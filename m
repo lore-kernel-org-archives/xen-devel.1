@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB4BC54E6A
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 16:36:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694897.1084173 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E08C54E71
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 16:36:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694895.1084154 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmFy4-000764-Ht; Mon, 18 Mar 2024 16:36:08 +0000
+	id 1rmFy2-0006bf-IR; Mon, 18 Mar 2024 16:36:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694897.1084173; Mon, 18 Mar 2024 16:36:08 +0000
+Received: by outflank-mailman (output) from mailman id 694895.1084154; Mon, 18 Mar 2024 16:36:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmFy4-00074q-Be; Mon, 18 Mar 2024 16:36:08 +0000
-Received: by outflank-mailman (input) for mailman id 694897;
- Mon, 18 Mar 2024 16:36:07 +0000
+	id 1rmFy2-0006bW-El; Mon, 18 Mar 2024 16:36:06 +0000
+Received: by outflank-mailman (input) for mailman id 694895;
+ Mon, 18 Mar 2024 16:36:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=we9v=KY=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rmFy3-0005JN-DY
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:36:07 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
+ id 1rmFy1-0005JN-Cj
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:36:05 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9d9b2ef8-e545-11ee-a1ee-f123f15fe8a2;
- Mon, 18 Mar 2024 17:36:05 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a46cd9e7fcaso106121166b.1
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:36:05 -0700 (PDT)
+ id 9c4651e1-e545-11ee-a1ee-f123f15fe8a2;
+ Mon, 18 Mar 2024 17:36:03 +0100 (CET)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5649c25369aso6221037a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:36:03 -0700 (PDT)
 Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- j22-20020a170906051600b00a441a7a75b5sm4988894eja.209.2024.03.18.09.36.02
+ j22-20020a170906051600b00a441a7a75b5sm4988894eja.209.2024.03.18.09.36.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 09:36:03 -0700 (PDT)
+ Mon, 18 Mar 2024 09:36:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d9b2ef8-e545-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 9c4651e1-e545-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710779764; x=1711384564; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1710779762; x=1711384562; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=PINeZIOEWeXs0aAyqXBWjda/ShH0F0UcrolT6+Sh/5w=;
-        b=dEZS4AgTv8Z87yqX0To8RcxHntjxQEEMNGoDtmQN3WeHqQ/RNiDotfPwYL8EbHk74M
-         OaTsjTQLuaHgZ+QDZVW8VvbcGb2f5gLSZ6GnQ1tIXyuFvmbMrDMoUgFXwr6mSZg4+urC
-         Ntqoh+fcUqJaoC3HrrDVcDffzoMPdGP5la0oo=
+        bh=+Es/OAet7dNZ7FixRa/pu3b/1ceG+5ckl7uGOXfyyFU=;
+        b=cpw6tsuEofu9xDWc6cQD/xmfmw3CK0zDnMp87RnAHbSC7LaYSOAEJrrqS99FCbQoLS
+         rOwQDMBGH2HvIeHs8Rz8R7VwDLgXbsPSnmYZ1zqBWhZPDqQalLwMdVJTZEqF7GNK4vkC
+         sUY41omIzhSSj/q91PYkqGsORwfWPoKbu1Brc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710779764; x=1711384564;
+        d=1e100.net; s=20230601; t=1710779762; x=1711384562;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=PINeZIOEWeXs0aAyqXBWjda/ShH0F0UcrolT6+Sh/5w=;
-        b=sUDC6paG924YFMEaF/Rnke/4VFb2HBfjL0prwp5rtmEDRTFAHKmgeQBJgnEvBUSvD4
-         ccQiJdyh7G1cPXHFJZ492RpSe576lQ/PgBxRKTmViOqI38TyNejoFwe1JZvi/nqt4f4g
-         6zjhaMQ+awqbSUVVmbrQStG7X6QHnAl7BbB6QCZEpk4CfGO5YPfMXV2opq8r84nkf2dM
-         BHi8xluUU7TfNo0KY19BJdDZSkOgER19Mx2MZ6SP9fsqg0Vh86iy/x/nnFNwsaq+xzKY
-         5ZahwT8ix/VgUI9YeR8KUmKeO9if082tRRvi2N0Py92P0eiPThl8AUsBqkD90XvEQ8Kr
-         X7Vg==
-X-Gm-Message-State: AOJu0YzwuZ0jtuyjPc+tNzOBANun7cUDGEbSyNNWlH/tev+6spLkaTPc
-	W0GB7Z+ozdqoHgpshi+OpMNEzOjbCY1zZeyZUlRJQowE7c7YCpPEC3VaZ48wRpn8vUsluDzL/V6
-	c
-X-Google-Smtp-Source: AGHT+IGP+9zN7xY7mThQWojYYbsKhTiU1tp+r4cl/2ev977sOFuznyozo9OoqQrM7KtJyUqm8N1VNw==
-X-Received: by 2002:a17:906:6a16:b0:a46:954a:aa14 with SMTP id qw22-20020a1709066a1600b00a46954aaa14mr6404141ejc.67.1710779764631;
-        Mon, 18 Mar 2024 09:36:04 -0700 (PDT)
+        bh=+Es/OAet7dNZ7FixRa/pu3b/1ceG+5ckl7uGOXfyyFU=;
+        b=A5UghqaPUvaEqYnitYlVU2Y5nCFS97CM8ojlHIBvRMDbJZphiY2x/XoXRGnKW2giRp
+         J7wdTw54o2DuHJU1jXypMBfJJKiDodKX8k13rY4tihMwahNTs0oxug8G2cSGEioVae2K
+         lchmIF2AhYggesxHLt3XgZN9zxTQxPNnCI9Mvpom7Rw4RvDlYL322SD7IGd9lUBzmDtH
+         Wh3lsWtK6bWC6E/TNzz7jyJXzf4DAzczAe1MXU1kR8X+gTphmsCHVWZyiCr3bslsp5nd
+         Fb+oihKW+PkQVejkyg1ef/RInTAm+IQ/NeGnbyCgGjG//jJruGvvRGxUZ0FZR2gfHGf4
+         cWtg==
+X-Gm-Message-State: AOJu0Yzw4X9hisdMiI4fCsDJgv8JwkBymLV9t1XKdh3+GqoN5U9Cwj+m
+	FVZuZLd3aCwhQVHVy/b5iuYxgM0qytOEDYOuo0FW+/45YwMyS6bng6Fmj/JE3Dn7iXfMriBdwe1
+	x
+X-Google-Smtp-Source: AGHT+IGuGed2OIpdg8mf45PQ90xsx+u1p/YYwxpG5q13Of4+Z8/utQniX7dc+gofmdEtnZVi2HXaug==
+X-Received: by 2002:a17:906:a18c:b0:a46:a17b:c44e with SMTP id s12-20020a170906a18c00b00a46a17bc44emr4306442ejy.30.1710779762049;
+        Mon, 18 Mar 2024 09:36:02 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -85,9 +85,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>
-Subject: [PATCH 7/7] xen/trace: Drop old trace API
-Date: Mon, 18 Mar 2024 16:35:52 +0000
-Message-Id: <20240318163552.3808695-8-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/7] xen: Switch to new TRACE() API
+Date: Mon, 18 Mar 2024 16:35:50 +0000
+Message-Id: <20240318163552.3808695-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240318163552.3808695-1-andrew.cooper3@citrix.com>
 References: <20240318163552.3808695-1-andrew.cooper3@citrix.com>
@@ -95,8 +95,30 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-With all users updated to the new API, drop the old API.  This includes all of
-asm/hvm/trace.h, which allows us to drop some includes.
+(Almost) no functional change.
+
+irq_move_cleanup_interrupt() changes two smp_processor_id() calls to the 'me'
+local variable which manifests as a minor code improvement.  All other
+differences in the compiled binary are to do with line numbers changing.
+
+Some conversion notes:
+ * HVMTRACE_LONG_[234]D() and TRACE_2_LONG_[234]D() were latently buggy.  They
+   blindly discard extra parameters, but luckily no users are impacted.  They
+   are also obfuscated wrappers, depending on exactly one or two parameters
+   being TRC_PAR_LONG() to compile successfully.
+ * HVMTRACE_LONG_1D() behaves unlike its named companions, and takes exactly
+   one 64bit parameter which it splits manually.  It's one user,
+   vmx_cr_access()'s LMSW path, is gets adjusted.
+ * TRACE_?D() and TRACE_2_LONG_*() change to TRACE_TIME() as cycles is always
+   enabled.
+ * HVMTRACE_ND() is opencoded for VMENTRY/VMEXIT records to include cycles.
+   These are converted to TRACE_TIME(), with the old modifier parameter
+   expressed as an OR at the callsite.  One callsite, svm_vmenter_helper() had
+   a nested tb_init_done check, which is dropped.  (The optimiser also spotted
+   this, which is why it doesn't manifest as a binary difference.)
+ * All uses of *LONG() are either opencoded or swapped to using a struct, to
+   avoid MISRA issues.
+ * All HVMTRACE_?D() change to TRACE() as cycles is explicitly skipped.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -111,376 +133,1052 @@ CC: consulting@bugseng.com <consulting@bugseng.com>
 v2.1:
  * New
 v3:
- * Extend to drop __trace_var() too
+ * Remove TRACE_PARAM64() for MISRA reasons.
 ---
- xen/arch/x86/hvm/emulate.c             |   1 -
- xen/arch/x86/hvm/hpet.c                |   1 -
- xen/arch/x86/hvm/hvm.c                 |   1 -
- xen/arch/x86/hvm/io.c                  |   1 -
- xen/arch/x86/hvm/svm/intr.c            |   1 -
- xen/arch/x86/hvm/svm/svm.c             |   1 -
- xen/arch/x86/hvm/vlapic.c              |   1 -
- xen/arch/x86/hvm/vmx/intr.c            |   1 -
- xen/arch/x86/hvm/vmx/vmx.c             |   1 -
- xen/arch/x86/include/asm/hvm/trace.h   | 114 -------------------------
- xen/arch/x86/include/asm/hvm/vmx/vmx.h |   1 -
- xen/common/trace.c                     |  12 +--
- xen/include/xen/trace.h                |  47 ----------
- 13 files changed, 3 insertions(+), 180 deletions(-)
- delete mode 100644 xen/arch/x86/include/asm/hvm/trace.h
+ xen/arch/x86/acpi/cpu_idle.c  | 12 ++++----
+ xen/arch/x86/compat.c         |  4 +--
+ xen/arch/x86/cpu/mwait-idle.c |  6 ++--
+ xen/arch/x86/emul-i8254.c     | 14 ++++-----
+ xen/arch/x86/hvm/emulate.c    |  8 +++---
+ xen/arch/x86/hvm/hpet.c       |  6 ++--
+ xen/arch/x86/hvm/hvm.c        | 16 +++++------
+ xen/arch/x86/hvm/rtc.c        | 12 ++++----
+ xen/arch/x86/hvm/svm/intr.c   |  6 ++--
+ xen/arch/x86/hvm/svm/svm.c    | 40 ++++++++++++--------------
+ xen/arch/x86/hvm/vlapic.c     | 51 +++++++++++++++++++++++----------
+ xen/arch/x86/hvm/vmx/intr.c   |  6 ++--
+ xen/arch/x86/hvm/vmx/vmx.c    | 54 +++++++++++++++++------------------
+ xen/arch/x86/hvm/vpic.c       | 13 ++++-----
+ xen/arch/x86/irq.c            | 14 ++++-----
+ xen/arch/x86/traps.c          |  2 +-
+ xen/common/domain.c           |  4 +--
+ xen/common/grant_table.c      |  6 ++--
+ xen/drivers/cpufreq/utility.c |  2 +-
+ 19 files changed, 144 insertions(+), 132 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index a37525316c6e..02e378365b40 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -22,7 +22,6 @@
- #include <asm/hvm/emulate.h>
- #include <asm/hvm/hvm.h>
- #include <asm/hvm/monitor.h>
--#include <asm/hvm/trace.h>
- #include <asm/hvm/support.h>
- #include <asm/iocap.h>
- #include <asm/vm_event.h>
-diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
-index 0356ade5957b..dd85e46d4001 100644
---- a/xen/arch/x86/hvm/hpet.c
-+++ b/xen/arch/x86/hvm/hpet.c
-@@ -8,7 +8,6 @@
- #include <asm/hvm/vpt.h>
- #include <asm/hvm/io.h>
- #include <asm/hvm/save.h>
--#include <asm/hvm/trace.h>
- #include <asm/current.h>
- #include <asm/hpet.h>
- #include <asm/mc146818rtc.h>
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index bb4eda4ecde2..cedaf428b400 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -51,7 +51,6 @@
- #include <asm/hvm/vpt.h>
- #include <asm/hvm/support.h>
- #include <asm/hvm/cacheattr.h>
--#include <asm/hvm/trace.h>
- #include <asm/hvm/nestedhvm.h>
- #include <asm/hvm/monitor.h>
- #include <asm/hvm/viridian.h>
-diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-index 06283b41c463..db726b38177b 100644
---- a/xen/arch/x86/hvm/io.c
-+++ b/xen/arch/x86/hvm/io.c
-@@ -28,7 +28,6 @@
- #include <asm/hvm/vpt.h>
- #include <asm/hvm/vpic.h>
- #include <asm/hvm/vlapic.h>
--#include <asm/hvm/trace.h>
- #include <asm/hvm/emulate.h>
- #include <public/sched.h>
- #include <xen/iocap.h>
-diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
-index dc684fdc843e..780c7e178a52 100644
---- a/xen/arch/x86/hvm/svm/intr.c
-+++ b/xen/arch/x86/hvm/svm/intr.c
-@@ -24,7 +24,6 @@
- #include <xen/kernel.h>
- #include <public/hvm/ioreq.h>
- #include <xen/domain_page.h>
--#include <asm/hvm/trace.h>
+diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
+index cfce4cc0408f..30094ff485b4 100644
+--- a/xen/arch/x86/acpi/cpu_idle.c
++++ b/xen/arch/x86/acpi/cpu_idle.c
+@@ -767,7 +767,7 @@ static void cf_check acpi_processor_idle(void)
+             /* Get start time (ticks) */
+             t1 = alternative_call(cpuidle_get_tick);
+             /* Trace cpu idle entry */
+-            TRACE_4D(TRC_PM_IDLE_ENTRY, cx->idx, t1, exp, pred);
++            TRACE_TIME(TRC_PM_IDLE_ENTRY, cx->idx, t1, exp, pred);
  
- #include "nestedhvm.h"
+             update_last_cx_stat(power, cx, t1);
  
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 2d0c8762359f..c94b83dc22f7 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -28,7 +28,6 @@
- #include <asm/hvm/svm/svm.h>
- #include <asm/hvm/svm/svmdebug.h>
- #include <asm/hvm/svm/vmcb.h>
--#include <asm/hvm/trace.h>
- #include <asm/iocap.h>
- #include <asm/i387.h>
- #include <asm/monitor.h>
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 65e171d4751f..7a971470537e 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -27,7 +27,6 @@
- #include <asm/hvm/io.h>
- #include <asm/hvm/support.h>
- #include <asm/hvm/nestedhvm.h>
--#include <asm/hvm/trace.h>
- #include <asm/hvm/viridian.h>
- #include <public/hvm/ioreq.h>
- #include <public/hvm/params.h>
-diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
-index d36498d83104..1a4dfb499bcd 100644
---- a/xen/arch/x86/hvm/vmx/intr.c
-+++ b/xen/arch/x86/hvm/vmx/intr.c
-@@ -24,7 +24,6 @@
- #include <asm/hvm/vlapic.h>
- #include <asm/hvm/nestedhvm.h>
- #include <public/hvm/ioreq.h>
--#include <asm/hvm/trace.h>
- #include <asm/vm_event.h>
+@@ -777,8 +777,8 @@ static void cf_check acpi_processor_idle(void)
+             t2 = alternative_call(cpuidle_get_tick);
+             trace_exit_reason(irq_traced);
+             /* Trace cpu idle exit */
+-            TRACE_6D(TRC_PM_IDLE_EXIT, cx->idx, t2,
+-                     irq_traced[0], irq_traced[1], irq_traced[2], irq_traced[3]);
++            TRACE_TIME(TRC_PM_IDLE_EXIT, cx->idx, t2,
++                       irq_traced[0], irq_traced[1], irq_traced[2], irq_traced[3]);
+             /* Update statistics */
+             update_idle_stats(power, cx, t1, t2);
+             /* Re-enable interrupts */
+@@ -798,7 +798,7 @@ static void cf_check acpi_processor_idle(void)
+         /* Get start time (ticks) */
+         t1 = alternative_call(cpuidle_get_tick);
+         /* Trace cpu idle entry */
+-        TRACE_4D(TRC_PM_IDLE_ENTRY, cx->idx, t1, exp, pred);
++        TRACE_TIME(TRC_PM_IDLE_ENTRY, cx->idx, t1, exp, pred);
  
- /*
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 255c97f18162..3fbbd44a6b45 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -37,7 +37,6 @@
- #include <asm/x86_emulate.h>
- #include <asm/hvm/vpt.h>
- #include <public/hvm/save.h>
--#include <asm/hvm/trace.h>
- #include <asm/hvm/monitor.h>
- #include <asm/xenoprof.h>
- #include <asm/gdbsx.h>
-diff --git a/xen/arch/x86/include/asm/hvm/trace.h b/xen/arch/x86/include/asm/hvm/trace.h
-deleted file mode 100644
-index 22eadbdd4720..000000000000
---- a/xen/arch/x86/include/asm/hvm/trace.h
-+++ /dev/null
-@@ -1,114 +0,0 @@
--#ifndef __ASM_X86_HVM_TRACE_H__
--#define __ASM_X86_HVM_TRACE_H__
--
--#include <xen/trace.h>
--
--#define DEFAULT_HVM_TRACE_ON  1
--#define DEFAULT_HVM_TRACE_OFF 0
--
--#define DEFAULT_HVM_VMSWITCH   DEFAULT_HVM_TRACE_ON
--#define DEFAULT_HVM_PF         DEFAULT_HVM_TRACE_ON
--#define DEFAULT_HVM_INJECT     DEFAULT_HVM_TRACE_ON
--#define DEFAULT_HVM_IO         DEFAULT_HVM_TRACE_ON
--#define DEFAULT_HVM_REGACCESS  DEFAULT_HVM_TRACE_ON
--#define DEFAULT_HVM_MISC       DEFAULT_HVM_TRACE_ON
--#define DEFAULT_HVM_INTR       DEFAULT_HVM_TRACE_ON
--
--#define DO_TRC_HVM_VMENTRY     DEFAULT_HVM_VMSWITCH
--#define DO_TRC_HVM_VMEXIT      DEFAULT_HVM_VMSWITCH
--#define DO_TRC_HVM_VMEXIT64    DEFAULT_HVM_VMSWITCH
--#define DO_TRC_HVM_PF_XEN      DEFAULT_HVM_PF
--#define DO_TRC_HVM_PF_XEN64    DEFAULT_HVM_PF
--#define DO_TRC_HVM_PF_INJECT   DEFAULT_HVM_PF
--#define DO_TRC_HVM_PF_INJECT64 DEFAULT_HVM_PF
--#define DO_TRC_HVM_INJ_EXC     DEFAULT_HVM_INJECT
--#define DO_TRC_HVM_INJ_VIRQ    DEFAULT_HVM_INJECT
--#define DO_TRC_HVM_REINJ_VIRQ  DEFAULT_HVM_INJECT
--#define DO_TRC_HVM_INTR_WINDOW DEFAULT_HVM_INJECT
--#define DO_TRC_HVM_IO_READ     DEFAULT_HVM_IO
--#define DO_TRC_HVM_IO_WRITE    DEFAULT_HVM_IO
--#define DO_TRC_HVM_CR_READ     DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_CR_READ64   DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_CR_WRITE    DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_CR_WRITE64  DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_DR_READ     DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_DR_WRITE    DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_XCR_READ64  DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_XCR_WRITE64 DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_MSR_READ    DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_MSR_WRITE   DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_RDTSC       DEFAULT_HVM_REGACCESS
--#define DO_TRC_HVM_CPUID       DEFAULT_HVM_MISC
--#define DO_TRC_HVM_INTR        DEFAULT_HVM_INTR
--#define DO_TRC_HVM_NMI         DEFAULT_HVM_INTR
--#define DO_TRC_HVM_MCE         DEFAULT_HVM_INTR
--#define DO_TRC_HVM_SMI         DEFAULT_HVM_INTR
--#define DO_TRC_HVM_VMMCALL     DEFAULT_HVM_MISC
--#define DO_TRC_HVM_HLT         DEFAULT_HVM_MISC
--#define DO_TRC_HVM_INVLPG      DEFAULT_HVM_MISC
--#define DO_TRC_HVM_INVLPG64    DEFAULT_HVM_MISC
--#define DO_TRC_HVM_IO_ASSIST   DEFAULT_HVM_MISC
--#define DO_TRC_HVM_MMIO_ASSIST DEFAULT_HVM_MISC
--#define DO_TRC_HVM_CLTS        DEFAULT_HVM_MISC
--#define DO_TRC_HVM_LMSW        DEFAULT_HVM_MISC
--#define DO_TRC_HVM_LMSW64      DEFAULT_HVM_MISC
--#define DO_TRC_HVM_REALMODE_EMULATE DEFAULT_HVM_MISC
--#define DO_TRC_HVM_TRAP             DEFAULT_HVM_MISC
--#define DO_TRC_HVM_TRAP_DEBUG       DEFAULT_HVM_MISC
--#define DO_TRC_HVM_VLAPIC           DEFAULT_HVM_MISC
--
--
--#define TRC_PAR_LONG(par) ((uint32_t)(par)), ((par) >> 32)
--
--#define TRACE_2_LONG_2D(_e, d1, d2, ...) \
--    TRACE_4D(_e, d1, d2)
--#define TRACE_2_LONG_3D(_e, d1, d2, d3, ...) \
--    TRACE_5D(_e, d1, d2, d3)
--#define TRACE_2_LONG_4D(_e, d1, d2, d3, d4, ...) \
--    TRACE_6D(_e, d1, d2, d3, d4)
--
--#define HVMTRACE_ND(evt, modifier, cycles, ...)                           \
--    do {                                                                  \
--        if ( unlikely(tb_init_done) && DO_TRC_HVM_ ## evt )               \
--        {                                                                 \
--            uint32_t _d[] = { __VA_ARGS__ };                              \
--            __trace_var(TRC_HVM_ ## evt | (modifier), cycles,             \
--                        sizeof(_d), sizeof(_d) ? _d : NULL);              \
--        }                                                                 \
--    } while(0)
--
--#define HVMTRACE_6D(evt, d1, d2, d3, d4, d5, d6)    \
--    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4, d5, d6)
--#define HVMTRACE_5D(evt, d1, d2, d3, d4, d5)        \
--    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4, d5)
--#define HVMTRACE_4D(evt, d1, d2, d3, d4)            \
--    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4)
--#define HVMTRACE_3D(evt, d1, d2, d3)                \
--    HVMTRACE_ND(evt, 0, 0, d1, d2, d3)
--#define HVMTRACE_2D(evt, d1, d2)                    \
--    HVMTRACE_ND(evt, 0, 0, d1, d2)
--#define HVMTRACE_1D(evt, d1)                        \
--    HVMTRACE_ND(evt, 0, 0, d1)
--#define HVMTRACE_0D(evt)                            \
--    HVMTRACE_ND(evt, 0, 0)
--
--#define HVMTRACE_LONG_1D(evt, d1)                  \
--                   HVMTRACE_2D(evt ## 64, (uint32_t)(d1), (d1) >> 32)
--#define HVMTRACE_LONG_2D(evt, d1, d2, ...)              \
--                   HVMTRACE_3D(evt ## 64, d1, d2)
--#define HVMTRACE_LONG_3D(evt, d1, d2, d3, ...)      \
--                   HVMTRACE_4D(evt ## 64, d1, d2, d3)
--#define HVMTRACE_LONG_4D(evt, d1, d2, d3, d4, ...)  \
--                   HVMTRACE_5D(evt ## 64, d1, d2, d3, d4)
--
--#endif /* __ASM_X86_HVM_TRACE_H__ */
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * tab-width: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-index 8ffab7d94c26..1489dd05c2a1 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -15,7 +15,6 @@
- #include <asm/processor.h>
- #include <asm/p2m.h>
- #include <asm/i387.h>
--#include <asm/hvm/trace.h>
- #include <asm/hvm/vmx/vmcs.h>
+         update_last_cx_stat(power, cx, t1);
  
- extern int8_t opt_ept_exec_sp;
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index 27c8a19f0549..c9c555094bf7 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -666,22 +666,21 @@ static DECLARE_SOFTIRQ_TASKLET(trace_notify_dom0_tasklet,
-                                trace_notify_dom0, NULL);
+@@ -853,8 +853,8 @@ static void cf_check acpi_processor_idle(void)
+         cstate_restore_tsc();
+         trace_exit_reason(irq_traced);
+         /* Trace cpu idle exit */
+-        TRACE_6D(TRC_PM_IDLE_EXIT, cx->idx, t2,
+-                 irq_traced[0], irq_traced[1], irq_traced[2], irq_traced[3]);
++        TRACE_TIME(TRC_PM_IDLE_EXIT, cx->idx, t2,
++                   irq_traced[0], irq_traced[1], irq_traced[2], irq_traced[3]);
  
- /**
-- * __trace_var - Enters a trace tuple into the trace buffer for the current CPU.
-+ * trace - Enters a trace tuple into the trace buffer for the current CPU.
-  * @event: the event type being logged
-- * @cycles: include tsc timestamp into trace record
-  * @extra: size of additional trace data in bytes
-  * @extra_data: pointer to additional trace data
-  *
-  * Logs a trace record into the appropriate buffer.
-  */
--void __trace_var(u32 event, bool cycles, unsigned int extra,
--                 const void *extra_data)
-+void trace(uint32_t event, unsigned int extra, const void *extra_data)
+         /* Update statistics */
+         update_idle_stats(power, cx, t1, t2);
+diff --git a/xen/arch/x86/compat.c b/xen/arch/x86/compat.c
+index a03106283028..217b5b1fcc41 100644
+--- a/xen/arch/x86/compat.c
++++ b/xen/arch/x86/compat.c
+@@ -37,8 +37,8 @@ long do_sched_op_compat(int cmd, unsigned long arg)
+         return do_sched_op(cmd, guest_handle_from_ptr(NULL, void));
+ 
+     case SCHEDOP_shutdown:
+-        TRACE_3D(TRC_SCHED_SHUTDOWN,
+-                 current->domain->domain_id, current->vcpu_id, arg);
++        TRACE_TIME(TRC_SCHED_SHUTDOWN,
++                   current->domain->domain_id, current->vcpu_id, arg);
+         domain_shutdown(current->domain, (u8)arg);
+         break;
+ 
+diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
+index ff5c808bc952..ae6987117169 100644
+--- a/xen/arch/x86/cpu/mwait-idle.c
++++ b/xen/arch/x86/cpu/mwait-idle.c
+@@ -962,7 +962,7 @@ static void cf_check mwait_idle(void)
+ 		lapic_timer_off();
+ 
+ 	before = alternative_call(cpuidle_get_tick);
+-	TRACE_4D(TRC_PM_IDLE_ENTRY, cx->type, before, exp, pred);
++	TRACE_TIME(TRC_PM_IDLE_ENTRY, cx->type, before, exp, pred);
+ 
+ 	update_last_cx_stat(power, cx, before);
+ 
+@@ -986,8 +986,8 @@ static void cf_check mwait_idle(void)
+ 
+ 	local_irq_enable();
+ 
+-	TRACE_6D(TRC_PM_IDLE_EXIT, cx->type, after,
+-		irq_traced[0], irq_traced[1], irq_traced[2], irq_traced[3]);
++	TRACE_TIME(TRC_PM_IDLE_EXIT, cx->type, after,
++		   irq_traced[0], irq_traced[1], irq_traced[2], irq_traced[3]);
+ 
+ 	if (!(lapic_timer_reliable_states & (1 << cx->type)))
+ 		lapic_timer_on();
+diff --git a/xen/arch/x86/emul-i8254.c b/xen/arch/x86/emul-i8254.c
+index 0191f80ba251..144aa168a3f0 100644
+--- a/xen/arch/x86/emul-i8254.c
++++ b/xen/arch/x86/emul-i8254.c
+@@ -94,7 +94,7 @@ static void cf_check pit_time_fired(struct vcpu *v, void *priv)
  {
-     struct t_buf *buf;
-     unsigned long flags;
-     u32 bytes_to_tail, bytes_to_wrap;
-     unsigned int rec_size, total_size;
-     bool started_below_highwater;
-+    bool cycles = event & TRC_HD_CYCLE_FLAG;
+     uint64_t *count_load_time = priv;
  
-     if( !tb_init_done )
-         return;
-@@ -808,11 +807,6 @@ void __trace_var(u32 event, bool cycles, unsigned int extra,
-         tasklet_schedule(&trace_notify_dom0_tasklet);
+-    TRACE_0D(TRC_HVM_EMUL_PIT_TIMER_CB);
++    TRACE_TIME(TRC_HVM_EMUL_PIT_TIMER_CB);
+     *count_load_time = get_guest_time(v);
  }
  
--void trace(uint32_t event, unsigned int extra, const void *extra_data)
--{
--    __trace_var(event, event & TRC_HD_CYCLE_FLAG, extra, extra_data);
--}
--
- void __trace_hypercall(uint32_t event, unsigned long op,
-                        const xen_ulong_t *args)
+@@ -128,19 +128,19 @@ static void pit_load_count(PITState *pit, int channel, int val)
+     case 2:
+     case 3:
+         /* Periodic timer. */
+-        TRACE_2D(TRC_HVM_EMUL_PIT_START_TIMER, period, period);
++        TRACE_TIME(TRC_HVM_EMUL_PIT_START_TIMER, period, period);
+         create_periodic_time(v, &pit->pt0, period, period, 0, pit_time_fired,
+                              &pit->count_load_time[channel], false);
+         break;
+     case 1:
+     case 4:
+         /* One-shot timer. */
+-        TRACE_2D(TRC_HVM_EMUL_PIT_START_TIMER, period, 0);
++        TRACE_TIME(TRC_HVM_EMUL_PIT_START_TIMER, period, 0);
+         create_periodic_time(v, &pit->pt0, period, 0, 0, pit_time_fired,
+                              &pit->count_load_time[channel], false);
+         break;
+     default:
+-        TRACE_0D(TRC_HVM_EMUL_PIT_STOP_TIMER);
++        TRACE_TIME(TRC_HVM_EMUL_PIT_STOP_TIMER);
+         destroy_periodic_time(&pit->pt0);
+         break;
+     }
+@@ -404,7 +404,7 @@ void pit_stop_channel0_irq(PITState *pit)
+     if ( !has_vpit(current->domain) )
+         return;
+ 
+-    TRACE_0D(TRC_HVM_EMUL_PIT_STOP_TIMER);
++    TRACE_TIME(TRC_HVM_EMUL_PIT_STOP_TIMER);
+     spin_lock(&pit->lock);
+     destroy_periodic_time(&pit->pt0);
+     spin_unlock(&pit->lock);
+@@ -615,7 +615,7 @@ void pit_reset(struct domain *d)
+ 
+     if ( is_hvm_domain(d) )
+     {
+-        TRACE_0D(TRC_HVM_EMUL_PIT_STOP_TIMER);
++        TRACE_TIME(TRC_HVM_EMUL_PIT_STOP_TIMER);
+         destroy_periodic_time(&pit->pt0);
+         pit->pt0.source = PTSRC_isa;
+     }
+@@ -660,7 +660,7 @@ void pit_deinit(struct domain *d)
+ 
+     if ( is_hvm_domain(d) )
+     {
+-        TRACE_0D(TRC_HVM_EMUL_PIT_STOP_TIMER);
++        TRACE_TIME(TRC_HVM_EMUL_PIT_STOP_TIMER);
+         destroy_periodic_time(&pit->pt0);
+     }
+ }
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index ab1bc516839a..d8f36206a712 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -2181,7 +2181,7 @@ static int cf_check hvmemul_read_cr(
+     case 3:
+     case 4:
+         *val = current->arch.hvm.guest_cr[reg];
+-        HVMTRACE_LONG_2D(CR_READ, reg, TRC_PAR_LONG(*val));
++        TRACE(TRC_HVM_CR_READ64, reg, *val, *val >> 32);
+         return X86EMUL_OKAY;
+     default:
+         break;
+@@ -2197,7 +2197,7 @@ static int cf_check hvmemul_write_cr(
  {
-diff --git a/xen/include/xen/trace.h b/xen/include/xen/trace.h
-index f184844e1b55..b39a286d2a8e 100644
---- a/xen/include/xen/trace.h
-+++ b/xen/include/xen/trace.h
-@@ -40,15 +40,6 @@ int trace_will_trace_event(u32 event);
- /* Create a trace record, with pre-constructed additional parameters. */
- void trace(uint32_t event, unsigned int extra, const void *extra_data);
+     int rc;
  
--void __trace_var(uint32_t event, bool cycles, unsigned int extra, const void *);
--
--static inline void trace_var(uint32_t event, bool cycles, unsigned int extra,
--                             const void *extra_data)
--{
+-    HVMTRACE_LONG_2D(CR_WRITE, reg, TRC_PAR_LONG(val));
++    TRACE(TRC_HVM_CR_WRITE64, reg, val, val >> 32);
+     switch ( reg )
+     {
+     case 0:
+@@ -2242,7 +2242,7 @@ static int cf_check hvmemul_read_xcr(
+     int rc = x86emul_read_xcr(reg, val, ctxt);
+ 
+     if ( rc == X86EMUL_OKAY )
+-        HVMTRACE_LONG_2D(XCR_READ, reg, TRC_PAR_LONG(*val));
++        TRACE(TRC_HVM_XCR_READ64, reg, *val, *val >> 32);
+ 
+     return rc;
+ }
+@@ -2252,7 +2252,7 @@ static int cf_check hvmemul_write_xcr(
+     uint64_t val,
+     struct x86_emulate_ctxt *ctxt)
+ {
+-    HVMTRACE_LONG_2D(XCR_WRITE, reg, TRC_PAR_LONG(val));
++    TRACE(TRC_HVM_XCR_WRITE64, reg, val, val >> 32);
+ 
+     return x86emul_write_xcr(reg, val, ctxt);
+ }
+diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
+index 1db9c0b60ee0..0356ade5957b 100644
+--- a/xen/arch/x86/hvm/hpet.c
++++ b/xen/arch/x86/hvm/hpet.c
+@@ -201,7 +201,7 @@ static void hpet_stop_timer(HPETState *h, unsigned int tn,
+ {
+     ASSERT(tn < HPET_TIMER_NUM);
+     ASSERT(rw_is_write_locked(&h->lock));
+-    TRACE_1D(TRC_HVM_EMUL_HPET_STOP_TIMER, tn);
++    TRACE_TIME(TRC_HVM_EMUL_HPET_STOP_TIMER, tn);
+     destroy_periodic_time(&h->pt[tn]);
+     /* read the comparator to get it updated so a read while stopped will
+      * return the expected value. */
+@@ -305,8 +305,8 @@ static void hpet_set_timer(HPETState *h, unsigned int tn,
+     if ( !oneshot )
+         period_ns = hpet_tick_to_ns(h, h->hpet.period[tn]);
+ 
+-    TRACE_2_LONG_4D(TRC_HVM_EMUL_HPET_START_TIMER, tn, irq,
+-                    TRC_PAR_LONG(diff_ns), TRC_PAR_LONG(period_ns));
++    TRACE_TIME(TRC_HVM_EMUL_HPET_START_TIMER, tn, irq,
++               diff_ns, diff_ns >> 32, period_ns, period_ns >> 32);
+ 
+     create_periodic_time(vhpet_vcpu(h), &h->pt[tn], diff_ns, period_ns,
+                          irq, timer_level(h, tn) ? hpet_timer_fired : NULL,
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index c75959588c0e..e8af42eb499d 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -1699,7 +1699,7 @@ void hvm_hlt(unsigned int eflags)
+ 
+     do_sched_op(SCHEDOP_block, guest_handle_from_ptr(NULL, void));
+ 
+-    HVMTRACE_1D(HLT, /* pending = */ vcpu_runnable(curr));
++    TRACE(TRC_HVM_HLT, /* pending = */ vcpu_runnable(curr));
+ }
+ 
+ void hvm_triple_fault(void)
+@@ -2153,7 +2153,7 @@ int hvm_mov_to_cr(unsigned int cr, unsigned int gpr)
+     unsigned long val = *decode_gpr(guest_cpu_user_regs(), gpr);
+     int rc;
+ 
+-    HVMTRACE_LONG_2D(CR_WRITE, cr, TRC_PAR_LONG(val));
++    TRACE(TRC_HVM_CR_WRITE64, cr, val, val >> 32);
+     HVM_DBG_LOG(DBG_LEVEL_1, "CR%u, value = %lx", cr, val);
+ 
+     switch ( cr )
+@@ -2218,7 +2218,7 @@ int hvm_mov_from_cr(unsigned int cr, unsigned int gpr)
+     }
+ 
+     *reg = val;
+-    HVMTRACE_LONG_2D(CR_READ, cr, TRC_PAR_LONG(val));
++    TRACE(TRC_HVM_CR_READ64, cr, val, val >> 32);
+     HVM_DBG_LOG(DBG_LEVEL_VMMU, "CR%u, value = %lx", cr, val);
+ 
+     return X86EMUL_OKAY;
+@@ -3508,7 +3508,7 @@ int hvm_vmexit_cpuid(struct cpu_user_regs *regs, unsigned int inst_len)
+     }
+ 
+     guest_cpuid(curr, leaf, subleaf, &res);
+-    HVMTRACE_6D(CPUID, leaf, subleaf, res.a, res.b, res.c, res.d);
++    TRACE(TRC_HVM_CPUID, leaf, subleaf, res.a, res.b, res.c, res.d);
+ 
+     regs->rax = res.a;
+     regs->rbx = res.b;
+@@ -3522,7 +3522,7 @@ void hvm_rdtsc_intercept(struct cpu_user_regs *regs)
+ {
+     msr_split(regs, hvm_get_guest_tsc(current));
+ 
+-    HVMTRACE_2D(RDTSC, regs->eax, regs->edx);
++    TRACE(TRC_HVM_RDTSC, regs->eax, regs->edx);
+ }
+ 
+ int hvm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
+@@ -3629,8 +3629,7 @@ int hvm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
+     }
+ 
+  out:
+-    HVMTRACE_3D(MSR_READ, msr,
+-                (uint32_t)*msr_content, (uint32_t)(*msr_content >> 32));
++    TRACE(TRC_HVM_MSR_READ, msr, *msr_content, *msr_content >> 32);
+     return ret;
+ 
+  gp_fault:
+@@ -3646,8 +3645,7 @@ int hvm_msr_write_intercept(unsigned int msr, uint64_t msr_content,
+     struct domain *d = v->domain;
+     int ret;
+ 
+-    HVMTRACE_3D(MSR_WRITE, msr,
+-               (uint32_t)msr_content, (uint32_t)(msr_content >> 32));
++    TRACE(TRC_HVM_MSR_WRITE, msr, msr_content, msr_content >> 32);
+ 
+     if ( may_defer && unlikely(monitored_msr(v->domain, msr)) )
+     {
+diff --git a/xen/arch/x86/hvm/rtc.c b/xen/arch/x86/hvm/rtc.c
+index 4b31382619f4..3ad5e4faba76 100644
+--- a/xen/arch/x86/hvm/rtc.c
++++ b/xen/arch/x86/hvm/rtc.c
+@@ -91,7 +91,7 @@ static void cf_check rtc_pf_callback(struct vcpu *v, void *opaque)
+          && ++(s->pt_dead_ticks) >= 10 )
+     {
+         /* VM is ignoring its RTC; no point in running the timer */
+-        TRACE_0D(TRC_HVM_EMUL_RTC_STOP_TIMER);
++        TRACE_TIME(TRC_HVM_EMUL_RTC_STOP_TIMER);
+         destroy_periodic_time(&s->pt);
+         s->period = 0;
+     }
+@@ -154,7 +154,7 @@ static void rtc_timer_update(RTCState *s)
+                     delta = period - ((now - s->start_time) % period);
+                 if ( s->hw.cmos_data[RTC_REG_B] & RTC_PIE )
+                 {
+-                    TRACE_2D(TRC_HVM_EMUL_RTC_START_TIMER, delta, period);
++                    TRACE_TIME(TRC_HVM_EMUL_RTC_START_TIMER, delta, period);
+                     create_periodic_time(v, &s->pt, delta, period,
+                                          RTC_IRQ, rtc_pf_callback, s, false);
+                 }
+@@ -165,7 +165,7 @@ static void rtc_timer_update(RTCState *s)
+         }
+         /* fall through */
+     default:
+-        TRACE_0D(TRC_HVM_EMUL_RTC_STOP_TIMER);
++        TRACE_TIME(TRC_HVM_EMUL_RTC_STOP_TIMER);
+         destroy_periodic_time(&s->pt);
+         s->period = 0;
+         break;
+@@ -552,7 +552,7 @@ static int rtc_ioport_write(void *opaque, uint32_t addr, uint32_t data)
+         rtc_update_irq(s);
+         if ( (data ^ orig) & RTC_PIE )
+         {
+-            TRACE_0D(TRC_HVM_EMUL_RTC_STOP_TIMER);
++            TRACE_TIME(TRC_HVM_EMUL_RTC_STOP_TIMER);
+             destroy_periodic_time(&s->pt);
+             s->period = 0;
+             rtc_timer_update(s);
+@@ -806,7 +806,7 @@ void rtc_reset(struct domain *d)
+     if ( !has_vrtc(d) )
+         return;
+ 
+-    TRACE_0D(TRC_HVM_EMUL_RTC_STOP_TIMER);
++    TRACE_TIME(TRC_HVM_EMUL_RTC_STOP_TIMER);
+     destroy_periodic_time(&s->pt);
+     s->period = 0;
+     s->pt.source = PTSRC_isa;
+@@ -891,7 +891,7 @@ void rtc_deinit(struct domain *d)
+ 
+     spin_barrier(&s->lock);
+ 
+-    TRACE_0D(TRC_HVM_EMUL_RTC_STOP_TIMER);
++    TRACE_TIME(TRC_HVM_EMUL_RTC_STOP_TIMER);
+     destroy_periodic_time(&s->pt);
+     kill_timer(&s->update_timer);
+     kill_timer(&s->update_timer2);
+diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
+index 4805c5567213..dc684fdc843e 100644
+--- a/xen/arch/x86/hvm/svm/intr.c
++++ b/xen/arch/x86/hvm/svm/intr.c
+@@ -90,8 +90,8 @@ static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
+         }
+     }
+ 
+-    HVMTRACE_3D(INTR_WINDOW, intack.vector, intack.source,
+-                vmcb->event_inj.v ? vmcb->event_inj.vector : -1);
++    TRACE(TRC_HVM_INTR_WINDOW, intack.vector, intack.source,
++          vmcb->event_inj.v ? vmcb->event_inj.vector : -1);
+ 
+     /*
+      * Create a dummy virtual interrupt to intercept as soon as the
+@@ -206,7 +206,7 @@ void asmlinkage svm_intr_assist(void)
+     }
+     else
+     {
+-        HVMTRACE_2D(INJ_VIRQ, intack.vector, /*fake=*/ 0);
++        TRACE(TRC_HVM_INJ_VIRQ, intack.vector, /*fake=*/ 0);
+         svm_inject_extint(v, intack.vector);
+         pt_intr_post(v, intack);
+     }
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index b1ab0b568b85..09a79d761163 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -1066,10 +1066,8 @@ void asmlinkage svm_vmenter_helper(void)
+ 
+     svm_asid_handle_vmrun();
+ 
 -    if ( unlikely(tb_init_done) )
--        __trace_var(event, cycles, extra, extra_data);
--}
--
- void __trace_hypercall(uint32_t event, unsigned long op,
-                        const xen_ulong_t *args);
+-        HVMTRACE_ND(VMENTRY,
+-                    nestedhvm_vcpu_in_guestmode(curr) ? TRC_HVM_NESTEDFLAG : 0,
+-                    1/*cycles*/);
++    TRACE_TIME(TRC_HVM_VMENTRY |
++               (nestedhvm_vcpu_in_guestmode(curr) ? TRC_HVM_NESTEDFLAG : 0));
  
-@@ -72,10 +63,6 @@ static inline int trace_will_trace_event(uint32_t event)
- static inline void trace(
-     uint32_t event, unsigned int extra, const void *extra_data) {}
+     svm_sync_vmcb(curr, vmcb_needs_vmsave);
  
--static inline void trace_var(uint32_t event, bool cycles, unsigned int extra,
--                             const void *extra_data) {}
--static inline void __trace_var(uint32_t event, bool cycles, unsigned int extra,
--                               const void *extra_data) {}
- static inline void __trace_hypercall(uint32_t event, unsigned long op,
-                                      const xen_ulong_t *args) {}
- #endif /* CONFIG_TRACEBUFFER */
-@@ -104,38 +91,4 @@ static inline void trace_time(
- /* Create a trace record with time included. */
- #define TRACE_TIME(_e, ...) TRACE((_e) | TRC_HD_CYCLE_FLAG, ##__VA_ARGS__)
+@@ -1441,10 +1439,10 @@ static void cf_check svm_inject_event(const struct x86_event *event)
  
--/* Convenience macros for calling the trace function. */
--#define TRACE_0D(_e)                            \
--    do {                                        \
--        trace_var(_e, 1, 0, NULL);              \
--    } while ( 0 )
--
--/* Common helper for TRACE_{1..6}D() below. */
--#define TRACE_varD(_e, ...)                             \
--    do {                                                \
--        if ( unlikely(tb_init_done) )                   \
--        {                                               \
--            uint32_t _d[] = { __VA_ARGS__ };            \
--            __trace_var(_e, true, sizeof(_d), _d);      \
--        }                                               \
--    } while ( 0 )
--
--#define TRACE_1D(_e, d1) \
--    TRACE_varD(_e, d1)
--
--#define TRACE_2D(_e, d1, d2) \
--    TRACE_varD(_e, d1, d2)
--
--#define TRACE_3D(_e, d1, d2, d3) \
--    TRACE_varD(_e, d1, d2, d3)
--
--#define TRACE_4D(_e, d1, d2, d3, d4) \
--    TRACE_varD(_e, d1, d2, d3, d4)
--
--#define TRACE_5D(_e, d1, d2, d3, d4, d5) \
--    TRACE_varD(_e, d1, d2, d3, d4, d5)
--
--#define TRACE_6D(_e, d1, d2, d3, d4, d5, d6) \
--    TRACE_varD(_e, d1, d2, d3, d4, d5, d6)
--
- #endif /* __XEN_TRACE_H__ */
+     if ( _event.vector == X86_EXC_PF &&
+          _event.type == X86_EVENTTYPE_HW_EXCEPTION )
+-        HVMTRACE_LONG_2D(PF_INJECT, _event.error_code,
+-                         TRC_PAR_LONG(_event.cr2));
++        TRACE(TRC_HVM_PF_INJECT64, _event.error_code,
++              _event.cr2, _event.cr2 >> 32);
+     else
+-        HVMTRACE_2D(INJ_EXC, _event.vector, _event.error_code);
++        TRACE(TRC_HVM_INJ_EXC, _event.vector, _event.error_code);
+ }
+ 
+ static bool cf_check svm_event_pending(const struct vcpu *v)
+@@ -1751,7 +1749,7 @@ static void svm_dr_access(struct vcpu *v, struct cpu_user_regs *regs)
+ {
+     struct vmcb_struct *vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+ 
+-    HVMTRACE_0D(DR_WRITE);
++    TRACE(TRC_HVM_DR_WRITE);
+     __restore_debug_registers(vmcb, v);
+ }
+ 
+@@ -2402,7 +2400,7 @@ static void svm_invlpga_intercept(
+ 
+ static void svm_invlpg_intercept(unsigned long linear)
+ {
+-    HVMTRACE_LONG_2D(INVLPG, 0, TRC_PAR_LONG(linear));
++    TRACE(TRC_HVM_INVLPG64, 0, linear, linear >> 32);
+     paging_invlpg(current, linear);
+ }
+ 
+@@ -2629,11 +2627,11 @@ void asmlinkage svm_vmexit_handler(void)
+     exit_reason = vmcb->exitcode;
+ 
+     if ( hvm_long_mode_active(v) )
+-        HVMTRACE_ND(VMEXIT64, vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0,
+-                    1/*cycles*/, exit_reason, TRC_PAR_LONG(regs->rip));
++        TRACE_TIME(TRC_HVM_VMEXIT64 | (vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0),
++                   exit_reason, regs->rip, regs->rip >> 32);
+     else
+-        HVMTRACE_ND(VMEXIT, vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0,
+-                    1/*cycles*/, exit_reason, regs->eip);
++        TRACE_TIME(TRC_HVM_VMEXIT | (vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0),
++                   exit_reason, regs->eip);
+ 
+     if ( vcpu_guestmode )
+     {
+@@ -2728,17 +2726,17 @@ void asmlinkage svm_vmexit_handler(void)
+     {
+     case VMEXIT_INTR:
+         /* Asynchronous event, handled when we STGI'd after the VMEXIT. */
+-        HVMTRACE_0D(INTR);
++        TRACE(TRC_HVM_INTR);
+         break;
+ 
+     case VMEXIT_NMI:
+         /* Asynchronous event, handled when we STGI'd after the VMEXIT. */
+-        HVMTRACE_0D(NMI);
++        TRACE(TRC_HVM_NMI);
+         break;
+ 
+     case VMEXIT_SMI:
+         /* Asynchronous event, handled when we STGI'd after the VMEXIT. */
+-        HVMTRACE_0D(SMI);
++        TRACE(TRC_HVM_SMI);
+         break;
+ 
+     case VMEXIT_ICEBP:
+@@ -2826,9 +2824,9 @@ void asmlinkage svm_vmexit_handler(void)
+             if ( trace_will_trace_event(TRC_SHADOW) )
+                 break;
+             if ( hvm_long_mode_active(v) )
+-                HVMTRACE_LONG_2D(PF_XEN, regs->error_code, TRC_PAR_LONG(va));
++                TRACE(TRC_HVM_PF_XEN64, regs->error_code, va, va >> 32);
+             else
+-                HVMTRACE_2D(PF_XEN, regs->error_code, va);
++                TRACE(TRC_HVM_PF_XEN, regs->error_code, va);
+             break;
+         }
+ 
+@@ -2837,7 +2835,7 @@ void asmlinkage svm_vmexit_handler(void)
+     }
+ 
+     case VMEXIT_EXCEPTION_AC:
+-        HVMTRACE_1D(TRAP, X86_EXC_AC);
++        TRACE(TRC_HVM_TRAP, X86_EXC_AC);
+         hvm_inject_hw_exception(X86_EXC_AC, vmcb->ei.exc.ec);
+         break;
+ 
+@@ -2847,7 +2845,7 @@ void asmlinkage svm_vmexit_handler(void)
+ 
+     /* Asynchronous event, handled when we STGI'd after the VMEXIT. */
+     case VMEXIT_EXCEPTION_MC:
+-        HVMTRACE_0D(MCE);
++        TRACE(TRC_HVM_MCE);
+         svm_vmexit_mce_intercept(v, regs);
+         break;
+ 
+@@ -2993,7 +2991,7 @@ void asmlinkage svm_vmexit_handler(void)
+         if ( (insn_len = svm_get_insn_len(v, INSTR_VMCALL)) == 0 )
+             break;
+         BUG_ON(vcpu_guestmode);
+-        HVMTRACE_1D(VMMCALL, regs->eax);
++        TRACE(TRC_HVM_VMMCALL, regs->eax);
+ 
+         if ( hvm_hypercall(regs) == HVM_HCALL_completed )
+             __update_guest_eip(regs, insn_len);
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index dcbcf4a1feb5..65e171d4751f 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -682,7 +682,7 @@ int guest_rdmsr_x2apic(const struct vcpu *v, uint32_t msr, uint64_t *val)
+ 
+ static void cf_check vlapic_pt_cb(struct vcpu *v, void *data)
+ {
+-    TRACE_0D(TRC_HVM_EMUL_LAPIC_TIMER_CB);
++    TRACE_TIME(TRC_HVM_EMUL_LAPIC_TIMER_CB);
+     *(s_time_t *)data = hvm_get_guest_time(v);
+ }
+ 
+@@ -736,9 +736,19 @@ static void vlapic_update_timer(struct vlapic *vlapic, uint32_t lvtt,
+             delta = delta * vlapic->hw.timer_divisor / old_divisor;
+         }
+ 
+-        TRACE_2_LONG_3D(TRC_HVM_EMUL_LAPIC_START_TIMER, TRC_PAR_LONG(delta),
+-                        TRC_PAR_LONG(is_periodic ? period : 0),
+-                        vlapic->pt.irq);
++        if ( unlikely(tb_init_done) )
++        {
++            struct {
++                uint64_t delta, period;
++                uint32_t irq;
++            } __packed d = {
++                .delta = delta,
++                .period = is_periodic ? period : 0,
++                .irq = vlapic->pt.irq,
++            };
++
++            trace_time(TRC_HVM_EMUL_LAPIC_START_TIMER, sizeof(d), &d);
++        }
+ 
+         create_periodic_time(current, &vlapic->pt, delta,
+                              is_periodic ? period : 0, vlapic->pt.irq,
+@@ -758,7 +768,7 @@ static void vlapic_update_timer(struct vlapic *vlapic, uint32_t lvtt,
+     }
+     else
+     {
+-        TRACE_0D(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
++        TRACE_TIME(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
+         destroy_periodic_time(&vlapic->pt);
+         /*
+          * From now, TMCCT should return 0 until TMICT is set again.
+@@ -1208,8 +1218,8 @@ void vlapic_tdt_msr_set(struct vlapic *vlapic, uint64_t value)
+ 
+         vlapic->hw.tdt_msr = value;
+         /* .... reprogram tdt timer */
+-        TRACE_2_LONG_3D(TRC_HVM_EMUL_LAPIC_START_TIMER, TRC_PAR_LONG(delta),
+-                        TRC_PAR_LONG(0LL), vlapic->pt.irq);
++        TRACE_TIME(TRC_HVM_EMUL_LAPIC_START_TIMER, delta, delta >> 32,
++                   0, 0, vlapic->pt.irq);
+         create_periodic_time(v, &vlapic->pt, delta, 0,
+                              vlapic->pt.irq, vlapic_tdt_pt_cb,
+                              &vlapic->timer_last_update, false);
+@@ -1222,8 +1232,8 @@ void vlapic_tdt_msr_set(struct vlapic *vlapic, uint64_t value)
+         /* trigger a timer event if needed */
+         if ( value > 0 )
+         {
+-            TRACE_2_LONG_3D(TRC_HVM_EMUL_LAPIC_START_TIMER, TRC_PAR_LONG(0LL),
+-                            TRC_PAR_LONG(0LL), vlapic->pt.irq);
++            TRACE_TIME(TRC_HVM_EMUL_LAPIC_START_TIMER, 0, 0,
++                       0, 0, vlapic->pt.irq);
+             create_periodic_time(v, &vlapic->pt, 0, 0,
+                                  vlapic->pt.irq, vlapic_tdt_pt_cb,
+                                  &vlapic->timer_last_update, false);
+@@ -1232,7 +1242,7 @@ void vlapic_tdt_msr_set(struct vlapic *vlapic, uint64_t value)
+         else
+         {
+             /* .... stop tdt timer */
+-            TRACE_0D(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
++            TRACE_TIME(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
+             destroy_periodic_time(&vlapic->pt);
+         }
+ 
+@@ -1282,7 +1292,7 @@ int vlapic_accept_pic_intr(struct vcpu *v)
+     if ( target )
+         accept = __vlapic_accept_pic_intr(v);
+ 
+-    TRACE_2D(TRC_HVM_EMUL_LAPIC_PIC_INTR, target, accept);
++    TRACE_TIME(TRC_HVM_EMUL_LAPIC_PIC_INTR, target, accept);
+ 
+     return target && accept;
+ }
+@@ -1433,7 +1443,7 @@ static void vlapic_do_init(struct vlapic *vlapic)
+     vlapic_set_reg(vlapic, APIC_SPIV, 0xff);
+     vlapic->hw.disabled |= VLAPIC_SW_DISABLED;
+ 
+-    TRACE_0D(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
++    TRACE_TIME(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
+     destroy_periodic_time(&vlapic->pt);
+ }
+ 
+@@ -1476,8 +1486,19 @@ static void lapic_rearm(struct vlapic *s)
+               (uint32_t)tmict * s->hw.timer_divisor);
+     is_periodic = vlapic_lvtt_period(s);
+ 
+-    TRACE_2_LONG_3D(TRC_HVM_EMUL_LAPIC_START_TIMER, TRC_PAR_LONG(period),
+-             TRC_PAR_LONG(is_periodic ? period : 0LL), s->pt.irq);
++    if ( unlikely(tb_init_done) )
++    {
++         struct {
++             uint64_t delta, period;
++             uint32_t irq;
++        } __packed d = {
++             .delta = period,
++             .period = is_periodic ? period : 0,
++             .irq = s->pt.irq,
++        };
++
++        trace_time(TRC_HVM_EMUL_LAPIC_START_TIMER, sizeof(d), &d);
++    }
+ 
+     create_periodic_time(vlapic_vcpu(s), &s->pt, period,
+                          is_periodic ? period : 0,
+@@ -1669,7 +1690,7 @@ void vlapic_destroy(struct vcpu *v)
+         return;
+ 
+     tasklet_kill(&vlapic->init_sipi.tasklet);
+-    TRACE_0D(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
++    TRACE_TIME(TRC_HVM_EMUL_LAPIC_STOP_TIMER);
+     destroy_periodic_time(&vlapic->pt);
+     unmap_domain_page_global(vlapic->regs);
+     free_domheap_page(vlapic->regs_page);
+diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
+index 8beeaab1517b..d36498d83104 100644
+--- a/xen/arch/x86/hvm/vmx/intr.c
++++ b/xen/arch/x86/hvm/vmx/intr.c
+@@ -67,8 +67,8 @@ static void vmx_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
+         unsigned long intr;
+ 
+         __vmread(VM_ENTRY_INTR_INFO, &intr);
+-        HVMTRACE_3D(INTR_WINDOW, intack.vector, intack.source,
+-                    (intr & INTR_INFO_VALID_MASK) ? intr & 0xff : -1);
++        TRACE(TRC_HVM_INTR_WINDOW, intack.vector, intack.source,
++              (intr & INTR_INFO_VALID_MASK) ? intr & 0xff : -1);
+     }
+ 
+     if ( (intack.source == hvm_intsrc_nmi) && cpu_has_vmx_vnmi )
+@@ -390,7 +390,7 @@ void asmlinkage vmx_intr_assist(void)
+     }
+     else
+     {
+-        HVMTRACE_2D(INJ_VIRQ, intack.vector, /*fake=*/ 0);
++        TRACE(TRC_HVM_INJ_VIRQ, intack.vector, /*fake=*/ 0);
+         vmx_inject_extint(intack.vector, intack.source);
+         pt_intr_post(v, intack);
+     }
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 23bdf0d1957f..ac73f58798ed 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2090,10 +2090,10 @@ static void cf_check vmx_inject_event(const struct x86_event *event)
+ 
+     if ( (_event.vector == X86_EXC_PF) &&
+          (_event.type == X86_EVENTTYPE_HW_EXCEPTION) )
+-        HVMTRACE_LONG_2D(PF_INJECT, _event.error_code,
+-                         TRC_PAR_LONG(curr->arch.hvm.guest_cr[2]));
++        TRACE(TRC_HVM_PF_INJECT64, _event.error_code,
++              curr->arch.hvm.guest_cr[2], curr->arch.hvm.guest_cr[2] >> 32);
+     else
+-        HVMTRACE_2D(INJ_EXC, _event.vector, _event.error_code);
++        TRACE(TRC_HVM_INJ_EXC, _event.vector, _event.error_code);
+ }
+ 
+ static bool cf_check vmx_event_pending(const struct vcpu *v)
+@@ -3085,7 +3085,7 @@ static void vmx_dr_access(unsigned long exit_qualification,
+ {
+     struct vcpu *v = current;
+ 
+-    HVMTRACE_0D(DR_WRITE);
++    TRACE(TRC_HVM_DR_WRITE);
+ 
+     if ( !v->arch.hvm.flag_dr_dirty )
+         __restore_debug_registers(v);
+@@ -3097,7 +3097,7 @@ static void vmx_dr_access(unsigned long exit_qualification,
+ 
+ static void vmx_invlpg_intercept(unsigned long linear)
+ {
+-    HVMTRACE_LONG_2D(INVLPG, /*invlpga=*/ 0, TRC_PAR_LONG(linear));
++    TRACE(TRC_HVM_INVLPG64, /*invlpga=*/ 0, linear, linear >> 32);
+     paging_invlpg(current, linear);
+ }
+ 
+@@ -3145,7 +3145,7 @@ static int vmx_cr_access(cr_access_qual_t qual)
+         hvm_monitor_crX(CR0, value, old);
+         curr->arch.hvm.guest_cr[0] = value;
+         vmx_update_guest_cr(curr, 0, 0);
+-        HVMTRACE_0D(CLTS);
++        TRACE(TRC_HVM_CLTS);
+         break;
+     }
+ 
+@@ -3158,7 +3158,7 @@ static int vmx_cr_access(cr_access_qual_t qual)
+         value = (value & ~(X86_CR0_MP|X86_CR0_EM|X86_CR0_TS)) |
+                 (qual.lmsw_data &
+                  (X86_CR0_PE|X86_CR0_MP|X86_CR0_EM|X86_CR0_TS));
+-        HVMTRACE_LONG_1D(LMSW, value);
++        TRACE(TRC_HVM_LMSW64, value, value >> 32);
+ 
+         if ( (rc = hvm_set_cr0(value, true)) == X86EMUL_EXCEPTION )
+             hvm_inject_hw_exception(X86_EXC_GP, 0);
+@@ -3711,7 +3711,7 @@ static void vmx_do_extint(struct cpu_user_regs *regs)
+     BUG_ON(!(vector & INTR_INFO_VALID_MASK));
+ 
+     vector &= INTR_INFO_VECTOR_MASK;
+-    HVMTRACE_1D(INTR, vector);
++    TRACE(TRC_HVM_INTR, vector);
+ 
+     regs->entry_vector = vector;
+     do_IRQ(regs);
+@@ -3851,7 +3851,7 @@ static void vmx_failed_vmentry(unsigned int exit_reason,
+ 
+     case EXIT_REASON_MCE_DURING_VMENTRY:
+         printk("MCE\n");
+-        HVMTRACE_0D(MCE);
++        TRACE(TRC_HVM_MCE);
+         /* Already handled. */
+         break;
+ 
+@@ -3892,7 +3892,7 @@ static int vmx_handle_eoi_write(void)
+     {
+         update_guest_eip(); /* Safe: APIC data write */
+         vlapic_EOI_set(vcpu_vlapic(current));
+-        HVMTRACE_0D(VLAPIC);
++        TRACE(TRC_HVM_VLAPIC);
+         return 1;
+     }
+ 
+@@ -4062,10 +4062,9 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
+     __vmread(VM_EXIT_REASON, &exit_reason);
+ 
+     if ( hvm_long_mode_active(v) )
+-        HVMTRACE_ND(VMEXIT64, 0, 1/*cycles*/, exit_reason,
+-                    TRC_PAR_LONG(regs->rip));
++        TRACE_TIME(TRC_HVM_VMEXIT64, exit_reason, regs->rip, regs->rip >> 32);
+     else
+-        HVMTRACE_ND(VMEXIT, 0, 1/*cycles*/, exit_reason, regs->eip);
++        TRACE_TIME(TRC_HVM_VMEXIT, exit_reason, regs->eip);
+ 
+     perfc_incra(vmexits, (uint16_t)exit_reason);
+ 
+@@ -4182,7 +4181,7 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
+         default:
+                 perfc_incr(realmode_exits);
+                 v->arch.hvm.vmx.vmx_emulate = 1;
+-                HVMTRACE_0D(REALMODE_EMULATE);
++                TRACE(TRC_HVM_REALMODE_EMULATE);
+                 return;
+             }
+         case EXIT_REASON_EXTERNAL_INTERRUPT:
+@@ -4239,7 +4238,7 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
+              * Table 23-1, "Exit Qualification for Debug Exceptions").
+              */
+             __vmread(EXIT_QUALIFICATION, &exit_qualification);
+-            HVMTRACE_1D(TRAP_DEBUG, exit_qualification);
++            TRACE(TRC_HVM_TRAP_DEBUG, exit_qualification);
+             __restore_debug_registers(v);
+             write_debugreg(6, exit_qualification | DR_STATUS_RESERVED_ONE);
+ 
+@@ -4301,7 +4300,7 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
+                 domain_pause_for_debugger();
+             break;
+         case X86_EXC_BP:
+-            HVMTRACE_1D(TRAP, vector);
++            TRACE(TRC_HVM_TRAP, vector);
+             if ( !v->domain->debugger_attached )
+             {
+                 unsigned long insn_len;
+@@ -4326,7 +4325,7 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
+             }
+             break;
+         case X86_EXC_NM:
+-            HVMTRACE_1D(TRAP, vector);
++            TRACE(TRC_HVM_TRAP, vector);
+             vmx_fpu_dirty_intercept();
+             break;
+         case X86_EXC_PF:
+@@ -4344,37 +4343,36 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
+                 if ( trace_will_trace_event(TRC_SHADOW) )
+                     break;
+                 if ( hvm_long_mode_active(v) )
+-                    HVMTRACE_LONG_2D(PF_XEN, regs->error_code,
+-                                     TRC_PAR_LONG(exit_qualification) );
++                    TRACE(TRC_HVM_PF_XEN64, regs->error_code,
++                          exit_qualification, exit_qualification >> 32);
+                 else
+-                    HVMTRACE_2D(PF_XEN,
+-                                regs->error_code, exit_qualification );
++                    TRACE(TRC_HVM_PF_XEN, regs->error_code, exit_qualification);
+                 break;
+             }
+ 
+             hvm_inject_page_fault(regs->error_code, exit_qualification);
+             break;
+         case X86_EXC_AC:
+-            HVMTRACE_1D(TRAP, vector);
++            TRACE(TRC_HVM_TRAP, vector);
+             vmx_propagate_intr(intr_info);
+             break;
+         case X86_EXC_NMI:
+             if ( MASK_EXTR(intr_info, INTR_INFO_INTR_TYPE_MASK) !=
+                  X86_EVENTTYPE_NMI )
+                 goto exit_and_crash;
+-            HVMTRACE_0D(NMI);
++            TRACE(TRC_HVM_NMI);
+             /* Already handled above. */
+             break;
+         case X86_EXC_MC:
+-            HVMTRACE_0D(MCE);
++            TRACE(TRC_HVM_MCE);
+             /* Already handled above. */
+             break;
+         case X86_EXC_UD:
+-            HVMTRACE_1D(TRAP, vector);
++            TRACE(TRC_HVM_TRAP, vector);
+             hvm_ud_intercept(regs);
+             break;
+         default:
+-            HVMTRACE_1D(TRAP, vector);
++            TRACE(TRC_HVM_TRAP, vector);
+             goto exit_and_crash;
+         }
+         break;
+@@ -4460,7 +4458,7 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
+         break;
+ 
+     case EXIT_REASON_VMCALL:
+-        HVMTRACE_1D(VMMCALL, regs->eax);
++        TRACE(TRC_HVM_VMMCALL, regs->eax);
+ 
+         if ( hvm_hypercall(regs) == HVM_HCALL_completed )
+             update_guest_eip(); /* Safe: VMCALL */
+@@ -4868,7 +4866,7 @@ bool asmlinkage vmx_vmenter_helper(const struct cpu_user_regs *regs)
+     if ( unlikely(curr->arch.hvm.vmx.lbr_flags & LBR_FIXUP_MASK) )
+         lbr_fixup();
+ 
+-    HVMTRACE_ND(VMENTRY, 0, 1/*cycles*/);
++    TRACE_TIME(TRC_HVM_VMENTRY);
+ 
+     __vmwrite(GUEST_RIP,    regs->rip);
+     __vmwrite(GUEST_RSP,    regs->rsp);
+diff --git a/xen/arch/x86/hvm/vpic.c b/xen/arch/x86/hvm/vpic.c
+index 4e23247a464a..7c3b5c7254a8 100644
+--- a/xen/arch/x86/hvm/vpic.c
++++ b/xen/arch/x86/hvm/vpic.c
+@@ -99,8 +99,7 @@ static void vpic_update_int_output(struct hvm_hw_vpic *vpic)
+     ASSERT(vpic_is_locked(vpic));
+ 
+     irq = vpic_get_highest_priority_irq(vpic);
+-    TRACE_3D(TRC_HVM_EMUL_PIC_INT_OUTPUT, vpic->int_output, vpic->is_master,
+-             irq);
++    TRACE_TIME(TRC_HVM_EMUL_PIC_INT_OUTPUT, vpic->int_output, vpic->is_master, irq);
+     if ( vpic->int_output == (!vpic->init_state && irq >= 0) )
+         return;
+ 
+@@ -119,7 +118,7 @@ static void vpic_update_int_output(struct hvm_hw_vpic *vpic)
+ 
+             if ( v != NULL )
+             {
+-                TRACE_1D(TRC_HVM_EMUL_PIC_KICK, irq);
++                TRACE_TIME(TRC_HVM_EMUL_PIC_KICK, irq);
+                 vcpu_kick(v);
+             }
+         }
+@@ -144,7 +143,7 @@ static void __vpic_intack(struct hvm_hw_vpic *vpic, int irq)
+ 
+     ASSERT(vpic_is_locked(vpic));
+ 
+-    TRACE_2D(TRC_HVM_EMUL_PIC_INTACK, vpic->is_master, irq);
++    TRACE_TIME(TRC_HVM_EMUL_PIC_INTACK, vpic->is_master, irq);
+     /* Edge-triggered: clear the IRR (forget the edge). */
+     if ( !(vpic->elcr & mask) )
+         vpic->irr &= ~mask;
+@@ -526,7 +525,7 @@ void vpic_irq_positive_edge(struct domain *d, int irq)
+     ASSERT(irq <= 15);
+     ASSERT(vpic_is_locked(vpic));
+ 
+-    TRACE_1D(TRC_HVM_EMUL_PIC_POSEDGE, irq);
++    TRACE_TIME(TRC_HVM_EMUL_PIC_POSEDGE, irq);
+     if ( irq == 2 )
+         return;
+ 
+@@ -544,7 +543,7 @@ void vpic_irq_negative_edge(struct domain *d, int irq)
+     ASSERT(irq <= 15);
+     ASSERT(vpic_is_locked(vpic));
+ 
+-    TRACE_1D(TRC_HVM_EMUL_PIC_NEGEDGE, irq);
++    TRACE_TIME(TRC_HVM_EMUL_PIC_NEGEDGE, irq);
+     if ( irq == 2 )
+         return;
+ 
+@@ -562,7 +561,7 @@ int vpic_ack_pending_irq(struct vcpu *v)
+ 
+     accept = vlapic_accept_pic_intr(v);
+ 
+-    TRACE_2D(TRC_HVM_EMUL_PIC_PEND_IRQ_CALL, accept, vpic->int_output);
++    TRACE_TIME(TRC_HVM_EMUL_PIC_PEND_IRQ_CALL, accept, vpic->int_output);
+     if ( !accept || !vpic->int_output )
+         return -1;
+ 
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 0487f734a5d2..2c1f858d3e64 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -229,7 +229,7 @@ static void _clear_irq_vector(struct irq_desc *desc)
+         for_each_cpu(cpu, tmp_mask)
+         {
+             ASSERT(per_cpu(vector_irq, cpu)[old_vector] == irq);
+-            TRACE_3D(TRC_HW_IRQ_MOVE_FINISH, irq, old_vector, cpu);
++            TRACE_TIME(TRC_HW_IRQ_MOVE_FINISH, irq, old_vector, cpu);
+             per_cpu(vector_irq, cpu)[old_vector] = ~irq;
+         }
+ 
+@@ -796,13 +796,11 @@ void cf_check irq_move_cleanup_interrupt(void)
+                 goto unlock;
+             }
+             send_IPI_self(IRQ_MOVE_CLEANUP_VECTOR);
+-            TRACE_3D(TRC_HW_IRQ_MOVE_CLEANUP_DELAY,
+-                     irq, vector, smp_processor_id());
++            TRACE_TIME(TRC_HW_IRQ_MOVE_CLEANUP_DELAY, irq, vector, me);
+             goto unlock;
+         }
+ 
+-        TRACE_3D(TRC_HW_IRQ_MOVE_CLEANUP,
+-                 irq, vector, smp_processor_id());
++        TRACE_TIME(TRC_HW_IRQ_MOVE_CLEANUP, irq, vector, me);
+ 
+         per_cpu(vector_irq, me)[vector] = ~irq;
+         desc->arch.move_cleanup_count--;
+@@ -1943,7 +1941,7 @@ void do_IRQ(struct cpu_user_regs *regs)
+                     spin_unlock(&desc->lock);
+                 }
+             }
+-            TRACE_1D(TRC_HW_IRQ_UNMAPPED_VECTOR, vector);
++            TRACE_TIME(TRC_HW_IRQ_UNMAPPED_VECTOR, vector);
+         }
+         goto out_no_unlock;
+     }
+@@ -1984,7 +1982,7 @@ void do_IRQ(struct cpu_user_regs *regs)
+ 
+         tsc_in = tb_init_done ? get_cycles() : 0;
+         do_IRQ_guest(desc, vector);
+-        TRACE_3D(TRC_HW_IRQ_HANDLED, irq, tsc_in, get_cycles());
++        TRACE_TIME(TRC_HW_IRQ_HANDLED, irq, tsc_in, get_cycles());
+         goto out_no_end;
+     }
+ 
+@@ -2008,7 +2006,7 @@ void do_IRQ(struct cpu_user_regs *regs)
+ 
+         tsc_in = tb_init_done ? get_cycles() : 0;
+         action->handler(irq, action->dev_id);
+-        TRACE_3D(TRC_HW_IRQ_HANDLED, irq, tsc_in, get_cycles());
++        TRACE_TIME(TRC_HW_IRQ_HANDLED, irq, tsc_in, get_cycles());
+ 
+         spin_lock_irq(&desc->lock);
+     }
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index d554c9d41edd..468a03608102 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -1899,7 +1899,7 @@ void asmlinkage do_device_not_available(struct cpu_user_regs *regs)
+         curr->arch.pv.ctrlreg[0] &= ~X86_CR0_TS;
+     }
+     else
+-        TRACE_0D(TRC_PV_MATH_STATE_RESTORE);
++        TRACE_TIME(TRC_PV_MATH_STATE_RESTORE);
+ #else
+     ASSERT_UNREACHABLE();
+ #endif
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 1f0d23a1e09b..fe8a216d29b6 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -625,7 +625,7 @@ struct domain *domain_create(domid_t domid,
+         hardware_domain = d;
+     }
+ 
+-    TRACE_1D(TRC_DOM0_DOM_ADD, d->domain_id);
++    TRACE_TIME(TRC_DOM0_DOM_ADD, d->domain_id);
+ 
+     lock_profile_register_struct(LOCKPROF_TYPE_PERDOM, d, domid);
+ 
+@@ -1222,7 +1222,7 @@ void domain_destroy(struct domain *d)
+     if ( atomic_cmpxchg(&d->refcnt, 0, DOMAIN_DESTROYED) != 0 )
+         return;
+ 
+-    TRACE_1D(TRC_DOM0_DOM_REM, d->domain_id);
++    TRACE_TIME(TRC_DOM0_DOM_REM, d->domain_id);
+ 
+     /* Delete from task list and task hashtable. */
+     spin_lock(&domlist_update_lock);
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index 77089308829b..8d34c8815f05 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -1307,7 +1307,7 @@ map_grant_ref(
+             goto undo_out;
+     }
+ 
+-    TRACE_1D(TRC_MEM_PAGE_GRANT_MAP, op->dom);
++    TRACE_TIME(TRC_MEM_PAGE_GRANT_MAP, op->dom);
+ 
+     /*
+      * All maptrack entry users check mt->flags first before using the
+@@ -1434,7 +1434,7 @@ unmap_common(
+         return;
+     }
+ 
+-    TRACE_1D(TRC_MEM_PAGE_GRANT_UNMAP, dom);
++    TRACE_TIME(TRC_MEM_PAGE_GRANT_UNMAP, dom);
+ 
+     rgt = rd->grant_table;
+ 
+@@ -2445,7 +2445,7 @@ gnttab_transfer(
+         put_gfn(d, gop.mfn);
+ #endif
+ 
+-        TRACE_1D(TRC_MEM_PAGE_GRANT_TRANSFER, e->domain_id);
++        TRACE_TIME(TRC_MEM_PAGE_GRANT_TRANSFER, e->domain_id);
+ 
+         /* Tell the guest about its new page frame. */
+         grant_read_lock(e->grant_table);
+diff --git a/xen/drivers/cpufreq/utility.c b/xen/drivers/cpufreq/utility.c
+index dbf8985969b2..ede22650a387 100644
+--- a/xen/drivers/cpufreq/utility.c
++++ b/xen/drivers/cpufreq/utility.c
+@@ -368,7 +368,7 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
+         retval = alternative_call(cpufreq_driver.target,
+                                   policy, target_freq, relation);
+         if ( retval == 0 )
+-            TRACE_2D(TRC_PM_FREQ_CHANGE, prev_freq/1000, policy->cur/1000);
++            TRACE_TIME(TRC_PM_FREQ_CHANGE, prev_freq / 1000, policy->cur / 1000);
+     }
+ 
+     return retval;
 -- 
 2.30.2
 
