@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6507CC54E72
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 16:36:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694893.1084134 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7223C54E5D
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 16:36:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694896.1084161 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmFxy-00062i-TO; Mon, 18 Mar 2024 16:36:02 +0000
+	id 1rmFy3-0006iC-6S; Mon, 18 Mar 2024 16:36:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694893.1084134; Mon, 18 Mar 2024 16:36:02 +0000
+Received: by outflank-mailman (output) from mailman id 694896.1084161; Mon, 18 Mar 2024 16:36:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmFxy-00062Z-PG; Mon, 18 Mar 2024 16:36:02 +0000
-Received: by outflank-mailman (input) for mailman id 694893;
- Mon, 18 Mar 2024 16:36:01 +0000
+	id 1rmFy2-0006h4-Vg; Mon, 18 Mar 2024 16:36:06 +0000
+Received: by outflank-mailman (input) for mailman id 694896;
+ Mon, 18 Mar 2024 16:36:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=we9v=KY=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rmFxx-0005JN-MY
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:36:01 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1rmFy2-0005JN-D3
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:36:06 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9a5bf40b-e545-11ee-a1ee-f123f15fe8a2;
- Mon, 18 Mar 2024 17:36:00 +0100 (CET)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a466f796fc1so587433066b.3
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:36:00 -0700 (PDT)
+ id 9ccc7f93-e545-11ee-a1ee-f123f15fe8a2;
+ Mon, 18 Mar 2024 17:36:04 +0100 (CET)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a4675aaa2e8so530463766b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:36:04 -0700 (PDT)
 Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- j22-20020a170906051600b00a441a7a75b5sm4988894eja.209.2024.03.18.09.35.57
+ j22-20020a170906051600b00a441a7a75b5sm4988894eja.209.2024.03.18.09.36.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 09:35:58 -0700 (PDT)
+ Mon, 18 Mar 2024 09:36:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,236 +47,400 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a5bf40b-e545-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 9ccc7f93-e545-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710779759; x=1711384559; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1710779763; x=1711384563; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=43RBkv9nNt2AeKgY3ovhftrUIQfOhkhQXVZiRG6YSx0=;
-        b=ao95LOdoc7zdpUQ4jYJnKqA17h0rGI3dejjuPRtnGGrxignSsS5w4020N8y6RymxdH
-         4fIg678LMf/VPL2J06Ab3e6Uuv4XJ5tSNfEyn2bsuauy4u0r64KhSes8qUfSEDB8iikW
-         sEA9xjnBmenTnJPeICi3jiEqfqFILnHpTW0Ho=
+        bh=8vrAhsgU6cX18okKuYBRpNmDoptjsZfxbtY0fNi0S6I=;
+        b=YJE3oceJHQ3uKQr8hNkLSsp9XV7vs6q0l+zUv5atmkaQD6LWrlbbkbzsUW2+nIfvjj
+         ZgcAdL3rOCbuIPBDvT9u2DsTcKFTh79Cnzg2PE27ybun/R5OSK14SCUjDwbBHLZTD5J0
+         DFhT0YcGwh86QrNf+vvgcqNM9QxFW1mUZ5SYA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710779759; x=1711384559;
+        d=1e100.net; s=20230601; t=1710779763; x=1711384563;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=43RBkv9nNt2AeKgY3ovhftrUIQfOhkhQXVZiRG6YSx0=;
-        b=UQDtyIFVXhVHC1Phm9WQMvO7EVG7YubIaBNehvesD9iHAuPXX4JyT0Fgg55Q4i075z
-         6vOqZ/2VS2VDiqKorYorVbuXdKya3upgDdtvsPClkPlWl9lylx8A++HhaF/JgDqZdZnH
-         d6yyOm2gj7xcoCTBgkCkDq4LMHFsIqou7f2QKhUo03GvbeOhErlAfp8mEcW5Jkk8r7pE
-         Qpen9vOsKve0/7Ugbgu2kslqOvG3mKD3yaLnVEam1GX4Cna9p3rUqM9rdpCIRn3PnvI4
-         ZEeyPPuh3mpUv15GXxnRUFtgpszGXXm0hX4hFEelQnYkyVCaGb5PY5gyyKSEhOF3XZVO
-         +E/g==
-X-Gm-Message-State: AOJu0YwOzRNoc3I2QbP5ATdG3HhZVbDaF+7USa9D46pZZmx7lhnxhjV9
-	wfkgriKsqrYAGylO/CQtscmHsc+gxvPun1+pFITUKTIjvojBZmSHxFzG3URxxs9TPcxcpm56cER
-	/
-X-Google-Smtp-Source: AGHT+IHE1OrPskT/jI53hC6Cj/B9BDqWSE89qkPT9exCF/Pfak0XZaz2HnBAxNcRRpgi/aJbGFHuLw==
-X-Received: by 2002:a17:906:190e:b0:a46:24fa:ea9f with SMTP id a14-20020a170906190e00b00a4624faea9fmr7551909eje.37.1710779758953;
-        Mon, 18 Mar 2024 09:35:58 -0700 (PDT)
+        bh=8vrAhsgU6cX18okKuYBRpNmDoptjsZfxbtY0fNi0S6I=;
+        b=YB6us06KbyjAz3gC3aHbiaOexuypMrDAKzqlkRwe9MOqwLHah5kySWAbpkkJMzh09G
+         hNpLpGDTxfOUCEdX/8YXVRGgpor7wAokTvz3+JdH/HsA/L51s5hHcn9HhmVtwQkRsGVU
+         iA+09iU24em6CjEgE6FT8WkLLSAT0PGQoN2Z32IpuVg2bFz0WHrSkbVeWpqUquX/PDeB
+         bvGWu/99cwIYajWmKIP/FtMJu/o17U6lSq/qjNVmeDisgfM+sdj3tpPgqhaFLAY6wA8f
+         CEggbO/faMGWXTKtNol7W3w2S353x7ZyKH+zI9rgY1017tPWq7aex3cGSwvwmbUx9+9k
+         lvlw==
+X-Gm-Message-State: AOJu0YzC3sEH+DWvDKhRq7UtG0b4gPf1zdSF5cP62c04b9AfrY+z8L1H
+	zoYHraJn9cG3fMZqBNwzJ6Vsd86XG4ki72Dg/hRiCE+4gSbc1BfhoeJtjs8FFE/MZyhLwE/tk8o
+	R
+X-Google-Smtp-Source: AGHT+IEnk6AfX4SLXJGON1k0UkIeAvbg61kD28TZM+u99GXJOtoZvunt1o7QU0IrhGe8s4ngEuX9Tw==
+X-Received: by 2002:a17:906:6947:b0:a46:1e16:317c with SMTP id c7-20020a170906694700b00a461e16317cmr7955308ejs.55.1710779762757;
+        Mon, 18 Mar 2024 09:36:02 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	George Dunlap <George.Dunlap@eu.citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <George.Dunlap@eu.citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>
-Subject: [PATCH 3/7] xen/rt: Clean up trace handling
-Date: Mon, 18 Mar 2024 16:35:48 +0000
-Message-Id: <20240318163552.3808695-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 6/7] xen/trace: Update final {__,}trace_var() users to the new API
+Date: Mon, 18 Mar 2024 16:35:51 +0000
+Message-Id: <20240318163552.3808695-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240318163552.3808695-1-andrew.cooper3@citrix.com>
 References: <20240318163552.3808695-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Most uses of bitfields and __packed are unnecessary.  There is also no need to
-cast 'd' to (unsigned char *) before passing it to a function taking void *.
-Switch to new trace_time() API.
+This logically drops the cycles parameter, as it's now encoded directly in the
+event code.
 
 No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
 ---
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Julien Grall <julien@xen.org>
-CC: Dario Faggioli <dfaggioli@suse.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 
-v2:
- * New.
 v3:
- * Rebase over core API changes.
+ * New
 ---
- xen/common/sched/rt.c | 99 ++++++++++++++++++++-----------------------
- 1 file changed, 47 insertions(+), 52 deletions(-)
+ xen/arch/x86/hvm/emulate.c      |  2 +-
+ xen/arch/x86/hvm/hvm.c          |  3 +--
+ xen/arch/x86/hvm/svm/svm.c      |  2 +-
+ xen/arch/x86/hvm/vmx/vmx.c      |  2 +-
+ xen/arch/x86/irq.c              |  2 +-
+ xen/arch/x86/mm/p2m-pod.c       |  8 ++++----
+ xen/arch/x86/mm/p2m-pt.c        |  2 +-
+ xen/arch/x86/mm/shadow/common.c |  6 +++---
+ xen/arch/x86/mm/shadow/multi.c  | 10 +++++-----
+ xen/arch/x86/pv/trace.c         | 21 +++++++++++----------
+ xen/common/memory.c             |  2 +-
+ xen/common/trace.c              |  2 +-
+ 12 files changed, 31 insertions(+), 31 deletions(-)
 
-diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
-index b279f957f622..f368e0fdd5a5 100644
---- a/xen/common/sched/rt.c
-+++ b/xen/common/sched/rt.c
-@@ -455,21 +455,21 @@ rt_update_deadline(s_time_t now, struct rt_unit *svc)
-     svc->cur_budget = svc->budget;
-     svc->priority_level = 0;
- 
--    /* TRACE */
-+    if ( unlikely(tb_init_done) )
-     {
--        struct __packed {
--            unsigned unit:16, dom:16;
--            unsigned priority_level;
-+        struct {
-+            uint16_t unit, dom;
-+            uint32_t priority_level;
-             uint64_t cur_deadline, cur_budget;
--        } d;
--        d.dom = svc->unit->domain->domain_id;
--        d.unit = svc->unit->unit_id;
--        d.priority_level = svc->priority_level;
--        d.cur_deadline = (uint64_t) svc->cur_deadline;
--        d.cur_budget = (uint64_t) svc->cur_budget;
--        trace_var(TRC_RTDS_BUDGET_REPLENISH, 1,
--                  sizeof(d),
--                  (unsigned char *) &d);
-+        } d = {
-+            .dom            = svc->unit->domain->domain_id,
-+            .unit           = svc->unit->unit_id,
-+            .priority_level = svc->priority_level,
-+            .cur_deadline   = svc->cur_deadline,
-+            .cur_budget     = svc->cur_budget,
-+        };
-+
-+        trace_time(TRC_RTDS_BUDGET_REPLENISH, sizeof(d), &d);
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index d8f36206a712..a37525316c6e 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -67,7 +67,7 @@ static void hvmtrace_io_assist(const ioreq_t *p)
+         size *= 2;
      }
  
-     return;
-@@ -986,7 +986,7 @@ burn_budget(const struct scheduler *ops, struct rt_unit *svc, s_time_t now)
-         }
-     }
- 
--    /* TRACE */
-+    if ( unlikely(tb_init_done) )
-     {
-         struct __packed {
-             uint16_t unit, dom;
-@@ -1003,9 +1003,7 @@ burn_budget(const struct scheduler *ops, struct rt_unit *svc, s_time_t now)
-             .has_extratime  = !!(svc->flags & RTDS_extratime),
-         };
- 
--        trace_var(TRC_RTDS_BUDGET_BURN, 1,
--                  sizeof(d),
--                  (unsigned char *) &d);
-+        trace_time(TRC_RTDS_BUDGET_BURN, sizeof(d), &d);
-     }
+-    trace_var(event, 0/*!cycles*/, size, buffer);
++    trace(event, size, buffer);
  }
  
-@@ -1040,22 +1038,19 @@ runq_pick(const struct scheduler *ops, const cpumask_t *mask, unsigned int cpu)
+ static int cf_check null_read(
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index e8af42eb499d..bb4eda4ecde2 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -5136,8 +5136,7 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) arg)
+             return -EINVAL;
+ 
+         /* Cycles will be taken at the vmexit and vmenter */
+-        trace_var(tr.event | TRC_GUEST, 0 /*!cycles*/,
+-                  tr.extra_bytes, tr.extra);
++        trace(tr.event | TRC_GUEST, tr.extra_bytes, tr.extra);
          break;
      }
  
--    /* TRACE */
-+    if ( unlikely(tb_init_done) && svc )
-     {
--        if( svc != NULL )
--        {
--            struct __packed {
--                unsigned unit:16, dom:16;
--                uint64_t cur_deadline, cur_budget;
--            } d;
--            d.dom = svc->unit->domain->domain_id;
--            d.unit = svc->unit->unit_id;
--            d.cur_deadline = (uint64_t) svc->cur_deadline;
--            d.cur_budget = (uint64_t) svc->cur_budget;
--            trace_var(TRC_RTDS_RUNQ_PICK, 1,
--                      sizeof(d),
--                      (unsigned char *) &d);
--        }
-+        struct __packed {
-+            uint16_t unit, dom;
-+            uint64_t cur_deadline, cur_budget;
-+        } d = {
-+            .unit         = svc->unit->unit_id,
-+            .dom          = svc->unit->domain->domain_id,
-+            .cur_deadline = svc->cur_deadline,
-+            .cur_budget   = svc->cur_budget,
-+        };
-+
-+        trace_time(TRC_RTDS_RUNQ_PICK, sizeof(d), &d);
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 09a79d761163..2d0c8762359f 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -1681,7 +1681,7 @@ static void svm_do_nested_pgfault(struct vcpu *v,
+         _d.mfn = mfn_x(mfn);
+         _d.p2mt = p2mt;
+ 
+-        __trace_var(TRC_HVM_NPF, 0, sizeof(_d), &_d);
++        trace(TRC_HVM_NPF, sizeof(_d), &_d);
      }
  
-     return svc;
-@@ -1076,18 +1071,19 @@ rt_schedule(const struct scheduler *ops, struct sched_unit *currunit,
-     struct rt_unit *snext = NULL;
-     bool migrated = false;
+     switch ( ret )
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index ac73f58798ed..255c97f18162 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -3767,7 +3767,7 @@ static void ept_handle_violation(ept_qual_t q, paddr_t gpa)
+         _d.qualification = q.raw;
+         _d.mfn = mfn_x(get_gfn_query_unlocked(d, gfn, &_d.p2mt));
  
--    /* TRACE */
-+    if ( unlikely(tb_init_done) )
-     {
--        struct __packed {
--            unsigned cpu:16, tasklet:8, tickled:4, idle:4;
--        } d;
--        d.cpu = cur_cpu;
--        d.tasklet = tasklet_work_scheduled;
--        d.tickled = cpumask_test_cpu(sched_cpu, &prv->tickled);
--        d.idle = is_idle_unit(currunit);
--        trace_var(TRC_RTDS_SCHEDULE, 1,
--                  sizeof(d),
--                  (unsigned char *)&d);
-+        struct {
-+            uint16_t cpu;
-+            uint8_t tasklet, tickled:4, idle:4;
-+        } d = {
-+            .cpu     = cur_cpu,
-+            .tasklet = tasklet_work_scheduled,
-+            .tickled = cpumask_test_cpu(sched_cpu, &prv->tickled),
-+            .idle    = is_idle_unit(currunit),
-+        };
-+
-+        trace_time(TRC_RTDS_SCHEDULE, sizeof(d), &d);
+-        __trace_var(TRC_HVM_NPF, 0, sizeof(_d), &_d);
++        trace(TRC_HVM_NPF, sizeof(_d), &_d);
      }
  
-     /* clear ticked bit now that we've been scheduled */
-@@ -1098,7 +1094,7 @@ rt_schedule(const struct scheduler *ops, struct sched_unit *currunit,
+     if ( q.gla_valid )
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 2c1f858d3e64..45a74c6a0256 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -135,7 +135,7 @@ static void _trace_irq_mask(uint32_t event, int irq, int vector,
  
-     if ( tasklet_work_scheduled )
+     memcpy(d.mask, mask,
+            min(sizeof(d.mask), BITS_TO_LONGS(nr_cpu_ids) * sizeof(long)));
+-    trace_var(event, 1, sizeof(d), &d);
++    trace_time(event, sizeof(d), &d);
+ }
+ 
+ static void trace_irq_mask(uint32_t event, int irq, int vector,
+diff --git a/xen/arch/x86/mm/p2m-pod.c b/xen/arch/x86/mm/p2m-pod.c
+index 65d31e552305..79a016682f1d 100644
+--- a/xen/arch/x86/mm/p2m-pod.c
++++ b/xen/arch/x86/mm/p2m-pod.c
+@@ -854,7 +854,7 @@ p2m_pod_zero_check_superpage(struct p2m_domain *p2m, gfn_t gfn)
+         t.d = d->domain_id;
+         t.order = 9;
+ 
+-        __trace_var(TRC_MEM_POD_ZERO_RECLAIM, 0, sizeof(t), &t);
++        trace(TRC_MEM_POD_ZERO_RECLAIM, sizeof(t), &t);
+     }
+ 
+     /*
+@@ -1022,7 +1022,7 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
+                 t.d = d->domain_id;
+                 t.order = 0;
+ 
+-                __trace_var(TRC_MEM_POD_ZERO_RECLAIM, 0, sizeof(t), &t);
++                trace(TRC_MEM_POD_ZERO_RECLAIM, sizeof(t), &t);
+             }
+ 
+             /* Add to cache, and account for the new p2m PoD entry */
+@@ -1262,7 +1262,7 @@ p2m_pod_demand_populate(struct p2m_domain *p2m, gfn_t gfn,
+         t.d = d->domain_id;
+         t.order = order;
+ 
+-        __trace_var(TRC_MEM_POD_POPULATE, 0, sizeof(t), &t);
++        trace(TRC_MEM_POD_POPULATE, sizeof(t), &t);
+     }
+ 
+     pod_unlock_and_flush(p2m);
+@@ -1307,7 +1307,7 @@ p2m_pod_demand_populate(struct p2m_domain *p2m, gfn_t gfn,
+         t.d = d->domain_id;
+         t.order = order;
+ 
+-        __trace_var(TRC_MEM_POD_SUPERPAGE_SPLINTER, 0, sizeof(t), &t);
++        trace(TRC_MEM_POD_SUPERPAGE_SPLINTER, sizeof(t), &t);
+     }
+ 
+     return true;
+diff --git a/xen/arch/x86/mm/p2m-pt.c b/xen/arch/x86/mm/p2m-pt.c
+index 348130d0dd3b..666abd46be16 100644
+--- a/xen/arch/x86/mm/p2m-pt.c
++++ b/xen/arch/x86/mm/p2m-pt.c
+@@ -608,7 +608,7 @@ p2m_pt_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
+         t.d = d->domain_id;
+         t.order = page_order;
+ 
+-        __trace_var(TRC_MEM_SET_P2M_ENTRY, 0, sizeof(t), &t);
++        trace(TRC_MEM_SET_P2M_ENTRY, sizeof(t), &t);
+     }
+ 
+     /* Carry out any eventually pending earlier changes first. */
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index 8aa7b698f879..1303aec85918 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -433,7 +433,7 @@ static inline void trace_resync(int event, mfn_t gmfn)
+         /* Convert gmfn to gfn */
+         gfn_t gfn = mfn_to_gfn(current->domain, gmfn);
+ 
+-        __trace_var(event, 0/*!tsc*/, sizeof(gfn), &gfn);
++        trace(event, sizeof(gfn), &gfn);
+     }
+ }
+ 
+@@ -910,7 +910,7 @@ static inline void trace_shadow_prealloc_unpin(struct domain *d, mfn_t smfn)
+ 
+         ASSERT(mfn_valid(smfn));
+         gfn = mfn_to_gfn(d, backpointer(mfn_to_page(smfn)));
+-        __trace_var(TRC_SHADOW_PREALLOC_UNPIN, 0/*!tsc*/, sizeof(gfn), &gfn);
++        trace(TRC_SHADOW_PREALLOC_UNPIN, sizeof(gfn), &gfn);
+     }
+ }
+ 
+@@ -1808,7 +1808,7 @@ static inline void trace_shadow_wrmap_bf(mfn_t gmfn)
+         /* Convert gmfn to gfn */
+         gfn_t gfn = mfn_to_gfn(current->domain, gmfn);
+ 
+-        __trace_var(TRC_SHADOW_WRMAP_BF, 0/*!tsc*/, sizeof(gfn), &gfn);
++        trace(TRC_SHADOW_WRMAP_BF, sizeof(gfn), &gfn);
+     }
+ }
+ 
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
+index 90cf0ceaa367..bcd02b2d0037 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -1979,7 +1979,7 @@ static inline void trace_shadow_gen(u32 event, guest_va_t va)
+     if ( tb_init_done )
      {
--        trace_var(TRC_RTDS_SCHED_TASKLET, 1, 0,  NULL);
-+        TRACE_TIME(TRC_RTDS_SCHED_TASKLET);
-         snext = rt_unit(sched_idle_unit(sched_cpu));
+         event |= (GUEST_PAGING_LEVELS-2)<<8;
+-        __trace_var(event, 0/*!tsc*/, sizeof(va), &va);
++        trace(event, sizeof(va), &va);
+     }
+ }
+ 
+@@ -2003,7 +2003,7 @@ static inline void trace_shadow_fixup(guest_l1e_t gl1e,
+         d.va = va;
+         d.flags = this_cpu(trace_shadow_path_flags);
+ 
+-        __trace_var(event, 0/*!tsc*/, sizeof(d), &d);
++        trace(event, sizeof(d), &d);
+     }
+ }
+ 
+@@ -2027,7 +2027,7 @@ static inline void trace_not_shadow_fault(guest_l1e_t gl1e,
+         d.va = va;
+         d.flags = this_cpu(trace_shadow_path_flags);
+ 
+-        __trace_var(event, 0/*!tsc*/, sizeof(d), &d);
++        trace(event, sizeof(d), &d);
+     }
+ }
+ 
+@@ -2053,7 +2053,7 @@ static inline void trace_shadow_emulate_other(u32 event,
+         d.gfn=gfn_x(gfn);
+         d.va = va;
+ 
+-        __trace_var(event, 0/*!tsc*/, sizeof(d), &d);
++        trace(event, sizeof(d), &d);
+     }
+ }
+ 
+@@ -2106,7 +2106,7 @@ static inline void trace_shadow_emulate(guest_l1e_t gl1e, unsigned long va)
+ #endif
+         d.flags = this_cpu(trace_shadow_path_flags);
+ 
+-        __trace_var(event, 0/*!tsc*/, sizeof(d), &d);
++        trace(event, sizeof(d), &d);
+     }
+ }
+ #endif /* CONFIG_HVM */
+diff --git a/xen/arch/x86/pv/trace.c b/xen/arch/x86/pv/trace.c
+index cf3897061e1f..70f426f2095c 100644
+--- a/xen/arch/x86/pv/trace.c
++++ b/xen/arch/x86/pv/trace.c
+@@ -19,7 +19,7 @@ void __trace_pv_trap(int trapnr, unsigned long eip,
+             .error_code     = error_code,
+         };
+ 
+-        __trace_var(TRC_PV_TRAP, 1, sizeof(d), &d);
++        trace_time(TRC_PV_TRAP, sizeof(d), &d);
      }
      else
-@@ -1250,16 +1246,15 @@ runq_tickle(const struct scheduler *ops, const struct rt_unit *new)
-     SCHED_STAT_CRANK(tickled_no_cpu);
-     return;
-  out:
--    /* TRACE */
-+    if ( unlikely(tb_init_done) )
      {
-         struct {
--            unsigned cpu:16, pad:16;
--        } d;
--        d.cpu = cpu_to_tickle;
--        d.pad = 0;
--        trace_var(TRC_RTDS_TICKLE, 1,
--                  sizeof(d),
--                  (unsigned char *)&d);
-+            uint16_t cpu, _pad;
-+        } d = {
-+            .cpu = cpu_to_tickle,
-+        };
+@@ -35,7 +35,7 @@ void __trace_pv_trap(int trapnr, unsigned long eip,
+             .error_code     = error_code,
+         };
+ 
+-        __trace_var(TRC_PV_TRAP | TRC_64_FLAG, 1, sizeof(d), &d);
++        trace_time(TRC_PV_TRAP | TRC_64_FLAG, sizeof(d), &d);
+     }
+ }
+ 
+@@ -53,7 +53,7 @@ void __trace_pv_page_fault(unsigned long addr, unsigned error_code)
+             .error_code = error_code,
+         };
+ 
+-        __trace_var(TRC_PV_PAGE_FAULT, 1, sizeof(d), &d);
++        trace_time(TRC_PV_PAGE_FAULT, sizeof(d), &d);
+     }
+     else
+     {
+@@ -66,7 +66,7 @@ void __trace_pv_page_fault(unsigned long addr, unsigned error_code)
+             .error_code = error_code,
+         };
+ 
+-        __trace_var(TRC_PV_PAGE_FAULT | TRC_64_FLAG, 1, sizeof(d), &d);
++        trace_time(TRC_PV_PAGE_FAULT | TRC_64_FLAG, sizeof(d), &d);
+     }
+ }
+ 
+@@ -75,10 +75,11 @@ void __trace_trap_one_addr(unsigned event, unsigned long va)
+     if ( is_pv_32bit_vcpu(current) )
+     {
+         u32 d = va;
+-        __trace_var(event, 1, sizeof(d), &d);
 +
-+        trace_time(TRC_RTDS_TICKLE, sizeof(d), &d);
++        trace_time(event, sizeof(d), &d);
+     }
+     else
+-        __trace_var(event | TRC_64_FLAG, 1, sizeof(va), &va);
++        trace_time(event | TRC_64_FLAG, sizeof(va), &va);
+ }
+ 
+ void __trace_trap_two_addr(unsigned event, unsigned long va1,
+@@ -93,7 +94,7 @@ void __trace_trap_two_addr(unsigned event, unsigned long va1,
+             .va2 = va2,
+         };
+ 
+-        __trace_var(event, 1, sizeof(d), &d);
++        trace_time(event, sizeof(d), &d);
+     }
+     else
+     {
+@@ -104,7 +105,7 @@ void __trace_trap_two_addr(unsigned event, unsigned long va1,
+             .va2 = va2,
+         };
+ 
+-        __trace_var(event | TRC_64_FLAG, 1, sizeof(d), &d);
++        trace_time(event | TRC_64_FLAG, sizeof(d), &d);
+     }
+ }
+ 
+@@ -123,7 +124,7 @@ void __trace_ptwr_emulation(unsigned long addr, l1_pgentry_t npte)
+             .eip  = eip,
+         };
+ 
+-        __trace_var(TRC_PV_PTWR_EMULATION_PAE, 1, sizeof(d), &d);
++        trace_time(TRC_PV_PTWR_EMULATION_PAE, sizeof(d), &d);
+     }
+     else
+     {
+@@ -136,6 +137,6 @@ void __trace_ptwr_emulation(unsigned long addr, l1_pgentry_t npte)
+             .rip  = eip,
+         };
+ 
+-        __trace_var(TRC_PV_PTWR_EMULATION | TRC_64_FLAG, 1, sizeof(d), &d);
++        trace_time(TRC_PV_PTWR_EMULATION | TRC_64_FLAG, sizeof(d), &d);
+     }
+ }
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index b3b05c2ec090..3cecfdee9518 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -483,7 +483,7 @@ static void decrease_reservation(struct memop_args *a)
+             t.d = a->domain->domain_id;
+             t.order = a->extent_order;
+         
+-            __trace_var(TRC_MEM_DECREASE_RESERVATION, 0, sizeof(t), &t);
++            trace(TRC_MEM_DECREASE_RESERVATION, sizeof(t), &t);
+         }
+ 
+         /* See if populate-on-demand wants to handle this */
+diff --git a/xen/common/trace.c b/xen/common/trace.c
+index c94ce1f7dc90..27c8a19f0549 100644
+--- a/xen/common/trace.c
++++ b/xen/common/trace.c
+@@ -868,7 +868,7 @@ void __trace_hypercall(uint32_t event, unsigned long op,
+         break;
      }
  
-     cpumask_set_cpu(cpu_to_tickle, &prv->tickled);
+-    __trace_var(event, 1, sizeof(uint32_t) * (1 + (a - d.args)), &d);
++    trace_time(event, sizeof(uint32_t) * (1 + (a - d.args)), &d);
+ }
+ 
+ /*
 -- 
 2.30.2
 
