@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0818DC54E73
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C466FC54E72
 	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 11:54:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694612.1083516 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.694618.1083582 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmBZ7-0001sM-F5; Mon, 18 Mar 2024 11:54:05 +0000
+	id 1rmBZC-0003Zo-Rk; Mon, 18 Mar 2024 11:54:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694612.1083516; Mon, 18 Mar 2024 11:54:05 +0000
+Received: by outflank-mailman (output) from mailman id 694618.1083582; Mon, 18 Mar 2024 11:54:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmBZ7-0001qM-Ac; Mon, 18 Mar 2024 11:54:05 +0000
-Received: by outflank-mailman (input) for mailman id 694612;
- Mon, 18 Mar 2024 11:54:03 +0000
+	id 1rmBZC-0003YJ-JQ; Mon, 18 Mar 2024 11:54:10 +0000
+Received: by outflank-mailman (input) for mailman id 694618;
+ Mon, 18 Mar 2024 11:54:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QoDm=KY=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rmBZ5-0001F2-R8
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 11:54:03 +0000
+ id 1rmBZA-0001F2-Qm
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 11:54:08 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 361da749-e51e-11ee-a1ee-f123f15fe8a2;
- Mon, 18 Mar 2024 12:54:01 +0100 (CET)
+ id 396893e5-e51e-11ee-a1ee-f123f15fe8a2;
+ Mon, 18 Mar 2024 12:54:07 +0100 (CET)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id 0C6044EE0746;
- Mon, 18 Mar 2024 12:54:01 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 3870D4EE0C8A;
+ Mon, 18 Mar 2024 12:54:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 361da749-e51e-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 396893e5-e51e-11ee-a1ee-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -50,10 +50,11 @@ Cc: sstabellini@kernel.org,
 	xenia.ragiadakou@amd.com,
 	ayan.kumar.halder@amd.com,
 	consulting@bugseng.com,
-	Julien Grall <julien@xen.org>
-Subject: [XEN PATCH 04/10] xen/device_tree: address violations of MISRA C Rule 20.7
-Date: Mon, 18 Mar 2024 12:53:47 +0100
-Message-Id: <3845d2a318bdaab242a7fd67473b05198db1b111.1710762555.git.nicola.vetrini@bugseng.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Dario Faggioli <dfaggioli@suse.com>
+Subject: [XEN PATCH 10/10] xen/sched: address violations of MISRA C Rule 20.7
+Date: Mon, 18 Mar 2024 12:53:53 +0100
+Message-Id: <0c584c738f744a583497f1fb862d753836d8b249.1710762555.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1710762555.git.nicola.vetrini@bugseng.com>
 References: <cover.1710762555.git.nicola.vetrini@bugseng.com>
@@ -70,26 +71,22 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
-This patch uniforms the way these macros use parentheses, skipping the
-already deviated cases of the lhs of an assignment. In principle, all
-three could have the parentheses on the macro argument in the lhs added.
----
- xen/include/xen/device_tree.h | 2 +-
+ xen/common/sched/private.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index 6fe2fa8b2123..e6287305a7b5 100644
---- a/xen/include/xen/device_tree.h
-+++ b/xen/include/xen/device_tree.h
-@@ -250,7 +250,7 @@ dt_find_interrupt_controller(const struct dt_device_match *matches);
-     for ( pp = (dn)->properties; (pp) != NULL; pp = (pp)->next )
+diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
+index 459d1dfb11a5..c0e7c96d24f4 100644
+--- a/xen/common/sched/private.h
++++ b/xen/common/sched/private.h
+@@ -540,7 +540,7 @@ static inline void sched_unit_unpause(const struct sched_unit *unit)
+ }
  
- #define dt_for_each_device_node(dt, dn)                     \
--    for ( dn = dt; (dn) != NULL; dn = (dn)->allnext )
-+    for ( dn = (dt); (dn) != NULL; dn = (dn)->allnext )
+ #define REGISTER_SCHEDULER(x) static const struct scheduler *x##_entry \
+-  __used_section(".data.schedulers") = &x
++  __used_section(".data.schedulers") = &(x)
  
- #define dt_for_each_child_node(dt, dn)                      \
-     for ( dn = (dt)->child; (dn) != NULL; dn = (dn)->sibling )
+ struct cpupool
+ {
 -- 
 2.34.1
 
