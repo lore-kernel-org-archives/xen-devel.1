@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71733C54E5D
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:11:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.695060.1084610 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920B2C54E58
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:11:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.695063.1084620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGVr-0001ZU-Ei; Mon, 18 Mar 2024 17:11:03 +0000
+	id 1rmGVx-0001yW-Lw; Mon, 18 Mar 2024 17:11:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 695060.1084610; Mon, 18 Mar 2024 17:11:03 +0000
+Received: by outflank-mailman (output) from mailman id 695063.1084620; Mon, 18 Mar 2024 17:11:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGVr-0001ZN-BG; Mon, 18 Mar 2024 17:11:03 +0000
-Received: by outflank-mailman (input) for mailman id 695060;
- Mon, 18 Mar 2024 17:11:02 +0000
+	id 1rmGVx-0001yL-Hk; Mon, 18 Mar 2024 17:11:09 +0000
+Received: by outflank-mailman (input) for mailman id 695063;
+ Mon, 18 Mar 2024 17:11:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=az6s=KY=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1rmGHj-0002gq-NK
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:56:27 +0000
+ id 1rmGHY-0002gq-L9
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:56:16 +0000
 Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
  [2a00:1450:4864:20::336])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 724c0068-e548-11ee-afdd-a90da7624cb6;
- Mon, 18 Mar 2024 17:56:21 +0100 (CET)
+ id 6ca5a649-e548-11ee-afdd-a90da7624cb6;
+ Mon, 18 Mar 2024 17:56:12 +0100 (CET)
 Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-413f76fcf41so33704655e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:56:21 -0700 (PDT)
+ 5b1f17b1804b1-41412253e71so7269575e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:56:11 -0700 (PDT)
 Received: from localhost.localdomain
  (cpc92320-cmbg19-2-0-cust35.5-4.cable.virginm.net. [82.13.64.36])
  by smtp.gmail.com with ESMTPSA id
- a18-20020a05600c349200b0041413d11838sm2020141wmq.26.2024.03.18.09.56.20
+ a18-20020a05600c349200b0041413d11838sm2020141wmq.26.2024.03.18.09.56.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 09:56:20 -0700 (PDT)
+ Mon, 18 Mar 2024 09:56:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,95 +48,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 724c0068-e548-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 6ca5a649-e548-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710780981; x=1711385781; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1710780971; x=1711385771; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1sfVt8Xg23JpHHAPGe+eT+E0bwcscFUgALb2j8zZ/sQ=;
-        b=M37dCuSMZTmRJh6f3u3SFKEzJPGbjvQg9Oj5X3bc0/6UTGnLDHsuIcWpM+EwxhPCSc
-         PH/Laz8oE5ZQGzDE1IECLkajDO/JktHbuvcehMy+eV7fvXJgysVsn2HQJ0DikRxMB3Ir
-         QeBcCtjmCDHrjusqMo24upertDPE/idlC8Rug=
+        bh=NJaVDu1HMN8nfSe34Wd7KEfeD3d4HQ65vleYBfsnpac=;
+        b=LMlaEySiRkJ4mjwpdzbRgXK6nMiASO/g0d+vCYRUluLIzGfESf+D5kA6aRwwrcZiVh
+         cAvn2Zw7kJrtdqw500dJ51tNrdDd3OYnUgr6brkmKpNnt1QtgrpjO4xW00ZR//1Q8uEi
+         xfTax9o+3l1NQ4MvifyU/ClSnyWD02tR+lWxw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710780981; x=1711385781;
+        d=1e100.net; s=20230601; t=1710780971; x=1711385771;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1sfVt8Xg23JpHHAPGe+eT+E0bwcscFUgALb2j8zZ/sQ=;
-        b=Of3i9shqpgc2vPuXJCc/6PP9MECT5PjcVwAqGx/2F41yfqR6AbCxKl5hqYeLoOfPp2
-         1DbB3LVkx/SnlOvId8PDwPyK6cmEHK3QO5vY+zAeaRwE6gV054TnBY2e27ecVxfXqgt6
-         sNzZrQLSrg2+a07gvGTFCwW7YrEzD/VCW/rY7mkLPojrbFzrkiW4S4QR3DrrmeO4w/jJ
-         rZNUHval4OirIBSc89aWzloqGbm5VgrYYc7E5wZLesqDYzXfvMSCnOdwV8YM62p3zZi7
-         VejHBvz16HxYttqv6mGh6xRltJH0NnAWPnt67/DdqctxD+Ue1YwM2B2pnvmkttiRATnV
-         FHWQ==
-X-Gm-Message-State: AOJu0YyplUZJg+hwFvF3IFsLYzbNJg5fpAvXC6VweEjP2iy3bgUvzAX8
-	tcvVXwNPRcO17ZnkcY3dl64rn7YR8NWBvjqm6wcH9yWc3Ic3n5VtEShG+2eCtp743Q2R+nwJs/8
-	Q
-X-Google-Smtp-Source: AGHT+IEMiO/AgdmTkpOqiPg6/8IU763h7xjEO1zx085zwYqqGt7cc1QJOnPJDF+WPxzm9Tujczh2FQ==
-X-Received: by 2002:a05:600c:5490:b0:414:846:4469 with SMTP id iv16-20020a05600c549000b0041408464469mr7010wmb.38.1710780980802;
-        Mon, 18 Mar 2024 09:56:20 -0700 (PDT)
+        bh=NJaVDu1HMN8nfSe34Wd7KEfeD3d4HQ65vleYBfsnpac=;
+        b=FqgLC2R5M+qKumWVHQk96O/CJyAABDpF+7zxnVBv/9B/h/p4RkOd2ZAQu5MIbs19Xg
+         F0g5slqWKgxe0mrOdKbcKiJ4rrASM/oqW8rRTyLqQBeGPg8sJdRQOJch4828G+rCPpYV
+         4iqwyqBcRa0mEWsXGdVv9lZsfsz2BnWhMTT7mMS8GNla/vlqHZziDbm+kbcAQiWam7Wy
+         bAw4NIGJEW8RMJTQuc+NPZ7cufQBtZALdMsw8P4sFEKpvWq3td2JnZoq43ak/Pm0QWqu
+         pnIssaqyvzOSxxrx+GMRWCYPE8DagdaZsls7xepsKKcEvkkzdfcWxKIUxtnr7Xn+OFSs
+         ahaw==
+X-Gm-Message-State: AOJu0Yy6nLMID62VmgOsw+FpDqCsFNuPXag3HFtm+ywOcE0uQeGfMWIC
+	JzYiXFnE1ilGZ4uJnSO0qcxbwkH0tcObVF6DwI2ovlQtNinWvvS9ISE+SD14Nxnrj73r/ZCFCMu
+	W
+X-Google-Smtp-Source: AGHT+IHaB/e3DTU/QGOuC0o0JPNOW3lrzTIeuYBU2yenLyQlwGyoquKV7itLuHb60AIA57Y7D3FACA==
+X-Received: by 2002:a05:600c:1389:b0:413:ee4b:cd8e with SMTP id u9-20020a05600c138900b00413ee4bcd8emr9755387wmf.24.1710780971394;
+        Mon, 18 Mar 2024 09:56:11 -0700 (PDT)
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [OSSTEST PATCH 35/36] Switch to Debian Bookworm as default suite
-Date: Mon, 18 Mar 2024 16:55:44 +0000
-Message-Id: <20240318165545.3898-36-anthony.perard@citrix.com>
+Subject: [OSSTEST PATCH 24/36] ts-nested-setup, setup l1 lvm volume groupe in guest
+Date: Mon, 18 Mar 2024 16:55:33 +0000
+Message-Id: <20240318165545.3898-25-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240318165545.3898-1-anthony.perard@citrix.com>
 References: <20240318165545.3898-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Xen 4.17 doesn't build with Debian Bookworm. It fails to build
-IPXE/etherboot, on "amd64". So we keep using Debian Buster on Xen 4.18
-and earlier branches. Xen 4.18 builds 4.17 via job "build-amd64-prev".
-
-Xen 4.17 would needs 18a36b4a9b08 ("tools: ipxe: update for fixing
-build with GCC12") which is only in Xen 4.18.
+LVM in l0 doesn't let us run pvcreate on the host LV, `pvcreate
+$outer_lvdev` fails with:
+    Cannot use /dev/$l0-vg/l1_gueststorage_outer_lv: device is an LV
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- Osstest.pm  | 2 +-
- make-flight | 6 +-----
- 2 files changed, 2 insertions(+), 6 deletions(-)
+ ts-nested-setup | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/Osstest.pm b/Osstest.pm
-index a559ca4e..9ac2dc5c 100644
---- a/Osstest.pm
-+++ b/Osstest.pm
-@@ -87,7 +87,7 @@ our %c = qw(
+diff --git a/ts-nested-setup b/ts-nested-setup
+index be3d3733..7fc8beef 100755
+--- a/ts-nested-setup
++++ b/ts-nested-setup
+@@ -80,14 +80,14 @@ sub guest_storage () {
+     target_cmd_root($l0, "vgremove -f $inner_vg ||:");
+     my $outer_lvdev = lv_create($l0, $outer_vg, $outer_lv, $size);
  
-     Images images
- 
--    DebianSuite buster
-+    DebianSuite bookworm
-     DebianMirrorSubpath debian
- 
-     TestHostKeypairPath id_rsa_osstest
-diff --git a/make-flight b/make-flight
-index 6e88cb13..0b528629 100755
---- a/make-flight
-+++ b/make-flight
-@@ -43,17 +43,13 @@ case "$xenbranch" in
-   xen-4.3-testing) defsuite="wheezy"; defguestsuite="wheezy";;
-   xen-4.9-testing)  defsuite="stretch"; defguestsuite="stretch";;
-   xen-4.10-testing) defsuite="stretch"; defguestsuite="stretch";;
-+  xen-4.1[1-8]-testing) defsuite="buster"; defguestsuite="buster";;
-   *)
-     defsuite=`getconfig DebianSuite`
-     defguestsuite=`getconfig GuestDebianSuite`
-     ;;
- esac
- 
--# QEMU doesn't build on buster anymore, use bookworm for it.
--case "$branch" in
--    qemu-mainline) defsuite="bookworm" ;;
--esac
+-    target_cmd_root($l0, <<END);
+-        pvcreate $outer_lvdev
+-	vgcreate $inner_vg $outer_lvdev
+-END
 -
- # Pick default Debian Installer version to correspond to the chosen
- # suite.
- if [ -z "$defdi_version" ] ; then
+     toolstack($l0)->block_attach($l1, "$outer_lvdev,raw,sdb,rw");
+     # NB this does not update the l1 guest config so if the l1 is shut
+     # down and recreated in the l0, this will vanish.
++
++    target_cmd_root($l1, <<END);
++	pvcreate /dev/xvdb
++	vgcreate $inner_vg /dev/xvdb
++END
+ }
+ 
+ packages();
 -- 
 Anthony PERARD
 
