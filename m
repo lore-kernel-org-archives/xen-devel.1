@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98937C54E71
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6507CC54E72
 	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 16:36:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694891.1084109 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.694893.1084134 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmFxw-0005LR-A4; Mon, 18 Mar 2024 16:36:00 +0000
+	id 1rmFxy-00062i-TO; Mon, 18 Mar 2024 16:36:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694891.1084109; Mon, 18 Mar 2024 16:36:00 +0000
+Received: by outflank-mailman (output) from mailman id 694893.1084134; Mon, 18 Mar 2024 16:36:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmFxw-0005L7-5P; Mon, 18 Mar 2024 16:36:00 +0000
-Received: by outflank-mailman (input) for mailman id 694891;
- Mon, 18 Mar 2024 16:35:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rmFxy-00062Z-PG; Mon, 18 Mar 2024 16:36:02 +0000
+Received: by outflank-mailman (input) for mailman id 694893;
+ Mon, 18 Mar 2024 16:36:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=we9v=KY=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rmFxu-0005JO-W2
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:35:58 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 98c415ae-e545-11ee-afdd-a90da7624cb6;
- Mon, 18 Mar 2024 17:35:57 +0100 (CET)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a468004667aso469316066b.2
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:35:57 -0700 (PDT)
+ id 1rmFxx-0005JN-MY
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:36:01 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9a5bf40b-e545-11ee-a1ee-f123f15fe8a2;
+ Mon, 18 Mar 2024 17:36:00 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a466f796fc1so587433066b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:36:00 -0700 (PDT)
 Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- j22-20020a170906051600b00a441a7a75b5sm4988894eja.209.2024.03.18.09.35.55
+ j22-20020a170906051600b00a441a7a75b5sm4988894eja.209.2024.03.18.09.35.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 09:35:56 -0700 (PDT)
+ Mon, 18 Mar 2024 09:35:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,149 +47,236 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98c415ae-e545-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 9a5bf40b-e545-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710779756; x=1711384556; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1710779759; x=1711384559; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Cpzmmaoi0pJueucz7Za6oBj+S2IXaqOnagU2yAyCJ44=;
-        b=JP9orS50tij7AR5qSry6psj3uSxN+dqggrNruuOGAo5lKFRepM6iDtccLLDS4d9j00
-         VnwGA6p4Td7d7Wv54zs+62zDQWslgbV73ZJ9fLnovz8D5dq7o+cvrrQAC28b+kWRgbOJ
-         bXoHqmAIInr8qAHHC18zjjlx7sw8l978xW9Q0=
+        bh=43RBkv9nNt2AeKgY3ovhftrUIQfOhkhQXVZiRG6YSx0=;
+        b=ao95LOdoc7zdpUQ4jYJnKqA17h0rGI3dejjuPRtnGGrxignSsS5w4020N8y6RymxdH
+         4fIg678LMf/VPL2J06Ab3e6Uuv4XJ5tSNfEyn2bsuauy4u0r64KhSes8qUfSEDB8iikW
+         sEA9xjnBmenTnJPeICi3jiEqfqFILnHpTW0Ho=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710779756; x=1711384556;
+        d=1e100.net; s=20230601; t=1710779759; x=1711384559;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Cpzmmaoi0pJueucz7Za6oBj+S2IXaqOnagU2yAyCJ44=;
-        b=if/w0DYXDIzTg/uEBxgo1+1IBfN40KJ8/Z/LPFHMMMkynANIpJiO7XAVlBn9i4zQRo
-         PMtKLrddf0vcjaE4JXNPczYDpdo/Y2ZoADBv+hL5hCEtduryqgpICM/U+0YVWOa0xJKN
-         wp8uakLmSi2metjuiOQ2rNrdSuswiPQcufLVC+4Dii7VwD4/lmvVEx975QdEbXL+nDi2
-         LmSCb70opR1dLL23R8E+2/uxIMaVFjX0+P2IFA5oqZyoMs/lEBJqlkPYCFA1dfyA5AhU
-         0FlXY5h/LLRHutSHGzeab8/WO4a8k0uV7lyuNgQ3FDPXJrG3lP/zTdBoWtS3BdqLW+gs
-         YIPw==
-X-Gm-Message-State: AOJu0YytK9Pjhfss0KWzSNRlBdbA9nLO7tCn8HH/V89oz8zDfmv+m9e1
-	slZzXZIPM1zZBsMB37rC/PAOGoNl2jfr+IoSvp4fU8MOqt0IUU6+ZenX2EiRHR6tv7X2OyblJW9
-	k
-X-Google-Smtp-Source: AGHT+IFlFP6MCdOoAYd9kZM9daEwNdNvAgjw0dy0gDaSkJUU2uztyqS390yRXY9RR7dsxHNJEWQejw==
-X-Received: by 2002:a17:906:81d0:b0:a46:d304:fce2 with SMTP id e16-20020a17090681d000b00a46d304fce2mr617114ejx.35.1710779756410;
-        Mon, 18 Mar 2024 09:35:56 -0700 (PDT)
+        bh=43RBkv9nNt2AeKgY3ovhftrUIQfOhkhQXVZiRG6YSx0=;
+        b=UQDtyIFVXhVHC1Phm9WQMvO7EVG7YubIaBNehvesD9iHAuPXX4JyT0Fgg55Q4i075z
+         6vOqZ/2VS2VDiqKorYorVbuXdKya3upgDdtvsPClkPlWl9lylx8A++HhaF/JgDqZdZnH
+         d6yyOm2gj7xcoCTBgkCkDq4LMHFsIqou7f2QKhUo03GvbeOhErlAfp8mEcW5Jkk8r7pE
+         Qpen9vOsKve0/7Ugbgu2kslqOvG3mKD3yaLnVEam1GX4Cna9p3rUqM9rdpCIRn3PnvI4
+         ZEeyPPuh3mpUv15GXxnRUFtgpszGXXm0hX4hFEelQnYkyVCaGb5PY5gyyKSEhOF3XZVO
+         +E/g==
+X-Gm-Message-State: AOJu0YwOzRNoc3I2QbP5ATdG3HhZVbDaF+7USa9D46pZZmx7lhnxhjV9
+	wfkgriKsqrYAGylO/CQtscmHsc+gxvPun1+pFITUKTIjvojBZmSHxFzG3URxxs9TPcxcpm56cER
+	/
+X-Google-Smtp-Source: AGHT+IHE1OrPskT/jI53hC6Cj/B9BDqWSE89qkPT9exCF/Pfak0XZaz2HnBAxNcRRpgi/aJbGFHuLw==
+X-Received: by 2002:a17:906:190e:b0:a46:24fa:ea9f with SMTP id a14-20020a170906190e00b00a4624faea9fmr7551909eje.37.1710779758953;
+        Mon, 18 Mar 2024 09:35:58 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
 	George Dunlap <George.Dunlap@eu.citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>
-Subject: [PATCH 1/7] xen/trace: Introduce new API
-Date: Mon, 18 Mar 2024 16:35:46 +0000
-Message-Id: <20240318163552.3808695-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/7] xen/rt: Clean up trace handling
+Date: Mon, 18 Mar 2024 16:35:48 +0000
+Message-Id: <20240318163552.3808695-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240318163552.3808695-1-andrew.cooper3@citrix.com>
 References: <20240318163552.3808695-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-trace() and trace_time(), in function form for struct arguments, and macro
-form for simple uint32_t list arguments.
+Most uses of bitfields and __packed are unnecessary.  There is also no need to
+cast 'd' to (unsigned char *) before passing it to a function taking void *.
+Switch to new trace_time() API.
 
-This will be used to clean up the mess of macros which exists throughout the
-codebase, as well as eventually dropping __trace_var().
-
-There is intentionally no macro to split a 64-bit parameter in the new API,
-for MISRA reasons.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
 ---
 CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Julien Grall <julien@xen.org>
+CC: Dario Faggioli <dfaggioli@suse.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 
+v2:
+ * New.
 v3:
- * Extend with trace() and trace_time()
- * Delete TRACE_PARAM64() for MISRA reasons.
+ * Rebase over core API changes.
 ---
- xen/common/trace.c      |  5 +++++
- xen/include/xen/trace.h | 30 ++++++++++++++++++++++++++++++
- 2 files changed, 35 insertions(+)
+ xen/common/sched/rt.c | 99 ++++++++++++++++++++-----------------------
+ 1 file changed, 47 insertions(+), 52 deletions(-)
 
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index 4e7b080e6154..c94ce1f7dc90 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -808,6 +808,11 @@ void __trace_var(u32 event, bool cycles, unsigned int extra,
-         tasklet_schedule(&trace_notify_dom0_tasklet);
+diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+index b279f957f622..f368e0fdd5a5 100644
+--- a/xen/common/sched/rt.c
++++ b/xen/common/sched/rt.c
+@@ -455,21 +455,21 @@ rt_update_deadline(s_time_t now, struct rt_unit *svc)
+     svc->cur_budget = svc->budget;
+     svc->priority_level = 0;
+ 
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+-        struct __packed {
+-            unsigned unit:16, dom:16;
+-            unsigned priority_level;
++        struct {
++            uint16_t unit, dom;
++            uint32_t priority_level;
+             uint64_t cur_deadline, cur_budget;
+-        } d;
+-        d.dom = svc->unit->domain->domain_id;
+-        d.unit = svc->unit->unit_id;
+-        d.priority_level = svc->priority_level;
+-        d.cur_deadline = (uint64_t) svc->cur_deadline;
+-        d.cur_budget = (uint64_t) svc->cur_budget;
+-        trace_var(TRC_RTDS_BUDGET_REPLENISH, 1,
+-                  sizeof(d),
+-                  (unsigned char *) &d);
++        } d = {
++            .dom            = svc->unit->domain->domain_id,
++            .unit           = svc->unit->unit_id,
++            .priority_level = svc->priority_level,
++            .cur_deadline   = svc->cur_deadline,
++            .cur_budget     = svc->cur_budget,
++        };
++
++        trace_time(TRC_RTDS_BUDGET_REPLENISH, sizeof(d), &d);
+     }
+ 
+     return;
+@@ -986,7 +986,7 @@ burn_budget(const struct scheduler *ops, struct rt_unit *svc, s_time_t now)
+         }
+     }
+ 
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+         struct __packed {
+             uint16_t unit, dom;
+@@ -1003,9 +1003,7 @@ burn_budget(const struct scheduler *ops, struct rt_unit *svc, s_time_t now)
+             .has_extratime  = !!(svc->flags & RTDS_extratime),
+         };
+ 
+-        trace_var(TRC_RTDS_BUDGET_BURN, 1,
+-                  sizeof(d),
+-                  (unsigned char *) &d);
++        trace_time(TRC_RTDS_BUDGET_BURN, sizeof(d), &d);
+     }
  }
  
-+void trace(uint32_t event, unsigned int extra, const void *extra_data)
-+{
-+    __trace_var(event, event & TRC_HD_CYCLE_FLAG, extra, extra_data);
-+}
-+
- void __trace_hypercall(uint32_t event, unsigned long op,
-                        const xen_ulong_t *args)
- {
-diff --git a/xen/include/xen/trace.h b/xen/include/xen/trace.h
-index 055883287e8c..f184844e1b55 100644
---- a/xen/include/xen/trace.h
-+++ b/xen/include/xen/trace.h
-@@ -37,6 +37,9 @@ int tb_control(struct xen_sysctl_tbuf_op *tbc);
+@@ -1040,22 +1038,19 @@ runq_pick(const struct scheduler *ops, const cpumask_t *mask, unsigned int cpu)
+         break;
+     }
  
- int trace_will_trace_event(u32 event);
+-    /* TRACE */
++    if ( unlikely(tb_init_done) && svc )
+     {
+-        if( svc != NULL )
+-        {
+-            struct __packed {
+-                unsigned unit:16, dom:16;
+-                uint64_t cur_deadline, cur_budget;
+-            } d;
+-            d.dom = svc->unit->domain->domain_id;
+-            d.unit = svc->unit->unit_id;
+-            d.cur_deadline = (uint64_t) svc->cur_deadline;
+-            d.cur_budget = (uint64_t) svc->cur_budget;
+-            trace_var(TRC_RTDS_RUNQ_PICK, 1,
+-                      sizeof(d),
+-                      (unsigned char *) &d);
+-        }
++        struct __packed {
++            uint16_t unit, dom;
++            uint64_t cur_deadline, cur_budget;
++        } d = {
++            .unit         = svc->unit->unit_id,
++            .dom          = svc->unit->domain->domain_id,
++            .cur_deadline = svc->cur_deadline,
++            .cur_budget   = svc->cur_budget,
++        };
++
++        trace_time(TRC_RTDS_RUNQ_PICK, sizeof(d), &d);
+     }
  
-+/* Create a trace record, with pre-constructed additional parameters. */
-+void trace(uint32_t event, unsigned int extra, const void *extra_data);
-+
- void __trace_var(uint32_t event, bool cycles, unsigned int extra, const void *);
+     return svc;
+@@ -1076,18 +1071,19 @@ rt_schedule(const struct scheduler *ops, struct sched_unit *currunit,
+     struct rt_unit *snext = NULL;
+     bool migrated = false;
  
- static inline void trace_var(uint32_t event, bool cycles, unsigned int extra,
-@@ -66,6 +69,9 @@ static inline int trace_will_trace_event(uint32_t event)
-     return 0;
- }
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+-        struct __packed {
+-            unsigned cpu:16, tasklet:8, tickled:4, idle:4;
+-        } d;
+-        d.cpu = cur_cpu;
+-        d.tasklet = tasklet_work_scheduled;
+-        d.tickled = cpumask_test_cpu(sched_cpu, &prv->tickled);
+-        d.idle = is_idle_unit(currunit);
+-        trace_var(TRC_RTDS_SCHEDULE, 1,
+-                  sizeof(d),
+-                  (unsigned char *)&d);
++        struct {
++            uint16_t cpu;
++            uint8_t tasklet, tickled:4, idle:4;
++        } d = {
++            .cpu     = cur_cpu,
++            .tasklet = tasklet_work_scheduled,
++            .tickled = cpumask_test_cpu(sched_cpu, &prv->tickled),
++            .idle    = is_idle_unit(currunit),
++        };
++
++        trace_time(TRC_RTDS_SCHEDULE, sizeof(d), &d);
+     }
  
-+static inline void trace(
-+    uint32_t event, unsigned int extra, const void *extra_data) {}
-+
- static inline void trace_var(uint32_t event, bool cycles, unsigned int extra,
-                              const void *extra_data) {}
- static inline void __trace_var(uint32_t event, bool cycles, unsigned int extra,
-@@ -74,6 +80,30 @@ static inline void __trace_hypercall(uint32_t event, unsigned long op,
-                                      const xen_ulong_t *args) {}
- #endif /* CONFIG_TRACEBUFFER */
+     /* clear ticked bit now that we've been scheduled */
+@@ -1098,7 +1094,7 @@ rt_schedule(const struct scheduler *ops, struct sched_unit *currunit,
  
-+/* Create a trace record with time included. */
-+static inline void trace_time(
-+    uint32_t event, unsigned int extra, const void *extra_data)
-+{
-+    trace(event | TRC_HD_CYCLE_FLAG, extra, extra_data);
-+}
+     if ( tasklet_work_scheduled )
+     {
+-        trace_var(TRC_RTDS_SCHED_TASKLET, 1, 0,  NULL);
++        TRACE_TIME(TRC_RTDS_SCHED_TASKLET);
+         snext = rt_unit(sched_idle_unit(sched_cpu));
+     }
+     else
+@@ -1250,16 +1246,15 @@ runq_tickle(const struct scheduler *ops, const struct rt_unit *new)
+     SCHED_STAT_CRANK(tickled_no_cpu);
+     return;
+  out:
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+         struct {
+-            unsigned cpu:16, pad:16;
+-        } d;
+-        d.cpu = cpu_to_tickle;
+-        d.pad = 0;
+-        trace_var(TRC_RTDS_TICKLE, 1,
+-                  sizeof(d),
+-                  (unsigned char *)&d);
++            uint16_t cpu, _pad;
++        } d = {
++            .cpu = cpu_to_tickle,
++        };
 +
-+/*
-+ * Create a trace record, packaging up to 7 additional parameters into a
-+ * uint32_t array.
-+ */
-+#define TRACE(_e, ...)                                          \
-+    do {                                                        \
-+        if ( unlikely(tb_init_done) )                           \
-+        {                                                       \
-+            uint32_t _d[] = { __VA_ARGS__ };                    \
-+            BUILD_BUG_ON(ARRAY_SIZE(_d) > TRACE_EXTRA_MAX);     \
-+            trace(_e, sizeof(_d), sizeof(_d) ? _d : NULL);      \
-+        }                                                       \
-+    } while ( 0 )
-+
-+/* Create a trace record with time included. */
-+#define TRACE_TIME(_e, ...) TRACE((_e) | TRC_HD_CYCLE_FLAG, ##__VA_ARGS__)
-+
- /* Convenience macros for calling the trace function. */
- #define TRACE_0D(_e)                            \
-     do {                                        \
++        trace_time(TRC_RTDS_TICKLE, sizeof(d), &d);
+     }
+ 
+     cpumask_set_cpu(cpu_to_tickle, &prv->tickled);
 -- 
 2.30.2
 
