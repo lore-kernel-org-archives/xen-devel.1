@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC331C54E5D
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:00:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694970.1084454 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1174AC54E5D
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:02:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694987.1084463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGLA-0005jz-V9; Mon, 18 Mar 2024 17:00:00 +0000
+	id 1rmGN2-0007af-9y; Mon, 18 Mar 2024 17:01:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694970.1084454; Mon, 18 Mar 2024 17:00:00 +0000
+Received: by outflank-mailman (output) from mailman id 694987.1084463; Mon, 18 Mar 2024 17:01:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGLA-0005jo-SK; Mon, 18 Mar 2024 17:00:00 +0000
-Received: by outflank-mailman (input) for mailman id 694970;
- Mon, 18 Mar 2024 17:00:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rmGN2-0007aY-6v; Mon, 18 Mar 2024 17:01:56 +0000
+Received: by outflank-mailman (input) for mailman id 694987;
+ Mon, 18 Mar 2024 17:01:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=az6s=KY=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1rmGHe-0002gq-ML
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:56:22 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 707d6999-e548-11ee-afdd-a90da7624cb6;
- Mon, 18 Mar 2024 17:56:18 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-41412411622so7208055e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:56:18 -0700 (PDT)
+ id 1rmGHc-0002f9-VH
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:56:20 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6f1a7b56-e548-11ee-a1ee-f123f15fe8a2;
+ Mon, 18 Mar 2024 17:56:16 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-414624a65beso23055e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:56:16 -0700 (PDT)
 Received: from localhost.localdomain
  (cpc92320-cmbg19-2-0-cust35.5-4.cable.virginm.net. [82.13.64.36])
  by smtp.gmail.com with ESMTPSA id
- a18-20020a05600c349200b0041413d11838sm2020141wmq.26.2024.03.18.09.56.17
+ a18-20020a05600c349200b0041413d11838sm2020141wmq.26.2024.03.18.09.56.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 09:56:17 -0700 (PDT)
+ Mon, 18 Mar 2024 09:56:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,106 +48,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 707d6999-e548-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 6f1a7b56-e548-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710780978; x=1711385778; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1710780975; x=1711385775; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lK2cvliT/wP/P+dntCPCcmtTOpkXUdusD9n6Lp67sAk=;
-        b=tW3C9f30kdt60lR85/Am5g4IJvgOtwUMgxtW3HxkSCrVDqxiS1fL3SdRPWYpUx8BQJ
-         w8iMNpwOxXy1WC5aLbl68W046fIFTwHYb9up60tqSKvy1hQKLp6Dj3aEX1E6LWTPkDpe
-         dnq8Afhk7dBuxeF6YwdM/Xp5EAagIpKXOYGy8=
+        bh=UQG3ZS/KBjrX61gOBxTf9yeYNXKYHvM6r6BPx94cQKs=;
+        b=fJK4BJ2mYlO7zN2Vef512nm9m3Uqv81Bmis0gqsEdCT4kE5bMgWrgNSslWytVDqwHs
+         sGjRLf4T3H5tPZkJfWFB+kTTP76lGH/FwhYEh4PFdhurYexZrshmCvZOUI8phFoPSfrn
+         5TIIYAGydoi7jERBCM29O3+T9qjXUwq1LATi4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710780978; x=1711385778;
+        d=1e100.net; s=20230601; t=1710780975; x=1711385775;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lK2cvliT/wP/P+dntCPCcmtTOpkXUdusD9n6Lp67sAk=;
-        b=NFsdnL0Sna9GLYsLXiH4oev/w+40O30M0SubH8hJqSSVK11hb8OQwU2MCv0QhrNhER
-         yzgV2503KqKm34cfL7fPNcro0o3JIUwq7aAGx8Cc/sLOgUiiH6o0P8yLV1tXKlwdqz/Y
-         a5aJdP4U0ApGqGLFLVN12G+wVHTqQ12PgJsj6mkDmwXTN5IV9VTx1CA94n4XRkdeikQq
-         xfOvqIQZEoRsJ9UhezQYT3S1QDxz1Fvu19wAANUZKfpvrOkZq0uGwpRouu0pXz8UykPY
-         kQY0eX0CPks82dtbtnQnjBFKNFSDx+TIX8YYyJh+kdwRFglsY62qHYxLcUgdeObF2a4s
-         FXSA==
-X-Gm-Message-State: AOJu0YwCoTR2dFm+Kt+pCh9igngas1ikJ2zRL3q9Nih5kcmOCCVt2TVC
-	/+lGw+8bFu05a7x0Lp2vdeWadShzuvcSt4v20sxpn6ZG59QQpQdPODvqhFZyvbtO0kI/U8lxxX2
-	c
-X-Google-Smtp-Source: AGHT+IFPTCcS1tWzDisEsT1f0NHG2uvx3CWNDZzxVre6NX5O2l2B7vmONi9UUzvm02FKWwJeRPV7Hw==
-X-Received: by 2002:a05:600c:35cd:b0:413:286c:4fcf with SMTP id r13-20020a05600c35cd00b00413286c4fcfmr8561862wmq.32.1710780977800;
-        Mon, 18 Mar 2024 09:56:17 -0700 (PDT)
+        bh=UQG3ZS/KBjrX61gOBxTf9yeYNXKYHvM6r6BPx94cQKs=;
+        b=XGjMQshHKgBNUBVHcptEV/7rlZuh4s4dwjiPaINy2MLLqm2I50F5VOX3HCkgvDWhsE
+         gEdoO8dXJRutNbF5TjLcrOBHW/UoX26wbUMXZJnTbt722ZOtktsdLA/tydUWbB0VCT01
+         9ILahsh21pTo4eEyUQqgXfeIDnoDTKgC3IFP9a6ND9peXFIA1Gv44q5azczQctXhpB1k
+         oixHYnGk9rlLDQq7ejmESaNFXgF2rBOoYeX45jPaqxwUKAt43uN1VrvjLN+G5csCpbyU
+         EonMdt8p0VI/t7Ly59gC8/p+RUrpuEQULERH88ifVJ2yFtKwR0S6JUjsjaHyaIkpBbE6
+         BxzQ==
+X-Gm-Message-State: AOJu0YzeVLd1NTHCian01YUDdJqDtvI5XS2h8uW/S7mQIJt26AJOZdFm
+	EYucUfwDX41xyfKEYvMNfePUvBcz1dmCZTyU1DrF9ZcoL+N+UwEb2x8uGJ+zCUvrrsLRpMG+3NU
+	W
+X-Google-Smtp-Source: AGHT+IFxPNgilfqdmRvgJO2Paa+HImA+CbRYKWFQN+pgq1nbnYiSEISR9mtJGNc7Acdzf42snqeVxQ==
+X-Received: by 2002:a05:600c:3c99:b0:413:fa31:b9f6 with SMTP id bg25-20020a05600c3c9900b00413fa31b9f6mr9694564wmb.2.1710780975478;
+        Mon, 18 Mar 2024 09:56:15 -0700 (PDT)
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [OSSTEST PATCH 31/36] ts-debian-*-install: Replace dots in hostnames by dashs
-Date: Mon, 18 Mar 2024 16:55:40 +0000
-Message-Id: <20240318165545.3898-32-anthony.perard@citrix.com>
+Subject: [OSSTEST PATCH 29/36] ts-debian-hvm-install: Increase min guest ram size
+Date: Mon, 18 Mar 2024 16:55:38 +0000
+Message-Id: <20240318165545.3898-30-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240318165545.3898-1-anthony.perard@citrix.com>
 References: <20240318165545.3898-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When running ./ts-debian-di-install, hostname on the command line is
-interpreted by the debian installer. As the installer find it to be a
-FQDN, it uses part of the hostname as the domain, thus overwriting the
-value from the DHCP and from d-i netcfg/get_domain setting (maybe).
+768 MB for the guest isn't enough anymore for Debian Bookworm, at boot
+it print this message:
 
-But the result is that /etc/resolv.conf contains "search
-bookworm.guest.osstest" and can't find an IP for "cache". So the
-installation fails.
+    Low memory
+    ----------
 
-Also replace ".guest.osstest" in a few other places, even if it
-may not be an issue.
+    Entering low memory mode
+
+    This system has relatively little free memory, so it will enter low memory
+    mode. Among other things, this means that this program will proceed in English.
+    You should set up swap space as soon as possible.
+    [Press enter to continue]
+
+So, automatic installation fails. An empiric test shows that the min
+was 817M for one particular situation (test-amd64-amd64-xl-qemuu-ovmf-amd64)
+but we probably need some leg room, so increase to 1 GB.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- ts-debian-di-install  | 4 ++--
  ts-debian-hvm-install | 2 +-
- ts-debian-install     | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/ts-debian-di-install b/ts-debian-di-install
-index d84407cf..06c7e1f4 100755
---- a/ts-debian-di-install
-+++ b/ts-debian-di-install
-@@ -68,8 +68,8 @@ our $ram_mb= $r{arch} =~ m/^armhf/ ? 768 : 2048;
- our $disk_mb= 10000;
- 
- our $guesthost= $gn.
--    ($r{"${gn}_suite"} ? ".".$r{"${gn}_suite"} : "").
--    ".guest.osstest";
-+    ($r{"${gn}_suite"} ? "-".$r{"${gn}_suite"} : "").
-+    "-guest-osstest";
- our $gho;
- 
- sub prep () {
 diff --git a/ts-debian-hvm-install b/ts-debian-hvm-install
-index 60c95b37..99e9acae 100755
+index 44eb3ab1..60c95b37 100755
 --- a/ts-debian-hvm-install
 +++ b/ts-debian-hvm-install
-@@ -46,7 +46,7 @@ our $ho= selecthost($whhost);
- our $ram_mb;
- our $disk_mb= 10000;
- 
--our $guesthost= "$gn.guest.osstest";
-+our $guesthost= "$gn-guest-osstest";
- our $gho;
- 
- our ($kernel, $ramdisk);
-diff --git a/ts-debian-install b/ts-debian-install
-index a737bec9..62db487a 100755
---- a/ts-debian-install
-+++ b/ts-debian-install
-@@ -34,7 +34,7 @@ our $ram_mb=    512;
- our $swap_mb=  1000;
- our $disk_mb= 10000;
- 
--our $guesthost= "$gn.guest.osstest";
-+our $guesthost= "$gn-guest-osstest";
- our $gho;
- 
- sub prep () {
+@@ -241,7 +241,7 @@ sub prep () {
+          if ($host_freemem_mb > $ram_lots * 2 + $ram_minslop) {
+               $ram_mb = $ram_lots;
+          } else {
+-              $ram_mb = 768;
++              $ram_mb = 1024;
+          }
+     }
+     logm("Host has $host_freemem_mb MB free memory, setting guest memory size to $ram_mb MB");
 -- 
 Anthony PERARD
 
