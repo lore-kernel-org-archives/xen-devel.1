@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3209ECD11BF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Mar 2024 14:48:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.695422.1085148 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F1D9CD11C2
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Mar 2024 14:58:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.695432.1085157 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmalA-0006gf-TS; Tue, 19 Mar 2024 14:48:12 +0000
+	id 1rmauq-00010p-QI; Tue, 19 Mar 2024 14:58:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 695422.1085148; Tue, 19 Mar 2024 14:48:12 +0000
+Received: by outflank-mailman (output) from mailman id 695432.1085157; Tue, 19 Mar 2024 14:58:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmalA-0006gW-Ql; Tue, 19 Mar 2024 14:48:12 +0000
-Received: by outflank-mailman (input) for mailman id 695422;
- Tue, 19 Mar 2024 14:48:11 +0000
+	id 1rmauq-00010i-NX; Tue, 19 Mar 2024 14:58:12 +0000
+Received: by outflank-mailman (input) for mailman id 695432;
+ Tue, 19 Mar 2024 14:58:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CQvM=KZ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rmal9-0006Nt-61
- for xen-devel@lists.xenproject.org; Tue, 19 Mar 2024 14:48:11 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
+ <SRS0=9UIi=KZ=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1rmaup-0000z5-2v
+ for xen-devel@lists.xenproject.org; Tue, 19 Mar 2024 14:58:11 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20601.outbound.protection.outlook.com
+ [2a01:111:f403:2415::601])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b2d6c161-e5ff-11ee-a1ee-f123f15fe8a2;
- Tue, 19 Mar 2024 15:48:07 +0100 (CET)
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d28051376eso93189501fa.0
- for <xen-devel@lists.xenproject.org>; Tue, 19 Mar 2024 07:48:07 -0700 (PDT)
-Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- xi8-20020a170906dac800b00a46af0fbe83sm3335059ejb.76.2024.03.19.07.48.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 07:48:05 -0700 (PDT)
+ id 1879bea9-e601-11ee-a1ee-f123f15fe8a2;
+ Tue, 19 Mar 2024 15:58:08 +0100 (CET)
+Received: from MN2PR22CA0023.namprd22.prod.outlook.com (2603:10b6:208:238::28)
+ by CY8PR12MB8362.namprd12.prod.outlook.com (2603:10b6:930:7e::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.27; Tue, 19 Mar
+ 2024 14:58:02 +0000
+Received: from BN2PEPF000044A9.namprd04.prod.outlook.com
+ (2603:10b6:208:238:cafe::da) by MN2PR22CA0023.outlook.office365.com
+ (2603:10b6:208:238::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.27 via Frontend
+ Transport; Tue, 19 Mar 2024 14:58:02 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN2PEPF000044A9.mail.protection.outlook.com (10.167.243.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7409.10 via Frontend Transport; Tue, 19 Mar 2024 14:58:02 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 19 Mar
+ 2024 09:58:02 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 19 Mar
+ 2024 09:58:02 -0500
+Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Tue, 19 Mar 2024 09:58:00 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,162 +65,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2d6c161-e5ff-11ee-a1ee-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710859686; x=1711464486; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ICFn6HYHLdztYm+7ek+tVrqiDg89lcf+qeTaqhK3dQQ=;
-        b=vA+H0DpVgIXq7cG0ogY8kgL4iQIwDwK35jDccpAj5GYxqVk0eoUmkvoiKGMTH3OmzD
-         7rkELJtae+DQoPRE5JUz0JJ6mYEkl0sEkbQEMpXBGBfytZgktUxD0xnK1Zk3ouiYPOc7
-         fVACjSze1tQ2jy4MnqnGC2FM28n3FPQPQoUDQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710859686; x=1711464486;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ICFn6HYHLdztYm+7ek+tVrqiDg89lcf+qeTaqhK3dQQ=;
-        b=WugJ7tZYF4yWnt9eHzP7xs3I6w70lTwRukW77h2d1c4TLHzSXo73R3EN19qGoyhsVR
-         Abxgba2OubjF44iYBUFk7uRpbD5+EM4nem7Tby3ukFX6lMfop+x2Gzmf7MGG0QWoybWV
-         PGxrdSKV4+etkaUUAGm0U8SpWFrnkc0Ii+KjtiQPyMoF6pyb015JRiVwhZIcR26Ly084
-         Y/taDLEPyie0+DIzD1ZZnlZPiIQzvdC8ycfNbA5TfUaSBBo2d4MwZ2/6iy2UF7tS+j4p
-         idxT+aQVrVbAgBlee3sePGMBjhNjm2ibzUjAtJUeY5Geupe9dB7X2vaJoE9GaJoWIbpq
-         EySQ==
-X-Gm-Message-State: AOJu0Yyi/Sat+RaQA2S8dTabHz6Ur7Z6hY55DK/F3Cyi3zI8ctOEbZ8Z
-	LKTkMYn5khvbQ8yKEVD3VxfUIAwokysRCUKJS0CuEgZzHiN5WguSe+HINGPBbC+Iwt9gY++nHOX
-	D
-X-Google-Smtp-Source: AGHT+IF5i5JE7N6DFA/B6ja5buYfxvVRqAa9umaE58q7GRlamTXFyPIexgPfCbnLDlBLo5TAMLMR0w==
-X-Received: by 2002:a05:651c:50f:b0:2d4:6d56:4aa9 with SMTP id o15-20020a05651c050f00b002d46d564aa9mr10785801ljp.33.1710859685932;
-        Tue, 19 Mar 2024 07:48:05 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 1/2] x86/boot: Fix setup_apic_nmi_watchdog() to fail more cleanly
-Date: Tue, 19 Mar 2024 14:48:01 +0000
-Message-Id: <20240319144802.3894710-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240319144802.3894710-1-andrew.cooper3@citrix.com>
-References: <20240319144802.3894710-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 1879bea9-e601-11ee-a1ee-f123f15fe8a2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CkWxsPbwapFMqkH1k5eCSd+TNL5ZLnJURvTytWbzAUBVYPVsRYqQTPzEMIvpzDEXADKN3sx7kzu3a5r1U+OPO6mKFwuUMdTD2XOq6PhipqPkhtWNkFK6ryfHC/QBKyJARfEa4oMShUmiBMZtLv/3L8wKeBtG7TKLrUOfHMmPbaJIiOBub8Nd2OySbsHj/twhFc/wGluAQRin53LIwPQBjjvw0u/w3CM3VOyep4Jj7W1SDcKA/EcOhwZDh70j93RBf4JOPrSvuv3RaBhe6YzO9aA+CfhUtJ8qemTNpgVDRsiQHJBOvfhluMOtB9C9xwUkosRA10pufa6qggH+Kx9RAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Oh6tmfvN8fcDo+SfSU22ZT+cMk+cmr5zybKRLkkMs8E=;
+ b=mcpHUkqIDNtOpip0mQ4ljqLuscm3HWZb8lgCLj7QiX2OkYAXg/M9wE0PUdVWKvA1ploesJEhy1wwYN9pt4MEeSCUEf0p6+7ZIuUxQ4K5NbPltj1g/VF6hBmNFXqKDq3vh5LbMKokn/SZtt9lklBg+9/T9zPDnqnDA3kCyXCQju7lW7IEj87bfoM/WyXe/PdU4OkkUb6Vce7ssrZAAK5XF8ysJ8qlpQDaHuE/r4He1V+FDrkemCMW/sUSJUkBKbcHKVUcfTI2bZdUcKHlkBgn+/d6806Vik6wxNBUQlMme9lS8Fnjxb4DpYT8qJW5jVww/1U02CgcFWHheZ+Jwmpzhg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Oh6tmfvN8fcDo+SfSU22ZT+cMk+cmr5zybKRLkkMs8E=;
+ b=loL6JEqm/kFOX+KTboMxkLlAR/irhIIVbRy6j4xhkeJ0ToCCpKnMrym2yDbLJbUtHHK2DUBRn5xZC1/4gInZbGHdpm6skM3phnF0mtaFqim+GpcP4Gk+bVAm6dyX1bxrrIVOPOl6QgP8X9kkWYVCASxiFDMoAg1p3p3NwKOrS1A=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <0dd4d824-068a-4975-a1af-e194337a64b9@amd.com>
+Date: Tue, 19 Mar 2024 15:58:00 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/11] xen/arm: Conditional compilation of
+ kernel_info.shm_mem member
+Content-Language: en-US
+To: Luca Fancellu <luca.fancellu@arm.com>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+References: <20240312130331.78418-1-luca.fancellu@arm.com>
+ <20240312130331.78418-5-luca.fancellu@arm.com>
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <20240312130331.78418-5-luca.fancellu@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB05.amd.com: michal.orzel@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A9:EE_|CY8PR12MB8362:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9deb9f31-0f01-4d36-8f26-08dc4824f9c7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	jC2ZlGRpDPj0vt/We8sXD3w2g9I54PfbAyy1DDd5ZEMpScE7u8FcI4LkNLQwywYoRMRE+QBx76l5kv9SQikcyZDc6IDzKpi1HeR3/Xfn4773/or/cRYsLbrK2zD8O7TXeMQIrHEelVWrGUN3TKu1VQh+/n7QGwv/ldqcdIgYvWNKkoD8GolwvHDr5fi9cbFFo45SzeFFcInANMRS4L79Iykz2gxElZG2+sfzdzuMII2nyXUxZg+CxJsGMBkAaLuM5eC1dmFtdRqJKIzzW6NrGsM567A6r6+Xvc7RBjcYf9A1+eQXniARYb0nH90fk50Pln+oIPJ6o5e1eFzRgRuTu5JYokzA77dFhYsTW5BQaoS0KlLYvmAOqexVBI41aIzFbVPn4+ScCbxWeL3Ldkuczr3QD9dXRQhOwVE7lHr+howK6CcbU2E3TVvCTDqB5hy+lVyo5kgcXoCBTKezKP4ekdoLMUJybG8l2nuZWO4dtVUgHywozbTw3gvVQzr791eXRabJlvlpftTmdzXXvTYdTom+TF9+teDUTHd/KVUwXfd7bXobI+k9GtYPdfXxePGGeXKaVpugsSMmIgkL6ZQTqySY55nAUYuI5gIkq3vqAawFJ7yU9tt4bWIC1Jtm5LG11vquK3kMqzq8JUE38UvBuHSeUv7GDE3+Lv4LPHl9K1hPbOMXe5OdbBsZrlDJhbhgv0+7xcRnFeylZglt6t6Kgxy1uBQGO7Y1uTUmq/z5E3ELPz6q8gX47rZZ7wD5yPix
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(376005)(36860700004)(1800799015)(34020700007)(82310400014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2024 14:58:02.5926
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9deb9f31-0f01-4d36-8f26-08dc4824f9c7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF000044A9.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8362
 
-Right now, if the user requests the watchdog on the command line,
-setup_apic_nmi_watchdog() will blindly assume that setting up the watchdog
-worked.  Reuse nmi_perfctr_msr to identify when the watchdog has been set up.
+Hi Luca,
 
-Rearrange setup_p6_watchdog() to not set nmi_perfctr_msr until the sanity
-checks are performed.  Turn setup_p4_watchdog() into a void function, matching
-the others.
+On 12/03/2024 14:03, Luca Fancellu wrote:
+> 
+> 
+> The user of shm_mem member of the 'struct kernel_info' is only
+> the code managing the static shared memory feature, which can be
+> compiled out using CONFIG_STATIC_SHM, so in case the feature is
+> not requested, that member won't be used and will waste memory
+> space.
+> 
+> To address this issue, protect the member with the Kconfig parameter
+> and modify the signature of the only function using it to remove
+> any reference to the member from outside the static-shmem module.
+> 
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-If the watchdog isn't set up, inform the user and override to NMI_NONE, which
-will prevent check_nmi_watchdog() from claiming that all CPUs are stuck.
+NIT: I always wonder why we have hundreds of functions taking both struct domain and
+struct kernel_info as arguments if the latter has the former as its member. As you are
+revisiting the function and modifying parameter list, you could take the opportunity
+to change it. But you don't have to.
 
-e.g.:
-
-  (XEN) alt table ffff82d040697c38 -> ffff82d0406a97f0
-  (XEN) Failed to configure NMI watchdog
-  (XEN) Brought up 512 CPUs
-  (XEN) Scheduling granularity: cpu, 1 CPU per sched-resource
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-
-This is all horrible code.
----
- xen/arch/x86/nmi.c | 25 ++++++++++++-------------
- 1 file changed, 12 insertions(+), 13 deletions(-)
-
-diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
-index 8994c50cb5e4..33f77a92047f 100644
---- a/xen/arch/x86/nmi.c
-+++ b/xen/arch/x86/nmi.c
-@@ -319,8 +319,6 @@ static void setup_p6_watchdog(unsigned counter)
- {
-     unsigned int evntsel;
- 
--    nmi_perfctr_msr = MSR_P6_PERFCTR(0);
--
-     if ( !nmi_p6_event_width && current_cpu_data.cpuid_level >= 0xa )
-         nmi_p6_event_width = MASK_EXTR(cpuid_eax(0xa), P6_EVENT_WIDTH_MASK);
-     if ( !nmi_p6_event_width )
-@@ -330,6 +328,8 @@ static void setup_p6_watchdog(unsigned counter)
-          nmi_p6_event_width > BITS_PER_LONG )
-         return;
- 
-+    nmi_perfctr_msr = MSR_P6_PERFCTR(0);
-+
-     clear_msr_range(MSR_P6_EVNTSEL(0), 2);
-     clear_msr_range(MSR_P6_PERFCTR(0), 2);
- 
-@@ -345,13 +345,13 @@ static void setup_p6_watchdog(unsigned counter)
-     wrmsr(MSR_P6_EVNTSEL(0), evntsel, 0);
- }
- 
--static int setup_p4_watchdog(void)
-+static void setup_p4_watchdog(void)
- {
-     uint64_t misc_enable;
- 
-     rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
-     if (!(misc_enable & MSR_IA32_MISC_ENABLE_PERF_AVAIL))
--        return 0;
-+        return;
- 
-     nmi_perfctr_msr = MSR_P4_IQ_PERFCTR0;
-     nmi_p4_cccr_val = P4_NMI_IQ_CCCR0;
-@@ -374,13 +374,12 @@ static int setup_p4_watchdog(void)
-     clear_msr_range(0x3E0, 2);
-     clear_msr_range(MSR_P4_BPU_CCCR0, 18);
-     clear_msr_range(MSR_P4_BPU_PERFCTR0, 18);
--        
-+
-     wrmsrl(MSR_P4_CRU_ESCR0, P4_NMI_CRU_ESCR0);
-     wrmsrl(MSR_P4_IQ_CCCR0, P4_NMI_IQ_CCCR0 & ~P4_CCCR_ENABLE);
-     write_watchdog_counter("P4_IQ_COUNTER0");
-     apic_write(APIC_LVTPC, APIC_DM_NMI);
-     wrmsrl(MSR_P4_IQ_CCCR0, nmi_p4_cccr_val);
--    return 1;
- }
- 
- void setup_apic_nmi_watchdog(void)
-@@ -395,8 +394,6 @@ void setup_apic_nmi_watchdog(void)
-         case 0xf ... 0x19:
-             setup_k7_watchdog();
-             break;
--        default:
--            return;
-         }
-         break;
-     case X86_VENDOR_INTEL:
-@@ -407,14 +404,16 @@ void setup_apic_nmi_watchdog(void)
-                               : CORE_EVENT_CPU_CLOCKS_NOT_HALTED);
-             break;
-         case 15:
--            if (!setup_p4_watchdog())
--                return;
-+            setup_p4_watchdog();
-             break;
--        default:
--            return;
-         }
-         break;
--    default:
-+    }
-+
-+    if ( nmi_perfctr_msr == 0 )
-+    {
-+        printk(XENLOG_WARNING "Failed to configure NMI watchdog\n");
-+        nmi_watchdog = NMI_NONE;
-         return;
-     }
- 
--- 
-2.30.2
+~Michal
 
 
