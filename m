@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE50C54E60
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Mar 2024 03:33:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.695191.1084733 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6038FC54E5D
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Mar 2024 03:33:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.695194.1084757 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmQDa-0003x8-4v; Tue, 19 Mar 2024 03:32:50 +0000
+	id 1rmQE2-0004pN-Kd; Tue, 19 Mar 2024 03:33:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 695191.1084733; Tue, 19 Mar 2024 03:32:50 +0000
+Received: by outflank-mailman (output) from mailman id 695194.1084757; Tue, 19 Mar 2024 03:33:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmQDa-0003x1-1m; Tue, 19 Mar 2024 03:32:50 +0000
-Received: by outflank-mailman (input) for mailman id 695191;
- Tue, 19 Mar 2024 03:32:49 +0000
+	id 1rmQE2-0004pE-I1; Tue, 19 Mar 2024 03:33:18 +0000
+Received: by outflank-mailman (input) for mailman id 695194;
+ Tue, 19 Mar 2024 03:33:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=N0xd=KZ=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1rmQDY-0003wv-Sc
- for xen-devel@lists.xenproject.org; Tue, 19 Mar 2024 03:32:48 +0000
+ id 1rmQE1-0003wv-3P
+ for xen-devel@lists.xenproject.org; Tue, 19 Mar 2024 03:33:17 +0000
 Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 59631fb4-e5a1-11ee-a1ee-f123f15fe8a2;
- Tue, 19 Mar 2024 04:32:46 +0100 (CET)
+ id 6aa3a620-e5a1-11ee-a1ee-f123f15fe8a2;
+ Tue, 19 Mar 2024 04:33:15 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 8AAB5CE0121;
- Tue, 19 Mar 2024 03:32:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85285C433C7;
- Tue, 19 Mar 2024 03:32:41 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 0A066CE08D4;
+ Tue, 19 Mar 2024 03:33:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDBCAC433F1;
+ Tue, 19 Mar 2024 03:33:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,29 +43,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 59631fb4-e5a1-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 6aa3a620-e5a1-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1710819162;
-	bh=kmmOI6qXEjivvJs+ffFofBzmRsJOKb9z+WudcXWCX9w=;
+	s=k20201202; t=1710819192;
+	bh=BhwU4HC5QYEwU9zq/KGOAxnObTvAl0v2AzcqP8ga7oI=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=n1Y25bTenLtIHyW9bOjWa0/pwYrzdBsVGp567b03FRGax6xDXon5dpNBlRZYlZl1R
-	 6vaxCCUNYsgzRVEErq8EmyB3gqNd3p3FiNgM/iq/V1w41Su37PJ91tHLVyGAdD69ah
-	 BQxAVGlE3ju3gvSjDhsfDfKYWr+Yq5aforAFJgdm4ycXNsJTOUYURb8gyb7rUF/wgy
-	 PrgUmgEa1KlhACFsZwcwJWO0RIDxSas6TQtTNb+wW5xn2e3KR+COe2nzrJLs4bWFgm
-	 lrxqXxEdrRsDZWsZMXFSCqBXqJqo2HB3ztcCZc8Hq46pT82q5znmML6Q/uMSoPAqMc
-	 0UjGdYRHwAFjg==
-Date: Mon, 18 Mar 2024 21:32:39 -0600 (MDT)
+	b=R19cf63oLsm/tD6Fm0gso/oCSQStF7TQj5bqiLP4Sw8M7z4hYLZJ5PAfpTg6dpi1m
+	 Qtn5rs3niB0q1EmmC0bJ9Ic7IoOopuQnpye+TCUnah5EPavfZQuvhBZRphguZSKdeR
+	 i1MIS1uS3fEjhkEINqjoZHMwoccpZZkrOtilCJW3x8x2hwMofMBMLPANTaLdsvjEW1
+	 YQxw85KHH8V9TKG5y+5lMO1SMw2zMY03yOs7tNgLgDBby7e2GjK3Gj7CHRRcGGARfl
+	 x7E+PhqEC80Kn7dNZpkIDZ7V9660oaxGgecXUgTsYnQSkZEzaV6aPmOaZwEMFYDTyP
+	 +pUfQM7HmeCAA==
+Date: Mon, 18 Mar 2024 21:33:09 -0600 (MDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Nicola Vetrini <nicola.vetrini@bugseng.com>
 cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, 
     michal.orzel@amd.com, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, 
-    consulting@bugseng.com, "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: Re: [XEN PATCH 03/10] xen/xsm: add parentheses to comply with MISRA
+    consulting@bugseng.com, Julien Grall <julien@xen.org>
+Subject: Re: [XEN PATCH 04/10] xen/device_tree: address violations of MISRA
  C Rule 20.7
-In-Reply-To: <4eeb9be581e3fa07378f5a7deb23c9066474638b.1710762555.git.nicola.vetrini@bugseng.com>
-Message-ID: <alpine.DEB.2.22.394.2403181810380.853156@ubuntu-linux-20-04-desktop>
-References: <cover.1710762555.git.nicola.vetrini@bugseng.com> <4eeb9be581e3fa07378f5a7deb23c9066474638b.1710762555.git.nicola.vetrini@bugseng.com>
+In-Reply-To: <3845d2a318bdaab242a7fd67473b05198db1b111.1710762555.git.nicola.vetrini@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2403181811260.853156@ubuntu-linux-20-04-desktop>
+References: <cover.1710762555.git.nicola.vetrini@bugseng.com> <3845d2a318bdaab242a7fd67473b05198db1b111.1710762555.git.nicola.vetrini@bugseng.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -81,5 +81,6 @@ On Mon, 18 Mar 2024, Nicola Vetrini wrote:
 > 
 > Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
  
+
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
