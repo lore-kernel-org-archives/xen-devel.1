@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63265C54E68
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Mar 2024 20:52:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.695606.1085470 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4DF8C54E71
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Mar 2024 20:59:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.695610.1085490 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmgR1-0006sH-8y; Tue, 19 Mar 2024 20:51:47 +0000
+	id 1rmgY5-0007yI-5O; Tue, 19 Mar 2024 20:59:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 695606.1085470; Tue, 19 Mar 2024 20:51:47 +0000
+Received: by outflank-mailman (output) from mailman id 695610.1085490; Tue, 19 Mar 2024 20:59:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmgR1-0006sA-6B; Tue, 19 Mar 2024 20:51:47 +0000
-Received: by outflank-mailman (input) for mailman id 695606;
- Tue, 19 Mar 2024 20:51:45 +0000
+	id 1rmgY5-0007yB-2j; Tue, 19 Mar 2024 20:59:05 +0000
+Received: by outflank-mailman (input) for mailman id 695610;
+ Tue, 19 Mar 2024 20:59:04 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CQvM=KZ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rmgQz-0006s4-Lw
- for xen-devel@lists.xenproject.org; Tue, 19 Mar 2024 20:51:45 +0000
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [2607:f8b0:4864:20::831])
+ <SRS0=D7vt=KZ=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1rmgY4-0007xt-LO
+ for xen-devel@lists.xenproject.org; Tue, 19 Mar 2024 20:59:04 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2009::600])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7e417d2e-e632-11ee-afdd-a90da7624cb6;
- Tue, 19 Mar 2024 21:51:44 +0100 (CET)
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-430c41f3f89so2877631cf.0
- for <xen-devel@lists.xenproject.org>; Tue, 19 Mar 2024 13:51:44 -0700 (PDT)
-Received: from [10.80.67.139] (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- bw7-20020a05622a098700b00430cc9ca5ffsm3251967qtb.81.2024.03.19.13.51.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Mar 2024 13:51:42 -0700 (PDT)
+ id 83eae5a2-e633-11ee-afdd-a90da7624cb6;
+ Tue, 19 Mar 2024 21:59:03 +0100 (CET)
+Received: from DS7PR05CA0010.namprd05.prod.outlook.com (2603:10b6:5:3b9::15)
+ by PH7PR12MB6720.namprd12.prod.outlook.com (2603:10b6:510:1b3::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.26; Tue, 19 Mar
+ 2024 20:59:00 +0000
+Received: from DS2PEPF0000343F.namprd02.prod.outlook.com
+ (2603:10b6:5:3b9:cafe::78) by DS7PR05CA0010.outlook.office365.com
+ (2603:10b6:5:3b9::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.12 via Frontend
+ Transport; Tue, 19 Mar 2024 20:59:00 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DS2PEPF0000343F.mail.protection.outlook.com (10.167.18.42) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7409.10 via Frontend Transport; Tue, 19 Mar 2024 20:58:59 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 19 Mar
+ 2024 15:58:58 -0500
+Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Tue, 19 Mar 2024 15:58:57 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,129 +61,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7e417d2e-e632-11ee-afdd-a90da7624cb6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710881503; x=1711486303; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=9ssBcy+nyWsJ8bmEaXd//Ag4IkIIyUhjb0uq6ZyMtjI=;
-        b=auG+hlZPsUlqD8YibDK41xMUlbu1+VitJG8J0w2KmnldSLBxyMJuVmerjTU1WAQVV9
-         aQhNkQUbxtgoPH6pWVb8mggjbtV6ZhNBxRV59IcqbCXnIil0Ox/5p5M67K+AQIG+C9mr
-         vH85Sy3vNHT3jdO1kbKnNR+cnGAQZxImFZutE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710881503; x=1711486303;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=9ssBcy+nyWsJ8bmEaXd//Ag4IkIIyUhjb0uq6ZyMtjI=;
-        b=qjeeBpDAI/fsx0olWTWIfG/nG7xj5BfrlEOdsMfeOhbcQzdqHMTRWIajW7/RZoRGRE
-         xv0AqKiNrF0ZoeDFnd5xj0KIWbXMqPFB3Owc/UyX0DqN7qy9XWHYH/NJBBdA5KzQmGiX
-         PJha4demosvLYPAeh0EAMSrk10JhdyYMM5HRHdNKIIhqEVb9GcfK9UfDornsZFoZv+dS
-         TQUe1tyKsq8ImRY0ev20YTq4qaJgj5ceiysVrtdz3aiNU7Retl++ORc5wUhEE5A0kcZk
-         j7fkq6LLuiolOeALjAzknEKt7xtFqNkxgPG+lT8Isd/1z6qFUpCkrmmVSRWGBr385eBD
-         90TA==
-X-Forwarded-Encrypted: i=1; AJvYcCW3A94azSVsnt6ISqlXiY51OWiUWNb9N3uqiO4ecNGAgNjm4Laif4/nkJaEui63DmZvgnYTCdgZTFYlr+dY93/dB83Xm3EvObfqiSwr1vQ=
-X-Gm-Message-State: AOJu0YxSFJ7UFiOLUUjlB1c1g5mZQxp3QtLF24nv/pMCkvOQRcNA/8g4
-	y74kVtudgXvecrPZsHfMEHtehO6qOeRyhlOJ8JJuesafvtmrF7zf4uzBTPz3vwk=
-X-Google-Smtp-Source: AGHT+IEU/owLiZ1iXm5qel7/stcnGoWAYql2UkQey8BE6Q1zAN0tj5BvYg8+IVJBjyyhnHCn5ybDFA==
-X-Received: by 2002:a05:622a:a091:b0:430:fff3:aa9f with SMTP id jv17-20020a05622aa09100b00430fff3aa9fmr307244qtb.18.1710881503130;
-        Tue, 19 Mar 2024 13:51:43 -0700 (PDT)
-Message-ID: <61b8e8a6-ab9d-434d-88dc-9ea4a082375b@citrix.com>
-Date: Tue, 19 Mar 2024 20:51:40 +0000
+X-Inumbo-ID: 83eae5a2-e633-11ee-afdd-a90da7624cb6
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QP4kE3KnwdB6lhcrw2PbDmWLMdjKfDzlEXaqY18R1HCVWfZvT371alStIsDrIK7/eH8QyygOT3DntguKx+1yMipEIqDPnk2x5dsH7kaq2urbezQ3vlzz48Bmeb3mRW2rfSbquaqN9HLcnfjVbe7xbBk/8Imo+dbJmThGwvCv1RL2sHKW9jJhKgLXFkTqKtwxerehKA54TIISM2P2VcLlYJul99pi/lRAg0pl2Fww0tK72cVeIwWyoBazjp6yRXr41oawEf/acb6tp/AuMLjCeCR53pqNuDSLZttY1fuKPxj/H4U5Qme3yynhr9IWO3lpyvN93Heyoy/qCcGC9moylg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lvOehq1EJKjZfWXBSzZg1ZZ1p5IUUk1AykmRfeyalZA=;
+ b=PNCHOtDTdMxWeRKFvqUNxWU5nbQ+c+vQ9tn5TwxRenqmNtjD9wycLeGwRmzP5sDXm3wYF5Cuhu131QR2SOV0OPkml07VXm3IFCT9EzbU3YqR6Z+xaYZ2ZirtNqLrlg10sSCEUieTi0kEq0Nxj3MPMUvHyStmjZxwA+tB2Q2wN4PKreyOLg4iWTunA9kKq4wRgJJmaN8QFYhWP5h1DDPJJWSS8z4L//FbLSimY2VXU3rvk4PRXw+kIVLPJTcRoGXZ+Koa8aXviAJOgFTDgSAAGI6FUgdQrm+0Sd0QMjtdobuEoOk3nbPwGTCQfQSOYFBke/no4nxHBXOZ+cJ38x+Kgw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lvOehq1EJKjZfWXBSzZg1ZZ1p5IUUk1AykmRfeyalZA=;
+ b=dFwlsOiV0hwdksokGnZ4VQqmaIBeTPFwnS+lpUu6pL3/JlXCNC8Jn7NHYeIsKm7Df+hMPzoJXDWsKF+FeRZ4BX/RBdxuFzGDkk407MgiUfpH46+sYjrfhNBwsghQBY29+MWRbkVmo5c2O3wx5LtQhohvzkCxCnzI0ho4wXgtLNI=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: Jason Andryuk <jason.andryuk@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH v3 1/3] Revert "xen/x86: bzImage parse kernel_alignment"
+Date: Tue, 19 Mar 2024 16:58:47 -0400
+Message-ID: <20240319205849.115884-2-jason.andryuk@amd.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240319205849.115884-1-jason.andryuk@amd.com>
+References: <20240319205849.115884-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86: increase NMI timer frequency if necessary
-Content-Language: en-GB
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <d5fd3646-18b3-4dae-8da7-6afa187f930e@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <d5fd3646-18b3-4dae-8da7-6afa187f930e@suse.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF0000343F:EE_|PH7PR12MB6720:EE_
+X-MS-Office365-Filtering-Correlation-Id: e1b8378e-132a-4a54-f0fd-08dc4857669a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	r8OnCdXJb+tokcrlhn8iiEY+4Fun5Gr7Fg3nCYPHg5/CIaOrIJiqiuCcitCL/jifBkrffIJEvH9xt7w0GYklEghfFC3WZlEJov1UCm88RVXzkP6B+XxrizgSJfvY9CvMk9cKlfxA6+XEfpAfrhrbW9PfngFJC+mtkzHk7Iz6Bshedvtz4Rkh4XCCWRRz6IUyGDogAPV8juC2+gkXebA9cudyWYmRn6pPhMPU3GZwQZhC7qEbR8tot0Lb2zJHLoPif89xonVpk4exUpZqC9Fe3Evn15Xs7yA071uDjAeG2fFxGNRJkhYGPZcJdk0rFhnx9WSCwYTGMoNA/BSEegth7Y7uPCfc/t2Ql6qXsQAni+jPnpBKygCo7Ee+f4n+PwV7UDRzspCtEctH5s4weKDs32fGPplIVSsBv5LN6ZjM81YfExpLoF7RhNrC9iYvcviGYdrPmq0Cb4QG/rlA5lj/zmyWQSLWzmlhmGNtEVZB8bjw92kx5GPitY3RbjBndbiV7oCU2omdIwUcCkM2JZfWvDvruDqAD/7fjIHVJw6VGxN/Y5yVBAwd+i57eBU/sSPfkdfHiCctw0UNUUN96HrDd7GFIIgZnTMtoMW/O9pdn7TCSabMuH47/qgXkkktuBpn2kPZC/HJlhxBIFiJH1O9VmNTtzRGlhyHTQ/mQT/vxbPP0UswNm1tkHTYCtWPqKHIfy8cKEqNXUg00nDqdxBy+xDq1kVpfk9Qmy+vsWR3nHvRohIPNWm+62IcutNQKc4p
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(376005)(1800799015)(82310400014)(36860700004);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2024 20:58:59.9771
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1b8378e-132a-4a54-f0fd-08dc4857669a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS2PEPF0000343F.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6720
 
-On 25/01/2024 4:55 pm, Jan Beulich wrote:
-> Since the performance counters used for the NMI watchdog count non-
-> halted cycles, they may count at a rate higher than cpu_khz.
+A new ELF note will specify the alignment for a relocatable PVH kernel.
+ELF notes are suitable for vmlinux and other ELF files, so this
+Linux-specific bzImage parsing in unnecessary.
 
-Is this in theory, or observed in practice?
+This reverts commit c44cac229067faeec8f49247d1cf281723ac2d40.
 
-It is my understanding that perf counters count in P0 reference cycles,
-and not at the Turbo/CBS rate.
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+ xen/arch/x86/bzimage.c             | 4 +---
+ xen/arch/x86/hvm/dom0_build.c      | 4 +---
+ xen/arch/x86/include/asm/bzimage.h | 2 +-
+ xen/arch/x86/pv/dom0_build.c       | 2 +-
+ 4 files changed, 4 insertions(+), 8 deletions(-)
 
->  Thus the
-> watchdog tick may occur more frequently than invocations of the timer
-> if we don't account for the ratio between nominal and maximum CPU clock
-> speeds, which would be a problem in particular when "watchdog_timeout=1"
-> is in effect (for high enough ratios even larger timout values may pose
-> a problem).
->
-> Leverage the so far display-only data we collect on newer Intel and AMD
-> CPUs. On older CPUs we just have to (continue to) hope that the default
-> frequency of 1 Hz is okay(-ish) to use.
->
-> While adding the new variable, also move the (now adjacent) cpu_khz to
-> .data.ro_after_init.
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> This renders the "log" in the function names somewhat stale, but I don't
-> think this strictly warrants renaming the functions right away.
+diff --git a/xen/arch/x86/bzimage.c b/xen/arch/x86/bzimage.c
+index 0f4cfc49f7..ac4fd428be 100644
+--- a/xen/arch/x86/bzimage.c
++++ b/xen/arch/x86/bzimage.c
+@@ -105,7 +105,7 @@ unsigned long __init bzimage_headroom(void *image_start,
+ }
+ 
+ int __init bzimage_parse(void *image_base, void **image_start,
+-                         unsigned long *image_len, unsigned int *align)
++                         unsigned long *image_len)
+ {
+     struct setup_header *hdr = (struct setup_header *)(*image_start);
+     int err = bzimage_check(hdr, *image_len);
+@@ -118,8 +118,6 @@ int __init bzimage_parse(void *image_base, void **image_start,
+     {
+         *image_start += (hdr->setup_sects + 1) * 512 + hdr->payload_offset;
+         *image_len = hdr->payload_length;
+-        if ( align )
+-            *align = hdr->kernel_alignment;
+     }
+ 
+     if ( elf_is_elfbinary(*image_start, *image_len) )
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index bbae8a5645..0ceda4140b 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -548,14 +548,12 @@ static int __init pvh_load_kernel(struct domain *d, const module_t *image,
+     struct elf_binary elf;
+     struct elf_dom_parms parms;
+     paddr_t last_addr;
+-    unsigned int align = 0;
+     struct hvm_start_info start_info = { 0 };
+     struct hvm_modlist_entry mod = { 0 };
+     struct vcpu *v = d->vcpu[0];
+     int rc;
+ 
+-    rc = bzimage_parse(image_base, &image_start, &image_len, &align);
+-    if ( rc != 0 )
++    if ( (rc = bzimage_parse(image_base, &image_start, &image_len)) != 0 )
+     {
+         printk("Error trying to detect bz compressed kernel\n");
+         return rc;
+diff --git a/xen/arch/x86/include/asm/bzimage.h b/xen/arch/x86/include/asm/bzimage.h
+index 2e04f5cc7b..7ed69d3910 100644
+--- a/xen/arch/x86/include/asm/bzimage.h
++++ b/xen/arch/x86/include/asm/bzimage.h
+@@ -6,6 +6,6 @@
+ unsigned long bzimage_headroom(void *image_start, unsigned long image_length);
+ 
+ int bzimage_parse(void *image_base, void **image_start,
+-                  unsigned long *image_len, unsigned int *align);
++                  unsigned long *image_len);
+ 
+ #endif /* __X86_BZIMAGE_H__ */
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index e9fa8a9a82..d8043fa58a 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -416,7 +416,7 @@ int __init dom0_construct_pv(struct domain *d,
+ 
+     d->max_pages = ~0U;
+ 
+-    if ( (rc = bzimage_parse(image_base, &image_start, &image_len, NULL)) != 0 )
++    if ( (rc = bzimage_parse(image_base, &image_start, &image_len)) != 0 )
+         return rc;
+ 
+     if ( (rc = elf_init(&elf, image_start, image_len)) != 0 )
+-- 
+2.44.0
 
-I'm not comfortable with this change.  It's adding to a complicated
-timing problem, rather than simplifying it.
-
-The real problem we've got is that the NMI handler is guessing at the
-timeout by counting NMIs, not by actually counting time.  There are
-several ways to fix this even with the current rendezvous logic.  When
-the NMI handler can actually say "if ( NOW() - last > timeout )", then
-the exact frequently of NMIs becomes far less important.
-
-~Andrew
 
