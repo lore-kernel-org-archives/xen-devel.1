@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A9DC54E67
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Mar 2024 08:52:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.695798.1085899 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 545A0C54E67
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Mar 2024 08:52:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.695799.1085908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmrg6-00022Q-1p; Wed, 20 Mar 2024 08:52:06 +0000
+	id 1rmrgC-0002Nc-AW; Wed, 20 Mar 2024 08:52:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 695798.1085899; Wed, 20 Mar 2024 08:52:06 +0000
+Received: by outflank-mailman (output) from mailman id 695799.1085908; Wed, 20 Mar 2024 08:52:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmrg5-00022J-V1; Wed, 20 Mar 2024 08:52:05 +0000
-Received: by outflank-mailman (input) for mailman id 695798;
- Wed, 20 Mar 2024 08:52:04 +0000
+	id 1rmrgC-0002NV-6y; Wed, 20 Mar 2024 08:52:12 +0000
+Received: by outflank-mailman (input) for mailman id 695799;
+ Wed, 20 Mar 2024 08:52:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eqSt=K2=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rmrg4-000214-BV
- for xen-devel@lists.xenproject.org; Wed, 20 Mar 2024 08:52:04 +0000
+ id 1rmrgA-000214-CK
+ for xen-devel@lists.xenproject.org; Wed, 20 Mar 2024 08:52:10 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1e629165-e697-11ee-a1ee-f123f15fe8a2;
- Wed, 20 Mar 2024 09:52:02 +0100 (CET)
+ id 22590b3f-e697-11ee-a1ee-f123f15fe8a2;
+ Wed, 20 Mar 2024 09:52:08 +0100 (CET)
 Received: from beta.station (net-93-144-106-196.cust.dsl.teletu.it
  [93.144.106.196])
- by support.bugseng.com (Postfix) with ESMTPSA id 941A34EE073D;
- Wed, 20 Mar 2024 09:52:00 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 0EC5A4EE073F;
+ Wed, 20 Mar 2024 09:52:08 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1e629165-e697-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 22590b3f-e697-11ee-a1ee-f123f15fe8a2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -54,42 +54,83 @@ Cc: consulting@bugseng.com,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 0/2] xen: address violations of MISRA C Rule 17.1
-Date: Wed, 20 Mar 2024 09:50:58 +0100
-Message-Id: <cover.1710923235.git.simone.ballarin@bugseng.com>
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 1/2] automation/eclair: add deviation for MISRA C:2012 Rule 17.1
+Date: Wed, 20 Mar 2024 09:50:59 +0100
+Message-Id: <882b442c8c1f73f8116676ab9351defe5c9609ac.1710923235.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1710923235.git.simone.ballarin@bugseng.com>
+References: <cover.1710923235.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-MISRA C Rule 20.7 states: "The features of `<stdarg.h>' shall not be used".
+MISRA C:2012 Rule 17.1 states:
+The features of `<stdarg.h>' shall not be used
 
 The Xen community wants to avoid using variadic functions except for
 specific circumstances where it feels appropriate by strict code review.
 
-Functions hypercall_create_continuation and hypercall_xlat_continuation
-are special hypercalls made to break long running hypercalls into multiple
-calls. They take a variable number of arguments depending on the original
-hypercall they are trying to continue. Add SAF deviations for the aforementioned
-functions.
-
 Add deviation for functions related to console output (printk and similar).
 
-Simone Ballarin (2):
-  automation/eclair: add deviation for MISRA C:2012 Rule 17.1
-  xen: address violations of MISRA C Rule 17.1
-
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+---
  .../eclair_analysis/ECLAIR/deviations.ecl     | 26 +++++++++++++++++++
  docs/misra/deviations.rst                     |  5 ++++
- docs/misra/safe.json                          |  8 ++++++
- xen/arch/arm/domain.c                         |  1 +
- xen/arch/x86/hypercall.c                      |  2 ++
- 5 files changed, 42 insertions(+)
+ 2 files changed, 31 insertions(+)
 
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index 9ac3ee4dfd..7c3559a3a0 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -382,6 +382,32 @@ explicit comment indicating the fallthrough intention is present."
+ -config=MC3R1.R16.6,switch_clauses+={deliberate, "default(0)"}
+ -doc_end
+ 
++#
++# Series 17.
++#
++
++-doc_begin="Functions related to console output are allowed to use the variadic features provided by stdarg.h."
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(debugtrace_printk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(dt_dprintk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(printk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(guest_printk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(panic)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(dprintk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(gdprintk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(snprintf)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(scnprintf)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(xasprintf)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(mm_printk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(dbgp_printk)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(elf_call_log_callback)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(vsnprintf)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(vscnprintf)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(xvasprintf)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(vprintk_common)&&kind(function))))"}
++-config=MC3R1.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(guest_printk)&&kind(function))))"}
++-config=MC3R1.R17.1,macros+={hide , "^va_(arg|start|copy|end)$"}
++-doc_end
++
+ #
+ # Series 18.
+ #
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+index ce855ddae6..fa649a2024 100644
+--- a/docs/misra/deviations.rst
++++ b/docs/misra/deviations.rst
+@@ -328,6 +328,11 @@ Deviations related to MISRA C:2012 Rules:
+        improve readability.
+      - Tagged as `deliberate` for ECLAIR.
+ 
++   * - R17.1
++     - Functions related to console output are allowed to use the variadic
++       features provided by `stdarg.h`.
++     - Tagged as `deliberate` for ECLAIR.
++
+    * - R20.7
+      - Code violating Rule 20.7 is safe when macro parameters are used:
+        (1) as function arguments;
 -- 
 2.34.1
 
