@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCB42C54E58
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Mar 2024 08:57:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.695809.1085928 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 163DCC54E58
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Mar 2024 08:57:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.695810.1085938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmrko-0004K9-2e; Wed, 20 Mar 2024 08:56:58 +0000
+	id 1rmrks-0004ZU-9Y; Wed, 20 Mar 2024 08:57:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 695809.1085928; Wed, 20 Mar 2024 08:56:58 +0000
+Received: by outflank-mailman (output) from mailman id 695810.1085938; Wed, 20 Mar 2024 08:57:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmrkn-0004K2-WF; Wed, 20 Mar 2024 08:56:58 +0000
-Received: by outflank-mailman (input) for mailman id 695809;
- Wed, 20 Mar 2024 08:56:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eqSt=K2=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rmrkn-0004Jw-3t
- for xen-devel@lists.xenproject.org; Wed, 20 Mar 2024 08:56:57 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cd140b98-e697-11ee-a1ee-f123f15fe8a2;
- Wed, 20 Mar 2024 09:56:55 +0100 (CET)
-Received: from beta.station (net-93-144-106-196.cust.dsl.teletu.it
- [93.144.106.196])
- by support.bugseng.com (Postfix) with ESMTPSA id 515034EE073D;
- Wed, 20 Mar 2024 09:56:54 +0100 (CET)
+	id 1rmrks-0004ZL-6i; Wed, 20 Mar 2024 08:57:02 +0000
+Received: by outflank-mailman (input) for mailman id 695810;
+ Wed, 20 Mar 2024 08:57:01 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1rmrkr-0004Yw-Hf
+ for xen-devel@lists.xenproject.org; Wed, 20 Mar 2024 08:57:01 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rmrkr-00021b-2O; Wed, 20 Mar 2024 08:57:01 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rmrkq-0001HC-TW; Wed, 20 Mar 2024 08:57:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,102 +41,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd140b98-e697-11ee-a1ee-f123f15fe8a2
-From: Simone Ballarin <simone.ballarin@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	sstabellini@kernel.com,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 2/2] xen: address violations of MISRA C Rule 17.1
-Date: Wed, 20 Mar 2024 09:51:00 +0100
-Message-Id: <f7c2f12ab1b62301cfea3a28707178950f480932.1710923235.git.simone.ballarin@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1710923235.git.simone.ballarin@bugseng.com>
-References: <cover.1710923235.git.simone.ballarin@bugseng.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=emC8rffH3vnmHuHyLdxkyK1SBNSw+hOp77sCYuhO3qg=; b=PUXlXcc05CmqWuzEcpVXIlfcFE
+	abS/UwwTTz4uE8VxI6UTB5ZiOQyhNDp+MWoy9kQyWwC6vzvDAB0y3JTO6t68lYcB+f6m5eElZBe8t
+	//bHGYuqoaammnmf4rSbYz9bfK4qAFOLLaNMdW/Vl7py+h4aPpTlBxqpzZuHVVnQhjt0=;
+Message-ID: <5ccdbad1-7610-45bf-878a-2d0f99cc805b@xen.org>
+Date: Wed, 20 Mar 2024 08:56:59 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/rwlock: Don't perpeuatite broken API in new logic
+Content-Language: en-GB
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: George Dunlap <George.Dunlap@citrix.com>, Jan Beulich
+ <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20240319113020.3843309-1-andrew.cooper3@citrix.com>
+ <553a8bfb-94f3-4c3a-b1ae-17d0cb185737@suse.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <553a8bfb-94f3-4c3a-b1ae-17d0cb185737@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-MISRA C Rule 20.7 states: "The features of `<stdarg.h>' shall not be used"
 
-The Xen community wants to avoid using variadic functions except for
-specific circumstances where it feels appropriate by strict code review.
 
-Functions hypercall_create_continuation and hypercall_xlat_continuation
-are special hypercalls made to break long running hypercalls into multiple
-calls. They take a variable number of arguments depending on the original
-hypercall they are trying to continue.
+On 20/03/2024 06:35, Jürgen Groß wrote:
+> On 19.03.24 12:30, Andrew Cooper wrote:
+>> The single user wants this the sane way around.  Write it as a normal 
+>> static
+>> inline just like rspin_lock().
+>>
+>> Fixes: cc3e8df542ed ("xen/spinlock: add 
+>> rspin_[un]lock_irq[save|restore]()")
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> 
+> Reviewed-by: Juergen Gross <jgross@suse.com>
+> 
+> Maybe with the subject fixed (s/rwlock/spinlock/).
 
-Add SAF deviations for the aforementioned functions.
+And s/perpeuatite/perpetuate/ :).
 
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
----
- docs/misra/safe.json     | 8 ++++++++
- xen/arch/arm/domain.c    | 1 +
- xen/arch/x86/hypercall.c | 2 ++
- 3 files changed, 11 insertions(+)
+Cheers,
 
-diff --git a/docs/misra/safe.json b/docs/misra/safe.json
-index 952324f85c..65c90c7618 100644
---- a/docs/misra/safe.json
-+++ b/docs/misra/safe.json
-@@ -28,6 +28,14 @@
-         },
-         {
-             "id": "SAF-3-safe",
-+            "analyser": {
-+                "eclair": "MC3R1.R17.1"
-+            },
-+            "name": "Rule 17.1: special hypercall made to break long running hypercalls into multiple calls.",
-+            "text": "They need to take a variable number of arguments depending on the original hypercall they are trying to continue."
-+        },
-+        {
-+            "id": "SAF-4-safe",
-             "analyser": {},
-             "name": "Sentinel",
-             "text": "Next ID to be used"
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 5e7a7f3e7e..f5706bd5b8 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -382,6 +382,7 @@ unsigned long hypercall_create_continuation(
-     const char *p = format;
-     unsigned long arg, rc;
-     unsigned int i;
-+    /* SAF-3-safe allowed variadic function */
-     va_list args;
- 
-     current->hcall_preempted = true;
-diff --git a/xen/arch/x86/hypercall.c b/xen/arch/x86/hypercall.c
-index 01cd73040d..18d8c75522 100644
---- a/xen/arch/x86/hypercall.c
-+++ b/xen/arch/x86/hypercall.c
-@@ -31,6 +31,7 @@ unsigned long hypercall_create_continuation(
-     const char *p = format;
-     unsigned long arg;
-     unsigned int i;
-+    /* SAF-3-safe allowed variadic function */
-     va_list args;
- 
-     curr->hcall_preempted = true;
-@@ -115,6 +116,7 @@ int hypercall_xlat_continuation(unsigned int *id, unsigned int nr,
-     struct cpu_user_regs *regs;
-     unsigned int i, cval = 0;
-     unsigned long nval = 0;
-+    /* SAF-3-safe allowed variadic function */
-     va_list args;
- 
-     ASSERT(nr <= ARRAY_SIZE(mcs->call.args));
 -- 
-2.34.1
-
+Julien Grall
 
