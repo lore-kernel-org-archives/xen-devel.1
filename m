@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5630C54E68
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Mar 2024 10:41:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.696316.1087143 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3675C54E68
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Mar 2024 10:41:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.696304.1087153 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnFrK-0003Ga-HZ; Thu, 21 Mar 2024 10:41:18 +0000
+	id 1rnFrT-0003Wv-OZ; Thu, 21 Mar 2024 10:41:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 696316.1087143; Thu, 21 Mar 2024 10:41:18 +0000
+Received: by outflank-mailman (output) from mailman id 696304.1087153; Thu, 21 Mar 2024 10:41:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnFrK-0003GT-El; Thu, 21 Mar 2024 10:41:18 +0000
-Received: by outflank-mailman (input) for mailman id 696316;
- Thu, 21 Mar 2024 10:41:16 +0000
+	id 1rnFrT-0003Wm-M4; Thu, 21 Mar 2024 10:41:27 +0000
+Received: by outflank-mailman (input) for mailman id 696304;
+ Thu, 21 Mar 2024 10:28:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ILtd=K3=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rnFrI-0003GL-CA
- for xen-devel@lists.xenproject.org; Thu, 21 Mar 2024 10:41:16 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=u/it=K3=bounce.vates.tech=bounce-md_30504962.65fc0bca.v1-b011fbae99164ddc94c4654e4770f1fb@srs-se1.protection.inumbo.net>)
+ id 1rnFew-0007v6-ND
+ for xen-devel@lists.xenproject.org; Thu, 21 Mar 2024 10:28:30 +0000
+Received: from mail135-12.atl141.mandrillapp.com
+ (mail135-12.atl141.mandrillapp.com [198.2.135.12])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8ac267ac-e76f-11ee-afe0-a90da7624cb6;
- Thu, 21 Mar 2024 11:41:15 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a46de423039so47841166b.0
- for <xen-devel@lists.xenproject.org>; Thu, 21 Mar 2024 03:41:15 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- q1-20020a056402040100b00568d762cb5asm4702737edv.35.2024.03.21.03.41.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Mar 2024 03:41:14 -0700 (PDT)
+ id c1b71590-e76d-11ee-afe0-a90da7624cb6;
+ Thu, 21 Mar 2024 11:28:29 +0100 (CET)
+Received: from pmta14.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail135-12.atl141.mandrillapp.com (Mailchimp) with ESMTP id
+ 4V0hWG40jdz705xhc
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Mar 2024 10:28:26 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ b011fbae99164ddc94c4654e4770f1fb; Thu, 21 Mar 2024 10:28:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,107 +45,281 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ac267ac-e76f-11ee-afe0-a90da7624cb6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1711017674; x=1711622474; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=aQwUxv85k60jx5TCPnj8y+/xwbLQvv8der3jLm2oF+Y=;
-        b=Hni+ZtQPjrAYGqw1YlRNvDFrPneEMkBkTOK/KsDXg+ovmgN1oKvBxwTQsUYhYTEgUz
-         oHgVEuGOHwpdVgUV8tpEV7nl1WjFnlTyhzUPCu6jo65TUX4USoQmirdTle6IB1a8cGMp
-         kCtp9XOqs+xRUBdsLHxYDC1GKg/TptxbNyn0mTlVOHVd390HBomu2MngmbBD1VOCln72
-         zrvNg0eywWoB9r2SDkZr101wzZ+0nYmIytv2SCMPq6aEvIYDg82wsPCEEWx2NYByC8tB
-         k+IMDzCWfdDBTtjzkHk/hPSbDkExUhqKkojkrhttzl2lhE/JfYkALzKoxoFXHqe9wYGI
-         sNNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711017674; x=1711622474;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=aQwUxv85k60jx5TCPnj8y+/xwbLQvv8der3jLm2oF+Y=;
-        b=UOrAMSwxldnK6TE8JywT2AeUWbyfIgr6DCIm4JhjGhKYoHHacf2jL3AxjAiQLSr2+I
-         cr12VhBUs7SPiBsDk3s91vBtS44tRoWojr6EzWHnIAw8VA/rI9akCqOpVR/RIRE9BR4t
-         MoZ8LJZ3X1snMUhubF8UQ/cDkAJSn6SjxochWyBabyJM07ZNa9Sqp/a2q/YadzqX7lQc
-         9UhCvXy4RGvywx1k6HfVeuJaHgd4OIcsohrpAyBg10tswPmNmeh+jtS483b0ke3dOuki
-         1oUFFulgEGr84mbz8TBXvmgnt7CrDeC2rV3xgD/1kNOWwH8CTS7z4uRfMjXQvXfecuAs
-         XGCA==
-X-Forwarded-Encrypted: i=1; AJvYcCV29qKffdKYX+71lMG09Ikdwn+5ScBDOXSKXcG9KA4eq5OsuxMopRju4Uc1Rv857Zddzsb2NTcJsekNSgM2vOVAO4DIt8iecwUrjdJBP1M=
-X-Gm-Message-State: AOJu0YxRQ1VpB/58c90fOn+mB/9gvqKIVhk8EdNCA86r1vdJTnRBUBpT
-	mlKWq7IBFH2JgXAtTbjl3uv9v9aDUd5wy1aUfn2LvdwuqyNLIqo/vbj8BCRzoQ==
-X-Google-Smtp-Source: AGHT+IGZvCNiVLqj8Et8fkvJhc/PjrGXQecbgdGxoAnjv2w2ewK6Xlgi0OwgbRSMmlufRyMvGQLbXw==
-X-Received: by 2002:a50:bae3:0:b0:56b:986b:b4e7 with SMTP id x90-20020a50bae3000000b0056b986bb4e7mr1502013ede.27.1711017674526;
-        Thu, 21 Mar 2024 03:41:14 -0700 (PDT)
-Message-ID: <6a9ab81f-451f-46bd-a875-b30eddc9a716@suse.com>
-Date: Thu, 21 Mar 2024 11:41:13 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH 2/3] AMD-Vi: Disable IOMMU if cx16 isn't supported
-Content-Language: en-US
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- xen-devel@lists.xenproject.org, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
+X-Inumbo-ID: c1b71590-e76d-11ee-afe0-a90da7624cb6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1711016906; x=1711277406;
+	bh=yNxbTqH2YJSkOiphdTLQC16uPnEcVvW/4yCo8FASxpc=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=GrXDwdCVooZpyvoMeitKyaQInEHVkymkKLBQm/8/YFPW1agW77sofv8ykeXjEho8g
+	 u5SimoOzD2MoVVfYUSRwcqSgr4Fam1Ng0pi3BZB2o9NQfxijQV7BOKV06LZy2Cu+NU
+	 NYeP87ojRy8A5zPoRQFh20LbtTWr887n1D1wtdInwzi3t2CQ+x1Pb2p3oOL6EV9jm0
+	 pAbHMKWOLj3bzc/CnzE1uhctbPCVv5Hx51E7PzVeZnaAy4/WXI2sFgVSQpSIs0Xc5r
+	 PfrLJOj5W49FZNJ+vgKoacoFnUaY/xhlX2NPKk7AdmNi13f3ylov/xuC1nImaMI/TN
+	 NK7Kv4M3SV76g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1711016906; x=1711277406; i=teddy.astie@vates.tech;
+	bh=yNxbTqH2YJSkOiphdTLQC16uPnEcVvW/4yCo8FASxpc=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=etazsW80scRAm8wHgdOSjH8kDbgDAeyvUpZMos0tZ0mdDJ0LzAuy5cMyeZvH+WmCp
+	 rOqPtGtgryoMAAUvO6DoxuB4N35asD8zQHbffmX+3n9mX2Sgv4pkKAKBjdqJWMavW1
+	 1Oss5ZpBCetnSacpcTggDFiRBou0uv0KDxdGHVbGYgrE3SBOtDMuA99NMzvdR4HWDD
+	 fpYwAhye6BnLblvkAU5RyH2n5Fj8QFTb/mRKIJ9+A6GR2WZ1M50137sbBmVtaeKc57
+	 13QwqXX260rq3QXmdC4TPEjcTCEC1dmxuohLdSuj0+kXYHCwz70mLXZNuouybF+/m0
+	 R/70vpZbnFc4Q==
+From: Teddy Astie <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?[XEN=20PATCH=201/3]=20VT-d:=20Disable=20IOMMU=20if=20cx16=20isn't=20supported?=
+X-Mailer: git-send-email 2.44.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1711016905606
+To: xen-devel@lists.xenproject.org
+Cc: Teddy Astie <teddy.astie@vates.tech>, Kevin Tian <kevin.tian@intel.com>
+Message-Id: <d7f4916c3cfee5fc62b6384559b614f0a7e562f1.1711016106.git.teddy.astie@vates.tech>
+In-Reply-To: <cover.1711016106.git.teddy.astie@vates.tech>
 References: <cover.1711016106.git.teddy.astie@vates.tech>
- <9c825255af5d3973b29c85cb6856c67b69aa0e4a.1711016106.git.teddy.astie@vates.tech>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9c825255af5d3973b29c85cb6856c67b69aa0e4a.1711016106.git.teddy.astie@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.b011fbae99164ddc94c4654e4770f1fb?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20240321:md
+Date: Thu, 21 Mar 2024 10:28:26 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On 21.03.2024 11:28, Teddy Astie wrote:
-> No hardware has VT-d support while not having cx16 support, consider disabling IOMMU in this case to avoid potentially buggy code.
+No hardware has VT-d support while not having cx16 support, consider disabling IOMMU in this case to avoid potentially buggy code.
 
-VT-d? That's Intel, not AMD. Also alongside bare hardware you also want to
-not completely leave out Xen running virtualized itself.
+Now that IOMMU is only enabled if cx16 is supported, drop dead code that handles cases where cx16 isn't supported.
 
-As a nit, please limit description lines to 80 chars.
+Signed-off-by Teddy Astie <teddy.astie@vates.tech>
+---
+ xen/drivers/passthrough/vtd/intremap.c | 67 +++++----------------
+ xen/drivers/passthrough/vtd/iommu.c    | 80 +++++++++-----------------
+ 2 files changed, 41 insertions(+), 106 deletions(-)
 
-> --- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-> +++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-> @@ -312,6 +312,12 @@ static int __init cf_check iov_detect(void)
->          return -ENODEV;
->      }
->  
-> +    if ( unlikely(!cpu_has_cx16) )
-> +    {
-> +        printk("AMD-Vi: CPU doesn't support CMPXCHG16B, disabling\n");
-> +        return -ENOSYS;
+diff --git a/xen/drivers/passthrough/vtd/intremap.c b/xen/drivers/passthrough/vtd/intremap.c
+index c504852eb8..312b73e693 100644
+--- a/xen/drivers/passthrough/vtd/intremap.c
++++ b/xen/drivers/passthrough/vtd/intremap.c
+@@ -173,47 +173,26 @@ bool __init cf_check intel_iommu_supports_eim(void)
+  * Assume iremap_lock has been acquired. It is to make sure software will not
+  * change the same IRTE behind us. With this assumption, if only high qword or
+  * low qword in IRTE is to be updated, this function's atomic variant can
+- * present an atomic update to VT-d hardware even when cmpxchg16b
+- * instruction is not supported.
++ * present an atomic update to VT-d hardware.
+  */
+ static void update_irte(struct vtd_iommu *iommu, struct iremap_entry *entry,
+                         const struct iremap_entry *new_ire, bool atomic)
+ {
+-    ASSERT(spin_is_locked(&iommu->intremap.lock));
+-
+-    if ( cpu_has_cx16 )
+-    {
+-        __uint128_t ret;
+-        struct iremap_entry old_ire;
++    __uint128_t ret;
++    struct iremap_entry old_ire;
+ 
+-        old_ire = *entry;
+-        ret = cmpxchg16b(entry, &old_ire, new_ire);
++    ASSERT(spin_is_locked(&iommu->intremap.lock));
++    
++    old_ire = *entry;
++    ret = cmpxchg16b(entry, &old_ire, new_ire);
+ 
+-        /*
+-         * In the above, we use cmpxchg16 to atomically update the 128-bit
+-         * IRTE, and the hardware cannot update the IRTE behind us, so
+-         * the return value of cmpxchg16 should be the same as old_ire.
+-         * This ASSERT validate it.
+-         */
+-        ASSERT(ret == old_ire.val);
+-    }
+-    else
+-    {
+-        /*
+-         * VT-d hardware doesn't update IRTEs behind us, nor the software
+-         * since we hold iremap_lock. If the caller wants VT-d hardware to
+-         * always see a consistent entry, but we can't meet it, a bug will
+-         * be raised.
+-         */
+-        if ( entry->lo == new_ire->lo )
+-            write_atomic(&entry->hi, new_ire->hi);
+-        else if ( entry->hi == new_ire->hi )
+-            write_atomic(&entry->lo, new_ire->lo);
+-        else if ( !atomic )
+-            *entry = *new_ire;
+-        else
+-            BUG();
+-    }
++    /*
++     * In the above, we use cmpxchg16 to atomically update the 128-bit
++     * IRTE, and the hardware cannot update the IRTE behind us, so
++     * the return value of cmpxchg16 should be the same as old_ire.
++     * This ASSERT validate it.
++     */
++    ASSERT(ret == old_ire.val);
+ }
+ 
+ /* Mark specified intr remap entry as free */
+@@ -394,8 +373,7 @@ static int ioapic_rte_to_remap_entry(struct vtd_iommu *iommu,
+     remap_rte->reserved = 0;
+     /* Indicate remap format. */
+     remap_rte->format = 1;
+-
+-    /* If cmpxchg16b is not available the caller must mask the IO-APIC pin. */
++    
+     update_irte(iommu, iremap_entry, &new_ire, !init && !masked);
+     iommu_sync_cache(iremap_entry, sizeof(*iremap_entry));
+     iommu_flush_iec_index(iommu, 0, index);
+@@ -437,21 +415,6 @@ void cf_check io_apic_write_remap_rte(
+     bool masked = true;
+     int rc;
+ 
+-    if ( !cpu_has_cx16 )
+-    {
+-       /*
+-        * Cannot atomically update the IRTE entry: mask the IO-APIC pin to
+-        * avoid interrupts seeing an inconsistent IRTE entry.
+-        */
+-        old_rte = __ioapic_read_entry(apic, pin, true);
+-        if ( !old_rte.mask )
+-        {
+-            masked = false;
+-            old_rte.mask = 1;
+-            __ioapic_write_entry(apic, pin, true, old_rte);
+-        }
+-    }
+-
+     /* Not the initializer, for old gcc to cope. */
+     new_rte.raw = rte;
+ 
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index c7110af7c9..47b56f37a9 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -1482,7 +1482,7 @@ int domain_context_mapping_one(
+ {
+     struct domain_iommu *hd = dom_iommu(domain);
+     struct context_entry *context, *context_entries, lctxt;
+-    __uint128_t old;
++    __uint128_t res, old;
+     uint64_t maddr;
+     uint16_t seg = iommu->drhd->segment, prev_did = 0;
+     struct domain *prev_dom = NULL;
+@@ -1580,55 +1580,23 @@ int domain_context_mapping_one(
+         ASSERT(!context_fault_disable(lctxt));
+     }
+ 
+-    if ( cpu_has_cx16 )
+-    {
+-        __uint128_t res = cmpxchg16b(context, &old, &lctxt.full);
++    res = cmpxchg16b(context, &old, &lctxt.full);
+ 
+-        /*
+-         * Hardware does not update the context entry behind our backs,
+-         * so the return value should match "old".
+-         */
+-        if ( res != old )
+-        {
+-            if ( pdev )
+-                check_cleanup_domid_map(domain, pdev, iommu);
+-            printk(XENLOG_ERR
+-                   "%pp: unexpected context entry %016lx_%016lx (expected %016lx_%016lx)\n",
+-                   &PCI_SBDF(seg, bus, devfn),
+-                   (uint64_t)(res >> 64), (uint64_t)res,
+-                   (uint64_t)(old >> 64), (uint64_t)old);
+-            rc = -EILSEQ;
+-            goto unlock;
+-        }
+-    }
+-    else if ( !prev_dom || !(mode & MAP_WITH_RMRR) )
+-    {
+-        context_clear_present(*context);
+-        iommu_sync_cache(context, sizeof(*context));
+-
+-        write_atomic(&context->hi, lctxt.hi);
+-        /* No barrier should be needed between these two. */
+-        write_atomic(&context->lo, lctxt.lo);
+-    }
+-    else /* Best effort, updating DID last. */
++    /*
++     * Hardware does not update the context entry behind our backs,
++     * so the return value should match "old".
++     */
++    if ( res != old )
+     {
+-         /*
+-          * By non-atomically updating the context entry's DID field last,
+-          * during a short window in time TLB entries with the old domain ID
+-          * but the new page tables may be inserted.  This could affect I/O
+-          * of other devices using this same (old) domain ID.  Such updating
+-          * therefore is not a problem if this was the only device associated
+-          * with the old domain ID.  Diverting I/O of any of a dying domain's
+-          * devices to the quarantine page tables is intended anyway.
+-          */
+-        if ( !(mode & (MAP_OWNER_DYING | MAP_SINGLE_DEVICE)) )
+-            printk(XENLOG_WARNING VTDPREFIX
+-                   " %pp: reassignment may cause %pd data corruption\n",
+-                   &PCI_SBDF(seg, bus, devfn), prev_dom);
+-
+-        write_atomic(&context->lo, lctxt.lo);
+-        /* No barrier should be needed between these two. */
+-        write_atomic(&context->hi, lctxt.hi);
++        if ( pdev )
++            check_cleanup_domid_map(domain, pdev, iommu);
++        printk(XENLOG_ERR
++                "%pp: unexpected context entry %016lx_%016lx (expected %016lx_%016lx)\n",
++                &PCI_SBDF(seg, bus, devfn),
++                (uint64_t)(res >> 64), (uint64_t)res,
++                (uint64_t)(old >> 64), (uint64_t)old);
++        rc = -EILSEQ;
++        goto unlock;
+     }
+ 
+     iommu_sync_cache(context, sizeof(struct context_entry));
+@@ -2630,6 +2598,15 @@ static int __init cf_check vtd_setup(void)
+     int ret;
+     bool reg_inval_supported = true;
+ 
++    if ( unlikely(!cpu_has_cx16) )
++    {
++        printk(XENLOG_ERR VTDPREFIX
++               "IOMMU: CPU doesn't support CMPXCHG16B, disabling\n");
++
++        ret = -ENOSYS;
++        goto error;
++    }
++
+     if ( list_empty(&acpi_drhd_units) )
+     {
+         ret = -ENODEV;
+@@ -2692,12 +2669,7 @@ static int __init cf_check vtd_setup(void)
+             iommu_intremap = iommu_intremap_off;
+ 
+ #ifndef iommu_intpost
+-        /*
+-         * We cannot use posted interrupt if X86_FEATURE_CX16 is
+-         * not supported, since we count on this feature to
+-         * atomically update 16-byte IRTE in posted format.
+-         */
+-        if ( !cap_intr_post(iommu->cap) || !iommu_intremap || !cpu_has_cx16 )
++        if ( !cap_intr_post(iommu->cap) || !iommu_intremap )
+             iommu_intpost = false;
+ #endif
+ 
+-- 
+2.44.0
 
-ENOSYS has a dedicated purpose and hence doesn't fit here. If no better
-suitable error code can be identified, ENODEV is perhaps what ought to be
-used.
 
-I'd also like to note that while this says 2/3, I can't spot any other
-part of such a 3-patch series anywhere. However, in particular
-https://lists.xen.org/archives/html/xen-devel/2024-03/threads.html looks
-to be lagging anyway.
 
-Further please note that maintainership recently has changed some; please
-make sure you use up-to-date information for composing the Cc: list.
+Teddy Astie | Vates XCP-ng Intern
 
-Jan
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
