@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C78B3CD11DB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E4BCD11DC
 	for <xen-devel@archiver.kernel.org>; Thu, 21 Mar 2024 10:41:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.696306.1087165 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.696305.1087159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnFrU-0003gx-Dx; Thu, 21 Mar 2024 10:41:28 +0000
+	id 1rnFrU-0003aK-2X; Thu, 21 Mar 2024 10:41:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 696306.1087165; Thu, 21 Mar 2024 10:41:28 +0000
+Received: by outflank-mailman (output) from mailman id 696305.1087159; Thu, 21 Mar 2024 10:41:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnFrU-0003fv-8G; Thu, 21 Mar 2024 10:41:28 +0000
-Received: by outflank-mailman (input) for mailman id 696306;
+	id 1rnFrT-0003ZO-TY; Thu, 21 Mar 2024 10:41:27 +0000
+Received: by outflank-mailman (input) for mailman id 696305;
  Thu, 21 Mar 2024 10:28:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=06Wg=K3=bounce.vates.tech=bounce-md_30504962.65fc0bcb.v1-4bf5dabb9933448fb19a3bb31f6c8228@srs-se1.protection.inumbo.net>)
- id 1rnFex-0007vj-Hi
+ <SRS0=fSjw=K3=bounce.vates.tech=bounce-md_30504962.65fc0bc9.v1-eb479812074546b5afbb57b56b3defaa@srs-se1.protection.inumbo.net>)
+ id 1rnFex-0007v6-C7
  for xen-devel@lists.xenproject.org; Thu, 21 Mar 2024 10:28:31 +0000
-Received: from mail179-23.suw41.mandrillapp.com
- (mail179-23.suw41.mandrillapp.com [198.2.179.23])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c1c6ba1d-e76d-11ee-a1ee-f123f15fe8a2;
+Received: from mail135-12.atl141.mandrillapp.com
+ (mail135-12.atl141.mandrillapp.com [198.2.135.12])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c1b4683c-e76d-11ee-afe0-a90da7624cb6;
  Thu, 21 Mar 2024 11:28:29 +0100 (CET)
-Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail179-23.suw41.mandrillapp.com (Mailchimp) with ESMTP id
- 4V0hWH34BNz35hmZb
- for <xen-devel@lists.xenproject.org>; Thu, 21 Mar 2024 10:28:27 +0000 (GMT)
+Received: from pmta14.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail135-12.atl141.mandrillapp.com (Mailchimp) with ESMTP id
+ 4V0hWG0743z705xhC
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Mar 2024 10:28:26 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 4bf5dabb9933448fb19a3bb31f6c8228; Thu, 21 Mar 2024 10:28:27 +0000
+ eb479812074546b5afbb57b56b3defaa; Thu, 21 Mar 2024 10:28:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,98 +45,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1c6ba1d-e76d-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: c1b4683c-e76d-11ee-afe0-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1711016907; x=1711277407;
-	bh=HdgIKxPjdc3u8Z26L+lDF+6ART3gkpF8tDbHa+2flGw=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=hevxefiKTH4GmIB1XFzm1KIp10A4MDtR1pWk52jDDDEZrgXlMxsPOtNDx5cPliMiq
-	 4HAKa7iwK0/QVGeW4xMxwbE8jRX2NA08l5yVUpEMvtY30vP8WsTpkvUb6hU91b57oR
-	 WXX2dpCX+unxiDcJ9cCO3NgbWJBa1eYvdSwDQClA9wnSCPuuCsJu9AG5OwiIvYlFcu
-	 grDPWjh7Fijcs5t+0z4vztnk3cVU4MynYleOekcv1HCsBHQqs4WMGvVpC8uqnRcs//
-	 jQ5qqY6gMOq6rrYyDXPXR0GNokOnTrWr9dIabEvr7JeWiLHh0rHFpWpYx6kHbvDv35
-	 AIKmJ2Ld7YFkw==
+	s=mte1; t=1711016906; x=1711277406;
+	bh=bRgIlyJ6IbTuuXiog1EKxOiaZ1bQd5ybOrwG+UdBIvY=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=oifZv/JBfe9AzXx/S9lTFdeECrw8Zf7+gLOeKA3E38WdrsgQmqRvBECTFoN5wOBIW
+	 Lu6DBseVRLBEKpBCR/dyl+31dxnxGzAxjNYhj/ALFoW2lleOrfjBpArcdny2gqMrNY
+	 6xkdxTF69VpK4cz8lo5xn/ARfEX59Hy4TMf36n1hrfuihIzoDswPginQ9uWdE/8jQB
+	 jOaNkPgpXkve0+mGzrJnFy+kI/6X01vTUBoZa0rvH/d+BKASmkvga1EZ2GFpATqf3h
+	 7AEs0RDk2MMQEW6sWBB16SSCT8e3dyXr/tCyh2PIusKMVnoDubnLQ4bCij3rIiQio+
+	 hfFnldYg5zLIw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1711016907; x=1711277407; i=teddy.astie@vates.tech;
-	bh=HdgIKxPjdc3u8Z26L+lDF+6ART3gkpF8tDbHa+2flGw=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=Y6M+VqQ8Z6IIIrJA048roxjZ/wbg/Z8m/mYqIYEDHPedv+9Iqp59ucYX81f2Ck5Ep
-	 7SQCrFrvbtSAEfzEOm0+pRDY3F2cTxw0NdRjWCuD2SqeBSexsffdnyAQYfzumBx+vX
-	 1EnE61auAMUo1dV672xQU9Fax2hn37jK3dvd5x4mNW79DrkpVts8rdr7I0eKT1EfOB
-	 vKXwXHuMWHryWiKBRuKzFOhZFF5PdMnwuhb2JXfOBb4EuAHzynczF2VOUzVNi4YF4C
-	 VE5cqdVke/4d275rD/vOiT1lNFadfCTbnhYv7sVRzThSGMIMsXB8svflJNRQZA06BL
-	 AbBXNuSTOhmXA==
+	t=1711016906; x=1711277406; i=teddy.astie@vates.tech;
+	bh=bRgIlyJ6IbTuuXiog1EKxOiaZ1bQd5ybOrwG+UdBIvY=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=sGIm+cedcPgiusNjayVJc52YBK6yvRB6+Ls98mgPQ6G1046QfObBCY3yc1hG/ONUY
+	 ucA8b4KB/BDomZGtu6R/olKpshS8IuQINENopQfjcaq/NhXe3J/t6Xhypovd6TpseA
+	 aENVvz7kaINZgXkuvl+dADkgd07lXXyxTXJIX5LrA4QMar0UqZfxfIclwvFKS6TbwL
+	 CdRYbsUYs72BI6tiIkCogAhRlk0CuIvVHoFsYTc7cvXyXB9dS7Km++VxF5YRE7Tu8W
+	 RNVxzrIKiU3cRBy4Dz4KtP/AiMCIY/tZSKHx9cL/GIL9F/W27vwVN0RT94Oc/j2Etj
+	 4aZuKt1lSf1hw==
 From: Teddy Astie <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[XEN=20PATCH=203/3]=20VT-d:=20Cleanup=20MAP=5FSINGLE=5FDEVICE=20and=20related=20dead=20code.?=
+Subject: =?utf-8?Q?[XEN=20PATCH=200/3]=20x86/iommu:=20Drop=20IOMMU=20support=20when=20cpu=20doesn't=20support=20cx16.?=
 X-Mailer: git-send-email 2.44.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1711016906361
+X-Bm-Transport-Timestamp: 1711016905266
 To: xen-devel@lists.xenproject.org
-Cc: Teddy Astie <teddy.astie@vates.tech>, Kevin Tian <kevin.tian@intel.com>
-Message-Id: <f68e1b0815c61338652015e7874a480a80970870.1711016106.git.teddy.astie@vates.tech>
-In-Reply-To: <cover.1711016106.git.teddy.astie@vates.tech>
-References: <cover.1711016106.git.teddy.astie@vates.tech>
+Cc: Teddy Astie <teddy.astie@vates.tech>
+Message-Id: <cover.1711016106.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.4bf5dabb9933448fb19a3bb31f6c8228?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.eb479812074546b5afbb57b56b3defaa?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20240321:md
-Date: Thu, 21 Mar 2024 10:28:27 +0000
+Date: Thu, 21 Mar 2024 10:28:25 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-This flag was only used in case cx16 is not available, as those code paths no longer exist, this flag now does basically nothing.
+All hardware that supports VT-d/AMD-Vi that exists also supports cx16 (aside specifically crafted virtual machines).
 
-Signed-off-by Teddy Astie <teddy.astie@vates.tech>
----
- xen/drivers/passthrough/vtd/iommu.c | 12 +++---------
- xen/drivers/passthrough/vtd/vtd.h   |  5 ++---
- 2 files changed, 5 insertions(+), 12 deletions(-)
+Some IOMMU code paths in Xen consider cases where VT-d/AMD-Vi is supported while cx16 isn't, those paths may be bugged and are barely tested, dead code in practice.
 
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index 47b56f37a9..4b15e6da79 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -1692,15 +1692,9 @@ static int domain_context_mapping(struct domain *domain, u8 devfn,
-         break;
-     }
- 
--    if ( domain != pdev->domain && pdev->domain != dom_io )
--    {
--        if ( pdev->domain->is_dying )
--            mode |= MAP_OWNER_DYING;
--        else if ( drhd &&
--                  !any_pdev_behind_iommu(pdev->domain, pdev, drhd->iommu) &&
--                  !pdev->phantom_stride )
--            mode |= MAP_SINGLE_DEVICE;
--    }
-+    if ( domain != pdev->domain && pdev->domain != dom_io &&
-+         pdev->domain->is_dying )
-+        mode |= MAP_OWNER_DYING;
- 
-     switch ( pdev->type )
-     {
-diff --git a/xen/drivers/passthrough/vtd/vtd.h b/xen/drivers/passthrough/vtd/vtd.h
-index cb2df76eed..43f06a353d 100644
---- a/xen/drivers/passthrough/vtd/vtd.h
-+++ b/xen/drivers/passthrough/vtd/vtd.h
-@@ -28,9 +28,8 @@
-  */
- #define MAP_WITH_RMRR         (1u << 0)
- #define MAP_OWNER_DYING       (1u << 1)
--#define MAP_SINGLE_DEVICE     (1u << 2)
--#define MAP_ERROR_RECOVERY    (1u << 3)
--#define UNMAP_ME_PHANTOM_FUNC (1u << 4)
-+#define MAP_ERROR_RECOVERY    (1u << 2)
-+#define UNMAP_ME_PHANTOM_FUNC (1u << 3)
- 
- /* Allow for both IOAPIC and IOSAPIC. */
- #define IO_xAPIC_route_entry IO_APIC_route_entry
+Consider disabling IOMMU in case we have IOMMU hardware but no cx16, then cleanup no-cx16 handling logic from VT-d and AMD-Vi drivers.
+
+Teddy Astie (3):
+  VT-d: Disable IOMMU if cx16 isn't supported
+  AMD-Vi: Disable IOMMU if cx16 isn't supported
+  VT-d: Cleanup MAP_SINGLE_DEVICE and related dead code.
+
+ xen/drivers/passthrough/amd/iommu_map.c     | 43 ++++------
+ xen/drivers/passthrough/amd/pci_amd_iommu.c |  6 ++
+ xen/drivers/passthrough/vtd/intremap.c      | 67 ++++-----------
+ xen/drivers/passthrough/vtd/iommu.c         | 92 +++++++--------------
+ xen/drivers/passthrough/vtd/vtd.h           |  5 +-
+ 5 files changed, 67 insertions(+), 146 deletions(-)
+
 -- 
 2.44.0
 
