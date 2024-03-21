@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6259AC54E58
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Mar 2024 10:18:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.696298.1087124 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F317BC54E58
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Mar 2024 10:28:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.696308.1087133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnFVH-0005ZW-Ae; Thu, 21 Mar 2024 10:18:31 +0000
+	id 1rnFf0-0007yB-95; Thu, 21 Mar 2024 10:28:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 696298.1087124; Thu, 21 Mar 2024 10:18:31 +0000
+Received: by outflank-mailman (output) from mailman id 696308.1087133; Thu, 21 Mar 2024 10:28:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnFVH-0005ZP-7o; Thu, 21 Mar 2024 10:18:31 +0000
-Received: by outflank-mailman (input) for mailman id 696298;
- Thu, 21 Mar 2024 10:18:30 +0000
+	id 1rnFf0-0007y4-6c; Thu, 21 Mar 2024 10:28:34 +0000
+Received: by outflank-mailman (input) for mailman id 696308;
+ Thu, 21 Mar 2024 10:28:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ILtd=K3=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rnFVG-0005Z6-2u
- for xen-devel@lists.xenproject.org; Thu, 21 Mar 2024 10:18:30 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ id 1rnFey-0007v6-CS
+ for xen-devel@lists.xenproject.org; Thu, 21 Mar 2024 10:28:32 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5be6351a-e76c-11ee-afe0-a90da7624cb6;
- Thu, 21 Mar 2024 11:18:28 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a46d0a8399aso316917966b.1
- for <xen-devel@lists.xenproject.org>; Thu, 21 Mar 2024 03:18:28 -0700 (PDT)
+ id c357be32-e76d-11ee-afe0-a90da7624cb6;
+ Thu, 21 Mar 2024 11:28:31 +0100 (CET)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-568a19fcc4eso434006a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Mar 2024 03:28:31 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- lg21-20020a170906f89500b00a46cc25b550sm4012866ejb.5.2024.03.21.03.18.26
+ v17-20020a056402175100b005651ae4ac91sm7877339edx.41.2024.03.21.03.28.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Mar 2024 03:18:26 -0700 (PDT)
+ Thu, 21 Mar 2024 03:28:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,54 +47,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5be6351a-e76c-11ee-afe0-a90da7624cb6
+X-Inumbo-ID: c357be32-e76d-11ee-afe0-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1711016307; x=1711621107; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1711016910; x=1711621710; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=RiWCV8tVWxNCerrDRbBLR5n2ELqhTqhTtlciIkOJnzg=;
-        b=RZWrbazLFUPzi6rdDrtOVbODtcmERMeb7IHmhEltpfC9JaOQvAEaCM3I6nQoO2dvFi
-         +aXhXqMmpoYfGrlDxWV6D+mgw8j7Job5G6bzy5iAq7ewxa+SbmB5vOUihOmy/9BEqHef
-         cobzlxFxVnPnTCpaQuRmrJz2GRWfywf6TSpWfUu+swjzaOzUk1sMqu/mfbCgDNgWCyjJ
-         +6XD5sd0wdpvbRBWfld4BOMxi6QfPBfzuCzsRew3R2OurmQz63fA81v8SCDYdg9Eh3e5
-         SlR3PlIjCO+rQdK3mq88i78ZhgwToYlsNQC5knkeLbIyR0mPePk/PKLOzfvdLvvcEO1J
-         pRww==
+        bh=j4/qTjYH1DcwTd8nnRm9/64Pym/nMZHZd2o2KLS/ULM=;
+        b=KT++fGrhVVmyaZdDthcgZHRPnxm2Mv0u2Wa9nSB00BJOe7NkuB4bx9o81oGvnfLYOb
+         cRM8PMpMd2fI8fRIdrPtC1qFrP+nwrI8V0dboP5DLwG92CrCCG4OhvDIJfZA/5uRtfD2
+         rjja/bmuZ0WKmRTH2vBKKc/HcrvwIpQ2XqTUtW09h0uS8dH72rjQTFwZL+YNbQMqL/hF
+         OQjyY3hustY+rbPL4DPt5A+C9/2je5ZZbheWDZ6cuMr7zaVapufqSqVb6Rrw4R0yWx5U
+         0ZoqYrCHU0p4HygxMUkbX3tSRsDYDolk4rFkPc1//Lj3vn82wPxEui9bSjJYbDLdXdAU
+         SXTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711016307; x=1711621107;
+        d=1e100.net; s=20230601; t=1711016910; x=1711621710;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=RiWCV8tVWxNCerrDRbBLR5n2ELqhTqhTtlciIkOJnzg=;
-        b=SzUZSbYvsSYUkDmxP15mG+p4BRe9xnydqmW0fbNuxFqOEy6VkrwliZRF/zCkyp7uJl
-         OfGE7CrFFUmdM2qXnRDVQ1WKsz8I5Fd+/qk9HqY+0WInN3H4gV7qqvy5KhBJwmN8W8ZD
-         mZsBVRPSHy6Todo6LSe0wDM0szlXeXRhkLxGUU3Y0sjCRpxwXoWXCyvQd3JZHyAN6XX3
-         eirrnCNMvxpasZano2oxEmlujtNYVV9WF8s8ZNGGY/XiCRgBEpgS/MuPSK5dKUt1tehW
-         Fy2vcIRYV1DxbdXLg/PeBWgO/UYQVobMSbu8MKbseU8opArw+id1fqrXHBhYz2bMTahu
-         BJ+w==
-X-Forwarded-Encrypted: i=1; AJvYcCV1xcTm7yp77qqIvG8sugw5NoXh22eC7JC4MQOXDT5n+ybtUGuCJn8+ECUrz/myA23wApB5kFzy9m/aS3zwds3OYCOVYI2tMMVMjagFn+k=
-X-Gm-Message-State: AOJu0YyzjmqILpKvI0J7uiHU/Lkyt7ySdZ5RhocB7Edh3RM1Z57KbBr0
-	qSBJ5V7UKWhxyMUTTVXF/UsVMC7/STBPp95bk7JSJ3kMp9bJnZkpErYpwKGdgPBWoQ9DZRxDwOA
-	=
-X-Google-Smtp-Source: AGHT+IHURNlhYI9sevEiBZd+FNrKqtyMa+CjSO0pGFlbIFotIgZ1/xjkMMK1BI2UN2JHggsYc8mFnw==
-X-Received: by 2002:a17:907:9952:b0:a46:d04b:66e7 with SMTP id kl18-20020a170907995200b00a46d04b66e7mr1880034ejc.25.1711016307549;
-        Thu, 21 Mar 2024 03:18:27 -0700 (PDT)
-Message-ID: <da5a9f49-90af-43a8-acf9-447c52af75df@suse.com>
-Date: Thu, 21 Mar 2024 11:18:25 +0100
+        bh=j4/qTjYH1DcwTd8nnRm9/64Pym/nMZHZd2o2KLS/ULM=;
+        b=KaJV8fETT7P7p1yisoi7e5Oz/ii6kVSy4NAWDOjZEg8W+j6waOqt8aNqmg97UfOpQi
+         s29hwqz8ZG07CIkIAbecdptVrA4B40Qlzna+m8N/1BsLKhB14kVxn2B/qVc+X6QTB3OD
+         yF2hwmUL0UII8kKabWa2SS8NKidDDcgVpe72OFcv55ce5JQaM6RZm4AbwfpyCgDj8NQM
+         a2yGTbqyIagpjKM/YVdTIE+57xyjfUrAsZV4GqxeSVjevuGp/RCGRmzTL5gKzG5k/yIK
+         9UYTizWVkPOL0GvdewzAhAFqYxdQtj06LWlFHR1jYUTQS3+X8CkyarlCevsJaeVxGTdU
+         VCZQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVWADzJPGqR094X1KBdsGka6uyv5h+u4iRn6Ti1Z2gpOST1UvFlo7vBuXd/cTYYP2CdiJ/1qn7JIOLPdZtUrrHkjZZ3HUXMH8HMjwJizJw=
+X-Gm-Message-State: AOJu0YxF0Nkd+41mzkK5VN8vPnBc99jfIm7HcZHUgQWI0Wsie2zSUF3z
+	reh5iPCs3hePNpWr6QjyYLe39VnZhr/QD/BQ+Tk3PMBwQrF4WERwhGjWspafVg==
+X-Google-Smtp-Source: AGHT+IE7XIzxMCsswS2aaOtbzCWPCCLvruC4rCngVjiIw6Zethxd4ob9oUolE4PZ8GGnkPtuqqBekg==
+X-Received: by 2002:a50:d75d:0:b0:568:d7fe:a768 with SMTP id i29-20020a50d75d000000b00568d7fea768mr1507405edj.25.1711016910561;
+        Thu, 21 Mar 2024 03:28:30 -0700 (PDT)
+Message-ID: <3fe788d3-3c49-4298-bd81-66fbb805bf91@suse.com>
+Date: Thu, 21 Mar 2024 11:28:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/vcpu: relax VCPUOP_initialise restriction for non-PV
- vCPUs
+Subject: Re: [PATCH v6 07/20] xen/riscv: introduce bitops.h
 Content-Language: en-US
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+To: Oleksii <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
  xen-devel@lists.xenproject.org
-References: <20240320135720.68894-1-roger.pau@citrix.com>
- <73314dc5-0145-4aa7-a3cd-23c943235392@suse.com> <ZfsPAj-ggY6unQef@macbook>
- <4cc5d746-a50c-4819-a56e-512abf797ef2@suse.com> <Zfv5k8jt0k7QHFxM@macbook>
- <c0aa957a-8a19-4fda-ae04-ce962fde6767@suse.com> <ZfwEmVmNmF-TOdxe@macbook>
+References: <cover.1710517542.git.oleksii.kurochko@gmail.com>
+ <14c91e2ba2aeb6e49f9f7e549232244719fa6959.1710517542.git.oleksii.kurochko@gmail.com>
+ <9724aa80-106d-45ea-bad0-f0f2b83632eb@suse.com>
+ <6f9811f714d9f207409260851f2fef1f62f9cba8.camel@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -119,69 +119,74 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ZfwEmVmNmF-TOdxe@macbook>
+In-Reply-To: <6f9811f714d9f207409260851f2fef1f62f9cba8.camel@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 21.03.2024 10:57, Roger Pau Monné wrote:
-> On Thu, Mar 21, 2024 at 10:17:25AM +0100, Jan Beulich wrote:
->> On 21.03.2024 10:10, Roger Pau Monné wrote:
->>> On Thu, Mar 21, 2024 at 09:07:10AM +0100, Jan Beulich wrote:
->>>> On 20.03.2024 17:29, Roger Pau Monné wrote:
->>>>> On Wed, Mar 20, 2024 at 04:09:33PM +0100, Jan Beulich wrote:
->>>>>> On 20.03.2024 14:57, Roger Pau Monne wrote:
->>>>>>> There's no reason to force HVM guests to have a valid vcpu_info area when
->>>>>>> initializing a vCPU, as the vCPU can also be brought online using the local
->>>>>>> APIC, and on that path there's no requirement for vcpu_info to be setup ahead
->>>>>>> of the bring up.  Note an HVM vCPU can operate normally without making use of
->>>>>>> vcpu_info.
->>>>>>
->>>>>> While I'd agree if you started with "There's no real need to force ...", I
->>>>>> still think there is a reason: If one wants to use paravirt interfaces (i.e.
->>>>>> hypercalls), they would better do so consistently. After all there's also
->>>>>> no need to use VCPUOP_initialise, yet you're not disabling its use.
->>>>>>
->>>>>> As said in reply to Andrew's reply, besides acting as a sentinel that
->>>>>> structure instance also acts as a sink for Xen accesses to a vCPU's
->>>>>> vcpu_info. By removing the check, you switch that from being a safeguard to
->>>>>> being something that actually has to be expected to be accessed. Unless
->>>>>> you've audited all uses to prove that no such access exists.
->>>>>
->>>>> I'm kind of lost in this last paragraph, how is that different than
->>>>> what currently happens when an HVM vCPU >= 32 is brought up using the
->>>>> lapic and has no vpcu_info mapped?
->>>>
->>>> I think this aspect was simply missed back at the time. And I think it
->>>> wants mentioning explicitly to justify the change.
->>>
->>> OK, I can add to the commit message:
->>>
->>> "Note an HVM vCPU can operate normally without making use of
->>> vcpu_info, and in fact does so when brought up from the local APIC."
+On 21.03.2024 11:07, Oleksii wrote:
+> On Wed, 2024-03-20 at 17:03 +0100, Jan Beulich wrote:
+>> On 15.03.2024 19:06, Oleksii Kurochko wrote:
+>>> --- /dev/null
+>>> +++ b/xen/arch/riscv/include/asm/bitops.h
+>>> @@ -0,0 +1,144 @@
+>>> +/* SPDX-License-Identifier: GPL-2.0 */
+>>> +/* Copyright (C) 2012 Regents of the University of California */
+>>> +
+>>> +#ifndef _ASM_RISCV_BITOPS_H
+>>> +#define _ASM_RISCV_BITOPS_H
+>>> +
+>>> +#include <asm/system.h>
+>>> +
+>>> +#define BITOP_BITS_PER_WORD BITS_PER_LONG
+>>> +
+>>> +#define BITOP_TYPE
+>>> +typedef uint64_t bitops_uint_t;
+>>> +
+>>> +#include <asm-generic/bitops/bitops-bits.h>
+>>> +
+>>> +#define __set_bit(n, p)      set_bit(n, p)
+>>> +#define __clear_bit(n, p)    clear_bit(n, p)
 >>
->> I'd be fine adding this (or having this added) while committing.
+>> If these cam with a TODO, I wouldn't say anything. But without I take
+>> it
+>> they're meant to remain that way, at which point I'd like to ask
+>> about
+>> the performance aspect: Surely the AMO insns are more expensive than
+>> whatever more basic insns could be used instead? I'd even go as far
+>> as
+>> wondering whether
 >>
->>>> As said in reply to Andrew, I don't think the dummy structure can be got
->>>> rid of. Nor can the checks here be (easily) removed altogether, i.e. your
->>>> change cannot (easily) be extended to PV as well. Even conditional removal
->>>> of the structure in !PV builds would first require all vcpu_info accesses
->>>> to gain a suitable conditional. Which may be undesirable, as some of these
->>>> may be deemed fast paths.
->>>
->>> I didn't intended to do this here, as replied to Andrew.  If we want
->>> to get rid of the check for PV also it needs to be done in a different
->>> patch, and with a different justification and analysis.
->>>
->>>>> Also, from a quick look it seems like sites do check whether vcpu_info
->>>>> == dummy_vcpu_info, otherwise we would already be in trouble.
->>>>
->>>> Such checks exist in code managing vcpu_info, but not - afaics - in places
->>>> actually accessing it.
+>> #define __set_bit(n, p)      ((void)__test_and_set_bit(n, p))
+>> #define __clear_bit(n, p)    ((void)__test_and_clear_bit(n, p))
+>>
+>> wouldn't be cheaper (the compiler would recognize the unused result
+>> and eliminate its calculation, I'm pretty sure).
+> It was implemented using atomic ops because of Arm:
+> /*
+>  * Non-atomic bit manipulation.
+>  *
+>  * Implemented using atomics to be interrupt safe. Could alternatively
+>  * implement with local interrupt masking.
+>  */
+> #define __set_bit(n,p)            set_bit(n,p)
+> #define __clear_bit(n,p)          clear_bit(n,p)
 > 
-> Is there anything else that needs adjusting then, or are you happy to
-> pick this up and adjust the commit message?
+> I though that the same comment is true for x86, but after your comment
+> I checked x86 implementation, I realized that x86 uses non-atomic
+> operations.
+> 
+> In this case, it seems to me there is a sense to use non-atomic for
+> RISC-V too.
 
-I'll pick this up and adjust (unless Andrew beats me).
+Hmm, wait: There's an important difference between x86 on one side and
+Arm/RISC-V/PPC and various other more or less RISC-like ones on the other.
+x86 has read-modify-write (memory) insns. Therefore even without using
+their atomic (LOCKed) forms, they do the update atomically as far as the
+local CPU is concerned. That's not the case when you need to use a three
+(or more) step load-op-store sequence.
+
+Had you retained Arm's comment, I probably wouldn't even have asked.
+Please add such a comment while sticking to this aliasing you have.
 
 Jan
 
