@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDB4CD1280
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Mar 2024 16:02:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.696956.1088236 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32E2BCD1282
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Mar 2024 16:02:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.696958.1088257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnhLR-0001kL-GQ; Fri, 22 Mar 2024 16:02:13 +0000
+	id 1rnhLT-0002Hn-EJ; Fri, 22 Mar 2024 16:02:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 696956.1088236; Fri, 22 Mar 2024 16:02:13 +0000
+Received: by outflank-mailman (output) from mailman id 696958.1088257; Fri, 22 Mar 2024 16:02:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnhLR-0001jR-9e; Fri, 22 Mar 2024 16:02:13 +0000
-Received: by outflank-mailman (input) for mailman id 696956;
- Fri, 22 Mar 2024 16:02:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rnhLT-0002Fd-4m; Fri, 22 Mar 2024 16:02:15 +0000
+Received: by outflank-mailman (input) for mailman id 696958;
+ Fri, 22 Mar 2024 16:02:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kYs8=K4=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rnhLQ-0000WB-DO
- for xen-devel@lists.xenproject.org; Fri, 22 Mar 2024 16:02:12 +0000
+ id 1rnhLS-0000W5-0a
+ for xen-devel@lists.xenproject.org; Fri, 22 Mar 2024 16:02:14 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8a922712-e865-11ee-afe0-a90da7624cb6;
- Fri, 22 Mar 2024 17:02:11 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8b547583-e865-11ee-a1ee-f123f15fe8a2;
+ Fri, 22 Mar 2024 17:02:12 +0100 (CET)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id 521E24EE0C92;
- Fri, 22 Mar 2024 17:02:10 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 961B34EE0C94;
+ Fri, 22 Mar 2024 17:02:11 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8a922712-e865-11ee-afe0-a90da7624cb6
+X-Inumbo-ID: 8b547583-e865-11ee-a1ee-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -55,9 +55,9 @@ Cc: sstabellini@kernel.org,
 	roger.pau@citrix.com,
 	bertrand.marquis@arm.com,
 	julien@xen.org
-Subject: [XEN PATCH 06/11] xen/efi: address violations of MISRA C Rule 20.7
-Date: Fri, 22 Mar 2024 17:01:55 +0100
-Message-Id: <2d3842a990189c37fa12672994b779ad42975235.1711118582.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 08/11] x86/altcall: address violations of MISRA C Rule 20.7
+Date: Fri, 22 Mar 2024 17:01:57 +0100
+Message-Id: <653ead65966226f50b0e4ae0268912c9710f9dba.1711118582.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1711118582.git.nicola.vetrini@bugseng.com>
 References: <cover.1711118582.git.nicola.vetrini@bugseng.com>
@@ -74,23 +74,170 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/include/efi/efiapi.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/x86/include/asm/alternative.h | 76 +++++++++++++-------------
+ 1 file changed, 38 insertions(+), 38 deletions(-)
 
-diff --git a/xen/include/efi/efiapi.h b/xen/include/efi/efiapi.h
-index a616d1238aa4..6d4d4e340d9e 100644
---- a/xen/include/efi/efiapi.h
-+++ b/xen/include/efi/efiapi.h
-@@ -63,7 +63,8 @@ EFI_STATUS
-     OUT UINT32                      *DescriptorVersion
-     );
+diff --git a/xen/arch/x86/include/asm/alternative.h b/xen/arch/x86/include/asm/alternative.h
+index 0d3697f1de49..a3b7cbab8740 100644
+--- a/xen/arch/x86/include/asm/alternative.h
++++ b/xen/arch/x86/include/asm/alternative.h
+@@ -243,28 +243,28 @@ extern void alternative_branches(void);
  
--#define NextMemoryDescriptor(Ptr,Size)  ((EFI_MEMORY_DESCRIPTOR *) (((UINT8 *) Ptr) + Size))
-+#define NextMemoryDescriptor(Ptr,Size)  ((EFI_MEMORY_DESCRIPTOR *) \
-+                                         ((UINT8 *)(Ptr) + (Size)))
+ #define alternative_vcall0(func) ({             \
+     ALT_CALL_NO_ARG1;                           \
+-    (void)sizeof(func());                       \
++    (void)sizeof((func)());                     \
+     (void)alternative_callN(0, int, func);      \
+ })
  
+-#define alternative_call0(func) ({              \
+-    ALT_CALL_NO_ARG1;                           \
+-    alternative_callN(0, typeof(func()), func); \
++#define alternative_call0(func) ({                \
++    ALT_CALL_NO_ARG1;                             \
++    alternative_callN(0, typeof((func)()), func); \
+ })
  
- typedef
+ #define alternative_vcall1(func, arg) ({           \
+     typeof(arg) v1_ = (arg);                       \
+     ALT_CALL_ARG(v1_, 1);                          \
+     ALT_CALL_NO_ARG2;                              \
+-    (void)sizeof(func(arg));                       \
++    (void)sizeof((func)(arg));                     \
+     (void)alternative_callN(1, int, func);         \
+ })
+ 
+-#define alternative_call1(func, arg) ({            \
+-    typeof(arg) v1_ = (arg);                       \
+-    ALT_CALL_ARG(v1_, 1);                          \
+-    ALT_CALL_NO_ARG2;                              \
+-    alternative_callN(1, typeof(func(arg)), func); \
++#define alternative_call1(func, arg) ({              \
++    typeof(arg) v1_ = (arg);                         \
++    ALT_CALL_ARG(v1_, 1);                            \
++    ALT_CALL_NO_ARG2;                                \
++    alternative_callN(1, typeof((func)(arg)), func); \
+ })
+ 
+ #define alternative_vcall2(func, arg1, arg2) ({           \
+@@ -273,17 +273,17 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v1_, 1);                                 \
+     ALT_CALL_ARG(v2_, 2);                                 \
+     ALT_CALL_NO_ARG3;                                     \
+-    (void)sizeof(func(arg1, arg2));                       \
++    (void)sizeof((func)(arg1, arg2));                     \
+     (void)alternative_callN(2, int, func);                \
+ })
+ 
+-#define alternative_call2(func, arg1, arg2) ({            \
+-    typeof(arg1) v1_ = (arg1);                            \
+-    typeof(arg2) v2_ = (arg2);                            \
+-    ALT_CALL_ARG(v1_, 1);                                 \
+-    ALT_CALL_ARG(v2_, 2);                                 \
+-    ALT_CALL_NO_ARG3;                                     \
+-    alternative_callN(2, typeof(func(arg1, arg2)), func); \
++#define alternative_call2(func, arg1, arg2) ({              \
++    typeof(arg1) v1_ = (arg1);                              \
++    typeof(arg2) v2_ = (arg2);                              \
++    ALT_CALL_ARG(v1_, 1);                                   \
++    ALT_CALL_ARG(v2_, 2);                                   \
++    ALT_CALL_NO_ARG3;                                       \
++    alternative_callN(2, typeof((func)(arg1, arg2)), func); \
+ })
+ 
+ #define alternative_vcall3(func, arg1, arg2, arg3) ({    \
+@@ -294,20 +294,20 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v2_, 2);                                \
+     ALT_CALL_ARG(v3_, 3);                                \
+     ALT_CALL_NO_ARG4;                                    \
+-    (void)sizeof(func(arg1, arg2, arg3));                \
++    (void)sizeof((func)(arg1, arg2, arg3));              \
+     (void)alternative_callN(3, int, func);               \
+ })
+ 
+-#define alternative_call3(func, arg1, arg2, arg3) ({     \
+-    typeof(arg1) v1_ = (arg1);                            \
+-    typeof(arg2) v2_ = (arg2);                           \
+-    typeof(arg3) v3_ = (arg3);                           \
+-    ALT_CALL_ARG(v1_, 1);                                \
+-    ALT_CALL_ARG(v2_, 2);                                \
+-    ALT_CALL_ARG(v3_, 3);                                \
+-    ALT_CALL_NO_ARG4;                                    \
+-    alternative_callN(3, typeof(func(arg1, arg2, arg3)), \
+-                      func);                             \
++#define alternative_call3(func, arg1, arg2, arg3) ({       \
++    typeof(arg1) v1_ = (arg1);                             \
++    typeof(arg2) v2_ = (arg2);                             \
++    typeof(arg3) v3_ = (arg3);                             \
++    ALT_CALL_ARG(v1_, 1);                                  \
++    ALT_CALL_ARG(v2_, 2);                                  \
++    ALT_CALL_ARG(v3_, 3);                                  \
++    ALT_CALL_NO_ARG4;                                      \
++    alternative_callN(3, typeof((func)(arg1, arg2, arg3)), \
++                      func);                               \
+ })
+ 
+ #define alternative_vcall4(func, arg1, arg2, arg3, arg4) ({ \
+@@ -320,7 +320,7 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v3_, 3);                                   \
+     ALT_CALL_ARG(v4_, 4);                                   \
+     ALT_CALL_NO_ARG5;                                       \
+-    (void)sizeof(func(arg1, arg2, arg3, arg4));             \
++    (void)sizeof((func)(arg1, arg2, arg3, arg4));           \
+     (void)alternative_callN(4, int, func);                  \
+ })
+ 
+@@ -334,8 +334,8 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v3_, 3);                                   \
+     ALT_CALL_ARG(v4_, 4);                                   \
+     ALT_CALL_NO_ARG5;                                       \
+-    alternative_callN(4, typeof(func(arg1, arg2,            \
+-                                     arg3, arg4)),          \
++    alternative_callN(4, typeof((func)(arg1, arg2,          \
++                                       arg3, arg4)),        \
+                       func);                                \
+ })
+ 
+@@ -351,7 +351,7 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v4_, 4);                                         \
+     ALT_CALL_ARG(v5_, 5);                                         \
+     ALT_CALL_NO_ARG6;                                             \
+-    (void)sizeof(func(arg1, arg2, arg3, arg4, arg5));             \
++    (void)sizeof((func)(arg1, arg2, arg3, arg4, arg5));           \
+     (void)alternative_callN(5, int, func);                        \
+ })
+ 
+@@ -367,8 +367,8 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v4_, 4);                                         \
+     ALT_CALL_ARG(v5_, 5);                                         \
+     ALT_CALL_NO_ARG6;                                             \
+-    alternative_callN(5, typeof(func(arg1, arg2, arg3,            \
+-                                     arg4, arg5)),                \
++    alternative_callN(5, typeof((func)(arg1, arg2, arg3,          \
++                                       arg4, arg5)),              \
+                       func);                                      \
+ })
+ 
+@@ -385,7 +385,7 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v4_, 4);                                               \
+     ALT_CALL_ARG(v5_, 5);                                               \
+     ALT_CALL_ARG(v6_, 6);                                               \
+-    (void)sizeof(func(arg1, arg2, arg3, arg4, arg5, arg6));             \
++    (void)sizeof((func)(arg1, arg2, arg3, arg4, arg5, arg6));           \
+     (void)alternative_callN(6, int, func);                              \
+ })
+ 
+@@ -402,8 +402,8 @@ extern void alternative_branches(void);
+     ALT_CALL_ARG(v4_, 4);                                               \
+     ALT_CALL_ARG(v5_, 5);                                               \
+     ALT_CALL_ARG(v6_, 6);                                               \
+-    alternative_callN(6, typeof(func(arg1, arg2, arg3,                  \
+-                                     arg4, arg5, arg6)),                \
++    alternative_callN(6, typeof((func)(arg1, arg2, arg3,                \
++                                       arg4, arg5, arg6)),              \
+                       func);                                            \
+ })
+ 
 -- 
 2.34.1
 
