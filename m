@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA80CD1281
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDB4CD1280
 	for <xen-devel@archiver.kernel.org>; Fri, 22 Mar 2024 16:02:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.696959.1088270 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.696956.1088236 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnhLU-0002h2-Qz; Fri, 22 Mar 2024 16:02:16 +0000
+	id 1rnhLR-0001kL-GQ; Fri, 22 Mar 2024 16:02:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 696959.1088270; Fri, 22 Mar 2024 16:02:16 +0000
+Received: by outflank-mailman (output) from mailman id 696956.1088236; Fri, 22 Mar 2024 16:02:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnhLU-0002gb-MG; Fri, 22 Mar 2024 16:02:16 +0000
-Received: by outflank-mailman (input) for mailman id 696959;
- Fri, 22 Mar 2024 16:02:14 +0000
+	id 1rnhLR-0001jR-9e; Fri, 22 Mar 2024 16:02:13 +0000
+Received: by outflank-mailman (input) for mailman id 696956;
+ Fri, 22 Mar 2024 16:02:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kYs8=K4=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rnhLS-0000WB-OF
- for xen-devel@lists.xenproject.org; Fri, 22 Mar 2024 16:02:14 +0000
+ id 1rnhLQ-0000WB-DO
+ for xen-devel@lists.xenproject.org; Fri, 22 Mar 2024 16:02:12 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8c76c732-e865-11ee-afe0-a90da7624cb6;
- Fri, 22 Mar 2024 17:02:14 +0100 (CET)
+ id 8a922712-e865-11ee-afe0-a90da7624cb6;
+ Fri, 22 Mar 2024 17:02:11 +0100 (CET)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id 7267D4EE0C97;
- Fri, 22 Mar 2024 17:02:13 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 521E24EE0C92;
+ Fri, 22 Mar 2024 17:02:10 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c76c732-e865-11ee-afe0-a90da7624cb6
+X-Inumbo-ID: 8a922712-e865-11ee-afe0-a90da7624cb6
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -55,9 +55,9 @@ Cc: sstabellini@kernel.org,
 	roger.pau@citrix.com,
 	bertrand.marquis@arm.com,
 	julien@xen.org
-Subject: [XEN PATCH 11/11] x86/public: hvm: address violations of MISRA C Rule 20.7
-Date: Fri, 22 Mar 2024 17:02:00 +0100
-Message-Id: <d9342b2a0390cf3128487cfe885940682bf9442e.1711118582.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 06/11] xen/efi: address violations of MISRA C Rule 20.7
+Date: Fri, 22 Mar 2024 17:01:55 +0100
+Message-Id: <2d3842a990189c37fa12672994b779ad42975235.1711118582.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1711118582.git.nicola.vetrini@bugseng.com>
 References: <cover.1711118582.git.nicola.vetrini@bugseng.com>
@@ -74,22 +74,23 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/include/public/arch-x86/xen.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/include/efi/efiapi.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
-index c0f4551247f4..a9a87d9b50de 100644
---- a/xen/include/public/arch-x86/xen.h
-+++ b/xen/include/public/arch-x86/xen.h
-@@ -36,7 +36,7 @@
- #define __XEN_GUEST_HANDLE(name)        __guest_handle_ ## name
- #define XEN_GUEST_HANDLE(name)          __XEN_GUEST_HANDLE(name)
- #define XEN_GUEST_HANDLE_PARAM(name)    XEN_GUEST_HANDLE(name)
--#define set_xen_guest_handle_raw(hnd, val)  do { (hnd).p = val; } while (0)
-+#define set_xen_guest_handle_raw(hnd, val)  do { (hnd).p = (val); } while (0)
- #define set_xen_guest_handle(hnd, val) set_xen_guest_handle_raw(hnd, val)
+diff --git a/xen/include/efi/efiapi.h b/xen/include/efi/efiapi.h
+index a616d1238aa4..6d4d4e340d9e 100644
+--- a/xen/include/efi/efiapi.h
++++ b/xen/include/efi/efiapi.h
+@@ -63,7 +63,8 @@ EFI_STATUS
+     OUT UINT32                      *DescriptorVersion
+     );
  
- #if defined(__i386__)
+-#define NextMemoryDescriptor(Ptr,Size)  ((EFI_MEMORY_DESCRIPTOR *) (((UINT8 *) Ptr) + Size))
++#define NextMemoryDescriptor(Ptr,Size)  ((EFI_MEMORY_DESCRIPTOR *) \
++                                         ((UINT8 *)(Ptr) + (Size)))
+ 
+ 
+ typedef
 -- 
 2.34.1
 
