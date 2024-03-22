@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5239CD11DF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5939C54E71
 	for <xen-devel@archiver.kernel.org>; Fri, 22 Mar 2024 16:02:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.696957.1088250 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.696955.1088231 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnhLS-0002Az-PJ; Fri, 22 Mar 2024 16:02:14 +0000
+	id 1rnhLR-0001h6-3p; Fri, 22 Mar 2024 16:02:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 696957.1088250; Fri, 22 Mar 2024 16:02:14 +0000
+Received: by outflank-mailman (output) from mailman id 696955.1088231; Fri, 22 Mar 2024 16:02:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rnhLS-0002AK-Kv; Fri, 22 Mar 2024 16:02:14 +0000
-Received: by outflank-mailman (input) for mailman id 696957;
- Fri, 22 Mar 2024 16:02:13 +0000
+	id 1rnhLR-0001gF-0i; Fri, 22 Mar 2024 16:02:13 +0000
+Received: by outflank-mailman (input) for mailman id 696955;
+ Fri, 22 Mar 2024 16:02:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kYs8=K4=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rnhLR-0000W5-62
- for xen-devel@lists.xenproject.org; Fri, 22 Mar 2024 16:02:13 +0000
+ id 1rnhLP-0000W5-V7
+ for xen-devel@lists.xenproject.org; Fri, 22 Mar 2024 16:02:11 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8af4cae7-e865-11ee-a1ee-f123f15fe8a2;
- Fri, 22 Mar 2024 17:02:11 +0100 (CET)
-Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id EB4364EE074B;
+ id 8a331fa7-e865-11ee-a1ee-f123f15fe8a2;
  Fri, 22 Mar 2024 17:02:10 +0100 (CET)
+Received: from nico.bugseng.com (unknown [46.228.253.194])
+ by support.bugseng.com (Postfix) with ESMTPSA id A7A714EE0C91;
+ Fri, 22 Mar 2024 17:02:09 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8af4cae7-e865-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 8a331fa7-e865-11ee-a1ee-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -56,9 +56,9 @@ Cc: sstabellini@kernel.org,
 	bertrand.marquis@arm.com,
 	julien@xen.org,
 	George Dunlap <george.dunlap@citrix.com>
-Subject: [XEN PATCH 07/11] xen/page_alloc: address violations of MISRA C Rule 20.7
-Date: Fri, 22 Mar 2024 17:01:56 +0100
-Message-Id: <ead692e7a9f7f21ae54448073af8b64a40f2ddfe.1711118582.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 05/11] xen: address MISRA C Rule 20.7 violation in generated hypercall
+Date: Fri, 22 Mar 2024 17:01:54 +0100
+Message-Id: <323c77d56f8dcbd6bf8f60c84aacff162265807e.1711118582.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1711118582.git.nicola.vetrini@bugseng.com>
 References: <cover.1711118582.git.nicola.vetrini@bugseng.com>
@@ -75,22 +75,31 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/common/page_alloc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/scripts/gen_hypercall.awk | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 28c510d6669b..82dc55829f78 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -150,7 +150,7 @@
- #include <asm/paging.h>
- #else
- #define p2m_pod_offline_or_broken_hit(pg) 0
--#define p2m_pod_offline_or_broken_replace(pg) BUG_ON(pg != NULL)
-+#define p2m_pod_offline_or_broken_replace(pg) BUG_ON((pg) != NULL)
- #endif
- 
- #ifndef PGC_static
+diff --git a/xen/scripts/gen_hypercall.awk b/xen/scripts/gen_hypercall.awk
+index 9f7cfa298a6d..1a7e051fde10 100644
+--- a/xen/scripts/gen_hypercall.awk
++++ b/xen/scripts/gen_hypercall.awk
+@@ -277,7 +277,7 @@ END {
+                         if (call[i] == ca && call_prio[i] == p_list[pl]) {
+                             fnd++;
+                             if (fnd == 1)
+-                                printf("        if ( num == __HYPERVISOR_%s ) \\\n", fn[call_fn[i]]);
++                                printf("        if ( (num) == __HYPERVISOR_%s ) \\\n", fn[call_fn[i]]);
+                             else
+                                 printf("        else \\\n");
+                             do_call(call_fn[i], call_p[i]);
+@@ -290,7 +290,7 @@ END {
+             } else {
+                 for (i = 1; i <= nc; i++)
+                     if (call[i] == ca && call_prio[i] == p_list[pl]) {
+-                        printf("if ( likely(num == __HYPERVISOR_%s) ) \\\n", fn[call_fn[i]]);
++                        printf("if ( likely((num) == __HYPERVISOR_%s) ) \\\n", fn[call_fn[i]]);
+                         do_call(call_fn[i], call_p[i]);
+                     }
+             }
 -- 
 2.34.1
 
