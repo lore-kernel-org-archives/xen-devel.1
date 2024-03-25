@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC6BC54E64
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Mar 2024 09:39:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.697648.1088620 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCC4C54E58
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Mar 2024 09:39:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.697650.1088634 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rognT-0001iQ-Ta; Mon, 25 Mar 2024 09:39:15 +0000
+	id 1rognW-00021a-Gt; Mon, 25 Mar 2024 09:39:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 697648.1088620; Mon, 25 Mar 2024 09:39:15 +0000
+Received: by outflank-mailman (output) from mailman id 697650.1088634; Mon, 25 Mar 2024 09:39:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rognT-0001iH-Pn; Mon, 25 Mar 2024 09:39:15 +0000
-Received: by outflank-mailman (input) for mailman id 697648;
- Mon, 25 Mar 2024 09:39:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rognW-00020j-9F; Mon, 25 Mar 2024 09:39:18 +0000
+Received: by outflank-mailman (input) for mailman id 697650;
+ Mon, 25 Mar 2024 09:39:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lWJZ=K7=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1rognS-0001fs-N3
- for xen-devel@lists.xenproject.org; Mon, 25 Mar 2024 09:39:14 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8925edf5-ea8b-11ee-a1ef-f123f15fe8a2;
- Mon, 25 Mar 2024 10:39:11 +0100 (CET)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-56845954ffeso5582588a12.2
- for <xen-devel@lists.xenproject.org>; Mon, 25 Mar 2024 02:39:11 -0700 (PDT)
+ id 1rognU-000193-9Z
+ for xen-devel@lists.xenproject.org; Mon, 25 Mar 2024 09:39:16 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8b2f9576-ea8b-11ee-afe3-a90da7624cb6;
+ Mon, 25 Mar 2024 10:39:15 +0100 (CET)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a4715991c32so482271366b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Mar 2024 02:39:15 -0700 (PDT)
 Received: from rayden.urgonet (h-217-31-164-171.A175.priv.bahnhof.se.
  [217.31.164.171]) by smtp.gmail.com with ESMTPSA id
- bw26-20020a170906c1da00b00a4650ec48d0sm2891067ejb.140.2024.03.25.02.39.09
+ bw26-20020a170906c1da00b00a4650ec48d0sm2891067ejb.140.2024.03.25.02.39.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Mar 2024 02:39:10 -0700 (PDT)
+ Mon, 25 Mar 2024 02:39:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,37 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8925edf5-ea8b-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: 8b2f9576-ea8b-11ee-afe3-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1711359551; x=1711964351; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1711359555; x=1711964355; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UtKMkPrD3bbUTAe9JMaiR4498NfrGxZFJfJBgZJEUYQ=;
-        b=IGxEWobmXXsZdvIiw0NIf7+pJIJHOGY7/90CM8G29bMe4cI1h1t0bM/SniO+rddRx1
-         +sazB+I3t0KdgeqCRVBZ2Zi1n/47pTO/mEhU1937BRLm3ecr644aIVl6Pj+w0PDP750o
-         lXBEfye3QuRaAxkSbr6GuVwPa3uauhuDEljy7ZYlA+n7rHwAr9cdjrZDQZZ1d/eVtGIQ
-         J3lM2QJkAMQsX9CeiUSdF+dEVqzfW0CTDCp/yn5tTHVXQf5P1pSIoJppHPsBs05/88Uf
-         dDZKxKKXhkHKS+hZFq3wapdVIo2NBLACKFsuO9LlcZ+LOSET92bFaT/8XhYACpyQ+z7C
-         J1CQ==
+        bh=ktHTOHPhZw2ERZCbIiZrCqqyY587Z370raI9TG92v+s=;
+        b=yEP6T+18eaYVZdoALuo/IDevPszFdavJnEEp7t4W8RHG+A4C4+8Bs/JM1zrQg/kxpp
+         3h2vGVGEA9qAyt/laghm1HGnuvUzgwYbReiofyEq/t2BdnX8WhkEBCMwYyxj8GaFgM7u
+         G4FwFh1QiLCG5d6+KpPOnKFLBq/uhejPrFyK9VNF3RVRokgAWjVOgRIq+RaprxRiWZJs
+         3ZUyVm1w3IJO0g4ZbhBHXd5rGl/Tgnb6s/R0MOHBC9IcQc1WMxZuYwlvS+bP39XS7a0c
+         +p2qrdK1uFtveO9VUcH3UTNTVrMo01V6qYs+I22JZEPjSRKjKHec2Y/SmjlBsSPAcYj5
+         55CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711359551; x=1711964351;
+        d=1e100.net; s=20230601; t=1711359555; x=1711964355;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UtKMkPrD3bbUTAe9JMaiR4498NfrGxZFJfJBgZJEUYQ=;
-        b=Hexw0IheVfmFQd/tfm6g2PFb1CuROAt25qKspOVv8kJWOgAwTM6e5iAac29oe3gCyn
-         wx9q+20V4hs+s7Pet60p8ohN9Sz3Gc54mb42KXqNLnQAjseNHDh9GNufCKq13Za5lmlT
-         YNKFwTm+hXjGTwiKEhfkRbXkBkrl988sb56uh5IyrUPTpW+rO6KJrcHaP+tJMSi4rvI8
-         rzUEZmpnq5AfI0URMyAP/iIp3rLb7mF4Dwgp+XYpKGWPwPAIH8gdfqIXeP1lzabzKRzM
-         FWd3+4AjTalRjxmpohA3Bjsuo6CgkRKzTLXbuAc5hlPZch72dmube7UVbz1Fns93RrKj
-         hDkw==
-X-Gm-Message-State: AOJu0YyyAiT1eejzQWYNIQHg+EIgJbaJh8IjzXMAgtUeJDUAR+ydlKUx
-	LYB/CmPsasw8LVoALEMiEoXgfBSs1NYg1eOXoegBISVy1H0VzE7RYrIWjSC5/BJm+SwmbJ+xac5
-	L
-X-Google-Smtp-Source: AGHT+IFEshPJz3eT1WpnGM/g8jA36vOf7jHJ/wJtxEy4DoWw66uuIwvxTVFyr8bGG52dsEvMmzOn+A==
-X-Received: by 2002:a17:907:1002:b0:a46:e921:ae3f with SMTP id ox2-20020a170907100200b00a46e921ae3fmr4067032ejb.13.1711359550939;
-        Mon, 25 Mar 2024 02:39:10 -0700 (PDT)
+        bh=ktHTOHPhZw2ERZCbIiZrCqqyY587Z370raI9TG92v+s=;
+        b=W1fIUGrAa1FKVTfbO0b+u44NBiK/+vO6dX1f9DYV0Dn+VPD8IHtd0F5ay2pwsd2YBY
+         BU3n4zdhq8yuX712k53iRinEq7jY7rwLP063EDm3WBDuKIz1k76A0SMQm+sZ0TJc0mbP
+         8t1ES+SNTkMFhsTBvH1Iy7ZvcO/qbGHnMtwS6iiB6AMy5WOifdH0JP+eQ0GujuIBLJWA
+         a7bgURZ9vgntMyGoAtbHipC4dku3Em4zew8a6gxU34puH9a+XC2UOdEdbEiIoegsuBv2
+         kjeQeM/4DobNp48kX4qx5Fq3BH8qyem9vbctZf5On5TncHBb+Wj33IXipAWoss/YsNWU
+         9WQQ==
+X-Gm-Message-State: AOJu0YwL5XtV917M9EU84MSMIcYv/AeEPUm6G6wtsDWQEV+4JVlVMxx7
+	F7Q31satr+l41FV3tfwJMbcwV/0flug1xG5wgmzdZd9T7LlBwex6NLegUdtYBxmi+Hz9a0lM07S
+	X
+X-Google-Smtp-Source: AGHT+IEOGVY6EyKr+I/yJdd39jUyvRqBVgESrP7PFiLL/4YlDZRoDQR0ajVYjp5mXVwH3HmNwSEKUw==
+X-Received: by 2002:a17:907:944f:b0:a49:56d4:d643 with SMTP id dl15-20020a170907944f00b00a4956d4d643mr2186112ejc.36.1711359554661;
+        Mon, 25 Mar 2024 02:39:14 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: patches@linaro.org,
@@ -87,679 +87,512 @@ Cc: patches@linaro.org,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [XEN PATCH 2/6] xen/arm: ffa: move common things to ffa_private.h
-Date: Mon, 25 Mar 2024 10:39:00 +0100
-Message-Id: <20240325093904.3466092-3-jens.wiklander@linaro.org>
+Subject: [XEN PATCH 5/6] xen/arm: ffa: separate rxtx buffer routines
+Date: Mon, 25 Mar 2024 10:39:03 +0100
+Message-Id: <20240325093904.3466092-6-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240325093904.3466092-1-jens.wiklander@linaro.org>
 References: <20240325093904.3466092-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Prepare to separate ffa.c into modules by moving common things into the
-new internal header file ffa_private.h.
+Move rxtx buffer routines into a spearate file for easier navigation in
+the source code.
+
+Add ffa_rxtx_init(), ffa_rxtx_destroy(), and ffa_rxtx_domain_destroy() to
+handle the ffa_rxtx internal things on initialization and teardown.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 ---
- xen/arch/arm/tee/ffa.c         | 298 +-----------------------------
- xen/arch/arm/tee/ffa_private.h | 318 +++++++++++++++++++++++++++++++++
- 2 files changed, 319 insertions(+), 297 deletions(-)
- create mode 100644 xen/arch/arm/tee/ffa_private.h
+ xen/arch/arm/tee/Makefile      |   1 +
+ xen/arch/arm/tee/ffa.c         | 174 +-------------------------
+ xen/arch/arm/tee/ffa_private.h |   7 ++
+ xen/arch/arm/tee/ffa_rxtx.c    | 216 +++++++++++++++++++++++++++++++++
+ 4 files changed, 229 insertions(+), 169 deletions(-)
+ create mode 100644 xen/arch/arm/tee/ffa_rxtx.c
 
+diff --git a/xen/arch/arm/tee/Makefile b/xen/arch/arm/tee/Makefile
+index be644fba8055..f0112a2f922d 100644
+--- a/xen/arch/arm/tee/Makefile
++++ b/xen/arch/arm/tee/Makefile
+@@ -1,5 +1,6 @@
+ obj-$(CONFIG_FFA) += ffa.o
+ obj-$(CONFIG_FFA) += ffa_shm.o
+ obj-$(CONFIG_FFA) += ffa_partinfo.o
++obj-$(CONFIG_FFA) += ffa_rxtx.o
+ obj-y += tee.o
+ obj-$(CONFIG_OPTEE) += optee.o
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 0344a0f17e72..259851f20bdb 100644
+index 7a2803881420..4f7775b8c890 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -63,204 +63,7 @@
- #include <asm/tee/ffa.h>
- #include <asm/tee/tee.h>
+@@ -65,26 +65,6 @@
  
--/* Error codes */
--#define FFA_RET_OK                      0
--#define FFA_RET_NOT_SUPPORTED           -1
--#define FFA_RET_INVALID_PARAMETERS      -2
--#define FFA_RET_NO_MEMORY               -3
--#define FFA_RET_BUSY                    -4
--#define FFA_RET_INTERRUPTED             -5
--#define FFA_RET_DENIED                  -6
--#define FFA_RET_RETRY                   -7
--#define FFA_RET_ABORTED                 -8
--
--/* FFA_VERSION helpers */
--#define FFA_VERSION_MAJOR_SHIFT         16U
--#define FFA_VERSION_MAJOR_MASK          0x7FFFU
--#define FFA_VERSION_MINOR_SHIFT         0U
--#define FFA_VERSION_MINOR_MASK          0xFFFFU
--#define MAKE_FFA_VERSION(major, minor)  \
--        ((((major) & FFA_VERSION_MAJOR_MASK) << FFA_VERSION_MAJOR_SHIFT) | \
--         ((minor) & FFA_VERSION_MINOR_MASK))
--
--#define FFA_VERSION_1_0         MAKE_FFA_VERSION(1, 0)
--#define FFA_VERSION_1_1         MAKE_FFA_VERSION(1, 1)
--/* The minimal FF-A version of the SPMC that can be supported */
--#define FFA_MIN_SPMC_VERSION    FFA_VERSION_1_1
--
--/*
-- * This is the version we want to use in communication with guests and SPs.
-- * During negotiation with a guest or a SP we may need to lower it for
-- * that particular guest or SP.
-- */
--#define FFA_MY_VERSION_MAJOR    1U
--#define FFA_MY_VERSION_MINOR    1U
--#define FFA_MY_VERSION          MAKE_FFA_VERSION(FFA_MY_VERSION_MAJOR, \
--                                                 FFA_MY_VERSION_MINOR)
--
--/*
-- * The FF-A specification explicitly works with 4K pages as a measure of
-- * memory size, for example, FFA_RXTX_MAP takes one parameter "RX/TX page
-- * count" which is the number of contiguous 4K pages allocated. Xen may use
-- * a different page size depending on the configuration to avoid confusion
-- * with PAGE_SIZE use a special define when it's a page size as in the FF-A
-- * specification.
-- */
--#define FFA_PAGE_SIZE                   SZ_4K
--
--/*
-- * The number of pages used for each of the RX and TX buffers shared with
-- * the SPMC.
-- */
--#define FFA_RXTX_PAGE_COUNT             1
--
--/*
-- * Limit the number of pages RX/TX buffers guests can map.
-- * TODO support a larger number.
-- */
--#define FFA_MAX_RXTX_PAGE_COUNT         1
--
--/*
-- * Limit for shared buffer size. Please note that this define limits
-- * number of pages.
-- *
-- * FF-A doesn't have any direct requirements on GlobalPlatform or vice
-- * versa, but an implementation can very well use FF-A in order to provide
-- * a GlobalPlatform interface on top.
-- *
-- * Global Platform specification for TEE requires that any TEE
-- * implementation should allow to share buffers with size of at least
-- * 512KB, defined in TEEC-1.0C page 24, Table 4-1,
-- * TEEC_CONFIG_SHAREDMEM_MAX_SIZE.
-- * Due to overhead which can be hard to predict exactly, double this number
-- * to give a safe margin.
-- */
--#define FFA_MAX_SHM_PAGE_COUNT          (2 * SZ_512K / FFA_PAGE_SIZE)
--
--/*
-- * Limits the number of shared buffers that guest can have at once. This
-- * is to prevent case, when guests trick XEN into exhausting its own
-- * memory by allocating many small buffers. This value has been chosen
-- * arbitrarily.
-- */
--#define FFA_MAX_SHM_COUNT               32
--
--/*
-- * The time we wait until trying to tear down a domain again if it was
-- * blocked initially.
-- */
--#define FFA_CTX_TEARDOWN_DELAY          SECONDS(1)
--
--/* FF-A-1.1-REL0 section 10.9.2 Memory region handle, page 167 */
--#define FFA_HANDLE_HYP_FLAG             BIT(63, ULL)
--#define FFA_HANDLE_INVALID              0xffffffffffffffffULL
--
--/*
-- * Memory attributes: Normal memory, Write-Back cacheable, Inner shareable
-- * Defined in FF-A-1.1-REL0 Table 10.18 at page 175.
-- */
--#define FFA_NORMAL_MEM_REG_ATTR         0x2fU
--/*
-- * Memory access permissions: Read-write
-- * Defined in FF-A-1.1-REL0 Table 10.15 at page 168.
-- */
--#define FFA_MEM_ACC_RW                  0x2U
--
--/* FF-A-1.1-REL0 section 10.11.4 Flags usage, page 184-187 */
--/* Clear memory before mapping in receiver */
--#define FFA_MEMORY_REGION_FLAG_CLEAR            BIT(0, U)
--/* Relayer may time slice this operation */
--#define FFA_MEMORY_REGION_FLAG_TIME_SLICE       BIT(1, U)
--/* Clear memory after receiver relinquishes it */
--#define FFA_MEMORY_REGION_FLAG_CLEAR_RELINQUISH BIT(2, U)
--/* Share memory transaction */
--#define FFA_MEMORY_REGION_TRANSACTION_TYPE_SHARE (1U << 3)
--
--/*
-- * Flags and field values used for the MSG_SEND_DIRECT_REQ/RESP:
-- * BIT(31): Framework or partition message
-- * BIT(7-0): Message type for frameworks messages
-- */
--#define FFA_MSG_FLAG_FRAMEWORK          BIT(31, U)
--#define FFA_MSG_TYPE_MASK               0xFFU;
--#define FFA_MSG_PSCI                    0x0U
--#define FFA_MSG_SEND_VM_CREATED         0x4U
--#define FFA_MSG_RESP_VM_CREATED         0x5U
--#define FFA_MSG_SEND_VM_DESTROYED       0x6U
--#define FFA_MSG_RESP_VM_DESTROYED       0x7U
--
--/*
-- * Flags to determine partition properties in FFA_PARTITION_INFO_GET return
-- * message:
-- * BIT(0): Supports receipt of direct requests
-- * BIT(1): Can send direct requests
-- * BIT(2): Can send and receive indirect messages
-- * BIT(3): Supports receipt of notifications
-- * BIT(4-5): Partition ID is a PE endpoint ID
-- * BIT(6): Partition must be informed about each VM that is created by
-- *         the Hypervisor
-- * BIT(7): Partition must be informed about each VM that is destroyed by
-- *         the Hypervisor
-- * BIT(8): Partition runs in the AArch64 execution state else AArch32
-- *         execution state
-- */
--#define FFA_PART_PROP_DIRECT_REQ_RECV   BIT(0, U)
--#define FFA_PART_PROP_DIRECT_REQ_SEND   BIT(1, U)
--#define FFA_PART_PROP_INDIRECT_MSGS     BIT(2, U)
--#define FFA_PART_PROP_RECV_NOTIF        BIT(3, U)
--#define FFA_PART_PROP_IS_TYPE_MASK      (3U << 4)
--#define FFA_PART_PROP_IS_PE_ID          (0U << 4)
--#define FFA_PART_PROP_IS_SEPID_INDEP    (1U << 4)
--#define FFA_PART_PROP_IS_SEPID_DEP      (2U << 4)
--#define FFA_PART_PROP_IS_AUX_ID         (3U << 4)
--#define FFA_PART_PROP_NOTIF_CREATED     BIT(6, U)
--#define FFA_PART_PROP_NOTIF_DESTROYED   BIT(7, U)
--#define FFA_PART_PROP_AARCH64_STATE     BIT(8, U)
--
--/*
-- * Flag used as parameter to FFA_PARTITION_INFO_GET to return partition
-- * count only.
-- */
--#define FFA_PARTITION_INFO_GET_COUNT_FLAG BIT(0, U)
--
--/* Function IDs */
--#define FFA_ERROR                       0x84000060U
--#define FFA_SUCCESS_32                  0x84000061U
--#define FFA_SUCCESS_64                  0xC4000061U
--#define FFA_INTERRUPT                   0x84000062U
--#define FFA_VERSION                     0x84000063U
--#define FFA_FEATURES                    0x84000064U
--#define FFA_RX_ACQUIRE                  0x84000084U
--#define FFA_RX_RELEASE                  0x84000065U
--#define FFA_RXTX_MAP_32                 0x84000066U
--#define FFA_RXTX_MAP_64                 0xC4000066U
--#define FFA_RXTX_UNMAP                  0x84000067U
--#define FFA_PARTITION_INFO_GET          0x84000068U
--#define FFA_ID_GET                      0x84000069U
--#define FFA_SPM_ID_GET                  0x84000085U
--#define FFA_MSG_WAIT                    0x8400006BU
--#define FFA_MSG_YIELD                   0x8400006CU
--#define FFA_RUN                         0x8400006DU
--#define FFA_MSG_SEND2                   0x84000086U
--#define FFA_MSG_SEND_DIRECT_REQ_32      0x8400006FU
--#define FFA_MSG_SEND_DIRECT_REQ_64      0xC400006FU
--#define FFA_MSG_SEND_DIRECT_RESP_32     0x84000070U
--#define FFA_MSG_SEND_DIRECT_RESP_64     0xC4000070U
--#define FFA_MEM_DONATE_32               0x84000071U
--#define FFA_MEM_DONATE_64               0xC4000071U
--#define FFA_MEM_LEND_32                 0x84000072U
--#define FFA_MEM_LEND_64                 0xC4000072U
--#define FFA_MEM_SHARE_32                0x84000073U
--#define FFA_MEM_SHARE_64                0xC4000073U
--#define FFA_MEM_RETRIEVE_REQ_32         0x84000074U
--#define FFA_MEM_RETRIEVE_REQ_64         0xC4000074U
--#define FFA_MEM_RETRIEVE_RESP           0x84000075U
--#define FFA_MEM_RELINQUISH              0x84000076U
--#define FFA_MEM_RECLAIM                 0x84000077U
--#define FFA_MEM_FRAG_RX                 0x8400007AU
--#define FFA_MEM_FRAG_TX                 0x8400007BU
--#define FFA_MSG_SEND                    0x8400006EU
--#define FFA_MSG_POLL                    0x8400006AU
-+#include "ffa_private.h"
+ #include "ffa_private.h"
  
- /*
-  * Structs below ending with _1_0 are defined in FF-A-1.0-REL and
-@@ -382,39 +185,6 @@ struct ffa_endpoint_rxtx_descriptor_1_1 {
-     uint32_t tx_region_offs;
- };
- 
--struct ffa_ctx {
--    void *rx;
--    const void *tx;
--    struct page_info *rx_pg;
--    struct page_info *tx_pg;
--    /* Number of 4kB pages in each of rx/rx_pg and tx/tx_pg */
--    unsigned int page_count;
--    /* FF-A version used by the guest */
--    uint32_t guest_vers;
--    bool rx_is_free;
--    /* Used shared memory objects, struct ffa_shm_mem */
--    struct list_head shm_list;
--    /* Number of allocated shared memory object */
--    unsigned int shm_count;
--    /*
--     * tx_lock is used to serialize access to tx
--     * rx_lock is used to serialize access to rx
--     * lock is used for the rest in this struct
--     */
--    spinlock_t tx_lock;
--    spinlock_t rx_lock;
--    spinlock_t lock;
--    /* Used if domain can't be torn down immediately */
--    struct domain *teardown_d;
--    struct list_head teardown_list;
--    s_time_t teardown_expire;
--    /*
--     * Used for ffa_domain_teardown() to keep track of which SPs should be
--     * notified that this guest is being destroyed.
--     */
--    unsigned long vm_destroy_bitmap[];
+-/*
+- * Structs below ending with _1_0 are defined in FF-A-1.0-REL and
+- * structs ending with _1_1 are defined in FF-A-1.1-REL0.
+- */
+-
+-/* Endpoint RX/TX descriptor */
+-struct ffa_endpoint_rxtx_descriptor_1_0 {
+-    uint16_t sender_id;
+-    uint16_t reserved;
+-    uint32_t rx_range_count;
+-    uint32_t tx_range_count;
 -};
 -
- struct ffa_shm_mem {
-     struct list_head list;
-     uint16_t sender_id;
-@@ -473,40 +243,6 @@ static bool ffa_get_version(uint32_t *vers)
-     return true;
+-struct ffa_endpoint_rxtx_descriptor_1_1 {
+-    uint16_t sender_id;
+-    uint16_t reserved;
+-    uint32_t rx_region_offs;
+-    uint32_t tx_region_offs;
+-};
+-
+ /* Negotiated FF-A version to use with the SPMC */
+ static uint32_t __ro_after_init ffa_version;
+ 
+@@ -145,12 +125,6 @@ static bool check_mandatory_feature(uint32_t id)
+     return !ret;
  }
  
--static int32_t ffa_get_ret_code(const struct arm_smccc_1_2_regs *resp)
+-static int32_t ffa_rxtx_map(paddr_t tx_addr, paddr_t rx_addr,
+-                            uint32_t page_count)
 -{
--    switch ( resp->a0 )
--    {
--    case FFA_ERROR:
--        if ( resp->a2 )
--            return resp->a2;
--        else
--            return FFA_RET_NOT_SUPPORTED;
--    case FFA_SUCCESS_32:
--    case FFA_SUCCESS_64:
--        return FFA_RET_OK;
--    default:
--        return FFA_RET_NOT_SUPPORTED;
--    }
--}
--
--static int32_t ffa_simple_call(uint32_t fid, register_t a1, register_t a2,
--                               register_t a3, register_t a4)
--{
--    const struct arm_smccc_1_2_regs arg = {
--        .a0 = fid,
--        .a1 = a1,
--        .a2 = a2,
--        .a3 = a3,
--        .a4 = a4,
--    };
--    struct arm_smccc_1_2_regs resp;
--
--    arm_smccc_1_2_smc(&arg, &resp);
--
--    return ffa_get_ret_code(&resp);
--}
--
- static int32_t ffa_features(uint32_t id)
- {
-     return ffa_simple_call(FFA_FEATURES, id, 0, 0, 0);
-@@ -654,38 +390,6 @@ static int32_t ffa_direct_req_send_vm(uint16_t sp_id, uint16_t vm_id,
-     return res;
- }
- 
--static uint16_t ffa_get_vm_id(const struct domain *d)
--{
--    /* +1 since 0 is reserved for the hypervisor in FF-A */
--    return d->domain_id + 1;
--}
--
--static void ffa_set_regs(struct cpu_user_regs *regs, register_t v0,
--                         register_t v1, register_t v2, register_t v3,
--                         register_t v4, register_t v5, register_t v6,
--                         register_t v7)
--{
--        set_user_reg(regs, 0, v0);
--        set_user_reg(regs, 1, v1);
--        set_user_reg(regs, 2, v2);
--        set_user_reg(regs, 3, v3);
--        set_user_reg(regs, 4, v4);
--        set_user_reg(regs, 5, v5);
--        set_user_reg(regs, 6, v6);
--        set_user_reg(regs, 7, v7);
--}
--
--static void ffa_set_regs_error(struct cpu_user_regs *regs, uint32_t error_code)
--{
--    ffa_set_regs(regs, FFA_ERROR, 0, error_code, 0, 0, 0, 0, 0);
--}
--
--static void ffa_set_regs_success(struct cpu_user_regs *regs, uint32_t w2,
--                             uint32_t w3)
--{
--    ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, 0, 0, 0, 0);
+-    return ffa_simple_call(FFA_RXTX_MAP_64, tx_addr, rx_addr, page_count, 0);
 -}
 -
  static void handle_version(struct cpu_user_regs *regs)
  {
      struct domain *d = current->domain;
+@@ -166,127 +140,6 @@ static void handle_version(struct cpu_user_regs *regs)
+     ffa_set_regs(regs, vers, 0, 0, 0, 0, 0, 0, 0);
+ }
+ 
+-static uint32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
+-				    register_t rx_addr, uint32_t page_count)
+-{
+-    uint32_t ret = FFA_RET_INVALID_PARAMETERS;
+-    struct domain *d = current->domain;
+-    struct ffa_ctx *ctx = d->arch.tee;
+-    struct page_info *tx_pg;
+-    struct page_info *rx_pg;
+-    p2m_type_t t;
+-    void *rx;
+-    void *tx;
+-
+-    if ( !smccc_is_conv_64(fid) )
+-    {
+-        /*
+-         * Calls using the 32-bit calling convention must ignore the upper
+-         * 32 bits in the argument registers.
+-         */
+-        tx_addr &= UINT32_MAX;
+-        rx_addr &= UINT32_MAX;
+-    }
+-
+-    if ( page_count > FFA_MAX_RXTX_PAGE_COUNT )
+-    {
+-        printk(XENLOG_ERR "ffa: RXTX_MAP: error: %u pages requested (limit %u)\n",
+-               page_count, FFA_MAX_RXTX_PAGE_COUNT);
+-        return FFA_RET_INVALID_PARAMETERS;
+-    }
+-
+-    /* Already mapped */
+-    if ( ctx->rx )
+-        return FFA_RET_DENIED;
+-
+-    tx_pg = get_page_from_gfn(d, gfn_x(gaddr_to_gfn(tx_addr)), &t, P2M_ALLOC);
+-    if ( !tx_pg )
+-        return FFA_RET_INVALID_PARAMETERS;
+-
+-    /* Only normal RW RAM for now */
+-    if ( t != p2m_ram_rw )
+-        goto err_put_tx_pg;
+-
+-    rx_pg = get_page_from_gfn(d, gfn_x(gaddr_to_gfn(rx_addr)), &t, P2M_ALLOC);
+-    if ( !tx_pg )
+-        goto err_put_tx_pg;
+-
+-    /* Only normal RW RAM for now */
+-    if ( t != p2m_ram_rw )
+-        goto err_put_rx_pg;
+-
+-    tx = __map_domain_page_global(tx_pg);
+-    if ( !tx )
+-        goto err_put_rx_pg;
+-
+-    rx = __map_domain_page_global(rx_pg);
+-    if ( !rx )
+-        goto err_unmap_tx;
+-
+-    ctx->rx = rx;
+-    ctx->tx = tx;
+-    ctx->rx_pg = rx_pg;
+-    ctx->tx_pg = tx_pg;
+-    ctx->page_count = page_count;
+-    ctx->rx_is_free = true;
+-    return FFA_RET_OK;
+-
+-err_unmap_tx:
+-    unmap_domain_page_global(tx);
+-err_put_rx_pg:
+-    put_page(rx_pg);
+-err_put_tx_pg:
+-    put_page(tx_pg);
+-
+-    return ret;
+-}
+-
+-static void rxtx_unmap(struct ffa_ctx *ctx)
+-{
+-    unmap_domain_page_global(ctx->rx);
+-    unmap_domain_page_global(ctx->tx);
+-    put_page(ctx->rx_pg);
+-    put_page(ctx->tx_pg);
+-    ctx->rx = NULL;
+-    ctx->tx = NULL;
+-    ctx->rx_pg = NULL;
+-    ctx->tx_pg = NULL;
+-    ctx->page_count = 0;
+-    ctx->rx_is_free = false;
+-}
+-
+-static uint32_t ffa_handle_rxtx_unmap(void)
+-{
+-    struct domain *d = current->domain;
+-    struct ffa_ctx *ctx = d->arch.tee;
+-
+-    if ( !ctx->rx )
+-        return FFA_RET_INVALID_PARAMETERS;
+-
+-    rxtx_unmap(ctx);
+-
+-    return FFA_RET_OK;
+-}
+-
+-static int32_t ffa_handle_rx_release(void)
+-{
+-    int32_t ret = FFA_RET_DENIED;
+-    struct domain *d = current->domain;
+-    struct ffa_ctx *ctx = d->arch.tee;
+-
+-    if ( !spin_trylock(&ctx->rx_lock) )
+-        return FFA_RET_BUSY;
+-
+-    if ( !ctx->page_count || ctx->rx_is_free )
+-        goto out;
+-    ret = FFA_RET_OK;
+-    ctx->rx_is_free = true;
+-out:
+-    spin_unlock(&ctx->rx_lock);
+-
+-    return ret;
+-}
+-
+ static void handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
+ {
+     struct arm_smccc_1_2_regs arg = { .a0 = fid, };
+@@ -522,8 +375,7 @@ static int ffa_domain_teardown(struct domain *d)
+     if ( !ctx )
+         return 0;
+ 
+-    if ( ctx->rx )
+-        rxtx_unmap(ctx);
++    ffa_rxtx_domain_destroy(d);
+ 
+     ffa_domain_teardown_continue(ctx, true /* first_time */);
+ 
+@@ -538,7 +390,6 @@ static int ffa_relinquish_resources(struct domain *d)
+ static bool ffa_probe(void)
+ {
+     uint32_t vers;
+-    int e;
+     unsigned int major_vers;
+     unsigned int minor_vers;
+ 
+@@ -596,36 +447,21 @@ static bool ffa_probe(void)
+          !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
+         return false;
+ 
+-    ffa_rx = alloc_xenheap_pages(get_order_from_pages(FFA_RXTX_PAGE_COUNT), 0);
+-    if ( !ffa_rx )
++    if ( !ffa_rxtx_init() )
+         return false;
+ 
+-    ffa_tx = alloc_xenheap_pages(get_order_from_pages(FFA_RXTX_PAGE_COUNT), 0);
+-    if ( !ffa_tx )
+-        goto err_free_ffa_rx;
+-
+-    e = ffa_rxtx_map(__pa(ffa_tx), __pa(ffa_rx), FFA_RXTX_PAGE_COUNT);
+-    if ( e )
+-    {
+-        printk(XENLOG_ERR "ffa: Failed to map rxtx: error %d\n", e);
+-        goto err_free_ffa_tx;
+-    }
+     ffa_version = vers;
+ 
+     if ( !ffa_partinfo_init() )
+-        goto err_free_ffa_tx;
++        goto err_rxtx_destroy;
+ 
+     INIT_LIST_HEAD(&ffa_teardown_head);
+     init_timer(&ffa_teardown_timer, ffa_teardown_timer_callback, NULL, 0);
+ 
+     return true;
+ 
+-err_free_ffa_tx:
+-    free_xenheap_pages(ffa_tx, 0);
+-    ffa_tx = NULL;
+-err_free_ffa_rx:
+-    free_xenheap_pages(ffa_rx, 0);
+-    ffa_rx = NULL;
++err_rxtx_destroy:
++    ffa_rxtx_destroy();
+     ffa_version = 0;
+ 
+     return false;
 diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-new file mode 100644
-index 000000000000..8352b6b55a9a
---- /dev/null
+index 6b32b69cfe90..98236cbf14a3 100644
+--- a/xen/arch/arm/tee/ffa_private.h
 +++ b/xen/arch/arm/tee/ffa_private.h
-@@ -0,0 +1,318 @@
+@@ -263,6 +263,13 @@ int32_t ffa_handle_partition_info_get(uint32_t w1, uint32_t w2, uint32_t w3,
+                                       uint32_t w4, uint32_t w5, uint32_t *count,
+                                       uint32_t *fpi_size);
+ 
++bool ffa_rxtx_init(void);
++void ffa_rxtx_destroy(void);
++void ffa_rxtx_domain_destroy(struct domain *d);
++uint32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
++			     register_t rx_addr, uint32_t page_count);
++uint32_t ffa_handle_rxtx_unmap(void);
++int32_t ffa_handle_rx_release(void);
+ 
+ static inline uint16_t ffa_get_vm_id(const struct domain *d)
+ {
+diff --git a/xen/arch/arm/tee/ffa_rxtx.c b/xen/arch/arm/tee/ffa_rxtx.c
+new file mode 100644
+index 000000000000..661764052e67
+--- /dev/null
++++ b/xen/arch/arm/tee/ffa_rxtx.c
+@@ -0,0 +1,216 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Copyright (C) 2023  Linaro Limited
++ * Copyright (C) 2024  Linaro Limited
 + */
-+
-+#ifndef __FFA_PRIVATE_H__
-+#define __FFA_PRIVATE_H__
 +
 +#include <xen/const.h>
++#include <xen/domain_page.h>
++#include <xen/mm.h>
 +#include <xen/sizes.h>
 +#include <xen/types.h>
-+#include <xen/mm.h>
-+#include <xen/list.h>
-+#include <xen/spinlock.h>
-+#include <xen/sched.h>
-+#include <xen/time.h>
 +
-+/* Error codes */
-+#define FFA_RET_OK                      0
-+#define FFA_RET_NOT_SUPPORTED           -1
-+#define FFA_RET_INVALID_PARAMETERS      -2
-+#define FFA_RET_NO_MEMORY               -3
-+#define FFA_RET_BUSY                    -4
-+#define FFA_RET_INTERRUPTED             -5
-+#define FFA_RET_DENIED                  -6
-+#define FFA_RET_RETRY                   -7
-+#define FFA_RET_ABORTED                 -8
++#include <asm/smccc.h>
++#include <asm/regs.h>
 +
-+/* FFA_VERSION helpers */
-+#define FFA_VERSION_MAJOR_SHIFT         16U
-+#define FFA_VERSION_MAJOR_MASK          0x7FFFU
-+#define FFA_VERSION_MINOR_SHIFT         0U
-+#define FFA_VERSION_MINOR_MASK          0xFFFFU
-+#define MAKE_FFA_VERSION(major, minor)  \
-+        ((((major) & FFA_VERSION_MAJOR_MASK) << FFA_VERSION_MAJOR_SHIFT) | \
-+         ((minor) & FFA_VERSION_MINOR_MASK))
++#include "ffa_private.h"
 +
-+#define FFA_VERSION_1_0         MAKE_FFA_VERSION(1, 0)
-+#define FFA_VERSION_1_1         MAKE_FFA_VERSION(1, 1)
-+/* The minimal FF-A version of the SPMC that can be supported */
-+#define FFA_MIN_SPMC_VERSION    FFA_VERSION_1_1
-+
-+/*
-+ * This is the version we want to use in communication with guests and SPs.
-+ * During negotiation with a guest or a SP we may need to lower it for
-+ * that particular guest or SP.
-+ */
-+#define FFA_MY_VERSION_MAJOR    1U
-+#define FFA_MY_VERSION_MINOR    1U
-+#define FFA_MY_VERSION          MAKE_FFA_VERSION(FFA_MY_VERSION_MAJOR, \
-+                                                 FFA_MY_VERSION_MINOR)
-+
-+/*
-+ * The FF-A specification explicitly works with 4K pages as a measure of
-+ * memory size, for example, FFA_RXTX_MAP takes one parameter "RX/TX page
-+ * count" which is the number of contiguous 4K pages allocated. Xen may use
-+ * a different page size depending on the configuration to avoid confusion
-+ * with PAGE_SIZE use a special define when it's a page size as in the FF-A
-+ * specification.
-+ */
-+#define FFA_PAGE_SIZE                   SZ_4K
-+
-+/*
-+ * The number of pages used for each of the RX and TX buffers shared with
-+ * the SPMC.
-+ */
-+#define FFA_RXTX_PAGE_COUNT             1
-+
-+/*
-+ * Limit the number of pages RX/TX buffers guests can map.
-+ * TODO support a larger number.
-+ */
-+#define FFA_MAX_RXTX_PAGE_COUNT         1
-+
-+/*
-+ * Limit for shared buffer size. Please note that this define limits
-+ * number of pages.
-+ *
-+ * FF-A doesn't have any direct requirements on GlobalPlatform or vice
-+ * versa, but an implementation can very well use FF-A in order to provide
-+ * a GlobalPlatform interface on top.
-+ *
-+ * Global Platform specification for TEE requires that any TEE
-+ * implementation should allow to share buffers with size of at least
-+ * 512KB, defined in TEEC-1.0C page 24, Table 4-1,
-+ * TEEC_CONFIG_SHAREDMEM_MAX_SIZE.
-+ * Due to overhead which can be hard to predict exactly, double this number
-+ * to give a safe margin.
-+ */
-+#define FFA_MAX_SHM_PAGE_COUNT          (2 * SZ_512K / FFA_PAGE_SIZE)
-+
-+/*
-+ * Limits the number of shared buffers that guest can have at once. This
-+ * is to prevent case, when guests trick XEN into exhausting its own
-+ * memory by allocating many small buffers. This value has been chosen
-+ * arbitrarily.
-+ */
-+#define FFA_MAX_SHM_COUNT               32
-+
-+/*
-+ * The time we wait until trying to tear down a domain again if it was
-+ * blocked initially.
-+ */
-+#define FFA_CTX_TEARDOWN_DELAY          SECONDS(1)
-+
-+/* FF-A-1.1-REL0 section 10.9.2 Memory region handle, page 167 */
-+#define FFA_HANDLE_HYP_FLAG             BIT(63, ULL)
-+#define FFA_HANDLE_INVALID              0xffffffffffffffffULL
-+
-+/*
-+ * Memory attributes: Normal memory, Write-Back cacheable, Inner shareable
-+ * Defined in FF-A-1.1-REL0 Table 10.18 at page 175.
-+ */
-+#define FFA_NORMAL_MEM_REG_ATTR         0x2fU
-+/*
-+ * Memory access permissions: Read-write
-+ * Defined in FF-A-1.1-REL0 Table 10.15 at page 168.
-+ */
-+#define FFA_MEM_ACC_RW                  0x2U
-+
-+/* FF-A-1.1-REL0 section 10.11.4 Flags usage, page 184-187 */
-+/* Clear memory before mapping in receiver */
-+#define FFA_MEMORY_REGION_FLAG_CLEAR            BIT(0, U)
-+/* Relayer may time slice this operation */
-+#define FFA_MEMORY_REGION_FLAG_TIME_SLICE       BIT(1, U)
-+/* Clear memory after receiver relinquishes it */
-+#define FFA_MEMORY_REGION_FLAG_CLEAR_RELINQUISH BIT(2, U)
-+/* Share memory transaction */
-+#define FFA_MEMORY_REGION_TRANSACTION_TYPE_SHARE (1U << 3)
-+
-+/*
-+ * Flags and field values used for the MSG_SEND_DIRECT_REQ/RESP:
-+ * BIT(31): Framework or partition message
-+ * BIT(7-0): Message type for frameworks messages
-+ */
-+#define FFA_MSG_FLAG_FRAMEWORK          BIT(31, U)
-+#define FFA_MSG_TYPE_MASK               0xFFU;
-+#define FFA_MSG_PSCI                    0x0U
-+#define FFA_MSG_SEND_VM_CREATED         0x4U
-+#define FFA_MSG_RESP_VM_CREATED         0x5U
-+#define FFA_MSG_SEND_VM_DESTROYED       0x6U
-+#define FFA_MSG_RESP_VM_DESTROYED       0x7U
-+
-+/*
-+ * Flags to determine partition properties in FFA_PARTITION_INFO_GET return
-+ * message:
-+ * BIT(0): Supports receipt of direct requests
-+ * BIT(1): Can send direct requests
-+ * BIT(2): Can send and receive indirect messages
-+ * BIT(3): Supports receipt of notifications
-+ * BIT(4-5): Partition ID is a PE endpoint ID
-+ * BIT(6): Partition must be informed about each VM that is created by
-+ *         the Hypervisor
-+ * BIT(7): Partition must be informed about each VM that is destroyed by
-+ *         the Hypervisor
-+ * BIT(8): Partition runs in the AArch64 execution state else AArch32
-+ *         execution state
-+ */
-+#define FFA_PART_PROP_DIRECT_REQ_RECV   BIT(0, U)
-+#define FFA_PART_PROP_DIRECT_REQ_SEND   BIT(1, U)
-+#define FFA_PART_PROP_INDIRECT_MSGS     BIT(2, U)
-+#define FFA_PART_PROP_RECV_NOTIF        BIT(3, U)
-+#define FFA_PART_PROP_IS_TYPE_MASK      (3U << 4)
-+#define FFA_PART_PROP_IS_PE_ID          (0U << 4)
-+#define FFA_PART_PROP_IS_SEPID_INDEP    (1U << 4)
-+#define FFA_PART_PROP_IS_SEPID_DEP      (2U << 4)
-+#define FFA_PART_PROP_IS_AUX_ID         (3U << 4)
-+#define FFA_PART_PROP_NOTIF_CREATED     BIT(6, U)
-+#define FFA_PART_PROP_NOTIF_DESTROYED   BIT(7, U)
-+#define FFA_PART_PROP_AARCH64_STATE     BIT(8, U)
-+
-+/*
-+ * Flag used as parameter to FFA_PARTITION_INFO_GET to return partition
-+ * count only.
-+ */
-+#define FFA_PARTITION_INFO_GET_COUNT_FLAG BIT(0, U)
-+
-+/* Function IDs */
-+#define FFA_ERROR                       0x84000060U
-+#define FFA_SUCCESS_32                  0x84000061U
-+#define FFA_SUCCESS_64                  0xC4000061U
-+#define FFA_INTERRUPT                   0x84000062U
-+#define FFA_VERSION                     0x84000063U
-+#define FFA_FEATURES                    0x84000064U
-+#define FFA_RX_ACQUIRE                  0x84000084U
-+#define FFA_RX_RELEASE                  0x84000065U
-+#define FFA_RXTX_MAP_32                 0x84000066U
-+#define FFA_RXTX_MAP_64                 0xC4000066U
-+#define FFA_RXTX_UNMAP                  0x84000067U
-+#define FFA_PARTITION_INFO_GET          0x84000068U
-+#define FFA_ID_GET                      0x84000069U
-+#define FFA_SPM_ID_GET                  0x84000085U
-+#define FFA_MSG_WAIT                    0x8400006BU
-+#define FFA_MSG_YIELD                   0x8400006CU
-+#define FFA_RUN                         0x8400006DU
-+#define FFA_MSG_SEND2                   0x84000086U
-+#define FFA_MSG_SEND_DIRECT_REQ_32      0x8400006FU
-+#define FFA_MSG_SEND_DIRECT_REQ_64      0xC400006FU
-+#define FFA_MSG_SEND_DIRECT_RESP_32     0x84000070U
-+#define FFA_MSG_SEND_DIRECT_RESP_64     0xC4000070U
-+#define FFA_MEM_DONATE_32               0x84000071U
-+#define FFA_MEM_DONATE_64               0xC4000071U
-+#define FFA_MEM_LEND_32                 0x84000072U
-+#define FFA_MEM_LEND_64                 0xC4000072U
-+#define FFA_MEM_SHARE_32                0x84000073U
-+#define FFA_MEM_SHARE_64                0xC4000073U
-+#define FFA_MEM_RETRIEVE_REQ_32         0x84000074U
-+#define FFA_MEM_RETRIEVE_REQ_64         0xC4000074U
-+#define FFA_MEM_RETRIEVE_RESP           0x84000075U
-+#define FFA_MEM_RELINQUISH              0x84000076U
-+#define FFA_MEM_RECLAIM                 0x84000077U
-+#define FFA_MEM_FRAG_RX                 0x8400007AU
-+#define FFA_MEM_FRAG_TX                 0x8400007BU
-+#define FFA_MSG_SEND                    0x8400006EU
-+#define FFA_MSG_POLL                    0x8400006AU
-+
-+struct ffa_ctx {
-+    void *rx;
-+    const void *tx;
-+    struct page_info *rx_pg;
-+    struct page_info *tx_pg;
-+    /* Number of 4kB pages in each of rx/rx_pg and tx/tx_pg */
-+    unsigned int page_count;
-+    /* FF-A version used by the guest */
-+    uint32_t guest_vers;
-+    bool rx_is_free;
-+    /* Used shared memory objects, struct ffa_shm_mem */
-+    struct list_head shm_list;
-+    /* Number of allocated shared memory object */
-+    unsigned int shm_count;
-+    /*
-+     * tx_lock is used to serialize access to tx
-+     * rx_lock is used to serialize access to rx
-+     * lock is used for the rest in this struct
-+     */
-+    spinlock_t tx_lock;
-+    spinlock_t rx_lock;
-+    spinlock_t lock;
-+    /* Used if domain can't be torn down immediately */
-+    struct domain *teardown_d;
-+    struct list_head teardown_list;
-+    s_time_t teardown_expire;
-+    /*
-+     * Used for ffa_domain_teardown() to keep track of which SPs should be
-+     * notified that this guest is being destroyed.
-+     */
-+    unsigned long vm_destroy_bitmap[];
++/* Endpoint RX/TX descriptor defined in FF-A-1.0-REL */
++struct ffa_endpoint_rxtx_descriptor_1_0 {
++    uint16_t sender_id;
++    uint16_t reserved;
++    uint32_t rx_range_count;
++    uint32_t tx_range_count;
 +};
 +
-+static inline uint16_t ffa_get_vm_id(const struct domain *d)
-+{
-+    /* +1 since 0 is reserved for the hypervisor in FF-A */
-+    return d->domain_id + 1;
-+}
++/* Endpoint RX/TX descriptor defined in FF-A-1.1-REL0 */
++struct ffa_endpoint_rxtx_descriptor_1_1 {
++    uint16_t sender_id;
++    uint16_t reserved;
++    uint32_t rx_region_offs;
++    uint32_t tx_region_offs;
++};
 +
-+static inline void ffa_set_regs(struct cpu_user_regs *regs, register_t v0,
-+                                register_t v1, register_t v2, register_t v3,
-+                                register_t v4, register_t v5, register_t v6,
-+                                register_t v7)
++uint32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
++			     register_t rx_addr, uint32_t page_count)
 +{
-+        set_user_reg(regs, 0, v0);
-+        set_user_reg(regs, 1, v1);
-+        set_user_reg(regs, 2, v2);
-+        set_user_reg(regs, 3, v3);
-+        set_user_reg(regs, 4, v4);
-+        set_user_reg(regs, 5, v5);
-+        set_user_reg(regs, 6, v6);
-+        set_user_reg(regs, 7, v7);
-+}
++    uint32_t ret = FFA_RET_INVALID_PARAMETERS;
++    struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
++    struct page_info *tx_pg;
++    struct page_info *rx_pg;
++    p2m_type_t t;
++    void *rx;
++    void *tx;
 +
-+static inline void ffa_set_regs_error(struct cpu_user_regs *regs,
-+                                      uint32_t error_code)
-+{
-+    ffa_set_regs(regs, FFA_ERROR, 0, error_code, 0, 0, 0, 0, 0);
-+}
-+
-+static inline void ffa_set_regs_success(struct cpu_user_regs *regs,
-+                                        uint32_t w2, uint32_t w3)
-+{
-+    ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, 0, 0, 0, 0);
-+}
-+
-+static inline int32_t ffa_get_ret_code(const struct arm_smccc_1_2_regs *resp)
-+{
-+    switch ( resp->a0 )
++    if ( !smccc_is_conv_64(fid) )
 +    {
-+    case FFA_ERROR:
-+        if ( resp->a2 )
-+            return resp->a2;
-+        else
-+            return FFA_RET_NOT_SUPPORTED;
-+    case FFA_SUCCESS_32:
-+    case FFA_SUCCESS_64:
-+        return FFA_RET_OK;
-+    default:
-+        return FFA_RET_NOT_SUPPORTED;
++        /*
++         * Calls using the 32-bit calling convention must ignore the upper
++         * 32 bits in the argument registers.
++         */
++        tx_addr &= UINT32_MAX;
++        rx_addr &= UINT32_MAX;
 +    }
++
++    if ( page_count > FFA_MAX_RXTX_PAGE_COUNT )
++    {
++        printk(XENLOG_ERR "ffa: RXTX_MAP: error: %u pages requested (limit %u)\n",
++               page_count, FFA_MAX_RXTX_PAGE_COUNT);
++        return FFA_RET_INVALID_PARAMETERS;
++    }
++
++    /* Already mapped */
++    if ( ctx->rx )
++        return FFA_RET_DENIED;
++
++    tx_pg = get_page_from_gfn(d, gfn_x(gaddr_to_gfn(tx_addr)), &t, P2M_ALLOC);
++    if ( !tx_pg )
++        return FFA_RET_INVALID_PARAMETERS;
++
++    /* Only normal RW RAM for now */
++    if ( t != p2m_ram_rw )
++        goto err_put_tx_pg;
++
++    rx_pg = get_page_from_gfn(d, gfn_x(gaddr_to_gfn(rx_addr)), &t, P2M_ALLOC);
++    if ( !tx_pg )
++        goto err_put_tx_pg;
++
++    /* Only normal RW RAM for now */
++    if ( t != p2m_ram_rw )
++        goto err_put_rx_pg;
++
++    tx = __map_domain_page_global(tx_pg);
++    if ( !tx )
++        goto err_put_rx_pg;
++
++    rx = __map_domain_page_global(rx_pg);
++    if ( !rx )
++        goto err_unmap_tx;
++
++    ctx->rx = rx;
++    ctx->tx = tx;
++    ctx->rx_pg = rx_pg;
++    ctx->tx_pg = tx_pg;
++    ctx->page_count = page_count;
++    ctx->rx_is_free = true;
++    return FFA_RET_OK;
++
++err_unmap_tx:
++    unmap_domain_page_global(tx);
++err_put_rx_pg:
++    put_page(rx_pg);
++err_put_tx_pg:
++    put_page(tx_pg);
++
++    return ret;
 +}
 +
-+static inline int32_t ffa_simple_call(uint32_t fid, register_t a1,
-+                                      register_t a2, register_t a3,
-+                                      register_t a4)
++static void rxtx_unmap(struct ffa_ctx *ctx)
 +{
-+    const struct arm_smccc_1_2_regs arg = {
-+        .a0 = fid,
-+        .a1 = a1,
-+        .a2 = a2,
-+        .a3 = a3,
-+        .a4 = a4,
-+    };
-+    struct arm_smccc_1_2_regs resp;
-+
-+    arm_smccc_1_2_smc(&arg, &resp);
-+
-+    return ffa_get_ret_code(&resp);
++    unmap_domain_page_global(ctx->rx);
++    unmap_domain_page_global(ctx->tx);
++    put_page(ctx->rx_pg);
++    put_page(ctx->tx_pg);
++    ctx->rx = NULL;
++    ctx->tx = NULL;
++    ctx->rx_pg = NULL;
++    ctx->tx_pg = NULL;
++    ctx->page_count = 0;
++    ctx->rx_is_free = false;
 +}
 +
-+#endif /*__FFA_PRIVATE_H__*/
++uint32_t ffa_handle_rxtx_unmap(void)
++{
++    struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    if ( !ctx->rx )
++        return FFA_RET_INVALID_PARAMETERS;
++
++    rxtx_unmap(ctx);
++
++    return FFA_RET_OK;
++}
++
++int32_t ffa_handle_rx_release(void)
++{
++    int32_t ret = FFA_RET_DENIED;
++    struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    if ( !spin_trylock(&ctx->rx_lock) )
++        return FFA_RET_BUSY;
++
++    if ( !ctx->page_count || ctx->rx_is_free )
++        goto out;
++    ret = FFA_RET_OK;
++    ctx->rx_is_free = true;
++out:
++    spin_unlock(&ctx->rx_lock);
++
++    return ret;
++}
++
++static int32_t ffa_rxtx_map(paddr_t tx_addr, paddr_t rx_addr,
++                            uint32_t page_count)
++{
++    return ffa_simple_call(FFA_RXTX_MAP_64, tx_addr, rx_addr, page_count, 0);
++}
++
++static int32_t ffa_rxtx_unmap(void)
++{
++    return ffa_simple_call(FFA_RXTX_UNMAP, 0, 0, 0, 0);
++}
++
++void ffa_rxtx_domain_destroy(struct domain *d)
++{
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    if ( ctx->rx )
++        rxtx_unmap(ctx);
++}
++
++void ffa_rxtx_destroy(void)
++{
++    bool need_unmap = ffa_tx && ffa_rx;
++
++    if ( ffa_tx )
++    {
++        free_xenheap_pages(ffa_tx, 0);
++        ffa_tx = NULL;
++    }
++    if ( ffa_rx )
++    {
++        free_xenheap_pages(ffa_rx, 0);
++        ffa_rx = NULL;
++    }
++
++    if ( need_unmap )
++        ffa_rxtx_unmap();
++}
++
++bool ffa_rxtx_init(void)
++{
++    int e;
++
++    ffa_rx = alloc_xenheap_pages(get_order_from_pages(FFA_RXTX_PAGE_COUNT), 0);
++    if ( !ffa_rx )
++        return false;
++
++    ffa_tx = alloc_xenheap_pages(get_order_from_pages(FFA_RXTX_PAGE_COUNT), 0);
++    if ( !ffa_tx )
++        goto err;
++
++    e = ffa_rxtx_map(__pa(ffa_tx), __pa(ffa_rx), FFA_RXTX_PAGE_COUNT);
++    if ( e )
++    {
++        printk(XENLOG_ERR "ffa: Failed to map rxtx: error %d\n", e);
++        goto err;
++    }
++    return true;
++
++err:
++    ffa_rxtx_destroy();
++
++    return false;
++}
 -- 
 2.34.1
 
