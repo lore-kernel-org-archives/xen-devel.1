@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2933CD1287
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE7BDCD1283
 	for <xen-devel@archiver.kernel.org>; Tue, 26 Mar 2024 21:39:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.698208.1089666 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.698212.1089705 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpEVa-0005c4-Df; Tue, 26 Mar 2024 21:39:02 +0000
+	id 1rpEVg-0006Yt-On; Tue, 26 Mar 2024 21:39:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 698208.1089666; Tue, 26 Mar 2024 21:39:02 +0000
+Received: by outflank-mailman (output) from mailman id 698212.1089705; Tue, 26 Mar 2024 21:39:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpEVa-0005bx-Av; Tue, 26 Mar 2024 21:39:02 +0000
-Received: by outflank-mailman (input) for mailman id 698208;
- Tue, 26 Mar 2024 21:39:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rpEVg-0006XR-L2; Tue, 26 Mar 2024 21:39:08 +0000
+Received: by outflank-mailman (input) for mailman id 698212;
+ Tue, 26 Mar 2024 21:39:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qfY0=LA=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1rpEVZ-0005br-1O
- for xen-devel@lists.xenproject.org; Tue, 26 Mar 2024 21:39:01 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20600.outbound.protection.outlook.com
- [2a01:111:f403:2415::600])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 408339bb-ebb9-11ee-afe3-a90da7624cb6;
- Tue, 26 Mar 2024 22:38:59 +0100 (CET)
-Received: from SJ0PR13CA0089.namprd13.prod.outlook.com (2603:10b6:a03:2c4::34)
- by IA1PR12MB6652.namprd12.prod.outlook.com (2603:10b6:208:38a::10)
+ id 1rpEVe-0005qH-G8
+ for xen-devel@lists.xenproject.org; Tue, 26 Mar 2024 21:39:06 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20601.outbound.protection.outlook.com
+ [2a01:111:f403:2412::601])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 439217fb-ebb9-11ee-a1ef-f123f15fe8a2;
+ Tue, 26 Mar 2024 22:39:04 +0100 (CET)
+Received: from SJ0PR03CA0024.namprd03.prod.outlook.com (2603:10b6:a03:33a::29)
+ by CH2PR12MB4311.namprd12.prod.outlook.com (2603:10b6:610:a8::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.33; Tue, 26 Mar
- 2024 21:38:55 +0000
-Received: from SJ5PEPF000001D6.namprd05.prod.outlook.com
- (2603:10b6:a03:2c4:cafe::44) by SJ0PR13CA0089.outlook.office365.com
- (2603:10b6:a03:2c4::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.12 via Frontend
- Transport; Tue, 26 Mar 2024 21:38:55 +0000
+ 2024 21:39:00 +0000
+Received: from SJ5PEPF000001D7.namprd05.prod.outlook.com
+ (2603:10b6:a03:33a:cafe::47) by SJ0PR03CA0024.outlook.office365.com
+ (2603:10b6:a03:33a::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.13 via Frontend
+ Transport; Tue, 26 Mar 2024 21:39:00 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SJ5PEPF000001D6.mail.protection.outlook.com (10.167.242.58) with Microsoft
+ SJ5PEPF000001D7.mail.protection.outlook.com (10.167.242.59) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Tue, 26 Mar 2024 21:38:54 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ 15.20.7409.10 via Frontend Transport; Tue, 26 Mar 2024 21:39:00 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 26 Mar
- 2024 16:38:53 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 26 Mar
- 2024 14:38:52 -0700
+ 2024 16:38:58 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Tue, 26 Mar 2024 16:38:52 -0500
+ Transport; Tue, 26 Mar 2024 16:38:58 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 408339bb-ebb9-11ee-afe3-a90da7624cb6
+X-Inumbo-ID: 439217fb-ebb9-11ee-a1ef-f123f15fe8a2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Y4ukPyC5A00Oyk2ZaHpqKCu1UPS0pz4mWPU8f25UuQoYSuHxEN+9NAo+uUWX9cDT+we5OBOrC11Lar6RllwrddlPxeLt7hSa4amGAfMWHi+/GUY9B/uMp2Ehu9ffy6d0Px65CgBI6SjQ7Vzn+E2yvJY84LbIh3mBjh5hGBwxw293Ui81YFPqIrGd+GCmNvRlgih8j0XgXgwEVO7bb2P/gE+S2A+2kxKzvEQrsvEmfmYlRv+wXmANp9C6KB6E44s3mxYVUujJkHrjUrUPqiHpWJ18UkPDYvYqvuuie7lq8Ym5WgmriAFaPJBnpdMyYLMyYLwC/G28jxNZfT7oSLmR0g==
+ b=j/aUWTxxnB+4ADVXpIXQhAlyWQDDi4wtL8QXqIDF8pwuKEGwTOaN2U2q4UAWgGi+cvFvLcEtrSNH4ouJiZ6KMghTknMUo4Ze2y0GdiPDBFuikwXh6e7QEoR6iulDpy+jEDrHAY2JKvSFNZ9gitjoEKIM7AH+Y4a8ttIv9vCod61piz0ZMkN9jF6ZyKqnFustXBWVFfIP3wnV2hvr1KI9yHMpB6+3eP3+hNvzqxbieQq+szW+9tmEQux4KGIzSFyaWl1OgUO6kVuTegHqbKdtEgGd1Fd5Cdx384AbEQO+83WsC2D/ekkCEezcB9Vhg27g4V5FYn1Y5HHceqsYcUkZrg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LwtkrJN7ACGn2gJq6icIRADQJTBXKuFjDY6R+BJAPc0=;
- b=f3ASPla7EPbWmZzcMgx4MAiZ7jI18HmZ6ffgNmmCddJTu/wNEv9ETqPodbE5IfbKDlcQSV14p57TU0mHPv5BoTqmNogOsU31E+pFhYdrxcJQsa4yw1ptPvjNyswY/84UKjInvngd6EhCVtb+OBk63dMWBaLXPFrsXFhKmLiYyXyDL9havsJ9XuR/MwAo71a0SseKAMyxdX9u/swD3/yAUFthS+oAHE0QfFuL6OXWD1gkRa3zcbfLxMTeMXE9ffBMK57kicIm8buowWjqC5hDXAk1KkckLRe/N/RoEUVkp3ekDY6hIWlUV6c8e5pP74Qa+HdaHEU6DZ2jmvjSWTlWFg==
+ bh=sQPi9MnxIxYvNcw+aMSnS9BZzf8Q8kjV58jecRQgAtM=;
+ b=mMb9gnMVKCrlD2zrXMBwuW5D1fOxk45Yk/xVmVJDjxisS8dq0WlRxUP/5jfyF2lwskskoPlIe93bVIDRSLXZEanEOqmMtEqj/R5f+iF/vDKI4dmQPt3pQizTdL1UutWolWQWlmC+dOwP0RcG3UrjstVeVW4d9NwrhupKTzNDi7xwQ4REWiYgqxXL+njee0ZmGqt1iKEKTjymQRw7qfUB/x1zhep/XRfKzcrdE8Emvv1keaIDLGIQ6UUn6IQvAgopWcjZVN5JVk4wL0AWekQgrXtwbxtOrJVX56txr1p7OkPF2MB4aHyCEFVriQlifUUchap48ADAUlCxnG08jUdRPQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LwtkrJN7ACGn2gJq6icIRADQJTBXKuFjDY6R+BJAPc0=;
- b=bZfMD31N0bj2m+Px5wffwXfVO56CpL/XFdQ0Qqp7O88gnfU55yz7Klp24ytL041zhYi/ZYmDEtRG6JmVcXyBWEfA2yoe0rpI8db+Lo4aZ6xlyWb0pxCy1NR0T7kvU27znYdlyFFl3cv6k/tQVhKxOngoogodA9Az+B0TXAwm/5g=
+ bh=sQPi9MnxIxYvNcw+aMSnS9BZzf8Q8kjV58jecRQgAtM=;
+ b=ra1ACj2y/OKG+FBW7Op5nZew7G4bZFeh3BoL8xN+BNSLfVCWd3uvSm2Jy9qH0Yt5pH9Oa0mwh4PV20m1OTFkxjFQT653YkQwjUdrWOresDLyooY/u1NJ5O2ahxKIU4NPBiXNlEE3DVcSyMletC3W2Ilzdu5HBUceP8oJ+eNMAy4=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -91,93 +87,120 @@ From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Jason Andryuk <jason.andryuk@amd.com>, Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross
-	<jgross@suse.com>, Julien Grall <julien@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 0/6] x86/pvh: Support relocating dom0 kernel
-Date: Tue, 26 Mar 2024 17:38:41 -0400
-Message-ID: <20240326213847.3944-1-jason.andryuk@amd.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, Julien Grall
+	<julien@xen.org>
+Subject: [PATCH v5 3/6] tools: Move MB/GB() to common-macros.h
+Date: Tue, 26 Mar 2024 17:38:44 -0400
+Message-ID: <20240326213847.3944-4-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240326213847.3944-1-jason.andryuk@amd.com>
+References: <20240326213847.3944-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D6:EE_|IA1PR12MB6652:EE_
-X-MS-Office365-Filtering-Correlation-Id: df90bb95-5e46-486c-e398-08dc4ddd22b2
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D7:EE_|CH2PR12MB4311:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45580c16-8562-4a35-2c2e-08dc4ddd2641
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	sLaUO67LZjY/qrL/SDnRjHfHsHDs/7NZAkzLcwidNhc8kKR7jeq598A4vWN2bMsnpmnA2h44mQIhWHOfN1rKvWNbKzFlQ5Lj16mkkUNTEGCiFA0y8U/MBoV3GbRoVv6wI4QM2YQsSE8E+Y+EZZwFzAfGQ5qj7t6gM6wvUhfjHxVPj6s2i3lkHVgaNkRRc2SJaRykQn482hy4oWxAnEgCWVhBU/HDDl0mt5I2Xi14sJALEFWproqM1HYXHVGhgGn/ersEi4aJzVnZQgoVhpi9RaL2inWFGLKxUJHXJ+3kBpdwmILbeUlP6lHhQu5z8qpywXRkfR42zlAKF52Bpc3MNcry/AClvlGGJpIL04/yhsjnkkkUat5MzBFp7+rU+hBd+VSF7INsZjxhlVCzCgACOcsGxzdi1rq6UrE4p1l4phJGdKJ6c/1sUbsuwFz/UV3RTG7zZNom7Mxs4D7z6j0DK417qtLECPf8+Oijk7QA04nyKuUP4cqF69B5Fc9612CSxzluVRk9v24tTwkrhKIEK1CpIJD/8bvKt0ibuZtfPYhh7KOKGf612cA6CXAYNdGXiwDQraAUxQMD8uHjg3p3K3fwdLWJKIxjIyDrLtU6Alyj6RWmujUf2hcsuZ8/FZgbzf9GBCvhOytvVBr7Hi0XEAyA4uqz6YHZc1wNo6cAC7282YZ3Ip0ZZCMRXt4ctp+mzJcnVztfg0KNOGprD9J7ooVFJqfWPHUXjmfCgSmRxrMtub0K7Dnp8XxutgC5Jt3x
+	b2sMrpm8SgUg2h8oMvx7/yxjFe+H1fuXfBLhmSZzST9EcIYwajvyDmDXknr4jMCuWlLsjIe3w1N92gxDEUT4rWNGAUtGLjwuq1ff4Mt/iouXdTIEOkk2jgl7pmBZtWTaBIKI0Mh8uAPnS7C6mNEnE7ByDZzN/0pnsf/Br06zTdG2BeZO2Ku1N/+WRhrEDSc8vWmeT5hSGkZPg2gs1BzXNTWr00MWhfCBRLw8FwmQX+YTKn2+lF3z4eY7e3/JxpMHQQO+L4g7Sj77bnLp5UqFJpdNaO5ZWXGRalTv3NkLmDZzV3nNh5URIEjCwaZxJ+knZczBip8q31fxHjtKt4VnQ8DgPANSNJ6WKObnqU7GLwVVS/PnKN0fiMok7V0a+VC7eDCC3AzVDtEVgq4MckLSs9Sy4o8nhDW4oNozq+Hns4h5pFs6DiKK6636OoxnWmBEcmQLX2181wIbjXjKqdEhMkg+gkSr6tQqW3bdU2Jmn/2EgjvesB85umugxTJkvsYTefpPdkFbR/rf53KBkmp6utVi1nOItDsCz0QsbRUsI1UwV1xNq4mkuJn0hITpGMx5T38UEgEgkmZhIpT46c5tJ86Wdu9zspAKKvcgGzCacxDPQWIMh2rHzUsvQta7dLIdKWGpuI7UYi1Lw/xZk4dmv1jGvQ38kpfugvWFh8r3fEzS7cHbljwj49XkK55nKwiQ+tUKxkR3U4Pmaoj3TjKJbVhw1G2mSGknh4L5J+g5LpsycDAGGhLCtISQdb9Vff5l
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(376005)(82310400014)(36860700004)(1800799015);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(376005)(82310400014)(36860700004);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2024 21:38:54.2371
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2024 21:39:00.2340
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: df90bb95-5e46-486c-e398-08dc4ddd22b2
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45580c16-8562-4a35-2c2e-08dc4ddd2641
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001D6.namprd05.prod.outlook.com
+	SJ5PEPF000001D7.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6652
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4311
 
-Xen tries to load a PVH dom0 kernel at the fixed guest physical address
-from the elf headers.  For Linux, this defaults to 0x1000000 (16MB), but
-it can be configured.
+Consolidate to a single set of common macros for tools.
 
-Unfortunately there exist firmwares that have reserved regions at this
-address, so Xen fails to load the dom0 kernel since it's not RAM.
+MB() will gain another use in libelf, so this movement makes it
+available.
 
-The other issue is that the Linux PVH entry point is not
-position-independent.  It expects to run at the compiled
-CONFIG_PHYSICAL_ADDRESS.
+Requested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+v4:
+New
 
-This patch set expands the PVH dom0 builder to try to relocate the
-kernel if needed and possible.  XEN_ELFNOTE_PHYS32_RELOC is added for
-kernels to indicate they are relocatable and their acceptable address
-range and alignment.
+v5:
+Add Jan's R-b & Req-b
+---
+ tools/firmware/hvmloader/util.h         | 3 ---
+ tools/helpers/init-xenstore-domain.c    | 1 -
+ tools/include/xen-tools/common-macros.h | 4 ++++
+ tools/libs/light/libxl_internal.h       | 4 ----
+ 4 files changed, 4 insertions(+), 8 deletions(-)
 
-The first patch reverts "xen/x86: bzImage parse kernel_alignment" since
-the alignment will be specified by the ELF note.
-
-The second and third patches move MB/GB() to common-macros.h.
-
-The fourth patch expands ELF note printing beyond just printing
-integers and strings.
-
-The fifth patch expands specifies the Xen ELF Notes are x86-specific.
-
-The sixth patch expands the pvh dom0 kernel placement code.
-
-I'll post an additional patch showing the Linux changes to make PVH
-relocatable.
-
-Jason Andryuk (6):
-  Revert "xen/x86: bzImage parse kernel_alignment"
-  tools/init-xenstore-domain: Replace variable MB() usage
-  tools: Move MB/GB() to common-macros.h
-  libelf: Expand ELF note printing
-  xen/elfnote: Specify ELF Notes are x86-specific
-  x86/PVH: Support relocatable dom0 kernels
-
- tools/firmware/hvmloader/util.h         |   3 -
- tools/helpers/init-xenstore-domain.c    |  11 ++-
- tools/include/xen-tools/common-macros.h |   4 +
- tools/libs/light/libxl_internal.h       |   4 -
- xen/arch/x86/bzimage.c                  |   4 +-
- xen/arch/x86/hvm/dom0_build.c           | 104 +++++++++++++++++++++++-
- xen/arch/x86/include/asm/bzimage.h      |   2 +-
- xen/arch/x86/pv/dom0_build.c            |   2 +-
- xen/common/libelf/libelf-dominfo.c      |  99 ++++++++++++++++------
- xen/common/libelf/libelf-private.h      |   1 +
- xen/include/public/elfnote.h            |  18 +++-
- xen/include/xen/libelf.h                |   4 +
- 12 files changed, 213 insertions(+), 43 deletions(-)
-
+diff --git a/tools/firmware/hvmloader/util.h b/tools/firmware/hvmloader/util.h
+index 87be213dec..14078bde1e 100644
+--- a/tools/firmware/hvmloader/util.h
++++ b/tools/firmware/hvmloader/util.h
+@@ -38,9 +38,6 @@ void __bug(const char *file, int line) __attribute__((noreturn));
+ #define BUG() __bug(__FILE__, __LINE__)
+ #define BUG_ON(p) do { if (p) BUG(); } while (0)
+ 
+-#define MB(mb) (mb##ULL << 20)
+-#define GB(gb) (gb##ULL << 30)
+-
+ static inline int test_bit(unsigned int b, const void *p)
+ {
+     return !!(((const uint8_t *)p)[b>>3] & (1u<<(b&7)));
+diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
+index 5405842dfe..f38ba8d6b5 100644
+--- a/tools/helpers/init-xenstore-domain.c
++++ b/tools/helpers/init-xenstore-domain.c
+@@ -20,7 +20,6 @@
+ #include "init-dom-json.h"
+ 
+ #define LAPIC_BASE_ADDRESS  0xfee00000UL
+-#define GB(x)               ((uint64_t)x << 30)
+ 
+ static uint32_t domid = ~0;
+ static char *kernel;
+diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
+index 81fba2e9f5..07aed92684 100644
+--- a/tools/include/xen-tools/common-macros.h
++++ b/tools/include/xen-tools/common-macros.h
+@@ -91,6 +91,10 @@
+ #define __AC(X, Y)   (X ## Y)
+ #define _AC(X, Y)    __AC(X, Y)
+ 
++/* Size macros. */
++#define MB(_mb)     (_AC(_mb, ULL) << 20)
++#define GB(_gb)     (_AC(_gb, ULL) << 30)
++
+ #define get_unaligned_t(type, ptr) ({                               \
+     const struct { type x; } __packed *ptr_ = (typeof(ptr_))(ptr);  \
+     ptr_->x;                                                        \
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index 094d0df9b1..803dbc1a03 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -126,10 +126,6 @@
+ #define PVSHIM_BASENAME "xen-shim"
+ #define PVSHIM_CMDLINE "pv-shim console=xen,pv"
+ 
+-/* Size macros. */
+-#define MB(_mb)     (_AC(_mb, ULL) << 20)
+-#define GB(_gb)     (_AC(_gb, ULL) << 30)
+-
+ #define DIV_ROUNDUP(n, d) (((n) + (d) - 1) / (d))
+ 
+ #define LIBXL__LOGGING_ENABLED
 -- 
 2.44.0
 
