@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB5DC47DD9
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Mar 2024 17:28:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.698677.1090677 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DFF8C47DD9
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Mar 2024 18:14:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.698686.1090692 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpX4S-0005n1-I7; Wed, 27 Mar 2024 17:28:16 +0000
+	id 1rpXnR-0004wk-FX; Wed, 27 Mar 2024 18:14:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 698677.1090677; Wed, 27 Mar 2024 17:28:16 +0000
+Received: by outflank-mailman (output) from mailman id 698686.1090692; Wed, 27 Mar 2024 18:14:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpX4S-0005mu-FU; Wed, 27 Mar 2024 17:28:16 +0000
-Received: by outflank-mailman (input) for mailman id 698677;
- Wed, 27 Mar 2024 17:28:15 +0000
+	id 1rpXnR-0004vn-BG; Wed, 27 Mar 2024 18:14:45 +0000
+Received: by outflank-mailman (input) for mailman id 698686;
+ Wed, 27 Mar 2024 18:14:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=uZRd=LB=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1rpX4R-0005mo-1F
- for xen-devel@lists.xenproject.org; Wed, 27 Mar 2024 17:28:15 +0000
-Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=lSYu=LB=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
+ id 1rpXmv-0004pv-Ek
+ for xen-devel@lists.xenproject.org; Wed, 27 Mar 2024 18:14:13 +0000
+Received: from doppler.solinno.uk
+ (8.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.9.a.d.0.6.f.d.1.0.b.8.0.1.0.0.2.ip6.arpa
+ [2001:8b0:1df6:da9::18])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 621fe5ba-ec5f-11ee-a1ef-f123f15fe8a2;
- Wed, 27 Mar 2024 18:28:12 +0100 (CET)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.17.1/8.15.2) with ESMTPS id 42RHRvsx080337
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 27 Mar 2024 13:28:03 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.17.1/8.15.2/Submit) id 42RHRvFj080336;
- Wed, 27 Mar 2024 10:27:57 -0700 (PDT) (envelope-from ehem)
+ id cfe395f7-ec65-11ee-a1ef-f123f15fe8a2;
+ Wed, 27 Mar 2024 19:14:12 +0100 (CET)
+Received: from folly.solinno.co.uk (folly.dyn.solinno.co.uk [192.168.2.135])
+ by doppler.solinno.uk (Postfix) with ESMTPSA id B0F4B8009F;
+ Wed, 27 Mar 2024 18:14:11 +0000 (GMT)
+Received: by folly.solinno.co.uk (Postfix, from userid 1000)
+ id 86739202A8; Wed, 27 Mar 2024 18:14:11 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,90 +45,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 621fe5ba-ec5f-11ee-a1ef-f123f15fe8a2
-Date: Wed, 27 Mar 2024 10:27:57 -0700
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>,
-        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-        Wei Liu <wl@xen.org>, Kelly Choi <kelly.choi@cloud.com>
-Subject: Re: Serious AMD-Vi(?) issue
-Message-ID: <ZgRXHQpamLIdu7dk@mattapan.m5p.com>
-References: <ZbLDlRi0vctlhsNp@mattapan.m5p.com>
- <ZcqoVBnsgUJw8G0l@mattapan.m5p.com>
- <ZfiY7/FBTwPQlfYi@mattapan.m5p.com>
- <CAO-mL=xndFd7xTU4Q+9hjLL-7zqZUGjYcp3_REa6QqXvtyAEYg@mail.gmail.com>
- <Zf3aWXfCANR7zXj8@mattapan.m5p.com>
- <e9b1c9c4-523b-481b-946e-37c7c18ea1d2@suse.com>
- <ZgHwEGCsCLHiYU5J@mattapan.m5p.com>
+X-Inumbo-ID: cfe395f7-ec65-11ee-a1ef-f123f15fe8a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
+	s=mail; t=1711563251;
+	bh=JDIuy3KhnVNygJWUuL86c9BvLnjCSC0gyIjiqhIaOR4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=cwUuo4NJyABfEk6Zpckz7ZK35hiSzNFLUrnCwKZmyF6SYyGvbeQDYuJKy9/1jKrNg
+	 UbljzUuah9nj65NmAqNlxA3UBGPBPx4ZMFNFGWdBQBEbDxYXcLMjV+uTp34AH1+Pfp
+	 JDiHNMSniZw3roF9pEZJtJz2WZLZZ5FVq48wKz4M=
+From: leigh@solinno.co.uk
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	anthony.perard@citrix.com,
+	slack@rabbit.lu,
+	Leigh Brown <leigh@solinno.co.uk>
+Subject: [PATCH 3/6] tools/misc: xenwatchdogd: make functions static
+Date: Wed, 27 Mar 2024 18:13:50 +0000
+Message-Id: <20240327181353.10951-4-leigh@solinno.co.uk>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240327181353.10951-1-leigh@solinno.co.uk>
+References: <55416d60-cae7-4e79-8bde-bc07ee9e3830@suse.com>
+ <20240327181353.10951-1-leigh@solinno.co.uk>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZgHwEGCsCLHiYU5J@mattapan.m5p.com>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Mar 25, 2024 at 02:43:44PM -0700, Elliott Mitchell wrote:
-> On Mon, Mar 25, 2024 at 08:55:56AM +0100, Jan Beulich wrote:
-> > On 22.03.2024 20:22, Elliott Mitchell wrote:
-> > > On Fri, Mar 22, 2024 at 04:41:45PM +0000, Kelly Choi wrote:
-> > >>
-> > >> I can see you've recently engaged with our community with some issues you'd
-> > >> like help with.
-> > >> We love the fact you are participating in our project, however, our
-> > >> developers aren't able to help if you do not provide the specific details.
-> > > 
-> > > Please point to specific details which have been omitted.  Fairly little
-> > > data has been provided as fairly little data is available.  The primary
-> > > observation is large numbers of:
-> > > 
-> > > (XEN) AMD-Vi: IO_PAGE_FAULT: DDDD:bb:dd.f d0 addr ffffff???????000 flags 0x8 I
-> > > 
-> > > Lines in Xen's ring buffer.
-> > 
-> > Yet this is (part of) the problem: By providing only the messages that appear
-> > relevant to you, you imply that you know that no other message is in any way
-> > relevant. That's judgement you'd better leave to people actually trying to
-> > investigate. Unless of course you were proposing an actual code change, with
-> > suitable justification.
-> 
-> Honestly, I forgot about the very small number of messages from the SATA
-> subsystem.  The question of whether the current mitigation actions are
-> effective right now was a bigger issue.  As such monitoring `xl dmesg`
-> was a priority to looking at SATA messages which failed to reliably
-> indicate status.
-> 
-> I *thought* I would be able to retrieve those via other slow means, but a
-> different and possibly overlapping issue has shown up.  Unfortunately
-> this means those are no longer retrievable.   :-(
+From: Leigh Brown <leigh@solinno.co.uk>
 
-With some persistence I was able to retrieve them.  There are other
-pieces of software with worse UIs than Xen.
+Make all functions except main() static in xenwatchdogd.c.
+---
+ tools/misc/xenwatchdogd.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-> > In fact when running into trouble, the usual course of action would be to
-> > increase verbosity in both hypervisor and kernel, just to make sure no
-> > potentially relevant message is missed.
-> 
-> More/better information might have been obtained if I'd been engaged
-> earlier.
-
-This is still true, things are in full mitigation mode and I'll be
-quite unhappy to go back with experiments at this point.
-
-
-I now see why I left those out.  The messages from the SATA subsystem
-were from a kernel which a bad patch had leaked into a LTS branch.  Looks
-like the SATA subsystem was significantly broken and I'm unsure whether
-any useful information could be retrieved.  Notably there is quite a bit
-of noise from SATA devices not effected by this issue.
-
-Some of the messages /might/ be useful, but the amount of noise is quite
-high.  Do messages from a broken kernel interest you?
-
-
+diff --git a/tools/misc/xenwatchdogd.c b/tools/misc/xenwatchdogd.c
+index d4da0ad0b6..224753e824 100644
+--- a/tools/misc/xenwatchdogd.c
++++ b/tools/misc/xenwatchdogd.c
+@@ -15,7 +15,7 @@ xc_interface *h;
+ bool safeexit = false;
+ bool done = false;
+ 
+-void daemonize(void)
++static void daemonize(void)
+ {
+     switch (fork()) {
+     case -1:
+@@ -38,12 +38,12 @@ void daemonize(void)
+         err(EXIT_FAILURE, "reopen stderr");
+ }
+ 
+-void catch_exit(int sig)
++static void catch_exit(int sig)
+ {
+     done = true;
+ }
+ 
+-void catch_usr1(int sig)
++static void catch_usr1(int sig)
+ {
+     safeexit = true;
+     done = true;
 -- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
-
+2.39.2
 
 
