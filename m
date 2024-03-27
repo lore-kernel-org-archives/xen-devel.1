@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A14CC47DD9
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Mar 2024 21:55:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.698730.1090770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A4DECD1287
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Mar 2024 21:55:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.698733.1090801 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpbEj-0001dj-Jj; Wed, 27 Mar 2024 21:55:09 +0000
+	id 1rpbEq-0002NS-BO; Wed, 27 Mar 2024 21:55:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 698730.1090770; Wed, 27 Mar 2024 21:55:09 +0000
+Received: by outflank-mailman (output) from mailman id 698733.1090801; Wed, 27 Mar 2024 21:55:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpbEj-0001dc-Gw; Wed, 27 Mar 2024 21:55:09 +0000
-Received: by outflank-mailman (input) for mailman id 698730;
- Wed, 27 Mar 2024 21:55:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rpbEq-0002NK-6x; Wed, 27 Mar 2024 21:55:16 +0000
+Received: by outflank-mailman (input) for mailman id 698733;
+ Wed, 27 Mar 2024 21:55:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fWcJ=LB=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1rpbEi-0001dR-LR
- for xen-devel@lists.xenproject.org; Wed, 27 Mar 2024 21:55:08 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [2a01:111:f403:2417::600])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ab82006f-ec84-11ee-afe3-a90da7624cb6;
- Wed, 27 Mar 2024 22:55:07 +0100 (CET)
-Received: from BN8PR04CA0035.namprd04.prod.outlook.com (2603:10b6:408:70::48)
- by PH7PR12MB7453.namprd12.prod.outlook.com (2603:10b6:510:20a::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.30; Wed, 27 Mar
- 2024 21:55:03 +0000
-Received: from BN2PEPF000044AA.namprd04.prod.outlook.com
- (2603:10b6:408:70:cafe::52) by BN8PR04CA0035.outlook.office365.com
- (2603:10b6:408:70::48) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.13 via Frontend
- Transport; Wed, 27 Mar 2024 21:55:02 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN2PEPF000044AA.mail.protection.outlook.com (10.167.243.105) with Microsoft
+ id 1rpbEp-0002MB-F5
+ for xen-devel@lists.xenproject.org; Wed, 27 Mar 2024 21:55:15 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2416::600])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id af94aaf8-ec84-11ee-a1ef-f123f15fe8a2;
+ Wed, 27 Mar 2024 22:55:13 +0100 (CET)
+Received: from SJ0PR13CA0090.namprd13.prod.outlook.com (2603:10b6:a03:2c4::35)
+ by DM6PR12MB4329.namprd12.prod.outlook.com (2603:10b6:5:211::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.32; Wed, 27 Mar
+ 2024 21:55:09 +0000
+Received: from CY4PEPF0000EE37.namprd05.prod.outlook.com
+ (2603:10b6:a03:2c4:cafe::b4) by SJ0PR13CA0090.outlook.office365.com
+ (2603:10b6:a03:2c4::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.12 via Frontend
+ Transport; Wed, 27 Mar 2024 21:55:09 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CY4PEPF0000EE37.mail.protection.outlook.com (10.167.242.43) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Wed, 27 Mar 2024 21:55:02 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.7409.10 via Frontend Transport; Wed, 27 Mar 2024 21:55:08 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 27 Mar
- 2024 16:55:02 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 27 Mar
- 2024 16:55:01 -0500
+ 2024 16:55:07 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Wed, 27 Mar 2024 16:55:00 -0500
+ Transport; Wed, 27 Mar 2024 16:55:07 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,120 +61,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab82006f-ec84-11ee-afe3-a90da7624cb6
+X-Inumbo-ID: af94aaf8-ec84-11ee-a1ef-f123f15fe8a2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DFloiD0pFAPMy1HkCthm5GyPGjFVubBQFmDYcKWsgfboQuTXvsxWkfexWzko7mcFZeTh9jb0CKKygnNQadZQ5PzCeIpfGZ6gRxoxMhlzcQfIxlhOH7V3YkO+g051prS3acGX5t8SYeXE85mauDMMaBbpnDc7cgHDHh+B51BYO3F85HyFeXDz/pY9RMHYx4Ruk93Dwh2SAeeospxMcKjihI5c1Gwr3+nyxocawT59zCNwRBjhew7GmBMcATqeqYEzlY3P6NbidBWbhgLRRpscdhOOOwGYF6HuEz+VS/mNpcirpBkmrQZm7Y4gtfU5/JW2EwgvPpN04ZV13NqhYwvk1Q==
+ b=i1v4y8zPqYmpoxGgMlvyFZ7LJhvsNfHUFczFIJC7R7kcuaswSl/0pBProEuvBv59pTlqlYNHSOiCOPMazX9iEeKjEHkHLNhAM3m2kFmevr4y4nW4FHAOYm8sNg6u0XNWzgMs9j6DHmWr7zTgtW5M1nd1g4NMj+Mii4Y91QGoU/m5C5ByQ0q/N3BK2POrP2zgi1psljF28roSJeIttlVPeCxItWWTYUcMrvuanwAity422vCkHQZBQOxmMy7utMyQGD8fOADiYPNwzEdxqQy17wdKhrOUb/SwquqJP56WxPjLQAR4+DedXqUC7iwvtySaynevN7Ta8rwM1QbQYYCdjg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7JGDFLL2Mbk36fV41ml7871DsjzHeNM5Ecm0pDvDuaM=;
- b=E9A/+bOl5YE5Q8iEn86/S95OmJK5gM/IKtC6nXeNe8TaDIjctO6CDc0sPyZKd9G9845jr5+SIMV8gIU3N0fL0uvP2vwRdABXjPqj0U9lN54uOf71nMXaehB/dVzM5NtCqV45Y6yFybmJYIz6mhGycXTGfzY01P1QVsGt2WlCXQRwOOrEapIiJc45jtojZmZgwTod746k7ilm6tcnu6ec31qCj+94VEVno9IPhmeeiLUQI70PmlvUe86g1AoQsAmw+FTnAHCyZAVf4X+p5fg0+MACfau+JwJQb10p5i22nFF7Mkz4fzKVq94E637c98swF2+0UM8BRJeP/NqR3ubvaw==
+ bh=NCUNHAud3RKnNZN44YqJ/JNK6UfzaIxSGxEmG+Yk0iE=;
+ b=GKuitne/DQA2GsounsDhcMJyiaXCSth3u/eSivpsUgl1uWDF/BgcvkC5gs61t+vz5P8F17oYojUlo51rSFMKO/cFet4gqOOjps85266L2jzTJ09VZUPA+olC0/IwEEWTJFZSQM3BPHw+MeHJNoPsxHGd8w8nyMPGOSdRdfuRHCpFSChVGrbEg8a/E4hMwtuCqq1Xg3G1PaFKC2Ng6WWOGgnfXxUV+1NBnRwwNWsJPdhyPJWE1WHAQuQPYV03UCLw580hTe85sWVSB2efqVeO47PEEnkBvDISGv+6jxULfRKU2sSLCZ7x21LXw2c+g0Ygt+GB0neUHF+H+ViP7r+zvg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7JGDFLL2Mbk36fV41ml7871DsjzHeNM5Ecm0pDvDuaM=;
- b=hdVu0LKQAuq7/g3aKCbAbvbjdefPBK3aCNr+8TUBbLxqDcP32HdjimqkAf1X34Mh/dI0AzvZyEN4rBMywO91HScJwUoQGtGgLh7Y7HXGGLqFU80XR3YeU7Hhgud+4W85cVGvseIBxJ+WOKIKmiZf/tmppG3KAFmZMlPdy8gz9bc=
+ bh=NCUNHAud3RKnNZN44YqJ/JNK6UfzaIxSGxEmG+Yk0iE=;
+ b=P4eKQU41W01UYzvBF5z3aKMTMU63QZbvhdx2b9bnvpvt1q0jdpeUmPcyjSjRXUu5iFThMEz+amrSie508zAttnfZTW/ks+NI6c029HMaZniQA11I8oXAGMW0r+3/W7HSOmfYqDgDxKUXJ+FhaTeRzMjYtVI8taGPehvO/JEI9Fw=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 0/4] x86/pvh: Support relocating dom0 kernel
-Date: Wed, 27 Mar 2024 17:50:58 -0400
-Message-ID: <20240327215102.136001-1-jason.andryuk@amd.com>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>
+Subject: [PATCH v6 3/4] libelf: Store maximum PHDR p_align
+Date: Wed, 27 Mar 2024 17:51:01 -0400
+Message-ID: <20240327215102.136001-4-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240327215102.136001-1-jason.andryuk@amd.com>
+References: <20240327215102.136001-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
+Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044AA:EE_|PH7PR12MB7453:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1c9bd374-7da5-4b47-c9c7-08dc4ea88e16
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE37:EE_|DM6PR12MB4329:EE_
+X-MS-Office365-Filtering-Correlation-Id: db537cd5-42e1-425e-31b8-08dc4ea891d7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	6wuKSjbm38MKPAWQeLjRrdhTrj61vXp+ifHTWw4f6WGngaEu9rk5nxXWU+iCBAUz/uevR3QybvAc7XFGWML8lCeqHDpJDVXo+eOq+rvtvZW/XGHCHQT9GiI3mV5kVyv2qSdbHOao+KO9cpc3M8sMEIh51YXovLA9FRM0jsKxE9xj06CqzrVBIyuimnteUPvuoBTlIjLx/Go9hajU/Ynr+pvcH3XfFXKqvNw29XhET03Fmf16HSvgh2LEHxyiVbs0LR7qfuEzhK7MPUE4RTzlDUWVaoeaRGosIHgdgbL4MilNRCzz7rsfZpjrqD2MSUawtld0oeEKgoFV6HjvHFse0a0ly5f9KZvk0Mzlf+ZKYO3FP0Y5QCh8mKG+OQJ/WqSg/B8Lw9/Ve9UIv/lyk3nn7PUvgMObVKkMRY7ZaxPzlV8xXc7+fbD64bd2E8XvBwaRrlt+Es/vd7Ts8rxIn+ElqEjobztfm85RBUupZQBPm3zUYJVdvcuZCAXEZoakD16RStYNL1Bo2rp5cjPya3J3nvEbJuSQtWufGhQoGiRXRi8vkuECB4BEZ8q7zOo2hiGZZXPF2+YwKMvy+I/a4JYarRjPaodbV9FdI9S6GclCtpH5tqOyZP8WiOu/n2ZlszqzTQfDhwMyar5sWRqA4jU82B4g9eFV7LeWkwAawRCpQCV5KXUyHVPkWM6gOxSsH01DxqmGWhGPOjC+1YzEaCKo50aLbmZURw0Uq/H8Vym8FgFHcLdCOIGp3Hs0bIO5AQDx
+	A53CxzDskgTzRsYz/UFZ3gpBXN3b7heHERXVv3ADATSbaQTS7SuCt0mdFPPKYdI1C7LpzOmvrquhQ7G+c05NmF4fyxkyJGkk6LHQ84/MZiTVgYDbAIaRpOJp1RD76WXw0nQoMpZ264pzKlEb36Hm3gDu+seN0AP0gEkPAKUxyuhlbp/pxGQxT+oyCiqf+NrdZ8M8TqRzM+FM0l6WIBxT/8UE6wTai71kxkh4Gn7OGhLigPiSymBt0jiphiIHVak0BSHLKXCsDo/pCM2g0rKN+APW+fvBlPi8KvcbCd/VGRcSk4PjABLFlzzsTJECaOFdcY6DYsQT3GICTX99n3kuH3r7Sl5AGEdMeYDh1WnSj43pw9hiHdI0uXuIiZE50WVUAo/vX+FoOvZRmWItHlD3glxyLdWnP1FFyUg99Uwtpx3evYCHkSUueadUdfzR0HFpfzUFE+0LUm81h+MFjBMTJnoBA0/vpOmXrxvDF9NZRC4ZdzrBXdV1maY9pAeYYqBaPKRwObEOlZ/BthIONxW5uyMd75QQWz83Qgst72a33uztntckX4C89LCiuDT9RrSllCVaMDFt9lNKc2WuMmPSanW+gTzhmtVgHMUWqW+Hw6eEPx39tKmdU4Z425zQSs5Z3CuX0IaTec10osPv5Lm1O3k5GOnF8CrL52ghkETigUhuvbWlFh9jfD6AeLO57mXqrv7e3blhtWGXjohMYXEliVHIakiB+GJrLYcKWSuIJzk11bUcYpV7/d6Uo9HFN+Y7
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(82310400014)(1800799015)(36860700004)(376005);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(82310400014)(36860700004)(376005);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 21:55:02.4785
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 21:55:08.6380
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1c9bd374-7da5-4b47-c9c7-08dc4ea88e16
+X-MS-Exchange-CrossTenant-Network-Message-Id: db537cd5-42e1-425e-31b8-08dc4ea891d7
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000044AA.namprd04.prod.outlook.com
+	CY4PEPF0000EE37.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7453
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4329
 
-Xen tries to load a PVH dom0 kernel at the fixed guest physical address
-from the elf headers.  For Linux, this defaults to 0x1000000 (16MB), but
-it can be configured.
+While parsing the PHDRs, store the maximum p_align value.  This may be
+consulted for moving a PVH image's load address.
 
-Unfortunately there exist firmwares that have reserved regions at this
-address, so Xen fails to load the dom0 kernel since it's not RAM.
-
-The other issue is that the Linux PVH entry point is not
-position-independent.  It expects to run at the compiled
-CONFIG_PHYSICAL_ADDRESS.
-
-This patch set expands the PVH dom0 builder to try to relocate the
-kernel if needed and possible.  XEN_ELFNOTE_PHYS32_RELOC is added for
-kernels to indicate they are relocatable and their acceptable address
-range and alignment.
-
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
 v6:
-Choose the alignment from the Note if specified, or the Maximum PHDR
-p_align value if greater than PAGE_SIZE.  Otherwise, it falls back to
-the default 2MB.
+New
+---
+ xen/common/libelf/libelf-loader.c | 15 +++++++++++----
+ xen/include/xen/libelf.h          |  1 +
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
-Patches from v5 commited:
-853c71dfbf xen/elfnote: Specify ELF Notes are x86-specific
-7d8c9b4e8d libelf: Expand ELF note printing
-8802230bfa Revert "xen/x86: bzImage parse kernel_alignment"
-
-The first and second patches move MB/GB() to common-macros.h.
-
-The third patch stores the maximum p_align value from the ELF PHDRs.
-
-The fourth patch expands the pvh dom0 kernel placement code.
-
-I'll post an additional patch showing the Linux changes to make PVH
-relocatable.
-
-Jason Andryuk (4):
-  tools/init-xenstore-domain: Replace variable MB() usage
-  tools: Move MB/GB() to common-macros.h
-  libelf: Store maximum PHDR p_align
-  x86/PVH: Support relocatable dom0 kernels
-
- tools/firmware/hvmloader/util.h         |   3 -
- tools/helpers/init-xenstore-domain.c    |  11 ++-
- tools/include/xen-tools/common-macros.h |   4 +
- tools/libs/light/libxl_internal.h       |   4 -
- xen/arch/x86/hvm/dom0_build.c           | 108 ++++++++++++++++++++++++
- xen/common/libelf/libelf-dominfo.c      |  35 ++++++++
- xen/common/libelf/libelf-loader.c       |  15 +++-
- xen/common/libelf/libelf-private.h      |   1 +
- xen/include/public/elfnote.h            |  16 +++-
- xen/include/xen/libelf.h                |   5 ++
- 10 files changed, 186 insertions(+), 16 deletions(-)
-
+diff --git a/xen/common/libelf/libelf-loader.c b/xen/common/libelf/libelf-loader.c
+index 629cc0d3e6..a5f6389f82 100644
+--- a/xen/common/libelf/libelf-loader.c
++++ b/xen/common/libelf/libelf-loader.c
+@@ -468,6 +468,7 @@ void elf_parse_binary(struct elf_binary *elf)
+ {
+     ELF_HANDLE_DECL(elf_phdr) phdr;
+     uint64_t low = -1, high = 0, paddr, memsz;
++    uint64_t max_align = 0, palign;
+     unsigned i, count;
+ 
+     count = elf_phdr_count(elf);
+@@ -481,17 +482,23 @@ void elf_parse_binary(struct elf_binary *elf)
+             continue;
+         paddr = elf_uval(elf, phdr, p_paddr);
+         memsz = elf_uval(elf, phdr, p_memsz);
+-        elf_msg(elf, "ELF: phdr: paddr=%#" PRIx64 " memsz=%#" PRIx64 "\n",
+-                paddr, memsz);
++        palign = elf_uval(elf, phdr, p_align);
++        elf_msg(elf,
++                "ELF: phdr: paddr=%#" PRIx64 " memsz=%#" PRIx64 " palign=%#" PRIx64 "\n",
++                paddr, memsz, palign);
+         if ( low > paddr )
+             low = paddr;
+         if ( high < paddr + memsz )
+             high = paddr + memsz;
++        if ( max_align < palign )
++            max_align = palign;
+     }
+     elf->pstart = low;
+     elf->pend = high;
+-    elf_msg(elf, "ELF: memory: %#" PRIx64 " -> %#" PRIx64 "\n",
+-            elf->pstart, elf->pend);
++    elf->palign = max_align;
++    elf_msg(elf,
++            "ELF: memory: %#" PRIx64 " -> %#" PRIx64 " align:%#" PRIx64 "\n",
++            elf->pstart, elf->pend, elf->palign);
+ }
+ 
+ elf_errorstatus elf_load_binary(struct elf_binary *elf)
+diff --git a/xen/include/xen/libelf.h b/xen/include/xen/libelf.h
+index 1c77e3df31..2d971f958e 100644
+--- a/xen/include/xen/libelf.h
++++ b/xen/include/xen/libelf.h
+@@ -196,6 +196,7 @@ struct elf_binary {
+     size_t dest_size;
+     uint64_t pstart;
+     uint64_t pend;
++    uint64_t palign;
+     uint64_t reloc_offset;
+ 
+     uint64_t bsd_symtab_pstart;
 -- 
 2.44.0
 
