@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B3E3CD128A
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Mar 2024 18:14:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.698684.1090687 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B248C47DD9
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Mar 2024 19:55:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.698716.1090758 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpXnR-0004tw-7M; Wed, 27 Mar 2024 18:14:45 +0000
+	id 1rpZMm-0001f0-CZ; Wed, 27 Mar 2024 19:55:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 698684.1090687; Wed, 27 Mar 2024 18:14:45 +0000
+Received: by outflank-mailman (output) from mailman id 698716.1090758; Wed, 27 Mar 2024 19:55:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpXnR-0004tp-4t; Wed, 27 Mar 2024 18:14:45 +0000
-Received: by outflank-mailman (input) for mailman id 698684;
- Wed, 27 Mar 2024 18:14:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lSYu=LB=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
- id 1rpXmt-0004pv-H7
- for xen-devel@lists.xenproject.org; Wed, 27 Mar 2024 18:14:12 +0000
-Received: from doppler.solinno.uk
- (8.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.9.a.d.0.6.f.d.1.0.b.8.0.1.0.0.2.ip6.arpa
- [2001:8b0:1df6:da9::18])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ce06e62a-ec65-11ee-a1ef-f123f15fe8a2;
- Wed, 27 Mar 2024 19:14:09 +0100 (CET)
-Received: from folly.solinno.co.uk (folly.dyn.solinno.co.uk [192.168.2.135])
- by doppler.solinno.uk (Postfix) with ESMTPSA id 4504980063;
- Wed, 27 Mar 2024 18:14:08 +0000 (GMT)
-Received: by folly.solinno.co.uk (Postfix, from userid 1000)
- id 288FF202A6; Wed, 27 Mar 2024 18:14:08 +0000 (GMT)
+	id 1rpZMm-0001et-7U; Wed, 27 Mar 2024 19:55:20 +0000
+Received: by outflank-mailman (input) for mailman id 698716;
+ Wed, 27 Mar 2024 19:55:19 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rpZMl-0001ej-3l; Wed, 27 Mar 2024 19:55:19 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rpZMk-0006LH-O5; Wed, 27 Mar 2024 19:55:18 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rpZMk-0001mw-7m; Wed, 27 Mar 2024 19:55:18 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1rpZMk-0006w1-73; Wed, 27 Mar 2024 19:55:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,70 +44,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ce06e62a-ec65-11ee-a1ef-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
-	s=mail; t=1711563248;
-	bh=4fghE0zaGdPSmd+dQTZotqH0mN2NPxM+aDrfDLB5zDI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=bgVSiAo7QrXvqMD+HNnROJwQRG1lRZk+KaF42UTEvHgilEkaLOyEAW/HuB05hrVT/
-	 mtdm0KB8HDc7CMLZzd+aIDXt1TyL033D+xp43OjC4OW2znac2B8bqg1aOR30fzlOc4
-	 LkusIQ21M1TIkcaJMHZ9mLtzMEM9/W8eoXqVM5pU=
-From: leigh@solinno.co.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=92J3VsQuEPaCVfB7UFuP0vfSWmmEUIiy1zomlUEFiKk=; b=vabnJZUsR/4SLABY6RvdgNNfAT
+	V1ihnoaxb7y8HY+WmGmRR+LBWBEimBRQngCkdErlGwca8AnD8tsxoahhROigIzBfcZkqn36w/hgsn
+	MsWGEsCHzFL20lPMfM9saZskggz8q+E7d5+X5SbYx9MYYdpZhG9gm0MWabHv/qxyjHIw=;
 To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com,
-	anthony.perard@citrix.com,
-	slack@rabbit.lu,
-	Leigh Brown <leigh@solinno.co.uk>
-Subject: [PATCH 0/6] xenwatchdogd enhancements
-Date: Wed, 27 Mar 2024 18:13:47 +0000
-Message-Id: <20240327181353.10951-1-leigh@solinno.co.uk>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <55416d60-cae7-4e79-8bde-bc07ee9e3830@suse.com>
-References: <55416d60-cae7-4e79-8bde-bc07ee9e3830@suse.com>
-MIME-Version: 1.0
+Message-ID: <osstest-185176-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 185176: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=8f85af65af76727692b9c2dea4f470f503432d2f
+X-Osstest-Versions-That:
+    xen=0cd50753eb40ca5f00ea1ced9f80ce5f478e560c
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 27 Mar 2024 19:55:18 +0000
 
-From: Leigh Brown <leigh@solinno.co.uk>
+flight 185176 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/185176/
 
-Following up on Cyril's email. I had been independently looking at this,
-mainly because xenwatchdogd is simple enough for me to understand. The
-primary intention of this patch series is to replace the pathologically
-bad behaviour of rebooting the domain if you run "xenwatchdogd -h". To
-that end, I have implemented comprehensive argument validation. This
-validation ensures you can't pass arguments that instantly reboot the
-domain or cause it to spin loop running sleep(0) repeatedly. I added a
-couple of enhancements whilst working on the changes as they were easy
-enough.
+Failures :-/ but no regressions.
 
-Full list of changes:
-- Use getopt_long() to add -h/--help with associated usage help.
-- Add -F/--foreground parameter to run without daemonizing.
-- Add -x/--save-exit parameter to disarm the watchdog when exiting.
-- Validate timeout is numeric and is at least two seconds.
-- Validate sleep is numeric and is at least one and less than timeout.
-- Check for too many arguments.
-- Use symbol constants instead of magic numbers where possible.
-- Add a manual page for xenwatchdogd().
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-I am not an expert in git or sending patches so forgive me if things
-don't look quite right.
+version targeted for testing:
+ xen                  8f85af65af76727692b9c2dea4f470f503432d2f
+baseline version:
+ xen                  0cd50753eb40ca5f00ea1ced9f80ce5f478e560c
 
-Signed-off-by: Leigh Brown <leigh@solinno.co.uk>
+Last test of basis   185173  2024-03-27 12:02:02 Z    0 days
+Testing same since   185176  2024-03-27 17:02:08 Z    0 days    1 attempts
 
-Leigh Brown (6):
-  tools/misc: xenwatchdogd: use EXIT_* constants
-  tools/misc: rework xenwatchdogd signal handling
-  tools/misc: xenwatchdogd: make functions static
-  tools/misc: xenwatchdogd: add parse_secs()
-  tools/misc: xenwatchdogd enhancements
-  docs/man: Add xenwatchdog manual page
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
 
- docs/man/xenwatchdogd.8.pod |  54 +++++++++++
- tools/misc/xenwatchdogd.c   | 180 ++++++++++++++++++++++++++++--------
- 2 files changed, 195 insertions(+), 39 deletions(-)
- create mode 100644 docs/man/xenwatchdogd.8.pod
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
--- 
-2.39.2
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   0cd50753eb..8f85af65af  8f85af65af76727692b9c2dea4f470f503432d2f -> smoke
 
