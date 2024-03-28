@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E297CD1284
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Mar 2024 15:59:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.699030.1091507 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63EE1CD1283
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Mar 2024 16:01:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.699036.1091532 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpsA0-0006YU-0V; Thu, 28 Mar 2024 15:59:24 +0000
+	id 1rpsBn-0000Tn-Ee; Thu, 28 Mar 2024 16:01:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 699030.1091507; Thu, 28 Mar 2024 15:59:23 +0000
+Received: by outflank-mailman (output) from mailman id 699036.1091532; Thu, 28 Mar 2024 16:01:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rps9z-0006YN-Tm; Thu, 28 Mar 2024 15:59:23 +0000
-Received: by outflank-mailman (input) for mailman id 699030;
- Thu, 28 Mar 2024 15:59:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rpsBn-0000Tg-CA; Thu, 28 Mar 2024 16:01:15 +0000
+Received: by outflank-mailman (input) for mailman id 699036;
+ Thu, 28 Mar 2024 16:01:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Yxy0=LC=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1rps7I-0001AK-SM
- for xen-devel@lists.xenproject.org; Thu, 28 Mar 2024 15:56:36 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c1831ad9-ed1b-11ee-afe3-a90da7624cb6;
- Thu, 28 Mar 2024 16:56:36 +0100 (CET)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5684db9147dso1315122a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 28 Mar 2024 08:56:36 -0700 (PDT)
+ id 1rps87-00071m-Ey
+ for xen-devel@lists.xenproject.org; Thu, 28 Mar 2024 15:57:27 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id df0457be-ed1b-11ee-a1ef-f123f15fe8a2;
+ Thu, 28 Mar 2024 16:57:25 +0100 (CET)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a466fc8fcccso150254866b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Mar 2024 08:57:25 -0700 (PDT)
 Received: from m1x-phil.lan (pas38-h02-176-184-5-52.dsl.sta.abo.bbox.fr.
  [176.184.5.52]) by smtp.gmail.com with ESMTPSA id
- l13-20020a056402028d00b0056bfa6ad5eesm959518edv.91.2024.03.28.08.56.34
+ k13-20020a1709067acd00b00a47df55cf5esm914850ejo.13.2024.03.28.08.57.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 28 Mar 2024 08:56:35 -0700 (PDT)
+ Thu, 28 Mar 2024 08:57:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,37 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1831ad9-ed1b-11ee-afe3-a90da7624cb6
+X-Inumbo-ID: df0457be-ed1b-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1711641396; x=1712246196; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1711641445; x=1712246245; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mvS5b4mOvRgBMXReEbw8mHkHwY6O9r1j8WjPX6hg3zo=;
-        b=gnpdPFgLW51sHyUyoXDwAOZDvI82FBpxhPc1kJVd0P9OD+7e9BhtZVFFO40jzchbss
-         VkTI4CekE0NeVoVzrAAMMTZlO7irkRt417toCdVs0Vd/bsP0bMwgf9T0O5sc8zm9D62u
-         qrgU5PVgvyyOkWhdTvcodVbGc1u2IKv1/J/l1pa4Db+oT20L3G9hUzbb6y+djmif+EPQ
-         Vmw/yflu4lHS5lPkcqIgqElyt0VpedKVGk9VbTOk+vOjWPuFHrPNO/CnHFeXOd+eVUV9
-         /2RhBmvOtqeWCF7ol7JeHxDXkovaoPgReWAHhYGLVPpOO0F3dSLOsZgF7MLn2H1Nb/EW
-         DJlQ==
+        bh=9JGjTd1WToEahvAfY8NVbIAQ8SXrGvIMBj7UnII/d+c=;
+        b=PeVw7HqXQfyBYwOKtTmkKxh/q/3MsDf5dRffkzxN75mmNWLGDz7BfVnLg8UpfjkAg3
+         wI/pk0M6bxXyA1jrgBCU4MlXe2KbpYWkhEIIj8qYMqyxOmVTJwXrS3PxFl8AvkrAq/tB
+         LzFRv+slu77S3ImpIMoz+N+3s/hvDiXfv+bW3v3qaMp4bU4JROokgdUiVRDAuiQCaACB
+         S8vQAGYW74BwUaU3x4GJh61cqkY1ic3HkOoGEKgosfwXanV3dd3OOK/yfU5bews5qTS3
+         VuOQrXHCY+7AbLOWwXVZejkRUgOt3+vhm4UB55w7WOUQXhsH95ay8CvBzTJSXZ5LjQR8
+         iuUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711641396; x=1712246196;
+        d=1e100.net; s=20230601; t=1711641445; x=1712246245;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mvS5b4mOvRgBMXReEbw8mHkHwY6O9r1j8WjPX6hg3zo=;
-        b=shV4e98lHzsq7+CX3Itr+Kbug4Fk5fGKUZne70K11rMq0F8smHLE9ZsEXiui9cNhLA
-         UfXKo8Nw8j4b428R0Wdmf8VXhnKSemzCfl6N1M0eOCtoeZxLV7jXrACdc7TRogD+9J2N
-         XQn+RmjOTx9LeBFWjB6R4CYeUZW9POh2Tw1uEibBKpvUkZ7KXnK0TQ1PdLtEs1sLVBY1
-         /I2w0ioZch9RhCO+/zC37LTngmtZjc244Qv2V5gqmtHsuQVex06kvI6/UU5ZeyNFYS5B
-         LZ2uBvlgu3yUHENyvwEfFcNSpc29QIXLMX5E06jhQ6oZ3wYX5yRME4Ab+VHP6ipyhFKX
-         glFw==
-X-Forwarded-Encrypted: i=1; AJvYcCXaTin6EX8lHgqxMhVP4ars4fwYtjb0qhSlBsAdZg1ACdjn52ZiPyOPEO+/iFfJhw+reMN/aTHJ22JPW1lmccojQ3JYCyx46owPXSB2K2E=
-X-Gm-Message-State: AOJu0Ywf63NaRPxaZc34WS2tG+Qy7tArtsPKxB15XqQIZIlBIfu++SMf
-	w42N1fUwhYXuWk34+m7ObYI4QqZwaj2WQ9SVDIT4OQJYMQgSWM1WvKG3QoRfILs=
-X-Google-Smtp-Source: AGHT+IHfWPHo1qaEN4DNEm3R8wOVj4A4iUDXGogGmGPb4Wx0aiRPAERFSIayiOeRYDhmlaAPcH41sw==
-X-Received: by 2002:a50:d6d7:0:b0:568:a9f3:b3fb with SMTP id l23-20020a50d6d7000000b00568a9f3b3fbmr2267809edj.8.1711641395712;
-        Thu, 28 Mar 2024 08:56:35 -0700 (PDT)
+        bh=9JGjTd1WToEahvAfY8NVbIAQ8SXrGvIMBj7UnII/d+c=;
+        b=dlrhL8wiWOdA7rTUMueHCGsk4xNsjpkbZ5VFF6zxtvytoeThwrQDdCgK6b/gpl1kcz
+         TTGIkJbCsGnTp7JP6wsE6+rfNSnYrDQUJOKIPzWcFMl+/ovsILu5DvD+M7V8eJkdmFAQ
+         /9p5/XN4zkizrlPhhHJnv/Y3fvWOyfMJ7Zcx8rNHtvQpAMvk6yTYWCoIRM/mGMifSlka
+         l2MQFm62e0uCZOLseTVITG5R49GGwy+Jvj0fwNg3O2ioOqz85M3Dsi2dluBnc/lLfFYO
+         Y7CQfYilYZ4QqaWeCPnz2pk7m6gPV7ahjRKyxhQOSTXBmpnmY5ylVI4O2dN9No+hjh18
+         VEqg==
+X-Forwarded-Encrypted: i=1; AJvYcCUrO0trlGvISPTKXfXOIHddDf1fUrfFKvy8LmIAjRjlNzg4nTRRyaRgmtfrWZq+o3e/d82U4vpdRTORdoknRlYppTwwy3tS4qvYIePOrhA=
+X-Gm-Message-State: AOJu0YzL5a8Xd359Cf6IKwVi0ZqcS66vmowWNxA8il7Po88Ai78739gv
+	oX06+aIEJQq4M65Mb/MnfLFCVT4+f/Ws6zWzcYCV5CUF5K9mS0WcAub66FRWxDU=
+X-Google-Smtp-Source: AGHT+IEke0w2rGaQ9eaNpJe9RsSUrMNnkosA5ZqUCdCrrEsx8n7A8+12nHMQifWFPzkMKHDz/PJUtg==
+X-Received: by 2002:a17:907:7d89:b0:a47:5265:9aac with SMTP id oz9-20020a1709077d8900b00a4752659aacmr2577836ejc.55.1711641445324;
+        Thu, 28 Mar 2024 08:57:25 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -93,9 +93,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Ani Sinha <anisinha@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [RFC PATCH-for-9.1 18/29] hw/i386/pc: Inline has_reserved_memory()
-Date: Thu, 28 Mar 2024 16:54:26 +0100
-Message-ID: <20240328155439.58719-19-philmd@linaro.org>
+Subject: [RFC PATCH-for-9.1 26/29] hw/i386/fw_cfg: Factor fw_cfg_build_smbios_legacy() out
+Date: Thu, 28 Mar 2024 16:54:34 +0100
+Message-ID: <20240328155439.58719-27-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240328155439.58719-1-philmd@linaro.org>
 References: <20240328155439.58719-1-philmd@linaro.org>
@@ -103,115 +103,96 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-All PCI-based machines have the has_reserved_memory
-field set to %true. Simplify by using an inlined helper
-checking whether the machine is PCI-based or not.
+Factor fw_cfg_build_smbios_legacy() out of
+fw_cfg_build_smbios().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/i386/pc.h |  1 -
- hw/i386/pc.c         | 17 ++++++++++-------
- hw/i386/pc_piix.c    |  1 -
- 3 files changed, 10 insertions(+), 9 deletions(-)
+ hw/i386/fw_cfg.h             |  1 +
+ hw/i386/fw_cfg-smbios-stub.c |  4 ++++
+ hw/i386/fw_cfg.c             | 33 ++++++++++++++++++++++-----------
+ 3 files changed, 27 insertions(+), 11 deletions(-)
 
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index 758dd5f29b..df4c813854 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -91,7 +91,6 @@ typedef struct PCMachineClass {
-     SmbiosEntryPointType default_smbios_ep_type;
- 
-     /* RAM / address space compat: */
--    bool has_reserved_memory;
-     bool broken_reserved_end;
-     bool enforce_amd_1tb_hole;
- 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 093a7c35f7..e36d76656b 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -671,6 +671,11 @@ void xen_load_linux(PCMachineState *pcms)
- #define PC_ROM_ALIGN       0x800
- #define PC_ROM_SIZE        (PC_ROM_MAX - PC_ROM_MIN_VGA)
- 
-+static bool has_reserved_memory(PCMachineState *pcms)
+diff --git a/hw/i386/fw_cfg.h b/hw/i386/fw_cfg.h
+index 7a426119f8..25ce86ec1b 100644
+--- a/hw/i386/fw_cfg.h
++++ b/hw/i386/fw_cfg.h
+@@ -24,6 +24,7 @@
+ FWCfgState *fw_cfg_arch_create(MachineState *ms,
+                                uint16_t boot_cpus,
+                                uint16_t apic_id_limit);
++void fw_cfg_build_smbios_legacy(PCMachineState *pcms, FWCfgState *fw_cfg);
+ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
+                          SmbiosEntryPointType ep_type);
+ void fw_cfg_build_feature_control(MachineState *ms, FWCfgState *fw_cfg);
+diff --git a/hw/i386/fw_cfg-smbios-stub.c b/hw/i386/fw_cfg-smbios-stub.c
+index 37dbfdee7c..da00ffc9ae 100644
+--- a/hw/i386/fw_cfg-smbios-stub.c
++++ b/hw/i386/fw_cfg-smbios-stub.c
+@@ -13,3 +13,7 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
+                          SmbiosEntryPointType ep_type)
+ {
+ }
++
++void fw_cfg_build_smbios_legacy(PCMachineState *pcms, FWCfgState *fw_cfg)
 +{
-+    return pc_machine_is_pci_enabled(pcms);
++}
+diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+index df05fe060c..be37e28f46 100644
+--- a/hw/i386/fw_cfg.c
++++ b/hw/i386/fw_cfg.c
+@@ -54,6 +54,22 @@ static bool smbios_legacy_mode(PCMachineState *pcms)
+     return !pc_machine_is_pci_enabled(pcms);
+ }
+ 
++void fw_cfg_build_smbios_legacy(PCMachineState *pcms, FWCfgState *fw_cfg)
++{
++    uint8_t *smbios_tables;
++    size_t smbios_tables_len;
++    MachineState *ms = MACHINE(pcms);
++    X86CPU *cpu = X86_CPU(ms->possible_cpus->cpus[0].cpu);
++
++    /* tell smbios about cpuid version and features */
++    smbios_set_cpuid(cpu->env.cpuid_version, cpu->env.features[FEAT_1_EDX]);
++
++    smbios_tables = smbios_get_table_legacy(&smbios_tables_len,
++                                            &error_fatal);
++    fw_cfg_add_bytes(fw_cfg, FW_CFG_SMBIOS_ENTRIES,
++                     smbios_tables, smbios_tables_len);
 +}
 +
- static hwaddr pc_above_4g_end(PCMachineState *pcms)
+ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
+                          SmbiosEntryPointType ep_type)
  {
-     X86MachineState *x86ms = X86_MACHINE(pcms);
-@@ -702,12 +707,11 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
+@@ -65,22 +81,17 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
+     MachineClass *mc = MACHINE_GET_CLASS(pcms);
+     X86CPU *cpu = X86_CPU(ms->possible_cpus->cpus[0].cpu);
  
- static uint64_t pc_get_cxl_range_start(PCMachineState *pcms)
- {
--    PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
-     MachineState *ms = MACHINE(pcms);
-     hwaddr cxl_base;
-     ram_addr_t size;
- 
--    if (pcmc->has_reserved_memory &&
-+    if (has_reserved_memory(pcms) &&
-         (ms->ram_size < ms->maxram_size)) {
-         pc_get_device_memory_range(pcms, &cxl_base, &size);
-         cxl_base += size;
-@@ -760,7 +764,7 @@ static hwaddr pc_max_used_gpa(PCMachineState *pcms, uint64_t pci_hole64_size)
-      * calculating the highest possible GPA so that we can properly report
-      * if someone configures them on a CPU that cannot possibly address them.
-      */
--    if (pcmc->has_reserved_memory &&
-+    if (has_reserved_memory(pcms) &&
-         (ms->ram_size < ms->maxram_size)) {
-         hwaddr devmem_start;
-         ram_addr_t devmem_size;
-@@ -891,7 +895,7 @@ void pc_memory_init(PCMachineState *pcms,
-         e820_add_entry(pcms->sgx_epc.base, pcms->sgx_epc.size, E820_RESERVED);
+-    if (!smbios_legacy_mode(pcms)) {
+-        /* These values are guest ABI, do not change */
+-        smbios_set_defaults("QEMU", mc->desc, mc->name);
++    if (smbios_legacy_mode(pcms)) {
++        fw_cfg_build_smbios_legacy(pcms, fw_cfg);
++        return;
      }
  
--    if (!pcmc->has_reserved_memory &&
-+    if (!has_reserved_memory(pcms) &&
-         (machine->ram_slots ||
-          (machine->maxram_size > machine->ram_size))) {
++    /* These values are guest ABI, do not change */
++    smbios_set_defaults("QEMU", mc->desc, mc->name);
++
+     /* tell smbios about cpuid version and features */
+     smbios_set_cpuid(cpu->env.cpuid_version, cpu->env.features[FEAT_1_EDX]);
  
-@@ -901,7 +905,7 @@ void pc_memory_init(PCMachineState *pcms,
-     }
- 
-     /* initialize device memory address space */
--    if (pcmc->has_reserved_memory &&
-+    if (has_reserved_memory(pcms) &&
-         (machine->ram_size < machine->maxram_size)) {
-         ram_addr_t device_mem_size;
-         hwaddr device_mem_base;
-@@ -1024,7 +1028,7 @@ uint64_t pc_pci_hole64_start(void)
- 
-     if (ppms->cxl_devices_state.is_enabled) {
-         hole64_start = pc_get_cxl_range_end(pcms);
--    } else if (pcmc->has_reserved_memory && (ms->ram_size < ms->maxram_size)) {
-+    } else if (has_reserved_memory(pcms) && (ms->ram_size < ms->maxram_size)) {
-         pc_get_device_memory_range(pcms, &hole64_start, &size);
-         if (!pcmc->broken_reserved_end) {
-             hole64_start += size;
-@@ -1752,7 +1756,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
-     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
- 
-     pcmc->smbios_defaults = true;
--    pcmc->has_reserved_memory = true;
-     pcmc->enforce_amd_1tb_hole = true;
-     pcmc->pvh_enabled = true;
-     pcmc->kvmclock_create_always = true;
-diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index 0bc14da768..e6178f8653 100644
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -830,7 +830,6 @@ static void isapc_machine_options(MachineClass *m)
-     m->rom_file_has_mr = false;
-     pcmc->smbios_defaults = false;
-     pcmc->smbios_legacy_mode = true;
--    pcmc->has_reserved_memory = false;
-     m->default_nic = "ne2k_isa";
-     m->default_cpu_type = X86_CPU_TYPE_NAME("486");
-     m->no_parallel = !module_object_class_by_name(TYPE_ISA_PARALLEL);
+-    if (smbios_legacy_mode(pcms)) {
+-        smbios_tables = smbios_get_table_legacy(&smbios_tables_len,
+-                                                &error_fatal);
+-        fw_cfg_add_bytes(fw_cfg, FW_CFG_SMBIOS_ENTRIES,
+-                         smbios_tables, smbios_tables_len);
+-        return;
+-    }
+-
+     /* build the array of physical mem area from e820 table */
+     mem_array = g_malloc0(sizeof(*mem_array) * e820_get_num_entries());
+     for (i = 0, array_count = 0; i < e820_get_num_entries(); i++) {
 -- 
 2.41.0
 
