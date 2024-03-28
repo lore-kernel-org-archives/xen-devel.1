@@ -4,40 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D537C54E64
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Mar 2024 06:25:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.698783.1090893 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D471CD11DD
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Mar 2024 06:34:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.698787.1090914 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpjCF-0003AW-Sn; Thu, 28 Mar 2024 06:25:07 +0000
+	id 1rpjLK-0005Fu-VV; Thu, 28 Mar 2024 06:34:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 698783.1090893; Thu, 28 Mar 2024 06:25:07 +0000
+Received: by outflank-mailman (output) from mailman id 698787.1090914; Thu, 28 Mar 2024 06:34:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpjCF-0003AP-Pv; Thu, 28 Mar 2024 06:25:07 +0000
-Received: by outflank-mailman (input) for mailman id 698783;
- Thu, 28 Mar 2024 06:25:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=JFXD=LC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rpjCF-0003AI-Ef
- for xen-devel@lists.xenproject.org; Thu, 28 Mar 2024 06:25:07 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ea6350f0-eccb-11ee-a1ef-f123f15fe8a2;
- Thu, 28 Mar 2024 07:25:05 +0100 (CET)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-341e3682c78so280707f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 27 Mar 2024 23:25:05 -0700 (PDT)
-Received: from ?IPV6:2003:ca:b738:601a:1073:a6:6f09:9d9a?
- (p200300cab738601a107300a66f099d9a.dip0.t-ipconnect.de.
- [2003:ca:b738:601a:1073:a6:6f09:9d9a])
- by smtp.gmail.com with ESMTPSA id
- l14-20020adfa38e000000b0033e93e00f68sm837764wrb.61.2024.03.27.23.25.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 27 Mar 2024 23:25:04 -0700 (PDT)
+	id 1rpjLK-0005Fn-ST; Thu, 28 Mar 2024 06:34:30 +0000
+Received: by outflank-mailman (input) for mailman id 698787;
+ Thu, 28 Mar 2024 06:34:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Dwcp=LC=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
+ id 1rpjLK-00050u-1K
+ for xen-devel@lists.xenproject.org; Thu, 28 Mar 2024 06:34:30 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2416::600])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 39cdb8f5-eccd-11ee-afe3-a90da7624cb6;
+ Thu, 28 Mar 2024 07:34:29 +0100 (CET)
+Received: from CH0PR03CA0100.namprd03.prod.outlook.com (2603:10b6:610:cd::15)
+ by IA1PR12MB6260.namprd12.prod.outlook.com (2603:10b6:208:3e4::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Thu, 28 Mar
+ 2024 06:34:25 +0000
+Received: from CH1PEPF0000A34C.namprd04.prod.outlook.com
+ (2603:10b6:610:cd:cafe::c0) by CH0PR03CA0100.outlook.office365.com
+ (2603:10b6:610:cd::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.25 via Frontend
+ Transport; Thu, 28 Mar 2024 06:34:25 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH1PEPF0000A34C.mail.protection.outlook.com (10.167.244.6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7409.10 via Frontend Transport; Thu, 28 Mar 2024 06:34:24 +0000
+Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 28 Mar
+ 2024 01:34:20 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,146 +58,224 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea6350f0-eccb-11ee-a1ef-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1711607104; x=1712211904; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=PVn77RP6DE4g6drhl0zx5cLmjDm/qQpN4xlwgp7Pt88=;
-        b=YjMQbmQSgJCEVAgs3R2gLeXcxiT6V691kgvebnmU3V9yCfGaDqMIGfAf3+zvCmocOo
-         UYFUR91i8uCvJu6uAzRAmARn4JssHGAt51ASeGDXJC0I4QucyVQ98t3xdfXooJbz4kjb
-         po6aREH+fareIH8gNCfymIqVOtW14MPBxgrogl4OhljJxLFKjrUh9ftTzaFJbgVGIO8h
-         5Zf+FiCLAV/OP/VpeKSLzsePf1Qr6O3jgXfUt/C9TmVOZK78qiteOa6X6OuB6SaZn4kB
-         llgTfrdkCkfTmVX3CUqhoQ1Xr3WJiRJVENMkv2bg35jM7HQ5o16/+iFQbHTJLggiKEOU
-         iDRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711607104; x=1712211904;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PVn77RP6DE4g6drhl0zx5cLmjDm/qQpN4xlwgp7Pt88=;
-        b=N+Gk/i3enap/U0zJmj0La6WQO30bvOVWvTQVW9sFqQy2s6Q6POeG1c+VTjMdGH6icg
-         w8nR2p9dpvFkXbY2fOcPWdK5kfNJSM18H74TigCTjrY9iPng2f6zMHVbAcp5EMw4dDMO
-         u3BeneQQpjN1WD1hF/nUUqqrh72/G0DwJ9ncKiWNKnlmZjXJcSe+oXThFCweLiXxvl6l
-         PPdIEzNTBidE0l+aH6L1H1kN2cmi8xKXSZ3QBWMiZRTF9nOHgzfa4hA1YgFz7vMmVhlX
-         H62CaoTszEVaXLWBAaJibSdcj3iWnlEiq0r+ydW7B/yZsU64YpINUTgOW7kKefghfqLL
-         60kA==
-X-Gm-Message-State: AOJu0YybTuVkQSdDVsbfruUNNGihookdF30u98Vy3S5OlnysXP8tnZ3e
-	vn2P1TlniiSMdlhggjN+++HB18/f6j1T2Kf+dM/u1E5tUJoDaOFmVGzY/VSRZA==
-X-Google-Smtp-Source: AGHT+IFGv9SYg8LhaAMn2UxpygNhIPirTpgzJo/McI1bKyBy52k/3Lkq06sua9RTPPUzUm97l8iF0g==
-X-Received: by 2002:a5d:6dc9:0:b0:342:cd1c:a6aa with SMTP id d9-20020a5d6dc9000000b00342cd1ca6aamr937305wrz.55.1711607104511;
-        Wed, 27 Mar 2024 23:25:04 -0700 (PDT)
-Message-ID: <c2ce4002-58d5-48a3-949c-3c361c78c0ac@suse.com>
-Date: Thu, 28 Mar 2024 07:25:02 +0100
+X-Inumbo-ID: 39cdb8f5-eccd-11ee-afe3-a90da7624cb6
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hgMdqZoIFyzvcLSnGCLx/7HONHgwmhpuc0sfUlgmurKsHfls3K5LgEjb4o6N3qdK6NZQW392diyllmkVuBDEZYH1OlrizMZiqM/ZU/+0gQR6c4Hf1YaVAOlbR6SAp9LGtNqmn0h313O/HNT2ATaQPT3HiDMXjeJMGjUS7n2957DV0AHiaL4lezKnnnMtQH74yD5yAub/j07wh/P8ZALWPD4AGlaunMDcxklvLaikXskBnZPe7RoZ4SxrY2yIwYdh+Fg49HpQeuEoDjEfW6uS30IstM4KkcX3ignGO7gQmM65Ju9LufHwyNNhv8xBXUr55ELpQYTaFnSpKfITdY/Yeg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sGh6+DBUR12UnhAId2zcgyQdtB6rlh4Opu5QWVMJXa4=;
+ b=TLhJQxsz2Xew5YykrCfJHyq7hBwrDuI624CTyRacovEnZp7jdE3sPXeSxIQCPO6BblErJzpIMBXyJxeDgF6/UhDBWfbnvmkZGEsRvmQk2vLVbVHaTKijNqy+ChiqsBZ23mlxL7HV14XhUqU8CFBGY52PuA2U3aKZiWvZif38xSGxj5iVJDwyv+jTAFCjMWtNeQZ07QnMovHFZ2OKLfNl5G5Q1IRoBFn52MVBJoo8aWi6RYrqtPotVgIP2VR9dk1O5movkm3ScZdSpuSJFTNtAKBaQ8O9fH7Wju9Xod+HoiuVAhMbQpNRl3QRQyWMJn0qecM+2fu10DordPSPUVb5vw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sGh6+DBUR12UnhAId2zcgyQdtB6rlh4Opu5QWVMJXa4=;
+ b=XWCFdmcuxhMUHonDFLCY2kEf877m2QJnCik/vkHVrLlJf+VTfl1nSuVUTa7qkuGd5LUTVTy7UEb2kNFbmsQENPBrIIbfIfhY4+tr3UNd9MDzNa1zvb4uyB4ZovyIpEnVfN48BuXZPeF3Js+rJxORBQ2wpUcincI1cFlhXRvnKfQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Jiqian Chen <Jiqian.Chen@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, George Dunlap
+	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Anthony PERARD <anthony.perard@citrix.com>,
+	"Juergen Gross" <jgross@suse.com>, "Daniel P . Smith"
+	<dpsmith@apertussolutions.com>, Stewart Hildebrand
+	<Stewart.Hildebrand@amd.com>, Huang Rui <Ray.Huang@amd.com>, Jiqian Chen
+	<Jiqian.Chen@amd.com>, Huang Rui <ray.huang@amd.com>, Stewart Hildebrand
+	<stewart.hildebrand@amd.com>
+Subject: [XEN PATCH v6 1/5] xen/vpci: Clear all vpci status of device
+Date: Thu, 28 Mar 2024 14:33:58 +0800
+Message-ID: <20240328063402.354496-2-Jiqian.Chen@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240328063402.354496-1-Jiqian.Chen@amd.com>
+References: <20240328063402.354496-1-Jiqian.Chen@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Serious AMD-Vi(?) issue
-Content-Language: en-US
-To: Elliott Mitchell <ehem+xen@m5p.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
- Kelly Choi <kelly.choi@cloud.com>
-References: <ZbLDlRi0vctlhsNp@mattapan.m5p.com>
- <ZcqoVBnsgUJw8G0l@mattapan.m5p.com> <ZfiY7/FBTwPQlfYi@mattapan.m5p.com>
- <CAO-mL=xndFd7xTU4Q+9hjLL-7zqZUGjYcp3_REa6QqXvtyAEYg@mail.gmail.com>
- <Zf3aWXfCANR7zXj8@mattapan.m5p.com>
- <e9b1c9c4-523b-481b-946e-37c7c18ea1d2@suse.com>
- <ZgHwEGCsCLHiYU5J@mattapan.m5p.com> <ZgRXHQpamLIdu7dk@mattapan.m5p.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ZgRXHQpamLIdu7dk@mattapan.m5p.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34C:EE_|IA1PR12MB6260:EE_
+X-MS-Office365-Filtering-Correlation-Id: 98df1f78-2d36-4327-2034-08dc4ef11c24
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	+mzOqEtOKuHfgxPtFet6T7OJsUrtO7mBJrJzBKaBv6EjZojLPB//IkWq5mm++PRbnvyOTZ8SLlR8DYCIJVPAnxu04lLE6Raix/4LgtWnW11rEMG1OtMmRTtMEGGljek5XFxxs9cdUBtVCOLumx6o33HJlwHIG9nZGwFIA2AmWZqnxlAYU0MwIdGQE830EFXk5Jbfu/6Z5umW434zQtvQtzA1g82T5TORUmWJd5X10e/APv046RUpu8RX4h5DLcGERdfSmV3QCLnBdgFxe4tRLUYwLIkxEz76bepxIlV8FAyT6YeyDCXMlfAO4wu+SE3JXXCnWfYu0HtJpIkIVgWpXHYolI0NMc2nJHOME8YqGm/UNWkaV6vA+I3sUFjrokueG3e8sTySW/GGfI+vaJWnSOOL0/g9jcuLkXIJcZ3CSHgpneKSpLEuivi0yRK4q8oeMIHbh/s6BsEmSC7awF+1lUFYZ7oHE/cea5ZVDFAw1hioRXmIUxj2yn1t9xEWxohDON3sMlXQSPTs883wYxuJHvAoL42ZVhywoEbZ4sNvtTdjVNjR+zxoJrDCuFXBdlmMP96LAxaIBksRHncvwAUPTlLPxIS9XPUiqRxwuqhv0YSamaaRS+mC8reKzHwwj1H51Cr+jtWVIYlIlD31S9N6GYrJjhKwg9vbGTMOnpa79v+FrFgypVEUbs9I37IBlDYjtCFO10xWifflrzqV5NPPRtFCjb7sTrQwKgXBuwJefwyLwCqqWIgX/rLMBPwJRET+
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(376005)(7416005)(82310400014)(36860700004)(1800799015);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2024 06:34:24.5357
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98df1f78-2d36-4327-2034-08dc4ef11c24
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0000A34C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6260
 
-On 27.03.2024 18:27, Elliott Mitchell wrote:
-> On Mon, Mar 25, 2024 at 02:43:44PM -0700, Elliott Mitchell wrote:
->> On Mon, Mar 25, 2024 at 08:55:56AM +0100, Jan Beulich wrote:
->>> On 22.03.2024 20:22, Elliott Mitchell wrote:
->>>> On Fri, Mar 22, 2024 at 04:41:45PM +0000, Kelly Choi wrote:
->>>>>
->>>>> I can see you've recently engaged with our community with some issues you'd
->>>>> like help with.
->>>>> We love the fact you are participating in our project, however, our
->>>>> developers aren't able to help if you do not provide the specific details.
->>>>
->>>> Please point to specific details which have been omitted.  Fairly little
->>>> data has been provided as fairly little data is available.  The primary
->>>> observation is large numbers of:
->>>>
->>>> (XEN) AMD-Vi: IO_PAGE_FAULT: DDDD:bb:dd.f d0 addr ffffff???????000 flags 0x8 I
->>>>
->>>> Lines in Xen's ring buffer.
->>>
->>> Yet this is (part of) the problem: By providing only the messages that appear
->>> relevant to you, you imply that you know that no other message is in any way
->>> relevant. That's judgement you'd better leave to people actually trying to
->>> investigate. Unless of course you were proposing an actual code change, with
->>> suitable justification.
->>
->> Honestly, I forgot about the very small number of messages from the SATA
->> subsystem.  The question of whether the current mitigation actions are
->> effective right now was a bigger issue.  As such monitoring `xl dmesg`
->> was a priority to looking at SATA messages which failed to reliably
->> indicate status.
->>
->> I *thought* I would be able to retrieve those via other slow means, but a
->> different and possibly overlapping issue has shown up.  Unfortunately
->> this means those are no longer retrievable.   :-(
-> 
-> With some persistence I was able to retrieve them.  There are other
-> pieces of software with worse UIs than Xen.
-> 
->>> In fact when running into trouble, the usual course of action would be to
->>> increase verbosity in both hypervisor and kernel, just to make sure no
->>> potentially relevant message is missed.
->>
->> More/better information might have been obtained if I'd been engaged
->> earlier.
-> 
-> This is still true, things are in full mitigation mode and I'll be
-> quite unhappy to go back with experiments at this point.
+When a device has been reset on dom0 side, the vpci on Xen
+side won't get notification, so the cached state in vpci is
+all out of date compare with the real device state.
+To solve that problem, add a new hypercall to clear all vpci
+device state. When the state of device is reset on dom0 side,
+dom0 can call this hypercall to notify vpci.
 
-Well, it very likely won't work without further experimenting by someone
-able to observe the bad behavior. Recall we're on xen-devel here; it is
-kind of expected that without clear (and practical) repro instructions
-experimenting as well as info collection will remain with the reporter.
+Signed-off-by: Huang Rui <ray.huang@amd.com>
+Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+Reviewed-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+ xen/arch/x86/hvm/hypercall.c |  1 +
+ xen/drivers/pci/physdev.c    | 36 ++++++++++++++++++++++++++++++++++++
+ xen/drivers/vpci/vpci.c      | 10 ++++++++++
+ xen/include/public/physdev.h |  7 +++++++
+ xen/include/xen/vpci.h       |  6 ++++++
+ 5 files changed, 60 insertions(+)
 
-> I now see why I left those out.  The messages from the SATA subsystem
-> were from a kernel which a bad patch had leaked into a LTS branch.  Looks
-> like the SATA subsystem was significantly broken and I'm unsure whether
-> any useful information could be retrieved.  Notably there is quite a bit
-> of noise from SATA devices not effected by this issue.
-> 
-> Some of the messages /might/ be useful, but the amount of noise is quite
-> high.  Do messages from a broken kernel interest you?
+diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
+index eeb73e1aa5d0..6ad5b4d5f11f 100644
+--- a/xen/arch/x86/hvm/hypercall.c
++++ b/xen/arch/x86/hvm/hypercall.c
+@@ -84,6 +84,7 @@ long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+     case PHYSDEVOP_pci_mmcfg_reserved:
+     case PHYSDEVOP_pci_device_add:
+     case PHYSDEVOP_pci_device_remove:
++    case PHYSDEVOP_pci_device_state_reset:
+     case PHYSDEVOP_dbgp_op:
+         if ( !is_hardware_domain(currd) )
+             return -ENOSYS;
+diff --git a/xen/drivers/pci/physdev.c b/xen/drivers/pci/physdev.c
+index 42db3e6d133c..73dc8f058b0e 100644
+--- a/xen/drivers/pci/physdev.c
++++ b/xen/drivers/pci/physdev.c
+@@ -2,6 +2,7 @@
+ #include <xen/guest_access.h>
+ #include <xen/hypercall.h>
+ #include <xen/init.h>
++#include <xen/vpci.h>
+ 
+ #ifndef COMPAT
+ typedef long ret_t;
+@@ -67,6 +68,41 @@ ret_t pci_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+         break;
+     }
+ 
++    case PHYSDEVOP_pci_device_state_reset: {
++        struct physdev_pci_device dev;
++        struct pci_dev *pdev;
++        pci_sbdf_t sbdf;
++
++        if ( !is_pci_passthrough_enabled() )
++            return -EOPNOTSUPP;
++
++        ret = -EFAULT;
++        if ( copy_from_guest(&dev, arg, 1) != 0 )
++            break;
++        sbdf = PCI_SBDF(dev.seg, dev.bus, dev.devfn);
++
++        ret = xsm_resource_setup_pci(XSM_PRIV, sbdf.sbdf);
++        if ( ret )
++            break;
++
++        pcidevs_lock();
++        pdev = pci_get_pdev(NULL, sbdf);
++        if ( !pdev )
++        {
++            pcidevs_unlock();
++            ret = -ENODEV;
++            break;
++        }
++
++        write_lock(&pdev->domain->pci_lock);
++        ret = vpci_reset_device_state(pdev);
++        write_unlock(&pdev->domain->pci_lock);
++        pcidevs_unlock();
++        if ( ret )
++            printk(XENLOG_ERR "%pp: failed to reset PCI device state\n", &sbdf);
++        break;
++    }
++
+     default:
+         ret = -ENOSYS;
+         break;
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 260b72875ee1..310700c1e775 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -117,6 +117,16 @@ int vpci_assign_device(struct pci_dev *pdev)
+ 
+     return rc;
+ }
++
++int vpci_reset_device_state(struct pci_dev *pdev)
++{
++    ASSERT(pcidevs_locked());
++    ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
++
++    vpci_deassign_device(pdev);
++    return vpci_assign_device(pdev);
++}
++
+ #endif /* __XEN__ */
+ 
+ static int vpci_register_cmp(const struct vpci_register *r1,
+diff --git a/xen/include/public/physdev.h b/xen/include/public/physdev.h
+index f0c0d4727c0b..f5bab1f29779 100644
+--- a/xen/include/public/physdev.h
++++ b/xen/include/public/physdev.h
+@@ -296,6 +296,13 @@ DEFINE_XEN_GUEST_HANDLE(physdev_pci_device_add_t);
+  */
+ #define PHYSDEVOP_prepare_msix          30
+ #define PHYSDEVOP_release_msix          31
++/*
++ * Notify the hypervisor that a PCI device has been reset, so that any
++ * internally cached state is regenerated.  Should be called after any
++ * device reset performed by the hardware domain.
++ */
++#define PHYSDEVOP_pci_device_state_reset     32
++
+ struct physdev_pci_device {
+     /* IN */
+     uint16_t seg;
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index e89c571890b2..ea64d94e818b 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -30,6 +30,7 @@ int __must_check vpci_assign_device(struct pci_dev *pdev);
+ 
+ /* Remove all handlers and free vpci related structures. */
+ void vpci_deassign_device(struct pci_dev *pdev);
++int __must_check vpci_reset_device_state(struct pci_dev *pdev);
+ 
+ /* Add/remove a register handler. */
+ int __must_check vpci_add_register_mask(struct vpci *vpci,
+@@ -266,6 +267,11 @@ static inline int vpci_assign_device(struct pci_dev *pdev)
+ 
+ static inline void vpci_deassign_device(struct pci_dev *pdev) { }
+ 
++static inline int __must_check vpci_reset_device_state(struct pci_dev *pdev)
++{
++    return 0;
++}
++
+ static inline void vpci_dump_msi(void) { }
+ 
+ static inline uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg,
+-- 
+2.34.1
 
-If this was a less vague (in terms of possible root causes) issue, I'd
-probably have answered "yes". But in the case here I'm afraid such might
-further confuse things rather than clarifying them.
-
-Jan
 
