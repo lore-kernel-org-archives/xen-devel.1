@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3592DCD11DD
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Mar 2024 16:12:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.699090.1091642 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6FECD1283
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Mar 2024 16:12:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.699093.1091653 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpsMS-0000IR-6f; Thu, 28 Mar 2024 16:12:16 +0000
+	id 1rpsMs-0000pb-FU; Thu, 28 Mar 2024 16:12:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 699090.1091642; Thu, 28 Mar 2024 16:12:16 +0000
+Received: by outflank-mailman (output) from mailman id 699093.1091653; Thu, 28 Mar 2024 16:12:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rpsMS-0000I6-4A; Thu, 28 Mar 2024 16:12:16 +0000
-Received: by outflank-mailman (input) for mailman id 699090;
- Thu, 28 Mar 2024 16:12:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rpsMs-0000pS-CH; Thu, 28 Mar 2024 16:12:42 +0000
+Received: by outflank-mailman (input) for mailman id 699093;
+ Thu, 28 Mar 2024 16:12:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Yxy0=LC=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1rps7n-0001AK-EE
- for xen-devel@lists.xenproject.org; Thu, 28 Mar 2024 15:57:07 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d3c5034c-ed1b-11ee-afe3-a90da7624cb6;
- Thu, 28 Mar 2024 16:57:06 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a466a27d30aso140700166b.1
- for <xen-devel@lists.xenproject.org>; Thu, 28 Mar 2024 08:57:06 -0700 (PDT)
+ id 1rps77-00071m-G7
+ for xen-devel@lists.xenproject.org; Thu, 28 Mar 2024 15:56:25 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ba189f94-ed1b-11ee-a1ef-f123f15fe8a2;
+ Thu, 28 Mar 2024 16:56:23 +0100 (CET)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-513ccc70a6dso1821156e87.1
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Mar 2024 08:56:23 -0700 (PDT)
 Received: from m1x-phil.lan (pas38-h02-176-184-5-52.dsl.sta.abo.bbox.fr.
  [176.184.5.52]) by smtp.gmail.com with ESMTPSA id
- f8-20020a17090624c800b00a46fbff47a6sm891626ejb.168.2024.03.28.08.57.04
+ i23-20020a170906265700b00a4749a1de50sm911948ejc.176.2024.03.28.08.56.21
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 28 Mar 2024 08:57:06 -0700 (PDT)
+ Thu, 28 Mar 2024 08:56:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,37 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3c5034c-ed1b-11ee-afe3-a90da7624cb6
+X-Inumbo-ID: ba189f94-ed1b-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1711641426; x=1712246226; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1711641383; x=1712246183; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4BSXB7GHW5TBQXIjnxuyxFyj9B1iDsM8cHi/htTyRxs=;
-        b=H/TUrYVppdn7LmwRGsgx2j1wQU1h58w8/D/39uon7Jhk6b7slCRn97xbTg/LKyZoVY
-         VJBJXV9OnD3YoJ3XiVC8kZxVxyNX/BZaTexO0SWUHL30WB0K8btFK3HGKLNjCq8ztgna
-         vUnz/75nWBTquQnVecf1GUicG7lMFGgIuqkl0HYQFspy7CXJola8DESy+ff6OEqY1/Hk
-         G26nvrb01XzF71lPtamFgGQum8MDO3xo4XW/cy62T1HEMhruqv3jF5vbEiJmJubnKesE
-         RmmIFPNbVgBM55MOyFb8m6qqX4T6/8hCwqt2xi5hgXb92SfTNV9PtYsTciLDDy2gcHBK
-         NnVA==
+        bh=YADozrynE6WAolQE0PpJsPO9+XRuTB0w7hXGd8JOVMk=;
+        b=t+/1N04qiasqsLsW1lgmgpEzggXkQbmk+oQ1NJhOyjhH0YcvmjGTucJMeeT8eBUPFq
+         IKeUNuKpBY1tycbKrGhB8bFrGRDwZSldhAImr+KZainvMB2DKkCwP2Huxkvzq6L3KvUf
+         OmSyAf7lS307LtfbyDepTokbaVt3z3IUmC6VkYgSYzYuUDQrwDbP+0d9y9UMRVIqwVWX
+         zcA3jxx0wh2Ux5QXvYzm1kciPjlNxM0t2H+zn9fMJ00MTFdnhLVGw39uEDZS4Jl/De5Y
+         VzAsc4jyPlvNfw5nvj9rBt5xZjEB1PPFMrcYul712K/zGc66mvBzIo/6toieFCmTuIi5
+         8ing==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711641426; x=1712246226;
+        d=1e100.net; s=20230601; t=1711641383; x=1712246183;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4BSXB7GHW5TBQXIjnxuyxFyj9B1iDsM8cHi/htTyRxs=;
-        b=lttiTexABxs/MZ1G9wVhWkn3X6mdCF/63J+2oCOb0SdU3eM4hxen8tIVBXc2bKYz8D
-         c+IgbGvXXAVZoJhPci/GaXb7KaPfS1zoI5lOYpGkTIAyPZdeHlmYmL/iw5siZw7vEmz7
-         02YJp3LP38zW/5TeRLnzD2ibieu4243U4q4He8W08qJdg6SW+2dazjuEZOBThProxg7e
-         2qBl+1oxiCUKLS+fZYobgtVYvuB81xqDv+iyNlTMMvo30nQDGj0vqKO9sLX8w++BvpUn
-         AXZzEVTUGrbJdILxL42P5u1jpz6B5QeppuIogR84h5wucdKLB0GPizkVtK0gHqoWkZch
-         inww==
-X-Forwarded-Encrypted: i=1; AJvYcCWdjweH8hCNV+vAtH7CnsX7fF0Ea6497PBY8wQGDvWS8rzMHqkFs4OkBxh9rtfVxn9mz6PofYakHxzHHDo6QNUGHNZnpXsFWlMGv/EeO8c=
-X-Gm-Message-State: AOJu0Yy0JqKG5kgPIqm7Q+2R18VwWwABH/w+tWxO8OqlpsrGwi4PrYWk
-	+fBqx38XNPRz22s+Gsc2a43dl0p8gkE4jwgjLYhnfBrKGsOLyUav6NC1HrayfiA=
-X-Google-Smtp-Source: AGHT+IFF/skKWHNCTMPwJb+B2ckteIOxmThfN9+aMTRN8D0HIEaksr7NEcZ4nuV98VsFYsHsSKmB9w==
-X-Received: by 2002:a17:906:b112:b0:a47:1fe8:9825 with SMTP id u18-20020a170906b11200b00a471fe89825mr2020350ejy.32.1711641426506;
-        Thu, 28 Mar 2024 08:57:06 -0700 (PDT)
+        bh=YADozrynE6WAolQE0PpJsPO9+XRuTB0w7hXGd8JOVMk=;
+        b=aRnAOmSTY0S9nWMix/CY6m/mbmG/eZgdFvmLyczqTJNtH8tYWN8Y9VjMahrMudSR9j
+         KFKQriAmQIngs4OHBkOUDNCXkLy0Vo9rRNe5EznpvWmPSXjbhO3QO9+/g+cCcuK5B6Pe
+         RebLECxBlD8+hm7+UPg4EjWgkCXUe13NMGxUd5qsDWnB9BqR6yRVDU97J7TSZPrl29y/
+         idRQ0rXhkNs6186kJ8A6lnMh6Xm30RVKGTTao4jCYhk5x9b0QbHvWVZCAaL2+QVAPHnQ
+         g0wBdLpSsOcZ9B0DlMeeh50PJQ/rQyoiL2ibu7aMQ/bunh3h/EnOJDPg6e0/D9eIoyGp
+         /0Hw==
+X-Forwarded-Encrypted: i=1; AJvYcCX6L2J7bRd4C7QUV46BxOJFaZIGVRyeU28Ofq4oS/PfwEGEyz3kPPv/hW8pxMxaq00Y07pYr6+lM1doBvIBOuT6qts5jNOnjvbVwzcDJcA=
+X-Gm-Message-State: AOJu0YxP05X8BH+CYOjCT9bK+3d1BzZZZzjbwrsoiP184pxD3vG4c2PZ
+	D6iqMUSAIIDmXG36hvleZMBZ17Fjw9ub8fqMF4e/aGGalmQrxnBsT/O9ptjwR1E=
+X-Google-Smtp-Source: AGHT+IFET2qLkxCYJlLAe5wqUF2LJxJCZxdIrO9Tbo3cYr9nsR7BCDgXHuGLT1xPB8OJyuTlfGMDhg==
+X-Received: by 2002:a05:6512:78f:b0:513:e643:cd12 with SMTP id x15-20020a056512078f00b00513e643cd12mr2537328lfr.26.1711641383341;
+        Thu, 28 Mar 2024 08:56:23 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -93,9 +93,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Ani Sinha <anisinha@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [RFC PATCH-for-9.1 23/29] hw/i386/fw_cfg: Inline smbios_defaults()
-Date: Thu, 28 Mar 2024 16:54:31 +0100
-Message-ID: <20240328155439.58719-24-philmd@linaro.org>
+Subject: [RFC PATCH-for-9.1 16/29] hw/i386/pc: Move south-bridge related fields to PcPciMachine
+Date: Thu, 28 Mar 2024 16:54:24 +0100
+Message-ID: <20240328155439.58719-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240328155439.58719-1-philmd@linaro.org>
 References: <20240328155439.58719-1-philmd@linaro.org>
@@ -103,79 +103,135 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-All PCI-based machines have the smbios_defaults field
-set to %true. Simplify by using an inlined helper
-checking whether the machine is PCI-based or not.
+South bridge type is only relevant for the i440fx/piix
+machine, which is PCI-based.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/i386/pc.h | 1 -
- hw/i386/fw_cfg.c     | 7 ++++++-
- hw/i386/pc.c         | 1 -
- hw/i386/pc_piix.c    | 1 -
- 4 files changed, 6 insertions(+), 4 deletions(-)
+ include/hw/i386/pc.h |  8 ++++----
+ hw/i386/pc.c         |  3 ++-
+ hw/i386/pc_piix.c    | 12 ++++++------
+ 3 files changed, 12 insertions(+), 11 deletions(-)
 
 diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index 7da0bc8aa4..6a6a8df005 100644
+index 668347c248..2db2aa03d3 100644
 --- a/include/hw/i386/pc.h
 +++ b/include/hw/i386/pc.h
-@@ -86,7 +86,6 @@ typedef struct PCMachineClass {
-     int default_cpu_version;
+@@ -38,7 +38,6 @@ typedef struct PCMachineState {
+     uint64_t max_ram_below_4g;
+     OnOffAuto vmport;
+     SmbiosEntryPointType smbios_entry_point_type;
+-    const char *south_bridge;
  
-     /* SMBIOS compat: */
--    bool smbios_defaults;
-     bool smbios_legacy_mode;
-     SmbiosEntryPointType default_smbios_ep_type;
+     bool smbus_enabled;
+     bool sata_enabled;
+@@ -59,6 +58,7 @@ typedef struct PcPciMachineState {
+     Notifier machine_done;
  
-diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
-index 14a7dfbdc9..f60390ed56 100644
---- a/hw/i386/fw_cfg.c
-+++ b/hw/i386/fw_cfg.c
-@@ -49,6 +49,11 @@ const char *fw_cfg_arch_key_name(uint16_t key)
- }
+     bool acpi_build_enabled;
++    const char *southbridge_typename;
+     uint64_t max_fw_size;
  
- #ifdef CONFIG_SMBIOS
-+static bool smbios_defaults(PCMachineState *pcms)
-+{
-+    return pc_machine_is_pci_enabled(pcms);
-+}
+     PFlashCFI01 *flash[2];
+@@ -88,9 +88,6 @@ typedef struct PcPciMachineState {
+ typedef struct PCMachineClass {
+     X86MachineClass parent_class;
+ 
+-    /* Device configuration: */
+-    const char *default_south_bridge;
+-
+     /* Compat options: */
+ 
+     /* Default CPU model version.  See x86_cpu_set_default_version(). */
+@@ -126,6 +123,9 @@ typedef struct PCMachineClass {
+ typedef struct PcPciMachineClass {
+     PCMachineClass parent_class;
+ 
++    /* Device configuration: */
++    const char *default_southbridge_typename;
 +
- void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
-                          SmbiosEntryPointType ep_type)
- {
-@@ -61,7 +66,7 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
-     MachineClass *mc = MACHINE_GET_CLASS(pcms);
-     X86CPU *cpu = X86_CPU(ms->possible_cpus->cpus[0].cpu);
- 
--    if (pcmc->smbios_defaults) {
-+    if (smbios_defaults(pcms)) {
-         /* These values are guest ABI, do not change */
-         smbios_set_defaults("QEMU", mc->desc, mc->name);
-     }
+     /* ACPI compat: */
+     int pci_root_uid;
+ } PcPciMachineClass;
 diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index b83abee8e9..7a758a2e84 100644
+index 5753a3ff0b..dd44df0470 100644
 --- a/hw/i386/pc.c
 +++ b/hw/i386/pc.c
-@@ -1754,7 +1754,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
-     PCMachineClass *pcmc = PC_MACHINE_CLASS(oc);
-     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
+@@ -1667,7 +1667,6 @@ static void pc_machine_initfn(Object *obj)
+ #endif /* CONFIG_VMPORT */
+     pcms->max_ram_below_4g = 0; /* use default */
+     pcms->smbios_entry_point_type = pcmc->default_smbios_ep_type;
+-    pcms->south_bridge = pcmc->default_south_bridge;
  
--    pcmc->smbios_defaults = true;
-     pcmc->enforce_amd_1tb_hole = true;
-     pcmc->pvh_enabled = true;
-     pcmc->kvmclock_create_always = true;
+     pcms->smbus_enabled = true;
+     pcms->sata_enabled = true;
+@@ -1689,9 +1688,11 @@ static void pc_machine_initfn(Object *obj)
+ static void pc_pci_machine_initfn(Object *obj)
+ {
+     PcPciMachineState *ppms = PC_PCI_MACHINE(obj);
++    PcPciMachineClass *ppmc = PC_PCI_MACHINE_GET_CLASS(ppms);
+ 
+     ppms->acpi_build_enabled = true;
+     ppms->max_fw_size = 8 * MiB;
++    ppms->southbridge_typename = ppmc->default_southbridge_typename;
+ 
+     pc_system_flash_create(ppms);
+     cxl_machine_init(obj, &ppms->cxl_devices_state);
 diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index e6178f8653..70dc8686f9 100644
+index 6b3403d0bd..2043a7022a 100644
 --- a/hw/i386/pc_piix.c
 +++ b/hw/i386/pc_piix.c
-@@ -828,7 +828,6 @@ static void isapc_machine_options(MachineClass *m)
-     m->max_cpus = 1;
-     m->option_rom_has_mr = true;
-     m->rom_file_has_mr = false;
--    pcmc->smbios_defaults = false;
-     pcmc->smbios_legacy_mode = true;
-     m->default_nic = "ne2k_isa";
-     m->default_cpu_type = X86_CPU_TYPE_NAME("486");
+@@ -243,7 +243,7 @@ static void pc_init1(MachineState *machine, const char *pci_type)
+         DeviceState *dev;
+         size_t i;
+ 
+-        pci_dev = pci_new_multifunction(-1, pcms->south_bridge);
++        pci_dev = pci_new_multifunction(-1, ppms->southbridge_typename);
+         object_property_set_bool(OBJECT(pci_dev), "has-usb",
+                                  machine_usb(machine), &error_abort);
+         object_property_set_bool(OBJECT(pci_dev), "has-acpi",
+@@ -385,12 +385,12 @@ static const QEnumLookup PCSouthBridgeOption_lookup = {
+ 
+ static int pc_get_south_bridge(Object *obj, Error **errp)
+ {
+-    PCMachineState *pcms = PC_MACHINE(obj);
++    PcPciMachineState *ppms = PC_PCI_MACHINE(obj);
+     int i;
+ 
+     for (i = 0; i < PCSouthBridgeOption_lookup.size; i++) {
+         if (g_strcmp0(PCSouthBridgeOption_lookup.array[i],
+-                      pcms->south_bridge) == 0) {
++                      ppms->southbridge_typename) == 0) {
+             return i;
+         }
+     }
+@@ -401,7 +401,7 @@ static int pc_get_south_bridge(Object *obj, Error **errp)
+ 
+ static void pc_set_south_bridge(Object *obj, int value, Error **errp)
+ {
+-    PCMachineState *pcms = PC_MACHINE(obj);
++    PcPciMachineState *ppms = PC_PCI_MACHINE(obj);
+ 
+     if (value < 0) {
+         error_setg(errp, "Value can't be negative");
+@@ -413,7 +413,7 @@ static void pc_set_south_bridge(Object *obj, int value, Error **errp)
+         return;
+     }
+ 
+-    pcms->south_bridge = PCSouthBridgeOption_lookup.array[value];
++    ppms->southbridge_typename = PCSouthBridgeOption_lookup.array[value];
+ }
+ 
+ /* Looking for a pc_compat_2_4() function? It doesn't exist.
+@@ -472,7 +472,7 @@ static void pc_i440fx_machine_options(MachineClass *m)
+     PcPciMachineClass *ppmc = PC_PCI_MACHINE_CLASS(m);
+     ObjectClass *oc = OBJECT_CLASS(m);
+ 
+-    pcmc->default_south_bridge = TYPE_PIIX3_DEVICE;
++    ppmc->default_southbridge_typename = TYPE_PIIX3_DEVICE;
+     ppmc->pci_root_uid = 0;
+     pcmc->default_cpu_version = 1;
+ 
 -- 
 2.41.0
 
