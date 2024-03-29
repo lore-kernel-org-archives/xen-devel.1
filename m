@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D99CDC6FD1F
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 09:12:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.699278.1091991 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B494CD1288
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 09:12:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.699284.1092050 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H3-0001BX-Qp; Fri, 29 Mar 2024 09:11:45 +0000
+	id 1rq8H7-0002Y4-TC; Fri, 29 Mar 2024 09:11:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 699278.1091991; Fri, 29 Mar 2024 09:11:45 +0000
+Received: by outflank-mailman (output) from mailman id 699284.1092050; Fri, 29 Mar 2024 09:11:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H3-0001BQ-OK; Fri, 29 Mar 2024 09:11:45 +0000
-Received: by outflank-mailman (input) for mailman id 699278;
- Fri, 29 Mar 2024 09:11:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rq8H7-0002XR-Nf; Fri, 29 Mar 2024 09:11:49 +0000
+Received: by outflank-mailman (input) for mailman id 699284;
+ Fri, 29 Mar 2024 09:11:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LGMC=LD=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rq8H2-0000x2-By
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:44 +0000
+ id 1rq8H6-0000ww-5X
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:48 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5b9a590e-edac-11ee-afe3-a90da7624cb6;
- Fri, 29 Mar 2024 10:11:42 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5de8bcc3-edac-11ee-a1ef-f123f15fe8a2;
+ Fri, 29 Mar 2024 10:11:46 +0100 (CET)
 Received: from nico.bugseng.com (unknown [176.206.12.122])
- by support.bugseng.com (Postfix) with ESMTPSA id 2285D4EE0743;
- Fri, 29 Mar 2024 10:11:41 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 8F3F84EE0C8D;
+ Fri, 29 Mar 2024 10:11:45 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5b9a590e-edac-11ee-afe3-a90da7624cb6
+X-Inumbo-ID: 5de8bcc3-edac-11ee-a1ef-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -55,9 +55,9 @@ Cc: sstabellini@kernel.org,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v3 1/7] x86/msi: address violation of MISRA C Rule 20.7 and coding style
-Date: Fri, 29 Mar 2024 10:11:29 +0100
-Message-Id: <2f2c865f20d0296e623f1d65bed25c083f5dd497.1711700095.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v3 7/7] x86/amd: address violations of MISRA C Rule 20.7
+Date: Fri, 29 Mar 2024 10:11:35 +0100
+Message-Id: <aa2c6d47927f76b12d1f30dc2eb1a6f15ba34dea.1711700095.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1711700095.git.nicola.vetrini@bugseng.com>
 References: <cover.1711700095.git.nicola.vetrini@bugseng.com>
@@ -70,81 +70,27 @@ macro definitions should gain additional parentheses to ensure that all
 current and future users will be safe with respect to expansions that
 can possibly alter the semantics of the passed-in macro parameter.
 
-While at it, the style of these macros has been somewhat uniformed.
-
 No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
-Changes in v2:
-- Make the style change more consistent
----
- xen/arch/x86/include/asm/msi.h | 49 +++++++++++++++++-----------------
- 1 file changed, 25 insertions(+), 24 deletions(-)
+ xen/arch/x86/include/asm/amd.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
-index 997ccb87be0c..bd110c357ce4 100644
---- a/xen/arch/x86/include/asm/msi.h
-+++ b/xen/arch/x86/include/asm/msi.h
-@@ -147,33 +147,34 @@ int msi_free_irq(struct msi_desc *entry);
-  */
- #define NR_HP_RESERVED_VECTORS 	20
- 
--#define msi_control_reg(base)		(base + PCI_MSI_FLAGS)
--#define msi_lower_address_reg(base)	(base + PCI_MSI_ADDRESS_LO)
--#define msi_upper_address_reg(base)	(base + PCI_MSI_ADDRESS_HI)
--#define msi_data_reg(base, is64bit)	\
--	( (is64bit == 1) ? base+PCI_MSI_DATA_64 : base+PCI_MSI_DATA_32 )
--#define msi_mask_bits_reg(base, is64bit) \
--	( (is64bit == 1) ? base+PCI_MSI_MASK_BIT : base+PCI_MSI_MASK_BIT-4)
-+#define msi_control_reg(base)        ((base) + PCI_MSI_FLAGS)
-+#define msi_lower_address_reg(base)  ((base) + PCI_MSI_ADDRESS_LO)
-+#define msi_upper_address_reg(base)  ((base) + PCI_MSI_ADDRESS_HI)
-+#define msi_data_reg(base, is64bit) \
-+    (((is64bit) == 1) ? (base) + PCI_MSI_DATA_64 : (base) + PCI_MSI_DATA_32)
-+#define msi_mask_bits_reg(base, is64bit)                \
-+    (((is64bit) == 1) ? (base) + PCI_MSI_MASK_BIT       \
-+                      : (base) + PCI_MSI_MASK_BIT - 4)
- #define msi_pending_bits_reg(base, is64bit) \
--	((base) + PCI_MSI_MASK_BIT + ((is64bit) ? 4 : 0))
--#define msi_disable(control)		control &= ~PCI_MSI_FLAGS_ENABLE
-+    ((base) + PCI_MSI_MASK_BIT + ((is64bit) ? 4 : 0))
-+#define msi_disable(control)         ({ (control) &= ~PCI_MSI_FLAGS_ENABLE })
- #define multi_msi_capable(control) \
--	(1 << ((control & PCI_MSI_FLAGS_QMASK) >> 1))
-+    (1 << (((control) & PCI_MSI_FLAGS_QMASK) >> 1))
- #define multi_msi_enable(control, num) \
--	control |= (((fls(num) - 1) << 4) & PCI_MSI_FLAGS_QSIZE);
--#define is_64bit_address(control)	(!!(control & PCI_MSI_FLAGS_64BIT))
--#define is_mask_bit_support(control)	(!!(control & PCI_MSI_FLAGS_MASKBIT))
--#define msi_enable(control, num) multi_msi_enable(control, num); \
--	control |= PCI_MSI_FLAGS_ENABLE
--
--#define msix_control_reg(base)		(base + PCI_MSIX_FLAGS)
--#define msix_table_offset_reg(base)	(base + PCI_MSIX_TABLE)
--#define msix_pba_offset_reg(base)	(base + PCI_MSIX_PBA)
--#define msix_enable(control)	 	control |= PCI_MSIX_FLAGS_ENABLE
--#define msix_disable(control)	 	control &= ~PCI_MSIX_FLAGS_ENABLE
--#define msix_table_size(control) 	((control & PCI_MSIX_FLAGS_QSIZE)+1)
--#define msix_unmask(address)	 	(address & ~PCI_MSIX_VECTOR_BITMASK)
--#define msix_mask(address)		(address | PCI_MSIX_VECTOR_BITMASK)
-+    ({ (control) |= (((fls(num) - 1) << 4) & PCI_MSI_FLAGS_QSIZE) })
-+#define is_64bit_address(control)    (!!((control) & PCI_MSI_FLAGS_64BIT))
-+#define is_mask_bit_support(control) (!!((control) & PCI_MSI_FLAGS_MASKBIT))
-+#define msi_enable(control, num)     ({ multi_msi_enable(control, num); \
-+                                        (control) |= PCI_MSI_FLAGS_ENABLE })
-+
-+#define msix_control_reg(base)       ((base) + PCI_MSIX_FLAGS)
-+#define msix_table_offset_reg(base)  ((base) + PCI_MSIX_TABLE)
-+#define msix_pba_offset_reg(base)    ((base) + PCI_MSIX_PBA)
-+#define msix_enable(control)         ({ (control) |= PCI_MSIX_FLAGS_ENABLE })
-+#define msix_disable(control)        ({ (control) &= ~PCI_MSIX_FLAGS_ENABLE })
-+#define msix_table_size(control)     (((control) & PCI_MSIX_FLAGS_QSIZE) + 1)
-+#define msix_unmask(address)         ((address) & ~PCI_MSIX_VECTOR_BITMASK)
-+#define msix_mask(address)           ((address) | PCI_MSIX_VECTOR_BITMASK)
- 
- /*
-  * MSI Defined Data Structures
+diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
+index 2cc0ce2e9fd2..fa4e0fc766aa 100644
+--- a/xen/arch/x86/include/asm/amd.h
++++ b/xen/arch/x86/include/asm/amd.h
+@@ -119,7 +119,8 @@
+ #define AMD_LEGACY_ERRATUM(...)         -1 /* legacy */, __VA_ARGS__, 0
+ #define AMD_OSVW_ERRATUM(osvw_id, ...)  osvw_id, __VA_ARGS__, 0
+ #define AMD_MODEL_RANGE(f, m_start, s_start, m_end, s_end)              \
+-    ((f << 24) | (m_start << 16) | (s_start << 12) | (m_end << 4) | (s_end))
++    (((f) << 24) | ((m_start) << 16) | ((s_start) << 12) | \
++     ((m_end) << 4) | (s_end))
+ #define AMD_MODEL_RANGE_FAMILY(range)   (((range) >> 24) & 0xff)
+ #define AMD_MODEL_RANGE_START(range)    (((range) >> 12) & 0xfff)
+ #define AMD_MODEL_RANGE_END(range)      ((range) & 0xfff)
 -- 
 2.34.1
 
