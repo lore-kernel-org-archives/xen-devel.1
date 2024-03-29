@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E61CD1290
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 09:12:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.699281.1092016 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F76FCD128E
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 09:12:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.699282.1092024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H5-0001hj-Lj; Fri, 29 Mar 2024 09:11:47 +0000
+	id 1rq8H6-0001kE-22; Fri, 29 Mar 2024 09:11:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 699281.1092016; Fri, 29 Mar 2024 09:11:47 +0000
+Received: by outflank-mailman (output) from mailman id 699282.1092024; Fri, 29 Mar 2024 09:11:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H5-0001gK-Er; Fri, 29 Mar 2024 09:11:47 +0000
-Received: by outflank-mailman (input) for mailman id 699281;
- Fri, 29 Mar 2024 09:11:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rq8H5-0001jE-Lp; Fri, 29 Mar 2024 09:11:47 +0000
+Received: by outflank-mailman (input) for mailman id 699282;
+ Fri, 29 Mar 2024 09:11:47 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LGMC=LD=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rq8H4-0000ww-5C
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:46 +0000
+ id 1rq8H5-0000x2-0u
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:47 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5cfe1f74-edac-11ee-a1ef-f123f15fe8a2;
- Fri, 29 Mar 2024 10:11:44 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5d9a25db-edac-11ee-afe3-a90da7624cb6;
+ Fri, 29 Mar 2024 10:11:45 +0100 (CET)
 Received: from nico.bugseng.com (unknown [176.206.12.122])
- by support.bugseng.com (Postfix) with ESMTPSA id 0A5614EE0748;
- Fri, 29 Mar 2024 10:11:44 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 1433F4EE0749;
+ Fri, 29 Mar 2024 10:11:45 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5cfe1f74-edac-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: 5d9a25db-edac-11ee-afe3-a90da7624cb6
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -52,12 +52,12 @@ Cc: sstabellini@kernel.org,
 	consulting@bugseng.com,
 	bertrand.marquis@arm.com,
 	julien@xen.org,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v3 4/7] x86/hvm: address violations of MISRA C Rule 20.7
-Date: Fri, 29 Mar 2024 10:11:32 +0100
-Message-Id: <ae50d853bbf20a74d2693a5d52f36d216c59213f.1711700095.git.nicola.vetrini@bugseng.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [XEN PATCH v3 6/7] xen/mm: address violations of MISRA C Rule 20.7
+Date: Fri, 29 Mar 2024 10:11:34 +0100
+Message-Id: <9fade8c540f19876fe7928ab91398bd5e94594b4.1711700095.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1711700095.git.nicola.vetrini@bugseng.com>
 References: <cover.1711700095.git.nicola.vetrini@bugseng.com>
@@ -74,26 +74,36 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/hvm/domain.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/include/xen/mm.h | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
-index 7f6e362a702e..b96cf93dd0ef 100644
---- a/xen/arch/x86/hvm/domain.c
-+++ b/xen/arch/x86/hvm/domain.c
-@@ -132,9 +132,9 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
-     s = (struct segment_register)                                           \
-         { 0, { (r)->s ## _ar }, (r)->s ## _limit, (r)->s ## _base };        \
-     /* Set accessed / busy bit for present segments. */                     \
--    if ( s.p )                                                              \
--        s.type |= (x86_seg_##s != x86_seg_tr ? 1 : 2);                      \
--    check_segment(&s, x86_seg_ ## s); })
-+    if ( (s).p )                                                            \
-+        (s).type |= (x86_seg_##s != x86_seg_tr ? 1 : 2);                    \
-+    check_segment(&(s), x86_seg_ ## s); })
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 3e84960a365f..7561297a7553 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -415,15 +415,15 @@ page_list_splice(struct page_list_head *list, struct page_list_head *head)
+ }
  
-         rc = SEG(cs, regs);
-         rc |= SEG(ds, regs);
+ #define page_list_for_each(pos, head) \
+-    for ( pos = (head)->next; pos; pos = page_list_next(pos, head) )
++    for ( (pos) = (head)->next; (pos); (pos) = page_list_next(pos, head) )
+ #define page_list_for_each_safe(pos, tmp, head) \
+-    for ( pos = (head)->next; \
+-          pos ? (tmp = page_list_next(pos, head), 1) : 0; \
+-          pos = tmp )
++    for ( (pos) = (head)->next; \
++          (pos) ? ((tmp) = page_list_next(pos, head), 1) : 0; \
++          (pos) = (tmp) )
+ #define page_list_for_each_safe_reverse(pos, tmp, head) \
+-    for ( pos = (head)->tail; \
+-          pos ? (tmp = page_list_prev(pos, head), 1) : 0; \
+-          pos = tmp )
++    for ( (pos) = (head)->tail; \
++          (pos) ? ((tmp) = page_list_prev(pos, head), 1) : 0; \
++          (pos) = (tmp) )
+ #else
+ # define page_list_head                  list_head
+ # define PAGE_LIST_HEAD_INIT             LIST_HEAD_INIT
 -- 
 2.34.1
 
