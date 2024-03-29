@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B94CD128A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB42ACD1290
 	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 11:11:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.699359.1092195 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.699358.1092188 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rqA8v-0007i2-85; Fri, 29 Mar 2024 11:11:29 +0000
+	id 1rqA8u-0007bY-QS; Fri, 29 Mar 2024 11:11:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 699359.1092195; Fri, 29 Mar 2024 11:11:29 +0000
+Received: by outflank-mailman (output) from mailman id 699358.1092188; Fri, 29 Mar 2024 11:11:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rqA8u-0007fq-W8; Fri, 29 Mar 2024 11:11:28 +0000
-Received: by outflank-mailman (input) for mailman id 699359;
- Fri, 29 Mar 2024 11:11:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rqA8u-0007ar-L0; Fri, 29 Mar 2024 11:11:28 +0000
+Received: by outflank-mailman (input) for mailman id 699358;
+ Fri, 29 Mar 2024 11:11:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tVj/=LD=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
- id 1rqA8t-0006qu-Kd
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 11:11:27 +0000
+ id 1rqA8s-0006qp-RU
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 11:11:26 +0000
 Received: from doppler.solinno.uk (doppler.solinno.uk [81.2.106.178])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 14bca0d2-edbd-11ee-a1ef-f123f15fe8a2;
- Fri, 29 Mar 2024 12:11:24 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 13de8d67-edbd-11ee-afe3-a90da7624cb6;
+ Fri, 29 Mar 2024 12:11:23 +0100 (CET)
 Received: from folly.solinno.co.uk (folly.dyn.solinno.co.uk [192.168.2.135])
- by doppler.solinno.uk (Postfix) with ESMTPSA id 2415A800AD;
- Fri, 29 Mar 2024 11:11:23 +0000 (GMT)
+ by doppler.solinno.uk (Postfix) with ESMTPSA id EE1E18009F;
+ Fri, 29 Mar 2024 11:11:22 +0000 (GMT)
 Received: by folly.solinno.co.uk (Postfix, from userid 1000)
- id C21C2202AC; Fri, 29 Mar 2024 11:11:22 +0000 (GMT)
+ id B9288202A8; Fri, 29 Mar 2024 11:11:22 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,23 +43,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14bca0d2-edbd-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: 13de8d67-edbd-11ee-afe3-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
-	s=mail; t=1711710683;
-	bh=vvCdYJp3hmq98C5XpPhX29JIJPhg6FKX4zHYexemcSA=;
+	s=mail; t=1711710682;
+	bh=I1KRv77SpIHtiaVfa6jI9oqQE3FOnPOPsxPAoW9qC9A=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Na54nphOlyvcT6fmlR+2XS4n7fZOIZY6aNNyhFg131DLIZ3EO1CvFh9WxdPDl4/wS
-	 4KnLfdc2ZsMcYc2U1qJyccrHyi/DEZYaDDdMaWrUgl4Ir71LV19mv4BOn/XDv0sA7m
-	 5D8QfiW3LT0iNPduaQMyQgnTTnrw/QmK7xKKMS58=
+	b=MFz1C8QqkX4a00kAlbl931eb2FFXJ6Ibpk8EmslqrcQrxIzAMW8EJrabcoqrepG7X
+	 Xe3XCgDyWezFivAs3sNPYJVaP6IjqFYvMcVfKS4ybDOkXPbfvXK3152rNsOdC0OrhC
+	 Fgm2DFyUr9PW3AE+VnZuKTrW0YimWT0TPIkY6lkg=
 From: leigh@solinno.co.uk
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
 	anthony.perard@citrix.com,
 	slack@rabbit.lu,
 	Leigh Brown <leigh@solinno.co.uk>
-Subject: [PATCH v2 6/6] docs/man: Add xenwatchdog manual page
-Date: Fri, 29 Mar 2024 11:10:56 +0000
-Message-Id: <20240329111056.6118-7-leigh@solinno.co.uk>
+Subject: [PATCH v2 2/6] tools/misc: rework xenwatchdogd signal handling
+Date: Fri, 29 Mar 2024 11:10:52 +0000
+Message-Id: <20240329111056.6118-3-leigh@solinno.co.uk>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240329111056.6118-1-leigh@solinno.co.uk>
 References: <20240329111056.6118-1-leigh@solinno.co.uk>
@@ -68,74 +68,72 @@ Content-Transfer-Encoding: 8bit
 
 From: Leigh Brown <leigh@solinno.co.uk>
 
-Add a manual page for xenwatchdogd.
+Rework xenwatchdogd signal handling to do the minimum in the signal
+handler. This is a very minor enhancement.
 
 Signed-off-by: Leigh Brown <leigh@solinno.co.uk>
 ---
- docs/man/xenwatchdogd.8.pod | 54 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 54 insertions(+)
- create mode 100644 docs/man/xenwatchdogd.8.pod
+ tools/misc/xenwatchdogd.c | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
 
-diff --git a/docs/man/xenwatchdogd.8.pod b/docs/man/xenwatchdogd.8.pod
-new file mode 100644
-index 0000000000..2f6454f183
---- /dev/null
-+++ b/docs/man/xenwatchdogd.8.pod
-@@ -0,0 +1,54 @@
-+=head1 NAME
+diff --git a/tools/misc/xenwatchdogd.c b/tools/misc/xenwatchdogd.c
+index 2f7c822d61..35a0df655a 100644
+--- a/tools/misc/xenwatchdogd.c
++++ b/tools/misc/xenwatchdogd.c
+@@ -9,9 +9,11 @@
+ #include <unistd.h>
+ #include <signal.h>
+ #include <stdio.h>
++#include <stdbool.h>
+ 
+ xc_interface *h;
+-int id = 0;
++static bool safeexit = false;
++static bool done = false;
+ 
+ void daemonize(void)
+ {
+@@ -38,20 +40,18 @@ void daemonize(void)
+ 
+ void catch_exit(int sig)
+ {
+-    if (id)
+-        xc_watchdog(h, id, 300);
+-    exit(EXIT_SUCCESS);
++    done = true;
+ }
+ 
+ void catch_usr1(int sig)
+ {
+-    if (id)
+-        xc_watchdog(h, id, 0);
+-    exit(EXIT_SUCCESS);
++    safeexit = true;
++    done = true;
+ }
+ 
+ int main(int argc, char **argv)
+ {
++    int id;
+     int t, s;
+     int ret;
+ 
+@@ -90,10 +90,14 @@ int main(int argc, char **argv)
+     if (id <= 0)
+         err(EXIT_FAILURE, "xc_watchdog setup");
+ 
+-    for (;;) {
++    while (!done) {
+         sleep(s);
+         ret = xc_watchdog(h, id, t);
+         if (ret != 0)
+             err(EXIT_FAILURE, "xc_watchdog");
+     }
 +
-+xenwatchdogd - Xen hypercall based watchdog daemon
-+
-+=head1 SYNOPSIS
-+
-+B<xenwatchdogd> [ I<OPTIONS> ] <I<TIMEOUT>> [ <I<SLEEP>> ]
-+
-+=head1 DESCRIPTION
-+
-+B<xenwatchdogd> arms the Xen watchdog timer to I<TIMEOUT> every I<SLEEP>
-+seconds. If the xenwatchdogd process dies or is delayed for more than
-+I<TIMEOUT> seconds, then Xen will reboot the domain. If the domain being
-+rebooted is domain 0, the whole system will reboot.
-+
-+=head1 OPTIONS
-+
-+=over 4
-+
-+=item B<-h>, B<--help>
-+
-+Display a help message.
-+
-+=item B<-F>, B<--foreground>
-+
-+Run in the foreground. The default behaviour is to daemonize.
-+
-+=item B<-x>, B<--safe-exit>
-+
-+Disable watchdog on orderly exit. The default behaviour is to arm the
-+watchdog to 300 seconds to allow time for the domain to shutdown.  See 
-+also the B<SIGNALS> section.
-+
-+=item B<timeout>
-+
-+The number of seconds to arm the Xen watchdog timer. This must be set to
-+a minimum of two.
-+
-+=item B<sleep>
-+
-+The number of seconds to sleep in between calls to arm the Xen watchdog
-+timer. This must be at least one second, and less than the I<timeout>
-+value. If not specified, it defaults to half the I<timeout> value.
-+
-+=back
-+
-+=head1 SIGNALS
-+
-+B<SIGUSR1> Will cause the program to disarm the watchdog timer and exit,
-+regardless of whether the safe exit option was passed.
-+
-+=head1 AUTHOR
-+
-+Citrix Ltd and other contributors.
++    // Zero seconds timeout will disarm the watchdog timer
++    xc_watchdog(h, id, safeexit ? 0 : 300);
++    return 0;
+ }
 -- 
 2.39.2
 
