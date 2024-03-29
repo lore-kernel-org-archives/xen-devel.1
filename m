@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2DB7CD128D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 09:12:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.699277.1091981 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DAA4CD1292
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 09:12:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.699279.1091997 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H2-0000xF-Kq; Fri, 29 Mar 2024 09:11:44 +0000
+	id 1rq8H4-0001Dm-2a; Fri, 29 Mar 2024 09:11:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 699277.1091981; Fri, 29 Mar 2024 09:11:44 +0000
+Received: by outflank-mailman (output) from mailman id 699279.1091997; Fri, 29 Mar 2024 09:11:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H2-0000x8-Hf; Fri, 29 Mar 2024 09:11:44 +0000
-Received: by outflank-mailman (input) for mailman id 699277;
- Fri, 29 Mar 2024 09:11:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rq8H3-0001DO-U9; Fri, 29 Mar 2024 09:11:45 +0000
+Received: by outflank-mailman (input) for mailman id 699279;
+ Fri, 29 Mar 2024 09:11:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LGMC=LD=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rq8H1-0000ww-Cc
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:43 +0000
+ id 1rq8H3-0000x2-0j
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:45 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5aeb5857-edac-11ee-a1ef-f123f15fe8a2;
- Fri, 29 Mar 2024 10:11:41 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5c11d5b4-edac-11ee-afe3-a90da7624cb6;
+ Fri, 29 Mar 2024 10:11:43 +0100 (CET)
 Received: from nico.bugseng.com (unknown [176.206.12.122])
- by support.bugseng.com (Postfix) with ESMTPSA id C1AE34EE073F;
- Fri, 29 Mar 2024 10:11:38 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 4DB7C4EE0744;
+ Fri, 29 Mar 2024 10:11:42 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5aeb5857-edac-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: 5c11d5b4-edac-11ee-afe3-a90da7624cb6
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -52,55 +52,42 @@ Cc: sstabellini@kernel.org,
 	consulting@bugseng.com,
 	bertrand.marquis@arm.com,
 	julien@xen.org,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	George Dunlap <george.dunlap@citrix.com>
-Subject: [XEN PATCH v3 0/7] address violations of MISRA C Rule 20.7 
-Date: Fri, 29 Mar 2024 10:11:28 +0100
-Message-Id: <cover.1711700095.git.nicola.vetrini@bugseng.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH v3 2/7] arm/public: address violations of MISRA C Rule 20.7
+Date: Fri, 29 Mar 2024 10:11:30 +0100
+Message-Id: <142c27a41cea7402a68035dd466db0b47487fb06.1711700095.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1711700095.git.nicola.vetrini@bugseng.com>
+References: <cover.1711700095.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi all,
+MISRA C Rule 20.7 states: "Expressions resulting from the expansion
+of macro parameters shall be enclosed in parentheses". Therefore, some
+macro definitions should gain additional parentheses to ensure that all
+current and future users will be safe with respect to expansions that
+can possibly alter the semantics of the passed-in macro parameter.
 
-this series aims to refactor some macros that cause violations of MISRA C Rule
-20.7 ("Expressions resulting from the expansion of macro parameters shall be
-enclosed in parentheses"). All the macros touched by these patches are in some
-way involved in violations, and the strategy adopted to bring them into
-compliance is to add parentheses around macro arguments where needed.
+No functional change.
 
-Deviations from the rule have been amended to encompass also direct use in
-initializer lists of macro arguments.
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+ xen/include/public/arch-arm.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Patch 1 is taken, with adjustments, from the earlier series (which was
-incorrectly tagged as v1). All other patches are new in this series and are
-pairwise indipendent.
-
-Nicola Vetrini (7):
-  x86/msi: address violation of MISRA C Rule 20.7 and coding style
-  arm/public: address violations of MISRA C Rule 20.7
-  x86/vPMU: address violations of MISRA C Rule 20.7
-  x86/hvm: address violations of MISRA C Rule 20.7
-  automation/eclair: add deviations for Rule 20.7
-  xen/mm: address violations of MISRA C Rule 20.7
-  x86/amd: address violations of MISRA C Rule 20.7
-
- .../eclair_analysis/ECLAIR/deviations.ecl     | 25 +++++++++-
- docs/misra/deviations.rst                     | 14 +++++-
- docs/misra/rules.rst                          |  2 +-
- xen/arch/x86/hvm/domain.c                     |  6 +--
- xen/arch/x86/include/asm/amd.h                |  3 +-
- xen/arch/x86/include/asm/msi.h                | 49 ++++++++++---------
- xen/arch/x86/include/asm/vpmu.h               |  4 +-
- xen/include/public/arch-arm.h                 |  2 +-
- xen/include/xen/mm.h                          | 14 +++---
- 9 files changed, 77 insertions(+), 42 deletions(-)
-
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index a25e87dbda3a..e167e14f8df9 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -209,7 +209,7 @@
+     do {                                                    \
+         __typeof__(&(hnd)) _sxghr_tmp = &(hnd);             \
+         _sxghr_tmp->q = 0;                                  \
+-        _sxghr_tmp->p = val;                                \
++        _sxghr_tmp->p = (val);                              \
+     } while ( 0 )
+ #define set_xen_guest_handle(hnd, val) set_xen_guest_handle_raw(hnd, val)
+ 
 -- 
 2.34.1
 
