@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B494CD1288
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E61CD1290
 	for <xen-devel@archiver.kernel.org>; Fri, 29 Mar 2024 09:12:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.699284.1092050 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.699281.1092016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H7-0002Y4-TC; Fri, 29 Mar 2024 09:11:49 +0000
+	id 1rq8H5-0001hj-Lj; Fri, 29 Mar 2024 09:11:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 699284.1092050; Fri, 29 Mar 2024 09:11:49 +0000
+Received: by outflank-mailman (output) from mailman id 699281.1092016; Fri, 29 Mar 2024 09:11:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rq8H7-0002XR-Nf; Fri, 29 Mar 2024 09:11:49 +0000
-Received: by outflank-mailman (input) for mailman id 699284;
- Fri, 29 Mar 2024 09:11:48 +0000
+	id 1rq8H5-0001gK-Er; Fri, 29 Mar 2024 09:11:47 +0000
+Received: by outflank-mailman (input) for mailman id 699281;
+ Fri, 29 Mar 2024 09:11:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LGMC=LD=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rq8H6-0000ww-5X
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:48 +0000
+ id 1rq8H4-0000ww-5C
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2024 09:11:46 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5de8bcc3-edac-11ee-a1ef-f123f15fe8a2;
- Fri, 29 Mar 2024 10:11:46 +0100 (CET)
+ id 5cfe1f74-edac-11ee-a1ef-f123f15fe8a2;
+ Fri, 29 Mar 2024 10:11:44 +0100 (CET)
 Received: from nico.bugseng.com (unknown [176.206.12.122])
- by support.bugseng.com (Postfix) with ESMTPSA id 8F3F84EE0C8D;
- Fri, 29 Mar 2024 10:11:45 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 0A5614EE0748;
+ Fri, 29 Mar 2024 10:11:44 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5de8bcc3-edac-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: 5cfe1f74-edac-11ee-a1ef-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -55,9 +55,9 @@ Cc: sstabellini@kernel.org,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v3 7/7] x86/amd: address violations of MISRA C Rule 20.7
-Date: Fri, 29 Mar 2024 10:11:35 +0100
-Message-Id: <aa2c6d47927f76b12d1f30dc2eb1a6f15ba34dea.1711700095.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v3 4/7] x86/hvm: address violations of MISRA C Rule 20.7
+Date: Fri, 29 Mar 2024 10:11:32 +0100
+Message-Id: <ae50d853bbf20a74d2693a5d52f36d216c59213f.1711700095.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1711700095.git.nicola.vetrini@bugseng.com>
 References: <cover.1711700095.git.nicola.vetrini@bugseng.com>
@@ -74,23 +74,26 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/include/asm/amd.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/x86/hvm/domain.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index 2cc0ce2e9fd2..fa4e0fc766aa 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -119,7 +119,8 @@
- #define AMD_LEGACY_ERRATUM(...)         -1 /* legacy */, __VA_ARGS__, 0
- #define AMD_OSVW_ERRATUM(osvw_id, ...)  osvw_id, __VA_ARGS__, 0
- #define AMD_MODEL_RANGE(f, m_start, s_start, m_end, s_end)              \
--    ((f << 24) | (m_start << 16) | (s_start << 12) | (m_end << 4) | (s_end))
-+    (((f) << 24) | ((m_start) << 16) | ((s_start) << 12) | \
-+     ((m_end) << 4) | (s_end))
- #define AMD_MODEL_RANGE_FAMILY(range)   (((range) >> 24) & 0xff)
- #define AMD_MODEL_RANGE_START(range)    (((range) >> 12) & 0xfff)
- #define AMD_MODEL_RANGE_END(range)      ((range) & 0xfff)
+diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
+index 7f6e362a702e..b96cf93dd0ef 100644
+--- a/xen/arch/x86/hvm/domain.c
++++ b/xen/arch/x86/hvm/domain.c
+@@ -132,9 +132,9 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
+     s = (struct segment_register)                                           \
+         { 0, { (r)->s ## _ar }, (r)->s ## _limit, (r)->s ## _base };        \
+     /* Set accessed / busy bit for present segments. */                     \
+-    if ( s.p )                                                              \
+-        s.type |= (x86_seg_##s != x86_seg_tr ? 1 : 2);                      \
+-    check_segment(&s, x86_seg_ ## s); })
++    if ( (s).p )                                                            \
++        (s).type |= (x86_seg_##s != x86_seg_tr ? 1 : 2);                    \
++    check_segment(&(s), x86_seg_ ## s); })
+ 
+         rc = SEG(cs, regs);
+         rc |= SEG(ds, regs);
 -- 
 2.34.1
 
