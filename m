@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F59CD1288
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A85CD1294
 	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:20:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.700402.1093544 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.700399.1093515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxjM-0001cz-Jk; Wed, 03 Apr 2024 10:20:32 +0000
+	id 1rrxjI-0000nh-TC; Wed, 03 Apr 2024 10:20:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 700402.1093544; Wed, 03 Apr 2024 10:20:32 +0000
+Received: by outflank-mailman (output) from mailman id 700399.1093515; Wed, 03 Apr 2024 10:20:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxjM-0001c6-AQ; Wed, 03 Apr 2024 10:20:32 +0000
-Received: by outflank-mailman (input) for mailman id 700402;
- Wed, 03 Apr 2024 10:20:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rrxjI-0000mS-Mk; Wed, 03 Apr 2024 10:20:28 +0000
+Received: by outflank-mailman (input) for mailman id 700399;
+ Wed, 03 Apr 2024 10:20:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YDNC=LI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rrxjK-0007Ql-Qe
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:30 +0000
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [2a00:1450:4864:20::129])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cc394784-f1a3-11ee-afe5-a90da7624cb6;
- Wed, 03 Apr 2024 12:20:30 +0200 (CEST)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-513d3746950so7685101e87.1
- for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:30 -0700 (PDT)
+ id 1rrxjG-0007Ob-TV
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:26 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c917b113-f1a3-11ee-a1ef-f123f15fe8a2;
+ Wed, 03 Apr 2024 12:20:25 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-515b43b39fdso688499e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:25 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.27
+ k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 03:20:28 -0700 (PDT)
+ Wed, 03 Apr 2024 03:20:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,89 +46,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc394784-f1a3-11ee-afe5-a90da7624cb6
+X-Inumbo-ID: c917b113-f1a3-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712139629; x=1712744429; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1712139624; x=1712744424; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wmYB0DAUci3LPNlemnoUPoXVgG+/ldfQH/ieZKbZO8s=;
-        b=Y0mJ3b4qsqkfmy1Qqoo2uvSlbVwEM+/gPdIV1Uyk9Jx4yxzEzztiZxeHq/BItTbby+
-         FyvW4uJG6yd7Gw6/F9PMvwvG66nMFhrF5Gfzf8BIJ1iNDaF/ZEp9lt7Vg3xtGQNryqh5
-         BsoYAS1qvqIlawcHPDBWKmFkgnVCNWy7JZJ6sAW18fKxCZ05/T6UMaRRE4HFtaqNX1hb
-         dPOmybayuY6Q5/RTjHTPN7bzH+yimoCcV4Hmob4uI9SOwvUKPgT+njleu693siUKqnJb
-         1YThq8wX5wfg/Tuh0QPMIcIiDtssxaJEBoyoOqkjobyl3wZ2xtzBG7/N7ZNsGvQ30nob
-         x+ig==
+        bh=Hf2lo1oLaP0G7F2E7pKpUjQOuukp+kvUPmq6qeGN1Gs=;
+        b=PLykraHvgNJbfbQbpKajlZpfQjVKXUkJezpUBSKagAusRSanSk0GLcqlWbVGJqhr4z
+         s6c0onL9oi10y3uk2EICMcQh/E811UGJpMOHV1JcdxJT+NM/axirFYg/UO2a2LdqGBWz
+         MtA7dYK7qgSQbXA4hRGdfCUApw/w78G2qmv1dUfoVX3JzAkDfaTtbfxyirP96CfYB+mm
+         89uDq1ybz8Z84hiVBxlJRxEru/0WEkocP9xCox//UlGWBBF39vXtXTqANYAjDg1BZjg1
+         IczLxdPwXc54ITbfgIhXeRmLeaLR9UGm/YrQvFQSomScFZKiMu6u8aPhQk0v7UXADxna
+         982g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712139629; x=1712744429;
+        d=1e100.net; s=20230601; t=1712139624; x=1712744424;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wmYB0DAUci3LPNlemnoUPoXVgG+/ldfQH/ieZKbZO8s=;
-        b=L1R3Zt+dc4PuQvmstKj/aLEzs+BlE6neCb25LsqLjkdBScf3Jrv6QOtegxnmknHt64
-         9FtT3gTNqJtFYd8z9adPUNWDbGRXkhWVqyTxc/78A/55W0sag04ns+N6Sg98SRM7L1bh
-         hcu5l6GGXgorpxvd1fDvqjrFJiJh0pXrnTtEOXDCfqetHXBmxe7eJ4dgxMNWPAm/n5HU
-         yDbc8ChtSsJ08PigSKc4tr+DNG7YxrrS6T7KpZ3I5qxim13Ju1xYtGPD+mdcS8F2u+Ts
-         VN4TQyxRxGJu3PceRXQ7pKmU/fNWVueJsOJYW99woSmQ8NOeH7HsautrX0pjqQiJrEhh
-         /I5Q==
-X-Gm-Message-State: AOJu0YxExApniK44BGVoJVfK9si0UHLZFWv9BTMkYNnt8qnetPKGs5BI
-	QfUwtT5GkrKslMu35GOV6hSogOwcMNP4sM9u5OxeXe2NdWuYQnsn6yM/JHov
-X-Google-Smtp-Source: AGHT+IGRuDpNNNUxCjV9t0vsUjouqbQHHG5MdprMpi2zeK7fm+ekTpdZexWqrbIGiM7eRnnMB7jHQA==
-X-Received: by 2002:ac2:558a:0:b0:513:9b96:a948 with SMTP id v10-20020ac2558a000000b005139b96a948mr9324598lfg.6.1712139629285;
-        Wed, 03 Apr 2024 03:20:29 -0700 (PDT)
+        bh=Hf2lo1oLaP0G7F2E7pKpUjQOuukp+kvUPmq6qeGN1Gs=;
+        b=pu3LMHuE3IfSSV+l5vuUKDVfJ3NYWTQ8SotIpPPtz9KwFhQLiYMTxZWFrdNjGS9C0s
+         tCu8Kugtiv19d3tsh9+wIsnfTtBYZWUn1fxx0SbbZyqu43Fi0auZdcWjSzryF0v4BfiF
+         jUzHjjJpPgr5pwTTxkiyOhk1yzfVWUwp/JJqXB42NJgMFVUakRaKRXoQkS9UHM038dFN
+         8H5JJkacfqs1+I5vBQwByXNaSGnicaXdjQ4z06jhzeDODWmLw5ub/q/+2gwreJNNOw0W
+         EXEPo2NnnabKSmxjMI6KAqVO1ec9+uhDl2ONwynkW7F+XPiZbhNJw8wtSxY/ecUdJhJT
+         Ehtw==
+X-Gm-Message-State: AOJu0YwFxMJLrW7iB4PZ/wm8STJRrwX99wlRPjow8WVyomm2nUwz41pP
+	DjF9Ca0XAW18o3csobjQ+TbdFHhL3iMkQFKkzG8nPyeenrXWwBsYzCZ8aIs+
+X-Google-Smtp-Source: AGHT+IH4bg1txYQJMVNseVJ2kSMF/ivLg2sB8ZFTK0j2GsWYsuqwJV7Kv4HcGxzX7oiL1czSjqkojA==
+X-Received: by 2002:a05:6512:20a:b0:515:89cc:26ab with SMTP id a10-20020a056512020a00b0051589cc26abmr847886lfo.9.1712139624428;
+        Wed, 03 Apr 2024 03:20:24 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v7 11/19] xen/riscv: introduce monitor.h
-Date: Wed,  3 Apr 2024 12:20:04 +0200
-Message-ID: <3b133ae88d44079570c936c9c7fffba8349b1710.1712137031.git.oleksii.kurochko@gmail.com>
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v7 07/19] xen/riscv: introduce bitops.h
+Date: Wed,  3 Apr 2024 12:20:00 +0200
+Message-ID: <3d8a46946a37ca499e962aa6504fa453326e5ad0.1712137031.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 References: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Taken from Linux-6.4.0-rc1
+
+Xen's bitops.h consists of several Linux's headers:
+* linux/arch/include/asm/bitops.h:
+  * The following function were removed as they aren't used in Xen:
+        * test_and_set_bit_lock
+        * clear_bit_unlock
+        * __clear_bit_unlock
+  * The following functions were renamed in the way how they are
+    used by common code:
+        * __test_and_set_bit
+        * __test_and_clear_bit
+  * The declaration and implementation of the following functios
+    were updated to make Xen build happy:
+        * clear_bit
+        * set_bit
+        * __test_and_clear_bit
+        * __test_and_set_bit
+  * linux/include/asm-generic/bitops/generic-non-atomic.h with the
+    following changes:
+     * Only functions that can be reused in Xen were left;
+       others were removed.
+     * it was updated the message inside #ifndef ... #endif.
+     * __always_inline -> always_inline to be align with definition in
+       xen/compiler.h.
+     * convert identations from tabs to spaces.
+     * inside generic__test_and_* use 'bitops_uint_t' instead of 'unsigned long'
+        to be generic.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V4-V7:
- - Nothing changed. Only rebase.
+Changes in V7:
+ - Update the commit message.
+ - Drop "__" for __op_bit and __op_bit_ord as they are atomic.
+ - add comment above __set_bit and __clear_bit about why they are defined as atomic.
+ - align bitops_uint_t with __AMO().
+ - make changes after  generic non-atomic test_*bit() were changed.
+ - s/__asm__ __volatile__/asm volatile
 ---
-Changes in V3:
- - new patch.
+Changes in V6:
+ - rebase clean ups were done: drop unused asm-generic includes
 ---
- xen/arch/riscv/include/asm/monitor.h | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/monitor.h
+ Changes in V5:
+   - new patch
+---
+ xen/arch/riscv/include/asm/bitops.h | 146 ++++++++++++++++++++++++++++
+ 1 file changed, 146 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/bitops.h
 
-diff --git a/xen/arch/riscv/include/asm/monitor.h b/xen/arch/riscv/include/asm/monitor.h
+diff --git a/xen/arch/riscv/include/asm/bitops.h b/xen/arch/riscv/include/asm/bitops.h
 new file mode 100644
-index 0000000000..f4fe2c0690
+index 0000000000..6f0212e5ac
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/monitor.h
-@@ -0,0 +1,26 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_RISCV_MONITOR_H__
-+#define __ASM_RISCV_MONITOR_H__
++++ b/xen/arch/riscv/include/asm/bitops.h
+@@ -0,0 +1,146 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Copyright (C) 2012 Regents of the University of California */
 +
-+#include <xen/bug.h>
++#ifndef _ASM_RISCV_BITOPS_H
++#define _ASM_RISCV_BITOPS_H
 +
-+#include <asm-generic/monitor.h>
++#include <asm/system.h>
 +
-+struct domain;
++#undef BITOP_BITS_PER_WORD
++#undef bitop_uint_t
 +
-+static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
++#define BITOP_BITS_PER_WORD BITS_PER_LONG
++#define bitop_uint_t unsigned long
++
++#if BITS_PER_LONG == 64
++#define __AMO(op)   "amo" #op ".d"
++#elif BITS_PER_LONG == 32
++#define __AMO(op)   "amo" #op ".w"
++#else
++#error "Unexpected BITS_PER_LONG"
++#endif
++
++#define __set_bit(n, p)      set_bit(n, p)
++#define __clear_bit(n, p)    clear_bit(n, p)
++
++/* Based on linux/arch/include/asm/bitops.h */
++
++/*
++ * Non-atomic bit manipulation.
++ *
++ * Implemented using atomics to be interrupt safe. Could alternatively
++ * implement with local interrupt masking.
++ */
++#define __set_bit(n, p)      set_bit(n, p)
++#define __clear_bit(n, p)    clear_bit(n, p)
++
++/* Based on linux/arch/include/asm/bitops.h */
++
++#define test_and_op_bit_ord(op, mod, nr, addr, ord)     \
++({                                                      \
++    unsigned long res, mask;                            \
++    mask = BITOP_MASK(nr);                              \
++    asm volatile (                                       \
++        __AMO(op) #ord " %0, %2, %1"                    \
++        : "=r" (res), "+A" (addr[BITOP_WORD(nr)])       \
++        : "r" (mod(mask))                               \
++        : "memory");                                    \
++    ((res & mask) != 0);                                \
++})
++
++#define op_bit_ord(op, mod, nr, addr, ord)      \
++    asm volatile (                              \
++        __AMO(op) #ord " zero, %1, %0"          \
++        : "+A" (addr[BITOP_WORD(nr)])           \
++        : "r" (mod(BITOP_MASK(nr)))             \
++        : "memory");
++
++#define test_and_op_bit(op, mod, nr, addr)    \
++    test_and_op_bit_ord(op, mod, nr, addr, .aqrl)
++#define op_bit(op, mod, nr, addr) \
++    op_bit_ord(op, mod, nr, addr, )
++
++/* Bitmask modifiers */
++#define NOP(x)    (x)
++#define NOT(x)    (~(x))
++
++/**
++ * test_and_set_bit - Set a bit and return its old value
++ * @nr: Bit to set
++ * @addr: Address to count from
++ */
++static inline int test_and_set_bit(int nr, volatile void *p)
 +{
-+    BUG_ON("unimplemented");
-+    return 0;
++    volatile bitop_uint_t *addr = p;
++
++    return test_and_op_bit(or, NOP, nr, addr);
 +}
 +
-+#endif /* __ASM_RISCV_MONITOR_H__ */
++/**
++ * test_and_clear_bit - Clear a bit and return its old value
++ * @nr: Bit to clear
++ * @addr: Address to count from
++ */
++static inline int test_and_clear_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    return test_and_op_bit(and, NOT, nr, addr);
++}
++
++/**
++ * set_bit - Atomically set a bit in memory
++ * @nr: the bit to set
++ * @addr: the address to start counting from
++ *
++ * Note that @nr may be almost arbitrarily large; this function is not
++ * restricted to acting on a single-word quantity.
++ */
++static inline void set_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    op_bit(or, NOP, nr, addr);
++}
++
++/**
++ * clear_bit - Clears a bit in memory
++ * @nr: Bit to clear
++ * @addr: Address to start counting from
++ */
++static inline void clear_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    op_bit(and, NOT, nr, addr);
++}
++
++/**
++ * test_and_change_bit - Toggle (change) a bit and return its old value
++ * @nr: Bit to change
++ * @addr: Address to count from
++ *
++ * This operation is atomic and cannot be reordered.
++ * It also implies a memory barrier.
++ */
++static inline int test_and_change_bit(int nr, volatile unsigned long *addr)
++{
++	return test_and_op_bit(xor, NOP, nr, addr);
++}
++
++#undef test_and_op_bit
++#undef __op_bit
++#undef NOP
++#undef NOT
++#undef __AMO
++
++#endif /* _ASM_RISCV_BITOPS_H */
 +
 +/*
 + * Local variables:
