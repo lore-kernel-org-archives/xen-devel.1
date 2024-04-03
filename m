@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8901CD1294
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:32:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.700443.1093626 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE651CD129A
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:32:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.700445.1093635 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxuR-00026S-Bf; Wed, 03 Apr 2024 10:31:59 +0000
+	id 1rrxuV-0002N7-I7; Wed, 03 Apr 2024 10:32:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 700443.1093626; Wed, 03 Apr 2024 10:31:59 +0000
+Received: by outflank-mailman (output) from mailman id 700445.1093635; Wed, 03 Apr 2024 10:32:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxuR-00026L-7g; Wed, 03 Apr 2024 10:31:59 +0000
-Received: by outflank-mailman (input) for mailman id 700443;
- Wed, 03 Apr 2024 10:31:57 +0000
+	id 1rrxuV-0002My-F9; Wed, 03 Apr 2024 10:32:03 +0000
+Received: by outflank-mailman (input) for mailman id 700445;
+ Wed, 03 Apr 2024 10:32:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YDNC=LI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rrxjO-0007Ob-CO
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:34 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
+ id 1rrxuU-0002ML-Nr
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:32:02 +0000
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [2a00:1450:4864:20::12d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cd8ce952-f1a3-11ee-a1ef-f123f15fe8a2;
- Wed, 03 Apr 2024 12:20:32 +0200 (CEST)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-515a68d45faso7029561e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:32 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.30
+ id 679c1c5c-f1a5-11ee-a1ef-f123f15fe8a2;
+ Wed, 03 Apr 2024 12:32:00 +0200 (CEST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-51381021af1so8628242e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:32:00 -0700 (PDT)
+Received: from [192.168.206.239] ([94.75.70.14])
+ by smtp.gmail.com with ESMTPSA id
+ t3-20020a192d43000000b00515b5cd2361sm2012048lft.164.2024.04.03.03.31.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 03:20:31 -0700 (PDT)
+ Wed, 03 Apr 2024 03:31:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,119 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd8ce952-f1a3-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: 679c1c5c-f1a5-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712139632; x=1712744432; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hBnO9yFQJm71DTw529h3h3x7yVtBkXskdtcbG0S49CI=;
-        b=cnv9VVbyizjwcK/HeeHN8+DSB26Aw2mOVRe1f5PmTbOldUp6byE13xXH6qyx/FjeD6
-         il7WUJi/B7xOIgwdk6DYsy0sXP5kLZzMwvGCNLng+RUVeC7AJyu5Q6HDX6+4ouk2KLsC
-         mOPd97vTUH06H3jpAtK742guFzuLwaE6fhD2Nu2+qEEDcMgK2LDBhkCgMiL9icABD9zr
-         TUltgt4AvhOYxh7GeXpgrLvaEJGJ+YODr9lh9AJNwAFxI/AUuBSxLGR+ztie9lX/mlYd
-         NSSbfQrTUHIkOW7F25+tteGMfeQmRmcNQbKfmbqNQtI7cWewcrdPGUi8nL77swu9QkQd
-         WAuw==
+        d=gmail.com; s=20230601; t=1712140320; x=1712745120; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=nzlgtb580luOjYNUllOGwmtHYFxNtC+MZM4d/MnUQKw=;
+        b=OLUILpinro7DpkrwhFDpendBFsia+n8k6WNTgxMg6FAhstfyt7me9l/ih+MSNCm7JP
+         POszmV0wEfxG5YMNrESYWy/ckyiRFV8ICvpMOkD+oJX34osaFchqLeOsDPmDrGKcXU3l
+         8kOSYapQN2b9hY+h23r5e7Yp0YMoVOMnHHImRwHmXrcuCf858u6BwYAfTep7TowptAOw
+         2PgdkJfl5S7f8FV3H3LnSAujLuCQlFJxEda1EolhbC47wA+4/BSgifCa/KsNi4NDeLvf
+         DFI3WZpBgFhKIB0m8YGcaFnF99ae7lmPKqw99h0bZKH1mSuWIBeQYq36yRiecjlesTix
+         Tcww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712139632; x=1712744432;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hBnO9yFQJm71DTw529h3h3x7yVtBkXskdtcbG0S49CI=;
-        b=eI6FZ3EvEDijztsZI2ynOTBOsD1OfAYW534dDGto+CKXxCxJNby19TN6QXjbp4WxhK
-         6izWX4zToVAybl3cqJpUWnJ9s536P5Z1hTRdOeAAz7OVOceyOPhyiJqZ5dL54r8inHyB
-         YvzZ2KiCZhGHjKo6mrBqz8/XmukLFwvIlc3qQ6uhVeB2Ly3RO5bwr0sL8rvjhhN4NjGV
-         01dA80QfvSkxz/JKVx9o/egoqLh0LIuWzO3nkIx976Fp9sXVVbn3/kjNOgC3juNIS7On
-         2Pc3rT2Qi8y7/KcNyykHgX0w5hXKXd9J2Wcsa79OQyFFbA/c8YmgeGziihI/W9NTtMTc
-         KKHQ==
-X-Gm-Message-State: AOJu0YyKrzjiEZxEzB7YkyjY8bgdwh5TjNQPJJPJkzI2h93EXrZT25RW
-	A93F+eUzdQFCT2KAThYUt4s+dHKj5DkMyn3S2pnVU+P/TKZEdmSzeoEkvXzJ
-X-Google-Smtp-Source: AGHT+IFYH5a4QwNmIZDQu397VIYey6jJgV2rrThyVidzAQCTas+ctdNgWcwHsWJNFOJV/pciExlKnA==
-X-Received: by 2002:ac2:5f86:0:b0:513:cb7a:7cf7 with SMTP id r6-20020ac25f86000000b00513cb7a7cf7mr9614247lfe.63.1712139631925;
-        Wed, 03 Apr 2024 03:20:31 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v7 13/19] xen/riscv: add required things to current.h
-Date: Wed,  3 Apr 2024 12:20:06 +0200
-Message-ID: <322e726f1d8f8ea55a0c86c4eb3aee971ffc4253.1712137031.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1712137031.git.oleksii.kurochko@gmail.com>
-References: <cover.1712137031.git.oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20230601; t=1712140320; x=1712745120;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=nzlgtb580luOjYNUllOGwmtHYFxNtC+MZM4d/MnUQKw=;
+        b=cibi2w+Zn1Yp4qxRc4h03yN0bYlxiUqJs7uDaP1yPq4dw9Rc7cyNw9pickUHeIKxFY
+         6VPw6XNpYwV8v0ZZpwgMoaRhAQTt/l/b9FXBJKapLRSb5o9/OTqEpuw7l8qJGx8zV7ZX
+         NcpiFP54+ACOy7ODY/Qf3MgyNYokHvLgXsHUT7it7x3q02QaRLeUkdeys+b8kDKOIn5/
+         L2WiAmdp8SMASmtV7oT5G5qJfKzn5O31IywwnM0fnnU6uR/g4PG7my7BGU2HjJClMoVI
+         WxVt6R5IQYf0EvYRKT4va0Bt17r3DcVsBNq7l+VPpOBMwLyuBYyIEiggkvNn5sf0WQky
+         IYyw==
+X-Forwarded-Encrypted: i=1; AJvYcCWJSScSQSrfm7BdQDm6d3Ac1qdEtpu7Zh14TFWCYeqI7xmCpt4LGsvVrMAMSP8sIrrcFPySpXqOcpDbt/Mx62/zAuAi3RoYvn7jtSQqViE=
+X-Gm-Message-State: AOJu0Yxz1eyfh3ogOIJhAH61XmfXhAzf6ygDDCh8WAkRSN87xgQQsdAK
+	Xxug51nHZ3FpHg1IDLAUeteXlOTqP84+/mEIxuTSWTPDbZmX3YZ0
+X-Google-Smtp-Source: AGHT+IF1XQCYvZCZN7iDe3k75stAfGwli+GSSwgMHS6ezLj2VS9ZKwZUWpcJCRbIem5aF3nvAFucfA==
+X-Received: by 2002:a19:3802:0:b0:513:cc18:d4c6 with SMTP id f2-20020a193802000000b00513cc18d4c6mr3955988lfa.41.1712140319969;
+        Wed, 03 Apr 2024 03:31:59 -0700 (PDT)
+Message-ID: <f9c57e31ed3caa6f8caec3300b88031963cdaf4a.camel@gmail.com>
+Subject: Re: [PATCH 4/4] xen/virtual-region: Drop setup_virtual_regions()
+From: Oleksii <oleksii.kurochko@gmail.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>
+Cc: Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
+ Shawn Anastasio <sanastasio@raptorengineering.com>, Konrad Rzeszutek Wilk
+ <konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Date: Wed, 03 Apr 2024 12:31:58 +0200
+In-Reply-To: <14accd85-d549-4551-a95c-6c8bcee92db5@citrix.com>
+References: <20240318110442.3653997-1-andrew.cooper3@citrix.com>
+	 <20240318110442.3653997-5-andrew.cooper3@citrix.com>
+	 <047ecaf2-66c6-4d07-ab14-9c50acfc1f9a@suse.com>
+	 <14accd85-d549-4551-a95c-6c8bcee92db5@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-Add minimal requied things to be able to build full Xen.
+On Mon, 2024-03-18 at 13:49 +0000, Andrew Cooper wrote:
+> On 18/03/2024 1:29 pm, Jan Beulich wrote:
+> > On 18.03.2024 12:04, Andrew Cooper wrote:
+> > > --- a/xen/common/virtual_region.c
+> > > +++ b/xen/common/virtual_region.c
+> > > @@ -39,6 +39,11 @@ static struct virtual_region core =3D {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { __start_bug_frames=
+_2, __stop_bug_frames_2 },
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { __start_bug_frames=
+_3, __stop_bug_frames_3 },
+> > > =C2=A0=C2=A0=C2=A0=C2=A0 },
+> > > +
+> > > +#ifdef CONFIG_X86
+> > > +=C2=A0=C2=A0=C2=A0 .ex =3D __start___ex_table,
+> > > +=C2=A0=C2=A0=C2=A0 .ex_end =3D __stop___ex_table,
+> > > +#endif
+> > > =C2=A0};
+> > > =C2=A0
+> > > =C2=A0/* Becomes irrelevant when __init sections are cleared. */
+> > > @@ -57,6 +62,11 @@ static struct virtual_region core_init
+> > > __initdata =3D {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { __start_bug_frames=
+_2, __stop_bug_frames_2 },
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { __start_bug_frames=
+_3, __stop_bug_frames_3 },
+> > > =C2=A0=C2=A0=C2=A0=C2=A0 },
+> > > +
+> > > +#ifdef CONFIG_X86
+> > > +=C2=A0=C2=A0=C2=A0 .ex =3D __start___ex_table,
+> > > +=C2=A0=C2=A0=C2=A0 .ex_end =3D __stop___ex_table,
+> > > +#endif
+> > > =C2=A0};
+> > My main reservation here is this x86-specific code in a common
+> > file.
+> > Are we certain both RISC-V and PPC will get away without needing to
+> > touch this? If so, I might consider ack-ing. But really I'd prefer
+> > if
+> > this could be minimally abstracted, via e.g. CONFIG_HAS_EXTABLE
+> > (selected by x86 only for now).
+>=20
+> This isn't the first bit of CONFIG_X86 in this file.=C2=A0 However, I'd
+> not
+> spotted that we have CONFIG_HAS_EX_TABLE already.=C2=A0 I can swap.
+>=20
+> As to extable on other architectures, that's not something I can
+> answer,
+> although it's not something I can see in Oleksii's or Shawn's series
+> so far.
+That's correct for RISC-V. Currently, I'm not utilizing
+__start___ex_table/__stop___ex_table, and setup_virtual_regions() is
+called with setup_virtual_regions(NULL, NULL).
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V5/V6/V7:
- - Nothing changed. Only rebase.
----
-Changes in V4:
- - BUG() was changed to BUG_ON("unimplemented");
- - Change "xen/bug.h" to "xen/lib.h" as BUG_ON is defined in xen/lib.h.
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V3:
- - add SPDX
- - drop a forward declaration of struct vcpu;
- - update guest_cpu_user_regs() macros
- - replace get_processor_id with smp_processor_id
- - update the commit message
- - code style fixes
----
-Changes in V2:
- - Nothing changed. Only rebase.
----
- xen/arch/riscv/include/asm/current.h | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
-
-diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
-index d84f15dc50..aedb6dc732 100644
---- a/xen/arch/riscv/include/asm/current.h
-+++ b/xen/arch/riscv/include/asm/current.h
-@@ -3,6 +3,21 @@
- #ifndef __ASM_CURRENT_H
- #define __ASM_CURRENT_H
- 
-+#include <xen/lib.h>
-+#include <xen/percpu.h>
-+#include <asm/processor.h>
-+
-+#ifndef __ASSEMBLY__
-+
-+/* Which VCPU is "current" on this PCPU. */
-+DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
-+
-+#define current            this_cpu(curr_vcpu)
-+#define set_current(vcpu)  do { current = (vcpu); } while (0)
-+#define get_cpu_current(cpu)  per_cpu(curr_vcpu, cpu)
-+
-+#define guest_cpu_user_regs() ({ BUG_ON("unimplemented"); NULL; })
-+
- #define switch_stack_and_jump(stack, fn) do {               \
-     asm volatile (                                          \
-             "mv sp, %0\n"                                   \
-@@ -10,4 +25,8 @@
-     unreachable();                                          \
- } while ( false )
- 
-+#define get_per_cpu_offset() __per_cpu_offset[smp_processor_id()]
-+
-+#endif /* __ASSEMBLY__ */
-+
- #endif /* __ASM_CURRENT_H */
--- 
-2.43.0
-
+~ Oleksii
 
