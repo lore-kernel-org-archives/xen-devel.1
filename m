@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D6ECD128A
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:20:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.700400.1093525 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ACCFCD129A
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:20:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.700403.1093549 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxjK-00015H-5i; Wed, 03 Apr 2024 10:20:30 +0000
+	id 1rrxjN-0001jZ-33; Wed, 03 Apr 2024 10:20:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 700400.1093525; Wed, 03 Apr 2024 10:20:30 +0000
+Received: by outflank-mailman (output) from mailman id 700403.1093549; Wed, 03 Apr 2024 10:20:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxjK-00014X-0C; Wed, 03 Apr 2024 10:20:30 +0000
-Received: by outflank-mailman (input) for mailman id 700400;
- Wed, 03 Apr 2024 10:20:28 +0000
+	id 1rrxjM-0001hO-RH; Wed, 03 Apr 2024 10:20:32 +0000
+Received: by outflank-mailman (input) for mailman id 700403;
+ Wed, 03 Apr 2024 10:20:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YDNC=LI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rrxjI-0007Ob-Ao
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:28 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
+ id 1rrxjL-0007Ob-AH
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:31 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c9c47370-f1a3-11ee-a1ef-f123f15fe8a2;
- Wed, 03 Apr 2024 12:20:26 +0200 (CEST)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-513d247e3c4so767432e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:26 -0700 (PDT)
+ id cb7c8316-f1a3-11ee-a1ef-f123f15fe8a2;
+ Wed, 03 Apr 2024 12:20:29 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-515c50dc2afso6881128e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:29 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.24
+ k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 03:20:24 -0700 (PDT)
+ Wed, 03 Apr 2024 03:20:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c9c47370-f1a3-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: cb7c8316-f1a3-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712139625; x=1712744425; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1712139628; x=1712744428; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3McwRPAOJ/rAbX5a8InnyXmQu31I3i7bfSHqCPAPuJI=;
-        b=hgBYegOoU0We47xC2YwHuEh+oU+J7hd8v6w65DU16olrTYcX/xx3R4zG1r708/rgim
-         tlsb7VEe1K79yOoNNLPLpApQjddRov1IRO+17jI8o3X/C31SResPyOwNXzT2qot48fHG
-         HZy0YG8OY6KGrOfNq4uEniVD3OgWr0e77wjTsC+BX2mlQworHgbFeXOfjS3swWA+CvDV
-         bapCrAx4jDGfRk7c9yxv4Ma3gYn3Xi/O6KmqkBX8W1bOgPG0GEsIwIjgjCHk171tB4jK
-         jiD35kKvIr3cNsc3xxjtnhwZEnBkGtDUOIhOXNaqlY8/jLuwm+ZI24VM0jM+Shs1xlX5
-         kTDg==
+        bh=IduMOn85G631qHxkqC5cntjzUMFTqSt1XHD+ZpmnC9U=;
+        b=MP/JzFEkUuovP3HJIfrexNI8eyn3exRogEImncJcgvgPZyx3YYPusFI+WNMi9Pz01A
+         wdoujvD6hbaOSE+kVlPfvTL1lDKvLZnnKWiXg2mdvVTkG6/VhL5uWlpZ7UUPF+mt3Cuw
+         P6MJpU9WyXyTM+CUQ9wP2gvwU7g5t61DsTs1JsMUZZQtQ9uVOi9jqjAvVaE0Dm/VZyUd
+         7dbE6EnOZJhRHwGiwWO802ezXhRy5Wl+UscMeI3ps6TGF1eSQJQxmoHROgzp2fI+hAtv
+         ZsGZqsROU1FgxjrGEIg/se4XKF8TfIt4hVpt7blOvfQ0/jSaaBrIxSfB+je3qHirFwli
+         lvkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712139625; x=1712744425;
+        d=1e100.net; s=20230601; t=1712139628; x=1712744428;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=3McwRPAOJ/rAbX5a8InnyXmQu31I3i7bfSHqCPAPuJI=;
-        b=jFhGCXjXRso3NvFQHxhViIkRfvNfpkxcALS3nwsB2pEMfMxpKCrala1MGnGk48Wao+
-         T5pSMIPNkJYYXDl1HosutVMOmE/HHtarKue9DAMQG2KU6Vadmo2ObHIQQPGVQcqzo/Iw
-         s3jMDxGhobD4w2cK3JqZg2DXVclxM8rs37utB/sFvr4Q+Wzkju1gYSQX4IqkT/v+HoF8
-         i/osSTBmrTOhiFn/mDBFDgBoTdfIAdWnQHuBu/hHNXvuKXlERZGazlXe3aSUGfGKyPKs
-         Ns+nXfPKG3DFJRvIsr9YfsTgX0KuYO+WggOJSo3t1G+NnuJ/iEERYl3jWacyuSBrz6jO
-         yUyA==
-X-Gm-Message-State: AOJu0Yzrq2uTMltEcoLezid1Chk9fZJjX0e8c0GJUSAmVdJA2YRdfTtm
-	07IBb2ceQpmeG7BARDRLHksAQPqdMHNkf6Xe9gixh1/e+IvpSqP/scUCFSvE
-X-Google-Smtp-Source: AGHT+IFKmkWov1H2Gto7IOMmcR1dGAJFV/WHz33nSXiGDP2x7OpjXDZi5zT2ps69wyxlJwbJwUl9Ew==
-X-Received: by 2002:a05:6512:34c4:b0:516:bef4:8835 with SMTP id w4-20020a05651234c400b00516bef48835mr409086lfr.13.1712139625314;
-        Wed, 03 Apr 2024 03:20:25 -0700 (PDT)
+        bh=IduMOn85G631qHxkqC5cntjzUMFTqSt1XHD+ZpmnC9U=;
+        b=atG7Og+dkt2AMqpF58TQXaz2beLZla+Rms0AboDJ1iSz7Onf6a0be9HIh0Qftv3Rwr
+         LZM/P4OcCeY560IfTBgqzNqqqHCnEZIpqlxMOAQXKCyI1bQDabGodk5Q5AE6VyilDDHJ
+         K8mvqZthb+ue0WxCDVdUZeZSsuKx+h8s9AluZQnNOT/NpzBPQrZg+o/niLHS/0On8gQY
+         u8khE/DRnDmlEt4MFDgSFH4plyIuDO7TuPwPV0g877Pljp2KUGQgD/EweA1LWwOMtZKq
+         MBsg7hIdN3vumg3HHpG42yzQU97wt8dmc9eFTQqH/9f/KxdCulPXUGbHrqRmd8F1vBA8
+         1zBA==
+X-Gm-Message-State: AOJu0YwgmzxjBQs1UwOPQLkwnxumJ0CT1DhlAyx5mQhx9Tv1NLFO9OXy
+	EKXlR6nZrz8mUrpouZlR+GgspPTU6by0cwMFt0bgnC5J4Iv6a6t6Pu731Cv2
+X-Google-Smtp-Source: AGHT+IEwtAkc2oSAR6LMhBD4cDjvS61RUkedsPMNm1jEf2O4Jmn3T3N3KjKWQyH7IYpV23hf5VHG/Q==
+X-Received: by 2002:ac2:504f:0:b0:513:2329:4308 with SMTP id a15-20020ac2504f000000b0051323294308mr9803473lfm.14.1712139627780;
+        Wed, 03 Apr 2024 03:20:27 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -87,39 +87,32 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v7 08/19] xen/riscv: introduce cmpxchg.h
-Date: Wed,  3 Apr 2024 12:20:01 +0200
-Message-ID: <f0d836be5dbc04468a74cabf9b48a51921bf749b.1712137031.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v7 10/19] xen/riscv: introduce atomic.h
+Date: Wed,  3 Apr 2024 12:20:03 +0200
+Message-ID: <6a6c4ef8663d9da8c8a2aba4baf0286f31566edf.1712137031.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 References: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The header was taken from Linux kernl 6.4.0-rc1.
+Initially the patch was introduced by Bobby, who takes the header from
+Linux kernel.
 
-Addionally, were updated:
-* add emulation of {cmp}xchg for 1/2 byte types using 32-bit atomic
-  access.
-* replace tabs with spaces
-* replace __* variale with *__
-* introduce generic version of xchg_* and cmpxchg_*.
-* drop {cmp}xchg{release,relaxed,acquire} as Xen doesn't use them
-* drop barries and use instruction suffixices instead ( .aq, .rl, .aqrl )
-
-Implementation of 4- and 8-byte cases were updated according to the spec:
-```
-              ....
-Linux Construct         RVWMO AMO Mapping
-    ...
-atomic <op>             amo<op>.{w|d}.aqrl
-Linux Construct         RVWMO LR/SC Mapping
-    ...
-atomic <op>             loop: lr.{w|d}.aq; <op>; sc.{w|d}.aqrl; bnez loop
-
-Table A.5: Mappings from Linux memory primitives to RISC-V primitives
-
-```
+The following changes were done on top of Bobby's changes:
+ - atomic##prefix##_*xchg_*(atomic##prefix##_t *v, c_t n) were updated
+   to use__*xchg_generic()
+ - drop casts in write_atomic() as they are unnecessary
+ - drop introduction of WRITE_ONCE() and READ_ONCE().
+   Xen provides ACCESS_ONCE()
+ - remove zero-length array access in read_atomic()
+ - drop defines similar to pattern:
+   #define atomic_add_return_relaxed   atomic_add_return_relaxed
+ - move not RISC-V specific functions to asm-generic/atomics-ops.h
+ - drop  atomic##prefix##_{cmp}xchg_{release, aquire, release}() as they
+   are not used in Xen.
+ - update the defintion of  atomic##prefix##_{cmp}xchg according to
+   {cmp}xchg() implementation in Xen.
 
 The current implementation is the same with 8e86f0b409a4
 ("arm64: atomics: fix use of acquire + release for full barrier
@@ -132,7 +125,7 @@ Load-Reserved/Store-Conditional Instructions:
  - .aq:   The LR/SC sequence can be given acquire semantics by
           setting the aq bit on the LR instruction.
  - .rl:   The LR/SC sequence can be given release semantics by
-          setting the rl bit on the SC instruction.
+              setting the rl bit on the SC instruction.
  - .aqrl: Setting the aq bit on the LR instruction, and setting
           both the aq and the rl bit on the SC instruction makes
           the LR/SC sequence sequentially consistent, meaning that
@@ -152,317 +145,320 @@ by (the author of the RVWMO spec) [2]
 [1] https://patchwork.kernel.org/project/linux-arm-kernel/patch/1391516953-14541-1-git-send-email-will.deacon@arm.com/
 [2] https://lore.kernel.org/linux-riscv/41e01514-74ca-84f2-f5cc-2645c444fd8e@nvidia.com/
 
+Signed-off-by: Bobby Eshleman <bobbyeshleman@gmail.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V7:
- - replace __*() -> _*() in cmpxchg.h
- - add () around ptr in _amoswap_generic(), emulate_xchg_1_2()
- - fix typos
- - code style fixes.
- - refactor emulate_xcgh_1_2():
-   - add parentheses for new argument.
-   - use instead of constant 0x4 -> sizeof(*aligned_ptr).
-   - add alignment_mask to save  sizeof(*aligned_ptr) - sizeof(*(ptr));
- - s/CONFIG_32BIT/CONFIG_RISCV_32
- - drop unnecessary parentheses in xchg()
- - drop register in _generic_cmpxchg()
- - refactor and update prototype of _generic_cmpxchg():
-   add named operands, return value instead of passing ret as an argument, drop %z and J
-   constraints for mask operand as it can't be zero
- - refactor and code style fixes in emulate_cmpxchg_1_2():
-   - add explanatory comment for emulate_cmpxchg_1_2().
-   - add parentheses for old and new arguments.
-   - use instead of constant 0x4 -> sizeof(*aligned_ptr).
-   - add alignment_mask to save  sizeof(*aligned_ptr) - sizeof(*(ptr));
- - drop unnessary parenthesses in cmpxchg().
- - update the commit message.
- - s/__asm__ __volatile__/asm volatile
+ - drop relaxed version of atomic ops as they are not used.
+ - update the commit message
+ - code style fixes
+ - refactor functions write_atomic(), add_sized() to be able to use #ifdef CONFIG_RISCV_32 ... #endif
+   for {write,read}q().
+ - update ATOMIC_OPS to receive unary operator.
+ - update the header on top of atomic-ops.h.
+ - some minor movements of function inside atomic-ops.h header.
 ---
 Changes in V6:
--  update the commit message? ( As before I don't understand this point. Can you give an example of what sort of opcode / instruction is missing?)
- - Code style fixes
- - change sizeof(*ptr) -> sizeof(*(ptr))
- - update operands names and some local variables for macros emulate_xchg_1_2() and emulate_cmpxchg_1_2()
- - drop {cmp}xchg_{relaxed,acquire,release) versions as they aren't needed for Xen
- - update __amoswap_generic() prototype and defintion: drop pre and post barries.
- - update emulate_xchg_1_2() prototype and definion: add lr_sfx, drop pre and post barries.
- - rename __xchg_generic to __xchg(), make __xchg as static inline function to be able to "#ifndef CONFIG_32BIT case 8:... " 
+ - drop atomic##prefix##_{cmp}xchg_{release, aquire, relaxed} as they aren't used
+   by Xen
+ - code style fixes.
+ - %s/__asm__ __volatile__/asm volatile
+ - add explanational comments.
+ - move inclusion of "#include <asm-generic/atomic-ops.h>" further down in atomic.h
+   header.
 ---
 Changes in V5:
- - update the commit message.
- - drop ALIGN_DOWN().
- - update the definition of emulate_xchg_1_2(): 
-   - lr.d -> lr.w, sc.d -> sc.w.
-   - drop ret argument.
-   - code style fixes around asm volatile.
-   - update prototype.
-   - use asm named operands.
-   - rename local variables.
-   - add comment above the macros
- - update the definition of __xchg_generic:
-   - rename to __xchg()
-   - transform it to static inline
-   - code style fixes around switch()
-   - update prototype.
- - redefine cmpxchg()
- - update emulate_cmpxchg_1_2():
-   - update prototype
-   - update local variables names and usage of them
-   - use name asm operands.
-   - add comment above the macros
- - drop pre and post, and use .aq,.rl, .aqrl suffixes.
- - drop {cmp}xchg_{relaxed, aquire, release} as they are not used by Xen.
- - drop unnessary details in comment above emulate_cmpxchg_1_2()
+ - fence.h changes were moved to separate patch as patches related to io.h and cmpxchg.h,
+   which are dependecies for this patch, also needed changes in fence.h
+ - remove accessing of zero-length array
+ - drops cast in write_atomic()
+ - drop introduction of WRITE_ONCE() and READ_ONCE().
+ - drop defines similar to pattern #define atomic_add_return_relaxed   atomic_add_return_relaxed
+ - Xen code style fixes
+ - move not RISC-V specific functions to asm-generic/atomics-ops.h
 ---
 Changes in V4:
- - Code style fixes.
- - enforce in __xchg_*() has the same type for new and *ptr, also "\n"
-   was removed at the end of asm instruction.
- - dependency from https://lore.kernel.org/xen-devel/cover.1706259490.git.federico.serafini@bugseng.com/
- - switch from ASSERT_UNREACHABLE to STATIC_ASSERT_UNREACHABLE().
- - drop xchg32(ptr, x) and xchg64(ptr, x) as they aren't used.
- - drop cmpxcg{32,64}_{local} as they aren't used.
- - introduce generic version of xchg_* and cmpxchg_*.
- - update the commit message.
+ - do changes related to the updates of [PATCH v3 13/34] xen/riscv: introduce cmpxchg.h
+ - drop casts in read_atomic_size(), write_atomic(), add_sized()
+ - tabs -> spaces
+ - drop #ifdef CONFIG_SMP ... #endif in fence.ha as it is simpler to handle NR_CPUS=1
+   the same as NR_CPUS>1 with accepting less than ideal performance.
 ---
 Changes in V3:
- - update the commit message
- - add emulation of {cmp}xchg_... for 1 and 2 bytes types
+  - update the commit message
+  - add SPDX for fence.h
+  - code style fixes
+  - Remove /* TODO: ... */ for add_sized macros. It looks correct to me.
+  - re-order the patch
+  - merge to this patch fence.h
 ---
 Changes in V2:
- - update the comment at the top of the header.
- - change xen/lib.h to xen/bug.h.
- - sort inclusion of headers properly.
+ - Change an author of commit. I got this header from Bobby's old repo.
 ---
- xen/arch/riscv/include/asm/cmpxchg.h | 227 +++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/config.h  |   2 +
- 2 files changed, 229 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/cmpxchg.h
+ xen/arch/riscv/include/asm/atomic.h  | 261 +++++++++++++++++++++++++++
+ xen/include/asm-generic/atomic-ops.h |  97 ++++++++++
+ 2 files changed, 358 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/atomic.h
+ create mode 100644 xen/include/asm-generic/atomic-ops.h
 
-diff --git a/xen/arch/riscv/include/asm/cmpxchg.h b/xen/arch/riscv/include/asm/cmpxchg.h
+diff --git a/xen/arch/riscv/include/asm/atomic.h b/xen/arch/riscv/include/asm/atomic.h
 new file mode 100644
-index 0000000000..9e78035dff
+index 0000000000..51574e7ce8
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/cmpxchg.h
-@@ -0,0 +1,227 @@
++++ b/xen/arch/riscv/include/asm/atomic.h
+@@ -0,0 +1,261 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
-+/* Copyright (C) 2014 Regents of the University of California */
++/*
++ * Taken and modified from Linux.
++ *
++ * The following changes were done:
++ * - * atomic##prefix##_*xchg_*(atomic##prefix##_t *v, c_t n) were updated
++ *     to use__*xchg_generic()
++ * - drop casts in write_atomic() as they are unnecessary
++ * - drop introduction of WRITE_ONCE() and READ_ONCE().
++ *   Xen provides ACCESS_ONCE()
++ * - remove zero-length array access in read_atomic()
++ * - drop defines similar to pattern
++ *   #define atomic_add_return_relaxed   atomic_add_return_relaxed
++ * - move not RISC-V specific functions to asm-generic/atomics-ops.h
++ * 
++ * Copyright (C) 2007 Red Hat, Inc. All Rights Reserved.
++ * Copyright (C) 2012 Regents of the University of California
++ * Copyright (C) 2017 SiFive
++ * Copyright (C) 2024 Vates SAS
++ */
 +
-+#ifndef _ASM_RISCV_CMPXCHG_H
-+#define _ASM_RISCV_CMPXCHG_H
++#ifndef _ASM_RISCV_ATOMIC_H
++#define _ASM_RISCV_ATOMIC_H
 +
-+#include <xen/compiler.h>
-+#include <xen/lib.h>
++#include <xen/atomic.h>
 +
++#include <asm/cmpxchg.h>
 +#include <asm/fence.h>
 +#include <asm/io.h>
 +#include <asm/system.h>
 +
-+#define _amoswap_generic(ptr, new, ret, sfx) \
-+    asm volatile ( \
-+        " amoswap" sfx " %0, %2, %1" \
-+        : "=r" (ret), "+A" (*(ptr)) \
-+        : "r" (new) \
-+        : "memory" );
++void __bad_atomic_size(void);
 +
 +/*
-+ * For LR and SC, the A extension requires that the address held in rs1 be
-+ * naturally aligned to the size of the operand (i.e., eight-byte aligned
-+ * for 64-bit words and four-byte aligned for 32-bit words).
-+ * If the address is not naturally aligned, an address-misaligned exception
-+ * or an access-fault exception will be generated.
-+ *
-+ * Thereby:
-+ * - for 1-byte xchg access the containing word by clearing low two bits.
-+ * - for 2-byte xchg access the containing word by clearing bit 1.
-+ *
-+ * If resulting 4-byte access is still misalgined, it will fault just as
-+ * non-emulated 4-byte access would.
++ * Legacy from Linux kernel. For some reason they wanted to have ordered
++ * read/write access. Thereby read* is used instead of read*_cpu()
 + */
-+#define emulate_xchg_1_2(ptr, new, lr_sfx, sc_sfx) \
-+({ \
-+    uint32_t *aligned_ptr; \
-+    unsigned long alignment_mask = sizeof(*aligned_ptr) - sizeof(*(ptr)); \
-+    unsigned int new_val_bit = \
-+        ((unsigned long)(ptr) & alignment_mask) * BITS_PER_BYTE; \
-+    unsigned long mask = \
-+        GENMASK(((sizeof(*(ptr))) * BITS_PER_BYTE) - 1, 0) << new_val_bit; \
-+    unsigned int new_ = (new) << new_val_bit; \
-+    unsigned int old; \
-+    unsigned int scratch; \
-+    \
-+    aligned_ptr = (uint32_t *)((unsigned long)(ptr) & ~alignment_mask); \
-+    \
-+    asm volatile ( \
-+        "0: lr.w" lr_sfx " %[old], %[ptr_]\n" \
-+        "   andn  %[scratch], %[old], %[mask]\n" \
-+        "   or   %[scratch], %[scratch], %z[new_]\n" \
-+        "   sc.w" sc_sfx " %[scratch], %[scratch], %[ptr_]\n" \
-+        "   bnez %[scratch], 0b\n" \
-+        : [old] "=&r" (old), [scratch] "=&r" (scratch), \
-+          [ptr_] "+A" (*aligned_ptr) \
-+        : [new_] "rJ" (new_), [mask] "r" (mask) \
-+        : "memory" ); \
-+    \
-+    (__typeof__(*(ptr)))((old & mask) >> new_val_bit); \
-+})
-+
-+static always_inline unsigned long __xchg(volatile void *ptr, unsigned long new, int size)
++static always_inline void read_atomic_size(const volatile void *p,
++                                           void *res,
++                                           unsigned int size)
 +{
-+    unsigned long ret;
-+
 +    switch ( size )
 +    {
-+    case 1:
-+        ret = emulate_xchg_1_2((volatile uint8_t *)ptr, new, ".aq", ".aqrl");
-+        break;
-+    case 2:
-+        ret = emulate_xchg_1_2((volatile uint16_t *)ptr, new, ".aq", ".aqrl");
-+        break;
-+    case 4:
-+        _amoswap_generic((volatile uint32_t *)ptr, new, ret, ".w.aqrl");
-+        break;
++    case 1: *(uint8_t *)res = readb(p); break;
++    case 2: *(uint16_t *)res = readw(p); break;
++    case 4: *(uint32_t *)res = readl(p); break;
 +#ifndef CONFIG_RISCV_32
-+    case 8:
-+        _amoswap_generic((volatile uint64_t *)ptr, new, ret, ".d.aqrl");
-+        break;
++    case 8: *(uint32_t *)res = readq(p); break;
 +#endif
-+    default:
-+        STATIC_ASSERT_UNREACHABLE();
++    default: __bad_atomic_size(); break;
 +    }
-+
-+    return ret;
 +}
 +
-+#define xchg(ptr, x) \
-+({ \
-+    __typeof__(*(ptr)) n_ = (x); \
-+    (__typeof__(*(ptr))) \
-+        __xchg((ptr), (unsigned long)n_, sizeof(*(ptr))); \
++#define read_atomic(p) ({                                   \
++    union { typeof(*(p)) val; char c[sizeof(*(p))]; } x_;   \
++    read_atomic_size(p, x_.c, sizeof(*(p)));                \
++    x_.val;                                                 \
 +})
 +
-+#define _generic_cmpxchg(ptr, old, new, lr_sfx, sc_sfx) \
-+ ({ \
-+    unsigned int rc; \
-+    unsigned long ret; \
-+    unsigned long mask = GENMASK(((sizeof(*(ptr))) * BITS_PER_BYTE) - 1, 0); \
-+    asm volatile ( \
-+        "0: lr" lr_sfx " %[ret], %[ptr_]\n" \
-+        "   and  %[ret], %[ret], %[mask]\n" \
-+        "   bne  %[ret], %z[old_], 1f\n" \
-+        "   sc" sc_sfx " %[rc], %z[new_], %[ptr_]\n" \
-+        "   bnez %[rc], 0b\n" \
-+        "1:\n" \
-+        : [ret] "=&r" (ret), [rc] "=&r" (rc), [ptr_] "+A" (*ptr) \
-+        : [old_] "rJ" (old), [new_] "rJ" (new), [mask] "r" (mask)  \
-+        : "memory" ); \
-+    ret; \
-+ })
-+
-+/*
-+ * For LR and SC, the A extension requires that the address held in rs1 be
-+ * naturally aligned to the size of the operand (i.e., eight-byte aligned
-+ * for 64-bit words and four-byte aligned for 32-bit words).
-+ * If the address is not naturally aligned, an address-misaligned exception
-+ * or an access-fault exception will be generated.
-+ *
-+ * Thereby:
-+ * - for 1-byte xchg access the containing word by clearing low two bits
-+ * - for 2-byte xchg ccess the containing word by clearing first bit.
-+ * 
-+ * If resulting 4-byte access is still misalgined, it will fault just as
-+ * non-emulated 4-byte access would.
-+ *
-+ * old_val was casted to unsigned long for cmpxchgptr()
-+ */
-+#define emulate_cmpxchg_1_2(ptr, old, new, lr_sfx, sc_sfx) \
-+({ \
-+    uint32_t *aligned_ptr; \
-+    unsigned long alignment_mask = sizeof(*aligned_ptr) - sizeof(*(ptr)); \
-+    uint8_t new_val_bit = \
-+        ((unsigned long)(ptr) & alignment_mask) * BITS_PER_BYTE; \
-+    unsigned long mask = \
-+        GENMASK(((sizeof(*(ptr))) * BITS_PER_BYTE) - 1, 0) << new_val_bit; \
-+    unsigned int old_ = (old) << new_val_bit; \
-+    unsigned int new_ = (new) << new_val_bit; \
-+    unsigned int old_val; \
-+    unsigned int scratch; \
-+    \
-+    aligned_ptr = (uint32_t *)((unsigned long)ptr & ~alignment_mask); \
-+    \
-+    asm volatile ( \
-+        "0: lr.w" lr_sfx " %[scratch], %[ptr_]\n" \
-+        "   and  %[old_val], %[scratch], %[mask]\n" \
-+        "   bne  %[old_val], %z[old_], 1f\n" \
-+        /* the following line is an equivalent to:
-+         *     scratch = old_val & ~mask;
-+         * And to elimanate one ( likely register ) input it was decided
-+         * to use:
-+         *     scratch = old_val ^ scratch
-+         */ \
-+        "   xor  %[scratch], %[old_val], %[scratch]\n" \
-+        "   or   %[scratch], %[scratch], %z[new_]\n" \
-+        "   sc.w" sc_sfx " %[scratch], %[scratch], %[ptr_]\n" \
-+        "   bnez %[scratch], 0b\n" \
-+        "1:\n" \
-+        : [old_val] "=&r" (old_val), [scratch] "=&r" (scratch), \
-+          [ptr_] "+A" (*aligned_ptr) \
-+        : [old_] "rJ" (old_), [new_] "rJ" (new_), \
-+          [mask] "r" (mask) \
-+        : "memory" ); \
-+    \
-+    (__typeof__(*(ptr)))((unsigned long)old_val >> new_val_bit); \
-+})
-+
-+/*
-+ * Atomic compare and exchange.  Compare OLD with MEM, if identical,
-+ * store NEW in MEM.  Return the initial value in MEM.  Success is
-+ * indicated by comparing RETURN with OLD.
-+ */
-+static always_inline unsigned long __cmpxchg(volatile void *ptr,
-+                                             unsigned long old,
-+                                             unsigned long new,
-+                                             int size)
++static always_inline void _write_atomic(volatile void *p,
++                                       unsigned long x, unsigned int size)
 +{
-+    unsigned long ret;
-+
 +    switch ( size )
 +    {
-+    case 1:
-+        ret = emulate_cmpxchg_1_2((volatile uint8_t *)ptr, old, new,
-+                                  ".aq", ".aqrl");
-+        break;
-+    case 2:
-+        ret = emulate_cmpxchg_1_2((volatile uint16_t *)ptr, old, new,
-+                                   ".aq", ".aqrl");
-+        break;
-+    case 4:
-+        ret = _generic_cmpxchg((volatile uint32_t *)ptr, old, new,
-+                          ".w.aq", ".w.aqrl");
-+        break;
-+#ifndef CONFIG_32BIT
-+    case 8:
-+        ret = _generic_cmpxchg((volatile uint64_t *)ptr, old, new,
-+                           ".d.aq", ".d.aqrl");
-+        break;
++    case 1: writeb(x, p); break;
++    case 2: writew(x, p); break;
++    case 4: writel(x, p); break;
++#ifndef CONFIG_RISCV_32
++    case 8: writeq(x, p); break;
 +#endif
-+    default:
-+        STATIC_ASSERT_UNREACHABLE();
++    default: __bad_atomic_size(); break;
 +    }
-+
-+    return ret;
 +}
 +
-+#define cmpxchg(ptr, o, n) \
-+({ \
-+    __typeof__(*(ptr)) o_ = (o); \
-+    __typeof__(*(ptr)) n_ = (n); \
-+    (__typeof__(*(ptr))) \
-+    __cmpxchg((ptr), (unsigned long)o_, (unsigned long)n_, \
-+              sizeof(*(ptr))); \
++#define write_atomic(p, x)                              \
++({                                                      \
++    typeof(*(p)) x_ = (x);                              \
++    _write_atomic((p), x_, sizeof(*(p)));               \
++    x_;                                                 \
 +})
 +
-+#endif /* _ASM_RISCV_CMPXCHG_H */
++static always_inline void _add_sized(volatile void *p,
++                                     unsigned long x, unsigned int size)
++{
++    switch ( size )
++    {
++    case 1: writeb(read_atomic((volatile uint8_t *)p) + x, p); break;
++    case 2: writew(read_atomic((volatile uint16_t *)p) + x, p); break;
++    case 4: writel(read_atomic((volatile uint32_t *)p) + x, p); break;
++#ifndef CONFIG_RISCV_32
++    case 8: writeq(read_atomic((volatile uint64_t *)p) + x, p); break;
++#endif
++    default: __bad_atomic_size(); break;
++    }
++}
++
++#define add_sized(p, x)                                 \
++({                                                      \
++    typeof(*(p)) x_ = (x);                              \
++    _add_sized((p), x_, sizeof(*(p)));                  \
++})
++
++#define __atomic_acquire_fence() \
++    asm volatile ( RISCV_ACQUIRE_BARRIER "" ::: "memory" )
++
++#define __atomic_release_fence() \
++    asm volatile ( RISCV_RELEASE_BARRIER "" ::: "memory" )
++
++/*
++ * First, the atomic ops that have no ordering constraints and therefor don't
++ * have the AQ or RL bits set.  These don't return anything, so there's only
++ * one version to worry about.
++ */
++#define ATOMIC_OP(op, asm_op, unary_op, asm_type, c_type, prefix)  \
++static inline                                               \
++void atomic##prefix##_##op(c_type i, atomic##prefix##_t *v) \
++{                                                           \
++    asm volatile (                                          \
++        "   amo" #asm_op "." #asm_type " zero, %1, %0"      \
++        : "+A" (v->counter)                                 \
++        : "r" (unary_op i)                                  \
++        : "memory" );                                       \
++}                                                           \
++
++/*
++ * Only CONFIG_GENERIC_ATOMIC64=y was ported to Xen that is the reason why
++ * last argument for ATOMIC_OP isn't used.
++ */
++#define ATOMIC_OPS(op, asm_op, unary_op)                    \
++        ATOMIC_OP (op, asm_op, unary_op, w, int,   )
++
++ATOMIC_OPS(add, add, +)
++ATOMIC_OPS(sub, add, -)
++ATOMIC_OPS(and, and, +)
++ATOMIC_OPS( or,  or, +)
++ATOMIC_OPS(xor, xor, +)
++
++#undef ATOMIC_OP
++#undef ATOMIC_OPS
++
++#include <asm-generic/atomic-ops.h>
++
++/*
++ * Atomic ops that have ordered variant.
++ * There's two flavors of these: the arithmatic ops have both fetch and return
++ * versions, while the logical ops only have fetch versions.
++ */
++#define ATOMIC_FETCH_OP(op, asm_op, unary_op, asm_type, c_type, prefix) \
++static inline                                                       \
++c_type atomic##prefix##_fetch_##op(c_type i, atomic##prefix##_t *v) \
++{                                                                   \
++    register c_type ret;                                            \
++    asm volatile (                                                  \
++        "   amo" #asm_op "." #asm_type ".aqrl  %1, %2, %0"          \
++        : "+A" (v->counter), "=r" (ret)                             \
++        : "r" (unary_op i)                                          \
++        : "memory" );                                               \
++    return ret;                                                     \
++}
++
++#define ATOMIC_OP_RETURN(op, asm_op, c_op, unary_op, asm_type, c_type, prefix) \
++static inline                                                           \
++c_type atomic##prefix##_##op##_return(c_type i, atomic##prefix##_t *v)  \
++{                                                                       \
++        return atomic##prefix##_fetch_##op(i, v) c_op (unary_op i);     \
++}
++
++/*
++ * Only CONFIG_GENERIC_ATOMIC64=y was ported to Xen that is the reason why
++ * last argument of ATOMIC_FETCH_OP, ATOMIC_OP_RETURN isn't used.
++ */
++#define ATOMIC_OPS(op, asm_op, c_op, unary_op)                          \
++        ATOMIC_FETCH_OP( op, asm_op,       unary_op, w, int,   )        \
++        ATOMIC_OP_RETURN(op, asm_op, c_op, unary_op, w, int,   )
++
++ATOMIC_OPS(add, add, +, +)
++ATOMIC_OPS(sub, add, +, -)
++
++#undef ATOMIC_OPS
++
++#define ATOMIC_OPS(op, asm_op, unary_op) \
++        ATOMIC_FETCH_OP(op, asm_op, unary_op, w, int,   )
++
++ATOMIC_OPS(and, and, +)
++ATOMIC_OPS( or,  or, +)
++ATOMIC_OPS(xor, xor, +)
++
++#undef ATOMIC_OPS
++
++#undef ATOMIC_FETCH_OP
++#undef ATOMIC_OP_RETURN
++
++/* This is required to provide a full barrier on success. */
++static inline int atomic_add_unless(atomic_t *v, int a, int u)
++{
++    int prev, rc;
++
++    asm volatile (
++        "0: lr.w     %[p],  %[c]\n"
++        "   beq      %[p],  %[u], 1f\n"
++        "   add      %[rc], %[p], %[a]\n"
++        "   sc.w.aqrl  %[rc], %[rc], %[c]\n"
++        "   bnez     %[rc], 0b\n"
++        "1:\n"
++        : [p] "=&r" (prev), [rc] "=&r" (rc), [c] "+A" (v->counter)
++        : [a] "r" (a), [u] "r" (u)
++        : "memory");
++    return prev;
++}
++
++static inline int atomic_sub_if_positive(atomic_t *v, int offset)
++{
++    int prev, rc;
++
++    asm volatile (
++        "0: lr.w     %[p],  %[c]\n"
++        "   sub      %[rc], %[p], %[o]\n"
++        "   bltz     %[rc], 1f\n"
++        "   sc.w.aqrl  %[rc], %[rc], %[c]\n"
++        "   bnez     %[rc], 0b\n"
++        "1:\n"
++        : [p] "=&r" (prev), [rc] "=&r" (rc), [c] "+A" (v->counter)
++        : [o] "r" (offset)
++        : "memory" );
++    return prev - offset;
++}
++
++/*
++ * atomic_{cmp,}xchg is required to have exactly the same ordering semantics as
++ * {cmp,}xchg and the operations that return.
++ */
++#define ATOMIC_OP(c_t, prefix, size)                            \
++static inline                                                   \
++c_t atomic##prefix##_xchg(atomic##prefix##_t *v, c_t n)         \
++{                                                               \
++    return __xchg(&v->counter, n, size);                        \
++}                                                               \
++static inline                                                   \
++c_t atomic##prefix##_cmpxchg(atomic##prefix##_t *v, c_t o, c_t n) \
++{                                                               \
++    return __cmpxchg(&v->counter, o, n, size);                  \
++}
++
++#define ATOMIC_OPS() \
++    ATOMIC_OP(int,   , 4)
++
++ATOMIC_OPS()
++
++#undef ATOMIC_OPS
++#undef ATOMIC_OP
++
++#endif /* _ASM_RISCV_ATOMIC_H */
 +
 +/*
 + * Local variables:
@@ -472,19 +468,109 @@ index 0000000000..9e78035dff
 + * indent-tabs-mode: nil
 + * End:
 + */
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index c5f93e6a01..50583aafdc 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -119,6 +119,8 @@
- 
- #define BITS_PER_LLONG 64
- 
-+#define BITS_PER_BYTE 8
+diff --git a/xen/include/asm-generic/atomic-ops.h b/xen/include/asm-generic/atomic-ops.h
+new file mode 100644
+index 0000000000..98dd907942
+--- /dev/null
++++ b/xen/include/asm-generic/atomic-ops.h
+@@ -0,0 +1,97 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * The header provides default implementations for every xen/atomic.h-provided
++ * forward inline declaration that can be synthesized from other atomic
++ * functions or being created from scratch.
++ */
++#ifndef _ASM_GENERIC_ATOMIC_OPS_H_
++#define _ASM_GENERIC_ATOMIC_OPS_H_
 +
- /* xen_ulong_t is always 64 bits */
- #define BITS_PER_XEN_ULONG 64
- 
++#include <xen/atomic.h>
++#include <xen/lib.h>
++
++#ifndef ATOMIC_READ
++static inline int atomic_read(const atomic_t *v)
++{
++    return ACCESS_ONCE(v->counter);
++}
++#endif
++
++#ifndef _ATOMIC_READ
++static inline int _atomic_read(atomic_t v)
++{
++    return v.counter;
++}
++#endif
++
++#ifndef ATOMIC_SET
++static inline void atomic_set(atomic_t *v, int i)
++{
++    ACCESS_ONCE(v->counter) = i;
++}
++#endif
++
++#ifndef _ATOMIC_SET
++static inline void _atomic_set(atomic_t *v, int i)
++{
++    v->counter = i;
++}
++#endif
++
++#ifndef ATOMIC_SUB_AND_TEST
++static inline int atomic_sub_and_test(int i, atomic_t *v)
++{
++    return atomic_sub_return(i, v) == 0;
++}
++#endif
++
++#ifndef ATOMIC_INC_AND_TEST
++static inline int atomic_inc_and_test(atomic_t *v)
++{
++    return atomic_add_return(1, v) == 0;
++}
++#endif
++
++#ifndef ATOMIC_INC
++static inline void atomic_inc(atomic_t *v)
++{
++    atomic_add(1, v);
++}
++#endif
++
++#ifndef ATOMIC_INC_RETURN
++static inline int atomic_inc_return(atomic_t *v)
++{
++    return atomic_add_return(1, v);
++}
++#endif
++
++#ifndef ATOMIC_DEC
++static inline void atomic_dec(atomic_t *v)
++{
++    atomic_sub(1, v);
++}
++#endif
++
++#ifndef ATOMIC_DEC_RETURN
++static inline int atomic_dec_return(atomic_t *v)
++{
++    return atomic_sub_return(1, v);
++}
++#endif
++
++#ifndef ATOMIC_DEC_AND_TEST
++static inline int atomic_dec_and_test(atomic_t *v)
++{
++    return atomic_sub_return(1, v) == 0;
++}
++#endif
++
++#ifndef ATOMIC_ADD_NEGATIVE
++static inline int atomic_add_negative(int i, atomic_t *v)
++{
++    return atomic_add_return(i, v) < 0;
++}
++#endif
++
++#endif /* _ASM_GENERIC_ATOMIC_OPS_H_ */
 -- 
 2.43.0
 
