@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84FF7CD128A
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:20:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.700395.1093467 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 770F5CD1288
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:20:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.700393.1093455 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxjD-0007oU-7P; Wed, 03 Apr 2024 10:20:23 +0000
+	id 1rrxjC-0007fF-JX; Wed, 03 Apr 2024 10:20:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 700395.1093467; Wed, 03 Apr 2024 10:20:23 +0000
+Received: by outflank-mailman (output) from mailman id 700393.1093455; Wed, 03 Apr 2024 10:20:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxjD-0007no-2F; Wed, 03 Apr 2024 10:20:23 +0000
-Received: by outflank-mailman (input) for mailman id 700395;
- Wed, 03 Apr 2024 10:20:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rrxjC-0007f4-Gh; Wed, 03 Apr 2024 10:20:22 +0000
+Received: by outflank-mailman (input) for mailman id 700393;
+ Wed, 03 Apr 2024 10:20:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YDNC=LI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rrxjB-0007Ql-Do
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:21 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c61738ff-f1a3-11ee-afe5-a90da7624cb6;
- Wed, 03 Apr 2024 12:20:20 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-516a01c8490so677188e87.1
- for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:20 -0700 (PDT)
+ id 1rrxjA-0007Ob-JX
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:20 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c4b2d085-f1a3-11ee-a1ef-f123f15fe8a2;
+ Wed, 03 Apr 2024 12:20:17 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-513ccc70a6dso10560086e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:17 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.17
+ k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 03:20:18 -0700 (PDT)
+ Wed, 03 Apr 2024 03:20:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,140 +46,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c61738ff-f1a3-11ee-afe5-a90da7624cb6
+X-Inumbo-ID: c4b2d085-f1a3-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712139619; x=1712744419; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1712139616; x=1712744416; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4FQPLinh42qBu2cwjojE0/Q7kzGHHOUunECIcZ8FxJQ=;
-        b=IYVv9/UppsE02zIZ4rfnGZZ1gQ2UMYrWynFyNgZAuypbpfzEFxNnY1eDIzyPSiyPTR
-         ljd2hH8ydaX9RQ1muvoW8sOvIvTY20kEOo3I4x4uNX/RJdN3eTpUgUBowpY3WrGOH+ze
-         /O4rlHbc+FLT4ODd+Lox5sxjxc1uXdj45Xl/WotrFZ/OQ/TkiJAIoHlq75O2nqDB8MKD
-         ZD9RNc660DdkrxW8DV4PRF+sX5usn4DfpnT75LVYOpfDAmUZ21wXuCKVWFb3jWbWYPxA
-         f64+WQrrNwcvJ1+ueOYbBgt/ryeT3rKGc0I2C5xRNnDb75fXQQFIGH5jY/3h1b0f6HVb
-         zOqg==
+        bh=KH6TUwBLuOJHUIi6nrJkkEdBWNueDnvGpQKaWKuDLWo=;
+        b=PO2feGd+c/P+KCeYSh8BVczfB7fdsq7021/6dV0TASQSZQNCZGbdaqnkGoEbug0FVa
+         6h5ISKU5QjlR66NdhKneYolTqL7p7lUtbTuB+syiw9Jl7rbC1Wbf6pVZI5qyoa//DCHt
+         sKVVI9XWbYJyXb2Tno1GrdZJZR/gL+WBWEwwid1xxMRgI9Is06BoJ+1qAeO8Z2jD8CCd
+         yrmBAwqVI7hRpKoXFbVey7dZ4CEdzHbH0K3PwdipCVbmjWesGFqemEfyivkNi+kN6D2x
+         2bzKXlDqinPH2eXlubx+vQgzlg0RuYqbbws2LYi/x/FZWs9pRDGcpf+Lhca/lCxfYszZ
+         9iBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712139619; x=1712744419;
+        d=1e100.net; s=20230601; t=1712139616; x=1712744416;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4FQPLinh42qBu2cwjojE0/Q7kzGHHOUunECIcZ8FxJQ=;
-        b=T+pZQrgqIkAy1CZ6+OR7R0Tpxz3miST5ouzMC9MT8+6jUVr+Dyibt5kQOpw10TD5BJ
-         olFEzeQiBGKJA+k3PBpGfbCzw1tpVMySdNpj80FcyDNAy+NKyBLr1rpvkUzvcFpZAUea
-         0pw8frICU3HzEYH6jlGHY7u8RmqVhGn1+wktYpKSO2+huU5XxEaXUM2Q7WtCiyZySsz1
-         bqH+jaHd9sF+kgi9T0Jf1vlUCZz5TuCpRoIbE8dMydfDnmd6CqZMFyZ+vkpZ5md2AfSx
-         3RR0PB1o+cPjatjR7gouIb+eBxOXWXqeXE9TFDK3oYK/1cySqx87Q3wrKCJDsW1cwqrY
-         ZSDA==
-X-Gm-Message-State: AOJu0Yxww/YLAZh9+pdefp+uW81CRcd7NmGyhv5hNcJ59uz5zQkwB2a0
-	4S/XW87dlaBrgnha87nK7ZmGZUpCPQ6x/wxpsHmvicl+CZlFvKQTlDNkzCSU
-X-Google-Smtp-Source: AGHT+IGv2Pse/vPGNf359mWOmsa4ZLmAKALU1CvLKVSk8jScd4QR201tE4WVGs5K3Bzm3qHbHt/zwQ==
-X-Received: by 2002:ac2:505c:0:b0:513:d442:223b with SMTP id a28-20020ac2505c000000b00513d442223bmr751273lfm.30.1712139618854;
-        Wed, 03 Apr 2024 03:20:18 -0700 (PDT)
+        bh=KH6TUwBLuOJHUIi6nrJkkEdBWNueDnvGpQKaWKuDLWo=;
+        b=ZauYBEB/gy4P4XcBJMP4zxZu6w3rq5X70ZXO66iOegfvynC3jz6gKoovwlQXW8qTIV
+         n6n8091tZYOTMH6GWf/wyDonx/MQNXJCKEFalmTu7e1ssGZ7ClRjX3zZK6ARwU4JfzGP
+         wxG2jnypSJqyW3NKzp/z2tvG/9dVzX9E/rqBHBn0X8kv+/Gs0tEac5T5HyAXgYyz06s+
+         JLXKkSxXiKRix3XvOXm2oRRq/s7A3GHkLlZM9V33uce1pbGQM5dE7o/JjkEMXLNb3jIN
+         5id2aUahtx8t52Gln6NEk3zgXfnmGNFvD/iZ/CSp7qnPBCRl6sR6Kr7D5jmuzHoYagIA
+         6n1w==
+X-Gm-Message-State: AOJu0Yz6TtXudfjsb7rOAPnSutS72gWQbfzUhdJfwDCxQ0rb/eLfOqc5
+	rM+0bp0H9bOtgJ3GdjMGprozwBS+Zj5yv2ewubdQhcn1DumhnDoRFE4EGYJi
+X-Google-Smtp-Source: AGHT+IGfnu6RXTh9RU7pq02Wr+aTLHeN63ufncsL4yPYbREHH6AmANJPT11YZUcPTVHUXvFwzskKKg==
+X-Received: by 2002:a05:6512:1287:b0:516:be9d:11ac with SMTP id u7-20020a056512128700b00516be9d11acmr1645286lfs.13.1712139616428;
+        Wed, 03 Apr 2024 03:20:16 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v7 03/19] xen/riscv: introduce extenstion support check by compiler
-Date: Wed,  3 Apr 2024 12:19:56 +0200
-Message-ID: <0c9b0317d0fc4f93bf5cc0893d480853110b8287.1712137031.git.oleksii.kurochko@gmail.com>
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v7 01/19] automation: introduce fixed randconfig for RISC-V
+Date: Wed,  3 Apr 2024 12:19:54 +0200
+Message-ID: <6e604205e4b815f4f66574d9680f5effb86fa673.1712137031.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 References: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently, RISC-V requires two extensions: _zbb and _zihintpause.
+This patch introduces the anchor riscv-fixed-randconfig,
+which includes all configurations that should be disabled for
+randconfig builds.
 
-This patch introduces a compiler check to check if these extensions
-are supported.
-Additionally, it introduces the riscv/booting.txt file, which contains
-information about the extensions that should be supported by the platform.
-
-In the future, a feature will be introduced to check whether an extension
-is supported at runtime.
-However, this feature requires functionality for parsing device tree
-source (DTS), which is not yet available.
-
+Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in V7:
- - add variables for each extension separately.
- - create variable for abi and compilation flags to not repeat the same in several
-   places.
- - update architectures to use generic implementations
+ - Nothing changed. Only rebase.
 ---
 Changes in V6:
  - new patch for this patch series
+ - Reviewed-by and Acked-by was added. ( in another patch series they were
+   recieved. )
 ---
- docs/misc/riscv/booting.txt | 16 ++++++++++++++++
- xen/arch/riscv/arch.mk      | 15 +++++++++++++--
- 2 files changed, 29 insertions(+), 2 deletions(-)
- create mode 100644 docs/misc/riscv/booting.txt
+ automation/gitlab-ci/build.yaml | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/docs/misc/riscv/booting.txt b/docs/misc/riscv/booting.txt
-new file mode 100644
-index 0000000000..cb4d79f12c
---- /dev/null
-+++ b/docs/misc/riscv/booting.txt
-@@ -0,0 +1,16 @@
-+System requirements
-+===================
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 6d2cb18b88..aac29ee13a 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -512,6 +512,14 @@ alpine-3.18-gcc-debug-arm64-boot-cpupools:
+       CONFIG_BOOT_TIME_CPUPOOLS=y
+ 
+ # RISC-V 64 cross-build
++.riscv-fixed-randconfig:
++  variables: &riscv-fixed-randconfig
++    EXTRA_FIXED_RANDCONFIG: |
++      CONFIG_COVERAGE=n
++      CONFIG_EXPERT=y
++      CONFIG_GRANT_TABLE=n
++      CONFIG_MEM_ACCESS=n
 +
-+The following extensions are expected to be supported by a system on which
-+Xen is run:
-+- Zbb:
-+  RISC-V doesn't have a CLZ instruction in the base ISA.
-+  As a consequence, __builtin_ffs() emits a library call to ffs() on GCC,
-+  or a de Bruijn sequence on Clang.
-+  Zbb extension adds a CLZ instruction, after which __builtin_ffs() emits
-+  a very simple sequence.
-+  The similar issue occurs with other __builtin_<bitop>, so it is needed to
-+  provide a generic version of bitops in RISC-V bitops.h
-+- Zihintpause:
-+  On a system that doesn't have this extension, cpu_relax() should be
-+  implemented properly.
-diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
-index 8403f96b6f..24a7461bcc 100644
---- a/xen/arch/riscv/arch.mk
-+++ b/xen/arch/riscv/arch.mk
-@@ -3,16 +3,27 @@
+ archlinux-current-gcc-riscv64:
+   extends: .gcc-riscv64-cross-build
+   variables:
+@@ -532,8 +540,7 @@ archlinux-current-gcc-riscv64-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    <<: *riscv-fixed-randconfig
  
- $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ archlinux-current-gcc-riscv64-debug-randconfig:
+   extends: .gcc-riscv64-cross-build-debug
+@@ -541,8 +548,7 @@ archlinux-current-gcc-riscv64-debug-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    <<: *riscv-fixed-randconfig
  
--CFLAGS-$(CONFIG_RISCV_64) += -mabi=lp64
-+riscv-abi-$(CONFIG_RISCV_32) := -mabi=ilp32
-+riscv-abi-$(CONFIG_RISCV_64) := -mabi=lp64
- 
- riscv-march-$(CONFIG_RISCV_ISA_RV64G) := rv64g
- riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
- 
-+riscv-generic-flags := $(riscv-abi-y) -march=$(riscv-march-y)
-+
-+zbb := $(call as-insn,$(CC) $(riscv-generic-flags)_zbb,"",_zbb)
-+zihintpause := $(call as-insn,\
-+               $(CC) $(riscv-generic-flags)_zihintpause,"pause",_zihintpause)
-+
-+extensions := $(zbb) $(zihintpause)
-+
-+extensions := $(subst $(space),,$(extensions))
-+
- # Note that -mcmodel=medany is used so that Xen can be mapped
- # into the upper half _or_ the lower half of the address space.
- # -mcmodel=medlow would force Xen into the lower half.
- 
--CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
-+CFLAGS += $(riscv-generic-flags)$(extensions) -mstrict-align -mcmodel=medany
- 
- # TODO: Drop override when more of the build is working
- override ALL_OBJS-y = arch/$(SRCARCH)/built_in.o
+ # Power cross-build
+ debian-bullseye-gcc-ppc64le:
 -- 
 2.43.0
 
