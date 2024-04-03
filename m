@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9901CD1288
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:28:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.700427.1093595 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01EADCD128A
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:29:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.700430.1093606 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxr8-0007CR-Bh; Wed, 03 Apr 2024 10:28:34 +0000
+	id 1rrxsG-000811-Ln; Wed, 03 Apr 2024 10:29:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 700427.1093595; Wed, 03 Apr 2024 10:28:34 +0000
+Received: by outflank-mailman (output) from mailman id 700430.1093606; Wed, 03 Apr 2024 10:29:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxr8-0007CK-8X; Wed, 03 Apr 2024 10:28:34 +0000
-Received: by outflank-mailman (input) for mailman id 700427;
- Wed, 03 Apr 2024 10:28:33 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XszW=LI=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rrxr7-0007CE-DL
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:28:33 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eb78be13-f1a4-11ee-afe5-a90da7624cb6;
- Wed, 03 Apr 2024 12:28:32 +0200 (CEST)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-415446af364so4508255e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:28:32 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- je14-20020a05600c1f8e00b00414887d9329sm21035000wmb.46.2024.04.03.03.28.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Apr 2024 03:28:31 -0700 (PDT)
+	id 1rrxsG-00080u-Hg; Wed, 03 Apr 2024 10:29:44 +0000
+Received: by outflank-mailman (input) for mailman id 700430;
+ Wed, 03 Apr 2024 10:29:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=YDNC=LI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rrxjT-0007Ob-J1
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:39 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d0a721dd-f1a3-11ee-a1ef-f123f15fe8a2;
+ Wed, 03 Apr 2024 12:20:37 +0200 (CEST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-513d3746950so7685294e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:37 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Apr 2024 03:20:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,117 +46,338 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb78be13-f1a4-11ee-afe5-a90da7624cb6
+X-Inumbo-ID: d0a721dd-f1a3-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1712140112; x=1712744912; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=u7KPOAEjE2s4I8YgVgYnndw4CobOf/M7qttYHxgRVlU=;
-        b=NsdMQ5qpeRZCdW6XrZiDNA3bnWXPeicXN8G7diM0QR+B2Opv2kDd2PWyb4VoPjLtCB
-         +LA8oSzQd2Ac5noKD+exybGIwerMOJhKFSHiRI3nlRKSinW3/YTZeC/7gIODJl/yBj2q
-         QU9TSVoXLd/rE+mP88R4fghYt8ft+44XfdzzGayB636gSStol6mETLIcd9QANjvqz19B
-         KlwY+jtj6cfo/PXZl+niuLR7b0dW+2C/MQ/RDbX3sWU8WTAgDMiD0cH6rGcodjBUlVZw
-         I8d+r5gDfQZ6b1ju3aqa1KBHI+2SCkA2D0Lyu1gQdlZadgJCWr92w4zMl19r1Db4cn12
-         rhDA==
+        d=gmail.com; s=20230601; t=1712139636; x=1712744436; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uOVqQfR57MWTh7AY+Vja1u38euiVWOG4QoZ0H9d02nE=;
+        b=DJiHXmRLIVCkEZJOPU/JSzr4SxjN9aAsPq2uhYXTJ51ObdNhIs5CO0edvs//tpRSYv
+         NIaASosOK1jcRrRMRFDD6703fpaX73bKHEe6UzmY+fGADydB5KrizFClj4MVPLH3uOnT
+         C4KbwScO0/BmUfPZXOyaPnxz2IGC6OsD+S8iNWxEml7F7WH+fX4JjXWWMJxPtPDtuAO/
+         cEW04TvY4d7CxK5L0JZanW7M/NqNTNSKIYP/klCZFt0kySf5vnanwTHyvzGMPv5V5VQo
+         djIaMsYTWHYrupfpoUeqMA1w9QoMz87Lc1IFI3yh6P3zPBK84yS5Fe3oH0JRnYUgZfzf
+         5b2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712140112; x=1712744912;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=u7KPOAEjE2s4I8YgVgYnndw4CobOf/M7qttYHxgRVlU=;
-        b=xRYKPk+wA/4/U2I+y3UUbFJcSLqxjm4YUk/VyJiD0eMYzAyB8LzGNyyQvZLva1AAnU
-         eqmSV7ogUc6IdzTZHDTjNXbKcnDsP3P2i5uJsvwz5px8spNHpUgQmBa+9AVyM1n+P0yq
-         QIvN6IrvmqOToeOlirhPwWEoDTNx2AI+Kbl8tRkt3jdWseop00qpPtuPV9bH2ygpziLB
-         DkLteDEB25TG3e3BAd7t52xD4643+Vn6nYWW9rD3loiVoMGA1m8j+GF0U9G8LqLfXrtG
-         bOz8AWC9KgqYGTlJuLE6jKeVjfdCXd1GkzoYRdCHAkmHWXxtVyj+vgUKk4TM6i1q1zBe
-         FSFg==
-X-Forwarded-Encrypted: i=1; AJvYcCVLsSfZmuPCireGj6nAgGeEy3vujGjSkTMCQdaMspjQXxmyfrcaQe6vrFlgLLDr2qd7rQNduyXPQhtelGDEeNN/SRzS8YqjxF7CcL9E7OY=
-X-Gm-Message-State: AOJu0YwL6GHwMz4npQ6NG2KBnebqLppoqC1pIpQM73SlnVZM9A2x4Mvq
-	5Y/U5zORUNl2C9vZq4fXO9jl+Fho6whQo9KCSOZdKDqN3f5L2ANggg6pwqGn3g==
-X-Google-Smtp-Source: AGHT+IHILVhw/zW3KP880Gy7L3lmgT2mexJzvE6Q2KI9sbnIyB7sQU6OVLFY6KUvOZf6vNvLMpYqaw==
-X-Received: by 2002:a05:600c:1c19:b0:414:8f85:6e50 with SMTP id j25-20020a05600c1c1900b004148f856e50mr1867451wms.19.1712140111898;
-        Wed, 03 Apr 2024 03:28:31 -0700 (PDT)
-Message-ID: <e3da3546-f2a7-4eab-b157-51b6570dcbf9@suse.com>
-Date: Wed, 3 Apr 2024 12:28:30 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 02/19] xen/riscv: disable unnecessary configs
-Content-Language: en-US
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, xen-devel@lists.xenproject.org
+        d=1e100.net; s=20230601; t=1712139636; x=1712744436;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uOVqQfR57MWTh7AY+Vja1u38euiVWOG4QoZ0H9d02nE=;
+        b=rtQtSws1/1lJS5a7cLdZeykH58pDe1puRgs32diIk1/Y/+DJHQvFViOp+VSpsgXG6A
+         rWVtSP+V9cbqWc2JgV6RDUFhfmeilgQFt5SaLKdXgZZ3stf1SRL48OcMu//oCMcHzPKn
+         nRuxfk3Uf8hWSpb3oahnK9hjonyhhv5NwGeHmgDmw87kmg4o9nqC5MisXis9NtE8PMry
+         0+mr5xzacsJhO3KzNhm4lvCQ1af+f9XFxd6oZvC/1b01oHbfoUXLnbqZmYfVzEzHsPjo
+         FvuyH0b8l08Ic7dfET2/9IHFsAjkb3Mk6CZAshXa7V7nhKwsGaqimS0vf8YWlxXpCmIk
+         PgWQ==
+X-Gm-Message-State: AOJu0YwzSskAkGkXT6YnYGpj4Y1PhODGxuKt6TcYSYsDOxZnK4okLGNt
+	8ynYvs8r1v3lSDj4UEVTlVJ/2TVdqhyU/hxoXaOCmLlZAEJG4v+CpTYHoqQ/
+X-Google-Smtp-Source: AGHT+IHGb+UEeJtU8cfi0+0Y8euhSdr2JoFc7fXBFZIRj50C11U0Lf18mXT4T99kWAEDw3v9+HPxNg==
+X-Received: by 2002:a05:6512:92d:b0:513:bc95:50c3 with SMTP id f13-20020a056512092d00b00513bc9550c3mr8562431lft.12.1712139636603;
+        Wed, 03 Apr 2024 03:20:36 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v7 18/19] xen/riscv: enable full Xen build
+Date: Wed,  3 Apr 2024 12:20:11 +0200
+Message-ID: <cf2bf628e975e9d110be74896c3392e2d96439a1.1712137031.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 References: <cover.1712137031.git.oleksii.kurochko@gmail.com>
- <c2ba247adce76c69ecd6400d791db36495b85b75.1712137031.git.oleksii.kurochko@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <c2ba247adce76c69ecd6400d791db36495b85b75.1712137031.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On 03.04.2024 12:19, Oleksii Kurochko wrote:
-> This patch disables unnecessary configs for two cases:
-> 1. By utilizing EXTRA_FIXED_RANDCONFIG for randconfig builds (GitLab CI jobs).
-> 2. By using tiny64_defconfig for non-randconfig builds.
-> 
-> Only configs which lead to compilation issues were disabled.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> ---
-> Changes in V7:
->  - Disable only configs which cause compilation issues.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V5-V7:
+ - Nothing changed. Only rebase.
+---
+Changes in V4:
+ - drop stubs for irq_actor_none() and irq_actor_none() as common/irq.c is compiled now.
+ - drop defintion of max_page in stubs.c as common/page_alloc.c is compiled now.
+ - drop printk() related changes in riscv/early_printk.c as common version will be used.
+---
+Changes in V3:
+ - Reviewed-by: Jan Beulich <jbeulich@suse.com>
+ - unrealted change dropped in tiny64_defconfig
+---
+Changes in V2:
+ - Nothing changed. Only rebase.
+---
+ xen/arch/riscv/Makefile       |  16 +++-
+ xen/arch/riscv/arch.mk        |   4 -
+ xen/arch/riscv/early_printk.c | 168 ----------------------------------
+ xen/arch/riscv/stubs.c        |  24 -----
+ 4 files changed, 15 insertions(+), 197 deletions(-)
 
-Since the description doesn't go into details: While I can see that
-PERF_COUNTERS and LIVEPATCH may require (a little / some more) extra
-work, are HYPFS, ARGO, and XSM really causing issues?
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 60afbc0ad9..81b77b13d6 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -12,10 +12,24 @@ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
+ 
+ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) -o $@
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(objtree)/common/symbols-dummy.o -o $(dot-target).0
++	$(NM) -pa --format=sysv $(dot-target).0 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).0.S
++	$(MAKE) $(build)=$(@D) $(dot-target).0.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(dot-target).0.o -o $(dot-target).1
++	$(NM) -pa --format=sysv $(dot-target).1 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).1.S
++	$(MAKE) $(build)=$(@D) $(dot-target).1.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
++	    $(dot-target).1.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
+ 		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		> $@.map
++	rm -f $(@D)/.$(@F).[0-9]*
+ 
+ $(obj)/xen.lds: $(src)/xen.lds.S FORCE
+ 	$(call if_changed_dep,cpp_lds_S)
+diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
+index 24a7461bcc..517bb662e4 100644
+--- a/xen/arch/riscv/arch.mk
++++ b/xen/arch/riscv/arch.mk
+@@ -24,7 +24,3 @@ extensions := $(subst $(space),,$(extensions))
+ # -mcmodel=medlow would force Xen into the lower half.
+ 
+ CFLAGS += $(riscv-generic-flags)$(extensions) -mstrict-align -mcmodel=medany
+-
+-# TODO: Drop override when more of the build is working
+-override ALL_OBJS-y = arch/$(SRCARCH)/built_in.o
+-override ALL_LIBS-y =
+diff --git a/xen/arch/riscv/early_printk.c b/xen/arch/riscv/early_printk.c
+index 60742a042d..610c814f54 100644
+--- a/xen/arch/riscv/early_printk.c
++++ b/xen/arch/riscv/early_printk.c
+@@ -40,171 +40,3 @@ void early_printk(const char *str)
+         str++;
+     }
+ }
+-
+-/*
+- * The following #if 1 ... #endif should be removed after printk
+- * and related stuff are ready.
+- */
+-#if 1
+-
+-#include <xen/stdarg.h>
+-#include <xen/string.h>
+-
+-/**
+- * strlen - Find the length of a string
+- * @s: The string to be sized
+- */
+-size_t (strlen)(const char * s)
+-{
+-    const char *sc;
+-
+-    for (sc = s; *sc != '\0'; ++sc)
+-        /* nothing */;
+-    return sc - s;
+-}
+-
+-/**
+- * memcpy - Copy one area of memory to another
+- * @dest: Where to copy to
+- * @src: Where to copy from
+- * @count: The size of the area.
+- *
+- * You should not use this function to access IO space, use memcpy_toio()
+- * or memcpy_fromio() instead.
+- */
+-void *(memcpy)(void *dest, const void *src, size_t count)
+-{
+-    char *tmp = (char *) dest, *s = (char *) src;
+-
+-    while (count--)
+-        *tmp++ = *s++;
+-
+-    return dest;
+-}
+-
+-int vsnprintf(char* str, size_t size, const char* format, va_list args)
+-{
+-    size_t i = 0; /* Current position in the output string */
+-    size_t written = 0; /* Total number of characters written */
+-    char* dest = str;
+-
+-    while ( format[i] != '\0' && written < size - 1 )
+-    {
+-        if ( format[i] == '%' )
+-        {
+-            i++;
+-
+-            if ( format[i] == '\0' )
+-                break;
+-
+-            if ( format[i] == '%' )
+-            {
+-                if ( written < size - 1 )
+-                {
+-                    dest[written] = '%';
+-                    written++;
+-                }
+-                i++;
+-                continue;
+-            }
+-
+-            /*
+-             * Handle format specifiers.
+-             * For simplicity, only %s and %d are implemented here.
+-             */
+-
+-            if ( format[i] == 's' )
+-            {
+-                char* arg = va_arg(args, char*);
+-                size_t arglen = strlen(arg);
+-
+-                size_t remaining = size - written - 1;
+-
+-                if ( arglen > remaining )
+-                    arglen = remaining;
+-
+-                memcpy(dest + written, arg, arglen);
+-
+-                written += arglen;
+-                i++;
+-            }
+-            else if ( format[i] == 'd' )
+-            {
+-                int arg = va_arg(args, int);
+-
+-                /* Convert the integer to string representation */
+-                char numstr[32]; /* Assumes a maximum of 32 digits */
+-                int numlen = 0;
+-                int num = arg;
+-                size_t remaining;
+-
+-                if ( arg < 0 )
+-                {
+-                    if ( written < size - 1 )
+-                    {
+-                        dest[written] = '-';
+-                        written++;
+-                    }
+-
+-                    num = -arg;
+-                }
+-
+-                do
+-                {
+-                    numstr[numlen] = '0' + num % 10;
+-                    num = num / 10;
+-                    numlen++;
+-                } while ( num > 0 );
+-
+-                /* Reverse the string */
+-                for (int j = 0; j < numlen / 2; j++)
+-                {
+-                    char tmp = numstr[j];
+-                    numstr[j] = numstr[numlen - 1 - j];
+-                    numstr[numlen - 1 - j] = tmp;
+-                }
+-
+-                remaining = size - written - 1;
+-
+-                if ( numlen > remaining )
+-                    numlen = remaining;
+-
+-                memcpy(dest + written, numstr, numlen);
+-
+-                written += numlen;
+-                i++;
+-            }
+-        }
+-        else
+-        {
+-            if ( written < size - 1 )
+-            {
+-                dest[written] = format[i];
+-                written++;
+-            }
+-            i++;
+-        }
+-    }
+-
+-    if ( size > 0 )
+-        dest[written] = '\0';
+-
+-    return written;
+-}
+-
+-void printk(const char *format, ...)
+-{
+-    static char buf[1024];
+-
+-    va_list args;
+-    va_start(args, format);
+-
+-    (void)vsnprintf(buf, sizeof(buf), format, args);
+-
+-    early_printk(buf);
+-
+-    va_end(args);
+-}
+-
+-#endif
+-
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index 8285bcffef..bda35fc347 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -24,12 +24,6 @@ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_core_mask);
+ 
+ nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
+ 
+-/*
+- * max_page is defined in page_alloc.c which isn't complied for now.
+- * definition of max_page will be remove as soon as page_alloc is built.
+- */
+-unsigned long __read_mostly max_page;
+-
+ /* time.c */
+ 
+ unsigned long __ro_after_init cpu_khz;  /* CPU clock frequency in kHz. */
+@@ -419,21 +413,3 @@ void __cpu_die(unsigned int cpu)
+ {
+     BUG_ON("unimplemented");
+ }
+-
+-/*
+- * The following functions are defined in common/irq.c, but common/irq.c isn't
+- * built for now. These changes will be removed there when common/irq.c is
+- * ready.
+- */
+-
+-void cf_check irq_actor_none(struct irq_desc *desc)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+-unsigned int cf_check irq_startup_none(struct irq_desc *desc)
+-{
+-    BUG_ON("unimplemented");
+-
+-    return 0;
+-}
+-- 
+2.43.0
 
-> --- a/xen/arch/riscv/configs/tiny64_defconfig
-> +++ b/xen/arch/riscv/configs/tiny64_defconfig
-> @@ -1,12 +1,11 @@
-> -# CONFIG_SCHED_CREDIT is not set
-> -# CONFIG_SCHED_RTDS is not set
-> -# CONFIG_SCHED_NULL is not set
-> -# CONFIG_SCHED_ARINC653 is not set
-> -# CONFIG_TRACEBUFFER is not set
->  # CONFIG_HYPFS is not set
->  # CONFIG_GRANT_TABLE is not set
-> -# CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
->  # CONFIG_MEM_ACCESS is not set
-> +# CONFIG_ARGO is not set
-> +# CONFIG_PERF_COUNTERS is not set
-> +# CONFIG_COVERAGE is not set
-> +# CONFIG_LIVEPATCH is not set
-> +# CONFIG_XSM is not set
->  
->  CONFIG_RISCV_64=y
->  CONFIG_DEBUG=y
-
-The description also says nothing about the items being removed.
-
-Jan
 
