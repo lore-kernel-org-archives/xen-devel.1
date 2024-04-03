@@ -4,52 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7811CD1288
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:12:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.700388.1093435 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84FF7CD128A
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:20:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.700395.1093467 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxbD-0005jN-HT; Wed, 03 Apr 2024 10:12:07 +0000
+	id 1rrxjD-0007oU-7P; Wed, 03 Apr 2024 10:20:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 700388.1093435; Wed, 03 Apr 2024 10:12:07 +0000
+Received: by outflank-mailman (output) from mailman id 700395.1093467; Wed, 03 Apr 2024 10:20:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxbD-0005jG-DL; Wed, 03 Apr 2024 10:12:07 +0000
-Received: by outflank-mailman (input) for mailman id 700388;
- Wed, 03 Apr 2024 10:12:06 +0000
+	id 1rrxjD-0007no-2F; Wed, 03 Apr 2024 10:20:23 +0000
+Received: by outflank-mailman (input) for mailman id 700395;
+ Wed, 03 Apr 2024 10:20:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eUqh=LI=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1rrxbC-0005jA-In
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:12:06 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20601.outbound.protection.outlook.com
- [2a01:111:f403:2417::601])
+ <SRS0=YDNC=LI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rrxjB-0007Ql-Do
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:21 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9ee8403e-f1a2-11ee-afe5-a90da7624cb6;
- Wed, 03 Apr 2024 12:12:04 +0200 (CEST)
-Received: from CH2PR05CA0002.namprd05.prod.outlook.com (2603:10b6:610::15) by
- DS0PR12MB7560.namprd12.prod.outlook.com (2603:10b6:8:133::17) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7409.46; Wed, 3 Apr 2024 10:12:02 +0000
-Received: from DS3PEPF000099D4.namprd04.prod.outlook.com
- (2603:10b6:610:0:cafe::4f) by CH2PR05CA0002.outlook.office365.com
- (2603:10b6:610::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.25 via Frontend
- Transport; Wed, 3 Apr 2024 10:12:02 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099D4.mail.protection.outlook.com (10.167.17.5) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7452.22 via Frontend Transport; Wed, 3 Apr 2024 10:12:01 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 3 Apr
- 2024 05:12:00 -0500
-Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Wed, 3 Apr 2024 05:11:58 -0500
+ id c61738ff-f1a3-11ee-afe5-a90da7624cb6;
+ Wed, 03 Apr 2024 12:20:20 +0200 (CEST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-516a01c8490so677188e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:20 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Apr 2024 03:20:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,230 +46,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ee8403e-f1a2-11ee-afe5-a90da7624cb6
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ebIAevk94pHslbS4NYiogZTousZ3EZLyZH+gq5QNtMHfvgXyTmFOUb0POSP1jJGWH0Vv1RCeb79XQO4uMlNGgRgvlzmkpsbY/79DEJjVP7lPhwI+bvjFihuSxGH5POV8OB+IEvm7LXnMiOzAFNecrjfjRaphNSiEv4xmZOp6fLm9wBrs5o+e6+J+GNfnQi1qdwjpzmmJHmmBexKlLLTOC/8fHQcZqvGiu82BnbGwiPtnGV7VGwcrTXUJG2e+fdSAZs4OfiRrWYDkgAVEIxQLKQoM4PC300s7jjwW06+jShDfWz0rheXU9L29Y5hSp+FjH1PWa52YIGCT+zK3IeqF6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nVZ8rFge6bNbG4lQdbguvKaDyYYtOn2T9lyT+8vv8dI=;
- b=Lmfwt/0S+uiB558jz3zd41bfV+BQbPaFnPSAYWnPTfTYwcdQ0lxL8P45agUSx0CWU+ubuwgL59thhZynWn8jOzTgaLpIrioTaXg59+X4hji+d68h0/56o7a905bETCpDMBzM2fV2rF0bdQ4K2I78gylIkZ92plEMB4epP2Vre2YP0/vzHs55HAyq/NEacEjvBQH+VzFgJbSM7qgvh8agISjSoUtWFHvUvfzsoSFEz6RwZ0xM5GX9euEjW/dcM+jgppzMvJvqzqapGJx2JnWhNe/I3/UNf1USCs0Eusn20n207KbUS3Qr51QSAK0gqpvo13WAqwGWX7AhCTL7CSElYg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nVZ8rFge6bNbG4lQdbguvKaDyYYtOn2T9lyT+8vv8dI=;
- b=AoV+Zy+NSX7rwol0MzOe31DJjMvcQOQMVQk5tX8PJFvd6EBATQ7sBkvBPzpSPV8NzG7ZPeewkUx/4KRlEx15SwtAI8IhwObgcJUx1llEDJYic/matH2RS4EnwErtqueUyTmDJQcsuDMDXKr2WvFrCBsKz6QaIUfBj6Pu6LqjOB8=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <5151abab-93a9-4b3f-8d69-c45e3cfc663c@amd.com>
-Date: Wed, 3 Apr 2024 12:11:57 +0200
+X-Inumbo-ID: c61738ff-f1a3-11ee-afe5-a90da7624cb6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1712139619; x=1712744419; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4FQPLinh42qBu2cwjojE0/Q7kzGHHOUunECIcZ8FxJQ=;
+        b=IYVv9/UppsE02zIZ4rfnGZZ1gQ2UMYrWynFyNgZAuypbpfzEFxNnY1eDIzyPSiyPTR
+         ljd2hH8ydaX9RQ1muvoW8sOvIvTY20kEOo3I4x4uNX/RJdN3eTpUgUBowpY3WrGOH+ze
+         /O4rlHbc+FLT4ODd+Lox5sxjxc1uXdj45Xl/WotrFZ/OQ/TkiJAIoHlq75O2nqDB8MKD
+         ZD9RNc660DdkrxW8DV4PRF+sX5usn4DfpnT75LVYOpfDAmUZ21wXuCKVWFb3jWbWYPxA
+         f64+WQrrNwcvJ1+ueOYbBgt/ryeT3rKGc0I2C5xRNnDb75fXQQFIGH5jY/3h1b0f6HVb
+         zOqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1712139619; x=1712744419;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=4FQPLinh42qBu2cwjojE0/Q7kzGHHOUunECIcZ8FxJQ=;
+        b=T+pZQrgqIkAy1CZ6+OR7R0Tpxz3miST5ouzMC9MT8+6jUVr+Dyibt5kQOpw10TD5BJ
+         olFEzeQiBGKJA+k3PBpGfbCzw1tpVMySdNpj80FcyDNAy+NKyBLr1rpvkUzvcFpZAUea
+         0pw8frICU3HzEYH6jlGHY7u8RmqVhGn1+wktYpKSO2+huU5XxEaXUM2Q7WtCiyZySsz1
+         bqH+jaHd9sF+kgi9T0Jf1vlUCZz5TuCpRoIbE8dMydfDnmd6CqZMFyZ+vkpZ5md2AfSx
+         3RR0PB1o+cPjatjR7gouIb+eBxOXWXqeXE9TFDK3oYK/1cySqx87Q3wrKCJDsW1cwqrY
+         ZSDA==
+X-Gm-Message-State: AOJu0Yxww/YLAZh9+pdefp+uW81CRcd7NmGyhv5hNcJ59uz5zQkwB2a0
+	4S/XW87dlaBrgnha87nK7ZmGZUpCPQ6x/wxpsHmvicl+CZlFvKQTlDNkzCSU
+X-Google-Smtp-Source: AGHT+IGv2Pse/vPGNf359mWOmsa4ZLmAKALU1CvLKVSk8jScd4QR201tE4WVGs5K3Bzm3qHbHt/zwQ==
+X-Received: by 2002:ac2:505c:0:b0:513:d442:223b with SMTP id a28-20020ac2505c000000b00513d442223bmr751273lfm.30.1712139618854;
+        Wed, 03 Apr 2024 03:20:18 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v7 03/19] xen/riscv: introduce extenstion support check by compiler
+Date: Wed,  3 Apr 2024 12:19:56 +0200
+Message-ID: <0c9b0317d0fc4f93bf5cc0893d480853110b8287.1712137031.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1712137031.git.oleksii.kurochko@gmail.com>
+References: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] xen/arm: Add i.MX UART early printk support
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>,
-	<xen-devel@lists.xenproject.org>
-CC: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Peng Fan <peng.fan@nxp.com>
-References: <20240402120557.1822253-1-olekstysh@gmail.com>
- <20240402120557.1822253-2-olekstysh@gmail.com>
-Content-Language: en-US
-From: Michal Orzel <michal.orzel@amd.com>
-In-Reply-To: <20240402120557.1822253-2-olekstysh@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB04.amd.com: michal.orzel@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D4:EE_|DS0PR12MB7560:EE_
-X-MS-Office365-Filtering-Correlation-Id: 91834826-8089-4094-0749-08dc53c6813a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	ptiEoUyeHqFcwk3qgMvvsxzNm261w3Yrwo8uTpUx5nGLBNjrwoI6F6+Nbcl9Lfm4G8erBbjgFrgrOcujsrtj0cjRl2Nh5UEehNPCy6HoHiHPI+3rfTLGF6HjX1kK3+ycjrxUOC0RxgtQ00rh+EW6SNqyBZbsgTfmYTGRbhG5gt/xUbZWqp9jCC7CKz3O/NbsnkclgKuhzbFMnfOiWk7pIVj7rnJROwEoTy1TjuIcPWLhkfc2Dz/TlYWi6ITEP0KMJ6Ko8KeYrtGZCdiT9chvkLZxKOxPuQeN/mie4ASFhLplDS6mmHLcrU90akUxa5U7pgIbQDYvd/xUKqYkZ9I7h7NWPkVcdRMNzlpAQ9ciR6dhSDcWOZEvbNxX5SjJgjipIxp+4brv2qtKdTyThyzLNOqyc+8SYkwSSkVSF/pIxKrBcXDQR1dGMouO2b8YrHYsXA4GO5h+bESDaE6AQ9nqFELp6+QcpjvodJEREdMlpJ5ohdoBDX7Nig1FIDgBxLiK/Bl/CJbtOD7wAAvjnpjGX6mCBEp3p4l2H9+AzsRT0bJ9VNs0e2vEpw6gulwzZVa/bGXtdWO3J9N7VG8bvG1zCFIYSQnhMnyTvAM/O91UZtxI5dJF8oIh58OftS5uKE8mOUymHQ9oVa8CWr2VMmIplmxBH0hgPShHFrZQvLEUvLTWKOj0/VYC+mathBBakbeylJ4/AwrPyA1YWRiFeOwbMh160Jo8BlWuUQmojqG/+rYzHU2pZQha82H4rMr2mRum
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(1800799015)(82310400014)(376005);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2024 10:12:01.4117
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91834826-8089-4094-0749-08dc53c6813a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS3PEPF000099D4.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7560
+Content-Transfer-Encoding: 8bit
 
-Hi Oleksandr,
+Currently, RISC-V requires two extensions: _zbb and _zihintpause.
 
-On 02/04/2024 14:05, Oleksandr Tyshchenko wrote:
-> 
-> 
-> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> 
-> Tested on i.MX 8M Mini only, but I guess, it should be
-> suitable for other i.MX8M* SoCs (those UART device tree nodes
-> contain "fsl,imx6q-uart" compatible string).
-Please use imperative mood in commit msg. I would mention also that you are adding
-macros that will be used by the runtime driver.
+This patch introduces a compiler check to check if these extensions
+are supported.
+Additionally, it introduces the riscv/booting.txt file, which contains
+information about the extensions that should be supported by the platform.
 
-> 
-> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> ---
-> I selected the following configs for enabling early printk:
-> 
->  CONFIG_EARLY_UART_CHOICE_IMX_UART=y
->  CONFIG_EARLY_UART_IMX_UART=y
->  CONFIG_EARLY_PRINTK=y
->  CONFIG_EARLY_UART_BASE_ADDRESS=0x30890000
->  CONFIG_EARLY_PRINTK_INC="debug-imx-uart.inc"
-> ---
-> ---
->  xen/arch/arm/Kconfig.debug            | 14 +++++
->  xen/arch/arm/arm64/debug-imx-uart.inc | 38 ++++++++++++++
->  xen/arch/arm/include/asm/imx-uart.h   | 76 +++++++++++++++++++++++++++
->  3 files changed, 128 insertions(+)
->  create mode 100644 xen/arch/arm/arm64/debug-imx-uart.inc
->  create mode 100644 xen/arch/arm/include/asm/imx-uart.h
-> 
-> diff --git a/xen/arch/arm/Kconfig.debug b/xen/arch/arm/Kconfig.debug
-> index eec860e88e..a15d08f214 100644
-> --- a/xen/arch/arm/Kconfig.debug
-> +++ b/xen/arch/arm/Kconfig.debug
-> @@ -68,6 +68,16 @@ choice
->                         provide the parameters for the i.MX LPUART rather than
->                         selecting one of the platform specific options below if
->                         you know the parameters for the port.
-> +       config EARLY_UART_CHOICE_IMX_UART
-> +               select EARLY_UART_IMX_UART
-> +               depends on ARM_64
-> +               bool "Early printk via i.MX UART"
-> +               help
-> +                       Say Y here if you wish the early printk to direct their
-Do not take example from surrounding code. help text should be indented by 2 tabs and 2 spaces here.
+In the future, a feature will be introduced to check whether an extension
+is supported at runtime.
+However, this feature requires functionality for parsing device tree
+source (DTS), which is not yet available.
 
-> +                       output to a i.MX UART. You can use this option to
-> +                       provide the parameters for the i.MX UART rather than
-> +                       selecting one of the platform specific options below if
-> +                       you know the parameters for the port.
->         config EARLY_UART_CHOICE_MESON
->                 select EARLY_UART_MESON
->                 depends on ARM_64
-> @@ -199,6 +209,9 @@ config EARLY_UART_EXYNOS4210
->  config EARLY_UART_IMX_LPUART
->         select EARLY_PRINTK
->         bool
-> +config EARLY_UART_IMX_UART
-> +       select EARLY_PRINTK
-> +       bool
->  config EARLY_UART_MESON
->         select EARLY_PRINTK
->         bool
-> @@ -304,6 +317,7 @@ config EARLY_PRINTK_INC
->         default "debug-cadence.inc" if EARLY_UART_CADENCE
->         default "debug-exynos4210.inc" if EARLY_UART_EXYNOS4210
->         default "debug-imx-lpuart.inc" if EARLY_UART_IMX_LPUART
-> +       default "debug-imx-uart.inc" if EARLY_UART_IMX_UART
->         default "debug-meson.inc" if EARLY_UART_MESON
->         default "debug-mvebu.inc" if EARLY_UART_MVEBU
->         default "debug-pl011.inc" if EARLY_UART_PL011
-> diff --git a/xen/arch/arm/arm64/debug-imx-uart.inc b/xen/arch/arm/arm64/debug-imx-uart.inc
-> new file mode 100644
-> index 0000000000..27a68b1ed5
-> --- /dev/null
-> +++ b/xen/arch/arm/arm64/debug-imx-uart.inc
-> @@ -0,0 +1,38 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * xen/arch/arm/arm64/debug-imx-uart.inc
-> + *
-> + * i.MX8M* specific debug code
-> + *
-> + * Copyright (C) 2024 EPAM Systems Inc.
-> + */
-> +
-> +#include <asm/imx-uart.h>
-> +
-> +/*
-> + * Wait UART to be ready to transmit
-> + * rb: register which contains the UART base address
-> + * rc: scratch register
-> + */
-> +.macro early_uart_ready xb, c
-> +1:
-> +        ldr   w\c, [\xb, #IMX21_UTS] /* <- Test register */
-> +        tst   w\c, #UTS_TXFULL       /* Check TxFIFO FULL bit */
-> +        bne   1b                     /* Wait for the UART to be ready */
-> +.endm
-> +
-> +/*
-> + * UART transmit character
-> + * rb: register which contains the UART base address
-> + * rt: register which contains the character to transmit
-> + */
-> +.macro early_uart_transmit xb, wt
-> +        str   \wt, [\xb, #URTX0] /* -> Transmitter Register */
-> +.endm
-> +
-> +/*
-> + * Local variables:
-> + * mode: ASM
-> + * indent-tabs-mode: nil
-> + * End:
-> + */
-> diff --git a/xen/arch/arm/include/asm/imx-uart.h b/xen/arch/arm/include/asm/imx-uart.h
-> new file mode 100644
-> index 0000000000..413a81dd44
-> --- /dev/null
-> +++ b/xen/arch/arm/include/asm/imx-uart.h
-> @@ -0,0 +1,76 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * xen/arch/arm/include/asm/imx-uart.h
-> + *
-> + * Common constant definition between early printk and the UART driver
-> + *
-> + * Copyright (C) 2024 EPAM Systems Inc.
-> + */
-> +
-> +#ifndef __ASM_ARM_IMX_UART_H__
-> +#define __ASM_ARM_IMX_UART_H__
-> +
-> +/* 32-bit register definition */
-> +#define URXD0        (0x00) /* Receiver Register */
-There is no need to surround these values
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V7:
+ - add variables for each extension separately.
+ - create variable for abi and compilation flags to not repeat the same in several
+   places.
+ - update architectures to use generic implementations
+---
+Changes in V6:
+ - new patch for this patch series
+---
+ docs/misc/riscv/booting.txt | 16 ++++++++++++++++
+ xen/arch/riscv/arch.mk      | 15 +++++++++++++--
+ 2 files changed, 29 insertions(+), 2 deletions(-)
+ create mode 100644 docs/misc/riscv/booting.txt
 
-> +#define URTX0        (0x40) /* Transmitter Register */
-> +#define UCR1         (0x80) /* Control Register 1 */
-> +#define UCR2         (0x84) /* Control Register 2 */
-> +#define UCR3         (0x88) /* Control Register 3 */
+diff --git a/docs/misc/riscv/booting.txt b/docs/misc/riscv/booting.txt
+new file mode 100644
+index 0000000000..cb4d79f12c
+--- /dev/null
++++ b/docs/misc/riscv/booting.txt
+@@ -0,0 +1,16 @@
++System requirements
++===================
++
++The following extensions are expected to be supported by a system on which
++Xen is run:
++- Zbb:
++  RISC-V doesn't have a CLZ instruction in the base ISA.
++  As a consequence, __builtin_ffs() emits a library call to ffs() on GCC,
++  or a de Bruijn sequence on Clang.
++  Zbb extension adds a CLZ instruction, after which __builtin_ffs() emits
++  a very simple sequence.
++  The similar issue occurs with other __builtin_<bitop>, so it is needed to
++  provide a generic version of bitops in RISC-V bitops.h
++- Zihintpause:
++  On a system that doesn't have this extension, cpu_relax() should be
++  implemented properly.
+diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
+index 8403f96b6f..24a7461bcc 100644
+--- a/xen/arch/riscv/arch.mk
++++ b/xen/arch/riscv/arch.mk
+@@ -3,16 +3,27 @@
+ 
+ $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ 
+-CFLAGS-$(CONFIG_RISCV_64) += -mabi=lp64
++riscv-abi-$(CONFIG_RISCV_32) := -mabi=ilp32
++riscv-abi-$(CONFIG_RISCV_64) := -mabi=lp64
+ 
+ riscv-march-$(CONFIG_RISCV_ISA_RV64G) := rv64g
+ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
+ 
++riscv-generic-flags := $(riscv-abi-y) -march=$(riscv-march-y)
++
++zbb := $(call as-insn,$(CC) $(riscv-generic-flags)_zbb,"",_zbb)
++zihintpause := $(call as-insn,\
++               $(CC) $(riscv-generic-flags)_zihintpause,"pause",_zihintpause)
++
++extensions := $(zbb) $(zihintpause)
++
++extensions := $(subst $(space),,$(extensions))
++
+ # Note that -mcmodel=medany is used so that Xen can be mapped
+ # into the upper half _or_ the lower half of the address space.
+ # -mcmodel=medlow would force Xen into the lower half.
+ 
+-CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
++CFLAGS += $(riscv-generic-flags)$(extensions) -mstrict-align -mcmodel=medany
+ 
+ # TODO: Drop override when more of the build is working
+ override ALL_OBJS-y = arch/$(SRCARCH)/built_in.o
+-- 
+2.43.0
 
-> +#define UCR4         (0x8c) /* Control Register 4 */
-> +#define UFCR         (0x90) /* FIFO Control Register */
-> +#define USR1         (0x94) /* Status Register 1 */
-> +#define USR2         (0x98) /* Status Register 2 */
-> +#define IMX21_UTS    (0xb4) /* Test Register */
-> +
-> +#define URXD_ERR        BIT(14, UL) /* Error detect */
-> +#define URXD_RX_DATA    GENMASK(7, 0) /* Received data mask */
-> +
-> +#define UCR1_TRDYEN      BIT(13, UL) /* Transmitter ready interrupt enable */
-> +#define UCR1_RRDYEN      BIT(9, UL) /* Receiver ready interrupt enable */
-NIT: please align comments within a block
-
-Other than that:
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-
-~Michal
 
