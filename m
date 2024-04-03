@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F21ACD1294
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:32:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.700448.1093645 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 063BECD1288
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Apr 2024 10:34:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.700453.1093655 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxv2-00038r-Qc; Wed, 03 Apr 2024 10:32:36 +0000
+	id 1rrxx2-0004AE-5z; Wed, 03 Apr 2024 10:34:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 700448.1093645; Wed, 03 Apr 2024 10:32:36 +0000
+Received: by outflank-mailman (output) from mailman id 700453.1093655; Wed, 03 Apr 2024 10:34:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rrxv2-00038k-O0; Wed, 03 Apr 2024 10:32:36 +0000
-Received: by outflank-mailman (input) for mailman id 700448;
- Wed, 03 Apr 2024 10:32:36 +0000
+	id 1rrxx2-0004A7-2v; Wed, 03 Apr 2024 10:34:40 +0000
+Received: by outflank-mailman (input) for mailman id 700453;
+ Wed, 03 Apr 2024 10:34:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XszW=LI=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rrxv2-0002ML-0q
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:32:36 +0000
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [2a00:1450:4864:20::22d])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=YDNC=LI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rrxjQ-0007Ob-IC
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2024 10:20:36 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7ba9982b-f1a5-11ee-a1ef-f123f15fe8a2;
- Wed, 03 Apr 2024 12:32:34 +0200 (CEST)
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2d68c6a4630so64355741fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:32:34 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ay15-20020a5d6f0f000000b003434c764f01sm8470589wrb.107.2024.04.03.03.32.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Apr 2024 03:32:33 -0700 (PDT)
+ id cf04be71-f1a3-11ee-a1ef-f123f15fe8a2;
+ Wed, 03 Apr 2024 12:20:35 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-513dc9d6938so7606639e87.2
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Apr 2024 03:20:35 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ k33-20020a0565123da100b00516a18f9080sm1161237lfv.257.2024.04.03.03.20.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Apr 2024 03:20:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,129 +46,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ba9982b-f1a5-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: cf04be71-f1a3-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1712140354; x=1712745154; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=QnG6JXgzmUiHuTzyCN5BwALIGxGYJ6ND+KL5cUC8M64=;
-        b=OjY5KOP0KRBa9a2CyM9OTXbaO2oZtZGA7Giqz1+9a719ODgTRPKs8W+eU9tXWFffCr
-         EghbymX0wmKt7zWUG6zGxJEQOGtyckyhvIFBQZjLOuV6yFxV49/ENLiEwz/nxPNFzuDi
-         /+yMG93P0dG6DvSCaAIdbSoYhjefsmxvzlI0BlqkvgZePv0MHuCETnFhjKcgFGHNpwST
-         gAjxpRDZ5jKT30vu918v8ZyUuDig/fQMjC+bhG6fWDUy3S2GLO4nPTCvxiTmKoQttP7c
-         FNnDz82h/7N/u0UOMJm9eXH1yugFKVROY5Yon9rZW9vibwrkQPU6eL/0ViF3HRyXS12P
-         A0+Q==
+        d=gmail.com; s=20230601; t=1712139634; x=1712744434; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=E9U6oW4Qnq2TPCE8LMjq0ZhGm7F+DtWBT/tWqvv+aXU=;
+        b=d5/wMwb3mIW4KjJTOj3CH/jpRyF0qO8HkKNZR1bFib0yY4CPxk+Sol3yfR9TGw/VCL
+         QX3u1oaxj51huWcALCKUwMv41J8ipp2pxbcQJ9KrbfpeYsUbWaKxFs73YOMsOcCMoW3W
+         4lTbbv7NDR/X4MOLJg0R43+q7OY1sawHeAAHD9T7ah4szCmUU5LRYE4w4l024uoKCV6e
+         iCA8wGy2/iBhuErOhZi82Jk/kJXKan5rFHDhOSz/6DFZLNGJVWNUnoQsTgguA2Df+9ml
+         Htk7zCW2ErqKJ0ccvLsTAiXfJh0yhwIemIaRbLe4vAUVT6QJuNFBfDyCeSvdHn81LqGP
+         cz3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712140354; x=1712745154;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QnG6JXgzmUiHuTzyCN5BwALIGxGYJ6ND+KL5cUC8M64=;
-        b=OS55vSMLpmSO2D7y5D38jsVBR8k+Fo/mOH3sLGd7iOhR3GdwVP46JOj7Kqh88fMqSu
-         oBfpu/GZscidKKabW53s/lh1a+HZFZJ3WBIpiMskIi8SPI7MB3lCDIaPLrmuO9nt0ruG
-         ONBSU9wziz9AvgVu/HmUASJfNBNtNyOcrJbilpBpkBnYt28+ThxbLo+yRSSUcjaeKheq
-         A4nVoG5nhyS/bGImvh98NQ1KhE6T9tWYB8ZoIM5QnQBG2vetmaNFYTBHX9mzApnpPsI2
-         jE4mHXfIdMmXU9oAeseEneDp5BQUtDjppX2Bu/I6LdPwOmGGc1t017D/WZiQcs2u87PP
-         pvLQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXboH0YcJopOAK1xu/Wg5WJAcdxZPCrTVe2T27nsAubt8Cmg2yBXqTdzsK9/++u9wInxLPHx9TSsU5XjDGE1AhmK80a2+eT0gfBoplXc0o=
-X-Gm-Message-State: AOJu0YxXtqBJ6moKRjxUGu4FbSTIap2hlET9TyB/ZgVnkmno9LI6rPL9
-	qHFr0zCFFJ5pCbK8meZwjKUXiwCbbXOcrlfHxGnBsO0MaT14ON7XTNWpUPsRUA==
-X-Google-Smtp-Source: AGHT+IH5zFvVp9DD+mZjdUWw7ZiktALKcb8oZB75WhO3Xy7luy1mKRHTVHxkLpjCWrjF18pqJB5WAw==
-X-Received: by 2002:a2e:a592:0:b0:2d4:668f:baac with SMTP id m18-20020a2ea592000000b002d4668fbaacmr12573545ljp.28.1712140353692;
-        Wed, 03 Apr 2024 03:32:33 -0700 (PDT)
-Message-ID: <68375b35-c611-411d-99f0-c71b48cc5ba2@suse.com>
-Date: Wed, 3 Apr 2024 12:32:32 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 03/19] xen/riscv: introduce extenstion support check by
- compiler
-Content-Language: en-US
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, xen-devel@lists.xenproject.org
+        d=1e100.net; s=20230601; t=1712139634; x=1712744434;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=E9U6oW4Qnq2TPCE8LMjq0ZhGm7F+DtWBT/tWqvv+aXU=;
+        b=nq95hp3VC51S/tycfCTHb9zuHRB5kitmPRFPulBmnmPfkWF7uk7WIDn+fR3jXVG7eE
+         VCqLIM+8p8i79zhx+BLnhBqahXEoQ601T47+1cI8vaVP+OmuS+Dst7V7MgLEPZPG1yOD
+         fvsxxXK/+FG7Ql2SiAj0s9AhgFCK/lTKsgn6v6IfpdoLOks95t9wbGzc5vuIrbHSp+DQ
+         b1nvkdbmNjXO1a5YI0fn7zuh6fRH/stu4BQkwOsZg/IWcfVC6sir3lcrRX4KoWcZQlhu
+         e19VsMnNiLLfK/Gj/8/pJogiEOv77YlhbcvVZrQDCnjnWFLjP5gIQt2KaFULnDD040lS
+         qm/Q==
+X-Gm-Message-State: AOJu0Yz13zuD25chWzHs4VeKjqRWqghhhkI07XrKrAOgqOGRqi8vyMAH
+	Ng73A5vQgeHeJ1yvBm0mGJ3LPj4OejPzsN1MkU7DokAH3KPFZ+BRzHCA8iMR
+X-Google-Smtp-Source: AGHT+IHAjlE34P1pdcJxuNNymHnV7H32e+81w+VuX+xiJ8HK+FcCSsopU06OYV71JcG7clJorQq+mg==
+X-Received: by 2002:ac2:5321:0:b0:516:7738:bd5c with SMTP id f1-20020ac25321000000b005167738bd5cmr1488007lfh.4.1712139634398;
+        Wed, 03 Apr 2024 03:20:34 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: [PATCH v7 16/19] xen/riscv: introduce vm_event_*() functions
+Date: Wed,  3 Apr 2024 12:20:09 +0200
+Message-ID: <99f82a80c2013b138c4ddff1f070d53c6f28681c.1712137031.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1712137031.git.oleksii.kurochko@gmail.com>
 References: <cover.1712137031.git.oleksii.kurochko@gmail.com>
- <0c9b0317d0fc4f93bf5cc0893d480853110b8287.1712137031.git.oleksii.kurochko@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <0c9b0317d0fc4f93bf5cc0893d480853110b8287.1712137031.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On 03.04.2024 12:19, Oleksii Kurochko wrote:
-> Currently, RISC-V requires two extensions: _zbb and _zihintpause.
-> 
-> This patch introduces a compiler check to check if these extensions
-> are supported.
-> Additionally, it introduces the riscv/booting.txt file, which contains
-> information about the extensions that should be supported by the platform.
-> 
-> In the future, a feature will be introduced to check whether an extension
-> is supported at runtime.
-> However, this feature requires functionality for parsing device tree
-> source (DTS), which is not yet available.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V5-V7:
+ - Only rebase was done.
+---
+Changes in V4:
+  - New patch.
+---
+ xen/arch/riscv/Makefile   |  1 +
+ xen/arch/riscv/vm_event.c | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 xen/arch/riscv/vm_event.c
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 2fefe14e7c..1ed1a8369b 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -5,6 +5,7 @@ obj-$(CONFIG_RISCV_64) += riscv64/
+ obj-y += sbi.o
+ obj-y += setup.o
+ obj-y += traps.o
++obj-y += vm_event.o
+ 
+ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
+diff --git a/xen/arch/riscv/vm_event.c b/xen/arch/riscv/vm_event.c
+new file mode 100644
+index 0000000000..bb1fc73bc1
+--- /dev/null
++++ b/xen/arch/riscv/vm_event.c
+@@ -0,0 +1,19 @@
++#include <xen/bug.h>
++
++struct vm_event_st;
++struct vcpu;
++
++void vm_event_fill_regs(struct vm_event_st *req)
++{
++    BUG_ON("unimplemented");
++}
++
++void vm_event_set_registers(struct vcpu *v, struct vm_event_st *rsp)
++{
++    BUG_ON("unimplemented");
++}
++
++void vm_event_monitor_next_interrupt(struct vcpu *v)
++{
++    /* Not supported on RISCV. */
++}
+-- 
+2.43.0
 
-However, ...
-
-> --- a/xen/arch/riscv/arch.mk
-> +++ b/xen/arch/riscv/arch.mk
-> @@ -3,16 +3,27 @@
->  
->  $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
->  
-> -CFLAGS-$(CONFIG_RISCV_64) += -mabi=lp64
-> +riscv-abi-$(CONFIG_RISCV_32) := -mabi=ilp32
-> +riscv-abi-$(CONFIG_RISCV_64) := -mabi=lp64
->  
->  riscv-march-$(CONFIG_RISCV_ISA_RV64G) := rv64g
->  riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
->  
-> +riscv-generic-flags := $(riscv-abi-y) -march=$(riscv-march-y)
-> +
-> +zbb := $(call as-insn,$(CC) $(riscv-generic-flags)_zbb,"",_zbb)
-> +zihintpause := $(call as-insn,\
-> +               $(CC) $(riscv-generic-flags)_zihintpause,"pause",_zihintpause)
-
-... this would better be indented thus
-
-zihintpause := $(call as-insn, \
-                      $(CC) $(riscv-generic-flags)_zihintpause,"pause",_zihintpause)
-
-to make nesting entirely obvious. I guess I'll table the liberty to adjust
-while committing.
-
-I'd also like to note that this is specifically not what I had suggested.
-But it at least improves readability.
-
-Jan
 
