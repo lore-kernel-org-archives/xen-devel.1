@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC3FFCD1297
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3344AC67861
 	for <xen-devel@archiver.kernel.org>; Fri,  5 Apr 2024 12:11:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.701226.1095501 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.701230.1095541 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rsiPx-0007R4-BL; Fri, 05 Apr 2024 12:11:37 +0000
+	id 1rsiQ1-0008Sz-HT; Fri, 05 Apr 2024 12:11:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 701226.1095501; Fri, 05 Apr 2024 12:11:37 +0000
+Received: by outflank-mailman (output) from mailman id 701230.1095541; Fri, 05 Apr 2024 12:11:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rsiPx-0007Qx-8l; Fri, 05 Apr 2024 12:11:37 +0000
-Received: by outflank-mailman (input) for mailman id 701226;
- Fri, 05 Apr 2024 12:11:35 +0000
+	id 1rsiQ1-0008Ss-Cx; Fri, 05 Apr 2024 12:11:41 +0000
+Received: by outflank-mailman (input) for mailman id 701230;
+ Fri, 05 Apr 2024 12:11:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Im47=LK=cloud.com=fouad.hilly@srs-se1.protection.inumbo.net>)
- id 1rsiPv-0007Qe-UW
- for xen-devel@lists.xenproject.org; Fri, 05 Apr 2024 12:11:35 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
+ id 1rsiQ0-0007Qe-8Z
+ for xen-devel@lists.xenproject.org; Fri, 05 Apr 2024 12:11:40 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a4663203-f345-11ee-a1ef-f123f15fe8a2;
- Fri, 05 Apr 2024 14:11:34 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-56e2393b073so2238680a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 05 Apr 2024 05:11:33 -0700 (PDT)
+ id a7a73133-f345-11ee-a1ef-f123f15fe8a2;
+ Fri, 05 Apr 2024 14:11:38 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-56e030624d1so3456671a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Apr 2024 05:11:38 -0700 (PDT)
 Received: from fhilly.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- j13-20020a50ed0d000000b0056c4372c161sm729425eds.55.2024.04.05.05.11.31
+ j13-20020a50ed0d000000b0056c4372c161sm729425eds.55.2024.04.05.05.11.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 05:11:31 -0700 (PDT)
+ Fri, 05 Apr 2024 05:11:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,106 +47,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4663203-f345-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: a7a73133-f345-11ee-a1ef-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1712319091; x=1712923891; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1712319097; x=1712923897; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=z1i+lAGzw5jmQvcR+ZSadLxyO+lAXMTpWfVS36kD2fk=;
-        b=flGXaGXjIU9FBWcrhayHcXfJQTNzdOiO2u8iwsprPV3dVcJ/Z59xTAkeRij2S6xiSQ
-         TYCj+fam+gi9YMaiTappzOY7/PYBxe/EGd5u2jvOlBhFA/D8gibYas8jpCNmvvfYvW6O
-         rxJoMVSnFmCmKDkz58bgTIy+k+ZzevQnNhARU=
+        bh=wdhAQWAGgzqfyVOlZZiidtJ6Xeb+heOhOyk9/vxfLS0=;
+        b=BCR/4nvzPXGSe2aZExlNnkyeFDGpL3gSy+eSFB4tKyeiUG1QoJDmFjygGFMXm1A08W
+         sIAdkIIKkKgT/n+lKOi8/LudOsCj0XPiGd0SV72BTIYPUoWKbDATqC0nFw8efe34YEAy
+         oHb5C7bwtkR5vA++Fs/RGCQ7btOJijllTdhmA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712319091; x=1712923891;
+        d=1e100.net; s=20230601; t=1712319097; x=1712923897;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=z1i+lAGzw5jmQvcR+ZSadLxyO+lAXMTpWfVS36kD2fk=;
-        b=cNHTWT1IJQ5VrpbgRnhzWJKV8fAc+6MqwpRUdLWWm5vfSEMeKaieFIyNebom+h5hp2
-         fi6BP50ou/9Nt2uO2lO0RWE9vYeby6hBccVpKhFW/PFMqePSDss50ZKjWS963MOx+Wtz
-         aKT+sVj/dxiCKwq7UCukXgqzCZZsAw9KvCerBRYFTc78+Id6C50zJ9kD3ZXIBgMjCO5+
-         Ho0ijKQxGiMFsg8PWk39+d08dOPW3zKolJK0wg2dGqisweNWynwbJQumaejpLFmrI2t+
-         2FpiRzRz049tovqozWU0+jxJRFZIBbvuDDw4DmO3BFdg8Jd2gtpj/WLMX/TEHaeEzaiG
-         zZaQ==
-X-Gm-Message-State: AOJu0YyC3g2R0nisESFm/GSfu9xjGFuIUZOqATrZiBOvmcCDp4/WvD71
-	jXE/wO3GGxptVuTHHSqz0hXhiR+TuJQwnzPKHXaoXMqxGIaxWJjf1fgeSx8SrNZvIc6ZyqtfnwO
-	a
-X-Google-Smtp-Source: AGHT+IEzZ7vs0wJQzSSeiWHlGqjLSoHJCD9DCOM78+5BxbEVS7rgKCIfI0T86TgsWL9qmrq2hvuIjA==
-X-Received: by 2002:a50:8753:0:b0:56e:2dfb:da7b with SMTP id 19-20020a508753000000b0056e2dfbda7bmr1390248edv.0.1712319091525;
-        Fri, 05 Apr 2024 05:11:31 -0700 (PDT)
+        bh=wdhAQWAGgzqfyVOlZZiidtJ6Xeb+heOhOyk9/vxfLS0=;
+        b=Vc+xoXsNqHcjj3dRjj9O5ebRpMwSMdTwe0rRQqmHQR1jQdCZgUPI1//83eZiKAP2Uk
+         T/iVTdeczswADvE2iSNIgDqMUhH0StBpgMyXBd0a0/OEIut1iYc+9+5PtugC2Z9VP/Uf
+         JPSQa7TVy+ethF+zq8UhOOihpx28nAY+6CfE1ZlJBESs/xGIzo7wqTkkeTcb2b14OEMQ
+         c+TG47cpSuz7xM29BD50ys8ImkOK6hau8YjM1PgIs2hW27f9XUmsWPNP3p6k1LZM1GOK
+         rjVppLdkNTKBnGmjpdYEkSqkHOCI9+9wL4K1UHltDQ1aapeoBS6TSfwVcPtkPqJdpn10
+         EVXQ==
+X-Gm-Message-State: AOJu0YyIYUqrhcE79u7lPtJwFPQEboSZSZW8PCVSPrOk2d6B9mSRtgY4
+	wvDXVEikD8m76I3Ra+fap88JEckq/05/3ipNmnQj9HogELFrqXZ5KbKpbu6qtRhAZ0xpc6pkr3s
+	Q
+X-Google-Smtp-Source: AGHT+IFc7P4utWajGbqgWpMUxPqCIQeerVOzNOKJFOn8AwBmV1kYyymGlsBRFkuK4n0vtNRUKCAkug==
+X-Received: by 2002:a50:d49a:0:b0:568:9b13:77fe with SMTP id s26-20020a50d49a000000b005689b1377femr938158edi.37.1712319097311;
+        Fri, 05 Apr 2024 05:11:37 -0700 (PDT)
 From: Fouad Hilly <fouad.hilly@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Fouad Hilly <fouad.hilly@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 1/5] x86: Remove x86 low level version check of microcode
-Date: Fri,  5 Apr 2024 13:11:24 +0100
-Message-ID: <20240405121128.260493-2-fouad.hilly@cloud.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 5/5] x86: Add --force option to xen-ucode to override microcode version check
+Date: Fri,  5 Apr 2024 13:11:28 +0100
+Message-ID: <20240405121128.260493-6-fouad.hilly@cloud.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20240405121128.260493-1-fouad.hilly@cloud.com>
 References: <20240405121128.260493-1-fouad.hilly@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove microcode version check at Intel and AMD Level.
-Microcode version check will be at higher and common level.
+Introduce --force option to xen-ucode to force skipping microcode version
+check, which allows the user to update x86 microcode even if both versions
+are the same.
 
 Signed-off-by: Fouad Hilly <fouad.hilly@cloud.com>
 ---
- xen/arch/x86/cpu/microcode/amd.c   |  8 ++------
- xen/arch/x86/cpu/microcode/intel.c | 11 +++--------
- 2 files changed, 5 insertions(+), 14 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 75fc84e445ce..4f805f662701 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -383,12 +383,8 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-                 goto skip;
-             }
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ tools/include/xenctrl.h   |  2 +-
+ tools/libs/ctrl/xc_misc.c | 12 ++++++++++--
+ tools/misc/xen-ucode.c    | 20 +++++++++++++++-----
+ 3 files changed, 26 insertions(+), 8 deletions(-)
+
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 2ef8b4e05422..5dbe3e63374a 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -1171,7 +1171,7 @@ typedef uint32_t xc_node_to_node_dist_t;
+ int xc_physinfo(xc_interface *xch, xc_physinfo_t *info);
+ int xc_cputopoinfo(xc_interface *xch, unsigned *max_cpus,
+                    xc_cputopo_t *cputopo);
+-int xc_microcode_update(xc_interface *xch, const void *buf, size_t len);
++int xc_microcode_update(xc_interface *xch, const void *buf, size_t len, uint32_t flags);
+ int xc_get_cpu_version(xc_interface *xch, struct xenpf_pcpu_version *cpu_ver);
+ int xc_get_ucode_revision(xc_interface *xch,
+                           struct xenpf_ucode_revision *ucode_rev);
+diff --git a/tools/libs/ctrl/xc_misc.c b/tools/libs/ctrl/xc_misc.c
+index 5ecdfa2c7934..edce45bc2a17 100644
+--- a/tools/libs/ctrl/xc_misc.c
++++ b/tools/libs/ctrl/xc_misc.c
+@@ -203,7 +203,7 @@ int xc_physinfo(xc_interface *xch,
+     return 0;
+ }
  
--            /*
--             * If the new ucode covers current CPU, compare ucodes and store the
--             * one with higher revision.
--             */
--            if ( (microcode_fits(mc->patch) != MIS_UCODE) &&
--                 (!saved || (compare_header(mc->patch, saved) == NEW_UCODE)) )
-+            /* If the provided ucode covers current CPU, then store its revision. */
-+            if ( (microcode_fits(mc->patch) != MIS_UCODE) && !saved )
-             {
-                 saved = mc->patch;
-                 saved_size = mc->len;
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index 060c529a6e5d..e65c02a57987 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -294,8 +294,7 @@ static int cf_check apply_microcode(const struct microcode_patch *patch)
+-int xc_microcode_update(xc_interface *xch, const void *buf, size_t len)
++int xc_microcode_update(xc_interface *xch, const void *buf, size_t len, uint32_t flags)
+ {
+     int ret;
+     struct xen_platform_op platform_op = {};
+@@ -215,7 +215,15 @@ int xc_microcode_update(xc_interface *xch, const void *buf, size_t len)
  
-     result = microcode_update_match(patch);
+     memcpy(uc, buf, len);
  
--    if ( result != NEW_UCODE &&
--         !(opt_ucode_allow_same && result == SAME_UCODE) )
-+    if ( result != NEW_UCODE && result != SAME_UCODE )
-         return -EINVAL;
+-    platform_op.cmd = XENPF_microcode_update;
++    if ( flags > XENPF_UCODE_FLAG_FORCE_NOT_SET )
++    {
++        platform_op.cmd = XENPF_microcode_update2;
++        platform_op.u.microcode.flags = flags;
++    }
++    else
++    {
++        platform_op.cmd = XENPF_microcode_update;
++    }
+     platform_op.u.microcode.length = len;
+     set_xen_guest_handle(platform_op.u.microcode.data, uc);
  
-     wbinvd();
-@@ -354,12 +353,8 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-         if ( error )
-             break;
+diff --git a/tools/misc/xen-ucode.c b/tools/misc/xen-ucode.c
+index 9bde991c5df5..469ce3299381 100644
+--- a/tools/misc/xen-ucode.c
++++ b/tools/misc/xen-ucode.c
+@@ -13,6 +13,8 @@
+ #include <xenctrl.h>
+ #include <getopt.h>
  
--        /*
--         * If the new update covers current CPU, compare updates and store the
--         * one with higher revision.
--         */
--        if ( (microcode_update_match(mc) != MIS_UCODE) &&
--             (!saved || compare_revisions(saved->rev, mc->rev) == NEW_UCODE) )
-+        /* If the provided ucode covers current CPU, then store its revision. */
-+        if ( (microcode_update_match(mc) != MIS_UCODE) && !saved )
-             saved = mc;
++#include <xen/platform.h>
++
+ static xc_interface *xch;
  
-         buf  += blob_size;
+ static const char intel_id[] = "GenuineIntel";
+@@ -21,10 +23,11 @@ static const char   amd_id[] = "AuthenticAMD";
+ static void usage(const char *name)
+ {
+     printf("%s: Xen microcode updating tool\n"
+-            "Usage: %s [<microcode file> | --show-cpu-info]\n"
++            "Usage: %s [[--force] <microcode file> | --show-cpu-info]\n"
+             "\n"
+             "  -h, --help            display this help and exit\n"
+             "  -s, --show-cpu-info   show CPU information and exit\n"
++            "  -f, --force           force to skip micorocde version check\n"
+             "\n"
+             , name, name);
+ }
+@@ -89,11 +92,13 @@ int main(int argc, char *argv[])
+     char *filename = NULL, *buf;
+     size_t len;
+     struct stat st;
++    uint32_t ucode_flag = XENPF_UCODE_FLAG_FORCE_NOT_SET;
+     int opt;
+ 
+     const static struct option options[] = {
+         {"help", no_argument, NULL, 'h'},
+         {"show-cpu-info", no_argument, NULL, 's'},
++        {"force", required_argument, NULL, 'f'},
+         {NULL, no_argument, NULL, 0}
+     };
+ 
+@@ -105,10 +110,10 @@ int main(int argc, char *argv[])
+         exit(1);
+     }
+ 
+-    if ( argc != 2 )
++    if ( argc < 2 || argc > 3)
+         goto ext_err;
+ 
+-    while ( (opt = getopt_long(argc, argv, "hs:", options, NULL)) != -1 )
++    while ( (opt = getopt_long(argc, argv, "hsf:", options, NULL)) != -1 )
+     {
+         switch (opt)
+         {
+@@ -120,12 +125,17 @@ int main(int argc, char *argv[])
+                     goto ext_err;
+                 show_curr_cpu(stdout);
+                 exit(EXIT_SUCCESS);
++            case 'f':
++            ucode_flag = XENPF_UCODE_FLAG_FORCE_SET;
++                filename = optarg;
++                break;
+             default:
+                 goto ext_err;
+         }
+     }
+ 
+-    filename = argv[1];
++    if ( argc == 2 )
++        filename = argv[1];
+     if ( filename == NULL )
+     {
+         printf("File name error\n");
+@@ -155,7 +165,7 @@ int main(int argc, char *argv[])
+         exit(1);
+     }
+ 
+-    ret = xc_microcode_update(xch, buf, len);
++    ret = xc_microcode_update(xch, buf, len, ucode_flag);
+     if ( ret )
+     {
+         fprintf(stderr, "Failed to update microcode. (err: %s)\n",
 -- 
 2.42.0
 
