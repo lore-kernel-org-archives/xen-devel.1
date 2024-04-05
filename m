@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29450CD129D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA999CD129F
 	for <xen-devel@archiver.kernel.org>; Fri,  5 Apr 2024 09:14:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.701160.1095347 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.701167.1095410 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rsfep-0007Z2-S5; Fri, 05 Apr 2024 09:14:47 +0000
+	id 1rsfeu-0000g9-DW; Fri, 05 Apr 2024 09:14:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 701160.1095347; Fri, 05 Apr 2024 09:14:47 +0000
+Received: by outflank-mailman (output) from mailman id 701167.1095410; Fri, 05 Apr 2024 09:14:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rsfep-0007YW-Me; Fri, 05 Apr 2024 09:14:47 +0000
-Received: by outflank-mailman (input) for mailman id 701160;
- Fri, 05 Apr 2024 09:14:46 +0000
+	id 1rsfet-0000cy-Vx; Fri, 05 Apr 2024 09:14:51 +0000
+Received: by outflank-mailman (input) for mailman id 701167;
+ Fri, 05 Apr 2024 09:14:50 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LUTm=LK=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rsfeo-0007WZ-Dr
- for xen-devel@lists.xenproject.org; Fri, 05 Apr 2024 09:14:46 +0000
+ id 1rsfer-0007WZ-Vk
+ for xen-devel@lists.xenproject.org; Fri, 05 Apr 2024 09:14:49 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f0eb9a0d-f32c-11ee-a1ef-f123f15fe8a2;
- Fri, 05 Apr 2024 11:14:44 +0200 (CEST)
+ id f375b6da-f32c-11ee-a1ef-f123f15fe8a2;
+ Fri, 05 Apr 2024 11:14:48 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id CCE414EE0742;
- Fri,  5 Apr 2024 11:14:42 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id DBAA64EE0749;
+ Fri,  5 Apr 2024 11:14:47 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f0eb9a0d-f32c-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: f375b6da-f32c-11ee-a1ef-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -50,110 +50,60 @@ Cc: sstabellini@kernel.org,
 	xenia.ragiadakou@amd.com,
 	ayan.kumar.halder@amd.com,
 	consulting@bugseng.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v2 1/9] x86/vlapic: tidy switch statement and address MISRA violation
-Date: Fri,  5 Apr 2024 11:14:29 +0200
-Message-Id: <81ecc35d04456771b1e48cb25155b0151e2225b8.1712305581.git.nicola.vetrini@bugseng.com>
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [XEN PATCH v2 7/9] xen/xsm: address violation of MISRA C Rule 16.2
+Date: Fri,  5 Apr 2024 11:14:35 +0200
+Message-Id: <7fbb80bf62fc2e5f91a89375134622366c0b3891.1712305581.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1712305581.git.nicola.vetrini@bugseng.com>
 References: <cover.1712305581.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove unneded blank lines between switch clauses.
-
-Refactor the last clauses so that a violation of
+Refactor the switch so that a violation of
 MISRA C Rule 16.2 is resolved (A switch label shall only be used
 when the most closely-enclosing compound statement is the body of
-a switch statement). The switch clause ending with the
-pseudo keyword "fallthrough" is an allowed exception to Rule 16.3.
+a switch statement).
+Note that the switch clause ending with the pseudo
+keyword "fallthrough" is an allowed exception to Rule 16.3.
 
-No functional change.
-
-Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/hvm/vlapic.c | 16 +++-------------
- 1 file changed, 3 insertions(+), 13 deletions(-)
+The second switch is not the best in terms of readability, so it may
+be best to deviate this particular instance.
+---
+ xen/include/xsm/dummy.h | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index dcbcf4a1feb5..81efe5472518 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -976,7 +976,6 @@ int guest_wrmsr_x2apic(struct vcpu *v, uint32_t msr, uint64_t val)
-         if ( val & ~APIC_TPRI_MASK )
-             return X86EMUL_EXCEPTION;
-         break;
--
-     case APIC_SPIV:
-         if ( val & ~(APIC_VECTOR_MASK | APIC_SPIV_APIC_ENABLED |
-                      APIC_SPIV_FOCUS_DISABLED |
-@@ -984,38 +983,31 @@ int guest_wrmsr_x2apic(struct vcpu *v, uint32_t msr, uint64_t val)
-                       ? APIC_SPIV_DIRECTED_EOI : 0)) )
-             return X86EMUL_EXCEPTION;
-         break;
--
-     case APIC_LVTT:
-         if ( val & ~(LVT_MASK | APIC_TIMER_MODE_MASK) )
-             return X86EMUL_EXCEPTION;
-         break;
--
-     case APIC_LVTTHMR:
-     case APIC_LVTPC:
-     case APIC_CMCI:
-         if ( val & ~(LVT_MASK | APIC_DM_MASK) )
-             return X86EMUL_EXCEPTION;
-         break;
--
-     case APIC_LVT0:
-     case APIC_LVT1:
-         if ( val & ~LINT_MASK )
-             return X86EMUL_EXCEPTION;
-         break;
--
-     case APIC_LVTERR:
-         if ( val & ~LVT_MASK )
-             return X86EMUL_EXCEPTION;
-         break;
--
-     case APIC_TMICT:
-         break;
--
-     case APIC_TDCR:
-         if ( val & ~APIC_TDR_DIV_MASK )
-             return X86EMUL_EXCEPTION;
-         break;
--
-     case APIC_ICR:
-         if ( (uint32_t)val & ~(APIC_VECTOR_MASK | APIC_DM_MASK |
-                                APIC_DEST_MASK | APIC_INT_ASSERT |
-@@ -1023,21 +1015,19 @@ int guest_wrmsr_x2apic(struct vcpu *v, uint32_t msr, uint64_t val)
-             return X86EMUL_EXCEPTION;
-         vlapic_set_reg(vlapic, APIC_ICR2, val >> 32);
-         break;
--
-     case APIC_SELF_IPI:
-         if ( val & ~APIC_VECTOR_MASK )
-             return X86EMUL_EXCEPTION;
-         offset = APIC_ICR;
-         val = APIC_DEST_SELF | (val & APIC_VECTOR_MASK);
-         break;
--
-     case APIC_EOI:
-     case APIC_ESR:
--        if ( val )
+diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
+index 88039fdd227c..84d3a8ed1c94 100644
+--- a/xen/include/xsm/dummy.h
++++ b/xen/include/xsm/dummy.h
+@@ -83,17 +83,17 @@ static always_inline int xsm_default_action(
+         return 0;
+     case XSM_TARGET:
+         if ( evaluate_nospec(src == target) )
 -        {
-+        if ( !val )
-+            break;
+             return 0;
 +        fallthrough;
-     default:
-             return X86EMUL_EXCEPTION;
+     case XSM_XS_PRIV:
+-            if ( evaluate_nospec(is_xenstore_domain(src)) )
+-                return 0;
 -        }
-     }
- 
-     vlapic_reg_write(v, array_index_nospec(offset, PAGE_SIZE), val);
+-        /* fall through */
++        if ( (action == XSM_XS_PRIV) &&
++             evaluate_nospec(is_xenstore_domain(src)) )
++            return 0;
++        fallthrough;
+     case XSM_DM_PRIV:
+         if ( target && evaluate_nospec(src->target == target) )
+             return 0;
+-        /* fall through */
++        fallthrough;
+     case XSM_PRIV:
+         if ( is_control_domain(src) )
+             return 0;
 -- 
 2.34.1
+
 
