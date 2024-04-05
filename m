@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98795CD1296
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC932CD129B
 	for <xen-devel@archiver.kernel.org>; Fri,  5 Apr 2024 09:14:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.701165.1095398 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.701159.1095341 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rsfet-0000Qk-D0; Fri, 05 Apr 2024 09:14:51 +0000
+	id 1rsfep-0007X1-KH; Fri, 05 Apr 2024 09:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 701165.1095398; Fri, 05 Apr 2024 09:14:51 +0000
+Received: by outflank-mailman (output) from mailman id 701159.1095341; Fri, 05 Apr 2024 09:14:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rsfet-0000P6-6p; Fri, 05 Apr 2024 09:14:51 +0000
-Received: by outflank-mailman (input) for mailman id 701165;
- Fri, 05 Apr 2024 09:14:49 +0000
+	id 1rsfep-0007Wu-Fw; Fri, 05 Apr 2024 09:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 701159;
+ Fri, 05 Apr 2024 09:14:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LUTm=LK=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rsfer-0007WZ-En
- for xen-devel@lists.xenproject.org; Fri, 05 Apr 2024 09:14:49 +0000
+ id 1rsfeo-0007WZ-74
+ for xen-devel@lists.xenproject.org; Fri, 05 Apr 2024 09:14:46 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f32b95bd-f32c-11ee-a1ef-f123f15fe8a2;
- Fri, 05 Apr 2024 11:14:48 +0200 (CEST)
+ id f032e5ff-f32c-11ee-a1ef-f123f15fe8a2;
+ Fri, 05 Apr 2024 11:14:43 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id 5167C4EE0747;
- Fri,  5 Apr 2024 11:14:47 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id CB51F4EE073E;
+ Fri,  5 Apr 2024 11:14:40 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f32b95bd-f32c-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: f032e5ff-f32c-11ee-a1ef-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -52,51 +52,52 @@ Cc: sstabellini@kernel.org,
 	consulting@bugseng.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v2 6/9] x86/hvm: address violations of MISRA C Rule 16.2
-Date: Fri,  5 Apr 2024 11:14:34 +0200
-Message-Id: <165d61fab77c0b6613b78e0091195753fe9cd2cc.1712305581.git.nicola.vetrini@bugseng.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [XEN PATCH v2 0/9] address violations of MISRA C Rule 16.2
+Date: Fri,  5 Apr 2024 11:14:28 +0200
+Message-Id: <cover.1712305581.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1712305581.git.nicola.vetrini@bugseng.com>
-References: <cover.1712305581.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Refactor the switch so that a violation of
-MISRA C Rule 16.2 is resolved (a switch label should be immediately
-enclosed in the compound statement of the switch).
+Continuing the work done in [1], these patches make this rule clean (i.e., no
+residual violation of the rule). Some switches are refactored to avoid
+interleaving a case label inside an if statement. In some cases this leads to
+some duplication, but the files where this would have had the greatest impact
+(the x86 emulator files and svm/emulate.c) are deviated, in order to have a
+reasonable balance between code changes and deviations.
 
-The switch clause ending with the pseudo
-keyword "fallthrough" is an allowed exception to Rule 16.3.
+[1] https://lore.kernel.org/xen-devel/99114c15a4256e6a0f39bd6de232ee4b8ad9b587.1698239734.git.nicola.vetrini@bugseng.com/
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/arch/x86/hvm/hypercall.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Nicola Vetrini (9):
+  x86/vlapic: tidy switch statement and address MISRA violation
+  x86/cpuid: address violation of MISRA C Rule 16.2
+  x86/irq: tidy switch statement and address MISRA violation
+  x86/efi: tidy switch statement and address MISRA violation
+  xen/domctl: address violations of MISRA C Rule 16.2
+  x86/hvm: address violations of MISRA C Rule 16.2
+  xen/xsm: address violation of MISRA C Rule 16.2
+  xen/domain: deviate MISRA C Rule 16.2 violation
+  eclair_analysis: deviate x86 emulator for Rule 16.2
 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index eeb73e1aa5d0..2801d75d89f1 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -119,12 +119,12 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-             (mode == 8 ? regs->rdi : regs->ebx) == HVMOP_guest_request_vm_event )
-             break;
- 
--        if ( unlikely(hvm_get_cpl(curr)) )
--        {
-+        if ( !unlikely(hvm_get_cpl(curr)) )
-+            break;
-+        fallthrough;
-     default:
--            regs->rax = -EPERM;
--            return HVM_HCALL_completed;
--        }
-+        regs->rax = -EPERM;
-+        return HVM_HCALL_completed;
-     case 0:
-         break;
-     }
+ .../eclair_analysis/ECLAIR/deviations.ecl     |  7 +++++
+ docs/misra/deviations.rst                     |  6 ++++
+ docs/misra/safe.json                          |  8 +++++
+ xen/arch/x86/cpuid.c                          | 31 +++++++++----------
+ xen/arch/x86/efi/efi-boot.h                   |  8 +++--
+ xen/arch/x86/hvm/hypercall.c                  | 10 +++---
+ xen/arch/x86/hvm/vlapic.c                     | 16 ++--------
+ xen/arch/x86/irq.c                            |  9 ++----
+ xen/common/domain.c                           |  1 +
+ xen/common/domctl.c                           |  8 +++--
+ xen/include/xsm/dummy.h                       | 12 +++----
+ 11 files changed, 64 insertions(+), 52 deletions(-)
+
 -- 
 2.34.1
-
 
