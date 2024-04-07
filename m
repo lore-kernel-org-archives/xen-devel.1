@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E04CD1296
-	for <xen-devel@archiver.kernel.org>; Sun,  7 Apr 2024 20:50:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.701684.1096024 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C599CD1292
+	for <xen-devel@archiver.kernel.org>; Sun,  7 Apr 2024 20:59:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.701695.1096044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rtZSv-00061z-1a; Sun, 07 Apr 2024 20:50:13 +0000
+	id 1rtZbo-0008Ii-3f; Sun, 07 Apr 2024 20:59:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 701684.1096024; Sun, 07 Apr 2024 20:50:13 +0000
+Received: by outflank-mailman (output) from mailman id 701695.1096044; Sun, 07 Apr 2024 20:59:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rtZSu-00061p-V5; Sun, 07 Apr 2024 20:50:12 +0000
-Received: by outflank-mailman (input) for mailman id 701684;
- Sun, 07 Apr 2024 20:50:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rtZbo-0008Ib-0g; Sun, 07 Apr 2024 20:59:24 +0000
+Received: by outflank-mailman (input) for mailman id 701695;
+ Sun, 07 Apr 2024 20:59:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CRZ/=LM=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1rtZSt-0005XS-Ch
- for xen-devel@lists.xenproject.org; Sun, 07 Apr 2024 20:50:11 +0000
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [2607:f8b0:4864:20::732])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6bcf080c-f520-11ee-a1ef-f123f15fe8a2;
- Sun, 07 Apr 2024 22:50:09 +0200 (CEST)
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-78d57bd577dso99044185a.2
- for <xen-devel@lists.xenproject.org>; Sun, 07 Apr 2024 13:50:09 -0700 (PDT)
+ id 1rtZbn-0008IV-Gh
+ for xen-devel@lists.xenproject.org; Sun, 07 Apr 2024 20:59:23 +0000
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [2607:f8b0:4864:20::b31])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b54ad52c-f521-11ee-afe6-a90da7624cb6;
+ Sun, 07 Apr 2024 22:59:22 +0200 (CEST)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-dc236729a2bso3651358276.0
+ for <xen-devel@lists.xenproject.org>; Sun, 07 Apr 2024 13:59:22 -0700 (PDT)
 Received: from shine.lan
  (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
  [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
- op3-20020a05620a534300b0078a593b54e6sm2512745qkn.96.2024.04.07.13.50.07
+ s12-20020ad44b2c000000b00696b152514dsm2506997qvw.12.2024.04.07.13.59.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Apr 2024 13:50:07 -0700 (PDT)
+ Sun, 07 Apr 2024 13:59:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,36 +48,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6bcf080c-f520-11ee-a1ef-f123f15fe8a2
+X-Inumbo-ID: b54ad52c-f521-11ee-afe6-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712523008; x=1713127808; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8ZDvIUsAKPV206Pd7mJP42UrMWzTymOhx8HDziGsICo=;
-        b=nmd2oqZzt/S1y3MZrB+gnyY74DWnepC6jgRdQInSEjQdBGe8W2M1yW+jECCt4vSiCF
-         Pc/cL0yGfR4YIsHxNJ7Uy0v0EE3q7Is0kmLOFOSxDhGMHGmS/0PWQSwiJXwje898gyEP
-         5Dqltt5m9MsPzFOnqDXWZMX9VQ99aMRGY6xBBMEvgSsSvSMLSVAAx4Gm3/mCyZWyTeKP
-         v6+9atH21MaLP0s1r5OsPXu+Cqd/NOeMUtkLN5pjzHUX3uX7vO8XCsz2KTl0ooyWkuVf
-         t8B7mbHBVgcTKJJMlncj70ONpSLshaXhNnenY0f4Yd/t+H6kADpjLUXEoNfAzCDRZgeE
-         +U9g==
+        d=gmail.com; s=20230601; t=1712523560; x=1713128360; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+OC3YGS4/Iar3z4n2ZpdMSQ+zYL8lV8fsg+McAQ6FMI=;
+        b=m/rC7Zm6hltAaSCrSHKetoPbCmylnXQZ/67U05m/5uqd7QS+EOaMaBZhsnDRJrOvjB
+         V4zPjPVWexvmSwiVKnfjvPTJaDvynQ/p9UHWlzq8QY3Vq1Hj7EpRQPaz0dT1bgi4jmR8
+         AA71Yx1d1dZ2UDzlpRxf8zaL4pI+YUASAFub0jf/iedX7aqrlqDTL+O4RpmD9ucgn/bV
+         gAhl+VWAGm+mfIpE/kzwtCWgw9a/b0uaDTxsiGvEoDinnHgiL8Az3w+DUMIQdmpWf9J/
+         rEReo4bxjtUKq9jQ+cCenH8hWySlTxQEOJXWIRVJB7q1UpoAOvRf1ZNWTdr9dambGZmz
+         TFbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712523008; x=1713127808;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8ZDvIUsAKPV206Pd7mJP42UrMWzTymOhx8HDziGsICo=;
-        b=T28fcxe2C8kfsI8VAajr4oQcg7MLIBZmt/0yLL5iyjF8hRlf7D2/QmyI+rSXo5d1jl
-         8OUcp2elXPHVsdLGAEKwnUct1BABVcq58jceR5RKAhJvvnJTT0J5vq38Dlu2EOceLLIA
-         K1w46dLcpPLmgh0jME5V3Z4j//N/VtaADekS1lF1USAO79uL4slHNNAExkpN/Yl/YzzB
-         Aes/8GmQQ/eBTe/H8lf0UFX8ZlUJ23TEN1TVcIbzNF8dygDU4f2et0lTxlRtpeeBu5XE
-         epR7irsjZdgpHeBeRoQXVI1JrV0St+zc/OIXK0rlpVCEzX0VMKzCdsshmcXzIyq8Eu+e
-         pdpA==
-X-Gm-Message-State: AOJu0Ywa8XgkxZH79Vwpudc5+jStg4K41zOLhEuzKBrzeo2LFA3AHgqu
-	LK7rMwPLG2BoyQVW5ucn26xJ/GXyudkw9U0rRs4Y1pWwQjVdSqXBwIEvTc/0
-X-Google-Smtp-Source: AGHT+IHUCCTAjf79Y8ZrkaloLomDLgJ1qtrOdgfyTEx1LMnfPTvwUnlErnzAeFfIv6z7S6NKdYtEmg==
-X-Received: by 2002:ae9:ea03:0:b0:78b:e7ed:2a08 with SMTP id f3-20020ae9ea03000000b0078be7ed2a08mr7479809qkg.41.1712523007822;
-        Sun, 07 Apr 2024 13:50:07 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1712523560; x=1713128360;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+OC3YGS4/Iar3z4n2ZpdMSQ+zYL8lV8fsg+McAQ6FMI=;
+        b=BAJkZCxPrGbnB63sCVnBEheAg2Ruj/xErw72YrLitEmWpui0bdwRwnNYxf9d9UDANP
+         qWdsKGXT/4AXs6+9YzqAQaYyJSlp9T8g/8bOEoStsjWw41Q3A0LhqijQmMK/zRXejazj
+         2zNyzV+CxxHfeUaSqz+9fcO3J2XoepohziTNNPmQY2IqauQUHi/o0RwOBrxcDdRcxRa/
+         aklsFND3t4qYRMxJSybOxQsAK/qFF3V8Uvu3xMxjKvBESJPYS/nln1vUZ7KsmzSzxACE
+         PvaiW10y45SX6NIcs2r9hpaWyyQQdJtuDXxcR0mB8olSCR/hogQPUdO9F++LfIonQrlQ
+         ol5w==
+X-Gm-Message-State: AOJu0Yw+OcU+jOdGyEvgWhvk/S7jHGSPott/BJOB2HrWNuEkD5kge7DP
+	g47wBO3ntYAwFqrt5kU5R8hsBXheVK/50EalbA/q4jc5FQmqdp2CHvY1G1KA
+X-Google-Smtp-Source: AGHT+IHEq4iSGbmx0vp5KdaKzevLGMXDY4iGqYJPvgkHGjXqpdOgLAfMAfss5TkdCRsrnI6wfAPI1A==
+X-Received: by 2002:a81:4f83:0:b0:615:175f:ae2b with SMTP id d125-20020a814f83000000b00615175fae2bmr6595791ywb.2.1712523560379;
+        Sun, 07 Apr 2024 13:59:20 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
@@ -85,83 +84,131 @@ Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [PATCH v2 2/3] libxl: Support blktap with HVM device model
-Date: Sun,  7 Apr 2024 16:49:52 -0400
-Message-Id: <20240407204953.60442-3-jandryuk@gmail.com>
+Subject: [PATCH v2] libxl: devd: Spawn QEMU for 9pfs
+Date: Sun,  7 Apr 2024 16:58:09 -0400
+Message-Id: <20240407205809.60871-1-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240407204953.60442-1-jandryuk@gmail.com>
-References: <20240407204953.60442-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-blktap exposes disks over UNIX socket Network Block Device (NBD).
-Modify libxl__device_disk_find_local_path() to provide back the
-QEMU-formatted NBD path.  This allows tapdisk to be used for booting an
-HVM.
+Add support for xl devd to support 9pfs in a domU.  devd need to spawn a
+pvqemu for the domain to service 9pfs as well as qdisk backends.  Rename
+num_qdisks to pvqemu_refcnt to be more generic.
 
-Use the nbd+unix:/// format specified by the protocol at
-https://github.com/NetworkBlockDevice/nbd/blob/master/doc/uri.md
+Keep the qdisk-backend-pid xenstore key as well as the disk-%u log file.
+They are externally visible, so the might be used by other tooling.
 
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
 v2:
-Add Anthony's R-b
-Add matching { } to else
+Retain xenstore qdisk-backend-pid and qdisk-%u logfile
 ---
- tools/libs/light/libxl_disk.c | 18 ++++++++++++++----
- tools/libs/light/libxl_dm.c   |  1 -
- 2 files changed, 14 insertions(+), 5 deletions(-)
+ tools/libs/light/libxl_device.c   | 22 ++++++++++++----------
+ tools/libs/light/libxl_dm.c       |  5 +++--
+ tools/libs/light/libxl_internal.h |  4 ++--
+ 3 files changed, 17 insertions(+), 14 deletions(-)
 
-diff --git a/tools/libs/light/libxl_disk.c b/tools/libs/light/libxl_disk.c
-index 819d34933b..432970f5a7 100644
---- a/tools/libs/light/libxl_disk.c
-+++ b/tools/libs/light/libxl_disk.c
-@@ -1724,7 +1724,8 @@ char *libxl__device_disk_find_local_path(libxl__gc *gc,
-      * If the format isn't raw and / or we're using a script, then see
-      * if the script has written a path to the "cooked" node
-      */
--    if (disk->script && guest_domid != INVALID_DOMID) {
-+    if ((disk->script && guest_domid != INVALID_DOMID) ||
-+        disk->backend == LIBXL_DISK_BACKEND_TAP) {
-         libxl__device device;
-         char *be_path, *pdpath;
-         int rc;
-@@ -1744,10 +1745,19 @@ char *libxl__device_disk_find_local_path(libxl__gc *gc,
-         LOGD(DEBUG, guest_domid, "Attempting to read node %s", pdpath);
-         path = libxl__xs_read(gc, XBT_NULL, pdpath);
+diff --git a/tools/libs/light/libxl_device.c b/tools/libs/light/libxl_device.c
+index 6f0100d05e..a3d9f6f7df 100644
+--- a/tools/libs/light/libxl_device.c
++++ b/tools/libs/light/libxl_device.c
+@@ -1524,12 +1524,12 @@ static void device_complete(libxl__egc *egc, libxl__ao_device *aodev)
+     libxl__nested_ao_free(aodev->ao);
+ }
  
--        if (path)
-+        if (path) {
-             LOGD(DEBUG, guest_domid, "Accessing cooked block device %s", path);
--        else
--            LOGD(DEBUG, guest_domid, "No physical-device-path, can't access locally.");
-+
-+            /* tapdisk exposes disks locally over UNIX socket NBD. */
-+            if (disk->backend == LIBXL_DISK_BACKEND_TAP) {
-+                path = libxl__sprintf(gc, "nbd+unix:///?socket=%s", path);
-+                LOGD(DEBUG, guest_domid,
-+                     "Directly accessing local TAP target %s", path);
-+            }
-+        } else {
-+            LOGD(DEBUG, guest_domid,
-+                "No physical-device-path, can't access locally.");
-+	}
+-static void qdisk_spawn_outcome(libxl__egc *egc, libxl__dm_spawn_state *dmss,
+-                                int rc)
++static void qemu_xenpv_spawn_outcome(libxl__egc *egc,
++                                     libxl__dm_spawn_state *dmss, int rc)
+ {
+     STATE_AO_GC(dmss->spawn.ao);
  
-         goto out;
-     }
+-    LOGD(DEBUG, dmss->guest_domid, "qdisk backend spawn %s",
++    LOGD(DEBUG, dmss->guest_domid, "qemu xenpv backend spawn %s",
+                 rc ? "failed" : "succeed");
+ 
+     libxl__nested_ao_free(dmss->spawn.ao);
+@@ -1552,7 +1552,7 @@ typedef struct libxl__ddomain_device {
+  */
+ typedef struct libxl__ddomain_guest {
+     uint32_t domid;
+-    int num_qdisks;
++    int pvqemu_refcnt;
+     XEN_SLIST_HEAD(, struct libxl__ddomain_device) devices;
+     XEN_SLIST_ENTRY(struct libxl__ddomain_guest) next;
+ } libxl__ddomain_guest;
+@@ -1646,15 +1646,16 @@ static int add_device(libxl__egc *egc, libxl__ao *ao,
+ 
+     switch(dev->backend_kind) {
+     case LIBXL__DEVICE_KIND_QDISK:
+-        if (dguest->num_qdisks == 0) {
++    case LIBXL__DEVICE_KIND_9PFS:
++        if (dguest->pvqemu_refcnt == 0) {
+             GCNEW(dmss);
+             dmss->guest_domid = dev->domid;
+             dmss->spawn.ao = ao;
+-            dmss->callback = qdisk_spawn_outcome;
++            dmss->callback = qemu_xenpv_spawn_outcome;
+ 
+-            libxl__spawn_qdisk_backend(egc, dmss);
++            libxl__spawn_qemu_xenpv_backend(egc, dmss);
+         }
+-        dguest->num_qdisks++;
++        dguest->pvqemu_refcnt++;
+         break;
+     default:
+         GCNEW(aodev);
+@@ -1685,8 +1686,9 @@ static int remove_device(libxl__egc *egc, libxl__ao *ao,
+ 
+     switch(ddev->dev->backend_kind) {
+     case LIBXL__DEVICE_KIND_QDISK:
+-        if (--dguest->num_qdisks == 0) {
+-            rc = libxl__destroy_qdisk_backend(gc, dev->domid);
++    case LIBXL__DEVICE_KIND_9PFS:
++        if (--dguest->pvqemu_refcnt == 0) {
++            rc = libxl__destroy_qemu_xenpv_backend(gc, dev->domid);
+             if (rc)
+                 goto out;
+         }
 diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 0b03a7c747..1a24e7961a 100644
+index 1a24e7961a..ff8ddeec9a 100644
 --- a/tools/libs/light/libxl_dm.c
 +++ b/tools/libs/light/libxl_dm.c
-@@ -1915,7 +1915,6 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-                     continue;
-                 }
+@@ -3380,7 +3380,8 @@ static void device_model_postconfig_done(libxl__egc *egc,
+     dmss->callback(egc, dmss, rc);
+ }
  
--                assert(disks[i].backend != LIBXL_DISK_BACKEND_TAP);
-                 target_path = libxl__device_disk_find_local_path(gc,
-                                     guest_domid, &disks[i], true);
+-void libxl__spawn_qdisk_backend(libxl__egc *egc, libxl__dm_spawn_state *dmss)
++void libxl__spawn_qemu_xenpv_backend(libxl__egc *egc,
++                                     libxl__dm_spawn_state *dmss)
+ {
+     STATE_AO_GC(dmss->spawn.ao);
+     flexarray_t *dm_args, *dm_envs;
+@@ -3470,7 +3471,7 @@ static int kill_device_model(libxl__gc *gc, const char *xs_path_pid)
+ }
+ 
+ /* Helper to destroy a Qdisk backend */
+-int libxl__destroy_qdisk_backend(libxl__gc *gc, uint32_t domid)
++int libxl__destroy_qemu_xenpv_backend(libxl__gc *gc, uint32_t domid)
+ {
+     char *pid_path;
+     int rc;
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index 094d0df9b1..dda3d15087 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -4196,9 +4196,9 @@ _hidden char *libxl__stub_dm_name(libxl__gc *gc, const char * guest_name);
+ 
+ /* Qdisk backend launch helpers */
+ 
+-_hidden void libxl__spawn_qdisk_backend(libxl__egc *egc,
++_hidden void libxl__spawn_qemu_xenpv_backend(libxl__egc *egc,
+                                         libxl__dm_spawn_state *dmss);
+-_hidden int libxl__destroy_qdisk_backend(libxl__gc *gc, uint32_t domid);
++_hidden int libxl__destroy_qemu_xenpv_backend(libxl__gc *gc, uint32_t domid);
+ 
+ /*----- Domain creation -----*/
  
 -- 
 2.39.2
