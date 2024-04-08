@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E08CD128A
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Apr 2024 12:27:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.701719.1096561 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22FCFCD128A
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Apr 2024 12:49:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.701942.1096577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rto69-0002No-7a; Mon, 08 Apr 2024 12:27:41 +0000
+	id 1rtoQi-0006Hx-3a; Mon, 08 Apr 2024 12:48:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 701719.1096561; Mon, 08 Apr 2024 12:27:41 +0000
+Received: by outflank-mailman (output) from mailman id 701942.1096577; Mon, 08 Apr 2024 12:48:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rto69-0002Mq-3l; Mon, 08 Apr 2024 12:27:41 +0000
-Received: by outflank-mailman (input) for mailman id 701719;
- Mon, 08 Apr 2024 04:12:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rtoQi-0006Hq-0D; Mon, 08 Apr 2024 12:48:56 +0000
+Received: by outflank-mailman (input) for mailman id 701942;
+ Mon, 08 Apr 2024 12:48:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KUbC=LN=gmail.com=mhkelley58@srs-se1.protection.inumbo.net>)
- id 1rtgMp-0002in-35
- for xen-devel@lists.xenproject.org; Mon, 08 Apr 2024 04:12:23 +0000
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [2607:f8b0:4864:20::635])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2fd0caf0-f55e-11ee-a1ef-f123f15fe8a2;
- Mon, 08 Apr 2024 06:12:18 +0200 (CEST)
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1e3c9300c65so17304465ad.0
- for <xen-devel@lists.xenproject.org>; Sun, 07 Apr 2024 21:12:18 -0700 (PDT)
-Received: from localhost.localdomain (c-73-254-87-52.hsd1.wa.comcast.net.
- [73.254.87.52]) by smtp.gmail.com with ESMTPSA id
- u17-20020a17090341d100b001e3f0cde2desm2474666ple.253.2024.04.07.21.12.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Apr 2024 21:12:16 -0700 (PDT)
+ <SRS0=oSlD=LN=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1rtoQh-0006Hk-2y
+ for xen-devel@lists.xenproject.org; Mon, 08 Apr 2024 12:48:55 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20601.outbound.protection.outlook.com
+ [2a01:111:f403:200a::601])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5a278daa-f5a6-11ee-afe6-a90da7624cb6;
+ Mon, 08 Apr 2024 14:48:53 +0200 (CEST)
+Received: from BLAPR05CA0032.namprd05.prod.outlook.com (2603:10b6:208:335::13)
+ by CY8PR12MB8362.namprd12.prod.outlook.com (2603:10b6:930:7e::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.55; Mon, 8 Apr
+ 2024 12:48:49 +0000
+Received: from BL02EPF00021F6F.namprd02.prod.outlook.com
+ (2603:10b6:208:335:cafe::c) by BLAPR05CA0032.outlook.office365.com
+ (2603:10b6:208:335::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.18 via Frontend
+ Transport; Mon, 8 Apr 2024 12:48:49 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF00021F6F.mail.protection.outlook.com (10.167.249.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7452.22 via Frontend Transport; Mon, 8 Apr 2024 12:48:49 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 8 Apr
+ 2024 07:48:48 -0500
+Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Mon, 8 Apr 2024 07:48:47 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,274 +61,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2fd0caf0-f55e-11ee-a1ef-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712549536; x=1713154336; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GMSQhLrDPilrzUC346KcRMtXyNYWEOyJ6WX8+UinkkA=;
-        b=GZ56xJMvfN8tT1iY+uZs22PjUNRYgnmsIeFqvfN5NGdSyMZpqhPTLdVYMw7f958ZpV
-         oQbvvRVszZELZAE4U7vUL1UNrH2AOwL2eI/bCKSyUUL/9RBiJEm8O9xPyNpsVAAlts6W
-         sDYnBL6Gp8U6RkZj332Ncrw5XCDxB5Gx6h5Gzj8ovuq267/476gUZVYzq49gfqzVndZC
-         b21Zsi4xeXstriGNrz0cvBDdHCD9Xi7FeA5UWb6YRHGOvP4fmHyv0tMla+efk77PUUO5
-         Jp/J4Wh4k3zDirxx1UHh41hQWWncEg0d8ror7WwTDRi4fdzzsv9+dFlGz5WmD+k9piFt
-         A20Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712549537; x=1713154337;
-        h=content-transfer-encoding:mime-version:reply-to:message-id:date
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GMSQhLrDPilrzUC346KcRMtXyNYWEOyJ6WX8+UinkkA=;
-        b=uHsQkgCLaIHCVL6ApBcJdppD0PygUf1t/nqfLnMN5gmI6H/b/SZrXDRAXTeAj2Zhk+
-         PWR6RKR4dv2oGiV4+HkIyupUI97cI2HTY/RGTn+vlYxkzLAkl28XgOnignfrSaa/srW8
-         TotHSavRwuoDyhcbbIErEOWzdcU5Wo+rZp0F5jEy3XoCknpUNTqoMLIhyBseneYvpkQS
-         t3l6Vvw284BedJ+UaCcXa7LReJzIagvabX52ln8uYJzG5naLzUeUd/Pt8BnFzwoyKm7I
-         mlfMewFDKcoWAwAc9w4irycz1FSW9b7DeVG3rERa81qVcNY6ds5E2o3GFLq2U8sWCQy9
-         oobQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVu5jyXhLPckEJVfy45o2YiL5xsRemM8aMTkTfHu8Z+khH2wur+8ZJZskiCthQPE8gSZ7mFbhOyg3yNnC/neWe2hYPES+a4CRF86VqipSI=
-X-Gm-Message-State: AOJu0Yy3ivqa01RHjvchvtrSTZn4t+S+xO+DUj3h25Vxgcxur2/VBP4b
-	QCi2Gm6DIjWvniRQKoBARTHgQL0r/MSFJq+BDPkiM7/r93sJKmXt
-X-Google-Smtp-Source: AGHT+IGJ2H/R5OdFFo2sWuPhTY0GzQYPe7tpoRBe4DrZ/4S9V3guChofxwL81b6WIsmX5otyZzTeOw==
-X-Received: by 2002:a17:903:1ce:b0:1e4:4a3f:9a88 with SMTP id e14-20020a17090301ce00b001e44a3f9a88mr488986plh.46.1712549536492;
-        Sun, 07 Apr 2024 21:12:16 -0700 (PDT)
-From: mhkelley58@gmail.com
-X-Google-Original-From: mhklinux@outlook.com
-To: robin.murphy@arm.com,
-	joro@8bytes.org,
-	will@kernel.org,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	oleksandr_tyshchenko@epam.com,
-	hch@lst.de,
-	m.szyprowski@samsung.com,
-	iommu@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Cc: petr@tesarici.cz,
-	roberto.sassu@huaweicloud.com
-Subject: [PATCH 1/2] swiotlb: Remove alloc_size argument to swiotlb_tbl_map_single()
-Date: Sun,  7 Apr 2024 21:11:41 -0700
-Message-Id: <20240408041142.665563-1-mhklinux@outlook.com>
-X-Mailer: git-send-email 2.25.1
-Reply-To: mhklinux@outlook.com
+X-Inumbo-ID: 5a278daa-f5a6-11ee-afe6-a90da7624cb6
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OTo/FJOus8SJH2QbTUXm2UZA0i4HYDvvn66RLjQCOwXEUQklq+dtEGJRE+IrgPpiz6Lh4u8MAmRPbcA6FIW1HVACGsZuvuE2z2W4cAOEKa1Vg5ynV+67qEeWSSxeOliUpu330vkS1PpyyLNyEFC/1yDm28QGZgfK12fSVLw+QVsjXTbO+QdogoaYfdi3xlQhSOphQafaadLo1BeDZosUWIrsqqtssehQkhjA83UM8r1TUmXk0+fYhuEjY+rmlcwad6OF97uBugS3g1rnNmnwZmTWedpC25WtnCMwh5jqwRmxLMee2tXSy+Aar+mcWKZpWk3TAdbsb/S9TY3n/BYswQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JGQCEk5pp9sIrAw4k+KN6KRlvFQ+JHNUZoUdGtL0Cdo=;
+ b=lnzqXpu3m70qUlF0eP8AuPe8MG9vrW5F7kpj1L6mrTqXiHs4Sewa4dhiNIfIb5uEDAoK4rbXqDzviRu9K/fsSudLKtGMi39qT56g05LRFaP/j07hG8iG17Ahwp/yrBH6dvkH7AVjZ203lVTZ71Gdn8Oc7tyc3fpqdhXe01ysZQ3kT4/UL//y0/94OdPpcZeV5nIf+sqCUqED0TKsoEnm9zjhKL7jH2Q2z6aVfnCFeDmV7SZTBrhtztEyybxSbR/CNcJUX9X4uZOvLKbg7xQHM4lcdJjyGzM52J/8fhunetyz9d+XikObMjWfMyeQOuJao6y5tOhUbqCq/X3B8SH4Ug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=ti.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JGQCEk5pp9sIrAw4k+KN6KRlvFQ+JHNUZoUdGtL0Cdo=;
+ b=sIYVMnsjtPceYGllmImgIABrCbFfBQi4aeb/PLz9RARtpJEtEPV5W1aqteYv3Pfy8pWUSi13PvcwKDDtqJFUeGt7Uf4RF/KsmuT+vWxqWMr53oJcUjjJy7qVjA3iLoBuuyMsKGxEJ+6plemeS8MhGstdj3FONNIeuDsNZGjd6Ig=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <c65a664b-81db-4fc5-b61a-d81c49715f58@amd.com>
+Date: Mon, 8 Apr 2024 14:48:46 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] drivers: char: Enable OMAP UART driver for TI K3 devices
+To: Vaishnav Achath <vaishnav.a@ti.com>, <andrew.cooper3@citrix.com>,
+	<george.dunlap@citrix.com>, <jbeulich@suse.com>, <julien@xen.org>,
+	<sstabellini@kernel.org>, <bertrand.marquis@arm.com>,
+	<Volodymyr_Babchuk@epam.com>
+CC: <xen-devel@lists.xenproject.org>
+References: <20240408121152.1302364-1-vaishnav.a@ti.com>
+Content-Language: en-US
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <20240408121152.1302364-1-vaishnav.a@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB04.amd.com: michal.orzel@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F6F:EE_|CY8PR12MB8362:EE_
+X-MS-Office365-Filtering-Correlation-Id: 57969914-5951-4ad7-575b-08dc57ca3cbd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	9J+ZVrwn5qLFz49CkXwV6zWIkws4FTXRZ81pnkkR4eoFTJVpSBeXWKTzK1cl6E5gwdX8WSbaBKaP4XIGCFcXcV6FB9BQQbacV+mgHqZzm4jgYFSS93MN8+O5MMw/zHEMqnr7xtI5SHsi4Fxh/cu8mAboSqLqToogydbnOyjjADz2qFEzY1uhLbxCpFcA+jpQgz0TdQIJPYCVC1dbC/1Pwtqlsjjg1QF2GKFfSZhqXgEn3VB1MSCXF4/Tip4ykpzhQSBJKPcLlK5yRADDTrTPWFrbG+ldjNB7UlEdDDPOFhRfBItLS02hM1nNlzB6YQRIXjpxN4+XfbHk+p7Ft948fw+1A/Ilbn7Ye3snh5Trs/N+FvQhNH8XjPgkPnHKb8oeyqrcVL0fygQF4M4MUCtFchyAFS9SvfSe+Fy19sppdSAdgVAfEO4cxaS8VRA6K5rI9I4U/UpWr8RwXT/vj8KAOHxq0KtenvxdEmMBJ/I70UudbsHWwjOKqdmDNdaRyLRKikldwdAc/qLHe0HKjzeI6472/On5TGift1dgCKdE7HMGUIIJDRH0OJ4ZxdBFrBX+74HDP11hdAQOfppxnOmcQi3imXimAxGNlmJS/+4r4lew35wiavkJjPZZX1jT1ygAjeA84AhAcJH56xfvIz2ed2MFHS/oVLBMTsl5+nrTQ2YaGwt4RYFFiwueBEUfrR4MEmzOzzMfGANoOiXYCE71JQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(82310400014)(1800799015)(376005)(36860700004);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2024 12:48:49.3350
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57969914-5951-4ad7-575b-08dc57ca3cbd
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BL02EPF00021F6F.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8362
 
-From: Michael Kelley <mhklinux@outlook.com>
+Hi,
 
-Currently swiotlb_tbl_map_single() takes alloc_align_mask and
-alloc_size arguments to specify an swiotlb allocation that is
-larger than mapping_size. This larger allocation is used solely
-by iommu_dma_map_single() to handle untrusted devices that should
-not have DMA visibility to memory pages that are partially used
-for unrelated kernel data.
+On 08/04/2024 14:11, Vaishnav Achath wrote:
+> 
+> 
+> TI K3 devices (J721E, J721S2, AM62X .etc) has the same variant
+s/has/have
 
-Having two arguments to specify the allocation is redundant. While
-alloc_align_mask naturally specifies the alignment of the starting
-address of the allocation, it can also implicitly specify the size
-by rounding up the mapping_size to that alignment.
+> of UART as OMAP4. Add the compatible used in Linux device tree,
+> "ti,am654-uart" to the omap-uart dt_match so that the driver can
+> be used with these devices. Also enable the driver for ARM64
+> platforms.
+> 
+> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+> ---
+> 
+> Xen logs from J721E EVM: https://gist.github.com/vaishnavachath/8185e2378981705e1deb121f109f46b5
+> 
+>  xen/drivers/char/Kconfig     | 2 +-
+>  xen/drivers/char/omap-uart.c | 1 +
+>  2 files changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+> index e18ec3788c..dcb9e85853 100644
+> --- a/xen/drivers/char/Kconfig
+> +++ b/xen/drivers/char/Kconfig
+> @@ -55,7 +55,7 @@ config HAS_EXYNOS4210
+>  config HAS_OMAP
+>         bool "Texas Instruments OMAP UART driver"
+>         default y
+> -       depends on ARM_32
+> +       depends on ARM_32 || ARM_64
+depends on ARM please
 
-Additionally, the current approach has an edge case bug.
-iommu_dma_map_page() already does the rounding up to compute the
-alloc_size argument. But swiotlb_tbl_map_single() then calculates
-the alignment offset based on the DMA min_align_mask, and adds
-that offset to alloc_size. If the offset is non-zero, the addition
-may result in a value that is larger than the max the swiotlb can
-allocate. If the rounding up is done _after_ the alignment offset is
-added to the mapping_size (and the original mapping_size conforms to
-the value returned by swiotlb_max_mapping_size), then the max that the
-swiotlb can allocate will not be exceeded.
+With that:
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-In view of these issues, simplify the swiotlb_tbl_map_single() interface
-by removing the alloc_size argument. Most call sites pass the same
-value for mapping_size and alloc_size, and they pass alloc_align_mask
-as zero. Just remove the redundant argument from these callers, as they
-will see no functional change. For iommu_dma_map_page() also remove
-the alloc_size argument, and have swiotlb_tbl_map_single() compute
-the alloc_size by rounding up mapping_size after adding the offset
-based on min_align_mask. This has the side effect of fixing the
-edge case bug but with no other functional change.
-
-Also add a sanity test on the alloc_align_mask. While IOMMU code
-currently ensures the granule is not larger than PAGE_SIZE, if
-that guarantee were to be removed in the future, the downstream
-effect on the swiotlb might go unnoticed until strange allocation
-failures occurred.
-
-Tested on an ARM64 system with 16K page size and some kernel
-test-only hackery to allow modifying the DMA min_align_mask and
-the granule size that becomes the alloc_align_mask. Tested these
-combinations with a variety of original memory addresses and
-sizes, including those that reproduce the edge case bug:
-
-* 4K granule and 0 min_align_mask
-* 4K granule and 0xFFF min_align_mask (4K - 1)
-* 16K granule and 0xFFF min_align_mask
-* 64K granule and 0xFFF min_align_mask
-* 64K granule and 0x3FFF min_align_mask (16K - 1)
-
-With the changes, all combinations pass.
-
-Signed-off-by: Michael Kelley <mhklinux@outlook.com>
----
-I've haven't used any "Fixes:" tags. This patch really should be
-backported only if all the other recent swiotlb fixes get backported,
-and I'm unclear on whether that will happen.
-
-I saw the brief discussion about removing the "dir" parameter from
-swiotlb_tbl_map_single(). That removal could easily be done as part
-of this patch, since it's already changing the swiotlb_tbl_map_single()
-parameters. But I think the conclusion of the discussion was to leave
-the "dir" parameter for symmetry with the swiotlb_sync_*() functions.
-Please correct me if that's wrong, and I'll respin this patch to do
-the removal.
-
- drivers/iommu/dma-iommu.c |  2 +-
- drivers/xen/swiotlb-xen.c |  2 +-
- include/linux/swiotlb.h   |  2 +-
- kernel/dma/swiotlb.c      | 56 +++++++++++++++++++++++++++++----------
- 4 files changed, 45 insertions(+), 17 deletions(-)
-
-diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
-index 07d087eecc17..c21ef1388499 100644
---- a/drivers/iommu/dma-iommu.c
-+++ b/drivers/iommu/dma-iommu.c
-@@ -1165,7 +1165,7 @@ static dma_addr_t iommu_dma_map_page(struct device *dev, struct page *page,
- 		trace_swiotlb_bounced(dev, phys, size);
- 
- 		aligned_size = iova_align(iovad, size);
--		phys = swiotlb_tbl_map_single(dev, phys, size, aligned_size,
-+		phys = swiotlb_tbl_map_single(dev, phys, size,
- 					      iova_mask(iovad), dir, attrs);
- 
- 		if (phys == DMA_MAPPING_ERROR)
-diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index 1c4ef5111651..6579ae3f6dac 100644
---- a/drivers/xen/swiotlb-xen.c
-+++ b/drivers/xen/swiotlb-xen.c
-@@ -216,7 +216,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
- 	 */
- 	trace_swiotlb_bounced(dev, dev_addr, size);
- 
--	map = swiotlb_tbl_map_single(dev, phys, size, size, 0, dir, attrs);
-+	map = swiotlb_tbl_map_single(dev, phys, size, 0, dir, attrs);
- 	if (map == (phys_addr_t)DMA_MAPPING_ERROR)
- 		return DMA_MAPPING_ERROR;
- 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index ea23097e351f..14bc10c1bb23 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -43,7 +43,7 @@ int swiotlb_init_late(size_t size, gfp_t gfp_mask,
- extern void __init swiotlb_update_mem_attributes(void);
- 
- phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t phys,
--		size_t mapping_size, size_t alloc_size,
-+		size_t mapping_size,
- 		unsigned int alloc_aligned_mask, enum dma_data_direction dir,
- 		unsigned long attrs);
- 
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index a5e0dfc44d24..046da973a7e2 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -1340,15 +1340,40 @@ static unsigned long mem_used(struct io_tlb_mem *mem)
- 
- #endif /* CONFIG_DEBUG_FS */
- 
-+/**
-+ * swiotlb_tbl_map_single() - bounce buffer map a single contiguous physical area
-+ * @dev:		Device which maps the buffer.
-+ * @orig_addr:		Original (non-bounced) physical IO buffer address
-+ * @mapping_size:	Requested size of the actual bounce buffer, excluding
-+ *			any pre- or post-padding for alignment
-+ * @alloc_align_mask:	Required start and end alignment of the allocated buffer
-+ * @dir:		DMA direction
-+ * @attrs:		Optional DMA attributes for the map operation
-+ *
-+ * Find and allocate a suitable sequence of IO TLB slots for the request.
-+ * The allocated space starts at an alignment specified by alloc_align_mask,
-+ * and the size of the allocated space is rounded up so that the total amount
-+ * of allocated space is a multiple of (alloc_align_mask + 1). If
-+ * alloc_align_mask is zero, the allocated space may be at any alignment and
-+ * the size is not rounded up.
-+ *
-+ * The returned address is within the allocated space and matches the bits
-+ * of orig_addr that are specified in the DMA min_align_mask for the device. As
-+ * such, this returned address may be offset from the beginning of the allocated
-+ * space. The bounce buffer space starting at the returned address for
-+ * mapping_size bytes is initialized to the contents of the original IO buffer
-+ * area. Any pre-padding (due to an offset) and any post-padding (due to
-+ * rounding-up the size) is not initialized.
-+ */
- phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
--		size_t mapping_size, size_t alloc_size,
--		unsigned int alloc_align_mask, enum dma_data_direction dir,
--		unsigned long attrs)
-+		size_t mapping_size, unsigned int alloc_align_mask,
-+		enum dma_data_direction dir, unsigned long attrs)
- {
- 	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
- 	unsigned int offset;
- 	struct io_tlb_pool *pool;
- 	unsigned int i;
-+	size_t size;
- 	int index;
- 	phys_addr_t tlb_addr;
- 	unsigned short pad_slots;
-@@ -1362,20 +1387,24 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
- 	if (cc_platform_has(CC_ATTR_MEM_ENCRYPT))
- 		pr_warn_once("Memory encryption is active and system is using DMA bounce buffers\n");
- 
--	if (mapping_size > alloc_size) {
--		dev_warn_once(dev, "Invalid sizes (mapping: %zd bytes, alloc: %zd bytes)",
--			      mapping_size, alloc_size);
--		return (phys_addr_t)DMA_MAPPING_ERROR;
--	}
-+	/*
-+	 * The default swiotlb memory pool is allocated with PAGE_SIZE
-+	 * alignment. If a mapping is requested with larger alignment,
-+	 * the mapping may be unable to use the initial slot(s) in all
-+	 * sets of IO_TLB_SEGSIZE slots. In such case, a mapping request
-+	 * of or near the maximum mapping size would always fail.
-+	 */
-+	dev_WARN_ONCE(dev, alloc_align_mask > ~PAGE_MASK,
-+		"Alloc alignment may prevent fulfilling requests with max mapping_size\n");
- 
- 	offset = swiotlb_align_offset(dev, alloc_align_mask, orig_addr);
--	index = swiotlb_find_slots(dev, orig_addr,
--				   alloc_size + offset, alloc_align_mask, &pool);
-+	size = ALIGN(mapping_size + offset, alloc_align_mask + 1);
-+	index = swiotlb_find_slots(dev, orig_addr, size, alloc_align_mask, &pool);
- 	if (index == -1) {
- 		if (!(attrs & DMA_ATTR_NO_WARN))
- 			dev_warn_ratelimited(dev,
- 	"swiotlb buffer is full (sz: %zd bytes), total %lu (slots), used %lu (slots)\n",
--				 alloc_size, mem->nslabs, mem_used(mem));
-+				 size, mem->nslabs, mem_used(mem));
- 		return (phys_addr_t)DMA_MAPPING_ERROR;
- 	}
- 
-@@ -1388,7 +1417,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
- 	offset &= (IO_TLB_SIZE - 1);
- 	index += pad_slots;
- 	pool->slots[index].pad_slots = pad_slots;
--	for (i = 0; i < nr_slots(alloc_size + offset); i++)
-+	for (i = 0; i < (nr_slots(size) - pad_slots); i++)
- 		pool->slots[index + i].orig_addr = slot_addr(orig_addr, i);
- 	tlb_addr = slot_addr(pool->start, index) + offset;
- 	/*
-@@ -1543,8 +1572,7 @@ dma_addr_t swiotlb_map(struct device *dev, phys_addr_t paddr, size_t size,
- 
- 	trace_swiotlb_bounced(dev, phys_to_dma(dev, paddr), size);
- 
--	swiotlb_addr = swiotlb_tbl_map_single(dev, paddr, size, size, 0, dir,
--			attrs);
-+	swiotlb_addr = swiotlb_tbl_map_single(dev, paddr, size, 0, dir, attrs);
- 	if (swiotlb_addr == (phys_addr_t)DMA_MAPPING_ERROR)
- 		return DMA_MAPPING_ERROR;
- 
--- 
-2.25.1
-
+~Michal
 
