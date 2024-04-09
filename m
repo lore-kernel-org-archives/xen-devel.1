@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F002CD129D
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2024 15:36:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.702503.1097590 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C16C67861
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2024 16:14:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.702529.1097627 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruDWb-0005gI-FZ; Tue, 09 Apr 2024 15:36:41 +0000
+	id 1ruE6d-00085U-OU; Tue, 09 Apr 2024 16:13:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 702503.1097590; Tue, 09 Apr 2024 15:36:41 +0000
+Received: by outflank-mailman (output) from mailman id 702529.1097627; Tue, 09 Apr 2024 16:13:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruDWb-0005eU-80; Tue, 09 Apr 2024 15:36:41 +0000
-Received: by outflank-mailman (input) for mailman id 702503;
- Tue, 09 Apr 2024 15:36:40 +0000
+	id 1ruE6d-00085N-Lb; Tue, 09 Apr 2024 16:13:55 +0000
+Received: by outflank-mailman (input) for mailman id 702529;
+ Tue, 09 Apr 2024 16:13:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=n+OA=LO=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1ruDWa-0005IE-E1
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2024 15:36:40 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f565771a-f686-11ee-b907-491648fe20b8;
- Tue, 09 Apr 2024 17:36:39 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a51a7d4466bso518056466b.2
- for <xen-devel@lists.xenproject.org>; Tue, 09 Apr 2024 08:36:39 -0700 (PDT)
-Received: from rayden.urgonet (h-217-31-164-171.A175.priv.bahnhof.se.
- [217.31.164.171]) by smtp.gmail.com with ESMTPSA id
- gs44-20020a1709072d2c00b00a46a3ad035esm5849000ejc.179.2024.04.09.08.36.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Apr 2024 08:36:38 -0700 (PDT)
+ <SRS0=uqhR=LO=oracle.com=konrad.wilk@srs-se1.protection.inumbo.net>)
+ id 1ruE6c-0007w8-Cx
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2024 16:13:54 +0000
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
+ [205.220.165.32]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 26f63cac-f68c-11ee-b907-491648fe20b8;
+ Tue, 09 Apr 2024 18:13:52 +0200 (CEST)
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 439BYIcH031281; Tue, 9 Apr 2024 16:13:47 GMT
+Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3xax9b5bsw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 09 Apr 2024 16:13:46 +0000
+Received: from pps.filterd
+ (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
+ with ESMTP id 439Fp1o2032367; Tue, 9 Apr 2024 16:13:46 GMT
+Received: from nam12-mw2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12lp2041.outbound.protection.outlook.com [104.47.66.41])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 3xavu7ddpv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 09 Apr 2024 16:13:46 +0000
+Received: from DM4PR10MB6719.namprd10.prod.outlook.com (2603:10b6:8:111::19)
+ by BN0PR10MB5142.namprd10.prod.outlook.com (2603:10b6:408:114::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 9 Apr
+ 2024 16:13:43 +0000
+Received: from DM4PR10MB6719.namprd10.prod.outlook.com
+ ([fe80::4581:e656:3f19:5977]) by DM4PR10MB6719.namprd10.prod.outlook.com
+ ([fe80::4581:e656:3f19:5977%7]) with mapi id 15.20.7409.042; Tue, 9 Apr 2024
+ 16:13:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,114 +65,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f565771a-f686-11ee-b907-491648fe20b8
+X-Inumbo-ID: 26f63cac-f68c-11ee-b907-491648fe20b8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
+ : subject : message-id : references : content-type :
+ content-transfer-encoding : in-reply-to : mime-version; s=corp-2023-11-20;
+ bh=ytD0acT6fIJrO4Bi2Z/mj/1qK3I8GNPRL9Pp1TSDoks=;
+ b=RmejxL5Mn0mVbKvCh0BBdHJy/evt62jye6FK8/2KjinGUa2kehCZ2KGZZprN42v0qA7p
+ H71f1u+nPksyejtRV80SEUw9YiOsbUzi0JwdziG/YInrgymSAVM1plMQU2LWLeeVqaIk
+ IycrQ3TUnR20xZ7fuptaOZquN1G75jfMDnQJYVngwXM+2Q6PvqCWMtCAXDjwRHlRp8O/
+ 6nW3TPcn34S6t6Cmnz25KrCr1aDdeOSOI5GQhI2uWvp+bh95UgHiT8KsNn76QA+phmYu
+ iQdWc5Q/g/19oFrrCtG92BMFWp+8asn9FhW0Zh4Oc83HqpphqfCASu++FobDjMMSs0gB dg== 
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=X7UPL+vFCNCCw+IFdsEnIubu2l8Ih4Z1UHJBSgC4INTHvwpqkrOCTyVOVd7MpRhZAQh+duPaIW8wIoYEu7Ji0+bTSb0cZsSyrMYBqJAq+Z/bLbBMmW5HFF82lnCZcint5xedAy7wUr2k54tm3HgjvuSJqMnohIlR4yk3f8wUYCcihrYoh99/cib05qDc/YMFR+zvoUO8ofMy1sNYtgyIcjW1JrdsZvkYujpyVNvj5fCQriZpsOI0uo0N0qmYnTIq8e0tO4uzOCh4f2P4dogBVp1iyUmXG3ozRKLZVB04AFMSZNhPGpOj/m45bjnO7iPVX25WxXcJanKfS42iZy7EVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pwpPInyrepjRMFADzdU3PYLX1lVgD/amIQNI+ydRVEE=;
+ b=D4KY7UZ+ltOy8gQDtqsyezuoowBgI1LqbO7t18waqG20kxEdVoqNmo+yCyZF5Ahd5/7iJ5JIpsgwwLhp1+8lwZQwgXFUVwDqBTb1SxoP4MRQa2EFTuta0fsUsOg2EEs272wZVowZGKYZK0p2oihSOWX7q5GJwnEMFsLZYoehsP+p3DkZaWzrTqTrLSsxwJWBOfTestT9arBbzoa61No+05d1vCiyriexYLc45AAHdJxsrStgztd+mXc0splqyNEqoS53u253dZVcaKt45kl9hgDatO+LsLu1zQ5UKyTIqiS2r/lRSXBiSgjGkBtIoI/eamONrXV2gDzX2Zr2faWiig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1712676999; x=1713281799; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+uEJrO4wREA7Y495lkxFCQXI3O8u6pydWDQAtd/HK8M=;
-        b=oGNEd/lLI5v+J19dOV/2sePbBZGcjY1E8ymJ8bXIq8owBLcv/EUegKtFZ5w9pBo/3x
-         CLwwe4sjbBW3FlkGQrrmRhmSSWqU8Br8TEiYQENrzatP6zUJ37zM9zlOBz+Kaoi9WBAx
-         CAgctetevhuoUXk88cx93QNOtJtD1i7Vm0UUYqaTmPMMO4WGLjmBc7oB6dkNOxl8Le8K
-         4e2+tNjoGcZJLU1LCzdAoCAc+I35lmX9bm8a5MppVMFbx7AKSYRioS9RNikzwpceM9fJ
-         z/vLWSpX7FIKEX/SWGa4dJojzpB7PrZDS00Ep8MriqnGONjEBJjI0fgao1UNGlRgd4M4
-         YBFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712676999; x=1713281799;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+uEJrO4wREA7Y495lkxFCQXI3O8u6pydWDQAtd/HK8M=;
-        b=E7xaA2DjadlkOrgwcEDJ+BLsET4qc2Y1aOVI7L/t3eyhcpxRjiFsEFyTR+MtMlusbS
-         uzgf+DmL/bDOvVl4mguAs69VLSdDrN2eM8KxP9d5LV0bAHqTqeFWbLPdfStC2f7uFKA+
-         KT2jmBxYclZMS+qaUGfQJAusy8NF7022y5YIV3GXBnoQpMnnw2d9g8OUNh5PwTR4zDEo
-         UHbhMktv8MLVh37zWyn6d7DY9qqwBjHsmzuUIIC2GL8QFky7mrJkBxFOVn2ASPFfXvch
-         NjcvJMuH8cCWid4C84fD3Og7e0v0Ge+8Rpif0ckIxTORhMG1pn2Kv8MwPHOCrpG+nwMh
-         rNRg==
-X-Gm-Message-State: AOJu0YyRQE5ZZDvWuTH6ypAv6zubejQ0x+05/jJNnVxGL6a1B+fqO93s
-	d/ensJyXBGrfqip35I/EipSdZwbIXHFoEyOaiY7LWy0NI/nIKjdiUFXfd5od30KJtxzf0fnP9FR
-	s
-X-Google-Smtp-Source: AGHT+IG0Viseu+hUAYAPjjQpOZn2uDv0CplDB0QrTJy7b31K6uj6uQbi8ba76tBgsTmmrU8GNqnLVQ==
-X-Received: by 2002:a17:907:3fa3:b0:a51:d2d4:1302 with SMTP id hr35-20020a1709073fa300b00a51d2d41302mr5631524ejc.40.1712676999287;
-        Tue, 09 Apr 2024 08:36:39 -0700 (PDT)
-From: Jens Wiklander <jens.wiklander@linaro.org>
-To: xen-devel@lists.xenproject.org
-Cc: patches@linaro.org,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [XEN PATCH v1 4/5] xen/arm: allow dynamically assigned SGI handlers
-Date: Tue,  9 Apr 2024 17:36:29 +0200
-Message-Id: <20240409153630.2026584-5-jens.wiklander@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240409153630.2026584-1-jens.wiklander@linaro.org>
-References: <20240409153630.2026584-1-jens.wiklander@linaro.org>
-MIME-Version: 1.0
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pwpPInyrepjRMFADzdU3PYLX1lVgD/amIQNI+ydRVEE=;
+ b=svAXEYGM7tlc0d58aB/aXK2958P8RXKPyR5vm1dROCpXH0EDfTWf9GB9EGvbs2J98m0t7Ju+qLewFLgg/OaOgi2qKC8Um2vSz/m6+gGgf+EYlmxlnNdF0d1+4RiNsB/AZNc+oypVZKeko4bB3jfD+cnfOipR4/2E66+4hYq0c4s=
+Date: Tue, 9 Apr 2024 12:13:23 -0400
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Konrad Rzeszutek Wilk <konrad@kernel.org>,
+        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+        Andrew Cooper <andrew.cooper3@citrix.com>,
+        George Dunlap <george.dunlap@citrix.com>,
+        Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+        Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] MAINTAINERS: Update livepatch maintainers
+Message-ID: <ZhVpIxhOjeRhYflW@char.us.oracle.com>
+References: <20240409103208.1641887-1-ross.lagerwall@citrix.com>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240409103208.1641887-1-ross.lagerwall@citrix.com>
+X-ClientProxiedBy: PH7P220CA0040.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:510:32b::24) To DM4PR10MB6719.namprd10.prod.outlook.com
+ (2603:10b6:8:111::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR10MB6719:EE_|BN0PR10MB5142:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	DN5tBnvztz+5t9uom29TXY7MniNaSScLPGdZAl9vDXmUfvD+zHDOXWnJkXHCzluOY+Th3557JIOyiWn6SVIzv9a/5qpSUSxd6OUAh2k2Y40/pN/viJHTUh5z0dJjDh/SL9WP6ALBSW56GxGWypaqg3au849KMYETOHo9IJ9rUPLBxx84bJ5YpDhJBafYleAopk2BE1PB+cVq4D0dz1uCT/W7E96M3bjNhEAxVGVSeFtSFDbgdK5h52+8lLAUcXGTlrhGrXRyuBiCmkpbhX1G8Zivg0EQB5iBJ2MPiNE4qVym7AUiEOYPjpVFehvsifDaCFpF/lrQFtx8LFCktU32iFJaR+a7FUPkJTuYYJ7O0gWyJh1r3AU+QEEAjaLYSCghgDH54akUnFd7Yts27ukIxGB1q54Gozzqa8Nb83pj7vjtpDuOzQzU30iFWKX4RD2ABrFUZMPS00C4X0zIllgFEGWJh2ESKriIQV+3rXN0slmmzIuyl3JwPvIGGY1OIHYWvXg1OEzSXmG72UEl1qawwXV7WnRN2bUEO6XJbPJqxUeYnarr5LzQvn2JsFWUf3cvGfD1R9PEdwu9JDHMVTt42n9HdixKIINXayayKiJJCCkIXbssAqI4zXauqpr+5ok0JxZZw8zm/42e26RQVXEXHAf40Bcv28cVo9oN23gDaEk=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB6719.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(366007)(376005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?iso-8859-1?Q?2LfwBAhn+T5faX6GfYueGFoapE+DBYu54u9c0vhvE3dkdtBJrG4demt0Ok?=
+ =?iso-8859-1?Q?5u1F/OySx2oidzbVk0ZQ0rdoh5HKoWh6Q606PaJfEoFdPU6mLvrLzSv9bz?=
+ =?iso-8859-1?Q?d1GKLDJoKGQYlUJPWPeIx8fxFzH5ZR2Mfj3liYjqJ0u/bjft9SMDtfvnxj?=
+ =?iso-8859-1?Q?Niepa2B/afZDncEH/GHg0s9I6xBmf7sNU18T82xKUbf/3NsfgxssBtmytt?=
+ =?iso-8859-1?Q?451n8RU42dqFsdoiag45zeTSp061my/HMjBnBINJCRPHF44lkX9Kl+6dI3?=
+ =?iso-8859-1?Q?ASasNAOe5d644RLfxxP0idpeiSkHO4LkERPZgrEMwAtfdKKybuOUTL43vT?=
+ =?iso-8859-1?Q?OgXGufQ9R4lv55L0kZWrjdQ0rAbxV4OWjWuPbzoFBx+WyJpQnnp50XGqFj?=
+ =?iso-8859-1?Q?HSEO1l/6LruUTtq9LHi0tWzlZ3pMQl6XV+AJ6iebpEEFCYhW7jB0E58CIC?=
+ =?iso-8859-1?Q?HYw0COcpx0hSNOnATlAYoSINE1otlxDeQXH9ypLYSKNGT/sYzhlxKfNrke?=
+ =?iso-8859-1?Q?YelDDwI72QFNcEVZUWC7uS8ENhCWms0AB/w5T5MfsvxKc3Q2F6NL4m6/d2?=
+ =?iso-8859-1?Q?5+kehxeGmGdxhDoaiXU9s/nIlYUr/+Q92/J87QdgTJ4AkLltqjePLm0o8E?=
+ =?iso-8859-1?Q?+o9xdAm+0cF9y42W+s8nBYjZRsfpUG2SQ1nbiK32thROfD4/Txf94uthCF?=
+ =?iso-8859-1?Q?He3nriBnqyHyV/tA2Al0dQ/Vr4b/vgICsI7hyQV8mKdY4+/6oGSY6R8qS8?=
+ =?iso-8859-1?Q?7oIbPeqW6ZfA7hFGm7zVxTJsJmvZCpI3Tpom1ADzUOSlUWdj4HUyYm40Lt?=
+ =?iso-8859-1?Q?4zIoehNpd8IXqyDV1REJUsi0PCoYdt36G9B+hOeW6jfTNWJWGoISooQnSH?=
+ =?iso-8859-1?Q?iPqeKr5qiTaUsh3VbeA7F2aMXbxfXj3RR1AG1OlLjAbxx1aIA1lR7FkyEJ?=
+ =?iso-8859-1?Q?mFdeaeoi+UdGB0fuTzK7W7pi+U7BZWZlKvp2Yzgeye8Bl5WPlvIRlmZgNB?=
+ =?iso-8859-1?Q?qmTN93AY1FUiEsRSMnDCITUFuXDvHLUtEUDcMkRPYZsmzVQ+R8FktbLm7b?=
+ =?iso-8859-1?Q?8YrkPEA3OwLZV4HfV2K5PlTfgUUR0QoU2+6tpEc/OrqZW1L2gIg9DNloE8?=
+ =?iso-8859-1?Q?1QBuN+U19qJesc4k3Fh+apqdzXSJmzj+eGLUoCtTW5xOwrrWdgc4Y0ohjw?=
+ =?iso-8859-1?Q?AlimeGEXAlU+1mGL0HSl6+7Hvj6G0VvgDoU739JGD0P/8B10/2DGyNotzi?=
+ =?iso-8859-1?Q?d9XeWPvPazUOh1+7FnGo2A593j23UfX9qw1e/vhq1hrDXAedqAKzdX1H8N?=
+ =?iso-8859-1?Q?y80g4w53uGRM9edhNBQmucnuhUqDOhUlMVVNTZDfjc92k2DsNcGIyCOwDb?=
+ =?iso-8859-1?Q?lqp8orhdBNkptXPD3vRoO3ZITXuOaY/LkZsifwPr93wZGrAlY7lHzNDw7k?=
+ =?iso-8859-1?Q?cDuporv/eAonyatKmKHsnY2rrpb5pl3iDRqHXLxQI8ypK+2ilTFp199IeI?=
+ =?iso-8859-1?Q?NVUuRTULbP/375FGzd0L/6ER54V2GhaJ9ISi3snrxLjcjK7K3SNyvJ01zQ?=
+ =?iso-8859-1?Q?hN5e+3mhd9h43vn2vzXkBsJIh7R7m+aPJ+blZ/Z6BpHurJn6sof58i4ojY?=
+ =?iso-8859-1?Q?oSyUXkikMR8VW6WBcHV5QBIHINqvburv+buaNnliYlxCLkJ3K7HzqdTw?=
+ =?iso-8859-1?Q?=3D=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	edoWk2R/aSzNfEuIMdzm2mjoSvK/Lwo6Bqj1U/YxZwvHcYlH1atu3pgCXIJeu1gxAuYE5obBuwUPz+KU916zWR8UAbthc7uY2sRsVs06lbkihgLVaQE0IdtwjsJC9pp5DtxRLNVDpjvNVdVVZ9QYyoJZPl5zUOAskGfKKXPvJlIrQM6PkYY1LB4nwGqz18JhbHR1NkIvbOQUGUjM8bXHC8VTaNzJmGpiwPJAIcELrBGx0BwqE6yWh0v5oFV98xBrgaGX2+X9530XKzfx2BgyreHWwSpfHHmtEAgO3lwoeEVGBHIHE7uwsoLVHITNI3gi+ZvlF+oaHRRGWCmNikUC0EWfxMbey5xuQm0wg0kXHl4hdSlHSX1koeZBaoDvPTIlrdNJ0WwnQLoIi0Vaj3MWt5g2VNbzB3GRDCgUsEoppISI+0Rl8qsUkVoTFXj/hPQtqnHnmMTiT39uoGjkHQ5TuO672zJ5Sd4MqRH2xNpRx1yCBDR8xYuPG1/T3WyjqtZLtQUkNSas5Y5rZHrJGdX5B/4DIl5tmzcPQkg1atsFrYP2j27EBqj9tq72kTctKe+l86K6sQTYCAVNVilrjk3yQLQRQ+bmksGm2xzfR4NaKo8=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d6ef1182-db7e-43c7-8cc0-08dc58b00508
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB6719.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2024 16:13:42.5449
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rDUds40adZ/r62UMdIv7VlDVglKe4BIZJ6OAJcY2Q1GC57OcQgYg0H1t8sobfOrpq7s91xErwwdgugApCjO3fQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5142
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-09_11,2024-04-09_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 suspectscore=0
+ bulkscore=0 mlxlogscore=999 mlxscore=0 adultscore=0 phishscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2404010000 definitions=main-2404090107
+X-Proofpoint-GUID: -24UPNJ_OTgJCgR_Weq7lRFo2B8k09q1
+X-Proofpoint-ORIG-GUID: -24UPNJ_OTgJCgR_Weq7lRFo2B8k09q1
 
-Updates so request_irq() can be used with a dynamically assigned SGI irq
-as input.
+On Tue, Apr 09, 2024 at 11:32:07AM +0100, Ross Lagerwall wrote:
+> Remove Konrad from the livepatch maintainers list as he hasn't been
+> active for a few years.
+> At the same time, add Roger as a new maintainer since he has been
+> actively working on it for a while.
+> 
+> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
-gic_route_irq_to_xen() don't gic_set_irq_type() for SGIs since they have
-their type assigned earlier during boot
+Acked-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 
-gic_interrupt() is updated to route the dynamically assigned SGIs to
-do_IRQ() instead of do_sgi(). The latter still handles the statically
-assigned SGI handlers like for instance GIC_SGI_CALL_FUNCTION.
-
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
----
- xen/arch/arm/gic.c | 5 +++--
- xen/arch/arm/irq.c | 7 +++++--
- 2 files changed, 8 insertions(+), 4 deletions(-)
-
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index 44c40e86defe..e9aeb7138455 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -117,7 +117,8 @@ void gic_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
- 
-     desc->handler = gic_hw_ops->gic_host_irq_type;
- 
--    gic_set_irq_type(desc, desc->arch.type);
-+    if ( desc->irq >= NR_GIC_SGI)
-+        gic_set_irq_type(desc, desc->arch.type);
-     gic_set_irq_priority(desc, priority);
- }
- 
-@@ -375,7 +376,7 @@ void gic_interrupt(struct cpu_user_regs *regs, int is_fiq)
-         /* Reading IRQ will ACK it */
-         irq = gic_hw_ops->read_irq();
- 
--        if ( likely(irq >= 16 && irq < 1020) )
-+        if ( likely(irq >= GIC_SGI_MAX && irq < 1020) )
-         {
-             isb();
-             do_IRQ(regs, irq, is_fiq);
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index bcce80a4d624..fdb214560978 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -224,9 +224,12 @@ void do_IRQ(struct cpu_user_regs *regs, unsigned int irq, int is_fiq)
- 
-     perfc_incr(irqs);
- 
--    ASSERT(irq >= 16); /* SGIs do not come down this path */
-+    /* Statically assigned SGIs do not come down this path */
-+    ASSERT(irq >= GIC_SGI_MAX);
- 
--    if ( irq < 32 )
-+    if ( irq < NR_GIC_SGI )
-+        perfc_incr(ipis);
-+    else if ( irq < NR_GIC_LOCAL_IRQS )
-         perfc_incr(ppis);
-     else
-         perfc_incr(spis);
--- 
-2.34.1
-
+Thank you for picking it up!
+> ---
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 1bd22fd75f0e..4bc45ded4130 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -395,7 +395,7 @@ F:	tools/include/xentoollog.h
+>  F:	tools/libs/
+>  
+>  LIVEPATCH
+> -M:	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+> +M:	Roger Pau Monné <roger.pau@citrix.com>
+>  M:	Ross Lagerwall <ross.lagerwall@citrix.com>
+>  S:	Supported
+>  F:	docs/misc/livepatch.pandoc
+> -- 
+> 2.43.0
+> 
 
