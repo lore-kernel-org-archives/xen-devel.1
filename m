@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A93CD12A2
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2024 11:46:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.702253.1097240 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 789FDCD12A4
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2024 11:46:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.702256.1097270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ru9vR-0006Dc-I2; Tue, 09 Apr 2024 11:46:05 +0000
+	id 1ru9vV-00078q-UZ; Tue, 09 Apr 2024 11:46:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 702253.1097240; Tue, 09 Apr 2024 11:46:05 +0000
+Received: by outflank-mailman (output) from mailman id 702256.1097270; Tue, 09 Apr 2024 11:46:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ru9vR-0006DC-B9; Tue, 09 Apr 2024 11:46:05 +0000
-Received: by outflank-mailman (input) for mailman id 702253;
- Tue, 09 Apr 2024 11:46:04 +0000
+	id 1ru9vV-00077B-Kv; Tue, 09 Apr 2024 11:46:09 +0000
+Received: by outflank-mailman (input) for mailman id 702256;
+ Tue, 09 Apr 2024 11:46:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0lRi=LO=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1ru9vQ-0004JG-9N
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2024 11:46:04 +0000
+ id 1ru9vU-0004JG-9S
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2024 11:46:08 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id bdbd7d8c-f666-11ee-94a3-07e782e9044d;
- Tue, 09 Apr 2024 13:46:02 +0200 (CEST)
+ id bffe69ae-f666-11ee-94a3-07e782e9044d;
+ Tue, 09 Apr 2024 13:46:06 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9F5651007;
- Tue,  9 Apr 2024 04:46:32 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 65725139F;
+ Tue,  9 Apr 2024 04:46:36 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8B5B23F766;
- Tue,  9 Apr 2024 04:46:01 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1C1723F766;
+ Tue,  9 Apr 2024 04:46:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,94 +44,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bdbd7d8c-f666-11ee-94a3-07e782e9044d
+X-Inumbo-ID: bffe69ae-f666-11ee-94a3-07e782e9044d
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 08/13] xen/arm: Introduce helper for static memory pages
-Date: Tue,  9 Apr 2024 12:45:38 +0100
-Message-Id: <20240409114543.3332150-9-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH v2 11/13] xen/arm: fix duplicate /reserved-memory node in Dom0
+Date: Tue,  9 Apr 2024 12:45:41 +0100
+Message-Id: <20240409114543.3332150-12-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240409114543.3332150-1-luca.fancellu@arm.com>
 References: <20240409114543.3332150-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce a new helper function in the static-memory module
-that can be called to manage static memory banks, this is
-done to reuse the code when other modules would like to
-manage static memory banks that are not part of the
-reserved_mem structure, this is done because the static
-shared memory banks will be removed from reserved_mem.
+From: Penny Zheng <Penny.Zheng@arm.com>
 
+In case there is a /reserved-memory node already present in the host
+dtb, current Xen codes would create yet another /reserved-memory node
+when the static shared memory feature is enabled and static shared
+memory regions are present.
+This would result in an incorrect device tree generation and hwdom
+would not be able to detect the static shared memory region.
+
+Avoid this issue by checking the presence of the /reserved-memory
+node and appending the nodes instead of generating a duplicate
+/reserved-memory.
+
+Make make_shm_memory_node externally visible and rename it to
+make_shm_resv_memory_node to make clear it produces childs for
+/reserved-memory.
+
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 v2:
+ - fix comment, remove function signature change, fixed commit msg
+ - rename make_shm_memory_node to make_shm_resv_memory_node in order
+   to make clear that it produces childs for /reserved-memory
  - Add Michal R-by
- - Changed commit msg
 v1:
- - new patch
+ - Rework of https://patchwork.kernel.org/project/xen-devel/patch/20231206090623.1932275-11-Penny.Zheng@arm.com/
 ---
----
- xen/arch/arm/include/asm/static-memory.h | 13 +++++++++++++
- xen/arch/arm/static-memory.c             | 12 +-----------
- 2 files changed, 14 insertions(+), 11 deletions(-)
+ xen/arch/arm/domain_build.c             | 23 ++++++++++++++++++++---
+ xen/arch/arm/include/asm/static-shmem.h |  9 +++++++++
+ xen/arch/arm/static-shmem.c             |  8 ++++----
+ 3 files changed, 33 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/static-memory.h b/xen/arch/arm/include/asm/static-memory.h
-index 3e3efd70c38d..804166e541ef 100644
---- a/xen/arch/arm/include/asm/static-memory.h
-+++ b/xen/arch/arm/include/asm/static-memory.h
-@@ -3,10 +3,23 @@
- #ifndef __ASM_STATIC_MEMORY_H_
- #define __ASM_STATIC_MEMORY_H_
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 9b36d6bb70c9..71eebfcf7e03 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1628,6 +1628,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
+         DT_MATCH_PATH("/hypervisor"),
+         { /* sentinel */ },
+     };
++    static __initdata bool res_mem_node_found = false;
+     struct dt_device_node *child;
+     int res, i, nirq, irq_id;
+     const char *name;
+@@ -1722,6 +1723,19 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
+     if ( res )
+         return res;
  
-+#include <xen/pfn.h>
- #include <asm/kernel.h>
++    if ( dt_node_path_is_equal(node, "/reserved-memory") )
++    {
++        res_mem_node_found = true;
++        /*
++         * Avoid duplicate /reserved-memory nodes in Device Tree, so add the
++         * static shared memory nodes there.
++         */
++        res = make_shm_resv_memory_node(kinfo, dt_n_addr_cells(node),
++                                        dt_n_size_cells(node));
++        if ( res )
++            return res;
++    }
++
+     for ( child = node->child; child != NULL; child = child->sibling )
+     {
+         res = handle_node(d, kinfo, child, p2mt);
+@@ -1774,9 +1788,12 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
+                 return res;
+         }
  
- #ifdef CONFIG_STATIC_MEMORY
+-        res = make_resv_memory_node(kinfo, addrcells, sizecells);
+-        if ( res )
+-            return res;
++        if ( !res_mem_node_found )
++        {
++            res = make_resv_memory_node(kinfo, addrcells, sizecells);
++            if ( res )
++                return res;
++        }
+     }
  
-+static inline void init_staticmem_bank(const struct membank *bank)
+     res = fdt_end_node(kinfo->fdt);
+diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
+index 2e8b138eb989..7495a91e7a31 100644
+--- a/xen/arch/arm/include/asm/static-shmem.h
++++ b/xen/arch/arm/include/asm/static-shmem.h
+@@ -34,6 +34,9 @@ int remove_shm_from_rangeset(const struct kernel_info *kinfo,
+ int remove_shm_holes_for_domU(const struct kernel_info *kinfo,
+                               struct membanks *ext_regions);
+ 
++int make_shm_resv_memory_node(const struct kernel_info *kinfo, int addrcells,
++                              int sizecells);
++
+ #else /* !CONFIG_STATIC_SHM */
+ 
+ static inline int make_resv_memory_node(const struct kernel_info *kinfo,
+@@ -77,6 +80,12 @@ static inline int remove_shm_holes_for_domU(const struct kernel_info *kinfo,
+     return 0;
+ }
+ 
++static inline int make_shm_resv_memory_node(const struct kernel_info *kinfo,
++                                            int addrcells, int sizecells)
 +{
-+    mfn_t bank_start = _mfn(PFN_UP(bank->start));
-+    unsigned long bank_pages = PFN_DOWN(bank->size);
-+    mfn_t bank_end = mfn_add(bank_start, bank_pages);
-+
-+    if ( mfn_x(bank_end) <= mfn_x(bank_start) )
-+        return;
-+
-+    unprepare_staticmem_pages(mfn_to_page(bank_start), bank_pages, false);
++    return 0;
 +}
 +
- void allocate_static_memory(struct domain *d, struct kernel_info *kinfo,
-                             const struct dt_device_node *node);
- void assign_static_memory_11(struct domain *d, struct kernel_info *kinfo,
-diff --git a/xen/arch/arm/static-memory.c b/xen/arch/arm/static-memory.c
-index 34bd12696a53..d4585c5a0633 100644
---- a/xen/arch/arm/static-memory.c
-+++ b/xen/arch/arm/static-memory.c
-@@ -265,17 +265,7 @@ void __init init_staticmem_pages(void)
-     for ( bank = 0 ; bank < reserved_mem->nr_banks; bank++ )
-     {
-         if ( reserved_mem->bank[bank].type == MEMBANK_STATIC_DOMAIN )
--        {
--            mfn_t bank_start = _mfn(PFN_UP(reserved_mem->bank[bank].start));
--            unsigned long bank_pages = PFN_DOWN(reserved_mem->bank[bank].size);
--            mfn_t bank_end = mfn_add(bank_start, bank_pages);
--
--            if ( mfn_x(bank_end) <= mfn_x(bank_start) )
--                return;
--
--            unprepare_staticmem_pages(mfn_to_page(bank_start),
--                                      bank_pages, false);
--        }
-+            init_staticmem_bank(&reserved_mem->bank[bank]);
-     }
+ #endif /* CONFIG_STATIC_SHM */
+ 
+ #endif /* __ASM_STATIC_SHMEM_H_ */
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index a08413ff44e2..5ad6f1269c48 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -297,8 +297,8 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+     return 0;
  }
+ 
+-static int __init make_shm_memory_node(const struct kernel_info *kinfo,
+-                                       int addrcells, int sizecells)
++int __init make_shm_resv_memory_node(const struct kernel_info *kinfo,
++                                     int addrcells, int sizecells)
+ {
+     const struct membanks *mem = &kinfo->shm_mem.common;
+     void *fdt = kinfo->fdt;
+@@ -306,7 +306,7 @@ static int __init make_shm_memory_node(const struct kernel_info *kinfo,
+     int res = 0;
+ 
+     if ( mem->nr_banks == 0 )
+-        return -ENOENT;
++        return 0;
+ 
+     /*
+      * For each shared memory region, a range is exposed under
+@@ -544,7 +544,7 @@ int __init make_resv_memory_node(const struct kernel_info *kinfo, int addrcells,
+     if ( res )
+         return res;
+ 
+-    res = make_shm_memory_node(kinfo, addrcells, sizecells);
++    res = make_shm_resv_memory_node(kinfo, addrcells, sizecells);
+     if ( res )
+         return res;
  
 -- 
 2.34.1
