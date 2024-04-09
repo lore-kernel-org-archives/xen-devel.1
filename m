@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C5ACD1284
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2024 11:46:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.702251.1097221 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1821CD129A
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2024 11:46:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.702247.1097177 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ru9vP-0005lq-RX; Tue, 09 Apr 2024 11:46:03 +0000
+	id 1ru9vL-0004b8-JS; Tue, 09 Apr 2024 11:45:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 702251.1097221; Tue, 09 Apr 2024 11:46:03 +0000
+Received: by outflank-mailman (output) from mailman id 702247.1097177; Tue, 09 Apr 2024 11:45:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ru9vP-0005le-Ns; Tue, 09 Apr 2024 11:46:03 +0000
-Received: by outflank-mailman (input) for mailman id 702251;
- Tue, 09 Apr 2024 11:46:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ru9vL-0004aJ-DZ; Tue, 09 Apr 2024 11:45:59 +0000
+Received: by outflank-mailman (input) for mailman id 702247;
+ Tue, 09 Apr 2024 11:45:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0lRi=LO=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1ru9vO-0004JL-5F
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2024 11:46:02 +0000
+ id 1ru9vJ-0004JG-VX
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2024 11:45:57 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id bd164c23-f666-11ee-b907-491648fe20b8;
- Tue, 09 Apr 2024 13:46:01 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id b9c89427-f666-11ee-94a3-07e782e9044d;
+ Tue, 09 Apr 2024 13:45:56 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 852921655;
- Tue,  9 Apr 2024 04:46:31 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BCEE915DB;
+ Tue,  9 Apr 2024 04:46:25 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 717293F766;
- Tue,  9 Apr 2024 04:46:00 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 737AB3F766;
+ Tue,  9 Apr 2024 04:45:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,82 +44,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd164c23-f666-11ee-b907-491648fe20b8
+X-Inumbo-ID: b9c89427-f666-11ee-94a3-07e782e9044d
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 07/13] xen/arm: Avoid code duplication in check_reserved_regions_overlap
-Date: Tue,  9 Apr 2024 12:45:37 +0100
-Message-Id: <20240409114543.3332150-8-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH v2 02/13] xen/arm: avoid repetitive checking in process_shm_node
+Date: Tue,  9 Apr 2024 12:45:32 +0100
+Message-Id: <20240409114543.3332150-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240409114543.3332150-1-luca.fancellu@arm.com>
 References: <20240409114543.3332150-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The function check_reserved_regions_overlap is calling
-'meminfo_overlap_check' on the same type of structure, this code
-can be written in a way to avoid code duplication, so rework the
-function to do that.
+From: Penny Zheng <Penny.Zheng@arm.com>
 
+Putting overlap and overflow checking in the loop is causing repetitive
+operation, so this commit extracts both checking outside the loop.
+
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 v2:
- - no changes
+ - add Michal R-by
 v1:
- - new patch
+ - Rework of https://patchwork.kernel.org/project/xen-devel/patch/20231206090623.1932275-3-Penny.Zheng@arm.com/
+ - use strncmp to match the branch above
+ - drop Michal R-by given the change
 ---
 ---
- xen/arch/arm/setup.c | 24 +++++++++++++-----------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+ xen/arch/arm/static-shmem.c | 39 +++++++++++++++----------------------
+ 1 file changed, 16 insertions(+), 23 deletions(-)
 
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 02bd27eb0c69..cc719d508d63 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -340,25 +340,27 @@ void __init fw_unreserved_regions(paddr_t s, paddr_t e,
- bool __init check_reserved_regions_overlap(paddr_t region_start,
-                                            paddr_t region_size)
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index cb268cd2edf1..40a0e860c79d 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -349,7 +349,7 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
  {
-+    const struct membanks *mem_banks[] = {
-+        bootinfo_get_reserved_mem(),
-+#ifdef CONFIG_ACPI
-+        bootinfo_get_acpi(),
-+#endif
-+    };
-+    unsigned int i;
+     const struct fdt_property *prop, *prop_id, *prop_role;
+     const __be32 *cell;
+-    paddr_t paddr, gaddr, size;
++    paddr_t paddr, gaddr, size, end;
+     struct meminfo *mem = &bootinfo.reserved_mem;
+     unsigned int i;
+     int len;
+@@ -422,6 +422,13 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+         return -EINVAL;
+     }
+ 
++    end = paddr + size;
++    if ( end <= paddr )
++    {
++        printk("fdt: static shared memory region %s overflow\n", shm_id);
++        return -EINVAL;
++    }
 +
-     /*
--     * Check if input region is overlapping with bootinfo_get_reserved_mem()
--     * banks
-+     * Check if input region is overlapping with reserved memory banks or
-+     * ACPI EfiACPIReclaimMemory (when ACPI feature is enabled)
-      */
--    if ( meminfo_overlap_check(bootinfo_get_reserved_mem(),
--                               region_start, region_size) )
--        return true;
-+    for ( i = 0; i < ARRAY_SIZE(mem_banks); i++ )
-+        if ( meminfo_overlap_check(mem_banks[i], region_start, region_size) )
-+            return true;
- 
-     /* Check if input region is overlapping with bootmodules */
-     if ( bootmodules_overlap_check(&bootinfo.modules,
-                                    region_start, region_size) )
-         return true;
- 
--#ifdef CONFIG_ACPI
--    /* Check if input region is overlapping with ACPI EfiACPIReclaimMemory */
--    if ( meminfo_overlap_check(bootinfo_get_acpi(), region_start, region_size) )
--        return true;
--#endif
+     for ( i = 0; i < mem->nr_banks; i++ )
+     {
+         /*
+@@ -441,30 +448,13 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+                 return -EINVAL;
+             }
+         }
++        else if ( strncmp(shm_id, mem->bank[i].shm_id, MAX_SHM_ID_LENGTH) != 0 )
++            continue;
+         else
+         {
+-            paddr_t end = paddr + size;
+-            paddr_t bank_end = mem->bank[i].start + mem->bank[i].size;
 -
-     return false;
- }
+-            if ( (end <= paddr) || (bank_end <= mem->bank[i].start) )
+-            {
+-                printk("fdt: static shared memory region %s overflow\n", shm_id);
+-                return -EINVAL;
+-            }
+-
+-            if ( check_reserved_regions_overlap(paddr, size) )
+-                return -EINVAL;
+-            else
+-            {
+-                if ( strcmp(shm_id, mem->bank[i].shm_id) != 0 )
+-                    continue;
+-                else
+-                {
+-                    printk("fdt: different shared memory region could not share the same shm ID %s\n",
+-                           shm_id);
+-                    return -EINVAL;
+-                }
+-            }
++            printk("fdt: different shared memory region could not share the same shm ID %s\n",
++                   shm_id);
++            return -EINVAL;
+         }
+     }
  
+@@ -472,6 +462,9 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+     {
+         if ( i < NR_MEM_BANKS )
+         {
++            if ( check_reserved_regions_overlap(paddr, size) )
++                return -EINVAL;
++
+             /* Static shared memory shall be reserved from any other use. */
+             safe_strcpy(mem->bank[mem->nr_banks].shm_id, shm_id);
+             mem->bank[mem->nr_banks].start = paddr;
 -- 
 2.34.1
 
