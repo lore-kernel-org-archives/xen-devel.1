@@ -4,37 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8770CCD128A
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Apr 2024 15:15:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.703368.1098998 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A173ECD1299
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Apr 2024 15:37:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.703375.1099028 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruZev-0003qg-0K; Wed, 10 Apr 2024 15:14:45 +0000
+	id 1rua0O-0007pn-6P; Wed, 10 Apr 2024 15:36:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 703368.1098998; Wed, 10 Apr 2024 15:14:44 +0000
+Received: by outflank-mailman (output) from mailman id 703375.1099028; Wed, 10 Apr 2024 15:36:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruZeu-0003qZ-Te; Wed, 10 Apr 2024 15:14:44 +0000
-Received: by outflank-mailman (input) for mailman id 703368;
- Wed, 10 Apr 2024 15:14:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7FY1=LP=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1ruZet-0003oZ-4F
- for xen-devel@lists.xenproject.org; Wed, 10 Apr 2024 15:14:43 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0e2e7ba5-f74d-11ee-b907-491648fe20b8;
- Wed, 10 Apr 2024 17:14:41 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-41551639550so47352215e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 10 Apr 2024 08:14:41 -0700 (PDT)
-Received: from localhost ([85.31.135.62]) by smtp.gmail.com with ESMTPSA id
- n6-20020a5d6606000000b0033e745b8bcfsm13911362wru.88.2024.04.10.08.14.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Apr 2024 08:14:40 -0700 (PDT)
+	id 1rua0O-0007pa-1B; Wed, 10 Apr 2024 15:36:56 +0000
+Received: by outflank-mailman (input) for mailman id 703375;
+ Wed, 10 Apr 2024 15:36:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=NRyK=LP=localhost=root@srs-se1.protection.inumbo.net>)
+ id 1rua0M-0007oC-Sg
+ for xen-devel@lists.xenproject.org; Wed, 10 Apr 2024 15:36:54 +0000
+Received: from localhost (ip-201.net-81-220-136.rev.numericable.fr
+ [81.220.136.201]) by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 26cd26b8-f750-11ee-94a3-07e782e9044d;
+ Wed, 10 Apr 2024 17:36:51 +0200 (CEST)
+Received: by localhost (Postfix, from userid 0)
+ id 57DEEE3202; Wed, 10 Apr 2024 17:36:51 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,163 +40,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e2e7ba5-f74d-11ee-b907-491648fe20b8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1712762081; x=1713366881; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Udh8ZMDVEpECGFfFBU6EwaiH5r4l1ii9BHFyxiYdzRg=;
-        b=U2lefbNBXNatST4WmOTs1IFVOcHmGIRj9zJmvjIQn73AvyMNX7Sn5/xV2kvy5IgW6n
-         IKJxIZewwXZwBmVGhgv1OS3/C7vcXvz5eCCcgVUrSi5YdxqXLMWbjRhJqcF3rTzhuxpP
-         HxJzTA2cE3dCMnQp7q1cN6jNsT3axEt4N78mI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712762081; x=1713366881;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Udh8ZMDVEpECGFfFBU6EwaiH5r4l1ii9BHFyxiYdzRg=;
-        b=sh3XX/773eK8ep/n6rVOBrzNc0jJ9sRho0eJZXhr6FsNHdCEvUkGB89F/2pZfS2b/+
-         urdSD+oZ8WKen6GDfh4Ud2T+J5jsnzSJS7CDtYShwDLparKG35ec3zBsMD0eLEZG50Wm
-         w/NEjXiujZHPuUx8YcYpusGoQgIg6+qEaguoiuiGciVcKB6qqp3tKiCXFGTvIPYT1nsb
-         JUHNffPJsmS+F8BvQOhuymXO8hTr9TOwE9KIzI7AHAj8mG5kSSxD/CTnq9cdLXPui9P/
-         a68DLkBMAwZniUMBnBhVgTZH28wM4X3BiKmKxiVnkm3sFn8bycXSsMe9qtZsp70+FBmb
-         sGfg==
-X-Gm-Message-State: AOJu0YwcTTS2lyCwh0y0B9GCcSKpoDbN26MhfZgwU1EyCoqGvQpE4S96
-	qqv0PQnPddMYRoWZdvYh4UZXiktEl2vsfIMZgH1XA831iRVuQkPjZXOXR2UEUvQ=
-X-Google-Smtp-Source: AGHT+IEFFk1rpRMkCPZMJxvqvktLYBdF8shanxlUvfeFqpY2ycN+Q5t7Pb9XPz41K0WHk9DNquCBEg==
-X-Received: by 2002:a05:6000:1561:b0:345:bbf8:5568 with SMTP id 1-20020a056000156100b00345bbf85568mr3202098wrz.7.1712762081179;
-        Wed, 10 Apr 2024 08:14:41 -0700 (PDT)
-Date: Wed, 10 Apr 2024 17:14:40 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
-	Jan Beulich <JBeulich@suse.com>, Wei Liu <wl@xen.org>,
-	Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Stefano Stabellini <stefano.stabellini@amd.com>,
-	Xenia Ragiadakou <xenia.ragiadakou@amd.com>
-Subject: Re: [PATCH v2 2/2] x86/Kconfig: Introduce CONFIG_{AMD,INTEL} and
- conditionalise ucode
-Message-ID: <Zhas4MQdL3hQ6Uww@macbook>
-References: <20231026205539.3261811-1-andrew.cooper3@citrix.com>
- <20231026205539.3261811-3-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 26cd26b8-f750-11ee-94a3-07e782e9044d
+From: Andrei Semenov <andrei.semenov@vates.fr>
+To: xen-devel@lists.xenproject.org
+Cc: Andrei Semenov <andrei.semenov@vates.fr>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v1 1/2] Implemented AMD SEV discovery and enabling.
+Date: Wed, 10 Apr 2024 17:36:36 +0200
+Message-Id: <27fce67472c97b2b2b7cc0412bf0edcaa67cc63f.1712759753.git.andrei.semenov@vates.fr>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <cover.1712759753.git.andrei.semenov@vates.fr>
+References: <cover.1712759753.git.andrei.semenov@vates.fr>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231026205539.3261811-3-andrew.cooper3@citrix.com>
 
-On Thu, Oct 26, 2023 at 09:55:39PM +0100, Andrew Cooper wrote:
-> We eventually want to be able to build a stripped down Xen for a single
-> platform.  Make a start with CONFIG_{AMD,INTEL} (hidden behind EXPERT, but
-> available to randconfig), and adjust the microcode logic.
-> 
-> No practical change.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Jan Beulich <JBeulich@suse.com>
-> CC: Roger Pau Monné <roger.pau@citrix.com>
-> CC: Wei Liu <wl@xen.org>
-> CC: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-> CC: Stefano Stabellini <stefano.stabellini@amd.com>
-> CC: Xenia Ragiadakou <xenia.ragiadakou@amd.com>
-> 
-> I've intentionally ignored the other vendors for now.  They can be put into
-> Kconfig by whomever figures out the actual dependencies between their init
-> routines.
-> 
-> v2:
->  * Tweak text
-> ---
->  xen/arch/x86/Kconfig                 |  2 ++
->  xen/arch/x86/Kconfig.cpu             | 22 ++++++++++++++++++++++
->  xen/arch/x86/cpu/microcode/Makefile  |  4 ++--
->  xen/arch/x86/cpu/microcode/private.h |  9 +++++++++
->  4 files changed, 35 insertions(+), 2 deletions(-)
->  create mode 100644 xen/arch/x86/Kconfig.cpu
-> 
-> diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-> index eac77573bd75..d9eacdd7e0fa 100644
-> --- a/xen/arch/x86/Kconfig
-> +++ b/xen/arch/x86/Kconfig
-> @@ -49,6 +49,8 @@ config HAS_CC_CET_IBT
->  
->  menu "Architecture Features"
->  
-> +source "arch/x86/Kconfig.cpu"
+Signed-off-by: Andrei Semenov <andrei.semenov@vates.fr>
+---
+ xen/arch/x86/cpu/amd.c                 | 53 ++++++++++++++++++++++++++
+ xen/arch/x86/hvm/svm/Makefile          |  1 +
+ xen/arch/x86/hvm/svm/sev.c             |  4 ++
+ xen/arch/x86/include/asm/cpufeature.h  |  3 ++
+ xen/arch/x86/include/asm/cpufeatures.h |  2 +
+ xen/arch/x86/include/asm/msr-index.h   |  1 +
+ xen/arch/x86/include/asm/sev.h         | 11 ++++++
+ 7 files changed, 75 insertions(+)
+ create mode 100644 xen/arch/x86/hvm/svm/sev.c
+ create mode 100644 xen/arch/x86/include/asm/sev.h
 
-Since we are not targeting at the CPU only, would this be better named
-as Kconfig.vendor?  Or Kconfig.platform?  (I'm OK if you prefer to
-leave as .cpu, just suggesting more neutral names.
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index ab92333673..a5903613f0 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -16,6 +16,7 @@
+ #include <asm/acpi.h>
+ #include <asm/apic.h>
+ #include <asm/microcode.h>
++#include <asm/sev.h>
+ 
+ #include "cpu.h"
+ 
+@@ -1030,6 +1031,54 @@ static void amd_check_erratum_1485(void)
+ 	wrmsrl(MSR_AMD64_BP_CFG, val | chickenbit);
+ }
+ 
++#ifdef CONFIG_HVM
++static void amd_enable_mem_encrypt(const struct cpuinfo_x86 *c)
++{
++	unsigned int  eax, ebx, ecx, edx;
++	uint64_t syscfg;
++
++	if (!smp_processor_id()) {
++
++		cpuid_count(0x80000000,0,&eax, &ebx, &ecx, &edx);
++
++		if (eax <  0x8000001f)
++			return;
++
++		cpuid_count(0x8000001f,0,&eax, &ebx, &ecx, &edx);
++
++		if (eax & 0x1)
++			setup_force_cpu_cap(X86_FEATURE_SME);
++
++		if (eax & 0x2) {
++			setup_force_cpu_cap(X86_FEATURE_SEV);
++			max_sev_asid = ecx;
++			min_sev_asid = edx;
++		}
++
++		if (eax & 0x3)
++			pte_c_bit_mask = 1UL << (ebx & 0x3f);
++	}
++
++	if (!(cpu_has_sme || cpu_has_sev))
++		return;
++
++	if (!smp_processor_id()) {
++		if (cpu_has_sev)
++			printk(XENLOG_INFO "SEV: ASID range [0x%x - 0x%x]\n",
++			min_sev_asid, max_sev_asid);
++	}
++
++	rdmsrl(MSR_K8_SYSCFG, syscfg);
++
++	if (syscfg & SYSCFG_MEM_ENCRYPT) {
++		return;
++	}
++
++	syscfg |= SYSCFG_MEM_ENCRYPT;
++	wrmsrl(MSR_K8_SYSCFG, syscfg);
++}
++#endif
++
+ static void cf_check init_amd(struct cpuinfo_x86 *c)
+ {
+ 	u32 l, h;
+@@ -1305,6 +1354,10 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
+ 	check_syscfg_dram_mod_en();
+ 
+ 	amd_log_freq(c);
++
++#ifdef CONFIG_HVM
++	amd_enable_mem_encrypt(c);
++#endif
+ }
+ 
+ const struct cpu_dev __initconst_cf_clobber amd_cpu_dev = {
+diff --git a/xen/arch/x86/hvm/svm/Makefile b/xen/arch/x86/hvm/svm/Makefile
+index 760d2954da..9773d539ef 100644
+--- a/xen/arch/x86/hvm/svm/Makefile
++++ b/xen/arch/x86/hvm/svm/Makefile
+@@ -6,3 +6,4 @@ obj-y += nestedsvm.o
+ obj-y += svm.o
+ obj-y += svmdebug.o
+ obj-y += vmcb.o
++obj-y += sev.o
+diff --git a/xen/arch/x86/hvm/svm/sev.c b/xen/arch/x86/hvm/svm/sev.c
+new file mode 100644
+index 0000000000..336fad25f5
+--- /dev/null
++++ b/xen/arch/x86/hvm/svm/sev.c
+@@ -0,0 +1,4 @@
++#include <asm/sev.h>
++uint64_t __read_mostly pte_c_bit_mask;
++unsigned int __read_mostly min_sev_asid;
++unsigned int __read_mostly max_sev_asid;
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index 743f11f989..a41374d0b7 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -231,6 +231,9 @@ static inline bool boot_cpu_has(unsigned int feat)
+ 
+ #define cpu_has_msr_tsc_aux     (cpu_has_rdtscp || cpu_has_rdpid)
+ 
++#define cpu_has_sme             boot_cpu_has(X86_FEATURE_SME)
++#define cpu_has_sev             boot_cpu_has(X86_FEATURE_SEV)
++
+ /* Bugs. */
+ #define cpu_bug_fpu_ptrs        boot_cpu_has(X86_BUG_FPU_PTRS)
+ #define cpu_bug_null_seg        boot_cpu_has(X86_BUG_NULL_SEG)
+diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
+index ba3df174b7..9b67ea2427 100644
+--- a/xen/arch/x86/include/asm/cpufeatures.h
++++ b/xen/arch/x86/include/asm/cpufeatures.h
+@@ -42,6 +42,8 @@ XEN_CPUFEATURE(XEN_SHSTK,         X86_SYNTH(26)) /* Xen uses CET Shadow Stacks *
+ XEN_CPUFEATURE(XEN_IBT,           X86_SYNTH(27)) /* Xen uses CET Indirect Branch Tracking */
+ XEN_CPUFEATURE(IBPB_ENTRY_PV,     X86_SYNTH(28)) /* MSR_PRED_CMD used by Xen for PV */
+ XEN_CPUFEATURE(IBPB_ENTRY_HVM,    X86_SYNTH(29)) /* MSR_PRED_CMD used by Xen for HVM */
++XEN_CPUFEATURE(SME,               X86_SYNTH(30)) /* AMD Secure Memory Encrypion */
++XEN_CPUFEATURE(SEV,               X86_SYNTH(31)) /* AMD Secure Encryption Virtualization */
+ 
+ /* Bug words follow the synthetic words. */
+ #define X86_NR_BUG 1
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index 92dd9fa496..318e8ca0c0 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -221,6 +221,7 @@
+ #define  SYSCFG_MTRR_VAR_DRAM_EN            (_AC(1, ULL) << 20)
+ #define  SYSCFG_MTRR_TOM2_EN                (_AC(1, ULL) << 21)
+ #define  SYSCFG_TOM2_FORCE_WB               (_AC(1, ULL) << 22)
++#define  SYSCFG_MEM_ENCRYPT                 (_AC(1, ULL) << 23)
+ 
+ #define MSR_K8_IORR_BASE0                   _AC(0xc0010016, U)
+ #define MSR_K8_IORR_MASK0                   _AC(0xc0010017, U)
+diff --git a/xen/arch/x86/include/asm/sev.h b/xen/arch/x86/include/asm/sev.h
+new file mode 100644
+index 0000000000..7bec230c7b
+--- /dev/null
++++ b/xen/arch/x86/include/asm/sev.h
+@@ -0,0 +1,11 @@
++#ifndef __XEN_SEV_H__
++#define __XEN_SEV_H__
++
++#include <xen/types.h>
++#include <asm/cache.h>
++
++extern uint64_t __read_mostly pte_c_bit_mask;
++extern unsigned int __read_mostly min_sev_asid;
++extern unsigned int __read_mostly max_sev_asid;
++
++#endif
+-- 
+2.35.3
 
-> +
->  source "arch/Kconfig"
->  
->  config PV
-> diff --git a/xen/arch/x86/Kconfig.cpu b/xen/arch/x86/Kconfig.cpu
-> new file mode 100644
-> index 000000000000..3c5d88fdfd16
-> --- /dev/null
-> +++ b/xen/arch/x86/Kconfig.cpu
-> @@ -0,0 +1,22 @@
-> +menu "Supported CPU vendors"
-> +	visible if EXPERT
-> +
-> +config AMD
-> +	bool "AMD"
-> +        default y
-> +        help
-> +          Detection, tunings and quirks for AMD platforms.
-> +
-> +	  May be turned off in builds targetting other vendors.  Otherwise,
-> +	  must be enabled for Xen to work suitably on AMD platforms.
-> +
-> +config INTEL
-> +	bool "Intel"
-> +        default y
-> +        help
-> +          Detection, tunings and quirks for Intel platforms.
-> +
-> +	  May be turned off in builds targetting other vendors.  Otherwise,
-> +	  must be enabled for Xen to work suitably on Intel platforms.
-
-There seems to be a weird mix between hard tabs and spaces above.
-Naming is OK for me.
-
-> +
-> +endmenu
-> diff --git a/xen/arch/x86/cpu/microcode/Makefile b/xen/arch/x86/cpu/microcode/Makefile
-> index aae235245b06..30d600544f45 100644
-> --- a/xen/arch/x86/cpu/microcode/Makefile
-> +++ b/xen/arch/x86/cpu/microcode/Makefile
-> @@ -1,3 +1,3 @@
-> -obj-y += amd.o
-> +obj-$(CONFIG_AMD) += amd.o
->  obj-y += core.o
-> -obj-y += intel.o
-> +obj-$(CONFIG_INTEL) += intel.o
-> diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
-> index b58611e908aa..da556fe5060a 100644
-> --- a/xen/arch/x86/cpu/microcode/private.h
-> +++ b/xen/arch/x86/cpu/microcode/private.h
-> @@ -70,7 +70,16 @@ struct microcode_ops {
->   * support available) and (not) ops->apply_microcode (i.e. read only).
->   * Otherwise, all hooks must be filled in.
->   */
-> +#ifdef CONFIG_AMD
->  void ucode_probe_amd(struct microcode_ops *ops);
-> +#else
-> +static inline void ucode_probe_amd(struct microcode_ops *ops) {}
-> +#endif
-> +
-> +#ifdef CONFIG_INTEL
->  void ucode_probe_intel(struct microcode_ops *ops);
-> +#else
-> +static inline void ucode_probe_intel(struct microcode_ops *ops) {}
-
-This is stale now, and will need some updating to match what's in
-private.h.
-
-Thanks, Roger.
 
