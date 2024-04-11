@@ -4,31 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE6A6C4345F
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Apr 2024 15:41:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.704038.1100131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80C70C4345F
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Apr 2024 15:53:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.704054.1100159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruwXw-00088M-1l; Thu, 11 Apr 2024 15:41:04 +0000
+	id 1ruwjw-0002bA-92; Thu, 11 Apr 2024 15:53:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 704038.1100131; Thu, 11 Apr 2024 15:41:04 +0000
+Received: by outflank-mailman (output) from mailman id 704054.1100159; Thu, 11 Apr 2024 15:53:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruwXv-00088F-VL; Thu, 11 Apr 2024 15:41:03 +0000
-Received: by outflank-mailman (input) for mailman id 704038;
- Thu, 11 Apr 2024 15:41:03 +0000
+	id 1ruwjw-0002b3-6N; Thu, 11 Apr 2024 15:53:28 +0000
+Received: by outflank-mailman (input) for mailman id 704054;
+ Thu, 11 Apr 2024 15:53:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jyOp=LQ=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1ruwKA-0001Lt-1t
- for xen-devel@lists.xenproject.org; Thu, 11 Apr 2024 15:26:50 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e8aa9416-f817-11ee-94a3-07e782e9044d;
- Thu, 11 Apr 2024 17:26:48 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1712849134652616.8489386519366;
- Thu, 11 Apr 2024 08:25:34 -0700 (PDT)
+ <SRS0=Poi8=LQ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1ruwju-0002ZT-Ft
+ for xen-devel@lists.xenproject.org; Thu, 11 Apr 2024 15:53:26 +0000
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [2607:f8b0:4864:20::72b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a0596f54-f81b-11ee-94a3-07e782e9044d;
+ Thu, 11 Apr 2024 17:53:24 +0200 (CEST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-789f00aba19so488235785a.0
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Apr 2024 08:53:24 -0700 (PDT)
+Received: from localhost ([85.31.135.62]) by smtp.gmail.com with ESMTPSA id
+ dw7-20020a05620a600700b0078ec2d73c9esm945976qkb.4.2024.04.11.08.53.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Apr 2024 08:53:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,170 +46,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e8aa9416-f817-11ee-94a3-07e782e9044d
-ARC-Seal: i=1; a=rsa-sha256; t=1712849136; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=E58Lf3xgoVtF86ugEj9CKlfrWiASx4+nrMGVQCvnNo8XZop1KtMxqHMT6flc+NtypXZMbCtz8r74B22VBdUPlhEynKBsa709JSPNMJsLfQNx15gfwyGftBhLzI56cNYVXe8qncOMUD3bAPRDby+Z33LkCql1cqNNNB5V4nLJhK0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1712849136; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=hJK+WJnd5udbin6GvR9ns7l4RIkHc9Dr7sf74H4OiFw=; 
-	b=RcqtzxNLf3bh92nJY4cmbvwcC9V1HPrA0wYq8RY8c/AJBUyk3Xb5mgNg05Gw6/zBMK2DQdrXTUZ2Jy9IwMLXMUouvFIMEwTBmS/18ellofRZfdIUwKLWEsqUIk/zo68pF3gpQNslBZw5lF4lktUMqQ+gieuK+OT7OarcYvgW/ko=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1712849136;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=hJK+WJnd5udbin6GvR9ns7l4RIkHc9Dr7sf74H4OiFw=;
-	b=nHgtEdiN21wyE1rw3uC5evU5pmgtuArpFTwlnGAn4BPyZUMTnkc1aQQTNWgenFFr
-	4AzF6zcR9qF0LchSt8/hSpkvXlx6U/FjkmYoeEAffnRnnw/y2SCvTfJf6no1gInXnpb
-	4GXYBT/D/IQMfZ0mjZmY4Nu/r8vilWtujapHkys8=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+X-Inumbo-ID: a0596f54-f81b-11ee-94a3-07e782e9044d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1712850802; x=1713455602; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RRN4wyQVKK8sx/p5OaCggnAVPVY2eawZsZuVzZ2KlCg=;
+        b=V6H+v4qJVJ9oP5u2Z/TClafiRRJn3eIkANuNCDJ5RjNt+iLNO2xc6FCXWDc1qEJOhr
+         DBHnDGhrNdeiyPEsY8UkqD9nSc7kPx2p12gD1xy+stowNF14nRRLLgxwiLcXGNGTkJqQ
+         TxIAezazWvD9M/+vwW/BGd0pW8R7WiOfrGV1A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1712850802; x=1713455602;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=RRN4wyQVKK8sx/p5OaCggnAVPVY2eawZsZuVzZ2KlCg=;
+        b=h651CrNaMi2+0kqUGO+RXYAEMxvcfVuBI1LS8/cuVwnH9z8HNvT5drHOeQzMiVbchV
+         zkye56Y1eprgt4rPfen8Jybn0dhmrgEAdaIj+0WbLkb5gQ+xq68H1brW9eE86z6GWRUW
+         3hISPpAUoQ5Z8tIkRD4yLwGu1ppCko+Fp2R3afyzUItY9srmfk26Vnm1jmGyQkyO4AXg
+         9AhGr0dCSSyjbIHnAIw7HOjwfKIw9lIa0MyvBE2DwSqT1s5AW08A5MKVj80Ck+6P8gQy
+         dQb5mVOwZJBVn7uyDP6/n1eFpIlyAbmb5cSjf9x1erXBG+6PasIQu2ic/FAuAhdefv82
+         QNRg==
+X-Gm-Message-State: AOJu0YzxlhggOWOhaYz9oKtgvDcLAdHuZ4QYi/XQS8YYFY4cE76pTfHH
+	Is2abTwOEfpIoaMxsPQGWS7iG/HxXnGmA2WtipfaBfA54VoaU5009uXuXwMd9haViXcvRAyqV90
+	J
+X-Google-Smtp-Source: AGHT+IHzC7kWDx1kLumqb1s4U8lf3wUnnSRI5UUmJQKzT2d15wfPZW8XcZBHfnAv9epFFCrStISumg==
+X-Received: by 2002:a05:620a:4691:b0:78d:67aa:9d66 with SMTP id bq17-20020a05620a469100b0078d67aa9d66mr53749qkb.15.1712850802389;
+        Thu, 11 Apr 2024 08:53:22 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: Jason Andryuk <jason.andryuk@amd.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 5/5] gzip: move huffman code table tracking into gzip state
-Date: Thu, 11 Apr 2024 11:25:18 -0400
-Message-Id: <20240411152518.2995-6-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240411152518.2995-1-dpsmith@apertussolutions.com>
-References: <20240411152518.2995-1-dpsmith@apertussolutions.com>
+Subject: [PATCH] altcall: fix __alt_call_maybe_initdata so it's safe for livepatch
+Date: Thu, 11 Apr 2024 17:53:14 +0200
+Message-ID: <20240411155314.73811-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+Setting alternative call variables as __init is not safe for use with
+livepatch, as livepatches can rightfully introduce new alternative calls to
+structures marked as __alt_call_maybe_initdata (possibly just indirectly due to
+replacing existing functions that use those).  Attempting to resolve those
+alternative calls then results in page faults as the variable that holds the
+function pointer address has been freed.
+
+When livepatch is supported use the __ro_after_init attribute instead of
+__initdata for __alt_call_maybe_initdata.
+
+Fixes: f26bb285949b ('xen: Implement xen/alternative-call.h for use in common code')
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/common/gzip/gunzip.c  |  2 ++
- xen/common/gzip/inflate.c | 26 ++++++++++++--------------
- 2 files changed, 14 insertions(+), 14 deletions(-)
+ xen/include/xen/alternative-call.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/xen/common/gzip/gunzip.c b/xen/common/gzip/gunzip.c
-index a1b516b925c9..79a641263597 100644
---- a/xen/common/gzip/gunzip.c
-+++ b/xen/common/gzip/gunzip.c
-@@ -31,6 +31,8 @@ struct gzip_data {
+diff --git a/xen/include/xen/alternative-call.h b/xen/include/xen/alternative-call.h
+index 5c6b9a562b92..1896063e5da5 100644
+--- a/xen/include/xen/alternative-call.h
++++ b/xen/include/xen/alternative-call.h
+@@ -50,7 +50,12 @@
  
-     unsigned long crc_32_tab[256];
-     unsigned long crc;
-+
-+    unsigned hufts;        /* track memory usage */
- };
+ #include <asm/alternative.h>
  
- #define OF(args)        args
-diff --git a/xen/common/gzip/inflate.c b/xen/common/gzip/inflate.c
-index 6c8c7452a31f..53ee1d8ce1e3 100644
---- a/xen/common/gzip/inflate.c
-+++ b/xen/common/gzip/inflate.c
-@@ -140,7 +140,7 @@ struct huft {
- };
+-#define __alt_call_maybe_initdata __initdata
++#ifndef CONFIG_LIVEPATCH
++# define __alt_call_maybe_initdata __initdata
++#else
++/* Must keep for livepatches to resolve alternative calls against them. */
++# define __alt_call_maybe_initdata __ro_after_init
++#endif
  
- /* Function prototypes */
--static int huft_build OF((unsigned *, unsigned, unsigned,
-+static int huft_build OF((struct gzip_data *, unsigned *, unsigned, unsigned,
-                           const ush *, const ush *, struct huft **, int *));
- static int huft_free OF((struct huft *));
- static int inflate_codes OF((struct gzip_data *, struct huft *, struct huft *, int, int));
-@@ -311,8 +311,6 @@ static const int dbits = 6;          /* bits in base distance lookup table */
- #define BMAX 16         /* maximum bit length of any code (16 for explode) */
- #define N_MAX 288       /* maximum number of codes in any set */
+ #else
  
--static unsigned __initdata hufts;      /* track memory usage */
--
- /*
-  * Given a list of code lengths and a maximum table size, make a set of
-  * tables to decode that set of codes.  Return zero on success, one if
-@@ -329,8 +327,8 @@ static unsigned __initdata hufts;      /* track memory usage */
-  * @param m Maximum lookup bits, returns actual
-  */
- static int __init huft_build(
--    unsigned *b, unsigned n, unsigned s, const ush *d, const ush *e,
--    struct huft **t, int *m)
-+    struct gzip_data *gd, unsigned *b, unsigned n, unsigned s, const ush *d,
-+    const ush *e, struct huft **t, int *m)
- {
-     unsigned a;                   /* counter for codes of length k */
-     unsigned f;                   /* i repeats in table every f entries */
-@@ -492,7 +490,7 @@ static int __init huft_build(
-                     goto out;
-                 }
-                 DEBG1("4 ");
--                hufts += z + 1;         /* track memory usage */
-+                gd->hufts += z + 1;         /* track memory usage */
-                 *t = q + 1;             /* link to list for huft_free() */
-                 *(t = &(q->v.t)) = (struct huft *)NULL;
-                 u[h] = ++q;             /* table starts after link */
-@@ -787,7 +785,7 @@ static int noinline __init inflate_fixed(struct gzip_data *gd)
-     for (; i < 288; i++)          /* make a complete, but wrong code set */
-         l[i] = 8;
-     bl = 7;
--    if ((i = huft_build(l, 288, 257, cplens, cplext, &tl, &bl)) != 0) {
-+    if ((i = huft_build(gd, l, 288, 257, cplens, cplext, &tl, &bl)) != 0) {
-         free(l);
-         return i;
-     }
-@@ -796,7 +794,7 @@ static int noinline __init inflate_fixed(struct gzip_data *gd)
-     for (i = 0; i < 30; i++)      /* make an incomplete code set */
-         l[i] = 5;
-     bd = 5;
--    if ((i = huft_build(l, 30, 0, cpdist, cpdext, &td, &bd)) > 1)
-+    if ((i = huft_build(gd, l, 30, 0, cpdist, cpdext, &td, &bd)) > 1)
-     {
-         huft_free(tl);
-         free(l);
-@@ -894,7 +892,7 @@ static int noinline __init inflate_dynamic(struct gzip_data *gd)
- 
-     /* build decoding table for trees--single level, 7 bit lookup */
-     bl = 7;
--    if ((i = huft_build(ll, 19, 19, NULL, NULL, &tl, &bl)) != 0)
-+    if ((i = huft_build(gd, ll, 19, 19, NULL, NULL, &tl, &bl)) != 0)
-     {
-         if (i == 1)
-             huft_free(tl);
-@@ -971,7 +969,7 @@ static int noinline __init inflate_dynamic(struct gzip_data *gd)
- 
-     /* build the decoding tables for literal/length and distance codes */
-     bl = lbits;
--    if ((i = huft_build(ll, nl, 257, cplens, cplext, &tl, &bl)) != 0)
-+    if ((i = huft_build(gd, ll, nl, 257, cplens, cplext, &tl, &bl)) != 0)
-     {
-         DEBG("dyn5b ");
-         if (i == 1) {
-@@ -983,7 +981,7 @@ static int noinline __init inflate_dynamic(struct gzip_data *gd)
-     }
-     DEBG("dyn5c ");
-     bd = dbits;
--    if ((i = huft_build(ll + nl, nd, 0, cpdist, cpdext, &td, &bd)) != 0)
-+    if ((i = huft_build(gd, ll + nl, nd, 0, cpdist, cpdext, &td, &bd)) != 0)
-     {
-         DEBG("dyn5d ");
-         if (i == 1) {
-@@ -1090,15 +1088,15 @@ static int __init inflate(struct gzip_data *gd)
-     /* decompress until the last block */
-     h = 0;
-     do {
--        hufts = 0;
-+        gd->hufts = 0;
- #ifdef ARCH_HAS_DECOMP_WDOG
-         arch_decomp_wdog();
- #endif
-         r = inflate_block(gd, &e);
-         if (r)
-             return r;
--        if (hufts > h)
--            h = hufts;
-+        if (gd->hufts > h)
-+            h = gd->hufts;
-     } while (!e);
- 
-     /* Undo too much lookahead. The next read will be byte aligned so we
 -- 
-2.30.2
+2.44.0
 
 
