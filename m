@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A819AC04FF6
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Apr 2024 18:20:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.704122.1100305 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3168C001CC
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Apr 2024 18:20:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.704123.1100313 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruz2O-0005FC-8W; Thu, 11 Apr 2024 18:20:40 +0000
+	id 1ruz2O-0005NE-Pc; Thu, 11 Apr 2024 18:20:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 704122.1100305; Thu, 11 Apr 2024 18:20:40 +0000
+Received: by outflank-mailman (output) from mailman id 704123.1100313; Thu, 11 Apr 2024 18:20:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ruz2O-0005EP-3g; Thu, 11 Apr 2024 18:20:40 +0000
-Received: by outflank-mailman (input) for mailman id 704122;
- Thu, 11 Apr 2024 18:20:38 +0000
+	id 1ruz2O-0005Lr-GI; Thu, 11 Apr 2024 18:20:40 +0000
+Received: by outflank-mailman (input) for mailman id 704123;
+ Thu, 11 Apr 2024 18:20:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SAdS=LQ=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
- id 1ruz2M-0004xS-T3
- for xen-devel@lists.xenproject.org; Thu, 11 Apr 2024 18:20:38 +0000
+ id 1ruz2N-0004xS-TJ
+ for xen-devel@lists.xenproject.org; Thu, 11 Apr 2024 18:20:39 +0000
 Received: from doppler.solinno.uk (doppler.solinno.uk [81.2.106.178])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3125b4a6-f830-11ee-94a3-07e782e9044d;
- Thu, 11 Apr 2024 20:20:36 +0200 (CEST)
+ id 31d25aa9-f830-11ee-94a3-07e782e9044d;
+ Thu, 11 Apr 2024 20:20:37 +0200 (CEST)
 Received: from folly.solinno.co.uk (folly.dyn.solinno.co.uk [192.168.2.135])
- by doppler.solinno.uk (Postfix) with ESMTPSA id 0F4148009E;
- Thu, 11 Apr 2024 19:20:36 +0100 (BST)
+ by doppler.solinno.uk (Postfix) with ESMTPSA id 32CC6800AC;
+ Thu, 11 Apr 2024 19:20:37 +0100 (BST)
 Received: by folly.solinno.co.uk (Postfix, from userid 1000)
- id E0E532017C; Thu, 11 Apr 2024 19:20:35 +0100 (BST)
+ id 0CE7B2017C; Thu, 11 Apr 2024 19:20:37 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,23 +43,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3125b4a6-f830-11ee-94a3-07e782e9044d
+X-Inumbo-ID: 31d25aa9-f830-11ee-94a3-07e782e9044d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
-	s=mail; t=1712859636;
-	bh=8p8Mh+h+4ZcsbqVep9j9UGhI85GMf2VA/SFHLl4d/EU=;
+	s=mail; t=1712859637;
+	bh=YwGv2PhPp4Evj73ZY3lHmUchew8hvcOMY1tjrOsWuo8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=v20Ag00Yj6c+gU5eTxB+dTs/8WOYx0XvULdeB8G4ueMIDqFjLrNFaOzN6lL0eqjdV
-	 KNwyyoPKAYvz71Uzg/AMMqEwE2vrrru5KeO3t/LC+ypUeY7Wp6l//3p7yo8Hlpb6Zm
-	 i8Dkak9LKW0AE4sT9PjcdoX6PCOfyq3l0zI4CPDk=
+	b=jyK+6dO6x07zzohtd7D+p7nxPLtdOzqIerpifvQGmAwcDx40I3xLG/VGQD9reAVH+
+	 zoKDfCFwo/Ddp+WuY1g5MOYRqcP5rxC9a6HeLv+9V53Bqc0zpNzFYWu3hLyO95jkRM
+	 FBeYwGmSn49U4U3w9RWJhI5MT0pRty+vq0aBtZy0=
 From: leigh@solinno.co.uk
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
 	anthony.perard@citrix.com,
 	slack@rabbit.lu,
 	Leigh Brown <leigh@solinno.co.uk>
-Subject: [PATCH v3 2/4] tools/misc: xenwatchdogd enhancements
-Date: Thu, 11 Apr 2024 19:20:21 +0100
-Message-Id: <20240411182023.56309-3-leigh@solinno.co.uk>
+Subject: [PATCH v3 4/4] docs/man: Add xenwatchdog manual page
+Date: Thu, 11 Apr 2024 19:20:23 +0100
+Message-Id: <20240411182023.56309-5-leigh@solinno.co.uk>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240411182023.56309-1-leigh@solinno.co.uk>
 References: <20240411182023.56309-1-leigh@solinno.co.uk>
@@ -68,157 +68,75 @@ Content-Transfer-Encoding: 8bit
 
 From: Leigh Brown <leigh@solinno.co.uk>
 
-Add usage() function, the ability to run in the foreground, and
-the ability to disarm the watchdog timer when exiting.
-
-Add enhanced parameter parsing and validation, making use of
-getopt_long().  Check the number of parameters are correct, the
-timeout is at least two seconds (to allow a minimum sleep time of
-one second), and that the sleep time is at least one and less
-than the watchdog timeout.
-
-With these changes, the daemon will no longer instantly reboot
-the domain if you enter a zero timeout (or non-numeric parameter),
-and prevent the daemon consuming 100% of a CPU due to zero sleep
-time.
+Add a manual page for xenwatchdogd.
 
 Signed-off-by: Leigh Brown <leigh@solinno.co.uk>
 ---
- tools/misc/xenwatchdogd.c | 94 ++++++++++++++++++++++++++++++++++-----
- 1 file changed, 84 insertions(+), 10 deletions(-)
+ docs/man/xenwatchdogd.8.pod | 55 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
+ create mode 100644 docs/man/xenwatchdogd.8.pod
 
-diff --git a/tools/misc/xenwatchdogd.c b/tools/misc/xenwatchdogd.c
-index 9fa772e49f..a16d1efc13 100644
---- a/tools/misc/xenwatchdogd.c
-+++ b/tools/misc/xenwatchdogd.c
-@@ -10,6 +10,11 @@
- #include <signal.h>
- #include <stdio.h>
- #include <stdbool.h>
-+#include <getopt.h>
+diff --git a/docs/man/xenwatchdogd.8.pod b/docs/man/xenwatchdogd.8.pod
+new file mode 100644
+index 0000000000..b03ed53ee6
+--- /dev/null
++++ b/docs/man/xenwatchdogd.8.pod
+@@ -0,0 +1,55 @@
++=head1 NAME
 +
-+#define WDOG_MIN_TIMEOUT 2
-+#define WDOG_MIN_SLEEP 1
-+#define WDOG_EXIT_TIMEOUT 300
- 
- static xc_interface *h;
- static volatile bool safeexit = false;
-@@ -49,6 +54,26 @@ static void catch_usr1(int sig)
-     done = true;
- }
- 
-+static void __attribute__((noreturn)) usage(int exit_code)
-+{
-+    FILE *out = exit_code ? stderr : stdout;
++xenwatchdogd - Xen hypercall based watchdog daemon
 +
-+    fprintf(out,
-+	"Usage: xenwatchdog [OPTION]... <timeout> [<sleep>]\n"
-+	"  -h, --help\t\tDisplay this help text and exit.\n"
-+	"  -F, --foreground\tRun in foreground.\n"
-+	"  -x, --safe-exit\tDisable watchdog on orderly exit.\n"
-+	"\t\t\tNote: default is to set a %d second timeout on exit.\n\n"
-+	"  timeout\t\tInteger seconds to arm the watchdog each time.\n"
-+	"\t\t\tNote: minimum timeout is %d seconds.\n\n"
-+	"  sleep\t\t\tInteger seconds to sleep between arming the watchdog.\n"
-+	"\t\t\tNote: sleep must be at least %d and less than timeout.\n"
-+	"\t\t\tIf not specified then set to half the timeout.\n",
-+	WDOG_EXIT_TIMEOUT, WDOG_MIN_TIMEOUT, WDOG_MIN_SLEEP
-+	);
-+    exit(exit_code);
-+}
++=head1 SYNOPSIS
 +
- static int parse_secs(const char *arg, const char *what)
- {
-     char *endptr;
-@@ -66,22 +91,71 @@ int main(int argc, char **argv)
-     int id;
-     int t, s;
-     int ret;
-+    bool daemon = true;
++B<xenwatchdogd> [ I<OPTIONS> ] <I<TIMEOUT>> [ <I<SLEEP>> ]
 +
-+    for ( ;; )
-+    {
-+	int option_index = 0, c;
-+	static const struct option long_options[] =
-+	{
-+	    { "help", no_argument, NULL, 'h' },
-+	    { "foreground", no_argument, NULL, 'F' },
-+	    { "safe-exit", no_argument, NULL, 'x' },
-+	    { NULL, 0, NULL, 0 },
-+	};
++=head1 DESCRIPTION
 +
-+	c = getopt_long(argc, argv, "hFxD", long_options, &option_index);
-+	if (c == -1)
-+	    break;
++B<xenwatchdogd> arms the Xen watchdog timer to I<TIMEOUT> every I<SLEEP>
++seconds. If the xenwatchdogd process dies or is delayed for more than
++I<TIMEOUT> seconds, then Xen will take the B<on_watchdog> action
++specified in the domain configuration (see xl.cfg(5)). If B<xenwatchdogd>
++is running in dom0, the whole system will reboot.
 +
-+	switch (c)
-+	{
-+	case 'h':
-+	    usage(EXIT_SUCCESS);
++=head1 OPTIONS
 +
-+	case 'F':
-+	    daemon = false;
-+	    break;
++=over 4
 +
-+	case 'x':
-+	    safeexit = true;
-+	    break;
++=item B<-h>, B<--help>
 +
-+	default:
-+	    usage(EXIT_FAILURE);
-+	}
-+    }
- 
--    if (argc < 2)
--	errx(EXIT_FAILURE, "usage: %s <timeout> <sleep>", argv[0]);
-+    if (argc - optind < 1)
-+	errx(EXIT_FAILURE, "timeout must be specified");
++Display a help message.
 +
-+    if (argc - optind > 2)
-+	errx(EXIT_FAILURE, "too many arguments");
++=item B<-F>, B<--foreground>
 +
-+    t = parse_secs(argv[optind], "timeout");
-+    if (t < WDOG_MIN_TIMEOUT)
-+	errx(EXIT_FAILURE, "Error: timeout must be at least %d seconds",
-+			   WDOG_MIN_TIMEOUT);
++Run in the foreground. The default behaviour is to daemonize.
 +
-+    ++optind;
-+    if (optind < argc) {
-+	s = parse_secs(argv[optind], "sleep");
-+	if (s < WDOG_MIN_SLEEP)
-+	    errx(EXIT_FAILURE, "Error: sleep must be no less than %d",
-+			       WDOG_MIN_SLEEP);
-+	if (s >= t)
-+	    errx(EXIT_FAILURE, "Error: sleep must be less than timeout");
-+    }
-+    else
-+	s = t / 2;
- 
--    daemonize();
-+    if (daemon)
-+	daemonize();
- 
-     h = xc_interface_open(NULL, NULL, 0);
-     if (h == NULL)
- 	err(EXIT_FAILURE, "xc_interface_open");
- 
--    t = parse_secs(argv[1], "timeout");
--
--    s = t / 2;
--    if (argc == 3)
--	s = parse_secs(argv[2], "sleep");
--
-     if (signal(SIGHUP, &catch_exit) == SIG_ERR)
- 	err(EXIT_FAILURE, "signal");
-     if (signal(SIGINT, &catch_exit) == SIG_ERR)
-@@ -105,6 +179,6 @@ int main(int argc, char **argv)
-     }
- 
-     // Zero seconds timeout will disarm the watchdog timer
--    xc_watchdog(h, id, safeexit ? 0 : 300);
-+    xc_watchdog(h, id, safeexit ? 0 : WDOG_EXIT_TIMEOUT);
-     return 0;
- }
++=item B<-x>, B<--safe-exit>
++
++Disable watchdog on orderly exit. The default behaviour is to arm the
++watchdog to 300 seconds to allow time for the domain to shutdown.  See 
++also the B<SIGNALS> section.
++
++=item B<timeout>
++
++The number of seconds to arm the Xen watchdog timer. This must be set to
++a minimum of two.
++
++=item B<sleep>
++
++The number of seconds to sleep in between calls to arm the Xen watchdog
++timer. This must be at least one second, and less than the I<timeout>
++value. If not specified, it defaults to half the I<timeout> value.
++
++=back
++
++=head1 SIGNALS
++
++B<SIGUSR1> Will cause the program to disarm the watchdog timer and exit,
++regardless of whether the B<--safe-exit> option was passed.
++
++=head1 AUTHOR
++
++Citrix Ltd and other contributors.
 -- 
 2.39.2
 
