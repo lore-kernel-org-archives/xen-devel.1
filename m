@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE9CC00A94
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A96A8C04FFF
 	for <xen-devel@archiver.kernel.org>; Mon, 15 Apr 2024 15:43:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.706350.1103455 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.706353.1103481 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rwOU2-0000Qt-ER; Mon, 15 Apr 2024 15:43:02 +0000
+	id 1rwOU6-00012z-Eo; Mon, 15 Apr 2024 15:43:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 706350.1103455; Mon, 15 Apr 2024 15:43:02 +0000
+Received: by outflank-mailman (output) from mailman id 706353.1103481; Mon, 15 Apr 2024 15:43:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rwOU2-0000QJ-9y; Mon, 15 Apr 2024 15:43:02 +0000
-Received: by outflank-mailman (input) for mailman id 706350;
- Mon, 15 Apr 2024 15:43:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rwOU6-00011k-7Y; Mon, 15 Apr 2024 15:43:06 +0000
+Received: by outflank-mailman (input) for mailman id 706353;
+ Mon, 15 Apr 2024 15:43:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YQk4=LU=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rwOU1-0000NU-Gr
- for xen-devel@lists.xenproject.org; Mon, 15 Apr 2024 15:43:01 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d6ff518d-fb3e-11ee-b908-491648fe20b8;
- Mon, 15 Apr 2024 17:43:00 +0200 (CEST)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-518a56cdc03so2156406e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 15 Apr 2024 08:43:00 -0700 (PDT)
+ id 1rwOU4-0000Nb-FT
+ for xen-devel@lists.xenproject.org; Mon, 15 Apr 2024 15:43:04 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d816c462-fb3e-11ee-94a3-07e782e9044d;
+ Mon, 15 Apr 2024 17:43:02 +0200 (CEST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a51a1c8d931so433377066b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Apr 2024 08:43:02 -0700 (PDT)
 Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- jz1-20020a17090775e100b00a526457fc84sm1987261ejc.57.2024.04.15.08.42.59
+ jz1-20020a17090775e100b00a526457fc84sm1987261ejc.57.2024.04.15.08.43.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 08:42:59 -0700 (PDT)
+ Mon, 15 Apr 2024 08:43:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6ff518d-fb3e-11ee-b908-491648fe20b8
+X-Inumbo-ID: d816c462-fb3e-11ee-94a3-07e782e9044d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1713195780; x=1713800580; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1713195782; x=1713800582; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=KpgVZvqhPT4WIEsac/Wg+IgEeBJYELSXisBygmL+81k=;
-        b=WmSxbQCl7Qkn9XxhzYpMW3A2zS/3uFSxJMInffD5vaK4/Qf34L4WrrahTDki170oUS
-         YPeTqwqdRvDhK0vu3Nz04Mr71AW2QvCWzYBCTvopIrn6yFy9q6e8LdBTN78j+yvns444
-         IasZ9QJDMlaJqJmaj7sU3/YqrAkqbIxJPtaJo=
+        bh=KwG/SvK+aur9Ak8+5b+UV8UOo2svZqs0RzBYX+mlEmk=;
+        b=cSap+eBzM4wuLz1xzGg2b6LMSWdzJ6spEEbH7O38LUPvurWI7dwaWJXPfrRbwYo+wd
+         NjsrsAm2/Hdg0MToTM7zMYNmM9KPLqq9x6xzHWhEvBAoxwp5aFpBUU6YfS9ZlFLklv3S
+         /GZ7RsIm+UO69br4eUW6ar6tHsqjlw6Cj2exQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713195780; x=1713800580;
+        d=1e100.net; s=20230601; t=1713195782; x=1713800582;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=KpgVZvqhPT4WIEsac/Wg+IgEeBJYELSXisBygmL+81k=;
-        b=njXLA4PJ+AxLsemszhBF/08V85a9GFdMmUq64JIlC8akgTxTmV/xuRjQ/DuP54aLV1
-         KuxNF57RYHFPkNobLTRtTFQPe7voCYwui2wqbkqxDwpMLsF4IC5Yt+3DqbphacUxYeOo
-         k0L+J8U3RNduOKJ/NVb0FUjGpcUEqgy8nnYtHbzg+vc3ycM67kDM20A1SpLwn6/gOPhH
-         auRaQ4YwtixLvygb8zcGflifm1fdQfYQFB91sAhgjcX3u3H4W9L5xhlAuBATO9H4nz8t
-         tInCNSUeXTo5gzmJvOCODTFZLSDZ6e0zj9EbtrmrxOiTeRGV561hOGtTHZ0A76oSUxcN
-         LLzQ==
-X-Gm-Message-State: AOJu0YyEp3Gqob70wf8qULVXL3w9COX8xKA15ICgIxp6erNq3zjj//9G
-	Vomg+T/1uizLpUmQA9DFlYunA64cLj/AriXVkZ2heA8rhZC7BVCc/5TzAkJwDu1Mvk/8qNLuN40
-	XqAc=
-X-Google-Smtp-Source: AGHT+IFTQlwoceTmwRCqmdPei0ogfxvb2temagQmdilUfn4ayRUbDk/NyhxitZnuNLs4/rLuDpCNBg==
-X-Received: by 2002:a19:6b19:0:b0:518:95b6:176f with SMTP id d25-20020a196b19000000b0051895b6176fmr5057542lfa.50.1713195780133;
-        Mon, 15 Apr 2024 08:43:00 -0700 (PDT)
+        bh=KwG/SvK+aur9Ak8+5b+UV8UOo2svZqs0RzBYX+mlEmk=;
+        b=wJxvUGhAe8zzxI++kVQp2MdnphLWRgG9RJTarKQSqnoZLQ8IamEbUYtKJiJX032j+D
+         YdcKq5jlWQWifqk2Q7uD35TTUcTzp9ri06n5YacKPemBBKx25/HFxqFhgukBi096SFw9
+         Sjl96iLgbt3SGU6YxsRYRKVJDpT4v5b9k9ZEzbemPaVmsYG/qi8Y8odopYrBjXaoSQG5
+         YJgisLd7OgA/ft0MayWijEZAWB156jqC0ChfF0ONBA+a5EyQTpvmWUq/XJyUrLavGoSC
+         oL+b8sv5nvVFGj/9NwcDTmbiMafTqGm0KEfdrSN0nLMTcwv/hjpP/yKQNiodSSMqnVq+
+         +8kA==
+X-Gm-Message-State: AOJu0YwAzuLMDhSZlRJL3IiVxUhVwUveieo2kKn2SAqHi+9sZOtKzdIS
+	XZ+5wVCxVwPDr2B1/347VddB4Pie9Cpa4XPq47cN/LLGC+cFMiDi9MXMAizd6DRkDj3u0SiPewR
+	wBlo=
+X-Google-Smtp-Source: AGHT+IFMRTgoBO75/F6759VTwv2svqgv1NIVz46T3NVo7ac4Ptoecbeo+nDmHrqX5jUOSMk/mP+cCw==
+X-Received: by 2002:a17:907:d2a:b0:a52:2f19:f1d7 with SMTP id gn42-20020a1709070d2a00b00a522f19f1d7mr7217919ejc.53.1713195781801;
+        Mon, 15 Apr 2024 08:43:01 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -82,142 +82,114 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH 2/4] xen/xlat: Sort structs per file
-Date: Mon, 15 Apr 2024 16:41:53 +0100
-Message-Id: <20240415154155.2718064-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/4] xen/public: Use -Wpadding for public headers
+Date: Mon, 15 Apr 2024 16:41:55 +0100
+Message-Id: <20240415154155.2718064-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240415154155.2718064-1-andrew.cooper3@citrix.com>
 References: <20240415154155.2718064-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+RFC.  In theory this is a great way to avoid some of the spiketraps involved
+with C being the official representation.
+
+However, this doesn't build.  gnttab_transfer has a layout that requires a
+CONFIG_COMPAT if we want to satisfy -Wpadding for both forms of the structure.
+
+Thoughts on whether this cross-check is worthwhile-enough to warrant the
+ifdefary?
+
+~Andrew
 ---
 CC: George Dunlap <George.Dunlap@citrix.com>
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Julien Grall <julien@xen.org>
 ---
- xen/include/xlat.lst | 40 ++++++++++++++++++++--------------------
- 1 file changed, 20 insertions(+), 20 deletions(-)
+ xen/common/Makefile              |  1 +
+ xen/common/hdr-chk.c             | 13 +++++++++++++
+ xen/include/public/grant_table.h |  7 +++++++
+ 3 files changed, 21 insertions(+)
+ create mode 100644 xen/common/hdr-chk.c
 
-diff --git a/xen/include/xlat.lst b/xen/include/xlat.lst
-index e811342bb096..b3befd9cc113 100644
---- a/xen/include/xlat.lst
-+++ b/xen/include/xlat.lst
-@@ -22,11 +22,11 @@
- # ? - needs checking
- 
- ?	dom0_vga_console_info		xen.h
--?	xenctl_bitmap			xen.h
- ?	mmu_update			xen.h
- !	mmuext_op			xen.h
- !	start_info			xen.h
- ?	vcpu_time_info			xen.h
-+?	xenctl_bitmap			xen.h
- 
- ?	pmu_amd_ctxt			arch-x86/pmu.h
- ?	pmu_arch			arch-x86/pmu.h
-@@ -40,13 +40,6 @@
- 
- ?	cpu_offline_action		arch-x86/xen-mca.h
- ?	mc				arch-x86/xen-mca.h
--?	mcinfo_bank			arch-x86/xen-mca.h
--?	mcinfo_common			arch-x86/xen-mca.h
--?	mcinfo_extended			arch-x86/xen-mca.h
--?	mcinfo_global			arch-x86/xen-mca.h
--?	mcinfo_logical_cpu		arch-x86/xen-mca.h
--?	mcinfo_msr			arch-x86/xen-mca.h
--?	mcinfo_recovery			arch-x86/xen-mca.h
- !	mc_fetch			arch-x86/xen-mca.h
- ?	mc_info				arch-x86/xen-mca.h
- ?	mc_inject_v2			arch-x86/xen-mca.h
-@@ -54,6 +47,13 @@
- ?	mc_msrinject			arch-x86/xen-mca.h
- ?	mc_notifydomain			arch-x86/xen-mca.h
- !	mc_physcpuinfo			arch-x86/xen-mca.h
-+?	mcinfo_bank			arch-x86/xen-mca.h
-+?	mcinfo_common			arch-x86/xen-mca.h
-+?	mcinfo_extended			arch-x86/xen-mca.h
-+?	mcinfo_global			arch-x86/xen-mca.h
-+?	mcinfo_logical_cpu		arch-x86/xen-mca.h
-+?	mcinfo_msr			arch-x86/xen-mca.h
-+?	mcinfo_recovery			arch-x86/xen-mca.h
- ?	page_offline_action		arch-x86/xen-mca.h
- 
- ?	argo_addr			argo.h
-@@ -85,18 +85,18 @@
- ?	gnttab_cache_flush		grant_table.h
- !	gnttab_copy			grant_table.h
- ?	gnttab_dump_table		grant_table.h
-+!	gnttab_get_status_frames	grant_table.h
-+?	gnttab_get_version		grant_table.h
- ?	gnttab_map_grant_ref		grant_table.h
-+?	gnttab_set_version		grant_table.h
- !	gnttab_setup_table		grant_table.h
-+?	gnttab_swap_grant_ref		grant_table.h
- !	gnttab_transfer			grant_table.h
--?	gnttab_unmap_grant_ref		grant_table.h
- ?	gnttab_unmap_and_replace	grant_table.h
--?	gnttab_set_version		grant_table.h
--?	gnttab_get_version		grant_table.h
--!	gnttab_get_status_frames	grant_table.h
--?	grant_entry_v1			grant_table.h
-+?	gnttab_unmap_grant_ref		grant_table.h
- ?	grant_entry_header		grant_table.h
-+?	grant_entry_v1			grant_table.h
- ?	grant_entry_v2			grant_table.h
--?	gnttab_swap_grant_ref		grant_table.h
- 
- !	dm_op_buf			hvm/dm_op.h
- ?	dm_op_create_ioreq_server	hvm/dm_op.h
-@@ -134,11 +134,11 @@
- !	add_to_physmap			memory.h
- !	add_to_physmap_batch		memory.h
- !	foreign_memory_map		memory.h
-+!	mem_access_op			memory.h
-+!	mem_acquire_resource		memory.h
- !	memory_exchange			memory.h
- !	memory_map			memory.h
- !	memory_reservation		memory.h
--!	mem_access_op			memory.h
--!	mem_acquire_resource		memory.h
- !	pod_target			memory.h
- !	remove_from_physmap		memory.h
- !	reserved_device_memory_map	memory.h
-@@ -154,10 +154,10 @@
- ?	physdev_pci_device		physdev.h
- ?	physdev_pci_device_add		physdev.h
- ?	physdev_pci_mmcfg_reserved	physdev.h
--?	physdev_unmap_pirq		physdev.h
- ?	physdev_restore_msi		physdev.h
- ?	physdev_set_iopl		physdev.h
- ?	physdev_setup_gsi		physdev.h
-+?	physdev_unmap_pirq		physdev.h
- 
- !	pct_register			platform.h
- !	power_register			platform.h
-@@ -169,17 +169,17 @@
- ?	processor_px			platform.h
- !	psd_package			platform.h
- ?	xenpf_enter_acpi_sleep		platform.h
--!	xenpf_symdata			platform.h
--?	xenpf_pcpuinfo			platform.h
- ?	xenpf_pcpu_version		platform.h
-+?	xenpf_pcpuinfo			platform.h
- ?	xenpf_resource_entry		platform.h
-+!	xenpf_symdata			platform.h
- ?	xenpf_ucode_revision		platform.h
- 
- ?	pmu_data			pmu.h
- ?	pmu_params			pmu.h
- 
--!	sched_poll			sched.h
- ?	sched_pin_override		sched.h
-+!	sched_poll			sched.h
- ?	sched_remote_shutdown		sched.h
- ?	sched_shutdown			sched.h
- 
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index d512cad5243f..dbbda70829f1 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -15,6 +15,7 @@ obj-y += event_fifo.o
+ obj-$(CONFIG_GRANT_TABLE) += grant_table.o
+ obj-y += guestcopy.o
+ obj-y += gzip/
++obj-y += hdr-chk.o
+ obj-$(CONFIG_HYPFS) += hypfs.o
+ obj-$(CONFIG_IOREQ_SERVER) += ioreq.o
+ obj-y += irq.o
+diff --git a/xen/common/hdr-chk.c b/xen/common/hdr-chk.c
+new file mode 100644
+index 000000000000..1c7a509dcd06
+--- /dev/null
++++ b/xen/common/hdr-chk.c
+@@ -0,0 +1,13 @@
++#include <xen/stdint.h>
++
++#include <public/xen.h>
++
++#pragma GCC diagnostic error "-Wpadded"
++
++#include <public/grant_table.h>
++
++#ifdef CONFIG_COMPAT
++
++#include <compat/grant_table.h>
++
++#endif /* CONFIG_COMPAT */
+diff --git a/xen/include/public/grant_table.h b/xen/include/public/grant_table.h
+index 1dfa17a6d02a..a66c77d0166c 100644
+--- a/xen/include/public/grant_table.h
++++ b/xen/include/public/grant_table.h
+@@ -355,6 +355,7 @@ struct gnttab_unmap_grant_ref {
+     grant_handle_t handle;
+     /* OUT parameters. */
+     int16_t  status;              /* => enum grant_status */
++    uint16_t _pad0;
+ };
+ typedef struct gnttab_unmap_grant_ref gnttab_unmap_grant_ref_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_unmap_grant_ref_t);
+@@ -371,6 +372,7 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_unmap_grant_ref_t);
+ struct gnttab_setup_table {
+     /* IN parameters. */
+     domid_t  dom;
++    uint16_t _pad0;
+     uint32_t nr_frames;
+     /* OUT parameters. */
+     int16_t  status;              /* => enum grant_status */
+@@ -409,9 +411,12 @@ struct gnttab_transfer {
+     /* IN parameters. */
+     xen_pfn_t     mfn;
+     domid_t       domid;
++    uint16_t      _pad0;
+     grant_ref_t   ref;
+     /* OUT parameters. */
+     int16_t       status;
++    uint16_t      _pad1;
++    /* XXX compat-dependent padding. */
+ };
+ typedef struct gnttab_transfer gnttab_transfer_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
+@@ -468,10 +473,12 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_copy_t);
+ struct gnttab_query_size {
+     /* IN parameters. */
+     domid_t  dom;
++    uint16_t _ign1;
+     /* OUT parameters. */
+     uint32_t nr_frames;
+     uint32_t max_nr_frames;
+     int16_t  status;              /* => enum grant_status */
++    uint16_t _ign2;
+ };
+ typedef struct gnttab_query_size gnttab_query_size_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_query_size_t);
 -- 
 2.30.2
 
