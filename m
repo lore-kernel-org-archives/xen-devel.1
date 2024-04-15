@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ACDFC04FF8
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2751C41513
 	for <xen-devel@archiver.kernel.org>; Mon, 15 Apr 2024 15:43:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.706351.1103470 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.706352.1103474 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rwOU5-0000t7-Ni; Mon, 15 Apr 2024 15:43:05 +0000
+	id 1rwOU6-0000wn-2B; Mon, 15 Apr 2024 15:43:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 706351.1103470; Mon, 15 Apr 2024 15:43:05 +0000
+Received: by outflank-mailman (output) from mailman id 706352.1103474; Mon, 15 Apr 2024 15:43:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rwOU5-0000t0-Jg; Mon, 15 Apr 2024 15:43:05 +0000
-Received: by outflank-mailman (input) for mailman id 706351;
+	id 1rwOU5-0000w2-SJ; Mon, 15 Apr 2024 15:43:05 +0000
+Received: by outflank-mailman (input) for mailman id 706352;
  Mon, 15 Apr 2024 15:43:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YQk4=LU=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rwOU2-0000NU-H7
+ id 1rwOU2-0000Nb-Nq
  for xen-devel@lists.xenproject.org; Mon, 15 Apr 2024 15:43:02 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d766b22e-fb3e-11ee-b908-491648fe20b8;
- Mon, 15 Apr 2024 17:43:01 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a51a7d4466bso385856466b.2
- for <xen-devel@lists.xenproject.org>; Mon, 15 Apr 2024 08:43:01 -0700 (PDT)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d5f59f43-fb3e-11ee-94a3-07e782e9044d;
+ Mon, 15 Apr 2024 17:42:59 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a524ecaf215so240260966b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Apr 2024 08:42:59 -0700 (PDT)
 Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- jz1-20020a17090775e100b00a526457fc84sm1987261ejc.57.2024.04.15.08.43.00
+ jz1-20020a17090775e100b00a526457fc84sm1987261ejc.57.2024.04.15.08.42.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 08:43:00 -0700 (PDT)
+ Mon, 15 Apr 2024 08:42:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d766b22e-fb3e-11ee-b908-491648fe20b8
+X-Inumbo-ID: d5f59f43-fb3e-11ee-94a3-07e782e9044d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1713195781; x=1713800581; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4BacL8QB7ZWP7TY5BHnn9lSxgM8xcnJnilaGER3YBeY=;
-        b=S5pW7g21FrdgTExQ0+kWvzsRwbYAnKuAQA7lI3Pk6jp6U2821A7cmHW+Sqe/PZTLyt
-         j9bjJekwvFVAbBw2UB0R/Pp74+zrKx40BdWtsgxpBQKVQ+EeW28VTkW7MtzQfOnMH7p2
-         xRxUas7mkBeKy1ePuu+J8CMPVSBbEzdfgsmhI=
+        d=citrix.com; s=google; t=1713195778; x=1713800578; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lPGq0ub75Cw5vDVXRG5deLNZNVu1XpuWe3GsyXEHU90=;
+        b=HpjBjigbwtujpj62NNWzKkqSNm1WBafmALPfBehGb2Ug8VGPcM9K21/GoZfAeIvQA1
+         kTpqYX4yfg/AApLHTKE/0tTw8C+G7cziZhvBmjLUM+XJlpiqAVIpmfom5Pr7wn15RmRG
+         qHBwLpn1I3KWN1ECVIbqzr1qPad2lMwe3gNGE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713195781; x=1713800581;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4BacL8QB7ZWP7TY5BHnn9lSxgM8xcnJnilaGER3YBeY=;
-        b=ocmupnFAUKK7Iqr8WfeY3KET0xkodkq7GqczS5cf1X9rcAoIatUYCLcxRdVW1/SmJE
-         CI5XbJF4Dw7Y/WrRW+EBskIGH0ULhfEzWoMsJmbvQqGGr6cHdmiBhazadEz6yPes8KEV
-         Ecp0rXh4T0YjtrYBogXmHq9cl04Q5Pmd8Jc2lHodOAfoRz1iJzXTrA90+rqUGDtVPFEL
-         8MOlJ5mEGKHLW1Pg5xC4S+hake/895DCyND1em4nhYLC0sDKRVn0KyLSXg4w4udHfBu6
-         Q/WtN/F3xMwPHFJShsIyX/H6gV+5hyTfBsCzWL9dEhnvWFO8p/ZD6dcbwESqdwbPqMne
-         wATg==
-X-Gm-Message-State: AOJu0YyU2H0onVinGJU8QiwMWNxf3u9F+y37WFxW9NboSQRSkT7+QTdd
-	FLJHkIArPniiuQ71Iaj7ki+ulCg9r+Sydm2LH188HnaXqyErwVFtjIyskzk3lYnyRLHVdeYFbVp
-	u0ko=
-X-Google-Smtp-Source: AGHT+IHPz7GVUB+XTlypiLu1c10rF57FJ4U4D8ixvfZxpXBt7kQI+18aXvdN+HDsFCKk62mq/iTuYA==
-X-Received: by 2002:a17:906:254c:b0:a51:a06e:afd1 with SMTP id j12-20020a170906254c00b00a51a06eafd1mr6141580ejb.23.1713195781048;
-        Mon, 15 Apr 2024 08:43:01 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1713195778; x=1713800578;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lPGq0ub75Cw5vDVXRG5deLNZNVu1XpuWe3GsyXEHU90=;
+        b=fhYi7GhMqoED0FXJifInImYxKoR6H7qAxo4UBP3z2zlPtM5zFPY9rkjjMFK/60Pzl1
+         /7m77S+UgBVZ2fUGWQJ8aRUC5YFZWbBK4D0k6d9+V05mTVoPt3mhIeMYTLMEBJ+Z2TTy
+         MJmznoFrgml0gZobqx03rxK+xEy5lxMxLzqDeml0vLygylZuKZV21Ey/JTONj/0mU68K
+         IiO34S0+vxKnopuXTXgjyhqHBQBM6oA7lWEFqgmeYw8/sasSrZNLMj+qPhHPtAvzZJw/
+         /65Z7W7GVjQFofR9zl9/lqBmo3snRyvbJQF0BuJMqT5HnjANM+UOp9m+Y5jzj8asIK0M
+         JBAA==
+X-Gm-Message-State: AOJu0Ywju151/7UeJlhu521KCiWTyV4ZdppoHvqWZ4AR8qBkfK7R+b6P
+	wTyWsruzNUKgBAp46wgo4vKOmQ3KEWqBUlJydeO1D8ac3KCbRcHWl4V6loJNr8TDfATlaK6R3ku
+	RyKI=
+X-Google-Smtp-Source: AGHT+IE9r8qSLyg2D7BMJgx3mc2ed305tBKVoys3OAyYk9+ePt/nz1Ml9hXIc+r+TRSGdGKIIA3Ztw==
+X-Received: by 2002:a17:906:5a83:b0:a4e:768a:144f with SMTP id l3-20020a1709065a8300b00a4e768a144fmr6141521ejq.36.1713195778076;
+        Mon, 15 Apr 2024 08:42:58 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -82,55 +81,36 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH 3/4] xen/gnttab: Perform compat/native gnttab_query_size check
-Date: Mon, 15 Apr 2024 16:41:54 +0100
-Message-Id: <20240415154155.2718064-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/4] xen/xlat: Improvements to compat hypercall checking
+Date: Mon, 15 Apr 2024 16:41:51 +0100
+Message-Id: <20240415154155.2718064-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240415154155.2718064-1-andrew.cooper3@citrix.com>
-References: <20240415154155.2718064-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This subop appears to have been missed from the compat checks.
+This started off as patch 3, and grew somewhat.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: George Dunlap <George.Dunlap@citrix.com>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
----
- xen/common/compat/grant_table.c | 4 ++++
- xen/include/xlat.lst            | 1 +
- 2 files changed, 5 insertions(+)
+Patches 1-3 are simple and hopefully non-controversial.
 
-diff --git a/xen/common/compat/grant_table.c b/xen/common/compat/grant_table.c
-index af98eade17c9..8a754055576b 100644
---- a/xen/common/compat/grant_table.c
-+++ b/xen/common/compat/grant_table.c
-@@ -30,6 +30,10 @@ CHECK_gnttab_unmap_grant_ref;
- CHECK_gnttab_unmap_and_replace;
- #undef xen_gnttab_unmap_and_replace
- 
-+#define xen_gnttab_query_size gnttab_query_size
-+CHECK_gnttab_query_size;
-+#undef xen_gnttab_query_size
-+
- DEFINE_XEN_GUEST_HANDLE(gnttab_setup_table_compat_t);
- DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_compat_t);
- DEFINE_XEN_GUEST_HANDLE(gnttab_copy_compat_t);
-diff --git a/xen/include/xlat.lst b/xen/include/xlat.lst
-index b3befd9cc113..53a1bdfc533f 100644
---- a/xen/include/xlat.lst
-+++ b/xen/include/xlat.lst
-@@ -88,6 +88,7 @@
- !	gnttab_get_status_frames	grant_table.h
- ?	gnttab_get_version		grant_table.h
- ?	gnttab_map_grant_ref		grant_table.h
-+?	gnttab_query_size		grant_table.h
- ?	gnttab_set_version		grant_table.h
- !	gnttab_setup_table		grant_table.h
- ?	gnttab_swap_grant_ref		grant_table.h
+Patch 4 is an attempt to make the headers less fragile, but came with an
+unexpected complication.  Details in the patch.
+
+Andrew Cooper (4):
+  xen/xlat: Sort out whitespace
+  xen/xlat: Sort structs per file
+  xen/gnttab: Perform compat/native gnttab_query_size check
+  xen/public: Use -Wpadding for public headers
+
+ xen/common/Makefile              |  1 +
+ xen/common/compat/grant_table.c  |  4 ++
+ xen/common/hdr-chk.c             | 13 ++++++
+ xen/include/public/grant_table.h |  7 ++++
+ xen/include/xlat.lst             | 70 +++++++++++++++++++++-----------
+ 5 files changed, 72 insertions(+), 23 deletions(-)
+ create mode 100644 xen/common/hdr-chk.c
+
+
+base-commit: c0f890cd9d5fd2c17a1e3110cb26f98c90ce8429
 -- 
 2.30.2
 
