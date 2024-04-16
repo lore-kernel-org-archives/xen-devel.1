@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72097C04FF6
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Apr 2024 09:16:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.706795.1104174 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A76EC4345F
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Apr 2024 09:31:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.706832.1104234 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rwev9-0000jD-Av; Tue, 16 Apr 2024 09:16:07 +0000
+	id 1rwf9l-00089e-2c; Tue, 16 Apr 2024 09:31:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 706795.1104174; Tue, 16 Apr 2024 09:16:07 +0000
+Received: by outflank-mailman (output) from mailman id 706832.1104234; Tue, 16 Apr 2024 09:31:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rwev9-0000j6-8S; Tue, 16 Apr 2024 09:16:07 +0000
-Received: by outflank-mailman (input) for mailman id 706795;
- Tue, 16 Apr 2024 09:16:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Qw+g=LV=cloud.com=fouad.hilly@srs-se1.protection.inumbo.net>)
- id 1rwev8-0000j0-Nm
- for xen-devel@lists.xenproject.org; Tue, 16 Apr 2024 09:16:06 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f3f36ab4-fbd1-11ee-b909-491648fe20b8;
- Tue, 16 Apr 2024 11:16:05 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a5269c3f9c7so249524866b.2
- for <xen-devel@lists.xenproject.org>; Tue, 16 Apr 2024 02:16:05 -0700 (PDT)
-Received: from fhilly.citrite.net (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- u2-20020a17090657c200b00a524476aac9sm4654723ejr.108.2024.04.16.02.16.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 02:16:03 -0700 (PDT)
+	id 1rwf9l-00089X-05; Tue, 16 Apr 2024 09:31:13 +0000
+Received: by outflank-mailman (input) for mailman id 706832;
+ Tue, 16 Apr 2024 09:31:11 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rwf9j-00089N-Et; Tue, 16 Apr 2024 09:31:11 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rwf9j-0004Zl-5f; Tue, 16 Apr 2024 09:31:11 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rwf9i-0008JZ-Uj; Tue, 16 Apr 2024 09:31:11 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1rwf9i-0006n5-UH; Tue, 16 Apr 2024 09:31:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,115 +44,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3f36ab4-fbd1-11ee-b909-491648fe20b8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1713258965; x=1713863765; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VMo9HfH+/6PT62gxIGHAj1EtchV4P4c0BEQDSxaYl8E=;
-        b=VJEok3iEtIuwmTdUJzPtp1ihuKw0D7NcjP8Gb5OBw6Cg9Q2WNz13BveNZpueLRBpzm
-         5B3eUEwjBxfTgDED4tygut7mHvXw4Pnqs33ekd599tE6tovSANBxNZBGKCRFNaHoCrd4
-         czA7ZJI/AxEdHPjl6DE+U6W4ZpGgwgEYYtyC8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713258965; x=1713863765;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VMo9HfH+/6PT62gxIGHAj1EtchV4P4c0BEQDSxaYl8E=;
-        b=kbM/vrt1FgsQcXvaA0wsXNEK+sCJ8ZdgbAjHhN5Us0521WVnKZOaycgbHk5YJwm06y
-         Yc0C6/xozr6pPp9L9bEVBtXETMwlmF+ZDg7B54+NWEHi+d5ruT386N1NmllMQ6GAtm5d
-         T7V/2rH3pmB6kC87uNgcnx6zIZOsjYumiqD8KCQzLHBLjN/81ghSiDDTUysQvzfLqvgJ
-         4f4Az0SEVfpR5OVgSj3ubHc3iAc1ug7NRZuPfLv/t3SXrKAWPoNB9uUtHz5Up1Z6nG6H
-         hQWwsoOW+qiF6YMU9Yp9w0cDpEktB0U48vX3ckQvahUmgQiNuMkVjMUYZ07yQ4n8OCcD
-         z0wQ==
-X-Gm-Message-State: AOJu0Yzbuz9+rdStdh2Q9OTjVNdv9L39mdB6BMa27fWO/ml4bOvmZzsv
-	KvkRZpADfa7LDxm1gmLJO13nzCqNF3cB4i1Jkam7XWB2lxP1MXirtsCOziIQ1mhn/BeAqSgAvq2
-	5
-X-Google-Smtp-Source: AGHT+IGiVFzED4vE2YgqcbK2WERtwlr9k7iUaPSamGBfKHXw9VfXOpLltOmof+L9ChbTrnrinumiKA==
-X-Received: by 2002:a17:906:2dc5:b0:a52:225a:2ebe with SMTP id h5-20020a1709062dc500b00a52225a2ebemr6719632eji.71.1713258964803;
-        Tue, 16 Apr 2024 02:16:04 -0700 (PDT)
-From: Fouad Hilly <fouad.hilly@cloud.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Fouad Hilly <fouad.hilly@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 1/5] x86: Update x86 low level version check of microcode
-Date: Tue, 16 Apr 2024 10:15:42 +0100
-Message-ID: <20240416091546.11622-2-fouad.hilly@cloud.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20240416091546.11622-1-fouad.hilly@cloud.com>
-References: <20240416091546.11622-1-fouad.hilly@cloud.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=KWtEoRlMp/QCrGipva5rkP/DHM/ALXCdxKJs+GXAr0U=; b=5gseg961bgMG08Me42Rxm4Khhv
+	txpZPvZLBnQBodl1CX9AeYo/kmXzUg+Q+GpuoQBWsTUsP2mVMGkiRflh52LEfADtlapqmqXISybYP
+	dta+u+H+OZcUSr1m0ag97uoShzbQ9g6NWWwK6+X0tsnguET0CmykxUMrNk14R/i/SiBA=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-185649-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 185649: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=6363872629cd58636128824977e56eea15b97a15
+X-Osstest-Versions-That:
+    ovmf=70892b13b28cdb0a10c82f3d3aca560a38dce5c9
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 16 Apr 2024 09:31:10 +0000
 
-Update microcode version check at Intel and AMD Level by:
-Preventing the low level code from sending errors if the microcode
-version provided is not a newer version. Other errors will be sent like before.
-When the provided microcode version is the same as the current one, code
-to point to microcode provided.
-Microcode version check happens at higher and common level in core.c.
-Keep all the required code at low level that checks for signature and CPU compatibility
+flight 185649 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/185649/
 
-[v2]
-Update message description to better describe the changes
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 6363872629cd58636128824977e56eea15b97a15
+baseline version:
+ ovmf                 70892b13b28cdb0a10c82f3d3aca560a38dce5c9
 
-Signed-off-by: Fouad Hilly <fouad.hilly@cloud.com>
----
- xen/arch/x86/cpu/microcode/amd.c   |  8 ++------
- xen/arch/x86/cpu/microcode/intel.c | 11 +++--------
- 2 files changed, 5 insertions(+), 14 deletions(-)
+Last test of basis   185643  2024-04-16 05:11:11 Z    0 days
+Testing same since   185649  2024-04-16 07:49:16 Z    0 days    1 attempts
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 75fc84e445ce..4f805f662701 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -383,12 +383,8 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-                 goto skip;
-             }
- 
--            /*
--             * If the new ucode covers current CPU, compare ucodes and store the
--             * one with higher revision.
--             */
--            if ( (microcode_fits(mc->patch) != MIS_UCODE) &&
--                 (!saved || (compare_header(mc->patch, saved) == NEW_UCODE)) )
-+            /* If the provided ucode covers current CPU, then store its revision. */
-+            if ( (microcode_fits(mc->patch) != MIS_UCODE) && !saved )
-             {
-                 saved = mc->patch;
-                 saved_size = mc->len;
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index 060c529a6e5d..e65c02a57987 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -294,8 +294,7 @@ static int cf_check apply_microcode(const struct microcode_patch *patch)
- 
-     result = microcode_update_match(patch);
- 
--    if ( result != NEW_UCODE &&
--         !(opt_ucode_allow_same && result == SAME_UCODE) )
-+    if ( result != NEW_UCODE && result != SAME_UCODE )
-         return -EINVAL;
- 
-     wbinvd();
-@@ -354,12 +353,8 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-         if ( error )
-             break;
- 
--        /*
--         * If the new update covers current CPU, compare updates and store the
--         * one with higher revision.
--         */
--        if ( (microcode_update_match(mc) != MIS_UCODE) &&
--             (!saved || compare_revisions(saved->rev, mc->rev) == NEW_UCODE) )
-+        /* If the provided ucode covers current CPU, then store its revision. */
-+        if ( (microcode_update_match(mc) != MIS_UCODE) && !saved )
-             saved = mc;
- 
-         buf  += blob_size;
--- 
-2.42.0
+------------------------------------------------------------
+People who touched revisions under test:
+  Chao Li <lichao@loongson.cn>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Ray Ni <ray.ni@intel.com>
 
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   70892b13b2..6363872629  6363872629cd58636128824977e56eea15b97a15 -> xen-tested-master
 
