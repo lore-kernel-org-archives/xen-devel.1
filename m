@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 660E3C04FF6
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Apr 2024 08:32:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.706737.1104082 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22A60C4345F
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Apr 2024 08:41:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.706747.1104099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rweF4-00078Z-7u; Tue, 16 Apr 2024 08:32:38 +0000
+	id 1rweN0-0002lN-6X; Tue, 16 Apr 2024 08:40:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 706737.1104082; Tue, 16 Apr 2024 08:32:38 +0000
+Received: by outflank-mailman (output) from mailman id 706747.1104099; Tue, 16 Apr 2024 08:40:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rweF4-00077a-2Y; Tue, 16 Apr 2024 08:32:38 +0000
-Received: by outflank-mailman (input) for mailman id 706737;
- Tue, 16 Apr 2024 08:32:36 +0000
+	id 1rweN0-0002lG-2i; Tue, 16 Apr 2024 08:40:50 +0000
+Received: by outflank-mailman (input) for mailman id 706747;
+ Tue, 16 Apr 2024 08:40:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=heP+=LV=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1rweF2-00075P-D9
- for xen-devel@lists.xenproject.org; Tue, 16 Apr 2024 08:32:36 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
+ <SRS0=AiXa=LV=bounce.vates.tech=bounce-md_30504962.661e398c.v1-d48cc00ce8c44aadafc4a9a5b1d0f643@srs-se1.protection.inumbo.net>)
+ id 1rweMy-0002lA-88
+ for xen-devel@lists.xenproject.org; Tue, 16 Apr 2024 08:40:48 +0000
+Received: from mail145-16.atl61.mandrillapp.com
+ (mail145-16.atl61.mandrillapp.com [198.2.145.16])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e04220e3-fbcb-11ee-b909-491648fe20b8;
- Tue, 16 Apr 2024 10:32:35 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-518a3e0d2e4so2503912e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 16 Apr 2024 01:32:35 -0700 (PDT)
-Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
- by smtp.gmail.com with ESMTPSA id
- g8-20020a19e048000000b00516d2c05b3dsm1536151lfj.299.2024.04.16.01.32.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 01:32:33 -0700 (PDT)
+ id 04991b1a-fbcd-11ee-b909-491648fe20b8;
+ Tue, 16 Apr 2024 10:40:46 +0200 (CEST)
+Received: from pmta06.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail145-16.atl61.mandrillapp.com (Mailchimp) with ESMTP id
+ 4VJcv05gXLz8XRtlK
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Apr 2024 08:40:44 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ d48cc00ce8c44aadafc4a9a5b1d0f643; Tue, 16 Apr 2024 08:40:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,289 +45,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e04220e3-fbcb-11ee-b909-491648fe20b8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713256354; x=1713861154; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=48w9RzVCrAnY6y/pfkpqctofcQ2H9eeAikbtyqILiGI=;
-        b=Axj63OieN+ykBecywtON76I552+Aflbkae8YY+Ud1WvK7pRCR4TBMszPKJZzMLdNKo
-         XCXxX8mWqzcjT9KcGlNMIU+CNRXpJJYV/9jeMVGhpLUvGt6nYKaazv7OsJFjUjmoB0FS
-         2SeCabxkQR3+Fo/Ldv5WHjtdl5KHY0DsVEWId0YIaBvOUA19d481HG99w1t6RcZw70Nd
-         C9mqsVcBAE4PABh4AB+eeKDAdXc3tg7+PGfAJeMOGLk98fMiRRYx4ellghT/Rt8wjCwo
-         a4HkBCW5lVk601W5Ejw++erhdcm6udbWZYCOQZxXqBtRbq1iqWvIOGgXqFhpKfCa7PZG
-         ONLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713256354; x=1713861154;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=48w9RzVCrAnY6y/pfkpqctofcQ2H9eeAikbtyqILiGI=;
-        b=ujZQABNIfPKTMCxHrx+PVBgR4LFJW1kucuKIgGdlkEaCSmdvq0cX0yFpKQTTZYH7KJ
-         TrN/b9fcGCewHJz2XBnpYJyOdQLZCf1fQZ9beqqv7Z9+w0bECmVwDBBI/vP17VoPBiPC
-         9cq/jIOKpXPrQj+qh4fVw2/qJciaDcDPlzb9ai0Lo5KDzY/tSxStWJnQylx4XAmuJMRy
-         F9aEfkOg6cY5gipjs7kRYMP2Fo+mULV2vQVXyomOWIE/Dgoqp0vyCyO3YdJNMf0Kvfke
-         ey2gdZcRLDU8J1dxEf4htO9GQqgmGD9cD8L74o6xp8n3e8lbHFZ3AmY0/sm0kYcik1TD
-         Hnug==
-X-Gm-Message-State: AOJu0Yx6OARivfYSphQsSYloDavH52WHkacVzbMtb3LbNchRZ5uBWYOy
-	8zAySy/sEszAYkOyoRxteXWojF3mwHolX0S8mM8yWo0E/jkDXQsqpVjaJD2vuwk=
-X-Google-Smtp-Source: AGHT+IEa3tKx5rjWqZfWHJBSXXcUtO9RlNJxcYMAveDZF2+FeRxeqW5Je6Ppec8PXNOFXlqfqp64WQ==
-X-Received: by 2002:a05:6512:691:b0:519:99c:9018 with SMTP id t17-20020a056512069100b00519099c9018mr438000lfe.11.1713256353690;
-        Tue, 16 Apr 2024 01:32:33 -0700 (PDT)
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	julien@xen.org,
-	bertrand.marquis@arm.com,
-	michal.orzel@amd.com,
-	Volodymyr_Babchuk@epam.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	edgar.iglesias@amd.com
-Subject: [PATCH v2 1/1] xen/arm64: entry: Add missing code symbol annotations
-Date: Tue, 16 Apr 2024 01:15:41 +0200
-Message-Id: <20240415231541.4140052-2-edgar.iglesias@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240415231541.4140052-1-edgar.iglesias@gmail.com>
-References: <20240415231541.4140052-1-edgar.iglesias@gmail.com>
+X-Inumbo-ID: 04991b1a-fbcd-11ee-b909-491648fe20b8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1713256844; x=1713517344;
+	bh=pjEjfv9riQAIjJjPevFt35FKNT3qD3QODRtVHVYVp2s=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=eP18DqWd58rvmfU7YllhlC/JG/wR42cHcStgW1FSNyL9PYpldamhJsZNaQ4URx21q
+	 5ySnZ9qU7IjJqdbxwNbxEII4XwN9FrmV1g0xY+axkvZXFNHxyRpx0zYWSWmBT19fsi
+	 /uoeGzaYP1tGoNgGfoxL6uymSJRoA8buQFXhqMQNHMSuezmgUq399gzqgaZ+NjmZXB
+	 8fYIcZkL06sN7TKZHPtA9ETl05kro3z53v9vbMRtBYJclZhB3fD0GMN074Gjvv6/ie
+	 X+roeCiwMGup9Ez8V2SH5+zJMeAcWlKdTxafBuHpNBIUy2WehwSmOVDU37Dh8vi+6n
+	 hRQXi2Fs6e4rA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1713256844; x=1713517344; i=teddy.astie@vates.tech;
+	bh=pjEjfv9riQAIjJjPevFt35FKNT3qD3QODRtVHVYVp2s=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=XTau+piv3L83ocq9clXm8va01HT2hMUcYo8jWwD+pavdiZRX3oWkKlhk4tp8Rz6dc
+	 Yw6VpVM0l/zGhcyAeuCgqykTKNRwiqTXPVbKuDBZyJLrO4r7azEnKKzMsgedWbwiJt
+	 mzGPx3JFguyjrrSJgPXPmbYYJZpCOdgyHh2WxdFBspYAlgTJ2WFDvE+v/EWLko9u+A
+	 khMdrELcYDzI9e/dlHVn8vaD1rmY64Ko12n6UCbLYOebneV0csMTp0fpLclYBZcMN0
+	 NPEurPs2O/U3xzZ1RW7f+tTgYwCRiDMM2EnuDUdPE94mpy8pDBCHKIqdahHu0hdERR
+	 tU+3c9Gd+cUOw==
+From: Teddy Astie <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20[XEN=20PATCH=20v1=2015/15]=20x86/hvm:=20make=20AMD-V=20and=20Intel=20VT-x=20support=20configurable?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1713256843068
+Message-Id: <2a6779ba-e3d7-4f53-8a0c-404f139ba254@vates.tech>
+To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>, xen-devel@lists.xenproject.org
+Cc: Xenia Ragiadakou <burzalodowa@gmail.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, =?utf-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20240416065012.3470263-1-Sergiy_Kibrik@epam.com>
+In-Reply-To: <20240416065012.3470263-1-Sergiy_Kibrik@epam.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.d48cc00ce8c44aadafc4a9a5b1d0f643?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20240416:md
+Date: Tue, 16 Apr 2024 08:40:44 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
+Hello Sergiy,
 
-Use the generic xen/linkage.h macros when and add missing
-code symbol annotations.
+> Also make INTEL_IOMMU/AMD_IOMMU options dependant on VMX/SVM options.
 
-Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+The discussion in the RFC series stated the IOMMU may be used with PV 
+guests, and doesn't rely on VMX/SVM support (in fact, it can be used 
+without HVM support in Xen).
+
+However, in the discussion, posted interrupts were supposed to be 
+dependent on VMX/SVM instead. I suppose this is a leftover from the 
+original RFC ?
+
+> https://lore.kernel.org/xen-devel/e29e375f-3d30-0eb1-7e28-b93f2d831b43@suse.com/
+
+Teddy
+
 ---
- xen/arch/arm/arm64/entry.S | 72 +++++++++++++++++++++++++-------------
- 1 file changed, 48 insertions(+), 24 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/entry.S b/xen/arch/arm/arm64/entry.S
-index f963c923bb..af9a592cae 100644
---- a/xen/arch/arm/arm64/entry.S
-+++ b/xen/arch/arm/arm64/entry.S
-@@ -289,21 +289,25 @@
-         b       do_bad_mode
-         .endm
- 
--hyp_sync_invalid:
-+FUNC_LOCAL(hyp_sync_invalid)
-         entry   hyp=1
-         invalid BAD_SYNC
-+END(hyp_sync_invalid)
- 
--hyp_irq_invalid:
-+FUNC_LOCAL(hyp_irq_invalid)
-         entry   hyp=1
-         invalid BAD_IRQ
-+END(hyp_irq_invalid)
- 
--hyp_fiq_invalid:
-+FUNC_LOCAL(hyp_fiq_invalid)
-         entry   hyp=1
-         invalid BAD_FIQ
-+END(hyp_fiq_invalid)
- 
--hyp_error_invalid:
-+FUNC_LOCAL(hyp_error_invalid)
-         entry   hyp=1
-         invalid BAD_ERROR
-+END(hyp_error_invalid)
- 
- /*
-  * SError received while running in the hypervisor mode.
-@@ -313,11 +317,12 @@ hyp_error_invalid:
-  * simplicity, as SError should be rare and potentially fatal,
-  * all interrupts are kept masked.
-  */
--hyp_error:
-+FUNC_LOCAL(hyp_error)
-         entry   hyp=1
-         mov     x0, sp
-         bl      do_trap_hyp_serror
-         exit    hyp=1
-+END(hyp_error)
- 
- /*
-  * Synchronous exception received while running in the hypervisor mode.
-@@ -327,7 +332,7 @@ hyp_error:
-  * some of them. So we want to inherit the state from the interrupted
-  * context.
-  */
--hyp_sync:
-+FUNC_LOCAL(hyp_sync)
-         entry   hyp=1
- 
-         /* Inherit interrupts */
-@@ -338,6 +343,7 @@ hyp_sync:
-         mov     x0, sp
-         bl      do_trap_hyp_sync
-         exit    hyp=1
-+END(hyp_sync)
- 
- /*
-  * IRQ received while running in the hypervisor mode.
-@@ -352,7 +358,7 @@ hyp_sync:
-  * would require some rework in some paths (e.g. panic, livepatch) to
-  * ensure the ordering is enforced everywhere.
-  */
--hyp_irq:
-+FUNC_LOCAL(hyp_irq)
-         entry   hyp=1
- 
-         /* Inherit D, A, F interrupts and keep I masked */
-@@ -365,8 +371,9 @@ hyp_irq:
-         mov     x0, sp
-         bl      do_trap_irq
-         exit    hyp=1
-+END(hyp_irq)
- 
--guest_sync:
-+FUNC_LOCAL(guest_sync)
-         /*
-          * Save x0, x1 in advance
-          */
-@@ -413,8 +420,9 @@ fastpath_out_workaround:
-         mov     x1, xzr
-         eret
-         sb
-+END(guest_sync)
- 
--wa2_ssbd:
-+FUNC_LOCAL(wa2_ssbd)
- #ifdef CONFIG_ARM_SSBD
- alternative_cb arm_enable_wa2_handling
-         b       wa2_end
-@@ -450,42 +458,55 @@ wa2_end:
-         mov     x0, xzr
-         eret
-         sb
--guest_sync_slowpath:
-+END(wa2_ssbd)
-+
-+FUNC_LOCAL(guest_sync_slowpath)
-         /*
-          * x0/x1 may have been scratch by the fast path above, so avoid
-          * to save them.
-          */
-         guest_vector compat=0, iflags=IFLAGS__AI_, trap=guest_sync, save_x0_x1=0
-+END(guest_sync_slowpath)
- 
--guest_irq:
-+FUNC_LOCAL(guest_irq)
-         guest_vector compat=0, iflags=IFLAGS__A__, trap=irq
-+END(guest_irq)
- 
--guest_fiq_invalid:
-+FUNC_LOCAL(guest_fiq_invalid)
-         entry   hyp=0, compat=0
-         invalid BAD_FIQ
-+END(guest_fiq_invalid)
- 
--guest_error:
-+FUNC_LOCAL(guest_error)
-         guest_vector compat=0, iflags=IFLAGS__AI_, trap=guest_serror
-+END(guest_error)
- 
--guest_sync_compat:
-+FUNC_LOCAL(guest_sync_compat)
-         guest_vector compat=1, iflags=IFLAGS__AI_, trap=guest_sync
-+END(guest_sync_compat)
- 
--guest_irq_compat:
-+FUNC_LOCAL(guest_irq_compat)
-         guest_vector compat=1, iflags=IFLAGS__A__, trap=irq
-+END(guest_irq_compat)
- 
--guest_fiq_invalid_compat:
-+FUNC_LOCAL(guest_fiq_invalid_compat)
-         entry   hyp=0, compat=1
-         invalid BAD_FIQ
-+END(guest_fiq_invalid_compat)
- 
--guest_error_compat:
-+FUNC_LOCAL(guest_error_compat)
-         guest_vector compat=1, iflags=IFLAGS__AI_, trap=guest_serror
-+END(guest_error_compat)
- 
--ENTRY(return_to_new_vcpu32)
-+FUNC(return_to_new_vcpu32)
-         exit    hyp=0, compat=1
--ENTRY(return_to_new_vcpu64)
-+END(return_to_new_vcpu32)
-+
-+FUNC(return_to_new_vcpu64)
-         exit    hyp=0, compat=0
-+END(return_to_new_vcpu64)
- 
--return_from_trap:
-+FUNC_LOCAL(return_from_trap)
-         msr     daifset, #IFLAGS___I_ /* Mask interrupts */
- 
-         ldr     x21, [sp, #UREGS_PC]            /* load ELR */
-@@ -524,6 +545,7 @@ return_from_trap:
- 
-         eret
-         sb
-+END(return_from_trap)
- 
- /*
-  * Consume pending SError generated by the guest if any.
-@@ -536,7 +558,7 @@ return_from_trap:
-  * it. So the function will unmask SError exception for a small window and
-  * then mask it again.
-  */
--check_pending_guest_serror:
-+FUNC_LOCAL(check_pending_guest_serror)
-         /*
-          * Save elr_el2 to check whether the pending SError exception takes
-          * place while we are doing this sync exception.
-@@ -586,7 +608,7 @@ abort_guest_exit_end:
-         cset    x19, ne
- 
-         ret
--ENDPROC(check_pending_guest_serror)
-+END(check_pending_guest_serror)
- 
- /*
-  * Exception vectors.
-@@ -597,7 +619,7 @@ ENDPROC(check_pending_guest_serror)
-         .endm
- 
-         .align  11
--ENTRY(hyp_traps_vector)
-+FUNC(hyp_traps_vector)
-         ventry  hyp_sync_invalid            /* Synchronous EL2t */
-         ventry  hyp_irq_invalid             /* IRQ EL2t */
-         ventry  hyp_fiq_invalid             /* FIQ EL2t */
-@@ -617,6 +639,7 @@ ENTRY(hyp_traps_vector)
-         ventry  guest_irq_compat            /* IRQ 32-bit EL0/EL1 */
-         ventry  guest_fiq_invalid_compat    /* FIQ 32-bit EL0/EL1 */
-         ventry  guest_error_compat          /* Error 32-bit EL0/EL1 */
-+END(hyp_traps_vector)
- 
- /*
-  * struct vcpu *__context_switch(struct vcpu *prev, struct vcpu *next)
-@@ -626,7 +649,7 @@ ENTRY(hyp_traps_vector)
-  *
-  * Returns prev in x0
-  */
--ENTRY(__context_switch)
-+FUNC(__context_switch)
-         add     x8, x0, #VCPU_arch_saved_context
-         mov     x9, sp
-         stp     x19, x20, [x8], #16         /* store callee-saved registers */
-@@ -647,6 +670,7 @@ ENTRY(__context_switch)
-         ldr     lr, [x8]
-         mov     sp, x9
-         ret
-+END(__context_switch)
- 
- /*
-  * Local variables:
--- 
-2.40.1
 
+Teddy Astie | Vates XCP-ng Intern
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
