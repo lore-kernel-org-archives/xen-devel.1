@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E7DC4345F
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Apr 2024 09:55:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.707294.1105057 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A221FC4345F
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Apr 2024 10:05:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.707300.1105076 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rx20D-0005wG-NE; Wed, 17 Apr 2024 09:54:53 +0000
+	id 1rx2A8-0007lb-NR; Wed, 17 Apr 2024 10:05:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 707294.1105057; Wed, 17 Apr 2024 09:54:53 +0000
+Received: by outflank-mailman (output) from mailman id 707300.1105076; Wed, 17 Apr 2024 10:05:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rx20D-0005w9-KY; Wed, 17 Apr 2024 09:54:53 +0000
-Received: by outflank-mailman (input) for mailman id 707294;
- Wed, 17 Apr 2024 09:54:52 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rx20B-0005vn-Us
- for xen-devel@lists.xenproject.org; Wed, 17 Apr 2024 09:54:52 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rx20B-0001pX-Dy; Wed, 17 Apr 2024 09:54:51 +0000
-Received: from [15.248.3.90] (helo=[10.24.67.26])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rx20B-0002tL-4v; Wed, 17 Apr 2024 09:54:51 +0000
+	id 1rx2A8-0007lU-K7; Wed, 17 Apr 2024 10:05:08 +0000
+Received: by outflank-mailman (input) for mailman id 707300;
+ Wed, 17 Apr 2024 10:05:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=6A/l=LW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rx2A7-0007lI-5S
+ for xen-devel@lists.xenproject.org; Wed, 17 Apr 2024 10:05:07 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f72ac45c-fca1-11ee-b909-491648fe20b8;
+ Wed, 17 Apr 2024 12:05:06 +0200 (CEST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5194cebd6caso430371e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Apr 2024 03:05:06 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ p2-20020a056512328200b00516cd83e497sm1893187lfe.210.2024.04.17.03.05.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Apr 2024 03:05:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,51 +46,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=JO4yvtfgs1RUxJlQy6DCbV3WvAYRqf3TZjtkF8f2Xeo=; b=qk+V9qX999eZ5/pEI7irJ65qot
-	9sDhwd/EUtpEaaS8303mkBlxndUHnuB1HXKsYp0bkxyza/6P1SH+wvT2NJOOFolLCB21+W2jpG8te
-	pJZLeG0iZ18cKi74/hEPCNqFT2b2UCfdLWsUPZXP3YQNtI2eI0aq8OxpS99VcjEl80b4=;
-Message-ID: <45d2bcc7-1d46-413d-bad1-db99dc8f410f@xen.org>
-Date: Wed, 17 Apr 2024 10:54:48 +0100
+X-Inumbo-ID: f72ac45c-fca1-11ee-b909-491648fe20b8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1713348305; x=1713953105; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KHB/UxAL8E3rbDnKIaIo6e50EVsTREcWNgCcpnb5Lfw=;
+        b=c7AfCmmGGlvKK6n4lF3Tj+xKbjZSK2IJHswBntBlkk6dcOgUf0DsSgWaD8y0R9dDYY
+         qoWF98F5jta7a1x1GpG1U+6atCrz07cExJ/Jii4mtirzWqhVohte6ZlhI/WjKWrmQYmf
+         79kEqK6sueyKFpaqcbxm55BnK9u86LHiXniPiqtPliV1z0NnBd8c710NC7YMKue/Ud9H
+         9d/NrxchrsmrF8wMqZYNe6mFQcufKDZnSDt54wMusS9OQn6YB3+gOncwVT2NOFoBSL0K
+         Hn2A6J2NoZqSc5pSmSQAo4rdRJDWvLyK9uYrwG9WI+59BPJyFyAXYrXFk/O7BMIhaak1
+         IqtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1713348305; x=1713953105;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KHB/UxAL8E3rbDnKIaIo6e50EVsTREcWNgCcpnb5Lfw=;
+        b=Ql75SgEf0D4pzFi46KpleEPd/ZGss1BA2R+coV87L7jey4Kl6j5a9OSQJkR1ZSeCR9
+         WFiwVGH7MdOLG43HbJSPjxB+19O4JHYSO6BRX2Je+yA1xR2dxc/rxo2lHDrpljhPL9Kb
+         V2KKh1bI9ypycUyJkbg0FrWgeoA4H0i3V/iEYjXlFKyvgoC9J/R9nQBjzlVtzwFTkXAW
+         vG8AOZqnhXYQtTRLBkyUVxQHjK+yLesVwbECy+cVjgzrgYVoNL2A6InH9kTc7Cd2w9CL
+         3fJXZoY/x4QvT6xhQFz6l+3ALU6cHfmcZsUg0FglsO7f5iJ1RnuCc0zWi07dfUJg8f/x
+         n5vQ==
+X-Gm-Message-State: AOJu0YxmxRtd7PGXOr06c0G5S6TmjnsVqxHb6hurvs0pL752F0neli43
+	iPcOcBhQO/KDXXZ4XVVMtnDZ+3KVUY9HVgAml3N1Ka2QpIAkjCSOuJW/PQ==
+X-Google-Smtp-Source: AGHT+IFkdm2DmO95vHJ2guYJdPUzTlp6oK0crDh5h01xJ4X5iT+HQ0vhGbj+Fm6QSrgHzq+jSd5yvQ==
+X-Received: by 2002:a05:6512:33cb:b0:518:d079:ffd9 with SMTP id d11-20020a05651233cb00b00518d079ffd9mr9099302lfg.13.1713348304889;
+        Wed, 17 Apr 2024 03:05:04 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v8 01/17] xen/riscv: disable unnecessary configs
+Date: Wed, 17 Apr 2024 12:04:44 +0200
+Message-ID: <267bb71ebeeafde25284eff82408effebba4380b.1713347222.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <cover.1713347222.git.oleksii.kurochko@gmail.com>
+References: <cover.1713347222.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs: arm: Update where Xen should be loaded in memory
-Content-Language: en-GB
-To: Luca Fancellu <Luca.Fancellu@arm.com>, Michal Orzel <michal.orzel@amd.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20240412061624.3441-1-michal.orzel@amd.com>
- <486125C0-3DB3-4A64-8B6F-8BA8A55EC1CB@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <486125C0-3DB3-4A64-8B6F-8BA8A55EC1CB@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Disables unnecessary configs for two cases:
+1. By utilizing EXTRA_FIXED_RANDCONFIG for randconfig builds (GitLab CI jobs).
+2. By using tiny64_defconfig for non-randconfig builds.
 
-On 12/04/2024 07:41, Luca Fancellu wrote:
-> 
-> 
->> On 12 Apr 2024, at 07:16, Michal Orzel <michal.orzel@amd.com> wrote:
->>
->> Since commit 6cd046c501bc ("xen/arm: Enlarge identity map space to 10TB")
->> Xen can be loaded below 10 TiB. Update docs accordingly.
->>
->> Take the opportunity to update stale links to Linux docs.
->>
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
->> ---
-> 
-> Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Only configs which lead to compilation issues were disabled.
 
-Committed. Thanks!
+Remove lines related to disablement of configs which aren't affected
+compilation:
+ -# CONFIG_SCHED_CREDIT is not set
+ -# CONFIG_SCHED_RTDS is not set
+ -# CONFIG_SCHED_NULL is not set
+ -# CONFIG_SCHED_ARINC653 is not set
+ -# CONFIG_TRACEBUFFER is not set
+ -# CONFIG_HYPFS is not set
+ -# CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
 
-Cheers,
+To allow CONFIG_ARGO build happy it was included <asm/p2m.h> to <asm/domain.h>
+as ARGO requires p2m_type_t ( p2m_ram_rw ) and declaration of
+check_get_page_from_gfn() from xen/p2m-common.h.
 
+Also, it was included <xen/errno.h> to asm/p2m.h as after the latter was
+included to <asm/domain.h> the compilation error that EINVAL, EOPNOTSUPP
+aren't declared started to occur.
+
+CONFIG_XSM=n as it requires an introduction of:
+* boot_module_find_by_kind()
+* BOOTMOD_XSM
+* struct bootmodule
+* copy_from_paddr()
+The mentioned things aren't introduced now.
+
+CPU_BOOT_TIME_CPUPOOLS requires an introduction of cpu_physical_id() and
+acpi_disabled, so it is disabled for now.
+
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V8:
+ - disabled CPU_BOOT_TIME_CPUPOOLS as it requires an introduction of cpu_physical_id() and acpi_disabled.
+ - leave XSM disabled, add explanation in the commit message.
+ - drop HYPFS as the patch was provided to resolve compilation issue when this condif is enabled for RISC-V.
+ - include asm/p2m.h to asm/domain.h, and xen/errno.h to asm/p2m.h to drop ARGO config from
+   tiny64_defconfing and build.yaml.
+ - update the commit message.
+---
+Changes in V7:
+ - Disable only configs which cause compilation issues.
+ - Update the commit message.
+---
+Changes in V6:
+ - Nothing changed. Only rebase.
+---
+Changes in V5:
+ - Rebase and drop duplicated configs in EXTRA_FIXED_RANDCONFIG list
+ - Update the commit message
+---
+Changes in V4:
+ - Nothing changed. Only rebase
+---
+Changes in V3:
+ - Remove EXTRA_FIXED_RANDCONFIG for non-randconfig jobs.
+   For non-randconfig jobs, it is sufficient to disable configs by using the defconfig.
+ - Remove double blank lines in build.yaml file before archlinux-current-gcc-riscv64-debug
+---
+Changes in V2:
+ - update the commit message.
+ - remove xen/arch/riscv/Kconfig changes.
+---
+ automation/gitlab-ci/build.yaml         |  4 ++++
+ xen/arch/riscv/configs/tiny64_defconfig | 12 +++++-------
+ xen/arch/riscv/include/asm/domain.h     |  2 ++
+ xen/arch/riscv/include/asm/p2m.h        |  2 ++
+ 4 files changed, 13 insertions(+), 7 deletions(-)
+
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index aac29ee13a..a1dce6cefd 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -515,10 +515,14 @@ alpine-3.18-gcc-debug-arm64-boot-cpupools:
+ .riscv-fixed-randconfig:
+   variables: &riscv-fixed-randconfig
+     EXTRA_FIXED_RANDCONFIG: |
++      CONFIG_BOOT_TIME_CPUPOOLS=n
+       CONFIG_COVERAGE=n
+       CONFIG_EXPERT=y
+       CONFIG_GRANT_TABLE=n
+       CONFIG_MEM_ACCESS=n
++      CONFIG_PERF_COUNTERS=n
++      CONFIG_LIVEPATCH=n
++      CONFIG_XSM=n
+ 
+ archlinux-current-gcc-riscv64:
+   extends: .gcc-riscv64-cross-build
+diff --git a/xen/arch/riscv/configs/tiny64_defconfig b/xen/arch/riscv/configs/tiny64_defconfig
+index 09defe236b..fc7a04872f 100644
+--- a/xen/arch/riscv/configs/tiny64_defconfig
++++ b/xen/arch/riscv/configs/tiny64_defconfig
+@@ -1,12 +1,10 @@
+-# CONFIG_SCHED_CREDIT is not set
+-# CONFIG_SCHED_RTDS is not set
+-# CONFIG_SCHED_NULL is not set
+-# CONFIG_SCHED_ARINC653 is not set
+-# CONFIG_TRACEBUFFER is not set
+-# CONFIG_HYPFS is not set
++# CONFIG_BOOT_TIME_CPUPOOLS is not set
+ # CONFIG_GRANT_TABLE is not set
+-# CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
+ # CONFIG_MEM_ACCESS is not set
++# CONFIG_PERF_COUNTERS is not set
++# CONFIG_COVERAGE is not set
++# CONFIG_LIVEPATCH is not set
++# CONFIG_XSM is not set
+ 
+ CONFIG_RISCV_64=y
+ CONFIG_DEBUG=y
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 027bfa8a93..16a9dd57aa 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -5,6 +5,8 @@
+ #include <xen/xmalloc.h>
+ #include <public/hvm/params.h>
+ 
++#include <asm/p2m.h>
++
+ struct hvm_domain
+ {
+     uint64_t              params[HVM_NR_PARAMS];
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index 87b13f8979..aa86fa10a7 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -2,6 +2,8 @@
+ #ifndef __ASM_RISCV_P2M_H__
+ #define __ASM_RISCV_P2M_H__
+ 
++#include <xen/errno.h>
++
+ #include <asm/page-bits.h>
+ 
+ #define paddr_bits PADDR_BITS
 -- 
-Julien Grall
+2.44.0
+
 
