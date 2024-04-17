@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D3CEC4345F
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Apr 2024 12:08:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.707420.1105305 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC5DCC04FFE
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Apr 2024 12:08:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.707425.1105355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rx45Q-0006LS-Ue; Wed, 17 Apr 2024 12:08:24 +0000
+	id 1rx45Y-0007aX-E1; Wed, 17 Apr 2024 12:08:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 707420.1105305; Wed, 17 Apr 2024 12:08:24 +0000
+Received: by outflank-mailman (output) from mailman id 707425.1105355; Wed, 17 Apr 2024 12:08:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rx45Q-0006LL-Ru; Wed, 17 Apr 2024 12:08:24 +0000
-Received: by outflank-mailman (input) for mailman id 707420;
- Wed, 17 Apr 2024 12:08:23 +0000
+	id 1rx45Y-0007aK-9f; Wed, 17 Apr 2024 12:08:32 +0000
+Received: by outflank-mailman (input) for mailman id 707425;
+ Wed, 17 Apr 2024 12:08:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bxKY=LW=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1rx45P-0006LA-Dy
- for xen-devel@lists.xenproject.org; Wed, 17 Apr 2024 12:08:23 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
+ id 1rx45X-0006LA-3G
+ for xen-devel@lists.xenproject.org; Wed, 17 Apr 2024 12:08:31 +0000
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [2a00:1450:4864:20::633])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2f9aed7f-fcb3-11ee-b909-491648fe20b8;
- Wed, 17 Apr 2024 14:08:22 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a4702457ccbso687152266b.3
- for <xen-devel@lists.xenproject.org>; Wed, 17 Apr 2024 05:08:22 -0700 (PDT)
+ id 3452679e-fcb3-11ee-b909-491648fe20b8;
+ Wed, 17 Apr 2024 14:08:30 +0200 (CEST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a52223e004dso617539066b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 17 Apr 2024 05:08:30 -0700 (PDT)
 Received: from EPUAKYIW03DD.epam.com (ll-22.209.223.85.sovam.net.ua.
  [85.223.209.22]) by smtp.gmail.com with ESMTPSA id
- zh17-20020a170906881100b00a5271ae4458sm3484247ejb.16.2024.04.17.05.08.20
+ zh17-20020a170906881100b00a5271ae4458sm3484247ejb.16.2024.04.17.05.08.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Apr 2024 05:08:20 -0700 (PDT)
+ Wed, 17 Apr 2024 05:08:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,66 +47,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f9aed7f-fcb3-11ee-b909-491648fe20b8
+X-Inumbo-ID: 3452679e-fcb3-11ee-b909-491648fe20b8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713355701; x=1713960501; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Sj+H5vwl0pa2TUiDvvfE1wpuZQMEDkB+YDup88Wnsdk=;
-        b=LkfKqBhnJcoFi3x2CCHT9Ov0+uCAxysu/ogL0P8lHOU7IpXssbyQkYOhlc8LEZN5lZ
-         vCRhmMrDWtilW2FTiVOEnIMJF6j2QuXN61laoOqlNGMxCtv9osfg548wd/Iq3H0pc7zv
-         atsFC+cc7gXs2mL2wUmRMJqr7rBGSxZrz3IrPP+/3IXvPhXjzoOJhE0V6wQrE/aOJ7KX
-         yE3cqk0dCfpmUK4e1239/rm5BbckJAkUt05PjxYNl549a7m6e6tcthEAh+8WNrZA3k11
-         D0AbP6CBqKgjdfSGPkQhtAbJE+mRpVwv+qcWfHY0+Y9vt8dVl9RWDYEr018LX2B2D5oQ
-         yIoA==
+        d=gmail.com; s=20230601; t=1713355709; x=1713960509; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=c1Qabi3jNJegdKhnBiMWi1ZQl9X7iHb1l6tidFGT/F0=;
+        b=EZvGXeOxLdAD4ASsid4T0Qs7PTssveJ3AIXqqSVcEdup8i0RFLL/x+/qDYXV0YulvU
+         dPW+U4p3WqSbYyZTREOxsiRdAirlTPDnCu52v74pnzZeioKdhTrPx/ymESUI+Og5M0DA
+         wAxAAKsxYnYnb9TFYifPhad01jkQLnmIZ/cYtNueYcf0oM+Y40202tfZHaAF+2mcm3kU
+         RMghTRBGvxSUE9UzLZZcB9EscRU+00N91H8HHGYHs231kHoWHonedq+HK30ayCNgT2kh
+         eK3SMP760GRP5L1i5reYTCBqYFN9vJ4FAX82mIPG3U/10pu2k4jZGs31r6QmJ9cn0g4N
+         a5Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713355701; x=1713960501;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Sj+H5vwl0pa2TUiDvvfE1wpuZQMEDkB+YDup88Wnsdk=;
-        b=l2qJQJ2pjnLdChQKSTP+GCU6ks3x+VdGP9IUQxOMa48/QRbAHr1TKKsPaEcrPReCaP
-         uTksG7vqjk7Av79UIUd99AJpCfltOx3bFBlbuWgft/OhBksjwLDW9IIoKMfyenDr+s1m
-         lUAnPVYsKYOvoA6+zMnvLLpaoo9VzRY+rGjEVFvL1Qzxz8Cvbr7TbJbK4iOKRv7HwjS7
-         VT073YwBP8XtvFnyZ6OEmpZ0lWalopCEjdFhAZavmd6sOmEoEKK1K3oOULfRQOcGdSHr
-         h5y7uWgpPoXeChTwRyA/4AmSRbjrAyZ4dDBWS974TbP0jshk+SFlKQCp2+7ZUEQa+Dzo
-         1vZQ==
-X-Gm-Message-State: AOJu0Yx396jLroX7cFiRkgwDoa+9RJMxLymm1Az1LZOLoqBMt9lEwBGt
-	cQQFR/xP8U0TL3hpj7AbsgqBetEbSZtt7neKL2QnceWevfcY14LNcMCQcg==
-X-Google-Smtp-Source: AGHT+IHgvlBgq5xAW5g3CzrY4Kb1gOyYSbmbIn43vzPE+6X3QJNTdS3x4+orfc8sNBIf55qB5NM1AA==
-X-Received: by 2002:a17:906:b0a:b0:a52:5125:9723 with SMTP id u10-20020a1709060b0a00b00a5251259723mr6772454ejg.71.1713355701097;
-        Wed, 17 Apr 2024 05:08:21 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1713355709; x=1713960509;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=c1Qabi3jNJegdKhnBiMWi1ZQl9X7iHb1l6tidFGT/F0=;
+        b=iEpOqRLD1oY2+1ldYDFe6mYJop+73rb0XyFChODmemrDNpGYWwq+ku/uTf35x1/0SI
+         M3+YAcapnbNWSv3X0Wno0Vvw9mkTJkZEHPNL9IRL42blvxxRyDARxyIA7KLJvu2Ze3i4
+         KBmr6/qlhIrBFVJs8zo2d1bbDPvT2e3xUe9LMgKR+6mlGycKsDlbdk0uRwyG+f0J6g2C
+         RVJC5s6eNTxFEB/ai3QVR2GCMY4UeeEJA8g1/VosujlCcVdGd9eZA5f5XQSd7vWOD7pV
+         f09Hy+bSb51REYZPnwmAqkBe4lslWjRzKEkMOpA0ZBoTu4QvBFc4s8yfLW65QZwnhr2Z
+         na3A==
+X-Gm-Message-State: AOJu0YylbE/woQcNWTi/RhAVqgtOtTp4yyMoPXF+E9ADE9PB0TGg8Pd4
+	RqnhMkPEjRajw4uGPA2V1EwaOfbmorQi+/jLQMga1RFazwmCGQc7pGIhfA==
+X-Google-Smtp-Source: AGHT+IHb8Vq/IOF6xICYfryAxfUddkwrB/+/DKcfazmmPzBN+SIvkYWlOPrfo0HJ92AWkgZcLafwVA==
+X-Received: by 2002:a17:907:86ab:b0:a52:51bb:5f with SMTP id qa43-20020a17090786ab00b00a5251bb005fmr12084368ejc.9.1713355709404;
+        Wed, 17 Apr 2024 05:08:29 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Stefano Stabellini <stefano.stabellini@amd.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [ImageBuilder 0/5] Misc updates for the dom0less support
-Date: Wed, 17 Apr 2024 15:07:36 +0300
-Message-Id: <20240417120741.2453431-1-olekstysh@gmail.com>
+Subject: [ImageBuilder 5/5] uboot-script-gen: Add ability to specify "nr_spis"
+Date: Wed, 17 Apr 2024 15:07:41 +0300
+Message-Id: <20240417120741.2453431-6-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240417120741.2453431-1-olekstysh@gmail.com>
+References: <20240417120741.2453431-1-olekstysh@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Hello all,
+This is needed to have a possibility of assigning a specified number
+of shared peripheral interrupts (SPIs) to domain.
 
-this is a collection of patches (#2-5) for improving the dom0less support
-and a patch (#1) for dealing with uImage.  
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+---
+ README.md                | 5 +++++
+ scripts/uboot-script-gen | 4 ++++
+ 2 files changed, 9 insertions(+)
 
-Oleksandr Tyshchenko (5):
-  uboot-script-gen: Update to deal with uImage which is not executable
-  uboot-script-gen: Extend DOMU_ENHANCED to specify "no-xenstore"
-  uboot-script-gen: Add ability to specify grant table params
-  uboot-script-gen: Add ability to unselect "vpl011"
-  uboot-script-gen: Add ability to specify "nr_spis"
-
- README.md                | 29 +++++++++++++++++++++++++----
- scripts/uboot-script-gen | 35 +++++++++++++++++++++++++++++------
- 2 files changed, 54 insertions(+), 10 deletions(-)
-
+diff --git a/README.md b/README.md
+index 63c4708..7683492 100644
+--- a/README.md
++++ b/README.md
+@@ -237,6 +237,11 @@ Where:
+   PL011 UART for domain. The default is 1. If explicitly set to 0, then
+   "console=ttyAMA0" is not used as a default DOMU_CMD[number].
+ 
++- DOMU_NR_SPIS[number] is optional. It specifies a number of shared peripheral
++  interrupts (SPIs) to be assigned to domain (depending on the underlying
++  hardware platform). The minimum possible value is 0, if DOMU_VPL011[number]
++  is also explicitly set to 0. Otherwise the minimum value is 1.
++
+ - DOMU_CPUPOOL[number] specifies the id of the cpupool (created using
+   CPUPOOL[number] option, where number == id) that will be assigned to domU.
+ 
+diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
+index fd37e18..50b6a59 100755
+--- a/scripts/uboot-script-gen
++++ b/scripts/uboot-script-gen
+@@ -348,6 +348,10 @@ function xen_device_tree_editing()
+         then
+             dt_set "/chosen/domU$i" "vpl011" "hex" "0x1"
+         fi
++        if test -n "${DOMU_NR_SPIS[$i]}"
++        then
++            dt_set "/chosen/domU$i" "nr_spis" "int" "${DOMU_NR_SPIS[$i]}"
++        fi
+         if [[ "${DOMU_ENHANCED[$i]}" == 1 || ("$DOM0_KERNEL" && "${DOMU_ENHANCED[$i]}" != 0) ]]
+         then
+             dt_set "/chosen/domU$i" "xen,enhanced" "str" "enabled"
 -- 
 2.34.1
 
