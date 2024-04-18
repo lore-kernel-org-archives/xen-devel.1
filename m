@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56F8FC04FFE
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2024 07:37:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.708013.1106555 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80073C4345F
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2024 07:37:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.708015.1106570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxMKT-0004qw-Rt; Thu, 18 Apr 2024 07:37:09 +0000
+	id 1rxMKW-0005CA-Ep; Thu, 18 Apr 2024 07:37:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 708013.1106555; Thu, 18 Apr 2024 07:37:09 +0000
+Received: by outflank-mailman (output) from mailman id 708015.1106570; Thu, 18 Apr 2024 07:37:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxMKT-0004qi-Ox; Thu, 18 Apr 2024 07:37:09 +0000
-Received: by outflank-mailman (input) for mailman id 708013;
- Thu, 18 Apr 2024 07:37:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rxMKW-0005B7-98; Thu, 18 Apr 2024 07:37:12 +0000
+Received: by outflank-mailman (input) for mailman id 708015;
+ Thu, 18 Apr 2024 07:37:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EyP4=LX=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1rxMKS-00046V-E9
- for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 07:37:08 +0000
+ id 1rxMKV-00057l-Gq
+ for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 07:37:11 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 74634cd5-fd56-11ee-94a3-07e782e9044d;
- Thu, 18 Apr 2024 09:37:05 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 7723327f-fd56-11ee-b909-491648fe20b8;
+ Thu, 18 Apr 2024 09:37:10 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 93C08339;
- Thu, 18 Apr 2024 00:37:33 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B6A791576;
+ Thu, 18 Apr 2024 00:37:37 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E51DC3F64C;
- Thu, 18 Apr 2024 00:37:04 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 141503F64C;
+ Thu, 18 Apr 2024 00:37:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 74634cd5-fd56-11ee-94a3-07e782e9044d
+X-Inumbo-ID: 7723327f-fd56-11ee-b909-491648fe20b8
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,134 +52,119 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 03/12] xen/arm: Pass struct kernel_info parameter to make_{resv,shm}_memory_node
-Date: Thu, 18 Apr 2024 08:36:43 +0100
-Message-Id: <20240418073652.3622828-4-luca.fancellu@arm.com>
+Subject: [PATCH v3 06/12] xen/arm: Avoid code duplication in find_unallocated_memory
+Date: Thu, 18 Apr 2024 08:36:46 +0100
+Message-Id: <20240418073652.3622828-7-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240418073652.3622828-1-luca.fancellu@arm.com>
 References: <20240418073652.3622828-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The struct domain parameter is not used in make_resv_memory_node and in
-its called function make_shm_memory_node, so drop it from both functions,
-also, take the occasion to pass directly struct kernel_info, from which
-we can infer other parameters passed to the functions and drop them as
-well.
+The function find_unallocated_memory is using the same code to
+loop through 2 structure of the same type, in order to avoid
+code duplication, rework the code to have only one loop that
+goes through all the structures, this will be used to avoid
+duplication when the static shared memory banks will be introduced
+as a separate structure from reserved memory.
+
+Take the occasion to add the error code to the error message in
+case 'rangeset_remove_range' fails.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 v3:
- - Fix commit title/msg, add Michal R-by
+ - Fixed the wrong logic, now the function correctly adds the
+   available ram to the rangeset and afterwards removes the
+   Dom0 memory and reserved memory from it.
+ - take the occasion to print the error code in the error
+   message as explained in the commit msg.
 v2:
+ - Add comment in the loop inside find_unallocated_memory to
+   improve readability
+v1:
  - new patch
 ---
 ---
- xen/arch/arm/dom0less-build.c           |  3 +--
- xen/arch/arm/domain_build.c             |  3 +--
- xen/arch/arm/include/asm/static-shmem.h |  9 ++++-----
- xen/arch/arm/static-shmem.c             | 16 +++++++++-------
- 4 files changed, 15 insertions(+), 16 deletions(-)
+ xen/arch/arm/domain_build.c | 53 ++++++++++++++++---------------------
+ 1 file changed, 23 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index fb63ec6fd111..0edc5357caef 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -645,8 +645,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     if ( ret )
-         goto err;
- 
--    ret = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
--                                &kinfo->shm_mem);
-+    ret = make_resv_memory_node(kinfo, addrcells, sizecells);
-     if ( ret )
-         goto err;
- 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 54232ed4cb9d..11d4e7d0b1ea 100644
+index 02e4dcafe78f..7c7038254473 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -1769,8 +1769,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
-                 return res;
+@@ -868,12 +868,14 @@ static int __init add_ext_regions(unsigned long s_gfn, unsigned long e_gfn,
+ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
+                                           struct membanks *ext_regions)
+ {
+-    const struct membanks *kinfo_mem = kernel_info_get_mem(kinfo);
+     const struct membanks *mem = bootinfo_get_mem();
+-    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
++    const struct membanks *mem_banks[] = {
++        kernel_info_get_mem(kinfo),
++        bootinfo_get_reserved_mem(),
++    };
+     struct rangeset *unalloc_mem;
+     paddr_t start, end;
+-    unsigned int i;
++    unsigned int i, j;
+     int res;
+ 
+     dt_dprintk("Find unallocated memory for extended regions\n");
+@@ -897,35 +899,26 @@ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
          }
- 
--        res = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
--                                    &kinfo->shm_mem);
-+        res = make_resv_memory_node(kinfo, addrcells, sizecells);
-         if ( res )
-             return res;
      }
-diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
-index 1536ff18b895..680594b6843d 100644
---- a/xen/arch/arm/include/asm/static-shmem.h
-+++ b/xen/arch/arm/include/asm/static-shmem.h
-@@ -7,8 +7,8 @@
  
- #ifdef CONFIG_STATIC_SHM
+-    /* Remove RAM assigned to Dom0 */
+-    for ( i = 0; i < kinfo_mem->nr_banks; i++ )
+-    {
+-        start = kinfo_mem->bank[i].start;
+-        end = kinfo_mem->bank[i].start + kinfo_mem->bank[i].size;
+-        res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
+-                                    PFN_DOWN(end - 1));
+-        if ( res )
+-        {
+-            printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
+-                   start, end);
+-            goto out;
+-        }
+-    }
+-
+-    /* Remove reserved-memory regions */
+-    for ( i = 0; i < reserved_mem->nr_banks; i++ )
+-    {
+-        start = reserved_mem->bank[i].start;
+-        end = reserved_mem->bank[i].start + reserved_mem->bank[i].size;
+-        res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
+-                                    PFN_DOWN(end - 1));
+-        if ( res )
++    /*
++     * Exclude the following regions:
++     * 1) Remove RAM assigned to Dom0
++     * 2) Remove reserved memory
++     */
++    for ( i = 0; i < ARRAY_SIZE(mem_banks); i++ )
++        for ( j = 0; j < mem_banks[i]->nr_banks; j++ )
+         {
+-            printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
+-                   start, end);
+-            goto out;
++            start = mem_banks[i]->bank[j].start;
++            end = mem_banks[i]->bank[j].start + mem_banks[i]->bank[j].size;
++            res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
++                                        PFN_DOWN(end - 1));
++            if ( res )
++            {
++                printk(XENLOG_ERR
++                       "Failed to add: %#"PRIpaddr"->%#"PRIpaddr", error %d\n",
++                       start, end, res);
++                goto out;
++            }
+         }
+-    }
  
--int make_resv_memory_node(const struct domain *d, void *fdt, int addrcells,
--                          int sizecells, const struct meminfo *mem);
-+int make_resv_memory_node(const struct kernel_info *kinfo, int addrcells,
-+                          int sizecells);
- 
- int process_shm(struct domain *d, struct kernel_info *kinfo,
-                 const struct dt_device_node *node);
-@@ -26,9 +26,8 @@ int process_shm_node(const void *fdt, int node, uint32_t address_cells,
- 
- #else /* !CONFIG_STATIC_SHM */
- 
--static inline int make_resv_memory_node(const struct domain *d, void *fdt,
--                                        int addrcells, int sizecells,
--                                        const struct meminfo *mem)
-+static inline int make_resv_memory_node(const struct kernel_info *kinfo,
-+                                        int addrcells, int sizecells)
- {
-     return 0;
- }
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-index 40a0e860c79d..349b85667684 100644
---- a/xen/arch/arm/static-shmem.c
-+++ b/xen/arch/arm/static-shmem.c
-@@ -277,10 +277,11 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-     return 0;
- }
- 
--static int __init make_shm_memory_node(const struct domain *d, void *fdt,
--                                       int addrcells, int sizecells,
--                                       const struct meminfo *mem)
-+static int __init make_shm_memory_node(const struct kernel_info *kinfo,
-+                                       int addrcells, int sizecells)
- {
-+    const struct meminfo *mem = &kinfo->shm_mem;
-+    void *fdt = kinfo->fdt;
-     unsigned int i = 0;
-     int res = 0;
- 
-@@ -488,10 +489,11 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-     return 0;
- }
- 
--int __init make_resv_memory_node(const struct domain *d, void *fdt,
--                                 int addrcells, int sizecells,
--                                 const struct meminfo *mem)
-+int __init make_resv_memory_node(const struct kernel_info *kinfo, int addrcells,
-+                                 int sizecells)
- {
-+    const struct meminfo *mem = &kinfo->shm_mem;
-+    void *fdt = kinfo->fdt;
-     int res = 0;
-     /* Placeholder for reserved-memory\0 */
-     const char resvbuf[16] = "reserved-memory";
-@@ -518,7 +520,7 @@ int __init make_resv_memory_node(const struct domain *d, void *fdt,
-     if ( res )
-         return res;
- 
--    res = make_shm_memory_node(d, fdt, addrcells, sizecells, mem);
-+    res = make_shm_memory_node(kinfo, addrcells, sizecells);
-     if ( res )
-         return res;
- 
+     /* Remove grant table region */
+     if ( kinfo->gnttab_size )
 -- 
 2.34.1
 
