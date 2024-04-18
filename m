@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A242C4345F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F883C04FF8
 	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2024 07:37:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.708010.1106524 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.708012.1106545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxMKQ-00046t-02; Thu, 18 Apr 2024 07:37:06 +0000
+	id 1rxMKS-0004al-EK; Thu, 18 Apr 2024 07:37:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 708010.1106524; Thu, 18 Apr 2024 07:37:05 +0000
+Received: by outflank-mailman (output) from mailman id 708012.1106545; Thu, 18 Apr 2024 07:37:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxMKP-00046i-Th; Thu, 18 Apr 2024 07:37:05 +0000
-Received: by outflank-mailman (input) for mailman id 708010;
- Thu, 18 Apr 2024 07:37:05 +0000
+	id 1rxMKS-0004aa-B6; Thu, 18 Apr 2024 07:37:08 +0000
+Received: by outflank-mailman (input) for mailman id 708012;
+ Thu, 18 Apr 2024 07:37:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EyP4=LX=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1rxMKP-00046V-7O
- for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 07:37:05 +0000
+ id 1rxMKR-00046V-2u
+ for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 07:37:07 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 71c87898-fd56-11ee-94a3-07e782e9044d;
- Thu, 18 Apr 2024 09:37:02 +0200 (CEST)
+ id 73a43654-fd56-11ee-94a3-07e782e9044d;
+ Thu, 18 Apr 2024 09:37:04 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34D7A339;
- Thu, 18 Apr 2024 00:37:29 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4CC021576;
+ Thu, 18 Apr 2024 00:37:32 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 849D63F64C;
- Thu, 18 Apr 2024 00:37:00 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5F1313F64C;
+ Thu, 18 Apr 2024 00:37:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,78 +44,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71c87898-fd56-11ee-94a3-07e782e9044d
+X-Inumbo-ID: 73a43654-fd56-11ee-94a3-07e782e9044d
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 00/12] Static shared memory followup v2 - pt1
-Date: Thu, 18 Apr 2024 08:36:40 +0100
-Message-Id: <20240418073652.3622828-1-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH v3 02/12] xen/arm: avoid repetitive checking in process_shm_node
+Date: Thu, 18 Apr 2024 08:36:42 +0100
+Message-Id: <20240418073652.3622828-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240418073652.3622828-1-luca.fancellu@arm.com>
+References: <20240418073652.3622828-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This serie is a partial rework of this other serie:
-https://patchwork.kernel.org/project/xen-devel/cover/20231206090623.1932275-1-Penny.Zheng@arm.com/
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-The original serie is addressing an issue of the static shared memory feature
-that impacts the memory footprint of other component when the feature is
-enabled, another issue impacts the device tree generation for the guests when
-the feature is enabled and used and the last one is a missing feature that is
-the option to have a static shared memory region that is not from the host
-address space.
+Putting overlap and overflow checking in the loop is causing repetitive
+operation, so this commit extracts both checking outside the loop.
 
-This serie is handling some comment on the original serie and it is splitting
-the rework in two part, this first part is addressing the memory footprint issue
-and the device tree generation, there will be a following serie addressing the
-last missing feature soon.
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+v2:
+ - add Michal R-by
+v1:
+ - Rework of https://patchwork.kernel.org/project/xen-devel/patch/20231206090623.1932275-3-Penny.Zheng@arm.com/
+ - use strncmp to match the branch above
+ - drop Michal R-by given the change
+---
+---
+ xen/arch/arm/static-shmem.c | 39 +++++++++++++++----------------------
+ 1 file changed, 16 insertions(+), 23 deletions(-)
 
-From v2:
- - Removed merging of the /memory interval
-
-From v1:
- - Add new patches, moved the patch related to the static memory helper.
-
-Luca Fancellu (8):
-  xen/arm: Pass struct kernel_info parameter to
-    make_{resv,shm}_memory_node
-  xen/arm: Introduce a generic way to access memory bank structures
-  xen/arm: Conditional compilation of kernel_info.shm_mem member
-  xen/arm: Avoid code duplication in find_unallocated_memory
-  xen/arm: Avoid code duplication in check_reserved_regions_overlap
-  xen/arm: Introduce helper for static memory pages
-  xen/arm: Reduce struct membank size on static shared memory
-  xen/arm: List static shared memory regions as /memory nodes
-
-Penny Zheng (4):
-  xen/arm: remove stale addr_cells/size_cells in assign_shared_memory
-  xen/arm: avoid repetitive checking in process_shm_node
-  xen/arm: remove shm holes from extended regions
-  xen/arm: fix duplicate /reserved-memory node in Dom0
-
- xen/arch/arm/acpi/domain_build.c         |   6 +-
- xen/arch/arm/arm32/mmu/mm.c              |  68 ++++--
- xen/arch/arm/arm64/mmu/mm.c              |   4 +-
- xen/arch/arm/bootfdt.c                   |  40 ++--
- xen/arch/arm/dom0less-build.c            |  19 +-
- xen/arch/arm/domain_build.c              | 213 ++++++++++--------
- xen/arch/arm/efi/efi-boot.h              |   8 +-
- xen/arch/arm/efi/efi-dom0.c              |  13 +-
- xen/arch/arm/include/asm/domain_build.h  |   6 +-
- xen/arch/arm/include/asm/kernel.h        |  18 +-
- xen/arch/arm/include/asm/setup.h         |  81 ++++++-
- xen/arch/arm/include/asm/static-memory.h |  13 ++
- xen/arch/arm/include/asm/static-shmem.h  |  59 ++++-
- xen/arch/arm/kernel.c                    |  12 +-
- xen/arch/arm/setup.c                     |  97 ++++++---
- xen/arch/arm/static-memory.c             |  35 ++-
- xen/arch/arm/static-shmem.c              | 263 ++++++++++++++++++-----
- 17 files changed, 689 insertions(+), 266 deletions(-)
-
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index cb268cd2edf1..40a0e860c79d 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -349,7 +349,7 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+ {
+     const struct fdt_property *prop, *prop_id, *prop_role;
+     const __be32 *cell;
+-    paddr_t paddr, gaddr, size;
++    paddr_t paddr, gaddr, size, end;
+     struct meminfo *mem = &bootinfo.reserved_mem;
+     unsigned int i;
+     int len;
+@@ -422,6 +422,13 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+         return -EINVAL;
+     }
+ 
++    end = paddr + size;
++    if ( end <= paddr )
++    {
++        printk("fdt: static shared memory region %s overflow\n", shm_id);
++        return -EINVAL;
++    }
++
+     for ( i = 0; i < mem->nr_banks; i++ )
+     {
+         /*
+@@ -441,30 +448,13 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+                 return -EINVAL;
+             }
+         }
++        else if ( strncmp(shm_id, mem->bank[i].shm_id, MAX_SHM_ID_LENGTH) != 0 )
++            continue;
+         else
+         {
+-            paddr_t end = paddr + size;
+-            paddr_t bank_end = mem->bank[i].start + mem->bank[i].size;
+-
+-            if ( (end <= paddr) || (bank_end <= mem->bank[i].start) )
+-            {
+-                printk("fdt: static shared memory region %s overflow\n", shm_id);
+-                return -EINVAL;
+-            }
+-
+-            if ( check_reserved_regions_overlap(paddr, size) )
+-                return -EINVAL;
+-            else
+-            {
+-                if ( strcmp(shm_id, mem->bank[i].shm_id) != 0 )
+-                    continue;
+-                else
+-                {
+-                    printk("fdt: different shared memory region could not share the same shm ID %s\n",
+-                           shm_id);
+-                    return -EINVAL;
+-                }
+-            }
++            printk("fdt: different shared memory region could not share the same shm ID %s\n",
++                   shm_id);
++            return -EINVAL;
+         }
+     }
+ 
+@@ -472,6 +462,9 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+     {
+         if ( i < NR_MEM_BANKS )
+         {
++            if ( check_reserved_regions_overlap(paddr, size) )
++                return -EINVAL;
++
+             /* Static shared memory shall be reserved from any other use. */
+             safe_strcpy(mem->bank[mem->nr_banks].shm_id, shm_id);
+             mem->bank[mem->nr_banks].start = paddr;
 -- 
 2.34.1
 
