@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E2DC04FFE
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2024 15:44:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.708486.1107437 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 105D9C04FF8
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2024 15:53:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.708494.1107456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxTvY-0001zL-MC; Thu, 18 Apr 2024 15:43:56 +0000
+	id 1rxU4D-0004Ms-RK; Thu, 18 Apr 2024 15:52:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 708486.1107437; Thu, 18 Apr 2024 15:43:56 +0000
+Received: by outflank-mailman (output) from mailman id 708494.1107456; Thu, 18 Apr 2024 15:52:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxTvY-0001zE-Ij; Thu, 18 Apr 2024 15:43:56 +0000
-Received: by outflank-mailman (input) for mailman id 708486;
- Thu, 18 Apr 2024 15:43:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rxU4D-0004Ml-OU; Thu, 18 Apr 2024 15:52:53 +0000
+Received: by outflank-mailman (input) for mailman id 708494;
+ Thu, 18 Apr 2024 15:52:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DNVj=LX=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1rxTvW-0001xq-Qr
- for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 15:43:54 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7588358b-fd9a-11ee-b909-491648fe20b8;
- Thu, 18 Apr 2024 17:43:53 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a53f131d9deso112535366b.3
- for <xen-devel@lists.xenproject.org>; Thu, 18 Apr 2024 08:43:53 -0700 (PDT)
-Received: from [192.168.0.107] ([91.123.150.5])
- by smtp.gmail.com with ESMTPSA id
- c19-20020a170906155300b00a526a99ccecsm1047891ejd.42.2024.04.18.08.43.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 08:43:52 -0700 (PDT)
+ <SRS0=0X1s=LX=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1rxU4C-0004M8-Ru
+ for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 15:52:52 +0000
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [2607:f8b0:4864:20::732])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b57c07c8-fd9b-11ee-94a3-07e782e9044d;
+ Thu, 18 Apr 2024 17:52:50 +0200 (CEST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-78f049ddd7dso66867885a.1
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Apr 2024 08:52:50 -0700 (PDT)
+Received: from localhost ([85.31.135.62]) by smtp.gmail.com with ESMTPSA id
+ z16-20020a0cda90000000b0069b0c9a81b5sm739013qvj.95.2024.04.18.08.52.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Apr 2024 08:52:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,245 +46,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7588358b-fd9a-11ee-b909-491648fe20b8
+X-Inumbo-ID: b57c07c8-fd9b-11ee-94a3-07e782e9044d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713455033; x=1714059833; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=tWKoyaYHpVNzIRsVIBBnWTD1mZrFmJFCALnJCC3cCj4=;
-        b=ZKECIkHXFEwPKdTcaLJa7Mk2FbZDeLDpMmygQ2yQF8epWoruEO1ELO/9eYBFCxuLOT
-         0fLSTSF+wRIVvMs9TlrdTmB2o9ruV/un5MvpmsaPeM6/Q0Cn6lSfBfHNGQDbUpNvQaRX
-         65Ql2//1faef6OTBPZrnecYWBdPsxxEQl8Tc7NV+BycomYu3DmJTN2fjAX3UvCW3BVPJ
-         01Y3y1+xHXir1g75iUMsepOuQCiGh4OisU4ZR2fl3yfliHmfNyeR31UFqsX/9p9+Xue8
-         KQ6ccBAW7qgcSZooJnuS902JAfVyWWR662SuZdLmhy8TvQxntircLIyhn7wU0KT3cYJ7
-         eK4A==
+        d=citrix.com; s=google; t=1713455569; x=1714060369; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FgZJsWC+V6vA1Vlcmi8D5n4+aJM93wZKHXM2K90e014=;
+        b=vQnHdTBspBUaoedNZ/VscHpOAiZhpQA6E/+D+ovxuXt8XLBuW1WAsXtjt8eqGgwaNZ
+         FJXt50yZ0ROeEZlLPzlf0htP/AkIA4WDE+/UydjbRPf2B5WPqDIf9qo/c7aM8I4hE53L
+         3EyekKuvOD0mts0TTqsRL/kRnSeE4BsZn2bII=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713455033; x=1714059833;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=tWKoyaYHpVNzIRsVIBBnWTD1mZrFmJFCALnJCC3cCj4=;
-        b=ZA9m8ytIvi6jFuNvrRhTlEcQG+Xx59xPdrx7eYuIV6AeN2TU6pn9Hn3QK472/sLls+
-         xKJlmt/8PhGZafTVITxFpwwptaobO4cKVpl+dMpFoSR8/E8tmpdn6RdUUyTh1CWGo850
-         xGMP++emOYfmICxGpZxcN64pOa93nd0DV7ASqg5feRd+HgeQn1Djsa49JC70yhVmT5Dg
-         BaMjvROsjf/i02cKuv9xIsOczqx168gb+qXqjYv1JfVfMSGeK8U3wrIir4DEwHCGmlqP
-         NBXP64N2+4RTVNbc8oc+5HU3+Rixo1qvM2lcFot6DgjycC+77upMM4+xJN5BhJIUxO/v
-         x9cw==
-X-Forwarded-Encrypted: i=1; AJvYcCWZ+bi5fnTJCZDi5+IPEFhYwBkVeQshdW8d7cQbenMWgYOhXDsZDzFqAKJISEJVuC8wvxeteTG/L/1vyooolyJrYT2habkU9VPH68YWF0c=
-X-Gm-Message-State: AOJu0YxgauYCbDRQEZj/pkv6c8Lo6fYafwMsR4HAbZ0vt7sGQWq216IR
-	l8wjW92KgEX6OLCPe7ZJZxyI+4DggB81ZxLnvIBzWovxutMHf9ji
-X-Google-Smtp-Source: AGHT+IFhdU6QoaTkJxqTiIw8s58+C0Ya54JYgXn5vMoSgszaePH3uB4KdotqKzb9bCGY74pq8KI8EQ==
-X-Received: by 2002:a17:907:97cd:b0:a55:a04:6fbc with SMTP id js13-20020a17090797cd00b00a550a046fbcmr2388068ejc.23.1713455032642;
-        Thu, 18 Apr 2024 08:43:52 -0700 (PDT)
-Message-ID: <631c2da6-8ce1-46ea-b685-cfaff8efa508@gmail.com>
-Date: Thu, 18 Apr 2024 18:43:50 +0300
+        d=1e100.net; s=20230601; t=1713455569; x=1714060369;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FgZJsWC+V6vA1Vlcmi8D5n4+aJM93wZKHXM2K90e014=;
+        b=MRmh0JX1s4YhM1ITgfgXRa6fgA2YdrSr8cX5t1TKS90yxkT+1k7XcqWtxY9DI/wpNJ
+         7aNUU3pb87thg99QVbg4mRXuyZ34thVKxjxeZ4WtjsA2kOmRLrGifyYm7XpSjBVRlJOy
+         Z4/qO/nOvoP7hlzEw1xj6csknziMwKxL5iRMWokjaR/x5tFWPWSCX+4eJUrtY2DrdpVD
+         nv9FA8hJ9yG1C1Zd0OjxOUkQvIwkY0z0bVfneh4WSiMr/OBj95beIHL48cX0mQRbgPHT
+         eXaubNrIXFUYDgHMmNICOZo8rSpLrLCAnS50djng2LfnoACEQ0uGZlFmuMASD/NKcu60
+         6QEA==
+X-Gm-Message-State: AOJu0YzrPnpwfhA7UGHs4EAE1dZkOdXEy9TH4PPXt1vufS31SsLJYJSZ
+	j6eFDijiw5rNOnotn5HrshawWVEcwID0bGd6UMFl1D24kEwLrdcIBQO1eJbXljAKWOdTUHjtBSE
+	+
+X-Google-Smtp-Source: AGHT+IG8t9u76ZRwiQqG7tf9z0HVbDVZ/4E4dyvgE+tuzI9ts+dT4kyGtA+gwYNuWQ8uNoyACI8itQ==
+X-Received: by 2002:a0c:fca7:0:b0:69b:24f2:c2eb with SMTP id h7-20020a0cfca7000000b0069b24f2c2ebmr3391091qvq.59.1713455569367;
+        Thu, 18 Apr 2024 08:52:49 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 1/2] x86/spec: fix reporting of BHB clearing usage from guest entry points
+Date: Thu, 18 Apr 2024 17:52:07 +0200
+Message-ID: <20240418155208.7771-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240418155208.7771-1-roger.pau@citrix.com>
+References: <20240418155208.7771-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] xen/arm: Add i.MX UART early printk support
-To: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Peng Fan <peng.fan@nxp.com>
-References: <20240402120557.1822253-1-olekstysh@gmail.com>
- <20240402120557.1822253-2-olekstysh@gmail.com>
- <5151abab-93a9-4b3f-8d69-c45e3cfc663c@amd.com>
-Content-Language: en-US
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <5151abab-93a9-4b3f-8d69-c45e3cfc663c@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+Reporting whether the BHB clearing on entry is done for the different domains
+types based on cpu_has_bhb_seq is incorrect, as that variable signals whether
+there's a BHB clearing sequence selected, but that alone doesn't imply that
+such sequence is used from the PV and/or HVM entry points.
 
+Instead use opt_bhb_entry_{pv,hvm} which do signal whether BHB clearing is
+performed on entry from PV/HVM.
 
-On 03.04.24 13:11, Michal Orzel wrote:
-> Hi Oleksandr,
+Fixes: 689ad48ce9cf ('x86/spec-ctrl: Wire up the Native-BHI software sequences')
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v1:
+ - Also fix usage of cpu_has_bhb_seq when deciding whether to print "None".
+---
+ xen/arch/x86/spec_ctrl.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Hello Michal
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index dd01e30844a1..1e831c1c108e 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -634,7 +634,7 @@ static void __init print_details(enum ind_thunk thunk)
+            (boot_cpu_has(X86_FEATURE_SC_MSR_HVM) ||
+             boot_cpu_has(X86_FEATURE_SC_RSB_HVM) ||
+             boot_cpu_has(X86_FEATURE_IBPB_ENTRY_HVM) ||
+-            cpu_has_bhb_seq || amd_virt_spec_ctrl ||
++            opt_bhb_entry_hvm || amd_virt_spec_ctrl ||
+             opt_eager_fpu || opt_verw_hvm)           ? ""               : " None",
+            boot_cpu_has(X86_FEATURE_SC_MSR_HVM)      ? " MSR_SPEC_CTRL" : "",
+            (boot_cpu_has(X86_FEATURE_SC_MSR_HVM) ||
+@@ -643,7 +643,7 @@ static void __init print_details(enum ind_thunk thunk)
+            opt_eager_fpu                             ? " EAGER_FPU"     : "",
+            opt_verw_hvm                              ? " VERW"          : "",
+            boot_cpu_has(X86_FEATURE_IBPB_ENTRY_HVM)  ? " IBPB-entry"    : "",
+-           cpu_has_bhb_seq                           ? " BHB-entry"     : "");
++           opt_bhb_entry_hvm                         ? " BHB-entry"     : "");
+ 
+ #endif
+ #ifdef CONFIG_PV
+@@ -651,14 +651,14 @@ static void __init print_details(enum ind_thunk thunk)
+            (boot_cpu_has(X86_FEATURE_SC_MSR_PV) ||
+             boot_cpu_has(X86_FEATURE_SC_RSB_PV) ||
+             boot_cpu_has(X86_FEATURE_IBPB_ENTRY_PV) ||
+-            cpu_has_bhb_seq ||
++            opt_bhb_entry_pv ||
+             opt_eager_fpu || opt_verw_pv)            ? ""               : " None",
+            boot_cpu_has(X86_FEATURE_SC_MSR_PV)       ? " MSR_SPEC_CTRL" : "",
+            boot_cpu_has(X86_FEATURE_SC_RSB_PV)       ? " RSB"           : "",
+            opt_eager_fpu                             ? " EAGER_FPU"     : "",
+            opt_verw_pv                               ? " VERW"          : "",
+            boot_cpu_has(X86_FEATURE_IBPB_ENTRY_PV)   ? " IBPB-entry"    : "",
+-           cpu_has_bhb_seq                           ? " BHB-entry"     : "");
++           opt_bhb_entry_pv                          ? " BHB-entry"     : "");
+ 
+     printk("  XPTI (64-bit PV only): Dom0 %s, DomU %s (with%s PCID)\n",
+            opt_xpti_hwdom ? "enabled" : "disabled",
+-- 
+2.44.0
 
-sorry for the late response
-
-> 
-> On 02/04/2024 14:05, Oleksandr Tyshchenko wrote:
->>
->>
->> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>
->> Tested on i.MX 8M Mini only, but I guess, it should be
->> suitable for other i.MX8M* SoCs (those UART device tree nodes
->> contain "fsl,imx6q-uart" compatible string).
-> Please use imperative mood in commit msg.
-
-ok
-
-
-> I would mention also that you are adding
-> macros that will be used by the runtime driver.
-
-
-will do
-
-> 
->>
->> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->> ---
->> I selected the following configs for enabling early printk:
->>
->>   CONFIG_EARLY_UART_CHOICE_IMX_UART=y
->>   CONFIG_EARLY_UART_IMX_UART=y
->>   CONFIG_EARLY_PRINTK=y
->>   CONFIG_EARLY_UART_BASE_ADDRESS=0x30890000
->>   CONFIG_EARLY_PRINTK_INC="debug-imx-uart.inc"
->> ---
->> ---
->>   xen/arch/arm/Kconfig.debug            | 14 +++++
->>   xen/arch/arm/arm64/debug-imx-uart.inc | 38 ++++++++++++++
->>   xen/arch/arm/include/asm/imx-uart.h   | 76 +++++++++++++++++++++++++++
->>   3 files changed, 128 insertions(+)
->>   create mode 100644 xen/arch/arm/arm64/debug-imx-uart.inc
->>   create mode 100644 xen/arch/arm/include/asm/imx-uart.h
->>
->> diff --git a/xen/arch/arm/Kconfig.debug b/xen/arch/arm/Kconfig.debug
->> index eec860e88e..a15d08f214 100644
->> --- a/xen/arch/arm/Kconfig.debug
->> +++ b/xen/arch/arm/Kconfig.debug
->> @@ -68,6 +68,16 @@ choice
->>                          provide the parameters for the i.MX LPUART rather than
->>                          selecting one of the platform specific options below if
->>                          you know the parameters for the port.
->> +       config EARLY_UART_CHOICE_IMX_UART
->> +               select EARLY_UART_IMX_UART
->> +               depends on ARM_64
->> +               bool "Early printk via i.MX UART"
->> +               help
->> +                       Say Y here if you wish the early printk to direct their
-> Do not take example from surrounding code. help text should be indented by 2 tabs and 2 spaces here.
-
-ok
-
-> 
->> +                       output to a i.MX UART. You can use this option to
->> +                       provide the parameters for the i.MX UART rather than
->> +                       selecting one of the platform specific options below if
->> +                       you know the parameters for the port.
->>          config EARLY_UART_CHOICE_MESON
->>                  select EARLY_UART_MESON
->>                  depends on ARM_64
->> @@ -199,6 +209,9 @@ config EARLY_UART_EXYNOS4210
->>   config EARLY_UART_IMX_LPUART
->>          select EARLY_PRINTK
->>          bool
->> +config EARLY_UART_IMX_UART
->> +       select EARLY_PRINTK
->> +       bool
->>   config EARLY_UART_MESON
->>          select EARLY_PRINTK
->>          bool
->> @@ -304,6 +317,7 @@ config EARLY_PRINTK_INC
->>          default "debug-cadence.inc" if EARLY_UART_CADENCE
->>          default "debug-exynos4210.inc" if EARLY_UART_EXYNOS4210
->>          default "debug-imx-lpuart.inc" if EARLY_UART_IMX_LPUART
->> +       default "debug-imx-uart.inc" if EARLY_UART_IMX_UART
->>          default "debug-meson.inc" if EARLY_UART_MESON
->>          default "debug-mvebu.inc" if EARLY_UART_MVEBU
->>          default "debug-pl011.inc" if EARLY_UART_PL011
->> diff --git a/xen/arch/arm/arm64/debug-imx-uart.inc b/xen/arch/arm/arm64/debug-imx-uart.inc
->> new file mode 100644
->> index 0000000000..27a68b1ed5
->> --- /dev/null
->> +++ b/xen/arch/arm/arm64/debug-imx-uart.inc
->> @@ -0,0 +1,38 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +/*
->> + * xen/arch/arm/arm64/debug-imx-uart.inc
->> + *
->> + * i.MX8M* specific debug code
->> + *
->> + * Copyright (C) 2024 EPAM Systems Inc.
->> + */
->> +
->> +#include <asm/imx-uart.h>
->> +
->> +/*
->> + * Wait UART to be ready to transmit
->> + * rb: register which contains the UART base address
->> + * rc: scratch register
->> + */
->> +.macro early_uart_ready xb, c
->> +1:
->> +        ldr   w\c, [\xb, #IMX21_UTS] /* <- Test register */
->> +        tst   w\c, #UTS_TXFULL       /* Check TxFIFO FULL bit */
->> +        bne   1b                     /* Wait for the UART to be ready */
->> +.endm
->> +
->> +/*
->> + * UART transmit character
->> + * rb: register which contains the UART base address
->> + * rt: register which contains the character to transmit
->> + */
->> +.macro early_uart_transmit xb, wt
->> +        str   \wt, [\xb, #URTX0] /* -> Transmitter Register */
->> +.endm
->> +
->> +/*
->> + * Local variables:
->> + * mode: ASM
->> + * indent-tabs-mode: nil
->> + * End:
->> + */
->> diff --git a/xen/arch/arm/include/asm/imx-uart.h b/xen/arch/arm/include/asm/imx-uart.h
->> new file mode 100644
->> index 0000000000..413a81dd44
->> --- /dev/null
->> +++ b/xen/arch/arm/include/asm/imx-uart.h
->> @@ -0,0 +1,76 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +/*
->> + * xen/arch/arm/include/asm/imx-uart.h
->> + *
->> + * Common constant definition between early printk and the UART driver
->> + *
->> + * Copyright (C) 2024 EPAM Systems Inc.
->> + */
->> +
->> +#ifndef __ASM_ARM_IMX_UART_H__
->> +#define __ASM_ARM_IMX_UART_H__
->> +
->> +/* 32-bit register definition */
->> +#define URXD0        (0x00) /* Receiver Register */
-> There is no need to surround these values
-
-ok
-
-> 
->> +#define URTX0        (0x40) /* Transmitter Register */
->> +#define UCR1         (0x80) /* Control Register 1 */
->> +#define UCR2         (0x84) /* Control Register 2 */
->> +#define UCR3         (0x88) /* Control Register 3 */
-> 
->> +#define UCR4         (0x8c) /* Control Register 4 */
->> +#define UFCR         (0x90) /* FIFO Control Register */
->> +#define USR1         (0x94) /* Status Register 1 */
->> +#define USR2         (0x98) /* Status Register 2 */
->> +#define IMX21_UTS    (0xb4) /* Test Register */
->> +
->> +#define URXD_ERR        BIT(14, UL) /* Error detect */
->> +#define URXD_RX_DATA    GENMASK(7, 0) /* Received data mask */
->> +
->> +#define UCR1_TRDYEN      BIT(13, UL) /* Transmitter ready interrupt enable */
->> +#define UCR1_RRDYEN      BIT(9, UL) /* Receiver ready interrupt enable */
-> NIT: please align comments within a block
-
-ok
-
-> 
-> Other than that:
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-
-
-thanks
-
-> 
-> ~Michal
 
