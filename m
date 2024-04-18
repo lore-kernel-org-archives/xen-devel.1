@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2B85C4345F
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2024 07:36:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.708008.1106514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DA9C4345F
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2024 07:37:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.708011.1106535 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxMJa-0003cE-Ns; Thu, 18 Apr 2024 07:36:14 +0000
+	id 1rxMKR-0004LE-8U; Thu, 18 Apr 2024 07:37:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 708008.1106514; Thu, 18 Apr 2024 07:36:14 +0000
+Received: by outflank-mailman (output) from mailman id 708011.1106535; Thu, 18 Apr 2024 07:37:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxMJa-0003c7-L8; Thu, 18 Apr 2024 07:36:14 +0000
-Received: by outflank-mailman (input) for mailman id 708008;
- Thu, 18 Apr 2024 07:36:13 +0000
+	id 1rxMKR-0004L7-59; Thu, 18 Apr 2024 07:37:07 +0000
+Received: by outflank-mailman (input) for mailman id 708011;
+ Thu, 18 Apr 2024 07:37:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=wA62=LX=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rxMJZ-0003ai-Lk
- for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 07:36:13 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 539fed86-fd56-11ee-94a3-07e782e9044d;
- Thu, 18 Apr 2024 09:36:10 +0200 (CEST)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-418c2bf2f90so2933625e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 18 Apr 2024 00:36:11 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- jg23-20020a05600ca01700b004189cf6bd6esm5346396wmb.22.2024.04.18.00.36.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 00:36:10 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EyP4=LX=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1rxMKP-00046V-Td
+ for xen-devel@lists.xenproject.org; Thu, 18 Apr 2024 07:37:05 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 72b1bec8-fd56-11ee-94a3-07e782e9044d;
+ Thu, 18 Apr 2024 09:37:03 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BA219DA7;
+ Thu, 18 Apr 2024 00:37:30 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CCE7B3F64C;
+ Thu, 18 Apr 2024 00:37:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,109 +44,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 539fed86-fd56-11ee-94a3-07e782e9044d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1713425771; x=1714030571; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=jUrxXZbvUIPruDasrXksl6xnNFXLc4odWwRuKQp+7SQ=;
-        b=CaIc/aPKaVzzy3r1ChLVuPcTEDeQV+RbgCeYPULR5O8GpR8ZoIuQI6ADH6g8OHwozq
-         gDGyG/LfMaLR1YWwLOIS7kYq50AotiVo8Vm4hCuMX8j9c+F9YY+VNLhakwgn5dGLNn51
-         PUFm33WAoAsbEGk3+ZdsMFdKLvxiEWDLuVa84mAa2fFgP6GS3WNr0dkt6u1tqHZkJyNk
-         OXGr52SLrZBD1bEpo/0k5PZMqwUh5txrcx9HrUKRHe2CRMgsmgoKlWfLYKXYmYmx2MS4
-         6p1EfGRWjUm6Dy+NXb3qsmoYJpsZWo66cqxO+9LqyDE9ZvJdPwIsMB1mFiaDs7dTr4j2
-         t0GA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713425771; x=1714030571;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=jUrxXZbvUIPruDasrXksl6xnNFXLc4odWwRuKQp+7SQ=;
-        b=MWXg/Usp4oULbjNmppdhyVS3t5o44IDFP14xuIcYfhEGmud1BErhJNge85C0QklbjG
-         uf0lXaG+OqFB34BFFtxJXwakznUu09FFdky0+6au3guo8l0dKV4fxSXRj7KoL8j7iCaZ
-         1ydDcdvWDkr1DyOCdHBpRrP0LIxnC1d4Zl7CaKHvZ1EJG/4tI68p3/pTBjVg0ru8gonB
-         +B/I9Hw2Y/baReIu2sXby5sZSWkdNKPmRciUOiJ1l7HGjfChQEwezFTQcbn0ILaF3ZXs
-         CZ+8Yho5fqCvVV2Uy3snAvvNkVRludrl19W7DIZHRuVwoZ9bfeZd6VZEbGDTvPVUfu2k
-         22gA==
-X-Forwarded-Encrypted: i=1; AJvYcCXhkWOgsrhm/R72igXhexzQw6y08fE+Svl3LxQ7Evr1EM9DcZh+LmpRLx6znrWC8bWWWHvKYRjJow5OPd0ruU71OiX/kwjwGBZUkIFYzTo=
-X-Gm-Message-State: AOJu0Yy/zU2oVY3xZG2Rvt9JR87+PglkMOxUin4l5AhCnK7EH0Asnkla
-	eCya4KzWvFkeVfJ61hJYAiTDoRZrVAPMjUr2QAwLz4CGSW9MpQ88vfIkiA139Q==
-X-Google-Smtp-Source: AGHT+IEYE/J0ukMUdzOJHaZ0IzVbDGsqQGfS7cpoBRJr3k8WeOzilEiMAsnHY0BnW3xkQrQSgqPu5g==
-X-Received: by 2002:a05:600c:3b86:b0:418:9d4a:1ba5 with SMTP id n6-20020a05600c3b8600b004189d4a1ba5mr1040330wms.6.1713425770873;
-        Thu, 18 Apr 2024 00:36:10 -0700 (PDT)
-Message-ID: <efb44106-832b-409a-a810-7821e830ac81@suse.com>
-Date: Thu, 18 Apr 2024 09:36:09 +0200
+X-Inumbo-ID: 72b1bec8-fd56-11ee-94a3-07e782e9044d
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH v3 01/12] xen/arm: remove stale addr_cells/size_cells in assign_shared_memory
+Date: Thu, 18 Apr 2024 08:36:41 +0100
+Message-Id: <20240418073652.3622828-2-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240418073652.3622828-1-luca.fancellu@arm.com>
+References: <20240418073652.3622828-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] gzip: refactor state tracking
-Content-Language: en-US
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Jason Andryuk <jason.andryuk@amd.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <20240411152518.2995-1-dpsmith@apertussolutions.com>
- <20240411152518.2995-4-dpsmith@apertussolutions.com>
- <360958a2-5b0d-4fbc-8637-2a33185bdd8d@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <360958a2-5b0d-4fbc-8637-2a33185bdd8d@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 11.04.2024 21:24, Andrew Cooper wrote:
-> On 11/04/2024 4:25 pm, Daniel P. Smith wrote:
->> diff --git a/xen/common/gzip/gunzip.c b/xen/common/gzip/gunzip.c
->> index 1bcb007395ba..9b4891731b8b 100644
->> --- a/xen/common/gzip/gunzip.c
->> +++ b/xen/common/gzip/gunzip.c
->> @@ -102,12 +109,13 @@ __init int gzip_check(char *image, unsigned long image_len)
->>  
->>  __init int perform_gunzip(char *output, char *image, unsigned long image_len)
->>  {
->> +    struct gzip_data gd;
->>      int rc;
-> 
-> By the end of this series,
-> 
-> Reading symbols from xen-syms...
-> (gdb) p sizeof(struct gzip_data)
-> $1 = 2120
-> 
-> x86 has an 8k stack and this takes 1/4 of it.  Other bits of state are
-> dynamically allocated, even in inflate.c, so I'd highly recommend doing
-> the same for this.
-> 
-> 
-> Also, could I nitpick the name and request:
-> 
-> struct gzip_state *s;
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-Except: Why "gzip" when it's un-zipping state?
+Function parameters {addr_cells,size_cells} are stale parameters in
+assign_shared_memory, so we shall remove them.
 
-Jan
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+v2:
+ - no change
+v1:
+ - This is this patch: https://patchwork.kernel.org/project/xen-devel/patch/20231206090623.1932275-2-Penny.Zheng@arm.com/
+---
+---
+ xen/arch/arm/static-shmem.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index 9097bc8b1511..cb268cd2edf1 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -90,7 +90,6 @@ static mfn_t __init acquire_shared_memory_bank(struct domain *d,
+ }
+ 
+ static int __init assign_shared_memory(struct domain *d,
+-                                       uint32_t addr_cells, uint32_t size_cells,
+                                        paddr_t pbase, paddr_t psize,
+                                        paddr_t gbase)
+ {
+@@ -252,7 +251,6 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+              * specified, so they should be assigned to dom_io.
+              */
+             ret = assign_shared_memory(owner_dom_io ? dom_io : d,
+-                                       addr_cells, size_cells,
+                                        pbase, psize, gbase);
+             if ( ret )
+                 return ret;
+-- 
+2.34.1
+
 
