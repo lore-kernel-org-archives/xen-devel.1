@@ -4,49 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F922C05023
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 04:14:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.708712.1107772 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 123F7C4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 04:34:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.708724.1107793 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxfde-0000Ki-3B; Fri, 19 Apr 2024 04:14:14 +0000
+	id 1rxfwf-0005te-1z; Fri, 19 Apr 2024 04:33:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 708712.1107772; Fri, 19 Apr 2024 04:14:14 +0000
+Received: by outflank-mailman (output) from mailman id 708724.1107793; Fri, 19 Apr 2024 04:33:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxfde-0000Kb-0E; Fri, 19 Apr 2024 04:14:14 +0000
-Received: by outflank-mailman (input) for mailman id 708712;
- Fri, 19 Apr 2024 04:14:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Z1xH=LY=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1rxfdc-0000KV-WA
- for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 04:14:13 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20600.outbound.protection.outlook.com
- [2a01:111:f403:2009::600])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 458fb5b9-fe03-11ee-b909-491648fe20b8;
- Fri, 19 Apr 2024 06:14:10 +0200 (CEST)
-Received: from CH3P220CA0027.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1e8::25)
- by CH3PR12MB8482.namprd12.prod.outlook.com (2603:10b6:610:15b::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Fri, 19 Apr
- 2024 04:14:08 +0000
-Received: from CH2PEPF00000149.namprd02.prod.outlook.com
- (2603:10b6:610:1e8:cafe::be) by CH3P220CA0027.outlook.office365.com
- (2603:10b6:610:1e8::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.26 via Frontend
- Transport; Fri, 19 Apr 2024 04:14:07 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH2PEPF00000149.mail.protection.outlook.com (10.167.244.106) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7452.22 via Frontend Transport; Fri, 19 Apr 2024 04:14:07 +0000
-Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 18 Apr
- 2024 23:14:05 -0500
+	id 1rxfwe-0005tX-TS; Fri, 19 Apr 2024 04:33:52 +0000
+Received: by outflank-mailman (input) for mailman id 708724;
+ Fri, 19 Apr 2024 04:33:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=hnvp=LY=m5p.com=ehem@srs-se1.protection.inumbo.net>)
+ id 1rxfwc-0005tP-Rf
+ for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 04:33:50 +0000
+Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 02ae996c-fe06-11ee-94a3-07e782e9044d;
+ Fri, 19 Apr 2024 06:33:47 +0200 (CEST)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:8ac4:0:0:0:0:f7])
+ by mailhost.m5p.com (8.17.1/8.17.1) with ESMTPS id 43J4XVZb002724
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Fri, 19 Apr 2024 00:33:37 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.17.1/8.15.2/Submit) id 43J4XVeI002723;
+ Thu, 18 Apr 2024 21:33:31 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,126 +45,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 458fb5b9-fe03-11ee-b909-491648fe20b8
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WC3SPS44gpm7Dc02rTYiXcQ1dNITpncxMSLjRc8oiwFByCnBCyXP9PdKqMVQF6wXXVTOvW7SqiY53yBRoxUl/xFLrj51RJsAmFjF0f724vdu4rV7Wb/GRAwnAA4O+xCUT1yhAUrY3Xn5ALc0O1oRE4vjC++J83dfYjbfaASLjgc1hPfXMNLTFgNQtELdYAK24n/2RsiCA1JXwZ15/KwP4Sb/1dOtItsbT8gELO3HPbeeQ4xCsp3Y2vrErOtDvPAkZ94ECJbupocODuQzUcoNnLSgmtrIEHrcn1WbKpNpZSIi9cpD+/18+z+rEWgtfWBElMTygd6SOQLsLKC8ecip9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pj8YD64Ph6IwvRJJqtUYhZIQZnosoF6qgGzX78HNrMA=;
- b=CP8pIPy66ZWI0B3BFcY4zt/0Ufvid5S8B2mFZNpLqjDRpdTRN3BswXR9KlM+6tP+S71B4aikzrDjybTQ7k5UuVqYa8b7EtxoP4sVYxK9QPOt6pKBf93fZryTRxz6KJWepavGur3oo2NJaDyg+i7KOfcgeiJOGw+rGIdn6LsQdLBLV9gkngf7gaWBFx+otol5VxwWNurGB1R+wawn/Sj9tLXkgmLwSMazF2i0D7NIgnVDK4OA18XZ8jBj+R0pLjxnhBtwR08A3XjVR6g2gucsuMLdSl9PxSX+0YwQPbp3NbiDpjKFYsZjYQk/ECQ9ey8y+cuG6zwc/yo4VEJlUQcIsg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pj8YD64Ph6IwvRJJqtUYhZIQZnosoF6qgGzX78HNrMA=;
- b=RsFZ7ZlqjTtxL74LHRsspdpiZldZyomG0JVKzdXaFCZyIpi3M6s49Sae161zK6z9qsLmNQY8UmxVTKqtuAAxmlz2FnsjUNq1nhq3ALVPogWVC1xMEjH8ILeAnEYyQtflvhI011kUn2TgWXkpshour7+UbvO6snQn66IUTE+nrXA=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jiqian Chen <Jiqian.Chen@amd.com>
-To: <qemu-devel@nongnu.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Anthony Perard
-	<anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
-	<xen-devel@lists.xenproject.org>, Huang Rui <Ray.Huang@amd.com>, Jiqian Chen
-	<Jiqian.Chen@amd.com>
-Subject: [RFC QEMU PATCH v6 0/1] Support device passthrough when dom0 is PVH on Xen
-Date: Fri, 19 Apr 2024 12:13:50 +0800
-Message-ID: <20240419041351.633856-1-Jiqian.Chen@amd.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 02ae996c-fe06-11ee-94a3-07e782e9044d
+Date: Thu, 18 Apr 2024 21:33:31 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+        Wei Liu <wl@xen.org>, Kelly Choi <kelly.choi@cloud.com>
+Subject: Re: Serious AMD-Vi(?) issue
+Message-ID: <ZiH0G5kN6m+wlNjn@mattapan.m5p.com>
+References: <CAO-mL=xndFd7xTU4Q+9hjLL-7zqZUGjYcp3_REa6QqXvtyAEYg@mail.gmail.com>
+ <Zf3aWXfCANR7zXj8@mattapan.m5p.com>
+ <e9b1c9c4-523b-481b-946e-37c7c18ea1d2@suse.com>
+ <ZgHwEGCsCLHiYU5J@mattapan.m5p.com>
+ <ZgRXHQpamLIdu7dk@mattapan.m5p.com>
+ <c2ce4002-58d5-48a3-949c-3c361c78c0ac@suse.com>
+ <ZhdNxWNpM0KCzz8E@mattapan.m5p.com>
+ <2aa4d1f4-ff37-4f12-bfbb-3ef5ad3f6fdd@suse.com>
+ <ZiDBc3ye2wqmBAfq@mattapan.m5p.com>
+ <f0bdb386-0870-4468-846c-6c8a91eaf806@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000149:EE_|CH3PR12MB8482:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3dd63812-992c-442e-5245-08dc6027284c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	6TOIrRuO1jIbFcaZSCKph0h3rkUYigLTp1GFUhGMt/LPzAcS3HtN4qqmcPb9ZZx0B+6eBj+3HTKd2oHnx0TfJIUkv7nLSDFB/OKK11ztyiPbnWyYRoWMVOoMkvMgGJ/47p0PCIF7XBmQMwc3rmqRsm2hgz4YYI2NgyVXo/JcA+Zgqr8NICh+AWzqIl9sgK71GjkdkHiEjXOOdBltPngJ9hrgSOivdcpvVqETUIkTC09u7GOs7WCUEzNcrgdq3WueFrYlxiVo0ipvwriqz+fw8g1OXyDsXRx+bBPutLuLLKLxMaECUTR9BKZ9wvFFkuXEQKsjdbZQ17QrDJ4P37zaCNwaAGsxmjwYU8MK1JF+p9OvAiMRlLmk6SF8kWCj4x58gvZveftBvIUij8pHqoR5uwlvkPCK1Hlt5t7ysgHp2lxn1BiGTuldKf1+xmUkx5XMTpNS31OZ6yOg7t55bBkMs2Dr86pO8M2XW7HNZE00Yz1xna65/1Lx8gi7hb6eq52EC4uAYUtFjLmn8I6ei9DfEY3Fai6Hf6IEvv7BIMdidNFEg1kVPM1oQD2hbmhojzKdRwFOV5Xr7feewhmd1X5xGx+m4q8jcSvOT1UWfeKQbs75W8vg4SiS9chVHluSR7n9JBQ6ezhqJjBOEp3XodGFN+oIOiPRvgdZn48wTkInnvMNHUIWesUVm5YG0LJ7R10wRVdQQHRcVXei1qLqrafGvkK8Inszo26JZHiGl/snSpK2wuAdNu8wMD2JbQQW6vpo
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(1800799015)(82310400014)(376005);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2024 04:14:07.5224
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3dd63812-992c-442e-5245-08dc6027284c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH2PEPF00000149.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8482
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f0bdb386-0870-4468-846c-6c8a91eaf806@suse.com>
 
-Hi All,
-This is v6 series to support passthrough on Xen when dom0 is PVH.
-v5->v6 changes:
-* Due to changes in the implementation of obtaining gsi in the kernel and Xen. Change to use xc_physdev_gsi_from_irq, instead of gsi sysfs.
+On Thu, Apr 18, 2024 at 09:09:51AM +0200, Jan Beulich wrote:
+> On 18.04.2024 08:45, Elliott Mitchell wrote:
+> > On Wed, Apr 17, 2024 at 02:40:09PM +0200, Jan Beulich wrote:
+> >> On 11.04.2024 04:41, Elliott Mitchell wrote:
+> >>> On Thu, Mar 28, 2024 at 07:25:02AM +0100, Jan Beulich wrote:
+> >>>> On 27.03.2024 18:27, Elliott Mitchell wrote:
+> >>>>> On Mon, Mar 25, 2024 at 02:43:44PM -0700, Elliott Mitchell wrote:
+> >>>>>> On Mon, Mar 25, 2024 at 08:55:56AM +0100, Jan Beulich wrote:
+> >>>>>>>
+> >>>>>>> In fact when running into trouble, the usual course of action would be to
+> >>>>>>> increase verbosity in both hypervisor and kernel, just to make sure no
+> >>>>>>> potentially relevant message is missed.
+> >>>>>>
+> >>>>>> More/better information might have been obtained if I'd been engaged
+> >>>>>> earlier.
+> >>>>>
+> >>>>> This is still true, things are in full mitigation mode and I'll be
+> >>>>> quite unhappy to go back with experiments at this point.
+> >>>>
+> >>>> Well, it very likely won't work without further experimenting by someone
+> >>>> able to observe the bad behavior. Recall we're on xen-devel here; it is
+> >>>> kind of expected that without clear (and practical) repro instructions
+> >>>> experimenting as well as info collection will remain with the reporter.
+> >>>
+> >>> After looking at the situation and considering the issues, I /may/ be
+> >>> able to setup for doing more testing.  I guess I should confirm, which of
+> >>> those criteria do you think currently provided information fails at?
+> >>>
+> >>> AMD-IOMMU + Linux MD RAID1 + dual Samsung SATA (or various NVMe) +
+> >>> dbench; seems a pretty specific setup.
+> >>
+> >> Indeed. If that's the only way to observe the issue, it suggests to me
+> >> that it'll need to be mainly you to do further testing, and perhaps even
+> >> debugging. Which isn't to say we're not available to help, but from all
+> >> I have gathered so far we're pretty much in the dark even as to which
+> >> component(s) may be to blame. As can still be seen at the top in reply
+> >> context, some suggestions were given as to obtaining possible further
+> >> information (or confirming the absence thereof).
+> > 
+> > There may be other ways which haven't yet been found.
+> > 
+> > I've been left with the suspicion AMD was to some degree sponsoring
+> > work to ensure Xen works on their hardware.  Given the severity of this
+> > problem I would kind of expect them not want to gain a reputation for
+> > having data loss issues.  Assuming a suitable pair of devices weren't
+> > already on-hand, I would kind of expect this to be well within their
+> > budget.
+> 
+> You've got to talk to AMD then. Plus I assume it's clear to you that
+> even if the (presumably) necessary hardware was available, it still
+> would require respective setup, leaving open whether the issue then
+> could indeed be reproduced.
 
-Best regards,
-Jiqian Chen
+I had a vain hope your links to AMD would allow you to say "we've got a
+major problem in need of addressing ASAP".
 
+I suspect it will reproduce readily.  The sparsity of reports is likely
+due to few people using RAID1 for flash.  Yet even though the initial
+surveys suggest flash has a rather lower initial failure rate, they're
+still pointing to rather non-zero failures in the first 5 years.
 
-v4->v5 changes:
-* Add review by Stefano
+> >> I'd also like to come back to the vague theory you did voice, in that
+> >> you're suspecting flushes to take too long. I continue to have trouble
+> >> with this, and I would therefore like to ask that you put this down in
+> >> more technical terms, making connections to actual actions taken by
+> >> software / hardware.
+> > 
+> > I'm trying to figure out a pattern.
+> > 
+> > Nominally all the devices are roughly on par (only a very cheap flash
+> > device will be unable to overwhelm SATA's bandwidth).  Yet why did the
+> > Crucial SATA device /seem/ not to have the issue?  Why did a Crucial NVMe
+> > device demonstrate the issue.
+> > 
+> > My guess is the flash controllers Samsung uses may be able to start
+> > executing commands faster than the ones Crucial uses.  Meanwhile NVMe
+> > is lower overhead and latency than SATA (SATA's overhead isn't an issue
+> > for actual disks).  Perhaps the IOMMU is still flushing its TLB, or
+> > hasn't loaded the new tables.
+> 
+> Which would be an IOMMU issue then, that software at best may be able to
+> work around.
 
+Yet even if uses of RAID1 with flash are uncommon or rare, I would
+expect this to have already manifested on Linux without Xen.  In turn
+this would suggest Linux likely already has some sort of workaround.
 
-v3->v4 changes:
-* Add gsi into struct XenHostPCIDevice and use gsi number that read from gsi sysfs
-  if it exists, if there is no gsi sysfs, still use irq.
+I suspect this is a case of there is some step which is missing from
+Xen's IOMMU handling.  Perhaps something which Linux does during an early
+DMA setup stage, but the current Xen implementation does lazily?
+Alternatively some flag setting or missing step?
 
+I should be able to do another test approach in a few weeks, but I would
+love if something could be found sooner.
 
-v2->v3 changes:
-* Du to changes in the implementation of the second patch on kernel side(that adds
-  a new sysfs for gsi instead of a new syscall), so read gsi number from the sysfs of gsi.
-
-
-Below is the description of v2 cover letter:
-This patch is the v2 of the implementation of passthrough when dom0 is PVH on Xen.
-Issues we encountered:
-1. failed to map pirq for gsi
-Problem: qemu will call xc_physdev_map_pirq() to map a passthrough device\u2019s gsi to pirq in
-function xen_pt_realize(). But failed.
-
-Reason: According to the implement of xc_physdev_map_pirq(), it needs gsi instead of irq,
-but qemu pass irq to it and treat irq as gsi, it is got from file
-/sys/bus/pci/devices/xxxx:xx:xx.x/irq in function xen_host_pci_device_get(). But actually
-the gsi number is not equal with irq. On PVH dom0, when it allocates irq for a gsi in
-function acpi_register_gsi_ioapic(), allocation is dynamic, and follow the principle of
-applying first, distributing first. And if you debug the kernel codes
-(see function __irq_alloc_descs), you will find the irq number is allocated from small to
-large by order, but the applying gsi number is not, gsi 38 may come before gsi 28, that
-causes gsi 38 get a smaller irq number than gsi 28, and then gsi != irq.
-
-Solution: we can record the relation between gsi and irq, then when userspace(qemu) want
-to use gsi, we can do a translation. The third patch of kernel(xen/privcmd: Add new syscall
-to get gsi from irq) records all the relations in acpi_register_gsi_xen_pvh() when dom0
-initialize pci devices, and provide a syscall for userspace to get the gsi from irq. The
-third patch of xen(tools: Add new function to get gsi from irq) add a new function
-xc_physdev_gsi_from_irq() to call the new syscall added on kernel side.
-And then userspace can use that function to get gsi. Then xc_physdev_map_pirq() will success.
-
-This v2 on qemu side is the same as the v1 
-(qemu https://lore.kernel.org/xen-devel/20230312092244.451465-19-ray.huang@amd.com/), just call
-xc_physdev_gsi_from_irq() to get gsi from irq.
-
-Jiqian Chen (1):
-  xen/pci: get gsi from irq for passthrough devices
-
- hw/xen/xen-host-pci-device.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
 
 -- 
-2.34.1
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
 
 
