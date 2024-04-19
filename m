@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4771AC04FF6
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 14:00:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.709098.1108352 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1C3C4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 14:24:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.709119.1108371 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxonC-0008Iw-CZ; Fri, 19 Apr 2024 14:00:42 +0000
+	id 1rxp9j-0004pp-FO; Fri, 19 Apr 2024 14:23:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 709098.1108352; Fri, 19 Apr 2024 14:00:42 +0000
+Received: by outflank-mailman (output) from mailman id 709119.1108371; Fri, 19 Apr 2024 14:23:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxonC-0008Ip-9r; Fri, 19 Apr 2024 14:00:42 +0000
-Received: by outflank-mailman (input) for mailman id 709098;
- Fri, 19 Apr 2024 14:00:41 +0000
+	id 1rxp9j-0004pi-CS; Fri, 19 Apr 2024 14:23:59 +0000
+Received: by outflank-mailman (input) for mailman id 709119;
+ Fri, 19 Apr 2024 14:23:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zESt=LY=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1rxonB-00084S-21
- for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 14:00:41 +0000
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [2607:f8b0:4864:20::f2d])
+ <SRS0=txqa=LY=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rxp9i-0004oC-4s
+ for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 14:23:58 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 334997a9-fe55-11ee-b909-491648fe20b8;
- Fri, 19 Apr 2024 16:00:39 +0200 (CEST)
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-69b6c2e9ed9so7753996d6.1
- for <xen-devel@lists.xenproject.org>; Fri, 19 Apr 2024 07:00:39 -0700 (PDT)
-Received: from georged-x-u.xenrt.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- t9-20020a0c8d89000000b0069b7eb7edebsm1582413qvb.71.2024.04.19.07.00.36
+ id 75383294-fe58-11ee-b909-491648fe20b8;
+ Fri, 19 Apr 2024 16:23:57 +0200 (CEST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-516d2600569so2687301e87.0
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Apr 2024 07:23:57 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ z4-20020ac24f84000000b00513d244005asm725847lfs.199.2024.04.19.07.23.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Apr 2024 07:00:37 -0700 (PDT)
+ Fri, 19 Apr 2024 07:23:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,300 +46,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 334997a9-fe55-11ee-b909-491648fe20b8
+X-Inumbo-ID: 75383294-fe58-11ee-b909-491648fe20b8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1713535237; x=1714140037; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qWMIoc6b1WKFM7SSJlKfUX9Err3kWMV0UKmrQ0B2hfA=;
-        b=W31ly7XY0DiUULpdgoIkWhoaktY8RB8X0TwNa7b9QhDPeY7eDh5/MKxEDPcv/C5Avl
-         Fc5se1Jny/I6/MRecfKWrFxO+/0madfIIDZ6zheIRL4Y7Va8u7KLcI6MusTJb2qlFzAE
-         HLkOtfk3aCEFjYoouOXgryOHWDq7LiwfWVeTc=
+        d=gmail.com; s=20230601; t=1713536636; x=1714141436; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fvE04hK1QhYzx30yo+rpGP6awpQxcr4JZMIWUrH45M0=;
+        b=VEVcgNr3cvTaqL3E4PJjkZPuz0G0T8xsIGuIsiUn7oqQrmqOsA91kG/dogi2C0mkAH
+         P0FQgWNTFlp2v40uVOY0Njlps3hqCHda94osdIxkNGK1KeIpt+xO8mWPdNa/6+4t5fON
+         t+b4EFpHt3w4SOD44Pdwfw47+0ml+KdJvMXcllr74R3D6mWaIIahXbXyLTOebBLu5qbr
+         Qc49wBpGR+Dan9pZNSZcsAJK1e0O9U2WyHtya0RXtN4lHpl8ovhVbRO38TMrVvRJJ0yZ
+         WtfpLUiK0fLuzSaY9ZwQD1Z2n9bWxgn2T9ULtPgvmVxhRMTZJfrK2e6r9ad0vbF1g1Fr
+         4AVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713535237; x=1714140037;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=qWMIoc6b1WKFM7SSJlKfUX9Err3kWMV0UKmrQ0B2hfA=;
-        b=fMR2mVYngdIRMB7JLyvQ/fb8hYFRhczA7vLi2e9hy6GotWUBVsI4P+liJrzbAgucJv
-         XOW4Ex03dobAtL3FNBWb5K12Ge3vJ/Q5VUCIeq15TrdcZ7a7sxVz1J85fYGyTw0nNIqy
-         4W8fq5HHMHepk2VcEE/TU56YmXTwas0deeEBvhdvhzSNLAqxWywEopQO5iNRAeHnDqEr
-         Co3mC8Ur3YIq2GNnmryJDa6jVd1e0ZrAaMYr4dp2zHiX4O6sFtG1XljoUvhQqEfw7DGC
-         Tr+8R2CidkxOp3/vr9hMeWQLZ36ggqfvOcu4R8/QJcbQDtipI4XzHZCcrusquvoiM1ZD
-         Wn+g==
-X-Gm-Message-State: AOJu0Ywkp4xZiLa/LYck9GeyO5NXkIBS6FYkTLuz6aiUO5AVOGQLtmnE
-	VULKT3IGPMTUasyxyK6hGuHPw9ApYsRXjfMQpnZee2VfZKt+jw/sp6xFp+8NM1x2ISHejd8rQOJ
-	q
-X-Google-Smtp-Source: AGHT+IH0lKHDZEJh+i9JynrdqwV8Vt4hD50JQB+HhFxOMPW0z8nHQWuRz5QxYE7vhyBxgZArgaGB9g==
-X-Received: by 2002:ad4:4dca:0:b0:69b:7b95:8ef1 with SMTP id cw10-20020ad44dca000000b0069b7b958ef1mr2392817qvb.22.1713535237381;
-        Fri, 19 Apr 2024 07:00:37 -0700 (PDT)
-From: George Dunlap <george.dunlap@cloud.com>
+        d=1e100.net; s=20230601; t=1713536636; x=1714141436;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fvE04hK1QhYzx30yo+rpGP6awpQxcr4JZMIWUrH45M0=;
+        b=U3w1gGKOQVoLk4DoDFiWqqdZaRWZ7et5qcw702nkTlIvMIP5gNe/lPWnPSilg7vRdN
+         Om98sXHDt9eCXFYlYSI4B4rnnsaQfWoUgKwH83Nl2HmRHx6deS4gCV7x2eXNdFAxGHjU
+         H8YQZSwuOD/NOk4bnoF7Vr1ormQe/8K0CCEbpfcRg5VjqDzxwwlFhbSLpSsF4icJ1hV1
+         +/2iOhMPURHHVvkotEhf2FuE2NFf+F5IiXZfNxhxCFblQbaoL5o1vh6he5B7dyPL+Isb
+         LNUKUHWBqnMKKs3hnU1NPhXBeHk2iU+HBdJbTE6+nObYrvH6FbiADFpBDVpUqbA0Trqv
+         iIYw==
+X-Gm-Message-State: AOJu0Yw5+/KLrkBJtXR9Rhr8tO5WJbQVEYJrmCb6zzqHpHWGI7+IcFxi
+	gzD9GI/nnDaYLY8GOb3lE6I4v0LjPDQDFUO2kndjwASzuZ1yTt6JAzpoxw==
+X-Google-Smtp-Source: AGHT+IEEvH4dYfTcbMlGk0kZFT2F92pKHd04k/inXJR/mV8qO8O0RGMIT96AWGZ6a5i2N/gB5GQpSA==
+X-Received: by 2002:ac2:57ca:0:b0:518:e8a4:9266 with SMTP id k10-20020ac257ca000000b00518e8a49266mr1563939lfo.14.1713536636111;
+        Fri, 19 Apr 2024 07:23:56 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@cloud.com>,
-	Nick Rosbrook <rosbrookn@gmail.com>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 2/3] golang/xenlight: Ensure comments aren't interpreted as docstrings
-Date: Fri, 19 Apr 2024 14:51:19 +0100
-Message-Id: <20240419135120.830517-2-george.dunlap@cloud.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240419135120.830517-1-george.dunlap@cloud.com>
-References: <20240419135120.830517-1-george.dunlap@cloud.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3] xen/riscv: check whether the assembler has Zbb extension support
+Date: Fri, 19 Apr 2024 16:23:53 +0200
+Message-ID: <95441782d1920f219d63dee1c82c7df68424d374.1713523124.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Go has always interpreted a comment directly before a function as a
-docstring, so having the C function prototypes which the golang method
-is meant to wrap in the comment before was always a bit non-standard.
-However, recent versions of `go fmt` now attempt to normalize these
-docstrings as well, leading to strange changes, particularly if `go
-fmt` is run on save.
+Update the argument of the as-insn for the Zbb case to verify that
+Zbb is supported not only by a compiler, but also by an assembler.
 
-Go through and put a space between non-docstring comments and methods,
-so that `go fmt` leaves the comments alone.
+Also, check-extenstion(ext_name, "insn") helper macro is introduced
+to check whether extension is supported by a compiler and an assembler.
 
-No functional change.
-
-Signed-off-by: George Dunlap <george.dunlap@cloud.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-v2:
- - New (replaced previous `go fmt` patch)
-
-CC: Nick Rosbrook <rosbrookn@gmail.com>
-CC: Anthony PERARD <anthony.perard@citrix.com>
+Changes in V3:
+ - code style fixes: use "-" insteaf of "_" for names.
+ - update the commit message.
 ---
- tools/golang/xenlight/xenlight.go | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+Changes in V2:
+ - introduce check_extenstion to abstract a check of if extenstion is
+   supported or not.
+ - update the commit message.
+---
+ xen/arch/riscv/arch.mk | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/tools/golang/xenlight/xenlight.go b/tools/golang/xenlight/xenlight.go
-index d793f172e5..7f08657187 100644
---- a/tools/golang/xenlight/xenlight.go
-+++ b/tools/golang/xenlight/xenlight.go
-@@ -562,6 +562,7 @@ func (dt DomainType) String() (str string) {
- }
+diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
+index 53f3575e7d..dd242c91d1 100644
+--- a/xen/arch/riscv/arch.mk
++++ b/xen/arch/riscv/arch.mk
+@@ -11,9 +11,14 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
  
- // const char *libxl_scheduler_to_string(libxl_scheduler p);
+ riscv-generic-flags := $(riscv-abi-y) -march=$(riscv-march-y)
+ 
+-zbb := $(call as-insn,$(CC) $(riscv-generic-flags)_zbb,"",_zbb)
+-zihintpause := $(call as-insn, \
+-                      $(CC) $(riscv-generic-flags)_zihintpause,"pause",_zihintpause)
++# check-extension: Check whether extenstion is supported by a compiler and
++#                  an assembler.
++# Usage: $(call check-extension,extension_name,"instr")
++check-extension = $(call as-insn,$(CC) $(riscv-generic-flags)_$(1),$(2),_$(1))
 +
- func (s Scheduler) String() string {
- 	cs := C.libxl_scheduler_to_string(C.libxl_scheduler(s))
- 	// No need to free const return value
-@@ -570,6 +571,7 @@ func (s Scheduler) String() string {
- }
++zbb-insn := "andn t0, t0, t0"
++zbb := $(call check-extension,zbb,$(zbb-insn))
++zihintpause := $(call check-extension,zihintpause,"pause")
  
- // int libxl_scheduler_from_string(const char *s, libxl_scheduler *e);
-+
- func (s *Scheduler) FromString(gstr string) (err error) {
- 	*s, err = SchedulerFromString(gstr)
- 	return
-@@ -594,6 +596,7 @@ func SchedulerFromString(name string) (s Scheduler, err error) {
+ extensions := $(zbb) $(zihintpause)
  
- // libxl_cpupoolinfo * libxl_list_cpupool(libxl_ctx*, int *nb_pool_out);
- // void libxl_cpupoolinfo_list_free(libxl_cpupoolinfo *list, int nb_pool);
-+
- func (ctx *Context) ListCpupool() (list []Cpupoolinfo) {
- 	var nbPool C.int
- 
-@@ -617,6 +620,7 @@ func (ctx *Context) ListCpupool() (list []Cpupoolinfo) {
- }
- 
- // int libxl_cpupool_info(libxl_ctx *ctx, libxl_cpupoolinfo *info, uint32_t poolid);
-+
- func (ctx *Context) CpupoolInfo(Poolid uint32) (pool Cpupoolinfo, err error) {
- 	var c_cpupool C.libxl_cpupoolinfo
- 
-@@ -638,6 +642,7 @@ func (ctx *Context) CpupoolInfo(Poolid uint32) (pool Cpupoolinfo, err error) {
- //                          uint32_t *poolid);
- // FIXME: uuid
- // FIXME: Setting poolid
-+
- func (ctx *Context) CpupoolCreate(Name string, Scheduler Scheduler, Cpumap Bitmap) (err error, Poolid uint32) {
- 	poolid := C.uint32_t(C.LIBXL_CPUPOOL_POOLID_ANY)
- 	name := C.CString(Name)
-@@ -666,6 +671,7 @@ func (ctx *Context) CpupoolCreate(Name string, Scheduler Scheduler, Cpumap Bitma
- }
- 
- // int libxl_cpupool_destroy(libxl_ctx *ctx, uint32_t poolid);
-+
- func (ctx *Context) CpupoolDestroy(Poolid uint32) (err error) {
- 	ret := C.libxl_cpupool_destroy(ctx.ctx, C.uint32_t(Poolid))
- 	if ret != 0 {
-@@ -677,6 +683,7 @@ func (ctx *Context) CpupoolDestroy(Poolid uint32) (err error) {
- }
- 
- // int libxl_cpupool_cpuadd(libxl_ctx *ctx, uint32_t poolid, int cpu);
-+
- func (ctx *Context) CpupoolCpuadd(Poolid uint32, Cpu int) (err error) {
- 	ret := C.libxl_cpupool_cpuadd(ctx.ctx, C.uint32_t(Poolid), C.int(Cpu))
- 	if ret != 0 {
-@@ -689,6 +696,7 @@ func (ctx *Context) CpupoolCpuadd(Poolid uint32, Cpu int) (err error) {
- 
- // int libxl_cpupool_cpuadd_cpumap(libxl_ctx *ctx, uint32_t poolid,
- //                                 const libxl_bitmap *cpumap);
-+
- func (ctx *Context) CpupoolCpuaddCpumap(Poolid uint32, Cpumap Bitmap) (err error) {
- 	var cbm C.libxl_bitmap
- 	if err = Cpumap.toC(&cbm); err != nil {
-@@ -706,6 +714,7 @@ func (ctx *Context) CpupoolCpuaddCpumap(Poolid uint32, Cpumap Bitmap) (err error
- }
- 
- // int libxl_cpupool_cpuremove(libxl_ctx *ctx, uint32_t poolid, int cpu);
-+
- func (ctx *Context) CpupoolCpuremove(Poolid uint32, Cpu int) (err error) {
- 	ret := C.libxl_cpupool_cpuremove(ctx.ctx, C.uint32_t(Poolid), C.int(Cpu))
- 	if ret != 0 {
-@@ -718,6 +727,7 @@ func (ctx *Context) CpupoolCpuremove(Poolid uint32, Cpu int) (err error) {
- 
- // int libxl_cpupool_cpuremove_cpumap(libxl_ctx *ctx, uint32_t poolid,
- //                                    const libxl_bitmap *cpumap);
-+
- func (ctx *Context) CpupoolCpuremoveCpumap(Poolid uint32, Cpumap Bitmap) (err error) {
- 	var cbm C.libxl_bitmap
- 	if err = Cpumap.toC(&cbm); err != nil {
-@@ -735,6 +745,7 @@ func (ctx *Context) CpupoolCpuremoveCpumap(Poolid uint32, Cpumap Bitmap) (err er
- }
- 
- // int libxl_cpupool_rename(libxl_ctx *ctx, const char *name, uint32_t poolid);
-+
- func (ctx *Context) CpupoolRename(Name string, Poolid uint32) (err error) {
- 	name := C.CString(Name)
- 	defer C.free(unsafe.Pointer(name))
-@@ -749,6 +760,7 @@ func (ctx *Context) CpupoolRename(Name string, Poolid uint32) (err error) {
- }
- 
- // int libxl_cpupool_cpuadd_node(libxl_ctx *ctx, uint32_t poolid, int node, int *cpus);
-+
- func (ctx *Context) CpupoolCpuaddNode(Poolid uint32, Node int) (Cpus int, err error) {
- 	ccpus := C.int(0)
- 
-@@ -764,6 +776,7 @@ func (ctx *Context) CpupoolCpuaddNode(Poolid uint32, Node int) (Cpus int, err er
- }
- 
- // int libxl_cpupool_cpuremove_node(libxl_ctx *ctx, uint32_t poolid, int node, int *cpus);
-+
- func (ctx *Context) CpupoolCpuremoveNode(Poolid uint32, Node int) (Cpus int, err error) {
- 	ccpus := C.int(0)
- 
-@@ -779,6 +792,7 @@ func (ctx *Context) CpupoolCpuremoveNode(Poolid uint32, Node int) (Cpus int, err
- }
- 
- // int libxl_cpupool_movedomain(libxl_ctx *ctx, uint32_t poolid, uint32_t domid);
-+
- func (ctx *Context) CpupoolMovedomain(Poolid uint32, Id Domid) (err error) {
- 	ret := C.libxl_cpupool_movedomain(ctx.ctx, C.uint32_t(Poolid), C.uint32_t(Id))
- 	if ret != 0 {
-@@ -792,6 +806,7 @@ func (ctx *Context) CpupoolMovedomain(Poolid uint32, Id Domid) (err error) {
- //
- // Utility functions
- //
-+
- func (ctx *Context) CpupoolFindByName(name string) (info Cpupoolinfo, found bool) {
- 	plist := ctx.ListCpupool()
- 
-@@ -940,6 +955,7 @@ func (bm Bitmap) String() (s string) {
- }
- 
- //int libxl_get_max_cpus(libxl_ctx *ctx);
-+
- func (ctx *Context) GetMaxCpus() (maxCpus int, err error) {
- 	ret := C.libxl_get_max_cpus(ctx.ctx)
- 	if ret < 0 {
-@@ -951,6 +967,7 @@ func (ctx *Context) GetMaxCpus() (maxCpus int, err error) {
- }
- 
- //int libxl_get_online_cpus(libxl_ctx *ctx);
-+
- func (ctx *Context) GetOnlineCpus() (onCpus int, err error) {
- 	ret := C.libxl_get_online_cpus(ctx.ctx)
- 	if ret < 0 {
-@@ -962,6 +979,7 @@ func (ctx *Context) GetOnlineCpus() (onCpus int, err error) {
- }
- 
- //int libxl_get_max_nodes(libxl_ctx *ctx);
-+
- func (ctx *Context) GetMaxNodes() (maxNodes int, err error) {
- 	ret := C.libxl_get_max_nodes(ctx.ctx)
- 	if ret < 0 {
-@@ -973,6 +991,7 @@ func (ctx *Context) GetMaxNodes() (maxNodes int, err error) {
- }
- 
- //int libxl_get_free_memory(libxl_ctx *ctx, uint64_t *memkb);
-+
- func (ctx *Context) GetFreeMemory() (memkb uint64, err error) {
- 	var cmem C.uint64_t
- 	ret := C.libxl_get_free_memory(ctx.ctx, &cmem)
-@@ -988,6 +1007,7 @@ func (ctx *Context) GetFreeMemory() (memkb uint64, err error) {
- }
- 
- //int libxl_get_physinfo(libxl_ctx *ctx, libxl_physinfo *physinfo)
-+
- func (ctx *Context) GetPhysinfo() (physinfo *Physinfo, err error) {
- 	var cphys C.libxl_physinfo
- 	C.libxl_physinfo_init(&cphys)
-@@ -1006,6 +1026,7 @@ func (ctx *Context) GetPhysinfo() (physinfo *Physinfo, err error) {
- }
- 
- //const libxl_version_info* libxl_get_version_info(libxl_ctx *ctx);
-+
- func (ctx *Context) GetVersionInfo() (info *VersionInfo, err error) {
- 	var cinfo *C.libxl_version_info
- 
-@@ -1045,6 +1066,7 @@ func (ctx *Context) DomainUnpause(Id Domid) (err error) {
- }
- 
- //int libxl_domain_pause(libxl_ctx *ctx, uint32_t domain);
-+
- func (ctx *Context) DomainPause(id Domid) (err error) {
- 	ret := C.libxl_domain_pause(ctx.ctx, C.uint32_t(id), nil)
- 
-@@ -1055,6 +1077,7 @@ func (ctx *Context) DomainPause(id Domid) (err error) {
- }
- 
- //int libxl_domain_shutdown(libxl_ctx *ctx, uint32_t domid);
-+
- func (ctx *Context) DomainShutdown(id Domid) (err error) {
- 	ret := C.libxl_domain_shutdown(ctx.ctx, C.uint32_t(id), nil)
- 
-@@ -1065,6 +1088,7 @@ func (ctx *Context) DomainShutdown(id Domid) (err error) {
- }
- 
- //int libxl_domain_reboot(libxl_ctx *ctx, uint32_t domid);
-+
- func (ctx *Context) DomainReboot(id Domid) (err error) {
- 	ret := C.libxl_domain_reboot(ctx.ctx, C.uint32_t(id), nil)
- 
-@@ -1076,6 +1100,7 @@ func (ctx *Context) DomainReboot(id Domid) (err error) {
- 
- //libxl_dominfo * libxl_list_domain(libxl_ctx*, int *nb_domain_out);
- //void libxl_dominfo_list_free(libxl_dominfo *list, int nb_domain);
-+
- func (ctx *Context) ListDomain() (glist []Dominfo) {
- 	var nbDomain C.int
- 	clist := C.libxl_list_domain(ctx.ctx, &nbDomain)
-@@ -1098,6 +1123,7 @@ func (ctx *Context) ListDomain() (glist []Dominfo) {
- //libxl_vcpuinfo *libxl_list_vcpu(libxl_ctx *ctx, uint32_t domid,
- //				int *nb_vcpu, int *nr_cpus_out);
- //void libxl_vcpuinfo_list_free(libxl_vcpuinfo *, int nr_vcpus);
-+
- func (ctx *Context) ListVcpu(id Domid) (glist []Vcpuinfo) {
- 	var nbVcpu C.int
- 	var nrCpu C.int
-@@ -1128,6 +1154,7 @@ func (ct ConsoleType) String() (str string) {
- 
- //int libxl_console_get_tty(libxl_ctx *ctx, uint32_t domid, int cons_num,
- //libxl_console_type type, char **path);
-+
- func (ctx *Context) ConsoleGetTty(id Domid, consNum int, conType ConsoleType) (path string, err error) {
- 	var cpath *C.char
- 	ret := C.libxl_console_get_tty(ctx.ctx, C.uint32_t(id), C.int(consNum), C.libxl_console_type(conType), &cpath)
-@@ -1143,6 +1170,7 @@ func (ctx *Context) ConsoleGetTty(id Domid, consNum int, conType ConsoleType) (p
- 
- //int libxl_primary_console_get_tty(libxl_ctx *ctx, uint32_t domid_vm,
- //					char **path);
-+
- func (ctx *Context) PrimaryConsoleGetTty(domid uint32) (path string, err error) {
- 	var cpath *C.char
- 	ret := C.libxl_primary_console_get_tty(ctx.ctx, C.uint32_t(domid), &cpath)
 -- 
-2.25.1
+2.44.0
 
 
