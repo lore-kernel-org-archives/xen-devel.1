@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A7EC4345F
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 11:03:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.708996.1108247 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24976C4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 11:08:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.709005.1108283 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxm1W-0007R8-Mx; Fri, 19 Apr 2024 11:03:18 +0000
+	id 1rxm6r-0001dp-0W; Fri, 19 Apr 2024 11:08:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 708996.1108247; Fri, 19 Apr 2024 11:03:18 +0000
+Received: by outflank-mailman (output) from mailman id 709005.1108283; Fri, 19 Apr 2024 11:08:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxm1W-0007R1-KS; Fri, 19 Apr 2024 11:03:18 +0000
-Received: by outflank-mailman (input) for mailman id 708996;
- Fri, 19 Apr 2024 11:03:17 +0000
+	id 1rxm6q-0001dA-Rh; Fri, 19 Apr 2024 11:08:48 +0000
+Received: by outflank-mailman (input) for mailman id 709005;
+ Fri, 19 Apr 2024 11:08:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zESt=LY=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1rxm1U-0007Qv-VB
- for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 11:03:16 +0000
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [2001:4860:4864:20::32])
+ <SRS0=N8I7=LY=gmail.com=asml.silence@srs-se1.protection.inumbo.net>)
+ id 1rxm6p-00017h-6l
+ for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 11:08:47 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6baca2d1-fe3c-11ee-b909-491648fe20b8;
- Fri, 19 Apr 2024 13:03:16 +0200 (CEST)
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-22f32226947so990128fac.2
- for <xen-devel@lists.xenproject.org>; Fri, 19 Apr 2024 04:03:16 -0700 (PDT)
+ id 311c49e2-fe3d-11ee-b909-491648fe20b8;
+ Fri, 19 Apr 2024 13:08:46 +0200 (CEST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a5557e3ebcaso316022266b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Apr 2024 04:08:46 -0700 (PDT)
+Received: from 127.0.0.1localhost ([163.114.131.193])
+ by smtp.gmail.com with ESMTPSA id
+ z13-20020a17090655cd00b00a4739efd7cesm2082525ejp.60.2024.04.19.04.08.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Apr 2024 04:08:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,80 +47,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6baca2d1-fe3c-11ee-b909-491648fe20b8
+X-Inumbo-ID: 311c49e2-fe3d-11ee-b909-491648fe20b8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1713524594; x=1714129394; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1713524926; x=1714129726; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Y2jbxJoWie299DLIJbLQ3cPdkIIkemn5pm+kfICbNcQ=;
-        b=Behsb8T4mcxJT5bHW4HKnh1MWnQMhi/xxhCmpYtqfH4JN0Il72naYU1DBqv/FmVqij
-         WgJZpRDDMLz4AbZ14qF/2buSOza81TEErsUNZAM21i4Z1PW2bK8An4s+g0nwxWQJw4mY
-         7xPRLbq6J550YjQFPHeKWY9WjTv1W8m70V9WE=
+        bh=vg0pL2CVxV49Fgeqn+qahTZ1Z4PbsN7awrFUvCLM+ng=;
+        b=V7xo0xUDhjNiMf/OcZ257ViI87JyvzkVSJflTaiWLug+Q/7/r1tQXO5lnLf6S6+L5A
+         ELoiV9umEPUyww3kHkDegPrZCdTOrFhuq4MwFtf7inS0hXHfSgT1my5UOZanS1p2BCX0
+         gqWLUfPd/0gAgFt/d5YQt57u1Zg6zHaW1SIVeOKda6+7C6A/20G8adFIjq4Nn1yqCFAC
+         B2FFARRPVaiC9xE9kHDolNCKvNj6ACI9Q5RzeVRGYQSrOC3Fw9JFjmeNp6K0f4p6YsIS
+         cQ4+/2ElypZn9bCQ+SzhMlOYX4egHasUHiMzu7MeYcJA4BQcWlfhkAe6R7i3koHZjlkZ
+         BDlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713524594; x=1714129394;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1713524926; x=1714129726;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Y2jbxJoWie299DLIJbLQ3cPdkIIkemn5pm+kfICbNcQ=;
-        b=IpfijMxpRtobEXAUA1ZQhzMnshjS5FDc5KiSTzrhf7GLzIeBc13iyHfmuTw9ATEJri
-         FturmweqA5yM1Py6jHC6p53FNbDTwjkd2t10BqarDIVsWKPCvnT9H4vMdEQ9iazF78UE
-         1JJYWyQv1XoR4PLY1rP1w5mxsfh8Q8bJhDD3DnMMjnyyq4sOXrgqr8KgjwNyT1LRaTCp
-         369yBw1XFECx5pl3IAWZZzcYSV4Je818vwnYqzESlRFik01879W4zjr8o/a7W/JA+Nt3
-         t97wNilsborxKijAbUucK84AlOPVPh9ns6v23eh9G0ifDAqoBDCMraRJNCEmwTq6wZVQ
-         qFRg==
-X-Gm-Message-State: AOJu0Yzq+KmkQrofN+M2LD9JeYFwsXVhwdgaioUnk+h+cDR0C0l3v6Cy
-	9RwrlhGWQ2VxWY0yRoPJk+jVI3ZzLP/WgppokwMuNbWOTpf6eBx7vM3MJFnssvqGrNUxSVJnIb0
-	oR/xi0qHCpbAIKjrRRaUPgF44O6HhL54wmNpchTknYB6Yhf5z
-X-Google-Smtp-Source: AGHT+IETIyySoN2MrwI2wyCDAnhlcZVvBgWfV/3Gb6JUEw1DsUPUS5g2f7PzlffUgOR7MYXqot1QlFmZBxcs3O1R+TA=
-X-Received: by 2002:a05:6870:1d0a:b0:233:abab:6d6c with SMTP id
- pa10-20020a0568701d0a00b00233abab6d6cmr2016879oab.7.1713524594467; Fri, 19
- Apr 2024 04:03:14 -0700 (PDT)
+        bh=vg0pL2CVxV49Fgeqn+qahTZ1Z4PbsN7awrFUvCLM+ng=;
+        b=xQ+Kb6+ziaGde9Xs0IfKLG7e8wEbks3+BYOe2W4qbMkOpHxpeYV4fsHsoILuX3plKo
+         nnr0uUtlyqMqXYSEW4X2nqQi3IwAuxPjFA+aI4brve0ubfstOs7tIYWcvMI4H86bqUqc
+         dzLrTm+5X2apverA1mSS9L1/sGolDnxJfdofyvcpDSmSKiF5ZFMzfiWnnwhbIF1DOoID
+         UDBB8BvGOLArjq15MkHj6E4chisZLkVWcpM4z2JMGUOVwmrMiwkVyaYSy0czHisGU1G4
+         IzdSnmuM4ZbToYvZFPhtx3LU1K9nklD4kQGw7Q8RjJP+19XlpXex28Cvtqb159sW1gU1
+         tmpA==
+X-Forwarded-Encrypted: i=1; AJvYcCWKyaL9etwrLDPDtbZwzROWhaOKQIvuLOHPajMkBB3S1Hu01ooKQWQ4eB6TGamRIuJor69KIy+OStmRe/2aFHuEekGEhRHyLwwP6vMDHlo=
+X-Gm-Message-State: AOJu0YyKvPftJE8SwZip85x0QV5NCW2K/fIyewGSXzfDeJAqUci6bOsi
+	SjjvR4oLXVaFMT+ZoQCG/MTFXCjDUVaFFdmxnZ0l5nFqloGyd/t7
+X-Google-Smtp-Source: AGHT+IGlNNpKG3wGDzOQc1RYm8RL9LY87wF61Oxy7BMYiyIn9QMexWxwwOK9pfN0OrWYDJl4d93LDw==
+X-Received: by 2002:a17:907:7215:b0:a55:75f7:42fb with SMTP id dr21-20020a170907721500b00a5575f742fbmr4895587ejc.24.1713524926172;
+        Fri, 19 Apr 2024 04:08:46 -0700 (PDT)
+From: Pavel Begunkov <asml.silence@gmail.com>
+To: io-uring@vger.kernel.org,
+	netdev@vger.kernel.org
+Cc: Jens Axboe <axboe@kernel.dk>,
+	asml.silence@gmail.com,
+	"David S . Miller" <davem@davemloft.net>,
+	Jakub Kicinski <kuba@kernel.org>,
+	David Ahern <dsahern@kernel.org>,
+	Eric Dumazet <edumazet@google.com>,
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Paul Durrant <paul@xen.org>,
+	xen-devel@lists.xenproject.org,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	virtualization@lists.linux.dev,
+	kvm@vger.kernel.org
+Subject: [PATCH io_uring-next/net-next v2 3/4] io_uring/notif: simplify io_notif_flush()
+Date: Fri, 19 Apr 2024 12:08:41 +0100
+Message-ID: <19e41652c16718b946a5c80d2ad409df7682e47e.1713369317.git.asml.silence@gmail.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <cover.1713369317.git.asml.silence@gmail.com>
+References: <cover.1713369317.git.asml.silence@gmail.com>
 MIME-Version: 1.0
-References: <20240419105037.700283-1-george.dunlap@cloud.com> <20240419105037.700283-2-george.dunlap@cloud.com>
-In-Reply-To: <20240419105037.700283-2-george.dunlap@cloud.com>
-From: George Dunlap <george.dunlap@cloud.com>
-Date: Fri, 19 Apr 2024 12:03:03 +0100
-Message-ID: <CA+zSX=ZqOyk6P4GrZNQULuxwUNyxLhWM3u4986Dpkvanbksdng@mail.gmail.com>
-Subject: Re: [PATCH 2/3] golang/xenlight: Run `go fmt` on non-generated golang files
-To: xen-devel@lists.xenproject.org
-Cc: Nick Rosbrook <rosbrookn@gmail.com>, Anthony PERARD <anthony.perard@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Apr 19, 2024 at 11:59=E2=80=AFAM George Dunlap <george.dunlap@cloud=
-.com> wrote:
->
-> No functional change.
->
-> Signed-off-by: George Dunlap <george.dunlap@cloud.com>
-> ---
-> CC: Nick Rosbrook <rosbrookn@gmail.com>
-> CC: Anthony PERARD <anthony.perard@citrix.com>
-> ---
->  tools/golang/xenlight/xenlight.go | 55 +++++++++++++++++--------------
->  1 file changed, 30 insertions(+), 25 deletions(-)
->
-> diff --git a/tools/golang/xenlight/xenlight.go b/tools/golang/xenlight/xe=
-nlight.go
-> index d793f172e5..0ff28590ee 100644
-> --- a/tools/golang/xenlight/xenlight.go
-> +++ b/tools/golang/xenlight/xenlight.go
-> @@ -633,9 +633,11 @@ func (ctx *Context) CpupoolInfo(Poolid uint32) (pool=
- Cpupoolinfo, err error) {
->  }
->
->  // int libxl_cpupool_create(libxl_ctx *ctx, const char *name,
-> -//                          libxl_scheduler sched,
-> -//                          libxl_bitmap cpumap, libxl_uuid *uuid,
-> -//                          uint32_t *poolid);
-> +//
-> +//     libxl_scheduler sched,
-> +//     libxl_bitmap cpumap, libxl_uuid *uuid,
-> +//     uint32_t *poolid);
+io_notif_flush() is partially duplicating io_tx_ubuf_complete(), so
+instead of duplicating it, make the flush call io_tx_ubuf_complete.
 
-Gah, sorry, I forgot to delete some of these blank lines that were
-added in.  I'll fix it up in v2.
+Reviewed-by: Jens Axboe <axboe@kernel.dk>
+Signed-off-by: Pavel Begunkov <asml.silence@gmail.com>
+---
+ io_uring/notif.c | 6 +++---
+ io_uring/notif.h | 9 +++------
+ 2 files changed, 6 insertions(+), 9 deletions(-)
 
- -George
+diff --git a/io_uring/notif.c b/io_uring/notif.c
+index 53532d78a947..26680176335f 100644
+--- a/io_uring/notif.c
++++ b/io_uring/notif.c
+@@ -9,7 +9,7 @@
+ #include "notif.h"
+ #include "rsrc.h"
+ 
+-void io_notif_tw_complete(struct io_kiocb *notif, struct io_tw_state *ts)
++static void io_notif_tw_complete(struct io_kiocb *notif, struct io_tw_state *ts)
+ {
+ 	struct io_notif_data *nd = io_notif_to_data(notif);
+ 
+@@ -23,8 +23,8 @@ void io_notif_tw_complete(struct io_kiocb *notif, struct io_tw_state *ts)
+ 	io_req_task_complete(notif, ts);
+ }
+ 
+-static void io_tx_ubuf_complete(struct sk_buff *skb, struct ubuf_info *uarg,
+-				bool success)
++void io_tx_ubuf_complete(struct sk_buff *skb, struct ubuf_info *uarg,
++			 bool success)
+ {
+ 	struct io_notif_data *nd = container_of(uarg, struct io_notif_data, uarg);
+ 	struct io_kiocb *notif = cmd_to_io_kiocb(nd);
+diff --git a/io_uring/notif.h b/io_uring/notif.h
+index 2e25a2fc77d1..2cf9ff6abd7a 100644
+--- a/io_uring/notif.h
++++ b/io_uring/notif.h
+@@ -21,7 +21,8 @@ struct io_notif_data {
+ };
+ 
+ struct io_kiocb *io_alloc_notif(struct io_ring_ctx *ctx);
+-void io_notif_tw_complete(struct io_kiocb *notif, struct io_tw_state *ts);
++void io_tx_ubuf_complete(struct sk_buff *skb, struct ubuf_info *uarg,
++			 bool success);
+ 
+ static inline struct io_notif_data *io_notif_to_data(struct io_kiocb *notif)
+ {
+@@ -33,11 +34,7 @@ static inline void io_notif_flush(struct io_kiocb *notif)
+ {
+ 	struct io_notif_data *nd = io_notif_to_data(notif);
+ 
+-	/* drop slot's master ref */
+-	if (refcount_dec_and_test(&nd->uarg.refcnt)) {
+-		notif->io_task_work.func = io_notif_tw_complete;
+-		__io_req_task_work_add(notif, IOU_F_TWQ_LAZY_WAKE);
+-	}
++	io_tx_ubuf_complete(NULL, &nd->uarg, true);
+ }
+ 
+ static inline int io_notif_account_mem(struct io_kiocb *notif, unsigned len)
+-- 
+2.44.0
+
 
