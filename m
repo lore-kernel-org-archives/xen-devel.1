@@ -4,56 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95C58C4345F
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 02:31:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.708627.1107653 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0630DC4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Apr 2024 03:37:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.708661.1107701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxe2Y-0000q3-Hf; Fri, 19 Apr 2024 02:31:50 +0000
+	id 1rxf3W-00053U-8t; Fri, 19 Apr 2024 03:36:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 708627.1107653; Fri, 19 Apr 2024 02:31:50 +0000
+Received: by outflank-mailman (output) from mailman id 708661.1107701; Fri, 19 Apr 2024 03:36:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rxe2Y-0000pw-EM; Fri, 19 Apr 2024 02:31:50 +0000
-Received: by outflank-mailman (input) for mailman id 708627;
- Fri, 19 Apr 2024 02:31:49 +0000
+	id 1rxf3W-00053N-5W; Fri, 19 Apr 2024 03:36:54 +0000
+Received: by outflank-mailman (input) for mailman id 708661;
+ Fri, 19 Apr 2024 03:36:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=52U1=LY=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
- id 1rxe2X-0000pn-Cn
- for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 02:31:49 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20601.outbound.protection.outlook.com
- [2a01:111:f403:2412::601])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Z1xH=LY=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
+ id 1rxf3V-000510-1B
+ for xen-devel@lists.xenproject.org; Fri, 19 Apr 2024 03:36:53 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20620.outbound.protection.outlook.com
+ [2a01:111:f400:7e88::620])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f74e39af-fdf4-11ee-94a3-07e782e9044d;
- Fri, 19 Apr 2024 04:31:47 +0200 (CEST)
-Received: from BL1PR13CA0239.namprd13.prod.outlook.com (2603:10b6:208:2bf::34)
- by CH3PR12MB9195.namprd12.prod.outlook.com (2603:10b6:610:1a3::6)
+ id 0ca46fbb-fdfe-11ee-94a3-07e782e9044d;
+ Fri, 19 Apr 2024 05:36:48 +0200 (CEST)
+Received: from SJ0PR03CA0063.namprd03.prod.outlook.com (2603:10b6:a03:331::8)
+ by SN7PR12MB7812.namprd12.prod.outlook.com (2603:10b6:806:329::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.43; Fri, 19 Apr
- 2024 02:31:41 +0000
-Received: from BL6PEPF00020E61.namprd04.prod.outlook.com
- (2603:10b6:208:2bf:cafe::13) by BL1PR13CA0239.outlook.office365.com
- (2603:10b6:208:2bf::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.29 via Frontend
- Transport; Fri, 19 Apr 2024 02:31:41 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF00020E61.mail.protection.outlook.com (10.167.249.22) with Microsoft
+ 2024 03:36:44 +0000
+Received: from SJ5PEPF000001CE.namprd05.prod.outlook.com
+ (2603:10b6:a03:331:cafe::d5) by SJ0PR03CA0063.outlook.office365.com
+ (2603:10b6:a03:331::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.30 via Frontend
+ Transport; Fri, 19 Apr 2024 03:36:44 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ5PEPF000001CE.mail.protection.outlook.com (10.167.242.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7452.22 via Frontend Transport; Fri, 19 Apr 2024 02:31:41 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.7452.22 via Frontend Transport; Fri, 19 Apr 2024 03:36:44 +0000
+Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 18 Apr
- 2024 21:31:41 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 18 Apr
- 2024 21:31:41 -0500
-Received: from [10.69.48.49] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Thu, 18 Apr 2024 21:31:38 -0500
+ 2024 22:36:40 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,208 +58,362 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f74e39af-fdf4-11ee-94a3-07e782e9044d
+X-Inumbo-ID: 0ca46fbb-fdfe-11ee-94a3-07e782e9044d
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=etTvsyyd48O5GVegNMEQ+4xUOaTFT5kThmtI0TXIUJJX1MufdSAB9PMY18biFqioBBqF50OkLJEvILx9fJ4Ol7isjYxKQ1ecyZlh/e8dADveMRwXIh5O79Jk6n8QVTuG7p6kerCbOYPbIKEv1uztwzX0uw0Uv0avE2e5z+NB4aMVxy4NvofpR3zUWGP52k4KmfP0ZIw2s66DEAq9KqJOP21o92MOYMpH1f22UBe5SYofbhWr1XkDt/5KOqzrxcuAyvrp5sSSn3o/+HYvkKLZHnS0F6rSRGh/4LOEectTu+3YO57Z+L3IrhsfXN9rFFHLvlBjU+3oF+hLXEU7FNgsTA==
+ b=TMALzLdiL29migiT8Ei+bXTD6vaVif0K3vrATKLUgBPVId/eVvxeA/zVP7Op6WgIODBWsELSuzjobTp3heUeX4ulWO5KX8rf6saHfdjkp0UKhzt9pprW2teNqIVz44X1nIStuGWCeIcBsO9Kh19VMM7HuOb6Rp/eOuEYAI2G4c9Yi5ImH7i3W87OJUGxFmcATVQGoL3wsAvPAHwM2LJp1lSiLanLyq3VcAzz+A653jJMOwXzWnLINoSv+zo4eqinQQxsaWWmkgU0iFvmTa39K3ERKablozmnnal+daBcyKT9EBb1oxsbpH298AXG7+5gaB5CvuyX9cp09k7j/Zv2jg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tUZRukvAfZ5neDu0ABl0uR5S6MvEatH59LzEPtV7y58=;
- b=iQZwV9leuiQ9vqg3IiDwfnGhJI05RE7oMw3Q7rRxjVkwZkWe8RxnVRisyFN8N6ZO6rNIfAcCXC9hWpX12WpchdPLbzjSdGhNFddc8BdWeN5xZ+E64CVNz+HtixEj/g4PCz5jKYce5j43QhA6Oz2yQCXXnfatq4K4wrbmUff8+HcHJazf+pZP6Ve/Rc9lf082l8DCvqdOkI7RoDLMVyIS/GoglHEO3hpkx8a1iOH6/HUIZ4K7XpKwCynz8AZ3/WTMGXPhpnB4xye3EQdKIH1JDBIrM6J63lJw6yDbBh48YlyC18w9HYVeJq0vDBY5SPRuSgfpnmyzGxfCU6HmVXzcGQ==
+ bh=TrsH2kqfUbago2wYG2lTp8qlxKK3xB7MTeNRFg867cs=;
+ b=UImrf7Ql0xDcUJqwD6BA4PHCKDCm1PXz3mimvc5BWZvssJosD5AwDlxbRWSM8PC1EHJqTtvxV69XbCAfYfLvz1JjbHTk3hJcbnj2jTu1e0UPvYW36e79VjCXTC+CfGeHnQm+ZpAHM1sEUmJ4rtDFX2eX06j0VHvXCsvJ70Vg7yuiHtpGtETeNgkKZJ7ckmrFvqcI9gmeO896QOCCpSbF5jSk4zm8CI7fP/zisq5QiycGIGI2Il4GYquyv00eRYiWIlM1r2XcGIVj0yz8tFbaWhLkKvW8EZHmIPo5XY2JP7xHHza1T1LOpbNEamLI7+u9O/J9CQ8VFIFmxADi4Wjjfg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tUZRukvAfZ5neDu0ABl0uR5S6MvEatH59LzEPtV7y58=;
- b=Y1aJ9+FZfQjFrB1sC/VHhrntpwU3quTSBZ5L2xKvNxWv9cbDuejmvKHeksWLw9m1zTIPKJLbslmFUmTKvnTfGIKF08hVthAjisKB+ib4L2wgDts9sOz3Q6FILmkZg0k2JW9o0ns37KMWDzliLqiQdX0NhRAI1VbzoHNzDV+RAB4=
+ bh=TrsH2kqfUbago2wYG2lTp8qlxKK3xB7MTeNRFg867cs=;
+ b=bFBSlXLQVO3BmiuAcDERRIP4XdB5wGj8zYXILR6mRe9pOmcnrXPdchEB82VAqGzeTQ7wcKFoqmHILWCA4/OONbDLuVxy7WvHEi4toETAENK07jk9oa+tZskhYOropqbVUiWmU5ivzr7gL1o9sCPrhQwpuCri97Qg5Pk9lruvNlg=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <eaad1ad2-e6ec-42a6-a0fb-236ce93f0a9e@amd.com>
-Date: Fri, 19 Apr 2024 10:31:38 +0800
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Jiqian Chen <Jiqian.Chen@amd.com>
+To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, "Rafael J .
+ Wysocki" <rafael@kernel.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>
+CC: <xen-devel@lists.xenproject.org>, <linux-pci@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-acpi@vger.kernel.org>, Huang Rui
+	<Ray.Huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>, Huang Rui
+	<ray.huang@amd.com>
+Subject: [RFC KERNEL PATCH v6 3/3] xen/privcmd: Add new syscall to get gsi from irq
+Date: Fri, 19 Apr 2024 11:36:16 +0800
+Message-ID: <20240419033616.607889-4-Jiqian.Chen@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240419033616.607889-1-Jiqian.Chen@amd.com>
+References: <20240419033616.607889-1-Jiqian.Chen@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/5] xen/memory, tools: Avoid hardcoding
- GUEST_MAGIC_BASE in init-dom0less
-To: Jan Beulich <jbeulich@suse.com>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
-	"Julien Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
-	"Juergen Gross" <jgross@suse.com>, Alec Kwapis <alec.kwapis@medtronic.com>,
-	<xen-devel@lists.xenproject.org>, Daniel Smith <dpsmith@apertussolutions.com>
-References: <20240409045357.236802-1-xin.wang2@amd.com>
- <20240409045357.236802-5-xin.wang2@amd.com>
- <cc4fd69b-4866-4f1b-b780-64c5fac7d2d6@suse.com>
-Content-Language: en-US
-From: Henry Wang <xin.wang2@amd.com>
-In-Reply-To: <cc4fd69b-4866-4f1b-b780-64c5fac7d2d6@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB05.amd.com: xin.wang2@amd.com does not designate
- permitted sender hosts)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00020E61:EE_|CH3PR12MB9195:EE_
-X-MS-Office365-Filtering-Correlation-Id: f8cd9427-de87-44ac-cba5-08dc6018d915
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CE:EE_|SN7PR12MB7812:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4140075f-2dcc-449d-b2e2-08dc6021ef85
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	PZ/T48zK7Dcv6agbLMYPlFZ/2bKuNAvtycS1+9hOpMy628ot28BImQVa8hJ7/uFnong4PdIrs3bCFcJAn6lHLAIwO0c3a0YvTTNP8vW5InwiKpvT5XSCqdxgoZtU3Z7GC+zqcrW0kpt48mESpRQmB9rxKPJW6a9NXAgYETOIPUgKoLKn/DUS9REJDmX/eFjN8mwQLPucaGq/D0LXteocekcCMQKp3GaKRqff1QsJUnAyAMi0znRgNbm0+9QS+BRcfSZN0SnkTvzf5Yq5Zd5nWQtL2SUo57Y+zEUmoMVIw/YR+27V20MrFcIKOYefBbdAQT1EyaALCuHNVyr0ad4Fr5xOA9/Cjts/nXxP/uuFzaBfSZGxYLmSfqJexF0VWdzxK8rgv/25Qvf5l1G0ojHIYntN17u0xHqDLOqYqCZcZTg960xPROxPQcWu7GcXG1mTU6sSbKY6/LgHBSXvvgGOhDZcPg+wWXHwP+BsaDP5k0ROZ+NqUE40whQpL/vwgk223JBmmGlMm76F5WZpuqUbT4+LA1MUL6HGLgwvqFabmyThvH7RyeSyHbQPKAYZAZEcGrOPVI8XmJumwSWl8moP4ZyXVxso9O3ajMr7QedBN3hWkvrmMzdZXKuqpXRDwyY/5/dK9jshP3UZl0fknIIZNqbr2G0zUHLXUqqIBSuWGXo9CxZhBM1XVeEUzjefxyjSPquXTqrx7FRSr8WFSGvj0AtBHIBRdcaugevWeId3XLUMlx/3P6fg9QXPlHqe8ckc
+	=?us-ascii?Q?qCoDbzT3dA3YI352qyd7ZF+UOoe1knwr+Mb92/8u4yyOWpGerUQlhQvjI98Q?=
+ =?us-ascii?Q?1u/33fa59PlPavQbkdx1D1tGzyXJcVBs6HFHizb2rnwG3ycQ24XBnRQ6e5cY?=
+ =?us-ascii?Q?PKFgT4I1/SspMMzUqeit+zeghMzqI/nUnMfG93O6VCwDTyI9RGm7sZb9jPTv?=
+ =?us-ascii?Q?/1l2yX6VjSijN3NWEQmaZBg+LhRuPaTNyU9SRzPO1RdyQDq1gJfAaTio5g4P?=
+ =?us-ascii?Q?TLnypU6Js6Ok/zHiorDHFpU4W1co5DbRIfb78Orz+drvlFjmFwppiKivejUq?=
+ =?us-ascii?Q?MUPVvviTGGtYHOdE3G+eUo0mtRBUMipjVXUHjtLGxPcJ6euX5hbwgWa6cEw3?=
+ =?us-ascii?Q?qicVbUM6xrM0agrnwOwL/gvJF6osVJIiEmUSzqcvQUMNZb2KKIbLQLt1d7eP?=
+ =?us-ascii?Q?rt1zIyFVUfTkE1VevI+hcYp1rArCNSq6mo/Ar3KGv5OxYQfzsj/9YMbMv9ae?=
+ =?us-ascii?Q?fCsCkGDBcw+vLaowXXhm8nJb/xkfZDe8Whc1k7Zvq6+mHSvA5InMUP8PSGYM?=
+ =?us-ascii?Q?tl/YAGZ05ZHk2KtQmCxhf7S4boXi1f+9/F5DSHgBVKubkIhdBzqwJzUcXK2U?=
+ =?us-ascii?Q?yJejKpl4gvwQup+XTJWM0s0qWQCwAYoRtcCLGrrE7QV2FRQ4Vuuar3l9Y3aZ?=
+ =?us-ascii?Q?5/F/qboc5Lwjto4h0r2b4iHs2puQwNmLoq51qWl8KyriddoTk5wtK7QnJSBO?=
+ =?us-ascii?Q?1XWuQ0Hpt1u8tIYc3IhFVIXDixaBLg9VQmpQfySuJrugZeSF5Hrpo2o8xEvM?=
+ =?us-ascii?Q?0dg4igRtSfqxBFeHMBMcHxvvbB9QykiYSuFsuAoEDodn4gkkG97uUx/Ut/RY?=
+ =?us-ascii?Q?9rPOzmBBL4OsTnCGXYywdOhNhKrmQ1+ZHsKg5V716i7h4dPR5JSasfBZSsqH?=
+ =?us-ascii?Q?teYTtxw7+6ucbvwDubKp6+slByjh6ZZutOW98ai+RJOMAY0uJj9mMKvQbe5o?=
+ =?us-ascii?Q?1WR0KNTB4SPwblMMg0ur2qiIwcRbZf9cnvqtCv6ya0U4T6m5q/YQbssFyYhr?=
+ =?us-ascii?Q?CalN3aZ8RwX1nviVJK5rerlu+Z0Ees8f+ztDYEsvrT5hWI3tfjl4nrRESYWm?=
+ =?us-ascii?Q?PsHE4ia6t/Edde+6W/nE7Xr7NQbzT56fC4Vii0U9yMYlXjIMhEnVXGwaAxrU?=
+ =?us-ascii?Q?UZFFmeCyIAq4t+UPjykt+bFBg68efyhKRvyeu+CdkVnJuIaLn7r9PK0lcGEP?=
+ =?us-ascii?Q?7QTZd/nB0iyspvkugFFizCZbPNUnZ0dNTmoy5ryLHW5/KycEqcoTZ8iDuPsi?=
+ =?us-ascii?Q?lGpjtZBB9CB0nxQL0k8qLzHPi7iORj3p6AsDuZJlvaVzyDMMYz11OdLHi/bR?=
+ =?us-ascii?Q?Htxvl0vYQuy4+5yUF71qRGl5gZvm3F9KTQ/9TEtUT/UHl9x+uTS7dr9PgKKN?=
+ =?us-ascii?Q?+wp5ramO1IrsKAWcTE1AoNugGbYR?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(82310400014)(376005)(7416005)(36860700004)(1800799015);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(376005)(82310400014)(36860700004);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2024 02:31:41.6864
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2024 03:36:44.7221
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f8cd9427-de87-44ac-cba5-08dc6018d915
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4140075f-2dcc-449d-b2e2-08dc6021ef85
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF00020E61.namprd04.prod.outlook.com
+	SJ5PEPF000001CE.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9195
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7812
 
-Hi Jan,
+In PVH dom0, it uses the linux local interrupt mechanism,
+when it allocs irq for a gsi, it is dynamic, and follow
+the principle of applying first, distributing first. And
+the irq number is alloced from small to large, but the
+applying gsi number is not, may gsi 38 comes before gsi 28,
+it causes the irq number is not equal with the gsi number.
+And when passthrough a device, QEMU will use device's gsi
+number to do pirq mapping, but the gsi number is got from
+file /sys/bus/pci/devices/<sbdf>/irq, irq!= gsi, so it will
+fail when mapping.
+And in current linux codes, there is no method to translate
+irq to gsi for userspace.
 
-On 4/18/2024 8:54 PM, Jan Beulich wrote:
-> On 09.04.2024 06:53, Henry Wang wrote:
->> --- a/xen/common/memory.c
->> +++ b/xen/common/memory.c
->> @@ -155,6 +155,14 @@ static void increase_reservation(struct memop_args *a)
->>       a->nr_done = i;
->>   }
->>   
->> +/*
->> + * Alias of _MEMF_no_refcount to avoid introduction of a new, single-use flag.
->> + * This flag should be used for populate_physmap() only as a re-purposing of
->> + * _MEMF_no_refcount to force a non-1:1 allocation from domheap.
->> + */
->> +#define _MEMF_force_heap_alloc _MEMF_no_refcount
->> +#define  MEMF_force_heap_alloc (1U<<_MEMF_force_heap_alloc)
-> Nit (style): Blanks around << please.
->
-> Also do you really need both constants? I dont think so.
->
-> Plus please make sure to #undef the constant once no longer needed, to
-> help spotting / avoiding misuses.
+For above purpose, record the relationship of gsi and irq
+when PVH dom0 do acpi_register_gsi_ioapic for devices and
+adds a new syscall into privcmd to let userspace can get
+that translation when they have a need.
 
-Sounds good, I will fix the NIT, drop the first #define and properly add 
-#undef.
+Co-developed-by: Huang Rui <ray.huang@amd.com>
+Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+---
+ arch/x86/include/asm/apic.h      |  8 +++++++
+ arch/x86/include/asm/xen/pci.h   |  5 ++++
+ arch/x86/kernel/acpi/boot.c      |  2 +-
+ arch/x86/pci/xen.c               | 21 +++++++++++++++++
+ drivers/xen/events/events_base.c | 39 ++++++++++++++++++++++++++++++++
+ drivers/xen/privcmd.c            | 19 ++++++++++++++++
+ include/uapi/xen/privcmd.h       |  7 ++++++
+ include/xen/events.h             |  5 ++++
+ 8 files changed, 105 insertions(+), 1 deletion(-)
 
->> @@ -219,7 +227,8 @@ static void populate_physmap(struct memop_args *a)
->>           }
->>           else
->>           {
->> -            if ( is_domain_direct_mapped(d) )
->> +            if ( is_domain_direct_mapped(d) &&
->> +                 !(a->memflags & MEMF_force_heap_alloc) )
->>               {
->>                   mfn = _mfn(gpfn);
->>   
->> @@ -246,7 +255,8 @@ static void populate_physmap(struct memop_args *a)
->>   
->>                   mfn = _mfn(gpfn);
->>               }
->> -            else if ( is_domain_using_staticmem(d) )
->> +            else if ( is_domain_using_staticmem(d) &&
->> +                      !(a->memflags & MEMF_force_heap_alloc) )
->>               {
->>                   /*
->>                    * No easy way to guarantee the retrieved pages are contiguous,
->> @@ -271,6 +281,14 @@ static void populate_physmap(struct memop_args *a)
->>               }
->>               else
->>               {
->> +                /*
->> +                 * Avoid passing MEMF_force_heap_alloc down to
->> +                 * alloc_domheap_pages() where the meaning would be the
->> +                 * original MEMF_no_refcount.
->> +                 */
->> +                if ( unlikely(a->memflags & MEMF_force_heap_alloc) )
->> +                    a->memflags &= ~MEMF_force_heap_alloc;
-> As asked before: Why the if()?
-
-I think there is no need to clear the flag if it is not set. But you are 
-correct, the if is not needed. I can drop it.
-
->> @@ -1404,6 +1422,7 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
->>       {
->>       case XENMEM_increase_reservation:
->>       case XENMEM_decrease_reservation:
->> +    case XENMEM_populate_physmap_heap_alloc:
->>       case XENMEM_populate_physmap:
->>           if ( copy_from_guest(&reservation, arg, 1) )
->>               return start_extent;
-> Nit or not: Please insert the new case label last.
-
-Sure.
-
->> @@ -1433,6 +1452,11 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
->>                && (reservation.mem_flags & XENMEMF_populate_on_demand) )
->>               args.memflags |= MEMF_populate_on_demand;
->>   
->> +        /* Assert flag is not set from construct_memop_from_reservation(). */
->> +        ASSERT(!(args.memflags & MEMF_force_heap_alloc));
->> +        if ( op == XENMEM_populate_physmap_heap_alloc )
->> +            args.memflags |= MEMF_force_heap_alloc;
-> Wouldn't this more logically live ...
->
->>           if ( xsm_memory_adjust_reservation(XSM_TARGET, curr_d, d) )
->>           {
->>               rcu_unlock_domain(d);
->> @@ -1453,7 +1477,7 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
->>           case XENMEM_decrease_reservation:
->>               decrease_reservation(&args);
->>               break;
-> here, as
->
->            case XENMEM_populate_physmap_heap_alloc:
->                ...
->                fallthrough;
-
-Ok.
-
->> -        default: /* XENMEM_populate_physmap */
->> +        default: /* XENMEM_populate_{physmap, physmap_heap_alloc} */
-> Otherwise: Just XENMEM_populate_physmap{,_heap_alloc} perhaps?
-
-Sounds good, thanks for the suggestion.
-
->> --- a/xen/include/public/memory.h
->> +++ b/xen/include/public/memory.h
->> @@ -21,6 +21,7 @@
->>   #define XENMEM_increase_reservation 0
->>   #define XENMEM_decrease_reservation 1
->>   #define XENMEM_populate_physmap     6
->> +#define XENMEM_populate_physmap_heap_alloc 29
-> Without a comment, how is one supposed to know what the difference is of
-> this new sub-op compared to the "normal" one? I actually wonder whether
-> referring to a Xen internal (allocation requested to come from the heap)
-> is actually a good idea here. I'm inclined to suggest to name this after
-> the purpose it has from the guest or tool stack perspective.
->
-> Speaking of which: Is this supposed to be guest-accessible, or is it
-> intended for tool-stack use only (I have to admit I don't even know where
-> init-dom0less actually runs)? In the latter case that also wants enforcing.
-> This may require an adjustment to the XSM hook in use here. Cc-ing Daniel
-> for possible advice.
-
-This sub-op should be called by the init-dom0less application (toolstack 
-side), which runs in Dom0. Daniel has proposed an alternative solution 
-which is based on the hypfs. If we decide to go that route, I think I 
-will rewrite the series. I will wait for the discussion settled. Thanks 
-for looping in Daniel!
-
-Kind regards,
-Henry
-
->
-> Jan
+diff --git a/arch/x86/include/asm/apic.h b/arch/x86/include/asm/apic.h
+index 9d159b771dc8..dd4139250895 100644
+--- a/arch/x86/include/asm/apic.h
++++ b/arch/x86/include/asm/apic.h
+@@ -169,6 +169,9 @@ extern bool apic_needs_pit(void);
+ 
+ extern void apic_send_IPI_allbutself(unsigned int vector);
+ 
++extern int acpi_register_gsi_ioapic(struct device *dev, u32 gsi,
++				    int trigger, int polarity);
++
+ #else /* !CONFIG_X86_LOCAL_APIC */
+ static inline void lapic_shutdown(void) { }
+ #define local_apic_timer_c2_ok		1
+@@ -183,6 +186,11 @@ static inline void apic_intr_mode_init(void) { }
+ static inline void lapic_assign_system_vectors(void) { }
+ static inline void lapic_assign_legacy_vector(unsigned int i, bool r) { }
+ static inline bool apic_needs_pit(void) { return true; }
++static inline int acpi_register_gsi_ioapic(struct device *dev, u32 gsi,
++				    int trigger, int polarity)
++{
++	return (int)gsi;
++}
+ #endif /* !CONFIG_X86_LOCAL_APIC */
+ 
+ #ifdef CONFIG_X86_X2APIC
+diff --git a/arch/x86/include/asm/xen/pci.h b/arch/x86/include/asm/xen/pci.h
+index 9015b888edd6..aa8ded61fc2d 100644
+--- a/arch/x86/include/asm/xen/pci.h
++++ b/arch/x86/include/asm/xen/pci.h
+@@ -5,6 +5,7 @@
+ #if defined(CONFIG_PCI_XEN)
+ extern int __init pci_xen_init(void);
+ extern int __init pci_xen_hvm_init(void);
++extern int __init pci_xen_pvh_init(void);
+ #define pci_xen 1
+ #else
+ #define pci_xen 0
+@@ -13,6 +14,10 @@ static inline int pci_xen_hvm_init(void)
+ {
+ 	return -1;
+ }
++static inline int pci_xen_pvh_init(void)
++{
++	return -1;
++}
+ #endif
+ #ifdef CONFIG_XEN_PV_DOM0
+ int __init pci_xen_initial_domain(void);
+diff --git a/arch/x86/kernel/acpi/boot.c b/arch/x86/kernel/acpi/boot.c
+index 85a3ce2a3666..72c73458c083 100644
+--- a/arch/x86/kernel/acpi/boot.c
++++ b/arch/x86/kernel/acpi/boot.c
+@@ -749,7 +749,7 @@ static int acpi_register_gsi_pic(struct device *dev, u32 gsi,
+ }
+ 
+ #ifdef CONFIG_X86_LOCAL_APIC
+-static int acpi_register_gsi_ioapic(struct device *dev, u32 gsi,
++int acpi_register_gsi_ioapic(struct device *dev, u32 gsi,
+ 				    int trigger, int polarity)
+ {
+ 	int irq = gsi;
+diff --git a/arch/x86/pci/xen.c b/arch/x86/pci/xen.c
+index 652cd53e77f6..f056ab5c0a06 100644
+--- a/arch/x86/pci/xen.c
++++ b/arch/x86/pci/xen.c
+@@ -114,6 +114,21 @@ static int acpi_register_gsi_xen_hvm(struct device *dev, u32 gsi,
+ 				 false /* no mapping of GSI to PIRQ */);
+ }
+ 
++static int acpi_register_gsi_xen_pvh(struct device *dev, u32 gsi,
++				    int trigger, int polarity)
++{
++	int irq;
++
++	irq = acpi_register_gsi_ioapic(dev, gsi, trigger, polarity);
++	if (irq < 0)
++		return irq;
++
++	if (xen_pvh_add_gsi_irq_map(gsi, irq) == -EEXIST)
++		printk(KERN_INFO "Already map the GSI :%u and IRQ: %d\n", gsi, irq);
++
++	return irq;
++}
++
+ #ifdef CONFIG_XEN_PV_DOM0
+ static int xen_register_gsi(u32 gsi, int triggering, int polarity)
+ {
+@@ -558,6 +573,12 @@ int __init pci_xen_hvm_init(void)
+ 	return 0;
+ }
+ 
++int __init pci_xen_pvh_init(void)
++{
++	__acpi_register_gsi = acpi_register_gsi_xen_pvh;
++	return 0;
++}
++
+ #ifdef CONFIG_XEN_PV_DOM0
+ int __init pci_xen_initial_domain(void)
+ {
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index 27553673e46b..80d4f7faac64 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -953,6 +953,43 @@ int xen_irq_from_gsi(unsigned gsi)
+ }
+ EXPORT_SYMBOL_GPL(xen_irq_from_gsi);
+ 
++int xen_gsi_from_irq(unsigned irq)
++{
++	struct irq_info *info;
++
++	list_for_each_entry(info, &xen_irq_list_head, list) {
++		if (info->type != IRQT_PIRQ)
++			continue;
++
++		if (info->irq == irq)
++			return info->u.pirq.gsi;
++	}
++
++	return -1;
++}
++EXPORT_SYMBOL_GPL(xen_gsi_from_irq);
++
++int xen_pvh_add_gsi_irq_map(unsigned gsi, unsigned irq)
++{
++	int tmp_irq;
++	struct irq_info *info;
++
++	tmp_irq = xen_irq_from_gsi(gsi);
++	if (tmp_irq != -1)
++		return -EEXIST;
++
++	info = kzalloc(sizeof(*info), GFP_KERNEL);
++	if (info == NULL)
++		panic("Unable to allocate metadata for GSI%d\n", gsi);
++
++	info->type = IRQT_PIRQ;
++	info->irq = irq;
++	info->u.pirq.gsi = gsi;
++	list_add_tail(&info->list, &xen_irq_list_head);
++
++	return 0;
++}
++
+ static void __unbind_from_irq(struct irq_info *info, unsigned int irq)
+ {
+ 	evtchn_port_t evtchn;
+@@ -2295,6 +2332,8 @@ void __init xen_init_IRQ(void)
+ 	xen_init_setup_upcall_vector();
+ 	xen_alloc_callback_vector();
+ 
++	if (xen_pvh_domain())
++		pci_xen_pvh_init();
+ 
+ 	if (xen_hvm_domain()) {
+ 		native_init_IRQ();
+diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
+index 67dfa4778864..11feed529e1d 100644
+--- a/drivers/xen/privcmd.c
++++ b/drivers/xen/privcmd.c
+@@ -842,6 +842,21 @@ static long privcmd_ioctl_mmap_resource(struct file *file,
+ 	return rc;
+ }
+ 
++static long privcmd_ioctl_gsi_from_irq(struct file *file, void __user *udata)
++{
++	struct privcmd_gsi_from_irq kdata;
++
++	if (copy_from_user(&kdata, udata, sizeof(kdata)))
++		return -EFAULT;
++
++	kdata.gsi = xen_gsi_from_irq(kdata.irq);
++
++	if (copy_to_user(udata, &kdata, sizeof(kdata)))
++		return -EFAULT;
++
++	return 0;
++}
++
+ #ifdef CONFIG_XEN_PRIVCMD_EVENTFD
+ /* Irqfd support */
+ static struct workqueue_struct *irqfd_cleanup_wq;
+@@ -1529,6 +1544,10 @@ static long privcmd_ioctl(struct file *file,
+ 		ret = privcmd_ioctl_ioeventfd(file, udata);
+ 		break;
+ 
++	case IOCTL_PRIVCMD_GSI_FROM_IRQ:
++		ret = privcmd_ioctl_gsi_from_irq(file, udata);
++		break;
++
+ 	default:
+ 		break;
+ 	}
+diff --git a/include/uapi/xen/privcmd.h b/include/uapi/xen/privcmd.h
+index 8b8c5d1420fe..61f0ffbec077 100644
+--- a/include/uapi/xen/privcmd.h
++++ b/include/uapi/xen/privcmd.h
+@@ -126,6 +126,11 @@ struct privcmd_ioeventfd {
+ 	__u8 pad[2];
+ };
+ 
++struct privcmd_gsi_from_irq {
++	__u32 irq;
++	__u32 gsi;
++};
++
+ /*
+  * @cmd: IOCTL_PRIVCMD_HYPERCALL
+  * @arg: &privcmd_hypercall_t
+@@ -157,5 +162,7 @@ struct privcmd_ioeventfd {
+ 	_IOW('P', 8, struct privcmd_irqfd)
+ #define IOCTL_PRIVCMD_IOEVENTFD					\
+ 	_IOW('P', 9, struct privcmd_ioeventfd)
++#define IOCTL_PRIVCMD_GSI_FROM_IRQ				\
++	_IOC(_IOC_NONE, 'P', 10, sizeof(struct privcmd_gsi_from_irq))
+ 
+ #endif /* __LINUX_PUBLIC_PRIVCMD_H__ */
+diff --git a/include/xen/events.h b/include/xen/events.h
+index 3b07409f8032..411298ae7fb0 100644
+--- a/include/xen/events.h
++++ b/include/xen/events.h
+@@ -127,6 +127,11 @@ int xen_pirq_from_irq(unsigned irq);
+ /* Return the irq allocated to the gsi */
+ int xen_irq_from_gsi(unsigned gsi);
+ 
++/* Return the gsi from irq */
++int xen_gsi_from_irq(unsigned irq);
++
++int xen_pvh_add_gsi_irq_map(unsigned gsi, unsigned irq);
++
+ /* Determine whether to ignore this IRQ if it is passed to a guest. */
+ int xen_test_irq_shared(int irq);
+ 
+-- 
+2.34.1
 
 
