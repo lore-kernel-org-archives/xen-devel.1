@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 876F2C4345F
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Apr 2024 09:43:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.709835.1108829 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 387DAC4345F
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Apr 2024 09:52:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.709844.1108849 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ryqCw-00080R-C6; Mon, 22 Apr 2024 09:43:30 +0000
+	id 1ryqLb-0001m9-HI; Mon, 22 Apr 2024 09:52:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 709835.1108829; Mon, 22 Apr 2024 09:43:30 +0000
+Received: by outflank-mailman (output) from mailman id 709844.1108849; Mon, 22 Apr 2024 09:52:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ryqCw-00080K-8p; Mon, 22 Apr 2024 09:43:30 +0000
-Received: by outflank-mailman (input) for mailman id 709835;
- Mon, 22 Apr 2024 09:43:29 +0000
+	id 1ryqLb-0001m2-EW; Mon, 22 Apr 2024 09:52:27 +0000
+Received: by outflank-mailman (input) for mailman id 709844;
+ Mon, 22 Apr 2024 09:52:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jl0+=L3=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ryqCv-00080C-15
- for xen-devel@lists.xenproject.org; Mon, 22 Apr 2024 09:43:29 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Ds6W=L3=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1ryqLZ-0001X4-VS
+ for xen-devel@lists.xenproject.org; Mon, 22 Apr 2024 09:52:25 +0000
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c5288de3-008c-11ef-909a-e314d9c70b13;
- Mon, 22 Apr 2024 11:43:27 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-41a70466b77so3247225e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 22 Apr 2024 02:43:27 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- j10-20020a05600c190a00b00418a9961c47sm16039667wmq.47.2024.04.22.02.43.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Apr 2024 02:43:26 -0700 (PDT)
+ id 05b2b778-008e-11ef-909a-e314d9c70b13;
+ Mon, 22 Apr 2024 11:52:25 +0200 (CEST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-343d7ff2350so3080018f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Apr 2024 02:52:25 -0700 (PDT)
+Received: from localhost ([85.31.135.62]) by smtp.gmail.com with ESMTPSA id
+ v10-20020a5d590a000000b003437ad152f9sm11472139wrd.105.2024.04.22.02.52.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 02:52:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,124 +46,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5288de3-008c-11ef-909a-e314d9c70b13
+X-Inumbo-ID: 05b2b778-008e-11ef-909a-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1713779007; x=1714383807; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=kHkJ5flqouRo1gFeTLcsT+gwQ3p07jQkXPddPMRv/lA=;
-        b=SYMyrKC/RTZydYJ4+B4vXWvhxlmDyAa1MpT1vcrxwqqc532xQYaNjUqNr4/aOdSWJk
-         AhsonWxu5z6QEG6WAnEfnH9gRrwU8koxgSr9bNX94iKoCARtWN+4YSYtfsB9f+03LXJ2
-         JfkwanLl3WsO4PKASDPqW460qTowzP6EfnqGppUinb4wxqCYQSOiNRpFMY1mCsxXlt3W
-         grTsEqbh3N2aFdy4habSFT7k2WaU4nITrryZYVA6wzsF2DSQevNE9oKaSrJ5t2i6WjyU
-         BypBzle/3ZwwRibFbgzwkwTDDM/F9jMMnEM16V8X54XeeDZEdIH2FCVAMfW+aj8qsaqb
-         r72A==
+        d=citrix.com; s=google; t=1713779544; x=1714384344; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=drPZty86Abw56CZZyAdI896Rwj7S92fYFAWqWuFlrdo=;
+        b=irnFghkAxR7Y89jmIUcAuiGXdCTrcIbe0X5qLDAe2oSIfLlPtaZcCZhg69Hqaner1g
+         BojaK/fAcx/O4w1s7AGZnR1Ip+lg+vW3kYDuI/W7z9k8ZkMJAdNLxM03sK9bP1foQOMR
+         MBfn1muLwkvKmTbBUurowt6x8WtPZ+eRyJT84=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713779007; x=1714383807;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=kHkJ5flqouRo1gFeTLcsT+gwQ3p07jQkXPddPMRv/lA=;
-        b=qJrBFsoTYmdW9d8HnWYjfN2kC7epKIMPuVLE2gEVXMH26YacQ0VGiWKRFKQ8aTexoS
-         s2LMS67xfofUAHGtw2rHlJUCQRa4+6+LejVXWJH9Fg9K8UQEwDpTiiziwsOtajEjSuPQ
-         nUCdwzIhIA/79BdH2Mk4NJJfpIdO3xUipMwsSlqY7/PrSUTwl551t+3aktI8ce8ERuLb
-         qxWFdUI4NmS4jXVN2mFLN+Ca9LDC7T0LGbpM6RS4l7VWWQ7oSpQ1ODrKx2ycCXEgBmAP
-         XR/X9TfmJgHXI7B1jRafPFambgOE1FMJMwONpxgowtK3VBDjqBraI5deZmh/cIIZRaFW
-         TDvQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXjl3cmd8nj6OQ6W/TpCBHXL+5G2T+SqrFzQFHfG0fxyCcZERLQSuFEmlOacvZbkhEZuODIcAjRdK9nDhEUQb5g3ZbtHIYRXI/zSaKN3y0=
-X-Gm-Message-State: AOJu0YzYMA3nCTAkyCmIzoLQg29yIg8+5LpxljSjKVt5StAVTyzrims5
-	oOBdIBMc0V0yZmTaVnrF2YNvQLnRIKH1l0KlrSWpm7cGI2tlp5moCfDkE+nY3w==
-X-Google-Smtp-Source: AGHT+IEkfr15z8If05339BiZbkT1Lb3LOczowvFhraobyWJBx1nf/npM6hdcNE6bG7vc1EaHm5gRvA==
-X-Received: by 2002:a05:600c:4754:b0:416:7b2c:df0f with SMTP id w20-20020a05600c475400b004167b2cdf0fmr8461449wmo.7.1713779006950;
-        Mon, 22 Apr 2024 02:43:26 -0700 (PDT)
-Message-ID: <956388de-ef6d-4d7a-8b5f-2a292af8db53@suse.com>
-Date: Mon, 22 Apr 2024 11:43:28 +0200
+        d=1e100.net; s=20230601; t=1713779544; x=1714384344;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=drPZty86Abw56CZZyAdI896Rwj7S92fYFAWqWuFlrdo=;
+        b=qnin4EjR0Euv8EGIa0L91weWZfyvzivK18kArdxzPbfc85lXTe3b3pOIaXNRgIxApv
+         X3MtXtxijvx0/mVoNZhX+rnXz6F1jdaAQjmP+1k9HQSH2LGIRryVDFfGKjmxDtatklS3
+         QY46YyZT2ldJSueWFzy2H60fL0PYeLsR5VZRUs3Suag4/K7PUERMsnXp0EFIPhoZJMrg
+         4YAeZlnGzq0IkcY8oXSGpTPqqEdVdc+qW1xqVROYhwLLlw/Q9uKSeCdwE6K4H8hYeUq5
+         Jij7mGBc+SL2K9cQ6BYcjFj432t0Yj+3ifrkBULRpNqKwUngGj28z4qkplW7ICqTFFFh
+         juYg==
+X-Gm-Message-State: AOJu0YxdrY5nzStREdT0bijLO+Nowl3lt3kzjzT8aNsB8CJpILRVU1ac
+	dnlVsOSxIvWvmiZ+FtWtAvPFUmzrqWb+4knsce0zFs3UcA4kQLJgM85v1I2IhEkaUPeAKE0/5SX
+	l
+X-Google-Smtp-Source: AGHT+IHaacB3gnriuYoV81Ftcrmt/1jSPI6rxCA91xh9nnjUzmgGFQT/8T0/SK3E6Y4BDkRW/B2kIQ==
+X-Received: by 2002:a5d:63cf:0:b0:343:eb6c:ae80 with SMTP id c15-20020a5d63cf000000b00343eb6cae80mr6257299wrw.28.1713779544276;
+        Mon, 22 Apr 2024 02:52:24 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 2/2] x86/pvh: zero VGA information
+Date: Mon, 22 Apr 2024 11:52:16 +0200
+Message-ID: <20240422095216.20211-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240422095216.20211-1-roger.pau@citrix.com>
+References: <20240422095216.20211-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] xen/riscv: check whether the assembler has Zbb
- extension support
-Content-Language: en-US
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <95441782d1920f219d63dee1c82c7df68424d374.1713523124.git.oleksii.kurochko@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <95441782d1920f219d63dee1c82c7df68424d374.1713523124.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 19.04.2024 16:23, Oleksii Kurochko wrote:
-> Update the argument of the as-insn for the Zbb case to verify that
-> Zbb is supported not only by a compiler, but also by an assembler.
-> 
-> Also, check-extenstion(ext_name, "insn") helper macro is introduced
-> to check whether extension is supported by a compiler and an assembler.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+PVH guests skip real mode VGA detection, and never have a VGA available, hence
+the default VGA selection is not applicable, and at worse can cause confusion
+when parsing Xen boot log.
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
-despite ...
+Zero the boot_vid_info structure when Xen is booted from the PVH entry point.
 
-> --- a/xen/arch/riscv/arch.mk
-> +++ b/xen/arch/riscv/arch.mk
-> @@ -11,9 +11,14 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
->  
->  riscv-generic-flags := $(riscv-abi-y) -march=$(riscv-march-y)
->  
-> -zbb := $(call as-insn,$(CC) $(riscv-generic-flags)_zbb,"",_zbb)
-> -zihintpause := $(call as-insn, \
-> -                      $(CC) $(riscv-generic-flags)_zihintpause,"pause",_zihintpause)
-> +# check-extension: Check whether extenstion is supported by a compiler and
-> +#                  an assembler.
-> +# Usage: $(call check-extension,extension_name,"instr")
-> +check-extension = $(call as-insn,$(CC) $(riscv-generic-flags)_$(1),$(2),_$(1))
-> +
-> +zbb-insn := "andn t0, t0, t0"
-> +zbb := $(call check-extension,zbb,$(zbb-insn))
-> +zihintpause := $(call check-extension,zihintpause,"pause")
+This fixes Xen incorrectly reporting:
 
-... still not really being happy with this: Either, as said before, zbb-insn
-would better be avoided (by using $(comma) as necessary), or you should have
-gone yet a step further to fully address my "redundancy" concern. Note how
-the two ultimate lines still have 3 (zbb) and 2 (zihintpause) references
-respectively, when the goal ought to be to have exactly one. E.g. along the
-lines of
+(XEN) Video information:
+(XEN)  VGA is text mode 80x25, font 8x16
 
-$(call check-extension,zbb)
-$(call check-extension,zihintpause)
+When booted as a PVH guest.
 
-suitably using $(eval ...) (to effect the variable definitions) and defining
-both zbb-insn and zihintpause-insn.
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/boot/video.h         | 2 ++
+ xen/arch/x86/guest/xen/pvh-boot.c | 9 +++++++++
+ xen/arch/x86/setup.c              | 1 -
+ 3 files changed, 11 insertions(+), 1 deletion(-)
 
-But I'll nevertheless put this in as is, unless you tell me you're up to
-going the extra step.
+diff --git a/xen/arch/x86/boot/video.h b/xen/arch/x86/boot/video.h
+index 6a7775d24292..1203515f9e5b 100644
+--- a/xen/arch/x86/boot/video.h
++++ b/xen/arch/x86/boot/video.h
+@@ -67,6 +67,8 @@ struct boot_video_info {
+     } vesapm;
+     uint16_t vesa_attrib;        /* 0x28 */
+ };
++
++extern struct boot_video_info boot_vid_info;
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* __BOOT_VIDEO_H__ */
+diff --git a/xen/arch/x86/guest/xen/pvh-boot.c b/xen/arch/x86/guest/xen/pvh-boot.c
+index 9cbe87b61bdd..cc57ab2cbcde 100644
+--- a/xen/arch/x86/guest/xen/pvh-boot.c
++++ b/xen/arch/x86/guest/xen/pvh-boot.c
+@@ -15,6 +15,10 @@
+ 
+ #include <public/arch-x86/hvm/start_info.h>
+ 
++#ifdef CONFIG_VIDEO
++# include "../../boot/video.h"
++#endif
++
+ /* Initialised in head.S, before .bss is zeroed. */
+ bool __initdata pvh_boot;
+ uint32_t __initdata pvh_start_info_pa;
+@@ -95,6 +99,11 @@ void __init pvh_init(multiboot_info_t **mbi, module_t **mod)
+     ASSERT(xen_guest);
+ 
+     get_memory_map();
++
++#ifdef CONFIG_VIDEO
++    /* No VGA available when booted from the PVH entry point. */
++    memset(&bootsym(boot_vid_info), 0, sizeof(boot_vid_info));
++#endif
+ }
+ 
+ void __init pvh_print_info(void)
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 86cd8b999774..449a3476531e 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -646,7 +646,6 @@ static struct e820map __initdata boot_e820;
+ 
+ #ifdef CONFIG_VIDEO
+ # include "boot/video.h"
+-extern struct boot_video_info boot_vid_info;
+ #endif
+ 
+ static void __init parse_video_info(void)
+-- 
+2.44.0
 
-Jan
 
