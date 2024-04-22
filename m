@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D12CC4345F
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Apr 2024 17:58:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.710185.1109280 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A83AC07C79
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Apr 2024 18:14:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.710194.1109320 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ryxvM-0005BI-II; Mon, 22 Apr 2024 17:57:52 +0000
+	id 1ryyBf-0000pk-9U; Mon, 22 Apr 2024 18:14:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 710185.1109280; Mon, 22 Apr 2024 17:57:52 +0000
+Received: by outflank-mailman (output) from mailman id 710194.1109320; Mon, 22 Apr 2024 18:14:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ryxvM-0005BB-FU; Mon, 22 Apr 2024 17:57:52 +0000
-Received: by outflank-mailman (input) for mailman id 710185;
- Mon, 22 Apr 2024 17:57:51 +0000
+	id 1ryyBf-0000oY-1G; Mon, 22 Apr 2024 18:14:43 +0000
+Received: by outflank-mailman (input) for mailman id 710194;
+ Mon, 22 Apr 2024 18:14:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=B2T4=L3=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1ryxvL-0005B3-EX
- for xen-devel@lists.xenproject.org; Mon, 22 Apr 2024 17:57:51 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
+ <SRS0=/m7Q=L3=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1ryyBe-0000IX-6f
+ for xen-devel@lists.xenproject.org; Mon, 22 Apr 2024 18:14:42 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d4826f05-00d1-11ef-909a-e314d9c70b13;
- Mon, 22 Apr 2024 19:57:48 +0200 (CEST)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-346406a5fb9so3790009f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 22 Apr 2024 10:57:48 -0700 (PDT)
-Received: from perard.uk.xensource.com (default-46-102-197-194.interdsl.co.uk.
+ id 2ffeed76-00d4-11ef-909a-e314d9c70b13;
+ Mon, 22 Apr 2024 20:14:41 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a55ab922260so203926466b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Apr 2024 11:14:41 -0700 (PDT)
+Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- u17-20020adfeb51000000b00347321735a6sm12603498wrn.66.2024.04.22.10.57.47
+ z15-20020a170906668f00b00a51d073da7esm5994224ejo.82.2024.04.22.11.14.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 10:57:47 -0700 (PDT)
+ Mon, 22 Apr 2024 11:14:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,100 +47,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d4826f05-00d1-11ef-909a-e314d9c70b13
+X-Inumbo-ID: 2ffeed76-00d4-11ef-909a-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1713808668; x=1714413468; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=JSnBH49T3OqaJvnPFW1gr50cYh18DpiRIBpR8edsy0A=;
-        b=AsdYZq74vB1RA4IvhWrCmW8gvg3Rk7tFIMKtAJSb6mRf98BlkQxPpB4rjzxXy2LmJ0
-         zi8Z6MZj9JCTcmo0L8ezoK3/6Sq0uGGc9GFDKiikrlRGrng7NmqKflsn48g5S/7RK47O
-         s43DUdecYgFstzgAi3KoQmgf59+q+jpweB+NM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713808668; x=1714413468;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1713809680; x=1714414480; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JSnBH49T3OqaJvnPFW1gr50cYh18DpiRIBpR8edsy0A=;
-        b=oCK+HDM+QEjU+DRMN8/PcdM15t+wCsBaMxThIYGGuE1BFxQiMZHHEeqiE/fjt3J6RV
-         KCRDy6f6NhPIx+iKQ0tA1fiz15fusUQDYWuYVEtGATyVfJ+tL0TAB5al6RmcS6eQkYv/
-         2HkKd+JkZBnQuBS3FPEFl6Afa6OSX5UR4LZKMnUuXhWEtJA/JhEhzrJNzXQuw/eD6X0Q
-         B+YFlhAr4Uk+FG63xMT5gqFYaYDjLhnEXVqX/uZf1lowIb8EADVjm52+aFVdHNGQ6LxC
-         DnwAZ6KKBY0zB4OP9UINKXLBk1kVqvTsPXDWpVFrvlgokiutG0Gd6RXZfC0QrURmP8uH
-         1h0w==
-X-Gm-Message-State: AOJu0Ywc3gYv5+raMjGbV8HS9WJ6EPz4NS9SP07EIEgIUvklWdUW6pqz
-	ozyKV2lYkvv8dPoinf7y6HgrJeeSJ9/NArOYBDNzJQPm8zkh9Nn1QyZfB/X0/Fg=
-X-Google-Smtp-Source: AGHT+IG8B0xmSb0gtR/F7CrUNqTWjPfm+d1jWXI4hkeiCkFNHAxWooMmuCiyZ7Rft2PMh1zF5bUz1A==
-X-Received: by 2002:adf:e80a:0:b0:345:b238:534d with SMTP id o10-20020adfe80a000000b00345b238534dmr5851771wrm.28.1713808668038;
-        Mon, 22 Apr 2024 10:57:48 -0700 (PDT)
-Date: Mon, 22 Apr 2024 18:57:46 +0100
-From: Anthony PERARD <anthony.perard@cloud.com>
-To: Fouad Hilly <fouad.hilly@cloud.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
-	Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 5/5] x86: Add --force option to xen-ucode to override
- microcode version check
-Message-ID: <35e382d7-0f65-4dbe-bc80-ddbf9d649e24@perard>
-References: <20240416091546.11622-1-fouad.hilly@cloud.com>
- <20240416091546.11622-6-fouad.hilly@cloud.com>
+        bh=FaF1+jq0lOG0Zt+SDR+w7NABaf8lTc4H+2KHEf8aMyg=;
+        b=BJFT2JallZ/j//2MXYLr2gSSAMRBSs91NowYyRZw2r13Q85exIpfAnABt4KqaiUoV9
+         0Vg30zKnMkh7CSHkaXkjpQmHLqMv/eMn/dG6qDzr4n7wIL8+9NM4h8tNpEpACGpMMUVi
+         2IF4ZFViGMHFOKUmCUZNq3Cab7WnNgcCkC+bU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1713809680; x=1714414480;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FaF1+jq0lOG0Zt+SDR+w7NABaf8lTc4H+2KHEf8aMyg=;
+        b=JZuVlHWOy8PWnTFXnKhTy85wWu56b2o6nIHlo7rLskynZ+KP2v3B00CjHAttAzd7wo
+         g2SFKt70VgrhytUxHDVEuATy1lCw0vy0cNBiOqfWwuaCUZRO5CXqBzVzavjp7EXWLHdL
+         qcB5YpHWdt9JPbd9DryaGaWOGs3S0LzhrYBBAcJpaIRuvyV5gIA+jhPKISlxPrz6rWfE
+         pfiJe9P9Vs8gH/NHOke4iblbd+VkQKHfYaqOj7V/bIiP3z2njEL0aXfcQkvHAWzeQx29
+         H6i7pvn0a8sjNZ3V2Kj7jmuP9ztHBSEzl7VsclLlVXPR6K1aBJpFRCEQy5WH11SeFSxT
+         K2Ng==
+X-Gm-Message-State: AOJu0Yy80mRYXNI8DOw+y1h1t3mqlIhPVyK2Egz8VlOk/pcRpgke57Qu
+	kY0z5d+/Y8RkiBRK1rRQSwvocAhdEN8BXh8VAqxELbsluSXH/jB/LbpLnT42H0vm83EgjLyz+sn
+	ZRr4=
+X-Google-Smtp-Source: AGHT+IHmqFdmdVeYAFVG6c/DuwA7Wp3vBh4M41S2ewoBL7esKFiKG2mvjUAjL/oIHx92bkOiFta4Xg==
+X-Received: by 2002:a17:906:1d47:b0:a58:7507:d4ed with SMTP id o7-20020a1709061d4700b00a587507d4edmr440811ejh.15.1713809680447;
+        Mon, 22 Apr 2024 11:14:40 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 4/6] x86/alternative: Replace a continue with a goto
+Date: Mon, 22 Apr 2024 19:14:32 +0100
+Message-Id: <20240422181434.3463252-5-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240422181434.3463252-1-andrew.cooper3@citrix.com>
+References: <20240422181434.3463252-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240416091546.11622-6-fouad.hilly@cloud.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 16, 2024 at 10:15:46AM +0100, Fouad Hilly wrote:
-> Introduce --force option to xen-ucode to force skipping microcode version
-> check, which allows the user to update x86 microcode even if both versions
-> are the same.
-> 
-> [v2]
-> 1- Changed data type from uint32_t to unsigned int.
-> 2- Corrected line length.
-> 3- Removed XENPF_UCODE_FLAG_FORCE_NOT_SET.
-> 4- Corrected indentations.
-> 5- Changed command line options to have the file name as first argument when applicable.
-> 6- --force option doesn't require an argument anymore.
-> 7- Used optint to access filename in argv.
-> 
-> Signed-off-by: Fouad Hilly <fouad.hilly@cloud.com>
-> ---
-> 
-> Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+A subsequent patch is going to insert a loop, which interferes with the
+continue in the devirtualisation logic.
 
-You might want to move that tag before the '---' separation otherwise it
-wont be part of the commit message. `git am` discard every thing after
-the '---' line. Also add the tag before your SOB.
+Replace it with a goto, and a paragraph explaining why we intentionally avoid
+setting a->priv = 1.
 
-> ---
->  tools/include/xenctrl.h   |  3 ++-
->  tools/libs/ctrl/xc_misc.c | 13 +++++++++++--
->  tools/misc/xen-ucode.c    | 18 +++++++++++++-----
->  3 files changed, 26 insertions(+), 8 deletions(-)
-> 
-> diff --git a/tools/misc/xen-ucode.c b/tools/misc/xen-ucode.c
-> index e3c1943e3633..4178fd2221ea 100644
-> --- a/tools/misc/xen-ucode.c
-> +++ b/tools/misc/xen-ucode.c
-> @@ -24,7 +26,8 @@ static void usage(const char *name)
->             "Usage: %s [microcode file] [options]\n"
+No functional change.
 
-Now, that usage line is wrong. The options needs to go before the file.
-That could be fix on the previous patch. With that usage line, we would
-want to run `./xen-ucode ucode.bin --force`, but I don't think that
-would work.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/alternative.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
->             "Options:\n"
->             "  -h, --help            display this help and exit\n"
-> -           "  -s, --show-cpu-info   show CPU information and exit\n",
-> +           "  -s, --show-cpu-info   show CPU information and exit\n"
-> +           "  -f, --force           force to skip micorocde version check\n",
->             name, name);
->  }
->  
-
-Thanks,
-
+diff --git a/xen/arch/x86/alternative.c b/xen/arch/x86/alternative.c
+index 2ca4dfd569bc..c86ea235e865 100644
+--- a/xen/arch/x86/alternative.c
++++ b/xen/arch/x86/alternative.c
+@@ -308,7 +308,15 @@ static void init_or_livepatch _apply_alternatives(struct alt_instr *start,
+                         buf[4] = 0xff;
+                     }
+                     else
+-                        continue;
++                    {
++                        /*
++                         * The function pointer we're wanting to devirtualise
++                         * is still NULL, and we're not sealing yet.  Leave
++                         * the alternative fully un-processed, in order to
++                         * process it the next time around.
++                         */
++                        goto skip_this_alternative;
++                    }
+                 }
+                 else if ( force && system_state < SYS_STATE_active )
+                     ASSERT_UNREACHABLE();
+@@ -323,6 +331,7 @@ static void init_or_livepatch _apply_alternatives(struct alt_instr *start,
+ 
+         add_nops(buf + a->repl_len, total_len - a->repl_len);
+         text_poke(orig, buf, total_len);
++    skip_this_alternative:;
+     }
+ 
+     /*
 -- 
-Anthony PERARD
+2.30.2
+
 
