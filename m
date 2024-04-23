@@ -4,35 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E42B8C41513
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 08:26:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.710384.1109598 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 681E5C4345F
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 08:46:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.710425.1109637 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzBTL-0003T8-Eo; Tue, 23 Apr 2024 08:25:51 +0000
+	id 1rzBn2-0001KM-A6; Tue, 23 Apr 2024 08:46:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 710384.1109598; Tue, 23 Apr 2024 08:25:51 +0000
+Received: by outflank-mailman (output) from mailman id 710425.1109637; Tue, 23 Apr 2024 08:46:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzBTL-0003Py-9D; Tue, 23 Apr 2024 08:25:51 +0000
-Received: by outflank-mailman (input) for mailman id 710384;
- Tue, 23 Apr 2024 08:25:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rzBn2-0001KF-7Y; Tue, 23 Apr 2024 08:46:12 +0000
+Received: by outflank-mailman (input) for mailman id 710425;
+ Tue, 23 Apr 2024 08:46:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eHxu=L4=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1rzBTK-0002TX-35
- for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 08:25:50 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 1648df22-014b-11ef-b4bb-af5377834399;
- Tue, 23 Apr 2024 10:25:48 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B67DD339;
- Tue, 23 Apr 2024 01:26:15 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B81B93F64C;
- Tue, 23 Apr 2024 01:25:46 -0700 (PDT)
+ <SRS0=UKuO=L4=darkstar.site=sakib@srs-se1.protection.inumbo.net>)
+ id 1rzBn0-0001K9-Vv
+ for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 08:46:11 +0000
+Received: from pb-smtp21.pobox.com (pb-smtp21.pobox.com [173.228.157.53])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ebdd5a13-014d-11ef-909a-e314d9c70b13;
+ Tue, 23 Apr 2024 10:46:07 +0200 (CEST)
+Received: from pb-smtp21.pobox.com (unknown [127.0.0.1])
+ by pb-smtp21.pobox.com (Postfix) with ESMTP id 7296B293A4;
+ Tue, 23 Apr 2024 04:46:04 -0400 (EDT)
+ (envelope-from sakib@darkstar.site)
+Received: from pb-smtp21.sea.icgroup.com (unknown [127.0.0.1])
+ by pb-smtp21.pobox.com (Postfix) with ESMTP id 5D1DB293A3;
+ Tue, 23 Apr 2024 04:46:04 -0400 (EDT)
+ (envelope-from sakib@darkstar.site)
+Received: from localhost (unknown [185.130.54.126])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by pb-smtp21.pobox.com (Postfix) with ESMTPSA id 4EA622939D;
+ Tue, 23 Apr 2024 04:46:00 -0400 (EDT)
+ (envelope-from sakib@darkstar.site)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,271 +52,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1648df22-014b-11ef-b4bb-af5377834399
-From: Luca Fancellu <luca.fancellu@arm.com>
+X-Inumbo-ID: ebdd5a13-014d-11ef-909a-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=pobox.com; h=from:to:cc
+	:subject:date:message-id:mime-version:content-transfer-encoding;
+	 s=sasl; bh=Uh4F9no4BIYC1nQL2ejMcfVoDtu9aEa2CEXPvaH2j0Q=; b=ANlo
+	c16bMuYA0Z9Vf/I6uWkcHzNvYUogE59oNXcCcg7H7BGPUuuO1BJRNZ07KcVetI0H
+	vc/LSFHZ5OEzCGGPRVhBBlFXhKU2R4PBgcKdHQoMZs/x9yuRKtUJPuTxXfJ+aZzG
+	mahkcK8pOPYIRkC8W96tx3Vex9uLFnP9c5BHxaI=
+From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 4/7] xen/arm: Parse xen,shared-mem when host phys address is not provided
-Date: Tue, 23 Apr 2024 09:25:29 +0100
-Message-Id: <20240423082532.776623-5-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240423082532.776623-1-luca.fancellu@arm.com>
-References: <20240423082532.776623-1-luca.fancellu@arm.com>
+Cc: Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v1 0/7] x86: make Intel/AMD vPMU & MCE support configurable
+Date: Tue, 23 Apr 2024 11:45:56 +0300
+Message-Id: <cover.1713860310.git.Sergiy_Kibrik@epam.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Pobox-Relay-ID:
+ E8E77480-014D-11EF-8AA1-A19503B9AAD1-90055647!pb-smtp21.pobox.com
+Content-Transfer-Encoding: quoted-printable
 
-Handle the parsing of the 'xen,shared-mem' property when the host physical
-address is not provided, this commit is introducing the logic to parse it,
-but the functionality is still not implemented and will be part of future
-commits.
+Here's an attempt to further separate support of Intel & AMD CPUs in Xen =
+build.
+The code to drive both platforms used to be built unconditionally, until =
+recent
+introduction of CONFIG_{AMD,INTEL} Kconfig options.
 
-Rework the logic inside process_shm_node to check the shm_id before doing
-the other checks, because it ease the logic itself, add more comment on
-the logic.
-Now when the host physical address is not provided, the value
-INVALID_PADDR is chosen to signal this condition and it is stored as
-start of the bank, due to that change also early_print_info_shmem and
-init_sharedmem_pages are changed, to don't handle banks with start equal
-to INVALID_PADDR.
+This series extends coverage of these options on vpmu and mcheck subsyste=
+ms,
+that is not building Intel or AMD vpmu/mcheck support if CPU vendor's sup=
+port
+was explicitly disabled.
 
-Another change is done inside meminfo_overlap_check, to skip banks that
-are starting with the start address INVALID_PADDR, that function is used
-to check banks from reserved memory and ACPI and it's unlikely for these
-bank to have the start address as INVALID_PADDR. The change holds
-because of this consideration.
+Sergiy Kibrik (7):
+  x86/vpmu: separate amd/intel vPMU code
+  x86/intel: guard vmce_has_lmce() with INTEL option
+  x86/MCE: guard access to Intel/AMD-specific MCA MSRs
+  x86/MCE: guard lmce_support/cmci_support
+  x86/MCE: guard {intel/amd}_mcheck_init() calls
+  x86/MCE: guard call to Intel-specific intel_get_extended_msrs()
+  x86/MCE: optional build of AMD/Intel MCE code
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
- xen/arch/arm/setup.c        |   3 +-
- xen/arch/arm/static-shmem.c | 129 +++++++++++++++++++++++++-----------
- 2 files changed, 93 insertions(+), 39 deletions(-)
+ xen/arch/x86/cpu/Makefile           |  4 +++-
+ xen/arch/x86/cpu/mcheck/Makefile    |  6 ++----
+ xen/arch/x86/cpu/mcheck/mce.c       | 13 ++++++++-----
+ xen/arch/x86/cpu/mcheck/non-fatal.c |  6 ++++++
+ xen/arch/x86/cpu/mcheck/vmce.c      | 18 +++++++++++-------
+ xen/arch/x86/cpu/mcheck/vmce.h      |  1 +
+ xen/arch/x86/include/asm/vpmu.h     | 19 +++++++++++++++++++
+ xen/arch/x86/msr.c                  |  2 +-
+ 8 files changed, 51 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index d242674381d4..f15d40a85a5f 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -297,7 +297,8 @@ static bool __init meminfo_overlap_check(const struct membanks *mem,
-         bank_start = mem->bank[i].start;
-         bank_end = bank_start + mem->bank[i].size;
- 
--        if ( region_end <= bank_start || region_start >= bank_end )
-+        if ( INVALID_PADDR == bank_start || region_end <= bank_start ||
-+             region_start >= bank_end )
-             continue;
-         else
-         {
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-index 24e40495a481..1c03bb7f1882 100644
---- a/xen/arch/arm/static-shmem.c
-+++ b/xen/arch/arm/static-shmem.c
-@@ -264,6 +264,12 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-         pbase = boot_shm_bank->start;
-         psize = boot_shm_bank->size;
- 
-+        if ( INVALID_PADDR == pbase )
-+        {
-+            printk("%pd: host physical address must be chosen by users at the moment.", d);
-+            return -EINVAL;
-+        }
-+
-         /*
-          * xen,shared-mem = <pbase, gbase, size>;
-          * TODO: pbase is optional.
-@@ -382,7 +388,8 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
- {
-     const struct fdt_property *prop, *prop_id, *prop_role;
-     const __be32 *cell;
--    paddr_t paddr, gaddr, size, end;
-+    paddr_t paddr = INVALID_PADDR;
-+    paddr_t gaddr, size, end;
-     struct membanks *mem = bootinfo_get_shmem();
-     struct shmem_membank_extra *shmem_extra = bootinfo_get_shmem_extra();
-     unsigned int i;
-@@ -437,24 +444,37 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-     if ( !prop )
-         return -ENOENT;
- 
-+    cell = (const __be32 *)prop->data;
-     if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
-     {
--        if ( len == dt_cells_to_size(size_cells + address_cells) )
--            printk("fdt: host physical address must be chosen by users at the moment.\n");
--
--        printk("fdt: invalid `xen,shared-mem` property.\n");
--        return -EINVAL;
-+        if ( len == dt_cells_to_size(address_cells + size_cells) )
-+            device_tree_get_reg(&cell, address_cells, size_cells, &gaddr,
-+                                &size);
-+        else
-+        {
-+            printk("fdt: invalid `xen,shared-mem` property.\n");
-+            return -EINVAL;
-+        }
-     }
-+    else
-+    {
-+        device_tree_get_reg(&cell, address_cells, address_cells, &paddr,
-+                            &gaddr);
-+        size = dt_next_cell(size_cells, &cell);
- 
--    cell = (const __be32 *)prop->data;
--    device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
--    size = dt_next_cell(size_cells, &cell);
-+        if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
-+        {
-+            printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
-+                paddr);
-+            return -EINVAL;
-+        }
- 
--    if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
--    {
--        printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
--               paddr);
--        return -EINVAL;
-+        end = paddr + size;
-+        if ( end <= paddr )
-+        {
-+            printk("fdt: static shared memory region %s overflow\n", shm_id);
-+            return -EINVAL;
-+        }
-     }
- 
-     if ( !IS_ALIGNED(gaddr, PAGE_SIZE) )
-@@ -476,41 +496,69 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-         return -EINVAL;
-     }
- 
--    end = paddr + size;
--    if ( end <= paddr )
--    {
--        printk("fdt: static shared memory region %s overflow\n", shm_id);
--        return -EINVAL;
--    }
--
-     for ( i = 0; i < mem->nr_banks; i++ )
-     {
-         /*
-          * Meet the following check:
-+         * when host address is provided:
-          * 1) The shm ID matches and the region exactly match
-          * 2) The shm ID doesn't match and the region doesn't overlap
-          * with an existing one
-+         * when host address is not provided:
-+         * 1) The shm ID matches and the region size exactly match
-          */
--        if ( paddr == mem->bank[i].start && size == mem->bank[i].size )
-+        bool paddr_assigned = INVALID_PADDR == paddr;
-+        bool shm_id_match = strncmp(shm_id, shmem_extra[i].shm_id,
-+                                    MAX_SHM_ID_LENGTH) == 0;
-+        if ( shm_id_match )
-         {
--            if ( strncmp(shm_id, shmem_extra[i].shm_id,
--                         MAX_SHM_ID_LENGTH) == 0  )
-+            /*
-+             * Regions have same shm_id (cases):
-+             * 1) physical host address is supplied:
-+             *    - OK:   paddr is equal and size is equal (same region)
-+             *    - Fail: paddr doesn't match or size doesn't match (there
-+             *            cannot exists two shmem regions with same shm_id)
-+             * 2) physical host address is NOT supplied:
-+             *    - OK:   size is equal (same region)
-+             *    - Fail: size is not equal (same shm_id must identify only one
-+             *            region, there can't be two different regions with same
-+             *            shm_id)
-+             */
-+            bool start_match = paddr_assigned ? (paddr == mem->bank[i].start) :
-+                                                true;
-+
-+            if ( start_match && size == mem->bank[i].size )
-                 break;
-             else
-             {
--                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
-+                printk("fdt: different shared memory region could not share the same shm ID %s\n",
-                        shm_id);
-                 return -EINVAL;
-             }
-         }
--        else if ( strncmp(shm_id, shmem_extra[i].shm_id,
--                          MAX_SHM_ID_LENGTH) != 0 )
--            continue;
-         else
-         {
--            printk("fdt: different shared memory region could not share the same shm ID %s\n",
--                   shm_id);
--            return -EINVAL;
-+            /*
-+             * Regions have different shm_id (cases):
-+             * 1) physical host address is supplied:
-+             *    - OK:   paddr different, or size different (case where paddr
-+             *            is equal but psize is different are wrong, but they
-+             *            are handled later when checking for overlapping)
-+             *    - Fail: paddr equal and size equal (the same region can't be
-+             *            identified with different shm_id)
-+             * 2) physical host address is NOT supplied:
-+             *    - OK:   Both have different shm_id so even with same size they
-+             *            can exists
-+             */
-+            if ( !paddr_assigned || paddr != mem->bank[i].start ||
-+                 size != mem->bank[i].size )
-+                continue;
-+            else
-+            {
-+                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
-+                       shm_id);
-+                return -EINVAL;
-+            }
-         }
-     }
- 
-@@ -518,7 +566,8 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-     {
-         if (i < mem->max_banks)
-         {
--            if ( check_reserved_regions_overlap(paddr, size) )
-+            if ( (paddr != INVALID_PADDR) &&
-+                 check_reserved_regions_overlap(paddr, size) )
-                 return -EINVAL;
- 
-             /* Static shared memory shall be reserved from any other use. */
-@@ -588,13 +637,16 @@ void __init early_print_info_shmem(void)
- {
-     const struct membanks *shmem = bootinfo_get_shmem();
-     unsigned int bank;
-+    unsigned int printed = 0;
- 
-     for ( bank = 0; bank < shmem->nr_banks; bank++ )
--    {
--        printk(" SHMEM[%u]: %"PRIpaddr" - %"PRIpaddr"\n", bank,
--               shmem->bank[bank].start,
--               shmem->bank[bank].start + shmem->bank[bank].size - 1);
--    }
-+        if ( shmem->bank[bank].start != INVALID_PADDR )
-+        {
-+            printk(" SHMEM[%u]: %"PRIpaddr" - %"PRIpaddr"\n", printed,
-+                shmem->bank[bank].start,
-+                shmem->bank[bank].start + shmem->bank[bank].size - 1);
-+            printed++;
-+        }
- }
- 
- void __init init_sharedmem_pages(void)
-@@ -603,7 +655,8 @@ void __init init_sharedmem_pages(void)
-     unsigned int bank;
- 
-     for ( bank = 0 ; bank < shmem->nr_banks; bank++ )
--        init_staticmem_bank(&shmem->bank[bank]);
-+        if ( shmem->bank[bank].start != INVALID_PADDR )
-+            init_staticmem_bank(&shmem->bank[bank]);
- }
- 
- int __init remove_shm_from_rangeset(const struct kernel_info *kinfo,
--- 
-2.34.1
+--=20
+2.25.1
 
 
