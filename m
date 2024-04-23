@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAE9FC10F1A
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 14:45:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.710149.1110119 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E01C4345F
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 14:52:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.710735.1110139 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzHOY-00072W-84; Tue, 23 Apr 2024 14:45:18 +0000
+	id 1rzHVj-000181-9v; Tue, 23 Apr 2024 14:52:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 710149.1110119; Tue, 23 Apr 2024 14:45:18 +0000
+Received: by outflank-mailman (output) from mailman id 710735.1110139; Tue, 23 Apr 2024 14:52:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzHOY-00072P-5H; Tue, 23 Apr 2024 14:45:18 +0000
-Received: by outflank-mailman (input) for mailman id 710149;
- Mon, 22 Apr 2024 16:59:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rzHVj-00017u-5r; Tue, 23 Apr 2024 14:52:43 +0000
+Received: by outflank-mailman (input) for mailman id 710735;
+ Tue, 23 Apr 2024 14:52:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iDho=L3=gmail.com=willemdebruijn.kernel@srs-se1.protection.inumbo.net>)
- id 1ryx0s-0000Ls-9c
- for xen-devel@lists.xenproject.org; Mon, 22 Apr 2024 16:59:30 +0000
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [2607:f8b0:4864:20::f29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ae6ded0f-00c9-11ef-909a-e314d9c70b13;
- Mon, 22 Apr 2024 18:59:29 +0200 (CEST)
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-69b514d3cf4so40443876d6.0
- for <xen-devel@lists.xenproject.org>; Mon, 22 Apr 2024 09:59:29 -0700 (PDT)
-Received: from localhost (164.146.150.34.bc.googleusercontent.com.
- [34.150.146.164]) by smtp.gmail.com with ESMTPSA id
- s16-20020a0cdc10000000b006a0426f2bdasm4405853qvk.57.2024.04.22.09.59.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 09:59:27 -0700 (PDT)
+ <SRS0=6olb=L4=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1rzHVh-00017o-OU
+ for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 14:52:41 +0000
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [2607:f8b0:4864:20::c33])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 210f7d29-0181-11ef-b4bb-af5377834399;
+ Tue, 23 Apr 2024 16:52:39 +0200 (CEST)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5aa241232faso4286085eaf.0
+ for <xen-devel@lists.xenproject.org>; Tue, 23 Apr 2024 07:52:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,77 +42,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae6ded0f-00c9-11ef-909a-e314d9c70b13
+X-Inumbo-ID: 210f7d29-0181-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713805168; x=1714409968; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:subject:references
-         :in-reply-to:message-id:cc:to:from:date:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1713883958; x=1714488758; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mrIzzRd5SEQLFvdzQYqOFzNQkQZWaPc3JGD8u2+BkdA=;
-        b=AxVsevf6CqM+ElXLo237LjSLkMWx5SCZK64HaoqFiCThTY3wq5iNl4p5zRkWqnCM3e
-         jMZq9p7ki10W/Sni6Wgb81XhZcV5cXywMPjVLroxnbQRfLTf+ru+noinv90XZCtt91+F
-         v+0PQ9dazNXhIY2BlD2N0RLWSSVckFXdZnq5yQ0JlHwviTu2Vjdu2fUxSTt2udHm27dB
-         zx/akvG88LViiXcA66swsHXy0nKU1LSwV6d4stVl0QbmiavgjSK/bEp+HUiddj/YTC3R
-         QFKNwVOk73h3QE98FpnzxG53SBNlYn7Qly2oeAjKYZ69wqCPiB/C0TL89H3TkDwH3wQm
-         917w==
+        bh=0oJ5oFwFtt28a/L1Lw52NZ/TBbSz0Cd9oGC/3/Q44LI=;
+        b=JNl4AhbcK7fmQkmjDERgvVXlizDrw7ZUFMwLCNtqgQoySc+6t00y6Q5uv4HB9qBxd1
+         QlhIGnixvAcPnZG/dA7GGXygYIG10MK5S8qG3o9HBvArwh+qCCr/KwSfYr+Y/8QwJLa1
+         S/KeS9/HQjfJ1rmwUB9rexE6GKxlbnKWZm/AjLa30/YVMsMGTGVtHHsMTdh0+m/hZdDX
+         TMlKZ7uTohe7HyRIMVtkrw8mkewJw8iWWCW/Mm8PPCpwMccopWq+1sCf7Tkg+ybHlFcy
+         iYWotBeNLb6uRsGI47hznDUucBK58NmzZzfRj0GClmnpQxgY1YuvA8njNzM477q0NvKX
+         4F1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713805168; x=1714409968;
-        h=content-transfer-encoding:mime-version:subject:references
-         :in-reply-to:message-id:cc:to:from:date:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=mrIzzRd5SEQLFvdzQYqOFzNQkQZWaPc3JGD8u2+BkdA=;
-        b=XmSTXIU1vrVj7YrMbtPliNV5dI83+qHfEHpDeWBkUYz7u0wYadKUpFiMBP7dXgHqh0
-         kuVlhgUd1d7kdnNx2ugRaggjCaL+7N/LvvHLXyW7itJdNx/64MIAtoRNqlWpkdPPSiFG
-         EQi2FpyYzt+QWSK7QNZVIUf51Ea3pst4OL5la6/vjbxxnGlpFuDg8PoLT2FMfBrEdFvT
-         ViBGSa6lGkhphOZGia2BuCmQca+5mxxJCKOPQ5ZRLXqlORrhY4p8VMKFpOF6nBpTRP3d
-         u3WDwSeFDel0PEiIuzgqpX/d7pG58jBy4PjwxF+FVJxlL51Pv1Yn/iY5N2mY/7w5q+hD
-         sjqg==
-X-Forwarded-Encrypted: i=1; AJvYcCUEQGYPZV0ny3lpnP2sQxYt4ei85ekkKFjtnuBlzs/GZ0qoqn2/IYPlhLAkNTM9JbPoGwECPmBtb12zhigJpEgxF6MEbrhZnsuYPHA+L0I=
-X-Gm-Message-State: AOJu0YzGVJRMiVRYcBIoq6jFXcZxwQ8RgwYggKfOJ3Qr1OJXYl1+ehsZ
-	9vZztX/+8uhBEm71E3ZdvtVdfhhOaIv4F5awZmq6RA17hmHzanLV
-X-Google-Smtp-Source: AGHT+IHHhU+Nvb87eCaQ76wWE1qXHzhzlsCm3OuWWbw2sH1hLhYIGaE9ghQG7Vrg+ndmJ6yOx+FQnA==
-X-Received: by 2002:ad4:524f:0:b0:69b:12a0:296f with SMTP id s15-20020ad4524f000000b0069b12a0296fmr10630701qvq.54.1713805168003;
-        Mon, 22 Apr 2024 09:59:28 -0700 (PDT)
-Date: Mon, 22 Apr 2024 12:59:27 -0400
-From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-To: Pavel Begunkov <asml.silence@gmail.com>, 
- io-uring@vger.kernel.org, 
- netdev@vger.kernel.org
-Cc: Jens Axboe <axboe@kernel.dk>, 
- asml.silence@gmail.com, 
- "David S . Miller" <davem@davemloft.net>, 
- Jakub Kicinski <kuba@kernel.org>, 
- David Ahern <dsahern@kernel.org>, 
- Eric Dumazet <edumazet@google.com>, 
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
- Jason Wang <jasowang@redhat.com>, 
- Wei Liu <wei.liu@kernel.org>, 
- Paul Durrant <paul@xen.org>, 
- xen-devel@lists.xenproject.org, 
- "Michael S . Tsirkin" <mst@redhat.com>, 
- virtualization@lists.linux.dev, 
- kvm@vger.kernel.org
-Message-ID: <6626976f4e91a_75392949e@willemb.c.googlers.com.notmuch>
-In-Reply-To: <a62015541de49c0e2a8a0377a1d5d0a5aeb07016.1713369317.git.asml.silence@gmail.com>
-References: <cover.1713369317.git.asml.silence@gmail.com>
- <a62015541de49c0e2a8a0377a1d5d0a5aeb07016.1713369317.git.asml.silence@gmail.com>
-Subject: Re: [PATCH io_uring-next/net-next v2 1/4] net: extend ubuf_info
- callback to ops structure
-Mime-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: 7bit
+        d=1e100.net; s=20230601; t=1713883958; x=1714488758;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=0oJ5oFwFtt28a/L1Lw52NZ/TBbSz0Cd9oGC/3/Q44LI=;
+        b=JHA2cGeO1FBEoCw/xXJUP+4VXKtKIKThsICyBz+2Ax9pW/xtscUp5RR0+ThVnlsmhJ
+         qcNm4vUFDdxp+EyWpRpiIVLMuG89EMoOSYJwfJmLRJOBKgrmjFUrfqk39YXaVvN8UCuU
+         dHSFU6fTiWVOn8b/0sT7v1Eh70nqy2AuMrUAPCg4ZnCqdJEY31UT0ZYSQLimHbCd47BM
+         MWz1AT8mtA7CosuD1LQ1q35KeVWuj7QUb3FhfUEmM3v31jd6+Wd6pQuRvKb/HRbD+Zm6
+         9LjckRLm9GebtvxCgEPgZn+TaCJK+424oEhZpYiuBfkPpS+MWpWvLzU5YQ4DHsSa3qvX
+         a+1w==
+X-Forwarded-Encrypted: i=1; AJvYcCVAN1CI9dInveqrajaoXfvYoWMxwDmSAUgaY21rgIs0prgfZ6Z6b1zmAGG4iUELfYCgzk4NS4L9IjbuCj2+h3wynyoXmKKJ/SMWqf6nueA=
+X-Gm-Message-State: AOJu0YxhRFBv1o3aAVW9srQDkRYQmrBJqzG/8ebsurTYi4+VquCpRMeB
+	IBjtVw3fIBBF59HnvSCYFRPHjQAAp7Yn5sXJW+uflCUhAGF9V6sT7KfT98in6BgEMiTw7J+uQg8
+	amQq22FOaXJHJC2+cR2H3SXB2MF5f+wzonOIjkQ==
+X-Google-Smtp-Source: AGHT+IGhElEhvoOcLIh6BtvKq0ep5l63/2dy1xgqffEyBWJzt4lw7QGECKqZXkEujCD6RCyTcTNymOhtdVsAksHMPhs=
+X-Received: by 2002:a4a:acc3:0:b0:5ac:bdbe:d09b with SMTP id
+ c3-20020a4aacc3000000b005acbdbed09bmr14253587oon.4.1713883958407; Tue, 23 Apr
+ 2024 07:52:38 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240422073708.3663529-1-jens.wiklander@linaro.org>
+ <20240422073708.3663529-5-jens.wiklander@linaro.org> <89d268cc-bc49-4e22-b4e9-2e8dbe73124c@xen.org>
+ <CAHUa44GAbBtczbVohVjC=66tqzjgeGLx44k9ddodDJL13KwVEQ@mail.gmail.com>
+ <205a95f2-fdf6-4f38-b2e0-31e4fff9348b@xen.org> <756FEA03-7F16-48AE-8308-059EBF8638A0@arm.com>
+ <27BADE00-E6EC-4BD6-AC5D-201DF1A76BCD@arm.com> <195c1fe6-ed77-417f-bcb0-fdfaf687c4b0@xen.org>
+In-Reply-To: <195c1fe6-ed77-417f-bcb0-fdfaf687c4b0@xen.org>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Tue, 23 Apr 2024 16:52:26 +0200
+Message-ID: <CAHUa44FmSg2Nm9JqZ6DLNX_CkS37esabc+E-uvk5XjJymqNWtg@mail.gmail.com>
+Subject: Re: [XEN PATCH v2 4/5] xen/arm: allow dynamically assigned SGI handlers
+To: Julien Grall <julien@xen.org>
+Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Xen-devel <xen-devel@lists.xenproject.org>, 
+	"patches@linaro.org" <patches@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Pavel Begunkov wrote:
-> We'll need to associate additional callbacks with ubuf_info, introduce
-> a structure holding ubuf_info callbacks. Apart from a more smarter
-> io_uring notification management introduced in next patches, it can be
-> used to generalise msg_zerocopy_put_abort() and also store
-> ->sg_from_iter, which is currently passed in struct msghdr.
-> 
-> Reviewed-by: Jens Axboe <axboe@kernel.dk>
-> Reviewed-by: David Ahern <dsahern@kernel.org>
-> Signed-off-by: Pavel Begunkov <asml.silence@gmail.com>
+Hi,
 
-Reviewed-by: Willem de Bruijn <willemb@google.com>
+On Tue, Apr 23, 2024 at 4:28=E2=80=AFPM Julien Grall <julien@xen.org> wrote=
+:
+>
+> Hi Bertrand,
+>
+> On 23/04/2024 14:23, Bertrand Marquis wrote:
+> > Hi Julien,
+> >
+> >> On 23 Apr 2024, at 14:37, Bertrand Marquis <Bertrand.Marquis@arm.com> =
+wrote:
+> >>
+> >> Hi Julien,
+> >>
+> >>> On 23 Apr 2024, at 13:05, Julien Grall <julien@xen.org> wrote:
+> >>>
+> >>>
+> >>>
+> >>> On 23/04/2024 10:35, Jens Wiklander wrote:
+> >>>> Hi Julien,
+> >>>
+> >>> Hi Jens,
+> >>>
+> >>>> On Mon, Apr 22, 2024 at 12:57=E2=80=AFPM Julien Grall <julien@xen.or=
+g> wrote:
+> >>>>>
+> >>>>> Hi Jens,
+> >>>>>
+> >>>>> On 22/04/2024 08:37, Jens Wiklander wrote:
+> >>>>>> Updates so request_irq() can be used with a dynamically assigned S=
+GI irq
+> >>>>>> as input. This prepares for a later patch where an FF-A schedule
+> >>>>>> receiver interrupt handler is installed for an SGI generated by th=
+e
+> >>>>>> secure world.
+> >>>>>
+> >>>>> I would like to understand the use-case a bit more. Who is responsi=
+ble
+> >>>>> to decide the SGI number? Is it Xen or the firmware?
+> >>>>>
+> >>>>> If the later, how can we ever guarantee the ID is not going to clas=
+h
+> >>>>> with what the OS/hypervisor is using? Is it described in a
+> >>>>> specification? If so, please give a pointer.
+> >>>> The firmware decides the SGI number. Given that the firmware doesn't
+> >>>> know which SGIs Xen is using it typically needs to donate one of the
+> >>>> secure SGIs, but that is transparent to Xen.
+> >>>
+> >>> Right this is my concern. The firmware decides the number, but at the=
+ same time Xen thinks that all the SGIs are available (AFAIK there is only =
+one set).
+> >>>
+> >>> What I would like to see is some wording from a spec indicating that =
+the SGIs ID reserved by the firmware will not be clashing with the one used=
+ by Xen.
+> >>
+> >> The idea is that the only SGI reserved for secure are used by the secu=
+re world (in fact it is the SPMC in the secure world who tells us which SGI=
+ it will generate).
+> >> So in theory that means it will always use an SGI between 8 and 15.
+> >>
+> >> Now it could make sense in fact to check that the number returned by t=
+he firmware (or SPMC) is not clashing with Xen as it is a recommendation in=
+ the spec and
+> >> in fact an implementation might do something different.
+> >>
+> >> Right now there is no spec that will say that it will never clash with=
+ the one used by Xen as the FF-A spec is not enforcing anything here so it =
+would be a good idea
+> >> to check and disable FF-A with a proper error message if this happens.
+> >
+> >
+> > After some more digging here is what is recommended by Arm in the Arm B=
+ase System Architecture v1.0C [1]:
+> >
+> > "The system shall implement at least eight Non-secure SGIs, assigned to=
+ interrupt IDs 0-7."
+>
+> Thanks! Can we provide a link to the specification in the commit message?
+
+Sure, I'll add a link.
+
+>
+> >
+> > So basically as long as Xen is using SGIs 0-7 it is safe as those shall=
+ never be used by the secure world.
+> > Now i do agree that we should check that whatever is returned by the fi=
+rmware is not conflicting with what
+> > is used by Xen.
+> +1.
+
+That makes sense, I'll add a check.
+
+Thanks,
+Jens
 
