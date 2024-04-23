@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CDB0C10F15
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7277C18E72
 	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 08:26:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.710386.1109618 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.710383.1109582 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzBTO-000420-15; Tue, 23 Apr 2024 08:25:54 +0000
+	id 1rzBTK-0002rC-5u; Tue, 23 Apr 2024 08:25:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 710386.1109618; Tue, 23 Apr 2024 08:25:53 +0000
+Received: by outflank-mailman (output) from mailman id 710383.1109582; Tue, 23 Apr 2024 08:25:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzBTN-00041H-Ro; Tue, 23 Apr 2024 08:25:53 +0000
-Received: by outflank-mailman (input) for mailman id 710386;
- Tue, 23 Apr 2024 08:25:52 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rzBTJ-0002pb-Ov; Tue, 23 Apr 2024 08:25:49 +0000
+Received: by outflank-mailman (input) for mailman id 710383;
+ Tue, 23 Apr 2024 08:25:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eHxu=L4=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1rzBTM-0002TX-27
- for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 08:25:52 +0000
+ id 1rzBTI-0002VX-IM
+ for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 08:25:48 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 178533e0-014b-11ef-b4bb-af5377834399;
- Tue, 23 Apr 2024 10:25:50 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 1599ce26-014b-11ef-909a-e314d9c70b13;
+ Tue, 23 Apr 2024 10:25:47 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EB0291477;
- Tue, 23 Apr 2024 01:26:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 81E391477;
+ Tue, 23 Apr 2024 01:26:14 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 135B33F64C;
- Tue, 23 Apr 2024 01:25:48 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 68BC23F64C;
+ Tue, 23 Apr 2024 01:25:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,334 +44,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 178533e0-014b-11ef-b4bb-af5377834399
+X-Inumbo-ID: 1599ce26-014b-11ef-909a-e314d9c70b13
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 6/7] xen/arm: Implement the logic for static shared memory from Xen heap
-Date: Tue, 23 Apr 2024 09:25:31 +0100
-Message-Id: <20240423082532.776623-7-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH 3/7] xen/p2m: put reference for superpage
+Date: Tue, 23 Apr 2024 09:25:28 +0100
+Message-Id: <20240423082532.776623-4-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240423082532.776623-1-luca.fancellu@arm.com>
 References: <20240423082532.776623-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This commit implements the logic to have the static shared memory banks
-from the Xen heap instead of having the host physical address passed from
-the user.
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-When the host physical address is not supplied, the physical memory is
-taken from the Xen heap using allocate_domheap_memory, the allocation
-needs to occur at the first handled DT node and the allocated banks
-need to be saved somewhere, so introduce the 'shm_heap_banks' static
-global variable of type 'struct meminfo' that will hold the banks
-allocated from the heap, its field .shmem_extra will be used to point
-to the bootinfo shared memory banks .shmem_extra space, so that there
-is not further allocation of memory and every bank in shm_heap_banks
-can be safely identified by the shm_id to reconstruct its traceability
-and if it was allocated or not.
+We are doing foreign memory mapping for static shared memory, and
+there is a great possibility that it could be super mapped.
+But today, p2m_put_l3_page could not handle superpages.
 
-A search into 'shm_heap_banks' will reveal if the banks were allocated
-or not, in case the host address is not passed, and the callback given
-to allocate_domheap_memory will store the banks in the structure and
-map them to the current domain, to do that, some changes to
-acquire_shared_memory_bank are made to let it differentiate if the bank
-is from the heap and if it is, then assign_pages is called for every
-bank.
+This commits implements a new function p2m_put_superpage to handle superpages,
+specifically for helping put extra references for foreign superpages.
 
-When the bank is already allocated, for every bank allocated with the
-corresponding shm_id, handle_shared_mem_bank is called and the mapping
-are done.
-
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/static-shmem.c | 193 +++++++++++++++++++++++++++++-------
- 1 file changed, 157 insertions(+), 36 deletions(-)
+v1:
+ - patch from https://patchwork.kernel.org/project/xen-devel/patch/20231206090623.1932275-9-Penny.Zheng@arm.com/
+---
+ xen/arch/arm/mmu/p2m.c | 58 +++++++++++++++++++++++++++++++-----------
+ 1 file changed, 43 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-index 1c03bb7f1882..10396ed52ff1 100644
---- a/xen/arch/arm/static-shmem.c
-+++ b/xen/arch/arm/static-shmem.c
-@@ -9,6 +9,18 @@
- #include <asm/static-memory.h>
- #include <asm/static-shmem.h>
- 
-+typedef struct {
-+    struct domain *d;
-+    paddr_t gbase;
-+    bool owner_dom_io;
-+    const char *role_str;
-+    struct shmem_membank_extra *bank_extra_info;
-+} alloc_heap_pages_cb_extra;
-+
-+static struct meminfo __initdata shm_heap_banks = {
-+    .common.max_banks = NR_MEM_BANKS
-+};
-+
- static void __init __maybe_unused build_assertions(void)
- {
-     /*
-@@ -66,7 +78,8 @@ static bool __init is_shm_allocated_to_domio(paddr_t pbase)
+diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+index 41fcca011cf4..479a80fbd4cf 100644
+--- a/xen/arch/arm/mmu/p2m.c
++++ b/xen/arch/arm/mmu/p2m.c
+@@ -753,17 +753,9 @@ static int p2m_mem_access_radix_set(struct p2m_domain *p2m, gfn_t gfn,
+     return rc;
  }
  
- static mfn_t __init acquire_shared_memory_bank(struct domain *d,
--                                               paddr_t pbase, paddr_t psize)
-+                                               paddr_t pbase, paddr_t psize,
-+                                               bool bank_from_heap)
+-/*
+- * Put any references on the single 4K page referenced by pte.
+- * TODO: Handle superpages, for now we only take special references for leaf
+- * pages (specifically foreign ones, which can't be super mapped today).
+- */
+-static void p2m_put_l3_page(const lpae_t pte)
++/* Put any references on the single 4K page referenced by mfn. */
++static void p2m_put_l3_page(mfn_t mfn, unsigned type)
  {
-     mfn_t smfn;
-     unsigned long nr_pfns;
-@@ -86,19 +99,31 @@ static mfn_t __init acquire_shared_memory_bank(struct domain *d,
-     d->max_pages += nr_pfns;
- 
-     smfn = maddr_to_mfn(pbase);
--    res = acquire_domstatic_pages(d, smfn, nr_pfns, 0);
-+    if ( bank_from_heap )
-+        /*
-+         * When host address is not provided, static shared memory is
-+         * allocated from heap and shall be assigned to owner domain.
-+         */
-+        res = assign_pages(maddr_to_page(pbase), nr_pfns, d, 0);
-+    else
-+        res = acquire_domstatic_pages(d, smfn, nr_pfns, 0);
-+
-     if ( res )
-     {
--        printk(XENLOG_ERR
--               "%pd: failed to acquire static memory: %d.\n", d, res);
--        d->max_pages -= nr_pfns;
--        return INVALID_MFN;
-+        printk(XENLOG_ERR "%pd: failed to %s static memory: %d.\n", d,
-+               bank_from_heap ? "assign" : "acquire", res);
-+        goto fail;
-     }
- 
-     return smfn;
-+
-+ fail:
-+    d->max_pages -= nr_pfns;
-+    return INVALID_MFN;
- }
- 
- static int __init assign_shared_memory(struct domain *d, paddr_t gbase,
-+                                       bool bank_from_heap,
-                                        const struct membank *shm_bank)
- {
-     mfn_t smfn;
-@@ -113,10 +138,7 @@ static int __init assign_shared_memory(struct domain *d, paddr_t gbase,
-     psize = shm_bank->size;
-     nr_borrowers = shm_bank->shmem_extra->nr_shm_borrowers;
- 
--    printk("%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
--           d, pbase, pbase + psize);
+-    mfn_t mfn = lpae_get_mfn(pte);
 -
--    smfn = acquire_shared_memory_bank(d, pbase, psize);
-+    smfn = acquire_shared_memory_bank(d, pbase, psize, bank_from_heap);
-     if ( mfn_eq(smfn, INVALID_MFN) )
-         return -EINVAL;
- 
-@@ -188,6 +210,7 @@ append_shm_bank_to_domain(struct shared_meminfo *kinfo_shm_mem, paddr_t start,
- static int __init handle_shared_mem_bank(struct domain *d, paddr_t gbase,
-                                          bool owner_dom_io,
-                                          const char *role_str,
-+                                         bool bank_from_heap,
-                                          const struct membank *shm_bank)
- {
-     paddr_t pbase, psize;
-@@ -197,6 +220,10 @@ static int __init handle_shared_mem_bank(struct domain *d, paddr_t gbase,
- 
-     pbase = shm_bank->start;
-     psize = shm_bank->size;
-+
-+    printk("%pd: SHMEM map from %s: mphys 0x%"PRIpaddr" -> gphys 0x%"PRIpaddr", size 0x%"PRIpaddr"\n",
-+           d, bank_from_heap ? "Xen heap" : "Host", pbase, gbase, psize);
-+
+-    ASSERT(p2m_is_valid(pte));
+-
      /*
-      * DOMID_IO is a fake domain and is not described in the Device-Tree.
-      * Therefore when the owner of the shared region is DOMID_IO, we will
-@@ -209,7 +236,8 @@ static int __init handle_shared_mem_bank(struct domain *d, paddr_t gbase,
-          * We found the first borrower of the region, the owner was not
-          * specified, so they should be assigned to dom_io.
-          */
--        ret = assign_shared_memory(owner_dom_io ? dom_io : d, gbase, shm_bank);
-+        ret = assign_shared_memory(owner_dom_io ? dom_io : d, gbase,
-+                                   bank_from_heap, shm_bank);
-         if ( ret )
-             return ret;
+      * TODO: Handle other p2m types
+      *
+@@ -771,16 +763,53 @@ static void p2m_put_l3_page(const lpae_t pte)
+      * flush the TLBs if the page is reallocated before the end of
+      * this loop.
+      */
+-    if ( p2m_is_foreign(pte.p2m.type) )
++    if ( p2m_is_foreign(type) )
+     {
+         ASSERT(mfn_valid(mfn));
+         put_page(mfn_to_page(mfn));
      }
-@@ -226,6 +254,40 @@ static int __init handle_shared_mem_bank(struct domain *d, paddr_t gbase,
-     return 0;
+     /* Detect the xenheap page and mark the stored GFN as invalid. */
+-    else if ( p2m_is_ram(pte.p2m.type) && is_xen_heap_mfn(mfn) )
++    else if ( p2m_is_ram(type) && is_xen_heap_mfn(mfn) )
+         page_set_xenheap_gfn(mfn_to_page(mfn), INVALID_GFN);
  }
  
-+static int __init save_map_heap_pages(struct domain *d, struct page_info *pg,
-+                                      unsigned int order, void *extra)
++/* Put any references on the superpage referenced by mfn. */
++static void p2m_put_superpage(mfn_t mfn, unsigned int next_level, unsigned type)
 +{
-+    alloc_heap_pages_cb_extra *b_extra = (alloc_heap_pages_cb_extra *)extra;
-+    int idx = shm_heap_banks.common.nr_banks;
-+    int ret = -ENOSPC;
++    unsigned int i;
++    unsigned int level_order = XEN_PT_LEVEL_ORDER(next_level);
 +
-+    BUG_ON(!b_extra);
-+
-+    if ( idx < shm_heap_banks.common.max_banks )
++    for ( i = 0; i < XEN_PT_LPAE_ENTRIES; i++ )
 +    {
-+        shm_heap_banks.bank[idx].start = page_to_maddr(pg);
-+        shm_heap_banks.bank[idx].size = (1ULL << (PAGE_SHIFT + order));
-+        shm_heap_banks.bank[idx].shmem_extra = b_extra->bank_extra_info;
-+        shm_heap_banks.common.nr_banks++;
++        if ( next_level == 3 )
++            p2m_put_l3_page(mfn, type);
++        else
++            p2m_put_superpage(mfn, next_level + 1, type);
 +
-+        ret = handle_shared_mem_bank(b_extra->d, b_extra->gbase,
-+                                     b_extra->owner_dom_io, b_extra->role_str,
-+                                     true, &shm_heap_banks.bank[idx]);
-+        if ( !ret )
-+        {
-+            /* Increment guest physical address for next mapping */
-+            b_extra->gbase += shm_heap_banks.bank[idx].size;
-+            ret = 0;
-+        }
++        mfn = mfn_add(mfn, 1 << level_order);
 +    }
-+
-+    if ( ret )
-+        printk("Failed to allocate static shared memory from Xen heap: (%d)\n",
-+               ret);
-+
-+    return ret;
 +}
 +
- int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-                        const struct dt_device_node *node)
- {
-@@ -264,42 +326,101 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-         pbase = boot_shm_bank->start;
-         psize = boot_shm_bank->size;
- 
--        if ( INVALID_PADDR == pbase )
--        {
--            printk("%pd: host physical address must be chosen by users at the moment.", d);
--            return -EINVAL;
--        }
-+        /*
-+         * "role" property is optional and if it is defined explicitly,
-+         * then the owner domain is not the default "dom_io" domain.
-+         */
-+        if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
-+            owner_dom_io = false;
- 
-         /*
--         * xen,shared-mem = <pbase, gbase, size>;
--         * TODO: pbase is optional.
-+         * xen,shared-mem = <[pbase,] gbase, size>;
-+         * pbase is optional.
-          */
-         addr_cells = dt_n_addr_cells(shm_node);
-         size_cells = dt_n_size_cells(shm_node);
-         prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
-         BUG_ON(!prop);
-         cells = (const __be32 *)prop->value;
--        gbase = dt_read_paddr(cells + addr_cells, addr_cells);
- 
--        for ( i = 0; i < PFN_DOWN(psize); i++ )
--            if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
--            {
--                printk("%pd: invalid physical address 0x%"PRI_mfn"\n",
--                       d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
--                return -EINVAL;
--            }
-+        if ( pbase != INVALID_PADDR )
-+        {
-+            /* guest phys address is after host phys address */
-+            gbase = dt_read_paddr(cells + addr_cells, addr_cells);
++/* Put any references on the page referenced by pte. */
++static void p2m_put_page(const lpae_t pte, unsigned int level)
++{
++    mfn_t mfn = lpae_get_mfn(pte);
 +
-+            for ( i = 0; i < PFN_DOWN(psize); i++ )
-+                if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
-+                {
-+                    printk("%pd: invalid physical address 0x%"PRI_mfn"\n",
-+                        d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
-+                    return -EINVAL;
-+                }
++    ASSERT(p2m_is_valid(pte));
 +
-+            /* The host physical address is supplied by the user */
-+            ret = handle_shared_mem_bank(d, gbase, owner_dom_io, role_str,
-+                                         false, boot_shm_bank);
-+            if ( ret )
-+                return ret;
-+        }
-+        else
-+        {
-+            /*
-+             * The host physical address is not supplied by the user, so it
-+             * means that the banks needs to be allocated from the Xen heap,
-+             * look into the already allocated banks from the heap.
-+             */
-+            const struct membank *alloc_bank = find_shm(&shm_heap_banks.common,
-+                                                        shm_id);
++    /*
++     * We are either having a first level 1G superpage or a
++     * second level 2M superpage.
++     */
++    if ( p2m_is_superpage(pte, level) )
++        return p2m_put_superpage(mfn, level + 1, pte.p2m.type);
++    else
++    {
++        ASSERT(level == 3);
++        return p2m_put_l3_page(mfn, pte.p2m.type);
++    }
++}
++
+ /* Free lpae sub-tree behind an entry */
+ static void p2m_free_entry(struct p2m_domain *p2m,
+                            lpae_t entry, unsigned int level)
+@@ -809,9 +838,8 @@ static void p2m_free_entry(struct p2m_domain *p2m,
+ #endif
  
--        /*
--         * "role" property is optional and if it is defined explicitly,
--         * then the owner domain is not the default "dom_io" domain.
--         */
--        if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
--            owner_dom_io = false;
-+            /* guest phys address is right at the beginning */
-+            gbase = dt_read_paddr(cells, addr_cells);
+         p2m->stats.mappings[level]--;
+-        /* Nothing to do if the entry is a super-page. */
+-        if ( level == 3 )
+-            p2m_put_l3_page(entry);
++        p2m_put_page(entry, level);
++
+         return;
+     }
  
--        ret = handle_shared_mem_bank(d, gbase, owner_dom_io, role_str,
--                                     boot_shm_bank);
--        if ( ret )
--            return ret;
-+            if ( !alloc_bank )
-+            {
-+                alloc_heap_pages_cb_extra cb_arg = { d, gbase, owner_dom_io,
-+                    role_str, boot_shm_bank->shmem_extra };
-+
-+                /* shm_id identified bank is not yet allocated */
-+                if ( !allocate_domheap_memory(NULL, psize, save_map_heap_pages,
-+                                              &cb_arg) )
-+                {
-+                    printk(XENLOG_ERR
-+                           "Failed to allocate (%"PRIpaddr"MB) pages as static shared memory from heap\n",
-+                           psize >> 20);
-+                    return -EINVAL;
-+                }
-+            }
-+            else
-+            {
-+                /* shm_id identified bank is already allocated */
-+                const struct membank *end_bank =
-+                        &shm_heap_banks.bank[shm_heap_banks.common.nr_banks];
-+                paddr_t gbase_bank = gbase;
-+
-+                /*
-+                 * Static shared memory banks that are taken from the Xen heap
-+                 * are allocated sequentially in shm_heap_banks, so starting
-+                 * from the first bank found identified by shm_id, the code can
-+                 * just advance by one bank at the time until it reaches the end
-+                 * of the array or it finds another bank NOT identified by
-+                 * shm_id
-+                 */
-+                for ( ; alloc_bank < end_bank; alloc_bank++ )
-+                {
-+                    if ( strncmp(shm_id, alloc_bank->shmem_extra->shm_id,
-+                                 MAX_SHM_ID_LENGTH) != 0 )
-+                        break;
-+
-+                    ret = handle_shared_mem_bank(d, gbase_bank, owner_dom_io,
-+                                                 role_str, true, alloc_bank);
-+                    if ( ret )
-+                        return ret;
-+
-+                    /* Increment guest physical address for next mapping */
-+                    gbase_bank += alloc_bank->size;
-+                }
-+            }
-+        }
- 
-         /*
-          * Record static shared memory region info for later setting
 -- 
 2.34.1
 
