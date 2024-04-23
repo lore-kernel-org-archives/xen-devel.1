@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD07C4345F
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 15:13:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.710797.1110308 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5830DC4345F
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 15:13:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.710798.1110319 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzHpl-0007LW-VC; Tue, 23 Apr 2024 15:13:25 +0000
+	id 1rzHpp-0007nh-9v; Tue, 23 Apr 2024 15:13:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 710797.1110308; Tue, 23 Apr 2024 15:13:25 +0000
+Received: by outflank-mailman (output) from mailman id 710798.1110319; Tue, 23 Apr 2024 15:13:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzHpl-0007Kt-S4; Tue, 23 Apr 2024 15:13:25 +0000
-Received: by outflank-mailman (input) for mailman id 710797;
- Tue, 23 Apr 2024 15:13:23 +0000
+	id 1rzHpp-0007nV-6U; Tue, 23 Apr 2024 15:13:29 +0000
+Received: by outflank-mailman (input) for mailman id 710798;
+ Tue, 23 Apr 2024 15:13:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=r5BF=L4=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rzHpj-0004ry-So
- for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 15:13:23 +0000
+ id 1rzHpn-0004ry-Sa
+ for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 15:13:27 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 06c360e2-0184-11ef-909a-e314d9c70b13;
- Tue, 23 Apr 2024 17:13:23 +0200 (CEST)
+ id 09270cd6-0184-11ef-909a-e314d9c70b13;
+ Tue, 23 Apr 2024 17:13:27 +0200 (CEST)
 Received: from nico.bugseng.com.homenet.telecomitalia.it
  (host-79-60-221-62.business.telecomitalia.it [79.60.221.62])
- by support.bugseng.com (Postfix) with ESMTPSA id CE74D4EE073F;
- Tue, 23 Apr 2024 17:13:20 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 0FD9E4EE0742;
+ Tue, 23 Apr 2024 17:13:25 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06c360e2-0184-11ef-909a-e314d9c70b13
+X-Inumbo-ID: 09270cd6-0184-11ef-909a-e314d9c70b13
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org,
 	nicola.vetrini@bugseng.com
@@ -56,9 +56,9 @@ Cc: sstabellini@kernel.org,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 07/10] x86/acpi: power: address violations of MISRA Rule 20.7
-Date: Tue, 23 Apr 2024 17:12:49 +0200
-Message-Id: <9f159a0c653c3fb9dd192c1f888a16052f1b026f.1713885065.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 09/10] x86/debugreg: address violation of MISRA C Rule 20.7
+Date: Tue, 23 Apr 2024 17:12:51 +0200
+Message-Id: <d0821fd968d371d03b6b336dd4b5226c1f5b68c9.1713885065.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1713885065.git.nicola.vetrini@bugseng.com>
 References: <cover.1713885065.git.nicola.vetrini@bugseng.com>
@@ -75,32 +75,22 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/acpi/power.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ xen/arch/x86/include/asm/debugreg.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/acpi/power.c b/xen/arch/x86/acpi/power.c
-index c6fa810a6b13..610937f42e95 100644
---- a/xen/arch/x86/acpi/power.c
-+++ b/xen/arch/x86/acpi/power.c
-@@ -422,12 +422,12 @@ static void tboot_sleep(u8 sleep_state)
- {
-     uint32_t shutdown_type;
+diff --git a/xen/arch/x86/include/asm/debugreg.h b/xen/arch/x86/include/asm/debugreg.h
+index 2bdaf5d9aa11..96c406ad53c8 100644
+--- a/xen/arch/x86/include/asm/debugreg.h
++++ b/xen/arch/x86/include/asm/debugreg.h
+@@ -67,7 +67,7 @@
+ #define DR_GENERAL_DETECT        (0x00002000UL) /* General detect enable */
  
--#define TB_COPY_GAS(tbg, g)             \
--    tbg.space_id = g.space_id;          \
--    tbg.bit_width = g.bit_width;        \
--    tbg.bit_offset = g.bit_offset;      \
--    tbg.access_width = g.access_width;  \
--    tbg.address = g.address;
-+#define TB_COPY_GAS(tbg, g)                 \
-+    (tbg).space_id = (g).space_id;          \
-+    (tbg).bit_width = (g).bit_width;        \
-+    (tbg).bit_offset = (g).bit_offset;      \
-+    (tbg).access_width = (g).access_width;  \
-+    (tbg).address = (g).address;
- 
-     /* sizes are not same (due to packing) so copy each one */
-     TB_COPY_GAS(g_tboot_shared->acpi_sinfo.pm1a_cnt_blk,
+ #define write_debugreg(reg, val) do {                       \
+-    unsigned long __val = val;                              \
++    unsigned long __val = (val);                            \
+     asm volatile ( "mov %0,%%db" #reg : : "r" (__val) );    \
+ } while (0)
+ #define read_debugreg(reg) ({                               \
 -- 
 2.34.1
 
