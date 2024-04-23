@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E144C4345F
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 13:51:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.710649.1109978 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CCEC4345F
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Apr 2024 14:12:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.710655.1109988 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzGYa-0005Hw-2y; Tue, 23 Apr 2024 13:51:36 +0000
+	id 1rzGsA-0001IK-Iq; Tue, 23 Apr 2024 14:11:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 710649.1109978; Tue, 23 Apr 2024 13:51:36 +0000
+Received: by outflank-mailman (output) from mailman id 710655.1109988; Tue, 23 Apr 2024 14:11:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzGYa-0005Hp-0I; Tue, 23 Apr 2024 13:51:36 +0000
-Received: by outflank-mailman (input) for mailman id 710649;
- Tue, 23 Apr 2024 13:51:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ck89=L4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rzGYY-0005HN-Ab
- for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 13:51:34 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 97dfe89f-0178-11ef-909a-e314d9c70b13;
- Tue, 23 Apr 2024 15:51:32 +0200 (CEST)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-41a1d88723bso18061215e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 23 Apr 2024 06:51:32 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- bg11-20020a05600c3c8b00b0041a9c3444a6sm3817429wmb.28.2024.04.23.06.51.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 Apr 2024 06:51:32 -0700 (PDT)
+	id 1rzGsA-0001ID-GJ; Tue, 23 Apr 2024 14:11:50 +0000
+Received: by outflank-mailman (input) for mailman id 710655;
+ Tue, 23 Apr 2024 14:11:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Nc7B=L4=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1rzGs8-0001I7-DU
+ for xen-devel@lists.xenproject.org; Tue, 23 Apr 2024 14:11:48 +0000
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [2001:4860:4864:20::2f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6ad16950-017b-11ef-b4bb-af5377834399;
+ Tue, 23 Apr 2024 16:11:46 +0200 (CEST)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-22f746c56a2so2585408fac.0
+ for <xen-devel@lists.xenproject.org>; Tue, 23 Apr 2024 07:11:46 -0700 (PDT)
+Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
+ w20-20020ac87194000000b00439622fb8f4sm3511650qto.39.2024.04.23.07.11.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Apr 2024 07:11:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,113 +46,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 97dfe89f-0178-11ef-909a-e314d9c70b13
+X-Inumbo-ID: 6ad16950-017b-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1713880292; x=1714485092; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=6p64LwaZAdUFtzNLap1xXwnhZr5O4ic7GnnFeUhYJ00=;
-        b=J0ZVN+0Lf0TrfcGQIDjaFMDCh7lAiqm18JNIr5b8vUKkpEfh2qRFEIgJVjBXVGbfGU
-         R84o2UKDfso81cSi0vedIiZgT6FTx99uKW/TiEKzXezK2L5N5daHs3xH103l02Nn/SDw
-         2ah9w1Ac1hoEtxAH1E4uDaT80ASczv+VufNWTvI4mbzfqLPnsmzrU3AbPV2WE0OrJvTx
-         ommP4Dk0D0dTjiJK4be92lD6NpM0gfWu0m2N0tOQi7k0t7loE2bdjuesilRHBzyZMkCj
-         WFcPJorQq/+gdD2SD+seqsFDgfnLMVx0SRzSKf8pjtgcg+VIHzp2LZdiI1U/KikfBn7+
-         pDSg==
+        d=citrix.com; s=google; t=1713881505; x=1714486305; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=HbzdywQUMMJyc/51/F1TIJDmBNql2mGKph3qYuis9CA=;
+        b=cMsugE0AyS5t6X5nD9oiaqqggojTeKuzWmpLZMqyX53KEpf1miqXG9/V56F5e+Uole
+         YcQUy4hRpPYFMEcgcyaf0VJ2prL+L4IKncluXqaaHaz7kBKhaUG6EQwlA2k7LIp2/wtk
+         r7PAJA4YyFDXAlWHIO+i4TlpEhVpQODY0IExI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713880292; x=1714485092;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=6p64LwaZAdUFtzNLap1xXwnhZr5O4ic7GnnFeUhYJ00=;
-        b=oLj26Y96rWUVNOl76J7tNM1ChW6edWkSV2IA/f1qHS3449cg9bwcDP0wVN6Cg+km4O
-         boR0Wp/WhSWmKTSxKHoQ/QCsIiNGEx1eo0Kre0DnX1s4CxJuJffLpR6Y+00q5p2Qm9Vm
-         iF8z93NEiof0rzTNufPBq96ErLiZJdnOBijlxNfHeJtpMVPfsVDL+cZ33Hcl37tw2x6q
-         gnrXq5dofYOmWEmSjCmmdibfAqPZMvjmuvSCTX2NEG0jKhIgeE2vxULPvYyFb79F+Q7m
-         BHyAYDhhnkRa8OdTvViWlnichjB9uCopBLTtiA6p/oXJkYgrwSxgstfjS1HsR9byZSjO
-         TLTw==
-X-Forwarded-Encrypted: i=1; AJvYcCXJxigFWK0+jyQQ33BwOg2HzpRXi/5OQ0WCXwjxkm/eSz6sgSVSy0m83Jm9dG9wlfD1n/fFfV/pXWBdxpUQCF1mxRiEoQ6cDU+Td3vaIA8=
-X-Gm-Message-State: AOJu0YxDqEvJ0XHsJ5J5cesRgHWGgJLSr9W0K+Pt6QfaDBH6EC8UoxEG
-	acBa/Srzdj9nB+cZWcl1uChbkZAH6kxU1w3pSx1LXeO0WrSWnDDDA6TQmpdhyQ==
-X-Google-Smtp-Source: AGHT+IECXA9l6/PkHv+ZPVKVxydp41OBSDgmgjxnOMCFklwknBSy9baedzn31bAmi0sQdSElIyM0KQ==
-X-Received: by 2002:a05:600c:3506:b0:41a:2b9:7764 with SMTP id h6-20020a05600c350600b0041a02b97764mr6683708wmq.27.1713880292242;
-        Tue, 23 Apr 2024 06:51:32 -0700 (PDT)
-Message-ID: <b76f105b-ac92-4759-8e93-64b97232a60c@suse.com>
-Date: Tue, 23 Apr 2024 15:51:31 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] x86/livepatch: perform sanity checks on the
- payload exception table contents
-Content-Language: en-US
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
+        d=1e100.net; s=20230601; t=1713881505; x=1714486305;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HbzdywQUMMJyc/51/F1TIJDmBNql2mGKph3qYuis9CA=;
+        b=aCMKiK/wkdnPkau1kcxDtLeqnaO6HnLjjLjALOPFbPzMGBnj4DXTTSD1jEOWOH8PxX
+         8SoTdC/wv/FdKt2IfOzkTceE9zkiAENKIZldwZ3gInA2+cTmz7QVVPjnN4FExQn88OHd
+         C+MBZy1SQa/oBj9j51bc0purHqfgtWG2NIkbG0uKmX/kalO6xQrtvmCAyi2rNkuZIZ9B
+         lnqibJ+yQWuB2aa0Jy4TIdnKRBLgKjZXRpYxetm5lcNWyKH9mSaPNBOgKJhRY7NwmFZb
+         OS7i/kcCAtS/RNzk+lH1YwkQt7QTv3HTaydPxy2IJyXq8XV+5Ua4VBPE5mFNi4RfetIg
+         H8AA==
+X-Forwarded-Encrypted: i=1; AJvYcCXTPnSZ/hZixPXfPipblXbKtoi7mUxkDbGxuqNHxdYFUsoKkecN9XvXviJOZwHqtFBHN4zD+X4F1+nQEp2W0JQEANNOaTbeHRFbA3cgV5Q=
+X-Gm-Message-State: AOJu0YzKz9NUmaeTMSbMDY++6HXKrX9LmLDScQk+FcRdD9Cow/FpuEg5
+	XKZ+jNqsBDEsjz9j3MEfH7RrC7TbAQ9pU3rboMs+eKpf5cL/+Jwx8ro4EOQaw9M=
+X-Google-Smtp-Source: AGHT+IEEiqnvY5gU8olRLcK2tUJTBHzdYVi1NwcD4IMO2aJyMs/EXrcaOrK3rqbE8nr1ZMwvpRlmfw==
+X-Received: by 2002:a05:6870:d298:b0:22e:a3b0:34fd with SMTP id d24-20020a056870d29800b0022ea3b034fdmr18566004oae.21.1713881505083;
+        Tue, 23 Apr 2024 07:11:45 -0700 (PDT)
+Date: Tue, 23 Apr 2024 16:11:42 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v3 1/4] xen-livepatch: fix parameter name parsing
+Message-ID: <ZifBnp4w8Cc1mH2R@macbook>
 References: <20240423131249.29825-1-roger.pau@citrix.com>
- <20240423131249.29825-5-roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240423131249.29825-5-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+ <20240423131249.29825-2-roger.pau@citrix.com>
+ <e685068a-6df7-4a70-b62a-43982b05d4d9@suse.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <e685068a-6df7-4a70-b62a-43982b05d4d9@suse.com>
 
-On 23.04.2024 15:12, Roger Pau Monne wrote:
-> Ensure the entries of a payload exception table only apply to text regions in
-> the payload itself.  Since the payload exception table needs to be loaded and
-> active even before a patch is applied (because hooks might already rely on it),
-> make sure the exception table (if any) only contains fixups for the payload
-> text section.
+On Tue, Apr 23, 2024 at 03:33:36PM +0200, Jan Beulich wrote:
+> On 23.04.2024 15:12, Roger Pau Monne wrote:
+> > It's incorrect to restrict strncmp to the length of the command line input
+> > parameter, as then a user passing a rune like:
+> > 
+> > % xen-livepatch up foo.livepatch
+> > 
+> > Would match against the "upload" command, because the string comparison has
+> > been truncated to the length of the input argument.  Instead the truncation
+> > should be done based on the length of the command name stored in the internal
+> > array of actions.
 > 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> But then "xen-livepatch upload-or-not foo.livepatch" would still wrongly
+> match. Why strncmp() at all, rather than strcmp()?
 
-In principle
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Still two comments:
+Bah, indeed, how dumb of me.  Will switch to strcmp in the next
+version.
 
-> --- a/xen/arch/x86/extable.c
-> +++ b/xen/arch/x86/extable.c
-> @@ -228,3 +228,21 @@ unsigned long asmlinkage search_pre_exception_table(struct cpu_user_regs *regs)
->      }
->      return fixup;
->  }
-> +
-> +#ifdef CONFIG_LIVEPATCH
-> +bool extable_is_between_bounds(const struct exception_table_entry *ex_start,
-
-s/between/in/ or even s/is_between/in/? "Between", to me at least, reads
-very much like meaning "exclusive at both ends".
-
-> +                               const struct exception_table_entry *ex_end,
-> +                               const void *start, const void *end)
-> +{
-> +    for ( ; ex_start < ex_end; ex_start++ )
-> +    {
-> +        const void *addr = (void *)ex_addr(ex_start);
-> +        const void *cont = (void *)ex_cont(ex_start);
-
-Might be nicer to use _p() here, or not do the comparisons with pointers, but
-instead with unsigned long-s.
-
-Jan
+Thanks, Roger.-
 
