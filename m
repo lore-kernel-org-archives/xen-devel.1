@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26DD1C4345F
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2024 03:44:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.711057.1110735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69B57C4345F
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2024 03:44:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.711058.1110745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzTY1-00013D-1M; Wed, 24 Apr 2024 03:43:53 +0000
+	id 1rzTY5-0001RL-Ao; Wed, 24 Apr 2024 03:43:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 711057.1110735; Wed, 24 Apr 2024 03:43:52 +0000
+Received: by outflank-mailman (output) from mailman id 711058.1110745; Wed, 24 Apr 2024 03:43:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzTY0-000136-Sj; Wed, 24 Apr 2024 03:43:52 +0000
-Received: by outflank-mailman (input) for mailman id 711057;
- Wed, 24 Apr 2024 03:43:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rzTY5-0001RB-7i; Wed, 24 Apr 2024 03:43:57 +0000
+Received: by outflank-mailman (input) for mailman id 711058;
+ Wed, 24 Apr 2024 03:43:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5Z4K=L5=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
- id 1rzTQg-0003iy-A8
- for xen-devel@lists.xenproject.org; Wed, 24 Apr 2024 03:36:18 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20600.outbound.protection.outlook.com
- [2a01:111:f403:200a::600])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ce1f1d0c-01eb-11ef-909a-e314d9c70b13;
- Wed, 24 Apr 2024 05:36:17 +0200 (CEST)
-Received: from BL0PR0102CA0061.prod.exchangelabs.com (2603:10b6:208:25::38) by
- PH8PR12MB7206.namprd12.prod.outlook.com (2603:10b6:510:226::5) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7519.22; Wed, 24 Apr 2024 03:36:12 +0000
-Received: from BL6PEPF0001AB73.namprd02.prod.outlook.com
- (2603:10b6:208:25:cafe::1) by BL0PR0102CA0061.outlook.office365.com
- (2603:10b6:208:25::38) with Microsoft SMTP Server (version=TLS1_2,
+ id 1rzTQd-0002In-Kd
+ for xen-devel@lists.xenproject.org; Wed, 24 Apr 2024 03:36:15 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2414::600])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cc34aefa-01eb-11ef-b4bb-af5377834399;
+ Wed, 24 Apr 2024 05:36:13 +0200 (CEST)
+Received: from MN2PR07CA0006.namprd07.prod.outlook.com (2603:10b6:208:1a0::16)
+ by DS7PR12MB6357.namprd12.prod.outlook.com (2603:10b6:8:96::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Wed, 24 Apr
+ 2024 03:36:09 +0000
+Received: from BL6PEPF0001AB78.namprd02.prod.outlook.com
+ (2603:10b6:208:1a0:cafe::32) by MN2PR07CA0006.outlook.office365.com
+ (2603:10b6:208:1a0::16) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.34 via Frontend
- Transport; Wed, 24 Apr 2024 03:36:11 +0000
+ Transport; Wed, 24 Apr 2024 03:36:09 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF0001AB73.mail.protection.outlook.com (10.167.242.166) with Microsoft
+ BL6PEPF0001AB78.mail.protection.outlook.com (10.167.242.171) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7519.19 via Frontend Transport; Wed, 24 Apr 2024 03:36:11 +0000
+ 15.20.7519.19 via Frontend Transport; Wed, 24 Apr 2024 03:36:09 +0000
 Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 23 Apr
- 2024 22:36:11 -0500
+ 2024 22:36:02 -0500
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
  (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 23 Apr
- 2024 20:36:10 -0700
+ 2024 20:35:50 -0700
 Received: from henry-MS-7D54.amd.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Tue, 23 Apr 2024 22:36:09 -0500
+ Transport; Tue, 23 Apr 2024 22:35:47 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ce1f1d0c-01eb-11ef-909a-e314d9c70b13
+X-Inumbo-ID: cc34aefa-01eb-11ef-b4bb-af5377834399
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ghRDvkE9FCgwOryUffkQ9/MwMaiV/3XgkUUbsRiyZV1Ju4JDEoOE3d4quczvM9RU7t801t4SWP4jZUvyJC8LNHE3XjA6EWqNofTeXngVmMIKXBfO3QkqYH7/j0rkmtWNvW5H3nzSxGpEBqrgZqPqqUbdzyDYoU91RCcot+qwc8x7cNKoB9x2vD6LSQLDM5nn1DJRVapKLpnBQxQJZRk6zaFECljOYc1rn+LhrFe7uRD4/ZPaUeksycAUVPwfUtsFp9a4RPexFbcufFjVFBk7DyXDav1aJB36xf9JFmN6ah7PqL5S63oKsqRxzbZc1CC3nMJjy2Z+HThri4PqG7ZaNQ==
+ b=MQ6JSNrzJpeerxjmsbGM+jY1aBs+y+YCk4oE7pRxuTHbAX3LTsdlx4v8TgkZP3SbeNRh2M8WG8aL827wzo2R2n5aFaIDD3c2UDB4B9ElW2EDJ89HAihAiRTHBKtpvcSYgBTNS2m68RGyqY8zBR3mRZ3goc+4UkEUg+/A/LtRvH3o9ix1ELlMZTNkSiDL4VEiOlO+6x1kgmdVwFjqLpoQ3LhiVAmZXOoqOPhw2PycSBgcNPlCFqRc2vZoAPUKd77wigfZ2uM9U2dM7NLsJv6SMgYWAqkSBH0a70uCqq/vLvPvFV8QVYaCIEGS59NwHOTPwLXgzEY2vFUi9DN2wVMyww==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AQUYI8nFNauA8Eqc+dTwkfBb4u7bvFl+DOSdQh9a2O8=;
- b=Hg6AyUF//gVHUUAvePooLAjWKg3lzfTBVFQLY6PPF/xxFCSWjQ+TK16Czg9ySV4aMUFCYYaGQi8aboE2dXunUVGvJpRcMHVL9w/SLbiBH+V0rZZ92mzDioo+8GIvXokuqXL3pVEaqvSV39iFs5n7B0caaSOhIpH/UkWirBvOvgIbA7z2MrPyPB42ZQvbpixxAtzNeQ7i+mpblIj4X1Ub7YFHVgBQ9D5Sbl5fNnl8jFj2CV7Xrlw9f/T8DV0JoQODNk5JcLSDpKXntEDo4bs58m6DWag0cnACnlDoFh/xh2b/Ei+B/5i7vAr8MPqhr2jBRnktrXwQuyQPewhT7eX/lQ==
+ bh=DTkFoRXnpKJLc0+QsW9+qktSbxTVG+nGYUGcq/+U60w=;
+ b=PJFYV6JxgxLJIcKT3wDdeshkOvzFUTSdtbWqmiBYNmvORLnI+8vKrVmWgUECoiYygBD3BDeKyGOrIDH5P5XK6Yg+uLVXzRl2ZaAQRMqCI6+ZzoQilILVfsUOoGKREpvYlUMJjWbqDLV1N4EwkZWQCbc3KyyroHE/XwTCk8U3b8zVDlq1OieDi4ekDxOV3VPLI/PVinRw7tf3Ch540rPyz6asBXDOviX75DCJWdgMScJkjqn7r1nuHv4NIAhLDcldfbHh6PqrG81U5e2cV8PquMdYd+Vs4s9G9h0MTXb5IkMlllq+Z1okRC2DwbGTRdHF62pqw5WXWfx7zpoANcYg/Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AQUYI8nFNauA8Eqc+dTwkfBb4u7bvFl+DOSdQh9a2O8=;
- b=NB4Jbd0TLDTXBfahb8afVzymAvLYtFwrQWa+qWp2ymRyc6DC4Vs0Mbg2aESyxRy3j2dMZG41qgbf6+e2725bNGYK20CLCC+Iw97kBjh4YxVwmlERzQFPkBE0E1mxxiB7kOWfBDfTRkNzvAV6tli3vabUSuEv0F9gQyN82zz1JBE=
+ bh=DTkFoRXnpKJLc0+QsW9+qktSbxTVG+nGYUGcq/+U60w=;
+ b=mncG7NdhNOZyjEsA5n7OWngNYcGNWtJSNyv7YxuELcahr579douhrAxDB0aFvH5Z+sjeWacBiBAudd/nok8eyRkD6xdudlhS4gJNDYBiIw5ZhuTpYO+hZl4JPKbuJr+4rVfFljm//L5o5g75r65ctnoJFMaGcC7bxsRl3iLzvAw=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -89,12 +89,16 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Henry Wang <xin.wang2@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Vikram Garhwal <fnu.vikram@xilinx.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Stefano Stabellini
-	<stefano.stabellini@xilinx.com>, Henry Wang <xin.wang2@amd.com>
-Subject: [PATCH 13/15] xl/overlay: add remove operation to xenstore
-Date: Wed, 24 Apr 2024 11:34:47 +0800
-Message-ID: <20240424033449.168398-14-xin.wang2@amd.com>
+CC: Vikram Garhwal <fnu.vikram@xilinx.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Vikram Garhwal <vikram.garhwal@amd.com>, "Henry
+ Wang" <xin.wang2@amd.com>
+Subject: [PATCH 07/15] xen/overlay: Enable device tree overlay assignment to running domains
+Date: Wed, 24 Apr 2024 11:34:41 +0800
+Message-ID: <20240424033449.168398-8-xin.wang2@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240424033449.168398-1-xin.wang2@amd.com>
 References: <20240424033449.168398-1-xin.wang2@amd.com>
@@ -103,300 +107,523 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB73:EE_|PH8PR12MB7206:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3df460e3-5aae-437d-590a-08dc640fafa2
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB78:EE_|DS7PR12MB6357:EE_
+X-MS-Office365-Filtering-Correlation-Id: f4fcf970-eedd-4aa1-dfc8-08dc640fae65
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230031|1800799015|82310400014|376005|36860700004;
+X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?TdSarGKTVe51lz0a5kBmLLtN4JH9E1C/limauW/385+6HgkrE0eLPd7S4OUz?=
- =?us-ascii?Q?tr2+yOqQW6YtjGty/LjAuVxVFqFFf7goUCzFmJdvslNm4AY6lPm4POtW042a?=
- =?us-ascii?Q?Z4wqyYUiwKYK8tMt74ZV1sgNQNRR45CKZGgJ4Saze56BFdeYf84UhmLM8FPi?=
- =?us-ascii?Q?6xrKF09ueQAr+ccZ7RgF/pTv0DEE9W0eRhHj2nmNbHCeMdlG8K1M3pPsJwt8?=
- =?us-ascii?Q?CWDwovIUm3c3+8bX813nbCI7XGz8/r3i6Z1CAsgakI2m/KPV2UA996gvVxnP?=
- =?us-ascii?Q?wZLSEzluNRZRhMHRa0EQ2FgrhaqhgV7K6y9l4q8P9xboPHzULrKGUF03XUCR?=
- =?us-ascii?Q?eFpGTBj6EwFM8cfo/21C8sfwsaZnZNmJyR8lD5wjfLyUNKJLu37RPJGOqKoi?=
- =?us-ascii?Q?3swZzAJwMSq+egrEmq7AJhAY/f1oqbEmpYtBvw69JJnupDXn/xKr4yprInt+?=
- =?us-ascii?Q?cU1F7yA5Y3E2jaxsk6uNEJi4De1yuo5n3yU59YsGMAoYNcvti3JkkUZ9Ph/+?=
- =?us-ascii?Q?SZlEzXBZ9ST5i/SYtNk3oFnnxmmelY0lPgvovnlMOBPf8WoCex89AVFX7mqz?=
- =?us-ascii?Q?XMXuEuewBAekC0OW5Pl681djcBJ77DneVOaK488Y7Db6yzS9q0lxeO1pUoaF?=
- =?us-ascii?Q?N+lL7R+KtzItyau3rt0qXWzRS6LUZooovv5Q0ruSqTav1Sbrty6JItgdDo+I?=
- =?us-ascii?Q?BUp1fXDvWAsz75D1C2l/1LIxtZL10fYXATi54w63VeY5olLnu2QOTJ49a6tv?=
- =?us-ascii?Q?Uh0F3gTzII+fD/9ds7YsVyQpr6jqocrPphLj/NTSmmPmkr/R2HKFWaoC6RaZ?=
- =?us-ascii?Q?5nP+Ik7e8njzpwfPP90eRhKAvgbI/oZsLalsVRMUMi/nb46LFd3mjexBA1D8?=
- =?us-ascii?Q?MKz3jIgeBmuk8KHHKpF1opR+WMpEVkca7PY7MyVHIBrzMBgmHtAqLQrGQ9bh?=
- =?us-ascii?Q?A0QL3NPJ9DjkDQnUOvKdJ4CxjStGBM1HGK/8a1kNBeVHw/YjOT/nL1uXuT+U?=
- =?us-ascii?Q?d69mOLMOXh73V/rcMt8/dB3C7WgSqkso0X/QmpjTyXXh1eLZJan2fYsgyTSX?=
- =?us-ascii?Q?ajRdKce8GM3lyERucDqAKr0akogONq2LmNVm6/qphCG8pak1O3NPGIdWfN8S?=
- =?us-ascii?Q?G0W+vwrRQUm157twupH4QzCenPJe5OAjlbl0zIPuw72QwGphN/xKx/VL7BGm?=
- =?us-ascii?Q?WiuDtXE1s2EJNne9CXKw7vPw70h1Onu7A2805l/Mg/+FSBa/SDV7gRmYi44l?=
- =?us-ascii?Q?+/SJl7oiKYOR8ZTlYaKbypN4lAnwx2wB0vr4kL5XMKuRa2jROMlgFRDbc8+T?=
- =?us-ascii?Q?htdxTWZI7OaapO+oigcGabM+Cx1GBC9epj2MhUSSujgHVmZy9fYL5EsagACb?=
- =?us-ascii?Q?oCyHnhc=3D?=
+	=?us-ascii?Q?K85sB8ClB6nQkWsQeYTh18OXfZkGhagob1W4qn1IX09NmR5trNEud9WRU2Ba?=
+ =?us-ascii?Q?ClrOIBwJqcIbdL7q+NYAdaI1Jf1vmdxludqH/fjiPEpkUXsu+24LwbvbMKtz?=
+ =?us-ascii?Q?CYoSbjAML/1B818XPwqd5dwj0fLUCzO3c3MUT7tX2ny4Gmb9toEEZDP6wrzF?=
+ =?us-ascii?Q?AjBICUI6V435+Yq0E8FkX7+q16io4OCkVjHN2Zs0vCz2t52X1fi4bCgST/u0?=
+ =?us-ascii?Q?YWeVAq7GIOzLV9IU9nLaVZqmcI0pXmJshqCh6NRrYu+H2IzJ/X3EEiJ3yWll?=
+ =?us-ascii?Q?4waYggJnmVQRvdZhOAVoTZjXO8+bsCUVTULVEIhbPWfNXXPhNx2szHCVbZo1?=
+ =?us-ascii?Q?Eg5b3p0MDbugWPx97FI+NqUqaGafOwOmSSOWqeR1ke6NatXBbXXTqg4ZzrAi?=
+ =?us-ascii?Q?BOixxaKI82W5ZVKis0zBIz6ojN/Cri6hhJG4sEpynTEKQlhp+eo4gB3Ukd1J?=
+ =?us-ascii?Q?rkfXU1domeQtIAweSWEMhvDQqMOZWphK3CVsG4+7Sni+1mtwH1qpXJG1rrIP?=
+ =?us-ascii?Q?ITXS/EBOXbV32JO7jQTuilGiFOmQ7CgO/CK9PNeP1EJOK938gVSYu2jojkun?=
+ =?us-ascii?Q?cf9BjpUukviHP+kTvfZZRrar/N8v8BaJ6dgGI8T3cuWAlmkU+GCHthKd3x4G?=
+ =?us-ascii?Q?yX7Wpbbsc0JI47slwOWTMXV5L276y+UurbbLCRX4yVoRf18ScNmUvjPEgj9x?=
+ =?us-ascii?Q?m8YyEkUMs9inkK1p9AcFjRK/MzQqqwnHBL/7V29nsctj2lnLv04P3uyxgqMt?=
+ =?us-ascii?Q?VDJXegg0byvcmmXj3bQy/6QcQPzNy99AGams/HqHsYXXQx5CMW+0w9s0/qYa?=
+ =?us-ascii?Q?ZmlLDLjcFI/wKG2twGLAhWe7wihEfsVlg7LS8Bn7ry159YEjvRO2EmiFhfQC?=
+ =?us-ascii?Q?vwTGRybSPuxkWbxHaeVPbXG8g6SnIJP+RW7iUYSeFeD+PAO/JUhYtpvoCTZz?=
+ =?us-ascii?Q?mc0rrMAgHe5HfmGeJCQ7nRue2ShP4XtlYq0gjeMx4Or5mNiXSFL7Wln3hzUa?=
+ =?us-ascii?Q?ySV5c4RwAFvk1HT8KVSNXz8Uz903+e/VQsc6fbCXR9+PjrIPt6JuB7TyBV8D?=
+ =?us-ascii?Q?yrCwRI1UgKoP9xI14w6dHOpWda3wao7dD+wDwdJVLPiD9JN1mqcATUVXy9pm?=
+ =?us-ascii?Q?rwkjYLQ/Q5NcyLv7iFfrlvih85FEEay3qycQJID/h3Ev4mOQvVPR5aHDKNp5?=
+ =?us-ascii?Q?2QBgUuBvlJuhrImJTRfci2j1SKCqeuurTqz2uW0GAq3JhZ/dwB0t2S/EZ9w8?=
+ =?us-ascii?Q?3kRejUrKqsaGhRqK1jW5J7XkDjC+EL9wPJK8HbzXf+VIHm1r9ikk1TIkQ2zj?=
+ =?us-ascii?Q?vls2jXr3YlVo0Z05YVIt70S3gbpSap0VUHW/PEgD2qKo3VbfWRjbaoDpZkiz?=
+ =?us-ascii?Q?9rQaldw=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(82310400014)(376005)(36860700004);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(376005)(36860700004)(82310400014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2024 03:36:11.3238
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2024 03:36:09.2498
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3df460e3-5aae-437d-590a-08dc640fafa2
+X-MS-Exchange-CrossTenant-Network-Message-Id: f4fcf970-eedd-4aa1-dfc8-08dc640fae65
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB73.namprd02.prod.outlook.com
+	BL6PEPF0001AB78.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7206
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6357
 
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
 
-Add 3 new command line parameters to the xl overlay command: overlay
-name, type and partial. Pass these paramters to the domU via xenstore.
+Following changes are done to enable dtbo assignment to a running vm with given
+domain_id:
+1. Support for irq map and unmap for running domain. We store the IRQ nums for
+    each overlay and while removing those IRQ nums are removed.
+2. Support iommu assign/reassign to running domains.
+3. Added "map_nodes" options to support two modes:
+    a. Add the nodes in Xen device tree and map the nodes to given VM
+    b. Just add them in xen device tree without mapping.
 
-Also introduce support for "operation" in xenstore: it can be "add" or
-"remove". In case of "remove", the overlay is to be removed from the
-domU device tree.
+Change device.c: handle_device() function with input domain_mapping flag.
 
-Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
-Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 Signed-off-by: Henry Wang <xin.wang2@amd.com>
 ---
- tools/xl/xl_vmcontrol.c | 184 +++++++++++++++++++++++++++++++++++++---
- 1 file changed, 173 insertions(+), 11 deletions(-)
+ xen/arch/arm/device.c            |   8 +-
+ xen/arch/arm/domain_build.c      |   2 +-
+ xen/arch/arm/include/asm/setup.h |   3 +-
+ xen/common/dt-overlay.c          | 218 ++++++++++++++++++++++++++-----
+ xen/include/public/sysctl.h      |   4 +-
+ 5 files changed, 199 insertions(+), 36 deletions(-)
 
-diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
-index 2bf76dd389..ddd6e9e370 100644
---- a/tools/xl/xl_vmcontrol.c
-+++ b/tools/xl/xl_vmcontrol.c
-@@ -1466,8 +1466,123 @@ static uint32_t get_num_pages(struct xs_handle *xs, const char *xs_path)
-     return num_pages;
+diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
+index 3e02cff008..df5035f9a8 100644
+--- a/xen/arch/arm/device.c
++++ b/xen/arch/arm/device.c
+@@ -317,7 +317,8 @@ static int map_device_children(const struct dt_device_node *dev,
+  *  - Map the IRQs and iomem regions to DOM0
+  */
+ int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
+-                  struct rangeset *iomem_ranges, struct rangeset *irq_ranges)
++                  struct rangeset *iomem_ranges, struct rangeset *irq_ranges,
++                  bool device_mapping)
+ {
+     unsigned int naddr;
+     unsigned int i;
+@@ -334,9 +335,10 @@ int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
+     struct map_range_data mr_data = {
+         .d = d,
+         .p2mt = p2mt,
+-        .skip_mapping = !own_device ||
++        .skip_mapping = (!own_device ||
+                         (is_pci_passthrough_enabled() &&
+-                        (device_get_class(dev) == DEVICE_PCI_HOSTBRIDGE)),
++                        (device_get_class(dev) == DEVICE_PCI_HOSTBRIDGE))) &&
++                        !device_mapping,
+         .iomem_ranges = iomem_ranges,
+         .irq_ranges = irq_ranges
+     };
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 54232ed4cb..a525aed175 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1699,7 +1699,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
+                "WARNING: Path %s is reserved, skip the node as we may re-use the path.\n",
+                path);
+ 
+-    res = handle_device(d, node, p2mt, NULL, NULL);
++    res = handle_device(d, node, p2mt, NULL, NULL, false);
+     if ( res)
+         return res;
+ 
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index d15a88d2e0..d6d8c28d02 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -172,7 +172,8 @@ u32 device_tree_get_u32(const void *fdt, int node,
+                         const char *prop_name, u32 dflt);
+ 
+ int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
+-                  struct rangeset *iomem_ranges, struct rangeset *irq_ranges);
++                  struct rangeset *iomem_ranges, struct rangeset *irq_ranges,
++                  bool device_mapping);
+ 
+ int map_device_irqs_to_domain(struct domain *d, struct dt_device_node *dev,
+                               bool need_mapping, struct rangeset *irq_ranges);
+diff --git a/xen/common/dt-overlay.c b/xen/common/dt-overlay.c
+index 39e4ba59dd..8840ea756b 100644
+--- a/xen/common/dt-overlay.c
++++ b/xen/common/dt-overlay.c
+@@ -356,24 +356,133 @@ static int overlay_get_nodes_info(const void *fdto, char **nodes_full_path)
+     return 0;
  }
  
-+static bool write_overlay_operation(struct xs_handle *xs, char *operation,
-+                               char *path)
++static int remove_all_irqs(struct rangeset *irq_ranges,
++                           struct domain *d, bool domain_mapping)
 +{
-+    xs_transaction_t xs_trans = XBT_NULL;
-+    char buf[128];
-+    char ref[64];
++    struct range *x;
++    int rc = 0;
 +
-+retry_transaction:
-+    xs_trans = xs_transaction_start(xs);
-+    if (!xs_trans)
-+        return false;
++    read_lock(&irq_ranges->lock);
 +
-+    snprintf(ref, sizeof(ref), "%s", operation);
-+    snprintf(buf, sizeof(buf), "%s/overlay-operation", path);
++    for ( x = first_range(irq_ranges); x != NULL;
++          x = next_range(irq_ranges, x) )
++    {
++        /*
++         * Handle invalid use cases 1:
++         * Where user assigned the nodes to dom0 along with their irq
++         * mappings but now just wants to remove the nodes entry from Xen device
++         * device tree without unmapping the irq.
++         */
++        if ( !domain_mapping && vgic_get_hw_irq_desc(d, NULL, x->s) )
++        {
++            printk(XENLOG_ERR "Removing node from device tree without releasing it's IRQ/IOMMU is not allowed\n");
++            rc = -EINVAL;
++            goto out;
++        }
 +
-+    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
-+        return false;
++        /*
++         * IRQ should always have access unless there are duplication of
++         * of irqs in device tree. There are few cases of xen device tree
++         * where there are duplicate interrupts for the same node.
++         */
++        if (!irq_access_permitted(d, x->s))
++            continue;
++        /*
++         * TODO: We don't handle shared IRQs for now. So, it is assumed that
++         * the IRQs was not shared with another domain.
++         */
++        rc = irq_deny_access(d, x->s);
++        if ( rc )
++        {
++            printk(XENLOG_ERR "unable to revoke access for irq %ld\n", x->s);
++            goto out;
++        }
 +
-+    if (!xs_transaction_end(xs, xs_trans, 0)) {
-+        if (errno == EAGAIN)
-+            goto retry_transaction;
-+        else
-+            return false;
++        if ( domain_mapping )
++        {
++            rc = release_guest_irq(d, x->s);
++            if ( rc )
++            {
++                printk(XENLOG_ERR "unable to release irq %ld\n", x->s);
++                goto out;
++            }
++        }
 +    }
 +
-+    return true;
++out:
++    read_unlock(&irq_ranges->lock);
++    return rc;
 +}
 +
-+static bool write_overlay_name(struct xs_handle *xs, char *name,
-+                               char *path)
++static int remove_all_iomems(struct rangeset *iomem_ranges,
++                             struct domain *d,
++                             bool domain_mapping)
 +{
-+    xs_transaction_t xs_trans = XBT_NULL;
-+    char buf[128];
-+    char ref[64];
++    struct range *x;
++    int rc = 0;
++    p2m_type_t t;
++    mfn_t mfn;
 +
-+retry_transaction:
-+    xs_trans = xs_transaction_start(xs);
-+    if (!xs_trans)
-+        return false;
++    read_lock(&iomem_ranges->lock);
 +
-+    snprintf(ref, sizeof(ref), "%s", name);
-+    snprintf(buf, sizeof(buf), "%s/overlay-name", path);
++    for ( x = first_range(iomem_ranges); x != NULL;
++          x = next_range(iomem_ranges, x) )
++    {
++        mfn = p2m_lookup(d, _gfn(x->s), &t);
++        if ( mfn_x(mfn) == 0 || mfn_x(mfn) == ~0UL )
++        {
++            rc = -EINVAL;
++            goto out;
++        }
 +
-+    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
-+        return false;
++        rc = iomem_deny_access(d, x->s, x->e);
++        if ( rc )
++        {
++            printk(XENLOG_ERR "Unable to remove dom%d access to %#lx - %#lx\n",
++                   d->domain_id,
++                   x->s, x->e);
++            goto out;
++        }
 +
-+    if (!xs_transaction_end(xs, xs_trans, 0)) {
-+        if (errno == EAGAIN)
-+            goto retry_transaction;
-+        else
-+            return false;
++        rc = unmap_mmio_regions(d, _gfn(x->s), x->e - x->s,
++                                _mfn(x->s));
++        if ( rc )
++            goto out;
 +    }
 +
-+    return true;
++out:
++    read_unlock(&iomem_ranges->lock);
++    return rc;
 +}
 +
-+static bool write_overlay_type(struct xs_handle *xs, char *type,
-+                               char *path)
-+{
-+    xs_transaction_t xs_trans = XBT_NULL;
-+    char buf[128];
-+    char ref[64];
-+
-+retry_transaction:
-+    xs_trans = xs_transaction_start(xs);
-+    if (!xs_trans)
-+        return false;
-+
-+    snprintf(ref, sizeof(ref), "%s", type);
-+    snprintf(buf, sizeof(buf), "%s/overlay-type", path);
-+
-+    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
-+        return false;
-+
-+    if (!xs_transaction_end(xs, xs_trans, 0)) {
-+        if (errno == EAGAIN)
-+            goto retry_transaction;
-+        else
-+            return false;
-+    }
-+
-+    return true;
-+}
-+
-+static bool write_overlay_partial(struct xs_handle *xs, bool is_partial,
-+                                  char *path)
-+{
-+    xs_transaction_t xs_trans = XBT_NULL;
-+    char buf[128];
-+    char ref[4];
-+
-+retry_transaction:
-+    xs_trans = xs_transaction_start(xs);
-+    if (!xs_trans)
-+        return false;
-+
-+    snprintf(ref, sizeof(ref), "%d", is_partial);
-+    snprintf(buf, sizeof(buf), "%s/overlay-partial", path);
-+
-+    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
-+        return false;
-+
-+    if (!xs_transaction_end(xs, xs_trans, 0)) {
-+        if (errno == EAGAIN)
-+            goto retry_transaction;
-+        else
-+            return false;
-+    }
-+
-+    return true;
-+}
-+
-+
- static int share_overlay_with_domu(void *overlay_dt_domU, int overlay_dt_size,
--                                   int domain_id)
-+                                   int domain_id, char *overlay_ops,
-+                                   char *overlay_name,
-+                                   char *overlay_type, bool is_overlay_partial)
+ /* Check if node itself can be removed and remove node from IOMMU. */
+-static int remove_node_resources(struct dt_device_node *device_node)
++static int remove_node_resources(struct dt_device_node *device_node,
++                                 struct domain *d, bool domain_mapping)
  {
-     struct xs_handle *xs = NULL;
-     char *path = NULL;
-@@ -1574,6 +1689,34 @@ static int share_overlay_with_domu(void *overlay_dt_domU, int overlay_dt_size,
-         goto out;
+     int rc = 0;
+     unsigned int len;
+     domid_t domid;
+ 
+-    domid = dt_device_used_by(device_node);
++    if ( !d )
++    {
++        domid = dt_device_used_by(device_node);
+ 
+-    dt_dprintk("Checking if node %s is used by any domain\n",
+-               device_node->full_name);
++        /*
++         * We also check if device is assigned to DOMID_IO as when a domain
++         * is destroyed device is assigned to DOMID_IO or for the case when
++         * device was never mapped to a running domain.
++         */
++        if ( domid != hardware_domain->domain_id && domid != DOMID_IO )
++        {
++            printk(XENLOG_ERR "Device %s is being assigned to %u. Device is assigned to %d\n",
++                   device_node->full_name, DOMID_IO, domid);
++            return -EINVAL;
++        }
+ 
+-    /* Remove the node if only it's assigned to hardware domain or domain io. */
+-    if ( domid != hardware_domain->domain_id && domid != DOMID_IO )
+-    {
+-        printk(XENLOG_ERR "Device %s is being used by domain %u. Removing nodes failed\n",
+-               device_node->full_name, domid);
+-        return -EINVAL;
++        /*
++         * Device is assigned to hardware domain.
++         */
++         d = hardware_domain;
      }
  
-+    /* write overlay ops */
-+    if (!write_overlay_operation(xs, overlay_ops, path)) {
-+        err = ERROR_FAIL;
-+        fprintf(stderr,"Writing overlay_ops ready failed\n");
-+        goto out;
-+    }
+     /* Check if iommu property exists. */
+@@ -382,6 +491,16 @@ static int remove_node_resources(struct dt_device_node *device_node)
+         if ( dt_device_is_protected(device_node) )
+         {
+             write_lock(&dt_host_lock);
++            if ( domain_mapping && !list_empty(&device_node->domain_list) )
++            {
++                rc = iommu_deassign_dt_device(d, device_node);
++                if ( rc < 0 )
++                {
++                    write_unlock(&dt_host_lock);
++                    return rc;
++                }
++            }
 +
-+    /* Write the overlay-name. */
-+    if (!write_overlay_name(xs, overlay_name, path)) {
-+        err = ERROR_FAIL;
-+        fprintf(stderr,"Writing overlay_name ready failed\n");
-+        goto out;
-+    }
-+
-+    /* Write the overlay-type. */
-+    if (!write_overlay_type(xs, overlay_type, path)) {
-+        err = ERROR_FAIL;
-+        fprintf(stderr,"Writing overlay_type ready failed\n");
-+        goto out;
-+    }
-+
-+    /* Write the overlay-partial. */
-+    if (!write_overlay_partial(xs, is_overlay_partial, path)) {
-+        err = ERROR_FAIL;
-+        fprintf(stderr,"Writing overlay_partial ready failed\n");
-+        goto out;
-+    }
-+
-     /* Write the status "done". */
-     if (!write_status(xs, "done", sender_status_path)) {
-         fprintf(stderr,"Writing status DONE failed\n");
-@@ -1611,13 +1754,16 @@ int main_dt_overlay(int argc, char **argv)
-     int overlay_dtb_size = 0;
-     const int overlay_add_op = 1;
-     const int overlay_remove_op = 2;
-+    char *overlay_name = "overlay";
-+    char *overlay_type = "normal";
-+    bool is_overlay_partial = false;
+             rc = iommu_remove_dt_device(device_node);
+             if ( rc < 0 )
+             {
+@@ -397,7 +516,8 @@ static int remove_node_resources(struct dt_device_node *device_node)
  
-     if (argc < 3) {
-         help("dt-overlay");
-         return EXIT_FAILURE;
+ /* Remove all descendants from IOMMU. */
+ static int
+-remove_descendant_nodes_resources(const struct dt_device_node *device_node)
++remove_descendant_nodes_resources(const struct dt_device_node *device_node,
++                                  struct domain *d, bool domain_mapping)
+ {
+     int rc = 0;
+     struct dt_device_node *child_node;
+@@ -407,12 +527,13 @@ remove_descendant_nodes_resources(const struct dt_device_node *device_node)
+     {
+         if ( child_node->child )
+         {
+-            rc = remove_descendant_nodes_resources(child_node);
++            rc = remove_descendant_nodes_resources(child_node, d,
++                                                   domain_mapping);
+             if ( rc )
+                 return rc;
+         }
+ 
+-        rc = remove_node_resources(child_node);
++        rc = remove_node_resources(child_node, d, domain_mapping);
+         if ( rc )
+             return rc;
+     }
+@@ -421,12 +542,13 @@ remove_descendant_nodes_resources(const struct dt_device_node *device_node)
+ }
+ 
+ /* Remove nodes from dt_host. */
+-static int remove_nodes(const struct overlay_track *tracker)
++static int remove_nodes(const struct overlay_track *tracker,
++                        struct domain *d)
+ {
+     int rc = 0;
+     struct dt_device_node *overlay_node;
+     unsigned int j;
+-    struct domain *d = hardware_domain;
++    bool domain_mapping = (d != NULL);
+ 
+     for ( j = 0; j < tracker->num_nodes; j++ )
+     {
+@@ -434,11 +556,19 @@ static int remove_nodes(const struct overlay_track *tracker)
+         if ( overlay_node == NULL )
+             return -EINVAL;
+ 
+-        rc = remove_descendant_nodes_resources(overlay_node);
++        rc = remove_descendant_nodes_resources(overlay_node, d, domain_mapping);
++        if ( rc )
++            return rc;
++
++        rc = remove_node_resources(overlay_node, d, domain_mapping);
++        if ( rc )
++            return rc;
++
++        rc = remove_all_irqs(tracker->irq_ranges, d, domain_mapping);
+         if ( rc )
+             return rc;
+ 
+-        rc = remove_node_resources(overlay_node);
++        rc = remove_all_iomems(tracker->iomem_ranges, d, domain_mapping);
+         if ( rc )
+             return rc;
+ 
+@@ -481,7 +611,8 @@ static int remove_nodes(const struct overlay_track *tracker)
+  * while destroying the domain.
+  */
+ static long handle_remove_overlay_nodes(const void *overlay_fdt,
+-                                        uint32_t overlay_fdt_size)
++                                        uint32_t overlay_fdt_size,
++                                        struct domain *d)
+ {
+     int rc;
+     struct overlay_track *entry, *temp, *track;
+@@ -520,7 +651,7 @@ static long handle_remove_overlay_nodes(const void *overlay_fdt,
+ 
      }
  
--    if (argc > 5) {
-+    if (argc > 7) {
-         fprintf(stderr, "Too many arguments\n");
-         return ERROR_FAIL;
-     }
-@@ -1625,17 +1771,22 @@ int main_dt_overlay(int argc, char **argv)
-     overlay_ops = argv[1];
-     overlay_config_file = argv[2];
+-    rc = remove_nodes(entry);
++    rc = remove_nodes(entry, d);
+     if ( rc )
+     {
+         printk(XENLOG_ERR "Removing node failed\n");
+@@ -560,12 +691,21 @@ static void free_nodes_full_path(unsigned int num_nodes, char **nodes_full_path)
+     xfree(nodes_full_path);
+ }
  
--    if (!strcmp(argv[argc - 1], "-e"))
--        auto_mode = false;
+-static long add_nodes(struct overlay_track *tr, char **nodes_full_path)
++static long add_nodes(struct overlay_track *tr, char **nodes_full_path,
++                      struct domain *d)
+ 
+ {
+     int rc;
+     unsigned int j;
+     struct dt_device_node *overlay_node;
++    bool domain_mapping = (d != NULL);
++
++    /*
++     * If domain is NULL, then we add the devices into hardware domain and skip
++     * IRQs/IOMMUs mapping.
++     */
++    if ( d == NULL )
++        d = hardware_domain;
+ 
+     for ( j = 0; j < tr->num_nodes; j++ )
+     {
+@@ -609,8 +749,6 @@ static long add_nodes(struct overlay_track *tr, char **nodes_full_path)
+             return rc;
+         }
+ 
+-        write_unlock(&dt_host_lock);
 -
--    if (argc == 4 || !auto_mode) {
-+    if (argc == 4 ) {
-         domain_id = find_domain(argv[argc-1]);
-         domain_mapping = true;
--    }
--
--    if (argc == 5 || !auto_mode) {
--        domain_id = find_domain(argv[argc-2]);
-+    } else if (argc == 5 && !strcmp(argv[4], "-e")) {
-+        domain_id = find_domain(argv[3]);
-+        auto_mode = false;
-         domain_mapping = true;
-+    } else if (argc == 7) {
-+        domain_id = find_domain(argv[3]);
-+        domain_mapping = true;
-+        overlay_name = argv[4];
-+        overlay_type = argv[5];
-+        is_overlay_partial = atoi(argv[6]);
-+    } else {
-+        fprintf(stderr, "Invalid arguments\n");
-+        return ERROR_FAIL;
+         prev_node->allnext = next_node;
+ 
+         overlay_node = dt_find_node_by_path(overlay_node->full_name);
+@@ -618,18 +756,23 @@ static long add_nodes(struct overlay_track *tr, char **nodes_full_path)
+         {
+             /* Sanity check. But code will never come here. */
+             ASSERT_UNREACHABLE();
++            write_unlock(&dt_host_lock);
+             return -EFAULT;
+         }
+ 
+-        rc = handle_device(hardware_domain, overlay_node, p2m_mmio_direct_c,
++        rc = handle_device(d, overlay_node, p2m_mmio_direct_c,
+                            tr->iomem_ranges,
+-                           tr->irq_ranges);
++                           tr->irq_ranges,
++                           domain_mapping);
+         if ( rc )
+         {
+             printk(XENLOG_ERR "Adding IRQ and IOMMU failed\n");
++            write_unlock(&dt_host_lock);
+             return rc;
+         }
+ 
++        write_unlock(&dt_host_lock);
++
+         /* Keep overlay_node address in tracker. */
+         tr->nodes_address[j] = (unsigned long)overlay_node;
+     }
+@@ -643,7 +786,8 @@ static long add_nodes(struct overlay_track *tr, char **nodes_full_path)
+  * to hardware domain done by handle_node().
+  */
+ static long handle_add_overlay_nodes(void *overlay_fdt,
+-                                     uint32_t overlay_fdt_size)
++                                     uint32_t overlay_fdt_size,
++                                     struct domain *d)
+ {
+     int rc;
+     unsigned int j;
+@@ -788,7 +932,7 @@ static long handle_add_overlay_nodes(void *overlay_fdt,
+         goto err;
      }
  
-     /* User didn't prove any overlay operation. */
-@@ -1678,7 +1829,18 @@ int main_dt_overlay(int argc, char **argv)
+-    rc = add_nodes(tr, nodes_full_path);
++    rc = add_nodes(tr, nodes_full_path, d);
+     if ( rc )
+     {
+         printk(XENLOG_ERR "Adding nodes failed. Removing the partially added nodes.\n");
+@@ -810,7 +954,7 @@ static long handle_add_overlay_nodes(void *overlay_fdt,
+  */
+  remove_node:
+     tr->num_nodes = j;
+-    rc = remove_nodes(tr);
++    rc = remove_nodes(tr, d);
  
-     if (domain_id && auto_mode && (op == LIBXL_DT_OVERLAY_ADD))
-         rc = share_overlay_with_domu(overlay_dtb, overlay_dtb_size,
--                                     domain_id);
-+                                     domain_id, "add", overlay_name,
-+                                     overlay_type, is_overlay_partial);
-+
-+    if (rc) {
-+        free(overlay_dtb);
-+        return rc;
-+    }
-+
-+    if (domain_id && auto_mode && (op == LIBXL_DT_OVERLAY_REMOVE))
-+        rc = share_overlay_with_domu(overlay_dtb, overlay_dtb_size,
-+                                     domain_id, "remove", overlay_name,
-+                                     overlay_type, is_overlay_partial);
+     if ( rc )
+     {
+@@ -855,6 +999,7 @@ long dt_overlay_sysctl(struct xen_sysctl_dt_overlay *op)
+ {
+     long ret;
+     void *overlay_fdt;
++    struct domain *d = NULL;
  
-     free(overlay_dtb);
-     return rc;
+     if ( op->overlay_op != XEN_SYSCTL_DT_OVERLAY_ADD &&
+          op->overlay_op != XEN_SYSCTL_DT_OVERLAY_REMOVE )
+@@ -863,7 +1008,7 @@ long dt_overlay_sysctl(struct xen_sysctl_dt_overlay *op)
+     if ( op->overlay_fdt_size == 0 || op->overlay_fdt_size > KB(500) )
+         return -EINVAL;
+ 
+-    if ( op->pad[0] || op->pad[1] || op->pad[2] )
++    if ( op->pad[0] || op->pad[1] )
+         return -EINVAL;
+ 
+     overlay_fdt = xmalloc_bytes(op->overlay_fdt_size);
+@@ -880,13 +1025,26 @@ long dt_overlay_sysctl(struct xen_sysctl_dt_overlay *op)
+         return -EFAULT;
+     }
+ 
++    /*
++     * If domain_mapping == false, domain_id can be ignored as we don't need to
++     * map resource to any domain.
++     *
++     * If domain_mapping == true, domain_id, get the target domain for the
++     * mapping.
++     */
++    if ( op->domain_mapping )
++        d = rcu_lock_domain_by_id(op->domain_id);
++
+     if ( op->overlay_op == XEN_SYSCTL_DT_OVERLAY_REMOVE )
+-        ret = handle_remove_overlay_nodes(overlay_fdt, op->overlay_fdt_size);
++        ret = handle_remove_overlay_nodes(overlay_fdt, op->overlay_fdt_size, d);
+     else
+-        ret = handle_add_overlay_nodes(overlay_fdt, op->overlay_fdt_size);
++        ret = handle_add_overlay_nodes(overlay_fdt, op->overlay_fdt_size, d);
+ 
+     xfree(overlay_fdt);
+ 
++    if ( op->domain_mapping )
++        rcu_unlock_domain(d);
++
+     return ret;
+ }
+ 
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 9b19679cae..f5435f8890 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -1197,7 +1197,9 @@ struct xen_sysctl_dt_overlay {
+ #define XEN_SYSCTL_DT_OVERLAY_ADD                   1
+ #define XEN_SYSCTL_DT_OVERLAY_REMOVE                2
+     uint8_t overlay_op;                     /* IN: Add or remove. */
+-    uint8_t pad[3];                         /* IN: Must be zero. */
++    bool domain_mapping;                    /* IN: True of False. */
++    uint8_t pad[2];                         /* IN: Must be zero. */
++    uint32_t domain_id;
+ };
+ #endif
+ 
 -- 
 2.34.1
 
