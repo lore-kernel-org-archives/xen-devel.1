@@ -4,52 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E16C4345F
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2024 03:43:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.711053.1110725 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26DD1C4345F
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2024 03:44:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.711057.1110735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzTXs-0000cn-P8; Wed, 24 Apr 2024 03:43:44 +0000
+	id 1rzTY1-00013D-1M; Wed, 24 Apr 2024 03:43:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 711053.1110725; Wed, 24 Apr 2024 03:43:44 +0000
+Received: by outflank-mailman (output) from mailman id 711057.1110735; Wed, 24 Apr 2024 03:43:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzTXs-0000cN-Lb; Wed, 24 Apr 2024 03:43:44 +0000
-Received: by outflank-mailman (input) for mailman id 711053;
- Wed, 24 Apr 2024 03:43:43 +0000
+	id 1rzTY0-000136-Sj; Wed, 24 Apr 2024 03:43:52 +0000
+Received: by outflank-mailman (input) for mailman id 711057;
+ Wed, 24 Apr 2024 03:43:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5Z4K=L5=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
- id 1rzTQk-0003iy-7f
- for xen-devel@lists.xenproject.org; Wed, 24 Apr 2024 03:36:22 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [2a01:111:f403:2414::600])
+ id 1rzTQg-0003iy-A8
+ for xen-devel@lists.xenproject.org; Wed, 24 Apr 2024 03:36:18 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20600.outbound.protection.outlook.com
+ [2a01:111:f403:200a::600])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d10f4b04-01eb-11ef-909a-e314d9c70b13;
- Wed, 24 Apr 2024 05:36:21 +0200 (CEST)
-Received: from BLAPR03CA0133.namprd03.prod.outlook.com (2603:10b6:208:32e::18)
- by CH2PR12MB4246.namprd12.prod.outlook.com (2603:10b6:610:a9::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Wed, 24 Apr
- 2024 03:36:16 +0000
-Received: from BL6PEPF0001AB75.namprd02.prod.outlook.com
- (2603:10b6:208:32e:cafe::c9) by BLAPR03CA0133.outlook.office365.com
- (2603:10b6:208:32e::18) with Microsoft SMTP Server (version=TLS1_2,
+ id ce1f1d0c-01eb-11ef-909a-e314d9c70b13;
+ Wed, 24 Apr 2024 05:36:17 +0200 (CEST)
+Received: from BL0PR0102CA0061.prod.exchangelabs.com (2603:10b6:208:25::38) by
+ PH8PR12MB7206.namprd12.prod.outlook.com (2603:10b6:510:226::5) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7519.22; Wed, 24 Apr 2024 03:36:12 +0000
+Received: from BL6PEPF0001AB73.namprd02.prod.outlook.com
+ (2603:10b6:208:25:cafe::1) by BL0PR0102CA0061.outlook.office365.com
+ (2603:10b6:208:25::38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.34 via Frontend
- Transport; Wed, 24 Apr 2024 03:36:16 +0000
+ Transport; Wed, 24 Apr 2024 03:36:11 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF0001AB75.mail.protection.outlook.com (10.167.242.168) with Microsoft
+ BL6PEPF0001AB73.mail.protection.outlook.com (10.167.242.166) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7519.19 via Frontend Transport; Wed, 24 Apr 2024 03:36:15 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ 15.20.7519.19 via Frontend Transport; Wed, 24 Apr 2024 03:36:11 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 23 Apr
- 2024 22:36:15 -0500
+ 2024 22:36:11 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 23 Apr
+ 2024 20:36:10 -0700
 Received: from henry-MS-7D54.amd.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Tue, 23 Apr 2024 22:36:13 -0500
+ Transport; Tue, 23 Apr 2024 22:36:09 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d10f4b04-01eb-11ef-909a-e314d9c70b13
+X-Inumbo-ID: ce1f1d0c-01eb-11ef-909a-e314d9c70b13
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PGCbezdktqld2vbBB95zhs1DELJyKC2mW/o9ZQKBEqJXWqGlJ2PbyfnyX+xqbiKHgXEfsPej918SG/oOmKJZPOJhjlHIhtPFGiNdx2MGdhjTQrBXTSXtNCgDaE0HAK4V8redAX422glkagWeg7zZo4dZFpkhNkZVjx3HojLjuJsGxqzWcLykDtIsQn8kJQwpGPPL+fCGbx+MifftvlycEndEMjAE/tpWJQSTDFhZ3R7wS839k1DS3dASn/+X2Lo0Ojw3JR9RKy4DQ+6wgDl273yeGWKitQuQFbdFlfdt6oEoryuGHIbZQWZ3Zdl13NH6l82EPQQ7ZKjaAo7ZDoQESw==
+ b=ghRDvkE9FCgwOryUffkQ9/MwMaiV/3XgkUUbsRiyZV1Ju4JDEoOE3d4quczvM9RU7t801t4SWP4jZUvyJC8LNHE3XjA6EWqNofTeXngVmMIKXBfO3QkqYH7/j0rkmtWNvW5H3nzSxGpEBqrgZqPqqUbdzyDYoU91RCcot+qwc8x7cNKoB9x2vD6LSQLDM5nn1DJRVapKLpnBQxQJZRk6zaFECljOYc1rn+LhrFe7uRD4/ZPaUeksycAUVPwfUtsFp9a4RPexFbcufFjVFBk7DyXDav1aJB36xf9JFmN6ah7PqL5S63oKsqRxzbZc1CC3nMJjy2Z+HThri4PqG7ZaNQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YTNLBtjiYYmlxApKNXyZCt+SLybH8i5qLWCARszzQRM=;
- b=gEHr/K4qysy9Yk+pLTqnSiYCjEA3L0iAQ3gDFdG30ftOVikzJ5zyDgHtSJB6yTHILUJ2ffbq6qsWnTKls6H4RRjZ7Wu99dsjpw5ylAkznw9p63vmLulwROmkiqPyDl3YgwIZwgNN5qThwUwmR7Vo08u1kdJAiFcblYvGU6nReNaeHP3L6iHCBrgvHii0sqz6Rqe/SbytYLvEIThbMhY4Vf/clhsTPEsG4LJbZ4SLjDeL415QwWtO0GG2tLWqui7oMjwnIqwbtm/Ng5d/lbsBaUyun01pTFDeGvS5pCtZ6I9NKcLEsqhm0jvjX9PG0ciyFPyeo0uofYdwGWMkatXOrw==
+ bh=AQUYI8nFNauA8Eqc+dTwkfBb4u7bvFl+DOSdQh9a2O8=;
+ b=Hg6AyUF//gVHUUAvePooLAjWKg3lzfTBVFQLY6PPF/xxFCSWjQ+TK16Czg9ySV4aMUFCYYaGQi8aboE2dXunUVGvJpRcMHVL9w/SLbiBH+V0rZZ92mzDioo+8GIvXokuqXL3pVEaqvSV39iFs5n7B0caaSOhIpH/UkWirBvOvgIbA7z2MrPyPB42ZQvbpixxAtzNeQ7i+mpblIj4X1Ub7YFHVgBQ9D5Sbl5fNnl8jFj2CV7Xrlw9f/T8DV0JoQODNk5JcLSDpKXntEDo4bs58m6DWag0cnACnlDoFh/xh2b/Ei+B/5i7vAr8MPqhr2jBRnktrXwQuyQPewhT7eX/lQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YTNLBtjiYYmlxApKNXyZCt+SLybH8i5qLWCARszzQRM=;
- b=TyhUEB8xgPQSpvDftFo5LvIY70qHo/Eo+KTUqPjOuH+sDEqCbZWE3DAoEfwPMLGZtZ4VOJ7EM4DLrvsh/yhgLrM1ooEXppfitRTxR1xphnMSDBzOYWI/t52xR/p6y7EItVAbPnOINCrJrnd+tSHe6lWcZW1096PKYeklj5Dz3ag=
+ bh=AQUYI8nFNauA8Eqc+dTwkfBb4u7bvFl+DOSdQh9a2O8=;
+ b=NB4Jbd0TLDTXBfahb8afVzymAvLYtFwrQWa+qWp2ymRyc6DC4Vs0Mbg2aESyxRy3j2dMZG41qgbf6+e2725bNGYK20CLCC+Iw97kBjh4YxVwmlERzQFPkBE0E1mxxiB7kOWfBDfTRkNzvAV6tli3vabUSuEv0F9gQyN82zz1JBE=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,256 +89,314 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Henry Wang <xin.wang2@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Vikram Garhwal <fnu.vikram@xilinx.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Stefano Stabellini
+CC: Vikram Garhwal <fnu.vikram@xilinx.com>, Anthony PERARD
+	<anthony.perard@citrix.com>, Stefano Stabellini
 	<stefano.stabellini@xilinx.com>, Henry Wang <xin.wang2@amd.com>
-Subject: [PATCH 15/15] docs: add device tree overlay documentation
-Date: Wed, 24 Apr 2024 11:34:49 +0800
-Message-ID: <20240424033449.168398-16-xin.wang2@amd.com>
+Subject: [PATCH 13/15] xl/overlay: add remove operation to xenstore
+Date: Wed, 24 Apr 2024 11:34:47 +0800
+Message-ID: <20240424033449.168398-14-xin.wang2@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240424033449.168398-1-xin.wang2@amd.com>
 References: <20240424033449.168398-1-xin.wang2@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: xin.wang2@amd.com does not designate
- permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB75:EE_|CH2PR12MB4246:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6846187a-e152-4a97-c74c-08dc640fb25a
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB73:EE_|PH8PR12MB7206:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3df460e3-5aae-437d-590a-08dc640fafa2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230031|1800799015|82310400014|376005|36860700004;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?PGGIThaCJFQX0jXmTSnPba5ZGxXovPsG4o001npZbHll1SNu6Nd5xRq+2Pno?=
- =?us-ascii?Q?KYbv9ZmjTf1Mrl7v4DCRo3AN6ZDx1KMIeTL8h91GBsycf4ZQYgpIuDkd+u/B?=
- =?us-ascii?Q?Ka/NyKU29s1ZaXJsex7ZovFfoJJkth57+ixi0KR5lHZ2NCvJNiICe68z+AGa?=
- =?us-ascii?Q?M5NdcpKUyU1U/up/AG3pcxNhX3M1LTAO6bMQH/Bu4/9PCYqQnjT1FSTFghEO?=
- =?us-ascii?Q?xX5MEvkRPXvXRz094DE9WhZC/ucvUlRDhz4hRIU3puOrztB4QdIJPkAvibI9?=
- =?us-ascii?Q?xuMigunKYi4YgkSdAS3ThgaiI2V8d+x/un2pR0aLNTfjSXrsPfopW8Cjp6Oa?=
- =?us-ascii?Q?H4ABp59aJ+wCW7MrArKzUBYRBiWal2JDPAkrsN5St1L3+wBAz43e/srs+gsk?=
- =?us-ascii?Q?xgNXpeMUaKwP1S6t3IbQtp/DOSRHFgxy5ykTH5KDawqjrH8pyiVayM8qqhfa?=
- =?us-ascii?Q?ZLLldCltPxp8RvlAP0Qv1FZILXBc9pnJsoUnCpxaj49B4E0FD/ipTT4bv4FG?=
- =?us-ascii?Q?sgciItgH8jvC8JvJtxCuIGHG08L1s4mOKjdv/fr/BAhSb8Trz87KSA+HYRb8?=
- =?us-ascii?Q?xuyodhwUo5F1ep1T4qVsc4hEwsXT6hFWZiW7KvMr8Fa3i/AFsH6cQjX8nviv?=
- =?us-ascii?Q?N+wOODMBmisXc80M9X9IJhrcpxYyw5NyMQImi142twSZlAnbBOm2XjAXY/WU?=
- =?us-ascii?Q?BbzgJH0gkdp0L2NXt3fyOv8FiNKFzOsz77i9emAyrlA435u+DOs5ntZHMDES?=
- =?us-ascii?Q?xA3qnTjBH2PEUbuwHh/p+gHyZ6ovrl0o1niy787QMmXSqL7Nv4tPyHbcTU5x?=
- =?us-ascii?Q?Q4WVIeRfTMds5ja/Gq3nR6Fdzmvx/QucEF7GyxoJQ4XvSVV5U6hMnqB68ja7?=
- =?us-ascii?Q?VL/kAKpzA+lG+12BEMLaGMJQMgqYLk3W+kbKl/DRuaDby2FkSwvdvYxPG0oM?=
- =?us-ascii?Q?H1JryQTeDVvVPPN7yespSbSac+9IKRzJ3g2IG0+TegBJjhuE2jnnfocVWz51?=
- =?us-ascii?Q?K+8cVeEY/Y8l8IRqsnJsNrsrnkxq77/mp7F3QsfV1bq46JfR5hFw6cP79Mw2?=
- =?us-ascii?Q?wXc4mJPKGhquNhM25KBe6tyK/Lf3ZkXmsTwP8NpjM31X///cGYHAMoLh16Om?=
- =?us-ascii?Q?Ac7HnzHiB/7c3KTRS11Y1lsGtepKwo281uV+BX6yZSSxwOfKQbCBNm0VZy24?=
- =?us-ascii?Q?PvGR7wChR/BUTH0npnBTNyuMgQYrRtKPZoWDJiRGl//rPS3wWDqhd8ppQH+y?=
- =?us-ascii?Q?WgjwCOkpIi/X0vxgzlhtbbOgc2vkkXrWeIV7CMsA30I7VpVz0yFNIOxi1pyl?=
- =?us-ascii?Q?i03kw0Pj3BDQkYh0BIjSSNQbAwNo5gmZvoiO49u9fN8S6d4Jpkm60nGojeTq?=
- =?us-ascii?Q?J7kB5k8=3D?=
+	=?us-ascii?Q?TdSarGKTVe51lz0a5kBmLLtN4JH9E1C/limauW/385+6HgkrE0eLPd7S4OUz?=
+ =?us-ascii?Q?tr2+yOqQW6YtjGty/LjAuVxVFqFFf7goUCzFmJdvslNm4AY6lPm4POtW042a?=
+ =?us-ascii?Q?Z4wqyYUiwKYK8tMt74ZV1sgNQNRR45CKZGgJ4Saze56BFdeYf84UhmLM8FPi?=
+ =?us-ascii?Q?6xrKF09ueQAr+ccZ7RgF/pTv0DEE9W0eRhHj2nmNbHCeMdlG8K1M3pPsJwt8?=
+ =?us-ascii?Q?CWDwovIUm3c3+8bX813nbCI7XGz8/r3i6Z1CAsgakI2m/KPV2UA996gvVxnP?=
+ =?us-ascii?Q?wZLSEzluNRZRhMHRa0EQ2FgrhaqhgV7K6y9l4q8P9xboPHzULrKGUF03XUCR?=
+ =?us-ascii?Q?eFpGTBj6EwFM8cfo/21C8sfwsaZnZNmJyR8lD5wjfLyUNKJLu37RPJGOqKoi?=
+ =?us-ascii?Q?3swZzAJwMSq+egrEmq7AJhAY/f1oqbEmpYtBvw69JJnupDXn/xKr4yprInt+?=
+ =?us-ascii?Q?cU1F7yA5Y3E2jaxsk6uNEJi4De1yuo5n3yU59YsGMAoYNcvti3JkkUZ9Ph/+?=
+ =?us-ascii?Q?SZlEzXBZ9ST5i/SYtNk3oFnnxmmelY0lPgvovnlMOBPf8WoCex89AVFX7mqz?=
+ =?us-ascii?Q?XMXuEuewBAekC0OW5Pl681djcBJ77DneVOaK488Y7Db6yzS9q0lxeO1pUoaF?=
+ =?us-ascii?Q?N+lL7R+KtzItyau3rt0qXWzRS6LUZooovv5Q0ruSqTav1Sbrty6JItgdDo+I?=
+ =?us-ascii?Q?BUp1fXDvWAsz75D1C2l/1LIxtZL10fYXATi54w63VeY5olLnu2QOTJ49a6tv?=
+ =?us-ascii?Q?Uh0F3gTzII+fD/9ds7YsVyQpr6jqocrPphLj/NTSmmPmkr/R2HKFWaoC6RaZ?=
+ =?us-ascii?Q?5nP+Ik7e8njzpwfPP90eRhKAvgbI/oZsLalsVRMUMi/nb46LFd3mjexBA1D8?=
+ =?us-ascii?Q?MKz3jIgeBmuk8KHHKpF1opR+WMpEVkca7PY7MyVHIBrzMBgmHtAqLQrGQ9bh?=
+ =?us-ascii?Q?A0QL3NPJ9DjkDQnUOvKdJ4CxjStGBM1HGK/8a1kNBeVHw/YjOT/nL1uXuT+U?=
+ =?us-ascii?Q?d69mOLMOXh73V/rcMt8/dB3C7WgSqkso0X/QmpjTyXXh1eLZJan2fYsgyTSX?=
+ =?us-ascii?Q?ajRdKce8GM3lyERucDqAKr0akogONq2LmNVm6/qphCG8pak1O3NPGIdWfN8S?=
+ =?us-ascii?Q?G0W+vwrRQUm157twupH4QzCenPJe5OAjlbl0zIPuw72QwGphN/xKx/VL7BGm?=
+ =?us-ascii?Q?WiuDtXE1s2EJNne9CXKw7vPw70h1Onu7A2805l/Mg/+FSBa/SDV7gRmYi44l?=
+ =?us-ascii?Q?+/SJl7oiKYOR8ZTlYaKbypN4lAnwx2wB0vr4kL5XMKuRa2jROMlgFRDbc8+T?=
+ =?us-ascii?Q?htdxTWZI7OaapO+oigcGabM+Cx1GBC9epj2MhUSSujgHVmZy9fYL5EsagACb?=
+ =?us-ascii?Q?oCyHnhc=3D?=
 X-Forefront-Antispam-Report:
 	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(82310400014)(376005)(36860700004);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2024 03:36:15.8879
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2024 03:36:11.3238
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6846187a-e152-4a97-c74c-08dc640fb25a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3df460e3-5aae-437d-590a-08dc640fafa2
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB75.namprd02.prod.outlook.com
+	BL6PEPF0001AB73.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4246
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7206
 
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
+
+Add 3 new command line parameters to the xl overlay command: overlay
+name, type and partial. Pass these paramters to the domU via xenstore.
+
+Also introduce support for "operation" in xenstore: it can be "add" or
+"remove". In case of "remove", the overlay is to be removed from the
+domU device tree.
 
 Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 Signed-off-by: Henry Wang <xin.wang2@amd.com>
 ---
- docs/misc/arm/overlay.txt | 172 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 172 insertions(+)
- create mode 100644 docs/misc/arm/overlay.txt
+ tools/xl/xl_vmcontrol.c | 184 +++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 173 insertions(+), 11 deletions(-)
 
-diff --git a/docs/misc/arm/overlay.txt b/docs/misc/arm/overlay.txt
-new file mode 100644
-index 0000000000..0351f82a19
---- /dev/null
-+++ b/docs/misc/arm/overlay.txt
-@@ -0,0 +1,172 @@
-+# Device Tree Overlays support in Xen
+diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
+index 2bf76dd389..ddd6e9e370 100644
+--- a/tools/xl/xl_vmcontrol.c
++++ b/tools/xl/xl_vmcontrol.c
+@@ -1466,8 +1466,123 @@ static uint32_t get_num_pages(struct xs_handle *xs, const char *xs_path)
+     return num_pages;
+ }
+ 
++static bool write_overlay_operation(struct xs_handle *xs, char *operation,
++                               char *path)
++{
++    xs_transaction_t xs_trans = XBT_NULL;
++    char buf[128];
++    char ref[64];
 +
-+Xen now supports dynamic device assignment to running domains i.e.
-+adding/removing nodes (using .dtbo) in Xen device tree, and assigning
-+them to a running domain with given $domid.
++retry_transaction:
++    xs_trans = xs_transaction_start(xs);
++    if (!xs_trans)
++        return false;
 +
-+Xen supports two modes of operation: normal mode and expert mode for
-+assigning nodes to domU. More on this below.
++    snprintf(ref, sizeof(ref), "%s", operation);
++    snprintf(buf, sizeof(buf), "%s/overlay-operation", path);
 +
-+Dynamic node assignment works in following ways:
++    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
++        return false;
 +
-+1. Xen tools check the dtbo given and parse all other user provided arguments
-+2. Xen tools pass the dtbo to Xen hypervisor via hypercall.
-+3. Xen hypervisor applies the dtbo to Xen device tree and assign the
-+   dbto's node resources to the user-provided $domid.
-+4. For normal mode,  Xen tools share the modified dtbo with domU. domU needs
-+   to run get_overlay.sh to get the dtbo from dom0 and apply the
-+   overlay. get_overlay.sh uses get_overlay application for data transfer
-+   between dom0 and domU.
++    if (!xs_transaction_end(xs, xs_trans, 0)) {
++        if (errno == EAGAIN)
++            goto retry_transaction;
++        else
++            return false;
++    }
 +
++    return true;
++}
 +
-+# Overlay Sharing protocol based on Xenstore
++static bool write_overlay_name(struct xs_handle *xs, char *name,
++                               char *path)
++{
++    xs_transaction_t xs_trans = XBT_NULL;
++    char buf[128];
++    char ref[64];
 +
-+The overlay sharing protocol with domU works in the following ways:
++retry_transaction:
++    xs_trans = xs_transaction_start(xs);
++    if (!xs_trans)
++        return false;
 +
-+1. get_overlay creates Xenstore path data/overlay and creates the
-+   following nodes under data/overlay path:
-+       a. receiver-status
-+       b. sender-status
-+       c. overlay-size
-+       d. overlay-name
-+       e. overlay-type
-+       f. overlay-partial
-+   and write "waiting" on receiver-status and "not_ready" to sender_status.
++    snprintf(ref, sizeof(ref), "%s", name);
++    snprintf(buf, sizeof(buf), "%s/overlay-name", path);
 +
-+2. libxl waits for "waiting" status on receiver-status, then writes
-+   "overlay-size" with dtbo size and "ready" on "sender-status".
++    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
++        return false;
 +
-+3. get_overlay waits for "sender-status" to "ready", then allocates the
-+   pages, next it shares the pages with dom0 (the page-ref num) by creating
-+   page-ref node under /data/overlay and finally writes "page-refs" to
-+   "receiver_status".
++    if (!xs_transaction_end(xs, xs_trans, 0)) {
++        if (errno == EAGAIN)
++            goto retry_transaction;
++        else
++            return false;
++    }
 +
-+4. libxl waits for "receiver-status" to become "page-refs" and copies
-+   the data to buffer allocated with page_refs. libxl also writes the
-+   "overlay-name", "overlay-type", and "overlay-partial" nodes with
-+   user-provided information.  Lastly, libxl writes "done" to
-+   "sender-status".
++    return true;
++}
 +
-+6. get_overlay waits for "sender-status" to be "done".
++static bool write_overlay_type(struct xs_handle *xs, char *type,
++                               char *path)
++{
++    xs_transaction_t xs_trans = XBT_NULL;
++    char buf[128];
++    char ref[64];
 +
-+7. get_overlay copies the data and writes it to file.
++retry_transaction:
++    xs_trans = xs_transaction_start(xs);
++    if (!xs_trans)
++        return false;
 +
-+8. Finally, get_overlay unshares the pages with dom0.
++    snprintf(ref, sizeof(ref), "%s", type);
++    snprintf(buf, sizeof(buf), "%s/overlay-type", path);
 +
-+Note: get_overlay application needs two drivers xen_gntdev and xen_gntalloc in
-+Linux. These can be loaded using modprobe xen_gntalloc and modprobe xen_gntdev.
++    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
++        return false;
 +
++    if (!xs_transaction_end(xs, xs_trans, 0)) {
++        if (errno == EAGAIN)
++            goto retry_transaction;
++        else
++            return false;
++    }
 +
-+# Examples
++    return true;
++}
 +
-+Here are a few examples on how to use it.
++static bool write_overlay_partial(struct xs_handle *xs, bool is_partial,
++                                  char *path)
++{
++    xs_transaction_t xs_trans = XBT_NULL;
++    char buf[128];
++    char ref[4];
 +
-+## Dom0 device add
++retry_transaction:
++    xs_trans = xs_transaction_start(xs);
++    if (!xs_trans)
++        return false;
 +
-+For assigning a device tree overlay to dom0, enter the following:
++    snprintf(ref, sizeof(ref), "%d", is_partial);
++    snprintf(buf, sizeof(buf), "%s/overlay-partial", path);
 +
-+    (dom0) xl dt-overlay add overlay.dtbo 0
++    if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
++        return false;
 +
-+This will allocate the devices mentioned in overlay.dtbo to Xen device
-+tree and will assign these devices to dom0.
++    if (!xs_transaction_end(xs, xs_trans, 0)) {
++        if (errno == EAGAIN)
++            goto retry_transaction;
++        else
++            return false;
++    }
 +
-+Next, if the user wants to add the same device tree overlay to dom0
-+Linux, execute the following:
-+
-+    (dom0) mkdir -p /sys/kernel/config/device-tree/overlays/new_overlay
-+    (dom0) cat overlay.dtbo > /sys/kernel/config/device-tree/overlays/new_overlay/dtbo
-+
-+Finally if needed, the relevant Linux kernel drive can be loaded using:
-+
-+    (dom0) modprobe module_name.ko
-+
-+
-+## Dom0 device remove
-+
-+For removing the device from dom0, do the following:
-+
-+    (dom0) xl dt-overlay remove overlay.dtbo
-+
-+NOTE: The user is expected to unload any Linux kernel modules which
-+might be accessing the devices in overlay.dtbo. Removing devices without
-+unloading the modules might result in a crash.
-+
-+The following is an incorrect sequence:
-+
-+    (dom0) xl dt-overlay add overlay.dtbo 0
-+    (dom0) xl dt-overlay remove overlay.dtbo
-+
-+The last command only removed the nodes from the Xen dtb but it did not
-+deassigning irq/iommus from dom0. This will result in unhandled
-+behavior. The correct sequence is to deassign the nodes from dom0:
-+
-+    (dom0) xl dt-overlay remove overlay.dtbo 0
-+
-+
-+## DomU device add/remove
-+
-+There are two modes supported for domU use cases: expert mode and normal
-+mode.
-+
-+
-+### Expert mode
-+
-+All the nodes in dtbo will be assigned to a domain; the user will need
-+to prepare the dtb for the domU. User will also need to modprobe the
-+relevant drivers.
-+
-+Example for domU device add:
-+
-+    (dom0) xl dt-overlay add overlay.dtbo $domid
-+    (dom0) xl console $domid  # to access $domid console
-+
-+Next, if the user needs to modify/prepare the overlay.dtbo suitable for
-+the domU:
-+
-+    (domU) mkdir -p /sys/kernel/config/device-tree/overlays/new_overlay
-+    (domU) cat overlay_linux.dtbo > /sys/kernel/config/device-tree/overlays/new_overlay/dtbo
-+
-+Finally, if needed, the relevant Linux kernel drive can be probed:
-+
-+    (domU) modprobe module_name.ko
-+
-+Example for domU overlay remove:
-+
-+    (dom0) xl dt-overlay remove overlay.dtbo $domid
++    return true;
++}
 +
 +
-+### Normal mode
+ static int share_overlay_with_domu(void *overlay_dt_domU, int overlay_dt_size,
+-                                   int domain_id)
++                                   int domain_id, char *overlay_ops,
++                                   char *overlay_name,
++                                   char *overlay_type, bool is_overlay_partial)
+ {
+     struct xs_handle *xs = NULL;
+     char *path = NULL;
+@@ -1574,6 +1689,34 @@ static int share_overlay_with_domu(void *overlay_dt_domU, int overlay_dt_size,
+         goto out;
+     }
+ 
++    /* write overlay ops */
++    if (!write_overlay_operation(xs, overlay_ops, path)) {
++        err = ERROR_FAIL;
++        fprintf(stderr,"Writing overlay_ops ready failed\n");
++        goto out;
++    }
 +
-+Libxl modifies the dtbo suitable for the domU. Currently, it does basic
-+modifications like updating "target-path" and "interrupt-parent" to make
-+them compatible with the domU device tree. Please note that this might
-+not work for nodes which need more complex adjustments. The user needs
-+to make any required changes for complex overlays and modprobe the
-+required Linux modules.
++    /* Write the overlay-name. */
++    if (!write_overlay_name(xs, overlay_name, path)) {
++        err = ERROR_FAIL;
++        fprintf(stderr,"Writing overlay_name ready failed\n");
++        goto out;
++    }
 +
-+For normal mode, the user is also required to input below three parameters:
++    /* Write the overlay-type. */
++    if (!write_overlay_type(xs, overlay_type, path)) {
++        err = ERROR_FAIL;
++        fprintf(stderr,"Writing overlay_type ready failed\n");
++        goto out;
++    }
 +
-+a. overlay_node: the name
-+b. overlay_type: whether the nodes are fpga nodes or normal nodes
-+c. partial or full overlay type: only needed for fpga overlays
++    /* Write the overlay-partial. */
++    if (!write_overlay_partial(xs, is_overlay_partial, path)) {
++        err = ERROR_FAIL;
++        fprintf(stderr,"Writing overlay_partial ready failed\n");
++        goto out;
++    }
 +
-+Example for domU overlay add:
+     /* Write the status "done". */
+     if (!write_status(xs, "done", sender_status_path)) {
+         fprintf(stderr,"Writing status DONE failed\n");
+@@ -1611,13 +1754,16 @@ int main_dt_overlay(int argc, char **argv)
+     int overlay_dtb_size = 0;
+     const int overlay_add_op = 1;
+     const int overlay_remove_op = 2;
++    char *overlay_name = "overlay";
++    char *overlay_type = "normal";
++    bool is_overlay_partial = false;
+ 
+     if (argc < 3) {
+         help("dt-overlay");
+         return EXIT_FAILURE;
+     }
+ 
+-    if (argc > 5) {
++    if (argc > 7) {
+         fprintf(stderr, "Too many arguments\n");
+         return ERROR_FAIL;
+     }
+@@ -1625,17 +1771,22 @@ int main_dt_overlay(int argc, char **argv)
+     overlay_ops = argv[1];
+     overlay_config_file = argv[2];
+ 
+-    if (!strcmp(argv[argc - 1], "-e"))
+-        auto_mode = false;
+-
+-    if (argc == 4 || !auto_mode) {
++    if (argc == 4 ) {
+         domain_id = find_domain(argv[argc-1]);
+         domain_mapping = true;
+-    }
+-
+-    if (argc == 5 || !auto_mode) {
+-        domain_id = find_domain(argv[argc-2]);
++    } else if (argc == 5 && !strcmp(argv[4], "-e")) {
++        domain_id = find_domain(argv[3]);
++        auto_mode = false;
+         domain_mapping = true;
++    } else if (argc == 7) {
++        domain_id = find_domain(argv[3]);
++        domain_mapping = true;
++        overlay_name = argv[4];
++        overlay_type = argv[5];
++        is_overlay_partial = atoi(argv[6]);
++    } else {
++        fprintf(stderr, "Invalid arguments\n");
++        return ERROR_FAIL;
+     }
+ 
+     /* User didn't prove any overlay operation. */
+@@ -1678,7 +1829,18 @@ int main_dt_overlay(int argc, char **argv)
+ 
+     if (domain_id && auto_mode && (op == LIBXL_DT_OVERLAY_ADD))
+         rc = share_overlay_with_domu(overlay_dtb, overlay_dtb_size,
+-                                     domain_id);
++                                     domain_id, "add", overlay_name,
++                                     overlay_type, is_overlay_partial);
 +
-+    (dom0) xl dt-overlay add overlay.dtbo $domid overlay_node_name overlay_type is_partial
-+    (dom0) xl console $domid  # go to $domid console
-+    (domU) ./usr/lib/xen/bin/get_overlay.sh
++    if (rc) {
++        free(overlay_dtb);
++        return rc;
++    }
 +
-+Finally if needed, the relevant Linux kernel drive can be loaded:
-+
-+    (domU) modprobe module_name.ko
-+
-+Example for domU overlay remove:
-+
-+    (dom0) xl dt-overlay remove overlay.dtbo $domid overlay_node_name overlay_type is_partial
-+
-+The get_overlay.sh script automates the following:
-+
-+a. gets the modified overlay.dtbo from dom0 using Xenstore transactions
-+b. applies overlay.dtbo to the domU Linux device tree depending on what
-+   type of overlay it is
-+c. removes the overlay nodes from device tree when the user requests it
++    if (domain_id && auto_mode && (op == LIBXL_DT_OVERLAY_REMOVE))
++        rc = share_overlay_with_domu(overlay_dtb, overlay_dtb_size,
++                                     domain_id, "remove", overlay_name,
++                                     overlay_type, is_overlay_partial);
+ 
+     free(overlay_dtb);
+     return rc;
 -- 
 2.34.1
 
