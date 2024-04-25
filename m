@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B33C4345F
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Apr 2024 13:11:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.712060.1112456 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C0CBC4345F
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Apr 2024 13:26:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.712077.1112466 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzysw-0000AN-N9; Thu, 25 Apr 2024 13:11:34 +0000
+	id 1rzz6l-0004Yu-0X; Thu, 25 Apr 2024 13:25:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 712060.1112456; Thu, 25 Apr 2024 13:11:34 +0000
+Received: by outflank-mailman (output) from mailman id 712077.1112466; Thu, 25 Apr 2024 13:25:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rzysw-0000A8-Im; Thu, 25 Apr 2024 13:11:34 +0000
-Received: by outflank-mailman (input) for mailman id 712060;
- Thu, 25 Apr 2024 13:11:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=c2YU=L6=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1rzysu-0008LR-Iy
- for xen-devel@lists.xenproject.org; Thu, 25 Apr 2024 13:11:32 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 54417f5a-0305-11ef-b4bb-af5377834399;
- Thu, 25 Apr 2024 15:11:30 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5496E1063;
- Thu, 25 Apr 2024 06:11:57 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 481A73F7BD;
- Thu, 25 Apr 2024 06:11:28 -0700 (PDT)
+	id 1rzz6k-0004Yn-SS; Thu, 25 Apr 2024 13:25:50 +0000
+Received: by outflank-mailman (input) for mailman id 712077;
+ Thu, 25 Apr 2024 13:25:49 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rzz6j-0004YZ-Ex; Thu, 25 Apr 2024 13:25:49 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rzz6j-0004W4-3N; Thu, 25 Apr 2024 13:25:49 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rzz6i-000395-NV; Thu, 25 Apr 2024 13:25:48 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1rzz6i-0003XA-Mw; Thu, 25 Apr 2024 13:25:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,281 +44,261 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54417f5a-0305-11ef-b4bb-af5377834399
-From: Luca Fancellu <luca.fancellu@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=7/ODw9oFi8QzBUUA+mNP+jVtTnVdKAKdjk2zQkhpu5w=; b=57+SzfdcR6yec6eh4TT1qpwvPi
+	GB6JR7wFxmA94YZx+fXkc0PzDwBiy6TjCZi3P/yGBEAS8LYrbmSIhbkvRo6esocSzCPlb8Wis2Grm
+	D77koB1q5iAMxkFV6Ta89E3p1TV3EPiTBw0Kv2ILJNFWpmQEoNTdT0lnfQYUg+0WbiuI=;
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 1/2] xen/arm: Add DT reserve map regions to bootinfo.reserved_mem
-Date: Thu, 25 Apr 2024 14:11:18 +0100
-Message-Id: <20240425131119.2299629-2-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240425131119.2299629-1-luca.fancellu@arm.com>
-References: <20240425131119.2299629-1-luca.fancellu@arm.com>
-MIME-Version: 1.0
+Message-ID: <osstest-185791-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [linux-linus test] 185791: regressions - FAIL
+X-Osstest-Failures:
+    linux-linus:test-armhf-armhf-xl-raw:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-examine:reboot:fail:heisenbug
+    linux-linus:test-armhf-armhf-xl:xen-boot:fail:heisenbug
+    linux-linus:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-qcow2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-qcow2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=e88c4cfcb7b888ac374916806f86c17d8ecaeb67
+X-Osstest-Versions-That:
+    linux=71b1543c83d65af8215d7558d70fc2ecbee77dcf
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 25 Apr 2024 13:25:48 +0000
 
-Currently the code is listing device tree reserve map regions
-as reserved memory for Xen, but they are not added into
-bootinfo.reserved_mem and they are fetched in multiple places
-using the same code sequence, causing duplication. Fix this
-by adding them to the bootinfo.reserved_mem at early stage.
+flight 185791 linux-linus real [real]
+flight 185796 linux-linus real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/185791/
+http://logs.test-lab.xenproject.org/osstest/logs/185796/
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
- xen/arch/arm/arm32/mmu/mm.c      | 29 +----------------
- xen/arch/arm/bootfdt.c           | 51 ++++++++++++++++++------------
- xen/arch/arm/domain_build.c      |  3 +-
- xen/arch/arm/include/asm/setup.h |  5 +++
- xen/arch/arm/setup.c             | 53 +++++++++-----------------------
- 5 files changed, 53 insertions(+), 88 deletions(-)
+Regressions :-(
 
-diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
-index 23150122f7c4..be480c31ea05 100644
---- a/xen/arch/arm/arm32/mmu/mm.c
-+++ b/xen/arch/arm/arm32/mmu/mm.c
-@@ -73,33 +73,6 @@ static paddr_t __init consider_modules(paddr_t s, paddr_t e,
-         }
-     }
- 
--    /* Now check any fdt reserved areas. */
--
--    nr = fdt_num_mem_rsv(device_tree_flattened);
--
--    for ( ; i < mi->nr_mods + nr; i++ )
--    {
--        paddr_t mod_s, mod_e;
--
--        if ( fdt_get_mem_rsv_paddr(device_tree_flattened,
--                                   i - mi->nr_mods,
--                                   &mod_s, &mod_e ) < 0 )
--            /* If we can't read it, pretend it doesn't exist... */
--            continue;
--
--        /* fdt_get_mem_rsv_paddr returns length */
--        mod_e += mod_s;
--
--        if ( s < mod_e && mod_s < e )
--        {
--            mod_e = consider_modules(mod_e, e, size, align, i+1);
--            if ( mod_e )
--                return mod_e;
--
--            return consider_modules(s, mod_s, size, align, i+1);
--        }
--    }
--
-     /*
-      * i is the current bootmodule we are evaluating, across all
-      * possible kinds of bootmodules.
-@@ -108,7 +81,7 @@ static paddr_t __init consider_modules(paddr_t s, paddr_t e,
-      * need to index the reserved_mem bank starting from 0, and only counting
-      * the reserved-memory modules. Hence, we need to use i - nr.
-      */
--    nr += mi->nr_mods;
-+    nr = mi->nr_mods;
-     for ( ; i - nr < reserved_mem->nr_banks; i++ )
-     {
-         paddr_t r_s = reserved_mem->bank[i - nr].start;
-diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index 4d708442a19e..6e060111d95b 100644
---- a/xen/arch/arm/bootfdt.c
-+++ b/xen/arch/arm/bootfdt.c
-@@ -475,8 +475,7 @@ static void __init early_print_info(void)
-     const struct membanks *mem_resv = bootinfo_get_reserved_mem();
-     struct bootmodules *mods = &bootinfo.modules;
-     struct bootcmdlines *cmds = &bootinfo.cmdlines;
--    unsigned int i, j;
--    int nr_rsvd;
-+    unsigned int i;
- 
-     for ( i = 0; i < mi->nr_banks; i++ )
-         printk("RAM: %"PRIpaddr" - %"PRIpaddr"\n",
-@@ -490,26 +489,11 @@ static void __init early_print_info(void)
-                 mods->module[i].start + mods->module[i].size,
-                 boot_module_kind_as_string(mods->module[i].kind));
- 
--    nr_rsvd = fdt_num_mem_rsv(device_tree_flattened);
--    if ( nr_rsvd < 0 )
--        panic("Parsing FDT memory reserve map failed (%d)\n", nr_rsvd);
--
--    for ( i = 0; i < nr_rsvd; i++ )
--    {
--        paddr_t s, e;
--
--        if ( fdt_get_mem_rsv_paddr(device_tree_flattened, i, &s, &e) < 0 )
--            continue;
--
--        /* fdt_get_mem_rsv_paddr returns length */
--        e += s;
--        printk(" RESVD[%u]: %"PRIpaddr" - %"PRIpaddr"\n", i, s, e);
--    }
--    for ( j = 0; j < mem_resv->nr_banks; j++, i++ )
-+    for ( i = 0; i < mem_resv->nr_banks; i++ )
-     {
-         printk(" RESVD[%u]: %"PRIpaddr" - %"PRIpaddr"\n", i,
--               mem_resv->bank[j].start,
--               mem_resv->bank[j].start + mem_resv->bank[j].size - 1);
-+               mem_resv->bank[i].start,
-+               mem_resv->bank[i].start + mem_resv->bank[i].size - 1);
-     }
-     early_print_info_shmem();
-     printk("\n");
-@@ -550,7 +534,10 @@ static void __init swap_memory_node(void *_a, void *_b, size_t size)
-  */
- size_t __init boot_fdt_info(const void *fdt, paddr_t paddr)
- {
-+    struct membanks *reserved_mem = bootinfo_get_reserved_mem();
-     struct membanks *mem = bootinfo_get_mem();
-+    unsigned int i;
-+    int nr_rsvd;
-     int ret;
- 
-     ret = fdt_check_header(fdt);
-@@ -559,6 +546,30 @@ size_t __init boot_fdt_info(const void *fdt, paddr_t paddr)
- 
-     add_boot_module(BOOTMOD_FDT, paddr, fdt_totalsize(fdt), false);
- 
-+    nr_rsvd = fdt_num_mem_rsv(fdt);
-+    if ( nr_rsvd < 0 )
-+        panic("Parsing FDT memory reserve map failed (%d)\n", nr_rsvd);
-+
-+    for ( i = 0; i < nr_rsvd; i++ )
-+    {
-+        struct membank *bank;
-+        paddr_t s, sz;
-+
-+        if ( fdt_get_mem_rsv_paddr(device_tree_flattened, i, &s, &sz) < 0 )
-+            continue;
-+
-+        if ( reserved_mem->nr_banks < reserved_mem->max_banks )
-+        {
-+            bank = &reserved_mem->bank[reserved_mem->nr_banks];
-+            bank->start = s;
-+            bank->size = sz;
-+            bank->type = MEMBANK_FDT_RESVMEM;
-+            reserved_mem->nr_banks++;
-+        }
-+        else
-+            panic("Cannot allocate reserved memory bank\n");
-+    }
-+
-     ret = device_tree_for_each_node(fdt, 0, early_scan_node, NULL);
-     if ( ret )
-         panic("Early FDT parsing failed (%d)\n", ret);
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 0784e4c5e315..6fc88a8234e4 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -793,7 +793,8 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
-         u64 start = mem->bank[i].start;
-         u64 size = mem->bank[i].size;
- 
--        if ( mem->bank[i].type == MEMBANK_STATIC_DOMAIN )
-+        if ( (mem->bank[i].type == MEMBANK_STATIC_DOMAIN) ||
-+             (mem->bank[i].type == MEMBANK_FDT_RESVMEM) )
-             continue;
- 
-         nr_cells += reg_size;
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 28fb659fe946..fc6967f9a435 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -42,6 +42,11 @@ enum membank_type {
-      * in reserved_mem.
-      */
-     MEMBANK_STATIC_HEAP,
-+    /*
-+     * The MEMBANK_FDT_RESVMEM type is used to indicate whether the memory
-+     * bank is from the FDT reserve map.
-+     */
-+    MEMBANK_FDT_RESVMEM,
- };
- 
- /* Indicates the maximum number of characters(\0 included) for shm_id */
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index d242674381d4..c4e5c19b11d6 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -210,48 +210,18 @@ static void __init dt_unreserved_regions(paddr_t s, paddr_t e,
-     const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
- #ifdef CONFIG_STATIC_SHM
-     const struct membanks *shmem = bootinfo_get_shmem();
-+    unsigned int offset;
- #endif
--    unsigned int i, nr;
--    int rc;
--
--    rc = fdt_num_mem_rsv(device_tree_flattened);
--    if ( rc < 0 )
--        panic("Unable to retrieve the number of reserved regions (rc=%d)\n",
--              rc);
--
--    nr = rc;
--
--    for ( i = first; i < nr ; i++ )
--    {
--        paddr_t r_s, r_e;
--
--        if ( fdt_get_mem_rsv_paddr(device_tree_flattened, i, &r_s, &r_e ) < 0 )
--            /* If we can't read it, pretend it doesn't exist... */
--            continue;
--
--        r_e += r_s; /* fdt_get_mem_rsv_paddr returns length */
--
--        if ( s < r_e && r_s < e )
--        {
--            dt_unreserved_regions(r_e, e, cb, i+1);
--            dt_unreserved_regions(s, r_s, cb, i+1);
--            return;
--        }
--    }
-+    unsigned int i;
- 
-     /*
-      * i is the current bootmodule we are evaluating across all possible
-      * kinds.
--     *
--     * When retrieving the corresponding reserved-memory addresses
--     * below, we need to index the reserved_mem->bank starting
--     * from 0, and only counting the reserved-memory modules. Hence,
--     * we need to use i - nr.
-      */
--    for ( ; i - nr < reserved_mem->nr_banks; i++ )
-+    for ( i = first; i < reserved_mem->nr_banks; i++ )
-     {
--        paddr_t r_s = reserved_mem->bank[i - nr].start;
--        paddr_t r_e = r_s + reserved_mem->bank[i - nr].size;
-+        paddr_t r_s = reserved_mem->bank[i].start;
-+        paddr_t r_e = r_s + reserved_mem->bank[i].size;
- 
-         if ( s < r_e && r_s < e )
-         {
-@@ -262,11 +232,16 @@ static void __init dt_unreserved_regions(paddr_t s, paddr_t e,
-     }
- 
- #ifdef CONFIG_STATIC_SHM
--    nr += reserved_mem->nr_banks;
--    for ( ; i - nr < shmem->nr_banks; i++ )
-+    /*
-+     * When retrieving the corresponding shared memory addresses
-+     * below, we need to index the shmem->bank starting from 0, hence
-+     * we need to use i - reserved_mem->nr_banks.
-+    */
-+    offset = reserved_mem->nr_banks;
-+    for ( ; i - offset < shmem->nr_banks; i++ )
-     {
--        paddr_t r_s = shmem->bank[i - nr].start;
--        paddr_t r_e = r_s + shmem->bank[i - nr].size;
-+        paddr_t r_s = shmem->bank[i - offset].start;
-+        paddr_t r_e = r_s + shmem->bank[i - offset].size;
- 
-         if ( s < r_e && r_s < e )
-         {
--- 
-2.34.1
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-xl-raw       8 xen-boot                 fail REGR. vs. 185768
 
+Tests which are failing intermittently (not blocking):
+ test-armhf-armhf-examine      8 reboot              fail pass in 185796-retest
+ test-armhf-armhf-xl           8 xen-boot            fail pass in 185796-retest
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl         15 migrate-support-check fail in 185796 never pass
+ test-armhf-armhf-xl     16 saverestore-support-check fail in 185796 never pass
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 185768
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 185768
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 185768
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 185768
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 185768
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 185768
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-qcow2    14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-qcow2    15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-vhd 15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ linux                e88c4cfcb7b888ac374916806f86c17d8ecaeb67
+baseline version:
+ linux                71b1543c83d65af8215d7558d70fc2ecbee77dcf
+
+Last test of basis   185768  2024-04-23 07:46:10 Z    2 days
+Failing since        185779  2024-04-24 00:13:50 Z    1 days    3 attempts
+Testing same since   185791  2024-04-25 01:43:09 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  David Howells <dhowells@redhat.com>
+  David Sterba <dsterba@suse.com>
+  Johannes Thumshirn <Johannes.thumshirn@wdc.com>
+  Linus Torvalds <torvalds@linux-foundation.org>
+  Naohiro Aota <naohiro.aota@wdc.com>
+  Neal Gompa <neal@gompa.dev>
+  Paulo Alcantara (Red Hat) <pc@manguebit.com>
+  Paulo Alcantara <pc@manguebit.com>
+  Qu Wenruo <wqu@suse.com>
+  Ronnie Sahlberg <lsahlber@redhat.com>
+  Steve French <stfrench@microsoft.com>
+  Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
+  Takayuki Nagata <tnagata@redhat.com>
+  Tom Talpey <tom@talpey.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          fail    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-examine-bios                                pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  pass    
+ test-armhf-armhf-xl-credit1                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-libvirt-qcow2                               pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-xl-qcow2                                    pass    
+ test-amd64-amd64-libvirt-raw                                 pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-amd64-amd64-xl-raw                                      pass    
+ test-armhf-armhf-xl-raw                                      fail    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-examine-uefi                                pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-libvirt-vhd                                 pass    
+ test-amd64-amd64-xl-vhd                                      pass    
+ test-arm64-arm64-xl-vhd                                      pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 376 lines long.)
 
