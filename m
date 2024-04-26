@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F335BC4345F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 14:02:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.712821.1113684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD88C4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 14:03:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.712831.1113709 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0M97-0008V6-8k; Fri, 26 Apr 2024 14:01:49 +0000
+	id 1s0MAe-0001sg-Ue; Fri, 26 Apr 2024 14:03:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 712821.1113684; Fri, 26 Apr 2024 14:01:49 +0000
+Received: by outflank-mailman (output) from mailman id 712831.1113709; Fri, 26 Apr 2024 14:03:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0M97-0008UY-2e; Fri, 26 Apr 2024 14:01:49 +0000
-Received: by outflank-mailman (input) for mailman id 712821;
- Fri, 26 Apr 2024 14:01:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LIFE=L7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1s0M95-0008CS-Hv
- for xen-devel@lists.xenproject.org; Fri, 26 Apr 2024 14:01:47 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 847220ec-03d5-11ef-b4bb-af5377834399;
- Fri, 26 Apr 2024 16:01:45 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a556d22fa93so259910766b.3
- for <xen-devel@lists.xenproject.org>; Fri, 26 Apr 2024 07:01:45 -0700 (PDT)
-Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- cd9-20020a170906b34900b00a5264576138sm10646714ejb.35.2024.04.26.07.01.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Apr 2024 07:01:44 -0700 (PDT)
+	id 1s0MAe-0001sZ-Rd; Fri, 26 Apr 2024 14:03:24 +0000
+Received: by outflank-mailman (input) for mailman id 712831;
+ Fri, 26 Apr 2024 14:03:23 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1s0MAd-0001sN-TA; Fri, 26 Apr 2024 14:03:23 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1s0MAd-0008GT-S4; Fri, 26 Apr 2024 14:03:23 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1s0MAd-0003xj-HF; Fri, 26 Apr 2024 14:03:23 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1s0MAd-0005M7-Gd; Fri, 26 Apr 2024 14:03:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,179 +44,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 847220ec-03d5-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714140105; x=1714744905; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=veQcubcMyTJwESdhZazD648xU+qEXNmLcmOyg8n0kxM=;
-        b=vZk8m4RHZPnB5zFFexR7CkcLjAgONhLRWxgf+aW2c+P974T1TuCKT35MpT829MAUft
-         P6xCgxtmxzA1l1L3L5u0R7Eh49d7eIFT5EPf2qeremPP4EK/D6smxpbs3KPrMVJI69I9
-         au8pPmyKYgFmEL0p/DcZ6Uu5V/RQSL9ongV4M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714140105; x=1714744905;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=veQcubcMyTJwESdhZazD648xU+qEXNmLcmOyg8n0kxM=;
-        b=LG+tdoiXQIIohLjAvbuGX1FNFjGSqLJnQJU9RYT5QkTTjNpgnUk0kGpvhPMFjQxpjK
-         hGAjF8/RmaKXy8sZVCYby1vtmZLmiL4Aqj4VGfKHzfx4kIcUKJLjlJHeLVmRacovyjBP
-         2KVLDaJbkTVonkUoH5wj87UuSzV1Caf7UN1iwptvQ5IQAsDUCu5m/2bujw+kiZEOCEYe
-         wOnIoc112YhRUCPGn4okvAZ6ivgTufBKF1dvRK2DWxVfhpluSWzQ3XjWQXjY+oFtplcm
-         yM143xIOOZOk1LVThzcJRuAFFUm9jkxA0mPDw4bwyT5TQgGuo4zigPOWzp0FTZB0QsWS
-         +13w==
-X-Gm-Message-State: AOJu0YzoushOYVpIyJa5uKqLx6m1flMswPBNiXnsl+q13jKRXlggZ88r
-	f/nswbcFXnCHynpamLq/j2uUisvnTfWa+pEhqEfIBe+2RHZwjJ7nN8ulCBKv6St93QfQFDZMAw3
-	8
-X-Google-Smtp-Source: AGHT+IEj8vXvCopGaO4X7dStaBJ9uvmEkLYNnY0dcfRkjLKnRFpM2yYWaQLzOc6QAsV0QYdMaNgRUA==
-X-Received: by 2002:a17:906:fa98:b0:a52:36e1:c139 with SMTP id lt24-20020a170906fa9800b00a5236e1c139mr1682397ejb.4.1714140104904;
-        Fri, 26 Apr 2024 07:01:44 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Daniel Smith <dpsmith@apertussolutions.com>,
-	Christopher Clark <christopher.w.clark@gmail.com>
-Subject: [PATCH 2/3] x86/boot: Explain discard_initial_images() and untangle PV initrd handling
-Date: Fri, 26 Apr 2024 15:01:39 +0100
-Message-Id: <20240426140140.465506-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240426140140.465506-1-andrew.cooper3@citrix.com>
-References: <20240426140140.465506-1-andrew.cooper3@citrix.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=8hTzDra1mHus1gRojydsf+usHtEIk/4pyz7dhjIZ04M=; b=ULUO4dF7eJwZVYhHvCoXgJP9Lc
+	4SJZmfP7GE/5N1JqCphWq5cfXTIx2J0L5orHCKkauQ7S7FLkt68X85Ah8dvhQcyrvjt3Jt0LeA7Lw
+	ET0iLWaNmq97PTY4Szh0chj1lpRJO9fti5uQ0FxFYe14C0FxasGBVGwPKrz5vtBdkOik=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-185804-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [libvirt test] 185804: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-vhd:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-vhd:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    libvirt=5540c3d2415c194b206f8946cf74b13648163332
+X-Osstest-Versions-That:
+    libvirt=948d496d2546807e8c3af634fa982615b2a3153b
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 26 Apr 2024 14:03:23 +0000
 
-discard_initial_images() frees the memory backing the boot modules.  It is
-called by dom0_construct_pv{,h}(), but obtains the module list by global
-pointer which is why there is no apparent link with the initrd pointer.
+flight 185804 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/185804/
 
-Generally, module contents are copied into dom0 as it's being built, but the
-initrd for PV dom0 might be directly mapped instead of copied.
+Failures :-/ but no regressions.
 
-dom0_construct_pv() does it's own ad-hoc freeing of the module in the copy
-case, and points the global reference at the new copy, then sets the size to
-0.  This only functions because init_domheap_pages(x, x) happens to be a nop.
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 185793
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-vhd 15 saverestore-support-check    fail   never pass
 
-Delete the ad-hoc freeing, and leave it to discard_initial_images().  This
-requires (not) adjusting initd->mod_start in the copy case, and only setting
-the size to 0 in the mapping case.
+version targeted for testing:
+ libvirt              5540c3d2415c194b206f8946cf74b13648163332
+baseline version:
+ libvirt              948d496d2546807e8c3af634fa982615b2a3153b
 
-Alter discard_initial_images() to explicitly check for an ignored module, and
-explain what's going on.  This is more robust and will allow for fixing other
-problems with module handling.
+Last test of basis   185793  2024-04-25 04:22:04 Z    1 days
+Testing same since   185804  2024-04-26 04:20:29 Z    0 days    1 attempts
 
-The later logic in dom0_construct_pv() now cannot use initrd->mod_start, but
-that's fine because initrd_mfn is already a duplicate of the information
-wanted, and is more consistent with initrd_{pfn,len} used elsewhere.
+------------------------------------------------------------
+People who touched revisions under test:
+  Michal Privoznik <mprivozn@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
 
-Invalidate the initrd pointer with LIST_POISON1 to make it clearer that it
-shouldn't be used.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-amd64-libvirt-qcow2                               pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-amd64-amd64-libvirt-raw                                 pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-libvirt-vhd                                 pass    
 
-No practical change in behaviour, but a substantial reduction in the
-complexity of how this works.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Daniel Smith <dpsmith@apertussolutions.com>
-CC: Christopher Clark <christopher.w.clark@gmail.com>
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-In other akward questions, why does initial_images_nrpages() account for all
-modules when only 1 or 2 are relevant for how we construct dom0 ?
----
- xen/arch/x86/pv/dom0_build.c | 22 +++++++++++-----------
- xen/arch/x86/setup.c         |  9 ++++++++-
- 2 files changed, 19 insertions(+), 12 deletions(-)
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index d8043fa58a27..64d9984b8308 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -630,18 +630,20 @@ int __init dom0_construct_pv(struct domain *d,
-                 }
-             memcpy(page_to_virt(page), mfn_to_virt(initrd->mod_start),
-                    initrd_len);
--            mpt_alloc = (paddr_t)initrd->mod_start << PAGE_SHIFT;
--            init_domheap_pages(mpt_alloc,
--                               mpt_alloc + PAGE_ALIGN(initrd_len));
--            initrd->mod_start = initrd_mfn = mfn_x(page_to_mfn(page));
-+            initrd_mfn = mfn_x(page_to_mfn(page));
-         }
-         else
-         {
-             while ( count-- )
-                 if ( assign_pages(mfn_to_page(_mfn(mfn++)), 1, d, 0) )
-                     BUG();
-+            /*
-+             * Mapped rather than copied.  Tell discard_initial_images() to
-+             * ignore it.
-+             */
-+            initrd->mod_end = 0;
-         }
--        initrd->mod_end = 0;
-+        initrd = LIST_POISON1; /* No longer valid to use. */
- 
-         iommu_memory_setup(d, "initrd", mfn_to_page(_mfn(initrd_mfn)),
-                            PFN_UP(initrd_len), &flush_flags);
-@@ -653,12 +655,10 @@ int __init dom0_construct_pv(struct domain *d,
-     if ( domain_tot_pages(d) < nr_pages )
-         printk(" (%lu pages to be allocated)",
-                nr_pages - domain_tot_pages(d));
--    if ( initrd )
--    {
--        mpt_alloc = (paddr_t)initrd->mod_start << PAGE_SHIFT;
-+    if ( initrd_len )
-         printk("\n Init. ramdisk: %"PRIpaddr"->%"PRIpaddr,
--               mpt_alloc, mpt_alloc + initrd_len);
--    }
-+               pfn_to_paddr(initrd_mfn),
-+               pfn_to_paddr(initrd_mfn) + initrd_len);
- 
-     printk("\nVIRTUAL MEMORY ARRANGEMENT:\n");
-     printk(" Loaded kernel: %p->%p\n", _p(vkern_start), _p(vkern_end));
-@@ -881,7 +881,7 @@ int __init dom0_construct_pv(struct domain *d,
-         if ( pfn >= initrd_pfn )
-         {
-             if ( pfn < initrd_pfn + PFN_UP(initrd_len) )
--                mfn = initrd->mod_start + (pfn - initrd_pfn);
-+                mfn = initrd_mfn + (pfn - initrd_pfn);
-             else
-                 mfn -= PFN_UP(initrd_len);
-         }
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 59907fae095f..785a46a44995 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -294,7 +294,7 @@ unsigned long __init initial_images_nrpages(nodeid_t node)
-     return nr;
- }
- 
--void __init discard_initial_images(void)
-+void __init discard_initial_images(void) /* a.k.a. free multiboot modules */
- {
-     unsigned int i;
- 
-@@ -302,6 +302,13 @@ void __init discard_initial_images(void)
-     {
-         uint64_t start = (uint64_t)initial_images[i].mod_start << PAGE_SHIFT;
- 
-+        /*
-+         * Sometimes the initrd is mapped, rather than copied, into dom0.
-+         * end=0 signifies that we should leave it alone.
-+         */
-+        if ( initial_images[i].mod_end == 0 )
-+            continue;
-+
-         init_domheap_pages(start,
-                            start + PAGE_ALIGN(initial_images[i].mod_end));
-     }
--- 
-2.30.2
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/libvirt.git
+   948d496d25..5540c3d241  5540c3d2415c194b206f8946cf74b13648163332 -> xen-tested-master
 
