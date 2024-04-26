@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA53C4345F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 16:09:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.712965.1113887 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A74DC4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 17:55:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.712994.1113921 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0O8G-0003ml-Cy; Fri, 26 Apr 2024 16:09:04 +0000
+	id 1s0Pn3-0004b7-56; Fri, 26 Apr 2024 17:55:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 712965.1113887; Fri, 26 Apr 2024 16:09:04 +0000
+Received: by outflank-mailman (output) from mailman id 712994.1113921; Fri, 26 Apr 2024 17:55:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0O8G-0003me-8l; Fri, 26 Apr 2024 16:09:04 +0000
-Received: by outflank-mailman (input) for mailman id 712965;
- Fri, 26 Apr 2024 16:09:03 +0000
+	id 1s0Pn2-0004aC-Ud; Fri, 26 Apr 2024 17:55:16 +0000
+Received: by outflank-mailman (input) for mailman id 712994;
+ Fri, 26 Apr 2024 17:55:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LIFE=L7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1s0O8F-0003mY-C6
- for xen-devel@lists.xenproject.org; Fri, 26 Apr 2024 16:09:03 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ <SRS0=/r3b=L7=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1s0Pn0-0004Xj-Sy
+ for xen-devel@lists.xenproject.org; Fri, 26 Apr 2024 17:55:14 +0000
+Received: from wfhigh5-smtp.messagingengine.com
+ (wfhigh5-smtp.messagingengine.com [64.147.123.156])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c1c163e-03e7-11ef-909a-e314d9c70b13;
- Fri, 26 Apr 2024 18:09:02 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a587831809eso276056666b.1
- for <xen-devel@lists.xenproject.org>; Fri, 26 Apr 2024 09:09:02 -0700 (PDT)
-Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- bu6-20020a170906a14600b00a57c75871d8sm5315763ejb.106.2024.04.26.09.09.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Apr 2024 09:09:00 -0700 (PDT)
+ id 2133c0c6-03f6-11ef-909a-e314d9c70b13;
+ Fri, 26 Apr 2024 19:55:13 +0200 (CEST)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfhigh.west.internal (Postfix) with ESMTP id 20807180017C;
+ Fri, 26 Apr 2024 13:55:11 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute6.internal (MEProxy); Fri, 26 Apr 2024 13:55:12 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 26 Apr 2024 13:55:08 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,165 +46,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c1c163e-03e7-11ef-909a-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714147741; x=1714752541; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=gD5q9PEj+9Tsia93/15fwjsbfZRGM0kGz/xaTFxAsYg=;
-        b=Dy0F0kMeKEZHB+6QDnOGf5SieAiaHDC/yk4X9RoJe0cLYyBcJd6IcNPTSPpu/gZB1I
-         AZUJTapuWUbsTRooVd2TNjpsCBVf/IP8sKx5jiYIQx5m5rbyG83DwjVc/y/LNNdXaDg+
-         FSoCKAeMDmWfQoA9qRO5vWj6vk9mF4nkFqI1k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714147741; x=1714752541;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gD5q9PEj+9Tsia93/15fwjsbfZRGM0kGz/xaTFxAsYg=;
-        b=P3AIDvGKlmRor6bIw5kkzwnvi2ACaxC/u8KmUJFMo0iYnSB6CpqevxTbF/ghYbJrqg
-         Ya8L1ro9BXw0T5/9qtIJz0pmMC3NcCxCfDo5rq1SSvrLRL01bxl8Fk5khTQgo5jPPODP
-         2sS6PU/H59Kzjj3+llIqCU+/VzYrHJs/xKo/T88B6leNIRssw7yOJs+5cb/2o+nWH0km
-         v+HiMjD89+qDLGrTIQ4Nj4lzbcdLr+kujxu/uRHD3sf5iOGttGhsnRVAbBRh418gnHmz
-         vVf67dCCP+SRt2LYSNZvhQD4mR2m2X5xh6iSwxzjzGKtWdF9lV9t5Gxw1xoawb4kBgRG
-         TDSQ==
-X-Gm-Message-State: AOJu0YxXUmxN104A8CZsngxbjwMEMmfpG22H5CxokTCTTzOJN5oZPtEu
-	pAJHllSPIYw9wCMni5nDII/f5wA6/0Ild4QYH9wFEfA7Pt4u5+ab7LYvLONzG0KyiAp4cVNieaa
-	u
-X-Google-Smtp-Source: AGHT+IH4X7bHy9GJ7y+RIcXHPc4Tqd+jVZ74Q9KvLt4n/XbbkISUkQAB32y4bTMCggnb3rYLybBNYA==
-X-Received: by 2002:a17:906:3811:b0:a55:99f4:549f with SMTP id v17-20020a170906381100b00a5599f4549fmr2335713ejc.48.1714147741396;
-        Fri, 26 Apr 2024 09:09:01 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH] x86/cpu-policy: Annotate the accumulated features
-Date: Fri, 26 Apr 2024 17:08:59 +0100
-Message-Id: <20240426160859.565438-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: 2133c0c6-03f6-11ef-909a-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm3; t=1714154110; x=1714240510; bh=wnwLHJjK04
+	m7/9icyRhj8AsJLZNROamjl2zOStksx24=; b=UHC1s2f/T0/3E2+PWJe0soraOF
+	+OrZF0FjpLmSpgoGC5lfSc1geZuWuK++8i6AXPWLnHWNPDMfp7E4ax/mi5J+iDlJ
+	ur6IbDVeN6C/g4Pj6VKhc2CgksLABGmqcgOZWww1JbJp6OZSinwllqnJvt7+kg9u
+	ux130D3+/1Tg/jk6l7yA0+5pcdnsG80jGIk0B+1xuM+vhj7HLg6nzcRyqfoOsyuw
+	GpDOrCDDHF8ZkD1Mhvsrw4p344NLVxvPouUgoYR1FeLVVuN9JHNr7PZTr2pDd6BM
+	7oupxhGbA+1bJHvadrpc7Z+c1+lOho5p+FJhEe1/i71lHMDMuPhjGPV5vR8Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1714154110; x=
+	1714240510; bh=wnwLHJjK04m7/9icyRhj8AsJLZNROamjl2zOStksx24=; b=I
+	/iG1QotweSKdUqu7tjOIW4uzc1PpIA45z6jzSPvYDB6SI3jM1Pmp+9M/RgLYzvQF
+	X31sy9gaZ5S+VaTZrg80hvl/xnnLJ5hK/FG++Ak20TMVi2MRkAAPzJ9b2pXE2WD+
+	sADIDlBJ0wQXYJ15mZCeVyvkGi8Y/Iml6k0QQX22meWBngq0Um4+qEsvA1+895ur
+	48g8UstUs9z6N/+W8H3b370xZBEGhWu/DPkVw9/ThvfmxipFWu00Qan7hF/znQrV
+	o5bq0ncsIKBZaP1HXLHENWoF8PiUPhDBW4Aj7feEwy4cU7L69olayyX+tjdaJpn8
+	Vl9H7lMAlmh9wfu/XkpCA==
+X-ME-Sender: <xms:fuorZlGhc3lTIR1jFJwpg7IWNIYWHESHfD4QJBf6axHjW94_TYuXAg>
+    <xme:fuorZqWRzNU4IWMLc1NJ2NKaGUT0_0evsks2rkjAAx4W5DWElK4J3zVp5FpVIU8tw
+    UUHuMO4dmhL2g>
+X-ME-Received: <xmr:fuorZnKZcCQJMDxmzuwobZOJSOTrpufM28uK6Qmme4GnfbVogCgyoC0yofNy8lIWEUDA74-qfo3zsd0R3FIoj9NN8OvnnSuHwJqrC2RsVraQHl7vigw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudelledguddukecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgr
+    rhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghkse
+    hinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhep
+    gfeuudehgfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuve
+    hluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghr
+    vghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:fuorZrEtyUONk3fJKga20BWdOKFlnOYRAL3klZPkqC9F4x8Sr1sNyA>
+    <xmx:fuorZrU-JXVuRBNz2aF2vwxViFknDXWBW8zntrIRrrOh1VoJx5nCTQ>
+    <xmx:fuorZmPt9JyGYGjy3qQRoyd7dn8SmHvHuY5cwv07f19TM82KrxBvJg>
+    <xmx:fuorZq2WcQWpx8DKVzkAXtdmwqDge2BgDyEVa6X9x-sfyeYGi3bENw>
+    <xmx:fuorZiHPQbMQcWV5ZqxUwbGrWAfdMmSLXVaLgQq72PqVT6dUKQhaepzD>
+Feedback-ID: i1568416f:Fastmail
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 1/7] x86/msi: passthrough all MSI-X vector ctrl writes to device model
+Date: Fri, 26 Apr 2024 19:53:58 +0200
+Message-ID: <db19b939bd56ea822a8149c5e7d46505b81d34a3.1714154036.git-series.marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <cover.3491f479d5b6238106af8ddc56ec6834090b330f.1714154036.git-series.marmarek@invisiblethingslab.com>
+References: <cover.3491f479d5b6238106af8ddc56ec6834090b330f.1714154036.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Some features need accumulating rather than intersecting to make migration
-safe.  Introduce the new '|' attribute for this purpose.
+QEMU needs to know whether clearing maskbit of a vector is really
+clearing, or was already cleared before. Currently Xen sends only
+clearing that bit to the device model, but not setting it, so QEMU
+cannot detect it. Because of that, QEMU is working this around by
+checking via /dev/mem, but that isn't the proper approach.
 
-Right now, it's only used by the Xapi toolstack, but it will be used by
-xl/libxl when the full policy-object work is complete, and until then it's
-still a useful hint for hand-crafted cpuid= lines in vm.cfg files.
+Give all necessary information to QEMU by passing all ctrl writes,
+including masking a vector. Advertise the new behavior via
+XENVER_get_features, so QEMU can know it doesn't need to access /dev/mem
+anymore.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+While this commit doesn't move the whole maskbit handling to QEMU (as
+discussed on xen-devel as one of the possibilities), it is a necessary
+first step anyway. Including telling QEMU it will get all the required
+information to do so. The actual implementation would need to include:
+ - a hypercall for QEMU to control just maskbit (without (re)binding the
+   interrupt again
+ - a methor for QEMU to tell Xen it will actually do the work
+Those are not part of this series.
+
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/include/public/arch-x86/cpufeatureset.h | 15 ++++++++++-----
- xen/tools/gen-cpuid.py                      |  7 +++++--
- 2 files changed, 15 insertions(+), 7 deletions(-)
+I did not added any control to enable/disable this new behavior (as
+Roger have suggested for possible non-QEMU ioreqs). I don't see how the
+new behavior could be problematic for some existing ioreq server (they
+already received writes to those addresses, just not all of them),
+but if that's really necessary, I can probably add a command line option
+to restore previous behavior system-wide.
 
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index 53f13dec31f7..6627453e3985 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -72,6 +72,11 @@ enum {
-  *   'H' = HVM HAP guests (not PV or HVM Shadow guests).
-  *   Upper case => Available by default
-  *   Lower case => Can be opted-in to, but not available by default.
-+ *
-+ * Migration: '|'
-+ *   This bit should be visible to a guest if any anywhere it might run has
-+ *   the bit set.  i.e. it needs accumulating across the migration pool,
-+ *   rather than intersecting.
-  */
+Changes in v5:
+- announce the feature only on x86
+- style fixes
+
+Changes in v4:
+- ignore unaligned writes with X86EMUL_OKAY
+- restructure the code to forward all writes in _msixtbl_write() instead
+  of manipulating return value of msixtbl_write() - this makes
+  WRITE_LEN4_COMPLETION special case unnecessary
+- advertise the changed behavior via XENVER_get_features instead of DMOP
+v3:
+ - advertise changed behavior in XEN_DMOP_get_ioreq_server_info - make
+   "flags" parameter IN/OUT
+ - move len check back to msixtbl_write() - will be needed there anyway
+   in a later patch
+v2:
+ - passthrough quad writes to emulator too (Jan)
+ - (ab)use len==0 for write len=4 completion (Jan), but add descriptive
+   #define for this magic value
+---
+ xen/arch/x86/hvm/vmsi.c       | 19 ++++++++++++++-----
+ xen/common/kernel.c           |  1 +
+ xen/include/public/features.h |  8 ++++++++
+ 3 files changed, 23 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
+index adbac965f9f7..999917983789 100644
+--- a/xen/arch/x86/hvm/vmsi.c
++++ b/xen/arch/x86/hvm/vmsi.c
+@@ -283,8 +283,8 @@ static int msixtbl_write(struct vcpu *v, unsigned long address,
+     unsigned long flags;
+     struct irq_desc *desc;
  
- /* Intel-defined CPU features, CPUID level 0x00000001.edx, word 0 */
-@@ -248,7 +253,7 @@ XEN_CPUFEATURE(IBRS_ALWAYS,   8*32+16) /*S  IBRS preferred always on */
- XEN_CPUFEATURE(STIBP_ALWAYS,  8*32+17) /*S  STIBP preferred always on */
- XEN_CPUFEATURE(IBRS_FAST,     8*32+18) /*S  IBRS preferred over software options */
- XEN_CPUFEATURE(IBRS_SAME_MODE, 8*32+19) /*S  IBRS provides same-mode protection */
--XEN_CPUFEATURE(NO_LMSL,       8*32+20) /*S  EFER.LMSLE no longer supported. */
-+XEN_CPUFEATURE(NO_LMSL,       8*32+20) /*S| EFER.LMSLE no longer supported. */
- XEN_CPUFEATURE(AMD_PPIN,      8*32+23) /*   Protected Processor Inventory Number */
- XEN_CPUFEATURE(AMD_SSBD,      8*32+24) /*S  MSR_SPEC_CTRL.SSBD available */
- XEN_CPUFEATURE(VIRT_SSBD,     8*32+25) /*!  MSR_VIRT_SPEC_CTRL.SSBD */
-@@ -263,7 +268,7 @@ XEN_CPUFEATURE(AVX512_4FMAPS, 9*32+ 3) /*A  AVX512 Multiply Accumulation Single
- XEN_CPUFEATURE(FSRM,          9*32+ 4) /*A  Fast Short REP MOVS */
- XEN_CPUFEATURE(AVX512_VP2INTERSECT, 9*32+8) /*a  VP2INTERSECT{D,Q} insns */
- XEN_CPUFEATURE(SRBDS_CTRL,    9*32+ 9) /*   MSR_MCU_OPT_CTRL and RNGDS_MITG_DIS. */
--XEN_CPUFEATURE(MD_CLEAR,      9*32+10) /*!A VERW clears microarchitectural buffers */
-+XEN_CPUFEATURE(MD_CLEAR,      9*32+10) /*!A| VERW clears microarchitectural buffers */
- XEN_CPUFEATURE(RTM_ALWAYS_ABORT, 9*32+11) /*! RTM disabled (but XBEGIN wont fault) */
- XEN_CPUFEATURE(TSX_FORCE_ABORT, 9*32+13) /* MSR_TSX_FORCE_ABORT.RTM_ABORT */
- XEN_CPUFEATURE(SERIALIZE,     9*32+14) /*A  SERIALIZE insn */
-@@ -292,7 +297,7 @@ XEN_CPUFEATURE(AVX_IFMA,     10*32+23) /*A  AVX-IFMA Instructions */
+-    if ( (len != 4 && len != 8) || (address & (len - 1)) )
+-        return r;
++    if ( !IS_ALIGNED(address, len) )
++        return X86EMUL_OKAY;
  
- /* AMD-defined CPU features, CPUID level 0x80000021.eax, word 11 */
- XEN_CPUFEATURE(NO_NEST_BP,         11*32+ 0) /*A  No Nested Data Breakpoints */
--XEN_CPUFEATURE(FS_GS_NS,           11*32+ 1) /*S  FS/GS base MSRs non-serialising */
-+XEN_CPUFEATURE(FS_GS_NS,           11*32+ 1) /*S| FS/GS base MSRs non-serialising */
- XEN_CPUFEATURE(LFENCE_DISPATCH,    11*32+ 2) /*A  LFENCE always serializing */
- XEN_CPUFEATURE(NSCB,               11*32+ 6) /*A  Null Selector Clears Base (and limit too) */
- XEN_CPUFEATURE(AUTO_IBRS,          11*32+ 8) /*S  Automatic IBRS */
-@@ -343,7 +348,7 @@ XEN_CPUFEATURE(DOITM,              16*32+12) /*   Data Operand Invariant Timing
- XEN_CPUFEATURE(SBDR_SSDP_NO,       16*32+13) /*A  No Shared Buffer Data Read or Sideband Stale Data Propagation */
- XEN_CPUFEATURE(FBSDP_NO,           16*32+14) /*A  No Fill Buffer Stale Data Propagation */
- XEN_CPUFEATURE(PSDP_NO,            16*32+15) /*A  No Primary Stale Data Propagation */
--XEN_CPUFEATURE(FB_CLEAR,           16*32+17) /*!A Fill Buffers cleared by VERW */
-+XEN_CPUFEATURE(FB_CLEAR,           16*32+17) /*!A| Fill Buffers cleared by VERW */
- XEN_CPUFEATURE(FB_CLEAR_CTRL,      16*32+18) /*   MSR_OPT_CPU_CTRL.FB_CLEAR_DIS */
- XEN_CPUFEATURE(RRSBA,              16*32+19) /*!  Restricted RSB Alternative */
- XEN_CPUFEATURE(BHI_NO,             16*32+20) /*A  No Branch History Injection  */
-@@ -353,7 +358,7 @@ XEN_CPUFEATURE(PBRSB_NO,           16*32+24) /*A  No Post-Barrier RSB prediction
- XEN_CPUFEATURE(GDS_CTRL,           16*32+25) /*   MCU_OPT_CTRL.GDS_MIT_{DIS,LOCK} */
- XEN_CPUFEATURE(GDS_NO,             16*32+26) /*A  No Gather Data Sampling */
- XEN_CPUFEATURE(RFDS_NO,            16*32+27) /*A  No Register File Data Sampling */
--XEN_CPUFEATURE(RFDS_CLEAR,         16*32+28) /*!A Register File(s) cleared by VERW */
-+XEN_CPUFEATURE(RFDS_CLEAR,         16*32+28) /*!A| Register File(s) cleared by VERW */
+     rcu_read_lock(&msixtbl_rcu_lock);
  
- /* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.edx, word 17 */
+@@ -345,8 +345,7 @@ static int msixtbl_write(struct vcpu *v, unsigned long address,
  
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index bf3f9ec01e6e..1fb76f664529 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -21,7 +21,7 @@ class State(object):
-         self.names = {}  # Value => Name mapping
-         self.values = {} # Name => Value mapping
-         self.raw = {
--            '!': set(),
-+            '!': set(), '|': set(),
-             'A': set(), 'S': set(), 'H': set(),
-             'a': set(), 's': set(), 'h': set(),
-         }
-@@ -48,7 +48,7 @@ def parse_definitions(state):
-     feat_regex = re.compile(
-         r"^XEN_CPUFEATURE\(([A-Z0-9_]+),"
-         "\s+([\s\d]+\*[\s\d]+\+[\s\d]+)\)"
--        "\s+/\*([\w!]*) .*$")
-+        "\s+/\*([\w!|]*) .*$")
+ unlock:
+     spin_unlock_irqrestore(&desc->lock, flags);
+-    if ( len == 4 )
+-        r = X86EMUL_OKAY;
++    r = X86EMUL_OKAY;
  
-     word_regex = re.compile(
-         r"^/\* .* word (\d*) \*/$")
-@@ -415,6 +415,8 @@ def write_results(state):
- 
- #define INIT_SPECIAL_FEATURES { \\\n%s\n}
- 
-+#define INIT_SIMPLE_OR { \\\n%s\n}
+ out:
+     rcu_read_unlock(&msixtbl_rcu_lock);
+@@ -357,7 +356,17 @@ static int cf_check _msixtbl_write(
+     const struct hvm_io_handler *handler, uint64_t address, uint32_t len,
+     uint64_t val)
+ {
+-    return msixtbl_write(current, address, len, val);
++    /* Ignore invalid length or unaligned writes. */
++    if ( (len != 4 && len != 8) || !IS_ALIGNED(address, len) )
++        return X86EMUL_OKAY;
 +
- #define INIT_PV_DEF_FEATURES { \\\n%s\n}
++    /*
++     * This function returns X86EMUL_UNHANDLEABLE even if write is properly
++     * handled, to propagate it to the device model (so it can keep its
++     * internal state in sync).
++     */
++    msixtbl_write(current, address, len, val);
++    return X86EMUL_UNHANDLEABLE;
+ }
  
- #define INIT_PV_MAX_FEATURES { \\\n%s\n}
-@@ -436,6 +438,7 @@ def write_results(state):
-        next(featureset_to_uint32s(state.common_1d, 1)),
-        format_uint32s(state, state.names.keys(), 4),
-        format_uint32s(state, state.raw['!'], 4),
-+       format_uint32s(state, state.raw['|'], 4),
-        format_uint32s(state, state.pv_def, 4),
-        format_uint32s(state, state.pv_max, 4),
-        format_uint32s(state, state.hvm_shadow_def, 4),
-
-base-commit: be5b08dd6ea6ef0f01caf537bdae125fa66a2230
+ static bool cf_check msixtbl_range(
+diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+index 08dbaa2a054c..b44b2439ca8e 100644
+--- a/xen/common/kernel.c
++++ b/xen/common/kernel.c
+@@ -637,6 +637,7 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+                 fi.submap |= (1U << XENFEAT_hvm_safe_pvclock) |
+                              (1U << XENFEAT_hvm_callback_vector) |
+                              (has_pirq(d) ? (1U << XENFEAT_hvm_pirqs) : 0);
++            fi.submap |= (1U << XENFEAT_dm_msix_all_writes);
+ #endif
+             if ( !paging_mode_translate(d) || is_domain_direct_mapped(d) )
+                 fi.submap |= (1U << XENFEAT_direct_mapped);
+diff --git a/xen/include/public/features.h b/xen/include/public/features.h
+index 4437f25d2532..880193094713 100644
+--- a/xen/include/public/features.h
++++ b/xen/include/public/features.h
+@@ -120,6 +120,14 @@
+ #define XENFEAT_runstate_phys_area        18
+ #define XENFEAT_vcpu_time_phys_area       19
+ 
++/*
++ * If set, Xen will passthrough all MSI-X vector ctrl writes to device model,
++ * not only those unmasking an entry. This allows device model to properly keep
++ * track of the MSI-X table without having to read it from the device behind
++ * Xen's backs. This information is relevant only for device models.
++ */
++#define XENFEAT_dm_msix_all_writes        20
++
+ #define XENFEAT_NR_SUBMAPS 1
+ 
+ #endif /* __XEN_PUBLIC_FEATURES_H__ */
 -- 
-2.30.2
-
+git-series 0.9.1
 
