@@ -4,35 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD88C4345F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 14:03:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.712831.1113709 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6D0AC4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 14:33:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.712855.1113724 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0MAe-0001sg-Ue; Fri, 26 Apr 2024 14:03:24 +0000
+	id 1s0Mdo-0000GY-69; Fri, 26 Apr 2024 14:33:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 712831.1113709; Fri, 26 Apr 2024 14:03:24 +0000
+Received: by outflank-mailman (output) from mailman id 712855.1113724; Fri, 26 Apr 2024 14:33:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0MAe-0001sZ-Rd; Fri, 26 Apr 2024 14:03:24 +0000
-Received: by outflank-mailman (input) for mailman id 712831;
- Fri, 26 Apr 2024 14:03:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1s0MAd-0001sN-TA; Fri, 26 Apr 2024 14:03:23 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1s0MAd-0008GT-S4; Fri, 26 Apr 2024 14:03:23 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1s0MAd-0003xj-HF; Fri, 26 Apr 2024 14:03:23 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1s0MAd-0005M7-Gd; Fri, 26 Apr 2024 14:03:23 +0000
+	id 1s0Mdo-0000GR-3X; Fri, 26 Apr 2024 14:33:32 +0000
+Received: by outflank-mailman (input) for mailman id 712855;
+ Fri, 26 Apr 2024 14:33:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=/P6z=L7=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1s0Mdm-0000Fn-TP
+ for xen-devel@lists.xenproject.org; Fri, 26 Apr 2024 14:33:30 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20610.outbound.protection.outlook.com
+ [2a01:111:f400:7e88::610])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f229a3c4-03d9-11ef-b4bb-af5377834399;
+ Fri, 26 Apr 2024 16:33:29 +0200 (CEST)
+Received: from CH0PR13CA0028.namprd13.prod.outlook.com (2603:10b6:610:b1::33)
+ by SJ1PR12MB6169.namprd12.prod.outlook.com (2603:10b6:a03:45c::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Fri, 26 Apr
+ 2024 14:33:24 +0000
+Received: from CH1PEPF0000AD78.namprd04.prod.outlook.com
+ (2603:10b6:610:b1:cafe::53) by CH0PR13CA0028.outlook.office365.com
+ (2603:10b6:610:b1::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.18 via Frontend
+ Transport; Fri, 26 Apr 2024 14:33:23 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH1PEPF0000AD78.mail.protection.outlook.com (10.167.244.56) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7452.22 via Frontend Transport; Fri, 26 Apr 2024 14:33:23 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 26 Apr
+ 2024 09:33:23 -0500
+Received: from [172.20.132.216] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Fri, 26 Apr 2024 09:33:21 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,131 +61,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=8hTzDra1mHus1gRojydsf+usHtEIk/4pyz7dhjIZ04M=; b=ULUO4dF7eJwZVYhHvCoXgJP9Lc
-	4SJZmfP7GE/5N1JqCphWq5cfXTIx2J0L5orHCKkauQ7S7FLkt68X85Ah8dvhQcyrvjt3Jt0LeA7Lw
-	ET0iLWaNmq97PTY4Szh0chj1lpRJO9fti5uQ0FxFYe14C0FxasGBVGwPKrz5vtBdkOik=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-185804-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: f229a3c4-03d9-11ef-b4bb-af5377834399
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=C1ojq8+SFUa25LR9tOz9+pt5GjNx2tYayTUKhJxzAgeDboHPEGZOD3m30TbUwhAjrobudov4bZjRbeO5zC+m+cR/a6+O9WpB1EhKmaYnuC3VBYavu8xMNn5DOgZHYkvx1BbLGAtY5JzukIbkZ41RH6M5fT7v7ZpY8538qGt3TWvnO24LJ+95gz3nzn9t39NEup4z8IDYIgbUs5CGiZG4eAvvF5bCqK27RAnfqpzberugjsziNOUr5uX3oCPA1fyu2h5I8Yg5rWXikP21eW89uADZrh42yge4SM6UF5xcIfqcuOd09uDaEY9Az/myGDxIE8BUvuL39OS7orth2bg3ew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Vpx/cFxweS61wRRRkOw84SPvY4PtH2Glydv/7cYPezA=;
+ b=XMrbDOpMM9B6F0Ld6t4H5yuJvtjBL32/8nir92BitdCdMeaA29SMBLqE3/ppdirV0gVnN8WxfuVRAR5ajmFS4ViOTXrM9NBhJR2GyqBn/0XiCBzEhxCZYuw07VigKeYHKmbx95BdxYBdzLqQstKY+Ei/fx+o39oYlxAHwwB4gerjrvZdnQkwzfl5X6abWOx9f7mg4zPtS+/LjKnQ1GuyjyIbth2K2UOhV1AxrKniMkVFVELu8oLdwEb+hyPFue8qMhqBkPRc5/AYBRBeiSV45SXsN8AMzsxo8BeofK2S18rX6WrxNDL7AGRkq78VTVdDdfn9nJUyfIxFuF8hWUWOMw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Vpx/cFxweS61wRRRkOw84SPvY4PtH2Glydv/7cYPezA=;
+ b=Z7H9sTl0rMGr/Pc8mFhm0tRzA29gBdjlfeAKkO/Yq7jbBcB8sJhXyPtHn4bs7o+u2J6bTESe1UMSF8DgFoU8qg5TPmH0wIDtilI5sC6G+Ej1XfAAt6VRVea35ncb+js8BPkWBEkzUdlEclgAINQCXXwYHtpS6bWJoAYkJFkisM8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <261fce46-56e9-4a7e-8f2f-b741bf5b8251@amd.com>
+Date: Fri, 26 Apr 2024 10:33:16 -0400
 MIME-Version: 1.0
-Subject: [libvirt test] 185804: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-vhd:migrate-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-vhd:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    libvirt=5540c3d2415c194b206f8946cf74b13648163332
-X-Osstest-Versions-That:
-    libvirt=948d496d2546807e8c3af634fa982615b2a3153b
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 26 Apr 2024 14:03:23 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/spinlock: use correct pointer
+To: Jan Beulich <jbeulich@suse.com>
+CC: Juergen Gross <jgross@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Julien
+ Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+	<xen-devel@lists.xenproject.org>
+References: <20240425204547.658536-1-stewart.hildebrand@amd.com>
+ <08165a0d-d8ee-4405-ba04-e1cfb51489b4@suse.com>
+Content-Language: en-US
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <08165a0d-d8ee-4405-ba04-e1cfb51489b4@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB04.amd.com: stewart.hildebrand@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD78:EE_|SJ1PR12MB6169:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8d1d038c-236d-46c6-c53f-08dc65fdd413
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?eDhwaStNMnhUeVpLRVFweDdlTTUrR0dmenlnelR5K0pKaDM2WWFFdlVjUmlr?=
+ =?utf-8?B?MVJVNHF5Mkp1eldjWFJOU0U5QkEwUWM5dkdzVFE5WmFwc3MvbkhwUGpVMkRI?=
+ =?utf-8?B?S0E5c0lFcHJWRTlhVVJvOHZIZytuMEtRaC9TRG1BQXZzcEVKbngvblVYci9J?=
+ =?utf-8?B?d1hqZHVXcGQ3cVJQa3RtVWdaOHJJTzlweUZBcTlBeXRRdkJkQnlWdVh2TWJN?=
+ =?utf-8?B?amxQZW5GQ2ZaV1lHc1RFa2xDTVh4VWJTZjhtdVptdmdGQ1liMXZmdDRJcy9x?=
+ =?utf-8?B?QmNRRGpFcGZpbTNQc2Ixa2UyY1hMZGdnS3dPVG9RYzhjVjU3b29UMzBpV1lL?=
+ =?utf-8?B?MmZaRjF2KzhOUGtkcXYwYlgrVThibmJtNmZLM2FsN1lvMEhWVXdBQlp6NThv?=
+ =?utf-8?B?bnA2L2tXS0JRMG14aUQ2c3F1eHMzcE4veTFNZzRIeER5empvcUVTQ0VMdEJ6?=
+ =?utf-8?B?aDhObVlsd2JnVlRvVThua2dpaHFKWW95SzczcVU4QXVXbkIvaHR0czBRU1A1?=
+ =?utf-8?B?VzlIeE5KUW9RbEtBNDRPZjNFcGpieThIajBwZG8xMjFvSjVOc3djN1U3WEZZ?=
+ =?utf-8?B?Vm5uMVMrcUxIMDJ6bDB1endYeGVGZ0hEZ0tmdmo5UmpDZ0ZDbFlBdVduSVN4?=
+ =?utf-8?B?eFNaMlFscjduZ3FLWDhTS2J2M2psSUpLK3N1ZC9xR09sWEE5VUxMWm1NaGxn?=
+ =?utf-8?B?MFhMbVdEWWFTS0wzbU5rdktoTjh0eWxTRWIrby9pUXdEb1hYVlg3M2F3b2sw?=
+ =?utf-8?B?dUUrZEVJUnN6Yy9sUFdLMW1nS0xaLzd1ajJVb3Z5b2pDR0dVZmxUM0J0b1RN?=
+ =?utf-8?B?Y0I3czA5aVFEMEpTdUVDQ3NEdFFVQWV0ZHNRQTBVY1ZESXVnTktBL3UvbnNs?=
+ =?utf-8?B?bmZqTnBIUjg5M09TMUhQQlhZQVBqTktqTUhlY0JXMGF6U0h1Yk1rQ1k5aEJv?=
+ =?utf-8?B?bElCWXVhZkFOcExXT1h3SzdEUmdUeE52aTY2MExnZVJhUUpLLzMrQjBwZHFi?=
+ =?utf-8?B?VCtkS2wyQ0J4aFZ4cW56K082T2prKzF3SlNYNTJXRTYzbFhnL1VEbEYvU3dt?=
+ =?utf-8?B?enhSVnhWS0FUMTZ2N0RPQVdhQ3U5V0QwNy8xTjE4VXNLVVdKUjI1RkJsbHV2?=
+ =?utf-8?B?bDRwMi9mUEJMdDZEWWhBOFdrZWRBZDJScHErQVkxSkxtZitmUkxnZFZ6RTZx?=
+ =?utf-8?B?ZStkZFV4WWF6Qk5sOWNyLzBEL01WZnZKZTh5cFlMbGhzVVgxR0JsRWRGY08r?=
+ =?utf-8?B?UWZyNk9wNEk2UkhIcDBheHVVSFdvWE9iQlVLR1h3c1FPTng4eXhCRDVVT1dI?=
+ =?utf-8?B?dmRiYkc3ZVhaeko2cG9Jd0FJb2p2WUhrQjFSYzhnMS8yaTZhK29rbTBmQTJh?=
+ =?utf-8?B?SGNzY2krQ29ieThJQzU3Z1ZQU3QrelBVdUc2ZFJjMXJNZXFqeFV3M2puZEVo?=
+ =?utf-8?B?WUtDWmcwdnl3Z3YrOEtEOEZ6T3ZVNmFmVHdjRjV0ZndFOFNqVVNmc1BwQm1N?=
+ =?utf-8?B?MnFmTEhSZEorT0V6RDJtM2tQTW9Od3pZa2JKb1pPYU1oaG5CRjZIRThNQ05v?=
+ =?utf-8?B?eE0xdWtTVVZIRGt4VVFZNkdKMmVmMEtndHJtRTh3dWh0ZlBvajVuUlJaTTZV?=
+ =?utf-8?B?TFFYTER3WjBudXZyMGRnamRnemZNVTZQcFN2Tmh3K1hocG9HUmtSVkpRRjc4?=
+ =?utf-8?B?T0Q2VkIwLzlINDByY2x0MWxLRW9oUXJDd1VrMXZuM1pEdkd0TWkySVNwakhh?=
+ =?utf-8?B?NGNUSUVRQU5UY1VScjVhWGNhVExHakk2SFdCQU01bDQ3alJrOWFtb2hsSVZU?=
+ =?utf-8?B?YTk3all3aCtyblE4L1BSYlR2d0xTVXdSbVQ0L21weGZPSnZTdEZqa2pTYkl2?=
+ =?utf-8?Q?rJLg0sAwzthXH?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(82310400014)(376005)(36860700004);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Apr 2024 14:33:23.7714
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d1d038c-236d-46c6-c53f-08dc65fdd413
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0000AD78.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6169
 
-flight 185804 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/185804/
+On 4/26/24 02:31, Jan Beulich wrote:
+> On 25.04.2024 22:45, Stewart Hildebrand wrote:
+>> The ->profile member is at different offsets in struct rspinlock and
+>> struct spinlock. When initializing the profiling bits of an rspinlock,
+>> an unrelated member in struct rspinlock was being overwritten, leading
+>> to mild havoc. Use the correct pointer.
+>>
+>> Fixes: b053075d1a7b ("xen/spinlock: make struct lock_profile rspinlock_t aware")
+>> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> 
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Failures :-/ but no regressions.
+Thanks!
 
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 185793
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-vhd 15 saverestore-support-check    fail   never pass
+> 
+>> --- a/xen/common/spinlock.c
+>> +++ b/xen/common/spinlock.c
+>> @@ -789,7 +789,11 @@ static int __init cf_check lock_prof_init(void)
+>>      {
+>>          (*q)->next = lock_profile_glb_q.elem_q;
+>>          lock_profile_glb_q.elem_q = *q;
+>> -        (*q)->ptr.lock->profile = *q;
+>> +
+>> +        if ( (*q)->is_rlock )
+>> +            (*q)->ptr.rlock->profile = *q;
+>> +        else
+>> +            (*q)->ptr.lock->profile = *q;
+>>      }
+>>  
+>>      _lock_profile_register_struct(LOCKPROF_TYPE_GLOBAL,
+> 
+> Just to mention it: Strictly speaking spinlock_profile_print_elem()'s
+> 
+>     printk("%s: addr=%p, lockval=%08x, ", data->name, data->ptr.lock, lockval);
+> 
+> isn't quite right either (and I would be surprised if Misra didn't have
+> to say something about it).
+> 
+> Jan
 
-version targeted for testing:
- libvirt              5540c3d2415c194b206f8946cf74b13648163332
-baseline version:
- libvirt              948d496d2546807e8c3af634fa982615b2a3153b
+I'd be happy to send a patch for that instance, too. Would you like a
+Reported-by: tag?
 
-Last test of basis   185793  2024-04-25 04:22:04 Z    1 days
-Testing same since   185804  2024-04-26 04:20:29 Z    0 days    1 attempts
+That patch would look something like:
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Michal Privoznik <mprivozn@redhat.com>
-  Peter Krempa <pkrempa@redhat.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-amd64-libvirt-qcow2                               pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-amd64-amd64-libvirt-raw                                 pass    
- test-arm64-arm64-libvirt-raw                                 pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
- test-armhf-armhf-libvirt-vhd                                 pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -637,22 +637,25 @@ static void cf_check spinlock_profile_print_elem(struct lock_profile *data,
+ {
+     unsigned int cpu;
+     unsigned int lockval;
++    void *lockaddr;
+ 
+     if ( data->is_rlock )
+     {
+         cpu = data->ptr.rlock->debug.cpu;
+         lockval = data->ptr.rlock->tickets.head_tail;
++        lockaddr = data->ptr.rlock;
+     }
+     else
+     {
+         cpu = data->ptr.lock->debug.cpu;
+         lockval = data->ptr.lock->tickets.head_tail;
++        lockaddr = data->ptr.lock;
+     }
+ 
+     printk("%s ", lock_profile_ancs[type].name);
+     if ( type != LOCKPROF_TYPE_GLOBAL )
+         printk("%d ", idx);
+-    printk("%s: addr=%p, lockval=%08x, ", data->name, data->ptr.lock, lockval);
++    printk("%s: addr=%p, lockval=%08x, ", data->name, lockaddr, lockval);
+     if ( cpu == SPINLOCK_NO_CPU )
+         printk("not locked\n");
+     else
 
 
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/libvirt.git
-   948d496d25..5540c3d241  5540c3d2415c194b206f8946cf74b13648163332 -> xen-tested-master
+That case is benign since the pointer is not dereferenced. So the
+rationale would primarily be for consistency (and possibly satisfying
+Misra).
 
