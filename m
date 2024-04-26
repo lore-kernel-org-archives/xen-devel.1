@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA83C4345F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 13:58:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.712813.1113659 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E375FC04FFE
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 14:01:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.712822.1113689 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0M5T-0006ft-73; Fri, 26 Apr 2024 13:58:03 +0000
+	id 1s0M97-00006g-If; Fri, 26 Apr 2024 14:01:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 712813.1113659; Fri, 26 Apr 2024 13:58:03 +0000
+Received: by outflank-mailman (output) from mailman id 712822.1113689; Fri, 26 Apr 2024 14:01:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0M5T-0006fm-4O; Fri, 26 Apr 2024 13:58:03 +0000
-Received: by outflank-mailman (input) for mailman id 712813;
- Fri, 26 Apr 2024 13:58:01 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1s0M5R-0006fc-5e; Fri, 26 Apr 2024 13:58:01 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1s0M5R-00082i-2g; Fri, 26 Apr 2024 13:58:01 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1s0M5Q-0003qX-RL; Fri, 26 Apr 2024 13:58:00 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1s0M5Q-0004Wp-Qr; Fri, 26 Apr 2024 13:58:00 +0000
+	id 1s0M97-00005H-9T; Fri, 26 Apr 2024 14:01:49 +0000
+Received: by outflank-mailman (input) for mailman id 712822;
+ Fri, 26 Apr 2024 14:01:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=LIFE=L7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1s0M96-0008CS-Gg
+ for xen-devel@lists.xenproject.org; Fri, 26 Apr 2024 14:01:48 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 84ef6a17-03d5-11ef-b4bb-af5377834399;
+ Fri, 26 Apr 2024 16:01:46 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a5883518135so255336966b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Apr 2024 07:01:46 -0700 (PDT)
+Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ cd9-20020a170906b34900b00a5264576138sm10646714ejb.35.2024.04.26.07.01.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Apr 2024 07:01:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,89 +47,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=m99CPSHnBn70MGvTcVk95Y4sflQr74vGPu7BBmXJ7RI=; b=mFpSSfTmpA5iq37wMe4SyffRzB
-	bMf7lmCmhlsvnPVrFL05FTPhF5a/YYt09XsVaaxYkZ2wCFiai9Bgx1j9WBkTGOuXdW1SYYM79Bj+x
-	seSDAwDSUaDe7TzkBviaYfC/y81I3mjHi9dNL7HJXDVry0xm5b6U4O4Dmvig7VV34dKc=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-185812-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 84ef6a17-03d5-11ef-b4bb-af5377834399
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1714140106; x=1714744906; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xeM/RCPSV+ID4MLdicSmYmkIWjkyBfbsjTrcmvtyVG4=;
+        b=OZ4lOPhN3yh5GHIYkiK6Y69+hb2BKrIPvXPoVsbCPtYBY9XQj3Y5cH52UFB5WWbZhq
+         g/p27HExZbFEgZuF0oDzswg6cJZqOrUQvP0P66EFvneqiUSrlo87OgzPO/LF3shPx7SY
+         9mPw3rvy9hCuYh2JEnUrsrppbd4YWIZYYZoCg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1714140106; x=1714744906;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xeM/RCPSV+ID4MLdicSmYmkIWjkyBfbsjTrcmvtyVG4=;
+        b=c94Hpaw303vhxPXvYCJX05NuYjq7nU40XcLBq/nhCAikuEZBjFmxqe7fvEmaxJ29Jh
+         eSa8CLqg0YAukzdvQBrVW6yydZqjz0HGfOkZzpCtveEeQg73wXR5FhrWdxHzcQCANHGB
+         j8jxBCqeN/1wrKfWqQB7/D7JCyBCgs48ag5bDW/xMEH1v5H3pUABbSTCoDkYHBMdDXuF
+         4lXKdqdKXvAdgtpdBUIJbyJ/K2O3q5BywMq6tA5QyIctyRQ1qW4qPhagDw2NIBmIeTq4
+         ldGHL6FNvomKS3uCcfkBU8NO0gSP2yhE+oT+Pcdo07vQrP008fxFHVGYZSxTJAmfzVpk
+         FgrQ==
+X-Gm-Message-State: AOJu0Yy21GO2QqBNhst5u1ikkLtMmbX3tlj3PFKRY+nv3BOh2JCXLzgi
+	qOJdvam9/bc4C8G98CD0ZhneLumYaG6d/347tz5eREVMc8EhNt3ESmH78KPglytBbBEcC/6FbnQ
+	n
+X-Google-Smtp-Source: AGHT+IHXYzsYv7isaIpXd/H2FGGVqrIpSvN9UrZRbkeAhfvNg0Rod0Zj+Jbpr22V3Soh08zCR09Cng==
+X-Received: by 2002:a17:906:f748:b0:a55:b021:c0b1 with SMTP id jp8-20020a170906f74800b00a55b021c0b1mr2631322ejb.9.1714140105903;
+        Fri, 26 Apr 2024 07:01:45 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Daniel Smith <dpsmith@apertussolutions.com>,
+	Christopher Clark <christopher.w.clark@gmail.com>
+Subject: [PATCH 3/3] x86/boot: Refactor pvh_load_kernel() to have an initrd_len local
+Date: Fri, 26 Apr 2024 15:01:40 +0100
+Message-Id: <20240426140140.465506-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240426140140.465506-1-andrew.cooper3@citrix.com>
+References: <20240426140140.465506-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 185812: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=be5b08dd6ea6ef0f01caf537bdae125fa66a2230
-X-Osstest-Versions-That:
-    xen=232ee07c23b23fbbafbbf27e475dbbc5b27e4bbb
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 26 Apr 2024 13:58:00 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-flight 185812 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/185812/
+The expression get more complicated when ->mod_end isn't being abused as a
+size field.  Introduce and use a initrd_len local variable.
 
-Failures :-/ but no regressions.
+No functional change.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Daniel Smith <dpsmith@apertussolutions.com>
+CC: Christopher Clark <christopher.w.clark@gmail.com>
+---
+ xen/arch/x86/hvm/dom0_build.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-version targeted for testing:
- xen                  be5b08dd6ea6ef0f01caf537bdae125fa66a2230
-baseline version:
- xen                  232ee07c23b23fbbafbbf27e475dbbc5b27e4bbb
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index ac71d43a6b3f..b0cb96c3bc76 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -650,6 +650,7 @@ static int __init pvh_load_kernel(struct domain *d, const module_t *image,
+ {
+     void *image_start = image_base + image_headroom;
+     unsigned long image_len = image->mod_end;
++    unsigned long initrd_len = initrd ? initrd->mod_end : 0;
+     struct elf_binary elf;
+     struct elf_dom_parms parms;
+     paddr_t last_addr;
+@@ -710,7 +711,7 @@ static int __init pvh_load_kernel(struct domain *d, const module_t *image,
+      * simplify it.
+      */
+     last_addr = find_memory(d, &elf, sizeof(start_info) +
+-                            (initrd ? ROUNDUP(initrd->mod_end, PAGE_SIZE) +
++                            (initrd ? ROUNDUP(initrd_len, PAGE_SIZE) +
+                                       sizeof(mod)
+                                     : 0) +
+                             (cmdline ? ROUNDUP(strlen(cmdline) + 1,
+@@ -725,7 +726,7 @@ static int __init pvh_load_kernel(struct domain *d, const module_t *image,
+     if ( initrd != NULL )
+     {
+         rc = hvm_copy_to_guest_phys(last_addr, mfn_to_virt(initrd->mod_start),
+-                                    initrd->mod_end, v);
++                                    initrd_len, v);
+         if ( rc )
+         {
+             printk("Unable to copy initrd to guest\n");
+@@ -733,8 +734,8 @@ static int __init pvh_load_kernel(struct domain *d, const module_t *image,
+         }
+ 
+         mod.paddr = last_addr;
+-        mod.size = initrd->mod_end;
+-        last_addr += ROUNDUP(initrd->mod_end, elf_64bit(&elf) ? 8 : 4);
++        mod.size = initrd_len;
++        last_addr += ROUNDUP(initrd_len, elf_64bit(&elf) ? 8 : 4);
+         if ( initrd->string )
+         {
+             char *str = __va(initrd->string);
+-- 
+2.30.2
 
-Last test of basis   185801  2024-04-25 21:02:05 Z    0 days
-Testing same since   185812  2024-04-26 11:01:45 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Anthony PERARD <anthony.perard@citrix.com>
-  Daniel P. Smith <dpsmith@apertussolutions.com>
-  Jan Beulich <jbeulich@suse.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stewart Hildebrand <stewart.hildebrand@amd.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   232ee07c23..be5b08dd6e  be5b08dd6ea6ef0f01caf537bdae125fa66a2230 -> smoke
 
