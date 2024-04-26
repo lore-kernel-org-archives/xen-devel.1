@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81EACC25B5F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 17:55:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.712995.1113935 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 323C8C4345F
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2024 17:55:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.713000.1113985 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0Pn4-00050Q-9S; Fri, 26 Apr 2024 17:55:18 +0000
+	id 1s0PnK-0006hH-VW; Fri, 26 Apr 2024 17:55:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 712995.1113935; Fri, 26 Apr 2024 17:55:18 +0000
+Received: by outflank-mailman (output) from mailman id 713000.1113985; Fri, 26 Apr 2024 17:55:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s0Pn4-00050J-6L; Fri, 26 Apr 2024 17:55:18 +0000
-Received: by outflank-mailman (input) for mailman id 712995;
- Fri, 26 Apr 2024 17:55:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s0PnK-0006h0-R0; Fri, 26 Apr 2024 17:55:34 +0000
+Received: by outflank-mailman (input) for mailman id 713000;
+ Fri, 26 Apr 2024 17:55:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/r3b=L7=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1s0Pn3-0004Xj-1L
- for xen-devel@lists.xenproject.org; Fri, 26 Apr 2024 17:55:17 +0000
-Received: from wfhigh5-smtp.messagingengine.com
- (wfhigh5-smtp.messagingengine.com [64.147.123.156])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 22cd8763-03f6-11ef-909a-e314d9c70b13;
- Fri, 26 Apr 2024 19:55:16 +0200 (CEST)
+ id 1s0PnJ-0005IL-1C
+ for xen-devel@lists.xenproject.org; Fri, 26 Apr 2024 17:55:33 +0000
+Received: from wfout3-smtp.messagingengine.com
+ (wfout3-smtp.messagingengine.com [64.147.123.146])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2b343baf-03f6-11ef-b4bb-af5377834399;
+ Fri, 26 Apr 2024 19:55:31 +0200 (CEST)
 Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfhigh.west.internal (Postfix) with ESMTP id 6107A1800120;
- Fri, 26 Apr 2024 13:55:14 -0400 (EDT)
+ by mailfout.west.internal (Postfix) with ESMTP id 3E7111C0019D;
+ Fri, 26 Apr 2024 13:55:28 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Fri, 26 Apr 2024 13:55:14 -0400
+ by compute2.internal (MEProxy); Fri, 26 Apr 2024 13:55:28 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 26 Apr 2024 13:55:12 -0400 (EDT)
+ 26 Apr 2024 13:55:26 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,136 +46,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22cd8763-03f6-11ef-909a-e314d9c70b13
+X-Inumbo-ID: 2b343baf-03f6-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1714154113; x=1714240513; bh=honjTb6abt
-	tQjuzNiX/lJMZfyWZ6V6USbB6qxEtNQxA=; b=ji60msnEKEfXtuFeFuu4U4C+4j
-	HTwVTgFU+Afx133SGtZNHGazKsnVf0u1AUR3w1B+of3PJEN9eGdmXPLc/zbqsqGv
-	gCvY7fjSoMyLZq1i7PDW+9N000KRW++R/m3c2AP1bGnHTGXhXl7SqxpBgzTFXe/+
-	hUA2qiYGBOBU8bgJLM1q0Uk/jiEwoIUS0x+mABxmemxjcnQZ+lmTiA6woFBuWzLL
-	83qlcFcP3f69mk3ljYtnZvi7wrXDsgj5HeexfHuGUkoPmJWGMchdHZe4GnMTy94I
-	v0t0f4OJfEzvbJr7K93lnmCE04G6KTr5CpHXcGBir1YWX6VtBaiVnOmUcwRA==
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to; s=fm3; t=1714154127; x=1714240527; bh=kqv3XxPnwBq6tyJeE7l4A
+	gxpNVKGtZJ7FW7pxlbH88o=; b=wKCwcpVAZvyu4pg/zrW3j5/5MjojIED1bThbZ
+	7YlEM0+JSrEe3qV7dFe81VQVNUwb8ZKbKQ4s10DfGz/uq7NUSFrC0Q2+2AWdzztw
+	PBVjQXfAEYq0q268DARHej5DmxBJTl9/sP02hFog2YIp6C88iYAXErLX4WvLTKW5
+	ufGgsx4nwPujWqS6xPm4HV5tXMyNCwZyPRJE1/NvwQuBGk8v2ktzPGyWAcp2M4FG
+	EydCiMI/7VoYLuiHjNdIiFs0bWGIF4C2duTjoijvEajrfV/5UurCcPXx1ugC2Fw+
+	GGHKAEvP6rCoNwlZXNktV/cTEa8xnjAwr+VKXIHXaX4AccAcw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1714154113; x=
-	1714240513; bh=honjTb6abttQjuzNiX/lJMZfyWZ6V6USbB6qxEtNQxA=; b=B
-	xO8B9qNEStbq4S0dLaDT7ls3zo5cUAFKYLDrfzK5G0gOcDgBwn8fVgB2aRkbIhCT
-	HGHifMGjoKa5wjIGT56Oq5384+rFDfkALqGGdFJaVjM2O4qreyrZRWBa7nCsOwNp
-	v8oF/36mJ1XprsUWxg0/QDDiY64TBqhGVJfPaT/GJhFRnqLTB77pPgMK41+ocI7N
-	VmmjMx/tLYfdSIMFXi/zX+78ayIveTgk4J59vdda9IlXlD27vUgsdnf7BPiabC5h
-	UkSvle246P+4caaIRczwohFcrHG7RZO5XrCvTN840xY0mm+bV7GVkp8dsKoiuYjk
-	xzu5CJju+wyufBksSMzCw==
-X-ME-Sender: <xms:georZqnqSLeLLSnKhNz8mVxmILp2iRqzsq1GFTTxasjRypdNdW7aCg>
-    <xme:georZh3cobb_PPpKJQ-rqKTCoT2IbNCb1r2Zfc6msl3vH2OYEqEMeE0TsJ9TARliq
-    kO0RI-O8apSYg>
-X-ME-Received: <xmr:georZooeyTbpV8v2b7m8S_4yTQgm4B6pPQ6KmtY-RCR232G5Z6nG8b9Q4Q2mww87_sMVUyTrqbNTVHnhTpBkw7Y3iLew0wXgKP9HgUqxaq1p5YD5rxw>
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1714154127; x=
+	1714240527; bh=kqv3XxPnwBq6tyJeE7l4AgxpNVKGtZJ7FW7pxlbH88o=; b=P
+	ve7k2xM9Qj1ZrR6uUb2WyfVSY5KpAEnsKA8cAsLsrYgOmB9svO+dULd4/YyJSDXo
+	QTQhaRR725DJaNs8wyAOxwT6d5ENpVeScTx41lt3ksNT6ROijyG1YF7/XfRqcgBq
+	hUWBwzsEpfBwaskAS2xbxSefNVHyRgu5pVZ/wWdW29YkqHTlRR08aVX7pIEybWJf
+	D+3EXXfGUP1OAlejfNE1Lf62zBe9xqnhihtbIUNhR9Ka81PceyInIVBNMCliEb4/
+	lbbZpfZu2W7MQUGDscsUgWE1f0DZewL6JBDTTzIpYPrf9Hyg5Pq9bIN4NP9gzKgN
+	abL6H6fA8ss/Q8m1nNaLw==
+X-ME-Sender: <xms:j-orZmfIbjO1sujNcl8iCQTDKaMR6AjM2BMYVyy_tnAR9vtlBwWpsg>
+    <xme:j-orZgP6Ice9x-_2NEodSHtyWRX8LsearozX5H0OLNiSvtpfsgIxbhgYVbi3Chxxc
+    aWDj2h-XBaXkA>
+X-ME-Received: <xmr:j-orZnh9OlwPsdAXWhr6X9zB0D0fSq-RTjKjUhD6iZRTuOCm6LABOsE6qcBpBZ8acu-C0Y2RfABSXV8x8VyEWz_A8nYmfRedVSKX5vZi2RnLRvYpT7A>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudelledguddulecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgr
-    rhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghkse
-    hinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhep
-    gfeuudehgfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuve
-    hluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghr
-    vghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:georZuloLR31hb5ruSBs4OXx7UsmpPbJmf3MCECNE42uYmyb4o_TYg>
-    <xmx:georZo3FpjmahsHeOO-EChMuskGLXNj27IhityXlmbd0I8V7LjTSnw>
-    <xmx:georZltnYUYl3W2ViFczZ1A1Xh4ASdADQ4Fsx_Cr-nLYm1G-r5fXwA>
-    <xmx:georZkVV1h5pSYUBehpYDjxh6kDcnvVEcjuwZnIjVW1dtCiwjZHc_g>
-    <xmx:georZrRngZu9gD2EoWoO73tzrUw0-VX8SQlTIbgoNzQ2cZTky3nZOYly>
+    enucfjughrpefhvfevufffkffojghfggfgsedtkeertdertdejnecuhfhrohhmpeforghr
+    vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
+    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeeu
+    teehgfeiheehfedtueeludfhgfeileeujefhgffgieeiveethfeffffffedtheenucffoh
+    hmrghinhepghhithhlrggsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
+    rghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhngh
+    hslhgrsgdrtghomh
+X-ME-Proxy: <xmx:j-orZj-oJNEXsBY9GsNo1_2zqGLOXa7L8i_yCJBpahMwWelDgnNjmA>
+    <xmx:j-orZisBHPRvd2hZPBhhBuZEp0Qa1g02-7Ly9t1c7ZSwSQwL1L3KSQ>
+    <xmx:j-orZqG9g_cCQHo7pEjNrVGv5irgONQ2skceRDtsEWv3_3lZxl38_g>
+    <xmx:j-orZhP1f6CVGspMaM9f1Tf_DFkJ9x48-EVOsx8v_6I-SxwhgHQ73w>
+    <xmx:j-orZmLWrwfJ3qml84zuSaty43HNXnOODFaiUVPT6h7RnsxVASx8kFiz>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v6 2/7] x86/msi: Extend per-domain/device warning mechanism
-Date: Fri, 26 Apr 2024 19:53:59 +0200
-Message-ID: <46f33e8ae1aa7d310e7a99e9da29d29096b0935b.1714154036.git-series.marmarek@invisiblethingslab.com>
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 7/7] [DO NOT APPLY] switch to alternative artifact repo
+Date: Fri, 26 Apr 2024 19:54:04 +0200
+Message-ID: <4634c2b7d08997b38521f0fa82e37a4fca0d6e2c.1714154036.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <cover.3491f479d5b6238106af8ddc56ec6834090b330f.1714154036.git-series.marmarek@invisiblethingslab.com>
 References: <cover.3491f479d5b6238106af8ddc56ec6834090b330f.1714154036.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The arch_msix struct had a single "warned" field with a domid for which
-warning was issued. Upcoming patch will need similar mechanism for few
-more warnings, so change it to save a bit field of issued warnings.
-
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+For testing, switch to my containers registry that includes containers
+rebuilt with changes in this series.
 ---
-Changes in v6:
-- add MSIX_CHECK_WARN macro (Jan)
-- drop struct name from warned_kind union (Jan)
+ automation/gitlab-ci/build.yaml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-New in v5
----
- xen/arch/x86/include/asm/msi.h | 17 ++++++++++++++++-
- xen/arch/x86/msi.c             |  5 +----
- 2 files changed, 17 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
-index 997ccb87be0c..bcfdfd35345d 100644
---- a/xen/arch/x86/include/asm/msi.h
-+++ b/xen/arch/x86/include/asm/msi.h
-@@ -208,6 +208,15 @@ struct msg_address {
-                                        PCI_MSIX_ENTRY_SIZE + \
-                                        (~PCI_MSIX_BIRMASK & (PAGE_SIZE - 1)))
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index aac29ee13ab6..6957f06016b7 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -320,7 +320,7 @@ qemu-system-ppc64-8.1.0-ppc64-export:
  
-+#define MSIX_CHECK_WARN(msix, domid, which) ({ \
-+    if ( (msix)->warned_domid != (domid) ) \
-+    { \
-+        (msix)->warned_domid = (domid); \
-+        (msix)->warned_kind.all = 0; \
-+    } \
-+    (msix)->warned_kind.which ? false : ((msix)->warned_kind.which = true); \
-+})
-+
- struct arch_msix {
-     unsigned int nr_entries, used_entries;
-     struct {
-@@ -217,7 +226,13 @@ struct arch_msix {
-     int table_idx[MAX_MSIX_TABLE_PAGES];
-     spinlock_t table_lock;
-     bool host_maskall, guest_maskall;
--    domid_t warned;
-+    domid_t warned_domid;
-+    union {
-+        uint8_t all;
-+        struct {
-+            bool maskall                   : 1;
-+        };
-+    } warned_kind;
- };
+ alpine-3.18-rootfs-export:
+   extends: .test-jobs-artifact-common
+-  image: registry.gitlab.com/xen-project/xen/tests-artifacts/alpine:3.18
++  image: registry.gitlab.com/xen-project/people/marmarek/xen/tests-artifacts/alpine:3.18
+   script:
+     - mkdir binaries && cp /initrd.tar.gz binaries/initrd.tar.gz
+   artifacts:
+@@ -331,7 +331,7 @@ alpine-3.18-rootfs-export:
  
- void early_msi_init(void);
-diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-index e721aaf5c001..42c793426da3 100644
---- a/xen/arch/x86/msi.c
-+++ b/xen/arch/x86/msi.c
-@@ -364,13 +364,10 @@ static bool msi_set_mask_bit(struct irq_desc *desc, bool host, bool guest)
-             domid_t domid = pdev->domain->domain_id;
- 
-             maskall = true;
--            if ( pdev->msix->warned != domid )
--            {
--                pdev->msix->warned = domid;
-+            if ( MSIX_CHECK_WARN(pdev->msix, domid, maskall) )
-                 printk(XENLOG_G_WARNING
-                        "cannot mask IRQ %d: masking MSI-X on Dom%d's %pp\n",
-                        desc->irq, domid, &pdev->sbdf);
--            }
-         }
-         pdev->msix->host_maskall = maskall;
-         if ( maskall || pdev->msix->guest_maskall )
+ kernel-6.1.19-export:
+   extends: .test-jobs-artifact-common
+-  image: registry.gitlab.com/xen-project/xen/tests-artifacts/kernel:6.1.19
++  image: registry.gitlab.com/xen-project/people/marmarek/xen/tests-artifacts/kernel:6.1.19
+   script:
+     - mkdir binaries && cp /bzImage binaries/bzImage
+   artifacts:
 -- 
 git-series 0.9.1
 
