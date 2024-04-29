@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E838C4345F
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:08:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714173.1115251 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF456C4345F
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:16:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714188.1115292 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1Sbd-0004Db-A2; Mon, 29 Apr 2024 15:07:49 +0000
+	id 1s1Sk5-0007HB-UF; Mon, 29 Apr 2024 15:16:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714173.1115251; Mon, 29 Apr 2024 15:07:49 +0000
+Received: by outflank-mailman (output) from mailman id 714188.1115292; Mon, 29 Apr 2024 15:16:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1Sbd-0004DU-7D; Mon, 29 Apr 2024 15:07:49 +0000
-Received: by outflank-mailman (input) for mailman id 714173;
- Mon, 29 Apr 2024 15:07:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=GJEf=MC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1s1Sbb-0004DO-Nh
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:07:47 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3cba1147-063a-11ef-909b-e314d9c70b13;
- Mon, 29 Apr 2024 17:07:47 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-41c011bb920so8703335e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:07:47 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- f17-20020a05600c155100b00418db9e4228sm42113471wmg.29.2024.04.29.08.07.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 29 Apr 2024 08:07:46 -0700 (PDT)
+	id 1s1Sk5-0007H0-R3; Mon, 29 Apr 2024 15:16:33 +0000
+Received: by outflank-mailman (input) for mailman id 714188;
+ Mon, 29 Apr 2024 15:16:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=yZQG=MC=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1s1Sk4-0006fc-Bd
+ for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:16:32 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 74fb9fe8-063b-11ef-b4bb-af5377834399;
+ Mon, 29 Apr 2024 17:16:30 +0200 (CEST)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-516ef30b16eso5113272e87.3
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:16:30 -0700 (PDT)
+Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ ah2-20020a1709069ac200b00a4e393b6349sm13898875ejc.5.2024.04.29.08.16.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Apr 2024 08:16:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,101 +47,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3cba1147-063a-11ef-909b-e314d9c70b13
+X-Inumbo-ID: 74fb9fe8-063b-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1714403266; x=1715008066; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=jp1wjCZsoGW2i8AskWs1lRsZ+I+xsoDVAKn5OjIpaD0=;
-        b=bGeYZ19+9f+rqyU4VVHZQc1gkkjfadXu653oaMAPetNl9t4bquQVCgOxYDn3cu37fj
-         La99rI9hIl5lpWAFuam9wr7XfqbkaipjPV74FGBEuq2oVl2UuctVguY2V/RFvL5Kae1P
-         XCTFpD9/MIgiewzCf7xadvaQrkaTU8aofQxjfrK9ZJLQVCFYV10/wnlK/CGpwZA22wnI
-         imPaftAvW7OXvE4vTG8VAqfYafyGKkkr/nJ9u6uFZz4wG/zFHerr7cJx1aLUGQUeXHgR
-         oqk/vxyN0NU/49eeadzGkYhZtVdmq87HsYxqHoEg4OG0ghXiFI1JY7YnwoUUtrM0LiRz
-         E1YQ==
+        d=citrix.com; s=google; t=1714403790; x=1715008590; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=q95oo9lBt9umv6UIN2GoLMgj9CrXSSoAkZ3vrRjbn0Q=;
+        b=ZrbR+r8322d6a/9AcS7erXXS7v9++Ah67eWrtTtPXg88GW9krJFD60gi63DDXRQySc
+         zXZGfaidRN7IUWVzo54TI3z44TAPOS4/RR5qM6+NmNsIHOaNnT0XFodlw/xvoN2+ufOn
+         1sQps2UTikfau77fUBHzqxKIP2IjftR7mx+iM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714403266; x=1715008066;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=jp1wjCZsoGW2i8AskWs1lRsZ+I+xsoDVAKn5OjIpaD0=;
-        b=KmZCqZGBi49Tli/1wFCIwfBndCsxglzBulklzr/NYIzdd4dbfsYDsv7exoSe6L+uxX
-         C58WQiY1qBiOp+0TMSGw6zd7QyMxGTRTj4caJhJANTJ6j+JbSmCptKVYRcOWMT/aPJPH
-         lQgobxVnKhhOZFiL81zmJFhYFhyQG9813nZsr+YN09HqtuK7hRpmkT5tP6deRN2+DGTz
-         oBqiWn0oNsYijemkBScaknc4w8EOs67jlDK6l5kekyF/KUwsX3aJeEcTcesm3U/XoOM1
-         pZyfmt7+vA/bxoR6PnFHXgj0BogYcUEOZM4/2eC5eLNAWpS4aFbS2lShpXL+mUOeW1W6
-         g0tA==
-X-Forwarded-Encrypted: i=1; AJvYcCVvSTKlx3WjURtzoOXdWBsMEG2C06LFpkKqxOpufTH6SDadDwLMQE6meZwJdIv9J3O3T2Z5H6N1GsHSN2tSv13XvedQOs1VxYp7DOrho5Q=
-X-Gm-Message-State: AOJu0Yz256xddm6q1ItXvjfML7RYQsBvC9izmf9Yqm4kUbnVh76bVpsu
-	kk0/fB3Mxy8raxKiPJH4N1WRoJ49zIqY1jAMbQI4vxFUJNMCMnwp4mtqyPPmjMl/OIqZn/TW2w8
-	=
-X-Google-Smtp-Source: AGHT+IGk2YAudYVlFywViJc1Fa0PKeDCDleUIp1dsAVp2XjeXsEseyH34pupjPWsNEiUkL5BKx8bsw==
-X-Received: by 2002:a05:600c:1395:b0:41b:d6ca:eefa with SMTP id u21-20020a05600c139500b0041bd6caeefamr5439259wmf.16.1714403266455;
-        Mon, 29 Apr 2024 08:07:46 -0700 (PDT)
-Message-ID: <49e4079e-e878-42d3-a1ec-033e7c0e2c6f@suse.com>
-Date: Mon, 29 Apr 2024 17:07:45 +0200
+        d=1e100.net; s=20230601; t=1714403790; x=1715008590;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=q95oo9lBt9umv6UIN2GoLMgj9CrXSSoAkZ3vrRjbn0Q=;
+        b=J0PvOeh/7hVsu/GRtc+t2rUS8Pa9HudNDStokMkhegCaOWoft7FnyaCt352Pt4LcM6
+         37U6u4XYLxWcyzb26h0DlOjRb5j+RXpdbWo6PLC8bVHWgwuQu3II0iXkwTCq24QpK1Wz
+         95O9MsHNwQgBvn50DGQE5SBiH0HGC9owkdPGXltzVAukQU1NqNNPg16CZTkfxkI4S97G
+         KYkPi2YoE19hAG6UmlLK7oAaYGlfXicDGPHWv6HsObJCoZLwVILECVckvm9x7jxQRbFO
+         uQ0VNhxi4X/3EszUF73IoeHSzYkCpr3SsH8X+EGJovVZ3MjtZ3OtrxOxg9wjDWG19bHW
+         JDcg==
+X-Gm-Message-State: AOJu0Yy3GukEZfjxeVRGQbPIFHlxVsGzcYbn4dpwbnhb0NkZT4X/Shn0
+	JJ1QxbqiUcgLW1SDXfuoluZXsWS4hYsMY95mmGli0XYlHoDmo2eMLFCYXwkoa10yFUZpHHz28IW
+	m
+X-Google-Smtp-Source: AGHT+IE8bbG1hHbsIx2V67uagxcMqS9yaZeds9wNUKKmIUDWYfrx93281JtK4elkGLWgJ5M+fZKO1g==
+X-Received: by 2002:a05:6512:3102:b0:51d:2c37:6c15 with SMTP id n2-20020a056512310200b0051d2c376c15mr4241227lfb.8.1714403790030;
+        Mon, 29 Apr 2024 08:16:30 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+	Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Andrei Semenov <andrei.semenov@vates.fr>,
+	Vaishali Thakkar <vaishali.thakkar@vates.tech>
+Subject: [PATCH 3/5] x86/spec-ctrl: Remove open-coded check of SVM_FEATURE_SPEC_CTRL
+Date: Mon, 29 Apr 2024 16:16:23 +0100
+Message-Id: <20240429151625.977884-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240429151625.977884-1-andrew.cooper3@citrix.com>
+References: <20240429151625.977884-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 6/8] gzip: move output buffer into gunzip state
-Content-Language: en-US
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Cc: Jason Andryuk <jason.andryuk@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20240424163422.23276-1-dpsmith@apertussolutions.com>
- <20240424163422.23276-7-dpsmith@apertussolutions.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240424163422.23276-7-dpsmith@apertussolutions.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 24.04.2024 18:34, Daniel P. Smith wrote:
-> --- a/xen/common/gzip/gunzip.c
-> +++ b/xen/common/gzip/gunzip.c
-> @@ -15,6 +15,8 @@ struct gunzip_state {
->      size_t insize;
->      /* Index of next byte to be processed in inbuf: */
->      unsigned int inptr;
-> +
-> +    unsigned long bytes_out;
->  };
+Now that the SVM feature leaf has been included in normal feature handling, it
+is available early enough for init_speculation_mitigations() to use.
 
-The conversion to unsigned long from ...
+No functional change.
 
-> @@ -42,7 +44,6 @@ typedef unsigned long   ulg;
->  #  define Tracecv(c, x)
->  #endif
->  
-> -static long __initdata bytes_out;
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Xenia Ragiadakou <xenia.ragiadakou@amd.com>
+CC: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+CC: George Dunlap <george.dunlap@citrix.com>
+CC: Andrei Semenov <andrei.semenov@vates.fr>
+CC: Vaishali Thakkar <vaishali.thakkar@vates.tech>
+---
+ xen/arch/x86/include/asm/cpufeature.h | 3 +++
+ xen/arch/x86/spec_ctrl.c              | 7 +------
+ 2 files changed, 4 insertions(+), 6 deletions(-)
 
-... this originally wants justifying in the (then no longer empty) description.
-It's not a lot that needs saying, but such a type change cannot go entirely
-silently.
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index 9bc553681f4a..77cfd900cb56 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -217,6 +217,9 @@ static inline bool boot_cpu_has(unsigned int feat)
+ #define cpu_has_rfds_no         boot_cpu_has(X86_FEATURE_RFDS_NO)
+ #define cpu_has_rfds_clear      boot_cpu_has(X86_FEATURE_RFDS_CLEAR)
+ 
++/* CPUID level 0x8000000a.edx */
++#define cpu_has_v_spec_ctrl     boot_cpu_has(X86_FEATURE_V_SPEC_CTRL)
++
+ /* Synthesized. */
+ #define cpu_has_arch_perfmon    boot_cpu_has(X86_FEATURE_ARCH_PERFMON)
+ #define cpu_has_cpuid_faulting  boot_cpu_has(X86_FEATURE_CPUID_FAULTING)
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 40f6ae017010..0bda9d01def5 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -11,7 +11,6 @@
+ #include <xen/warning.h>
+ 
+ #include <asm/amd.h>
+-#include <asm/hvm/svm/svm.h>
+ #include <asm/intel-family.h>
+ #include <asm/microcode.h>
+ #include <asm/msr.h>
+@@ -1896,12 +1895,8 @@ void __init init_speculation_mitigations(void)
+          *
+          * No need for SCF_ist_sc_msr because Xen's value is restored
+          * atomically WRT NMIs in the VMExit path.
+-         *
+-         * TODO: Adjust cpu_has_svm_spec_ctrl to be usable earlier on boot.
+          */
+-        if ( opt_msr_sc_hvm &&
+-             (boot_cpu_data.extended_cpuid_level >= 0x8000000aU) &&
+-             (cpuid_edx(0x8000000aU) & (1u << SVM_FEATURE_SPEC_CTRL)) )
++        if ( opt_msr_sc_hvm && cpu_has_v_spec_ctrl )
+             setup_force_cpu_cap(X86_FEATURE_SC_MSR_HVM);
+     }
+ 
+-- 
+2.30.2
 
-Jan
 
