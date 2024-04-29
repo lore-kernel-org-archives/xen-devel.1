@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC36C19F53
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:00:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714124.1115142 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 833F9C4345F
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:00:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714128.1115181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUi-00062G-M6; Mon, 29 Apr 2024 15:00:40 +0000
+	id 1s1SUr-00075K-PU; Mon, 29 Apr 2024 15:00:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714124.1115142; Mon, 29 Apr 2024 15:00:40 +0000
+Received: by outflank-mailman (output) from mailman id 714128.1115181; Mon, 29 Apr 2024 15:00:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUi-000629-JC; Mon, 29 Apr 2024 15:00:40 +0000
-Received: by outflank-mailman (input) for mailman id 714124;
- Mon, 29 Apr 2024 15:00:38 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s1SUr-00075D-Ly; Mon, 29 Apr 2024 15:00:49 +0000
+Received: by outflank-mailman (input) for mailman id 714128;
+ Mon, 29 Apr 2024 15:00:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hXAa=MC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s1SUg-00061u-OO
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:38 +0000
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [2607:f8b0:4864:20::e2f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3c9cb86d-0639-11ef-909b-e314d9c70b13;
- Mon, 29 Apr 2024 17:00:37 +0200 (CEST)
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-47c5bf7aadaso172935137.0
- for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:37 -0700 (PDT)
+ id 1s1SUp-0006Ve-OF
+ for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:47 +0000
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [2607:f8b0:4864:20::72d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 41a33aa5-0639-11ef-b4bb-af5377834399;
+ Mon, 29 Apr 2024 17:00:46 +0200 (CEST)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-79100a90868so29299685a.2
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:46 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- pp6-20020a056214138600b006a0d7154d13sm325965qvb.78.2024.04.29.08.00.34
+ sq18-20020a05620a4ad200b0078d5f7b9a2dsm10320819qkn.15.2024.04.29.08.00.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 08:00:34 -0700 (PDT)
+ Mon, 29 Apr 2024 08:00:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,83 +46,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c9cb86d-0639-11ef-909b-e314d9c70b13
+X-Inumbo-ID: 41a33aa5-0639-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714402836; x=1715007636; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XLDb+cZAz3TcRuYrTZgK4SE4NsryhjwmSdkiv3ZqfqQ=;
-        b=Ag+qyr0E8zt5twJKiFcWebLkG2CAsJeEZ7x3Pa4DCAIB3gx/tqNhlQhgtNGFILbzwR
-         gdEdV4663ytYnJvlGWrj9p8324ZTqDERqdFaS+SRGzUrkj+otoGyp40Dr9LoQn5PouNN
-         +Mo3paWqQLzPwGQHMRNeJ4+g1z42L+Z7thcBs=
+        d=citrix.com; s=google; t=1714402845; x=1715007645; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TeOl9O7LDZ2iZGM+JQTgtPA8a4JFNTC4N89WNpXHObE=;
+        b=AbX4Z1ySumGuZa8+qCmNrsXjCpHAlnA1/CDpcPoOjauCw+5v7kyIV52gXIfPHGfw9O
+         ojMIAyZasCHDzKf/QwjlXILlRgXSONSlf6g9EmmmUUpj00qiwcpWRFLUAkHjzzE2w5j+
+         PS5ACDHCoyZ04aD5Lkcuyg432mosTkTwkLgKQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714402836; x=1715007636;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XLDb+cZAz3TcRuYrTZgK4SE4NsryhjwmSdkiv3ZqfqQ=;
-        b=UTcw6utCZm0fr6KJQbrtI3Mw5OCJhHmYOWvOe2mNItjW1pBkJFw+fR57mW+Q6/Zd/S
-         VNfG8TbbGV5h4c2GsPB4U+42w9kj41p1dLoyIcK67/khdd+QCqqzTgAMXeJTCES0YG0R
-         nHUFYof3GLs7KB2Uo7qz+Kpl1gyxQ7OlmTD1hJl9ncZ7rdgnItktxVYhWoa4T+VY6kR8
-         mWenZK5kphp56aH0PouXm4Yz1kx7XT6SGuo4DdbF97bW9tCwsBTdWXzxXhIMgXXsmhB/
-         0JRH0b/HDUFZ3QmK7ZhRKH/YbgP6r8CoELFMDjqNJjnfSyWcdLPESpRoPDH4NTTBPXtR
-         pHHw==
-X-Gm-Message-State: AOJu0YxNg3gqYzbxCAAkTrR1p4UpGpVPZZfBp9MwNbQEYp04as3fczof
-	BF6eeZgRsIwP+NVSfq6OrdUOfqFPRwWTaNJVIMtlLWCxFPbMTm5I2+MPgRqMvaCHFkBNL+MCCV1
-	p
-X-Google-Smtp-Source: AGHT+IHSjOxOUkY89xDRJ34eGL8emqQ/UrLXNEvOMzFU34RV81b1VlUMQdzmYP5S5GZ5YmI3NC3BlA==
-X-Received: by 2002:a67:fb51:0:b0:47b:f690:c8fc with SMTP id e17-20020a67fb51000000b0047bf690c8fcmr8549vsr.11.1714402834778;
-        Mon, 29 Apr 2024 08:00:34 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1714402845; x=1715007645;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=TeOl9O7LDZ2iZGM+JQTgtPA8a4JFNTC4N89WNpXHObE=;
+        b=UUYHOcYT6SR2J4mAazNsJW0z9IN8OYt3fD5ZUn/v7Ei1dpDNZp+TtkbwdO+bqlkdeY
+         +CfHkYNVnFAAk0l0dQrXoyOirJ/F/69LSkUaP38HuYclhi2cm8WRdv7Y5LkgItOmA651
+         f0imXalOvMXWw4FX92Chv43/RMAnE8YeLXGSD50M/zxlAFzDI7YcdGPBVMpNnevmDU/k
+         S6ldTgB8sxOCqUDAtFJAUZDnawRpL7Q1j2NyYU4Dw9BMnIxbRcC1nNEEzyK16tx10xUX
+         MDQSEZyn22hj91QJbDWb9enjPOUVMMITyq1qKIMoAOonOSCjOXksxC51lbuymuT4Vn0e
+         awsQ==
+X-Gm-Message-State: AOJu0YzTivCrEpapfnUZEjHszPX1y71lvFvrrQxGu3e1AWopAi85VaC+
+	zlaSAZJzUF/wcMsGusOtCU1mmnlKdoftCz2fiuJZVNb6D0CCvm3Wni8CcRpsXqDjWgugU2ooBH8
+	w
+X-Google-Smtp-Source: AGHT+IEQTaracmximP7j2sbFjK4X6UAk8BGjawiXJbZvQU35r2lCSidN0qLlCOK94Lpv7HSFuOQ2FA==
+X-Received: by 2002:a05:620a:414b:b0:790:c677:545d with SMTP id k11-20020a05620a414b00b00790c677545dmr8130046qko.68.1714402844493;
+        Mon, 29 Apr 2024 08:00:44 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: konrad.wilk@oracle.com,
 	ross.lagerwall@citrix.com,
 	Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 0/9] livepatch-build-tools: some bug fixes and improvements
-Date: Mon, 29 Apr 2024 16:56:45 +0200
-Message-ID: <20240429145654.71669-1-roger.pau@citrix.com>
+Subject: [PATCH 4/9] create-diff-object: document kpatch_regenerate_special_section() behavior
+Date: Mon, 29 Apr 2024 16:56:49 +0200
+Message-ID: <20240429145654.71669-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240429145654.71669-1-roger.pau@citrix.com>
+References: <20240429145654.71669-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+The purpose of kpatch_regenerate_special_section() is fairly opaque without
+spending a good amount of time and having quite a lot of knowledge about what
+the special sections contains.
 
-The first 3 patches in the series attempt to fix some bugs, I don't
-think they will be specially controversial or difficult to review (patch
-1 was already posted standalone).
+Introduce some comments in order to give context and describe the expected
+functionality.
 
-The rest of the patches are more convoluted, as they attempt to solve
-some shortcomings when attempting to create livepatches that change
-alternatives or exceptions.  For example a patch that only changes
-content in alternative blocks (the code that ends up in the
-.altinstr_replacement section) won't work, as create-diff-object will
-report that there are no changes.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ create-diff-object.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
-I've attempted to test as many corner cases as I could come up with, but
-it's hard to figure all the possible changes, plus it's also fairly easy
-to inadvertently regress existing functionality.
-
-Thanks, Roger.
-
-Roger Pau Monne (9):
-  livepatch-build-tools: allow patch file name sizes up to 127
-    characters
-  create-diff-object: update default alt_instr size
-  livepatch-build: fix detection of structure sizes
-  create-diff-object: document kpatch_regenerate_special_section()
-    behavior
-  create-diff-object: move kpatch_include_symbol()
-  create-diff-object: detect changes in .altinstr_replacement and .fixup
-    sections
-  create-diff-object: don't account for changes to .bug_frame.? sections
-  create-diff-object: account for changes in the special section itself
-  create-diff-object: account for special section changes
-
- create-diff-object.c | 196 +++++++++++++++++++++++++++++++++----------
- livepatch-build      |  12 ++-
- 2 files changed, 161 insertions(+), 47 deletions(-)
-
+diff --git a/create-diff-object.c b/create-diff-object.c
+index d8a2afbf2774..6a751bf3b789 100644
+--- a/create-diff-object.c
++++ b/create-diff-object.c
+@@ -1210,6 +1210,12 @@ static void kpatch_regenerate_special_section(struct kpatch_elf *kelf,
+ 
+ 	src_offset = 0;
+ 	dest_offset = 0;
++
++	/*
++	 * Special sections processed here are array objects, hence in order to
++	 * detect whether a special section needs processing attempt to get the
++	 * element size.  Returning a size of 0 means no processing required.
++	 */
+ 	group_size = special->group_size(kelf, src_offset);
+ 	if (group_size == 0) {
+ 		log_normal("Skipping regeneration of a special section: %s\n",
+@@ -1246,6 +1252,33 @@ static void kpatch_regenerate_special_section(struct kpatch_elf *kelf,
+ 		if (src_offset + group_size > sec->base->sh.sh_size)
+ 			group_size = sec->base->sh.sh_size - src_offset;
+ 
++		/*
++		 * Special sections handled perform a bunch of different tasks,
++		 * but they all have something in common: they are array like
++		 * sections that reference functions in the object file being
++		 * processed.
++		 *
++		 * .bug_frames.* relocations reference the symbol (plus offset)
++		 * where the exception is triggered from.
++		 *
++		 * .altinstructions relocations contain references to
++		 * coordinates where the alternatives are to be applied, plus
++		 * coordinates that point to the replacement code in
++		 * .altinstr_replacement.
++		 *
++		 * .ex_table relocations contain references to the coordinates
++		 * where the fixup code should be executed, plus relocation
++		 * coordinates that point to the text code to execte living in
++		 * the .fixup section.
++		 *
++		 * .livepatch.hooks.* relocations point to the hook
++		 * functions.
++		 *
++		 * Such dependencies allow to make a decision on whether an
++		 * element in the array needs including in the livepatch: if
++		 * the symbol pointed by the relocation is new or has changed
++		 * the array element needs including.
++		 */
+ 		include = should_keep_rela_group(sec, src_offset, group_size);
+ 
+ 		if (!include)
 -- 
 2.44.0
 
