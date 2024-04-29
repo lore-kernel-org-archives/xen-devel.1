@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 833F9C4345F
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:00:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714128.1115181 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A148C19F53
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:01:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714125.1115147 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUr-00075K-PU; Mon, 29 Apr 2024 15:00:49 +0000
+	id 1s1SUi-000647-TJ; Mon, 29 Apr 2024 15:00:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714128.1115181; Mon, 29 Apr 2024 15:00:49 +0000
+Received: by outflank-mailman (output) from mailman id 714125.1115147; Mon, 29 Apr 2024 15:00:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUr-00075D-Ly; Mon, 29 Apr 2024 15:00:49 +0000
-Received: by outflank-mailman (input) for mailman id 714128;
- Mon, 29 Apr 2024 15:00:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s1SUi-00063k-Or; Mon, 29 Apr 2024 15:00:40 +0000
+Received: by outflank-mailman (input) for mailman id 714125;
+ Mon, 29 Apr 2024 15:00:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hXAa=MC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s1SUp-0006Ve-OF
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:47 +0000
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [2607:f8b0:4864:20::72d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 41a33aa5-0639-11ef-b4bb-af5377834399;
- Mon, 29 Apr 2024 17:00:46 +0200 (CEST)
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-79100a90868so29299685a.2
- for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:46 -0700 (PDT)
+ id 1s1SUh-00061u-Du
+ for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:39 +0000
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [2607:f8b0:4864:20::72b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3d391801-0639-11ef-909b-e314d9c70b13;
+ Mon, 29 Apr 2024 17:00:38 +0200 (CEST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-790f4650f93so114417085a.2
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:38 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- sq18-20020a05620a4ad200b0078d5f7b9a2dsm10320819qkn.15.2024.04.29.08.00.43
+ oo14-20020a05620a530e00b00790f6f8b03csm807879qkn.55.2024.04.29.08.00.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 08:00:44 -0700 (PDT)
+ Mon, 29 Apr 2024 08:00:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41a33aa5-0639-11ef-b4bb-af5377834399
+X-Inumbo-ID: 3d391801-0639-11ef-909b-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714402845; x=1715007645; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1714402837; x=1715007637; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TeOl9O7LDZ2iZGM+JQTgtPA8a4JFNTC4N89WNpXHObE=;
-        b=AbX4Z1ySumGuZa8+qCmNrsXjCpHAlnA1/CDpcPoOjauCw+5v7kyIV52gXIfPHGfw9O
-         ojMIAyZasCHDzKf/QwjlXILlRgXSONSlf6g9EmmmUUpj00qiwcpWRFLUAkHjzzE2w5j+
-         PS5ACDHCoyZ04aD5Lkcuyg432mosTkTwkLgKQ=
+        bh=CiR1avLNZwB2iaSZsLj5E6HA1txC8l+NaDpKGNZUIvI=;
+        b=QqgEUupfH79KQGHsJaIJcWPjJCo+uJ04B+Pe+Ai/U1rJ1G4SBWpubL5jee4MGm/w7L
+         i+7vYvCL5OsI2PwxZeIGYZU0E5lkAoLR12sTFAEsfX0A1pmRooHejk5QJskWF1gTfORL
+         9bMMiUepGimMcVUUwwLorhEpSRxg1XSyepMds=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714402845; x=1715007645;
+        d=1e100.net; s=20230601; t=1714402837; x=1715007637;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=TeOl9O7LDZ2iZGM+JQTgtPA8a4JFNTC4N89WNpXHObE=;
-        b=UUYHOcYT6SR2J4mAazNsJW0z9IN8OYt3fD5ZUn/v7Ei1dpDNZp+TtkbwdO+bqlkdeY
-         +CfHkYNVnFAAk0l0dQrXoyOirJ/F/69LSkUaP38HuYclhi2cm8WRdv7Y5LkgItOmA651
-         f0imXalOvMXWw4FX92Chv43/RMAnE8YeLXGSD50M/zxlAFzDI7YcdGPBVMpNnevmDU/k
-         S6ldTgB8sxOCqUDAtFJAUZDnawRpL7Q1j2NyYU4Dw9BMnIxbRcC1nNEEzyK16tx10xUX
-         MDQSEZyn22hj91QJbDWb9enjPOUVMMITyq1qKIMoAOonOSCjOXksxC51lbuymuT4Vn0e
-         awsQ==
-X-Gm-Message-State: AOJu0YzTivCrEpapfnUZEjHszPX1y71lvFvrrQxGu3e1AWopAi85VaC+
-	zlaSAZJzUF/wcMsGusOtCU1mmnlKdoftCz2fiuJZVNb6D0CCvm3Wni8CcRpsXqDjWgugU2ooBH8
-	w
-X-Google-Smtp-Source: AGHT+IEQTaracmximP7j2sbFjK4X6UAk8BGjawiXJbZvQU35r2lCSidN0qLlCOK94Lpv7HSFuOQ2FA==
-X-Received: by 2002:a05:620a:414b:b0:790:c677:545d with SMTP id k11-20020a05620a414b00b00790c677545dmr8130046qko.68.1714402844493;
-        Mon, 29 Apr 2024 08:00:44 -0700 (PDT)
+        bh=CiR1avLNZwB2iaSZsLj5E6HA1txC8l+NaDpKGNZUIvI=;
+        b=AQZ4oEAG/LlJr7tFo7UbiQjvdt3m/H7JoPGHt0WrryjxyICGRTB5Ehy2rT+D1UrCEs
+         jD26MEYEOgbco8LhknRUmfsVIGXRlRHvFZ9iSSryfhviANCZfjIxeAsri1hX7MOvKtTy
+         7BjaTKnM0zN8Vf3PBd0ZUsGK/D7Y7LYmVUemSLyr/u/WBV/u4wRykRCS9MiKLvNSMFzf
+         QXTLwP2TYL5SBV+Zcbe8hXMA5AtOs9TIePCC5E8lgcxInmr3Z7UEdpG6buujc8AMIh58
+         WpxfhR04E+vwOJdShbIvSEC/dEA29nm4CE5fs2/R0YE8pj1Lypx9lA9CVUwiEbDLun31
+         RPhQ==
+X-Gm-Message-State: AOJu0YxcQwYNXu6CGYVI7jNp8o57O/gGf+oYqq63Fs192usAp3Clrq3I
+	hj6ndO3A0QpESUpsNUeREwnjLdPXRXJi/s6LyTpxI+78JRey9R2fU9Rcsxmfv0Ogefv/MCweSq3
+	S
+X-Google-Smtp-Source: AGHT+IHE66QaziwrLZLcC+gNcKROz5NfYV0txx1zAAT6J8hMJhKzbk7ohPvn/82BVbBB1YE+GHAibA==
+X-Received: by 2002:a05:620a:a92:b0:790:96d4:7a5e with SMTP id v18-20020a05620a0a9200b0079096d47a5emr10944592qkg.12.1714402837340;
+        Mon, 29 Apr 2024 08:00:37 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: konrad.wilk@oracle.com,
 	ross.lagerwall@citrix.com,
 	Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 4/9] create-diff-object: document kpatch_regenerate_special_section() behavior
-Date: Mon, 29 Apr 2024 16:56:49 +0200
-Message-ID: <20240429145654.71669-5-roger.pau@citrix.com>
+Subject: [PATCH 1/9] livepatch-build-tools: allow patch file name sizes up to 127 characters
+Date: Mon, 29 Apr 2024 16:56:46 +0200
+Message-ID: <20240429145654.71669-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240429145654.71669-1-roger.pau@citrix.com>
 References: <20240429145654.71669-1-roger.pau@citrix.com>
@@ -89,69 +89,37 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The purpose of kpatch_regenerate_special_section() is fairly opaque without
-spending a good amount of time and having quite a lot of knowledge about what
-the special sections contains.
+XenServer uses quite long Xen version names, and encode such in the livepatch
+filename, and it's currently running out of space in the file name.
 
-Introduce some comments in order to give context and describe the expected
-functionality.
+Bump max filename size to 127, so it also matches the patch name length in the
+hypervisor interface.  Note the size of the buffer is 128 character, and the
+last one is reserved for the null terminator.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- create-diff-object.c | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+Changes since v1:
+ - Take into account the null terminator.
+---
+ livepatch-build | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/create-diff-object.c b/create-diff-object.c
-index d8a2afbf2774..6a751bf3b789 100644
---- a/create-diff-object.c
-+++ b/create-diff-object.c
-@@ -1210,6 +1210,12 @@ static void kpatch_regenerate_special_section(struct kpatch_elf *kelf,
+diff --git a/livepatch-build b/livepatch-build
+index 948b2acfc2f6..f3ca9399d149 100755
+--- a/livepatch-build
++++ b/livepatch-build
+@@ -72,8 +72,9 @@ function make_patch_name()
+     fi
  
- 	src_offset = 0;
- 	dest_offset = 0;
-+
-+	/*
-+	 * Special sections processed here are array objects, hence in order to
-+	 * detect whether a special section needs processing attempt to get the
-+	 * element size.  Returning a size of 0 means no processing required.
-+	 */
- 	group_size = special->group_size(kelf, src_offset);
- 	if (group_size == 0) {
- 		log_normal("Skipping regeneration of a special section: %s\n",
-@@ -1246,6 +1252,33 @@ static void kpatch_regenerate_special_section(struct kpatch_elf *kelf,
- 		if (src_offset + group_size > sec->base->sh.sh_size)
- 			group_size = sec->base->sh.sh_size - src_offset;
+     # Only allow alphanumerics and '_' and '-' in the patch name.  Everything
+-    # else is replaced with '-'.  Truncate to 48 chars.
+-    echo ${PATCHNAME//[^a-zA-Z0-9_-]/-} |cut -c 1-48
++    # else is replaced with '-'.  Truncate to 127 chars
++    # (XEN_LIVEPATCH_NAME_SIZE - 1).
++    echo ${PATCHNAME//[^a-zA-Z0-9_-]/-} |cut -c -127
+ }
  
-+		/*
-+		 * Special sections handled perform a bunch of different tasks,
-+		 * but they all have something in common: they are array like
-+		 * sections that reference functions in the object file being
-+		 * processed.
-+		 *
-+		 * .bug_frames.* relocations reference the symbol (plus offset)
-+		 * where the exception is triggered from.
-+		 *
-+		 * .altinstructions relocations contain references to
-+		 * coordinates where the alternatives are to be applied, plus
-+		 * coordinates that point to the replacement code in
-+		 * .altinstr_replacement.
-+		 *
-+		 * .ex_table relocations contain references to the coordinates
-+		 * where the fixup code should be executed, plus relocation
-+		 * coordinates that point to the text code to execte living in
-+		 * the .fixup section.
-+		 *
-+		 * .livepatch.hooks.* relocations point to the hook
-+		 * functions.
-+		 *
-+		 * Such dependencies allow to make a decision on whether an
-+		 * element in the array needs including in the livepatch: if
-+		 * the symbol pointed by the relocation is new or has changed
-+		 * the array element needs including.
-+		 */
- 		include = should_keep_rela_group(sec, src_offset, group_size);
- 
- 		if (!include)
+ # Do a full normal build
 -- 
 2.44.0
 
