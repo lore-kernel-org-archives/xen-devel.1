@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2DBC4345F
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 14:50:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714120.1115131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3503C4345F
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:00:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714126.1115162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SKF-0003F7-Of; Mon, 29 Apr 2024 14:49:51 +0000
+	id 1s1SUn-0006XM-8r; Mon, 29 Apr 2024 15:00:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714120.1115131; Mon, 29 Apr 2024 14:49:51 +0000
+Received: by outflank-mailman (output) from mailman id 714126.1115162; Mon, 29 Apr 2024 15:00:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SKF-0003F0-Lz; Mon, 29 Apr 2024 14:49:51 +0000
-Received: by outflank-mailman (input) for mailman id 714120;
- Mon, 29 Apr 2024 14:49:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s1SUn-0006XF-5j; Mon, 29 Apr 2024 15:00:45 +0000
+Received: by outflank-mailman (input) for mailman id 714126;
+ Mon, 29 Apr 2024 15:00:44 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hXAa=MC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s1SKE-0003Eu-CF
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 14:49:50 +0000
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [2607:f8b0:4864:20::82d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ba13d23c-0637-11ef-909b-e314d9c70b13;
- Mon, 29 Apr 2024 16:49:49 +0200 (CEST)
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-439dfa27003so26288431cf.2
- for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 07:49:49 -0700 (PDT)
+ id 1s1SUl-0006Ve-Vo
+ for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:43 +0000
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [2607:f8b0:4864:20::72d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3f2b3c33-0639-11ef-b4bb-af5377834399;
+ Mon, 29 Apr 2024 17:00:42 +0200 (CEST)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-790605809cbso420317085a.3
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:42 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- m3-20020ac86883000000b004365bc5b9a2sm10418902qtq.33.2024.04.29.07.49.47
+ pa2-20020a05620a830200b0078ede2e9125sm10422151qkn.57.2024.04.29.08.00.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 07:49:47 -0700 (PDT)
+ Mon, 29 Apr 2024 08:00:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,71 +46,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba13d23c-0637-11ef-909b-e314d9c70b13
+X-Inumbo-ID: 3f2b3c33-0639-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714402188; x=1715006988; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=rQVwmGnw4AtV/5ML7zk73UyIDJQUeLuqoYN0ypngkvk=;
-        b=tCkcgqSOD1De91iGnNDu/QGTvluJknu4x+4PqEeVE+5+PP/Tr7lv8hGCze0FawdIjH
-         ER7crBFSC6N9JsVwPwj2QFbN4pr5TNYF/mqCsgxVNULfJ8tY+svh1QmUTgVgjTnPUHgn
-         M/uxfH7Zmr4otvGOxrdIRAZGd1VAUUVThw7sU=
+        d=citrix.com; s=google; t=1714402840; x=1715007640; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SiQeSFoT/wXbOVQjeXcAWBiOE9S9/ogSwfjl5ofYfjE=;
+        b=UJMh97+hl4Old0cahbYH5d+r4/9LYzJy9lgZ+VkqVojsktRGxB8PnHuTGbAWJsRr5S
+         X2VEE6BqRmFR9Ns9R4Domwt3I4YfNrOGoKoRzwH6KnDURslxny8/iNoTVwnW6YpQBqap
+         GR5UedV+qlLgu9rsN6hUVF/aU/ypHiG6759K8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714402188; x=1715006988;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=rQVwmGnw4AtV/5ML7zk73UyIDJQUeLuqoYN0ypngkvk=;
-        b=rPIiAE6EsxBkTnVYct2pRZfq/LZxx7+Cf5lcDzaKGG2FJmK8A1iXnFKuZ9kfSblJ9m
-         +4aSkbPc8ujZZt9d+ktlAdi7XdcKqDLcv5lwdyFJtoGHdOc30fMcaL7+1kiqmDkDkoe2
-         igyqlZknSk2hP0ba7/2EdlU4fkPfAdrSPLFlHCvcqaoTbtbt0oo7SoZ49ODHTVIVferY
-         dwX2o/B7fgmkPHaFR/RwY3X+GMjjOvFr1jN9gMxg+6Wd35fCgZaLO2oF2T/vTxrszHmH
-         NUvHmYJmEF7UYRyMqLjZykjZnSp1XihG+e65orwno+ZmFIWiyVsxojPsubHYEW1OoQuc
-         WqJA==
-X-Gm-Message-State: AOJu0YwEbMv19pIBwC5xPEONQrOHAGf3WRXjHjZ6O5RawBh+mijSTUlT
-	aOshLO0UQRidtuUY41eJ+4mwQ+7SdiFd8lrZG2XUvMUscULgPUpqpfgDB/P7dds=
-X-Google-Smtp-Source: AGHT+IG8MjdwnaQGJ1Sp4lZVMFzY9Z3ixMbiTVrFlWwL7A6BkY+WVrO6QCDX+3FW7EmIO0SbHxvxug==
-X-Received: by 2002:a05:622a:344:b0:43a:7660:2114 with SMTP id r4-20020a05622a034400b0043a76602114mr8575280qtw.6.1714402188021;
-        Mon, 29 Apr 2024 07:49:48 -0700 (PDT)
-Date: Mon, 29 Apr 2024 16:49:45 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@cloud.com>
-Subject: Re: [PATCH] revert "x86/mm: re-implement get_page_light() using an
- atomic increment"
-Message-ID: <Zi-zidVJKYAMKjzG@macbook>
-References: <f54c05d4-b61d-4e26-8e93-6e1bdc22a1d4@suse.com>
+        d=1e100.net; s=20230601; t=1714402840; x=1715007640;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SiQeSFoT/wXbOVQjeXcAWBiOE9S9/ogSwfjl5ofYfjE=;
+        b=cPydUbqrl3h/nBY97pEFSGgAfRwiwTOZyae4ivdTbjpnDCmoQiPI8mEK2QMoyI2ur1
+         LTi8IjTHuULg7iwYA9SEpOgcWwt3EnyURcWpE+iIrZ8ftZgVp2gxsYknim3X9V+ofimz
+         LAdM1Uzz3z7PnRGLcqV8y/fvHPUd2Ftd+4zNpSld8km3v/5n32XPBVwxh1f+Jyp+ZCFK
+         d8UvOCEgh+BsyP/Tp4mi4pklKkLwJp89jfzjfyGYdw8qxifYLZzCRL464Fcy4i7Xxsa/
+         F58WrnY4v9MyzTUfBVrBOSKQriUylItwU+76dnJLtyzEyGaLx9zxzq8NlAdv3z2togF5
+         e3cA==
+X-Gm-Message-State: AOJu0YwMpJaV9xj9bV7lByctIW1ZttVTYu1dyRnGdjWlhu3jlKteW9Id
+	E6U6UcLTUijYZG7/rwYFqSoPgxOz1IFwm/utYJjCNb7JRer6NbV7e985bVcgXTJmw/9y1TTDg5R
+	4
+X-Google-Smtp-Source: AGHT+IGyzndRvqqRSoKqlx/mXjkWwqb7cfTC/no9JTMWUvvtw0nuLVnO4nxSXwkIu/HziZUgZD6Gxg==
+X-Received: by 2002:a05:620a:1a16:b0:790:8926:a69e with SMTP id bk22-20020a05620a1a1600b007908926a69emr12973353qkb.74.1714402840107;
+        Mon, 29 Apr 2024 08:00:40 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: konrad.wilk@oracle.com,
+	ross.lagerwall@citrix.com,
+	Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH 2/9] create-diff-object: update default alt_instr size
+Date: Mon, 29 Apr 2024 16:56:47 +0200
+Message-ID: <20240429145654.71669-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240429145654.71669-1-roger.pau@citrix.com>
+References: <20240429145654.71669-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <f54c05d4-b61d-4e26-8e93-6e1bdc22a1d4@suse.com>
 
-On Mon, Apr 29, 2024 at 03:01:00PM +0200, Jan Beulich wrote:
-> revert "x86/mm: re-implement get_page_light() using an atomic increment"
-> 
-> This reverts commit c40bc0576dcc5acd4d7e22ef628eb4642f568533.
-> 
-> That change aimed at eliminating an open-coded lock-like construct,
-> which really isn't all that similar to, in particular, get_page(). The
-> function always succeeds. Any remaining concern would want taking care
-> of by placing block_lock_speculation() at the end of the function.
-> Since the function is called only during page (de)validation, any
-> possible performance concerns over such extra serialization could
-> likely be addressed by pre-validating (e.g. via pinning) page tables.
-> 
-> The fundamental issue with the change being reverted is that it detects
-> bad state only after already having caused possible corruption. While
-> the system is going to be halted in such an event, there is a time
-> window during which the resulting incorrect state could be leveraged by
-> a clever (in particular: fast enough) attacker.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+The size of the alt_instr structure in Xen is 14 instead of 12 bytes, adjust
+it.
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ create-diff-object.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks.
+diff --git a/create-diff-object.c b/create-diff-object.c
+index fed360a9aa68..d8a2afbf2774 100644
+--- a/create-diff-object.c
++++ b/create-diff-object.c
+@@ -1000,7 +1000,7 @@ static int altinstructions_group_size(struct kpatch_elf *kelf, int offset)
+ 	char *str;
+ 	if (!size) {
+ 		str = getenv("ALT_STRUCT_SIZE");
+-		size = str ? atoi(str) : 12;
++		size = str ? atoi(str) : 14;
+ 	}
+ 
+ 	log_debug("altinstr_size=%d\n", size);
+-- 
+2.44.0
+
 
