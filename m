@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3503C4345F
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:00:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714126.1115162 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC36C19F53
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:00:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714124.1115142 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUn-0006XM-8r; Mon, 29 Apr 2024 15:00:45 +0000
+	id 1s1SUi-00062G-M6; Mon, 29 Apr 2024 15:00:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714126.1115162; Mon, 29 Apr 2024 15:00:45 +0000
+Received: by outflank-mailman (output) from mailman id 714124.1115142; Mon, 29 Apr 2024 15:00:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUn-0006XF-5j; Mon, 29 Apr 2024 15:00:45 +0000
-Received: by outflank-mailman (input) for mailman id 714126;
- Mon, 29 Apr 2024 15:00:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s1SUi-000629-JC; Mon, 29 Apr 2024 15:00:40 +0000
+Received: by outflank-mailman (input) for mailman id 714124;
+ Mon, 29 Apr 2024 15:00:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hXAa=MC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s1SUl-0006Ve-Vo
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:43 +0000
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [2607:f8b0:4864:20::72d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3f2b3c33-0639-11ef-b4bb-af5377834399;
- Mon, 29 Apr 2024 17:00:42 +0200 (CEST)
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-790605809cbso420317085a.3
- for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:42 -0700 (PDT)
+ id 1s1SUg-00061u-OO
+ for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:38 +0000
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [2607:f8b0:4864:20::e2f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3c9cb86d-0639-11ef-909b-e314d9c70b13;
+ Mon, 29 Apr 2024 17:00:37 +0200 (CEST)
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-47c5bf7aadaso172935137.0
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:37 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- pa2-20020a05620a830200b0078ede2e9125sm10422151qkn.57.2024.04.29.08.00.39
+ pp6-20020a056214138600b006a0d7154d13sm325965qvb.78.2024.04.29.08.00.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 08:00:39 -0700 (PDT)
+ Mon, 29 Apr 2024 08:00:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,70 +46,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3f2b3c33-0639-11ef-b4bb-af5377834399
+X-Inumbo-ID: 3c9cb86d-0639-11ef-909b-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714402840; x=1715007640; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SiQeSFoT/wXbOVQjeXcAWBiOE9S9/ogSwfjl5ofYfjE=;
-        b=UJMh97+hl4Old0cahbYH5d+r4/9LYzJy9lgZ+VkqVojsktRGxB8PnHuTGbAWJsRr5S
-         X2VEE6BqRmFR9Ns9R4Domwt3I4YfNrOGoKoRzwH6KnDURslxny8/iNoTVwnW6YpQBqap
-         GR5UedV+qlLgu9rsN6hUVF/aU/ypHiG6759K8=
+        d=citrix.com; s=google; t=1714402836; x=1715007636; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XLDb+cZAz3TcRuYrTZgK4SE4NsryhjwmSdkiv3ZqfqQ=;
+        b=Ag+qyr0E8zt5twJKiFcWebLkG2CAsJeEZ7x3Pa4DCAIB3gx/tqNhlQhgtNGFILbzwR
+         gdEdV4663ytYnJvlGWrj9p8324ZTqDERqdFaS+SRGzUrkj+otoGyp40Dr9LoQn5PouNN
+         +Mo3paWqQLzPwGQHMRNeJ4+g1z42L+Z7thcBs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714402840; x=1715007640;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SiQeSFoT/wXbOVQjeXcAWBiOE9S9/ogSwfjl5ofYfjE=;
-        b=cPydUbqrl3h/nBY97pEFSGgAfRwiwTOZyae4ivdTbjpnDCmoQiPI8mEK2QMoyI2ur1
-         LTi8IjTHuULg7iwYA9SEpOgcWwt3EnyURcWpE+iIrZ8ftZgVp2gxsYknim3X9V+ofimz
-         LAdM1Uzz3z7PnRGLcqV8y/fvHPUd2Ftd+4zNpSld8km3v/5n32XPBVwxh1f+Jyp+ZCFK
-         d8UvOCEgh+BsyP/Tp4mi4pklKkLwJp89jfzjfyGYdw8qxifYLZzCRL464Fcy4i7Xxsa/
-         F58WrnY4v9MyzTUfBVrBOSKQriUylItwU+76dnJLtyzEyGaLx9zxzq8NlAdv3z2togF5
-         e3cA==
-X-Gm-Message-State: AOJu0YwMpJaV9xj9bV7lByctIW1ZttVTYu1dyRnGdjWlhu3jlKteW9Id
-	E6U6UcLTUijYZG7/rwYFqSoPgxOz1IFwm/utYJjCNb7JRer6NbV7e985bVcgXTJmw/9y1TTDg5R
-	4
-X-Google-Smtp-Source: AGHT+IGyzndRvqqRSoKqlx/mXjkWwqb7cfTC/no9JTMWUvvtw0nuLVnO4nxSXwkIu/HziZUgZD6Gxg==
-X-Received: by 2002:a05:620a:1a16:b0:790:8926:a69e with SMTP id bk22-20020a05620a1a1600b007908926a69emr12973353qkb.74.1714402840107;
-        Mon, 29 Apr 2024 08:00:40 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1714402836; x=1715007636;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XLDb+cZAz3TcRuYrTZgK4SE4NsryhjwmSdkiv3ZqfqQ=;
+        b=UTcw6utCZm0fr6KJQbrtI3Mw5OCJhHmYOWvOe2mNItjW1pBkJFw+fR57mW+Q6/Zd/S
+         VNfG8TbbGV5h4c2GsPB4U+42w9kj41p1dLoyIcK67/khdd+QCqqzTgAMXeJTCES0YG0R
+         nHUFYof3GLs7KB2Uo7qz+Kpl1gyxQ7OlmTD1hJl9ncZ7rdgnItktxVYhWoa4T+VY6kR8
+         mWenZK5kphp56aH0PouXm4Yz1kx7XT6SGuo4DdbF97bW9tCwsBTdWXzxXhIMgXXsmhB/
+         0JRH0b/HDUFZ3QmK7ZhRKH/YbgP6r8CoELFMDjqNJjnfSyWcdLPESpRoPDH4NTTBPXtR
+         pHHw==
+X-Gm-Message-State: AOJu0YxNg3gqYzbxCAAkTrR1p4UpGpVPZZfBp9MwNbQEYp04as3fczof
+	BF6eeZgRsIwP+NVSfq6OrdUOfqFPRwWTaNJVIMtlLWCxFPbMTm5I2+MPgRqMvaCHFkBNL+MCCV1
+	p
+X-Google-Smtp-Source: AGHT+IHSjOxOUkY89xDRJ34eGL8emqQ/UrLXNEvOMzFU34RV81b1VlUMQdzmYP5S5GZ5YmI3NC3BlA==
+X-Received: by 2002:a67:fb51:0:b0:47b:f690:c8fc with SMTP id e17-20020a67fb51000000b0047bf690c8fcmr8549vsr.11.1714402834778;
+        Mon, 29 Apr 2024 08:00:34 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: konrad.wilk@oracle.com,
 	ross.lagerwall@citrix.com,
 	Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 2/9] create-diff-object: update default alt_instr size
-Date: Mon, 29 Apr 2024 16:56:47 +0200
-Message-ID: <20240429145654.71669-3-roger.pau@citrix.com>
+Subject: [PATCH 0/9] livepatch-build-tools: some bug fixes and improvements
+Date: Mon, 29 Apr 2024 16:56:45 +0200
+Message-ID: <20240429145654.71669-1-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240429145654.71669-1-roger.pau@citrix.com>
-References: <20240429145654.71669-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The size of the alt_instr structure in Xen is 14 instead of 12 bytes, adjust
-it.
+Hello,
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- create-diff-object.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The first 3 patches in the series attempt to fix some bugs, I don't
+think they will be specially controversial or difficult to review (patch
+1 was already posted standalone).
 
-diff --git a/create-diff-object.c b/create-diff-object.c
-index fed360a9aa68..d8a2afbf2774 100644
---- a/create-diff-object.c
-+++ b/create-diff-object.c
-@@ -1000,7 +1000,7 @@ static int altinstructions_group_size(struct kpatch_elf *kelf, int offset)
- 	char *str;
- 	if (!size) {
- 		str = getenv("ALT_STRUCT_SIZE");
--		size = str ? atoi(str) : 12;
-+		size = str ? atoi(str) : 14;
- 	}
- 
- 	log_debug("altinstr_size=%d\n", size);
+The rest of the patches are more convoluted, as they attempt to solve
+some shortcomings when attempting to create livepatches that change
+alternatives or exceptions.  For example a patch that only changes
+content in alternative blocks (the code that ends up in the
+.altinstr_replacement section) won't work, as create-diff-object will
+report that there are no changes.
+
+I've attempted to test as many corner cases as I could come up with, but
+it's hard to figure all the possible changes, plus it's also fairly easy
+to inadvertently regress existing functionality.
+
+Thanks, Roger.
+
+Roger Pau Monne (9):
+  livepatch-build-tools: allow patch file name sizes up to 127
+    characters
+  create-diff-object: update default alt_instr size
+  livepatch-build: fix detection of structure sizes
+  create-diff-object: document kpatch_regenerate_special_section()
+    behavior
+  create-diff-object: move kpatch_include_symbol()
+  create-diff-object: detect changes in .altinstr_replacement and .fixup
+    sections
+  create-diff-object: don't account for changes to .bug_frame.? sections
+  create-diff-object: account for changes in the special section itself
+  create-diff-object: account for special section changes
+
+ create-diff-object.c | 196 +++++++++++++++++++++++++++++++++----------
+ livepatch-build      |  12 ++-
+ 2 files changed, 161 insertions(+), 47 deletions(-)
+
 -- 
 2.44.0
 
