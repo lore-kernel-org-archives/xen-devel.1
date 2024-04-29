@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48958C4345F
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:01:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714131.1115212 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A223AC19F53
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:01:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714136.1115232 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SV0-00087Y-O6; Mon, 29 Apr 2024 15:00:58 +0000
+	id 1s1SV4-0000NK-C1; Mon, 29 Apr 2024 15:01:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714131.1115212; Mon, 29 Apr 2024 15:00:58 +0000
+Received: by outflank-mailman (output) from mailman id 714136.1115232; Mon, 29 Apr 2024 15:01:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SV0-00087M-Jw; Mon, 29 Apr 2024 15:00:58 +0000
-Received: by outflank-mailman (input) for mailman id 714131;
- Mon, 29 Apr 2024 15:00:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s1SV4-0000MQ-6t; Mon, 29 Apr 2024 15:01:02 +0000
+Received: by outflank-mailman (input) for mailman id 714136;
+ Mon, 29 Apr 2024 15:01:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hXAa=MC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s1SUy-0006Ve-Rp
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:56 +0000
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [2607:f8b0:4864:20::c33])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 46fbe4fa-0639-11ef-b4bb-af5377834399;
- Mon, 29 Apr 2024 17:00:55 +0200 (CEST)
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5ac8c73cf88so3212412eaf.2
- for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:55 -0700 (PDT)
+ id 1s1SV2-00061u-O3
+ for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:01:00 +0000
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [2607:f8b0:4864:20::f30])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 499c070b-0639-11ef-909b-e314d9c70b13;
+ Mon, 29 Apr 2024 17:00:59 +0200 (CEST)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-69b6c2e9ed9so21091906d6.1
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:59 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- d17-20020a0cf0d1000000b006a04769b5a7sm10441892qvl.110.2024.04.29.08.00.51
+ t10-20020a0cef0a000000b006a040cdd805sm392396qvr.92.2024.04.29.08.00.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 08:00:52 -0700 (PDT)
+ Mon, 29 Apr 2024 08:00:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46fbe4fa-0639-11ef-b4bb-af5377834399
+X-Inumbo-ID: 499c070b-0639-11ef-909b-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714402853; x=1715007653; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1714402858; x=1715007658; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IFbDmju5IjTA9HMoPxU+gJubSBkYzhzZZat8pMJw8AU=;
-        b=ckv782+AXekPtMhi+DR01PJTWQCWGOkV6os/hAANCqBmLRorqpcFu8mK6jg/QgHyKk
-         tNXENyJ+cx6kq901C3aXjmXMlTkWfrUpVD7jculei/Olv/s5bj2Dg/sucCUVAfOMZRM9
-         wAYaBwP3dLtbG+h6id1ySXwA/UIonqef70gG0=
+        bh=ABIMao/S3hzX29QxYYcWMCOhcIr5YSs4nbEkZAC6ppk=;
+        b=ESvZdTEfYhOldho+Qeoi7BKH6MkOsqdG9R6iwAdt81dt6fE15zkk4wkga7Tuk3ZmlH
+         H7j42bXg5Knvabwlscjiv9tMoeysK7pTWXQf0dAps1m6DyMpKur4zJ6BNtOV8yJESadF
+         i1jdgMUX0oh+XFr5Q64pAfxNV5/9Ycn8LQk9g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714402853; x=1715007653;
+        d=1e100.net; s=20230601; t=1714402858; x=1715007658;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IFbDmju5IjTA9HMoPxU+gJubSBkYzhzZZat8pMJw8AU=;
-        b=Rhd4/QqvUG1PmegseSJKeKmF7dZ0x55ZR0AqGnoLCCgBB5Hbean3cNd6w4JccfFWUL
-         qnEV4WQXwIxwn99mqhLFicIGCmvB/BJT73X+hxJ386dJbi6iN+piu60UEyBm8u/GmEnX
-         /WgjH75nsRrpY/C53UWWfojpdOfpdhF6rbNSj2Yu7GXEcIj3aAXyVykG1vKIzcQ8ZEYx
-         wiKEVVlJkNqmoYS0CdYYlvLSqFiPFK/2jZhZvxLxsHYI269RJEOLk2460AFd/TICzczP
-         xdgjHjrNc4nYBADPSDHponxii1xvtM2+L22KmXbg6BOx9drQKdJDftJZCrl/hwdzMKdm
-         MlrQ==
-X-Gm-Message-State: AOJu0YwdroKmz6L8yaLaQR1ejuchUV444+8TVmJcFOUiSTCba5YUyjUs
-	GluQY+HIfBYn1uu5Vr/2B4IvShkb/xfH6Y0sWqAszRJFxEXub98/i7Q/JEAd7yQQjeQw4lep0P/
-	n
-X-Google-Smtp-Source: AGHT+IH61EQ/4nlaImXeAg5mlusaibvWGRzYoiVkr/DIS2WKP+Xnc4BLJE3V92IGdcm2d2Yz1gEuoA==
-X-Received: by 2002:a05:6358:1913:b0:18e:3ec:94cb with SMTP id w19-20020a056358191300b0018e03ec94cbmr12307398rwm.14.1714402853326;
-        Mon, 29 Apr 2024 08:00:53 -0700 (PDT)
+        bh=ABIMao/S3hzX29QxYYcWMCOhcIr5YSs4nbEkZAC6ppk=;
+        b=Q1oh/ouC/3WalvjBgDA1ar602mkQQrQaUuUz9pYgU1OXpJ9L8vzqfOgyoLntFTmnNu
+         5K6wbbkhVikh1fztaQ/kf5XhBU9OglrDYo/g4Jv2CgLNCXtQSjvMSv6amgh/RplZq7M7
+         UIIMVxo7yfqOUfkqBZ3TiQzf/5ZWde8yBFTSS9mqlrZAkbaTsPO/q0zwrYX2nxu/U5o7
+         8maAVd7hesYzLxpuf0+W9kJh79CPi0hJPC3vtnVP7CxrOgXuPue1S+Q6q/U/T/8d022z
+         /2tgc8qlkBa8+BcfSoNNS9FQsxlyEF1VbuT9VR2dthxC5N+j1r6+W2bPoPPVgnEzpH7d
+         BcPA==
+X-Gm-Message-State: AOJu0Yxjmg4mR7tzyL2jTcWc6bhFjE5QC30JMGENDVVuQYs5K6Yfph15
+	1jEggLOL8IqJQypoPBWa2VSGEAAdMnIluMpLUQa4mHbm8xM58kDD9cOwrX1sDmr6TfGqrF4pKNZ
+	w
+X-Google-Smtp-Source: AGHT+IGxPcDT9IwGTWGDL4oYzCXrDmSIbNhuvzGMF891BclHIsi0n3Dih5B5TyYh4tZ1b0v0ecwWcg==
+X-Received: by 2002:a05:6214:130d:b0:6a0:5528:9594 with SMTP id pn13-20020a056214130d00b006a055289594mr11828763qvb.64.1714402858002;
+        Mon, 29 Apr 2024 08:00:58 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: konrad.wilk@oracle.com,
 	ross.lagerwall@citrix.com,
 	Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 7/9] create-diff-object: don't account for changes to .bug_frame.? sections
-Date: Mon, 29 Apr 2024 16:56:52 +0200
-Message-ID: <20240429145654.71669-8-roger.pau@citrix.com>
+Subject: [PATCH 9/9] create-diff-object: account for special section changes
+Date: Mon, 29 Apr 2024 16:56:54 +0200
+Message-ID: <20240429145654.71669-10-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240429145654.71669-1-roger.pau@citrix.com>
 References: <20240429145654.71669-1-roger.pau@citrix.com>
@@ -89,49 +89,64 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-bug_frame related sections exclusively contain addresses that reference back to
-the address where the BUG_INSTR is executed.  As such, any change to the
-contents of bug_frame sections (or it's relocations) will necessarily require a
-change in the caller function, as the placement of the BUG_INSTR must have
-changed.
+When deciding whether there's content to generate a payload also take into
+account whether special sections have changed.  Initially account for changes
+to alternative related section to cause the generation of a livepatch.
 
-Take advantage of this relocation, and unconditionally mark the bug_frame
-sections themselves as not having changed, the logic in
-kpatch_regenerate_special_section() will already take care of including any
-bug_frame element group that references a function that has changed.
-
-This should be a non functional change in the payload generated by
-create-diff-object, but needs doing so that we can take into account changes to
-.altinstructions and .ex_table sections themselves without unnecessarily also
-pulling .bug_frame sections.
+Note that accounting for hook sections is already done by
+kpatch_include_hook_elements() when deciding whether there's changed content in
+the object file.  .bugframe sections are also not accounted for since any
+section in a bugframe section will be accompanied by a change in the function
+the bugframe references (the placement of the BUG_INSTR will change in the
+caller function).
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- create-diff-object.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ create-diff-object.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
 diff --git a/create-diff-object.c b/create-diff-object.c
-index f4e4da063d0a..d1b1477be1cd 100644
+index 8bfb6bf92a1b..957631097b8a 100644
 --- a/create-diff-object.c
 +++ b/create-diff-object.c
-@@ -1284,6 +1284,17 @@ static void kpatch_regenerate_special_section(struct kpatch_elf *kelf,
- 		}
- 	}
+@@ -1663,6 +1663,28 @@ static int kpatch_include_hook_elements(struct kpatch_elf *kelf)
+ 	return num_new_functions;
+ }
  
-+	/*
-+	 * For bug_frame sections don't care if the section itself or the
-+	 * relocations have changed, as any change in the bug_frames will be
-+	 * accompanied by a change in the caller function text, as the
-+	 * BUG_INSTR will have a different placement in the caller.
-+	 */
-+	if (!strncmp(special->name, ".bug_frames.", strlen(".bug_frames."))) {
-+		sec->status = SAME;
-+		sec->base->status = SAME;
-+	}
++static unsigned int include_special_sections(const struct kpatch_elf *kelf)
++{
++	const struct section *sec;
++	unsigned int nr = 0;
 +
- 	for ( ; src_offset < sec->base->sh.sh_size; src_offset += group_size) {
- 
- 		group_size = special->group_size(kelf, src_offset);
++	/*
++	 * Only account for changes in alternatives and exception table related
++	 * sections.  Hooks are already taken care of separately, and changes
++	 * in bug_frame sections always go along with changes in the caller
++	 * functions.
++	 */
++	list_for_each_entry(sec, &kelf->sections, list)
++		if (sec->status != SAME &&
++		    (!strcmp(sec->name, ".altinstructions") ||
++		     !strcmp(sec->name, ".altinstr_replacement") ||
++		     !strcmp(sec->name, ".ex_table") ||
++		     !strcmp(sec->name, ".fixup")))
++			nr++;
++
++	return nr;
++}
++
+ static int kpatch_include_new_globals(struct kpatch_elf *kelf)
+ {
+ 	struct symbol *sym;
+@@ -2469,6 +2491,8 @@ int main(int argc, char *argv[])
+ 	kpatch_include_debug_sections(kelf_patched);
+ 	log_debug("Include hook elements\n");
+ 	num_changed += kpatch_include_hook_elements(kelf_patched);
++	log_debug("Include special sections\n");
++	num_changed += include_special_sections(kelf_patched);
+ 	log_debug("num_changed = %d\n", num_changed);
+ 	log_debug("Include new globals\n");
+ 	new_globals_exist = kpatch_include_new_globals(kelf_patched);
 -- 
 2.44.0
 
