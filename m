@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC6EC25B5C
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:01:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714129.1115191 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5549C4345F
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Apr 2024 15:01:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714132.1115222 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUu-0007OP-1j; Mon, 29 Apr 2024 15:00:52 +0000
+	id 1s1SV2-0008RC-1a; Mon, 29 Apr 2024 15:01:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714129.1115191; Mon, 29 Apr 2024 15:00:52 +0000
+Received: by outflank-mailman (output) from mailman id 714132.1115222; Mon, 29 Apr 2024 15:00:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1SUt-0007O7-VC; Mon, 29 Apr 2024 15:00:51 +0000
-Received: by outflank-mailman (input) for mailman id 714129;
- Mon, 29 Apr 2024 15:00:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s1SV1-0008QM-Sb; Mon, 29 Apr 2024 15:00:59 +0000
+Received: by outflank-mailman (input) for mailman id 714132;
+ Mon, 29 Apr 2024 15:00:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hXAa=MC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s1SUs-0006Ve-Mh
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:50 +0000
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [2607:f8b0:4864:20::f2a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 435b60d9-0639-11ef-b4bb-af5377834399;
- Mon, 29 Apr 2024 17:00:49 +0200 (CEST)
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6a0b68733f5so17121996d6.1
- for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:49 -0700 (PDT)
+ id 1s1SUz-00061u-Nc
+ for xen-devel@lists.xenproject.org; Mon, 29 Apr 2024 15:00:57 +0000
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [2607:f8b0:4864:20::829])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 48213e23-0639-11ef-909b-e314d9c70b13;
+ Mon, 29 Apr 2024 17:00:57 +0200 (CEST)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4365c1451d4so31256561cf.2
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Apr 2024 08:00:57 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- mg22-20020a056214561600b006a0cd4c2d9bsm1081568qvb.28.2024.04.29.08.00.46
+ h5-20020ac85485000000b00439cccb91b2sm6612689qtq.73.2024.04.29.08.00.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 08:00:46 -0700 (PDT)
+ Mon, 29 Apr 2024 08:00:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 435b60d9-0639-11ef-b4bb-af5377834399
+X-Inumbo-ID: 48213e23-0639-11ef-909b-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1714402847; x=1715007647; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1714402856; x=1715007656; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RQz1eJLG5RTUbfOfXgpL5NrHKeTAiJtLKKFiPXfVznk=;
-        b=WB/hh2C8gS8Z/CsJQadz2EmKNa0AWHuIp4F4l2ReRO0KshtHSkwq8yWCGPXJQMyKZu
-         QkTnoCd3BpxcqzcAWfUjCP9/UsAw6eZtBEbL8stee84kl1PhU0QLqydtw4l6vkKDigxz
-         f065T72fguBaQG3LXRZIZFTi9n+UP+UTF8sa8=
+        bh=bJJy5gubMnJaNx3BJ2gbPZ/DdC5mFYTQDBpTvDsIrfk=;
+        b=Z5H15jZQky0Gux1WB9koyK6gFqtIZrc3cBNDrPvCxDPatbZ1tF+NviCWuR0KNTuWsM
+         xPEujhloHRLDG47Xq5GxZD6McfeE7B5tdGMSxJRJZcInL9buc5/4Z6dKLg6SJrhyAPZO
+         Yf0WWvlZIMC+3XGWumULngAuzs4fFiPAB1hBA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714402847; x=1715007647;
+        d=1e100.net; s=20230601; t=1714402856; x=1715007656;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RQz1eJLG5RTUbfOfXgpL5NrHKeTAiJtLKKFiPXfVznk=;
-        b=jpMWCzd+5zncRVuHC4cMPhhTEH2r6fNX6hhOS7yC588xGAbeZwrS5hjngMK5QLxC6V
-         a8SgLTQz7KeTgFVhaL58HzbldSCrljzxhBAHhgucBxXCxhYa2Tkgw2JsORsylgJqrmP0
-         WSAqKLo9xF156qlS9wTrdFarL33lWXYo4+rr5Xg+ipGACYM6AiVDIVLvUDpGyEFe1VHB
-         /yMxpsKmysxd54iftMG12QoDeN4jgLUyH+P0TnyAB3Jk/F1aXgFxhobEjdAO1EoP9z/+
-         EsmXEJ3opA80lcQhHrr36/DAor4r3iFpO1X8x9hlubviLeaKZHHw+fic9AbxaBEdwQG/
-         PRBg==
-X-Gm-Message-State: AOJu0Yz6Ko6cz8BeWqmTNWvnAhTKvu11HNLS/qRYP4P7o7E1bomiuKEL
-	1xbbkvnUKmrpolgQs1a95vogojI3YrX8MQWcIFhN7fs5OIAE7buMgdj0gMzElqJdBM2kISwU5ma
-	r
-X-Google-Smtp-Source: AGHT+IEXBtTgAfpV3p39ATbcVjeU7BTkltXUUJMbnqzj2OpTZpuakYk2/N+6I2Nt2geVhKOHwwNukA==
-X-Received: by 2002:a05:6214:250a:b0:6a0:c9eb:25db with SMTP id gf10-20020a056214250a00b006a0c9eb25dbmr4996306qvb.8.1714402846918;
-        Mon, 29 Apr 2024 08:00:46 -0700 (PDT)
+        bh=bJJy5gubMnJaNx3BJ2gbPZ/DdC5mFYTQDBpTvDsIrfk=;
+        b=Q47uPIBq/q3RqzaHIiswayxKbcoDeQmk/6pPY9aU+C2XPm63HD1Hm0pi2hnutthFsR
+         j/U7N7gMaufsoSqQxv/kW6nJ6TrnQtjMOPmzb8EzmxOhxaPep2nAmQz4qrfZPg+W5pIf
+         JLtweLXwt9wKnSYZD3VncrRmkXmpouuoGm4hfnL6/Zb8yeSqJDFzOh+U1yW24kyNsta0
+         dPydjG5hwtv7vm28esJUfOxTqmQIeyCNZokLclHX2eu27j1JWvFKhmnTkDWF4lQwVQXV
+         hs/V30AYyjmTUXugyw0O6xr5o3EfhTXeUX8JUNvHDM1cc2FkoNqYNcNYrtZFuR7DCRNC
+         rNNQ==
+X-Gm-Message-State: AOJu0YwmGO87wRKrgVeziJby6JxPfOSS/ZD8cU3Ah0UhSjt0SxerAVpg
+	qP+LxJP8Nx6mXXOFGdURlOmRnvEHDn9Mmo8DPvP/Xn3PfYOv1Ce8FmVDrtbxrNK3q065Ksn5OnB
+	o
+X-Google-Smtp-Source: AGHT+IF7Kt4rVMpOZTBkwfNyqexlYmDJuCJB7gQOo9oZubbbFgketoMH7REOTY+yQPwhgpfUnURAkw==
+X-Received: by 2002:a05:622a:298d:b0:43a:bd5b:2c33 with SMTP id hd13-20020a05622a298d00b0043abd5b2c33mr7519212qtb.3.1714402855678;
+        Mon, 29 Apr 2024 08:00:55 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: konrad.wilk@oracle.com,
 	ross.lagerwall@citrix.com,
 	Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 5/9] create-diff-object: move kpatch_include_symbol()
-Date: Mon, 29 Apr 2024 16:56:50 +0200
-Message-ID: <20240429145654.71669-6-roger.pau@citrix.com>
+Subject: [PATCH 8/9] create-diff-object: account for changes in the special section itself
+Date: Mon, 29 Apr 2024 16:56:53 +0200
+Message-ID: <20240429145654.71669-9-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240429145654.71669-1-roger.pau@citrix.com>
 References: <20240429145654.71669-1-roger.pau@citrix.com>
@@ -89,107 +89,64 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-So it can be used by kpatch_process_special_sections() in further changes.
+Changes to special sections are not accounted for right now.  For example a
+change that only affects .altinstructions or .ex_table won't be included in the
+livepatch payload, if none of the symbols referenced by those sections have
+also changed.
 
-Non functional change.
+Since it's not possible to know which elements in the special group have
+changed if we detect a change in the special section the whole group (minus
+elements that have references to init section symbols) must be included.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- create-diff-object.c | 74 ++++++++++++++++++++++----------------------
- 1 file changed, 37 insertions(+), 37 deletions(-)
+ create-diff-object.c | 33 ++++++++++++++++++++++++++-------
+ 1 file changed, 26 insertions(+), 7 deletions(-)
 
 diff --git a/create-diff-object.c b/create-diff-object.c
-index 6a751bf3b789..7674d972e301 100644
+index d1b1477be1cd..8bfb6bf92a1b 100644
 --- a/create-diff-object.c
 +++ b/create-diff-object.c
-@@ -1198,6 +1198,43 @@ void kpatch_update_ex_table_addend(struct kpatch_elf *kelf,
+@@ -1170,13 +1170,32 @@ static int should_keep_rela_group(struct section *sec, int start, int size)
+ 	 */
+ 	list_for_each_entry(rela, &sec->relas, list) {
+ 		if (rela->offset >= start &&
+-		    rela->offset < start + size &&
+-		    (rela->sym->type == STT_FUNC ||
+-		     rela->sym->type == STT_SECTION) &&
+-		    rela->sym->sec->include) {
+-			found = 1;
+-			log_debug("new/changed symbol %s found in special section %s\n",
+-				  rela->sym->name, sec->name);
++		    rela->offset < start + size)
++		{
++			/*
++			 * Avoid including groups with relocations against
++			 * symbols living in init sections, those are never
++			 * included in livepatches.
++			 */
++			if (is_init_section(rela->sym->sec))
++				return 0;
++
++			/*
++			 * If the base section has changed, always include all
++			 * groups (except those pointing to .init section
++			 * symbols), as we have no way to differentiate which
++			 * groups have changed.
++			 */
++			if (sec->status != SAME || sec->base->status != SAME)
++				found = 1;
++			else if ((rela->sym->type == STT_FUNC ||
++			          rela->sym->type == STT_SECTION) &&
++			         rela->sym->sec->include) {
++				found = 1;
++				log_debug(
++		"new/changed symbol %s found in special section %s\n",
++				          rela->sym->name, sec->name);
++			}
+ 		}
  	}
- }
  
-+#define inc_printf(fmt, ...) \
-+	log_debug("%*s" fmt, recurselevel, "", ##__VA_ARGS__);
-+
-+static void kpatch_include_symbol(struct symbol *sym, int recurselevel)
-+{
-+	struct rela *rela;
-+	struct section *sec;
-+
-+	inc_printf("start include_symbol(%s)\n", sym->name);
-+	sym->include = 1;
-+	inc_printf("symbol %s is included\n", sym->name);
-+	/*
-+	 * Check if sym is a non-local symbol (sym->sec is NULL) or
-+	 * if an unchanged local symbol.  This a base case for the
-+	 * inclusion recursion.
-+	 */
-+	if (!sym->sec || sym->sec->include ||
-+	    (sym->type != STT_SECTION && sym->status == SAME))
-+		goto out;
-+	sec = sym->sec;
-+	sec->include = 1;
-+	inc_printf("section %s is included\n", sec->name);
-+	if (sec->secsym && sec->secsym != sym) {
-+		sec->secsym->include = 1;
-+		inc_printf("section symbol %s is included\n", sec->secsym->name);
-+	}
-+	if (!sec->rela)
-+		goto out;
-+	sec->rela->include = 1;
-+	inc_printf("section %s is included\n", sec->rela->name);
-+	list_for_each_entry(rela, &sec->rela->relas, list)
-+		kpatch_include_symbol(rela->sym, recurselevel+1);
-+out:
-+	inc_printf("end include_symbol(%s)\n", sym->name);
-+	return;
-+}
-+
- static void kpatch_regenerate_special_section(struct kpatch_elf *kelf,
- 				              struct special_section *special,
- 				              struct section *sec)
-@@ -1455,43 +1492,6 @@ static void kpatch_include_standard_string_elements(struct kpatch_elf *kelf)
- 	}
- }
- 
--#define inc_printf(fmt, ...) \
--	log_debug("%*s" fmt, recurselevel, "", ##__VA_ARGS__);
--
--static void kpatch_include_symbol(struct symbol *sym, int recurselevel)
--{
--	struct rela *rela;
--	struct section *sec;
--
--	inc_printf("start include_symbol(%s)\n", sym->name);
--	sym->include = 1;
--	inc_printf("symbol %s is included\n", sym->name);
--	/*
--	 * Check if sym is a non-local symbol (sym->sec is NULL) or
--	 * if an unchanged local symbol.  This a base case for the
--	 * inclusion recursion.
--	 */
--	if (!sym->sec || sym->sec->include ||
--	    (sym->type != STT_SECTION && sym->status == SAME))
--		goto out;
--	sec = sym->sec;
--	sec->include = 1;
--	inc_printf("section %s is included\n", sec->name);
--	if (sec->secsym && sec->secsym != sym) {
--		sec->secsym->include = 1;
--		inc_printf("section symbol %s is included\n", sec->secsym->name);
--	}
--	if (!sec->rela)
--		goto out;
--	sec->rela->include = 1;
--	inc_printf("section %s is included\n", sec->rela->name);
--	list_for_each_entry(rela, &sec->rela->relas, list)
--		kpatch_include_symbol(rela->sym, recurselevel+1);
--out:
--	inc_printf("end include_symbol(%s)\n", sym->name);
--	return;
--}
--
- static int kpatch_include_changed_functions(struct kpatch_elf *kelf)
- {
- 	struct symbol *sym;
 -- 
 2.44.0
 
