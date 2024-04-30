@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61BC6C4345F
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2024 12:47:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.714807.1116133 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F383C19F53
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2024 12:47:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.714809.1116144 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1mtO-0005Ga-Si; Tue, 30 Apr 2024 12:47:30 +0000
+	id 1s1mtP-0005R0-Gk; Tue, 30 Apr 2024 12:47:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714807.1116133; Tue, 30 Apr 2024 12:47:30 +0000
+Received: by outflank-mailman (output) from mailman id 714809.1116144; Tue, 30 Apr 2024 12:47:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1mtO-0005Es-Nw; Tue, 30 Apr 2024 12:47:30 +0000
-Received: by outflank-mailman (input) for mailman id 714807;
- Tue, 30 Apr 2024 12:47:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s1mtP-0005PA-93; Tue, 30 Apr 2024 12:47:31 +0000
+Received: by outflank-mailman (input) for mailman id 714809;
+ Tue, 30 Apr 2024 12:47:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OGtk=MD=cloud.com=fouad.hilly@srs-se1.protection.inumbo.net>)
- id 1s1mtN-0005Ay-IT
- for xen-devel@lists.xenproject.org; Tue, 30 Apr 2024 12:47:29 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ccd0812e-06ef-11ef-b4bb-af5377834399;
- Tue, 30 Apr 2024 14:47:27 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a58a36008ceso662040466b.0
- for <xen-devel@lists.xenproject.org>; Tue, 30 Apr 2024 05:47:27 -0700 (PDT)
+ id 1s1mtO-0005B4-8h
+ for xen-devel@lists.xenproject.org; Tue, 30 Apr 2024 12:47:30 +0000
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [2a00:1450:4864:20::633])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cdfffa86-06ef-11ef-909b-e314d9c70b13;
+ Tue, 30 Apr 2024 14:47:29 +0200 (CEST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a55bf737cecso668767266b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Apr 2024 05:47:29 -0700 (PDT)
 Received: from fhilly.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- e14-20020a170906504e00b00a558014ab2csm14165324ejk.145.2024.04.30.05.47.26
+ e14-20020a170906504e00b00a558014ab2csm14165324ejk.145.2024.04.30.05.47.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 05:47:26 -0700 (PDT)
+ Tue, 30 Apr 2024 05:47:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,122 +47,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ccd0812e-06ef-11ef-b4bb-af5377834399
+X-Inumbo-ID: cdfffa86-06ef-11ef-909b-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1714481247; x=1715086047; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1714481249; x=1715086049; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bxvxpeo53t3s7EbhOvzZRsMHHwhI5TdimldfKLtVGMc=;
-        b=fMdFeSM77EzxJp2l/OGOd8Lh5enogyE7Z5gqUov6cc1h/XPMrdnlXsGhmFJ42aPMOj
-         Yc7SBBVtGd+QuQWgdffsAvQ1/wPeCaykd3ue1fZbuEPtJBloiF5i8YYqZ6T4Fr+nQdDN
-         UwcZDD3CrgOr33lRLHNeskfo7cGyhmRehqaHQ=
+        bh=xetGCzyng7oSVdEu+g4DSoDeJEZCA8694EpUidgaMa8=;
+        b=gdpPgm6+e3ajxiUMY3jXIiXPq8OTWW3wmlCviUCMp2XYArpzW6kJ6qUutIxeLy9SHA
+         HZSmMXvUodJ7t1fMHWXwFCsugYGkVFigyb8T4RINqeaJi9OfTLchH9MhlRr6HAdBnqi8
+         JYy0MaCvdZud0Jnjv4BVkXpf98+/CdAIUau9w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714481247; x=1715086047;
+        d=1e100.net; s=20230601; t=1714481249; x=1715086049;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bxvxpeo53t3s7EbhOvzZRsMHHwhI5TdimldfKLtVGMc=;
-        b=E/MXkPvfXZ+OBvsAr0voYSJPR8cyBrTXSHnpRnJbkdwqii6gBcbmxWxEXtkbUsqeEs
-         bVVgSk/UNTYg+ePLXVU3dA0yp53PYzT3+FFScyhzTSEhHCGUYnLYrjWt+q+0UWJWyD69
-         O8oURqRxmOlhRq7/TojKsUtjsqEkXA2EUPPwfd0vZXVMSkfN9jkk0n9waL0Txpsl8vSO
-         +lEszZiMh5+2Ej6FJsICBBoUP+OlwwPHJaD4Rl4BHeeRGdOWhGW125EAkjjtT8hVCCFh
-         jLr/BGh0wCZ9wZpG6Zcduo+IxFRs5o4KIfKE5ThyZj9CzOwjr83S8JwJUVUUWt0OKt36
-         hrAg==
-X-Gm-Message-State: AOJu0Yy0Wyni/BIflDxW5siG5huPWJ+iZEjrPIQ8aO0Qxch2rv5L/EGF
-	bB309XC+pjFq8J2+JUDuDpj+CgcVvtyjHzxzUTT0p0UEDGLcOkKPWEptc0TIBMbzFJZWdr9AclJ
-	X
-X-Google-Smtp-Source: AGHT+IEYkZIzhUEArnmSrlxLG95tEEeoD8rk4qvgtIN3V+ZO4wpE/Zw2bddMmewo+3ca9v7SmEH5/g==
-X-Received: by 2002:a17:906:5fd3:b0:a58:e8c7:c0ae with SMTP id k19-20020a1709065fd300b00a58e8c7c0aemr6933947ejv.16.1714481246781;
-        Tue, 30 Apr 2024 05:47:26 -0700 (PDT)
+        bh=xetGCzyng7oSVdEu+g4DSoDeJEZCA8694EpUidgaMa8=;
+        b=bIFdImaSu8mRR8GvGHqoZr0BW+iBSi99UXMQdVbNg94K8Yo8bNS1gnz/Pm9+ZkG35l
+         Ax0eJfaARBvktCQCy6Iuzbi2wSf/wBAlTq5BhRFhDTn4071HilNa11mf3AQUwMQlYH+J
+         Z1kvlohzYh/POrTRLLBxoJ7bCTWDwIHDUbvbdh8UhKtF08JQIqfIwA9J5Xjap839iY3W
+         4yOC3GSjFvQvQSexY/WyWTRz4JEXq6iaa/nhLyjFiyKh7CerBWXPeK4rrYtPfzugbjYy
+         L6f9jFcQ18Rzb+B23P3K9GFDgyieErcqzXVlJkxwnSzdEzlZJybiHBSKTtEPhVCI/Mua
+         i/Gw==
+X-Gm-Message-State: AOJu0YzVV09/he7n0Ivrmvxt+JkrYezkWazgWRRSEEGdiYSp7XRONqUn
+	J75wvHzE8j+xl74yBJQs5jKfd+pWmNKoMBqdmyRw2kYPa0XCO13zBMBZyQ3kCzD015hkppleIdj
+	j
+X-Google-Smtp-Source: AGHT+IEgypZzUkmtEkoARhyE6vL2FcIm90aW/XVJnTNlJjgUCAOSBS4YAT210l6216z9vbqk/+S3bw==
+X-Received: by 2002:a17:906:698e:b0:a52:58a7:11d1 with SMTP id i14-20020a170906698e00b00a5258a711d1mr8632442ejr.38.1714481248942;
+        Tue, 30 Apr 2024 05:47:28 -0700 (PDT)
 From: Fouad Hilly <fouad.hilly@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Fouad Hilly <fouad.hilly@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 1/5] x86: Update x86 low level version check of microcode
-Date: Tue, 30 Apr 2024 13:47:05 +0100
-Message-ID: <20240430124709.865183-2-fouad.hilly@cloud.com>
+	Anthony PERARD <anthony@xenproject.org>
+Subject: [PATCH v3 4/5] x86: Use getopt to handle command line args
+Date: Tue, 30 Apr 2024 13:47:08 +0100
+Message-ID: <20240430124709.865183-5-fouad.hilly@cloud.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20240430124709.865183-1-fouad.hilly@cloud.com>
 References: <20240430124709.865183-1-fouad.hilly@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Update microcode version check at Intel and AMD Level by:
-Preventing the low level code from sending errors if the microcode
-version is not a newer version. this is required to allow developers to do
-ucode loading testing, including the introduction of Intel "min rev" field,
-which requires an override mechanism for newer version checks. Even though
-the check for newer is removed at this level, it still exists at higher
-common level, where by default only newer version will be processed.
-The option to override version check, will be added as part of this patch
-series.
-Other errors will be handled as required at this level.
-Keep all the required code at low level that checks for signature and CPU compatibility
+Use getopt_long() to handle command line arguments.
+Introduce ext_err for common exit with errors.
 
 Signed-off-by: Fouad Hilly <fouad.hilly@cloud.com>
 ---
 [v3]
-1- Update intel code to return errors in case of invalid microcode only.
-2- Update code comments.
-3- Update commit message and its description
+1- Exit with error prints erros only to stderr.
+2- Remove argc checks.
+3- Utilize optind.
 
 [v2]
-Update message description to better describe the changes
- xen/arch/x86/cpu/microcode/amd.c   |  7 +++----
- xen/arch/x86/cpu/microcode/intel.c | 10 ++++------
- 2 files changed, 7 insertions(+), 10 deletions(-)
+1- Removed unnecessary NULL initialization.
+2- Used static at the beginning of type struct declaration.
+3- Corrected switch\case indentations.
+4- Removed redundant checks.
+5- Corrected label indentation.
+ tools/misc/xen-ucode.c | 45 +++++++++++++++++++++++++++++++-----------
+ 1 file changed, 33 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 17e68697d5bf..316469ec06e4 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -384,11 +384,10 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-             }
+diff --git a/tools/misc/xen-ucode.c b/tools/misc/xen-ucode.c
+index 005bf85b6551..d95f967f021b 100644
+--- a/tools/misc/xen-ucode.c
++++ b/tools/misc/xen-ucode.c
+@@ -11,6 +11,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <xenctrl.h>
++#include <getopt.h>
  
-             /*
--             * If the new ucode covers current CPU, compare ucodes and store the
--             * one with higher revision.
-+             * If the microcode covers current CPU, then store its
-+             * revision.
-              */
--            if ( (microcode_fits(mc->patch) != MIS_UCODE) &&
--                 (!saved || (compare_header(mc->patch, saved) == NEW_UCODE)) )
-+            if ( (microcode_fits(mc->patch) != MIS_UCODE) && !saved )
-             {
-                 saved = mc->patch;
-                 saved_size = mc->len;
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index 96f34b336b21..de9115974d08 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -294,8 +294,7 @@ static int cf_check apply_microcode(const struct microcode_patch *patch)
+ static xc_interface *xch;
  
-     result = microcode_update_match(patch);
+@@ -20,7 +21,10 @@ static const char   amd_id[] = "AuthenticAMD";
+ static void usage(const char *name)
+ {
+     printf("%s: Xen microcode updating tool\n"
+-           "Usage: %s [<microcode file> | show-cpu-info]\n",
++           "Usage: %s [<microcode file> | Options]\n"
++           "options:\n"
++           "  -h, --help            display this help and exit\n"
++           "  -s, --show-cpu-info   show CPU information and exit\n",
+            name, name);
+ }
  
--    if ( result != NEW_UCODE &&
--         !(opt_ucode_allow_same && result == SAME_UCODE) )
-+    if ( result == MIS_UCODE )
-         return -EINVAL;
+@@ -84,6 +88,13 @@ int main(int argc, char *argv[])
+     char *filename, *buf;
+     size_t len;
+     struct stat st;
++    int opt;
++
++    static const struct option options[] = {
++        {"help", no_argument, NULL, 'h'},
++        {"show-cpu-info", no_argument, NULL, 's'},
++        {NULL, no_argument, NULL, 0}
++    };
  
-     wbinvd();
-@@ -355,11 +354,10 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-             break;
+     xch = xc_interface_open(NULL, NULL, 0);
+     if ( xch == NULL )
+@@ -93,21 +104,25 @@ int main(int argc, char *argv[])
+         exit(1);
+     }
  
-         /*
--         * If the new update covers current CPU, compare updates and store the
--         * one with higher revision.
-+         * If the microcode covers current CPU, then store its
-+         * revision.
-          */
--        if ( (microcode_update_match(mc) != MIS_UCODE) &&
--             (!saved || compare_revisions(saved->rev, mc->rev) == NEW_UCODE) )
-+        if ( (microcode_update_match(mc) != MIS_UCODE) && !saved )
-             saved = mc;
+-    if ( argc < 2 )
++    while ( (opt = getopt_long(argc, argv, "hs", options, NULL)) != -1 )
+     {
+-        fprintf(stderr,
+-                "%s: unable to process command line arguments\n", argv[0]);
+-        usage(argv[0]);
+-        exit(2);
++        switch (opt)
++        {
++        case 'h':
++            usage(argv[0]);
++            exit(EXIT_SUCCESS);
++        case 's':
++            show_curr_cpu(stdout);
++            exit(EXIT_SUCCESS);
++        default:
++            goto ext_err;
++        }
+     }
  
-         buf  += blob_size;
+-    if ( !strcmp(argv[1], "show-cpu-info") )
+-    {
+-        show_curr_cpu(stdout);
+-        return 0;
+-    }
++    if ( optind == argc )
++        goto ext_err;
+ 
+-    filename = argv[1];
++    filename = argv[optind];
+     fd = open(filename, O_RDONLY);
+     if ( fd < 0 )
+     {
+@@ -149,4 +164,10 @@ int main(int argc, char *argv[])
+     close(fd);
+ 
+     return 0;
++
++ ext_err:
++    fprintf(stderr,
++            "%s: unable to process command line arguments\n", argv[0]);
++    usage(argv[0]);
++    exit(EXIT_FAILURE);
+ }
 -- 
 2.42.0
 
