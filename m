@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83A5C25B74
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2024 16:50:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.715052.1116505 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE50C4345F
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2024 16:50:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.715058.1116564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1qgV-0004JE-2X; Tue, 30 Apr 2024 16:50:27 +0000
+	id 1s1qgZ-0005or-Vh; Tue, 30 Apr 2024 16:50:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 715052.1116505; Tue, 30 Apr 2024 16:50:27 +0000
+Received: by outflank-mailman (output) from mailman id 715058.1116564; Tue, 30 Apr 2024 16:50:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s1qgU-0004J7-Ua; Tue, 30 Apr 2024 16:50:26 +0000
-Received: by outflank-mailman (input) for mailman id 715052;
- Tue, 30 Apr 2024 16:50:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s1qgZ-0005nD-NB; Tue, 30 Apr 2024 16:50:31 +0000
+Received: by outflank-mailman (input) for mailman id 715058;
+ Tue, 30 Apr 2024 16:50:30 +0000
+Received: from [94.247.172.50] (helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7/Z8=MD=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1s1qgT-0003oO-Ic
- for xen-devel@lists.xenproject.org; Tue, 30 Apr 2024 16:50:25 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bdb105fa-0711-11ef-909b-e314d9c70b13;
- Tue, 30 Apr 2024 18:50:25 +0200 (CEST)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-516d264d0e4so10924e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 30 Apr 2024 09:50:25 -0700 (PDT)
+ id 1s1qgX-0003oL-T1
+ for xen-devel@lists.xenproject.org; Tue, 30 Apr 2024 16:50:29 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bf83db4e-0711-11ef-b4bb-af5377834399;
+ Tue, 30 Apr 2024 18:50:28 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-51e75e7a276so742448e87.0
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Apr 2024 09:50:28 -0700 (PDT)
 Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- h18-20020a197012000000b0051d9149a2cesm917564lfc.84.2024.04.30.09.50.23
+ u17-20020a196a11000000b0051aaffe4f1dsm4252114lfu.79.2024.04.30.09.50.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 09:50:23 -0700 (PDT)
+ Tue, 30 Apr 2024 09:50:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,37 +46,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bdb105fa-0711-11ef-909b-e314d9c70b13
+X-Inumbo-ID: bf83db4e-0711-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714495824; x=1715100624; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1714495828; x=1715100628; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Fl7u/xU9kjPK32PHrP3OybWWMA4e16GqaL6Xbstmvbo=;
-        b=GHhjqpPSU4kT7Um5onInyv/0qvcJl2zA2c1xkaf/qeq1ZkLjW/hbwXJHt5mZ7OQo+a
-         m9v1BeTZA7V/fpwSIOFb4aHyC1NFXzvvVNCkYfugEHaNX8a8BJRzn0nB0qu7dFLf8VP+
-         mcr8saXq0H5AqcWzah9soVrtaivnyeuTraY06weik3fSC3d/FrXOPhRSTs0c+bzhyhdH
-         11eh3WQETYNg8NKGlGmucBkw1ADhq1kQc08Ug4AvHPiwArrINQjJd1FGJzTiMTD3VnBQ
-         8cZqBshbJ1SF3Cwpg2AxseL4/+eI5BfVNzcaJm5hL5jofmFqtXfU2+POfMdMl5KBqRW5
-         XtYw==
+        bh=j0mqQo2QzUWZGYHpYGMWslGBm8Oap0E4Z0qNuGo27BE=;
+        b=Cr6rYcX+49Pwp/ZaOyNGmqouxkYQodnwJ/cfXmF9ZWSfJZKppkCA1LocdpRlwvMMp4
+         1YuvD3f+33RNq5fY4OSwa6KEIVo0N6xc4z6/8pF9p8dX66rso7omjrTcBMlYW4kveQIu
+         7LqaUAoLrQItScK4j76bP8y6Q8YN56JJP6lO+PniIfT0doTDyk3V+v++Xjni8bx0a8lk
+         NklPxwfRBfeJ54SJbR2NRWrL1ckHwDhhjmPlIbn7PJek3XCTMb0k6S3Dp6ro+3EfiuVB
+         7rO32N4Ma5BE3UiaqMnOlmTRwXI538wftbwC8+TYIJ6dtzvaHaNbrsZ53OkESwG6HiXt
+         omfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714495824; x=1715100624;
+        d=1e100.net; s=20230601; t=1714495828; x=1715100628;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Fl7u/xU9kjPK32PHrP3OybWWMA4e16GqaL6Xbstmvbo=;
-        b=mTMuhlIRWVoEZltI4+2YaDwh5XAg4sdY3qJkZhDTV564Tx/H/df9j049jmfCnjWmsJ
-         viYvFHR7W8Ax0qPWeInRbpcR0NR/mRIr8QxfZ9pE9hSkK20OV2KPUlblL6phxxja1u3c
-         m1kZOee2sFaHIJoQis3skcZpSTWn0MKI5CP1+9etyoTE2Sab3s2QbAjzCCZYiRFEU+KI
-         JIEY9/aXql0SaLj24fpTUvYRIOwatMHq+hrizk2fZt1/nslZ9meOx2zSzcdzWSDfWcd9
-         Vae4+xIwWUcVNJEzk8xzR7UB11ZSzjqdl4SfeevQz7jnXMAS96EM9jzwbqbj5HxKQ/t9
-         mz+Q==
-X-Forwarded-Encrypted: i=1; AJvYcCXonagH/5sTaxwLVMHy3ZyWkHQGsVDkSrAyZa0+tY58el4la0Z4qj4nCvA5KaNOh3xuELe18PLmLM96b0Tbzl7CfZDIYih7AKjAdR1tww4=
-X-Gm-Message-State: AOJu0YwPlEaPuJ91Mu65byYzx3gpQMV+Z1mc4YkS86kRDO1MkHkzl0jV
-	au2EItUCGriWGj7qobxRMvMlQ0avXfy91Fpl7N7Q9iCbYjhdv1h6
-X-Google-Smtp-Source: AGHT+IEr1VKCghuiim9RyIssq8iqWzgedXC6VPdssb/073WGO5FTX1lD3Adw0P8JM08/qNMg1AdtBQ==
-X-Received: by 2002:ac2:5f01:0:b0:51d:6630:b83f with SMTP id 1-20020ac25f01000000b0051d6630b83fmr89702lfq.17.1714495824584;
-        Tue, 30 Apr 2024 09:50:24 -0700 (PDT)
+        bh=j0mqQo2QzUWZGYHpYGMWslGBm8Oap0E4Z0qNuGo27BE=;
+        b=ls47+iDTyr+tnxjwy+JtBt09DW3lBWIjIffeYjxC4iIYh5s0agJb9CySSY7mSyzmck
+         jgB8uE+f+5E8UT1XguMoAq/t0gJMTjZSAO3pHefajXazw1S0d0Ix7wTGnSZmZajqVmvQ
+         Sb/ThhXUDDM/cdJTnN1yXpU7GeHHyycL2/aYJjZQeRDMZ42puYs5O4u1LrhkPgtq2msB
+         f18GdH9w9gAiyMUkkpbStoOTFDre1XD9hNICldfJlPtUGiWPbmlzAgRnO0UFupSc3wgx
+         iq8QC6FK0ZQipFmuQ0Vqn1PGj7ggNgMvv4MAL8CVZev1Js3u38cv8FirGfKwYyeOt+Rb
+         4ohg==
+X-Forwarded-Encrypted: i=1; AJvYcCVWAUMKcSVQTdkm2sERhxIM6/7mPU4gtGuGuhv5gjyyLESEQfKQQEPHP2/a6tMF2e+lNDcJ2I1bmN7dFNC3wial0ScrCoXGqZpQyb0VaRo=
+X-Gm-Message-State: AOJu0Yz6JPJN4kzjLql8HNXxYKzC5KgNGYsrcnm1zwsRpLfuSuhk3yln
+	LaXrQ0H0inqbhuY+YpVExnS1+ma6XtjNyqrWNmU6p98iNXehepWC
+X-Google-Smtp-Source: AGHT+IGQCPL9JgHmD1RLCqV4syaus5YjfpEwlBgT76+qyDY37l2dNAYgiSCfXBlfwOjb2G8RuoFmJQ==
+X-Received: by 2002:ac2:4c4e:0:b0:51d:1830:8380 with SMTP id o14-20020ac24c4e000000b0051d18308380mr58334lfk.8.1714495827628;
+        Tue, 30 Apr 2024 09:50:27 -0700 (PDT)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: edgar.iglesias@gmail.com,
@@ -87,9 +86,9 @@ Cc: edgar.iglesias@gmail.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Paul Durrant <paul@xen.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v4 08/17] xen: mapcache: Refactor xen_invalidate_map_cache_entry_unlocked
-Date: Tue, 30 Apr 2024 18:49:30 +0200
-Message-Id: <20240430164939.925307-9-edgar.iglesias@gmail.com>
+Subject: [PATCH v4 10/17] xen: mapcache: Break out xen_map_cache_init_single()
+Date: Tue, 30 Apr 2024 18:49:32 +0200
+Message-Id: <20240430164939.925307-11-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240430164939.925307-1-edgar.iglesias@gmail.com>
 References: <20240430164939.925307-1-edgar.iglesias@gmail.com>
@@ -98,87 +97,99 @@ Content-Transfer-Encoding: 8bit
 
 From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Add MapCache argument to xen_invalidate_map_cache_entry_unlocked.
-This is in preparation for supporting multiple map caches.
-
-No functional changes.
+Break out xen_map_cache_init_single() in preparation for
+adding multiple map caches.
 
 Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
 ---
- hw/xen/xen-mapcache.c | 21 +++++++++++----------
- 1 file changed, 11 insertions(+), 10 deletions(-)
+ hw/xen/xen-mapcache.c | 53 ++++++++++++++++++++++++++-----------------
+ 1 file changed, 32 insertions(+), 21 deletions(-)
 
 diff --git a/hw/xen/xen-mapcache.c b/hw/xen/xen-mapcache.c
-index 6e758eff94..34454da2f6 100644
+index dd08cd296b..72a7e25e3e 100644
 --- a/hw/xen/xen-mapcache.c
 +++ b/hw/xen/xen-mapcache.c
-@@ -420,7 +420,8 @@ ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
-     return xen_ram_addr_from_mapcache_single(mapcache, ptr);
+@@ -93,23 +93,44 @@ static inline int test_bits(int nr, int size, const unsigned long *addr)
+         return 0;
  }
  
--static void xen_invalidate_map_cache_entry_unlocked(uint8_t *buffer)
-+static void xen_invalidate_map_cache_entry_unlocked(MapCache *mc,
-+                                                    uint8_t *buffer)
+-void xen_map_cache_init(phys_offset_to_gaddr_t f, void *opaque)
++static MapCache *xen_map_cache_init_single(phys_offset_to_gaddr_t f,
++                                           void *opaque,
++                                           unsigned long max_size)
  {
-     MapCacheEntry *entry = NULL, *pentry = NULL;
-     MapCacheRev *reventry;
-@@ -428,7 +429,7 @@ static void xen_invalidate_map_cache_entry_unlocked(uint8_t *buffer)
-     hwaddr size;
-     int found = 0;
+     unsigned long size;
+-    struct rlimit rlimit_as;
++    MapCache *mc;
++
++    mc = g_new0(MapCache, 1);
++
++    mc->phys_offset_to_gaddr = f;
++    mc->opaque = opaque;
++    qemu_mutex_init(&mc->lock);
++
++    QTAILQ_INIT(&mc->locked_entries);
  
--    QTAILQ_FOREACH(reventry, &mapcache->locked_entries, next) {
-+    QTAILQ_FOREACH(reventry, &mc->locked_entries, next) {
-         if (reventry->vaddr_req == buffer) {
-             paddr_index = reventry->paddr_index;
-             size = reventry->size;
-@@ -438,7 +439,7 @@ static void xen_invalidate_map_cache_entry_unlocked(uint8_t *buffer)
-     }
-     if (!found) {
-         trace_xen_invalidate_map_cache_entry_unlocked_not_found(buffer);
--        QTAILQ_FOREACH(reventry, &mapcache->locked_entries, next) {
-+        QTAILQ_FOREACH(reventry, &mc->locked_entries, next) {
-             trace_xen_invalidate_map_cache_entry_unlocked_found(
-                 reventry->paddr_index,
-                 reventry->vaddr_req
-@@ -446,15 +447,15 @@ static void xen_invalidate_map_cache_entry_unlocked(uint8_t *buffer)
-         }
-         return;
-     }
--    QTAILQ_REMOVE(&mapcache->locked_entries, reventry, next);
-+    QTAILQ_REMOVE(&mc->locked_entries, reventry, next);
-     g_free(reventry);
+-    mapcache = g_new0(MapCache, 1);
++    mc->max_mcache_size = max_size;
  
--    if (mapcache->last_entry != NULL &&
--        mapcache->last_entry->paddr_index == paddr_index) {
--        mapcache->last_entry = NULL;
-+    if (mc->last_entry != NULL &&
-+        mc->last_entry->paddr_index == paddr_index) {
-+        mc->last_entry = NULL;
-     }
+-    mapcache->phys_offset_to_gaddr = f;
+-    mapcache->opaque = opaque;
+-    qemu_mutex_init(&mapcache->lock);
++    mc->nr_buckets =
++        (((mc->max_mcache_size >> XC_PAGE_SHIFT) +
++          (1UL << (MCACHE_BUCKET_SHIFT - XC_PAGE_SHIFT)) - 1) >>
++         (MCACHE_BUCKET_SHIFT - XC_PAGE_SHIFT));
  
--    entry = &mapcache->entry[paddr_index % mapcache->nr_buckets];
-+    entry = &mc->entry[paddr_index % mc->nr_buckets];
-     while (entry && (entry->paddr_index != paddr_index || entry->size != size)) {
-         pentry = entry;
-         entry = entry->next;
-@@ -488,7 +489,7 @@ static void xen_invalidate_map_cache_entry_bh(void *opaque)
-     XenMapCacheData *data = opaque;
+-    QTAILQ_INIT(&mapcache->locked_entries);
++    size = mc->nr_buckets * sizeof(MapCacheEntry);
++    size = (size + XC_PAGE_SIZE - 1) & ~(XC_PAGE_SIZE - 1);
++    trace_xen_map_cache_init(mc->nr_buckets, size);
++    mc->entry = g_malloc0(size);
++    return mc;
++}
++
++void xen_map_cache_init(phys_offset_to_gaddr_t f, void *opaque)
++{
++    struct rlimit rlimit_as;
++    unsigned long max_mcache_size;
  
-     mapcache_lock(mapcache);
--    xen_invalidate_map_cache_entry_unlocked(data->buffer);
-+    xen_invalidate_map_cache_entry_unlocked(mapcache, data->buffer);
-     mapcache_unlock(mapcache);
- 
-     aio_co_wake(data->co);
-@@ -506,7 +507,7 @@ void coroutine_mixed_fn xen_invalidate_map_cache_entry(uint8_t *buffer)
-         qemu_coroutine_yield();
+     if (geteuid() == 0) {
+         rlimit_as.rlim_cur = RLIM_INFINITY;
+         rlimit_as.rlim_max = RLIM_INFINITY;
+-        mapcache->max_mcache_size = MCACHE_MAX_SIZE;
++        max_mcache_size = MCACHE_MAX_SIZE;
      } else {
-         mapcache_lock(mapcache);
--        xen_invalidate_map_cache_entry_unlocked(buffer);
-+        xen_invalidate_map_cache_entry_unlocked(mapcache, buffer);
-         mapcache_unlock(mapcache);
+         getrlimit(RLIMIT_AS, &rlimit_as);
+         rlimit_as.rlim_cur = rlimit_as.rlim_max;
+@@ -119,24 +140,14 @@ void xen_map_cache_init(phys_offset_to_gaddr_t f, void *opaque)
+                         " memory is not infinity");
+         }
+         if (rlimit_as.rlim_max < MCACHE_MAX_SIZE + NON_MCACHE_MEMORY_SIZE) {
+-            mapcache->max_mcache_size = rlimit_as.rlim_max -
+-                NON_MCACHE_MEMORY_SIZE;
++            max_mcache_size = rlimit_as.rlim_max - NON_MCACHE_MEMORY_SIZE;
+         } else {
+-            mapcache->max_mcache_size = MCACHE_MAX_SIZE;
++            max_mcache_size = MCACHE_MAX_SIZE;
+         }
      }
+ 
++    mapcache = xen_map_cache_init_single(f, opaque, max_mcache_size);
+     setrlimit(RLIMIT_AS, &rlimit_as);
+-
+-    mapcache->nr_buckets =
+-        (((mapcache->max_mcache_size >> XC_PAGE_SHIFT) +
+-          (1UL << (MCACHE_BUCKET_SHIFT - XC_PAGE_SHIFT)) - 1) >>
+-         (MCACHE_BUCKET_SHIFT - XC_PAGE_SHIFT));
+-
+-    size = mapcache->nr_buckets * sizeof (MapCacheEntry);
+-    size = (size + XC_PAGE_SIZE - 1) & ~(XC_PAGE_SIZE - 1);
+-    trace_xen_map_cache_init(mapcache->nr_buckets, size);
+-    mapcache->entry = g_malloc0(size);
  }
+ 
+ static void xen_remap_bucket(MapCache *mc,
 -- 
 2.40.1
 
