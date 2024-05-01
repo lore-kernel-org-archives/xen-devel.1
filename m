@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF342C25B5C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E23BC25B10
 	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2024 17:45:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.716040.1118105 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.716035.1118061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2aU5-0001qL-OO; Thu, 02 May 2024 17:44:41 +0000
+	id 1s2aU1-0000py-Bh; Thu, 02 May 2024 17:44:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 716040.1118105; Thu, 02 May 2024 17:44:41 +0000
+Received: by outflank-mailman (output) from mailman id 716035.1118061; Thu, 02 May 2024 17:44:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2aU5-0001pU-KK; Thu, 02 May 2024 17:44:41 +0000
-Received: by outflank-mailman (input) for mailman id 716040;
- Thu, 02 May 2024 17:44:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s2aU1-0000pr-8B; Thu, 02 May 2024 17:44:37 +0000
+Received: by outflank-mailman (input) for mailman id 716035;
+ Thu, 02 May 2024 17:44:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1TOG=MF=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1s2aU4-0000pj-F5
- for xen-devel@lists.xenproject.org; Thu, 02 May 2024 17:44:40 +0000
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [2a00:1450:4864:20::233])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a586fdf4-08ab-11ef-b4bb-af5377834399;
- Thu, 02 May 2024 19:44:38 +0200 (CEST)
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2e0a2870bceso59013851fa.2
- for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 10:44:38 -0700 (PDT)
+ id 1s2aTz-0000pk-If
+ for xen-devel@lists.xenproject.org; Thu, 02 May 2024 17:44:35 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a2e17859-08ab-11ef-909b-e314d9c70b13;
+ Thu, 02 May 2024 19:44:33 +0200 (CEST)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-51967f75729so9994573e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 10:44:33 -0700 (PDT)
 Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- bp42-20020a05651215aa00b0051f131c08c4sm247133lfb.183.2024.05.02.10.44.36
+ b15-20020ac2562f000000b0051884ea2a32sm244102lff.31.2024.05.02.10.44.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 10:44:36 -0700 (PDT)
+ Thu, 02 May 2024 10:44:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a586fdf4-08ab-11ef-b4bb-af5377834399
+X-Inumbo-ID: a2e17859-08ab-11ef-909b-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714671877; x=1715276677; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1714671872; x=1715276672; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nmk0wrFUeJk71sTQLd3UkMRJK8JdRU2ZvbHWSXIjxGE=;
-        b=fQ+dTFfZmd4zbRLCDE5eC01RylnZeDdbjUmaXA7/a2lALPe3fzMIWRpocpEaWOcELR
-         AFOppQGy63r6Gw5NG9JWwGDAPbf+d8S8IcAQDQpOOkPRKN8AX5JhEfOTa8DHAfhAzS/n
-         vrFHrLAfvSFrgNdkw2QdRNlwWSBWU3QIhTR0nOnEsd4KlJNOuaQqNz33kbbPg1Ae13uT
-         +kTzA8t4HP+CUENaWwpic1f5Ea6r84LI3wCZp9gnrTLkMpwFdOmlD60UctsfmiEqJGh1
-         MgQLU1cQV6Qp0qgNqBV3Ir0dMkRqGonRQav9ack8em/DGJWTht2HR9S+ImJxoPXBpSIU
-         wTxw==
+        bh=qOE/YLLSPbJgtqh9FaZ/GX1mmt9IgzaYsZgTTrSiNM8=;
+        b=RaLH4dfs3KJ5VikZ3O2qPpKGgG44sblzksb6c17Zb8tZBjdXTuMymAPOSlBMu6JtZl
+         rL8Za+2WqhjEH/C44MnGCsHHzVK1OP0Bsre7gx0GFHgxft8mFG4yXtkpFZLEVpAQ03ty
+         SJJWo7goN9+bkzQ4ma0SZb7kfp0O+j5+WNalbT7MgtK8YZDFuSuS6DkS1E1YDLuoZ4Z8
+         BVWKb3FSxjd3bqL/krnfsUaL4C/cjMnC04u4+Vj7/BvGlET7gFkg7cGAg8E8zgn5ZcsT
+         updqZtiALPaWVKnRaCqWjSR8ymzKmwF427xFjvs4nzQ9hUV/KoD4mFQ4h5NVo7jOQCNR
+         OmIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714671877; x=1715276677;
+        d=1e100.net; s=20230601; t=1714671872; x=1715276672;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=nmk0wrFUeJk71sTQLd3UkMRJK8JdRU2ZvbHWSXIjxGE=;
-        b=EsEBHEpulOU6YbkacLtLhb2MbH2vqDFwsBh23xyjtYCy/W8sr8sedPXqyzq7Uwx8AY
-         S4rBZNnK4BfP5fgI+njQpaiNsObzwS/r6HegJEFyVjpi4REBC3cyzC+2ZLEVDgUy7wHN
-         KULrWSX7O8I0HQy5Wwv/IBD38/XAIvsopZGzTUagAnPOzNGSNt4f97zVlPA5gWz9rWOy
-         Mi5X7LwAAszd6tJwWKGnf78ibzqxise87UaOmE+jRuJ4xayzfqjGspoHytzM0+jTSmek
-         Wd+vwuRG2twHUcy+0BhKBN3ZP5ECDL9KDRD7fyg4ktY/+s09KhvtIrVW6Gh45rFywONz
-         aEog==
-X-Gm-Message-State: AOJu0YzWlux7lp9kxPq+xyhWno54ZfFzv0LfjCZXVXtvpaACHuohNVIk
-	aqGJtrzp6G3qj6Z3pX47qmgsSi16XJQwSccTHjDeDetvO2VH3imkB2wGNaok
-X-Google-Smtp-Source: AGHT+IH5+T7s8J2KvprU48kD+WjKFIdBK1vELw+ethbsndwadvILH2gUZvISJTaosMo8adsitW8pTw==
-X-Received: by 2002:ac2:4942:0:b0:516:582:2348 with SMTP id o2-20020ac24942000000b0051605822348mr346795lfi.54.1714671876830;
-        Thu, 02 May 2024 10:44:36 -0700 (PDT)
+        bh=qOE/YLLSPbJgtqh9FaZ/GX1mmt9IgzaYsZgTTrSiNM8=;
+        b=paUYRzZzpp7RP7JSn3XXbRMmloB8Jdxu3kCCaBB/sjdgc8GjF4TUwl5+HyRVs87zwg
+         0pwOvvbbQJ3XDm1hjwLKec/xY8yM43MAIGRAu8wzZIhCvXMOG1+Q593yuySMOIO8BGb2
+         Qhax4QjknnNAhRqF8PuqzKOpd//z4FjqkSZkDu6atVambWZJ8FQtUuedS36kDTTUgvLs
+         p8G+qelIhJ7YK1Gstamueudk7NnGr7sCiVmXz5s8DW1I7/R1vaEKpXnxomF7QcQ2uiin
+         CRlyl3Fec4+1ua4lztDlMy0t+2SPeX8vMACKpO8lSKQwznJCIYUs8vcZTXPypS2lKHQ1
+         C1LA==
+X-Gm-Message-State: AOJu0YwYC9e711Nq/NlkFT7DYUZKs3oormZjYGWaC9QrTSLecqcWIPJC
+	qVBXsM+Sl7qWNmZbffkKwnJo3L1NZfWOUhvxmqhcWynbBzqFF1MGR0fXSsgR
+X-Google-Smtp-Source: AGHT+IGbcCm5fc38UKPK1zDJdfmBtwkHYVUiZ0vyqiprQuSB5aWnfRR1u8dWIJi9bSESJAk8I6IWfg==
+X-Received: by 2002:ac2:520b:0:b0:518:b144:9020 with SMTP id a11-20020ac2520b000000b00518b1449020mr309556lfl.61.1714671872244;
+        Thu, 02 May 2024 10:44:32 -0700 (PDT)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -87,9 +87,9 @@ Cc: sstabellini@kernel.org,
 	jbeulich@suse.com,
 	andrew.cooper3@citrix.com,
 	edgar.iglesias@amd.com
-Subject: [PATCH v3 4/9] xen/arm64: head: Add missing code symbol annotations
-Date: Wed,  1 May 2024 05:54:43 +0200
-Message-Id: <20240501035448.964625-5-edgar.iglesias@gmail.com>
+Subject: [PATCH v3 1/9] xen/arm64: entry: Add missing code symbol annotations
+Date: Wed,  1 May 2024 05:54:40 +0200
+Message-Id: <20240501035448.964625-2-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240501035448.964625-1-edgar.iglesias@gmail.com>
 References: <20240501035448.964625-1-edgar.iglesias@gmail.com>
@@ -102,222 +102,234 @@ Use the generic xen/linkage.h macros to annotate code symbols
 and add missing annotations.
 
 Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/arch/arm/arm64/head.S | 50 ++++++++++++++++++++-------------------
- 1 file changed, 26 insertions(+), 24 deletions(-)
+ xen/arch/arm/arm64/entry.S | 72 +++++++++++++++++++++++++-------------
+ 1 file changed, 48 insertions(+), 24 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index fb297e9eb5..7acedb4f8f 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -90,7 +90,7 @@
-  * 4K-aligned address.
-  */
+diff --git a/xen/arch/arm/arm64/entry.S b/xen/arch/arm/arm64/entry.S
+index f963c923bb..af9a592cae 100644
+--- a/xen/arch/arm/arm64/entry.S
++++ b/xen/arch/arm/arm64/entry.S
+@@ -289,21 +289,25 @@
+         b       do_bad_mode
+         .endm
  
--GLOBAL(start)
-+FUNC(start)
+-hyp_sync_invalid:
++FUNC_LOCAL(hyp_sync_invalid)
+         entry   hyp=1
+         invalid BAD_SYNC
++END(hyp_sync_invalid)
+ 
+-hyp_irq_invalid:
++FUNC_LOCAL(hyp_irq_invalid)
+         entry   hyp=1
+         invalid BAD_IRQ
++END(hyp_irq_invalid)
+ 
+-hyp_fiq_invalid:
++FUNC_LOCAL(hyp_fiq_invalid)
+         entry   hyp=1
+         invalid BAD_FIQ
++END(hyp_fiq_invalid)
+ 
+-hyp_error_invalid:
++FUNC_LOCAL(hyp_error_invalid)
+         entry   hyp=1
+         invalid BAD_ERROR
++END(hyp_error_invalid)
+ 
+ /*
+  * SError received while running in the hypervisor mode.
+@@ -313,11 +317,12 @@ hyp_error_invalid:
+  * simplicity, as SError should be rare and potentially fatal,
+  * all interrupts are kept masked.
+  */
+-hyp_error:
++FUNC_LOCAL(hyp_error)
+         entry   hyp=1
+         mov     x0, sp
+         bl      do_trap_hyp_serror
+         exit    hyp=1
++END(hyp_error)
+ 
+ /*
+  * Synchronous exception received while running in the hypervisor mode.
+@@ -327,7 +332,7 @@ hyp_error:
+  * some of them. So we want to inherit the state from the interrupted
+  * context.
+  */
+-hyp_sync:
++FUNC_LOCAL(hyp_sync)
+         entry   hyp=1
+ 
+         /* Inherit interrupts */
+@@ -338,6 +343,7 @@ hyp_sync:
+         mov     x0, sp
+         bl      do_trap_hyp_sync
+         exit    hyp=1
++END(hyp_sync)
+ 
+ /*
+  * IRQ received while running in the hypervisor mode.
+@@ -352,7 +358,7 @@ hyp_sync:
+  * would require some rework in some paths (e.g. panic, livepatch) to
+  * ensure the ordering is enforced everywhere.
+  */
+-hyp_irq:
++FUNC_LOCAL(hyp_irq)
+         entry   hyp=1
+ 
+         /* Inherit D, A, F interrupts and keep I masked */
+@@ -365,8 +371,9 @@ hyp_irq:
+         mov     x0, sp
+         bl      do_trap_irq
+         exit    hyp=1
++END(hyp_irq)
+ 
+-guest_sync:
++FUNC_LOCAL(guest_sync)
          /*
-          * DO NOT MODIFY. Image header expected by Linux boot-loaders.
+          * Save x0, x1 in advance
           */
-@@ -102,6 +102,7 @@ efi_head:
-          */
-         add     x13, x18, #0x16
-         b       real_start           /* branch to kernel start */
-+END(start)
-         .quad   0                    /* Image load offset from start of RAM */
-         .quad   _end - start         /* Effective size of kernel image, little-endian */
-         .quad   __HEAD_FLAGS         /* Informative flags, little-endian */
-@@ -223,7 +224,7 @@ section_table:
-         .align  5
- #endif /* CONFIG_ARM_EFI */
+@@ -413,8 +420,9 @@ fastpath_out_workaround:
+         mov     x1, xzr
+         eret
+         sb
++END(guest_sync)
  
--real_start:
-+FUNC_LOCAL(real_start)
-         /* BSS should be zeroed when booting without EFI */
-         mov   x26, #0                /* x26 := skip_zero_bss */
- 
-@@ -263,9 +264,9 @@ primary_switched:
-         mov   x1, x21                /* x1 := paddr(FDT) */
-         ldr   x2, =start_xen
-         b     launch
--ENDPROC(real_start)
-+END(real_start)
- 
--GLOBAL(init_secondary)
-+FUNC(init_secondary)
-         msr   DAIFSet, 0xf           /* Disable all interrupts */
- 
-         /* Find out where we are */
-@@ -304,7 +305,7 @@ secondary_switched:
-         /* Jump to C world */
-         ldr   x2, =start_secondary
-         b     launch
--ENDPROC(init_secondary)
-+END(init_secondary)
- 
- /*
-  * Check if the CPU has been booted in Hypervisor mode.
-@@ -313,7 +314,7 @@ ENDPROC(init_secondary)
-  *
-  * Clobbers x0 - x5
-  */
--check_cpu_mode:
-+FUNC_LOCAL(check_cpu_mode)
-         PRINT_ID("- Current EL ")
-         mrs   x5, CurrentEL
-         print_reg x5
-@@ -329,7 +330,7 @@ check_cpu_mode:
-         PRINT_ID("- Xen must be entered in NS EL2 mode -\r\n")
-         PRINT_ID("- Please update the bootloader -\r\n")
-         b fail
--ENDPROC(check_cpu_mode)
-+END(check_cpu_mode)
- 
- /*
-  * Zero BSS
-@@ -339,7 +340,7 @@ ENDPROC(check_cpu_mode)
-  *
-  * Clobbers x0 - x3
-  */
--zero_bss:
-+FUNC_LOCAL(zero_bss)
-         /* Zero BSS only when requested */
-         cbnz  x26, skip_bss
- 
-@@ -353,14 +354,14 @@ zero_bss:
- 
- skip_bss:
-         ret
--ENDPROC(zero_bss)
-+END(zero_bss)
- 
- /*
-  * Initialize the processor for turning the MMU on.
-  *
-  * Clobbers x0 - x3
-  */
--cpu_init:
-+FUNC_LOCAL(cpu_init)
-         PRINT_ID("- Initialize CPU -\r\n")
- 
-         /* Set up memory attribute type tables */
-@@ -399,7 +400,7 @@ cpu_init:
-          */
-         msr spsel, #1
-         ret
--ENDPROC(cpu_init)
-+END(cpu_init)
- 
- /*
-  * Setup the initial stack and jump to the C world
-@@ -411,7 +412,7 @@ ENDPROC(cpu_init)
-  *
-  * Clobbers x3
-  */
--launch:
-+FUNC_LOCAL(launch)
-         ldr   x3, =init_data
-         add   x3, x3, #INITINFO_stack /* Find the boot-time stack */
-         ldr   x3, [x3]
-@@ -421,13 +422,13 @@ launch:
- 
-         /* Jump to C world */
-         br    x2
--ENDPROC(launch)
-+END(launch)
- 
- /* Fail-stop */
--fail:   PRINT_ID("- Boot failed -\r\n")
-+FUNC_LOCAL(fail)   PRINT_ID("- Boot failed -\r\n")
- 1:      wfe
-         b     1b
--ENDPROC(fail)
-+END(fail)
- 
- #ifdef CONFIG_EARLY_PRINTK
- /*
-@@ -438,14 +439,14 @@ ENDPROC(fail)
-  *
-  * Clobbers x0 - x1
-  */
--init_uart:
-+FUNC_LOCAL(init_uart)
-         ldr   x23, =CONFIG_EARLY_UART_BASE_ADDRESS
- #ifdef CONFIG_EARLY_UART_INIT
-         early_uart_init x23, 0
- #endif
-         PRINT("- UART enabled -\r\n")
-         ret
--ENDPROC(init_uart)
-+END(init_uart)
- 
- /*
-  * Print early debug messages.
-@@ -454,7 +455,7 @@ ENDPROC(init_uart)
-  * x23: Early UART base address
-  * Clobbers x0-x1
-  */
--ENTRY(asm_puts)
-+FUNC(asm_puts)
-         early_uart_ready x23, 1
-         ldrb  w1, [x0], #1           /* Load next char */
-         cbz   w1, 1f                 /* Exit on nul */
-@@ -462,7 +463,7 @@ ENTRY(asm_puts)
-         b     asm_puts
- 1:
-         ret
--ENDPROC(asm_puts)
-+END(asm_puts)
- 
- /*
-  * Print a 64-bit number in hex.
-@@ -471,7 +472,7 @@ ENDPROC(asm_puts)
-  * x23: Early UART base address
-  * Clobbers x0-x3
-  */
--ENTRY(asm_putn)
-+FUNC(asm_putn)
-         adr_l x1, hex
-         mov   x3, #16
- 1:
-@@ -484,7 +485,7 @@ ENTRY(asm_putn)
-         subs  x3, x3, #1
-         b.ne  1b
-         ret
--ENDPROC(asm_putn)
-+END(asm_putn)
- 
- RODATA_SECT(.rodata.idmap, hex, "0123456789abcdef")
- 
-@@ -493,16 +494,17 @@ RODATA_SECT(.rodata.idmap, hex, "0123456789abcdef")
- /* This provides a C-API version of __lookup_processor_type
-  * TODO: For now, the implementation return NULL every time
-  */
--ENTRY(lookup_processor_type)
-+FUNC(lookup_processor_type)
-         mov  x0, #0
-         ret
-+END(lookup_processor_type)
- 
- #ifdef CONFIG_ARM_EFI
- /*
-  *  Function to transition from EFI loader in C, to Xen entry point.
-  *  void noreturn efi_xen_start(void *fdt_ptr, uint32_t fdt_size);
-  */
--ENTRY(efi_xen_start)
-+FUNC(efi_xen_start)
+-wa2_ssbd:
++FUNC_LOCAL(wa2_ssbd)
+ #ifdef CONFIG_ARM_SSBD
+ alternative_cb arm_enable_wa2_handling
+         b       wa2_end
+@@ -450,42 +458,55 @@ wa2_end:
+         mov     x0, xzr
+         eret
+         sb
+-guest_sync_slowpath:
++END(wa2_ssbd)
++
++FUNC_LOCAL(guest_sync_slowpath)
          /*
-          * Preserve x0 (fdt pointer) across call to __flush_dcache_area,
-          * restore for entry into Xen.
-@@ -554,7 +556,7 @@ ENTRY(efi_xen_start)
-         mov   x26, #1               /* x26 := skip_zero_bss */
+          * x0/x1 may have been scratch by the fast path above, so avoid
+          * to save them.
+          */
+         guest_vector compat=0, iflags=IFLAGS__AI_, trap=guest_sync, save_x0_x1=0
++END(guest_sync_slowpath)
  
-         b     real_start_efi
--ENDPROC(efi_xen_start)
-+END(efi_xen_start)
+-guest_irq:
++FUNC_LOCAL(guest_irq)
+         guest_vector compat=0, iflags=IFLAGS__A__, trap=irq
++END(guest_irq)
  
- #endif /* CONFIG_ARM_EFI */
+-guest_fiq_invalid:
++FUNC_LOCAL(guest_fiq_invalid)
+         entry   hyp=0, compat=0
+         invalid BAD_FIQ
++END(guest_fiq_invalid)
  
+-guest_error:
++FUNC_LOCAL(guest_error)
+         guest_vector compat=0, iflags=IFLAGS__AI_, trap=guest_serror
++END(guest_error)
+ 
+-guest_sync_compat:
++FUNC_LOCAL(guest_sync_compat)
+         guest_vector compat=1, iflags=IFLAGS__AI_, trap=guest_sync
++END(guest_sync_compat)
+ 
+-guest_irq_compat:
++FUNC_LOCAL(guest_irq_compat)
+         guest_vector compat=1, iflags=IFLAGS__A__, trap=irq
++END(guest_irq_compat)
+ 
+-guest_fiq_invalid_compat:
++FUNC_LOCAL(guest_fiq_invalid_compat)
+         entry   hyp=0, compat=1
+         invalid BAD_FIQ
++END(guest_fiq_invalid_compat)
+ 
+-guest_error_compat:
++FUNC_LOCAL(guest_error_compat)
+         guest_vector compat=1, iflags=IFLAGS__AI_, trap=guest_serror
++END(guest_error_compat)
+ 
+-ENTRY(return_to_new_vcpu32)
++FUNC(return_to_new_vcpu32)
+         exit    hyp=0, compat=1
+-ENTRY(return_to_new_vcpu64)
++END(return_to_new_vcpu32)
++
++FUNC(return_to_new_vcpu64)
+         exit    hyp=0, compat=0
++END(return_to_new_vcpu64)
+ 
+-return_from_trap:
++FUNC_LOCAL(return_from_trap)
+         msr     daifset, #IFLAGS___I_ /* Mask interrupts */
+ 
+         ldr     x21, [sp, #UREGS_PC]            /* load ELR */
+@@ -524,6 +545,7 @@ return_from_trap:
+ 
+         eret
+         sb
++END(return_from_trap)
+ 
+ /*
+  * Consume pending SError generated by the guest if any.
+@@ -536,7 +558,7 @@ return_from_trap:
+  * it. So the function will unmask SError exception for a small window and
+  * then mask it again.
+  */
+-check_pending_guest_serror:
++FUNC_LOCAL(check_pending_guest_serror)
+         /*
+          * Save elr_el2 to check whether the pending SError exception takes
+          * place while we are doing this sync exception.
+@@ -586,7 +608,7 @@ abort_guest_exit_end:
+         cset    x19, ne
+ 
+         ret
+-ENDPROC(check_pending_guest_serror)
++END(check_pending_guest_serror)
+ 
+ /*
+  * Exception vectors.
+@@ -597,7 +619,7 @@ ENDPROC(check_pending_guest_serror)
+         .endm
+ 
+         .align  11
+-ENTRY(hyp_traps_vector)
++FUNC(hyp_traps_vector)
+         ventry  hyp_sync_invalid            /* Synchronous EL2t */
+         ventry  hyp_irq_invalid             /* IRQ EL2t */
+         ventry  hyp_fiq_invalid             /* FIQ EL2t */
+@@ -617,6 +639,7 @@ ENTRY(hyp_traps_vector)
+         ventry  guest_irq_compat            /* IRQ 32-bit EL0/EL1 */
+         ventry  guest_fiq_invalid_compat    /* FIQ 32-bit EL0/EL1 */
+         ventry  guest_error_compat          /* Error 32-bit EL0/EL1 */
++END(hyp_traps_vector)
+ 
+ /*
+  * struct vcpu *__context_switch(struct vcpu *prev, struct vcpu *next)
+@@ -626,7 +649,7 @@ ENTRY(hyp_traps_vector)
+  *
+  * Returns prev in x0
+  */
+-ENTRY(__context_switch)
++FUNC(__context_switch)
+         add     x8, x0, #VCPU_arch_saved_context
+         mov     x9, sp
+         stp     x19, x20, [x8], #16         /* store callee-saved registers */
+@@ -647,6 +670,7 @@ ENTRY(__context_switch)
+         ldr     lr, [x8]
+         mov     sp, x9
+         ret
++END(__context_switch)
+ 
+ /*
+  * Local variables:
 -- 
 2.40.1
 
