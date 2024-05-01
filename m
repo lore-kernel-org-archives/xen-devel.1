@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1302DC4345F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1015AC04FFE
 	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2024 17:45:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.716038.1118083 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.716041.1118120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2aU4-0001FD-65; Thu, 02 May 2024 17:44:40 +0000
+	id 1s2aU8-0002Ml-8G; Thu, 02 May 2024 17:44:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 716038.1118083; Thu, 02 May 2024 17:44:40 +0000
+Received: by outflank-mailman (output) from mailman id 716041.1118120; Thu, 02 May 2024 17:44:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2aU4-0001Ee-1K; Thu, 02 May 2024 17:44:40 +0000
-Received: by outflank-mailman (input) for mailman id 716038;
- Thu, 02 May 2024 17:44:39 +0000
+	id 1s2aU8-0002MW-5O; Thu, 02 May 2024 17:44:44 +0000
+Received: by outflank-mailman (input) for mailman id 716041;
+ Thu, 02 May 2024 17:44:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1TOG=MF=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1s2aU3-0000pj-F2
- for xen-devel@lists.xenproject.org; Thu, 02 May 2024 17:44:39 +0000
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [2a00:1450:4864:20::230])
+ id 1s2aU7-0000pj-9D
+ for xen-devel@lists.xenproject.org; Thu, 02 May 2024 17:44:43 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a47c8a4e-08ab-11ef-b4bb-af5377834399;
- Thu, 02 May 2024 19:44:36 +0200 (CEST)
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2df848f9325so71748051fa.1
- for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 10:44:36 -0700 (PDT)
+ id a7a1a43f-08ab-11ef-b4bb-af5377834399;
+ Thu, 02 May 2024 19:44:41 +0200 (CEST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-51ac5923ef6so1939533e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 10:44:41 -0700 (PDT)
 Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- w9-20020a05651c102900b002e1c8a2f3d1sm255777ljm.75.2024.05.02.10.44.33
+ cf9-20020a056512280900b0051efeb3994asm245518lfb.288.2024.05.02.10.44.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 10:44:33 -0700 (PDT)
+ Thu, 02 May 2024 10:44:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a47c8a4e-08ab-11ef-b4bb-af5377834399
+X-Inumbo-ID: a7a1a43f-08ab-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714671875; x=1715276675; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1714671880; x=1715276680; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OqCCbbv/MtZy1u/M+ApEL4BOvMHDwRPRM9TWyEa/hOE=;
-        b=ShDznb8ZXMke04ud9GgP268RqFmqpicyjjeFqxLdcPFFroLKAnl/MG7k2Pe1tta7T6
-         NhmBWCqVEuXMcU+MciNCyhMTruqHKftZtnPI7qOuybUUvyoo3q4u4osSqFh9099eRFeQ
-         9m4syWN8qgtAr+m7Ueji4n5t0y34oHIaawQZHmg7rCiY15+dOCccBb1FFFlDn544xKUj
-         OP0V6dCHqD4O0Q/BnR5DtpFZc7tUjqXoQshkd+1LJU71NILiOc/raHEdIWcMxTC4oe8L
-         SeR4aP5++Td/YKfiB/DDLZL9Gly2lftjg36cP7pfX19FjiG5K3T1B0OaS13YzWftlqnS
-         L92A==
+        bh=+btECkGvGdaMDpadFUE07lhZtvml0qD3bZm2bwgsu5s=;
+        b=KloZ3SnP/n8Yzcy/qtJjYPihZjESjPvMDTDL6BF2fSnAwySbO7zvGQOJ0cL7tT69ho
+         bfZQKoUkog2ns0alfn1aLhm2Cpj104NDm83TldGC34zwCJfAQcFn9eQa66XhIey8GqfP
+         5cYFOzkPjmEkbw5jhQLAxHXoN980H/gnpXssIRjMQt2vjPzbCsMKFHfhQalwsgM2lHPA
+         UBpXYML1w9xNm1E3sppTOJztyKCj8+UTXx186A3S9eqAIBqzZa/S16hp8IxQbHTES43l
+         6HmKYVsH0n//067t0QEAi/UZL/HojfJUszg2rNjyYbBtX6LOZA7n7Z5UZu8MfL0E4P36
+         E+VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714671875; x=1715276675;
+        d=1e100.net; s=20230601; t=1714671880; x=1715276680;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OqCCbbv/MtZy1u/M+ApEL4BOvMHDwRPRM9TWyEa/hOE=;
-        b=plq8uEax6Vj6u2i65cpzwwhZqyOKBcTlWqvbYpKz5Y8qkzHEfPmLFWqfxzZUkncbxb
-         olNdaGcEWagoyhqbdonjGyhoUl+9jpTH73AQvAe39zUHQw0jxLUPH6i5mxgdBzXBZBUd
-         V7ywN4JcQpcFx/oGxh9+vhZKNpblLT3HMZsro+U9epAEnK8K55NIfNNYhINl2sC0jsKD
-         oXKkbwcbG9PI95KJGYlbAna17rj/IRXeIXWbia3UO982MfVd/cR/m8fjHFB0rupUAISN
-         5G7kHuLCYw9aaVN3q/9xjWl6jr0XOWOd1+eHHVcMReilUp2ZzamK64oFQ5IC+WtMmmGW
-         0Z3w==
-X-Gm-Message-State: AOJu0YzBzcmQ7wTX9WUg06rYXMDFNW3PNGkrCkcJqb8lf6grvzWVgipE
-	unPKF5Aiti4f8lMNgfU2U1qVAyIZtjtxP8MJPcuPwMsAhQ8Gc0eNKYGsmVSZ
-X-Google-Smtp-Source: AGHT+IGkgN8FO7nnrbF/W+13whQheJUvKQ/jtMk8hAv9qCI/Rb7h3opgGgtUjVjZnTDJ5j/cjNhTUw==
-X-Received: by 2002:a2e:7204:0:b0:2df:7824:7d32 with SMTP id n4-20020a2e7204000000b002df78247d32mr248943ljc.50.1714671875373;
-        Thu, 02 May 2024 10:44:35 -0700 (PDT)
+        bh=+btECkGvGdaMDpadFUE07lhZtvml0qD3bZm2bwgsu5s=;
+        b=K9nXLp0n+QYMSdSeycn4H8TADSxltCvVfwl2XGtqsXiC9K8gtmtT4ZA4QldPDuaubU
+         wDnAyPJyGFB+w+NaWEBlbE99VH/H0KO8EIWMxhszzE229OWusI8sZkJmInsnSf1YPJxB
+         eQIFfSACCRQ8mA5o4+wczxysMjcEB4fb0xbgy1+r3hgcKBmeSGXOUvDyFo/VlDY6hy5w
+         B6KVA1i/lTBz2dCprTnx69NriqtBmbJOmPRcZIEh8FmJTDvygyodhAcNfvurF0W+LS1l
+         kDuI0lKYNSjDKyDm2LC77eH0DcSPiH5BnR+fjoE9nd7uk5Da6wJpYtzJ1MIaVLqeesuV
+         rioQ==
+X-Gm-Message-State: AOJu0YwwmvyEGmH8l9pQUAVrk81xyGVZ7t2lRv4lAvP19o0qHq6yPLjh
+	FN0vfht61ZC4OeDAiC3Gu2iMUHzVRvu+MvOAkexYRSacbefDt7FAsjAc0Tbx
+X-Google-Smtp-Source: AGHT+IEeaDRkvnyZ84ZEqX2g2gP1bsOAOy3rLwUj3q9QOWJgKyu8kPC1ZQjmXZ0ZCcY6wSReM+ACtA==
+X-Received: by 2002:ac2:4572:0:b0:513:c47e:d811 with SMTP id k18-20020ac24572000000b00513c47ed811mr102176lfm.33.1714671880241;
+        Thu, 02 May 2024 10:44:40 -0700 (PDT)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -87,9 +87,9 @@ Cc: sstabellini@kernel.org,
 	jbeulich@suse.com,
 	andrew.cooper3@citrix.com,
 	edgar.iglesias@amd.com
-Subject: [PATCH v3 3/9] xen/arm64: sve: Add missing code symbol annotations
-Date: Wed,  1 May 2024 05:54:42 +0200
-Message-Id: <20240501035448.964625-4-edgar.iglesias@gmail.com>
+Subject: [PATCH v3 6/9] xen/arm64: bpi: Add missing code symbol annotations
+Date: Wed,  1 May 2024 05:54:45 +0200
+Message-Id: <20240501035448.964625-7-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240501035448.964625-1-edgar.iglesias@gmail.com>
 References: <20240501035448.964625-1-edgar.iglesias@gmail.com>
@@ -103,49 +103,66 @@ and add missing annotations.
 
 Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
 ---
- xen/arch/arm/arm64/sve-asm.S | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ xen/arch/arm/arm64/bpi.S | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/sve-asm.S b/xen/arch/arm/arm64/sve-asm.S
-index 59dbefbbb2..2d8b895f07 100644
---- a/xen/arch/arm/arm64/sve-asm.S
-+++ b/xen/arch/arm/arm64/sve-asm.S
-@@ -161,9 +161,10 @@
+diff --git a/xen/arch/arm/arm64/bpi.S b/xen/arch/arm/arm64/bpi.S
+index 4e63825220..b16e4d1e29 100644
+--- a/xen/arch/arm/arm64/bpi.S
++++ b/xen/arch/arm/arm64/bpi.S
+@@ -52,14 +52,15 @@
+  * micro-architectures in a system.
+  */
+     .align	11
+-ENTRY(__bp_harden_hyp_vecs_start)
++FUNC(__bp_harden_hyp_vecs_start)
+     .rept 4
+     vectors hyp_traps_vector
+     .endr
+-ENTRY(__bp_harden_hyp_vecs_end)
++GLOBAL(__bp_harden_hyp_vecs_end)
++END(__bp_harden_hyp_vecs_start)
+ 
+ .macro mitigate_spectre_bhb_loop count
+-ENTRY(__mitigate_spectre_bhb_loop_start_\count)
++FUNC(__mitigate_spectre_bhb_loop_start_\count)
+     stp     x0, x1, [sp, #-16]!
+     mov     x0, \count
+ .Lspectre_bhb_loop\@:
+@@ -68,11 +69,12 @@ ENTRY(__mitigate_spectre_bhb_loop_start_\count)
+     b.ne    .Lspectre_bhb_loop\@
+     sb
+     ldp     x0, x1, [sp], #16
+-ENTRY(__mitigate_spectre_bhb_loop_end_\count)
++GLOBAL(__mitigate_spectre_bhb_loop_end_\count)
++END(__mitigate_spectre_bhb_loop_start_\count)
  .endm
  
- /* Gets the current vector register size in bytes */
--GLOBAL(sve_get_hw_vl)
-+FUNC(sve_get_hw_vl)
-     _sve_rdvl 0, 1
-     ret
-+END(sve_get_hw_vl)
+ .macro smccc_workaround num smcc_id
+-ENTRY(__smccc_workaround_smc_start_\num)
++FUNC(__smccc_workaround_smc_start_\num)
+     sub     sp, sp, #(8 * 4)
+     stp     x0, x1, [sp, #(8 * 2)]
+     stp     x2, x3, [sp, #(8 * 0)]
+@@ -81,13 +83,15 @@ ENTRY(__smccc_workaround_smc_start_\num)
+     ldp     x2, x3, [sp, #(8 * 0)]
+     ldp     x0, x1, [sp, #(8 * 2)]
+     add     sp, sp, #(8 * 4)
+-ENTRY(__smccc_workaround_smc_end_\num)
++GLOBAL(__smccc_workaround_smc_end_\num)
++END(__smccc_workaround_smc_start_\num)
+ .endm
  
- /*
-  * Save the SVE context
-@@ -172,9 +173,10 @@ GLOBAL(sve_get_hw_vl)
-  * x1 - pointer to buffer for P0-15
-  * x2 - Save FFR if non-zero
-  */
--GLOBAL(sve_save_ctx)
-+FUNC(sve_save_ctx)
-     sve_save 0, 1, x2
-     ret
-+END(sve_save_ctx)
+-ENTRY(__mitigate_spectre_bhb_clear_insn_start)
++FUNC(__mitigate_spectre_bhb_clear_insn_start)
+     clearbhb
+     isb
+-ENTRY(__mitigate_spectre_bhb_clear_insn_end)
++GLOBAL(__mitigate_spectre_bhb_clear_insn_end)
++END(__mitigate_spectre_bhb_clear_insn_start)
  
- /*
-  * Load the SVE context
-@@ -183,9 +185,10 @@ GLOBAL(sve_save_ctx)
-  * x1 - pointer to buffer for P0-15
-  * x2 - Restore FFR if non-zero
-  */
--GLOBAL(sve_load_ctx)
-+FUNC(sve_load_ctx)
-     sve_load 0, 1, x2
-     ret
-+END(sve_load_ctx)
- 
- /*
-  * Local variables:
+ mitigate_spectre_bhb_loop 8
+ mitigate_spectre_bhb_loop 24
 -- 
 2.40.1
 
