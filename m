@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F479C4345F
-	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2024 16:38:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.715930.1117910 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A29C4345F
+	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2024 16:56:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.715950.1117969 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2ZS5-0003Ak-Ck; Thu, 02 May 2024 16:38:33 +0000
+	id 1s2Zij-0007U9-LT; Thu, 02 May 2024 16:55:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 715930.1117910; Thu, 02 May 2024 16:38:33 +0000
+Received: by outflank-mailman (output) from mailman id 715950.1117969; Thu, 02 May 2024 16:55:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2ZS5-0003Ad-AB; Thu, 02 May 2024 16:38:33 +0000
-Received: by outflank-mailman (input) for mailman id 715930;
- Thu, 02 May 2024 16:38:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s2Zij-0007TA-HL; Thu, 02 May 2024 16:55:45 +0000
+Received: by outflank-mailman (input) for mailman id 715950;
+ Thu, 02 May 2024 16:55:44 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1TOG=MF=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1s2ZS3-0003AX-3T
- for xen-devel@lists.xenproject.org; Thu, 02 May 2024 16:38:31 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 67725715-08a2-11ef-909b-e314d9c70b13;
- Thu, 02 May 2024 18:38:28 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a58fbbcd77aso661045966b.2
- for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 09:38:28 -0700 (PDT)
+ <SRS0=8/Nh=MF=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
+ id 1s2Zih-0006N3-VT
+ for xen-devel@lists.xenproject.org; Thu, 02 May 2024 16:55:43 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cfab38dc-08a4-11ef-b4bb-af5377834399;
+ Thu, 02 May 2024 18:55:42 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-51f3a49ff7dso919918e87.2
+ for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 09:55:42 -0700 (PDT)
+Received: from carlo-ubuntu.mo54.unimo.it (nonato.mo54.unimo.it.
+ [155.185.85.8]) by smtp.gmail.com with ESMTPSA id
+ mq30-20020a170907831e00b00a5987fbfb83sm29103ejc.152.2024.05.02.09.55.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 May 2024 09:55:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,328 +47,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 67725715-08a2-11ef-909b-e314d9c70b13
+X-Inumbo-ID: cfab38dc-08a4-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714667908; x=1715272708; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1714668942; x=1715273742; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Tdq2b0nhg5nyul35h5bkMt4asw7wNg6ha8u+AmWjAGc=;
-        b=h4/712AiA/3B8ZcDl7nhljMtOcIxywN/YD6+E2GMJQoFXwIbrt3Y+okDc9+mj1/jpX
-         yGurqgCC78t3ll42ULg6Q5ztrbbrRvIFJDwbl8dkEkR2BRf7JmiE6dmvyW3Skklv5umf
-         QxZqg2tSUjSyTZKwZuk+iO1WhLhVA1e99v8vWyo3LWFcMR9NPOeBjgQon/9Eb8XAwMCN
-         vcgZJHTEjRh+4xiYCvb8o39DpXYIEPZ9mrkB/MA2waqqjmcYPWgub5ULwKNvk+njauM0
-         f/FLGKWrud+kDKjG84ESHCpfG0+lvDgK4ZdWlSeSlk7yU9C8PEM+manoI9ZKEjytIdDn
-         Uxmg==
+        bh=9lNNmDdINfoHlllIflrjGEio9WD33GRBGAZScKnxGPA=;
+        b=vIo2zAhWo5eT4uj4bhJHsRWmJ96FC1KhMzNfgWUQHJRriW1+BZI6M9DL5NQbPrNtcZ
+         5fKhFpddbpBBcuVtO8QgeExlq0N6fSh8Sd7z9JW5vTH8PtYCI9v9wV9fdbwsXQWy0PAl
+         MXLAeUNhdQ/nl9v229ZGa6vDLMob3/X0JgFumCdMMCOLjMntwpit5KZTINPC5t6uQ+e2
+         +f3hwH2CXU+vepsngrNG++7j366Pv8af7st6jUbto74wfFD5cMp+I9iEefraM2e/T4BC
+         gmgcD8QKw/Zp28T3EiS2W2YI7z8PdYWeGawI1q9fCNDBAqHhBVcmiKzhCT6h8prqYLn2
+         8I0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714667908; x=1715272708;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1714668942; x=1715273742;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Tdq2b0nhg5nyul35h5bkMt4asw7wNg6ha8u+AmWjAGc=;
-        b=pl9aDnhouetGbzsxj48k8jRyuY9KcYvgqHojbJNDpZAP9Dd60xTo0Mr1seWChSMEj2
-         5140Hx+osRRWX5IM/Com3jVJfpZYhvkrp4WQHP7zaCIEckxJpW3ZjdPEgus+hmDGoB/T
-         HoDqcU6afWRthDVnW1no79Q1Y4soAcn8cCAG6H+HjRRnNJ4HHgzDuVxP2JUlRF7GyR9M
-         w5esaRZYrefvtYFDBhKaa1iioA8MWBSe+DkYQoIDlzJL2ls9HcN7q+R7I3Z1T6gsi5H5
-         4J9+DrrnIozLn0ruMv+UgRhHD+Pwb5qbRvaIBuskpFaBQSeh2Fmk5vm/1qRCwG0yVT6h
-         Rd6Q==
-X-Gm-Message-State: AOJu0YzxWpHeGymGoMflk7G3xSVaVMvhf+uEDdcshPWlU2/PIeTbZ6KJ
-	MuwwGnZFvmToKuIZvH7/htN8We1S3+2ZppdDu2ZlpAmHth9K+NW/QA3+7mAQLYRhqs4s+rH6q14
-	pAAqSkzzQvuDeVCsR+HCxB3HOH1w=
-X-Google-Smtp-Source: AGHT+IFVcTsj3sgUTVuf4RSliWYI8UVluVED1hKF9MWgodAcHSq6Usexhfi2jq/y16/YXoYU/oMdHCGBhNsUpjXhbR4=
-X-Received: by 2002:a50:8e4f:0:b0:570:5214:f62 with SMTP id
- 15-20020a508e4f000000b0057052140f62mr22737edx.0.1714667907978; Thu, 02 May
- 2024 09:38:27 -0700 (PDT)
+        bh=9lNNmDdINfoHlllIflrjGEio9WD33GRBGAZScKnxGPA=;
+        b=Cx366My83m+MdyBKQgu+MEFX20N4SOVNJLrKvWYk4sWryJZcYn2JhYAto2SBL7sr/h
+         /hQCGfxLGHnE3o9blCCX7niJ1BFWwntkiFsqrYmc8xFZ+WJrJ0pLu2aYzELjl5bCOwdd
+         QppQmVCFPjne/Ixz+h6mg+EFelGFyCbUkygwL8xzIWs5g+4wlDXXto7SU0Bwtv/pQduI
+         2f45dBbyzpbAH+miKHH3GqoLEVFRrGn7Wajb77sGXjLbjhICzvN4Jo0Q7+JHlGfBuzeo
+         gPamylXEAvm5gsJtd1IBvQyaFVKxt8yTAp9JjNvFc+5lXzsDCkJc+fSridXuOdeN677T
+         laTA==
+X-Gm-Message-State: AOJu0YwnSCx5BeznvdWMGV1Zk8g1/cZ+uyLTwbmbzUBf+/In6h4QLcuG
+	pGXcyD3DxYMZS63xYtvI9TgFt6vmP4OoatVrNV41Tp7QJSWxWxFK0QDZjQti69nasA89t4/exIo
+	I
+X-Google-Smtp-Source: AGHT+IFE87a06WYupkqdQKi0ZTarJY7Cax3giuwXsFKojmeBItsHdWnxzl4JvHy/bNxWSAvrjg0bwg==
+X-Received: by 2002:a05:6512:32b9:b0:51e:11d5:bca5 with SMTP id q25-20020a05651232b900b0051e11d5bca5mr224999lfe.54.1714668941569;
+        Thu, 02 May 2024 09:55:41 -0700 (PDT)
+From: Carlo Nonato <carlo.nonato@minervasys.tech>
+To: xen-devel@lists.xenproject.org
+Cc: andrea.bastoni@minervasys.tech,
+	Carlo Nonato <carlo.nonato@minervasys.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH v8 05/13] xen: extend domctl interface for cache coloring
+Date: Thu,  2 May 2024 18:55:25 +0200
+Message-Id: <20240502165533.319988-6-carlo.nonato@minervasys.tech>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240502165533.319988-1-carlo.nonato@minervasys.tech>
+References: <20240502165533.319988-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
-References: <20240415231541.4140052-1-edgar.iglesias@gmail.com>
- <20240415231541.4140052-2-edgar.iglesias@gmail.com> <alpine.DEB.2.22.394.2404251608320.3940@ubuntu-linux-20-04-desktop>
-In-Reply-To: <alpine.DEB.2.22.394.2404251608320.3940@ubuntu-linux-20-04-desktop>
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Date: Thu, 2 May 2024 18:38:16 +0200
-Message-ID: <CAJy5ezoyCarP28SdXwArMM4d7AALPAURERM-c2fDTxu1Am3tNQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] xen/arm64: entry: Add missing code symbol annotations
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, julien@xen.org, bertrand.marquis@arm.com, 
-	michal.orzel@amd.com, Volodymyr_Babchuk@epam.com, jbeulich@suse.com, 
-	andrew.cooper3@citrix.com, edgar.iglesias@amd.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Apr 26, 2024 at 1:14=E2=80=AFAM Stefano Stabellini
-<sstabellini@kernel.org> wrote:
->
-> On Tue, 16 Apr 2024, Edgar E. Iglesias wrote:
-> > From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
-> >
-> > Use the generic xen/linkage.h macros when and add missing
->                                         ^ when what?
->
-> > code symbol annotations.
-> >
-> > Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
->
-> I am looking at the implementation of FUNC and as far as I can tell
-> there is no change compared to ENTRY. So from that point of view we are
-> good. I wonder if we should keep using "ENTRY" because it is nice to
-> mark explicitely the entry points as such but at the same time I am also
-> OK with this. I'll let the other ARM maintainers decide.
->
-> On the other hand, FUNC_LOCAL does introduce a change: it adds a .align
-> everywhere. Should not be harmful?
->
-> With the commit message fixed:
+Add a new domctl hypercall to allow the user to set LLC coloring
+configurations. Colors can be set only once, just after domain creation,
+since recoloring isn't supported.
 
-Thanks Stefano, will fix the commit message in v3:
+Based on original work from: Luca Miccio <lucmiccio@gmail.com>
 
- "Use the generic xen/linkage.h macros to annotate code symbols
- and add missing annotations."
+Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+---
+v8:
+- fixed memory leak on error path of domain_set_llc_colors()
+v7:
+- -EOPNOTSUPP returned in case of hypercall called without llc_coloring_enabled
+- domain_set_llc_colors_domctl() renamed to domain_set_llc_colors()
+- added padding and input bound checks to domain_set_llc_colors()
+- removed alloc_colors() helper usage from domain_set_llc_colors()
+v6:
+- reverted the XEN_DOMCTL_INTERFACE_VERSION bump
+- reverted to uint32 for the guest handle
+- explicit padding added to the domctl struct
+- rewrote domain_set_llc_colors_domctl() to be more explicit
+v5:
+- added a new hypercall to set colors
+- uint for the guest handle
+v4:
+- updated XEN_DOMCTL_INTERFACE_VERSION
+---
+ xen/common/domctl.c            | 10 ++++++++
+ xen/common/llc-coloring.c      | 46 +++++++++++++++++++++++++++++++---
+ xen/include/public/domctl.h    |  9 +++++++
+ xen/include/xen/llc-coloring.h |  2 ++
+ 4 files changed, 64 insertions(+), 3 deletions(-)
 
-Cheers,
-Edgar
+diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+index 2c0331bb05..30cca9a4ae 100644
+--- a/xen/common/domctl.c
++++ b/xen/common/domctl.c
+@@ -8,6 +8,7 @@
+ 
+ #include <xen/types.h>
+ #include <xen/lib.h>
++#include <xen/llc-coloring.h>
+ #include <xen/err.h>
+ #include <xen/mm.h>
+ #include <xen/sched.h>
+@@ -864,6 +865,15 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+                 __HYPERVISOR_domctl, "h", u_domctl);
+         break;
+ 
++    case XEN_DOMCTL_set_llc_colors:
++        if ( op->u.set_llc_colors.pad )
++            ret = -EINVAL;
++        else if ( llc_coloring_enabled )
++            ret = domain_set_llc_colors(d, &op->u.set_llc_colors);
++        else
++            ret = -EOPNOTSUPP;
++        break;
++
+     default:
+         ret = arch_do_domctl(op, d, u_domctl);
+         break;
+diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
+index 26270cda9c..ecfeb0ce82 100644
+--- a/xen/common/llc-coloring.c
++++ b/xen/common/llc-coloring.c
+@@ -4,6 +4,7 @@
+  *
+  * Copyright (C) 2022 Xilinx Inc.
+  */
++#include <xen/guest_access.h>
+ #include <xen/keyhandler.h>
+ #include <xen/llc-coloring.h>
+ #include <xen/param.h>
+@@ -103,8 +104,7 @@ static void print_colors(const unsigned int *colors, unsigned int num_colors)
+     printk(" }\n");
+ }
+ 
+-static bool __init check_colors(const unsigned int *colors,
+-                                unsigned int num_colors)
++static bool check_colors(const unsigned int *colors, unsigned int num_colors)
+ {
+     unsigned int i;
+ 
+@@ -180,7 +180,7 @@ void domain_dump_llc_colors(const struct domain *d)
+     print_colors(d->llc_colors, d->num_llc_colors);
+ }
+ 
+-static void __init domain_set_default_colors(struct domain *d)
++static void domain_set_default_colors(struct domain *d)
+ {
+     printk(XENLOG_WARNING
+            "LLC color config not found for %pd, using all colors\n", d);
+@@ -226,6 +226,46 @@ void domain_llc_coloring_free(struct domain *d)
+     xfree(__va(__pa(d->llc_colors)));
+ }
+ 
++int domain_set_llc_colors(struct domain *d,
++                          const struct xen_domctl_set_llc_colors *config)
++{
++    unsigned int *colors;
++
++    if ( d->num_llc_colors )
++        return -EEXIST;
++
++    if ( !config->num_llc_colors )
++    {
++        domain_set_default_colors(d);
++        return 0;
++    }
++
++    if ( config->num_llc_colors > max_nr_colors )
++        return -EINVAL;
++
++    colors = xmalloc_array(unsigned int, config->num_llc_colors);
++    if ( !colors )
++        return -ENOMEM;
++
++    if ( copy_from_guest(colors, config->llc_colors, config->num_llc_colors) )
++    {
++        xfree(colors);
++        return -EFAULT;
++    }
++
++    if ( !check_colors(colors, config->num_llc_colors) )
++    {
++        printk(XENLOG_ERR "Bad LLC color config for %pd\n", d);
++        xfree(colors);
++        return -EINVAL;
++    }
++
++    d->llc_colors = colors;
++    d->num_llc_colors = config->num_llc_colors;
++
++    return 0;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+index a33f9ec32b..d44eac8775 100644
+--- a/xen/include/public/domctl.h
++++ b/xen/include/public/domctl.h
+@@ -1190,6 +1190,13 @@ struct xen_domctl_vmtrace_op {
+ typedef struct xen_domctl_vmtrace_op xen_domctl_vmtrace_op_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_domctl_vmtrace_op_t);
+ 
++struct xen_domctl_set_llc_colors {
++    /* IN LLC coloring parameters */
++    uint32_t num_llc_colors;
++    uint32_t pad;
++    XEN_GUEST_HANDLE_64(uint32) llc_colors;
++};
++
+ struct xen_domctl {
+     uint32_t cmd;
+ #define XEN_DOMCTL_createdomain                   1
+@@ -1277,6 +1284,7 @@ struct xen_domctl {
+ #define XEN_DOMCTL_vmtrace_op                    84
+ #define XEN_DOMCTL_get_paging_mempool_size       85
+ #define XEN_DOMCTL_set_paging_mempool_size       86
++#define XEN_DOMCTL_set_llc_colors                87
+ #define XEN_DOMCTL_gdbsx_guestmemio            1000
+ #define XEN_DOMCTL_gdbsx_pausevcpu             1001
+ #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
+@@ -1339,6 +1347,7 @@ struct xen_domctl {
+         struct xen_domctl_vuart_op          vuart_op;
+         struct xen_domctl_vmtrace_op        vmtrace_op;
+         struct xen_domctl_paging_mempool    paging_mempool;
++        struct xen_domctl_set_llc_colors    set_llc_colors;
+         uint8_t                             pad[128];
+     } u;
+ };
+diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
+index ee82932266..b3801fca00 100644
+--- a/xen/include/xen/llc-coloring.h
++++ b/xen/include/xen/llc-coloring.h
+@@ -29,6 +29,8 @@ static inline void domain_llc_coloring_free(struct domain *d) {}
+ unsigned int get_llc_way_size(void);
+ void arch_llc_coloring_init(void);
+ int dom0_set_llc_colors(struct domain *d);
++int domain_set_llc_colors(struct domain *d,
++                          const struct xen_domctl_set_llc_colors *config);
+ 
+ #endif /* __COLORING_H__ */
+ 
+-- 
+2.34.1
 
-
-
->
-> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
->
->
-> > ---
-> >  xen/arch/arm/arm64/entry.S | 72 +++++++++++++++++++++++++-------------
-> >  1 file changed, 48 insertions(+), 24 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/arm64/entry.S b/xen/arch/arm/arm64/entry.S
-> > index f963c923bb..af9a592cae 100644
-> > --- a/xen/arch/arm/arm64/entry.S
-> > +++ b/xen/arch/arm/arm64/entry.S
-> > @@ -289,21 +289,25 @@
-> >          b       do_bad_mode
-> >          .endm
-> >
-> > -hyp_sync_invalid:
-> > +FUNC_LOCAL(hyp_sync_invalid)
-> >          entry   hyp=3D1
-> >          invalid BAD_SYNC
-> > +END(hyp_sync_invalid)
-> >
-> > -hyp_irq_invalid:
-> > +FUNC_LOCAL(hyp_irq_invalid)
-> >          entry   hyp=3D1
-> >          invalid BAD_IRQ
-> > +END(hyp_irq_invalid)
-> >
-> > -hyp_fiq_invalid:
-> > +FUNC_LOCAL(hyp_fiq_invalid)
-> >          entry   hyp=3D1
-> >          invalid BAD_FIQ
-> > +END(hyp_fiq_invalid)
-> >
-> > -hyp_error_invalid:
-> > +FUNC_LOCAL(hyp_error_invalid)
-> >          entry   hyp=3D1
-> >          invalid BAD_ERROR
-> > +END(hyp_error_invalid)
-> >
-> >  /*
-> >   * SError received while running in the hypervisor mode.
-> > @@ -313,11 +317,12 @@ hyp_error_invalid:
-> >   * simplicity, as SError should be rare and potentially fatal,
-> >   * all interrupts are kept masked.
-> >   */
-> > -hyp_error:
-> > +FUNC_LOCAL(hyp_error)
-> >          entry   hyp=3D1
-> >          mov     x0, sp
-> >          bl      do_trap_hyp_serror
-> >          exit    hyp=3D1
-> > +END(hyp_error)
-> >
-> >  /*
-> >   * Synchronous exception received while running in the hypervisor mode=
-.
-> > @@ -327,7 +332,7 @@ hyp_error:
-> >   * some of them. So we want to inherit the state from the interrupted
-> >   * context.
-> >   */
-> > -hyp_sync:
-> > +FUNC_LOCAL(hyp_sync)
-> >          entry   hyp=3D1
-> >
-> >          /* Inherit interrupts */
-> > @@ -338,6 +343,7 @@ hyp_sync:
-> >          mov     x0, sp
-> >          bl      do_trap_hyp_sync
-> >          exit    hyp=3D1
-> > +END(hyp_sync)
-> >
-> >  /*
-> >   * IRQ received while running in the hypervisor mode.
-> > @@ -352,7 +358,7 @@ hyp_sync:
-> >   * would require some rework in some paths (e.g. panic, livepatch) to
-> >   * ensure the ordering is enforced everywhere.
-> >   */
-> > -hyp_irq:
-> > +FUNC_LOCAL(hyp_irq)
-> >          entry   hyp=3D1
-> >
-> >          /* Inherit D, A, F interrupts and keep I masked */
-> > @@ -365,8 +371,9 @@ hyp_irq:
-> >          mov     x0, sp
-> >          bl      do_trap_irq
-> >          exit    hyp=3D1
-> > +END(hyp_irq)
-> >
-> > -guest_sync:
-> > +FUNC_LOCAL(guest_sync)
-> >          /*
-> >           * Save x0, x1 in advance
-> >           */
-> > @@ -413,8 +420,9 @@ fastpath_out_workaround:
-> >          mov     x1, xzr
-> >          eret
-> >          sb
-> > +END(guest_sync)
-> >
-> > -wa2_ssbd:
-> > +FUNC_LOCAL(wa2_ssbd)
-> >  #ifdef CONFIG_ARM_SSBD
-> >  alternative_cb arm_enable_wa2_handling
-> >          b       wa2_end
-> > @@ -450,42 +458,55 @@ wa2_end:
-> >          mov     x0, xzr
-> >          eret
-> >          sb
-> > -guest_sync_slowpath:
-> > +END(wa2_ssbd)
-> > +
-> > +FUNC_LOCAL(guest_sync_slowpath)
-> >          /*
-> >           * x0/x1 may have been scratch by the fast path above, so avoi=
-d
-> >           * to save them.
-> >           */
-> >          guest_vector compat=3D0, iflags=3DIFLAGS__AI_, trap=3Dguest_sy=
-nc, save_x0_x1=3D0
-> > +END(guest_sync_slowpath)
-> >
-> > -guest_irq:
-> > +FUNC_LOCAL(guest_irq)
-> >          guest_vector compat=3D0, iflags=3DIFLAGS__A__, trap=3Dirq
-> > +END(guest_irq)
-> >
-> > -guest_fiq_invalid:
-> > +FUNC_LOCAL(guest_fiq_invalid)
-> >          entry   hyp=3D0, compat=3D0
-> >          invalid BAD_FIQ
-> > +END(guest_fiq_invalid)
-> >
-> > -guest_error:
-> > +FUNC_LOCAL(guest_error)
-> >          guest_vector compat=3D0, iflags=3DIFLAGS__AI_, trap=3Dguest_se=
-rror
-> > +END(guest_error)
-> >
-> > -guest_sync_compat:
-> > +FUNC_LOCAL(guest_sync_compat)
-> >          guest_vector compat=3D1, iflags=3DIFLAGS__AI_, trap=3Dguest_sy=
-nc
-> > +END(guest_sync_compat)
-> >
-> > -guest_irq_compat:
-> > +FUNC_LOCAL(guest_irq_compat)
-> >          guest_vector compat=3D1, iflags=3DIFLAGS__A__, trap=3Dirq
-> > +END(guest_irq_compat)
-> >
-> > -guest_fiq_invalid_compat:
-> > +FUNC_LOCAL(guest_fiq_invalid_compat)
-> >          entry   hyp=3D0, compat=3D1
-> >          invalid BAD_FIQ
-> > +END(guest_fiq_invalid_compat)
-> >
-> > -guest_error_compat:
-> > +FUNC_LOCAL(guest_error_compat)
-> >          guest_vector compat=3D1, iflags=3DIFLAGS__AI_, trap=3Dguest_se=
-rror
-> > +END(guest_error_compat)
-> >
-> > -ENTRY(return_to_new_vcpu32)
-> > +FUNC(return_to_new_vcpu32)
-> >          exit    hyp=3D0, compat=3D1
-> > -ENTRY(return_to_new_vcpu64)
-> > +END(return_to_new_vcpu32)
-> > +
-> > +FUNC(return_to_new_vcpu64)
-> >          exit    hyp=3D0, compat=3D0
-> > +END(return_to_new_vcpu64)
-> >
-> > -return_from_trap:
-> > +FUNC_LOCAL(return_from_trap)
-> >          msr     daifset, #IFLAGS___I_ /* Mask interrupts */
-> >
-> >          ldr     x21, [sp, #UREGS_PC]            /* load ELR */
-> > @@ -524,6 +545,7 @@ return_from_trap:
-> >
-> >          eret
-> >          sb
-> > +END(return_from_trap)
-> >
-> >  /*
-> >   * Consume pending SError generated by the guest if any.
-> > @@ -536,7 +558,7 @@ return_from_trap:
-> >   * it. So the function will unmask SError exception for a small window=
- and
-> >   * then mask it again.
-> >   */
-> > -check_pending_guest_serror:
-> > +FUNC_LOCAL(check_pending_guest_serror)
-> >          /*
-> >           * Save elr_el2 to check whether the pending SError exception =
-takes
-> >           * place while we are doing this sync exception.
-> > @@ -586,7 +608,7 @@ abort_guest_exit_end:
-> >          cset    x19, ne
-> >
-> >          ret
-> > -ENDPROC(check_pending_guest_serror)
-> > +END(check_pending_guest_serror)
-> >
-> >  /*
-> >   * Exception vectors.
-> > @@ -597,7 +619,7 @@ ENDPROC(check_pending_guest_serror)
-> >          .endm
-> >
-> >          .align  11
-> > -ENTRY(hyp_traps_vector)
-> > +FUNC(hyp_traps_vector)
-> >          ventry  hyp_sync_invalid            /* Synchronous EL2t */
-> >          ventry  hyp_irq_invalid             /* IRQ EL2t */
-> >          ventry  hyp_fiq_invalid             /* FIQ EL2t */
-> > @@ -617,6 +639,7 @@ ENTRY(hyp_traps_vector)
-> >          ventry  guest_irq_compat            /* IRQ 32-bit EL0/EL1 */
-> >          ventry  guest_fiq_invalid_compat    /* FIQ 32-bit EL0/EL1 */
-> >          ventry  guest_error_compat          /* Error 32-bit EL0/EL1 */
-> > +END(hyp_traps_vector)
-> >
-> >  /*
-> >   * struct vcpu *__context_switch(struct vcpu *prev, struct vcpu *next)
-> > @@ -626,7 +649,7 @@ ENTRY(hyp_traps_vector)
-> >   *
-> >   * Returns prev in x0
-> >   */
-> > -ENTRY(__context_switch)
-> > +FUNC(__context_switch)
-> >          add     x8, x0, #VCPU_arch_saved_context
-> >          mov     x9, sp
-> >          stp     x19, x20, [x8], #16         /* store callee-saved regi=
-sters */
-> > @@ -647,6 +670,7 @@ ENTRY(__context_switch)
-> >          ldr     lr, [x8]
-> >          mov     sp, x9
-> >          ret
-> > +END(__context_switch)
-> >
-> >  /*
-> >   * Local variables:
-> > --
-> > 2.40.1
-> >
 
