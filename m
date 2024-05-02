@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A136CC25B10
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B336FC25B5C
 	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2024 16:56:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.715945.1117920 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.715951.1117973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2Zie-0006Ls-TK; Thu, 02 May 2024 16:55:40 +0000
+	id 1s2Zik-0007Yu-3l; Thu, 02 May 2024 16:55:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 715945.1117920; Thu, 02 May 2024 16:55:40 +0000
+Received: by outflank-mailman (output) from mailman id 715951.1117973; Thu, 02 May 2024 16:55:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2Zie-0006Ll-Qo; Thu, 02 May 2024 16:55:40 +0000
-Received: by outflank-mailman (input) for mailman id 715945;
- Thu, 02 May 2024 16:55:39 +0000
+	id 1s2Zij-0007Xo-RW; Thu, 02 May 2024 16:55:45 +0000
+Received: by outflank-mailman (input) for mailman id 715951;
+ Thu, 02 May 2024 16:55:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8/Nh=MF=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1s2Zid-0006Lf-Pk
- for xen-devel@lists.xenproject.org; Thu, 02 May 2024 16:55:39 +0000
+ id 1s2Zii-0006Lf-2b
+ for xen-devel@lists.xenproject.org; Thu, 02 May 2024 16:55:44 +0000
 Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
  [2a00:1450:4864:20::629])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cd13bc1d-08a4-11ef-909b-e314d9c70b13;
- Thu, 02 May 2024 18:55:38 +0200 (CEST)
+ id d01e4368-08a4-11ef-909b-e314d9c70b13;
+ Thu, 02 May 2024 18:55:43 +0200 (CEST)
 Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a55bf737cecso1010509166b.0
- for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 09:55:38 -0700 (PDT)
+ a640c23a62f3a-a5966f5a76bso182206866b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 09:55:43 -0700 (PDT)
 Received: from carlo-ubuntu.mo54.unimo.it (nonato.mo54.unimo.it.
  [155.185.85.8]) by smtp.gmail.com with ESMTPSA id
- mq30-20020a170907831e00b00a5987fbfb83sm29103ejc.152.2024.05.02.09.55.36
+ mq30-20020a170907831e00b00a5987fbfb83sm29103ejc.152.2024.05.02.09.55.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 09:55:37 -0700 (PDT)
+ Thu, 02 May 2024 09:55:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,138 +47,293 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd13bc1d-08a4-11ef-909b-e314d9c70b13
+X-Inumbo-ID: d01e4368-08a4-11ef-909b-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1714668937; x=1715273737; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0gkpKCmCscYcHI5K9J1ZWC0k2m8hrdGMWQYAyGZgqIU=;
-        b=2HtycorCH4hcj0oLKQAjM7A8n7dJc1XvB2iszUDXTbpyCSAK9UndkQfKTU/uyJ5ug5
-         mSrB1IcR4pau5BUT9OANta0dWtjx4K9GRsOaw5sM53clB0p32IkWlt5JIMUnR1HMNFQ1
-         5k98fwq2rHSdcCsi9wF2kTxT24d+VVzAJUylX+8oczucOeDGj0zpZCDzIhC3EOBeEFyd
-         ftk19A/WP4gni3k5teZhJE+oxqTQRoICWCPp/MtNI2mQ96lZPKJXEhKfCfQBoHLIDzQ3
-         6mSHYvIPHjxpray8goWKgI+9EafgXJl1NCdo/Kfzurv3vpe3r/P4RXx6/oWiXT3qxWeg
-         8FVw==
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1714668942; x=1715273742; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3EUvo/9M8ITy6G3rHvhG7NG2DwAgBy3coT8I6ydQ2x4=;
+        b=VS2N/fqYnnpQrOoXFuh4WnWwAMyilj52BvYFWiutiFyzngHCUGVMQo/ZO+mQ26abUp
+         3kqzhL/mFzAFqNNYXFJD2Mg4NHdMkkLk53mLoKVvn97sud+Vk+bAtdejAMybIkeeHdox
+         bvgvazr/8lihylx4dFf1WkNxlqToN8qjq0/m2DCglGYBpm+tPtnmI2M5mXVNyhWTow/C
+         ETIpbJ2DLEzSJNK6FSrk2KcICOx9po1PGh9ZSk4RscbbursZ2vP6CR2LtFDlX6VTyupd
+         xtp7nmhpdhtoll48efxOIgvWN4GimRicXVY5FiM5792fQqjukKbGpsc05wjWo0H2DU1s
+         wPFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714668937; x=1715273737;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0gkpKCmCscYcHI5K9J1ZWC0k2m8hrdGMWQYAyGZgqIU=;
-        b=a0EsJxtbixR+2B6f5OIUl5CwjHJAmQSSlRn3fc/ryMOLWxmGKUZfiKpxzMO4/vqYAa
-         hbcnd83JDWN5nAv4cj3jY0Kf7AThYOQS9ewADvRBQlNynA5LIza/5+kt8gyHBj0cH9Ba
-         va6OXokFGYgj04oUjkOzBGXc+5fY0SmYOnheXqpxU3VrZlDMbRzY3skAbgUkPxMZwJGo
-         0s2smHoauf6Qtt7GBUeMyzCRdhUbsDJ+PPK6SHbyVbEala1xBIejKqNSj8nQH8RzZqUj
-         M115/3LEN7FhfG77CNA09ezgS0BRT0mA9ohVWPedF6jeZo3nExDSjhtWvnlNutcgt3u4
-         HYNA==
-X-Gm-Message-State: AOJu0YySOlX5z9SZFFC87DUrwTzlsNEHEuDlVTGg+xyt4xhEpNNiQ9m1
-	DSOcWgDDyqReFSYG9OKVIInHwD9FqMoKhVbqiqg+dw6xFvFbbX56L0LWoqi7UreDHZewsN+ODzQ
-	r
-X-Google-Smtp-Source: AGHT+IF2ygDwkCaFzAIPf+pJIDcPHgiTFNxHs9rVsRZhxQkDr56yF0mglY0KehVMayvtxae9mTD2hg==
-X-Received: by 2002:a17:906:f1c8:b0:a58:9c9b:61ad with SMTP id gx8-20020a170906f1c800b00a589c9b61admr68340ejb.43.1714668937383;
-        Thu, 02 May 2024 09:55:37 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1714668942; x=1715273742;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3EUvo/9M8ITy6G3rHvhG7NG2DwAgBy3coT8I6ydQ2x4=;
+        b=iOZLc3ERsqWRh7yM68RHux/WINVGJf+H9hPe1I4aZV3NXoVl08u2vlhFKl/qoSsnT/
+         3FSZ4PcuID36/H4SRiEILzgGciaR+mvcRQFNN1INiiKKQwXYN0YweAM0eb3VwaF84TYx
+         lCtkVyzju1ikNIBZ1dZ6dtBd2FN9wJ53QCfbXLudoQOJDr7WTScZwOJad0oqvqq8eOi2
+         I0ecpW/nSfrFatfkivSNRgtQg3WpWChOgBTDXDBeYVUZwe4fWk1J94Nt44Zegi/82jee
+         KCaqLGdQi5EdY0Bx+YU5Jole588T4dbmhELCGo48rfBVwFIc/GAzqXudLY01WW4mGdEZ
+         NBKg==
+X-Gm-Message-State: AOJu0Yz8IAvEFSklRsrEysq3hcS+FtGNy9ijk2fwK+x7tKZTqs6QtN1W
+	Vm/1vHzv93M/x6YOl6fezr0HepPUidLZZMDi+sbiBJTCZQsJKlTtj3lN/AuVNdAaGYZ7lOjnrmc
+	5
+X-Google-Smtp-Source: AGHT+IEaaUlZhh8N1o1seHM3dS9FR8bI1vP2vECN7M/57vevuCIUxNoc+9g8AGbYJ3CQ/WfMUyAYvw==
+X-Received: by 2002:a17:906:4906:b0:a55:5958:cb00 with SMTP id b6-20020a170906490600b00a555958cb00mr2219308ejq.38.1714668942177;
+        Thu, 02 May 2024 09:55:42 -0700 (PDT)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
 	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Anthony PERARD <anthony@xenproject.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v8 00/13] Arm cache coloring
-Date: Thu,  2 May 2024 18:55:20 +0200
-Message-Id: <20240502165533.319988-1-carlo.nonato@minervasys.tech>
+	Juergen Gross <jgross@suse.com>,
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH v8 06/13] tools: add support for cache coloring configuration
+Date: Thu,  2 May 2024 18:55:26 +0200
+Message-Id: <20240502165533.319988-7-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240502165533.319988-1-carlo.nonato@minervasys.tech>
+References: <20240502165533.319988-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Shared caches in multi-core CPU architectures represent a problem for
-predictability of memory access latency. This jeopardizes applicability
-of many Arm platform in real-time critical and mixed-criticality
-scenarios. We introduce support for cache partitioning with page
-coloring, a transparent software technique that enables isolation
-between domains and Xen, and thus avoids cache interference.
+Add a new "llc_colors" parameter that defines the LLC color assignment for
+a domain. The user can specify one or more color ranges using the same
+syntax used everywhere else for color config described in the
+documentation.
+The parameter is defined as a list of strings that represent the color
+ranges.
 
-When creating a domain, a simple syntax (e.g. `0-3` or `4-11`) allows
-the user to define assignments of cache partitions ids, called colors,
-where assigning different colors guarantees no mutual eviction on cache
-will ever happen. This instructs the Xen memory allocator to provide
-the i-th color assignee only with pages that maps to color i, i.e. that
-are indexed in the i-th cache partition.
+Documentation is also added.
 
-The proposed implementation supports the dom0less feature.
-The proposed implementation doesn't support the static-mem feature.
-The solution has been tested in several scenarios, including Xilinx Zynq
-MPSoCs.
+Based on original work from: Luca Miccio <lucmiccio@gmail.com>
 
-Carlo Nonato (12):
-  xen/common: add cache coloring common code
-  xen/arm: add initial support for LLC coloring on arm64
-  xen/arm: permit non direct-mapped Dom0 construction
-  xen/arm: add Dom0 cache coloring support
-  xen: extend domctl interface for cache coloring
-  tools: add support for cache coloring configuration
-  xen/arm: add support for cache coloring configuration via device-tree
-  xen/page_alloc: introduce preserved page flags macro
-  xen: add cache coloring allocator for domains
-  xen/arm: use domain memory to allocate p2m page tables
-  xen/arm: make consider_modules() available for xen relocation
-  xen/arm: add cache coloring support for Xen
+Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+---
+v8:
+- warn the user in case of coloring not supported at hypervisor level
+v7:
+- removed unneeded NULL check before xc_hypercall_buffer_free() in
+  xc_domain_set_llc_colors()
+v6:
+- no edits
+v5:
+- added LIBXL_HAVE_BUILDINFO_LLC_COLORS
+- moved color configuration in xc_domain_set_llc_colors() cause of the new
+  hypercall
+v4:
+- removed overlapping color ranges checks during parsing
+- moved hypercall buffer initialization in libxenctrl
+---
+ docs/man/xl.cfg.5.pod.in         | 10 +++++++++
+ tools/include/libxl.h            |  5 +++++
+ tools/include/xenctrl.h          |  9 ++++++++
+ tools/libs/ctrl/xc_domain.c      | 35 +++++++++++++++++++++++++++++
+ tools/libs/light/libxl_create.c  | 13 +++++++++++
+ tools/libs/light/libxl_types.idl |  1 +
+ tools/xl/xl_parse.c              | 38 +++++++++++++++++++++++++++++++-
+ 7 files changed, 110 insertions(+), 1 deletion(-)
 
-Luca Miccio (1):
-  xen/arm: add Xen cache colors command line parameter
-
- SUPPORT.md                              |   7 +
- docs/man/xl.cfg.5.pod.in                |  10 +
- docs/misc/arm/device-tree/booting.txt   |   4 +
- docs/misc/cache-coloring.rst            | 246 +++++++++++++++
- docs/misc/xen-command-line.pandoc       |  70 +++++
- tools/include/libxl.h                   |   5 +
- tools/include/xenctrl.h                 |   9 +
- tools/libs/ctrl/xc_domain.c             |  35 +++
- tools/libs/light/libxl_create.c         |  13 +
- tools/libs/light/libxl_types.idl        |   1 +
- tools/xl/xl_parse.c                     |  38 ++-
- xen/arch/arm/Kconfig                    |   1 +
- xen/arch/arm/Makefile                   |   1 +
- xen/arch/arm/alternative.c              |  30 +-
- xen/arch/arm/arm32/mmu/mm.c             | 115 +------
- xen/arch/arm/arm64/mmu/head.S           |  58 +++-
- xen/arch/arm/arm64/mmu/mm.c             |  28 +-
- xen/arch/arm/dom0less-build.c           |  60 +---
- xen/arch/arm/domain_build.c             | 107 ++++++-
- xen/arch/arm/include/asm/domain_build.h |   1 +
- xen/arch/arm/include/asm/mm.h           |   5 +
- xen/arch/arm/include/asm/mmu/layout.h   |   3 +
- xen/arch/arm/include/asm/processor.h    |  16 +
- xen/arch/arm/include/asm/setup.h        |   3 +
- xen/arch/arm/llc-coloring.c             | 140 +++++++++
- xen/arch/arm/mmu/p2m.c                  |   4 +-
- xen/arch/arm/mmu/setup.c                | 221 +++++++++++++-
- xen/arch/arm/setup.c                    |  13 +-
- xen/common/Kconfig                      |  30 ++
- xen/common/Makefile                     |   1 +
- xen/common/domain.c                     |   3 +
- xen/common/domctl.c                     |  10 +
- xen/common/keyhandler.c                 |   3 +
- xen/common/llc-coloring.c               | 379 ++++++++++++++++++++++++
- xen/common/page_alloc.c                 | 204 ++++++++++++-
- xen/include/public/domctl.h             |   9 +
- xen/include/xen/llc-coloring.h          |  63 ++++
- xen/include/xen/sched.h                 |   5 +
- xen/include/xen/xmalloc.h               |  12 +
- 39 files changed, 1768 insertions(+), 195 deletions(-)
- create mode 100644 docs/misc/cache-coloring.rst
- create mode 100644 xen/arch/arm/llc-coloring.c
- create mode 100644 xen/common/llc-coloring.c
- create mode 100644 xen/include/xen/llc-coloring.h
-
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 8f2b375ce9..320644701b 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -3072,6 +3072,16 @@ raised.
+ 
+ =back
+ 
++=over 4
++
++=item B<llc_colors=[ "RANGE", "RANGE", ...]>
++
++Specify the Last Level Cache (LLC) color configuration for the guest.
++B<RANGE> can be either a single color value or a hypen-separated closed
++interval of colors (such as "0-4").
++
++=back
++
+ =head3 x86
+ 
+ =over 4
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 62cb07dea6..49521e5da4 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1368,6 +1368,11 @@ void libxl_mac_copy(libxl_ctx *ctx, libxl_mac *dst, const libxl_mac *src);
+  */
+ #define LIBXL_HAVE_BUILDINFO_HVM_SYSTEM_FIRMWARE
+ 
++/*
++ * The libxl_domain_build_info has the llc_colors array.
++ */
++#define LIBXL_HAVE_BUILDINFO_LLC_COLORS 1
++
+ /*
+  * ERROR_REMUS_XXX error code only exists from Xen 4.5, Xen 4.6 and it
+  * is changed to ERROR_CHECKPOINT_XXX in Xen 4.7
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 4996855944..2ad8e2066b 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -2654,6 +2654,15 @@ int xc_livepatch_replace(xc_interface *xch, char *name, uint32_t timeout, uint32
+ int xc_domain_cacheflush(xc_interface *xch, uint32_t domid,
+                          xen_pfn_t start_pfn, xen_pfn_t nr_pfns);
+ 
++/*
++ * Set LLC colors for a domain.
++ * It can only be used directly after domain creation. An attempt to use it
++ * afterwards will result in an error.
++ */
++int xc_domain_set_llc_colors(xc_interface *xch, uint32_t domid,
++                             const unsigned int *llc_colors,
++                             unsigned int num_llc_colors);
++
+ #if defined(__arm__) || defined(__aarch64__)
+ int xc_dt_overlay(xc_interface *xch, void *overlay_fdt,
+                   uint32_t overlay_fdt_size, uint8_t overlay_op);
+diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
+index f2d9d14b4d..d315cfa6c1 100644
+--- a/tools/libs/ctrl/xc_domain.c
++++ b/tools/libs/ctrl/xc_domain.c
+@@ -2180,6 +2180,41 @@ int xc_domain_soft_reset(xc_interface *xch,
+     domctl.domain = domid;
+     return do_domctl(xch, &domctl);
+ }
++
++int xc_domain_set_llc_colors(xc_interface *xch, uint32_t domid,
++                             const unsigned int *llc_colors,
++                             unsigned int num_llc_colors)
++{
++    struct xen_domctl domctl = {};
++    DECLARE_HYPERCALL_BUFFER(uint32_t, local);
++    int ret = -1;
++
++    if ( num_llc_colors )
++    {
++        size_t bytes = sizeof(uint32_t) * num_llc_colors;
++
++        local = xc_hypercall_buffer_alloc(xch, local, bytes);
++        if ( local == NULL )
++        {
++            PERROR("Could not allocate LLC colors for set_llc_colors");
++            ret = -ENOMEM;
++            goto out;
++        }
++        memcpy(local, llc_colors, bytes);
++        set_xen_guest_handle(domctl.u.set_llc_colors.llc_colors, local);
++    }
++
++    domctl.cmd = XEN_DOMCTL_set_llc_colors;
++    domctl.domain = domid;
++    domctl.u.set_llc_colors.num_llc_colors = num_llc_colors;
++
++    ret = do_domctl(xch, &domctl);
++
++out:
++    xc_hypercall_buffer_free(xch, local);
++
++    return ret;
++}
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 41252ec553..ff80625bd6 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -726,6 +726,19 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
+             /* A new domain now exists */
+             *domid = local_domid;
+ 
++            ret = xc_domain_set_llc_colors(ctx->xch, local_domid,
++                                           b_info->llc_colors,
++                                           b_info->num_llc_colors);
++            if (ret < 0 && errno == EOPNOTSUPP) {
++                if (b_info->num_llc_colors > 0)
++                    LOGED(WARN, local_domid,
++                          "LLC coloring not enabled in the hypervisor");
++            } else if (ret < 0) {
++                LOGED(ERROR, local_domid, "LLC colors allocation failed");
++                rc = ERROR_FAIL;
++                goto out;
++            }
++
+             rc = libxl__is_domid_recent(gc, local_domid, &recent);
+             if (rc)
+                 goto out;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 470122e768..79118e1582 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -616,6 +616,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+     ("ioports",          Array(libxl_ioport_range, "num_ioports")),
+     ("irqs",             Array(uint32, "num_irqs")),
+     ("iomem",            Array(libxl_iomem_range, "num_iomem")),
++    ("llc_colors",       Array(uint32, "num_llc_colors")),
+     ("claim_mode",	     libxl_defbool),
+     ("event_channels",   uint32),
+     ("kernel",           string),
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index ab09d0288b..ddfbcb00fd 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1294,7 +1294,7 @@ void parse_config_data(const char *config_source,
+     XLU_ConfigList *cpus, *vbds, *nics, *pcis, *cvfbs, *cpuids, *vtpms,
+                    *usbctrls, *usbdevs, *p9devs, *vdispls, *pvcallsifs_devs;
+     XLU_ConfigList *channels, *ioports, *irqs, *iomem, *viridian, *dtdevs,
+-                   *mca_caps, *smbios;
++                   *mca_caps, *smbios, *llc_colors;
+     int num_ioports, num_irqs, num_iomem, num_cpus, num_viridian, num_mca_caps;
+     int num_smbios;
+     int pci_power_mgmt = 0;
+@@ -1302,6 +1302,7 @@ void parse_config_data(const char *config_source,
+     int pci_permissive = 0;
+     int pci_seize = 0;
+     int i, e;
++    int num_llc_colors;
+     char *kernel_basename;
+ 
+     libxl_domain_create_info *c_info = &d_config->c_info;
+@@ -1445,6 +1446,41 @@ void parse_config_data(const char *config_source,
+     if (!xlu_cfg_get_long (config, "maxmem", &l, 0))
+         b_info->max_memkb = l * 1024;
+ 
++    if (!xlu_cfg_get_list(config, "llc_colors", &llc_colors, &num_llc_colors, 0)) {
++        int cur_index = 0;
++
++        b_info->num_llc_colors = 0;
++        for (i = 0; i < num_llc_colors; i++) {
++            uint32_t start = 0, end = 0, k;
++
++            buf = xlu_cfg_get_listitem(llc_colors, i);
++            if (!buf) {
++                fprintf(stderr,
++                        "xl: Can't get element %d in LLC color list\n", i);
++                exit(1);
++            }
++
++            if (sscanf(buf, "%" SCNu32 "-%" SCNu32, &start, &end) != 2) {
++                if (sscanf(buf, "%" SCNu32, &start) != 1) {
++                    fprintf(stderr, "xl: Invalid LLC color range: %s\n", buf);
++                    exit(1);
++                }
++                end = start;
++            } else if (start > end) {
++                fprintf(stderr,
++                        "xl: Start LLC color is greater than end: %s\n", buf);
++                exit(1);
++            }
++
++            b_info->num_llc_colors += (end - start) + 1;
++            b_info->llc_colors = (uint32_t *)realloc(b_info->llc_colors,
++                        sizeof(*b_info->llc_colors) * b_info->num_llc_colors);
++
++            for (k = start; k <= end; k++)
++                b_info->llc_colors[cur_index++] = k;
++        }
++    }
++
+     if (!xlu_cfg_get_long (config, "vcpus", &l, 0)) {
+         vcpus = l;
+         if (libxl_cpu_bitmap_alloc(ctx, &b_info->avail_vcpus, l)) {
 -- 
 2.34.1
 
