@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F01C25B5C
-	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2024 17:45:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.716044.1118151 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA2DEC4345F
+	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2024 18:03:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.716097.1118161 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2aUE-0003J7-8F; Thu, 02 May 2024 17:44:50 +0000
+	id 1s2alT-00036H-1G; Thu, 02 May 2024 18:02:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 716044.1118151; Thu, 02 May 2024 17:44:50 +0000
+Received: by outflank-mailman (output) from mailman id 716097.1118161; Thu, 02 May 2024 18:02:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2aUE-0003Hv-44; Thu, 02 May 2024 17:44:50 +0000
-Received: by outflank-mailman (input) for mailman id 716044;
- Thu, 02 May 2024 17:44:49 +0000
+	id 1s2alS-00036A-Uy; Thu, 02 May 2024 18:02:38 +0000
+Received: by outflank-mailman (input) for mailman id 716097;
+ Thu, 02 May 2024 18:02:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1TOG=MF=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1s2aUD-0000pj-83
- for xen-devel@lists.xenproject.org; Thu, 02 May 2024 17:44:49 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
+ <SRS0=3Qsp=MF=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1s2alR-000364-Rd
+ for xen-devel@lists.xenproject.org; Thu, 02 May 2024 18:02:37 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ab266fc8-08ab-11ef-b4bb-af5377834399;
- Thu, 02 May 2024 19:44:47 +0200 (CEST)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-51f29e80800so1228221e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 02 May 2024 10:44:47 -0700 (PDT)
-Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
- by smtp.gmail.com with ESMTPSA id
- f10-20020a19ae0a000000b0051f4ab12ee3sm190497lfc.248.2024.05.02.10.44.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 10:44:44 -0700 (PDT)
+ id 26f126d0-08ae-11ef-b4bb-af5377834399;
+ Thu, 02 May 2024 20:02:35 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id D50AD61A1D;
+ Thu,  2 May 2024 18:02:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89341C113CC;
+ Thu,  2 May 2024 18:02:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,284 +44,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab266fc8-08ab-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714671886; x=1715276686; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zHs4bshwNa+29DjSZp/GoXZPGT+4z3HWsZCQXLRsJBk=;
-        b=ZHAPfkp0TQ4sThBvrNzSY6h2RcpTqhNpSMSyxvCYu4OCo7uJSqIia5/YpZxiHGkB71
-         Xk2VhvpW/Ld5dy9pBps51AU2Yitts4fgqJH3uLxU6EPlDssYTxcPDDCVaTPk2Ds08Mq8
-         2QiDMKE5FyHg1BrI+fhCyJhZxxRU1uBq5WITXuCzYuPH5kxXVmY1z9PW/r8euSzaytXm
-         89iMjVwyxhT0KtamfcUyAImEfCYxbfsVYYHe6D+Nts9U/AhvifN8XlIlzcD6gVOuJlIv
-         jU1qfrE/WaRk6vPESa4Yme6yBVQLbGvuQbXMFlCCe9Qvq9UWqABjmvN/EwsqMV55CRq7
-         RWxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714671886; x=1715276686;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=zHs4bshwNa+29DjSZp/GoXZPGT+4z3HWsZCQXLRsJBk=;
-        b=GtyY6733WFVhpIH9afrFbpGvgPAVZw6zo7fBCT5HoHY8uKUOhi66Wvm6jdAfyLKQ6W
-         zbscE2Pjcl8zOVlarpae+7MZVmxnszaq9LtlrpqNmUWGZnlDYH9WCHPqgfmQp3nRZe8M
-         hlRT3CcYRSZns+FoocjXmHJQm55S7///98k/Do6EcaezVbdyMrKbQGTpsFNQA3AgKP1S
-         vCdbmFac0S4CAp2eWUewvGpwFDhf3fiuoW19XH1//QPceFQHnsivCHZn6YXuYVy6proH
-         hVXkMvaO9c1oXDQ10Lz+rHEO/SkfE72CNVGpX7VDDr6yx0hL4vtGVGEbloRKwF0w1Qb9
-         U2CQ==
-X-Gm-Message-State: AOJu0Yyt0bdI8ouu//QEiS1ipWNjXTXZAVPQR5gfU2VRwa/w5RsZp9WW
-	zOSK4OBJuiMVwSdkWO+xczqfBfeNZ8OOYujoYZXaxH89PYXiTt/8B/7jMAcz
-X-Google-Smtp-Source: AGHT+IHTUje8yIPxKFZYWW3hfLgmp4LDhlggTVeZyQmVCbaHU7mc8OlD2vNztC903H84MmHD22J8ew==
-X-Received: by 2002:a05:6512:786:b0:51a:c3f2:69a8 with SMTP id x6-20020a056512078600b0051ac3f269a8mr332574lfr.53.1714671886039;
-        Thu, 02 May 2024 10:44:46 -0700 (PDT)
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	julien@xen.org,
-	bertrand.marquis@arm.com,
-	michal.orzel@amd.com,
-	Volodymyr_Babchuk@epam.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	edgar.iglesias@amd.com
-Subject: [PATCH v3 9/9] xen/arm64: lib: Use the generic xen/linkage.h macros
-Date: Wed,  1 May 2024 05:54:48 +0200
-Message-Id: <20240501035448.964625-10-edgar.iglesias@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240501035448.964625-1-edgar.iglesias@gmail.com>
-References: <20240501035448.964625-1-edgar.iglesias@gmail.com>
+X-Inumbo-ID: 26f126d0-08ae-11ef-b4bb-af5377834399
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1714672953;
+	bh=/ZteNs6x9OubUJqG1B50uqZmMsB3ugNtVG566Vfz8sY=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=SVu7/9084mtuCkBHG7NyEZnlldSwDsUHWHJxe4sKxla7k1M4lKwB0EPZiJMOURKtd
+	 iFeHG0+mb2q6U2ZMW2qp1JxqckPBzcX6h0l+iyp1uCf1foMqfNOmPuj+gvkeexoq5t
+	 /V5+Tox5R+9v5oSqQ8sPH/HtdrGoVoC4zNNDVfZAH7uYq1+Nkq0mu6LEj1QXPHUaWQ
+	 DY6ij8f5hgdnO0nEyR3I0z6SnkbPhdBjGQ/yuhyFOQbxhtSRT/ReEHmPHZUrQmTXOb
+	 VtGbJ1PN6uSp+qGg15/IBBKSQincxMlVB+O+Eu9yjk+gd/WxX7AHOM4HOMihxMQbaT
+	 eT9ai3vYLUVuQ==
+Date: Thu, 2 May 2024 11:02:29 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Henry Wang <xin.wang2@amd.com>
+cc: Julien Grall <julien@xen.org>, Jan Beulich <jbeulich@suse.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 07/15] xen/overlay: Enable device tree overlay assignment
+ to running domains
+In-Reply-To: <e3c7098b-a876-48f3-8ccb-18a2ced8521c@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2405021101200.624854@ubuntu-linux-20-04-desktop>
+References: <20240424033449.168398-1-xin.wang2@amd.com> <20240424033449.168398-8-xin.wang2@amd.com> <da67f90f-6807-4fdc-b65b-f7a4ba9f78ad@suse.com> <97a401ff-4b5c-4e6a-8d9c-e36305ec64f5@amd.com> <128c7e68-0431-44e9-b4fc-96cc46e158ad@xen.org>
+ <e3c7098b-a876-48f3-8ccb-18a2ced8521c@amd.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/mixed; boundary="8323329-878510409-1714672954=:624854"
 
-From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Use the generic xen/linkage.h macros to annotate code symbols.
+--8323329-878510409-1714672954=:624854
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
----
- xen/arch/arm/arm64/lib/memchr.S  | 4 ++--
- xen/arch/arm/arm64/lib/memcmp.S  | 4 ++--
- xen/arch/arm/arm64/lib/memcpy.S  | 4 ++--
- xen/arch/arm/arm64/lib/memmove.S | 4 ++--
- xen/arch/arm/arm64/lib/memset.S  | 4 ++--
- xen/arch/arm/arm64/lib/strchr.S  | 4 ++--
- xen/arch/arm/arm64/lib/strcmp.S  | 4 ++--
- xen/arch/arm/arm64/lib/strlen.S  | 4 ++--
- xen/arch/arm/arm64/lib/strncmp.S | 4 ++--
- xen/arch/arm/arm64/lib/strnlen.S | 4 ++--
- xen/arch/arm/arm64/lib/strrchr.S | 4 ++--
- 11 files changed, 22 insertions(+), 22 deletions(-)
+On Tue, 30 Apr 2024, Henry Wang wrote:
+> Hi Julien,
+> 
+> On 4/30/2024 1:34 AM, Julien Grall wrote:
+> > On 29/04/2024 04:36, Henry Wang wrote:
+> > > Hi Jan, Julien, Stefano,
+> > 
+> > Hi Henry,
+> > 
+> > > On 4/24/2024 2:05 PM, Jan Beulich wrote:
+> > > > On 24.04.2024 05:34, Henry Wang wrote:
+> > > > > --- a/xen/include/public/sysctl.h
+> > > > > +++ b/xen/include/public/sysctl.h
+> > > > > @@ -1197,7 +1197,9 @@ struct xen_sysctl_dt_overlay {
+> > > > >   #define XEN_SYSCTL_DT_OVERLAY_ADD                   1
+> > > > >   #define XEN_SYSCTL_DT_OVERLAY_REMOVE                2
+> > > > >       uint8_t overlay_op;                     /* IN: Add or remove. */
+> > > > > -    uint8_t pad[3];                         /* IN: Must be zero. */
+> > > > > +    bool domain_mapping;                    /* IN: True of False. */
+> > > > > +    uint8_t pad[2];                         /* IN: Must be zero. */
+> > > > > +    uint32_t domain_id;
+> > > > >   };
+> > > > If you merely re-purposed padding fields, all would be fine without
+> > > > bumping the interface version. Yet you don't, albeit for an unclear
+> > > > reason: Why uint32_t rather than domid_t? And on top of that - why a
+> > > > separate boolean when you could use e.g. DOMID_INVALID to indicate
+> > > > "no domain mapping"?
+> > > 
+> > > I think both of your suggestion make great sense. I will follow the
+> > > suggestion in v2.
+> > > 
+> > > > That said - anything taking a domain ID is certainly suspicious in a
+> > > > sysctl. Judging from the description you really mean this to be a
+> > > > domctl. Anything else will require extra justification.
+> > > 
+> > > I also think a domctl is better. I had a look at the history of the
+> > > already merged series, it looks like in the first version of merged part 1
+> > > [1], the hypercall was implemented as the domctl in the beginning but
+> > > later in v2 changed to sysctl. I think this makes sense as the scope of
+> > > that time is just to make Xen aware of the device tree node via Xen device
+> > > tree.
+> > > 
+> > > However this is now a problem for the current part where the scope (and
+> > > the end goal) is extended to assign the added device to Linux Dom0/DomU
+> > > via device tree overlays. I am not sure which way is better, should we
+> > > repurposing the sysctl to domctl or maybe add another domctl (I am
+> > > worrying about the duplication because basically we need the same sysctl
+> > > functionality but now with a domid in it)? What do you think?
+> > 
+> > I am not entirely sure this is a good idea to try to add the device in Xen
+> > and attach it to the guests at the same time. Imagine the following
+> > situation:
+> > 
+> > 1) Add and attach devices
+> > 2) The domain is rebooted
+> > 3) Detach and remove devices
+> > 
+> > After step 2, you technically have a new domain. You could have also a case
+> > where this is a completely different guest. So the flow would look a little
+> > bit weird (you create the DT overlay with domain A but remove with domain
+> > B).
+> > 
+> > So, at the moment, it feels like the add/attach (resp detech/remove)
+> > operations should happen separately.
+> > 
+> > Can you clarify why you want to add devices to Xen and attach to a guest
+> > within a single hypercall?
+> 
+> Sorry I don't know if there is any specific thoughts on the design of using a
+> single hypercall to do both add devices to Xen device tree and assign the
+> device to the guest. In fact seeing your above comments, I think separating
+> these two functionality to two xl commands using separated hypercalls would
+> indeed be a better idea. Thank you for the suggestion!
+> 
+> To make sure I understand correctly, would you mind confirming if below
+> actions for v2 make sense to you? Thanks!
+> - Only use the XEN_SYSCTL_DT_OVERLAY_{ADD, REMOVE} sysctls to add/remove
+> overlay to Xen device tree
+> - Introduce the xl dt-overlay attach <domid> command and respective domctls to
+> do the device assignment for the overlay to domain.
 
-diff --git a/xen/arch/arm/arm64/lib/memchr.S b/xen/arch/arm/arm64/lib/memchr.S
-index 81f113bb1c..3d8aeca3ca 100644
---- a/xen/arch/arm/arm64/lib/memchr.S
-+++ b/xen/arch/arm/arm64/lib/memchr.S
-@@ -29,7 +29,7 @@
-  * Returns:
-  *	x0 - address of first occurrence of 'c' or 0
-  */
--ENTRY(memchr)
-+FUNC(memchr)
- 	and	w1, w1, #0xff
- 1:	subs	x2, x2, #1
- 	b.mi	2f
-@@ -40,4 +40,4 @@ ENTRY(memchr)
- 	ret
- 2:	mov	x0, #0
- 	ret
--ENDPROC(memchr)
-+END(memchr)
-diff --git a/xen/arch/arm/arm64/lib/memcmp.S b/xen/arch/arm/arm64/lib/memcmp.S
-index 87c2537ffe..d77dd4ce52 100644
---- a/xen/arch/arm/arm64/lib/memcmp.S
-+++ b/xen/arch/arm/arm64/lib/memcmp.S
-@@ -57,7 +57,7 @@ pos		.req	x11
- limit_wd	.req	x12
- mask		.req	x13
- 
--ENTRY(memcmp)
-+FUNC(memcmp)
- 	cbz	limit, .Lret0
- 	eor	tmp1, src1, src2
- 	tst	tmp1, #7
-@@ -254,4 +254,4 @@ CPU_LE( rev	data2, data2 )
- .Lret0:
- 	mov	result, #0
- 	ret
--ENDPROC(memcmp)
-+END(memcmp)
-diff --git a/xen/arch/arm/arm64/lib/memcpy.S b/xen/arch/arm/arm64/lib/memcpy.S
-index d90d20ef3e..1e04b79010 100644
---- a/xen/arch/arm/arm64/lib/memcpy.S
-+++ b/xen/arch/arm/arm64/lib/memcpy.S
-@@ -55,7 +55,7 @@ C_h	.req	x12
- D_l	.req	x13
- D_h	.req	x14
- 
--ENTRY(memcpy)
-+FUNC(memcpy)
- 	mov	dst, dstin
- 	cmp	count, #16
- 	/*When memory length is less than 16, the accessed are not aligned.*/
-@@ -197,4 +197,4 @@ ENTRY(memcpy)
- 	tst	count, #0x3f
- 	b.ne	.Ltail63
- 	ret
--ENDPROC(memcpy)
-+END(memcpy)
-diff --git a/xen/arch/arm/arm64/lib/memmove.S b/xen/arch/arm/arm64/lib/memmove.S
-index a49de845d0..14438dbe9c 100644
---- a/xen/arch/arm/arm64/lib/memmove.S
-+++ b/xen/arch/arm/arm64/lib/memmove.S
-@@ -56,7 +56,7 @@ C_h	.req	x12
- D_l	.req	x13
- D_h	.req	x14
- 
--ENTRY(memmove)
-+FUNC(memmove)
- 	cmp	dstin, src
- 	b.lo	memcpy
- 	add	tmp1, src, count
-@@ -193,4 +193,4 @@ ENTRY(memmove)
- 	tst	count, #0x3f
- 	b.ne	.Ltail63
- 	ret
--ENDPROC(memmove)
-+END(memmove)
-diff --git a/xen/arch/arm/arm64/lib/memset.S b/xen/arch/arm/arm64/lib/memset.S
-index 5bf751521b..367fa60175 100644
---- a/xen/arch/arm/arm64/lib/memset.S
-+++ b/xen/arch/arm/arm64/lib/memset.S
-@@ -53,7 +53,7 @@ dst		.req	x8
- tmp3w		.req	w9
- tmp3		.req	x9
- 
--ENTRY(memset)
-+FUNC(memset)
- 	mov	dst, dstin	/* Preserve return value.  */
- 	and	A_lw, val, #255
- 	orr	A_lw, A_lw, A_lw, lsl #8
-@@ -212,4 +212,4 @@ ENTRY(memset)
- 	ands	count, count, zva_bits_x
- 	b.ne	.Ltail_maybe_long
- 	ret
--ENDPROC(memset)
-+END(memset)
-diff --git a/xen/arch/arm/arm64/lib/strchr.S b/xen/arch/arm/arm64/lib/strchr.S
-index 0506b0ff7f..83fd81e8ef 100644
---- a/xen/arch/arm/arm64/lib/strchr.S
-+++ b/xen/arch/arm/arm64/lib/strchr.S
-@@ -27,7 +27,7 @@
-  * Returns:
-  *	x0 - address of first occurrence of 'c' or 0
-  */
--ENTRY(strchr)
-+FUNC(strchr)
- 	and	w1, w1, #0xff
- 1:	ldrb	w2, [x0], #1
- 	cmp	w2, w1
-@@ -37,4 +37,4 @@ ENTRY(strchr)
- 	cmp	w2, w1
- 	csel	x0, x0, xzr, eq
- 	ret
--ENDPROC(strchr)
-+END(strchr)
-diff --git a/xen/arch/arm/arm64/lib/strcmp.S b/xen/arch/arm/arm64/lib/strcmp.S
-index c6f42dd255..7677108e26 100644
---- a/xen/arch/arm/arm64/lib/strcmp.S
-+++ b/xen/arch/arm/arm64/lib/strcmp.S
-@@ -59,7 +59,7 @@ tmp3		.req	x9
- zeroones	.req	x10
- pos		.req	x11
- 
--ENTRY(strcmp)
-+FUNC(strcmp)
- 	eor	tmp1, src1, src2
- 	mov	zeroones, #REP8_01
- 	tst	tmp1, #7
-@@ -230,4 +230,4 @@ CPU_BE(	orr	syndrome, diff, has_nul )
- 	lsr	data1, data1, #56
- 	sub	result, data1, data2, lsr #56
- 	ret
--ENDPROC(strcmp)
-+END(strcmp)
-diff --git a/xen/arch/arm/arm64/lib/strlen.S b/xen/arch/arm/arm64/lib/strlen.S
-index fb6aaf1a6a..10feedaf81 100644
---- a/xen/arch/arm/arm64/lib/strlen.S
-+++ b/xen/arch/arm/arm64/lib/strlen.S
-@@ -56,7 +56,7 @@ pos		.req	x12
- #define REP8_7f 0x7f7f7f7f7f7f7f7f
- #define REP8_80 0x8080808080808080
- 
--ENTRY(strlen)
-+FUNC(strlen)
- 	mov	zeroones, #REP8_01
- 	bic	src, srcin, #15
- 	ands	tmp1, srcin, #15
-@@ -123,4 +123,4 @@ CPU_LE( lsr	tmp2, tmp2, tmp1 )	/* Shift (tmp1 & 63).  */
- 	csinv	data1, data1, xzr, le
- 	csel	data2, data2, data2a, le
- 	b	.Lrealigned
--ENDPROC(strlen)
-+END(strlen)
-diff --git a/xen/arch/arm/arm64/lib/strncmp.S b/xen/arch/arm/arm64/lib/strncmp.S
-index a4a0f779f5..c00a641fc7 100644
---- a/xen/arch/arm/arm64/lib/strncmp.S
-+++ b/xen/arch/arm/arm64/lib/strncmp.S
-@@ -64,7 +64,7 @@ limit_wd	.req	x13
- mask		.req	x14
- endloop		.req	x15
- 
--ENTRY(strncmp)
-+FUNC(strncmp)
- 	cbz	limit, .Lret0
- 	eor	tmp1, src1, src2
- 	mov	zeroones, #REP8_01
-@@ -307,4 +307,4 @@ CPU_BE( orr	syndrome, diff, has_nul )
- .Lret0:
- 	mov	result, #0
- 	ret
--ENDPROC(strncmp)
-+END(strncmp)
-diff --git a/xen/arch/arm/arm64/lib/strnlen.S b/xen/arch/arm/arm64/lib/strnlen.S
-index 81c8e8b54e..2059ba782c 100644
---- a/xen/arch/arm/arm64/lib/strnlen.S
-+++ b/xen/arch/arm/arm64/lib/strnlen.S
-@@ -59,7 +59,7 @@ limit_wd	.req	x14
- #define REP8_7f 0x7f7f7f7f7f7f7f7f
- #define REP8_80 0x8080808080808080
- 
--ENTRY(strnlen)
-+FUNC(strnlen)
- 	cbz	limit, .Lhit_limit
- 	mov	zeroones, #REP8_01
- 	bic	src, srcin, #15
-@@ -168,4 +168,4 @@ CPU_LE( lsr	tmp2, tmp2, tmp4 )	/* Shift (tmp1 & 63).  */
- .Lhit_limit:
- 	mov	len, limit
- 	ret
--ENDPROC(strnlen)
-+END(strnlen)
-diff --git a/xen/arch/arm/arm64/lib/strrchr.S b/xen/arch/arm/arm64/lib/strrchr.S
-index 07059983f8..81033c0822 100644
---- a/xen/arch/arm/arm64/lib/strrchr.S
-+++ b/xen/arch/arm/arm64/lib/strrchr.S
-@@ -26,7 +26,7 @@
-  * Returns:
-  *	x0 - address of last occurrence of 'c' or 0
-  */
--ENTRY(strrchr)
-+FUNC(strrchr)
- 	mov	x3, #0
- 	and	w1, w1, #0xff
- 1:	ldrb	w2, [x0], #1
-@@ -37,4 +37,4 @@ ENTRY(strrchr)
- 	b	1b
- 2:	mov	x0, x3
- 	ret
--ENDPROC(strrchr)
-+END(strrchr)
--- 
-2.40.1
-
+I think two hypercalls is OK. The original idea was to have a single xl
+command to do the operation for user convenience (even that is not a
+hard requirement) but that can result easily in two hypercalls.
+--8323329-878510409-1714672954=:624854--
 
