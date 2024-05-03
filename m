@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1BAC10F1A
-	for <xen-devel@archiver.kernel.org>; Thu,  9 May 2024 16:11:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.719316.1121999 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59D6C10F1A
+	for <xen-devel@archiver.kernel.org>; Thu,  9 May 2024 17:30:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.719346.1122106 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s56MB-0005UW-No; Thu, 09 May 2024 16:10:55 +0000
+	id 1s57ad-0000L4-I0; Thu, 09 May 2024 17:29:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 719316.1121999; Thu, 09 May 2024 16:10:55 +0000
+Received: by outflank-mailman (output) from mailman id 719346.1122106; Thu, 09 May 2024 17:29:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s56MB-0005UP-L5; Thu, 09 May 2024 16:10:55 +0000
-Received: by outflank-mailman (input) for mailman id 719316;
- Thu, 09 May 2024 16:10:54 +0000
+	id 1s57ad-0000Kx-EK; Thu, 09 May 2024 17:29:55 +0000
+Received: by outflank-mailman (input) for mailman id 719346;
+ Thu, 09 May 2024 17:29:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Y6XG=MM=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
- id 1s56M9-0005UJ-Nq
- for xen-devel@lists.xenproject.org; Thu, 09 May 2024 16:10:54 +0000
-Received: from doppler.solinno.uk
- (8.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.9.a.d.0.6.f.d.1.0.b.8.0.1.0.0.2.ip6.arpa
- [2001:8b0:1df6:da9::18])
+ <SRS0=QLvV=MM=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
+ id 1s57ab-0008WC-Gv
+ for xen-devel@lists.xenproject.org; Thu, 09 May 2024 17:29:53 +0000
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [2a00:1450:4864:20::230])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b43ed473-0e1e-11ef-b4bb-af5377834399;
- Thu, 09 May 2024 18:10:51 +0200 (CEST)
-Received: from mail.solinno.uk (localhost [127.0.0.1])
- by doppler.solinno.uk (Postfix) with ESMTP id 5B25F80058;
- Thu,  9 May 2024 17:10:50 +0100 (BST)
+ id be241a25-0e29-11ef-b4bb-af5377834399;
+ Thu, 09 May 2024 19:29:51 +0200 (CEST)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2e34e85ebf4so10422421fa.2
+ for <xen-devel@lists.xenproject.org>; Thu, 09 May 2024 10:29:51 -0700 (PDT)
+Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2e4d0ef229csm2555471fa.66.2024.05.09.10.29.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 May 2024 10:29:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,175 +47,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b43ed473-0e1e-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
-	s=mail; t=1715271050;
-	bh=28qez7AsmLm1bdQt/hM8A9aHukwMHE/I7EpLIEWCf68=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=VyKqEEl5+vnojZHjPS+4VCT7PCG3WTcg4cofqNAijZDHokz5sMoMiTJIjwwC3GYDc
-	 3sPRSmQuLffMmTrqtj+U9xEtLCZKafA9UvxW3TVBj998jFJVTVhVZSgS9rOUL5F7ie
-	 ssWLgKhAktPJDofIwe8DMxhYPgOcIXu57JaGLXpI=
+X-Inumbo-ID: be241a25-0e29-11ef-b4bb-af5377834399
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1715275791; x=1715880591; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8CWrR8s0gYDS+czdwwl88oUb1Zx/cHo9QTV6MX+PdaQ=;
+        b=PuaZxYbh4dl/k+kRVrw4kzEzL7R/4qBmasKmm76uPOIncuiut2RFZf7lflsADVIVsB
+         SaTosd8Vsn7VFTZk/e8aVWYApbSRPAQozer5yS2XcDPdEl1vsk3w7PrqFIR/qEnJZoCv
+         yaouowfMbdNOajLJsZXiDslCnGw5yn3mEjMLOBvNq7glRAVtg8w659yNHGWvR1aPqXiy
+         Uio6i1I3cwzCsXscFobRyHqk9sO19RH/qK3FhrhBJUqnG7oX80tH76TUDTg7jNz06X5n
+         BbcXxkNkngr4U237Omw0/9ng0oprG6TsLszr8PKqVei5tdlubq4RI1dqWegwyQ8SfkxI
+         8yJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715275791; x=1715880591;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8CWrR8s0gYDS+czdwwl88oUb1Zx/cHo9QTV6MX+PdaQ=;
+        b=fhZYJ55ZiLTSSXCsvMjp4V9Jm1AB1xj9xofq/lH3ROLOWHnHU9sY5SoTa9LQOBj/MN
+         xjjmJmyHC6OFujz+yJfIFPTeZOWPfHKj/mOMorLXDze/ZCLJSEQcuxt8tD4tfvzrdiRY
+         UsqurTc6wsX80rhyACDipanFagin67DaScQ97jEqFvXtlBmYBcyTHcAI/sJi3+l3ho2C
+         2XIl5CXwhkiKUXDNTeq2kFFoiNDtK1GbjK8SPBOvS1JJRxa8SQetE27LIQJxrPsPLdst
+         Qhl8ozjSp6WakvYAIizMb478SzsNQmP9+Sbhp02OANTZDefpeTy2W+KZK4vLmRcYeRrt
+         raZw==
+X-Forwarded-Encrypted: i=1; AJvYcCW4brdFwiJHJtaoWyYV1Ul6i3CprM5vMhm1s3AkAnDBU9Od8K3XEIc7OoCHJKhSXcLMrZxjFjSsdb+4cI7y1L8WXXBiuXWpW1tX/RJHhas=
+X-Gm-Message-State: AOJu0Ywl9BeN31qCpPz/bNiExqHt+gHc9R17/AMMKMOGoxLKL1MlNpsG
+	niEB8b0lgAIOO7MH0KENycxnTFfwBd1CjsvD2fzhS9xkwF31Ou6k
+X-Google-Smtp-Source: AGHT+IEqPcOqKJgEtzLBhZogEkbqeGe1tWfxm6fA+Z6yvRB5yQwN2WVk6iss6MyCzgHI/1kn9iQ+GQ==
+X-Received: by 2002:a2e:be13:0:b0:2de:25e2:6187 with SMTP id 38308e7fff4ca-2e51fe57b06mr778381fa.23.1715275791414;
+        Thu, 09 May 2024 10:29:51 -0700 (PDT)
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: edgar.iglesias@gmail.com,
+	sstabellini@kernel.org,
+	jgross@suse.com,
+	"Edgar E. Iglesias" <edgar.iglesias@amd.com>,
+	David Hildenbrand <david@redhat.com>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Paul Durrant <paul@xen.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v5 3/8] xen: Add xen_mr_is_memory()
+Date: Fri,  3 May 2024 03:44:44 +0200
+Message-Id: <20240503014449.1046238-4-edgar.iglesias@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240503014449.1046238-1-edgar.iglesias@gmail.com>
+References: <20240503014449.1046238-1-edgar.iglesias@gmail.com>
 MIME-Version: 1.0
-Date: Thu, 09 May 2024 17:10:50 +0100
-From: Leigh Brown <leigh@solinno.co.uk>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Oleksii Kurochko
- <oleksii.kurochko@gmail.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Juergen Gross <jgross@suse.com>, Jason Andryuk
- <jandryuk@gmail.com>
-Subject: Re: [RFC PATCH v2 0/5] Add bridge VLAN support
-In-Reply-To: <f5300cd1-4200-4957-9e4b-9ba0c1f40fa2@citrix.com>
-References: <20240508213824.55824-1-leigh@solinno.co.uk>
- <f5300cd1-4200-4957-9e4b-9ba0c1f40fa2@citrix.com>
-Message-ID: <2d89f70c625c3abd24bd57f2ee0d2f94@solinno.co.uk>
-X-Sender: leigh@solinno.co.uk
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hi Andrew,
+From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-On 2024-05-09 16:53, Andrew Cooper wrote:
-> On 08/05/2024 10:38 pm, Leigh Brown wrote:
->> Hello all,
->> 
->> I realised over the weekend that there is a valid use case for 
->> providing
->> a VIF to a domain that has access to multiple VLANs, e.g. a router. 
->> Yes,
->> you can create a VIF per VLAN, but if you start having several VLANs 
->> (as
->> I do), it would be nicer to create a single interface that has access 
->> to
->> all the relevant VLANs (e.g. enX0.10, enX0.20, etc.).
->> 
->> So, version 2 changes the name and type of the parameter from an 
->> integer
->> called `vid' to a string called `vlan'. The vlan parameter is then
->> parsed by the vif-bridge script (actually, the functions called by it 
->> in
->> xen-network-common.sh).
->> 
->> As it quite a common practice to allocate VLANs in round numbers, I 
->> also
->> implemented the ability to specify contiguous or non-contiguous 
->> ranges.
->> You can specify whether a VLAN is tagged or untagged, and which VLAN 
->> is
->> the PVID (only one PVID is allowed).  For example,
->> 
->> vif = [ 'mac=xx:xx:xx:xx:xx:xx, bridge=br0, vlan=10p/20-29' ]
->> 
->> will setup the VIF so that 10 is the PVID and VLAN IDs 20 through 29
->> are permitted with tags. Another example:
->> 
->> vif = [ 'mac=xx:xx:xx:xx:xx:xx, bridge=br0, vlan=1p/10+10x9' ]
->> 
->> will setup the bridge to set 1 as the PVID and permit access with
->> tags for VLAN IDs 10, 20, 30, 40, 50, 60, 70, 80 and 90.
->> 
->> This patch set enables this capability as follows:
->> 
->> 1. Adds `vlan' as a new member of the libxl_device_nic structure;
->> 2. Adds support to read and write the vlan parameter from the 
->> xenstore;
->> 3. Adds `vlan' as a new keyword for the vif configuration option;
->> 4. Adds support to assign the bridge VLANs in the Linux hotplug 
->> scripts;
->> 5. Updated xl-network-configuration(5) manpage and example configs.
->> 
->> Original blurb below:
->> 
->> For many years I have been configuring VLANs on my Linux Dom0 by
->> creating VLAN interfaces for each VLAN I wanted to connect a domain
->> to and then a corresponding bridge. So I would tend to have things
->> like:
->> 
->> enp0s0    -> br0     -> vif1, vif2
->> enp0s0.10 -> br0vl10 -> vif3, vif4
->> enp0s0.20 -> br0vl20 -> vif5
->> dummy0    -> br1     -> vif6
->> 
->> I recently discovered that iproute2 supports creating bridge VLANs 
->> that
->> allows you to assign a VLAN to each of the interfaces associated to a
->> bridge. This allows a greatly simplified configuration where a single
->> bridge can support all the domains, and the iproute2 bridge command 
->> can
->> assign each VIF to the required VLAN.  This looks like this:
->> 
->> # bridge vlan
->> port              vlan-id
->> enp0s0            1 PVID Egress Untagged
->>                   10
->>                   20
->> br0               1 PVID Egress Untagged
->> vif1.0            1 PVID Egress Untagged
->> vif2.0            1 PVID Egress Untagged
->> vif3.0            10 PVID Egress Untagged
->> vif4.0            10 PVID Egress Untagged
->> vif5.0            20 PVID Egress Untagged
->> vif6.0            30 PVID Egress Untagged
->> 
->> This patch set enables this capability as follows:
->> 
->> 1. Adds `vid' as a new member of the libxl_device_nic structure;
->> 2. Adds support to read and write vid from the xenstore;
->> 3. Adds `vid' as a new keyword for the vif configuration option;
->> 4. Adds support for assign the bridge VLAN in the Linux hotplug 
->> scripts.
->> 
->> I don't believe NetBSD or FreeBSD support this capability, but if they
->> do please point me in the direction of some documentation and/or 
->> examples.
->> 
->> NB: I'm not very familiar with Xen code base so may have missed
->> something important, although I have tested it and it is working well
->> for me.
->> 
->> Cheers,
->> 
->> Leigh.
->> 
->> 
->> Leigh Brown (5):
->>   tools/libs/light: Add vlan field to libxl_device_nic
->>   tools/xl: add vlan keyword to vif option
->>   tools/hotplug/Linux: Add bridge VLAN support
->>   docs/man: document VIF vlan keyword
->>   tools/examples: Example Linux bridge VLAN config
->> 
->>  docs/man/xl-network-configuration.5.pod.in    |  38 ++++++
->>  tools/examples/linux-bridge-vlan/README       |  68 +++++++++++
->>  tools/examples/linux-bridge-vlan/br0.netdev   |   7 ++
->>  tools/examples/linux-bridge-vlan/br0.network  |   8 ++
->>  .../examples/linux-bridge-vlan/enp0s0.network |  16 +++
->>  tools/hotplug/Linux/xen-network-common.sh     | 111 
->> ++++++++++++++++++
->>  tools/libs/light/libxl_nic.c                  |  10 ++
->>  tools/libs/light/libxl_types.idl              |   1 +
->>  tools/xl/xl_parse.c                           |   2 +
->>  9 files changed, 261 insertions(+)
->>  create mode 100644 tools/examples/linux-bridge-vlan/README
->>  create mode 100644 tools/examples/linux-bridge-vlan/br0.netdev
->>  create mode 100644 tools/examples/linux-bridge-vlan/br0.network
->>  create mode 100644 tools/examples/linux-bridge-vlan/enp0s0.network
->> 
-> 
-> This is past the last-post date, so Oleksii will need to decide whether
-> he's happy to make an exception for it.
+Add xen_mr_is_memory() to abstract away tests for the
+xen_memory MR.
 
- From my own perspective, I know this is an enhancement and am more than
-happy to maintain it locally for the time being, so no problem if it has
-to wait.  Still happy for any feedback though :-)
+No functional changes.
 
-> Anthony is OoO for a month now, so if this is to get in for 4.19, then
-> it will need reviewing by others.  I've CC'd a few plausible 
-> candidates...
-> 
-> ~Andrew
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: David Hildenbrand <david@redhat.com>
+---
+ hw/xen/xen-hvm-common.c | 10 ++++++++--
+ include/sysemu/xen.h    |  8 ++++++++
+ 2 files changed, 16 insertions(+), 2 deletions(-)
 
-Regards,
+diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
+index 1627da7398..c94f1990c5 100644
+--- a/hw/xen/xen-hvm-common.c
++++ b/hw/xen/xen-hvm-common.c
+@@ -12,6 +12,12 @@
+ 
+ MemoryRegion xen_memory;
+ 
++/* Check for xen memory.  */
++bool xen_mr_is_memory(MemoryRegion *mr)
++{
++    return mr == &xen_memory;
++}
++
+ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
+                    Error **errp)
+ {
+@@ -28,7 +34,7 @@ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
+         return;
+     }
+ 
+-    if (mr == &xen_memory) {
++    if (xen_mr_is_memory(mr)) {
+         return;
+     }
+ 
+@@ -55,7 +61,7 @@ static void xen_set_memory(struct MemoryListener *listener,
+ {
+     XenIOState *state = container_of(listener, XenIOState, memory_listener);
+ 
+-    if (section->mr == &xen_memory) {
++    if (xen_mr_is_memory(section->mr)) {
+         return;
+     } else {
+         if (add) {
+diff --git a/include/sysemu/xen.h b/include/sysemu/xen.h
+index 754ec2e6cb..dc72f83bcb 100644
+--- a/include/sysemu/xen.h
++++ b/include/sysemu/xen.h
+@@ -34,6 +34,8 @@ void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length);
+ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
+                    struct MemoryRegion *mr, Error **errp);
+ 
++bool xen_mr_is_memory(MemoryRegion *mr);
++
+ #else /* !CONFIG_XEN_IS_POSSIBLE */
+ 
+ #define xen_enabled() 0
+@@ -47,6 +49,12 @@ static inline void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
+     g_assert_not_reached();
+ }
+ 
++static inline bool xen_mr_is_memory(MemoryRegion *mr)
++{
++    g_assert_not_reached();
++    return false;
++}
++
+ #endif /* CONFIG_XEN_IS_POSSIBLE */
+ 
+ #endif
+-- 
+2.40.1
 
-Leigh,
 
