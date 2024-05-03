@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52033C25B10
-	for <xen-devel@archiver.kernel.org>; Fri,  3 May 2024 14:42:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.716522.1118708 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E604C25B76
+	for <xen-devel@archiver.kernel.org>; Fri,  3 May 2024 14:42:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.716521.1118703 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2u6e-0003Dw-8X; Fri, 03 May 2024 14:41:48 +0000
+	id 1s2u6d-0003BK-UR; Fri, 03 May 2024 14:41:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 716522.1118708; Fri, 03 May 2024 14:41:48 +0000
+Received: by outflank-mailman (output) from mailman id 716521.1118703; Fri, 03 May 2024 14:41:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s2u6e-0003Cc-1D; Fri, 03 May 2024 14:41:48 +0000
-Received: by outflank-mailman (input) for mailman id 716522;
- Fri, 03 May 2024 14:41:47 +0000
+	id 1s2u6d-0003B2-RI; Fri, 03 May 2024 14:41:47 +0000
+Received: by outflank-mailman (input) for mailman id 716521;
+ Fri, 03 May 2024 14:41:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8QA1=MG=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
- id 1s2u6d-0002U8-80
- for xen-devel@lists.xenproject.org; Fri, 03 May 2024 14:41:47 +0000
+ id 1s2u6c-0002U8-7x
+ for xen-devel@lists.xenproject.org; Fri, 03 May 2024 14:41:46 +0000
 Received: from doppler.solinno.uk (doppler.solinno.uk [81.2.106.178])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 41cc7177-095b-11ef-909c-e314d9c70b13;
+ id 43139d67-095b-11ef-909c-e314d9c70b13;
  Fri, 03 May 2024 16:41:44 +0200 (CEST)
 Received: from folly.solinno.co.uk (folly.dyn.solinno.co.uk [192.168.2.135])
- by doppler.solinno.uk (Postfix) with ESMTPSA id D40B88009E;
- Fri,  3 May 2024 15:41:41 +0100 (BST)
+ by doppler.solinno.uk (Postfix) with ESMTPSA id 0A049800AB;
+ Fri,  3 May 2024 15:41:42 +0100 (BST)
 Received: by folly.solinno.co.uk (Postfix, from userid 1000)
- id A86C020171; Fri,  3 May 2024 15:41:41 +0100 (BST)
+ id B133E2018D; Fri,  3 May 2024 15:41:41 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,95 +43,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41cc7177-095b-11ef-909c-e314d9c70b13
+X-Inumbo-ID: 43139d67-095b-11ef-909c-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
-	s=mail; t=1714747301;
-	bh=QhPCF+Da6a6rJ80ZqmX2rlEn+1VBdptYD+Uv3wW6YvA=;
+	s=mail; t=1714747302;
+	bh=a0ZpqrsC8JFCevX5tRnZgArUyWq4u2VycjvhQNh9u1w=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=vf4ivSKnOtFHHamPhhsa9RrmD62thFAMLYjCSsHRbp37Nr7lydHqxJ+RpEYMfFpkp
-	 jQPt019Su7UiiRVXWTHIGlmJcNxnYXK7v95BKn3Wa2c6sQsnyZoVg5LTWFeq1i3K7H
-	 7eGqRtT/4a2rfc9rBj1h+D619duHqGPviuoy0Oto=
+	b=OEfqaY478oIg2vS+Gun7DbFYJ1k3n+O0upYaUFHKMuyVbnqsCJJum8fmDve9LmCMr
+	 znkAJm/f0g+aq7YPKGvmflVdOm76LdBA1nLHCQz15e24Uln2nrAQStclLwh0Afr/b9
+	 c0T0QShXykumfgqFhAdJL7Mf+X0g7+cCxQ9kVQHw=
 From: Leigh Brown <leigh@solinno.co.uk>
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
 	anthony.perard@citrix.com,
 	Leigh Brown <leigh@solinno.co.uk>
-Subject: [RFC PATCH 1/5] tools/libs/light: Add vid field to libxl_device_nic
-Date: Fri,  3 May 2024 15:41:20 +0100
-Message-Id: <20240503144124.12931-2-leigh@solinno.co.uk>
+Subject: [RFC PATCH 5/5] tools/examples: Examples Linux bridge VLAN config
+Date: Fri,  3 May 2024 15:41:24 +0100
+Message-Id: <20240503144124.12931-6-leigh@solinno.co.uk>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240503144124.12931-1-leigh@solinno.co.uk>
 References: <20240503144124.12931-1-leigh@solinno.co.uk>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add integer member `vid' to libxl_device_nic, to represent the
-VLAN ID to assign to the VIF when adding it to the bridge device.
-
-Update libxl_nic.c to read and write the vid field from the
-xenstore.
-
-This provides the capability for supported operating systems (e.g.
-Linux) to perform VLAN filtering on bridge ports.  The Xen
-hotplug scripts need to be updated to read this information from
-then xenstore and perform the required configuration.
+Add a new directory linux-bridge-vlan showing how to configure
+systemd-networkd to support a bridge VLAN configuration.
 
 Signed-off-by: Leigh Brown <leigh@solinno.co.uk>
 ---
- tools/libs/light/libxl_nic.c     | 20 ++++++++++++++++++++
- tools/libs/light/libxl_types.idl |  1 +
- 2 files changed, 21 insertions(+)
+ tools/examples/linux-bridge-vlan/README       | 52 +++++++++++++++++++
+ tools/examples/linux-bridge-vlan/br0.netdev   |  7 +++
+ tools/examples/linux-bridge-vlan/br0.network  |  8 +++
+ .../examples/linux-bridge-vlan/enp0s0.network | 16 ++++++
+ 4 files changed, 83 insertions(+)
+ create mode 100644 tools/examples/linux-bridge-vlan/README
+ create mode 100644 tools/examples/linux-bridge-vlan/br0.netdev
+ create mode 100644 tools/examples/linux-bridge-vlan/br0.network
+ create mode 100644 tools/examples/linux-bridge-vlan/enp0s0.network
 
-diff --git a/tools/libs/light/libxl_nic.c b/tools/libs/light/libxl_nic.c
-index d6bf06fc34..e28b9101ee 100644
---- a/tools/libs/light/libxl_nic.c
-+++ b/tools/libs/light/libxl_nic.c
-@@ -233,6 +233,11 @@ static int libxl__set_xenstore_nic(libxl__gc *gc, uint32_t domid,
-         flexarray_append(back, GCSPRINTF("%u", nic->mtu));
-     }
-     
-+    if (nic->vid) {
-+        flexarray_append(back, "vid");
-+        flexarray_append(back, GCSPRINTF("%u", nic->vid));
-+    }
+diff --git a/tools/examples/linux-bridge-vlan/README b/tools/examples/linux-bridge-vlan/README
+new file mode 100644
+index 0000000000..b287710e0f
+--- /dev/null
++++ b/tools/examples/linux-bridge-vlan/README
+@@ -0,0 +1,52 @@
++Linux Xen Dom0 single bridge multiple VLAN configuration with systemd
++=====================================================================
 +
-     flexarray_append(back, "bridge");
-     flexarray_append(back, libxl__strdup(gc, nic->bridge));
-     flexarray_append(back, "handle");
-@@ -313,6 +318,21 @@ static int libxl__nic_from_xenstore(libxl__gc *gc, const char *libxl_path,
-         nic->mtu = LIBXL_DEVICE_NIC_MTU_DEFAULT;
-     }
- 
-+    rc = libxl__xs_read_checked(gc, XBT_NULL,
-+                                GCSPRINTF("%s/vid", libxl_path), &tmp);
-+    if (rc) goto out;
-+    if (tmp) {
-+        char *endptr;
++Introduction
++------------
 +
-+        nic->vid = strtol(tmp, &endptr, 10);
-+        if (*endptr != '\0') {
-+            rc = ERROR_INVAL;
-+            goto out;
-+        }
-+    } else {
-+        nic->vid = 0;
-+    }
++This directory contains example files to be placed in /etc/systemd/network
++to enable a single bridge with multiple VLAN support.
 +
-     rc = libxl__xs_read_checked(gc, XBT_NULL,
-                                 GCSPRINTF("%s/mac", libxl_path), &tmp);
-     if (rc) goto out;
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 7d8bd5d216..df5185128c 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -809,6 +809,7 @@ libxl_device_nic = Struct("device_nic", [
-     ("backend_domname", string),
-     ("devid", libxl_devid),
-     ("mtu", integer),
-+    ("vid", integer),
-     ("model", string),
-     ("mac", libxl_mac),
-     ("ip", string),
++The example is to support the scenario where the Xen host network interface
++is connected to an Ethernet switch configured as a trunk port. Each domain
++VIF can then be configured with the VLAN id (vid) of the required VLAN.
++
++The example files create a bridge device called br0, with a physical interface 
++called enp0s0. You will need to update this with your system's device name.
++
++Key points of the configuration are:
++
++1. In br0.netdev, VLANFiltering=on is set. This is required to ensure the
++   VLAN tags are handled correctly.  If it is not set then the packets
++   from the vif interfaces will not have the correct VLAN tags set.  I
++   observed them with the pvid in the switch MAC address table.
++
++2. In br0.network, a system IPv4 address is configured that can be updated
++   according to your local network settings.
++
++3. In enp0s0.network, Bridge=br0 sets the bridge device to connect to and
++   there is a [BridgeVLAN] section for each VLAN you want to give access
++   to the switch. Note, if you want to create an internal VLAN private to
++   the host, do not include that VLAN id in this file.
++
++
++Domain configuration
++--------------------
++
++Add the vid= keyword to the vif definition in the domain. For example:
++
++vif = [ 'mac=xx:xx:xx:xx:xx:xx, bridge=br0, vid=10' ]
++
++
++Hints and tips
++--------------
++
++1. To check if vlan_filtering is enabled, run:
++   # cat /sys/devices/virtual/net/<name>/bridge/vlan_filtering
++
++2. To check the bridge port VLAN assignments, run:
++   # bridge vlan
++
++3. To check the vid setting in the xenstore, run:
++   # xenstore-ls -f | grep 'vid ='
++
+diff --git a/tools/examples/linux-bridge-vlan/br0.netdev b/tools/examples/linux-bridge-vlan/br0.netdev
+new file mode 100644
+index 0000000000..ae1fe487c3
+--- /dev/null
++++ b/tools/examples/linux-bridge-vlan/br0.netdev
+@@ -0,0 +1,7 @@
++[NetDev]
++Name=br0
++Kind=bridge
++MACAddress=xx:xx:xx:xx:xx:xx
++
++[Bridge]
++VLANFiltering=on
+diff --git a/tools/examples/linux-bridge-vlan/br0.network b/tools/examples/linux-bridge-vlan/br0.network
+new file mode 100644
+index 0000000000..b56203b66a
+--- /dev/null
++++ b/tools/examples/linux-bridge-vlan/br0.network
+@@ -0,0 +1,8 @@
++[Match]
++Name=br0
++
++[Network]
++DNS=8.8.8.8
++#Domains=example.com
++Address=10.1.1.10/24
++Gateway=10.1.1.1
+diff --git a/tools/examples/linux-bridge-vlan/enp0s0.network b/tools/examples/linux-bridge-vlan/enp0s0.network
+new file mode 100644
+index 0000000000..6ee3154dfc
+--- /dev/null
++++ b/tools/examples/linux-bridge-vlan/enp0s0.network
+@@ -0,0 +1,16 @@
++[Match]
++Name=enp0s0
++
++[Network]
++Bridge=br0
++
++# If Jumbo frames are required
++#[Link]
++#MTUBytes=9000
++
++[BridgeVLAN]
++VLAN=10
++
++[BridgeVLAN]
++VLAN=20
++
 -- 
 2.39.2
 
