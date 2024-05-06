@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC90BC25B5C
-	for <xen-devel@archiver.kernel.org>; Mon,  6 May 2024 10:15:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.717440.1119729 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FBD0C41513
+	for <xen-devel@archiver.kernel.org>; Mon,  6 May 2024 10:15:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.717444.1119763 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s3vNm-0004DS-IB; Mon, 06 May 2024 10:15:42 +0000
+	id 1s3vNs-0005O9-9M; Mon, 06 May 2024 10:15:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 717440.1119729; Mon, 06 May 2024 10:15:42 +0000
+Received: by outflank-mailman (output) from mailman id 717444.1119763; Mon, 06 May 2024 10:15:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s3vNm-0004Cq-6Q; Mon, 06 May 2024 10:15:42 +0000
-Received: by outflank-mailman (input) for mailman id 717440;
- Mon, 06 May 2024 10:15:40 +0000
+	id 1s3vNr-0005Ln-Fm; Mon, 06 May 2024 10:15:47 +0000
+Received: by outflank-mailman (input) for mailman id 717444;
+ Mon, 06 May 2024 10:15:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=loHM=MJ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1s3vNk-0001n2-GK
- for xen-devel@lists.xenproject.org; Mon, 06 May 2024 10:15:40 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ id 1s3vNp-0001n2-HI
+ for xen-devel@lists.xenproject.org; Mon, 06 May 2024 10:15:45 +0000
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [2a00:1450:4864:20::22a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95f52bdb-0b91-11ef-b4bb-af5377834399;
- Mon, 06 May 2024 12:15:38 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a59c0a6415fso283056066b.1
- for <xen-devel@lists.xenproject.org>; Mon, 06 May 2024 03:15:38 -0700 (PDT)
+ id 990e55ba-0b91-11ef-b4bb-af5377834399;
+ Mon, 06 May 2024 12:15:43 +0200 (CEST)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2e1fa1f1d9bso33040831fa.0
+ for <xen-devel@lists.xenproject.org>; Mon, 06 May 2024 03:15:44 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- h8-20020a17090634c800b00a59b8e16ac7sm2160242ejb.36.2024.05.06.03.15.37
+ h8-20020a17090634c800b00a59b8e16ac7sm2160242ejb.36.2024.05.06.03.15.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 May 2024 03:15:37 -0700 (PDT)
+ Mon, 06 May 2024 03:15:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,118 +46,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95f52bdb-0b91-11ef-b4bb-af5377834399
+X-Inumbo-ID: 990e55ba-0b91-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714990538; x=1715595338; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1714990543; x=1715595343; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=u9aRyETJM++e8QaOVBfsR9DXY+H55bqORXnss0g7U94=;
-        b=Vj6N//DgZ6M7A5/U+cAUxc7UatQTZ7mfZg3wrzK8oxmrzK44w0Vp1aVKer3lKePuKZ
-         RaLkDamDGoNew10UmxcWb+Ut0kf/kWWFWf2L8zjEG68k+ZdOwWkzkBd61/L67I1jHlLO
-         NuVxb0t4as5w0Pz8VTWwxrVX5D9jLfK0nksHqGVemprxpEqr5H/mB1FPrZYceA7/y2UZ
-         1IXrU83naBYK6KquA07kxzBmPQY4/5B87s3p0HLjqBvbgBHG2nKsjTGy0GAYhE07qW45
-         +f/fr1Sb+SiUe/1XUG+461lTPLaRYiu4Fz1+0asrw33AfCAA1bpOzP9WNT2SAR2sM2Gb
-         U2NQ==
+        bh=UGf7j+VFITNzuSDPQfzUoszvG5jtrP41Tc7vySyHgmQ=;
+        b=EO5HQWFRSu15BMkt3HHRKJpyXjfLubCr5uhoRzzmlTMtm9rX2UEETm0uLVTSGxPBbk
+         wvrSM5NxBTd8CcnSvwwmeM5jFTnsvvdY0QKLzgFDrvueYYpONsj118rYakQM6laBXG2v
+         jtpdQVL3QWXyuaN1o0v37p94q8btB2vzeajl1Cl/0y18y7DLTmufTSicHYJtXpPWXdCT
+         KNzHUC8yyiM3VXxyrs4LsjRIYRxyz/C07fX3BnI8+dpG/NIN3tdmQMf5acqjk5BRdVKG
+         lRH1o7yWobdPlj8wmXfqzdXLYTyNbgodz6nZoRkOL2/pZ24LfnQ3pQSpcZFrmK3t71Vx
+         P4sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714990538; x=1715595338;
+        d=1e100.net; s=20230601; t=1714990543; x=1715595343;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=u9aRyETJM++e8QaOVBfsR9DXY+H55bqORXnss0g7U94=;
-        b=YmWDo07/BQ6pUJaZaXNc46P4z88+rEset4+oGN0fSeShYAIbxDpdfNl8MYaGczGAis
-         LUAIzw/5zA7HjAI8e0ItFRoPHzGxzIdXB5QgIyBxURSX9tAIeHcca0TjihhelLmwN7uX
-         3c5Uz9O3Qb2RreWVtjZq2DGVp5f8TpWQrRvfxlVmDrcRWkFq2sTGv/1aCRIaYFBQVGE6
-         JeP9HoDSkmEj+tML8948S1tZ2pUwJkZaSQwhLAHirzi3t9nz8A6CNDGfR84Kd0QsObmc
-         JlLzE8UPAS2N48+4O5GTA9jLIovpqgjQs5dsgXWFr4C3F0ohppCjxGeKQPpiL/T7GalX
-         mK/g==
-X-Gm-Message-State: AOJu0YyPP9JNV1tHXDggXFZhQcCrfxNa4q3l/KoUmMnGtaXrhwrJ7nRY
-	QiaPzPqTapafkwWaEHbnI1gCLsYjIZ/IoezSqWHlXsgexcXlRWZJv7QTnQ==
-X-Google-Smtp-Source: AGHT+IHI93x4RqSFxuW56ORAdgjkjFHZj7dEuWqCEvHuMmmbdXeYP0LpN0rimu9dVLlOWXtWCB67jg==
-X-Received: by 2002:a17:906:2492:b0:a59:9f4e:4e3d with SMTP id e18-20020a170906249200b00a599f4e4e3dmr4246517ejb.3.1714990537955;
-        Mon, 06 May 2024 03:15:37 -0700 (PDT)
+        bh=UGf7j+VFITNzuSDPQfzUoszvG5jtrP41Tc7vySyHgmQ=;
+        b=E5OVDVmZL6bDbZo2/B5qUJEPXuern3dLRqav9JLnU/LLc8SwkCyZLf0znTAiiqxcE9
+         GTZiEWiXjTsy+Cd4YXNzG9QWjiy/0xvYUeamjXO4xh42fO/tllEI5NfMZeBvbyuxyczn
+         CDsa5H30Rqgh3zTq8OapEer1EvZop/V9lRiV2hoIjIjGhiQhW+dGPyjE0/2wnX0JUNPq
+         mRGoLOsVYyUWSaMJBF/nt2TBHN3VpjaVpYzVMd/irriDe2JagjuuLvj+oG3khQb1KlV4
+         cX9ktZn7ZZ+q5HzTQRVO/ZZW2Z/5cOM7LUcsmyzEa9NwTvqa4Kw9zioxaLlYq15FRwL3
+         NeUQ==
+X-Gm-Message-State: AOJu0YwiFElLg6jlMcEVQsYgSlzOBlw2bdL+jE27ygGKEUQi5audyUqb
+	cWYLLzPrJJEbTJGH2yhds7EKXYrZwxesxjrcFfRTd7Jk3ItZSboYM9ztlw==
+X-Google-Smtp-Source: AGHT+IHx8T/bh0+URP+QGniO8cp/ei7wx+5dDWfqjBQz4Hqg6uZTjSu7pleLSaZVT/B2pSCt9fg4eg==
+X-Received: by 2002:a05:6512:6d5:b0:51f:6ab6:9e5b with SMTP id u21-20020a05651206d500b0051f6ab69e5bmr11075796lff.36.1714990543163;
+        Mon, 06 May 2024 03:15:43 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v9 10/15] xen/riscv: add required things to current.h
-Date: Mon,  6 May 2024 12:15:19 +0200
-Message-ID: <083df7371fa500056fe160261e83b5f89236e3f8.1714988096.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v9 15/15] xen/README: add compiler and binutils versions for RISC-V64
+Date: Mon,  6 May 2024 12:15:24 +0200
+Message-ID: <0a110c3f0d31c86147797c4d41c2d63a32127e04.1714988096.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <cover.1714988096.git.oleksii.kurochko@gmail.com>
 References: <cover.1714988096.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add minimal requied things to be able to build full Xen.
+This patch doesn't represent a strict lower bound for GCC and
+GNU Binutils; rather, these versions are specifically employed by
+the Xen RISC-V container and are anticipated to undergo continuous
+testing. Older GCC and GNU Binutils would work,
+but this is not a guarantee.
+
+While it is feasible to utilize Clang, it's important to note that,
+currently, there is no Xen RISC-V CI job in place to verify the
+seamless functioning of the build with Clang.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V5-V9:
  - Nothing changed. Only rebase.
 ---
-Changes in V4:
- - BUG() was changed to BUG_ON("unimplemented");
- - Change "xen/bug.h" to "xen/lib.h" as BUG_ON is defined in xen/lib.h.
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>
+ Changes in V6:
+  - update the message in README.
 ---
-Changes in V3:
- - add SPDX
- - drop a forward declaration of struct vcpu;
- - update guest_cpu_user_regs() macros
- - replace get_processor_id with smp_processor_id
- - update the commit message
- - code style fixes
+ Changes in V5:
+  - update the commit message and README file with additional explanation about GCC and
+    GNU Binutils version. Additionally, it was added information about Clang.
 ---
-Changes in V2:
- - Nothing changed. Only rebase.
+ Changes in V4:
+  - Update version of GCC (12.2) and GNU Binutils (2.39) to the version
+    which are in Xen's contrainter for RISC-V
 ---
- xen/arch/riscv/include/asm/current.h | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ Changes in V3:
+  - new patch
+---
+ README | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
-index d84f15dc50..aedb6dc732 100644
---- a/xen/arch/riscv/include/asm/current.h
-+++ b/xen/arch/riscv/include/asm/current.h
-@@ -3,6 +3,21 @@
- #ifndef __ASM_CURRENT_H
- #define __ASM_CURRENT_H
- 
-+#include <xen/lib.h>
-+#include <xen/percpu.h>
-+#include <asm/processor.h>
-+
-+#ifndef __ASSEMBLY__
-+
-+/* Which VCPU is "current" on this PCPU. */
-+DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
-+
-+#define current            this_cpu(curr_vcpu)
-+#define set_current(vcpu)  do { current = (vcpu); } while (0)
-+#define get_cpu_current(cpu)  per_cpu(curr_vcpu, cpu)
-+
-+#define guest_cpu_user_regs() ({ BUG_ON("unimplemented"); NULL; })
-+
- #define switch_stack_and_jump(stack, fn) do {               \
-     asm volatile (                                          \
-             "mv sp, %0\n"                                   \
-@@ -10,4 +25,8 @@
-     unreachable();                                          \
- } while ( false )
- 
-+#define get_per_cpu_offset() __per_cpu_offset[smp_processor_id()]
-+
-+#endif /* __ASSEMBLY__ */
-+
- #endif /* __ASM_CURRENT_H */
+diff --git a/README b/README
+index c8a108449e..30da5ff9c0 100644
+--- a/README
++++ b/README
+@@ -48,6 +48,10 @@ provided by your OS distributor:
+       - For ARM 64-bit:
+         - GCC 5.1 or later
+         - GNU Binutils 2.24 or later
++      - For RISC-V 64-bit:
++        - GCC 12.2 or later
++        - GNU Binutils 2.39 or later
++          Older GCC and GNU Binutils would work, but this is not a guarantee.
+     * POSIX compatible awk
+     * Development install of zlib (e.g., zlib-dev)
+     * Development install of Python 2.7 or later (e.g., python-dev)
 -- 
 2.45.0
 
