@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CEB6C25B4F
-	for <xen-devel@archiver.kernel.org>; Tue,  7 May 2024 15:22:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.718273.1120853 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 936CEC10F1A
+	for <xen-devel@archiver.kernel.org>; Tue,  7 May 2024 15:25:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.718279.1120873 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4Mdv-0005hO-C9; Tue, 07 May 2024 15:22:11 +0000
+	id 1s4Mh5-00073t-0J; Tue, 07 May 2024 15:25:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 718273.1120853; Tue, 07 May 2024 15:22:11 +0000
+Received: by outflank-mailman (output) from mailman id 718279.1120873; Tue, 07 May 2024 15:25:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4Mdv-0005hH-9e; Tue, 07 May 2024 15:22:11 +0000
-Received: by outflank-mailman (input) for mailman id 718273;
- Tue, 07 May 2024 15:22:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s4Mh4-00073m-TR; Tue, 07 May 2024 15:25:26 +0000
+Received: by outflank-mailman (input) for mailman id 718279;
+ Tue, 07 May 2024 15:25:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YimZ=MK=amazon.co.uk=prvs=8506a7df7=eliasely@srs-se1.protection.inumbo.net>)
- id 1s4Mdt-0005hB-ET
- for xen-devel@lists.xenproject.org; Tue, 07 May 2024 15:22:09 +0000
-Received: from smtp-fw-6002.amazon.com (smtp-fw-6002.amazon.com [52.95.49.90])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90b34196-0c85-11ef-909c-e314d9c70b13;
- Tue, 07 May 2024 17:22:08 +0200 (CEST)
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
- smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev) ([10.43.8.6])
- by smtp-border-fw-6002.iad6.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 May 2024 15:22:03 +0000
-Received: from EX19MTAEUC002.ant.amazon.com [10.0.17.79:9527]
- by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.8.30:2525] with
- esmtp (Farcaster)
- id 6f031f60-57de-41f3-851e-2a71332a4210; Tue, 7 May 2024 15:22:01 +0000 (UTC)
+ id 1s4Mh3-00073e-L6
+ for xen-devel@lists.xenproject.org; Tue, 07 May 2024 15:25:25 +0000
+Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com
+ [99.78.197.220]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 04d20811-0c86-11ef-b4bb-af5377834399;
+ Tue, 07 May 2024 17:25:23 +0200 (CEST)
+Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
+ smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.25.36.210])
+ by smtp-border-fw-80009.pdx80.corp.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 May 2024 15:25:19 +0000
+Received: from EX19MTAEUC002.ant.amazon.com [10.0.17.79:22996]
+ by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.11.44:2525]
+ with esmtp (Farcaster)
+ id 93c06852-df1b-488d-ac33-f5dfbd568114; Tue, 7 May 2024 15:25:18 +0000 (UTC)
 Received: from EX19D018EUA002.ant.amazon.com (10.252.50.146) by
  EX19MTAEUC002.ant.amazon.com (10.252.51.181) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Tue, 7 May 2024 15:22:01 +0000
+ 15.2.1258.28; Tue, 7 May 2024 15:25:18 +0000
 Received: from [192.168.15.40] (10.106.83.8) by EX19D018EUA002.ant.amazon.com
  (10.252.50.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.28; Tue, 7 May
- 2024 15:21:57 +0000
+ 2024 15:25:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,147 +54,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90b34196-0c85-11ef-909c-e314d9c70b13
+X-Inumbo-ID: 04d20811-0c86-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1715095329; x=1746631329;
+  t=1715095523; x=1746631523;
   h=message-id:date:mime-version:subject:to:cc:references:
    from:in-reply-to:content-transfer-encoding;
-  bh=yaFPD2Ekn21BDjcaiX5C+jqap0rCbSx8lXe5MsuDjWw=;
-  b=lJt67S+EEzbTUd8+dw9q7iYXzFGmlO6IVbPgNc8X/OnJYQBV/6IqPqkO
-   MaZrPB0dxltd3j+EJAckGNmIAQNunwmJqVSfal/xMs9+WS16UbxMMBAeI
-   lyZHvygagl1sbWQCpiZFwdZTX7PH80ln24LCV00+TB4fqTzlucQhJ1lZC
-   o=;
+  bh=Gr9kwZ+RTjeaE5vmYv137GFBoQHoDJVWeG4hdNIu1V8=;
+  b=YAvU4Nwp2CFIvLN3QtzWaYvqEw+OgL0IJRqE9TYFsBTMEvOhJiqWbTgV
+   XZDNlHqTXstjusmiobYa5YFkT4aN/oivRCk598S4qci+Uo92c1pzAjqIl
+   cu3QuEcDXrTzxCq/x1Z3yCRBHTv9bW9KYE2iwythlBMLQktJ7hGvyYNj2
+   Q=;
 X-IronPort-AV: E=Sophos;i="6.08,142,1712620800"; 
-   d="scan'208";a="405335772"
-X-Farcaster-Flow-ID: 6f031f60-57de-41f3-851e-2a71332a4210
-Message-ID: <e465d95c-f1c8-4857-9bb5-1c37a3c4cc80@amazon.com>
-Date: Tue, 7 May 2024 16:21:53 +0100
+   d="scan'208";a="87615136"
+X-Farcaster-Flow-ID: 93c06852-df1b-488d-ac33-f5dfbd568114
+Message-ID: <5b1e5eac-df9b-48b0-ba14-9c56f32a5d9c@amazon.com>
+Date: Tue, 7 May 2024 16:25:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 (resend) 09/27] x86/pv: Rewrite how building PV dom0
- handles domheap mappings
+Subject: Re: [PATCH v2 (resend) 12/27] x86/mapcache: Initialise the mapcache
+ for the idle domain
 To: Jan Beulich <jbeulich@suse.com>
 CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
 	<hongyxia@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Julien Grall <jgrall@amazon.com>,
+	<wl@xen.org>, Wei Wang <wawei@amazon.de>, Julien Grall <jgrall@amazon.com>,
 	<xen-devel@lists.xenproject.org>
 References: <20240116192611.41112-1-eliasely@amazon.com>
- <20240116192611.41112-10-eliasely@amazon.com>
- <7031861b-f925-479c-b236-8b1809996ede@suse.com>
+ <20240116192611.41112-13-eliasely@amazon.com>
+ <d6f3993e-5e96-4e3d-9334-9b44152f9f81@suse.com>
 Content-Language: en-US
 From: Elias El Yandouzi <eliasely@amazon.com>
-In-Reply-To: <7031861b-f925-479c-b236-8b1809996ede@suse.com>
+In-Reply-To: <d6f3993e-5e96-4e3d-9334-9b44152f9f81@suse.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.106.83.8]
-X-ClientProxiedBy: EX19D032UWB003.ant.amazon.com (10.13.139.165) To
+X-ClientProxiedBy: EX19D031UWA002.ant.amazon.com (10.13.139.96) To
  EX19D018EUA002.ant.amazon.com (10.252.50.146)
 
- > On 20/02/2024 10:28, Jan Beulich wrote:
->> On 16.01.2024 20:25, Elias El Yandouzi wrote:
->> --- a/xen/arch/x86/pv/dom0_build.c
->> +++ b/xen/arch/x86/pv/dom0_build.c
->> @@ -382,6 +382,10 @@ int __init dom0_construct_pv(struct domain *d,
->>       l3_pgentry_t *l3tab = NULL, *l3start = NULL;
->>       l2_pgentry_t *l2tab = NULL, *l2start = NULL;
->>       l1_pgentry_t *l1tab = NULL, *l1start = NULL;
->> +    mfn_t l4start_mfn = INVALID_MFN;
->> +    mfn_t l3start_mfn = INVALID_MFN;
->> +    mfn_t l2start_mfn = INVALID_MFN;
->> +    mfn_t l1start_mfn = INVALID_MFN;
-> 
-> The reason initializers are needed here is, aiui, the overly large scope
-> of these variables. For example ...
-> 
-
-Correct, is it just an observation or do you want me to do anything?
-
->> @@ -708,22 +712,32 @@ int __init dom0_construct_pv(struct domain *d,
->>           v->arch.pv.event_callback_cs    = FLAT_COMPAT_KERNEL_CS;
->>       }
+On 20/02/2024 10:51, Jan Beulich wrote:
+> On 16.01.2024 20:25, Elias El Yandouzi wrote:
+>> --- a/xen/arch/x86/domain.c
+>> +++ b/xen/arch/x86/domain.c
+>> @@ -750,9 +750,16 @@ int arch_domain_create(struct domain *d,
 >>   
->> +#define UNMAP_MAP_AND_ADVANCE(mfn_var, virt_var, maddr) \
->> +do {                                                    \
->> +    unmap_domain_page(virt_var);                        \
->> +    mfn_var = maddr_to_mfn(maddr);                      \
->> +    maddr += PAGE_SIZE;                                 \
->> +    virt_var = map_domain_page(mfn_var);                \
->> +} while ( false )
+>>       spin_lock_init(&d->arch.e820_lock);
+>>   
+>> +    if ( (rc = mapcache_domain_init(d)) != 0)
+>> +    {
+>> +        free_perdomain_mappings(d);
+>> +        return rc;
+>> +    }
 >> +
->>       if ( !compat )
+>>       /* Minimal initialisation for the idle domain. */
+>>       if ( unlikely(is_idle_domain(d)) )
 >>       {
->>           maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l4_page_table;
->> -        l4start = l4tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
->> +        UNMAP_MAP_AND_ADVANCE(l4start_mfn, l4start, mpt_alloc);
->> +        l4tab = l4start;
->>           clear_page(l4tab);
->> -        init_xen_l4_slots(l4tab, _mfn(virt_to_mfn(l4start)),
->> -                          d, INVALID_MFN, true);
->> -        v->arch.guest_table = pagetable_from_paddr(__pa(l4start));
->> +        init_xen_l4_slots(l4tab, l4start_mfn, d, INVALID_MFN, true);
->> +        v->arch.guest_table = pagetable_from_mfn(l4start_mfn);
-> 
-> ... looks to be required only here, while ...
-> 
+>> +        struct page_info *pg = d->arch.perdomain_l3_pg;
+>>           static const struct arch_csw idle_csw = {
+>>               .from = paravirt_ctxt_switch_from,
+>>               .to   = paravirt_ctxt_switch_to,
+>> @@ -763,6 +770,9 @@ int arch_domain_create(struct domain *d,
+>>   
+>>           d->arch.cpu_policy = ZERO_BLOCK_PTR; /* Catch stray misuses. */
+>>   
+>> +        idle_pg_table[l4_table_offset(PERDOMAIN_VIRT_START)] =
+>> +            l4e_from_page(pg, __PAGE_HYPERVISOR_RW);
+>> +
+>>           return 0;
 >>       }
->>       else
->>       {
->>           /* Monitor table already created by switch_compat(). */
->> -        l4start = l4tab = __va(pagetable_get_paddr(v->arch.guest_table));
->> +        l4start_mfn = pagetable_get_mfn(v->arch.guest_table);
->> +        l4start = l4tab = map_domain_page(l4start_mfn);
 > 
-> ... in principle the use of the variable could be avoided here. Below
-> from here there's no further use of it.
-> 
->> @@ -781,30 +797,34 @@ int __init dom0_construct_pv(struct domain *d,
->>   
->>       if ( compat )
->>       {
->> -        l2_pgentry_t *l2t;
->> -
->>           /* Ensure the first four L3 entries are all populated. */
->>           for ( i = 0, l3tab = l3start; i < 4; ++i, ++l3tab )
->>           {
->>               if ( !l3e_get_intpte(*l3tab) )
->>               {
->>                   maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l2_page_table;
->> -                l2tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
->> -                clear_page(l2tab);
->> -                *l3tab = l3e_from_paddr(__pa(l2tab), L3_PROT);
->> +                UNMAP_MAP_AND_ADVANCE(l2start_mfn, l2start, mpt_alloc);
->> +                clear_page(l2start);
->> +                *l3tab = l3e_from_mfn(l2start_mfn, L3_PROT);
->>               }
-> 
-> The updating of l2start is only conditional here, yet ...
-> 
->>               if ( i == 3 )
->>                   l3e_get_page(*l3tab)->u.inuse.type_info |= PGT_pae_xen_l2;
->>           }
->>   
->> -        l2t = map_l2t_from_l3e(l3start[3]);
->> -        init_xen_pae_l2_slots(l2t, d);
->> -        unmap_domain_page(l2t);
->> +        init_xen_pae_l2_slots(l2start, d);
-> 
-> ... here you assume it points at the page referenced by the 3rd L3 entry.
+> Why not add another call to mapcache_domain_init() right here, allowing
+> a more specific panic() to be invoked in case of failure (compared to
+> the BUG_ON() upon failure of creation of the idle domain as a whole)?
+> Then the other mapcache_domain_init() call doesn't need moving a 2nd
+> time in close succession.
 
-Hmm, I missed it when sending the revision and indeed it doesn't look 
-correct.
 
-> Question is why the original code is being replaced here in the first
-> place: It was already suitably mapping the page in question.
-
-The code was already suitably mapping the pages in question. This patch 
-doesn't aim to make any functional change, just to rework how the 
-domheap pages are used. The goal of the series is to remove the mappings 
-from the directmap, which means those pages needs to be mapped and 
-unmapped when required.
-
-This is all this patch do, see `UNMAP_MAP_AND_ADVANCE()` macro.
+Sorry but I don't get your point, why calling another time 
+`mapcache_domain_init()`? What panic() are you referring to?
 
 Elias
 
