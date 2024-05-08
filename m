@@ -4,32 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA7BC04FFE
-	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2024 21:05:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.718959.1121532 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA0BAC04FFE
+	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2024 21:39:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.718968.1121571 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4oTw-0006wW-RS; Wed, 08 May 2024 21:05:44 +0000
+	id 1s4p0B-0004Yg-ST; Wed, 08 May 2024 21:39:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 718959.1121532; Wed, 08 May 2024 21:05:44 +0000
+Received: by outflank-mailman (output) from mailman id 718968.1121571; Wed, 08 May 2024 21:39:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4oTw-0006wP-NE; Wed, 08 May 2024 21:05:44 +0000
-Received: by outflank-mailman (input) for mailman id 718959;
- Wed, 08 May 2024 21:05:43 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1s4oTv-0006wJ-8X
- for xen-devel@lists.xenproject.org; Wed, 08 May 2024 21:05:43 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1s4oTu-0000HW-Qn; Wed, 08 May 2024 21:05:42 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.0.211])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1s4oTu-0001Ah-LQ; Wed, 08 May 2024 21:05:42 +0000
+	id 1s4p0B-0004Y3-OY; Wed, 08 May 2024 21:39:03 +0000
+Received: by outflank-mailman (input) for mailman id 718968;
+ Wed, 08 May 2024 21:39:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=nd4S=ML=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
+ id 1s4p0A-00044I-A7
+ for xen-devel@lists.xenproject.org; Wed, 08 May 2024 21:39:02 +0000
+Received: from doppler.solinno.uk (doppler.solinno.uk [81.2.106.178])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 611416e4-0d83-11ef-909c-e314d9c70b13;
+ Wed, 08 May 2024 23:38:59 +0200 (CEST)
+Received: from folly.solinno.co.uk (folly.dyn.solinno.co.uk [192.168.2.135])
+ by doppler.solinno.uk (Postfix) with ESMTPSA id 2010F8007B;
+ Wed,  8 May 2024 22:38:59 +0100 (BST)
+Received: by folly.solinno.co.uk (Postfix, from userid 1000)
+ id EC76220166; Wed,  8 May 2024 22:38:58 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,79 +43,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=uMKXVQiv+rd0LyM0gDIWnH+cpu+xUY0PsuYtzul+dEE=; b=lvMUbxF+GCm3t1/ndJtXpWaNQK
-	ciz1SRMoxOAS0fHiK2xLNz4LbFbTASPG1bSbtzPinWzTj8qTxcMChJIqHQYQZPsFiO5UM8x0OsEE8
-	CbaUd1tF0zaYeNLB3aW2C0VCm9E18k7Qpj1Lu42FIR4F5K7H2PZuORzO31yhnHSycLvM=;
-Message-ID: <0857d348-1305-40d2-9596-e0e5f4490c4a@xen.org>
-Date: Wed, 8 May 2024 22:05:40 +0100
+X-Inumbo-ID: 611416e4-0d83-11ef-909c-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
+	s=mail; t=1715204339;
+	bh=NwExQyE50t0WzUcJcVbwpgO12YLzpS7FSJX0VovsD2w=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=0p+fVAK8o9JhCJg0v5dza9u9Fi5JpN2LJfm8aDeFs5HqXP3kQATXlN3LphiN+I8v9
+	 I4A0NE276Pj55g6Dwknjzd5zrWUIygNHMKk4m++Tp4vtfaVHaYfuBqgcqAuoUDVUuE
+	 RH/FHx9hXn/S7UVSt+9h6UYjOZZ0eD/DlRWWWOjM=
+From: Leigh Brown <leigh@solinno.co.uk>
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	anthony.perard@citrix.com,
+	Leigh Brown <leigh@solinno.co.uk>
+Subject: [RFC PATCH v2 1/5] tools/libs/light: Add vlan field to libxl_device_nic
+Date: Wed,  8 May 2024 22:38:20 +0100
+Message-Id: <20240508213824.55824-2-leigh@solinno.co.uk>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240508213824.55824-1-leigh@solinno.co.uk>
+References: <20240508213824.55824-1-leigh@solinno.co.uk>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] xen/p2m: put reference for superpage
-Content-Language: en-GB
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Penny Zheng <Penny.Zheng@arm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20240423082532.776623-1-luca.fancellu@arm.com>
- <20240423082532.776623-4-luca.fancellu@arm.com>
- <b7d1d40b-c634-4830-aa4b-b0475bdff8fc@xen.org>
- <9F196831-D294-4227-B86F-E8EEACB5B076@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <9F196831-D294-4227-B86F-E8EEACB5B076@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
+Add `vlan' string field to libxl_device_nic, to allow a VLAN
+configuration to be specified for the VIF when adding it to the
+bridge device.
 
+Update libxl_nic.c to read and write the vlan field from the
+xenstore.
 
-On 07/05/2024 14:30, Luca Fancellu wrote:
-> Hi Julien,
+This provides the capability for supported operating systems (e.g.
+Linux) to perform VLAN filtering on bridge ports.  The Xen
+hotplug scripts need to be updated to read this information from
+the xenstore and perform the required configuration.
 
-Hi Luca,
+Signed-off-by: Leigh Brown <leigh@solinno.co.uk>
+---
+ tools/libs/light/libxl_nic.c     | 10 ++++++++++
+ tools/libs/light/libxl_types.idl |  1 +
+ 2 files changed, 11 insertions(+)
 
->> On 7 May 2024, at 14:20, Julien Grall <julien@xen.org> wrote:
->>
->> Hi Luca,
->>
->> On 23/04/2024 09:25, Luca Fancellu wrote:
->>> From: Penny Zheng <Penny.Zheng@arm.com>
->>> We are doing foreign memory mapping for static shared memory, and
->>> there is a great possibility that it could be super mapped.
->>
->> Is this because we are mapping more than one page at the time? Can you point me to the code?
-> 
-> So, to be honest this patch was originally in Penny’s serie, my knowledge of this side of the codebase
-> is very limited and so I pushed this one basically untouched.
-> 
->  From what I can see in the serie the mappings are made in handle_shared_mem_bank, and map_regions_p2mt
-> is called for one page at the time (allocated through the function allocate_domheap_memory (new function introduced in
-> the serie).
-> 
-> So is that the case that this patch is not needed?
-
-I looked at the code and, if I am not mistake, we are passing 
-PFN_DOWN(psize) to map_regions_p2mt. At the moment, it is unclear to me 
-why would psize be < PAGE_SIZE.
-
->>> But today, p2m_put_l3_page could not handle superpages.
->>
->> This was done on purpose. Xen is not preemptible and therefore we need to be cautious how much work is done within the p2m code.
->>
->> With the below proposal, for 1GB mapping, we may end up to call put_page() up to 512 * 512 = 262144 times. put_page() can free memory. This could be a very long operation.
->>
->> Have you benchmark how long it would take?
-> 
-> I did not, since its purpose was unclear to me and was not commented in the last serie from Penny.
-
-Honestly, I can't remember why it wasn't commented.
-
-Cheers,
-
+diff --git a/tools/libs/light/libxl_nic.c b/tools/libs/light/libxl_nic.c
+index d6bf06fc34..d861e3726d 100644
+--- a/tools/libs/light/libxl_nic.c
++++ b/tools/libs/light/libxl_nic.c
+@@ -233,6 +233,11 @@ static int libxl__set_xenstore_nic(libxl__gc *gc, uint32_t domid,
+         flexarray_append(back, GCSPRINTF("%u", nic->mtu));
+     }
+     
++    if (nic->vlan) {
++        flexarray_append(back, "vlan");
++        flexarray_append(back, libxl__strdup(gc, nic->vlan));
++    }
++
+     flexarray_append(back, "bridge");
+     flexarray_append(back, libxl__strdup(gc, nic->bridge));
+     flexarray_append(back, "handle");
+@@ -313,6 +318,11 @@ static int libxl__nic_from_xenstore(libxl__gc *gc, const char *libxl_path,
+         nic->mtu = LIBXL_DEVICE_NIC_MTU_DEFAULT;
+     }
+ 
++    rc = libxl__xs_read_checked(gc, XBT_NULL,
++                                GCSPRINTF("%s/vlan", libxl_path),
++				(const char **)(&nic->vlan));
++    if (rc) goto out;
++
+     rc = libxl__xs_read_checked(gc, XBT_NULL,
+                                 GCSPRINTF("%s/mac", libxl_path), &tmp);
+     if (rc) goto out;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 7d8bd5d216..5c510dc272 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -809,6 +809,7 @@ libxl_device_nic = Struct("device_nic", [
+     ("backend_domname", string),
+     ("devid", libxl_devid),
+     ("mtu", integer),
++    ("vlan", string),
+     ("model", string),
+     ("mac", libxl_mac),
+     ("ip", string),
 -- 
-Julien Grall
+2.39.2
+
 
