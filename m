@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C31F5C25B5F
-	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2024 11:04:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.718679.1121192 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5886C04FFE
+	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2024 11:27:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.718735.1121232 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4f68-0007bd-JF; Wed, 08 May 2024 11:04:32 +0000
+	id 1s4fRu-0004pZ-2u; Wed, 08 May 2024 11:27:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 718679.1121192; Wed, 08 May 2024 11:04:32 +0000
+Received: by outflank-mailman (output) from mailman id 718735.1121232; Wed, 08 May 2024 11:27:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4f68-0007bW-Fg; Wed, 08 May 2024 11:04:32 +0000
-Received: by outflank-mailman (input) for mailman id 718679;
- Wed, 08 May 2024 11:04:30 +0000
+	id 1s4fRu-0004pS-00; Wed, 08 May 2024 11:27:02 +0000
+Received: by outflank-mailman (input) for mailman id 718735;
+ Wed, 08 May 2024 11:27:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gEdx=ML=xenbits.xen.org=julieng@srs-se1.protection.inumbo.net>)
- id 1s4f66-0006tz-P8
- for xen-devel@lists.xen.org; Wed, 08 May 2024 11:04:30 +0000
-Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
+ <SRS0=0je0=ML=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1s4fRs-0004Lt-Oi
+ for xen-devel@lists.xenproject.org; Wed, 08 May 2024 11:27:00 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bc7f667a-0d2a-11ef-909c-e314d9c70b13;
- Wed, 08 May 2024 13:04:28 +0200 (CEST)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julieng@xenbits.xen.org>)
- id 1s4f5w-0006DQ-PL; Wed, 08 May 2024 11:04:20 +0000
-Received: from julieng by xenbits.xenproject.org with local (Exim 4.92)
- (envelope-from <julieng@xenbits.xen.org>)
- id 1s4f5w-0005EO-KC; Wed, 08 May 2024 11:04:20 +0000
+ id e2b2ec57-0d2d-11ef-909c-e314d9c70b13;
+ Wed, 08 May 2024 13:27:00 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a59b178b75bso779042666b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 08 May 2024 04:27:00 -0700 (PDT)
+Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
+ b3-20020a170906d10300b00a59edf10304sm1858562ejz.76.2024.05.08.04.26.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 May 2024 04:26:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,150 +46,321 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc7f667a-0d2a-11ef-909c-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Date:Message-Id:Subject:CC:From:To:MIME-Version:
-	Content-Transfer-Encoding:Content-Type;
-	bh=6d+yGvKAp/ietMPZl7Ya/IGpIx85yuZHje+WdkXJkGk=; b=yrH6e/TTf/PeSSaP5rafYXKFiW
-	2ARQx7toKnniWwOpGiOJcHHrj7hMGADfEcuq128Q3UiNv6crEHIR9wunmHNhFn5viuUmWFznVTgDO
-	e0D8hn90KIOH+/uXar/DBMZeTpGV1QncR95n1WmXTiPHRTLHcYJ3QlL6LpvZtKW+fbf0=;
-Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
-Content-Transfer-Encoding: binary
+X-Inumbo-ID: e2b2ec57-0d2d-11ef-909c-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1715167619; x=1715772419; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PfaLi13cq6Jp00njiG3Oj5QQBnM03VocbDPA5xG0o9g=;
+        b=WRPzU5RgQkevL0cFdnFNTcngzUsBZ3tfNratpyaKdpvZQdc2cgedCRyVrOknXcnG/M
+         gejuU+NDIsNexFfo9CqEA+9LoanVKPtXFDEEDHGYUpNlsPaMpK6iW5ZiQ43cfWl2mt5O
+         DjxxzZvmkIrzo7S5a0jv3tZPSDmpZxn3UHVcQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715167619; x=1715772419;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=PfaLi13cq6Jp00njiG3Oj5QQBnM03VocbDPA5xG0o9g=;
+        b=UjbAB6WfJwEh+xuHjlLmw6Iy83jouPLGn1v3sKFTLVKf7TSigFObgkL3+OQJWE2Dpa
+         atH/yQdAaxKxTRSiDeqXCQVPytB6aLwD7bTJjwInxWzcjcdhlJJkkNb7JPwXslGNmott
+         b3V8s6+HlZTu7qXIKge1h3j6FrIV1qUAaJCwKeG7cx61qS4vFVsqm+eBkOEoqHr3rRQk
+         XZ7jv0oCwq4Ee3mUywNgxNNpoTfnqMWuW+2VjFnZ1icMdSVL1LNnk5SYSXAunXlBy1FB
+         iriw5E9vLVwHnk6J2xT3CX+beomMH6EFlV3I74vAny7qJruIW8prXroPQSuNs9EvNPps
+         EfWA==
+X-Gm-Message-State: AOJu0Yw7DH1iXprdKVcfAFXAuBS3lqDXjY14pXk4ajuTjhp7xedKda7X
+	KK0GzeVmtz5ot2GGAPzo/NXYn/p7gKKxErp/tblFToixc1JUbXX3JtE+v6aBqHEE8u60fTmcM6F
+	d
+X-Google-Smtp-Source: AGHT+IFu7vidAerhk41EYCSsbv5K0vQLhkaZwr+s2zbmNY5pScb1HCc3PxhVMj0gScVnH3E6/JOiGA==
+X-Received: by 2002:a17:906:fb85:b0:a59:c577:c5cb with SMTP id a640c23a62f3a-a59fb94a413mr171281266b.10.1715167619317;
+        Wed, 08 May 2024 04:26:59 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>
+Subject: [PATCH for-4.19 v2 3/3] xen/x86: remove foreign mappings from the p2m on teardown
+Date: Wed,  8 May 2024 13:23:23 +0200
+Message-ID: <20240508112323.38946-4-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240508112323.38946-1-roger.pau@citrix.com>
+References: <20240508112323.38946-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-X-Mailer: MIME-tools 5.509 (Entity 5.509)
-To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
- xen-users@lists.xen.org, oss-security@lists.openwall.com
-From: Xen.org security team <security@xen.org>
-CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 457 v2 - Linux/xen-netfront: Memory leak
- due to missing cleanup function
-Message-Id: <E1s4f5w-0005EO-KC@xenbits.xenproject.org>
-Date: Wed, 08 May 2024 11:04:20 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=separator
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
+Iterate over the p2m up to the maximum recorded gfn and remove any foreign
+mappings, in order to drop the underlying page references and thus don't keep
+extra page references if a domain is destroyed while still having foreign
+mappings on it's p2m.
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
+The logic is similar to the one used on Arm.
 
-                    Xen Security Advisory XSA-457
-                              version 2
+Note that foreign mappings cannot be created by guests that have altp2m or
+nested HVM enabled, as p2ms different than the host one are not currently
+scrubbed when destroyed in order to drop references to any foreign maps.
 
-    Linux/xen-netfront: Memory leak due to missing cleanup function
+It's unclear whether the right solution is to take an extra reference when
+foreign maps are added to p2ms different than the host one, or just rely on the
+host p2m already having a reference.  The mapping being removed from the host
+p2m should cause it to be dropped on all domain p2ms.
 
-UPDATES IN VERSION 2
-====================
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v1:
+ - Use existing p2m max_mapped_pfn field.
+ - Prevent creating foreign mappings by guests that have altp2m or nestedhvm
+   enabled.
+---
+ CHANGELOG.md                   |  1 +
+ xen/arch/x86/domain.c          |  8 +++-
+ xen/arch/x86/include/asm/p2m.h | 26 +++++++------
+ xen/arch/x86/mm/p2m-basic.c    | 17 +++++++++
+ xen/arch/x86/mm/p2m.c          | 68 ++++++++++++++++++++++++++++++++--
+ 5 files changed, 103 insertions(+), 17 deletions(-)
 
-* Clarify the XSA is in netfront and *not* netback
-* Clarify the impact: only the guest may crash
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 8041cfb7d243..09bdb9b97578 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+    - HVM PIRQs are disabled by default.
+    - Reduce IOMMU setup time for hardware domain.
+  - xl/libxl configures vkb=[] for HVM domains with priority over vkb_device.
++ - Allow HVM/PVH domains to map foreign pages.
+ 
+ ### Added
+  - On x86:
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index dff790060605..1cb3ccddab00 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -718,7 +718,7 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+         return -EINVAL;
+     }
+ 
+-    if ( altp2m && (altp2m & (altp2m - 1)) )
++    if ( altp2m & (altp2m - 1) )
+     {
+         dprintk(XENLOG_INFO, "Multiple altp2m options selected in flags: %#x\n",
+                 config->flags);
+@@ -2387,6 +2387,7 @@ int domain_relinquish_resources(struct domain *d)
+         enum {
+             PROG_iommu_pagetables = 1,
+             PROG_shared,
++            PROG_mappings,
+             PROG_paging,
+             PROG_vcpu_pagetables,
+             PROG_xen,
+@@ -2435,6 +2436,11 @@ int domain_relinquish_resources(struct domain *d)
+         }
+ #endif
+ 
++    PROGRESS(mappings):
++        ret = relinquish_p2m_mapping(d);
++        if ( ret )
++            return ret;
++
+     PROGRESS(paging):
+ 
+         /* Tear down paging-assistance stuff. */
+diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
+index 107b9f260848..c1478ffc3647 100644
+--- a/xen/arch/x86/include/asm/p2m.h
++++ b/xen/arch/x86/include/asm/p2m.h
+@@ -383,6 +383,8 @@ struct p2m_domain {
+ 
+     /* Number of foreign mappings. */
+     unsigned long      nr_foreign;
++    /* Cursor for iterating over the p2m on teardown. */
++    unsigned long      teardown_gfn;
+ #endif /* CONFIG_HVM */
+ };
+ 
+@@ -395,16 +397,7 @@ struct p2m_domain {
+ #endif
+ #include <xen/p2m-common.h>
+ 
+-static inline bool arch_acquire_resource_check(struct domain *d)
+-{
+-    /*
+-     * FIXME: Until foreign pages inserted into the P2M are properly
+-     * reference counted, it is unsafe to allow mapping of
+-     * resource pages unless the caller is the hardware domain
+-     * (see set_foreign_p2m_entry()).
+-     */
+-    return !paging_mode_translate(d) || is_hardware_domain(d);
+-}
++bool arch_acquire_resource_check(const struct domain *d);
+ 
+ /*
+  * Updates vCPU's n2pm to match its np2m_base in VMCx12 and returns that np2m.
+@@ -720,6 +713,10 @@ p2m_pod_offline_or_broken_hit(struct page_info *p);
+ void
+ p2m_pod_offline_or_broken_replace(struct page_info *p);
+ 
++/* Perform cleanup of p2m mappings ahead of teardown. */
++int
++relinquish_p2m_mapping(struct domain *d);
++
+ #else
+ 
+ static inline bool
+@@ -748,6 +745,11 @@ static inline void p2m_pod_offline_or_broken_replace(struct page_info *p)
+     ASSERT_UNREACHABLE();
+ }
+ 
++static inline int relinquish_p2m_mapping(struct domain *d)
++{
++    return 0;
++}
++
+ #endif
+ 
+ 
+@@ -1043,7 +1045,7 @@ static inline int p2m_entry_modify(struct p2m_domain *p2m, p2m_type_t nt,
+         break;
+ 
+     case p2m_map_foreign:
+-        if ( !mfn_valid(nfn) )
++        if ( !mfn_valid(nfn) || p2m != p2m_get_hostp2m(p2m->domain) )
+         {
+             ASSERT_UNREACHABLE();
+             return -EINVAL;
+@@ -1068,7 +1070,7 @@ static inline int p2m_entry_modify(struct p2m_domain *p2m, p2m_type_t nt,
+         break;
+ 
+     case p2m_map_foreign:
+-        if ( !mfn_valid(ofn) )
++        if ( !mfn_valid(ofn) || p2m != p2m_get_hostp2m(p2m->domain) )
+         {
+             ASSERT_UNREACHABLE();
+             return -EINVAL;
+diff --git a/xen/arch/x86/mm/p2m-basic.c b/xen/arch/x86/mm/p2m-basic.c
+index 8599bd15c61a..d374e1e824f1 100644
+--- a/xen/arch/x86/mm/p2m-basic.c
++++ b/xen/arch/x86/mm/p2m-basic.c
+@@ -13,6 +13,8 @@
+ 
+ #include <xen/event.h>
+ #include <xen/types.h>
++#include <asm/altp2m.h>
++#include <asm/hvm/nestedhvm.h>
+ #include <asm/p2m.h>
+ #include "mm-locks.h"
+ #include "p2m.h"
+@@ -207,6 +209,21 @@ void p2m_final_teardown(struct domain *d)
+     p2m_teardown_hostp2m(d);
+ }
+ 
++bool arch_acquire_resource_check(const struct domain *d)
++{
++    /*
++     * altp2m is not supported as we would otherwise also need to walk the
++     * altp2m tables and drop any foreign map entries in order to drop the page
++     * reference.
++     *
++     * The same applies to nestedhvm nested p2m tables, as the type from the L0
++     * p2m is replicated into the L1 p2m, and there's no filtering that
++     * prevents foreign mappings from being created in nestedp2m.
++     */
++    return d->arch.hvm.params[HVM_PARAM_ALTP2M] == XEN_ALTP2M_disabled &&
++           !nestedhvm_enabled(d);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index ce742c12e0de..23c6c42af275 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -2333,10 +2333,6 @@ static int p2m_add_foreign(struct domain *tdom, unsigned long fgfn,
+     int rc;
+     struct domain *fdom;
+ 
+-    /*
+-     * hvm fixme: until support is added to p2m teardown code to cleanup any
+-     * foreign entries, limit this to hardware domain only.
+-     */
+     if ( !arch_acquire_resource_check(tdom) )
+         return -EPERM;
+ 
+@@ -2693,6 +2689,70 @@ int p2m_set_altp2m_view_visibility(struct domain *d, unsigned int altp2m_idx,
+     return rc;
+ }
+ 
++/*
++ * Remove foreign mappings from the p2m, as that drops the page reference taken
++ * when mapped.
++ */
++int relinquish_p2m_mapping(struct domain *d)
++{
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    unsigned long gfn, count = 0;
++    int rc = 0;
++
++    if ( !paging_mode_translate(d) )
++        return 0;
++
++    BUG_ON(!d->is_dying);
++
++    p2m_lock(p2m);
++
++    gfn = p2m->teardown_gfn;
++
++    /* Iterate over the whole p2m on debug builds to ensure correctness. */
++    while ( gfn <= p2m->max_mapped_pfn &&
++            (IS_ENABLED(CONFIG_DEBUG) || p2m->nr_foreign) )
++    {
++        unsigned int order;
++        p2m_type_t t;
++        p2m_access_t a;
++
++        _get_gfn_type_access(p2m, _gfn(gfn), &t, &a, 0, &order, 0);
++        ASSERT(IS_ALIGNED(gfn, 1UL << order));
++
++        if ( t == p2m_map_foreign )
++        {
++            ASSERT(p2m->nr_foreign);
++            ASSERT(order == 0);
++
++            rc = p2m_set_entry(p2m, _gfn(gfn), INVALID_MFN, order, p2m_invalid,
++                               p2m->default_access);
++            if ( rc )
++            {
++                printk(XENLOG_ERR
++                       "%pd: failed to unmap foreign page %" PRI_gfn " order %u error %d\n",
++                       d, gfn, order, rc);
++                ASSERT_UNREACHABLE();
++                break;
++            }
++        }
++
++        gfn += 1UL << order;
++
++        if ( !(++count & 0xff) && hypercall_preempt_check() )
++        {
++            rc = -ERESTART;
++            break;
++        }
++    }
++
++    ASSERT(gfn <= p2m->max_mapped_pfn || !p2m->nr_foreign);
++    p2m->teardown_gfn = gfn;
++
++    p2m_unlock(p2m);
++
++    return rc;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+-- 
+2.44.0
 
-ISSUE DESCRIPTION
-=================
-
-In netfront, xennet_alloc_one_rx_buffer() failed to call the
-appropriate clean-up function, resulting in a memory leak.
-
-IMPACT
-======
-
-A malicious guest userspace process can exhaust memory resources
-within the guest kernel, potentially leading to a guest crash (Denial
-of Service). It is not known whether it can be triggered remotely.
-
-VULNERABLE SYSTEMS
-==================
-
-Systems with guests running Linux 5.9 and later with Xen PV network
-devices are affected.
-
-MITIGATION
-==========
-
-For HVM guests, using emulated network devices will avoid this issue.
-
-RESOLUTION
-==========
-
-The following patch in Linux resolves the issue:
-
-https://git.kernel.org/torvalds/c/037965402a010898d34f4e35327d22c0a95cd51f
-
-A copy of which is attached.
-
-xsa457.patch           Linux 5.9
-
-$ sha256sum xsa457*
-9d6ae3da27f1ff92f9f45c800822beecda603d6dea6726207cee6c768416114c  xsa457.patch
-$
-
-
-NOTE ON THE LACK OF EMBARGO
-===========================
-
-The issue was reported initially on a public bug tracker and fixed in
-public before it was realized that there was a security aspect.
------BEGIN PGP SIGNATURE-----
-
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmY7W/gMHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZnPQIAIPhOEXsSKutZJF776KKDmoNDmZ00SikkfZ9tZW8
-LyiNNJ7l7tDN3A5EVJn4l8Xos+PFaadNIXdaLKemRt17nP4Qw+UzjvBTiTbou+m7
-OGUGsRMCNkfpv8OEi/U91o3W3uEE/tL7ahws/wAnOzEfcbTFl5alTDfuDfrtOaiA
-1Uz37QO0GNQSD+n91SyosqAljfbAvWNQMLJ+Iz9YB6BonVwsWWNeHjF1N9zDWv3k
-pD+DVOa60FYIA3xxeJveZO3ZLA6oBo5wyKiQ8p3bun9X9W5+i6PrzWewnsWCvya+
-Yyi0xTZ2YBzo+eNFpQ9OKqjDVoSREx9l9Ef0YvSStR0/aBw=
-=/9cg
------END PGP SIGNATURE-----
-
---=separator
-Content-Type: application/octet-stream; name="xsa457.patch"
-Content-Disposition: attachment; filename="xsa457.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbSAwMzc5NjU0MDJhMDEwODk4ZDM0ZjRlMzUzMjdkMjJjMGE5NWNkNTFm
-IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKZXNwZXIgRGFuZ2Fh
-cmQgQnJvdWVyIDxoYXdrQGtlcm5lbC5vcmc+CkRhdGU6IFdlZCwgMjcgTWFy
-IDIwMjQgMTM6MTQ6NTYgKzAxMDAKU3ViamVjdDogeGVuLW5ldGZyb250OiBB
-ZGQgbWlzc2luZyBza2JfbWFya19mb3JfcmVjeWNsZQoKTm90aWNlIHRoYXQg
-c2tiX21hcmtfZm9yX3JlY3ljbGUoKSBpcyBpbnRyb2R1Y2VkIGxhdGVyIHRo
-YW4gZml4ZXMgdGFnIGluCmNvbW1pdCA2YTViY2Q4NGU4ODYgKCJwYWdlX3Bv
-b2w6IEFsbG93IGRyaXZlcnMgdG8gaGludCBvbiBTS0IgcmVjeWNsaW5nIiku
-CgpJdCBpcyBiZWxpZXZlZCB0aGF0IGZpeGVzIHRhZyB3ZXJlIG1pc3Npbmcg
-YSBjYWxsIHRvIHBhZ2VfcG9vbF9yZWxlYXNlX3BhZ2UoKQpiZXR3ZWVuIHY1
-LjkgdG8gdjUuMTQsIGFmdGVyIHdoaWNoIGlzIHNob3VsZCBoYXZlIHVzZWQg
-c2tiX21hcmtfZm9yX3JlY3ljbGUoKS4KU2luY2UgdjYuNiB0aGUgY2FsbCBw
-YWdlX3Bvb2xfcmVsZWFzZV9wYWdlKCkgd2VyZSByZW1vdmVkIChpbgpjb21t
-aXQgNTM1YjljNjFiZGVmICgibmV0OiBwYWdlX3Bvb2w6IGhpZGUgcGFnZV9w
-b29sX3JlbGVhc2VfcGFnZSgpIikKYW5kIHJlbWFpbmluZyBjYWxsZXJzIGNv
-bnZlcnRlZCAoaW4gY29tbWl0IDZiZmVmMmVjMDE3MiAoIk1lcmdlIGJyYW5j
-aAonbmV0LXBhZ2VfcG9vbC1yZW1vdmUtcGFnZV9wb29sX3JlbGVhc2VfcGFn
-ZSciKSkuCgpUaGlzIGxlYWsgYmVjYW1lIHZpc2libGUgaW4gdjYuOCB2aWEg
-Y29tbWl0IGRiYTFiOGE3YWI2OCAoIm1tL3BhZ2VfcG9vbDogY2F0Y2gKcGFn
-ZV9wb29sIG1lbW9yeSBsZWFrcyIpLgoKQ2M6IHN0YWJsZUB2Z2VyLmtlcm5l
-bC5vcmcKRml4ZXM6IDZjNWFhNmZjNGRlZiAoInhlbiBuZXR3b3JraW5nOiBh
-ZGQgYmFzaWMgWERQIHN1cHBvcnQgZm9yIHhlbi1uZXRmcm9udCIpClJlcG9y
-dGVkLWJ5OiBMZW9uaWRhcyBTcHlyb3BvdWxvcyA8YXJ0YWZpbmRlQGFyY2hs
-aW51eC5jb20+Ckxpbms6IGh0dHBzOi8vYnVnemlsbGEua2VybmVsLm9yZy9z
-aG93X2J1Zy5jZ2k/aWQ9MjE4NjU0ClJlcG9ydGVkLWJ5OiBBcnRodXIgQm9y
-c2Jvb20gPGFydGh1cmJvcnNib29tQGdtYWlsLmNvbT4KU2lnbmVkLW9mZi1i
-eTogSmVzcGVyIERhbmdhYXJkIEJyb3VlciA8aGF3a0BrZXJuZWwub3JnPgpM
-aW5rOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzE3MTE1NDE2NzQ0Ni4y
-NjcxMDYyLjkxMjcxMDUzODQ1OTEyMzczNjMuc3RnaXRAZmlyZXNvdWwKU2ln
-bmVkLW9mZi1ieTogSmFrdWIgS2ljaW5za2kgPGt1YmFAa2VybmVsLm9yZz4K
-LS0tCiBkcml2ZXJzL25ldC94ZW4tbmV0ZnJvbnQuYyB8IDEgKwogMSBmaWxl
-IGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspCgpkaWZmIC0tZ2l0IGEvZHJpdmVy
-cy9uZXQveGVuLW5ldGZyb250LmMgYi9kcml2ZXJzL25ldC94ZW4tbmV0ZnJv
-bnQuYwppbmRleCBhZDI5ZjM3MDAzNGU0Zi4uOGQyYWVlODg1MjZjNjkgMTAw
-NjQ0Ci0tLSBhL2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCisrKyBiL2Ry
-aXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCkBAIC0yODUsNiArMjg1LDcgQEAg
-c3RhdGljIHN0cnVjdCBza19idWZmICp4ZW5uZXRfYWxsb2Nfb25lX3J4X2J1
-ZmZlcihzdHJ1Y3QgbmV0ZnJvbnRfcXVldWUgKnF1ZXVlKQogCQlyZXR1cm4g
-TlVMTDsKIAl9CiAJc2tiX2FkZF9yeF9mcmFnKHNrYiwgMCwgcGFnZSwgMCwg
-MCwgUEFHRV9TSVpFKTsKKwlza2JfbWFya19mb3JfcmVjeWNsZShza2IpOwog
-CiAJLyogQWxpZ24gaXAgaGVhZGVyIHRvIGEgMTYgYnl0ZXMgYm91bmRhcnkg
-Ki8KIAlza2JfcmVzZXJ2ZShza2IsIE5FVF9JUF9BTElHTik7Ci0tIApjZ2l0
-IDEuMi4zLWtvcmcKCg==
-
---=separator--
 
