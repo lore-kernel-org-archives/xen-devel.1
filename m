@@ -4,37 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 295BAC25B75
-	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2024 11:27:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.718736.1121242 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58BC0C19F4F
+	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2024 12:10:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.718771.1121252 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4fRv-00054q-Bd; Wed, 08 May 2024 11:27:03 +0000
+	id 1s4g71-00057b-2P; Wed, 08 May 2024 12:09:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 718736.1121242; Wed, 08 May 2024 11:27:03 +0000
+Received: by outflank-mailman (output) from mailman id 718771.1121252; Wed, 08 May 2024 12:09:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s4fRv-00054h-7Z; Wed, 08 May 2024 11:27:03 +0000
-Received: by outflank-mailman (input) for mailman id 718736;
- Wed, 08 May 2024 11:27:01 +0000
+	id 1s4g70-00057U-Us; Wed, 08 May 2024 12:09:30 +0000
+Received: by outflank-mailman (input) for mailman id 718771;
+ Wed, 08 May 2024 12:09:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0je0=ML=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s4fRt-0004oy-EX
- for xen-devel@lists.xenproject.org; Wed, 08 May 2024 11:27:01 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ <SRS0=ompu=ML=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1s4g6z-00057L-BY
+ for xen-devel@lists.xenproject.org; Wed, 08 May 2024 12:09:29 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2414::600])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e238001f-0d2d-11ef-b4bb-af5377834399;
- Wed, 08 May 2024 13:26:59 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a59c04839caso957236066b.2
- for <xen-devel@lists.xenproject.org>; Wed, 08 May 2024 04:26:59 -0700 (PDT)
-Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- g13-20020a1709063b0d00b00a59a17eb5d2sm5787521ejf.222.2024.05.08.04.26.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 May 2024 04:26:57 -0700 (PDT)
+ id ceb2459d-0d33-11ef-b4bb-af5377834399;
+ Wed, 08 May 2024 14:09:24 +0200 (CEST)
+Received: from SJ0PR03CA0021.namprd03.prod.outlook.com (2603:10b6:a03:33a::26)
+ by MW6PR12MB8960.namprd12.prod.outlook.com (2603:10b6:303:23e::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.42; Wed, 8 May
+ 2024 12:09:20 +0000
+Received: from SJ1PEPF00001CE8.namprd03.prod.outlook.com
+ (2603:10b6:a03:33a:cafe::bd) by SJ0PR03CA0021.outlook.office365.com
+ (2603:10b6:a03:33a::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.42 via Frontend
+ Transport; Wed, 8 May 2024 12:09:19 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ1PEPF00001CE8.mail.protection.outlook.com (10.167.242.24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7544.18 via Frontend Transport; Wed, 8 May 2024 12:09:19 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 8 May
+ 2024 07:09:18 -0500
+Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Wed, 8 May 2024 07:09:17 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,296 +61,376 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e238001f-0d2d-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1715167618; x=1715772418; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+9za8P4EPzVB+2QpoWeyBB/3pcjYoli4eAelV6qAoOM=;
-        b=qhnKDssikiMPAbClzmJF0xaAbBBhToVoBGTVaTz87+0kg8G/0CRpwP7h6jLXoVQwaP
-         nDzjZwWZETgqTEbONM18j6IHb7ncGwqHsfYDHuMlwPWYX8lEAPeo7PaypxdF2hxpoIkI
-         YpMKIGMdTlh3gKr0tMYc0Kird6poGUoB8jmC8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715167618; x=1715772418;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+9za8P4EPzVB+2QpoWeyBB/3pcjYoli4eAelV6qAoOM=;
-        b=l862eFv6rKCTcJNkclWffhWCuH16A7crw/uM7zJY/0jdb6x0aUoK+WHIgF6Ovwoow+
-         MxowC5fA0OnxQ5X+5Z8bgMuDg+aS16uoldiCKdfugJ2lbG1Ixtzn2N0XPkVc7pa87kjZ
-         F+rIvMqHA053pj50N0jZ1teCqxJtQEY6138fP72AuGw76CLyG7Mn7H12/pPJo4AxoRb1
-         qZQ48EUUoF6wvbnEvgrcA9LEFHzOMkJngmGtnrEyobBPyiAMCriFHMewr/DAQOS8n7ro
-         M7B3G//GD4cOA6LYrIRytnfRuTLF2PsXABmFhTB2GfMIa5bEV1BbAtjyDe7vxoddyFmC
-         VEsQ==
-X-Gm-Message-State: AOJu0YwVFrsOaJ4ZGr/ZoQQcVE9M3yILTDb2wf1ackaGXH3IAaz0acqt
-	pSbfngWAqqX02J1K24cu+NXxkkcLbpP2rE9wgwohBvVbPIwZu/kXzseWzzb+d0FoJytgMTrmFMZ
-	l
-X-Google-Smtp-Source: AGHT+IECJsbn5pM4hjExb+nFNlRr5lvugFFZyFGIDU8Jd4fM7lAesXbatc8NcLMBMlYb2Pr8VUOoCw==
-X-Received: by 2002:a17:906:f28c:b0:a59:a0eb:aeb0 with SMTP id a640c23a62f3a-a59fb952bb0mr153520466b.36.1715167617901;
-        Wed, 08 May 2024 04:26:57 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH for-4.19 v2 2/3] xen/x86: enable altp2m at create domain domctl
-Date: Wed,  8 May 2024 13:23:22 +0200
-Message-ID: <20240508112323.38946-3-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240508112323.38946-1-roger.pau@citrix.com>
-References: <20240508112323.38946-1-roger.pau@citrix.com>
+X-Inumbo-ID: ceb2459d-0d33-11ef-b4bb-af5377834399
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BrsNPWbMss67TDAn1mJfgMgD34hAhSZGfWAmHTakd6xxFlLyTggAVzPjJ+l+INXgYM6ut8ZbDBY5R+m1thon8ShZZQhQ2BOnFS9ofRrhxhTad7eb3+Af0xYYa/qXi6knyr+ByqySSA1ZDlDIL9Wmc7qAVrYYl9uWC47oFHKu1wGg7lVZARx8dDudmZ3GFfvlij2jVoE6dtD7b7mGNtE616/gglWAaiidyR+/3eDBBGp6NWiLN+S+olMbf7Bv36MsXh/0gnAYs0dz9qj/x03DHX91NXFOdyeZ1Do5FF/GLZOtXDYn/yKEVn+vR1hGF9E9u5vlgZzlVGFZ+Z9fnqyI6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JQ97iZJtt9Thg0nMoKUUPhZ0X3mcr4cpwmkH/PCWogk=;
+ b=GEn+gd+SeLZdO3m87bo8XUlFM+1/C3Mqt4eo3T3DB9/XSTO5O4X05mHriQDyAb7MDqfL4VsvN1cjrHKi1M7GQzmeho+HxkS9vBC32K3gw5gpRlWIMNdLeL75L/cgMIpVWEal0E7qjiRryr1WZZYKitpRAZNzxsHYqLB+pKVWgD/1KU8NRu7hWeF1XxB7NfM7hLv0Sa4al39zSY1lVP4TTm2Y/K+vdR9h529U27pV/Z4YgbmRExR12JQTOcpUnHb9NpebTCChQ3J4KJkOH8kIsB9v3Xm8Dr+SsNQ7+MwuUGw7V1n14SEEzmOnmzYoC6+QC6m7idYN1QULuXVTYLfxgw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JQ97iZJtt9Thg0nMoKUUPhZ0X3mcr4cpwmkH/PCWogk=;
+ b=es2zWZqUEC79XP0BIrAPUKowIOtx3iJGxSGGRcyZjJqQDKln3I5clD2EgE4RPi7UpgPLsgXv06dehZQ+5xcmxPV54JJRfv+G3Yhsr6/bmFMqtk2dY8eGoYfs1+h5evAhn1dyeqwwuJf8LH1V2LxPe9xpxG387iFwVpaihvZYudw=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <59b02ed2-e543-4bfd-946e-6a82919c582d@amd.com>
+Date: Wed, 8 May 2024 14:09:16 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/7] xen/arm: Parse xen,shared-mem when host phys address
+ is not provided
+To: Luca Fancellu <luca.fancellu@arm.com>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20240423082532.776623-1-luca.fancellu@arm.com>
+ <20240423082532.776623-5-luca.fancellu@arm.com>
+Content-Language: en-US
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <20240423082532.776623-5-luca.fancellu@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB03.amd.com: michal.orzel@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE8:EE_|MW6PR12MB8960:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2ef0010e-17f0-47e0-bad3-08dc6f57b078
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230031|36860700004|376005|1800799015|82310400017;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?KzhaVEljS0VZRjN6dnkyVWlkMTVLN2M1dWVKNnUwcnN3SExYTmUyVHloWXVk?=
+ =?utf-8?B?cnc5ekVRZDZjSHRvckRoaVNJOVg5M2puRHN5d2k0THdacDNWYjBYR0xHN3lq?=
+ =?utf-8?B?K0ZENnY3bDVmNHQrdld5VXVHcUdKSER4TmZaZHk1R3kvK2xiYzZGVWxWWkR3?=
+ =?utf-8?B?RnErcEZpaWo4ell6TkQ5TWh3OEppcFZ4VHRXRjkwN085QlE0d2VCd1RrKzh4?=
+ =?utf-8?B?QjU0eStxU2crMitBRXUxOHRaMmVvMkovYk94OVZMVXRiaDg4OFY5VjBFTGVw?=
+ =?utf-8?B?am1vSlcxTkZBVmM3MDJKQ3dQVDNYME5aS29pK2FnSmluOTZyN0xUQXVOMy9Z?=
+ =?utf-8?B?bzUzRXZITmNLOXo5NThzNXBUVXRSbStYbXJScDd1R1Ftd20zRGloYmtZRGNt?=
+ =?utf-8?B?TWVwRTNicmNsWk5ZRGFMRDVZTlkwVmQxYUlVcHowTkFibmJlV3FEd0RKZUtN?=
+ =?utf-8?B?c2hYV3JpbVNha2RSdjhFT2NQRVMvc3hkMWJlMnJVT0NEa2hvRzJNdnN5Zkli?=
+ =?utf-8?B?TWZCWkVtQXlXaUNWaDBFNWVGQlc5TC9aK1hIdlB6WUFJZjBiK2F4QndjK1lm?=
+ =?utf-8?B?Ti80OG91cVRGOUdvNjFTUk1MSzhmV3pnYi8vaVhyTzBhcFQxYWxiMmNrRGpI?=
+ =?utf-8?B?WFhWZkhnaFN3MWNIY0hqeUtsUUg2a3MwRlJmeDhFYjV2RzVQUnByK0dhT2k2?=
+ =?utf-8?B?U0VIcXdoTDJidElHVzA3cmFzQzZKVmU3cExtYmRFTlAzQ1FYTHRGNEE4Yis4?=
+ =?utf-8?B?VS9qK25iUytuaHlqWm5nQVl1UEhYZWFTOTVZUmU5ZFp0aU5KTmMyVzJJanVG?=
+ =?utf-8?B?ZzM0RXVLTjdUR01wbkZNLzFBN0RaRlFoWnczTzRLWFFxQmhEc0J5MXpiMGYy?=
+ =?utf-8?B?Q2ZmZGZ4SFZ0SVJwY3RhV0JQT1EyL3F1ZFpmejZ0a3U4VWl0MG16LzZyR1ZU?=
+ =?utf-8?B?QWJRY0lNejhkYnJLQUw5c2JTdTlTZXl1VWRQMHVzejBzTGd4ZGhiMDQraVAw?=
+ =?utf-8?B?NVU5UHNncTl4b1Nvdy9jVFZReEZsSTdXL0ptaEZJazkyOGJ4R2d0b29lQ1FL?=
+ =?utf-8?B?SHZJNmdwMmtlNTBRbVNYeVRqdlVabnYrdEQ5RmtKTjN5ZnI3SDBlamJiMFY3?=
+ =?utf-8?B?dUlPZ1FZb09STDA4TC9DYkVucnRRSHI1ekw0VW1aK0lPZlZjRWdBVW9hZDFY?=
+ =?utf-8?B?cFpUc1hTWGFSbXBVVDFPNitqRk95OEh5MFFmbHB4aHd4cExTOXI3K0xHUUo2?=
+ =?utf-8?B?LytkYUZHLzJRc1NpNllTd3ZHSXVGN0Y1eDN0TVRiZHk3OG5DWXFRMVAxRWhL?=
+ =?utf-8?B?cEdaS1MvSkkwMXdkZzRKTFhwSDZXVGlxNTRadno2L3FRc3NTaC9uK1ZPQjZO?=
+ =?utf-8?B?K2d6N09ETTBFcTdlUkZyRmdza2RCSUJWUXcrcUJtQ1VOY3M2UnJpem8zL3F5?=
+ =?utf-8?B?NWlOczE0d3d0WXBkOTdVU01RNGovZ0QwcVFnaERUVEpsemRzTlFEcUpwRUlm?=
+ =?utf-8?B?YzkrWlpVQkttelYyZVZPOHJxY1Z0aWFGRGFyWFVXRVlHbHpRS2JmQ0R5cFk3?=
+ =?utf-8?B?aHY0UUlKRlg5QWZ4UXVQcllxTCtJQWgzWU41eWMzS3U2bVdRVVlLaUNLb2hh?=
+ =?utf-8?B?SitVaS9NaWM3bUpBSlZHL3ZXV05HYzNUUlExTyt3SFdHUllqL2xGcmlJQkh1?=
+ =?utf-8?B?VTdGcXRjWmprMHR1Vlc5Qk94MjNlMGNRUkdlTC9aWEhhSmVlL0RTblljK1Nj?=
+ =?utf-8?B?LzlLOWozeVgvS3lWaGw0NzZHWGIzZ0x6Y21GcWZHMUJRRmNPa1hROXlVV1FY?=
+ =?utf-8?B?TVRTeDU1VEpMc2JZd2h3K0EvYXpYUnpWdjM4dEUrbXdFNUQzSjUwYVd6Tjhz?=
+ =?utf-8?Q?aERGeP9AV1QAE?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(376005)(1800799015)(82310400017);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2024 12:09:19.2057
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ef0010e-17f0-47e0-bad3-08dc6f57b078
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF00001CE8.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8960
 
-Enabling it using an HVM param is fragile, and complicates the logic when
-deciding whether options that interact with altp2m can also be enabled.
+Hi Luca,
 
-Leave the HVM param value for consumption by the guest, but prevent it from
-being set.  Enabling is now done using the misc_flags field in
-xen_arch_domainconfig.
+On 23/04/2024 10:25, Luca Fancellu wrote:
+> 
+> 
+> Handle the parsing of the 'xen,shared-mem' property when the host physical
+> address is not provided, this commit is introducing the logic to parse it,
+> but the functionality is still not implemented and will be part of future
+> commits.
+> 
+> Rework the logic inside process_shm_node to check the shm_id before doing
+> the other checks, because it ease the logic itself, add more comment on
+> the logic.
+> Now when the host physical address is not provided, the value
+> INVALID_PADDR is chosen to signal this condition and it is stored as
+> start of the bank, due to that change also early_print_info_shmem and
+> init_sharedmem_pages are changed, to don't handle banks with start equal
+> to INVALID_PADDR.
+> 
+> Another change is done inside meminfo_overlap_check, to skip banks that
+> are starting with the start address INVALID_PADDR, that function is used
+> to check banks from reserved memory and ACPI and it's unlikely for these
+also from shmem
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v1:
- - New in this version.
----
- tools/libs/light/libxl_x86.c      | 43 +++++++++++++++++++++----------
- xen/arch/x86/domain.c             | 25 +++++++++++++++++-
- xen/arch/x86/hvm/hvm.c            | 15 ++++++++++-
- xen/include/public/arch-x86/xen.h | 18 +++++++++++++
- xen/include/public/hvm/params.h   |  9 ++-----
- 5 files changed, 87 insertions(+), 23 deletions(-)
+> bank to have the start address as INVALID_PADDR. The change holds
+> because of this consideration.
+On arm64 and LPAE arm32 we don't have this problem. In theory we could have a bank
+starting at INVALID_PADDR if PA range was 32bit but as the comment above the function states,
+wrapping around is not handled. You might want to use it as a justification to be clear.
 
-diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
-index a50ec37eb3eb..86ee8132536c 100644
---- a/tools/libs/light/libxl_x86.c
-+++ b/tools/libs/light/libxl_x86.c
-@@ -6,8 +6,21 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-                                       libxl_domain_config *d_config,
-                                       struct xen_domctl_createdomain *config)
- {
-+    unsigned int altp2m = d_config->b_info.altp2m;
-+
-     switch(d_config->c_info.type) {
-     case LIBXL_DOMAIN_TYPE_HVM:
-+        /*
-+         * The config parameter "altp2m" replaces the parameter "altp2mhvm".
-+         * For legacy reasons, both parameters are accepted on x86 HVM guests.
-+         *
-+         * If the legacy field info->u.hvm.altp2m is set, activate altp2m.
-+         * Otherwise set altp2m based on the field info->altp2m.
-+         */
-+        if (altp2m == LIBXL_ALTP2M_MODE_DISABLED &&
-+            libxl_defbool_val(d_config->b_info.u.hvm.altp2m))
-+            altp2m = libxl_defbool_val(d_config->b_info.u.hvm.altp2m);
-+
-         config->arch.emulation_flags = (XEN_X86_EMU_ALL & ~XEN_X86_EMU_VPCI);
-         if (!libxl_defbool_val(d_config->b_info.u.hvm.pirq))
-             config->arch.emulation_flags &= ~XEN_X86_EMU_USE_PIRQ;
-@@ -26,6 +39,22 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-     if (libxl_defbool_val(d_config->b_info.arch_x86.msr_relaxed))
-         config->arch.misc_flags |= XEN_X86_MSR_RELAXED;
- 
-+    if (d_config->c_info.type != LIBXL_DOMAIN_TYPE_PV) {
-+        switch (altp2m) {
-+        case LIBXL_ALTP2M_MODE_MIXED:
-+            config->arch.misc_flags |= XEN_X86_ALTP2M_MIXED;
-+            break;
-+
-+        case LIBXL_ALTP2M_MODE_EXTERNAL:
-+            config->arch.misc_flags |= XEN_X86_ALTP2M_EXT;
-+            break;
-+
-+        case LIBXL_ALTP2M_MODE_LIMITED:
-+            config->arch.misc_flags |= XEN_X86_ALTP2M_LIMITED;
-+            break;
-+        }
-+    }
-+
-     return 0;
- }
- 
-@@ -407,19 +436,9 @@ static int hvm_set_conf_params(libxl__gc *gc, uint32_t domid,
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-     xc_interface *xch = ctx->xch;
-     int ret = ERROR_FAIL;
--    unsigned int altp2m = info->altp2m;
- 
-     switch(info->type) {
-     case LIBXL_DOMAIN_TYPE_HVM:
--        /* The config parameter "altp2m" replaces the parameter "altp2mhvm". For
--         * legacy reasons, both parameters are accepted on x86 HVM guests.
--         *
--         * If the legacy field info->u.hvm.altp2m is set, activate altp2m.
--         * Otherwise set altp2m based on the field info->altp2m. */
--        if (info->altp2m == LIBXL_ALTP2M_MODE_DISABLED &&
--            libxl_defbool_val(info->u.hvm.altp2m))
--            altp2m = libxl_defbool_val(info->u.hvm.altp2m);
--
-         if (xc_hvm_param_set(xch, domid, HVM_PARAM_HPET_ENABLED,
-                              libxl_defbool_val(info->u.hvm.hpet))) {
-             LOG(ERROR, "Couldn't set HVM_PARAM_HPET_ENABLED");
-@@ -444,10 +463,6 @@ static int hvm_set_conf_params(libxl__gc *gc, uint32_t domid,
-             LOG(ERROR, "Couldn't set HVM_PARAM_TIMER_MODE");
-             goto out;
-         }
--        if (xc_hvm_param_set(xch, domid, HVM_PARAM_ALTP2M, altp2m)) {
--            LOG(ERROR, "Couldn't set HVM_PARAM_ALTP2M");
--            goto out;
--        }
-         break;
- 
-     default:
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 20e83cf38bbd..dff790060605 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -637,6 +637,9 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-     bool hap = config->flags & XEN_DOMCTL_CDF_hap;
-     bool nested_virt = config->flags & XEN_DOMCTL_CDF_nested_virt;
-     unsigned int max_vcpus;
-+    unsigned int altp2m = config->arch.misc_flags & (XEN_X86_ALTP2M_MIXED |
-+                                                     XEN_X86_ALTP2M_EXT |
-+                                                     XEN_X86_ALTP2M_LIMITED);
- 
-     if ( hvm ? !hvm_enabled : !IS_ENABLED(CONFIG_PV) )
-     {
-@@ -708,13 +711,33 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-         }
-     }
- 
--    if ( config->arch.misc_flags & ~XEN_X86_MSR_RELAXED )
-+    if ( config->arch.misc_flags & ~XEN_X86_MISC_FLAGS_ALL )
-     {
-         dprintk(XENLOG_INFO, "Invalid arch misc flags %#x\n",
-                 config->arch.misc_flags);
-         return -EINVAL;
-     }
- 
-+    if ( altp2m && (altp2m & (altp2m - 1)) )
-+    {
-+        dprintk(XENLOG_INFO, "Multiple altp2m options selected in flags: %#x\n",
-+                config->flags);
-+        return -EINVAL;
-+    }
-+
-+    if ( altp2m && nested_virt )
-+    {
-+        dprintk(XENLOG_INFO,
-+                "Nested virt and altp2m are mutually incompatible\n");
-+        return -EINVAL;
-+    }
-+
-+    if ( altp2m && !hap )
-+    {
-+        dprintk(XENLOG_INFO, "altp2m requires HAP\n");
-+        return -EINVAL;
-+    }
-+
-     return 0;
- }
- 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 0ce45b177cf4..f3e1b9364588 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -659,6 +659,14 @@ int hvm_domain_initialise(struct domain *d,
- 
-     d->arch.hvm.params[HVM_PARAM_TRIPLE_FAULT_REASON] = SHUTDOWN_reboot;
- 
-+    /* Set altp2m based on domctl flags. */
-+    if ( config->arch.misc_flags & XEN_X86_ALTP2M_MIXED )
-+        d->arch.hvm.params[HVM_PARAM_ALTP2M] = XEN_ALTP2M_mixed;
-+    else if ( config->arch.misc_flags & XEN_X86_ALTP2M_EXT )
-+        d->arch.hvm.params[HVM_PARAM_ALTP2M] = XEN_ALTP2M_external;
-+    else if ( config->arch.misc_flags & XEN_X86_ALTP2M_LIMITED )
-+        d->arch.hvm.params[HVM_PARAM_ALTP2M] = XEN_ALTP2M_limited;
-+
-     vpic_init(d);
- 
-     rc = vioapic_init(d);
-@@ -4163,6 +4171,12 @@ static int hvm_allow_set_param(struct domain *d,
-     case HVM_PARAM_CONSOLE_EVTCHN:
-     case HVM_PARAM_X87_FIP_WIDTH:
-         break;
-+
-+    /* The following parameters are read-only. */
-+    case HVM_PARAM_ALTP2M:
-+        rc = -EEXIST;
-+        break;
-+
-     /* The following parameters are deprecated. */
-     case HVM_PARAM_PAE_ENABLED:
-     case HVM_PARAM_DM_DOMAIN:
-@@ -4204,7 +4218,6 @@ static int hvm_allow_set_param(struct domain *d,
-     case HVM_PARAM_BUFIOREQ_PFN:
-     case HVM_PARAM_IOREQ_SERVER_PFN:
-     case HVM_PARAM_NR_IOREQ_SERVER_PAGES:
--    case HVM_PARAM_ALTP2M:
-     case HVM_PARAM_MCA_CAP:
-         if ( value != 0 && new_value != value )
-             rc = -EEXIST;
-diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
-index a9a87d9b50de..bc444e7744a5 100644
---- a/xen/include/public/arch-x86/xen.h
-+++ b/xen/include/public/arch-x86/xen.h
-@@ -300,6 +300,24 @@ struct xen_arch_domainconfig {
-  * doesn't allow the guest to read or write to the underlying MSR.
-  */
- #define XEN_X86_MSR_RELAXED (1u << 0)
-+
-+/* altp2m options.  Only one can be set.
-+ *
-+ * Note that 'mixed' mode has not been evaluated for safety from a
-+ * security perspective.  Before using this mode in a
-+ * security-critical environment, each subop should be evaluated for
-+ * safety, with unsafe subops blacklisted in XSM.
-+ *
-+ * Enable altp2m mixed mode.
-+ */
-+#define XEN_X86_ALTP2M_MIXED   (1U << 1)
-+/* Enable altp2m external mode. */
-+#define XEN_X86_ALTP2M_EXT     (1U << 2)
-+/* Enable altp2m limited mode. */
-+#define XEN_X86_ALTP2M_LIMITED (1U << 3)
-+
-+#define XEN_X86_MISC_FLAGS_ALL (XEN_X86_MSR_RELAXED | XEN_X86_ALTP2M_MIXED | \
-+                                XEN_X86_ALTP2M_EXT | XEN_X86_ALTP2M_LIMITED)
-     uint32_t misc_flags;
- };
- 
-diff --git a/xen/include/public/hvm/params.h b/xen/include/public/hvm/params.h
-index a22b4ed45d2e..99c40b4287f1 100644
---- a/xen/include/public/hvm/params.h
-+++ b/xen/include/public/hvm/params.h
-@@ -246,16 +246,11 @@
- #define HVM_PARAM_VM_GENERATION_ID_ADDR 34
- 
- /*
-- * Set mode for altp2m:
-- *  disabled: don't activate altp2m (default)
-+ * Get mode for altp2m:
-+ *  disabled: altp2m not active (default)
-  *  mixed: allow access to all altp2m ops for both in-guest and external tools
-  *  external: allow access to external privileged tools only
-  *  limited: guest only has limited access (ie. control VMFUNC and #VE)
-- *
-- * Note that 'mixed' mode has not been evaluated for safety from a
-- * security perspective.  Before using this mode in a
-- * security-critical environment, each subop should be evaluated for
-- * safety, with unsafe subops blacklisted in XSM.
-  */
- #define HVM_PARAM_ALTP2M       35
- #define XEN_ALTP2M_disabled      0
--- 
-2.44.0
+> 
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+> ---
+>  xen/arch/arm/setup.c        |   3 +-
+>  xen/arch/arm/static-shmem.c | 129 +++++++++++++++++++++++++-----------
+>  2 files changed, 93 insertions(+), 39 deletions(-)
+> 
+> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+> index d242674381d4..f15d40a85a5f 100644
+> --- a/xen/arch/arm/setup.c
+> +++ b/xen/arch/arm/setup.c
+> @@ -297,7 +297,8 @@ static bool __init meminfo_overlap_check(const struct membanks *mem,
+>          bank_start = mem->bank[i].start;
+>          bank_end = bank_start + mem->bank[i].size;
+> 
+> -        if ( region_end <= bank_start || region_start >= bank_end )
+> +        if ( INVALID_PADDR == bank_start || region_end <= bank_start ||
+> +             region_start >= bank_end )
+>              continue;
+>          else
+>          {
+> diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+> index 24e40495a481..1c03bb7f1882 100644
+> --- a/xen/arch/arm/static-shmem.c
+> +++ b/xen/arch/arm/static-shmem.c
+> @@ -264,6 +264,12 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+>          pbase = boot_shm_bank->start;
+>          psize = boot_shm_bank->size;
+> 
+> +        if ( INVALID_PADDR == pbase )
+> +        {
+> +            printk("%pd: host physical address must be chosen by users at the moment.", d);
+The dot at the end is not needed.
+
+> +            return -EINVAL;
+> +        }
+> +
+>          /*
+>           * xen,shared-mem = <pbase, gbase, size>;
+>           * TODO: pbase is optional.
+> @@ -382,7 +388,8 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+>  {
+>      const struct fdt_property *prop, *prop_id, *prop_role;
+>      const __be32 *cell;
+> -    paddr_t paddr, gaddr, size, end;
+> +    paddr_t paddr = INVALID_PADDR;
+> +    paddr_t gaddr, size, end;
+>      struct membanks *mem = bootinfo_get_shmem();
+>      struct shmem_membank_extra *shmem_extra = bootinfo_get_shmem_extra();
+>      unsigned int i;
+> @@ -437,24 +444,37 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+>      if ( !prop )
+>          return -ENOENT;
+> 
+> +    cell = (const __be32 *)prop->data;
+>      if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
+>      {
+> -        if ( len == dt_cells_to_size(size_cells + address_cells) )
+> -            printk("fdt: host physical address must be chosen by users at the moment.\n");
+> -
+> -        printk("fdt: invalid `xen,shared-mem` property.\n");
+> -        return -EINVAL;
+> +        if ( len == dt_cells_to_size(address_cells + size_cells) )
+> +            device_tree_get_reg(&cell, address_cells, size_cells, &gaddr,
+> +                                &size);
+> +        else
+> +        {
+> +            printk("fdt: invalid `xen,shared-mem` property.\n");
+> +            return -EINVAL;
+> +        }
+>      }
+> +    else
+> +    {
+> +        device_tree_get_reg(&cell, address_cells, address_cells, &paddr,
+> +                            &gaddr);
+> +        size = dt_next_cell(size_cells, &cell);
+> 
+> -    cell = (const __be32 *)prop->data;
+> -    device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
+> -    size = dt_next_cell(size_cells, &cell);
+> +        if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
+> +        {
+> +            printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
+> +                paddr);
+> +            return -EINVAL;
+> +        }
+> 
+> -    if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
+> -    {
+> -        printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
+> -               paddr);
+> -        return -EINVAL;
+> +        end = paddr + size;
+> +        if ( end <= paddr )
+> +        {
+> +            printk("fdt: static shared memory region %s overflow\n", shm_id);
+> +            return -EINVAL;
+> +        }
+>      }
+> 
+>      if ( !IS_ALIGNED(gaddr, PAGE_SIZE) )
+> @@ -476,41 +496,69 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+>          return -EINVAL;
+>      }
+> 
+> -    end = paddr + size;
+> -    if ( end <= paddr )
+> -    {
+> -        printk("fdt: static shared memory region %s overflow\n", shm_id);
+> -        return -EINVAL;
+> -    }
+> -
+>      for ( i = 0; i < mem->nr_banks; i++ )
+>      {
+>          /*
+>           * Meet the following check:
+> +         * when host address is provided:
+- when would read better
+
+>           * 1) The shm ID matches and the region exactly match
+>           * 2) The shm ID doesn't match and the region doesn't overlap
+>           * with an existing one
+> +         * when host address is not provided:
+> +         * 1) The shm ID matches and the region size exactly match
+>           */
+> -        if ( paddr == mem->bank[i].start && size == mem->bank[i].size )
+> +        bool paddr_assigned = INVALID_PADDR == paddr;
+parenthesis around INVALID_PADDR == paddr
+
+> +        bool shm_id_match = strncmp(shm_id, shmem_extra[i].shm_id,
+> +                                    MAX_SHM_ID_LENGTH) == 0;
+why not if ( strncmp... given no other use of this variable other than the one below?
+
+> +        if ( shm_id_match )
+>          {
+> -            if ( strncmp(shm_id, shmem_extra[i].shm_id,
+> -                         MAX_SHM_ID_LENGTH) == 0  )
+> +            /*
+> +             * Regions have same shm_id (cases):
+> +             * 1) physical host address is supplied:
+> +             *    - OK:   paddr is equal and size is equal (same region)
+> +             *    - Fail: paddr doesn't match or size doesn't match (there
+> +             *            cannot exists two shmem regions with same shm_id)
+> +             * 2) physical host address is NOT supplied:
+> +             *    - OK:   size is equal (same region)
+> +             *    - Fail: size is not equal (same shm_id must identify only one
+> +             *            region, there can't be two different regions with same
+> +             *            shm_id)
+> +             */
+> +            bool start_match = paddr_assigned ? (paddr == mem->bank[i].start) :
+> +                                                true;
+> +
+> +            if ( start_match && size == mem->bank[i].size )
+>                  break;
+>              else
+>              {
+> -                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
+> +                printk("fdt: different shared memory region could not share the same shm ID %s\n",
+>                         shm_id);
+>                  return -EINVAL;
+>              }
+>          }
+> -        else if ( strncmp(shm_id, shmem_extra[i].shm_id,
+> -                          MAX_SHM_ID_LENGTH) != 0 )
+> -            continue;
+>          else
+>          {
+There is no need for this else and entire block given that the block within if either calls break or return
+
+> -            printk("fdt: different shared memory region could not share the same shm ID %s\n",
+> -                   shm_id);
+> -            return -EINVAL;
+> +            /*
+> +             * Regions have different shm_id (cases):
+> +             * 1) physical host address is supplied:
+> +             *    - OK:   paddr different, or size different (case where paddr
+> +             *            is equal but psize is different are wrong, but they
+> +             *            are handled later when checking for overlapping)
+> +             *    - Fail: paddr equal and size equal (the same region can't be
+> +             *            identified with different shm_id)
+> +             * 2) physical host address is NOT supplied:
+> +             *    - OK:   Both have different shm_id so even with same size they
+> +             *            can exists
+> +             */
+> +            if ( !paddr_assigned || paddr != mem->bank[i].start ||
+> +                 size != mem->bank[i].size )
+> +                continue;
+> +            else
+> +            {
+> +                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
+> +                       shm_id);
+> +                return -EINVAL;
+> +            }
+>          }
+>      }
+> 
+> @@ -518,7 +566,8 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+>      {
+>          if (i < mem->max_banks)
+>          {
+> -            if ( check_reserved_regions_overlap(paddr, size) )
+> +            if ( (paddr != INVALID_PADDR) &&
+> +                 check_reserved_regions_overlap(paddr, size) )
+>                  return -EINVAL;
+> 
+>              /* Static shared memory shall be reserved from any other use. */
+> @@ -588,13 +637,16 @@ void __init early_print_info_shmem(void)
+>  {
+>      const struct membanks *shmem = bootinfo_get_shmem();
+>      unsigned int bank;
+> +    unsigned int printed = 0;
+> 
+>      for ( bank = 0; bank < shmem->nr_banks; bank++ )
+> -    {
+> -        printk(" SHMEM[%u]: %"PRIpaddr" - %"PRIpaddr"\n", bank,
+> -               shmem->bank[bank].start,
+> -               shmem->bank[bank].start + shmem->bank[bank].size - 1);
+> -    }
+> +        if ( shmem->bank[bank].start != INVALID_PADDR )
+> +        {
+> +            printk(" SHMEM[%u]: %"PRIpaddr" - %"PRIpaddr"\n", printed,
+> +                shmem->bank[bank].start,
+> +                shmem->bank[bank].start + shmem->bank[bank].size - 1);
+> +            printed++;
+NIT: you could initialize and increment it as part of the for loop
+
+> +        }
+>  }
+> 
+>  void __init init_sharedmem_pages(void)
+> @@ -603,7 +655,8 @@ void __init init_sharedmem_pages(void)
+>      unsigned int bank;
+> 
+>      for ( bank = 0 ; bank < shmem->nr_banks; bank++ )
+> -        init_staticmem_bank(&shmem->bank[bank]);
+> +        if ( shmem->bank[bank].start != INVALID_PADDR )
+> +            init_staticmem_bank(&shmem->bank[bank]);
+>  }
+> 
+>  int __init remove_shm_from_rangeset(const struct kernel_info *kinfo,
+> --
+> 2.34.1
+> 
+
+~Michal
 
 
