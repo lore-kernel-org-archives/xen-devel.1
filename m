@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71983C25B79
-	for <xen-devel@archiver.kernel.org>; Fri, 10 May 2024 03:55:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.719467.1122256 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9487DC25B5F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 May 2024 03:55:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.719464.1122226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s5HM3-0007xb-O6; Fri, 10 May 2024 03:55:31 +0000
+	id 1s5HLz-0007DH-Sh; Fri, 10 May 2024 03:55:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 719467.1122256; Fri, 10 May 2024 03:55:31 +0000
+Received: by outflank-mailman (output) from mailman id 719464.1122226; Fri, 10 May 2024 03:55:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s5HM3-0007xP-K6; Fri, 10 May 2024 03:55:31 +0000
-Received: by outflank-mailman (input) for mailman id 719467;
- Fri, 10 May 2024 03:55:30 +0000
+	id 1s5HLz-0007DA-Oy; Fri, 10 May 2024 03:55:27 +0000
+Received: by outflank-mailman (input) for mailman id 719464;
+ Fri, 10 May 2024 03:55:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=XugN=MN=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1s5HM2-0006yN-Cb
- for xen-devel@lists.xenproject.org; Fri, 10 May 2024 03:55:30 +0000
-Received: from wfhigh5-smtp.messagingengine.com
- (wfhigh5-smtp.messagingengine.com [64.147.123.156])
+ id 1s5HLy-0006yN-8r
+ for xen-devel@lists.xenproject.org; Fri, 10 May 2024 03:55:26 +0000
+Received: from wfout3-smtp.messagingengine.com
+ (wfout3-smtp.messagingengine.com [64.147.123.146])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 22db5715-0e81-11ef-b4bb-af5377834399;
- Fri, 10 May 2024 05:55:28 +0200 (CEST)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailfhigh.west.internal (Postfix) with ESMTP id 6113B180012B;
- Thu,  9 May 2024 23:55:26 -0400 (EDT)
+ id 20539327-0e81-11ef-b4bb-af5377834399;
+ Fri, 10 May 2024 05:55:23 +0200 (CEST)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfout.west.internal (Postfix) with ESMTP id 0D6CA1C000F6;
+ Thu,  9 May 2024 23:55:21 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute7.internal (MEProxy); Thu, 09 May 2024 23:55:26 -0400
+ by compute6.internal (MEProxy); Thu, 09 May 2024 23:55:22 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 9 May 2024 23:55:24 -0400 (EDT)
+ 9 May 2024 23:55:20 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,59 +46,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22db5715-0e81-11ef-b4bb-af5377834399
+X-Inumbo-ID: 20539327-0e81-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1715313326; x=1715399726; bh=Uac2qx6Vbh
-	R5d6LSLBww4OHHHB4xRISCtst2qrKvDik=; b=w2D+lAYsyqL5Yt1/KjA/K7+087
-	GPEhsECSdBsTWU+T6243GImObLIxzRLcMOXQQ/B8Nu3PA5/YO+WVaAEYuVhIZpGI
-	oz03idPiaded75Qoq4amyWkIVRxK33kgWehEvT5iqkJRLk3N89p35dl8zxclygfm
-	HwSJMejJ5mZz/d2GM11n5kKZPmf8MY8q9THz2tRiA5oenJL32OVxtG41Lw0QvByO
-	wIopligZP5mqgcuLKe2llvcBdWQi9lSjRSZlcOLZH33vzNu9PZrjpg+K6MS+/5DV
-	1NjsW2ZvA9qHgxmWkb+Gd+ikFgEMuE5DzwnxpPtRCNJ3BysWdDcjl1SrDALw==
+	:subject:to:to; s=fm3; t=1715313321; x=1715399721; bh=ACyP2w5iOq
+	1oYIJ7NbzixfPI/5xHvfYdC3cDB7RY4rE=; b=ZhtWLV2P0ka6pWzFXQar6Ja25N
+	I8aE2yjzrwm2rnF9QfPW8DQyCRfp0eQxRFGfZVXJaExNMPzSeOqof4UsHXf71+Ua
+	phU42xLaQu++LzXLvbkx/ePMjyNnobqy3USIXpWUZ2gVd4u4GhTOxfPKPWyNqMIl
+	GEn2MZjB9q0q7yqZkE0pCtr1Pg6H8JzOypwfIxc4gHt3vsPyDYu+HItcNYnCwhVl
+	8TL2Bn2F+Lpvp54wLc7+jwouqWbDn9Wmq+xXR/bygUDP3qkt+AP4IiCO+tZ6nYyd
+	qCQ2GB0541+xtEV3e6YoS+fA2BcBb2XOT7wq1MLnipKefEZ0zppW6UeCROdw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715313326; x=
-	1715399726; bh=Uac2qx6VbhR5d6LSLBww4OHHHB4xRISCtst2qrKvDik=; b=J
-	YxxpGxc/MIMaxzkLte1Vm9jls+CbjD2naXZS9tjilKFNpa4CCX3Oo1mBueodpsjt
-	UpmbGl5nMrpyPOLE+A4R6807/CURiamk117zOza2c8nsH7DfziTrwuXZbAL+XKtn
-	E84YZGgeckPlYV4Xs10aVNYYKsal6AJN8KpSJ1rrUVRcVxWZssB73scJhhKdfTJi
-	BxJAls+C3CPymQ1+cknSd7egKW9rC0TZYMPwzzVmOZgcBGM+iAIjKhXAsNpwuxPJ
-	bYC7fsVkjxajJ+GYhaoHIc9v/YnLXLIxprgHm0qH1OpSa3TjuB2ZYFQbHviuvrS2
-	+tsn/LBNY6RdldMfQ2H3g==
-X-ME-Sender: <xms:rZo9ZtCvOQSxi4CRoMRRWyg4CfzoXvAgflmpAx9x8G9kt0P-T_Plzg>
-    <xme:rZo9ZrjXOlxb3RoZThYzym255HIH83xo6LF65rgZ6_ny23KoXaO0_0C0f4s652q9V
-    PrwMw0tiDzQfQ>
-X-ME-Received: <xmr:rZo9ZomB3Yefn2PPJVhrcy-LrIUQubD1Ct-52pAyxM65-vofryMQCdh9IiiDoEbfLyVh5lSqCAo37naIIpZVFEz6bro0gNymA0j6zL4658ggUqLiEk0>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715313321; x=
+	1715399721; bh=ACyP2w5iOq1oYIJ7NbzixfPI/5xHvfYdC3cDB7RY4rE=; b=k
+	fXBhdGpv2EahviQsFjLNyISaKyOrVVNdnMsqjOm4nX6/ZdqFsR8S0fSnwOLNKOZM
+	t8CejMYEh8zyF+Pr8prWhddDPu0PHxRfh59aBsGwK8um99xeHjnoab8s1rwBn2RN
+	akcF8xJ3bq1f36zhLO/XMuaoZBy5kLLImEDE2/xd5gQ+gozDmPcboVJwxksgquxS
+	ZPjLqj0qKdwJDe2sB/LiOPf38v6K7Y8ObBcc3s34qnUS19NtleUEoF9jzkcR4a+o
+	Tl6GZ1lh+8WQTlEXoWzwjynpzu+5rOAVTd/MnZUCns9vzmXO0c3p99sCvdm7e4QK
+	/cKJoxxdLTZ9/JjbZnvYQ==
+X-ME-Sender: <xms:qZo9ZoZ-hSBpmCsyPWLh_0MmEBYiu03pWuKK2XglFPLHhP-sFdHxIQ>
+    <xme:qZo9ZjZfAeicguXXRnOQVRYxHr7wzcNhCL1-KE1P_HN_92IHpK-6GI0BmgDOs9fQv
+    qrrZVTmC72isA>
+X-ME-Received: <xmr:qZo9Zi9mSJWobilgRThEQa__HosIzrAcklUFddhUYFFiU86L5UL2hz-0XCu9--jd0i0D57ia7-0dDUlEkdxAMEJYCroxtyWQfQbUl2_EXFBakeQG_eM>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdefhedgudefucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
     vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
-    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeff
-    iedtgeevffetledvgefhhfevgffhfeekleehueejjeegvddvgfffjeeutddvleenucffoh
-    hmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
-    rghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhngh
-    hslhgrsgdrtghomh
-X-ME-Proxy: <xmx:rZo9Znyp4FhIS8fm9Hvba_amqn864PoFElIJ1yD90RyBILCMuOw6yA>
-    <xmx:rZo9ZiRWgbJQqPOu8i7Jx58MoGUT6TnKLB_DXszcBFpqIZtQop8yOw>
-    <xmx:rZo9ZqahjFZJj0QXUpb-8Zn4M6zqbyf79eCCAxg6vmol3yZcwa7FEQ>
-    <xmx:rZo9ZjSJwZ49puO4IVArPRa7eWZRLO2SYfQ2FRQ7zxzhnUV9Q1Krdg>
-    <xmx:rpo9ZgdWLd1x-75kyQW9RGaTg0wrPpJfbBdI8mrYvnuDgjyAlB1UQwUG>
+    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefh
+    iefhgfehgfekteeigfdtiedvgfevhffhfedvudeltedvgfegtdekteeffeegheenucffoh
+    hmrghinhepmhhsihigthgslhgplhhishhtrdhnvgigthenucevlhhushhtvghrufhiiigv
+    pedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisg
+    hlvghthhhinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:qZo9Zioo2dV-TOp_6gkP2xBuZ5q8z_FkuuhC8M-Bbgpvks9qZRoxUw>
+    <xmx:qZo9Zjqah9ZSmpRjFVOoNxsQWcdySEjqNWldPcnyaE41aFj2zdM1Mw>
+    <xmx:qZo9ZgRjqyYBtDTpPszO5UxNXnso1OG5OGDGp8ITn55Ck2Cc6Cag2g>
+    <xmx:qZo9ZjpSPKS1B4SioQPdhj8eI_Bzf0EEELmkCT_lglb_LPlEX3VsRg>
+    <xmx:qZo9ZkkuLOBA52Ut98IRkjXLdTwuwi5N6uTGcP8NzYCO-ou3eVyySfxK>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v8 4/6] automation: switch to a wifi card on ADL system
-Date: Fri, 10 May 2024 05:53:24 +0200
-Message-ID: <ac5f7b07e47edf6f14d50935d7fd01fdd6a6e900.1715313192.git-series.marmarek@invisiblethingslab.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v8 2/6] x86/hvm: Allow access to registers on the same page as MSI-X table
+Date: Fri, 10 May 2024 05:53:22 +0200
+Message-ID: <fbe01c945d75409406ac0b02bc17d44f57a39ccf.1715313192.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <cover.33fb4385b7dd6c53bda4acf0a9e91748b3d7b1f7.1715313192.git-series.marmarek@invisiblethingslab.com>
 References: <cover.33fb4385b7dd6c53bda4acf0a9e91748b3d7b1f7.1715313192.git-series.marmarek@invisiblethingslab.com>
@@ -106,98 +107,465 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Switch to a wifi card that has registers on a MSI-X page. This tests the
-"x86/hvm: Allow writes to registers on the same page as MSI-X table"
-feature. Switch it only for HVM test, because MSI-X adjacent write is
-not supported on PV.
+Some devices (notably Intel Wifi 6 AX210 card) keep auxiliary registers
+on the same page as MSI-X table. Device model (especially one in
+stubdomain) cannot really handle those, as direct writes to that page is
+refused (page is on the mmio_ro_ranges list). Instead, extend
+msixtbl_mmio_ops to handle such accesses too.
 
-This requires also including drivers and firmware in system for tests.
-Remove firmware unrelated to the test, to not increase initrd size too
-much (all firmware takes over 100MB compressed).
-And finally adjusts test script to handle not only eth0 as a test device,
-but also wlan0 and connect it to the wifi network.
+Doing this, requires correlating read/write location with guest
+MSI-X table address. Since QEMU doesn't map MSI-X table to the guest,
+it requires msixtbl_entry->gtable, which is HVM-only. Similar feature
+for PV would need to be done separately.
+
+This will be also used to read Pending Bit Array, if it lives on the same
+page, making QEMU not needing /dev/mem access at all (especially helpful
+with lockdown enabled in dom0). If PBA lives on another page, QEMU will
+map it to the guest directly.
+If PBA lives on the same page, discard writes and log a message.
+Technically, writes outside of PBA could be allowed, but at this moment
+the precise location of PBA isn't saved, and also no known device abuses
+the spec in this way (at least yet).
+
+To access those registers, msixtbl_mmio_ops need the relevant page
+mapped. MSI handling already has infrastructure for that, using fixmap,
+so try to map first/last page of the MSI-X table (if necessary) and save
+their fixmap indexes. Note that msix_get_fixmap() does reference
+counting and reuses existing mapping, so just call it directly, even if
+the page was mapped before. Also, it uses a specific range of fixmap
+indexes which doesn't include 0, so use 0 as default ("not mapped")
+value - which simplifies code a bit.
+
+Based on assumption that all MSI-X page accesses are handled by Xen, do
+not forward adjacent accesses to other hypothetical ioreq servers, even
+if the access wasn't handled for some reason (failure to map pages etc).
+Relevant places log a message about that already.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-This needs two new gitlab variables: WIFI_HW2_SSID and WIFI_HW2_PSK. I'll
-provide them in private.
-
-This change requires rebuilding test containers.
-
-This can be applied only after QEMU change is committed. Otherwise the
-test will fail.
+Changes in v8:
+- rename adjacent_handle to get_adjacent_idx
+- put SBDF at the start of error messages
+- use 0 for ADJACENT_DONT_HANDLE (it's FIX_RESERVED)
+- merge conditions in msixtbl_range into one "if"
+- add assert for address alignment
+- change back to setting pval to ~0UL at the start of adjacent_read
+Changes in v7:
+- simplify logic based on assumption that all access to MSI-X pages are
+  handled by Xen (Roger)
+- move calling adjacent_handle() into adjacent_{read,write}() (Roger)
+- move range check into msixtbl_addr_to_desc() (Roger)
+- fix off-by-one when initializing adj_access_idx[ADJ_IDX_LAST] (Roger)
+- no longer distinguish between unhandled write due to PBA nearby and
+  other reasons
+- add missing break after ASSERT_UNREACHABLE (Jan)
+Changes in v6:
+- use MSIX_CHECK_WARN macro
+- extend assert on fixmap_idx
+- add break in default label, after ASSERT_UNREACHABLE(), and move
+  setting default there
+- style fixes
+Changes in v5:
+- style fixes
+- include GCC version in the commit message
+- warn only once (per domain, per device) about failed adjacent access
+Changes in v4:
+- drop same_page parameter of msixtbl_find_entry(), distinguish two
+  cases in relevant callers
+- rename adj_access_table_idx to adj_access_idx
+- code style fixes
+- drop alignment check in adjacent_{read,write}() - all callers already
+  have it earlier
+- delay mapping first/last MSI-X pages until preparing device for a
+  passthrough
+v3:
+ - merge handling into msixtbl_mmio_ops
+ - extend commit message
+v2:
+ - adjust commit message
+ - pass struct domain to msixtbl_page_handler_get_hwaddr()
+ - reduce local variables used only once
+ - log a warning if write is forbidden if MSI-X and PBA lives on the same
+   page
+ - do not passthrough unaligned accesses
+ - handle accesses both before and after MSI-X table
 ---
- automation/gitlab-ci/test.yaml                      | 4 ++++
- automation/scripts/qubes-x86-64.sh                  | 7 +++++++
- automation/tests-artifacts/alpine/3.18.dockerfile   | 7 +++++++
- automation/tests-artifacts/kernel/6.1.19.dockerfile | 2 ++
- 4 files changed, 20 insertions(+)
+ xen/arch/x86/hvm/vmsi.c        | 208 ++++++++++++++++++++++++++++++++--
+ xen/arch/x86/include/asm/msi.h |   5 +-
+ xen/arch/x86/msi.c             |  42 +++++++-
+ 3 files changed, 245 insertions(+), 10 deletions(-)
 
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index ad249fa0a5d9..6803cae116b5 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -193,6 +193,10 @@ adl-pci-pv-x86-64-gcc-debug:
+diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
+index 999917983789..d506d6adaaf6 100644
+--- a/xen/arch/x86/hvm/vmsi.c
++++ b/xen/arch/x86/hvm/vmsi.c
+@@ -180,6 +180,10 @@ static bool msixtbl_initialised(const struct domain *d)
+     return d->arch.hvm.msixtbl_list.next;
+ }
  
- adl-pci-hvm-x86-64-gcc-debug:
-   extends: .adl-x86-64
-+  variables:
-+    PCIDEV: "00:14.3"
-+    WIFI_SSID: "$WIFI_HW2_SSID"
-+    WIFI_PSK: "$WIFI_HW2_PSK"
-   script:
-     - ./automation/scripts/qubes-x86-64.sh pci-hvm 2>&1 | tee ${LOGFILE}
-   needs:
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 7eabc1bd6ad4..60498ef1e89a 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -94,6 +94,13 @@ on_reboot = "destroy"
-     domU_check="
- set -x -e
- interface=eth0
-+if [ -e /sys/class/net/wlan0 ]; then
-+    interface=wlan0
-+    set +x
-+    wpa_passphrase "$WIFI_SSID" "$WIFI_PSK" > /etc/wpa_supplicant.conf
-+    set -x
-+    wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf
-+fi
- ip link set \"\$interface\" up
- timeout 30s udhcpc -i \"\$interface\"
- pingip=\$(ip -o -4 r show default|cut -f 3 -d ' ')
-diff --git a/automation/tests-artifacts/alpine/3.18.dockerfile b/automation/tests-artifacts/alpine/3.18.dockerfile
-index 9cde6c9ad4da..c323e266c7da 100644
---- a/automation/tests-artifacts/alpine/3.18.dockerfile
-+++ b/automation/tests-artifacts/alpine/3.18.dockerfile
-@@ -34,6 +34,13 @@ RUN \
-   apk add udev && \
-   apk add pciutils && \
-   apk add libelf && \
-+  apk add wpa_supplicant && \
-+  # Select firmware for hardware tests
-+  apk add linux-firmware-other && \
-+  mkdir /lib/firmware-preserve && \
-+  mv /lib/firmware/iwlwifi-so-a0-gf-a0* /lib/firmware-preserve/ && \
-+  rm -rf /lib/firmware && \
-+  mv /lib/firmware-preserve /lib/firmware && \
-   \
-   # Xen
-   cd / && \
-diff --git a/automation/tests-artifacts/kernel/6.1.19.dockerfile b/automation/tests-artifacts/kernel/6.1.19.dockerfile
-index 3a4096780d20..84ed5dff23ae 100644
---- a/automation/tests-artifacts/kernel/6.1.19.dockerfile
-+++ b/automation/tests-artifacts/kernel/6.1.19.dockerfile
-@@ -32,6 +32,8 @@ RUN curl -fsSLO https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-"$LINUX_VERSI
-     make xen.config && \
-     scripts/config --enable BRIDGE && \
-     scripts/config --enable IGC && \
-+    scripts/config --enable IWLWIFI && \
-+    scripts/config --enable IWLMVM && \
-     cp .config .config.orig && \
-     cat .config.orig | grep XEN | grep =m |sed 's/=m/=y/g' >> .config && \
-     make -j$(nproc) bzImage && \
++/*
++ * Lookup an msixtbl_entry on the same page as given addr. It's up to the
++ * caller to check if address is strictly part of the table - if relevant.
++ */
+ static struct msixtbl_entry *msixtbl_find_entry(
+     struct vcpu *v, unsigned long addr)
+ {
+@@ -187,8 +191,8 @@ static struct msixtbl_entry *msixtbl_find_entry(
+     struct domain *d = v->domain;
+ 
+     list_for_each_entry( entry, &d->arch.hvm.msixtbl_list, list )
+-        if ( addr >= entry->gtable &&
+-             addr < entry->gtable + entry->table_len )
++        if ( PFN_DOWN(addr) >= PFN_DOWN(entry->gtable) &&
++             PFN_DOWN(addr) <= PFN_DOWN(entry->gtable + entry->table_len - 1) )
+             return entry;
+ 
+     return NULL;
+@@ -203,6 +207,10 @@ static struct msi_desc *msixtbl_addr_to_desc(
+     if ( !entry || !entry->pdev )
+         return NULL;
+ 
++    if ( addr < entry->gtable ||
++         addr >= entry->gtable + entry->table_len )
++        return NULL;
++
+     nr_entry = (addr - entry->gtable) / PCI_MSIX_ENTRY_SIZE;
+ 
+     list_for_each_entry( desc, &entry->pdev->msi_list, list )
+@@ -213,6 +221,157 @@ static struct msi_desc *msixtbl_addr_to_desc(
+     return NULL;
+ }
+ 
++/*
++ * Returns:
++ *  - 0 (FIX_RESERVED) if no handling should be done
++ *  - a fixmap idx to use for handling
++ */
++static unsigned int get_adjacent_idx(
++    const struct msixtbl_entry *entry, unsigned long addr, bool write)
++{
++    unsigned int adj_type;
++    struct arch_msix *msix;
++
++    if ( !entry || !entry->pdev )
++    {
++        ASSERT_UNREACHABLE();
++        return 0;
++    }
++
++    if ( PFN_DOWN(addr) == PFN_DOWN(entry->gtable) && addr < entry->gtable )
++        adj_type = ADJ_IDX_FIRST;
++    else if ( PFN_DOWN(addr) == PFN_DOWN(entry->gtable + entry->table_len - 1) &&
++              addr >= entry->gtable + entry->table_len )
++        adj_type = ADJ_IDX_LAST;
++    else
++    {
++        /* All callers should already do equivalent range checking. */
++        ASSERT_UNREACHABLE();
++        return 0;
++    }
++
++    msix = entry->pdev->msix;
++    if ( !msix )
++    {
++        ASSERT_UNREACHABLE();
++        return 0;
++    }
++
++    if ( !msix->adj_access_idx[adj_type] )
++    {
++        if ( MSIX_CHECK_WARN(msix, entry->pdev->domain->domain_id,
++                             adjacent_not_initialized) )
++            gprintk(XENLOG_WARNING,
++                    "%pp: Page for adjacent(%d) MSI-X table access not initialized (addr %#lx, gtable %#lx))\n",
++                    &entry->pdev->sbdf, adj_type, addr, entry->gtable);
++        return 0;
++    }
++
++    /* If PBA lives on the same page too, discard writes. */
++    if ( write &&
++         ((adj_type == ADJ_IDX_LAST &&
++           msix->table.last == msix->pba.first) ||
++          (adj_type == ADJ_IDX_FIRST &&
++           msix->table.first == msix->pba.last)) )
++    {
++        if ( MSIX_CHECK_WARN(msix, entry->pdev->domain->domain_id,
++                             adjacent_pba) )
++            gprintk(XENLOG_WARNING,
++                    "%pp: MSI-X table and PBA share a page, "
++                    "discard write to adjacent memory (%#lx)\n",
++                    &entry->pdev->sbdf, addr);
++        return 0;
++    }
++
++    return msix->adj_access_idx[adj_type];
++}
++
++static int adjacent_read(
++    const struct msixtbl_entry *entry,
++    paddr_t address, unsigned int len, uint64_t *pval)
++{
++    const void __iomem *hwaddr;
++    unsigned int fixmap_idx;
++
++    ASSERT(IS_ALIGNED(address, len));
++
++    *pval = ~0UL;
++
++    fixmap_idx = get_adjacent_idx(entry, address, false);
++
++    if ( !fixmap_idx )
++        return X86EMUL_OKAY;
++
++    hwaddr = fix_to_virt(fixmap_idx) + PAGE_OFFSET(address);
++
++    switch ( len )
++    {
++    case 1:
++        *pval = readb(hwaddr);
++        break;
++
++    case 2:
++        *pval = readw(hwaddr);
++        break;
++
++    case 4:
++        *pval = readl(hwaddr);
++        break;
++
++    case 8:
++        *pval = readq(hwaddr);
++        break;
++
++    default:
++        ASSERT_UNREACHABLE();
++        break;
++    }
++
++    return X86EMUL_OKAY;
++}
++
++static int adjacent_write(
++    const struct msixtbl_entry *entry,
++    paddr_t address, unsigned int len, uint64_t val)
++{
++    void __iomem *hwaddr;
++    unsigned int fixmap_idx;
++
++    ASSERT(IS_ALIGNED(address, len));
++
++    fixmap_idx = get_adjacent_idx(entry, address, true);
++
++    if ( !fixmap_idx )
++        return X86EMUL_OKAY;
++
++    hwaddr = fix_to_virt(fixmap_idx) + PAGE_OFFSET(address);
++
++    switch ( len )
++    {
++    case 1:
++        writeb(val, hwaddr);
++        break;
++
++    case 2:
++        writew(val, hwaddr);
++        break;
++
++    case 4:
++        writel(val, hwaddr);
++        break;
++
++    case 8:
++        writeq(val, hwaddr);
++        break;
++
++    default:
++        ASSERT_UNREACHABLE();
++        break;
++    }
++
++    return X86EMUL_OKAY;
++}
++
+ static int cf_check msixtbl_read(
+     const struct hvm_io_handler *handler, uint64_t address, uint32_t len,
+     uint64_t *pval)
+@@ -222,7 +381,7 @@ static int cf_check msixtbl_read(
+     unsigned int nr_entry, index;
+     int r = X86EMUL_UNHANDLEABLE;
+ 
+-    if ( (len != 4 && len != 8) || (address & (len - 1)) )
++    if ( !IS_ALIGNED(address, len) )
+         return r;
+ 
+     rcu_read_lock(&msixtbl_rcu_lock);
+@@ -230,6 +389,17 @@ static int cf_check msixtbl_read(
+     entry = msixtbl_find_entry(current, address);
+     if ( !entry )
+         goto out;
++
++    if ( address < entry->gtable ||
++         address >= entry->gtable + entry->table_len )
++    {
++        r = adjacent_read(entry, address, len, pval);
++        goto out;
++    }
++
++    if ( len != 4 && len != 8 )
++        goto out;
++
+     offset = address & (PCI_MSIX_ENTRY_SIZE - 1);
+ 
+     if ( offset != PCI_MSIX_ENTRY_VECTOR_CTRL_OFFSET )
+@@ -291,6 +461,17 @@ static int msixtbl_write(struct vcpu *v, unsigned long address,
+     entry = msixtbl_find_entry(v, address);
+     if ( !entry )
+         goto out;
++
++    if ( address < entry->gtable ||
++         address >= entry->gtable + entry->table_len )
++    {
++        r = adjacent_write(entry, address, len, val);
++        goto out;
++    }
++
++    if ( len != 4 && len != 8 )
++        goto out;
++
+     nr_entry = array_index_nospec(((address - entry->gtable) /
+                                    PCI_MSIX_ENTRY_SIZE),
+                                   MAX_MSIX_TABLE_ENTRIES);
+@@ -356,8 +537,8 @@ static int cf_check _msixtbl_write(
+     const struct hvm_io_handler *handler, uint64_t address, uint32_t len,
+     uint64_t val)
+ {
+-    /* Ignore invalid length or unaligned writes. */
+-    if ( (len != 4 && len != 8) || !IS_ALIGNED(address, len) )
++    /* Ignore unaligned writes. */
++    if ( !IS_ALIGNED(address, len) )
+         return X86EMUL_OKAY;
+ 
+     /*
+@@ -374,16 +555,23 @@ static bool cf_check msixtbl_range(
+ {
+     struct vcpu *curr = current;
+     unsigned long addr = r->addr;
+-    const struct msi_desc *desc;
++    const struct msixtbl_entry *entry;
++    bool ret = false;
+ 
+     ASSERT(r->type == IOREQ_TYPE_COPY);
+ 
+     rcu_read_lock(&msixtbl_rcu_lock);
+-    desc = msixtbl_addr_to_desc(msixtbl_find_entry(curr, addr), addr);
++    entry = msixtbl_find_entry(curr, addr);
++    if ( entry &&
++          /* Adjacent access. */
++         (addr < entry->gtable || addr >= entry->gtable + entry->table_len ||
++          /* Otherwise check if there is a matching msi_desc. */
++          msixtbl_addr_to_desc(entry, addr)) )
++        ret = true;
+     rcu_read_unlock(&msixtbl_rcu_lock);
+ 
+-    if ( desc )
+-        return 1;
++    if ( ret )
++        return ret;
+ 
+     if ( r->state == STATE_IOREQ_READY && r->dir == IOREQ_WRITE )
+     {
+@@ -429,7 +617,7 @@ static bool cf_check msixtbl_range(
+         }
+     }
+ 
+-    return 0;
++    return false;
+ }
+ 
+ static const struct hvm_io_ops msixtbl_mmio_ops = {
+diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
+index bcfdfd35345d..923b730d48b8 100644
+--- a/xen/arch/x86/include/asm/msi.h
++++ b/xen/arch/x86/include/asm/msi.h
+@@ -224,6 +224,9 @@ struct arch_msix {
+     } table, pba;
+     int table_refcnt[MAX_MSIX_TABLE_PAGES];
+     int table_idx[MAX_MSIX_TABLE_PAGES];
++#define ADJ_IDX_FIRST 0
++#define ADJ_IDX_LAST  1
++    unsigned int adj_access_idx[2];
+     spinlock_t table_lock;
+     bool host_maskall, guest_maskall;
+     domid_t warned_domid;
+@@ -231,6 +234,8 @@ struct arch_msix {
+         uint8_t all;
+         struct {
+             bool maskall                   : 1;
++            bool adjacent_not_initialized  : 1;
++            bool adjacent_pba              : 1;
+         };
+     } warned_kind;
+ };
+diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
+index 42c793426da3..4f9249f11b2f 100644
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -913,6 +913,37 @@ static int msix_capability_init(struct pci_dev *dev,
+         list_add_tail(&entry->list, &dev->msi_list);
+         *desc = entry;
+     }
++    else
++    {
++        /*
++         * If the MSI-X table doesn't start at the page boundary, map the first page for
++         * passthrough accesses.
++         */
++        if ( PAGE_OFFSET(table_paddr) )
++        {
++            int idx = msix_get_fixmap(msix, table_paddr, table_paddr);
++
++            if ( idx > 0 )
++                msix->adj_access_idx[ADJ_IDX_FIRST] = idx;
++            else
++                gprintk(XENLOG_ERR, "%pp: Failed to map first MSI-X table page: %d\n", &dev->sbdf, idx);
++        }
++        /*
++         * If the MSI-X table doesn't end on the page boundary, map the last page
++         * for passthrough accesses.
++         */
++        if ( PAGE_OFFSET(table_paddr + msix->nr_entries * PCI_MSIX_ENTRY_SIZE) )
++        {
++            uint64_t entry_paddr = table_paddr +
++                (msix->nr_entries - 1) * PCI_MSIX_ENTRY_SIZE;
++            int idx = msix_get_fixmap(msix, table_paddr, entry_paddr);
++
++            if ( idx > 0 )
++                msix->adj_access_idx[ADJ_IDX_LAST] = idx;
++            else
++                gprintk(XENLOG_ERR, "%pp: Failed to map last MSI-X table page: %d\n", &dev->sbdf, idx);
++        }
++    }
+ 
+     if ( !msix->used_entries )
+     {
+@@ -1079,6 +1110,17 @@ static void _pci_cleanup_msix(struct arch_msix *msix)
+         msix->table.first = 0;
+         msix->table.last = 0;
+ 
++        if ( msix->adj_access_idx[ADJ_IDX_FIRST] )
++        {
++            msix_put_fixmap(msix, msix->adj_access_idx[ADJ_IDX_FIRST]);
++            msix->adj_access_idx[ADJ_IDX_FIRST] = 0;
++        }
++        if ( msix->adj_access_idx[ADJ_IDX_LAST] )
++        {
++            msix_put_fixmap(msix, msix->adj_access_idx[ADJ_IDX_LAST]);
++            msix->adj_access_idx[ADJ_IDX_LAST] = 0;
++        }
++
+         if ( rangeset_remove_range(mmio_ro_ranges, msix->pba.first,
+                                    msix->pba.last) )
+             WARN();
 -- 
 git-series 0.9.1
 
