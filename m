@@ -4,40 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB1F3C25B74
-	for <xen-devel@archiver.kernel.org>; Fri, 10 May 2024 10:22:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.719671.1122518 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AAE5C25B10
+	for <xen-devel@archiver.kernel.org>; Fri, 10 May 2024 10:29:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.719702.1122551 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s5NNt-0006Wf-TR; Fri, 10 May 2024 10:21:49 +0000
+	id 1s5NVF-0000L6-Cl; Fri, 10 May 2024 10:29:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 719671.1122518; Fri, 10 May 2024 10:21:49 +0000
+Received: by outflank-mailman (output) from mailman id 719702.1122551; Fri, 10 May 2024 10:29:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s5NNt-0006WY-Qr; Fri, 10 May 2024 10:21:49 +0000
-Received: by outflank-mailman (input) for mailman id 719671;
- Fri, 10 May 2024 10:21:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=YvKo=MN=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1s5NNs-0006WS-BA
- for xen-devel@lists.xenproject.org; Fri, 10 May 2024 10:21:48 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1b03186c-0eb7-11ef-909d-e314d9c70b13;
- Fri, 10 May 2024 12:21:47 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a59c0a6415fso521845466b.1
- for <xen-devel@lists.xenproject.org>; Fri, 10 May 2024 03:21:47 -0700 (PDT)
-Received: from ?IPV6:2003:e5:873c:a500:6aaf:b7a7:7c29:ae5c?
- (p200300e5873ca5006aafb7a77c29ae5c.dip0.t-ipconnect.de.
- [2003:e5:873c:a500:6aaf:b7a7:7c29:ae5c])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a1781d342sm168537766b.6.2024.05.10.03.21.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 May 2024 03:21:45 -0700 (PDT)
+	id 1s5NVF-0000JA-6t; Fri, 10 May 2024 10:29:25 +0000
+Received: by outflank-mailman (input) for mailman id 719702;
+ Fri, 10 May 2024 10:29:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=IhR9=MN=cloud.com=kelly.choi@srs-se1.protection.inumbo.net>)
+ id 1s5NVE-0000AU-8Z
+ for xen-devel@lists.xenproject.org; Fri, 10 May 2024 10:29:24 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 29355476-0eb8-11ef-b4bb-af5377834399;
+ Fri, 10 May 2024 12:29:20 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a59a64db066so471395366b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 May 2024 03:29:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,85 +42,548 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1b03186c-0eb7-11ef-909d-e314d9c70b13
+X-Inumbo-ID: 29355476-0eb8-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1715336506; x=1715941306; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
+        d=cloud.com; s=cloud; t=1715336960; x=1715941760; darn=lists.xenproject.org;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=gB3+mueVJC6rTSgQyDulrWqT4OQyPBK4CkJ9nqNOnDg=;
-        b=ZqV+DatO0NVL4iTgcFtyb8OHCm8NseP1ZdFl+xC5+S1ZsCZsfe9n2s3K5hDVCLY2dN
-         w0/BEoILo1Cxv3I4ErqCAp8bWwV5CU3jPxSX5BXzt0ZaRQPTQMdOEdaRDXVYNuMLnEby
-         KyofvvNUgcBldppshgk+hXaNmGIzJp2a3BYm7YjyqWppwapqy0Z1KVX2SPDw0ypbiItv
-         wCQMWm0zOHIk+M2RbM1a694FdbpWyqCy6cnLpS1FQLOtRpjKQkzLlBr7JAvkFuhbOX9V
-         cPCMZFld8Yzpu4g3G6nw+LHhXEGPgCO6jjyp/A84qe7jJBTfsCgJRs2jCYp455YGhuC5
-         egSg==
+        bh=DCce+NW2yUN6XuQdr+dHXWXXVx5hWNLro/e1lSco0rA=;
+        b=kthvIuOkuGTbiHRYAe0avT11p6bVmNbMTb6s95QQmC8bEu47dLh7aGRhyFMw/SRB2M
+         4xQw/Tlf9Nq0p+wWsudCxmiqNV/06UL5FdLlnAGo13iHJ3hBgj0b5uRU26aHH47f+7aX
+         tIjbm54pK+Pj2K77Qgrb/ICgTMBsNXLGylqj4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715336506; x=1715941306;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20230601; t=1715336960; x=1715941760;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=gB3+mueVJC6rTSgQyDulrWqT4OQyPBK4CkJ9nqNOnDg=;
-        b=pvbBw4Iz7AZ1RPMc5sLgZT5GefSp0uqJ/wBpDA3C0AnI+GX9mUD5V6dyx2b6trMabR
-         C5IA9rERsU0n1Ym82HWqkdy8skjK1B/dQr+bKAAJxX9vKUjStvWpYQVJcv7zI2r3rh69
-         codce9oka077nDycfGThG8KOYZrJvlBGT7OtJRAQUP30t5c+HjRBN8+FTJP4A5VE0b/1
-         GKhiGC90SPKzlBLMElEDMYWSJ0aE8J78TarucqjEM1ujVOKt4dKihg4JmbXbuPmZ/i+w
-         BNzhj2wmMMejDAN8LdPWznOPzYZBR0+lATdriqPR9hi/ZdYcyiVU4UDg2zNTODnPbzQB
-         ZDgg==
-X-Forwarded-Encrypted: i=1; AJvYcCUkqeazVFndQTf0QY2CnVDJiUh15anydoh5YF30E5n3dMGlkKfUd6fo55WgkgS0KUgIoBPGz6/N2XQ4caBEZo1CO/U3YvmsRmUoYz4R/hc=
-X-Gm-Message-State: AOJu0YzCwwi4gNcS02NhbSVa81I01IdShtbosZXgpZBah+5jMwDv8CAr
-	1eu/VbOdT+TE0ZGy1dk1NTt95Xmn05rkeG3PKwcdVGlryBVDIt4McSbGIKJr6xU=
-X-Google-Smtp-Source: AGHT+IGm0ShzWqxUTz6WdBSaEzgp1Qnpb/3O6/pweXuPBaR9LwjAUlSsib161KD3DVm9rCH0vGd4qA==
-X-Received: by 2002:a17:906:cc84:b0:a59:c28a:d350 with SMTP id a640c23a62f3a-a5a2d55ab1fmr161431566b.24.1715336506363;
-        Fri, 10 May 2024 03:21:46 -0700 (PDT)
-Message-ID: <d0b5e7d5-3503-49be-9fa3-4b79c62059ca@suse.com>
-Date: Fri, 10 May 2024 12:21:45 +0200
+        bh=DCce+NW2yUN6XuQdr+dHXWXXVx5hWNLro/e1lSco0rA=;
+        b=tryLnSmnFxmRyL/zaahx3Z/7sPii9sEMKyvB5CBEpkkOV63+EvySvAGvFMgP+1w4Md
+         uu9tQJ31imK62Qa0qzbJSo1stWz82/jzKyH0Dsl5KXYKdBYApDBsfEViFqPdoyyZqhLp
+         3dS6kXfT/VGZv8XubdafZK9tNObu7teV7Y6THl8tHY5ahajATE8edUVvEn9XdDTSWgaj
+         LOOwl7tix2pSjVVz3IIa5a90wi6Nbfjmg4m5d5jBmPEXui/lg9PDlQe9wiZRAWLxGB6n
+         gHwufZyw0leI4ZW6fzvoWn+Tsvfh4PMcgxfO0LtqRuKWCGS647EKodBkpPfM2WfwRD0d
+         LDVg==
+X-Gm-Message-State: AOJu0Yyasv6FotCmAroIzWaNfSO7hdVX2MKVsBErxr1uy6isjimk5Trj
+	fm5GvO/zqmAvkIHaJuCXr71A8I6AdkCWPS2GHcupta5DTH7Lh6aqMjljjkRv2K8KK8dLWmwyZNP
+	j8PhJt9E5EHS557H+t0UYyIt5OoRFpBiF2TM3cTmle/JjtOKAMbU=
+X-Google-Smtp-Source: AGHT+IE/L3ppUUb+U5bYZDALwX47F0hhzNpsAETPKEpjV/xTDTaEKci+/zOpqJ7NHYQG4EexfZz17DHDsQ6vryW6z2w=
+X-Received: by 2002:a17:906:5691:b0:a59:bbf0:88fa with SMTP id
+ a640c23a62f3a-a5a2d57b1ddmr134681266b.28.1715336959589; Fri, 10 May 2024
+ 03:29:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC KERNEL PATCH v6 3/3] xen/privcmd: Add new syscall to get gsi
- from irq
-To: "Chen, Jiqian" <Jiqian.Chen@amd.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>, "Rafael J . Wysocki"
- <rafael@kernel.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
- "Huang, Ray" <Ray.Huang@amd.com>
-References: <20240419033616.607889-1-Jiqian.Chen@amd.com>
- <20240419033616.607889-4-Jiqian.Chen@amd.com>
- <79666084-fc2f-4637-8f0b-3846285601b8@suse.com>
- <BL1PR12MB58493D17E23751A06FC931DDE7E72@BL1PR12MB5849.namprd12.prod.outlook.com>
- <c30ebad2-1ad3-4b58-afaf-e6dc32c091fc@suse.com>
- <BL1PR12MB58491D2210091DF9607A354AE7E72@BL1PR12MB5849.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-In-Reply-To: <BL1PR12MB58491D2210091DF9607A354AE7E72@BL1PR12MB5849.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <p2-q466qgwwlqfn4m-qx47948p-a01-2x6n-0011N000017qoUMQAY@cvent-planner.com>
+ <LV8PR84MB3654E4FE6C656979B4A47A78A6172@LV8PR84MB3654.NAMPRD84.PROD.OUTLOOK.COM>
+ <CAO-mL=wM8siytp7hQezY8mm1AyL0tJc0Y-Za8wt1ebhAjbiOyQ@mail.gmail.com>
+In-Reply-To: <CAO-mL=wM8siytp7hQezY8mm1AyL0tJc0Y-Za8wt1ebhAjbiOyQ@mail.gmail.com>
+From: Kelly Choi <kelly.choi@cloud.com>
+Date: Fri, 10 May 2024 11:28:43 +0100
+Message-ID: <CAO-mL=wsbpmeyz7ZoD29TBPRpbxR_ZqKQPkQsO6FNduuzFQKcA@mail.gmail.com>
+Subject: Fwd: [ANNOUNCE] Xen Project Summit 2024 Design Sessions
+To: xen-devel <xen-devel@lists.xenproject.org>, xen-users@lists.xenproject.org, 
+	xen-announce@lists.xenproject.org
+Content-Type: multipart/alternative; boundary="000000000000259fa40618170227"
 
-On 10.05.24 12:13, Chen, Jiqian wrote:
-> On 2024/5/10 17:53, Jürgen Groß wrote:
->> On 10.05.24 11:06, Chen, Jiqian wrote:
->>> Hi,
->>>
->>> On 2024/5/10 14:46, Jürgen Groß wrote:
->>>> On 19.04.24 05:36, Jiqian Chen wrote:
->>>>> +
->>>>> +    info->type = IRQT_PIRQ;
->>> I am considering whether I need to use a new type(like IRQT_GSI) here to distinguish with IRQT_PIRQ, because function restore_pirqs will process all IRQT_PIRQ.
->>
->> restore_pirqs() already considers gsi == 0 to be not GSI related. Isn't this
->> enough?
-> No, it is not enough.
-> xen_pvh_add_gsi_irq_map adds the mapping of gsi and irq, but the value of gsi is not 0,
-> once restore_pirqs is called, it will do PHYSDEVOP_map_pirq for that gsi, but in pvh dom0, we shouldn't do PHYSDEVOP_map_pirq.
+--000000000000259fa40618170227
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Okay, then add a new flag to info->u.pirq.flags for that purpose?
+*Our design sessions are now open for Xen Summit! *
+
+If you've attended Xen Summit before, you might be familiar with the
+process.
+
+For anyone who hasn't done so before, please follow the instructions below,
+using the link to create an account
+<https://design-sessions.xenproject.org/>.
+Once you've created your account, you'll be asked to verify using the code
+below. That's it, you're in!
+
+We aim to have design sessions with a virtual element (using Jitsi/Zoom).
+This is free for the community to join in and listen, and will be hosted by
+an attendee in the session.
+
+If you're going to be an *in-person attendee*, you can propose a session
+and vote on sessions you would like to see discussed.
+If you're going to be a *virtual attendee*, you can vote on sessions you
+would like to see discussed. You can still propose a session, but please
+note there will be no professional audio or visual equipment in person for
+these sessions.
+
+The final schedule will be allocated and arranged by the highest-voted
+sessions.
+
+Virtual links for the community to join Xen Summit design sessions will be
+shared closer to the event.
+
+If you have any questions, please let me know.
+
+For in-person tickets, click here
+<https://events.linuxfoundation.org/xen-project-summit/register/>.
+
+------------------------------
 
 
-Juergen
 
+
+We look forward to holding the Design Sessions at the upcoming Xen Project
+Summit. The design sessions will be on Wednesday, 5 June, and Thursday, 6
+June 2024.
+
+We encourage everyone to submit a Design Session, the verification code is:
+=E2=80=9C*LFXEN24*=E2=80=9D.
+
+*SUBMIT A DESIGN SESSION* <https://design-sessions.xenproject.org/>
+
+
+
+The process involves the following steps:
+
+   - Anyone interested can propose
+   <https://design-sessions.xenproject.org/discussion/new> a topic.
+   - All participants review the list of sessions
+   <https://design-sessions.xenproject.org/list/discussion>, indicating
+   their interest in attending each one.
+   - The session scheduler optimizes the schedule
+   <https://design-sessions.xenproject.org/schedule> to accommodate as many
+   preferences as possible.
+
+Participants can also propose long-form talks by adding [TALK] to the
+session title.
+
+For suggested topics, sample Design Session submissions, and more tips
+check out the Xen Design Session page
+<https://events.linuxfoundation.org/xen-project-summit/program/design-sessi=
+ons/>
+for more information.
+
+
+Best Regards,
+Xen Project Events Team
+
+
+------------------------------
+
+--000000000000259fa40618170227
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr"><div><div dir=
+=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div =
+dir=3D"ltr"><div><b>Our design sessions are now open for Xen Summit!=C2=A0<=
+/b><br></div><div><br></div><div>If you&#39;ve attended Xen Summit before, =
+you might be familiar with the process.=C2=A0</div><div><br></div><div>For =
+anyone who hasn&#39;t done so before, please follow the instructions below,=
+ using the=C2=A0<a href=3D"https://design-sessions.xenproject.org/" target=
+=3D"_blank">link to create an account</a>.=C2=A0</div><div>Once you&#39;ve =
+created your account, you&#39;ll be asked to verify using the code below. T=
+hat&#39;s it, you&#39;re in!</div><div><br></div><div>We aim to have design=
+ sessions with a virtual element (using Jitsi/Zoom). This is free for the c=
+ommunity to join in and listen, and will be hosted by an attendee in the se=
+ssion.=C2=A0<br></div><div><br></div><div>If you&#39;re going to be an <b><=
+i>in-person attendee</i></b>, you can propose a session and vote on session=
+s you would like to see discussed.=C2=A0</div><div>If you&#39;re going to b=
+e a <b><i>virtual attendee</i></b>, you can vote on sessions you would like=
+ to see discussed. You can still propose a session, but please note there w=
+ill be no professional audio or visual equipment in person for these sessio=
+ns.=C2=A0</div><div><br></div><div>The final schedule will be allocated and=
+ arranged by the highest-voted sessions.=C2=A0</div><div><br></div><div><fo=
+nt color=3D"#ff0000">Virtual links for the community to join Xen Summit des=
+ign sessions will be shared closer to the event.=C2=A0=C2=A0</font><br></di=
+v><div><br></div><div>If you=C2=A0have any questions,=C2=A0please let me kn=
+ow.</div><div><p class=3D"MsoNormal">For in-person tickets, <a href=3D"http=
+s://events.linuxfoundation.org/xen-project-summit/register/" target=3D"_bla=
+nk">click here</a>.=C2=A0</p><p class=3D"MsoNormal"><u></u></p><table borde=
+r=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" style=3D"width:9=
+49.612px"><tbody><tr><td style=3D"padding:0.75pt"><div class=3D"MsoNormal" =
+align=3D"center" style=3D"text-align:center"><hr size=3D"1" width=3D"100%" =
+noshade align=3D"center" style=3D"color:rgb(160,160,160)"></div><p class=3D=
+"MsoNormal"></p></td></tr></tbody></table></div><div><br></div></div></div>=
+</div><div class=3D"gmail_quote"><div><div lang=3D"EN-US" link=3D"#0099E0" =
+vlink=3D"#0099E0" style=3D"word-wrap:break-word" id=3D"m_616053144227370237=
+0m_-2685003709366885060body"><div><div id=3D"m_6160531442273702370m_-268500=
+3709366885060mail-editor-reference-message-container"><div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;float:left">
+<tbody>
+<tr>
+<td style=3D"background:#eff0f2;padding:0in 0in 0in 0in">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;float:left">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;background:white">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><img bo=
+rder=3D"0" width=3D"699" style=3D"width:7.2812in" id=3D"m_61605314422737023=
+70m_-2685003709366885060_x0000_i1028" src=3D"https://custom.cvent.com/64779=
+B2AC74D4D2BBFF4459DE93A5253/pix/d770244914e047019777029a32e20c53.png?d=3D69=
+9"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"display:none"><u></u>=C2=A0<u></u></span></p>
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Times New Roman&quot;,serif"><u>=
+</u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in;word-break:break-word">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;background:white;float:left">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in;float:left">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;float:left">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100.0%;word-break:break-word">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:11.25pt 11.25pt 0in 11.25pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:3.75pt 0in 3.75pt 0in">
+<p class=3D"MsoNormal" style=3D"line-height:13.5pt"><span style=3D"font-siz=
+e:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:black">We look forw=
+ard to holding the Design Sessions at the upcoming Xen Project Summit. The =
+design sessions will be on Wednesday, 5 June, and
+ Thursday, 6 June 2024.<br>
+<br>
+We encourage everyone to submit a Design Session, the </span><span style=3D=
+"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:#212121">v=
+erification code</span><span style=3D"font-size:10.5pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:black"> is: =E2=80=9C</span><b><span style=3D"fo=
+nt-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:#212121">LFXE=
+N24</span></b><span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;=
+,sans-serif;color:black">=E2=80=9D.<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100.0%;float:left">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;border-radius:15px;border-collapse:separate!important">
+<tbody>
+<tr>
+<td style=3D"padding:11.25pt 11.25pt 11.25pt 11.25pt">
+<div align=3D"center">
+<table border=3D"1" cellspacing=3D"0" cellpadding=3D"0" style=3D"background=
+:#72be44;border:solid #72be44 4.5pt">
+<tbody>
+<tr>
+<td style=3D"border:none;padding:3.75pt 15.0pt 3.75pt 15.0pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"color:black"><a href=3D"https://design-sessions.xenproject.org/" ta=
+rget=3D"_blank"><b><span style=3D"font-size:13.0pt;font-family:&quot;Arial&=
+quot;,sans-serif;color:white;text-decoration:none">SUBMIT
+ A DESIGN SESSION</span></b></a></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-size:1.0pt">=C2=A0</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in;word-break:break-word">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100.0%;float:left">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in;float:left">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;word-break:break-word">
+<tbody>
+<tr>
+<td style=3D"padding:0in 11.25pt 11.25pt 11.25pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:3.75pt 0in 3.75pt 0in">
+<p class=3D"MsoNormal" style=3D"line-height:13.5pt"><span style=3D"font-siz=
+e:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:#212529">The proces=
+s involves the following steps:</span><span style=3D"font-size:10.5pt;font-=
+family:&quot;Arial&quot;,sans-serif;color:black"><u></u><u></u></span></p>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:3.75pt 0in 3.75pt 0in;word-break:break-word">
+<ul type=3D"disc">
+<li class=3D"MsoNormal" style=3D"color:black;line-height:13.5pt">
+<span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;co=
+lor:#212529">Anyone interested can=C2=A0</span><a href=3D"https://design-se=
+ssions.xenproject.org/discussion/new" target=3D"_blank"><span style=3D"font=
+-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:#0d6efd">propos=
+e</span></a><span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,s=
+ans-serif;color:#212529">=C2=A0a
+ topic.</span><span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;=
+,sans-serif"><u></u><u></u></span></li><li class=3D"MsoNormal" style=3D"col=
+or:black;line-height:13.5pt">
+<span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;co=
+lor:#212529">All participants review the=C2=A0</span><a href=3D"https://des=
+ign-sessions.xenproject.org/list/discussion" target=3D"_blank"><span style=
+=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:#0d6efd=
+">list
+ of sessions</span></a><span style=3D"font-size:10.5pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:#212529">, indicating their interest in attendin=
+g each one.
+</span><span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-s=
+erif"><u></u><u></u></span></li><li class=3D"MsoNormal" style=3D"color:blac=
+k;line-height:13.5pt">
+<span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;co=
+lor:#212529">The session scheduler optimizes the=C2=A0</span><a href=3D"htt=
+ps://design-sessions.xenproject.org/schedule" target=3D"_blank"><span style=
+=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:#0d6efd=
+">schedule</span></a><span style=3D"font-size:10.5pt;font-family:&quot;Aria=
+l&quot;,sans-serif;color:#212529">=C2=A0to
+ accommodate as many preferences as possible.</span><span style=3D"font-siz=
+e:10.5pt;font-family:&quot;Arial&quot;,sans-serif"><u></u><u></u></span></l=
+i></ul>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:3.75pt 0in 3.75pt 0in;word-break:break-word">
+<p class=3D"MsoNormal" style=3D"line-height:13.5pt"><span style=3D"font-siz=
+e:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:#212529">Participan=
+ts can also propose long-form talks by adding [TALK] to the session title.<=
+/span><span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,sans-se=
+rif;color:black"><u></u><u></u></span></p>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:3.75pt 0in 3.75pt 0in;word-break:break-word">
+<p class=3D"MsoNormal" style=3D"line-height:13.5pt"><span style=3D"font-siz=
+e:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:black">For suggeste=
+d topics, sample Design Session submissions, and more tips check out the
+</span><a href=3D"https://events.linuxfoundation.org/xen-project-summit/pro=
+gram/design-sessions/" target=3D"_blank"><span style=3D"font-size:10.5pt;fo=
+nt-family:&quot;Arial&quot;,sans-serif;color:#1155cc">Xen Design Session pa=
+ge</span></a><span style=3D"font-size:10.5pt;font-family:&quot;Arial&quot;,=
+sans-serif;color:black">
+ for more information.<u></u><u></u></span></p>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:3.75pt 0in 3.75pt 0in;word-break:break-word">
+<p class=3D"MsoNormal" style=3D"line-height:13.5pt"><span style=3D"font-siz=
+e:10.5pt;font-family:&quot;Arial&quot;,sans-serif;color:black"><br>
+Best Regards,<br>
+Xen Project Events Team<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;background:#62ab30;float:left">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<div align=3D"center">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%;float:left">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:11.25pt 11.25pt 11.25pt 11.25pt"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"1" width=3D"100%" noshade style=3D"color:#a0a0a0" align=3D"cent=
+er">
+</div>
+<p class=3D"MsoNormal"><br></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><img border=3D"0" id=3D"m_6160531442273702370m_-2685=
+003709366885060_x0000_i1025" src=3D"https://www.cvent.com/api/email/dispatc=
+h/v1/open/q466qgwwlqfn4m/qx47948p/transparent.gif"></p>
+</div>
+</div>
+</div>
+</div>
+
+</div></div></div>
+</div></div>
+
+--000000000000259fa40618170227--
 
