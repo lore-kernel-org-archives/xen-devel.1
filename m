@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A78C25B77
-	for <xen-devel@archiver.kernel.org>; Fri, 10 May 2024 22:40:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.720096.1123116 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E8EC25B10
+	for <xen-devel@archiver.kernel.org>; Fri, 10 May 2024 22:45:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.720112.1123136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s5YuQ-0000OP-Em; Fri, 10 May 2024 22:40:10 +0000
+	id 1s5YzV-00039H-IB; Fri, 10 May 2024 22:45:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 720096.1123116; Fri, 10 May 2024 22:40:10 +0000
+Received: by outflank-mailman (output) from mailman id 720112.1123136; Fri, 10 May 2024 22:45:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s5YuQ-0000OI-Bw; Fri, 10 May 2024 22:40:10 +0000
-Received: by outflank-mailman (input) for mailman id 720096;
- Fri, 10 May 2024 22:40:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s5YzV-00039A-Fc; Fri, 10 May 2024 22:45:25 +0000
+Received: by outflank-mailman (input) for mailman id 720112;
+ Fri, 10 May 2024 22:45:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4i6G=MN=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1s5YuP-000872-Bd
- for xen-devel@lists.xenproject.org; Fri, 10 May 2024 22:40:09 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 40260fd6-0f1e-11ef-909d-e314d9c70b13;
- Sat, 11 May 2024 00:40:07 +0200 (CEST)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a59cc765c29so559624066b.3
- for <xen-devel@lists.xenproject.org>; Fri, 10 May 2024 15:40:07 -0700 (PDT)
-Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a1781cf60sm233915866b.14.2024.05.10.15.40.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 May 2024 15:40:06 -0700 (PDT)
+ id 1s5YzU-000392-A7
+ for xen-devel@lists.xenproject.org; Fri, 10 May 2024 22:45:24 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fbc5d350-0f1e-11ef-b4bb-af5377834399;
+ Sat, 11 May 2024 00:45:22 +0200 (CEST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-41a72f3a20dso17708135e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 10 May 2024 15:45:22 -0700 (PDT)
+Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-41fccce24efsm78524385e9.19.2024.05.10.15.45.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 May 2024 15:45:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,202 +47,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40260fd6-0f1e-11ef-909d-e314d9c70b13
+X-Inumbo-ID: fbc5d350-0f1e-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1715380806; x=1715985606; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Phw85PeYT8ClsRvMd2JBZsNjZhs23kHM7gjroo/IJSY=;
-        b=eKxt9k9HpPpDkLmGwthZfYlmFQzLunWL9YafRWJ+NEwTtUXDdYkMg7S86W80ZQKm/r
-         1ZSfFQMDZzPw7X6u+wQ0AcdRSguAXAsq33oQugU6zSYvZTHtVvDXSe1tFjLWyAh03fyg
-         6L5KdP0T2rY+0QnmYWzXI9QO5A34nLSv+/iR0=
+        d=citrix.com; s=google; t=1715381121; x=1715985921; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Sn6WsIBQzi2paWx2AV+3jgJbQsaBnBIozeWKELO4BZU=;
+        b=BFn+FueisxjxAw4xnWWTs+rHKR1eo/lTAl+lpsxSAi7zyM0BTbD286Q/YtPL+mDAKx
+         p+JUU+9zaJp8lvajZ6X2l4HXqnE+cdSPjCwKt71ayorLkk2CaxzkDFmGD2E3y2tURkjP
+         HbyZCXOykr3qzYfx+lhZLw0rcqtxMZoTnVeEs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715380806; x=1715985606;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Phw85PeYT8ClsRvMd2JBZsNjZhs23kHM7gjroo/IJSY=;
-        b=utwtBdbmsfHhqI7ES8U5hzn0ERN0d/ISdjDv+ikcLwKG7T4NWd4JoyABk9yl5oGcNh
-         tWohC3IE2itRUgKfBDPdS6Uq/lLT9clwgwjgwGtj15cJR0kX7pvBSCK8qLWo27k9a0mc
-         Z6LbA9UzSBURBSzSmlPL/nTVNLxklrKM/LXjeyXaOhkTsMhaht1dfiMb2xU8b1e8QiAT
-         4t8na+IysUga5NCKRhPaUlSeS/KsiZvk8g1+WN1UC0yya/FmCQjAyEfM9sCihxX7el9s
-         bxi2fxbSRqqwLSYqawOn3FzvG5A21mrvwPQnEtpDudfFnIfsobnrS6sP8fpkYHAKymKx
-         otvA==
-X-Gm-Message-State: AOJu0YykJ1zS3nijXdp/UwsLH7Ks+6VUB+ANQ5K3N7M976MQTMnbUFvS
-	Jc/IB5kVby7eOYMknVhYf0xONeVWcf6l07JfLXJuKzrSMAJd3EQtgXmSG6yznDf2+vLot9xQxWZ
-	i
-X-Google-Smtp-Source: AGHT+IHf4xSJp8NCGGmvT9XjSTZCP+6zYExEd3Ow9Gm2SOkX5JRmY26CWDUdpoU0non11Cvmx80fkQ==
-X-Received: by 2002:a17:907:77c3:b0:a59:9db6:535d with SMTP id a640c23a62f3a-a5a2d67862amr251200766b.65.1715380806572;
-        Fri, 10 May 2024 15:40:06 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>
-Subject: [PATCH 3/4] tools/xen-cpuid: Use automatically generated feature names
-Date: Fri, 10 May 2024 23:40:01 +0100
-Message-Id: <20240510224002.2324578-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240510224002.2324578-1-andrew.cooper3@citrix.com>
-References: <20240510224002.2324578-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20230601; t=1715381121; x=1715985921;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Sn6WsIBQzi2paWx2AV+3jgJbQsaBnBIozeWKELO4BZU=;
+        b=PaQaw+h3465u/OMRpvDTCKwLc9Zr2m2tKN8/sYbxnQyYj6Ls80E/aulbDVdGs9eeJg
+         f6tMFNv+9ZqrF3vnixsdNJ2yvyaIzOEWySbxGVPmjWToeZu84ywFYBPxaPcLnxFGzD1x
+         202YQ1OT+dEgvSArGxo10lW+sG2t5/LMEG/9ciCOtVk27+rLkpicxbh1lI8MY1qZLD4Y
+         PXIBig4t9DkWXFeac5gMq5qALQl0d6EAfCufj7eJeg90/2K+fv9CsGhSWyDvhrIQ4h7B
+         9IX9VYSRjzCQF6kFzNWMLtJzSbmynn5YxAcoggErISIf7LoE39AyEYjh4zWORwc8Trg9
+         2ZgA==
+X-Forwarded-Encrypted: i=1; AJvYcCXhi6zWTODcXNdvwNY1PxHlZ7/4sD6ktntuDZ+cr9dUCi0JhoHF0okt2WOPTRTllu+CqzHUZnEEbBfgJUxFfdxo9jP2//qM8UrKgv9/g+I=
+X-Gm-Message-State: AOJu0Yxpz0sCmHbkjcMspFxYQbX4yqX1DNPtGYOf6v7X/4oO/ZpOXR3X
+	o6btXu9dKPNTx1v9AZsXN8gvq+eI7BOx19GNzGlU8pdrxR8KBNHPeP0vayt9X+c=
+X-Google-Smtp-Source: AGHT+IHLax7T17bbvizcPdXomnhVe6GKAZmA6+qk9CH8eom9zoZKay3NOCDtz1jUPjv8wq4BkaIyRw==
+X-Received: by 2002:a05:600c:1f93:b0:417:d4f5:6501 with SMTP id 5b1f17b1804b1-41feac5a3b8mr29511265e9.27.1715381121468;
+        Fri, 10 May 2024 15:45:21 -0700 (PDT)
+Message-ID: <be534982-5b4f-4f90-8484-faf09e44a618@citrix.com>
+Date: Fri, 10 May 2024 23:45:20 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] docs/misra: add R21.6 R21.9 R21.10 R21.14 R21.15
+ R21.16
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>
+References: <alpine.DEB.2.22.394.2404261435010.3940@ubuntu-linux-20-04-desktop>
+ <cf0cd2ef-58df-476f-89c5-c843a85f71f7@citrix.com>
+Content-Language: en-GB
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <cf0cd2ef-58df-476f-89c5-c843a85f71f7@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+On 10/05/2024 10:48 pm, Andrew Cooper wrote:
+> On 26/04/2024 10:36 pm, Stefano Stabellini wrote:
+>> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+>> ---
+>>
+>> Changes in v3:
+>> - add explanation in footnote
+>> - remove comment from 21.14, 21.15, 21.16
+>>
+>>  docs/misra/rules.rst | 42 ++++++++++++++++++++++++++++++++++++++++++
+>>  1 file changed, 42 insertions(+)
+>>
+>> diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+>> index b7b447e152..5ba7394f05 100644
+>> --- a/docs/misra/rules.rst
+>> +++ b/docs/misra/rules.rst
+>> @@ -652,12 +652,48 @@ maintainers if you want to suggest a change.
+>>         declared
+>>       - See comment for Rule 21.1
+>>  
+>> +   * - `Rule 21.6 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_06.c>`_
+>> +     - Required
+>> +     - The Standard Library input/output routines shall not be used
+>> +     - Xen doesn't provide, use, or link against a Standard Library [1]_
+>> +
+>> +   * - `Rule 21.9 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_09.c>`_
+>> +     - Required
+>> +     - The library functions bsearch and qsort of <stdlib.h> shall not be used
+>> +     - Xen doesn't provide, use, or link against a Standard Library [1]_
+>> +
+>> +   * - `Rule 21.10 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_10.c>`_
+>> +     - Required
+>> +     - The Standard Library time and date routines shall not be used
+>> +     - Xen doesn't provide, use, or link against a Standard Library [1]_
+>> +
+>>     * - `Rule 21.13 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_13.c>`_
+>>       - Mandatory
+>>       - Any value passed to a function in <ctype.h> shall be representable as an
+>>         unsigned char or be the value EOF
+>>       -
+>>  
+>> +   * - `Rule 21.14 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_14.c>`_
+>> +     - Required
+>> +     - The Standard Library function memcmp shall not be used to compare
+>> +       null terminated strings
+>> +     -
+>> +
+>> +   * - `Rule 21.15 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_15.c>`_
+>> +     - Required
+>> +     - The pointer arguments to the Standard Library functions memcpy,
+>> +       memmove and memcmp shall be pointers to qualified or unqualified
+>> +       versions of compatible types
+>> +     -
+>> +
+>> +   * - `Rule 21.16 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_16.c>`_
+>> +     - Required
+>> +     - The pointer arguments to the Standard Library function memcmp
+>> +       shall point to either a pointer type, an essentially signed type,
+>> +       an essentially unsigned type, an essentially Boolean type or an
+>> +       essentially enum type
+>> +     - void* arguments are allowed
+>> +
+>>     * - `Rule 21.17 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_21_17.c>`_
+>>       - Mandatory
+>>       - Use of the string handling functions from <string.h> shall not result in
+>> @@ -712,3 +748,9 @@ maintainers if you want to suggest a change.
+>>       - The value of a pointer to a FILE shall not be used after the associated
+>>         stream has been closed
+>>       -
+>> +
+>> +
+>> +.. [1] Xen implements itself a few functions with names that match the
+>> +       corresponding function names of the Standard Library for developers'
+>> +       convenience. These functions are part of the Xen code and subject to
+>> +       analysis.
+> I discovered the hard way (c/s 1357f1fa588f1) that numbered footnotes
+> are an issue when the document gets more complicated.
+>
+> I'd suggest using #xen-stdlib as a named footnote instead of [1].
+>
+> Can fix on commit.
 
-Have gen-cpuid.py write out INIT_FEATURE_VAL_TO_NAME, derived from the same
-data source as INIT_FEATURE_NAME_TO_VAL, although both aliases of common_1d
-are needed.
+And a ".. rubric:: Footnotes" is wanted too.  Fixed on commit, after
+conferring with Stefano.
 
-In xen-cpuid.c, have the compiler pad both leaf_info[] and feature_names[] if
-necessary.  This avoids needing complicated cross-checks.
-
-As dump_leaf() rendered missing names as numbers, always dump leaves even if
-we don't have the leaf name.  This conversion was argumably missed in commit
-59afdb8a81d6 ("tools/misc: Tweak reserved bit handling for xen-cpuid").
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-
-Differences in names are:
-
- sysenter    -> sep
- tm          -> tm1
- ds-cpl      -> dscpl
- est         -> eist
- sse41       -> sse4-1
- sse42       -> sse4-2
- movebe      -> movbe
- tsc-dl      -> tsc-deadline
- rdrnd       -> rdrand
- hyper       -> hypervisor
- mmx+        -> mmext
- fxsr+       -> ffxsr
- pg1g        -> page1gb
- 3dnow+      -> 3dnowext
- cmp         -> cmp-legacy
- cr8d        -> cr8-legacy
- lzcnt       -> abm
- msse        -> misalignsse
- 3dnowpf     -> 3dnowprefetch
- nodeid      -> nodeid-msr
- dbx         -> dbext
- tsc-adj     -> tsc-adjust
- fdp-exn     -> fdp-excp-only
- deffp       -> no-fpu-sel
- <24>        -> bld
- ppin        -> amd-ppin
- lfence+     -> lfence-dispatch
- ppin        -> intel-ppin
- energy-ctrl -> energy-filtering
-
-Apparently BLD missed the update to xen-cpuid.c.  It appears to be the only
-one.  Several of the + names would be nice to keep as were, but doing so isn't
-nice in gen-cpuid.  Any changes would alter the {dom0-}cpuid= cmdline options,
-but we intentionally don't list them, so I'm not worried.
-
-Thoughts?
-
-v3:
- * Rework somewhat.
- * Insert aliases of common_1d.
----
- tools/misc/xen-cpuid.c | 15 ++++++---------
- xen/tools/gen-cpuid.py | 21 +++++++++++++++++++++
- 2 files changed, 27 insertions(+), 9 deletions(-)
-
-diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
-index 6ee835b22949..2f34694e9c57 100644
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -11,6 +11,7 @@
- #include <xenguest.h>
- 
- #include <xen-tools/common-macros.h>
-+#include <xen/lib/x86/cpuid-autogen.h>
- 
- static uint32_t nr_features;
- 
-@@ -268,7 +269,7 @@ static const struct {
-     const char *name;
-     const char *abbr;
-     const char *const *strs;
--} leaf_info[] = {
-+} leaf_info[FEATURESET_NR_ENTRIES] = {
-     { "CPUID 0x00000001.edx",        "1d", str_1d },
-     { "CPUID 0x00000001.ecx",        "1c", str_1c },
-     { "CPUID 0x80000001.edx",       "e1d", str_e1d },
-@@ -291,6 +292,9 @@ static const struct {
- 
- #define COL_ALIGN "24"
- 
-+static const char *const feature_names[(FEATURESET_NR_ENTRIES + 1) << 5] =
-+    INIT_FEATURE_VAL_TO_NAME;
-+
- static const char *const fs_names[] = {
-     [XEN_SYSCTL_cpu_featureset_raw]     = "Raw",
-     [XEN_SYSCTL_cpu_featureset_host]    = "Host",
-@@ -304,12 +308,6 @@ static void dump_leaf(uint32_t leaf, const char *const *strs)
- {
-     unsigned i;
- 
--    if ( !strs )
--    {
--        printf(" ???");
--        return;
--    }
--
-     for ( i = 0; i < 32; ++i )
-         if ( leaf & (1u << i) )
-         {
-@@ -338,8 +336,7 @@ static void decode_featureset(const uint32_t *features,
-     for ( i = 0; i < length && i < ARRAY_SIZE(leaf_info); ++i )
-     {
-         printf("  [%02u] %-"COL_ALIGN"s", i, leaf_info[i].name ?: "<UNKNOWN>");
--        if ( leaf_info[i].name )
--            dump_leaf(features[i], leaf_info[i].strs);
-+        dump_leaf(features[i], &feature_names[i * 32]);
-         printf("\n");
-     }
- }
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index 79d7f5c8e1c9..d0bb2e4a229f 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -470,6 +470,27 @@ def write_results(state):
-     state.output.write(
- """}
- 
-+""")
-+
-+    state.output.write(
-+"""
-+#define INIT_FEATURE_VAL_TO_NAME { \\
-+""")
-+
-+    for name, bit in sorted(state.values.items()):
-+        state.output.write(
-+            '    [%s] = "%s",\\\n' % (bit, name)
-+            )
-+
-+        # Add the other alias for 1d/e1d common bits
-+        if bit in state.common_1d:
-+            state.output.write(
-+                '    [%s] = "%s",\\\n' % (64 + bit, name)
-+            )
-+
-+    state.output.write(
-+"""}
-+
- """)
- 
-     for idx, text in enumerate(state.bitfields):
--- 
-2.30.2
-
+~Andrew
 
