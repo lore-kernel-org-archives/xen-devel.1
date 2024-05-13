@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBAC1C25B5F
-	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2024 13:41:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.720927.1123998 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715B7C25B79
+	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2024 13:41:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.720929.1124022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s6VvW-00041q-8W; Mon, 13 May 2024 13:41:14 +0000
+	id 1s6VvY-0004lI-Rd; Mon, 13 May 2024 13:41:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 720927.1123998; Mon, 13 May 2024 13:41:14 +0000
+Received: by outflank-mailman (output) from mailman id 720929.1124022; Mon, 13 May 2024 13:41:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s6VvV-00040w-V3; Mon, 13 May 2024 13:41:13 +0000
-Received: by outflank-mailman (input) for mailman id 720927;
- Mon, 13 May 2024 13:41:12 +0000
+	id 1s6VvY-0004l2-Nd; Mon, 13 May 2024 13:41:16 +0000
+Received: by outflank-mailman (input) for mailman id 720929;
+ Mon, 13 May 2024 13:41:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w2Lj=MQ=amazon.co.uk=prvs=8568adbc3=eliasely@srs-se1.protection.inumbo.net>)
- id 1s6VvU-0002lY-P7
- for xen-devel@lists.xenproject.org; Mon, 13 May 2024 13:41:12 +0000
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com
- [99.78.197.220]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7461a6a4-112e-11ef-b4bb-af5377834399;
- Mon, 13 May 2024 15:41:10 +0200 (CEST)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.25.36.210])
- by smtp-border-fw-80009.pdx80.corp.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2024 13:41:06 +0000
-Received: from EX19MTAUEA001.ant.amazon.com [10.0.29.78:8888]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.42.97:2525]
- with esmtp (Farcaster)
- id 7a338e33-2920-4928-86c0-716608c0b7ff; Mon, 13 May 2024 13:41:06 +0000 (UTC)
-Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
- EX19MTAUEA001.ant.amazon.com (10.252.134.203) with Microsoft SMTP Server
+ id 1s6VvW-0002lY-G8
+ for xen-devel@lists.xenproject.org; Mon, 13 May 2024 13:41:14 +0000
+Received: from smtp-fw-6002.amazon.com (smtp-fw-6002.amazon.com [52.95.49.90])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7607bc47-112e-11ef-b4bb-af5377834399;
+ Mon, 13 May 2024 15:41:12 +0200 (CEST)
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.43.8.6])
+ by smtp-border-fw-6002.iad6.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2024 13:41:10 +0000
+Received: from EX19MTAUEB001.ant.amazon.com [10.0.29.78:59609]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.4.17:2525] with
+ esmtp (Farcaster)
+ id b0625eca-4095-429b-ae8c-57fb22cad0fb; Mon, 13 May 2024 13:41:09 +0000 (UTC)
+Received: from EX19D008UEA001.ant.amazon.com (10.252.134.62) by
+ EX19MTAUEB001.ant.amazon.com (10.252.135.108) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Mon, 13 May 2024 13:41:02 +0000
+ 15.2.1258.28; Mon, 13 May 2024 13:41:08 +0000
 Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
- EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
+ EX19D008UEA001.ant.amazon.com (10.252.134.62) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Mon, 13 May 2024 13:41:01 +0000
+ 15.2.1258.28; Mon, 13 May 2024 13:41:07 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28 via Frontend Transport; Mon, 13 May 2024 13:41:00 +0000
+ 15.2.1258.28 via Frontend Transport; Mon, 13 May 2024 13:41:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,30 +58,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7461a6a4-112e-11ef-b4bb-af5377834399
+X-Inumbo-ID: 7607bc47-112e-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1715607670; x=1747143670;
+  t=1715607673; x=1747143673;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=TyQ1NOFs+JBNhEZ9nul6mULL97GoHUzPHp2fRNIcmm8=;
-  b=HNwzFK4Nk+oVDM9J24x97/R7AEqYlxqBWwIL7yypUJW3j0WNpa2VFi5k
-   sO5yIl6/aBtYDh3apEP75oCoR07ij6kpD9KGmDRFyA1xdo7Wh6NDWeRdS
-   BmDKdUABdX69Alxlkw7TkU2ryzvzIAgvZ1MuKFDBMTX7k7HMA446kFnwG
-   g=;
+  bh=tb2fNfqN0eF/OdROl8BG6kceQk3KA1cAs0YAyUr8QAc=;
+  b=IObegGfxLKD8fddKWloBtG6mYxTR4BATPPEiPpqc0T8EhiOQ76oP2GIX
+   XrRA1Ayh4dt/lVQ9j5fTRYbv54h0Na6E/j8zfl0dyXSfO9M4/0n5n8VtU
+   SYV+5ZYwYNYpiSD28b7T78CKmFjDhdT8X6g3oA0Zu6epVeA0GcGUoLzxB
+   I=;
 X-IronPort-AV: E=Sophos;i="6.08,158,1712620800"; 
-   d="scan'208";a="88857716"
-X-Farcaster-Flow-ID: 7a338e33-2920-4928-86c0-716608c0b7ff
+   d="scan'208";a="406401335"
+X-Farcaster-Flow-ID: b0625eca-4095-429b-ae8c-57fb22cad0fb
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
-	<hongyxia@amazon.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Wang <wawei@amazon.de>, Julien Grall
-	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
-Subject: [PATCH V3 (resend) 05/19] x86/mapcache: Initialise the mapcache for the idle domain
-Date: Mon, 13 May 2024 13:40:32 +0000
-Message-ID: <20240513134046.82605-6-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Elias El
+ Yandouzi" <eliasely@amazon.com>, Jan Beulich <jbeulich@suse.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>
+Subject: [PATCH V3 (resend) 08/19] xen/x86: Add build assertion for fixmap entries
+Date: Mon, 13 May 2024 13:40:35 +0000
+Message-ID: <20240513134046.82605-9-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240513134046.82605-1-eliasely@amazon.com>
 References: <20240513134046.82605-1-eliasely@amazon.com>
@@ -89,67 +88,32 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Hongyan Xia <hongyxia@amazon.com>
+The early fixed addresses must all fit into the static L1 table.
+Introduce a build assertion to this end.
 
-In order to use the mapcache in the idle domain, we also have to
-populate its page tables in the PERDOMAIN region, and we need to move
-mapcache_domain_init() earlier in arch_domain_create().
-
-Note, commit 'x86: lift mapcache variable to the arch level' has
-initialised the mapcache for HVM domains. With this patch, PV, HVM,
-idle domains now all initialise the mapcache.
-
-Signed-off-by: Wei Wang <wawei@amazon.de>
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
 ----
 
-	Changes in V2:
-          * Free resources if mapcache initialisation fails
-          * Remove `is_idle_domain()` check from `create_perdomain_mappings()`
+     Changes in v2:
+         * New patch
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 507d704f16..3303bdb53e 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -758,9 +758,16 @@ int arch_domain_create(struct domain *d,
+diff --git a/xen/arch/x86/include/asm/fixmap.h b/xen/arch/x86/include/asm/fixmap.h
+index a7ac365fc6..904bee0480 100644
+--- a/xen/arch/x86/include/asm/fixmap.h
++++ b/xen/arch/x86/include/asm/fixmap.h
+@@ -77,6 +77,11 @@ enum fixed_addresses {
+ #define FIXADDR_SIZE  (__end_of_fixed_addresses << PAGE_SHIFT)
+ #define FIXADDR_START (FIXADDR_TOP - FIXADDR_SIZE)
  
-     spin_lock_init(&d->arch.e820_lock);
- 
-+    if ( (rc = mapcache_domain_init(d)) != 0)
-+    {
-+        free_perdomain_mappings(d);
-+        return rc;
-+    }
++static inline void fixaddr_build_assertion(void)
++{
++    BUILD_BUG_ON(FIX_PMAP_END > L1_PAGETABLE_ENTRIES - 1);
++}
 +
-     /* Minimal initialisation for the idle domain. */
-     if ( unlikely(is_idle_domain(d)) )
-     {
-+        struct page_info *pg = d->arch.perdomain_l3_pg;
-         static const struct arch_csw idle_csw = {
-             .from = paravirt_ctxt_switch_from,
-             .to   = paravirt_ctxt_switch_to,
-@@ -771,6 +778,9 @@ int arch_domain_create(struct domain *d,
+ extern void __set_fixmap(
+     enum fixed_addresses idx, unsigned long mfn, unsigned long flags);
  
-         d->arch.cpu_policy = ZERO_BLOCK_PTR; /* Catch stray misuses. */
- 
-+        idle_pg_table[l4_table_offset(PERDOMAIN_VIRT_START)] =
-+            l4e_from_page(pg, __PAGE_HYPERVISOR_RW);
-+
-         return 0;
-     }
- 
-@@ -851,8 +861,6 @@ int arch_domain_create(struct domain *d,
- 
-     psr_domain_init(d);
- 
--    mapcache_domain_init(d);
--
-     if ( is_hvm_domain(d) )
-     {
-         if ( (rc = hvm_domain_initialise(d, config)) != 0 )
 -- 
 2.40.1
 
