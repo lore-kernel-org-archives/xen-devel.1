@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86902C25B78
-	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2024 11:12:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.720821.1123855 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F7DC25B7A
+	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2024 11:12:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.720823.1123870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s6TbD-0007Jn-3I; Mon, 13 May 2024 11:12:07 +0000
+	id 1s6TbF-0007iu-5f; Mon, 13 May 2024 11:12:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 720821.1123855; Mon, 13 May 2024 11:12:06 +0000
+Received: by outflank-mailman (output) from mailman id 720823.1123870; Mon, 13 May 2024 11:12:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s6TbC-0007I6-MT; Mon, 13 May 2024 11:12:06 +0000
-Received: by outflank-mailman (input) for mailman id 720821;
- Mon, 13 May 2024 11:12:05 +0000
+	id 1s6TbE-0007c5-3u; Mon, 13 May 2024 11:12:08 +0000
+Received: by outflank-mailman (input) for mailman id 720823;
+ Mon, 13 May 2024 11:12:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w2Lj=MQ=amazon.co.uk=prvs=8568adbc3=eliasely@srs-se1.protection.inumbo.net>)
- id 1s6TbA-0003MC-B2
- for xen-devel@lists.xenproject.org; Mon, 13 May 2024 11:12:04 +0000
-Received: from smtp-fw-9102.amazon.com (smtp-fw-9102.amazon.com
- [207.171.184.29]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9f3767fb-1119-11ef-909d-e314d9c70b13;
- Mon, 13 May 2024 13:12:02 +0200 (CEST)
+ id 1s6TbC-0003MC-BK
+ for xen-devel@lists.xenproject.org; Mon, 13 May 2024 11:12:06 +0000
+Received: from smtp-fw-80008.amazon.com (smtp-fw-80008.amazon.com
+ [99.78.197.219]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9f6b2f0d-1119-11ef-909d-e314d9c70b13;
+ Mon, 13 May 2024 13:12:03 +0200 (CEST)
 Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO
  smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.25.36.214])
- by smtp-border-fw-9102.sea19.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2024 11:11:55 +0000
-Received: from EX19MTAUEA002.ant.amazon.com [10.0.29.78:56418]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.83.223:2525]
+ by smtp-border-fw-80008.pdx80.corp.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2024 11:12:00 +0000
+Received: from EX19MTAUEB002.ant.amazon.com [10.0.29.78:51808]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.61.78:2525]
  with esmtp (Farcaster)
- id 2b21e6f7-2a58-484f-8d2a-a0460334d2b3; Mon, 13 May 2024 11:11:53 +0000 (UTC)
-Received: from EX19D008UEA001.ant.amazon.com (10.252.134.62) by
- EX19MTAUEA002.ant.amazon.com (10.252.134.9) with Microsoft SMTP Server
+ id 41b2d30f-ddb1-4efb-88b6-74e78337e70b; Mon, 13 May 2024 11:11:59 +0000 (UTC)
+Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
+ EX19MTAUEB002.ant.amazon.com (10.252.135.47) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Mon, 13 May 2024 11:11:53 +0000
+ 15.2.1258.28; Mon, 13 May 2024 11:11:59 +0000
 Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
- EX19D008UEA001.ant.amazon.com (10.252.134.62) with Microsoft SMTP Server
+ EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Mon, 13 May 2024 11:11:53 +0000
+ 15.2.1258.28; Mon, 13 May 2024 11:11:59 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28 via Frontend Transport; Mon, 13 May 2024 11:11:52 +0000
+ 15.2.1258.28 via Frontend Transport; Mon, 13 May 2024 11:11:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,27 +58,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9f3767fb-1119-11ef-909d-e314d9c70b13
+X-Inumbo-ID: 9f6b2f0d-1119-11ef-909d-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
   t=1715598723; x=1747134723;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=mKCZV9DzUavScUGAYIjbkqz34voMdE7B7ItlMBncNvQ=;
-  b=FfUMR3FUAQYz29EJ9SvP5Rw00w8z4QDxALGWzwo9OmjSS89RiGydwsIk
-   X66HYB3wa4pD4AsIUWKi1/+1q763DiuGMA/irfseHAkumpZXkYSV43WTY
-   ZHxiagunKNRZUMWvN/Dh1Dq7kF2sOwMlh7tmtCg4SwHnfbOPagi9kpOA2
-   k=;
+  bh=Xrly80bM9b4Iylo4MumX8GuIMjwgPtJngKOUTgszWKw=;
+  b=NNSZ4aiOHDISjYhEmI2cPwno0y4heS2Sv78NGsBVFBfKshrdXdegk25/
+   jFeoToBxM9IYr8oiVqy2jJy+CRdvZW61ffpElN8a1I17RqejfY/jHuRPP
+   i0xRkm08MkGArh19vdAuFS303PKiqA1DMOnqTx0WmlnG70rJUDpZDiiu+
+   s=;
 X-IronPort-AV: E=Sophos;i="6.08,158,1712620800"; 
-   d="scan'208";a="418645273"
-X-Farcaster-Flow-ID: 2b21e6f7-2a58-484f-8d2a-a0460334d2b3
+   d="scan'208";a="88736903"
+X-Farcaster-Flow-ID: 41b2d30f-ddb1-4efb-88b6-74e78337e70b
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Elias El
- Yandouzi" <eliasely@amazon.com>
-Subject: [PATCH V3 14/19] Rename mfn_to_virt() calls
-Date: Mon, 13 May 2024 11:11:12 +0000
-Message-ID: <20240513111117.68828-15-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Julien Grall
+	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
+Subject: [PATCH V3 18/19] xen/arm64: Implement a mapcache for arm64
+Date: Mon, 13 May 2024 11:11:16 +0000
+Message-ID: <20240513111117.68828-19-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240513111117.68828-1-eliasely@amazon.com>
 References: <20240513111117.68828-1-eliasely@amazon.com>
@@ -86,298 +86,270 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Until directmap gets completely removed, we'd still need to
-keep some calls to mfn_to_virt() for xenheap pages or when the
-directmap is enabled.
+From: Julien Grall <jgrall@amazon.com>
 
-Rename the macro to mfn_to_directmap_virt() to flag them and
-prevent further use of mfn_to_virt().
+At the moment, on arm64, map_domain_page() is implemented using
+virt_to_mfn(). Therefore it is relying on the directmap.
 
+In a follow-up patch, we will allow the admin to remove the directmap.
+Therefore we want to implement a mapcache.
+
+Thanksfully there is already one for arm32. So select ARCH_ARM_DOMAIN_PAGE
+and add the necessary boiler plate to support 64-bit:
+    - The page-table start at level 0, so we need to allocate the level
+      1 page-table
+    - map_domain_page() should check if the page is in the directmap. If
+      yes, then use virt_to_mfn() to limit the performance impact
+      when the directmap is still enabled (this will be selectable
+      on the command line).
+
+Take the opportunity to replace first_table_offset(...) with offsets[...].
+
+Note that, so far, arch_mfns_in_directmap() always return true on
+arm64. So the mapcache is not yet used. This will change in a
+follow-up patch.
+
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
+----
+
+    There are a few TODOs:
+        - It is becoming more critical to fix the mapcache
+          implementation (this is not compliant with the Arm Arm)
+        - Evaluate the performance
+
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 21d03d9f44..0462960fc7 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -1,7 +1,6 @@
+ config ARM_32
+ 	def_bool y
+ 	depends on "$(ARCH)" = "arm32"
+-	select ARCH_MAP_DOMAIN_PAGE
+ 
+ config ARM_64
+ 	def_bool y
+diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
+index 2ec1ffe1dc..826864d25d 100644
+--- a/xen/arch/arm/arm64/mmu/mm.c
++++ b/xen/arch/arm/arm64/mmu/mm.c
+@@ -4,6 +4,7 @@
+ #include <xen/mm.h>
+ #include <xen/pfn.h>
+ 
++#include <asm/domain_page.h>
+ #include <asm/setup.h>
+ #include <asm/static-memory.h>
+ #include <asm/static-shmem.h>
+@@ -237,6 +238,14 @@ void __init setup_mm(void)
+     setup_frametable_mappings(ram_start, ram_end);
+     max_page = PFN_DOWN(ram_end);
+ 
++    /*
++     * The allocators may need to use map_domain_page() (such as for
++     * scrubbing pages). So we need to prepare the domheap area first.
++     */
++    if ( !init_domheap_mappings(smp_processor_id()) )
++        panic("CPU%u: Unable to prepare the domheap page-tables\n",
++              smp_processor_id());
++
+     init_staticmem_pages();
+     init_sharedmem_pages();
+ }
+diff --git a/xen/arch/arm/domain_page.c b/xen/arch/arm/domain_page.c
+index ac2a6d0332..0f6ba48892 100644
+--- a/xen/arch/arm/domain_page.c
++++ b/xen/arch/arm/domain_page.c
+@@ -1,4 +1,5 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
++#include <xen/domain_page.h>
+ #include <xen/mm.h>
+ #include <xen/pmap.h>
+ #include <xen/vmap.h>
+@@ -8,6 +9,8 @@
+ /* Override macros from asm/page.h to make them work with mfn_t */
+ #undef virt_to_mfn
+ #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
++#undef mfn_to_virt
++#define mfn_to_virt(va) __mfn_to_virt(mfn_x(mfn))
+ 
+ /* cpu0's domheap page tables */
+ static DEFINE_PAGE_TABLES(cpu0_dommap, DOMHEAP_SECOND_PAGES);
+@@ -31,13 +34,30 @@ bool init_domheap_mappings(unsigned int cpu)
+ {
+     unsigned int order = get_order_from_pages(DOMHEAP_SECOND_PAGES);
+     lpae_t *root = per_cpu(xen_pgtable, cpu);
++    lpae_t *first;
+     unsigned int i, first_idx;
+     lpae_t *domheap;
+     mfn_t mfn;
+ 
++    /* Convenience aliases */
++    DECLARE_OFFSETS(offsets, DOMHEAP_VIRT_START);
++
+     ASSERT(root);
+     ASSERT(!per_cpu(xen_dommap, cpu));
+ 
++    /*
++     * On Arm64, the root is at level 0. Therefore we need an extra step
++     * to allocate the first level page-table.
++     */
++#ifdef CONFIG_ARM_64
++    if ( create_xen_table(&root[offsets[0]]) )
++        return false;
++
++    first = xen_map_table(lpae_get_mfn(root[offsets[0]]));
++#else
++    first = root;
++#endif
++
+     /*
+      * The domheap for cpu0 is initialized before the heap is initialized.
+      * So we need to use pre-allocated pages.
+@@ -58,16 +78,20 @@ bool init_domheap_mappings(unsigned int cpu)
+      * domheap mapping pages.
+      */
+     mfn = virt_to_mfn(domheap);
+-    first_idx = first_table_offset(DOMHEAP_VIRT_START);
++    first_idx = offsets[1];
+     for ( i = 0; i < DOMHEAP_SECOND_PAGES; i++ )
+     {
+         lpae_t pte = mfn_to_xen_entry(mfn_add(mfn, i), MT_NORMAL);
+         pte.pt.table = 1;
+-        write_pte(&root[first_idx + i], pte);
++        write_pte(&first[first_idx + i], pte);
+     }
+ 
+     per_cpu(xen_dommap, cpu) = domheap;
+ 
++#ifdef CONFIG_ARM_64
++    xen_unmap_table(first);
++#endif
++
+     return true;
+ }
+ 
+@@ -91,6 +115,10 @@ void *map_domain_page(mfn_t mfn)
+     lpae_t pte;
+     int i, slot;
+ 
++    /* Bypass the mapcache if the page is in the directmap */
++    if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
++        return mfn_to_virt(mfn);
++
+     local_irq_save(flags);
+ 
+     /* The map is laid out as an open-addressed hash table where each
+@@ -153,13 +181,25 @@ void *map_domain_page(mfn_t mfn)
+ /* Release a mapping taken with map_domain_page() */
+ void unmap_domain_page(const void *ptr)
+ {
++    unsigned long va = (unsigned long)ptr;
+     unsigned long flags;
+     lpae_t *map = this_cpu(xen_dommap);
+-    int slot = ((unsigned long)ptr - DOMHEAP_VIRT_START) >> SECOND_SHIFT;
++    unsigned int slot;
++
++    /* Below we assume that the domheap area doesn't start at 0 */
++    BUILD_BUG_ON(DOMHEAP_VIRT_START == 0);
+ 
+-    if ( !ptr )
++    /*
++     * map_domain_page() may not have mapped anything if the address
++     * is part of the directmap. So ignore anything outside of the
++     * domheap.
++     */
++    if ( (va < DOMHEAP_VIRT_START) ||
++         ((va - DOMHEAP_VIRT_START) >= DOMHEAP_VIRT_SIZE) )
+         return;
+ 
++    slot = (va - DOMHEAP_VIRT_START) >> SECOND_SHIFT;
++
+     local_irq_save(flags);
+ 
+     ASSERT(slot >= 0 && slot < DOMHEAP_ENTRIES);
 diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 48538b5337..2bca3f9e87 100644
+index 60e0122cba..610dfa0466 100644
 --- a/xen/arch/arm/include/asm/mm.h
 +++ b/xen/arch/arm/include/asm/mm.h
-@@ -336,6 +336,7 @@ static inline uint64_t gvirt_to_maddr(vaddr_t va, paddr_t *pa,
-  */
- #define virt_to_mfn(va)     __virt_to_mfn(va)
- #define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
-+#define mfn_to_directmap_virt(mfn) mfn_to_virt(mfn)
+@@ -432,6 +432,11 @@ static inline void page_set_xenheap_gfn(struct page_info *p, gfn_t gfn)
+     } while ( (y = cmpxchg(&p->u.inuse.type_info, x, nx)) != x );
+ }
  
- /* Convert between Xen-heap virtual addresses and page-info structures. */
- static inline struct page_info *virt_to_page(const void *v)
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 89caefc8a2..62d6fee0f4 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -81,14 +81,14 @@ void *map_domain_page(mfn_t mfn)
++/* Helpers to allocate, map and unmap a Xen page-table */
++int create_xen_table(lpae_t *entry);
++lpae_t *xen_map_table(mfn_t mfn);
++void xen_unmap_table(const lpae_t *table);
++
+ #endif /*  __ARCH_ARM_MM__ */
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/mmu/layout.h b/xen/arch/arm/include/asm/mmu/layout.h
+index a3b546465b..c549420e8b 100644
+--- a/xen/arch/arm/include/asm/mmu/layout.h
++++ b/xen/arch/arm/include/asm/mmu/layout.h
+@@ -35,9 +35,13 @@
+  *
+  *  32G -  64G   Frametable: 56 bytes per page for 2TB of RAM
+  *
+- * 0x00000a8000000000 - 0x00007fffffffffff (512GB+117TB, L0 slots [21..255])
++ * 0x00000a8000000000 - 0x00007f7fffffffff (117TB, L0 slots [21..254])
+  *  Unused
+  *
++ * 0x00007f8000000000 - 0x00007fffffffffff (512GB, L0 slot [255])
++ *  (Relative offsets)
++ *  0  -    2G    Domheap: on-demand-mapped
++ *
+  * 0x0000800000000000 - 0x000084ffffffffff (5TB, L0 slots [256..265])
+  *  1:1 mapping of RAM
+  *
+@@ -130,6 +134,13 @@
+ #define FRAMETABLE_SIZE        GB(32)
+ #define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
  
- #ifdef NDEBUG
-     if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
--        return mfn_to_virt(mfn_x(mfn));
-+        return mfn_to_directmap_virt(mfn_x(mfn));
++#define DOMHEAP_VIRT_START     SLOT0(255)
++#define DOMHEAP_VIRT_SIZE      GB(2)
++
++#define DOMHEAP_ENTRIES        1024 /* 1024 2MB mapping slots */
++/* Number of domheap pagetable pages required at the second level (2MB mappings) */
++#define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
++
+ #define DIRECTMAP_VIRT_START   SLOT0(256)
+ #define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (266 - 256))
+ #define DIRECTMAP_VIRT_END     (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE - 1)
+diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
+index 1ed1a53ab1..da33c6c52e 100644
+--- a/xen/arch/arm/mmu/pt.c
++++ b/xen/arch/arm/mmu/pt.c
+@@ -33,7 +33,7 @@ mm_printk(const char *fmt, ...) {}
+ #define HYP_PT_ROOT_LEVEL 1
  #endif
  
-     v = mapcache_current_vcpu();
-     if ( !v || !v->domain->arch.mapcache.inuse )
-     {
-         if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
--            return mfn_to_virt(mfn_x(mfn));
-+            return mfn_to_directmap_virt(mfn_x(mfn));
-         else
-         {
-             BUG_ON(system_state >= SYS_STATE_smp_boot);
-@@ -324,7 +324,7 @@ void *map_domain_page_global(mfn_t mfn)
- 
- #ifdef NDEBUG
-     if ( arch_mfn_in_directmap(mfn_x(mfn, 1)) )
--        return mfn_to_virt(mfn_x(mfn));
-+        return mfn_to_directmap_virt(mfn_x(mfn));
- #endif
- 
-     return vmap(&mfn, 1);
-diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
-index b0cb96c3bc..d1482ae2f7 100644
---- a/xen/arch/x86/hvm/dom0_build.c
-+++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -439,7 +439,7 @@ static int __init pvh_populate_p2m(struct domain *d)
-                                  d->arch.e820[i].addr + d->arch.e820[i].size);
-             enum hvm_translation_result res =
-                  hvm_copy_to_guest_phys(mfn_to_maddr(_mfn(addr)),
--                                        mfn_to_virt(addr),
-+                                        mfn_to_directmap_virt(addr),
-                                         end - d->arch.e820[i].addr,
-                                         v);
- 
-@@ -725,7 +725,7 @@ static int __init pvh_load_kernel(struct domain *d, const module_t *image,
- 
-     if ( initrd != NULL )
-     {
--        rc = hvm_copy_to_guest_phys(last_addr, mfn_to_virt(initrd->mod_start),
-+        rc = hvm_copy_to_guest_phys(last_addr, mfn_to_directmap_virt(initrd->mod_start),
-                                     initrd_len, v);
-         if ( rc )
-         {
-diff --git a/xen/arch/x86/include/asm/page.h b/xen/arch/x86/include/asm/page.h
-index 350d1fb110..c6891b52d4 100644
---- a/xen/arch/x86/include/asm/page.h
-+++ b/xen/arch/x86/include/asm/page.h
-@@ -268,7 +268,7 @@ void copy_page_sse2(void *to, const void *from);
-  */
- #define mfn_valid(mfn)      __mfn_valid(mfn_x(mfn))
- #define virt_to_mfn(va)     __virt_to_mfn(va)
--#define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
-+#define mfn_to_directmap_virt(mfn)    __mfn_to_virt(mfn)
- #define virt_to_maddr(va)   __virt_to_maddr((unsigned long)(va))
- #define maddr_to_virt(ma)   __maddr_to_virt((unsigned long)(ma))
- #define maddr_to_page(ma)   __maddr_to_page(ma)
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index efdf20f775..337363cf17 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -318,8 +318,8 @@ void __init arch_init_memory(void)
-         iostart_pfn = max_t(unsigned long, pfn, 1UL << (20 - PAGE_SHIFT));
-         ioend_pfn = min(rstart_pfn, 16UL << (20 - PAGE_SHIFT));
-         if ( iostart_pfn < ioend_pfn )
--            destroy_xen_mappings((unsigned long)mfn_to_virt(iostart_pfn),
--                                 (unsigned long)mfn_to_virt(ioend_pfn));
-+            destroy_xen_mappings((unsigned long)mfn_to_directmap_virt(iostart_pfn),
-+                                 (unsigned long)mfn_to_directmap_virt(ioend_pfn));
- 
-         /* Mark as I/O up to next RAM region. */
-         for ( ; pfn < rstart_pfn; pfn++ )
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 919347d8c2..e0671ab3c3 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -399,7 +399,7 @@ void *__init bootstrap_map(const module_t *mod)
-     void *ret;
- 
-     if ( system_state != SYS_STATE_early_boot )
--        return mod ? mfn_to_virt(mod->mod_start) : NULL;
-+        return mod ? mfn_to_directmap_virt(mod->mod_start) : NULL;
- 
-     if ( !mod )
-     {
-@@ -1708,7 +1708,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     {
-         set_pdx_range(mod[i].mod_start,
-                       mod[i].mod_start + PFN_UP(mod[i].mod_end));
--        map_pages_to_xen((unsigned long)mfn_to_virt(mod[i].mod_start),
-+        map_pages_to_xen((unsigned long)mfn_to_directmap_virt(mod[i].mod_start),
-                          _mfn(mod[i].mod_start),
-                          PFN_UP(mod[i].mod_end), PAGE_HYPERVISOR);
-     }
-diff --git a/xen/arch/x86/tboot.c b/xen/arch/x86/tboot.c
-index ba0700d2d5..58df01dfb9 100644
---- a/xen/arch/x86/tboot.c
-+++ b/xen/arch/x86/tboot.c
-@@ -253,7 +253,7 @@ static void tboot_gen_xenheap_integrity(const uint8_t key[TB_KEY_SIZE],
-             continue; /* skip tboot and its page tables */
- 
-         if ( is_page_in_use(page) && is_special_page(page) )
--            vmac_update(mfn_to_virt(mfn), PAGE_SIZE, &ctx);
-+            vmac_update(mfn_to_directmap_virt(mfn), PAGE_SIZE, &ctx);
-     }
-     *mac = vmac(NULL, 0, nonce, NULL, &ctx);
- 
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index b2a280fba3..1697760d82 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -1247,19 +1247,25 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
-     i = virt_to_mfn(HYPERVISOR_VIRT_END - 1) + 1;
-     if ( spfn < i )
-     {
--        ret = map_pages_to_xen((unsigned long)mfn_to_virt(spfn), _mfn(spfn),
--                               min(epfn, i) - spfn, PAGE_HYPERVISOR);
--        if ( ret )
--            goto destroy_directmap;
-+        if ( arch_mfns_in_directmap(spfn, min(epfn, i) - spfn ) )
-+        {
-+            ret = map_pages_to_xen((unsigned long)mfn_to_directmap_virt(spfn), _mfn(spfn),
-+                                min(epfn, i) - spfn, PAGE_HYPERVISOR);
-+            if ( ret )
-+                goto destroy_directmap;
-+        }
-     }
-     if ( i < epfn )
-     {
-         if ( i < spfn )
-             i = spfn;
--        ret = map_pages_to_xen((unsigned long)mfn_to_virt(i), _mfn(i),
--                               epfn - i, __PAGE_HYPERVISOR_RW);
--        if ( ret )
--            goto destroy_directmap;
-+        if ( arch_mfns_in_directmap(spfn, epfn - i) )
-+        {
-+            ret = map_pages_to_xen((unsigned long)mfn_to_directmap_virt(i), _mfn(i),
-+                                epfn - i, __PAGE_HYPERVISOR_RW);
-+            if ( ret )
-+                goto destroy_directmap;
-+        }
-     }
- 
-     old_node_start = node_start_pfn(node);
-@@ -1348,8 +1354,8 @@ destroy_frametable:
-     NODE_DATA(node)->node_start_pfn = old_node_start;
-     NODE_DATA(node)->node_spanned_pages = old_node_span;
-  destroy_directmap:
--    destroy_xen_mappings((unsigned long)mfn_to_virt(spfn),
--                         (unsigned long)mfn_to_virt(epfn));
-+    destroy_xen_mappings((unsigned long)mfn_to_directmap_virt(spfn),
-+                         (unsigned long)mfn_to_directmap_virt(epfn));
- 
-     return ret;
+-static lpae_t *xen_map_table(mfn_t mfn)
++lpae_t *xen_map_table(mfn_t mfn)
+ {
+     /*
+      * During early boot, map_domain_page() may be unusable. Use the
+@@ -45,7 +45,7 @@ static lpae_t *xen_map_table(mfn_t mfn)
+     return map_domain_page(mfn);
  }
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index efbec00af9..39aed5845d 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -1599,7 +1599,7 @@ static __init void copy_mapping(unsigned long mfn, unsigned long end,
-     for ( ; mfn < end; mfn = next )
-     {
-         l4_pgentry_t l4e = efi_l4t[l4_table_offset(mfn << PAGE_SHIFT)];
--        unsigned long va = (unsigned long)mfn_to_virt(mfn);
-+        unsigned long va = (unsigned long)mfn_to_directmap_virt(mfn);
  
-         if ( !(mfn & ((1UL << (L4_PAGETABLE_SHIFT - PAGE_SHIFT)) - 1)) )
-             UNMAP_DOMAIN_PAGE(l3dst);
-@@ -1757,15 +1757,18 @@ void __init efi_init_memory(void)
-         if ( pfn_to_pdx(emfn - 1) < (DIRECTMAP_SIZE >> PAGE_SHIFT) &&
-              pdx_is_region_compressible(mem_base, mem_npages) )
-         {
--            if ( (unsigned long)mfn_to_virt(emfn - 1) >= HYPERVISOR_VIRT_END )
--                prot &= ~_PAGE_GLOBAL;
--            if ( map_pages_to_xen((unsigned long)mfn_to_virt(smfn),
--                                  _mfn(smfn), emfn - smfn, prot) == 0 )
--                desc->VirtualStart =
--                    (unsigned long)maddr_to_virt(desc->PhysicalStart);
--            else
--                printk(XENLOG_ERR "Could not map MFNs %#lx-%#lx\n",
--                       smfn, emfn - 1);
-+            if ( arch_mfns_in_directmap(smfn, emfn - smfn) )
-+            {
-+                if ( (unsigned long)mfn_to_directmap_virt(emfn - 1) >= HYPERVISOR_VIRT_END )
-+                    prot &= ~_PAGE_GLOBAL;
-+                if ( map_pages_to_xen((unsigned long)mfn_to_directmap_virt(smfn),
-+                                    _mfn(smfn), emfn - smfn, prot) == 0 )
-+                    desc->VirtualStart =
-+                        (unsigned long)maddr_to_virt(desc->PhysicalStart);
-+                else
-+                    printk(XENLOG_ERR "Could not map MFNs %#lx-%#lx\n",
-+                        smfn, emfn - 1);
-+            }
-         }
-         else if ( !((desc->PhysicalStart + len - 1) >> (VADDR_BITS - 1)) &&
-                   (extra = xmalloc(struct rt_extra)) != NULL )
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 3c0909f333..e1e98d4d59 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -611,8 +611,8 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
-     {
-         if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
-         {
--            _heap[node] = mfn_to_virt(mfn + nr - needed);
--            avail[node] = mfn_to_virt(mfn + nr - 1) +
-+            _heap[node] = mfn_to_directmap_virt(mfn + nr - needed);
-+            avail[node] = mfn_to_directmap_virt(mfn + nr - 1) +
-                           PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-         }
-         else
-@@ -631,8 +631,8 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
-     {
-         if ( arch_mfns_in_directmap(mfn, needed) )
-         {
--            _heap[node] = mfn_to_virt(mfn);
--            avail[node] = mfn_to_virt(mfn + needed - 1) +
-+            _heap[node] = mfn_to_directmap_virt(mfn);
-+            avail[node] = mfn_to_directmap_virt(mfn + needed - 1) +
-                           PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-         }
-         else
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index 4e7b080e61..955509a0d8 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -229,7 +229,7 @@ static int alloc_trace_bufs(unsigned int pages)
-         offset = t_info->mfn_offset[cpu];
- 
-         /* Initialize the buffer metadata */
--        per_cpu(t_bufs, cpu) = buf = mfn_to_virt(t_info_mfn_list[offset]);
-+        per_cpu(t_bufs, cpu) = buf = mfn_to_directmap_virt(t_info_mfn_list[offset]);
-         buf->cons = buf->prod = 0;
- 
-         printk(XENLOG_INFO "xentrace: p%d mfn %x offset %u\n",
-@@ -268,7 +268,7 @@ out_dealloc:
-             if ( !mfn )
-                 break;
-             ASSERT(!(mfn_to_page(_mfn(mfn))->count_info & PGC_allocated));
--            free_xenheap_pages(mfn_to_virt(mfn), 0);
-+            free_xenheap_pages(mfn_to_directmap_virt(mfn), 0);
-         }
-     }
-     free_xenheap_pages(t_info, get_order_from_pages(t_info_pages));
-@@ -529,7 +529,7 @@ static unsigned char *next_record(const struct t_buf *buf, uint32_t *next,
-     per_cpu_mfn_offset = t_info->mfn_offset[smp_processor_id()];
-     mfn_list = (uint32_t *)t_info;
-     mfn = mfn_list[per_cpu_mfn_offset + per_cpu_mfn_nr];
--    this_page = mfn_to_virt(mfn);
-+    this_page = (unsigned char *)mfn_to_directmap_virt(mfn);
-     if (per_cpu_mfn_nr + 1 >= opt_tbuf_size)
-     {
-         /* reached end of buffer? */
-@@ -538,7 +538,7 @@ static unsigned char *next_record(const struct t_buf *buf, uint32_t *next,
-     else
-     {
-         mfn = mfn_list[per_cpu_mfn_offset + per_cpu_mfn_nr + 1];
--        *next_page = mfn_to_virt(mfn);
-+        *next_page = mfn_to_directmap_virt(mfn);
-     }
-     return this_page;
+-static void xen_unmap_table(const lpae_t *table)
++void xen_unmap_table(const lpae_t *table)
+ {
+     /*
+      * During early boot, xen_map_table() will not use map_domain_page()
+@@ -228,7 +228,7 @@ void *ioremap(paddr_t pa, size_t len)
+     return ioremap_attr(pa, len, PAGE_HYPERVISOR_NOCACHE);
  }
+ 
+-static int create_xen_table(lpae_t *entry)
++int create_xen_table(lpae_t *entry)
+ {
+     mfn_t mfn;
+     void *p;
 -- 
 2.40.1
 
