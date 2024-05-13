@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C77A7C25B5F
-	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2024 13:41:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.720925.1123982 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B34C25B10
+	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2024 13:41:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.720922.1123952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s6VvL-0003Uv-Bv; Mon, 13 May 2024 13:41:03 +0000
+	id 1s6VvG-0002ln-MJ; Mon, 13 May 2024 13:40:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 720925.1123982; Mon, 13 May 2024 13:41:03 +0000
+Received: by outflank-mailman (output) from mailman id 720922.1123952; Mon, 13 May 2024 13:40:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s6VvL-0003Um-6o; Mon, 13 May 2024 13:41:03 +0000
-Received: by outflank-mailman (input) for mailman id 720925;
- Mon, 13 May 2024 13:41:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s6VvG-0002lg-J4; Mon, 13 May 2024 13:40:58 +0000
+Received: by outflank-mailman (input) for mailman id 720922;
+ Mon, 13 May 2024 13:40:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w2Lj=MQ=amazon.co.uk=prvs=8568adbc3=eliasely@srs-se1.protection.inumbo.net>)
- id 1s6VvK-0002zP-1C
- for xen-devel@lists.xenproject.org; Mon, 13 May 2024 13:41:02 +0000
-Received: from smtp-fw-2101.amazon.com (smtp-fw-2101.amazon.com [72.21.196.25])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6f18f246-112e-11ef-909d-e314d9c70b13;
- Mon, 13 May 2024 15:41:01 +0200 (CEST)
+ id 1s6VvE-0002lY-Ul
+ for xen-devel@lists.xenproject.org; Mon, 13 May 2024 13:40:56 +0000
+Received: from smtp-fw-52002.amazon.com (smtp-fw-52002.amazon.com
+ [52.119.213.150]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6af23afd-112e-11ef-b4bb-af5377834399;
+ Mon, 13 May 2024 15:40:54 +0200 (CEST)
 Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
  smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.43.8.6])
- by smtp-border-fw-2101.iad2.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2024 13:41:00 +0000
-Received: from EX19MTAUEC001.ant.amazon.com [10.0.29.78:20285]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.4.17:2525] with
- esmtp (Farcaster)
- id da52c68b-ca18-439b-8681-3a40d2ff44ac; Mon, 13 May 2024 13:40:59 +0000 (UTC)
-Received: from EX19D008UEA001.ant.amazon.com (10.252.134.62) by
- EX19MTAUEC001.ant.amazon.com (10.252.135.222) with Microsoft SMTP Server
+ by smtp-border-fw-52002.iad7.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2024 13:40:52 +0000
+Received: from EX19MTAUEB001.ant.amazon.com [10.0.29.78:34588]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.61.78:2525]
+ with esmtp (Farcaster)
+ id 1b0b867d-7d2c-4dca-98d9-9b5ab36c1217; Mon, 13 May 2024 13:40:51 +0000 (UTC)
+Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
+ EX19MTAUEB001.ant.amazon.com (10.252.135.108) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Mon, 13 May 2024 13:40:57 +0000
+ 15.2.1258.28; Mon, 13 May 2024 13:40:51 +0000
 Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
- EX19D008UEA001.ant.amazon.com (10.252.134.62) with Microsoft SMTP Server
+ EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Mon, 13 May 2024 13:40:57 +0000
+ 15.2.1258.28; Mon, 13 May 2024 13:40:50 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28 via Frontend Transport; Mon, 13 May 2024 13:40:55 +0000
+ 15.2.1258.28 via Frontend Transport; Mon, 13 May 2024 13:40:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,203 +58,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f18f246-112e-11ef-909d-e314d9c70b13
+X-Inumbo-ID: 6af23afd-112e-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1715607662; x=1747143662;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=awTpJTVuZnpLM2XGjDjoGafH08PnS/u8+TgC4HSOyp8=;
-  b=ZG+b+vK76qC/Bvo2fhIShUYZ745mK6DDLVzyRYeUwV08oYOH0o03A4Nw
-   qTgRtp/UvdBfI9AISgrJ5H/I/Z37D4Sxf0jGekLyqvupGMbwC23IwYhPV
-   yXXLD4FF89SE65ilb67u+OILxkn7FDxuqYxoh/32RCoigPntJ83+cIAjU
-   g=;
+  t=1715607655; x=1747143655;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=FHUsw7Ke1dSe493VXWfS2kJQWXB8M4+Qm3akn5JUvwU=;
+  b=gOoAfWS33izZk5ygFBRlQttJ1SodwtzVGyTkxq93AliKukRy06DIihd5
+   fRABosNCrS9nTuZnOSNSwnpmdjX25qgU/MNIRCP+5P4p7fbBlZGZvWN/p
+   m5JFHBauc0mMW03MjRZhi36aeQR54LuS2qmE23lolqvexmNyPlDQlgAfM
+   4=;
 X-IronPort-AV: E=Sophos;i="6.08,158,1712620800"; 
-   d="scan'208";a="400810215"
-X-Farcaster-Flow-ID: da52c68b-ca18-439b-8681-3a40d2ff44ac
+   d="scan'208";a="632499832"
+X-Farcaster-Flow-ID: 1b0b867d-7d2c-4dca-98d9-9b5ab36c1217
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
-	<hongyxia@amazon.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Julien Grall <jgrall@amazon.com>, Elias El Yandouzi
-	<eliasely@amazon.com>
-Subject: [PATCH V3 (resend) 03/19] x86/pv: Rewrite how building PV dom0 handles domheap mappings
-Date: Mon, 13 May 2024 13:40:30 +0000
-Message-ID: <20240513134046.82605-4-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Elias El
+ Yandouzi" <eliasely@amazon.com>, Jan Beulich <jbeulich@suse.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Lukasz Hawrylko <lukasz@hawrylko.pl>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>
+Subject: [PATCH V3 (resend) 00/19] Remove the directmap
+Date: Mon, 13 May 2024 13:40:27 +0000
+Message-ID: <20240513134046.82605-1-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240513134046.82605-1-eliasely@amazon.com>
-References: <20240513134046.82605-1-eliasely@amazon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Hongyan Xia <hongyxia@amazon.com>
+Hi all,
 
-Building a PV dom0 is allocating from the domheap but uses it like the
-xenheap. Use the pages as they should be.
+A few years ago, Wei Liu implemented a PoC to remove the directmap
+from Xen. The last version was sent by Hongyan Xia [1].
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
+I will start with thanking both Wei and Hongyan for the initial work
+to upstream the feature. A lot of patches already went in and this is
+the last few patches missing to effectively enable the feature.
 
-----
-    Changes in V3:
-        * Fold following patch 'x86/pv: Map L4 page table for shim domain'
+=== What is the directmap? ===
 
-    Changes in V2:
-        * Clarify the commit message
-        * Break the patch in two parts
+At the moment, on both arm64 and x86, most of the RAM is mapped
+in Xen address space. This means that domain memory is easily
+accessible in Xen.
 
-    Changes since Hongyan's version:
-        * Rebase
-        * Remove spurious newline
+=== Why do we want to remove the directmap? ===
 
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 807296c280..ac910b438a 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -382,6 +382,10 @@ int __init dom0_construct_pv(struct domain *d,
-     l3_pgentry_t *l3tab = NULL, *l3start = NULL;
-     l2_pgentry_t *l2tab = NULL, *l2start = NULL;
-     l1_pgentry_t *l1tab = NULL, *l1start = NULL;
-+    mfn_t l4start_mfn = INVALID_MFN;
-+    mfn_t l3start_mfn = INVALID_MFN;
-+    mfn_t l2start_mfn = INVALID_MFN;
-+    mfn_t l1start_mfn = INVALID_MFN;
- 
-     /*
-      * This fully describes the memory layout of the initial domain. All
-@@ -710,22 +714,32 @@ int __init dom0_construct_pv(struct domain *d,
-         v->arch.pv.event_callback_cs    = FLAT_COMPAT_KERNEL_CS;
-     }
- 
-+#define UNMAP_MAP_AND_ADVANCE(mfn_var, virt_var, maddr) \
-+do {                                                    \
-+    unmap_domain_page(virt_var);                        \
-+    mfn_var = maddr_to_mfn(maddr);                      \
-+    maddr += PAGE_SIZE;                                 \
-+    virt_var = map_domain_page(mfn_var);                \
-+} while ( false )
-+
-     if ( !compat )
-     {
-         maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l4_page_table;
--        l4start = l4tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+        UNMAP_MAP_AND_ADVANCE(l4start_mfn, l4start, mpt_alloc);
-+        l4tab = l4start;
-         clear_page(l4tab);
--        init_xen_l4_slots(l4tab, _mfn(virt_to_mfn(l4start)),
--                          d, INVALID_MFN, true);
--        v->arch.guest_table = pagetable_from_paddr(__pa(l4start));
-+        init_xen_l4_slots(l4tab, l4start_mfn, d, INVALID_MFN, true);
-+        v->arch.guest_table = pagetable_from_mfn(l4start_mfn);
-     }
-     else
-     {
-         /* Monitor table already created by switch_compat(). */
--        l4start = l4tab = __va(pagetable_get_paddr(v->arch.guest_table));
-+        l4start_mfn = pagetable_get_mfn(v->arch.guest_table);
-+        l4start = l4tab = map_domain_page(l4start_mfn);
-         /* See public/xen.h on why the following is needed. */
-         maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l3_page_table;
-         l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+        UNMAP_MAP_AND_ADVANCE(l3start_mfn, l3start, mpt_alloc);
-     }
- 
-     l4tab += l4_table_offset(v_start);
-@@ -735,14 +749,16 @@ int __init dom0_construct_pv(struct domain *d,
-         if ( !((unsigned long)l1tab & (PAGE_SIZE-1)) )
-         {
-             maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l1_page_table;
--            l1start = l1tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+            UNMAP_MAP_AND_ADVANCE(l1start_mfn, l1start, mpt_alloc);
-+            l1tab = l1start;
-             clear_page(l1tab);
-             if ( count == 0 )
-                 l1tab += l1_table_offset(v_start);
-             if ( !((unsigned long)l2tab & (PAGE_SIZE-1)) )
-             {
-                 maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l2_page_table;
--                l2start = l2tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+                UNMAP_MAP_AND_ADVANCE(l2start_mfn, l2start, mpt_alloc);
-+                l2tab = l2start;
-                 clear_page(l2tab);
-                 if ( count == 0 )
-                     l2tab += l2_table_offset(v_start);
-@@ -752,19 +768,19 @@ int __init dom0_construct_pv(struct domain *d,
-                     {
-                         maddr_to_page(mpt_alloc)->u.inuse.type_info =
-                             PGT_l3_page_table;
--                        l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+                        UNMAP_MAP_AND_ADVANCE(l3start_mfn, l3start, mpt_alloc);
-                     }
-                     l3tab = l3start;
-                     clear_page(l3tab);
-                     if ( count == 0 )
-                         l3tab += l3_table_offset(v_start);
--                    *l4tab = l4e_from_paddr(__pa(l3start), L4_PROT);
-+                    *l4tab = l4e_from_mfn(l3start_mfn, L4_PROT);
-                     l4tab++;
-                 }
--                *l3tab = l3e_from_paddr(__pa(l2start), L3_PROT);
-+                *l3tab = l3e_from_mfn(l2start_mfn, L3_PROT);
-                 l3tab++;
-             }
--            *l2tab = l2e_from_paddr(__pa(l1start), L2_PROT);
-+            *l2tab = l2e_from_mfn(l1start_mfn, L2_PROT);
-             l2tab++;
-         }
-         if ( count < initrd_pfn || count >= initrd_pfn + PFN_UP(initrd_len) )
-@@ -783,27 +799,31 @@ int __init dom0_construct_pv(struct domain *d,
- 
-     if ( compat )
-     {
--        l2_pgentry_t *l2t;
--
-         /* Ensure the first four L3 entries are all populated. */
-         for ( i = 0, l3tab = l3start; i < 4; ++i, ++l3tab )
-         {
-             if ( !l3e_get_intpte(*l3tab) )
-             {
-                 maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l2_page_table;
--                l2tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
--                clear_page(l2tab);
--                *l3tab = l3e_from_paddr(__pa(l2tab), L3_PROT);
-+                UNMAP_MAP_AND_ADVANCE(l2start_mfn, l2start, mpt_alloc);
-+                clear_page(l2start);
-+                *l3tab = l3e_from_mfn(l2start_mfn, L3_PROT);
-             }
-             if ( i == 3 )
-                 l3e_get_page(*l3tab)->u.inuse.type_info |= PGT_pae_xen_l2;
-         }
- 
--        l2t = map_l2t_from_l3e(l3start[3]);
--        init_xen_pae_l2_slots(l2t, d);
--        unmap_domain_page(l2t);
-+        UNMAP_DOMAIN_PAGE(l2start);
-+        l2start = map_l2t_from_l3e(l3start[3]);
-+        init_xen_pae_l2_slots(l2start, d);
-     }
- 
-+#undef UNMAP_MAP_AND_ADVANCE
-+
-+    UNMAP_DOMAIN_PAGE(l1start);
-+    UNMAP_DOMAIN_PAGE(l2start);
-+    UNMAP_DOMAIN_PAGE(l3start);
-+
-     /* Pages that are part of page tables must be read only. */
-     mark_pv_pt_pages_rdonly(d, l4start, vpt_start, nr_pt_pages, &flush_flags);
- 
-@@ -976,6 +996,8 @@ int __init dom0_construct_pv(struct domain *d,
-         pv_shim_setup_dom(d, l4start, v_start, vxenstore_start, vconsole_start,
-                           vphysmap_start, si);
- 
-+    UNMAP_DOMAIN_PAGE(l4start);
-+
- #ifdef CONFIG_COMPAT
-     if ( compat )
-         xlat_start_info(si, pv_shim ? XLAT_start_info_console_domU
+(Summarizing my understanding of the previous discussion)
+
+Speculation attacks (like Spectre SP1) rely on loading piece of memory
+in the cache. If the region is not mapped then it can't be loaded.
+
+So removing reducing the amount of memory mapped in Xen will also
+reduce the surface attack.
+
+=== What's the performance impact? ===
+
+As the guest memory is not always mapped, then the cost of mapping
+will increase. I haven't done the numbers with this new version, but
+some measurement were provided in the previous version for x86.
+
+=== Improvement possible ===
+
+The known area to improve on x86 are:
+   * Mapcache: There was a patch sent by Hongyan:
+     https://lore.kernel.org/xen-devel/4058e92ce21627731c49b588a95809dc0affd83a.1581015491.git.hongyxia@amazon.com/
+   * EPT: At the moment an guest page-tabel walk requires about 20 map/unmap.
+     This will have an very high impact on the performance. We need to decide
+     whether keep the EPT always mapped is a problem
+
+The original series didn't have support for Arm64. But as there were
+some interest, I have provided a PoC.
+
+There are more extra work for Arm64:
+   * The mapcache is quite simple. We would investigate the performance
+   * The mapcache should be made compliant to the Arm Arm (this is now
+     more critical).
+   * We will likely have the same problem as for the EPT.
+   * We have no support for merging table to a superpage, neither
+     free empty page-tables. (See more below)
+
+=== Implementation ===
+
+The subject is probably a misnomer. The directmap is still present but
+the RAM is not mapped by default. Instead, the region will still be used
+to map pages allocate via alloc_xenheap_pages().
+
+The advantage is the solution is simple (so IHMO good enough for been
+merged as a tech preview). The disadvantage is the page allocator is not
+trying to keep all the xenheap pages together. So we may end up to have
+an increase of page table usage.
+
+In the longer term, we should consider to remove the direct map
+completely and switch to vmap(). The main problem with this approach
+is it is frequent to use mfn_to_virt() in the code. So we would need
+to cache the mapping (maybe in the struct page_info).
+
+=== Why arm32 is not covered? ===
+
+On Arm32, the domheap and xenheap is always separated. So by design
+the guest memory is not mapped by default.
+
+At this stage, it seems unnecessary to have to map/unmap xenheap pages
+every time they are allocated.
+
+=== Why not using a separate domheap and xenheap? ===
+
+While a separate xenheap/domheap reduce the page-table usage (all
+xenheap pages are contiguous and could be always mapped), it is also
+currently less scalable because the split is fixed at boot time (XXX:
+Can this be dynamic?).
+
+=== Future of secret-free hypervisor ===
+
+There are some information in an e-mail from Andrew a few years ago:
+
+https://lore.kernel.org/xen-devel/e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com/
+
+Cheers,
+
+[1] https://lore.kernel.org/xen-devel/cover.1588278317.git.hongyxia@amazon.com/
+
+*** BLURB HERE ***
+
+Elias El Yandouzi (3):
+  xen/x86: Add build assertion for fixmap entries
+  Rename mfn_to_virt() calls
+  Rename maddr_to_virt() calls
+
+Hongyan Xia (9):
+  x86: Create per-domain mapping of guest_root_pt
+  x86/pv: Rewrite how building PV dom0 handles domheap mappings
+  x86/mapcache: Initialise the mapcache for the idle domain
+  x86: Add a boot option to enable and disable the direct map
+  x86/domain_page: Remove the fast paths when mfn is not in the
+    directmap
+  xen/page_alloc: Add a path for xenheap when there is no direct map
+  x86/setup: Leave early boot slightly earlier
+  x86/setup: vmap heap nodes when they are outside the direct map
+  x86/setup: Do not create valid mappings when directmap=no
+
+Julien Grall (5):
+  xen/x86: Add support for the PMAP
+  xen/arm32: mm: Rename 'first' to 'root' in init_secondary_pagetables()
+  xen/arm64: mm: Use per-pCPU page-tables
+  xen/arm64: Implement a mapcache for arm64
+  xen/arm64: Allow the admin to enable/disable the directmap
+
+Wei Liu (2):
+  x86/pv: Domheap pages should be mapped while relocating initrd
+  x86: Lift mapcache variable to the arch level
+
+ docs/misc/xen-command-line.pandoc             | 12 +++
+ xen/arch/arm/Kconfig                          |  2 +-
+ xen/arch/arm/arm64/mmu/mm.c                   | 45 ++++++++-
+ xen/arch/arm/domain_page.c                    | 50 +++++++++-
+ xen/arch/arm/include/asm/arm32/mm.h           |  8 --
+ xen/arch/arm/include/asm/arm64/mm.h           |  7 +-
+ xen/arch/arm/include/asm/domain_page.h        | 13 +++
+ xen/arch/arm/include/asm/mm.h                 |  9 ++
+ xen/arch/arm/include/asm/mmu/layout.h         | 13 ++-
+ xen/arch/arm/include/asm/mmu/mm.h             |  2 +
+ xen/arch/arm/mm.c                             |  1 +
+ xen/arch/arm/mmu/pt.c                         | 12 +--
+ xen/arch/arm/mmu/setup.c                      | 27 ++---
+ xen/arch/arm/mmu/smpboot.c                    | 30 ++----
+ xen/arch/arm/setup.c                          |  2 +
+ xen/arch/x86/Kconfig                          |  2 +
+ xen/arch/x86/dmi_scan.c                       |  4 +-
+ xen/arch/x86/domain.c                         | 12 ++-
+ xen/arch/x86/domain_page.c                    | 74 +++++++++-----
+ xen/arch/x86/hvm/dom0_build.c                 |  4 +-
+ xen/arch/x86/include/asm/config.h             | 10 +-
+ xen/arch/x86/include/asm/domain.h             | 13 +--
+ xen/arch/x86/include/asm/fixmap.h             |  9 ++
+ .../x86/include/asm/mach-default/bios_ebda.h  |  2 +-
+ xen/arch/x86/include/asm/mm.h                 |  6 ++
+ xen/arch/x86/include/asm/page.h               |  8 +-
+ xen/arch/x86/include/asm/pmap.h               | 25 +++++
+ xen/arch/x86/include/asm/x86_64/page.h        |  2 +-
+ xen/arch/x86/mm.c                             | 18 +++-
+ xen/arch/x86/mpparse.c                        |  2 +-
+ xen/arch/x86/pv/dom0_build.c                  | 70 +++++++++----
+ xen/arch/x86/pv/domain.c                      | 36 +++++++
+ xen/arch/x86/setup.c                          | 98 ++++++++++++++++---
+ xen/arch/x86/tboot.c                          |  2 +-
+ xen/arch/x86/x86_64/asm-offsets.c             |  1 +
+ xen/arch/x86/x86_64/entry.S                   |  8 ++
+ xen/arch/x86/x86_64/mm.c                      | 26 +++--
+ xen/common/Kconfig                            | 17 ++++
+ xen/common/efi/boot.c                         | 23 +++--
+ xen/common/page_alloc.c                       | 89 ++++++++++++++---
+ xen/common/trace.c                            |  8 +-
+ xen/include/xen/mm.h                          |  7 ++
+ 42 files changed, 630 insertions(+), 179 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/domain_page.h
+ create mode 100644 xen/arch/x86/include/asm/pmap.h
+
 -- 
 2.40.1
 
