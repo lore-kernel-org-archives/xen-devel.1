@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0DE9C25B79
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FB1C41513
 	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 14:26:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.722429.1126411 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.722426.1126389 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7Fah-0003Zr-Pf; Wed, 15 May 2024 14:26:47 +0000
+	id 1s7Fae-00033y-Jv; Wed, 15 May 2024 14:26:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 722429.1126411; Wed, 15 May 2024 14:26:47 +0000
+Received: by outflank-mailman (output) from mailman id 722426.1126389; Wed, 15 May 2024 14:26:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7Fah-0003YX-K7; Wed, 15 May 2024 14:26:47 +0000
-Received: by outflank-mailman (input) for mailman id 722429;
- Wed, 15 May 2024 14:26:46 +0000
+	id 1s7Fae-000334-Fs; Wed, 15 May 2024 14:26:44 +0000
+Received: by outflank-mailman (input) for mailman id 722426;
+ Wed, 15 May 2024 14:26:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kRjG=MS=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1s7Fag-0002KG-D8
- for xen-devel@lists.xenproject.org; Wed, 15 May 2024 14:26:46 +0000
+ id 1s7Fad-0002KG-3T
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2024 14:26:43 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 27a825e7-12c7-11ef-b4bb-af5377834399;
- Wed, 15 May 2024 16:26:44 +0200 (CEST)
+ id 259d49db-12c7-11ef-b4bb-af5377834399;
+ Wed, 15 May 2024 16:26:41 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F22A715A1;
- Wed, 15 May 2024 07:27:08 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 853561042;
+ Wed, 15 May 2024 07:27:05 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 51BAD3F7A6;
- Wed, 15 May 2024 07:26:43 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F2BAA3F7A6;
+ Wed, 15 May 2024 07:26:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,159 +44,331 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27a825e7-12c7-11ef-b4bb-af5377834399
+X-Inumbo-ID: 259d49db-12c7-11ef-b4bb-af5377834399
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Penny Zheng <Penny.Zheng@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 7/7] xen/docs: Describe static shared memory when host address is not provided
-Date: Wed, 15 May 2024 15:26:25 +0100
-Message-Id: <20240515142626.3480640-8-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 4/7] xen/arm: Parse xen,shared-mem when host phys address is not provided
+Date: Wed, 15 May 2024 15:26:22 +0100
+Message-Id: <20240515142626.3480640-5-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240515142626.3480640-1-luca.fancellu@arm.com>
 References: <20240515142626.3480640-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Penny Zheng <Penny.Zheng@arm.com>
+Handle the parsing of the 'xen,shared-mem' property when the host physical
+address is not provided, this commit is introducing the logic to parse it,
+but the functionality is still not implemented and will be part of future
+commits.
 
-This commit describe the new scenario where host address is not provided
-in "xen,shared-mem" property and a new example is added to the page to
-explain in details.
+Rework the logic inside process_shm_node to check the shm_id before doing
+the other checks, because it ease the logic itself, add more comment on
+the logic.
+Now when the host physical address is not provided, the value
+INVALID_PADDR is chosen to signal this condition and it is stored as
+start of the bank, due to that change also early_print_info_shmem and
+init_sharedmem_pages are changed, to don't handle banks with start equal
+to INVALID_PADDR.
 
-Take the occasion to fix some typos in the page.
+Another change is done inside meminfo_overlap_check, to skip banks that
+are starting with the start address INVALID_PADDR, that function is used
+to check banks from reserved memory, shared memory and ACPI and since
+the comment above the function states that wrapping around is not handled,
+it's unlikely for these bank to have the start address as INVALID_PADDR.
+Same change is done inside consider_modules, find_unallocated_memory and
+dt_unreserved_regions functions, in order to skip banks that starts with
+INVALID_PADDR from any computation.
+The changes above holds because of this consideration.
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
-v2:
- - Add Michal R-by
-v1:
- - patch from https://patchwork.kernel.org/project/xen-devel/patch/20231206090623.1932275-10-Penny.Zheng@arm.com/
-   with some changes in the commit message.
+v2 changes:
+ - fix comments, add parenthesis to some conditions, remove unneeded
+   variables, remove else branch, increment counter in the for loop,
+   skip INVALID_PADDR start banks from also consider_modules,
+   find_unallocated_memory and dt_unreserved_regions. (Michal)
 ---
- docs/misc/arm/device-tree/booting.txt | 52 ++++++++++++++++++++-------
- 1 file changed, 39 insertions(+), 13 deletions(-)
+ xen/arch/arm/arm32/mmu/mm.c |  11 +++-
+ xen/arch/arm/domain_build.c |   5 ++
+ xen/arch/arm/setup.c        |  14 +++-
+ xen/arch/arm/static-shmem.c | 125 +++++++++++++++++++++++++-----------
+ 4 files changed, 111 insertions(+), 44 deletions(-)
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index bbd955e9c2f6..ac4bad6fe5e0 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -590,7 +590,7 @@ communication.
-     An array takes a physical address, which is the base address of the
-     shared memory region in host physical address space, a size, and a guest
-     physical address, as the target address of the mapping.
--    e.g. xen,shared-mem = < [host physical address] [guest address] [size] >
-+    e.g. xen,shared-mem = < [host physical address] [guest address] [size] >;
+diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
+index 23150122f7c4..3d46f32831bf 100644
+--- a/xen/arch/arm/arm32/mmu/mm.c
++++ b/xen/arch/arm/arm32/mmu/mm.c
+@@ -128,8 +128,15 @@ static paddr_t __init consider_modules(paddr_t s, paddr_t e,
+     nr += reserved_mem->nr_banks;
+     for ( ; i - nr < shmem->nr_banks; i++ )
+     {
+-        paddr_t r_s = shmem->bank[i - nr].start;
+-        paddr_t r_e = r_s + shmem->bank[i - nr].size;
++        paddr_t r_s, r_e;
++
++        r_s = shmem->bank[i - nr].start;
++
++        /* Shared memory banks can contain INVALID_PADDR as start */
++        if ( INVALID_PADDR == r_s )
++            continue;
++
++        r_e = r_s + shmem->bank[i - nr].size;
  
-     It shall also meet the following criteria:
-     1) If the SHM ID matches with an existing region, the address range of the
-@@ -601,8 +601,8 @@ communication.
-     The number of cells for the host address (and size) is the same as the
-     guest pseudo-physical address and they are inherited from the parent node.
+         if ( s < r_e && r_s < e )
+         {
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index f6550809cfdf..4febba69ef63 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -926,6 +926,11 @@ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
+         for ( j = 0; j < mem_banks[i]->nr_banks; j++ )
+         {
+             start = mem_banks[i]->bank[j].start;
++
++            /* Shared memory banks can contain INVALID_PADDR as start */
++            if ( INVALID_PADDR == start )
++                continue;
++
+             end = mem_banks[i]->bank[j].start + mem_banks[i]->bank[j].size;
+             res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
+                                         PFN_DOWN(end - 1));
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index d242674381d4..016859f6982a 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -265,8 +265,15 @@ static void __init dt_unreserved_regions(paddr_t s, paddr_t e,
+     nr += reserved_mem->nr_banks;
+     for ( ; i - nr < shmem->nr_banks; i++ )
+     {
+-        paddr_t r_s = shmem->bank[i - nr].start;
+-        paddr_t r_e = r_s + shmem->bank[i - nr].size;
++        paddr_t r_s, r_e;
++
++        r_s = shmem->bank[i - nr].start;
++
++        /* Shared memory banks can contain INVALID_PADDR as start */
++        if ( INVALID_PADDR == r_s )
++            continue;
++
++        r_e = r_s + shmem->bank[i - nr].size;
  
--    Host physical address is optional, when missing Xen decides the location
--    (currently unimplemented).
-+    Host physical address is optional, when missing Xen decides the location.
-+    e.g. xen,shared-mem = < [guest address] [size] >;
+         if ( s < r_e && r_s < e )
+         {
+@@ -297,7 +304,8 @@ static bool __init meminfo_overlap_check(const struct membanks *mem,
+         bank_start = mem->bank[i].start;
+         bank_end = bank_start + mem->bank[i].size;
  
- - role (Optional)
+-        if ( region_end <= bank_start || region_start >= bank_end )
++        if ( INVALID_PADDR == bank_start || region_end <= bank_start ||
++             region_start >= bank_end )
+             continue;
+         else
+         {
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index 8a14d120690c..ddaacbc77740 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -265,6 +265,12 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+         pbase = boot_shm_bank->start;
+         psize = boot_shm_bank->size;
  
-@@ -629,7 +629,7 @@ chosen {
-         role = "owner";
-         xen,shm-id = "my-shared-mem-0";
-         xen,shared-mem = <0x10000000 0x10000000 0x10000000>;
++        if ( INVALID_PADDR == pbase )
++        {
++            printk("%pd: host physical address must be chosen by users at the moment", d);
++            return -EINVAL;
++        }
++
+         /*
+          * xen,shared-mem = <pbase, gbase, size>;
+          * TODO: pbase is optional.
+@@ -377,7 +383,8 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+ {
+     const struct fdt_property *prop, *prop_id, *prop_role;
+     const __be32 *cell;
+-    paddr_t paddr, gaddr, size, end;
++    paddr_t paddr = INVALID_PADDR;
++    paddr_t gaddr, size, end;
+     struct membanks *mem = bootinfo_get_shmem();
+     struct shmem_membank_extra *shmem_extra = bootinfo_get_shmem_extra();
+     unsigned int i;
+@@ -432,24 +439,37 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+     if ( !prop )
+         return -ENOENT;
+ 
++    cell = (const __be32 *)prop->data;
+     if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
+     {
+-        if ( len == dt_cells_to_size(size_cells + address_cells) )
+-            printk("fdt: host physical address must be chosen by users at the moment.\n");
+-
+-        printk("fdt: invalid `xen,shared-mem` property.\n");
+-        return -EINVAL;
++        if ( len == dt_cells_to_size(address_cells + size_cells) )
++            device_tree_get_reg(&cell, address_cells, size_cells, &gaddr,
++                                &size);
++        else
++        {
++            printk("fdt: invalid `xen,shared-mem` property.\n");
++            return -EINVAL;
++        }
+     }
++    else
++    {
++        device_tree_get_reg(&cell, address_cells, address_cells, &paddr,
++                            &gaddr);
++        size = dt_next_cell(size_cells, &cell);
+ 
+-    cell = (const __be32 *)prop->data;
+-    device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
+-    size = dt_next_cell(size_cells, &cell);
++        if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
++        {
++            printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
++                paddr);
++            return -EINVAL;
++        }
+ 
+-    if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
+-    {
+-        printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
+-               paddr);
+-        return -EINVAL;
++        end = paddr + size;
++        if ( end <= paddr )
++        {
++            printk("fdt: static shared memory region %s overflow\n", shm_id);
++            return -EINVAL;
++        }
+     }
+ 
+     if ( !IS_ALIGNED(gaddr, PAGE_SIZE) )
+@@ -471,39 +491,64 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+         return -EINVAL;
+     }
+ 
+-    end = paddr + size;
+-    if ( end <= paddr )
+-    {
+-        printk("fdt: static shared memory region %s overflow\n", shm_id);
+-        return -EINVAL;
 -    }
-+    };
- 
-     domU1 {
-         compatible = "xen,domain";
-@@ -640,25 +640,36 @@ chosen {
-         vpl011;
- 
+-
+     for ( i = 0; i < mem->nr_banks; i++ )
+     {
          /*
--         * shared memory region identified as 0x0(xen,shm-id = <0x0>)
--         * is shared between Dom0 and DomU1.
-+         * shared memory region "my-shared-mem-0" is shared
-+         * between Dom0 and DomU1.
+          * Meet the following check:
+-         * 1) The shm ID matches and the region exactly match
+-         * 2) The shm ID doesn't match and the region doesn't overlap
+-         * with an existing one
++         * - when host address is provided:
++         *   1) The shm ID matches and the region exactly match
++         *   2) The shm ID doesn't match and the region doesn't overlap
++         *      with an existing one
++         * - when host address is not provided:
++         *   1) The shm ID matches and the region size exactly match
           */
-         domU1-shared-mem@10000000 {
-             compatible = "xen,domain-shared-memory-v1";
-             role = "borrower";
-             xen,shm-id = "my-shared-mem-0";
-             xen,shared-mem = <0x10000000 0x50000000 0x10000000>;
--        }
-+        };
- 
-         /*
--         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
--         * is shared between DomU1 and DomU2.
-+         * shared memory region "my-shared-mem-1" is shared between
-+         * DomU1 and DomU2.
-          */
-         domU1-shared-mem@50000000 {
-             compatible = "xen,domain-shared-memory-v1";
-             xen,shm-id = "my-shared-mem-1";
-             xen,shared-mem = <0x50000000 0x60000000 0x20000000>;
--        }
-+        };
+-        if ( paddr == mem->bank[i].start && size == mem->bank[i].size )
++        bool paddr_assigned = (INVALID_PADDR == paddr);
++
++        if ( strncmp(shm_id, shmem_extra[i].shm_id, MAX_SHM_ID_LENGTH) == 0 )
+         {
+-            if ( strncmp(shm_id, shmem_extra[i].shm_id,
+-                         MAX_SHM_ID_LENGTH) == 0  )
++            /*
++             * Regions have same shm_id (cases):
++             * 1) physical host address is supplied:
++             *    - OK:   paddr is equal and size is equal (same region)
++             *    - Fail: paddr doesn't match or size doesn't match (there
++             *            cannot exists two shmem regions with same shm_id)
++             * 2) physical host address is NOT supplied:
++             *    - OK:   size is equal (same region)
++             *    - Fail: size is not equal (same shm_id must identify only one
++             *            region, there can't be two different regions with same
++             *            shm_id)
++             */
++            bool start_match = paddr_assigned ? (paddr == mem->bank[i].start) :
++                                                true;
++
++            if ( start_match && (size == mem->bank[i].size) )
+                 break;
+             else
+             {
+-                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
++                printk("fdt: different shared memory region could not share the same shm ID %s\n",
+                        shm_id);
+                 return -EINVAL;
+             }
+         }
+-        else if ( strncmp(shm_id, shmem_extra[i].shm_id,
+-                          MAX_SHM_ID_LENGTH) != 0 )
 +
 +        /*
-+         * shared memory region "my-shared-mem-2" is shared between
-+         * DomU1 and DomU2.
++         * Regions have different shm_id (cases):
++         * 1) physical host address is supplied:
++         *    - OK:   paddr different, or size different (case where paddr
++         *            is equal but psize is different are wrong, but they
++         *            are handled later when checking for overlapping)
++         *    - Fail: paddr equal and size equal (the same region can't be
++         *            identified with different shm_id)
++         * 2) physical host address is NOT supplied:
++         *    - OK:   Both have different shm_id so even with same size they
++         *            can exists
 +         */
-+        domU1-shared-mem-2 {
-+            compatible = "xen,domain-shared-memory-v1";
-+            xen,shm-id = "my-shared-mem-2";
-+            role = "owner";
-+            xen,shared-mem = <0x80000000 0x20000000>;
-+        };
++        if ( !paddr_assigned || (paddr != mem->bank[i].start) ||
++             (size != mem->bank[i].size) )
+             continue;
+         else
+         {
+-            printk("fdt: different shared memory region could not share the same shm ID %s\n",
++            printk("fdt: xen,shm-id %s does not match for all the nodes using the same region\n",
+                    shm_id);
+             return -EINVAL;
+         }
+@@ -513,7 +558,8 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+     {
+         if (i < mem->max_banks)
+         {
+-            if ( check_reserved_regions_overlap(paddr, size) )
++            if ( (paddr != INVALID_PADDR) &&
++                 check_reserved_regions_overlap(paddr, size) )
+                 return -EINVAL;
  
-         ......
+             /* Static shared memory shall be reserved from any other use. */
+@@ -583,13 +629,13 @@ void __init early_print_info_shmem(void)
+ {
+     const struct membanks *shmem = bootinfo_get_shmem();
+     unsigned int bank;
++    unsigned int printed = 0;
  
-@@ -672,14 +683,21 @@ chosen {
-         cpus = <1>;
+-    for ( bank = 0; bank < shmem->nr_banks; bank++ )
+-    {
+-        printk(" SHMEM[%u]: %"PRIpaddr" - %"PRIpaddr"\n", bank,
+-               shmem->bank[bank].start,
+-               shmem->bank[bank].start + shmem->bank[bank].size - 1);
+-    }
++    for ( bank = 0; bank < shmem->nr_banks; bank++, printed++ )
++        if ( shmem->bank[bank].start != INVALID_PADDR )
++            printk(" SHMEM[%u]: %"PRIpaddr" - %"PRIpaddr"\n", printed,
++                shmem->bank[bank].start,
++                shmem->bank[bank].start + shmem->bank[bank].size - 1);
+ }
  
-         /*
--         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
--         * is shared between domU1 and domU2.
-+         * shared memory region "my-shared-mem-1" is shared between
-+         * domU1 and domU2.
-          */
-         domU2-shared-mem@50000000 {
-             compatible = "xen,domain-shared-memory-v1";
-             xen,shm-id = "my-shared-mem-1";
-             xen,shared-mem = <0x50000000 0x70000000 0x20000000>;
--        }
-+        };
-+
-+        domU2-shared-mem-2 {
-+            compatible = "xen,domain-shared-memory-v1";
-+            xen,shm-id = "my-shared-mem-2";
-+            role = "borrower";
-+            xen,shared-mem = <0x90000000 0x20000000>;
-+        };
+ void __init init_sharedmem_pages(void)
+@@ -598,7 +644,8 @@ void __init init_sharedmem_pages(void)
+     unsigned int bank;
  
-         ......
-     };
-@@ -699,3 +717,11 @@ shared between DomU1 and DomU2. It will get mapped at 0x60000000 in DomU1 guest
- physical address space, and at 0x70000000 in DomU2 guest physical address space.
- DomU1 and DomU2 are both the borrower domain, the owner domain is the default
- owner domain DOMID_IO.
-+
-+For the static shared memory region "my-shared-mem-2", since host physical
-+address is not provided by user, Xen will automatically allocate 512MB
-+from heap as static shared memory to be shared between DomU1 and DomU2.
-+The automatically allocated static shared memory will get mapped at
-+0x80000000 in DomU1 guest physical address space, and at 0x90000000 in DomU2
-+guest physical address space. DomU1 is explicitly defined as the owner domain,
-+and DomU2 is the borrower domain.
+     for ( bank = 0 ; bank < shmem->nr_banks; bank++ )
+-        init_staticmem_bank(&shmem->bank[bank]);
++        if ( shmem->bank[bank].start != INVALID_PADDR )
++            init_staticmem_bank(&shmem->bank[bank]);
+ }
+ 
+ int __init remove_shm_from_rangeset(const struct kernel_info *kinfo,
 -- 
 2.34.1
 
