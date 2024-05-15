@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 185B6C25B77
-	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 07:34:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.721955.1125696 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33FA5C25B7A
+	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 07:34:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.721956.1125701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s799s-00052t-J2; Wed, 15 May 2024 07:34:40 +0000
+	id 1s799s-000567-TZ; Wed, 15 May 2024 07:34:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 721955.1125696; Wed, 15 May 2024 07:34:40 +0000
+Received: by outflank-mailman (output) from mailman id 721956.1125701; Wed, 15 May 2024 07:34:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s799s-00052m-GT; Wed, 15 May 2024 07:34:40 +0000
-Received: by outflank-mailman (input) for mailman id 721955;
- Wed, 15 May 2024 07:34:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s799s-000553-Oi; Wed, 15 May 2024 07:34:40 +0000
+Received: by outflank-mailman (input) for mailman id 721956;
+ Wed, 15 May 2024 07:34:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=opSn=MS=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1s799q-0004ka-US
- for xen-devel@lists.xenproject.org; Wed, 15 May 2024 07:34:38 +0000
+ id 1s799r-0004nt-Iu
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2024 07:34:39 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 94e67609-128d-11ef-b4bb-af5377834399;
- Wed, 15 May 2024 09:34:37 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 959f3b2c-128d-11ef-909d-e314d9c70b13;
+ Wed, 15 May 2024 09:34:38 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [46.228.253.202])
- by support.bugseng.com (Postfix) with ESMTPSA id 3FC664EE0745;
- Wed, 15 May 2024 09:34:36 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 85EC14EE0747;
+ Wed, 15 May 2024 09:34:37 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94e67609-128d-11ef-b4bb-af5377834399
+X-Inumbo-ID: 959f3b2c-128d-11ef-909d-e314d9c70b13
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org,
 	nicola.vetrini@bugseng.com
@@ -53,9 +53,9 @@ Cc: sstabellini@kernel.org,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 1/4] x86/vpmu: address violations of MISRA C Rule 20.7
-Date: Wed, 15 May 2024 09:34:30 +0200
-Message-Id: <ecba64bb8295fa27f0ddbb0905b0983a3572b1ae.1715757982.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 3/4] x86_64/uaccess: address violations of MISRA C Rule 20.7
+Date: Wed, 15 May 2024 09:34:32 +0200
+Message-Id: <b131427dc03c4b89141bab7648523b81bf5186a6.1715757982.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1715757982.git.nicola.vetrini@bugseng.com>
 References: <cover.1715757982.git.nicola.vetrini@bugseng.com>
@@ -68,28 +68,40 @@ macro definitions should gain additional parentheses to ensure that all
 current and future users will be safe with respect to expansions that
 can possibly alter the semantics of the passed-in macro parameter.
 
+xlat_malloc_init is touched for consistency, despite the construct
+being already deviated.
+
 No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/cpu/vpmu_amd.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/arch/x86/include/asm/x86_64/uaccess.h | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/vpmu_amd.c b/xen/arch/x86/cpu/vpmu_amd.c
-index db2fa420e14a..97e6315bd9f7 100644
---- a/xen/arch/x86/cpu/vpmu_amd.c
-+++ b/xen/arch/x86/cpu/vpmu_amd.c
-@@ -25,8 +25,8 @@
+diff --git a/xen/arch/x86/include/asm/x86_64/uaccess.h b/xen/arch/x86/include/asm/x86_64/uaccess.h
+index ba79f950fba9..c6fa3fd381bc 100644
+--- a/xen/arch/x86/include/asm/x86_64/uaccess.h
++++ b/xen/arch/x86/include/asm/x86_64/uaccess.h
+@@ -26,15 +26,16 @@ void free_compat_arg_xlat(struct vcpu *v);
+ #define xlat_page_start ((unsigned long)COMPAT_ARG_XLAT_VIRT_BASE)
+ #define xlat_page_size  COMPAT_ARG_XLAT_SIZE
+ #define xlat_page_left_size(xlat_page_current) \
+-    (xlat_page_start + xlat_page_size - xlat_page_current)
++    (xlat_page_start + xlat_page_size - (xlat_page_current))
  
- #define is_guest_mode(msr) ((msr) & (1ULL << MSR_F10H_EVNTSEL_GO_SHIFT))
- #define is_pmu_enabled(msr) ((msr) & (1ULL << MSR_F10H_EVNTSEL_EN_SHIFT))
--#define set_guest_mode(msr) (msr |= (1ULL << MSR_F10H_EVNTSEL_GO_SHIFT))
--#define is_overflowed(msr) (!((msr) & (1ULL << (MSR_F10H_COUNTER_LENGTH-1))))
-+#define set_guest_mode(msr) ((msr) |= (1ULL << MSR_F10H_EVNTSEL_GO_SHIFT))
-+#define is_overflowed(msr) (!((msr) & (1ULL << (MSR_F10H_COUNTER_LENGTH - 1))))
+ #define xlat_malloc_init(xlat_page_current)    do { \
+-    xlat_page_current = xlat_page_start; \
++    (xlat_page_current) = xlat_page_start; \
+ } while (0)
  
- static unsigned int __read_mostly num_counters;
- static const u32 __read_mostly *counters;
+ extern void *xlat_malloc(unsigned long *xlat_page_current, size_t size);
+ 
+-#define xlat_malloc_array(_p, _t, _c) ((_t *) xlat_malloc(&_p, sizeof(_t) * _c))
++#define xlat_malloc_array(_p, _t, _c) ((_t *) xlat_malloc(&(_p), \
++                                                          sizeof(_t) * (_c)))
+ 
+ /*
+  * Valid if in +ve half of 48-bit address space, or above Xen-reserved area.
 -- 
 2.34.1
 
