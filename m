@@ -4,37 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42022C25B79
-	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 15:29:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.722504.1126538 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53829C25B79
+	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 15:29:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.722505.1126548 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7GZd-0005ZQ-8P; Wed, 15 May 2024 15:29:45 +0000
+	id 1s7GZi-0005rp-GM; Wed, 15 May 2024 15:29:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 722504.1126538; Wed, 15 May 2024 15:29:45 +0000
+Received: by outflank-mailman (output) from mailman id 722505.1126548; Wed, 15 May 2024 15:29:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7GZd-0005ZJ-5X; Wed, 15 May 2024 15:29:45 +0000
-Received: by outflank-mailman (input) for mailman id 722504;
- Wed, 15 May 2024 15:29:44 +0000
+	id 1s7GZi-0005ri-CV; Wed, 15 May 2024 15:29:50 +0000
+Received: by outflank-mailman (input) for mailman id 722505;
+ Wed, 15 May 2024 15:29:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cqhY=MS=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1s7GZc-0005Yo-63
- for xen-devel@lists.xenproject.org; Wed, 15 May 2024 15:29:44 +0000
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [2607:f8b0:4864:20::72b])
+ <SRS0=1aeg=MS=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
+ id 1s7GZg-0005Yo-1q
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2024 15:29:48 +0000
+Received: from doppler.solinno.uk
+ (8.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.9.a.d.0.6.f.d.1.0.b.8.0.1.0.0.2.ip6.arpa
+ [2001:8b0:1df6:da9::18])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f39ccf4d-12cf-11ef-909d-e314d9c70b13;
- Wed, 15 May 2024 17:29:43 +0200 (CEST)
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-792bcfde2baso594194085a.3
- for <xen-devel@lists.xenproject.org>; Wed, 15 May 2024 08:29:43 -0700 (PDT)
-Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792bf30f93fsm688476085a.102.2024.05.15.08.29.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 08:29:41 -0700 (PDT)
+ id f59a0cc7-12cf-11ef-909d-e314d9c70b13;
+ Wed, 15 May 2024 17:29:46 +0200 (CEST)
+Received: from mail.solinno.uk (localhost [127.0.0.1])
+ by doppler.solinno.uk (Postfix) with ESMTP id 86BB580068;
+ Wed, 15 May 2024 16:29:45 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,84 +43,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f39ccf4d-12cf-11ef-909d-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1715786982; x=1716391782; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3sxGkmPVD5HLFrwQ1yQahTr4XsqgTq5I3qCRTvh/WaE=;
-        b=Uwk+wrDrXKT7wuf5wQ8lhJMT7/SXTLwH+9ko2OA/VX5bG3I8ns7k3ndeggdr6rI1Mi
-         wVH6SOXMMk9KuG0jL3u6yjgyIfbJyzy1MF/SO6s8kcrhh6/77XxTRp26EiTMdo7B3060
-         8PocyYRPbJlX8vAP4V6JeJoDDj/nNZWLEufEQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715786982; x=1716391782;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3sxGkmPVD5HLFrwQ1yQahTr4XsqgTq5I3qCRTvh/WaE=;
-        b=h27vKPreQTxfzGwxZ9vW5QZmvFop1wu3MDYb12mWD+Mry1/MjjieS3BMc8DwohzGuo
-         egZIGMnyg62jnFmP/IIipoq4TYmMhx1Ui7qADZEG+jdLgleO6vqs1oEEi6gRDa1pAYBI
-         7B0mY0nHI1OYRqVlefhF88sGrQQpDIGHhv1MfL5cuuboyOUF/14Po1hrRW/9gXPn+jAP
-         isgVriRDgnFPWQuolFRYHI1UXuobcOnk9Z8vkd0OxOxd8aCI3AR+ZCimKOvxH3BY+xVk
-         vkDfV3JE43LheNoqKKq+qxr1PfG7YlJKwgWIUeJQ0eGah7jR+NQK2LwJZsBKCi3a74RE
-         Jv2A==
-X-Gm-Message-State: AOJu0YyLmm/psvmrrikDP368eHiqF4sKDtEJ5zBK16zBwuxFcJhg0xbM
-	FVck2jAWGPcDFf3Cj6oB4k5PHED6+zeJ9a6rRyQfbHxse4abQ2f+tIw/fjhaRvJvZX31A/z4s7W
-	0
-X-Google-Smtp-Source: AGHT+IHrUfB3FnVXKRvNxQUkNyVWWW7N5YXwvqj3UY+11WN1ZeTw0FIO4srwbU/vABbkqlaVLEcTUw==
-X-Received: by 2002:a05:620a:4393:b0:792:e8ab:9826 with SMTP id af79cd13be357-792e8ab983emr773594885a.62.1715786981746;
-        Wed, 15 May 2024 08:29:41 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.19?] xen/x86: pretty print interrupt CPU affinity masks
-Date: Wed, 15 May 2024 17:29:25 +0200
-Message-ID: <20240515152925.77197-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.44.0
+X-Inumbo-ID: f59a0cc7-12cf-11ef-909d-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
+	s=mail; t=1715786985;
+	bh=nja7hs+1Fl4A9h1PMkBe/mv1CUxj2LF9liD70bT+zlA=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=OS9z4LABvhs1zpA3tPsN8Pv0YXdJsg8wiLF9/ooaiaDBYxf6EzvgU3zBvA1xl4KVG
+	 n3PR8+/Nfj9B7FtuWKAAGMSjpPEGb10inZSjKFhHSTKObMsBCBmfYopj0gQPyInaSg
+	 iKPWYINh7cVZ2YZSDtYZt0/yqV1eO4sYBv3CRWds=
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Date: Wed, 15 May 2024 16:29:45 +0100
+From: Leigh Brown <leigh@solinno.co.uk>
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com,
+ anthony.perard@citrix.com
+Subject: Re: [RFC PATCH v2 3/5] tools/hotplug/Linux: Add bridge VLAN support
+In-Reply-To: <CAKf6xpuNJbf2ioVFyvu2L6YG2_eNRbqPF8tn7Yodyv5UA4uE6A@mail.gmail.com>
+References: <20240508213824.55824-1-leigh@solinno.co.uk>
+ <20240508213824.55824-4-leigh@solinno.co.uk>
+ <CAKf6xpuNJbf2ioVFyvu2L6YG2_eNRbqPF8tn7Yodyv5UA4uE6A@mail.gmail.com>
+Message-ID: <f7a94db1deb1c3197d1f77e8e774ee53@solinno.co.uk>
+X-Sender: leigh@solinno.co.uk
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
 
-Print the CPU affinity masks as numeric ranges instead of plain hexadecimal
-bitfields.
+Hi Jason,
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/irq.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+On 2024-05-15 01:57, Jason Andryuk wrote:
+> On Wed, May 8, 2024 at 6:55 PM Leigh Brown <leigh@solinno.co.uk> wrote:
+>> 
+>> Update add_to_bridge shell function to read the vlan parameter
+>> from xenstore and set the bridge VLAN configuration for the VID.
+>> 
+>> Add additional helper functions to parse the vlan specification,
+>> which consists of one or more of the follow:
+>> 
+>> a) single VLAN (e.g. 10).
+>> b) contiguous range of VLANs (e.g. 10-15).
+>> c) discontiguous range with base, increment and count
+>>    (e.g. 100+10x9 which gives VLAN IDs 100, 110, ... 190).
+>> 
+>> A single VLAN can be suffixed with "p" to indicate the PVID, or
+>> "u" to indicate untagged. A range of VLANs can be suffixed with
+>> "u" to indicate untagged.  A complex example would be:
+>> 
+>>    vlan=1p/10-15/20-25u
+>> 
+>> This capability only works when using the iproute2 bridge command,
+>> so a warning is issued if the vlan parameter is set and the bridge
+>> command is not available, as it will be ignored.
+>> 
+>> Signed-off-by: Leigh Brown <leigh@solinno.co.uk>
+>> ---
+>>  tools/hotplug/Linux/xen-network-common.sh | 111 
+>> ++++++++++++++++++++++
+>>  1 file changed, 111 insertions(+)
+>> 
+>> diff --git a/tools/hotplug/Linux/xen-network-common.sh 
+>> b/tools/hotplug/Linux/xen-network-common.sh
+>> index 42fa704e8d..d9fb4f7355 100644
+>> --- a/tools/hotplug/Linux/xen-network-common.sh
+>> +++ b/tools/hotplug/Linux/xen-network-common.sh
+>> @@ -121,10 +121,113 @@ create_bridge () {
+>>      fi
+>>  }
+>> 
+>> +_vif_vlan_add() {
+>> +    # References vlans, pvid and error variables from the calling 
+>> function
+>> +    local -i vid=$1
+>> +    local flag=${2:-}
+>> +
+>> +    if (( vid < 1 || vid > 4094 )) ;then
+>> +        error="vlan id $vid not between 1 and 4094"
+>> +        return
+>> +    fi
+>> +    if [[ -n "${vlans[$vid]}" ]] ;then
+>> +        error="vlan id $vid specified more than once"
+>> +        return
+> 
+> You could do `fatal "vlan id $vid specified more than once"` and just
+> terminate the script at this point.  It would simplify your later code
+> if you use fatal more.
 
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index 80ba8d9fe912..3b951d81bd6d 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -1934,10 +1934,10 @@ void do_IRQ(struct cpu_user_regs *regs)
-                 if ( ~irq < nr_irqs && irq_desc_initialized(desc) )
-                 {
-                     spin_lock(&desc->lock);
--                    printk("IRQ%d a=%04lx[%04lx,%04lx] v=%02x[%02x] t=%s s=%08x\n",
--                           ~irq, *cpumask_bits(desc->affinity),
--                           *cpumask_bits(desc->arch.cpu_mask),
--                           *cpumask_bits(desc->arch.old_cpu_mask),
-+                    printk("IRQ%d a={%*pbl}[{%*pbl},{%*pbl}] v=%02x[%02x] t=%s s=%08x\n",
-+                           ~irq, CPUMASK_PR(desc->affinity),
-+                           CPUMASK_PR(desc->arch.cpu_mask),
-+                           CPUMASK_PR(desc->arch.old_cpu_mask),
-                            desc->arch.vector, desc->arch.old_vector,
-                            desc->handler->typename, desc->status);
-                     spin_unlock(&desc->lock);
-@@ -2638,7 +2638,7 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
-         if ( !set_affinity )
-             printk("Cannot set affinity for IRQ%u\n", irq);
-         else if ( break_affinity )
--            printk("Broke affinity for IRQ%u, new: %*pb\n",
-+            printk("Broke affinity for IRQ%u, new: {%*pbl}\n",
-                    irq, CPUMASK_PR(affinity));
-     }
- 
--- 
-2.44.0
+I will do that.
 
+>> +    fi
+>> +    case $flag in
+>> +     p) if (( pvid != 0 )) ;then
+>> +            error="more than one pvid specified ($vid and $pvid)"
+>> +            return
+>> +        fi
+>> +        pvid=$vid
+>> +        vlans[$vid]=p ;;
+>> +     u) vlans[$vid]=u ;;
+>> +     *) vlans[$vid]=t ;;
+>> +    esac
+>> +}
+>> +
+>> +_vif_vlan_parse_term() {
+>> +    # References error variable from the calling function
+>> +    local vid incr last term=${1:-}
+>> +
+>> +    if [[ $term =~ ^([0-9]+)([pu])?$ ]] ;then
+> 
+> I like that you split the different cases into multiple REs.
+> 
+>> +        _vif_vlan_add ${BASH_REMATCH[1]} ${BASH_REMATCH[2]}
+>> +    elif [[ $term =~ ^([0-9]+)-([0-9]+)(u)?$ ]] ;then
+>> +        vid=${BASH_REMATCH[1]}
+>> +        last=${BASH_REMATCH[2]}
+>> +        if (( last >= vid )) ;then
+>> +            for (( ; vid<=last; vid++ )) ;do
+>> +                _vif_vlan_add $vid ${BASH_REMATCH[3]}
+>> +            done
+>> +        else
+>> +           error="invalid vlan id range: $term"
+>> +        fi
+>> +    elif [[ $term =~ ^([0-9]+)\+([0-9]+)x([0-9]+)(u)?$ ]] ;then
+>> +        vid=${BASH_REMATCH[1]}
+>> +        incr=${BASH_REMATCH[2]}
+>> +        for (( j=${BASH_REMATCH[3]}; j>0; --j, vid+=incr ))
+>> +        do
+>> +            _vif_vlan_add $vid ${BASH_REMATCH[4]}
+>> +        done
+>> +    else
+>> +        error="invalid vlan specification: $term"
+>> +    fi
+>> +}
+>> +
+>> +_vif_vlan_validate_pvid() {
+>> +    # References vlans and pvid variables from the calling function
+>> +    if (( pvid == 0 )) ;then
+>> +        if (( ${#vlans[@]} == 1 )) ;then
+>> +            vlans[${!vlans[*]}]=p
+>> +        else
+>> +            error="pvid required for multiple vlan ids"
+>> +        fi
+>> +    fi
+>> +}
+>> +
+>> +_vif_vlan_setup() {
+>> +    # References vlans and dev variable from the calling function
+>> +    local vid cmd
+>> +
+>> +    bridge vlan del dev "$dev" vid 1
+>> +    for vid in ${!vlans[@]} ;do
+>> +        cmd="bridge vlan add dev '$dev' vid $vid"
+>> +        case ${vlans[$vid]} in
+>> +             p) cmd="$cmd pvid untagged" ;;
+>> +             u) cmd="$cmd untagged" ;;
+>> +             t) ;;
+>> +        esac
+>> +        eval "$cmd"
+>> +    done
+>> +}
+>> +
+>> +_vif_vlan_membership() {
+>> +    # The vlans, pvid, dev and error variables are used by 
+>> sub-functions
+>> +    local -A vlans=()
+>> +    local -a terms=()
+>> +    local -i i pvid=0
+>> +    local dev=$1 error=""
+>> +
+>> +    # Split the vlan specification string into its terms
+>> +    readarray -d / -t terms <<<$2
+>> +    for (( i=0; i<${#terms[@]}; ++i )) ;do
+>> +        _vif_vlan_parse_term ${terms[$i]%%[[:space:]]}
+>> +        [[ -n "$error" ]] && break
+>> +    done
+>> +
+>> +    [[ -z "$error" ]] && _vif_vlan_validate_pvid
+>> +    [[ -z "$error" ]] && _vif_vlan_setup
+>> +    [[ -z "$error" ]] && return 0
+>> +
+>> +    log error "$error"
+>> +    return 1
+>> +}
+>> +
+>>  # Usage: add_to_bridge bridge dev
+>>  add_to_bridge () {
+>>      local bridge=$1
+>>      local dev=$2
+>> +    local vlan=$(xenstore_read_default "$XENBUS_PATH/vlan" "")
+>> 
+>>      # Don't add $dev to $bridge if it's already on the bridge.
+>>      if [ ! -e "/sys/class/net/${bridge}/brif/${dev}" ]; then
+>> @@ -134,6 +237,14 @@ add_to_bridge () {
+>>          else
+>>              ip link set ${dev} master ${bridge}
+>>          fi
+>> +        if [ -n "${vlan}" ] ;then
+>> +            if which bridge >&/dev/null; then
+>> +                log debug "configuring VLANs for ${dev} on ${bridge}"
+>> +                _vif_vlan_membership "${dev}" "${vlan}"
+>> +            else
+>> +                log warning "bridge command not available, ignoring 
+>> vlan config"
+> 
+> Do you think this should be fatal?  It seems to me that setting up the
+> connection but not applying the vlans could be a security issue.
+
+Agreed, I will do that.
+
+> This file before your patch was very close to posix sh.  Afterwards,
+> it definitely needs bash.  vif-bridge is /bin/bash, so it is fine.
+
+Great - I would not like to rewrite it in Posix shell!
+
+> Regards,
+> Jason
+
+Regards,
+
+Leigh.
 
