@@ -4,35 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0FE3C25B79
-	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 14:26:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.722427.1126399 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 843D1C25B75
+	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 14:27:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.722435.1126429 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7Fag-0003Nf-WB; Wed, 15 May 2024 14:26:46 +0000
+	id 1s7FbB-0005xb-Fk; Wed, 15 May 2024 14:27:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 722427.1126399; Wed, 15 May 2024 14:26:46 +0000
+Received: by outflank-mailman (output) from mailman id 722435.1126429; Wed, 15 May 2024 14:27:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7Fag-0003NW-SS; Wed, 15 May 2024 14:26:46 +0000
-Received: by outflank-mailman (input) for mailman id 722427;
- Wed, 15 May 2024 14:26:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s7FbB-0005xO-Cq; Wed, 15 May 2024 14:27:17 +0000
+Received: by outflank-mailman (input) for mailman id 722435;
+ Wed, 15 May 2024 14:27:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kRjG=MS=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1s7Fae-0002KG-5N
- for xen-devel@lists.xenproject.org; Wed, 15 May 2024 14:26:44 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 264d3fa6-12c7-11ef-b4bb-af5377834399;
- Wed, 15 May 2024 16:26:42 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E08814BF;
- Wed, 15 May 2024 07:27:06 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2BB353F7A6;
- Wed, 15 May 2024 07:26:41 -0700 (PDT)
+ <SRS0=6wQf=MS=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1s7Fb9-0005pX-UO
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2024 14:27:16 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2414::600])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 38a0a0c4-12c7-11ef-909d-e314d9c70b13;
+ Wed, 15 May 2024 16:27:13 +0200 (CEST)
+Received: from SA9PR13CA0139.namprd13.prod.outlook.com (2603:10b6:806:27::24)
+ by MN0PR12MB5954.namprd12.prod.outlook.com (2603:10b6:208:37d::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.55; Wed, 15 May
+ 2024 14:27:10 +0000
+Received: from SA2PEPF00003AE7.namprd02.prod.outlook.com
+ (2603:10b6:806:27:cafe::8e) by SA9PR13CA0139.outlook.office365.com
+ (2603:10b6:806:27::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.10 via Frontend
+ Transport; Wed, 15 May 2024 14:27:10 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SA2PEPF00003AE7.mail.protection.outlook.com (10.167.248.7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7587.21 via Frontend Transport; Wed, 15 May 2024 14:27:09 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 15 May
+ 2024 09:27:08 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 15 May
+ 2024 09:27:07 -0500
+Received: from [172.18.62.51] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Wed, 15 May 2024 09:27:06 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,208 +65,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 264d3fa6-12c7-11ef-b4bb-af5377834399
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 5/7] xen/arm: Rework heap page allocation outside allocate_bank_memory
-Date: Wed, 15 May 2024 15:26:23 +0100
-Message-Id: <20240515142626.3480640-6-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240515142626.3480640-1-luca.fancellu@arm.com>
-References: <20240515142626.3480640-1-luca.fancellu@arm.com>
+X-Inumbo-ID: 38a0a0c4-12c7-11ef-909d-e314d9c70b13
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nRN/NWowAMa0CcFnVMuLoFG15i/j0niUdCQym4mqB7EPiN1JqQWnw72b1YTB5BX6bLeXkPreJVulTtnr27Xgks/aZ8M4eOfsdzXy93C/MhhKSI4c+9kmspfmX8N4CnWT/ceKhwBQ+2DPwP+onLNzKkLLdKynzTCzpjzTmGpqx8yuU6zzUHYLEl6dFkSf/7YBAeT0V734SnWRyjhffOXelEQSP8WnyoxIw/y7mhT/OeGxuZ7JkqpoufczX1M5PhTCYWREvSHqWp82UjkOewBYwpEWAzVD2FVMKrD08RicrqdZ1J6+23PqeE5JpkLKb+kM4x/rc9z5eEiEayIZHytWJw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=miWKji/1XntNKyYIcFoAx/UroAi6DyHJuVvRVQCCt7A=;
+ b=TtMew6jD/3kCQzeEq9QQeHewSC2cgdqRLwQWizRMoDH0zwjNzHwvP3RhlqEFRkvst/nhp2Ax4uPn5S92nhz5yIqXcrHkFl2TU/IPLRts64JPlOweuiXkvFtC0iASoBJjlC1L3UDzpkp48VY1EienAaoexX/ee2uON3Zq2XUv/oJ/i4t8XHDn6zcgCZObpJMOPwe3ioYM6j6uixz1VtR6oa55Muos5Jv0KlevD+Yh0rG1tfgtzhDXxkv1lRQy/m+anlFjK80o5wYvfVZkQ2IVwMe75Jhsh4KzbGB3aNLp7QQUsS/cAJ/a3sVcSyrbTHKQC7QYjjhd5PNPU/FUFJ2UgA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=miWKji/1XntNKyYIcFoAx/UroAi6DyHJuVvRVQCCt7A=;
+ b=2J/WU6mCSX635BmrZ2MhKf2NJuKlb7FbzPZvEzDiqbMeWQ5+nw3NBcMPorJocGEUpV4Bo/6Vu/3pgvAG8YKG4hFgVLjsKyzKuMa3a/j7OsIeyjIQrU9Q78riMlb9zKHob/I2qSV5AXY5uXwDOuakJPvTu/T+KLgQA0fe7K9h8EI=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <4eab3820-d357-42cb-a367-a7a0966e7e3b@amd.com>
+Date: Wed, 15 May 2024 10:27:05 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH v7 1/5] xen/vpci: Clear all vpci status of device
+To: <xen-devel@lists.xenproject.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger.pau@citrix.com>, Oleksii K. <oleksii.kurochko@gmail.com>
+CC: Jiqian Chen <Jiqian.Chen@amd.com>, Jan Beulich <jbeulich@suse.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, "George Dunlap"
+	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Anthony PERARD
+	<anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, "Daniel P .
+ Smith" <dpsmith@apertussolutions.com>, Huang Rui <Ray.Huang@amd.com>
+References: <20240419035340.608833-1-Jiqian.Chen@amd.com>
+ <20240419035340.608833-2-Jiqian.Chen@amd.com>
+Content-Language: en-US
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <20240419035340.608833-2-Jiqian.Chen@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE7:EE_|MN0PR12MB5954:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1d5006f1-ef14-4344-1490-08dc74eb1af3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230031|36860700004|376005|7416005|82310400017|1800799015;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?TER5eHNHQ2NiUisyaGJQd0diNVJIQ3VjWlkzUlN1Y0VHUk8xbFJkOEZ5aUJC?=
+ =?utf-8?B?K2x1cnVFS3BCNEVZOEFTK2xSYUhiZWhKYWdyajdXOGxxUFZTK211djJId0xG?=
+ =?utf-8?B?QTV2Qis2S2lrSDNxVWljZG1iL1lBYzBQUENxTEdEZTZCeDFrSmxmVFhFaGxJ?=
+ =?utf-8?B?Z2xSSjdETW1HYVRFOHpITi9sOTJvSjkwajRLOStySkN3YlFOaXczd0crenJR?=
+ =?utf-8?B?c213OGNFWW0ydE5ZZjR2Z3lTYTNXYnlFVGRpMlA5blVVLzdJYk5LYTZQMFQ4?=
+ =?utf-8?B?a2JoY2kxVDZNQUhGTzVieitIK2N0dm1oN2ZtT25VZDdlcysvbFVBVzkzUEcx?=
+ =?utf-8?B?MDNGcUhTVGlwajg4RGdsWGJzZEJuNmVOa0NuL2NjMi9oL2hTNHp5ZnREaFVp?=
+ =?utf-8?B?NHA1aHViUEZ2S0VMb1VIaFh3UGZCeWIzWktReVMrOW9DaTFYa0x3VWJQeFZs?=
+ =?utf-8?B?N21SS3NNRTJiejh0ZnlBcXdEYmZickViRFZ5T0NSNG84aEROWWxWalpSUStx?=
+ =?utf-8?B?a1piQUdSNmNwdW05ZzF0eG1rNHZvUkx4TGQyRUU0T1kyd3NLa09NMVNoQS84?=
+ =?utf-8?B?ZlFlU2hLUDF2UlJYYW1mU3RKZ1RQeEZROTVwQUhIWE5XUHBXQWpSR2RqR21i?=
+ =?utf-8?B?UDJETGJHeTlxZE8wK0dKenp6dmJtRTZYZllxNm9vQjJLSDNKM2JOeEdFSzM0?=
+ =?utf-8?B?WlRvaSt3bXdXQ3ZhWW5nNERLK09VV1VRZzdvZkFSOWZUOEZyZjVMbk95OVZT?=
+ =?utf-8?B?bDExYmVLS2V2TTJFM1ROc2M5ZFplS0hOYldYcmd6SG5KTE5ZWDRjQlV6djBO?=
+ =?utf-8?B?NG9QMmo5YWRsL09nS2ovK1FybDdHNU9tcVFLczFWcEFCK2RLMkdpWHZaczJ1?=
+ =?utf-8?B?NXJQMFhJRnVIMndjV0xlaU5xcXVMZnlwRmJhdkxzNW5wRzhadWhJMEQ4ejlC?=
+ =?utf-8?B?SUlmOWxXL3E3ZlNFQ1R0dlV3TmhJRnBBOFVhZUZBdTFzc3ZvRnRVRGo4SC9z?=
+ =?utf-8?B?R3VOZkY3VXA2VnpBNS8rYXJCazVOZHdYd1B3UWhCRkRzNW50a3g5S1FSVnhH?=
+ =?utf-8?B?QWtvb0RMeENSK2JieHlIeldRSXpiL1hYVDdVVnZtcVhiUkhXbWgyQ3lzTXhm?=
+ =?utf-8?B?OTM5T0xDbEsrYkZDOXpDWWR2eXpYeE1qM2drNkFtMERjKzQwc3p0aVFWMi9I?=
+ =?utf-8?B?MUUwN3JaNzZYREdkOTVYbWJrK1lZWVIwOW42TFFFRW00M1V3QkdTNlhRamJq?=
+ =?utf-8?B?aXZJakxIeVg2dzZHalZ4aklzeWpBVnRvcWVFeWdaRUw0eE1EU3lGaVlWWDhM?=
+ =?utf-8?B?TDNTd0YzOUlyVGJwOXFRQXBpKzZ0emFSUVMvaHM5RTJuQm1rVHZqTitnd2hm?=
+ =?utf-8?B?UzFlWHYzejNSSVpreGpBc0FDbkNBbEh5cnNubHd3MGtDQ0JmMUhzV0FaaHNw?=
+ =?utf-8?B?K3Buc1pVdnVncTRXcHdRSEN0RE8ya21yWkdKZTNLNStuUTBjKzBWQjNySkxj?=
+ =?utf-8?B?Y1ZSN0tMenA2cTc3VEVlTmtoRXdhbENPajUwUkZsZWxTYmw2VUUwcTMwdGhM?=
+ =?utf-8?B?L2NKK25zK0wwc29VVDYxOVlMN2xSSDk0SzVhWWdaNDk3UEdDQVJvQWRhNG1z?=
+ =?utf-8?B?ZVRXell1bkxpNHliMXM5Z01RZDJPZ1F6bFZXa3RnTGlUNytJcjFOcCszZ0tN?=
+ =?utf-8?B?MUF0czMzSmcrYldNZlJ0dlUxdHZlN0k1Slplc0pBcERlRkRISXMvOTdVdXZS?=
+ =?utf-8?Q?3tu+bvcxuxNXjbJVIZr2WOudsGrh3LOWriJJMCG?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(376005)(7416005)(82310400017)(1800799015);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2024 14:27:09.7573
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1d5006f1-ef14-4344-1490-08dc74eb1af3
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF00003AE7.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5954
 
-The function allocate_bank_memory allocates pages from the heap and
-maps them to the guest using guest_physmap_add_page.
+On 4/18/24 23:53, Jiqian Chen wrote:
+> When a device has been reset on dom0 side, the vpci on Xen
+> side won't get notification, so the cached state in vpci is
+> all out of date compare with the real device state.
+> To solve that problem, add a new hypercall to clear all vpci
+> device state. When the state of device is reset on dom0 side,
+> dom0 can call this hypercall to notify vpci.
+> 
+> Signed-off-by: Huang Rui <ray.huang@amd.com>
+> Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+> Reviewed-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-As a preparation work to support static shared memory bank when the
-host physical address is not provided, Xen needs to allocate memory
-from the heap, so rework allocate_bank_memory moving out the page
-allocation in a new function called allocate_domheap_memory.
+Could we consider this patch for 4.19? It's independent of the rest of
+this series, and it fixes a real issue observed on both Arm and x86. The
+Linux counterpart has already been merged in linux-next [0].
 
-The function allocate_domheap_memory takes a callback function and
-a pointer to some extra information passed to the callback and this
-function will be called for every region, until a defined size is
-reached.
-
-In order to keep allocate_bank_memory functionality, the callback
-passed to allocate_domheap_memory is a wrapper for
-guest_physmap_add_page.
-
-Let allocate_domheap_memory be externally visible, in order to use
-it in the future from the static shared memory module.
-
-Take the opportunity to change the signature of allocate_bank_memory
-and remove the 'struct domain' parameter, which can be retrieved from
-'struct kernel_info'.
-
-No functional changes is intended.
-
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
-v2:
- - Reduced scope of pg var in allocate_domheap_memory, removed not
-   necessary BUG_ON(), changed callback to return bool and fix
-   comment. (Michal)
----
- xen/arch/arm/dom0less-build.c           |  4 +-
- xen/arch/arm/domain_build.c             | 79 +++++++++++++++++--------
- xen/arch/arm/include/asm/domain_build.h |  9 ++-
- 3 files changed, 62 insertions(+), 30 deletions(-)
-
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index 74f053c242f4..20ddf6f8f250 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -60,12 +60,12 @@ static void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
- 
-     mem->nr_banks = 0;
-     bank_size = MIN(GUEST_RAM0_SIZE, kinfo->unassigned_mem);
--    if ( !allocate_bank_memory(d, kinfo, gaddr_to_gfn(GUEST_RAM0_BASE),
-+    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM0_BASE),
-                                bank_size) )
-         goto fail;
- 
-     bank_size = MIN(GUEST_RAM1_SIZE, kinfo->unassigned_mem);
--    if ( !allocate_bank_memory(d, kinfo, gaddr_to_gfn(GUEST_RAM1_BASE),
-+    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM1_BASE),
-                                bank_size) )
-         goto fail;
- 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 4febba69ef63..fd8babacb9df 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -417,30 +417,15 @@ static void __init allocate_memory_11(struct domain *d,
- }
- 
- #ifdef CONFIG_DOM0LESS_BOOT
--bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
--                                 gfn_t sgfn, paddr_t tot_size)
-+bool __init allocate_domheap_memory(struct domain *d, paddr_t tot_size,
-+                                    alloc_domheap_mem_cb cb, void *extra)
- {
--    struct membanks *mem = kernel_info_get_mem(kinfo);
--    int res;
--    struct page_info *pg;
--    struct membank *bank;
--    unsigned int max_order = ~0;
--
--    /*
--     * allocate_bank_memory can be called with a tot_size of zero for
--     * the second memory bank. It is not an error and we can safely
--     * avoid creating a zero-size memory bank.
--     */
--    if ( tot_size == 0 )
--        return true;
--
--    bank = &mem->bank[mem->nr_banks];
--    bank->start = gfn_to_gaddr(sgfn);
--    bank->size = tot_size;
-+    unsigned int max_order = UINT_MAX;
- 
-     while ( tot_size > 0 )
-     {
-         unsigned int order = get_allocation_size(tot_size);
-+        struct page_info *pg;
- 
-         order = min(max_order, order);
- 
-@@ -463,17 +448,61 @@ bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
-             continue;
-         }
- 
--        res = guest_physmap_add_page(d, sgfn, page_to_mfn(pg), order);
--        if ( res )
--        {
--            dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
-+        if ( !cb(d, pg, order, extra) )
-             return false;
--        }
- 
--        sgfn = gfn_add(sgfn, 1UL << order);
-         tot_size -= (1ULL << (PAGE_SHIFT + order));
-     }
- 
-+    return true;
-+}
-+
-+static bool __init guest_map_pages(struct domain *d, struct page_info *pg,
-+                                   unsigned int order, void *extra)
-+{
-+    gfn_t *sgfn = (gfn_t *)extra;
-+    int res;
-+
-+    BUG_ON(!sgfn);
-+    res = guest_physmap_add_page(d, *sgfn, page_to_mfn(pg), order);
-+    if ( res )
-+    {
-+        dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
-+        return false;
-+    }
-+
-+    *sgfn = gfn_add(*sgfn, 1UL << order);
-+
-+    return true;
-+}
-+
-+bool __init allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
-+                                 paddr_t tot_size)
-+{
-+    struct membanks *mem = kernel_info_get_mem(kinfo);
-+    struct domain *d = kinfo->d;
-+    struct membank *bank;
-+
-+    /*
-+     * allocate_bank_memory can be called with a tot_size of zero for
-+     * the second memory bank. It is not an error and we can safely
-+     * avoid creating a zero-size memory bank.
-+     */
-+    if ( tot_size == 0 )
-+        return true;
-+
-+    bank = &mem->bank[mem->nr_banks];
-+    bank->start = gfn_to_gaddr(sgfn);
-+    bank->size = tot_size;
-+
-+    /*
-+     * Allocate pages from the heap until tot_size is zero and map them to the
-+     * guest using guest_map_pages, passing the starting gfn as extra parameter
-+     * for the map operation.
-+     */
-+    if ( !allocate_domheap_memory(d, tot_size, guest_map_pages, &sgfn) )
-+        return false;
-+
-     mem->nr_banks++;
-     kinfo->unassigned_mem -= bank->size;
- 
-diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
-index 45936212ca21..e712afbc7fbf 100644
---- a/xen/arch/arm/include/asm/domain_build.h
-+++ b/xen/arch/arm/include/asm/domain_build.h
-@@ -5,9 +5,12 @@
- #include <asm/kernel.h>
- 
- typedef __be32 gic_interrupt_t[3];
--
--bool allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
--                          gfn_t sgfn, paddr_t tot_size);
-+typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
-+                                     unsigned int order, void *extra);
-+bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
-+                             alloc_domheap_mem_cb cb, void *extra);
-+bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
-+                          paddr_t tot_size);
- int construct_domain(struct domain *d, struct kernel_info *kinfo);
- int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
- int make_chosen_node(const struct kernel_info *kinfo);
--- 
-2.34.1
-
+[0] https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?h=next-20240515&id=b272722511d5e8ae580f01830687b8a6b2717f01
 
