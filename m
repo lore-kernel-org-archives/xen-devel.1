@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44147C25B79
-	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 14:22:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.722415.1126339 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DAA7C25B79
+	for <xen-devel@archiver.kernel.org>; Wed, 15 May 2024 14:26:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.722423.1126359 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7FWX-0001Lp-11; Wed, 15 May 2024 14:22:29 +0000
+	id 1s7Faa-0002Jz-PB; Wed, 15 May 2024 14:26:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 722415.1126339; Wed, 15 May 2024 14:22:29 +0000
+Received: by outflank-mailman (output) from mailman id 722423.1126359; Wed, 15 May 2024 14:26:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7FWW-0001Li-UZ; Wed, 15 May 2024 14:22:28 +0000
-Received: by outflank-mailman (input) for mailman id 722415;
- Wed, 15 May 2024 14:22:27 +0000
+	id 1s7Faa-0002Js-MD; Wed, 15 May 2024 14:26:40 +0000
+Received: by outflank-mailman (input) for mailman id 722423;
+ Wed, 15 May 2024 14:26:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RHxB=MS=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1s7FWV-0001LJ-Gs
- for xen-devel@lists.xenproject.org; Wed, 15 May 2024 14:22:27 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8d61b016-12c6-11ef-909d-e314d9c70b13;
- Wed, 15 May 2024 16:22:25 +0200 (CEST)
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2db17e8767cso98427971fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 15 May 2024 07:22:25 -0700 (PDT)
-Received: from [10.80.67.140] (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-351d21c8106sm284788f8f.60.2024.05.15.07.22.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 May 2024 07:22:22 -0700 (PDT)
+ <SRS0=kRjG=MS=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1s7FaZ-00025L-2u
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2024 14:26:39 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 239c571f-12c7-11ef-909d-e314d9c70b13;
+ Wed, 15 May 2024 16:26:37 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F10A214BF;
+ Wed, 15 May 2024 07:27:01 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 849F63F7A6;
+ Wed, 15 May 2024 07:26:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,190 +44,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8d61b016-12c6-11ef-909d-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1715782945; x=1716387745; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=RtwMB00+s5qMmn/kqwmbEpnVdTHjnFeYVb3ciF6v32M=;
-        b=KoGHTQJ4f2lSUimq4VVDewbC3msBWD4RJeB8FosAKEXYd1rhGeuvcVtY+ZgMAJrGCR
-         uRDE8UtIt8Vgy9lHzlYe4qnt3y+bhQMUEahNo/KH4wlMVO1+7mDF7Ps4voroAt0oo9uF
-         X7JTQY5uKgQdHxMQCw1RHYOJVY7VM39uYckWA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715782945; x=1716387745;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RtwMB00+s5qMmn/kqwmbEpnVdTHjnFeYVb3ciF6v32M=;
-        b=P7hf3JyiBjU2Lm2yo/f9llHLKXUYdZddo7fzSwrLg0/cD4hMfiZ0W+T5vopvPk6t7f
-         Yx+DG012MI9+VHVciJg8foVxmrfgGP0aIEHcgZIf3uvokwXo6b7voS/oH68qd2DCRA4z
-         r+56yvGkx1a45F3l6FPaT2XXoHLV38pi6uWzxBroSNC6bm9tX/Pc5pqHER8hwqKTPZtg
-         QGIazyAph/ACtOh4FWK72Xzl+ZJBgyv8juJlrBFO4CP2EqOqxS3P+V9lyW/skzLRsBjQ
-         d7awS5W1ePxMDAFRBqdCdFtg64Vqi8+hedmZFQ9nQHSqQRZgU0Vuj6MmdqAS30ws62No
-         gxVw==
-X-Gm-Message-State: AOJu0YxPjQp+LPdnekk7ULgYYrpV8NQLK3tfDlsF0DimSHbd37LJ8vND
-	b8y7Ez1eZRi/SuSJ//RPus3BIlw1Wt/RVxMz+N/XHiZFjQH6C696/Xkl/0Q7ELw=
-X-Google-Smtp-Source: AGHT+IGdRvyP7NWoa+ddjY6+WWxZOOgtzddKaEM9rI1w6GZ05qB3qUuyMqLILy1LLJNpKll5gBynow==
-X-Received: by 2002:a05:651c:1542:b0:2de:7046:b8f8 with SMTP id 38308e7fff4ca-2e51fd2e6a8mr162451611fa.5.1715782943154;
-        Wed, 15 May 2024 07:22:23 -0700 (PDT)
-Message-ID: <4ddc5acc-fc7b-4ed6-8e63-412f34da00b2@citrix.com>
-Date: Wed, 15 May 2024 15:22:22 +0100
+X-Inumbo-ID: 239c571f-12c7-11ef-909d-e314d9c70b13
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 1/7] xen/arm: Lookup bootinfo shm bank during the mapping
+Date: Wed, 15 May 2024 15:26:19 +0100
+Message-Id: <20240515142626.3480640-2-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240515142626.3480640-1-luca.fancellu@arm.com>
+References: <20240515142626.3480640-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Xen crash in scheduler during cpu hotplug
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
-References: <41ae17df-fb06-40b3-a98a-02f6f495f169@citrix.com>
- <7553291c-f88d-49c7-a1bd-5f8dbd21fd2b@suse.com>
- <9fdbf8a1-56a6-4be3-96a0-fcded0382cf0@citrix.com>
- <6766f9f1-2ceb-42d8-8ddd-f98671106579@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <6766f9f1-2ceb-42d8-8ddd-f98671106579@suse.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 15/05/2024 2:38 pm, Jürgen Groß wrote:
-> On 15.05.24 15:22, Andrew Cooper wrote:
->> On 15/05/2024 1:39 pm, Jan Beulich wrote:
->>> On 15.05.2024 13:58, Andrew Cooper wrote:
->>>> Just so it doesn't get lost.  In XenRT, we've found:
->>>>
->>>>> (XEN) ----[ Xen-4.19.0-1-d  x86_64  debug=y  Tainted:     H  ]----
->>>>> (XEN) CPU:    45
->>>>> (XEN) RIP:    e008:[<ffff82d040244cbf>]
->>>>> common/sched/credit.c#csched_load_balance+0x41/0x877
->>>>> (XEN) RFLAGS: 0000000000010092   CONTEXT: hypervisor
->>>>> (XEN) rax: ffff82d040981618   rbx: ffff82d040981618   rcx:
->>>>> 0000000000000000
->>>>> (XEN) rdx: 0000003ff68cd000   rsi: 000000000000002d   rdi:
->>>>> ffff83103723d450
->>>>> (XEN) rbp: ffff83207caa7d48   rsp: ffff83207caa7b98   r8:
->>>>> 0000000000000000
->>>>> (XEN) r9:  ffff831037253cf0   r10: ffff83103767c3f0   r11:
->>>>> 0000000000000009
->>>>> (XEN) r12: ffff831037237990   r13: ffff831037237990   r14:
->>>>> ffff831037253720
->>>>> (XEN) r15: 0000000000000000   cr0: 000000008005003b   cr4:
->>>>> 0000000000f526e0
->>>>> (XEN) cr3: 000000005bc2f000   cr2: 0000000000000010
->>>>> (XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss:
->>>>> 0000000000000000
->>>>> (XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
->>>>> (XEN) Xen code around <ffff82d040244cbf>
->>>>> (common/sched/credit.c#csched_load_balance+0x41/0x877):
->>>>> (XEN)  48 8b 0c 10 48 8b 49 08 <48> 8b 79 10 48 89 bd b8 fe ff ff 49
->>>>> 8b 4e 28 48
->>>>> <snip>
->>>>> (XEN) Xen call trace:
->>>>> (XEN)    [<ffff82d040244cbf>] R
->>>>> common/sched/credit.c#csched_load_balance+0x41/0x877
->>> While this is of course pretty little information, I've still tried to
->>> decipher it, first noticing it's credit1 that's being used here. Once
->>> forcing csched_load_balance() non-inline (no idea why it is a separate
->>> function in your build), I can see a sufficiently matching pattern at
->>> approximately the same offset into the function. That's
->>>
->>>      const struct cpupool *c = get_sched_res(cpu)->cpupool;
->>>      ...
->>>      const cpumask_t *online = c->res_valid;
->>>      ...
->>>      BUG_ON(get_sched_res(cpu) != snext->unit->res);
->>>
->>> overlapping, with the crash being on the middle of the quoted lines.
->>> IOW the CPU pool is still NULL for this sched resource. Cc-ing
->>> Jürgen for possible clues ...
->>
->> We've seen it in 4.13, 4.17 and upstream, after Roger extended the
->> existing CPU hotplug testing to try and reproduce the MTRR watchdog
->> failure.  We've found yet another "no irq for handler" from this too.
->>
->> It's always a deference at NULL+0x10, somewhere within
->> csched_schedule().
->
-> I think I've found the reason.
->
-> In schedule_cpu_add() the cpupool and granularity are set only after
-> releasing the scheduling lock. I think those must be inside the locked
-> region.
->
-> Can you give this one a try (not tested at all)?
->
-> diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-> index 0cb33831d2..babac7aad6 100644
-> --- a/xen/common/sched/core.c
-> +++ b/xen/common/sched/core.c
-> @@ -3176,6 +3176,8 @@ int schedule_cpu_add(unsigned int cpu, struct
-> cpupool *c)
->
->      sr->scheduler = new_ops;
->      sr->sched_priv = ppriv;
-> +    sr->granularity = cpupool_get_granularity(c);
-> +    sr->cpupool = c;
->
->      /*
->       * Reroute the lock to the per pCPU lock as /last/ thing. In fact,
-> @@ -3188,8 +3190,6 @@ int schedule_cpu_add(unsigned int cpu, struct
-> cpupool *c)
->      /* _Not_ pcpu_schedule_unlock(): schedule_lock has changed! */
->      spin_unlock_irqrestore(old_lock, flags);
->
-> -    sr->granularity = cpupool_get_granularity(c);
-> -    sr->cpupool = c;
->      /* The  cpu is added to a pool, trigger it to go pick up some
-> work */
->      cpu_raise_softirq(cpu, SCHEDULE_SOFTIRQ);
+The current static shared memory code is using bootinfo banks when it
+needs to find the number of borrowers, so every time assign_shared_memory
+is called, the bank is searched in the bootinfo.shmem structure.
 
-This change seems to be standing up to the test, in a way that the
-previous form very much didn't.
+There is nothing wrong with it, however the bank can be used also to
+retrieve the start address and size and also to pass less argument to
+assign_shared_memory. When retrieving the information from the bootinfo
+bank, it's also possible to move the checks on alignment to
+process_shm_node in the early stages.
 
-Thanks for the quick fix.
+So create a new function find_shm_bank_by_id() which takes a
+'struct shared_meminfo' structure and the shared memory ID, to look for a
+bank with a matching ID, take the physical host address and size from the
+bank, pass the bank to assign_shared_memory() removing the now unnecessary
+arguments and finally remove the acquire_nr_borrower_domain() function
+since now the information can be extracted from the passed bank.
+Move the "xen,shm-id" parsing early in process_shm to bail out quickly in
+case of errors (unlikely), as said above, move the checks on alignment
+to process_shm_node.
 
-~Andrew
+Drawback of this change is that now the bootinfo are used also when the
+bank doesn't need to be allocated, however it will be convinient later
+to use it as an argument for assign_shared_memory when dealing with
+the use case where the Host physical address is not supplied by the user.
+
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+v2 changes:
+ - fix typo commit msg, renamed find_shm() to find_shm_bank_by_id(),
+   swap region size check different from zero and size alignment, remove
+   not necessary BUGON(). (Michal)
+---
+ xen/arch/arm/static-shmem.c | 101 +++++++++++++++++++-----------------
+ 1 file changed, 54 insertions(+), 47 deletions(-)
+
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index 78881dd1d3f7..0afc86c43f85 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -19,29 +19,22 @@ static void __init __maybe_unused build_assertions(void)
+                  offsetof(struct shared_meminfo, bank)));
+ }
+ 
+-static int __init acquire_nr_borrower_domain(struct domain *d,
+-                                             paddr_t pbase, paddr_t psize,
+-                                             unsigned long *nr_borrowers)
++static const struct membank __init *
++find_shm_bank_by_id(const struct membanks *shmem, const char *shm_id)
+ {
+-    const struct membanks *shmem = bootinfo_get_shmem();
+     unsigned int bank;
+ 
+-    /* Iterate reserved memory to find requested shm bank. */
+     for ( bank = 0 ; bank < shmem->nr_banks; bank++ )
+     {
+-        paddr_t bank_start = shmem->bank[bank].start;
+-        paddr_t bank_size = shmem->bank[bank].size;
+-
+-        if ( (pbase == bank_start) && (psize == bank_size) )
++        if ( strncmp(shm_id, shmem->bank[bank].shmem_extra->shm_id,
++                     MAX_SHM_ID_LENGTH) == 0 )
+             break;
+     }
+ 
+     if ( bank == shmem->nr_banks )
+-        return -ENOENT;
++        return NULL;
+ 
+-    *nr_borrowers = shmem->bank[bank].shmem_extra->nr_shm_borrowers;
+-
+-    return 0;
++    return &shmem->bank[bank];
+ }
+ 
+ /*
+@@ -103,14 +96,18 @@ static mfn_t __init acquire_shared_memory_bank(struct domain *d,
+     return smfn;
+ }
+ 
+-static int __init assign_shared_memory(struct domain *d,
+-                                       paddr_t pbase, paddr_t psize,
+-                                       paddr_t gbase)
++static int __init assign_shared_memory(struct domain *d, paddr_t gbase,
++                                       const struct membank *shm_bank)
+ {
+     mfn_t smfn;
+     int ret = 0;
+     unsigned long nr_pages, nr_borrowers, i;
+     struct page_info *page;
++    paddr_t pbase, psize;
++
++    pbase = shm_bank->start;
++    psize = shm_bank->size;
++    nr_borrowers = shm_bank->shmem_extra->nr_shm_borrowers;
+ 
+     printk("%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
+            d, pbase, pbase + psize);
+@@ -135,14 +132,6 @@ static int __init assign_shared_memory(struct domain *d,
+         }
+     }
+ 
+-    /*
+-     * Get the right amount of references per page, which is the number of
+-     * borrower domains.
+-     */
+-    ret = acquire_nr_borrower_domain(d, pbase, psize, &nr_borrowers);
+-    if ( ret )
+-        return ret;
+-
+     /*
+      * Instead of letting borrower domain get a page ref, we add as many
+      * additional reference as the number of borrowers when the owner
+@@ -199,6 +188,7 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+ 
+     dt_for_each_child_node(node, shm_node)
+     {
++        const struct membank *boot_shm_bank;
+         const struct dt_property *prop;
+         const __be32 *cells;
+         uint32_t addr_cells, size_cells;
+@@ -212,6 +202,23 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+         if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
+             continue;
+ 
++        if ( dt_property_read_string(shm_node, "xen,shm-id", &shm_id) )
++        {
++            printk("%pd: invalid \"xen,shm-id\" property", d);
++            return -EINVAL;
++        }
++        BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
++
++        boot_shm_bank = find_shm_bank_by_id(bootinfo_get_shmem(), shm_id);
++        if ( !boot_shm_bank )
++        {
++            printk("%pd: static shared memory bank not found: '%s'", d, shm_id);
++            return -ENOENT;
++        }
++
++        pbase = boot_shm_bank->start;
++        psize = boot_shm_bank->size;
++
+         /*
+          * xen,shared-mem = <pbase, gbase, size>;
+          * TODO: pbase is optional.
+@@ -221,20 +228,7 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+         prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
+         BUG_ON(!prop);
+         cells = (const __be32 *)prop->value;
+-        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, &gbase);
+-        psize = dt_read_paddr(cells, size_cells);
+-        if ( !IS_ALIGNED(pbase, PAGE_SIZE) || !IS_ALIGNED(gbase, PAGE_SIZE) )
+-        {
+-            printk("%pd: physical address 0x%"PRIpaddr", or guest address 0x%"PRIpaddr" is not suitably aligned.\n",
+-                   d, pbase, gbase);
+-            return -EINVAL;
+-        }
+-        if ( !IS_ALIGNED(psize, PAGE_SIZE) )
+-        {
+-            printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
+-                   d, psize);
+-            return -EINVAL;
+-        }
++        gbase = dt_read_paddr(cells + addr_cells, addr_cells);
+ 
+         for ( i = 0; i < PFN_DOWN(psize); i++ )
+             if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
+@@ -251,13 +245,6 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+         if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
+             owner_dom_io = false;
+ 
+-        if ( dt_property_read_string(shm_node, "xen,shm-id", &shm_id) )
+-        {
+-            printk("%pd: invalid \"xen,shm-id\" property", d);
+-            return -EINVAL;
+-        }
+-        BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
+-
+         /*
+          * DOMID_IO is a fake domain and is not described in the Device-Tree.
+          * Therefore when the owner of the shared region is DOMID_IO, we will
+@@ -270,8 +257,8 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+              * We found the first borrower of the region, the owner was not
+              * specified, so they should be assigned to dom_io.
+              */
+-            ret = assign_shared_memory(owner_dom_io ? dom_io : d,
+-                                       pbase, psize, gbase);
++            ret = assign_shared_memory(owner_dom_io ? dom_io : d, gbase,
++                                       boot_shm_bank);
+             if ( ret )
+                 return ret;
+         }
+@@ -439,12 +426,32 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
+     device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
+     size = dt_next_cell(size_cells, &cell);
+ 
++    if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
++    {
++        printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
++               paddr);
++        return -EINVAL;
++    }
++
++    if ( !IS_ALIGNED(gaddr, PAGE_SIZE) )
++    {
++        printk("fdt: guest address 0x%"PRIpaddr" is not suitably aligned.\n",
++               gaddr);
++        return -EINVAL;
++    }
++
+     if ( !size )
+     {
+         printk("fdt: the size for static shared memory region can not be zero\n");
+         return -EINVAL;
+     }
+ 
++    if ( !IS_ALIGNED(size, PAGE_SIZE) )
++    {
++        printk("fdt: size 0x%"PRIpaddr" is not suitably aligned\n", size);
++        return -EINVAL;
++    }
++
+     end = paddr + size;
+     if ( end <= paddr )
+     {
+-- 
+2.34.1
+
 
