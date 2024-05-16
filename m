@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 476B2C25B78
-	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2024 11:28:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.723175.1127776 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C1BDC25B7C
+	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2024 11:28:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.723181.1127837 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7ZHc-0006bQ-S4; Thu, 16 May 2024 11:28:24 +0000
+	id 1s7ZHj-0008BJ-5V; Thu, 16 May 2024 11:28:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 723175.1127776; Thu, 16 May 2024 11:28:24 +0000
+Received: by outflank-mailman (output) from mailman id 723181.1127837; Thu, 16 May 2024 11:28:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7ZHc-0006bJ-PZ; Thu, 16 May 2024 11:28:24 +0000
-Received: by outflank-mailman (input) for mailman id 723175;
- Thu, 16 May 2024 11:28:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s7ZHj-0008B7-1q; Thu, 16 May 2024 11:28:31 +0000
+Received: by outflank-mailman (input) for mailman id 723181;
+ Thu, 16 May 2024 11:28:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=S52g=MT=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1s7ZHb-0006b6-I7
- for xen-devel@lists.xenproject.org; Thu, 16 May 2024 11:28:23 +0000
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [2a00:1450:4864:20::52f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 67415070-1377-11ef-909d-e314d9c70b13;
- Thu, 16 May 2024 13:28:22 +0200 (CEST)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-572c65cea55so5922160a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 May 2024 04:28:22 -0700 (PDT)
+ id 1s7ZHh-0006b7-LA
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2024 11:28:29 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6a7b8689-1377-11ef-b4bb-af5377834399;
+ Thu, 16 May 2024 13:28:28 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-572a93890d1so3445325a12.3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 May 2024 04:28:28 -0700 (PDT)
 Received: from lab.home
  (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
  [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-574bcede889sm7083043a12.92.2024.05.16.04.28.20
+ 4fb4d7f45d1cf-574bcede889sm7083043a12.92.2024.05.16.04.28.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 04:28:21 -0700 (PDT)
+ Thu, 16 May 2024 04:28:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,48 +49,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 67415070-1377-11ef-909d-e314d9c70b13
+X-Inumbo-ID: 6a7b8689-1377-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715858902; x=1716463702; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1715858907; x=1716463707; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9wb2Zg0RGsFll9U2ozXeIHtw+XG8+EPJB3Bp+jbvzsQ=;
-        b=g7wKBayxZQW2hP/3F3o+/3QY0FMUX11Lolz56PlL1BcipTtCM8EU2dOfsMDF099u5I
-         5/nSYuBv2hEjSCc8UKV56BN3HyjXWUDSTEypV251/IC0salJzWSCwzHIQChFveCkU9fK
-         Xg1TIv0E0MMh0rLgg6OoyhRsk9y8Vt/OsDYukG6SjUUd2k8J5VLCjg9o4VLmDBb8Wx5c
-         fNygT+MWsbcnmDheQrePOUJYtCp8k8s50eiNNOGplKuLywbUFYTRwk7d120BmSQ3oAcI
-         nRY073JE+58KDWhXDFcSuJ3RNXgPSq4gcE43krDbX0hG+Uuad6YK3AlQM7lO7ZahrKyL
-         w6aA==
+        bh=CZx7e4I8f24AmBOZ73vCNLclq5iufdJNqbBIJFjDxwY=;
+        b=Sc+mGZyYiWezTycnwzIkred2qGbRW+6rpfIGtNqySYtcrSrpBgrs2p/ku0YoqdLwvb
+         Tdx2bJkN6eCAQbnlVkptbdxrpg5YYHIuYQR1OEZeBNScLuqYIZ7ugdRFy4NFjKlMyCoI
+         4MeRaJy03JgtdJ9Kk/Ol551OB2wyZMEAVqN+zCjn7xmObnitvGXRfLgPyeNmXRJV9JvZ
+         1vyEj0l4h4geTuhJQkGa1M3lUp+3zX6OZdeeoMIzKQwes6W/+gEzWX+k3IKW9FD2/dv5
+         sB47X6tLcizzLiNGoVvob1ewIvDg2FQGiEJ5+nECFq3IKqwJwivPkJzN8cf8O+fsBFDM
+         ZrLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715858902; x=1716463702;
+        d=1e100.net; s=20230601; t=1715858907; x=1716463707;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9wb2Zg0RGsFll9U2ozXeIHtw+XG8+EPJB3Bp+jbvzsQ=;
-        b=O1dgDcTsZV0h9uPukvovN41m7cOtKABh1gqhmgvqVzdDSwgz8kWSrWwZpGYkWuWjoZ
-         N4Q5CV2naeiPvpZHNEhOCcnuJjSWplDv5L2VwgabSLe9Yy+vzJf4lHTsMK23lCAGaAcK
-         Xo8dlSJSVQCyPdnyNbtO1Knpm96ZenF0Z4wO+iGBF0cGEQebvoIwHFsm0LteLLfnR4XJ
-         jl7ZQGQNwz8NKvfNN6pQmbGGEAlxhCeFIIZn5/W6lVt54Ur/XMxRB9+SmtgBth1O7W2s
-         7WeirwOeLywaeInf9d7pZdhOxIEOXfAAlJSJ6SAfP5PFugPY6BQWphdxTW3w1UhGQZ16
-         TERw==
-X-Gm-Message-State: AOJu0Yxu/YYQQ6INtWau/r+355I7c8THe7xX6vdSf0mwk4cv7SAEXDbo
-	ZZn3dL6KmCNCVnGGkBOlxqc+axa9oHF7jRnxyu6fnzOfa9J8LuiKNPWSpE3J
-X-Google-Smtp-Source: AGHT+IGSJea0rRaSHcwu8qEp0BoExYhQPeYNJ6GI0Qo2/ni19nG/mqFw9W2LQDFxddiHBZUnOB9Ueg==
-X-Received: by 2002:a05:6402:278c:b0:574:eb36:9cf5 with SMTP id 4fb4d7f45d1cf-574eb369d9fmr7759577a12.11.1715858901825;
-        Thu, 16 May 2024 04:28:21 -0700 (PDT)
+        bh=CZx7e4I8f24AmBOZ73vCNLclq5iufdJNqbBIJFjDxwY=;
+        b=iIJXLTJMcQOloRgan+VZJI+2Ym3hokvgT1WFn8QydS5vW1FoPsuhn9ls+Kx8+zABAU
+         EuEjJEJJsK98zeHwD+qS1VlCbva3YppnvM9sAshy2dVjKEOICONEDc9EqNw0eaB1Ws1N
+         TtXBQEcjVoJ/7WHjJh0yi5+rIGCIMDQfYDgiApKzMTNroR341kjC83J/p+cM7s6ORqEO
+         sVHi8gyBTt6YU7shdG/EuSJSz25j+PfTP7ACzL3Bhu2OjU88UGpRuU/oh3dre9uUhcc4
+         TGMlFNl25GWctkaAff+9ultl39coGEGyFKgkbwv6rUDw9use0b6LgnbHM7yF43VMwff5
+         jlmA==
+X-Gm-Message-State: AOJu0YzLtRB9VNNm1goczEVocIKBoOUkt+Bj8Ci0UDgdyqXhUlGwKajg
+	tE8MkH+o+0D6V2pzxJM4wK8xMd00C2gZkPFMWu+44Y8309gXHpbnCVNB/xOh
+X-Google-Smtp-Source: AGHT+IF340ISLMPoj07I1Jt9JQ5Xug7pRVHWxjYlGkF/DFVxJW3+Izogh9HGDdXfmKU9eVffMT049g==
+X-Received: by 2002:a50:bb0f:0:b0:56f:e7b9:e67d with SMTP id 4fb4d7f45d1cf-5734d5cec3bmr19668133a12.12.1715858907443;
+        Thu, 16 May 2024 04:28:27 -0700 (PDT)
 From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH for-4.19? v3 1/6] x86/p2m: Add braces for better code clarity
-Date: Thu, 16 May 2024 11:28:08 +0000
-Message-Id: <36cb7af0de191b6a8d64931225f21a42c2c04529.1715858136.git.w1benny@gmail.com>
+	Christian Lindig <christian.lindig@citrix.com>,
+	David Scott <dave@recoil.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Christian Lindig <christian.lindig@cloud.com>
+Subject: [PATCH for-4.19? v3 6/6] tools/ocaml: Add altp2m_count parameter
+Date: Thu, 16 May 2024 11:28:13 +0000
+Message-Id: <8537c5deeb409580868ec8d88171146dc7138662.1715858136.git.w1benny@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1715858136.git.w1benny@gmail.com>
 References: <cover.1715858136.git.w1benny@gmail.com>
@@ -100,50 +99,83 @@ Content-Transfer-Encoding: 8bit
 
 From: Petr Beneš <w1benny@gmail.com>
 
-No functional change.
+Allow developers using the OCaml bindings to set the altp2m_count parameter.
 
 Signed-off-by: Petr Beneš <w1benny@gmail.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Christian Lindig <christian.lindig@cloud.com>
 ---
- xen/arch/x86/mm/p2m.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ tools/ocaml/libs/xc/xenctrl.ml      |  1 +
+ tools/ocaml/libs/xc/xenctrl.mli     |  1 +
+ tools/ocaml/libs/xc/xenctrl_stubs.c | 11 +++++++----
+ 3 files changed, 9 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index ce742c12e0..eb7996170d 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -106,6 +106,7 @@ void p2m_change_entry_type_global(struct domain *d,
-         unsigned int i;
+diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
+index 55923857ec..dfb3d331c9 100644
+--- a/tools/ocaml/libs/xc/xenctrl.ml
++++ b/tools/ocaml/libs/xc/xenctrl.ml
+@@ -85,6 +85,7 @@ type domctl_create_config =
+     max_grant_frames: int;
+     max_maptrack_frames: int;
+     max_grant_version: int;
++    altp2m_count: int;
+     vmtrace_buf_kb: int32;
+     cpupool_id: int32;
+     arch: arch_domainconfig;
+diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
+index 9b4b45db3a..ff0e309c56 100644
+--- a/tools/ocaml/libs/xc/xenctrl.mli
++++ b/tools/ocaml/libs/xc/xenctrl.mli
+@@ -77,6 +77,7 @@ type domctl_create_config = {
+   max_grant_frames: int;
+   max_maptrack_frames: int;
+   max_grant_version: int;
++  altp2m_count: int;
+   vmtrace_buf_kb: int32;
+   cpupool_id: int32;
+   arch: arch_domainconfig;
+diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
+index 2b6d3c09df..1f544cd2e4 100644
+--- a/tools/ocaml/libs/xc/xenctrl_stubs.c
++++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
+@@ -210,9 +210,10 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ #define VAL_MAX_GRANT_FRAMES    Field(config, 6)
+ #define VAL_MAX_MAPTRACK_FRAMES Field(config, 7)
+ #define VAL_MAX_GRANT_VERSION   Field(config, 8)
+-#define VAL_VMTRACE_BUF_KB      Field(config, 9)
+-#define VAL_CPUPOOL_ID          Field(config, 10)
+-#define VAL_ARCH                Field(config, 11)
++#define VAL_ALTP2M_COUNT        Field(config, 9)
++#define VAL_VMTRACE_BUF_KB      Field(config, 10)
++#define VAL_CPUPOOL_ID          Field(config, 11)
++#define VAL_ARCH                Field(config, 12)
 
-         for ( i = 0; i < MAX_ALTP2M; i++ )
-+        {
-             if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
-             {
-                 struct p2m_domain *altp2m = d->arch.altp2m_p2m[i];
-@@ -114,6 +115,7 @@ void p2m_change_entry_type_global(struct domain *d,
-                 change_entry_type_global(altp2m, ot, nt);
-                 p2m_unlock(altp2m);
-             }
-+        }
-     }
+ 	uint32_t domid = Int_val(wanted_domid);
+ 	uint64_t vmtrace_size = Int32_val(VAL_VMTRACE_BUF_KB);
+@@ -230,6 +231,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ 		.max_maptrack_frames = Int_val(VAL_MAX_MAPTRACK_FRAMES),
+ 		.grant_opts =
+ 		    XEN_DOMCTL_GRANT_version(Int_val(VAL_MAX_GRANT_VERSION)),
++		.nr_altp2m = Int_val(VAL_ALTP2M_COUNT),
+ 		.vmtrace_size = vmtrace_size,
+ 		.cpupool_id = Int32_val(VAL_CPUPOOL_ID),
+ 	};
+@@ -257,7 +259,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ #if defined(__i386__) || defined(__x86_64__)
 
-     p2m_unlock(hostp2m);
-@@ -139,6 +141,7 @@ void p2m_memory_type_changed(struct domain *d)
-         unsigned int i;
+ 		/* Quick & dirty check for ABI changes. */
+-		BUILD_BUG_ON(sizeof(cfg) != 64);
++		BUILD_BUG_ON(sizeof(cfg) != 68);
 
-         for ( i = 0; i < MAX_ALTP2M; i++ )
-+        {
-             if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
-             {
-                 struct p2m_domain *altp2m = d->arch.altp2m_p2m[i];
-@@ -147,6 +150,7 @@ void p2m_memory_type_changed(struct domain *d)
-                 _memory_type_changed(altp2m);
-                 p2m_unlock(altp2m);
-             }
-+        }
-     }
-
-     p2m_unlock(hostp2m);
+         /* Mnemonics for the named fields inside xen_x86_arch_domainconfig */
+ #define VAL_EMUL_FLAGS          Field(arch_domconfig, 0)
+@@ -288,6 +290,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ #undef VAL_ARCH
+ #undef VAL_CPUPOOL_ID
+ #undef VAL_VMTRACE_BUF_KB
++#undef VAL_ALTP2M_COUNT
+ #undef VAL_MAX_GRANT_VERSION
+ #undef VAL_MAX_MAPTRACK_FRAMES
+ #undef VAL_MAX_GRANT_FRAMES
 --
 2.34.1
 
