@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803AAC25B7B
-	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2024 11:28:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.723180.1127824 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 476B2C25B78
+	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2024 11:28:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.723175.1127776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7ZHg-0007jZ-Rj; Thu, 16 May 2024 11:28:28 +0000
+	id 1s7ZHc-0006bQ-S4; Thu, 16 May 2024 11:28:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 723180.1127824; Thu, 16 May 2024 11:28:28 +0000
+Received: by outflank-mailman (output) from mailman id 723175.1127776; Thu, 16 May 2024 11:28:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7ZHg-0007is-Lt; Thu, 16 May 2024 11:28:28 +0000
-Received: by outflank-mailman (input) for mailman id 723180;
- Thu, 16 May 2024 11:28:28 +0000
+	id 1s7ZHc-0006bJ-PZ; Thu, 16 May 2024 11:28:24 +0000
+Received: by outflank-mailman (input) for mailman id 723175;
+ Thu, 16 May 2024 11:28:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=S52g=MT=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1s7ZHg-0006b6-66
- for xen-devel@lists.xenproject.org; Thu, 16 May 2024 11:28:28 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
+ id 1s7ZHb-0006b6-I7
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2024 11:28:23 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6a2d68c9-1377-11ef-909d-e314d9c70b13;
- Thu, 16 May 2024 13:28:27 +0200 (CEST)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-572669fd9f9so3346789a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 May 2024 04:28:27 -0700 (PDT)
+ id 67415070-1377-11ef-909d-e314d9c70b13;
+ Thu, 16 May 2024 13:28:22 +0200 (CEST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-572c65cea55so5922160a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 16 May 2024 04:28:22 -0700 (PDT)
 Received: from lab.home
  (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
  [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-574bcede889sm7083043a12.92.2024.05.16.04.28.25
+ 4fb4d7f45d1cf-574bcede889sm7083043a12.92.2024.05.16.04.28.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 04:28:25 -0700 (PDT)
+ Thu, 16 May 2024 04:28:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,45 +49,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6a2d68c9-1377-11ef-909d-e314d9c70b13
+X-Inumbo-ID: 67415070-1377-11ef-909d-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715858907; x=1716463707; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1715858902; x=1716463702; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lcXsJFjS9m5+2bzRAoHvtJjIOqkMU5GtwndPgJCwhX4=;
-        b=FWWYWfDreGrMzpIK2IDFXfRKtGx+biIrQU41MFruHink8j+mCoPA43ryt75rnGfhf0
-         IjAm7qjEoA/27cULb5hD66pkbej8DwvpUxRm65k+b4m9Q+RfDU1CewEW1t/3J7oSQS99
-         ISk9PN/eg4LgvYFPa0vWxzGL7uzpFKmbOpUUfzMAoSF8Y6O4a3Ri9ajasLERagsr2k1A
-         t303GUQRGPCvgsSHU7YlYHCU9Rz1Bz0oWVEfNuVpK0kYC0H45OUv8HmhA8Twkw3fYT+F
-         jZLg+WYilupzgc/w3EDqyuxTOiiqe516lmYfd+U/giYEssH+6jT1bWLy0ny054faS/ri
-         De6Q==
+        bh=9wb2Zg0RGsFll9U2ozXeIHtw+XG8+EPJB3Bp+jbvzsQ=;
+        b=g7wKBayxZQW2hP/3F3o+/3QY0FMUX11Lolz56PlL1BcipTtCM8EU2dOfsMDF099u5I
+         5/nSYuBv2hEjSCc8UKV56BN3HyjXWUDSTEypV251/IC0salJzWSCwzHIQChFveCkU9fK
+         Xg1TIv0E0MMh0rLgg6OoyhRsk9y8Vt/OsDYukG6SjUUd2k8J5VLCjg9o4VLmDBb8Wx5c
+         fNygT+MWsbcnmDheQrePOUJYtCp8k8s50eiNNOGplKuLywbUFYTRwk7d120BmSQ3oAcI
+         nRY073JE+58KDWhXDFcSuJ3RNXgPSq4gcE43krDbX0hG+Uuad6YK3AlQM7lO7ZahrKyL
+         w6aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715858907; x=1716463707;
+        d=1e100.net; s=20230601; t=1715858902; x=1716463702;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lcXsJFjS9m5+2bzRAoHvtJjIOqkMU5GtwndPgJCwhX4=;
-        b=sDL+yKVUjDM3B7lT67vZ+VRnEft3kyH0pi/oRYMmycWiNu90u0Bez9dNOb3lOcCDcW
-         h/neoZZZyfwM33wLWvB1RhEBr8Rf08AHE/5h1bisVAC47u3l/ovpMciznwL06KWfd3O3
-         uW5DQg8LTdPLMjT++k/+QMkygmGPpZ6wpjwpBpKw0JrSJPL4Iith2NwcAIWOBCQ6C+PW
-         PhRSl0ZomRpa+UA0BfQEWsWa8R1Hg2ePBjB05LkoqClqzgK9DQ+2N8u2E9Qllp01J1lr
-         PNT1K8PABlh+xlimYk//rf2SW8ue4tBcTs744Rx52cJkdojt70wLf+TQA+wcVe6oO3Fk
-         Y7Eg==
-X-Gm-Message-State: AOJu0YwrMYVFIf2nXJhDuEomBNfNGHCMXS4eEkwCycAc6IzwCc/Mlyse
-	LA2UqrZQzqv4Uw2CKrhcfMbwa9+5xTZVAEsxUcr6thjE1/OWB0AapbDDUg==
-X-Google-Smtp-Source: AGHT+IEDNx0Eao0z1ZBy+RPyD3phVLCE34VncoyEhxg5SSGon5U7YHDOnSbpDqNvuzkTzzEeJEbSSw==
-X-Received: by 2002:a50:8d4e:0:b0:571:bed1:3a27 with SMTP id 4fb4d7f45d1cf-5734d6f2d33mr13268941a12.38.1715858905672;
-        Thu, 16 May 2024 04:28:25 -0700 (PDT)
+        bh=9wb2Zg0RGsFll9U2ozXeIHtw+XG8+EPJB3Bp+jbvzsQ=;
+        b=O1dgDcTsZV0h9uPukvovN41m7cOtKABh1gqhmgvqVzdDSwgz8kWSrWwZpGYkWuWjoZ
+         N4Q5CV2naeiPvpZHNEhOCcnuJjSWplDv5L2VwgabSLe9Yy+vzJf4lHTsMK23lCAGaAcK
+         Xo8dlSJSVQCyPdnyNbtO1Knpm96ZenF0Z4wO+iGBF0cGEQebvoIwHFsm0LteLLfnR4XJ
+         jl7ZQGQNwz8NKvfNN6pQmbGGEAlxhCeFIIZn5/W6lVt54Ur/XMxRB9+SmtgBth1O7W2s
+         7WeirwOeLywaeInf9d7pZdhOxIEOXfAAlJSJ6SAfP5PFugPY6BQWphdxTW3w1UhGQZ16
+         TERw==
+X-Gm-Message-State: AOJu0Yxu/YYQQ6INtWau/r+355I7c8THe7xX6vdSf0mwk4cv7SAEXDbo
+	ZZn3dL6KmCNCVnGGkBOlxqc+axa9oHF7jRnxyu6fnzOfa9J8LuiKNPWSpE3J
+X-Google-Smtp-Source: AGHT+IGSJea0rRaSHcwu8qEp0BoExYhQPeYNJ6GI0Qo2/ni19nG/mqFw9W2LQDFxddiHBZUnOB9Ueg==
+X-Received: by 2002:a05:6402:278c:b0:574:eb36:9cf5 with SMTP id 4fb4d7f45d1cf-574eb369d9fmr7759577a12.11.1715858901825;
+        Thu, 16 May 2024 04:28:21 -0700 (PDT)
 From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH for-4.19? v3 5/6] tools/libxl: Activate the altp2m_count feature
-Date: Thu, 16 May 2024 11:28:12 +0000
-Message-Id: <d478dbe742f9b8abd9d2e843a9c7b2a8a156157f.1715858136.git.w1benny@gmail.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH for-4.19? v3 1/6] x86/p2m: Add braces for better code clarity
+Date: Thu, 16 May 2024 11:28:08 +0000
+Message-Id: <36cb7af0de191b6a8d64931225f21a42c2c04529.1715858136.git.w1benny@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1715858136.git.w1benny@gmail.com>
 References: <cover.1715858136.git.w1benny@gmail.com>
@@ -97,26 +100,50 @@ Content-Transfer-Encoding: 8bit
 
 From: Petr Beneš <w1benny@gmail.com>
 
-This commit activates the previously introduced altp2m_count parameter,
-establishing the connection between libxl and Xen.
+No functional change.
 
 Signed-off-by: Petr Beneš <w1benny@gmail.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- tools/libs/light/libxl_create.c | 1 +
- 1 file changed, 1 insertion(+)
+ xen/arch/x86/mm/p2m.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index 236b8c1965..f5eb16d0dc 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -657,6 +657,7 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-             .max_grant_frames = b_info->max_grant_frames,
-             .max_maptrack_frames = b_info->max_maptrack_frames,
-             .grant_opts = XEN_DOMCTL_GRANT_version(b_info->max_grant_version),
-+            .nr_altp2m = b_info->altp2m_count,
-             .vmtrace_size = ROUNDUP(b_info->vmtrace_buf_kb << 10, XC_PAGE_SHIFT),
-             .cpupool_id = info->poolid,
-         };
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index ce742c12e0..eb7996170d 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -106,6 +106,7 @@ void p2m_change_entry_type_global(struct domain *d,
+         unsigned int i;
+
+         for ( i = 0; i < MAX_ALTP2M; i++ )
++        {
+             if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
+             {
+                 struct p2m_domain *altp2m = d->arch.altp2m_p2m[i];
+@@ -114,6 +115,7 @@ void p2m_change_entry_type_global(struct domain *d,
+                 change_entry_type_global(altp2m, ot, nt);
+                 p2m_unlock(altp2m);
+             }
++        }
+     }
+
+     p2m_unlock(hostp2m);
+@@ -139,6 +141,7 @@ void p2m_memory_type_changed(struct domain *d)
+         unsigned int i;
+
+         for ( i = 0; i < MAX_ALTP2M; i++ )
++        {
+             if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
+             {
+                 struct p2m_domain *altp2m = d->arch.altp2m_p2m[i];
+@@ -147,6 +150,7 @@ void p2m_memory_type_changed(struct domain *d)
+                 _memory_type_changed(altp2m);
+                 p2m_unlock(altp2m);
+             }
++        }
+     }
+
+     p2m_unlock(hostp2m);
 --
 2.34.1
 
