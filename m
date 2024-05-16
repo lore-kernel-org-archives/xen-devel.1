@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40309C25B78
-	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2024 10:56:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.723124.1127687 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B30FC25B74
+	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2024 10:56:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.723126.1127697 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7Yn4-0007vy-9F; Thu, 16 May 2024 10:56:50 +0000
+	id 1s7Yn5-000863-0e; Thu, 16 May 2024 10:56:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 723124.1127687; Thu, 16 May 2024 10:56:50 +0000
+Received: by outflank-mailman (output) from mailman id 723126.1127697; Thu, 16 May 2024 10:56:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7Yn4-0007vn-6c; Thu, 16 May 2024 10:56:50 +0000
-Received: by outflank-mailman (input) for mailman id 723124;
- Thu, 16 May 2024 10:56:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s7Yn4-000853-P2; Thu, 16 May 2024 10:56:50 +0000
+Received: by outflank-mailman (input) for mailman id 723126;
+ Thu, 16 May 2024 10:56:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ujgU=MT=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
- id 1s7Yn2-0007M7-8e
- for xen-devel@lists.xenproject.org; Thu, 16 May 2024 10:56:48 +0000
+ id 1s7Yn3-0007XN-MV
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2024 10:56:49 +0000
 Received: from doppler.solinno.uk (doppler.solinno.uk [81.2.106.178])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fcf3a761-1372-11ef-b4bb-af5377834399;
- Thu, 16 May 2024 12:56:46 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fe152f91-1372-11ef-909d-e314d9c70b13;
+ Thu, 16 May 2024 12:56:48 +0200 (CEST)
 Received: from folly.solinno.co.uk (folly.dyn.solinno.co.uk [192.168.2.135])
- by doppler.solinno.uk (Postfix) with ESMTPSA id 2997080079;
- Thu, 16 May 2024 11:56:46 +0100 (BST)
+ by doppler.solinno.uk (Postfix) with ESMTPSA id 0C42C8009F;
+ Thu, 16 May 2024 11:56:48 +0100 (BST)
 Received: by folly.solinno.co.uk (Postfix, from userid 1000)
- id 03ED920189; Thu, 16 May 2024 11:56:46 +0100 (BST)
+ id D4C4B20189; Thu, 16 May 2024 11:56:47 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,89 +43,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fcf3a761-1372-11ef-b4bb-af5377834399
+X-Inumbo-ID: fe152f91-1372-11ef-909d-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
-	s=mail; t=1715857006;
-	bh=IqQbHL4zd6sroMW8oqRG7fEFGbUFht56fidjDQZye10=;
+	s=mail; t=1715857008;
+	bh=/LeYpkSLtC63z1CHHwG/PrlVgENABot2k3FS2Sid64E=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=AhpBQQ3x4Lb7jWtkqMmnz4tg6Gmc8b+edVc4M0iWm8UQ11z8en4i2Mj7HQdjuYoD7
-	 oGVrLAf1XEiTy5TMWzh7IEMqAJBsgjXrsVySQPmeHw9G9VFB6OT2WKF85/unQxZLuv
-	 rUeolKYwZtQsKcQM3xneLSPrmP+dv1nrx3jANIrY=
+	b=RnuQNhykSjB2NiCV5Wh4HaLqxR5NpHTnhfMZ5lYVizmPF9dA46LeV6Bqj8SM6BXMP
+	 Om5n+o72WDQwxxpkXaC8YqJvS3sF9qKkbXo/ky/qwe+xIMN3IOFmRVNppYJmDpNWDJ
+	 3GBsd5Ts/U8OPirHDvBKAkstrBiGxCsgSz4SBFVw=
 From: Leigh Brown <leigh@solinno.co.uk>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Jason Andryuk <jandryuk@gmail.com>,
 	Leigh Brown <leigh@solinno.co.uk>
-Subject: [PATCH v3 1/4] tools/libs/light: Add vlan field to libxl_device_nic
-Date: Thu, 16 May 2024 11:56:09 +0100
-Message-Id: <20240516105612.15306-2-leigh@solinno.co.uk>
+Subject: [PATCH v3 3/4] tools/hotplug/Linux: Add bridge VLAN support
+Date: Thu, 16 May 2024 11:56:11 +0100
+Message-Id: <20240516105612.15306-4-leigh@solinno.co.uk>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240516105612.15306-1-leigh@solinno.co.uk>
 References: <20240516105612.15306-1-leigh@solinno.co.uk>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add `vlan' string field to libxl_device_nic, to allow a VLAN
-configuration to be specified for the VIF when adding it to the
-bridge device.
+Update add_to_bridge shell function to read the vlan parameter from
+xenstore and set the bridge VLAN configuration for the VID.
 
-Update libxl_nic.c to read and write the vlan field from the
-xenstore.
+Add additional helper functions to parse the vlan specification,
+which consists of one or more of the following:
 
-This provides the capability for supported operating systems (e.g.
-Linux) to perform VLAN filtering on bridge ports.  The Xen
-hotplug scripts need to be updated to read this information from
-the xenstore and perform the required configuration.
+a) single VLAN (e.g. 10).
+b) contiguous range of VLANs (e.g. 10-15).
+c) discontiguous range with base, increment and count
+   (e.g. 100+10x9 which gives VLAN IDs 100, 110, ... 190).
+
+A single VLAN can be suffixed with "p" to indicate the PVID, or
+"u" to indicate untagged. A range of VLANs can be suffixed with
+"u" to indicate untagged.  A complex example would be:
+
+   vlan=1p/10-15/20-25u
+
+This capability requires the iproute2 bridge command to be
+installed.  An error will be generated if the vlan parameter is
+set and the bridge command is not available.
 
 Signed-off-by: Leigh Brown <leigh@solinno.co.uk>
-Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
 
 ---
- tools/libs/light/libxl_nic.c     | 10 ++++++++++
- tools/libs/light/libxl_types.idl |  1 +
- 2 files changed, 11 insertions(+)
+ tools/hotplug/Linux/xen-network-common.sh | 103 ++++++++++++++++++++++
+ 1 file changed, 103 insertions(+)
 
-diff --git a/tools/libs/light/libxl_nic.c b/tools/libs/light/libxl_nic.c
-index d6bf06fc34..d861e3726d 100644
---- a/tools/libs/light/libxl_nic.c
-+++ b/tools/libs/light/libxl_nic.c
-@@ -233,6 +233,11 @@ static int libxl__set_xenstore_nic(libxl__gc *gc, uint32_t domid,
-         flexarray_append(back, GCSPRINTF("%u", nic->mtu));
-     }
-     
-+    if (nic->vlan) {
-+        flexarray_append(back, "vlan");
-+        flexarray_append(back, libxl__strdup(gc, nic->vlan));
-+    }
-+
-     flexarray_append(back, "bridge");
-     flexarray_append(back, libxl__strdup(gc, nic->bridge));
-     flexarray_append(back, "handle");
-@@ -313,6 +318,11 @@ static int libxl__nic_from_xenstore(libxl__gc *gc, const char *libxl_path,
-         nic->mtu = LIBXL_DEVICE_NIC_MTU_DEFAULT;
-     }
+diff --git a/tools/hotplug/Linux/xen-network-common.sh b/tools/hotplug/Linux/xen-network-common.sh
+index 42fa704e8d..fa7615ce0f 100644
+--- a/tools/hotplug/Linux/xen-network-common.sh
++++ b/tools/hotplug/Linux/xen-network-common.sh
+@@ -121,10 +121,105 @@ create_bridge () {
+     fi
+ }
  
-+    rc = libxl__xs_read_checked(gc, XBT_NULL,
-+                                GCSPRINTF("%s/vlan", libxl_path),
-+				(const char **)(&nic->vlan));
-+    if (rc) goto out;
++_vif_vlan_add() {
++    # References vlans and pvid variables from the calling function
++    local -i vid=$1
++    local flag=${2:-}
 +
-     rc = libxl__xs_read_checked(gc, XBT_NULL,
-                                 GCSPRINTF("%s/mac", libxl_path), &tmp);
-     if (rc) goto out;
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 7d8bd5d216..5c510dc272 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -809,6 +809,7 @@ libxl_device_nic = Struct("device_nic", [
-     ("backend_domname", string),
-     ("devid", libxl_devid),
-     ("mtu", integer),
-+    ("vlan", string),
-     ("model", string),
-     ("mac", libxl_mac),
-     ("ip", string),
++    if (( vid < 1 || vid > 4094 )) ;then
++        fatal "vlan id $vid not between 1 and 4094"
++    fi
++    if [[ -n "${vlans[$vid]}" ]] ;then
++        fatal "vlan id $vid specified more than once"
++    fi
++    case $flag in
++     p) if (( pvid != 0 )) ;then
++            fatal "more than one pvid specified ($vid and $pvid)"
++        fi
++        pvid=$vid
++        vlans[$vid]=p ;;
++     u) vlans[$vid]=u ;;
++     *) vlans[$vid]=t ;;
++    esac
++}
++
++_vif_vlan_parse_term() {
++    local vid incr last term=${1:-}
++
++    if [[ $term =~ ^([0-9]+)([pu])?$ ]] ;then
++        _vif_vlan_add ${BASH_REMATCH[1]} ${BASH_REMATCH[2]}
++    elif [[ $term =~ ^([0-9]+)-([0-9]+)(u)?$ ]] ;then
++        vid=${BASH_REMATCH[1]}
++        last=${BASH_REMATCH[2]}
++        if (( last >= vid )) ;then
++            for (( ; vid<=last; vid++ )) ;do
++                _vif_vlan_add $vid ${BASH_REMATCH[3]}
++            done
++        else
++            fatal "invalid vlan id range: $term"
++        fi
++    elif [[ $term =~ ^([0-9]+)\+([0-9]+)x([0-9]+)(u)?$ ]] ;then
++        vid=${BASH_REMATCH[1]}
++        incr=${BASH_REMATCH[2]}
++        for (( j=${BASH_REMATCH[3]}; j>0; --j, vid+=incr ))
++        do
++            _vif_vlan_add $vid ${BASH_REMATCH[4]}
++        done
++    else
++        fatal "invalid vlan specification: $term"
++    fi
++}
++
++_vif_vlan_validate_pvid() {
++    # References vlans and pvid variables from the calling function
++    if (( pvid == 0 )) ;then
++        if (( ${#vlans[@]} == 1 )) ;then
++            vlans[${!vlans[*]}]=p
++        else
++            fatal "pvid required when using multiple vlan ids"
++        fi
++    fi
++}
++
++_vif_vlan_setup() {
++    # References vlans and dev variable from the calling function
++    local vid cmd
++
++    bridge vlan del dev "$dev" vid 1
++    for vid in ${!vlans[@]} ;do
++        cmd="bridge vlan add dev '$dev' vid $vid"
++        case ${vlans[$vid]} in
++             p) cmd="$cmd pvid untagged" ;;
++             u) cmd="$cmd untagged" ;;
++             t) ;;
++        esac
++        eval "$cmd"
++    done
++}
++
++_vif_vlan_membership() {
++    # The vlans, pvid and dev variables are used by sub-functions
++    local -A vlans=()
++    local -a terms=()
++    local -i i pvid=0
++    local dev=$1
++
++    # Split the vlan specification string into its terms
++    readarray -d / -t terms <<<$2
++    for (( i=0; i<${#terms[@]}; ++i )) ;do
++        _vif_vlan_parse_term ${terms[$i]%%[[:space:]]}
++    done
++
++    _vif_vlan_validate_pvid
++    _vif_vlan_setup
++    return 0
++}
++
+ # Usage: add_to_bridge bridge dev
+ add_to_bridge () {
+     local bridge=$1
+     local dev=$2
++    local vlan=$(xenstore_read_default "$XENBUS_PATH/vlan" "")
+ 
+     # Don't add $dev to $bridge if it's already on the bridge.
+     if [ ! -e "/sys/class/net/${bridge}/brif/${dev}" ]; then
+@@ -134,6 +229,14 @@ add_to_bridge () {
+         else
+             ip link set ${dev} master ${bridge}
+         fi
++        if [ -n "${vlan}" ] ;then
++            log debug "configuring vlans for ${dev} on ${bridge}"
++            if which bridge >&/dev/null; then
++                _vif_vlan_membership "${dev}" "${vlan}"
++            else
++                fatal "vlan configuration failed: bridge command not found"
++            fi
++        fi
+     else
+         log debug "$dev already on bridge $bridge"
+     fi
 -- 
 2.39.2
 
