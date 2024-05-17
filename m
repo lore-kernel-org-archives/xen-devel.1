@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0A4C25B79
-	for <xen-devel@archiver.kernel.org>; Fri, 17 May 2024 13:55:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.724181.1129383 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD04CC25B7C
+	for <xen-devel@archiver.kernel.org>; Fri, 17 May 2024 13:55:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.724183.1129397 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7y3G-0002T9-UM; Fri, 17 May 2024 13:55:14 +0000
+	id 1s7y3H-0002fU-Rk; Fri, 17 May 2024 13:55:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 724181.1129383; Fri, 17 May 2024 13:55:14 +0000
+Received: by outflank-mailman (output) from mailman id 724183.1129397; Fri, 17 May 2024 13:55:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7y3G-0002Sw-Qh; Fri, 17 May 2024 13:55:14 +0000
-Received: by outflank-mailman (input) for mailman id 724181;
- Fri, 17 May 2024 13:55:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s7y3H-0002bx-Gd; Fri, 17 May 2024 13:55:15 +0000
+Received: by outflank-mailman (input) for mailman id 724183;
+ Fri, 17 May 2024 13:55:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3Ubw=MU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1s7y3E-0001sq-M9
- for xen-devel@lists.xenproject.org; Fri, 17 May 2024 13:55:12 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 13be8d67-1455-11ef-b4bb-af5377834399;
- Fri, 17 May 2024 15:55:10 +0200 (CEST)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a59a0e4b773so458873266b.2
- for <xen-devel@lists.xenproject.org>; Fri, 17 May 2024 06:55:10 -0700 (PDT)
+ id 1s7y3G-0001cB-5R
+ for xen-devel@lists.xenproject.org; Fri, 17 May 2024 13:55:14 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 150695c4-1455-11ef-909e-e314d9c70b13;
+ Fri, 17 May 2024 15:55:13 +0200 (CEST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-572f6ee87c1so4572333a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 17 May 2024 06:55:13 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a179c81b4sm1117456466b.113.2024.05.17.06.55.09
+ a640c23a62f3a-a5a179c81b4sm1117456466b.113.2024.05.17.06.55.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 May 2024 06:55:09 -0700 (PDT)
+ Fri, 17 May 2024 06:55:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,326 +46,479 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13be8d67-1455-11ef-b4bb-af5377834399
+X-Inumbo-ID: 150695c4-1455-11ef-909e-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715954110; x=1716558910; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1715954112; x=1716558912; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=woatuozuOyseeL4cnN4KyDezDGVt7DBVcd4a7zZ/GoA=;
-        b=WdzIylq215iprKTArZcnSdkcdpYaKOtSS+C2mhpMFtBrV+GcbPnPf3PMmmjxPeC2Yu
-         4K+k8YXTpyYcjOAHkMMBNTKk9+Bk9PeKc1VXbgnkJYWIz7C+6lxzU+sOD8uuRZwOPI82
-         R4eMkGtSybEpuBw+caCMR2UHyp2OVdNnTNbK45fuExWA33CEtiCDqISm7ABaj0PEe79S
-         OMrb3N9BMZeAOqZTR9PyUlBzkcMBtFJpjPPPb4bwI1I7I358jmTXXHuuPtjNWP8SItwA
-         rbfB0hq5EYoLnZl8ubnsTaA6+BAFefYeOWZVcu5uecM/zvJ5x15BRFsk4LD6Yc5yq7W4
-         TdUQ==
+        bh=dmyFXVNnt+hxL3zbiepowjxUxD57Pi8IWfGlJVjPZ2c=;
+        b=HNhUOPj1KLI1pWjId5P8dNr1Yh2P/HvbmXQwAxKnf68YZtdtHxaxl7F7z640eEuwSA
+         /gI3I5xyyJwvmfHWTw8e2/ZtJ9Ct8puVz1DAHUraKTuFz8wxm+LEQaaynSghtpOowlZR
+         OIFS6j3AJ538vrq6Mscl3kAVdfiJGr3DnK52ykxiLMAgH3bGr5eu0NsfqKp6srK3wpSR
+         LVBjTK5Q7TIDk643qxatkp6lVzr6sHZTguwr/cgaOR/lpAmVVDmatSEcEdY+5pyHHsaS
+         YX9Tp6hiAAJBJqBuYa7OrOkLXuGfONJ9XduqA+OYINC9/9SIJAw4tjoMLLkj/XiVe+E3
+         ZfZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715954110; x=1716558910;
+        d=1e100.net; s=20230601; t=1715954112; x=1716558912;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=woatuozuOyseeL4cnN4KyDezDGVt7DBVcd4a7zZ/GoA=;
-        b=SNBogpROmET7WwsdeRG7rEQeQd1kR6BzS1vwOgRjrQ3cyUSBSNbIYoAvXg1X0RrTXj
-         SzxBTWedRYrm7zVn4DuWgckYM3ExL/iWmKsz1TgaEDjOHrzg9MCHs2EuRvCBiQ4+mV4h
-         l+7IN53BrKlSWBmiGbOcqY7uD6J+ugrTBc1Ub59k3JaGzkrC9AeM8EPHzCUGas76dPiD
-         BR2GufdBlvR7L1U4SA5BBL06boHhIb5cOogJJmkGtVXd+deCwyZUcvhduLbC7qysjktg
-         b75yV2Vw7gp5uu8Q0694JeS/xh3ow+xvasEthwiudA2I7CDaOx4ZG2s++fVhVnl66C11
-         uilQ==
-X-Gm-Message-State: AOJu0YxFDJs4oGgndC7ItssMbvnuWgefuENZJ5rplRH9Arz+6uLA4Z4e
-	tbtkrLVjSZC4Nqc0gelrGFZqylqTXbCeMkIP/NqBs3Bo8ii/WI1p62VtU7cL
-X-Google-Smtp-Source: AGHT+IHsehvx8pqw/g9Quv5gEW1QWWYdyQ7L1VBT233xZ+7+m0DFfBk+bO2yECVK8fjtIZ1/kLvG1A==
-X-Received: by 2002:a17:906:2746:b0:a5a:84f9:df73 with SMTP id a640c23a62f3a-a5a84f9dfd2mr736182166b.38.1715954110155;
-        Fri, 17 May 2024 06:55:10 -0700 (PDT)
+        bh=dmyFXVNnt+hxL3zbiepowjxUxD57Pi8IWfGlJVjPZ2c=;
+        b=YalY2mKMe1qNAoT6/L6w5x6Uazx3vxfgNWE6EqNUNPqQLH3ZHayLsmlVozwMFCBU8L
+         2HgBel2Njs+b25i4aa3Jtwa56CfBR+qpzVhSEM4irf2wFVFsb5qm1EjAqoCqVglt8g0E
+         Hju6WOr3syaxZ0h5QHC2BkDjHYcMWlnMKenNKx1JXbwJ3Q2vUGtA5GyCkkaOoUE35eSD
+         bNAxntyytbSZ8UaYv3HTiYmUxSLNXBV7lDzmqTE6E44m4YMW01IBeMyrTrjQ/erbtosq
+         yrhQ6Re42aa49n6sBvw3vsrk0qZ3AgN3eZUJV+WUGipTBRM1p5jkNG5Gnf5d72QbFHS3
+         HZhQ==
+X-Gm-Message-State: AOJu0Yy47P5Kj3wxMu61tt7MczzPsHZLlsknl6u9TZaUThPPTBs6xCOm
+	ly65CFyWfprQBhP6dB4KUycH1rG7R/u+hRA5iopAg7+XwngwJUumfS7SgEv9
+X-Google-Smtp-Source: AGHT+IGcyYgqw7vHA3eICyUNiTI1THyvqb+ALgLMhYDvqNtVqiPJ30pnF69tErln8kIe4xgeQcGPvg==
+X-Received: by 2002:a17:906:c2c7:b0:a59:beb2:62d7 with SMTP id a640c23a62f3a-a5a2d665449mr1453259066b.56.1715954111845;
+        Fri, 17 May 2024 06:55:11 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v10 03/14] xen/bitops: implement fls{l}() in common logic
-Date: Fri, 17 May 2024 15:54:52 +0200
-Message-ID: <43df611d1c7b7ac16b181fb819f5d886daa31bad.1715952103.git.oleksii.kurochko@gmail.com>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v10 05/14] xen/riscv: introduce cmpxchg.h
+Date: Fri, 17 May 2024 15:54:54 +0200
+Message-ID: <79303bd6ba08b8c3bad96cb4e47d46f61a42d081.1715952103.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <cover.1715952103.git.oleksii.kurochko@gmail.com>
 References: <cover.1715952103.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-To avoid the compilation error below, it is needed to update to places
-in common/page_alloc.c where flsl() is used as now flsl() returns unsigned int:
+The header was taken from Linux kernl 6.4.0-rc1.
 
-./include/xen/kernel.h:18:21: error: comparison of distinct pointer types lacks a cast [-Werror]
-       18 |         (void) (&_x == &_y);            \
-          |                     ^~
-    common/page_alloc.c:1843:34: note: in expansion of macro 'min'
-     1843 |         unsigned int inc_order = min(MAX_ORDER, flsl(e - s) - 1);
+Addionally, were updated:
+* add emulation of {cmp}xchg for 1/2 byte types using 32-bit atomic
+  access.
+* replace tabs with spaces
+* replace __* variale with *__
+* introduce generic version of xchg_* and cmpxchg_*.
+* drop {cmp}xchg{release,relaxed,acquire} as Xen doesn't use them
+* drop barries and use instruction suffixices instead ( .aq, .rl, .aqrl )
 
-generic_fls{l} was used instead of __builtin_clz{l}(x) as if x is 0,
-the result in undefined.
+Implementation of 4- and 8-byte cases were updated according to the spec:
+```
+              ....
+Linux Construct         RVWMO AMO Mapping
+    ...
+atomic <op>             amo<op>.{w|d}.aqrl
+Linux Construct         RVWMO LR/SC Mapping
+    ...
+atomic <op>             loop: lr.{w|d}.aq; <op>; sc.{w|d}.aqrl; bnez loop
 
-The prototype of the per-architecture fls{l}() functions was changed to
-return 'unsigned int' to align with the generic implementation of these
-functions and avoid introducing signed/unsigned mismatches.
+Table A.5: Mappings from Linux memory primitives to RISC-V primitives
+
+```
+
+The current implementation is the same with 8e86f0b409a4
+("arm64: atomics: fix use of acquire + release for full barrier
+semantics") [1].
+RISC-V could combine acquire and release into the SC
+instructions and it could reduce a fence instruction to gain better
+performance. Here is related description from RISC-V ISA 10.2
+Load-Reserved/Store-Conditional Instructions:
+
+ - .aq:   The LR/SC sequence can be given acquire semantics by
+          setting the aq bit on the LR instruction.
+ - .rl:   The LR/SC sequence can be given release semantics by
+          setting the rl bit on the SC instruction.
+ - .aqrl: Setting the aq bit on the LR instruction, and setting
+          both the aq and the rl bit on the SC instruction makes
+          the LR/SC sequence sequentially consistent, meaning that
+          it cannot be reordered with earlier or later memory
+          operations from the same hart.
+
+ Software should not set the rl bit on an LR instruction unless
+ the aq bit is also set, nor should software set the aq bit on an
+ SC instruction unless the rl bit is also set. LR.rl and SC.aq
+ instructions are not guaranteed to provide any stronger ordering
+ than those with both bits clear, but may result in lower
+ performance.
+
+Also, I way of transforming ".rl + full barrier" to ".aqrl" was approved
+by (the author of the RVWMO spec) [2]
+
+[1] https://patchwork.kernel.org/project/linux-arm-kernel/patch/1391516953-14541-1-git-send-email-will.deacon@arm.com/
+[2] https://lore.kernel.org/linux-riscv/41e01514-74ca-84f2-f5cc-2645c444fd8e@nvidia.com/
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- The patch is almost independent from Andrew's patch series
- ( https://lore.kernel.org/xen-devel/20240313172716.2325427-1-andrew.cooper3@citrix.com/T/#t)
- except test_fls() function which IMO can be merged as a separate patch after Andrew's patch
- will be fully ready.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V10:
- - update return type of arch_flsl() across arcitectures to 'unsigned int' to be aligned
-   with return type of generic flsl() in xen/bitops.h.
- - switch inline to always_inline for arch_flsl() across architectures to be in sync
-   with other similar changes.
- - define arch_flsl as arch_fls not just only fls.
- - update the commit message ( add information that per-arch fls{l)() protypes were
-   changed ).
+ - Code style fixes for __xchg, __cmpxchg ( the line was too long )
+ - change type of size argument from int to unsigned int for
+   __bad_{cmp}xchg(), __{cmp}xchg().
+ - drop parentheses around ptr in {cmp}xchg() when ptr is an argument of
+   __{cmp}xchg().
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V9:
- - update return type of fls and flsl() to unsigned int to be aligned with other
-   bit ops.
- - update places where return value of fls() and flsl() is compared with int.
- - update the commit message.
+ - update return type of __bad_xchg();
+ - update the comment above __bad_cmpxchg();
+ - update the default case inside __xchg() to be aligned with similar default
+   case in __cmpxchg().
 ---
 Changes in V8:
- - do proper rebase: back definition of fls{l} to the current patch.
- - drop the changes which removed ffz() in PPC. it should be done not
-   in this patch.
- - add a message after Signed-off.
+ - use __bad_{xchg,cmpxch}(ptr,size) insetead of STATIC_ASSERT_UNREACHABLE() to
+   make this patch be independent from the macros that haven't been committed yet
+   and may never be.
 ---
 Changes in V7:
- - Code style fixes
+ - replace __*() -> _*() in cmpxchg.h
+ - add () around ptr in _amoswap_generic(), emulate_xchg_1_2()
+ - fix typos
+ - code style fixes.
+ - refactor emulate_xcgh_1_2():
+   - add parentheses for new argument.
+   - use instead of constant 0x4 -> sizeof(*aligned_ptr).
+   - add alignment_mask to save  sizeof(*aligned_ptr) - sizeof(*(ptr));
+ - s/CONFIG_32BIT/CONFIG_RISCV_32
+ - drop unnecessary parentheses in xchg()
+ - drop register in _generic_cmpxchg()
+ - refactor and update prototype of _generic_cmpxchg():
+   add named operands, return value instead of passing ret as an argument, drop %z and J
+   constraints for mask operand as it can't be zero
+ - refactor and code style fixes in emulate_cmpxchg_1_2():
+   - add explanatory comment for emulate_cmpxchg_1_2().
+   - add parentheses for old and new arguments.
+   - use instead of constant 0x4 -> sizeof(*aligned_ptr).
+   - add alignment_mask to save  sizeof(*aligned_ptr) - sizeof(*(ptr));
+ - drop unnessary parenthesses in cmpxchg().
+ - update the commit message.
+ - s/__asm__ __volatile__/asm volatile
 ---
 Changes in V6:
- - new patch for the patch series.
+-  update the commit message? ( As before I don't understand this point. Can you give an example of what sort of opcode / instruction is missing?)
+ - Code style fixes
+ - change sizeof(*ptr) -> sizeof(*(ptr))
+ - update operands names and some local variables for macros emulate_xchg_1_2() and emulate_cmpxchg_1_2()
+ - drop {cmp}xchg_{relaxed,acquire,release) versions as they aren't needed for Xen
+ - update __amoswap_generic() prototype and defintion: drop pre and post barries.
+ - update emulate_xchg_1_2() prototype and definion: add lr_sfx, drop pre and post barries.
+ - rename __xchg_generic to __xchg(), make __xchg as static inline function to be able to "#ifndef CONFIG_32BIT case 8:... "
 ---
- xen/arch/arm/include/asm/arm32/bitops.h |  2 +-
- xen/arch/arm/include/asm/arm64/bitops.h |  6 ++----
- xen/arch/arm/include/asm/bitops.h       |  9 +++------
- xen/arch/ppc/include/asm/bitops.h       |  3 ---
- xen/arch/x86/include/asm/bitops.h       | 12 +++++++-----
- xen/common/bitops.c                     | 22 ++++++++++++++++++++++
- xen/common/page_alloc.c                 |  4 ++--
- xen/include/xen/bitops.h                | 24 ++++++++++++++++++++++++
- 8 files changed, 61 insertions(+), 21 deletions(-)
+Changes in V5:
+ - update the commit message.
+ - drop ALIGN_DOWN().
+ - update the definition of emulate_xchg_1_2():
+   - lr.d -> lr.w, sc.d -> sc.w.
+   - drop ret argument.
+   - code style fixes around asm volatile.
+   - update prototype.
+   - use asm named operands.
+   - rename local variables.
+   - add comment above the macros
+ - update the definition of __xchg_generic:
+   - rename to __xchg()
+   - transform it to static inline
+   - code style fixes around switch()
+   - update prototype.
+ - redefine cmpxchg()
+ - update emulate_cmpxchg_1_2():
+   - update prototype
+   - update local variables names and usage of them
+   - use name asm operands.
+   - add comment above the macros
+ - drop pre and post, and use .aq,.rl, .aqrl suffixes.
+ - drop {cmp}xchg_{relaxed, aquire, release} as they are not used by Xen.
+ - drop unnessary details in comment above emulate_cmpxchg_1_2()
+---
+Changes in V4:
+ - Code style fixes.
+ - enforce in __xchg_*() has the same type for new and *ptr, also "\n"
+   was removed at the end of asm instruction.
+ - dependency from https://lore.kernel.org/xen-devel/cover.1706259490.git.federico.serafini@bugseng.com/
+ - switch from ASSERT_UNREACHABLE to STATIC_ASSERT_UNREACHABLE().
+ - drop xchg32(ptr, x) and xchg64(ptr, x) as they aren't used.
+ - drop cmpxcg{32,64}_{local} as they aren't used.
+ - introduce generic version of xchg_* and cmpxchg_*.
+ - update the commit message.
+---
+Changes in V3:
+ - update the commit message
+ - add emulation of {cmp}xchg_... for 1 and 2 bytes types
+---
+Changes in V2:
+ - update the comment at the top of the header.
+ - change xen/lib.h to xen/bug.h.
+ - sort inclusion of headers properly.
+---
+ xen/arch/riscv/include/asm/cmpxchg.h | 241 +++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/config.h  |   2 +
+ 2 files changed, 243 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/cmpxchg.h
 
-diff --git a/xen/arch/arm/include/asm/arm32/bitops.h b/xen/arch/arm/include/asm/arm32/bitops.h
-index d0309d47c1..9ee96f568b 100644
---- a/xen/arch/arm/include/asm/arm32/bitops.h
-+++ b/xen/arch/arm/include/asm/arm32/bitops.h
-@@ -1,7 +1,7 @@
- #ifndef _ARM_ARM32_BITOPS_H
- #define _ARM_ARM32_BITOPS_H
- 
--#define flsl fls
-+#define arch_flsl arch_fls
- 
- /*
-  * Little endian assembly bitops.  nr = 0 -> byte 0 bit 0.
-diff --git a/xen/arch/arm/include/asm/arm64/bitops.h b/xen/arch/arm/include/asm/arm64/bitops.h
-index 906d84e5f2..d942077392 100644
---- a/xen/arch/arm/include/asm/arm64/bitops.h
-+++ b/xen/arch/arm/include/asm/arm64/bitops.h
-@@ -1,17 +1,15 @@
- #ifndef _ARM_ARM64_BITOPS_H
- #define _ARM_ARM64_BITOPS_H
- 
--static inline int flsl(unsigned long x)
-+static always_inline unsigned int arch_flsl(unsigned long x)
- {
-         uint64_t ret;
- 
--        if (__builtin_constant_p(x))
--               return generic_flsl(x);
--
-         asm("clz\t%0, %1" : "=r" (ret) : "r" (x));
- 
-         return BITS_PER_LONG - ret;
- }
-+#define arch_flsl arch_flsl
- 
- /* Based on linux/include/asm-generic/bitops/find.h */
- 
-diff --git a/xen/arch/arm/include/asm/bitops.h b/xen/arch/arm/include/asm/bitops.h
-index 8e16335e76..f428cf8338 100644
---- a/xen/arch/arm/include/asm/bitops.h
-+++ b/xen/arch/arm/include/asm/bitops.h
-@@ -78,17 +78,14 @@ bool clear_mask16_timeout(uint16_t mask, volatile void *p,
-  * the clz instruction for much better code efficiency.
-  */
- 
--static inline int fls(unsigned int x)
-+static always_inline unsigned int arch_fls(unsigned int x)
- {
--        int ret;
--
--        if (__builtin_constant_p(x))
--               return generic_fls(x);
-+        unsigned int ret;
- 
-         asm("clz\t%"__OP32"0, %"__OP32"1" : "=r" (ret) : "r" (x));
-         return 32 - ret;
- }
--
-+#define arch_fls arch_fls
- 
- #define arch_ffs(x) ({ unsigned int __t = (x); fls(ISOLATE_LSB(__t)); })
- #define arch_ffsl(x) ({ unsigned long __t = (x); flsl(ISOLATE_LSB(__t)); })
-diff --git a/xen/arch/ppc/include/asm/bitops.h b/xen/arch/ppc/include/asm/bitops.h
-index 049aa62b89..46154fc957 100644
---- a/xen/arch/ppc/include/asm/bitops.h
-+++ b/xen/arch/ppc/include/asm/bitops.h
-@@ -119,9 +119,6 @@ static inline int test_and_set_bit(unsigned int nr, volatile void *addr)
-         (volatile unsigned int *)addr + BITOP_WORD(nr)) != 0;
- }
- 
--#define flsl(x) generic_flsl(x)
--#define fls(x) generic_fls(x)
--
- /**
-  * hweightN - returns the hamming weight of a N-bit word
-  * @x: the word to weigh
-diff --git a/xen/arch/x86/include/asm/bitops.h b/xen/arch/x86/include/asm/bitops.h
-index 23f09fdb7a..17849fae97 100644
---- a/xen/arch/x86/include/asm/bitops.h
-+++ b/xen/arch/x86/include/asm/bitops.h
-@@ -425,20 +425,21 @@ static always_inline unsigned int arch_ffsl(unsigned long x)
-  *
-  * This is defined the same way as ffs.
-  */
--static inline int flsl(unsigned long x)
-+static always_inline unsigned int arch_flsl(unsigned long x)
- {
--    long r;
-+    unsigned long r;
- 
-     asm ( "bsr %1,%0\n\t"
-           "jnz 1f\n\t"
-           "mov $-1,%0\n"
-           "1:" : "=r" (r) : "rm" (x));
--    return (int)r+1;
-+    return (unsigned int)r+1;
- }
-+#define arch_flsl arch_flsl
- 
--static inline int fls(unsigned int x)
-+static always_inline unsigned int arch_fls(unsigned int x)
- {
--    int r;
-+    unsigned int r;
- 
-     asm ( "bsr %1,%0\n\t"
-           "jnz 1f\n\t"
-@@ -446,6 +447,7 @@ static inline int fls(unsigned int x)
-           "1:" : "=r" (r) : "rm" (x));
-     return r + 1;
- }
-+#define arch_fls arch_fls
- 
- /**
-  * hweightN - returns the hamming weight of a N-bit word
-diff --git a/xen/common/bitops.c b/xen/common/bitops.c
-index a8c32f6767..95bc47176b 100644
---- a/xen/common/bitops.c
-+++ b/xen/common/bitops.c
-@@ -62,9 +62,31 @@ static void test_ffs(void)
-     CHECK(ffs64, (uint64_t)0x8000000000000000, 64);
- }
- 
-+static void test_fls(void)
+diff --git a/xen/arch/riscv/include/asm/cmpxchg.h b/xen/arch/riscv/include/asm/cmpxchg.h
+new file mode 100644
+index 0000000000..38e241a4e5
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/cmpxchg.h
+@@ -0,0 +1,241 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/* Copyright (C) 2014 Regents of the University of California */
++
++#ifndef _ASM_RISCV_CMPXCHG_H
++#define _ASM_RISCV_CMPXCHG_H
++
++#include <xen/compiler.h>
++#include <xen/lib.h>
++
++#include <asm/fence.h>
++#include <asm/io.h>
++#include <asm/system.h>
++
++#define _amoswap_generic(ptr, new, ret, sfx) \
++    asm volatile ( \
++        " amoswap" sfx " %0, %2, %1" \
++        : "=r" (ret), "+A" (*(ptr)) \
++        : "r" (new) \
++        : "memory" );
++
++/*
++ * For LR and SC, the A extension requires that the address held in rs1 be
++ * naturally aligned to the size of the operand (i.e., eight-byte aligned
++ * for 64-bit words and four-byte aligned for 32-bit words).
++ * If the address is not naturally aligned, an address-misaligned exception
++ * or an access-fault exception will be generated.
++ *
++ * Thereby:
++ * - for 1-byte xchg access the containing word by clearing low two bits.
++ * - for 2-byte xchg access the containing word by clearing bit 1.
++ *
++ * If resulting 4-byte access is still misalgined, it will fault just as
++ * non-emulated 4-byte access would.
++ */
++#define emulate_xchg_1_2(ptr, new, lr_sfx, sc_sfx) \
++({ \
++    uint32_t *aligned_ptr; \
++    unsigned long alignment_mask = sizeof(*aligned_ptr) - sizeof(*(ptr)); \
++    unsigned int new_val_bit = \
++        ((unsigned long)(ptr) & alignment_mask) * BITS_PER_BYTE; \
++    unsigned long mask = \
++        GENMASK(((sizeof(*(ptr))) * BITS_PER_BYTE) - 1, 0) << new_val_bit; \
++    unsigned int new_ = (new) << new_val_bit; \
++    unsigned int old; \
++    unsigned int scratch; \
++    \
++    aligned_ptr = (uint32_t *)((unsigned long)(ptr) & ~alignment_mask); \
++    \
++    asm volatile ( \
++        "0: lr.w" lr_sfx " %[old], %[ptr_]\n" \
++        "   andn  %[scratch], %[old], %[mask]\n" \
++        "   or   %[scratch], %[scratch], %z[new_]\n" \
++        "   sc.w" sc_sfx " %[scratch], %[scratch], %[ptr_]\n" \
++        "   bnez %[scratch], 0b\n" \
++        : [old] "=&r" (old), [scratch] "=&r" (scratch), \
++          [ptr_] "+A" (*aligned_ptr) \
++        : [new_] "rJ" (new_), [mask] "r" (mask) \
++        : "memory" ); \
++    \
++    (__typeof__(*(ptr)))((old & mask) >> new_val_bit); \
++})
++
++/*
++ * This function doesn't exist, so you'll get a linker error
++ * if something tries to do an invalid xchg().
++ */
++extern unsigned long __bad_xchg(volatile void *ptr, unsigned int size);
++
++static always_inline unsigned long __xchg(volatile void *ptr,
++                                          unsigned long new,
++                                          unsigned int size)
 +{
-+    /* unsigned int ffs(unsigned int) */
-+    CHECK(fls, 1, 1);
-+    CHECK(fls, 3, 2);
-+    CHECK(fls, 3U << 30, 32);
++    unsigned long ret;
 +
-+    /* unsigned int flsl(unsigned long) */
-+    CHECK(flsl, 1, 1);
-+    CHECK(flsl, 1UL << (BITS_PER_LONG - 1), BITS_PER_LONG);
-+#if BITS_PER_LONG > 32
-+    CHECK(flsl, 3UL << 32, 34);
++    switch ( size )
++    {
++    case 1:
++        ret = emulate_xchg_1_2((volatile uint8_t *)ptr, new, ".aq", ".aqrl");
++        break;
++    case 2:
++        ret = emulate_xchg_1_2((volatile uint16_t *)ptr, new, ".aq", ".aqrl");
++        break;
++    case 4:
++        _amoswap_generic((volatile uint32_t *)ptr, new, ret, ".w.aqrl");
++        break;
++#ifndef CONFIG_RISCV_32
++    case 8:
++        _amoswap_generic((volatile uint64_t *)ptr, new, ret, ".d.aqrl");
++        break;
 +#endif
++    default:
++        return __bad_xchg(ptr, size);
++    }
 +
-+    /* unsigned int fls64(uint64_t) */
-+    CHECK(fls64, 1, 1);
-+    CHECK(fls64, 0x00000000C0000000ULL, 32);
-+    CHECK(fls64, 0x0000000180000000ULL, 33);
-+    CHECK(fls64, 0xC000000000000000ULL, 64);
++    return ret;
 +}
 +
- static int __init cf_check test_bitops(void)
- {
-     test_ffs();
-+    test_fls();
- 
-     return 0;
- }
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index be4ba3962a..eed6b2a901 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -1842,7 +1842,7 @@ static void _init_heap_pages(const struct page_info *pg,
-          * Note that the value of ffsl() and flsl() starts from 1 so we need
-          * to decrement it by 1.
-          */
--        unsigned int inc_order = min(MAX_ORDER, flsl(e - s) - 1);
-+        unsigned int inc_order = min(MAX_ORDER + 0U, flsl(e - s) - 1);
- 
-         if ( s )
-             inc_order = min(inc_order, ffsl(s) - 1U);
-@@ -2266,7 +2266,7 @@ void __init xenheap_max_mfn(unsigned long mfn)
-     ASSERT(!first_node_initialised);
-     ASSERT(!xenheap_bits);
-     BUILD_BUG_ON((PADDR_BITS - PAGE_SHIFT) >= BITS_PER_LONG);
--    xenheap_bits = min(flsl(mfn + 1) - 1 + PAGE_SHIFT, PADDR_BITS);
-+    xenheap_bits = min(flsl(mfn + 1) - 1 + PAGE_SHIFT, PADDR_BITS + 0U);
-     printk(XENLOG_INFO "Xen heap: %u bits\n", xenheap_bits);
- }
- 
-diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
-index 6eeeff0117..59b8028894 100644
---- a/xen/include/xen/bitops.h
-+++ b/xen/include/xen/bitops.h
-@@ -200,6 +200,30 @@ static always_inline bool test_bit(int nr, const volatile void *addr)
-     test_bit(nr, addr);                                 \
- })
- 
-+static always_inline __pure unsigned int fls(unsigned int x)
++#define xchg(ptr, x) \
++({ \
++    __typeof__(*(ptr)) n_ = (x); \
++    (__typeof__(*(ptr))) \
++        __xchg(ptr, (unsigned long)n_, sizeof(*(ptr))); \
++})
++
++#define _generic_cmpxchg(ptr, old, new, lr_sfx, sc_sfx) \
++ ({ \
++    unsigned int rc; \
++    unsigned long ret; \
++    unsigned long mask = GENMASK(((sizeof(*(ptr))) * BITS_PER_BYTE) - 1, 0); \
++    asm volatile ( \
++        "0: lr" lr_sfx " %[ret], %[ptr_]\n" \
++        "   and  %[ret], %[ret], %[mask]\n" \
++        "   bne  %[ret], %z[old_], 1f\n" \
++        "   sc" sc_sfx " %[rc], %z[new_], %[ptr_]\n" \
++        "   bnez %[rc], 0b\n" \
++        "1:\n" \
++        : [ret] "=&r" (ret), [rc] "=&r" (rc), [ptr_] "+A" (*ptr) \
++        : [old_] "rJ" (old), [new_] "rJ" (new), [mask] "r" (mask)  \
++        : "memory" ); \
++    ret; \
++ })
++
++/*
++ * For LR and SC, the A extension requires that the address held in rs1 be
++ * naturally aligned to the size of the operand (i.e., eight-byte aligned
++ * for 64-bit words and four-byte aligned for 32-bit words).
++ * If the address is not naturally aligned, an address-misaligned exception
++ * or an access-fault exception will be generated.
++ *
++ * Thereby:
++ * - for 1-byte xchg access the containing word by clearing low two bits
++ * - for 2-byte xchg ccess the containing word by clearing first bit.
++ * 
++ * If resulting 4-byte access is still misalgined, it will fault just as
++ * non-emulated 4-byte access would.
++ *
++ * old_val was casted to unsigned long for cmpxchgptr()
++ */
++#define emulate_cmpxchg_1_2(ptr, old, new, lr_sfx, sc_sfx) \
++({ \
++    uint32_t *aligned_ptr; \
++    unsigned long alignment_mask = sizeof(*aligned_ptr) - sizeof(*(ptr)); \
++    uint8_t new_val_bit = \
++        ((unsigned long)(ptr) & alignment_mask) * BITS_PER_BYTE; \
++    unsigned long mask = \
++        GENMASK(((sizeof(*(ptr))) * BITS_PER_BYTE) - 1, 0) << new_val_bit; \
++    unsigned int old_ = (old) << new_val_bit; \
++    unsigned int new_ = (new) << new_val_bit; \
++    unsigned int old_val; \
++    unsigned int scratch; \
++    \
++    aligned_ptr = (uint32_t *)((unsigned long)ptr & ~alignment_mask); \
++    \
++    asm volatile ( \
++        "0: lr.w" lr_sfx " %[scratch], %[ptr_]\n" \
++        "   and  %[old_val], %[scratch], %[mask]\n" \
++        "   bne  %[old_val], %z[old_], 1f\n" \
++        /* the following line is an equivalent to: \
++         *     scratch = old_val & ~mask; \
++         * And to elimanate one ( likely register ) input it was decided \
++         * to use: \
++         *     scratch = old_val ^ scratch \
++         */ \
++        "   xor  %[scratch], %[old_val], %[scratch]\n" \
++        "   or   %[scratch], %[scratch], %z[new_]\n" \
++        "   sc.w" sc_sfx " %[scratch], %[scratch], %[ptr_]\n" \
++        "   bnez %[scratch], 0b\n" \
++        "1:\n" \
++        : [old_val] "=&r" (old_val), [scratch] "=&r" (scratch), \
++          [ptr_] "+A" (*aligned_ptr) \
++        : [old_] "rJ" (old_), [new_] "rJ" (new_), \
++          [mask] "r" (mask) \
++        : "memory" ); \
++    \
++    (__typeof__(*(ptr)))((unsigned long)old_val >> new_val_bit); \
++})
++
++/*
++ * This function doesn't exist, so you'll get a linker error
++ * if something tries to do an invalid cmpxchg().
++ */
++extern unsigned long __bad_cmpxchg(volatile void *ptr, unsigned int size);
++
++/*
++ * Atomic compare and exchange.  Compare OLD with MEM, if identical,
++ * store NEW in MEM.  Return the initial value in MEM.  Success is
++ * indicated by comparing RETURN with OLD.
++ */
++static always_inline unsigned long __cmpxchg(volatile void *ptr,
++                                             unsigned long old,
++                                             unsigned long new,
++                                             unsigned int size)
 +{
-+    if ( __builtin_constant_p(x) )
-+        return generic_fls(x);
++    unsigned long ret;
 +
-+#ifndef arch_fls
-+#define arch_fls generic_fls
++    switch ( size )
++    {
++    case 1:
++        ret = emulate_cmpxchg_1_2((volatile uint8_t *)ptr, old, new,
++                                  ".aq", ".aqrl");
++        break;
++    case 2:
++        ret = emulate_cmpxchg_1_2((volatile uint16_t *)ptr, old, new,
++                                   ".aq", ".aqrl");
++        break;
++    case 4:
++        ret = _generic_cmpxchg((volatile uint32_t *)ptr, old, new,
++                          ".w.aq", ".w.aqrl");
++        break;
++#ifndef CONFIG_32BIT
++    case 8:
++        ret = _generic_cmpxchg((volatile uint64_t *)ptr, old, new,
++                           ".d.aq", ".d.aqrl");
++        break;
 +#endif
++    default:
++        return __bad_cmpxchg(ptr, size);
++    }
 +
-+    return arch_fls(x);
++    return ret;
 +}
 +
-+static always_inline __pure unsigned int flsl(unsigned long x)
-+{
-+    if ( __builtin_constant_p(x) )
-+        return generic_flsl(x);
++#define cmpxchg(ptr, o, n) \
++({ \
++    __typeof__(*(ptr)) o_ = (o); \
++    __typeof__(*(ptr)) n_ = (n); \
++    (__typeof__(*(ptr))) \
++    __cmpxchg(ptr, (unsigned long)o_, (unsigned long)n_, \
++              sizeof(*(ptr))); \
++})
 +
-+#ifndef arch_flsl
-+#define arch_flsl generic_flsl
-+#endif
++#endif /* _ASM_RISCV_CMPXCHG_H */
 +
-+    return arch_flsl(x);
-+}
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index c5f93e6a01..50583aafdc 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -119,6 +119,8 @@
+ 
+ #define BITS_PER_LLONG 64
+ 
++#define BITS_PER_BYTE 8
 +
- /*
-  * Find First Set bit.  Bits are labelled from 1.
-  */
+ /* xen_ulong_t is always 64 bits */
+ #define BITS_PER_XEN_ULONG 64
+ 
 -- 
 2.45.0
 
