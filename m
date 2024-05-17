@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD567C25B79
-	for <xen-devel@archiver.kernel.org>; Fri, 17 May 2024 13:55:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.724185.1129418 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A96ACC25B7A
+	for <xen-devel@archiver.kernel.org>; Fri, 17 May 2024 13:55:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.724187.1129437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7y3K-0003Lh-MG; Fri, 17 May 2024 13:55:18 +0000
+	id 1s7y3M-0003u3-OH; Fri, 17 May 2024 13:55:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 724185.1129418; Fri, 17 May 2024 13:55:18 +0000
+Received: by outflank-mailman (output) from mailman id 724187.1129437; Fri, 17 May 2024 13:55:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s7y3K-0003K5-Ea; Fri, 17 May 2024 13:55:18 +0000
-Received: by outflank-mailman (input) for mailman id 724185;
- Fri, 17 May 2024 13:55:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1s7y3M-0003sm-Fb; Fri, 17 May 2024 13:55:20 +0000
+Received: by outflank-mailman (input) for mailman id 724187;
+ Fri, 17 May 2024 13:55:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3Ubw=MU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1s7y3I-0001sq-Pp
- for xen-devel@lists.xenproject.org; Fri, 17 May 2024 13:55:16 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 15822ea0-1455-11ef-b4bb-af5377834399;
- Fri, 17 May 2024 15:55:13 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a5a7d28555bso515552566b.1
- for <xen-devel@lists.xenproject.org>; Fri, 17 May 2024 06:55:13 -0700 (PDT)
+ id 1s7y3J-0001cB-V2
+ for xen-devel@lists.xenproject.org; Fri, 17 May 2024 13:55:18 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 17726393-1455-11ef-909e-e314d9c70b13;
+ Fri, 17 May 2024 15:55:17 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a5d02b45262so123719866b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 17 May 2024 06:55:17 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a179c81b4sm1117456466b.113.2024.05.17.06.55.12
+ a640c23a62f3a-a5a179c81b4sm1117456466b.113.2024.05.17.06.55.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 May 2024 06:55:12 -0700 (PDT)
+ Fri, 17 May 2024 06:55:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 15822ea0-1455-11ef-b4bb-af5377834399
+X-Inumbo-ID: 17726393-1455-11ef-909e-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715954113; x=1716558913; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1715954116; x=1716558916; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8LVIzWnb4Mr13ThHiKzAiz89V4t6vZ0dpQ2obZh+rUk=;
-        b=ITTxY2viO/+UKk3MDwEbJSSFZW0AR1oPHmvvWHHcc4DQhwt05gueE5P9e6EqNdESf1
-         gbdPq/+tq2JYNvskErUM0OhPsk9xvxjnhWUW1LIZtfgRsyOy2dVJxk/3YcaWKB8uiqif
-         QOnQf4D+o7GC8+SJsxUrXRFk6yRhFwHQEoYYaWu51cpJ8/03TJbNN4m7IVfI1y4nJ3O6
-         DO/wfiAseNGV26fWQdehovZKVihfjnzkrPQnPj/j3qfo0An+ZS4SSXObD/5TNpk5ixY9
-         oCEOZFxYytl60TA8Ecu7J3J1Y8hoQpfxuEqaH2pvFadzK3aIgcYR9QSLZyCV/WzZdFPj
-         K5yQ==
+        bh=KU2J4ehhQREX9aohkUCxXxXEnfxAhv6f1eRMLAoyz2s=;
+        b=bcWEAmwolFHOUgLezjT2aYjSLvByXK6P5lGpMrXdz234jNQlyduEgQBURmm71/Z0i6
+         nkE8zbosgP/8NAl7m9b4X3AorpTPGejBV6oB2HfwFsAhP7D5bnYXAIPmgY/3lRkUZpDB
+         7wlB+K5Bg9+Aj0YPUNSJjKh8ZF6N/8vgv3eoQo8MkCRx4HT0nGXeUWoUdlYz81e4ect3
+         4iLL3ei0YSqTnPt4TF6nR4snOOpAlMCWz6iO5mvweI+NBrABQ6SJb1DQ2DG/Waxhb8eP
+         fuxg3E1W1llLWbnrNPeTojCMjJT+EKXuNX2gG1ydkBRf6pJhYY45IglPEq7JcWGF1Ikv
+         NFqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715954113; x=1716558913;
+        d=1e100.net; s=20230601; t=1715954116; x=1716558916;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8LVIzWnb4Mr13ThHiKzAiz89V4t6vZ0dpQ2obZh+rUk=;
-        b=DgF62gi/KLPS4W2AGdLVZ04scAzuuhL5gKUKsT/Y99k4vF0tdrlICVRxRUjWXC47Xn
-         BhbuHjFAGwLpQroIg2lL5oGq7Gfk5PJnmLFLyE36XfuH1dtjAFyt9Rz8fT7YP+U+VFc4
-         v0qD/thnbhzsDtkqirLNj+az9DQa1WbTqv5ERw20rXTkEOFaA3y4hf2GADzk8TxnJgsW
-         iXN8VvufIm5LywGBMwm8Y3aNlQsoouy3Ts9zznNZa0wQDpuhra6YWoofvPSnzWoKVy8A
-         om+h3YupGhE3hAWe43YWa5k+cOBDo3erTXgEuzsBFovckw+jhUeKzBmxFOjMsoACe+ZV
-         7eWQ==
-X-Gm-Message-State: AOJu0Yy9ok8EAnQhOSO3Rb8Y0HuEzBmL94dcZqWLMKqJ9fSMNlDWuBXY
-	KgFm5MQHGqCFY0VG1x4speDB3W07dZqjqR4Km4q1ibE0bqqQJkFwNcbJjXNc
-X-Google-Smtp-Source: AGHT+IEqB4puYJmNpx00kOKICGOKy52EQdfcxH6ptgJHjislAjztsRVBNQ15+p5HIZKWgzGXhdY36A==
-X-Received: by 2002:a17:907:130f:b0:a5c:df6b:a9b5 with SMTP id a640c23a62f3a-a5cdf6bade3mr382475466b.59.1715954112729;
-        Fri, 17 May 2024 06:55:12 -0700 (PDT)
+        bh=KU2J4ehhQREX9aohkUCxXxXEnfxAhv6f1eRMLAoyz2s=;
+        b=nIM86d3EgE90lNOplA3t2KnR9NwveQh3cFNwP5gzIn/9Q/rlXA1Qsmvn8dmTfgSSjS
+         cJOaJo/+TPkwhMJ80Zc1PBc8H/l9rkv0FYsguPmDjDzcu3bTaMrgxRtFg+PVc/m6Sah1
+         S5HhJKUD4brzAGB1J3cC+u9mIg5EMHTU8rmfMpErVnhWdzMf0vqxhbAQUpFiWIRTMyfL
+         FlTHAo2q38JvzrioEk9DmwlTLcQlspJfaK9juzWQaxeEdRPnRGjd60sjC4jtqpbiCURe
+         ntynKTUBTeMi17tt2wgdy3NUUY3ihLnB5hW2jZ8QIbHH7lQUBSjZPHYy/+t343xQRi6a
+         SRcg==
+X-Gm-Message-State: AOJu0YyB+15O1p8vhHFDgtNXieBaxcPZ97ZaQfF2kYEHwCeB2cHl8KD6
+	CfVto07+1BAOgEH/ltEDgxbJRAn6svwhxL5H8PG4Z68xTOINhqtL7F/m6+jF
+X-Google-Smtp-Source: AGHT+IHmsoziuc4fyB4Cz+upZaGGb/0p3VflZy9DZeEXYmYAAXv0aK0Ua4LT0M+a5btqqD1Zjya7hQ==
+X-Received: by 2002:a17:907:36f:b0:a52:6fcb:564a with SMTP id a640c23a62f3a-a5a2d53aa70mr1484720766b.9.1715954116246;
+        Fri, 17 May 2024 06:55:16 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -87,538 +87,375 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v10 06/14] xen/riscv: introduce atomic.h
-Date: Fri, 17 May 2024 15:54:55 +0200
-Message-ID: <c54eeba8741d3ef4298b471133ce526cf3d3f4eb.1715952103.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v10 10/14] xen/riscv: add minimal stuff to mm.h to build full Xen
+Date: Fri, 17 May 2024 15:54:59 +0200
+Message-ID: <c9b8a462e85cc11f60391b6eff2c7cb5db9903ad.1715952103.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <cover.1715952103.git.oleksii.kurochko@gmail.com>
 References: <cover.1715952103.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Initially the patch was introduced by Bobby, who takes the header from
-Linux kernel.
-
-The following changes were done on top of Bobby's changes:
- - atomic##prefix##_*xchg_*(atomic##prefix##_t *v, c_t n) were updated
-   to use__*xchg_generic()
- - drop casts in write_atomic() as they are unnecessary
- - drop introduction of WRITE_ONCE() and READ_ONCE().
-   Xen provides ACCESS_ONCE()
- - remove zero-length array access in read_atomic()
- - drop defines similar to pattern:
-   #define atomic_add_return_relaxed   atomic_add_return_relaxed
- - move not RISC-V specific functions to asm-generic/atomics-ops.h
- - drop  atomic##prefix##_{cmp}xchg_{release, aquire, release}() as they
-   are not used in Xen.
- - update the defintion of  atomic##prefix##_{cmp}xchg according to
-   {cmp}xchg() implementation in Xen.
- - some ATOMIC_OP() macros were updated:
-   - drop size argument for ATOMIC_OP which defines atomic##prefix##_xchg()
-     and atomic##prefix##_cmpxchg().
-   - drop c_op argument for ATOMIC_OPS which defines ATOMIC_OPS(and, and),
-     ATOMIC_OPS( or,  or), ATOMIC_OPS(xor, xor), ATOMIC_OPS(add, add, +),
-     ATOMIC_OPS(sub, add, -) as c_op is always "+" for them.
-   - drop "" from definition of __atomic_{acquire/release"}_fence.
-
-The current implementation is the same with 8e86f0b409a4
-("arm64: atomics: fix use of acquire + release for full barrier
-semantics") [1].
-RISC-V could combine acquire and release into the SC
-instructions and it could reduce a fence instruction to gain better
-performance. Here is related description from RISC-V ISA 10.2
-Load-Reserved/Store-Conditional Instructions:
-
- - .aq:   The LR/SC sequence can be given acquire semantics by
-          setting the aq bit on the LR instruction.
- - .rl:   The LR/SC sequence can be given release semantics by
-              setting the rl bit on the SC instruction.
- - .aqrl: Setting the aq bit on the LR instruction, and setting
-          both the aq and the rl bit on the SC instruction makes
-          the LR/SC sequence sequentially consistent, meaning that
-          it cannot be reordered with earlier or later memory
-          operations from the same hart.
-
- Software should not set the rl bit on an LR instruction unless
- the aq bit is also set, nor should software set the aq bit on an
- SC instruction unless the rl bit is also set. LR.rl and SC.aq
- instructions are not guaranteed to provide any stronger ordering
- than those with both bits clear, but may result in lower
- performance.
-
-Also, I way of transforming ".rl + full barrier" to ".aqrl" was approved
-by (the author of the RVWMO spec) [2]
-
-[1] https://patchwork.kernel.org/project/linux-arm-kernel/patch/1391516953-14541-1-git-send-email-will.deacon@arm.com/
-[2] https://lore.kernel.org/linux-riscv/41e01514-74ca-84f2-f5cc-2645c444fd8e@nvidia.com/
-
-Signed-off-by: Bobby Eshleman <bobbyeshleman@gmail.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V10:
- - drop unnessary parentheses around p in add_sized()
- - add Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V9:
- - update the defintion of write_atomic macros:
-   drop the return value as this macros isn't expeceted to return something
-   drop unnessary parentheses around p.
- - drop casts inside _add_sized() for ptr variable as they aren't necessary.
----
-Changes in V8:
- - ???? add the explanatory comment to _add_sized().
- - drop "" in __atomic_{acquire, release}_fence().
- - code style fixes in atomic##prefix##_##op##_return(): indentation.
- - drop an unary_op argument ("+") for ATOMIC_OPS(and, and), ATOMIC_OPS( or,  or), ATOMIC_OPS(xor, xor)
-   and use "+" directly inside definition of ATOMIC_OPS().
- - drop c_op for ATOMIC_OPS(add, add, +) and ATOMIC_OPS(sub, add, -) as it is always "+" for now.
-   Just use "+" inside definition of ATOMIC_OPS().
- - drop size argument for ATOMIC_OP() defintions of atomic##prefix##_{xchg,cmpxchg}()
- - update the commit message.
+Changes in V8-V10:
+ - Nothing changed only rebase.
 ---
 Changes in V7:
- - drop relaxed version of atomic ops as they are not used.
- - update the commit message
- - code style fixes
- - refactor functions write_atomic(), add_sized() to be able to use #ifdef CONFIG_RISCV_32 ... #endif
-   for {write,read}q().
- - update ATOMIC_OPS to receive unary operator.
- - update the header on top of atomic-ops.h.
- - some minor movements of function inside atomic-ops.h header.
+ - update argument type of maddr_to_virt() function: unsigned long -> paddr_t
+ - rename argument of PFN_ORDER(): pfn -> pg.
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V6:
- - drop atomic##prefix##_{cmp}xchg_{release, aquire, relaxed} as they aren't used
-   by Xen
- - code style fixes.
- - %s/__asm__ __volatile__/asm volatile
- - add explanational comments.
- - move inclusion of "#include <asm-generic/atomic-ops.h>" further down in atomic.h
-   header.
+ - drop __virt_to_maddr() ( transform to macro ) and __maddr_to_virt ( rename to maddr_to_virt ).
+ - parenthesize va in definition of vmap_to_mfn().
+ - Code style fixes.
 ---
 Changes in V5:
- - fence.h changes were moved to separate patch as patches related to io.h and cmpxchg.h,
-   which are dependecies for this patch, also needed changes in fence.h
- - remove accessing of zero-length array
- - drops cast in write_atomic()
- - drop introduction of WRITE_ONCE() and READ_ONCE().
- - drop defines similar to pattern #define atomic_add_return_relaxed   atomic_add_return_relaxed
- - Xen code style fixes
- - move not RISC-V specific functions to asm-generic/atomics-ops.h
+ - update the comment around "struct domain *domain;" : zero -> NULL
+ - fix ident. for unsigned long val;
+ - put page_to_virt() and virt_to_page() close to each other.
+ - drop unnessary leading underscore
+ - drop a space before the comment: /* Count of uses of this frame as its current type. */
+ - drop comment about a page 'not as a shadow'. it is not necessary for RISC-V
 ---
 Changes in V4:
- - do changes related to the updates of [PATCH v3 13/34] xen/riscv: introduce cmpxchg.h
- - drop casts in read_atomic_size(), write_atomic(), add_sized()
- - tabs -> spaces
- - drop #ifdef CONFIG_SMP ... #endif in fence.ha as it is simpler to handle NR_CPUS=1
-   the same as NR_CPUS>1 with accepting less than ideal performance.
+ - update an argument name of PFN_ORDERN macros.
+ - drop pad at the end of 'struct page_info'.
+ - Change message -> subject in "Changes in V3"
+ - delete duplicated macros from riscv/mm.h
+ - fix identation in struct page_info
+ - align comment for PGC_ macros
+ - update definitions of domain_set_alloc_bitsize() and domain_clamp_alloc_bitsize()
+ - drop unnessary comments.
+ - s/BUG/BUG_ON("...")
+ - define __virt_to_maddr, __maddr_to_virt as stubs
+ - add inclusion of xen/mm-frame.h for mfn_x and others
+ - include "xen/mm.h" instead of "asm/mm.h" to fix compilation issues:
+	 In file included from arch/riscv/setup.c:7:
+	./arch/riscv/include/asm/mm.h:60:28: error: field 'list' has incomplete type
+	   60 |     struct page_list_entry list;
+	      |                            ^~~~
+	./arch/riscv/include/asm/mm.h:81:43: error: 'MAX_ORDER' undeclared here (not in a function)
+	   81 |                 unsigned long first_dirty:MAX_ORDER + 1;
+	      |                                           ^~~~~~~~~
+	./arch/riscv/include/asm/mm.h:81:31: error: bit-field 'first_dirty' width not an integer constant
+	   81 |                 unsigned long first_dirty:MAX_ORDER + 1;
+ - Define __virt_to_mfn() and __mfn_to_virt() using maddr_to_mfn() and mfn_to_maddr().
 ---
 Changes in V3:
-  - update the commit message
-  - add SPDX for fence.h
-  - code style fixes
-  - Remove /* TODO: ... */ for add_sized macros. It looks correct to me.
-  - re-order the patch
-  - merge to this patch fence.h
+ - update the commit title
+ - introduce DIRECTMAP_VIRT_START.
+ - drop changes related pfn_to_paddr() and paddr_to_pfn as they were remvoe in
+   [PATCH v2 32/39] xen/riscv: add minimal stuff to asm/page.h to build full Xen
+ - code style fixes.
+ - drop get_page_nr  and put_page_nr as they don't need for time being
+ - drop CONFIG_STATIC_MEMORY related things
+ - code style fixes
 ---
 Changes in V2:
- - Change an author of commit. I got this header from Bobby's old repo.
+ - define stub for arch_get_dma_bitsize(void)
 ---
- xen/arch/riscv/include/asm/atomic.h  | 280 +++++++++++++++++++++++++++
- xen/include/asm-generic/atomic-ops.h |  97 ++++++++++
- 2 files changed, 377 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/atomic.h
- create mode 100644 xen/include/asm-generic/atomic-ops.h
+ xen/arch/riscv/include/asm/mm.h | 240 ++++++++++++++++++++++++++++++++
+ xen/arch/riscv/mm.c             |   2 +-
+ xen/arch/riscv/setup.c          |   2 +-
+ 3 files changed, 242 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/atomic.h b/xen/arch/riscv/include/asm/atomic.h
-new file mode 100644
-index 0000000000..554bcc2087
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/atomic.h
-@@ -0,0 +1,280 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Taken and modified from Linux.
-+ *
-+ * The following changes were done:
-+ * - * atomic##prefix##_*xchg_*(atomic##prefix##_t *v, c_t n) were updated
-+ *     to use__*xchg_generic()
-+ * - drop casts in write_atomic() as they are unnecessary
-+ * - drop introduction of WRITE_ONCE() and READ_ONCE().
-+ *   Xen provides ACCESS_ONCE()
-+ * - remove zero-length array access in read_atomic()
-+ * - drop defines similar to pattern
-+ *   #define atomic_add_return_relaxed   atomic_add_return_relaxed
-+ * - move not RISC-V specific functions to asm-generic/atomics-ops.h
-+ * 
-+ * Copyright (C) 2007 Red Hat, Inc. All Rights Reserved.
-+ * Copyright (C) 2012 Regents of the University of California
-+ * Copyright (C) 2017 SiFive
-+ * Copyright (C) 2024 Vates SAS
-+ */
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 07c7a0abba..cc4a07a71c 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -3,11 +3,246 @@
+ #ifndef _ASM_RISCV_MM_H
+ #define _ASM_RISCV_MM_H
+ 
++#include <public/xen.h>
++#include <xen/bug.h>
++#include <xen/mm-frame.h>
++#include <xen/pdx.h>
++#include <xen/types.h>
 +
-+#ifndef _ASM_RISCV_ATOMIC_H
-+#define _ASM_RISCV_ATOMIC_H
+ #include <asm/page-bits.h>
+ 
+ #define pfn_to_paddr(pfn) ((paddr_t)(pfn) << PAGE_SHIFT)
+ #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
+ 
++#define paddr_to_pdx(pa)    mfn_to_pdx(maddr_to_mfn(pa))
++#define gfn_to_gaddr(gfn)   pfn_to_paddr(gfn_x(gfn))
++#define gaddr_to_gfn(ga)    _gfn(paddr_to_pfn(ga))
++#define mfn_to_maddr(mfn)   pfn_to_paddr(mfn_x(mfn))
++#define maddr_to_mfn(ma)    _mfn(paddr_to_pfn(ma))
++#define vmap_to_mfn(va)     maddr_to_mfn(virt_to_maddr((vaddr_t)(va)))
++#define vmap_to_page(va)    mfn_to_page(vmap_to_mfn(va))
 +
-+#include <xen/atomic.h>
-+
-+#include <asm/cmpxchg.h>
-+#include <asm/fence.h>
-+#include <asm/io.h>
-+#include <asm/system.h>
-+
-+void __bad_atomic_size(void);
-+
-+/*
-+ * Legacy from Linux kernel. For some reason they wanted to have ordered
-+ * read/write access. Thereby read* is used instead of read*_cpu()
-+ */
-+static always_inline void read_atomic_size(const volatile void *p,
-+                                           void *res,
-+                                           unsigned int size)
++static inline void *maddr_to_virt(paddr_t ma)
 +{
-+    switch ( size )
-+    {
-+    case 1: *(uint8_t *)res = readb(p); break;
-+    case 2: *(uint16_t *)res = readw(p); break;
-+    case 4: *(uint32_t *)res = readl(p); break;
-+#ifndef CONFIG_RISCV_32
-+    case 8: *(uint32_t *)res = readq(p); break;
-+#endif
-+    default: __bad_atomic_size(); break;
-+    }
++    BUG_ON("unimplemented");
++    return NULL;
 +}
 +
-+#define read_atomic(p) ({                                   \
-+    union { typeof(*(p)) val; char c[sizeof(*(p))]; } x_;   \
-+    read_atomic_size(p, x_.c, sizeof(*(p)));                \
-+    x_.val;                                                 \
-+})
++#define virt_to_maddr(va) ({ BUG_ON("unimplemented"); 0; })
 +
-+static always_inline void _write_atomic(volatile void *p,
-+                                       unsigned long x, unsigned int size)
++/* Convert between Xen-heap virtual addresses and machine frame numbers. */
++#define __virt_to_mfn(va)  mfn_x(maddr_to_mfn(virt_to_maddr(va)))
++#define __mfn_to_virt(mfn) maddr_to_virt(mfn_to_maddr(_mfn(mfn)))
++
++/*
++ * We define non-underscored wrappers for above conversion functions.
++ * These are overriden in various source files while underscored version
++ * remain intact.
++ */
++#define virt_to_mfn(va)     __virt_to_mfn(va)
++#define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
++
++struct page_info
 +{
-+    switch ( size )
-+    {
-+    case 1: writeb(x, p); break;
-+    case 2: writew(x, p); break;
-+    case 4: writel(x, p); break;
-+#ifndef CONFIG_RISCV_32
-+    case 8: writeq(x, p); break;
-+#endif
-+    default: __bad_atomic_size(); break;
-+    }
-+}
++    /* Each frame can be threaded onto a doubly-linked list. */
++    struct page_list_entry list;
 +
-+#define write_atomic(p, x)                              \
-+({                                                      \
-+    typeof(*(p)) x_ = (x);                              \
-+    _write_atomic(p, x_, sizeof(*(p)));                 \
-+})
++    /* Reference count and various PGC_xxx flags and fields. */
++    unsigned long count_info;
 +
-+static always_inline void _add_sized(volatile void *p,
-+                                     unsigned long x, unsigned int size)
++    /* Context-dependent fields follow... */
++    union {
++        /* Page is in use: ((count_info & PGC_count_mask) != 0). */
++        struct {
++            /* Type reference count and various PGT_xxx flags and fields. */
++            unsigned long type_info;
++        } inuse;
++
++        /* Page is on a free list: ((count_info & PGC_count_mask) == 0). */
++        union {
++            struct {
++                /*
++                 * Index of the first *possibly* unscrubbed page in the buddy.
++                 * One more bit than maximum possible order to accommodate
++                 * INVALID_DIRTY_IDX.
++                 */
++#define INVALID_DIRTY_IDX ((1UL << (MAX_ORDER + 1)) - 1)
++                unsigned long first_dirty:MAX_ORDER + 1;
++
++                /* Do TLBs need flushing for safety before next page use? */
++                bool need_tlbflush:1;
++
++#define BUDDY_NOT_SCRUBBING    0
++#define BUDDY_SCRUBBING        1
++#define BUDDY_SCRUB_ABORT      2
++                unsigned long scrub_state:2;
++            };
++
++            unsigned long val;
++        } free;
++    } u;
++
++    union {
++        /* Page is in use */
++        struct {
++            /* Owner of this page (NULL if page is anonymous). */
++            struct domain *domain;
++        } inuse;
++
++        /* Page is on a free list. */
++        struct {
++            /* Order-size of the free chunk this page is the head of. */
++            unsigned int order;
++        } free;
++    } v;
++
++    union {
++        /*
++         * Timestamp from 'TLB clock', used to avoid extra safety flushes.
++         * Only valid for: a) free pages, and b) pages with zero type count
++         */
++        uint32_t tlbflush_timestamp;
++    };
++};
++
++#define frame_table ((struct page_info *)FRAMETABLE_VIRT_START)
++
++/* PDX of the first page in the frame table. */
++extern unsigned long frametable_base_pdx;
++
++/* Convert between machine frame numbers and page-info structures. */
++#define mfn_to_page(mfn)                                            \
++    (frame_table + (mfn_to_pdx(mfn) - frametable_base_pdx))
++#define page_to_mfn(pg)                                             \
++    pdx_to_mfn((unsigned long)((pg) - frame_table) + frametable_base_pdx)
++
++static inline void *page_to_virt(const struct page_info *pg)
 +{
-+    switch ( size )
-+    {
-+    case 1:
-+    {
-+        volatile uint8_t *ptr = p;
-+        write_atomic(ptr, read_atomic(ptr) + x);
-+        break;
-+    }
-+    case 2:
-+    {
-+        volatile uint16_t *ptr = p;
-+        write_atomic(ptr, read_atomic(ptr) + x);
-+        break;
-+    }
-+    case 4:
-+    {
-+        volatile uint32_t *ptr = p;
-+        write_atomic(ptr, read_atomic(ptr) + x);
-+        break;
-+    }
-+#ifndef CONFIG_RISCV_32
-+    case 8:
-+    {
-+        volatile uint64_t *ptr = p;
-+        write_atomic(ptr, read_atomic(ptr) + x);
-+        break;
-+    }
-+#endif
-+    default: __bad_atomic_size(); break;
-+    }
++    return mfn_to_virt(mfn_x(page_to_mfn(pg)));
 +}
 +
-+#define add_sized(p, x)                                 \
-+({                                                      \
-+    typeof(*(p)) x_ = (x);                              \
-+    _add_sized(p, x_, sizeof(*(p)));                    \
-+})
-+
-+#define __atomic_acquire_fence() \
-+    asm volatile ( RISCV_ACQUIRE_BARRIER ::: "memory" )
-+
-+#define __atomic_release_fence() \
-+    asm volatile ( RISCV_RELEASE_BARRIER ::: "memory" )
-+
-+/*
-+ * First, the atomic ops that have no ordering constraints and therefor don't
-+ * have the AQ or RL bits set.  These don't return anything, so there's only
-+ * one version to worry about.
-+ */
-+#define ATOMIC_OP(op, asm_op, unary_op, asm_type, c_type, prefix)  \
-+static inline                                               \
-+void atomic##prefix##_##op(c_type i, atomic##prefix##_t *v) \
-+{                                                           \
-+    asm volatile (                                          \
-+        "   amo" #asm_op "." #asm_type " zero, %1, %0"      \
-+        : "+A" (v->counter)                                 \
-+        : "r" (unary_op i)                                  \
-+        : "memory" );                                       \
-+}                                                           \
-+
-+/*
-+ * Only CONFIG_GENERIC_ATOMIC64=y was ported to Xen that is the reason why
-+ * last argument for ATOMIC_OP isn't used.
-+ */
-+#define ATOMIC_OPS(op, asm_op, unary_op)                    \
-+        ATOMIC_OP (op, asm_op, unary_op, w, int,   )
-+
-+ATOMIC_OPS(add, add, +)
-+ATOMIC_OPS(sub, add, -)
-+ATOMIC_OPS(and, and, +)
-+ATOMIC_OPS( or,  or, +)
-+ATOMIC_OPS(xor, xor, +)
-+
-+#undef ATOMIC_OP
-+#undef ATOMIC_OPS
-+
-+#include <asm-generic/atomic-ops.h>
-+
-+/*
-+ * Atomic ops that have ordered variant.
-+ * There's two flavors of these: the arithmatic ops have both fetch and return
-+ * versions, while the logical ops only have fetch versions.
-+ */
-+#define ATOMIC_FETCH_OP(op, asm_op, unary_op, asm_type, c_type, prefix) \
-+static inline                                                       \
-+c_type atomic##prefix##_fetch_##op(c_type i, atomic##prefix##_t *v) \
-+{                                                                   \
-+    register c_type ret;                                            \
-+    asm volatile (                                                  \
-+        "   amo" #asm_op "." #asm_type ".aqrl  %1, %2, %0"          \
-+        : "+A" (v->counter), "=r" (ret)                             \
-+        : "r" (unary_op i)                                          \
-+        : "memory" );                                               \
-+    return ret;                                                     \
-+}
-+
-+#define ATOMIC_OP_RETURN(op, asm_op, c_op, unary_op, asm_type, c_type, prefix) \
-+static inline                                                           \
-+c_type atomic##prefix##_##op##_return(c_type i, atomic##prefix##_t *v)  \
-+{                                                                       \
-+    return atomic##prefix##_fetch_##op(i, v) c_op (unary_op i);         \
++/* Convert between Xen-heap virtual addresses and page-info structures. */
++static inline struct page_info *virt_to_page(const void *v)
++{
++    BUG_ON("unimplemented");
++    return NULL;
 +}
 +
 +/*
-+ * Only CONFIG_GENERIC_ATOMIC64=y was ported to Xen that is the reason why
-+ * last argument of ATOMIC_FETCH_OP, ATOMIC_OP_RETURN isn't used.
++ * Common code requires get_page_type and put_page_type.
++ * We don't care about typecounts so we just do the minimum to make it
++ * happy.
 + */
-+#define ATOMIC_OPS(op, asm_op, unary_op)                        \
-+        ATOMIC_FETCH_OP( op, asm_op,    unary_op, w, int,   )   \
-+        ATOMIC_OP_RETURN(op, asm_op, +, unary_op, w, int,   )
-+
-+ATOMIC_OPS(add, add, +)
-+ATOMIC_OPS(sub, add, -)
-+
-+#undef ATOMIC_OPS
-+
-+#define ATOMIC_OPS(op, asm_op) \
-+        ATOMIC_FETCH_OP(op, asm_op, +, w, int,   )
-+
-+ATOMIC_OPS(and, and)
-+ATOMIC_OPS( or,  or)
-+ATOMIC_OPS(xor, xor)
-+
-+#undef ATOMIC_OPS
-+
-+#undef ATOMIC_FETCH_OP
-+#undef ATOMIC_OP_RETURN
-+
-+/* This is required to provide a full barrier on success. */
-+static inline int atomic_add_unless(atomic_t *v, int a, int u)
++static inline int get_page_type(struct page_info *page, unsigned long type)
 +{
-+    int prev, rc;
-+
-+    asm volatile (
-+        "0: lr.w     %[p],  %[c]\n"
-+        "   beq      %[p],  %[u], 1f\n"
-+        "   add      %[rc], %[p], %[a]\n"
-+        "   sc.w.aqrl  %[rc], %[rc], %[c]\n"
-+        "   bnez     %[rc], 0b\n"
-+        "1:\n"
-+        : [p] "=&r" (prev), [rc] "=&r" (rc), [c] "+A" (v->counter)
-+        : [a] "r" (a), [u] "r" (u)
-+        : "memory");
-+    return prev;
++    return 1;
 +}
 +
-+static inline int atomic_sub_if_positive(atomic_t *v, int offset)
++static inline void put_page_type(struct page_info *page)
 +{
-+    int prev, rc;
++}
 +
-+    asm volatile (
-+        "0: lr.w     %[p],  %[c]\n"
-+        "   sub      %[rc], %[p], %[o]\n"
-+        "   bltz     %[rc], 1f\n"
-+        "   sc.w.aqrl  %[rc], %[rc], %[c]\n"
-+        "   bnez     %[rc], 0b\n"
-+        "1:\n"
-+        : [p] "=&r" (prev), [rc] "=&r" (rc), [c] "+A" (v->counter)
-+        : [o] "r" (offset)
-+        : "memory" );
-+    return prev - offset;
++static inline void put_page_and_type(struct page_info *page)
++{
++    put_page_type(page);
++    put_page(page);
 +}
 +
 +/*
-+ * atomic_{cmp,}xchg is required to have exactly the same ordering semantics as
-+ * {cmp,}xchg and the operations that return.
++ * RISC-V does not have an M2P, but common code expects a handful of
++ * M2P-related defines and functions. Provide dummy versions of these.
 + */
-+#define ATOMIC_OP(c_t, prefix)                                  \
-+static inline                                                   \
-+c_t atomic##prefix##_xchg(atomic##prefix##_t *v, c_t n)         \
-+{                                                               \
-+    return __xchg(&v->counter, n, sizeof(c_t));                 \
-+}                                                               \
-+static inline                                                   \
-+c_t atomic##prefix##_cmpxchg(atomic##prefix##_t *v, c_t o, c_t n) \
-+{                                                               \
-+    return __cmpxchg(&v->counter, o, n, sizeof(c_t));           \
++#define INVALID_M2P_ENTRY        (~0UL)
++#define SHARED_M2P_ENTRY         (~0UL - 1UL)
++#define SHARED_M2P(_e)           ((_e) == SHARED_M2P_ENTRY)
++
++#define set_gpfn_from_mfn(mfn, pfn) do { (void)(mfn), (void)(pfn); } while (0)
++#define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
++
++#define PDX_GROUP_SHIFT (PAGE_SHIFT + VPN_BITS)
++
++static inline unsigned long domain_get_maximum_gpfn(struct domain *d)
++{
++    BUG_ON("unimplemented");
++    return 0;
 +}
 +
-+#define ATOMIC_OPS() \
-+    ATOMIC_OP(int,   )
-+
-+ATOMIC_OPS()
-+
-+#undef ATOMIC_OPS
-+#undef ATOMIC_OP
-+
-+#endif /* _ASM_RISCV_ATOMIC_H */
++static inline long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg)
++{
++    BUG_ON("unimplemented");
++    return 0;
++}
 +
 +/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
++ * On RISCV, all the RAM is currently direct mapped in Xen.
++ * Hence return always true.
 + */
-diff --git a/xen/include/asm-generic/atomic-ops.h b/xen/include/asm-generic/atomic-ops.h
-new file mode 100644
-index 0000000000..98dd907942
---- /dev/null
-+++ b/xen/include/asm-generic/atomic-ops.h
-@@ -0,0 +1,97 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
++{
++    return true;
++}
++
++#define PG_shift(idx)   (BITS_PER_LONG - (idx))
++#define PG_mask(x, idx) (x ## UL << PG_shift(idx))
++
++#define PGT_none          PG_mask(0, 1)  /* no special uses of this page   */
++#define PGT_writable_page PG_mask(1, 1)  /* has writable mappings?         */
++#define PGT_type_mask     PG_mask(1, 1)  /* Bits 31 or 63.                 */
++
++/* Count of uses of this frame as its current type. */
++#define PGT_count_width   PG_shift(2)
++#define PGT_count_mask    ((1UL << PGT_count_width) - 1)
++
 +/*
-+ * The header provides default implementations for every xen/atomic.h-provided
-+ * forward inline declaration that can be synthesized from other atomic
-+ * functions or being created from scratch.
++ * Page needs to be scrubbed. Since this bit can only be set on a page that is
++ * free (i.e. in PGC_state_free) we can reuse PGC_allocated bit.
 + */
-+#ifndef _ASM_GENERIC_ATOMIC_OPS_H_
-+#define _ASM_GENERIC_ATOMIC_OPS_H_
++#define _PGC_need_scrub   _PGC_allocated
++#define PGC_need_scrub    PGC_allocated
 +
-+#include <xen/atomic.h>
-+#include <xen/lib.h>
++/* Cleared when the owning guest 'frees' this page. */
++#define _PGC_allocated    PG_shift(1)
++#define PGC_allocated     PG_mask(1, 1)
++/* Page is Xen heap? */
++#define _PGC_xen_heap     PG_shift(2)
++#define PGC_xen_heap      PG_mask(1, 2)
++/* Page is broken? */
++#define _PGC_broken       PG_shift(7)
++#define PGC_broken        PG_mask(1, 7)
++/* Mutually-exclusive page states: { inuse, offlining, offlined, free }. */
++#define PGC_state         PG_mask(3, 9)
++#define PGC_state_inuse   PG_mask(0, 9)
++#define PGC_state_offlining PG_mask(1, 9)
++#define PGC_state_offlined PG_mask(2, 9)
++#define PGC_state_free    PG_mask(3, 9)
++#define page_state_is(pg, st) (((pg)->count_info&PGC_state) == PGC_state_##st)
 +
-+#ifndef ATOMIC_READ
-+static inline int atomic_read(const atomic_t *v)
++/* Count of references to this frame. */
++#define PGC_count_width   PG_shift(9)
++#define PGC_count_mask    ((1UL << PGC_count_width) - 1)
++
++#define _PGC_extra        PG_shift(10)
++#define PGC_extra         PG_mask(1, 10)
++
++#define is_xen_heap_page(page) ((page)->count_info & PGC_xen_heap)
++#define is_xen_heap_mfn(mfn) \
++    (mfn_valid(mfn) && is_xen_heap_page(mfn_to_page(mfn)))
++
++#define is_xen_fixed_mfn(mfn)                                   \
++    ((mfn_to_maddr(mfn) >= virt_to_maddr((vaddr_t)_start)) &&   \
++     (mfn_to_maddr(mfn) <= virt_to_maddr((vaddr_t)_end - 1)))
++
++#define page_get_owner(p)    (p)->v.inuse.domain
++#define page_set_owner(p, d) ((p)->v.inuse.domain = (d))
++
++/* TODO: implement */
++#define mfn_valid(mfn) ({ (void)(mfn); 0; })
++
++#define domain_set_alloc_bitsize(d) ((void)(d))
++#define domain_clamp_alloc_bitsize(d, b) ((void)(d), (b))
++
++#define PFN_ORDER(pg) ((pg)->v.free.order)
++
+ extern unsigned char cpu0_boot_stack[];
+ 
+ void setup_initial_pagetables(void);
+@@ -20,4 +255,9 @@ unsigned long calc_phys_offset(void);
+ 
+ void turn_on_mmu(unsigned long ra);
+ 
++static inline unsigned int arch_get_dma_bitsize(void)
 +{
-+    return ACCESS_ONCE(v->counter);
++    return 32; /* TODO */
 +}
-+#endif
 +
-+#ifndef _ATOMIC_READ
-+static inline int _atomic_read(atomic_t v)
-+{
-+    return v.counter;
-+}
-+#endif
-+
-+#ifndef ATOMIC_SET
-+static inline void atomic_set(atomic_t *v, int i)
-+{
-+    ACCESS_ONCE(v->counter) = i;
-+}
-+#endif
-+
-+#ifndef _ATOMIC_SET
-+static inline void _atomic_set(atomic_t *v, int i)
-+{
-+    v->counter = i;
-+}
-+#endif
-+
-+#ifndef ATOMIC_SUB_AND_TEST
-+static inline int atomic_sub_and_test(int i, atomic_t *v)
-+{
-+    return atomic_sub_return(i, v) == 0;
-+}
-+#endif
-+
-+#ifndef ATOMIC_INC_AND_TEST
-+static inline int atomic_inc_and_test(atomic_t *v)
-+{
-+    return atomic_add_return(1, v) == 0;
-+}
-+#endif
-+
-+#ifndef ATOMIC_INC
-+static inline void atomic_inc(atomic_t *v)
-+{
-+    atomic_add(1, v);
-+}
-+#endif
-+
-+#ifndef ATOMIC_INC_RETURN
-+static inline int atomic_inc_return(atomic_t *v)
-+{
-+    return atomic_add_return(1, v);
-+}
-+#endif
-+
-+#ifndef ATOMIC_DEC
-+static inline void atomic_dec(atomic_t *v)
-+{
-+    atomic_sub(1, v);
-+}
-+#endif
-+
-+#ifndef ATOMIC_DEC_RETURN
-+static inline int atomic_dec_return(atomic_t *v)
-+{
-+    return atomic_sub_return(1, v);
-+}
-+#endif
-+
-+#ifndef ATOMIC_DEC_AND_TEST
-+static inline int atomic_dec_and_test(atomic_t *v)
-+{
-+    return atomic_sub_return(1, v) == 0;
-+}
-+#endif
-+
-+#ifndef ATOMIC_ADD_NEGATIVE
-+static inline int atomic_add_negative(int i, atomic_t *v)
-+{
-+    return atomic_add_return(i, v) < 0;
-+}
-+#endif
-+
-+#endif /* _ASM_GENERIC_ATOMIC_OPS_H_ */
+ #endif /* _ASM_RISCV_MM_H */
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 053f043a3d..fe3a43be20 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -5,12 +5,12 @@
+ #include <xen/init.h>
+ #include <xen/kernel.h>
+ #include <xen/macros.h>
++#include <xen/mm.h>
+ #include <xen/pfn.h>
+ 
+ #include <asm/early_printk.h>
+ #include <asm/csr.h>
+ #include <asm/current.h>
+-#include <asm/mm.h>
+ #include <asm/page.h>
+ #include <asm/processor.h>
+ 
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 6593f601c1..98a94c4c48 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -2,9 +2,9 @@
+ 
+ #include <xen/compile.h>
+ #include <xen/init.h>
++#include <xen/mm.h>
+ 
+ #include <asm/early_printk.h>
+-#include <asm/mm.h>
+ 
+ /* Xen stack for bringing up the first CPU. */
+ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
 -- 
 2.45.0
 
