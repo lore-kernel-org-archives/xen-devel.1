@@ -4,33 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B20C25B74
-	for <xen-devel@archiver.kernel.org>; Sat, 18 May 2024 10:18:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.724728.1129880 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1308C25B74
+	for <xen-devel@archiver.kernel.org>; Sat, 18 May 2024 11:02:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.724750.1129947 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s8H8f-0005yE-2S; Sat, 18 May 2024 10:18:05 +0000
+	id 1s8Hpl-0007Jj-Fo; Sat, 18 May 2024 11:02:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 724728.1129880; Sat, 18 May 2024 10:18:05 +0000
+Received: by outflank-mailman (output) from mailman id 724750.1129947; Sat, 18 May 2024 11:02:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s8H8e-0005y7-WB; Sat, 18 May 2024 10:18:04 +0000
-Received: by outflank-mailman (input) for mailman id 724728;
- Sat, 18 May 2024 10:18:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s8Hpl-0007Ha-8C; Sat, 18 May 2024 11:02:37 +0000
+Received: by outflank-mailman (input) for mailman id 724750;
+ Sat, 18 May 2024 11:02:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v3Z6=MV=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1s8H8d-0005y1-Pm
- for xen-devel@lists.xenproject.org; Sat, 18 May 2024 10:18:03 +0000
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [2607:f8b0:4864:20::330])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e8183941-14ff-11ef-909f-e314d9c70b13;
- Sat, 18 May 2024 12:18:02 +0200 (CEST)
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-6f0ef6bee72so590521a34.0
- for <xen-devel@lists.xenproject.org>; Sat, 18 May 2024 03:18:02 -0700 (PDT)
+ id 1s8Hpj-0006PW-SN
+ for xen-devel@lists.xenproject.org; Sat, 18 May 2024 11:02:35 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2123da9d-1506-11ef-b4bb-af5377834399;
+ Sat, 18 May 2024 13:02:34 +0200 (CEST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-420104e5336so5201145e9.1
+ for <xen-devel@lists.xenproject.org>; Sat, 18 May 2024 04:02:34 -0700 (PDT)
+Received: from lab.home
+ (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
+ [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3502b8969fbsm23777282f8f.37.2024.05.18.04.02.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 May 2024 04:02:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,74 +49,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e8183941-14ff-11ef-909f-e314d9c70b13
+X-Inumbo-ID: 2123da9d-1506-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716027481; x=1716632281; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1716030153; x=1716634953; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=R1MdbXUXeDvckJAbagFPWhg2rYINBHeuo1GegK8vYnw=;
-        b=lTiJPtmRWylMa3ZiQmzxWrSQaNN7uFNEzLBWbST6wJQjyIdT0AMst0NLNlgfl1ucc0
-         ZBbUzCqylI58rA53ghRIc49rW/dZDdDaAEyqOqsRzcOaCppZ4iazxAcu/UzcfkOLchT0
-         keKELxapqQ5fbXbK+MGQTGK8B99ZX/M6O0atm5Ccj45DZQCzg5cqzOKWFoiGKibgxedr
-         yW7SrMlennAbEghdvK6VXXg2dryiEj9cDi4TCRm8lHYnLHeC8ljAmiIp0hYFpXFaMoa6
-         prIZEoRxFOzwDwerKdWGTmDTLcpAZlypWJLk1QFLGRDaiarvBb3AdYV9wAHxAsvY7nfy
-         m74A==
+        bh=CZx7e4I8f24AmBOZ73vCNLclq5iufdJNqbBIJFjDxwY=;
+        b=MpZ2gj2nWq0O6DAu4jX0D5Y2ONcuKIHJdvbOoT7OAR1FtOgqJt1rYjzi4B3Xqc1yB6
+         ayubHyvZbJUdFQQPzTw/sR63pwdz5S1tpSycvgknGIxgw6rCAOZnOy6PTyAbCEQKFiOn
+         RvRIpzI0D+kJc8dkgphYfHnNDCr+q3fh0ss7xfFFrIHsJOY1AUXwQdF2V0wRebyg1Bdw
+         E4CQANVArrsgkXGAEFKrnU/E4W7DuwmkpovyydON0PlN9QIrLqi2e2ktOlMvvMuaY3M4
+         q0FKQ3Xq7uMGjr2fAsreOGP5HIEQZmUToHmbxCRVVh577rY9zN1VSd1u3dJ203opbUgH
+         Z3qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716027481; x=1716632281;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1716030153; x=1716634953;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=R1MdbXUXeDvckJAbagFPWhg2rYINBHeuo1GegK8vYnw=;
-        b=qLPiLNiDLOiiK4hcFs5dzBtXReLuu9VPeuA08ScgHiIFlI4vzQJ/sx6CGFg7YL36jY
-         sXNMLh177AigSr75QqTq44IiyRGN8Yg4eD3AtHTgJ1n0nJHjB7kvfLpiS5TWl9jzxvSL
-         bYXnlRyWohnlBfOqGcDrhGYhSffR4v/B2gLqwvioc91FseClI8JrA8ovo4BOX1g3S+yF
-         DWKIXgz4Ud/xxS3qyqQLi4epcyz9Lz1UUiVWYexAM3N4+WT5cDAFHycxtvbVtMaZ418r
-         NyBr2GR49zz5noEgsLs9RTHAmSwnKjdVez/cX35JK6gFa1w+AZyQbbBur9NDvwkU3M+u
-         4EWw==
-X-Gm-Message-State: AOJu0YyJ8PEiMldaJzH0ju+ajj1XFJueh8PNIstrxk2ZNqLljZhlRoOV
-	ml9eHL83rcGUrPMLICIowCSC3aOn5bimal3MxPhquOWLsFxAncWkUdv8E9nwBwsR6Wq/hkn/ZAv
-	3X+XMsXLgPHJV1WwWjG6/F7XnmP0=
-X-Google-Smtp-Source: AGHT+IHSpKUbM3Pc0cE7hQveNZdZbphdVrAuIJP9IQ1rBQuopVnrYRTYxVcI8uh3Dxn6FNHyUv4c6aAJ5vU23XyfI0U=
-X-Received: by 2002:a05:6871:7246:b0:245:407f:96a6 with SMTP id
- 586e51a60fabf-245408edb80mr8272524fac.36.1716027480867; Sat, 18 May 2024
- 03:18:00 -0700 (PDT)
+        bh=CZx7e4I8f24AmBOZ73vCNLclq5iufdJNqbBIJFjDxwY=;
+        b=PiW1AkU29a61ho/LQ9a5mH/hC7oS3o5k24vTM9LoE4HWVGZmUMC0Ld8JfVA0TYi8Hp
+         G9iDGZJncF74fvaiZqwaa4lCWbS8FIDqENvs5eEnYk0Bhiozc5ZKf3u0MlYemcgt5hfJ
+         LhtvOgKbYdGAa/3PiBplHLWy48Kw/gMeQCY0kUw9ln/QvN7ju1Wm76gJMCaC3Js2dAq/
+         +iSpEjVuKguruy3XhToEGUhN30QiUp/9b/T1eFA8QYA4njuNQxuCclyQhk/ZiLFfbP4G
+         n/da1g6BuWpeIzOsExw/3hldI6zHipUbXYxjRJ8YmjR0BBb6sVxYcz4V30FAFmBA8tm5
+         xWpA==
+X-Gm-Message-State: AOJu0Yx1FUbQKrlPt60U0/qi9KXLwvyrvu8NkWtpEXiuEQP8NiJas2tf
+	EhQ/BdwOBaYIdPMPOqXFMTTaHDLt+zZ/FZGkAKMHqU37F41pgzR+5n8Hfw==
+X-Google-Smtp-Source: AGHT+IHsRTfJKAJsoyxs2Lhvbc+XDn+/W7DQC6ZXTI8u/8PQVwkGsEuGgUjdy6Bw0awD8RmAgnXg6w==
+X-Received: by 2002:a05:600c:1c16:b0:418:bdcd:e59b with SMTP id 5b1f17b1804b1-420e19d5fa3mr13856515e9.7.1716030153510;
+        Sat, 18 May 2024 04:02:33 -0700 (PDT)
+From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
+	Christian Lindig <christian.lindig@citrix.com>,
+	David Scott <dave@recoil.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Christian Lindig <christian.lindig@cloud.com>
+Subject: [PATCH for-4.19? v4 6/6] tools/ocaml: Add altp2m_count parameter
+Date: Sat, 18 May 2024 11:02:17 +0000
+Message-Id: <9ae1893beea2bb043413c014bd4adf6cbdab0aa7.1716029860.git.w1benny@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1716029860.git.w1benny@gmail.com>
+References: <cover.1716029860.git.w1benny@gmail.com>
 MIME-Version: 1.0
-References: <cover.1715858136.git.w1benny@gmail.com> <b6bf7e5ba0deab4550b9d15c327015fe7d94d463.1715858136.git.w1benny@gmail.com>
- <CABfawhmB+XND75WPJ_MjORyjUiV_h_NNmJQx2BaZ5WRmzkX79A@mail.gmail.com>
-In-Reply-To: <CABfawhmB+XND75WPJ_MjORyjUiV_h_NNmJQx2BaZ5WRmzkX79A@mail.gmail.com>
-From: =?UTF-8?Q?Petr_Bene=C5=A1?= <w1benny@gmail.com>
-Date: Sat, 18 May 2024 12:17:49 +0200
-Message-ID: <CAKBKdXh7rQ1x8vRZkXw1wC8M64Qk82mmz66XEa2gjjCZ+m7Arg@mail.gmail.com>
-Subject: Re: [PATCH for-4.19? v3 4/6] x86: Make the maximum number of altp2m
- views configurable
-To: Tamas K Lengyel <tamas@tklengyel.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Alexandru Isaila <aisaila@bitdefender.com>, 
-	Petre Pircalabu <ppircalabu@bitdefender.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, May 18, 2024 at 3:18=E2=80=AFAM Tamas K Lengyel <tamas@tklengyel.co=
-m> wrote:
->
-> > -        ap2m =3D array_access_nospec(d->arch.altp2m_p2m, altp2m_idx);
-> > +        ap2m =3D d->arch.altp2m_p2m[altp2m_idx];
->
-> Why is it no longer necessary to use array_access_nospec?
->
-> Tamas
+From: Petr Beneš <w1benny@gmail.com>
 
-I was under the impression that when the domain_create guarantees the
-length of the array, and before each access to the altp2m_p2m there is
-an explicit check if idx is within bounds of nr_altp2m, that the
-array_access_nospec is not needed anymore. But apparently I
-misunderstood how speculative execution works, when I now read about
-it.
+Allow developers using the OCaml bindings to set the altp2m_count parameter.
 
-I'll put it back.
+Signed-off-by: Petr Beneš <w1benny@gmail.com>
+Acked-by: Christian Lindig <christian.lindig@cloud.com>
+---
+ tools/ocaml/libs/xc/xenctrl.ml      |  1 +
+ tools/ocaml/libs/xc/xenctrl.mli     |  1 +
+ tools/ocaml/libs/xc/xenctrl_stubs.c | 11 +++++++----
+ 3 files changed, 9 insertions(+), 4 deletions(-)
 
-P.
+diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
+index 55923857ec..dfb3d331c9 100644
+--- a/tools/ocaml/libs/xc/xenctrl.ml
++++ b/tools/ocaml/libs/xc/xenctrl.ml
+@@ -85,6 +85,7 @@ type domctl_create_config =
+     max_grant_frames: int;
+     max_maptrack_frames: int;
+     max_grant_version: int;
++    altp2m_count: int;
+     vmtrace_buf_kb: int32;
+     cpupool_id: int32;
+     arch: arch_domainconfig;
+diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
+index 9b4b45db3a..ff0e309c56 100644
+--- a/tools/ocaml/libs/xc/xenctrl.mli
++++ b/tools/ocaml/libs/xc/xenctrl.mli
+@@ -77,6 +77,7 @@ type domctl_create_config = {
+   max_grant_frames: int;
+   max_maptrack_frames: int;
+   max_grant_version: int;
++  altp2m_count: int;
+   vmtrace_buf_kb: int32;
+   cpupool_id: int32;
+   arch: arch_domainconfig;
+diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
+index 2b6d3c09df..1f544cd2e4 100644
+--- a/tools/ocaml/libs/xc/xenctrl_stubs.c
++++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
+@@ -210,9 +210,10 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ #define VAL_MAX_GRANT_FRAMES    Field(config, 6)
+ #define VAL_MAX_MAPTRACK_FRAMES Field(config, 7)
+ #define VAL_MAX_GRANT_VERSION   Field(config, 8)
+-#define VAL_VMTRACE_BUF_KB      Field(config, 9)
+-#define VAL_CPUPOOL_ID          Field(config, 10)
+-#define VAL_ARCH                Field(config, 11)
++#define VAL_ALTP2M_COUNT        Field(config, 9)
++#define VAL_VMTRACE_BUF_KB      Field(config, 10)
++#define VAL_CPUPOOL_ID          Field(config, 11)
++#define VAL_ARCH                Field(config, 12)
+
+ 	uint32_t domid = Int_val(wanted_domid);
+ 	uint64_t vmtrace_size = Int32_val(VAL_VMTRACE_BUF_KB);
+@@ -230,6 +231,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ 		.max_maptrack_frames = Int_val(VAL_MAX_MAPTRACK_FRAMES),
+ 		.grant_opts =
+ 		    XEN_DOMCTL_GRANT_version(Int_val(VAL_MAX_GRANT_VERSION)),
++		.nr_altp2m = Int_val(VAL_ALTP2M_COUNT),
+ 		.vmtrace_size = vmtrace_size,
+ 		.cpupool_id = Int32_val(VAL_CPUPOOL_ID),
+ 	};
+@@ -257,7 +259,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ #if defined(__i386__) || defined(__x86_64__)
+
+ 		/* Quick & dirty check for ABI changes. */
+-		BUILD_BUG_ON(sizeof(cfg) != 64);
++		BUILD_BUG_ON(sizeof(cfg) != 68);
+
+         /* Mnemonics for the named fields inside xen_x86_arch_domainconfig */
+ #define VAL_EMUL_FLAGS          Field(arch_domconfig, 0)
+@@ -288,6 +290,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ #undef VAL_ARCH
+ #undef VAL_CPUPOOL_ID
+ #undef VAL_VMTRACE_BUF_KB
++#undef VAL_ALTP2M_COUNT
+ #undef VAL_MAX_GRANT_VERSION
+ #undef VAL_MAX_MAPTRACK_FRAMES
+ #undef VAL_MAX_GRANT_FRAMES
+--
+2.34.1
+
 
