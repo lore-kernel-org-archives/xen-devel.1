@@ -4,32 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96DB9C25B79
-	for <xen-devel@archiver.kernel.org>; Mon, 20 May 2024 14:34:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.726172.1130414 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB30C04FFE
+	for <xen-devel@archiver.kernel.org>; Mon, 20 May 2024 14:53:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.726185.1130434 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s945R-0003GK-Uw; Mon, 20 May 2024 14:34:01 +0000
+	id 1s94NU-00077X-Go; Mon, 20 May 2024 14:52:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 726172.1130414; Mon, 20 May 2024 14:34:01 +0000
+Received: by outflank-mailman (output) from mailman id 726185.1130434; Mon, 20 May 2024 14:52:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s945R-0003GC-Re; Mon, 20 May 2024 14:34:01 +0000
-Received: by outflank-mailman (input) for mailman id 726172;
- Mon, 20 May 2024 14:34:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+3cx=MX=solinno.co.uk=leigh@srs-se1.protection.inumbo.net>)
- id 1s945Q-0003G6-1O
- for xen-devel@lists.xenproject.org; Mon, 20 May 2024 14:34:00 +0000
-Received: from doppler.solinno.uk (doppler.solinno.uk [81.2.106.178])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fd81f8d0-16b5-11ef-b4bb-af5377834399;
- Mon, 20 May 2024 16:33:57 +0200 (CEST)
-Received: from mail.solinno.uk (localhost [127.0.0.1])
- by doppler.solinno.uk (Postfix) with ESMTP id 922B38006F;
- Mon, 20 May 2024 15:33:56 +0100 (BST)
+	id 1s94NU-00077Q-E0; Mon, 20 May 2024 14:52:40 +0000
+Received: by outflank-mailman (input) for mailman id 726185;
+ Mon, 20 May 2024 14:52:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jwTB=MX=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
+ id 1s94NT-00077K-AB
+ for xen-devel@lists.xenproject.org; Mon, 20 May 2024 14:52:39 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2412::600])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 98e3604c-16b8-11ef-909f-e314d9c70b13;
+ Mon, 20 May 2024 16:52:37 +0200 (CEST)
+Received: from SA9PR10CA0010.namprd10.prod.outlook.com (2603:10b6:806:a7::15)
+ by CY8PR12MB7265.namprd12.prod.outlook.com (2603:10b6:930:57::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.35; Mon, 20 May
+ 2024 14:52:31 +0000
+Received: from SA2PEPF00003F66.namprd04.prod.outlook.com
+ (2603:10b6:806:a7:cafe::a2) by SA9PR10CA0010.outlook.office365.com
+ (2603:10b6:806:a7::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36 via Frontend
+ Transport; Mon, 20 May 2024 14:52:31 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SA2PEPF00003F66.mail.protection.outlook.com (10.167.248.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7611.14 via Frontend Transport; Mon, 20 May 2024 14:52:30 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 20 May
+ 2024 09:52:28 -0500
+Received: from [172.31.100.92] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Mon, 20 May 2024 09:52:26 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,146 +61,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd81f8d0-16b5-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=solinno.co.uk;
-	s=mail; t=1716215636;
-	bh=umNSVV7br+LWKfpTsCOsdtnYlHjj/kq7PBIz0k7y5gM=;
-	h=Date:From:To:Cc:Subject:From;
-	b=g0q7NgJmLs1wkcowodrDQ9+3ZDBeSjCIzLXEkKc49Lijx2vkEr9VMOerwi3p3u2wc
-	 AbETm2LaYC+JFh9UzVEf2QNUr0o8WjOZs6bQE5K3ZBD/kV1dpKE3fRnYEtFweuEU8M
-	 Td3W12JjWyp/Vbz7JQtdD9JRuY+cDxjLan0SLUhY=
+X-Inumbo-ID: 98e3604c-16b8-11ef-909f-e314d9c70b13
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RjwTV1r2oOKd9W230ry/OCXCdEHzeoV3ktYpD5DPQXWBMj+FiEx0/LFPryhWHkjebjovBqYKI+BhRIXiGgtUxtqC34HXspI9/jJv1Nf6RCrLb4s4yHVlU6ibygf/+zxI8RSVVrElrZ0dHUCYmXzB0Sp/mdnY2uNmA9vt6Rz6vMNGcUPxFYRmpPLJwILGThGBDdcu/9CGH0nRIVMSLCp43RZOxB2gnwxxG7kuKM/xszGYw0lp7wmX9NcsI/EqH0BfuwJkZ2VkqeQPdoR44Ve5t0dEn21ZQ0lsUjTdWBOhdz/6hgMgEuOGXVf5dIr4DXDzP3iYQaTLyHqJtnglCwVjwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EUZTRuRZpTJvKvnJre3jqWAN7n3G4U+8+LDtO2FmSXo=;
+ b=JwbcwpY0yNV41wWCK8W10352XKsymvanbe42ZMXjC5iJKO3S+AJBkjTbACBHxZusGBa3HHrlWzwvtfnNHKgPaNTO5le/OysR7fc09inSr+Mxm6TVgIFyG2UWr7dc/Qhj/Uv8iUVP4p+CR/Hp152H34hPHIIILnIz5o/D4eguS7j32SBoFSULCOi9G0o2VbR69lr40ypwK6+hsDNhYzL5wA/MQZhYEX1aEh442wLr80ZtZVN7kAaRLOkIAIiomQzrnahPZzdrTCdMOV+YT03sbTyZuPffy2dkzlBqLo1nB3uRotfEbiQtVPdn/L8BCkDcX8A7nJP3HMnV2iCzD8vPkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EUZTRuRZpTJvKvnJre3jqWAN7n3G4U+8+LDtO2FmSXo=;
+ b=bSiKOKgOoYaHwLN0CPcfUYQC3Jn+tafi7Q6wRothYCSdYkaYx8a2t38WmyMycJun45k2nTtj559a6iavZFaGkV9IVerhP1U09KePWLiZJ6TaeprSyk4RWNMGhyG0BEprKqBmEM5xF2MPPwe0o8MVyaA/cfz2sB+aSDUvDNoR5Fs=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <86c91b57-68b4-4271-87ec-b80525ed3373@amd.com>
+Date: Mon, 20 May 2024 22:52:25 +0800
 MIME-Version: 1.0
-Date: Mon, 20 May 2024 15:33:56 +0100
-From: Leigh Brown <leigh@solinno.co.uk>
-To: Xen Devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk
- <jandryuk@gmail.com>
-Subject: xl list -l aborts with double free error with vlan patches
-Message-ID: <0d8fbde01bedf97dcd7540ceea6c42ab@solinno.co.uk>
-X-Sender: leigh@solinno.co.uk
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/4] xen/arm/static-shmem: Static-shmem should be
+ direct-mapped for direct-mapped domains
+To: Michal Orzel <michal.orzel@amd.com>, <xen-devel@lists.xenproject.org>,
+	Luca Fancellu <Luca.Fancellu@arm.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+References: <20240517032156.1490515-1-xin.wang2@amd.com>
+ <20240517032156.1490515-2-xin.wang2@amd.com>
+ <ee20798f-a459-492a-a7a1-308472878fe1@amd.com>
+Content-Language: en-US
+From: Henry Wang <xin.wang2@amd.com>
+In-Reply-To: <ee20798f-a459-492a-a7a1-308472878fe1@amd.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: None (SATLEXMB03.amd.com: xin.wang2@amd.com does not designate
+ permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F66:EE_|CY8PR12MB7265:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5f25c36-c727-45b3-0d66-08dc78dc798d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230031|1800799015|82310400017|376005|36860700004;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?eFE0bDlmUUo0ajlzSFd5SWd4VUxTeE0vWkFMd0pLWW8veVlCazQzYkVmUTVG?=
+ =?utf-8?B?K2x2dWNROTlZZE8zak9DM1daSUtSYkpZOHlGUEorWkJOZzhhT3hBWDRrQ3lz?=
+ =?utf-8?B?ZGhxcExEQlNmRklIakdQc3d2V090T1dsNWd6YklaR1ZPMXlrSUloSkF1MFg5?=
+ =?utf-8?B?aVZTWTNZN3A2a1lpV1JsTWt2bDFPWHpFM0svZWZBbVlvN250c3d1ekdLUEpZ?=
+ =?utf-8?B?Ynh0U2NxWEZtRWhPYkc2RjRQTnFseVlhQmtIMUdWNEYrVUZaYkFqbEk1U1BQ?=
+ =?utf-8?B?UjZrRlg4SnJjQnVYR2hIL3JZS0t1NktXcDhRV3JsaUtTL3VURWdXYUgwbG5W?=
+ =?utf-8?B?TlpnU1ZzajVXN3hqMUtLNXRmRFVOdHNrMGgvU01UN0Q4R05SUmc3Q3g4ZTcv?=
+ =?utf-8?B?cXhLMzQraEllZm1ocWxOQWtrTTB3RjgvQWowVEpQakFzMGYrWkVXbkJlNE45?=
+ =?utf-8?B?K3orc2o2LzVKQUhFUko5Rzc5amh5ckhQbUNzOWszRzJYRjVCdXdrK1JrQXpa?=
+ =?utf-8?B?T25UZjFyWWVWRnhDOU9BZmJ6OUtaS0FEOCtLT0NUbXh6TFprSkFsSTRWWTVS?=
+ =?utf-8?B?a0FQcTVCK29TRmt1eUdyL1A2RWVBa1FMYW5oR0N2aUxXMVgyb3NFYkY5dkd2?=
+ =?utf-8?B?SnVVcGNDR0lVRjZ5Yk9SMUJhQ2FMSUxaUWgrYVU1UDcwZGhRb1JodWxhSTlS?=
+ =?utf-8?B?OUpiUmlpTmhmTDR2dzBsY050Yyt4OGdqUm9WSEVHbzIydWttS3RUYXNQM1dB?=
+ =?utf-8?B?OHAxNUdvQ2tyUU1BbjlXY0ZCNzBUNXpHc3ROMUZSbUN5Y1h6OEJudWc2VGJo?=
+ =?utf-8?B?OHo4Tmg4b3U3L3E2bGlZVnAzdEpzMXRSTHpnZ0NGcnhjb1EwbW1hR3BKbGc3?=
+ =?utf-8?B?OTczWjFWSjZiM3BNYVcyRElzYzhYbUY5YVBtZXNoeEJTOWw1Mk9lSkxvNllt?=
+ =?utf-8?B?dDZqZ0hIbnFJY3VKdlJKclNSVG9ZZStLRS9jZ0tMSVd5VUt2a0lGZncxcnU4?=
+ =?utf-8?B?OHVuZUxqOFRxb01wNFlSV0R6eE0xUVhETVZ2S2tCbG1meGxDQTYvTWRJZm1F?=
+ =?utf-8?B?QXd0NnNXdFVJc0NMTjJOWEc4K2VqMlhxMmMzNnJTOW1FNUd0RUdrUXpiMWNF?=
+ =?utf-8?B?TXBveXgwQW90cFFVSW1xeFMwUktoSzJuNCtOR3Job3h0NTdhNWF3VkkrRGRF?=
+ =?utf-8?B?MldZSVB4NEhNb1JiaHpPYU1IcmJKTkkzOEZYZ1A2Yzd6dmZ0TjE0QXRqQzVD?=
+ =?utf-8?B?V3JndHVZeWRDV0kwbTlub0hzakQraTdCR3BBcklDbjVlZHFVbjFRT3d2QW16?=
+ =?utf-8?B?Y25PTHlLMHRCK0MwQVN1SnZlQnNzTTA1QTkrcGJxQ01MZVZ3QmpHUmZEbXRH?=
+ =?utf-8?B?amZaeEd3bmQvbzgzcktDZmdoTGgybnV4WkRCY2xvdlZKc2d0cmFHOVE5OEtJ?=
+ =?utf-8?B?bzR1M3pLamtkdHRiNTBZSm1pcjNlT2I2UDJBN0I0U3NXVVZ3ZXRCRml5Nlpp?=
+ =?utf-8?B?WG5ZRkRiSmExTEE5SUFTTHRnZmRvRWk1L25QZVdqMldPUlMrMU9jY29zclJn?=
+ =?utf-8?B?ejU5cmRmSTl5RUY3VEppankrSlRuci94Zkw1bWk2U3VCdUwyKzJWRitMSzE4?=
+ =?utf-8?B?UE5wREg1clIwUHhSTlRKbmVtZzBmUWtSVUNOalhzQU1jRGZGTnpkd2pHRHBI?=
+ =?utf-8?B?L3kzaWpnWjBZL0xMdjBoVy9YUnc0L3owKzhFSjZhVmN1bXV4bXJwbGxzUEVq?=
+ =?utf-8?B?N2pJVVZ1SFdEaHlTVVVEaFRBdVBTOEJsV2treVVXSTJkUERkcHBVdkt3T01s?=
+ =?utf-8?B?aXlrNDJreUFBaVk0ZldyYW9uODJQeFEwQ0VsUkpWeG9GMUhPYXk0ck1aNVVL?=
+ =?utf-8?Q?C3himXi2Kj2bi?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(82310400017)(376005)(36860700004);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2024 14:52:30.6411
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5f25c36-c727-45b3-0d66-08dc78dc798d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF00003F66.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7265
 
-Hello,
+Hi Michal, Luca,
 
-When running xl list -l with my VLAN patches applied, a double free 
-error is raised. I'm unable to determine why.
+On 5/20/2024 7:24 PM, Michal Orzel wrote:
+> Hi Henry,
+>
+> +CC: Luca
+>
+> On 17/05/2024 05:21, Henry Wang wrote:
+>> To make things easier, add restriction that static shared memory
+>> should also be direct-mapped for direct-mapped domains. Check the
+>> host physical address to be matched with guest physical address when
+>> parsing the device tree. Document this restriction in the doc.
+> I'm ok with this restriction.
+>
+> @Luca, do you have any use case preventing us from making this restriction?
+>
+> This patch clashes with Luca series so depending on which goes first,
 
-broken: 0cc01c603f4287233715a526b056bc20e0e97412 (HEAD) tools/xl: add 
-vlan keyword to vif option
-okay:   3bc14e4fa4b9832888710759a7dbe5f0d239f33b tools/libs/light: Add 
-vlan field to libxl_device_nic
-okay:   e27fc7d15eab79e604e8b8728778594accc23cf1 tools/xentop: Fix cpu% 
-sort order
+I agree that there will be some conflicts between the two series. To 
+avoid back and forth, if Luca's series goes in first, would it be ok for 
+you if I place the same check from this patch in 
+handle_shared_mem_bank() like below?
 
-Any suggestions appreciated...
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index 9c3a83042d..2d23fa4917 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -219,6 +219,13 @@ static int __init handle_shared_mem_bank(struct 
+domain *d, paddr_t gbase,
+      pbase = shm_bank->start;
+      psize = shm_bank->size;
 
-Debug run and backtrace:
++    if ( is_domain_direct_mapped(d) && (pbase != gbase) )
++    {
++        printk("%pd: physical address 0x%"PRIpaddr" and guest address 
+0x%"PRIpaddr" are not direct-mapped.\n",
++               d, pbase, gbase);
++        return -EINVAL;
++    }
++
+      printk("%pd: SHMEM map from %s: mphys 0x%"PRIpaddr" -> gphys 
+0x%"PRIpaddr", size 0x%"PRIpaddr"\n",
+             d, bank_from_heap ? "Xen heap" : "Host", pbase, gbase, psize);
 
-(gdb) run -vvvv list -l
-Starting program: /usr/sbin/xl -vvvv list -l
-[Thread debugging using libthread_db enabled]
-Using host libthread_db library 
-"/lib/x86_64-linux-gnu/libthread_db.so.1".
-libxl: debug: libxl_domain.c:2295:libxl_retrieve_domain_configuration: 
-ao 0x555555592f50: create: how=(nil) callback=(nil) 
-poller=0x55555559dde0
-[Detaching after fork from child process 1044]
-libxl: debug: libxl_domain.c:2311:libxl_retrieve_domain_configuration: 
-ao 0x555555592f50: inprogress: poller=0x55555559dde0, flags=i
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-vbd from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-vif from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-vtpm from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-vusb from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-vusb from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-pci from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-vdispl from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: No 
-vsnd from xenstore
-libxl: debug: libxl_qmp.c:1920:libxl__ev_qmp_dispose:  ev 0x5555555a0240
-libxl: debug: libxl_event.c:2067:libxl__ao_complete: ao 0x555555592f50: 
-complete, rc=0
-libxl: debug: libxl_event.c:2036:libxl__ao__destroy: ao 0x555555592f50: 
-destroy
-libxl: debug: libxl_domain.c:2295:libxl_retrieve_domain_configuration: 
-Domain 1:ao 0x55555559f830: create: how=(nil) callback=(nil) 
-poller=0x55555559dde0
-[Detaching after fork from child process 1045]
-libxl: debug: libxl_domain.c:2311:libxl_retrieve_domain_configuration: 
-Domain 1:ao 0x55555559f830: inprogress: poller=0x55555559dde0, flags=i
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: 
-Domain 1:No vtpm from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: 
-Domain 1:No vusb from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: 
-Domain 1:No vusb from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: 
-Domain 1:No pci from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: 
-Domain 1:No vdispl from xenstore
-libxl: debug: libxl_domain.c:2587:retrieve_domain_configuration_end: 
-Domain 1:No vsnd from xenstore
-libxl: debug: libxl_qmp.c:1920:libxl__ev_qmp_dispose: Domain 1: ev 
-0x5555555a2820
-libxl: debug: libxl_event.c:2067:libxl__ao_complete: ao 0x55555559f830: 
-complete, rc=0
-libxl: debug: libxl_event.c:2036:libxl__ao__destroy: ao 0x55555559f830: 
-destroy
-free(): double free detected in tcache 2
+> Acked-by: Michal Orzel <michal.orzel@amd.com>
 
-Program received signal SIGABRT, Aborted.
-__pthread_kill_implementation (threadid=<optimized out>, 
-signo=signo@entry=6, no_tid=no_tid@entry=0) at ./nptl/pthread_kill.c:44
-44	./nptl/pthread_kill.c: No such file or directory.
-(gdb) bt
-#0  __pthread_kill_implementation (threadid=<optimized out>, 
-signo=signo@entry=6, no_tid=no_tid@entry=0) at ./nptl/pthread_kill.c:44
-#1  0x00007ffff7d5de8f in __pthread_kill_internal (signo=6, 
-threadid=<optimized out>) at ./nptl/pthread_kill.c:78
-#2  0x00007ffff7d0efb2 in __GI_raise (sig=sig@entry=6) at 
-../sysdeps/posix/raise.c:26
-#3  0x00007ffff7cf9472 in __GI_abort () at ./stdlib/abort.c:79
-#4  0x00007ffff7d52430 in __libc_message (action=action@entry=do_abort, 
-fmt=fmt@entry=0x7ffff7e6c459 "%s\n") at 
-../sysdeps/posix/libc_fatal.c:155
-#5  0x00007ffff7d677aa in malloc_printerr (str=str@entry=0x7ffff7e6f098 
-"free(): double free detected in tcache 2") at ./malloc/malloc.c:5660
-#6  0x00007ffff7d69a36 in _int_free (av=0x7ffff7ea5c60 <main_arena>, 
-p=0x5555555a0f90, have_lock=have_lock@entry=0) at ./malloc/malloc.c:4469
-#7  0x00007ffff7d6be8f in __GI___libc_free (mem=<optimized out>) at 
-./malloc/malloc.c:3385
-#8  0x00007ffff7f160a3 in libxl__free_all (gc=gc@entry=0x55555559f870) 
-at libxl_internal.c:86
-#9  0x00007ffff7f27c11 in libxl__ao__destroy (ctx=0x555555591850, 
-ao=ao@entry=0x55555559f830) at libxl_event.c:2039
-#10 0x00007ffff7f27c3e in ao__check_destroy (ctx=<optimized out>, 
-ao=ao@entry=0x55555559f830) at libxl_event.c:2028
-#11 0x00007ffff7f27c76 in ao__manip_leave (ctx=<optimized out>, 
-ao=ao@entry=0x55555559f830) at libxl_event.c:2021
-#12 0x00007ffff7f2948f in libxl__ao_inprogress 
-(ao=ao@entry=0x55555559f830, file=file@entry=0x7ffff7f80866 
-"libxl_domain.c", line=line@entry=2311,
-     func=func@entry=0x7ffff7f814a0 <__func__.3> 
-"libxl_retrieve_domain_configuration") at libxl_event.c:2235
-#13 0x00007ffff7f46add in libxl_retrieve_domain_configuration 
-(ctx=<optimized out>, domid=<optimized out>, 
-d_config=d_config@entry=0x7fffffffe510, ao_how=ao_how@entry=0x0)
-     at libxl_domain.c:2311
-#14 0x00005555555744f2 in list_domains_details 
-(info=info@entry=0x5555555aa1e0, nb_domain=2) at xl_info.c:479
-#15 0x0000555555575e21 in main_list (argc=<optimized out>, 
-argv=<optimized out>) at xl_info.c:582
-#16 0x0000555555561b55 in main (argc=2, argv=0x7fffffffecd8) at xl.c:451
+Thanks. I will take the tag if you are ok with above diff (for the case 
+if this series goes in later than Luca's).
 
-Regards,
+>>           }
+>> +        if ( is_domain_direct_mapped(d) && (pbase != gbase) )
+>> +        {
+>> +            printk("%pd: physical address 0x%"PRIpaddr" and guest address 0x%"PRIpaddr" are not 1:1 direct-mapped.\n",
+> NIT: 1:1 and direct-mapped means the same so no need to place them next to each other
 
-Leigh.
+Ok. I will drop the "1:1" in the next version. Thanks.
+
+Kind regards,
+Henry
+
+> ~Michal
+
 
