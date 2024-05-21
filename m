@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0136C25B75
-	for <xen-devel@archiver.kernel.org>; Tue, 21 May 2024 04:36:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.726501.1130817 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E40CBC25B74
+	for <xen-devel@archiver.kernel.org>; Tue, 21 May 2024 04:36:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.726503.1130832 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s9HEV-0007Uv-SS; Tue, 21 May 2024 04:36:15 +0000
+	id 1s9HEZ-00081t-Bg; Tue, 21 May 2024 04:36:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 726501.1130817; Tue, 21 May 2024 04:36:15 +0000
+Received: by outflank-mailman (output) from mailman id 726503.1130832; Tue, 21 May 2024 04:36:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s9HEV-0007Tw-MX; Tue, 21 May 2024 04:36:15 +0000
-Received: by outflank-mailman (input) for mailman id 726501;
- Tue, 21 May 2024 04:36:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s9HEZ-00081l-7k; Tue, 21 May 2024 04:36:19 +0000
+Received: by outflank-mailman (input) for mailman id 726503;
+ Tue, 21 May 2024 04:36:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=H+om=MY=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
- id 1s9HET-0006eS-Ms
- for xen-devel@lists.xenproject.org; Tue, 21 May 2024 04:36:13 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [2a01:111:f403:2417::600])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a5d4fe5f-172b-11ef-909f-e314d9c70b13;
- Tue, 21 May 2024 06:36:11 +0200 (CEST)
-Received: from SA9PR13CA0045.namprd13.prod.outlook.com (2603:10b6:806:22::20)
- by SA1PR12MB6775.namprd12.prod.outlook.com (2603:10b6:806:25a::10)
+ id 1s9HEY-0006hu-8Q
+ for xen-devel@lists.xenproject.org; Tue, 21 May 2024 04:36:18 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2418::600])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a857611f-172b-11ef-b4bb-af5377834399;
+ Tue, 21 May 2024 06:36:15 +0200 (CEST)
+Received: from SA1P222CA0046.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2d0::14)
+ by MW6PR12MB8957.namprd12.prod.outlook.com (2603:10b6:303:23a::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.35; Tue, 21 May
- 2024 04:36:07 +0000
-Received: from SA2PEPF00001507.namprd04.prod.outlook.com
- (2603:10b6:806:22:cafe::23) by SA9PR13CA0045.outlook.office365.com
- (2603:10b6:806:22::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.17 via Frontend
- Transport; Tue, 21 May 2024 04:36:07 +0000
+ 2024 04:36:12 +0000
+Received: from SA2PEPF00001506.namprd04.prod.outlook.com
+ (2603:10b6:806:2d0:cafe::c3) by SA1P222CA0046.outlook.office365.com
+ (2603:10b6:806:2d0::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.55 via Frontend
+ Transport; Tue, 21 May 2024 04:36:11 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SA2PEPF00001507.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ SA2PEPF00001506.mail.protection.outlook.com (10.167.242.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7611.14 via Frontend Transport; Tue, 21 May 2024 04:36:07 +0000
+ 15.20.7611.14 via Frontend Transport; Tue, 21 May 2024 04:36:10 +0000
 Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 20 May
- 2024 23:36:05 -0500
+ 2024 23:36:10 -0500
 Received: from henry-MS-7D54.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Mon, 20 May 2024 23:36:04 -0500
+ Transport; Mon, 20 May 2024 23:36:08 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a5d4fe5f-172b-11ef-909f-e314d9c70b13
+X-Inumbo-ID: a857611f-172b-11ef-b4bb-af5377834399
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C17Pi7tJGLw4DxXwSM9ESWg+rU7/DL+BNHCHdzx108xL3y0u1SAhsITSJG/V+hZ6e2Mw83HLbVmKSf19vVmx5Dfwd2qmvf6PJE+z52vOzDBDCxdXDijE6a8F6rOzeaAcPXlDNKUA69J27tHRj+k1vQn8hng/rJiykmgbs4dRHvvFeS3mj06/6T2uuxSLVEQxlHWyuilGtbngxRogVBKH+17igtCWP6/pbhN+JgPCDFOK5q5yBttJiTmkTXvn0QZ64+dcLoIJDoJLO1hCtUDMpTJ4cPPah0bWKjgRoHuQB21f+LBpfS6xqD1X19o7mgdMHGbobn1uIm3KU59HOWe2ow==
+ b=lZgPU7G1H+hhtuaWEuG/cMMmBo/QQ49SAG+AZvvFieqW6nQcvTRxqXdKrDBK2oWwTIgqAYyXW2HJawQa13miNOxFqlYK/NcLU9BNnnDtbAnhbktwlBWXwyWWzccQUWlaczfX8Xe+S4bDs7sE9OceNUvQyVQmYZNddeSWI9MsSzMa6tnKnLHsW7xjrHa23FIAgq5KXRB/r4O7+4KG/2TISHL4pSdKMxIJEDbKI3vS9DAJO2FpZJviUDn98kll0mW7Un4FNF4nx0bH+B1ILui13JtcZYmuWHkL7AkkQeIk74XG7xdAogJs/P1spFDp9PnHCKxfOoYtekCTdmWMp+wfnw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FuT4kemK+kjHrj50JMbp96wCovrhPDOGjTghim1ZSdM=;
- b=bjAXEwE2weqPzRyAftaegUnj/bQU5S9W+wpTYVqmqVnEGNrt3dC3BvezD/7WbBfg7Ya8Dy+Bt21s0NC0jUGbc+hJiL61lzIt5j40ODG5U3Kz2sW99tzqmbZRZhE/+Oq8aVgAm4Tg3b9Pcabh6M8Y5R1gU8qOtJDLee5z5ShoanKPr2Aqp4qgu7lpk8Nox6MVkk1iVCLUM+zjyKaoftFmHaxYwy234Xgbe+srYG94RwPL/eqX8k8CCLooFtOYfbFXdnrWrlGzUN5CRGWi1nUv58SkLCEyyY38JWNNzcl8COGHcOxtB4HPWZfKUkSPmNA6+A5U5UODmg8JCOxwQU741Q==
+ bh=EOJtF38SHzbKHHCO6HcbBP/3k8UEkTSkkoNvwkF1QIM=;
+ b=QBtl44x1G/czAYBYL4NEKW+rBKOl7GF0UAaPXDJO83C9zkgJZzZwFcV5iz1OL4hQ6jiR0fVfLZyqAK4RpIOAwoxof1OYBH3T5pv/qK6SlbxCAL9lyon2lTGztVWG9zN1aO7nR96FJenXJwNDoUA3rZHfPbu/Gg1CRcCJtAp9L+8pH+Tq+ZzCjUzj0RUL4nFYfHDil3+B5y3vpnRuC6TivZLSoeine2eK7ypgBjECuYl1d+MR4n9b8KPyfhT+/7UlKXiokTsDq0KtaaoCaUTHDVlQf5z2GpH92BOPoacxQXbDGdVXMYfWe9RdMvXqNmHk5rhGMnvTL0zG1YgUzll7yg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FuT4kemK+kjHrj50JMbp96wCovrhPDOGjTghim1ZSdM=;
- b=OyewpQFMLsLzwHRRGnuZZR+b9WXn9PLZ7dv9WAkvDvye5aTGKcelpFrl24Uiub4fZPFuJiA828qlNfOL4N3+Gn2BAZ2g67P2StzAmJ7jGcZoj9Rit+Pgn1Ogo0WVegm8eCaoiGZxdxGoBED/sXBjl9LgqJgH7e3nvCdViME6z+k=
+ bh=EOJtF38SHzbKHHCO6HcbBP/3k8UEkTSkkoNvwkF1QIM=;
+ b=S8Sm22uAopwOkW6WFnp9X+UOmz1gKQmZeaERmqNckV/Ei1KDdKMH7fKKmqLOWWEB+5H24Os1gsNfWYIAEJImkk50W1cb5htRRPGFeYD7W7/VwPNeWz0cAufpNhmAl3Znjc1tQ3LRg6NjhA/01+IaVAJbwKhgneLsIMudVo1j03U=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -89,9 +89,9 @@ CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
 	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
 	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	"Henry Wang" <xin.wang2@amd.com>
-Subject: [PATCH v3 3/8] xen/arm, doc: Add a DT property to specify IOMMU for Dom0less domUs
-Date: Tue, 21 May 2024 12:35:52 +0800
-Message-ID: <20240521043557.1580753-4-xin.wang2@amd.com>
+Subject: [PATCH v3 5/8] xen/arm/gic: Allow routing/removing interrupt to running VMs
+Date: Tue, 21 May 2024 12:35:54 +0800
+Message-ID: <20240521043557.1580753-6-xin.wang2@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240521043557.1580753-1-xin.wang2@amd.com>
 References: <20240521043557.1580753-1-xin.wang2@amd.com>
@@ -102,133 +102,182 @@ Received-SPF: None (SATLEXMB03.amd.com: xin.wang2@amd.com does not designate
  permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001507:EE_|SA1PR12MB6775:EE_
-X-MS-Office365-Filtering-Correlation-Id: e98ba37c-bd5c-4a95-9f03-08dc794f881e
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001506:EE_|MW6PR12MB8957:EE_
+X-MS-Office365-Filtering-Correlation-Id: 556d5ffa-525c-4836-1cb7-08dc794f8a1b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230031|82310400017|36860700004|376005|1800799015;
+	BCL:0;ARA:13230031|36860700004|376005|82310400017|1800799015;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?OjUZlyRjaxo9UymNdsxuU/VMmz908IooKJ5Hq41wYYPUxw0jvP/J1SH0Dgzg?=
- =?us-ascii?Q?9Qw6vUhe77juLSOdALoUTJ7MPOQ2NGQX6Oaj/zLaT+nY+J3cFE2LZCd7N50b?=
- =?us-ascii?Q?oG8Ftl0iVGrIYTH/jYcWQf20eWXBh6wj2yFECT+obqpij9ApHlPJ4piJxhmP?=
- =?us-ascii?Q?zIU9AlVjcq/3E0QacQqHvjewJWMI1BcHeZEBjBUuB1aB9ayCQFlW62SGH4ug?=
- =?us-ascii?Q?a3qCMyvT+3ejtZOvRdVdJF/laNLdJ7hYtvyVPnc7oHyjChDvXivAUKrQASIM?=
- =?us-ascii?Q?mShsFZEDZeWEHcqSs6qRebPdjkzCIRrpRfh4BeZkoRI8JC7CoxF3hxCrl9gi?=
- =?us-ascii?Q?5GYKZrqrM7W0Uq2/4c+rOeE2VKZYKTioXmNUOu9QRaZSG2DnwVB1UqqLaKhB?=
- =?us-ascii?Q?rGPeswld3orys+i+IffK34ObGxA06R+WODQvVmQyTmy55HaxVA2hvVIE/Cy8?=
- =?us-ascii?Q?X6cqfR2aIcmlPvboh0C4zW4HN1f8SPtJ/EFGgHQrtcB76E4aYFPiemGGiktF?=
- =?us-ascii?Q?jpSLye93VpyMgo6UFUl257Mt9jeF5TC4D87vv7JZZXpmzfN5CS+3QorHRaJ4?=
- =?us-ascii?Q?hqn181uz+HALBFmeLw8N8faFLmV7pBlySY09CGOMxAriS3BiU6ubzPgzVQAT?=
- =?us-ascii?Q?n9tfVefES7qLSyAcVUZJTDlUEgTbF1NgpvOhe+Baxui5rCA3WcttrhGJmC9i?=
- =?us-ascii?Q?G4cZgpdK6ec3dIzi2QwaLymNxwbpJVCiTPbE4nNncham2PJOWBJrVU3m9RdZ?=
- =?us-ascii?Q?UEzXzzV/XSlWwM49E0TedO8VAzJzB1ZcYH8J3Fm72wfXdURKiykfqw64Scaq?=
- =?us-ascii?Q?67tFYvtE6L2l6iMRdgP6WlmZ/FTR6dUsNwewZkOeLi3324QGNga9hQUWT+2U?=
- =?us-ascii?Q?pavGXQxrk0hvlwped46TBMVAYpnyIxKKz04Y2A00serVA/tjlu0NCZHi6k33?=
- =?us-ascii?Q?AY7EHYA1YmwHZSWyQ0VaKU1GYFzR+p7DsOMwS4rcih1ncND5r7ymh4gks3QY?=
- =?us-ascii?Q?cUOJPlYE66v/pMU8W5fyHST/IQoHhEdLd1+eAonoNgrZEpnOlIqsKxPYJSXq?=
- =?us-ascii?Q?68N5DdBoJrT0SdS6oBpPVEnRCCvciINCgmzhGv3ejDNPTn2AMk1gjyU303g9?=
- =?us-ascii?Q?Kzo37LiGvRNKPoyC7DiD8H3+3srzKGIrArFbR5bPLsJvnN77/DObSTNzSN6b?=
- =?us-ascii?Q?axwYVR1dfbwbPZDkt/2uDRKsvjPw5jSGgaattr1ThGyioCP1498OyTnNmFue?=
- =?us-ascii?Q?pnqRvxQSHUeCzvagMwNOqrdYetjMLT9A3PYyYk4VZC4dYXepr92uVHatVjuE?=
- =?us-ascii?Q?36Dm8MlP5dUf+gukoZCvTw/PjcWYli7ApBV5AaOFrXOgag4xKvD9tngxtwBh?=
- =?us-ascii?Q?G3jUZOFQp2O/kuR4lgAwSCZa+pXo?=
+	=?us-ascii?Q?+Qql7oBpC7z9QsDGgKoq0TXcutywO3ibPMhx5jjDz4u/TIaGO7etjfTbZsGy?=
+ =?us-ascii?Q?LDgMF64CKDEOrduo2EqUd0O3amflBPJzXguY/tmBp6uJrvukT6SNIfmPp3Zp?=
+ =?us-ascii?Q?SONcEMkqFLhEqwyVAKCkpimVhdOZ9MjiXqL9AEgr5Dei4jS4jW6hbeC06+Bp?=
+ =?us-ascii?Q?LOhClgJ/Br1ngGSJ4vCeGABNV0SDYRNAFfmK+qHOq+M8dQYzS0n+0b60ieIj?=
+ =?us-ascii?Q?Nmg0rn6VA5es5XHPomXD7eZqMUW4gobcuwoXgJRjPfL0tyaaKNTjeQMQ6IcC?=
+ =?us-ascii?Q?J+s+M3XG42t51JbL4K8vbhmxnaWPtfqpbDwVycqRfbYzSFYIpOJcVD0LGW2z?=
+ =?us-ascii?Q?YKQlz3E3JeDzw5Ubn81UE1AKxiCsVKGzywraP7DSuVFf2NC8lMNnes40b11i?=
+ =?us-ascii?Q?ZB9Uy32A5F+soo6bTzuizlRa13FBrI6of4mKSASUyePIm2SNmdTTSJItJTsg?=
+ =?us-ascii?Q?TrjGJqILLjX5YvsjneTvM8OJPcR20QCC3nv5TroNS53/KOdfcyttZya3sIfX?=
+ =?us-ascii?Q?YlFhduTiJVttzQwz9HocLEJFULDlxjyp8zifNTBMk3vrOAOdNeo+rgkQ96Te?=
+ =?us-ascii?Q?b97jGy+K54tNnriXFjg84+hi9l1vjyY8ceqV38223vtvh6ZMnJVfQ5TuFony?=
+ =?us-ascii?Q?WJlwiYgcJ92Bt0ULXmkxbdZdetiN0q/J2wUM+bBVpNRrEGKnvdEDxovArEre?=
+ =?us-ascii?Q?RNktqaKpCibXxyq4KqFdXhZCOhVtNVzw5d145FEWl7PX+LG+AbaO9Suv60Hx?=
+ =?us-ascii?Q?ehgwww3VWirIjY20UZjbpMjR7s10pBddbSJcahtTk+zwD9cXpNoWj0UelRcQ?=
+ =?us-ascii?Q?A/R54EhsXavqzrUIqq2g+sk2gc2C1GA3fPvxSyBIVGBgrMNuvVXoXFUUzHXV?=
+ =?us-ascii?Q?oRGbgRhSJxXQUW/qhJLlesL0MSdjjbnv/hxxcyyALPhsj36RoxwOCPJsxzd5?=
+ =?us-ascii?Q?2+kKOcP+U9K/14WHLbMEH6EhYaCLklqHyrdKOkJTG4hlMvKftswV6qpNcUzb?=
+ =?us-ascii?Q?0mScb+vCZWFUr3lKLdBfcvJI5SMjQY/ls9tbm0HmPAoPjcEXHFSGjuxUGF9b?=
+ =?us-ascii?Q?fS+CuJc8Ffipda4ivAM9c1AbYdT2TkS+vk+H/TiHiL/t9sqwo1smfpuUJnZo?=
+ =?us-ascii?Q?Zchvu0pAoUetsdiXiRBoMt567GbHaUbj6240XYljz7EsSJYs9sA22HLh9WFP?=
+ =?us-ascii?Q?UUu6pL980WbgDzkeNYjEexdX+0FL4yY0fZ0pdqvCvxwHcBdSxrtJrEdrT0rX?=
+ =?us-ascii?Q?ssaB1sFUR99TYl4yHi77POeDjw+4KCWrNGnDe/bXdJWAFg/zwnz7peq8ToKm?=
+ =?us-ascii?Q?ebMJO8GuPynAuL9xf7OIfX0Y33FNIEofX9PybYAkmQPSYZOUoE1Sp350KCvv?=
+ =?us-ascii?Q?DeLKjjytWc6zdcBgwuOb3HYNJGYP?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(82310400017)(36860700004)(376005)(1800799015);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(376005)(82310400017)(1800799015);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 04:36:07.2384
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 04:36:10.5552
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e98ba37c-bd5c-4a95-9f03-08dc794f881e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 556d5ffa-525c-4836-1cb7-08dc794f8a1b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF00001507.namprd04.prod.outlook.com
+	SA2PEPF00001506.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6775
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8957
 
-There are some use cases in which the dom0less domUs need to have
-the XEN_DOMCTL_CDF_iommu set at the domain construction time. For
-example, the dynamic dtbo feature allows the domain to be assigned
-a device that is behind the IOMMU at runtime. For these use cases,
-we need to have a way to specify the domain will need the IOMMU
-mapping at domain construction time.
+From: Vikram Garhwal <fnu.vikram@xilinx.com>
 
-Introduce a "passthrough" DT property for Dom0less DomUs following
-the same entry as the xl.cfg. Currently only provide two options,
-i.e. "enable" and "disable". Set the XEN_DOMCTL_CDF_iommu at domain
-construction time based on the property.
+Currently, routing/removing physical interrupts are only allowed at
+the domain creation/destroy time. For use cases such as dynamic device
+tree overlay adding/removing, the routing/removing of physical IRQ to
+running domains should be allowed.
 
+Removing the above-mentioned domain creation/dying check. Since this
+will introduce interrupt state unsync issues for cases when the
+interrupt is active or pending in the guest, therefore for these cases
+we simply reject the operation. Do it for both new and old vGIC
+implementations.
+
+Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 Signed-off-by: Henry Wang <xin.wang2@amd.com>
 ---
 v3:
-- Use a separate variable to cache the condition from the "passthrough"
-  flag separately to improve readability.
-- Update the doc to explain the default condition more clearly.
+- Update in-code comments.
+- Correct the if conditions.
+- Add taking/releasing the vgic lock of the vcpu.
 v2:
-- New patch to replace the original patch in v1:
-  "[PATCH 03/15] xen/arm: Always enable IOMMU"
+- Reject the case where the IRQ is active or pending in guest.
 ---
- docs/misc/arm/device-tree/booting.txt | 16 ++++++++++++++++
- xen/arch/arm/dom0less-build.c         | 11 +++++++++--
- 2 files changed, 25 insertions(+), 2 deletions(-)
+ xen/arch/arm/gic-vgic.c  | 15 ++++++++++++---
+ xen/arch/arm/gic.c       | 15 ---------------
+ xen/arch/arm/vgic/vgic.c | 10 +++++++---
+ 3 files changed, 19 insertions(+), 21 deletions(-)
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index bbd955e9c2..f1fd069c87 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -260,6 +260,22 @@ with the following properties:
-     value specified by Xen command line parameter gnttab_max_maptrack_frames
-     (or its default value if unspecified, i.e. 1024) is used.
+diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
+index 56490dbc43..956c11ba13 100644
+--- a/xen/arch/arm/gic-vgic.c
++++ b/xen/arch/arm/gic-vgic.c
+@@ -439,24 +439,33 @@ int vgic_connect_hw_irq(struct domain *d, struct vcpu *v, unsigned int virq,
  
-+- passthrough
-+
-+    A string property specifying whether IOMMU mappings are enabled for the
-+    domain and hence whether it will be enabled for passthrough hardware.
-+    Possible property values are:
-+
-+    - "enabled"
-+    IOMMU mappings are enabled for the domain. Note that this option is the
-+    default if the user provides the device partial passthrough device tree
-+    for the domain.
-+
-+    - "disabled"
-+    IOMMU mappings are disabled for the domain and so hardware may not be
-+    passed through. This option is the default if this property is missing
-+    and the user does not provide the device partial device tree for the domain.
-+
- Under the "xen,domain" compatible node, one or more sub-nodes are present
- for the DomU kernel and ramdisk.
+     /* We are taking to rank lock to prevent parallel connections. */
+     vgic_lock_rank(v_target, rank, flags);
++    spin_lock(&v_target->arch.vgic.lock);
  
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index 74f053c242..5830a7051d 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -848,6 +848,8 @@ static int __init construct_domU(struct domain *d,
- void __init create_domUs(void)
- {
-     struct dt_device_node *node;
-+    const char *dom0less_iommu;
-+    bool iommu = false;
-     const struct dt_device_node *cpupool_node,
-                                 *chosen = dt_find_node_by_path("/chosen");
+     if ( connect )
+     {
+-        /* The VIRQ should not be already enabled by the guest */
++        /*
++         * The VIRQ should not be already enabled by the guest nor
++         * active/pending in the guest.
++         */
+         if ( !p->desc &&
+-             !test_bit(GIC_IRQ_GUEST_ENABLED, &p->status) )
++             !test_bit(GIC_IRQ_GUEST_ENABLED, &p->status) &&
++             !test_bit(GIC_IRQ_GUEST_VISIBLE, &p->status) &&
++             !test_bit(GIC_IRQ_GUEST_ACTIVE, &p->status) )
+             p->desc = desc;
+         else
+             ret = -EBUSY;
+     }
+     else
+     {
+-        if ( desc && p->desc != desc )
++        if ( (desc && p->desc != desc) ||
++             test_bit(GIC_IRQ_GUEST_VISIBLE, &p->status) ||
++             test_bit(GIC_IRQ_GUEST_ACTIVE, &p->status) )
+             ret = -EINVAL;
+         else
+             p->desc = NULL;
+     }
  
-@@ -895,8 +897,13 @@ void __init create_domUs(void)
-             panic("Missing property 'cpus' for domain %s\n",
-                   dt_node_name(node));
++    spin_unlock(&v_target->arch.vgic.lock);
+     vgic_unlock_rank(v_target, rank, flags);
  
--        if ( dt_find_compatible_node(node, NULL, "multiboot,device-tree") &&
--             iommu_enabled )
-+        if ( !dt_property_read_string(node, "passthrough", &dom0less_iommu) &&
-+             !strcmp(dom0less_iommu, "enabled") )
-+            iommu = true;
-+
-+        if ( iommu_enabled &&
-+             (iommu || dt_find_compatible_node(node, NULL,
-+                                               "multiboot,device-tree")) )
-             d_cfg.flags |= XEN_DOMCTL_CDF_iommu;
+     return ret;
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index 44c40e86de..3ebd89940a 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -135,14 +135,6 @@ int gic_route_irq_to_guest(struct domain *d, unsigned int virq,
+     ASSERT(virq < vgic_num_irqs(d));
+     ASSERT(!is_lpi(virq));
  
-         if ( !dt_property_read_u32(node, "nr_spis", &d_cfg.arch.nr_spis) )
+-    /*
+-     * When routing an IRQ to guest, the virtual state is not synced
+-     * back to the physical IRQ. To prevent get unsync, restrict the
+-     * routing to when the Domain is been created.
+-     */
+-    if ( d->creation_finished )
+-        return -EBUSY;
+-
+     ret = vgic_connect_hw_irq(d, NULL, virq, desc, true);
+     if ( ret )
+         return ret;
+@@ -167,13 +159,6 @@ int gic_remove_irq_from_guest(struct domain *d, unsigned int virq,
+     ASSERT(test_bit(_IRQ_GUEST, &desc->status));
+     ASSERT(!is_lpi(virq));
+ 
+-    /*
+-     * Removing an interrupt while the domain is running may have
+-     * undesirable effect on the vGIC emulation.
+-     */
+-    if ( !d->is_dying )
+-        return -EBUSY;
+-
+     desc->handler->shutdown(desc);
+ 
+     /* EOI the IRQ if it has not been done by the guest */
+diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
+index b9463a5f27..78554c11e2 100644
+--- a/xen/arch/arm/vgic/vgic.c
++++ b/xen/arch/arm/vgic/vgic.c
+@@ -876,8 +876,11 @@ int vgic_connect_hw_irq(struct domain *d, struct vcpu *vcpu,
+ 
+     if ( connect )                      /* assign a mapped IRQ */
+     {
+-        /* The VIRQ should not be already enabled by the guest */
+-        if ( !irq->hw && !irq->enabled )
++        /*
++         * The VIRQ should not be already enabled by the guest nor
++         * active/pending in the guest
++         */
++        if ( !irq->hw && !irq->enabled && !irq->active && !irq->pending_latch )
+         {
+             irq->hw = true;
+             irq->hwintid = desc->irq;
+@@ -887,7 +890,8 @@ int vgic_connect_hw_irq(struct domain *d, struct vcpu *vcpu,
+     }
+     else                                /* remove a mapped IRQ */
+     {
+-        if ( desc && irq->hwintid != desc->irq )
++        if ( (desc && irq->hwintid != desc->irq) ||
++             irq->active || irq->pending_latch )
+         {
+             ret = -EINVAL;
+         }
 -- 
 2.34.1
 
