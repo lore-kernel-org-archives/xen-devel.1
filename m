@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A93C25B78
-	for <xen-devel@archiver.kernel.org>; Wed, 22 May 2024 14:20:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.727745.1132395 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5AEC25B78
+	for <xen-devel@archiver.kernel.org>; Wed, 22 May 2024 15:15:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.727760.1132422 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s9mou-0008WU-8e; Wed, 22 May 2024 14:19:56 +0000
+	id 1s9ngQ-0004E6-LR; Wed, 22 May 2024 15:15:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 727745.1132395; Wed, 22 May 2024 14:19:56 +0000
+Received: by outflank-mailman (output) from mailman id 727760.1132422; Wed, 22 May 2024 15:15:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s9mou-0008WN-6B; Wed, 22 May 2024 14:19:56 +0000
-Received: by outflank-mailman (input) for mailman id 727745;
- Wed, 22 May 2024 14:19:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1s9ngQ-0004Dv-HI; Wed, 22 May 2024 15:15:14 +0000
+Received: by outflank-mailman (input) for mailman id 727760;
+ Wed, 22 May 2024 15:15:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vsR+=MZ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1s9mos-0008V1-IT
- for xen-devel@lists.xenproject.org; Wed, 22 May 2024 14:19:54 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5b43b329-1846-11ef-90a0-e314d9c70b13;
- Wed, 22 May 2024 16:19:53 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a59cc765c29so95170366b.3
- for <xen-devel@lists.xenproject.org>; Wed, 22 May 2024 07:19:53 -0700 (PDT)
-Received: from [10.80.67.140] ([160.101.139.1])
+ <SRS0=eEN6=MZ=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1s9ngP-0003wy-8r
+ for xen-devel@lists.xenproject.org; Wed, 22 May 2024 15:15:13 +0000
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [2a00:1450:4864:20::42e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 15410651-184e-11ef-b4bb-af5377834399;
+ Wed, 22 May 2024 17:15:11 +0200 (CEST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-34f0e55787aso4013910f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 22 May 2024 08:15:11 -0700 (PDT)
+Received: from [192.168.0.16] (0545937c.skybroadband.com. [5.69.147.124])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a17b017b1sm1778456166b.181.2024.05.22.07.19.52
+ ffacd0b85a97d-354db76acafsm1864576f8f.49.2024.05.22.08.15.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 May 2024 07:19:52 -0700 (PDT)
+ Wed, 22 May 2024 08:15:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,108 +47,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5b43b329-1846-11ef-90a0-e314d9c70b13
+X-Inumbo-ID: 15410651-184e-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1716387592; x=1716992392; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=wA0WKAeMXM6MNE0c7IGAxHxlLxAMIdxdodB10bvF13Y=;
-        b=Zb4iuUAH0imfWxBpG86722UvfIG9HUT/RduA+Ruff4uDaXbXUW7HY7MFPbp8eyARRF
-         hInBkq8VesTp7AZORxQDhVM8G2XVnvedMWSDzot4R8e+yY+nksIu/h7xCXWVs/VGVcDv
-         PpnBF3kSWoRBM6TyzZVD02FrWYqrDPYQyl3bA=
+        d=cloud.com; s=cloud; t=1716390911; x=1716995711; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=kK3dRrXrwVNPXE4+0A/1KWYbPmGy2JdF5u4c4yDy9s4=;
+        b=F5+Fies9vkolU8Q7W7A0cXxkxZaFFM1LOlH73VoqFVytxPtEk3NeO6Aa8eGCuv1Oj3
+         KLzj1JNV8EkZ9+IE2RiLWXTHfc00fzzb/I+W1rHvXfjrafKJ2mh2DzWiWUaP3kjsGbTX
+         v522lZUZh+nPB9xZoC2fmUgYd6QZtFXGQoZak=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716387592; x=1716992392;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wA0WKAeMXM6MNE0c7IGAxHxlLxAMIdxdodB10bvF13Y=;
-        b=gR3zMTz/Q+hP3kf/HZD1xQ6/s4pdBI5Va7EGvGq7oiuhufSLij8xm+P2obQe4sG47m
-         KFdejkq/Xz2//nSg+YQ85wNXDhL1oNqqNKCJ5xPbAAfn0+Tp9WY6tN2EpmCbD8OEZwJu
-         XlOEWoxDakXNHHSU10jDKjo6jD5aI2OICBmmcQg2Wn8K05DWqc9BcZmeX7I9B14Wk3V0
-         RCyzVxuRFlvNP6cpJDo91TyhYypmvACN924jMyQOHn7Yvvqt22E87Wh4yannAvuABUax
-         R1AyTuHbcop5jwQ9FlkvnLeCB0LGMRhRdOx78aV4pQRYlYQHZg3dAHpTlLXG8fdVqp1t
-         c/jw==
-X-Forwarded-Encrypted: i=1; AJvYcCXHqKXpucinjFMb+PRQM+NjDvWqXklCFzQ08pXDDY+/p8g3DdKhsouwybtrhrL/x0uhLoBZJ0KE3ZWLjrHd6/e6XOi4qR0U5l8EhCH+Rgc=
-X-Gm-Message-State: AOJu0YyKmyzqhoySmWIPgfy6d1wn1533C8Y5xwMgCFec21zybbBA1rTj
-	fn9RS7Y73LF7EwJosby89trylPdktEIMlj9Jo4LI8fGpb8oIdOPqDDK8+n73h0c=
-X-Google-Smtp-Source: AGHT+IF2W59fLOBQrB5AgIOPWN6eg0HzdlLZ987J3lhiMfFXPCVcn6KcMU+jH+RQCtOnB72BmxXiAw==
-X-Received: by 2002:a17:906:cec5:b0:a59:d458:8355 with SMTP id a640c23a62f3a-a6228191821mr126180566b.77.1716387592552;
-        Wed, 22 May 2024 07:19:52 -0700 (PDT)
-Message-ID: <bdefdd57-74b9-4bcc-a8b5-03e8eeee3569@citrix.com>
-Date: Wed, 22 May 2024 15:19:50 +0100
+        d=1e100.net; s=20230601; t=1716390911; x=1716995711;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=kK3dRrXrwVNPXE4+0A/1KWYbPmGy2JdF5u4c4yDy9s4=;
+        b=hoLOchSaUwjZxnDadbIhChEmeoYybx84DdDUzD3k25EbmrwzOUpmoFo/c9vbkJEqGA
+         r/ELbiiB0qz4eiS3jhROpL+7nxJ+JeYQ9USmnCkZPm4VlT/WzU0Er73+lwT+b6+VATlO
+         OUftw4IKgL4EpVW3kl2nVUzGvPSDcZ6DQflAU4rSM4nl/OyB0vx5P5DLTlkFjZL8+t3X
+         lgP/mdLYDEvSDuM1mXFT9MmJPcBUea3iCvVutOB7d6m+GNfudVCzsW4D1xzjMLkRdJPs
+         fk3Yjclik4SIUlunr6at66eyjYRkA/2KFciCHBBKnaxmG8FmH1m3M/Gm/NrhE9O7KL6q
+         02gQ==
+X-Gm-Message-State: AOJu0Yynm2fFcgqWfI9uFe59ORPh7Z+zsEq8AFOZhtT5g7rjb4JKSWuT
+	6KEEECKs7nohiLsxFnAhujMpVPkv4NTSxXZpza+inSFf9QA2OwZi1dlyyYLt91k=
+X-Google-Smtp-Source: AGHT+IG9GddBwM5c5CCKKh8vIp9biDptjqXlZAk9WQ+OyCsyroo+12gATRP4E15F30O4WDlyURbPxA==
+X-Received: by 2002:adf:f104:0:b0:34d:8d88:7c53 with SMTP id ffacd0b85a97d-354d8bd1408mr1705577f8f.0.1716390910943;
+        Wed, 22 May 2024 08:15:10 -0700 (PDT)
+Message-ID: <974bfbc6-97f6-4afa-978c-562448042d4a@cloud.com>
+Date: Wed, 22 May 2024 16:15:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] x86/shadow: Introduce sh_trace_gl1e_va()
-To: Jan Beulich <jbeulich@suse.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20240522131703.30839-1-andrew.cooper3@citrix.com>
- <20240522131703.30839-3-andrew.cooper3@citrix.com>
- <e0f0d9e7-ab53-414a-b689-dde9a9089f5d@suse.com>
+Subject: Re: [PATCH v2 2/2] tools/xg: Clean up xend-style overrides for CPU
+ policies
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Anthony PERARD <anthony@xenproject.org>, Juergen Gross <jgross@suse.com>
+References: <cover.1715954111.git.alejandro.vallejo@cloud.com>
+ <d397ec0de4138e32feeb910f3401a6568a75035e.1715954111.git.alejandro.vallejo@cloud.com>
+ <Zktl8zRt1kue5vA6@macbook>
 Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
- CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
- 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
- IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
- SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
- JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
- mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
- ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
- RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
- dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
- /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
- TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
- Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
- 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
- vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
- g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
- wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
- 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
- kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
- bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
- uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
- XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
- HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
- pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
- vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
- b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
- 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
- 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
- nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
- B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
- d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
- 6+ahAA==
-In-Reply-To: <e0f0d9e7-ab53-414a-b689-dde9a9089f5d@suse.com>
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+In-Reply-To: <Zktl8zRt1kue5vA6@macbook>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 22/05/2024 2:47 pm, Jan Beulich wrote:
-> On 22.05.2024 15:17, Andrew Cooper wrote:
->> trace_shadow_fixup() and trace_not_shadow_fault() both write out identical
->> trace records.  Reimplement them in terms of a common sh_trace_gl1e_va().
->>
->> There's no need to pack the trace record, even in the case of PAE paging.
-> Isn't this altering the generated trace record for the 4-level case, in
-> size changing from 20 to 24 bytes?
+On 20/05/2024 16:02, Roger Pau Monné wrote:
+>> -
+>>  static int xc_msr_policy(xc_interface *xch, domid_t domid,
+>> -                         const struct xc_msr *msr)
+>> +                         const struct xc_msr *msr,
+>> +                         xc_cpu_policy_t *host,
+>> +                         xc_cpu_policy_t *def,
+> 
+> host and def should likely be const?
 
-Oh, eww.  Yes it does.
+I tried, but I can't. All policies go through find_msr(), which takes a
+non-const policy, and must be non-const because it's also used for the
+cur policy.
 
-I'll need to rework with __packed still in place.
+I did the next best thing (I think) by const-ifying the result of
+find_msr inside the loop for host and def. Same thing on the cpuid function.
 
-~Andrew
+>> -    if ( rc )
+>> -    {
+>> -        PERROR("Failed to obtain host policy");
+>> -        rc = -errno;
+>> -        goto out;
+>> -    }
+>> +    if ( !msrs )
+> 
+> Does this build?  Where is 'msrs' defined in this context?  The
+> function parameter is 'msr' AFAICT.
+
+Ugh. I fixed that while adjusting it for testing within XenServer and
+then neglected to make the change in the actual for-upstream patches.
+
+You're right.
+
+> 
+>> +        return 0;
+> 
+> Should we also check for host, def, cur != NULL also?
+
+It's already done by the caller, but can do out of paranoia; returning
+-EINVAL.
+
+>> @@ -583,14 +436,16 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+>>      int rc;
+>>      bool hvm;
+>>      xc_domaininfo_t di;
+>> -    struct xc_cpu_policy *p = xc_cpu_policy_init();
+>> -    unsigned int i, nr_leaves = ARRAY_SIZE(p->leaves), nr_msrs = 0;
+>> -    uint32_t err_leaf = -1, err_subleaf = -1, err_msr = -1;
+>> -    uint32_t host_featureset[FEATURESET_NR_ENTRIES] = {};
+>> -    uint32_t len = ARRAY_SIZE(host_featureset);
+>>  
+>> -    if ( !p )
+>> -        return -ENOMEM;
+>> +    struct xc_cpu_policy *host = xc_cpu_policy_init();
+>> +    struct xc_cpu_policy *def = xc_cpu_policy_init();
+> 
+> I would be helpful to have some kind of mechanism to allocate + init a
+> policy at the same time, so that the resulting object could be made
+> const here.  (Not that you need to do it in this patch).
+
+That would seem sensible, but we'd also need a way to clone it to avoid
+repeating hypercalls when they aren't required. I had a patch that did
+that, but was quite complicated for other reasons. I might get back to
+it at some point now that per-vCPU policies don't seem to be required.
+
+>> @@ -695,24 +542,24 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+>>                   !(dfs = x86_cpu_policy_lookup_deep_deps(b)) )
+>>                  continue;
+>>  
+>> -            for ( i = 0; i < ARRAY_SIZE(disabled_features); ++i )
+>> +            for ( size_t i = 0; i < ARRAY_SIZE(disabled_features); ++i )
+> 
+> All this loop index type changes could be done as a separate patch,
+> you are not even touching the surrounding lines.  It adds a lot of
+> churn to this patch for no reason IMO.
+
+I got carried away. Let me revert that. I still want to get rid of all
+those overscoped indices, but this is not the patch for it.
+
+>> @@ -772,49 +619,45 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+>>               * apic_id_size values greater than 7.  Limit the value to
+>>               * 7 for now.
+>>               */
+>> -            if ( p->policy.extd.nc < 0x7f )
+>> +            if ( cur->policy.extd.nc < 0x7f )
+>>              {
+>> -                if ( p->policy.extd.apic_id_size != 0 && p->policy.extd.apic_id_size < 0x7 )
+>> -                    p->policy.extd.apic_id_size++;
+>> +                if ( cur->policy.extd.apic_id_size != 0 && cur->policy.extd.apic_id_size < 0x7 )
+> 
+> I would split the line while there, it's overly long.
+
+Ack
+
+> 
+> Thanks, Roger.
+
+Cheers,
+Alejandro
 
