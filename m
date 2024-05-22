@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CADDC41513
-	for <xen-devel@archiver.kernel.org>; Wed, 22 May 2024 07:52:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.727263.1131689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D27DC25B77
+	for <xen-devel@archiver.kernel.org>; Wed, 22 May 2024 07:52:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.727266.1131724 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s9glZ-0005dO-4A; Wed, 22 May 2024 07:52:05 +0000
+	id 1s9glc-0006aT-Qa; Wed, 22 May 2024 07:52:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 727263.1131689; Wed, 22 May 2024 07:52:05 +0000
+Received: by outflank-mailman (output) from mailman id 727266.1131724; Wed, 22 May 2024 07:52:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1s9glZ-0005cP-08; Wed, 22 May 2024 07:52:05 +0000
-Received: by outflank-mailman (input) for mailman id 727263;
- Wed, 22 May 2024 07:52:03 +0000
+	id 1s9glc-0006aK-NA; Wed, 22 May 2024 07:52:08 +0000
+Received: by outflank-mailman (input) for mailman id 727266;
+ Wed, 22 May 2024 07:52:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GfTZ=MZ=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1s9glX-0005YY-M3
- for xen-devel@lists.xenproject.org; Wed, 22 May 2024 07:52:03 +0000
+ id 1s9glb-0005YY-HV
+ for xen-devel@lists.xenproject.org; Wed, 22 May 2024 07:52:07 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 2c9faaab-1810-11ef-90a0-e314d9c70b13;
- Wed, 22 May 2024 09:52:02 +0200 (CEST)
+ id 2f414d23-1810-11ef-90a0-e314d9c70b13;
+ Wed, 22 May 2024 09:52:06 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CF224DA7;
- Wed, 22 May 2024 00:52:25 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7716B14BF;
+ Wed, 22 May 2024 00:52:30 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E8DDB3F766;
- Wed, 22 May 2024 00:52:00 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 909813F766;
+ Wed, 22 May 2024 00:52:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c9faaab-1810-11ef-90a0-e314d9c70b13
+X-Inumbo-ID: 2f414d23-1810-11ef-90a0-e314d9c70b13
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,242 +52,202 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 1/7] xen/arm: Lookup bootinfo shm bank during the mapping
-Date: Wed, 22 May 2024 08:51:45 +0100
-Message-Id: <20240522075151.3373899-2-luca.fancellu@arm.com>
+Subject: [PATCH v3 5/7] xen/arm: Rework heap page allocation outside allocate_bank_memory
+Date: Wed, 22 May 2024 08:51:49 +0100
+Message-Id: <20240522075151.3373899-6-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240522075151.3373899-1-luca.fancellu@arm.com>
 References: <20240522075151.3373899-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The current static shared memory code is using bootinfo banks when it
-needs to find the number of borrowers, so every time assign_shared_memory
-is called, the bank is searched in the bootinfo.shmem structure.
+The function allocate_bank_memory allocates pages from the heap and
+maps them to the guest using guest_physmap_add_page.
 
-There is nothing wrong with it, however the bank can be used also to
-retrieve the start address and size and also to pass less argument to
-assign_shared_memory. When retrieving the information from the bootinfo
-bank, it's also possible to move the checks on alignment to
-process_shm_node in the early stages.
+As a preparation work to support static shared memory bank when the
+host physical address is not provided, Xen needs to allocate memory
+from the heap, so rework allocate_bank_memory moving out the page
+allocation in a new function called allocate_domheap_memory.
 
-So create a new function find_shm_bank_by_id() which takes a
-'struct shared_meminfo' structure and the shared memory ID, to look for a
-bank with a matching ID, take the physical host address and size from the
-bank, pass the bank to assign_shared_memory() removing the now unnecessary
-arguments and finally remove the acquire_nr_borrower_domain() function
-since now the information can be extracted from the passed bank.
-Move the "xen,shm-id" parsing early in process_shm to bail out quickly in
-case of errors (unlikely), as said above, move the checks on alignment
-to process_shm_node.
+The function allocate_domheap_memory takes a callback function and
+a pointer to some extra information passed to the callback and this
+function will be called for every region, until a defined size is
+reached.
 
-Drawback of this change is that now the bootinfo are used also when the
-bank doesn't need to be allocated, however it will be convenient later
-to use it as an argument for assign_shared_memory when dealing with
-the use case where the Host physical address is not supplied by the user.
+In order to keep allocate_bank_memory functionality, the callback
+passed to allocate_domheap_memory is a wrapper for
+guest_physmap_add_page.
+
+Let allocate_domheap_memory be externally visible, in order to use
+it in the future from the static shared memory module.
+
+Take the opportunity to change the signature of allocate_bank_memory
+and remove the 'struct domain' parameter, which can be retrieved from
+'struct kernel_info'.
+
+No functional changes is intended.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 v3 changes:
- - switch strncmp with strcmp in find_shm_bank_by_id, fix commit msg typo,
-   add R-by Michal.
-v2 changes:
- - fix typo commit msg, renamed find_shm() to find_shm_bank_by_id(),
-   swap region size check different from zero and size alignment, remove
-   not necessary BUGON(). (Michal)
+ - Add R-by Michal
+v2:
+ - Reduced scope of pg var in allocate_domheap_memory, removed not
+   necessary BUG_ON(), changed callback to return bool and fix
+   comment. (Michal)
 ---
- xen/arch/arm/static-shmem.c | 100 +++++++++++++++++++-----------------
- 1 file changed, 53 insertions(+), 47 deletions(-)
+ xen/arch/arm/dom0less-build.c           |  4 +-
+ xen/arch/arm/domain_build.c             | 79 +++++++++++++++++--------
+ xen/arch/arm/include/asm/domain_build.h |  9 ++-
+ 3 files changed, 62 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-index 78881dd1d3f7..0a1c327e90ea 100644
---- a/xen/arch/arm/static-shmem.c
-+++ b/xen/arch/arm/static-shmem.c
-@@ -19,29 +19,21 @@ static void __init __maybe_unused build_assertions(void)
-                  offsetof(struct shared_meminfo, bank)));
+diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+index 74f053c242f4..20ddf6f8f250 100644
+--- a/xen/arch/arm/dom0less-build.c
++++ b/xen/arch/arm/dom0less-build.c
+@@ -60,12 +60,12 @@ static void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
+ 
+     mem->nr_banks = 0;
+     bank_size = MIN(GUEST_RAM0_SIZE, kinfo->unassigned_mem);
+-    if ( !allocate_bank_memory(d, kinfo, gaddr_to_gfn(GUEST_RAM0_BASE),
++    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM0_BASE),
+                                bank_size) )
+         goto fail;
+ 
+     bank_size = MIN(GUEST_RAM1_SIZE, kinfo->unassigned_mem);
+-    if ( !allocate_bank_memory(d, kinfo, gaddr_to_gfn(GUEST_RAM1_BASE),
++    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM1_BASE),
+                                bank_size) )
+         goto fail;
+ 
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 02e741685102..669970c86fd5 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -417,30 +417,15 @@ static void __init allocate_memory_11(struct domain *d,
  }
  
--static int __init acquire_nr_borrower_domain(struct domain *d,
--                                             paddr_t pbase, paddr_t psize,
--                                             unsigned long *nr_borrowers)
-+static const struct membank __init *
-+find_shm_bank_by_id(const struct membanks *shmem, const char *shm_id)
+ #ifdef CONFIG_DOM0LESS_BOOT
+-bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
+-                                 gfn_t sgfn, paddr_t tot_size)
++bool __init allocate_domheap_memory(struct domain *d, paddr_t tot_size,
++                                    alloc_domheap_mem_cb cb, void *extra)
  {
--    const struct membanks *shmem = bootinfo_get_shmem();
-     unsigned int bank;
- 
--    /* Iterate reserved memory to find requested shm bank. */
-     for ( bank = 0 ; bank < shmem->nr_banks; bank++ )
-     {
--        paddr_t bank_start = shmem->bank[bank].start;
--        paddr_t bank_size = shmem->bank[bank].size;
+-    struct membanks *mem = kernel_info_get_mem(kinfo);
+-    int res;
+-    struct page_info *pg;
+-    struct membank *bank;
+-    unsigned int max_order = ~0;
 -
--        if ( (pbase == bank_start) && (psize == bank_size) )
-+        if ( strcmp(shm_id, shmem->bank[bank].shmem_extra->shm_id) == 0 )
-             break;
-     }
- 
-     if ( bank == shmem->nr_banks )
--        return -ENOENT;
-+        return NULL;
- 
--    *nr_borrowers = shmem->bank[bank].shmem_extra->nr_shm_borrowers;
--
--    return 0;
-+    return &shmem->bank[bank];
- }
- 
- /*
-@@ -103,14 +95,18 @@ static mfn_t __init acquire_shared_memory_bank(struct domain *d,
-     return smfn;
- }
- 
--static int __init assign_shared_memory(struct domain *d,
--                                       paddr_t pbase, paddr_t psize,
--                                       paddr_t gbase)
-+static int __init assign_shared_memory(struct domain *d, paddr_t gbase,
-+                                       const struct membank *shm_bank)
- {
-     mfn_t smfn;
-     int ret = 0;
-     unsigned long nr_pages, nr_borrowers, i;
-     struct page_info *page;
-+    paddr_t pbase, psize;
-+
-+    pbase = shm_bank->start;
-+    psize = shm_bank->size;
-+    nr_borrowers = shm_bank->shmem_extra->nr_shm_borrowers;
- 
-     printk("%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
-            d, pbase, pbase + psize);
-@@ -135,14 +131,6 @@ static int __init assign_shared_memory(struct domain *d,
-         }
-     }
- 
 -    /*
--     * Get the right amount of references per page, which is the number of
--     * borrower domains.
+-     * allocate_bank_memory can be called with a tot_size of zero for
+-     * the second memory bank. It is not an error and we can safely
+-     * avoid creating a zero-size memory bank.
 -     */
--    ret = acquire_nr_borrower_domain(d, pbase, psize, &nr_borrowers);
--    if ( ret )
--        return ret;
+-    if ( tot_size == 0 )
+-        return true;
 -
-     /*
-      * Instead of letting borrower domain get a page ref, we add as many
-      * additional reference as the number of borrowers when the owner
-@@ -199,6 +187,7 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+-    bank = &mem->bank[mem->nr_banks];
+-    bank->start = gfn_to_gaddr(sgfn);
+-    bank->size = tot_size;
++    unsigned int max_order = UINT_MAX;
  
-     dt_for_each_child_node(node, shm_node)
+     while ( tot_size > 0 )
      {
-+        const struct membank *boot_shm_bank;
-         const struct dt_property *prop;
-         const __be32 *cells;
-         uint32_t addr_cells, size_cells;
-@@ -212,6 +201,23 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-         if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
+         unsigned int order = get_allocation_size(tot_size);
++        struct page_info *pg;
+ 
+         order = min(max_order, order);
+ 
+@@ -463,17 +448,61 @@ bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
              continue;
- 
-+        if ( dt_property_read_string(shm_node, "xen,shm-id", &shm_id) )
-+        {
-+            printk("%pd: invalid \"xen,shm-id\" property", d);
-+            return -EINVAL;
-+        }
-+        BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
-+
-+        boot_shm_bank = find_shm_bank_by_id(bootinfo_get_shmem(), shm_id);
-+        if ( !boot_shm_bank )
-+        {
-+            printk("%pd: static shared memory bank not found: '%s'", d, shm_id);
-+            return -ENOENT;
-+        }
-+
-+        pbase = boot_shm_bank->start;
-+        psize = boot_shm_bank->size;
-+
-         /*
-          * xen,shared-mem = <pbase, gbase, size>;
-          * TODO: pbase is optional.
-@@ -221,20 +227,7 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-         prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
-         BUG_ON(!prop);
-         cells = (const __be32 *)prop->value;
--        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, &gbase);
--        psize = dt_read_paddr(cells, size_cells);
--        if ( !IS_ALIGNED(pbase, PAGE_SIZE) || !IS_ALIGNED(gbase, PAGE_SIZE) )
--        {
--            printk("%pd: physical address 0x%"PRIpaddr", or guest address 0x%"PRIpaddr" is not suitably aligned.\n",
--                   d, pbase, gbase);
--            return -EINVAL;
--        }
--        if ( !IS_ALIGNED(psize, PAGE_SIZE) )
--        {
--            printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
--                   d, psize);
--            return -EINVAL;
--        }
-+        gbase = dt_read_paddr(cells + addr_cells, addr_cells);
- 
-         for ( i = 0; i < PFN_DOWN(psize); i++ )
-             if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
-@@ -251,13 +244,6 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-         if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
-             owner_dom_io = false;
- 
--        if ( dt_property_read_string(shm_node, "xen,shm-id", &shm_id) )
--        {
--            printk("%pd: invalid \"xen,shm-id\" property", d);
--            return -EINVAL;
--        }
--        BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
--
-         /*
-          * DOMID_IO is a fake domain and is not described in the Device-Tree.
-          * Therefore when the owner of the shared region is DOMID_IO, we will
-@@ -270,8 +256,8 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-              * We found the first borrower of the region, the owner was not
-              * specified, so they should be assigned to dom_io.
-              */
--            ret = assign_shared_memory(owner_dom_io ? dom_io : d,
--                                       pbase, psize, gbase);
-+            ret = assign_shared_memory(owner_dom_io ? dom_io : d, gbase,
-+                                       boot_shm_bank);
-             if ( ret )
-                 return ret;
          }
-@@ -439,12 +425,32 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-     device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
-     size = dt_next_cell(size_cells, &cell);
  
-+    if ( !IS_ALIGNED(paddr, PAGE_SIZE) )
-+    {
-+        printk("fdt: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
-+               paddr);
-+        return -EINVAL;
-+    }
-+
-+    if ( !IS_ALIGNED(gaddr, PAGE_SIZE) )
-+    {
-+        printk("fdt: guest address 0x%"PRIpaddr" is not suitably aligned.\n",
-+               gaddr);
-+        return -EINVAL;
-+    }
-+
-     if ( !size )
-     {
-         printk("fdt: the size for static shared memory region can not be zero\n");
-         return -EINVAL;
+-        res = guest_physmap_add_page(d, sgfn, page_to_mfn(pg), order);
+-        if ( res )
+-        {
+-            dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
++        if ( !cb(d, pg, order, extra) )
+             return false;
+-        }
+ 
+-        sgfn = gfn_add(sgfn, 1UL << order);
+         tot_size -= (1ULL << (PAGE_SHIFT + order));
      }
  
-+    if ( !IS_ALIGNED(size, PAGE_SIZE) )
++    return true;
++}
++
++static bool __init guest_map_pages(struct domain *d, struct page_info *pg,
++                                   unsigned int order, void *extra)
++{
++    gfn_t *sgfn = (gfn_t *)extra;
++    int res;
++
++    BUG_ON(!sgfn);
++    res = guest_physmap_add_page(d, *sgfn, page_to_mfn(pg), order);
++    if ( res )
 +    {
-+        printk("fdt: size 0x%"PRIpaddr" is not suitably aligned\n", size);
-+        return -EINVAL;
++        dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
++        return false;
 +    }
 +
-     end = paddr + size;
-     if ( end <= paddr )
-     {
++    *sgfn = gfn_add(*sgfn, 1UL << order);
++
++    return true;
++}
++
++bool __init allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
++                                 paddr_t tot_size)
++{
++    struct membanks *mem = kernel_info_get_mem(kinfo);
++    struct domain *d = kinfo->d;
++    struct membank *bank;
++
++    /*
++     * allocate_bank_memory can be called with a tot_size of zero for
++     * the second memory bank. It is not an error and we can safely
++     * avoid creating a zero-size memory bank.
++     */
++    if ( tot_size == 0 )
++        return true;
++
++    bank = &mem->bank[mem->nr_banks];
++    bank->start = gfn_to_gaddr(sgfn);
++    bank->size = tot_size;
++
++    /*
++     * Allocate pages from the heap until tot_size is zero and map them to the
++     * guest using guest_map_pages, passing the starting gfn as extra parameter
++     * for the map operation.
++     */
++    if ( !allocate_domheap_memory(d, tot_size, guest_map_pages, &sgfn) )
++        return false;
++
+     mem->nr_banks++;
+     kinfo->unassigned_mem -= bank->size;
+ 
+diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
+index 45936212ca21..e712afbc7fbf 100644
+--- a/xen/arch/arm/include/asm/domain_build.h
++++ b/xen/arch/arm/include/asm/domain_build.h
+@@ -5,9 +5,12 @@
+ #include <asm/kernel.h>
+ 
+ typedef __be32 gic_interrupt_t[3];
+-
+-bool allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
+-                          gfn_t sgfn, paddr_t tot_size);
++typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
++                                     unsigned int order, void *extra);
++bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
++                             alloc_domheap_mem_cb cb, void *extra);
++bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
++                          paddr_t tot_size);
+ int construct_domain(struct domain *d, struct kernel_info *kinfo);
+ int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
+ int make_chosen_node(const struct kernel_info *kinfo);
 -- 
 2.34.1
 
