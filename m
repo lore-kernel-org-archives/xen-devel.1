@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1470C25B75
-	for <xen-devel@archiver.kernel.org>; Thu, 23 May 2024 14:22:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.728541.1133484 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E902C25B75
+	for <xen-devel@archiver.kernel.org>; Thu, 23 May 2024 14:25:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.728546.1133499 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sA9Kg-0004BG-1M; Thu, 23 May 2024 14:22:14 +0000
+	id 1sA9ND-0004oS-NE; Thu, 23 May 2024 14:24:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 728541.1133484; Thu, 23 May 2024 14:22:14 +0000
+Received: by outflank-mailman (output) from mailman id 728546.1133499; Thu, 23 May 2024 14:24:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sA9Kf-0004B9-Uq; Thu, 23 May 2024 14:22:13 +0000
-Received: by outflank-mailman (input) for mailman id 728541;
- Thu, 23 May 2024 14:22:12 +0000
+	id 1sA9ND-0004nP-Ia; Thu, 23 May 2024 14:24:51 +0000
+Received: by outflank-mailman (input) for mailman id 728546;
+ Thu, 23 May 2024 14:24:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TXgv=M2=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1sA9Kd-0004At-W8
- for xen-devel@lists.xenproject.org; Thu, 23 May 2024 14:22:12 +0000
-Received: from wfhigh6-smtp.messagingengine.com
- (wfhigh6-smtp.messagingengine.com [64.147.123.157])
+ <SRS0=bqR6=M2=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
+ id 1sA9NB-0004l4-Lv
+ for xen-devel@lists.xenproject.org; Thu, 23 May 2024 14:24:49 +0000
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [2607:f8b0:4864:20::729])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d622ffa1-190f-11ef-90a1-e314d9c70b13;
- Thu, 23 May 2024 16:22:09 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfhigh.west.internal (Postfix) with ESMTP id 3727518000B8;
- Thu, 23 May 2024 10:22:06 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Thu, 23 May 2024 10:22:06 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 23 May 2024 10:22:04 -0400 (EDT)
+ id 3594abba-1910-11ef-90a1-e314d9c70b13;
+ Thu, 23 May 2024 16:24:48 +0200 (CEST)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-794977cbcc3so110760485a.0
+ for <xen-devel@lists.xenproject.org>; Thu, 23 May 2024 07:24:48 -0700 (PDT)
+Received: from georged-x-u.xenrt.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-792bf34060csm1484523485a.134.2024.05.23.07.24.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 May 2024 07:24:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,136 +47,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d622ffa1-190f-11ef-90a1-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:content-type:content-type:date:date
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1716474125;
-	 x=1716560525; bh=wch4MQuvuoO/P1pJrQteF14ohcPjgykADHYQkfDfatc=; b=
-	BjcgLiWmlR+xaH9GdQ+d4rEO0sgf1GtMiJTZCRcF2zSw5Kb+0LoFJUg6976wp0cm
-	t78HTUzGk4MTKKLTRn67hNwkhj+5o20lLxhTFlwU84aJM65PwxGPhUnu7xWeud+x
-	QB+lI9j2OPhzDy0Umf04mbO1KPrz7VwsU4wXCT5+irBQzllMu9m5rD609MYWwoYp
-	exZXfrNmJq1qElVb/RdjYSaBJuFp8CUMF0Ey4UiXiKiTsFToWrbv8XKC1kvRH6TZ
-	vtL++6GaH35hBfw2Dg6UT5514poW1hfDYl9x7x1WCVfpv35OrZW1QsJPJSygI90U
-	Bi+DhF4Cfbupyorsh0dgbA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1716474125; x=1716560525; bh=wch4MQuvuoO/P1pJrQteF14ohcPj
-	gykADHYQkfDfatc=; b=nXStMfr5tSxpoaGYxfs9eR5ys1YlaSRcGOiZMCyL7b6c
-	5nxMWORJPS78UC+XIB4Q+N0srgF0xsC8l6ML6i+cs+W8r3wwF/NfTBNHWb35bgu3
-	tKWXUi0+akkgOiqRW8djPIfpi+FMPwvmrQfEL99AW/mVfs1qN4mWaEWec6Z1F9rE
-	tLB0SHzQeVTA2iGmSblsIk48DVh8sCDK3v4C5Nd4M/DdYeSAQ4QDkH2CAJFbTKqu
-	qTyX19n0kLKGKWpjt7jxCqYIWDsTv9v4A97EAgy72AxwWyfFCgO5tO3595nhZ1Qz
-	rwwqQQtoZsfmiyGNN9COytqPKGnxYFgOwPdQd6uVvQ==
-X-ME-Sender: <xms:DVFPZo6JxlmxbjnlJCMmWAfkTl3J2M98Yrzu6PmuCIacdm5MP8xHug>
-    <xme:DVFPZp5B_NOC9mvzlB3F5fRAbub8RE-kolDJp-ntVB7OLJLImRSvap9oB917eNjRh
-    Ii2AYuxX_JYgQ>
-X-ME-Received: <xmr:DVFPZnc8ZF6PD1bRfxiorjRvjlbby8YU-7OUp9tBnry9tnM1nr1puBTcpT5avmQ7xFnmUlVBSph1GkUSOCi9yW8Pq9WSxK5etQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeiiedgjeehucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvffukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
-    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeehvedv
-    ueevheekhefhvefggffgvedugeetuefgleeivdehgfeuieeugfetteeiffenucffohhmrg
-    hinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghm
-    pehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslh
-    grsgdrtghomh
-X-ME-Proxy: <xmx:DVFPZtIUmHNW2D4JaLvhXFGe1S2wjA3kWzq3x1vifkP7hPMtOIqy0w>
-    <xmx:DVFPZsJNUWRXYr3juwd1PRUj32Gc9fAIIApk4My0DTFIfeg-bEUlaA>
-    <xmx:DVFPZuwDOS5Hb-RMH60J-idNbHecnjLj-pLoWJllAbkcqBezT2KUHQ>
-    <xmx:DVFPZgJF-p9Mt_C724P9KhikDW0T6AR9GU5UY_UAdSTtXdRlNU4cNQ>
-    <xmx:DVFPZjWRm-UWZrne_iD3FxfmNc5UQ9uO2ZotSvVGIq7qC0YaVNRvWQRN>
-Feedback-ID: i1568416f:Fastmail
-Date: Thu, 23 May 2024 16:22:01 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org,
+X-Inumbo-ID: 3594abba-1910-11ef-90a1-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1716474287; x=1717079087; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=X8Ew7kXbX6WgodqVo4gVB/w3zPAvA0jSuuYBh0aRvRU=;
+        b=Urc6KGvqgtJk+ULitDI60Z/ycC6fg9TYwsZWpuEysvbIZ8UPOH6DAldMdi8IaPJjSw
+         rC5hI4Uz9xWfI75p/Y+pCkDIeGc+i5/Y9VSA0Lfuc9WESps9X46NXZsSEAf9QtjorNFh
+         cagPyfJ4I6JAMP3LfRd8ndJrYcVWpA3r+YeZA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716474287; x=1717079087;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=X8Ew7kXbX6WgodqVo4gVB/w3zPAvA0jSuuYBh0aRvRU=;
+        b=KeD9EgXTrxVBICmetsPkNKw7MOtRdoUrMkNBhZ0D98598oxBq1uE6P/rgi9eHcQgRZ
+         iA2DqOHdpbxMz28pFW3giCu+jrbDe/97EIjrkVbf62pfiKY6lVRHouwiWbt8UZn1DmD4
+         xifQF+7TQ2Svp9c6Glr2063aOhUpNrQlN92xXu9s3a4E1mJi2JJF6TDTTwIMHLr4miRR
+         TyTlNSkPqVFuNUDoff09lBmxcTycp0+bPcQzwmlwZqF3i94q5IhEIhWsNHlGC8mPqjh5
+         9p5siVfjrL7po2A8bJpV1y8qVsGpDwbUbgEZahn8KFVgN9e4xKY/rsfUFBwvEpgz7YWO
+         xr0w==
+X-Gm-Message-State: AOJu0Yxo+a6VrafWvFRllOBADYl7HdIaF9dzV+jggcje8kwEmWynQ2+K
+	OXTt4pjJtyoHTmuTMyFixmdm6hgQkAgBpGJUnq53/9nxTc1RdOzy5lworeER7KAGxxkpzFx7cS1
+	IcYY=
+X-Google-Smtp-Source: AGHT+IG5VmIs5hbF9sW/q/KrZDjCyvAZCTD8j7mB5ZNItW8pz1J6+O7F4zgT+uRykhLHaoVN5DmJtA==
+X-Received: by 2002:ae9:e916:0:b0:792:5b7a:ad58 with SMTP id af79cd13be357-7949941a69fmr549719485a.8.1716474287318;
+        Thu, 23 May 2024 07:24:47 -0700 (PDT)
+From: George Dunlap <george.dunlap@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v4 0/2] Add API for making parts of a MMIO page R/O and
- use it in XHCI console
-Message-ID: <Zk9RChKHBa4mQAVj@mail-itl>
-References: <cover.68462f37276d69ab6e268be94d049f866a321f73.1716392340.git-series.marmarek@invisiblethingslab.com>
+	Anthony Perard <anthony.perard@cloud.com>,
+	Olaf Hering <olaf@aepfle.de>
+Subject: [PATCH v2 2/2] tools/xenalyze: Ignore HVM_EMUL events harder
+Date: Thu, 23 May 2024 15:10:20 +0100
+Message-Id: <20240523141020.2256177-2-george.dunlap@cloud.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240523141020.2256177-1-george.dunlap@cloud.com>
+References: <20240523141020.2256177-1-george.dunlap@cloud.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="NVX2/ut/877rVt3E"
-Content-Disposition: inline
-In-Reply-To: <cover.68462f37276d69ab6e268be94d049f866a321f73.1716392340.git-series.marmarek@invisiblethingslab.com>
+Content-Transfer-Encoding: 8bit
 
+To unify certain common sanity checks, checks are done very early in
+processing based only on the top-level type.
 
---NVX2/ut/877rVt3E
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 23 May 2024 16:22:01 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v4 0/2] Add API for making parts of a MMIO page R/O and
- use it in XHCI console
+Unfortunately, when TRC_HVM_EMUL was introduced, it broke some of the
+assumptions about how the top-level types worked.  Namely, traces of
+this type will show up outside of HVM contexts: in idle domains and in
+PV domains.
 
-On Wed, May 22, 2024 at 05:39:02PM +0200, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> On older systems, XHCI xcap had a layout that no other (interesting) regi=
-sters
-> were placed on the same page as the debug capability, so Linux was fine w=
-ith
-> making the whole page R/O. But at least on Tiger Lake and Alder Lake, Lin=
-ux
-> needs to write to some other registers on the same page too.
->=20
-> Add a generic API for making just parts of an MMIO page R/O and use it to=
- fix
-> USB3 console with share=3Dyes or share=3Dhwdom options. More details in c=
-ommit
-> messages.
->=20
-> Marek Marczykowski-G=C3=B3recki (2):
->   x86/mm: add API for marking only part of a MMIO page read only
->   drivers/char: Use sub-page ro API to make just xhci dbc cap RO
+Make an explicit exception for TRC_HVM_EMUL types in a number of places:
 
-Does any other x86 maintainer feel comfortable ack-ing this series? Jan
-already reviewed 2/2 here (but not 1/2 in this version), but also said
-he is not comfortable with letting this in without a second maintainer
-approval: https://lore.kernel.org/xen-devel/7655e401-b927-4250-ae63-05361a5=
-ee71d@suse.com/
+ - Pass the record info pointer to toplevel_assert_check, so that it
+   can exclude TRC_HVM_EMUL records from idle and vcpu data_mode
+   checks
 
->=20
->  xen/arch/x86/hvm/emulate.c      |   2 +-
->  xen/arch/x86/hvm/hvm.c          |   4 +-
->  xen/arch/x86/include/asm/mm.h   |  25 +++-
->  xen/arch/x86/mm.c               | 273 +++++++++++++++++++++++++++++++++-
->  xen/arch/x86/pv/ro-page-fault.c |   6 +-
->  xen/drivers/char/xhci-dbc.c     |  36 ++--
->  6 files changed, 327 insertions(+), 19 deletions(-)
->=20
-> base-commit: b0082b908391b29b7c4dd5e6c389ebd6481926f8
-> --=20
-> git-series 0.9.1
+ - Don't attempt to set the vcpu data_type in hvm_process for
+   TRC_HVM_EMUL records.
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+Signed-off-by: George Dunlap <george.dunlap@cloud.com>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Anthony Perard <anthony.perard@cloud.com>
+CC: Olaf Hering <olaf@aepfle.de>
+---
+ tools/xentrace/xenalyze.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
---NVX2/ut/877rVt3E
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
+index 9c4463b0e8..d95e52695f 100644
+--- a/tools/xentrace/xenalyze.c
++++ b/tools/xentrace/xenalyze.c
+@@ -21,6 +21,7 @@
+ #define _XOPEN_SOURCE 600
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <stdbool.h>
+ #include <argp.h>
+ #include <inttypes.h>
+ #include <limits.h>
+@@ -5305,8 +5306,11 @@ void hvm_process(struct pcpu_info *p)
+ 
+     assert(p->current);
+ 
+-    if(vcpu_set_data_type(p->current, VCPU_DATA_HVM))
+-        return;
++    /* HVM_EMUL types show up in all contexts */
++    if(ri->evt.sub != 0x4) {
++        if(vcpu_set_data_type(p->current, VCPU_DATA_HVM))
++            return;
++    }
+ 
+     switch ( ri->evt.sub ) {
+     case 2: /* HVM_HANDLER */
+@@ -9447,9 +9451,10 @@ static struct tl_assert_mask tl_assert_checks[TOPLEVEL_MAX] = {
+ /* There are a lot of common assumptions for the various processing
+  * routines.  Check them all in one place, doing something else if
+  * they don't pass. */
+-int toplevel_assert_check(int toplevel, struct pcpu_info *p)
++int toplevel_assert_check(int toplevel, struct record_info *ri, struct pcpu_info *p)
+ {
+     struct tl_assert_mask mask;
++    bool is_hvm_emul = (toplevel == TOPLEVEL_HVM) && (ri->evt.sub == 0x4);
+ 
+     mask = tl_assert_checks[toplevel];
+ 
+@@ -9459,7 +9464,7 @@ int toplevel_assert_check(int toplevel, struct pcpu_info *p)
+         goto fail;
+     }
+ 
+-    if( mask.not_idle_domain )
++    if( mask.not_idle_domain && !is_hvm_emul)
+     {
+         /* Can't do this check w/o first doing above check */
+         assert(mask.p_current);
+@@ -9478,7 +9483,8 @@ int toplevel_assert_check(int toplevel, struct pcpu_info *p)
+         v = p->current;
+ 
+         if ( ! (v->data_type == VCPU_DATA_NONE
+-                || v->data_type == mask.vcpu_data_mode) )
++                || v->data_type == mask.vcpu_data_mode
++                || is_hvm_emul) )
+         {
+             /* This may happen for track_dirty_vram, which causes a SHADOW_WRMAP_BF trace f/ dom0 */
+             fprintf(warn, "WARNING: Unexpected vcpu data type for d%dv%d on proc %d! Expected %d got %d. Not processing\n",
+@@ -9525,7 +9531,7 @@ void process_record(struct pcpu_info *p) {
+         return;
+ 
+     /* Unify toplevel assertions */
+-    if ( toplevel_assert_check(toplevel, p) )
++    if ( toplevel_assert_check(toplevel, ri, p) )
+     {
+         switch(toplevel) {
+         case TRC_GEN_MAIN:
+-- 
+2.25.1
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmZPUQoACgkQ24/THMrX
-1yyBAgf+OY4AI4FifIusRtmZbKOTGwbDJwPe3rQRQvQIoc2uzQwcYWNiirQdxXR3
-8F+ZEL1/IWAC5jJk5kK5guXBFUXhLy0+ni6tfO/jlRg6P468eoIWrHvQ0vtyFcUF
-QWjk5MXs2UmPnSY+6FO90sZCU5CXv9E5T5xIXzm2IQGWyQtA5GHBBaGsDdPnsekN
-ccrwinyhyVvGSruXHnRpIyCM6Ghmw4Zyq0LpRRH9Mpxw8QiY8OU1mEuHi4txkHTZ
-O5RdlHc+nDg40xpY0S9GNzbm9mh9I/blzV+twHkOb+lTCzXq3UfqTH29kKdK6VVO
-N427hpmTrAYKGUPuqAZLtmo+c4M5Ig==
-=N8As
------END PGP SIGNATURE-----
-
---NVX2/ut/877rVt3E--
 
