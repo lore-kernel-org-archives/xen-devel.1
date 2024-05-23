@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C071BC41513
-	for <xen-devel@archiver.kernel.org>; Thu, 23 May 2024 07:41:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.728093.1132860 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 881B4C25B75
+	for <xen-devel@archiver.kernel.org>; Thu, 23 May 2024 07:41:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.728096.1132889 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sA34G-0001Wl-Bm; Thu, 23 May 2024 07:40:52 +0000
+	id 1sA34L-0002Fy-6t; Thu, 23 May 2024 07:40:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 728093.1132860; Thu, 23 May 2024 07:40:52 +0000
+Received: by outflank-mailman (output) from mailman id 728096.1132889; Thu, 23 May 2024 07:40:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sA34G-0001We-8o; Thu, 23 May 2024 07:40:52 +0000
-Received: by outflank-mailman (input) for mailman id 728093;
- Thu, 23 May 2024 07:40:50 +0000
+	id 1sA34L-0002Fn-3n; Thu, 23 May 2024 07:40:57 +0000
+Received: by outflank-mailman (input) for mailman id 728096;
+ Thu, 23 May 2024 07:40:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1Po+=M2=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
- id 1sA34E-0001WY-HU
- for xen-devel@lists.xenproject.org; Thu, 23 May 2024 07:40:50 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20624.outbound.protection.outlook.com
- [2a01:111:f400:7e88::624])
+ id 1sA34K-0001WY-60
+ for xen-devel@lists.xenproject.org; Thu, 23 May 2024 07:40:56 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2415::600])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c5d858ae-18d7-11ef-90a1-e314d9c70b13;
- Thu, 23 May 2024 09:40:49 +0200 (CEST)
-Received: from CH0PR03CA0210.namprd03.prod.outlook.com (2603:10b6:610:e4::35)
- by SN7PR12MB6672.namprd12.prod.outlook.com (2603:10b6:806:26c::5)
+ id c93c26aa-18d7-11ef-90a1-e314d9c70b13;
+ Thu, 23 May 2024 09:40:54 +0200 (CEST)
+Received: from CH0PR03CA0328.namprd03.prod.outlook.com (2603:10b6:610:118::14)
+ by PH7PR12MB6882.namprd12.prod.outlook.com (2603:10b6:510:1b8::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.22; Thu, 23 May
- 2024 07:40:45 +0000
-Received: from CH1PEPF0000AD76.namprd04.prod.outlook.com
- (2603:10b6:610:e4:cafe::fd) by CH0PR03CA0210.outlook.office365.com
- (2603:10b6:610:e4::35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.19 via Frontend
- Transport; Thu, 23 May 2024 07:40:45 +0000
+ 2024 07:40:51 +0000
+Received: from CH1PEPF0000AD74.namprd04.prod.outlook.com
+ (2603:10b6:610:118:cafe::c8) by CH0PR03CA0328.outlook.office365.com
+ (2603:10b6:610:118::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.20 via Frontend
+ Transport; Thu, 23 May 2024 07:40:50 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH1PEPF0000AD76.mail.protection.outlook.com (10.167.244.53) with Microsoft
+ CH1PEPF0000AD74.mail.protection.outlook.com (10.167.244.52) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7611.14 via Frontend Transport; Thu, 23 May 2024 07:40:44 +0000
+ 15.20.7611.14 via Frontend Transport; Thu, 23 May 2024 07:40:50 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 23 May
- 2024 02:40:44 -0500
+ 2024 02:40:50 -0500
 Received: from henry-MS-7D54.amd.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Thu, 23 May 2024 02:40:41 -0500
+ Transport; Thu, 23 May 2024 02:40:48 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5d858ae-18d7-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: c93c26aa-18d7-11ef-90a1-e314d9c70b13
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eBUFhwhuQjb7+8X5X6R4kmafl+OL6+/T+s7/7QRLM8LsMPe7aAnQYQce5Uceckjnm4ulN7kPX90a87WaTQg3YIpy2IZ0fkW1m+b0yAjfRtxlGUrIwx53tWq6G7C0/HVKwD+rQF0vkz2BXkAGpYVPtI89FYg9ewNIFnqANypiqMgzLOedgXgbtxGZED90lYmpJVzoPBKf6qfBpG3Gjr7JohMBdQ+DhZA7ai+Sylo+N6gg108yNo0fxISl2O7bVpzjivIxMsqblngHYBZ8Lpf4RP8EgA1PSL6/x1emsTyH6+w5sMJOFEjiMH7CHR/i6lIC6f6fX7uVEhxtfHlrBV/UGg==
+ b=GASANB7wRfDiBw1ZYy5MobrfNCEfRYjgsrg/RI9Os1jl+FYX8BtBBlsH2i6cm0Zx5rhfpcNYvoon0qGoYlky02pMMaAG7C7BlMh8+c2uOkoZh+fogGwJxBT18uvpXXqhqLRL/p70C75TwqHAKykez7Zzefbun15eQntzJm98y8yoT64NwCb+Am8oBuTqczJTcXXWq6T9vqHcxU1d3r/YNySJprxtD/pSXPrvfehaE7LxaZcacR/KCFCPMjiwxQabclPXi0DsOlMOrsVvmdiQ4wXVzEjAK5LZzyFiwf5RqNkIUQQMcnIWmJ/NuDA7dwWDPhR5WEtrcYh0pQkYOCg45A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s6GY8LYUMBjl94igM9pP1TWRNhnTdORD7Nqir12syYE=;
- b=GD0yVgQJvqm2A6K/aRhqKWts4b8KpkSQIe1W6qG2WFmQGYlviHmqhyFwhxeh1KQUMVS83InoXJOBN18dMk0AXlc1y1HG0DjqfXomIfEXbjytlXX7kDeds6vS38Lc46zFu7Ygt5K1OjDsGVRoW7IldNZ3RnooEa7KTSrjfnQAflGPOqkillkMzd+MCqfrNo1jFHj5gQQpH0MQh5GbO2eH9N8kkHSQCmblknYFiI1UUH5wIabOb4ztLxfjar9Z3E6+eR3bOG1RuhrsX2ZSgNKlpJ7gKuLifuf9auQ1K+zhrldHAu9kU9PEoU+eJWMrvVjyNESO+iLCdUbhi977ahg6lw==
+ bh=KLxhi2kA+DFIhfmJBOruoj4kiXc2RPsQrpkdr7sIoWE=;
+ b=GVmSctfn71A0m1gonkGAMKOeFxZbt20ohEYTYxQCIPp1oP3L7lW8xv3S3Rm9dqRJrb6E8W/IImqt/oAlmrKTjJUShz7PAmfQcBPK2a4uz58cPPo1ifLksBODz1hmwbZ68L9l7VTGCoaYTekavu3/QGmy5cr4Ck4WxQN8Bj5R2GGDmqKh4TroRksRb3kVj78kRL+opHIleJ0Gl5uybTBZfud/tPYgkZytNeAI0BOKqM+84dSNp5h3Rh0HGEKplaRXnlJie6ZzOhKFDl5q+fv3waqRC2SAffuy9cYUPfxR9NaXIecEvL8rzQCI0sPsEbb7UOREOxv0euKyolsoSnMlPA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s6GY8LYUMBjl94igM9pP1TWRNhnTdORD7Nqir12syYE=;
- b=2/xt8J4PMWfwWRhXHPSqdOsc9VTic6XmrzYqH29ztZa7YUXdNSwdzfZjesVPQwBIZhGnzRUFpL/nV121VS64xace/RAgkaUabUyDLhbZI2m+IkXujzCa53Sgh5I9ZPpJszbUxm99E5g1Rgq2tWk849FIejbouwhu6dfcVcwwWKY=
+ bh=KLxhi2kA+DFIhfmJBOruoj4kiXc2RPsQrpkdr7sIoWE=;
+ b=aRguojq0DNlj0lcnHRcOhH6ezOWHKdVvcV/CDw4KPrD1YP5uaohbpDqT26/qwbSr5Jmn3St02CrnbPhrwAKjDTRO6fdGNk4DMET2i+xzmpr+Vei14dfgb4M0B+1ZVnWd2UCIQ2otTCapcJaaSRpKmRUcExijgJ0lLrwVB0oPymg=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,17 +85,16 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Henry Wang <xin.wang2@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony@xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, George Dunlap
+CC: Anthony PERARD <anthony@xenproject.org>, George Dunlap
 	<george.dunlap@citrix.com>, Nick Rosbrook <rosbrookn@gmail.com>, "Juergen
- Gross" <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>
-Subject: [PATCH v4 0/9] Remaining patches for dynamic node programming using overlay dtbo
-Date: Thu, 23 May 2024 15:40:31 +0800
-Message-ID: <20240523074040.1611264-1-xin.wang2@amd.com>
+ Gross" <jgross@suse.com>, Henry Wang <xin.wang2@amd.com>, Jason Andryuk
+	<jason.andryuk@amd.com>
+Subject: [PATCH v4 3/9] tools/arm: Introduce the "nr_spis" xl config entry
+Date: Thu, 23 May 2024 15:40:34 +0800
+Message-ID: <20240523074040.1611264-4-xin.wang2@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240523074040.1611264-1-xin.wang2@amd.com>
+References: <20240523074040.1611264-1-xin.wang2@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -103,118 +102,180 @@ Received-SPF: None (SATLEXMB03.amd.com: xin.wang2@amd.com does not designate
  permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD76:EE_|SN7PR12MB6672:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7468e249-a0b4-4744-f97f-08dc7afba794
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD74:EE_|PH7PR12MB6882:EE_
+X-MS-Office365-Filtering-Correlation-Id: ef06980a-a40e-4bda-512a-08dc7afbab4d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230031|82310400017|376005|1800799015|36860700004|7416005;
+	BCL:0;ARA:13230031|82310400017|1800799015|376005|36860700004;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?NBmC6hn3LQhREzPCW69Tq4ZqhcLA27uy65HuAVw65egaUcvJbqJgrntnyCRk?=
- =?us-ascii?Q?HsJzFsHdOD7aCDOThMmvuxJtJmjpVQngcjU32KuNJPws3hp8gPyDZl6oj5V6?=
- =?us-ascii?Q?N1OXRGJXYVxE4ZAoVBRSkwaB+PP8/fZc391NxIht8ha6T+y6/geYT6uma02M?=
- =?us-ascii?Q?Fy9jXd8Qw+6qNpgU49dlDC8Vrd6Kicoj898WdLPV/p/K5w3hxVw1skA6olSO?=
- =?us-ascii?Q?dSk/HPrPJrPIwj2dRTLGI0vxMG8PR0XEDEnLfswEctraVmE0SzawC4vz0784?=
- =?us-ascii?Q?nmseRuqq+qcMJmfQHOvuvDX14sGrlHgl64ECA5K1NcRnipVk+jTDUfU3Km1p?=
- =?us-ascii?Q?6bYYsHFBga6vPuj4iqFiwM1Je94bykjj4enWGf+7cY433Qa3uzVDx+cQLhk6?=
- =?us-ascii?Q?z4Nbx+fQMgQGsHuAtBFceUl4i5aW4yXIILeUraAQaIiB7mvMuByTJp06yO+m?=
- =?us-ascii?Q?oJCEYH3+6rMLtqZWITKTrn5ucp6QwcvweOXbfUz1HMDuWGmg9w/HEebVfjbm?=
- =?us-ascii?Q?LIlJW6W6ld7E+5EtPLB/Tc4fK6CvGlC05TEskK5ci33O5sGVVtTO1YTer5he?=
- =?us-ascii?Q?bNSuFewWuf9PTZHL8yQcCO7ERbCSpE9Ftnn3mk/R9SvMYrTTYtPcgHTMJntu?=
- =?us-ascii?Q?ij+G840Vzl+WRv1xEwOyjZCTFXrpFA+O1dlwoTyk7i5gLiqowOSTIBrbNR8H?=
- =?us-ascii?Q?37o4GbzdBkMmGsEFGLZKjgwJQgmp8ciwZyP0jvEaqlNxTm4mG7GViwUoLIdx?=
- =?us-ascii?Q?c/ueOkNJAbr3kxgl0O0nkR0fwNoMyn7JHLROK7lFjfAefe6u/pSoQRcvOL+F?=
- =?us-ascii?Q?dGx0f4J0LP40imynIOVELoU99lF2lXAm+eTOmGZIzfGXVz1Xb7+2XL/6IrlH?=
- =?us-ascii?Q?5B05esIR7fEcpmwQbvruKA9qZpTYH+mpSajFGHnS49fTxlmtc2GCgmGtZahn?=
- =?us-ascii?Q?w59RZWd3Ky2/EWUZ6EkaA0QNxxPtoirF7yjPLdC2faeZAOwfFfpy9SrY1UBA?=
- =?us-ascii?Q?o/ajC+Xn5Pl6TU/I0RgG0FgAoKuId7PlCtf8rN/RlTGFeg1FBdJMMT7cfJ03?=
- =?us-ascii?Q?VKxKU+39alBlxqAW6NkSFy1D9inRTSAjkHLUr3Poqm2IITT/7lWxczY8Qt1+?=
- =?us-ascii?Q?ud76zRIpk2IWfRRrtCbDVnhl4plrU3CyCSeOYnAadbXtZVJQCcgPaAgOIrEd?=
- =?us-ascii?Q?Xbq/8PizAW5YiwPC8HbfmT8k+TSbnUju5lQC05u/N36sG2luCW3Fau9a7IT3?=
- =?us-ascii?Q?rJ83A3qH2saH6Jq5d756Q/NLZDg4SFKNeeMRnw4Cep/bTFiUp31Mb+fXY6xW?=
- =?us-ascii?Q?bdtAzLXaDbFiF3x/2C+VnVHtIOA9iZhf57UM5kflcMqibA=3D=3D?=
+	=?us-ascii?Q?DQVn/2bkLGWMeex8Bl0oFAwDENUj5lUQVM7JhtUDpuqti28h65sxsB0XEmcW?=
+ =?us-ascii?Q?vu9Ll/jnDvQt2y8gPiOSDM+kqrLse/yY9l4shPu3u0tavdDdN0ny0Fovzz3P?=
+ =?us-ascii?Q?XO4vYyEFHd4COKWGtGJIY/vXuiFIlvdNwY+etuJYDnbshwKdKr/FwHz+d79E?=
+ =?us-ascii?Q?k0XQstTzeJhaAtOANh72wnufn7Y55/SpfRPtOIZjj8El4mAreYGQRUR2/Vuf?=
+ =?us-ascii?Q?N9ZMG/wcoNsXu9f9Wk6JQ72EG6dy3oExY0XYaDy/U7DEZu9n0ohqtSo2+fNo?=
+ =?us-ascii?Q?St/QUCzYNbvTWwM/xThDEUpxi5+HTv8cX0a8EvVj0XaH3MrC3qmsXfhdDo8y?=
+ =?us-ascii?Q?JE1q48EyV6jJYwFGqEcRomaccr1wLMWOW7rycs/ZuTc5Ee22l+GOerac/fUx?=
+ =?us-ascii?Q?rq0gm1t6eEr1ESi0x2xWji5qBG+FOqlt+cBbmaX51/QKi0TtvoMdE31nBm3/?=
+ =?us-ascii?Q?hmHZ5xcSC4jnE+z7HRiHpgQ1wc4Dy+J7DLh+/hKpuNYGJK/hBL4ew8LcNS2Y?=
+ =?us-ascii?Q?J16lCobsWuMKWuhorTcL8hCQiAGiKG2xp90g4ArdCTPIuB36vLrDLF8FFB3b?=
+ =?us-ascii?Q?BLAFjECIsS8qPv7RJw9STMKErZ3tjSQGZb5t9r4KweC4dd0GNBm2vn5qNK6z?=
+ =?us-ascii?Q?rV+hzCMqvkgDepTCbjrLzVMShw8k37hSM34lMNV2CEEadENZfUIp7OHXGsZD?=
+ =?us-ascii?Q?l/pbGiYaj9jPOi6RGX8O8MNgIaD9/mOJyHO6okRNPAnQqEdM2qTT8Bx6Uz6O?=
+ =?us-ascii?Q?m8Y4f9/1zpTq9BpNAqb8FZ9EGUHzNRJkKzX/B4vneUSKUkHggvr99QXjIzjS?=
+ =?us-ascii?Q?nrYoFBiBXdf/6cdl9uFLiI5mzqNzQhzeP9RR8v7DF99eOQFHOM8j94M1JFr/?=
+ =?us-ascii?Q?VKHscBBu1HrkYTNc0unvXPzsI7QQWu2etFHUSx7A65q1AFt395qgd2Emgo+X?=
+ =?us-ascii?Q?Ld9cGnRBeCt2HK5dFTfI5uv+PCygWP4OPLsYH/qf5515ANqP9FTmVZVAR7N0?=
+ =?us-ascii?Q?UVgwlScJskf9F6cavBKbnGSznmxfN1OKEiq0lg4/BuAVnKQPu7yaIEC4ycxq?=
+ =?us-ascii?Q?8mXrXtLm2Ctrgxu01DFziwjXHpQldO7b4y3pOjSd5rVEnFd/mu5wIfG/GdIV?=
+ =?us-ascii?Q?w7ydpqv6YMonOKAiHtMQIW/OYz8fyJm3RU8DsswCWOYUGX7sXfa74orrLJlJ?=
+ =?us-ascii?Q?FG7yn8CcHYj32AFNJY4W59+aXgH+NSPacbLBggyQCuf59WT7a5HSP1tFH34o?=
+ =?us-ascii?Q?D8j+W52GJqVgG0gLPR8sG14DWplVOnvaJ9oXxzknj1EM+9d+gSfsp6SpmJnW?=
+ =?us-ascii?Q?IpRVXokmg06Iq3R09mQ+Xx8DPHYKdCe5zm26dM2Tlpvtc6S7i7dMyuhuLyhs?=
+ =?us-ascii?Q?DqcrNmBSJiGCwkGht0ZC078NUjjs?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(82310400017)(376005)(1800799015)(36860700004)(7416005);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(82310400017)(1800799015)(376005)(36860700004);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 May 2024 07:40:44.5924
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 May 2024 07:40:50.8337
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7468e249-a0b4-4744-f97f-08dc7afba794
+X-MS-Exchange-CrossTenant-Network-Message-Id: ef06980a-a40e-4bda-512a-08dc7afbab4d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000AD76.namprd04.prod.outlook.com
+	CH1PEPF0000AD74.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6672
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6882
 
-Hi all,
+Currently, the number of SPIs allocated to the domain is only
+configurable for Dom0less DomUs. Xen domains are supposed to be
+platform agnostics and therefore the numbers of SPIs for libxl
+guests should not be based on the hardware.
 
-This is the remaining series for the full functional "dynamic node
-programming using overlay dtbo" feature. The first part [1] has
-already been merged.
+Introduce a new xl config entry for Arm to provide a method for
+user to decide the number of SPIs. This would help to avoid
+bumping the `config->arch.nr_spis` in libxl everytime there is a
+new platform with increased SPI numbers.
 
-Quoting from the original series, the first part has already made
-Xen aware of new device tree node which means updating the dt_host
-with overlay node information, and in this series, the goal is to
-map IRQ and IOMMU during runtime, where we will do the actual IOMMU
-and IRQ mapping and unmapping to a running domain. Also, documentation
-of the "dynamic node programming using overlay dtbo" feature is added.
+Update the doc and the golang bindings accordingly.
 
-During the discussion in v3, I was recommended to split the overlay
-devices attach/detach to/from running domains to separated patches [3].
-But I decided to only expose the xl user interfaces together to the
-users after device attach/detach is fully functional, so I didn't
-split the toolstack patch (#8).
+Signed-off-by: Henry Wang <xin.wang2@amd.com>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+v4:
+- Add Jason's Reviewed-by tag.
+v3:
+- Reword documentation to avoid ambiguity.
+v2:
+- New patch to replace the original patch in v1:
+  "[PATCH 05/15] tools/libs/light: Increase nr_spi to 160"
+---
+ docs/man/xl.cfg.5.pod.in             | 14 ++++++++++++++
+ tools/golang/xenlight/helpers.gen.go |  2 ++
+ tools/golang/xenlight/types.gen.go   |  1 +
+ tools/libs/light/libxl_arm.c         |  4 ++--
+ tools/libs/light/libxl_types.idl     |  1 +
+ tools/xl/xl_parse.c                  |  3 +++
+ 6 files changed, 23 insertions(+), 2 deletions(-)
 
-Patch 1 is a fix of the existing code which is noticed during my local
-tests, details please see the commit message.
-
-Gitlab CI for this series can be found in [2].
-
-[1] https://lore.kernel.org/xen-devel/20230906011631.30310-1-vikram.garhwal@amd.com/
-[2] https://gitlab.com/xen-project/people/henryw/xen/-/pipelines/1301720278
-[3] https://lore.kernel.org/xen-devel/e743d3d2-5884-4e55-8627-85985ba339f9@amd.com/
-
-Henry Wang (7):
-  tools/xl: Correct the help information and exit code of the dt-overlay
-    command
-  xen/arm, doc: Add a DT property to specify IOMMU for Dom0less domUs
-  tools/arm: Introduce the "nr_spis" xl config entry
-  xen/arm/gic: Allow adding interrupt to running VMs
-  xen/arm: Add XEN_DOMCTL_dt_overlay and device attachment to domains
-  xen/arm: Support device detachment from domains
-  tools: Introduce the "xl dt-overlay {attach,detach}" commands
-
-Vikram Garhwal (2):
-  xen/arm/gic: Allow removing interrupt to running VMs
-  docs: Add device tree overlay documentation
-
- docs/man/xl.cfg.5.pod.in              |  14 +
- docs/misc/arm/device-tree/booting.txt |  16 +
- docs/misc/arm/overlay.txt             |  99 ++++++
- tools/golang/xenlight/helpers.gen.go  |   2 +
- tools/golang/xenlight/types.gen.go    |   1 +
- tools/include/libxl.h                 |  10 +
- tools/include/xenctrl.h               |   3 +
- tools/libs/ctrl/xc_dt_overlay.c       |  31 ++
- tools/libs/light/libxl_arm.c          |   4 +-
- tools/libs/light/libxl_dt_overlay.c   |  28 ++
- tools/libs/light/libxl_types.idl      |   1 +
- tools/xl/xl_cmdtable.c                |   4 +-
- tools/xl/xl_parse.c                   |   3 +
- tools/xl/xl_vmcontrol.c               |  48 ++-
- xen/arch/arm/dom0less-build.c         |  11 +-
- xen/arch/arm/domctl.c                 |   3 +
- xen/arch/arm/gic-vgic.c               |  36 ++-
- xen/arch/arm/gic.c                    |  17 +-
- xen/arch/arm/vgic/vgic.c              |  31 +-
- xen/common/dt-overlay.c               | 438 ++++++++++++++++++++------
- xen/include/public/domctl.h           |  15 +
- xen/include/public/sysctl.h           |  11 +-
- xen/include/xen/dt-overlay.h          |   7 +
- 23 files changed, 678 insertions(+), 155 deletions(-)
- create mode 100644 docs/misc/arm/overlay.txt
-
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 8f2b375ce9..416d582844 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -3072,6 +3072,20 @@ raised.
+ 
+ =back
+ 
++=over 4
++
++=item B<nr_spis="NR_SPIS">
++
++An optional 32-bit integer parameter specifying the number of SPIs (Shared
++Peripheral Interrupts) to allocate for the domain. If the value specified by
++the `nr_spis` parameter is smaller than the number of SPIs calculated by the
++toolstack based on the devices allocated for the domain, or the `nr_spis`
++parameter is not specified, the value calculated by the toolstack will be used
++for the domain. Otherwise, the value specified by the `nr_spis` parameter will
++be used.
++
++=back
++
+ =head3 x86
+ 
+ =over 4
+diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
+index b9cb5b33c7..fe5110474d 100644
+--- a/tools/golang/xenlight/helpers.gen.go
++++ b/tools/golang/xenlight/helpers.gen.go
+@@ -1154,6 +1154,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
+ x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
+ x.ArchArm.SveVl = SveType(xc.arch_arm.sve_vl)
++x.ArchArm.NrSpis = uint32(xc.arch_arm.nr_spis)
+ if err := x.ArchX86.MsrRelaxed.fromC(&xc.arch_x86.msr_relaxed);err != nil {
+ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+ }
+@@ -1670,6 +1671,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
+ xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
+ xc.arch_arm.sve_vl = C.libxl_sve_type(x.ArchArm.SveVl)
++xc.arch_arm.nr_spis = C.uint32_t(x.ArchArm.NrSpis)
+ if err := x.ArchX86.MsrRelaxed.toC(&xc.arch_x86.msr_relaxed); err != nil {
+ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+ }
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
+index 5b293755d7..c9e45b306f 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -597,6 +597,7 @@ ArchArm struct {
+ GicVersion GicVersion
+ Vuart VuartType
+ SveVl SveType
++NrSpis uint32
+ }
+ ArchX86 struct {
+ MsrRelaxed Defbool
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 1cb89fa584..a4029e3ac8 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -181,8 +181,8 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+ 
+     LOG(DEBUG, "Configure the domain");
+ 
+-    config->arch.nr_spis = nr_spis;
+-    LOG(DEBUG, " - Allocate %u SPIs", nr_spis);
++    config->arch.nr_spis = max(nr_spis, d_config->b_info.arch_arm.nr_spis);
++    LOG(DEBUG, " - Allocate %u SPIs", config->arch.nr_spis);
+ 
+     switch (d_config->b_info.arch_arm.gic_version) {
+     case LIBXL_GIC_VERSION_DEFAULT:
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 79e9c656cc..4e65e6fda5 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -722,6 +722,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
+                                ("vuart", libxl_vuart_type),
+                                ("sve_vl", libxl_sve_type),
++                               ("nr_spis", uint32),
+                               ])),
+     ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
+                               ])),
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index c504ab3711..e3a4800f6e 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -2935,6 +2935,9 @@ skip_usbdev:
+         }
+     }
+ 
++    if (!xlu_cfg_get_long (config, "nr_spis", &l, 0))
++        b_info->arch_arm.nr_spis = l;
++
+     parse_vkb_list(config, d_config);
+ 
+     d_config->virtios = NULL;
 -- 
 2.34.1
 
