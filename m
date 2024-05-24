@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAF08C25B79
-	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 10:33:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.729298.1134406 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CE4C25B74
+	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 10:52:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.729312.1134437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sASEJ-0001op-B1; Fri, 24 May 2024 10:32:55 +0000
+	id 1sASWp-0006A7-6v; Fri, 24 May 2024 10:52:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 729298.1134406; Fri, 24 May 2024 10:32:55 +0000
+Received: by outflank-mailman (output) from mailman id 729312.1134437; Fri, 24 May 2024 10:52:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sASEJ-0001oi-8N; Fri, 24 May 2024 10:32:55 +0000
-Received: by outflank-mailman (input) for mailman id 729298;
- Fri, 24 May 2024 10:32:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sASWp-0006A0-42; Fri, 24 May 2024 10:52:03 +0000
+Received: by outflank-mailman (input) for mailman id 729312;
+ Fri, 24 May 2024 10:52:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=di0w=M3=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1sASEI-0001HK-39
- for xen-devel@lists.xenproject.org; Fri, 24 May 2024 10:32:54 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f97dd3e6-19b8-11ef-b4bb-af5377834399;
- Fri, 24 May 2024 12:32:52 +0200 (CEST)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-354e0cc9c5cso2554692f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 24 May 2024 03:32:52 -0700 (PDT)
-Received: from [192.168.0.16] (0545937c.skybroadband.com. [5.69.147.124])
+ <SRS0=2lVY=M3=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
+ id 1sASWo-0005va-7b
+ for xen-devel@lists.xenproject.org; Fri, 24 May 2024 10:52:02 +0000
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [2a00:1450:4864:20::229])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a6794cf7-19bb-11ef-90a1-e314d9c70b13;
+ Fri, 24 May 2024 12:52:01 +0200 (CEST)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2e95a7545bdso8103881fa.2
+ for <xen-devel@lists.xenproject.org>; Fri, 24 May 2024 03:52:01 -0700 (PDT)
+Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3557a0931c9sm1269766f8f.65.2024.05.24.03.32.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 May 2024 03:32:51 -0700 (PDT)
+ 38308e7fff4ca-2e95be00a9esm1417431fa.103.2024.05.24.03.51.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 May 2024 03:51:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,247 +47,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f97dd3e6-19b8-11ef-b4bb-af5377834399
+X-Inumbo-ID: a6794cf7-19bb-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1716546772; x=1717151572; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=4sC4hyVDtv8Dy6ruPjJsuJvbEvg/9VKuCLBxdu6Om/s=;
-        b=IPAwYGatLJ3hCN9VKOetL2DgXzVby+d37CI9pa3oyy1+3mYPn5zshS5P+vKYDH8x83
-         xalCPaCfl1gKX22zpzEAMbPnYpouaXTdUKxvOn9/s6u7d1dWbxep6INU3eVrhHUsIhC1
-         GHtW+hxxg1eV0gCX+gnfgiM3uEPixKWsYOVvg=
+        d=gmail.com; s=20230601; t=1716547921; x=1717152721; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YP28Iks2aCd2MOvUAbQc4yYuz/leCz2VtuKFu0fMfns=;
+        b=Wl4j6IP6/aHZ0ifQHdheTEn2PWngmtcVEywDgaBYPaEqm+g8RSgs2o0BC0A2bWNOnZ
+         tlysKLtQA7gFr+scuWAYicl5i1AVFnUDiW7hS+0EJVHSB8PqqRTsyfRP++BvVQPYwZ67
+         33VVXtFJX81rnzXeVZ4xoPch0ZedFMw+9ngfqi9UyITAq792g1k/+YTjXRdp6wEwKEBi
+         xsh9PnesERgcpz/FK/kwm18ZZH3VPQbCI1xp/RkdFlfHcApaGJowGAd5r5kNy9NyE/Vy
+         4wDTYOzEXOzOJPCxIDxYQymHTpqMHyHO42RvY3fGzFqL+eafUBIs13EMZPKGTwgLFrvd
+         Pz4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716546772; x=1717151572;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=4sC4hyVDtv8Dy6ruPjJsuJvbEvg/9VKuCLBxdu6Om/s=;
-        b=DKXV/bdDNAFVewKY7L4dVaB/qu8DRKe4obarwoP/MXeXyr0wSYpjBC9amHy0fZESMb
-         DJWl9SvoadcdZECNL6lIGdNamPfUHsBZHcYL9EroICk4cBh6tiRzLCd2C5vyTcIwFDX+
-         5OS04DCY+lVntM7SP2hTvN263gfOJtWuYUBrqp+jpFA9qn/M+Sluw7ySZKTZSA9c48Pw
-         GcNVQF7mrP6lAf3kWHO6oh20v9WjUTWwRFIk/FQw21CxSmBCtJ/XM9NML7meFMUh9ESV
-         ODqmBmFsO+m81cmEtSDKCbL0Iq9y0e7lK0WB/FuAXC/UNk4YS19CypoRjeklNThXvDem
-         HkXw==
-X-Gm-Message-State: AOJu0Yytu7i4yC7ZKxy8QWR4rYB1JDG4PM8MxyR/hJ8sB3xEQY3oX5Ow
-	g3/5sN5HaeDdGHo26jM7EKIx18AqPvlrZL8WhWoQD183/I6F6//ZXJyyPNeS7uQ=
-X-Google-Smtp-Source: AGHT+IF8Lbrj01EXtzdBE+xuUilIfxojctlcogSMfV5y6PYVLJqta20UIWoEe39z6tZvVBiybN2AAw==
-X-Received: by 2002:adf:ce07:0:b0:354:f286:4f0f with SMTP id ffacd0b85a97d-35526c3a2e7mr1284687f8f.30.1716546771785;
-        Fri, 24 May 2024 03:32:51 -0700 (PDT)
-Message-ID: <de256e4b-fdc4-48a8-9173-38092ab90716@cloud.com>
-Date: Fri, 24 May 2024 11:32:50 +0100
+        d=1e100.net; s=20230601; t=1716547921; x=1717152721;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=YP28Iks2aCd2MOvUAbQc4yYuz/leCz2VtuKFu0fMfns=;
+        b=fZXfhN4GP1MxoipY23lKgTSI5BENqQDpCA/MYD5jIG3UsOtlZ910HninnRIf9egpOs
+         qrVuk1q1Vtp0oKuBzqLJoAxM+mTtj1nFfhCePNbNnqdb2f4SVTgCt5bIldXwOL0McMQ0
+         yGePB0Yn1GFAenSBVfRjx/x/Ae8BMpi18Mf9gCDmL8vCzyWmCLrxMzavl0+awx512Gj/
+         XK5rFvNpClBIfzrlZyIvaWof5oGObdx+CMfT7gLN321gocGOdDu3WttzK4upJT9Z23H9
+         UXN+hh3m27VIefosxPIp2UEKOc69WRo/6VXr4B6KP5z+7tbRGt8/tzwB4sYkNpWptcJK
+         l4Nw==
+X-Forwarded-Encrypted: i=1; AJvYcCWuFZpVxQ1iBZjP1In0AB9zOsAWF/dyhla6K0Td2QkzakQq0zYVBHGrwhZdy0MJKj6+NV/+4IU+rseL1Vcru3U4zpXkuUTJUHM3/HQ4S4U=
+X-Gm-Message-State: AOJu0YyiPTWZA5p7adDfqva5KCdWX44rzf67ewSOqgKHYn2Y0TgLpIwD
+	6NoiIgBRgHSIulmpOp6d81IpLnHep8HLBUt80JDE5UlGvbpqg0gf
+X-Google-Smtp-Source: AGHT+IHxf48OGn9vlQXF6Pl1G+8i2NXaRVtBjeCMc7C8+mcWr77Zr/it24OxvWZYA9xQzmTZ7G5dGA==
+X-Received: by 2002:a2e:6802:0:b0:2e5:67a8:2e6b with SMTP id 38308e7fff4ca-2e95b04115amr13608211fa.8.1716547920962;
+        Fri, 24 May 2024 03:52:00 -0700 (PDT)
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: edgar.iglesias@gmail.com,
+	sstabellini@kernel.org,
+	jgross@suse.com,
+	"Edgar E. Iglesias" <edgar.iglesias@amd.com>,
+	David Hildenbrand <david@redhat.com>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Paul Durrant <paul@xen.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v7 3/8] xen: Add xen_mr_is_memory()
+Date: Fri, 24 May 2024 12:51:47 +0200
+Message-Id: <20240524105152.1301842-4-edgar.iglesias@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240524105152.1301842-1-edgar.iglesias@gmail.com>
+References: <20240524105152.1301842-1-edgar.iglesias@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/2] tools/xg: Streamline cpu policy
- serialise/deserialise calls
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Anthony PERARD <anthony@xenproject.org>, Juergen Gross <jgross@suse.com>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-References: <cover.1716457040.git.alejandro.vallejo@cloud.com>
- <5c6ee74b60bad4eb9cc8e17dbfcf7158d38bd32c.1716457040.git.alejandro.vallejo@cloud.com>
- <Zk8YucyA1ZwGU4Y-@macbook>
-Content-Language: en-GB
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-In-Reply-To: <Zk8YucyA1ZwGU4Y-@macbook>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 23/05/2024 11:21, Roger Pau Monné wrote:
-> On Thu, May 23, 2024 at 10:41:29AM +0100, Alejandro Vallejo wrote:
->> The idea is to use xc_cpu_policy_t as a single object containing both the
->> serialised and deserialised forms of the policy. Note that we need lengths
->> for the arrays, as the serialised policies may be shorter than the array
->> capacities.
->>
->> * Add the serialised lengths to the struct so we can distinguish
->>   between length and capacity of the serialisation buffers.
->> * Remove explicit buffer+lengths in serialise/deserialise calls
->>   and use the internal buffer inside xc_cpu_policy_t instead.
->> * Refactor everything to use the new serialisation functions.
->> * Remove redundant serialization calls and avoid allocating dynamic
->>   memory aside from the policy objects in xen-cpuid. Also minor cleanup
->>   in the policy print call sites.
->>
->> No functional change intended.
->>
->> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-> 
-> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
-> 
-> Just two comments.
-> 
->> ---
->> v3:
->>   * Better context scoping in xg_sr_common_x86.
->>     * Can't be const because write_record() takes non-const.
->>   * Adjusted line length of xen-cpuid's print_policy.
->>   * Adjusted error messages in xen-cpuid's print_policy.
->>   * Reverted removal of overscoped loop indices.
->> ---
->>  tools/include/xenguest.h            |  8 ++-
->>  tools/libs/guest/xg_cpuid_x86.c     | 98 ++++++++++++++++++++---------
->>  tools/libs/guest/xg_private.h       |  2 +
->>  tools/libs/guest/xg_sr_common_x86.c | 56 ++++++-----------
->>  tools/misc/xen-cpuid.c              | 41 ++++--------
->>  5 files changed, 106 insertions(+), 99 deletions(-)
->>
->> diff --git a/tools/include/xenguest.h b/tools/include/xenguest.h
->> index e01f494b772a..563811cd8dde 100644
->> --- a/tools/include/xenguest.h
->> +++ b/tools/include/xenguest.h
->> @@ -799,14 +799,16 @@ int xc_cpu_policy_set_domain(xc_interface *xch, uint32_t domid,
->>                               xc_cpu_policy_t *policy);
->>  
->>  /* Manipulate a policy via architectural representations. */
->> -int xc_cpu_policy_serialise(xc_interface *xch, const xc_cpu_policy_t *policy,
->> -                            xen_cpuid_leaf_t *leaves, uint32_t *nr_leaves,
->> -                            xen_msr_entry_t *msrs, uint32_t *nr_msrs);
->> +int xc_cpu_policy_serialise(xc_interface *xch, xc_cpu_policy_t *policy);
->>  int xc_cpu_policy_update_cpuid(xc_interface *xch, xc_cpu_policy_t *policy,
->>                                 const xen_cpuid_leaf_t *leaves,
->>                                 uint32_t nr);
->>  int xc_cpu_policy_update_msrs(xc_interface *xch, xc_cpu_policy_t *policy,
->>                                const xen_msr_entry_t *msrs, uint32_t nr);
->> +int xc_cpu_policy_get_leaves(xc_interface *xch, const xc_cpu_policy_t *policy,
->> +                             const xen_cpuid_leaf_t **leaves, uint32_t *nr);
->> +int xc_cpu_policy_get_msrs(xc_interface *xch, const xc_cpu_policy_t *policy,
->> +                           const xen_msr_entry_t **msrs, uint32_t *nr);
-> 
-> Maybe it would be helpful to have a comment clarifying that the return
-> of xc_cpu_policy_get_{leaves,msrs}() is a reference to the content of
-> the policy, not a copy of it (and hence is tied to the lifetime of
-> policy, and doesn't require explicit freeing).
+From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Sure.
+Add xen_mr_is_memory() to abstract away tests for the
+xen_memory MR.
 
-> 
->>  
->>  /* Compatibility calculations. */
->>  bool xc_cpu_policy_is_compatible(xc_interface *xch, xc_cpu_policy_t *host,
->> diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
->> index 4453178100ad..4f4b86b59470 100644
->> --- a/tools/libs/guest/xg_cpuid_x86.c
->> +++ b/tools/libs/guest/xg_cpuid_x86.c
->> @@ -834,14 +834,13 @@ void xc_cpu_policy_destroy(xc_cpu_policy_t *policy)
->>      }
->>  }
->>  
->> -static int deserialize_policy(xc_interface *xch, xc_cpu_policy_t *policy,
->> -                              unsigned int nr_leaves, unsigned int nr_entries)
->> +static int deserialize_policy(xc_interface *xch, xc_cpu_policy_t *policy)
->>  {
->>      uint32_t err_leaf = -1, err_subleaf = -1, err_msr = -1;
->>      int rc;
->>  
->>      rc = x86_cpuid_copy_from_buffer(&policy->policy, policy->leaves,
->> -                                    nr_leaves, &err_leaf, &err_subleaf);
->> +                                    policy->nr_leaves, &err_leaf, &err_subleaf);
->>      if ( rc )
->>      {
->>          if ( err_leaf != -1 )
->> @@ -851,7 +850,7 @@ static int deserialize_policy(xc_interface *xch, xc_cpu_policy_t *policy,
->>      }
->>  
->>      rc = x86_msr_copy_from_buffer(&policy->policy, policy->msrs,
->> -                                  nr_entries, &err_msr);
->> +                                  policy->nr_msrs, &err_msr);
->>      if ( rc )
->>      {
->>          if ( err_msr != -1 )
->> @@ -878,7 +877,10 @@ int xc_cpu_policy_get_system(xc_interface *xch, unsigned int policy_idx,
->>          return rc;
->>      }
->>  
->> -    rc = deserialize_policy(xch, policy, nr_leaves, nr_msrs);
->> +    policy->nr_leaves = nr_leaves;
->> +    policy->nr_msrs = nr_msrs;
->> +
->> +    rc = deserialize_policy(xch, policy);
->>      if ( rc )
->>      {
->>          errno = -rc;
->> @@ -903,7 +905,10 @@ int xc_cpu_policy_get_domain(xc_interface *xch, uint32_t domid,
->>          return rc;
->>      }
->>  
->> -    rc = deserialize_policy(xch, policy, nr_leaves, nr_msrs);
->> +    policy->nr_leaves = nr_leaves;
->> +    policy->nr_msrs = nr_msrs;
->> +
->> +    rc = deserialize_policy(xch, policy);
->>      if ( rc )
->>      {
->>          errno = -rc;
->> @@ -917,17 +922,14 @@ int xc_cpu_policy_set_domain(xc_interface *xch, uint32_t domid,
->>                               xc_cpu_policy_t *policy)
->>  {
->>      uint32_t err_leaf = -1, err_subleaf = -1, err_msr = -1;
->> -    unsigned int nr_leaves = ARRAY_SIZE(policy->leaves);
->> -    unsigned int nr_msrs = ARRAY_SIZE(policy->msrs);
->>      int rc;
->>  
->> -    rc = xc_cpu_policy_serialise(xch, policy, policy->leaves, &nr_leaves,
->> -                                 policy->msrs, &nr_msrs);
->> +    rc = xc_cpu_policy_serialise(xch, policy);
->>      if ( rc )
->>          return rc;
->>  
->> -    rc = xc_set_domain_cpu_policy(xch, domid, nr_leaves, policy->leaves,
->> -                                  nr_msrs, policy->msrs,
->> +    rc = xc_set_domain_cpu_policy(xch, domid, policy->nr_leaves, policy->leaves,
->> +                                  policy->nr_msrs, policy->msrs,
->>                                    &err_leaf, &err_subleaf, &err_msr);
->>      if ( rc )
->>      {
->> @@ -942,34 +944,32 @@ int xc_cpu_policy_set_domain(xc_interface *xch, uint32_t domid,
->>      return rc;
->>  }
->>  
->> -int xc_cpu_policy_serialise(xc_interface *xch, const xc_cpu_policy_t *p,
->> -                            xen_cpuid_leaf_t *leaves, uint32_t *nr_leaves,
->> -                            xen_msr_entry_t *msrs, uint32_t *nr_msrs)
->> +int xc_cpu_policy_serialise(xc_interface *xch, xc_cpu_policy_t *p)
->>  {
->> +    unsigned int nr_leaves = ARRAY_SIZE(p->leaves);
->> +    unsigned int nr_msrs = ARRAY_SIZE(p->msrs);
->>      int rc;
->>  
->> -    if ( leaves )
->> +    rc = x86_cpuid_copy_to_buffer(&p->policy, p->leaves, &nr_leaves);
->> +    if ( rc )
->>      {
->> -        rc = x86_cpuid_copy_to_buffer(&p->policy, leaves, nr_leaves);
->> -        if ( rc )
->> -        {
->> -            ERROR("Failed to serialize CPUID policy");
->> -            errno = -rc;
->> -            return -1;
->> -        }
->> +        ERROR("Failed to serialize CPUID policy");
->> +        errno = -rc;
->> +        return -1;
->>      }
->>  
->> -    if ( msrs )
->> +    p->nr_leaves = nr_leaves;
-> 
-> Nit: FWIW, I think you could avoid having to introduce local
-> nr_{leaves,msrs} variables and just use p->nr_{leaves,msrs}?  By
-> setting them to ARRAY_SIZE() at the top of the function and then
-> letting x86_{cpuid,msr}_copy_to_buffer() adjust as necessary.
-> 
-> Thanks, Roger.
+No functional changes.
 
-The intent was to avoid mutating the policy object in the error cases
-during deserialise. Then I adjusted the serialise case to have symmetry.
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: David Hildenbrand <david@redhat.com>
+---
+ hw/xen/xen-hvm-common.c | 10 ++++++++--
+ include/sysemu/xen.h    |  8 ++++++++
+ 2 files changed, 16 insertions(+), 2 deletions(-)
 
-It's true the preservation is not meaningful in the serialise case
-because at that point the serialised form is already corrupted.
+diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
+index 2d1b032121..a0a0252da0 100644
+--- a/hw/xen/xen-hvm-common.c
++++ b/hw/xen/xen-hvm-common.c
+@@ -12,6 +12,12 @@
+ 
+ MemoryRegion xen_memory;
+ 
++/* Check for xen memory.  */
++bool xen_mr_is_memory(MemoryRegion *mr)
++{
++    return mr == &xen_memory;
++}
++
+ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
+                    Error **errp)
+ {
+@@ -28,7 +34,7 @@ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
+         return;
+     }
+ 
+-    if (mr == &xen_memory) {
++    if (xen_mr_is_memory(mr)) {
+         return;
+     }
+ 
+@@ -55,7 +61,7 @@ static void xen_set_memory(struct MemoryListener *listener,
+ {
+     XenIOState *state = container_of(listener, XenIOState, memory_listener);
+ 
+-    if (section->mr == &xen_memory) {
++    if (xen_mr_is_memory(section->mr)) {
+         return;
+     } else {
+         if (add) {
+diff --git a/include/sysemu/xen.h b/include/sysemu/xen.h
+index 754ec2e6cb..dc72f83bcb 100644
+--- a/include/sysemu/xen.h
++++ b/include/sysemu/xen.h
+@@ -34,6 +34,8 @@ void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length);
+ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
+                    struct MemoryRegion *mr, Error **errp);
+ 
++bool xen_mr_is_memory(MemoryRegion *mr);
++
+ #else /* !CONFIG_XEN_IS_POSSIBLE */
+ 
+ #define xen_enabled() 0
+@@ -47,6 +49,12 @@ static inline void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
+     g_assert_not_reached();
+ }
+ 
++static inline bool xen_mr_is_memory(MemoryRegion *mr)
++{
++    g_assert_not_reached();
++    return false;
++}
++
+ #endif /* CONFIG_XEN_IS_POSSIBLE */
+ 
+ #endif
+-- 
+2.40.1
 
-I don't mind either way. Seeing how I'm sending one final version with
-the comments of patch2 I'll just adjust as you proposed.
-
-Cheers,
-Alejandro
 
