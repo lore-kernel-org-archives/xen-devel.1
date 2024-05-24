@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D920C25B75
-	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 02:30:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.729035.1134175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C01C25B7D
+	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 04:10:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.729061.1134189 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sAKh9-0003VL-83; Fri, 24 May 2024 02:30:11 +0000
+	id 1sAMG3-0002Si-3j; Fri, 24 May 2024 04:10:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 729035.1134175; Fri, 24 May 2024 02:30:11 +0000
+Received: by outflank-mailman (output) from mailman id 729061.1134189; Fri, 24 May 2024 04:10:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sAKh9-0003VA-5E; Fri, 24 May 2024 02:30:11 +0000
-Received: by outflank-mailman (input) for mailman id 729035;
- Fri, 24 May 2024 02:30:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=K6bJ=M3=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1sAKWk-0003tc-KI
- for xen-devel@lists.xenproject.org; Fri, 24 May 2024 02:19:26 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 09d8cb2f-1974-11ef-90a1-e314d9c70b13;
- Fri, 24 May 2024 04:19:25 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id CBA4B62F9E;
- Fri, 24 May 2024 02:19:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BE25C2BD10;
- Fri, 24 May 2024 02:19:22 +0000 (UTC)
+	id 1sAMG2-0002Sb-WA; Fri, 24 May 2024 04:10:18 +0000
+Received: by outflank-mailman (input) for mailman id 729061;
+ Fri, 24 May 2024 04:10:17 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sAMG1-0002SR-Iq; Fri, 24 May 2024 04:10:17 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sAMG1-0004wM-FA; Fri, 24 May 2024 04:10:17 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sAMG1-0001Q4-0C; Fri, 24 May 2024 04:10:17 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1sAMG0-00076S-Vu; Fri, 24 May 2024 04:10:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,210 +44,232 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 09d8cb2f-1974-11ef-90a1-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1716517163;
-	bh=ww9wwzaIabqdPH5v4U3tm6QEcQmHmaxF/Yt+pirjSPU=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=ssZlT1lj9Zv7nDQYLzT8SnolJr8VbY+FEWccmnq6v74gq9vvHv134yqtntovF2U3+
-	 PvijpMk3St2FmkTML6kGjk7v7Chznc/7RAaeaFmvAb63gp6iEd2bB8+MaEucvkD0dd
-	 r8ZuYcYAU9gAuwiRAW0Hw39Aj+roNtXvciAJakODwdG+TDFR8H8eMpA97EOgVzpMhT
-	 Y2+m0xZgkgDdUpVzK6MoZASXLSvBAddo6zmpUpm2ev+ZSOHwD6sQ7ESH4a2kNsvaWE
-	 WRj+lnzqpBzXXhxA7cHLr5dHB2L1RzgojSDyGeYa7JRD7UHYIKAY6PokXJ983EnbCz
-	 orWVek/To9fMw==
-Date: Thu, 23 May 2024 19:19:21 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Julien Grall <julien@xen.org>
-cc: Henry Wang <xin.wang2@amd.com>, xen-devel@lists.xenproject.org, 
-    Anthony PERARD <anthony@xenproject.org>, 
-    George Dunlap <george.dunlap@citrix.com>, 
-    Nick Rosbrook <rosbrookn@gmail.com>, Juergen Gross <jgross@suse.com>, 
-    Jason Andryuk <jason.andryuk@amd.com>
-Subject: Re: [PATCH v4 3/9] tools/arm: Introduce the "nr_spis" xl config
- entry
-In-Reply-To: <02e22734-2e0c-4a0a-8c5a-42beee0cc396@xen.org>
-Message-ID: <alpine.DEB.2.22.394.2405231802010.2557291@ubuntu-linux-20-04-desktop>
-References: <20240523074040.1611264-1-xin.wang2@amd.com> <20240523074040.1611264-4-xin.wang2@amd.com> <02e22734-2e0c-4a0a-8c5a-42beee0cc396@xen.org>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=mVrL0x6mgS5IFnWSHxKh1OEdl1xZCr5tDX3f2sjDNng=; b=E8jyqRb/OzaLsLvSu5LLluryPz
+	Zw6+crucjKiXP+ZKvNZmGbPZyFAvDW0wOEd75+V4zmvKEivOgvkYSep4GIRM+hJgxLodqxQg1gwiI
+	uDbeh7Q8OlkP0cWPuI15QsTVFmJAMe31BLniYpBIEDq0Bt41QrAo/3jXZ/DHcWIbDGqI=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-186105-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Subject: [xen-unstable test] 186105: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable:build-armhf:xen-build:fail:regression
+    xen-unstable:build-armhf-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl-rtds:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-examine:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-libvirt-vhd:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl-arndale:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl-credit1:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl-credit2:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl-multivcpu:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl-qcow2:build-check(1):blocked:nonblocking
+    xen-unstable:test-armhf-armhf-xl-raw:build-check(1):blocked:nonblocking
+    xen-unstable:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    xen-unstable:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    xen-unstable:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    xen-unstable:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    xen-unstable:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    xen-unstable:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+    xen-unstable:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+    xen-unstable:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    xen-unstable:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
+    xen-unstable:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
+    xen-unstable:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=ced21fbb2842ac4655048bdee56232974ff9ff9c
+X-Osstest-Versions-That:
+    xen=ced21fbb2842ac4655048bdee56232974ff9ff9c
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 24 May 2024 04:10:16 +0000
 
-On Fri, 24 May 2024, Julien Grall wrote:
-> Hi Henry,
-> 
-> On 23/05/2024 08:40, Henry Wang wrote:
-> > Currently, the number of SPIs allocated to the domain is only
-> > configurable for Dom0less DomUs. Xen domains are supposed to be
-> > platform agnostics and therefore the numbers of SPIs for libxl
-> > guests should not be based on the hardware.
-> > 
-> > Introduce a new xl config entry for Arm to provide a method for
-> > user to decide the number of SPIs. This would help to avoid
-> > bumping the `config->arch.nr_spis` in libxl everytime there is a
-> > new platform with increased SPI numbers.
-> > 
-> > Update the doc and the golang bindings accordingly.
-> > 
-> > Signed-off-by: Henry Wang <xin.wang2@amd.com>
-> > Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
-> > ---
-> > v4:
-> > - Add Jason's Reviewed-by tag.
-> > v3:
-> > - Reword documentation to avoid ambiguity.
-> > v2:
-> > - New patch to replace the original patch in v1:
-> >    "[PATCH 05/15] tools/libs/light: Increase nr_spi to 160"
-> > ---
-> >   docs/man/xl.cfg.5.pod.in             | 14 ++++++++++++++
-> >   tools/golang/xenlight/helpers.gen.go |  2 ++
-> >   tools/golang/xenlight/types.gen.go   |  1 +
-> >   tools/libs/light/libxl_arm.c         |  4 ++--
-> >   tools/libs/light/libxl_types.idl     |  1 +
-> >   tools/xl/xl_parse.c                  |  3 +++
-> >   6 files changed, 23 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-> > index 8f2b375ce9..416d582844 100644
-> > --- a/docs/man/xl.cfg.5.pod.in
-> > +++ b/docs/man/xl.cfg.5.pod.in
-> > @@ -3072,6 +3072,20 @@ raised.
-> >     =back
-> >   +=over 4
-> > +
-> > +=item B<nr_spis="NR_SPIS">
-> > +
-> > +An optional 32-bit integer parameter specifying the number of SPIs (Shared
-> 
-> We can't support that much SPIs :). The limit would be 991 SPIs.
+flight 186105 xen-unstable real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/186105/
 
-I change it
+Regressions :-(
 
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf                   6 xen-build                fail REGR. vs. 186078
 
-> > +Peripheral Interrupts) to allocate for the domain. If the value specified
-> > by
-> > +the `nr_spis` parameter is smaller than the number of SPIs calculated by
-> > the
-> > +toolstack based on the devices allocated for the domain, or the `nr_spis`
-> > +parameter is not specified, the value calculated by the toolstack will be
-> > used
-> > +for the domain. Otherwise, the value specified by the `nr_spis` parameter
-> > will
-> > +be used.
-> 
-> I think it would be worth mentioning that the number of SPIs should match the
-> highest interrupt ID that will be assigned to the domain (rather than the
-> number of SPIs planned to be assigned).
+Tests which did not succeed, but are not blocking:
+ build-armhf-libvirt           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-rtds      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-examine      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-vhd  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-arndale   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-credit1   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-credit2   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-multivcpu  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-qcow2     1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-raw       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 186078
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 186078
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 186078
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 186078
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 186078
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
 
-I added it
+version targeted for testing:
+ xen                  ced21fbb2842ac4655048bdee56232974ff9ff9c
+baseline version:
+ xen                  ced21fbb2842ac4655048bdee56232974ff9ff9c
 
+Last test of basis   186105  2024-05-23 09:38:07 Z    0 days
+Testing same since                          (not found)         0 attempts
 
-> > +
-> > +=back
-> > +
-> >   =head3 x86
-> >     =over 4
-> > diff --git a/tools/golang/xenlight/helpers.gen.go
-> > b/tools/golang/xenlight/helpers.gen.go
-> > index b9cb5b33c7..fe5110474d 100644
-> > --- a/tools/golang/xenlight/helpers.gen.go
-> > +++ b/tools/golang/xenlight/helpers.gen.go
-> > @@ -1154,6 +1154,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
-> >   x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
-> >   x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
-> >   x.ArchArm.SveVl = SveType(xc.arch_arm.sve_vl)
-> > +x.ArchArm.NrSpis = uint32(xc.arch_arm.nr_spis)
-> >   if err := x.ArchX86.MsrRelaxed.fromC(&xc.arch_x86.msr_relaxed);err != nil
-> > {
-> >   return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
-> >   }
-> > @@ -1670,6 +1671,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
-> >   xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
-> >   xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
-> >   xc.arch_arm.sve_vl = C.libxl_sve_type(x.ArchArm.SveVl)
-> > +xc.arch_arm.nr_spis = C.uint32_t(x.ArchArm.NrSpis)
-> >   if err := x.ArchX86.MsrRelaxed.toC(&xc.arch_x86.msr_relaxed); err != nil {
-> >   return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
-> >   }
-> > diff --git a/tools/golang/xenlight/types.gen.go
-> > b/tools/golang/xenlight/types.gen.go
-> > index 5b293755d7..c9e45b306f 100644
-> > --- a/tools/golang/xenlight/types.gen.go
-> > +++ b/tools/golang/xenlight/types.gen.go
-> > @@ -597,6 +597,7 @@ ArchArm struct {
-> >   GicVersion GicVersion
-> >   Vuart VuartType
-> >   SveVl SveType
-> > +NrSpis uint32
-> >   }
-> >   ArchX86 struct {
-> >   MsrRelaxed Defbool
-> > diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-> > index 1cb89fa584..a4029e3ac8 100644
-> > --- a/tools/libs/light/libxl_arm.c
-> > +++ b/tools/libs/light/libxl_arm.c
-> > @@ -181,8 +181,8 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-> >         LOG(DEBUG, "Configure the domain");
-> >   -    config->arch.nr_spis = nr_spis;
-> > -    LOG(DEBUG, " - Allocate %u SPIs", nr_spis);
-> > +    config->arch.nr_spis = max(nr_spis, d_config->b_info.arch_arm.nr_spis);
-> 
-> I am not entirely sure about using max(). To me if the user specifies a lower
-> limit, then we should throw an error because this is likely an indication that
-> the SPIs they will want to assign will clash with the emulated ones.
-> 
-> So it would be better to warn at domain creation rather than waiting until the
-> IRQs are assigned.
-> 
-> I would like Anthony's opinion on this one. Given he is away this month, I
-> guess we could get this patch merged (with other comments addressed) and have
-> a follow-up if wanted before 4.19.
-
-I left it as is for now
-
-
-> > +    LOG(DEBUG, " - Allocate %u SPIs", config->arch.nr_spis);
-> >         switch (d_config->b_info.arch_arm.gic_version) {
-> >       case LIBXL_GIC_VERSION_DEFAULT:
-> > diff --git a/tools/libs/light/libxl_types.idl
-> > b/tools/libs/light/libxl_types.idl
-> > index 79e9c656cc..4e65e6fda5 100644
-> > --- a/tools/libs/light/libxl_types.idl
-> > +++ b/tools/libs/light/libxl_types.idl
-> > @@ -722,6 +722,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
-> >       ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
-> >                                  ("vuart", libxl_vuart_type),
-> >                                  ("sve_vl", libxl_sve_type),
-> > +                               ("nr_spis", uint32),
-> 
-> From my understandig, any change in the .idl requires a corresponding
-> LIBXL_HAVE_... in include/libxl.h. This is in order to allow external
-> toolstack (such as libvirt) to be able to select at build time between
-> multiple version of libxl.
-
-I added it
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64-xtf                                              pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  fail    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          blocked 
+ build-i386-libvirt                                           pass    
+ build-amd64-prev                                             pass    
+ build-i386-prev                                              pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-xtf-amd64-amd64-1                                       pass    
+ test-xtf-amd64-amd64-2                                       pass    
+ test-xtf-amd64-amd64-3                                       pass    
+ test-xtf-amd64-amd64-4                                       pass    
+ test-xtf-amd64-amd64-5                                       pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  blocked 
+ test-amd64-amd64-examine-bios                                pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  pass    
+ test-armhf-armhf-xl-credit1                                  blocked 
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  blocked 
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     blocked 
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-amd64-livepatch                                   pass    
+ test-amd64-amd64-migrupgrade                                 pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                blocked 
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-libvirt-qcow2                               pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-xl-qcow2                                    blocked 
+ test-amd64-amd64-libvirt-raw                                 pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-amd64-amd64-xl-raw                                      pass    
+ test-armhf-armhf-xl-raw                                      blocked 
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-examine-uefi                                pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-libvirt-vhd                                 blocked 
+ test-amd64-amd64-xl-vhd                                      pass    
+ test-arm64-arm64-xl-vhd                                      pass    
 
 
-> >                                 ])),
-> >       ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
-> >                                 ])),
-> > diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-> > index c504ab3711..e3a4800f6e 100644
-> > --- a/tools/xl/xl_parse.c
-> > +++ b/tools/xl/xl_parse.c
-> > @@ -2935,6 +2935,9 @@ skip_usbdev:
-> >           }
-> >       }
-> >   +    if (!xlu_cfg_get_long (config, "nr_spis", &l, 0))
-> > +        b_info->arch_arm.nr_spis = l;
-> > +
-> >       parse_vkb_list(config, d_config);
-> >         d_config->virtios = NULL;
-> 
-> Cheers,
-> 
-> -- 
-> Julien Grall
-> 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Published tested tree is already up to date.
+
 
