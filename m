@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D611CC25B7C
-	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 12:31:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.729462.1134607 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26159C25B7C
+	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 12:41:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.729482.1134661 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sAU52-00052z-SQ; Fri, 24 May 2024 12:31:28 +0000
+	id 1sAUEV-0000OP-8Q; Fri, 24 May 2024 12:41:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 729462.1134607; Fri, 24 May 2024 12:31:28 +0000
+Received: by outflank-mailman (output) from mailman id 729482.1134661; Fri, 24 May 2024 12:41:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sAU52-00052s-PQ; Fri, 24 May 2024 12:31:28 +0000
-Received: by outflank-mailman (input) for mailman id 729462;
- Fri, 24 May 2024 12:31:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sAUEV-0000N3-3c; Fri, 24 May 2024 12:41:15 +0000
+Received: by outflank-mailman (input) for mailman id 729482;
+ Fri, 24 May 2024 12:41:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=J/Vf=M3=bounce.vates.tech=bounce-md_30504962.6650889a.v1-b9480d857674453791d98acf668f11dd@srs-se1.protection.inumbo.net>)
- id 1sAU51-00051V-6z
- for xen-devel@lists.xenproject.org; Fri, 24 May 2024 12:31:27 +0000
-Received: from mail136-17.atl41.mandrillapp.com
- (mail136-17.atl41.mandrillapp.com [198.2.136.17])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8867d8cf-19c9-11ef-b4bb-af5377834399;
- Fri, 24 May 2024 14:31:24 +0200 (CEST)
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-17.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4Vm4CZ55cDzPm0PRK
- for <xen-devel@lists.xenproject.org>; Fri, 24 May 2024 12:31:22 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- b9480d857674453791d98acf668f11dd; Fri, 24 May 2024 12:31:22 +0000
+ <SRS0=BPhY=M3=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1sAUET-00082M-C8
+ for xen-devel@lists.xenproject.org; Fri, 24 May 2024 12:41:13 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id e471831c-19ca-11ef-90a1-e314d9c70b13;
+ Fri, 24 May 2024 14:41:08 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9716A1684;
+ Fri, 24 May 2024 05:41:31 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A56513F641;
+ Fri, 24 May 2024 05:41:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,139 +44,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8867d8cf-19c9-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1716553882; x=1716814382;
-	bh=tlJyPYKFhaSXXv4BnrdLWt4xxrI76gRAyevGwxWPheE=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=JF4TV6zbXv9jcw8mX6ePjox7oAR+1V+12cSJD+KrFlg8wzNlvMwFpH6oBQ48Sg8RG
-	 2OVYFnhFaDGtOWpqLQ/be4d43YzcusyP3gpaZxtVI/uAQlYxaeoYp8MmouY6PODs5F
-	 h8ukRZRxSSaM/P1mapiYW1FouGOf7hkefNa7nqkTO1Z0QYS7kijMf3n7qsevTsuwRJ
-	 mqvnQNvUReVy4ktDr9yPPzG6Yvxa0Ug3bEGo20TJW7bC7tRlBJHVHQmbo4KtuD6DLY
-	 RtE3KGFuyw/f4iGM1KW9r6XAb/FgXpGRFXAwh/60QtNHXsbfdWE0T4OOlji725YzaJ
-	 hMtIEPquMkPWQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1716553882; x=1716814382; i=vaishali.thakkar@vates.tech;
-	bh=tlJyPYKFhaSXXv4BnrdLWt4xxrI76gRAyevGwxWPheE=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=b4Qlf5nZ+7sZ7vuIQWbHEjgN0ZmWdslRHeXkrd+ofgSJnRXkBr60i2WrmTigpMA7r
-	 v7b5S3QjakYog3TWZXzxNzwcQ7xzIgA371qmPbt5xBEXBjaG+VoARSM1hAqdS3xfcC
-	 vOg8g1LKKp9jFNW+uRzeC2jMboDD694G226SCgtSDRgQV6TIOHZPYIgxeLSi5sGtPB
-	 9jE7QhtSw87tNqJvs4rg5kL0oOcJPI4BVLhffUnhd0WphPJzdaZ+vmgXoP+mQSFVU+
-	 go2kbVhhFCfAyQJ4CG4IQAG2tbnfptz0ciUFSywJcBjBtFxY8yy1ISNKroAE2kA7bH
-	 VzsDJ7X1crAUA==
-From: Vaishali Thakkar <vaishali.thakkar@vates.tech>
-Subject: =?utf-8?Q?[RFC=20for-4.20=20v1=200/1]=20x86/hvm:=20Introduce=20Xen-wide=20ASID=20allocator?=
-X-Mailer: git-send-email 2.45.0
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1716553881342
+X-Inumbo-ID: e471831c-19ca-11ef-90a1-e314d9c70b13
+From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com, george.dunlap@citrix.com, Vaishali Thakkar <vaishali.thakkar@vates.tech>
-Message-Id: <cover.1716551380.git.vaishali.thakkar@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.b9480d857674453791d98acf668f11dd?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20240524:md
-Date: Fri, 24 May 2024 12:31:22 +0000
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v4 2/7] xen/arm: Wrap shared memory mapping code in one function
+Date: Fri, 24 May 2024 13:40:50 +0100
+Message-Id: <20240524124055.3871399-3-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240524124055.3871399-1-luca.fancellu@arm.com>
+References: <20240524124055.3871399-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Motivation:
------------
-This is part of the effort to enable AMD SEV technologies in Xen. For
-AMD SEV support, we need a fixed ASID associated with all vcpus of the
-same domain throughout the domain's lifetime. This is because for SEV/
-SEV-{ES,SNP} VM, the ASID is the index which is associated with the
-encryption key.
+Wrap the code and logic that is calling assign_shared_memory
+and map_regions_p2mt into a new function 'handle_shared_mem_bank',
+it will become useful later when the code will allow the user to
+don't pass the host physical address.
 
-Currently, ASID generation and management is done per-PCPU in Xen. And
-at the time of each VMENTER, the ASID associated with vcpus of the
-domain is changed. This implementation is incompatible with SEV
-technologies for the above mentioned reasons. In a discussion with
-Andrew Cooper, it came up that it=E2=80=99ll be nice to have fixed ASIDs no=
-t
-only for SEV VMs but also for all VMs. Because it opens up the
-opportunity to use instructions like TLBSYNC and INVLPGB (Section
-5.5.3 in AMD Architecture manual[0]) for broadcasting the TLB
-Invalidations.
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+v3 changes:
+ - check return value of dt_property_read_string, add R-by Michal
+v2 changes:
+ - add blank line, move owner_dom_io computation inside
+   handle_shared_mem_bank in order to reduce args count, remove
+   not needed BUGON(). (Michal)
+---
+ xen/arch/arm/static-shmem.c | 86 +++++++++++++++++++++++--------------
+ 1 file changed, 53 insertions(+), 33 deletions(-)
 
-Why is this RFC?
-----------------
-This is only tested on AMD SVM at the moment. There are a few points
-that I would like to discuss and get a feedback on from the community
-before further development and testing. I=E2=80=99ve also submitted a desig=
-n
-session for this RFC to discuss further at the Xen Summit.
-
-Points of discussion:
----------------------
-1. I=E2=80=99m not sure how this should be handled for the nestedhvm. To st=
-art
-with, at the moment all the values seem to be handled via struct
-nestedvcpu. Do we want to keep it that way or do we want to have
-something like nestedhvm_domain to associate certain values like asid?
-I=E2=80=99ve not handled this as part of this RFC as I would like to know t=
-he
-opinions and plans of those working on nested virtualization.
-
-2. I=E2=80=99m doing initialization of xen-wide asids at the moment in setu=
-p.c
-but is that the right place to do it? I=E2=80=99m asking this because I=E2=
-=80=99ve
-been seeing a weird bug with the code in this RFC. Dom0 is able to
-have a fixed asid through the lifecycle of it. But if I start a domU
-with 2/4 vcpus via xl, sometimes it only brings up the one vcpu and
-shows =E2=80=98tsc: Unable to calibrate against PIT=E2=80=99 while booting =
-the kernel.
-
-Notes:
------
-1. Currently the RFC doesn=E2=80=99t demonstrate the use of TLBSYNC and INV=
-LPGB.
-It can further be added if required. I'm not sure if it should be part
-of the same patch series or not.
-
-2. This is a basic RFC to start the discussion on the above points but
-I further plan to add a logic to reclaim the asids that are no longer
-in use and add a check to pick the asid from such stack before doing
-hvm_asid_flush_all.
-
-[0] https://www.amd.com/content/dam/amd/en/documents/processor-tech-docs/pr=
-ogrammer-references/24593.pdf
-
-
-
-Vaishali Thakkar (1):
-  x86/hvm: Introduce Xen-wide ASID Allocator
-
- xen/arch/x86/flushtlb.c                |  1 -
- xen/arch/x86/hvm/asid.c                | 61 ++++++++++++++------------
- xen/arch/x86/hvm/emulate.c             |  3 --
- xen/arch/x86/hvm/hvm.c                 |  2 +-
- xen/arch/x86/hvm/nestedhvm.c           |  4 +-
- xen/arch/x86/hvm/svm/asid.c            | 28 +++++++-----
- xen/arch/x86/hvm/svm/nestedsvm.c       |  2 +-
- xen/arch/x86/hvm/svm/svm.c             | 33 ++++++--------
- xen/arch/x86/hvm/svm/svm.h             |  1 -
- xen/arch/x86/hvm/vmx/vmcs.c            |  2 +-
- xen/arch/x86/hvm/vmx/vmx.c             | 15 +++----
- xen/arch/x86/hvm/vmx/vvmx.c            |  6 +--
- xen/arch/x86/include/asm/hvm/asid.h    | 19 ++++----
- xen/arch/x86/include/asm/hvm/domain.h  |  1 +
- xen/arch/x86/include/asm/hvm/hvm.h     |  2 +-
- xen/arch/x86/include/asm/hvm/svm/svm.h |  1 +
- xen/arch/x86/include/asm/hvm/vcpu.h    |  6 +--
- xen/arch/x86/include/asm/hvm/vmx/vmx.h |  3 +-
- xen/arch/x86/mm/hap/hap.c              |  4 +-
- xen/arch/x86/mm/p2m.c                  |  6 +--
- xen/arch/x86/mm/paging.c               |  2 +-
- xen/arch/x86/setup.c                   |  7 +++
- 22 files changed, 108 insertions(+), 101 deletions(-)
-
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index 0a1c327e90ea..c15a65130659 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -180,6 +180,53 @@ append_shm_bank_to_domain(struct kernel_info *kinfo, paddr_t start,
+     return 0;
+ }
+ 
++static int __init handle_shared_mem_bank(struct domain *d, paddr_t gbase,
++                                         const char *role_str,
++                                         const struct membank *shm_bank)
++{
++    bool owner_dom_io = true;
++    paddr_t pbase, psize;
++    int ret;
++
++    pbase = shm_bank->start;
++    psize = shm_bank->size;
++
++    /*
++     * "role" property is optional and if it is defined explicitly,
++     * then the owner domain is not the default "dom_io" domain.
++     */
++    if ( role_str != NULL )
++        owner_dom_io = false;
++
++    /*
++     * DOMID_IO is a fake domain and is not described in the Device-Tree.
++     * Therefore when the owner of the shared region is DOMID_IO, we will
++     * only find the borrowers.
++     */
++    if ( (owner_dom_io && !is_shm_allocated_to_domio(pbase)) ||
++         (!owner_dom_io && strcmp(role_str, "owner") == 0) )
++    {
++        /*
++         * We found the first borrower of the region, the owner was not
++         * specified, so they should be assigned to dom_io.
++         */
++        ret = assign_shared_memory(owner_dom_io ? dom_io : d, gbase, shm_bank);
++        if ( ret )
++            return ret;
++    }
++
++    if ( owner_dom_io || (strcmp(role_str, "borrower") == 0) )
++    {
++        /* Set up P2M foreign mapping for borrower domain. */
++        ret = map_regions_p2mt(d, _gfn(PFN_UP(gbase)), PFN_DOWN(psize),
++                               _mfn(PFN_UP(pbase)), p2m_map_foreign_rw);
++        if ( ret )
++            return ret;
++    }
++
++    return 0;
++}
++
+ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+                        const struct dt_device_node *node)
+ {
+@@ -196,7 +243,6 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+         unsigned int i;
+         const char *role_str;
+         const char *shm_id;
+-        bool owner_dom_io = true;
+ 
+         if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
+             continue;
+@@ -237,39 +283,13 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+                 return -EINVAL;
+             }
+ 
+-        /*
+-         * "role" property is optional and if it is defined explicitly,
+-         * then the owner domain is not the default "dom_io" domain.
+-         */
+-        if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
+-            owner_dom_io = false;
++        /* "role" property is optional */
++        if ( dt_property_read_string(shm_node, "role", &role_str) != 0 )
++            role_str = NULL;
+ 
+-        /*
+-         * DOMID_IO is a fake domain and is not described in the Device-Tree.
+-         * Therefore when the owner of the shared region is DOMID_IO, we will
+-         * only find the borrowers.
+-         */
+-        if ( (owner_dom_io && !is_shm_allocated_to_domio(pbase)) ||
+-             (!owner_dom_io && strcmp(role_str, "owner") == 0) )
+-        {
+-            /*
+-             * We found the first borrower of the region, the owner was not
+-             * specified, so they should be assigned to dom_io.
+-             */
+-            ret = assign_shared_memory(owner_dom_io ? dom_io : d, gbase,
+-                                       boot_shm_bank);
+-            if ( ret )
+-                return ret;
+-        }
+-
+-        if ( owner_dom_io || (strcmp(role_str, "borrower") == 0) )
+-        {
+-            /* Set up P2M foreign mapping for borrower domain. */
+-            ret = map_regions_p2mt(d, _gfn(PFN_UP(gbase)), PFN_DOWN(psize),
+-                                   _mfn(PFN_UP(pbase)), p2m_map_foreign_rw);
+-            if ( ret )
+-                return ret;
+-        }
++        ret = handle_shared_mem_bank(d, gbase, role_str, boot_shm_bank);
++        if ( ret )
++            return ret;
+ 
+         /*
+          * Record static shared memory region info for later setting
 -- 
-2.45.0
+2.34.1
 
 
