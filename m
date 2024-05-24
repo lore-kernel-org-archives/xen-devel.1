@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA73C25B7F
-	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 20:04:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.729755.1135094 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4899AC25B74
+	for <xen-devel@archiver.kernel.org>; Fri, 24 May 2024 21:44:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.729847.1135130 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sAb8x-0001ZF-21; Fri, 24 May 2024 20:03:59 +0000
+	id 1sAchj-0000Mv-Km; Fri, 24 May 2024 21:43:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 729755.1135094; Fri, 24 May 2024 20:03:59 +0000
+Received: by outflank-mailman (output) from mailman id 729847.1135130; Fri, 24 May 2024 21:43:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sAb8w-0001XB-Qw; Fri, 24 May 2024 20:03:58 +0000
-Received: by outflank-mailman (input) for mailman id 729755;
- Fri, 24 May 2024 20:03:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sAchj-0000Mo-Gi; Fri, 24 May 2024 21:43:59 +0000
+Received: by outflank-mailman (input) for mailman id 729847;
+ Fri, 24 May 2024 21:43:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PGXh=M3=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sAb8u-000773-TT
- for xen-devel@lists.xenproject.org; Fri, 24 May 2024 20:03:56 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bf9fe58b-1a08-11ef-b4bb-af5377834399;
- Fri, 24 May 2024 22:03:55 +0200 (CEST)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-57857e0f464so1184464a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 24 May 2024 13:03:55 -0700 (PDT)
-Received: from andrewcoop.citrite.net ([160.101.139.1])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626c9377d8sm173553066b.55.2024.05.24.13.03.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 May 2024 13:03:53 -0700 (PDT)
+ <SRS0=K6bJ=M3=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1sAchh-0000Mf-JG
+ for xen-devel@lists.xenproject.org; Fri, 24 May 2024 21:43:57 +0000
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b72d0254-1a16-11ef-90a1-e314d9c70b13;
+ Fri, 24 May 2024 23:43:55 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id A18E1CE19F1;
+ Fri, 24 May 2024 21:43:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F521C2BBFC;
+ Fri, 24 May 2024 21:43:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,348 +43,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bf9fe58b-1a08-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1716581034; x=1717185834; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BArFVTq1bFwBqGRKgiR15fKQGJoXMQ04ywKksSWcrsw=;
-        b=nce6VDKq+A7CD02EOSHb4AOw7H264K5pwaW25ZnM3aasO4mUoSAUz8Xg99jXVkyUxp
-         WdkxEvouGhx14pxxNTTC8t04OUh1F9nXBwY8fJCNs7o2bKnqcxYs6sr2/HBQtR5pX+YN
-         ZJNCMx6+UW+5+I0MAbZhtfSg3fgtSUGd8oApc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716581034; x=1717185834;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BArFVTq1bFwBqGRKgiR15fKQGJoXMQ04ywKksSWcrsw=;
-        b=UvIwFnqnUxtHAvnJomBst7ofJMhQJkwzq4OVPaHkqVXi0NHczF7JGLoeWvIVOKEXBF
-         3PP1+JzwVDkmuI/VZAKbnmX8OCcLkhy7TYkV4NMjjhOQyIqNgdIv7oXlzDTD/05vfSjD
-         y3fAgiz9usW++eb0Yw8GdjFXP4gB/PxQPfvleqQMFIJiftoBDu6tnMSTDj+DBM8IvmkO
-         cCk5X5WPLq0UOTedsCtj++g4lxpVOHgXJo6FEQaEJ9VnpE1IHUmyG5UxJhyvPjSwEJTl
-         u1Qp0ZBj9HP6uhITwRCvba08Lxw2ms5KprDFcflhSE5XhRqaG+Shny8uNm92CzqHF+sJ
-         BwoQ==
-X-Gm-Message-State: AOJu0YwtlVGiqB/Nei71T2EuusE7moY+qYMnJ/n7ZjlR5C6VP69w2BOU
-	J9rsT/t39zGJVVe4x/RuPjPHEgdS+WdV2fGju8o7zCx4n4JJGtO01BAzNNY/3ZqSoD9/9X24V8r
-	/0j4=
-X-Google-Smtp-Source: AGHT+IFS0sRKjwwnSdc3AQTMI7Dh0SyIHhDvuOE50/zkVG/FaN3PWKT6+IRAPUcfHZtNjlNVcg8Ydg==
-X-Received: by 2002:a17:907:6d07:b0:a58:c80e:edd9 with SMTP id a640c23a62f3a-a626525da3bmr218463666b.77.1716581034101;
-        Fri, 24 May 2024 13:03:54 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	"consulting @ bugseng . com" <consulting@bugseng.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH v2 11/13] xen/bitops: Implement fls()/flsl() in common logic
-Date: Fri, 24 May 2024 21:03:36 +0100
-Message-Id: <20240524200338.1232391-12-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240524200338.1232391-1-andrew.cooper3@citrix.com>
-References: <20240524200338.1232391-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: b72d0254-1a16-11ef-90a1-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1716587028;
+	bh=/tvhAKH8diu82OuYBC/gDMZewjW2e2ICgNJ5qfZa3Mw=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=g4ZcjC+HwVU1fnitzyPpLoiNO1GjC3zxfpsFup8YXndXquKa98n65zVIpRq5vpoBY
+	 Lf9wNjFgvBBbXuLXEMNtuvLHiuftnIgC3zEPMLYG+y6+vYQVY+WyEzn2rJYe4Zt3o4
+	 YZVzCkeatC+ls1TdYLr+itEfQPt6Uxb0hceJLkgrzB7f2w+FE/AFW+GzNPN44ihrLX
+	 Lcz56Sn+BLnV8/kpil8114EB8aghIjUHiry4gJX7+F2xShbM61OXlFZGF5Af2uUwMn
+	 8EJ0DbehGR4J6WBcqhQ3iQ1g/UlMB8aVHUaTFASWujqryiw4BMjHTyXf3eF9GbLQGO
+	 K5sUpmxTsXXyQ==
+Date: Fri, 24 May 2024 14:43:47 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Julien Grall <julien@xen.org>
+cc: Stefano Stabellini <stefano.stabellini@amd.com>, 
+    xen-devel@lists.xenproject.org, anthony@xenproject.org, 
+    sstabellini@kernel.org, bertrand.marquis@arm.com, michal.orzel@amd.com, 
+    Volodymyr_Babchuk@epam.com, Henry Wang <xin.wang2@amd.com>, 
+    Jason Andryuk <jason.andryuk@amd.com>
+Subject: Re: [PATCH v5 3/7] tools/arm: Introduce the "nr_spis" xl config
+ entry
+In-Reply-To: <56bf92b7-9bcc-4093-b51c-b8ec0b43209c@xen.org>
+Message-ID: <alpine.DEB.2.22.394.2405241443410.2557291@ubuntu-linux-20-04-desktop>
+References: <alpine.DEB.2.22.394.2405231914360.2557291@ubuntu-linux-20-04-desktop> <20240524021814.2666257-3-stefano.stabellini@amd.com> <56bf92b7-9bcc-4093-b51c-b8ec0b43209c@xen.org>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+On Fri, 23 May 2024, Julien Grall wrote:
+> Hi,
+> 
+> On 24/05/2024 03:18, Stefano Stabellini wrote:
+> > From: Henry Wang <xin.wang2@amd.com>
+> > 
+> > Currently, the number of SPIs allocated to the domain is only
+> > configurable for Dom0less DomUs. Xen domains are supposed to be
+> > platform agnostics and therefore the numbers of SPIs for libxl
+> > guests should not be based on the hardware.
+> > 
+> > Introduce a new xl config entry for Arm to provide a method for
+> > user to decide the number of SPIs. This would help to avoid
+> > bumping the `config->arch.nr_spis` in libxl everytime there is a
+> > new platform with increased SPI numbers.
+> > 
+> > Update the doc and the golang bindings accordingly.
+> > 
+> > Signed-off-by: Henry Wang <xin.wang2@amd.com>
+> > Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+> > Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+> > ---
+> >   docs/man/xl.cfg.5.pod.in             | 16 ++++++++++++++++
+> >   tools/golang/xenlight/helpers.gen.go |  2 ++
+> >   tools/golang/xenlight/types.gen.go   |  1 +
+> >   tools/include/libxl.h                |  7 +++++++
+> >   tools/libs/light/libxl_arm.c         |  4 ++--
+> >   tools/libs/light/libxl_types.idl     |  1 +
+> >   tools/xl/xl_parse.c                  |  3 +++
+> >   7 files changed, 32 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+> > index 8f2b375ce9..ac3f88fd57 100644
+> > --- a/docs/man/xl.cfg.5.pod.in
+> > +++ b/docs/man/xl.cfg.5.pod.in
+> > @@ -3072,6 +3072,22 @@ raised.
+> >     =back
+> >   +=over 4
+> > +
+> > +=item B<nr_spis="NR_SPIS">
+> > +
+> > +An optional integer parameter specifying the number of SPIs (Shared
+> > +Peripheral Interrupts) to allocate for the domain. Max is 991 SPIs. If
+> > +the value specified by the `nr_spis` parameter is smaller than the
+> > +number of SPIs calculated by the toolstack based on the devices
+> > +allocated for the domain, or the `nr_spis` parameter is not specified,
+> > +the value calculated by the toolstack will be used for the domain.
+> > +Otherwise, the value specified by the `nr_spis` parameter will be used.
+> > +The number of SPIs should match the highest interrupt ID that will be
+> > +assigned to the domain.
+> > +
+> > +=back
+> > +
+> >   =head3 x86
+> >     =over 4
+> > diff --git a/tools/golang/xenlight/helpers.gen.go
+> > b/tools/golang/xenlight/helpers.gen.go
+> > index b9cb5b33c7..fe5110474d 100644
+> > --- a/tools/golang/xenlight/helpers.gen.go
+> > +++ b/tools/golang/xenlight/helpers.gen.go
+> > @@ -1154,6 +1154,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
+> >   x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
+> >   x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
+> >   x.ArchArm.SveVl = SveType(xc.arch_arm.sve_vl)
+> > +x.ArchArm.NrSpis = uint32(xc.arch_arm.nr_spis)
+> >   if err := x.ArchX86.MsrRelaxed.fromC(&xc.arch_x86.msr_relaxed);err != nil
+> > {
+> >   return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+> >   }
+> > @@ -1670,6 +1671,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
+> >   xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
+> >   xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
+> >   xc.arch_arm.sve_vl = C.libxl_sve_type(x.ArchArm.SveVl)
+> > +xc.arch_arm.nr_spis = C.uint32_t(x.ArchArm.NrSpis)
+> >   if err := x.ArchX86.MsrRelaxed.toC(&xc.arch_x86.msr_relaxed); err != nil {
+> >   return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+> >   }
+> > diff --git a/tools/golang/xenlight/types.gen.go
+> > b/tools/golang/xenlight/types.gen.go
+> > index 5b293755d7..c9e45b306f 100644
+> > --- a/tools/golang/xenlight/types.gen.go
+> > +++ b/tools/golang/xenlight/types.gen.go
+> > @@ -597,6 +597,7 @@ ArchArm struct {
+> >   GicVersion GicVersion
+> >   Vuart VuartType
+> >   SveVl SveType
+> > +NrSpis uint32
+> >   }
+> >   ArchX86 struct {
+> >   MsrRelaxed Defbool
+> > diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+> > index 62cb07dea6..3b5c18b48b 100644
+> > --- a/tools/include/libxl.h
+> > +++ b/tools/include/libxl.h
+> > @@ -636,6 +636,13 @@
+> >    */
+> >   #define LIBXL_HAVE_XEN_9PFS 1
+> >   +/*
+> > + * LIBXL_HAVE_NR_SPIS indicates the presence of the nr_spis field in
+> > + * libxl_domain_build_info that specifies the number of SPIs interrupts
+> > + * for the guest.
+> > + */
+> > +#define LIBXL_HAVE_NR_SPIS 1
+> > +
+> 
+> Looking at the other arch.arm field, I think this wants to be:
+> 
+> /*
+>  * libxl_domain_build_info has the arch_arm.nr_spis field
+>  */
+> #define LIBXL_HAVE_BUILDINFO_ARCH_NR_SPIS 1
+> 
+> This would also clarify that the field is Arm specific.
 
-This is most easily done together because of how arm32 is currently
-structured, but it does just mirror the existing ffs()/ffsl() work.
-
-Introduce compile and boot time testing.
-
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Shawn Anastasio <sanastasio@raptorengineering.com>
-CC: consulting@bugseng.com <consulting@bugseng.com>
-CC: Simone Ballarin <simone.ballarin@bugseng.com>
-CC: Federico Serafini <federico.serafini@bugseng.com>
-CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
-
-v2:
- * New, incorperated from Oleksii's RISC-V series and adjusted.
-
-for x86:
-
-  add/remove: 0/0 grow/shrink: 3/17 up/down: 28/-153 (-125)
-  Function                                     old     new   delta
-  pci_enable_msi                              1033    1049     +16
-  vlapic_lowest_prio                           330     338      +8
-  kexec_early_calculations                      53      57      +4
-  pci_restore_msi_state                       1159    1157      -2
-  arch_hwdom_irqs                               61      59      -2
-  control_read                                 132     129      -3
-  pci_enable_msi.cold                          121     117      -4
-  arch_get_dma_bitsize                         173     169      -4
-  xmem_pool_alloc                             1039    1032      -7
-  xenheap_max_mfn                               49      42      -7
-  mba_sanitize_thrtl                            83      76      -7
-  xstate_init                                  807     799      -8
-  offline_page                                 965     957      -8
-  apicid_to_socket                             160     152      -8
-  vlapic_find_highest_vector                    61      48     -13
-  xmem_pool_free                               983     967     -16
-  iommu_alloc                                  935     919     -16
-  free_heap_pages                             1512    1496     -16
-  detect_ht                                    318     302     -16
-  alloc_heap_pages                            1569    1553     -16
-
-showing that the optimiser can now do a better job in most cases.
----
- xen/arch/arm/include/asm/arm32/bitops.h |  2 --
- xen/arch/arm/include/asm/arm64/bitops.h | 12 -------
- xen/arch/arm/include/asm/bitops.h       | 19 ++--------
- xen/arch/ppc/include/asm/bitops.h       |  4 +--
- xen/arch/x86/include/asm/bitops.h       | 46 +++++++++++++++----------
- xen/common/bitops.c                     | 25 ++++++++++++++
- xen/include/xen/bitops.h                | 24 +++++++++++++
- 7 files changed, 80 insertions(+), 52 deletions(-)
-
-diff --git a/xen/arch/arm/include/asm/arm32/bitops.h b/xen/arch/arm/include/asm/arm32/bitops.h
-index d0309d47c188..0d7bb12d5c19 100644
---- a/xen/arch/arm/include/asm/arm32/bitops.h
-+++ b/xen/arch/arm/include/asm/arm32/bitops.h
-@@ -1,8 +1,6 @@
- #ifndef _ARM_ARM32_BITOPS_H
- #define _ARM_ARM32_BITOPS_H
- 
--#define flsl fls
--
- /*
-  * Little endian assembly bitops.  nr = 0 -> byte 0 bit 0.
-  */
-diff --git a/xen/arch/arm/include/asm/arm64/bitops.h b/xen/arch/arm/include/asm/arm64/bitops.h
-index 906d84e5f295..a6135838dcfa 100644
---- a/xen/arch/arm/include/asm/arm64/bitops.h
-+++ b/xen/arch/arm/include/asm/arm64/bitops.h
-@@ -1,18 +1,6 @@
- #ifndef _ARM_ARM64_BITOPS_H
- #define _ARM_ARM64_BITOPS_H
- 
--static inline int flsl(unsigned long x)
--{
--        uint64_t ret;
--
--        if (__builtin_constant_p(x))
--               return generic_flsl(x);
--
--        asm("clz\t%0, %1" : "=r" (ret) : "r" (x));
--
--        return BITS_PER_LONG - ret;
--}
--
- /* Based on linux/include/asm-generic/bitops/find.h */
- 
- #ifndef CONFIG_GENERIC_FIND_FIRST_BIT
-diff --git a/xen/arch/arm/include/asm/bitops.h b/xen/arch/arm/include/asm/bitops.h
-index d30ba44598e3..8f4bdc09d128 100644
---- a/xen/arch/arm/include/asm/bitops.h
-+++ b/xen/arch/arm/include/asm/bitops.h
-@@ -140,25 +140,10 @@ static inline int test_bit(int nr, const volatile void *addr)
-         return 1UL & (p[BITOP_WORD(nr)] >> (nr & (BITOP_BITS_PER_WORD-1)));
- }
- 
--/*
-- * On ARMv5 and above those functions can be implemented around
-- * the clz instruction for much better code efficiency.
-- */
--
--static inline int fls(unsigned int x)
--{
--        int ret;
--
--        if (__builtin_constant_p(x))
--               return generic_flsl(x);
--
--        asm("clz\t%"__OP32"0, %"__OP32"1" : "=r" (ret) : "r" (x));
--        return 32 - ret;
--}
--
--
- #define arch_ffs(x)  ((x) ? 1 + __builtin_ctz(x) : 0)
- #define arch_ffsl(x) ((x) ? 1 + __builtin_ctzl(x) : 0)
-+#define arch_fls(x)  ((x) ? 32 - __builtin_clz(x) : 0)
-+#define arch_flsl(x) ((x) ? BITS_PER_LONG - __builtin_clzl(x) : 0)
- 
- /**
-  * hweightN - returns the hamming weight of a N-bit word
-diff --git a/xen/arch/ppc/include/asm/bitops.h b/xen/arch/ppc/include/asm/bitops.h
-index 761361291e6f..8119b5ace877 100644
---- a/xen/arch/ppc/include/asm/bitops.h
-+++ b/xen/arch/ppc/include/asm/bitops.h
-@@ -171,10 +171,10 @@ static inline int __test_and_clear_bit(int nr, volatile void *addr)
-     return (old & mask) != 0;
- }
- 
--#define flsl(x) generic_flsl(x)
--#define fls(x) generic_flsl(x)
- #define arch_ffs(x)  ((x) ? 1 + __builtin_ctz(x) : 0)
- #define arch_ffsl(x) ((x) ? 1 + __builtin_ctzl(x) : 0)
-+#define arch_fls(x)  ((x) ? 32 - __builtin_clz(x) : 0)
-+#define arch_flsl(x) ((x) ? BITS_PER_LONG - __builtin_clzl(x) : 0)
- 
- /**
-  * hweightN - returns the hamming weight of a N-bit word
-diff --git a/xen/arch/x86/include/asm/bitops.h b/xen/arch/x86/include/asm/bitops.h
-index 830e488f33a0..fc9fe73ad5ba 100644
---- a/xen/arch/x86/include/asm/bitops.h
-+++ b/xen/arch/x86/include/asm/bitops.h
-@@ -447,33 +447,41 @@ static always_inline unsigned int arch_ffsl(unsigned long x)
- }
- #define arch_ffsl arch_ffsl
- 
--/**
-- * fls - find last bit set
-- * @x: the word to search
-- *
-- * This is defined the same way as ffs.
-- */
--static inline int flsl(unsigned long x)
-+static always_inline unsigned int arch_fls(unsigned int x)
- {
--    long r;
-+    unsigned int r;
-+
-+    /* See arch_ffs() for safety discussions. */
-+    if ( __builtin_constant_p(x > 0) && x > 0 )
-+        asm ( "bsr %[val], %[res]"
-+              : [res] "=r" (r)
-+              : [val] "rm" (x) );
-+    else
-+        asm ( "bsr %[val], %[res]"
-+              : [res] "=r" (r)
-+              : [val] "rm" (x), "[res]" (-1) );
- 
--    asm ( "bsr %1,%0\n\t"
--          "jnz 1f\n\t"
--          "mov $-1,%0\n"
--          "1:" : "=r" (r) : "rm" (x));
--    return (int)r+1;
-+    return r + 1;
- }
-+#define arch_fls arch_fls
- 
--static inline int fls(unsigned int x)
-+static always_inline unsigned int arch_flsl(unsigned long x)
- {
--    int r;
-+    unsigned int r;
-+
-+    /* See arch_ffs() for safety discussions. */
-+    if ( __builtin_constant_p(x > 0) && x > 0 )
-+        asm ( "bsr %[val], %q[res]"
-+              : [res] "=r" (r)
-+              : [val] "rm" (x) );
-+    else
-+        asm ( "bsr %[val], %q[res]"
-+              : [res] "=r" (r)
-+              : [val] "rm" (x), "[res]" (-1) );
- 
--    asm ( "bsr %1,%0\n\t"
--          "jnz 1f\n\t"
--          "mov $-1,%0\n"
--          "1:" : "=r" (r) : "rm" (x));
-     return r + 1;
- }
-+#define arch_flsl arch_flsl
- 
- /**
-  * hweightN - returns the hamming weight of a N-bit word
-diff --git a/xen/common/bitops.c b/xen/common/bitops.c
-index b3813f818198..b4845d9e84d1 100644
---- a/xen/common/bitops.c
-+++ b/xen/common/bitops.c
-@@ -26,7 +26,32 @@ static void __init test_ffs(void)
- #endif
- }
- 
-+static void __init test_fls(void)
-+{
-+    /* unsigned int fls(unsigned int) */
-+    CHECK(fls, 0, 0);
-+    CHECK(fls, 1, 1);
-+    CHECK(fls, 3, 2);
-+    CHECK(fls, 7, 3);
-+    CHECK(fls, 6, 3);
-+    CHECK(fls, 0x80000000U, 32);
-+
-+    /* unsigned int flsl(unsigned long) */
-+    CHECK(flsl, 0, 0);
-+    CHECK(flsl, 1, 1);
-+    CHECK(flsl, 3, 2);
-+    CHECK(flsl, 7, 3);
-+    CHECK(flsl, 6, 3);
-+
-+    CHECK(flsl, 1 | (1UL << (BITS_PER_LONG - 1)), BITS_PER_LONG);
-+#if BITS_PER_LONG > 32
-+    CHECK(flsl, 1 | (1UL << 32), 33);
-+    CHECK(flsl, 1 | (1UL << 63), 64);
-+#endif
-+}
-+
- static void __init __constructor test_bitops(void)
- {
-     test_ffs();
-+    test_fls();
- }
-diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
-index 88cf27a88bcf..e7df6377372d 100644
---- a/xen/include/xen/bitops.h
-+++ b/xen/include/xen/bitops.h
-@@ -60,6 +60,30 @@ static always_inline __pure unsigned int ffsl(unsigned long x)
- #endif
- }
- 
-+static always_inline __pure unsigned int fls(unsigned int x)
-+{
-+    if ( __builtin_constant_p(x) )
-+        return x ? 32 - __builtin_clz(x) : 0;
-+
-+#ifdef arch_fls
-+    return arch_fls(x);
-+#else
-+    return generic_flsl(x);
-+#endif
-+}
-+
-+static always_inline __pure unsigned int flsl(unsigned long x)
-+{
-+    if ( __builtin_constant_p(x) )
-+        return x ? BITS_PER_LONG - __builtin_clzl(x) : 0;
-+
-+#ifdef arch_fls
-+    return arch_flsl(x);
-+#else
-+    return generic_flsl(x);
-+#endif
-+}
-+
- /* --------------------- Please tidy below here --------------------- */
- 
- #ifndef find_next_bit
--- 
-2.30.2
-
+I made the change
 
