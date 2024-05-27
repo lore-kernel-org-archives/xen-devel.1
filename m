@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1046EC25B74
-	for <xen-devel@archiver.kernel.org>; Mon, 27 May 2024 12:59:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.730727.1135917 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 218EDC25B74
+	for <xen-devel@archiver.kernel.org>; Mon, 27 May 2024 13:27:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.730750.1135930 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sBZwY-0005es-Sz; Mon, 27 May 2024 12:59:14 +0000
+	id 1sBaNg-0002ae-UI; Mon, 27 May 2024 13:27:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 730727.1135917; Mon, 27 May 2024 12:59:14 +0000
+Received: by outflank-mailman (output) from mailman id 730750.1135930; Mon, 27 May 2024 13:27:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sBZwY-0005dw-MT; Mon, 27 May 2024 12:59:14 +0000
-Received: by outflank-mailman (input) for mailman id 730727;
- Mon, 27 May 2024 12:56:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3Kte=M6=linux.intel.com=ilpo.jarvinen@srs-se1.protection.inumbo.net>)
- id 1sBZtj-0004UW-Ph
- for xen-devel@lists.xenproject.org; Mon, 27 May 2024 12:56:20 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 806f077d-1c28-11ef-b4bb-af5377834399;
- Mon, 27 May 2024 14:56:16 +0200 (CEST)
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
- by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 May 2024 05:56:14 -0700
-Received: from unknown (HELO localhost) ([10.245.247.139])
- by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 May 2024 05:56:10 -0700
+	id 1sBaNg-0002aX-RV; Mon, 27 May 2024 13:27:16 +0000
+Received: by outflank-mailman (input) for mailman id 730750;
+ Mon, 27 May 2024 13:27:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=O60l=M6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sBaNf-0002aR-6i
+ for xen-devel@lists.xenproject.org; Mon, 27 May 2024 13:27:15 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d4374d88-1c2c-11ef-90a1-e314d9c70b13;
+ Mon, 27 May 2024 15:27:13 +0200 (CEST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-529661f2552so3066232e87.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 May 2024 06:27:13 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-578649b3001sm4032343a12.77.2024.05.27.06.27.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 May 2024 06:27:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,93 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 806f077d-1c28-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1716814576; x=1748350576;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=/GjJOKz80/OPeh1IZUhwdO/jTNvJXvgYw28YHmRy+ms=;
-  b=IIMT0WaDdedSP4Lxd8EpFBDtky/oZjEwfIdoNjA+eaVum20oD3cRGT4G
-   3p3SZp7QYOUjKNT0mS1/pZzVyuKyG4fPhiPhT1xMx9vqJEbLHCt+rifvf
-   Y+/mNMvGv0lNHl3lVcVeP0QoLBjyCSYdblQRTctXFR4R7Z/TGKeaAlfRc
-   ipOvmUHasbO/x/55Eh3GlHUPDLmgBwtBjPKl1f4bL74xVTITQfUwk2UpX
-   +PGRpXfnkp1pSJfin9p2d+5RwufdcVaAm1TwoMVW20525RGfsGAQsm+MH
-   K196RIpakrMrBeNTmHMnbx5IAgmoeSXWCrwo3ZrlpG4yChkr8vcyaxtUh
-   w==;
-X-CSE-ConnectionGUID: +uXa3yUFT2+riveQYP0R5w==
-X-CSE-MsgGUID: G164Qc3CQ+qH5BtCEOAweg==
-X-IronPort-AV: E=McAfee;i="6600,9927,11084"; a="23734146"
-X-IronPort-AV: E=Sophos;i="6.08,192,1712646000"; 
-   d="scan'208";a="23734146"
-X-CSE-ConnectionGUID: YFWi0+SrQV+rzQS/udVCIg==
-X-CSE-MsgGUID: ZBHpgWfbTRyNJw3j2NIY2A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,192,1712646000"; 
-   d="scan'208";a="34643688"
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-To: Juergen Gross <jgross@suse.com>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ian Campbell <ian.campbell@citrix.com>,
-	xen-devel@lists.xenproject.org,
-	linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	stable@vger.kernel.org
-Subject: [PATCH 3/4] x86/pci/xen: Fix PCIBIOS_* return code handling
-Date: Mon, 27 May 2024 15:55:37 +0300
-Message-Id: <20240527125538.13620-3-ilpo.jarvinen@linux.intel.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240527125538.13620-1-ilpo.jarvinen@linux.intel.com>
-References: <20240527125538.13620-1-ilpo.jarvinen@linux.intel.com>
+X-Inumbo-ID: d4374d88-1c2c-11ef-90a1-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1716816433; x=1717421233; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=rKSNs4523+4teDwcbjKLKgWAgOut0WjV9YrmmUEFspI=;
+        b=O/CFUgmt8LgfRo28yhsK9/rLcoUPsI4bIlpwoiD9/SV7XN0TeDyIV3KC9Pwoi8X182
+         kbj+y4Ftt0KWr4cQc82crCv0FNO6UqszbSALzI2J+fPKe0xECbNfcNDSGCarMaiKcz8E
+         uoF2vJtbqAJvU8IJQbzOzERBSbQ8U5ghX/ojKChgtRlJ7jh9rEt85Yr1gar6RqKMo6/U
+         mfJ1osxkrqhVLKbS1eLcvKG08LWlnTgQeI7FEiZZ0+epn6Qx4DLaPyIQf+Eral4FaQpT
+         xuODPrRsJA3Ukcuqw+3AXvv/pOUlYi3j0GAA+NaCGmNQSyx2+uNW5khoIPSFLwi27jYB
+         S24A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716816433; x=1717421233;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=rKSNs4523+4teDwcbjKLKgWAgOut0WjV9YrmmUEFspI=;
+        b=YMZ683VJTrgumcddAll1VDr6Mz1gtrDxh15R6RswGxEVagUUVe2EMZuXABvh+Fmp+Q
+         PjM+YB0smeeO9c2JxT9ntU2Xd+qEZzo7oq0UVxb+5W8xscrv3c1VJ3ccJsB2pVN+e6HA
+         1CdEr4jlbt62pEguKjZAHNQ1bkdMKR1aKabMdsaawzRD9NRSCbvl5ELpe0W8jr79pn8b
+         90Xzd27mzzWEOmbe04lcl17FQ56hOXJeyX9Ra62nkvOGDxX6FD0xFLesIi47uZSJ97kE
+         Arof3n90KVahyHpCErAvGpXJsqZv9/8LXfS2lT2KIcM9qsF04tEyQqUKh9e3DbAV0YjE
+         aFpw==
+X-Forwarded-Encrypted: i=1; AJvYcCXLGpY3jHesAYwM6q9mxuK0Lq8R4FHAxsQEG+JCCpWsLFxTbASrItcFLDFckZB0q+szE2LgL/w+rrbtH1SoaEOTB3LZKRG0czMX/sa+wRg=
+X-Gm-Message-State: AOJu0YzEyupy0/2/BON0wK4P9qhckOsIfA4rZAlst3K73oGjac60tdaK
+	cd8h0FJp1xD6ceZc/cmzQ2GvPhoK/J6A6QaJ3uw+vdPCLx4VuiQk6EH+ifhLEQ==
+X-Google-Smtp-Source: AGHT+IFKRzD2OdT2IGhCCThP3gDFk3CxPFQhNOcCbfeLY3vK7Uw0Y1y6iSRYPWqUqGhwHC7kGcHSlg==
+X-Received: by 2002:a05:6512:3684:b0:51e:f8ae:db35 with SMTP id 2adb3069b0e04-529668ca029mr5061217e87.43.1716816433122;
+        Mon, 27 May 2024 06:27:13 -0700 (PDT)
+Message-ID: <1660a2a7-cea4-4e6f-9286-0c134c34b6fb@suse.com>
+Date: Mon, 27 May 2024 15:27:11 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 07/13] x86/bitops: Improve arch_ffs() in the general
+ case
+Content-Language: en-US
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Shawn Anastasio <sanastasio@raptorengineering.com>,
+ "consulting @ bugseng . com" <consulting@bugseng.com>,
+ Simone Ballarin <simone.ballarin@bugseng.com>,
+ Federico Serafini <federico.serafini@bugseng.com>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20240524200338.1232391-1-andrew.cooper3@citrix.com>
+ <20240524200338.1232391-8-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20240524200338.1232391-8-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-xen_pcifront_enable_irq() uses pci_read_config_byte() that returns
-PCIBIOS_* codes. The error handling, however, assumes the codes are
-normal errnos because it checks for < 0.
+On 24.05.2024 22:03, Andrew Cooper wrote:
+> --- a/xen/arch/x86/include/asm/bitops.h
+> +++ b/xen/arch/x86/include/asm/bitops.h
+> @@ -432,12 +432,28 @@ static inline int ffsl(unsigned long x)
+>  
+>  static always_inline unsigned int arch_ffs(unsigned int x)
+>  {
+> -    int r;
+> +    unsigned int r;
+> +
+> +    if ( __builtin_constant_p(x > 0) && x > 0 )
+> +    {
+> +        /* Safe, when the compiler knows that x is nonzero. */
+> +        asm ( "bsf %[val], %[res]"
+> +              : [res] "=r" (r)
+> +              : [val] "rm" (x) );
+> +    }
 
-xen_pcifront_enable_irq() also returns the PCIBIOS_* code back to the
-caller but the function is used as the (*pcibios_enable_irq) function
-which should return normal errnos.
+In patch 11 relevant things are all in a single patch, making it easier
+to spot that this is dead code: The sole caller already has a
+__builtin_constant_p(), hence I don't see how the one here could ever
+return true. With that the respective part of the description is then
+questionable, too, I'm afraid: Where did you observe any actual effect
+from this? Or if you did - what am I missing?
 
-Convert the error check to plain non-zero check which works for
-PCIBIOS_* return codes and convert the PCIBIOS_* return code using
-pcibios_err_to_errno() into normal errno before returning it.
-
-Fixes: 3f2a230caf21 ("xen: handled remapped IRQs when enabling a pcifront PCI device.")
-Signed-off-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
-Cc: stable@vger.kernel.org
----
- arch/x86/pci/xen.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/arch/x86/pci/xen.c b/arch/x86/pci/xen.c
-index 652cd53e77f6..0f2fe524f60d 100644
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -38,10 +38,10 @@ static int xen_pcifront_enable_irq(struct pci_dev *dev)
- 	u8 gsi;
- 
- 	rc = pci_read_config_byte(dev, PCI_INTERRUPT_LINE, &gsi);
--	if (rc < 0) {
-+	if (rc) {
- 		dev_warn(&dev->dev, "Xen PCI: failed to read interrupt line: %d\n",
- 			 rc);
--		return rc;
-+		return pcibios_err_to_errno(rc);
- 	}
- 	/* In PV DomU the Xen PCI backend puts the PIRQ in the interrupt line.*/
- 	pirq = gsi;
--- 
-2.39.2
-
+Jan
 
