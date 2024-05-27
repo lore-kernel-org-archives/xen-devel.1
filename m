@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A539C25B74
-	for <xen-devel@archiver.kernel.org>; Mon, 27 May 2024 12:58:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.730734.1135900 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8431C25B74
+	for <xen-devel@archiver.kernel.org>; Mon, 27 May 2024 12:59:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.730725.1135910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sBZvw-00055E-9j; Mon, 27 May 2024 12:58:36 +0000
+	id 1sBZwY-0005bY-In; Mon, 27 May 2024 12:59:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 730734.1135900; Mon, 27 May 2024 12:58:36 +0000
+Received: by outflank-mailman (output) from mailman id 730725.1135910; Mon, 27 May 2024 12:59:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sBZvw-000557-7A; Mon, 27 May 2024 12:58:36 +0000
-Received: by outflank-mailman (input) for mailman id 730734;
- Mon, 27 May 2024 12:58:35 +0000
+	id 1sBZwY-0005bR-GI; Mon, 27 May 2024 12:59:14 +0000
+Received: by outflank-mailman (input) for mailman id 730725;
+ Mon, 27 May 2024 12:55:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=O60l=M6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sBZvv-00054x-2P
- for xen-devel@lists.xenproject.org; Mon, 27 May 2024 12:58:35 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
+ (envelope-from <SRS0=WtIC=M6=gmail.com=yskelg@srs-se1.protection.inumbo.net>)
+ id 1sBZsz-0004Tb-KA
+ for xen-devel@lists.xenproject.org; Mon, 27 May 2024 12:55:33 +0000
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [2607:f8b0:4864:20::630])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d333dd8e-1c28-11ef-90a1-e314d9c70b13;
- Mon, 27 May 2024 14:58:34 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a62972c88a9so236161766b.1
- for <xen-devel@lists.xenproject.org>; Mon, 27 May 2024 05:58:34 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a62c501e85dsm247769766b.117.2024.05.27.05.58.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 May 2024 05:58:33 -0700 (PDT)
+ id 667be261-1c28-11ef-90a1-e314d9c70b13;
+ Mon, 27 May 2024 14:55:32 +0200 (CEST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1f44b4404dfso21862055ad.0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 May 2024 05:55:32 -0700 (PDT)
+Received: from paran-QEMU-Virtual-Machine.. ([118.32.98.101])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1f44c757845sm60382005ad.5.2024.05.27.05.55.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 May 2024 05:55:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,92 +47,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d333dd8e-1c28-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 667be261-1c28-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1716814713; x=1717419513; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=+Yme6rd5RZYashNZq5SnUrewWqWptJp8i6Jp+GbeKLw=;
-        b=DR8Wku8IflbSgrHzpw4Y9BAXcKrPHjZ/B3g6/xNKmRI/tZRgkocxTrPJE4Ee2HGrYN
-         ZiVAiZALy/UojRPEahf2JHvpDvTCLW9QeM3ADKvZSlXeRzB5Ct6ufV7QMaUnWHD0CRjG
-         Fxd9pMb9wWYark0AHeYUBswug5aGZDtJ2qyrPPU5tb0rAgBIZScW2JUdYu2kMk6qL4P1
-         v4RHv/hmTy8lhrsUE3uYvn/kCegwHXqIXZYWjJ2QkJomHZl9r0h2OxFjxXxmCF+94ZiC
-         Lkew5tD9o3IFUbY1IN+LWBZQJgVp7cPFkQJGlaqNAMixgBYbfkBu5AZbSYFHijfcMyWj
-         gF5A==
+        d=gmail.com; s=20230601; t=1716814531; x=1717419331; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pMe2OjnAw9DOpVmn/tQbHcQU5IfzyQdTOAHTtCD7gi8=;
+        b=FvS2KSZd7lE/ejf3q/peyRA7xt55tW0gw5w+/3UNtK89gxHuSZNpXFJkLKXpXaK9fi
+         ktL9zEVoSbPLHDmJ5BXwPKIMBnYy5iyaxrAPBmxjYHwndXvRE9YTKdxT6YFN4OhnErxT
+         /YF58gf766seTiVIcHcX6CjQ86hJ/wy1+Oh311YQpPh6Ux2x6DOzZErKMJKdSJLE8ll/
+         a5LQ1aopzkXQVoWWvU0r4NWZ1jhoXwHOJHKIRvUPCZVgnihQMpPXQhCPH5Yvj404sNzh
+         vh6S8KG31/sjldYsYLRAqQP6fco35EsmLnJK2HPZjGwT0S/H+7mLyJS1EHodpNFUF6Ze
+         6Paw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716814713; x=1717419513;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=+Yme6rd5RZYashNZq5SnUrewWqWptJp8i6Jp+GbeKLw=;
-        b=meXIGTQIIyomkdishavYbLYeZO0va6GnFLa85W+WRoE3nkBpkFoD6IL1mvHEFYqaOY
-         wbUbcoJHUxa0uuYoqwnI+bs/yhr3U9pJ0FaEHFBadxX88oUWu1sk0ANXJBb7GiwIzEUL
-         tI1m4cIQtM1D2xKb9xFtiM/cWCS0AwrupPQk9dolINK7Dhns8VXELyLEb+iX2H67MH6h
-         bkaulh+pq0MqS3ELp9BjcN+db7vYdErEGH39XeL6rk91ahvqzolysAeQ0b6D9fYL7ZQ7
-         Ec39NZPZdf7bRHVlmFYc/6aa0ODE39D02nUbyTOBnxXjtZI0lqWDL0RZux51ozmqL537
-         ZgvA==
-X-Forwarded-Encrypted: i=1; AJvYcCVevuFYFWEtGmZdwlLXZvoahTZ28kzzB6ohALsvzXcv0QlqnrLEKNsKI492pJkT4tKRPcX54paVat2NAlVBALt89JnUD+4lqcx4v5AmfqI=
-X-Gm-Message-State: AOJu0YwpPkoA/jq6VR7QUo9Y6chTz69ArBz7AR9ns1eU5x3+wjv2yHJS
-	vlaPIs6UI0XW4hA8jI1mrCMhj73NgSHwJH10kWqjl3oiZifeVuWnh0vSWpr0Ag==
-X-Google-Smtp-Source: AGHT+IGbz1zNzGOOQzvC3vXB7vasindAwIi0MBbktLeKFgA2UWNqPL4IucJUAE+oaqG8uq7eWWsqrg==
-X-Received: by 2002:a17:906:c49:b0:a5c:dd34:2312 with SMTP id a640c23a62f3a-a6264f01525mr590867766b.62.1716814713475;
-        Mon, 27 May 2024 05:58:33 -0700 (PDT)
-Message-ID: <a9b7ddb7-a485-4d0f-b2cc-7207093514c1@suse.com>
-Date: Mon, 27 May 2024 14:58:32 +0200
+        d=1e100.net; s=20230601; t=1716814531; x=1717419331;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pMe2OjnAw9DOpVmn/tQbHcQU5IfzyQdTOAHTtCD7gi8=;
+        b=qfyIdZHWIHwwNWZi/PC/+3GSBBiLBj2yapXaGjbIhtinUghHCeRDxH46RutvvhLs9X
+         ltP6ayIJv5v4G+Civ/7KAnn1Uza/02ik4u2ZRU8TYgxt5WhD7F9eYHxqnGKMTYMvN9wd
+         7HXnD9Eh6Cv+DpijMEp91HbMh8dCqdPNT1DOr5LyEX9PDpgFI40n6G+IIsxokxRJqHL8
+         2dLId82mBH8Rg7uxmLKii+jXo6YgB33mV/iank/KOBvsmQ70lJoVYIVpdDyxLch8I2/f
+         bYO92sElmrg1CjFA6EKGTRbZuY/RfJM3l1SmKSLoOVQlKTvHkeOxkiU1UfgBZkeeYlrz
+         M5YQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUjJTPbPXKbmBfN2fgR96nQgGBGjt/R8yrxKwkwu+pul6at4iSs416vqxaQEjgnbnQiKVAQV0+Lr1Ani+ozS+t20OL68sr96E7N1SJ8Q98=
+X-Gm-Message-State: AOJu0YwekmPCPnQd+jpcgqMX9BToHLXvEKHfmD/anv2Wq237joqbeev6
+	LzmcVvdudphT9lbZZfmhPDEdHu+DtfyXniPY4aXf5wmciXvbkpMmcztQMzuXMaI=
+X-Google-Smtp-Source: AGHT+IEvCWcm6q+tC3X0xxKR+wWh5xFppmrVISfccNDFu9TXeDUUje3ns00KN5KoFpXURDLsUc3FBA==
+X-Received: by 2002:a17:902:d50c:b0:1f4:b313:3e9a with SMTP id d9443c01a7336-1f4b3134380mr10896515ad.65.1716814530796;
+        Mon, 27 May 2024 05:55:30 -0700 (PDT)
+From: yskelg@gmail.com
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Anthony PERARD <anthony@xenproject.org>
+Cc: Austin Kim <austindh.kim@gmail.com>,
+	shjy180909@gmail.com,
+	xen-devel@lists.xenproject.org,
+	Yunseong Kim <yskelg@gmail.com>
+Subject: [PATCH] loadpolicy: Verifies memory allocation during policy loading
+Date: Mon, 27 May 2024 21:54:39 +0900
+Message-Id: <20240527125438.66349-1-yskelg@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/13] xen/bitops: Delete find_first_set_bit()
-Content-Language: en-US
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien@xen.org>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Shawn Anastasio <sanastasio@raptorengineering.com>,
- "consulting @ bugseng . com" <consulting@bugseng.com>,
- Simone Ballarin <simone.ballarin@bugseng.com>,
- Federico Serafini <federico.serafini@bugseng.com>,
- Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20240524200338.1232391-1-andrew.cooper3@citrix.com>
- <20240524200338.1232391-11-andrew.cooper3@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240524200338.1232391-11-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 24.05.2024 22:03, Andrew Cooper wrote:
-> No more users.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+From: Yunseong Kim <yskelg@gmail.com>
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+memory allocation failure handling in the loadpolicy module.
 
+Signed-off-by: Yunseong Kim <yskelg@gmail.com>
+---
+ tools/flask/utils/loadpolicy.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/tools/flask/utils/loadpolicy.c b/tools/flask/utils/loadpolicy.c
+index 76710a256c..7f6bab4dcd 100644
+--- a/tools/flask/utils/loadpolicy.c
++++ b/tools/flask/utils/loadpolicy.c
+@@ -58,6 +58,11 @@ int main (int argCnt, const char *args[])
+     }
+ 
+     polMemCp = malloc(info.st_size);
++    if (!polMemCp) {
++        fprintf(stderr, "Error occurred allocating %ld bytes\n", info.st_size);
++        ret = -ENOMEM;
++        goto cleanup;
++    }
+ 
+ #ifdef USE_MMAP
+     polMem = mmap(NULL, info.st_size, PROT_READ, MAP_SHARED, polFd, 0);
+-- 
+2.34.1
 
 
