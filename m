@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA068C25B78
-	for <xen-devel@archiver.kernel.org>; Tue, 28 May 2024 15:30:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731195.1136566 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C5ABC25B78
+	for <xen-devel@archiver.kernel.org>; Tue, 28 May 2024 15:32:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.731216.1136603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sBymC-0001Fo-8i; Tue, 28 May 2024 15:30:12 +0000
+	id 1sByo5-0003mB-3g; Tue, 28 May 2024 15:32:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731195.1136566; Tue, 28 May 2024 15:30:12 +0000
+Received: by outflank-mailman (output) from mailman id 731216.1136603; Tue, 28 May 2024 15:32:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sBymC-0001FH-1d; Tue, 28 May 2024 15:30:12 +0000
-Received: by outflank-mailman (input) for mailman id 731195;
- Tue, 28 May 2024 15:30:11 +0000
+	id 1sByo5-0003m4-1C; Tue, 28 May 2024 15:32:09 +0000
+Received: by outflank-mailman (input) for mailman id 731216;
+ Tue, 28 May 2024 15:32:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5inG=M7=cloud.com=fouad.hilly@srs-se1.protection.inumbo.net>)
- id 1sBymB-00018F-6L
- for xen-devel@lists.xenproject.org; Tue, 28 May 2024 15:30:11 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ <SRS0=bNtp=M7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sByo2-0003hj-U6
+ for xen-devel@lists.xenproject.org; Tue, 28 May 2024 15:32:06 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2accabe2-1d07-11ef-90a1-e314d9c70b13;
- Tue, 28 May 2024 17:30:09 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a6341cf2c99so98851466b.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 May 2024 08:30:09 -0700 (PDT)
-Received: from fhilly.citrite.net ([160.101.139.1])
+ id 708e402e-1d07-11ef-90a1-e314d9c70b13;
+ Tue, 28 May 2024 17:32:06 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-57822392a0dso1278570a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 May 2024 08:32:06 -0700 (PDT)
+Received: from andrewcoop.citrite.net ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626c937444sm621673366b.61.2024.05.28.08.30.07
+ 4fb4d7f45d1cf-579d65934ddsm2736883a12.38.2024.05.28.08.32.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 08:30:08 -0700 (PDT)
+ Tue, 28 May 2024 08:32:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,199 +47,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2accabe2-1d07-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 708e402e-1d07-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1716910208; x=1717515008; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bJX73ZmntNKRAs0BEZRhybEqHcJwu5VuVHE4B8+pY60=;
-        b=jsH+tYRG95sELT8cWmsfGHEKCkPHYDNU3TW66Xhd9e98bau26M3lUVmgGOsC5GKd5m
-         iLneUP35aqUVOdJkUOawonZiMCtloe9/+7D1B/kwKdD+flGQ50Ft56fS61TkqKFajSOA
-         7vSqM+qFtDmfgQMqZ3KwmBHMP5KWaoDy4cNQ4=
+        d=citrix.com; s=google; t=1716910325; x=1717515125; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0xHve6PL7KT+Q9OZMD1lypR2DI/5gusYMZC8r2FNE2M=;
+        b=JgVZuKd0ok1aaNVOYUjJQwDTg1arhOQZLRCmu1NqSAytLTzzoGsc6dw9VAtass9B8a
+         G36U/JSgETyOfB4OC9TKj8DIFUr5Zax0A1AkDojK+fUVKqFByC/69NI0yXaZ+q1uKUUg
+         HZmjG37ZVC1ldnBns31qUnie4jxE2QnMiPtTA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716910208; x=1717515008;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=bJX73ZmntNKRAs0BEZRhybEqHcJwu5VuVHE4B8+pY60=;
-        b=Eh4PuwG0b4G7cGw3bmb766wb1N6DFYSygO5MnYEVKbB/BXNIrWGIPYo2PnK6PPTMV0
-         ZfILHwDUmZR8MGxlAqvYPIPoJUBIawN2xwlM56ffgGUV7tFr1SkpD38KXAl8FVrvpEXk
-         5sdY3XPhuQnXU+S0IYZyJvDSjg7aFBl47QQJNmJLOgJ3uc82MCwc2BTyd+DmZhUvyaWB
-         T5ZV1wb51zOfngWOSVX5Dyw48yQC+MQ78KzNkuhCWd7hLmaNWj0OGO6tDs9+D9FptV6M
-         OOLcKBzlOjpHlRx6frUUoW5KDN2wAzyOYYt4gN9cMVaHBczBI8Js1IzOJVmvlUNOKDYa
-         QkgA==
-X-Gm-Message-State: AOJu0Yx87t1DNWHPTAp4KSCxodswAWOx/5HE0Q4V+SsmTbJ4m55P9sSx
-	9yl7pH/UcdORY25+lupDdXO5nIVd2RGFjNk32ofg9QyP7g9wxE9OrV+CM6w4yWxJc7YoIYSyElX
-	9U48=
-X-Google-Smtp-Source: AGHT+IHzLvVpGVHVUdhsRJaFBLhxIExE5P2Hb13QIBulTEa2VIkMdvPfsb8s3kG1g7MR5q0a2ZRzUg==
-X-Received: by 2002:a17:906:3741:b0:a5a:1f4f:cb4c with SMTP id a640c23a62f3a-a62641b4532mr886848066b.7.1716910208404;
-        Tue, 28 May 2024 08:30:08 -0700 (PDT)
-From: Fouad Hilly <fouad.hilly@cloud.com>
+        d=1e100.net; s=20230601; t=1716910325; x=1717515125;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0xHve6PL7KT+Q9OZMD1lypR2DI/5gusYMZC8r2FNE2M=;
+        b=SCOzdkDfOGWfRi8sfvS9ZcjgTqzxQqWQBI0aZ9Lm6HM2/v9T+5Hp2AeuA6uwOiIwXD
+         p+IF1Ox4nHPPBY5ma3vlR8W3uHWA81XKJi0O5E4ngYuBqGm7UfZpEWEPoF9v96LeSMMl
+         XjpyChNHz97lfYFJl99PYpTzYp/JNKzJWX0VnBTn/msmxaCMaT0vvkivwEEYQCqpKAmr
+         9SUIz8Ti+6PVQzqJVl4WjMQxlwpAd4zOMDDpzef/2lhKkVt4Ton0gNfvH35dkV3MzZTB
+         UE8tMtpXwZiTcDDNCRNkQBvvFZGd5jvt5ru/emOE0U/BfnoDY8jQ/p71NCm6koB2ztTw
+         fmtg==
+X-Gm-Message-State: AOJu0Yzd8jycxXGUDptCdEFVSntc+MyZcd+J9wDdn6WwS7r9Nra501Iu
+	A7uJA28p9SKI9UJBMRM2dD84bgqdRoOGlUSO5wwAZFGqAfbNyq4DdBnpQpFqI4So3d/JOe1mish
+	bx4U=
+X-Google-Smtp-Source: AGHT+IHp1sX/p4lLI2vNr7/D5sa+edVHYvSRUcQ1KYFoLpit8HagOdhaxu0d/2yF3P3upXxQfBMMEA==
+X-Received: by 2002:a50:9f8f:0:b0:579:d23d:c6d8 with SMTP id 4fb4d7f45d1cf-579d9ff4d77mr3044829a12.18.1716910325439;
+        Tue, 28 May 2024 08:32:05 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Fouad Hilly <fouad.hilly@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 1/4] x86/ucode: Introduce PF_microcode_update2 with flags parameter
-Date: Tue, 28 May 2024 16:29:40 +0100
-Message-ID: <20240528152943.3915760-2-fouad.hilly@cloud.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20240528152943.3915760-1-fouad.hilly@cloud.com>
-References: <20240528152943.3915760-1-fouad.hilly@cloud.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH] x86/svm: Rework VMCB_ACCESSORS() to use a plain type name
+Date: Tue, 28 May 2024 16:32:04 +0100
+Message-Id: <20240528153204.1350919-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Refactor microcode_update() by adding flags field.
-struct xenpf_microcode_update2 added with uint32_t flags field.
-Introduce XENPF_microcode_update2 hypercall with flags field.
+This avoids having a function call in a typeof() expression.
 
-Signed-off-by: Fouad Hilly <fouad.hilly@cloud.com>
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-[v4]
-1- Commit message and description updated.
-2- Changing the order of the patches.
-[v3]
-1- Updated Commit message description.
-2- Revereted changes to a stable ABI and introduced a new struct.
-3- ucode_force_flag updated from static to a local variable.
-4- microcode_update() updated to reject unsupported flags yet.
-
-[v2]
-1- Update message description to highlight interface change.
-2- Removed extra empty lines.
-3- removed unnecessary define.
-4- Corrected long lines.
-5- Removed ternary operator.
-6- Introduced static ucode_update_flags, which will be used later to determine local ucode_force_flag.
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/cpu/microcode/core.c    | 11 ++++++++---
- xen/arch/x86/include/asm/microcode.h |  3 ++-
- xen/arch/x86/platform_hypercall.c    | 13 ++++++++++++-
- xen/include/public/platform.h        | 14 ++++++++++++++
- 4 files changed, 36 insertions(+), 5 deletions(-)
+ xen/arch/x86/include/asm/hvm/svm/vmcb.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index e90055772acf..8a9e744489b9 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -40,6 +40,8 @@
- #include <asm/processor.h>
- #include <asm/setup.h>
- 
-+#include <public/platform.h>
-+
- #include "private.h"
- 
- /*
-@@ -570,6 +572,7 @@ static int cf_check do_microcode_update(void *patch)
+diff --git a/xen/arch/x86/include/asm/hvm/svm/vmcb.h b/xen/arch/x86/include/asm/hvm/svm/vmcb.h
+index 0396d10b90ba..28f715e37692 100644
+--- a/xen/arch/x86/include/asm/hvm/svm/vmcb.h
++++ b/xen/arch/x86/include/asm/hvm/svm/vmcb.h
+@@ -630,7 +630,7 @@ vmcb_get_ ## name(const struct vmcb_struct *vmcb) \
  }
  
- struct ucode_buf {
-+    unsigned int flags;
-     unsigned int len;
-     char buffer[];
- };
-@@ -708,13 +711,14 @@ static long cf_check microcode_update_helper(void *data)
-     return ret;
- }
+ #define VMCB_ACCESSORS(name, cleanbit) \
+-        VMCB_ACCESSORS_(name, typeof(alloc_vmcb()->_ ## name), cleanbit)
++    VMCB_ACCESSORS_(name, typeof(((struct vmcb_struct){})._ ## name), cleanbit)
  
--int microcode_update(XEN_GUEST_HANDLE(const_void) buf, unsigned long len)
-+int microcode_update(XEN_GUEST_HANDLE(const_void) buf,
-+                     unsigned long len, unsigned int flags)
- {
-     int ret;
-     struct ucode_buf *buffer;
- 
--    if ( len != (uint32_t)len )
--        return -E2BIG;
-+    if ( flags & ~XENPF_UCODE_FORCE )
-+        return -EINVAL;
- 
-     if ( !ucode_ops.apply_microcode )
-         return -EINVAL;
-@@ -730,6 +734,7 @@ int microcode_update(XEN_GUEST_HANDLE(const_void) buf, unsigned long len)
-         return -EFAULT;
-     }
-     buffer->len = len;
-+    buffer->flags = flags;
- 
-     /*
-      * Always queue microcode_update_helper() on CPU0.  Most of the logic
-diff --git a/xen/arch/x86/include/asm/microcode.h b/xen/arch/x86/include/asm/microcode.h
-index 8f59b20b0289..57c08205d475 100644
---- a/xen/arch/x86/include/asm/microcode.h
-+++ b/xen/arch/x86/include/asm/microcode.h
-@@ -22,7 +22,8 @@ struct cpu_signature {
- DECLARE_PER_CPU(struct cpu_signature, cpu_sig);
- 
- void microcode_set_module(unsigned int idx);
--int microcode_update(XEN_GUEST_HANDLE(const_void) buf, unsigned long len);
-+int microcode_update(XEN_GUEST_HANDLE(const_void) buf,
-+                     unsigned long len, unsigned int flags);
- int early_microcode_init(unsigned long *module_map,
-                          const struct multiboot_info *mbi);
- int microcode_init_cache(unsigned long *module_map,
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 95467b88ab64..7e3278109300 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -311,7 +311,18 @@ ret_t do_platform_op(
- 
-         guest_from_compat_handle(data, op->u.microcode.data);
- 
--        ret = microcode_update(data, op->u.microcode.length);
-+        ret = microcode_update(data, op->u.microcode.length, 0);
-+        break;
-+    }
-+
-+    case XENPF_microcode_update2:
-+    {
-+        XEN_GUEST_HANDLE(const_void) data;
-+
-+        guest_from_compat_handle(data, op->u.microcode2.data);
-+
-+        ret = microcode_update(data, op->u.microcode2.length,
-+                               op->u.microcode2.flags);
-         break;
-     }
- 
-diff --git a/xen/include/public/platform.h b/xen/include/public/platform.h
-index 15777b541690..2725b8d1044f 100644
---- a/xen/include/public/platform.h
-+++ b/xen/include/public/platform.h
-@@ -624,6 +624,19 @@ struct xenpf_ucode_revision {
- typedef struct xenpf_ucode_revision xenpf_ucode_revision_t;
- DEFINE_XEN_GUEST_HANDLE(xenpf_ucode_revision_t);
- 
-+/* Hypercall to microcode_update with flags */
-+#define XENPF_microcode_update2    66
-+struct xenpf_microcode_update2 {
-+    /* IN variables. */
-+    uint32_t flags;                   /* Flags to be passed with ucode. */
-+/* Force to skip microcode version check */
-+#define XENPF_UCODE_FORCE           1
-+    uint32_t length;                  /* Length of microcode data. */
-+    XEN_GUEST_HANDLE(const_void) data;/* Pointer to microcode data */
-+};
-+typedef struct xenpf_microcode_update2 xenpf_microcode_update2_t;
-+DEFINE_XEN_GUEST_HANDLE(xenpf_microcode_update2_t);
-+
- /*
-  * ` enum neg_errnoval
-  * ` HYPERVISOR_platform_op(const struct xen_platform_op*);
-@@ -656,6 +669,7 @@ struct xen_platform_op {
-         xenpf_symdata_t               symdata;
-         xenpf_dom0_console_t          dom0_console;
-         xenpf_ucode_revision_t        ucode_revision;
-+        xenpf_microcode_update2_t     microcode2;
-         uint8_t                       pad[128];
-     } u;
- };
+ VMCB_ACCESSORS(cr_intercepts, intercepts)
+ VMCB_ACCESSORS(dr_intercepts, intercepts)
+
+base-commit: 2d93f78bfe25f695d8ffb61d110da9df293ed71b
+prerequisite-patch-id: 4f38737ad5ea15b0341664ee1c6b96d0d00b6700
 -- 
-2.42.0
+2.30.2
 
 
