@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7FFC25B7C
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 09:02:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731688.1137333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68EA8C41513
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 09:02:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.731691.1137363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCFCT-0006mq-Hw; Wed, 29 May 2024 09:02:25 +0000
+	id 1sCFCa-0007aS-DC; Wed, 29 May 2024 09:02:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731688.1137333; Wed, 29 May 2024 09:02:25 +0000
+Received: by outflank-mailman (output) from mailman id 731691.1137363; Wed, 29 May 2024 09:02:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCFCT-0006mj-F4; Wed, 29 May 2024 09:02:25 +0000
-Received: by outflank-mailman (input) for mailman id 731688;
- Wed, 29 May 2024 09:02:24 +0000
+	id 1sCFCa-0007aB-9z; Wed, 29 May 2024 09:02:32 +0000
+Received: by outflank-mailman (input) for mailman id 731691;
+ Wed, 29 May 2024 09:02:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJ4/=NA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sCFCR-0006YK-Vs
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 09:02:23 +0000
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [2607:f8b0:4864:20::731])
+ id 1sCFCZ-0006YK-BK
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 09:02:31 +0000
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [2607:f8b0:4864:20::232])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 28b94192-1d9a-11ef-b4bb-af5377834399;
- Wed, 29 May 2024 11:02:22 +0200 (CEST)
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-794c3946468so117511285a.1
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 02:02:22 -0700 (PDT)
+ id 2cfd3434-1d9a-11ef-b4bb-af5377834399;
+ Wed, 29 May 2024 11:02:29 +0200 (CEST)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3d1bb1c3a88so1045063b6e.2
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 02:02:29 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794db33d9f8sm73278785a.134.2024.05.29.02.02.19
+ af79cd13be357-794abcc0f27sm450462085a.31.2024.05.29.02.02.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 02:02:19 -0700 (PDT)
+ Wed, 29 May 2024 02:02:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 28b94192-1d9a-11ef-b4bb-af5377834399
+X-Inumbo-ID: 2cfd3434-1d9a-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1716973340; x=1717578140; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1716973347; x=1717578147; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=erP1nWqmPbjeOHjS7xu18nxyw0w9w/NsNw7WUoH3eXI=;
-        b=r+yAnjlX7xkDSh4NSiYWo7CscaXOqMbnAKxpl6+seBmvqNr8U22JRPbik/7UTILPz8
-         5Yc5nrxkEF7NpfRqlSeCWi/YqXKAyZuEFnJXtCHHPPw/re/+/1LHm9u3UBfoN9npEWTQ
-         pILzOwNLQlM0L6zf9Re4Qypwyc1YGqRPqtU3M=
+        bh=51wZoBHUI8YnkZDZQOJzY42CcaN9TxiSHoaNW33FOv0=;
+        b=a9GP9EOSCE9MyHLQzMFUWTVJIFmRByi4NJctgTO6GqhZhTfXgO5XMTfwZT5/AT2Xdy
+         wDjWbO+rbibgxjT8Zusy3iO/ntGE33szBsBxE1KxPL2RTqWJBtUSubNOyFFxfipbSZuK
+         xVOcrdnzXC4kJmPGjeTktumriXTH+Yb4+Gu4Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716973340; x=1717578140;
+        d=1e100.net; s=20230601; t=1716973347; x=1717578147;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=erP1nWqmPbjeOHjS7xu18nxyw0w9w/NsNw7WUoH3eXI=;
-        b=AlScULjXJ163QT54JPhrA6FwcuJKakr8yOiRO/Nl2wKG6QjLtpVmpz9L4XGC1KTMH3
-         zcFB8d/LdjuHL1GAX7QXYsKcEUWsh+H5lCNBm004opt+NlGHwvnVXcLEGBMhUX1d68qn
-         1ovamcA/aOAzGekx8DFPKb1rbjvA8jYlwLfjCE7xwa0GibSDIvoTVG0ANiiWZVT9Id7B
-         TgKvjWOwY9wEveV9QEomCx+bIgFvENj1ovY1ZQook9WRlKZ7TjGsXUxVFLmoXDmKU1sZ
-         njwzqXoYPi1eDQrZb7mzM4Smhzhenydgn4aUKDdCcVAO9Eu8cXomWSk1rzGMo4bcPgIc
-         cP0g==
-X-Gm-Message-State: AOJu0YyMWVcIpnped4PS5JyGXOEFrCDBgFGlzpAj/Wor+Q3dyUjM+dcC
-	HDpP301R/tbMmtR1PgkL6P4NoIapXTp3vNWonKb3EsemNl4pfvI6NdHE1I+Vji3OY4kYYMirNXa
-	3
-X-Google-Smtp-Source: AGHT+IGtDPgZsC09q6labm0ZQe0wplK8jSwdnIGkpbIgFSfZy/tLnmb/8TjhjPNyH7JAOytWhLdvRg==
-X-Received: by 2002:a05:620a:394d:b0:794:a993:711e with SMTP id af79cd13be357-794ab060b3cmr1999790485a.16.1716973340284;
-        Wed, 29 May 2024 02:02:20 -0700 (PDT)
+        bh=51wZoBHUI8YnkZDZQOJzY42CcaN9TxiSHoaNW33FOv0=;
+        b=Os2n9ISTbcGzhLtelnL3KKHgp21fiw8QMjmSZYnpkuTjTgHfZpLH8hHaTdIpM82Lq3
+         69g/RXvFwV5oEqVpfmt+CFTQMGnGt4GdjJiUEUW7WkqO33+huXvaaDQGo3T0rFgGUBip
+         Fs9y6uo5VfJSDeT48KXgT0w+j1icjRCje1/+7CXcwCibJZ18esNJsD+2ckjFHNm+YduX
+         jVjyqUsZb6Ll9t10jo2wuWwNM4hp+8iQF929BFr2fwJhDgDH0+5tYuJyHd1vouzCLWT9
+         efJasPt6Xkm9OxKUBI9hY33VoP9MgQmi6gVbZ8rqveh5J7MCrlmCQFap0YRc2g0VENP9
+         Hx0Q==
+X-Gm-Message-State: AOJu0Yx8whlMjgbDJS3eKrWjsFKwPQU12JK3zG+NXWZMmPcMrqFZOlxI
+	8B1A1oe61VtycBgXwLpfI4pTqq/7dljQ7y2vQrkOXEekSg0558mUcwZHi779Sd15K31l+Qx5PIr
+	y
+X-Google-Smtp-Source: AGHT+IFfACwML2Op18jla+kB7L8l2Ckh1hot8lils5Zo/p1hrUkHo+HwbRRecuy/K1vQlG/qE76xBg==
+X-Received: by 2002:a05:6870:a54b:b0:24f:df37:75dc with SMTP id 586e51a60fabf-24fdf383398mr11135367fac.51.1716973347325;
+        Wed, 29 May 2024 02:02:27 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH for-4.19 1/9] x86/irq: remove offline CPUs from old CPU mask when adjusting move_cleanup_count
-Date: Wed, 29 May 2024 11:01:23 +0200
-Message-ID: <20240529090132.59434-2-roger.pau@citrix.com>
+Subject: [PATCH for-4.19 4/9] x86/irq: describe how the interrupt CPU movement works
+Date: Wed, 29 May 2024 11:01:26 +0200
+Message-ID: <20240529090132.59434-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240529090132.59434-1-roger.pau@citrix.com>
 References: <20240529090132.59434-1-roger.pau@citrix.com>
@@ -89,35 +89,52 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-When adjusting move_cleanup_count to account for CPUs that are offline also
-adjust old_cpu_mask, otherwise further calls to fixup_irqs() could subtract
-those again creating and create an imbalance in move_cleanup_count.
+The logic to move interrupts across CPUs is complex, attempt to provide a
+comment that describes the expected behavior so users of the interrupt system
+have more context about the usage of the arch_irq_desc structure fields.
 
-Fixes: 472e0b74c5c4 ('x86/IRQ: deal with move cleanup count state in fixup_irqs()')
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/irq.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ xen/arch/x86/include/asm/irq.h | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index c16205a9beb6..9716e00e873b 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -2572,6 +2572,14 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
-             desc->arch.move_cleanup_count -= cpumask_weight(affinity);
-             if ( !desc->arch.move_cleanup_count )
-                 release_old_vec(desc);
-+            else
-+                /*
-+                 * Adjust old_cpu_mask to account for the offline CPUs,
-+                 * otherwise further calls to fixup_irqs() could subtract those
-+                 * again and possibly underflow the counter.
-+                 */
-+                cpumask_and(desc->arch.old_cpu_mask, desc->arch.old_cpu_mask,
-+                            &cpu_online_map);
-         }
+diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
+index 413994d2133b..80a3aa7a88b9 100644
+--- a/xen/arch/x86/include/asm/irq.h
++++ b/xen/arch/x86/include/asm/irq.h
+@@ -28,6 +28,32 @@ typedef struct {
  
-         if ( !desc->action || cpumask_subset(desc->affinity, mask) )
+ struct irq_desc;
+ 
++/*
++ * Xen logic for moving interrupts around CPUs allows manipulating interrupts
++ * that target remote CPUs.  The logic to move an interrupt from CPU(s) is as
++ * follows:
++ *
++ * 1. cpu_mask and vector is copied to old_cpu_mask and old_vector.
++ * 2. New cpu_mask and vector are set, vector is setup at the new destination.
++ * 3. move_in_progress is set.
++ * 4. Interrupt source is updated to target new CPU and vector.
++ * 5. Interrupts arriving at old_cpu_mask are processed normally.
++ * 6. When an interrupt is delivered at the new destination (cpu_mask) as part
++ *    of acking the interrupt move_in_progress is cleared and move_cleanup_count
++ *    is set to the weight of online CPUs in old_cpu_mask.
++ *    IRQ_MOVE_CLEANUP_VECTOR is sent to all CPUs in old_cpu_mask.
++ * 7. When receiving IRQ_MOVE_CLEANUP_VECTOR CPUs in old_cpu_mask clean the
++ *    vector entry and decrease the count in move_cleanup_count.  The CPU that
++ *    sets move_cleanup_count to 0 releases the vector.
++ *
++ * Note that when interrupt movement (either move_in_progress or
++ * move_cleanup_count set) is in progress it's not possible to move the
++ * interrupt to yet a different CPU.
++ *
++ * By keeping the vector in the old CPU(s) configured until the interrupt is
++ * acked on the new destination Xen allows draining any pending interrupts at
++ * the old destinations.
++ */
+ struct arch_irq_desc {
+         s16 vector;                  /* vector itself is only 8 bits, */
+         s16 old_vector;              /* but we use -1 for unassigned  */
 -- 
 2.44.0
 
