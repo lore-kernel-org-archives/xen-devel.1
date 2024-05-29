@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A37D6C25B7C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA4F1C41513
 	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 19:55:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.732319.1138250 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.732325.1138304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCPOG-0003Ns-CC; Wed, 29 May 2024 19:55:16 +0000
+	id 1sCPOL-0004br-Eh; Wed, 29 May 2024 19:55:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 732319.1138250; Wed, 29 May 2024 19:55:16 +0000
+Received: by outflank-mailman (output) from mailman id 732325.1138304; Wed, 29 May 2024 19:55:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCPOG-0003Nl-9D; Wed, 29 May 2024 19:55:16 +0000
-Received: by outflank-mailman (input) for mailman id 732319;
- Wed, 29 May 2024 19:55:15 +0000
+	id 1sCPOL-0004aT-7t; Wed, 29 May 2024 19:55:21 +0000
+Received: by outflank-mailman (input) for mailman id 732325;
+ Wed, 29 May 2024 19:55:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DI5e=NA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sCPOF-0003Nf-4S
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 19:55:15 +0000
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [2a00:1450:4864:20::12b])
+ id 1sCPOJ-0003Nf-DU
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 19:55:19 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5d3c7546-1df5-11ef-90a1-e314d9c70b13;
- Wed, 29 May 2024 21:55:14 +0200 (CEST)
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-529614b8c29so216246e87.2
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 12:55:14 -0700 (PDT)
+ id 5ff10d06-1df5-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 21:55:18 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-52a6ef5e731so236714e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 12:55:18 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5297066b249sm1344203e87.178.2024.05.29.12.55.12
+ 2adb3069b0e04-5297066b249sm1344203e87.178.2024.05.29.12.55.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 12:55:12 -0700 (PDT)
+ Wed, 29 May 2024 12:55:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,272 +46,697 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d3c7546-1df5-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 5ff10d06-1df5-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717012513; x=1717617313; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pAzpqmChn/xM5jNHeWdfIx1rNGhRNDTsnTQUp2N3w0c=;
-        b=I2t0OkCHFl8rSoZPn8ZRHNqYHKWWp2EIQv2LyQ13V393SpKpOyzoHOMbhcW4p8amAR
-         KWq2x7UNpPNQ7Os/cHlUT1MMhhWH/sGDDDpfD4yNMc5+i5FvJm7YLNIQLsGwBOHoN+8M
-         ChA8Bo+uOVZJ0fu07pAoyUu/fZr74UjZLQiFMSqJ0ksfoME1WsXZG9438RJiCKdDrGTw
-         HjOK4VBeENpsz7iBkeMowiyTOFaoATT2r9qCc+ElMlcIXgUWuVubgQcXNJfU3NuOE9kW
-         SS1XCD0lxbZ4bO5ia8O0x71OqkSEq7VA420/kp1Z0SvMPsJVm8OsiipAtFrmoo4mhzBJ
-         2dxg==
+        d=gmail.com; s=20230601; t=1717012518; x=1717617318; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HT5eQZFG3kOfjlltqo/sjfVASYxX5jfFvb3QP7WAnA4=;
+        b=j8M6/thJwD6aBd8mAkZQP6aKlla6gkO38+sWFUhn5FkbvpBcF7CVDpNcXrlQvRlL4t
+         dWlnN8gMX6FN1RE1wQAylp6BNRY5/8tSeRaKoc1MrQqlQAylPcLkN2u5JMLsbHxD3XD2
+         9hSt1CjhZO5I5/f8gTXEoASwUL9spknkOcDimjaqNLce/z0egmZe/DJwnKV2Ycb37HbI
+         29/WuvKgwbunptpTHTTiNiBNjT6qnkvujRgsK6BYzUOXIxrHtnwFt8vrjxKQqh/qk4tc
+         em+YVEsBMdOVLFZGuvQe44u2Z6xN6bPDq9V2TDEfYDZlMM7GJJUgGgCBEIVtcAjv5uX7
+         /XDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717012513; x=1717617313;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pAzpqmChn/xM5jNHeWdfIx1rNGhRNDTsnTQUp2N3w0c=;
-        b=Zj3tXmioLBG6m/HhQQEy9lYPfZMh/U6eJxFvHpi6TtVuMDKNpCigbRx/4jh8cXRD6W
-         DFs7PO8EmrU6iGFD6uAkfDpTV+jGJbmRV3zUEtmuiRd+pj3qfVbXWgdG0LkaniBkvBt6
-         T0mJJgiW6DDh/vU8tRjd/WuPbhGJOt7vWAE6QkJJ2ceCHt1t87YrPrhzd0VDGlEVjV90
-         ezS4r1kFhCIMdmF+ppbIZBFpEXjtrCfOsPMDaS2V9VfQ8R2iNXv6XH9FymC4gV8bC0LN
-         Q9ZHyzyRu1epCK4wMTs9li9h8q5YU77SOzOFkwAIgR9nAeq3FAMZe82BhwGSFLAWsS6D
-         XRsA==
-X-Gm-Message-State: AOJu0YzSE4GDOCaLNLzUsbsGIDhcvcg2HuKzpESyh2HG0MdbICLSPxS5
-	Mj3AaqKZnSaAOXggKwtSvafnQw7SOLcjnCMdqnmt19asuI8Y9kxvsgnVjBht
-X-Google-Smtp-Source: AGHT+IEhwUhr5SI6KtlUMzXiIkwF4VeWu3DSGpjuardRodBn6EAmuWCRKQgr6QpcNaG3tPdKcFtcjA==
-X-Received: by 2002:ac2:42c7:0:b0:51d:d630:365c with SMTP id 2adb3069b0e04-52b7d419a32mr132874e87.4.1717012512944;
-        Wed, 29 May 2024 12:55:12 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1717012518; x=1717617318;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HT5eQZFG3kOfjlltqo/sjfVASYxX5jfFvb3QP7WAnA4=;
+        b=F9Wf8OsduInVIXZc/W4GR/3pycUH2aCzObD66NLVH0/2UBGrtmKY6eIO+NLhswUWNN
+         lWyFQtYW54M9DBeDUGOIbYvLyUOnN2+wzSNHqtmcRV6oq1kzL2NzUZThDuTfebWzY+3m
+         D6hymlha7/rzJtkfEAPTwEs4e8jVF0p/t+DT6B5nyO1UUO2GpYf7sjpmNXoi4fmf/Xak
+         y6B0a1AaYtMA865U2+h838VnHUExFyKerVODuBGwYakZgna1Gs0S2kK4mdtH5b0FeFaw
+         BM4mBZhxw1oV5uXi5HsvLeL1Myj6wDBw9gHILaumRVS5KctHAUGlO/ZR/rqeAXCwUKI1
+         TeKQ==
+X-Gm-Message-State: AOJu0YyoZ21ZBil0TROmyE28SKBdqm4Wal+5lmGwBGpbFK9qK1/2bU9L
+	TUQGPfJ5VgGU4K14cxeDt0CuaI9E1hQylXj0IQYKqgskh3H2B04Ar1P3XVup
+X-Google-Smtp-Source: AGHT+IENbAEXIatG6RzIfpPoL19Qek9oosir4ctTUoquQPNkD+5xNxItPVUgu7SlQtOFp7OajD8J+A==
+X-Received: by 2002:a05:6512:3b06:b0:52a:d87f:60e3 with SMTP id 2adb3069b0e04-52b7d48c622mr148339e87.57.1717012517792;
+        Wed, 29 May 2024 12:55:17 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Connor Davis <connojdavis@gmail.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH for-4.19? v12 0/8] *Enable build of full Xen for RISC-V
-Date: Wed, 29 May 2024 21:55:01 +0200
-Message-ID: <cover.1717008161.git.oleksii.kurochko@gmail.com>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v12 6/8] xen/riscv: add minimal amount of stubs to build full Xen
+Date: Wed, 29 May 2024 21:55:07 +0200
+Message-ID: <4e5b814c3f73bd4ae6bb80296e17ac80bd8d224a.1717008161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.0
+In-Reply-To: <cover.1717008161.git.oleksii.kurochko@gmail.com>
+References: <cover.1717008161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch series performs all of the additions necessary to drop the
-build overrides for RISCV and enable the full Xen build. Except in cases
-where compatibile implementations already exist (e.g. atomic.h and
-bitops.h), the newly added definitions are simple.
-
-The patch series is based on the following patch series:
-- [PATCH v2 for-4.19 00/13] xen/bitops: Untangle ffs()/fls() infrastructure [1]
-- [PATCH] move __read_mostly to xen/cache.h  [2]
-
-Right now, the patch series doesn't have a direct dependency on [2] and it
-provides __read_mostly in the patch:
-    [PATCH v3 26/34] xen/riscv: add definition of __read_mostly
-However, it will be dropped as soon as [2] is merged or at least when the
-final version of the patch [2] is provided.
-As an option, it can be considered to merge arch-specific patch and then just
-rebase [2] and drop arch-specific changes.
-
-The link to the branch with rebased patches on top of [1] could be found here:
-  https://gitlab.com/xen-project/people/olkur/xen/-/commits/riscv-full-xen-build-v12
-
-[1] https://lore.kernel.org/xen-devel/20240524200338.1232391-1-andrew.cooper3@citrix.com/
-[2] https://lore.kernel.org/xen-devel/f25eb5c9-7c14-6e23-8535-2c66772b333e@suse.com/
-
-***
-I think that I need to write a separate email requesting approval for this patch
-series to be included in Xen 4.19. Most of the patches are RISC-V specific,
-so there is a low risk of breaking anything else.
-There is only one patch that touches common or arch-specific files, and it
-doesn't introduce any functional changes.
-Since I can't approve it myself, I am asking for someone else to do so.
-***
-
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V12:
- - Rebase the patch series on top of [1] mentioned above.
- - Update the cover letter message.
- - "[PATCH v11 3/9] xen/bitops: implement fls{l}() in common logic" was droped
-   as it is a part of patch series [1] mentioned above.
- - Other changes are specific to specific patches. Please look at changes for
-   specific patch.
----
-Changes in V11:
-  - Patch was merged to staging:
-    - [PATCH v10 05/14] xen/riscv: introduce cmpxchg.h
-	  - [PATCH v10 06/14] xen/riscv: introduce atomic.h
-	  - [PATCH v10 07/14] xen/riscv: introduce monitor.h
-	  - [PATCH v10 09/14] xen/riscv: add required things to current.h
-	  - [PATCH v10 11/14] xen/riscv: introduce vm_event_*() functions
- - Other changes are specific to specific patches. Please look at changes for
-   specific patch.
----
-Changes in V10:
-  - Patch was merged to staging:
-    - [PATCH v9 04/15] xen/bitops: put __ffs() into linux compatible header
- - Other changes are specific to specific patches. Please look at changes for
-   specific patch.
----
-Changes in V9:
- - Patch was merged to staging:
-    - [PATCH v8 07/17] xen/riscv: introduce io.h
-  	- [PATCH v7 14/19] xen/riscv: add minimal stuff to page.h to build full Xen
- - Other changes are specific to specific patches. Please look at changes for
-   specific patch.
----
-Changes in V8:
- - Patch was merged to staging:
-    - [PATCH v7 01/19] automation: introduce fixed randconfig for RISC-V
-    - [PATCH v7 03/19] xen/riscv: introduce extenstion support check by compiler
- - Other changes are specific to specific patches. Please look at changes for
-   specific patch.
- - Update the commit message:
-     - drop the dependency from STATIC_ASSERT_UNREACHABLE() implementation.
-     - Add suggestion to merge arch-specific changes related to __read_mostly.
----
-Changes in V7:
- - Patch was merged to staging:
-   [PATCH v6 15/20] xen/riscv: add minimal stuff to processor.h to build full Xen.
- - Other changes are specific to specific patches. Please look at changes for
-   specific patch.
+Changes in V7-V12:
+ - Only rebase was done.
 ---
 Changes in V6:
- - Update the cover letter message: drop already merged dependecies and add
-   a new one.
- - Patches were merged to staging:
-   - [PATCH v5 02/23] xen/riscv: use some asm-generic headers ( even v4 was
-     merged to staging branch, I just wasn't apply changes on top of the latest staging branch )
-   - [PATCH v5 03/23] xen/riscv: introduce nospec.h
-   - [PATCH v5 10/23] xen/riscv: introduces acrquire, release and full barriers
- - Introduce new patches:
-   - xen/riscv: introduce extenstion support check by compiler
-   - xen/bitops: put __ffs() and ffz() into linux compatible header
-   - xen/bitops: implement fls{l}() in common logic
- - The following patches were dropped:
-   - drop some patches related to bitops operations as they were introduced in another
-     patch series [...]
-   - introduce new version for generic __ffs(), ffz() and fls{l}().
- - Merge patch from patch series "[PATCH v9 0/7]  Introduce generic headers" to this patch
-   series as only one patch left in the generic headers patch series and it is more about
-   RISC-V.
- - Other changes are specific to specific patches. please look at specific patch.
+ - update the commit in stubs.c around /* ... common/irq.c ... */
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V5:
- - Update the cover letter as one of the dependencies were merged to staging.
- - Was introduced asm-generic for atomic ops and separate patches for asm-generic bit ops
- - Moved fence.h to separate patch to deal with some patches dependecies on fence.h
- - Patches were dropped as they were merged to staging:
-   * [PATCH v4 03/30] xen: add support in public/hvm/save.h for PPC and RISC-V
-   * [PATCH v4 04/30] xen/riscv: introduce cpufeature.h
-   * [PATCH v4 05/30] xen/riscv: introduce guest_atomics.h
-   * [PATCH v4 06/30] xen: avoid generation of empty asm/iommu.h
-   * [PATCH v4 08/30] xen/riscv: introduce setup.h
-   * [PATCH v4 10/30] xen/riscv: introduce flushtlb.h
-   * [PATCH v4 11/30] xen/riscv: introduce smp.h
-   * [PATCH v4 15/30] xen/riscv: introduce irq.h
-   * [PATCH v4 16/30] xen/riscv: introduce p2m.h
-   * [PATCH v4 17/30] xen/riscv: introduce regs.h
-   * [PATCH v4 18/30] xen/riscv: introduce time.h
-   * [PATCH v4 19/30] xen/riscv: introduce event.h
-   * [PATCH v4 22/30] xen/riscv: define an address of frame table
- - Other changes are specific to specific patches. please look at specific patch
+ - drop unrelated changes
+ - assert_failed("unimplmented...") change to BUG_ON()
 ---
 Changes in V4:
- - Update the cover letter message: new patch series dependencies.
- - Some patches were merged to staging, so they were dropped in this patch series:
-     [PATCH v3 09/34] xen/riscv: introduce system.h
-     [PATCH v3 18/34] xen/riscv: introduce domain.h
-     [PATCH v3 19/34] xen/riscv: introduce guest_access.h
- - Was sent out of this patch series:
-     [PATCH v3 16/34] xen/lib: introduce generic find next bit operations
- - [PATCH v3 17/34] xen/riscv: add compilation of generic find-next-bit.c was
-   droped as CONFIG_GENERIC_FIND_NEXT_BIT was dropped.
- - All other changes are specific to a specific patch.
+  - added new stubs which are necessary for compilation after rebase: __cpu_up(), __cpu_disable(), __cpu_die()
+    from smpboot.c
+  - back changes related to printk() in early_printk() as they should be removed in the next patch to avoid
+    compilation error.
+  - update definition of cpu_khz: __read_mostly -> __ro_after_init.
+  - drop vm_event_reset_vmtrace(). It is defibed in asm-generic/vm_event.h.
+  - move vm_event_*() functions from stubs.c to riscv/vm_event.c.
+  - s/BUG/BUG_ON("unimplemented") in stubs.c
+  - back irq_actor_none() and irq_actor_none() as common/irq.c isn't compiled at this moment,
+    so this function are needed to avoid compilation error.
+  - defined max_page to avoid compilation error, it will be removed as soon as common/page_alloc.c will
+    be compiled.
 ---
 Changes in V3:
- - Update the cover letter message
- - The following patches were dropped as they were merged to staging:
-    [PATCH v2 03/39] xen/riscv:introduce asm/byteorder.h
-    [PATCH v2 04/39] xen/riscv: add public arch-riscv.h
-    [PATCH v2 05/39] xen/riscv: introduce spinlock.h
-    [PATCH v2 20/39] xen/riscv: define bug frame tables in xen.lds.S
-    [PATCH v2 34/39] xen: add RISCV support for pmu.h
-    [PATCH v2 35/39] xen: add necessary headers to common to build full Xen for RISC-V
- - Instead of the following patches were introduced new:
-    [PATCH v2 10/39] xen/riscv: introduce asm/iommu.h
-    [PATCH v2 11/39] xen/riscv: introduce asm/nospec.h
- - remove "asm/"  for commit messages which start with "xen/riscv:"
- - code style updates.
- - add emulation of {cmp}xchg_* for 1 and 2 bytes types.
  - code style fixes.
- - add SPDX and footer for the newly added headers.
- - introduce generic find-next-bit.c.
- - some other mionor changes. ( details please find in a patch )
+ - update attribute for frametable_base_pdx  and frametable_virt_end to __ro_after_init.
+   insteaf of read_mostly.
+ - use BUG() instead of assert_failed/WARN for newly introduced stubs.
+ - drop "#include <public/vm_event.h>" in stubs.c and use forward declaration instead.
+ - drop ack_node() and end_node() as they aren't used now.
 ---
 Changes in V2:
-  - Drop the following patches as they are the part of [2]:
-      [PATCH v1 06/57] xen/riscv: introduce paging.h
-      [PATCH v1 08/57] xen/riscv: introduce asm/device.h
-      [PATCH v1 10/57] xen/riscv: introduce asm/grant_table.h
-      [PATCH v1 12/57] xen/riscv: introduce asm/hypercall.h
-      [PATCH v1 13/57] xen/riscv: introduce asm/iocap.h
-      [PATCH v1 15/57] xen/riscv: introduce asm/mem_access.h
-      [PATCH v1 18/57] xen/riscv: introduce asm/random.h
-      [PATCH v1 21/57] xen/riscv: introduce asm/xenoprof.h
-      [PATCH v1 24/57] xen/riscv: introduce asm/percpu.h
-      [PATCH v1 29/57] xen/riscv: introduce asm/hardirq.h
-      [PATCH v1 33/57] xen/riscv: introduce asm/altp2m.h
-      [PATCH v1 38/57] xen/riscv: introduce asm/monitor.h
-      [PATCH v1 39/57] xen/riscv: introduce asm/numa.h
-      [PATCH v1 42/57] xen/riscv: introduce asm/softirq.h
-  - xen/lib.h in most of the cases were changed to xen/bug.h as
-    mostly functionilty of bug.h is used.
-  - align arch-riscv.h with Arm's version of it.
-  - change the Author of commit with introduction of asm/atomic.h.
-  - update some definition from spinlock.h.
-  - code style changes.
+ - define udelay stub
+ - remove 'select HAS_PDX' from RISC-V Kconfig because of
+   https://lore.kernel.org/xen-devel/20231006144405.1078260-1-andrew.cooper3@citrix.com/
 ---
-
-Oleksii Kurochko (8):
-  xen/riscv: disable unnecessary configs
-  xen: introduce generic non-atomic test_*bit()
-  xen/riscv: introduce bitops.h
-  xen/riscv: add definition of __read_mostly
-  xen/riscv: add minimal stuff to mm.h to build full Xen
-  xen/riscv: add minimal amount of stubs to build full Xen
-  xen/riscv: enable full Xen build
-  xen/README: add compiler and binutils versions for RISC-V64
-
- README                                  |   4 +
- automation/gitlab-ci/build.yaml         |   4 +
- xen/arch/arm/include/asm/bitops.h       |  67 ----
- xen/arch/ppc/include/asm/bitops.h       |  52 ---
- xen/arch/ppc/include/asm/page.h         |   2 +-
- xen/arch/ppc/mm-radix.c                 |   2 +-
- xen/arch/riscv/Makefile                 |  17 +-
- xen/arch/riscv/arch.mk                  |   4 -
- xen/arch/riscv/configs/tiny64_defconfig |  12 +-
- xen/arch/riscv/early_printk.c           | 168 ----------
- xen/arch/riscv/include/asm/bitops.h     | 137 ++++++++
- xen/arch/riscv/include/asm/cache.h      |   2 +
- xen/arch/riscv/include/asm/domain.h     |   2 +
- xen/arch/riscv/include/asm/mm.h         | 240 ++++++++++++++
- xen/arch/riscv/include/asm/p2m.h        |   2 +
- xen/arch/riscv/mm.c                     |  52 ++-
- xen/arch/riscv/setup.c                  |  10 +-
- xen/arch/riscv/stubs.c                  | 415 ++++++++++++++++++++++++
- xen/arch/riscv/traps.c                  |  25 ++
- xen/arch/x86/include/asm/bitops.h       |  31 +-
- xen/include/xen/bitops.h                | 146 +++++++++
- 21 files changed, 1069 insertions(+), 325 deletions(-)
- create mode 100644 xen/arch/riscv/include/asm/bitops.h
+ xen/arch/riscv/Makefile |   1 +
+ xen/arch/riscv/mm.c     |  50 +++++
+ xen/arch/riscv/setup.c  |   8 +
+ xen/arch/riscv/stubs.c  | 439 ++++++++++++++++++++++++++++++++++++++++
+ xen/arch/riscv/traps.c  |  25 +++
+ 5 files changed, 523 insertions(+)
  create mode 100644 xen/arch/riscv/stubs.c
 
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 1ed1a8369b..60afbc0ad9 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -4,6 +4,7 @@ obj-y += mm.o
+ obj-$(CONFIG_RISCV_64) += riscv64/
+ obj-y += sbi.o
+ obj-y += setup.o
++obj-y += stubs.o
+ obj-y += traps.o
+ obj-y += vm_event.o
+ 
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index fe3a43be20..2c3fb7d72e 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -1,5 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <xen/bug.h>
+ #include <xen/cache.h>
+ #include <xen/compiler.h>
+ #include <xen/init.h>
+@@ -14,6 +15,9 @@
+ #include <asm/page.h>
+ #include <asm/processor.h>
+ 
++unsigned long __ro_after_init frametable_base_pdx;
++unsigned long __ro_after_init frametable_virt_end;
++
+ struct mmu_desc {
+     unsigned int num_levels;
+     unsigned int pgtbl_count;
+@@ -294,3 +298,49 @@ unsigned long __init calc_phys_offset(void)
+     phys_offset = load_start - XEN_VIRT_START;
+     return phys_offset;
+ }
++
++void put_page(struct page_info *page)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned long get_upper_mfn_bound(void)
++{
++    /* No memory hotplug yet, so current memory limit is the final one. */
++    return max_page - 1;
++}
++
++void arch_dump_shared_mem_info(void)
++{
++    BUG_ON("unimplemented");
++}
++
++int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
++{
++    BUG_ON("unimplemented");
++    return -1;
++}
++
++int xenmem_add_to_physmap_one(struct domain *d, unsigned int space,
++                              union add_to_physmap_extra extra,
++                              unsigned long idx, gfn_t gfn)
++{
++    BUG_ON("unimplemented");
++
++    return 0;
++}
++
++int destroy_xen_mappings(unsigned long s, unsigned long e)
++{
++    BUG_ON("unimplemented");
++    return -1;
++}
++
++int map_pages_to_xen(unsigned long virt,
++                     mfn_t mfn,
++                     unsigned long nr_mfns,
++                     unsigned int flags)
++{
++    BUG_ON("unimplemented");
++    return -1;
++}
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 98a94c4c48..8bb5bdb2ae 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -1,11 +1,19 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <xen/bug.h>
+ #include <xen/compile.h>
+ #include <xen/init.h>
+ #include <xen/mm.h>
+ 
++#include <public/version.h>
++
+ #include <asm/early_printk.h>
+ 
++void arch_get_xen_caps(xen_capabilities_info_t *info)
++{
++    BUG_ON("unimplemented");
++}
++
+ /* Xen stack for bringing up the first CPU. */
+ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
+     __aligned(STACK_SIZE);
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+new file mode 100644
+index 0000000000..8285bcffef
+--- /dev/null
++++ b/xen/arch/riscv/stubs.c
+@@ -0,0 +1,439 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#include <xen/cpumask.h>
++#include <xen/domain.h>
++#include <xen/irq.h>
++#include <xen/nodemask.h>
++#include <xen/time.h>
++#include <public/domctl.h>
++
++#include <asm/current.h>
++
++/* smpboot.c */
++
++cpumask_t cpu_online_map;
++cpumask_t cpu_present_map;
++cpumask_t cpu_possible_map;
++
++/* ID of the PCPU we're running on */
++DEFINE_PER_CPU(unsigned int, cpu_id);
++/* XXX these seem awfully x86ish... */
++/* representing HT siblings of each logical CPU */
++DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_sibling_mask);
++/* representing HT and core siblings of each logical CPU */
++DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_core_mask);
++
++nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
++
++/*
++ * max_page is defined in page_alloc.c which isn't complied for now.
++ * definition of max_page will be remove as soon as page_alloc is built.
++ */
++unsigned long __read_mostly max_page;
++
++/* time.c */
++
++unsigned long __ro_after_init cpu_khz;  /* CPU clock frequency in kHz. */
++
++s_time_t get_s_time(void)
++{
++    BUG_ON("unimplemented");
++}
++
++int reprogram_timer(s_time_t timeout)
++{
++    BUG_ON("unimplemented");
++}
++
++void send_timer_event(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
++{
++    BUG_ON("unimplemented");
++}
++
++/* shutdown.c */
++
++void machine_restart(unsigned int delay_millisecs)
++{
++    BUG_ON("unimplemented");
++}
++
++void machine_halt(void)
++{
++    BUG_ON("unimplemented");
++}
++
++/* domctl.c */
++
++long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
++                    XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_get_domain_info(const struct domain *d,
++                          struct xen_domctl_getdomaininfo *info)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
++{
++    BUG_ON("unimplemented");
++}
++
++/* monitor.c */
++
++int arch_monitor_domctl_event(struct domain *d,
++                              struct xen_domctl_monitor_op *mop)
++{
++    BUG_ON("unimplemented");
++}
++
++/* smp.c */
++
++void arch_flush_tlb_mask(const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++void smp_send_event_check_mask(const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++void smp_send_call_function_mask(const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++/* irq.c */
++
++struct pirq *alloc_pirq_struct(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
++{
++    BUG_ON("unimplemented");
++}
++
++void pirq_guest_unbind(struct domain *d, struct pirq *pirq)
++{
++    BUG_ON("unimplemented");
++}
++
++void pirq_set_affinity(struct domain *d, int pirq, const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++hw_irq_controller no_irq_type = {
++    .typename = "none",
++    .startup = irq_startup_none,
++    .shutdown = irq_shutdown_none,
++    .enable = irq_enable_none,
++    .disable = irq_disable_none,
++};
++
++int arch_init_one_irq_desc(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++}
++
++void smp_send_state_dump(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
++
++/* domain.c */
++
++DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
++unsigned long __per_cpu_offset[NR_CPUS];
++
++void context_switch(struct vcpu *prev, struct vcpu *next)
++{
++    BUG_ON("unimplemented");
++}
++
++void continue_running(struct vcpu *same)
++{
++    BUG_ON("unimplemented");
++}
++
++void sync_local_execstate(void)
++{
++    BUG_ON("unimplemented");
++}
++
++void sync_vcpu_execstate(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void startup_cpu_idle_loop(void)
++{
++    BUG_ON("unimplemented");
++}
++
++void free_domain_struct(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void dump_pageframe_info(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void free_vcpu_struct(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_vcpu_create(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_vcpu_destroy(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_switch_to_aarch64_mode(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_domain_create(struct domain *d,
++                       struct xen_domctl_createdomain *config,
++                       unsigned int flags)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_domain_teardown(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_destroy(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_shutdown(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_pause(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_unpause(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_domain_soft_reset(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_creation_finished(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_initialise_vcpu(struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_vcpu_reset(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++int domain_relinquish_resources(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_dump_domain_info(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_dump_vcpu_info(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_mark_events_pending(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_update_evtchn_irq(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_block_unless_event_pending(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_kick(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++struct domain *alloc_domain_struct(void)
++{
++    BUG_ON("unimplemented");
++}
++
++struct vcpu *alloc_vcpu_struct(const struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned long
++hypercall_create_continuation(unsigned int op, const char *format, ...)
++{
++    BUG_ON("unimplemented");
++}
++
++int __init parse_arch_dom0_param(const char *s, const char *e)
++{
++    BUG_ON("unimplemented");
++}
++
++/* guestcopy.c */
++
++unsigned long raw_copy_to_guest(void *to, const void *from, unsigned int len)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned long raw_copy_from_guest(void *to, const void __user *from,
++                                  unsigned int len)
++{
++    BUG_ON("unimplemented");
++}
++
++/* sysctl.c */
++
++long arch_do_sysctl(struct xen_sysctl *sysctl,
++                    XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
++{
++    BUG_ON("unimplemented");
++}
++
++/* p2m.c */
++
++int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
++{
++    BUG_ON("unimplemented");
++}
++
++int unmap_mmio_regions(struct domain *d,
++                       gfn_t start_gfn,
++                       unsigned long nr,
++                       mfn_t mfn)
++{
++    BUG_ON("unimplemented");
++}
++
++int map_mmio_regions(struct domain *d,
++                     gfn_t start_gfn,
++                     unsigned long nr,
++                     mfn_t mfn)
++{
++    BUG_ON("unimplemented");
++}
++
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn)
++{
++    BUG_ON("unimplemented");
++}
++
++/* Return the size of the pool, in bytes. */
++int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
++{
++    BUG_ON("unimplemented");
++}
++
++/* delay.c */
++
++void udelay(unsigned long usecs)
++{
++    BUG_ON("unimplemented");
++}
++
++/* guest_access.h */ 
++
++static inline unsigned long raw_clear_guest(void *to, unsigned int len)
++{
++    BUG_ON("unimplemented");
++}
++
++/* smpboot.c */
++
++int __cpu_up(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
++
++void __cpu_disable(void)
++{
++    BUG_ON("unimplemented");
++}
++
++void __cpu_die(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
++
++/*
++ * The following functions are defined in common/irq.c, but common/irq.c isn't
++ * built for now. These changes will be removed there when common/irq.c is
++ * ready.
++ */
++
++void cf_check irq_actor_none(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned int cf_check irq_startup_none(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++
++    return 0;
++}
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index ccd3593f5a..5415cf8d90 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -4,6 +4,10 @@
+  *
+  * RISC-V Trap handlers
+  */
++
++#include <xen/lib.h>
++#include <xen/sched.h>
++
+ #include <asm/processor.h>
+ #include <asm/traps.h>
+ 
+@@ -11,3 +15,24 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+ {
+     die();
+ }
++
++void vcpu_show_execution_state(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void show_execution_state(const struct cpu_user_regs *regs)
++{
++    printk("implement show_execution_state(regs)\n");
++}
++
++void arch_hypercall_tasklet_result(struct vcpu *v, long res)
++{
++    BUG_ON("unimplemented");
++}
++
++enum mc_disposition arch_do_multicall_call(struct mc_state *state)
++{
++    BUG_ON("unimplemented");
++    return mc_continue;
++}
 -- 
 2.45.0
 
