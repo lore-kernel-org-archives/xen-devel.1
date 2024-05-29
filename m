@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4575C25B75
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 05:06:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731373.1136808 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7364AC25B75
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 05:06:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.731379.1136869 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCBVA-0002Is-Ot; Wed, 29 May 2024 05:05:28 +0000
+	id 1sCBVF-0003mh-Iy; Wed, 29 May 2024 05:05:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731373.1136808; Wed, 29 May 2024 05:05:28 +0000
+Received: by outflank-mailman (output) from mailman id 731379.1136869; Wed, 29 May 2024 05:05:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCBVA-0002Il-Lu; Wed, 29 May 2024 05:05:28 +0000
-Received: by outflank-mailman (input) for mailman id 731373;
- Wed, 29 May 2024 05:05:27 +0000
+	id 1sCBVF-0003mP-F9; Wed, 29 May 2024 05:05:33 +0000
+Received: by outflank-mailman (input) for mailman id 731379;
+ Wed, 29 May 2024 05:05:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=r7nM=NA=bombadil.srs.infradead.org=BATV+c55c297d46ee5715703b+7584+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1sCBV6-0002IO-VQ
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 05:05:27 +0000
+ id 1sCBVE-0002IO-8I
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 05:05:32 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0cd62887-1d79-11ef-90a1-e314d9c70b13;
- Wed, 29 May 2024 07:05:23 +0200 (CEST)
+ id 124ad58e-1d79-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 07:05:31 +0200 (CEST)
 Received: from
  2a02-8389-2341-5b80-7775-b725-99f7-3344.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:7775:b725:99f7:3344] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1sCBUv-00000002pSP-1Lzk; Wed, 29 May 2024 05:05:13 +0000
+ id 1sCBV8-00000002pZH-1Swh; Wed, 29 May 2024 05:05:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0cd62887-1d79-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 124ad58e-1d79-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=/OLpY6jO6BGmZUZluvnHNfe+GDP4sT7VwC1y29SpC6U=; b=OeadjJJGioCa4ge9VNZLLPIeJ8
-	O9S5rUx9FafsfCUd/nVJdDPOpkJsv/E9yKCxbOOv290nnhE62p3wpyYQNPmrOmNyU3hzVOzhGPQxa
-	5a4T1lTIFSW+n3MtalzxAOCYtI3DQHhzspZ8bYnEdLFBuQ+bNkNK5b871ug/c8Zf1MXixhuq1fwcL
-	BxKay23FFqMmNqBL5VSxy6HUEZFvyI7zrsX4GqEOmWHd2HuIc7ZktQuuiNYT9hnqC19jbRgfOjXtD
-	KR9+Ssjbvj0F4kFxGdIepfLmbgfwNS35I/CDczeE6V2t2s7vUtO9/Gkm7F3aD4SXdu4zuGlpm8kbx
-	t86dAPmA==;
+	bh=YGmOwuIW0DehI4KXZwtqg3QuYxifQjapgz3/0XZe+RA=; b=KhFS/hxRb8UpO9uvnt4jA68rPG
+	xVySn1pHD4jIRemyRbCCEdqXZl0xtjnDLGWGYQO/VqtIGw3kO7PMotHaHvYeF3y7+zrWI6JoWm7Pu
+	K36zrJ5O9E7hHC8jFyqb0xPEFI8urWGQgmpxKmKvuJcI1lc4KbirfQgyMqZqdMiNOH0Qn6YwwfkIE
+	fgfo+VGAtqPz4gTfBDOjANwyIRtH8WAho9J73pWTOMMk8H6xVuduHp7xwShRKISMLaacYAKT5bsRv
+	hrsO1G72IRV/pFLruJ2/ijU+K3F58b+tzy0n/xqUnJBi8VNnAK04O7UkNZ4e+JaGUDKq6/ezYTnGO
+	RPYgZo2w==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>,
 	"Martin K. Petersen" <martin.petersen@oracle.com>
@@ -71,9 +71,9 @@ Cc: Richard Weinberger <richard@nod.at>,
 	ceph-devel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-scsi@vger.kernel.org
-Subject: [PATCH 01/12] ubd: untagle discard vs write zeroes not support handling
-Date: Wed, 29 May 2024 07:04:03 +0200
-Message-ID: <20240529050507.1392041-2-hch@lst.de>
+Subject: [PATCH 06/12] sd: simplify the disable case in sd_config_discard
+Date: Wed, 29 May 2024 07:04:08 +0200
+Message-ID: <20240529050507.1392041-7-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240529050507.1392041-1-hch@lst.de>
 References: <20240529050507.1392041-1-hch@lst.de>
@@ -81,41 +81,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Discard and Write Zeroes are different operation and implemented
-by different fallocate opcodes for ubd.  If one fails the other one
-can work and vice versa.
+Fall through to the main call to blk_queue_max_discard_sectors given that
+max_blocks has been initialized to zero above instead of duplicating the
+call.
 
-Split the code to disable the operations in ubd_handler to only
-disable the operation that actually failed.
-
-Fixes: 50109b5a03b4 ("um: Add support for DISCARD in the UBD Driver")
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- arch/um/drivers/ubd_kern.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ drivers/scsi/sd.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
-index ef805eaa9e013d..a79a3b7c33a647 100644
---- a/arch/um/drivers/ubd_kern.c
-+++ b/arch/um/drivers/ubd_kern.c
-@@ -471,9 +471,14 @@ static void ubd_handler(void)
- 		for (count = 0; count < n/sizeof(struct io_thread_req *); count++) {
- 			struct io_thread_req *io_req = (*irq_req_buffer)[count];
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index 09ffe9d826aeac..437743e3a0d37d 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -844,8 +844,7 @@ static void sd_config_discard(struct scsi_disk *sdkp, unsigned int mode)
  
--			if ((io_req->error == BLK_STS_NOTSUPP) && (req_op(io_req->req) == REQ_OP_DISCARD)) {
--				blk_queue_max_discard_sectors(io_req->req->q, 0);
--				blk_queue_max_write_zeroes_sectors(io_req->req->q, 0);
-+			if (io_req->error == BLK_STS_NOTSUPP) {
-+				struct request_queue *q = io_req->req->q;
-+
-+				if (req_op(io_req->req) == REQ_OP_DISCARD)
-+					blk_queue_max_discard_sectors(q, 0);
-+				if (req_op(io_req->req) == REQ_OP_WRITE_ZEROES)
-+					blk_queue_max_write_zeroes_sectors(q,
-+							0);
- 			}
- 			blk_mq_end_request(io_req->req, io_req->error);
- 			kfree(io_req);
+ 	case SD_LBP_FULL:
+ 	case SD_LBP_DISABLE:
+-		blk_queue_max_discard_sectors(q, 0);
+-		return;
++		break;
+ 
+ 	case SD_LBP_UNMAP:
+ 		max_blocks = min_not_zero(sdkp->max_unmap_blocks,
 -- 
 2.43.0
 
