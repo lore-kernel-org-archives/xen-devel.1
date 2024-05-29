@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68EA8C41513
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A349C27C50
 	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 09:02:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731691.1137363 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.731689.1137343 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCFCa-0007aS-DC; Wed, 29 May 2024 09:02:32 +0000
+	id 1sCFCU-00071I-QB; Wed, 29 May 2024 09:02:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731691.1137363; Wed, 29 May 2024 09:02:32 +0000
+Received: by outflank-mailman (output) from mailman id 731689.1137343; Wed, 29 May 2024 09:02:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCFCa-0007aB-9z; Wed, 29 May 2024 09:02:32 +0000
-Received: by outflank-mailman (input) for mailman id 731691;
- Wed, 29 May 2024 09:02:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sCFCU-00071B-ND; Wed, 29 May 2024 09:02:26 +0000
+Received: by outflank-mailman (input) for mailman id 731689;
+ Wed, 29 May 2024 09:02:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJ4/=NA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sCFCZ-0006YK-BK
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 09:02:31 +0000
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [2607:f8b0:4864:20::232])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2cfd3434-1d9a-11ef-b4bb-af5377834399;
- Wed, 29 May 2024 11:02:29 +0200 (CEST)
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3d1bb1c3a88so1045063b6e.2
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 02:02:29 -0700 (PDT)
+ id 1sCFCT-0006nV-T7
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 09:02:25 +0000
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [2607:f8b0:4864:20::f34])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2a42f51a-1d9a-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 11:02:24 +0200 (CEST)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6ab9d406101so10364256d6.3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 02:02:24 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794abcc0f27sm450462085a.31.2024.05.29.02.02.26
+ 6a1803df08f44-6ac163189cbsm52218246d6.125.2024.05.29.02.02.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 02:02:26 -0700 (PDT)
+ Wed, 29 May 2024 02:02:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2cfd3434-1d9a-11ef-b4bb-af5377834399
+X-Inumbo-ID: 2a42f51a-1d9a-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1716973347; x=1717578147; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1716973343; x=1717578143; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=51wZoBHUI8YnkZDZQOJzY42CcaN9TxiSHoaNW33FOv0=;
-        b=a9GP9EOSCE9MyHLQzMFUWTVJIFmRByi4NJctgTO6GqhZhTfXgO5XMTfwZT5/AT2Xdy
-         wDjWbO+rbibgxjT8Zusy3iO/ntGE33szBsBxE1KxPL2RTqWJBtUSubNOyFFxfipbSZuK
-         xVOcrdnzXC4kJmPGjeTktumriXTH+Yb4+Gu4Y=
+        bh=q0Nh3rBmN+pTUZ9mi1QuaHwm6Qdmm1bW1P320o0L9uQ=;
+        b=UrCRNhoAdwKdMwnay26lSkyLKktz/PB5H92GLpZxY27JCpJxj/cf5ZewimxjIy28hr
+         fV5XTeAa4MyoxbDVvBL9cm17LFMuRO7GsJxeoVM/UGz6OLS7VaMhpVYhtbiQ/CIhfBEo
+         mBUKP+Twdv2nzuy9KtzB8y4SXpuXmzmzbicmM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716973347; x=1717578147;
+        d=1e100.net; s=20230601; t=1716973343; x=1717578143;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=51wZoBHUI8YnkZDZQOJzY42CcaN9TxiSHoaNW33FOv0=;
-        b=Os2n9ISTbcGzhLtelnL3KKHgp21fiw8QMjmSZYnpkuTjTgHfZpLH8hHaTdIpM82Lq3
-         69g/RXvFwV5oEqVpfmt+CFTQMGnGt4GdjJiUEUW7WkqO33+huXvaaDQGo3T0rFgGUBip
-         Fs9y6uo5VfJSDeT48KXgT0w+j1icjRCje1/+7CXcwCibJZ18esNJsD+2ckjFHNm+YduX
-         jVjyqUsZb6Ll9t10jo2wuWwNM4hp+8iQF929BFr2fwJhDgDH0+5tYuJyHd1vouzCLWT9
-         efJasPt6Xkm9OxKUBI9hY33VoP9MgQmi6gVbZ8rqveh5J7MCrlmCQFap0YRc2g0VENP9
-         Hx0Q==
-X-Gm-Message-State: AOJu0Yx8whlMjgbDJS3eKrWjsFKwPQU12JK3zG+NXWZMmPcMrqFZOlxI
-	8B1A1oe61VtycBgXwLpfI4pTqq/7dljQ7y2vQrkOXEekSg0558mUcwZHi779Sd15K31l+Qx5PIr
-	y
-X-Google-Smtp-Source: AGHT+IFfACwML2Op18jla+kB7L8l2Ckh1hot8lils5Zo/p1hrUkHo+HwbRRecuy/K1vQlG/qE76xBg==
-X-Received: by 2002:a05:6870:a54b:b0:24f:df37:75dc with SMTP id 586e51a60fabf-24fdf383398mr11135367fac.51.1716973347325;
-        Wed, 29 May 2024 02:02:27 -0700 (PDT)
+        bh=q0Nh3rBmN+pTUZ9mi1QuaHwm6Qdmm1bW1P320o0L9uQ=;
+        b=jKCK9rPPQij7Z2sFb3KGSteqLY6q78V5/TOV71rWFIfCbI3XO8DVuJikl7kqAhiIBS
+         g/JA5396YceHog8lOwiDgB8XKPYQkMJbYcOsaDbr3DMeLvl0287vnebNW/xM6MjJlnq0
+         KDjN9QyFk8Cx1dVTpFyWZMcIXZoIV4z7rvsqyJZJOPG6sgF/iO3G0M4nKUhbT8r2cAL6
+         6O/xKXw1tNd0xxDWxbYZ8WqengB6CVyR2ceW1aw0KNu8iG8khEuoFZnNjgW3xbPso4UW
+         VEimtzETbXHnZZtI9Q50CUdr+jc+sg4Kt1kmVWm1P0l3zKyl6ETokyVF1jcJV0bs9wnk
+         Br0w==
+X-Gm-Message-State: AOJu0Yxg+JxPe7mLlFPVUa02Ni7NyzAo6dT9b4/sZKs4DnfiWVqULpEO
+	ZT5doBshy5l01CSd4cnByPlgSV5ZglTsTVjAG2iGlYSPmm8+dFS6KMmIgCgkGvkY6cHy7yIqRQc
+	m
+X-Google-Smtp-Source: AGHT+IFHRIN1eZv4oe0SSy/cz+Iz9pCra+5E0JzLjhkBniawjYKENoDwI5H8li2IB8bRXo70SdnG0g==
+X-Received: by 2002:a05:6214:4a07:b0:6a0:b3cc:ee48 with SMTP id 6a1803df08f44-6abc8cd1be4mr175200136d6.37.1716973342641;
+        Wed, 29 May 2024 02:02:22 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH for-4.19 4/9] x86/irq: describe how the interrupt CPU movement works
-Date: Wed, 29 May 2024 11:01:26 +0200
-Message-ID: <20240529090132.59434-5-roger.pau@citrix.com>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH for-4.19 2/9] xen/cpu: do not get the CPU map in stop_machine_run()
+Date: Wed, 29 May 2024 11:01:24 +0200
+Message-ID: <20240529090132.59434-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240529090132.59434-1-roger.pau@citrix.com>
 References: <20240529090132.59434-1-roger.pau@citrix.com>
@@ -89,52 +92,94 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The logic to move interrupts across CPUs is complex, attempt to provide a
-comment that describes the expected behavior so users of the interrupt system
-have more context about the usage of the arch_irq_desc structure fields.
+The current callers of stop_machine_run() outside of init code already have the
+CPU maps locked, and hence there's no reason for stop_machine_run() to attempt
+to lock again.
+
+Replace the get_cpu_maps() call with a suitable unreachable assert.
+
+Further changes will modify the conditions under which get_cpu_maps() returns
+success and without the adjustment proposed here the usage of
+stop_machine_run() in cpu_down() would then return an error.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/include/asm/irq.h | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ xen/common/cpu.c          |  5 +++++
+ xen/common/stop_machine.c | 15 ++++++++-------
+ xen/include/xen/cpu.h     |  2 ++
+ 3 files changed, 15 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
-index 413994d2133b..80a3aa7a88b9 100644
---- a/xen/arch/x86/include/asm/irq.h
-+++ b/xen/arch/x86/include/asm/irq.h
-@@ -28,6 +28,32 @@ typedef struct {
+diff --git a/xen/common/cpu.c b/xen/common/cpu.c
+index 8709db4d2957..6173220e771b 100644
+--- a/xen/common/cpu.c
++++ b/xen/common/cpu.c
+@@ -68,6 +68,11 @@ void cpu_hotplug_done(void)
+     write_unlock(&cpu_add_remove_lock);
+ }
  
- struct irq_desc;
++bool cpu_map_locked(void)
++{
++    return rw_is_locked(&cpu_add_remove_lock);
++}
++
+ static NOTIFIER_HEAD(cpu_chain);
  
-+/*
-+ * Xen logic for moving interrupts around CPUs allows manipulating interrupts
-+ * that target remote CPUs.  The logic to move an interrupt from CPU(s) is as
-+ * follows:
-+ *
-+ * 1. cpu_mask and vector is copied to old_cpu_mask and old_vector.
-+ * 2. New cpu_mask and vector are set, vector is setup at the new destination.
-+ * 3. move_in_progress is set.
-+ * 4. Interrupt source is updated to target new CPU and vector.
-+ * 5. Interrupts arriving at old_cpu_mask are processed normally.
-+ * 6. When an interrupt is delivered at the new destination (cpu_mask) as part
-+ *    of acking the interrupt move_in_progress is cleared and move_cleanup_count
-+ *    is set to the weight of online CPUs in old_cpu_mask.
-+ *    IRQ_MOVE_CLEANUP_VECTOR is sent to all CPUs in old_cpu_mask.
-+ * 7. When receiving IRQ_MOVE_CLEANUP_VECTOR CPUs in old_cpu_mask clean the
-+ *    vector entry and decrease the count in move_cleanup_count.  The CPU that
-+ *    sets move_cleanup_count to 0 releases the vector.
-+ *
-+ * Note that when interrupt movement (either move_in_progress or
-+ * move_cleanup_count set) is in progress it's not possible to move the
-+ * interrupt to yet a different CPU.
-+ *
-+ * By keeping the vector in the old CPU(s) configured until the interrupt is
-+ * acked on the new destination Xen allows draining any pending interrupts at
-+ * the old destinations.
-+ */
- struct arch_irq_desc {
-         s16 vector;                  /* vector itself is only 8 bits, */
-         s16 old_vector;              /* but we use -1 for unassigned  */
+ void __init register_cpu_notifier(struct notifier_block *nb)
+diff --git a/xen/common/stop_machine.c b/xen/common/stop_machine.c
+index 398cfd507c10..7face75648e8 100644
+--- a/xen/common/stop_machine.c
++++ b/xen/common/stop_machine.c
+@@ -82,9 +82,15 @@ int stop_machine_run(int (*fn)(void *data), void *data, unsigned int cpu)
+     BUG_ON(!local_irq_is_enabled());
+     BUG_ON(!is_idle_vcpu(current));
+ 
+-    /* cpu_online_map must not change. */
+-    if ( !get_cpu_maps() )
++    /*
++     * cpu_online_map must not change.  The only two callers of
++     * stop_machine_run() outside of init code already have the CPU map locked.
++     */
++    if ( system_state >= SYS_STATE_active && !cpu_map_locked() )
++    {
++        ASSERT_UNREACHABLE();
+         return -EBUSY;
++    }
+ 
+     nr_cpus = num_online_cpus();
+     if ( cpu_online(this) )
+@@ -92,10 +98,7 @@ int stop_machine_run(int (*fn)(void *data), void *data, unsigned int cpu)
+ 
+     /* Must not spin here as the holder will expect us to be descheduled. */
+     if ( !spin_trylock(&stopmachine_lock) )
+-    {
+-        put_cpu_maps();
+         return -EBUSY;
+-    }
+ 
+     stopmachine_data.fn = fn;
+     stopmachine_data.fn_data = data;
+@@ -136,8 +139,6 @@ int stop_machine_run(int (*fn)(void *data), void *data, unsigned int cpu)
+ 
+     spin_unlock(&stopmachine_lock);
+ 
+-    put_cpu_maps();
+-
+     return ret;
+ }
+ 
+diff --git a/xen/include/xen/cpu.h b/xen/include/xen/cpu.h
+index e1d4eb59675c..d8c8264c58b0 100644
+--- a/xen/include/xen/cpu.h
++++ b/xen/include/xen/cpu.h
+@@ -13,6 +13,8 @@ void put_cpu_maps(void);
+ void cpu_hotplug_begin(void);
+ void cpu_hotplug_done(void);
+ 
++bool cpu_map_locked(void);
++
+ /* Receive notification of CPU hotplug events. */
+ void register_cpu_notifier(struct notifier_block *nb);
+ 
 -- 
 2.44.0
 
