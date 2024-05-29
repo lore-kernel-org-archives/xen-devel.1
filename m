@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B64C25B75
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 08:36:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731673.1137312 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5723AC25B75
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 09:02:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.731690.1137353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCEnV-0007mR-AO; Wed, 29 May 2024 08:36:37 +0000
+	id 1sCFCW-0007GR-5b; Wed, 29 May 2024 09:02:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731673.1137312; Wed, 29 May 2024 08:36:37 +0000
+Received: by outflank-mailman (output) from mailman id 731690.1137353; Wed, 29 May 2024 09:02:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCEnV-0007m4-7M; Wed, 29 May 2024 08:36:37 +0000
-Received: by outflank-mailman (input) for mailman id 731673;
- Wed, 29 May 2024 08:36:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=RuQ4=NA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sCEnU-0007ln-98
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 08:36:36 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8e75296b-1d96-11ef-b4bb-af5377834399;
- Wed, 29 May 2024 10:36:34 +0200 (CEST)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-52b1ba74d39so320012e87.1
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 01:36:34 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626cc8e534sm702084066b.170.2024.05.29.01.36.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 May 2024 01:36:33 -0700 (PDT)
+	id 1sCFCW-0007GK-1p; Wed, 29 May 2024 09:02:28 +0000
+Received: by outflank-mailman (input) for mailman id 731690;
+ Wed, 29 May 2024 09:02:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=FJ4/=NA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1sCFCV-0006nV-3E
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 09:02:27 +0000
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [2607:f8b0:4864:20::82c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2b3c2558-1d9a-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 11:02:26 +0200 (CEST)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-43f87ba7d3eso8992531cf.0
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 02:02:26 -0700 (PDT)
+Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-43fb16b9770sm52129441cf.6.2024.05.29.02.02.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 May 2024 02:02:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,138 +46,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e75296b-1d96-11ef-b4bb-af5377834399
+X-Inumbo-ID: 2b3c2558-1d9a-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1716971794; x=1717576594; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=aue1JfAUF2Db+m9WM9eLeyB/E18PJUjmuGIUgDBYp40=;
-        b=ae+V03gIOqnkBKKkMUkgHXtMDnlEnvAUvGjogl42ZEhnkkZ6HRZ+o3g62Y8W2wRdkd
-         trsJ+hxPzeZEoICYgg+bRERYk05ft7mX0Wo+KVsF7HJ4ZkhXeUlRpUHIU4WN2xZ2PXfr
-         id8T9XwnAgfuJNMCnzEYELtD6OfV3aPPJ59cVWjQNudZGa+IlOsd8Mba0+B/2aE/UXvj
-         dnrUmeerAc7Z6ZC5PLyz2DIEePOKg7zmTlH4sbBCNnTVVImTsROjz4/tHBQ4wMSPCt14
-         mYRQALJ9GCaVCBBO34XqclxZ4RK20JFydc+9yAIcWQWi2LF2tsENzJuzcF6DnN6dVFC8
-         nb+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716971794; x=1717576594;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1716973345; x=1717578145; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aue1JfAUF2Db+m9WM9eLeyB/E18PJUjmuGIUgDBYp40=;
-        b=GtZG1MSRKqf47WlGOWSSQLMA139VrlyL/Vtd+wxrhGWHcEnDXmlGcpZAtYsRRsDlcL
-         Bm0ljsMVMhq07yQdBFLHyVwxfIj6JJfh0EVlQCYy3b3RVU12yT8zQDkKAdFGXBLfGQkD
-         KNMTKcFMyJtjU1siCSF+JpwBNrzOOu0Z/F36QBZkrWk3dZB8+HyG5GFqK0ZLjYdqosV1
-         Pg2ZfWI5ea7y8QCJIwm/HcTcvmPkv1Uqb0LzoMdu5ItCDC4WjE98w27/dDoOkAh4Gxl5
-         4rPt9nL7lBOqCovJV5EaMNpId0g8r3mhG8nhVqEOyPuYDgZkkWcUGMffOFGE8keNjpnu
-         9U9A==
-X-Forwarded-Encrypted: i=1; AJvYcCVo/+fExo6Z9WbT2kZDSRiQupq7uojgamCMZAJ/5RyREL3SXQhlQzptH0a16qtpb73x4Q60OcilJStAAvZzS/OF1Fwht6akoYBHUE86WqE=
-X-Gm-Message-State: AOJu0YzhWzn893wHAzDeEEIK4KvYuaRitAReSH4uUNXNRZZL27cGcgHd
-	JMnRHa8uOJFvuZxvY/mINQLfNMQTAFtBFbX2p9neNIr34owEb9LcAWa/5sO3fg==
-X-Google-Smtp-Source: AGHT+IHHSehhRNBBC08d5X+GZe7hByLCqX7iZuq7R5DVW1LgYx34rYmht5n+89yYXtjsEWpcBSzWRQ==
-X-Received: by 2002:a05:6512:902:b0:51d:4af6:bb86 with SMTP id 2adb3069b0e04-529612c529amr9250737e87.0.1716971793843;
-        Wed, 29 May 2024 01:36:33 -0700 (PDT)
-Message-ID: <5438a9b1-d13a-415b-95e4-af520c228e01@suse.com>
-Date: Wed, 29 May 2024 10:36:32 +0200
+        bh=nBJNMx2S48pD7GARHNMhhe8qb1w3vAy8ioD3DvtxaK0=;
+        b=h9HQD/CtQY7JTRR314/fx5bxpAqhS/rmFY2phrwXtUnOMsOcrbt+FI+IeRb29Zd+nd
+         P6LN6vcwDq5/L9m+8t508co5xltNbfdxtPNykzdw71RBxWCh8dgSKqQE9k9t1ugjGlCn
+         Z7VFnCxAYQhA24rpL0USKvu7EBJGXAu2TVVQs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716973345; x=1717578145;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=nBJNMx2S48pD7GARHNMhhe8qb1w3vAy8ioD3DvtxaK0=;
+        b=dsfrday04ntS/rA0twvR5OYLlEGyC4JZKqS+hrnom1JQ5vPCPrhw+cgTSEynRypMtq
+         JUXUHMnYh+jb1e5+kkrpw3h4r7p4YNRyjyYHfWvPqepvucM/zZWSV9R4hGK4W46VyBlF
+         CzOeTMgJVtaPXltXlOcALuBX30zjVOCMKk+jpkGyR3YRzWsjavLH0vQzJT2ARq4TSMbu
+         jEKMGSjSRI0F3VPf3IP6R4ntK/MVoESrM2qio6uSMhvXuQcWz+53roXB3Ti9pq+gG8yQ
+         Ed+WDjdaD6v4q6rI7TNS6vZqDqLerTlge+4O2Hf3U3kHuhFllzylmD1hlcwKEyZxvPyk
+         9eVw==
+X-Gm-Message-State: AOJu0YzltI1JhO+aSzNLo56x7goXzBDzmPNqUJjW52t0hD8YWVAiuqAC
+	fXycsdrS5g5W859QY9uCUDQgNqgqtHrV6bNMX/0hYACgjhiNkLxaHi2PK2rdSDLhLkS9HZrZwUw
+	7
+X-Google-Smtp-Source: AGHT+IFHrl3J3xvu8cJrUJptqFsfoUxoTDgqwa6ABiAHIEPBty/+m2iD8CgPpr1TfF9sKgBxFQzAoQ==
+X-Received: by 2002:a05:622a:1811:b0:43e:e6e:21df with SMTP id d75a77b69052e-43fb0e8584emr144478991cf.15.1716973345017;
+        Wed, 29 May 2024 02:02:25 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH for-4.19 3/9] xen/cpu: ensure get_cpu_maps() returns false if CPU operations are underway
+Date: Wed, 29 May 2024 11:01:25 +0200
+Message-ID: <20240529090132.59434-4-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240529090132.59434-1-roger.pau@citrix.com>
+References: <20240529090132.59434-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 2/9] xen: introduce generic non-atomic test_*bit()
-To: "Oleksii K." <oleksii.kurochko@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Shawn Anastasio <sanastasio@raptorengineering.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org, Julien Grall <julien@xen.org>
-References: <cover.1716547693.git.oleksii.kurochko@gmail.com>
- <79c3c31f0032a79c25d0a458b6091904457c8939.1716547693.git.oleksii.kurochko@gmail.com>
- <ab275ed4-29c3-4473-b1ee-2a9cda63eeaf@suse.com>
- <d8fd70469a1ac8d8cc291dddd0496f6bfabf6720.camel@gmail.com>
- <a39c3c03-ef54-4329-833d-03b60f162234@xen.org>
- <56b97916d1c36040a0be547759d5d10d311c9ed3.camel@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <56b97916d1c36040a0be547759d5d10d311c9ed3.camel@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 29.05.2024 09:50, Oleksii K. wrote:
-> On Tue, 2024-05-28 at 09:53 +0100, Julien Grall wrote:
->>>>> +/**
->>>>> + * generic_test_bit - Determine whether a bit is set
->>>>> + * @nr: bit number to test
->>>>> + * @addr: Address to start counting from
->>>>> + *
->>>>> + * This operation is non-atomic and can be reordered.
->>>>> + * If two examples of this operation race, one can appear to
->>>>> succeed
->>>>> + * but actually fail.  You must protect multiple accesses with
->>>>> a
->>>>> lock.
->>>>> + */
->>>>
->>>> You got carried away updating comments - there's no raciness for
->>>> simple test_bit(). As is also expressed by its name not having
->>>> those
->>>> double underscores that the others have.
->>> Then it is true for every function in this header. Based on the
->>> naming
->>> the conclusion can be done if it is atomic/npn-atomic and can/can't
->>> be
->>> reordered. 
->>
->> So let me start with that my only request is to keep the existing 
->> comments as you move it. It looks like there were none of test_bit()
->> before.
-> Just to clarify that I understand correctly.
-> 
-> Do we need any comment above functions generic_*()? Based on that they
-> are implemented in generic way they will be always "non-atomic and can
-> be reordered.".
+Due to the current rwlock logic, if the CPU calling get_cpu_maps() does so from
+a cpu_hotplug_{begin,done}() region the function will still return success,
+because a CPU taking the rwlock in read mode after having taken it in write
+mode is allowed.  Such behavior however defeats the purpose of get_cpu_maps(),
+as it should always return false when called with a CPU hot{,un}plug operation
+is in progress.  Otherwise the logic in send_IPI_mask() for example is wrong,
+as it could decide to use the shorthand even when a CPU operation is in
+progress.
 
-I indicated before that I think reproducing the same comments __test_and_*
-already have also for generic_* isn't overly useful. If someone insisted
-on them being there as well, I could live with that, though.
+Adjust the logic in get_cpu_maps() to return false when the CPUs lock is
+already hold in write mode by the current CPU, as read_trylock() would
+otherwise return true.
 
-> Do you find the following comment useful?
-> 
-> " * If two examples of this operation race, one can appear to succeed
->  * but actually fail.  You must protect multiple accesses with a lock."
-> 
-> It seems to me that it can dropped as basically "non-atomic and can be
-> reordered." means that.
+Fixes: 868a01021c6f ('rwlock: allow recursive read locking when already locked in write mode')
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/common/cpu.c         | 3 ++-
+ xen/include/xen/rwlock.h | 2 ++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-I agree, or else - as indicated before - the wording would need to further
-change. Yet iirc you've added that in response to a comment from Julien,
-so you'll primarily want his input as to the presence of something along
-these lines.
+diff --git a/xen/common/cpu.c b/xen/common/cpu.c
+index 6173220e771b..d76f80fe2e99 100644
+--- a/xen/common/cpu.c
++++ b/xen/common/cpu.c
+@@ -49,7 +49,8 @@ static DEFINE_RWLOCK(cpu_add_remove_lock);
+ 
+ bool get_cpu_maps(void)
+ {
+-    return read_trylock(&cpu_add_remove_lock);
++    return !rw_is_write_locked_by_me(&cpu_add_remove_lock) &&
++           read_trylock(&cpu_add_remove_lock);
+ }
+ 
+ void put_cpu_maps(void)
+diff --git a/xen/include/xen/rwlock.h b/xen/include/xen/rwlock.h
+index a2e98cad343e..4e7802821859 100644
+--- a/xen/include/xen/rwlock.h
++++ b/xen/include/xen/rwlock.h
+@@ -316,6 +316,8 @@ static always_inline void write_lock_irq(rwlock_t *l)
+ 
+ #define rw_is_locked(l)               _rw_is_locked(l)
+ #define rw_is_write_locked(l)         _rw_is_write_locked(l)
++#define rw_is_write_locked_by_me(l) \
++    lock_evaluate_nospec(_is_write_locked_by_me(atomic_read(&(l)->cnts)))
+ 
+ 
+ typedef struct percpu_rwlock percpu_rwlock_t;
+-- 
+2.44.0
 
-Jan
 
