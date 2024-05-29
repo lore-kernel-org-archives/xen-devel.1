@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1752DC27C43
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 09:02:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731687.1137322 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FC43C25B75
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 09:02:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.731693.1137383 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCFCR-0006YX-BE; Wed, 29 May 2024 09:02:23 +0000
+	id 1sCFCd-0008AM-Ui; Wed, 29 May 2024 09:02:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731687.1137322; Wed, 29 May 2024 09:02:23 +0000
+Received: by outflank-mailman (output) from mailman id 731693.1137383; Wed, 29 May 2024 09:02:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCFCR-0006YQ-8b; Wed, 29 May 2024 09:02:23 +0000
-Received: by outflank-mailman (input) for mailman id 731687;
- Wed, 29 May 2024 09:02:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sCFCd-0008AB-RO; Wed, 29 May 2024 09:02:35 +0000
+Received: by outflank-mailman (input) for mailman id 731693;
+ Wed, 29 May 2024 09:02:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJ4/=NA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sCFCP-0006YK-SU
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 09:02:21 +0000
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [2607:f8b0:4864:20::22d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 27297f9d-1d9a-11ef-b4bb-af5377834399;
- Wed, 29 May 2024 11:02:19 +0200 (CEST)
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3cabac56b38so898712b6e.3
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 02:02:19 -0700 (PDT)
+ id 1sCFCc-0006nV-Mr
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 09:02:34 +0000
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [2607:f8b0:4864:20::72c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2fae73e0-1d9a-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 11:02:34 +0200 (CEST)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-794ba2d4579so116587785a.1
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 02:02:34 -0700 (PDT)
 Received: from localhost ([213.195.114.223]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ac070e1460sm52339466d6.40.2024.05.29.02.02.16
+ af79cd13be357-794abd39bf3sm451529785a.114.2024.05.29.02.02.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 02:02:17 -0700 (PDT)
+ Wed, 29 May 2024 02:02:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,107 +46,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27297f9d-1d9a-11ef-b4bb-af5377834399
+X-Inumbo-ID: 2fae73e0-1d9a-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1716973337; x=1717578137; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yZF32pZ4CySVT63PvMfVFEEjipVnmCoEx5V33tI/850=;
-        b=jU8oImCdkqRMkKHakjJAqQSYHbI9BaUKdFyWkNbGqgUxmEli5Q7d2M6FjdkyBRHXWZ
-         vXlPK5RVwTnDsmI/zqcobgmN7ByNgQroMWH5izF3w470238gfg/reHsRMsPlhlJb1ruY
-         GSiVFcoqEZ37ZHj4LRd9/FNrkR1gfMEit2UGk=
+        d=citrix.com; s=google; t=1716973352; x=1717578152; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ALobPQ5l/DjhjFTulvS4fT4tWBapunVg8uReYEyLy/E=;
+        b=NN6sNLWAMpjm5z/6U1xsOe2F8lj6MiTnZTkEQaJY3IM33I70k12LMRMFhBKc4hb18R
+         BOu8PQtnSNAsVyDWQ9fYk1GbQUDKLvUII2QegZKsefLNZxRdXG/CVBmgSfoaYa/OEOV1
+         /ON4cJqxYar8+MWdfGmYGJW9X9lR+bYrEGs+w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716973337; x=1717578137;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yZF32pZ4CySVT63PvMfVFEEjipVnmCoEx5V33tI/850=;
-        b=er63QhVQT952kvL22hazu984LfGsR876h9br9X/LWZ9sac28pLlVZEwRsCyaSZgqUN
-         wb+rqCPb2/7UwjvaREevX1JGDCT7iIqwxuTiqQhWQ3gJnY3pfGruxJHgghW+EpR/zbwy
-         bRknG77DyLghfITEYKBJUUei3L04j71Kk5/jycxa54SmMdWI88sw3cj4qmMjG6QCc69X
-         rv45mt91wZC/uQKnJLEpzoXFVQU90Ihkys6GEhn8CvXNrq2KDFzC8OL4SQyP20p8ElzQ
-         sh1szKvscnVkbL1qR4Lkew/nh2hd/X40gfX/fjlor/oPHYS9CQcHlxGj2kZwT2hggJpP
-         dJyg==
-X-Gm-Message-State: AOJu0Yyh4d9o8KsxDCtKgtPyg3yn2X0VoILzE2HwyY7eQaBbJvZgHKIo
-	Gt2EkdejnnBDMCtDQyRhr828QE2LyvFQ7uiNaiiKSYrvpTWFBU2tMODB7xq9oWXCVyCPgPejGv6
-	8
-X-Google-Smtp-Source: AGHT+IH0ZJzmvauilykbAJmHui3TPflhX0w+i/ry24eVRpmVsIVFIJO+Rs/P50zziFBhLR2bEDa1kw==
-X-Received: by 2002:a05:6808:3026:b0:3c9:c3ca:e2cb with SMTP id 5614622812f47-3d1a5483e47mr16811764b6e.11.1716973337560;
-        Wed, 29 May 2024 02:02:17 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1716973352; x=1717578152;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ALobPQ5l/DjhjFTulvS4fT4tWBapunVg8uReYEyLy/E=;
+        b=SdFyns2rw/E64vmszjoQAyUdmlEDDccMfL1NNJ5wcmNyTPYmrvu8bnmcY2J4fTNGGP
+         BMQ1Zvr1IODDyR8sPwSmj3CW1R0ZSTOd8qBsG1GTCvDP8kksBV9eVsUp3UBf+TOh8lqr
+         6MjHpXkyaDhe0hOmjWpCicMPJxot51FNbtMHsskpaXEC79Sjd+JeuXeqWctrOQyIOtin
+         JyNRTIekwA7cgVhXRWjGcBeQQYaaSy2bDOf4R37nzDvAJLaVAysM4FJ43ieA70hMTkH4
+         OO99af/klQZCdhBluIevnbMPf80s16LKfWxPnNRfLjLHTynbcl++qxuIxRgzoQxVxEl6
+         XiNg==
+X-Gm-Message-State: AOJu0Yzap0RTor07fLQxNEHqr1Gc+CZyFn03yp3FCGCVfrNWe9QUz+t7
+	ratmDoIj4uc4qha0UvIBx0y1eVbIzBFBGAr1wSDqgBsdbHQBucR6yY7QKAgh7cgLlbKDt0+OhC7
+	l
+X-Google-Smtp-Source: AGHT+IFeh7suErWELrxwwMWXUq8jDXXBH01dea6zwgIMVCoOkjB04GbH9B18swjZG3RrGBpGvWUrUw==
+X-Received: by 2002:a05:620a:4141:b0:790:789d:b3d0 with SMTP id af79cd13be357-794ab099dd1mr1642553285a.38.1716973352006;
+        Wed, 29 May 2024 02:02:32 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.19 0/9] x86/irq: fixes for CPU hot{,un}plug
-Date: Wed, 29 May 2024 11:01:22 +0200
-Message-ID: <20240529090132.59434-1-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.19 6/9] x86/irq: restrict CPU movement in set_desc_affinity()
+Date: Wed, 29 May 2024 11:01:28 +0200
+Message-ID: <20240529090132.59434-7-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240529090132.59434-1-roger.pau@citrix.com>
+References: <20240529090132.59434-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+If external interrupts are using logical mode it's possible to have an overlap
+between the current ->arch.cpu_mask and the provided mask (or TARGET_CPUS).  If
+that's the case avoid assigning a new vector and just move the interrupt to a
+member of ->arch.cpu_mask that overlaps with the provided mask and is online.
 
-The following series aim to fix interrupt handling when doing CPU
-plug/unplug operations.  Without this series running:
+While there also add an extra assert to ensure the mask containing the possible
+destinations is not empty before calling cpu_mask_to_apicid(), as at that point
+having an empty mask is not expected.
 
-cpus=`xl info max_cpu_id`
-while [ 1 ]; do
-    for i in `seq 1 $cpus`; do
-        xen-hptool cpu-offline $i;
-        xen-hptool cpu-online $i;
-    done
-done
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/irq.c | 34 +++++++++++++++++++++++++++-------
+ 1 file changed, 27 insertions(+), 7 deletions(-)
 
-Quite quickly results in interrupts getting lost and "No irq handler for
-vector" messages on the Xen console.  Drivers in dom0 also start getting
-interrupt timeouts and the system becomes unusable.
-
-After applying the series running the loop over night still result in a
-fully usable system, no  "No irq handler for vector" messages at all, no
-interrupt loses reported by dom0.  Test with
-x2apic-mode={mixed,cluster}.
-
-I'm tagging this for 4.19 as it's IMO bugfixes, but the series has grown
-quite bigger than expected, and hence we need to be careful to not
-introduce breakages late in the release cycle.  I've attempted to
-document all code as good as I could, interrupt handling has some
-unexpected corner cases that are hard to diagnose and reason about.
-
-I'm currently also doing some extra testing with XenRT in case I've
-missed something.
-
-Thanks, Roger.
-
-Roger Pau Monne (9):
-  x86/irq: remove offline CPUs from old CPU mask when adjusting
-    move_cleanup_count
-  xen/cpu: do not get the CPU map in stop_machine_run()
-  xen/cpu: ensure get_cpu_maps() returns false if CPU operations are
-    underway
-  x86/irq: describe how the interrupt CPU movement works
-  x86/irq: limit interrupt movement done by fixup_irqs()
-  x86/irq: restrict CPU movement in set_desc_affinity()
-  x86/irq: deal with old_cpu_mask for interrupts in movement in
-    fixup_irqs()
-  x86/irq: handle moving interrupts in _assign_irq_vector()
-  x86/irq: forward pending interrupts to new destination in fixup_irqs()
-
- xen/arch/x86/apic.c             |   5 +
- xen/arch/x86/include/asm/apic.h |   3 +
- xen/arch/x86/include/asm/irq.h  |  28 +++++-
- xen/arch/x86/irq.c              | 172 +++++++++++++++++++++++++-------
- xen/common/cpu.c                |   8 +-
- xen/common/stop_machine.c       |  15 +--
- xen/include/xen/cpu.h           |   2 +
- xen/include/xen/rwlock.h        |   2 +
- 8 files changed, 190 insertions(+), 45 deletions(-)
-
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 1b7127090377..ae8fa574d4e7 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -846,19 +846,38 @@ void cf_check irq_complete_move(struct irq_desc *desc)
+ 
+ unsigned int set_desc_affinity(struct irq_desc *desc, const cpumask_t *mask)
+ {
+-    int ret;
+-    unsigned long flags;
+     cpumask_t dest_mask;
+ 
+     if ( mask && !cpumask_intersects(mask, &cpu_online_map) )
+         return BAD_APICID;
+ 
+-    spin_lock_irqsave(&vector_lock, flags);
+-    ret = _assign_irq_vector(desc, mask ?: TARGET_CPUS);
+-    spin_unlock_irqrestore(&vector_lock, flags);
++    /*
++     * mask input set con contain CPUs that are not online.  To decide whether
++     * the interrupt needs to be migrated restrict the input mask to the CPUs
++     * that are online.
++     */
++    if ( mask )
++        cpumask_and(&dest_mask, mask, &cpu_online_map);
++    else
++        cpumask_copy(&dest_mask, TARGET_CPUS);
+ 
+-    if ( ret < 0 )
+-        return BAD_APICID;
++    /*
++     * Only move the interrupt if there are no CPUs left in ->arch.cpu_mask
++     * that can handle it, otherwise just shuffle it around ->arch.cpu_mask
++     * to an available destination.
++     */
++    if ( !cpumask_intersects(desc->arch.cpu_mask, &dest_mask) )
++    {
++        int ret;
++        unsigned long flags;
++
++        spin_lock_irqsave(&vector_lock, flags);
++        ret = _assign_irq_vector(desc, mask ?: TARGET_CPUS);
++        spin_unlock_irqrestore(&vector_lock, flags);
++
++        if ( ret < 0 )
++            return BAD_APICID;
++    }
+ 
+     if ( mask )
+     {
+@@ -871,6 +890,7 @@ unsigned int set_desc_affinity(struct irq_desc *desc, const cpumask_t *mask)
+         cpumask_copy(&dest_mask, desc->arch.cpu_mask);
+     }
+     cpumask_and(&dest_mask, &dest_mask, &cpu_online_map);
++    ASSERT(!cpumask_empty(&dest_mask));
+ 
+     return cpu_mask_to_apicid(&dest_mask);
+ }
 -- 
 2.44.0
 
