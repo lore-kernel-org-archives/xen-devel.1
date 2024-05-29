@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36F69C27C44
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 14:08:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731993.1137788 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13AFC25B75
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 14:20:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.732037.1137825 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCJy1-0004iY-AK; Wed, 29 May 2024 14:07:49 +0000
+	id 1sCK9k-0000qs-ES; Wed, 29 May 2024 14:19:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731993.1137788; Wed, 29 May 2024 14:07:49 +0000
+Received: by outflank-mailman (output) from mailman id 732037.1137825; Wed, 29 May 2024 14:19:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCJy1-0004iR-7G; Wed, 29 May 2024 14:07:49 +0000
-Received: by outflank-mailman (input) for mailman id 731993;
- Wed, 29 May 2024 14:07:48 +0000
+	id 1sCK9k-0000qC-6C; Wed, 29 May 2024 14:19:56 +0000
+Received: by outflank-mailman (input) for mailman id 732037;
+ Wed, 29 May 2024 14:19:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9nLQ=NA=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1sCJy0-0004U5-7I
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 14:07:48 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
+ <SRS0=mTS/=NA=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sCK9i-0000nP-Pz
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 14:19:54 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d361b662-1dc4-11ef-90a1-e314d9c70b13;
- Wed, 29 May 2024 16:07:46 +0200 (CEST)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-52b119986f2so710587e87.1
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 07:07:46 -0700 (PDT)
-Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
+ id 844d1903-1dc6-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 16:19:53 +0200 (CEST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-57a033c2e9fso1255235a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 07:19:53 -0700 (PDT)
+Received: from andrew-laptop.citrite.net ([217.156.233.157])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-529715e57c1sm1333816e87.286.2024.05.29.07.07.44
+ a640c23a62f3a-a6389a0b4ccsm101767066b.22.2024.05.29.07.19.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 07:07:44 -0700 (PDT)
+ Wed, 29 May 2024 07:19:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,120 +47,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d361b662-1dc4-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 844d1903-1dc6-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716991666; x=1717596466; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1716992392; x=1717597192; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yfQU3CIk8oi6JUEGcx9QZf/9+B1Oq0qqW+7JWEaNpUQ=;
-        b=QoswkUFCR7FGFb+hWlx6AuRK9tIIKedF4mT5M9Vym6NhCnNt9L/y6LyY6S5NeM6m2F
-         blU/eyXywaU32Ekx8sq4+uh43onH5LCL/KLHJ0Vl+npjWnyTqgh3m8Y9B85h0WHpvBZP
-         6EkVID6sK79PHiDCm+Fd1JZVnND5UzHJQIRiJF3EmXDXueQhdnYIlveIRaLauEnIYuQE
-         Z1AMBdzpU3IP+eicgW2NZnUEgxxFCS+eXtudP1d3klxg1nF11tix1sccKMSxxCuf8QyY
-         Dx5QW9N7b/k2oUas267tyxGqPBut8wT7IwYDCmsuDiiMhYIAwy3a6p0boky3uvRT5xfO
-         AfPQ==
+        bh=Rc/urejuK2M9KAkefkWK+X4luH5a6jraofBI99vzPZo=;
+        b=e//jalF831zaKPqYUYFU5K8wvkCJ0CTEu7sQz/hh5Ru/yZqdhDy+kR03msssUBipsk
+         vvpcLOq+INJA66UrPonON+waMSAvJHoGhzTaN7jbSU+Rk4rDqzRtIzEmyFgd29hN6vOX
+         2z8M4wSO75ivYYA906e0c53DeonFL5DUzh9LE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716991666; x=1717596466;
+        d=1e100.net; s=20230601; t=1716992392; x=1717597192;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=yfQU3CIk8oi6JUEGcx9QZf/9+B1Oq0qqW+7JWEaNpUQ=;
-        b=NFC1lhpBNflk5TRn7V+3ogxm5Z2fWvHdzycE4bvH/w1omJA0EVm+By/fMA2yC+xIBJ
-         tA0tlFFWTy3f9bCXK8RTYHS2iBTlKE+Wk4lcmioNa/js4B1eukApeMYu35pkfFg+Xw0V
-         aXqfMq8L5uyRfKUfdlACL+dUxFGVcodzMgP+eDcGBaEh6qekSXk7zUWlOSpZztwD5quI
-         spOOCPPLNkO63kDA6gdklkKp3mL1q5AH20/+qi3mcfy89t+BTVQ99PKvzrv6nM44XJOr
-         +ewZo3mVuCPCUBxUzQCLysuaB4ZPO/viOKl9ZuVpWX1YUrq+AeLictE2OL+/Y5gDSVyY
-         acLg==
-X-Forwarded-Encrypted: i=1; AJvYcCXRL1mH+PPVfjDvx2s7bQwGmMrAIoJtlGXDIsGmqDc3mOTT/mPNbmW1zTpuR9rabA57IbSL5TEr70NMzHiAR2ex/YAO0u9JK/qUG+4E8KY=
-X-Gm-Message-State: AOJu0YwpqxQt5LJDF4CvIgfvJt/8rr6MUeDp+wT9yY/7lezgR3d8QPaa
-	y8w8dHbdcW+TQ2NhqSQfEtn2g+zSlsMAXdzts9Gty8mm1cQfl8D0
-X-Google-Smtp-Source: AGHT+IGzkXOYSImMOV6N87l6JZQ270Dpu6VtX1s3RWgHcPsFkFEwPwb1/bHSmEc0ivZv+7V/GBf3hw==
-X-Received: by 2002:a19:2d48:0:b0:526:92d7:52d4 with SMTP id 2adb3069b0e04-529bea19e84mr2711966e87.61.1716991666190;
-        Wed, 29 May 2024 07:07:46 -0700 (PDT)
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: edgar.iglesias@gmail.com,
-	sstabellini@kernel.org,
-	jgross@suse.com,
-	"Edgar E. Iglesias" <edgar.iglesias@amd.com>,
-	David Hildenbrand <david@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Paul Durrant <paul@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v8 3/8] xen: Add xen_mr_is_memory()
-Date: Wed, 29 May 2024 16:07:34 +0200
-Message-Id: <20240529140739.1387692-4-edgar.iglesias@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240529140739.1387692-1-edgar.iglesias@gmail.com>
-References: <20240529140739.1387692-1-edgar.iglesias@gmail.com>
+        bh=Rc/urejuK2M9KAkefkWK+X4luH5a6jraofBI99vzPZo=;
+        b=lhFOuPidZx/g9R5ZD91gDZxLvcfOJQQk4iKqygHo/dZbtKSgfmtNHzPwSdW9YTNzWC
+         b5/2/g8XlxhkqlWyyTF9FH8BWquo+adLvUp1CeruAxaDzxY9xeP3/mNXjcpPFPuLZo9b
+         74IiCi02bJClP+rQzdFCFFTabJwMPGOYkIhYpWslDmxENY2cZre1ArlnAuR96RIRbms8
+         CmUeKU81U6JTc/53c8DO9/rpA1dSg3w/rDAj6f83cHr8TD4Oe7sVtw/5Rad1iOnCCWKa
+         iCA3Njup0bYWLRoIQNpSaqQEoTBmDrLrN1skNhXI24x5/WEXOFEN3e5LC0WftqgMXjvt
+         /MZw==
+X-Gm-Message-State: AOJu0YzM+tSp+tbWkh4OgU48kDFbaBYsHMTp81tFsDRkRASgc/CpQ+pk
+	OhzNxRg1sAU9EV5UxQCKBSQsImmvjnCFW3f1wY+xqEGdWOWm5MotUSQuGq1v1KZ/4sgJpsporjp
+	6TK0=
+X-Google-Smtp-Source: AGHT+IEqb5api7YOB5c5JcJp7ScU29OHf161yGSsdq3HrC5QI8Ff3C9+zcTXyrgoIB2eySMmpW8DjQ==
+X-Received: by 2002:a17:907:7d9f:b0:a62:b36a:eafa with SMTP id a640c23a62f3a-a62b36b0213mr1634016866b.57.1716992392482;
+        Wed, 29 May 2024 07:19:52 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH 1/3] CI: Remove CI_COMMIT_REF_PROTECTED requirement for HW jobs
+Date: Wed, 29 May 2024 15:19:43 +0100
+Message-Id: <20240529141945.41669-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240529141945.41669-1-andrew.cooper3@citrix.com>
+References: <20240529141945.41669-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
+This restriction doesn't provide any security because anyone with suitable
+permissions on the HW runners can bypass it with this local patch.
 
-Add xen_mr_is_memory() to abstract away tests for the
-xen_memory MR.
+Requiring branches to be protected hampers usability of transient testing
+branches (specifically, can't delete branches except via the Gitlab UI).
 
-No functional changes.
+Drop the requirement.
 
-Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: David Hildenbrand <david@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Fixes: 746774cd1786 ("automation: introduce a dom0less test run on Xilinx hardware")
+Fixes: 0ab316e7e15f ("automation: add a smoke and suspend test on an Alder Lake system")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
- hw/xen/xen-hvm-common.c | 10 ++++++++--
- include/sysemu/xen.h    |  1 +
- 2 files changed, 9 insertions(+), 2 deletions(-)
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
-index 2d1b032121..a0a0252da0 100644
---- a/hw/xen/xen-hvm-common.c
-+++ b/hw/xen/xen-hvm-common.c
-@@ -12,6 +12,12 @@
+Fixes because this wants backporting, but it also needs acks from both Marek
+and Stefano as the owners of the hardware in question.
+---
+ automation/gitlab-ci/test.yaml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index ad249fa0a5d9..efd3ad46f08e 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -92,7 +92,7 @@
+     when: always
+   only:
+     variables:
+-      - $XILINX_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
++      - $XILINX_JOBS == "true"
+   tags:
+     - xilinx
  
- MemoryRegion xen_memory;
+@@ -112,7 +112,7 @@
+     when: always
+   only:
+     variables:
+-      - $QUBES_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
++      - $QUBES_JOBS == "true"
+   tags:
+     - qubes-hw2
  
-+/* Check for xen memory.  */
-+bool xen_mr_is_memory(MemoryRegion *mr)
-+{
-+    return mr == &xen_memory;
-+}
-+
- void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
-                    Error **errp)
- {
-@@ -28,7 +34,7 @@ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
-         return;
-     }
- 
--    if (mr == &xen_memory) {
-+    if (xen_mr_is_memory(mr)) {
-         return;
-     }
- 
-@@ -55,7 +61,7 @@ static void xen_set_memory(struct MemoryListener *listener,
- {
-     XenIOState *state = container_of(listener, XenIOState, memory_listener);
- 
--    if (section->mr == &xen_memory) {
-+    if (xen_mr_is_memory(section->mr)) {
-         return;
-     } else {
-         if (add) {
-diff --git a/include/sysemu/xen.h b/include/sysemu/xen.h
-index 754ec2e6cb..3445888e39 100644
---- a/include/sysemu/xen.h
-+++ b/include/sysemu/xen.h
-@@ -49,4 +49,5 @@ static inline void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
- 
- #endif /* CONFIG_XEN_IS_POSSIBLE */
- 
-+bool xen_mr_is_memory(MemoryRegion *mr);
- #endif
 -- 
-2.40.1
+2.30.2
 
 
