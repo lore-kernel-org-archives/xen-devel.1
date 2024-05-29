@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA4F1C41513
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 19:55:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.732325.1138304 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD761C27C51
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 19:55:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.732323.1138282 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCPOL-0004br-Eh; Wed, 29 May 2024 19:55:21 +0000
+	id 1sCPOJ-000409-Om; Wed, 29 May 2024 19:55:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 732325.1138304; Wed, 29 May 2024 19:55:21 +0000
+Received: by outflank-mailman (output) from mailman id 732323.1138282; Wed, 29 May 2024 19:55:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCPOL-0004aT-7t; Wed, 29 May 2024 19:55:21 +0000
-Received: by outflank-mailman (input) for mailman id 732325;
- Wed, 29 May 2024 19:55:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sCPOJ-0003yY-Fp; Wed, 29 May 2024 19:55:19 +0000
+Received: by outflank-mailman (input) for mailman id 732323;
+ Wed, 29 May 2024 19:55:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DI5e=NA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sCPOJ-0003Nf-DU
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 19:55:19 +0000
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [2a00:1450:4864:20::134])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5ff10d06-1df5-11ef-90a1-e314d9c70b13;
- Wed, 29 May 2024 21:55:18 +0200 (CEST)
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-52a6ef5e731so236714e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 12:55:18 -0700 (PDT)
+ id 1sCPOH-0003Q0-PQ
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 19:55:17 +0000
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [2a00:1450:4864:20::132])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5e624e07-1df5-11ef-b4bb-af5377834399;
+ Wed, 29 May 2024 21:55:16 +0200 (CEST)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-52ac99930c6so270039e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 12:55:16 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5297066b249sm1344203e87.178.2024.05.29.12.55.17
+ 2adb3069b0e04-5297066b249sm1344203e87.178.2024.05.29.12.55.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 12:55:17 -0700 (PDT)
+ Wed, 29 May 2024 12:55:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ff10d06-1df5-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 5e624e07-1df5-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717012518; x=1717617318; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1717012515; x=1717617315; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HT5eQZFG3kOfjlltqo/sjfVASYxX5jfFvb3QP7WAnA4=;
-        b=j8M6/thJwD6aBd8mAkZQP6aKlla6gkO38+sWFUhn5FkbvpBcF7CVDpNcXrlQvRlL4t
-         dWlnN8gMX6FN1RE1wQAylp6BNRY5/8tSeRaKoc1MrQqlQAylPcLkN2u5JMLsbHxD3XD2
-         9hSt1CjhZO5I5/f8gTXEoASwUL9spknkOcDimjaqNLce/z0egmZe/DJwnKV2Ycb37HbI
-         29/WuvKgwbunptpTHTTiNiBNjT6qnkvujRgsK6BYzUOXIxrHtnwFt8vrjxKQqh/qk4tc
-         em+YVEsBMdOVLFZGuvQe44u2Z6xN6bPDq9V2TDEfYDZlMM7GJJUgGgCBEIVtcAjv5uX7
-         /XDw==
+        bh=5j/RmSAlhCXJU1vUCQMT/ujGfnXfs53M7nbtzjes1TI=;
+        b=fEUhk5AA8ukCLPi7XQ2/NiqZL+ep3PgY6SLKzfRFoN1Ujeyophk2ftajYp5oyr/FUB
+         KaUQsk6i2vEWk2Q1CJ2J6jx/V/ESUXfVEAav7eSpNFaNKKVgvpfNrVKZGwMRzh6OPWE3
+         VRFUQasY09XWkdfdq0iC78BTWlZDNAGdNf5m2Oy+WQryFb5IosO/xkHu6M2LoDRvycQY
+         FfJ2CQQOM1UM/v1iDd54C1/dRBeq87X0Jqz02yLF+xTwCC7DWsZYSwZ5D2mQGGH6MCLV
+         YSxNjBAH9Zq4IZrIt+Ctlo98jUiAMRvoCu/VtPO6KfaQCzDOHS/yejHr9xoNe1boBpqp
+         Ljtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717012518; x=1717617318;
+        d=1e100.net; s=20230601; t=1717012515; x=1717617315;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=HT5eQZFG3kOfjlltqo/sjfVASYxX5jfFvb3QP7WAnA4=;
-        b=F9Wf8OsduInVIXZc/W4GR/3pycUH2aCzObD66NLVH0/2UBGrtmKY6eIO+NLhswUWNN
-         lWyFQtYW54M9DBeDUGOIbYvLyUOnN2+wzSNHqtmcRV6oq1kzL2NzUZThDuTfebWzY+3m
-         D6hymlha7/rzJtkfEAPTwEs4e8jVF0p/t+DT6B5nyO1UUO2GpYf7sjpmNXoi4fmf/Xak
-         y6B0a1AaYtMA865U2+h838VnHUExFyKerVODuBGwYakZgna1Gs0S2kK4mdtH5b0FeFaw
-         BM4mBZhxw1oV5uXi5HsvLeL1Myj6wDBw9gHILaumRVS5KctHAUGlO/ZR/rqeAXCwUKI1
-         TeKQ==
-X-Gm-Message-State: AOJu0YyoZ21ZBil0TROmyE28SKBdqm4Wal+5lmGwBGpbFK9qK1/2bU9L
-	TUQGPfJ5VgGU4K14cxeDt0CuaI9E1hQylXj0IQYKqgskh3H2B04Ar1P3XVup
-X-Google-Smtp-Source: AGHT+IENbAEXIatG6RzIfpPoL19Qek9oosir4ctTUoquQPNkD+5xNxItPVUgu7SlQtOFp7OajD8J+A==
-X-Received: by 2002:a05:6512:3b06:b0:52a:d87f:60e3 with SMTP id 2adb3069b0e04-52b7d48c622mr148339e87.57.1717012517792;
-        Wed, 29 May 2024 12:55:17 -0700 (PDT)
+        bh=5j/RmSAlhCXJU1vUCQMT/ujGfnXfs53M7nbtzjes1TI=;
+        b=kBQxKH8TZKI8yuefj7eIHjF4MpnOqi6tCj1X8TNLZx/jSDoAEXpT0BZm2JYrVC35gL
+         ZtXG9SNSovJHjgDT0TsLRVX+0HlTo5CNm3rwPfnsmLGtbsD/9ZAVCF3eu4vzvtz0TW5m
+         F85LMKBHvGjgWo0YVvyXL59+2mhdcwX5PrDSuRWel105srLzPBBfQiEDUFbQpAGPYd/l
+         03b8YbK8Edb0xyHXoufed4oQnzZ319fePGDep50clSiZV/ZDQ64W+dg/bp+M5/0SI+2z
+         kbn1AG9wGEqcXp4KO46IN8vN3g1BpXpiMqVXSsUBDRy3Vt0VYXhOoTrSA8wkNs5LER75
+         WFEg==
+X-Gm-Message-State: AOJu0Yz7gmJnk4ougoN37KtlgI7JV9B9v7Do2vKKUVcBxree66niXr0V
+	fYPRJt0MM2JMGZYUBg69Mfjpdn1BWZfrGQN0ALiA1yJgZxX3c+CRbiJNqJNh
+X-Google-Smtp-Source: AGHT+IHsKzwdLJDunzsII+Oo8Y+RSm0pjg/FSCmVV8H2Jruqwk6TXnOHVvqxpsKkabpyMwtmcSKuRg==
+X-Received: by 2002:a19:ca06:0:b0:518:dae6:d0ec with SMTP id 2adb3069b0e04-52b7d418d7amr115370e87.4.1717012515204;
+        Wed, 29 May 2024 12:55:15 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -87,656 +87,226 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v12 6/8] xen/riscv: add minimal amount of stubs to build full Xen
-Date: Wed, 29 May 2024 21:55:07 +0200
-Message-ID: <4e5b814c3f73bd4ae6bb80296e17ac80bd8d224a.1717008161.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v12 3/8] xen/riscv: introduce bitops.h
+Date: Wed, 29 May 2024 21:55:04 +0200
+Message-ID: <b70eda27ec40fff2fdd1225f8b4f17c036b550b7.1717008161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <cover.1717008161.git.oleksii.kurochko@gmail.com>
 References: <cover.1717008161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Taken from Linux-6.4.0-rc1
+
+Xen's bitops.h consists of several Linux's headers:
+* linux/arch/include/asm/bitops.h:
+  * The following function were removed as they aren't used in Xen:
+        * test_and_set_bit_lock
+        * clear_bit_unlock
+        * __clear_bit_unlock
+  * The following functions were renamed in the way how they are
+    used by common code:
+        * __test_and_set_bit
+        * __test_and_clear_bit
+  * The declaration and implementation of the following functios
+    were updated to make Xen build happy:
+        * clear_bit
+        * set_bit
+        * __test_and_clear_bit
+        * __test_and_set_bit
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V7-V12:
- - Only rebase was done.
+Changes in V11-V12:
+ - Nothing changed. Only rebase was done.
+---
+Changes in V10:
+ - update the error message BITS_PER_LONG -> BITOP_BITS_PER_WORD
+---
+Changes in V9:
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - drop redefinition of bitop_uint_t in asm/types.h as some operation in Xen common code expects
+   to work with 32-bit quantities.
+ - s/BITS_PER_LONG/BITOP_BITS_PER_WORD in asm/bitops.h around __AMO() macros.
+---
+Changes in V8:
+ - define bitop_uint_t in <asm/types.h> after the changes in patch related to introduction of
+   "introduce generic non-atomic test_*bit()".
+ - drop duplicated __set_bit() and __clear_bit().
+ - drop duplicated comment: /* Based on linux/arch/include/asm/bitops.h */.
+ - update type of res and mask in test_and_op_bit_ord(): unsigned long -> bitop_uint_t.
+ - drop 1 padding blank in test_and_op_bit_ord().
+ - update definition of test_and_set_bit(),test_and_clear_bit(),test_and_change_bit:
+   change return type to bool.
+ - change addr argument type of test_and_change_bit(): unsigned long * -> void *.
+ - move test_and_change_bit() closer to other test_and-s function.
+ - Code style fixes: tabs -> space.
+ - s/#undef __op_bit/#undef op_bit.
+ - update the commit message: delete information about generic-non-atomic.h changes as now
+   it is a separate patch.
+---
+Changes in V7:
+ - Update the commit message.
+ - Drop "__" for __op_bit and __op_bit_ord as they are atomic.
+ - add comment above __set_bit and __clear_bit about why they are defined as atomic.
+ - align bitops_uint_t with __AMO().
+ - make changes after  generic non-atomic test_*bit() were changed.
+ - s/__asm__ __volatile__/asm volatile
 ---
 Changes in V6:
- - update the commit in stubs.c around /* ... common/irq.c ... */
- - add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - rebase clean ups were done: drop unused asm-generic includes
 ---
-Changes in V5:
- - drop unrelated changes
- - assert_failed("unimplmented...") change to BUG_ON()
+ Changes in V5:
+   - new patch
 ---
-Changes in V4:
-  - added new stubs which are necessary for compilation after rebase: __cpu_up(), __cpu_disable(), __cpu_die()
-    from smpboot.c
-  - back changes related to printk() in early_printk() as they should be removed in the next patch to avoid
-    compilation error.
-  - update definition of cpu_khz: __read_mostly -> __ro_after_init.
-  - drop vm_event_reset_vmtrace(). It is defibed in asm-generic/vm_event.h.
-  - move vm_event_*() functions from stubs.c to riscv/vm_event.c.
-  - s/BUG/BUG_ON("unimplemented") in stubs.c
-  - back irq_actor_none() and irq_actor_none() as common/irq.c isn't compiled at this moment,
-    so this function are needed to avoid compilation error.
-  - defined max_page to avoid compilation error, it will be removed as soon as common/page_alloc.c will
-    be compiled.
----
-Changes in V3:
- - code style fixes.
- - update attribute for frametable_base_pdx  and frametable_virt_end to __ro_after_init.
-   insteaf of read_mostly.
- - use BUG() instead of assert_failed/WARN for newly introduced stubs.
- - drop "#include <public/vm_event.h>" in stubs.c and use forward declaration instead.
- - drop ack_node() and end_node() as they aren't used now.
----
-Changes in V2:
- - define udelay stub
- - remove 'select HAS_PDX' from RISC-V Kconfig because of
-   https://lore.kernel.org/xen-devel/20231006144405.1078260-1-andrew.cooper3@citrix.com/
----
- xen/arch/riscv/Makefile |   1 +
- xen/arch/riscv/mm.c     |  50 +++++
- xen/arch/riscv/setup.c  |   8 +
- xen/arch/riscv/stubs.c  | 439 ++++++++++++++++++++++++++++++++++++++++
- xen/arch/riscv/traps.c  |  25 +++
- 5 files changed, 523 insertions(+)
- create mode 100644 xen/arch/riscv/stubs.c
+ xen/arch/riscv/include/asm/bitops.h | 137 ++++++++++++++++++++++++++++
+ 1 file changed, 137 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/bitops.h
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 1ed1a8369b..60afbc0ad9 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -4,6 +4,7 @@ obj-y += mm.o
- obj-$(CONFIG_RISCV_64) += riscv64/
- obj-y += sbi.o
- obj-y += setup.o
-+obj-y += stubs.o
- obj-y += traps.o
- obj-y += vm_event.o
- 
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index fe3a43be20..2c3fb7d72e 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -1,5 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
-+#include <xen/bug.h>
- #include <xen/cache.h>
- #include <xen/compiler.h>
- #include <xen/init.h>
-@@ -14,6 +15,9 @@
- #include <asm/page.h>
- #include <asm/processor.h>
- 
-+unsigned long __ro_after_init frametable_base_pdx;
-+unsigned long __ro_after_init frametable_virt_end;
-+
- struct mmu_desc {
-     unsigned int num_levels;
-     unsigned int pgtbl_count;
-@@ -294,3 +298,49 @@ unsigned long __init calc_phys_offset(void)
-     phys_offset = load_start - XEN_VIRT_START;
-     return phys_offset;
- }
-+
-+void put_page(struct page_info *page)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+unsigned long get_upper_mfn_bound(void)
-+{
-+    /* No memory hotplug yet, so current memory limit is the final one. */
-+    return max_page - 1;
-+}
-+
-+void arch_dump_shared_mem_info(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-+{
-+    BUG_ON("unimplemented");
-+    return -1;
-+}
-+
-+int xenmem_add_to_physmap_one(struct domain *d, unsigned int space,
-+                              union add_to_physmap_extra extra,
-+                              unsigned long idx, gfn_t gfn)
-+{
-+    BUG_ON("unimplemented");
-+
-+    return 0;
-+}
-+
-+int destroy_xen_mappings(unsigned long s, unsigned long e)
-+{
-+    BUG_ON("unimplemented");
-+    return -1;
-+}
-+
-+int map_pages_to_xen(unsigned long virt,
-+                     mfn_t mfn,
-+                     unsigned long nr_mfns,
-+                     unsigned int flags)
-+{
-+    BUG_ON("unimplemented");
-+    return -1;
-+}
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 98a94c4c48..8bb5bdb2ae 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -1,11 +1,19 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
-+#include <xen/bug.h>
- #include <xen/compile.h>
- #include <xen/init.h>
- #include <xen/mm.h>
- 
-+#include <public/version.h>
-+
- #include <asm/early_printk.h>
- 
-+void arch_get_xen_caps(xen_capabilities_info_t *info)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
- /* Xen stack for bringing up the first CPU. */
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-     __aligned(STACK_SIZE);
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+diff --git a/xen/arch/riscv/include/asm/bitops.h b/xen/arch/riscv/include/asm/bitops.h
 new file mode 100644
-index 0000000000..8285bcffef
+index 0000000000..7f7af3fda1
 --- /dev/null
-+++ b/xen/arch/riscv/stubs.c
-@@ -0,0 +1,439 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#include <xen/cpumask.h>
-+#include <xen/domain.h>
-+#include <xen/irq.h>
-+#include <xen/nodemask.h>
-+#include <xen/time.h>
-+#include <public/domctl.h>
++++ b/xen/arch/riscv/include/asm/bitops.h
+@@ -0,0 +1,137 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Copyright (C) 2012 Regents of the University of California */
 +
-+#include <asm/current.h>
++#ifndef _ASM_RISCV_BITOPS_H
++#define _ASM_RISCV_BITOPS_H
 +
-+/* smpboot.c */
++#include <asm/system.h>
 +
-+cpumask_t cpu_online_map;
-+cpumask_t cpu_present_map;
-+cpumask_t cpu_possible_map;
++#if BITOP_BITS_PER_WORD == 64
++#define __AMO(op)   "amo" #op ".d"
++#elif BITOP_BITS_PER_WORD == 32
++#define __AMO(op)   "amo" #op ".w"
++#else
++#error "Unexpected BITOP_BITS_PER_WORD"
++#endif
 +
-+/* ID of the PCPU we're running on */
-+DEFINE_PER_CPU(unsigned int, cpu_id);
-+/* XXX these seem awfully x86ish... */
-+/* representing HT siblings of each logical CPU */
-+DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_sibling_mask);
-+/* representing HT and core siblings of each logical CPU */
-+DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_core_mask);
-+
-+nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
++/* Based on linux/arch/include/asm/bitops.h */
 +
 +/*
-+ * max_page is defined in page_alloc.c which isn't complied for now.
-+ * definition of max_page will be remove as soon as page_alloc is built.
++ * Non-atomic bit manipulation.
++ *
++ * Implemented using atomics to be interrupt safe. Could alternatively
++ * implement with local interrupt masking.
 + */
-+unsigned long __read_mostly max_page;
++#define __set_bit(n, p)      set_bit(n, p)
++#define __clear_bit(n, p)    clear_bit(n, p)
++
++#define test_and_op_bit_ord(op, mod, nr, addr, ord)     \
++({                                                      \
++    bitop_uint_t res, mask;                             \
++    mask = BITOP_MASK(nr);                              \
++    asm volatile (                                      \
++        __AMO(op) #ord " %0, %2, %1"                    \
++        : "=r" (res), "+A" (addr[BITOP_WORD(nr)])       \
++        : "r" (mod(mask))                               \
++        : "memory");                                    \
++    ((res & mask) != 0);                                \
++})
 +
-+/* time.c */
++#define op_bit_ord(op, mod, nr, addr, ord)      \
++    asm volatile (                              \
++        __AMO(op) #ord " zero, %1, %0"          \
++        : "+A" (addr[BITOP_WORD(nr)])           \
++        : "r" (mod(BITOP_MASK(nr)))             \
++        : "memory");
 +
-+unsigned long __ro_after_init cpu_khz;  /* CPU clock frequency in kHz. */
++#define test_and_op_bit(op, mod, nr, addr)    \
++    test_and_op_bit_ord(op, mod, nr, addr, .aqrl)
++#define op_bit(op, mod, nr, addr) \
++    op_bit_ord(op, mod, nr, addr, )
 +
-+s_time_t get_s_time(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int reprogram_timer(s_time_t timeout)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void send_timer_event(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* shutdown.c */
-+
-+void machine_restart(unsigned int delay_millisecs)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void machine_halt(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* domctl.c */
-+
-+long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
-+                    XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_get_domain_info(const struct domain *d,
-+                          struct xen_domctl_getdomaininfo *info)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* monitor.c */
-+
-+int arch_monitor_domctl_event(struct domain *d,
-+                              struct xen_domctl_monitor_op *mop)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* smp.c */
-+
-+void arch_flush_tlb_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_event_check_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_call_function_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* irq.c */
-+
-+struct pirq *alloc_pirq_struct(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void pirq_guest_unbind(struct domain *d, struct pirq *pirq)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void pirq_set_affinity(struct domain *d, int pirq, const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+hw_irq_controller no_irq_type = {
-+    .typename = "none",
-+    .startup = irq_startup_none,
-+    .shutdown = irq_shutdown_none,
-+    .enable = irq_enable_none,
-+    .disable = irq_disable_none,
-+};
-+
-+int arch_init_one_irq_desc(struct irq_desc *desc)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_state_dump(unsigned int cpu)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* domain.c */
-+
-+DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
-+unsigned long __per_cpu_offset[NR_CPUS];
-+
-+void context_switch(struct vcpu *prev, struct vcpu *next)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void continue_running(struct vcpu *same)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void sync_local_execstate(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void sync_vcpu_execstate(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void startup_cpu_idle_loop(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void free_domain_struct(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void dump_pageframe_info(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void free_vcpu_struct(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_vcpu_create(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_vcpu_destroy(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_switch_to_aarch64_mode(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_create(struct domain *d,
-+                       struct xen_domctl_createdomain *config,
-+                       unsigned int flags)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_teardown(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_destroy(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_shutdown(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_pause(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_unpause(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_soft_reset(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_creation_finished(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_initialise_vcpu(struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_vcpu_reset(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int domain_relinquish_resources(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_dump_domain_info(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_dump_vcpu_info(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_mark_events_pending(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_update_evtchn_irq(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_block_unless_event_pending(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_kick(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+struct domain *alloc_domain_struct(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+struct vcpu *alloc_vcpu_struct(const struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+unsigned long
-+hypercall_create_continuation(unsigned int op, const char *format, ...)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int __init parse_arch_dom0_param(const char *s, const char *e)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* guestcopy.c */
-+
-+unsigned long raw_copy_to_guest(void *to, const void *from, unsigned int len)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+unsigned long raw_copy_from_guest(void *to, const void __user *from,
-+                                  unsigned int len)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* sysctl.c */
++/* Bitmask modifiers */
++#define NOP(x)    (x)
++#define NOT(x)    (~(x))
 +
-+long arch_do_sysctl(struct xen_sysctl *sysctl,
-+                    XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
++/**
++ * test_and_set_bit - Set a bit and return its old value
++ * @nr: Bit to set
++ * @addr: Address to count from
++ */
++static inline bool test_and_set_bit(int nr, volatile void *p)
 +{
-+    BUG_ON("unimplemented");
-+}
++    volatile bitop_uint_t *addr = p;
 +
-+void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
-+{
-+    BUG_ON("unimplemented");
++    return test_and_op_bit(or, NOP, nr, addr);
 +}
-+
-+/* p2m.c */
 +
-+int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
++/**
++ * test_and_clear_bit - Clear a bit and return its old value
++ * @nr: Bit to clear
++ * @addr: Address to count from
++ */
++static inline bool test_and_clear_bit(int nr, volatile void *p)
 +{
-+    BUG_ON("unimplemented");
-+}
++    volatile bitop_uint_t *addr = p;
 +
-+int unmap_mmio_regions(struct domain *d,
-+                       gfn_t start_gfn,
-+                       unsigned long nr,
-+                       mfn_t mfn)
-+{
-+    BUG_ON("unimplemented");
++    return test_and_op_bit(and, NOT, nr, addr);
 +}
 +
-+int map_mmio_regions(struct domain *d,
-+                     gfn_t start_gfn,
-+                     unsigned long nr,
-+                     mfn_t mfn)
++/**
++ * test_and_change_bit - Toggle (change) a bit and return its old value
++ * @nr: Bit to change
++ * @addr: Address to count from
++ *
++ * This operation is atomic and cannot be reordered.
++ * It also implies a memory barrier.
++ */
++static inline bool test_and_change_bit(int nr, volatile void *p)
 +{
-+    BUG_ON("unimplemented");
-+}
++    volatile bitop_uint_t *addr = p;
 +
-+int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
-+                          unsigned long gfn, mfn_t mfn)
-+{
-+    BUG_ON("unimplemented");
++    return test_and_op_bit(xor, NOP, nr, addr);
 +}
 +
-+/* Return the size of the pool, in bytes. */
-+int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
++/**
++ * set_bit - Atomically set a bit in memory
++ * @nr: the bit to set
++ * @addr: the address to start counting from
++ *
++ * Note that @nr may be almost arbitrarily large; this function is not
++ * restricted to acting on a single-word quantity.
++ */
++static inline void set_bit(int nr, volatile void *p)
 +{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* delay.c */
++    volatile bitop_uint_t *addr = p;
 +
-+void udelay(unsigned long usecs)
-+{
-+    BUG_ON("unimplemented");
++    op_bit(or, NOP, nr, addr);
 +}
 +
-+/* guest_access.h */ 
-+
-+static inline unsigned long raw_clear_guest(void *to, unsigned int len)
++/**
++ * clear_bit - Clears a bit in memory
++ * @nr: Bit to clear
++ * @addr: Address to start counting from
++ */
++static inline void clear_bit(int nr, volatile void *p)
 +{
-+    BUG_ON("unimplemented");
-+}
++    volatile bitop_uint_t *addr = p;
 +
-+/* smpboot.c */
-+
-+int __cpu_up(unsigned int cpu)
-+{
-+    BUG_ON("unimplemented");
++    op_bit(and, NOT, nr, addr);
 +}
 +
-+void __cpu_disable(void)
-+{
-+    BUG_ON("unimplemented");
-+}
++#undef test_and_op_bit
++#undef op_bit
++#undef NOP
++#undef NOT
++#undef __AMO
 +
-+void __cpu_die(unsigned int cpu)
-+{
-+    BUG_ON("unimplemented");
-+}
++#endif /* _ASM_RISCV_BITOPS_H */
 +
 +/*
-+ * The following functions are defined in common/irq.c, but common/irq.c isn't
-+ * built for now. These changes will be removed there when common/irq.c is
-+ * ready.
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
 + */
-+
-+void cf_check irq_actor_none(struct irq_desc *desc)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+unsigned int cf_check irq_startup_none(struct irq_desc *desc)
-+{
-+    BUG_ON("unimplemented");
-+
-+    return 0;
-+}
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index ccd3593f5a..5415cf8d90 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -4,6 +4,10 @@
-  *
-  * RISC-V Trap handlers
-  */
-+
-+#include <xen/lib.h>
-+#include <xen/sched.h>
-+
- #include <asm/processor.h>
- #include <asm/traps.h>
- 
-@@ -11,3 +15,24 @@ void do_trap(struct cpu_user_regs *cpu_regs)
- {
-     die();
- }
-+
-+void vcpu_show_execution_state(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void show_execution_state(const struct cpu_user_regs *regs)
-+{
-+    printk("implement show_execution_state(regs)\n");
-+}
-+
-+void arch_hypercall_tasklet_result(struct vcpu *v, long res)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+enum mc_disposition arch_do_multicall_call(struct mc_state *state)
-+{
-+    BUG_ON("unimplemented");
-+    return mc_continue;
-+}
 -- 
 2.45.0
 
