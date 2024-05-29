@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AF58C25B75
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 04:51:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.731369.1136799 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90C4C25B7C
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 05:05:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.731380.1136879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCBHk-0000Jj-Kh; Wed, 29 May 2024 04:51:36 +0000
+	id 1sCBVJ-0004AT-Tm; Wed, 29 May 2024 05:05:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 731369.1136799; Wed, 29 May 2024 04:51:36 +0000
+Received: by outflank-mailman (output) from mailman id 731380.1136879; Wed, 29 May 2024 05:05:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCBHk-0000Jc-HY; Wed, 29 May 2024 04:51:36 +0000
-Received: by outflank-mailman (input) for mailman id 731369;
- Wed, 29 May 2024 04:51:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=qV8p=NA=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1sCBHj-0000JW-7A
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 04:51:35 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1ee7747d-1d77-11ef-b4bb-af5377834399;
- Wed, 29 May 2024 06:51:33 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-35b6467754cso912495f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 28 May 2024 21:51:33 -0700 (PDT)
-Received: from [192.168.69.100] ([176.187.204.141])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626c93b6d4sm677740766b.88.2024.05.28.21.51.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 May 2024 21:51:31 -0700 (PDT)
+	id 1sCBVJ-0004AG-Po; Wed, 29 May 2024 05:05:37 +0000
+Received: by outflank-mailman (input) for mailman id 731380;
+ Wed, 29 May 2024 05:05:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=r7nM=NA=bombadil.srs.infradead.org=BATV+c55c297d46ee5715703b+7584+infradead.org+hch@srs-se1.protection.inumbo.net>)
+ id 1sCBVH-0002IO-UF
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 05:05:35 +0000
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [2607:7c80:54:3::133])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 14852e35-1d79-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 07:05:35 +0200 (CEST)
+Received: from
+ 2a02-8389-2341-5b80-7775-b725-99f7-3344.cable.dynamic.v6.surfer.at
+ ([2a02:8389:2341:5b80:7775:b725:99f7:3344] helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1sCBVB-00000002pbP-0kqv; Wed, 29 May 2024 05:05:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,86 +44,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ee7747d-1d77-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1716958292; x=1717563092; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=u1nYdfp4fuN4YG4QO33DKDAeJvAL793XESNugrAHys8=;
-        b=xSqPfmXmmJ0QSd0GT72z+063yHKrJM5Q48Oa4b8R8DNjt4UoTFjz8GpLJB6pLKZm6T
-         2hkskis7YDxZW5dky/tUCWVPuBzmWbd6HOhkOZHiIcPTA054odaNyay2tu1D+i3k9Xo5
-         kkdKFgXZPNJ9KQoN4rDozM8dBloHp5htpFACzXQy0FXp+Kdx4ZJ+78VKXGm0j/y7iIdV
-         QvI8TErlLJv5l/0ESPjPExB49lnPkcXeQhIvGVXgd003blL+2Vy03jSIULWdlCIg3+NJ
-         gsZlY0ieJHvQ8XOom1F7jCqI4cge2U6XFIPJDAfcE65eBwF2xokRd+QKYnXlJnipnS16
-         vQkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716958292; x=1717563092;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=u1nYdfp4fuN4YG4QO33DKDAeJvAL793XESNugrAHys8=;
-        b=OnICOj7bGIOBOLPbzHvFSM0cUonSvf6/GOXG01xJkUTCCYki+9SjUO8oBvdoZzThUx
-         CHkG88QPH6c1igPbnp8E9XAUBcGYJM+DG9WgNnPs+8yWS1bJHtupelTdiwNImNHZxTER
-         VcHP3kjah9IMZRzfYHByoV9ps0FfswuBQAhfKvS3veozf/Kl099RjrdBevT/6kaoDnXV
-         Ppwq3q61blPdH17HQEJk7K75WSTgobw0DX4h0mFWqknyR1cElLjqHsVEO2YD1UO/iUkI
-         OkxV5HmohpJPm3YAoVCVFI8/7TLn7yIYgu+rw7Aiw4MCSAgvotTXC80td3abPZTXPBqF
-         zmHg==
-X-Forwarded-Encrypted: i=1; AJvYcCW8oSEzPOTfidqUzcKeNVgP4PG+0+g7ZSpmvV6sH5dWAyhX7welRnnEy/cOWWv2jf5+19SXI/cz4qT6W2UIMHt9Cubu4kXhzPoNMc0ePaQ=
-X-Gm-Message-State: AOJu0Yzyvk5SFLvgImbBBkawx6Wr69kevnTasKi9kQ43V+urbFr7UnV7
-	WIfJZSDRz0VxTKSN/H5x4/ioJgu2aT7bzXePa+/3OaWwNY34a2osQr/77m1FotU=
-X-Google-Smtp-Source: AGHT+IGT3NnjnHd9X0oouBZX33hk8pFTpyFyM+V1o+EOw+IGtUHkSyasUXrVcfyfdl3dvCH6VgD+zg==
-X-Received: by 2002:adf:e648:0:b0:357:40e8:e574 with SMTP id ffacd0b85a97d-35740e8e60amr7150400f8f.37.1716958292268;
-        Tue, 28 May 2024 21:51:32 -0700 (PDT)
-Message-ID: <506f4ebe-50de-433b-8d06-9d2ceddde600@linaro.org>
-Date: Wed, 29 May 2024 06:51:29 +0200
+X-Inumbo-ID: 14852e35-1d79-11ef-90a1-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=zW0EkOuxIkEXAr+kUSNAXR4zW6yla1v+V3lES4DaK0U=; b=JV2Lk341hcuT/7Vl5ccbx6rEF4
+	LSvvlB9GQx61zLW6Ek9rMBriZIqorh2yE6n19JvBK8pX9/bCGIKdK8ZSpyJEO6QCmV4FTj9dJx9ct
+	2mmqIL366QPU6zYx5zGQSrSTnDBwzdEgAuHzVnaP8EbOoN2JW7yLhrxCvxx4q95t/vZOmQ/fs/cKy
+	Hwkml4dg7O0d9si4j5qAHqQU/FbHR3FB0PuKk8zFIIWsEMD/MnhlQRi1PZcYYk0TFsmHCcsFDcNLx
+	/+4Z/3TAjBBZlqT2hEMfDtWsLUrRt4XNvmIyqd0q1bw8vLAqtevVrvfYTv+SnaOzLd/GwgYDhosg1
+	p2ZtR9BA==;
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>
+Cc: Richard Weinberger <richard@nod.at>,
+	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Ilya Dryomov <idryomov@gmail.com>,
+	Dongsheng Yang <dongsheng.yang@easystack.cn>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	linux-um@lists.infradead.org,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	ceph-devel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-scsi@vger.kernel.org
+Subject: [PATCH 07/12] sd: factor out a sd_discard_mode helper
+Date: Wed, 29 May 2024 07:04:09 +0200
+Message-ID: <20240529050507.1392041-8-hch@lst.de>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240529050507.1392041-1-hch@lst.de>
+References: <20240529050507.1392041-1-hch@lst.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] hw/xen: Simplify legacy backends handling
-To: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
-Cc: Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Eduardo Habkost
- <eduardo@habkost.net>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Gerd Hoffmann <kraxel@redhat.com>
-References: <20240510104908.76908-1-philmd@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240510104908.76908-1-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-ping?
+Split the logic to pick the right discard mode into a little helper
+to prepare for further changes.
 
-On 10/5/24 12:49, Philippe Mathieu-Daudé wrote:
-> Respin of Paolo's Xen patches from
-> https://lore.kernel.org/qemu-devel/20240509170044.190795-1-pbonzini@redhat.com/
-> rebased on one of my cleanup branches making backend
-> structures const. Treat xenfb as other backends.
-> 
-> Paolo Bonzini (2):
->    hw/xen: initialize legacy backends from xen_bus_init()
->    hw/xen: register legacy backends via xen_backend_init
-> 
-> Philippe Mathieu-Daudé (5):
->    hw/xen: Remove declarations left over in 'xen-legacy-backend.h'
->    hw/xen: Constify XenLegacyDevice::XenDevOps
->    hw/xen: Constify xenstore_be::XenDevOps
->    hw/xen: Make XenDevOps structures const
->    hw/xen: Register framebuffer backend via xen_backend_init()
-> 
->   include/hw/xen/xen-legacy-backend.h | 15 +--------------
->   include/hw/xen/xen_pvdev.h          |  3 +--
->   hw/9pfs/xen-9p-backend.c            |  8 +++++++-
->   hw/display/xenfb.c                  | 15 +++++++++++++--
->   hw/i386/pc.c                        |  1 -
->   hw/usb/xen-usb.c                    | 14 ++++----------
->   hw/xen/xen-bus.c                    |  4 ++++
->   hw/xen/xen-hvm-common.c             |  2 --
->   hw/xen/xen-legacy-backend.c         | 24 ++++--------------------
->   hw/xenpv/xen_machine_pv.c           |  7 +------
->   10 files changed, 35 insertions(+), 58 deletions(-)
-> 
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/scsi/sd.c | 37 ++++++++++++++++++++-----------------
+ 1 file changed, 20 insertions(+), 17 deletions(-)
+
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index 437743e3a0d37d..2d08b69154b995 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -3201,6 +3201,25 @@ static void sd_read_app_tag_own(struct scsi_disk *sdkp, unsigned char *buffer)
+ 	return;
+ }
+ 
++static unsigned int sd_discard_mode(struct scsi_disk *sdkp)
++{
++	if (!sdkp->lbpvpd) {
++		/* LBP VPD page not provided */
++		if (sdkp->max_unmap_blocks)
++			return SD_LBP_UNMAP;
++		return SD_LBP_WS16;
++	}
++
++	/* LBP VPD page tells us what to use */
++	if (sdkp->lbpu && sdkp->max_unmap_blocks)
++		return SD_LBP_UNMAP;
++	if (sdkp->lbpws)
++		return SD_LBP_WS16;
++	if (sdkp->lbpws10)
++		return SD_LBP_WS10;
++	return SD_LBP_DISABLE;
++}
++
+ /**
+  * sd_read_block_limits - Query disk device for preferred I/O sizes.
+  * @sdkp: disk to query
+@@ -3239,23 +3258,7 @@ static void sd_read_block_limits(struct scsi_disk *sdkp)
+ 			sdkp->unmap_alignment =
+ 				get_unaligned_be32(&vpd->data[32]) & ~(1 << 31);
+ 
+-		if (!sdkp->lbpvpd) { /* LBP VPD page not provided */
+-
+-			if (sdkp->max_unmap_blocks)
+-				sd_config_discard(sdkp, SD_LBP_UNMAP);
+-			else
+-				sd_config_discard(sdkp, SD_LBP_WS16);
+-
+-		} else {	/* LBP VPD page tells us what to use */
+-			if (sdkp->lbpu && sdkp->max_unmap_blocks)
+-				sd_config_discard(sdkp, SD_LBP_UNMAP);
+-			else if (sdkp->lbpws)
+-				sd_config_discard(sdkp, SD_LBP_WS16);
+-			else if (sdkp->lbpws10)
+-				sd_config_discard(sdkp, SD_LBP_WS10);
+-			else
+-				sd_config_discard(sdkp, SD_LBP_DISABLE);
+-		}
++		sd_config_discard(sdkp, sd_discard_mode(sdkp));
+ 	}
+ 
+  out:
+-- 
+2.43.0
 
 
