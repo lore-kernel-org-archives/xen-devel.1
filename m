@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87015C25B7C
-	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 19:55:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.732322.1138274 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B892C27C4F
+	for <xen-devel@archiver.kernel.org>; Wed, 29 May 2024 19:55:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.732326.1138320 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCPOJ-0003tX-9V; Wed, 29 May 2024 19:55:19 +0000
+	id 1sCPON-0005Bn-UN; Wed, 29 May 2024 19:55:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 732322.1138274; Wed, 29 May 2024 19:55:19 +0000
+Received: by outflank-mailman (output) from mailman id 732326.1138320; Wed, 29 May 2024 19:55:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCPOJ-0003sM-42; Wed, 29 May 2024 19:55:19 +0000
-Received: by outflank-mailman (input) for mailman id 732322;
- Wed, 29 May 2024 19:55:17 +0000
+	id 1sCPON-0005B5-Q0; Wed, 29 May 2024 19:55:23 +0000
+Received: by outflank-mailman (input) for mailman id 732326;
+ Wed, 29 May 2024 19:55:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DI5e=NA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sCPOH-0003Nf-DS
- for xen-devel@lists.xenproject.org; Wed, 29 May 2024 19:55:17 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
+ id 1sCPOK-0003Nf-77
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2024 19:55:20 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5ef92ff7-1df5-11ef-90a1-e314d9c70b13;
- Wed, 29 May 2024 21:55:16 +0200 (CEST)
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-529b79609cbso173149e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 12:55:16 -0700 (PDT)
+ id 60881d7a-1df5-11ef-90a1-e314d9c70b13;
+ Wed, 29 May 2024 21:55:19 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-52a6ef5e731so236760e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2024 12:55:19 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5297066b249sm1344203e87.178.2024.05.29.12.55.15
+ 2adb3069b0e04-5297066b249sm1344203e87.178.2024.05.29.12.55.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 12:55:15 -0700 (PDT)
+ Wed, 29 May 2024 12:55:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ef92ff7-1df5-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 60881d7a-1df5-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717012516; x=1717617316; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1717012519; x=1717617319; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=h3OBfOym5W7zP/NOzLdy/wTYIWbuyzij9mGpUhq8jn8=;
-        b=FXOMKagBdb7WBn+WKoaoOCl3NTDtgwaYgcP/t2jk/vaIqJx0mgssV5tsMsOHSNj5+r
-         6hKjE4djiOUkCVb3ZcL8/K9vdZWtZAKmmQTEz6DpjNusjCvAoerw61Hbl19ytQRGNvRQ
-         nOsyzWt4KA4feEQf3W9Sze3v5v3CBVjSRkcZAKDxDoJ6iOQB9et0Rq+v4ZS/EkSKZl3l
-         c5Vgbo9+8GVVVejgGqxBKShA4c4tM2AbhOQZfMbdrlxStcZ5+S0NLEPFv570TY5EsSvs
-         v5GkEDgPnnLl7yItr6Ds7JshotbqkN1UBSnLncPh3dyj02qoN9+xZgWWAUqZ5vBqP73Q
-         XLiQ==
+        bh=RB69PkHLC0P/c7KJEa2nAcuiiLx+QigdAnc7qWzg1l4=;
+        b=ZdoiPYve5Ig14vbzHhUPSfvKDnbmzOTLlhgqdc1YrraXzJPtpQS+5GPILCstLUNt86
+         cgn3RgnwNicgPagmprQQPqZzBZ1Uv8iVaMwX9o5yoBgEdaaQUmt0cy2NLg4+GGp4xaZW
+         POJIYT15Y8jzWwBzc9XgOvRXGCIvCqxun+6BPG0AhM9QEzWf2KHDDUxpDiJWquGfkOnY
+         g9HCIlvRAsnvkuuajWz5ZhIIYdoGkZ9oHIV/wxzyvBOQMANbW+LmdjnWhUcPsf8TJAAp
+         iBUSTn0XD7c6uH3W0fCKi5GzkYD6xg5CJ67t5QdxQy0QwzxCeMWITS60YmNx9IQBZfvl
+         +5Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717012516; x=1717617316;
+        d=1e100.net; s=20230601; t=1717012519; x=1717617319;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=h3OBfOym5W7zP/NOzLdy/wTYIWbuyzij9mGpUhq8jn8=;
-        b=Z0ZZdRN50W+xs5/y8py/Meh0yfcvs7H7lRSKgFcd3W8YI60klAbvksdXjixZLQsFKs
-         uKu6kvPMQz/aVwIH55OnhL8MIXWU0a20Npj6cwyNjjlMOORS518k8A0WtRRyHSrnubbM
-         Qp52pqAO3NVpj/hIL9/7ol//wpi/PEqkT66KZblClUfFoa8RbDsI9qF7Tw8i+rI2ivS0
-         U+4TdeniShfSZ6/ykV7qXcZJoKZC+wKB4anS0Fmhf8CkS1ssCJZiuxd1KbmCG4jDCNjZ
-         H3Gyo3ZfUUvmEGYnbwRm3rjlKGPDh6QyM8cU++g7Cc9N0sBFEicffXRajNspoNpQpo++
-         euiw==
-X-Gm-Message-State: AOJu0YwyyDeKXVgxnsL+mIxkcybcCjhfnAomUcKetK+FMCQLNtjo+m1x
-	9vhcIoq3a/F6qQbN1bDudeXPYdnJkfVdmJgrZxnFgww/4IDqSgHA9Da/NmkP
-X-Google-Smtp-Source: AGHT+IF8TRHBMLnG7vbLddBJSm+lXJuXkNyuIx+55aDyvR4lh964SVdEQEN1swQiiL5CcERQAR3igQ==
-X-Received: by 2002:ac2:5f08:0:b0:52b:797f:b21f with SMTP id 2adb3069b0e04-52b7d47a923mr117416e87.51.1717012516270;
-        Wed, 29 May 2024 12:55:16 -0700 (PDT)
+        bh=RB69PkHLC0P/c7KJEa2nAcuiiLx+QigdAnc7qWzg1l4=;
+        b=KrGQfEyzqiMKNiMI0bMd8ySwK+JHX7y5GZh2s8eQReW/GrSyFcRpFzq53nARJ46LoQ
+         lIF10gpnABILlhIYUodtxmZ3Bc9AyjcF6uJAX62WWn7A+KAybT2BNz1eM00WblePQIoD
+         AUPMsMmbg/OFUkF+sXKPTAYcA6OP6WVr5uC7hp4JCoVyuwWfM3O5DgpLgMqdAWuETJ0g
+         uX9eiTIjsyBDneREGVzWxwhyEB4d55r6lm2cbm4uMFcvzKxdfvM9eUli8vTMo8FGnZR6
+         nZvYgaF8YHeY/VivaDlngviTj6nPT2xfk5tq+5IOg1TOU90GGxFSaUAadtbZ7na/3XCF
+         FCjQ==
+X-Gm-Message-State: AOJu0YzJA4gDaCXYZ4RqhBfPNtSVnSebHxpSsJZ++2H6A+XjlDW89RJV
+	D7ahh1cWYpD9R9EcP5SGw1/54YwUFYUoByUuZm7FRriYqwS4HVPDg3hC/B8U
+X-Google-Smtp-Source: AGHT+IEdszj2ogMZI1dkrwdXUnmCfQoc81L+BYRLNYf+UmK0Mq/P+Qp3C8Sbi01ORtNa1IAloSaJmg==
+X-Received: by 2002:a05:6512:358f:b0:51d:1002:520d with SMTP id 2adb3069b0e04-52b7d4905b8mr101793e87.64.1717012518832;
+        Wed, 29 May 2024 12:55:18 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -87,59 +87,301 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v12 4/8] xen/riscv: add definition of __read_mostly
-Date: Wed, 29 May 2024 21:55:05 +0200
-Message-ID: <b93a0eab949f49d2977a3358b6c6c940b8028f4d.1717008161.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v12 7/8] xen/riscv: enable full Xen build
+Date: Wed, 29 May 2024 21:55:08 +0200
+Message-ID: <1cea913117f771a5f3b4404d7bfb7e1329f3f38e.1717008161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <cover.1717008161.git.oleksii.kurochko@gmail.com>
 References: <cover.1717008161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The definition of __read_mostly should be removed in:
-https://lore.kernel.org/xen-devel/f25eb5c9-7c14-6e23-8535-2c66772b333e@suse.com/
-
-The patch introduces it in arch-specific header to not
-block enabling of full Xen build for RISC-V.
-
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-- [PATCH] move __read_mostly to xen/cache.h  [2]
-
-Right now, the patch series doesn't have a direct dependency on [2] and it
-provides __read_mostly in the patch:
-    [PATCH v3 26/34] xen/riscv: add definition of __read_mostly
-However, it will be dropped as soon as [2] is merged or at least when the
-final version of the patch [2] is provided.
-
-Considering that there is still no still final decision regarding patch [2] my suggestion
-is to merge RISC-V specific patch and just drop the changes in patch [2].
-
-[2] https://lore.kernel.org/xen-devel/f25eb5c9-7c14-6e23-8535-2c66772b333e@suse.com/
+ At least this patch cann't be merged w/o Andrew's patch series is merged as ffs related
+ functions are used from that patch series:
+  https://lore.kernel.org/xen-devel/20240313172716.2325427-1-andrew.cooper3@citrix.com/T/#t
 ---
-Changes in V9-V12:
- - Only rebase was done.
+Changes in V5-V12:
+ - Nothing changed. Only rebase.
+ - Add the footer after Signed-off section.
 ---
-Change in V8:
- - update the footer after Signed-off.
+Changes in V4:
+ - drop stubs for irq_actor_none() and irq_actor_none() as common/irq.c is compiled now.
+ - drop defintion of max_page in stubs.c as common/page_alloc.c is compiled now.
+ - drop printk() related changes in riscv/early_printk.c as common version will be used.
 ---
-Changes in V4-V7:
+Changes in V3:
+ - Reviewed-by: Jan Beulich <jbeulich@suse.com>
+ - unrealted change dropped in tiny64_defconfig
+---
+Changes in V2:
  - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/cache.h | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/arch/riscv/Makefile       |  16 +++-
+ xen/arch/riscv/arch.mk        |   4 -
+ xen/arch/riscv/early_printk.c | 168 ----------------------------------
+ xen/arch/riscv/stubs.c        |  24 -----
+ 4 files changed, 15 insertions(+), 197 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/cache.h b/xen/arch/riscv/include/asm/cache.h
-index 69573eb051..94bd94db53 100644
---- a/xen/arch/riscv/include/asm/cache.h
-+++ b/xen/arch/riscv/include/asm/cache.h
-@@ -3,4 +3,6 @@
- #ifndef _ASM_RISCV_CACHE_H
- #define _ASM_RISCV_CACHE_H
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 60afbc0ad9..81b77b13d6 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -12,10 +12,24 @@ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
  
-+#define __read_mostly __section(".data.read_mostly")
-+
- #endif /* _ASM_RISCV_CACHE_H */
+ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) -o $@
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(objtree)/common/symbols-dummy.o -o $(dot-target).0
++	$(NM) -pa --format=sysv $(dot-target).0 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).0.S
++	$(MAKE) $(build)=$(@D) $(dot-target).0.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(dot-target).0.o -o $(dot-target).1
++	$(NM) -pa --format=sysv $(dot-target).1 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).1.S
++	$(MAKE) $(build)=$(@D) $(dot-target).1.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
++	    $(dot-target).1.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
+ 		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		> $@.map
++	rm -f $(@D)/.$(@F).[0-9]*
+ 
+ $(obj)/xen.lds: $(src)/xen.lds.S FORCE
+ 	$(call if_changed_dep,cpp_lds_S)
+diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
+index 8c071aff65..17827c302c 100644
+--- a/xen/arch/riscv/arch.mk
++++ b/xen/arch/riscv/arch.mk
+@@ -38,7 +38,3 @@ extensions := $(subst $(space),,$(extensions))
+ # -mcmodel=medlow would force Xen into the lower half.
+ 
+ CFLAGS += $(riscv-generic-flags)$(extensions) -mstrict-align -mcmodel=medany
+-
+-# TODO: Drop override when more of the build is working
+-override ALL_OBJS-y = arch/$(SRCARCH)/built_in.o
+-override ALL_LIBS-y =
+diff --git a/xen/arch/riscv/early_printk.c b/xen/arch/riscv/early_printk.c
+index 60742a042d..610c814f54 100644
+--- a/xen/arch/riscv/early_printk.c
++++ b/xen/arch/riscv/early_printk.c
+@@ -40,171 +40,3 @@ void early_printk(const char *str)
+         str++;
+     }
+ }
+-
+-/*
+- * The following #if 1 ... #endif should be removed after printk
+- * and related stuff are ready.
+- */
+-#if 1
+-
+-#include <xen/stdarg.h>
+-#include <xen/string.h>
+-
+-/**
+- * strlen - Find the length of a string
+- * @s: The string to be sized
+- */
+-size_t (strlen)(const char * s)
+-{
+-    const char *sc;
+-
+-    for (sc = s; *sc != '\0'; ++sc)
+-        /* nothing */;
+-    return sc - s;
+-}
+-
+-/**
+- * memcpy - Copy one area of memory to another
+- * @dest: Where to copy to
+- * @src: Where to copy from
+- * @count: The size of the area.
+- *
+- * You should not use this function to access IO space, use memcpy_toio()
+- * or memcpy_fromio() instead.
+- */
+-void *(memcpy)(void *dest, const void *src, size_t count)
+-{
+-    char *tmp = (char *) dest, *s = (char *) src;
+-
+-    while (count--)
+-        *tmp++ = *s++;
+-
+-    return dest;
+-}
+-
+-int vsnprintf(char* str, size_t size, const char* format, va_list args)
+-{
+-    size_t i = 0; /* Current position in the output string */
+-    size_t written = 0; /* Total number of characters written */
+-    char* dest = str;
+-
+-    while ( format[i] != '\0' && written < size - 1 )
+-    {
+-        if ( format[i] == '%' )
+-        {
+-            i++;
+-
+-            if ( format[i] == '\0' )
+-                break;
+-
+-            if ( format[i] == '%' )
+-            {
+-                if ( written < size - 1 )
+-                {
+-                    dest[written] = '%';
+-                    written++;
+-                }
+-                i++;
+-                continue;
+-            }
+-
+-            /*
+-             * Handle format specifiers.
+-             * For simplicity, only %s and %d are implemented here.
+-             */
+-
+-            if ( format[i] == 's' )
+-            {
+-                char* arg = va_arg(args, char*);
+-                size_t arglen = strlen(arg);
+-
+-                size_t remaining = size - written - 1;
+-
+-                if ( arglen > remaining )
+-                    arglen = remaining;
+-
+-                memcpy(dest + written, arg, arglen);
+-
+-                written += arglen;
+-                i++;
+-            }
+-            else if ( format[i] == 'd' )
+-            {
+-                int arg = va_arg(args, int);
+-
+-                /* Convert the integer to string representation */
+-                char numstr[32]; /* Assumes a maximum of 32 digits */
+-                int numlen = 0;
+-                int num = arg;
+-                size_t remaining;
+-
+-                if ( arg < 0 )
+-                {
+-                    if ( written < size - 1 )
+-                    {
+-                        dest[written] = '-';
+-                        written++;
+-                    }
+-
+-                    num = -arg;
+-                }
+-
+-                do
+-                {
+-                    numstr[numlen] = '0' + num % 10;
+-                    num = num / 10;
+-                    numlen++;
+-                } while ( num > 0 );
+-
+-                /* Reverse the string */
+-                for (int j = 0; j < numlen / 2; j++)
+-                {
+-                    char tmp = numstr[j];
+-                    numstr[j] = numstr[numlen - 1 - j];
+-                    numstr[numlen - 1 - j] = tmp;
+-                }
+-
+-                remaining = size - written - 1;
+-
+-                if ( numlen > remaining )
+-                    numlen = remaining;
+-
+-                memcpy(dest + written, numstr, numlen);
+-
+-                written += numlen;
+-                i++;
+-            }
+-        }
+-        else
+-        {
+-            if ( written < size - 1 )
+-            {
+-                dest[written] = format[i];
+-                written++;
+-            }
+-            i++;
+-        }
+-    }
+-
+-    if ( size > 0 )
+-        dest[written] = '\0';
+-
+-    return written;
+-}
+-
+-void printk(const char *format, ...)
+-{
+-    static char buf[1024];
+-
+-    va_list args;
+-    va_start(args, format);
+-
+-    (void)vsnprintf(buf, sizeof(buf), format, args);
+-
+-    early_printk(buf);
+-
+-    va_end(args);
+-}
+-
+-#endif
+-
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index 8285bcffef..bda35fc347 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -24,12 +24,6 @@ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_core_mask);
+ 
+ nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
+ 
+-/*
+- * max_page is defined in page_alloc.c which isn't complied for now.
+- * definition of max_page will be remove as soon as page_alloc is built.
+- */
+-unsigned long __read_mostly max_page;
+-
+ /* time.c */
+ 
+ unsigned long __ro_after_init cpu_khz;  /* CPU clock frequency in kHz. */
+@@ -419,21 +413,3 @@ void __cpu_die(unsigned int cpu)
+ {
+     BUG_ON("unimplemented");
+ }
+-
+-/*
+- * The following functions are defined in common/irq.c, but common/irq.c isn't
+- * built for now. These changes will be removed there when common/irq.c is
+- * ready.
+- */
+-
+-void cf_check irq_actor_none(struct irq_desc *desc)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+-unsigned int cf_check irq_startup_none(struct irq_desc *desc)
+-{
+-    BUG_ON("unimplemented");
+-
+-    return 0;
+-}
 -- 
 2.45.0
 
