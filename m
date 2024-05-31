@@ -4,37 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B9DC25B75
-	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2024 11:40:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.733669.1139977 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81330C25B75
+	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2024 11:55:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.733667.1139987 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sD0c9-0002Yp-LF; Fri, 31 May 2024 11:40:05 +0000
+	id 1sD0r1-0005Eb-Td; Fri, 31 May 2024 11:55:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 733669.1139977; Fri, 31 May 2024 11:40:05 +0000
+Received: by outflank-mailman (output) from mailman id 733667.1139987; Fri, 31 May 2024 11:55:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sD0c9-0002YM-I9; Fri, 31 May 2024 11:40:05 +0000
-Received: by outflank-mailman (input) for mailman id 733669;
- Fri, 31 May 2024 11:40:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sD0r1-0005EU-QS; Fri, 31 May 2024 11:55:27 +0000
+Received: by outflank-mailman (input) for mailman id 733667;
+ Fri, 31 May 2024 11:38:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xPZo=NC=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1sD0c8-0002Ae-0n
- for xen-devel@lists.xenproject.org; Fri, 31 May 2024 11:40:04 +0000
-Received: from wfout1-smtp.messagingengine.com
- (wfout1-smtp.messagingengine.com [64.147.123.144])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 837edcfa-1f42-11ef-90a1-e314d9c70b13;
- Fri, 31 May 2024 13:40:02 +0200 (CEST)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.west.internal (Postfix) with ESMTP id 18F651C00224;
- Fri, 31 May 2024 07:39:59 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Fri, 31 May 2024 07:39:59 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 31 May 2024 07:39:56 -0400 (EDT)
+ <SRS0=FQNi=NC=samsung.com=nj.shetty@srs-se1.protection.inumbo.net>)
+ id 1sD0aE-0001ZQ-06
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2024 11:38:06 +0000
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 39a5e14f-1f42-11ef-b4bb-af5377834399;
+ Fri, 31 May 2024 13:37:59 +0200 (CEST)
+Received: from epcas5p3.samsung.com (unknown [182.195.41.41])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20240531113755epoutp03fc728a1c21586f57d87e19a419a7b2e9~Uj86mlAlA2987829878epoutp034
+ for <xen-devel@lists.xenproject.org>; Fri, 31 May 2024 11:37:55 +0000 (GMT)
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas5p2.samsung.com (KnoxPortal) with ESMTP id
+ 20240531113755epcas5p271b8ac6d7e7f1402241b70b4a7ee73b2~Uj86NVzG_2148421484epcas5p2O;
+ Fri, 31 May 2024 11:37:55 +0000 (GMT)
+Received: from epsmges5p2new.samsung.com (unknown [182.195.38.179]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4VrLhd3fPBz4x9Q0; Fri, 31 May
+ 2024 11:37:53 +0000 (GMT)
+Received: from epcas5p2.samsung.com ( [182.195.41.40]) by
+ epsmges5p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ CD.E9.09989.196B9566; Fri, 31 May 2024 20:37:53 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas5p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20240531110559epcas5p1f41d7d904ed46260837c38a57fa32d86~UjhCSqWw21511815118epcas5p1x;
+ Fri, 31 May 2024 11:05:59 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20240531110559epsmtrp2e32c4ef6effff2d97c7dd8e4c00c8f46~UjhCRz5O50896008960epsmtrp2m;
+ Fri, 31 May 2024 11:05:59 +0000 (GMT)
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ C0.22.07412.71FA9566; Fri, 31 May 2024 20:05:59 +0900 (KST)
+Received: from nj.shetty?samsung.com (unknown [107.99.41.245]) by
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20240531110557epsmtip1d7d4153c068ec15012f898a1f6bb80b2~Ujg-zJJlx1968819688epsmtip1t;
+ Fri, 31 May 2024 11:05:56 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,164 +67,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 837edcfa-1f42-11ef-90a1-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1717155598;
-	 x=1717241998; bh=PtyDoQ5hXIUw/iYJcJ0Fd/M4Ak5wsByW/SqcYzEaX/Y=; b=
-	FjH2Uz3gFWVXntIWh/tFZBVsB0yZQpEIbnBJhHlm1tquzjcFOWQZ8GhzHLnZwWZl
-	dsDpue7nhFXqpRYtUro9P+UsNWaRqOkwqi/a2ZCKySflULqAEFVgc8yqEi6+ylAL
-	OfTrpBk0zC4h/suma/SjgbZ68T3S8luD+K4H5+bvWb9wEgZf85/4eOrU0ny1FyTo
-	hL/Ey8gMbRl0XpbWVf3yUuOlxOJ8o0zpA1uWCGssynrELZYev0Mv54ly3X2UGqcN
-	FC1AXz1pz/hCjQGzV3n6TShkNzD9VCwLowPRzLMEu8JpieHy2TvuhjTQUxOHR+74
-	7UBnD+l5Kl9ReUBmN6rc0w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1717155598; x=1717241998; bh=PtyDoQ5hXIUw/iYJcJ0Fd/M4Ak5w
-	sByW/SqcYzEaX/Y=; b=kfJ8r3d/HPvq4TDMlUmxkVw9c2uiVJI0N2aPLS9bhGP0
-	YWpu92UeJ1P1AXC+bPM+OjO93kzWjiGZAgq2gcY/X8PDbZ3nwxFTgTs+WxccKI7S
-	uIESJ4vlDgqgyGuDcmxhAj+QIJ0Zo9m1ok/8qOLfwohjtWmeeTLLBYvYgmWhINly
-	7PJEm016mXft6bsFhvQc0j52y9oNYKZxPovYusbcDxq7jZCioguDGYFpiceB8W4n
-	D9cnoKAo/tZGnIXQcepg0zhGmfEDUvMPtnNzVvgtnT7QqPlrSgCRt/XWgsItY4IP
-	/P4cTD9gMgxluTG0IAHtyojvDldnwZqGL4BHxlsJQA==
-X-ME-Sender: <xms:DrdZZmSoj_HAULYl5hfZn-cZwWNceuMbp88tqPlvwzGpjyfW-l_7uQ>
-    <xme:DrdZZrymmic_iJ2jENfSlgp-mptBh-lXj6RAAd61moqF36DCmPbHTDecELUjOlvS4
-    5guYjNs6hpPTQ>
-X-ME-Received: <xmr:DrdZZj0-VoP8NyDw0aAF23RwhRukJDplFiQZ35yD2NKQae61IGlEz5erO0I>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdekiedggeduucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgv
-    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
-    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfdu
-    leetfeevhfefheeiteeliefhjefhleduveetteekveettddvgeeuteefjedunecuvehluh
-    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
-    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:DrdZZiC6wvK-z-wSibhxhty8VYeGSdt2xiozSxmRdGvzxuUX59ONwA>
-    <xmx:DrdZZvjD5eGZLkfgS-Ecl8J5vsZe3v6sRxx7wiVUz0u-ZdeJ3IiXTA>
-    <xmx:DrdZZurca9YnRObjruZwF6g5yu5ZfeCuIZxdBfj8i3yi8Fu8ML4tdA>
-    <xmx:DrdZZijdvDrdFXLtRZLZ6WwPXrY4WEIAN1DuNCmAJEWzHRvfotztoA>
-    <xmx:DrdZZlYRF1_gY_Arfhaojkz3wMRa2xma2m8EBRLbdbePdu9ADLc44Y8f>
-Feedback-ID: i1568416f:Fastmail
-Date: Fri, 31 May 2024 13:39:54 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Xen-devel <xen-devel@lists.xenproject.org>,
+X-Inumbo-ID: 39a5e14f-1f42-11ef-b4bb-af5377834399
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com 20240531113755epoutp03fc728a1c21586f57d87e19a419a7b2e9~Uj86mlAlA2987829878epoutp034
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1717155475;
+	bh=Y0VkJe20fMinBlmQK31o7n10A9UqotHuj7Gyw5qxaTQ=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=sRleW/KoTf36lPqWsVssBbgWRUwgJKB+m6Dbwqh+uMUhgrg0M4BXwNNDnk/cUHi8I
+	 iVmL+eUijzT1lGesNcZ4YRq1L/gz8j6q81Q/1LsogkscxitQG3Bi/mzIOAm2DtjXXu
+	 lU0IBsv3w3WhomYH3Tr5N8omlXy2FkNMIAVlKOsQ=
+X-AuditID: b6c32a4a-e57f970000002705-ed-6659b69163db
+Date: Fri, 31 May 2024 10:58:56 +0000
+From: Nitesh Shetty <nj.shetty@samsung.com>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, "Martin K. Petersen"
+	<martin.petersen@oracle.com>, Richard Weinberger <richard@nod.at>, Anton
+	Ivanov <anton.ivanov@cambridgegreys.com>, Johannes Berg
+	<johannes@sipsolutions.net>, Josef Bacik <josef@toxicpanda.com>, Ilya
+	Dryomov <idryomov@gmail.com>, Dongsheng Yang <dongsheng.yang@easystack.cn>,
 	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH 1/3] CI: Remove CI_COMMIT_REF_PROTECTED requirement for
- HW jobs
-Message-ID: <Zlm3CwgwccpPU4f6@mail-itl>
-References: <20240529141945.41669-1-andrew.cooper3@citrix.com>
- <20240529141945.41669-2-andrew.cooper3@citrix.com>
- <ZlfHh_blx1i0eE7O@mail-itl>
- <alpine.DEB.2.22.394.2405301715010.2557291@ubuntu-linux-20-04-desktop>
+	linux-um@lists.infradead.org, linux-block@vger.kernel.org,
+	nbd@other.debian.org, ceph-devel@vger.kernel.org,
+	xen-devel@lists.xenproject.org, linux-scsi@vger.kernel.org, Bart Van Assche
+	<bvanassche@acm.org>, Damien Le Moal <dlemoal@kernel.org>
+Subject: Re: [PATCH 14/14] block: add special APIs for run-time disabling of
+ discard and friends
+Message-ID: <20240531105856.nkr2gbyhwbzoqycs@nj.shetty@samsung.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="0qbZMnV+fSlTWEii"
+In-Reply-To: <20240531074837.1648501-15-hch@lst.de>
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Te0xTdxT2d297ubCUXSrLfmBk7CrJxAAtj3oxPOYg5G4QJFM3N3R4pZe2
+	AdquD3FbNmDYOFh4yQbYMKaB8aiCWh6BkYYNRcTBWATH6CaCkaDAttYyCI/BWloW//vOd74v
+	J985OTjKX8J8cZlcw6rkTBaJeXA6b+57Lai8870MQdcjb2qh+gaHuvKgFKMqLSsoZZm4gFBT
+	vbFUZe0YoJqv9CPUw9rzGGW9/oxDrU8LKZN5P/XleBdGFRuSqMaBDYRam2lBqIruBUBVj9Rx
+	qeX2CuR1Pj06lkjPNjeg9HxFGaB1HS/Q3foHbvTosJY2Ggoxuq0+l75pGePQPRN5GD1R+yFt
+	nTFz6PtLBShdWtzJocvabnBpm9EvhXg/M0rKMmJW5c/K0xVimVwSTSYeSYtLixAJhEHCSOoA
+	6S9nstloMj4pJShBlmXPSvqfYbK0diqFUavJkJgolUKrYf2lCrUmmmSV4ixluDJYzWSrtXJJ
+	sJzVHBQKBKERduGpTOm9tUU3ZQd+1tzyI8gDdW5FwB2HRDhsGOzhFgEPnE/0AJjf0w+cxTMA
+	68yDbs5iCcDvikeQbYt1sszVMAF4a7KF4yxsAG7038YcKg4RAKe6yu0NHMeI/fCnTdxBexMk
+	nJkb3hqBEjoufLo4t6XfSZyG1k0T16HnEXGwseqQg+YRXnDw4mOOA7sTYdBQv7g1CxLn3eG5
+	yT9dIeJhd9VVrhPvhHMD7S7eF9r+MmFOnAObv2rCnOZzAOrH9cDZiIW6u6WoA6OEFFavXXaZ
+	d8Ov77YiTt4TFq89dsXnwa7abbwHXr12yTXAB/66nO/CNLTMr6LOrbQCeN1QgZQBP/1zifTP
+	zXPig7DQ8jlXb18ASuyCjRu4E+6D174PuQS4BuDDKtXZElYdoQyVszn/nzldkW0EWw8Q+FYX
+	mJ6yBPcBBAd9AOIo6c1blRzP4PPEzEcfsypFmkqbxar7QIT9QOWo70vpCvsHyTVpwvBIQbhI
+	JAqPDBMJyZd587pvxHxCwmjYTJZVsqptH4K7++YhHSer3wno4e0eHD42qes13DF278DiUh8N
+	FwR85hXvY17dADtqPrgvMY28KZAFno2KzIz9Q2+NIzMSjtj89giDE6QPiW9tu4zJMo+qA9MT
+	fUdVw/+shsyOHq3R1jwdvNcEBfxjo0MliYrb3XkrQqlR2LhUkJBSWKFV0L/s1Yz//vfpIpnn
+	cVHUiaaYn9enSwrMVP18v2IZv3PSo58lLlcmLOTWVVvnRg79+8OpTzdtQ8FjI7Nvn3j1iwut
+	mDwsp3DtE8+2lVtuTKpgInkqKWAgn3fxTC5oafCDEbNPyqPEpld6X0z+bTT2yfpsUGP74VDZ
+	u/mrlqCSN1K1GUO6wJgNr0WSo5YywkBUpWb+Axp6BGqJBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCIsWRmVeSWpSXmKPExsWy7bCSnK74+sg0g/P7lS3ezNjIYrH6bj+b
+	xbQPP5ktPtycxGTxYL+9xbR5VxgtVq4+ymRxf147m8XHDZ9YLP48NLTYe0vbovv6DjaL3lU+
+	FsuP/2Oy+P10LZPF5J1vGC1mnF/MavF9y2QmByGPy1e8PZ6vXMbs8XryBEaP1q3cHjtn3WX3
+	uHy21GPTqk42j81L6j0Of7jC4rH7ZgObx815hR4fn95i8bj6rZnZo793G4vHhM0bWT0+b5IL
+	EIjisklJzcksSy3St0vgyni1eC1jwXPWiua1U5kbGN+zdDFyckgImEh8vDeBvYuRi0NIYDej
+	xKknx9khEpISy/4eYYawhSVW/nsOVfSRUaJ54XuwBIuAqsSDHROBJnFwsAloS5z+zwESFhFQ
+	knj66iwjSD2zQC+rxOIfP9hAEsICSRIf/+9lBannFXCWWD7dEcQUEoiSmHKID6SCV0BQ4uTM
+	J2C3MQuYSczb/JAZpIRZQFpi+T+w6ZwCxhKrlnxhmcAoMAtJxywkHbMQOhYwMq9ilEwtKM5N
+	z002LDDMSy3XK07MLS7NS9dLzs/dxAiOWC2NHYz35v/TO8TIxMF4iFGCg1lJhPdXekSaEG9K
+	YmVValF+fFFpTmrxIUZpDhYlcV7DGbNThATSE0tSs1NTC1KLYLJMHJxSDUyKXO06JsGVEbsN
+	/lRpNHncfb3f3UvXvv7y/cfXXtyZrC3Q9fFlgfhNZy1ds+drd0Zrs5s/62esPHHEVoJ1Edu7
+	DxGTz4mfKVtYVp1fNneh4IZtJW9WV76yneTVHmvScyg41//yK91jFUwRYo2mYamCkuxKZuoW
+	Ly3mMSquWMZR8CnJvZz3AEfBbNZix1bD/XEpwYLT+p4Xm788eOvjNO4Fisb3+Tj2vSvOYCgr
+	Lz9iLqTsdJE/hq+q6m3zx7LYVakVfPU56iVxyql7Jnn/3yKkf0a65FdYWJtTw8m7Jxdav9bJ
+	Pfpo9+b7x9N/z3Sr4Ez1zOebG9xpzS6n4tXvfshMLlHSif/fmSeqZRxKLMUZiYZazEXFiQDh
+	esZKRwMAAA==
+X-CMS-MailID: 20240531110559epcas5p1f41d7d904ed46260837c38a57fa32d86
+X-Msg-Generator: CA
+Content-Type: multipart/mixed;
+	boundary="----Fualeei1.f5fhWGYL679EBd0hH5-OLgtfrOtH6wInDZGwDEe=_482db_"
+X-Sendblock-Type: REQ_APPROVE
+CMS-TYPE: 105P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240531110559epcas5p1f41d7d904ed46260837c38a57fa32d86
+References: <20240531074837.1648501-1-hch@lst.de>
+	<20240531074837.1648501-15-hch@lst.de>
+	<CGME20240531110559epcas5p1f41d7d904ed46260837c38a57fa32d86@epcas5p1.samsung.com>
+
+------Fualeei1.f5fhWGYL679EBd0hH5-OLgtfrOtH6wInDZGwDEe=_482db_
+Content-Type: text/plain; charset="utf-8"; format="flowed"
 Content-Disposition: inline
-In-Reply-To: <alpine.DEB.2.22.394.2405301715010.2557291@ubuntu-linux-20-04-desktop>
+
+On 31/05/24 09:48AM, Christoph Hellwig wrote:
+>A few drivers optimistically try to support discard, write zeroes and
+>secure erase and disable the features from the I/O completion handler
+>if the hardware can't support them.  This disable can't be done using
+>the atomic queue limits API because the I/O completion handlers can't
+>take sleeping locks or freeze the queue.  Keep the existing clearing
+>of the relevant field to zero, but replace the old blk_queue_max_*
+>APIs with new disable APIs that force the value to 0.
+>
+>Signed-off-by: Christoph Hellwig <hch@lst.de>
+>Reviewed-by: Bart Van Assche <bvanassche@acm.org>
+>Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
+>---
+Reviewed-by: Nitesh Shetty <nj.shetty@samsung.com>
+
+------Fualeei1.f5fhWGYL679EBd0hH5-OLgtfrOtH6wInDZGwDEe=_482db_
+Content-Type: text/plain; charset="utf-8"
 
 
---0qbZMnV+fSlTWEii
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 31 May 2024 13:39:54 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Xen-devel <xen-devel@lists.xenproject.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH 1/3] CI: Remove CI_COMMIT_REF_PROTECTED requirement for
- HW jobs
-
-On Thu, May 30, 2024 at 05:43:12PM -0700, Stefano Stabellini wrote:
-> On Thu, 30 May 2024, Marek Marczykowski-G=C3=B3recki wrote:
-> > On Wed, May 29, 2024 at 03:19:43PM +0100, Andrew Cooper wrote:
-> > > This restriction doesn't provide any security because anyone with sui=
-table
-> > > permissions on the HW runners can bypass it with this local patch.
-> > >=20
-> > > Requiring branches to be protected hampers usability of transient tes=
-ting
-> > > branches (specifically, can't delete branches except via the Gitlab U=
-I).
-> > >
-> > > Drop the requirement.
-> > >=20
-> > > Fixes: 746774cd1786 ("automation: introduce a dom0less test run on Xi=
-linx hardware")
-> > > Fixes: 0ab316e7e15f ("automation: add a smoke and suspend test on an =
-Alder Lake system")
-> > > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> >=20
-> > Runners used to be set to run only on protected branches. I think it
-> > isn't the case anymore from what I see, but it needs checking (I don't
-> > see specific settings in all the projects). If it were still the case,
-> > removing variable check would result in jobs forever pending.
->=20
-> Andrew, thank you so much for pointing this out.
->=20
-> I think the idea was that we can specify the individual users with
-> access to protected branches. We cannot add restrictions for unprotected
-> branches. So if we set the gitlab runner to only run protected jobs,
-> then the $CI_COMMIT_REF_PROTECTED check makes sense. Not for security,
-> but to prevent the jobs from getting stuck waiting for a runner that
-> will never arrive.
->=20
-> However, like Marek said, now the gitlab runners don't have the
-> "Protected" check set, so it is all useless :-(
->=20
-> I would prefer to set "Protected" in the gitlab runners settings so that
-> it becomes easier to specify users that can and cannot trigger the jobs.
-
-Owners of subprojects can control branch protection rules, so this
-feature doesn't help with limiting access to runners added to the whole
-group. Qubes runners are not group runners, they are project runners
-added only to select projects.
-
-I don't remember why exactly runners got "protected" disabled, but AFAIR
-there was some issue with that setting.
-
-> Then, we'll need the $CI_COMMIT_REF_PROTECTED check, not for security,
-> but to avoid pipelines getting stuck for unprotected branches.
->=20
-> It is really difficult to restrict users from triggering jobs in other
-> way because they are all automatically added to all subprojects.
->=20
->=20
-> Would you guys be OK if I set "Protected" in the Xilinx and Qubes gitlab
-> runners as soon as possible?
-
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---0qbZMnV+fSlTWEii
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmZZtwsACgkQ24/THMrX
-1yy5+Qf+ICtQHPgXu0IXrYCdZYqHJNc18ypMaNIJKR4Ltj0OF40ylFkEcVSBswnX
-Z6y0ZlJH9D6R8CFgIIpR5rQ0YxIExslDUj2E1KFnluqt6zg3fFN23eDxflYvmI8C
-4O7tEcdDLlB765NAWyCY+CvBvO1yG9xCW0WrkWkKOAwajqYNBUcpVOQ/syhftUnZ
-JWb+ePoPrlwq1bDKqHO7jidmjtGIMdfzt2bbJbR4m70VRb5Zftai0uyjr54p+km0
-omXfL+T5SJRctnUpcH+xS7Z38gjCKaLW29CXXKJiKFJibyhizm345ZD26nXz5ycm
-6tB+eUu7RLxgPCj4JxywV8gi0NVV3A==
-=162x
------END PGP SIGNATURE-----
-
---0qbZMnV+fSlTWEii--
+------Fualeei1.f5fhWGYL679EBd0hH5-OLgtfrOtH6wInDZGwDEe=_482db_--
 
