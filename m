@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863ABC27C4F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE7C7C27C44
 	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2024 07:49:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.733345.1139559 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.733341.1139519 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCx0Z-0005lU-Gq; Fri, 31 May 2024 07:49:03 +0000
+	id 1sCx0V-0004oS-Ew; Fri, 31 May 2024 07:48:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 733345.1139559; Fri, 31 May 2024 07:49:03 +0000
+Received: by outflank-mailman (output) from mailman id 733341.1139519; Fri, 31 May 2024 07:48:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCx0Z-0005lK-D9; Fri, 31 May 2024 07:49:03 +0000
-Received: by outflank-mailman (input) for mailman id 733345;
- Fri, 31 May 2024 07:49:02 +0000
+	id 1sCx0V-0004oL-B7; Fri, 31 May 2024 07:48:59 +0000
+Received: by outflank-mailman (input) for mailman id 733341;
+ Fri, 31 May 2024 07:48:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rv5j=NC=bombadil.srs.infradead.org=BATV+4872a67a45e6d46d0c49+7586+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1sCx0Y-0004o6-7G
- for xen-devel@lists.xenproject.org; Fri, 31 May 2024 07:49:02 +0000
+ id 1sCx0T-0004o6-5E
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2024 07:48:58 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3e4dbefc-1f22-11ef-90a1-e314d9c70b13;
- Fri, 31 May 2024 09:49:01 +0200 (CEST)
+ id 3afb0e0c-1f22-11ef-90a1-e314d9c70b13;
+ Fri, 31 May 2024 09:48:56 +0200 (CEST)
 Received: from
  2a02-8389-2341-5b80-5ba9-f4da-76fa-44a9.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:5ba9:f4da:76fa:44a9] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1sCx0P-00000009XZp-47jk; Fri, 31 May 2024 07:48:54 +0000
+ id 1sCx0C-00000009XUr-41fW; Fri, 31 May 2024 07:48:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3e4dbefc-1f22-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 3afb0e0c-1f22-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Hmvd8CugAGeadU1twTfeSXY4eccQybGsIHGkHL/IkB0=; b=my2INQcFxeQCNvgjmcsLc6Fb75
-	+EFy+S+L2zWGIt2g4BBPXT+zKxxSbEKSxb3tBRS+43v7OGTOfpAaW1jjrvVXj8p6heokqg/3QgPvL
-	cgEBbCQix9cOwyUKFuYg+h5o9MEKJotPtCESJKIwP3xUkAsfSsX/y9a+v4vJDSw3AsL5pT6hLH7Lu
-	GuIXPs5ZW+9cBS0QF0sROYtRVuRTwsPOFFLgXpIrSa2T3CEX1IdFPbiV5seheDqGCLuYFDc6Yd5EF
-	vffvu0LIjnfyd9A6B8PL+fYm3X9czzdyrgWKqx6Sa5+9qR0j+vzU7k6HmdEMljdnNzNPqRFDODR5A
-	UiRrYXYA==;
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=X6ZSIyh1cBG1UFDOkvLStzuDyEP+AFeCGGHYkP7yPXE=; b=wh98NvxtuA1xZGSKFRioyMm51I
+	vrfovyzZnajBqXQQrJzm7vrjL319N5CmN22SqQEH5AWCG3vSYC2Ehtl5dcKGB5JTVnjGnZ5BKPqLM
+	k/8mUprcZcrR0sLsTDn+NROurZ//Aujt8btpgMENtK0/To9YThW/cFbdJDIRSieOZxuCL8t6W/I55
+	BtAv6L1mDU06KnafTVhy4T18Em8h0Ba2Y70K4JL0T5UE87wHrD0U6qXXRuxbTCgayrCNZ2qZ6PffF
+	YrCVgO4qoHmBcSzLnvh4ZzHMZzUuHyvAU4HVYk4J4d95GDSA618ThURvQ6uULdXsoDERjoAsBWfP6
+	qbtPlb0Q==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>,
 	"Martin K. Petersen" <martin.petersen@oracle.com>
@@ -70,140 +70,58 @@ Cc: Richard Weinberger <richard@nod.at>,
 	nbd@other.debian.org,
 	ceph-devel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
-	linux-scsi@vger.kernel.org,
-	Bart Van Assche <bvanassche@acm.org>,
-	Damien Le Moal <dlemoal@kernel.org>
-Subject: [PATCH 04/14] block: take io_opt and io_min into account for max_sectors
-Date: Fri, 31 May 2024 09:47:59 +0200
-Message-ID: <20240531074837.1648501-5-hch@lst.de>
+	linux-scsi@vger.kernel.org
+Subject: convert the SCSI ULDs to the atomic queue limits API v2
+Date: Fri, 31 May 2024 09:47:55 +0200
+Message-ID: <20240531074837.1648501-1-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240531074837.1648501-1-hch@lst.de>
-References: <20240531074837.1648501-1-hch@lst.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-The soft max_sectors limit is normally capped by the hardware limits and
-an arbitrary upper limit enforced by the kernel, but can be modified by
-the user.  A few drivers want to increase this limit (nbd, rbd) or
-adjust it up or down based on hardware capabilities (sd).
+Hi all,
 
-Change blk_validate_limits to default max_sectors to the optimal I/O
-size, or upgrade it to the preferred minimal I/O size if that is
-larger than the kernel default if no optimal I/O size is provided based
-on the logic in the SD driver.
+this series converts the SCSI upper level drivers to the atomic queue
+limits API.
 
-This keeps the existing kernel default for drivers that do not provide
-an io_opt or very big io_min value, but picks a much more useful
-default for those who provide these hints, and allows to remove the
-hacks to set the user max_sectors limit in nbd, rbd and sd.
+The first patch is a bug fix for ubd that later patches depend on and
+might be worth picking up for 6.10.
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
-Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
----
- block/blk-settings.c |  7 +++++++
- drivers/block/nbd.c  |  2 +-
- drivers/block/rbd.c  |  1 -
- drivers/scsi/sd.c    | 29 +++++------------------------
- 4 files changed, 13 insertions(+), 26 deletions(-)
+The second patch changes the max_sectors calculation to take the optimal
+I/O size into account so that sd, nbd and rbd don't have to mess with
+the user max_sector value.  I'd love to see a careful review from the
+nbd and rbd maintainers for this one!
 
-diff --git a/block/blk-settings.c b/block/blk-settings.c
-index effeb9a639bb45..a49abdb3554834 100644
---- a/block/blk-settings.c
-+++ b/block/blk-settings.c
-@@ -153,6 +153,13 @@ static int blk_validate_limits(struct queue_limits *lim)
- 		if (lim->max_user_sectors < PAGE_SIZE / SECTOR_SIZE)
- 			return -EINVAL;
- 		lim->max_sectors = min(max_hw_sectors, lim->max_user_sectors);
-+	} else if (lim->io_opt) {
-+		lim->max_sectors =
-+			min(max_hw_sectors, lim->io_opt >> SECTOR_SHIFT);
-+	} else if (lim->io_min &&
-+		   lim->io_min > (BLK_DEF_MAX_SECTORS_CAP << SECTOR_SHIFT)) {
-+		lim->max_sectors =
-+			min(max_hw_sectors, lim->io_min >> SECTOR_SHIFT);
- 	} else {
- 		lim->max_sectors = min(max_hw_sectors, BLK_DEF_MAX_SECTORS_CAP);
- 	}
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 22a79a62cc4eab..ad887d614d5b3f 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -1808,7 +1808,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- {
- 	struct queue_limits lim = {
- 		.max_hw_sectors		= 65536,
--		.max_user_sectors	= 256,
-+		.io_opt			= 256 << SECTOR_SHIFT,
- 		.max_segments		= USHRT_MAX,
- 		.max_segment_size	= UINT_MAX,
- 	};
-diff --git a/drivers/block/rbd.c b/drivers/block/rbd.c
-index 46dc487ccc17eb..22ad704f81d8b9 100644
---- a/drivers/block/rbd.c
-+++ b/drivers/block/rbd.c
-@@ -4954,7 +4954,6 @@ static int rbd_init_disk(struct rbd_device *rbd_dev)
- 	    rbd_dev->layout.object_size * rbd_dev->layout.stripe_count;
- 	struct queue_limits lim = {
- 		.max_hw_sectors		= objset_bytes >> SECTOR_SHIFT,
--		.max_user_sectors	= objset_bytes >> SECTOR_SHIFT,
- 		.io_opt			= objset_bytes,
- 		.io_min			= rbd_dev->opts->alloc_size,
- 		.max_segments		= USHRT_MAX,
-diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
-index f6c822c9cbd2d3..3dff9150ce11e2 100644
---- a/drivers/scsi/sd.c
-+++ b/drivers/scsi/sd.c
-@@ -3593,7 +3593,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
- 	struct request_queue *q = sdkp->disk->queue;
- 	sector_t old_capacity = sdkp->capacity;
- 	unsigned char *buffer;
--	unsigned int dev_max, rw_max;
-+	unsigned int dev_max;
- 
- 	SCSI_LOG_HLQUEUE(3, sd_printk(KERN_INFO, sdkp,
- 				      "sd_revalidate_disk\n"));
-@@ -3675,34 +3675,15 @@ static int sd_revalidate_disk(struct gendisk *disk)
- 	else
- 		blk_queue_io_min(sdkp->disk->queue, 0);
- 
--	if (sd_validate_opt_xfer_size(sdkp, dev_max)) {
--		q->limits.io_opt = logical_to_bytes(sdp, sdkp->opt_xfer_blocks);
--		rw_max = logical_to_sectors(sdp, sdkp->opt_xfer_blocks);
--	} else {
--		q->limits.io_opt = 0;
--		rw_max = min_not_zero(logical_to_sectors(sdp, dev_max),
--				      (sector_t)BLK_DEF_MAX_SECTORS_CAP);
--	}
--
- 	/*
- 	 * Limit default to SCSI host optimal sector limit if set. There may be
- 	 * an impact on performance for when the size of a request exceeds this
- 	 * host limit.
- 	 */
--	rw_max = min_not_zero(rw_max, sdp->host->opt_sectors);
--
--	/* Do not exceed controller limit */
--	rw_max = min(rw_max, queue_max_hw_sectors(q));
--
--	/*
--	 * Only update max_sectors if previously unset or if the current value
--	 * exceeds the capabilities of the hardware.
--	 */
--	if (sdkp->first_scan ||
--	    q->limits.max_sectors > q->limits.max_dev_sectors ||
--	    q->limits.max_sectors > q->limits.max_hw_sectors) {
--		q->limits.max_sectors = rw_max;
--		q->limits.max_user_sectors = rw_max;
-+	q->limits.io_opt = sdp->host->opt_sectors << SECTOR_SHIFT;
-+	if (sd_validate_opt_xfer_size(sdkp, dev_max)) {
-+		q->limits.io_opt = min_not_zero(q->limits.io_opt,
-+				logical_to_bytes(sdp, sdkp->opt_xfer_blocks));
- 	}
- 
- 	sdkp->first_scan = 0;
--- 
-2.43.0
+The following patches clean up a few lose ends in the sd driver, and
+then convert sd and sr to the atomic queue limits API.  The final
+patches remove the now unused block APIs, and convert a few to be
+specific to their now more narrow use case.
 
+The patches are against Jens' block-6.10 tree.  Due to the amount of
+block layer changes in here, and other that will depend on it, it
+would be good if this could eventually be merged through the block
+tree, or at least a shared branch between the SCSI and block trees.
+
+Changes since v1:
+ - change the io_opt value for rbd
+ - fix a left-over direct assignent to q->limits
+ - add a new patch to refactor the ubd interrupt handler
+ - use an else if to micro-optimize the ubd error handling
+ - also remove disk_set_max_open_zones and disk_set_max_active_zones
+ - use SECTOR_SHIFT in one more place
+ - various spelling fixes
+ - comment formating fix
+
+Diffstat:
+ arch/um/drivers/ubd_kern.c   |   50 +++------
+ block/blk-settings.c         |  238 +------------------------------------------
+ drivers/block/nbd.c          |    2 
+ drivers/block/rbd.c          |    3 
+ drivers/block/xen-blkfront.c |    4 
+ drivers/scsi/sd.c            |  222 ++++++++++++++++++++--------------------
+ drivers/scsi/sd.h            |    6 -
+ drivers/scsi/sd_zbc.c        |   27 ++--
+ drivers/scsi/sr.c            |   42 ++++---
+ include/linux/blkdev.h       |   52 +++------
+ 10 files changed, 210 insertions(+), 436 deletions(-)
 
