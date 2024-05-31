@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22534C27C44
-	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2024 09:09:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.733485.1139758 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4617FC25B75
+	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2024 09:09:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.733491.1139769 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCyFz-0004T5-Kk; Fri, 31 May 2024 09:09:03 +0000
+	id 1sCyGb-0005QI-TH; Fri, 31 May 2024 09:09:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 733485.1139758; Fri, 31 May 2024 09:09:03 +0000
+Received: by outflank-mailman (output) from mailman id 733491.1139769; Fri, 31 May 2024 09:09:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCyFz-0004Sy-Hs; Fri, 31 May 2024 09:09:03 +0000
-Received: by outflank-mailman (input) for mailman id 733485;
- Fri, 31 May 2024 09:09:02 +0000
+	id 1sCyGb-0005QB-Qe; Fri, 31 May 2024 09:09:41 +0000
+Received: by outflank-mailman (input) for mailman id 733491;
+ Fri, 31 May 2024 09:09:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kOju=NC=gmail.com=idryomov@srs-se1.protection.inumbo.net>)
- id 1sCyFy-0004Eb-QW
- for xen-devel@lists.xenproject.org; Fri, 31 May 2024 09:09:02 +0000
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [2001:4860:4864:20::29])
+ <SRS0=Umgu=NC=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
+ id 1sCyGa-0004Eb-1c
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2024 09:09:40 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6b8bc4cd-1f2d-11ef-90a1-e314d9c70b13;
- Fri, 31 May 2024 11:09:02 +0200 (CEST)
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-25076dde95eso532008fac.0
- for <xen-devel@lists.xenproject.org>; Fri, 31 May 2024 02:09:02 -0700 (PDT)
+ id 82833119-1f2d-11ef-90a1-e314d9c70b13;
+ Fri, 31 May 2024 11:09:39 +0200 (CEST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2e95a60dfcdso21579541fa.1
+ for <xen-devel@lists.xenproject.org>; Fri, 31 May 2024 02:09:39 -0700 (PDT)
+Received: from [192.168.3.251] (54-240-197-236.amazon.com. [54.240.197.236])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4212b83d5c7sm18847855e9.8.2024.05.31.02.09.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 31 May 2024 02:09:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,100 +47,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b8bc4cd-1f2d-11ef-90a1-e314d9c70b13
+X-Inumbo-ID: 82833119-1f2d-11ef-90a1-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717146540; x=1717751340; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=V7TiTdx/nEWXXgHHbHN78B+YsjlKDnX0w9LWVG0G2x4=;
-        b=Olb7esvQJJdgWc1w+jurUljBIZwYghFM0dXmiSAiXDrmpFc1FNFW6+rsNIV5P3G38U
-         3tIwJ3u4jm6VnzUORWtA2VthKxsHtYsNlj+lgwtvIAxZ+99asQ8IuexrYTCLPHnoBcVF
-         6uGy7jtE9qblLc8Xwu3JCG7s1kNrHkQcaTwc39ksp0eVPgsx7+mKxi2P9gYy7m3+pv8t
-         /o3mVXmzWQk6i/dOsd+yatAleBuLkzJvN/oRHkX/AiGgdYjmoen1CTlqAWKRI0qjBSkr
-         70SHcL4ZhDsTgmdpO+ZMG/xHf6/YsS4S9GxMYrfyVCnRzB/O0Wlxo8zjHy4W5iG4ZQXS
-         9otg==
+        d=gmail.com; s=20230601; t=1717146579; x=1717751379; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:organization:content-language
+         :references:cc:to:subject:reply-to:user-agent:mime-version:date
+         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9nHLqWeneXgssP+00AwHJM3tHuDqX/2jS/REuWoSHIw=;
+        b=mlDNHnC4Gji218IjrB5oOQ73chGvvlVNtAIaI8v+okPGK0fy7o7UQLn1175JQSCGmH
+         YrQ0KTk1Bjwst/ggO4G9E/k0ktzpKhdaBTBTujG0R9rNrOeiFJrkSNPrRud067atjROc
+         0lybD/1SyYKfAXUQjJh6+NavxEulR6hfEV+qniAWzbZgatRYOMgn/5LgLdNE2FowCVb5
+         qXI2DL4gWLsYwjCP/JseYTtm7N7WfgIUFUDbXnaYWZs5YB+B9CbdxEo7XBGZxHc28qrR
+         Z/q6akl2irKgLkCnT8ceEef9o3FtDe2AsZVgITYzqcCtKFQC0nT9uUAZk35ty1RPqNPh
+         PPeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717146540; x=1717751340;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=V7TiTdx/nEWXXgHHbHN78B+YsjlKDnX0w9LWVG0G2x4=;
-        b=cIXHJ4W2y4Gl8eDil0eCqFO8MpUNoe7+k9NldqBA2Q1G00e9yp75m+3Dz62zCdulme
-         G/nqkO4Sgyi9tgQLAJlhlsCcqu0M9UpFu/EMuYawetdZedgYtyJAMij8/yR4OK/kJkut
-         vqZ11eD/VkMDZx8gnnZHswBEibdO6yJB4EEzP+/aWavi/rfifZxRITYYHhWvsUOHuVwL
-         57KAOZ9JDnxFVxZcHbEc6J3JdKnIZ7uJgPLlo1dK0ekWoCumVR5/Fv+Dt2FqCsjJaHg+
-         xL4zLB7qhm4MzwJwJzGemS0FbWm3FV9+bBt5fdNChqagysDMGEZXOLKJLaHmq+R+ft0H
-         avuQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXsAYQYKMaVcI+XmCSjV5/wzz7QWD7uTje/gsTqIHI4XUq1ZFZYYIWRtz9nbtltmlJJf+gGDTqL09sAoedqBaIgWdaQx92pkpqLaUf906M=
-X-Gm-Message-State: AOJu0Yx6HADRbyU9ZvHsdUL7FSmc5n+2oITbcrUSSzI6ZkxbiMUe0LHZ
-	xZ50vSTgRtdGz32Yo1Mz169TPCVpSyhAjyq10s+lAbvtOHDdQ85fQYD+L/lR1f1wJfLMrz1MLUi
-	6wuBtYCWfbV+UCJI+sbPiOfhFmSs=
-X-Google-Smtp-Source: AGHT+IHoKiJiwn0RUfGlBR1LOXIQjJEAP/TieA174CPldpRPuDqgZrspO+vxp9UsllxKnQz9RUjusbGg9aknaFlS5Ec=
-X-Received: by 2002:a05:6870:9346:b0:250:6422:86a with SMTP id
- 586e51a60fabf-25065b70997mr1985845fac.10.1717146540364; Fri, 31 May 2024
- 02:09:00 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1717146579; x=1717751379;
+        h=content-transfer-encoding:in-reply-to:organization:content-language
+         :references:cc:to:subject:reply-to:user-agent:mime-version:date
+         :message-id:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9nHLqWeneXgssP+00AwHJM3tHuDqX/2jS/REuWoSHIw=;
+        b=NhPSUrnRL871/e+PlniZ6CX3wg6NhpMikbi/VhWkYcnJCJKplJYXhdDen2YvbBEqJe
+         H2VPQvnE6AB7lyof2XFaCv1+20c0ndTOU/gpYhMOu0fTJBA37dDagMvPVZjJ8+Y3c7Pg
+         +duPq9opmo79aqmfJXO77VO4BP8449rGJ5JhPcOyUOPDy27MRBCowIqdcjnj7STbwQoU
+         oHWoNVa9PUHpSMr6A1L1Ig9RGkCXVU1dpWCaB9r3n0WWXxvk0YQZmN58aGdvXxcDVy8o
+         ZkhPLNKzGzI1GODrHj6K6E76n7JDCM5DkN+KvfIIPpNukk8lgzSrNVDswcc47SN8K6g4
+         UKQQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXP0mcQpVs7KJWRXYbfmQIMvlWSSf3YK8QGzPDFAGkvwHbR4Gw9qFxahv+c6SjO+dj3whzSxeYLeAP+77my+SlTWRIyOx62HhafEfmE7lE=
+X-Gm-Message-State: AOJu0YwPLlXzCz4oTULw++CWQIWfQQCo9a3eFYNjlixDVaoEPPC1+C1W
+	KKFFR/dKERfHjbF2iSq8Q1oZIXPDOf55mGQfx719zAjhPg2Ji747
+X-Google-Smtp-Source: AGHT+IH88NdbdF6pEzhBNUimRkWJPQqdY0qzX+TwohQvgXS4DJe6CtPrF9PW//10pZ/crdnVcStzaw==
+X-Received: by 2002:a05:6512:45b:b0:52a:daba:f7f0 with SMTP id 2adb3069b0e04-52b896dc4abmr679253e87.62.1717146578471;
+        Fri, 31 May 2024 02:09:38 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Message-ID: <e1451535-b62a-473d-bb6c-00e91274aace@xen.org>
+Date: Fri, 31 May 2024 10:09:37 +0100
 MIME-Version: 1.0
-References: <20240531074837.1648501-1-hch@lst.de> <20240531074837.1648501-4-hch@lst.de>
-In-Reply-To: <20240531074837.1648501-4-hch@lst.de>
-From: Ilya Dryomov <idryomov@gmail.com>
-Date: Fri, 31 May 2024 11:08:48 +0200
-Message-ID: <CAOi1vP_mY-a7aiWod-eVz8xuhGz4mHBBoZZgr2FoxS5wVUym3w@mail.gmail.com>
-Subject: Re: [PATCH 03/14] rbd: increase io_opt again
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>, "Martin K. Petersen" <martin.petersen@oracle.com>, 
-	Richard Weinberger <richard@nod.at>, Anton Ivanov <anton.ivanov@cambridgegreys.com>, 
-	Johannes Berg <johannes@sipsolutions.net>, Josef Bacik <josef@toxicpanda.com>, 
-	Dongsheng Yang <dongsheng.yang@easystack.cn>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	linux-um@lists.infradead.org, linux-block@vger.kernel.org, 
-	nbd@other.debian.org, ceph-devel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-scsi@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Reply-To: paul@xen.org
+Subject: Re: [PATCH v2 2/7] hw/xen: Constify XenLegacyDevice::XenDevOps
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
+Cc: Anthony PERARD <anthony@xenproject.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Eduardo Habkost
+ <eduardo@habkost.net>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Gerd Hoffmann <kraxel@redhat.com>
+References: <20240510104908.76908-1-philmd@linaro.org>
+ <20240510104908.76908-3-philmd@linaro.org>
+Content-Language: en-US
+Organization: Xen Project
+In-Reply-To: <20240510104908.76908-3-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, May 31, 2024 at 9:48=E2=80=AFAM Christoph Hellwig <hch@lst.de> wrot=
-e:
->
-> Commit 16d80c54ad42 ("rbd: set io_min, io_opt and discard_granularity to
-> alloc_size") lowered the io_opt size for rbd from objset_bytes which is
-> 4MB for typical setup to alloc_size which is typically 64KB.
->
-> The commit mostly talks about discard behavior and does mention io_min
-> in passing.  Reducing io_opt means reducing the readahead size, which
-> seems counter-intuitive given that rbd currently abuses the user
-> max_sectors setting to actually increase the I/O size.  Switch back
-> to the old setting to allow larger reads (the readahead size despite it's
-> name actually limits the size of any buffered read) and to prepare
-> for using io_opt in the max_sectors calculation and getting drivers out
-> of the business of overriding the max_user_sectors value.
->
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+On 10/05/2024 11:49, Philippe Mathieu-Daudé wrote:
+> XenDevOps @ops is not updated, mark it const.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->  drivers/block/rbd.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/block/rbd.c b/drivers/block/rbd.c
-> index 26ff5cd2bf0abc..46dc487ccc17eb 100644
-> --- a/drivers/block/rbd.c
-> +++ b/drivers/block/rbd.c
-> @@ -4955,8 +4955,8 @@ static int rbd_init_disk(struct rbd_device *rbd_dev=
-)
->         struct queue_limits lim =3D {
->                 .max_hw_sectors         =3D objset_bytes >> SECTOR_SHIFT,
->                 .max_user_sectors       =3D objset_bytes >> SECTOR_SHIFT,
-> +               .io_opt                 =3D objset_bytes,
->                 .io_min                 =3D rbd_dev->opts->alloc_size,
-> -               .io_opt                 =3D rbd_dev->opts->alloc_size,
->                 .max_segments           =3D USHRT_MAX,
->                 .max_segment_size       =3D UINT_MAX,
->         };
-> --
-> 2.43.0
->
+>   include/hw/xen/xen_pvdev.h  | 2 +-
+>   hw/xen/xen-legacy-backend.c | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+> 
 
-Acked-by: Ilya Dryomov <idryomov@gmail.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 
-Thanks,
-
-                Ilya
 
