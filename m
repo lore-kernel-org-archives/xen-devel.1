@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84ED5C27C52
-	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2024 07:49:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.733348.1139589 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1516DC27C51
+	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2024 07:49:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.733342.1139529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCx0h-0006jJ-98; Fri, 31 May 2024 07:49:11 +0000
+	id 1sCx0W-00052f-LX; Fri, 31 May 2024 07:49:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 733348.1139589; Fri, 31 May 2024 07:49:11 +0000
+Received: by outflank-mailman (output) from mailman id 733342.1139529; Fri, 31 May 2024 07:49:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sCx0h-0006j6-5K; Fri, 31 May 2024 07:49:11 +0000
-Received: by outflank-mailman (input) for mailman id 733348;
- Fri, 31 May 2024 07:49:10 +0000
+	id 1sCx0W-00052Y-Hl; Fri, 31 May 2024 07:49:00 +0000
+Received: by outflank-mailman (input) for mailman id 733342;
+ Fri, 31 May 2024 07:48:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rv5j=NC=bombadil.srs.infradead.org=BATV+4872a67a45e6d46d0c49+7586+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1sCx0g-0004oC-Lb
- for xen-devel@lists.xenproject.org; Fri, 31 May 2024 07:49:10 +0000
+ id 1sCx0U-0004oC-O4
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2024 07:48:58 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 42ce95de-1f22-11ef-b4bb-af5377834399;
- Fri, 31 May 2024 09:49:09 +0200 (CEST)
+ id 3af473f0-1f22-11ef-b4bb-af5377834399;
+ Fri, 31 May 2024 09:48:56 +0200 (CEST)
 Received: from
  2a02-8389-2341-5b80-5ba9-f4da-76fa-44a9.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:5ba9:f4da:76fa:44a9] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1sCx0X-00000009XeI-2flr; Fri, 31 May 2024 07:49:02 +0000
+ id 1sCx0I-00000009XVz-1ERf; Fri, 31 May 2024 07:48:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42ce95de-1f22-11ef-b4bb-af5377834399
+X-Inumbo-ID: 3af473f0-1f22-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=NIYU24POaVEtCWxh2Uz76sasJLK5fExY/uxdAFrpLn0=; b=nvWGxGR5UCqtJLt0MzfGEBXnRL
-	vxsmtMLHS1hp0z0eBbJsI51GWBRhrA2+Lck1DFcYdERBAx3KcneUDzBnOglm5G+IfC+X2MADP07Jj
-	saCga2YJOejXuJjmKaPvmIpDS+wNLQHuYkF228yXr/q9S5QKvtOfgkc6aqVAvRZNiuGM8/6ioOixR
-	fa78mHFjrLtwDVtZ2ckhco4l97C5UC7UdJtwC8yE9zPhXtzLPRBv0UkgWdg/HF9Z0W/SxVp/BhuNx
-	IZUiOmTk9V8IWo2G70I7pqb0wHbZ9WCexXrsHNoo4DmXAZa+i22XFuQMxwVHwGHCSRlu4soLwwS6O
-	e4SUs9tw==;
+	bh=8qWYYD/WE7sZdc6vKaSwzAcVLajLtvsC2W0WllIXaIM=; b=1A1yb09khg0zzo88GBpLvTFsHc
+	tV8ef2UQ1VXidXvG732ApqmyCupKhGkL5G59GgO8xU8oyRy3a7wLIj5Fqsb7ozie1sIBv/ltIsHYx
+	+btWJXOahq4wAEa2PPIJxwFXAazEivQE/BryJ8mbFTKha/lhrUy32leI2VIH6j6MGV9GQOA2CaiHz
+	ExUMMEXqbTiHF//iRBxcXt5wvKwfJDb8BxMSI0kYUpaS1XbArUgDpnhBV5zsm3WXP9abkponn0rgr
+	g9AmlPK83Uxe92IoHb7Jc1v2oHu4zV0TiIRlrabbLStJXmWX3Wjs0EvPEaMCe032BaHlcz+c/JPQo
+	uvqey7Tw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>,
 	"Martin K. Petersen" <martin.petersen@oracle.com>
@@ -70,12 +70,10 @@ Cc: Richard Weinberger <richard@nod.at>,
 	nbd@other.debian.org,
 	ceph-devel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
-	linux-scsi@vger.kernel.org,
-	Bart Van Assche <bvanassche@acm.org>,
-	Damien Le Moal <dlemoal@kernel.org>
-Subject: [PATCH 07/14] sd: add a sd_disable_write_same helper
-Date: Fri, 31 May 2024 09:48:02 +0200
-Message-ID: <20240531074837.1648501-8-hch@lst.de>
+	linux-scsi@vger.kernel.org
+Subject: [PATCH 01/14] ubd: refactor the interrupt handler
+Date: Fri, 31 May 2024 09:47:56 +0200
+Message-ID: <20240531074837.1648501-2-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240531074837.1648501-1-hch@lst.de>
 References: <20240531074837.1648501-1-hch@lst.de>
@@ -83,46 +81,81 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Add helper to disable WRITE SAME when it is not supported and use it
-instead of sd_config_write_same in the I/O completion handler.  This
-avoids touching more fields than required in the I/O completion handler
-and  prepares for converting sd to use the atomic queue limits API.
+Instead of a separate handler function that leaves no work in the
+interrupt hanler itself, split out a per-request end I/O helper and
+clean up the coding style and variable naming while we're at it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
-Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 ---
- drivers/scsi/sd.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ arch/um/drivers/ubd_kern.c | 49 ++++++++++++++------------------------
+ 1 file changed, 18 insertions(+), 31 deletions(-)
 
-diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
-index f07d90474e682b..70211d0b187652 100644
---- a/drivers/scsi/sd.c
-+++ b/drivers/scsi/sd.c
-@@ -1004,6 +1004,13 @@ static blk_status_t sd_setup_write_zeroes_cmnd(struct scsi_cmnd *cmd)
- 	return sd_setup_write_same10_cmnd(cmd, false);
+diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
+index ef805eaa9e013d..0c9542d58c01b7 100644
+--- a/arch/um/drivers/ubd_kern.c
++++ b/arch/um/drivers/ubd_kern.c
+@@ -447,43 +447,30 @@ static int bulk_req_safe_read(
+ 	return n;
  }
  
-+static void sd_disable_write_same(struct scsi_disk *sdkp)
-+{
-+	sdkp->device->no_write_same = 1;
-+	sdkp->max_ws_blocks = 0;
-+	blk_queue_max_write_zeroes_sectors(sdkp->disk->queue, 0);
-+}
-+
- static void sd_config_write_same(struct scsi_disk *sdkp)
+-/* Called without dev->lock held, and only in interrupt context. */
+-static void ubd_handler(void)
++static void ubd_end_request(struct io_thread_req *io_req)
  {
- 	struct request_queue *q = sdkp->disk->queue;
-@@ -2258,8 +2265,7 @@ static int sd_done(struct scsi_cmnd *SCpnt)
- 				if (SCpnt->cmnd[1] & 8) { /* UNMAP */
- 					sd_disable_discard(sdkp);
- 				} else {
--					sdkp->device->no_write_same = 1;
--					sd_config_write_same(sdkp);
-+					sd_disable_write_same(sdkp);
- 					req->rq_flags |= RQF_QUIET;
- 				}
- 				break;
+-	int n;
+-	int count;
+-
+-	while(1){
+-		n = bulk_req_safe_read(
+-			thread_fd,
+-			irq_req_buffer,
+-			&irq_remainder,
+-			&irq_remainder_size,
+-			UBD_REQ_BUFFER_SIZE
+-		);
+-		if (n < 0) {
+-			if(n == -EAGAIN)
+-				break;
+-			printk(KERN_ERR "spurious interrupt in ubd_handler, "
+-			       "err = %d\n", -n);
+-			return;
+-		}
+-		for (count = 0; count < n/sizeof(struct io_thread_req *); count++) {
+-			struct io_thread_req *io_req = (*irq_req_buffer)[count];
+-
+-			if ((io_req->error == BLK_STS_NOTSUPP) && (req_op(io_req->req) == REQ_OP_DISCARD)) {
+-				blk_queue_max_discard_sectors(io_req->req->q, 0);
+-				blk_queue_max_write_zeroes_sectors(io_req->req->q, 0);
+-			}
+-			blk_mq_end_request(io_req->req, io_req->error);
+-			kfree(io_req);
+-		}
++	if (io_req->error == BLK_STS_NOTSUPP &&
++	    req_op(io_req->req) == REQ_OP_DISCARD) {
++		blk_queue_max_discard_sectors(io_req->req->q, 0);
++		blk_queue_max_write_zeroes_sectors(io_req->req->q, 0);
+ 	}
++	blk_mq_end_request(io_req->req, io_req->error);
++	kfree(io_req);
+ }
+ 
+ static irqreturn_t ubd_intr(int irq, void *dev)
+ {
+-	ubd_handler();
++	int len, i;
++
++	while ((len = bulk_req_safe_read(thread_fd, irq_req_buffer,
++			&irq_remainder, &irq_remainder_size,
++			UBD_REQ_BUFFER_SIZE)) >= 0) {
++		for (i = 0; i < len / sizeof(struct io_thread_req *); i++)
++			ubd_end_request((*irq_req_buffer)[i]);
++	}
++
++	if (len < 0 && len != -EAGAIN)
++		pr_err("spurious interrupt in %s, err = %d\n", __func__, len);
+ 	return IRQ_HANDLED;
+ }
+ 
 -- 
 2.43.0
 
