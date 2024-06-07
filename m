@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90575C27C5F
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Jun 2024 09:10:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.736427.1142498 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2A0C27C53
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Jun 2024 09:10:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.736431.1142527 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sFVbl-0006CE-O4; Fri, 07 Jun 2024 09:10:01 +0000
+	id 1sFVc4-00081Y-FC; Fri, 07 Jun 2024 09:10:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 736427.1142498; Fri, 07 Jun 2024 09:10:01 +0000
+Received: by outflank-mailman (output) from mailman id 736431.1142527; Fri, 07 Jun 2024 09:10:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sFVbl-0006Bi-KM; Fri, 07 Jun 2024 09:10:01 +0000
-Received: by outflank-mailman (input) for mailman id 736427;
- Fri, 07 Jun 2024 09:10:00 +0000
+	id 1sFVc4-00081R-C3; Fri, 07 Jun 2024 09:10:20 +0000
+Received: by outflank-mailman (input) for mailman id 736431;
+ Fri, 07 Jun 2024 09:10:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NiIp=NJ=redhat.com=david@srs-se1.protection.inumbo.net>)
- id 1sFVbk-0006Bc-2v
- for xen-devel@lists.xenproject.org; Fri, 07 Jun 2024 09:10:00 +0000
+ id 1sFVc3-0006Bc-P9
+ for xen-devel@lists.xenproject.org; Fri, 07 Jun 2024 09:10:19 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b62463dc-24ad-11ef-90a2-e314d9c70b13;
- Fri, 07 Jun 2024 11:09:58 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-94-siZVc8J6MdebVKtoCSUwSQ-1; Fri,
- 07 Jun 2024 05:09:51 -0400
+ id c2252ea2-24ad-11ef-90a2-e314d9c70b13;
+ Fri, 07 Jun 2024 11:10:18 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-592-yH10sX6lNoa9rUALrYBFDg-1; Fri, 07 Jun 2024 05:10:01 -0400
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
  [10.11.54.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C59D31C05190;
- Fri,  7 Jun 2024 09:09:50 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 16217811E81;
+ Fri,  7 Jun 2024 09:10:00 +0000 (UTC)
 Received: from t14s.fritz.box (unknown [10.39.194.94])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 44DB337E7;
- Fri,  7 Jun 2024 09:09:46 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CF51437E7;
+ Fri,  7 Jun 2024 09:09:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b62463dc-24ad-11ef-90a2-e314d9c70b13
+X-Inumbo-ID: c2252ea2-24ad-11ef-90a2-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1717751397;
+	s=mimecast20190719; t=1717751417;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=kiFnKpy9jAQsfmTIBaaW+Ib0u1X/H+DkqsqDykpaDbc=;
-	b=GNxqk8ux8t6eT3Pmk4WOQGs8g/mCXLwUO6W/xF9HOi1t8Yba2PDpiWqkULXq4K6vOtXxkM
-	dTXBocFW4U8EbRfAenebeuBR230RxJHIs7+o6AVHe+1+wlMhDBVyFnYlEkF9mWCtTUgj5H
-	atTIYRAsw3bPgh95K3XImwmmdPBEVrY=
-X-MC-Unique: siZVc8J6MdebVKtoCSUwSQ-1
+	bh=BkvZtA0DZCTst0gmiY3p4tzfSSSAg0RWHnN+gN89loE=;
+	b=GKS4Exv49hOzsBLMaPqOha/mm31v0EwICUqWSPgUeIO9FvzjrdpskTrBZeDrcPtsfe1Rbk
+	BSfeVuNbfB0vJgeg6zAA6QLPbzSeXHIKiy4kFQJZobdZEK91aRfP1Q1X7v5r4coAptWyet
+	hRCjqaDSgsmF4ZlhH4nzU2ubmxDkq9Q=
+X-MC-Unique: yH10sX6lNoa9rUALrYBFDg-1
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-mm@kvack.org,
@@ -90,136 +90,172 @@ Cc: linux-mm@kvack.org,
 	Alexander Potapenko <glider@google.com>,
 	Marco Elver <elver@google.com>,
 	Dmitry Vyukov <dvyukov@google.com>
-Subject: [PATCH v1 1/3] mm: pass meminit_context to __free_pages_core()
-Date: Fri,  7 Jun 2024 11:09:36 +0200
-Message-ID: <20240607090939.89524-2-david@redhat.com>
+Subject: [PATCH v1 3/3] mm/memory_hotplug: skip adjust_managed_page_count() for PageOffline() pages when offlining
+Date: Fri,  7 Jun 2024 11:09:38 +0200
+Message-ID: <20240607090939.89524-4-david@redhat.com>
 In-Reply-To: <20240607090939.89524-1-david@redhat.com>
 References: <20240607090939.89524-1-david@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.1
 
-In preparation for further changes, let's teach __free_pages_core()
-about the differences of memory hotplug handling.
+We currently have a hack for virtio-mem in place to handle memory
+offlining with PageOffline pages for which we already adjusted the
+managed page count.
 
-Move the memory hotplug specific handling from generic_online_page() to
-__free_pages_core(), use adjust_managed_page_count() on the memory
-hotplug path, and spell out why memory freed via memblock
-cannot currently use adjust_managed_page_count().
+Let's enlighten memory offlining code so we can get rid of that hack,
+and document the situation.
 
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- mm/internal.h       |  3 ++-
- mm/kmsan/init.c     |  2 +-
- mm/memory_hotplug.c |  9 +--------
- mm/mm_init.c        |  4 ++--
- mm/page_alloc.c     | 17 +++++++++++++++--
- 5 files changed, 21 insertions(+), 14 deletions(-)
+ drivers/virtio/virtio_mem.c    | 11 ++---------
+ include/linux/memory_hotplug.h |  4 ++--
+ include/linux/page-flags.h     |  8 ++++++--
+ mm/memory_hotplug.c            |  6 +++---
+ mm/page_alloc.c                | 12 ++++++++++--
+ 5 files changed, 23 insertions(+), 18 deletions(-)
 
-diff --git a/mm/internal.h b/mm/internal.h
-index 12e95fdf61e90..3fdee779205ab 100644
---- a/mm/internal.h
-+++ b/mm/internal.h
-@@ -604,7 +604,8 @@ extern void __putback_isolated_page(struct page *page, unsigned int order,
- 				    int mt);
- extern void memblock_free_pages(struct page *page, unsigned long pfn,
- 					unsigned int order);
--extern void __free_pages_core(struct page *page, unsigned int order);
-+extern void __free_pages_core(struct page *page, unsigned int order,
-+		enum meminit_context);
+diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
+index b90df29621c81..b0b8714415783 100644
+--- a/drivers/virtio/virtio_mem.c
++++ b/drivers/virtio/virtio_mem.c
+@@ -1269,12 +1269,6 @@ static void virtio_mem_fake_offline_going_offline(unsigned long pfn,
+ 	struct page *page;
+ 	unsigned long i;
  
- /*
-  * This will have no effect, other than possibly generating a warning, if the
-diff --git a/mm/kmsan/init.c b/mm/kmsan/init.c
-index 3ac3b8921d36f..ca79636f858e5 100644
---- a/mm/kmsan/init.c
-+++ b/mm/kmsan/init.c
-@@ -172,7 +172,7 @@ static void do_collection(void)
- 		shadow = smallstack_pop(&collect);
- 		origin = smallstack_pop(&collect);
- 		kmsan_setup_meta(page, shadow, origin, collect.order);
--		__free_pages_core(page, collect.order);
-+		__free_pages_core(page, collect.order, MEMINIT_EARLY);
- 	}
+-	/*
+-	 * Drop our reference to the pages so the memory can get offlined
+-	 * and add the unplugged pages to the managed page counters (so
+-	 * offlining code can correctly subtract them again).
+-	 */
+-	adjust_managed_page_count(pfn_to_page(pfn), nr_pages);
+ 	/* Drop our reference to the pages so the memory can get offlined. */
+ 	for (i = 0; i < nr_pages; i++) {
+ 		page = pfn_to_page(pfn + i);
+@@ -1293,10 +1287,9 @@ static void virtio_mem_fake_offline_cancel_offline(unsigned long pfn,
+ 	unsigned long i;
+ 
+ 	/*
+-	 * Get the reference we dropped when going offline and subtract the
+-	 * unplugged pages from the managed page counters.
++	 * Get the reference again that we dropped via page_ref_dec_and_test()
++	 * when going offline.
+ 	 */
+-	adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
+ 	for (i = 0; i < nr_pages; i++)
+ 		page_ref_inc(pfn_to_page(pfn + i));
  }
+diff --git a/include/linux/memory_hotplug.h b/include/linux/memory_hotplug.h
+index 7a9ff464608d7..ebe876930e782 100644
+--- a/include/linux/memory_hotplug.h
++++ b/include/linux/memory_hotplug.h
+@@ -175,8 +175,8 @@ extern int mhp_init_memmap_on_memory(unsigned long pfn, unsigned long nr_pages,
+ extern void mhp_deinit_memmap_on_memory(unsigned long pfn, unsigned long nr_pages);
+ extern int online_pages(unsigned long pfn, unsigned long nr_pages,
+ 			struct zone *zone, struct memory_group *group);
+-extern void __offline_isolated_pages(unsigned long start_pfn,
+-				     unsigned long end_pfn);
++extern unsigned long __offline_isolated_pages(unsigned long start_pfn,
++		unsigned long end_pfn);
  
+ typedef void (*online_page_callback_t)(struct page *page, unsigned int order);
+ 
+diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
+index e0362ce7fc109..0876aca0833e7 100644
+--- a/include/linux/page-flags.h
++++ b/include/linux/page-flags.h
+@@ -1024,11 +1024,15 @@ PAGE_TYPE_OPS(Buddy, buddy, buddy)
+  * putting them back to the buddy, it can do so via the memory notifier by
+  * decrementing the reference count in MEM_GOING_OFFLINE and incrementing the
+  * reference count in MEM_CANCEL_OFFLINE. When offlining, the PageOffline()
+- * pages (now with a reference count of zero) are treated like free pages,
+- * allowing the containing memory block to get offlined. A driver that
++ * pages (now with a reference count of zero) are treated like free (unmanaged)
++ * pages, allowing the containing memory block to get offlined. A driver that
+  * relies on this feature is aware that re-onlining the memory block will
+  * require not giving them to the buddy via generic_online_page().
+  *
++ * Memory offlining code will not adjust the managed page count for any
++ * PageOffline() pages, treating them like they were never exposed to the
++ * buddy using generic_online_page().
++ *
+  * There are drivers that mark a page PageOffline() and expect there won't be
+  * any further access to page content. PFN walkers that read content of random
+  * pages should check PageOffline() and synchronize with such drivers using
 diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
-index 171ad975c7cfd..27e3be75edcf7 100644
+index 0254059efcbe1..965707a02556f 100644
 --- a/mm/memory_hotplug.c
 +++ b/mm/memory_hotplug.c
-@@ -630,14 +630,7 @@ EXPORT_SYMBOL_GPL(restore_online_page_callback);
- 
- void generic_online_page(struct page *page, unsigned int order)
+@@ -1941,7 +1941,7 @@ int __ref offline_pages(unsigned long start_pfn, unsigned long nr_pages,
+ 			struct zone *zone, struct memory_group *group)
  {
--	/*
--	 * Freeing the page with debug_pagealloc enabled will try to unmap it,
--	 * so we should map it first. This is better than introducing a special
--	 * case in page freeing fast path.
--	 */
--	debug_pagealloc_map_pages(page, 1 << order);
--	__free_pages_core(page, order);
--	totalram_pages_add(1UL << order);
-+	__free_pages_core(page, order, MEMINIT_HOTPLUG);
- }
- EXPORT_SYMBOL_GPL(generic_online_page);
+ 	const unsigned long end_pfn = start_pfn + nr_pages;
+-	unsigned long pfn, system_ram_pages = 0;
++	unsigned long pfn, managed_pages, system_ram_pages = 0;
+ 	const int node = zone_to_nid(zone);
+ 	unsigned long flags;
+ 	struct memory_notify arg;
+@@ -2062,7 +2062,7 @@ int __ref offline_pages(unsigned long start_pfn, unsigned long nr_pages,
+ 	} while (ret);
  
-diff --git a/mm/mm_init.c b/mm/mm_init.c
-index 019193b0d8703..feb5b6e8c8875 100644
---- a/mm/mm_init.c
-+++ b/mm/mm_init.c
-@@ -1938,7 +1938,7 @@ static void __init deferred_free_range(unsigned long pfn,
- 	for (i = 0; i < nr_pages; i++, page++, pfn++) {
- 		if (pageblock_aligned(pfn))
- 			set_pageblock_migratetype(page, MIGRATE_MOVABLE);
--		__free_pages_core(page, 0);
-+		__free_pages_core(page, 0, MEMINIT_EARLY);
- 	}
- }
+ 	/* Mark all sections offline and remove free pages from the buddy. */
+-	__offline_isolated_pages(start_pfn, end_pfn);
++	managed_pages = __offline_isolated_pages(start_pfn, end_pfn);
+ 	pr_debug("Offlined Pages %ld\n", nr_pages);
  
-@@ -2513,7 +2513,7 @@ void __init memblock_free_pages(struct page *page, unsigned long pfn,
- 		}
- 	}
+ 	/*
+@@ -2078,7 +2078,7 @@ int __ref offline_pages(unsigned long start_pfn, unsigned long nr_pages,
+ 	zone_pcp_enable(zone);
  
--	__free_pages_core(page, order);
-+	__free_pages_core(page, order, MEMINIT_EARLY);
- }
+ 	/* removal success */
+-	adjust_managed_page_count(pfn_to_page(start_pfn), -nr_pages);
++	adjust_managed_page_count(pfn_to_page(start_pfn), -managed_pages);
+ 	adjust_present_page_count(pfn_to_page(start_pfn), group, -nr_pages);
  
- DEFINE_STATIC_KEY_MAYBE(CONFIG_INIT_ON_ALLOC_DEFAULT_ON, init_on_alloc);
+ 	/* reinitialise watermarks and update pcp limits */
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 2224965ada468..e0c8a8354be36 100644
+index 039bc52cc9091..809bc4a816e85 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
-@@ -1214,7 +1214,8 @@ static void __free_pages_ok(struct page *page, unsigned int order,
- 	__count_vm_events(PGFREE, 1 << order);
- }
- 
--void __free_pages_core(struct page *page, unsigned int order)
-+void __free_pages_core(struct page *page, unsigned int order,
-+		enum meminit_context context)
+@@ -6745,14 +6745,19 @@ void zone_pcp_reset(struct zone *zone)
+ /*
+  * All pages in the range must be in a single zone, must not contain holes,
+  * must span full sections, and must be isolated before calling this function.
++ *
++ * Returns the number of managed (non-PageOffline()) pages in the range: the
++ * number of pages for which memory offlining code must adjust managed page
++ * counters using adjust_managed_page_count().
+  */
+-void __offline_isolated_pages(unsigned long start_pfn, unsigned long end_pfn)
++unsigned long __offline_isolated_pages(unsigned long start_pfn,
++		unsigned long end_pfn)
  {
- 	unsigned int nr_pages = 1 << order;
- 	struct page *p = page;
-@@ -1234,7 +1235,19 @@ void __free_pages_core(struct page *page, unsigned int order)
- 	__ClearPageReserved(p);
- 	set_page_count(p, 0);
++	unsigned long already_offline = 0, flags;
+ 	unsigned long pfn = start_pfn;
+ 	struct page *page;
+ 	struct zone *zone;
+ 	unsigned int order;
+-	unsigned long flags;
  
--	atomic_long_add(nr_pages, &page_zone(page)->managed_pages);
-+	if (IS_ENABLED(CONFIG_MEMORY_HOTPLUG) &&
-+	    unlikely(context == MEMINIT_HOTPLUG)) {
-+		/*
-+		 * Freeing the page with debug_pagealloc enabled will try to
-+		 * unmap it; some archs don't like double-unmappings, so
-+		 * map it first.
-+		 */
-+		debug_pagealloc_map_pages(page, nr_pages);
-+		adjust_managed_page_count(page, nr_pages);
-+	} else {
-+		/* memblock adjusts totalram_pages() ahead of time. */
-+		atomic_long_add(nr_pages, &page_zone(page)->managed_pages);
-+	}
+ 	offline_mem_sections(pfn, end_pfn);
+ 	zone = page_zone(pfn_to_page(pfn));
+@@ -6774,6 +6779,7 @@ void __offline_isolated_pages(unsigned long start_pfn, unsigned long end_pfn)
+ 		if (PageOffline(page)) {
+ 			BUG_ON(page_count(page));
+ 			BUG_ON(PageBuddy(page));
++			already_offline++;
+ 			pfn++;
+ 			continue;
+ 		}
+@@ -6786,6 +6792,8 @@ void __offline_isolated_pages(unsigned long start_pfn, unsigned long end_pfn)
+ 		pfn += (1 << order);
+ 	}
+ 	spin_unlock_irqrestore(&zone->lock, flags);
++
++	return end_pfn - start_pfn - already_offline;
+ }
+ #endif
  
- 	if (page_contains_unaccepted(page, order)) {
- 		if (order == MAX_PAGE_ORDER && __free_unaccepted(page))
 -- 
 2.45.1
 
