@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE78C27C75
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F0B8C27C77
 	for <xen-devel@archiver.kernel.org>; Mon, 10 Jun 2024 06:54:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.736904.1142998 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.736899.1142947 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGYul-000344-8S; Mon, 10 Jun 2024 06:53:59 +0000
+	id 1sGYuf-0001ou-Pg; Mon, 10 Jun 2024 06:53:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 736904.1142998; Mon, 10 Jun 2024 06:53:59 +0000
+Received: by outflank-mailman (output) from mailman id 736899.1142947; Mon, 10 Jun 2024 06:53:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGYul-00033v-5e; Mon, 10 Jun 2024 06:53:59 +0000
-Received: by outflank-mailman (input) for mailman id 736904;
- Mon, 10 Jun 2024 06:53:57 +0000
+	id 1sGYuf-0001on-NB; Mon, 10 Jun 2024 06:53:53 +0000
+Received: by outflank-mailman (input) for mailman id 736899;
+ Mon, 10 Jun 2024 06:53:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FMhB=NM=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1sGYuj-0001oX-J5
- for xen-devel@lists.xenproject.org; Mon, 10 Jun 2024 06:53:57 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ id 1sGYue-0001oX-5t
+ for xen-devel@lists.xenproject.org; Mon, 10 Jun 2024 06:53:52 +0000
+Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com
+ [2a00:1450:4864:20::641])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 34a79980-26f6-11ef-b4bb-af5377834399;
- Mon, 10 Jun 2024 08:53:56 +0200 (CEST)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a62ef52e837so528756866b.3
- for <xen-devel@lists.xenproject.org>; Sun, 09 Jun 2024 23:53:56 -0700 (PDT)
+ id 2fd63ba6-26f6-11ef-b4bb-af5377834399;
+ Mon, 10 Jun 2024 08:53:48 +0200 (CEST)
+Received: by mail-ej1-x641.google.com with SMTP id
+ a640c23a62f3a-a6f177b78dcso95409266b.1
+ for <xen-devel@lists.xenproject.org>; Sun, 09 Jun 2024 23:53:47 -0700 (PDT)
 Received: from rayden.urgonet (h-217-31-164-171.A175.priv.bahnhof.se.
  [217.31.164.171]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6f1e6795b9sm107981966b.174.2024.06.09.23.53.53
+ a640c23a62f3a-a6f1e6795b9sm107981966b.174.2024.06.09.23.53.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 23:53:54 -0700 (PDT)
+ Sun, 09 Jun 2024 23:53:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,37 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 34a79980-26f6-11ef-b4bb-af5377834399
+X-Inumbo-ID: 2fd63ba6-26f6-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1718002435; x=1718607235; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=v0XZWV38zo7fRMFW2k6millPwbwyTFNlIqQWXfkZcoE=;
-        b=wm3NVcf0cwmsKRDHMpzk0pUjs8pRNsKotohsW5zAUtAxPqcjiweXaPjV15z2nk83Dn
-         1qe7DYXdaGjoyVZW+UzaKiufbfdrDI5LNPOHPsXhb1k8qDHBisLhPMHi0No75/eizajk
-         Fq4Nz1G6LT+UXrGT1Jf5NOk6jtu0tun/5PObGi/fUJE8eGrOfEYocrSrj7dIUD4zvuGX
-         RTlQW/pyQossoInGJS4gvs71Bhc4XmWN1kBru3mBbGTb5FYtqtsncnIDBgrIC3hwPWNe
-         u7aADhnSGB6vWvFmaHFSZgy+tRPffv2PaLfk0DSp+Z+IqDo8lF3gN2Jma00mEBRmZZBr
-         jnCA==
+        d=linaro.org; s=google; t=1718002427; x=1718607227; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8ydBCMucw8T2ZNRmg/cuXstuBHa/XNErLk9auQP/k8g=;
+        b=dHkH9gu+PexT7opiJbEyLr7t2r5W8m1YZMJrAlsdV6iINOJ9+sW+3glTj5HBu0uTRJ
+         CdVslleygNUnzYIoxjWP91foO2dj2mXnT9fH/oAttlhT5ZGYULXh0X7yCoDUxlf8Y4J5
+         cGZ7/o9eVBjNlt1TL8nZp0w2ijsMiWo29eaUziIcZogDV0ohzuyF5I2erJ7+PwWHQUGg
+         CajP477rtPcV5qSg4Si+OrE4YXrmyugbNNhIGOIObFejrnrygZ524LUXFP/ZEt8vQ+3i
+         wIp7cnJQ48wdkDPdHhb63RufWwlTXukXIg8ybVcL3eCChHyyqVYzJ2CCeLlXt/SzwkoG
+         fV6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718002435; x=1718607235;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=v0XZWV38zo7fRMFW2k6millPwbwyTFNlIqQWXfkZcoE=;
-        b=NCfN7gDrafE5mYqYlrA+BE7VSyzLsQyVBuWHz0ICbsDsPNBkOMi+Ah1PJA5skvfKVs
-         k0uDNyFCX3FtMOln7FNy+rV6kJ4h1ZU4ZNrJcspLF2+kBofxVU4jemyHbVqWwC/rzwli
-         fcT6gNw+DfZHxZ7D/Abln4/pZB1kO65b/griFFv35XyGGbMW/L9eGtPrs4BA/yocSvFv
-         je2USAZHaHnuxlOu1O40sHZnsfpiFheK39/Mb6HOUA0MS8ZWIg5hiaDMK/7YecDEx6L2
-         IZvbKRNsh+SgNHKMf0OMaaSSE98+NgOcc0qir/5XcDYBAu2xo5PcXR7bcj+RiSqJBa4y
-         D0Jw==
-X-Gm-Message-State: AOJu0YykQRm73cX6ALs4b44yrUbgH9utKduQ6bftTZGoTIRcbixWS6eX
-	HIuUFqHU8PTPNM2wIodF/90+tCVNjQ98XFF0wBVr0SpYABCScGlqo7/4MEyJAdQ3KEM2HCYXuH3
-	I744=
-X-Google-Smtp-Source: AGHT+IFrqovL90KjjtIWH7ELqoOBQ3DlSigv3se5/sV3vqUZIu9PEL+pc5diOLHr+PJK6s+8Xzun2Q==
-X-Received: by 2002:a17:906:29d5:b0:a6f:1b40:82ab with SMTP id a640c23a62f3a-a6f1b408397mr163610266b.76.1718002434843;
-        Sun, 09 Jun 2024 23:53:54 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1718002427; x=1718607227;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8ydBCMucw8T2ZNRmg/cuXstuBHa/XNErLk9auQP/k8g=;
+        b=Sbnm9VExG50m2jYwXxd12wZQfOHgFpXofwxqMkSbO6DtTQ2cal9oucfa1zLbt4Kqt7
+         +1LZVzZrHBz7ZoHY9XLLLB4HjZ2S79ElzX5SWskfnZvQKLVL5yqe4k+utU8GV9XeOvG/
+         erSRzQFOwhFWIqNFrcavemvxhxU5UH10cOcwTRUtlxDcZtyx8MIKmvG2Z0w03hVTpHw4
+         oS1dqFaYCUNITELEGxk0fFIeQ63v8KYHwTm6+A56Md9Vo4iz6aLVOuwYA5/FHo1e4qGs
+         D6cSTeLiZnmK/fLzlRHqs819bdMimyxHWAkb5MUNDOnh1V3+hwCygc/ggCcqjtgTfj5X
+         TkwA==
+X-Gm-Message-State: AOJu0Yx8r4aBAEvLxV0NA2XgXVv1Xj3WkQg8xWrmDf9IkaJse++hnJRQ
+	o5Wns2P2nsXaC0M9DNH2MJDxQVFNkQXgbft5XTXsXTt7bO/xuccA9/h+dWQHtQx8Z2gdu7YIAhf
+	8PpYVKw==
+X-Google-Smtp-Source: AGHT+IE83438JhKbRk+s8D/haJ85GMQd9q5RFeQuWrLdFH3yc7ZyFidDJlQegYEqPB1u0RzRrsecew==
+X-Received: by 2002:a17:906:f20b:b0:a6f:268a:1fc4 with SMTP id a640c23a62f3a-a6f268a2031mr45606166b.61.1718002426704;
+        Sun, 09 Jun 2024 23:53:46 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: patches@linaro.org,
@@ -87,100 +86,101 @@ Cc: patches@linaro.org,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [XEN PATCH v6 5/7] xen/arm: add and call init_tee_secondary()
-Date: Mon, 10 Jun 2024 08:53:41 +0200
-Message-Id: <20240610065343.2594943-6-jens.wiklander@linaro.org>
+Subject: [XEN PATCH v6 0/7] FF-A notifications
+Date: Mon, 10 Jun 2024 08:53:36 +0200
+Message-Id: <20240610065343.2594943-1-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240610065343.2594943-1-jens.wiklander@linaro.org>
-References: <20240610065343.2594943-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add init_tee_secondary() to the TEE mediator framework and call it from
-start_secondary() late enough that per-cpu interrupts can be configured
-on CPUs as they are initialized. This is needed in later patches.
+Hi,
 
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
+This patch set adds support for FF-A notifications. We only support
+global notifications, per vCPU notifications remain unsupported.
+
+The first three patches are further cleanup and can be merged before the
+rest if desired.
+
+A physical SGI is used to make Xen aware of pending FF-A notifications. The
+physical SGI is selected by the SPMC in the secure world. Since it must not
+already be used by Xen the SPMC is in practice forced to donate one of the
+secure SGIs, but that's normally not a problem. The SGI handling in Xen is
+updated to support registration of handlers for SGIs that aren't statically
+assigned, that is, SGI IDs above GIC_SGI_MAX.
+
+The patch "xen/arm: add and call init_tee_secondary()" provides a hook for
+register the needed per-cpu interrupt handler in "xen/arm: ffa: support
+notification".
+
+The patch "xen/arm: add and call tee_free_domain_ctx()" provides a hook for
+later freeing of the TEE context. This hook is used in "xen/arm: ffa:
+support notification" and avoids the problem with TEE context being freed
+while we need to access it when handling a Schedule Receiver interrupt. It
+was suggested as an alternative in [1] that the TEE context could be freed
+from complete_domain_destroy().
+
+[1] https://lore.kernel.org/all/CAHUa44H4YpoxYT7e6WNH5XJFpitZQjqP9Ng4SmTy4eWhyN+F+w@mail.gmail.com/
+
+Thanks,
+Jens
+
 v5->v6:
-- Rename init_tee_interrupt() to init_tee_secondary() as requested
----
- xen/arch/arm/include/asm/tee/tee.h | 8 ++++++++
- xen/arch/arm/smpboot.c             | 2 ++
- xen/arch/arm/tee/tee.c             | 6 ++++++
- 3 files changed, 16 insertions(+)
+- Added Betrands R-B for "xen/arm: add and call tee_free_domain_ctx()",
+  "xen/arm: add and call init_tee_secondary()"
+- Added Juliens A-B for "xen/arm: allow dynamically assigned SGI handlers"
+- Updated "xen/arm: ffa: support notification", details in the patch
 
-diff --git a/xen/arch/arm/include/asm/tee/tee.h b/xen/arch/arm/include/asm/tee/tee.h
-index da324467e130..6bc13da885b6 100644
---- a/xen/arch/arm/include/asm/tee/tee.h
-+++ b/xen/arch/arm/include/asm/tee/tee.h
-@@ -28,6 +28,9 @@ struct tee_mediator_ops {
-      */
-     bool (*probe)(void);
- 
-+    /* Initialize secondary CPUs */
-+    void (*init_secondary)(void);
-+
-     /*
-      * Called during domain construction if toolstack requests to enable
-      * TEE support so mediator can inform TEE about new
-@@ -66,6 +69,7 @@ int tee_domain_init(struct domain *d, uint16_t tee_type);
- int tee_domain_teardown(struct domain *d);
- int tee_relinquish_resources(struct domain *d);
- uint16_t tee_get_type(void);
-+void init_tee_secondary(void);
- 
- #define REGISTER_TEE_MEDIATOR(_name, _namestr, _type, _ops)         \
- static const struct tee_mediator_desc __tee_desc_##_name __used     \
-@@ -105,6 +109,10 @@ static inline uint16_t tee_get_type(void)
-     return XEN_DOMCTL_CONFIG_TEE_NONE;
- }
- 
-+static inline void init_tee_secondary(void)
-+{
-+}
-+
- #endif  /* CONFIG_TEE */
- 
- #endif /* __ARCH_ARM_TEE_TEE_H__ */
-diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
-index 93a10d7721b4..04e363088d60 100644
---- a/xen/arch/arm/smpboot.c
-+++ b/xen/arch/arm/smpboot.c
-@@ -29,6 +29,7 @@
- #include <asm/procinfo.h>
- #include <asm/psci.h>
- #include <asm/acpi.h>
-+#include <asm/tee/tee.h>
- 
- /* Override macros from asm/page.h to make them work with mfn_t */
- #undef virt_to_mfn
-@@ -401,6 +402,7 @@ void asmlinkage start_secondary(void)
-      */
-     init_maintenance_interrupt();
-     init_timer_interrupt();
-+    init_tee_secondary();
- 
-     local_abort_enable();
- 
-diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
-index ddd17506a9ff..9fd1d7495b2e 100644
---- a/xen/arch/arm/tee/tee.c
-+++ b/xen/arch/arm/tee/tee.c
-@@ -96,6 +96,12 @@ static int __init tee_init(void)
- 
- __initcall(tee_init);
- 
-+void __init init_tee_secondary(void)
-+{
-+    if ( cur_mediator && cur_mediator->ops->init_secondary )
-+        cur_mediator->ops->init_secondary();
-+}
-+
- /*
-  * Local variables:
-  * mode: C
+v4->v5:
+- Added two new patches "xen/arm: add and call init_tee_interrupt()" and
+  "xen/arm: add and call tee_free_domain_ctx()"
+- Updated "xen/arm: ffa: support notification", details in the patch
+
+v3->v4:
+- "xen/arm: ffa: support notification" and
+  "xen/arm: allow dynamically assigned SGI handlers" updated as requestsed,
+  details in each patch.
+
+v2->v3:
+- "xen/arm: ffa: support notification" and
+  "xen/arm: allow dynamically assigned SGI handlers" updated as requestsed,
+  details in each patch.
+
+v1->v2:
+- "xen/arm: ffa: support notification" and
+  "xen/arm: allow dynamically assigned SGI handlers" updated as requestsed,
+  details in each patch.
+- Added Bertrands R-B for "xen/arm: ffa: refactor ffa_handle_call()",
+  "xen/arm: ffa: use ACCESS_ONCE()", and
+  "xen/arm: ffa: simplify ffa_handle_mem_share()"
+
+
+
+Jens Wiklander (7):
+  xen/arm: ffa: refactor ffa_handle_call()
+  xen/arm: ffa: use ACCESS_ONCE()
+  xen/arm: ffa: simplify ffa_handle_mem_share()
+  xen/arm: allow dynamically assigned SGI handlers
+  xen/arm: add and call init_tee_secondary()
+  xen/arm: add and call tee_free_domain_ctx()
+  xen/arm: ffa: support notification
+
+ xen/arch/arm/domain.c              |   1 +
+ xen/arch/arm/gic.c                 |  12 +-
+ xen/arch/arm/include/asm/gic.h     |   2 +-
+ xen/arch/arm/include/asm/tee/tee.h |  14 +
+ xen/arch/arm/irq.c                 |  18 +-
+ xen/arch/arm/smpboot.c             |   2 +
+ xen/arch/arm/tee/Makefile          |   1 +
+ xen/arch/arm/tee/ffa.c             | 105 +++++--
+ xen/arch/arm/tee/ffa_notif.c       | 425 +++++++++++++++++++++++++++++
+ xen/arch/arm/tee/ffa_partinfo.c    |   9 +-
+ xen/arch/arm/tee/ffa_private.h     |  56 +++-
+ xen/arch/arm/tee/ffa_shm.c         |  33 +--
+ xen/arch/arm/tee/tee.c             |  14 +-
+ xen/include/public/arch-arm.h      |  14 +
+ 14 files changed, 643 insertions(+), 63 deletions(-)
+ create mode 100644 xen/arch/arm/tee/ffa_notif.c
+
 -- 
 2.34.1
 
