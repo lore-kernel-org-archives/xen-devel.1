@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6285AC27C5E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 13:25:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.738402.1145165 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F20FC25B76
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 13:47:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.738439.1145192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sH1VH-0003EP-RD; Tue, 11 Jun 2024 13:25:35 +0000
+	id 1sH1q8-0000cO-NA; Tue, 11 Jun 2024 13:47:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 738402.1145165; Tue, 11 Jun 2024 13:25:35 +0000
+Received: by outflank-mailman (output) from mailman id 738439.1145192; Tue, 11 Jun 2024 13:47:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sH1VH-0003EI-Oh; Tue, 11 Jun 2024 13:25:35 +0000
-Received: by outflank-mailman (input) for mailman id 738402;
- Tue, 11 Jun 2024 13:25:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=t3ge=NN=cloud.com=kelly.choi@srs-se1.protection.inumbo.net>)
- id 1sH1VG-0002n8-IJ
- for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 13:25:34 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 14e7437f-27f6-11ef-90a3-e314d9c70b13;
- Tue, 11 Jun 2024 15:25:33 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5751bcb3139so1344533a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 11 Jun 2024 06:25:33 -0700 (PDT)
+	id 1sH1q8-0000cH-KU; Tue, 11 Jun 2024 13:47:08 +0000
+Received: by outflank-mailman (input) for mailman id 738439;
+ Tue, 11 Jun 2024 13:47:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=WBrw=NN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sH1q8-0000cB-4Z
+ for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 13:47:08 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1661b7e5-27f9-11ef-b4bb-af5377834399;
+ Tue, 11 Jun 2024 15:47:04 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-57c60b13a56so4769174a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Jun 2024 06:47:04 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57aae11a98csm9271232a12.48.2024.06.11.06.47.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Jun 2024 06:47:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,128 +47,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14e7437f-27f6-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 1661b7e5-27f9-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1718112333; x=1718717133; darn=lists.xenproject.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=3T80f/U57WIOBBnkYbt17B9SaLcZhGHQ8mzVH8zpSHo=;
-        b=fna2WouTmi4/oSNTIjGfVDpN+ntXt6dPHn9vOy+UnefDmddXK4xDD6p8kv1vtsMP9w
-         7ps1SdYxE2+RYSqFXmbc27+lSiOYbnzShuUBw9cwqTtOxQ8xfjk5D/CLhqdxQA2QPGy2
-         MK1qlpfTOK7UK7/c7c95TnCZ+o0CpUTHLdve8=
+        d=suse.com; s=google; t=1718113624; x=1718718424; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=JHbMF6CeepYRy3Wn3DYzNdxmP6DQLhUOKuKCEK/M2JE=;
+        b=ek5cNokgkLVWLvM0IcMLe11KZf5pFpIkK+nEq1rhl8RX7ydwhltyYJhuIsYZGUjQAI
+         OTin4ZR0DHoQEzstaBrWK7pcOK4+OQQh5r5lNj0Hlwk5D4Km5tfoTFgj7r1wGctJ4hdM
+         I2GC8O8pFanJme1+Yc8Xk5xPUcZE39HE2pyhyIYo1IYlxoMzjNErvdDkEm3jGUcA/rU2
+         wHkRCbYEWNs2io15ym0qK7apIMWi3h8TvpqILn7+4ahqM/2dliln+lj0pSGaXJGcytLX
+         oHKBTMJzZWUkWVvrQl87JOayCUtpWsYFzNdmywoxuzp4+zqVKkYxV1SQGwNpeehLnkPg
+         EJ5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718112333; x=1718717133;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=3T80f/U57WIOBBnkYbt17B9SaLcZhGHQ8mzVH8zpSHo=;
-        b=Tq28M7JhF1tdaoPNDiS8Lhb/AnQiYSSo6sD+OSD4btFaauybBfjU43ipAfG8pUMkjX
-         CLUCzwDHRViE8trPormHrxQN1BnGqN1PfvuU1Runlt+qhMkITlFuO4BtCcY0sK981mD7
-         saSDi2o9Bt8az8wdk5y4jXlLlH+lNzs4Tv2c+58kkyl8fs4LyR6MmwEeqpqDa0f+zAHc
-         9M6pmJrMI/4WGRvsj3C7FJMB7gWy3bcMP11fkyVp1M7e1ReDP6QzXMcbKV5rGGAangaY
-         +ULizM8ZJIpY4slLDwOT15IBeQ88GIiqrJNTiGByYntsF/7zmhQBn2XlC7aTOCMQl2Oa
-         YvYw==
-X-Gm-Message-State: AOJu0YyWg1/WVJLXFeB6f0gRK10iPai2mDeJgT0s/5EqK7x9hecbavIv
-	3rcRaWupc64MbE/zsd+6pnP98rXS7kuJ1OLtJvHw4zU9TnH6S0tOW60NgK0Gwu+u9tT4t51WqWk
-	e04ftzFuP8xDh5pxX/KOD8qeNQ+6azKvoe5qEdC35LRxcXopcXeIJ5UXT
-X-Google-Smtp-Source: AGHT+IGaS9CUpsVER0k0bf3BjYsivGWZXHGyR11QL/4m+NsL8970f4EJtFs8daUXKhhanWBQRyulx2KnhbxOl8Q0fEI=
-X-Received: by 2002:a50:a419:0:b0:57c:7676:ea4d with SMTP id
- 4fb4d7f45d1cf-57c7676ec61mr3571638a12.13.1718112332577; Tue, 11 Jun 2024
- 06:25:32 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1718113624; x=1718718424;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JHbMF6CeepYRy3Wn3DYzNdxmP6DQLhUOKuKCEK/M2JE=;
+        b=Ey/5rvv+ZzBY2B+kmiY/2dShya0MpkW1n44Q6kiKXp/p+tNkBjrmGXdxwO5fcmqgv9
+         QmLbJBxOqODXl6D7JTALbwca7kbMlwL2sDH3gRdb7hyLrvSr20OREo9Bb8XG1HXGhY09
+         17cZBXXKV7irxg58cm7tL9qYENe5zIcFD00tOPju72/6fZz6mjJ7ND2/rpOuAfINDOkF
+         laTzNyMYnkIsULEoaRE3vMQ18Ej2XVOUZBUAhvLwNoIjohOGwU/0LSn2Q2lTJJrBUifM
+         Q6BzqzP1FC50VNF7eaCq4x0/pXcgMrCrQQB2MI3wnOt/vcvONU5CsshvKoFp8QxGMhN2
+         NDlw==
+X-Forwarded-Encrypted: i=1; AJvYcCV4WRJdJvt9cgW3tiPBywet3psclzTuUmAfpEsnqiBlWhRmUZqdlgZl3DbI8oseM1KiC9ARcZ5iAjd3Cdn5pl1/bx4nqWZd+5BSFNpmyGs=
+X-Gm-Message-State: AOJu0Yy0QID036I644CNtVkYk8K16GsykTsCurGhcvZhDSAJ9kor/7Yb
+	55mNkkQoYra55htMnf7D5WGo9Ebayab2LGgw9WexdEmaFHbLy29tSefQNCW24KlEpJx5bmsgNuA
+	=
+X-Google-Smtp-Source: AGHT+IHReDcHCS+52c26gyCdRw2S/o2RgLjjuqd1dJKhSZ3UgjnLw6Jjzgi3U4DedD7YQO6l1EyeqQ==
+X-Received: by 2002:a50:d5da:0:b0:57c:61ca:eb8c with SMTP id 4fb4d7f45d1cf-57c61caec8fmr6117494a12.42.1718113624310;
+        Tue, 11 Jun 2024 06:47:04 -0700 (PDT)
+Message-ID: <9a7e5fab-7ea7-4196-bbc5-5c9e286cf576@suse.com>
+Date: Tue, 11 Jun 2024 15:47:03 +0200
 MIME-Version: 1.0
-From: Kelly Choi <kelly.choi@cloud.com>
-Date: Tue, 11 Jun 2024 14:24:56 +0100
-Message-ID: <CAO-mL=xMsBa=Gndq6sPkC3_JRnJiV5YeMZTqGxS2Nu_n61rMxg@mail.gmail.com>
-Subject: [ANNOUNCE] Call for agenda items - Community Call 13th June 2024
-To: xen-devel <xen-devel@lists.xenproject.org>, xen-users@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="00000000000044ada9061a9d33cc"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/7] x86/irq: deal with old_cpu_mask for interrupts in
+ movement in fixup_irqs()
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <20240610142043.11924-1-roger.pau@citrix.com>
+ <20240610142043.11924-6-roger.pau@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20240610142043.11924-6-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---00000000000044ada9061a9d33cc
-Content-Type: text/plain; charset="UTF-8"
+On 10.06.2024 16:20, Roger Pau Monne wrote:
+> @@ -2589,6 +2589,28 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
+>                                 affinity);
+>          }
+>  
+> +        if ( desc->arch.move_in_progress &&
+> +             !cpumask_test_cpu(cpu, &cpu_online_map) &&
 
-Hi all,
+Btw - any reason you're open-coding !cpu_online() here? I've noticed this
+in the context of patch 7, where a little further down a !cpu_online() is
+being added. Those likely all want to be consistent.
 
-*Please add your proposed agenda items below.*
-
-https://cryptpad.fr/pad/#/2/pad/edit/Uj1NJNpA9pgpXJJ54dyuqhDQ/
-
-If any action items are missing or have been resolved, please add/remove
-them from the sheet.
-
-*CALL LINK: https://meet.jit.si/XenProjectCommunityCall
-<https://www.google.com/url?q=https://meet.jit.si/XenProjectCommunityCall&sa=D&source=calendar&ust=1699196661201312&usg=AOvVaw1FcogEsMjFSd1Pmi7V0cBc>*
-
-*DATE: Thursday 13th June 2024*
-
-*TIME: 1500 UTC (4 pm UK time)*
-*Note the following administrative conventions for the call:*
-
-
-** To allow time to switch between meetings, we plan on starting theagenda
-at 15:05 UTC sharp.  Aim to join by 15:03 UTC if possible to allocatetime
-to sort out technical difficulties.*
-
-
-
-
-
-
-
-
-** If you want to be CC'ed please add or remove yourself from
-thesign-up-sheet
-at https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/
-<https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/>== Dial-in
-Information ==## Meeting time16:00 - 17:00 British timeFurther
-International meeting times:*
-https://www.timeanddate.com/worldclock/meetingdetails.html?year=2024&month=6&day=13=4&hour=15&min=0&sec=0&p1=1234&p2=37&p3=224&p4=179
-
-## Dial in details
-https://meet.jit.si/static/dialInInfo.html?room=XenProjectCommunityCall
-
-Many thanks,
-Kelly Choi
-
-Community Manager
-Xen Project
-
---00000000000044ada9061a9d33cc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><div>Hi all,<br><p><u>Please add your proposed agenda=
- items below.</u>=C2=A0</p><p><a href=3D"https://cryptpad.fr/pad/#/2/pad/ed=
-it/Uj1NJNpA9pgpXJJ54dyuqhDQ/">https://cryptpad.fr/pad/#/2/pad/edit/Uj1NJNpA=
-9pgpXJJ54dyuqhDQ/</a>=C2=A0<br></p><p>If any action items are missing or ha=
-ve been resolved, please add/remove them from the sheet.=C2=A0</p><p><b>CAL=
-L=C2=A0LINK:=C2=A0<a href=3D"https://www.google.com/url?q=3Dhttps://meet.ji=
-t.si/XenProjectCommunityCall&amp;sa=3DD&amp;source=3Dcalendar&amp;ust=3D169=
-9196661201312&amp;usg=3DAOvVaw1FcogEsMjFSd1Pmi7V0cBc" target=3D"_blank">htt=
-ps://meet.jit.si/XenProjectCommunityCall</a></b></p><p><b>DATE: Thursday 13=
-th June 2024</b></p><p><b>TIME: 1500 UTC (4 pm UK time)</b></p><i>Note the =
-following administrative conventions for the=C2=A0call:</i></div><div><div>=
-<i>* To allow time to switch between meetings, we plan on starting the<br>a=
-genda at 15:05 UTC sharp.=C2=A0 Aim to join by 15:03 UTC if possible to all=
-ocate<br>time to sort out technical difficulties.</i></div><div><i><br>* If=
- you want to be CC&#39;ed please add or remove yourself from the<br>sign-up=
--sheet at=C2=A0<a href=3D"https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAO=
-e6RFPz0sRCf+/" rel=3D"noreferrer" target=3D"_blank">https://cryptpad.fr/pad=
-/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/</a><br><br>=3D=3D=C2=A0Dial-in Info=
-rmation =3D=3D<br>## Meeting time<br>16:00 - 17:00 British time<br>Further =
-International meeting times:<br></i><a href=3D"https://www.timeanddate.com/=
-worldclock/meetingdetails.html?year=3D2024&amp;month=3D6&amp;day=3D13=3D4&a=
-mp;hour=3D15&amp;min=3D0&amp;sec=3D0&amp;p1=3D1234&amp;p2=3D37&amp;p3=3D224=
-&amp;p4=3D179" target=3D"_blank">https://www.timeanddate.com/worldclock/mee=
-tingdetails.html?year=3D2024&amp;month=3D6&amp;day=3D13=3D4&amp;hour=3D15&a=
-mp;min=3D0&amp;sec=3D0&amp;p1=3D1234&amp;p2=3D37&amp;p3=3D224&amp;p4=3D179<=
-/a><br><br>##=C2=A0Dial=C2=A0in details<br><a href=3D"https://meet.jit.si/s=
-tatic/dialInInfo.html?room=3DXenProjectCommunityCall" rel=3D"noreferrer" ta=
-rget=3D"_blank">https://meet.jit.si/static/dialInInfo.html?room=3DXenProjec=
-tCommunityCall</a><div></div></div></div><div><br></div></div><div><div dir=
-=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div =
-dir=3D"ltr"><div>Many thanks,</div><div>Kelly Choi</div><div><br></div><div=
-><div style=3D"color:rgb(136,136,136)">Community Manager</div><div style=3D=
-"color:rgb(136,136,136)">Xen Project=C2=A0<br></div></div></div></div></div=
-></div>
-
---00000000000044ada9061a9d33cc--
+Jan
 
