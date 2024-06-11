@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7792C25B76
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 05:27:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.737688.1144187 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF86C25B76
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 05:27:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.737708.1144198 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGu2u-0008Qd-U0; Tue, 11 Jun 2024 05:27:48 +0000
+	id 1sGu2z-00014a-4k; Tue, 11 Jun 2024 05:27:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 737688.1144187; Tue, 11 Jun 2024 05:27:48 +0000
+Received: by outflank-mailman (output) from mailman id 737708.1144198; Tue, 11 Jun 2024 05:27:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGu2u-0008Ok-HF; Tue, 11 Jun 2024 05:27:48 +0000
-Received: by outflank-mailman (input) for mailman id 737688;
- Tue, 11 Jun 2024 05:27:47 +0000
+	id 1sGu2y-00014L-Uz; Tue, 11 Jun 2024 05:27:52 +0000
+Received: by outflank-mailman (input) for mailman id 737708;
+ Tue, 11 Jun 2024 05:27:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M7An=NN=bombadil.srs.infradead.org=BATV+2fedbe304aabaf399917+7597+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1sGtvi-0006Mb-8l
- for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 05:20:22 +0000
+ id 1sGtvk-0006Mb-HO
+ for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 05:20:24 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c14d9ee-27b2-11ef-90a3-e314d9c70b13;
- Tue, 11 Jun 2024 07:20:21 +0200 (CEST)
+ id 4d6e32e7-27b2-11ef-90a3-e314d9c70b13;
+ Tue, 11 Jun 2024 07:20:24 +0200 (CEST)
 Received: from
  2a02-8389-2341-5b80-cdb4-8e7d-405d-6b77.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:cdb4:8e7d:405d:6b77] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1sGtvO-00000007R2v-03k6; Tue, 11 Jun 2024 05:20:02 +0000
+ id 1sGtvT-00000007R7j-1fbd; Tue, 11 Jun 2024 05:20:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c14d9ee-27b2-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 4d6e32e7-27b2-11ef-90a3-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=XX8OKzSF4I8HqKWv9CPGPzdF42TlXrJn92mCb7zGUpU=; b=MgJCZXdCXtq5WcrpKLj6n44BMN
-	x7as6F25HhuflNiQsl6jB5W6Jl8Cql52H+wX7EAkBatRuj+eJQEWJ77tUg0C3taOh9WTyyJ5Bqsdi
-	RXIGXMyVTRoSsh9a4uAfJCaQK5+FHeeQHkBBZE0YZA9FygNVsS+hGq+FQgsOMtLKMq7cOPugwuWbd
-	nHgbDPqb89/cUkFHBBzn5P6ypmdPwRtPSnVwTBJUEpsncbavyujHEC5azlnNETobhWGFD7GOTUPkY
-	4mvSB/tNstXuD79kJeevqTycR98vtBAfM0kE9ci/1QpnRCn9+ZGtDS5u57IeabqphYzfqjxqKjOQg
-	V0F/xAxw==;
+	bh=d3AwxBu+VkFli34awimWaaFVvEWHaqxKTv0UwQ9CRyc=; b=tqeyL4qAQR7OhvjRw/yA9bfsYL
+	N7xOcD+7T+hDGiHjgbYtqeGtHZOfnb7lkqTfhINRoXm8Ee/FCoElOSL9s5+c7xym/wAGYkkCCfTnf
+	qnZh6UX/gAl/6P74rJ/m8SqAil023LUZcv7Cr265hYsCU/L9dwK5YaQOsXptA+e34hFEY+D4fsWNP
+	I/TkliZmU6+cRQG+O7IAEegj9IsAiU1oLp5bK5FUQVjUzc+yLZkVwnddnikR9Tnjh2lQ+tABeLqD6
+	BTy061IMVJym4Pxy6W2dcyfJp0bugTmVuat/LwZBLmMMQuWFCsrfBogivxrNR625W3HQo2OxmIK95
+	Gt3RlwjA==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -92,9 +92,9 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
 	linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org
-Subject: [PATCH 10/26] xen-blkfront: don't disable cache flushes when they fail
-Date: Tue, 11 Jun 2024 07:19:10 +0200
-Message-ID: <20240611051929.513387-11-hch@lst.de>
+Subject: [PATCH 12/26] block: remove blk_flush_policy
+Date: Tue, 11 Jun 2024 07:19:12 +0200
+Message-ID: <20240611051929.513387-13-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611051929.513387-1-hch@lst.de>
 References: <20240611051929.513387-1-hch@lst.de>
@@ -102,69 +102,70 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-blkfront always had a robust negotiation protocol for detecting a write
-cache.  Stop simply disabling cache flushes when they fail as that is
-a grave error.
+Fold blk_flush_policy into the only caller to prepare for pending changes
+to it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/xen-blkfront.c | 29 +++++++++--------------------
- 1 file changed, 9 insertions(+), 20 deletions(-)
+ block/blk-flush.c | 33 +++++++++++++++------------------
+ 1 file changed, 15 insertions(+), 18 deletions(-)
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 9b4ec3e4908cce..9794ac2d3299d1 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -982,18 +982,6 @@ static const char *flush_info(struct blkfront_info *info)
- 		return "barrier or flush: disabled;";
+diff --git a/block/blk-flush.c b/block/blk-flush.c
+index c17cf8ed8113db..2234f8b3fc05f2 100644
+--- a/block/blk-flush.c
++++ b/block/blk-flush.c
+@@ -100,23 +100,6 @@ blk_get_flush_queue(struct request_queue *q, struct blk_mq_ctx *ctx)
+ 	return blk_mq_map_queue(q, REQ_OP_FLUSH, ctx)->fq;
  }
  
--static void xlvbd_flush(struct blkfront_info *info)
+-static unsigned int blk_flush_policy(unsigned long fflags, struct request *rq)
 -{
--	blk_queue_write_cache(info->rq, info->feature_flush ? true : false,
--			      info->feature_fua ? true : false);
--	pr_info("blkfront: %s: %s %s %s %s %s %s %s\n",
--		info->gd->disk_name, flush_info(info),
--		"persistent grants:", info->feature_persistent ?
--		"enabled;" : "disabled;", "indirect descriptors:",
--		info->max_indirect_segments ? "enabled;" : "disabled;",
--		"bounce buffer:", info->bounce ? "enabled" : "disabled;");
+-	unsigned int policy = 0;
+-
+-	if (blk_rq_sectors(rq))
+-		policy |= REQ_FSEQ_DATA;
+-
+-	if (fflags & (1UL << QUEUE_FLAG_WC)) {
+-		if (rq->cmd_flags & REQ_PREFLUSH)
+-			policy |= REQ_FSEQ_PREFLUSH;
+-		if (!(fflags & (1UL << QUEUE_FLAG_FUA)) &&
+-		    (rq->cmd_flags & REQ_FUA))
+-			policy |= REQ_FSEQ_POSTFLUSH;
+-	}
+-	return policy;
 -}
 -
- static int xen_translate_vdev(int vdevice, int *minor, unsigned int *offset)
+ static unsigned int blk_flush_cur_seq(struct request *rq)
  {
- 	int major;
-@@ -1162,7 +1150,15 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
- 	info->sector_size = sector_size;
- 	info->physical_sector_size = physical_sector_size;
+ 	return 1 << ffz(rq->flush.seq);
+@@ -399,12 +382,26 @@ bool blk_insert_flush(struct request *rq)
+ {
+ 	struct request_queue *q = rq->q;
+ 	unsigned long fflags = q->queue_flags;	/* may change, cache */
+-	unsigned int policy = blk_flush_policy(fflags, rq);
+ 	struct blk_flush_queue *fq = blk_get_flush_queue(q, rq->mq_ctx);
++	unsigned int policy = 0;
  
--	xlvbd_flush(info);
-+	blk_queue_write_cache(info->rq, info->feature_flush ? true : false,
-+			      info->feature_fua ? true : false);
+ 	/* FLUSH/FUA request must never be merged */
+ 	WARN_ON_ONCE(rq->bio != rq->biotail);
+ 
++	if (blk_rq_sectors(rq))
++		policy |= REQ_FSEQ_DATA;
 +
-+	pr_info("blkfront: %s: %s %s %s %s %s %s %s\n",
-+		info->gd->disk_name, flush_info(info),
-+		"persistent grants:", info->feature_persistent ?
-+		"enabled;" : "disabled;", "indirect descriptors:",
-+		info->max_indirect_segments ? "enabled;" : "disabled;",
-+		"bounce buffer:", info->bounce ? "enabled" : "disabled;");
- 
- 	if (info->vdisk_info & VDISK_READONLY)
- 		set_disk_ro(gd, 1);
-@@ -1622,13 +1618,6 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- 				       info->gd->disk_name, op_name(bret.operation));
- 				blkif_req(req)->error = BLK_STS_NOTSUPP;
- 			}
--			if (unlikely(blkif_req(req)->error)) {
--				if (blkif_req(req)->error == BLK_STS_NOTSUPP)
--					blkif_req(req)->error = BLK_STS_OK;
--				info->feature_fua = 0;
--				info->feature_flush = 0;
--				xlvbd_flush(info);
--			}
- 			fallthrough;
- 		case BLKIF_OP_READ:
- 		case BLKIF_OP_WRITE:
++	/*
++	 * Check which flushes we need to sequence for this operation.
++	 */
++	if (fflags & (1UL << QUEUE_FLAG_WC)) {
++		if (rq->cmd_flags & REQ_PREFLUSH)
++			policy |= REQ_FSEQ_PREFLUSH;
++		if (!(fflags & (1UL << QUEUE_FLAG_FUA)) &&
++		    (rq->cmd_flags & REQ_FUA))
++			policy |= REQ_FSEQ_POSTFLUSH;
++	}
++
+ 	/*
+ 	 * @policy now records what operations need to be done.  Adjust
+ 	 * REQ_PREFLUSH and FUA for the driver.
 -- 
 2.43.0
 
