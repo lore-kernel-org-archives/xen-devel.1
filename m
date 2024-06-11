@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB3EC27C5E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 05:20:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.737610.1144048 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 123AEC27C5E
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 05:20:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.737619.1144058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGtvf-0001Wv-RN; Tue, 11 Jun 2024 05:20:19 +0000
+	id 1sGtvo-0002MX-1S; Tue, 11 Jun 2024 05:20:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 737610.1144048; Tue, 11 Jun 2024 05:20:19 +0000
+Received: by outflank-mailman (output) from mailman id 737619.1144058; Tue, 11 Jun 2024 05:20:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGtvf-0001Wl-MH; Tue, 11 Jun 2024 05:20:19 +0000
-Received: by outflank-mailman (input) for mailman id 737610;
- Tue, 11 Jun 2024 05:20:17 +0000
+	id 1sGtvn-0002MO-Uz; Tue, 11 Jun 2024 05:20:27 +0000
+Received: by outflank-mailman (input) for mailman id 737619;
+ Tue, 11 Jun 2024 05:20:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M7An=NN=bombadil.srs.infradead.org=BATV+2fedbe304aabaf399917+7597+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1sGtvd-0006gk-Ro
- for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 05:20:17 +0000
+ id 1sGtvm-0006gk-36
+ for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 05:20:26 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 48da98a5-27b2-11ef-b4bb-af5377834399;
- Tue, 11 Jun 2024 07:20:16 +0200 (CEST)
+ id 4d914041-27b2-11ef-b4bb-af5377834399;
+ Tue, 11 Jun 2024 07:20:24 +0200 (CEST)
 Received: from
  2a02-8389-2341-5b80-cdb4-8e7d-405d-6b77.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:cdb4:8e7d:405d:6b77] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1sGtvL-00000007R0v-1C21; Tue, 11 Jun 2024 05:19:59 +0000
+ id 1sGtvQ-00000007R5I-2gcI; Tue, 11 Jun 2024 05:20:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48da98a5-27b2-11ef-b4bb-af5377834399
+X-Inumbo-ID: 4d914041-27b2-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=lt3t26OR+aUwy+yHARJ3+3kli+Y9MzGBmWJgtPDO0Yk=; b=3Uu1BULf7magHnf6R7hsR1GIlN
-	SJd84Gj4n7hMxXgVxqwTjx12uB4BxsPsKofgqeK8s1tB9x/8UIqfFwYdEmhAf22CuIAOwrm0oxESi
-	ycgsWyJNCcFgkZRL9iNnvCLYcGs2YN4KpB13M0ItXIwsYf4zxZ//KlgnW18ry7obpXptNUl3Jior/
-	Fwwpt7Ey8K33VEKo8oxSt00ZEPoPxl7Xaeg9EVXtqGT/k85qAxMYikzkGk0wNt6tJYX2Bnl0J+7lG
-	lA1TnI+25z1ZuXjSGhoq/L28+4F0/MOFLHnnstU1+tbzD0qia6Man53VkKd6ZswYiGXsl7DEHICUx
-	lOPAQasw==;
+	bh=Lo072dU2QpGVh/xLHOL31dXMwicRfcSfRIC85i+l4AM=; b=L+Tee0sieKd6J7cvbELhlhVaks
+	LPgpuWpIZFicteZRDgauMdYkEwQiZlmV5XX+JbDB3vC4m0KJjDG5bevXe1oDrF7Jlfr+LBmHklh7Z
+	M40vIFh7OGGJJuWxvhSfZOjx5DnhPxo/8ZdarjapcrQwl0gEEF0aMgeR7GX/Vza1VeumjCpiApl3p
+	PLelqO46Phs6ttgR0xqN2LNDZRODEhHCY/W5L7HCIbxlf4xUJx7pMbuzHT/BrilnMkwuSzhiCHprb
+	3j9JgyMjfS6K9KPGvRSqyYB7cH/3qG08T81bWKh0w5UA9xhwkAnTEMljKkuADRwOj/NUqNEybtjm0
+	nk5ysDdw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -92,9 +92,9 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
 	linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org
-Subject: [PATCH 09/26] nbd: move setting the cache control flags to __nbd_set_size
-Date: Tue, 11 Jun 2024 07:19:09 +0200
-Message-ID: <20240611051929.513387-10-hch@lst.de>
+Subject: [PATCH 11/26] block: freeze the queue in queue_attr_store
+Date: Tue, 11 Jun 2024 07:19:11 +0200
+Message-ID: <20240611051929.513387-12-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611051929.513387-1-hch@lst.de>
 References: <20240611051929.513387-1-hch@lst.de>
@@ -102,52 +102,100 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Move setting the cache control flags in nbd in preparation for moving
-these flags into the queue_limits structure.
+queue_attr_store updates attributes used to control generating I/O, and
+can cause malformed bios if changed with I/O in flight.  Freeze the queue
+in common code instead of adding it to almost every attribute.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/nbd.c | 17 +++++++----------
- 1 file changed, 7 insertions(+), 10 deletions(-)
+ block/blk-mq.c    | 5 +++--
+ block/blk-sysfs.c | 9 ++-------
+ 2 files changed, 5 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index ad887d614d5b3f..44b8c671921e5c 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -342,6 +342,12 @@ static int __nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
- 		lim.max_hw_discard_sectors = UINT_MAX;
- 	else
- 		lim.max_hw_discard_sectors = 0;
-+	if (!(nbd->config->flags & NBD_FLAG_SEND_FLUSH))
-+		blk_queue_write_cache(nbd->disk->queue, false, false);
-+	else if (nbd->config->flags & NBD_FLAG_SEND_FUA)
-+		blk_queue_write_cache(nbd->disk->queue, true, true);
-+	else
-+		blk_queue_write_cache(nbd->disk->queue, true, false);
- 	lim.logical_block_size = blksize;
- 	lim.physical_block_size = blksize;
- 	error = queue_limits_commit_update(nbd->disk->queue, &lim);
-@@ -1286,19 +1292,10 @@ static void nbd_bdev_reset(struct nbd_device *nbd)
+diff --git a/block/blk-mq.c b/block/blk-mq.c
+index 0d4cd39c3d25da..58b0d6c7cc34d6 100644
+--- a/block/blk-mq.c
++++ b/block/blk-mq.c
+@@ -4631,13 +4631,15 @@ int blk_mq_update_nr_requests(struct request_queue *q, unsigned int nr)
+ 	int ret;
+ 	unsigned long i;
  
- static void nbd_parse_flags(struct nbd_device *nbd)
- {
--	struct nbd_config *config = nbd->config;
--	if (config->flags & NBD_FLAG_READ_ONLY)
-+	if (nbd->config->flags & NBD_FLAG_READ_ONLY)
- 		set_disk_ro(nbd->disk, true);
- 	else
- 		set_disk_ro(nbd->disk, false);
--	if (config->flags & NBD_FLAG_SEND_FLUSH) {
--		if (config->flags & NBD_FLAG_SEND_FUA)
--			blk_queue_write_cache(nbd->disk->queue, true, true);
--		else
--			blk_queue_write_cache(nbd->disk->queue, true, false);
--	}
--	else
--		blk_queue_write_cache(nbd->disk->queue, false, false);
++	if (WARN_ON_ONCE(!q->mq_freeze_depth))
++		return -EINVAL;
++
+ 	if (!set)
+ 		return -EINVAL;
+ 
+ 	if (q->nr_requests == nr)
+ 		return 0;
+ 
+-	blk_mq_freeze_queue(q);
+ 	blk_mq_quiesce_queue(q);
+ 
+ 	ret = 0;
+@@ -4671,7 +4673,6 @@ int blk_mq_update_nr_requests(struct request_queue *q, unsigned int nr)
+ 	}
+ 
+ 	blk_mq_unquiesce_queue(q);
+-	blk_mq_unfreeze_queue(q);
+ 
+ 	return ret;
+ }
+diff --git a/block/blk-sysfs.c b/block/blk-sysfs.c
+index f0f9314ab65c61..5c787965b7d09e 100644
+--- a/block/blk-sysfs.c
++++ b/block/blk-sysfs.c
+@@ -189,12 +189,9 @@ static ssize_t queue_discard_max_store(struct request_queue *q,
+ 	if ((max_discard_bytes >> SECTOR_SHIFT) > UINT_MAX)
+ 		return -EINVAL;
+ 
+-	blk_mq_freeze_queue(q);
+ 	lim = queue_limits_start_update(q);
+ 	lim.max_user_discard_sectors = max_discard_bytes >> SECTOR_SHIFT;
+ 	err = queue_limits_commit_update(q, &lim);
+-	blk_mq_unfreeze_queue(q);
+-
+ 	if (err)
+ 		return err;
+ 	return ret;
+@@ -241,11 +238,9 @@ queue_max_sectors_store(struct request_queue *q, const char *page, size_t count)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	blk_mq_freeze_queue(q);
+ 	lim = queue_limits_start_update(q);
+ 	lim.max_user_sectors = max_sectors_kb << 1;
+ 	err = queue_limits_commit_update(q, &lim);
+-	blk_mq_unfreeze_queue(q);
+ 	if (err)
+ 		return err;
+ 	return ret;
+@@ -585,13 +580,11 @@ static ssize_t queue_wb_lat_store(struct request_queue *q, const char *page,
+ 	 * ends up either enabling or disabling wbt completely. We can't
+ 	 * have IO inflight if that happens.
+ 	 */
+-	blk_mq_freeze_queue(q);
+ 	blk_mq_quiesce_queue(q);
+ 
+ 	wbt_set_min_lat(q, val);
+ 
+ 	blk_mq_unquiesce_queue(q);
+-	blk_mq_unfreeze_queue(q);
+ 
+ 	return count;
+ }
+@@ -722,9 +715,11 @@ queue_attr_store(struct kobject *kobj, struct attribute *attr,
+ 	if (!entry->store)
+ 		return -EIO;
+ 
++	blk_mq_freeze_queue(q);
+ 	mutex_lock(&q->sysfs_lock);
+ 	res = entry->store(q, page, length);
+ 	mutex_unlock(&q->sysfs_lock);
++	blk_mq_unfreeze_queue(q);
+ 	return res;
  }
  
- static void send_disconnects(struct nbd_device *nbd)
 -- 
 2.43.0
 
