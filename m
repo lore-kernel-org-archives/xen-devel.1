@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8D4C25B76
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 05:20:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.737597.1144008 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB3EC27C5E
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2024 05:20:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.737610.1144048 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGtvQ-0007vm-Jc; Tue, 11 Jun 2024 05:20:04 +0000
+	id 1sGtvf-0001Wv-RN; Tue, 11 Jun 2024 05:20:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 737597.1144008; Tue, 11 Jun 2024 05:20:04 +0000
+Received: by outflank-mailman (output) from mailman id 737610.1144048; Tue, 11 Jun 2024 05:20:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sGtvQ-0007v9-Gj; Tue, 11 Jun 2024 05:20:04 +0000
-Received: by outflank-mailman (input) for mailman id 737597;
- Tue, 11 Jun 2024 05:20:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sGtvf-0001Wl-MH; Tue, 11 Jun 2024 05:20:19 +0000
+Received: by outflank-mailman (input) for mailman id 737610;
+ Tue, 11 Jun 2024 05:20:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M7An=NN=bombadil.srs.infradead.org=BATV+2fedbe304aabaf399917+7597+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1sGtvP-0006Mb-5y
- for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 05:20:03 +0000
+ id 1sGtvd-0006gk-Ro
+ for xen-devel@lists.xenproject.org; Tue, 11 Jun 2024 05:20:17 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 40859eb5-27b2-11ef-90a3-e314d9c70b13;
- Tue, 11 Jun 2024 07:20:02 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 48da98a5-27b2-11ef-b4bb-af5377834399;
+ Tue, 11 Jun 2024 07:20:16 +0200 (CEST)
 Received: from
  2a02-8389-2341-5b80-cdb4-8e7d-405d-6b77.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:cdb4:8e7d:405d:6b77] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1sGtv2-00000007QpR-0wAa; Tue, 11 Jun 2024 05:19:40 +0000
+ id 1sGtvL-00000007R0v-1C21; Tue, 11 Jun 2024 05:19:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40859eb5-27b2-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 48da98a5-27b2-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=QZOtfSoQAA02jj5gA5gptGlEH50imtUdZkhUebJgjrY=; b=UXmi+XkXDTmhUIFmQ+lCw4UloG
-	14qIavWEJ+8aZIyq6Y+DxHB0S+SOdr/Qm7RnBCGVrQ6ORBr+Hqf8WMeKLVA1Ap/HXQFtuZp9XeHwE
-	mLWCp4AAXKrG1/s2Fd8LRv78JletbtIZkPhtpE7wERgDDf281dTYOKtaadOkC4olXUszQKCGm5yP1
-	BpkgDcxJ6TrEqCdmFlqaO5NBmiBg3C6wPCtwYpOHue5QOYvKPnHjae3lNtfzFW81dHNN4ZfSiAMBf
-	4uq0nk+3pDzVezm1sl4pM5+/+sE3FR5B72qqnqHf1v7fD0uNQAYqOZPwF/oW5OjnMH5uLvQLA7tKb
-	NcAQXwJw==;
+	bh=lt3t26OR+aUwy+yHARJ3+3kli+Y9MzGBmWJgtPDO0Yk=; b=3Uu1BULf7magHnf6R7hsR1GIlN
+	SJd84Gj4n7hMxXgVxqwTjx12uB4BxsPsKofgqeK8s1tB9x/8UIqfFwYdEmhAf22CuIAOwrm0oxESi
+	ycgsWyJNCcFgkZRL9iNnvCLYcGs2YN4KpB13M0ItXIwsYf4zxZ//KlgnW18ry7obpXptNUl3Jior/
+	Fwwpt7Ey8K33VEKo8oxSt00ZEPoPxl7Xaeg9EVXtqGT/k85qAxMYikzkGk0wNt6tJYX2Bnl0J+7lG
+	lA1TnI+25z1ZuXjSGhoq/L28+4F0/MOFLHnnstU1+tbzD0qia6Man53VkKd6ZswYiGXsl7DEHICUx
+	lOPAQasw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -92,9 +92,9 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
 	linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org
-Subject: [PATCH 03/26] loop: stop using loop_reconfigure_limits in __loop_clr_fd
-Date: Tue, 11 Jun 2024 07:19:03 +0200
-Message-ID: <20240611051929.513387-4-hch@lst.de>
+Subject: [PATCH 09/26] nbd: move setting the cache control flags to __nbd_set_size
+Date: Tue, 11 Jun 2024 07:19:09 +0200
+Message-ID: <20240611051929.513387-10-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611051929.513387-1-hch@lst.de>
 References: <20240611051929.513387-1-hch@lst.de>
@@ -102,43 +102,52 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-__loop_clr_fd wants to clear all settings on the device.  Prepare for
-moving more settings into the block limits by open coding
-loop_reconfigure_limits.
+Move setting the cache control flags in nbd in preparation for moving
+these flags into the queue_limits structure.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/loop.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ drivers/block/nbd.c | 17 +++++++----------
+ 1 file changed, 7 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 93780f41646b75..93a49c40a31a71 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -1133,6 +1133,7 @@ static int loop_configure(struct loop_device *lo, blk_mode_t mode,
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index ad887d614d5b3f..44b8c671921e5c 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -342,6 +342,12 @@ static int __nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
+ 		lim.max_hw_discard_sectors = UINT_MAX;
+ 	else
+ 		lim.max_hw_discard_sectors = 0;
++	if (!(nbd->config->flags & NBD_FLAG_SEND_FLUSH))
++		blk_queue_write_cache(nbd->disk->queue, false, false);
++	else if (nbd->config->flags & NBD_FLAG_SEND_FUA)
++		blk_queue_write_cache(nbd->disk->queue, true, true);
++	else
++		blk_queue_write_cache(nbd->disk->queue, true, false);
+ 	lim.logical_block_size = blksize;
+ 	lim.physical_block_size = blksize;
+ 	error = queue_limits_commit_update(nbd->disk->queue, &lim);
+@@ -1286,19 +1292,10 @@ static void nbd_bdev_reset(struct nbd_device *nbd)
  
- static void __loop_clr_fd(struct loop_device *lo, bool release)
+ static void nbd_parse_flags(struct nbd_device *nbd)
  {
-+	struct queue_limits lim;
- 	struct file *filp;
- 	gfp_t gfp = lo->old_gfp_mask;
+-	struct nbd_config *config = nbd->config;
+-	if (config->flags & NBD_FLAG_READ_ONLY)
++	if (nbd->config->flags & NBD_FLAG_READ_ONLY)
+ 		set_disk_ro(nbd->disk, true);
+ 	else
+ 		set_disk_ro(nbd->disk, false);
+-	if (config->flags & NBD_FLAG_SEND_FLUSH) {
+-		if (config->flags & NBD_FLAG_SEND_FUA)
+-			blk_queue_write_cache(nbd->disk->queue, true, true);
+-		else
+-			blk_queue_write_cache(nbd->disk->queue, true, false);
+-	}
+-	else
+-		blk_queue_write_cache(nbd->disk->queue, false, false);
+ }
  
-@@ -1156,7 +1157,14 @@ static void __loop_clr_fd(struct loop_device *lo, bool release)
- 	lo->lo_offset = 0;
- 	lo->lo_sizelimit = 0;
- 	memset(lo->lo_file_name, 0, LO_NAME_SIZE);
--	loop_reconfigure_limits(lo, 512, false);
-+
-+	/* reset the block size to the default */
-+	lim = queue_limits_start_update(lo->lo_queue);
-+	lim.logical_block_size = 512;
-+	lim.physical_block_size = 512;
-+	lim.io_min = 512;
-+	queue_limits_commit_update(lo->lo_queue, &lim);
-+
- 	invalidate_disk(lo->lo_disk);
- 	loop_sysfs_exit(lo);
- 	/* let user-space know about this change */
+ static void send_disconnects(struct nbd_device *nbd)
 -- 
 2.43.0
 
