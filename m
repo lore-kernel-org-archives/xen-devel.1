@@ -4,45 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C79C27C6E
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Jun 2024 16:31:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.740121.1147138 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D7FC27C4F
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Jun 2024 16:58:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.740136.1147158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sHnM4-0005HF-Gi; Thu, 13 Jun 2024 16:31:16 +0000
+	id 1sHnm5-00014G-MT; Thu, 13 Jun 2024 16:58:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 740121.1147138; Thu, 13 Jun 2024 16:31:16 +0000
+Received: by outflank-mailman (output) from mailman id 740136.1147158; Thu, 13 Jun 2024 16:58:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sHnM4-0005H8-DU; Thu, 13 Jun 2024 16:31:16 +0000
-Received: by outflank-mailman (input) for mailman id 740121;
- Thu, 13 Jun 2024 16:31:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sHnm5-000149-Jo; Thu, 13 Jun 2024 16:58:09 +0000
+Received: by outflank-mailman (input) for mailman id 740136;
+ Thu, 13 Jun 2024 16:58:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Dc9R=NP=amazon.co.uk=prvs=88774d79b=eliasely@srs-se1.protection.inumbo.net>)
- id 1sHnM2-0005Gx-Iv
- for xen-devel@lists.xenproject.org; Thu, 13 Jun 2024 16:31:14 +0000
-Received: from smtp-fw-52003.amazon.com (smtp-fw-52003.amazon.com
- [52.119.213.152]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 585bbdf1-29a2-11ef-b4bb-af5377834399;
- Thu, 13 Jun 2024 18:31:12 +0200 (CEST)
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
- smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.43.8.6])
- by smtp-border-fw-52003.iad7.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2024 16:31:11 +0000
-Received: from EX19MTAEUC001.ant.amazon.com [10.0.10.100:46197]
- by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.47.146:2525]
- with esmtp (Farcaster)
- id 8100c6ab-c6a2-4d88-8eb8-fc882871ded1; Thu, 13 Jun 2024 16:31:09 +0000 (UTC)
-Received: from EX19D018EUA002.ant.amazon.com (10.252.50.146) by
- EX19MTAEUC001.ant.amazon.com (10.252.51.193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.34; Thu, 13 Jun 2024 16:31:08 +0000
-Received: from [10.95.132.234] (10.95.132.234) by
- EX19D018EUA002.ant.amazon.com (10.252.50.146) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.34; Thu, 13 Jun 2024 16:31:05 +0000
+ <SRS0=9y96=NP=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1sHnm4-00013v-Ei
+ for xen-devel@lists.xenproject.org; Thu, 13 Jun 2024 16:58:08 +0000
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [2607:f8b0:4864:20::f31])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1a4f6571-29a6-11ef-90a3-e314d9c70b13;
+ Thu, 13 Jun 2024 18:58:07 +0200 (CEST)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6b072522bd5so6230486d6.2
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Jun 2024 09:58:07 -0700 (PDT)
+Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6b2a5efb07csm8501036d6.134.2024.06.13.09.58.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Jun 2024 09:58:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,101 +46,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 585bbdf1-29a2-11ef-b4bb-af5377834399
+X-Inumbo-ID: 1a4f6571-29a6-11ef-90a3-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1718296273; x=1749832273;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=EOs3UZ4vIwDq2rjD+Isyyo91v0ijB9Y4SztO4w/VQ7o=;
-  b=ZAQsFGnIlhyaLsjRJdf0+2rxSKbN8W1kIs6fvChL6KQpqq1MKAm80QIR
-   ryvQ/8qphBWyKCLE0gVxkCXPwDHseL8prARG4iXhskbOnE0fGdxFj6Vlo
-   rFNktWqv3RVu3T9EXYW09yUyOmUfN27bZhXTO5xo4iyzlnNuRc64PW5Rr
-   s=;
-X-IronPort-AV: E=Sophos;i="6.08,235,1712620800"; 
-   d="scan'208";a="4786701"
-X-Farcaster-Flow-ID: 8100c6ab-c6a2-4d88-8eb8-fc882871ded1
-Message-ID: <1ad9ccce-c02b-46c0-8fea-10b35b574cb8@amazon.com>
-Date: Thu, 13 Jun 2024 17:31:01 +0100
+        d=citrix.com; s=google; t=1718297884; x=1718902684; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PC76GIkUGU8UlLIXtJNN8BuZtt7P1TDX2gYZkFadrsY=;
+        b=Q3HxLKZGA8/LB9HR7L5aozT4/ibGj8IBRCVM4dXwQS3Xx6wocgDkCDXCcvknPtJGnk
+         TA4Y1kCc/Oq+YwgA0NaMHqK5PAgTQBlvQyIXm+HDEHOA5F/PxJivpu83CN7tJOuSVQpp
+         yhyufF23TYpXHE5TuQgflSa4X01/v6VlQyv3U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718297884; x=1718902684;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=PC76GIkUGU8UlLIXtJNN8BuZtt7P1TDX2gYZkFadrsY=;
+        b=URHiF41Hvs6fpDzEMuxk+qKi2eAurp+KzSsgfpYbRCzfhdi3F6DM9Ay//p7byVxn4P
+         Ol0ep40URTC/iMTGTHKNt7qwLgIS+3hdMdvjNNj9JpzW2iG9USkMCgqvPDUHP6P1K8Qm
+         Mv6JGfHAvRe8liVCejzeigvUeJk5sHiYc9uZafSvkUM/0B+rb4f4FEnjN8vCeDvZh9Y8
+         ntmLMGFXmfymt4iA/qsq3UjJZQ/zHfIDRjRxzeawCcSifeacdH4y3G6NrsMM247LNBtQ
+         DJ8T6WT6481KulXAe2ivhId1kwV2mhh5oHT9YMp6hP3LqvNmfRQ0TRiOo53EfSod+plI
+         G79A==
+X-Gm-Message-State: AOJu0Yw6kg5BShd5ECmrgmEJFoSFm+ihdVsCq3axhv2dFcWI/2sNGrsA
+	tWk90kb8ovdcNuO7A6teJP7xoPm5XiC7eGaH1H/gcnhsWmX1qkxVeAQPHzJ6jFw+uEz1ZHqXlkd
+	d
+X-Google-Smtp-Source: AGHT+IGul1+xQlyP5wng89N5Wm066PxOGU65bM5Nel+PzvhHTqNKFIMShWyiLZjCbJahOiflP3+Pzg==
+X-Received: by 2002:a05:6214:943:b0:6b0:91d4:5825 with SMTP id 6a1803df08f44-6b2afd958d0mr1142786d6.56.1718297884533;
+        Thu, 13 Jun 2024 09:58:04 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v3 1/3] x86/irq: deal with old_cpu_mask for interrupts in movement in fixup_irqs()
+Date: Thu, 13 Jun 2024 18:56:15 +0200
+Message-ID: <20240613165617.42538-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240613165617.42538-1-roger.pau@citrix.com>
+References: <20240613165617.42538-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V3 (resend) 01/19] x86: Create per-domain mapping of
- guest_root_pt
-To: Jan Beulich <jbeulich@suse.com>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
-	<hongyxia@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Julien Grall
-	<jgrall@amazon.com>, <xen-devel@lists.xenproject.org>
-References: <20240513134046.82605-1-eliasely@amazon.com>
- <20240513134046.82605-2-eliasely@amazon.com>
- <dd145c67-8e3e-4b15-94f7-c7cd1f127d45@suse.com>
- <bda3386e-26c5-4efd-b7ad-00f3643523fa@amazon.com>
- <b50d0a83-fab4-4f59-bf4d-5c5593923f34@suse.com>
-Content-Language: en-US
-From: Elias El Yandouzi <eliasely@amazon.com>
-In-Reply-To: <b50d0a83-fab4-4f59-bf4d-5c5593923f34@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.95.132.234]
-X-ClientProxiedBy: EX19D039UWA004.ant.amazon.com (10.13.139.68) To
- EX19D018EUA002.ant.amazon.com (10.252.50.146)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Jan,
+Given the current logic it's possible for ->arch.old_cpu_mask to get out of
+sync: if a CPU set in old_cpu_mask is offlined and then onlined
+again without old_cpu_mask having been updated the data in the mask will no
+longer be accurate, as when brought back online the CPU will no longer have
+old_vector configured to handle the old interrupt source.
 
-On 16/05/2024 08:17, Jan Beulich wrote:
-> On 15.05.2024 20:25, Elias El Yandouzi wrote:
->> However, I noticed quite a weird bug while doing some testing. I may
->> need your expertise to find the root cause.
-> 
-> Looks like you've overflowed the dom0 kernel stack, most likely because
-> of recurring nested exceptions.
-> 
->> In the case where I have more vCPUs than pCPUs (and let's consider we
->> have one pCPU for two vCPUs), I noticed that I would always get a page
->> fault in dom0 kernel (5.10.0-13-amd64) at the exact same location. I did
->> a bit of investigation but I couldn't come to a clear conclusion.
->> Looking at the stack trace [1], I have the feeling the crash occurs in a
->> loop or a recursive call.
->>
->> I tried to identify where the crash occurred using addr2line:
->>
->>   > addr2line -e vmlinux-5.10.0-29-amd64 0xffffffff810218a0
->> debian/build/build_amd64_none_amd64/arch/x86/xen/mmu_pv.c:880
->>
->> It turns out to point on the closing bracket of the function
->> xen_mm_unpin_all()[2].
->>
->> I thought the crash could happen while returning from the function in
->> the assembly epilogue but the output of objdump doesn't even show the
->> address.
->>
->> The only theory I could think of was that because we only have one pCPU,
->> we may never execute one of the two vCPUs, and never setup the mapping
->> to the guest_root_pt in write_ptbase(), hence the page fault. This is
->> just a random theory, I couldn't find any hint suggesting it would be
->> the case though. Any idea how I could debug this?
-> 
-> I guess you want to instrument Xen enough to catch the top level fault (or
-> the 2nd from top, depending on where the nesting actually starts) to see
-> why that happens. Quite likely some guest mapping isn't set up properly.
-> 
+If there's an interrupt movement in progress, and the to be offlined CPU (which
+is the call context) is in the old_cpu_mask clear it and update the mask, so it
+doesn't contain stale data.
 
-Julien helped me with this one and I believe we have identified the 
-problem.
+Note that when the system is going down fixup_irqs() will be called by
+smp_send_stop() from CPU 0 with a mask with only CPU 0 on it, effectively
+asking to move all interrupts to the current caller (CPU 0) which is the only
+CPU to remain online.  In that case we don't care to migrate interrupts that
+are in the process of being moved, as it's likely we won't be able to move all
+interrupts to CPU 0 due to vector shortage anyway.
 
-As you've suggested, I wrote the mapping of the guest root PT in our 
-per-domain section, root_pt_l1tab, within write_ptbase() function as 
-we'd always be in the case v == current plus switch_cr3_cr4() would 
-always flush local tlb.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v2:
+ - Adjust commit message.
+ - Add comment about excluding smp_send_stop() case.
+ - Use cpu_online().
+---
+ xen/arch/x86/irq.c | 29 ++++++++++++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
 
-However, there exists a path, in toggle_guest_mode(), where we could 
-call update_cr3()/make_cr3() without calling write_ptbase() and hence 
-not maintain mappings properly. Instead toggle_guest_mode() has a partly 
-open-coded version of write_ptbase().
-
-Would you rather like to see the mappings written in make_cr3() or in 
-toggle_guest_mode() within the pseudo open-coded version of write_ptbase()?
-
-Elias
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 263e502bc0f6..d305aed317f2 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -2526,7 +2526,7 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
+     for ( irq = 0; irq < nr_irqs; irq++ )
+     {
+         bool break_affinity = false, set_affinity = true;
+-        unsigned int vector;
++        unsigned int vector, cpu = smp_processor_id();
+         cpumask_t *affinity = this_cpu(scratch_cpumask);
+ 
+         if ( irq == 2 )
+@@ -2569,6 +2569,33 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
+                                affinity);
+         }
+ 
++        if ( desc->arch.move_in_progress &&
++             /*
++              * Only attempt to adjust the mask if the current CPU is going
++              * offline, otherwise the whole system is going down and leaving
++              * stale data in the masks is fine.
++              */
++             !cpu_online(cpu) &&
++             cpumask_test_cpu(cpu, desc->arch.old_cpu_mask) )
++        {
++            /*
++             * This CPU is going offline, remove it from ->arch.old_cpu_mask
++             * and possibly release the old vector if the old mask becomes
++             * empty.
++             *
++             * Note cleaning ->arch.old_cpu_mask is required if the CPU is
++             * brought offline and then online again, as when re-onlined the
++             * per-cpu vector table will no longer have ->arch.old_vector
++             * setup, and hence ->arch.old_cpu_mask would be stale.
++             */
++            cpumask_clear_cpu(cpu, desc->arch.old_cpu_mask);
++            if ( cpumask_empty(desc->arch.old_cpu_mask) )
++            {
++                desc->arch.move_in_progress = 0;
++                release_old_vec(desc);
++            }
++        }
++
+         /*
+          * Avoid shuffling the interrupt around as long as current target CPUs
+          * are a subset of the input mask.  What fixup_irqs() cares about is
+-- 
+2.45.2
 
 
