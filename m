@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91322C27C79
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 17:31:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.742528.1149338 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F15DC41513
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 17:39:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.742538.1149361 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJGBy-0002Be-NP; Mon, 17 Jun 2024 17:30:54 +0000
+	id 1sJGKI-0003EG-8o; Mon, 17 Jun 2024 17:39:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 742528.1149338; Mon, 17 Jun 2024 17:30:54 +0000
+Received: by outflank-mailman (output) from mailman id 742538.1149361; Mon, 17 Jun 2024 17:39:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJGBy-0002BX-Ke; Mon, 17 Jun 2024 17:30:54 +0000
-Received: by outflank-mailman (input) for mailman id 742528;
- Mon, 17 Jun 2024 17:30:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sJGKH-0003Bx-W6; Mon, 17 Jun 2024 17:39:29 +0000
+Received: by outflank-mailman (input) for mailman id 742538;
+ Mon, 17 Jun 2024 17:39:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gp4O=NT=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sJGBx-0002BP-5p
- for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 17:30:53 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 568b5465-2ccf-11ef-90a3-e314d9c70b13;
- Mon, 17 Jun 2024 19:30:51 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a6cb130027aso310217666b.2
- for <xen-devel@lists.xenproject.org>; Mon, 17 Jun 2024 10:30:49 -0700 (PDT)
-Received: from [10.125.226.166] ([160.101.139.1])
+ id 1sJGKH-00036g-3H
+ for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 17:39:29 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8a6e9f41-2cd0-11ef-b4bb-af5377834399;
+ Mon, 17 Jun 2024 19:39:26 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a6f958a3a69so7951566b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Jun 2024 10:39:26 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57cbc852bf5sm5901534a12.58.2024.06.17.10.30.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Jun 2024 10:30:48 -0700 (PDT)
+ a640c23a62f3a-a6f56da4496sm532010666b.8.2024.06.17.10.39.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Jun 2024 10:39:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,167 +47,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 568b5465-2ccf-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 8a6e9f41-2cd0-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1718645449; x=1719250249; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=7/xARnIxZ3vDTJqd5Pdnj0Kwhy1Z2i2+RNe91WeCq8E=;
-        b=aWjgYv/HEtQZA+u1M4MAl6841naHexWK19re2hPUVV8EyFZ3wp+/WSVSxML2c5fc0d
-         h71Ativj9IoFBCfk3tysSZe1Qt88bxyBO73ZdlteeMQIATnSdUqYToE6dnEq3zzcu7+m
-         XFiFZUPlkEYpjc4R8otPjCxtPllyEV8Qw/ccg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718645449; x=1719250249;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1718645965; x=1719250765; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7/xARnIxZ3vDTJqd5Pdnj0Kwhy1Z2i2+RNe91WeCq8E=;
-        b=UGEJ456YVIpxjYaVGuOAi/UBVP4vQSo4mdl46bwbfwowkue0hmoRgXs6/IAxP0Otfi
-         EwYMXKPWOilHM/Ej61lSqMW3T94ZdUQJ4A0wfBVuKcg3/Y/gUTGzr9ApvrIYFiYNwozQ
-         ZtmB6XGMGTWMSch6y80A57Wg0DIglo9uAuPuGMiPXaMLNzqeznfH9T9FYchtWaMIT0MC
-         Hwx/ygxeYYv1H1+ziBUvVflwirBxOiOqMaBiHavwSP30WoJ98n3ub30AkzcPDc0HPFvf
-         ImfVbxzSyAFe8pggyFF4nEQ8cGEUVQiVBbuhUBLDlu+Hrp5A+liHZJ/f6m5DizvWUtGl
-         xpag==
-X-Forwarded-Encrypted: i=1; AJvYcCU7WVUF5XgyuF/3dsshgVHTSREWPRDwpGj7Pw92uADt8Ei2sESfsp9CDO/LahAEhXmVbE3qQe7jtFmWtkxo7hoc8/Z7/eEt3nXNrPWOXI0=
-X-Gm-Message-State: AOJu0Yx+pDPs/k9SR8ty3wpOxGNGZD0HIXtX4Zkn8PhibVoOc+48sdLR
-	O5FYO0nyEycTeB1N5uOnEQTk6Em7vSLcyltjBnRrelP+Fr28PfbiKXoklknnxIU=
-X-Google-Smtp-Source: AGHT+IFLx2aAgn/ANZseNFV/XUwfiU9hY7C3sp5f7YhaRPYMxrhjPZE/yHw/qz/F3OgAMjraiouDLA==
-X-Received: by 2002:a50:c056:0:b0:57c:6338:328a with SMTP id 4fb4d7f45d1cf-57cbd6c7589mr9672923a12.30.1718645448831;
-        Mon, 17 Jun 2024 10:30:48 -0700 (PDT)
-Message-ID: <af1419dd-c9bf-4f15-b2dd-c3883030d4f4@citrix.com>
-Date: Mon, 17 Jun 2024 18:30:48 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] x86/boot: Collect the Raw CPU Policy earlier on boot
-To: Jan Beulich <jbeulich@suse.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20240523111627.28896-1-andrew.cooper3@citrix.com>
- <20240523111627.28896-4-andrew.cooper3@citrix.com>
- <8245f0ce-2964-4ecb-a31d-3e182a6d3e0b@suse.com>
- <6b4ed926-8934-4660-98c7-1856d0c90878@citrix.com>
- <cc1b52d8-163f-443c-8418-aba1c7d77ecb@suse.com>
-Content-Language: en-GB
+        bh=Z5V14Q8Gcx1y36spQ2JEJ7cbqPfjGOYxmj1ldZEYhTQ=;
+        b=M9Owe0bbw1/pBNPLQBAKvhPY1TDE7qQhmLlkFBcM3ye+wsgSP9ER2N6e/BA1bYoSaA
+         77ZHH2Xg4lZrr++2TtMiHQufGaoDoCVJLMFRNjOhbxTZSNjSVf6guwdqU/ye6m+DI0ns
+         GI8U4OBygkj+2Ly4h2ylZjN7cPN21SIdiuhJ0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718645965; x=1719250765;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Z5V14Q8Gcx1y36spQ2JEJ7cbqPfjGOYxmj1ldZEYhTQ=;
+        b=OXWTiFkKQMP2wqZOOSq85H/fpHqz/NxLAqsoovNAXGzP/DuExvCvZLCISc2U6j176G
+         Yk5zXa8wuJOEnv5w8KDaPwYwg/IIul4VLxdrR4b9+/7p1nUwtCVIwtyMaXoVRuXme1of
+         wbmKoVxLxOShrB3xyXL1TRBWf5hcGlMGIJMihj+631S/f1fsme8qywICrFecOc3TpQ6L
+         AU79K+Fxe1ccfRRLBEvrFErbpwKgtCyTW+bIe5HzZr7f28hRQ6dQvbNpGUihYB9HxnjY
+         nc1btGf6mQE9WQRnlnBVLAKJOiCLD6XbL1N28086IvkesrOIiIQyUQilNz/JT7u+5JTn
+         t7NA==
+X-Gm-Message-State: AOJu0YzCW5RGUf2CzdSYTrV/2PFiJrzcEWT7gUFpJ8iAxT9ll/5+uk+G
+	OZeaIyCE+zNv2FSeW/giXiodzlk+Y/5howRDl/UwEsorIkirrRyq2bDsx5aKlQqBcrYc9iuDNRg
+	5PeM=
+X-Google-Smtp-Source: AGHT+IHDPj2YJF/xoswS4Hxe1qyfmkAv45GDhCV3GJGVWSh9zGuNHazvSlL1zN/PexzvEbPHklSOoQ==
+X-Received: by 2002:a17:906:b756:b0:a6e:fad9:6dbb with SMTP id a640c23a62f3a-a6f60bcbb01mr710081566b.0.1718645965045;
+        Mon, 17 Jun 2024 10:39:25 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <cc1b52d8-163f-443c-8418-aba1c7d77ecb@suse.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 1/7] x86/xstate: Fix initialisation of XSS cache
+Date: Mon, 17 Jun 2024 18:39:15 +0100
+Message-Id: <20240617173921.1755439-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240617173921.1755439-1-andrew.cooper3@citrix.com>
+References: <20240617173921.1755439-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 17/06/2024 11:25 am, Jan Beulich wrote:
-> On 14.06.2024 20:26, Andrew Cooper wrote:
->> On 23/05/2024 4:44 pm, Jan Beulich wrote:
->>> On 23.05.2024 13:16, Andrew Cooper wrote:
->>>> This is a tangle, but it's a small step in the right direction.
->>>>
->>>> xstate_init() is shortly going to want data from the Raw policy.
->>>> calculate_raw_cpu_policy() is sufficiently separate from the other policies to
->>>> be safe to do.
->>>>
->>>> No functional change.
->>>>
->>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>> Would you mind taking a look at
->>> https://lists.xen.org/archives/html/xen-devel/2021-04/msg01335.html
->>> to make clear (to me at least) in how far we can perhaps find common grounds
->>> on what wants doing when? (Of course the local version I have has been
->>> constantly re-based, so some of the function names would have changed from
->>> what's visible there.)
->> That's been covered several times, at least in part.
->>
->> I want to eventually move the host policy too, but I'm not willing to
->> compound the mess we've currently got just to do it earlier.  It's just
->> creating even more obstacles to doing it nicely.
->>
->> Nothing in this series needs (or indeed should) use the host policy.
-> Hmm, I'm irritated: You talk about host policy here, ...
->
->> The same is true of your AMX series.  You're (correctly) breaking the
->> uniform allocation size and (when policy selection is ordered WRT vCPU
->> creation, as discussed) it becomes solely depend on the guest policy.
-> ... then guest policy, and ...
->
->> xsave.c really has no legitimate use for the host policy once the
->> uniform allocation size aspect has gone away.
-> ... then host policy again.
+The clobbering of this_cpu(xcr0) and this_cpu(xss) to architecturally invalid
+values is to force the subsequent set_xcr0() and set_msr_xss() to reload the
+hardware register.
 
-Yes.  Notice how host policy is always referred to in the negative.
+While XCR0 is reloaded in xstate_init(), MSR_XSS isn't.  This causes
+get_msr_xss() to return the invalid value, and logic of the form:
 
-The raw policy should be used for everything pertaining to the
-instruction ABI itself, and the guest policy for sizing information.
+    old = get_msr_xss();
+    set_msr_xss(new);
+    ...
+    set_msr_xss(old);
 
-> Whereas my patch switches to using the raw
-> policy, simply to eliminate redundant data.
+to try and restore said invalid value.
 
-Except it doesn't.  The latest posted version of your series contains:
+The architecturally invalid value must be purged from the cache, meaning the
+hardware register must be written at least once.  This in turn highlights that
+the invalid value must only be used in the case that the hardware register is
+available.
 
--static u32 __read_mostly xsave_cntxt_size;
-+#define xsave_cntxt_size (host_cpuid_policy.xstate.max_size | 0)
+Fixes: f7f4a523927f ("x86/xstate: reset cached register values on resume")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-and you've even stated that I should have acked this patch simply on its
-age.
+v3:
+ * Split out of later patch
+---
+ xen/arch/x86/xstate.c | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
 
-I acked the patches that were good, and you did committed them at the
-time.  Then I put together this series to fix the bugs the latent bugs
-which you were making less latent; this series really is the same one
-discussed back then, and really does have some 2020/2021 author dates in it.
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index 99cedb4f5e24..75788147966a 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -641,13 +641,6 @@ void xstate_init(struct cpuinfo_x86 *c)
+         return;
+     }
+ 
+-    /*
+-     * Zap the cached values to make set_xcr0() and set_msr_xss() really
+-     * write it.
+-     */
+-    this_cpu(xcr0) = 0;
+-    this_cpu(xss) = ~0;
+-
+     cpuid_count(XSTATE_CPUID, 0, &eax, &ebx, &ecx, &edx);
+     feature_mask = (((u64)edx << 32) | eax) & XCNTXT_MASK;
+     BUG_ON(!valid_xcr0(feature_mask));
+@@ -657,8 +650,19 @@ void xstate_init(struct cpuinfo_x86 *c)
+      * Set CR4_OSXSAVE and run "cpuid" to get xsave_cntxt_size.
+      */
+     set_in_cr4(X86_CR4_OSXSAVE);
++
++    /*
++     * Zap the cached values to make set_xcr0() and set_msr_xss() really write
++     * the hardware register.
++     */
++    this_cpu(xcr0) = 0;
+     if ( !set_xcr0(feature_mask) )
+         BUG();
++    if ( cpu_has_xsaves )
++    {
++        this_cpu(xss) = ~0;
++        set_msr_xss(0);
++    }
+ 
+     if ( bsp )
+     {
+-- 
+2.39.2
 
-
-It is, AFAICT, not safe to move the calculation of the host policy as
-early as you did, without arranging for setup_{force,clear}_cap() to
-edit the host policy synchronously.  Recalculating a second time later
-isn't good enough, because you've created an asymmetry for most of boot
-between two pieces of state which are supposed to be in sync, and that
-you're intentionally starting to use.  So yes - while I do intend to
-eventually make the host policy usable that early too, I'm really not
-happy doing so in a manner that has "ticking timebomb" written all over it.
-
-As to xsave_cntxt_size, it can (and should) be eliminated entirely when
-xstate_alloc_save_area() can use the guest policy to size the allocation.
-
-~Andrew
 
