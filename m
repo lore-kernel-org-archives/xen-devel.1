@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83557C2BA18
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 06:06:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.741601.1148258 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71A4C27C77
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 06:06:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.741595.1148213 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJ5VF-0002ks-C3; Mon, 17 Jun 2024 06:06:05 +0000
+	id 1sJ5V8-0001T5-0G; Mon, 17 Jun 2024 06:05:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 741601.1148258; Mon, 17 Jun 2024 06:06:05 +0000
+Received: by outflank-mailman (output) from mailman id 741595.1148213; Mon, 17 Jun 2024 06:05:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJ5VF-0002ki-8i; Mon, 17 Jun 2024 06:06:05 +0000
-Received: by outflank-mailman (input) for mailman id 741601;
- Mon, 17 Jun 2024 06:06:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sJ5V7-0001SY-SE; Mon, 17 Jun 2024 06:05:57 +0000
+Received: by outflank-mailman (input) for mailman id 741595;
+ Mon, 17 Jun 2024 06:05:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JvID=NT=bombadil.srs.infradead.org=BATV+625ba2f6da96caf54eae+7603+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1sJ5VE-0001Pt-Bb
- for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 06:06:04 +0000
+ id 1sJ5V6-0001PY-KM
+ for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 06:05:56 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id acec1dc8-2c6f-11ef-90a3-e314d9c70b13;
- Mon, 17 Jun 2024 08:06:03 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a5bb2015-2c6f-11ef-b4bb-af5377834399;
+ Mon, 17 Jun 2024 08:05:51 +0200 (CEST)
 Received: from [91.187.204.140] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1sJ5Uz-00000009IIF-1FWI; Mon, 17 Jun 2024 06:05:49 +0000
+ id 1sJ5Un-00000009IBT-13tu; Mon, 17 Jun 2024 06:05:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: acec1dc8-2c6f-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: a5bb2015-2c6f-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=meZuXUdMqnfJKNa8LwE+49M6ExyQLw1VDUKKaUAtY/k=; b=kXJ7ztHFcc1IoznmhgthEbCn2W
-	e1Zl0vH8pJJ+B1epWy41WO2zQGJBi7XGUy+4DCl9YDXMqTyH3anZVULv8jW+BHuwQ85BKjVgecb4w
-	hAGHoW9h4WP4v1QYat3Jf10IP4aUS7o6JZkLXgjO/8HcnWdwF4gdFcc7AKgkddhvpiw4wY1zPxXr8
-	3mk8eCEPPsZL/pesCm8st49vLZsZi08TeEmgYQj7DQG8b6JLAICjztbtSkI7ROD2ePH/Irbhf7bQ+
-	3BFsrlrwOKGuxd2zhlnwTsZISXTPAagKKPg7HdaG9zcqs83W9ES5qTSx7HYqlSblbPpRJLwJC6SUc
-	Bt14RRKQ==;
+	bh=qPBJslfqWjz6ccntprxT8r9b8bc2Nh8I2X0y5YXiLrY=; b=H7sPQj5uSpQ8xoiZtGJBid1xZu
+	if6mAqA0Jfn3igEw6WdszQJfz5gH3lyZMnstvAzV3P6serQmkAQyiADHD9wWOOPOF9HP4DBW1GR2g
+	jgbtirHJj+0wShDJc2fQyh1RCasnfNjxJOqpGUt9TfDBEEIsM7YbcF1ehsywJSRiXEtWqa5IAPivq
+	Whnv97Fge0UeW/m//VhN8O0fP1mMPRjqdJRnrVxH4yr4HWBwZjknPZIFb7Mpe61CRsUHpOZfdP1no
+	4LhjEos8Iy6NCRKQSI8NlGYeodCulXCzsT3f2+L1F9TfNW2bq7y/erGTZtNK0CymRxBgerAU8FCd5
+	7vMi+W6Q==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -89,13 +89,10 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
 	linux-nvme@lists.infradead.org,
 	linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	Damien Le Moal <dlemoal@kernel.org>,
-	Hannes Reinecke <hare@suse.de>,
-	Bart Van Assche <bvanassche@acm.org>
-Subject: [PATCH 05/26] loop: always update discard settings in loop_reconfigure_limits
-Date: Mon, 17 Jun 2024 08:04:32 +0200
-Message-ID: <20240617060532.127975-6-hch@lst.de>
+	linux-block@vger.kernel.org
+Subject: [PATCH 01/26] xen-blkfront: don't disable cache flushes when they fail
+Date: Mon, 17 Jun 2024 08:04:28 +0200
+Message-ID: <20240617060532.127975-2-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240617060532.127975-1-hch@lst.de>
 References: <20240617060532.127975-1-hch@lst.de>
@@ -103,60 +100,116 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Simplify loop_reconfigure_limits by always updating the discard limits.
-This adds a little more work to loop_set_block_size, but doesn't change
-the outcome as the discard flag won't change.
+blkfront always had a robust negotiation protocol for detecting a write
+cache.  Stop simply disabling cache flushes in the block layer as the
+flags handling is moving to the atomic queue limits API that needs
+user context to freeze the queue for that.  Instead handle the case
+of the feature flags cleared inside of blkfront.  This removes old
+debug code to check for such a mismatch which was previously impossible
+to hit, including the check for passthrough requests that blkfront
+never used to start with.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
 ---
- drivers/block/loop.c | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ drivers/block/xen-blkfront.c | 44 +++++++++++++++++++-----------------
+ 1 file changed, 23 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index fd671028fa8554..ce197cbea5f434 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -975,8 +975,7 @@ loop_set_status_from_info(struct loop_device *lo,
- 	return 0;
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+index 9b4ec3e4908cce..851b03844edd13 100644
+--- a/drivers/block/xen-blkfront.c
++++ b/drivers/block/xen-blkfront.c
+@@ -788,6 +788,11 @@ static int blkif_queue_rw_req(struct request *req, struct blkfront_ring_info *ri
+ 			 * A barrier request a superset of FUA, so we can
+ 			 * implement it the same way.  (It's also a FLUSH+FUA,
+ 			 * since it is guaranteed ordered WRT previous writes.)
++			 *
++			 * Note that can end up here with a FUA write and the
++			 * flags cleared.  This happens when the flag was
++			 * run-time disabled after a failing I/O, and we'll
++			 * simplify submit it as a normal write.
+ 			 */
+ 			if (info->feature_flush && info->feature_fua)
+ 				ring_req->operation =
+@@ -795,8 +800,6 @@ static int blkif_queue_rw_req(struct request *req, struct blkfront_ring_info *ri
+ 			else if (info->feature_flush)
+ 				ring_req->operation =
+ 					BLKIF_OP_FLUSH_DISKCACHE;
+-			else
+-				ring_req->operation = 0;
+ 		}
+ 		ring_req->u.rw.nr_segments = num_grant;
+ 		if (unlikely(require_extra_req)) {
+@@ -887,16 +890,6 @@ static inline void flush_requests(struct blkfront_ring_info *rinfo)
+ 		notify_remote_via_irq(rinfo->irq);
  }
  
--static int loop_reconfigure_limits(struct loop_device *lo, unsigned short bsize,
--		bool update_discard_settings)
-+static int loop_reconfigure_limits(struct loop_device *lo, unsigned short bsize)
+-static inline bool blkif_request_flush_invalid(struct request *req,
+-					       struct blkfront_info *info)
+-{
+-	return (blk_rq_is_passthrough(req) ||
+-		((req_op(req) == REQ_OP_FLUSH) &&
+-		 !info->feature_flush) ||
+-		((req->cmd_flags & REQ_FUA) &&
+-		 !info->feature_fua));
+-}
+-
+ static blk_status_t blkif_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 			  const struct blk_mq_queue_data *qd)
  {
- 	struct queue_limits lim;
+@@ -908,12 +901,22 @@ static blk_status_t blkif_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 	rinfo = get_rinfo(info, qid);
+ 	blk_mq_start_request(qd->rq);
+ 	spin_lock_irqsave(&rinfo->ring_lock, flags);
+-	if (RING_FULL(&rinfo->ring))
+-		goto out_busy;
  
-@@ -984,8 +983,7 @@ static int loop_reconfigure_limits(struct loop_device *lo, unsigned short bsize,
- 	lim.logical_block_size = bsize;
- 	lim.physical_block_size = bsize;
- 	lim.io_min = bsize;
--	if (update_discard_settings)
--		loop_config_discard(lo, &lim);
-+	loop_config_discard(lo, &lim);
- 	return queue_limits_commit_update(lo->lo_queue, &lim);
+-	if (blkif_request_flush_invalid(qd->rq, rinfo->dev_info))
+-		goto out_err;
++	/*
++	 * Check if the backend actually supports flushes.
++	 *
++	 * While the block layer won't send us flushes if we don't claim to
++	 * support them, the Xen protocol allows the backend to revoke support
++	 * at any time.  That is of course a really bad idea and dangerous, but
++	 * has been allowed for 10+ years.  In that case we simply clear the
++	 * flags, and directly return here for an empty flush and ignore the
++	 * FUA flag later on.
++	 */
++	if (unlikely(req_op(qd->rq) == REQ_OP_FLUSH && !info->feature_flush))
++		goto complete;
+ 
++	if (RING_FULL(&rinfo->ring))
++		goto out_busy;
+ 	if (blkif_queue_request(qd->rq, rinfo))
+ 		goto out_busy;
+ 
+@@ -921,14 +924,14 @@ static blk_status_t blkif_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 	spin_unlock_irqrestore(&rinfo->ring_lock, flags);
+ 	return BLK_STS_OK;
+ 
+-out_err:
+-	spin_unlock_irqrestore(&rinfo->ring_lock, flags);
+-	return BLK_STS_IOERR;
+-
+ out_busy:
+ 	blk_mq_stop_hw_queue(hctx);
+ 	spin_unlock_irqrestore(&rinfo->ring_lock, flags);
+ 	return BLK_STS_DEV_RESOURCE;
++complete:
++	spin_unlock_irqrestore(&rinfo->ring_lock, flags);
++	blk_mq_end_request(qd->rq, BLK_STS_OK);
++	return BLK_STS_OK;
  }
  
-@@ -1086,7 +1084,7 @@ static int loop_configure(struct loop_device *lo, blk_mode_t mode,
- 	else
- 		bsize = 512;
- 
--	error = loop_reconfigure_limits(lo, bsize, true);
-+	error = loop_reconfigure_limits(lo, bsize);
- 	if (WARN_ON_ONCE(error))
- 		goto out_unlock;
- 
-@@ -1496,7 +1494,7 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
- 	invalidate_bdev(lo->lo_device);
- 
- 	blk_mq_freeze_queue(lo->lo_queue);
--	err = loop_reconfigure_limits(lo, arg, false);
-+	err = loop_reconfigure_limits(lo, arg);
- 	loop_update_dio(lo);
- 	blk_mq_unfreeze_queue(lo->lo_queue);
- 
+ static void blkif_complete_rq(struct request *rq)
+@@ -1627,7 +1630,6 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
+ 					blkif_req(req)->error = BLK_STS_OK;
+ 				info->feature_fua = 0;
+ 				info->feature_flush = 0;
+-				xlvbd_flush(info);
+ 			}
+ 			fallthrough;
+ 		case BLKIF_OP_READ:
 -- 
 2.43.0
 
