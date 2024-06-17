@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC514C2BB9A
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 17:39:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.742539.1149380 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BEC1C2BB85
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 17:39:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.742536.1149348 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJGKJ-0003nz-F3; Mon, 17 Jun 2024 17:39:31 +0000
+	id 1sJGKH-000374-JM; Mon, 17 Jun 2024 17:39:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 742539.1149380; Mon, 17 Jun 2024 17:39:31 +0000
+Received: by outflank-mailman (output) from mailman id 742536.1149348; Mon, 17 Jun 2024 17:39:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJGKJ-0003nq-9G; Mon, 17 Jun 2024 17:39:31 +0000
-Received: by outflank-mailman (input) for mailman id 742539;
- Mon, 17 Jun 2024 17:39:29 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sJGKH-00036x-Go; Mon, 17 Jun 2024 17:39:29 +0000
+Received: by outflank-mailman (input) for mailman id 742536;
+ Mon, 17 Jun 2024 17:39:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gp4O=NT=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sJGKH-00036h-L3
- for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 17:39:29 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8c2e2180-2cd0-11ef-90a3-e314d9c70b13;
- Mon, 17 Jun 2024 19:39:29 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a6f0c3d0792so531942266b.3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Jun 2024 10:39:28 -0700 (PDT)
+ id 1sJGKG-00036g-Sd
+ for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 17:39:28 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8a4cbf23-2cd0-11ef-b4bb-af5377834399;
+ Mon, 17 Jun 2024 19:39:25 +0200 (CEST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a6265d3ba8fso534988066b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Jun 2024 10:39:25 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6f56da4496sm532010666b.8.2024.06.17.10.39.27
+ a640c23a62f3a-a6f56da4496sm532010666b.8.2024.06.17.10.39.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jun 2024 10:39:27 -0700 (PDT)
+ Mon, 17 Jun 2024 10:39:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,186 +47,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c2e2180-2cd0-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 8a4cbf23-2cd0-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1718645968; x=1719250768; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3uvI0uPWUeQgT6Y03c0cvjouO28il7Tm0yQNEqwNcQQ=;
-        b=cUcmywmQ9KtmYsGeHwwNG/Z0718OLni1WCnSOh66t1FlsDC2wcTrFBKi7vBr8Bhsyy
-         oXkfPYYgXSmkjswirH2DKu6ThShxOHuhpgmxzIQft+1M0MHpWetYM9SK1Xy+FMvblP5t
-         MqBKcbkLOL+2WeCzSzk6lDmsjm68csfRs39WM=
+        d=citrix.com; s=google; t=1718645964; x=1719250764; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zlq2KA/Rl2jpa+CD3iKff2ATLeNrqe6aHn27qOTXtpE=;
+        b=eSLi34n3l5anaUrp6G3ImCnB70fJ+ksS/EM4OtMJbCPYYOVXZG+3bwJVKH5jWEcyJh
+         nhZ9cghG/YgLe45Ld6Z1w5uIIcAnUbZtHAcgxAWwRlSsXNfgNBUk//clMOA9Ls8kz/br
+         tdSELTXzaeyU780dmjEDiQFKueXat8URoy/Do=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718645968; x=1719250768;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3uvI0uPWUeQgT6Y03c0cvjouO28il7Tm0yQNEqwNcQQ=;
-        b=FG1egbY4DGvXGAawn6ASbeQFFiRTr2bwq0gAM6gmrAhrvNSR3kJsCBp12wQdhOWvQ/
-         WiQTS7IpOYu/5SeO7PF2pv8OerUmY/fIdu/lTldNxCfkZffCsY9Gf3ghdoPvZrLWyfzJ
-         IK+CCcfzROgAfWiEfLMaeTCqVrPBDy3w4skTf7wgMDySjvWyUXiSbAiJAo9kRRV6pX5V
-         TxRPJLeXlBTVcbUNEGX+be2sQ5iFzTiA6VRM0VcnDQJaSaSrEJUuMZWg0chHltviPavF
-         E0IeJPdeOtL7tHHRCEQv+TPJ9zLWl6yYLVcnb0CXnWv4tctwDSTymyLn/gySs0Qg9CHw
-         9iAA==
-X-Gm-Message-State: AOJu0YxzpQmf+Ze9aUwPw4szhi/PnTs6qBNhFdC/3dkrFFGhLBXXgboF
-	XtUMHfi8uG+fqN2z65QePd2aH1ed5wwzi4TSAN2WRRSHBTx9uKzlu+ZdCWdo1wneZAxlaaTUeih
-	3+CY=
-X-Google-Smtp-Source: AGHT+IHfbAFMyFk+KRS69Rs46acGyugZCHtGPpEtfuM/I3FtBCHjLXabA2YjEFtlhhgRngQufGCmTw==
-X-Received: by 2002:a17:906:1854:b0:a6f:1dbb:d38b with SMTP id a640c23a62f3a-a6f60d2bd6dmr685432466b.28.1718645968045;
-        Mon, 17 Jun 2024 10:39:28 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1718645964; x=1719250764;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zlq2KA/Rl2jpa+CD3iKff2ATLeNrqe6aHn27qOTXtpE=;
+        b=G/F5TYPuUNJVKZ6vo7vWkZ09IrhPJtiDXKfEREozHUcCwMRqra5whB0ossuQO/3De8
+         dT8BOafqReOrOQZUuU699dL0fzQ3JFdeEJ1ql7Cutp/WoESVGbxECDGm0QbFgFII2Jvx
+         5Rw5Vdg+rB09t1Op7wIOyrjW6K/tKtprVNNvPUWnWrvGSMOt8GnemqvNiQEvPqGJGpui
+         K1D9JnFvhAvbobNZUCgjQoDNNv1lx9jbVsDQlR6CwrbEzvF34r6bySpPozvs1GFzVAqe
+         1QhxtirHzJ0xgUwSTBNf6Lz6rIbPnpW6pCvsE480Phg6lBn2NvPqgS+VfsxhsNuHR6ZO
+         NWhw==
+X-Gm-Message-State: AOJu0Yw2b0Nx24ji8NKSLOWIUYDfDKtojXM0lo8bTnO4rlERz4tdJunV
+	Qm8L2jW7kmc8yvrgMrtQmIjcz45ydx1hIOkxcFD/ObXGFaInW6kNVzz3NxpbB8Jo7ttP6oCCKeO
+	WVYk=
+X-Google-Smtp-Source: AGHT+IH0Cf5w34tJZlQQYn8ISB9ntlcGzbS6+l97omLPz4iYgaP6n6gLYIJ9DopkPO/6M6RgBbmjCA==
+X-Received: by 2002:a17:907:c081:b0:a6f:77bb:1713 with SMTP id a640c23a62f3a-a6f77bb1889mr384559566b.9.1718645964528;
+        Mon, 17 Jun 2024 10:39:24 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH v4 5/7] x86/cpu-policy: Simplify recalculate_xstate()
-Date: Mon, 17 Jun 2024 18:39:19 +0100
-Message-Id: <20240617173921.1755439-6-andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.19 v4 0/7] x86/xstate: Fixes to size calculations
+Date: Mon, 17 Jun 2024 18:39:14 +0100
+Message-Id: <20240617173921.1755439-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240617173921.1755439-1-andrew.cooper3@citrix.com>
-References: <20240617173921.1755439-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Make use of xstate_uncompressed_size() helper rather than maintaining the
-running calculation while accumulating feature components.
+Only minor changes in v4 vs v3.  See patches for details.
 
-The rest of the CPUID data can come direct from the raw cpu policy.  All
-per-component data form an ABI through the behaviour of the X{SAVE,RSTOR}*
-instructions.
+The end result has been tested across the entire XenServer hardware lab.  This
+found several false assupmtion about how the dynamic sizes behave.
 
-Use for_each_set_bit() rather than opencoding a slightly awkward version of
-it.  Mask the attributes in ecx down based on the visible features.  This
-isn't actually necessary for any components or attributes defined at the time
-of writing (up to AMX), but is added out of an abundance of caution.
+Patches 1 and 6 the main bugfixes from this series.  There's still lots more
+work to do in order to get AMX and/or CET working, but this is at least a 4-yo
+series finally off my plate.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Andrew Cooper (7):
+  x86/xstate: Fix initialisation of XSS cache
+  x86/xstate: Cross-check dynamic XSTATE sizes at boot
+  x86/boot: Collect the Raw CPU Policy earlier on boot
+  x86/xstate: Rework xstate_ctxt_size() as xstate_uncompressed_size()
+  x86/cpu-policy: Simplify recalculate_xstate()
+  x86/cpuid: Fix handling of XSAVE dynamic leaves
+  x86/defns: Clean up X86_{XCR0,XSS}_* constants
 
-v2:
- * Tie ALIGN64 to xsavec rather than xsaves.
-v3:
- * Tweak commit message.
----
- xen/arch/x86/cpu-policy.c         | 55 +++++++++++--------------------
- xen/arch/x86/include/asm/xstate.h |  1 +
- 2 files changed, 21 insertions(+), 35 deletions(-)
+ xen/arch/x86/cpu-policy.c                   |  56 ++--
+ xen/arch/x86/cpuid.c                        |  24 +-
+ xen/arch/x86/domctl.c                       |   2 +-
+ xen/arch/x86/hvm/hvm.c                      |   2 +-
+ xen/arch/x86/i387.c                         |   2 +-
+ xen/arch/x86/include/asm/x86-defns.h        |  55 ++--
+ xen/arch/x86/include/asm/xstate.h           |   8 +-
+ xen/arch/x86/setup.c                        |   4 +-
+ xen/arch/x86/xstate.c                       | 294 +++++++++++++++++---
+ xen/include/public/arch-x86/cpufeatureset.h |   3 +
+ xen/include/xen/lib/x86/cpu-policy.h        |   2 +-
+ 11 files changed, 330 insertions(+), 122 deletions(-)
 
-diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
-index 5b66f002df05..304dc20cfab8 100644
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -193,8 +193,7 @@ static void sanitise_featureset(uint32_t *fs)
- static void recalculate_xstate(struct cpu_policy *p)
- {
-     uint64_t xstates = XSTATE_FP_SSE;
--    uint32_t xstate_size = XSTATE_AREA_MIN_SIZE;
--    unsigned int i, Da1 = p->xstate.Da1;
-+    unsigned int i, ecx_mask = 0, Da1 = p->xstate.Da1;
- 
-     /*
-      * The Da1 leaf is the only piece of information preserved in the common
-@@ -206,61 +205,47 @@ static void recalculate_xstate(struct cpu_policy *p)
-         return;
- 
-     if ( p->basic.avx )
--    {
-         xstates |= X86_XCR0_YMM;
--        xstate_size = max(xstate_size,
--                          xstate_offsets[X86_XCR0_YMM_POS] +
--                          xstate_sizes[X86_XCR0_YMM_POS]);
--    }
- 
-     if ( p->feat.mpx )
--    {
-         xstates |= X86_XCR0_BNDREGS | X86_XCR0_BNDCSR;
--        xstate_size = max(xstate_size,
--                          xstate_offsets[X86_XCR0_BNDCSR_POS] +
--                          xstate_sizes[X86_XCR0_BNDCSR_POS]);
--    }
- 
-     if ( p->feat.avx512f )
--    {
-         xstates |= X86_XCR0_OPMASK | X86_XCR0_ZMM | X86_XCR0_HI_ZMM;
--        xstate_size = max(xstate_size,
--                          xstate_offsets[X86_XCR0_HI_ZMM_POS] +
--                          xstate_sizes[X86_XCR0_HI_ZMM_POS]);
--    }
- 
-     if ( p->feat.pku )
--    {
-         xstates |= X86_XCR0_PKRU;
--        xstate_size = max(xstate_size,
--                          xstate_offsets[X86_XCR0_PKRU_POS] +
--                          xstate_sizes[X86_XCR0_PKRU_POS]);
--    }
- 
--    p->xstate.max_size  =  xstate_size;
-+    /* Subleaf 0 */
-+    p->xstate.max_size =
-+        xstate_uncompressed_size(xstates & ~XSTATE_XSAVES_ONLY);
-     p->xstate.xcr0_low  =  xstates & ~XSTATE_XSAVES_ONLY;
-     p->xstate.xcr0_high = (xstates & ~XSTATE_XSAVES_ONLY) >> 32;
- 
-+    /* Subleaf 1 */
-     p->xstate.Da1 = Da1;
-+    if ( p->xstate.xsavec )
-+        ecx_mask |= XSTATE_ALIGN64;
-+
-     if ( p->xstate.xsaves )
-     {
-+        ecx_mask |= XSTATE_XSS;
-         p->xstate.xss_low   =  xstates & XSTATE_XSAVES_ONLY;
-         p->xstate.xss_high  = (xstates & XSTATE_XSAVES_ONLY) >> 32;
-     }
--    else
--        xstates &= ~XSTATE_XSAVES_ONLY;
- 
--    for ( i = 2; i < min(63UL, ARRAY_SIZE(p->xstate.comp)); ++i )
-+    /* Subleafs 2+ */
-+    xstates &= ~XSTATE_FP_SSE;
-+    BUILD_BUG_ON(ARRAY_SIZE(p->xstate.comp) < 63);
-+    for_each_set_bit ( i, &xstates, 63 )
-     {
--        uint64_t curr_xstate = 1UL << i;
--
--        if ( !(xstates & curr_xstate) )
--            continue;
--
--        p->xstate.comp[i].size   = xstate_sizes[i];
--        p->xstate.comp[i].offset = xstate_offsets[i];
--        p->xstate.comp[i].xss    = curr_xstate & XSTATE_XSAVES_ONLY;
--        p->xstate.comp[i].align  = curr_xstate & xstate_align;
-+        /*
-+         * Pass through size (eax) and offset (ebx) directly.  Visbility of
-+         * attributes in ecx limited by visible features in Da1.
-+         */
-+        p->xstate.raw[i].a = raw_cpu_policy.xstate.raw[i].a;
-+        p->xstate.raw[i].b = raw_cpu_policy.xstate.raw[i].b;
-+        p->xstate.raw[i].c = raw_cpu_policy.xstate.raw[i].c & ecx_mask;
-     }
- }
- 
-diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
-index f5115199d4f9..bfb66dd766b6 100644
---- a/xen/arch/x86/include/asm/xstate.h
-+++ b/xen/arch/x86/include/asm/xstate.h
-@@ -40,6 +40,7 @@ extern uint32_t mxcsr_mask;
- #define XSTATE_XSAVES_ONLY         0
- #define XSTATE_COMPACTION_ENABLED  (1ULL << 63)
- 
-+#define XSTATE_XSS     (1U << 0)
- #define XSTATE_ALIGN64 (1U << 1)
- 
- extern u64 xfeature_mask;
 -- 
 2.39.2
 
