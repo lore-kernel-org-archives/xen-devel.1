@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A690C41513
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 08:57:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.741918.1148602 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1401C2BA2B
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2024 08:57:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.741916.1148587 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJ8B8-0005X4-LO; Mon, 17 Jun 2024 08:57:30 +0000
+	id 1sJ8B7-0005G7-7E; Mon, 17 Jun 2024 08:57:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 741918.1148602; Mon, 17 Jun 2024 08:57:30 +0000
+Received: by outflank-mailman (output) from mailman id 741916.1148587; Mon, 17 Jun 2024 08:57:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJ8B8-0005WY-HS; Mon, 17 Jun 2024 08:57:30 +0000
-Received: by outflank-mailman (input) for mailman id 741918;
- Mon, 17 Jun 2024 08:57:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sJ8B7-0005G0-4K; Mon, 17 Jun 2024 08:57:29 +0000
+Received: by outflank-mailman (input) for mailman id 741916;
+ Mon, 17 Jun 2024 08:57:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UpZp=NT=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1sJ8B6-0005Fp-HW
- for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 08:57:28 +0000
+ id 1sJ8B5-0005Fj-RB
+ for xen-devel@lists.xenproject.org; Mon, 17 Jun 2024 08:57:27 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9e0686b7-2c87-11ef-90a3-e314d9c70b13;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9dcac429-2c87-11ef-b4bb-af5377834399;
  Mon, 17 Jun 2024 10:57:25 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id 08EF34EE0757;
+ by support.bugseng.com (Postfix) with ESMTPSA id 510F64EE0738;
  Mon, 17 Jun 2024 10:57:24 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e0686b7-2c87-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 9dcac429-2c87-11ef-b4bb-af5377834399
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -51,51 +51,53 @@ Cc: sstabellini@kernel.org,
 	consulting@bugseng.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [XEN PATCH v2 1/6][RESEND] automation/eclair: address violations of MISRA C Rule 20.7
-Date: Mon, 17 Jun 2024 10:57:13 +0200
-Message-Id: <af4b0512eb52be99e37c9c670f98967ca15c68ac.1718378539.git.nicola.vetrini@bugseng.com>
+	Doug Goldstein <cardoe@cardoe.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>
+Subject: [XEN PATCH v2 0/6][RESEND] address violations of MISRA C Rule 20.7
+Date: Mon, 17 Jun 2024 10:57:12 +0200
+Message-Id: <cover.1718378539.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1718378539.git.nicola.vetrini@bugseng.com>
-References: <cover.1718378539.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-MISRA C Rule 20.7 states: "Expressions resulting from the expansion
-of macro parameters shall be enclosed in parentheses".
+Hi all,
 
-The helper macro bitmap_switch has parameters that cannot be parenthesized
-in order to comply with the rule, as that would break its functionality.
-Moreover, the risk of misuse due developer confusion is deemed not
-substantial enough to warrant a more involved refactor, thus the macro
-is deviated for this rule.
+this series addresses several violations of Rule 20.7, as well as a
+small fix to the ECLAIR integration scripts that do not influence
+the current behaviour, but were mistakenly part of the upstream
+configuration.
 
-No functional change.
+Note that by applying this series the rule has a few leftover violations.
+Most of those are in x86 code in xen/arch/x86/include/asm/msi.h .
+I did send a patch [1] to deal with those, limited only to addressing the MISRA
+violations, but in the end it was dropped in favour of a more general cleanup of
+the file upon agreement, so this is why those changes are not included here.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- automation/eclair_analysis/ECLAIR/deviations.ecl | 8 ++++++++
- 1 file changed, 8 insertions(+)
+[1] https://lore.kernel.org/xen-devel/2f2c865f20d0296e623f1d65bed25c083f5dd497.1711700095.git.nicola.vetrini@bugseng.com/
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index 447c1e6661d1..c2698e7074aa 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -463,6 +463,14 @@ of this macro do not lead to developer confusion, and can thus be deviated."
- -config=MC3R1.R20.7,reports+={safe, "any_area(any_loc(any_exp(macro(^count_args_$))))"}
- -doc_end
- 
-+-doc_begin="The arguments of macro bitmap_switch macro can't be parenthesized as
-+the rule would require, without breaking the functionality of the macro. This is
-+a specialized local helper macro only used within the bitmap.h header, so it is
-+less likely to lead to developer confusion and it is deemed better to deviate it."
-+-file_tag+={xen_bitmap_h, "^xen/include/xen/bitmap\\.h$"}
-+-config=MC3R1.R20.7,reports+={safe, "any_area(any_loc(any_exp(macro(loc(file(xen_bitmap_h))&&^bitmap_switch$))))"}
-+-doc_end
-+
- -doc_begin="Uses of variadic macros that have one of their arguments defined as
- a macro and used within the body for both ordinary parameter expansion and as an
- operand to the # or ## operators have a behavior that is well-understood and
+Changes in v2:
+- refactor patch 4 to deviate the pattern, instead of fixing the violations
+- The series has been resent because I forgot to properly Cc the mailing list
+
+Nicola Vetrini (6):
+  automation/eclair: address violations of MISRA C Rule 20.7
+  xen/self-tests: address violations of MISRA rule 20.7
+  xen/guest_access: address violations of MISRA rule 20.7
+  automation/eclair_analysis: address violations of MISRA C Rule 20.7
+  x86/irq: address violations of MISRA C Rule 20.7
+  automation/eclair_analysis: clean ECLAIR configuration scripts
+
+ automation/eclair_analysis/ECLAIR/analyze.sh     |  3 +--
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 14 ++++++++++++--
+ docs/misra/deviations.rst                        |  3 ++-
+ xen/include/xen/guest_access.h                   |  4 ++--
+ xen/include/xen/irq.h                            |  2 +-
+ xen/include/xen/self-tests.h                     |  8 ++++----
+ 6 files changed, 22 insertions(+), 12 deletions(-)
+
 -- 
 2.34.1
 
