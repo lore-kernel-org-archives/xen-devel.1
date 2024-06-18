@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24FE4C2BA1A
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Jun 2024 09:43:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.742910.1149786 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59083C27C4F
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Jun 2024 09:45:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.742926.1149807 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJVMV-0002bd-IJ; Tue, 18 Jun 2024 09:42:47 +0000
+	id 1sJVOe-0003iM-7K; Tue, 18 Jun 2024 09:45:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 742910.1149786; Tue, 18 Jun 2024 09:42:47 +0000
+Received: by outflank-mailman (output) from mailman id 742926.1149807; Tue, 18 Jun 2024 09:45:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJVMV-0002bW-FW; Tue, 18 Jun 2024 09:42:47 +0000
-Received: by outflank-mailman (input) for mailman id 742910;
- Tue, 18 Jun 2024 09:42:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sJVOe-0003iF-4B; Tue, 18 Jun 2024 09:45:00 +0000
+Received: by outflank-mailman (input) for mailman id 742926;
+ Tue, 18 Jun 2024 09:44:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=x1Qc=NU=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1sJVMU-0002bQ-6c
- for xen-devel@lists.xenproject.org; Tue, 18 Jun 2024 09:42:46 +0000
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [2607:f8b0:4864:20::335])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1c6c19f9-2d57-11ef-b4bb-af5377834399;
- Tue, 18 Jun 2024 11:42:44 +0200 (CEST)
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6fb840d8ffdso2493323a34.1
- for <xen-devel@lists.xenproject.org>; Tue, 18 Jun 2024 02:42:44 -0700 (PDT)
-Received: from localhost ([122.172.82.13]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-6fedf0bef16sm7753098a12.43.2024.06.18.02.42.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 02:42:42 -0700 (PDT)
+ <SRS0=qMuf=NU=bounce.vates.tech=bounce-md_30504962.66715718.v1-20c3e0d591fb42a98919864b1479226f@srs-se1.protection.inumbo.net>)
+ id 1sJVOc-0003i1-Uj
+ for xen-devel@lists.xenproject.org; Tue, 18 Jun 2024 09:44:59 +0000
+Received: from mail177-18.suw61.mandrillapp.com
+ (mail177-18.suw61.mandrillapp.com [198.2.177.18])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6be7a28b-2d57-11ef-90a3-e314d9c70b13;
+ Tue, 18 Jun 2024 11:44:57 +0200 (CEST)
+Received: from pmta14.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail177-18.suw61.mandrillapp.com (Mailchimp) with ESMTP id
+ 4W3ML01GbXzCf9KCN
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Jun 2024 09:44:56 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 20c3e0d591fb42a98919864b1479226f; Tue, 18 Jun 2024 09:44:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,175 +45,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1c6c19f9-2d57-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1718703763; x=1719308563; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8UALesfbksrHHNtNwGYa4E+DNFkRXivhYiDbx6+KbJc=;
-        b=S+74Pnur6hpPfzhn/qtKmLoZ3J1fVWoLtYJQkVpqpm8Rsz+XPBfu/OiEHwUt81k307
-         nrIWbLVS9z43ZtMP8KPs0fn3a8/dZQsxRZHFxqcbEhSZ1PpMod4j+dqN5BhSFRuppqUu
-         qyCF+v9maudBj38cK1xCcNOXZc2jxb4/7uCfJ7fTF7IIbYarQOSELxqg8BJgwEyvv29a
-         JEvl0pUgEtnn0GdRGE3bYEXxZX5SqQYQEkMNbtZWKQD3SSIpoaXGI+CM9W4Q7ujOw5wl
-         6Rel2CVqsrQYkhESv5kjmhbHIsB15CopEK1xYttYptzOmmE9fVRUP3N4V/1Vm4KLa1Tq
-         NO+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718703763; x=1719308563;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8UALesfbksrHHNtNwGYa4E+DNFkRXivhYiDbx6+KbJc=;
-        b=UALrsZawBzkdHSuxS+TP/mtYkcV0fei8N7BbkKZMthClE8ULJ7+JgJrQc9kJ8maUEz
-         PNbZ9FDdqEa5YwHgwa2gYnG2G51A2tAOkRCCG6vPbyhC34inDsuQHe9si88JBnclPhvK
-         GkLLXAqObPCz90HlY2/N5tWHMN5Qq4AEQxBJX7x9ITAliRZ46y0DTin71SheaaZPOnWJ
-         7U5wi7BK0y3lAsUaF2loGdRktgok26cnYtMvi1218uesFYg8vEeJmD9DG2iAdhHtvR77
-         mBXZOJFAshFUzv/491AAVHvpuSiVSjL2E78RWe21morCPikomIRXuZzkFdR5y5PZJtRZ
-         buMQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW3byWCaxn3dVyGkdu4ofaKYkEYGKSuNoEDrZ6ikYUMNLMUVUFWdJTg8EmnqzKqkBKrsVCqxB7Gt3wpYV9rC/4pQmMHP07vyvcO5A7sMpY=
-X-Gm-Message-State: AOJu0Yx2Gpe4gbU3hCCaNa4Y0ZSE5ia4qjg6AxbO/YG22VgfPVX0aNr2
-	Q36lXSnQLQRxHwtNL3+/tYlJYJq/wtFcPeE5DER4n3E+txvwMF/CtvLshLnY/GQ=
-X-Google-Smtp-Source: AGHT+IHduV0HGFrVmQSxIvryeJgCIEd+h/riwq126F2u6x4F+za92Uiu45uPCTH4ThXJnQkPLkaziw==
-X-Received: by 2002:a9d:4d91:0:b0:6fa:81b:d4f8 with SMTP id 46e09a7af769-6fb9364ecd9mr12749877a34.1.1718703762611;
-        Tue, 18 Jun 2024 02:42:42 -0700 (PDT)
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Al Viro <viro@zeniv.linux.org.uk>,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/2] xen: privcmd: Switch from mutex to spinlock for irqfds
-Date: Tue, 18 Jun 2024 15:12:28 +0530
-Message-Id: <a66d7a7a9001424d432f52a9fc3931a1f345464f.1718703669.git.viresh.kumar@linaro.org>
-X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
+X-Inumbo-ID: 6be7a28b-2d57-11ef-90a3-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1718703896; x=1718964396;
+	bh=Ogh1Twxwluua6JbFcStBvILAn7Dr8nm1RzNhVradvDc=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=eW2IGoW2cgOMx5cb94n1/+CrXR9xjb36LjglpP5rXG0PgM/t21INLIeJviwt4moFD
+	 GKQWrJy9k/cx16MrnzN8ZiNsizGVJhjzBYpU3uLCbbTwmCZ/zzskbxr07uQncG1QPr
+	 8Q3WVsrgagsmNvVND71WCQuF+Jx0JqxZOi3YV8O/rVsWM8N9oIppkO4afJqEfyLmwF
+	 JmIqOpAG7yJJOVaXohoT7C//JYIWiNeSfqwTvlYgs+8suCzwD8+UUAO2CiJqTIuxFz
+	 tEKW/XUu6tc7s3qZVOGADmz56U2X7vjoNso2cuUW9l11BuFbWZ+mUkPrCNF0NPmEIe
+	 C2cybaBmR38Fg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1718703896; x=1718964396; i=anthony.perard@vates.tech;
+	bh=Ogh1Twxwluua6JbFcStBvILAn7Dr8nm1RzNhVradvDc=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=FZcTzsJ/MY1N3/2UOn9UK50g0TK+V6aBZu7n/ouxl+iWk0g86RhHWh8iYq2yQ6xPd
+	 7A5BZEYHlbEC5tIiw0uuSVk+O8WIUZWpThYEEkMOx+t2G/VudnZISGysZrMp26Yn2h
+	 11SMMn0nZErrHL41vNlt7MQaNzPOW6Zf561NB+YzjysCkRzri7MW70CP1NbtsiNM0D
+	 UCUas1kvqpsumiFaEhZW/MVSUJzp7XS0GxQMqvHLc4nK+uHBszbdQzlXHqw/BtFGI7
+	 37yLTZvi6E2p0lRse5uKBHE7KwITmg8+5JscYKu+qRTpROHjpJ02kOXQ+AkR/8wEzf
+	 Q68IlkNw/hGMA==
+From: Anthony PERARD <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?Re:=20[OSSTEST=20PATCH]=20preseed=5Fbase:=20Use=20"keep"=20NIC=20NamePolicy=20when=20"force-mac-address"?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1718703894789
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony@xenproject.org>, xen-devel@lists.xenproject.org, Luca Fancellu <luca.fancellu@arm.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Message-Id: <ZnFXFjeakYBmBHSB@l14>
+References: <20240617144051.29547-1-anthony@xenproject.org> <a65a83be-1236-4699-8124-c0bd809c4b97@citrix.com>
+In-Reply-To: <a65a83be-1236-4699-8124-c0bd809c4b97@citrix.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.20c3e0d591fb42a98919864b1479226f?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20240618:md
+Date: Tue, 18 Jun 2024 09:44:56 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-irqfd_wakeup() gets EPOLLHUP, when it is called by
-eventfd_release() by way of wake_up_poll(&ctx->wqh, EPOLLHUP), which
-gets called under spin_lock_irqsave(). We can't use a mutex here as it
-will lead to a deadlock.
+On Mon, Jun 17, 2024 at 04:34:09PM +0100, Andrew Cooper wrote:
+> On 17/06/2024 3:40 pm, Anthony PERARD wrote:
+> > diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
+> > index 3545f3fd..d974fea5 100644
+> > --- a/Osstest/Debian.pm
+> > +++ b/Osstest/Debian.pm
+> > @@ -972,7 +972,19 @@ END
+> >          # is going to be added to dom0's initrd, which is used by some guests
+> >          # (created with ts-debian-install).
+> >          preseed_hook_installscript($ho, $sfx,
+> > -            '/usr/lib/base-installer.d/', '05ifnamepolicy', <<'END');
+> > +            '/usr/lib/base-installer.d/', '05ifnamepolicy',
+> > +            $ho->{Flags}{'force-mac-address'} ? <<'END' : <<'END');
+> 
+> The conditional looks suspicious if both options are <<'END'.
 
-Fix it by switching over to a spin lock.
+That works fine, this pattern is already used in few places in osstest,
+like here:
+https://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=ts-host-install;h=0b6aaeeae228551064618abfa624321992a2eb2d;hb=HEAD#l240
+    >  $ho->{Flags}{'force-mac-address'} ? <<END : <<END);
 
-Reported-by: Al Viro <viro@zeniv.linux.org.uk>
-Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
----
- drivers/xen/privcmd.c | 26 +++++++++++++++-----------
- 1 file changed, 15 insertions(+), 11 deletions(-)
+Or even here:
+https://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=ts-xen-build;h=c294a51eafc26e53b5417529b943224902870acf;hb=HEAD#l173
+    > buildcmd_stamped_logged(600, 'xen', 'configure', <<END,<<END,<<END);
 
-diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index 67dfa4778864..5ceb6c56cf3e 100644
---- a/drivers/xen/privcmd.c
-+++ b/drivers/xen/privcmd.c
-@@ -13,7 +13,6 @@
- #include <linux/file.h>
- #include <linux/kernel.h>
- #include <linux/module.h>
--#include <linux/mutex.h>
- #include <linux/poll.h>
- #include <linux/sched.h>
- #include <linux/slab.h>
-@@ -845,7 +844,7 @@ static long privcmd_ioctl_mmap_resource(struct file *file,
- #ifdef CONFIG_XEN_PRIVCMD_EVENTFD
- /* Irqfd support */
- static struct workqueue_struct *irqfd_cleanup_wq;
--static DEFINE_MUTEX(irqfds_lock);
-+static DEFINE_SPINLOCK(irqfds_lock);
- static LIST_HEAD(irqfds_list);
- 
- struct privcmd_kernel_irqfd {
-@@ -909,9 +908,11 @@ irqfd_wakeup(wait_queue_entry_t *wait, unsigned int mode, int sync, void *key)
- 		irqfd_inject(kirqfd);
- 
- 	if (flags & EPOLLHUP) {
--		mutex_lock(&irqfds_lock);
-+		unsigned long flags;
-+
-+		spin_lock_irqsave(&irqfds_lock, flags);
- 		irqfd_deactivate(kirqfd);
--		mutex_unlock(&irqfds_lock);
-+		spin_unlock_irqrestore(&irqfds_lock, flags);
- 	}
- 
- 	return 0;
-@@ -929,6 +930,7 @@ irqfd_poll_func(struct file *file, wait_queue_head_t *wqh, poll_table *pt)
- static int privcmd_irqfd_assign(struct privcmd_irqfd *irqfd)
- {
- 	struct privcmd_kernel_irqfd *kirqfd, *tmp;
-+	unsigned long flags;
- 	__poll_t events;
- 	struct fd f;
- 	void *dm_op;
-@@ -968,18 +970,18 @@ static int privcmd_irqfd_assign(struct privcmd_irqfd *irqfd)
- 	init_waitqueue_func_entry(&kirqfd->wait, irqfd_wakeup);
- 	init_poll_funcptr(&kirqfd->pt, irqfd_poll_func);
- 
--	mutex_lock(&irqfds_lock);
-+	spin_lock_irqsave(&irqfds_lock, flags);
- 
- 	list_for_each_entry(tmp, &irqfds_list, list) {
- 		if (kirqfd->eventfd == tmp->eventfd) {
- 			ret = -EBUSY;
--			mutex_unlock(&irqfds_lock);
-+			spin_unlock_irqrestore(&irqfds_lock, flags);
- 			goto error_eventfd;
- 		}
- 	}
- 
- 	list_add_tail(&kirqfd->list, &irqfds_list);
--	mutex_unlock(&irqfds_lock);
-+	spin_unlock_irqrestore(&irqfds_lock, flags);
- 
- 	/*
- 	 * Check if there was an event already pending on the eventfd before we
-@@ -1011,12 +1013,13 @@ static int privcmd_irqfd_deassign(struct privcmd_irqfd *irqfd)
- {
- 	struct privcmd_kernel_irqfd *kirqfd;
- 	struct eventfd_ctx *eventfd;
-+	unsigned long flags;
- 
- 	eventfd = eventfd_ctx_fdget(irqfd->fd);
- 	if (IS_ERR(eventfd))
- 		return PTR_ERR(eventfd);
- 
--	mutex_lock(&irqfds_lock);
-+	spin_lock_irqsave(&irqfds_lock, flags);
- 
- 	list_for_each_entry(kirqfd, &irqfds_list, list) {
- 		if (kirqfd->eventfd == eventfd) {
-@@ -1025,7 +1028,7 @@ static int privcmd_irqfd_deassign(struct privcmd_irqfd *irqfd)
- 		}
- 	}
- 
--	mutex_unlock(&irqfds_lock);
-+	spin_unlock_irqrestore(&irqfds_lock, flags);
- 
- 	eventfd_ctx_put(eventfd);
- 
-@@ -1073,13 +1076,14 @@ static int privcmd_irqfd_init(void)
- static void privcmd_irqfd_exit(void)
- {
- 	struct privcmd_kernel_irqfd *kirqfd, *tmp;
-+	unsigned long flags;
- 
--	mutex_lock(&irqfds_lock);
-+	spin_lock_irqsave(&irqfds_lock, flags);
- 
- 	list_for_each_entry_safe(kirqfd, tmp, &irqfds_list, list)
- 		irqfd_deactivate(kirqfd);
- 
--	mutex_unlock(&irqfds_lock);
-+	spin_unlock_irqrestore(&irqfds_lock, flags);
- 
- 	destroy_workqueue(irqfd_cleanup_wq);
- }
+> Doesn't this just write 70-eth-keep-policy.link unconditionally?
+
+I've check that, on a different host, and the "mac" name policy is used
+as expected, so the file "70-eth-keep-policy.link" isn't created on that
+host.
+
+Cheers,
+
 -- 
-2.31.1.272.g89b43f80a514
 
+
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
