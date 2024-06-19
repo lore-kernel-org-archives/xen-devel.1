@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5009EC27C53
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Jun 2024 15:16:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.743890.1150883 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 347B0C27C53
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Jun 2024 15:46:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.743901.1150893 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJx2d-0001vU-TF; Wed, 19 Jun 2024 15:16:07 +0000
+	id 1sJxW3-0006CH-0y; Wed, 19 Jun 2024 15:46:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 743890.1150883; Wed, 19 Jun 2024 15:16:07 +0000
+Received: by outflank-mailman (output) from mailman id 743901.1150893; Wed, 19 Jun 2024 15:46:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sJx2d-0001vN-Pz; Wed, 19 Jun 2024 15:16:07 +0000
-Received: by outflank-mailman (input) for mailman id 743890;
- Wed, 19 Jun 2024 15:16:06 +0000
+	id 1sJxW2-0006CA-UW; Wed, 19 Jun 2024 15:46:30 +0000
+Received: by outflank-mailman (input) for mailman id 743901;
+ Wed, 19 Jun 2024 15:46:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RXUT=NV=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sJx2c-0001vH-Jt
- for xen-devel@lists.xenproject.org; Wed, 19 Jun 2024 15:16:06 +0000
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [2607:f8b0:4864:20::729])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Hkwz=NV=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
+ id 1sJxW2-0006C4-2U
+ for xen-devel@lists.xenproject.org; Wed, 19 Jun 2024 15:46:30 +0000
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [2607:f8b0:4864:20::22f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d656f3e0-2e4e-11ef-b4bb-af5377834399;
- Wed, 19 Jun 2024 17:16:01 +0200 (CEST)
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7955aaf8006so506752985a.1
- for <xen-devel@lists.xenproject.org>; Wed, 19 Jun 2024 08:16:01 -0700 (PDT)
-Received: from [10.125.226.166] ([160.101.139.1])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b2a5eca9c1sm78714396d6.39.2024.06.19.08.15.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Jun 2024 08:15:59 -0700 (PDT)
+ id 1575b600-2e53-11ef-b4bb-af5377834399;
+ Wed, 19 Jun 2024 17:46:25 +0200 (CEST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3c9cc681ee0so3172472b6e.0
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Jun 2024 08:46:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,153 +42,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d656f3e0-2e4e-11ef-b4bb-af5377834399
+X-Inumbo-ID: 1575b600-2e53-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1718810160; x=1719414960; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=ItYjzeLz9pCHlYwoslznxmKtrPfREFj+z5aB8KdzW/Y=;
-        b=lgiP6/3JCNw2f6h1RxrOoMvpxYKHv+EzvDrLZY4sFjdsaL3hzgTaYlVHJZGDnrNHe3
-         3nKQ1VJnV7+EBLC7wo6O1uSoxqSxThwKNFnpMb6QiCs0anid6J7tANPuCqLagjrGd9px
-         KVqO/GrvCoFfS5FCPVJF7zA6sbX7SOOmdtXao=
+        d=gmail.com; s=20230601; t=1718811984; x=1719416784; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=t6i79TBptLGYHvgct8a+nK5k8kULH1VcVm+mKgbhLiQ=;
+        b=dsIVVhr5xXAdJWm6jefZ+NeYxTqvPcI9p5EsoGpLkmjBhwd+mDJR4aNgsYwabkMD1K
+         4TmH2kVFm6zinrUm5vdgDvfabIYp7tWuTlMd+bKaAstJYUf2U8iQTNTlldYS8ztSTYxH
+         yCXcZbtSzDjsjUtwCFi1Dqz/yf3Nw2QUmGVQKMu9qVQIdVYgGsbxwYUyLIDID3aOahTd
+         Ds87NdQ32yuHrYnvNWslHQRVx+6OD3RGweMOPOJLuisq3I+AT8+IFQ0UZufImlZVJN/u
+         VjesL6zGEMMQfM5tw/7/l4DtkMQU+Ju4bEXm9zKKzsr6MHHKlkP6ViktWNq+meRUy4Fw
+         T/sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718810160; x=1719414960;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ItYjzeLz9pCHlYwoslznxmKtrPfREFj+z5aB8KdzW/Y=;
-        b=jZaemUCDEKowJ2HrH88HmytcyVQB6nfcShu6QbV12UDkhTfvM8mZGeM0kVk+pvNL+K
-         O0qx7TcoSqZha3Yyn64Lka2O2OtVdZG+s+6VoFPCbO64jN4Qmn8GtJsxb5Z2CibEtXRN
-         zRKUTwXG5FoLnrPADuvV/vNTyR4J827xpmdl7QkmwcPqiVEfgLGhrCy+tz13Y3RwAaVZ
-         9hYIHzbojUZuci/USQHXW3qzBh0yZ5W4S/G+tAs907b9fc88mconh+0Dx6XN2e/BjY1z
-         3zxJo7A4qmH4QiSaLVHlIBsHA0ekxkv+vt5Rez2t/H817BzwgMDrQJimTpdt8WfYXVRO
-         Ve1g==
-X-Gm-Message-State: AOJu0Ywzs5a6fZhCyDcv1VXoBrgJnchUQaD/KojO36SjUqKyUndSMOrC
-	neumHdqZfqcDTiNH5GaRAdBffp1QObHA5XiR8IsMnkq6xBRwVySxiR8uegxuLJr8unSt0QAwDQg
-	9yW8=
-X-Google-Smtp-Source: AGHT+IHSvRA+epUNuVPlhYXYEHKgwy49psFLjn7oHwsv/w8BP10LOTc1yhrGfai1ndv/hKONw/pN5Q==
-X-Received: by 2002:a05:6214:caa:b0:6b2:bad8:b72b with SMTP id 6a1803df08f44-6b501e3939fmr38892276d6.28.1718810159939;
-        Wed, 19 Jun 2024 08:15:59 -0700 (PDT)
-Message-ID: <87424aa5-758b-42c6-a777-14af385d1203@cloud.com>
-Date: Wed, 19 Jun 2024 16:15:57 +0100
+        d=1e100.net; s=20230601; t=1718811984; x=1719416784;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=t6i79TBptLGYHvgct8a+nK5k8kULH1VcVm+mKgbhLiQ=;
+        b=SLJhgpFXwZ4Bk07IHT8/CfJz4+ITY3To6wG7SBARk1Yxs3TUb80uXMMJLLMy8jUQoQ
+         Er/9M+h04dM9do8L/zXZ1HZzMJ8usY2c+THIXGFUcN3EvBmkUks8cEOyKfUShnC8edzg
+         K7lxUT86DejUIf3gZF9BXzQvk1R/P/CHeRmiCjWdMwRYAAcJrg29ZAxEP0xIg/oi3UPJ
+         C1kx/2CWs4ttkqsDMmGymRMXj+FklnnTjqKwiWfXHZ8DxCmbT/G2ofRM1YF4uvUdd9LQ
+         zjsNzjsz6HYJMeRxcT8hYRlvpMFmXF+g8tatoUpS90R2QLz6crWVNRFN4KeBPQbwqovQ
+         lE0w==
+X-Forwarded-Encrypted: i=1; AJvYcCWQtSWj7bJhP5HxGCJrOjKAINwikqJPCg9Ba4KvAHhZ7GGcuYlXz06LAJ1Ns9m/cR1eh7O+JU0dJwkQi/coRF1/xeZ9i4QD3dX0rxuelAM=
+X-Gm-Message-State: AOJu0YzbHMcUAdZES2tlIBgAQCprgsU/iWLv4qpANQOM6ukbiWXQclVz
+	M/sDZ4baCjPh4+wvdG6yDjEwnXPNZ0/Uh6A+ZJHIzku2HaXipucExt5DvDT5KzKxIowKX6SoaQf
+	hMdcr+Wi0RGmAIjR0Auag3aUXqIk=
+X-Google-Smtp-Source: AGHT+IFduTD6szkPAuGBJD+MLbhP/M27BP//P7PnlUhalJm8qvZOP6Sk+wglvNwj0fEYD3dzIw98+ddByD5L8Ay6nss=
+X-Received: by 2002:a05:6870:524f:b0:24f:d3ce:fe92 with SMTP id
+ 586e51a60fabf-25c94980cc1mr3421271fac.14.1718811984200; Wed, 19 Jun 2024
+ 08:46:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: xen | Failed pipeline for staging | 43d5c5d5
-To: xen-devel <xen-devel@lists.xenproject.org>
-References: <6672eede44602_2e3c548bc2022ad@gitlab-sidekiq-catchall-v2-649cf875c5-bssqj.mail>
-Content-Language: en-GB
-Cc: Jan Beulich <jbeulich@suse.com>
-From: Andrew Cooper <andrew.cooper@cloud.com>
-Autocrypt: addr=andrew.cooper@cloud.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSdBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyQGNsb3VkLmNvbT7CwY4EEwEIADgWIQTPNUlbfqb3Dqd9IXZl
- w/kGpdefoAUCY9sQuAIbAwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgAAKCRBlw/kGpdefoFJ5
- D/9+nAjHPxmjH7Vv423dYvz+smJghc8/DZ+tICR/EjU+bwp896sR3KQSHlo7HJzU0zcRGjwt
- vrfKnWYCkpLn8rEJuQCXbuHplS2ATrTC1jkqytUC/VhVDOVvnrjYL9R5jRdzxqjOCJjaN2OI
- in+zkIX9D9uZs6MdtUTcvUm7RkHF/nYkxfvrkVVBXWt3bJ7b9oPXV6myq9KBp/S5n9ZJLeva
- mn78RUJRKDweKUwXQhGcz8E0tvWrvCE8KG5xQ3vlwF2TXHzo/FImMHSqhQ0dN4KtadaI+JaF
- T1bF5F6UGAoUMv9lf8Y0qVXSLV4NjBwLhJcrJ5OgyVihk/LTFZiqGHBlJ7+RgXNhWn/mDF4D
- pPiJwcp40mD89c3eGhkQ6sP/HIYLr7kpZKFEHLTN+xO45KRPHKKeSBR99xuC3Lgo6qnV6f+V
- FZprHMfYQ1Obzma62gHtgjpg0w1Vs4JpE9HJMKZx6I8KH7GeCw1xhQP5o+rvag7YZOiGa3y8
- dbMiz+1LQwRxWVHJJNF54uScgFC2TO0gyVzkf64X7PfhaRhTH5Ie0ukVY7NZ4sDKURNeaZ0v
- h/TgFxqiJOmFG1EnXETOoB4RPZEYpPHTJXovx8ie0b2Hoje+STJzOgonyiTGTEB2bys4UJyp
- 42fZjcJ2w3PkRhm3VrflU1Lvz1pw9k8wEjWOcs7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnl
- qZjzz2vyrYfz7bkPtXaGb9H4Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lK
- DSoAsvt8w82tIlP/EbmRbDVn7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/Q
- zV9f07DJswuda1JH3/qvYu0pvjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjt
- w7KsZ4ygXYrsm/oCBiVW/OgUg/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP
- +wi6y+TnuAL36UtK/uFyEuPywwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48
- Z27ZUUZd2Dr6O/n8poQHbaTd6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y
- 0fsJT5RgvefAIFfHBg7fTY/ikBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W
- 9CxSyQ0qmZ2bXsLQYRj2xqd1bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N
- 7VZtSfEJeRV04unbsKVXWZAkuAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRF
- cMf7xJaL9xXedMcAEQEAAcLBXwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/
- er8EA7g23HMxYWd3FXHThrVQHgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznE
- ns5EAAXEbITrgKWXDDUWGYxdpnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10P
- Z3mZD4Xu9kU2IXYmuW+e5KCAvTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJ
- TGnVxZZSCyLUO83sh6OZhJkkb9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJv
- fPKpNzGD8XWR5HHF0NLIJhgg4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4U
- ePdFLfhKyRdSXuvY3AHJd4CP4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6
- yPbxT7CwRS5dcQPzUiuHLK9invjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZe
- rSm4xaYegEFusyhbZrI0U9tJB8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tv
- G3euCklmkn9Sl9IAKFu29RSod5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2
- nf3Bbzx81wZK14JdDDHUX2Rs6+ahAA==
-In-Reply-To: <6672eede44602_2e3c548bc2022ad@gitlab-sidekiq-catchall-v2-649cf875c5-bssqj.mail>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <cover.1718038855.git.w1benny@gmail.com> <fee20e24a94cb29dea81631a6b775933d1151da4.1718038855.git.w1benny@gmail.com>
+ <4a49fe9b-66fd-4a32-ad01-14ed4c5fc34c@suse.com>
+In-Reply-To: <4a49fe9b-66fd-4a32-ad01-14ed4c5fc34c@suse.com>
+From: =?UTF-8?Q?Petr_Bene=C5=A1?= <w1benny@gmail.com>
+Date: Wed, 19 Jun 2024 17:46:13 +0200
+Message-ID: <CAKBKdXgUKYoJfB1mG+6JSaV=jWpmRmS1UbQ6N4JNZ774rP_PoQ@mail.gmail.com>
+Subject: Re: [PATCH for-4.19? v6 6/9] xen: Make the maximum number of altp2m
+ views configurable for x86
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	George Dunlap <george.dunlap@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Tamas K Lengyel <tamas@tklengyel.com>, Alexandru Isaila <aisaila@bitdefender.com>, 
+	Petre Pircalabu <ppircalabu@bitdefender.com>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 19/06/2024 3:44 pm, GitLab wrote:
-> GitLab
-> ✖ 	Pipeline #1338876222 has failed!
-> 
->  
-> Project 	xen-project <https://gitlab.com/xen-project> / xen
-> <https://gitlab.com/xen-project/xen>
-> Branch 	
-> 	staging <https://gitlab.com/xen-project/xen/-/commits/staging>
-> 
-> Commit 	
-> 	43d5c5d5
-> <https://gitlab.com/xen-project/xen/-/commit/43d5c5d5f70b3f5419e7ef30399d23adf6ddfa8e>
-> 
-> xen: avoid UB in guest handle arithmetic At le...
-> Commit Author 	
-> 	Jan Beulich <https://gitlab.com/jbeulich>
-> 
->  
-> Pipeline #1338876222
-> <https://gitlab.com/xen-project/xen/-/pipelines/1338876222> triggered by
-> 		Ganis <https://gitlab.com/ganis>
-> 
-> had 1 failed job
-> Failed job
-> ✖ 	build
-> 
-> 	debian-bookworm-gcc-arm32-debug-randconfig
-> <https://gitlab.com/xen-project/xen/-/jobs/7136417308>
+On Thu, Jun 13, 2024 at 2:03=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
+te:
+> > @@ -510,13 +526,13 @@ int p2m_change_altp2m_gfn(struct domain *d, unsig=
+ned int idx,
+> >      mfn_t mfn;
+> >      int rc =3D -EINVAL;
+> >
+> > -    if ( idx >=3D  min(ARRAY_SIZE(d->arch.altp2m_p2m), MAX_EPTP) ||
+> > +    if ( idx >=3D d->nr_altp2m ||
+> >           d->arch.altp2m_eptp[array_index_nospec(idx, MAX_EPTP)] =3D=3D
+>
+> This ends up being suspicious: The range check is against a value differe=
+nt
+> from what is passed to array_index_nospec(). The two weren't the same
+> before either, but there the range check was more strict (which now isn't
+> visible anymore, even though I think it would still be true). Imo this
+> wants a comment, or an assertion effectively taking the place of a commen=
+t.
 
-This is:
+> Since they're all "is this slot populated" checks, maybe we want
+> an is_altp2m_eptp_valid() helper?
 
-In file included from common/livepatch.c:9:
-common/livepatch.c: In function 'livepatch_list':
-./include/xen/guest_access.h:130:25: error: cast to pointer from integer
-of different size [-Werror=int-to-pointer-cast]
-  130 |     __raw_copy_to_guest((void *)(d_ + (off) * sizeof(*_s)), \
-      |                         ^
-common/livepatch.c:1283:18: note: in expansion of macro
-'__copy_to_guest_offset'
- 1283 |             if ( __copy_to_guest_offset(list->name, name_offset,
-      |                  ^~~~~~~~~~~~~~~~~~~~~~
-./include/xen/guest_access.h:130:25: error: cast to pointer from integer
-of different size [-Werror=int-to-pointer-cast]
-  130 |     __raw_copy_to_guest((void *)(d_ + (off) * sizeof(*_s)), \
-      |                         ^
-common/livepatch.c:1287:17: note: in expansion of macro
-'__copy_to_guest_offset'
- 1287 |                 __copy_to_guest_offset(list->metadata,
-metadata_offset,
-      |                 ^~~~~~~~~~~~~~~~~~~~~~
+Let me see if I understand correctly. You're suggesting the condition
+should be replaced with something like this? (Also, I would suggest
+altp2m_is_eptp_valid() name, since it's consistent e.g. with
+p2m_is_altp2m().)
 
+static inline bool altp2m_is_eptp_valid(const struct domain *d,
+                                        unsigned int idx)
+{
+    /*
+     * EPTP index is correlated with altp2m index and should not exceed
+     * d->nr_altp2m.
+     */
+    assert(idx < d->nr_altp2m);
 
-The problem is that (off) is of type uint64_t, so
+    return idx < MAX_EPTP &&
+        d->arch.altp2m_eptp[array_index_nospec(idx, MAX_EPTP)] !=3D
+        mfn_x(INVALID_MFN);
+}
 
-   (const void *)(s_ + (off) * sizeof(*_d))
+Note that in the codebase there are also very similar checks, but
+again without array_index_nospec. For instance, in the
+p2m_altp2m_propagate_change() function (which is called fairly
+frequently):
 
-ends up being a uint64_t -> uint32_t down-convert in arm32.
+int p2m_altp2m_propagate_change(struct domain *d, gfn_t gfn,
+                                mfn_t mfn, unsigned int page_order,
+                                p2m_type_t p2mt, p2m_access_t p2ma)
+{
+    struct p2m_domain *p2m;
+    unsigned int i;
+    unsigned int reset_count =3D 0;
+    unsigned int last_reset_idx =3D ~0;
+    int ret =3D 0;
 
-This wants to use the _p() macro which takes care of casting through
-(unsigned long) on its way to a pointer.  I'll do a patch.
+    if ( !altp2m_active(d) )
+        return 0;
 
-~Andrew
+    altp2m_list_lock(d);
+
+    for ( i =3D 0; i < d->nr_altp2m; i++ )
+    {
+        p2m_type_t t;
+        p2m_access_t a;
+
+        // XXX this could be replaced with altp2m_is_eptp_valid(), but
+based on previous review remarks,
+        // it would introduce unnecessary perf. hit. So, should these
+occurrences left unchanged?
+        if ( d->arch.altp2m_eptp[i] =3D=3D mfn_x(INVALID_MFN) )
+            continue;
+
+       ...
+
+There are more instances of this. Which re-opens again the issue from
+previous conversation: should I introduce a function which will be
+used in some cases (where _nospec is used) and not used elsewhere?
+
+P.
 
