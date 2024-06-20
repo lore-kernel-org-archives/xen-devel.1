@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB7F0C2BA1A
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Jun 2024 13:52:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.744516.1151637 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D74F5C30653
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Jun 2024 13:52:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.744507.1151552 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sKICq-0001nO-RF; Thu, 20 Jun 2024 13:52:04 +0000
+	id 1sKICk-0008FQ-Lv; Thu, 20 Jun 2024 13:51:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 744516.1151637; Thu, 20 Jun 2024 13:52:04 +0000
+Received: by outflank-mailman (output) from mailman id 744507.1151552; Thu, 20 Jun 2024 13:51:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sKICq-0001kv-Dc; Thu, 20 Jun 2024 13:52:04 +0000
-Received: by outflank-mailman (input) for mailman id 744516;
- Thu, 20 Jun 2024 13:52:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sKICk-0008EJ-HW; Thu, 20 Jun 2024 13:51:58 +0000
+Received: by outflank-mailman (input) for mailman id 744507;
+ Thu, 20 Jun 2024 13:51:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fPla=NW=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sKICo-0008AF-18
- for xen-devel@lists.xenproject.org; Thu, 20 Jun 2024 13:52:02 +0000
+ id 1sKICj-0008AK-Rw
+ for xen-devel@lists.xenproject.org; Thu, 20 Jun 2024 13:51:57 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 44ec8317-2f0c-11ef-90a3-e314d9c70b13;
- Thu, 20 Jun 2024 15:52:01 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 412d62f4-2f0c-11ef-b4bb-af5377834399;
+ Thu, 20 Jun 2024 15:51:55 +0200 (CEST)
 Received: from truciolo.bugseng.com (unknown [78.208.165.219])
- by support.bugseng.com (Postfix) with ESMTPSA id 098864EE0738;
- Thu, 20 Jun 2024 15:52:00 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id A051E4EE073D;
+ Thu, 20 Jun 2024 15:51:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,43 +41,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 44ec8317-2f0c-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 412d62f4-2f0c-11ef-b4bb-af5377834399
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>
-Subject: [XEN PATCH 13/13] x86/vlapic: address a violation of MISRA C Rule 16.3
-Date: Thu, 20 Jun 2024 15:51:47 +0200
-Message-Id: <b37ab35baab67cc147d5f21e15234adc08cd7af9.1718890095.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 02/13] x86/cpuid: use fallthrough pseudo keyword
+Date: Thu, 20 Jun 2024 15:51:36 +0200
+Message-Id: <23fa8f1061b894d4dd121bc9c2fcaf2c3ad312f3.1718890095.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <10af9145252a2f5c31ea0f13cbb67cbe76a8ba3a.1718890095.git.federico.serafini@bugseng.com>
 References: <10af9145252a2f5c31ea0f13cbb67cbe76a8ba3a.1718890095.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing break statement to address a violation of MISRA C
-Rule 16.3: "An unconditional `break' statement shall terminate every
-switch-clause".
+The current comment making explicit the fallthrough intention does
+not follow the agreed syntax: replace it with the pseduo keyword.
 
 No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/arch/x86/hvm/vlapic.c | 1 +
- 1 file changed, 1 insertion(+)
+ xen/arch/x86/cpuid.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 9cfc82666a..2ec9594271 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -367,6 +367,7 @@ static void vlapic_accept_irq(struct vcpu *v, uint32_t icr_low)
-         gdprintk(XENLOG_ERR, "TODO: unsupported delivery mode in ICR %x\n",
-                  icr_low);
-         domain_crash(v->domain);
-+        break;
-     }
- }
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index a822e80c7e..2a777436ee 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -97,9 +97,8 @@ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
+         if ( is_viridian_domain(d) )
+             return cpuid_viridian_leaves(v, leaf, subleaf, res);
  
++        fallthrough;
+         /*
+-         * Fallthrough.
+-         *
+          * Intel reserve up until 0x4fffffff for hypervisor use.  AMD reserve
+          * only until 0x400000ff, but we already use double that.
+          */
 -- 
 2.34.1
 
