@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A669C27C4F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9507C41513
 	for <xen-devel@archiver.kernel.org>; Fri, 21 Jun 2024 20:58:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.745566.1152692 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.745568.1152712 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sKlKg-0005jE-BX; Fri, 21 Jun 2024 20:58:06 +0000
+	id 1sKlKi-0006CO-TY; Fri, 21 Jun 2024 20:58:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 745566.1152692; Fri, 21 Jun 2024 20:58:06 +0000
+Received: by outflank-mailman (output) from mailman id 745568.1152712; Fri, 21 Jun 2024 20:58:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sKlKg-0005j7-82; Fri, 21 Jun 2024 20:58:06 +0000
-Received: by outflank-mailman (input) for mailman id 745566;
- Fri, 21 Jun 2024 20:58:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sKlKi-0006CH-QV; Fri, 21 Jun 2024 20:58:08 +0000
+Received: by outflank-mailman (input) for mailman id 745568;
+ Fri, 21 Jun 2024 20:58:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FH9a=NX=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sKlKf-0005j1-UG
- for xen-devel@lists.xenproject.org; Fri, 21 Jun 2024 20:58:05 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f3ae7ebb-3010-11ef-b4bb-af5377834399;
- Fri, 21 Jun 2024 22:58:03 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-57d1782679fso2875778a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 21 Jun 2024 13:58:03 -0700 (PDT)
+ id 1sKlKh-0005sX-4d
+ for xen-devel@lists.xenproject.org; Fri, 21 Jun 2024 20:58:07 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f4e44aba-3010-11ef-90a3-e314d9c70b13;
+ Fri, 21 Jun 2024 22:58:05 +0200 (CEST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-57d1012e52fso2824908a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Jun 2024 13:58:05 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d3042d509sm1440011a12.43.2024.06.21.13.58.02
+ 4fb4d7f45d1cf-57d3042d509sm1440011a12.43.2024.06.21.13.58.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 13:58:02 -0700 (PDT)
+ Fri, 21 Jun 2024 13:58:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,67 +47,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3ae7ebb-3010-11ef-b4bb-af5377834399
+X-Inumbo-ID: f4e44aba-3010-11ef-90a3-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1719003483; x=1719608283; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6Lzo3JDUF518si0KUt6/S/krRvZgmKUoFzznxiBo0cw=;
-        b=H5WAJJ8I9+CK85Efws9INeRgP8ZByChnk36YYMA5qdF0UR4NN7h4te8hY9soZ/jVar
-         xo9oU8XorpvSqaEcAbsUU7RbwEgMjLvtlRX8Jve3tUOVBlhUoAXMoNQDaH94nEt+XUzX
-         AlYYJVdE9M9ieg0XwPCRFVQWZNN/02BGBQQkc=
+        d=citrix.com; s=google; t=1719003485; x=1719608285; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=I2mJFKp0tzriHW0QjBAnMPOnFKVP/CBMSZnxZwykoKk=;
+        b=uDbTKnDaxM9u7N8MNzOKHnnK5RT3+WGPicwdkXstY3AdUr1N9+Q2lq6xeDYf14V+OW
+         3aJIRJ3pf9TQUdaZPpVFBRqFTvoymOS5vmuov9i1xOlVsoMXbGe/OkmPgnT+HrcyfDnL
+         w+67mHRFkLok+iZUNfyxjSX9LZc2f8mko3Z98=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719003483; x=1719608283;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=6Lzo3JDUF518si0KUt6/S/krRvZgmKUoFzznxiBo0cw=;
-        b=Wew6e48ZeTkd4bglva6qnKHhX5is7UI0maFlfnAc9ngDTL3T2/IOlTajZtcTdv8K0x
-         EbCaDyqmrFPibPEuT6pXwmtEm07aNLUSZlvbIh/GtJhtHn+NEQ82LYtdj1YjCP0xzOR+
-         V5APGebSr4kd1DmeJsLvvuM6Sy5UgdPpJp+Ft1F+Qppv3TVJYnwYyZ0vIUbTvineU8BP
-         tJFZ/AIPpkwiV0T9OIIRg8o1LtiCmibiu4jUgYpOJkIZe30nupaJQAWJnaZEAKCEeK9g
-         XmiyalfAwMC69cV9PG12MWbFLh2aPP9TvOoYX6w7ebD4Kp0h7nAp1x5OB8/T8a7eUhr/
-         0h8w==
-X-Gm-Message-State: AOJu0YyrwiMZxtDDbrgkvKrqaS1VSnpRit1Y3DPSQj1LhUBrabZzuvN2
-	q25Rzq4m41QwZxcCFy0i33ZeyA/vJCZvkpqAdWWp1rXM+/PVRqMQNG7g/KkSHEjVe8HSd5Hbhmi
-	Samk=
-X-Google-Smtp-Source: AGHT+IEqP6gWYL+pJI8eWgZrb14yjcaQKCCUMGwvzUu4l5FTKxFmFCmDwrUToqzZHEl19UuNmy3XZw==
-X-Received: by 2002:a50:d707:0:b0:578:56e1:7ba3 with SMTP id 4fb4d7f45d1cf-57d07ebf183mr6586536a12.38.1719003482733;
-        Fri, 21 Jun 2024 13:58:02 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1719003485; x=1719608285;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=I2mJFKp0tzriHW0QjBAnMPOnFKVP/CBMSZnxZwykoKk=;
+        b=mhkdFbN9NiXYHFsROuz9GdGEE5YWdqpzrx1u1i78mFHtyCsJ+deFcB3fwI8WIdD7uH
+         72q+61Y/9+WeI2O6wUVG9N51nm3+REICC8NHfhRuK6m0c2deOqQ4RK+K20mW0GWuZJbr
+         iczMYtJQZnf+kXPPeTkoZqg3IOsTjz8vcb3UrHwgXMmRHECTUZnSofB+RRSauIYTRZxU
+         hrXgvnhcwpY8rKtPd3WWxqqJB1wLr6XgxFJWoznWy4t+qayLmnOS5aHV/y76Hj299l1E
+         7qrvH4OzoUAIRbv9Rds5Tf5Px0InX2Zb8GRy1zSuZ4Kf4CnUhC+KpzeMUf0w3meWHMXK
+         xfcQ==
+X-Gm-Message-State: AOJu0Yy+YukvQJETRALvRtrqbKOIVDNS6ETVzGoRARTtWFT4XlzehQ+g
+	Wfnk6FqL11XdCgjkGJ+OJqPiblb3+bIvKR1ZaC3+Af7i5p6T9oVLoi/8btOkzQkW63+zqHhGf0B
+	c8/w=
+X-Google-Smtp-Source: AGHT+IFXHPD0wWta+oxEYQcmgEfPdVSHm0Vxn7VWpzd99ufMFqO8UaVmn6TUdSvAMxiUnh9lEus+8w==
+X-Received: by 2002:a50:d50a:0:b0:57d:2716:838c with SMTP id 4fb4d7f45d1cf-57d27168510mr3030952a12.37.1719003485207;
+        Fri, 21 Jun 2024 13:58:05 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <George.Dunlap@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Roberto Bagnara <roberto.bagnara@bugseng.com>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.19 0/2] Xen: Final MISRA R8.3 fixes
-Date: Fri, 21 Jun 2024 21:57:58 +0100
-Message-Id: <20240621205800.329230-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/2] xen/multicall: Change nr_calls to uniformly be unsigned long
+Date: Fri, 21 Jun 2024 21:58:00 +0100
+Message-Id: <20240621205800.329230-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240621205800.329230-1-andrew.cooper3@citrix.com>
+References: <20240621205800.329230-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This gets Xen clean to R8.3 and marks it as blocking in Gitlab.
+Right now, the non-compat declaration and definition of do_multicall()
+differing types for the nr_calls parameter.
 
-https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1342755199
+This is a MISRA rule 8.3 violation, but it's also time-bomb waiting for the
+first 128bit architecture (RISC-V looks as if it might get there first).
 
-Andrew Cooper (2):
-  x86/pagewalk: Address MISRA R8.3 violation in guest_walk_tables()
-  xen/multicall: Change nr_calls to uniformly be unsigned long
+Worse, the type chosen here has a side effect of truncating the guest
+parameter, because Xen still doesn't have a clean hypercall ABI definition.
 
+Switch uniformly to using unsigned long.
+
+This addresses the MISRA violation, and while it is a guest-visible ABI
+change, it's only in the corner case where the guest kernel passed a
+bogus-but-correct-when-truncated value.  I can't find any any users of
+mutilcall which pass a bad size to begin with, so this should have no
+practical effect on guests.
+
+In fact, this brings the behaviour of multicalls more in line with the header
+description of how it behaves.
+
+With this fix, Xen is now fully clean to Rule 8.3, so mark it so.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: George Dunlap <George.Dunlap@citrix.com>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Roberto Bagnara <roberto.bagnara@bugseng.com>
+CC: consulting@bugseng.com <consulting@bugseng.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+
+I know this isn't going to be universally liked, but we need to do something,
+and this is my very strong vote for the least bad way out of the current mess.
+---
  automation/eclair_analysis/ECLAIR/tagging.ecl | 1 +
- xen/arch/x86/include/asm/guest_pt.h           | 2 +-
  xen/common/multicall.c                        | 4 ++--
  xen/include/hypercall-defs.c                  | 4 ++--
  xen/include/public/xen.h                      | 2 +-
- 5 files changed, 7 insertions(+), 6 deletions(-)
+ 4 files changed, 6 insertions(+), 5 deletions(-)
 
-
-base-commit: 9e7c26ad8532c3efda174dee5ab8bdbeef1e4f6d
+diff --git a/automation/eclair_analysis/ECLAIR/tagging.ecl b/automation/eclair_analysis/ECLAIR/tagging.ecl
+index b829655ca0bc..3d06a1aad410 100644
+--- a/automation/eclair_analysis/ECLAIR/tagging.ecl
++++ b/automation/eclair_analysis/ECLAIR/tagging.ecl
+@@ -45,6 +45,7 @@ MC3R1.R7.2||
+ MC3R1.R7.4||
+ MC3R1.R8.1||
+ MC3R1.R8.2||
++MC3R1.R8.3||
+ MC3R1.R8.5||
+ MC3R1.R8.6||
+ MC3R1.R8.8||
+diff --git a/xen/common/multicall.c b/xen/common/multicall.c
+index 1f0cc4cb267c..ce394c5efcfe 100644
+--- a/xen/common/multicall.c
++++ b/xen/common/multicall.c
+@@ -34,11 +34,11 @@ static void trace_multicall_call(multicall_entry_t *call)
+ }
+ 
+ ret_t do_multicall(
+-    XEN_GUEST_HANDLE_PARAM(multicall_entry_t) call_list, uint32_t nr_calls)
++    XEN_GUEST_HANDLE_PARAM(multicall_entry_t) call_list, unsigned long nr_calls)
+ {
+     struct vcpu *curr = current;
+     struct mc_state *mcs = &curr->mc_state;
+-    uint32_t         i;
++    unsigned long    i;
+     int              rc = 0;
+     enum mc_disposition disp = mc_continue;
+ 
+diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
+index 47c093acc84d..7720a29ade0b 100644
+--- a/xen/include/hypercall-defs.c
++++ b/xen/include/hypercall-defs.c
+@@ -135,7 +135,7 @@ xenoprof_op(int op, void *arg)
+ #ifdef CONFIG_COMPAT
+ prefix: compat
+ set_timer_op(uint32_t lo, uint32_t hi)
+-multicall(multicall_entry_compat_t *call_list, uint32_t nr_calls)
++multicall(multicall_entry_compat_t *call_list, unsigned long nr_calls)
+ memory_op(unsigned int cmd, void *arg)
+ #ifdef CONFIG_IOREQ_SERVER
+ dm_op(domid_t domid, unsigned int nr_bufs, void *bufs)
+@@ -172,7 +172,7 @@ console_io(unsigned int cmd, unsigned int count, char *buffer)
+ vm_assist(unsigned int cmd, unsigned int type)
+ event_channel_op(int cmd, void *arg)
+ mmuext_op(mmuext_op_t *uops, unsigned int count, unsigned int *pdone, unsigned int foreigndom)
+-multicall(multicall_entry_t *call_list, unsigned int nr_calls)
++multicall(multicall_entry_t *call_list, unsigned long nr_calls)
+ #ifdef CONFIG_PV
+ mmu_update(mmu_update_t *ureqs, unsigned int count, unsigned int *pdone, unsigned int foreigndom)
+ stack_switch(unsigned long ss, unsigned long esp)
+diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
+index b47d48d0e2d6..e051f989a5ca 100644
+--- a/xen/include/public/xen.h
++++ b/xen/include/public/xen.h
+@@ -623,7 +623,7 @@ DEFINE_XEN_GUEST_HANDLE(mmu_update_t);
+ /*
+  * ` enum neg_errnoval
+  * ` HYPERVISOR_multicall(multicall_entry_t call_list[],
+- * `                      uint32_t nr_calls);
++ * `                      unsigned long nr_calls);
+  *
+  * NB. The fields are logically the natural register size for this
+  * architecture. In cases where xen_ulong_t is larger than this then
 -- 
 2.39.2
 
