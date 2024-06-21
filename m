@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2116C2BB85
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Jun 2024 20:19:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.745528.1152662 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00678C2BB85
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Jun 2024 20:58:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.745567.1152701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sKkjS-0006mQ-2I; Fri, 21 Jun 2024 20:19:38 +0000
+	id 1sKlKh-0005xn-MB; Fri, 21 Jun 2024 20:58:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 745528.1152662; Fri, 21 Jun 2024 20:19:38 +0000
+Received: by outflank-mailman (output) from mailman id 745567.1152701; Fri, 21 Jun 2024 20:58:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sKkjR-0006mJ-Vw; Fri, 21 Jun 2024 20:19:37 +0000
-Received: by outflank-mailman (input) for mailman id 745528;
- Fri, 21 Jun 2024 20:19:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sKlKh-0005xg-JV; Fri, 21 Jun 2024 20:58:07 +0000
+Received: by outflank-mailman (input) for mailman id 745567;
+ Fri, 21 Jun 2024 20:58:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FH9a=NX=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sKkjQ-0006Xk-Kl
- for xen-devel@lists.xenproject.org; Fri, 21 Jun 2024 20:19:36 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 940913f6-300b-11ef-90a3-e314d9c70b13;
- Fri, 21 Jun 2024 22:19:36 +0200 (CEST)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a6ef793f4b8so252384666b.1
- for <xen-devel@lists.xenproject.org>; Fri, 21 Jun 2024 13:19:36 -0700 (PDT)
+ id 1sKlKg-0005j1-Kg
+ for xen-devel@lists.xenproject.org; Fri, 21 Jun 2024 20:58:06 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f465af9f-3010-11ef-b4bb-af5377834399;
+ Fri, 21 Jun 2024 22:58:05 +0200 (CEST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-57cbc66a0a6so881006a12.1
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Jun 2024 13:58:05 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6fcf48b3a6sm116947466b.87.2024.06.21.13.19.33
+ 4fb4d7f45d1cf-57d3042d509sm1440011a12.43.2024.06.21.13.58.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 13:19:33 -0700 (PDT)
+ Fri, 21 Jun 2024 13:58:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,103 +47,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 940913f6-300b-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: f465af9f-3010-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1719001175; x=1719605975; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1719003484; x=1719608284; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RNg2DzwYEol0Dd/MIahRG8oCTZpkXejfnW6xOn3sPPQ=;
-        b=QTNoX5U6rmpJICA0jNsaTU8eA0+ISQhdY8RNztrrt+NdDZKTpQ3AsuZrss63UxYXAy
-         q/XVtRUgAq57Ok6wpfL3I7ZLk98ZSCuWMxToMFk+/6KMcFO3SfPvLgVeV+oxGrliuF10
-         aij2VZyjFLkbh27aylC9RW1IEiEhhcvwOepiM=
+        bh=bdyjt3BIACM8vTSuTSumyihaZrwR5nCq3lnnqbQTCh8=;
+        b=vCXU0+Aj8Gi0FtsVdCZBEFM9KaYOmZ3INS1y/xw1aL+TbhhbRn+HpQ6padg6BnOzRa
+         ECgw3J9/iWjCUTptnIo36x+uSpVEGXtnEXGWqXfEoXdln0YrBNd8N5Nb4ynNzVBev2ay
+         8IDBeC4jl7/Ce9OWEe6wmoCQbWq/TSEfhlaZU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719001175; x=1719605975;
+        d=1e100.net; s=20230601; t=1719003484; x=1719608284;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RNg2DzwYEol0Dd/MIahRG8oCTZpkXejfnW6xOn3sPPQ=;
-        b=kZLjqjeMilmo5YofW8g8aDXj51yXgJCLk5B1359fBBD3Q3urp7+u+reVQrKg928SoB
-         aP5zIBVY/7OoUniL5qeF2A3Hq1ogV0042R7Nrz3QN1DUzjNzguN/3+6zGZRvRkvEPs1l
-         h6UzdQ7b/6weCzHOinKW2MDGvwaSlJTR+kcNB+CsgLRJwbLX6y34NbRcvxALxoEc5gqH
-         J3CK5rck203zN6x3TKPupJcA5EBog2xXwmf+L0wFTdH2lKuCrFecsT4FlJjNCVnHMq+G
-         dbcUQZyf339vC9q/yP/SkT+vzXXVegCal5uUGkKChQZqRbdXH8Hc1Eq7aA/w0jSAE9s8
-         efxQ==
-X-Gm-Message-State: AOJu0YynFIHRzBxLEhZoMeD7s/EZMPUK0hSkLcghngVuoTNWBlG0SZ8p
-	LvJhz+tzuOiNH9lg6uEMYeOQyjBqBH22MVuE+t0GpkjHUxcQwksQB80d1ZIhT5FK2U2CEO809y1
-	v38E=
-X-Google-Smtp-Source: AGHT+IGHl4OM1ru7y/HT5MSJYwiduCg/9TtIS6T/sCUpcaB58OFHVIFvYyPaAgoCqMBV1HBaeivDLA==
-X-Received: by 2002:a17:907:910d:b0:a6f:dd94:c53d with SMTP id a640c23a62f3a-a6fdd94c91amr21152666b.75.1719001174723;
-        Fri, 21 Jun 2024 13:19:34 -0700 (PDT)
+        bh=bdyjt3BIACM8vTSuTSumyihaZrwR5nCq3lnnqbQTCh8=;
+        b=JZrSblH1OC+Sn6Xq7U53rTpY2x3ckALwQ0UmvzmDI1jLYZVnf7zKo/DIcWikC4uSoz
+         dIFCIrEZPcF7LeMAGlGBamHcgMano3jaGi/FoFisyaYB60/6v0vuwVwMwRbvwERaBa6i
+         jpwajJZQxM9HVoMJrV9BMrg+d/CHrfTpJ03dUp1rlolnf8AFlriwJP4jzsPDiwlknNUV
+         Xfg9viubNxydMc/yqBSr3kbUjdCrai2OQQzHAm0AXIm44T5EU77QhiBEdTHUetqDiVas
+         QibqleVDMYRs6IFV0qYbL9VT1zXLlnChcXusOgoLCKY+2YNPyOwA8IBn75Q0S2J/vfGs
+         wDag==
+X-Gm-Message-State: AOJu0Yy7aNJZ1SShm8oABvEroOCp4blksKfOgXgRs2cSHWTjQwDnCfz7
+	xX2eQxtvjxhMLUuM1srIIDNCMhithtXMXyPRXo/XrKlM+vuwI5wrry/IlzgiW9Px/gQ3iYJN7SV
+	oTwU=
+X-Google-Smtp-Source: AGHT+IGsGEoeFtjCEZAmgNF0aYxzTDgFROuk8KFeQVBo+qKImCPjmGqgL9fBnC3cLsT564i1CILIVw==
+X-Received: by 2002:aa7:db51:0:b0:57d:3df:ba2d with SMTP id 4fb4d7f45d1cf-57d3dff2a40mr540834a12.2.1719003483976;
+        Fri, 21 Jun 2024 13:58:03 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	George Dunlap <George.Dunlap@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH 1/3] xen/riscv: Drop legacy __ro_after_init definition
-Date: Fri, 21 Jun 2024 21:19:26 +0100
-Message-Id: <20240621201928.319293-2-andrew.cooper3@citrix.com>
+	Roberto Bagnara <roberto.bagnara@bugseng.com>,
+	"consulting @ bugseng . com" <consulting@bugseng.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH 1/2] x86/pagewalk: Address MISRA R8.3 violation in guest_walk_tables()
+Date: Fri, 21 Jun 2024 21:57:59 +0100
+Message-Id: <20240621205800.329230-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240621201928.319293-1-andrew.cooper3@citrix.com>
-References: <20240621201928.319293-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20240621205800.329230-1-andrew.cooper3@citrix.com>
+References: <20240621205800.329230-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hide the legacy __ro_after_init definition in xen/cache.h for RISC-V, to avoid
-its use creeping in.  Only mm.c needs adjusting as a consequence
+Commit 4c5d78a10dc8 ("x86/pagewalk: Re-implement the pagetable walker")
+intentionally renamed guest_walk_tables()'s 'pfec' parameter to 'walk' because
+it's not a PageFault Error Code, despite the name of some of the constants
+passed in.  Sadly the constants-cleanup I've been meaning to do since then
+still hasn't come to pass.
 
-No functional change.
+Update the declaration to match, to placate MISRA.
 
+Fixes: 4c5d78a10dc8 ("x86/pagewalk: Re-implement the pagetable walker")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-CC: Shawn Anastasio <sanastasio@raptorengineering.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: George Dunlap <George.Dunlap@citrix.com>
 CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-
-https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1342686294
+CC: Roberto Bagnara <roberto.bagnara@bugseng.com>
+CC: consulting@bugseng.com <consulting@bugseng.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/mm.c     | 2 +-
- xen/include/xen/cache.h | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ xen/arch/x86/include/asm/guest_pt.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index 053f043a3d2a..3ebaf6da01cc 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -1,11 +1,11 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
+diff --git a/xen/arch/x86/include/asm/guest_pt.h b/xen/arch/x86/include/asm/guest_pt.h
+index bc312343cdf1..7b0c9b005c1f 100644
+--- a/xen/arch/x86/include/asm/guest_pt.h
++++ b/xen/arch/x86/include/asm/guest_pt.h
+@@ -422,7 +422,7 @@ static inline unsigned int guest_walk_to_page_order(const walk_t *gw)
  
--#include <xen/cache.h>
- #include <xen/compiler.h>
- #include <xen/init.h>
- #include <xen/kernel.h>
- #include <xen/macros.h>
- #include <xen/pfn.h>
-+#include <xen/sections.h>
+ bool
+ guest_walk_tables(const struct vcpu *v, struct p2m_domain *p2m,
+-                  unsigned long va, walk_t *gw, uint32_t pfec,
++                  unsigned long va, walk_t *gw, uint32_t walk,
+                   gfn_t top_gfn, mfn_t top_mfn, void *top_map);
  
- #include <asm/early_printk.h>
- #include <asm/csr.h>
-diff --git a/xen/include/xen/cache.h b/xen/include/xen/cache.h
-index 55456823c543..82a3ba38e3e7 100644
---- a/xen/include/xen/cache.h
-+++ b/xen/include/xen/cache.h
-@@ -15,7 +15,9 @@
- #define __cacheline_aligned __attribute__((__aligned__(SMP_CACHE_BYTES)))
- #endif
- 
-+#if defined(CONFIG_ARM) || defined(CONFIG_X86) || defined(CONFIG_PPC64)
- /* TODO: Phase out the use of this via cache.h */
- #define __ro_after_init __section(".data.ro_after_init")
-+#endif
- 
- #endif /* __LINUX_CACHE_H */
+ /* Pretty-print the contents of a guest-walk */
 -- 
 2.39.2
 
