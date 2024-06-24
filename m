@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B88C2BD05
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jun 2024 11:08:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.746504.1153572 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8672C2BD09
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jun 2024 11:09:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.746510.1153582 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLhYe-0001sW-JG; Mon, 24 Jun 2024 11:08:24 +0000
+	id 1sLhZj-0002gQ-SF; Mon, 24 Jun 2024 11:09:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 746504.1153572; Mon, 24 Jun 2024 11:08:24 +0000
+Received: by outflank-mailman (output) from mailman id 746510.1153582; Mon, 24 Jun 2024 11:09:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLhYe-0001sP-Ge; Mon, 24 Jun 2024 11:08:24 +0000
-Received: by outflank-mailman (input) for mailman id 746504;
- Mon, 24 Jun 2024 11:08:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sLhZj-0002gJ-Pl; Mon, 24 Jun 2024 11:09:31 +0000
+Received: by outflank-mailman (input) for mailman id 746510;
+ Mon, 24 Jun 2024 11:09:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dlsF=N2=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1sLhYd-0001sH-DE
- for xen-devel@lists.xenproject.org; Mon, 24 Jun 2024 11:08:23 +0000
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [2607:f8b0:4864:20::72a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 10d9b3e2-321a-11ef-b4bb-af5377834399;
- Mon, 24 Jun 2024 13:08:21 +0200 (CEST)
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-79776e3e351so324295985a.3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jun 2024 04:08:21 -0700 (PDT)
-Received: from georged-x-u.xenrt.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b51ef32f9csm33060646d6.91.2024.06.24.04.08.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 04:08:19 -0700 (PDT)
+ <SRS0=Bblz=N2=arm.com=robin.murphy@srs-se1.protection.inumbo.net>)
+ id 1sLhZi-0002er-8W
+ for xen-devel@lists.xenproject.org; Mon, 24 Jun 2024 11:09:30 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 38d9cd84-321a-11ef-90a3-e314d9c70b13;
+ Mon, 24 Jun 2024 13:09:28 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1DB2DDA7;
+ Mon, 24 Jun 2024 04:09:52 -0700 (PDT)
+Received: from [10.57.74.124] (unknown [10.57.74.124])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4C7383F73B;
+ Mon, 24 Jun 2024 04:09:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,80 +44,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10d9b3e2-321a-11ef-b4bb-af5377834399
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1719227300; x=1719832100; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+5qC9sjfZW5xvtM27k2obmnqE9Kc0AqhK5r2h4CzQCk=;
-        b=VUN715t7gpKRgp7oMyWUJwhMmfABgUccbNQ4B/OBwbNM+L8UIx8vS16fF+lUP9WReh
-         8Evxjbj5gsnfqfS5DAZzKPxCzsWjAi/v1RdvHeD6dNiYsQATwFHlLdQuhHAg/mGkzi3P
-         BB6ekJ5TlmRmTwoodHUMk0cSBI0nc95c0VPMI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719227300; x=1719832100;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+5qC9sjfZW5xvtM27k2obmnqE9Kc0AqhK5r2h4CzQCk=;
-        b=vGrehJdSamZqEtimV7zojGLM6r4kbzt19uUNx9DnHdBl7zytRbmA57oeLUwiWJ0pJJ
-         rQ/xUVs/HWXMTyWPzn4C+MLSQMhXMmQv0Fue2+n7heB1EDGgqtPdyijjH2S3z2+hN9IK
-         NhvGW37r8dDdf9RiFp40kp7WHbQXQRxPEDTLphN+aEYoveoUXQdrRPmAEG+1tOuxWmE/
-         jM5UybFkgyzPwt0ZuYaX7CBiDwMB8fbChDicYpm2G+gSsasjp8f+DUSrH0Dd7FY87kOa
-         UAZ+NEjdK8EBrvZUWW+/lWX3y7rmjUdtwMhkFfVY5ABrU0ozBEOakTVkrT2Aj8t+ZOa0
-         bnSw==
-X-Gm-Message-State: AOJu0YxGUvfgmbLR7BV9wP0sovabAxeie19qcpoj+EC7fq3pYEoW5AKs
-	TjQid7amUzow55pLW2+JpOlt46Hd5hFKGbxiruvJUjBKgvcv6zorNTA0tuHI8GhM7B/jDRb7hZb
-	i
-X-Google-Smtp-Source: AGHT+IG0B2zg5ewAzZld7SrzOhRA0mZZUneC/LOwnH2XbW/B2ZbTeoZBmXGyZnkDg7TXceUwal4guA==
-X-Received: by 2002:ad4:50c8:0:b0:6b5:165:2f78 with SMTP id 6a1803df08f44-6b53635fd93mr54361946d6.13.1719227299753;
-        Mon, 24 Jun 2024 04:08:19 -0700 (PDT)
-From: George Dunlap <george.dunlap@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@cloud.com>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH for-4.19] tools/xenalyze: Remove argp_program_bug_address
-Date: Mon, 24 Jun 2024 11:49:30 +0100
-Message-Id: <20240624104930.1951521-1-george.dunlap@cloud.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 38d9cd84-321a-11ef-90a3-e314d9c70b13
+Message-ID: <4c941977-868a-4bd0-9c57-eb58255d95bf@arm.com>
+Date: Mon, 24 Jun 2024 12:09:23 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH] iommu/xen: Add Xen PV-IOMMU driver
+To: Baolu Lu <baolu.lu@linux.intel.com>, Teddy Astie
+ <teddy.astie@vates.tech>, Jason Gunthorpe <jgg@ziepe.ca>
+Cc: xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+References: <fe36b8d36ed3bc01c78901bdf7b87a71cb1adaad.1718286176.git.teddy.astie@vates.tech>
+ <20240619163000.GK791043@ziepe.ca>
+ <750967b7-252f-4523-872f-64b79358c97c@vates.tech>
+ <4ba90f86-fd14-4d2a-b7a0-c3eaab243565@linux.intel.com>
+From: Robin Murphy <robin.murphy@arm.com>
+Content-Language: en-GB
+In-Reply-To: <4ba90f86-fd14-4d2a-b7a0-c3eaab243565@linux.intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-xenalyze sets argp_program_bug_address to my old Citrix address.  This
-was done before xenalyze was in the xen.git tree; and it's the only
-program in the tree which does so.
+On 2024-06-23 4:21 am, Baolu Lu wrote:
+> On 6/21/24 11:09 PM, Teddy Astie wrote:
+>> Le 19/06/2024 à 18:30, Jason Gunthorpe a écrit :
+>>> On Thu, Jun 13, 2024 at 01:50:22PM +0000, Teddy Astie wrote:
+>>>
+>>>> +struct iommu_domain *xen_iommu_domain_alloc(unsigned type)
+>>>> +{
+>>>> +    struct xen_iommu_domain *domain;
+>>>> +    u16 ctx_no;
+>>>> +    int ret;
+>>>> +
+>>>> +    if (type & IOMMU_DOMAIN_IDENTITY) {
+>>>> +        /* use default domain */
+>>>> +        ctx_no = 0;
+>>> Please use the new ops, domain_alloc_paging and the static identity 
+>>> domain.
+>> Yes, in the v2, I will use this newer interface.
+>>
+>> I have a question on this new interface : is it valid to not have a
+>> identity domain (and "default domain" being blocking); well in the
+>> current implementation it doesn't really matter, but at some point, we
+>> may want to allow not having it (thus making this driver mandatory).
+> 
+> It's valid to not have an identity domain if "default domain being
+> blocking" means a paging domain with no mappings.
+> 
+> In the iommu driver's iommu_ops::def_domain_type callback, just always
+> return IOMMU_DOMAIN_DMA, which indicates that the iommu driver doesn't
+> support identity translation.
 
-Now that xenalyze is part of the normal Xen distribution, it should be
-obvious where to report bugs.
+That's not necessary - if neither ops->identity_domain nor 
+ops->domain_alloc(IOMMU_DOMAIN_IDENTITY) gives a valid domain then we 
+fall back to IOMMU_DOMAIN_DMA anyway.
 
-Signed-off-by: George Dunlap <george.dunlap@cloud.com>
----
-Freeze exception justification: This is only a change in
-documentation.
-
-CC: Anthony PERARD <anthony@xenproject.org>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
----
- tools/xentrace/xenalyze.c | 3 ---
- 1 file changed, 3 deletions(-)
-
-diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
-index d95e52695f..adc96dd7e4 100644
---- a/tools/xentrace/xenalyze.c
-+++ b/tools/xentrace/xenalyze.c
-@@ -10920,9 +10920,6 @@ const struct argp parser_def = {
-     .doc = "",
- };
- 
--const char *argp_program_bug_address = "George Dunlap <george.dunlap@eu.citrix.com>";
--
--
- int main(int argc, char *argv[]) {
-     /* Start with warn at stderr. */
-     warn = stderr;
--- 
-2.25.1
-
+Thanks,
+Robin.
 
