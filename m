@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77392C41513
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jun 2024 18:00:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.746893.1154120 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FD65C2BD09
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jun 2024 18:54:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.746905.1154130 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLnzG-0002Jo-1D; Mon, 24 Jun 2024 18:00:18 +0000
+	id 1sLopj-0000XA-OL; Mon, 24 Jun 2024 18:54:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 746893.1154120; Mon, 24 Jun 2024 18:00:18 +0000
+Received: by outflank-mailman (output) from mailman id 746905.1154130; Mon, 24 Jun 2024 18:54:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLnzF-0002Jh-Uu; Mon, 24 Jun 2024 18:00:17 +0000
-Received: by outflank-mailman (input) for mailman id 746893;
- Mon, 24 Jun 2024 18:00:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Bblz=N2=arm.com=robin.murphy@srs-se1.protection.inumbo.net>)
- id 1sLnzE-0002JZ-RC
- for xen-devel@lists.xenproject.org; Mon, 24 Jun 2024 18:00:16 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 9bea681d-3253-11ef-90a3-e314d9c70b13;
- Mon, 24 Jun 2024 20:00:15 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9DCDBDA7;
- Mon, 24 Jun 2024 11:00:39 -0700 (PDT)
-Received: from [10.57.74.124] (unknown [10.57.74.124])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 94FA63F73B;
- Mon, 24 Jun 2024 11:00:12 -0700 (PDT)
+	id 1sLopj-0000X3-L4; Mon, 24 Jun 2024 18:54:31 +0000
+Received: by outflank-mailman (input) for mailman id 746905;
+ Mon, 24 Jun 2024 18:54:31 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sLopj-0000Wt-0Q; Mon, 24 Jun 2024 18:54:31 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sLopi-0008Ib-IR; Mon, 24 Jun 2024 18:54:30 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sLopi-00038W-7Z; Mon, 24 Jun 2024 18:54:30 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1sLopi-0004ie-4V; Mon, 24 Jun 2024 18:54:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,80 +44,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9bea681d-3253-11ef-90a3-e314d9c70b13
-Message-ID: <b65e089b-f8b0-4588-adaf-af555ab5781a@arm.com>
-Date: Mon, 24 Jun 2024 19:00:10 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2] iommu/xen: Add Xen PV-IOMMU driver
-To: Easwar Hariharan <eahariha@linux.microsoft.com>,
- Jason Gunthorpe <jgg@ziepe.ca>, Teddy Astie <teddy.astie@vates.tech>
-Cc: xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-References: <24d7ec005e77e4e0127995ba6f4ad16f33737fa5.1718981216.git.teddy.astie@vates.tech>
- <da3ec316-b001-4711-b323-70af3e6bb014@arm.com>
- <a04e169d-b38a-43dc-b783-a8af1e1b0468@vates.tech>
- <20240624163254.GT791043@ziepe.ca>
- <900edf8a-885c-4bf3-84bd-5e7b165a1ed7@linux.microsoft.com>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <900edf8a-885c-4bf3-84bd-5e7b165a1ed7@linux.microsoft.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=g/5ICl8d2sxRmdGAIQejzDa+tGc+cvcNqyzD/mhJR6w=; b=01GEo3ilH25Pd+B5wpXtWYT75C
+	UzM60IHs6Q2IhDWq4EpgjiMAmTng6x1Bh0zTM8n1cxYT10uCHZBLqGD65I4Xf47li4qrsfTUIpRIl
+	BjyhaI7l6oX7dSUug0GxJVB7Dl1UmaloeqwciizkJf7EWmsPh4hb5JbVbDEKhOIdsD3o=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-186467-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 186467: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=908407bf2b29a38d6879fc8c57dad14473ef67f8
+X-Osstest-Versions-That:
+    xen=9e7c26ad8532c3efda174dee5ab8bdbeef1e4f6d
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 24 Jun 2024 18:54:30 +0000
 
-On 2024-06-24 6:36 pm, Easwar Hariharan wrote:
-> Hi Jason,
-> 
-> On 6/24/2024 9:32 AM, Jason Gunthorpe wrote:
->> On Mon, Jun 24, 2024 at 02:36:45PM +0000, Teddy Astie wrote:
->>>>> +bool xen_iommu_capable(struct device *dev, enum iommu_cap cap)
->>>>> +{
->>>>> +    switch (cap) {
->>>>> +    case IOMMU_CAP_CACHE_COHERENCY:
->>>>> +        return true;
->>>>
->>>> Will the PV-IOMMU only ever be exposed on hardware where that really is
->>>> always true?
->>>>
->>>
->>> On the hypervisor side, the PV-IOMMU interface always implicitely flush
->>> the IOMMU hardware on map/unmap operation, so at the end of the
->>> hypercall, the cache should be always coherent IMO.
->>
->> Cache coherency is a property of the underlying IOMMU HW and reflects
->> the ability to prevent generating transactions that would bypass the
->> cache.
->>
->> On AMD and Intel IOMMU HW this maps to a bit in their PTEs that must
->> always be set to claim this capability.
->>
->> No ARM SMMU supports it yet.
->>
-> 
-> Unrelated to this patch: Both the arm-smmu and arm-smmu-v3 drivers claim
-> this capability if the device tree/IORT table have the corresponding flags.
-> 
-> I read through DEN0049 to determine what are the knock-on effects, or
-> equivalently the requirements to set those flags in the IORT, but came
-> up empty. Could you help with what I'm missing to resolve the apparent
-> contradiction between your statement and the code?
+flight 186467 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/186467/
 
-We did rejig things slightly a while back. The status quo now is that 
-IOMMU_CAP_CACHE_COHERENCY mostly covers whether IOMMU mappings can make 
-device accesses coherent at all, tied in with the IOMMU_CACHE prot value 
-- this is effectively forced for Intel and AMD, while for SMMU we have 
-to take a guess, but as commented it's a pretty reasonable assumption 
-that if the SMMU's own output for table walks etc. is coherent then its 
-translation outputs are likely to be too. The further property of being 
-able to then enforce a coherent mapping regardless of what an endpoint 
-might try to get around it (PCIe No Snoop etc.) is now under the 
-enforce_cache_coherency op - that's what SMMU can't guarantee for now 
-due to the IMP-DEF nature of whether S2FWB overrides No Snoop or not.
+Failures :-/ but no regressions.
 
-Thanks,
-Robin.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  908407bf2b29a38d6879fc8c57dad14473ef67f8
+baseline version:
+ xen                  9e7c26ad8532c3efda174dee5ab8bdbeef1e4f6d
+
+Last test of basis   186447  2024-06-21 15:04:10 Z    3 days
+Testing same since   186467  2024-06-24 16:03:45 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Anthony PERARD <anthony.perard@vates.tech>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   9e7c26ad85..908407bf2b  908407bf2b29a38d6879fc8c57dad14473ef67f8 -> smoke
 
