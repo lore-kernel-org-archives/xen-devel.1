@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9711C2BBCA
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2024 06:01:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.747192.1154523 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5EA9C3064D
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2024 06:01:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.746929.1154534 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLzEc-0004Vu-Qm; Tue, 25 Jun 2024 06:00:54 +0000
+	id 1sLzFH-0004zt-1w; Tue, 25 Jun 2024 06:01:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 747192.1154523; Tue, 25 Jun 2024 06:00:54 +0000
+Received: by outflank-mailman (output) from mailman id 746929.1154534; Tue, 25 Jun 2024 06:01:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLzEc-0004Vn-Nx; Tue, 25 Jun 2024 06:00:54 +0000
-Received: by outflank-mailman (input) for mailman id 747192;
- Tue, 25 Jun 2024 06:00:53 +0000
+	id 1sLzFG-0004zm-VO; Tue, 25 Jun 2024 06:01:34 +0000
+Received: by outflank-mailman (input) for mailman id 746929;
+ Mon, 24 Jun 2024 20:57:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=sC98=N3=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sLzEb-0004Vh-48
- for xen-devel@lists.xenproject.org; Tue, 25 Jun 2024 06:00:53 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1jEd=N2=net-c.com=rustybird@srs-se1.protection.inumbo.net>)
+ id 1sLqkj-0006zn-6X
+ for xen-devel@lists.xenproject.org; Mon, 24 Jun 2024 20:57:29 +0000
+Received: from mailo.com (msg-2.mailo.com [213.182.54.12])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 47086dbd-32b8-11ef-90a3-e314d9c70b13;
- Tue, 25 Jun 2024 08:00:52 +0200 (CEST)
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2ebed33cb65so56328441fa.2
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jun 2024 23:00:52 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7069afb8bd8sm403788b3a.145.2024.06.24.23.00.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jun 2024 23:00:50 -0700 (PDT)
+ id 5c99ac83-326c-11ef-90a3-e314d9c70b13;
+ Mon, 24 Jun 2024 22:57:26 +0200 (CEST)
+Received: by b221-6.in.mailobj.net [192.168.90.26] with ESMTP
+ via ip-20.mailobj.net [213.182.54.20]
+ Mon, 24 Jun 2024 22:57:20 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,105 +41,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47086dbd-32b8-11ef-90a3-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1719295251; x=1719900051; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=QGYTSjuyk5eWZDroKLLfQ8zBgMUfQ/0YGkUFlSNGDdY=;
-        b=JHT4r4J+XvSDTg1d6Hecc+cV1rB9CyI2YkNEm9V09AkO1rpV+abwxA0eeVaKOxuDbA
-         oYSbrJpRFz+QSlDrILg0upHmiUnMA7Xz094AQWXWkZwIwSR3H5NvV3fN8sdCfuqG308E
-         O0YqpXSABnpNi08R7jMhfnBTu+lk36LgZ7PA4nbR5DsZOSmhTf8lVm8WR4vtWF13qPuG
-         rBHrJis/gC7z+vrX25e1ggYc+4qFVI7zR2icvaQjBuF5DURgh2kzzaGkqh/APgjuDfQB
-         I2LLoWNVKWBm6w3VJPhLbJPdkyXx0OrjUxUE2SzIyX6nmeF02yJ+qUfqdaHN3q0ZdgvV
-         kJdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719295251; x=1719900051;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QGYTSjuyk5eWZDroKLLfQ8zBgMUfQ/0YGkUFlSNGDdY=;
-        b=Y5EWtkBFx7V3fr7gZxMIYFR3+53Xt6fcObbH2nQj3B0ohbW06mYvWZEbcZ6MKPRQ7D
-         j5hJodP/7j9F0evrUkOmm4ziN8yZv0vZxLf2g2tYts6Jo6Vr8E7dN6Zgtu56gEQGQlJm
-         +1ebFnhym/YSPMjOqvL/NzXIaVDn5so/CACWHh+FlfQ8TdhIONCwBIGVLJWqmL8xs8Fi
-         xnnRo17tG3a5Puwo028w9B5Yh8ztWi57gLceECiH9Y6Po5nkGf6AEsQZotq1DaZw5SJZ
-         9Ntno/aZ9KwddAhf7f64p3hOpUKyygPRX/xY/CwHN8I9c1fAaY7P5ud9FjNNc9O4JyRw
-         p43w==
-X-Forwarded-Encrypted: i=1; AJvYcCUt+O+H/xA7Y/bUh9rwIOORylwShDBeBrwntzDXnMehijB24zTjNRU1FUF/AP9HtYXQbDWEzw6HIG1DdORfBqcrjQ05NPhEaNh1UgmVDg0=
-X-Gm-Message-State: AOJu0YzFBY/SYenDuLqCBQXkQO1qqiwuLvqiu6yRApDrIlpoa9KOenOv
-	zmwzRffXwuYI7iuHGldEnbKFkMQjZaHPueLeht2Y+QtLVv1AtS1pyGmNugFgcQ==
-X-Google-Smtp-Source: AGHT+IFHPCziqXXYtQLOVV6YdqS2rDgeQmRPUWNbvwHxqhexrUH8yl/yqPxSGUXTK+BddbkVzljhlA==
-X-Received: by 2002:a05:651c:209:b0:2ec:5777:aa61 with SMTP id 38308e7fff4ca-2ec5931002amr50758901fa.3.1719295251404;
-        Mon, 24 Jun 2024 23:00:51 -0700 (PDT)
-Message-ID: <80d0578d-26c0-4650-9edf-6926c055d415@suse.com>
-Date: Tue, 25 Jun 2024 08:00:43 +0200
+X-Inumbo-ID: 5c99ac83-326c-11ef-90a3-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=net-c.com; s=mailo;
+	t=1719262640; bh=yL7RpNY0mzppYqKUJ2NLIHNEkbd+z2/jheYt/lByE0Q=;
+	h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To;
+	b=ycobJ/XxK0lDNyvZvZCfaF/btBqESLa79LJON+en38+TZ5XySXnaVs5mNa1/MRD2a
+	 tD1DREkGBe/iWEGVSuGy064aZ2vRdsa/ONJfc/EvmgFprCoiXXhV6mWjWdlbIkWB2b
+	 jHkLNWF/zIrChcDH2ju8hnv8d1oWiu8pAYe/YaMU=
+X-EA-Auth: jzlao6B10w7KC8fjYHfmgbgCFNZVbCjLZL2oGthHEOwT9J4UezSzTA5LoR/1Goq85PA6kQAuzA2C6Nltm+C0R3RF7t21KtGhRHp48tIVmqI=
+Date: Mon, 24 Jun 2024 20:56:47 +0000
+From: Rusty Bird <rustybird@net-c.com>
+To: Christoph Hellwig <hch@lst.de>
+Cc: =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>,
+	Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+	xen-devel <xen-devel@lists.xenproject.org>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Jens Axboe <axboe@kernel.dk>
+Subject: Re: Regression in xen-blkfront regarding sector sizes
+Message-ID: <Znndj9W_bCsFTxkz@mutt>
+References: <Znl5FYI9CC37jJLX@mail-itl>
+ <1944dd3f-1ba8-4559-b71a-056b9309ab58@suse.com>
+ <20240624143826.GA8973@lst.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] Add libfuzzer target to fuzz/x86_instruction_emulator
-To: Tamas K Lengyel <tamas@tklengyel.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony@xenproject.org>, xen-devel@lists.xenproject.org
-References: <20240621191434.5046-1-tamas@tklengyel.com>
- <45c69745-b060-4697-9f6e-b3d2a8860946@suse.com>
- <CABfawhkyDVw-=nR2d6KiXGYYv=coDgHUr1oXC+BmUxH_ita+iQ@mail.gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CABfawhkyDVw-=nR2d6KiXGYYv=coDgHUr1oXC+BmUxH_ita+iQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240624143826.GA8973@lst.de>
 
-On 24.06.2024 23:23, Tamas K Lengyel wrote:
-> On Mon, Jun 24, 2024 at 11:55 AM Jan Beulich <jbeulich@suse.com> wrote:
->>
->> On 21.06.2024 21:14, Tamas K Lengyel wrote:
->>> @@ -58,6 +58,9 @@ afl-harness: afl-harness.o $(OBJS) cpuid.o wrappers.o
->>>  afl-harness-cov: afl-harness-cov.o $(patsubst %.o,%-cov.o,$(OBJS)) cpuid.o wrappers.o
->>>       $(CC) $(CFLAGS) $(GCOV_FLAGS) $(addprefix -Wl$(comma)--wrap=,$(WRAPPED)) $^ -o $@
->>>
->>> +libfuzzer-harness: $(OBJS) cpuid.o
->>> +     $(CC) $(CFLAGS) $(LIB_FUZZING_ENGINE) -fsanitize=fuzzer $^ -o $@
->>
->> What is LIB_FUZZING_ENGINE? I don't think we have any use of that in the
->> tree anywhere.
+Christoph Hellwig:
+> On Mon, Jun 24, 2024 at 04:29:15PM +0200, Jürgen Groß wrote:
+> >> Rusty suspects it's related to
+> >> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/block/xen-blkfront.c?id=ba3f67c1163812b5d7ec33705c31edaa30ce6c51,
+> >> so I'm cc-ing people mentioned there too.
+> >
+> > I think the call of blkif_set_queue_limits() in this patch should NOT precede
+> > setting of info->sector_size and info->physical_sector_size, as those are
+> > needed by blkif_set_queue_limits().
 > 
-> It's used by oss-fuzz, otherwise it's not doing anything.
+> Yes.  Something like the patch below should fix it.  We could also stop
+> passing sector_size and physіcal_sector_size to xlvbd_alloc_gendisk to
+> clean things up a bit more.
 > 
->>
->> I'm further surprised you get away here without wrappers.o.
+> diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+> index fd7c0ff2139cee..9f3d68044f8882 100644
+> --- a/drivers/block/xen-blkfront.c
+> +++ b/drivers/block/xen-blkfront.c
+> @@ -1133,6 +1133,8 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
+>  	if (err)
+>  		goto out_release_minors;
+>  
+> +	info->sector_size = sector_size;
+> +	info->physical_sector_size = physical_sector_size;
+>  	blkif_set_queue_limits(info, &lim);
+>  	gd = blk_mq_alloc_disk(&info->tag_set, &lim, info);
+>  	if (IS_ERR(gd)) {
+> @@ -1159,8 +1161,6 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
+>  
+>  	info->rq = gd->queue;
+>  	info->gd = gd;
+> -	info->sector_size = sector_size;
+> -	info->physical_sector_size = physical_sector_size;
+>  
+>  	xlvbd_flush(info);
+>  
 > 
-> Wrappers.o was actually breaking the build for oss-fuzz at the linking
-> stage. It works just fine without it.
+> 
 
-I'm worried here, to be honest. The wrappers serve a pretty important
-role, and I'm having a hard time seeing why they shouldn't be needed
-here when they're needed both for the test and afl harnesses. Could
-you add some more detail on the build issues you encountered?
+With this patch applied on top of v6.9.4, I get the correct
+logical/physical block sizes and the issue is fixed. Thank you!
 
-Jan
+Rusty
+
+
 
