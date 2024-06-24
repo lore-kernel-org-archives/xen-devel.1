@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11348C2D0D1
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jun 2024 13:41:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.746647.1153761 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C2CC2BD09
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jun 2024 13:48:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.746660.1153770 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLjwE-0000oD-4d; Mon, 24 Jun 2024 13:40:54 +0000
+	id 1sLk3K-0001o8-03; Mon, 24 Jun 2024 13:48:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 746647.1153761; Mon, 24 Jun 2024 13:40:54 +0000
+Received: by outflank-mailman (output) from mailman id 746660.1153770; Mon, 24 Jun 2024 13:48:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sLjwE-0000o6-1B; Mon, 24 Jun 2024 13:40:54 +0000
-Received: by outflank-mailman (input) for mailman id 746647;
- Mon, 24 Jun 2024 13:40:52 +0000
+	id 1sLk3J-0001o1-TZ; Mon, 24 Jun 2024 13:48:13 +0000
+Received: by outflank-mailman (input) for mailman id 746660;
+ Mon, 24 Jun 2024 13:48:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=wsRE=N2=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sLjwC-0000o0-Nx
- for xen-devel@lists.xenproject.org; Mon, 24 Jun 2024 13:40:52 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=6zbB=N2=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1sLk3J-0001nv-4s
+ for xen-devel@lists.xenproject.org; Mon, 24 Jun 2024 13:48:13 +0000
+Received: from fhigh7-smtp.messagingengine.com
+ (fhigh7-smtp.messagingengine.com [103.168.172.158])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5f7ec253-322f-11ef-90a3-e314d9c70b13;
- Mon, 24 Jun 2024 15:40:51 +0200 (CEST)
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2eaafda3b5cso46668941fa.3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jun 2024 06:40:51 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f9eb3c8c01sm62702855ad.129.2024.06.24.06.40.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jun 2024 06:40:50 -0700 (PDT)
+ id 64d5af78-3230-11ef-90a3-e314d9c70b13;
+ Mon, 24 Jun 2024 15:48:11 +0200 (CEST)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id C2CEA1140227;
+ Mon, 24 Jun 2024 09:48:09 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute6.internal (MEProxy); Mon, 24 Jun 2024 09:48:09 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 24 Jun 2024 09:48:07 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,98 +46,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f7ec253-322f-11ef-90a3-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1719236451; x=1719841251; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=KLzkamUjja3jxtbo0dxxGSX71v1mCJ21/2iw1rHe5K0=;
-        b=HrMFGFTlnIKgEMJ9NwVyblEtRrbQbGQEkXBzM7LgCAB+8lpfdZ4SvaTaxzaB/WBTR/
-         q7lUSIWoRlN71Zp4LpNwOZEiuHLO1X92HMl53M1/3Ci8AYxl9u783tjXo3CyKGNjz0s7
-         xgU8Moz8lwp0oB0tOVY6eU0R2YYv8/fSLFVuP/g8cv1M7UNmnMekE1oyKCisinG0+Vcf
-         i9bU9vPDxMBGDuxN4Wvlpd99vvrlw+ZazC5nNqFvKcMYXEvA9NI2dRT/O/DpDp8Jq5GR
-         Lb1c1dqU/78PILUDi2lA/z+T2SCLmTxHEv8t1fyZOO4g1WUW7RGKEO66GKNUydmKPEJS
-         d6zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719236451; x=1719841251;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KLzkamUjja3jxtbo0dxxGSX71v1mCJ21/2iw1rHe5K0=;
-        b=FuQTbfW+ju1/r60r1ODg2WUHmZzP5wnZ6oSvhZAhVjDMJxeLaWvHCjz6NN6KIXMKJF
-         RVU3wCvDb5oUvQ8cp50Hyu6ocYYK1OMHagmHSs2rY6MKdQ24lsimqGgWzFjr/f2xHOZb
-         z44nzrvBKQMrEkjVAN5xGTMj7lD2ds1YDya4c7iFvkcRYnEnOE1vJXC3ur7TtQr/sYFB
-         CP624DzN4V8/mNs0EVyt0kD6tqYu5ppXaDD67ZHCYbiw0F7fZvncfpk8zSC3PxLMQBmH
-         JmEtf4Qv93bYkSs88dUjzrOEH37TR4JonY9EW/ftaNxYb0WAQIzxQy1r8PqoOzHGLbUX
-         aqHg==
-X-Forwarded-Encrypted: i=1; AJvYcCVECIkXb1Kf4BouKVtwxNsu2NvXR905VTH7gWno/FOPuuFvpRoEXe3tHitNtG02fBRPP+WGn+zlzJQ9LtcOj6xWLwHEBqB7ecDPgWqu4rI=
-X-Gm-Message-State: AOJu0Yy6fqwVugULAGr7dx2IbmaKsZyVUs+ZZsDy/dktQIY395rH49B9
-	l6wCdHccbC8CZbfTKCFVw/TaF/vxjfbPORYk8k0visIhPM9ntyEBBaFnUvke9g==
-X-Google-Smtp-Source: AGHT+IEJlbkh48uEmGZMyRNc2OFdg4O04Y6YkGtSRxTuC6TavMEwvRkFjmIhl6nsH2gdr0UKFb4ryg==
-X-Received: by 2002:a2e:92d6:0:b0:2ec:514f:89b4 with SMTP id 38308e7fff4ca-2ec5951ca7bmr30496521fa.43.1719236451364;
-        Mon, 24 Jun 2024 06:40:51 -0700 (PDT)
-Message-ID: <23f4b971-a161-47db-85a7-54f50300d039@suse.com>
-Date: Mon, 24 Jun 2024 15:40:44 +0200
+X-Inumbo-ID: 64d5af78-3230-11ef-90a3-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:message-id:mime-version:reply-to
+	:subject:subject:to:to; s=fm1; t=1719236889; x=1719323289; bh=m1
+	ygcSpOcgz8PRMolKj0zus6mRL+uXQvw8SdE2416+E=; b=fzWpmH1hpKsWe0Nj1X
+	/7ks6k8nCu+EubdtqWUrzgRMEl+Ipc03jgI9I4zSe3y01Uq/T0wS6098HI8MFbAN
+	pDyOWt7cpf/gE3iyqfEO3vu67ltsbLbyWVOcmyPHttUtgU9/PA/vogQDd73cPcMm
+	V+J+VHxpvGaJ5uGVHlOoQWCAf68gS7AFlOBf4xKUkv26CFa8s7MlKOJGc7EcIj80
+	RaEBjPDoTQxkJvpsYJrMBBGrs1vEJ6wOpWTjdfG/0Y9XSZHeeBTJjpaECN+pQ8no
+	wL9CwhKc57Wg1DoocF6N4fft6yN/5Ov79cpf4E3n139DxHxt/VWjWLjTwK90ryBL
+	nh5A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:message-id
+	:mime-version:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1719236889; x=1719323289; bh=m1ygcSpOcgz8PRMolKj0zus6mRL+uXQvw8S
+	dE2416+E=; b=kJ5y7ctrz70i1raqTos7bxx9TqfZriVT8sPywXo+ER/RZhrxhLC
+	oGVV6s54dYNPeLBZ4+ajOm3fvg7VV2e/NGhClqaagbd3GqAs/C+5rjFk25isjX2Z
+	/MR0bbP8teefcbvsw7Ak56b4D6OtQ5ymJPiJRYaRUPZBQbo6+MLuSDaOvc18Mblg
+	rgyCyQ24WersBgY+47XXTjH1vrPWLRxZL7xtvB3egVxpPSod1u2D9+WnmE353IMM
+	pOYd26/Iw70YB1YkucJbejiI+AW7VLAYWH45ZkL1usKeYMkgDM220JkzTXt9eXIY
+	kFChZxx/okmg/cLzVXEnuGdnHNhXg4Uwavg==
+X-ME-Sender: <xms:GXl5Zn04JyJeR_4i-OP_aYUIODz9nDWcwgf9B2LYD0KxYUX2dpsQ6Q>
+    <xme:GXl5ZmF3pYhqtUbqKmdjKPHJPvbJRszPqmieA6Quoo7CwntI5zm_ZKGz24OrkuvgQ
+    rxEu0XAD0GNZg>
+X-ME-Received: <xmr:GXl5Zn5SgfpfJUeBww96Oh8tuTAxmIl0StN2gKMgp_kdJDHT_B8Ag9GUGSXxdXg2d5iuR_cFb-7wEOLcrHzYL0ytBsLpR2MEvQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeeguddgieelucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepfffhvfevuffkgggtugesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
+    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
+    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgefhfeff
+    uefhffdvheeugfefleehvdeiueekudeuveeljeehgeffteehgffggeelnecuffhomhgrih
+    hnpehgihhthhhusgdrtghomhdpkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihii
+    vgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsih
+    gslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:GXl5Zs2_OG4ozr579RiPt9-1hSba8Y5wgy7n7dvKoAFOgvNcSKVR5A>
+    <xmx:GXl5ZqGcu73kEowIXBlOxdzIuSujbb9xi15vS1AFz9R5-dNA_1SCfw>
+    <xmx:GXl5Zt_y7No2iPxQfqr6gjhlRrPsujOToifFwvguwEnYVqITnYCwsw>
+    <xmx:GXl5ZnlUSdMm9KfUrAl4Lf6LTwz3sZCzCIO8B0U9glOfTggydG4AKQ>
+    <xmx:GXl5ZmiZWXmSR-RFYjDeD1Dgan8xBzTJmQf6r3krGx39WuVS7HVsOm1A>
+Feedback-ID: i1568416f:Fastmail
+Date: Mon, 24 Jun 2024 15:48:05 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Christoph Hellwig <hch@lst.de>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Jens Axboe <axboe@kernel.dk>
+Subject: Regression in xen-blkfront regarding sector sizes
+Message-ID: <Znl5FYI9CC37jJLX@mail-itl>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: E820 memory allocation issue on Threadripper platforms
-To: Branden Sherrell <sherrellbc@gmail.com>
-Cc: Patrick Plenefisch <simonpatp@gmail.com>, xen-devel@lists.xenproject.org,
- Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <CAOCpoWdOH=xGxiQSC1c5Ueb1THxAjH4WiZbCZq-QT+d_KAk3SA@mail.gmail.com>
- <1708c3d7-662a-44bc-b9b3-4ab9f8642d7b@suse.com>
- <dcaf9d8d-ad5a-4714-936b-79ed0e587f9d@suse.com>
- <CAOCpoWeowZPuQTeBp9nu8p8CDtE=u++wN_UqRoABZtB57D50Qw@mail.gmail.com>
- <ac742d12-ec91-4215-bb42-82a145924b4f@suse.com>
- <CAOCpoWfQmkhN3hms1xuotSUZzVzR99i9cNGGU2r=yD5PjysMiQ@mail.gmail.com>
- <fa23a590-5869-4e11-8998-1d03742c5919@suse.com> <ZaeoWBV8IEZap2mr@macbook>
- <15dcef46-aaa8-4f71-bd5c-355001dd9188@suse.com> <ZafOGEwms01OFaVJ@macbook>
- <7BAC7BB5-C321-4C34-884A-21CC12F761BB@gmail.com>
- <36d581a0-f144-4756-b345-8b74ccc25c74@suse.com>
- <70B65B5D-C075-4D8E-8D2B-08A1930EE68B@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <70B65B5D-C075-4D8E-8D2B-08A1930EE68B@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="5QbWF5RurAf+2VDd"
+Content-Disposition: inline
 
-On 24.06.2024 15:07, Branden Sherrell wrote:
-> What is the reasoning that this fix be applied only to PVH domains? Taking a look at the fix logic it appears to walk the E820 to find a suitable range of memory to load the kernel into (assuming it can be determined that the kernel is also relocatable). Why can this logic not be applied to dom0 kernel load in general?
 
-Because PV requirements are different, first and foremost because there
-we have pseudo-physical and machine memory maps to deal with. As you can
-see from [1] I've raised the topic on how to deal with PV there, but so
-far there was no reply helping the issue towards resolution.
+--5QbWF5RurAf+2VDd
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 24 Jun 2024 15:48:05 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Christoph Hellwig <hch@lst.de>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Jens Axboe <axboe@kernel.dk>
+Subject: Regression in xen-blkfront regarding sector sizes
 
-Btw - please don't top-post.
+Hi,
 
-Jan
+Some Qubes users report a regression in xen-blkfront regarding block
+size reporting. It works fine on 6.8.8, but appears broken on 6.9.2.
 
-[1] https://lists.xen.org/archives/html/xen-devel/2024-06/msg00831.html
+The specific problem is that blkfront reports block size of 512, even for
+backend devices of 4096. This, for example, fails 512-bytes reads with
+O_DIRECT, and appears to break mounting a filesystem on such a device
+(at least xfs one).
+
+For example it looks like this:
+
+    [user@dom0 ~]$ head /sys/block/loop12/queue/*_block_size
+    =3D=3D> /sys/block/loop12/queue/logical_block_size <=3D=3D
+    4096
+
+    =3D=3D> /sys/block/loop12/queue/physical_block_size <=3D=3D
+    4096
+
+    [user@dom0 bin]$ qvm-run -p the-vm 'head /sys/block/xvdi/queue/*_block_=
+size'
+    =3D=3D> /sys/block/xvdi/queue/logical_block_size <=3D=3D
+    512
+
+    =3D=3D> /sys/block/xvdi/queue/physical_block_size <=3D=3D
+    512
+
+and then:
+
+    $ sudo dd if=3D/dev/xvdi of=3D/dev/null count=3D1 status=3Dprogress ifl=
+ag=3Ddirect
+    /usr/bin/dd: error reading '/dev/xvdi': Input/output error
+    0+0 records in
+    0+0 records out
+    0 bytes copied, 0.000170858 s, 0.0 kB/s
+
+and mounting fails like this:
+
+    [   68.055045] SGI XFS with ACLs, security attributes, realtime, scrub,=
+ quota, no debug enabled
+    [   68.057308] I/O error, dev xvdi, sector 0 op 0x0:(READ) flags 0x1000=
+ phys_seg 1 prio class 0
+    [   68.057333] XFS (xvdi): SB validate failed with error -5.
+
+More details at https://github.com/QubesOS/qubes-issues/issues/9293
+
+Rusty suspects it's related to
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/d=
+rivers/block/xen-blkfront.c?id=3Dba3f67c1163812b5d7ec33705c31edaa30ce6c51,
+so I'm cc-ing people mentioned there too.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--5QbWF5RurAf+2VDd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmZ5eRUACgkQ24/THMrX
+1yzhVwf+KP6Njl2Qp0s1yEbrTFIzpgQkPJqQ7YFHoYOss3N65lEk1XS5f6j0MKoE
+7BpuQcNtti9+9guVhoSTaOnp2ittNLj6GP478E/zrOCly8Ta5G5HVz+XIMha++eO
+8anR0i0V9yQr7lCetluey+WYA5VgVlwWb5CnG8S7fDfDOXn0ZW0ok1qU/CSVJJ/z
+xpwkn0fo27cj3cac+Bp1RvYo5XXZ6oXURaTyHx71Ov/+WiHawiiUtAll2IV8BAxV
+1DvSCbd8ggPCC+F0mLMpXnqnaITdbkP77ca0PB3Ge+vd+wa3ibLJWEIefTLXfICl
+IiKkAju3aylRai7xySrRhbXCxfnxlg==
+=hp8c
+-----END PGP SIGNATURE-----
+
+--5QbWF5RurAf+2VDd--
 
