@@ -4,34 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46946C3064D
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2024 13:43:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.747719.1155186 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0772CC2BBCA
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2024 13:52:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.747733.1155211 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sM6S7-0004EQ-Sr; Tue, 25 Jun 2024 13:43:19 +0000
+	id 1sM6aY-0006vX-BG; Tue, 25 Jun 2024 13:52:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 747719.1155186; Tue, 25 Jun 2024 13:43:19 +0000
+Received: by outflank-mailman (output) from mailman id 747733.1155211; Tue, 25 Jun 2024 13:52:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sM6S7-0004EJ-Pz; Tue, 25 Jun 2024 13:43:19 +0000
-Received: by outflank-mailman (input) for mailman id 747719;
- Tue, 25 Jun 2024 13:43:18 +0000
+	id 1sM6aY-0006v8-6u; Tue, 25 Jun 2024 13:52:02 +0000
+Received: by outflank-mailman (input) for mailman id 747733;
+ Tue, 25 Jun 2024 13:52:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=v2rz=N3=tklengyel.com=tamas@srs-se1.protection.inumbo.net>)
- id 1sM6S6-0004EB-Cy
- for xen-devel@lists.xenproject.org; Tue, 25 Jun 2024 13:43:18 +0000
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dfba6550-32f8-11ef-90a3-e314d9c70b13;
- Tue, 25 Jun 2024 15:43:17 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1719322991509960.1477680832319;
- Tue, 25 Jun 2024 06:43:11 -0700 (PDT)
-Received: by mail-yb1-f172.google.com with SMTP id
- 3f1490d57ef6-e02b571b0f6so5432398276.0
- for <xen-devel@lists.xenproject.org>; Tue, 25 Jun 2024 06:43:11 -0700 (PDT)
+ <SRS0=sI+y=N3=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1sM6aW-0006cc-VQ
+ for xen-devel@lists.xenproject.org; Tue, 25 Jun 2024 13:52:00 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1850fd4f-32fa-11ef-90a3-e314d9c70b13;
+ Tue, 25 Jun 2024 15:52:00 +0200 (CEST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a724440f597so358838666b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Jun 2024 06:52:00 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a6fcf560627sm521042666b.148.2024.06.25.06.51.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Jun 2024 06:51:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,138 +46,268 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dfba6550-32f8-11ef-90a3-e314d9c70b13
-ARC-Seal: i=1; a=rsa-sha256; t=1719322994; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=kskmQ/HkDsXBCo7+k0gw3KG2TQKmF8MfbCEHM/ZbEADlS0ykReAmiLolfZlIr74I16IDVuPV2xM741GWXOvdCcW1Y4WD4QQmMcKItUNxVbh5JQpymPVfLz/nZoNa6nhM7+8wC8rkoAldgzmvyZNhl6So/+gaBghElUcRx6KfG7s=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1719322994; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=pr1odYqS0ZrtCrgBJK30bcPuDVS3ze7cey35TPBpOlY=; 
-	b=Ebvxkclg9ZqNovPIWFi1od8tPyZNaPPJbRVWESOwHJ4lKQGTibbrzsnNLgxpdkHAv88NrheKA6kPs4qV1BjP2oaibqyd3r3eh485gIOtmL1o8nd2jWE0CFhNmdR3fwCBwkfLzwp+67CBn6TxTkU5it5MPbtIWb4qQigxT8hER/4=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=tklengyel.com;
-	spf=pass  smtp.mailfrom=tamas@tklengyel.com;
-	dmarc=pass header.from=<tamas@tklengyel.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1719322994;
-	s=zmail; d=tklengyel.com; i=tamas@tklengyel.com;
-	h=MIME-Version:References:In-Reply-To:From:From:Date:Date:Message-ID:Subject:Subject:To:To:Cc:Cc:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=pr1odYqS0ZrtCrgBJK30bcPuDVS3ze7cey35TPBpOlY=;
-	b=WnixsLCZhpY2BwZEesCNFML/5kjDHGc7xZwu07RFswP5EDbPUEHHOOpgI0qCYnSJ
-	IAWA3tus3y5pkORWUUArE5Q3KGqc9hpbTzy8YRma4CjX7rLcYN6Ce1/1vTYAICYgIEt
-	Pr2uyznvL7M8IL0oHIu6oJxEVg3yKk3eptqus3bY=
-X-Forwarded-Encrypted: i=1; AJvYcCUspalkeHc80f9yhLr4mFs0m8GnVoRWttip/A8zg/a87psGA01DSruG3FSXZcXKFTIKbZ+K0+4Pcwplv8PPBiO9RqcvlcxzeSujcrO1BKU=
-X-Gm-Message-State: AOJu0YwTK9BMqw8stIr5TL5idEgmWHb1jqu7YXRq5gLOSbjsiSBev/LH
-	ccmnEI+WFTnhmnFHLQ69+2n2zi1eUY0+kGARVOvnjKTSaGCdN8Y1xeAK0cPwmyyL/1mvsyJyVWL
-	/CV1HC6H4znBnSLJIRyUjDcD+9dQ=
-X-Google-Smtp-Source: AGHT+IEdGW5iyChpb1JVMDxR3jJ63LbEVe4bAhxc5XoXBCuP+6lSXhBULGr2KGgRCihfdmSCCQjPADmG1B0fQysE0mc=
-X-Received: by 2002:a5b:8c9:0:b0:e02:c434:8b2a with SMTP id
- 3f1490d57ef6-e030402f3cdmr7300676276.54.1719322990668; Tue, 25 Jun 2024
- 06:43:10 -0700 (PDT)
+X-Inumbo-ID: 1850fd4f-32fa-11ef-90a3-e314d9c70b13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1719323519; x=1719928319; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1FrKnov37Nx5RTAuE+Ip2KD1aMSdkm5yA9SPDVIzLCE=;
+        b=QlKw80M/GeQenHK1jzsmxj83H5UC8jD3XbfcXdn+o83XjH5qL40uwkRF/jdTzigdqu
+         lgfTTX5zq0OOMT32U7OQVRdQZ/sVhgeD7sYc8RzvW48By7dIQyOj9bSM273/npAa4M5a
+         s2PJF88d/B8ri518IdwwumLBWISL4clgZ2LxXSFYsk6kk2yX4x+zrEIOZWVYFUr5ruaV
+         FeUxFv/qd5NYasMC/277aRyQnkhMN0O601Ap421/LPxOUdAeiOl1KCzlG4rtXsMqUTho
+         CtAnjQynTLpJS5ZuT3Kq5YcVbxcwRl8o62nVfaAEGuxApUt/LaOhd0BgaRgH8cmN2Bxk
+         aUeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719323519; x=1719928319;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=1FrKnov37Nx5RTAuE+Ip2KD1aMSdkm5yA9SPDVIzLCE=;
+        b=hVtTvnvXCZvzhWhy8qoj6Om8IN4NqVyyXOX7x5jx80lER0FhS6OafAA7IkVyVAaTn9
+         BgT3GTrPyVbn5oEzBEHvD7L6FP/4gMcE0yNN6bkmvmyXBS7/TUWXEFBTyKZPkRbZN3O+
+         FisUiakc/cnb0MFliAmy5TM2ACwjlYrnqQ6yW01BQEjq8cjnzmkDdPWtZdyKXOOYRFK4
+         q6CITPQXQyoa2SB3X/2hes74SkNdy+Jz8+T/mF8gTlP6vbYmS4lzZhqKI0MQZkTr1rKf
+         uCZcool9h05xGr7hMSgqxfbYrc1kjZUK1GSfEO9SZCgmB29vUyDqO4Bpl6/OLrHeoWBa
+         GNIQ==
+X-Gm-Message-State: AOJu0YxCacodlXFFfRUxQxMvMKtnEEa1YG6op5Ht6Xr4ppm5a2u6Rabi
+	mlu0mARkce/wpDU/2DZsqrnplSwdcXotEnNyS4Hz+YUeNwHS6DSVO7trK679
+X-Google-Smtp-Source: AGHT+IEyYJALzg0VlcwOiDGXNXFNzd1AZPMr3eALpVdlpk/C3uBU/LrsMHq7/n0t5MvCLwgCV0nk1g==
+X-Received: by 2002:a17:907:d402:b0:a72:6849:cb21 with SMTP id a640c23a62f3a-a726849d851mr195370166b.54.1719323519249;
+        Tue, 25 Jun 2024 06:51:59 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v13 02/10] xen/riscv: introduce bitops.h
+Date: Tue, 25 Jun 2024 15:51:44 +0200
+Message-ID: <0e4441eee82b0545e59099e2f62e3a01fa198d08.1719319093.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <cover.1719319093.git.oleksii.kurochko@gmail.com>
+References: <cover.1719319093.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-References: <20240621191434.5046-1-tamas@tklengyel.com> <20240621191434.5046-2-tamas@tklengyel.com>
- <0a7854e0-e01e-435e-95fe-b262cc4afc1e@suse.com> <CABfawhmkhCD-MFgZBrhJ1CwiiseotJ=+MANbgwsjRL_VYsnuTQ@mail.gmail.com>
- <b9b84f10-6d41-48d9-996d-069408753e28@suse.com> <CABfawhkJ0t8FenCWbupGcHD-ZhorbWN7ZjMQVm-jeg_zA1g5iQ@mail.gmail.com>
- <66a7243d-a1a1-4236-832f-f3e1daf11b85@suse.com>
-In-Reply-To: <66a7243d-a1a1-4236-832f-f3e1daf11b85@suse.com>
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Date: Tue, 25 Jun 2024 09:42:34 -0400
-X-Gmail-Original-Message-ID: <CABfawhmAV5+Nr9A_Speh2ai3v9wfJtxmps=R6iTxNU1RFP4xRA@mail.gmail.com>
-Message-ID: <CABfawhmAV5+Nr9A_Speh2ai3v9wfJtxmps=R6iTxNU1RFP4xRA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] Add scripts/oss-fuzz/build.sh
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jun 25, 2024 at 9:18=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 25.06.2024 14:39, Tamas K Lengyel wrote:
-> > On Tue, Jun 25, 2024 at 7:40=E2=80=AFAM Jan Beulich <jbeulich@suse.com>=
- wrote:
-> >>
-> >> On 25.06.2024 13:15, Tamas K Lengyel wrote:
-> >>> On Tue, Jun 25, 2024 at 5:17=E2=80=AFAM Jan Beulich <jbeulich@suse.co=
-m> wrote:
-> >>>>
-> >>>> On 21.06.2024 21:14, Tamas K Lengyel wrote:
-> >>>>> --- /dev/null
-> >>>>> +++ b/scripts/oss-fuzz/build.sh
-> >>>>> @@ -0,0 +1,22 @@
-> >>>>> +#!/bin/bash -eu
-> >>>>> +# Copyright 2024 Google LLC
-> >>>>> +#
-> >>>>> +# Licensed under the Apache License, Version 2.0 (the "License");
-> >>>>> +# you may not use this file except in compliance with the License.
-> >>>>> +# You may obtain a copy of the License at
-> >>>>> +#
-> >>>>> +#      http://www.apache.org/licenses/LICENSE-2.0
-> >>>>> +#
-> >>>>> +# Unless required by applicable law or agreed to in writing, softw=
-are
-> >>>>> +# distributed under the License is distributed on an "AS IS" BASIS=
-,
-> >>>>> +# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or =
-implied.
-> >>>>> +# See the License for the specific language governing permissions =
-and
-> >>>>> +# limitations under the License.
-> >>>>> +#
-> >>>>> +##################################################################=
-##############
-> >>>>
-> >>>> I'm a little concerned here, but maybe I shouldn't be. According to =
-what
-> >>>> I'm reading, the Apache 2.0 license is at least not entirely compati=
-ble
-> >>>> with GPLv2. While apparently the issue is solely with linking in Apa=
-che-
-> >>>> licensed code, I wonder whether us not having a respective file unde=
-r
-> >>>> ./LICENSES/ (and no pre-cooked SPDX identifier to use) actually has =
-a
-> >>>> reason possibly excluding the use of such code in the project.
-> >>>>
-> >>>>> +cd xen
-> >>>>> +./configure clang=3Dy --disable-stubdom --disable-pvshim --disable=
--docs --disable-xen
-> >>>>> +make clang=3Dy -C tools/include
-> >>>>> +make clang=3Dy -C tools/fuzz/x86_instruction_emulator libfuzzer-ha=
-rness
-> >>>>> +cp tools/fuzz/x86_instruction_emulator/libfuzzer-harness $OUT/x86_=
-instruction_emulator
-> >>>>
-> >>>> In addition to what Julien said, I further think that filename / dir=
-ectory
-> >>>> name are too generic for a file with this pretty specific contents.
-> >>>
-> >>> I don't really get your concern here?
-> >>
-> >> The thing that is built is specifically a x86 emulator piece of fuzzin=
-g
-> >> binary. Neither the directory name nor the file name contain either x8=
-6
-> >> or (at least) emul.
-> >
-> > Because this build script is not necessarily restricted to build only
-> > this one harness in the future. Right now that's the only one that has
-> > a suitable libfuzzer harness, but the reason this build script is here
-> > is to be easily able to add additional fuzzing binaries without the
-> > need to open PRs on the oss-fuzz repo, which as I understand no one
-> > was willing to do in the xen community due to the CLA. Now that the
-> > integration is going to be in oss-fuzz, the only thing you have to do
-> > in the future is add more stuff to this script to get fuzzed. Anything
-> > that's compiled with libfuzzer and copied to $OUT will be picked up by
-> > oss-fuzz automatically. Makes sense?
->
-> It does, yes. Yet nothing like that was said in the description. How
-> should anyone have known there are future possibilities with this script?
+Taken from Linux-6.4.0-rc1
 
-Apologies, to me "The build integration script for oss-fuzz targets."
-was sufficiently descriptive but it may require some familiarity with
-oss-fuzz to get. I can certainly add the above text to the commit
-message if that helps.
+Xen's bitops.h consists of several Linux's headers:
+* linux/arch/include/asm/bitops.h:
+  * The following function were removed as they aren't used in Xen:
+        * test_and_set_bit_lock
+        * clear_bit_unlock
+        * __clear_bit_unlock
+  * The following functions were renamed in the way how they are
+    used by common code:
+        * __test_and_set_bit
+        * __test_and_clear_bit
+  * The declaration and implementation of the following functios
+    were updated to make Xen build happy:
+        * clear_bit
+        * set_bit
+        * __test_and_clear_bit
+        * __test_and_set_bit
 
-Tamas
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V11-V13:
+ - Nothing changed. Only rebase was done.
+---
+Changes in V10:
+ - update the error message BITS_PER_LONG -> BITOP_BITS_PER_WORD
+---
+Changes in V9:
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - drop redefinition of bitop_uint_t in asm/types.h as some operation in Xen common code expects
+   to work with 32-bit quantities.
+ - s/BITS_PER_LONG/BITOP_BITS_PER_WORD in asm/bitops.h around __AMO() macros.
+---
+Changes in V8:
+ - define bitop_uint_t in <asm/types.h> after the changes in patch related to introduction of
+   "introduce generic non-atomic test_*bit()".
+ - drop duplicated __set_bit() and __clear_bit().
+ - drop duplicated comment: /* Based on linux/arch/include/asm/bitops.h */.
+ - update type of res and mask in test_and_op_bit_ord(): unsigned long -> bitop_uint_t.
+ - drop 1 padding blank in test_and_op_bit_ord().
+ - update definition of test_and_set_bit(),test_and_clear_bit(),test_and_change_bit:
+   change return type to bool.
+ - change addr argument type of test_and_change_bit(): unsigned long * -> void *.
+ - move test_and_change_bit() closer to other test_and-s function.
+ - Code style fixes: tabs -> space.
+ - s/#undef __op_bit/#undef op_bit.
+ - update the commit message: delete information about generic-non-atomic.h changes as now
+   it is a separate patch.
+---
+Changes in V7:
+ - Update the commit message.
+ - Drop "__" for __op_bit and __op_bit_ord as they are atomic.
+ - add comment above __set_bit and __clear_bit about why they are defined as atomic.
+ - align bitops_uint_t with __AMO().
+ - make changes after  generic non-atomic test_*bit() were changed.
+ - s/__asm__ __volatile__/asm volatile
+---
+Changes in V6:
+ - rebase clean ups were done: drop unused asm-generic includes
+---
+ Changes in V5:
+   - new patch
+---
+ xen/arch/riscv/include/asm/bitops.h | 137 ++++++++++++++++++++++++++++
+ 1 file changed, 137 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/bitops.h
+
+diff --git a/xen/arch/riscv/include/asm/bitops.h b/xen/arch/riscv/include/asm/bitops.h
+new file mode 100644
+index 0000000000..7f7af3fda1
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/bitops.h
+@@ -0,0 +1,137 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Copyright (C) 2012 Regents of the University of California */
++
++#ifndef _ASM_RISCV_BITOPS_H
++#define _ASM_RISCV_BITOPS_H
++
++#include <asm/system.h>
++
++#if BITOP_BITS_PER_WORD == 64
++#define __AMO(op)   "amo" #op ".d"
++#elif BITOP_BITS_PER_WORD == 32
++#define __AMO(op)   "amo" #op ".w"
++#else
++#error "Unexpected BITOP_BITS_PER_WORD"
++#endif
++
++/* Based on linux/arch/include/asm/bitops.h */
++
++/*
++ * Non-atomic bit manipulation.
++ *
++ * Implemented using atomics to be interrupt safe. Could alternatively
++ * implement with local interrupt masking.
++ */
++#define __set_bit(n, p)      set_bit(n, p)
++#define __clear_bit(n, p)    clear_bit(n, p)
++
++#define test_and_op_bit_ord(op, mod, nr, addr, ord)     \
++({                                                      \
++    bitop_uint_t res, mask;                             \
++    mask = BITOP_MASK(nr);                              \
++    asm volatile (                                      \
++        __AMO(op) #ord " %0, %2, %1"                    \
++        : "=r" (res), "+A" (addr[BITOP_WORD(nr)])       \
++        : "r" (mod(mask))                               \
++        : "memory");                                    \
++    ((res & mask) != 0);                                \
++})
++
++#define op_bit_ord(op, mod, nr, addr, ord)      \
++    asm volatile (                              \
++        __AMO(op) #ord " zero, %1, %0"          \
++        : "+A" (addr[BITOP_WORD(nr)])           \
++        : "r" (mod(BITOP_MASK(nr)))             \
++        : "memory");
++
++#define test_and_op_bit(op, mod, nr, addr)    \
++    test_and_op_bit_ord(op, mod, nr, addr, .aqrl)
++#define op_bit(op, mod, nr, addr) \
++    op_bit_ord(op, mod, nr, addr, )
++
++/* Bitmask modifiers */
++#define NOP(x)    (x)
++#define NOT(x)    (~(x))
++
++/**
++ * test_and_set_bit - Set a bit and return its old value
++ * @nr: Bit to set
++ * @addr: Address to count from
++ */
++static inline bool test_and_set_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    return test_and_op_bit(or, NOP, nr, addr);
++}
++
++/**
++ * test_and_clear_bit - Clear a bit and return its old value
++ * @nr: Bit to clear
++ * @addr: Address to count from
++ */
++static inline bool test_and_clear_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    return test_and_op_bit(and, NOT, nr, addr);
++}
++
++/**
++ * test_and_change_bit - Toggle (change) a bit and return its old value
++ * @nr: Bit to change
++ * @addr: Address to count from
++ *
++ * This operation is atomic and cannot be reordered.
++ * It also implies a memory barrier.
++ */
++static inline bool test_and_change_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    return test_and_op_bit(xor, NOP, nr, addr);
++}
++
++/**
++ * set_bit - Atomically set a bit in memory
++ * @nr: the bit to set
++ * @addr: the address to start counting from
++ *
++ * Note that @nr may be almost arbitrarily large; this function is not
++ * restricted to acting on a single-word quantity.
++ */
++static inline void set_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    op_bit(or, NOP, nr, addr);
++}
++
++/**
++ * clear_bit - Clears a bit in memory
++ * @nr: Bit to clear
++ * @addr: Address to start counting from
++ */
++static inline void clear_bit(int nr, volatile void *p)
++{
++    volatile bitop_uint_t *addr = p;
++
++    op_bit(and, NOT, nr, addr);
++}
++
++#undef test_and_op_bit
++#undef op_bit
++#undef NOP
++#undef NOT
++#undef __AMO
++
++#endif /* _ASM_RISCV_BITOPS_H */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+-- 
+2.45.2
+
 
