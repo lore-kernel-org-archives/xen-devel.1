@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71E0C30653
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E729DC41513
 	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2024 19:07:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.748026.1155600 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.748029.1155629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMBVq-0000sv-11; Tue, 25 Jun 2024 19:07:30 +0000
+	id 1sMBVs-0001be-5x; Tue, 25 Jun 2024 19:07:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 748026.1155600; Tue, 25 Jun 2024 19:07:29 +0000
+Received: by outflank-mailman (output) from mailman id 748029.1155629; Tue, 25 Jun 2024 19:07:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMBVp-0000sg-SZ; Tue, 25 Jun 2024 19:07:29 +0000
-Received: by outflank-mailman (input) for mailman id 748026;
- Tue, 25 Jun 2024 19:07:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sMBVs-0001aR-1y; Tue, 25 Jun 2024 19:07:32 +0000
+Received: by outflank-mailman (input) for mailman id 748029;
+ Tue, 25 Jun 2024 19:07:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vmrN=N3=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sMBVo-0000O1-72
- for xen-devel@lists.xenproject.org; Tue, 25 Jun 2024 19:07:28 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 28f46f20-3326-11ef-b4bb-af5377834399;
- Tue, 25 Jun 2024 21:07:26 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a6fd513f18bso500994766b.3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Jun 2024 12:07:26 -0700 (PDT)
+ id 1sMBVp-00008w-O3
+ for xen-devel@lists.xenproject.org; Tue, 25 Jun 2024 19:07:29 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2aa255d4-3326-11ef-90a3-e314d9c70b13;
+ Tue, 25 Jun 2024 21:07:29 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a6fd513f18bso501003766b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Jun 2024 12:07:29 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a725d7b190fsm180434766b.50.2024.06.25.12.07.24
+ a640c23a62f3a-a725d7b190fsm180434766b.50.2024.06.25.12.07.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Jun 2024 12:07:24 -0700 (PDT)
+ Tue, 25 Jun 2024 12:07:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 28f46f20-3326-11ef-b4bb-af5377834399
+X-Inumbo-ID: 2aa255d4-3326-11ef-90a3-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1719342445; x=1719947245; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1719342448; x=1719947248; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hlzSBBPH1Fz0L1myZVLvo6vrKf8kQ291bZGAOZ0GC5A=;
-        b=FmdYg87xCxpvnGbBTo2Atgbfbcu+ZvBCuaRsXAJUIVJzLq/2OgiPhKTibAN+TSRp6+
-         qierkuHmkRKXsWTQa003Jms50RLSnxyO5s+f2ZA8dcRxntGBkVplhcbAEWpYfujacZAd
-         WE4W8SNLA5SsSYZGF/Odkmi9WXcXQQxS/5cIY=
+        bh=IqTAjuFXDg4PchRKJS8PgwLD1p7wjSEO9wUcu/jl/lg=;
+        b=aF7Eudbs/pvxagbLa98MU3eidR/QdZZTGQG2uELKl4t9gnJr/60LB8peKiHyLgMd7Y
+         c3AF5sFwInypUhNvKwNcLI83w/7l9iijfJ29p+edAdxs4WGgmub0tduDm4WKEj/oPXNw
+         xZ7xxmwxSiUKHZrKBwSub7JhfZ7UlXD40XQt0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719342445; x=1719947245;
+        d=1e100.net; s=20230601; t=1719342448; x=1719947248;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=hlzSBBPH1Fz0L1myZVLvo6vrKf8kQ291bZGAOZ0GC5A=;
-        b=TWbsYcCSc80bjn873FDm411QgLVIeqgmQ+IXKl/tOivyCzIqLTtq9Nqr0ouc8TT2XD
-         5MEWhrTvQGsxF6itcm04la0xpV02/Z7QVYYpnELcKv9Y0itiWWc3YhQJeKB4cbKlyi8W
-         tdnFqBZAmDIiPg703lY0F9zFdUwtUJj+U3YwxwzoiO3MNqnsyQZuTDKjXwkthBZyhlgL
-         TviwJ0vsMMtX2Y0f19LGdJpAiMg3Mom1H1NnxGbBSFx4Az8LMjo3dPnkCd45DifiO/bY
-         wynVBLoQ7o+1KPVUhoaYJDYkbM4doUzxmGw9lDi0fQSTcm8WnQbdI56TbtDPph9upM07
-         iL0g==
-X-Gm-Message-State: AOJu0Yw++e+9794HuqMzdbV4MaAXkmVzT3wpqG4POmGt65mm9zFWOxyG
-	smnNcWESV6oemD917OpLROlip5QTni+3xNYPgFPtwZdm634UdVwoR6sRWBmJgH0D04OydJuQ7vN
-	AspU=
-X-Google-Smtp-Source: AGHT+IGuRz/nm8gKauLNQIF038k6w2NBrZxpsGF7hd8yXlcJSlVujS8VN+uqtC7rvaEif9/JFVCvqg==
-X-Received: by 2002:a17:907:8dc6:b0:a6f:e25d:f6a4 with SMTP id a640c23a62f3a-a7245c642e5mr589513666b.76.1719342445256;
-        Tue, 25 Jun 2024 12:07:25 -0700 (PDT)
+        bh=IqTAjuFXDg4PchRKJS8PgwLD1p7wjSEO9wUcu/jl/lg=;
+        b=sN0bwQ/D8zYAvvlxgFCLpa1GOdRiUDCAQiVjtDagixpIOiByGEN82nrvL28itQe1fz
+         oULq0dnp7nx7sATmBvtHgbAH4jxyzj/vVb+CCih7t+egT2GW9Oi0YbMrp2E/qfnNDfud
+         SYpQxt8gieONFxu4ugijtdNelkQOQv8CahozdYFyV0rIk3kOWPqHcKjR+e1oF2HTm5S7
+         nSz3d3aMVjs18khVXTYFJFgKziunRk7fog5Z7n+nEF6tiSTzuYd53Tkib9SINF6WGJYt
+         lWt1H4m2kltdVqbGmRBAFns7uxEdWqTI+o1YEUugqXnX8njoBNG41ez4+0I17Uike6SV
+         4Xhw==
+X-Gm-Message-State: AOJu0YziNW1sXQ0aZlBqpMUxWN/Q8Dzb0zJtgKJzr8XOTTqy0d+844Ht
+	Q0Zbg0owXuPzvsh30VIMT80Vwo/6CeJH+nRkeUyvhEaCmBWCrsb2+LGdcel1A76BhOS3dfJthxS
+	MlKs=
+X-Google-Smtp-Source: AGHT+IEXoA2JRkMlTSVwVKWS+vj658ux8ClHQgfVG80Prd6QW4t1IN1zGIW7wD48aUpC2pYpxZkHdg==
+X-Received: by 2002:a17:906:1995:b0:a6e:fa0a:4899 with SMTP id a640c23a62f3a-a7245b45affmr505431466b.16.1719342448411;
+        Tue, 25 Jun 2024 12:07:28 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -86,9 +86,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.19? 3/6] xen/macros: Introduce BUILD_ERROR()
-Date: Tue, 25 Jun 2024 20:07:16 +0100
-Message-Id: <20240625190719.788643-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 6/6] x86/xstate: Switch back to for_each_set_bit()
+Date: Tue, 25 Jun 2024 20:07:19 +0100
+Message-Id: <20240625190719.788643-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240625190719.788643-1-andrew.cooper3@citrix.com>
 References: <20240625190719.788643-1-andrew.cooper3@citrix.com>
@@ -96,10 +96,25 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-... and use it in self-tests.h.
+In all 3 examples, we're iterating over a scaler.  No caller can pass the
+COMPRESSED flag in, so the upper bound of 63, as opposed to 64, doesn't
+matter.
 
-This is intended to replace constructs such as __bitop_bad_size().  It
-produces a better diagnostic, and is MISRA-friendly.
+This alone produces:
+
+  add/remove: 0/0 grow/shrink: 0/4 up/down: 0/-161 (-161)
+  Function                                     old     new   delta
+  compress_xsave_states                         66      58      -8
+  xstate_uncompressed_size                     119      71     -48
+  xstate_compressed_size                       124      76     -48
+  recalculate_xstate                           347     290     -57
+
+where xstate_{un,}compressed_size() have practically halved in size despite
+being small before.
+
+The change in compress_xsave_states() is unexpected.  The function is almost
+entirely dead code, and within what remains there's a smaller stack frame.  I
+suspect it's leftovers that the optimiser couldn't fully discard.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -111,44 +126,73 @@ CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 CC: Bertrand Marquis <bertrand.marquis@arm.com>
 CC: Michal Orzel <michal.orzel@amd.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-
-RFC for-4.19.  This can be used to not introduce new MISRA violations when
-adjusting __bitop_bad_size().  It's safe to pull out of this series.
-
 ---
- xen/include/xen/macros.h     | 2 ++
- xen/include/xen/self-tests.h | 4 ++--
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ xen/arch/x86/cpu-policy.c | 4 ++--
+ xen/arch/x86/xstate.c     | 8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/include/xen/macros.h b/xen/include/xen/macros.h
-index ec89f4654fcf..8441d7e7d66a 100644
---- a/xen/include/xen/macros.h
-+++ b/xen/include/xen/macros.h
-@@ -59,6 +59,8 @@
- #define BUILD_BUG_ON(cond) ((void)BUILD_BUG_ON_ZERO(cond))
- #endif
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index cd53bac777dc..fa55f6073089 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -193,7 +193,7 @@ static void sanitise_featureset(uint32_t *fs)
+ static void recalculate_xstate(struct cpu_policy *p)
+ {
+     uint64_t xstates = XSTATE_FP_SSE;
+-    unsigned int i, ecx_mask = 0, Da1 = p->xstate.Da1;
++    unsigned int ecx_mask = 0, Da1 = p->xstate.Da1;
  
-+#define BUILD_ERROR(msg) asm ( ".error \"" msg "\"" )
-+
- /* Hide a value from the optimiser. */
- #define HIDE(x)                                 \
-     ({                                          \
-diff --git a/xen/include/xen/self-tests.h b/xen/include/xen/self-tests.h
-index 42a4cc4d17fe..4bc322b7f2a6 100644
---- a/xen/include/xen/self-tests.h
-+++ b/xen/include/xen/self-tests.h
-@@ -22,9 +22,9 @@
-         typeof(fn(val)) real = fn(val);                                 \
-                                                                         \
-         if ( !__builtin_constant_p(real) )                              \
--            asm ( ".error \"'" STR(fn(val)) "' not compile-time constant\"" ); \
-+            BUILD_ERROR("'" STR(fn(val)) "' not compile-time constant"); \
-         else if ( real != res )                                         \
--            asm ( ".error \"Compile time check '" STR(fn(val) == res) "' failed\"" ); \
-+            BUILD_ERROR("Compile time check '" STR(fn(val) == res) "' failed"); \
-     } while ( 0 )
- #else
- #define COMPILE_CHECK(fn, val, res)
+     /*
+      * The Da1 leaf is the only piece of information preserved in the common
+@@ -237,7 +237,7 @@ static void recalculate_xstate(struct cpu_policy *p)
+     /* Subleafs 2+ */
+     xstates &= ~XSTATE_FP_SSE;
+     BUILD_BUG_ON(ARRAY_SIZE(p->xstate.comp) < 63);
+-    bitmap_for_each ( i, &xstates, 63 )
++    for_each_set_bit ( i, xstates )
+     {
+         /*
+          * Pass through size (eax) and offset (ebx) directly.  Visbility of
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index da9053c0a262..88dbfbeafacd 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -589,7 +589,7 @@ static bool valid_xcr0(uint64_t xcr0)
+ 
+ unsigned int xstate_uncompressed_size(uint64_t xcr0)
+ {
+-    unsigned int size = XSTATE_AREA_MIN_SIZE, i;
++    unsigned int size = XSTATE_AREA_MIN_SIZE;
+ 
+     /* Non-XCR0 states don't exist in an uncompressed image. */
+     ASSERT((xcr0 & ~X86_XCR0_STATES) == 0);
+@@ -606,7 +606,7 @@ unsigned int xstate_uncompressed_size(uint64_t xcr0)
+      * with respect their index.
+      */
+     xcr0 &= ~(X86_XCR0_SSE | X86_XCR0_X87);
+-    bitmap_for_each ( i, &xcr0, 63 )
++    for_each_set_bit ( i, xcr0 )
+     {
+         const struct xstate_component *c = &raw_cpu_policy.xstate.comp[i];
+         unsigned int s = c->offset + c->size;
+@@ -621,7 +621,7 @@ unsigned int xstate_uncompressed_size(uint64_t xcr0)
+ 
+ unsigned int xstate_compressed_size(uint64_t xstates)
+ {
+-    unsigned int i, size = XSTATE_AREA_MIN_SIZE;
++    unsigned int size = XSTATE_AREA_MIN_SIZE;
+ 
+     if ( xstates == 0 )
+         return 0;
+@@ -634,7 +634,7 @@ unsigned int xstate_compressed_size(uint64_t xstates)
+      * componenets require aligning to 64 first.
+      */
+     xstates &= ~(X86_XCR0_SSE | X86_XCR0_X87);
+-    bitmap_for_each ( i, &xstates, 63 )
++    for_each_set_bit ( i, xstates )
+     {
+         const struct xstate_component *c = &raw_cpu_policy.xstate.comp[i];
+ 
 -- 
 2.39.2
 
