@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F026C2BBCA
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2024 18:28:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.748015.1155560 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A380C2BBCA
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2024 19:07:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.748024.1155580 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMAu8-0001PR-6g; Tue, 25 Jun 2024 18:28:32 +0000
+	id 1sMBVo-0000Oq-94; Tue, 25 Jun 2024 19:07:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 748015.1155560; Tue, 25 Jun 2024 18:28:32 +0000
+Received: by outflank-mailman (output) from mailman id 748024.1155580; Tue, 25 Jun 2024 19:07:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMAu8-0001PK-3O; Tue, 25 Jun 2024 18:28:32 +0000
-Received: by outflank-mailman (input) for mailman id 748015;
- Tue, 25 Jun 2024 18:28:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sMBVo-0000Oj-5Y; Tue, 25 Jun 2024 19:07:28 +0000
+Received: by outflank-mailman (input) for mailman id 748024;
+ Tue, 25 Jun 2024 19:07:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sI+y=N3=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sMAu7-0001PC-Dk
- for xen-devel@lists.xenproject.org; Tue, 25 Jun 2024 18:28:31 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b8c2bbe4-3320-11ef-90a3-e314d9c70b13;
- Tue, 25 Jun 2024 20:28:30 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a7245453319so496769466b.1
- for <xen-devel@lists.xenproject.org>; Tue, 25 Jun 2024 11:28:30 -0700 (PDT)
-Received: from [192.168.219.191] ([94.75.70.14])
+ <SRS0=vmrN=N3=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sMBVm-0000O1-RK
+ for xen-devel@lists.xenproject.org; Tue, 25 Jun 2024 19:07:26 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 278146f7-3326-11ef-b4bb-af5377834399;
+ Tue, 25 Jun 2024 21:07:24 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a724b9b34b0so339742966b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Jun 2024 12:07:24 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6fcf560627sm542619166b.148.2024.06.25.11.28.28
+ a640c23a62f3a-a725d7b190fsm180434766b.50.2024.06.25.12.07.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Jun 2024 11:28:29 -0700 (PDT)
+ Tue, 25 Jun 2024 12:07:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,79 +47,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8c2bbe4-3320-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 278146f7-3326-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719340110; x=1719944910; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=Pko28/t4Wtd90ChhzTiIIVxZnme5thqAQj31u5fTeR4=;
-        b=LjyI6DLj2aFNVRgXcka4b30vIqaauW462oC780G5chfALljeu1Jy5GA9WJtYE6+GmR
-         JBAqI+XXvjf7CD+0ycO/sfw17pvP1glXTCINbeEjBTLr9X+YP108+XgzPjTCl6F73y7n
-         g95zAkYflfGoZUNSMCt4tMuSNB6TZglfUHINDZR8//PQdSOX7LDCmv335pr3H0yATP/X
-         v/cQGQTbydXAfmIp03uu/p6sO9+1RQMHEVnY9qYF/kvQm1wffZDzfHp5EuORDRjpAZli
-         AmALnCka5XdYdb54IHvPNm/QwU0XF9dbLZrzcNVRTn22ctmlksI5gj1/ceJ7/srGnZ6h
-         BhfQ==
+        d=citrix.com; s=google; t=1719342442; x=1719947242; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xi3l57Ho1pUmbNMNe9NHaEbiwxfjL48pmKM7zQN1k2o=;
+        b=lYdTahKGt635gTcgZBqAPehk9FdZXCcADV/lGlyDj9lzHWm+4JTmdGtG2g3F+SKQS9
+         nNeDACwd8HGF3HyvYCVqOsSfhYVppa+l/cJdN2BElc+VR2hyQ0g82+kksHFNXnZ6yeYj
+         Rf1hpcb/WaXifpwLdnj1H8xfZaO/EHG7P1G+s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719340110; x=1719944910;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Pko28/t4Wtd90ChhzTiIIVxZnme5thqAQj31u5fTeR4=;
-        b=nzyGlpPEh1nLDul0anHfgFTOXq8ofxrxaTdK2lFkYihPFiBU/N+m42gNqYf3XE7t2g
-         ORFkEoUpQjghRKKXnxVY6smNIy26CPq9JemxafbcHf2Gw3h9ZzsK5WRIEFmAFM767eM1
-         f6cHjmWmotuUFtb1DwWyORR6pJzT9X2Ub/5wqc4L+66Shy0rrPcDHwYORu8erwV8giyD
-         KW9q4P123fhQvYU1CIEQH0xQ2VU2Ufh6NZ34mn6NjFqVFORdp4lE4+xoLCZPXdEGBExh
-         EoNaWCxmrNoZKofjTwzKMg4Xsgo2nMgdol7eB7SjAcCrvlxFKXw6Q1JFcguQ+9YAXUXr
-         HHhw==
-X-Forwarded-Encrypted: i=1; AJvYcCVZfh79GNsWWSzaVV9wSuQCa5BYp4S+oiLfmHmUy6q17oBH3YreiaCglMYklBL562YuDN03XdrE4SdvY6D2Imp/+P6gvGOu19ZSx1ncuNY=
-X-Gm-Message-State: AOJu0YyjEMPYlEnp+b8pKNLPzHkN4rIAZPmX3wRkYJCxq8MsItElXK9C
-	TpXJEmCEJWPOYzpLy0xe1hY4D3IztT5fdvHhPJXBrOOZAC2Kbkpg
-X-Google-Smtp-Source: AGHT+IHPrmPluPxoLl54SEeuWo3Es9CqHRGKVvB+oDSTEg5IR+AKqRkRfDH5GL+EtlZ3p3wh9jeZHQ==
-X-Received: by 2002:a17:907:710d:b0:a72:5967:b34 with SMTP id a640c23a62f3a-a727fc55f2dmr66938466b.22.1719340109609;
-        Tue, 25 Jun 2024 11:28:29 -0700 (PDT)
-Message-ID: <ed99047fe78ee829199b42051f5657ba79ef3545.camel@gmail.com>
-Subject: Re: [PATCH for-4.19?] Config.mk: update MiniOS commit
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
-	 <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
- <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Samuel Thibault
- <samuel.thibault@ens-lyon.org>,  Juergen Gross <jgross@suse.com>
-Date: Tue, 25 Jun 2024 20:28:28 +0200
-In-Reply-To: <a98ab069-407b-4dee-9052-40ab72890d47@suse.com>
-References: <a98ab069-407b-4dee-9052-40ab72890d47@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.2 (3.52.2-1.fc40app2) 
+        d=1e100.net; s=20230601; t=1719342442; x=1719947242;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xi3l57Ho1pUmbNMNe9NHaEbiwxfjL48pmKM7zQN1k2o=;
+        b=Cra9gL8fa6xP0muFLvxUyrH7RcCNgKcry8Y6zXbApulnz6zSJQyBLlgncAMLHiCA7f
+         SsDpj3TJkOuLUFb3OE8vtFmKlLiUvAzT5OxPgivZUY9jkJqlhkiOfE+YqmYja6TDHkn6
+         8xhYSCyQRPjIDE2XVH2peB0PD7QfQwzaNl1RVFVDb/SqZZqreMVgTYCtM+0yxl5ptXLc
+         w16lejgz0tV6ZA0bFR2iE4maRgKRlUzDZTC9nu2o+bAYb8FfZ6wkb4IPkKSjR3guwams
+         vLIVEQEav4IyS9fgVM1o4F5/LqDnMvLEJGpc9FMQNyGjdOmrln+RuiwnXw3D6nhJmZAy
+         eZTA==
+X-Gm-Message-State: AOJu0YzbJgjRIZMyY9hzbJKN7ouH/hL12wyELhVHf37RE225xqyacFff
+	BYMcpRbpZ2hGU9c+NaMVN2p/5hbEloj39mRv7+BfpP4g3kWtbyu497a7azrmG2lYYoGNzSN4wE4
+	4ubU=
+X-Google-Smtp-Source: AGHT+IEd3SHDA5f778vCgNNEnjYw+yhpd1jw+f+ZXJu1RKSDoaW7l41vRWxVF3RD3nt1F64w90ZD6Q==
+X-Received: by 2002:a17:907:c815:b0:a72:5226:3307 with SMTP id a640c23a62f3a-a7252263ff9mr539077266b.57.1719342442485;
+        Tue, 25 Jun 2024 12:07:22 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH 1/6] x86/vmx: Rewrite vmx_sync_pir_to_irr() to be more efficient
+Date: Tue, 25 Jun 2024 20:07:14 +0100
+Message-Id: <20240625190719.788643-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240625190719.788643-1-andrew.cooper3@citrix.com>
+References: <20240625190719.788643-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, 2024-06-25 at 09:57 +0200, Jan Beulich wrote:
-> Pull in the gcc14 build fix there.
->=20
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+There are two issues.  First, pi_test_and_clear_on() pulls the cache-line to
+the CPU and dirties it even if there's nothing outstanding, but the final
+for_each_set_bit() is O(256) when O(8) would do, and would avoid multiple
+atomic updates to the same IRR word.
 
-~ Oleksii
+Rewrite it from scratch, explaining what's going on at each step.
 
-> ---
-> Probably nice to reference a gcc14-clean MiniOS tree from what is
-> going
-> to be 4.19.
->=20
-> --- a/Config.mk
-> +++ b/Config.mk
-> @@ -224,7 +224,7 @@ QEMU_UPSTREAM_URL ?=3D https://xenbits.xen
-> =C2=A0QEMU_UPSTREAM_REVISION ?=3D master
-> =C2=A0
-> =C2=A0MINIOS_UPSTREAM_URL ?=3D https://xenbits.xen.org/git-http/mini-os.g=
-it
-> -MINIOS_UPSTREAM_REVISION ?=3D b6a5b4d72b88e5c4faed01f5a44505de022860fc
-> +MINIOS_UPSTREAM_REVISION ?=3D 8b038c7411ae7e823eaf6d15d5efbe037a07197a
-> =C2=A0
-> =C2=A0SEABIOS_UPSTREAM_URL ?=3D https://xenbits.xen.org/git-http/seabios.=
-git
-> =C2=A0SEABIOS_UPSTREAM_REVISION ?=3D rel-1.16.3
+Bloat-o-meter reports 177 -> 145 (net -32), but the better aspect is the
+removal calls to __find_{first,next}_bit() hidden behind for_each_set_bit().
+
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+
+The main purpose of this is to get rid of for_each_set_bit().
+
+Full side-by-side diff:
+  https://termbin.com/5wsb
+
+The first loop ends up being unrolled identically, although there's 64bit movs
+to reload 0 for the xchg which is definitely suboptimal.  Opencoding
+asm ("xchg") without a memory clobber gets to 32bit movs which is an
+improvement but no ideal.  However I didn't fancy going that far.
+
+Also, the entirety of pi_desc is embedded in struct vcpu, which means when
+we're executing in Xen, the prefetcher is going to be stealing it back from
+the IOMMU all the time.  This is a datastructure which really should *not* be
+adjacent to all the other misc data in the vcpu.
+---
+ xen/arch/x86/hvm/vmx/vmx.c | 61 +++++++++++++++++++++++++++++++++-----
+ 1 file changed, 53 insertions(+), 8 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index f16faa6a615c..948ad48a4757 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2321,18 +2321,63 @@ static void cf_check vmx_deliver_posted_intr(struct vcpu *v, u8 vector)
+ 
+ static void cf_check vmx_sync_pir_to_irr(struct vcpu *v)
+ {
+-    struct vlapic *vlapic = vcpu_vlapic(v);
+-    unsigned int group, i;
+-    DECLARE_BITMAP(pending_intr, X86_NR_VECTORS);
++    struct pi_desc *desc = &v->arch.hvm.vmx.pi_desc;
++    union {
++        uint64_t _64[X86_NR_VECTORS / (sizeof(uint64_t) * 8)];
++        uint32_t _32[X86_NR_VECTORS / (sizeof(uint32_t) * 8)];
++    } vec;
++    uint32_t *irr;
++    bool on;
+ 
+-    if ( !pi_test_and_clear_on(&v->arch.hvm.vmx.pi_desc) )
++    /*
++     * The PIR is a contended cacheline which bounces between the CPU and
++     * IOMMU.  The IOMMU updates the entire PIR atomically, but we can't
++     * express the same on the CPU side, so care has to be taken.
++     *
++     * First, do a plain read of ON.  If the PIR hasn't been modified, this
++     * will keep the cacheline Shared and not pull it Excusive on the CPU.
++     */
++    if ( !pi_test_on(desc) )
+         return;
+ 
+-    for ( group = 0; group < ARRAY_SIZE(pending_intr); group++ )
+-        pending_intr[group] = pi_get_pir(&v->arch.hvm.vmx.pi_desc, group);
++    /*
++     * Second, if the plain read said that ON was set, we must clear it with
++     * an atomic action.  This will bring the cachline to Exclusive on the
++     * CPU.
++     *
++     * This should always succeed because noone else should be playing with
++     * the PIR behind our back, but assert so just in case.
++     */
++    on = pi_test_and_clear_on(desc);
++    ASSERT(on);
+ 
+-    for_each_set_bit(i, pending_intr, X86_NR_VECTORS)
+-        vlapic_set_vector(i, &vlapic->regs->data[APIC_IRR]);
++    /*
++     * The cacheline is now Exclusive on the CPU, and the IOMMU has indicated
++     * (via ON being set) thatat least one vector is pending too.  Atomically
++     * read and clear the entire pending bitmap as fast as we, to reduce the
++     * window that the IOMMU may steal the cacheline back from us.
++     *
++     * It is a performance concern, but not a correctness concern.  If the
++     * IOMMU does steal the cacheline back, we'll just wait to get it back
++     * again.
++     */
++    for ( unsigned int i = 0; i < ARRAY_SIZE(vec._64); ++i )
++        vec._64[i] = xchg(&desc->pir[i], 0);
++
++    /*
++     * Finally, merge the pending vectors into IRR.  The IRR register is
++     * scattered in memory, so we have to do this 32 bits at a time.
++     */
++    irr = (uint32_t *)&vcpu_vlapic(v)->regs->data[APIC_IRR];
++    for ( unsigned int i = 0; i < ARRAY_SIZE(vec._32); ++i )
++    {
++        if ( !vec._32[i] )
++            continue;
++
++        asm ( "lock or %[val], %[irr]"
++              : [irr] "+m" (irr[i * 0x10])
++              : [val] "r" (vec._32[i]) );
++    }
+ }
+ 
+ static bool cf_check vmx_test_pir(const struct vcpu *v, uint8_t vec)
+-- 
+2.39.2
 
 
