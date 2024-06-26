@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709D2C30658
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 15:22:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.749163.1157209 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C650FC27C4F
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 15:23:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.749160.1157185 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMUTy-00072s-9o; Wed, 26 Jun 2024 15:22:50 +0000
+	id 1sMUTw-0006Xo-Fd; Wed, 26 Jun 2024 15:22:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 749163.1157209; Wed, 26 Jun 2024 15:22:50 +0000
+Received: by outflank-mailman (output) from mailman id 749160.1157185; Wed, 26 Jun 2024 15:22:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMUTy-00072G-6L; Wed, 26 Jun 2024 15:22:50 +0000
-Received: by outflank-mailman (input) for mailman id 749163;
- Wed, 26 Jun 2024 15:22:48 +0000
+	id 1sMUTw-0006Xh-Cj; Wed, 26 Jun 2024 15:22:48 +0000
+Received: by outflank-mailman (input) for mailman id 749160;
+ Wed, 26 Jun 2024 15:22:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+UY/=N4=bounce.vates.tech=bounce-md_30504962.667c3245.v1-1767b6f4715f4d92a79f29ab3bb9e524@srs-se1.protection.inumbo.net>)
- id 1sMUTw-0006XW-QT
- for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 15:22:48 +0000
-Received: from mail187-10.suw11.mandrillapp.com
- (mail187-10.suw11.mandrillapp.com [198.2.187.10])
+ <SRS0=5vpY=N4=bounce.vates.tech=bounce-md_30504962.667c3242.v1-9372eb8379bc40e28f2b20363a613314@srs-se1.protection.inumbo.net>)
+ id 1sMUTu-0006XW-4w
+ for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 15:22:46 +0000
+Received: from mail134-3.atl141.mandrillapp.com
+ (mail134-3.atl141.mandrillapp.com [198.2.134.3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f11df52d-33cf-11ef-90a3-e314d9c70b13;
- Wed, 26 Jun 2024 17:22:47 +0200 (CEST)
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-10.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4W8QS55tBSz5QkLrh
- for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 15:22:45 +0000 (GMT)
+ id ef0b585f-33cf-11ef-90a3-e314d9c70b13;
+ Wed, 26 Jun 2024 17:22:44 +0200 (CEST)
+Received: from pmta10.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail134-3.atl141.mandrillapp.com (Mailchimp) with ESMTP id
+ 4W8QS24phBzDRJ1Ww
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 15:22:42 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 1767b6f4715f4d92a79f29ab3bb9e524; Wed, 26 Jun 2024 15:22:45 +0000
+ 9372eb8379bc40e28f2b20363a613314; Wed, 26 Jun 2024 15:22:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,567 +45,479 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f11df52d-33cf-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: ef0b585f-33cf-11ef-90a3-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1719415365; x=1719675865;
-	bh=BnjwzMk0AflYRqN9hVbL8ralKTRwJ7dacm5DkHqoKTQ=;
+	s=mte1; t=1719415362; x=1719675862;
+	bh=33Jim/AT+SoQIHMb1mWyjCf8Oyw2QMc8mVmnlKwJbW0=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=eztExEb2OqM04ooKaJfu3ZiCwUmXEvqxqm7C/W2g8l+mkgVp6l5zp34MAZ9p1LkSf
-	 dkO50aRELWi6aMxZfRKDVcoMJJMrKo5jMZyU34HOLYPWzUApj+UcZ4qRS+GDKl4sLE
-	 oD/ocqoPvbe+hb0qEaLkbuKWbmhVfgFchElzf3PPcqn4Z3qVJTAq+AORFkwEgFXnIz
-	 RZBiGwh+JLCCVyl3iymWjzoaL15iGcxoER9XJdci0oKZOI6WeDBxuy/lPMCAPilxF/
-	 wMWhm2GQFMjcnAiT5PIxuBDM5Gr2hwefXFvRzHANqv1Q/g27FdDLA+uDikFS1An++3
-	 qHGcISOCOcVzw==
+	b=VUeM9GbAV49+gfaocJTswbsCSqvad+4KX2Pe8cVUZWzgaTTGBWLbqMmOjTc8cn9or
+	 BZA7XJ1zmPb7bvIw/uPysFy3SGOx0l+XGMnoEz9xejKSdNd6UO45QA2KqOgr2HDVcQ
+	 HnpqJ/L6z78SaJZso4ZUfyLCh1IiCeQj6MmtVfITiG1CPhWyc14CZJ7S2iOIlmY+oc
+	 K+kHvJ8no0yQJ7ULOHkv8X9J1JtCahkJE/1glo4YlHPmdJuqx0LrrbAI2xe3AtvZGG
+	 nfHUCD9z5+u1QF2V3uO1DXvKdEkS05N7rXlTju9cm1aFHMFgDQS415TU8Twv00/4qO
+	 dO9+21B/ed5+w==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1719415365; x=1719675865; i=teddy.astie@vates.tech;
-	bh=BnjwzMk0AflYRqN9hVbL8ralKTRwJ7dacm5DkHqoKTQ=;
+	t=1719415362; x=1719675862; i=teddy.astie@vates.tech;
+	bh=33Jim/AT+SoQIHMb1mWyjCf8Oyw2QMc8mVmnlKwJbW0=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=wNdEX9hPbuF9HJNPlfkeONBFUKhR4Qg9KP9QscSby9liJGLOYV93+EUhOj+HbAf3H
-	 2K1K51VTh0/b/js6K/n9TEkiDPRmx95Z9rYKwORcfAzlQ359ttNWPjAH6usaxbE8wb
-	 dxzEGcId1sxpPPNz8ZsOd7gk3pnSAmMbJivsp3saS53V0VU5jFW5v2LjcjTHdUmTqL
-	 CdjXLrgNske4N84A8XYlA4XiXdVHAswKGMYK2Izx74ZooftAm7FH1vovuUNgmnroIH
-	 vzBqIcIiRqUp7l23VdVUzXKCuKIy/2EWBbaWNnYVIVJ+PpO8RESIIuApfE3tPJGngA
-	 rZ+nAC9FtSy5Q==
+	b=CpLOVNHVJwfMpTS6sH7xfPwuevjNkfdkC1N2vmO/4VDHUeIoZBTD8jFJ/xz1zC0OZ
+	 9cX90ACQywxGTQQYqZCs0XAb6qREqBjKtYOanFkz3I3yHnLLuQlPRgYqKjy4m73B30
+	 8lyFYEh0D9xt7ZerwTifwpbG1M5Mt9GrpzcCBoN7Jyqhy83+nSkqkyqMLRPHCEXda/
+	 adpnmKYa7JGnSmuxXkUue0McLqqdc6xlUq+tkIESBte7vMPfmoblmAzMW8+jakTFQA
+	 HzWXiPWwTu5a79lMPK3ScS+qYKwJ2+0mPV4MyiizD8mJTl+M/tuCQ9R6AvhvBS6PIH
+	 zhTFNXJ/Ig9jg==
 From: TSnake41 <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20XEN=20PATCH=20v2=205/5]=20xen/public:=20Introduce=20PV-IOMMU=20hypercall=20interface?=
+Subject: =?utf-8?Q?[RFC=20XEN=20PATCH=20v2=202/5]=20docs/designs:=20Add=20a=20design=20document=20for=20IOMMU=20subsystem=20redesign?=
 X-Mailer: git-send-email 2.45.2
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1719415364570
+X-Bm-Transport-Timestamp: 1719415361048
 To: xen-devel@lists.xenproject.org
 Cc: Teddy Astie <teddy.astie@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, =?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Message-Id: <42edb79171c5e075c673af6c406c930e543b3774.1719414737.git.teddy.astie@vates.tech>
+Message-Id: <0f9658f25c98f1acdab8788c705287d743103d91.1719414736.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1719414736.git.teddy.astie@vates.tech>
 References: <cover.1719414736.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.1767b6f4715f4d92a79f29ab3bb9e524?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.9372eb8379bc40e28f2b20363a613314?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20240626:md
-Date: Wed, 26 Jun 2024 15:22:45 +0000
+Date: Wed, 26 Jun 2024 15:22:42 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
 From: Teddy Astie <teddy.astie@vates.tech>
 
-Introduce a new pv interface to manage the underlying IOMMU and manage contexts
-and devices. This interface allows creation of new contexts from Dom0 and
-addition of IOMMU mappings using guest PoV.
+Current IOMMU subsystem has some limitations that make PV-IOMMU practically impossible.
+One of them is the assumtion that each domain is bound to a single "IOMMU domain", which
+also causes complications with quarantine implementation.
 
-This interface doesn't allow creation of mapping to other domains.
+Moreover, current IOMMU subsystem is not entirely well-defined, for instance, the behavior
+of map_page between ARM SMMUv3 and x86 VT-d/AMD-Vi greatly differs. On ARM, it can modifies
+the domain page table while on x86, it may be forbidden (e.g using HAP with PVH), or only
+modifying the devices PoV (e.g using PV).
+
+The goal of this redesign is to define more explicitely the behavior and interface of the
+IOMMU subsystem while allowing PV-IOMMU to be effectively implemented.
 
 Signed-off-by Teddy Astie <teddy.astie@vates.tech>
 ---
 Changed in V2:
-* formatting
+* nit s/dettach/detach/
 ---
- xen/common/Makefile           |   1 +
- xen/common/pv-iommu.c         | 320 ++++++++++++++++++++++++++++++++++
- xen/include/hypercall-defs.c  |   6 +
- xen/include/public/pv-iommu.h | 114 ++++++++++++
- xen/include/public/xen.h      |   1 +
- 5 files changed, 442 insertions(+)
- create mode 100644 xen/common/pv-iommu.c
- create mode 100644 xen/include/public/pv-iommu.h
+ docs/designs/iommu-contexts.md | 398 +++++++++++++++++++++++++++++++++
+ 1 file changed, 398 insertions(+)
+ create mode 100644 docs/designs/iommu-contexts.md
 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index f12a474d40..52ada89888 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -58,6 +58,7 @@ obj-y += wait.o
- obj-bin-y += warning.init.o
- obj-$(CONFIG_XENOPROF) += xenoprof.o
- obj-y += xmalloc_tlsf.o
-+obj-y += pv-iommu.o
- 
- obj-bin-$(CONFIG_X86) += $(foreach n,decompress bunzip2 unxz unlzma lzo unlzo unlz4 unzstd earlycpio,$(n).init.o)
- 
-diff --git a/xen/common/pv-iommu.c b/xen/common/pv-iommu.c
+diff --git a/docs/designs/iommu-contexts.md b/docs/designs/iommu-contexts.md
 new file mode 100644
-index 0000000000..844642ee54
+index 0000000000..8211f91692
 --- /dev/null
-+++ b/xen/common/pv-iommu.c
-@@ -0,0 +1,320 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * xen/common/pv_iommu.c
-+ *
-+ * PV-IOMMU hypercall interface.
-+ */
++++ b/docs/designs/iommu-contexts.md
+@@ -0,0 +1,398 @@
++# IOMMU context management in Xen
 +
-+#include <xen/mm.h>
-+#include <xen/lib.h>
-+#include <xen/iommu.h>
-+#include <xen/sched.h>
-+#include <xen/pci.h>
-+#include <xen/guest_access.h>
-+#include <asm/p2m.h>
-+#include <asm/event.h>
-+#include <public/pv-iommu.h>
++Status: Experimental
++Revision: 0
 +
-+#define PVIOMMU_PREFIX "[PV-IOMMU] "
++# Background
 +
-+#define PVIOMMU_MAX_PAGES 256 /* Move to Kconfig ? */
++The design for *IOMMU paravirtualization for Dom0* [1] explains that some guests may
++want to access to IOMMU features. In order to implement this in Xen, several adjustments
++needs to be made to the IOMMU subsystem.
 +
-+/* Allowed masks for each sub-operation */
-+#define ALLOC_OP_FLAGS_MASK (0)
-+#define FREE_OP_FLAGS_MASK (IOMMU_TEARDOWN_REATTACH_DEFAULT)
++This "hardware IOMMU domain" is currently implemented on a per-domain basis such as each
++domain actually has a specific *hardware IOMMU domain*, this design aims to allow a
++single Xen domain to manage several "IOMMU context", and allow some domains (e.g Dom0
++[1]) to modify their IOMMU contexts.
 +
-+static int get_paged_frame(struct domain *d, gfn_t gfn, mfn_t *mfn,
-+                           struct page_info **page, int readonly)
++In addition to this, quarantine feature can be refactored into using IOMMU contexts
++to reduce the complexity of platform-specific implementations and ensuring more
++consistency across platforms.
++
++# IOMMU context
++
++We define a "IOMMU context" as being a *hardware IOMMU domain*, but named as a context
++to avoid confusion with Xen domains.
++It represents some hardware-specific data structure that contains mappings from a device
++frame-number to a machine frame-number (e.g using a pagetable) that can be applied to
++a device using IOMMU hardware.
++
++This structure is bound to a Xen domain, but a Xen domain may have several IOMMU context.
++These contexts may be modifiable using the interface as defined in [1] aside some
++specific cases (e.g modifying default context).
++
++This is implemented in Xen as a new structure that will hold context-specific
++data.
++
++```c
++struct iommu_context {
++    u16 id; /* Context id (0 means default context) */
++    struct list_head devices;
++
++    struct arch_iommu_context arch;
++
++    bool opaque; /* context can't be modified nor accessed (e.g HAP) */
++};
++```
++
++A context is identified by a number that is domain-specific and may be used by IOMMU
++users such as PV-IOMMU by the guest.
++
++struct arch_iommu_context is splited from struct arch_iommu
++
++```c
++struct arch_iommu_context
 +{
-+    p2m_type_t p2mt;
-+
-+    *page = get_page_from_gfn(d, gfn_x(gfn), &p2mt,
-+                             (readonly) ? P2M_ALLOC : P2M_UNSHARE);
-+
-+    if ( !(*page) )
-+    {
-+        *mfn = INVALID_MFN;
-+        if ( p2m_is_shared(p2mt) )
-+            return -EINVAL;
-+        if ( p2m_is_paging(p2mt) )
-+        {
-+            p2m_mem_paging_populate(d, gfn);
-+            return -EIO;
-+        }
-+
-+        return -EPERM;
-+    }
-+
-+    *mfn = page_to_mfn(*page);
-+
-+    return 0;
-+}
-+
-+static int can_use_iommu_check(struct domain *d)
-+{
-+    if ( !iommu_enabled )
-+    {
-+        printk(PVIOMMU_PREFIX "IOMMU is not enabled\n");
-+        return 0;
-+    }
-+
-+    if ( !is_hardware_domain(d) )
-+    {
-+        printk(PVIOMMU_PREFIX "Non-hardware domain\n");
-+        return 0;
-+    }
-+
-+    if ( !is_iommu_enabled(d) )
-+    {
-+        printk(PVIOMMU_PREFIX "IOMMU disabled for this domain\n");
-+        return 0;
-+    }
-+
-+    return 1;
-+}
-+
-+static long query_cap_op(struct pv_iommu_op *op, struct domain *d)
-+{
-+    op->cap.max_ctx_no = d->iommu.other_contexts.count;
-+    op->cap.max_nr_pages = PVIOMMU_MAX_PAGES;
-+    op->cap.max_iova_addr = (1LLU << 39) - 1; /* TODO: hardcoded 39-bits */
-+
-+    return 0;
-+}
-+
-+static long alloc_context_op(struct pv_iommu_op *op, struct domain *d)
-+{
-+    u16 ctx_no = 0;
-+    int status = 0;
-+
-+    status = iommu_context_alloc(d, &ctx_no, op->flags & ALLOC_OP_FLAGS_MASK);
-+
-+    if (status < 0)
-+        return status;
-+
-+    printk("Created context %hu\n", ctx_no);
-+
-+    op->ctx_no = ctx_no;
-+    return 0;
-+}
-+
-+static long free_context_op(struct pv_iommu_op *op, struct domain *d)
-+{
-+    return iommu_context_free(d, op->ctx_no,
-+                              IOMMU_TEARDOWN_PREEMPT | (op->flags & FREE_OP_FLAGS_MASK));
-+}
-+
-+static long reattach_device_op(struct pv_iommu_op *op, struct domain *d)
-+{
-+    struct physdev_pci_device dev = op->reattach_device.dev;
-+    device_t *pdev;
-+
-+    pdev = pci_get_pdev(d, PCI_SBDF(dev.seg, dev.bus, dev.devfn));
-+
-+    if ( !pdev )
-+        return -ENOENT;
-+
-+    return iommu_reattach_context(d, d, pdev, op->ctx_no);
-+}
-+
-+static long map_pages_op(struct pv_iommu_op *op, struct domain *d)
-+{
-+    int ret = 0, flush_ret;
-+    struct page_info *page = NULL;
-+    mfn_t mfn;
-+    unsigned int flags;
-+    unsigned int flush_flags = 0;
-+    size_t i = 0;
-+
-+    if ( op->map_pages.nr_pages > PVIOMMU_MAX_PAGES )
-+        return -E2BIG;
-+
-+    if ( !iommu_check_context(d, op->ctx_no) )
-+        return -EINVAL;
-+
-+    //printk("Mapping gfn:%lx-%lx to dfn:%lx-%lx on %hu\n",
-+    //       op->map_pages.gfn, op->map_pages.gfn + op->map_pages.nr_pages - 1,
-+    //       op->map_pages.dfn, op->map_pages.dfn + op->map_pages.nr_pages - 1,
-+    //       op->ctx_no);
-+
-+    flags = 0;
-+
-+    if ( op->flags & IOMMU_OP_readable )
-+        flags |= IOMMUF_readable;
-+
-+    if ( op->flags & IOMMU_OP_writeable )
-+        flags |= IOMMUF_writable;
-+
-+    for (i = 0; i < op->map_pages.nr_pages; i++)
-+    {
-+        gfn_t gfn = _gfn(op->map_pages.gfn + i);
-+        dfn_t dfn = _dfn(op->map_pages.dfn + i);
-+
-+        /* Lookup pages struct backing gfn */
-+        ret = get_paged_frame(d, gfn, &mfn, &page, 0);
-+
-+        if ( ret )
-+            break;
-+
-+        /* Check for conflict with existing mappings */
-+        if ( !iommu_lookup_page(d, dfn, &mfn, &flags, op->ctx_no) )
-+        {
-+            put_page(page);
-+            ret = -EADDRINUSE;
-+            break;
-+        }
-+
-+        ret = iommu_map(d, dfn, mfn, 1, flags, &flush_flags, op->ctx_no);
-+
-+        if ( ret )
-+            break;
-+    }
-+
-+    op->map_pages.mapped = i;
-+
-+    flush_ret = iommu_iotlb_flush(d, _dfn(op->map_pages.dfn),
-+                                  op->map_pages.nr_pages, flush_flags,
-+                                  op->ctx_no);
-+
-+    if ( flush_ret )
-+        printk("Flush operation failed (%d)\n", flush_ret);
-+
-+    return ret;
-+}
-+
-+static long unmap_pages_op(struct pv_iommu_op *op, struct domain *d)
-+{
-+    mfn_t mfn;
-+    int ret = 0, flush_ret;
-+    unsigned int flags;
-+    unsigned int flush_flags = 0;
-+    size_t i = 0;
-+
-+    if ( op->unmap_pages.nr_pages > PVIOMMU_MAX_PAGES )
-+        return -E2BIG;
-+
-+    if ( !iommu_check_context(d, op->ctx_no) )
-+        return -EINVAL;
-+
-+    //printk("Unmapping dfn:%lx-%lx on %hu\n",
-+    //       op->unmap_pages.dfn, op->unmap_pages.dfn + op->unmap_pages.nr_pages - 1,
-+    //       op->ctx_no);
-+
-+    for (i = 0; i < op->unmap_pages.nr_pages; i++)
-+    {
-+        dfn_t dfn = _dfn(op->unmap_pages.dfn + i);
-+
-+        /* Check if there is a valid mapping for this domain */
-+        if ( iommu_lookup_page(d, dfn, &mfn, &flags, op->ctx_no) ) {
-+            ret = -ENOENT;
-+            break;
-+        }
-+
-+        ret = iommu_unmap(d, dfn, 1, 0, &flush_flags, op->ctx_no);
-+
-+        if (ret)
-+            break;
-+
-+        /* Decrement reference counter */
-+        put_page(mfn_to_page(mfn));
-+    }
-+
-+    op->unmap_pages.unmapped = i;
-+
-+    flush_ret = iommu_iotlb_flush(d, _dfn(op->unmap_pages.dfn),
-+                                  op->unmap_pages.nr_pages, flush_flags,
-+                                  op->ctx_no);
-+
-+    if ( flush_ret )
-+        printk("Flush operation failed (%d)\n", flush_ret);
-+
-+    return ret;
-+}
-+
-+static long lookup_page_op(struct pv_iommu_op *op, struct domain *d)
-+{
-+    mfn_t mfn;
-+    gfn_t gfn;
-+    unsigned int flags = 0;
-+
-+    if ( !iommu_check_context(d, op->ctx_no) )
-+        return -EINVAL;
-+
-+    /* Check if there is a valid BFN mapping for this domain */
-+    if ( iommu_lookup_page(d, _dfn(op->lookup_page.dfn), &mfn, &flags, op->ctx_no) )
-+        return -ENOENT;
-+
-+    gfn = mfn_to_gfn(d, mfn);
-+    BUG_ON(gfn_eq(gfn, INVALID_GFN));
-+
-+    op->lookup_page.gfn = gfn_x(gfn);
-+
-+    return 0;
-+}
-+
-+long do_iommu_sub_op(struct pv_iommu_op *op)
-+{
-+    struct domain *d = current->domain;
-+
-+    if ( !can_use_iommu_check(d) )
-+        return -EPERM;
-+
-+    switch ( op->subop_id )
-+    {
-+        case 0:
-+            return 0;
-+
-+        case IOMMUOP_query_capabilities:
-+            return query_cap_op(op, d);
-+
-+        case IOMMUOP_alloc_context:
-+            return alloc_context_op(op, d);
-+
-+        case IOMMUOP_free_context:
-+            return free_context_op(op, d);
-+
-+        case IOMMUOP_reattach_device:
-+            return reattach_device_op(op, d);
-+
-+        case IOMMUOP_map_pages:
-+            return map_pages_op(op, d);
-+
-+        case IOMMUOP_unmap_pages:
-+            return unmap_pages_op(op, d);
-+
-+        case IOMMUOP_lookup_page:
-+            return lookup_page_op(op, d);
-+
-+        default:
-+            return -EINVAL;
-+    }
-+}
-+
-+long do_iommu_op(XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    long ret = 0;
-+    struct pv_iommu_op op;
-+
-+    if ( unlikely(copy_from_guest(&op, arg, 1)) )
-+        return -EFAULT;
-+
-+    ret = do_iommu_sub_op(&op);
-+
-+    if ( ret == -ERESTART )
-+        return hypercall_create_continuation(__HYPERVISOR_iommu_op, "h", arg);
-+
-+    if ( unlikely(copy_to_guest(arg, &op, 1)) )
-+        return -EFAULT;
-+
-+    return ret;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
-index 47c093acc8..4ba4480867 100644
---- a/xen/include/hypercall-defs.c
-+++ b/xen/include/hypercall-defs.c
-@@ -209,6 +209,9 @@ hypfs_op(unsigned int cmd, const char *arg1, unsigned long arg2, void *arg3, uns
- #ifdef CONFIG_X86
- xenpmu_op(unsigned int op, xen_pmu_params_t *arg)
- #endif
-+#ifdef CONFIG_HAS_PASSTHROUGH
-+iommu_op(void *arg)
-+#endif
- 
- #ifdef CONFIG_PV
- caller: pv64
-@@ -295,5 +298,8 @@ mca                                do       do       -        -        -
- #ifndef CONFIG_PV_SHIM_EXCLUSIVE
- paging_domctl_cont                 do       do       do       do       -
- #endif
-+#ifdef CONFIG_HAS_PASSTHROUGH
-+iommu_op                           do       do       do       do       -
-+#endif
- 
- #endif /* !CPPCHECK */
-diff --git a/xen/include/public/pv-iommu.h b/xen/include/public/pv-iommu.h
-new file mode 100644
-index 0000000000..45f9c44eb1
---- /dev/null
-+++ b/xen/include/public/pv-iommu.h
-@@ -0,0 +1,114 @@
-+/* SPDX-License-Identifier: MIT */
-+/******************************************************************************
-+ * pv-iommu.h
-+ *
-+ * Paravirtualized IOMMU driver interface.
-+ *
-+ * Copyright (c) 2024 Teddy Astie <teddy.astie@vates.tech>
-+ */
-+
-+#ifndef __XEN_PUBLIC_PV_IOMMU_H__
-+#define __XEN_PUBLIC_PV_IOMMU_H__
-+
-+#include "xen.h"
-+#include "physdev.h"
-+
-+#define IOMMU_DEFAULT_CONTEXT (0)
-+
-+/**
-+ * Query PV-IOMMU capabilities for this domain.
-+ */
-+#define IOMMUOP_query_capabilities    1
-+
-+/**
-+ * Allocate an IOMMU context, the new context handle will be written to ctx_no.
-+ */
-+#define IOMMUOP_alloc_context         2
-+
-+/**
-+ * Destroy a IOMMU context.
-+ * All devices attached to this context are reattached to default context.
-+ *
-+ * The default context can't be destroyed (0).
-+ */
-+#define IOMMUOP_free_context          3
-+
-+/**
-+ * Reattach the device to IOMMU context.
-+ */
-+#define IOMMUOP_reattach_device       4
-+
-+#define IOMMUOP_map_pages             5
-+#define IOMMUOP_unmap_pages           6
-+
-+/**
-+ * Get the GFN associated to a specific DFN.
-+ */
-+#define IOMMUOP_lookup_page           7
-+
-+struct pv_iommu_op {
-+    uint16_t subop_id;
-+    uint16_t ctx_no;
-+
-+/**
-+ * Create a context that is cloned from default.
-+ * The new context will be populated with 1:1 mappings covering the entire guest memory.
-+ */
-+#define IOMMU_CREATE_clone (1 << 0)
-+
-+#define IOMMU_OP_readable (1 << 0)
-+#define IOMMU_OP_writeable (1 << 1)
-+    uint32_t flags;
++    spinlock_t pgtables_lock;
++    struct page_list_head pgtables;
 +
 +    union {
++        /* Intel VT-d */
 +        struct {
-+            uint64_t gfn;
-+            uint64_t dfn;
-+            /* Number of pages to map */
-+            uint32_t nr_pages;
-+            /* Number of pages actually mapped after sub-op */
-+            uint32_t mapped;
-+        } map_pages;
-+
++            uint64_t pgd_maddr; /* io page directory machine address */
++            domid_t *didmap; /* per-iommu DID */
++            unsigned long *iommu_bitmap; /* bitmap of iommu(s) that the context uses */
++        } vtd;
++        /* AMD IOMMU */
 +        struct {
-+            uint64_t dfn;
-+            /* Number of pages to unmap */
-+            uint32_t nr_pages;
-+            /* Number of pages actually unmapped after sub-op */
-+            uint32_t unmapped;
-+        } unmap_pages;
-+
-+        struct {
-+            struct physdev_pci_device dev;
-+        } reattach_device;
-+
-+        struct {
-+            uint64_t gfn;
-+            uint64_t dfn;
-+        } lookup_page;
-+
-+        struct {
-+            /* Maximum number of IOMMU context this domain can use. */
-+            uint16_t max_ctx_no;
-+            /* Maximum number of pages that can be modified in a single map/unmap operation. */
-+            uint32_t max_nr_pages;
-+            /* Maximum device address (iova) that the guest can use for mappings. */
-+            uint64_t max_iova_addr;
-+        } cap;
++            struct page_info *root_table;
++        } amd;
 +    };
 +};
 +
-+typedef struct pv_iommu_op pv_iommu_op_t;
-+DEFINE_XEN_GUEST_HANDLE(pv_iommu_op_t);
++struct arch_iommu
++{
++    spinlock_t mapping_lock; /* io page table lock */
++    struct {
++        struct page_list_head list;
++        spinlock_t lock;
++    } pgtables;
 +
++    struct list_head identity_maps;
++
++    union {
++        /* Intel VT-d */
++        struct {
++            /* no more context-specific values */
++            unsigned int agaw; /* adjusted guest address width, 0 is level 2 30-bit */
++        } vtd;
++        /* AMD IOMMU */
++        struct {
++            unsigned int paging_mode;
++            struct guest_iommu *g_iommu;
++        } amd;
++    };
++};
++```
++
++IOMMU context information is now carried by iommu_context rather than being integrated to
++struct arch_iommu.
++
++# Xen domain IOMMU structure
++
++`struct domain_iommu` is modified to allow multiples context within a single Xen domain
++to exist :
++
++```c
++struct iommu_context_list {
++    uint16_t count; /* Context count excluding default context */
++
++    /* if count > 0 */
++
++    uint64_t *bitmap; /* bitmap of context allocation */
++    struct iommu_context *map; /* Map of contexts */
++};
++
++struct domain_iommu {
++    /* ... */
++
++    struct iommu_context default_ctx;
++    struct iommu_context_list other_contexts;
++
++    /* ... */
++}
++```
++
++default_ctx is a special context with id=0 that holds the page table mapping the entire
++domain, which basically preserve the previous behavior. All devices are expected to be
++bound to this context during initialization.
++
++Along with this default context that always exist, we use a pool of contexts that has a
++fixed size at domain initialization, where contexts can be allocated (if possible), and
++have a id matching their position in the map (considering that id != 0).
++These contexts may be used by IOMMU contexts users such as PV-IOMMU or quarantine domain
++(DomIO).
++
++# Platform independent context management interface
++
++A new platform independant interface is introduced in Xen hypervisor to allow
++IOMMU contexts users to create and manage contexts within domains.
++
++```c
++/* Direct context access functions (not supposed to be used directly) */
++#define iommu_default_context(d) (&dom_iommu(d)->default_ctx)
++struct iommu_context *iommu_get_context(struct domain *d, u16 ctx_no);
++int iommu_context_init(struct domain *d, struct iommu_context *ctx, u16 ctx_no, u32 flags);
++int iommu_context_teardown(struct domain *d, struct iommu_context *ctx, u32 flags);
++
++/* Check if a specific context exist in the domain, note that ctx_no=0 always
++    exists */
++bool iommu_check_context(struct domain *d, u16 ctx_no);
++
++/* Flag for default context initialization */
++#define IOMMU_CONTEXT_INIT_default (1 << 0)
++
++/* Flag for quarantine contexts (scratch page, DMA Abort mode, ...) */
++#define IOMMU_CONTEXT_INIT_quarantine (1 << 1)
++
++/* Flag to specify that devices will need to be reattached to default domain */
++#define IOMMU_TEARDOWN_REATTACH_DEFAULT (1 << 0)
++
++/* Allocate a new context, uses CONTEXT_INIT flags */
++int iommu_context_alloc(struct domain *d, u16 *ctx_no, u32 flags);
++
++/* Free a context, uses CONTEXT_TEARDOWN flags */
++int iommu_context_free(struct domain *d, u16 ctx_no, u32 flags);
++
++/* Move a device from one context to another, including between different domains. */
++int iommu_reattach_context(struct domain *prev_dom, struct domain *next_dom,
++                            device_t *dev, u16 ctx_no);
++
++/* Add a device to a context for first initialization */
++int iommu_attach_context(struct domain *d, device_t *dev, u16 ctx_no);
++
++/* Remove a device from a context, effectively removing it from the IOMMU. */
++int iommu_detach_context(struct domain *d, device_t *dev);
++```
++
++This interface will use a new interface with drivers to implement these features.
++
++Some existing functions will have a new parameter to specify on what context to do the operation.
++- iommu_map (iommu_legacy_map untouched)
++- iommu_unmap (iommu_legacy_unmap untouched)
++- iommu_lookup_page
++- iommu_iotlb_flush
++
++These functions will modify the iommu_context structure to accomodate with the
++operations applied, these functions will be used to replace some operations previously
++made in the IOMMU driver.
++
++# IOMMU platform_ops interface changes
++
++The IOMMU driver needs to expose a way to create and manage IOMMU contexts, the approach
++taken here is to modify the interface to allow specifying a IOMMU context on operations,
++and at the same time, simplifying the interface by relying more on iommu
++platform-independent code.
++
++Added functions in iommu_ops
++
++```c
++/* Initialize a context (creating page tables, allocating hardware, structures, ...) */
++int (*context_init)(struct domain *d, struct iommu_context *ctx,
++                    u32 flags);
++/* Destroy a context, assumes no device is bound to the context. */
++int (*context_teardown)(struct domain *d, struct iommu_context *ctx,
++                        u32 flags);
++/* Put a device in a context (assumes the device is not attached to another context) */
++int (*attach)(struct domain *d, device_t *dev,
++              struct iommu_context *ctx);
++/* Remove a device from a context, and from the IOMMU. */
++int (*detach)(struct domain *d, device_t *dev,
++              struct iommu_context *prev_ctx);
++/* Move the device from a context to another, including if the new context is in
++   another domain. d corresponds to the target domain. */
++int (*reattach)(struct domain *d, device_t *dev,
++                struct iommu_context *prev_ctx,
++                struct iommu_context *ctx);
++
++#ifdef CONFIG_HAS_PCI
++/* Specific interface for phantom function devices. */
++int (*add_devfn)(struct domain *d, struct pci_dev *pdev, u16 devfn,
++                    struct iommu_context *ctx);
++int (*remove_devfn)(struct domain *d, struct pci_dev *pdev, u16 devfn,
++                struct iommu_context *ctx);
 +#endif
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
++/* Changes in existing to use a specified iommu_context. */
++int __must_check (*map_page)(struct domain *d, dfn_t dfn, mfn_t mfn,
++                                unsigned int flags,
++                                unsigned int *flush_flags,
++                                struct iommu_context *ctx);
++int __must_check (*unmap_page)(struct domain *d, dfn_t dfn,
++                                unsigned int order,
++                                unsigned int *flush_flags,
++                                struct iommu_context *ctx);
++int __must_check (*lookup_page)(struct domain *d, dfn_t dfn, mfn_t *mfn,
++                                unsigned int *flags,
++                                struct iommu_context *ctx);
++
++int __must_check (*iotlb_flush)(struct iommu_context *ctx, dfn_t dfn,
++                                unsigned long page_count,
++                                unsigned int flush_flags);
++
++void (*clear_root_pgtable)(struct domain *d, struct iommu_context *ctx);
++```
++
++These functions are redundant with existing functions, therefore, the following functions
++are replaced with new equivalents :
++- quarantine_init : platform-independent code and IOMMU_CONTEXT_INIT_quarantine flag
++- add_device : attach and add_devfn (phantom)
++- assign_device : attach and add_devfn (phantom)
++- remove_device : detach and remove_devfn (phantom)
++- reassign_device : reattach
++
++Some functionnal differences with previous functions, the following should be handled
++by platform-independent/arch-specific code instead of IOMMU driver :
++- identity mappings (unity mappings and rmrr)
++- device list in context and domain
++- domain of a device
++- quarantine
++
++The idea behind this is to implement IOMMU context features while simplifying IOMMU
++drivers implementations and ensuring more consistency between IOMMU drivers.
++
++## Phantom function handling
++
++PCI devices may use additionnal devfn to do DMA operations, in order to support such
++devices, an interface is added to map specific device functions without implying that
++the device is mapped to a new context (that may cause duplicates in Xen data structures).
++
++Functions add_devfn and remove_devfn allows to map a iommu context on specific devfn
++for a pci device, without altering platform-independent data structures.
++
++It is important for the reattach operation to care about these devices, in order
++to prevent devices from being partially reattached to the new context (see XSA-449 [2])
++by using a all-or-nothing approach for reattaching such devices.
++
++# Quarantine refactoring using IOMMU contexts
++
++The quarantine mecanism can be entirely reimplemented using IOMMU context, making
++it simpler, more consistent between platforms,
++
++Quarantine is currently only supported with x86 platforms and works by creating a
++single *hardware IOMMU domain* per quarantined device. All the quarantine logic is
++the implemented in a platform-specific fashion while actually implementing the same
++concepts :
++
++The *hardware IOMMU context* data structures for quarantine are currently stored in
++the device structure itself (using arch_pci_dev) and IOMMU driver needs to care about
++whether we are dealing with quarantine operations or regular operations (often dealt
++using macros such as QUARANTINE_SKIP or DEVICE_PGTABLE).
++
++The page table that will apply on the quarantined device is created reserved device
++regions, and adding mappings to a scratch page if enabled (quarantine=scratch-page).
++
++A new approach we can use is allowing the quarantine domain (DomIO) to manage IOMMU
++contexts, and implement all the quarantine logic using IOMMU contexts.
++
++That way, the quarantine implementation can be platform-independent, thus have a more
++consistent implementation between platforms. It will also allows quarantine to work
++with other IOMMU implementations without having to implement platform-specific behavior.
++Moreover, quarantine operations can be implemented using regular context operations
++instead of relying on driver-specific code.
++
++Quarantine implementation can be summarised as
++
++```c
++int iommu_quarantine_dev_init(device_t *dev)
++{
++    int ret;
++    u16 ctx_no;
++
++    if ( !iommu_quarantine )
++        return -EINVAL;
++
++    ret = iommu_context_alloc(dom_io, &ctx_no, IOMMU_CONTEXT_INIT_quarantine);
++
++    if ( ret )
++        return ret;
++
++    /** TODO: Setup scratch page, mappings... */
++
++    ret = iommu_reattach_context(dev->domain, dom_io, dev, ctx_no);
++
++    if ( ret )
++    {
++        ASSERT(!iommu_context_free(dom_io, ctx_no, 0));
++        return ret;
++    }
++
++    return ret;
++}
++```
++
++# Platform-specific considerations
++
++## Reference counters on target pages
++
++When mapping a guest page onto a IOMMU context, we need to make sure that
++this page is not reused for something else while being actually referenced
++by a IOMMU context. One way of doing it is incrementing the reference counter
++of each target page we map (excluding reserved regions), and decrementing it
++when the mapping isn't used anymore.
++
++One consideration to have is when destroying the context while having existing
++mappings in it. We can walk through the entire page table and decrement the
++reference counter of all mappings. All of that assumes that there is no reserved
++region mapped (which should be the case as a requirement of teardown, or as a
++consequence of REATTACH_DEFAULT flag).
++
++Another consideration is that the "cleanup mappings" operation may take a lot
++of time depending on the complexity of the page table. Making the teardown operation preemptable can allow the hypercall to be preempted if needed also preventing a malicious
++guest from stalling a CPU in a teardown operation with a specially crafted IOMMU
++context (e.g with several 1G superpages).
++
++## Limit the amount of pages IOMMU contexts can use
++
++In order to prevent a (eventually malicious) guest from causing too much allocations
++in Xen, we can enforce limits on the memory the IOMMU subsystem can use for IOMMU context.
++A possible implementation can be to preallocate a reasonably large chunk of memory
++and split it into pages for use by the IOMMU subsystem only for non-default IOMMU
++contexts (e.g PV-IOMMU interface), if this limitation is overcome, some operations
++may fail from the guest side. These limitations shouldn't impact "usual" operations
++of the IOMMU subsystem (e.g default context initialization).
++
++## x86 Architecture
++
++TODO
++
++### Intel VT-d
++
++VT-d uses DID to tag the *IOMMU domain* applied to a device and assumes that all entries
++with the same DID uses the same page table (i.e same IOMMU context).
++Under certain circonstances (e.g DRHD with DID limit below 16-bits), the *DID* is
++transparently converted into a DRHD-specific DID using a map managed internally.
++
++The current implementation of the code reuses the Xen domain_id as DID.
++However, by using multiples IOMMU contexts per domain, we can't use the domain_id for
++contexts (otherwise, different page tables will be mapped with the same DID).
++The following strategy is used :
++- on the default context, reuse the domain_id (the default context is unique per domain)
++- on non-default context, use a id allocated in the pseudo_domid map, (actually used by
++quarantine) which is a DID outside of Xen domain_id range
++
++### AMD-Vi
++
++TODO
++
++## Device-tree platforms
++
++### SMMU and SMMUv3
++
++TODO
++
++* * *
++
++[1] See pv-iommu.md
++
++[2] pci: phantom functions assigned to incorrect contexts
++https://xenbits.xen.org/xsa/advisory-449.html
 \ No newline at end of file
-diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
-index b47d48d0e2..28ab815ebc 100644
---- a/xen/include/public/xen.h
-+++ b/xen/include/public/xen.h
-@@ -118,6 +118,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
- #define __HYPERVISOR_xenpmu_op            40
- #define __HYPERVISOR_dm_op                41
- #define __HYPERVISOR_hypfs_op             42
-+#define __HYPERVISOR_iommu_op             43
- 
- /* Architecture-specific hypercall definitions. */
- #define __HYPERVISOR_arch_0               48
 -- 
 2.45.2
 
