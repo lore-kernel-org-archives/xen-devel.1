@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F281C3064D
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 15:29:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.749212.1157245 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29DE6C27C4F
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 15:39:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.749244.1157276 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMUa3-0002KI-94; Wed, 26 Jun 2024 15:29:07 +0000
+	id 1sMUjP-0006bb-H5; Wed, 26 Jun 2024 15:38:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 749212.1157245; Wed, 26 Jun 2024 15:29:07 +0000
+Received: by outflank-mailman (output) from mailman id 749244.1157276; Wed, 26 Jun 2024 15:38:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMUa3-0002KB-63; Wed, 26 Jun 2024 15:29:07 +0000
-Received: by outflank-mailman (input) for mailman id 749212;
- Wed, 26 Jun 2024 15:29:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sMUjP-0006bU-DD; Wed, 26 Jun 2024 15:38:47 +0000
+Received: by outflank-mailman (input) for mailman id 749244;
+ Wed, 26 Jun 2024 15:38:46 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pb7p=N4=bounce.vates.tech=bounce-md_30504962.667c3279.v1-5533be79f55c46a48dcd81b32f46d421@srs-se1.protection.inumbo.net>)
- id 1sMUUk-0006XW-Mi
- for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 15:23:38 +0000
-Received: from mail187-10.suw11.mandrillapp.com
- (mail187-10.suw11.mandrillapp.com [198.2.187.10])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0f47dd49-33d0-11ef-90a3-e314d9c70b13;
- Wed, 26 Jun 2024 17:23:38 +0200 (CEST)
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-10.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4W8QT51XxMz5QkLpF
- for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 15:23:37 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 5533be79f55c46a48dcd81b32f46d421; Wed, 26 Jun 2024 15:23:37 +0000
+ <SRS0=e1Ku=N4=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
+ id 1sMUjO-0006Z3-9w
+ for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 15:38:46 +0000
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [2607:f8b0:4864:20::735])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2b7e1f3f-33d2-11ef-b4bb-af5377834399;
+ Wed, 26 Jun 2024 17:38:44 +0200 (CEST)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-79c084476bdso188386285a.3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 08:38:44 -0700 (PDT)
+Received: from georged-x-u.xenrt.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6b51ef30c1esm55692166d6.79.2024.06.26.08.38.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Jun 2024 08:38:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,58 +47,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f47dd49-33d0-11ef-90a3-e314d9c70b13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1719415417; x=1719675917;
-	bh=HQnzbPh+i1Pp6Lcr9ot6UJATrOws3xOB7YqdoqCYhiU=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=JsNaSJACkzhO3rIxMEBeFtwxusl8EpZA44O4u+f/t/Imv9bjqQJVyvd1j+5HIk9sF
-	 0vu3f8yMfL9NxhBqrOJxTlsgi41+B/gbCig6liI3mSbVcwjVRbzzStudwKKi6BxbAk
-	 DwXqdLmMa57pIA2fplNlYsOy6Qt0QDiC8OEznXA6UmDnEUE5kBD79JwlTXtLjrp8ez
-	 mLn/hm5ciSgJlez79ozBJG8vUnx859bonOEXOO2A3UBDI9oo7OgY3jJ/9xRoBpkjs5
-	 m+97Oq8q/ftnTwRPk7jlaUW3tsLFuUTvEz6MB+O3SPaHhIo6/4DXGmMgh71aPc3/Ki
-	 T+Yn2nKDh015w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1719415417; x=1719675917; i=teddy.astie@vates.tech;
-	bh=HQnzbPh+i1Pp6Lcr9ot6UJATrOws3xOB7YqdoqCYhiU=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=XkwOTjmbxB7JaXtLh7FxChPPedd+RgAjgI3aCIRrcx9w2Xv8gv82sQD4866Cj5Rcq
-	 VRNAYbrrwzj+nXGzxX2P3cVJU/EuK60sGNFUUwzURX9ZHhVRjGvacS5lN3q6NZ6/oF
-	 kEKZsZAcGKb1sQnEaZjGqvegl3zF7hqnJ0VNfT/BQ7I2IJj9CzGCWKJkPXPbJol05r
-	 zubrW30ONXpm6kGBSf2G17zARDDhYuiHXe547r10yG18td1VsyUhrgeW6v9JaDxC1P
-	 23v5+UaZDQ6DGgddaNCO8kRxlPtKvaoKjiD2wdpb8omrc+rAmhXejhN5OlFNAiz5xJ
-	 8TR5bQV4WJ+rQ==
-From: Teddy Astie <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[RFC=20XEN=20PATCH=20v2=200/5]=20IOMMU=20subsystem=20redesign=20and=20PV-IOMMU=20interface?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1719415415340
-Message-Id: <c3a91cde-f325-4459-8629-f3575543e4d8@vates.tech>
+X-Inumbo-ID: 2b7e1f3f-33d2-11ef-b4bb-af5377834399
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1719416323; x=1720021123; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KG63BasigL6EjyAVVQsMRh0WTj185+GcKDw46ekPGTI=;
+        b=UtmHvmJ563bizgLXpiYe76cEAt0Q/JcKZr2eo9eqrzeuEPz3nza7Mv93KCbD6UrYGe
+         TkmSHCcPir+rFgMwy7U/DOq7L6w4O9vDn0j9k1fFlIbsY4SS5OpGEzTMnn3igNAdHQ9/
+         R9hw6B7X/cn1DxeRXkrOLuUd3Wef0+sIgsbLA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719416323; x=1720021123;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KG63BasigL6EjyAVVQsMRh0WTj185+GcKDw46ekPGTI=;
+        b=DsFywpnMHQxb48tT6/vSdwExzJI8JbbXYb/M5gowdTiveSv3LU3M5WYbXdQQTYNLfB
+         onIWLA5y9g3hxgH3jHQoSXN4XtJ1LsvAeWDQ+D4ZjTYQX51DFHhOLK3DYMTJn3ANKaSU
+         0+fihe93qolsYgUZyVBlPueul/+W0ZEdDQxSJFoYqV1v/J8IkE7x/1q/yFjeaJg3FUmP
+         YCPwjNjKy/lwbLVTZL0FeqCz6N1Z5bjV55s8BNpVckgepAy+/6BK9gZZxAhEI1ixB2iz
+         uI7Cf4edudyED0PhCOEVWA6zhlVQ48f57e22wwfWOCijfTmvucgvT6F0ccnYONSPgGcm
+         IFAA==
+X-Gm-Message-State: AOJu0YwAJAm9DmahJ1pFCvtjy9RUTXHbz6rH5qSQfT0MLY69z8NmHdHy
+	Xx/j4YhqcBxnk/Ng3d+nSPbTdkVXl3fOLJBX1yY+cuXRqiok9yFwvWRdar7Xn/3/Nr9VPtzwMgj
+	nm2c=
+X-Google-Smtp-Source: AGHT+IEvEO2vzEzCn0fizkYLMdQH8kX6ddBLYClg1yQzeHBXTdml0NZkSOUyGLpMRPNAKTuZzPLB3A==
+X-Received: by 2002:a0c:f051:0:b0:6b4:ffca:ca96 with SMTP id 6a1803df08f44-6b5409e0b5dmr112332276d6.30.1719416323083;
+        Wed, 26 Jun 2024 08:38:43 -0700 (PDT)
+From: George Dunlap <george.dunlap@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, =?utf-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Lukasz Hawrylko <lukasz@hawrylko.pl>, "Daniel P. Smith" <dpsmith@apertussolutions.com>, =?utf-8?Q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>, =?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-References: <cover.1719414736.git.teddy.astie@vates.tech>
-In-Reply-To: <cover.1719414736.git.teddy.astie@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.5533be79f55c46a48dcd81b32f46d421?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20240626:md
-Date: Wed, 26 Jun 2024 15:23:37 +0000
+Cc: George Dunlap <george.dunlap@cloud.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Juergen Gross <jgross@suse.com>,
+	Nick Rosbrook <rosbrookn@gmail.com>
+Subject: [PATCH] MAINTAINERS: Step down as maintainer and committer
+Date: Wed, 26 Jun 2024 16:19:35 +0100
+Message-Id: <20240626151935.26704-1-george.dunlap@cloud.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-forgot to add that this patch series is rebased on top of staging
+Remain a Reviewer on the golang bindings and scheduler for now (using
+a xenproject.org alias), since there may be architectural decisions I
+can shed light on.
 
-Teddy
+Remove the XENTRACE section entirely, as there's no obvious candidate
+to take it over; having the respective parts fall back to the tools
+and The Rest seems the most reasonable option.
 
+Signed-off-by: George Dunlap <george.dunlap@cloud.com>
+---
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Dario Faggioli <dfaggioli@suse.com>
+CC: Juergen Gross <jgross@suse.com>
+CC: Nick Rosbrook <rosbrookn@gmail.com>
+---
+ MAINTAINERS | 13 ++-----------
+ 1 file changed, 2 insertions(+), 11 deletions(-)
 
-Teddy Astie | Vates XCP-ng Intern
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9d66b898ec..2b0c894527 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -325,8 +325,8 @@ F:	xen/arch/x86/debug.c
+ F:	tools/debugger/gdbsx/
+ 
+ GOLANG BINDINGS
+-M:	George Dunlap <george.dunlap@citrix.com>
+ M:	Nick Rosbrook <rosbrookn@gmail.com>
++R:	George Dunlap <gwd@xenproject.org>
+ S:	Maintained
+ F:	tools/golang
+ 
+@@ -490,9 +490,9 @@ S:	Supported
+ F:	xen/common/sched/rt.c
+ 
+ SCHEDULING
+-M:	George Dunlap <george.dunlap@citrix.com>
+ M:	Dario Faggioli <dfaggioli@suse.com>
+ M:	Juergen Gross <jgross@suse.com>
++R:	George Dunlap <gwd@xenproject.org>
+ S:	Supported
+ F:	xen/common/sched/
+ 
+@@ -597,7 +597,6 @@ F:	tools/tests/x86_emulator/
+ X86 MEMORY MANAGEMENT
+ M:	Jan Beulich <jbeulich@suse.com>
+ M:	Andrew Cooper <andrew.cooper3@citrix.com>
+-R:	George Dunlap <george.dunlap@citrix.com>
+ S:	Supported
+ F:	xen/arch/x86/mm/
+ 
+@@ -641,13 +640,6 @@ F:	tools/libs/store/
+ F:	tools/xenstored/
+ F:	tools/xs-clients/
+ 
+-XENTRACE
+-M:	George Dunlap <george.dunlap@citrix.com>
+-S:	Supported
+-F:	tools/xentrace/
+-F:	xen/common/trace.c
+-F:	xen/include/xen/trace.h
+-
+ XEN MISRA ANALYSIS TOOLS
+ M:	Luca Fancellu <luca.fancellu@arm.com>
+ S:	Supported
+@@ -670,7 +662,6 @@ K:	\b(xsm|XSM)\b
+ 
+ THE REST
+ M:	Andrew Cooper <andrew.cooper3@citrix.com>
+-M:	George Dunlap <george.dunlap@citrix.com>
+ M:	Jan Beulich <jbeulich@suse.com>
+ M:	Julien Grall <julien@xen.org>
+ M:	Stefano Stabellini <sstabellini@kernel.org>
+-- 
+2.25.1
 
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
 
