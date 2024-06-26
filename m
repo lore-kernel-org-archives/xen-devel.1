@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E6ABC27C4F
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 13:54:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.748997.1156954 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7178C3064D
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 13:58:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.749008.1156969 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMT6F-0008Cb-3O; Wed, 26 Jun 2024 13:54:15 +0000
+	id 1sMT9x-0000dM-Od; Wed, 26 Jun 2024 13:58:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 748997.1156954; Wed, 26 Jun 2024 13:54:15 +0000
+Received: by outflank-mailman (output) from mailman id 749008.1156969; Wed, 26 Jun 2024 13:58:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMT6E-0008CU-W8; Wed, 26 Jun 2024 13:54:14 +0000
-Received: by outflank-mailman (input) for mailman id 748997;
- Wed, 26 Jun 2024 13:54:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sMT9x-0000cc-LM; Wed, 26 Jun 2024 13:58:05 +0000
+Received: by outflank-mailman (input) for mailman id 749008;
+ Wed, 26 Jun 2024 13:58:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=m54e=N4=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1sMT6D-0008CO-Qo
- for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 13:54:13 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 91acfa60-33c3-11ef-90a3-e314d9c70b13;
- Wed, 26 Jun 2024 15:54:13 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a72604c8c5bso394524666b.2
- for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 06:54:13 -0700 (PDT)
-Received: from localhost ([160.101.139.1]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7261c5bc2asm231591566b.186.2024.06.26.06.54.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Jun 2024 06:54:11 -0700 (PDT)
+ <SRS0=e1Ku=N4=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
+ id 1sMT9w-0000af-B1
+ for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 13:58:04 +0000
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [2607:f8b0:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1a2cb9e6-33c4-11ef-b4bb-af5377834399;
+ Wed, 26 Jun 2024 15:58:02 +0200 (CEST)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-700cc97b220so859853a34.0
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 06:58:02 -0700 (PDT)
+Received: from georged-x-u.xenrt.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-79bce9318f6sm499371185a.101.2024.06.26.06.57.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Jun 2024 06:58:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,135 +47,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91acfa60-33c3-11ef-90a3-e314d9c70b13
+X-Inumbo-ID: 1a2cb9e6-33c4-11ef-b4bb-af5377834399
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1719410052; x=1720014852; darn=lists.xenproject.org;
-        h=in-reply-to:references:cc:to:from:subject:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1719410281; x=1720015081; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sFtLwp8M26ePMhbl9+A2uXgdQgcBjsL8/TaCHyqwhpc=;
-        b=O76vV0Y0o7Vl0lHiRn9uGJkJ3UXbPer3ew8pdjYmvXcGsqpg6ggLWAw76KSpN1he5R
-         aCErgMh2dF0wo8/FC4j03L4i+8gDHeI3X6pRONQHMPHIkBWFVWoW66JY/vUvGdeMTykK
-         PDcP5gbjrQXClC8c3njAIGEf2+em9lVTdTous=
+        bh=mXSq9cIt+cDOKNPJ1wEig1h0MbpC9b/C/ll62WYu3WA=;
+        b=YCpEDFcFJ7d2G5KY/dtFwIhg8TPxfs3+LvPqcYHhNqtVT7zOir9QjqYWYDZTc+QAHu
+         ArMYRa9kO++X8HFRHrOhMKIjWS4hsmZYoccqW9bv9fiJQQWYm8qSfW0WlHisiQRHN+Cq
+         epTnWAWXa0XIb1ZVRep/P52AvPfwAczCzmPAA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719410052; x=1720014852;
-        h=in-reply-to:references:cc:to:from:subject:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=sFtLwp8M26ePMhbl9+A2uXgdQgcBjsL8/TaCHyqwhpc=;
-        b=Sr1Od3/TmGlAWRs5mnv0yzQtyGvx+LKxmTGRCueoM7x8NIUB2jgx9iF/Qrw5nToCDN
-         9xvRqStHIa9zBMrEWKn048FAeeh1C3RXg58IU7VDaoXRAJivpCtK1OhczPTCbBfvHNt2
-         6LUqrqDnQm9ViHSs98yt6oNAqFAHqxf8jUB14Bwk0gH6ehn71KxSe4aZBF9FRiDrj3nv
-         FPTEjfYan/AhS7GjxZes0odW+vrbncLqJlXF3wybCFgKjnNiM8wqqYyCEfxxzVytejhS
-         deJk1T3lqecxg6xSDUBrGEqWNFyhBY8aHxjAWM0beG5+SZFsYtsR6YxMsL6lBv7wGAz8
-         NWpg==
-X-Forwarded-Encrypted: i=1; AJvYcCUolHO6HeyHCZZ374YEfbsthkWe3hBZ28ibr973v5mjNrxziWrEd0aSO4q68KiWOpvrXzivu0jJR8lbcKosaQV2c6456emYcpEhuqlr9x0=
-X-Gm-Message-State: AOJu0YzGxJZz/1DXyNResc8orbs8Jcs4Su4ZmI6gHKWuu13vJV4X3HzT
-	VzvhlVEBzktP0lHZZP+T67fePPQJw3QgWmub0LmZHynS9BU1Rfi3Z77b2H6Bbek=
-X-Google-Smtp-Source: AGHT+IF8cUiv3tjJ6utpl38WSBWja90vLzoHtxrvWKI4aGmBgkqr2e4E5Oe/tQcOHvqfkUYnOJdjjg==
-X-Received: by 2002:a17:906:1995:b0:a6e:fa0a:4899 with SMTP id a640c23a62f3a-a7245b45affmr658484366b.16.1719410052274;
-        Wed, 26 Jun 2024 06:54:12 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 26 Jun 2024 14:54:11 +0100
-Message-Id: <D29ZZSXN0QPV.2627WUC2J3NUK@cloud.com>
-Subject: Re: [PATCH v2 (resend) 04/27] acpi: vmap pages in
- acpi_os_alloc_memory
-From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
-To: "Elias El Yandouzi" <eliasely@amazon.com>,
- <xen-devel@lists.xenproject.org>
-Cc: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Hongyan
- Xia" <hongyxia@amazon.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>,
- "George Dunlap" <george.dunlap@citrix.com>, "Jan Beulich"
- <jbeulich@suse.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Wei
- Liu" <wl@xen.org>, "Julien Grall" <jgrall@amazon.com>
-X-Mailer: aerc 0.17.0
-References: <20240116192611.41112-1-eliasely@amazon.com>
- <20240116192611.41112-5-eliasely@amazon.com>
-In-Reply-To: <20240116192611.41112-5-eliasely@amazon.com>
+        d=1e100.net; s=20230601; t=1719410281; x=1720015081;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mXSq9cIt+cDOKNPJ1wEig1h0MbpC9b/C/ll62WYu3WA=;
+        b=GWZ40zcs3ns+/vKHS4yuVCs5nPmJRtQbtjIzs/6FtTNk4NPmvqgoIceB+f33M+fTpB
+         X6bgGMPQiF/7DDmmzSJlztH/hvaYn3xegVJeZZq1/EScS2bh8T8F/5AqCZT0DCj59I5U
+         rxssGs+vYYhq/cirfskf5lWA1H9dHgvpa6hIMIPdAZ4YKOlzXvVJQTKMIfGpgRUVZY+Z
+         PTfEj1jtVo1fOKvb1d+jNIgG7NL1BgW2wRG7WWzMJ2G4jc4J9BiZ6Oa0tSQ1Z3jcEcbp
+         jqS+44NFYpqhsz79ecMH3xU16yCabi0tJuaZkvJTftAU50gWFdYvhGQEthx0K7OrfAlv
+         LGUQ==
+X-Gm-Message-State: AOJu0Yy+uafvBOeMq5M+fIP1CPNs053Pvs12+iIFgxj6v4h0uf8xDR2T
+	0/PT9djhK8oJpgxNUQ/N/3IdaOvITBhEGqPwd+v0rFRuhxKOVPQ3YYjJzdUw++r2EXObq7ZixYl
+	Ef24=
+X-Google-Smtp-Source: AGHT+IFZ+U741Xe22L3IWdU6A/JpCNgMUNRvCO/9WayrRbFltM4UDYHFtnKiLh3aCsSZgpCCJu66BA==
+X-Received: by 2002:a05:6830:e8b:b0:6f9:7145:ed49 with SMTP id 46e09a7af769-700b117f908mr12160357a34.7.1719410280859;
+        Wed, 26 Jun 2024 06:58:00 -0700 (PDT)
+From: George Dunlap <george.dunlap@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@cloud.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Roger Pau Monne <roger.pau@cloud.com>
+Subject: [PATCH WIP 01/14] x86/cpuid-policy: Add AMD SVM CPUID leaf to featureset
+Date: Wed, 26 Jun 2024 14:38:40 +0100
+Message-Id: <20240626133853.4150731-2-george.dunlap@cloud.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240626133853.4150731-1-george.dunlap@cloud.com>
+References: <20240626133853.4150731-1-george.dunlap@cloud.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-I'm late to the party but there's something bothering me a little.
+NOTE: This patch is be partially superseded by Andrew Cooper's "x86:
+AMD CPUID handling improvements" series.
 
-On Tue Jan 16, 2024 at 7:25 PM GMT, Elias El Yandouzi wrote:
-> diff --git a/xen/common/vmap.c b/xen/common/vmap.c
-> index 171271fae3..966a7e763f 100644
-> --- a/xen/common/vmap.c
-> +++ b/xen/common/vmap.c
-> @@ -245,6 +245,11 @@ void *vmap(const mfn_t *mfn, unsigned int nr)
->      return __vmap(mfn, 1, nr, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
->  }
-> =20
-> +void *vmap_contig(mfn_t mfn, unsigned int nr)
-> +{
-> +    return __vmap(&mfn, nr, 1, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
-> +}
-> +
->  unsigned int vmap_size(const void *va)
->  {
->      unsigned int pages =3D vm_size(va, VMAP_DEFAULT);
+Currently, the CPUID leaf for SVM features (extd 0xa.edx) is manually
+twiddled:
 
-How is vmap_contig() different from regular vmap()?
+ - hvm_max_policy takes host_policy and clamps it to supported
+   features (with some features unilaterally enabled because they're
+   always emulated
 
-vmap() calls map_pages_to_xen() `nr` times, while vmap_contig() calls it ju=
-st
-once. I'd expect both cases to work fine as they are. What am I missing? Wh=
-at
-would make...
+ - hvm_default_policy is copied from there
 
-> diff --git a/xen/drivers/acpi/osl.c b/xen/drivers/acpi/osl.c
-> index 389505f786..ab80d6b2a9 100644
-> --- a/xen/drivers/acpi/osl.c
-> +++ b/xen/drivers/acpi/osl.c
-> @@ -221,7 +221,11 @@ void *__init acpi_os_alloc_memory(size_t sz)
->  	void *ptr;
-> =20
->  	if (system_state =3D=3D SYS_STATE_early_boot)
-> -		return mfn_to_virt(mfn_x(alloc_boot_pages(PFN_UP(sz), 1)));
-> +	{
-> +		mfn_t mfn =3D alloc_boot_pages(PFN_UP(sz), 1);
-> +
-> +		return vmap_contig(mfn, PFN_UP(sz));
-... this statement not operate identically with regular vmap()? Or
-probably more interestingly, what would preclude existing calls to vmap() n=
-ot
-operate under vmap_contig() instead?
+ - When recalculate_policy() is called for a guest, if SVM is clear,
+   then the entire leaf is zeroed out.
 
-I'm guessing it has to do with ARM having granules, but the looping logic s=
-eems
-wonky in the non 4K case anyway seeing how the va jumps are based on PAGE_S=
-IZE.
+Move to a mode where the extended features are off by default, and
+enabled when nested_virt is enabled.
 
-> +	}
-> =20
->  	ptr =3D xmalloc_bytes(sz);
->  	ASSERT(!ptr || is_xmalloc_memory(ptr));
-> @@ -246,5 +250,11 @@ void __init acpi_os_free_memory(void *ptr)
->  	if (is_xmalloc_memory(ptr))
->  		xfree(ptr);
->  	else if (ptr && system_state =3D=3D SYS_STATE_early_boot)
-> -		init_boot_pages(__pa(ptr), __pa(ptr) + PAGE_SIZE);
-> +	{
-> +		paddr_t addr =3D mfn_to_maddr(vmap_to_mfn(ptr));
-> +		unsigned int nr =3D vmap_size(ptr);
-> +
-> +		vunmap(ptr);
-> +		init_boot_pages(addr, addr + nr * PAGE_SIZE);
-> +	}
->  }
-> diff --git a/xen/include/xen/vmap.h b/xen/include/xen/vmap.h
-> index 24c85de490..0c16baa85f 100644
-> --- a/xen/include/xen/vmap.h
-> +++ b/xen/include/xen/vmap.h
-> @@ -15,6 +15,7 @@ void vm_init_type(enum vmap_region type, void *start, v=
-oid *end);
->  void *__vmap(const mfn_t *mfn, unsigned int granularity, unsigned int nr=
-,
->               unsigned int align, unsigned int flags, enum vmap_region ty=
-pe);
->  void *vmap(const mfn_t *mfn, unsigned int nr);
-> +void *vmap_contig(mfn_t mfn, unsigned int nr);
->  void vunmap(const void *va);
-> =20
->  void *vmalloc(size_t size);
+In cpufeatureset.h, define a new featureset word for the AMD SVM
+features, and declare all of the bits defined in
+x86/include/asm/hvm/svm/svm.h.  Mark the ones we currently pass
+through to the "max policy" as HAP-only and optional.
+
+In cpu-policy.h, define FEATURESET_ead, and convert the un-named space
+in struct_cpu_policy into the appropriate union.  FIXME: Do this in a
+prerequisite patch, and change all references to p->extd.raw[0xa].
+
+Update x86_cpu_X_to_Y and Y_to_X to copy this into and out of the
+appropriate leaf.
+
+Populate this during boot in generic_identify().
+
+Add the new featureset definition into libxl_cpuid.c.
+
+Update the code in calculate_hvm_max_policy() to do nothing with the
+"normal" CPUID bits, and use the feature bit to unconditionally enable
+VMCBCLEAN. FIXME Move this to a follow-up patch.
+
+In recalculate_cpuid_policy(), enable max_fs when nested_hvm() is
+true.
+
+Signed-off-by: George Dunlap <george.dunlap@cloud.com>
+---
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monne <roger.pau@cloud.com>
+---
+ tools/libs/light/libxl_cpuid.c              |  1 +
+ tools/misc/xen-cpuid.c                      |  1 +
+ xen/arch/x86/cpu-policy.c                   | 23 ++++++++++-----------
+ xen/arch/x86/cpu/common.c                   |  2 ++
+ xen/include/public/arch-x86/cpufeatureset.h | 16 ++++++++++++++
+ xen/include/xen/lib/x86/cpu-policy.h        | 10 ++++++++-
+ xen/lib/x86/cpuid.c                         |  4 +++-
+ 7 files changed, 43 insertions(+), 14 deletions(-)
+
+diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
+index 063fe86eb7..e8000615ab 100644
+--- a/tools/libs/light/libxl_cpuid.c
++++ b/tools/libs/light/libxl_cpuid.c
+@@ -342,6 +342,7 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *policy, const char* str)
+         CPUID_ENTRY(0x00000007,  1, CPUID_REG_EDX),
+         MSR_ENTRY(0x10a, CPUID_REG_EAX),
+         MSR_ENTRY(0x10a, CPUID_REG_EDX),
++        CPUID_ENTRY(0x8000000a, NA, CPUID_REG_EDX),
+ #undef MSR_ENTRY
+ #undef CPUID_ENTRY
+     };
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index 4c4593528d..460acec46c 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -37,6 +37,7 @@ static const struct {
+     { "CPUID 0x00000007:1.edx",     "7d1" },
+     { "MSR_ARCH_CAPS.lo",         "m10Al" },
+     { "MSR_ARCH_CAPS.hi",         "m10Ah" },
++    { "CPUID 0x8000000a.edx",       "ead" },
+ };
+ 
+ #define COL_ALIGN "24"
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index 304dc20cfa..d3ba177dac 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -751,22 +751,16 @@ static void __init calculate_hvm_max_policy(void)
+     if ( !cpu_has_vmx )
+         __clear_bit(X86_FEATURE_PKS, fs);
+ 
+-    /* 
++    /*
+      * Make adjustments to possible (nested) virtualization features exposed
+      * to the guest
+      */
+     if ( p->extd.svm )
+     {
+-        /* Clamp to implemented features which require hardware support. */
+-        p->extd.raw[0xa].d &= ((1u << SVM_FEATURE_NPT) |
+-                               (1u << SVM_FEATURE_LBRV) |
+-                               (1u << SVM_FEATURE_NRIPS) |
+-                               (1u << SVM_FEATURE_PAUSEFILTER) |
+-                               (1u << SVM_FEATURE_DECODEASSISTS));
+         /* Enable features which are always emulated. */
+-        p->extd.raw[0xa].d |= (1u << SVM_FEATURE_VMCBCLEAN);
++        __set_bit(X86_FEATURE_VMCBCLEAN, fs);
+     }
+-    
++
+     guest_common_max_feature_adjustments(fs);
+     guest_common_feature_adjustments(fs);
+ 
+@@ -915,6 +909,14 @@ void recalculate_cpuid_policy(struct domain *d)
+             __clear_bit(X86_FEATURE_VMX, max_fs);
+             __clear_bit(X86_FEATURE_SVM, max_fs);
+         }
++        else
++        {
++            /*
++             * Enable SVM features.  This will be empty on VMX
++             * hosts.
++             */
++            fs[FEATURESET_ead] = max_fs[FEATURESET_ead];
++        }
+     }
+ 
+     /*
+@@ -981,9 +983,6 @@ void recalculate_cpuid_policy(struct domain *d)
+          ((vpmu_mode & XENPMU_MODE_ALL) && !is_hardware_domain(d)) )
+         p->basic.raw[0xa] = EMPTY_LEAF;
+ 
+-    if ( !p->extd.svm )
+-        p->extd.raw[0xa] = EMPTY_LEAF;
+-
+     if ( !p->extd.page1gb )
+         p->extd.raw[0x19] = EMPTY_LEAF;
+ }
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index ff4cd22897..da5ad10516 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -478,6 +478,8 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ 		c->x86_capability[FEATURESET_e7d] = cpuid_edx(0x80000007);
+ 	if (c->extended_cpuid_level >= 0x80000008)
+ 		c->x86_capability[FEATURESET_e8b] = cpuid_ebx(0x80000008);
++	if (c->extended_cpuid_level >= 0x8000000a)
++		c->x86_capability[FEATURESET_ead] = cpuid_edx(0x8000000a);
+ 	if (c->extended_cpuid_level >= 0x80000021)
+ 		c->x86_capability[FEATURESET_e21a] = cpuid_eax(0x80000021);
+ 
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index d9eba5e9a7..88d5d0054b 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -365,6 +365,22 @@ XEN_CPUFEATURE(RFDS_CLEAR,         16*32+28) /*!A| Register File(s) cleared by V
+ 
+ /* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.edx, word 17 */
+ 
++/* AMD-defined CPU features, CPUID level 0x8000000a.edx, word 18 */
++XEN_CPUFEATURE(NPT,                 18*32+ 0) /*h  Nested page table support */
++XEN_CPUFEATURE(LBRV,                18*32+ 1) /*h  LBR virtualization support */
++XEN_CPUFEATURE(SVML,                18*32+ 2) /*   SVM locking MSR support */
++XEN_CPUFEATURE(NRIPS,               18*32+ 3) /*h  Next RIP save on VMEXIT support */
++XEN_CPUFEATURE(TSCRATEMSR,          18*32+ 4) /*   TSC ratio MSR support */
++XEN_CPUFEATURE(VMCBCLEAN,           18*32+ 5) /*h  VMCB clean bits support */
++XEN_CPUFEATURE(FLUSHBYASID,         18*32+ 6) /*   TLB flush by ASID support */
++XEN_CPUFEATURE(DECODEASSISTS,       18*32+ 7) /*h  Decode assists support */
++XEN_CPUFEATURE(PAUSEFILTER,         18*32+10) /*h  Pause intercept filter support */
++XEN_CPUFEATURE(PAUSETHRESH,         18*32+12) /*   Pause intercept filter threshold */
++XEN_CPUFEATURE(VLOADSAVE,           18*32+15) /*   virtual vmload/vmsave */
++XEN_CPUFEATURE(VGIF,                18*32+16) /*   Virtual GIF */
++XEN_CPUFEATURE(SSS,                 18*32+19) /*   NPT Supervisor Shadow Stacks */
++XEN_CPUFEATURE(SPEC_CTRL,           18*32+20) /*   MSR_SPEC_CTRL virtualisation */
++
+ #endif /* XEN_CPUFEATURE */
+ 
+ /* Clean up from a default include.  Close the enum (for C). */
+diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
+index d26012c6da..445325a5b5 100644
+--- a/xen/include/xen/lib/x86/cpu-policy.h
++++ b/xen/include/xen/lib/x86/cpu-policy.h
+@@ -22,6 +22,7 @@
+ #define FEATURESET_7d1       15 /* 0x00000007:1.edx    */
+ #define FEATURESET_m10Al     16 /* 0x0000010a.eax      */
+ #define FEATURESET_m10Ah     17 /* 0x0000010a.edx      */
++#define FEATURESET_ead       18 /* 0x8000000a.edx      */
+ 
+ struct cpuid_leaf
+ {
+@@ -296,7 +297,14 @@ struct cpu_policy
+             uint32_t /* d */:32;
+ 
+             uint64_t :64, :64; /* Leaf 0x80000009. */
+-            uint64_t :64, :64; /* Leaf 0x8000000a - SVM rev and features. */
++
++            /* Leaf 0x8000000a - SVM rev and features. */
++            uint64_t /* a, b */:64, /* c */:32;
++            union {
++                uint32_t ead;
++                struct { DECL_BITFIELD(ead); };
++            };
++
+             uint64_t :64, :64; /* Leaf 0x8000000b. */
+             uint64_t :64, :64; /* Leaf 0x8000000c. */
+             uint64_t :64, :64; /* Leaf 0x8000000d. */
+diff --git a/xen/lib/x86/cpuid.c b/xen/lib/x86/cpuid.c
+index eb7698dc73..d68f442d4e 100644
+--- a/xen/lib/x86/cpuid.c
++++ b/xen/lib/x86/cpuid.c
+@@ -81,7 +81,8 @@ void x86_cpu_policy_to_featureset(
+     fs[FEATURESET_7d1]       = p->feat._7d1;
+     fs[FEATURESET_m10Al]     = p->arch_caps.lo;
+     fs[FEATURESET_m10Ah]     = p->arch_caps.hi;
+-}
++    fs[FEATURESET_ead]       = p->extd.ead;
++ }
+ 
+ void x86_cpu_featureset_to_policy(
+     const uint32_t fs[FEATURESET_NR_ENTRIES], struct cpu_policy *p)
+@@ -104,6 +105,7 @@ void x86_cpu_featureset_to_policy(
+     p->feat._7d1             = fs[FEATURESET_7d1];
+     p->arch_caps.lo          = fs[FEATURESET_m10Al];
+     p->arch_caps.hi          = fs[FEATURESET_m10Ah];
++    p->extd.ead              = fs[FEATURESET_ead];
+ }
+ 
+ void x86_cpu_policy_recalc_synth(struct cpu_policy *p)
+-- 
+2.25.1
+
 
