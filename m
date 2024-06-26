@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94AA5C3065B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65170C30659
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 13:29:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.748857.1156803 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.748855.1156790 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMShv-0003PP-L7; Wed, 26 Jun 2024 13:29:07 +0000
+	id 1sMShu-0003GY-Tc; Wed, 26 Jun 2024 13:29:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 748857.1156803; Wed, 26 Jun 2024 13:29:07 +0000
+Received: by outflank-mailman (output) from mailman id 748855.1156790; Wed, 26 Jun 2024 13:29:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMShv-0003Oc-CB; Wed, 26 Jun 2024 13:29:07 +0000
-Received: by outflank-mailman (input) for mailman id 748857;
+	id 1sMShu-0003GQ-Qn; Wed, 26 Jun 2024 13:29:06 +0000
+Received: by outflank-mailman (input) for mailman id 748855;
  Wed, 26 Jun 2024 13:29:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+tE4=N4=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1sMSht-00030P-Tl
+ id 1sMSht-00030Q-Dy
  for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 13:29:05 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0e9a167e-33c0-11ef-b4bb-af5377834399;
- Wed, 26 Jun 2024 15:29:04 +0200 (CEST)
-Received: from nico.bugseng.com (unknown [46.228.253.214])
- by support.bugseng.com (Postfix) with ESMTPSA id C54A74EE0757;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0de584a5-33c0-11ef-90a3-e314d9c70b13;
  Wed, 26 Jun 2024 15:29:03 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [46.228.253.214])
+ by support.bugseng.com (Postfix) with ESMTPSA id 485DA4EE0756;
+ Wed, 26 Jun 2024 15:29:02 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e9a167e-33c0-11ef-b4bb-af5377834399
+X-Inumbo-ID: 0de584a5-33c0-11ef-90a3-e314d9c70b13
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -54,9 +54,9 @@ Cc: sstabellini@kernel.org,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>
-Subject: [XEN PATCH v2 for-4.20 3/7] xen/guest_access: address violations of MISRA rule 20.7
-Date: Wed, 26 Jun 2024 15:28:49 +0200
-Message-Id: <cfc2067d0389092c0f2d0e688e474b1f0d5013c7.1719407840.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v2 for-4.20 1/7] automation/eclair: address violations of MISRA C Rule 20.7
+Date: Wed, 26 Jun 2024 15:28:47 +0200
+Message-Id: <679b1948690fecf06c9e81b398f7bf9bf5a292d2.1719407840.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1719407840.git.nicola.vetrini@bugseng.com>
 References: <cover.1719407840.git.nicola.vetrini@bugseng.com>
@@ -64,35 +64,63 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 MISRA C Rule 20.7 states: "Expressions resulting from the expansion
-of macro parameters shall be enclosed in parentheses". Therefore, some
-macro definitions should gain additional parentheses to ensure that all
-current and future users will be safe with respect to expansions that
-can possibly alter the semantics of the passed-in macro parameter.
+of macro parameters shall be enclosed in parentheses".
+
+The helper macro bitmap_switch has parameters that cannot be parenthesized
+in order to comply with the rule, as that would break its functionality.
+Moreover, the risk of misuse due developer confusion is deemed not
+substantial enough to warrant a more involved refactor, thus the macro
+is deviated for this rule.
 
 No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/include/xen/guest_access.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Changes in v2:
+- Switched to a comment-based deviation to allow other tools to
+pick this deviation up automatically.
+---
+ docs/misra/safe.json     | 8 ++++++++
+ xen/include/xen/bitmap.h | 3 +++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/xen/include/xen/guest_access.h b/xen/include/xen/guest_access.h
-index a2146749e396..2e0971c4872c 100644
---- a/xen/include/xen/guest_access.h
-+++ b/xen/include/xen/guest_access.h
-@@ -51,9 +51,9 @@
-     ((XEN_GUEST_HANDLE(type)) { &(hnd).p->fld })
+diff --git a/docs/misra/safe.json b/docs/misra/safe.json
+index c213e0a0be3b..3f18ef401c7d 100644
+--- a/docs/misra/safe.json
++++ b/docs/misra/safe.json
+@@ -60,6 +60,14 @@
+         },
+         {
+             "id": "SAF-7-safe",
++            "analyser": {
++                "eclair": "MC3R1.R20.7"
++            },
++            "name": "MC3R1.R20.7: deliberately non-parenthesized macro argument",
++            "text": "A macro parameter expands to an expression that is non-parenthesized, as doing so would break the functionality."
++        },
++        {
++            "id": "SAF-8-safe",
+             "analyser": {},
+             "name": "Sentinel",
+             "text": "Next ID to be used"
+diff --git a/xen/include/xen/bitmap.h b/xen/include/xen/bitmap.h
+index b9f980e91930..6ee39aa35ac6 100644
+--- a/xen/include/xen/bitmap.h
++++ b/xen/include/xen/bitmap.h
+@@ -103,10 +103,13 @@ extern int bitmap_allocate_region(unsigned long *bitmap, int pos, int order);
+ #define bitmap_switch(nbits, zero, small, large)			  \
+ 	unsigned int n__ = (nbits);					  \
+ 	if (__builtin_constant_p(nbits) && !n__) {			  \
++		/* SAF-7-safe Rule 20.7 non-parenthesized macro argument */ \
+ 		zero;							  \
+ 	} else if (__builtin_constant_p(nbits) && n__ <= BITS_PER_LONG) { \
++		/* SAF-7-safe Rule 20.7 non-parenthesized macro argument */ \
+ 		small;							  \
+ 	} else {							  \
++		/* SAF-7-safe Rule 20.7 non-parenthesized macro argument */ \
+ 		large;							  \
+ 	}
  
- #define guest_handle_from_ptr(ptr, type)        \
--    ((XEN_GUEST_HANDLE_PARAM(type)) { (type *)ptr })
-+    ((XEN_GUEST_HANDLE_PARAM(type)) { (type *)(ptr) })
- #define const_guest_handle_from_ptr(ptr, type)  \
--    ((XEN_GUEST_HANDLE_PARAM(const_##type)) { (const type *)ptr })
-+    ((XEN_GUEST_HANDLE_PARAM(const_##type)) { (const type *)(ptr) })
- 
- /*
-  * Copy an array of objects to guest context via a guest handle,
 -- 
 2.34.1
 
