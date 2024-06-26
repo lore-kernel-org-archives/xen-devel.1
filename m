@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19141C27C4F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94AB6C3065B
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 09:28:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.748589.1156387 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.748591.1156398 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMOwt-0005sV-JY; Wed, 26 Jun 2024 09:28:19 +0000
+	id 1sMOwu-0006Eq-SD; Wed, 26 Jun 2024 09:28:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 748589.1156387; Wed, 26 Jun 2024 09:28:19 +0000
+Received: by outflank-mailman (output) from mailman id 748591.1156398; Wed, 26 Jun 2024 09:28:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMOwt-0005qp-7o; Wed, 26 Jun 2024 09:28:19 +0000
-Received: by outflank-mailman (input) for mailman id 748589;
- Wed, 26 Jun 2024 09:28:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sMOwu-0006Cz-Ie; Wed, 26 Jun 2024 09:28:20 +0000
+Received: by outflank-mailman (input) for mailman id 748591;
+ Wed, 26 Jun 2024 09:28:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=P08s=N4=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sMOwr-0004l5-HO
- for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 09:28:17 +0000
+ id 1sMOwt-0004l0-EE
+ for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 09:28:19 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6ab1bf4f-339e-11ef-b4bb-af5377834399;
- Wed, 26 Jun 2024 11:28:16 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6c632e85-339e-11ef-90a3-e314d9c70b13;
+ Wed, 26 Jun 2024 11:28:19 +0200 (CEST)
 Received: from truciolo.bugseng.com (unknown [78.209.199.41])
- by support.bugseng.com (Postfix) with ESMTPSA id 6178F4EE0758;
- Wed, 26 Jun 2024 11:28:15 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 264DB4EE0754;
+ Wed, 26 Jun 2024 11:28:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ab1bf4f-339e-11ef-b4bb-af5377834399
+X-Inumbo-ID: 6c632e85-339e-11ef-90a3-e314d9c70b13
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -49,57 +49,43 @@ Cc: consulting@bugseng.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v3 05/12] x86/traps: address violations of MISRA C Rule 16.3
-Date: Wed, 26 Jun 2024 11:27:58 +0200
-Message-Id: <e7aea6bacb9c914a06a929dfe3606f7cc360588f.1719383180.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH v3 09/12] x86/mm: add defensive return
+Date: Wed, 26 Jun 2024 11:28:02 +0200
+Message-Id: <acb26329a980809dda100825f52b05d0cc295315.1719383180.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1719383180.git.federico.serafini@bugseng.com>
 References: <cover.1719383180.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add break or pseudo keyword fallthrough to address violations of
-MISRA C Rule 16.3: "An unconditional `break' statement shall terminate
-every switch-clause".
-
-No functional change.
+Add defensive return statement at the end of an unreachable
+default case. Other than improve safety, this meets the requirements
+to deviate a violation of MISRA C Rule 16.3: "An unconditional `break'
+statement shall terminate every switch-clause".
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
 Changes in v3:
-- use break instead of fallthrough.
----
- xen/arch/x86/traps.c | 3 +++
- 1 file changed, 3 insertions(+)
+- do not return 0 (success).
 
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index 9906e874d5..d62598a4c2 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -1186,6 +1186,7 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        break;
-     }
- }
- 
-@@ -1748,6 +1749,7 @@ static void io_check_error(const struct cpu_user_regs *regs)
-     {
-     case 'd': /* 'dom0' */
-         nmi_hwdom_report(_XEN_NMIREASON_io_error);
-+        break;
-     case 'i': /* 'ignore' */
-         break;
-     default:  /* 'fatal' */
-@@ -1768,6 +1770,7 @@ static void unknown_nmi_error(const struct cpu_user_regs *regs,
-     {
-     case 'd': /* 'dom0' */
-         nmi_hwdom_report(_XEN_NMIREASON_unknown);
-+        break;
-     case 'i': /* 'ignore' */
-         break;
-     default:  /* 'fatal' */
+Al least this version returns an error code but I am not sure about
+which one to use.
+---
+ xen/arch/x86/mm.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 648d6dd475..a1e28b3360 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -916,6 +916,7 @@ get_page_from_l1e(
+                 return 0;
+             default:
+                 ASSERT_UNREACHABLE();
++                return -EPERM;
+             }
+         }
+         else if ( l1f & _PAGE_RW )
 -- 
 2.34.1
 
