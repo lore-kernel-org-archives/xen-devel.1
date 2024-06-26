@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEC26C30659
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 13:58:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.749012.1157005 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD1D1C3065B
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jun 2024 13:58:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.749013.1157022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMTA0-0001N2-C4; Wed, 26 Jun 2024 13:58:08 +0000
+	id 1sMTA1-0001v7-MA; Wed, 26 Jun 2024 13:58:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 749012.1157005; Wed, 26 Jun 2024 13:58:08 +0000
+Received: by outflank-mailman (output) from mailman id 749013.1157022; Wed, 26 Jun 2024 13:58:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sMT9z-0001L2-Um; Wed, 26 Jun 2024 13:58:07 +0000
-Received: by outflank-mailman (input) for mailman id 749012;
- Wed, 26 Jun 2024 13:58:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sMTA1-0001si-Cj; Wed, 26 Jun 2024 13:58:09 +0000
+Received: by outflank-mailman (input) for mailman id 749013;
+ Wed, 26 Jun 2024 13:58:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=e1Ku=N4=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1sMT9y-0000af-JH
- for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 13:58:06 +0000
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [2607:f8b0:4864:20::72b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1bc125b2-33c4-11ef-b4bb-af5377834399;
- Wed, 26 Jun 2024 15:58:05 +0200 (CEST)
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-79c06a06a8eso99842385a.0
- for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 06:58:05 -0700 (PDT)
+ id 1sMTA0-0000aq-Gt
+ for xen-devel@lists.xenproject.org; Wed, 26 Jun 2024 13:58:08 +0000
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [2607:f8b0:4864:20::72f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1d600963-33c4-11ef-90a3-e314d9c70b13;
+ Wed, 26 Jun 2024 15:58:07 +0200 (CEST)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-795a4fde8bfso396636985a.2
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Jun 2024 06:58:07 -0700 (PDT)
 Received: from georged-x-u.xenrt.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-79bce9318f6sm499371185a.101.2024.06.26.06.58.03
+ af79cd13be357-79bce9318f6sm499371185a.101.2024.06.26.06.58.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 06:58:03 -0700 (PDT)
+ Wed, 26 Jun 2024 06:58:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,130 +47,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1bc125b2-33c4-11ef-b4bb-af5377834399
+X-Inumbo-ID: 1d600963-33c4-11ef-90a3-e314d9c70b13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1719410284; x=1720015084; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1719410286; x=1720015086; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4CicAy88BoQhTqLPRoVgCuGO0iyrk5R5H3mkM3cjN/E=;
-        b=J6ZCXsgv6aZiOJCAsaTTg8qJPXOAnqYSAzGzNjwu4pN8+c/V4tTM6Gx06TrimhfXZz
-         Z+2IMsj+VCpgXjUzu9ik6hDB3lHAnRSL2CtgzInB0i9+CJK4N5kANfbPDdyqPQbgf/hU
-         5M7HRJJq+zAIi9YegdDEnlRC+LGKFVc8i+O40=
+        bh=RQPpBZ6HUrKlZc92OfyG7VzBOtY27D4cEzdSY9vU/Hg=;
+        b=h2vjbbUd/ocY5uNF/tmZ6w9P50ZQ6dAV1H9J6EM4hxaR4FGFgk6qXhPDtc6MRFPgPN
+         GGAqx9kImj2WbhL6/YeXXpKkbtyRHUisJYLAEbP7dznu7f3bqkQZwK5POmb6xnKxr0bU
+         0JJcwHA2J4kOw0RLi4tKXzLeOMLVpyhGQoKXg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719410284; x=1720015084;
+        d=1e100.net; s=20230601; t=1719410286; x=1720015086;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4CicAy88BoQhTqLPRoVgCuGO0iyrk5R5H3mkM3cjN/E=;
-        b=D0t9vUZeOFo4zOhL43Fk1vUxTKLd/Z6EVe36fNBuGfvnIQhl51NDmSCqbHxZPqNewt
-         WMnZlOzlTuIy9Ckt+OKVkawRuD8TpTeINDR1V5twzolgo3shiDVqJvdSpOfU+tcPAuXn
-         tPUN5C901OYxiDBCmRm0AaOLGS4zHTz8Dz98o9k5YxSpwTyblNQi6yYiPGBG0U28ft0L
-         bd4SjLvPWffAc0mnteXlgJirIFwFXzqLStLl6sHfMGPL5uajWNDgFBsZpJHxCLmkjvYQ
-         e1qEEAffGbx36efhVpOYJAUTqv3aT28T7Pfe5RmjLGaRiPpiy+uYZ63r/2clfqtTUbmo
-         0Z8w==
-X-Gm-Message-State: AOJu0Yx/7G9iTJd5E0FGKqxov6Lo9XhjJex/YZCX9A1SYxs9Fw0UlJSK
-	nPjSd7fUn2zdf3Yjfx5J3+b0wdo0R6KhP/qYrb3brPqb5w0VQ+1jnbFqi66Q2xhX3n/1rHRefdr
-	9nFY=
-X-Google-Smtp-Source: AGHT+IFuaaGzYU5rWVD3+w/otwtbTWoRCXh7i4fUBEqB1FYOqspJGP6Lpr0Q080r7c8cpsLLXlmXCA==
-X-Received: by 2002:a05:620a:1a19:b0:797:b319:c3a2 with SMTP id af79cd13be357-79be6eae80dmr1257297985a.39.1719410283769;
-        Wed, 26 Jun 2024 06:58:03 -0700 (PDT)
+        bh=RQPpBZ6HUrKlZc92OfyG7VzBOtY27D4cEzdSY9vU/Hg=;
+        b=m5FXvgzq0xCkHat9bJziWLFcZJfr9cCM5aaTNid4ngKkFMS/EzEI9SG5SCXoG8LJeg
+         hngOLISnBxat8b1ldn7Ly/XfFBYPtsQ5mVXm6Y9Hpu84bY3EGNvRKqAEBCxERV8s0Oo4
+         CrrF1kzGirdFlevEnretDJZAiN9ZGw5Ip4auZsY54MEMVY0uY2SD00lBDd1uz1qsPuyV
+         ls0Z3NpIZohZOTaKadw/pBQ74rRhlEzRGM0i76FSrAk/QbcvYGhYzm3RtuOfLWEqQbTV
+         /ULj6XyT0YNWM5ih8qtXFRsMVXkNdCrN8vC0QLJsh7hYp82EYa/6yU9NuO2o//o5JM2e
+         a6NQ==
+X-Gm-Message-State: AOJu0Yx/XIKVzERbyrKdkuat8shuvD+nfvgVdjHa2HCigNxOr8vGcUNq
+	753E/moGIUX1hiwEhRq7yzeTawDqyHapN4QZkmAgOkGzO1MNXA+NwQeSzTm2fe8aMikoeeC8duK
+	iM1g=
+X-Google-Smtp-Source: AGHT+IHYOMfst4jjFAWDaoBPQd4epq0sodwQ8Lc9GhHBIHXeDf1jkpgCheuuVvuRECqN+bBlRsuDqg==
+X-Received: by 2002:a05:620a:414b:b0:797:de98:1420 with SMTP id af79cd13be357-79be6e9f513mr1244126985a.45.1719410285511;
+        Wed, 26 Jun 2024 06:58:05 -0700 (PDT)
 From: George Dunlap <george.dunlap@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: George Dunlap <george.dunlap@cloud.com>
-Subject: [PATCH WIP 04/14] xenalyze: Track generic event information when not in summary mode
-Date: Wed, 26 Jun 2024 14:38:43 +0100
-Message-Id: <20240626133853.4150731-5-george.dunlap@cloud.com>
+Subject: [PATCH WIP 06/14] xen/svm: Remove redundant HVM_HANDLER trace for EXCEPTION_AC
+Date: Wed, 26 Jun 2024 14:38:45 +0100
+Message-Id: <20240626133853.4150731-7-george.dunlap@cloud.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240626133853.4150731-1-george.dunlap@cloud.com>
 References: <20240626133853.4150731-1-george.dunlap@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Generally speaking, a VMEXIT/VMENTRY cycle should have at least three
-trace records: the VMEXIT trace (which contains the processor-specific
-exit code), a more generic Xen-based Xen event (an HVM_HANDLER trace
-record), and a VMEXIT trace; and any given VMEXIT exit reason should
-only have a single HVM_HANDLER trace type.  Having duplicate or
-missing HVM_HANDLER traces is generally indicative of a problem that's
-crept in in the hypervisor tracing scheme.
-
-This is property is checked in hvm_generic_postprocess(), and
-violations are flagged with a warning.  In order to do this, when an
-HVM trace record that doesn't have a specific post-processor happens,
-information about the HVM trace record is stored in
-hvm_data->inflight.generic.
-
-Unfortunately, while the check was being done in all "modes", the
-relevant information was only being copied into inflight.generic in
-summary mode.  This resulted in spurious warnings about missing
-HVM_HANDLER traces when running in dump mode.
-
-Since running in dump mode is often critical to understanding how the
-warnings came about, just collect the information always as well.
-
-That said, the data from the trace doesn't appear to be used by
-anyone; so to save some time, don't bother copying it.
+Adding an HVM_TRAP trace record is redundant for EXCEPTION_AC: it adds
+trace volume without adding any information, and xenalyze already
+knows not to expect it.  Remove it.
 
 Signed-off-by: George Dunlap <george.dunlap@cloud.com>
 ---
- tools/xentrace/xenalyze.c | 13 ++++---------
- 1 file changed, 4 insertions(+), 9 deletions(-)
+ xen/arch/x86/hvm/svm/svm.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
-index 52ee7a5f9f..46248e9a70 100644
---- a/tools/xentrace/xenalyze.c
-+++ b/tools/xentrace/xenalyze.c
-@@ -1367,7 +1367,6 @@ struct hvm_data {
-             } msr;
-             struct {
-                 unsigned int event;
--                uint32_t d[4];
-             } generic;
-             struct {
-                 unsigned eax;
-@@ -4572,8 +4571,7 @@ void hvm_npf_process(struct record_info *ri, struct hvm_data *h)
-                (unsigned long long)r->gpa, r->qualification,
-                (unsigned long long)r->mfn, r->p2mt);
- 
--    if ( opt.summary_info )
--        hvm_generic_postprocess_init(ri, h);
-+    hvm_generic_postprocess_init(ri, h);
- }
- 
- void hvm_rdtsc_process(struct record_info *ri, struct hvm_data *h)
-@@ -4621,7 +4619,6 @@ void hvm_generic_postprocess_init(struct record_info *ri, struct hvm_data *h)
-         fprintf(warn, "%s: Strange, h->postprocess set!\n",
-                 __func__);
-     h->inflight.generic.event = ri->event;
--    bcopy(h->d, h->inflight.generic.d, sizeof(unsigned int) * 4);
- }
- 
- void hvm_generic_postprocess(struct hvm_data *h)
-@@ -4899,8 +4896,7 @@ needs_vmexit:
-     default:
-         if(opt.dump_all)
-             hvm_generic_dump(ri, "]");
--        if(opt.summary_info)
--            hvm_generic_postprocess_init(ri, h);
-+        hvm_generic_postprocess_init(ri, h);
-         break;
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 988250dbc1..abe665ee43 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -2779,7 +2779,6 @@ void asmlinkage svm_vmexit_handler(void)
      }
- }
-@@ -6166,11 +6162,10 @@ void shadow_fault_generic_process(struct record_info *ri, struct hvm_data *h)
  
-     /* pf-case traces, vs others */
-     h->inflight.generic.event = ri->event;
--    bcopy(ri->d, h->inflight.generic.d, sizeof(unsigned int) * 4);
+     case VMEXIT_EXCEPTION_AC:
+-        TRACE(TRC_HVM_TRAP, X86_EXC_AC);
+         hvm_inject_hw_exception(X86_EXC_AC, vmcb->ei.exc.ec);
+         break;
  
-     if(opt.dump_all)
--        shadow_fault_generic_dump(h->inflight.generic.event,
--                                  h->inflight.generic.d,
-+        shadow_fault_generic_dump(ri->event,
-+                                  ri->d,
-                                   "]", ri->dump_header);
- 
-     h->inflight.pf_xen.pf_case = sevt.minor;
 -- 
 2.25.1
 
