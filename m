@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67EEEC27C4F
-	for <xen-devel@archiver.kernel.org>; Sun, 30 Jun 2024 12:34:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.751114.1159006 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E11BFC30653
+	for <xen-devel@archiver.kernel.org>; Sun, 30 Jun 2024 12:34:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.751115.1159016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sNtlD-0008Jn-KA; Sun, 30 Jun 2024 12:34:27 +0000
+	id 1sNtlF-000092-2A; Sun, 30 Jun 2024 12:34:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 751114.1159006; Sun, 30 Jun 2024 12:34:27 +0000
+Received: by outflank-mailman (output) from mailman id 751115.1159016; Sun, 30 Jun 2024 12:34:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sNtlD-0008JW-FA; Sun, 30 Jun 2024 12:34:27 +0000
-Received: by outflank-mailman (input) for mailman id 751114;
- Sun, 30 Jun 2024 12:34:26 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sNtlE-00008t-UG; Sun, 30 Jun 2024 12:34:28 +0000
+Received: by outflank-mailman (input) for mailman id 751115;
+ Sun, 30 Jun 2024 12:34:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aV4l=OA=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1sNtlC-0007C0-Ei
- for xen-devel@lists.xenproject.org; Sun, 30 Jun 2024 12:34:26 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20618.outbound.protection.outlook.com
- [2a01:111:f403:240a::618])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 14b0a67c-36dd-11ef-b4bb-af5377834399;
- Sun, 30 Jun 2024 14:34:24 +0200 (CEST)
-Received: from CH0PR03CA0182.namprd03.prod.outlook.com (2603:10b6:610:e4::7)
- by IA0PR12MB7601.namprd12.prod.outlook.com (2603:10b6:208:43b::21) with
- Microsoft SMTP Server (version=TLS1_2,
+ id 1sNtlD-0007C1-Dy
+ for xen-devel@lists.xenproject.org; Sun, 30 Jun 2024 12:34:27 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2060a.outbound.protection.outlook.com
+ [2a01:111:f403:2418::60a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 16217c99-36dd-11ef-90a3-e314d9c70b13;
+ Sun, 30 Jun 2024 14:34:26 +0200 (CEST)
+Received: from CH0PR07CA0020.namprd07.prod.outlook.com (2603:10b6:610:32::25)
+ by IA1PR12MB6065.namprd12.prod.outlook.com (2603:10b6:208:3ef::7)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.29; Sun, 30 Jun
- 2024 12:34:13 +0000
-Received: from CH1PEPF0000A34B.namprd04.prod.outlook.com
- (2603:10b6:610:e4:cafe::b3) by CH0PR03CA0182.outlook.office365.com
- (2603:10b6:610:e4::7) with Microsoft SMTP Server (version=TLS1_2,
+ 2024 12:34:20 +0000
+Received: from CH1PEPF0000A348.namprd04.prod.outlook.com
+ (2603:10b6:610:32:cafe::63) by CH0PR07CA0020.outlook.office365.com
+ (2603:10b6:610:32::25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.29 via Frontend
- Transport; Sun, 30 Jun 2024 12:34:13 +0000
+ Transport; Sun, 30 Jun 2024 12:34:20 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH1PEPF0000A34B.mail.protection.outlook.com (10.167.244.10) with Microsoft
+ CH1PEPF0000A348.mail.protection.outlook.com (10.167.244.4) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7741.18 via Frontend Transport; Sun, 30 Jun 2024 12:34:12 +0000
+ 15.20.7741.18 via Frontend Transport; Sun, 30 Jun 2024 12:34:20 +0000
 Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 30 Jun
- 2024 07:34:08 -0500
+ 2024 07:34:16 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14b0a67c-36dd-11ef-b4bb-af5377834399
+X-Inumbo-ID: 16217c99-36dd-11ef-90a3-e314d9c70b13
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ee1WY73v7qOEB8D4aUuIF0qMYn/Qw4dnvK1XczAO4Os1TTZdyph8ukVikRAdao9NGGC/esZfdC/t1rVelclF7+grplqXKKGXEMsXuXhQ51/RF/x3v7QvZnWRmvAEyIAORvKnAhvy3/ytEDcou8i/Zrm5YYhq+67Pt2A+CWIbjnGevOaekl0me31z5Hyu4UjZpgYNWZLXJdvgzCb2oVbQUrH8GQmQnzFl4iMQ1+e2XHpaWVBMmsbgyhOBGYWZa8nEdTzggt3TLdxXGHo5xUtaprz1mhqQl6yUE3CAEmT5uRvchEqAgNpV5+99QwBD0knpLsHyCDn0JNNt6i8LHoZUbA==
+ b=VqSLTDOqs96c5KP057H160FtIi4ZVmm/CX5ZD+ZM/CFWd+mAFr4uVMQX/G7n8Sf6hwOp5Dui7itOXSsBu25cP/LcmVc3qmYXnzPJ+sxnz8zLuCjzl0+dtu/yYndGj5ZyCdqtHXA12mfVZnEEGSrtOVe/GYIa8xYZgU4UTf0RdlR07RKJ0ZB/3M1Vi5puqxJoyvO00IOMYHxwc8gfDSJYlOdZju8Ov6OWDPDbr8xRP06ZfPQkZkgmyrxHbU3umIqJnfwNvxDbcSiEuCLxg1qGfnoLI69AtAk6WeimZfm4qCe81Bc4YKPeviFECcL9J1yc/3EmRpoyA+7JSII25JsbDg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kvNzp09rHGoY9zYCVKlErNT4ho6RlTIpvWIBG8mH1Lo=;
- b=j1mhCxGrT3XyNuUEW7A8JdSG+V8WsG5R/Kpd2SELqZt9sjf7ev9nXMsYM7njEm5cxQCCl3Y90aXw/7DZRmsweqEJDdbBs4bZ5YKvik7RJ1K4w8nU4Jk/C3eOUsXgc4qH1tOwIIu+Fsjnh/BSTx/JRjJZo5HuqOhdbb8QLdPFLAdfjI2HmokwJ884dbltWMmC211IOq5Vw3+zc30a0GDKKlyRWF4L6jdYnnsO00nKaTWI8DSvU79qLoSEyOmjOPyQg6VikTWop1m5caun5h5YTG+IdjjbtU+FJm8FXVX+HebZM3ArPHB0yD254Faf+0pmTwnVkNcVEVRzp4hnPa6h0A==
+ bh=GEDL2Ue2C9U9cBafxmiXxoyp43uQlrhbX1J3rhhqNwM=;
+ b=W8TxnQnfr/2VyRB8pWD2/SbOw5PhhXxe+IAKXvgF7ooilFKiZXfclHjCD2Yze0UL0FlAyrs3QBW3iX5VK1sOv8e6hHxt86jlQd8EA0PNWXRW/SI9fK3jpHzYjwTYkkqHQFcO00a+DDWHLs4IZ/JvsJZscq6MZHdyXzV9XU8WxTtrzl500sAGON5TQVlSnf49N2reucTFL5G0+ovtddeiBdumBjCUpodcX17Kw/eUUqj6agH6neoVDbVjRTRfqKOkdOgK8ozldW0AFnNwVP1i5q1aNJxKckHpLuCwGW+acgQDb314P4PBgzPPbNdoPYzBqCtnDgpCFrkLXaN7yP7JZQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kvNzp09rHGoY9zYCVKlErNT4ho6RlTIpvWIBG8mH1Lo=;
- b=CG8Ilg/LgDS4F1K8BysueEdDUL61tvMV5/phlOH/WycrDt8CjsMg2s3MJ/+qs88Y5BgEl9JFKSGd38KFET5f18pueKzZaFFa5Du3WTTVO9A6oJkOnP6Zxw8iujc3NsFYpL/LMXPAb9cUQgyaaCsEqEtUpArHNkmvDG7P4gehza8=
+ bh=GEDL2Ue2C9U9cBafxmiXxoyp43uQlrhbX1J3rhhqNwM=;
+ b=1JHGmz4+gYKAh+ZrIG0DxqmnbqX3uiJxr3oNaTBrJ2HCRvb82sdrm5mJfM1wVCaLvwwVj05Kj05oOs7Wc96Eypgz5fkXUiHGrUHzK40ax0oD2cUv0/LDELGQOj8a+G4QOM+DXYaAzZI9rUu2BffcX4IU4oiaVrrZiwb5b18p2bU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -91,9 +91,9 @@ CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
 	Stewart Hildebrand <Stewart.Hildebrand@amd.com>, Huang Rui
 	<Ray.Huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>, Huang Rui
 	<ray.huang@amd.com>
-Subject: [XEN PATCH v11 3/8] x86/pvh: Add PHYSDEVOP_setup_gsi for PVH dom0
-Date: Sun, 30 Jun 2024 20:33:39 +0800
-Message-ID: <20240630123344.20623-4-Jiqian.Chen@amd.com>
+Subject: [XEN PATCH v11 5/8] x86/domctl: Add XEN_DOMCTL_gsi_permission to grant gsi
+Date: Sun, 30 Jun 2024 20:33:41 +0800
+Message-ID: <20240630123344.20623-6-Jiqian.Chen@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240630123344.20623-1-Jiqian.Chen@amd.com>
 References: <20240630123344.20623-1-Jiqian.Chen@amd.com>
@@ -105,106 +105,228 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34B:EE_|IA0PR12MB7601:EE_
-X-MS-Office365-Filtering-Correlation-Id: b0bcd5ed-0694-4ca5-5822-08dc9900f2a7
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A348:EE_|IA1PR12MB6065:EE_
+X-MS-Office365-Filtering-Correlation-Id: 47bc0807-671d-4e18-8e19-08dc9900f6f7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|7416014|376014;
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|7416014|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?OmiCRUz9ca07Pr5U8tEwiGFU7SKER4srVsMwffpiipFz57QAGCWzFVaOwBzV?=
- =?us-ascii?Q?Cel8VPXOdbdH7XrCZKCVY2F8AhgbbeJxxfnx2PdUQ/auwhiSkdKSVtsWIMXB?=
- =?us-ascii?Q?lgxzSH+Myq/R+GXX20+1fHnpsAcONLEa/B8sA7gXNnSB93gUWr0pefjWBF0t?=
- =?us-ascii?Q?J5HxdsD4bId8ti/HL+bIjLj5SWqb3FCLOTHpj74x+4oOf7/G6D4taeZy9c2T?=
- =?us-ascii?Q?/WOYNZi/2wGC+EwDTwipOqry29raAKGRuPzFbDBLm/4525TiDqvH50awn1lv?=
- =?us-ascii?Q?Oqt0zsoJ9HNifPCuUppEYh0Qz6y9344RZdn7RoQcGJdUi6/PvJKsIULe/KSB?=
- =?us-ascii?Q?j12kybGV2BYmdqXwCkixuRQB/Tn6vyafrz8cfuC8ApGfX7vqSjFB1vQIf8Wq?=
- =?us-ascii?Q?hUC18TQ/b7WubYCAmq+VWcI3dvpJBA+1xj6QnyTRWasl0SzWWtk0bfmogRPK?=
- =?us-ascii?Q?WIi+Zyy8NNOmfjhzKGfGkizTHh+jgab9VoxCLHMFqSj47NbG3FZaaxQAZuMA?=
- =?us-ascii?Q?sGFmCTY2wVT4kMIlKDVMdWDOkYC6+O0dvxlLWqWvADiiiPWcS6sZ7AzMijZ5?=
- =?us-ascii?Q?KNWuduR+0gLTxh3kIXA4coVf3pyQnyLZ7/wPS4T+7SzEZjphVXVl80VVPGB/?=
- =?us-ascii?Q?Y/rm3XZc18NUSNV2XhnGZ8TumZ8kznPGwIcAPA2x3ilTdHTl5cP2bG4QU/lJ?=
- =?us-ascii?Q?r0ate2ik0QUr1MCGwe2CU4XjHK5AbEQ4xMEWprN4u2GfIeFmpOoyyLOHqpJa?=
- =?us-ascii?Q?PmXJN6JThr4Sff7DrFuDP9yCqu7jIQDbBeuxcT2nHVMcmTav6NO2CBRxZlbt?=
- =?us-ascii?Q?FiuBeo2i37A890aeol0eRgETBqItcnvhHJykqm1qpWu+yjl01X1PN4gUnrv6?=
- =?us-ascii?Q?L8+W7EsL7wUTNCPeiEtavVkuDUGy1HNv9fehhO9JTyog+5B4a71Exel3Nhe/?=
- =?us-ascii?Q?pFDWslKdiFYEkez3tv8Gy2iQ67r0MSVmu7siDQBdZDqy6iPr75HHovB38ta3?=
- =?us-ascii?Q?nBBJKRL0DN42TQzuLFm4gE2U2sTVAYiyHS4VekSEhWo/L4za8yzLDjqLtSd8?=
- =?us-ascii?Q?rE7OyJPMqoSQ7Clv7dnwK0tMl50e3BXOyUYYEMNaz087W5xoZGoEu0lj9aiO?=
- =?us-ascii?Q?16tSqz964vs5CQUgTiTAvTVpBqiFXSoYNKHzY3Z2UVPJEO7kj57eWCP0FS+S?=
- =?us-ascii?Q?3tdjDQ1GYUfV3HRGwr92a7XzwVTwNyG9o/SGWlmfnqlWwmqHFL0rsFERp7wi?=
- =?us-ascii?Q?A20WRI4WkUoZ8Sv3OKofHbXjgNfn6f6YowPiiaWgFre8VYd6t4y1E62gZb3q?=
- =?us-ascii?Q?FgWM/3FSOeryYCyYWQADMKUQ9i6RgjZjZpZCbJvL5blnx93LqmZ0/FEy6mMu?=
- =?us-ascii?Q?mdUxmJ2uVAMhNf0lbwa767QVrL3ii+Cq6TOWpyAYYeFMqK3/YhfNVejTYgbX?=
- =?us-ascii?Q?I9qz2+FEztE1LMLNoSug5Ky/ljOrMrJy?=
+	=?us-ascii?Q?CEDPZFLoglkQhdJfX29Fy5XwZMxYNwNuis2n3gNzJxfg1stWRWJBzz69lzej?=
+ =?us-ascii?Q?LrejBdWDHmAZYz2/+zwi7nV5g5mWQFsBXcmjsHzf3VJKo3+Ie3r5qxH9Uf9r?=
+ =?us-ascii?Q?N6TGCBg+WGwkU0F38uKa5T+lB8DUUeVj0bxZWPImtsJ7Bz8KwjEZilmL7k/j?=
+ =?us-ascii?Q?e5o3uoTlY/1RLjMRib6jAZe6qg0yq8HDwYixhfm8D0wIL7DhqLjxiGkocCx1?=
+ =?us-ascii?Q?Ay+Iz3hHeAWaz9OVEddXnG/WatU8a8QM8CLJFxfv0/m5NXgyfJhoj/+zw7BU?=
+ =?us-ascii?Q?OeUlzSJHjPuICaMBO0Ts2WaWli3m8iXibDdd3fNNMCGIFXMtRVkcUZdlf4M8?=
+ =?us-ascii?Q?Prgwx0xtyTsC0x6Bzij373FluRwVzOLsXGtomwzNmLT6aTsRCEjxYv5OX808?=
+ =?us-ascii?Q?SH5L2kAwiyAGWwo0I5MqmYoFxxhBJqDgOptmbvYgroRMa4j2667buLpLOEfE?=
+ =?us-ascii?Q?/JGjdQGaVMxhQse92qPOP2/R9YBawjpDYBYpmsl+F/m6QBoGe0DebA2dXqOO?=
+ =?us-ascii?Q?cJHOESd4NOEDj5NE97Rv8/P66h1eGBiVu1puB+lko/u9IIIRbo/qx0mqaPX5?=
+ =?us-ascii?Q?nYM8pBYA4W6Q1a70bZeIGZgQrc4EPldRyJP04KcJgI8RgHqdUhtYCz4nAvws?=
+ =?us-ascii?Q?zRH/EEhr06YRsOyX+ZWp/4jtXoOA3kC4D3ycYRAgXYpldTv/sqx5X56sSfrF?=
+ =?us-ascii?Q?BTpldTeTdKGoB630lrZ3to2NrbDK6YIF+2RNRV5pz6bCW13vcC6IIDPieKO8?=
+ =?us-ascii?Q?Yflwqhq+adMAAzR+KAY+njykHwLGTSDsJ6k9YgqCiPQ3DFNYSF++18I84zIy?=
+ =?us-ascii?Q?n1ZWEPHYFjkpoHkYOtT2jjZikD9JX+e6+Q5MP71LvYLdFZvJP5kZQnOaqhnD?=
+ =?us-ascii?Q?1FcXB9qsDWz20MaU685K38gnGUH64Yv7hfYG/2X48sLVsHcSzFQoOJAWLXrI?=
+ =?us-ascii?Q?rHzTBqU47jAUODNK4xFBFY9XuTkKWe69rn78C+UL1rjmLkYQlo/GqwNCautl?=
+ =?us-ascii?Q?NozOFk+coFPxrsN/bVocxL/Zm5gkbKlboYpQ4zxWm4Nx1IAEK07WVoeuCVD7?=
+ =?us-ascii?Q?TzwYvAgQNlbEmJrDREbcpxEA9Mx9GvCa8WWw0APo5gP+iYoiIbnFWwxnGzDU?=
+ =?us-ascii?Q?cq8ItX1G0zJnq4lsHkqlffVfqQkZm5AsHKw8PQrV66aDNJE941Xpynw5AKCn?=
+ =?us-ascii?Q?sq3Ww3ysdMH59BX9Nk0R6VlO3thNovAbUmkc3f03h/veEK7+M/ibw7yhCCgR?=
+ =?us-ascii?Q?8kGr9V2q8wMQqKN5TGeimSSHwpUs2T4hyHaEtgxfKJTH+Yeff2/y+aAznhPH?=
+ =?us-ascii?Q?TWqeujm21Q6KOmbtBSLiQgwCbqNC4dEFFJmQw5ykbVUFqdf5yxhbram3ec3D?=
+ =?us-ascii?Q?nDwsn3I8VD8Bq00GIRXuicTTyoXuDVpOhBS6Qr6wcKJG1UXAqDdNW6j/FEjT?=
+ =?us-ascii?Q?Wnw9MThKUlDMytTR1Z03Eh2peGsqyhWU?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(7416014)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(7416014)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2024 12:34:12.8933
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2024 12:34:20.1455
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b0bcd5ed-0694-4ca5-5822-08dc9900f2a7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 47bc0807-671d-4e18-8e19-08dc9900f6f7
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000A34B.namprd04.prod.outlook.com
+	CH1PEPF0000A348.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7601
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6065
 
-The gsi of a passthrough device must be configured for it to be
-able to be mapped into a hvm domU.
-But When dom0 is PVH, the gsis don't get registered, it causes
-the info of apic, pin and irq not be added into irq_2_pin list,
-and the handler of irq_desc is not set, then when passthrough a
-device, setting ioapic affinity and vector will fail.
+Some type of domain don't have PIRQs, like PVH, it doesn't do
+PHYSDEVOP_map_pirq for each gsi. When passthrough a device
+to guest base on PVH dom0, callstack
+pci_add_dm_done->XEN_DOMCTL_irq_permission will fail at function
+domain_pirq_to_irq, because PVH has no mapping of gsi, pirq and
+irq on Xen side.
+What's more, current hypercall XEN_DOMCTL_irq_permission requires
+passing in pirq, it is not suitable for dom0 that doesn't have
+PIRQs.
 
-To fix above problem, on Linux kernel side, a new code will
-need to call PHYSDEVOP_setup_gsi for passthrough devices to
-register gsi when dom0 is PVH.
-
-So, add PHYSDEVOP_setup_gsi into hvm_physdev_op for above
-purpose.
-
-Clarify two questions:
-First, why the gsi of devices belong to PVH dom0 can work?
-Because when probe a driver to a normal device, it calls(on linux
-kernel side) pci_device_probe-> request_threaded_irq->
-irq_startup-> __unmask_ioapic-> io_apic_write, then trap into xen
-side hvmemul_do_io-> hvm_io_intercept-> hvm_process_io_intercept->
-vioapic_write_indirect-> vioapic_hwdom_map_gsi-> mp_register_gsi.
-So that the gsi can be registered.
-
-Second, why the gsi of passthrough device can't work when dom0
-is PVH?
-Because when assign a device to passthrough, it uses pciback to
-probe the device, and it calls pcistub_probe->pcistub_seize->
-pcistub_init_device-> xen_pcibk_reset_device->
-xen_pcibk_control_isr->isr_on, but isr_on is not set, so that the
-fake IRQ handler is not installed, then the gsi isn't unmasked.
-What's more, we can see on Xen side, the function
-vioapic_hwdom_map_gsi-> mp_register_gsi will be called only when
-the gsi is unmasked, so that the gsi can't work for passthrough
-device.
+So, add a new hypercall XEN_DOMCTL_gsi_permission to grant the
+permission of irq(translate from gsi) to dumU when dom0 has no
+PIRQs.
 
 Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
 Signed-off-by: Huang Rui <ray.huang@amd.com>
 Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
 ---
- xen/arch/x86/hvm/hypercall.c | 1 +
- 1 file changed, 1 insertion(+)
+ xen/arch/x86/domctl.c              | 33 ++++++++++++++++++++++++++++++
+ xen/arch/x86/include/asm/io_apic.h |  2 ++
+ xen/arch/x86/io_apic.c             | 17 +++++++++++++++
+ xen/arch/x86/mpparse.c             |  3 +--
+ xen/include/public/domctl.h        |  8 ++++++++
+ xen/xsm/flask/hooks.c              |  1 +
+ 6 files changed, 62 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index 03ada3c880bd..cfe82d0f96ed 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -86,6 +86,7 @@ long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-             return -ENOSYS;
-         break;
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index 9190e11faaa3..5f20febabbf2 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -36,6 +36,7 @@
+ #include <asm/xstate.h>
+ #include <asm/psr.h>
+ #include <asm/cpu-policy.h>
++#include <asm/io_apic.h>
  
-+    case PHYSDEVOP_setup_gsi:
-     case PHYSDEVOP_pci_mmcfg_reserved:
-     case PHYSDEVOP_pci_device_add:
-     case PHYSDEVOP_pci_device_remove:
+ static int update_domain_cpu_policy(struct domain *d,
+                                     xen_domctl_cpu_policy_t *xdpc)
+@@ -237,6 +238,38 @@ long arch_do_domctl(
+         break;
+     }
+ 
++    case XEN_DOMCTL_gsi_permission:
++    {
++        int irq;
++        uint8_t mask = 1;
++        unsigned int gsi = domctl->u.gsi_permission.gsi;
++        bool allow = domctl->u.gsi_permission.allow_access;
++
++        /* Check all bits and pads are zero except lowest bit */
++        ret = -EINVAL;
++        if ( domctl->u.gsi_permission.allow_access & ( !mask ) )
++            goto gsi_permission_out;
++        for ( i = 0; i < ARRAY_SIZE(domctl->u.gsi_permission.pad); ++i )
++            if ( domctl->u.gsi_permission.pad[i] )
++                goto gsi_permission_out;
++
++        if ( gsi >= nr_irqs_gsi || ( irq = gsi_2_irq(gsi) ) < 0 )
++            goto gsi_permission_out;
++
++        ret = -EPERM;
++        if ( !irq_access_permitted(currd, irq) ||
++             xsm_irq_permission(XSM_HOOK, d, irq, allow) )
++            goto gsi_permission_out;
++
++        if ( allow )
++            ret = irq_permit_access(d, irq);
++        else
++            ret = irq_deny_access(d, irq);
++
++    gsi_permission_out:
++        break;
++    }
++
+     case XEN_DOMCTL_getpageframeinfo3:
+     {
+         unsigned int num = domctl->u.getpageframeinfo3.num;
+diff --git a/xen/arch/x86/include/asm/io_apic.h b/xen/arch/x86/include/asm/io_apic.h
+index 78268ea8f666..7e86d8337758 100644
+--- a/xen/arch/x86/include/asm/io_apic.h
++++ b/xen/arch/x86/include/asm/io_apic.h
+@@ -213,5 +213,7 @@ unsigned highest_gsi(void);
+ 
+ int ioapic_guest_read( unsigned long physbase, unsigned int reg, u32 *pval);
+ int ioapic_guest_write(unsigned long physbase, unsigned int reg, u32 val);
++int mp_find_ioapic(int gsi);
++int gsi_2_irq(int gsi);
+ 
+ #endif
+diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
+index d73108558e09..d54283955a60 100644
+--- a/xen/arch/x86/io_apic.c
++++ b/xen/arch/x86/io_apic.c
+@@ -955,6 +955,23 @@ static int pin_2_irq(int idx, int apic, int pin)
+     return irq;
+ }
+ 
++int gsi_2_irq(int gsi)
++{
++    int ioapic, pin, irq;
++
++    ioapic = mp_find_ioapic(gsi);
++    if ( ioapic < 0 )
++        return -EINVAL;
++
++    pin = gsi - io_apic_gsi_base(ioapic);
++
++    irq = apic_pin_2_gsi_irq(ioapic, pin);
++    if ( irq <= 0 )
++        return -EINVAL;
++
++    return irq;
++}
++
+ static inline int IO_APIC_irq_trigger(int irq)
+ {
+     int apic, idx, pin;
+diff --git a/xen/arch/x86/mpparse.c b/xen/arch/x86/mpparse.c
+index d8ccab2449c6..c95da0de5770 100644
+--- a/xen/arch/x86/mpparse.c
++++ b/xen/arch/x86/mpparse.c
+@@ -841,8 +841,7 @@ static struct mp_ioapic_routing {
+ } mp_ioapic_routing[MAX_IO_APICS];
+ 
+ 
+-static int mp_find_ioapic (
+-	int			gsi)
++int mp_find_ioapic(int gsi)
+ {
+ 	unsigned int		i;
+ 
+diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+index 2a49fe46ce25..f7ae8b19d27d 100644
+--- a/xen/include/public/domctl.h
++++ b/xen/include/public/domctl.h
+@@ -464,6 +464,12 @@ struct xen_domctl_irq_permission {
+     uint8_t pad[3];
+ };
+ 
++/* XEN_DOMCTL_gsi_permission */
++struct xen_domctl_gsi_permission {
++    uint32_t gsi;
++    uint8_t allow_access;    /* flag to specify enable/disable of x86 gsi access */
++    uint8_t pad[3];
++};
+ 
+ /* XEN_DOMCTL_iomem_permission */
+ struct xen_domctl_iomem_permission {
+@@ -1306,6 +1312,7 @@ struct xen_domctl {
+ #define XEN_DOMCTL_get_paging_mempool_size       85
+ #define XEN_DOMCTL_set_paging_mempool_size       86
+ #define XEN_DOMCTL_dt_overlay                    87
++#define XEN_DOMCTL_gsi_permission                88
+ #define XEN_DOMCTL_gdbsx_guestmemio            1000
+ #define XEN_DOMCTL_gdbsx_pausevcpu             1001
+ #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
+@@ -1328,6 +1335,7 @@ struct xen_domctl {
+         struct xen_domctl_setdomainhandle   setdomainhandle;
+         struct xen_domctl_setdebugging      setdebugging;
+         struct xen_domctl_irq_permission    irq_permission;
++        struct xen_domctl_gsi_permission    gsi_permission;
+         struct xen_domctl_iomem_permission  iomem_permission;
+         struct xen_domctl_ioport_permission ioport_permission;
+         struct xen_domctl_hypercall_init    hypercall_init;
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index 5e88c71b8e22..a5b134c91101 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -685,6 +685,7 @@ static int cf_check flask_domctl(struct domain *d, int cmd)
+     case XEN_DOMCTL_shadow_op:
+     case XEN_DOMCTL_ioport_permission:
+     case XEN_DOMCTL_ioport_mapping:
++    case XEN_DOMCTL_gsi_permission:
+ #endif
+ #ifdef CONFIG_HAS_PASSTHROUGH
+     /*
 -- 
 2.34.1
 
