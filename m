@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03EE7C3065D
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jul 2024 11:24:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.752362.1160594 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 644E9C3064D
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jul 2024 11:24:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.752359.1160561 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sObcA-0002kQ-Hy; Tue, 02 Jul 2024 11:24:02 +0000
+	id 1sObc6-0001ph-Ul; Tue, 02 Jul 2024 11:23:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 752362.1160594; Tue, 02 Jul 2024 11:24:02 +0000
+Received: by outflank-mailman (output) from mailman id 752359.1160561; Tue, 02 Jul 2024 11:23:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sObcA-0002kF-Ev; Tue, 02 Jul 2024 11:24:02 +0000
-Received: by outflank-mailman (input) for mailman id 752362;
- Tue, 02 Jul 2024 11:24:01 +0000
+	id 1sObc6-0001ov-Pb; Tue, 02 Jul 2024 11:23:58 +0000
+Received: by outflank-mailman (input) for mailman id 752359;
+ Tue, 02 Jul 2024 11:23:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/Tas=OC=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sObc9-0001m7-4r
- for xen-devel@lists.xenproject.org; Tue, 02 Jul 2024 11:24:01 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
+ id 1sObc6-0001m7-45
+ for xen-devel@lists.xenproject.org; Tue, 02 Jul 2024 11:23:58 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 93ce3950-3865-11ef-aaf1-7f3abd7486c0;
- Tue, 02 Jul 2024 13:23:59 +0200 (CEST)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2ed5ac077f5so48545841fa.1
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jul 2024 04:23:59 -0700 (PDT)
+ id 91c2d0fe-3865-11ef-aaf1-7f3abd7486c0;
+ Tue, 02 Jul 2024 13:23:56 +0200 (CEST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2ec61eeed8eso50369231fa.0
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jul 2024 04:23:56 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2ee5161fb73sm16149981fa.33.2024.07.02.04.23.57
+ 38308e7fff4ca-2ee5161fb73sm16149981fa.33.2024.07.02.04.23.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 04:23:58 -0700 (PDT)
+ Tue, 02 Jul 2024 04:23:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 93ce3950-3865-11ef-aaf1-7f3abd7486c0
+X-Inumbo-ID: 91c2d0fe-3865-11ef-aaf1-7f3abd7486c0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719919439; x=1720524239; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1719919435; x=1720524235; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hEIsWsvrlXl4/YcR0JMfIfMbkJsSh1CWtuRxJ27QKeY=;
-        b=mjYufUq8+mgghRdUihQLdQ0QnbXlkHXJSv9e0o6nrDCYcw791Kzu3xKovS/0zeEXlj
-         QJ33KUDfBCNjND+qW9OPqxrE4LOZ79vSbU1oKg77SNUNJk9sRCWi4xXUVsSsESvGH0v0
-         cv5uEsgqAA/TDH+QthfLbWEui/PS5+G473IA7AUK1MTJxjucV/2KNbknhtHn3IP7g9E8
-         Goa+7BMuSM69dXypYNLHvWqq+Y/3jpTolmXI1kbtJd2h2JkHXisnfNsYlEfyOaWVmLI+
-         SYOev5peLkzXgp71KZu7H1YMCQDLU/HSXNkuvrhoo6WJAvaXoXXtryzS+nkT11vLhO+3
-         uxQg==
+        bh=L0kvZbIwg1P0mhVOPWpS762W5yQg7NFjtIVmRuw6584=;
+        b=Le+N02QphNp+Hx8OufdExGBj9V7pWqGKf7IlKXmnZbr9kwBIbiKqyJWfE/t59W7zrt
+         zvkrsnfCpekcnwajcSJFMwRbBEISca8+QxZwOGaU803ebO+rpu8ZavSuoTOtmnEt1GDI
+         gCAy61J3vdIenWDvcOf8pEXMqcKN0NO0wt+SHfexZcf1cNixkyyZ2VSJHtc1THwXL74/
+         Ybd2VJY2vYo9086ofHjougrEGa5fH9n0EuC6VrfmSIrEZYypAchEomwTHuaSL9HF864E
+         kYf+IepKOROmp6XjzcWGG2YjzrEKIHcua9TVxTmLtXusmyTiSY1n0PJA8S8SH9Ze/kfh
+         ylHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719919439; x=1720524239;
+        d=1e100.net; s=20230601; t=1719919435; x=1720524235;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=hEIsWsvrlXl4/YcR0JMfIfMbkJsSh1CWtuRxJ27QKeY=;
-        b=htoUUvAAzK91VDoqOvmMYOcPenriscTdSirenftkYN7iGHh9y5LB6FI9QylKt1xllw
-         xkxK9IBFw+ljN22gdr88M8Y1BJKgdzkQW4iZr8cyuSBYGNmEQoufjmRj1PanAXWVH0B1
-         ByAOpVK77Fd2MhjbtM7gNfLwr6uorKQgy2jfSERn5Zr/0NRfqiiAURkJlhAuujY7bxmo
-         Pumx0wy+QoiiGowbcV7gLUy9m2qpdRdffnnXqGcjVoNTOWs4hY8fgJkBbHN1gVVTBO7J
-         3gCUcpK4UdGuU6Xff0Rs6pzca+pNydFQlbuOuRLqGWnnP4nQ8U6GvIBS2kMlS8udJug0
-         b1SQ==
-X-Gm-Message-State: AOJu0YwljEgJRx7YDdUxhca8ie07DeZofp/RB6m4l03vDsCx4j5ciNWX
-	r/DndHseimIsCV90EO9UTVfIQ+81m7CDldYIAZsdctBg8b2CqQwQYRsm7Jbp
-X-Google-Smtp-Source: AGHT+IEClPxEScxTwOZDx/lM2//DicvvbS2F0zthvwNfRMHFUtUpJW46VjOET/t7OoKVDOZ/OVSDLQ==
-X-Received: by 2002:a05:651c:893:b0:2ee:6277:a888 with SMTP id 38308e7fff4ca-2ee6277a9f3mr53920421fa.38.1719919438650;
-        Tue, 02 Jul 2024 04:23:58 -0700 (PDT)
+        bh=L0kvZbIwg1P0mhVOPWpS762W5yQg7NFjtIVmRuw6584=;
+        b=tE8eBbjObEFVClUk/lir69mWw4nWQguIPB0GmNUTktm8vFEBkRQ+HmL9gv6LSegk8h
+         RltxdQ0+15oBE8erMZmrEbR8W7rNsUIPsBxI2e/FV7P5qezTm9cAwMD6IUcU0+OQaNFz
+         l6YYeGawaosCNA+J2aDwtTXKAaVLTRdqlHBOu5xaxG3EPMDV7qGcofG54xn3YQ/9U0xt
+         34X04taHmLShxagHyemalZ3hKT5MtqUidpuPahmnOQabOH2U3x7E8/wQUQ0VxemxfTZa
+         FTy08GIIl7Mmw8fnwe5+53ebxX5CjPr6UedD04cpS0xVpA0b/iXqXBkTHkZ5Ho8YuRhq
+         ct6A==
+X-Gm-Message-State: AOJu0Yyqe1SpJZrqxPqCLDj0mqLxBmcBImnsl6dU+geY0QYlsxyXaTCv
+	atE7qpEqszrY0C8DJxhTW/Xft4mr1Bk5vG1S6zsbo/1OMyNldqDk7w8iFiFx
+X-Google-Smtp-Source: AGHT+IFziYw3KhCffJR57gsm6MaJhnTZA0BJrtpkAe2mBdjSNoxtUVxNMMYxY/bGE0g8qR5naBzYMA==
+X-Received: by 2002:a2e:a548:0:b0:2ec:6639:120a with SMTP id 38308e7fff4ca-2ee5e33a582mr60578951fa.10.1719919435018;
+        Tue, 02 Jul 2024 04:23:55 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -86,97 +86,41 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v9 4/5] xen/riscv: enable GENERIC_BUG_FRAME
-Date: Tue,  2 Jul 2024 13:23:49 +0200
-Message-ID: <c51c485bac43b7589961aabec8af1b82d4673b94.1719918148.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v9 1/5] xen/riscv: use printk() instead of early_printk()
+Date: Tue,  2 Jul 2024 13:23:46 +0200
+Message-ID: <22c78705e4559a049e72950dc311513f1c15e489.1719918148.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <cover.1719918148.git.oleksii.kurochko@gmail.com>
 References: <cover.1719918148.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+As common code is available it is better to use printk() instead
+of early_printk().
+
+Also the printing of "Hello from RISC-V world" is dropped as
+it is useless and "All set up is enough".
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/Kconfig |  1 +
- xen/arch/riscv/traps.c | 31 +++++++++++++++++++++++++++++++
- xen/common/bug.c       |  1 +
- 3 files changed, 33 insertions(+)
+ xen/arch/riscv/setup.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-index b4b354a778..74ad019fe7 100644
---- a/xen/arch/riscv/Kconfig
-+++ b/xen/arch/riscv/Kconfig
-@@ -5,6 +5,7 @@ config RISCV
- config RISCV_64
- 	def_bool y
- 	select 64BIT
-+	select GENERIC_BUG_FRAME
- 
- config ARCH_DEFCONFIG
- 	string
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index cb18b30ff2..7ba16252fc 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -5,6 +5,7 @@
-  * RISC-V Trap handlers
-  */
- 
-+#include <xen/bug.h>
- #include <xen/lib.h>
- #include <xen/sched.h>
- 
-@@ -101,8 +102,38 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
-     die();
- }
- 
-+static bool is_valid_bug_insn(uint32_t insn)
-+{
-+    return insn == BUG_INSN_32 ||
-+           (insn & COMPRESSED_INSN_MASK) == BUG_INSN_16;
-+}
-+
-+/* Should be used only on Xen code */
-+static uint32_t read_instr(unsigned long pc)
-+{
-+    uint16_t instr16 = *(uint16_t *)pc;
-+
-+    ASSERT(is_kernel_text(pc + 1) || is_kernel_inittext(pc + 1));
-+
-+    if ( GET_INSN_LENGTH(instr16) == 2 )
-+        return instr16;
-+
-+    ASSERT(is_kernel_text(pc + 3) || is_kernel_inittext(pc + 3));
-+
-+    return *(uint32_t *)pc;
-+}
-+
- void do_trap(struct cpu_user_regs *cpu_regs)
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 8bb5bdb2ae..e3cb0866d5 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -23,9 +23,7 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
  {
-+    register_t pc = cpu_regs->sepc;
-+    uint32_t instr = read_instr(pc);
-+
-+    if ( ( is_valid_bug_insn(instr) ) && ( do_bug_frame(cpu_regs, pc) >= 0 ) )
-+    {
-+        cpu_regs->sepc += GET_INSN_LENGTH(instr);
-+        return;
-+    }
-+
-     do_unexpected_trap(cpu_regs);
- }
+     remove_identity_mapping();
  
-diff --git a/xen/common/bug.c b/xen/common/bug.c
-index b7c5d8fd4d..75cb35fcfa 100644
---- a/xen/common/bug.c
-+++ b/xen/common/bug.c
-@@ -1,6 +1,7 @@
- #include <xen/bug.h>
- #include <xen/errno.h>
- #include <xen/kernel.h>
-+#include <xen/lib.h>
- #include <xen/livepatch.h>
- #include <xen/string.h>
- #include <xen/types.h>
+-    early_printk("Hello from C env\n");
+-
+-    early_printk("All set up\n");
++    printk("All set up\n");
+ 
+     for ( ;; )
+         asm volatile ("wfi");
 -- 
 2.45.2
 
