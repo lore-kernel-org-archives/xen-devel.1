@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEBA4C2BD09
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jul 2024 13:52:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.753066.1161333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22096C30653
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jul 2024 14:20:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.753084.1161359 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sP0Oq-0007fs-VY; Wed, 03 Jul 2024 13:51:56 +0000
+	id 1sP0qC-0004PJ-LJ; Wed, 03 Jul 2024 14:20:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 753066.1161333; Wed, 03 Jul 2024 13:51:56 +0000
+Received: by outflank-mailman (output) from mailman id 753084.1161359; Wed, 03 Jul 2024 14:20:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sP0Oq-0007fl-Sx; Wed, 03 Jul 2024 13:51:56 +0000
-Received: by outflank-mailman (input) for mailman id 753066;
- Wed, 03 Jul 2024 13:51:56 +0000
+	id 1sP0qC-0004NU-Dj; Wed, 03 Jul 2024 14:20:12 +0000
+Received: by outflank-mailman (input) for mailman id 753084;
+ Wed, 03 Jul 2024 14:20:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mAj5=OD=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sP0Oq-0007ff-6V
- for xen-devel@lists.xenproject.org; Wed, 03 Jul 2024 13:51:56 +0000
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [2a00:1450:4864:20::230])
+ <SRS0=i9qc=OD=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sP0qB-00047x-2S
+ for xen-devel@lists.xenproject.org; Wed, 03 Jul 2024 14:20:11 +0000
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [2a00:1450:4864:20::531])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6891a001-3943-11ef-bbf9-fd08da9f4363;
- Wed, 03 Jul 2024 15:51:55 +0200 (CEST)
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2ebeefb9a7fso60556541fa.0
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jul 2024 06:51:55 -0700 (PDT)
-Received: from [192.168.219.191] ([94.75.70.14])
+ id 5a70b626-3947-11ef-bbf9-fd08da9f4363;
+ Wed, 03 Jul 2024 16:20:09 +0200 (CEST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-57cc30eaf0aso1869514a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jul 2024 07:20:09 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-58bce1922c8sm1907140a12.13.2024.07.03.06.51.53
+ 4fb4d7f45d1cf-5861324f036sm7114707a12.34.2024.07.03.07.20.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jul 2024 06:51:54 -0700 (PDT)
+ Wed, 03 Jul 2024 07:20:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,111 +47,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6891a001-3943-11ef-bbf9-fd08da9f4363
+X-Inumbo-ID: 5a70b626-3947-11ef-bbf9-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720014715; x=1720619515; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=zY0LbkTabeUXU+vUQ/HHe6zEIYM+kDyKmdN+gjlg7/s=;
-        b=S9cw9Sw7MfAlKmHBq01o14C2kJTT64rvmCrCiapnUhRVD6b4osyhK6LMUmVEGq6cMI
-         8PTsD4+QSAtwueU4lrdkll2MqUIP7yHQzXMJEmAD7N3QgtyMt5bgH7GxcW2Pf3+XJ70d
-         sttYIf7blVwzOz8UgN2FgFUcBBQF/gTJjVft47gXPsW/d1QR/617/5gdTkxRDWNwYnkS
-         HXZE2k7eFDbUAILVVCC8P7zN4yEIPGzmVDgW9J+l/8ky2QxsAjVccNmDasEAYQRoI4XF
-         Rsb0fkhZFu7JvR6xT2/rhyjZxKVzljuJ+zSq9Zd02q8y2qvX5+Vd9klJYnyUYW5/59/I
-         9yqQ==
+        d=citrix.com; s=google; t=1720016408; x=1720621208; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QvtNDTqYHADux5W5ocofKnMkBGfiU5QPPfJXj51wIBM=;
+        b=drRurYpwNJGU6MJwYl6R5wMUD9WD7/Vh0m5hYhEArAyEU7VCitn54X8CN4evLigLd+
+         e9Qmetaa/rys/BaIIbOGfn6Pg/TLX6pmvDxWJa8Mbtiip608nG45Suomk07kDqbmF/Dp
+         IFTi1npCjdyOREi1tnziGuu+Qf7KdL4CXdzgo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720014715; x=1720619515;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=zY0LbkTabeUXU+vUQ/HHe6zEIYM+kDyKmdN+gjlg7/s=;
-        b=QwybgAmP7gDPYiJoBVbjOQy4rkM8o4uVMSsknMjUF0C7shOiVS7jt1Yl3Jg0g1yGm0
-         pbM2NosxBCFwYPwLiXRPw29MMXeOIBRTWIrX49lXNmTk24z5SMQateuRS9UncW58a+nJ
-         MMXsRcf7QeQnDc91MLHHIdmBpkL+0b8UR93o1+6nEWuTDmzAQKcDF7dvagmflLerXG48
-         ned3aUZnd6ZCB25ugJ+VqZzk2Ek0jNvJM//hlJx2dQr9C6hFNziXR7yosAYjk3nV+3F0
-         ZXITIrjQ/odYEJIUKjVCuN052Mj6HInHFJ2W+9nzVzUmrxbsX12Tj0EHJsMLQ2eGCAQr
-         g8Yw==
-X-Forwarded-Encrypted: i=1; AJvYcCX4EuaD9vDA3jQJYzOEhrfjBKa75PFODJgnqrKQsyRd46ho2W5GM6nrV1hWx7Sgt6mEQ7huNMO0Io66DojKsfdHu16bPCTQWdcmeNL/Jk8=
-X-Gm-Message-State: AOJu0Ywmy+Nh92Tvjwg+MxnXzGnyZUotuUdYmWQspIzk3mo6FdCMM3rx
-	cJ62EOH1/hla3xikgk5pMwQCqYR19nOZd3prX9bbnzlAg32xRzL43o1XRV5E
-X-Google-Smtp-Source: AGHT+IHDNwc2+kUcVlhem1MQ4CSUDzoaupwqLaMKMXIL5kUBEKVIY/4N3V+MPd/5TCBEUupHm7gh/A==
-X-Received: by 2002:a05:651c:b0b:b0:2ec:5c94:3d99 with SMTP id 38308e7fff4ca-2ee5e3810b7mr78832801fa.2.1720014714455;
-        Wed, 03 Jul 2024 06:51:54 -0700 (PDT)
-Message-ID: <45983cc81600dd0bcc804504f61a582cf709c9a5.camel@gmail.com>
-Subject: Re: [PATCH for-4.19 v2] xen/vmap: Document the vmap header
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>, Alejandro Vallejo
-	 <alejandro.vallejo@cloud.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall
- <julien@xen.org>,  Stefano Stabellini <sstabellini@kernel.org>, Xen-devel
- <xen-devel@lists.xenproject.org>
-Date: Wed, 03 Jul 2024 15:51:53 +0200
-In-Reply-To: <7772dc9e-b9e2-4af7-af43-fa5cbe651488@suse.com>
-References: 
-	<f8bcfe757b45ce59e1a1203c2675a4266cc15f20.1720005327.git.alejandro.vallejo@cloud.com>
-	 <7772dc9e-b9e2-4af7-af43-fa5cbe651488@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.2 (3.52.2-1.fc40app2) 
+        d=1e100.net; s=20230601; t=1720016408; x=1720621208;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QvtNDTqYHADux5W5ocofKnMkBGfiU5QPPfJXj51wIBM=;
+        b=qfsd/oAHfilIKvk4QPox1bmEu3cFWQa4XdLdtsXQL7N51mSYCubCEZd0sT7caKY1qw
+         3u+O0a3QVkeYm+XA7JYKimzhkS1IO0XH54kao+FpdutkwaFKoeULiPESGbBoGvDaylU1
+         2ljDP7tAys6h7BOCfZE8I7Pw/AplDGceDr3Bq9oPWmBd+41jny2pJQ8pRitWR7kiYUib
+         pIOTtVoAADTzn6bpJGYcTrONUW95UUXd6EFtog7PEpzyLBeB8ugLKW7S1HHM7Eo8tP2B
+         9yiiqfUKBSVuucOGFb/IGky9M2V097EoOu0y8nnZyCa/DGISrFSsuLnHTtM8PZ/4qsOQ
+         378g==
+X-Gm-Message-State: AOJu0YwXnJVYj+UDNCgR9liARUgrlS16ipWtmjFHbNyRqT2wI7JnPV9X
+	GFw9a/NXevQvT7CPAwm3bNzzBohHmlGFqW7rBqT8c5gxf9NT1XWKOuFynsZfJDStPJ0O9slmqjq
+	3H64=
+X-Google-Smtp-Source: AGHT+IFqmUSdJZCkTH4i1WdxPdXjaDXOvrWfDnUPTz+/TvaNRmkBILQn52UweyaMVG0TeClF2LUWeQ==
+X-Received: by 2002:a05:6402:5203:b0:57d:1696:fd14 with SMTP id 4fb4d7f45d1cf-5879ede2704mr11274311a12.8.1720016408500;
+        Wed, 03 Jul 2024 07:20:08 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH for-4.19 2/4] CI: Adjust the usage of inline files
+Date: Wed,  3 Jul 2024 15:20:00 +0100
+Message-Id: <20240703142002.1662874-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240703142002.1662874-1-andrew.cooper3@citrix.com>
+References: <20240703142002.1662874-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, 2024-07-03 at 13:58 +0200, Jan Beulich wrote:
-> On 03.07.2024 13:19, Alejandro Vallejo wrote:
-> > +/*
-> > + * Unmaps a range of virtually contiguous memory from one of the
-> > vmap regions
-> > + *
-> > + * The system remembers internally how wide the mapping is and
-> > unmaps it all.
->=20
-> Seeing this is still taken verbatim ...
->=20
-> > + * It also can determine the vmap region type from the `va`.
-> > + *
-> > + * @param va Virtual base address of the range to unmap
-> > + */
-> > =C2=A0void vunmap(const void *va);
-> > =C2=A0
-> > +/*
-> > + * Allocate `size` octets of possibly non-contiguous physical
-> > memory and map
-> > + * them contiguously in the VMAP_DEFAULT vmap region
-> > + *
-> > + * @param size Pointer to the base of an array of mfns
-> > + * @return Pointer to the mapped area on success; NULL otherwise.
-> > + */
-> > =C2=A0void *vmalloc(size_t size);
-> > +
-> > +/* Same as vmalloc(), but for the VMAP_XEN vmap region. */
-> > =C2=A0void *vmalloc_xen(size_t size);
-> > =C2=A0
-> > +/* Same as vmalloc(), but set the contents to zero before
-> > returning */
-> > =C2=A0void *vzalloc(size_t size);
-> > +
-> > +/*
-> > + * Unmap and free memory from vmalloc(), vmalloc_xen() or
-> > vzalloc()
-> > + *
-> > + * The system remembers internally how wide the mapping is and
-> > unmaps it all.
-> > + *
-> > + * @param va Virtual base address of the range to free and unmap
-> > + */
-> > =C2=A0void vfree(void *va);
->=20
-> ... here (just moved to the proper place now), I further wonder: Why
-> just
-> "mapping" and "unmap". The function is also (one might even say
-> primarily)
-> about freeing. IOW perhaps "how wide the allocation is and
-> unmaps/frees it
-> all"?
->=20
-> Happy to adjust while committing, at which point:
-> Acked-by: Jan Beulich <jbeulich@suse.com>
-Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+As per:
 
-~ Oleskii
+  https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#here-documents
+
+For inline files, use COPY with a heredoc, rather than opencoding it through
+/bin/sh.
+
+No practical change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Doug Goldstein <cardoe@cardoe.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ automation/build/debian/jessie-i386.dockerfile  | 2 +-
+ automation/build/debian/jessie.dockerfile       | 2 +-
+ automation/build/debian/stretch-i386.dockerfile | 2 +-
+ automation/build/debian/stretch.dockerfile      | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/automation/build/debian/jessie-i386.dockerfile b/automation/build/debian/jessie-i386.dockerfile
+index f6eaa94ee523..1eb7ff11c7d3 100644
+--- a/automation/build/debian/jessie-i386.dockerfile
++++ b/automation/build/debian/jessie-i386.dockerfile
+@@ -12,7 +12,7 @@ WORKDIR /build
+ ENTRYPOINT ["linux32"]
+ 
+ # replace repos in archive as release is EOL
+-RUN cat <<"END" > /etc/apt/sources.list
++COPY <<"END" /etc/apt/sources.list
+ deb http://archive.debian.org/debian/ jessie main contrib non-free
+ deb http://archive.debian.org/debian/ jessie-backports main contrib non-free
+ deb http://archive.debian.org/debian-security/ jessie/updates main contrib non-free
+diff --git a/automation/build/debian/jessie.dockerfile b/automation/build/debian/jessie.dockerfile
+index a870e743fcaf..4c0ffe66f8fe 100644
+--- a/automation/build/debian/jessie.dockerfile
++++ b/automation/build/debian/jessie.dockerfile
+@@ -10,7 +10,7 @@ RUN mkdir /build
+ WORKDIR /build
+ 
+ # replace repos in archive as release is EOL
+-RUN cat <<"END" > /etc/apt/sources.list
++COPY <<"END" /etc/apt/sources.list
+ deb http://archive.debian.org/debian/ jessie main contrib non-free
+ deb http://archive.debian.org/debian/ jessie-backports main contrib non-free
+ deb http://archive.debian.org/debian-security/ jessie/updates main contrib non-free
+diff --git a/automation/build/debian/stretch-i386.dockerfile b/automation/build/debian/stretch-i386.dockerfile
+index ad8db692aaf2..8ec9c3a24667 100644
+--- a/automation/build/debian/stretch-i386.dockerfile
++++ b/automation/build/debian/stretch-i386.dockerfile
+@@ -12,7 +12,7 @@ WORKDIR /build
+ ENTRYPOINT ["linux32"]
+ 
+ # replace repos in archive as release is EOL
+-RUN cat <<"END" > /etc/apt/sources.list
++COPY <<"END" /etc/apt/sources.list
+ deb http://archive.debian.org/debian/ stretch main contrib non-free
+ deb http://archive.debian.org/debian/ stretch-backports main contrib non-free
+ deb http://archive.debian.org/debian-security/ stretch/updates main contrib non-free
+diff --git a/automation/build/debian/stretch.dockerfile b/automation/build/debian/stretch.dockerfile
+index 4dfd40b54277..2db4552662de 100644
+--- a/automation/build/debian/stretch.dockerfile
++++ b/automation/build/debian/stretch.dockerfile
+@@ -10,7 +10,7 @@ RUN mkdir /build
+ WORKDIR /build
+ 
+ # replace repos in archive as release is EOL
+-RUN cat <<"END" > /etc/apt/sources.list
++COPY <<"END" /etc/apt/sources.list
+ deb http://archive.debian.org/debian/ stretch main contrib non-free
+ deb http://archive.debian.org/debian/ stretch-backports main contrib non-free
+ deb http://archive.debian.org/debian-security/ stretch/updates main contrib non-free
+-- 
+2.39.2
+
 
