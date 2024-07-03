@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6411C30653
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jul 2024 16:41:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.753277.1161537 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E620C2BD09
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jul 2024 20:44:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.753308.1161549 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sP32i-0004Ns-GJ; Wed, 03 Jul 2024 16:41:16 +0000
+	id 1sP6pI-0005S2-DE; Wed, 03 Jul 2024 20:43:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 753277.1161537; Wed, 03 Jul 2024 16:41:16 +0000
+Received: by outflank-mailman (output) from mailman id 753308.1161549; Wed, 03 Jul 2024 20:43:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sP32i-0004Nj-D1; Wed, 03 Jul 2024 16:41:16 +0000
-Received: by outflank-mailman (input) for mailman id 753277;
- Wed, 03 Jul 2024 16:41:14 +0000
+	id 1sP6pI-0005Rv-Am; Wed, 03 Jul 2024 20:43:40 +0000
+Received: by outflank-mailman (input) for mailman id 753308;
+ Wed, 03 Jul 2024 20:43:39 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1sP32g-0004NX-TX; Wed, 03 Jul 2024 16:41:14 +0000
+ id 1sP6pH-0005Rl-SJ; Wed, 03 Jul 2024 20:43:39 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1sP32g-0000eY-Sj; Wed, 03 Jul 2024 16:41:14 +0000
+ id 1sP6pH-0005AZ-NN; Wed, 03 Jul 2024 20:43:39 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1sP32g-0003Lf-HG; Wed, 03 Jul 2024 16:41:14 +0000
+ id 1sP6pH-0003ev-9K; Wed, 03 Jul 2024 20:43:39 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1sP32g-0007NZ-Gn; Wed, 03 Jul 2024 16:41:14 +0000
+ id 1sP6pH-0005op-8f; Wed, 03 Jul 2024 20:43:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,15 +47,15 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=Lxd2H8fqKhDwwA6YTimhHA+1oEzt6aYGMVdQ+iHMSYc=; b=yUtYr7rvdmWLCp6Q41O7mUmXAN
-	LyRdKoRIrxb7k3dJfUpBaCWhesGRVrdi5q4UT3ojBVagFV4reS2Jp+mm6hwPXPuo2uncpeZA5n/9e
-	5j4+otYTeQBJqA0vUbgp70tkulldC8KES/T6Ngw6ATPvOjgnU4ajK2ftCn1jeV0EJp3w=;
+	bh=cchSMN/AVDH8A+9NDJeqV6A1sNyuMCqAraBd6I3C/aQ=; b=XaDv9B9YG5UvTRvVUur7kDT8XG
+	b+0ucgu3oq6LRf/XEMFyvqp+LKebDzmxQ01ellPSrptZtN1HrPjKxo+Ctj7z/WpmU24OQzES7ofGC
+	JnkEVz5HKlbLMCnjwWmfag3xAECNZj5mIZBqDWgy9inZSIHyUL5N0jIqVPcn/gZEgtE8=;
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-186641-mainreport@xen.org>
+Message-ID: <osstest-186644-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 186641: tolerable all pass - PUSHED
+Subject: [xen-unstable-smoke test] 186644: tolerable all pass - PUSHED
 X-Osstest-Failures:
     xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
     xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
@@ -63,14 +63,14 @@ X-Osstest-Failures:
     xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
     xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
 X-Osstest-Versions-This:
-    xen=fb76e08a8f7a61dfbc07d0f335f1623bca650d7f
+    xen=63c66274d9934e0df7f4e3725c868ff2251b705f
 X-Osstest-Versions-That:
-    xen=08daa72cdcb660c2f0aef52ee76a3704e2dd1b5b
+    xen=fb76e08a8f7a61dfbc07d0f335f1623bca650d7f
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 03 Jul 2024 16:41:14 +0000
+Date: Wed, 03 Jul 2024 20:43:39 +0000
 
-flight 186641 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/186641/
+flight 186644 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/186644/
 
 Failures :-/ but no regressions.
 
@@ -82,15 +82,16 @@ Tests which did not succeed, but are not blocking:
  test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
 version targeted for testing:
- xen                  fb76e08a8f7a61dfbc07d0f335f1623bca650d7f
+ xen                  63c66274d9934e0df7f4e3725c868ff2251b705f
 baseline version:
- xen                  08daa72cdcb660c2f0aef52ee76a3704e2dd1b5b
+ xen                  fb76e08a8f7a61dfbc07d0f335f1623bca650d7f
 
-Last test of basis   186629  2024-07-02 12:04:14 Z    1 days
-Testing same since   186641  2024-07-03 13:00:24 Z    0 days    1 attempts
+Last test of basis   186641  2024-07-03 13:00:24 Z    0 days
+Testing same since   186644  2024-07-03 17:04:06 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
   Jan Beulich <jbeulich@suse.com>
 
 jobs:
@@ -123,5 +124,5 @@ Test harness code can be found at
 Pushing revision :
 
 To xenbits.xen.org:/home/xen/git/xen.git
-   08daa72cdc..fb76e08a8f  fb76e08a8f7a61dfbc07d0f335f1623bca650d7f -> smoke
+   fb76e08a8f..63c66274d9  63c66274d9934e0df7f4e3725c868ff2251b705f -> smoke
 
