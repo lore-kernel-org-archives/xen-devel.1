@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F49C31D97
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jul 2024 10:43:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.752894.1161164 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F621C30653
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jul 2024 10:43:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.752891.1161142 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sOxS4-0004hb-G1; Wed, 03 Jul 2024 10:43:04 +0000
+	id 1sOxS3-0004Fs-3o; Wed, 03 Jul 2024 10:43:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 752894.1161164; Wed, 03 Jul 2024 10:43:04 +0000
+Received: by outflank-mailman (output) from mailman id 752891.1161142; Wed, 03 Jul 2024 10:43:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sOxS4-0004fz-80; Wed, 03 Jul 2024 10:43:04 +0000
-Received: by outflank-mailman (input) for mailman id 752894;
- Wed, 03 Jul 2024 10:43:02 +0000
+	id 1sOxS3-0004Fl-0y; Wed, 03 Jul 2024 10:43:03 +0000
+Received: by outflank-mailman (input) for mailman id 752891;
+ Wed, 03 Jul 2024 10:43:01 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mAj5=OD=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sOxS2-0003zy-MD
- for xen-devel@lists.xenproject.org; Wed, 03 Jul 2024 10:43:02 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
+ id 1sOxS1-0003zy-0H
+ for xen-devel@lists.xenproject.org; Wed, 03 Jul 2024 10:43:01 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 04cf92dc-3929-11ef-8776-851b0ebba9a2;
- Wed, 03 Jul 2024 12:43:01 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a7241b2fe79so575648766b.1
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jul 2024 03:43:01 -0700 (PDT)
+ id 0391a4ad-3929-11ef-8776-851b0ebba9a2;
+ Wed, 03 Jul 2024 12:42:59 +0200 (CEST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a70c0349b64so684727366b.1
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jul 2024 03:42:58 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a72b92985desm414590066b.78.2024.07.03.03.42.58
+ a640c23a62f3a-a72b92985desm414590066b.78.2024.07.03.03.42.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jul 2024 03:42:59 -0700 (PDT)
+ Wed, 03 Jul 2024 03:42:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04cf92dc-3929-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 0391a4ad-3929-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720003380; x=1720608180; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1720003378; x=1720608178; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+pLr0uyErdUGlpbnK/HxLvapfSaB11DzNANAbBgSYDg=;
-        b=NCKRIFPiJ76VtuonhrfZH0ldTMo+Y7bFBAa3pw0jvXUcCk5cXj6Kisoxcf89HQAg73
-         0zLnCNoSGKRJiZ1Zy0LCE5ta6PMgGwbnWpg7lvk+AhH5hv5MMMxR6t1RjjSrz0QJFSOP
-         0ZBmIJfxi6LglSuXYTR7czr+td0C5oapkiXa3/E6h7ficUzzR3uF709l3u9WMXK+nZOa
-         UvzootZCTA5yqr+s8EokIvppjGR/74Xk815vCDkEZg/d+c8VZXW4TiYbgjRttg4kiLAq
-         IOj984Twlr1o2HHBHddIJUs0Q9FCFxeMMt2Ts0hAuD7nXWVsu/oJVC0cNSpWHXSeqeXX
-         RTMg==
+        bh=/G/A7NPWRh6mPuP+ZzOUK2A1wKjvppqVXw3/IEnVJxs=;
+        b=ak0tmmX/ZQjBL43Gvuil5z1AQUKmCbHBd+EiPiJGmMW+rD2czkAm1kBE2H8LE6mo9O
+         IcroTJ2MA9ni0HdxvZBzsp54pw+XllDChjw1guzTAytis3iFxwlEaYmCd+7Dw0s31KQW
+         uGxpkHCD9GxAzLrro75gzeS6GxeCvb5fdm4vbQMLK7O0As9Ceq80W+KOap4tL1HJrXCL
+         dtMVcYaUQ1dYGd5+KaIsNdb2M7GCTiHRDLZQGvjTJg0yyhuwKbv0VqrU+2WBZ6LhmUix
+         tUMSnT9DHPQf1W7sha7Vm7n76pSmaN9eaytxsYzILRoDzbMrDhXX9FDiuQlJThpBJeLW
+         zaIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720003380; x=1720608180;
+        d=1e100.net; s=20230601; t=1720003378; x=1720608178;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+pLr0uyErdUGlpbnK/HxLvapfSaB11DzNANAbBgSYDg=;
-        b=rmLgeUhhP/4wQwWac5HxueJTFMnt7BQmUkKNbMnCoy9ET/zsUZgzfphv0pjAqA1JRP
-         15tfyK/H3bLvZ7hXq1ZAAK1lHpvCfqLp1gthGv11MKGJf2oaht9mRBZAyjVGqTvdJ+/I
-         g53I2PlCREMfbkkmoCWzeTZfNgUVjJugqPbDLY8quszCs3yaV3wpKTheYd38vSyg0o0c
-         Cir7cBpDDZaU2Clhzc5906k4syvcJOTKG6EsNgt/7Jkzvk8EPbuX5gDbfBKc0Hg17Z8x
-         oTJK/c0EMVDCJg+OXa1tLY4KmJOT911EH9J/HPDl7ejrw8nRpqXxR9VoscGk0EFjw0qg
-         SbkQ==
-X-Gm-Message-State: AOJu0YxQb8NaxdLmwDuZMRuHSUdgJ5ZaGXaJOfZawLdaKgR02I0WZXee
-	KwLkOXA3snOnErrB8omUiiKFYTCktp5ETtBUlpSri3FKtNE/Une9KUYnihm5
-X-Google-Smtp-Source: AGHT+IH3O6KWGvDg2t91/NyMVCFCqzBu4loX4h2mF+Jp6kwL5bKL+02NZHeN4ouuhErBQnF9C49v+g==
-X-Received: by 2002:a17:907:7295:b0:a72:7bf4:694c with SMTP id a640c23a62f3a-a751443c582mr1021317066b.16.1720003379590;
-        Wed, 03 Jul 2024 03:42:59 -0700 (PDT)
+        bh=/G/A7NPWRh6mPuP+ZzOUK2A1wKjvppqVXw3/IEnVJxs=;
+        b=qfRYYmUQP7jJwFnpTJdBZMeIR43NjoTsDAFt/fVJ+8wX7UgfFNmD7SX2/EDZJygxZI
+         W+DOsy0yE8QA7c44mgp6pGTiQJuZWSNOpqYnNNpf8JUjBGkstYQjz4CYV0kdZ8UFwfJc
+         XTJgcNYMBXeA5cdp2+YtPAuXibln1wWA4S3WiYLZFhXx4c7yG8OA3V0LJxY9o9Piypql
+         /EBCfi8cZAILuDEOO5+yCiahBAKwmbShDKyaLu6BuWUe5425wmIFL2ERpjLBiffktVEQ
+         qHzBnU4SZuxqSPs4AzpOGwU8DmlN+oJwpaKX/b4F8wL8U4A55YOxfPG1CaFZP90F68He
+         hRxQ==
+X-Gm-Message-State: AOJu0YzTqR3LEqHrLr0eyAhysexhjSF/1AHOuRkbvurpHau0STCJQ0B/
+	QdY/wIRVPBbY81aD5vcGty/1J5aLJRWtxrGE/W/i7LUXPHrWZ85kt4SKIQXK
+X-Google-Smtp-Source: AGHT+IF0e8OlBOffvF4PdyITNIFA1vPC47T7cI8Tz6isT4NspLNQ0rQK8izoqHNJIJNzCDw7uMtKsw==
+X-Received: by 2002:a17:907:6e9f:b0:a72:7d5c:ace0 with SMTP id a640c23a62f3a-a751440bbaemr799692866b.11.1720003377862;
+        Wed, 03 Jul 2024 03:42:57 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -86,87 +86,32 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 5/5] xen/riscv: map FDT
-Date: Wed,  3 Jul 2024 12:42:51 +0200
-Message-ID: <7e492df051c949744755a221c0448c740d2c681b.1720002425.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 3/5] xen/riscv: enable CONFIG_HAS_DEVICE_TREE
+Date: Wed,  3 Jul 2024 12:42:49 +0200
+Message-ID: <8861be6624f50c927a8dadbcf056aff2dc0576ab.1720002425.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <cover.1720002425.git.oleksii.kurochko@gmail.com>
 References: <cover.1720002425.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Except mapping of FDT, it is also printing command line passed by
-a DTB and initialize bootinfo from a DTB.
-
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/riscv64/head.S |  3 +++
- xen/arch/riscv/setup.c        | 21 +++++++++++++++++++++
- 2 files changed, 24 insertions(+)
+ xen/arch/riscv/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
-index 3261e9fce8..22fb36a861 100644
---- a/xen/arch/riscv/riscv64/head.S
-+++ b/xen/arch/riscv/riscv64/head.S
-@@ -41,6 +41,9 @@ FUNC(start)
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+index 74ad019fe7..1863a5d117 100644
+--- a/xen/arch/riscv/Kconfig
++++ b/xen/arch/riscv/Kconfig
+@@ -5,6 +5,7 @@ config RISCV
+ config RISCV_64
+ 	def_bool y
+ 	select 64BIT
++	select HAS_DEVICE_TREE
+ 	select GENERIC_BUG_FRAME
  
-         jal     setup_initial_pagetables
- 
-+        mv      a0, s1
-+        jal     fdt_map
-+
-         /* Calculate proper VA after jump from 1:1 mapping */
-         la      a0, .L_primary_switched
-         sub     a0, a0, s2
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 4f06203b46..b346956e06 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -1,7 +1,9 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
-+#include <xen/bootfdt.h>
- #include <xen/bug.h>
- #include <xen/compile.h>
-+#include <xen/device_tree.h>
- #include <xen/init.h>
- #include <xen/mm.h>
- 
-@@ -33,15 +35,34 @@ static void test_macros_from_bug_h(void)
-     printk("WARN is most likely working\n");
- }
- 
-+void __init fdt_map(paddr_t dtb_addr)
-+{
-+    device_tree_flattened = early_fdt_map(dtb_addr);
-+    if ( !device_tree_flattened )
-+    {
-+        printk("wrong FDT\n");
-+        die();
-+    }
-+}
-+
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
- {
-+    size_t fdt_size;
-+    const char *cmdline;
-+
-     remove_identity_mapping();
- 
-     trap_init();
- 
-     test_macros_from_bug_h();
- 
-+    fdt_size = boot_fdt_info(device_tree_flattened, dtb_addr);
-+
-+    cmdline = boot_fdt_cmdline(device_tree_flattened);
-+    printk("Command line: %s\n", cmdline);
-+    cmdline_parse(cmdline);
-+
-     printk("All set up\n");
- 
-     for ( ;; )
+ config ARCH_DEFCONFIG
 -- 
 2.45.2
 
