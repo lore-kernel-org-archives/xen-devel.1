@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC16C3DA40
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jul 2024 18:23:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.754478.1162931 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB09C3271E
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jul 2024 19:15:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.754513.1162971 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sPnaa-0006p0-BS; Fri, 05 Jul 2024 18:23:20 +0000
+	id 1sPoOy-0006qL-UU; Fri, 05 Jul 2024 19:15:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 754478.1162931; Fri, 05 Jul 2024 18:23:20 +0000
+Received: by outflank-mailman (output) from mailman id 754513.1162971; Fri, 05 Jul 2024 19:15:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sPnaa-0006ot-8O; Fri, 05 Jul 2024 18:23:20 +0000
-Received: by outflank-mailman (input) for mailman id 754478;
- Fri, 05 Jul 2024 18:23:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=A4R/=OF=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sPnaY-0006of-TI
- for xen-devel@lists.xenproject.org; Fri, 05 Jul 2024 18:23:18 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a5d4bf1b-3afb-11ef-bbfb-fd08da9f4363;
- Fri, 05 Jul 2024 20:23:16 +0200 (CEST)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-57cb9a370ddso2602211a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jul 2024 11:23:16 -0700 (PDT)
-Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-58f9d3f11ffsm1084696a12.67.2024.07.05.11.23.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 11:23:13 -0700 (PDT)
+	id 1sPoOy-0006qE-Qw; Fri, 05 Jul 2024 19:15:24 +0000
+Received: by outflank-mailman (input) for mailman id 754513;
+ Fri, 05 Jul 2024 19:15:24 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sPoOy-0006q4-2c; Fri, 05 Jul 2024 19:15:24 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sPoOy-0007bt-02; Fri, 05 Jul 2024 19:15:24 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sPoOx-0004uG-DT; Fri, 05 Jul 2024 19:15:23 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1sPoOx-00062e-D4; Fri, 05 Jul 2024 19:15:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,69 +44,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a5d4bf1b-3afb-11ef-bbfb-fd08da9f4363
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1720203795; x=1720808595; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ykZjKbXh9UmKyZo8fjcIZ1I5BuCpnN4JJtWIO/GSyng=;
-        b=Gj9c/16TEqC8l7rnEoWE0malHtA+QhHqN8gp2s08dLPo+as71qs4+a46dXs8q9TTfx
-         /GBy8NDs+uqDsHHVGlfgKL3JxBTBFGCwEBNknRuhL4cloQa/2DJjpmZEit01CGMXncLV
-         6UN4anuzECJVWSFTTc7LfgAV6UR9hZHHat/UE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720203795; x=1720808595;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ykZjKbXh9UmKyZo8fjcIZ1I5BuCpnN4JJtWIO/GSyng=;
-        b=hGTn9fNd3S5OPjQ4xCw5KOIueN31cfD2T4r6AvIxFPaHCJ0GspMoovQI75g2aqIKA5
-         dZEM8jnt1iVYp8DtabYYtGYfqpiQJxr/bDDEAA+IStS9euRzuobKbX7Z+QFfH6jCp/31
-         SO0BUE8Excln8Z+xvRxPL6pDyN21Sp+boch37kPxGuH5aUTN6HxHOo8IcoVXs6z/Z853
-         AU4IhGxTa67PO6OLRHMQJ5EcnjCJlzIUEC6mNJlrvvqHrdXZkYhpoMcmXP2fYxjJzxf6
-         Lu8Zg4eLf6x7D/tR75o74ygMC/k+N06i8E08i9Ts2BS6nHaUubzcJ8j3wViHgsUZUpEY
-         5w9g==
-X-Gm-Message-State: AOJu0YwdAbNaRZoMsFCaYUKiRXdL8v9cObzQg+S7HEhoxdvNwdRVk9Rn
-	Tvk/CePqRMqfFT8poA3MvOIPxbqU6YuR32ScfCxlPgIKQshwcyMINwv9ZDo0M0GfQJhuKlp52Zm
-	7
-X-Google-Smtp-Source: AGHT+IHjQc78kY0IfYHTpBEqA9L6mCyX6+TwII3IdXPZPbtoARlqaKBIKEN9sVECxLQ6/rjZ9HIhTw==
-X-Received: by 2002:a05:6402:524b:b0:57c:7486:3f7d with SMTP id 4fb4d7f45d1cf-58e59d3b3efmr4081018a12.19.1720203795073;
-        Fri, 05 Jul 2024 11:23:15 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH 0/2] ppc/shutdown: Implement machine_{halt,restart}()
-Date: Fri,  5 Jul 2024 19:23:09 +0100
-Message-Id: <20240705182311.1968790-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.2
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=MFQNuMZKRDUtrBvuE6eoFWWQf876cPpE6Wo32Uoh0t0=; b=vtktRhDGGN4k1hDASkfY5z68mN
+	JwkQOvDTuukqXAF9aEEnyMc7gt2s0350nKQRI3h5Y5MJ2VNDI/eoFSBFExNjLAxKRWguCDvwv4UGP
+	fzsbHny8C5RdsJyVz4P0r3o+Gg0EMl5iwTOGJkLqWDMU+mcxIxLyv3CEP4kQm+WlWBqk=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-186705-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 186705: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=a3359ffb25ce70ee90822f6886136bf0d200406e
+X-Osstest-Versions-That:
+    ovmf=22d0babd3315dc24027321819cf0efc487dc9d18
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 05 Jul 2024 19:15:23 +0000
 
-I got bored testing fixes to the gitlab containers.
+flight 186705 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/186705/
 
-Oleksii: There's almost certainly a related change suitable for RISC-V.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 a3359ffb25ce70ee90822f6886136bf0d200406e
+baseline version:
+ ovmf                 22d0babd3315dc24027321819cf0efc487dc9d18
 
-Andrew Cooper (2):
-  xen/shutdown: Fix build issue with shutdown.h on PPC
-  ppc/shutdown: Implement machine_{halt,restart}()
+Last test of basis   186704  2024-07-05 15:11:05 Z    0 days
+Testing same since   186705  2024-07-05 17:42:53 Z    0 days    1 attempts
 
- xen/arch/ppc/Makefile           |  1 +
- xen/arch/ppc/ppc64/opal-calls.S |  4 +++
- xen/arch/ppc/setup.c            |  8 +++---
- xen/arch/ppc/shutdown.c         | 43 +++++++++++++++++++++++++++++++++
- xen/arch/ppc/stubs.c            | 12 ---------
- xen/common/shutdown.c           |  4 +--
- xen/include/xen/shutdown.h      |  3 ++-
- 7 files changed, 55 insertions(+), 20 deletions(-)
- create mode 100644 xen/arch/ppc/shutdown.c
+------------------------------------------------------------
+People who touched revisions under test:
+  Xianglai Li <lixianglai@loongson.cn>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
 
 
-base-commit: c2a66d0b58b9661037cfed6bf3f8122b3363ca38
--- 
-2.39.2
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   22d0babd33..a3359ffb25  a3359ffb25ce70ee90822f6886136bf0d200406e -> xen-tested-master
 
