@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1DC5C3271E
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jul 2024 15:20:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.754376.1162790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA6BC3271E
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jul 2024 15:21:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.754378.1162800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sPkjv-000067-1H; Fri, 05 Jul 2024 15:20:47 +0000
+	id 1sPkk3-0000Ol-AA; Fri, 05 Jul 2024 15:20:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 754376.1162790; Fri, 05 Jul 2024 15:20:47 +0000
+Received: by outflank-mailman (output) from mailman id 754378.1162800; Fri, 05 Jul 2024 15:20:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sPkju-00005z-To; Fri, 05 Jul 2024 15:20:46 +0000
-Received: by outflank-mailman (input) for mailman id 754376;
- Fri, 05 Jul 2024 15:20:45 +0000
+	id 1sPkk3-0000Oc-7E; Fri, 05 Jul 2024 15:20:55 +0000
+Received: by outflank-mailman (input) for mailman id 754378;
+ Fri, 05 Jul 2024 15:20:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=A4R/=OF=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sPkjt-00005r-KM
- for xen-devel@lists.xenproject.org; Fri, 05 Jul 2024 15:20:45 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1sPkk1-00005r-9i
+ for xen-devel@lists.xenproject.org; Fri, 05 Jul 2024 15:20:53 +0000
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [2a00:1450:4864:20::535])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 25683790-3ae2-11ef-8776-851b0ebba9a2;
- Fri, 05 Jul 2024 17:20:43 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a77bf336171so256866966b.1
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jul 2024 08:20:43 -0700 (PDT)
+ id 2a2e1b15-3ae2-11ef-8776-851b0ebba9a2;
+ Fri, 05 Jul 2024 17:20:51 +0200 (CEST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-58f9874aeb4so1178733a12.0
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jul 2024 08:20:51 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a77c8ad6c6esm78100366b.49.2024.07.05.08.20.40
+ a640c23a62f3a-a77c8ad6c6esm78100366b.49.2024.07.05.08.20.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 08:20:40 -0700 (PDT)
+ Fri, 05 Jul 2024 08:20:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25683790-3ae2-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 2a2e1b15-3ae2-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1720192842; x=1720797642; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NrzNfhl2P/0/0SZmMx6v7qVnc8kyhqfiItOMvG5o1uo=;
-        b=lbSXnHY97k7PeUB0dUK97ftch2wyYCbdeJ9Dk5VSiW8GNxI0Cq7Ckkej119s4dx2QP
-         OCylZ/G/cpK+3MJ97ryAUPBvIHIVtKQ+ncTVjCCZLGVK4hmZrV7BCL05vNN+X1G1y3xw
-         c6sErAq+lpCEk9YbCbgsaaBzUra97wbfv+R30=
+        d=citrix.com; s=google; t=1720192850; x=1720797650; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OcZcOS3Zfs0qn5whvyKffCaiaSIRTopD2hbn/NMOSac=;
+        b=fiKR+IhIQHV5NGy+/YevliOo039PKAOHjc8f8vvmgX5p4V9xoxGHFKa1m2nUPldCxn
+         7uzq4ktfNSfuMyiwrTINTspp7u7z3lQTbAm/5WCVhimM2YFt6jFmsYv0NZYxuPOCU48B
+         OI6c5I8J7bDHkKDP436BVNcwIX2SDyGlQvJfw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720192842; x=1720797642;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NrzNfhl2P/0/0SZmMx6v7qVnc8kyhqfiItOMvG5o1uo=;
-        b=A/7rIGDpyREv8fFhan953P/2f5VC7RuPZjPLAuDNFGpOwAiV9ros3mmLnRrJqBisIQ
-         AcRpLNXbx9uhgA2HI4FmZdL98oAxDB965WsU99SeAf6FvldgON3JjTsozPVKLflRDSEg
-         sPe1nV/pRmTkCaRePZXg6MeHym1vIkNLImUFutlphjvKPTLECihFzVIQrzGxmxId51iu
-         VaiGnW9bZYGaSGtH9JrDKZ+CIHSQw+YBdWXQCCssUE2hez4HekQqIVoYW0ES/Mx6bFEc
-         Ad32KPAX6bVPXchcreNMn40qdmjXfSRoCAV6R1U43/A8ZTuRNNQXzKNxesDTFG9Rh9as
-         CpOQ==
-X-Gm-Message-State: AOJu0YwZvyRV/TaaGTrErMtMGINZyBq/pN5VacjRZYqYGMM2pdYVewWy
-	MO7BqwqMbqHz3UNu1l/WxevBv0A76uCJ6Zg5R+f6ADzMtLrWjEQSDv6AXxVAMW2+WqkTdQeQczB
-	b
-X-Google-Smtp-Source: AGHT+IEPuLvXIsVUFR+7tg0gAV55lh7/XiiJSwYOoj36vsuRtnr6VhpsN3+nBdSrdd2J81aSX+gYrw==
-X-Received: by 2002:a17:906:6a93:b0:a77:a1f1:cfa0 with SMTP id a640c23a62f3a-a77bdae45eamr333391766b.36.1720192842183;
-        Fri, 05 Jul 2024 08:20:42 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1720192850; x=1720797650;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=OcZcOS3Zfs0qn5whvyKffCaiaSIRTopD2hbn/NMOSac=;
+        b=qGBPf++B0q6w5/fscGc+utFN0SX/38m8iJUxyFc2IRf8e6YYQB6DdrEVlmhrD55AhQ
+         XuYK0Cc7/39Bc9RP7uNjtDkLyGe9+ECIitZQQfCyhODS/je7z/j423jGXI/rt4YNOidD
+         FBAryCLlAteJnkol5Nng8BRwzjDcUNynjtnMZki3nF63DkVHkeVg8+QwAi2nz9WlzYXH
+         wIYBfhw13vDihdT4G1zD+JoI712nrrVqYhyKORt0ncnNZdAv3t2KOlisByDmpa8hzkhW
+         V+25GsmY4HIsgbh3CiUoXJT4j1xVCeVkpa5LqB3uTcnoQKH0xfE/wsdR0l4j2zHz3Ody
+         fIeA==
+X-Gm-Message-State: AOJu0YzHJL8LGGFCeXIpeCRgU6y33svGou/JvSwe/VejigLmJ2a/A6hF
+	bx3ZgcRsIoL9iShfCGq3qJu8zN6wftFwJNR+es23g6Nz4c9Hka876gugZTG3UVlePfkPhfoa33O
+	a
+X-Google-Smtp-Source: AGHT+IHFfV8n32lBYuoEDVkYpY4UpnOOVGoPJhADeAiwu+PZuCiN4zx8kwRW/ds3I9uR6+zovrlcQg==
+X-Received: by 2002:a17:906:40d0:b0:a72:5bb9:b140 with SMTP id a640c23a62f3a-a77ba7123abmr307449966b.54.1720192849948;
+        Fri, 05 Jul 2024 08:20:49 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -84,51 +85,71 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.19 0/6] CI: Fixes, part 2
-Date: Fri,  5 Jul 2024 16:20:31 +0100
-Message-Id: <20240705152037.1920276-1-andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.19 2/6] build: Fix the version of python checked for by ./configure
+Date: Fri,  5 Jul 2024 16:20:33 +0100
+Message-Id: <20240705152037.1920276-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240705152037.1920276-1-andrew.cooper3@citrix.com>
+References: <20240705152037.1920276-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Work to fix a few build system checks, and to strip the obsolete contents of
-the build containers, prior to adding new containers (will be part 3).
+We previously upped the minimum python version to 2.6, but neglected to
+reflect this in ./configure
 
-Andrew Cooper (6):
-  build: Regenerate ./configure with Autoconf 2.71
-  build: Fix the version of python checked for by ./configure
-  CI: Refresh the Coverity Github Action configuration
-  build: Drop openssl as a build dependency
-  build: Drop libiconv as a build dependecy
-  build: Drop xorg-x11 as a build dependency
+Fixes: 2a353c048c68 ("tools: Don't use distutils in configure or Makefile")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Juergen Gross <jgross@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ tools/configure    | 8 ++++----
+ tools/configure.ac | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
- .cirrus.yml                                   |    2 +-
- .github/workflows/coverity.yml                |   36 +-
- README                                        |    2 -
- .../build/debian/bookworm-arm64v8.dockerfile  |    2 -
- .../build/debian/bookworm-i386.dockerfile     |    2 -
- automation/build/debian/bookworm.dockerfile   |    2 -
- .../build/debian/jessie-i386.dockerfile       |    2 -
- automation/build/debian/jessie.dockerfile     |    2 -
- .../build/debian/stretch-i386.dockerfile      |    2 -
- automation/build/debian/stretch.dockerfile    |    2 -
- automation/build/fedora/29.dockerfile         |    1 -
- automation/build/ubuntu/bionic.dockerfile     |    2 -
- automation/build/ubuntu/focal.dockerfile      |    2 -
- automation/build/ubuntu/trusty.dockerfile     |    2 -
- automation/build/ubuntu/xenial.dockerfile     |    2 -
- .../kernel/5.19-arm64v8.dockerfile            |    1 -
- .../tests-artifacts/kernel/6.1.19.dockerfile  |    1 -
- config/Tools.mk.in                            |    1 -
- configure                                     | 1006 +--
- docs/configure                                |  990 +--
- stubdom/configure                             | 2293 ++++--
- tools/config.h.in                             |   15 +-
- tools/configure                               | 6397 +++++++++--------
- tools/configure.ac                            |    4 +-
- 24 files changed, 6136 insertions(+), 4635 deletions(-)
-
+diff --git a/tools/configure b/tools/configure
+index 6c1084b7b28a..d160ca296202 100755
+--- a/tools/configure
++++ b/tools/configure
+@@ -8298,15 +8298,15 @@ if test x"${PYTHONPATH}" = x"no"
+ then
+     as_fn_error $? "Unable to find $PYTHON, please install $PYTHON" "$LINENO" 5
+ fi
+-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for python version >= 2.6 " >&5
+-printf %s "checking for python version >= 2.6 ... " >&6; }
+-`$PYTHON -c 'import sys; sys.exit(eval("sys.version_info < (2, 6)"))'`
++{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for python version >= 2.7 " >&5
++printf %s "checking for python version >= 2.7 ... " >&6; }
++`$PYTHON -c 'import sys; sys.exit(eval("sys.version_info < (2, 7)"))'`
+ if test "$?" != "0"
+ then
+     python_version=`$PYTHON -V 2>&1`
+     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+ printf "%s\n" "no" >&6; }
+-    as_fn_error $? "$python_version is too old, minimum required version is 2.6" "$LINENO" 5
++    as_fn_error $? "$python_version is too old, minimum required version is 2.7" "$LINENO" 5
+ else
+     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+ printf "%s\n" "yes" >&6; }
+diff --git a/tools/configure.ac b/tools/configure.ac
+index ac0fdc4314c4..be58f06be450 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -385,7 +385,7 @@ PYTHONPATH=$PYTHON
+ PYTHON=`basename $PYTHONPATH`
+ 
+ AX_PATH_PROG_OR_FAIL([PYTHONPATH], [$PYTHON])
+-AX_CHECK_PYTHON_VERSION([2], [6])
++AX_CHECK_PYTHON_VERSION([2], [7])
+ 
+ AS_IF([test "$cross_compiling" != yes], [
+     AX_CHECK_PYTHON_DEVEL()
 -- 
 2.39.2
 
