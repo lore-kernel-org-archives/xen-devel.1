@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A1BDC3DA41
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jul 2024 17:10:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.755524.1163906 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3F9FC3271E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jul 2024 17:35:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.755531.1163927 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sQrsG-00053w-FG; Mon, 08 Jul 2024 17:10:00 +0000
+	id 1sQsGx-0000W5-KU; Mon, 08 Jul 2024 17:35:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 755524.1163906; Mon, 08 Jul 2024 17:10:00 +0000
+Received: by outflank-mailman (output) from mailman id 755531.1163927; Mon, 08 Jul 2024 17:35:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sQrsG-00053p-CI; Mon, 08 Jul 2024 17:10:00 +0000
-Received: by outflank-mailman (input) for mailman id 755524;
- Mon, 08 Jul 2024 17:09:59 +0000
+	id 1sQsGx-0000Vy-G7; Mon, 08 Jul 2024 17:35:31 +0000
+Received: by outflank-mailman (input) for mailman id 755531;
+ Mon, 08 Jul 2024 17:35:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xFgZ=OI=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sQrsF-00053j-8X
- for xen-devel@lists.xenproject.org; Mon, 08 Jul 2024 17:09:59 +0000
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [2607:f8b0:4864:20::730])
+ <SRS0=DP+Y=OI=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sQsGw-0000H0-78
+ for xen-devel@lists.xenproject.org; Mon, 08 Jul 2024 17:35:30 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e65d24d0-3d4c-11ef-8776-851b0ebba9a2;
- Mon, 08 Jul 2024 19:09:57 +0200 (CEST)
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-79ef8fe0e90so208982785a.3
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jul 2024 10:09:56 -0700 (PDT)
-Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-79f18ff695dsm10162985a.14.2024.07.08.10.09.54
+ id 775a3695-3d50-11ef-8776-851b0ebba9a2;
+ Mon, 08 Jul 2024 19:35:28 +0200 (CEST)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-57cc1c00ba6so5674290a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Jul 2024 10:35:28 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a780a6bc88csm11603666b.6.2024.07.08.10.35.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 10:09:55 -0700 (PDT)
+ Mon, 08 Jul 2024 10:35:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,67 +47,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e65d24d0-3d4c-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 775a3695-3d50-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1720458596; x=1721063396; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=WX9HGNqyT895VmKzQ0BsOnL/b6zmLY23I1w48g1ZhRE=;
-        b=kOVhvZrtONcGM896HDaXI5NGhFJY6yWyFDVqvol5kjVTxbM9lhn3Iltg3GxEOd9x4f
-         ctJLwo1D3PMmUWf1KxlcGfhy7XzHnGL38AlMTAB9026nMyAtdRg4pK2wJV/kHL8MhZ+g
-         7F13j88hjhrPXPh7tA7Oro2/+vLpMBHrQEJXQ=
+        d=citrix.com; s=google; t=1720460126; x=1721064926; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=epcQlWhE08mmo18Ou0eUa+ySD6kZjdPGssgvvnX14vM=;
+        b=CQj1Zig1rku/JKCKrmi3PcEl8V8u70Pg+3MLnrdPc8WSIpnXJfIwfy0WrwDGtWThDP
+         KWkuh7cNh7bikwY/dzsdMqxbPlRwOpBit2h6PovZQBNfNOJmpE8k6vZ5yxLV0ePnZG8l
+         +pAzsALKx0WFWcrKk41R/TtRIjrVaQUt9Hvgc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720458596; x=1721063396;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=WX9HGNqyT895VmKzQ0BsOnL/b6zmLY23I1w48g1ZhRE=;
-        b=a47z15GZChY38wQhh9PmQaWelHYZlP7a+2sfuETxKOByLxNRs6ti9mWD0w4eHHBGZ7
-         iZ9PNayrIdEv8qSKCre61hKsUiFU5Tw59riezrDY4g2EZFCwaeVU6Fudf9uWsqm573aa
-         kH17+0QzBxl/kh+8ocBseCkQxrbTRuKSZAaooDZEeAFXQrKSAoD055d0VKAF66e7UM80
-         6/0272iihb8//4tecso12CfxxnqkYVyTksNi8T2RzW4Ctsl5/tEBMhrWAX4rTTYOgbCC
-         862a9YWi9zqGxLZM3Ma4xt24RhYeNJq9Rhu7I0hCn4YZihXBtkOKpA+yebD0MkqO1KSC
-         x5Rw==
-X-Gm-Message-State: AOJu0YyedgR8N1bcyS9mMRqbrQe7kPFYGdMkmwgcUq1i2l/AbE93XgYH
-	kRXFWMBnRb+N1m0+cdqwf0g0CMTHJ6Nx8pAt6NZ7DZAX/WUYuPYzPF2t+JkcnxA=
-X-Google-Smtp-Source: AGHT+IHt48Vwzg2wcb43HIAznH/r75Pd+DvBtiZyGrb+tGAGHKq4HbOYRm1OH8sKhy9wFX85Qc1Zxw==
-X-Received: by 2002:a05:620a:9c2:b0:79f:7b8:4950 with SMTP id af79cd13be357-79f19ab8cb0mr15144785a.51.1720458595776;
-        Mon, 08 Jul 2024 10:09:55 -0700 (PDT)
-Date: Mon, 8 Jul 2024 19:09:50 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+        d=1e100.net; s=20230601; t=1720460126; x=1721064926;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=epcQlWhE08mmo18Ou0eUa+ySD6kZjdPGssgvvnX14vM=;
+        b=RVolCbX4DDNEmGutX4S8J1z2t0fjtyAXBio6ZZsVsYuETfJgC5utSUEHZs3xPlNiYu
+         cABU9KaAQrsxCAtEyp6c5JQvV+ZDXvK+V4JQLgJ4Ef8P8PXDZJhKjBhi4HeWCYeU7GPj
+         dav3YeVi6gXuOr+82PKomcmI8zLiAqdphfyHv6lQTpgeVbXS1oI3nCkRLBFFlKd3N+Ij
+         b2QCVE1V89FCz0PtzkytPjwPB22K7VM6GAB9EPg8FrK4jvZu7cZUWyZtYc10R1re5kkb
+         tGU+99DgJvjjAr/0SZ5Il11m3Tf1I+RmLH196pyjrc/jZNaMSul3WY2Zy+u97liuIjFH
+         j2Yw==
+X-Gm-Message-State: AOJu0YwNmGAqspYsBytsPBAFf/pDC9rBWGdpgRG9LFh/iSsBzCzJtVSM
+	dbbu+OhlXk1zb+/ypCeawvVvCpx73GxpD7FdYuHcGo1O28L/Y2Z9S8Jm+EGIW3+sMj65TkD3R0h
+	p
+X-Google-Smtp-Source: AGHT+IFI2/gBtGpBbyGt3lCYXWmf0QYtt4N0rNJ3xsNz0sosJ5NN+JTGmFARbLqHfD2RQ7GMMLlD1A==
+X-Received: by 2002:a17:906:f0cc:b0:a6f:e819:da9c with SMTP id a640c23a62f3a-a780b70539bmr19110566b.43.1720460126307;
+        Mon, 08 Jul 2024 10:35:26 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>,
+	Juergen Gross <jgross@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Re: [PATCH for-4.19 v2 3/6] CI: Refresh the Coverity Github Action
- configuration
-Message-ID: <ZowdXsQiYry-ZiCj@macbook.local>
-References: <20240705152037.1920276-4-andrew.cooper3@citrix.com>
- <20240708154228.2177924-1-andrew.cooper3@citrix.com>
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH 1/4] CI: Fix CONTAINER_UID0=1 scripts/containerize
+Date: Mon,  8 Jul 2024 18:35:19 +0100
+Message-Id: <20240708173522.2218293-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240708173522.2218293-1-andrew.cooper3@citrix.com>
+References: <20240708173522.2218293-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240708154228.2177924-1-andrew.cooper3@citrix.com>
 
-On Mon, Jul 08, 2024 at 04:42:28PM +0100, Andrew Cooper wrote:
-> Update to Ubuntu 24.04, and checkout@v4 as v2 is deprecated.
-> 
-> The build step goes out of it's way to exclude docs and stubdom (but include
-> plain MiniOS), so disable those at the ./configure stage and simplify the
-> build step somewhat.
-> 
-> Refresh the package list.  libbz2-dev was in there twice, and e2fslibs-dev is
-> a a transitional package to libext2fs-dev.  I'm not aware of libtool ever
-> having been a Xen dependency.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Right now, most build containers use root.  Archlinux, Fedora and Yocto set up
+a regular user called `user`.
 
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+For those containers, trying to containerize as root fails, because
+CONTAINER_UID0=1 does nothing, whereas CONTAINER_UID0=0 forces the user away
+from root.
 
-Thanks, Roger.
+To make CONTAINER_UID0=1 work reliably, force to root if requested.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Juergen Gross <jgross@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+CC: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+ automation/scripts/containerize | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/automation/scripts/containerize b/automation/scripts/containerize
+index acdef1b54813..03bc4837350c 100755
+--- a/automation/scripts/containerize
++++ b/automation/scripts/containerize
+@@ -51,7 +51,7 @@ esac
+ 
+ # Use this variable to control whether root should be used
+ case "_${CONTAINER_UID0}" in
+-    _1)   userarg= ;;
++    _1)   userarg="-u 0" ;;
+     _0|_) userarg="-u $(id -u) $userns_podman" ;;
+ esac
+ 
+-- 
+2.39.2
+
 
