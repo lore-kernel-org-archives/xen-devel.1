@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45FABC3DA4A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFC52C3DA4B
 	for <xen-devel@archiver.kernel.org>; Thu, 11 Jul 2024 11:15:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.757327.1166202 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.757324.1166174 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sRrls-0000SG-07; Thu, 11 Jul 2024 11:15:32 +0000
+	id 1sRrlp-00089F-5F; Thu, 11 Jul 2024 11:15:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 757327.1166202; Thu, 11 Jul 2024 11:15:31 +0000
+Received: by outflank-mailman (output) from mailman id 757324.1166174; Thu, 11 Jul 2024 11:15:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sRrlr-0000Rb-PL; Thu, 11 Jul 2024 11:15:31 +0000
-Received: by outflank-mailman (input) for mailman id 757327;
- Thu, 11 Jul 2024 11:15:30 +0000
+	id 1sRrlo-00088k-TH; Thu, 11 Jul 2024 11:15:28 +0000
+Received: by outflank-mailman (input) for mailman id 757324;
+ Thu, 11 Jul 2024 11:15:28 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PZf6=OL=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sRrlq-0007rD-LO
- for xen-devel@lists.xenproject.org; Thu, 11 Jul 2024 11:15:30 +0000
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [2a00:1450:4864:20::135])
+ id 1sRrlo-0007rD-35
+ for xen-devel@lists.xenproject.org; Thu, 11 Jul 2024 11:15:28 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e1d1126a-3f76-11ef-bbfb-fd08da9f4363;
- Thu, 11 Jul 2024 13:15:29 +0200 (CEST)
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-52ea7d2a039so780464e87.3
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jul 2024 04:15:30 -0700 (PDT)
+ id e045db34-3f76-11ef-bbfb-fd08da9f4363;
+ Thu, 11 Jul 2024 13:15:27 +0200 (CEST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a77e2f51496so112808166b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jul 2024 04:15:27 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a780a7ff7d5sm246386666b.142.2024.07.11.04.15.27
+ a640c23a62f3a-a780a7ff7d5sm246386666b.142.2024.07.11.04.15.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 04:15:28 -0700 (PDT)
+ Thu, 11 Jul 2024 04:15:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e1d1126a-3f76-11ef-bbfb-fd08da9f4363
+X-Inumbo-ID: e045db34-3f76-11ef-bbfb-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1720696528; x=1721301328; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1720696526; x=1721301326; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tAHuZgHoF2exqi8oaOVtjkQF+Fln/FT2w5YgzvR4eVA=;
-        b=ldznZDsntPj1nxdbH6+r65PN/8suh7prGDIZiHhi66mdVizfAnRXodhEo01o/svKBb
-         yeAP4W4BVz7sGT7n2whUJQgw7H+i2Mn8KngcKxzjRhwSi2vjMlK+Bfjt9QEzW9LYkfKV
-         z9M5Cok+Oea8m7yeH0sGx0+/JgthwtKNk+CAo=
+        bh=L/meM4LOF0SLC51tAEKjDtfLnz5/szauziEh2ia+Hxk=;
+        b=aATb1H4JT4ybYjxTIs4zH2AibqoNQRrqvSAWBrynD9P91ngi3GKIvsSuuSPcLuH7wG
+         qbbyfxgvmvzZUGkGy/OeoDhcikJlj0152Qy13wxx2eFIm9KuD/1c3S8nl+b31+xs+vI5
+         km8vSlN2wVZFYEtmLLfOwiwQacF2nCxE0/rE4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720696528; x=1721301328;
+        d=1e100.net; s=20230601; t=1720696526; x=1721301326;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=tAHuZgHoF2exqi8oaOVtjkQF+Fln/FT2w5YgzvR4eVA=;
-        b=rLIW3pDXud8+OOta33JpigkltIrDtUQE3sAAyFBx9M+Dzx14HfDDRJC+u4Txg579A1
-         V8C1vQSPxn7EcMz2dMaF+aYBL8MpbnALYEhlTHrcdRotELB4JlBuqsBDI3YXI6LTsiGX
-         xM2FgEf54t6mGK0MxXa2pi1wyAqopisyYPbcuUNAe0kro79W/zo0i4MyKo74CnU7jpMS
-         EhKJdSfoxzrK31AhlC405l2qn0nqKYlxVoJPQqagOgwGmxqcRGg/DOT8LhUnzu9QU9DF
-         mROPAKOewsswiQvih83TPWCI7n9cXN7FQUUCTTsUYUI4dr7A8YNDBfIo6RJtukWL7Fbg
-         nyTw==
-X-Gm-Message-State: AOJu0Yyc3i8GGIutOjdD6ytFoBT5nWef69kMdJbibqckOc+a+G/Y0JzB
-	u9TWx3HyNd70rRT8s9wvADW/KKc27at5l7pKVxyr8NznENEOwY67Dgj7uyhJQHTvgjDnp5dVnIo
-	8
-X-Google-Smtp-Source: AGHT+IH3eHhpMt5JixBNtCVG5d70gnp7RhzK3eL2/QC1E+fTy3wxvek4a12zgAmqccSYEchjVUdzHg==
-X-Received: by 2002:a05:6512:4016:b0:52c:ce28:82c8 with SMTP id 2adb3069b0e04-52eb99d4c5dmr6580137e87.52.1720696528522;
-        Thu, 11 Jul 2024 04:15:28 -0700 (PDT)
+        bh=L/meM4LOF0SLC51tAEKjDtfLnz5/szauziEh2ia+Hxk=;
+        b=rr+qHBFUy/sj+LcyiBCUtbWJc7dRmM2o2kSu8eBHeG7prdkGhJINcXybsEMDJvEtKf
+         xfxV/VAOQCIjvNCd2eLAALQzM7Ih5rHjCUdUUKzyZxFSHyYDcewJReCquGX+Qm0XIrl8
+         Xe+5bdUUTd+A45SO8MOcyA+02C1yA9btNXFLAoAWoIt6UIimG190Uu3CTTFTi4TcWiO9
+         A1PixG39Cc+irXD+r+duFg1tGpJwdXOQYjy57zLviSR654WyFmXygP9OEuWBCMhZrjWZ
+         UYH5LUBrpVVOvlqEWWEO3A0yHoWEfjvYqMEmgejQzbfE+uOLmqhEtv76gpRVe6Xd7RT5
+         hYIg==
+X-Gm-Message-State: AOJu0Yz2PVWvIPE4TQpZ5Sj9/1EmhRPIj2hdNQsB/7MM7O6LkLhstYfg
+	SD1oCY2eookHdbjrlHg7ThcTegZhFLahfCfDSw2/JfUXcw3iDtJuHz8LLagu1GyoUtvaAnxez+2
+	h
+X-Google-Smtp-Source: AGHT+IHHDkvg4Tc1JebNvajW43vBdtx3XCYg8dIoey6SD94uRNl0Hcmzz+XWpyqp5Wn4XnW/oUbhnQ==
+X-Received: by 2002:a17:906:2342:b0:a77:e1fb:7dec with SMTP id a640c23a62f3a-a780b6b316dmr486049266b.17.1720696525947;
+        Thu, 11 Jul 2024 04:15:25 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -86,9 +86,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 05/12] CI: Drop Ubuntu Trusty testing
-Date: Thu, 11 Jul 2024 12:15:10 +0100
-Message-Id: <20240711111517.3064810-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 03/12] CI: Drop Debian Jessie dockerfiles
+Date: Thu, 11 Jul 2024 12:15:08 +0100
+Message-Id: <20240711111517.3064810-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240711111517.3064810-1-andrew.cooper3@citrix.com>
 References: <20240711111517.3064810-1-andrew.cooper3@citrix.com>
@@ -96,8 +96,9 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is also End of Life.
+These were removed from testing in Xen 4.18.
 
+Fixes: 3817e3c1b4b8 ("automation: Remove testing on Debian Jessie")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Anthony PERARD <anthony.perard@vates.tech>
@@ -109,20 +110,21 @@ CC: Julien Grall <julien@xen.org>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
- automation/build/ubuntu/trusty.dockerfile | 51 -----------------------
- automation/gitlab-ci/build.yaml           | 12 ------
- automation/scripts/containerize           |  1 -
- 3 files changed, 64 deletions(-)
- delete mode 100644 automation/build/ubuntu/trusty.dockerfile
+ .../build/debian/jessie-i386.dockerfile       | 55 -------------------
+ automation/build/debian/jessie.dockerfile     | 52 ------------------
+ automation/scripts/containerize               |  2 -
+ 3 files changed, 109 deletions(-)
+ delete mode 100644 automation/build/debian/jessie-i386.dockerfile
+ delete mode 100644 automation/build/debian/jessie.dockerfile
 
-diff --git a/automation/build/ubuntu/trusty.dockerfile b/automation/build/ubuntu/trusty.dockerfile
+diff --git a/automation/build/debian/jessie-i386.dockerfile b/automation/build/debian/jessie-i386.dockerfile
 deleted file mode 100644
-index 1cda1bbd3fea..000000000000
---- a/automation/build/ubuntu/trusty.dockerfile
+index dfa6dae06cb8..000000000000
+--- a/automation/build/debian/jessie-i386.dockerfile
 +++ /dev/null
-@@ -1,51 +0,0 @@
+@@ -1,55 +0,0 @@
 -# syntax=docker/dockerfile:1
--FROM --platform=linux/amd64 ubuntu:14.04
+-FROM --platform=linux/i386 debian/eol:jessie
 -LABEL maintainer.name="The Xen Project" \
 -      maintainer.email="xen-devel@lists.xenproject.org"
 -
@@ -132,6 +134,15 @@ index 1cda1bbd3fea..000000000000
 -RUN mkdir /build
 -WORKDIR /build
 -
+-ENTRYPOINT ["linux32"]
+-
+-# replace repos in archive as release is EOL
+-COPY <<"END" /etc/apt/sources.list
+-deb http://archive.debian.org/debian/ jessie main contrib non-free
+-deb http://archive.debian.org/debian/ jessie-backports main contrib non-free
+-deb http://archive.debian.org/debian-security/ jessie/updates main contrib non-free
+-END
+-
 -# build depends
 -RUN apt-get update && \
 -    apt-get --quiet --yes install \
@@ -139,7 +150,65 @@ index 1cda1bbd3fea..000000000000
 -        zlib1g-dev \
 -        libncurses5-dev \
 -        python-dev \
--        python3-dev \
+-        uuid-dev \
+-        libyajl-dev \
+-        libaio-dev \
+-        libglib2.0-dev \
+-        clang \
+-        libpixman-1-dev \
+-        pkg-config \
+-        flex \
+-        bison \
+-        acpica-tools \
+-        bin86 \
+-        bcc \
+-        liblzma-dev \
+-        libc6-dev \
+-        libnl-3-dev \
+-        ocaml-nox \
+-        libfindlib-ocaml-dev \
+-        markdown \
+-        transfig \
+-        pandoc \
+-        checkpolicy \
+-        wget \
+-        git \
+-        nasm \
+-        && \
+-        apt-get autoremove -y && \
+-        apt-get clean && \
+-        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
+diff --git a/automation/build/debian/jessie.dockerfile b/automation/build/debian/jessie.dockerfile
+deleted file mode 100644
+index 82dae9ec70c4..000000000000
+--- a/automation/build/debian/jessie.dockerfile
++++ /dev/null
+@@ -1,52 +0,0 @@
+-# syntax=docker/dockerfile:1
+-FROM --platform=linux/amd64 debian/eol:jessie
+-LABEL maintainer.name="The Xen Project" \
+-      maintainer.email="xen-devel@lists.xenproject.org"
+-
+-ENV DEBIAN_FRONTEND=noninteractive
+-ENV USER root
+-
+-RUN mkdir /build
+-WORKDIR /build
+-
+-# replace repos in archive as release is EOL
+-COPY <<"END" /etc/apt/sources.list
+-deb http://archive.debian.org/debian/ jessie main contrib non-free
+-deb http://archive.debian.org/debian/ jessie-backports main contrib non-free
+-deb http://archive.debian.org/debian-security/ jessie/updates main contrib non-free
+-END
+-
+-# build depends
+-RUN apt-get update && \
+-    apt-get --quiet --yes install \
+-        build-essential \
+-        zlib1g-dev \
+-        libncurses5-dev \
+-        python-dev \
 -        uuid-dev \
 -        libyajl-dev \
 -        libaio-dev \
@@ -167,46 +236,19 @@ index 1cda1bbd3fea..000000000000
 -        apt-get autoremove -y && \
 -        apt-get clean && \
 -        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
--
--# Remove expired certificate that Let's Encrypt certificates used to relie on.
--# (Not needed anymore)
--RUN sed -i 's#mozilla/DST_Root_CA_X3\.crt#!\0#' /etc/ca-certificates.conf && \
--    update-ca-certificates
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 2c6eb17bef50..3e299f34f461 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -633,18 +633,6 @@ fedora-gcc-debug:
-   variables:
-     CONTAINER: fedora:29
- 
--# Ubuntu Trusty's Clang is 3.4 while Xen requires 3.5
--
--ubuntu-trusty-gcc:
--  extends: .gcc-x86-64-build
--  variables:
--    CONTAINER: ubuntu:trusty
--
--ubuntu-trusty-gcc-debug:
--  extends: .gcc-x86-64-build-debug
--  variables:
--    CONTAINER: ubuntu:trusty
--
- ubuntu-xenial-clang:
-   extends: .clang-x86-64-build
-   variables:
 diff --git a/automation/scripts/containerize b/automation/scripts/containerize
-index 5140765cee98..e9ad20aa0c80 100755
+index 03bc4837350c..57db42d10cb5 100755
 --- a/automation/scripts/containerize
 +++ b/automation/scripts/containerize
-@@ -39,7 +39,6 @@ case "_${CONTAINER}" in
-     _bookworm-arm64v8) CONTAINER="${BASE}/debian:bookworm-arm64v8" ;;
-     _bookworm-cppcheck) CONTAINER="${BASE}/debian:bookworm-cppcheck" ;;
-     _bionic) CONTAINER="${BASE}/ubuntu:bionic" ;;
--    _trusty) CONTAINER="${BASE}/ubuntu:trusty" ;;
-     _xenial) CONTAINER="${BASE}/ubuntu:xenial" ;;
-     _opensuse-leap|_leap) CONTAINER="${BASE}/suse:opensuse-leap" ;;
-     _opensuse-tumbleweed|_tumbleweed) CONTAINER="${BASE}/suse:opensuse-tumbleweed" ;;
+@@ -31,8 +31,6 @@ case "_${CONTAINER}" in
+     _centos7) CONTAINER="${BASE}/centos:7" ;;
+     _fedora) CONTAINER="${BASE}/fedora:29";;
+     _focal) CONTAINER="${BASE}/ubuntu:focal" ;;
+-    _jessie) CONTAINER="${BASE}/debian:jessie" ;;
+-    _jessie-i386) CONTAINER="${BASE}/debian:jessie-i386" ;;
+     _bullseye-ppc64le) CONTAINER="${BASE}/debian:bullseye-ppc64le" ;;
+     _stretch|_) CONTAINER="${BASE}/debian:stretch" ;;
+     _stretch-i386) CONTAINER="${BASE}/debian:stretch-i386" ;;
 -- 
 2.39.2
 
