@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5761AC3DA4B
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jul 2024 11:15:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.757330.1166237 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1610EC3DA41
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jul 2024 11:15:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.757333.1166266 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sRrlx-0001b5-0m; Thu, 11 Jul 2024 11:15:37 +0000
+	id 1sRrm2-0002eA-Bt; Thu, 11 Jul 2024 11:15:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 757330.1166237; Thu, 11 Jul 2024 11:15:36 +0000
+Received: by outflank-mailman (output) from mailman id 757333.1166266; Thu, 11 Jul 2024 11:15:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sRrlw-0001al-SJ; Thu, 11 Jul 2024 11:15:36 +0000
-Received: by outflank-mailman (input) for mailman id 757330;
- Thu, 11 Jul 2024 11:15:35 +0000
+	id 1sRrm2-0002dB-0D; Thu, 11 Jul 2024 11:15:42 +0000
+Received: by outflank-mailman (input) for mailman id 757333;
+ Thu, 11 Jul 2024 11:15:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PZf6=OL=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sRrlv-0007rD-Bd
- for xen-devel@lists.xenproject.org; Thu, 11 Jul 2024 11:15:35 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ id 1sRrlz-0007rD-Ur
+ for xen-devel@lists.xenproject.org; Thu, 11 Jul 2024 11:15:39 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e49f2f01-3f76-11ef-bbfb-fd08da9f4363;
- Thu, 11 Jul 2024 13:15:34 +0200 (CEST)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a77ec5d3b0dso101533466b.0
- for <xen-devel@lists.xenproject.org>; Thu, 11 Jul 2024 04:15:34 -0700 (PDT)
+ id e745a80c-3f76-11ef-bbfb-fd08da9f4363;
+ Thu, 11 Jul 2024 13:15:39 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a77e5929033so110996866b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jul 2024 04:15:39 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a780a7ff7d5sm246386666b.142.2024.07.11.04.15.32
+ a640c23a62f3a-a780a7ff7d5sm246386666b.142.2024.07.11.04.15.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 04:15:32 -0700 (PDT)
+ Thu, 11 Jul 2024 04:15:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e49f2f01-3f76-11ef-bbfb-fd08da9f4363
+X-Inumbo-ID: e745a80c-3f76-11ef-bbfb-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1720696533; x=1721301333; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1720696538; x=1721301338; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GGXMWhwWhR4eu24XAy5thYClOJ/SD11Mbj0BOcW/2q4=;
-        b=gjZwvwC3mWwTWhhznnqIKLhSJxrjv3161TNvkvdX9czRZmF4HQtZleDkAO1lmAI6WW
-         WELYekx6PfO5aEUG+KLswHLHEBwcDBiZfYBuci0a3IWp4HL1QVAAH1BvortH75tbxNn+
-         CuNaJhqBWlgC3htYQyPljpPgwKevSRuTFAGGo=
+        bh=/58JNO+Inrk9wj+NdeQQj6nZyBQF1LcNhJ0B6w0/d4Y=;
+        b=Sonh6Fh1hD1yLaUP98DAVGAaDnxP6/43lYczFbB9hUU5POzbQz+tMXnDE4cUom/jqz
+         XzMy5XoiVVRHgjdF5/h4NVVhIchCsbnmYUSpKPbZEp0TZPsY9ILz30JCCNzDNSf/SiSR
+         m2MV+0Vp50W8f657h/Mv2Gn/J4PLm/ZZ5Jq1k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720696533; x=1721301333;
+        d=1e100.net; s=20230601; t=1720696538; x=1721301338;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=GGXMWhwWhR4eu24XAy5thYClOJ/SD11Mbj0BOcW/2q4=;
-        b=mMFv3Olyycuv5VonahSgWiHnNaYEB8ghftjbv9QegW5PqXS27DBossHQ+Qh19xjyVB
-         u9TqhBel84AUNn0DHvKPajPSzQ222bx3QcxSC+EiExsRQCFKhOmt9tkXNRFuIHMpEnRn
-         iRRTnFjZ047YmeKBMeZJV41LjRZecCOCWs52dUZHKs0c8xMWGELasmBKBUWo7oLxz9vS
-         FUCitTQeeH/Uk0LMmla5caDCHc1kzxrPdh/B8TflKhiygoACaIXJxR89JYESI7XHBBjc
-         3V+tmtjRCKmTSmu7j5Q9AE3g1TiBHI7qLrhBdNo84QEMQfsKFazfc8fIo5WpWZY9hBN+
-         h7Pw==
-X-Gm-Message-State: AOJu0YzBo2cGSb9tKKoiHpx0mc4NSQKqNO6GzKH9Tej5oWAuRVxHlLjg
-	Y+8pNgoI7XNI+4O5A+wfZ9PZ64z72Su4snBev9axpAINMMkfcUVRsKsUluZcBrt+yAhg0/HrFmj
-	Z
-X-Google-Smtp-Source: AGHT+IF7Ddg0v7erLjz9gTj8Rdrl6n/v+Oz4ajX7EkmQdnvN1xRBwsxmyTxjJldGrDJOozxFrK0Hdg==
-X-Received: by 2002:a17:906:6a25:b0:a77:c657:5942 with SMTP id a640c23a62f3a-a780b88b3d8mr699173066b.52.1720696533420;
-        Thu, 11 Jul 2024 04:15:33 -0700 (PDT)
+        bh=/58JNO+Inrk9wj+NdeQQj6nZyBQF1LcNhJ0B6w0/d4Y=;
+        b=d0ZcigWPsgdBJbT8gCjDvmSnc3wwEfvAIvgi7J1UPom+cr5FC3vVWHO0THDZbzcpOj
+         NFdansCvoAWl/iM0kkg/6f6p1Z519NOzkpYUR0TsepA1aiJpNQpbQfrTxW2muxHhJJaL
+         xrprUnp4uN9PLWhRy61mw3sfSv+og9bdPHNtsOJUoKWWf2Jhel2z05LzQ++rpnEJtYQd
+         R4T2VBhoj5VRdhCq0LhcKUduxyulDymi13GMtR26qSJsL7GEquL5KxZdf4IFE3dfNIkp
+         CZQGvZz7l1RIcXaL6RiYLx3kodsDFH4bJY5cY9iQbCUlbtJu6N4Ad8dPA/vTttvjbl3Q
+         hLlw==
+X-Gm-Message-State: AOJu0Yx8tJpr8h8vTkgxqNseLgQo45hWo/pq+YSrDlK45pOSXszsqvsN
+	d5QUd2G4B3U0Nvru4eMaSX5inaAy14dK/6NlarYvuYUshFG9fMnr9JsX+H/XZGueSYn9p8tSzt5
+	4
+X-Google-Smtp-Source: AGHT+IFUhjpe6I7SpkUuVRldLMGG9DNg5sTjpySDOkwmu/oP04WKHAaoix/XKfmfMefITqm1OqwgkQ==
+X-Received: by 2002:a17:906:1808:b0:a77:c96b:a113 with SMTP id a640c23a62f3a-a780b881c98mr515861566b.60.1720696538294;
+        Thu, 11 Jul 2024 04:15:38 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -86,9 +86,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 08/12] CI: Use debian:12-ppc64le for both build and test
-Date: Thu, 11 Jul 2024 12:15:13 +0100
-Message-Id: <20240711111517.3064810-9-andrew.cooper3@citrix.com>
+Subject: [PATCH 11/12] CI: Swap to debian for riscv64 build and test
+Date: Thu, 11 Jul 2024 12:15:16 +0100
+Message-Id: <20240711111517.3064810-12-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240711111517.3064810-1-andrew.cooper3@citrix.com>
 References: <20240711111517.3064810-1-andrew.cooper3@citrix.com>
@@ -96,14 +96,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-qemu-system-ppc64/8.1.0-ppc64 was added because bullseye's Qemu didn't
-understand the powernv9 machine.
-
-However, bookworm's Qemu does, and this is preforable to maintaining a random
-build of Qemu ourselves.
-
-Add bookworm builds, and retain bullseye to keep our lower-bound toolchain
-testing.
+The containers are both much smaller, with stable toolchains over time, and
+this at least means we're not doing all testing with a single compiler.
 
 Rename the jobs to follow to sort coherently ($DISTRO-$VERSION-$ARCH-*) and
 reposition the jobs to optimise starting the smoke test.
@@ -119,180 +113,187 @@ CC: Julien Grall <julien@xen.org>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
- automation/gitlab-ci/build.yaml               | 59 ++++++++++---------
- automation/gitlab-ci/test.yaml                |  5 +-
- automation/scripts/qemu-smoke-ppc64le.sh      |  4 +-
- .../qemu-system-ppc64/8.1.0-ppc64.dockerfile  | 38 ------------
- 4 files changed, 34 insertions(+), 72 deletions(-)
- delete mode 100644 automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile
+ .../archlinux/current-riscv64.dockerfile      | 22 -----
+ automation/gitlab-ci/build.yaml               | 83 +++++++++++--------
+ automation/gitlab-ci/test.yaml                |  4 +-
+ automation/scripts/containerize               |  3 +-
+ 4 files changed, 52 insertions(+), 60 deletions(-)
+ delete mode 100644 automation/build/archlinux/current-riscv64.dockerfile
 
+diff --git a/automation/build/archlinux/current-riscv64.dockerfile b/automation/build/archlinux/current-riscv64.dockerfile
+deleted file mode 100644
+index f7770bf82a78..000000000000
+--- a/automation/build/archlinux/current-riscv64.dockerfile
++++ /dev/null
+@@ -1,22 +0,0 @@
+-# syntax=docker/dockerfile:1
+-FROM --platform=linux/amd64 archlinux
+-LABEL maintainer.name="The Xen Project" \
+-      maintainer.email="xen-devel@lists.xenproject.org"
+-
+-# Packages needed for the build
+-RUN pacman --noconfirm --needed -Syu \
+-    base-devel \
+-    git \
+-    inetutils \
+-    riscv64-linux-gnu-binutils \
+-    riscv64-linux-gnu-gcc \
+-    riscv64-linux-gnu-glibc \
+-    # For test phase
+-    qemu-system-riscv
+-
+-# Add compiler path
+-ENV CROSS_COMPILE=riscv64-linux-gnu-
+-
+-RUN useradd --create-home user
+-USER user
+-WORKDIR /build
 diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 1446bc1d0ea7..316dc4345f29 100644
+index e081664c4e95..4b9d80cc5632 100644
 --- a/automation/gitlab-ci/build.yaml
 +++ b/automation/gitlab-ci/build.yaml
-@@ -302,20 +302,6 @@ qemu-system-aarch64-6.0.0-arm32-export:
-   tags:
-     - arm64
+@@ -357,6 +357,13 @@ debian-12-ppc64le-gcc-debug:
+     KBUILD_DEFCONFIG: ppc64_defconfig
+     HYPERVISOR_ONLY: y
  
--# ppc64 test artifacts
--
--qemu-system-ppc64-8.1.0-ppc64-export:
--  extends: .test-jobs-artifact-common
--  image: registry.gitlab.com/xen-project/xen/tests-artifacts/qemu-system-ppc64:8.1.0-ppc64
--  script:
--    - mkdir binaries && cp /qemu-system-ppc64 /skiboot.lid binaries/
--  artifacts:
--    paths:
--      - binaries/qemu-system-ppc64
--      - binaries/skiboot.lid
--  tags:
--    - x86_64
--
- # x86_64 test artifacts
- 
- alpine-3.18-rootfs-export:
-@@ -364,6 +350,13 @@ debian-bookworm-clang-debug:
-   variables:
-     CONTAINER: debian:bookworm
- 
-+debian-12-ppc64le-gcc-debug:
-+  extends: .gcc-ppc64le-cross-build-debug
++debian-12-riscv64-gcc-debug:
++  extends: .gcc-riscv64-cross-build-debug
 +  variables:
-+    CONTAINER: debian:12-ppc64le
-+    KBUILD_DEFCONFIG: ppc64_defconfig
++    CONTAINER: debian:12-riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
 +    HYPERVISOR_ONLY: y
 +
  # Arm32 cross-build
  
  debian-bookworm-gcc-arm32:
-@@ -500,21 +493,6 @@ archlinux-current-gcc-riscv64-randconfig:
-     RANDCONFIG: y
-     <<: *riscv-fixed-randconfig
+@@ -458,41 +465,6 @@ alpine-3.18-gcc-debug-arm64-earlyprintk:
+       CONFIG_EARLY_UART_CHOICE_PL011=y
+       CONFIG_EARLY_UART_BASE_ADDRESS=0x9000000
  
--# Power cross-build
--debian-bullseye-gcc-ppc64le:
--  extends: .gcc-ppc64le-cross-build
+-# RISC-V 64 cross-build
+-.riscv-fixed-randconfig:
+-  variables: &riscv-fixed-randconfig
+-    EXTRA_FIXED_RANDCONFIG: |
+-      CONFIG_BOOT_TIME_CPUPOOLS=n
+-      CONFIG_COVERAGE=n
+-      CONFIG_EXPERT=y
+-      CONFIG_GRANT_TABLE=n
+-      CONFIG_MEM_ACCESS=n
+-      CONFIG_PERF_COUNTERS=n
+-      CONFIG_LIVEPATCH=n
+-      CONFIG_XSM=n
+-
+-archlinux-current-gcc-riscv64:
+-  extends: .gcc-riscv64-cross-build
 -  variables:
--    CONTAINER: debian:bullseye-ppc64le
--    KBUILD_DEFCONFIG: ppc64_defconfig
+-    CONTAINER: archlinux:current-riscv64
+-    KBUILD_DEFCONFIG: tiny64_defconfig
 -    HYPERVISOR_ONLY: y
 -
--debian-bullseye-gcc-ppc64le-debug:
--  extends: .gcc-ppc64le-cross-build-debug
+-archlinux-current-gcc-riscv64-debug:
+-  extends: .gcc-riscv64-cross-build-debug
 -  variables:
--    CONTAINER: debian:bullseye-ppc64le
--    KBUILD_DEFCONFIG: ppc64_defconfig
+-    CONTAINER: archlinux:current-riscv64
+-    KBUILD_DEFCONFIG: tiny64_defconfig
 -    HYPERVISOR_ONLY: y
+-
+-archlinux-current-gcc-riscv64-randconfig:
+-  extends: .gcc-riscv64-cross-build
+-  variables:
+-    CONTAINER: archlinux:current-riscv64
+-    KBUILD_DEFCONFIG: tiny64_defconfig
+-    RANDCONFIG: y
+-    <<: *riscv-fixed-randconfig
 -
  # Yocto test jobs
  yocto-qemuarm64:
    extends: .yocto-test-arm64
-@@ -738,3 +716,26 @@ opensuse-tumbleweed-gcc-debug:
-   variables:
-     CONTAINER: suse:opensuse-tumbleweed
-   allow_failure: true
-+
-+# PowerPC builds (x86 cross)
-+debian-bullseye-gcc-ppc64le:
-+  extends: .gcc-ppc64le-cross-build
+@@ -739,3 +711,44 @@ debian-12-ppc64le-gcc:
+     KBUILD_DEFCONFIG: ppc64_defconfig
+     HYPERVISOR_ONLY: y
+ 
++# RISC-V 64 cross-build
++debian-11-riscv64-gcc:
++  extends: .gcc-riscv64-cross-build
 +  variables:
-+    CONTAINER: debian:bullseye-ppc64le
-+    KBUILD_DEFCONFIG: ppc64_defconfig
++    CONTAINER: debian:11-riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
 +    HYPERVISOR_ONLY: y
 +
-+debian-bullseye-gcc-ppc64le-debug:
-+  extends: .gcc-ppc64le-cross-build-debug
++debian-11-riscv64-gcc-debug:
++  extends: .gcc-riscv64-cross-build-debug
 +  variables:
-+    CONTAINER: debian:bullseye-ppc64le
-+    KBUILD_DEFCONFIG: ppc64_defconfig
++    CONTAINER: debian:11-riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
 +    HYPERVISOR_ONLY: y
 +
-+debian-12-ppc64le-gcc:
-+  extends: .gcc-ppc64le-cross-build
++debian-12-riscv64-gcc:
++  extends: .gcc-riscv64-cross-build
 +  variables:
-+    CONTAINER: debian:12-ppc64le
-+    KBUILD_DEFCONFIG: ppc64_defconfig
++    CONTAINER: debian:12-riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
 +    HYPERVISOR_ONLY: y
 +
++.riscv-fixed-randconfig:
++  variables: &riscv-fixed-randconfig
++    EXTRA_FIXED_RANDCONFIG: |
++      CONFIG_BOOT_TIME_CPUPOOLS=n
++      CONFIG_COVERAGE=n
++      CONFIG_EXPERT=y
++      CONFIG_GRANT_TABLE=n
++      CONFIG_MEM_ACCESS=n
++      CONFIG_PERF_COUNTERS=n
++      CONFIG_LIVEPATCH=n
++      CONFIG_XSM=n
++
++debian-12-riscv64-gcc-randconfig:
++  extends: .gcc-riscv64-cross-build
++  variables:
++    CONTAINER: debian:12-riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
++    RANDCONFIG: y
++    <<: *riscv-fixed-randconfig
 diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index d50e522f9f79..70c946f87799 100644
+index 70c946f87799..f7e1753ead34 100644
 --- a/automation/gitlab-ci/test.yaml
 +++ b/automation/gitlab-ci/test.yaml
-@@ -69,7 +69,7 @@
- .qemu-ppc64le:
+@@ -56,7 +56,7 @@
+ .qemu-riscv64:
    extends: .test-jobs-common
    variables:
--    CONTAINER: debian:bullseye-ppc64le
-+    CONTAINER: debian:12-ppc64le
-     LOGFILE: qemu-smoke-ppc64le.log
+-    CONTAINER: archlinux:current-riscv64
++    CONTAINER: debian:12
+     LOGFILE: qemu-smoke-riscv64.log
    artifacts:
      paths:
-@@ -447,5 +447,4 @@ qemu-smoke-ppc64le-powernv9-gcc:
+@@ -440,7 +440,7 @@ qemu-smoke-riscv64-gcc:
    script:
-     - ./automation/scripts/qemu-smoke-ppc64le.sh powernv9 2>&1 | tee ${LOGFILE}
+     - ./automation/scripts/qemu-smoke-riscv64.sh 2>&1 | tee ${LOGFILE}
    needs:
--    - qemu-system-ppc64-8.1.0-ppc64-export
--    - debian-bullseye-gcc-ppc64le-debug
-+    - debian-12-ppc64le-gcc-debug
-diff --git a/automation/scripts/qemu-smoke-ppc64le.sh b/automation/scripts/qemu-smoke-ppc64le.sh
-index 701d81107d18..9088881b731b 100755
---- a/automation/scripts/qemu-smoke-ppc64le.sh
-+++ b/automation/scripts/qemu-smoke-ppc64le.sh
-@@ -12,8 +12,8 @@ rm -f ${serial_log}
- set +e
+-    - archlinux-current-gcc-riscv64-debug
++    - debian-12-riscv64-gcc-debug
  
- timeout -k 1 20 \
--binaries/qemu-system-ppc64 \
--    -bios binaries/skiboot.lid \
-+qemu-system-ppc64 \
-+    -bios skiboot.lid \
-     -M $machine \
-     -m 2g \
-     -smp 1 \
-diff --git a/automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile b/automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile
-deleted file mode 100644
-index e28d68649239..000000000000
---- a/automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile
-+++ /dev/null
-@@ -1,38 +0,0 @@
--# syntax=docker/dockerfile:1
--FROM --platform=linux/amd64 debian:bullseye-slim
--LABEL maintainer.name="The Xen Project" \
--      maintainer.email="xen-devel@lists.xenproject.org"
--
--ENV DEBIAN_FRONTEND=noninteractive
--ENV QEMU_VERSION=8.1.0
--ENV USER root
--
--RUN mkdir /build
--WORKDIR /build
--
--# build depends
--RUN apt-get update && \
--    apt-get --quiet --yes install \
--        build-essential \
--        curl \
--        python3 \
--        python3-pip \
--        python3-elementpath \
--        ninja-build \
--        pkg-config \
--        libglib2.0-dev \
--        libpixman-1-dev \
--        && \
--    \
--    curl -fsSLO https://download.qemu.org/qemu-"$QEMU_VERSION".tar.xz && \
--    tar xvJf qemu-"$QEMU_VERSION".tar.xz && \
--    cd qemu-"$QEMU_VERSION" && \
--    ./configure --target-list=ppc64-softmmu && \
--    make -j$(nproc) && \
--    cp ./build/qemu-system-ppc64 / && \
--    cp ./build/qemu-bundle/usr/local/share/qemu/skiboot.lid / && \
--    cd /build && \
--    rm -rf qemu-"$QEMU_VERSION"* && \
--    apt-get autoremove -y && \
--    apt-get clean && \
--    rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
+ qemu-smoke-ppc64le-powernv9-gcc:
+   extends: .qemu-ppc64le
+diff --git a/automation/scripts/containerize b/automation/scripts/containerize
+index 5c3f6782d9cd..6dbf55c8f89a 100755
+--- a/automation/scripts/containerize
++++ b/automation/scripts/containerize
+@@ -27,12 +27,13 @@ case "_${CONTAINER}" in
+     _alpine) CONTAINER="${BASE}/alpine:3.18" ;;
+     _alpine-arm64v8) CONTAINER="${BASE}/alpine:3.18-arm64v8" ;;
+     _archlinux|_arch) CONTAINER="${BASE}/archlinux:current" ;;
+-    _riscv64) CONTAINER="${BASE}/archlinux:current-riscv64" ;;
+     _centos7) CONTAINER="${BASE}/centos:7" ;;
+     _fedora) CONTAINER="${BASE}/fedora:29";;
+     _focal) CONTAINER="${BASE}/ubuntu:focal" ;;
+     _bullseye-ppc64le) CONTAINER="${BASE}/debian:11-ppc64le" ;;
+     _bookworm-ppc64le) CONTAINER="${BASE}/debian:12-ppc64le" ;;
++    _bullseye-riscv64) CONTAINER="${BASE}/debian:11-riscv64" ;;
++    _bookworm-riscv64) CONTAINER="${BASE}/debian:12-riscv64" ;;
+     _buster-gcc-ibt) CONTAINER="${BASE}/debian:buster-gcc-ibt" ;;
+     _bookworm|_) CONTAINER="${BASE}/debian:bookworm" ;;
+     _bookworm-i386) CONTAINER="${BASE}/debian:bookworm-i386" ;;
 -- 
 2.39.2
 
