@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4965CC2BD09
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jul 2024 15:44:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.758136.1167450 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA068C2BD09
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jul 2024 16:19:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.758147.1167481 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sSIR5-0007d5-Iu; Fri, 12 Jul 2024 15:43:51 +0000
+	id 1sSIz8-0004TW-IV; Fri, 12 Jul 2024 16:19:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 758136.1167450; Fri, 12 Jul 2024 15:43:51 +0000
+Received: by outflank-mailman (output) from mailman id 758147.1167481; Fri, 12 Jul 2024 16:19:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sSIR5-0007cy-GO; Fri, 12 Jul 2024 15:43:51 +0000
-Received: by outflank-mailman (input) for mailman id 758136;
- Fri, 12 Jul 2024 15:43:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sSIz8-0004TP-FW; Fri, 12 Jul 2024 16:19:02 +0000
+Received: by outflank-mailman (input) for mailman id 758147;
+ Fri, 12 Jul 2024 16:19:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZSin=OM=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sSIR4-0007cs-DM
- for xen-devel@lists.xenproject.org; Fri, 12 Jul 2024 15:43:50 +0000
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [2607:f8b0:4864:20::f29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 863aa3f8-4065-11ef-8776-851b0ebba9a2;
- Fri, 12 Jul 2024 17:43:46 +0200 (CEST)
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6b5ecafbf88so10460356d6.3
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jul 2024 08:43:46 -0700 (PDT)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b61b9ec002sm36335026d6.46.2024.07.12.08.43.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Jul 2024 08:43:44 -0700 (PDT)
+ <SRS0=1Ov5=OM=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1sSIz6-00040f-RP
+ for xen-devel@lists.xenproject.org; Fri, 12 Jul 2024 16:19:00 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 725cc52d-406a-11ef-bbfb-fd08da9f4363;
+ Fri, 12 Jul 2024 18:19:00 +0200 (CEST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-58bac81f40bso2957343a12.1
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jul 2024 09:19:00 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-594bb9604f7sm4669169a12.15.2024.07.12.09.18.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Jul 2024 09:18:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,117 +46,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 863aa3f8-4065-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 725cc52d-406a-11ef-bbfb-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1720799025; x=1721403825; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=dWd+n4yiFFWvvagGGhW3G76+L4yKCvDlRp42nISmMPU=;
-        b=Szj+mVn3XVdJMQ/bj22b6Hn7AUoNyJgNr7Abg/qN15UE4KY6yNAG+81630KiA6X5et
-         9+DsuE62kSasTAQ2i2YMPN8WruxiCe/eN04kGn+j+Ml08gjARpWljnQ1Sc/c6JY4YLEM
-         BYZe+sKO6rwL96U7J1YwtfGHnMqJUzOFOOBNQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720799025; x=1721403825;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1720801139; x=1721405939; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dWd+n4yiFFWvvagGGhW3G76+L4yKCvDlRp42nISmMPU=;
-        b=c2YYoSm8Z9LTKYGfFHI3S3AdCoknzqwlg7ruDivsPbY4EsT5QagCgEgQj1kW4E7bd6
-         ISeDPHOfp4ipdJ9J9fH1/YmE1ZKQzaAAOwjeWb/XxNupu+NESc7aeuNdabafzrLqm6aq
-         GjbHBvxGYmzhe+c5EGN6XoqZ3AuqqFlugMHTkq6eTsZfUamTzta5dEVrA5LmMDhqhMxq
-         y5Yia+yl2R3mIrhL3dTHpUp3cY1tiVq2jL1Fo5IiOPmBU5+9FMmQVRTldNKJ9FB5DRA8
-         vxDf0ObLCm/AN9Q3YtTb9qspcm9cBzksFrz8x5LRuGqa5xF4nIxr1IZDlEnhFXfju3XN
-         uXjA==
-X-Gm-Message-State: AOJu0Yyh2YMUvQY+q54HuYawRcysQ7JPAmU5Ha/NCplX11frRU6KT3El
-	e3YzAuq0KXrw7kc7Hwv/tQBLKL8IdfEo4NHfSOfXIJYVj5nrRnrGYqQCes3VaLE=
-X-Google-Smtp-Source: AGHT+IF5wH66jGQzK6wK6g4T4aYbBVnRxLTz5uRNzaiypbO8qJorxSJFUQ9w7duYSJFwJh+Z4eFYeg==
-X-Received: by 2002:a05:6214:19cb:b0:6b7:431c:1b19 with SMTP id 6a1803df08f44-6b7431c1ea3mr98400456d6.6.1720799025371;
-        Fri, 12 Jul 2024 08:43:45 -0700 (PDT)
-Message-ID: <f95e793d-e8c3-4e21-926a-7e4a5fc66580@citrix.com>
-Date: Fri, 12 Jul 2024 16:43:41 +0100
+        bh=BY3OUb5w0oTrYR4mV0gprlP5xV2m84WlodPsogn9Pjs=;
+        b=lyKrcixoE2JbL8aCfalV6m8iFZeZq+epl8czRQsC9RP6XgqfKX10VPOxxs9ukqxVHO
+         ItrJ6vmpFY/PftN7zpHQv5uQWVUHSVuUVscqMT3TtrGmel95h2sYq62oMR/eWuBFHug4
+         I+uddAJKWICaK4jMjlVyvIVFu6ysOIdtKqM8W5KS+5rFr2PTRzu4vv8UzOG62GThGlv+
+         NqlEcVSBhwArEef5ib+Fodq3/+yGSye6EjvT3VPaJC00eV/M5E+WhzHIYdV9gmEuI+N0
+         ajQsEjY0zKT5yDup2rHfwFqQXdaPWZUZW6eTPb2ESgkHlsahmqJzYZY8/mqcfMWp3zKL
+         xgUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1720801139; x=1721405939;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=BY3OUb5w0oTrYR4mV0gprlP5xV2m84WlodPsogn9Pjs=;
+        b=JI85Pbc7+cWqC0uMHpKHTvccGGlz+l3C2HBhcRhwI+3X/J//WN0hpuvilo8IBKgHSE
+         TkTZhZv9Vz4v3X2XJ4fjgb+AP4yDjS15/IzkkMsajhUbKIiiugcRNwpPOxWsgjBnprnq
+         wcmlhjTM5W3u6ozWoNeEtC/58YgCL1mX/YpTr5JD8YcJuqjWbBkNrnjnRf9ziWzUeoPH
+         y3hlgyr3zbREGOGIMffTcoigECD9DtIAGy0MorqShArOZzzMzy5P5s1GnJ3XHn+grjbY
+         q4u4sh2bQtvJ6m37uQqLegX+Rw/ITeWjrBps1AklG4eC0nfibJ7w5eWknnJVS7x3VrGg
+         v4Pw==
+X-Gm-Message-State: AOJu0Yzz5x/WSmoLCpWC8KA0d8YDJz3oTVnOyNpL8uqJze0pM3BNNGre
+	NVxfbz2ljhbwd8K4fVc60lC2ZPRIGMfKGZv83ApLANIkfCQM6cE6l0vDHAj0
+X-Google-Smtp-Source: AGHT+IHL4FpM9BdrB3G+J7mKN1NNcS9yF2cOvmTTRegbZwowIZgJUdW3gdEkQ0GTVm3AiEdwiU2g1w==
+X-Received: by 2002:aa7:c35a:0:b0:57a:858d:20ca with SMTP id 4fb4d7f45d1cf-594bc7c7e77mr7398976a12.28.1720801139348;
+        Fri, 12 Jul 2024 09:18:59 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v10 3/5] xen/riscv: introduce trap_init()
+Date: Fri, 12 Jul 2024 18:18:52 +0200
+Message-ID: <80c02f1215d74e42fd9bc7f0d6e27d043a11b0e9.1720799487.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <cover.1720799487.git.oleksii.kurochko@gmail.com>
+References: <cover.1720799487.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 15/12] CI: Refresh Ubuntu Xenial container as 16.04-x86_64
-To: Anthony PERARD <anthony.perard@vates.tech>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Jan Beulich <JBeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Shawn Anastasio <sanastasio@raptorengineering.com>
-References: <20240711111517.3064810-1-andrew.cooper3@citrix.com>
- <20240712104829.3237296-1-andrew.cooper3@citrix.com> <ZpE915dPhH1tgrua@l14>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <ZpE915dPhH1tgrua@l14>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 12/07/2024 3:29 pm, Anthony PERARD wrote:
-> On Fri, Jul 12, 2024 at 11:48:29AM +0100, Andrew Cooper wrote:
->> diff --git a/automation/build/ubuntu/16.04-x86_64.dockerfile b/automation/build/ubuntu/16.04-x86_64.dockerfile
->> new file mode 100644
->> +        python3-setuptools
-> Another thing,
->
-> I've just notice that "python3-setuptools" was originally only introduced
-> to focal container on purpose, by:
-> bbc72a7877d8 ("automation: Add python3's setuptools to some containers")
->
-> But now this patch series is introducing it to xenial and bionic. It
-> might be worth mentioning, or removing the deps.
->
+trap_init() wasn't declared with the __init attribute to avoid removing
+__init when multi-CPU support for Xen is added.
 
-Oh, good point.  I'll take this back out of Xenial/Bionic.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+Changes in V10:
+  - update the commit message
+---
+Changes in V9:
+ - drop inclusion of <asm/mm.h> in setup.c
+ - drop #include <public/version.h>
+ - ... <xen/bug.h>
+ - introduce stub for
+   void arch_get_xen_caps(xen_capabilities_info_t *info);
 
-Stretch/Trusty have already been removed.
+ - resolve rebase conflicts.
+---
+Changes in V8:
+ - nothing changed. only rebase was done.
+---
+Changes in V7:
+ - #define cast_to_bug_frame(addr) ((const struct bug_frame *)(addr)).
+ - remove unnecessary comments in trap_init() function.
+---
+Changes in V6:
+ - trap_init() is now called after enabling the MMU.
+ - Add additional explanatory comments.
+---
+Changes in V5:
+  - Nothing changed
+---
+Changes in V4:
+  - Nothing changed
+---
+Changes in V3:
+  - Nothing changed
+---
+Changes in V2:
+  - Rename setup_trap_handler() to trap_init().
+  - Add Reviewed-by to the commit message.
+---
+ xen/arch/riscv/include/asm/traps.h |  1 +
+ xen/arch/riscv/setup.c             |  3 +++
+ xen/arch/riscv/traps.c             | 12 ++++++++++++
+ 3 files changed, 16 insertions(+)
 
-Thanks,
+diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
+index 3fef318478..c30118e095 100644
+--- a/xen/arch/riscv/include/asm/traps.h
++++ b/xen/arch/riscv/include/asm/traps.h
+@@ -9,6 +9,7 @@
+ 
+ void do_trap(struct cpu_user_regs *cpu_regs);
+ void handle_trap(void);
++void trap_init(void);
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index e3cb0866d5..a6a29a1508 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -8,6 +8,7 @@
+ #include <public/version.h>
+ 
+ #include <asm/early_printk.h>
++#include <asm/traps.h>
+ 
+ void arch_get_xen_caps(xen_capabilities_info_t *info)
+ {
+@@ -23,6 +24,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ {
+     remove_identity_mapping();
+ 
++    trap_init();
++
+     printk("All set up\n");
+ 
+     for ( ;; )
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 37cec40dfa..cb18b30ff2 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -12,6 +12,18 @@
+ #include <asm/riscv_encoding.h>
+ #include <asm/traps.h>
+ 
++/*
++ * Initialize the trap handling.
++ *
++ * The function is called after MMU is enabled.
++ */
++void trap_init(void)
++{
++    unsigned long addr = (unsigned long)&handle_trap;
++
++    csr_write(CSR_STVEC, addr);
++}
++
+ static const char *decode_trap_cause(unsigned long cause)
+ {
+     static const char *const trap_causes[] = {
+-- 
+2.45.2
 
-~Andrew
 
