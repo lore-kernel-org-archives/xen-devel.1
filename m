@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E1AAC3DA4D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E527AC3DA52
 	for <xen-devel@archiver.kernel.org>; Fri, 12 Jul 2024 13:08:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.758028.1167270 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.758025.1167236 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sSG0U-0006DG-4n; Fri, 12 Jul 2024 13:08:14 +0000
+	id 1sSG0R-0005IY-7z; Fri, 12 Jul 2024 13:08:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 758028.1167270; Fri, 12 Jul 2024 13:08:14 +0000
+Received: by outflank-mailman (output) from mailman id 758025.1167236; Fri, 12 Jul 2024 13:08:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sSG0U-0006Cl-0W; Fri, 12 Jul 2024 13:08:14 +0000
-Received: by outflank-mailman (input) for mailman id 758028;
- Fri, 12 Jul 2024 13:08:12 +0000
+	id 1sSG0R-0005Hl-2M; Fri, 12 Jul 2024 13:08:11 +0000
+Received: by outflank-mailman (input) for mailman id 758025;
+ Fri, 12 Jul 2024 13:08:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/nkX=OM=cloud.com=fouad.hilly@srs-se1.protection.inumbo.net>)
- id 1sSG0S-0005Dy-BY
- for xen-devel@lists.xenproject.org; Fri, 12 Jul 2024 13:08:12 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1sSG0P-0005Dy-Lj
+ for xen-devel@lists.xenproject.org; Fri, 12 Jul 2024 13:08:09 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c9a1a27b-404f-11ef-bbfb-fd08da9f4363;
- Fri, 12 Jul 2024 15:08:10 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a77e85cb9b4so269121066b.0
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jul 2024 06:08:10 -0700 (PDT)
+ id c8498f11-404f-11ef-bbfb-fd08da9f4363;
+ Fri, 12 Jul 2024 15:08:08 +0200 (CEST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-58e76294858so5446605a12.0
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jul 2024 06:08:08 -0700 (PDT)
 Received: from fhilly.. ([185.25.67.249]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a780a87204esm343023466b.222.2024.07.12.06.08.08
+ a640c23a62f3a-a780a87204esm343023466b.222.2024.07.12.06.08.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jul 2024 06:08:08 -0700 (PDT)
+ Fri, 12 Jul 2024 06:08:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,485 +46,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c9a1a27b-404f-11ef-bbfb-fd08da9f4363
+X-Inumbo-ID: c8498f11-404f-11ef-bbfb-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1720789689; x=1721394489; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1720789687; x=1721394487; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=whToGD1DSrObOBTapTvNuH8JLCI/G4TaeHuUCU4s/+Y=;
-        b=XcYnKqy/EASk6PAFbsUI2PZW2RldYg66HF6djGazC+tqEiVbqJBhM2hFz0SNgVg/XL
-         GRg7uP+AnWftKI4lLu4e8TMbd2o3QAt26fK3uV7iysrEXdWNgFTBgZWnQ4XszaUe3H91
-         g+P+nHYdyhYL0V34k8sJ+/cvX2GFio7ZGsHPQ=
+        bh=lKSvI1GhDD74lnKkd7GNWTC2GWZKCFTz0GYz5GHUU34=;
+        b=dl0WWk2nWX4GTdjJFCuXPfUxZAC/T1o/asiS500t/xFBUB0gmT17SdYPdM/NKVTNUC
+         iidsq67EOEbcrRhUa0GizNEf3Aldb7pSg0Iz/AGdiTNDonGgd2Bq2D2ylGRpHA88HP+r
+         Vwam1tza3ePy/uaL7c4BIv+M7XVyMzWx5c5Cw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720789689; x=1721394489;
+        d=1e100.net; s=20230601; t=1720789687; x=1721394487;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=whToGD1DSrObOBTapTvNuH8JLCI/G4TaeHuUCU4s/+Y=;
-        b=YidYpK3SNVDTZ8yVmT00O1rN4A8Knv5CkCwFAY5MN3OATWGkqjTAranByMFCo12ia1
-         XImw23pkBtskrZhb9FqyjxIn58fyBmRem8hQBg8F+5KOYGcqscKsMC1KbGTJcJ9GSNhP
-         fUsPEPMfdQIBov3tLB4NNwU2XezCKsGouZpI0Kowk+YjS96BgpsQFwhhTLBOMgPzmoYv
-         Q08LowT4fS22mUszn+1UsHL/4jLaiXX+Fha4dLfCFReDDISraAd+JXtpcQyjmvpXHqGF
-         vznGtIKw9TKh7zBgKtCjRJgsihkDmfJnam/DKlyGzKzyuF0eR0aSZnhX48MWMx6EyvCb
-         E6Ow==
-X-Gm-Message-State: AOJu0YzTqpicixnZKgnJvrDETXG+IuQscFGr/uo5gK9RNqBY/c4wfVSO
-	dMG2HKTODV/NHjZ3+4hmKohSnzbBq8WJve6ZDfM85aeGbAl25fM83qgfh0+E3uePVk1FRBXHoRn
-	E
-X-Google-Smtp-Source: AGHT+IEdA9Cz83EZJSxAH1Fuqkpusyqqzjn/AqTYK7EiRWSKEsbzDbP8vq5akLT8oTFOPmzIL9ROzg==
-X-Received: by 2002:a17:906:aacd:b0:a77:db97:f4fd with SMTP id a640c23a62f3a-a780b6ff016mr700949266b.34.1720789689018;
-        Fri, 12 Jul 2024 06:08:09 -0700 (PDT)
+        bh=lKSvI1GhDD74lnKkd7GNWTC2GWZKCFTz0GYz5GHUU34=;
+        b=lJYK3S6nxezMI6nfermrW0KBsAtM1O0n0Rg+rKE20SoxnWI4P2VLa1B5QOMD0JWe18
+         Vd8I4zDBFDo6j89/ZcSUj/1OsBshSQctQjxiKuoefgmvUHiDYyNDtXw/ScI67T+FAJwy
+         dTSStIuZyauljSV++gVMNj9Y1pQaffPrdSruGjXrMQopJmZGSRbUJDrgmC+9sJddUzu5
+         38BGNizlwW4esDhbMK+LmoxoAX78XU5bYqcKJUjFI7V5dwyKb1MpiOzFTahGJlGJSsbc
+         d6otZBsEjEPgAenDyEbUpHLkAeGnrfOkfHHUuitCHoe+kUhPRw756rLWDp3wAZyn3SV0
+         FWNA==
+X-Gm-Message-State: AOJu0YyHLZ+HmcSbL2o55JLpMritAz+CKPSziqniuNAbtp34PM53JvEN
+	QibpzFOGSRS5lXuY4G73Y4hzjnexXoj5v5UUa6nDjcMh3T8zOOYByZrBwqN41FmlVB5m+etGooM
+	P
+X-Google-Smtp-Source: AGHT+IF7dlL60wQIT5woQMJLiW0PmggqfXyi+MbjZPlQI4HPR3z0BjH0ehHBfSQMo8BNWw+ZFygcEw==
+X-Received: by 2002:a17:906:e099:b0:a72:8c53:1798 with SMTP id a640c23a62f3a-a799cd36c58mr168771766b.30.1720789686709;
+        Fri, 12 Jul 2024 06:08:06 -0700 (PDT)
 From: Fouad Hilly <fouad.hilly@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Fouad Hilly <fouad.hilly@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 4/4] x86/ucode: Utilize ucode_force and remove opt_ucode_allow_same
-Date: Fri, 12 Jul 2024 14:07:49 +0100
-Message-ID: <20240712130749.1272741-5-fouad.hilly@cloud.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 1/4] x86/ucode: Introduce XENPF_microcode_update2 with flags parameter
+Date: Fri, 12 Jul 2024 14:07:46 +0100
+Message-ID: <20240712130749.1272741-2-fouad.hilly@cloud.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20240712130749.1272741-1-fouad.hilly@cloud.com>
 References: <20240712130749.1272741-1-fouad.hilly@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Pass xen-ucode flags to do low level checks on micorocde version and
-utilize it to allow for microcode downgrade or reapply the same version of the
-microcode.
-ucode_force is required to be passed to a low level Intel and AMD for version
-checks to be done.
-While adding ucode_force, opt_ucode_allow_same was removed.
-Remove opt_ucode_allow_same from documentation.
+Refactor microcode_update() by adding flags field.
+struct xenpf_microcode_update2 added with uint32_t flags field.
+Introduce XENPF_microcode_update2 hypercall with flags field.
 
 Signed-off-by: Fouad Hilly <fouad.hilly@cloud.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 [v5]
-1- Update commit message.
-2- Introduce structs microcode_patch_with_flags and microcode_nmi_patch_with_flags.
-3- pass flags to Intel and AMD low level through apply_microcode().
-[4]
-1- As opt_ucode_allow_same is not required anymore, it has been removed while introducing ucode_force.
-2- Apply the changes for both AMD and Intel.
-3- Remove the mention of opt_ucode_allow_same from documentation.
+1- Update commit message to include the full name of XENPF_microcode_update2
+[v4]
+1- Commit message and description updated.
+2- Changing the order of the patches.
+[v3]
+1- Updated Commit message description.
+2- Revereted changes to a stable ABI and introduced a new struct.
+3- ucode_force_flag updated from static to a local variable.
+4- microcode_update() updated to reject unsupported flags yet.
+[v2]
+1- Update message description to highlight interface change.
+2- Removed extra empty lines.
+3- removed unnecessary define.
+4- Corrected long lines.
+5- Removed ternary operator.
+6- Introduced static ucode_update_flags, which will be used later to determine local ucode_force_flag.
 ---
- docs/misc/xen-command-line.pandoc    |  7 +--
- xen/arch/x86/cpu/microcode/amd.c     |  8 ++-
- xen/arch/x86/cpu/microcode/core.c    | 93 +++++++++++++++++-----------
- xen/arch/x86/cpu/microcode/intel.c   |  9 ++-
- xen/arch/x86/cpu/microcode/private.h |  5 +-
- 5 files changed, 73 insertions(+), 49 deletions(-)
+ xen/arch/x86/cpu/microcode/core.c    | 11 ++++++++---
+ xen/arch/x86/include/asm/microcode.h |  3 ++-
+ xen/arch/x86/platform_hypercall.c    | 13 ++++++++++++-
+ xen/include/public/platform.h        | 14 ++++++++++++++
+ 4 files changed, 36 insertions(+), 5 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 98a45211556b..2a8d47bbc664 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2650,7 +2650,7 @@ performance.
-    Alternatively, selecting `tsx=1` will re-enable TSX at the users own risk.
- 
- ### ucode
--> `= List of [ <integer> | scan=<bool>, nmi=<bool>, allow-same=<bool> ]`
-+> `= List of [ <integer> | scan=<bool>, nmi=<bool> ]`
- 
-     Applicability: x86
-     Default: `nmi`
-@@ -2682,11 +2682,6 @@ precedence over `scan`.
- stop_machine context. In NMI handler, even NMIs are blocked, which is
- considered safer. The default value is `true`.
- 
--'allow-same' alters the default acceptance policy for new microcode to permit
--trying to reload the same version.  Many CPUs will actually reload microcode
--of the same version, and this allows for easy testing of the late microcode
--loading path.
--
- ### unrestricted_guest (Intel)
- > `= <boolean>`
- 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index f76a563c8b84..8ec19441cfcd 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -22,6 +22,8 @@
- 
- #include "private.h"
- 
-+#include "public/platform.h"
-+
- #define pr_debug(x...) ((void)0)
- 
- struct equiv_cpu_entry {
-@@ -214,13 +216,15 @@ static enum microcode_match_result cf_check compare_patch(
-     return compare_header(new, old);
- }
- 
--static int cf_check apply_microcode(const struct microcode_patch *patch)
-+static int cf_check apply_microcode(const struct microcode_patch *patch,
-+                                    unsigned int flags)
- {
-     int hw_err;
-     unsigned int cpu = smp_processor_id();
-     struct cpu_signature *sig = &per_cpu(cpu_sig, cpu);
-     uint32_t rev, old_rev = sig->rev;
-     enum microcode_match_result result = microcode_fits(patch);
-+    bool ucode_force = flags == XENPF_UCODE_FORCE;
- 
-     if ( result == MIS_UCODE )
-         return -EINVAL;
-@@ -229,7 +233,7 @@ static int cf_check apply_microcode(const struct microcode_patch *patch)
-      * Allow application of the same revision to pick up SMT-specific changes
-      * even if the revision of the other SMT thread is already up-to-date.
-      */
--    if ( result == OLD_UCODE )
-+    if ( !ucode_force && (result == SAME_UCODE || result == OLD_UCODE) )
-         return -EEXIST;
- 
-     if ( check_final_patch_levels(sig) )
 diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 8a9e744489b9..2e3923152367 100644
+index e90055772acf..8a9e744489b9 100644
 --- a/xen/arch/x86/cpu/microcode/core.c
 +++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -90,6 +90,16 @@ struct ucode_mod_blob {
-     size_t size;
+@@ -40,6 +40,8 @@
+ #include <asm/processor.h>
+ #include <asm/setup.h>
+ 
++#include <public/platform.h>
++
+ #include "private.h"
+ 
+ /*
+@@ -570,6 +572,7 @@ static int cf_check do_microcode_update(void *patch)
+ }
+ 
+ struct ucode_buf {
++    unsigned int flags;
+     unsigned int len;
+     char buffer[];
  };
- 
-+struct microcode_patch_with_flags {
-+    unsigned int flags;
-+    struct microcode_patch *patch;
-+};
-+
-+struct microcode_nmi_patch_with_flags {
-+    unsigned int flags;
-+    const struct microcode_patch *patch;
-+};
-+
- static struct ucode_mod_blob __initdata ucode_blob;
- /*
-  * By default we will NOT parse the multiboot modules to see if there is
-@@ -100,8 +110,6 @@ static bool __initdata ucode_scan;
- /* By default, ucode loading is done in NMI handler */
- static bool ucode_in_nmi = true;
- 
--bool __read_mostly opt_ucode_allow_same;
--
- /* Protected by microcode_mutex */
- static struct microcode_patch *microcode_cache;
- 
-@@ -128,8 +136,6 @@ static int __init cf_check parse_ucode(const char *s)
- 
-         if ( (val = parse_boolean("nmi", s, ss)) >= 0 )
-             ucode_in_nmi = val;
--        else if ( (val = parse_boolean("allow-same", s, ss)) >= 0 )
--            opt_ucode_allow_same = val;
-         else if ( !ucode_mod_forced ) /* Not forced by EFI */
-         {
-             if ( (val = parse_boolean("scan", s, ss)) >= 0 )
-@@ -237,7 +243,11 @@ static DEFINE_PER_CPU(int, loading_err);
-  */
- static cpumask_t cpu_callin_map;
- static atomic_t cpu_out, cpu_updated;
--static const struct microcode_patch *nmi_patch = ZERO_BLOCK_PTR;
-+static struct microcode_nmi_patch_with_flags nmi_patch_with_flags =
-+{
-+    .flags  = 0,
-+    .patch  = ZERO_BLOCK_PTR,
-+};
- 
- /*
-  * Return a patch that covers current CPU. If there are multiple patches,
-@@ -327,7 +337,8 @@ static bool cf_check wait_cpu_callout(unsigned int nr)
-  * If no patch is provided, the cached patch will be loaded. Microcode update
-  * during APs bringup and CPU resuming falls into this case.
-  */
--static int microcode_update_cpu(const struct microcode_patch *patch)
-+static int microcode_update_cpu(const struct microcode_patch *patch,
-+                                unsigned int flags)
- {
-     int err;
- 
-@@ -335,10 +346,11 @@ static int microcode_update_cpu(const struct microcode_patch *patch)
- 
-     spin_lock(&microcode_mutex);
-     if ( patch )
--        err = alternative_call(ucode_ops.apply_microcode, patch);
-+        err = alternative_call(ucode_ops.apply_microcode, patch, flags);
-     else if ( microcode_cache )
-     {
--        err = alternative_call(ucode_ops.apply_microcode, microcode_cache);
-+        err = alternative_call(ucode_ops.apply_microcode, microcode_cache,
-+                               flags);
-         if ( err == -EIO )
-         {
-             microcode_free_patch(microcode_cache);
-@@ -379,7 +391,8 @@ static int secondary_nmi_work(void)
-     return wait_for_state(LOADING_EXIT) ? 0 : -EBUSY;
- }
- 
--static int primary_thread_work(const struct microcode_patch *patch)
-+static int primary_thread_work(const struct microcode_patch *patch,
-+                               unsigned int flags)
- {
-     int ret;
- 
-@@ -388,7 +401,7 @@ static int primary_thread_work(const struct microcode_patch *patch)
-     if ( !wait_for_state(LOADING_ENTER) )
-         return -EBUSY;
- 
--    ret = alternative_call(ucode_ops.apply_microcode, patch);
-+    ret = alternative_call(ucode_ops.apply_microcode, patch, flags);
-     if ( !ret )
-         atomic_inc(&cpu_updated);
-     atomic_inc(&cpu_out);
-@@ -416,7 +429,8 @@ static int cf_check microcode_nmi_callback(
-         return 0;
- 
-     if ( primary_cpu )
--        ret = primary_thread_work(nmi_patch);
-+        ret = primary_thread_work(nmi_patch_with_flags.patch,
-+                                  nmi_patch_with_flags.flags);
-     else
-         ret = secondary_nmi_work();
-     this_cpu(loading_err) = ret;
-@@ -446,7 +460,8 @@ static int secondary_thread_fn(void)
-     return this_cpu(loading_err);
- }
- 
--static int primary_thread_fn(const struct microcode_patch *patch)
-+static int primary_thread_fn(const struct microcode_patch *patch,
-+                             unsigned int flags)
- {
-     if ( !wait_for_state(LOADING_CALLIN) )
-         return -EBUSY;
-@@ -466,10 +481,11 @@ static int primary_thread_fn(const struct microcode_patch *patch)
-         return this_cpu(loading_err);
-     }
- 
--    return primary_thread_work(patch);
-+    return primary_thread_work(patch, flags);
- }
- 
--static int control_thread_fn(const struct microcode_patch *patch)
-+static int control_thread_fn(const struct microcode_patch *patch,
-+                             unsigned int flags)
- {
-     unsigned int cpu = smp_processor_id(), done;
-     unsigned long tick;
-@@ -482,7 +498,8 @@ static int control_thread_fn(const struct microcode_patch *patch)
-      */
-     watchdog_disable();
- 
--    nmi_patch = patch;
-+    nmi_patch_with_flags.patch = patch;
-+    nmi_patch_with_flags.flags = flags;
-     smp_wmb();
-     saved_nmi_callback = set_nmi_callback(microcode_nmi_callback);
- 
-@@ -498,7 +515,7 @@ static int control_thread_fn(const struct microcode_patch *patch)
-         goto out;
- 
-     /* Control thread loads ucode first while others are in NMI handler. */
--    ret = alternative_call(ucode_ops.apply_microcode, patch);
-+    ret = alternative_call(ucode_ops.apply_microcode, patch, flags);
-     if ( !ret )
-         atomic_inc(&cpu_updated);
-     atomic_inc(&cpu_out);
-@@ -544,17 +561,19 @@ static int control_thread_fn(const struct microcode_patch *patch)
- 
-     set_nmi_callback(saved_nmi_callback);
-     smp_wmb();
--    nmi_patch = ZERO_BLOCK_PTR;
-+    nmi_patch_with_flags.patch = ZERO_BLOCK_PTR;
-+    nmi_patch_with_flags.flags = 0;
- 
-     watchdog_enable();
- 
+@@ -708,13 +711,14 @@ static long cf_check microcode_update_helper(void *data)
      return ret;
  }
  
--static int cf_check do_microcode_update(void *patch)
-+static int cf_check do_microcode_update(void *_patch_with_flags)
+-int microcode_update(XEN_GUEST_HANDLE(const_void) buf, unsigned long len)
++int microcode_update(XEN_GUEST_HANDLE(const_void) buf,
++                     unsigned long len, unsigned int flags)
  {
-     unsigned int cpu = smp_processor_id();
      int ret;
-+    struct microcode_patch_with_flags * patch_with_flags = _patch_with_flags;
+     struct ucode_buf *buffer;
  
-     /*
-      * The control thread set state to coordinate ucode loading. Primary
-@@ -562,9 +581,11 @@ static int cf_check do_microcode_update(void *patch)
-      * the completion of the ucode loading process.
-      */
-     if ( cpu == cpumask_first(&cpu_online_map) )
--        ret = control_thread_fn(patch);
-+        ret = control_thread_fn(patch_with_flags->patch,
-+                                patch_with_flags->flags);
-     else if ( is_cpu_primary(cpu) )
--        ret = primary_thread_fn(patch);
-+        ret = primary_thread_fn(patch_with_flags->patch,
-+                                patch_with_flags->flags);
-     else
-         ret = secondary_thread_fn();
+-    if ( len != (uint32_t)len )
+-        return -E2BIG;
++    if ( flags & ~XENPF_UCODE_FORCE )
++        return -EINVAL;
  
-@@ -582,7 +603,8 @@ static long cf_check microcode_update_helper(void *data)
-     int ret;
-     struct ucode_buf *buffer = data;
-     unsigned int cpu, updated;
--    struct microcode_patch *patch;
-+    struct microcode_patch_with_flags patch_with_flags;
-+    bool ucode_force = buffer->flags == XENPF_UCODE_FORCE;
- 
-     /* cpu_online_map must not change during update */
-     if ( !get_cpu_maps() )
-@@ -606,16 +628,17 @@ static long cf_check microcode_update_helper(void *data)
-         goto put;
-     }
- 
--    patch = parse_blob(buffer->buffer, buffer->len);
-+    patch_with_flags.patch = parse_blob(buffer->buffer, buffer->len);
-+    patch_with_flags.flags = buffer->flags;
-     xfree(buffer);
--    if ( IS_ERR(patch) )
-+    if ( IS_ERR(patch_with_flags.patch) )
-     {
--        ret = PTR_ERR(patch);
-+        ret = PTR_ERR(patch_with_flags.patch);
-         printk(XENLOG_WARNING "Parsing microcode blob error %d\n", ret);
-         goto put;
-     }
- 
--    if ( !patch )
-+    if ( !patch_with_flags.patch )
-     {
-         printk(XENLOG_WARNING "microcode: couldn't find any matching ucode in "
-                               "the provided blob!\n");
-@@ -632,17 +655,17 @@ static long cf_check microcode_update_helper(void *data)
-     {
-         enum microcode_match_result result;
- 
--        result = alternative_call(ucode_ops.compare_patch, patch,
--                                  microcode_cache);
-+        result = alternative_call(ucode_ops.compare_patch,
-+                                  patch_with_flags.patch, microcode_cache);
- 
-         if ( result != NEW_UCODE &&
--             !(opt_ucode_allow_same && result == SAME_UCODE) )
-+             !(ucode_force && (result == OLD_UCODE || result == SAME_UCODE)) )
-         {
-             spin_unlock(&microcode_mutex);
-             printk(XENLOG_WARNING
-                    "microcode: couldn't find any newer%s revision in the provided blob!\n",
--                   opt_ucode_allow_same ? " (or the same)" : "");
--            microcode_free_patch(patch);
-+                   ucode_force? " (or a valid)" : "");
-+            microcode_free_patch(patch_with_flags.patch);
-             ret = -EEXIST;
- 
-             goto put;
-@@ -674,13 +697,13 @@ static long cf_check microcode_update_helper(void *data)
-      *   this requirement can be relaxed in the future. Right now, this is
-      *   conservative and good.
-      */
--    ret = stop_machine_run(do_microcode_update, patch, NR_CPUS);
-+    ret = stop_machine_run(do_microcode_update, &patch_with_flags, NR_CPUS);
- 
-     updated = atomic_read(&cpu_updated);
-     if ( updated > 0 )
-     {
-         spin_lock(&microcode_mutex);
--        microcode_update_cache(patch);
-+        microcode_update_cache(patch_with_flags.patch);
-         spin_unlock(&microcode_mutex);
- 
-         /*
-@@ -697,7 +720,7 @@ static long cf_check microcode_update_helper(void *data)
-             alternative_vcall(ctxt_switch_masking, current);
-     }
-     else
--        microcode_free_patch(patch);
-+        microcode_free_patch(patch_with_flags.patch);
- 
-     if ( updated && updated != nr_cores )
-         printk(XENLOG_ERR "ERROR: Updating microcode succeeded on %u cores and failed\n"
-@@ -775,7 +798,7 @@ int microcode_update_one(void)
      if ( !ucode_ops.apply_microcode )
-         return -EOPNOTSUPP;
- 
--    return microcode_update_cpu(NULL);
-+    return microcode_update_cpu(NULL, 0);
- }
- 
- static int __init early_update_cache(const void *data, size_t len)
-@@ -858,7 +881,7 @@ static int __init early_microcode_update_cpu(void)
-     if ( !patch )
-         return -ENOENT;
- 
--    return microcode_update_cpu(patch);
-+    return microcode_update_cpu(patch, 0);
- }
- 
- int __init early_microcode_init(unsigned long *module_map,
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index f505aa1b7888..cb6e906481a4 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -29,6 +29,8 @@
- 
- #include "private.h"
- 
-+#include "public/platform.h"
-+
- #define pr_debug(x...) ((void)0)
- 
- struct microcode_patch {
-@@ -284,21 +286,22 @@ static enum microcode_match_result cf_check compare_patch(
-     return compare_revisions(old->rev, new->rev);
- }
- 
--static int cf_check apply_microcode(const struct microcode_patch *patch)
-+static int cf_check apply_microcode(const struct microcode_patch *patch,
-+                                    unsigned int flags)
- {
-     uint64_t msr_content;
-     unsigned int cpu = smp_processor_id();
-     struct cpu_signature *sig = &this_cpu(cpu_sig);
-     uint32_t rev, old_rev = sig->rev;
-     enum microcode_match_result result;
-+    bool ucode_force = flags == XENPF_UCODE_FORCE;
- 
-     result = microcode_update_match(patch);
- 
-     if ( result == MIS_UCODE )
          return -EINVAL;
- 
--    if ( result == OLD_UCODE ||
--         (result == SAME_UCODE && !opt_ucode_allow_same) )
-+    if ( !ucode_force && (result == SAME_UCODE || result == OLD_UCODE) )
-         return -EEXIST;
- 
-     wbinvd();
-diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
-index da556fe5060a..017889e1b58d 100644
---- a/xen/arch/x86/cpu/microcode/private.h
-+++ b/xen/arch/x86/cpu/microcode/private.h
-@@ -3,8 +3,6 @@
- 
- #include <asm/microcode.h>
- 
--extern bool opt_ucode_allow_same;
--
- enum microcode_match_result {
-     OLD_UCODE, /* signature matched, but revision id is older */
-     SAME_UCODE, /* signature matched, but revision id is the same */
-@@ -50,7 +48,8 @@ struct microcode_ops {
-      * Attempt to load the provided patch into the CPU.  Returns an error if
-      * anything didn't go as expected.
-      */
--    int (*apply_microcode)(const struct microcode_patch *patch);
-+    int (*apply_microcode)(const struct microcode_patch *patch,
-+                           unsigned int flags);
+@@ -730,6 +734,7 @@ int microcode_update(XEN_GUEST_HANDLE(const_void) buf, unsigned long len)
+         return -EFAULT;
+     }
+     buffer->len = len;
++    buffer->flags = flags;
  
      /*
-      * Given two patches, are they both applicable to the current CPU, and is
+      * Always queue microcode_update_helper() on CPU0.  Most of the logic
+diff --git a/xen/arch/x86/include/asm/microcode.h b/xen/arch/x86/include/asm/microcode.h
+index 8f59b20b0289..57c08205d475 100644
+--- a/xen/arch/x86/include/asm/microcode.h
++++ b/xen/arch/x86/include/asm/microcode.h
+@@ -22,7 +22,8 @@ struct cpu_signature {
+ DECLARE_PER_CPU(struct cpu_signature, cpu_sig);
+ 
+ void microcode_set_module(unsigned int idx);
+-int microcode_update(XEN_GUEST_HANDLE(const_void) buf, unsigned long len);
++int microcode_update(XEN_GUEST_HANDLE(const_void) buf,
++                     unsigned long len, unsigned int flags);
+ int early_microcode_init(unsigned long *module_map,
+                          const struct multiboot_info *mbi);
+ int microcode_init_cache(unsigned long *module_map,
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index 95467b88ab64..7e3278109300 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -311,7 +311,18 @@ ret_t do_platform_op(
+ 
+         guest_from_compat_handle(data, op->u.microcode.data);
+ 
+-        ret = microcode_update(data, op->u.microcode.length);
++        ret = microcode_update(data, op->u.microcode.length, 0);
++        break;
++    }
++
++    case XENPF_microcode_update2:
++    {
++        XEN_GUEST_HANDLE(const_void) data;
++
++        guest_from_compat_handle(data, op->u.microcode2.data);
++
++        ret = microcode_update(data, op->u.microcode2.length,
++                               op->u.microcode2.flags);
+         break;
+     }
+ 
+diff --git a/xen/include/public/platform.h b/xen/include/public/platform.h
+index 15777b541690..2725b8d1044f 100644
+--- a/xen/include/public/platform.h
++++ b/xen/include/public/platform.h
+@@ -624,6 +624,19 @@ struct xenpf_ucode_revision {
+ typedef struct xenpf_ucode_revision xenpf_ucode_revision_t;
+ DEFINE_XEN_GUEST_HANDLE(xenpf_ucode_revision_t);
+ 
++/* Hypercall to microcode_update with flags */
++#define XENPF_microcode_update2    66
++struct xenpf_microcode_update2 {
++    /* IN variables. */
++    uint32_t flags;                   /* Flags to be passed with ucode. */
++/* Force to skip microcode version check */
++#define XENPF_UCODE_FORCE           1
++    uint32_t length;                  /* Length of microcode data. */
++    XEN_GUEST_HANDLE(const_void) data;/* Pointer to microcode data */
++};
++typedef struct xenpf_microcode_update2 xenpf_microcode_update2_t;
++DEFINE_XEN_GUEST_HANDLE(xenpf_microcode_update2_t);
++
+ /*
+  * ` enum neg_errnoval
+  * ` HYPERVISOR_platform_op(const struct xen_platform_op*);
+@@ -656,6 +669,7 @@ struct xen_platform_op {
+         xenpf_symdata_t               symdata;
+         xenpf_dom0_console_t          dom0_console;
+         xenpf_ucode_revision_t        ucode_revision;
++        xenpf_microcode_update2_t     microcode2;
+         uint8_t                       pad[128];
+     } u;
+ };
 -- 
 2.42.0
 
