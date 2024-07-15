@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7672DC3DA61
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24EECC3DA4A
 	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 16:47:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.759064.1168638 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.759067.1168647 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOrT-0007fs-FF; Mon, 15 Jul 2024 16:47:39 +0000
+	id 1sTOrU-0007pS-4x; Mon, 15 Jul 2024 16:47:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 759064.1168638; Mon, 15 Jul 2024 16:47:39 +0000
+Received: by outflank-mailman (output) from mailman id 759067.1168647; Mon, 15 Jul 2024 16:47:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOrT-0007fh-Bd; Mon, 15 Jul 2024 16:47:39 +0000
-Received: by outflank-mailman (input) for mailman id 759064;
- Mon, 15 Jul 2024 16:47:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sTOrT-0007ns-VP; Mon, 15 Jul 2024 16:47:39 +0000
+Received: by outflank-mailman (input) for mailman id 759067;
+ Mon, 15 Jul 2024 16:47:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f3wo=OP=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sTOrR-0006CY-AE
- for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:47:37 +0000
+ id 1sTOrS-000798-LK
+ for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:47:38 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f02873b5-42c9-11ef-8776-851b0ebba9a2;
- Mon, 15 Jul 2024 18:47:35 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f1077e25-42c9-11ef-bbfb-fd08da9f4363;
+ Mon, 15 Jul 2024 18:47:37 +0200 (CEST)
 Received: from truciolo.bugseng.com (unknown [37.163.111.28])
- by support.bugseng.com (Postfix) with ESMTPSA id 9C4B64EE0739;
- Mon, 15 Jul 2024 18:47:34 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 7BB284EE0745;
+ Mon, 15 Jul 2024 18:47:36 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,23 +41,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f02873b5-42c9-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: f1077e25-42c9-11ef-bbfb-fd08da9f4363
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [XEN PATCH v4 3/9] x86/domctl: address a violation of MISRA C Rule 16.3
-Date: Mon, 15 Jul 2024 18:47:16 +0200
-Message-Id: <759ef52606d90ec0efed9fc6d87fd432a42f7cc4.1721050709.git.federico.serafini@bugseng.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v4 5/9] x86/traps: address violations of MISRA C Rule 16.3
+Date: Mon, 15 Jul 2024 18:47:18 +0200
+Message-Id: <d16e294e1cbd74001c1ca276023d13f66f4ec0d3.1721050709.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1721050709.git.federico.serafini@bugseng.com>
 References: <cover.1721050709.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing break statement to address a violation of
+Add break or pseudo keyword fallthrough to address violations of
 MISRA C Rule 16.3: "An unconditional `break' statement shall terminate
 every switch-clause".
 
@@ -65,23 +64,38 @@ No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/domctl.c | 1 +
- 1 file changed, 1 insertion(+)
+ xen/arch/x86/traps.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index 9190e11faa..68b5b46d1a 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -517,6 +517,7 @@ long arch_do_domctl(
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index ee91fc56b1..7a9299ae6c 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -1186,6 +1186,7 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
  
-         default:
-             ret = -ENOSYS;
-+            break;
-         }
-         break;
+     default:
+         ASSERT_UNREACHABLE();
++        break;
      }
+ }
+ 
+@@ -1748,6 +1749,7 @@ static void io_check_error(const struct cpu_user_regs *regs)
+     {
+     case 'd': /* 'dom0' */
+         nmi_hwdom_report(_XEN_NMIREASON_io_error);
++        break;
+     case 'i': /* 'ignore' */
+         break;
+     default:  /* 'fatal' */
+@@ -1768,6 +1770,7 @@ static void unknown_nmi_error(const struct cpu_user_regs *regs,
+     {
+     case 'd': /* 'dom0' */
+         nmi_hwdom_report(_XEN_NMIREASON_unknown);
++        break;
+     case 'i': /* 'ignore' */
+         break;
+     default:  /* 'fatal' */
 -- 
 2.34.1
 
