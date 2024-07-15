@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72E2C3DA59
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 16:47:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.759066.1168643 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0F80C3DA4B
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 16:47:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.759069.1168668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOrT-0007jK-Qz; Mon, 15 Jul 2024 16:47:39 +0000
+	id 1sTOrW-0008Tv-Gj; Mon, 15 Jul 2024 16:47:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 759066.1168643; Mon, 15 Jul 2024 16:47:39 +0000
+Received: by outflank-mailman (output) from mailman id 759069.1168668; Mon, 15 Jul 2024 16:47:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOrT-0007iS-Jq; Mon, 15 Jul 2024 16:47:39 +0000
-Received: by outflank-mailman (input) for mailman id 759066;
- Mon, 15 Jul 2024 16:47:38 +0000
+	id 1sTOrW-0008Tc-CZ; Mon, 15 Jul 2024 16:47:42 +0000
+Received: by outflank-mailman (input) for mailman id 759069;
+ Mon, 15 Jul 2024 16:47:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f3wo=OP=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sTOrS-0006CY-AS
- for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:47:38 +0000
+ id 1sTOrU-0006CY-77
+ for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:47:40 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f08dee2b-42c9-11ef-8776-851b0ebba9a2;
- Mon, 15 Jul 2024 18:47:36 +0200 (CEST)
+ id f1e1340e-42c9-11ef-8776-851b0ebba9a2;
+ Mon, 15 Jul 2024 18:47:38 +0200 (CEST)
 Received: from truciolo.bugseng.com (unknown [37.163.111.28])
- by support.bugseng.com (Postfix) with ESMTPSA id CC67B4EE0742;
- Mon, 15 Jul 2024 18:47:35 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 616B34EE0746;
+ Mon, 15 Jul 2024 18:47:37 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,75 +41,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f08dee2b-42c9-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: f1e1340e-42c9-11ef-8776-851b0ebba9a2
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH v4 4/9] x86/vpmu: address violations of MISRA C Rule 16.3
-Date: Mon, 15 Jul 2024 18:47:17 +0200
-Message-Id: <67c30f4ef05846f8c3b371eb5fb2de4bd42eb5f1.1721050709.git.federico.serafini@bugseng.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [XEN PATCH v4 6/9] x86/mce: address violations of MISRA C Rule 16.3
+Date: Mon, 15 Jul 2024 18:47:19 +0200
+Message-Id: <b71abb5ded93a7ce6a79a17f0f413c2d0186f2e6.1721050709.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1721050709.git.federico.serafini@bugseng.com>
 References: <cover.1721050709.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing break statements to address violations of MISRA C Rule
-16.3: "An unconditional `break' statement shall terminate every
-switch-clause".
+Add missing break statements to address violations of
+MISRA C Rule 16.3: "An unconditional `break' statement shall terminate
+every switch-clause".
 
 No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/cpu/vpmu.c       | 3 +++
- xen/arch/x86/cpu/vpmu_intel.c | 2 ++
- 2 files changed, 5 insertions(+)
+ xen/arch/x86/cpu/mcheck/mce_amd.c   | 1 +
+ xen/arch/x86/cpu/mcheck/mce_intel.c | 2 ++
+ 2 files changed, 3 insertions(+)
 
-diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-index a7bc0cd1fc..b2ba999412 100644
---- a/xen/arch/x86/cpu/vpmu.c
-+++ b/xen/arch/x86/cpu/vpmu.c
-@@ -663,6 +663,8 @@ long do_xenpmu_op(
+diff --git a/xen/arch/x86/cpu/mcheck/mce_amd.c b/xen/arch/x86/cpu/mcheck/mce_amd.c
+index 3318b8204f..4f06a3153b 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_amd.c
++++ b/xen/arch/x86/cpu/mcheck/mce_amd.c
+@@ -201,6 +201,7 @@ static void mcequirk_amd_apply(enum mcequirk_amd_flags flags)
  
-         if ( pmu_params.version.maj != XENPMU_VER_MAJ )
-             return -EINVAL;
+     default:
+         ASSERT(flags == MCEQUIRK_NONE);
++        break;
+     }
+ }
+ 
+diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
+index dd812f4b8a..9574dedbfd 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_intel.c
++++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
+@@ -896,6 +896,8 @@ static void intel_init_ppin(const struct cpuinfo_x86 *c)
+             ppin_msr = 0;
+         else if ( c == &boot_cpu_data )
+             ppin_msr = MSR_PPIN;
 +
 +        break;
      }
+ }
  
-     switch ( op )
-@@ -776,6 +778,7 @@ long do_xenpmu_op(
- 
-     default:
-         ret = -EINVAL;
-+        break;
-     }
- 
-     return ret;
-diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
-index cd414165df..26dd3a9358 100644
---- a/xen/arch/x86/cpu/vpmu_intel.c
-+++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -666,6 +666,7 @@ static int cf_check core2_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
- 
-             xen_pmu_cntr_pair[tmp].control = msr_content;
-         }
-+        break;
-     }
- 
-     if ( type != MSR_TYPE_GLOBAL )
-@@ -713,6 +714,7 @@ static int cf_check core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
-             break;
-         default:
-             rdmsrl(msr, *msr_content);
-+            break;
-         }
-     }
-     else if ( msr == MSR_IA32_MISC_ENABLE )
 -- 
 2.34.1
 
