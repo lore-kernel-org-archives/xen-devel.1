@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA77C3DA59
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 13:02:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.758869.1168388 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 375B5C3DA59
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 13:30:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.758887.1168407 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTLLo-0005Lg-6t; Mon, 15 Jul 2024 13:02:44 +0000
+	id 1sTLmD-0000bY-J5; Mon, 15 Jul 2024 13:30:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 758869.1168388; Mon, 15 Jul 2024 13:02:44 +0000
+Received: by outflank-mailman (output) from mailman id 758887.1168407; Mon, 15 Jul 2024 13:30:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTLLo-0005LZ-2Q; Mon, 15 Jul 2024 13:02:44 +0000
-Received: by outflank-mailman (input) for mailman id 758869;
- Mon, 15 Jul 2024 13:02:43 +0000
+	id 1sTLmD-0000b1-Fz; Mon, 15 Jul 2024 13:30:01 +0000
+Received: by outflank-mailman (input) for mailman id 758887;
+ Mon, 15 Jul 2024 13:29:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kjrg=OP=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sTLLn-0005LS-Bf
- for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 13:02:43 +0000
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [2607:f8b0:4864:20::733])
+ <SRS0=f/7M=OP=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1sTLmB-0000Ys-SN
+ for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 13:29:59 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 84da1d5d-42aa-11ef-bbfb-fd08da9f4363;
- Mon, 15 Jul 2024 15:02:41 +0200 (CEST)
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-79f08b01ba6so355900685a.0
- for <xen-devel@lists.xenproject.org>; Mon, 15 Jul 2024 06:02:41 -0700 (PDT)
-Received: from [10.125.226.166] ([185.25.67.249])
+ id 54f5489a-42ae-11ef-bbfb-fd08da9f4363;
+ Mon, 15 Jul 2024 15:29:59 +0200 (CEST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a77cc44f8aaso242917666b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Jul 2024 06:29:59 -0700 (PDT)
+Received: from [192.168.219.191] ([94.75.70.14])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a160bdca41sm194785685a.55.2024.07.15.06.02.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jul 2024 06:02:40 -0700 (PDT)
+ 4fb4d7f45d1cf-59b26f61f62sm3350924a12.82.2024.07.15.06.29.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jul 2024 06:29:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,205 +47,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 84da1d5d-42aa-11ef-bbfb-fd08da9f4363
+X-Inumbo-ID: 54f5489a-42ae-11ef-bbfb-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1721048561; x=1721653361; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=vmQg8lZ4uyq92nzQahMeihKaOXreEhuittm/emP8eJI=;
-        b=GZS89clI7WWZDxgso6NIdIOSIFMChev6+Ui4fxhgwsxiSL6jJyztixIZs4c8Bk2Jfd
-         Q4THGjSLqOBEEJFLZYf45dICWJ6EkbGCQz0oOfZLzY5yIHrZmR7llSb65usSFmg+pjbT
-         CqeJ3sZdHi1MfcEO3mumH2Y6QLws4U+SW9JvA=
+        d=gmail.com; s=20230601; t=1721050198; x=1721654998; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=BwdOuYXhYyq01hfQeUAROIU2sYwv+dhNfF6a540e6Ew=;
+        b=mr52ZaCA6cXyUidtsgp3Ycqeabf2/QuGKBhKmM5dFsk0ZbZ/77scxJtRoGTr31mEVv
+         1QVYUDE+SerTdWel1ZGquWjImsS2g7DnJaW2IgvI2V7mVtUlPt5BNUd/fTS0jB5TGdJ9
+         a5qp9PZZT2uxE5meEQG4p8A/ToLU1JQJ3+ZlAqpTensoYiww5mYLjqog8NM8UOwUsMYm
+         5Wph35vTJyL6heTWnS2X8mXUriw2pRLP+LH0OJS2xsonxI0NdT6pffQk6bae8f4gv42B
+         OuuinaMoX6vIQ/ZFq5dqoPITOhpmzFtetCAKa13NmjbvPuhkJrcByBQJFNE2CZlI0TWm
+         CqEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721048561; x=1721653361;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vmQg8lZ4uyq92nzQahMeihKaOXreEhuittm/emP8eJI=;
-        b=WEAgTrwWdLwj/liVZwAfELcmu0yWcW83HBtWljtlQvvINx+/PWZcAHmUEmyWwkCYil
-         qGlEYEh2aoY48uocq4ThjRMNB2V6HFCRweHoUc7LIBgKiM5SZLh2J2PHPq5cdKDZCfpA
-         TZTExpH3KrcsJvKWR894qc/WBssy0QfH21Ha94rx3mlue+T6wUGAHTPxzvi6YIXR9Imk
-         /5Rz40FQFG0X28XQnij0yyjkQjoEN9CLr0BK49j567sGMO1G/He7EjMMwbxcg8NVzJos
-         KtUuwakGU9LMUzQTiYTMsnp2Qzvw6JNRPwAopRPm09aux4uQ/oeGvFM0wiGhqocaeE5c
-         Or9A==
-X-Gm-Message-State: AOJu0YxH4MATuyIG+HkvliSXgNBZs7UN9d730pRecUGD4D8v31uWvvPd
-	lamwneywJQHixm/bzj2Rg1qCDieTngqgLc2fcxHBdlmVRHx0ASYoehpXyjHu82U=
-X-Google-Smtp-Source: AGHT+IFWnNHFP8JQ2FhCn+irM9H3Hh38qNEhzV7Mwc79KS+YYvqSo3UKA7gE4x8o319Eqr/vxkHqNw==
-X-Received: by 2002:a05:620a:215c:b0:79f:712:ff97 with SMTP id af79cd13be357-7a152fee4c5mr1581482185a.18.1721048560672;
-        Mon, 15 Jul 2024 06:02:40 -0700 (PDT)
-Message-ID: <377cd22e-e5f9-4675-9d11-92298dc5ce55@citrix.com>
-Date: Mon, 15 Jul 2024 14:02:36 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/12] CI: Swap from perl to perl-base in build containers
-To: Anthony PERARD <anthony.perard@vates.tech>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Jan Beulich <JBeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20230601; t=1721050198; x=1721654998;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=BwdOuYXhYyq01hfQeUAROIU2sYwv+dhNfF6a540e6Ew=;
+        b=fO3nTnIcuG9CQs0l9HuGW5GWv9jmcXZrtKG3xuorSGPo4UOE4SiS3Zqrw4brxWs80T
+         o0iHeIdd9X6KkIpXa3B9JmxdUGvfmLokgMbA1S7W4eKRrEJalyCicyvloGw9wKmFO4Y9
+         Lirf9R0yhgGB4onbo5EXv2Y6qnwgoa+Eb3eccEK5MXWba4kEPsiojnBu2eHoxQChn90V
+         O/iuC/1zZWptZkLW9bUy+qnXLhnOu5EPXVsA4+T0VVPGibMcvTZQLNvExgNtYwy2ZwZF
+         HkFIo+W8uoC2CMoWmqJonoPuspekfrBaGbsYvD5RSgR87RzaKMdeh2+OdclB/WUkQIek
+         IQmg==
+X-Forwarded-Encrypted: i=1; AJvYcCX0wlsgWfmReQqpUVOE8kOCTO8Ml9Wt+GAl3ZW+0IWaQs3hFwRLW49//CMfkQ9RPhkvmXR+xgSLOa5fRi/o/oDqsKrAHMmotIMe1sV6VN0=
+X-Gm-Message-State: AOJu0YzHj43W89nCtemcFtUTc0bQCW/8PSxyG9l1PqdhBFEG4bFmdmKU
+	02znHiVT56OWWZlKKk6qbAqx30HqoPMbSwDnM5ugTjuIUYF7a0Ea
+X-Google-Smtp-Source: AGHT+IHkiaf/+hDlY3F6mc6cPg3gLRyQRbSUiKh0LYNJqitdfjPp2Hg2X5jQkNcmmEcn/CpBnpLLXg==
+X-Received: by 2002:a05:6402:348c:b0:58f:2087:7983 with SMTP id 4fb4d7f45d1cf-594bcba842bmr16677605a12.40.1721050198096;
+        Mon, 15 Jul 2024 06:29:58 -0700 (PDT)
+Message-ID: <433345965599d1db98e3fb0023777269cf24184f.camel@gmail.com>
+Subject: Re: [PATCH 10/12] CI: Introduce debian:11/12-riscv64 containers
+From: Oleksii <oleksii.kurochko@gmail.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel
+	 <xen-devel@lists.xenproject.org>
+Cc: Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross
+ <jgross@suse.com>,  Roger Pau =?ISO-8859-1?Q?Monn=E9?=
+ <roger.pau@citrix.com>, Jan Beulich <JBeulich@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Shawn Anastasio
+ <sanastasio@raptorengineering.com>
+Date: Mon, 15 Jul 2024 15:29:56 +0200
+In-Reply-To: <0c03dff1-e68c-4660-b2cb-471958708daa@citrix.com>
 References: <20240711111517.3064810-1-andrew.cooper3@citrix.com>
- <20240713180952.3363596-1-andrew.cooper3@citrix.com> <ZpUaMwZoKnrh61P0@l14>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <ZpUaMwZoKnrh61P0@l14>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+	 <20240711111517.3064810-11-andrew.cooper3@citrix.com>
+	 <1b6c7e57ea331d3ea9aeea7fafc9a0733f6e9147.camel@gmail.com>
+	 <0c03dff1-e68c-4660-b2cb-471958708daa@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3 (3.52.3-1.fc40app2) 
+MIME-Version: 1.0
 
-On 15/07/2024 1:46 pm, Anthony PERARD wrote:
-> On Sat, Jul 13, 2024 at 07:09:52PM +0100, Andrew Cooper wrote:
->> We only need a basic perl environment, not the things that a primarily-perl
->> project would want.
->>
->> Discovered during the Fedora refresh where the difference is ~40M, but it's
->> more modest for OpenSUSE and Ubuntu.
-> "perl-base" on Ubuntu is quite different from "perl-base" on OpenSUSE
-> Leap. I haven't check Tumbleweed but is probably the same as Leap.
+On Fri, 2024-07-12 at 13:30 +0100, Andrew Cooper wrote:
+> On 12/07/2024 12:39 pm, Oleksii wrote:
+> > On Thu, 2024-07-11 at 12:15 +0100, Andrew Cooper wrote:
+> > > For starters, they're slightly smaller:
+> > >=20
+> > > =C2=A0 $ docker image list <snip>
+> > > =C2=A0 registry.gitlab.com/xen-project/xen/debian=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 12-
+> > > riscv64=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
+> > > 772MB
+> > > =C2=A0 registry.gitlab.com/xen-project/xen/debian=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 11-
+> > > riscv64=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
+> > > 422MB
+> > Do we really need both 11-riscv64 and 12-riscv64?
+>=20
+> Need? No, not strictly.
+>=20
+> Want? Yes, absolutely.
+>=20
+> You always want at least 2 different toolchains worth of testing, or
+> what you will find happens is that you end up accidentally depending
+> on
+> a quirk of the single compiler your using, and that you discover this
+> at
+> some point in the future, rather than now(ish) when CI says no.
+>=20
+> At the moment, the RISC-V builds are very trivial and quick, so it
+> makes
+> a lot of sense to have a second toolchain.=C2=A0 Before too much longer,
+> you'll want to get Clang working too.
+Agree, I should consider to add Clang. I will do that in the one of my
+nearest patch series.
 
-/sigh - because that would have been too easy.
-
-> So, I think these would deserve to be in separated patches.
->
-> On Ubuntu, installing "perl" or "perl-base" or none of them makes no
-> difference. We install "build-essentials" which pulls "dpkg-dev" which
-> pulls "perl", so we don't test properly if "perl-base" is enough or if
-> we need more.
-
-Fine - lets leave the Ubuntu's alone.
-
->
-> I tried to find out which Perl module we would need, and I've got this
-> list:
->
-> - get_maintainer
->     Getopt::Long;
-> - add_maintainer
->     Getopt::Long;
->     File::Basename;
->     List::MoreUtils;
->     IO::Handle;
-> - stubdom/vtpmmgr:
->     Digest::SHA qw(sha1);
->     Math::BigInt only => 'GMP';
-> - kconfig
->     Getopt::Long;
-> - ocaml/lib/xc/abi-check
->     Data::Dumper;
-> - docs/gen-html-index
->     Getopt::Long;
->     IO::File;
->     File::Basename;
-> - docs/xen-headers
->     Getopt::Long;
->     File::Find;
->     IO::File;
-> (there's also tools/examples/xeninfo.pl, I dont't if that can still work
-> or if we need to purge it)
-
-Ewww.
-
-my %xenhosts = ("192.0.2.10" => {"port" => "9363"}, ...
-
-is enough to demonstrate it's a special purpose script.
-
-That file isn't referenced by the Makefile, nor is anything in the vnc/
-dir, so we should purge the lot.
-
->
-> Then I've got whatever module is in "perl-base" pkg.
->
-> For Leap's perl-base:
->     getopt:long
->     file:basename
->     io:handle
->     io:file
->     file:find
->     data:dumper
->     digest:sha
-> So, add_maintainer.pl and the script in stubdom/vtpmmgr won't work. So
-> that's probably fine for Leap.
-
-vtpmmgr isn't built by default, so gets 0 testing in CI.  I don't expect
-people to be using add_maintainer inside the containers either.
-
->
-> For Ubuntu 22.04 (not check others, but likely about the same)
-> there's more packages:
->     perl-base
->         getopt::long
->         file:basename
->         io:handle
->         io:file
->     perl-modules-5.34
->         file:find
->         math:bigint
->     libperl5.34
->         data:dumper
->         digest:sha
->     liblist-moreutils-perl
->         list:MoreUtils
->     librpc-xml-perl
->         rpc:xml
-> ("perl" pkg pulls "perl-modules-5.34" and "libperl5.34")
->
-> So with just "perl-base", the ocaml's abi-check wouldn't work, as well
-> as the docs's script (probably ok for "docs" if we don't use containers
-> to build them).
-
-Hmm yeah - we wouldn't want to break that.
-
->  Also add_maintainer and stubdom/vtpmmgr like for Leap.
->
->
-> So I would suggest to not touch the Ubuntu containers, make the change
-> to the OpenSUSE one and maybe add the limitation to the commit message.
-
-Ok - I'll do this.
-
-~Andrew
+~ Oleksii
 
