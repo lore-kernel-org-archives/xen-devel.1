@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5814CC3DA4A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 451A6C3DA4B
 	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 16:49:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.759105.1168797 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.759101.1168787 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOtE-0006WZ-KN; Mon, 15 Jul 2024 16:49:28 +0000
+	id 1sTOtD-0006BV-4w; Mon, 15 Jul 2024 16:49:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 759105.1168797; Mon, 15 Jul 2024 16:49:28 +0000
+Received: by outflank-mailman (output) from mailman id 759101.1168787; Mon, 15 Jul 2024 16:49:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOtE-0006Vx-DW; Mon, 15 Jul 2024 16:49:28 +0000
-Received: by outflank-mailman (input) for mailman id 759105;
- Mon, 15 Jul 2024 16:49:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sTOtD-0006BC-0a; Mon, 15 Jul 2024 16:49:27 +0000
+Received: by outflank-mailman (input) for mailman id 759101;
+ Mon, 15 Jul 2024 16:49:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f3wo=OP=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sTOtD-0003ly-3s
- for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:49:27 +0000
+ id 1sTOtA-0003ll-TQ
+ for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:49:24 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 31a75d49-42ca-11ef-bbfb-fd08da9f4363;
- Mon, 15 Jul 2024 18:49:25 +0200 (CEST)
-Received: from truciolo.bugseng.com (unknown [37.163.111.28])
- by support.bugseng.com (Postfix) with ESMTPSA id A2FD54EE0742;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 304cbd67-42ca-11ef-8776-851b0ebba9a2;
  Mon, 15 Jul 2024 18:49:23 +0200 (CEST)
+Received: from truciolo.bugseng.com (unknown [37.163.111.28])
+ by support.bugseng.com (Postfix) with ESMTPSA id 83A7D4EE073E;
+ Mon, 15 Jul 2024 18:49:21 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,50 +41,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31a75d49-42ca-11ef-bbfb-fd08da9f4363
+X-Inumbo-ID: 304cbd67-42ca-11ef-8776-851b0ebba9a2
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH v4 9/9] x86/mpparse: address a violation of MISRA C Rule 16.3
-Date: Mon, 15 Jul 2024 18:49:00 +0200
-Message-ID: <c72a1b9b35303fd0f13fb5a13713477cf80da878.1721050709.git.federico.serafini@bugseng.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [XEN PATCH v4 8/9] x86/mm: add defensive return
+Date: Mon, 15 Jul 2024 18:48:59 +0200
+Message-ID: <de98fe0d6b36383b6eb8d1a9b077b0b387ae0848.1721050709.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1721050709.git.federico.serafini@bugseng.com>
 References: <cover.1721050709.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Message-ID: <20240715164900.XyTR7K26UhSaEosXqTWm7r7FB8Tpb6TGiPACLfe1ZbQ@z>
+Message-ID: <20240715164859.r-_-rhHgh_Am-QEJxUoZfmQ7rg2n12OM_tjd0L-cgoA@z>
 
-Add a missing break statement to address a violation of
-MISRA C Rule 16.3: "An unconditional `break' statement shall terminate
-every switch-clause".
-
-No functional change.
+Add defensive return statement at the end of an unreachable
+default case. Other than improve safety, this meets the requirements
+to deviate a violation of MISRA C Rule 16.3: "An unconditional `break'
+statement shall terminate every switch-clause".
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/mpparse.c | 1 +
+No changes from v3, further feedback on this thread would be appreciated:
+https://lists.xenproject.org/archives/html/xen-devel/2024-07/msg00474.html
+---
+ xen/arch/x86/mm.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/xen/arch/x86/mpparse.c b/xen/arch/x86/mpparse.c
-index d8ccab2449..306d8ed97a 100644
---- a/xen/arch/x86/mpparse.c
-+++ b/xen/arch/x86/mpparse.c
-@@ -544,6 +544,7 @@ static inline void __init construct_default_ISA_mptable(int mpc_default_type)
- 		case 4:
- 		case 7:
- 			memcpy(bus.mpc_bustype, "MCA   ", 6);
-+			break;
- 	}
- 	MP_bus_info(&bus);
- 	if (mpc_default_type > 4) {
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 648d6dd475..a1e28b3360 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -916,6 +916,7 @@ get_page_from_l1e(
+                 return 0;
+             default:
+                 ASSERT_UNREACHABLE();
++                return -EPERM;
+             }
+         }
+         else if ( l1f & _PAGE_RW )
 -- 
 2.34.1
 
