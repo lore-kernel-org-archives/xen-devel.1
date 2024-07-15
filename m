@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 451A6C3DA4B
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 16:49:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.759101.1168787 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1073C3DA4A
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jul 2024 16:54:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.759136.1168807 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOtD-0006BV-4w; Mon, 15 Jul 2024 16:49:27 +0000
+	id 1sTOxV-0001hg-0n; Mon, 15 Jul 2024 16:53:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 759101.1168787; Mon, 15 Jul 2024 16:49:27 +0000
+Received: by outflank-mailman (output) from mailman id 759136.1168807; Mon, 15 Jul 2024 16:53:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTOtD-0006BC-0a; Mon, 15 Jul 2024 16:49:27 +0000
-Received: by outflank-mailman (input) for mailman id 759101;
- Mon, 15 Jul 2024 16:49:25 +0000
+	id 1sTOxU-0001hZ-UY; Mon, 15 Jul 2024 16:53:52 +0000
+Received: by outflank-mailman (input) for mailman id 759136;
+ Mon, 15 Jul 2024 16:53:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=f3wo=OP=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sTOtA-0003ll-TQ
- for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:49:24 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=FzxU=OP=bounce.vates.tech=bounce-md_30504962.6695541b.v1-1b53374b6cbb4c9c80dff4ce05751766@srs-se1.protection.inumbo.net>)
+ id 1sTOxT-0001hT-BT
+ for xen-devel@lists.xenproject.org; Mon, 15 Jul 2024 16:53:51 +0000
+Received: from mail186-27.suw21.mandrillapp.com
+ (mail186-27.suw21.mandrillapp.com [198.2.186.27])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 304cbd67-42ca-11ef-8776-851b0ebba9a2;
- Mon, 15 Jul 2024 18:49:23 +0200 (CEST)
-Received: from truciolo.bugseng.com (unknown [37.163.111.28])
- by support.bugseng.com (Postfix) with ESMTPSA id 83A7D4EE073E;
- Mon, 15 Jul 2024 18:49:21 +0200 (CEST)
+ id ce42bb31-42ca-11ef-8776-851b0ebba9a2;
+ Mon, 15 Jul 2024 18:53:49 +0200 (CEST)
+Received: from pmta10.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail186-27.suw21.mandrillapp.com (Mailchimp) with ESMTP id
+ 4WN7ZM4lQPz6CPyKp
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Jul 2024 16:53:47 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 1b53374b6cbb4c9c80dff4ce05751766; Mon, 15 Jul 2024 16:53:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,50 +45,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 304cbd67-42ca-11ef-8776-851b0ebba9a2
-From: Federico Serafini <federico.serafini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v4 8/9] x86/mm: add defensive return
-Date: Mon, 15 Jul 2024 18:48:59 +0200
-Message-ID: <de98fe0d6b36383b6eb8d1a9b077b0b387ae0848.1721050709.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1721050709.git.federico.serafini@bugseng.com>
-References: <cover.1721050709.git.federico.serafini@bugseng.com>
+X-Inumbo-ID: ce42bb31-42ca-11ef-8776-851b0ebba9a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1721062427; x=1721322927;
+	bh=P6SEnbZd/odoYl5abbfmQNDDIlQVEao/1tXgtnbaZpw=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=hbFj4j8bAxoDE/dxkp8OAZBGCFQ3qG+29uVc0LqqvPNakaBJHWWfzVrDPqdPWXvqO
+	 fFpXOryExG13CxdXUmAxlzW0pnHC7hl9ep5c2oO6d0ZMyT4Qxai0nYwHOQQ/H6mqKo
+	 0sk2Ycz0kMMvrzaTitpsRuBuOY5X/Vncpt/9JiXNmfLSzTNxzo1mT/CgYHHFOsF0nY
+	 rTZumaLFKsEEYWiXWViMPVn94TmJTxZiq4ABTpR5kDoF4KO71E82vlHzoIm03LwWAZ
+	 KeIsu40gdqs53zFI6Ol4t+n9ctiL/gCHRUyPbwnIWqpHzEScD36LrQH4GHvH9+SghN
+	 05MfpQw9I67vg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1721062427; x=1721322927; i=anthony.perard@vates.tech;
+	bh=P6SEnbZd/odoYl5abbfmQNDDIlQVEao/1tXgtnbaZpw=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=PPenwSiVieQjZ6h+XHqadqWCRG98xU9WSQ8xVtx6ppzcx3JN0szY1l3nMrkFu2XoH
+	 No1Q6qsYoHdFojkb+jo2nOEhDfg/YDVjWPzLC3NVBl0TtM47wpGpgeoQnWOqjwr1JJ
+	 cSDDqHre7APyo39F3eQ75WO04O4Ia6d/e3NGVZL2ws+osDQhNufitwMEo1c5SNN2MA
+	 2PWxmTdWgp5uZmIPzlTqS9JtX/eGfZa7z2Uj9PRf5+/+il5/QP+Iq6UHa4iOKf0Zmo
+	 9bQHRiN8gsBg4NE9Nac9FkPOhWa4EiUzKNwN62eOa7578444UZ2MRi4gzMPZ9nJsGr
+	 QHTP8op27grlg==
+From: Anthony PERARD <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH=2022/12]=20tools/examples:=20Remove=20more=20obsolete=20content?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1721062426302
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>, =?utf-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jan Beulich <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Message-Id: <ZpVUGYOHHekE+zMh@l14>
+References: <20240711111517.3064810-1-andrew.cooper3@citrix.com> <20240715151640.3374005-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20240715151640.3374005-1-andrew.cooper3@citrix.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.1b53374b6cbb4c9c80dff4ce05751766?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20240715:md
+Date: Mon, 15 Jul 2024 16:53:47 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Message-ID: <20240715164859.r-_-rhHgh_Am-QEJxUoZfmQ7rg2n12OM_tjd0L-cgoA@z>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Add defensive return statement at the end of an unreachable
-default case. Other than improve safety, this meets the requirements
-to deviate a violation of MISRA C Rule 16.3: "An unconditional `break'
-statement shall terminate every switch-clause".
+On Mon, Jul 15, 2024 at 04:16:40PM +0100, Andrew Cooper wrote:
+> xeninfo.pl was introduced in commit 1b0a8bb57e3e ("Added xeninfo.pl, a script
+> for collecting statistics from Xen hosts using the Xen-API") and has been
+> touched exactly twice since to remove hardcoded IP addresses and paths.
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
-No changes from v3, further feedback on this thread would be appreciated:
-https://lists.xenproject.org/archives/html/xen-devel/2024-07/msg00474.html
----
- xen/arch/x86/mm.c | 1 +
- 1 file changed, 1 insertion(+)
+Xen-API, is that xapi?
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 648d6dd475..a1e28b3360 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -916,6 +916,7 @@ get_page_from_l1e(
-                 return 0;
-             default:
-                 ASSERT_UNREACHABLE();
-+                return -EPERM;
-             }
-         }
-         else if ( l1f & _PAGE_RW )
+> The configuration files in vnc/* date from when we had a vendered version of
+> Qemu living in the tree.
+
+I guess QEMU at that time didn't have VNC support? Because looks like
+the vnc config was supposed to be put in a guest, and `xm` had support
+for it.
+
+> These have never (AFAICT) been wired into the `make install` rule.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+Anyway, patch looks good:
+Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+
+Thanks,
+
 -- 
-2.34.1
 
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
