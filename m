@@ -4,32 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C1B8C3DA59
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jul 2024 14:02:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.759621.1169283 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78846C3DA49
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jul 2024 14:44:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.759641.1169307 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTikw-00059T-KW; Tue, 16 Jul 2024 14:02:14 +0000
+	id 1sTjPR-000469-0X; Tue, 16 Jul 2024 14:44:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 759621.1169283; Tue, 16 Jul 2024 14:02:14 +0000
+Received: by outflank-mailman (output) from mailman id 759641.1169307; Tue, 16 Jul 2024 14:44:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sTikw-00059M-Hw; Tue, 16 Jul 2024 14:02:14 +0000
-Received: by outflank-mailman (input) for mailman id 759621;
- Tue, 16 Jul 2024 13:56:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sTjPQ-000462-U1; Tue, 16 Jul 2024 14:44:04 +0000
+Received: by outflank-mailman (input) for mailman id 759641;
+ Tue, 16 Jul 2024 14:44:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gqoP=OQ=aperard.fr=tony@srs-se1.protection.inumbo.net>)
- id 1sTiew-0003XU-Un
- for xen-devel@lists.xenproject.org; Tue, 16 Jul 2024 13:56:03 +0000
-Received: from mail.aperard.fr (mail.aperard.fr [5.39.88.23])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 220152d9-437b-11ef-8776-851b0ebba9a2;
- Tue, 16 Jul 2024 15:56:00 +0200 (CEST)
-Received: from l14 (unknown [10.9.0.5])
- by mail.aperard.fr (Postfix) with ESMTPA id EFFE480EE9;
- Tue, 16 Jul 2024 14:55:58 +0100 (BST)
+ (envelope-from <SRS0=I1NN=OQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sTjPP-00045w-Cz
+ for xen-devel@lists.xenproject.org; Tue, 16 Jul 2024 14:44:03 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d74fe2fd-4381-11ef-bbfb-fd08da9f4363;
+ Tue, 16 Jul 2024 16:44:01 +0200 (CEST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2eeb1ba040aso74641561fa.1
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jul 2024 07:44:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70b7ebc40c5sm6383095b3a.87.2024.07.16.07.43.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jul 2024 07:44:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,141 +47,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 220152d9-437b-11ef-8776-851b0ebba9a2
-DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://aperard.fr/dkim-rotate/README.txt https://aperard.fr/dkim-rotate/67/6740e4466320c88d1a694cc3138ec888.pem
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aperard.fr; s=k;
-	t=1721138159; bh=daMXKN0z3Ri88Ksjk6enT7p1w98k+r/SYz0tqkUZMdo=;
-	h=DKIM-Signature-Warning:DKIM-Signature-Warning:
-	 DKIM-Signature-Warning:DKIM-Signature-Warning:
-	 DKIM-Signature-Warning:DKIM-Signature-Warning:
-	 DKIM-Signature-Warning:Date:From:To:Cc:Subject:References:
-	 In-Reply-To;
-	b=tqSftVjI8lalQ1RucWcinV0a8pDKxJpNKwktGsKJyFi+QWi9pRV6NI7oa9/KUtd3G
-	 Ag8jn5X+OiJSbsP2S2IZDak98+abB5AIvKfEyicTKgEfTWG8klFHWIdIcqVqoeNzvP
-	 T65wVyTwvdW5kvXPzrwqLoCp9tkf86XEQFYyTRkPm4bBsQn0aYk8vFfzq+TX2H3yTK
-	 50QEPU94ui53gj5lgRVNhvQLaZhR12O2t254WTNxWhM8SnIYMEZVj3JhLmnA2qi6tv
-	 aQd245Pp8ohfLCZEx/E4UXskx74OM0xY3FUrmPR0E3jYRtLE1t+1tT8iSem6Hj2bUZ
-	 jifuQ+sOha4Tg==
-DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://aperard.fr/dkim-rotate/README.txt https://aperard.fr/dkim-rotate/67/6740e4466320c88d1a694cc3138ec888.pem
-DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://aperard.fr/dkim-rotate/README.txt https://aperard.fr/dkim-rotate/67/6740e4466320c88d1a694cc3138ec888.pem
-DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://aperard.fr/dkim-rotate/README.txt https://aperard.fr/dkim-rotate/67/6740e4466320c88d1a694cc3138ec888.pem
-DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://aperard.fr/dkim-rotate/README.txt https://aperard.fr/dkim-rotate/67/6740e4466320c88d1a694cc3138ec888.pem
-DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://aperard.fr/dkim-rotate/README.txt https://aperard.fr/dkim-rotate/67/6740e4466320c88d1a694cc3138ec888.pem
-DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://aperard.fr/dkim-rotate/README.txt https://aperard.fr/dkim-rotate/67/6740e4466320c88d1a694cc3138ec888.pem
-Date: Tue, 16 Jul 2024 15:55:58 +0200
-From: Anthony PERARD <tony@aperard.fr>
-To: Juergen Gross <jgross@suse.com>
-Cc: Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH for-4.19] docs/checklist: Fix XEN_EXTRAVERSION
- inconsistency for release candidates
-Message-ID: <ZpZ77uJ/wuhoxR2p@l14>
-References: <20240715155051.3375999-1-andrew.cooper3@citrix.com>
- <3b188f84-50f7-4e13-bcde-1d6076e5cc2d@xen.org>
- <423412a9-e969-4126-8e39-7e77e67d2fd8@suse.com>
- <884ea922-946c-4344-ab29-6f2eb4be69f7@xen.org>
- <94edb2c8-1d40-49c1-b29f-151418eb5c11@suse.com>
- <7920f364-d07d-4004-b2b8-fa43b754e9b9@xen.org>
- <94722620-dc9f-4ace-9e3e-070c362d10df@suse.com>
- <2bdf382a-cbad-454f-82ce-0b0d30d2e8ef@suse.com>
+X-Inumbo-ID: d74fe2fd-4381-11ef-bbfb-fd08da9f4363
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1721141041; x=1721745841; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=vaRkMqurbE0hQZizbSqP5YDubh1/Bzj4BZmfgG6mD4k=;
+        b=CHjYuj1qDd2ryNKsLueERT09VFnJ/BOKo6s3VM2K3kF0WDXQT3fymcGbk3n0n69KcQ
+         Kp0OO44lE8qWp+Jd+n6MzTfF97slvua9WSlaAqHBQ852QLX5j4m1DPg4eQb65J+0dKHo
+         AA8naaEw+MWLRgNWR3k+yz6qQ1uDEPzur7T3ASZWrnQ8lK5hRwISJ8bhV9h3hd70mMih
+         sS3zB1DnAfthZ6KZ8flRZekEGMEJHhxGBIkcu3iWmo5QIysO30OFzex4aDAECxg5mORZ
+         4pB7XtGQY//MHcTT5TB+oRHOBYPvxtqG4/vUKLJ1evWZZFcQsDN9/Jp4BVTBrPd8nNbv
+         PfZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721141041; x=1721745841;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vaRkMqurbE0hQZizbSqP5YDubh1/Bzj4BZmfgG6mD4k=;
+        b=B4+p+LEC1GKGeP4Uo7E5r+B7boxJUwx4I+lyB6M3QRaJJsV6fLHOHxiv8HRKJfhPtZ
+         7lWKXocUxPapwh5dF8hNBaSSWscEZtj0rkGo8XZiWc2hvLzmEUQgnSQaINwrZHr+yi6g
+         f1pWWJcKQaeGCQtTGq/za49FX0XSZZlcqvVb24QQWjBlzxOS+Y7b7SWfFf+myn1giOLe
+         e+ntJ04nRo1uFZ85su+yTaAJffoUH65JBHCU94knh4YIaEWqD31t1CXBMMIir3HqhOAy
+         pJP4twdEXMU+2il7sg58a7toWyhPWcWvPR6Ys4uHHsurWXIjYRDjrr0eBRQsajiKYLIR
+         2PRA==
+X-Gm-Message-State: AOJu0Yz7JFkc2vqHfbtV4jq2z7Vp+3QdKkG4yFIT5NimUhe2wzZ12Lov
+	fMGjotK4Of4mYFmaRpPPOv1+wqwehRDoSbLlNb7RoidHeKAY0gBPyXwPvqg8yw==
+X-Google-Smtp-Source: AGHT+IHgUICZPBCrmoIukJVsXmQS26b3EIaSdeG6jjXp/Yhc6xo+JlcUZixf2kebTXvZxjr37FBK8w==
+X-Received: by 2002:a2e:83c3:0:b0:2ee:db2c:5753 with SMTP id 38308e7fff4ca-2eef41ec98cmr16189451fa.42.1721141040887;
+        Tue, 16 Jul 2024 07:44:00 -0700 (PDT)
+Message-ID: <ef2f726e-2339-4606-9668-8fe0da524933@suse.com>
+Date: Tue, 16 Jul 2024 16:43:54 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2bdf382a-cbad-454f-82ce-0b0d30d2e8ef@suse.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: Problems in PV dom0 on recent x86 hardware
+To: Jason Andryuk <jason.andryuk@amd.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+References: <baade0a7-e204-4743-bda1-282df74e5f89@suse.com>
+ <d379a900-fd1c-42ca-bc31-071f7fd80d0b@suse.com>
+ <ZousjqOAFJgO6681@macbook.local>
+ <6101999a-6f88-46cb-b850-af43b364f299@suse.com>
+ <7a0a8b1c-69e0-435d-b4f4-7a9d784eab29@amd.com>
+ <1f96a355-b0d2-4cc9-a2ae-6d3ab750136d@suse.com>
+ <89d7b5a6-e971-4cd0-85df-0dd599d0ba1b@suse.com>
+ <7d207d6c-d025-4fbb-8649-9c42224097f5@suse.com>
+ <88db3cb6-2b7e-48b2-9bf4-d871067325a0@suse.com>
+ <3d6d35ea-5044-4249-a277-0e5aa31ed888@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <3d6d35ea-5044-4249-a277-0e5aa31ed888@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jul 16, 2024 at 10:22:18AM +0200, Juergen Gross wrote:
-> On 16.07.24 09:46, Jan Beulich wrote:
-> > On 16.07.2024 09:33, Julien Grall wrote:
-> > > Hi,
-> > > 
-> > > On 16/07/2024 08:24, Jan Beulich wrote:
-> > > > On 16.07.2024 09:22, Julien Grall wrote:
-> > > > > On 16/07/2024 07:47, Jan Beulich wrote:
-> > > > > > On 15.07.2024 18:56, Julien Grall wrote:
-> > > > > > > On 15/07/2024 16:50, Andrew Cooper wrote:
-> > > > > > > > An earlier part of the checklist states:
-> > > > > > > > 
-> > > > > > > >       * change xen-unstable README. The banner (generated using figlet) should say:
-> > > > > > > >           - "Xen 4.5" in releases and on stable branches
-> > > > > > > >           - "Xen 4.5-unstable" on unstable
-> > > > > > > >           - "Xen 4.5-rc" for release candidate
-> > > > > > > > 
-> > > > > > > > Update the notes about XEN_EXTRAVERSION to match.
-> > > > 
-> > > > When this is the purpose of the patch, ...
-> > > > 
-> > > > > > > We have been tagging the tree with 4.5.0-rcX. So I think it would be
-> > > > > > > better to update the wording so we use a consistent naming.
-> > > > > > 
-> > > > > > I find:
-> > > > > > 
-> > > > > > 4.18-rc
-> > > > > > 4.17-rc
-> > > > > > 4.16-rc
-> > > > > > 4.15-rc
-> > > > > 
-> > > > > Hmmm... I don't think we are looking at the same thing. I was
-> > > > > specifically looking at the tag and *not* XEN_EXTRAVERSION.
-> > > > 
-> > > > ... why would we be looking at tags?
-> > > 
-> > > As I wrote, consistency across the naming scheme we use.
-> > > 
-> > > > The tags (necessarily) have RC numbers,
-> > > 
-> > > Right but they also *have* the .0.
-> > > 
-> > > > so are going to be different from XEN_EXTRAVERSION in any event.
-> > > 
-> > > Sure they are not going to be 100% the same. However, they could have
-> > > some similarity.
-> > > 
-> > > As I pointed out multiple times now, to me it is odd we are tagging the
-> > > tree with 4.19.0-rcX, but we use 4.19-rc.
-> > > 
-> > > Furthermore, if you look at the history of the document. It is quite
-> > > clear that the goal was consistency (the commit mentioned by Andrew
-> > > happened after). Yes it wasn't respected but I can't tell exactly why.
-> > > 
-> > > So as we try to correct the documentation, I think we should also look
-> > > at consistency. If you *really* want to drop the .0, then I think it
-> > > should happen for the tag as well (again for consistency).
-> > 
-> > I don't see why (but I also wouldn't mind the dropping from the tag).
-> > They are going to be different. Whether they're different in one or two
-> > aspects is secondary to me. I rather view the consistency goal to be
-> > with what we've been doing in the last so many releases.
+On 09.07.2024 15:08, Jason Andryuk wrote:
+> On 2024-07-09 06:56, Jürgen Groß wrote:
+>> On 09.07.24 09:01, Jan Beulich wrote:
+>>> On 09.07.2024 08:36, Jürgen Groß wrote:
+>>>> On 09.07.24 08:24, Jan Beulich wrote:
+>>>>> On 08.07.2024 23:30, Jason Andryuk wrote:
+>>>>>>    From the backtrace, it looks like the immediate case is just 
+>>>>>> trying to
+>>>>>> read a 4-byte version:
+>>>>>>
+>>>>>>    >>>> [   44.575541]  ucsi_acpi_dsm+0x53/0x80
+>>>>>>    >>>> [   44.575546]  ucsi_acpi_read+0x2e/0x60
+>>>>>>    >>>> [   44.575550]  ucsi_register+0x24/0xa0
+>>>>>>    >>>> [   44.575555]  ucsi_acpi_probe+0x162/0x1e3
+>>>>>>
+>>>>>> int ucsi_register(struct ucsi *ucsi)
+>>>>>> {
+>>>>>>            int ret;
+>>>>>>
+>>>>>>            ret = ucsi->ops->read(ucsi, UCSI_VERSION, &ucsi->version,
+>>>>>>                                  sizeof(ucsi->version));
+>>>>>>
+>>>>>> ->read being ucsi_acpi_read()
+>>>>>>
+>>>>>> However, the driver also appears write to adjacent addresses.
+>>>>>
+>>>>> There are also corresponding write functions in the driver, yes, but
+>>>>> ucsi_acpi_async_write() (used directly or indirectly) similarly calls
+>>>>> ucsi_acpi_dsm(), which wires through to acpi_evaluate_dsm(). That's
+>>>>> ACPI object evaluation, which isn't obvious without seeing the
+>>>>> involved AML whether it might write said memory region.
+>>>>
+>>>> I guess an ACPI dump would help here?
+>>>
+>>> Perhaps, yes.
+>>
+>> It is available in the bug report:
+>>
+>> https://bugzilla.opensuse.org/show_bug.cgi?id=1227301
 > 
-> Another aspect to look at would be version sorting. This will be interesting
-> when e.g. having a Xen rpm package installed and upgrading it with a later
-> version. I don't think we want to regard replacing an -rc version with the
-> .0 version to be a downgrade, so the the version numbers should be sorted by
-> "sort -V" in the correct order.
+> After acpixtract & iasl:
+> 
+> $ grep -ir FEEC *
+> dsdt.dsl:   OperationRegion (ECMM, SystemMemory, 0xFEEC2000, 0x0100)
+> ssdt16.dsl: OperationRegion (SUSC, SystemMemory, 0xFEEC2100, 0x30)
 
-Packages version from distribution is not something we have to deal with
-upstream. It's for the one writing the package version to make sure
-that -rc are older than actual release.
+As I look to have only flawed variants of acpixtract to hand, any chance
+you could supply me with dsdt.dsl and all ssdt*.dsl that you successfully
+extracted / disassembled?
 
-While trying to to find if SPEC files where dealing with "-rc" suffix,
-I found a doc for fedora telling how to deal with RCs:
-https://docs.fedoraproject.org/en-US/packaging-guidelines/Versioning/
-They say to replace the dash with a tilde, so "-rc" become "~rc", and
-package manager know what to do with it.
+Thanks, Jan
 
-Some other distribution know how to deal with "rc" suffix, but the dash
-"-" isn't actually allowed in the version string:
-https://man.archlinux.org/man/vercmp.8
+> from the DSDT:
+>      Scope (\_SB.PCI0.LPC0.EC0)
+>      {
+>          OperationRegion (ECMM, SystemMemory, 0xFEEC2000, 0x0100)
+>          Field (ECMM, AnyAcc, Lock, Preserve)
+>          {
+>              TWBT,   2048
+>          }
+> 
+>          Name (BTBF, Buffer (0x0100)
+>          {
+>               0x00                                             // .
+>          })
+>          Method (BTIF, 0, NotSerialized)
+>          {
+>              BTBF = TWBT /* \_SB_.PCI0.LPC0.EC0_.TWBT */
+>              Return (BTBF) /* \_SB_.PCI0.LPC0.EC0_.BTBF */
+>          }
+>      }
+> 
+>  From SSDT16:
+> DefinitionBlock ("", "SSDT", 2, "LENOVO", "UsbCTabl", 0x00000001)
+> {
+>      External (_SB_.PCI0.LPC0.EC0_, DeviceObj)
+> 
+>      Scope (\_SB)
+>      {
+>          OperationRegion (SUSC, SystemMemory, 0xFEEC2100, 0x30)
+>          Field (SUSC, ByteAcc, Lock, Preserve)
+>          {
+> 
+> 
+> This embedded controller (?) seems to live at 0xfeec2xxx.
+> 
+> Regards,
+> Jason
 
-So unless we forgo "-rc" in tags, there's no way we can take into
-account how distributions package manager sorts version numbers. Also,
-there's no need to, it is the job of the packager to deal with version
-number, we just need to make is simple enough and consistent.
-
-Cheers,
-
--- 
-Anthony PERARD
 
