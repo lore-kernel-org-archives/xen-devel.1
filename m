@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76A09C3DA63
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Jul 2024 16:49:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.760594.1170490 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45449C3DA49
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Jul 2024 16:54:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.760633.1170539 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sUUJI-0007iZ-9h; Thu, 18 Jul 2024 16:48:52 +0000
+	id 1sUUOu-0003gM-RM; Thu, 18 Jul 2024 16:54:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 760594.1170490; Thu, 18 Jul 2024 16:48:52 +0000
+Received: by outflank-mailman (output) from mailman id 760633.1170539; Thu, 18 Jul 2024 16:54:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sUUJI-0007hK-1l; Thu, 18 Jul 2024 16:48:52 +0000
-Received: by outflank-mailman (input) for mailman id 760594;
- Thu, 18 Jul 2024 16:48:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sUUOu-0003gF-Oq; Thu, 18 Jul 2024 16:54:40 +0000
+Received: by outflank-mailman (input) for mailman id 760633;
+ Thu, 18 Jul 2024 16:54:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=AEHZ=OS=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sUUJG-0007PV-UA
- for xen-devel@lists.xenproject.org; Thu, 18 Jul 2024 16:48:50 +0000
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [2a00:1450:4864:20::129])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9bc77dde-4525-11ef-bbfd-fd08da9f4363;
- Thu, 18 Jul 2024 18:48:50 +0200 (CEST)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-52ea79e6979so731745e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jul 2024 09:48:50 -0700 (PDT)
-Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc820f2bsm576882466b.206.2024.07.18.09.48.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 09:48:48 -0700 (PDT)
+ <SRS0=MiOu=OS=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1sUUOt-0003g9-JV
+ for xen-devel@lists.xenproject.org; Thu, 18 Jul 2024 16:54:39 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6acbab8c-4526-11ef-8776-851b0ebba9a2;
+ Thu, 18 Jul 2024 18:54:37 +0200 (CEST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-58e76294858so99849a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jul 2024 09:54:37 -0700 (PDT)
+Received: from localhost ([185.25.67.249]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5a2b676c74dsm55561a12.10.2024.07.18.09.54.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Jul 2024 09:54:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,210 +46,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9bc77dde-4525-11ef-bbfd-fd08da9f4363
+X-Inumbo-ID: 6acbab8c-4526-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1721321329; x=1721926129; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1721321677; x=1721926477; darn=lists.xenproject.org;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-transfer-encoding:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Xuo7u/zXkhIBsvPwcy6H4PeF57mIJAldQoYHTVo90WI=;
-        b=mflds8n3s2rRfb4Muk97juUZW++hDeYqlmL84wvRmuj3kKD2GhAoddkNCgl1PkapCf
-         R+A6G2LDlOttVd8I7OenmyiCAOR6+WEH0zgwf6x7IrVMEVYhS1yqjSMrJR6GENkhpGcG
-         sLINNTRKGkPn0kdTjZXorA3SXXEU833lPcpVU=
+        bh=xcPb7I9RXMTFl4+UfiV1/KnoKBsPI0JuJtndM3eMftw=;
+        b=ESB32CxOwJ/y87SgLvpaEZBhIdSdjvR+qsqrmpPfGnDVmSuVtAid/+NZYTvdcRR921
+         zqOp+udanZE/pCjKTvbmaW3h2RPQsXmZn6VY53oolfqlmv7wdaP4+LbRGVz/SmM3e0El
+         j5r+K06hivkzubheSRcaEcw3Or4QWuCvJxyj8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721321329; x=1721926129;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Xuo7u/zXkhIBsvPwcy6H4PeF57mIJAldQoYHTVo90WI=;
-        b=UEKH17Zn7FnN9TdZ0G+accpKZbScqOvGjq3d88OKb3rP7IMWRlJR1p4gT1qWr0imJe
-         Ah/JviVT9fAb/KNfzm00T03K7d3dpF+h9sb3eIR9yBnqVzWcq9afR/fZzp/xQ6Q0oglQ
-         gJDAam9SIntDWVruMRN5EKHqubMiuhXnyHWbFKuIMLWbNAtVMrEYvsUUcPnvGDXY+Fm7
-         Qb58kNhOhrS/w0uULJQFBhpPe9MFiYnXEQQLYm7D4NK2KpA4fVi8pRNt5Jh9IobEwTKS
-         rFqVvdtZXugHbzelT6cjqKQgU2EI3sEFJQVuTiSeehRQirjVX69Q1XSRkQ+ysw8HfkIE
-         JJ+g==
-X-Gm-Message-State: AOJu0YyIWj+05o5FZ5gqESj5+1bg5gdJcdsRtPnPb5i+CR82u94EwP1K
-	kH7V6RSmzW6fRaEykhZlnVUZpMQBMgDAzFD6xz9bZS5VlYCng5pvwDcBRjPd21hrcjLHc1JvEXS
-	9
-X-Google-Smtp-Source: AGHT+IH+I4nN2nmQzuvSuwTsqBxTrwMpY51AkGdJw+JG371v4KDIMQo1MbwaSewsmi5uAI1yd9joww==
-X-Received: by 2002:a05:6512:3ba8:b0:52c:dfe1:44ea with SMTP id 2adb3069b0e04-52ee53a2502mr4486308e87.6.1721321328990;
-        Thu, 18 Jul 2024 09:48:48 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 3/6] tools/libxs: Rationalise the definition of struct xs_handle
-Date: Thu, 18 Jul 2024 17:48:39 +0100
-Message-Id: <20240718164842.3650702-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240718164842.3650702-1-andrew.cooper3@citrix.com>
-References: <20240718164842.3650702-1-andrew.cooper3@citrix.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        d=1e100.net; s=20230601; t=1721321677; x=1721926477;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=xcPb7I9RXMTFl4+UfiV1/KnoKBsPI0JuJtndM3eMftw=;
+        b=LG4FcnsvPXHJlITnIW8b8qSkl/J51ziHzKALWLD5eXQ3+zf2AZ5iHKsmsz9HCgWrIb
+         uwm9dZ2NJllVB/DXv9jRn7eBe6tR6Akr2Gjw///PTCvirjMvJKkWPsxmh48sC0qP67s7
+         wVcLlmgSXSZefDXwj7/z8qU5Z9Sb8xz1nJ5EKXITHGU1tvtUL6ryI3slDUiWE679D+kF
+         by3JNJ/ycwZtfm31vU5erhFxX4KHgHTZ/a+fpWXuiwx1ZlGYW09yJdxDDat95cRlpr4D
+         uLdwadjrc3D/avyKUr93Lc29z8lFuPVJNgEE5vOeqvnKBRhnmnF5g9c0tMSXFBrt6doh
+         PDyg==
+X-Forwarded-Encrypted: i=1; AJvYcCUBiKQpCh7veW5jmaZjaf9GnmQ8Rcn4So/ZXbWcfPaVBE2hPRUX/hhtgkTN5KgS3AS+XU7TxTU/JGRTcGl3ewDsHkOU/7v3+fLiORj23Ng=
+X-Gm-Message-State: AOJu0YxtJU/3jDtarUW9L9w2ZCuMo7mLin6Pib0KaJo4/+h8rncT0MUQ
+	m1Z+8FBVyumOT0767FCENzcze0bJ5QdjzOOGHxadA9fJX4GVaDYa5ZHJZGktxe4=
+X-Google-Smtp-Source: AGHT+IH15tW5MDA2fodCvG7TcmMVlGnM3xpT289mDzXlogdQapBRbTUKD1rG4pLYbcXExgc2nVJRuw==
+X-Received: by 2002:a05:6402:2110:b0:57d:3e48:165d with SMTP id 4fb4d7f45d1cf-5a1557cd01fmr4345153a12.4.1721321676986;
+        Thu, 18 Jul 2024 09:54:36 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 18 Jul 2024 17:54:34 +0100
+Message-Id: <D2STLWUF9965.3QXLJ2TWIXS1Z@cloud.com>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>,
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, "Xen-devel"
+ <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH for-4.20 3/4] x86/fpu: Combine fpu_ctxt and xsave_area
+ in arch_vcpu
+From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
+To: "Jan Beulich" <jbeulich@suse.com>
+X-Mailer: aerc 0.17.0
+References: <cover.1720538832.git.alejandro.vallejo@cloud.com>
+ <170c78f39dfef620d9060be3f1b31313673f09b9.1720538832.git.alejandro.vallejo@cloud.com> <78ae0b2f-e0a6-4ab9-b7a6-43e1357ff9b9@suse.com>
+In-Reply-To: <78ae0b2f-e0a6-4ab9-b7a6-43e1357ff9b9@suse.com>
 
-Right now there are two completely different struct xs_handle definitions,
-depend on #ifdef USE_PTHREAD.  One is especially well hidden, and often
-escapes updates.
+On Thu Jul 18, 2024 at 12:49 PM BST, Jan Beulich wrote:
+> On 09.07.2024 17:52, Alejandro Vallejo wrote:
+> > --- a/xen/arch/x86/domctl.c
+> > +++ b/xen/arch/x86/domctl.c
+> > @@ -1343,7 +1343,8 @@ void arch_get_info_guest(struct vcpu *v, vcpu_gue=
+st_context_u c)
+> >  #define c(fld) (c.nat->fld)
+> >  #endif
+> > =20
+> > -    memcpy(&c.nat->fpu_ctxt, v->arch.fpu_ctxt, sizeof(c.nat->fpu_ctxt)=
+);
+> > +    memcpy(&c.nat->fpu_ctxt, &v->arch.xsave_area->fpu_sse,
+> > +           sizeof(c.nat->fpu_ctxt));
+>
+> Now that the middle argument has proper type, maybe take the opportunity
+> and add BUILD_BUG_ON(sizeof(...) =3D=3D sizeof(...))? (Also in e.g.
+> hvm_save_cpu_ctxt() then.)
 
-Rework struct xs_handle using some interior ifdefary.  It's slightly longer,
-but much easier to follow.  Importanly, this makes it much harder to forget
-the !PTHREAD case when adding a "common" variable.
+Sure.
 
-No functional change.
+>
+> > --- a/xen/arch/x86/include/asm/domain.h
+> > +++ b/xen/arch/x86/include/asm/domain.h
+> > @@ -591,12 +591,7 @@ struct pv_vcpu
+> > =20
+> >  struct arch_vcpu
+> >  {
+> > -    /*
+> > -     * guest context (mirroring struct vcpu_guest_context) common
+> > -     * between pv and hvm guests
+> > -     */
+> > -
+> > -    void              *fpu_ctxt;
+> > +    /* Fixed point registers */
+> >      struct cpu_user_regs user_regs;
+>
+> Not exactly, no. Selector registers are there as well for example, which
+> I wouldn't consider "fixed point" ones. I wonder why the existing comment
+> cannot simply be kept, perhaps extended to mention that fpu_ctxt now live=
+s
+> elsewhere.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Juergen Gross <jgross@suse.com>
----
- tools/libs/store/xs.c | 77 +++++++++++++++++++++----------------------
- 1 file changed, 37 insertions(+), 40 deletions(-)
+Would you prefer "general purpose registers"? It's not quite that either, b=
+ut
+it's arguably closer. I can part with the comment altogether but I'd rather
+leave a token amount of information to say "non-FPU register state" (but no=
+t
+that, because that would be a terrible description).=20
 
-diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
-index 1b5a913a1594..96ea2b192924 100644
---- a/tools/libs/store/xs.c
-+++ b/tools/libs/store/xs.c
-@@ -40,6 +40,14 @@
- #include <xentoolcore_internal.h>
- #include <xen_list.h>
- 
-+#ifdef USE_PTHREAD
-+# include <pthread.h>
-+#endif
-+
-+#ifdef USE_DLSYM
-+# include <dlfcn.h>
-+#endif
-+
- #ifndef O_CLOEXEC
- #define O_CLOEXEC 0
- #endif
-@@ -54,14 +62,6 @@ struct xs_stored_msg {
- 	char *body;
- };
- 
--#ifdef USE_PTHREAD
--
--#include <pthread.h>
--
--#ifdef USE_DLSYM
--#include <dlfcn.h>
--#endif
--
- struct xs_handle {
- 	/* Communications channel to xenstore daemon. */
- 	int fd;
-@@ -71,16 +71,20 @@ struct xs_handle {
-          * A read thread which pulls messages off the comms channel and
-          * signals waiters.
-          */
-+#ifdef USE_PTHREAD
- 	pthread_t read_thr;
- 	int read_thr_exists;
-+#endif
- 
- 	/*
-          * A list of fired watch messages, protected by a mutex. Users can
-          * wait on the conditional variable until a watch is pending.
-          */
- 	XEN_TAILQ_HEAD(, struct xs_stored_msg) watch_list;
-+#ifdef USE_PTHREAD
- 	pthread_mutex_t watch_mutex;
- 	pthread_cond_t watch_condvar;
-+#endif
- 
- 	/* Clients can select() on this pipe to wait for a watch to fire. */
- 	int watch_pipe[2];
-@@ -93,6 +97,7 @@ struct xs_handle {
-          * conditional variable for its response.
-          */
- 	XEN_TAILQ_HEAD(, struct xs_stored_msg) reply_list;
-+#ifdef USE_PTHREAD
- 	pthread_mutex_t reply_mutex;
- 	pthread_cond_t reply_condvar;
- 
-@@ -112,55 +117,47 @@ struct xs_handle {
- 	 *     reply_mutex
- 	 *     watch_mutex
- 	 */
-+#endif
- };
- 
--#define mutex_lock(m)		pthread_mutex_lock(m)
--#define mutex_unlock(m)		pthread_mutex_unlock(m)
--#define condvar_signal(c)	pthread_cond_signal(c)
--#define condvar_wait(c,m)	pthread_cond_wait(c,m)
--#define cleanup_push(f, a)	\
--    pthread_cleanup_push((void (*)(void *))(f), (void *)(a))
-+
-+#ifdef USE_PTHREAD
-+
-+# define mutex_lock(m)             pthread_mutex_lock(m)
-+# define mutex_unlock(m)           pthread_mutex_unlock(m)
-+# define condvar_signal(c)         pthread_cond_signal(c)
-+# define condvar_wait(c, m)        pthread_cond_wait(c, m)
-+# define cleanup_push(f, a)        pthread_cleanup_push((void (*)(void *))(f), (void *)(a))
- /*
-  * Some definitions of pthread_cleanup_pop() are a macro starting with an
-  * end-brace. GCC then complains if we immediately precede that with a label.
-  * Hence we insert a dummy statement to appease the compiler in this situation.
-  */
--#define cleanup_pop(run)        ((void)0); pthread_cleanup_pop(run)
-+# define cleanup_pop(run)          ((void)0); pthread_cleanup_pop(run)
- 
--#define read_thread_exists(h)	(h->read_thr_exists)
-+# define read_thread_exists(h)     ((h)->read_thr_exists)
- 
- /* Because pthread_cleanup_p* are not available when USE_PTHREAD is
-  * disabled, use these macros which convert appropriately. */
--#define cleanup_push_heap(p)        cleanup_push(free, p)
--#define cleanup_pop_heap(run, p)    cleanup_pop((run))
-+# define cleanup_push_heap(p)      cleanup_push(free, p)
-+# define cleanup_pop_heap(run, p)  cleanup_pop((run))
- 
- static void *read_thread(void *arg);
- 
--#else /* !defined(USE_PTHREAD) */
-+#else /* USE_PTHREAD */
- 
--struct xs_handle {
--	int fd;
--	Xentoolcore__Active_Handle tc_ah; /* for restrict */
--	XEN_TAILQ_HEAD(, struct xs_stored_msg) reply_list;
--	XEN_TAILQ_HEAD(, struct xs_stored_msg) watch_list;
--	/* Clients can select() on this pipe to wait for a watch to fire. */
--	int watch_pipe[2];
--	/* Filtering watch event in unwatch function? */
--	bool unwatch_filter;
--};
-+# define mutex_lock(m)               ((void)0)
-+# define mutex_unlock(m)             ((void)0)
-+# define condvar_signal(c)           ((void)0)
-+# define condvar_wait(c, m)          ((void)0)
-+# define cleanup_push(f, a)          ((void)0)
-+# define cleanup_pop(run)            ((void)0)
-+# define read_thread_exists(h)       (0)
-+# define cleanup_push_heap(p)        ((void)0)
-+# define cleanup_pop_heap(run, p)    do { if ((run)) free(p); } while(0)
- 
--#define mutex_lock(m)		((void)0)
--#define mutex_unlock(m)		((void)0)
--#define condvar_signal(c)	((void)0)
--#define condvar_wait(c,m)	((void)0)
--#define cleanup_push(f, a)	((void)0)
--#define cleanup_pop(run)	((void)0)
--#define read_thread_exists(h)	(0)
-+#endif /* !USE_PTHREAD */
- 
--#define cleanup_push_heap(p)        ((void)0)
--#define cleanup_pop_heap(run, p)    do { if ((run)) free(p); } while(0)
--
--#endif
- 
- static int read_message(struct xs_handle *h, int nonblocking);
- 
--- 
-2.39.2
+I'd rather update it to something that better reflects reality, as I found =
+it
+quite misleading when reading through. I initially thought it may have been
+related to struct layout (as in C-style single-level inheritance), but as i=
+t
+turns out it's merely establishing a vague relationship between arch_vcpu a=
+nd
+vcpu_guest_context. I can believe once upon a time the relationship was clo=
+ser
+than it it now, but with the guest context missing AVX state, MSR state and
+other bits and pieces I thought it better to avoid such confusions for futu=
+re
+navigators down the line so limit its description to the line below.
 
+>
+> > --- a/xen/arch/x86/x86_emulate/blk.c
+> > +++ b/xen/arch/x86/x86_emulate/blk.c
+> > @@ -11,7 +11,8 @@
+> >      !defined(X86EMUL_NO_SIMD)
+> >  # ifdef __XEN__
+> >  #  include <asm/xstate.h>
+> > -#  define FXSAVE_AREA current->arch.fpu_ctxt
+> > +#  define FXSAVE_AREA ((struct x86_fxsr *) \
+> > +                           (void*)&current->arch.xsave_area->fpu_sse)
+>
+> Nit: Blank missing after before *.
+
+Heh, took me a while looking at x86_fxsr to realise you mean the void point=
+er.
+
+Ack.
+
+>
+> > --- a/xen/arch/x86/xstate.c
+> > +++ b/xen/arch/x86/xstate.c
+> > @@ -507,9 +507,16 @@ int xstate_alloc_save_area(struct vcpu *v)
+> >      unsigned int size;
+> > =20
+> >      if ( !cpu_has_xsave )
+> > -        return 0;
+> > -
+> > -    if ( !is_idle_vcpu(v) || !cpu_has_xsavec )
+> > +    {
+> > +        /*
+> > +         * This is bigger than FXSAVE_SIZE by 64 bytes, but it helps t=
+reating
+> > +         * the FPU state uniformly as an XSAVE buffer even if XSAVE is=
+ not
+> > +         * available in the host. Note the alignment restriction of th=
+e XSAVE
+> > +         * area are stricter than those of the FXSAVE area.
+> > +         */
+> > +        size =3D XSTATE_AREA_MIN_SIZE;
+>
+> What exactly would break if just (a little over) 512 bytes worth were all=
+ocated
+> when there's no XSAVE? If it was exactly 512, something like xstate_all()=
+ would
+> need to apply a little more care, I guess. Yet for that having just alway=
+s-zero
+> xstate_bv and xcomp_bv there would already suffice (e.g. using
+> offsetof(..., xsave_hdr.reserved) here, to cover further fields gaining m=
+eaning
+> down the road). Remember that due to xmalloc() overhead and the 64-byte-a=
+ligned
+> requirement, you can only have 6 of them in a page the way you do it, whe=
+n the
+> alternative way 7 would fit (if I got my math right).
+>
+> Jan
+
+I'm slightly confused.
+
+XSTATE_AREA_MIN_SIZE is already 512 + 64 to account for the XSAVE header,
+including its reserved fields. Did you mean something else?
+
+    #define XSAVE_HDR_SIZE            64
+    #define XSAVE_SSE_OFFSET          160
+    #define XSTATE_YMM_SIZE           256
+    #define FXSAVE_SIZE               512
+    #define XSAVE_HDR_OFFSET          FXSAVE_SIZE
+    #define XSTATE_AREA_MIN_SIZE      (FXSAVE_SIZE + XSAVE_HDR_SIZE)
+
+Part of the rationale is to simplify other bits of code that are currently
+conditionalized on v->xsave_header being NULL. And for that the full xsave
+header must be present (even if unused because !cpu_xsave)
+
+Do you mean something else?
+
+Cheers,
+Alejandro
 
