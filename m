@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFD4BC3DA63
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Jul 2024 16:14:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.760581.1170460 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19D3C3DA49
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Jul 2024 16:49:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.760597.1170519 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sUTlo-0003DT-Rn; Thu, 18 Jul 2024 16:14:16 +0000
+	id 1sUUJK-00009u-TL; Thu, 18 Jul 2024 16:48:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 760581.1170460; Thu, 18 Jul 2024 16:14:16 +0000
+Received: by outflank-mailman (output) from mailman id 760597.1170519; Thu, 18 Jul 2024 16:48:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sUTlo-0003DM-Ot; Thu, 18 Jul 2024 16:14:16 +0000
-Received: by outflank-mailman (input) for mailman id 760581;
- Thu, 18 Jul 2024 16:14:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sUUJK-00009h-PU; Thu, 18 Jul 2024 16:48:54 +0000
+Received: by outflank-mailman (input) for mailman id 760597;
+ Thu, 18 Jul 2024 16:48:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9B5K=OS=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sUTln-0003DG-5a
- for xen-devel@lists.xenproject.org; Thu, 18 Jul 2024 16:14:15 +0000
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [2607:f8b0:4864:20::f2a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c54ffa79-4520-11ef-8776-851b0ebba9a2;
- Thu, 18 Jul 2024 18:14:13 +0200 (CEST)
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6b73f7b855bso5875686d6.3
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jul 2024 09:14:13 -0700 (PDT)
-Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b79c50d560sm9490496d6.53.2024.07.18.09.14.10
+ <SRS0=AEHZ=OS=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sUUJK-0007PV-77
+ for xen-devel@lists.xenproject.org; Thu, 18 Jul 2024 16:48:54 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9dcf5687-4525-11ef-bbfd-fd08da9f4363;
+ Thu, 18 Jul 2024 18:48:53 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-52ee4e26790so767008e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Jul 2024 09:48:53 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a79bc820f2bsm576882466b.206.2024.07.18.09.48.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 09:14:11 -0700 (PDT)
+ Thu, 18 Jul 2024 09:48:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,57 +47,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c54ffa79-4520-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 9dcf5687-4525-11ef-bbfd-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1721319252; x=1721924052; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=QdPKvdhrBeaCbamle2Vl7Ldt5/QLB7kliCakUV/1Tjw=;
-        b=nPnTGT8NibTPtowf24zxIffGbJqKVG/aWFDUr9cPhXgLQ3EP+feaV3JqmqG3tc2sse
-         KaWDuZO6esqU7rDDI+K4wuYx44NvOixxIZM/g707fzdHSqeiLDlu/Yz6PrWuyD30qeT/
-         +SXDCgXjaxrMjNumVWc70Hr4xzapRnqrjOjWU=
+        d=citrix.com; s=google; t=1721321332; x=1721926132; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NhFAb8PBQU/57PNqveksaa0wxKn4j+nTJ+P+HwWc7e4=;
+        b=jQ0bWDdjaR9m+QbYmV2C1XVWkpO8CBWMTmAnftexBYwdblB/ZjNxGmjVtoBEwyw9kg
+         5JhUaXRHF5PAo10LRe7b//GIDDnSgVPXHehkcrYof1CNu66S/BclbP46CRJT+u/54qZU
+         f5IR4d1LRBItOz9doundZ2VakqtDeULWZrvWw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721319252; x=1721924052;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QdPKvdhrBeaCbamle2Vl7Ldt5/QLB7kliCakUV/1Tjw=;
-        b=Gn/vc37aslqeUPXZiN9FMGtyvIaXCmMB2dh3/vOO7MwQ+rpk8Kpn8P+BLioK9ix95R
-         1Qt8tS2/VCb4wK5/p8EOs2ebC/nymhUTGceXG3YsPrl32ypb8nZmAGIA+GDislLXK1Br
-         sRZZwyuPD6Z3zPUZjTU2glyjdfFHQlhtMl88ROuMsY3bWPrQ2xHZsW97ZqCo4l4pTjT6
-         qWu/0HXxyVP5JvGHGnlcJ8PXYoGP0BiHrCiwirwRSuQBgcu7N1ruOO1FjKHPyEv5reT+
-         UK30cNMNK3Y3dhX3oD47lhoiztUgDUSdl/wYIiU2Oqrzg7/alAmMaRevrknaBBUo+bIG
-         t+Qg==
-X-Gm-Message-State: AOJu0YxFIHb7WVIfz3eYi/LGihcoiW6e6tPQp+1itNi3gbB4bktD+iJC
-	3ZS3cpPY6vuNMyLfXwiY3W6InBKGIc+tySt3KDJehsYoRdbzFsUsEyjYfTVBWyM=
-X-Google-Smtp-Source: AGHT+IGJKjcXlo3qorvFSVuh5ddFUGMH7rRHKMKFdTbVtwun7BK/BoyOAtTPd9sbNkRRny8p9L421g==
-X-Received: by 2002:a05:6214:2a8e:b0:6b7:4298:2c75 with SMTP id 6a1803df08f44-6b78e2bbeeamr61729246d6.55.1721319251740;
-        Thu, 18 Jul 2024 09:14:11 -0700 (PDT)
-Date: Thu, 18 Jul 2024 18:14:09 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/HVM: get_pat_flags() is needed only by shadow code
-Message-ID: <Zpk_Uacbt9iY9dys@macbook>
-References: <76aafbed-bea9-445a-8abb-6e1e44996594@suse.com>
+        d=1e100.net; s=20230601; t=1721321332; x=1721926132;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=NhFAb8PBQU/57PNqveksaa0wxKn4j+nTJ+P+HwWc7e4=;
+        b=E97GePdMyUjXhmix57GrMWnS2hwxGDY4vph/cvaeWrzcFgCQPRLLN/PDl5u9LVyAOm
+         sLPyMdMDR0pwMk0RoDIlgcOfqN7Q1ukNMXSw2zIpKWVaSMCeV/KJWkiwcbtt2ECtjvDn
+         CiBXUHEUBAXoz0TaD96KQ/WRiN/vkuPn71pNs6BO6dKNZGcG72HcLhMNheKx2r5mvLv2
+         qfEJlycnxsEJVcx55q+I3QS0llK0SznRPng7jW5+bGy2Jj/i+W2HabKADgiSH0Npllpw
+         TgF8LDlbZo4oKenwmYiSWWRYTq5uhHREkUp4zWTfgWymv5gKeztIoK5eRNx9eQC7SWLg
+         vC2w==
+X-Gm-Message-State: AOJu0Yz650rppTEa4oQxWM9cY/UI6n2+A6N1Y9hQAsNYsyG4kqv6CPMO
+	X7/BlR1ItU4+zO+ixQ66Wyqx0dD1XFpGL6RnCJpuq5DKEoB2v/Y2VS61AAzlb7AmiBJVBloIpCs
+	F
+X-Google-Smtp-Source: AGHT+IG4Fe3mXPxhBviT+OHpGVmgrBeFMtY0KoXy8ywzzLjRF6J/wTS1Q3D3OlChZOth7bazYM/HZA==
+X-Received: by 2002:a05:6512:1082:b0:52b:bee3:dcc6 with SMTP id 2adb3069b0e04-52ee542de4emr3859041e87.51.1721321332536;
+        Thu, 18 Jul 2024 09:48:52 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH 6/6] tools/libxs: Stop playing with SIGPIPE
+Date: Thu, 18 Jul 2024 17:48:42 +0100
+Message-Id: <20240718164842.3650702-7-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240718164842.3650702-1-andrew.cooper3@citrix.com>
+References: <20240718164842.3650702-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <76aafbed-bea9-445a-8abb-6e1e44996594@suse.com>
 
-On Thu, Jul 18, 2024 at 12:10:00PM +0200, Jan Beulich wrote:
-> Therefore with SHADOW_PAGING=n this is better compiled out, to avoid
-> leaving around unreachable/dead code.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+It's very rude for a library to play with signals behind the back of the
+application, no matter ones views on the default behaviour of SIGPIPE under
+POSIX.  Even if the application doesn't care about the xenstored socket, it my
+care about others.
 
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+This logic has existed since xenstore/xenstored was originally added in commit
+29c9e570b1ed ("Add xenstore daemon and library") in 2005.
 
-I was going to suggest moving this to shadow specific code, but I see
-it accesses some static variables or macros defined in mtrr.c.
+It's also unnecessary.  Pass MSG_NOSIGNAL when talking to xenstored over a
+pipe (to avoid sucumbing to SIGPIPE if xenstored has crashed), and forgo any
+playing with the signal disposition.
 
-Thanks, Roger.
+This has a side benefit of saving 2 syscalls per xenstore request.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Juergen Gross <jgross@suse.com>
+---
+ tools/libs/store/xs.c | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
+index 9db5c02661f5..63d754e17014 100644
+--- a/tools/libs/store/xs.c
++++ b/tools/libs/store/xs.c
+@@ -579,7 +579,7 @@ static bool sendmsg_exact(int fd, struct iovec *iov, unsigned int nr)
+ 	assert(iov->iov_len == sizeof(struct xsd_sockmsg));
+ 
+ 	while (hdr.msg_iovlen) {
+-		ssize_t res = sendmsg(fd, &hdr, 0);
++		ssize_t res = sendmsg(fd, &hdr, MSG_NOSIGNAL);
+ 
+ 		if (res < 0 && errno == EINTR)
+ 			continue;
+@@ -680,7 +680,6 @@ static void *xs_talkv(struct xs_handle *h,
+ 	void *ret = NULL;
+ 	int saved_errno;
+ 	unsigned int i, msg_len;
+-	struct sigaction ignorepipe, oldact;
+ 
+ 	/* Element 0 must be xsd_sockmsg */
+ 	assert(num_vecs >= 1);
+@@ -697,11 +696,6 @@ static void *xs_talkv(struct xs_handle *h,
+ 
+ 	msg->len = msg_len;
+ 
+-	ignorepipe.sa_handler = SIG_IGN;
+-	sigemptyset(&ignorepipe.sa_mask);
+-	ignorepipe.sa_flags = 0;
+-	sigaction(SIGPIPE, &ignorepipe, &oldact);
+-
+ 	mutex_lock(&h->request_mutex);
+ 
+ 	if (!write_request(h, iovec, num_vecs))
+@@ -713,7 +707,6 @@ static void *xs_talkv(struct xs_handle *h,
+ 
+ 	mutex_unlock(&h->request_mutex);
+ 
+-	sigaction(SIGPIPE, &oldact, NULL);
+ 	if (reply_type == XS_ERROR) {
+ 		saved_errno = get_error(ret);
+ 		free(ret);
+@@ -732,7 +725,6 @@ static void *xs_talkv(struct xs_handle *h,
+ 	/* We're in a bad state, so close fd. */
+ 	saved_errno = errno;
+ 	mutex_unlock(&h->request_mutex);
+-	sigaction(SIGPIPE, &oldact, NULL);
+ close_fd:
+ 	close(h->fd);
+ 	h->fd = -1;
+-- 
+2.39.2
+
 
