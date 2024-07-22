@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA04C3DA59
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Jul 2024 14:41:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.762068.1172166 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1262FC3DA59
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Jul 2024 14:45:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.762077.1172176 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sVuDY-0002Hh-5t; Mon, 22 Jul 2024 14:40:48 +0000
+	id 1sVuHb-0002tp-P2; Mon, 22 Jul 2024 14:44:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 762068.1172166; Mon, 22 Jul 2024 14:40:48 +0000
+Received: by outflank-mailman (output) from mailman id 762077.1172176; Mon, 22 Jul 2024 14:44:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sVuDY-0002HK-3E; Mon, 22 Jul 2024 14:40:48 +0000
-Received: by outflank-mailman (input) for mailman id 762068;
- Mon, 22 Jul 2024 14:40:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=urmM=OW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sVuDW-0002HD-NN
- for xen-devel@lists.xenproject.org; Mon, 22 Jul 2024 14:40:46 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 607da9ef-4838-11ef-bbfe-fd08da9f4363;
- Mon, 22 Jul 2024 16:40:44 +0200 (CEST)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2eecd2c6432so64690011fa.3
- for <xen-devel@lists.xenproject.org>; Mon, 22 Jul 2024 07:40:44 -0700 (PDT)
-Received: from [192.168.219.191] ([94.75.70.14])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-52f02846610sm537063e87.5.2024.07.22.07.40.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 07:40:43 -0700 (PDT)
+	id 1sVuHb-0002ti-LU; Mon, 22 Jul 2024 14:44:59 +0000
+Received: by outflank-mailman (input) for mailman id 762077;
+ Mon, 22 Jul 2024 14:44:58 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1sVuHa-0002tc-OD
+ for xen-devel@lists.xenproject.org; Mon, 22 Jul 2024 14:44:58 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1sVuHa-0008TS-8a; Mon, 22 Jul 2024 14:44:58 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.0.211])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1sVuHa-0002G0-02; Mon, 22 Jul 2024 14:44:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,184 +41,288 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 607da9ef-4838-11ef-bbfe-fd08da9f4363
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721659244; x=1722264044; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=gB66ADtljKgNpE2wmGo0t+zBgsABbouGKxWN0DXsYk4=;
-        b=F2bycYTpf/jyxW3xQDAwD6f/r4+jCQ4KxHZDDZUeBDQIJWxjq4MBQyckhDP8dWLayR
-         +JDPUuLk9mo7r5tyRakmP2gFiBSIHGtchMBAvxdvufN3+cV2GO1Pr0gjitWQ/n3KnhGq
-         Wpe76Ko+mPSot1Yt9JW6nkyWzdmGTptt3lML/pgXc/JumSL2Lp5FwvpXWcjCFFw/s8W9
-         1TFwdJSXN0mx3Q6VSP2Jy1XQT4TUe61nwDNqQ4dOysiBO+IYyQUpvsyLKOtx/i+SG1Pi
-         cEXOorA/s6m4B+2QIPA5ZegCKHsT32GUr/Pk7P1YwZSeS9t0vSzWnqk1Mi2l6KCWvdf1
-         r7zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721659244; x=1722264044;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=gB66ADtljKgNpE2wmGo0t+zBgsABbouGKxWN0DXsYk4=;
-        b=sfzr760m/UtHcXfEJ4Jb0ZsU87qIb9dDAt++sOzDSYTywobQaRUkkDZSa0iyofBip5
-         T2CZY9EvMskFYysoV2Apo/lifIDBmSaNshiLXzBb75xwe26ulXGc7O3Htnsz5vzPJWcp
-         89gcreM747Et+ppPjTjtkYj/KoAvuwahW+fMGBaCgSTfMz312aUI/0MM6fYiMp47kC/8
-         0v9v4ThAxgQ+Sbw21KXrXsEX+f6C7HQ6XbxdAJxwLPw3Afp47Fe1WbkOEnMdcEeWJSLf
-         wJHCXWOxNEj/NWSmSgXE8PxWjmo1YHlAF36RdUPv+yal4ICGGdgpLQCBwLIvbD1c1h52
-         s75Q==
-X-Forwarded-Encrypted: i=1; AJvYcCU0hcuOWvg3OifbE7TW3uOAo57XV2V/eVNFai84cFKlW7Y7joJLX9fS+tjEhaqJuFaV7MphmB8u+7U/NPJ7V0SWxx5oSAe5Bb/xefMLD3o=
-X-Gm-Message-State: AOJu0Yw84RG6J+hQKHnDxAIwYzCsie+gHIn3ekf2ffA5nYqpV0IN4ZNX
-	DRfENmYowe8WEte12AivtR4x7ef90+LQJp+XAETo+gBaOHdZCiAHjyELSnuW
-X-Google-Smtp-Source: AGHT+IHxM+qxemdRhrbxmICLNxnYv3dGmDyyv/NAqhE0NAHSx9y4ipoiA4adpoicZmD+yI2UZ0EGCQ==
-X-Received: by 2002:a05:6512:3ba6:b0:52e:9f1b:517 with SMTP id 2adb3069b0e04-52efb63ea6fmr6219626e87.25.1721659243992;
-        Mon, 22 Jul 2024 07:40:43 -0700 (PDT)
-Message-ID: <009bff8b38a4415acb2f107fc518bb165b3ea6ec.camel@gmail.com>
-Subject: Re: [PATCH v2 5/8] xen/riscv: introduce asm/pmap.h header
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-Cc: Alistair Francis <alistair.francis@wdc.com>, Bob Eshleman
- <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Date: Mon, 22 Jul 2024 16:40:43 +0200
-In-Reply-To: <15375179-1c94-43c3-a256-42a856905e21@xen.org>
-References: <cover.1720799925.git.oleksii.kurochko@gmail.com>
-	 <c7331e4c2f481f069571976a708c4aba04d2c0e4.1720799926.git.oleksii.kurochko@gmail.com>
-	 <15375179-1c94-43c3-a256-42a856905e21@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3 (3.52.3-1.fc40app2) 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=02p29+YY269D48FvIkA6iubAUOWyMsjdj8I8LGHx5is=; b=ITTem54MMJPnMNlfqEnLnsdh7S
+	9X25J6+V8msfi7KTe6j8zKMevoQzInyQBhDH9yvecO52h4vs72j0ck+T5ekCvvhmAU2lgZBuu+5XL
+	1HhMsZN3b/+zQpDXJo1DYwXUJ0xGltngRfcTJfQTBEAJpdMewQRfJ4jsXthSWc7EcapA=;
+Message-ID: <f13fe8e6-69f3-4eb5-bdf8-b2b5377c7a4a@xen.org>
+Date: Mon, 22 Jul 2024 15:44:56 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/8] xen/riscv: setup fixmap mapping
+Content-Language: en-GB
+To: Oleksii <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1720799925.git.oleksii.kurochko@gmail.com>
+ <b1776fb20603cb56b0aea17ef998ea951d2bbda9.1720799926.git.oleksii.kurochko@gmail.com>
+ <8fd1cc2c-9dda-4e74-b242-fe8aa862955d@xen.org>
+ <3ce708acbe360854f88dc4c93b36c2359955915f.camel@gmail.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <3ce708acbe360854f88dc4c93b36c2359955915f.camel@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi Julien,
 
-On Sun, 2024-07-21 at 09:51 +0100, Julien Grall wrote:
-> Hi Oleksii,
->=20
-> On 12/07/2024 17:22, Oleksii Kurochko wrote:
-> > Introduces arch_pmap_{un}map functions and select HAS_PMAP
-> > for CONFIG_RISCV.
-> >=20
-> > Additionaly it was necessary to introduce functions:
-> > =C2=A0 - mfn_to_xen_entry
-> > =C2=A0 - mfn_to_pte
-> >=20
-> > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> > ---
-> > Changes in V2:
-> > =C2=A0 - newly introduced patch
-> > ---
-> > =C2=A0 xen/arch/riscv/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
-> > =C2=A0 xen/arch/riscv/include/asm/page.h |=C2=A0 2 ++
-> > =C2=A0 xen/arch/riscv/include/asm/pmap.h | 28
-> > ++++++++++++++++++++++++++++
-> > =C2=A0 xen/arch/riscv/mm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 14 ++++++++++++++
-> > =C2=A0 4 files changed, 45 insertions(+)
-> > =C2=A0 create mode 100644 xen/arch/riscv/include/asm/pmap.h
-> >=20
-> > diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-> > index 259eea8d3b..0112aa8778 100644
-> > --- a/xen/arch/riscv/Kconfig
-> > +++ b/xen/arch/riscv/Kconfig
-> > @@ -3,6 +3,7 @@ config RISCV
-> > =C2=A0=C2=A0	select FUNCTION_ALIGNMENT_16B
-> > =C2=A0=C2=A0	select GENERIC_BUG_FRAME
-> > =C2=A0=C2=A0	select HAS_DEVICE_TREE
-> > +	select HAS_PMAP
-> > =C2=A0=20
-> > =C2=A0 config RISCV_64
-> > =C2=A0=C2=A0	def_bool y
-> > diff --git a/xen/arch/riscv/include/asm/page.h
-> > b/xen/arch/riscv/include/asm/page.h
-> > index cbbf3656d1..339074d502 100644
-> > --- a/xen/arch/riscv/include/asm/page.h
-> > +++ b/xen/arch/riscv/include/asm/page.h
-> > @@ -51,6 +51,8 @@ typedef struct {
-> > =C2=A0 #endif
-> > =C2=A0 } pte_t;
-> > =C2=A0=20
-> > +pte_t mfn_to_xen_entry(mfn_t mfn, unsigned int attr);
-> > +
-> > =C2=A0 static inline pte_t paddr_to_pte(paddr_t paddr,
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned int p=
-ermissions)
-> > =C2=A0 {
-> > diff --git a/xen/arch/riscv/include/asm/pmap.h
-> > b/xen/arch/riscv/include/asm/pmap.h
-> > new file mode 100644
-> > index 0000000000..eb4c48515c
-> > --- /dev/null
-> > +++ b/xen/arch/riscv/include/asm/pmap.h
-> > @@ -0,0 +1,28 @@
-> > +#ifndef __ASM_PMAP_H__
-> > +#define __ASM_PMAP_H__
-> > +
-> > +#include <xen/bug.h>
-> > +#include <xen/mm.h>
-> > +
-> > +#include <asm/fixmap.h>
-> > +
-> > +static inline void arch_pmap_map(unsigned int slot, mfn_t mfn)
-> > +{
-> > +=C2=A0=C2=A0=C2=A0 pte_t *entry =3D &xen_fixmap[slot];
-> > +=C2=A0=C2=A0=C2=A0 pte_t pte;
-> > +
-> > +=C2=A0=C2=A0=C2=A0 ASSERT(!pte_is_valid(*entry));
-> > +
-> > +=C2=A0=C2=A0=C2=A0 pte =3D mfn_to_xen_entry(mfn, PAGE_HYPERVISOR_RW);
-> > +=C2=A0=C2=A0=C2=A0 pte.pte |=3D PTE_LEAF_DEFAULT;
-> > +=C2=A0=C2=A0=C2=A0 write_pte(entry, pte);
-> > +}
-> > +
-> > +static inline void arch_pmap_unmap(unsigned int slot)
-> > +{
-> > +=C2=A0=C2=A0=C2=A0 pte_t pte =3D {};
-> > +
-> > +=C2=A0=C2=A0=C2=A0 write_pte(&xen_fixmap[slot], pte);
-> > +}
-> > +
-> > +#endif /* __ASM_PMAP_H__ */
-> > diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-> > index d69a174b5d..445319af08 100644
-> > --- a/xen/arch/riscv/mm.c
-> > +++ b/xen/arch/riscv/mm.c
-> > @@ -370,3 +370,17 @@ int map_pages_to_xen(unsigned long virt,
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BUG_ON("unimplemented");
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -1;
-> > =C2=A0 }
-> > +
-> > +static inline pte_t mfn_to_pte(mfn_t mfn)
-> > +{
-> > +=C2=A0=C2=A0=C2=A0 unsigned long pte =3D mfn_x(mfn) << PTE_PPN_SHIFT;
-> > +=C2=A0=C2=A0=C2=A0 return (pte_t){ .pte =3D pte};
-> > +}
-> > +
-> > +inline pte_t mfn_to_xen_entry(mfn_t mfn, unsigned int attr)
-> > +{
-> > +=C2=A0=C2=A0=C2=A0 /* there is no attr field in RISC-V's pte */
-> > +=C2=A0=C2=A0=C2=A0 (void) attr;
->=20
-> Surely you have a way to say indicate whether an entry is
-> readable/writable?
-Sure, there is a way. But probably I misinterpreted attr for Arm and
-decided not to use them here. By that I mean, that Arm has MT_NORMAL,
-MT_DEVICE which RISC-V doesn't have.
 
-If it is about readable/writable then for sure, I will start to use
-attr.
+On 22/07/2024 15:31, Oleksii wrote:
+> Hi Julien,
 
-~ Oleksii
+Hi Oleksii,
 
->=20
-> > +
-> > +=C2=A0=C2=A0=C2=A0 return mfn_to_pte(mfn);
-> > +}
->=20
-> Cheers,
->=20
+> On Sun, 2024-07-21 at 09:46 +0100, Julien Grall wrote:
+>> Hi Oleksii,
+>>
+>> On 12/07/2024 17:22, Oleksii Kurochko wrote:
+>>> Introduce a function to set up fixmap mappings and L0 page
+>>> table for fixmap.
+>>>
+>>> Additionally, defines were introduced in riscv/config.h to
+>>> calculate the FIXMAP_BASE address.
+>>> This involved introducing BOOT_FDT_VIRT_{START, SIZE} and
+>>> XEN_SIZE, XEN_VIRT_END.
+>>>
+>>> Also, the check of Xen size was updated in the riscv/lds.S
+>>> script to use XEN_SIZE instead of a hardcoded constant.
+>>>
+>>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>>> ---
+>>> Changes in V2:
+>>>    - newly introduced patch
+>>> ---
+>>>    xen/arch/riscv/include/asm/config.h |  9 ++++++
+>>>    xen/arch/riscv/include/asm/fixmap.h | 48
+>>> +++++++++++++++++++++++++++++
+>>>    xen/arch/riscv/include/asm/mm.h     |  2 ++
+>>>    xen/arch/riscv/include/asm/page.h   |  7 +++++
+>>>    xen/arch/riscv/mm.c                 | 35 +++++++++++++++++++++
+>>>    xen/arch/riscv/setup.c              |  2 ++
+>>>    xen/arch/riscv/xen.lds.S            |  2 +-
+>>>    7 files changed, 104 insertions(+), 1 deletion(-)
+>>>    create mode 100644 xen/arch/riscv/include/asm/fixmap.h
+>>>
+>>> diff --git a/xen/arch/riscv/include/asm/config.h
+>>> b/xen/arch/riscv/include/asm/config.h
+>>> index 50583aafdc..3275477c17 100644
+>>> --- a/xen/arch/riscv/include/asm/config.h
+>>> +++ b/xen/arch/riscv/include/asm/config.h
+>>> @@ -74,11 +74,20 @@
+>>>    #error "unsupported RV_STAGE1_MODE"
+>>>    #endif
+>>>    
+>>> +#define XEN_SIZE                MB(2)
+>>
+>> NIT: I would name it XEN_VIRT_SIZE to be consistent with the
+>> start/end.
+>>
+>>> +#define XEN_VIRT_END            (XEN_VIRT_START + XEN_SIZE)
+>> Can we get away with not introducing *_END and just use START, SIZE?
+>> The
+>> reason I am asking is with "end" it is never clear whether it is
+>> inclusive or exclusive. For instance, here you use an exclusive range
+>> but ...
+>>
+>>> +
+>>> +#define BOOT_FDT_VIRT_START     XEN_VIRT_END
+>>> +#define BOOT_FDT_VIRT_SIZE      MB(4)
+>>> +
+>>>    #define DIRECTMAP_SLOT_END      509
+>>>    #define DIRECTMAP_SLOT_START    200
+>>>    #define DIRECTMAP_VIRT_START    SLOTN(DIRECTMAP_SLOT_START)
+>>>    #define DIRECTMAP_SIZE          (SLOTN(DIRECTMAP_SLOT_END) -
+>>> SLOTN(DIRECTMAP_SLOT_START))
+>>>    
+>>> +#define FIXMAP_BASE             (BOOT_FDT_VIRT_START +
+>>> BOOT_FDT_VIRT_SIZE)
+>>> +#define FIXMAP_ADDR(n)          (FIXMAP_BASE + (n) * PAGE_SIZE)
+>>> +
+>>>    #define FRAMETABLE_SCALE_FACTOR  (PAGE_SIZE/sizeof(struct
+>>> page_info))
+>>>    #define FRAMETABLE_SIZE_IN_SLOTS (((DIRECTMAP_SIZE / SLOTN(1)) /
+>>> FRAMETABLE_SCALE_FACTOR) + 1)
+>>>    
+>>> diff --git a/xen/arch/riscv/include/asm/fixmap.h
+>>> b/xen/arch/riscv/include/asm/fixmap.h
+>>> new file mode 100644
+>>> index 0000000000..fcfb82d69c
+>>> --- /dev/null
+>>> +++ b/xen/arch/riscv/include/asm/fixmap.h
+>>> @@ -0,0 +1,48 @@
+>>> +/*
+>>> + * fixmap.h: compile-time virtual memory allocation
+>>> + */
+>>> +#ifndef __ASM_FIXMAP_H
+>>> +#define __ASM_FIXMAP_H
+>>> +
+>>> +#include <xen/bug.h>
+>>> +#include <xen/page-size.h>
+>>> +#include <xen/pmap.h>
+>>> +
+>>> +#include <asm/page.h>
+>>> +
+>>> +/* Fixmap slots */
+>>> +#define FIX_PMAP_BEGIN (0) /* Start of PMAP */
+>>> +#define FIX_PMAP_END (FIX_PMAP_BEGIN + NUM_FIX_PMAP - 1) /* End of
+>>> PMAP */
+>>
+>> ... here is seems to be inclusive. Furthermore if you had 32-bit
+>> address
+>> space, it is also quite easy to have to create a region right at the
+>> top
+>> of it. So when END is exclusive, it would become 0.
+>>
+>> So on Arm, we decided to start to get rid of "end". I would consider
+>> to
+>> do the same on RISC-V for new functions.
+> I will refactor the code and get rid of "end".
+> 
+>>
+>>> +#define FIX_MISC (FIX_PMAP_END + 1)  /* Ephemeral mappings of
+>>> hardware */
+>>
+>> Are you going to use this fixmap? If not, then I would consider to
+>> remove it.
+> Yes, it used now in copy_from_paddr():
+>     /**
+>      * copy_from_paddr - copy data from a physical address
+>      * @dst: destination virtual address
+>      * @paddr: source physical address
+>      * @len: length to copy
+>      */
+>     void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long
+>     len)
+>     {
+>         void *src = (void *)FIXMAP_ADDR(FIXMAP_MISC);
+>     
+>         while (len) {
+>             unsigned long l, s;
+>     
+>             s = paddr & (PAGE_SIZE-1);
+>             l = min(PAGE_SIZE - s, len);
+>     
+>             set_fixmap(FIXMAP_MISC, maddr_to_mfn(paddr),
+>     PAGE_HYPERVISOR_WC);
+>             memcpy(dst, src + s, l);
+>             clear_fixmap(FIXMAP_MISC);
+>     
+>             paddr += l;
+>             dst += l;
+>             len -= l;
+>         }
+>     }
+> 
+>>
+>>> +
+>>> +#define FIX_LAST FIX_MISC
+>>> +
+>>> +#define FIXADDR_START FIXMAP_ADDR(0)
+>>> +#define FIXADDR_TOP FIXMAP_ADDR(FIX_LAST)
+>>> +
+>>> +#ifndef __ASSEMBLY__
+>>> +
+>>> +/*
+>>> + * Direct access to xen_fixmap[] should only happen when {set,
+>>> + * clear}_fixmap() is unusable (e.g. where we would end up to
+>>> + * recursively call the helpers).
+>>> + */
+>>> +extern pte_t xen_fixmap[];
+>>> +
+>>> +/* Map a page in a fixmap entry */
+>>> +extern void set_fixmap(unsigned int map, mfn_t mfn, unsigned int
+>>> attributes);
+>>> +/* Remove a mapping from a fixmap entry */
+>>> +extern void clear_fixmap(unsigned int map);
+>>
+>> Neither of the functions seem to be implemented in this patch. Can
+>> you
+>> clarify what's the plan for them?
+> You are right, it could be dropped now. But in future this functions
+> are used for copy_from_paddr(). Look at the code above.
 
+Right, to me it is just odd we are definition prototype for functions 
+that don't yet exist.
+
+>>
+>> Also, I know that for x86/arm, we have some function prefixed with
+>> extern. But AFAIK, we are trying to get rid of them.
+>>
+>> In any case, I think for RISC-V we need some consistency. For
+>> instance,
+>> here you define with extern but...
+>>
+>>> +
+>>> +#define fix_to_virt(slot) ((void *)FIXMAP_ADDR(slot))
+>>> +
+>>> +static inline unsigned int virt_to_fix(vaddr_t vaddr)
+>>> +{
+>>> +    BUG_ON(vaddr >= FIXADDR_TOP || vaddr < FIXADDR_START);
+>>> +
+>>> +    return ((vaddr - FIXADDR_START) >> PAGE_SHIFT);
+>>> +}
+>>> +
+>>> +#endif /* __ASSEMBLY__ */
+>>> +
+>>> +#endif /* __ASM_FIXMAP_H */
+>>> diff --git a/xen/arch/riscv/include/asm/mm.h
+>>> b/xen/arch/riscv/include/asm/mm.h
+>>> index 25af9e1aaa..a0bdc2bc3a 100644
+>>> --- a/xen/arch/riscv/include/asm/mm.h
+>>> +++ b/xen/arch/riscv/include/asm/mm.h
+>>> @@ -255,4 +255,6 @@ static inline unsigned int
+>>> arch_get_dma_bitsize(void)
+>>>        return 32; /* TODO */
+>>>    }
+>>>    
+>>> +void setup_fixmap_mappings(void);
+>>
+>> ... here it is without.
+>>
+>>> +
+>>>    #endif /* _ASM_RISCV_MM_H */
+>>> diff --git a/xen/arch/riscv/include/asm/page.h
+>>> b/xen/arch/riscv/include/asm/page.h
+>>> index c831e16417..cbbf3656d1 100644
+>>> --- a/xen/arch/riscv/include/asm/page.h
+>>> +++ b/xen/arch/riscv/include/asm/page.h
+>>> @@ -81,6 +81,13 @@ static inline void flush_page_to_ram(unsigned
+>>> long mfn, bool sync_icache)
+>>>        BUG_ON("unimplemented");
+>>>    }
+>>>    
+>>> +/* Write a pagetable entry. */
+>>> +static inline void write_pte(pte_t *p, pte_t pte)
+>>> +{
+>>> +    *p = pte;
+>>> +    asm volatile ("sfence.vma");
+>>> +}
+>>> +
+>>>    #endif /* __ASSEMBLY__ */
+>>>    
+>>>    #endif /* _ASM_RISCV_PAGE_H */
+>>> diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+>>> index 7d09e781bf..d69a174b5d 100644
+>>> --- a/xen/arch/riscv/mm.c
+>>> +++ b/xen/arch/riscv/mm.c
+>>> @@ -49,6 +49,9 @@ stage1_pgtbl_root[PAGETABLE_ENTRIES];
+>>>    pte_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+>>>    stage1_pgtbl_nonroot[PGTBL_INITIAL_COUNT * PAGETABLE_ENTRIES];
+>>>    
+>>> +pte_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+>>> +xen_fixmap[PAGETABLE_ENTRIES];
+>>
+>> Can you add a BUILD_BUG_ON() to check that the number of entries in
+>> the
+>> fixmap will never be above PAGETABLE_ENTRIES?
+> Sure. What is the best place? Somewhere in setup_fixmap_mappings()?
+
+I think so.
+
+Cheers,
+
+-- 
+Julien Grall
 
