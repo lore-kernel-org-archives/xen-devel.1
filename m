@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E0BC3DA59
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Jul 2024 10:19:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.761605.1171588 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85738C3DA5D
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Jul 2024 10:19:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.761607.1171609 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sVq7z-00014I-BN; Mon, 22 Jul 2024 10:18:47 +0000
+	id 1sVq86-0001ag-10; Mon, 22 Jul 2024 10:18:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 761605.1171588; Mon, 22 Jul 2024 10:18:47 +0000
+Received: by outflank-mailman (output) from mailman id 761607.1171609; Mon, 22 Jul 2024 10:18:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sVq7z-00014B-8F; Mon, 22 Jul 2024 10:18:47 +0000
-Received: by outflank-mailman (input) for mailman id 761605;
- Mon, 22 Jul 2024 10:18:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sVq85-0001aZ-SZ; Mon, 22 Jul 2024 10:18:53 +0000
+Received: by outflank-mailman (input) for mailman id 761607;
+ Mon, 22 Jul 2024 10:18:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QQNa=OW=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sVq7x-00013j-SY
- for xen-devel@lists.xenproject.org; Mon, 22 Jul 2024 10:18:45 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c5311b31-4813-11ef-bbfe-fd08da9f4363;
- Mon, 22 Jul 2024 12:18:44 +0200 (CEST)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5a10835480bso3086825a12.2
- for <xen-devel@lists.xenproject.org>; Mon, 22 Jul 2024 03:18:42 -0700 (PDT)
+ id 1sVq84-0001Ys-Jx
+ for xen-devel@lists.xenproject.org; Mon, 22 Jul 2024 10:18:52 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c9dbf107-4813-11ef-8776-851b0ebba9a2;
+ Mon, 22 Jul 2024 12:18:50 +0200 (CEST)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5a167b9df7eso3683921a12.3
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Jul 2024 03:18:50 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7a3c7e3f58sm407102766b.91.2024.07.22.03.18.40
+ a640c23a62f3a-a7a3c7e3f58sm407102766b.91.2024.07.22.03.18.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 03:18:40 -0700 (PDT)
+ Mon, 22 Jul 2024 03:18:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,64 +47,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5311b31-4813-11ef-bbfe-fd08da9f4363
+X-Inumbo-ID: c9dbf107-4813-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1721643521; x=1722248321; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hIOijb8+VxrZCQ3kiEmbcZFsSDI/3noifpCHlfSSVy8=;
-        b=njCJEe5kth/0qNHV5elMDWSs8tHdtGR3Jkmgf2zMC+7UNEd4mEGuAG878NpiElAz5G
-         jUUs6d1Seu+UPobMrVKklPyPP5LXnSjck5aYv/S48MGxo9vBZtj1USafjs23QGbt2oJ9
-         j4tKN0jNaOLulmuAYvEnc4yEKKWwLlsIlVONc=
+        d=citrix.com; s=google; t=1721643529; x=1722248329; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3j2YYKC1Ck9c5srCq004lFLgpbvA/qrQWTg9Ql7DWDc=;
+        b=GKDmbwc6Bd0CuBlZimRy1HrIpGk/haKllvw7EXAP13D8B6yu2TBf7azhC/WxMeEmp5
+         lPipjfEKhxbJUE+V9wu5PpB0YPeh9zTiwIZK/6oEESZcBTJehSBEObTkDRefXc2UWbqS
+         rO5J+BuCZ++ebsNzXU9Uzj4mHZpC3pPgATvfw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721643521; x=1722248321;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hIOijb8+VxrZCQ3kiEmbcZFsSDI/3noifpCHlfSSVy8=;
-        b=ZCsG+CKVvxNxptGdwaNtwoUvCIh21ZSZ50QHJOk5PX14v+Ajl+oByLFGgZyi73IIBw
-         i6qupMKcG9EpE9DSSBtkZdgyLTj0Urg/Poqev/+/OrOquIqDBIfhB70//oXoxPozJSux
-         3izd6ti/Ylx3skwlv3r0hUEiBUxQgys2Wxg0vsqiSLJSVS6IFioXTbmN5WlhYqyPPWfn
-         M6tr5kVlfmC5jegVQFPq0QUck4SrkaNmLeGWydOXvs3i/3ddmAostrxixuKQlpDLV5JH
-         m2d1bqTTf1Ivcf1BeQ4alSRltGRvZkUDR0frBum2NbKLzx0Cjkp25CckBZj/dOQ6IT1d
-         x75w==
-X-Gm-Message-State: AOJu0YxkqV8h36p203par07kBoFP6AsDXIcb8twmU2LHXLkH3UUMTEqr
-	R5axeKlLx3hgs/uWGXaZl+VJCzv7tduTypPQTY7qZ5vL9V1NfKI7rRIfaQK62wEBip/gzFWWaNa
-	j
-X-Google-Smtp-Source: AGHT+IHQFA9+nh23Kw2BYNvusO2dlD42iCBpEBm8+S69mdF25IgyfOEc+PkbdFMmhpy3eltfAf0Asg==
-X-Received: by 2002:a17:907:d86:b0:a77:d1ea:ab3b with SMTP id a640c23a62f3a-a7a4c010093mr404244766b.25.1721643521380;
-        Mon, 22 Jul 2024 03:18:41 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1721643529; x=1722248329;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3j2YYKC1Ck9c5srCq004lFLgpbvA/qrQWTg9Ql7DWDc=;
+        b=vtN9g6pybvLWuaMJK0d4pf3xikdMT+V4xwec75s0Z5e4LholWoWqMXjyO2zHk5MPEm
+         MV0tEX/xqmxfv7DxKh3h+qho7zNtV3HKIhJofHQvy9ac2DQaZ8f4p0zkWYQ/GjI9tg2n
+         ikU2UczItI71JQZQf7hIjtYBln4bw3WjBiRkdbjEYlpL/43Ls6mxQkYQu0q6gvs1H57t
+         8PUFnJEGl6/feESiwVws3HsDZ2Bgl3izwMZrsl8SpOWe5xVLNsSMWrZ+ldZfUZ83VMAe
+         pDIWcZAcRs6z37e6qX+RZFVXwAj13IbfBT5dIKng2ShSl1bbTeub65F3cP/IRobTh2iV
+         /2mg==
+X-Gm-Message-State: AOJu0YwSttl5OkAIJd2tnwXYeExKFTbfIiqjBymlZsIRDc39dFmvk9OE
+	9FYbW7a1u7R8AqGg+9Db0FSTmJRUV5T6FPrVV7JTJmaOXKSEeJyoyivx2VvCstqxxDymR9Frmph
+	5
+X-Google-Smtp-Source: AGHT+IFn7ltR/9GzXqf7x3jcra6jNQrGQnLhLEu7CKDQT/pKgI9IFR603+hOujlOOJ5eaQcqNZggMg==
+X-Received: by 2002:a17:906:dc8f:b0:a6f:392d:51a9 with SMTP id a640c23a62f3a-a7a4bfe6b79mr464451166b.14.1721643523821;
+        Mon, 22 Jul 2024 03:18:43 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Gene Bright <gene@cyberlight.us>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Gene Bright <gene@cyberlight.us>
-Subject: [PATCH 0/2] x86/efi: Fix booting when NX is disabled
-Date: Mon, 22 Jul 2024 11:18:36 +0100
-Message-Id: <20240722101838.3946983-1-andrew.cooper3@citrix.com>
+	Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Subject: [PATCH 2/2] x86/efi: Unlock NX if necessary
+Date: Mon, 22 Jul 2024 11:18:38 +0100
+Message-Id: <20240722101838.3946983-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240722101838.3946983-1-andrew.cooper3@citrix.com>
+References: <20240722101838.3946983-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Bugfix from the XCP-ng forums.  See patch 2 for details.
+EFI systems can run with NX disabled, as has been discovered on a Broadwell
+Supermicro X10SRM-TF system.
 
-Apparently the native path with NX disabled is broken too, but I've not had
-any time to look into that yet.
+Prior to commit fc3090a47b21 ("x86/boot: Clear XD_DISABLE from the early boot
+path"), the logic to unlock NX was common to all boot paths, but that commit
+moved it out of the native-EFI booth path.
 
-Andrew Cooper (2):
-  x86/efi: Simplify efi_arch_cpu() a little
-  x86/efi: Unlock NX if necessary
+Have the EFI path attempt to unlock NX, rather than just blindly refusing to
+boot when CONFIG_REQUIRE_NX is active.
 
- xen/arch/x86/efi/efi-boot.h | 56 +++++++++++++++++++++++++++----------
- 1 file changed, 42 insertions(+), 14 deletions(-)
+Fixes: fc3090a47b21 ("x86/boot: Clear XD_DISABLE from the early boot path")
+Link: https://xcp-ng.org/forum/post/80520
+Reported-by: Gene Bright <gene@cyberlight.us>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Daniel P. Smith <dpsmith@apertussolutions.com>
+CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+CC: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+CC: Gene Bright <gene@cyberlight.us>
 
+Note.  Entirely speculative coding, based only on the forum report.
+---
+ xen/arch/x86/efi/efi-boot.h | 33 ++++++++++++++++++++++++++++++---
+ 1 file changed, 30 insertions(+), 3 deletions(-)
 
-base-commit: ff652ed5dcd797a46c84258255dfd429ae68a2d6
+diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
+index 4e4be7174751..158350aa14e4 100644
+--- a/xen/arch/x86/efi/efi-boot.h
++++ b/xen/arch/x86/efi/efi-boot.h
+@@ -736,13 +736,33 @@ static void __init efi_arch_handle_module(const struct file *file,
+     efi_bs->FreePool(ptr);
+ }
+ 
++static bool __init intel_unlock_nx(void)
++{
++    uint64_t val, disable;
++
++    rdmsrl(MSR_IA32_MISC_ENABLE, val);
++
++    disable = val & MSR_IA32_MISC_ENABLE_XD_DISABLE;
++
++    if ( !disable )
++        return false;
++
++    wrmsrl(MSR_IA32_MISC_ENABLE, val & ~disable);
++    trampoline_misc_enable_off |= disable;
++
++    return true;
++}
++
+ static void __init efi_arch_cpu(void)
+ {
+-    uint32_t eax;
++    uint32_t eax, ebx, ecx, edx;
+     uint32_t *caps = boot_cpu_data.x86_capability;
+ 
+     boot_tsc_stamp = rdtsc();
+ 
++    cpuid(0, &eax, &ebx, &ecx, &edx);
++    boot_cpu_data.x86_vendor = x86_cpuid_lookup_vendor(ebx, ecx, edx);
++
+     caps[FEATURESET_1c] = cpuid_ecx(1);
+ 
+     eax = cpuid_eax(0x80000000U);
+@@ -752,10 +772,17 @@ static void __init efi_arch_cpu(void)
+     caps[FEATURESET_e1d] = cpuid_edx(0x80000001U);
+ 
+     /*
+-     * This check purposefully doesn't use cpu_has_nx because
++     * These checks purposefully doesn't use cpu_has_nx because
+      * cpu_has_nx bypasses the boot_cpu_data read if Xen was compiled
+-     * with CONFIG_REQUIRE_NX
++     * with CONFIG_REQUIRE_NX.
++     *
++     * If NX isn't available, it might be hidden.  Try to reactivate it.
+      */
++    if ( !boot_cpu_has(X86_FEATURE_NX) &&
++         boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
++         intel_unlock_nx() )
++        caps[FEATURESET_e1d] = cpuid_edx(0x80000001U);
++
+     if ( IS_ENABLED(CONFIG_REQUIRE_NX) &&
+          !boot_cpu_has(X86_FEATURE_NX) )
+         blexit(L"This build of Xen requires NX support");
 -- 
 2.39.2
 
