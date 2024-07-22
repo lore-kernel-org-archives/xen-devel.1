@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B426C3DA59
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Jul 2024 14:51:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.762095.1172195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6701C3DA59
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Jul 2024 14:52:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.762075.1172206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sVuOE-0005bj-MY; Mon, 22 Jul 2024 14:51:50 +0000
+	id 1sVuOv-00068Q-VN; Mon, 22 Jul 2024 14:52:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 762095.1172195; Mon, 22 Jul 2024 14:51:50 +0000
+Received: by outflank-mailman (output) from mailman id 762075.1172206; Mon, 22 Jul 2024 14:52:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sVuOE-0005bc-K3; Mon, 22 Jul 2024 14:51:50 +0000
-Received: by outflank-mailman (input) for mailman id 762095;
- Mon, 22 Jul 2024 14:51:49 +0000
+	id 1sVuOv-00068J-S4; Mon, 22 Jul 2024 14:52:33 +0000
+Received: by outflank-mailman (input) for mailman id 762075;
+ Mon, 22 Jul 2024 14:44:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=urmM=OW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sVuOD-0005bS-0p
- for xen-devel@lists.xenproject.org; Mon, 22 Jul 2024 14:51:49 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
+ <SRS0=H4cl=OW=gmail.com=inisider@srs-se1.protection.inumbo.net>)
+ id 1sVuH9-0002sW-Rn
+ for xen-devel@lists.xenproject.org; Mon, 22 Jul 2024 14:44:31 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ebdd3a9b-4839-11ef-bbfe-fd08da9f4363;
- Mon, 22 Jul 2024 16:51:48 +0200 (CEST)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-52efbb55d24so2827562e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 22 Jul 2024 07:51:48 -0700 (PDT)
+ id e75324f1-4838-11ef-bbfe-fd08da9f4363;
+ Mon, 22 Jul 2024 16:44:30 +0200 (CEST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52efd08e6d9so2548810e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Jul 2024 07:44:30 -0700 (PDT)
 Received: from [192.168.219.191] ([94.75.70.14])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-52efa2820d2sm965959e87.257.2024.07.22.07.51.46
+ 2adb3069b0e04-52eff3bd6ecsm734888e87.4.2024.07.22.07.44.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 07:51:46 -0700 (PDT)
+ Mon, 22 Jul 2024 07:44:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,108 +47,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ebdd3a9b-4839-11ef-bbfe-fd08da9f4363
+X-Inumbo-ID: e75324f1-4838-11ef-bbfe-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721659907; x=1722264707; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1721659470; x=1722264270; darn=lists.xenproject.org;
         h=mime-version:user-agent:content-transfer-encoding:references
          :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=66Z4ANDo8hy/oRTaWYIScX14jYV39ia2y0ZjHKAum2Q=;
-        b=ELx/5FXsTISt9oOng0SwpBdK84zTXltFdY/ny+B4+xTWzS2QWI3nF/HEc3o+0301WS
-         jgsSE57wP43Hn71twkD8a6CNpV4pPUeU5E+HyRxsmORPaWl5j73Qynr3wFtODjegU2ra
-         kha0SzZ9UUrBSEAyN2MRRLKeQnksxIgwEETlDc7CWGHRGAXD8BuoSf18/DCCGOcJhZPg
-         hxbw6aUNkPV2Vl3r/RW6oI76cGVjzw1Ylk7voo0YhnXkTfySNSn+1iu54Bw4HEchnd5/
-         dxoO6zQLVBrdEq285+aLGp99IIzadA6IxbddgYwWd5tbTlzDVQ/nLe6hGDkGFKV2YOIf
-         IMnA==
+        bh=KLcCUe3DQuLuEs5kLVFN8x3bGpofBM+4/6gzTmtveEU=;
+        b=JnLzzRkxPyL9kpHciOrr2YukTnD4pvhf955mnpwctu4647pD35KxKSWo37H5w8Ilfn
+         Oo7eGiLBINHV2pqpvVzBUqjkfwGEiM0ZzONF+5FqqU/zaEFBlEolqsJgiAqxF/fjASjE
+         9q+4VFxVg5EDUd/zMZfj7Jb7m/MFJJaT1HXDPl0Euqyx1dlwk5s/P2mGvfL5+Xds+cqP
+         BmkPM7TliKmdTwxWt0CEr7f38XZx9YsncKZsB3aHuZgBQODOfmmb7Hy6iW6xpWDpcyTY
+         ucZoNGsJW2f8ZLHFmNnsgcyh1GcaEaU0KyP7N9sOoBLJzL4JPtPJyL9uiy17zOWu47vY
+         DVrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721659907; x=1722264707;
+        d=1e100.net; s=20230601; t=1721659470; x=1722264270;
         h=mime-version:user-agent:content-transfer-encoding:references
          :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=66Z4ANDo8hy/oRTaWYIScX14jYV39ia2y0ZjHKAum2Q=;
-        b=aA/svTzBOBfyB7U+UP2Q9QSghF51GOLitI1q2WbqqEm+GvcQVD6dRRbmBeMWE8zJIp
-         THz/WZDLuWEm8ljC/lccN9aQbdkitEuoks/192OIHp8DgQ1eWTgVNnfSfLVu1lhqmRCm
-         RiDN1ank9VZKSBk9VIHLemcbcR3kf0wEZatFmgo5feR6XsPPrq/qZHT64x7e5romrF4V
-         swx64JE0D7v8+IVoYfDRntjtFShV52ZK/C5iPekr78TSqG0XAPz+S6IOl6pzcdCR/dTq
-         k2qe50yKcFdWagF+pmATDTFU44FBX5DEXVLMx79hSDp766duk+KbZWWrtEacGpUVICvs
-         u2PA==
-X-Forwarded-Encrypted: i=1; AJvYcCVUto9pYcpOoRxDLaXNn40cAHB6Bq1bI2njC8ChSUvsXboYjfLvdwgBrrG5HCGqf2s+QUL6gcLe0YNJ6TthDcZnaSZoKhglgCna0b5fQtM=
-X-Gm-Message-State: AOJu0YwpiEuHp0QR5EqcXKYNHCenfPcd7Qdyyb3PgZYDSKQXkO2o9ReV
-	HS1flMZIYrvIMe+qeVlqFrXGsJb+JDWpvf1z16f5V2wJ7dBzKDzE
-X-Google-Smtp-Source: AGHT+IGUekzzNtufdWQizWUNhm/sbPmM0+IbmQEDkwK9BjKp8g/lCh/EuaPyNdqOX/q6vFJzxQAAfg==
-X-Received: by 2002:a05:6512:3d1a:b0:52c:c9e4:3291 with SMTP id 2adb3069b0e04-52efb82570cmr4977215e87.60.1721659907052;
-        Mon, 22 Jul 2024 07:51:47 -0700 (PDT)
-Message-ID: <a0e77fa86e25a3947348e5778b4a23236b28c8f3.camel@gmail.com>
-Subject: Re: [PATCH v2 6/8] xen/riscv: introduce generic Xen page table
- handling
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <jbeulich@suse.com>,  Stefano Stabellini <sstabellini@kernel.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Date: Mon, 22 Jul 2024 16:51:46 +0200
-In-Reply-To: <5187f606-0a1c-4812-8f8c-13301f0aba8c@xen.org>
+        bh=KLcCUe3DQuLuEs5kLVFN8x3bGpofBM+4/6gzTmtveEU=;
+        b=snPRDxQCEWX77jEezzUZ3NeCgzlhQJZUAAzYMAnij/avyZXmaKWFtzEf26BQyhlm+d
+         8nMn/2eey/7jGl9PYQFV2T7bp7atInhkkLg7PdKOMl6DHMRryfOUJX4veg5i6umK7r2E
+         8p04WQdhRxTqDbI8J1s44oSOauIvivVh4Yqlfi5WZlVEbl1AzJRlZKjbW/Arxqbrov+a
+         1/+Yi+xcMBSEkuOQW959FR0X9l9ou02Vdri1IfkBiW8rEoYMA6Kh++1jncS99ldZANSe
+         vUYKUeROl7TVcLewcduItcjgvId4IfQ5n8KaliO9ArWaAbA/HQU+oUAzjvf5BmzzbnqK
+         3W7w==
+X-Forwarded-Encrypted: i=1; AJvYcCXLmUlmEHb/FuRryIdYO8BS7KrSqZV4BZvgGqCUMHLrKc2KmxCiLyow7MCwlw9V5/Zkl3WJ11LiHrR5rAayZppwHKHivbUlE1jt2n6EwDU=
+X-Gm-Message-State: AOJu0YyifFK7rDoTQS/MaEyJ1EK7mCKQ4rIG3fs244rNvoSUzCXQynWc
+	VIKfCMM8f46BMItl4ThE7ijfZmHaFLIuC3BgWb6VYpyl7qY5m2mG
+X-Google-Smtp-Source: AGHT+IFU4CN1nGtxanR0T5CSS5qgsIbFS8KzWTviVAMVaMaEVY6ZS1zZ4/+NZ3MNA4G13Q9Csbtl8Q==
+X-Received: by 2002:a05:6512:3083:b0:52e:d0f8:2d30 with SMTP id 2adb3069b0e04-52fc4075b25mr44591e87.59.1721659469955;
+        Mon, 22 Jul 2024 07:44:29 -0700 (PDT)
+Message-ID: <54af6fb751da1103054de2d79a2057bec658f399.camel@gmail.com>
+Subject: Re: [PATCH v2 5/8] xen/riscv: introduce asm/pmap.h header
+From: Oleksii Kurochko <inisider@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, Bob Eshleman
+ <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+Date: Mon, 22 Jul 2024 16:44:28 +0200
+In-Reply-To: <6458c61d-5974-41c2-a1e6-76e4a15a487a@suse.com>
 References: <cover.1720799925.git.oleksii.kurochko@gmail.com>
-	 <f2d7f538edb7db8990bf26b791df9da3d390bf05.1720799926.git.oleksii.kurochko@gmail.com>
-	 <5187f606-0a1c-4812-8f8c-13301f0aba8c@xen.org>
+	 <c7331e4c2f481f069571976a708c4aba04d2c0e4.1720799926.git.oleksii.kurochko@gmail.com>
+	 <6458c61d-5974-41c2-a1e6-76e4a15a487a@suse.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.52.3 (3.52.3-1.fc40app2) 
 MIME-Version: 1.0
 
-Hi Julien,
-
-On Sun, 2024-07-21 at 10:02 +0100, Julien Grall wrote:
-> Hi,
+On Mon, 2024-07-22 at 14:54 +0200, Jan Beulich wrote:
+> On 12.07.2024 18:22, Oleksii Kurochko wrote:
+> > --- /dev/null
+> > +++ b/xen/arch/riscv/include/asm/pmap.h
+> > @@ -0,0 +1,28 @@
+> > +#ifndef __ASM_PMAP_H__
+> > +#define __ASM_PMAP_H__
+> > +
+> > +#include <xen/bug.h>
+> > +#include <xen/mm.h>
+> > +
+> > +#include <asm/fixmap.h>
+> > +
+> > +static inline void arch_pmap_map(unsigned int slot, mfn_t mfn)
+> > +{
+> > +=C2=A0=C2=A0=C2=A0 pte_t *entry =3D &xen_fixmap[slot];
+> > +=C2=A0=C2=A0=C2=A0 pte_t pte;
+> > +
+> > +=C2=A0=C2=A0=C2=A0 ASSERT(!pte_is_valid(*entry));
+> > +
+> > +=C2=A0=C2=A0=C2=A0 pte =3D mfn_to_xen_entry(mfn, PAGE_HYPERVISOR_RW);
+> > +=C2=A0=C2=A0=C2=A0 pte.pte |=3D PTE_LEAF_DEFAULT;
+> > +=C2=A0=C2=A0=C2=A0 write_pte(entry, pte);
+> > +}
+> > +
+> > +static inline void arch_pmap_unmap(unsigned int slot)
+> > +{
+> > +=C2=A0=C2=A0=C2=A0 pte_t pte =3D {};
+> > +
+> > +=C2=A0=C2=A0=C2=A0 write_pte(&xen_fixmap[slot], pte);
+> > +}
 >=20
-> On 12/07/2024 17:22, Oleksii Kurochko wrote:
-> > At least, between Arm and RISC-V most of the code related to Xen
-> > page
-> > table handling are common.
-> >=20
-> > This GENERIC_PT code is based on Arm's arm/mmu/pt.c except some
-> > minor
-> > changes such as introduction of the following functions:
-> > =C2=A0=C2=A0 * get_root_page()
-> > =C2=A0=C2=A0 * xen_pt_check_contig()
-> > =C2=A0=C2=A0 * set_pte_table_bit()
-> > =C2=A0=C2=A0 * sanity_arch_specific_pte_checks()
-> > =C2=A0=C2=A0 * get_contig_bit()
-> > =C2=A0=C2=A0 * set_pte_permissions()
-> > =C2=A0=C2=A0 * flush_xen_tlb_range_va()
-> > It was done because not every functions has the generic pte_flags
-> > and
-> > it could be a different positions of the PTE bits in a PTE.
-> While I am always in favor of trying to avoid code duplication, I am
-> not=20
-> sure the page-tables are one that should be.
-Probably it wasn't the best one abstraction provided. But I think that
-there are still some function which could be generic:
-- xen_{un}map_table()
-- map_pages_to_xen
-- probably some page table walking?
+> Why are these not using set_fixmap() / clear_fixmap() respectively?
+They haven't been introduced yet. And I thought that these fucntion are
+used only in pmap_{un}map() and that is the reason why I decided to not
+introduce them. But while writing the answer on another comment, I
+found other places where set_fixmap() / clear_fixmap() are used, so I
+will introduce them and reuse here.
 
-But I am okay, if not to abstract that, I just wanted to here an
-opinion if it is a sense to work in this direction or not.
-
-I will then move everything to RISC-V specific folder and clean up some
-places related to Arm.
+>=20
+> > --- a/xen/arch/riscv/mm.c
+> > +++ b/xen/arch/riscv/mm.c
+> > @@ -370,3 +370,17 @@ int map_pages_to_xen(unsigned long virt,
+> > =C2=A0=C2=A0=C2=A0=C2=A0 BUG_ON("unimplemented");
+> > =C2=A0=C2=A0=C2=A0=C2=A0 return -1;
+> > =C2=A0}
+> > +
+> > +static inline pte_t mfn_to_pte(mfn_t mfn)
+>=20
+> This name suggests (to me) that you're getting _the_ (single) PTE for
+> a given MFN. However, what the function is doing is make a PTE using
+> the given MFN. On x86 at least the common way to name such a function
+> would be pte_from_mfn().
+If it is a common way then I will rename it. Thanks.
 
 ~ Oleksii
 
+
 >=20
-> For instance, you don't have the concept of contiguous page in RISC-V
-> (I=20
-> see you introduce dummy flags, but IMHO this is a bit of a hack). All
-> the code was also written in a way to avoid temporary conflict
-> mappings.=20
-> This is to avoid using Break-Before-Make. But on newer hardware this=20
-> could be relaxed.
+> > +{
+> > +=C2=A0=C2=A0=C2=A0 unsigned long pte =3D mfn_x(mfn) << PTE_PPN_SHIFT;
+> > +=C2=A0=C2=A0=C2=A0 return (pte_t){ .pte =3D pte};
 >=20
-> I am interested to know what the others thinks.
+> Nit: Blank missing.
 >=20
-> Cheers,
->=20
+> Jan
 
 
