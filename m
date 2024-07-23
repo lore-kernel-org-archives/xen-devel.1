@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56D6DC3DA49
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F71C3DA63
 	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 08:16:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.762734.1173020 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.762735.1173024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWAhQ-0006Qy-FN; Tue, 23 Jul 2024 08:16:44 +0000
+	id 1sWAhQ-0006UF-OL; Tue, 23 Jul 2024 08:16:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 762734.1173020; Tue, 23 Jul 2024 08:16:44 +0000
+Received: by outflank-mailman (output) from mailman id 762735.1173024; Tue, 23 Jul 2024 08:16:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWAhQ-0006Qm-CH; Tue, 23 Jul 2024 08:16:44 +0000
-Received: by outflank-mailman (input) for mailman id 762734;
+	id 1sWAhQ-0006Sv-Ji; Tue, 23 Jul 2024 08:16:44 +0000
+Received: by outflank-mailman (input) for mailman id 762735;
  Tue, 23 Jul 2024 08:16:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J0IL=OX=bugseng.com=alessandro.zucchelli@srs-se1.protection.inumbo.net>)
- id 1sWAgl-0008AN-4q
- for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 08:16:03 +0000
+ id 1sWAgq-0007w0-BE
+ for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 08:16:08 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cc2013c5-48cb-11ef-bbfe-fd08da9f4363;
- Tue, 23 Jul 2024 10:16:01 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cddf2a28-48cb-11ef-8776-851b0ebba9a2;
+ Tue, 23 Jul 2024 10:16:04 +0200 (CEST)
 Received: from delta.bugseng.com.homenet.telecomitalia.it
  (host-79-35-51-193.retail.telecomitalia.it [79.35.51.193])
- by support.bugseng.com (Postfix) with ESMTPSA id 3F21C4EE0743;
- Tue, 23 Jul 2024 10:15:59 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id B2FCF4EE0746;
+ Tue, 23 Jul 2024 10:16:03 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,96 +42,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc2013c5-48cb-11ef-bbfe-fd08da9f4363
+X-Inumbo-ID: cddf2a28-48cb-11ef-8776-851b0ebba9a2
 From: Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
-	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>,
+	Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>
-Subject: [XEN PATCH v5 12/17] xen: address violations of MISRA C:2012 Directive 4.10
-Date: Tue, 23 Jul 2024 10:15:04 +0200
-Message-Id: <42fbbb9ffb85893d049c80812b547ffb10ccda7e.1721720583.git.alessandro.zucchelli@bugseng.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v5 15/17] xen/build: address violation of MISRA C Directive 4.10
+Date: Tue, 23 Jul 2024 10:15:07 +0200
+Message-Id: <08fe3472d3da3035357b72d4684295cbe79b77c1.1721720583.git.alessandro.zucchelli@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1721720583.git.alessandro.zucchelli@bugseng.com>
 References: <cover.1721720583.git.alessandro.zucchelli@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
+This addresses violations of MISRA C:2012 Rule 4.10 which states as
+following: Precautions shall be taken in order to prevent the contents
+of a header file being included more than once.
 
-Modify creation rule for asm-offsets.h to conform to
-the new standard and to not generate conflicting guards
-between architectures (which is a violation of the directive).
-Modify generic-y creation rule to generate code without violations
-and to conform to the new standard.
+Changes are made for autogenerated header files: include/xen/compile.h
+and include/xen/hypercall-defs.h.
 
-Mechanical change.
+No functional change.
 
-Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
-Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 Signed-off-by: Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>
 
 ---
 Changes in v5:
-- edit inclusion guards of autogenerated files
-Commit introduced in v3
+- edit inclusion guards for autogenerated header files
 ---
- xen/build.mk                     | 7 ++++---
- xen/scripts/Makefile.asm-generic | 8 +++++++-
- 2 files changed, 11 insertions(+), 4 deletions(-)
+ xen/build.mk         | 6 +++++-
+ xen/include/Makefile | 5 ++++-
+ 2 files changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/xen/build.mk b/xen/build.mk
-index 0f490ca71b..32624d3097 100644
+index 32624d3097..ebb2d06b3c 100644
 --- a/xen/build.mk
 +++ b/xen/build.mk
-@@ -47,6 +47,7 @@ asm-offsets.s: arch/$(SRCARCH)/$(ARCH)/asm-offsets.c
+@@ -18,6 +18,8 @@ quiet_cmd_compile.h = UPD     $@
+ define cmd_compile.h
+     if [ ! -r $@ -o -O $@ ]; then \
+ 	cat .banner; \
++	echo '#ifndef XEN__COMPILE_H' > $(dot-target).tmp; \
++	echo '#define XEN__COMPILE_H' >> $(dot-target).tmp; \
+ 	sed -e 's/@@date@@/$(XEN_BUILD_DATE)/g' \
+ 	    -e 's/@@time@@/$(XEN_BUILD_TIME)/g' \
+ 	    -e 's/@@whoami@@/$(XEN_WHOAMI)/g' \
+@@ -28,8 +30,9 @@ define cmd_compile.h
+ 	    -e 's/@@subversion@@/$(XEN_SUBVERSION)/g' \
+ 	    -e 's/@@extraversion@@/$(XEN_EXTRAVERSION)/g' \
+ 	    -e 's!@@changeset@@!$(shell $(srctree)/tools/scmversion $(XEN_ROOT) || echo "unavailable")!g' \
+-	    < $< > $(dot-target).tmp; \
++	    < $< >> $(dot-target).tmp; \
+ 	sed -rf $(srctree)/tools/process-banner.sed < .banner >> $(dot-target).tmp; \
++	echo '#endif /* XEN__COMPILE_H */' >> $(dot-target).tmp; \
+ 	mv -f $(dot-target).tmp $@; \
+     fi
+ endef
+@@ -40,6 +43,7 @@ include/xen/compile.h: include/xen/compile.h.in .banner FORCE
  
- arch/$(SRCARCH)/include/asm/asm-offsets.h: asm-offsets.s
- 	@(set -e; \
-+	  guard=$$(echo ASM__${SRCARCH}__ASM_OFFSETS_H | tr a-z A-Z); \
- 	  echo "/*"; \
- 	  echo " * DO NOT MODIFY."; \
- 	  echo " *"; \
-@@ -54,12 +55,12 @@ arch/$(SRCARCH)/include/asm/asm-offsets.h: asm-offsets.s
- 	  echo " *"; \
- 	  echo " */"; \
- 	  echo ""; \
--	  echo "#ifndef __ASM_OFFSETS_H__"; \
--	  echo "#define __ASM_OFFSETS_H__"; \
-+	  echo "#ifndef $$guard"; \
-+	  echo "#define $$guard"; \
- 	  echo ""; \
- 	  sed -rne "/^[^#].*==>/{s:.*==>(.*)<==.*:\1:; s: [\$$#]: :; p;}"; \
- 	  echo ""; \
--	  echo "#endif") <$< >$@
-+	  echo "#endif /* $$guard */") <$< >$@
+ targets += include/xen/compile.h
  
- build-dirs := $(patsubst %/built_in.o,%,$(filter %/built_in.o,$(ALL_OBJS) $(ALL_LIBS)))
++
+ -include $(wildcard .asm-offsets.s.d)
+ asm-offsets.s: arch/$(SRCARCH)/$(ARCH)/asm-offsets.c
+ 	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index 1ff9468eeb..35df93c82e 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -119,7 +119,10 @@ $(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) FORCE
  
-diff --git a/xen/scripts/Makefile.asm-generic b/xen/scripts/Makefile.asm-generic
-index b0d356bfa3..2d2fd9f76e 100644
---- a/xen/scripts/Makefile.asm-generic
-+++ b/xen/scripts/Makefile.asm-generic
-@@ -32,7 +32,13 @@ old-headers := $(wildcard $(obj)/*.h)
- unwanted    := $(filter-out $(generic-y) $(generated-y),$(old-headers))
+ quiet_cmd_genhyp = GEN     $@
+ define cmd_genhyp
+-    awk -f $(srctree)/scripts/gen_hypercall.awk <$< >$@
++    echo "#ifndef XEN__HYPERCALL_DEFS_H" >$@; \
++    echo "#define XEN__HYPERCALL_DEFS_H" >>$@; \
++    awk -f $(srctree)/scripts/gen_hypercall.awk <$< >>$@; \
++    echo "#endif /* XEN__HYPERCALL_DEFS_H */" >>$@
+ endef
  
- quiet_cmd_wrap = WRAP    $@
--      cmd_wrap = echo "\#include <asm-generic/$*.h>" > $@
-+cmd_wrap = \
-+    guard=$$(echo ASM_GENERIC__${SRCARCH}__$*_H | tr a-z A-Z); \
-+    echo "\#ifndef $$guard" >$@.new; \
-+    echo "\#define $$guard" >>$@.new; \
-+    echo "\#include <asm-generic/$*.h>" >>$@.new; \
-+    echo "\#endif /* $$guard */" >>$@.new; \
-+    mv -f $@.new $@
- 
- quiet_cmd_remove = REMOVE  $(unwanted)
-       cmd_remove = rm -f $(unwanted)
+ all: $(obj)/xen/hypercall-defs.h
 -- 
 2.34.1
 
