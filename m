@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 429A5C3DA49
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 08:16:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.762708.1172969 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB55C3DA64
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 08:16:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.762713.1172980 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWAgv-0003cJ-O0; Tue, 23 Jul 2024 08:16:13 +0000
+	id 1sWAgy-0003y6-0S; Tue, 23 Jul 2024 08:16:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 762708.1172969; Tue, 23 Jul 2024 08:16:13 +0000
+Received: by outflank-mailman (output) from mailman id 762713.1172980; Tue, 23 Jul 2024 08:16:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWAgv-0003cA-Kn; Tue, 23 Jul 2024 08:16:13 +0000
-Received: by outflank-mailman (input) for mailman id 762708;
- Tue, 23 Jul 2024 08:16:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sWAgx-0003xz-Sz; Tue, 23 Jul 2024 08:16:15 +0000
+Received: by outflank-mailman (input) for mailman id 762713;
+ Tue, 23 Jul 2024 08:16:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J0IL=OX=bugseng.com=alessandro.zucchelli@srs-se1.protection.inumbo.net>)
- id 1sWAgp-0008AN-5Z
- for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 08:16:07 +0000
+ id 1sWAgh-0007w0-A0
+ for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 08:15:59 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ce620007-48cb-11ef-bbfe-fd08da9f4363;
- Tue, 23 Jul 2024 10:16:05 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c9ca172c-48cb-11ef-8776-851b0ebba9a2;
+ Tue, 23 Jul 2024 10:15:57 +0200 (CEST)
 Received: from delta.bugseng.com.homenet.telecomitalia.it
  (host-79-35-51-193.retail.telecomitalia.it [79.35.51.193])
- by support.bugseng.com (Postfix) with ESMTPSA id 7E3FB4EE0744;
- Tue, 23 Jul 2024 10:16:04 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 73C734EE0745;
+ Tue, 23 Jul 2024 10:15:55 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,305 +42,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ce620007-48cb-11ef-bbfe-fd08da9f4363
+X-Inumbo-ID: c9ca172c-48cb-11ef-8776-851b0ebba9a2
 From: Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
-	Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>
-Subject: [XEN PATCH v5 17/17] include/asm-generic: rename inclusion guards for consistency
-Date: Tue, 23 Jul 2024 10:15:09 +0200
-Message-Id: <79c020c608d59c1c5d4156e307acba046b1ad17e.1721720583.git.alessandro.zucchelli@bugseng.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>
+Subject: [XEN PATCH v5 10/17] x86/asm: address violations of MISRA C:2012 Directive 4.10
+Date: Tue, 23 Jul 2024 10:15:02 +0200
+Message-Id: <20e1d32d9e384f9682fc25d9a55480edd11e344e.1721720583.git.alessandro.zucchelli@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1721720583.git.alessandro.zucchelli@bugseng.com>
 References: <cover.1721720583.git.alessandro.zucchelli@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Edit inclusion guards in asm-generic header files in order to make them
-consistent with the estabilished naming convention.
+From: Simone Ballarin <simone.ballarin@bugseng.com>
 
-No functional change.
+Amend generation script, add inclusion guards to address violations
+of MISRA C:2012 Directive 4.10 ("Precautions shall be taken in order
+to prevent the contents of a header file being included more than
+once").
 
+This patch amends the Makefile adding the required inclusion guards
+for xlat.h.
+
+Add deviation comment for files intended for multiple inclusion.
+
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 Signed-off-by: Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>
----
- xen/include/asm-generic/altp2m.h     | 6 +++---
- xen/include/asm-generic/atomic-ops.h | 6 +++---
- xen/include/asm-generic/device.h     | 6 +++---
- xen/include/asm-generic/div64.h      | 6 +++---
- xen/include/asm-generic/hardirq.h    | 6 +++---
- xen/include/asm-generic/iocap.h      | 6 +++---
- xen/include/asm-generic/monitor.h    | 6 +++---
- xen/include/asm-generic/paging.h     | 6 +++---
- xen/include/asm-generic/percpu.h     | 6 +++---
- xen/include/asm-generic/random.h     | 6 +++---
- xen/include/asm-generic/softirq.h    | 6 +++---
- xen/include/asm-generic/vm_event.h   | 6 +++---
- 12 files changed, 36 insertions(+), 36 deletions(-)
 
-diff --git a/xen/include/asm-generic/altp2m.h b/xen/include/asm-generic/altp2m.h
-index 39865a842a..34ae943145 100644
---- a/xen/include/asm-generic/altp2m.h
-+++ b/xen/include/asm-generic/altp2m.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_ALTP2M_H
--#define __ASM_GENERIC_ALTP2M_H
-+#ifndef ASM_GENERIC__ALTP2M_H
-+#define ASM_GENERIC__ALTP2M_H
- 
- #include <xen/bug.h>
- 
-@@ -22,7 +22,7 @@ static inline unsigned int altp2m_vcpu_idx(const struct vcpu *v)
-     return 0;
- }
- 
--#endif /* __ASM_GENERIC_ALTP2M_H */
-+#endif /* ASM_GENERIC__ALTP2M_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/atomic-ops.h b/xen/include/asm-generic/atomic-ops.h
-index 98dd907942..50f1db909d 100644
---- a/xen/include/asm-generic/atomic-ops.h
-+++ b/xen/include/asm-generic/atomic-ops.h
-@@ -4,8 +4,8 @@
-  * forward inline declaration that can be synthesized from other atomic
-  * functions or being created from scratch.
-  */
--#ifndef _ASM_GENERIC_ATOMIC_OPS_H_
--#define _ASM_GENERIC_ATOMIC_OPS_H_
-+#ifndef ASM_GENERIC__ATOMIC_OPS_H_
-+#define ASM_GENERIC__ATOMIC_OPS_H_
- 
- #include <xen/atomic.h>
- #include <xen/lib.h>
-@@ -94,4 +94,4 @@ static inline int atomic_add_negative(int i, atomic_t *v)
- }
- #endif
- 
--#endif /* _ASM_GENERIC_ATOMIC_OPS_H_ */
-+#endif /* ASM_GENERIC__ATOMIC_OPS_H_ */
-diff --git a/xen/include/asm-generic/device.h b/xen/include/asm-generic/device.h
-index 1acd1ba1d8..eccd3159a9 100644
---- a/xen/include/asm-generic/device.h
-+++ b/xen/include/asm-generic/device.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_DEVICE_H__
--#define __ASM_GENERIC_DEVICE_H__
-+#ifndef ASM_GENERIC__DEVICE_H
-+#define ASM_GENERIC__DEVICE_H
- 
- #include <xen/stdbool.h>
- 
-@@ -127,7 +127,7 @@ __section(".adev.info") = {                                         \
- 
- #endif /* CONFIG_ACPI */
- 
--#endif /* __ASM_GENERIC_DEVICE_H__ */
-+#endif /* ASM_GENERIC__DEVICE_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/div64.h b/xen/include/asm-generic/div64.h
-index 068d8a11ad..c1770561c6 100644
---- a/xen/include/asm-generic/div64.h
-+++ b/xen/include/asm-generic/div64.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_DIV64
--#define __ASM_GENERIC_DIV64
-+#ifndef ASM_GENERIC__DIV64_H
-+#define ASM_GENERIC__DIV64_H
- 
- #include <xen/types.h>
- 
-@@ -15,7 +15,7 @@
- 
- #endif /* BITS_PER_LONG */
- 
--#endif
-+#endif /* ASM_GENERIC__DIV64_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/hardirq.h b/xen/include/asm-generic/hardirq.h
-index ddccf460b9..09260b1b08 100644
---- a/xen/include/asm-generic/hardirq.h
-+++ b/xen/include/asm-generic/hardirq.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_HARDIRQ_H
--#define __ASM_GENERIC_HARDIRQ_H
-+#ifndef ASM_GENERIC__HARDIRQ_H
-+#define ASM_GENERIC__HARDIRQ_H
- 
- #include <xen/cache.h>
- #include <xen/smp.h>
-@@ -17,7 +17,7 @@ typedef struct {
- #define irq_enter()     (local_irq_count(smp_processor_id())++)
- #define irq_exit()      (local_irq_count(smp_processor_id())--)
- 
--#endif /* __ASM_GENERIC_HARDIRQ_H */
-+#endif /* ASM_GENERIC__HARDIRQ_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/iocap.h b/xen/include/asm-generic/iocap.h
-index dd7cb45488..1001fb629a 100644
---- a/xen/include/asm-generic/iocap.h
-+++ b/xen/include/asm-generic/iocap.h
-@@ -1,11 +1,11 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_IOCAP_H__
--#define __ASM_GENERIC_IOCAP_H__
-+#ifndef ASM_GENERIC__IOCAP_H
-+#define ASM_GENERIC__IOCAP_H
- 
- #define cache_flush_permitted(d)                        \
-     (!rangeset_is_empty((d)->iomem_caps))
- 
--#endif /* __ASM_GENERIC_IOCAP_H__ */
-+#endif /* ASM_GENERIC__IOCAP_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/monitor.h b/xen/include/asm-generic/monitor.h
-index 1ade289099..e53f0823cb 100644
---- a/xen/include/asm-generic/monitor.h
-+++ b/xen/include/asm-generic/monitor.h
-@@ -9,8 +9,8 @@
-  *
+---
+Changes in v5:
+- rebase against current staging tree
+- remove an unused path in Makefile that was mistakenly left in
+- edit inclusion guards, according to feedback received
+Changes in v4:
+- changed guard creation for autogenerated headers in Makefile
+Changes in v3:
+- fix inconsistent deviation ID
+- remove trailing underscores
+Changes in v2:
+- merge patches 7/13 and 13/13 of v1 as they had the same
+  commit message
+- amend the Makefile to produce the required inclusion guard
+- use the format introduced with doc/misra/safe.json instead of
+  a generic text-based deviation
+---
+ docs/misra/safe.json                   | 8 ++++++++
+ xen/arch/x86/include/asm/compat.h      | 5 +++++
+ xen/arch/x86/include/asm/cpufeatures.h | 5 +----
+ xen/arch/x86/include/asm/efibind.h     | 5 +++++
+ xen/include/Makefile                   | 9 +++++++--
+ 5 files changed, 26 insertions(+), 6 deletions(-)
+
+diff --git a/docs/misra/safe.json b/docs/misra/safe.json
+index 684346386e..6ede5c91c2 100644
+--- a/docs/misra/safe.json
++++ b/docs/misra/safe.json
+@@ -92,6 +92,14 @@
+         },
+         {
+             "id": "SAF-11-safe",
++            "analyser": {
++                "eclair": "MC3R1.D4.10"
++            },
++            "name": "Dir 4.10: file intended for multiple inclusion",
++            "text": "Files intended for multiple inclusion are not supposed to comply with D4.10."
++        },
++        {
++            "id": "SAF-12-safe",
+             "analyser": {},
+             "name": "Sentinel",
+             "text": "Next ID to be used"
+diff --git a/xen/arch/x86/include/asm/compat.h b/xen/arch/x86/include/asm/compat.h
+index 818cad87db..98ed170b95 100644
+--- a/xen/arch/x86/include/asm/compat.h
++++ b/xen/arch/x86/include/asm/compat.h
+@@ -2,6 +2,9 @@
+  * compat.h
   */
  
--#ifndef __ASM_GENERIC_MONITOR_H__
--#define __ASM_GENERIC_MONITOR_H__
-+#ifndef ASM_GENERIC__MONITOR_H
-+#define ASM_GENERIC__MONITOR_H
++#ifndef ASM__X86__COMPAT_H
++#define ASM__X86__COMPAT_H
++
+ #ifdef CONFIG_COMPAT
  
+ #define COMPAT_BITS_PER_LONG 32
+@@ -18,3 +21,5 @@ int switch_compat(struct domain *);
  #include <xen/errno.h>
- #include <xen/lib.h>
-@@ -52,7 +52,7 @@ void arch_monitor_cleanup_domain(struct domain *d)
-     /* No arch-specific domain cleanup on GENERIC. */
- }
- 
--#endif /* __ASM_GENERIC_MONITOR_H__ */
-+#endif /* ASM_GENERIC__MONITOR_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/paging.h b/xen/include/asm-generic/paging.h
-index 8df534cfdc..1a8fae6543 100644
---- a/xen/include/asm-generic/paging.h
-+++ b/xen/include/asm-generic/paging.h
-@@ -1,13 +1,13 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_PAGING_H__
--#define __ASM_GENERIC_PAGING_H__
-+#ifndef ASM_GENERIC__PAGING_H
-+#define ASM_GENERIC__PAGING_H
- 
- #include <xen/stdbool.h>
- 
- #define paging_mode_translate(d)    ((void)(d), true)
- #define paging_mode_external(d)     ((void)(d), true)
- 
--#endif /* __ASM_GENERIC_PAGING_H__ */
-+#endif /* ASM_GENERIC__PAGING_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/percpu.h b/xen/include/asm-generic/percpu.h
-index 60af4f9ff9..7302edb00c 100644
---- a/xen/include/asm-generic/percpu.h
-+++ b/xen/include/asm-generic/percpu.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_PERCPU_H__
--#define __ASM_GENERIC_PERCPU_H__
-+#ifndef ASM_GENERIC__PERCPU_H
-+#define ASM_GENERIC__PERCPU_H
- 
- #ifndef __ASSEMBLY__
- 
-@@ -25,7 +25,7 @@ void percpu_init_areas(void);
- 
+ static inline int switch_compat(struct domain *d) { return -EOPNOTSUPP; }
  #endif
++
++#endif /* ASM__X86__COMPAT_H */
+diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
+index ba3df174b7..d590fe31ea 100644
+--- a/xen/arch/x86/include/asm/cpufeatures.h
++++ b/xen/arch/x86/include/asm/cpufeatures.h
+@@ -1,7 +1,4 @@
+-/*
+- * Explicitly intended for multiple inclusion.
+- */
+-
++/* SAF-11-safe file intended for multiple inclusion */
+ #include <xen/lib/x86/cpuid-autogen.h>
  
--#endif /* __ASM_GENERIC_PERCPU_H__ */
-+#endif /* ASM_GENERIC__PERCPU_H */
+ /* Number of capability words covered by the featureset words. */
+diff --git a/xen/arch/x86/include/asm/efibind.h b/xen/arch/x86/include/asm/efibind.h
+index bce02f3707..57c712748a 100644
+--- a/xen/arch/x86/include/asm/efibind.h
++++ b/xen/arch/x86/include/asm/efibind.h
+@@ -1,2 +1,7 @@
++#ifndef ASM__X86__EFIBIND_H
++#define ASM__X86__EFIBIND_H
++
+ #include <xen/types.h>
+ #include <asm/x86_64/efibind.h>
++
++#endif /* ASM__X86__EFIBIND_H */
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index 058b0a566b..1ff9468eeb 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -105,9 +105,14 @@ xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+
+ xlat-y := $(filter $(patsubst compat/%,%,$(headers-y)),$(xlat-y))
  
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/random.h b/xen/include/asm-generic/random.h
-index d0d35dd217..f2e6c1c11c 100644
---- a/xen/include/asm-generic/random.h
-+++ b/xen/include/asm-generic/random.h
-@@ -1,13 +1,13 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_RANDOM_H__
--#define __ASM_GENERIC_RANDOM_H__
-+#ifndef ASM_GENERIC__RANDOM_H
-+#define ASM_GENERIC__RANDOM_H
+ quiet_cmd_xlat_h = GEN     $@
+-cmd_xlat_h = \
+-	cat $(filter %.h,$^) >$@.new; \
++define cmd_xlat_h
++	guard=$$(echo ASM__${SRCARCH}__COMPAT__XLAT_H | tr a-z A-Z); \
++	echo "#ifndef $$guard" > $@.new; \
++	echo "#define $$guard" >> $@.new; \
++	cat $(filter %.h,$^) >> $@.new; \
++	echo "#endif /* $$guard */" >> $@.new; \
+ 	mv -f $@.new $@
++endef
  
- static inline unsigned int arch_get_random(void)
- {
-     return 0;
- }
- 
--#endif /* __ASM_GENERIC_RANDOM_H__ */
-+#endif /* ASM_GENERIC__RANDOM_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/softirq.h b/xen/include/asm-generic/softirq.h
-index 83be855e50..92144c7eca 100644
---- a/xen/include/asm-generic/softirq.h
-+++ b/xen/include/asm-generic/softirq.h
-@@ -1,12 +1,12 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_SOFTIRQ_H__
--#define __ASM_GENERIC_SOFTIRQ_H__
-+#ifndef ASM_GENERIC__SOFTIRQ_H
-+#define ASM_GENERIC__SOFTIRQ_H
- 
- #define NR_ARCH_SOFTIRQS       0
- 
- #define arch_skip_send_event_check(cpu) 0
- 
--#endif /* __ASM_GENERIC_SOFTIRQ_H__ */
-+#endif /* ASM_GENERIC__SOFTIRQ_H */
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/asm-generic/vm_event.h b/xen/include/asm-generic/vm_event.h
-index 620c7b971c..ff538b6ba4 100644
---- a/xen/include/asm-generic/vm_event.h
-+++ b/xen/include/asm-generic/vm_event.h
-@@ -5,8 +5,8 @@
-  * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-  */
- 
--#ifndef __ASM_GENERIC_VM_EVENT_H__
--#define __ASM_GENERIC_VM_EVENT_H__
-+#ifndef ASM_GENERIC__VM_EVENT_H
-+#define ASM_GENERIC__VM_EVENT_H
- 
- #include <xen/sched.h>
- #include <public/vm_event.h>
-@@ -52,4 +52,4 @@ void vm_event_reset_vmtrace(struct vcpu *v)
-     /* Nothing to do. */
- }
- 
--#endif /* __ASM_GENERIC_VM_EVENT_H__ */
-+#endif /* ASM_GENERIC__VM_EVENT_H */
+ $(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) FORCE
+ 	$(call if_changed,xlat_h)
 -- 
 2.34.1
 
