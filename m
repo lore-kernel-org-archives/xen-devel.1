@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 668A2C3DA49
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 13:34:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.763195.1173445 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0409C3DA49
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 13:36:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.763203.1173456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWFf2-0002Il-S9; Tue, 23 Jul 2024 13:34:36 +0000
+	id 1sWFgg-0002tU-5e; Tue, 23 Jul 2024 13:36:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 763195.1173445; Tue, 23 Jul 2024 13:34:36 +0000
+Received: by outflank-mailman (output) from mailman id 763203.1173456; Tue, 23 Jul 2024 13:36:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWFf2-0002Ie-PT; Tue, 23 Jul 2024 13:34:36 +0000
-Received: by outflank-mailman (input) for mailman id 763195;
- Tue, 23 Jul 2024 13:34:36 +0000
+	id 1sWFgg-0002tN-34; Tue, 23 Jul 2024 13:36:18 +0000
+Received: by outflank-mailman (input) for mailman id 763203;
+ Tue, 23 Jul 2024 13:36:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=v/3h=OX=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sWFf2-0002CL-6W
- for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 13:34:36 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
+ <SRS0=W1nq=OX=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1sWFge-0002s4-8j
+ for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 13:36:16 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2060b.outbound.protection.outlook.com
+ [2a01:111:f403:2009::60b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d22adbf-48f8-11ef-bbfe-fd08da9f4363;
- Tue, 23 Jul 2024 15:34:35 +0200 (CEST)
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-52f0277daa5so3803696e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 23 Jul 2024 06:34:35 -0700 (PDT)
-Received: from [192.168.219.191] ([94.75.70.14])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-52efaf7bc4asm1273496e87.239.2024.07.23.06.34.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 06:34:34 -0700 (PDT)
+ id 875b7628-48f8-11ef-bbfe-fd08da9f4363;
+ Tue, 23 Jul 2024 15:36:14 +0200 (CEST)
+Received: from MN2PR06CA0003.namprd06.prod.outlook.com (2603:10b6:208:23d::8)
+ by MN2PR12MB4061.namprd12.prod.outlook.com (2603:10b6:208:19a::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.19; Tue, 23 Jul
+ 2024 13:36:10 +0000
+Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
+ (2603:10b6:208:23d:cafe::1b) by MN2PR06CA0003.outlook.office365.com
+ (2603:10b6:208:23d::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.17 via Frontend
+ Transport; Tue, 23 Jul 2024 13:36:10 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7784.5 via Frontend Transport; Tue, 23 Jul 2024 13:36:10 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 23 Jul
+ 2024 08:36:09 -0500
+Received: from [172.23.111.139] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Tue, 23 Jul 2024 08:36:08 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,155 +61,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d22adbf-48f8-11ef-bbfe-fd08da9f4363
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721741675; x=1722346475; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=54B/T7kfM8m0KH/qFk8WedHdvr0bVpQONjmGgmlMV4o=;
-        b=jVditT5mq9Hm3SjuXc9YxrZORwxx/92f+uGANVE7+1i22tWV884o0i8b9Xa63h4mkr
-         6uh1/w7QMBulIZYNEg1f0EyUPLv3z5/1D9zeJlb2OLc+MpdZQULidufxgwPIjws+w+L/
-         ik5R0ddsNSHVybuA0kYkYaeEVgHViKQtB7TMJN8mGbeN6SdGlEW58CBqJ1IEJD923CRq
-         ct+IXw3VhpLpm7PgzYWSRXXooHUzwNtdGFfk7PHDvwfYrEfdWE1Pb8HA3ka+Et/LRZPE
-         UNHfhjkM4SGpvlzg5k6qzX+wgx72gl5fdm4WmWdC/ra0KCw/gKRQxB4rrBv6DA6lZXSu
-         wQZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721741675; x=1722346475;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=54B/T7kfM8m0KH/qFk8WedHdvr0bVpQONjmGgmlMV4o=;
-        b=nq1lEScuLzfA1aIDMtVJ2jSdPwFcQlCRMHhnrdQYB7b/KCsaOSfN6Z3lLsLx4JAL5v
-         IdwQlpr1XEa0REn+BeaahWIKKCNZrM+BhvptHRntAWb/hqQgK3Ak6HPrUijEO9W/diEj
-         sd9j7omgU20mAOv84nw0KjM1JREngrOiz7tXdOG7M1bdHcbXvSti1kdlLDbuiu+MK1sS
-         tPT8CpCZODSqG2qrGfru0Gh4Mq0XiLHy1I8GKPgh80amc7jxsGX8wmIR1RLi3AASzKG9
-         Dy7hrJ9zF/M6PaTOvM5ZEwgGFbPkD/KznB4IjsDzbvMXE8ahnbwbItsmVs4Ojfq1t3/r
-         o7Zg==
-X-Forwarded-Encrypted: i=1; AJvYcCViriRKto4n1GaGuok/yYhdjlOzuXuEoZsUuz7bQa1rcEY3MmIsv8m3v6kHkNOGH7anftgH0ONZtacqeXqEL4GOhoWczIygoUprHNrLqE8=
-X-Gm-Message-State: AOJu0YxlRs59+2NXP4D06DlgdD5sxBINsNdTXe/aMWlQE+CMu2LhRwec
-	ay5AMwCsMxzRVPlCLks+9y/TjfXbwrKBRhosTZUNaK4MchBudb0rLMGqmC11
-X-Google-Smtp-Source: AGHT+IFmuWcTIT1qopslzTqxTAd/KQraSpEyyn5v7JCvn3+HGjwzcTy4CCKHG3eBEGwRZnHFr1iBEQ==
-X-Received: by 2002:ac2:4bc2:0:b0:52c:e133:7b2e with SMTP id 2adb3069b0e04-52efb78ed6dmr7459040e87.35.1721741674680;
-        Tue, 23 Jul 2024 06:34:34 -0700 (PDT)
-Message-ID: <2f6a6c92ad9f9b1629008cd07a41b8374bd3ed1d.camel@gmail.com>
-Subject: Re: [PATCH v2 4/8] xen/riscv: setup fixmap mapping
-From: oleksii.kurochko@gmail.com
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, Bob Eshleman
- <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Date: Tue, 23 Jul 2024 15:34:33 +0200
-In-Reply-To: <215dd01dee2d793e371feab3a42c9d9c51252b03.camel@gmail.com>
-References: <cover.1720799925.git.oleksii.kurochko@gmail.com>
-	 <b1776fb20603cb56b0aea17ef998ea951d2bbda9.1720799926.git.oleksii.kurochko@gmail.com>
-	 <16648c6c-416d-4205-8d16-38c006251bb9@suse.com>
-	 <26a45d85fa22a696b629e602e87d5d95626b77f0.camel@gmail.com>
-	 <53e2a88b-8d2d-477a-84cb-5b44af365dbe@suse.com>
-	 <215dd01dee2d793e371feab3a42c9d9c51252b03.camel@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3 (3.52.3-1.fc40app2) 
+X-Inumbo-ID: 875b7628-48f8-11ef-bbfe-fd08da9f4363
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CqbbPrcwjf1S6npgTFubicbBXPoakkr1UueaGZnHwpUBwfy7Hr+81IPj9gfteDl5WXF6gTB7pZgOPCzObv3ImNNdr/Lu5n4+6Acyy5CGY9RroxHdI6tMhZgIM6/3FKl9OW714D/2KKNvcCDO74BpMPzGuOz43TKx1r42pHtSxSh61n5Zv7TBx7fxLNA1eE9mxrZSFofAatLmjIQqlIJ6fRQxTPavQ5ZPwQPERuTnJ7mNBiYMb7ki7qYGGXfbArFyP0rUmtodsrOMTMlrsGWbHBvDsiA5DNC1xqrwjjnX5y6GSAL6WXI1+gIw700XHpltWePqPiPwhHMnlyN8eKd5og==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=o8VthCRXraIiNFbEqzH/+77YKs+ZZNodAJVfWtzplKE=;
+ b=LD0rcvOIfc8jB3/mUU4asLcwV0kxSsNl8HYolYNR4lyTJqsvscuK3ktb+Dr0L+BCmnY+4yEs2PK5YvngCPpYrcsQwGG84mP6PQMoo4yocSYaRQ+GFhde1A3WhIWok7qcEFP0NwNCJP4xzYbN3xEjSdZzG1T5YeLK4Shfwq1QOiLeNvR6HrmdDz9TOlkUGVkKmYU1rLMf/1B73pzfzpfoODvV0VxjJZ6Jaucqt8oN6lUkKXz37kPSD9FtwnyZ63WCKdURgdz5JXEZxhCfnu6iSTRayeqW3wPtsfTltZz6ald6dXYF+TSiLdc4sdqBdfZMuVOi7NB88BNgoGo93VzysA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=o8VthCRXraIiNFbEqzH/+77YKs+ZZNodAJVfWtzplKE=;
+ b=rvkKm/+wyv62OD2F4Ov6zGyuDlHrj30DjxOsQHiI5hoqHMytT96uJb0X4cxk3IrIJOYfVfh82hFA/rjnJ3sAVHLv+YpHhXKzYm4sIq/UG7tK7sFN91SLi+2+tFkCDFLBFuz3cLpNEXuF66m8WxSUaLN+ZZzAgesoH5AyhnOkSs8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <ac1bd263-e9b4-4bc6-a9be-649b075add46@amd.com>
+Date: Tue, 23 Jul 2024 09:13:05 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Jason Andryuk <jason.andryuk@amd.com>
+Subject: Re: [PATCH 2/6] tools/libxs: Rework xs_talkv() to take xsd_sockmsg
+ within the iovec
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel
+	<xen-devel@lists.xenproject.org>
+CC: Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross
+	<jgross@suse.com>
+References: <20240718164842.3650702-1-andrew.cooper3@citrix.com>
+ <20240718164842.3650702-3-andrew.cooper3@citrix.com>
+Content-Language: en-US
+In-Reply-To: <20240718164842.3650702-3-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|MN2PR12MB4061:EE_
+X-MS-Office365-Filtering-Correlation-Id: b63a424d-f871-43ca-a382-08dcab1c69da
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?VWh0eU91RjVRdUtCNlIvZUZxT0Iyc0xja3dhelZuT2RLTTNaV2FLb1hhU2VX?=
+ =?utf-8?B?SmVud09rSTZCd2UzRGltMkU2ZXlqaGI5NXhEeEVxZzFFQUJnRXJxS09ZS05l?=
+ =?utf-8?B?RUhuSGJGRXhZT1hPbnF4VmVKYTRBekZwMzFldzVTWU9Fc29jREZPQlk3eURn?=
+ =?utf-8?B?TjFJUmtROWVYYStaZWJhUEhyS2hxOEJLQzB5eG40TVE5ZE5KeGhRSlE5Y2Q5?=
+ =?utf-8?B?UUFZT3A4SUV2bmlmVkpXaGZqZVVzWllvR0p4OGduZ3FlWHZzUTJ3NCtWaWk0?=
+ =?utf-8?B?WktNbzNTKzZkUG1NUjkvUTBJNjhQWWU3N0s3TDQyZnh5NUoraEFyYTRqL09r?=
+ =?utf-8?B?MTJQMVlBNXF5T0FBY3BhWlZqSkFlS3FnSmgvNFA0YUl6VHk5eW9YdE93UkpT?=
+ =?utf-8?B?eWJQUXdVVXJjcExrUUZBOG0wUEVHcGtNSy9OZkpuNGNHRVJtNGtabnQ4czFx?=
+ =?utf-8?B?Tm5qRHZyVWlaR2tLb0tWc2JvbHNXYWZJSFhMeUtJbitCeDlaaUFSeHNhZEZj?=
+ =?utf-8?B?VlROUzVaZkRzbEpWUklEYVJCQ1ZxT1ZTOEM5UERYK3JuM3lGOW1kMlJkWGI2?=
+ =?utf-8?B?WVZoVHdEK2RCR1VTdFJxUzRpRWNmTWVYWU5xZUlwZVVkN3VoYjNibWMraTZO?=
+ =?utf-8?B?MVVvUHIxckF6WmtUd1ZPR3NEa2ZQTVZUbmIyVVl1aUdSZlhHaG4vcHRCNmlU?=
+ =?utf-8?B?MGVXOEtyellubE9KbCtGZ3ZySnlJOXdTN0FpUUlWYW5XeDJoK1NVcUROeXZo?=
+ =?utf-8?B?RkNPb3FNL0dFaTRiSVllMFZCK0k0OEcrRjgwdzR5NGluOG94MjFJZ2Y0ajVN?=
+ =?utf-8?B?bjBNT2FteWh0bUxYV0dNNURLNVo2SVJxYUtyYUFDVFRraVBVbFZrN05jRG5X?=
+ =?utf-8?B?WDJaVU1JZlVZUDQwNDYvRkM1Und0TGlaU3ZmQjZvUUtTUkNZM1NtUG8rNDhG?=
+ =?utf-8?B?Y0s0RzhPYnUvcGNRZHVkamZzNE93dXJiZjhkaDdCVlpNbXphVTVNQlgyRHdX?=
+ =?utf-8?B?U1psbHNIaHBTc2tiUm9GRWhsYy9pQVlFbjJIcmFJZTdKa0FodmlVVE9GZXZl?=
+ =?utf-8?B?RDFDTExmQ0JsSU03eVFFRHMvYnJydXByQ0J3NllHUFZHLzJCVi8wMmkzaW1F?=
+ =?utf-8?B?ODdZOXRmNjVEYUJuWmxsalkzNStiQWhjMWhYTDkyZDVpVE1GWkdWY0l5Visr?=
+ =?utf-8?B?bjRiL0V2WXRJYlBCSzVBVHFWbDFzWUlmMjJTVzFMdklZS1ZkenJuYisvUlVx?=
+ =?utf-8?B?bm9OZ0tvR2xqSDU1SGtram1hYTkxcnBDOVhrNHV3bElUTkZPeGdBSlNSWmcz?=
+ =?utf-8?B?RDF2Z2o5OEQrN0swcHdjQmxTOGtaTGc2NjZneUxXSG9ZdzB4cTBTSDloeWY4?=
+ =?utf-8?B?ekRUOHVvaWxYdjdqZHpySlhHSWw3UE9qQVRRSWRlNEVBazhRM2tiTWltUnRq?=
+ =?utf-8?B?N1dLOEMrWks1NE94SlpUSlIyRlZlekgxTFVDSGZvbEJwM25hZ1hKVlh1WU9V?=
+ =?utf-8?B?dXVXWXN2RjVZdE9nMlY5TFJ5UGhSS0xRNHY4TjU1L01lL214RncrSjBuaWFT?=
+ =?utf-8?B?MHh3cHA5YWNRTnlLNlJLK3BoVzk4RHhYaTMreTJsNFdqdlE1TWNVT3FJNGVH?=
+ =?utf-8?B?NjJTdW5JT1lEL2VtRTF6eDVUaXhmbk91dVNCLzVKUWVFMHQ0dkU2V2ZRN1g1?=
+ =?utf-8?B?UzhxcUlXU0M2UW5tdHNjaEZ3TkZPemNpU0xEc2NGR01EVkt6c09YaFo2NDJD?=
+ =?utf-8?B?YkYwLzBMU0dIcWdrYXdLaXVzWkx4NFBSSVJ5STI0TUhpdnVVUzJOTktDNldZ?=
+ =?utf-8?B?UjMxTU5LdjBvRnNHZ2NEUFhoYytyLy9uWkwwWnNuVXBGMEQvUWYySzNyOTBU?=
+ =?utf-8?B?YzRLSEZGVDU4eXJaZWsrZ1M2UWVDcUN1MTh0VTI3d0pqRzdoZFNBOVFoMVZ1?=
+ =?utf-8?Q?pUE+d3wpcwtXsu7d0gGYka80YwF1MH78?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2024 13:36:10.1419
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b63a424d-f871-43ca-a382-08dcab1c69da
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN3PEPF0000B06C.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4061
 
-On Mon, 2024-07-22 at 19:04 +0200, oleksii.kurochko@gmail.com wrote:
-> On Mon, 2024-07-22 at 17:25 +0200, Jan Beulich wrote:
-> > On 22.07.2024 16:36, Oleksii wrote:
-> > > On Mon, 2024-07-22 at 14:42 +0200, Jan Beulich wrote:
-> > > > On 12.07.2024 18:22, Oleksii Kurochko wrote:
-> > > > > --- a/xen/arch/riscv/include/asm/config.h
-> > > > > +++ b/xen/arch/riscv/include/asm/config.h
-> > > > > @@ -74,11 +74,20 @@
-> > > > > =C2=A0#error "unsupported RV_STAGE1_MODE"
-> > > > > =C2=A0#endif
-> > > > > =C2=A0
-> > > > > +#define XEN_SIZE=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 MB(2)
-> > > > > +#define XEN_VIRT_END=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (XEN_VIRT_START + XEN_SIZE)
-> > > > > +
-> > > > > +#define BOOT_FDT_VIRT_START=C2=A0=C2=A0=C2=A0=C2=A0 XEN_VIRT_END
-> > > > > +#define BOOT_FDT_VIRT_SIZE=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 MB(4)
-> > > > > +
-> > > > > =C2=A0#define DIRECTMAP_SLOT_END=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 50=
-9
-> > > > > =C2=A0#define DIRECTMAP_SLOT_START=C2=A0=C2=A0=C2=A0 200
-> > > > > =C2=A0#define DIRECTMAP_VIRT_START=C2=A0=C2=A0=C2=A0 SLOTN(DIRECT=
-MAP_SLOT_START)
-> > > > > =C2=A0#define DIRECTMAP_SIZE=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 (SLOTN(DIRECTMAP_SLOT_END) -
-> > > > > SLOTN(DIRECTMAP_SLOT_START))
-> > > > > =C2=A0
-> > > > > +#define FIXMAP_BASE=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 (BOOT_FDT_VIRT_START +
-> > > > > BOOT_FDT_VIRT_SIZE)
-> > > > > +#define FIXMAP_ADDR(n)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 (FIXMAP_BASE + (n) *
-> > > > > PAGE_SIZE)
-> > > >=20
-> > > > Why exactly do you insert this here, and not adjacent to
-> > > > BOOT_FDT_VIRT_*,
-> > > > which it actually is adjacent with?
-> > > I tried to follow alphabetical order.
-> >=20
-> > Oh, X before B (just making fun) ... Anyway, my take here is that
-> > sorting
-> > by address is going to be more helpful.
-> >=20
-> > > > > --- a/xen/arch/riscv/mm.c
-> > > > > +++ b/xen/arch/riscv/mm.c
-> > > > > @@ -49,6 +49,9 @@ stage1_pgtbl_root[PAGETABLE_ENTRIES];
-> > > > > =C2=A0pte_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
-> > > > > =C2=A0stage1_pgtbl_nonroot[PGTBL_INITIAL_COUNT *
-> > > > > PAGETABLE_ENTRIES];
-> > > > > =C2=A0
-> > > > > +pte_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
-> > > > > +xen_fixmap[PAGETABLE_ENTRIES];
-> > > >=20
-> > > > Any reason this cannot be static?
-> > > It will be used by pmap:
-> > > =C2=A0=C2=A0 static inline void arch_pmap_map(unsigned int slot, mfn_=
-t mfn)
-> > > =C2=A0=C2=A0 {
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pte_t *entry =3D &xen_fixmap[slo=
-t];
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pte_t pte;
-> > > =C2=A0=C2=A0=20
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ASSERT(!pte_is_valid(*entry));
-> > > =C2=A0=C2=A0=20
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pte =3D mfn_to_xen_entry(mfn, PA=
-GE_HYPERVISOR_RW);
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pte.pte |=3D PTE_LEAF_DEFAULT;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 write_pte(entry, pte);
-> > > =C2=A0=C2=A0 }
-> > > =C2=A0=C2=A0=20
-> > > =C2=A0=C2=A0 static inline void arch_pmap_unmap(unsigned int slot)
-> > > =C2=A0=C2=A0 {
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pte_t pte =3D {};
-> > > =C2=A0=C2=A0=20
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 write_pte(&xen_fixmap[slot], pte=
-);
-> > > =C2=A0=C2=A0 }
-> >=20
-> > Yet as asked there - shouldn't that be set_fixmap() and
-> > clear_fixmap()?
-> It should be, I'll rework that in the next patch version.
-It couldn't be set_fixmap() and clear_fixmap() as I am going to
-implement them using map_pages_to_xen() because:
-...
-    /*
-     * We cannot use set_fixmap() here. We use PMAP when the domain map
-     * page infrastructure is not yet initialized, so
-map_pages_to_xen() called
-     * by set_fixmap() needs to map pages on demand, which then calls
-pmap()
-     * again, resulting in a loop. Modify the PTEs directly instead.
-The same
-     * is true for pmap_unmap().
-     */
-    arch_pmap_map(slot, mfn);
-...
+On 2024-07-18 12:48, Andrew Cooper wrote:
+> We would like to writev() the whole outgoing message, which is hard given the
+> current need to prepend the locally-constructed xsd_sockmsg.
+> 
+> Instead, have the caller provide xsd_sockmsg in iovec[0].  This in turn drops
+> the t and type parameters from xs_talkv().
+> 
+> Note that xs_talkv() may alter the iovec structure.  This may happen when
+> writev() is really used under the covers, and it's preforable to having the
 
-~ Oleksii
+preferable
+
+> lower levels need to duplciate the iovec to edit it upon encountering a short
+
+duplicate
+
+> write.  xs_directory_part() is the only function impacted by this, and it's
+> easy to rearrange.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
