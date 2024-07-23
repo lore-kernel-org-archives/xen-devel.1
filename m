@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CFEC3DA70
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8286C3DA63
 	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 03:25:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.762546.1172708 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.762548.1172732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sW68o-0005ib-BA; Tue, 23 Jul 2024 03:24:42 +0000
+	id 1sW68r-0006NA-Qw; Tue, 23 Jul 2024 03:24:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 762546.1172708; Tue, 23 Jul 2024 03:24:42 +0000
+Received: by outflank-mailman (output) from mailman id 762548.1172732; Tue, 23 Jul 2024 03:24:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sW68o-0005hS-4n; Tue, 23 Jul 2024 03:24:42 +0000
-Received: by outflank-mailman (input) for mailman id 762546;
- Tue, 23 Jul 2024 03:24:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sW68r-0006N1-O1; Tue, 23 Jul 2024 03:24:45 +0000
+Received: by outflank-mailman (input) for mailman id 762548;
+ Tue, 23 Jul 2024 03:24:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xgPy=OX=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1sW68n-0005f5-Fr
- for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 03:24:41 +0000
+ id 1sW68p-0005rf-Kg
+ for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 03:24:43 +0000
 Received: from fhigh6-smtp.messagingengine.com
  (fhigh6-smtp.messagingengine.com [103.168.172.157])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 17732e67-48a3-11ef-8776-851b0ebba9a2;
- Tue, 23 Jul 2024 05:24:39 +0200 (CEST)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 09960114027C;
- Mon, 22 Jul 2024 23:24:38 -0400 (EDT)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 191bfba5-48a3-11ef-bbfe-fd08da9f4363;
+ Tue, 23 Jul 2024 05:24:41 +0200 (CEST)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id CCD2A11400E6;
+ Mon, 22 Jul 2024 23:24:40 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Mon, 22 Jul 2024 23:24:38 -0400
+ by compute3.internal (MEProxy); Mon, 22 Jul 2024 23:24:40 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 22 Jul 2024 23:24:35 -0400 (EDT)
+ 22 Jul 2024 23:24:39 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,35 +46,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 17732e67-48a3-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 191bfba5-48a3-11ef-bbfe-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1721705078; x=1721791478; bh=5mBbeJ3IgD
-	DqpZgnQ/L6S/O0FCGdtdLv+JP7rpu5cRQ=; b=vrqmjrav9JygAnUk/Smp9aPtN3
-	+Y4Isu6Oy6TEAaDSK8dtH+tighNDS9vKRmcDVKuJ3i+zgpDdS9j7/j1YsfzqmUbc
-	eKXfka44UGJ8Jeb5OxfZt/jqz4ZbdrlWRY2NK7jJbpsfVyeVu8mMIr+kgjP0fztk
-	fqenkX8GVg9Jcl0341NEL0I2HIG5GXX4DuRuy13wTbiO/Y4L+VVdTHOWH421CLGr
-	1mBtHBh3vYEgbSw/ZGrv7WfQL4eu/g7ByfzaqtYi7iMUOZB44gfVPVMRk1M/3Mei
-	oxat8QZS9G2R//2QmFpUKp7+8WXWjAND9P3HzPBe/HbrwkmTrwbSPxGx8YVQ==
+	:subject:to:to; s=fm2; t=1721705080; x=1721791480; bh=3q36D4bJYb
+	KeTNzDrlCHr7vVdpQaHyX3JUKiZcT8bno=; b=BlPtfE+aHRz3PvT0VWRZ/4780l
+	jEDEYofmrSxseCH+BbLdpS9DmDHbYCfKOVCZGWnmGmduMNJwkAfsCKZh5UEMBNgO
+	pmjWJcxjNVltXuLfd2rLmb8hqNPyNJDsRLWY/n6SRmyqarwl53V5fmyE48MVtbBh
+	NcKfGg1I+exUEp0uYAaMVx/uYHHgx7MZAFhnzbhBxrQFMA/WBlhMc9mz08wNJRvS
+	cgaGBPEkKx1C52/8T24dxEELjnEjkHdarygQ7ja5x7VkXa2oomYZvWyEi/Gx0aKb
+	Z/SFjYXdg2geN85lOPLybq4L7f92KgMb3bRLDZIZSStX3KPD+MCDV2aNTTuA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1721705078; x=
-	1721791478; bh=5mBbeJ3IgDDqpZgnQ/L6S/O0FCGdtdLv+JP7rpu5cRQ=; b=B
-	U8hV5yrhzpKs2+YbqSB3+/YKwg5zPuHeI7eKoNdgO8NMk4MSncpRAKn3IXofNIG9
-	Nd1DYw7jABwQKg5D/J1x35rTNJOTuBNMPwppS+IrYCdVZntORqE+uqmAI8wNSTOF
-	k1b1FBAaKW5AN8jv5yrxmWjtAx0PO6Zv1MMgsqxmxF9JrW/fhzRVUCDwHaORoZVp
-	IzFN/DJpJzhmtMxrQpvAP/PUQPiMVs3qDlkkkSuSGYulVdXZrTjquME3Wa+uQx3U
-	d/MKbBzyuqWNLlCeIxp4UVWVlQ8zDJKxaeTNDLiWzHOvTkuvo5H1SshfqTyoharr
-	MQvJWZTdMQbJEFqGyI6lg==
-X-ME-Sender: <xms:dSKfZmscrzgGQukhowVeyd6z95BQ4f4mxHTrWvHuMBvcrKNzwJN1eQ>
-    <xme:dSKfZrdXsbqfjbDI6s8k2-QrOTJ3BB6pL_bmeq4UvlnTaY1ENF3gpMLa9Ip0ZWOl3
-    BcFXrmNwJoIoA>
-X-ME-Received: <xmr:dSKfZhwbZVggYUoWrEErqGttoi9kCv3eLBQkuQOfOyJ0xFxLFjJqDNdpHhRRvoD3U81vfRbzJyHLvMVJBxWuYi955xf4AuOoOcUVe74L_1dIfh3c_lM>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1721705080; x=
+	1721791480; bh=3q36D4bJYbKeTNzDrlCHr7vVdpQaHyX3JUKiZcT8bno=; b=q
+	0Gp9QIUQbewwQP4XXKc/RvuvRKocaWN5M9ckuXuIF2rPbkryIwvsQvDv1bRK+QQJ
+	2QAYuHjMWI+3a/wmCHcnID9oXJGt7NHnsYkqyZv52GeSPc0SIK2M3vR+EwUctYLP
+	Ah1r0J7lYh6DZtshJJ/VN1A2NXleL7jY7haNemPwBaZthZQ2IF1SfQHH9VVzmnl4
+	aVu5kAjGGte1iPXk2jklIzi4uApSpO0s0+muLNaOsjb1cfQdIitOyqysV8bQe4mo
+	/agkTVBuMpuQsZXFNXhY1sgmiLY+OLS4enF5SZsul4gk4ibuVkM3MqdLFG7fVpEt
+	pHCnMJLEwXxB/hh3pj12A==
+X-ME-Sender: <xms:eCKfZqFOjdLh9-wLZ274INZqCaypc0PG3fNYVhJ7fiaSDD6qWkHJWQ>
+    <xme:eCKfZrU8Mf2bDOfaXWWgcxHXjXdWLHnuG76J4xmppI5nLjqCRrCOvrItDbFCp6QVV
+    2jdvgwkEBm23A>
+X-ME-Received: <xmr:eCKfZkLPve6qkKz2vsb5AqKPPSsGHlQyxMeHqo8ot2S34mzj9Wy_R_cHnGWmWOe-qMk2ge8wI_m_4J29IJsEAS3fZkOy5k6K9lTJJNFcDeb7KuTO9rA>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrheekgdejvdcutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
@@ -84,11 +84,11 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrheekgdejvdcutefuodetggdote
     udehgfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluh
     hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
     sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtoheptd
-X-ME-Proxy: <xmx:dSKfZhMfGwTzXwIEHzWwnGu1VYw1nCbeUgbQU3MHtkagEw0Sw9qC6Q>
-    <xmx:dSKfZm8RP3n5hHAK7M4W7HM2UHVs40w62t8j8cGYrL_vARfibqXJ8g>
-    <xmx:dSKfZpXCvh56SV6PKRi55dj5ivYJViEN4pEusxkXNWoNl5aa3bcF-g>
-    <xmx:dSKfZvdIBISc4i9lDwV33LNM2T1KX2FIwajWx62mY4-z-rEemHqRFA>
-    <xmx:diKfZtnTL8D101g0nJQoJvNFLz941Fh-u01Pn4vOFKsCOeJ_OcLOEgIn>
+X-ME-Proxy: <xmx:eCKfZkH3wcCDg-f4uJU5EVuGDrBHfUr6O6cngUqcqYacJJO35Jfhcg>
+    <xmx:eCKfZgVx6uB04gfcOjcN2t9tHqp3E_rygRuVLBXSTDhkb6L8_MO6gQ>
+    <xmx:eCKfZnM532wvuEOTBekh1hy1qjUYdXbV2D8zb3TvYgdThvql_Qzo6A>
+    <xmx:eCKfZn1ZSguLDYZd_D2KWhHinPCXk9moy8GZAr7TTqD75B1XRSXhYQ>
+    <xmx:eCKfZqeU1MUjp_B6Y7z2BENgQfb_YV1lSsszuGrftZYugZA2llX6RI1r>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,9 +97,9 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 1/3] xen/list: add LIST_HEAD_RO_AFTER_INIT
-Date: Tue, 23 Jul 2024 05:24:12 +0200
-Message-ID: <dec7790f13e9abfed6fad2d4bb3af0c38bcbd2fd.1721704980.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v6 3/3] drivers/char: Use sub-page ro API to make just xhci dbc cap RO
+Date: Tue, 23 Jul 2024 05:24:14 +0200
+Message-ID: <b1dadae26c6c9a585a938ebb3e0cda657cb4dfdf.1721704980.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <cover.66bd16d0134f9664ea3e0f4d56f7c127afc308c8.1721704980.git-series.marmarek@invisiblethingslab.com>
 References: <cover.66bd16d0134f9664ea3e0f4d56f7c127afc308c8.1721704980.git-series.marmarek@invisiblethingslab.com>
@@ -107,30 +107,83 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Similar to LIST_HEAD_READ_MOSTLY.
+Not the whole page, which may contain other registers too. The XHCI
+specification describes DbC as designed to be controlled by a different
+driver, but does not mandate placing registers on a separate page. In fact
+on Tiger Lake and newer (at least), this page do contain other registers
+that Linux tries to use. And with share=yes, a domU would use them too.
+Without this patch, PV dom0 would fail to initialize the controller,
+while HVM would be killed on EPT violation.
+
+With `share=yes`, this patch gives domU more access to the emulator
+(although a HVM with any emulated device already has plenty of it). This
+configuration is already documented as unsafe with untrusted guests and
+not security supported.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-New in v5
+Changes in v4:
+- restore mmio_ro_ranges in the fallback case
+- set XHCI_SHARE_NONE in the fallback case
+Changes in v3:
+- indentation fix
+- remove stale comment
+- fallback to pci_ro_device() if subpage_mmio_ro_add() fails
+- extend commit message
+Changes in v2:
+ - adjust for simplified subpage_mmio_ro_add() API
 ---
- xen/include/xen/list.h | 3 +++
- 1 file changed, 3 insertions(+)
+ xen/drivers/char/xhci-dbc.c | 36 ++++++++++++++++++++++--------------
+ 1 file changed, 22 insertions(+), 14 deletions(-)
 
-diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
-index 6506ac40893b..62169f46742e 100644
---- a/xen/include/xen/list.h
-+++ b/xen/include/xen/list.h
-@@ -42,6 +42,9 @@ struct list_head {
- #define LIST_HEAD_READ_MOSTLY(name) \
-     struct list_head __read_mostly name = LIST_HEAD_INIT(name)
+diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
+index 8e2037f1a5f7..c45e4b6825cc 100644
+--- a/xen/drivers/char/xhci-dbc.c
++++ b/xen/drivers/char/xhci-dbc.c
+@@ -1216,20 +1216,28 @@ static void __init cf_check dbc_uart_init_postirq(struct serial_port *port)
+         break;
+     }
+ #ifdef CONFIG_X86
+-    /*
+-     * This marks the whole page as R/O, which may include other registers
+-     * unrelated to DbC. Xen needs only DbC area protected, but it seems
+-     * Linux's XHCI driver (as of 5.18) works without writting to the whole
+-     * page, so keep it simple.
+-     */
+-    if ( rangeset_add_range(mmio_ro_ranges,
+-                PFN_DOWN((uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK) +
+-                         uart->dbc.xhc_dbc_offset),
+-                PFN_UP((uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK) +
+-                       uart->dbc.xhc_dbc_offset +
+-                sizeof(*uart->dbc.dbc_reg)) - 1) )
+-        printk(XENLOG_INFO
+-               "Error while adding MMIO range of device to mmio_ro_ranges\n");
++    if ( subpage_mmio_ro_add(
++             (uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK) +
++              uart->dbc.xhc_dbc_offset,
++             sizeof(*uart->dbc.dbc_reg)) )
++    {
++        printk(XENLOG_WARNING
++               "Error while marking MMIO range of XHCI console as R/O, "
++               "making the whole device R/O (share=no)\n");
++        uart->dbc.share = XHCI_SHARE_NONE;
++        if ( pci_ro_device(0, uart->dbc.sbdf.bus, uart->dbc.sbdf.devfn) )
++            printk(XENLOG_WARNING
++                   "Failed to mark read-only %pp used for XHCI console\n",
++                   &uart->dbc.sbdf);
++        if ( rangeset_add_range(mmio_ro_ranges,
++                 PFN_DOWN((uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK) +
++                          uart->dbc.xhc_dbc_offset),
++                 PFN_UP((uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK) +
++                        uart->dbc.xhc_dbc_offset +
++                        sizeof(*uart->dbc.dbc_reg)) - 1) )
++            printk(XENLOG_INFO
++                   "Error while adding MMIO range of device to mmio_ro_ranges\n");
++    }
+ #endif
+ }
  
-+#define LIST_HEAD_RO_AFTER_INIT(name) \
-+    struct list_head __ro_after_init name = LIST_HEAD_INIT(name)
-+
- static inline void INIT_LIST_HEAD(struct list_head *list)
- {
-     list->next = list;
 -- 
 git-series 0.9.1
 
