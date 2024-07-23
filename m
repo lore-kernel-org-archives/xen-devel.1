@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEA3FC3DA49
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 17:41:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.763460.1173730 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16691C3DA49
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jul 2024 18:23:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.763475.1173739 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWJW4-0002LL-UE; Tue, 23 Jul 2024 17:41:36 +0000
+	id 1sWKAW-00087c-5V; Tue, 23 Jul 2024 18:23:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 763460.1173730; Tue, 23 Jul 2024 17:41:36 +0000
+Received: by outflank-mailman (output) from mailman id 763475.1173739; Tue, 23 Jul 2024 18:23:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWJW4-0002LE-Re; Tue, 23 Jul 2024 17:41:36 +0000
-Received: by outflank-mailman (input) for mailman id 763460;
- Tue, 23 Jul 2024 17:41:35 +0000
+	id 1sWKAW-00087V-2m; Tue, 23 Jul 2024 18:23:24 +0000
+Received: by outflank-mailman (input) for mailman id 763475;
+ Tue, 23 Jul 2024 18:23:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=402b=OX=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sWJW3-0002L8-Lg
- for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 17:41:35 +0000
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [2a00:1450:4864:20::135])
+ <SRS0=m9Jy=OX=gmail.com=milandjokic1995@srs-se1.protection.inumbo.net>)
+ id 1sWKAU-00087P-Ur
+ for xen-devel@lists.xenproject.org; Tue, 23 Jul 2024 18:23:23 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cd2bcab7-491a-11ef-8776-851b0ebba9a2;
- Tue, 23 Jul 2024 19:41:33 +0200 (CEST)
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-52f04150796so3413607e87.3
- for <xen-devel@lists.xenproject.org>; Tue, 23 Jul 2024 10:41:33 -0700 (PDT)
-Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ id a38c1262-4920-11ef-8776-851b0ebba9a2;
+ Tue, 23 Jul 2024 20:23:20 +0200 (CEST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-368313809a4so74918f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 23 Jul 2024 11:23:20 -0700 (PDT)
+Received: from Xen-host.domain.local ([89.216.37.146])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7a3c785d96sm564232566b.9.2024.07.23.10.41.31
+ ffacd0b85a97d-36878695165sm12153993f8f.62.2024.07.23.11.23.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 10:41:31 -0700 (PDT)
+ Tue, 23 Jul 2024 11:23:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,268 +47,379 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd2bcab7-491a-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: a38c1262-4920-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1721756492; x=1722361292; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7so5yOkajtILhIB4eAzsw9yrXHKi0Sp/DtmGeke8xss=;
-        b=XJwLU5dXpdhHH8ehq90Fhhwqe/1aTqhHO2lt/2TQZyuOpaynboYQXJh4PS7Mu0v7of
-         BplJr5T3xkNhlGxfHpJgaYEY8SN6qrE39Nq3GTp6uLNQ1nzXGHi/EzERAYI+0Ucn2t+2
-         x3ivOdcIJ+vK/9cF0d16Jni9ovdjlEIvogQbk=
+        d=gmail.com; s=20230601; t=1721759000; x=1722363800; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rEKXJ3rnaM1OvcvTBXIXn3MAAErsEuSno4les8Onla4=;
+        b=gpv2fpQIy3/p4qq/hhbx4Gqsu9yXHA+yLAiRs/9nRDc1hCpiOPg51aDFTTT3Q6/QNb
+         0ffwVNXCh9Aoq48ErHKF4I18dl/tFqTYHWhCLN2yF8HfG46/xxypV8SpIx1kWSHGy72l
+         Mn3jPYSwPG8uwnWTeRIAV0HYfDEHmNR+1hFsj8ogVXlQYLprvDESswx6+IphysDor/fY
+         Y0Xvki9PZ7yfJRfOYMUMKTuvWORWqm6TA1ThXk8jtEFgzANL+5T22lLB1jKkrN5yTHsy
+         D2MGonY8aV0JardKJLgHkVn5zBqa7xx9D9GnMHq7rqA28vH/oM3Xc1RatxkaeHbzz97o
+         9vdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721756492; x=1722361292;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7so5yOkajtILhIB4eAzsw9yrXHKi0Sp/DtmGeke8xss=;
-        b=LM3pFiXsrN7YW1XWM274mwmRwTFaKhGjJWfOqA+5F3GPSsiw+ZIr1EnF5JpyX9pLQf
-         AdHF8XDQmseFs84gDELPV+j18HsQQx+vlGv8jJfjv+NmBwYgUESr5zuaGR+6QtjoMJfI
-         e4kaEzXMs8x9MmGJZcwYVO2Sp3wmhYgMshFShmuPxOl/DULgvWoeTzZc8DNkrqNbXh52
-         RW/4T8hZ2ppj57+oB/swDH5r4ofVhOdBw40mvWuvWAC0RDzpLBIGANT36gpSsUo5KVby
-         8NEBIlnR5dFStgiIp5ANgw1oSgG23pmWJjFsItoR1F85VYA9ELo6iOURqM4NTFV/uIdL
-         x2fg==
-X-Gm-Message-State: AOJu0Yw21Vs6dXvF7LsGT4ZcevSFgsCqns+FxsVqU5ya7CSniPn06aI7
-	PGdBtFXO3dkpH6tc1ncPDMKF3k6XQ1MS4QAuHKmHT/n8J5mWBWPEk7s1ZXL/QqeP4cY49gSk0Zb
-	c
-X-Google-Smtp-Source: AGHT+IG2JsrLKI+X4Ti5/Q8D2AFhgxUBjd2JXxXvATr9WTBvrEdVmEFifovhFX8NwdeALQGPewvIVA==
-X-Received: by 2002:a05:6512:2247:b0:52e:9d6c:4462 with SMTP id 2adb3069b0e04-52fc40455e1mr2895738e87.23.1721756492039;
-        Tue, 23 Jul 2024 10:41:32 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH] xen/printk: Avoid the use of L as a length modifier
-Date: Tue, 23 Jul 2024 18:41:29 +0100
-Message-Id: <20240723174129.67911-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.2
+        d=1e100.net; s=20230601; t=1721759000; x=1722363800;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rEKXJ3rnaM1OvcvTBXIXn3MAAErsEuSno4les8Onla4=;
+        b=b21j1ISVX4k2Jory/Rf7tlO+mN/C/fcm+Cez9t8m41LBNCpCPzVmXq1UCK9OMGki/O
+         kfrXCFvRXT78/sU/4L8pQ9U1CtOu4XNNr6UABAwmxn9LL+jAQ/TC9NVUnr6jpiIoWITc
+         UpTuPgVSlIfgvU9cnmo/Ro58/DM+bY/ctLFFDeVGXnt65dpfags3fYuKohyb7/gLok7X
+         XNHoFb0Sfui5RLocpn0PU5nj18OFTUehqCFKII09U67L4ZLaIgRADezW+mnDYIaZqXAW
+         3K8eAUeyEqHGWngle2FOZcbKAjH2ldSatd2eU7iI7nqMjLAvhaSMJIF1nOlMHcqiL/rP
+         NiGg==
+X-Gm-Message-State: AOJu0Yw3XgYDwSPg53j9twE9TvOHYpViOIOrn3BZNycKpnCDV4XSdGA/
+	0xamfWouoF/ILJ1AoHX/jBMgtttLSANZVdgZR/kXIimyKBpfaL0UBZ6jBuuW
+X-Google-Smtp-Source: AGHT+IF3Fo/93/hCrwGY9D48HZbsCXb4BnNPN4ndkhdnPMjtwU39QaZeKp+eQ777InDukQAZZAlSsg==
+X-Received: by 2002:a05:6000:1544:b0:366:df35:b64f with SMTP id ffacd0b85a97d-369e3e5a4f9mr2768780f8f.4.1721758999264;
+        Tue, 23 Jul 2024 11:23:19 -0700 (PDT)
+From: Milan Djokic <milandjokic1995@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: oleksii.kurochko@gmail.com,
+	Nikola Jelic <nikola.jelic@rt-rk.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Milan Djokic <milan.djokic@rt-rk.com>
+Subject: [PATCH v2] xen: PE/COFF image header
+Date: Tue, 23 Jul 2024 20:22:06 +0200
+Message-Id: <728bb10e944a7ec28a67c2e9e62910632eb2366b.1721758832.git.milandjokic1995@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <2b747d672eeadc1150d3b84f0303e1d288311133.1721391876.git.milan.djokic@rt-rk.com>
+References: <2b747d672eeadc1150d3b84f0303e1d288311133.1721391876.git.milan.djokic@rt-rk.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Coverity complains about it being invalid.  It turns out that it is a GCC-ism
-to treat ll and L equivalently.  C99 only permits L to mean long double.
+From: Nikola Jelic <nikola.jelic@rt-rk.com>
 
-Convert all uses of L in to alternatives, either l, ll or PRI.64 depending on
-the operand type.  This in turn removes some unnecessary casts which look to
-predate us having correct PRI* constants.
+Added PE/COFF generic image header which shall be used for EFI
+application format for x86/risc-v. x86 and risc-v source shall be adjusted
+to use this header in following commits. pe.h header is taken over from
+linux kernel with minor changes in terms of formatting and structure member comments.
+Also, COFF relocation and win cert structures are ommited, since these are not relevant for Xen.
 
-No functional change.
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 36e4fc57fc16
 
-Coverity-IDs: 1464224, 1464228, 1464248, 1464261, 1464272, 1464281, 1464287, 1464290, 1494437
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Nikola Jelic <nikola.jelic@rt-rk.com>
+Signed-off-by: Milan Djokic <milan.djokic@rt-rk.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-
-I'm disappointed at having to use %ll for __fix_to_virt() in apic.c and
-io_apic.c.  The expression ends up ULL because of the GB(64) in VMAP_VIRT_END,
-but can't really be changed without breaking 32bit builds of Xen.
-
-One option might be to turn __fix_to_virt() into a proper function, but
-there's a lot of that infrastructure which should be dedup'd and not left to
-each arch to copy.
+This header is split into a separate commit following discussion from https://lists.xenproject.org/archives/html/xen-devel/2024-07/msg00166.html
+Upcoming commit shall modify x86 implementation to use this header
+instead of internal structures.
 ---
- xen/arch/x86/apic.c            | 2 +-
- xen/arch/x86/cpu/intel.c       | 2 +-
- xen/arch/x86/cpu/mcheck/mce.c  | 9 ++++-----
- xen/arch/x86/cpu/mcheck/vmce.c | 2 +-
- xen/arch/x86/e820.c            | 6 +++---
- xen/arch/x86/hvm/vmx/vmcs.c    | 4 ++--
- xen/arch/x86/io_apic.c         | 2 +-
- xen/common/page_alloc.c        | 4 ++--
- xen/common/perfc.c             | 8 ++++----
- 9 files changed, 19 insertions(+), 20 deletions(-)
+Changes in V2:
+  - Fixed header formatting and some structure member names/comments
+  - Removed linux kernel specific macros (EFI stub version, linux pe
+magic)
+  - Removed duplicated values
+  - Removed COFF relocation and win cert structures which are not relevant for Xen
+---
+ xen/include/efi/pe.h | 291 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 291 insertions(+)
+ create mode 100644 xen/include/efi/pe.h
 
-diff --git a/xen/arch/x86/apic.c b/xen/arch/x86/apic.c
-index 6567af685a1b..406ecbaab53e 100644
---- a/xen/arch/x86/apic.c
-+++ b/xen/arch/x86/apic.c
-@@ -938,7 +938,7 @@ void __init init_apic_mappings(void)
-         apic_phys = mp_lapic_addr;
- 
-     set_fixmap_nocache(FIX_APIC_BASE, apic_phys);
--    apic_printk(APIC_VERBOSE, "mapped APIC to %08Lx (%08lx)\n", APIC_BASE,
-+    apic_printk(APIC_VERBOSE, "mapped APIC to %08llx (%08lx)\n", APIC_BASE,
-                 apic_phys);
- 
- __next:
-diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index af56e57bd8ab..29690843fa4a 100644
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -441,7 +441,7 @@ static void intel_log_freq(const struct cpuinfo_x86 *c)
-             unsigned long long val = ecx;
- 
-             val *= ebx;
--            printk("CPU%u: TSC: %u Hz * %u / %u = %Lu Hz\n",
-+            printk("CPU%u: TSC: %u Hz * %u / %u = %llu Hz\n",
-                    smp_processor_id(), ecx, ebx, eax, val / eax);
-         }
-         else if ( ecx | eax | ebx )
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index 32c1b2756b90..c2b5199f8bcc 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -1183,8 +1183,8 @@ static bool x86_mc_msrinject_verify(struct xen_mc_msrinject *mci)
- 
-         if ( reason != NULL )
-         {
--            printk("HV MSR INJECT ERROR: MSR %#Lx %s\n",
--                   (unsigned long long)mci->mcinj_msr[i].reg, reason);
-+            printk("HV MSR INJECT ERROR: MSR %#"PRIx64" %s\n",
-+                   mci->mcinj_msr[i].reg, reason);
-             errs++;
-         }
-     }
-@@ -1228,11 +1228,10 @@ static void cf_check x86_mc_msrinject(void *data)
- 
-     for ( i = 0, msr = &mci->mcinj_msr[0]; i < mci->mcinj_count; i++, msr++ )
-     {
--        printk("HV MSR INJECT (%s) target %u actual %u MSR %#Lx <-- %#Lx\n",
-+        printk("HV MSR INJECT (%s) target %u actual %u MSR %#"PRIx64" <-- %#"PRIx64"\n",
-                intpose ? "interpose" : "hardware",
-                mci->mcinj_cpunr, smp_processor_id(),
--               (unsigned long long)msr->reg,
--               (unsigned long long)msr->value);
-+               msr->reg, msr->value);
- 
-         if ( intpose )
-             intpose_add(mci->mcinj_cpunr, msr->reg, msr->value);
-diff --git a/xen/arch/x86/cpu/mcheck/vmce.c b/xen/arch/x86/cpu/mcheck/vmce.c
-index 5abdf4cb5fd5..dce67a3e1b2c 100644
---- a/xen/arch/x86/cpu/mcheck/vmce.c
-+++ b/xen/arch/x86/cpu/mcheck/vmce.c
-@@ -71,7 +71,7 @@ int vmce_restore_vcpu(struct vcpu *v, const struct hvm_vmce_vcpu *ctxt)
-     if ( ctxt->caps & ~guest_mcg_cap & ~MCG_CAP_COUNT & ~MCG_CTL_P )
-     {
-         printk(XENLOG_G_ERR
--               "%s restore: unsupported MCA capabilities %#"PRIx64" for %pv (supported: %#Lx)\n",
-+               "%s restore: unsupported MCA capabilities %#"PRIx64" for %pv (supported: %#llx)\n",
-                 is_hvm_vcpu(v) ? "HVM" : "PV", ctxt->caps,
-                 v, guest_mcg_cap & ~MCG_CAP_COUNT);
-         return -EINVAL;
-diff --git a/xen/arch/x86/e820.c b/xen/arch/x86/e820.c
-index 6a3ce7e0a07f..bfe373e03427 100644
---- a/xen/arch/x86/e820.c
-+++ b/xen/arch/x86/e820.c
-@@ -94,9 +94,9 @@ void __init print_e820_memory_map(const struct e820entry *map,
-     unsigned int i;
- 
-     for (i = 0; i < entries; i++) {
--        printk(" [%016Lx, %016Lx] ",
--               (unsigned long long)(map[i].addr),
--               (unsigned long long)(map[i].addr + map[i].size) - 1);
-+        printk(" [%016"PRIx64", %016"PRIx64"] ",
-+               map[i].addr,
-+               map[i].addr + map[i].size - 1);
-         switch (map[i].type) {
-         case E820_RAM:
-             printk("(usable)\n");
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 9b6dc51f36ab..28d91c3857d5 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -517,7 +517,7 @@ static int vmx_init_vmcs_config(bool bsp)
-         if ( (vmx_basic_msr_high & (VMX_BASIC_VMCS_SIZE_MASK >> 32)) >
-              PAGE_SIZE )
-         {
--            printk("VMX: CPU%d VMCS size is too big (%Lu bytes)\n",
-+            printk("VMX: CPU%d VMCS size is too big (%llu bytes)\n",
-                    smp_processor_id(),
-                    vmx_basic_msr_high & (VMX_BASIC_VMCS_SIZE_MASK >> 32));
-             return -EINVAL;
-@@ -564,7 +564,7 @@ static int vmx_init_vmcs_config(bool bsp)
-         if ( (vmx_basic_msr_high & (VMX_BASIC_VMCS_SIZE_MASK >> 32)) !=
-              ((vmx_basic_msr & VMX_BASIC_VMCS_SIZE_MASK) >> 32) )
-         {
--            printk("VMX: CPU%d unexpected VMCS size %Lu\n",
-+            printk("VMX: CPU%d unexpected VMCS size %llu\n",
-                    smp_processor_id(),
-                    vmx_basic_msr_high & (VMX_BASIC_VMCS_SIZE_MASK >> 32));
-             mismatch = 1;
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index d2a313c4ac72..ef076bfaf3f5 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -2597,7 +2597,7 @@ static void __init ioapic_init_mappings(void)
-         }
- 
-         set_fixmap_nocache(idx, ioapic_phys);
--        apic_printk(APIC_VERBOSE, "mapped IOAPIC to %08Lx (%08lx)\n",
-+        apic_printk(APIC_VERBOSE, "mapped IOAPIC to %08llx (%08lx)\n",
-                     __fix_to_virt(idx), ioapic_phys);
- 
-         if ( bad_ioapic_register(i) )
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 33c8c917d984..3ea5c1b38b4a 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -2395,7 +2395,7 @@ int assign_pages(
- 
-         if ( unlikely(nr > d->max_pages - tot_pages) )
-         {
--            gprintk(XENLOG_INFO, "Over-allocation for %pd: %Lu > %u\n",
-+            gprintk(XENLOG_INFO, "Over-allocation for %pd: %llu > %u\n",
-                     d, tot_pages + 0ULL + nr, d->max_pages);
-             rc = -E2BIG;
-             goto out;
-@@ -2407,7 +2407,7 @@ int assign_pages(
-         if ( unlikely(d->tot_pages + nr < nr) )
-         {
-             gprintk(XENLOG_INFO,
--                    "Excess allocation for %pd: %Lu (%u extra)\n",
-+                    "Excess allocation for %pd: %llu (%u extra)\n",
-                     d, d->tot_pages + 0ULL + nr, d->extra_pages);
-             if ( pg[0].count_info & PGC_extra )
-                 d->extra_pages -= nr;
-diff --git a/xen/common/perfc.c b/xen/common/perfc.c
-index 80480aa7766d..3efb3a4262ef 100644
---- a/xen/common/perfc.c
-+++ b/xen/common/perfc.c
-@@ -49,7 +49,7 @@ void cf_check perfc_printall(unsigned char key)
-                 sum += per_cpu(perfcounters, cpu)[j];
-             if ( perfc_info[i].type == TYPE_S_SINGLE ) 
-                 sum = (perfc_t) sum;
--            printk("TOTAL[%12Lu]", sum);
-+            printk("TOTAL[%12llu]", sum);
-             if ( sum )
-             {
-                 k = 0;
-@@ -74,7 +74,7 @@ void cf_check perfc_printall(unsigned char key)
-             }
-             if ( perfc_info[i].type == TYPE_S_ARRAY ) 
-                 sum = (perfc_t) sum;
--            printk("TOTAL[%12Lu]", sum);
-+            printk("TOTAL[%12llu]", sum);
-             if (sum)
-             {
- #ifdef CONFIG_PERF_ARRAYS
-@@ -87,7 +87,7 @@ void cf_check perfc_printall(unsigned char key)
-                         sum = (perfc_t) sum;
-                     if ( (k % 4) == 0 )
-                         printk("\n%16s", "");
--                    printk("  ARR%02u[%10Lu]", k, sum);
-+                    printk("  ARR%02u[%10llu]", k, sum);
-                 }
- #else
-                 k = 0;
-@@ -103,7 +103,7 @@ void cf_check perfc_printall(unsigned char key)
-                         sum = (perfc_t) sum;
-                     if ( k > 0 && (k % 4) == 0 )
-                         printk("\n%53s", "");
--                    printk("  CPU%02u[%10Lu]", cpu, sum);
-+                    printk("  CPU%02u[%10llu]", cpu, sum);
-                     ++k;
-                 }
- #endif
+diff --git a/xen/include/efi/pe.h b/xen/include/efi/pe.h
+new file mode 100644
+index 0000000000..64e047e88b
+--- /dev/null
++++ b/xen/include/efi/pe.h
+@@ -0,0 +1,291 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright 2011 Red Hat, Inc.
++ * All rights reserved.
++ *
++ * Author(s): Peter Jones <pjones@redhat.com>
++ */
++#ifndef EFI__PE_H
++#define EFI__PE_H
++
++#define MZ_MAGIC 0x5a4d /* "MZ" */
++
++#define PE_MAGIC              0x00004550 /* "PE\0\0" */
++#define PE_OPT_MAGIC_PE32     0x010b
++#define PE_OPT_MAGIC_PE32_ROM 0x0107
++#define PE_OPT_MAGIC_PE32PLUS 0x020b
++
++/* machine type */
++#define IMAGE_FILE_MACHINE_UNKNOWN     0x0000
++#define IMAGE_FILE_MACHINE_AM33        0x01d3
++#define IMAGE_FILE_MACHINE_AMD64       0x8664
++#define IMAGE_FILE_MACHINE_ARM         0x01c0
++#define IMAGE_FILE_MACHINE_ARMV7       0x01c4
++#define IMAGE_FILE_MACHINE_ARM64       0xaa64
++#define IMAGE_FILE_MACHINE_EBC         0x0ebc
++#define IMAGE_FILE_MACHINE_I386        0x014c
++#define IMAGE_FILE_MACHINE_IA64        0x0200
++#define IMAGE_FILE_MACHINE_M32R        0x9041
++#define IMAGE_FILE_MACHINE_MIPS16      0x0266
++#define IMAGE_FILE_MACHINE_MIPSFPU     0x0366
++#define IMAGE_FILE_MACHINE_MIPSFPU16   0x0466
++#define IMAGE_FILE_MACHINE_POWERPC     0x01f0
++#define IMAGE_FILE_MACHINE_POWERPCFP   0x01f1
++#define IMAGE_FILE_MACHINE_R4000       0x0166
++#define IMAGE_FILE_MACHINE_RISCV32     0x5032
++#define IMAGE_FILE_MACHINE_RISCV64     0x5064
++#define IMAGE_FILE_MACHINE_RISCV128    0x5128
++#define IMAGE_FILE_MACHINE_SH3         0x01a2
++#define IMAGE_FILE_MACHINE_SH3DSP      0x01a3
++#define IMAGE_FILE_MACHINE_SH3E        0x01a4
++#define IMAGE_FILE_MACHINE_SH4         0x01a6
++#define IMAGE_FILE_MACHINE_SH5         0x01a8
++#define IMAGE_FILE_MACHINE_THUMB       0x01c2
++#define IMAGE_FILE_MACHINE_WCEMIPSV2   0x0169
++#define IMAGE_FILE_MACHINE_LOONGARCH32 0x6232
++#define IMAGE_FILE_MACHINE_LOONGARCH64 0x6264
++
++/* flags */
++#define IMAGE_FILE_RELOCS_STRIPPED         0x0001
++#define IMAGE_FILE_EXECUTABLE_IMAGE        0x0002
++#define IMAGE_FILE_LINE_NUMS_STRIPPED      0x0004
++#define IMAGE_FILE_LOCAL_SYMS_STRIPPED     0x0008
++#define IMAGE_FILE_AGGRESSIVE_WS_TRIM      0x0010
++#define IMAGE_FILE_LARGE_ADDRESS_AWARE     0x0020
++#define IMAGE_FILE_16BIT_MACHINE           0x0040
++#define IMAGE_FILE_BYTES_REVERSED_LO       0x0080
++#define IMAGE_FILE_32BIT_MACHINE           0x0100
++#define IMAGE_FILE_DEBUG_STRIPPED          0x0200
++#define IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP 0x0400
++#define IMAGE_FILE_NET_RUN_FROM_SWAP       0x0800
++#define IMAGE_FILE_SYSTEM                  0x1000
++#define IMAGE_FILE_DLL                     0x2000
++#define IMAGE_FILE_UP_SYSTEM_ONLY          0x4000
++#define IMAGE_FILE_BYTES_REVERSED_HI       0x8000
++
++#define IMAGE_SUBSYSTEM_UNKNOWN                 0
++#define IMAGE_SUBSYSTEM_NATIVE                  1
++#define IMAGE_SUBSYSTEM_WINDOWS_GUI             2
++#define IMAGE_SUBSYSTEM_WINDOWS_CUI             3
++#define IMAGE_SUBSYSTEM_POSIX_CUI               7
++#define IMAGE_SUBSYSTEM_WINDOWS_CE_GUI          9
++#define IMAGE_SUBSYSTEM_EFI_APPLICATION         10
++#define IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER 11
++#define IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER      12
++#define IMAGE_SUBSYSTEM_EFI_ROM_IMAGE           13
++#define IMAGE_SUBSYSTEM_XBOX                    14
++
++#define IMAGE_DLL_CHARACTERISTICS_DYNAMIC_BASE         0x0040
++#define IMAGE_DLL_CHARACTERISTICS_FORCE_INTEGRITY      0x0080
++#define IMAGE_DLL_CHARACTERISTICS_NX_COMPAT            0x0100
++#define IMAGE_DLLCHARACTERISTICS_NO_ISOLATION          0x0200
++#define IMAGE_DLLCHARACTERISTICS_NO_SEH                0x0400
++#define IMAGE_DLLCHARACTERISTICS_NO_BIND               0x0800
++#define IMAGE_DLLCHARACTERISTICS_WDM_DRIVER            0x2000
++#define IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE 0x8000
++
++#define IMAGE_DLLCHARACTERISTICS_EX_CET_COMPAT         0x0001
++#define IMAGE_DLLCHARACTERISTICS_EX_FORWARD_CFI_COMPAT 0x0040
++
++/* they actually defined 0x00000000 as well, but I think we'll skip that one. */
++#define IMAGE_SCN_RESERVED_0             0x00000001
++#define IMAGE_SCN_RESERVED_1             0x00000002
++#define IMAGE_SCN_RESERVED_2             0x00000004
++#define IMAGE_SCN_TYPE_NO_PAD            0x00000008 /* don't pad - obsolete */
++#define IMAGE_SCN_RESERVED_3             0x00000010
++#define IMAGE_SCN_CNT_CODE               0x00000020 /* .text */
++#define IMAGE_SCN_CNT_INITIALIZED_DATA   0x00000040 /* .data */
++#define IMAGE_SCN_CNT_UNINITIALIZED_DATA 0x00000080 /* .bss */
++#define IMAGE_SCN_LNK_OTHER              0x00000100 /* reserved */
++#define IMAGE_SCN_LNK_INFO               0x00000200 /* .drectve comments */
++#define IMAGE_SCN_RESERVED_4             0x00000400
++#define IMAGE_SCN_LNK_REMOVE             0x00000800 /* .o only - scn to be rm'd*/
++#define IMAGE_SCN_LNK_COMDAT             0x00001000 /* .o only - COMDAT data */
++#define IMAGE_SCN_RESERVED_5             0x00002000 /* spec omits this */
++#define IMAGE_SCN_RESERVED_6             0x00004000 /* spec omits this */
++#define IMAGE_SCN_GPREL                  0x00008000 /* global pointer referenced data */
++/* spec lists 0x20000 twice, I suspect they meant 0x10000 for one of them */
++#define IMAGE_SCN_MEM_PURGEABLE 0x00010000 /* reserved for "future" use */
++#define IMAGE_SCN_16BIT         0x00020000 /* reserved for "future" use */
++#define IMAGE_SCN_LOCKED        0x00040000 /* reserved for "future" use */
++#define IMAGE_SCN_PRELOAD       0x00080000 /* reserved for "future" use */
++/* and here they just stuck a 1-nibble integer in the middle of a bitfield */
++#define IMAGE_SCN_ALIGN_1BYTES    0x00100000 /* it does what it says on the box */
++#define IMAGE_SCN_ALIGN_2BYTES    0x00200000
++#define IMAGE_SCN_ALIGN_4BYTES    0x00300000
++#define IMAGE_SCN_ALIGN_8BYTES    0x00400000
++#define IMAGE_SCN_ALIGN_16BYTES   0x00500000
++#define IMAGE_SCN_ALIGN_32BYTES   0x00600000
++#define IMAGE_SCN_ALIGN_64BYTES   0x00700000
++#define IMAGE_SCN_ALIGN_128BYTES  0x00800000
++#define IMAGE_SCN_ALIGN_256BYTES  0x00900000
++#define IMAGE_SCN_ALIGN_512BYTES  0x00a00000
++#define IMAGE_SCN_ALIGN_1024BYTES 0x00b00000
++#define IMAGE_SCN_ALIGN_2048BYTES 0x00c00000
++#define IMAGE_SCN_ALIGN_4096BYTES 0x00d00000
++#define IMAGE_SCN_ALIGN_8192BYTES 0x00e00000
++#define IMAGE_SCN_LNK_NRELOC_OVFL 0x01000000 /* extended relocations */
++#define IMAGE_SCN_MEM_DISCARDABLE 0x02000000 /* scn can be discarded */
++#define IMAGE_SCN_MEM_NOT_CACHED  0x04000000 /* cannot be cached */
++#define IMAGE_SCN_MEM_NOT_PAGED   0x08000000 /* not pageable */
++#define IMAGE_SCN_MEM_SHARED      0x10000000 /* can be shared */
++#define IMAGE_SCN_MEM_EXECUTE     0x20000000 /* can be executed as code */
++#define IMAGE_SCN_MEM_READ        0x40000000 /* readable */
++#define IMAGE_SCN_MEM_WRITE       0x80000000 /* writeable */
++
++#define IMAGE_DEBUG_TYPE_CODEVIEW              2
++#define IMAGE_DEBUG_TYPE_EX_DLLCHARACTERISTICS 20
++
++#ifndef __ASSEMBLY__
++
++struct mz_hdr {
++    uint16_t magic;              /* MZ_MAGIC */
++    uint16_t lbsize;             /* size of last used block */
++    uint16_t blocks;             /* pages in file, 0x3 */
++    uint16_t relocs;             /* relocations */
++    uint16_t hdrsize;            /* header size in "paragraphs" */
++    uint16_t min_extra_pps;      /* .bss */
++    uint16_t max_extra_pps;      /* runtime limit for the arena size */
++    uint16_t ss;                 /* relative stack segment */
++    uint16_t sp;                 /* initial %sp register */
++    uint16_t checksum;           /* word checksum */
++    uint16_t ip;                 /* initial %ip register */
++    uint16_t cs;                 /* initial %cs relative to load segment */
++    uint16_t reloc_table_offset; /* offset of the first relocation */
++    uint16_t overlay_num;        /* overlay number.  set to 0. */
++    uint16_t reserved0[4];       /* reserved */
++    uint16_t oem_id;             /* oem identifier */
++    uint16_t oem_info;           /* oem specific */
++    uint16_t reserved1[10];      /* reserved */
++    uint32_t peaddr;             /* file offset of PE header */
++    char     message[];          /* message to print */
++};
++
++struct mz_reloc {
++    uint16_t offset;
++    uint16_t segment;
++};
++
++struct pe_hdr {
++    uint32_t magic;        /* PE magic */
++    uint16_t machine;      /* machine type */
++    uint16_t sections;     /* number of sections */
++    uint32_t timestamp;    /* time_t */
++    uint32_t symbol_table; /* symbol table offset */
++    uint32_t symbols;      /* number of symbols */
++    uint16_t opt_hdr_size; /* size of optional header */
++    uint16_t flags;        /* flags */
++};
++
++/*
++ * the fact that pe32 isn't padded where pe32+ is 64-bit means union won't
++ * work right.
++ */
++struct pe32_opt_hdr {
++    /* "standard" header */
++    uint16_t magic;       /* file type */
++    uint8_t  ld_major;    /* linker major version */
++    uint8_t  ld_minor;    /* linker minor version */
++    uint32_t text_size;   /* size of text section(s) */
++    uint32_t data_size;   /* size of data section(s) */
++    uint32_t bss_size;    /* size of bss section(s) */
++    uint32_t entry_point; /* file offset of entry point */
++    uint32_t code_base;   /* relative code addr in ram */
++    uint32_t data_base;   /* relative data addr in ram */
++    /* "windows" header */
++    uint32_t image_base;     /* preferred load address */
++    uint32_t section_align;  /* alignment in bytes */
++    uint32_t file_align;     /* file alignment in bytes */
++    uint16_t os_major;       /* major OS version */
++    uint16_t os_minor;       /* minor OS version */
++    uint16_t image_major;    /* major image version */
++    uint16_t image_minor;    /* minor image version */
++    uint16_t subsys_major;   /* major subsystem version */
++    uint16_t subsys_minor;   /* minor subsystem version */
++    uint32_t win32_version;  /* reserved, must be 0 */
++    uint32_t image_size;     /* image size */
++    uint32_t header_size;    /* header size rounded up to file_align */
++    uint32_t csum;           /* checksum */
++    uint16_t subsys;         /* subsystem */
++    uint16_t dll_flags;      /* more flags! */
++    uint32_t stack_size_req; /* amt of stack requested */
++    uint32_t stack_size;     /* amt of stack required */
++    uint32_t heap_size_req;  /* amt of heap requested */
++    uint32_t heap_size;      /* amt of heap required */
++    uint32_t loader_flags;   /* reserved, must be 0 */
++    uint32_t data_dirs;      /* number of data dir entries */
++};
++
++struct pe32plus_opt_hdr {
++    uint16_t magic;       /* file type */
++    uint8_t  ld_major;    /* linker major version */
++    uint8_t  ld_minor;    /* linker minor version */
++    uint32_t text_size;   /* size of text section(s) */
++    uint32_t data_size;   /* size of data section(s) */
++    uint32_t bss_size;    /* size of bss section(s) */
++    uint32_t entry_point; /* file offset of entry point */
++    uint32_t code_base;   /* relative code addr in ram */
++    /* "windows" header */
++    uint64_t image_base;     /* preferred load address */
++    uint32_t section_align;  /* alignment in bytes */
++    uint32_t file_align;     /* file alignment in bytes */
++    uint16_t os_major;       /* major OS version */
++    uint16_t os_minor;       /* minor OS version */
++    uint16_t image_major;    /* major image version */
++    uint16_t image_minor;    /* minor image version */
++    uint16_t subsys_major;   /* major subsystem version */
++    uint16_t subsys_minor;   /* minor subsystem version */
++    uint32_t win32_version;  /* reserved, must be 0 */
++    uint32_t image_size;     /* image size */
++    uint32_t header_size;    /* header size rounded up to file_align */
++    uint32_t csum;           /* checksum */
++    uint16_t subsys;         /* subsystem */
++    uint16_t dll_flags;      /* more flags! */
++    uint64_t stack_size_req; /* amt of stack requested */
++    uint64_t stack_size;     /* amt of stack required */
++    uint64_t heap_size_req;  /* amt of heap requested */
++    uint64_t heap_size;      /* amt of heap required */
++    uint32_t loader_flags;   /* reserved, must be 0 */
++    uint32_t data_dirs;      /* number of data dir entries */
++};
++
++struct data_dirent {
++    uint32_t rva;            /* relative to load address */
++    uint32_t size;
++};
++
++struct data_directory {
++    struct data_dirent exports;          /* .edata */
++    struct data_dirent imports;          /* .idata */
++    struct data_dirent resources;        /* .rsrc */
++    struct data_dirent exceptions;       /* .pdata */
++    struct data_dirent certs;            /* certs */
++    struct data_dirent base_relocations; /* .reloc */
++    struct data_dirent debug;            /* .debug */
++    struct data_dirent arch;             /* reservered */
++    struct data_dirent global_ptr;       /* global pointer reg. Size=0 */
++    struct data_dirent tls;              /* .tls */
++    struct data_dirent load_config;      /* load configuration structure */
++    struct data_dirent bound_imports;    /* no idea */
++    struct data_dirent import_addrs;     /* import address table */
++    struct data_dirent delay_imports;    /* delay-load import table */
++    struct data_dirent clr_runtime_hdr;  /* .cor (object only) */
++    struct data_dirent reserved;
++};
++
++struct section_header {
++    char     name[8];         /* name or string tbl offset */
++    uint32_t virtual_size;    /* size of loaded section in ram */
++    uint32_t rva;             /* relative virtual address */
++    uint32_t raw_data_size;   /* size of the section */
++    uint32_t data_addr;       /* file pointer to first page of sec */
++    uint32_t relocs;          /* file pointer to relocation entries */
++    uint32_t line_numbers;    /* line numbers */
++    uint16_t num_relocs;      /* number of relocations */
++    uint16_t num_lin_numbers; /* COFF line count */
++    uint32_t flags;
++};
++
++#endif /* __ASSEMBLY__ */
++
++#endif /* EFI__PE_H */
 -- 
-2.39.2
+2.25.1
 
 
