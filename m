@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4598CC3DA61
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A34DC49EA1
 	for <xen-devel@archiver.kernel.org>; Wed, 24 Jul 2024 15:31:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.764287.1174697 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.764283.1174653 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWdxi-0006aZ-Ro; Wed, 24 Jul 2024 15:31:30 +0000
+	id 1sWdxf-0005SB-Gx; Wed, 24 Jul 2024 15:31:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 764287.1174697; Wed, 24 Jul 2024 15:31:30 +0000
+Received: by outflank-mailman (output) from mailman id 764283.1174653; Wed, 24 Jul 2024 15:31:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWdxi-0006aS-Mp; Wed, 24 Jul 2024 15:31:30 +0000
-Received: by outflank-mailman (input) for mailman id 764287;
- Wed, 24 Jul 2024 15:31:29 +0000
+	id 1sWdxf-0005RR-9Q; Wed, 24 Jul 2024 15:31:27 +0000
+Received: by outflank-mailman (input) for mailman id 764283;
+ Wed, 24 Jul 2024 15:31:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fJNX=OY=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sWdxg-0005Od-Vc
- for xen-devel@lists.xenproject.org; Wed, 24 Jul 2024 15:31:28 +0000
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [2a00:1450:4864:20::22b])
+ id 1sWdxd-0005Od-VT
+ for xen-devel@lists.xenproject.org; Wed, 24 Jul 2024 15:31:25 +0000
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [2a00:1450:4864:20::233])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ca1b5c54-49d1-11ef-8776-851b0ebba9a2;
- Wed, 24 Jul 2024 17:31:26 +0200 (CEST)
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ee910d6a9eso10077391fa.1
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jul 2024 08:31:26 -0700 (PDT)
+ id c892aca8-49d1-11ef-8776-851b0ebba9a2;
+ Wed, 24 Jul 2024 17:31:23 +0200 (CEST)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2ee910d6a9eso10076811fa.1
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jul 2024 08:31:23 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2ef26f1bc4asm14240491fa.40.2024.07.24.08.31.24
+ 38308e7fff4ca-2ef26f1bc4asm14240491fa.40.2024.07.24.08.31.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 08:31:24 -0700 (PDT)
+ Wed, 24 Jul 2024 08:31:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,100 +46,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca1b5c54-49d1-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: c892aca8-49d1-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721835085; x=1722439885; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1721835083; x=1722439883; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4O/hwQwHF6rfJLVATnZjtAz9ttGqfT93bsxm/gvlyso=;
-        b=Fx02EhSWbV36Y2XPEQJhk4I3PD1/abDRG4Axwf3C9J3R/UkDK8tM/L+K3sUM/qJnoj
-         2cYjw9B0lFsfi6HHaSccH8iJPwnHGFfInCHQjXcV6QECpZcCXeOC6Yu79HiUEU/6V0zz
-         InFMCYbtJo8u9E1MjZ6BYIXxZ9CxbEhDuZlj18yxZowyrvUzuUBWzVR6jWBVINSCa6jM
-         ORjmyMccpUlUmVMFtOQOZQJm2wNE/QwtCcWr+z8UseqSSXNuSYkte8/K6kelchcMIAED
-         eWOAht0WGh0PJ0N2mY2hMfj+vRB3GH75JIz8B8ZPSiUdIa85hyxt+kTK1QZYCNriU10U
-         ecww==
+        bh=5G2pjQd0Lv6vwExyaSIrvv5vmUPPgawgWplARMvkx+E=;
+        b=Mrsda4eaC9nBeobRf4UuXBCtazwOdLvRunCaoKrFLrrRil8deqV/VOHXtib2IjCNxq
+         Io8YYc/gql/q1LD/E0nBK9gkyJiQ1uo05gPdXrpsFJiqe/hsqtwQCnJfPYqhth7ZjCDR
+         6jpBkpQTTpcivWE9JiP639wAWg4UkGmKGrX3DgNLQ1baoEWdnd55Bb4T0cKJANnIOPyk
+         efSv49lg4GTJLIP1kqYdSFqEE1xtgQA0kV5oSTr1kV6EP204iphZEnnk/bZUjc70LNQs
+         lLJg4f2ucqlHXCUpJFh/kgJNLukecDNokMpQCwL/Wsq7aqbZvPURKSijLVs4jTzD1NAY
+         1sYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721835085; x=1722439885;
+        d=1e100.net; s=20230601; t=1721835083; x=1722439883;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4O/hwQwHF6rfJLVATnZjtAz9ttGqfT93bsxm/gvlyso=;
-        b=f99J9Kf15C1th2Qn3XXy0rtTCxAWAPYcCD6B3WyjnTQqlhbdAp6bUppC8J3goWHNWp
-         BtBlIRV9e5UItRUZ5rtVZ7d0/S1CHFZkyKk/UU3fSl4MeT2DN0IEnIYr4qOFmodyqT6q
-         ZbgQPJI5bneRzMp3zMX+1diU3jEZ3YFZ/mRB547yuqjKSNow2Lo1PzE12yhu9dJoQqQJ
-         2/++dH0GnL/RmMnAtiOBO/Lhb+RdygL4FXWmoZYw/8krYtHYc8Js1lRMJPWLmr+xA1VX
-         t7tCNUj47xzUkaORzIeR0j9KZsvi5AbBmGY8goUq2TdOCRxTi+9XLzt6HLb9SwJ7l6kd
-         tz8w==
-X-Gm-Message-State: AOJu0YyHQZ4ecA450fmPIePkzd6G5ZqePwoESKD8GAnfMS1quueliCfp
-	x8SUNLMzPa9fCDbk+yJTPus49+FpfsuPbm3+VKJ8y76J/QKjO4wXuAbNrRxN
-X-Google-Smtp-Source: AGHT+IFwW9NRyjYW7BQrQYvv6ZlUZAHMK5dZdh4otNlSjFLdBd76AEtDTO4J0u1G65gJH33NGBAHAg==
-X-Received: by 2002:a2e:a4cd:0:b0:2ee:7c35:d892 with SMTP id 38308e7fff4ca-2f032d43da6mr6452101fa.17.1721835085036;
-        Wed, 24 Jul 2024 08:31:25 -0700 (PDT)
+        bh=5G2pjQd0Lv6vwExyaSIrvv5vmUPPgawgWplARMvkx+E=;
+        b=bfif6kH84Yfz09kKanwZWERD5fSoz1GKCYuPNWWQp5bkDWHi/1LEedRR9g+OjWcv2R
+         c7KurY01Zboxs21KEU0ZFinmTNsj2qemqklnXxuAhKbSXkCB1Ni9a5VYWeooDBRallLg
+         9apye8aeSZcMrt8YAMO279cXJ8qFgJOzFx1dMOsgE9KMQH1K8QSzOL3/q8ZKoDENgxcU
+         xjIEhXRl0+ywr4GP99Ggapok5fdu8TiNWxYJtWl211+Xch7+C2UqRBuKzyBn89fuHMI8
+         lFBWV8zAi6lME/N4nm19XcByTfZofMDTs5K22tWot713xnemXu0SWhHvzOUNEVhAL7WV
+         Gs3A==
+X-Gm-Message-State: AOJu0YxNmbKvpb/0y9ZcxNAXufGR3wEAH8BTJRlaAQNNHAmL5X5BkCt3
+	np2Cr8FiS0e1keckOrKPNQs1qzcKd7uHiLtYw3r6s5Kup8IfBTPRavJMGuk8
+X-Google-Smtp-Source: AGHT+IEUnSTWoqw7sceknY8fvoknuG0Nuu+QDZ2ocZ66OWkjz85ttdEXvrTQKmznCSQhtObHHduKxw==
+X-Received: by 2002:a2e:b618:0:b0:2ee:daf3:5d30 with SMTP id 38308e7fff4ca-2f03a4f64a2mr154841fa.0.1721835082374;
+        Wed, 24 Jul 2024 08:31:22 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v11 5/5] xen/riscv: test basic exception handling stuff
-Date: Wed, 24 Jul 2024 17:31:19 +0200
-Message-ID: <c407999ca7a7fb2772cfa8ea4b9b312cf4366c4d.1721731887.git.oleksii.kurochko@gmail.com>
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v11 1/5] xen/riscv: use printk() instead of early_printk()
+Date: Wed, 24 Jul 2024 17:31:15 +0200
+Message-ID: <f80a93ee72a5887a9ba259db61e4571379315f6f.1721731887.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <cover.1721731887.git.oleksii.kurochko@gmail.com>
 References: <cover.1721731887.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduces testing of some macros from <xen/bug.h>.
+As common code is available it is better to use printk() instead
+of early_printk().
 
-Also wraps this testing into SELF_TESTS config to not produce
-a noise in the log related to functionality testing ( in the
-current case, it is macros from xen/bug.h ) when CONFIG_SELF_TESTS
-is disabled.
+Also the printing of "Hello from RISC-V world" is dropped as
+it is useless and "All set up is enough".
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/riscv/setup.c | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+Changes in V11:
+ - Nothing changed. Only rebase.
+---
+Changes in V10:
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V9:
+ - new patch
+---
+ xen/arch/riscv/setup.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index a6a29a1508..4defad68f4 100644
+index 8bb5bdb2ae..e3cb0866d5 100644
 --- a/xen/arch/riscv/setup.c
 +++ b/xen/arch/riscv/setup.c
-@@ -19,6 +19,22 @@ void arch_get_xen_caps(xen_capabilities_info_t *info)
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-     __aligned(STACK_SIZE);
- 
-+#ifdef CONFIG_SELF_TESTS
-+static void test_run_in_exception(const struct cpu_user_regs *regs)
-+{
-+    printk("If you see this message, ");
-+    printk("run_in_exception_handler is most likely working\n");
-+}
-+
-+static void test_macros_from_bug_h(void)
-+{
-+    run_in_exception_handler(test_run_in_exception);
-+    WARN();
-+    printk("If you see this message, ");
-+    printk("WARN is most likely working\n");
-+}
-+#endif
-+
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
+@@ -23,9 +23,7 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
  {
-@@ -26,6 +42,10 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+     remove_identity_mapping();
  
-     trap_init();
- 
-+#ifdef CONFIG_SELF_TESTS
-+    test_macros_from_bug_h();
-+#endif
-+
-     printk("All set up\n");
+-    early_printk("Hello from C env\n");
+-
+-    early_printk("All set up\n");
++    printk("All set up\n");
  
      for ( ;; )
+         asm volatile ("wfi");
 -- 
 2.45.2
 
