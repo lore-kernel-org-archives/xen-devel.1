@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1780C52CD8
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Jul 2024 08:28:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.764815.1175363 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA964C3DA5D
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Jul 2024 08:37:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.764853.1175413 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWtpJ-0006gH-Ji; Thu, 25 Jul 2024 08:27:53 +0000
+	id 1sWtyk-0002Wf-V3; Thu, 25 Jul 2024 08:37:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 764815.1175363; Thu, 25 Jul 2024 08:27:53 +0000
+Received: by outflank-mailman (output) from mailman id 764853.1175413; Thu, 25 Jul 2024 08:37:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sWtpJ-0006gA-Gz; Thu, 25 Jul 2024 08:27:53 +0000
-Received: by outflank-mailman (input) for mailman id 764815;
- Thu, 25 Jul 2024 08:27:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=D+J6=OZ=cloud.com=fouad.hilly@srs-se1.protection.inumbo.net>)
- id 1sWtpI-0006fy-CJ
- for xen-devel@lists.xenproject.org; Thu, 25 Jul 2024 08:27:52 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c8363221-4a5f-11ef-bbff-fd08da9f4363;
- Thu, 25 Jul 2024 10:27:51 +0200 (CEST)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5a3458bf858so775034a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 25 Jul 2024 01:27:51 -0700 (PDT)
-Received: from fhilly.. ([185.25.67.249]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5ac63590e7esm558590a12.36.2024.07.25.01.27.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 01:27:50 -0700 (PDT)
+	id 1sWtyk-0002WY-SM; Thu, 25 Jul 2024 08:37:38 +0000
+Received: by outflank-mailman (input) for mailman id 764853;
+ Thu, 25 Jul 2024 08:37:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=/1nn=OZ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sWtyj-0002Qu-Nm
+ for xen-devel@lists.xenproject.org; Thu, 25 Jul 2024 08:37:37 +0000
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [2a00:1450:4864:20::633])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 24b87bb2-4a61-11ef-8776-851b0ebba9a2;
+ Thu, 25 Jul 2024 10:37:36 +0200 (CEST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a7a9cf7d3f3so33244266b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 25 Jul 2024 01:37:36 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7acad4160bsm47245766b.98.2024.07.25.01.37.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Jul 2024 01:37:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,79 +47,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8363221-4a5f-11ef-bbff-fd08da9f4363
+X-Inumbo-ID: 24b87bb2-4a61-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1721896071; x=1722500871; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=m6yyfqqYk1ygVqha37CcbDMngpYzNkFAOOOxh/xLphk=;
-        b=jvr0QO3Cmtt1hCTiaacb1OUjSwZzUmN9YotPOMB0UTYnioU6XC+wI9Th/HWql1pnLI
-         5Lfn9ZdD5JpGnXsH0AYUfU8Pfk/84plKWf0CiDyBhkFBoit7EZHT1MkYSzmIMLAfht6K
-         ssAdPltFVJFmcm8er6E0bUoqOe0cwZL0NXXUQ=
+        d=suse.com; s=google; t=1721896656; x=1722501456; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=zaIrx7YHUpypK+qpBz60y/7w1fXeUC/TztAWP1g1ecM=;
+        b=Fn7/9aY5Py7BTe/sDx1Es67HgcBnUynTOCJ3XpbU8KWBxI4xmTIJYb5VoRXAUriXsY
+         GipOTN3nyRxhDA8o5AYLEqW9RC/fPZcI1k7q9huwE8ZxnFBIc5ADADt/o+bWTTqjj+sg
+         5NL5ug12YRPOPKBnoQYhWqVgsBy2rjciCepmCnfrmVjacOvhjSqXS5rnrdQ5bp06xvMh
+         /QaHTRVMAjYuWnwMc6lNr0OAi9SYHtRCjW8QOisYNWduJ+CIeZINmtkmehgpGOxE7/ef
+         PtUlXxvx/cOkFePpwiQ2Ypa/SCsS94kdDRHuoJX0lYWJ3PTjkv/QLj8TyBt8uT0kvnjJ
+         HmJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721896071; x=1722500871;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=m6yyfqqYk1ygVqha37CcbDMngpYzNkFAOOOxh/xLphk=;
-        b=jc7DuGcJkT6o93zGNDY59fI9oXmcck8bDkIvJSld8HN/STQzyspmOHUwo4pxObCgKm
-         RLqU4wRoB4LaI8S/fCP/V75fjw1ocknwMF7VNx9YFBjz8PapmhZAW+qjVcHE1PbFmS1W
-         aUqQwu4jJrWaD1hrbHuQIA4tyFQlT6LctjMQsBn0BfSvafSIYo1nzXBizFAILDlkA+bA
-         XZsm4VxdHCGRj+Wu7iTucYI+F1QE2bFVjHdkxb0Jtl4cDls05Q97PZg304v5zh2waydM
-         nep4lOyb1geZuW6Tc+mkJrma7p0Eh8AdwPwbTRqxAx7C6M6VElZ6RotuDPvsc+zeOrZk
-         rK8g==
-X-Gm-Message-State: AOJu0YzMMe7F3BMdQDM99V2yaqM/y68Ye+R+w1w27Q5wbKY8A9KEBC5/
-	jwLTrVH3Eg/774THCPcc2B8J/URaQLblBpKRxZ7aGNiOCalJTKgg6IN/qbaFv7Fl1xZFbrhewtW
-	0
-X-Google-Smtp-Source: AGHT+IHfHOw5mOk911ZxLplhb78R5Ce2nVBf65Td+k4xwlpbNu4GixbxfGHhJEIKFl0THVvurwNKtA==
-X-Received: by 2002:a50:d71e:0:b0:5a3:64dc:33a5 with SMTP id 4fb4d7f45d1cf-5ac62906bc6mr846243a12.17.1721896070436;
-        Thu, 25 Jul 2024 01:27:50 -0700 (PDT)
-From: Fouad Hilly <fouad.hilly@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Fouad Hilly <fouad.hilly@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v6 0/4]  x86/xen-ucode: Introduce --force option
-Date: Thu, 25 Jul 2024 09:27:21 +0100
-Message-ID: <20240725082725.2685481-1-fouad.hilly@cloud.com>
-X-Mailer: git-send-email 2.42.0
+        d=1e100.net; s=20230601; t=1721896656; x=1722501456;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zaIrx7YHUpypK+qpBz60y/7w1fXeUC/TztAWP1g1ecM=;
+        b=aehoVBte1RDNrfjuoM37wvubI7uuU+jxP/Fw9crPQghkIO5B29SLuTvja26qSkPLCl
+         X87jAvX3tmOIw/sGnJPF6qJWhUcn64ruPHZ6npBASKJCTJLED22BRQe8CcJja+SZ/PI2
+         eVIcfIWyt4iZlKo4IEa3u2wwAqTIHgwBqC8cdXSv6FueJJgXOTJ5VgW55dcsi9mgxR2I
+         Hamk6R7SUQCeJh5HleBTezxfwb1Q3INNhh8bho9OW/AO3lUVKsWsiVQ+0icsZSYva+C+
+         1BCX4hus1FdHQ3D/p5BjY75cVtyU5AdVTknjqUlneQE418Ru+MiqwvlYIKfxEM6vFx3b
+         Q1UQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWprXoltcttgGPzjZYdhjK3dhPSpyCqlUQYWm/O1FdwNmzDSiLAwr6DLkunqK2UgG4nBvkc3iwZuPsChVNkWlApm2RGGbyqdz/Y1X3xnFc=
+X-Gm-Message-State: AOJu0YxtifqvTFFgsf5mQ+jgDGB31/0H7qFieuPAoZ6mPzjkLC2DOPAc
+	LRRUlcrvzOSigHekFDFaxfGo2d26y2gjuO4tTnepH8frP3hZ2P2w8ayoot7C6NA37YyP8jE/jCE
+	=
+X-Google-Smtp-Source: AGHT+IHykuXenWBb45vtWxcccZd4/vj2HyCQ/8AfQw4Ogpr4yB63sa5cZlLKYdtHhR+ZIGiils2QZA==
+X-Received: by 2002:a17:907:7f86:b0:a77:e48d:bc3 with SMTP id a640c23a62f3a-a7ac4de3b26mr142936866b.19.1721896655654;
+        Thu, 25 Jul 2024 01:37:35 -0700 (PDT)
+Message-ID: <772e656a-8d03-47b3-884e-4aeeb48b1c0d@suse.com>
+Date: Thu, 25 Jul 2024 10:37:34 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 2/4] x86/ucode: refactor xen-ucode to utilize getopt
+To: Fouad Hilly <fouad.hilly@cloud.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>, xen-devel@lists.xenproject.org
+References: <20240725082725.2685481-1-fouad.hilly@cloud.com>
+ <20240725082725.2685481-3-fouad.hilly@cloud.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20240725082725.2685481-3-fouad.hilly@cloud.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Refactor and introduce --force option to xen-ucode, which skips microcode
-version check when updating x86 CPU micocode. A new hypercall introduced
-with flags field to facilitate the new option and allow for future flags
-as needed.
-This change is required to enable developers to load ucode that is the same version as the
-one already loaded or downgrade for testing.
+On 25.07.2024 10:27, Fouad Hilly wrote:
+> @@ -71,12 +72,29 @@ static void show_curr_cpu(FILE *f)
+>      }
+>  }
+>  
+> +static void usage(FILE *stream, const char *name)
+> +{
+> +    fprintf(stream,
+> +            "%s: Xen microcode updating tool\n"
+> +            "options:\n"
+> +            "  -h, --help            display this help\n"
+> +            "  -s, --show-cpu-info   show CPU information\n"
+> +            "Usage: %s [microcode file | options]\n", name, name);
 
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+You did see Anthony's comments on this before sending the new version,
+didn't you? I agree with him (and I'm somewhat embarrassed that I didn't
+notice this myself earlier on).
 
-Fouad Hilly (4):
-  x86/ucode: Introduce XENPF_microcode_update2 with flags parameter
-  x86/ucode: refactor xen-ucode to utilize getopt
-  x86/ucode: Introduce --force option to xen-ucode
-  x86/ucode: Utilize ucode_force and remove opt_ucode_allow_same
+> @@ -146,4 +176,10 @@ int main(int argc, char *argv[])
+>      close(fd);
+>  
+>      return 0;
+> +
+> + ext_err:
+> +    fprintf(stderr,
+> +            "%s: unable to process command line arguments\n", argv[0]);
+> +    usage(stderr, argv[0]);
+> +    exit(EXIT_FAILURE);
+>  }
 
- docs/misc/xen-command-line.pandoc    |  7 +-
- tools/include/xenctrl.h              |  3 +-
- tools/libs/ctrl/xc_misc.c            | 12 ++--
- tools/misc/xen-ucode.c               | 63 +++++++++++++++---
- xen/arch/x86/cpu/microcode/amd.c     |  8 ++-
- xen/arch/x86/cpu/microcode/core.c    | 99 +++++++++++++++++-----------
- xen/arch/x86/cpu/microcode/intel.c   |  9 ++-
- xen/arch/x86/cpu/microcode/private.h |  5 +-
- xen/arch/x86/include/asm/microcode.h |  3 +-
- xen/arch/x86/platform_hypercall.c    | 13 +++-
- xen/include/public/platform.h        | 14 ++++
- 11 files changed, 167 insertions(+), 69 deletions(-)
+And there was a comment on this, too.
 
--- 
-2.42.0
-
+Jan
 
