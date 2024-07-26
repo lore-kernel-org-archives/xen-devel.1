@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29720C3DA4A
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 15:41:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.765662.1176322 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2D1C3DA49
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 15:41:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.765661.1176317 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXN4b-0004sb-W7; Fri, 26 Jul 2024 15:41:37 +0000
+	id 1sXN4b-0004pP-OK; Fri, 26 Jul 2024 15:41:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 765662.1176322; Fri, 26 Jul 2024 15:41:37 +0000
+Received: by outflank-mailman (output) from mailman id 765661.1176317; Fri, 26 Jul 2024 15:41:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXN4b-0004rZ-RI; Fri, 26 Jul 2024 15:41:37 +0000
-Received: by outflank-mailman (input) for mailman id 765662;
+	id 1sXN4b-0004pI-KA; Fri, 26 Jul 2024 15:41:37 +0000
+Received: by outflank-mailman (input) for mailman id 765661;
  Fri, 26 Jul 2024 15:41:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Bxzg=O2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sXMvZ-00084Z-Lz
- for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 15:32:17 +0000
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [2607:f8b0:4864:20::733])
+ id 1sXMvL-00084Z-Ik
+ for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 15:32:03 +0000
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [2607:f8b0:4864:20::835])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3baeadbc-4b64-11ef-bbff-fd08da9f4363;
- Fri, 26 Jul 2024 17:32:14 +0200 (CEST)
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7a1df0a93eeso54357785a.1
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 08:32:14 -0700 (PDT)
+ id 3216d2c5-4b64-11ef-bbff-fd08da9f4363;
+ Fri, 26 Jul 2024 17:31:58 +0200 (CEST)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-44ff7cc5432so5018541cf.3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 08:31:58 -0700 (PDT)
 Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a1d73ed33bsm186293085a.58.2024.07.26.08.32.12
+ d75a77b69052e-44fe8201583sm13962251cf.69.2024.07.26.08.31.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jul 2024 08:32:12 -0700 (PDT)
+ Fri, 26 Jul 2024 08:31:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,47 +46,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3baeadbc-4b64-11ef-bbff-fd08da9f4363
+X-Inumbo-ID: 3216d2c5-4b64-11ef-bbff-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1722007933; x=1722612733; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1722007917; x=1722612717; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+bQ+ii7M1KJhsihYtAn+LMm9W2OsmDXTDtNb1K2Kk+8=;
-        b=ULjq/Fq8AEzNonKiqnzDW2K4UctU1Jls2eXHeGiyKUtMbUZ1fup+OMvxdw69kxqRDG
-         bCMe/pFZwI4HvSBRwtfaOF7JekIf5n1R2unNXmCNwGqinsTniSiOC2TA4Xco+ugIfLAM
-         u5or8g1UmGciX16GTqlgQzD4Fo/YzT4aGXeh4=
+        bh=y0jFmKsOaRzFzsuDJr/vpzxDf870ieWIqAEP938hVyw=;
+        b=M7Qeu1AAlr0bQG8bOphO1sdcojnhZZLTcmLZp1Z8T+qyHIZ3L32hi40lz8Dx+apTol
+         wwtj4pTT4IU4v/Q0T2N1SPwX2wcCQgd65sK+1GpcKjiJwy+KO4tcH9TilJbsqbBfSgP9
+         IPjc6HO62lw93TFytJoVqfD5MJ5Ln5pcDkv5U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722007933; x=1722612733;
+        d=1e100.net; s=20230601; t=1722007917; x=1722612717;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+bQ+ii7M1KJhsihYtAn+LMm9W2OsmDXTDtNb1K2Kk+8=;
-        b=XTjbhbKK7gMAVEajiqbuSMrkNWsYY+/q+NRzGjuu6L1kZfruMFba8YEKKSQRpmLG6s
-         FLV0dGsAA9UDttxrigvUXktyBjcKoYbUsLBhhx1H7bgXUMy1q7i97SXDEyQMM7I+wGQg
-         LRup8Nr2feEDEhm6MnvwPgVeWCllxLB3hZh8mX8faIj08syDoM3Lv6hrIpm9HBuK0CMG
-         JkVonKdyFAAaRQYotYNRcQ01crPOX/xwEYriGh8tZNtOsXiK8RypHLfR/jlF1Z+wsLsH
-         xeyFum5eVkyYmTb3nKjufn8jeKA4S2ISL+tHP8j/H9Lf4lbDBsMQT17UxIdpEBf1Oib8
-         5sEQ==
-X-Gm-Message-State: AOJu0Yy7/FtcEumP2xkLgioa0Va7WzY0j4PckaIZFWekavioZO5SCYij
-	ZjVUQy2FSKbZ7SnQtcv63lCISF2z0JHgNobxN84iJdcPkactxJzsendIQEIHBK69grEVz963CHk
-	+
-X-Google-Smtp-Source: AGHT+IFEl+l6gfhV/oaxuOmcOHpAbe9haRO9XmK8X2xunfJzUIgKMhf39uziKga6rh7b4MNPD63eCg==
-X-Received: by 2002:a05:620a:4152:b0:79f:fe8:5fce with SMTP id af79cd13be357-7a1e522fb05mr11382285a.3.1722007932948;
-        Fri, 26 Jul 2024 08:32:12 -0700 (PDT)
+        bh=y0jFmKsOaRzFzsuDJr/vpzxDf870ieWIqAEP938hVyw=;
+        b=xNhhr2hZwqIXClJVPSAFTpKMfaCcWrAgH44XtF2eLso/79fMcxU98Fu8xrh3NGVHKm
+         Taw0MnjWf7+v5YHUJY8JCOd36NDu46AtKb4AakEERzqFYvpdyDRMA+c+cJaKJ9LA+8tv
+         2+7HR21adF86zOIetTCTD1Nu+G5GG9nKfAPl7cCQ09zajnb+Z6LT2LCbSAVitv81/3wD
+         0GRGO/U+wEDOhk0l1x6QYA0vBCwrQqf+CJA+oo6bw5LfwVOLJMHMJTnQ8hifhBO41FIJ
+         UaTSK43IO8lEZqlix4L0lDMPB9H+ip1PcJyR1oVEPMNQP4ozJEy23HT42v+n8aHNFdrc
+         sy7A==
+X-Gm-Message-State: AOJu0YzKckbeIHrjeNUD7G8AuxoaJfUzDFAuuQb2ol9YogKBJwuEUABY
+	sN/Hc/rLTM371r7lF/4KCo1/wXRsEy3ksEVGDaeZl+6mT8Scwd53IjgBB9FjEXoLjb46ClBdxgC
+	G
+X-Google-Smtp-Source: AGHT+IGiS/h6u9qqSHvgUrluH594A0zTw0s1tnDElj/8eDjyLad+rVrps4h28Kg+Rh5qgtG1Fnzf4g==
+X-Received: by 2002:a05:622a:547:b0:44f:f7be:4d3e with SMTP id d75a77b69052e-45004d6fd41mr2322221cf.5.1722007917022;
+        Fri, 26 Jul 2024 08:31:57 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: alejandro.vallejo@cloud.com,
 	Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH 21/22] x86/mm: switch to a per-CPU mapped stack when using ASI
-Date: Fri, 26 Jul 2024 17:22:05 +0200
-Message-ID: <20240726152206.28411-22-roger.pau@citrix.com>
+	Tim Deegan <tim@xen.org>
+Subject: [PATCH 14/22] x86/hvm: use a per-pCPU monitor table in shadow mode
+Date: Fri, 26 Jul 2024 17:21:58 +0200
+Message-ID: <20240726152206.28411-15-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240726152206.28411-1-roger.pau@citrix.com>
 References: <20240726152206.28411-1-roger.pau@citrix.com>
@@ -94,597 +91,458 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-When using ASI the CPU stack is mapped using a range of fixmap entries in the
-per-CPU region.  This ensures the stack is only accessible by the current CPU.
-
-Note however there's further work required in order to allocate the stack from
-domheap instead of xenheap, and ensure the stack is not part of the direct
-map.
-
-For domains not running with ASI enabled all the CPU stacks are mapped in the
-per-domain L3, so that the stack is always at the same linear address,
-regardless of whether ASI is enabled or not for the domain.
-
-When calling UEFI runtime methods the current per-domain slot needs to be added
-to the EFI L4, so that the stack is available in UEFI.
-
-Finally, some users of callfunc IPIs pass parameters from the stack, so when
-handling a callfunc IPI the stack of the caller CPU is mapped into the address
-space of the CPU handling the IPI.  This needs further work to use a bounce
-buffer in order to avoid having to map remote CPU stacks.
+Instead of allocating a monitor table for each vCPU when running in HVM shadow
+mode, use a per-pCPU monitor table, which gets the per-domain slot updated on
+guest context switch.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-There's also further work required in order to avoid mapping remote stack when
-handling callfunc IPIs.
+I've tested this manually, but XenServer builds disable shadow support, so it
+possibly hasn't been given the same level of testing as the rest of the
+changes.
 ---
- xen/arch/x86/domain.c              |  12 +++
- xen/arch/x86/include/asm/current.h |   5 ++
- xen/arch/x86/include/asm/fixmap.h  |   5 ++
- xen/arch/x86/include/asm/mm.h      |   6 +-
- xen/arch/x86/include/asm/smp.h     |  12 +++
- xen/arch/x86/mm.c                  | 125 +++++++++++++++++++++++++++--
- xen/arch/x86/setup.c               |  27 +++++--
- xen/arch/x86/smp.c                 |  29 +++++++
- xen/arch/x86/smpboot.c             |  47 ++++++++++-
- xen/arch/x86/traps.c               |   6 +-
- xen/common/efi/runtime.c           |  12 +++
- xen/common/smp.c                   |  10 +++
- xen/include/xen/smp.h              |   5 ++
- 13 files changed, 281 insertions(+), 20 deletions(-)
+ xen/arch/x86/hvm/hvm.c              |  7 +++
+ xen/arch/x86/include/asm/hvm/vcpu.h |  6 ++-
+ xen/arch/x86/include/asm/paging.h   | 18 ++++++++
+ xen/arch/x86/mm.c                   |  6 +++
+ xen/arch/x86/mm/shadow/common.c     | 42 +++++++-----------
+ xen/arch/x86/mm/shadow/hvm.c        | 65 ++++++++++++----------------
+ xen/arch/x86/mm/shadow/multi.c      | 66 ++++++++++++++++++-----------
+ xen/arch/x86/mm/shadow/private.h    |  4 +-
+ 8 files changed, 120 insertions(+), 94 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 94a42ef29cd1..d00ba415877f 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -929,6 +929,18 @@ int arch_domain_create(struct domain *d,
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 3f771bc65677..419d78a79c51 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -141,6 +141,7 @@ void hvm_set_cpu_monitor_table(struct vcpu *v)
  
-     d->arch.msr_relaxed = config->arch.misc_flags & XEN_X86_MSR_RELAXED;
+     ASSERT(pgt);
  
-+    if ( !d->arch.asi && (opt_asi_hvm || opt_asi_pv ) )
-+    {
-+        /*
-+         * This domain is not using ASI, but other domains on the system
-+         * possibly are, hence the CPU stacks are on the per-CPU page-table
-+         * region.  Add an L3 entry that has all the stacks mapped.
-+         */
-+        rc = map_all_stacks(d);
-+        if ( rc )
-+            goto fail;
-+    }
-+
-     return 0;
++    paging_set_cpu_monitor_table(v);
+     setup_perdomain_slot(v, pgt);
  
-  fail:
-diff --git a/xen/arch/x86/include/asm/current.h b/xen/arch/x86/include/asm/current.h
-index 6a021607a1a9..75b9a341f814 100644
---- a/xen/arch/x86/include/asm/current.h
-+++ b/xen/arch/x86/include/asm/current.h
-@@ -24,6 +24,11 @@
-  * 0 - IST Shadow Stacks (4x 1k, read-only)
-  */
- 
-+static inline bool is_shstk_slot(unsigned int i)
-+{
-+    return (i == 0 || i == PRIMARY_SHSTK_SLOT);
-+}
-+
- /*
-  * Identify which stack page the stack pointer is on.  Returns an index
-  * as per the comment above.
-diff --git a/xen/arch/x86/include/asm/fixmap.h b/xen/arch/x86/include/asm/fixmap.h
-index bc68a98568ae..d52c1886fcdd 100644
---- a/xen/arch/x86/include/asm/fixmap.h
-+++ b/xen/arch/x86/include/asm/fixmap.h
-@@ -120,6 +120,11 @@ extern void __set_fixmap_x(
- 
- /* per-CPU fixmap area. */
- enum percpu_fixed_addresses {
-+    /* For alignment reasons the per-CPU stacks must come first. */
-+    PCPU_STACK_START,
-+    PCPU_STACK_END = PCPU_STACK_START + NR_CPUS * (1U << STACK_ORDER) - 1,
-+#define PERCPU_STACK_IDX(c) (PCPU_STACK_START + (c) * (1U << STACK_ORDER))
-+#define PERCPU_STACK_ADDR(c) percpu_fix_to_virt(PERCPU_STACK_IDX(c))
-     PCPU_FIX_PV_L4SHADOW,
-     __end_of_percpu_fixed_addresses
- };
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index f883468b1a7c..b4f1e0399275 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -521,7 +521,7 @@ extern struct rangeset *mmio_ro_ranges;
- #define compat_pfn_to_cr3(pfn) (((unsigned)(pfn) << 12) | ((unsigned)(pfn) >> 20))
- #define compat_cr3_to_pfn(cr3) (((unsigned)(cr3) >> 12) | ((unsigned)(cr3) << 20))
- 
--void memguard_guard_stack(void *p);
-+void memguard_guard_stack(void *p, unsigned int cpu);
- void memguard_unguard_stack(void *p);
- 
- struct mmio_ro_emulate_ctxt {
-@@ -652,4 +652,8 @@ static inline int destroy_xen_mappings_cpu(unsigned long s, unsigned long e,
-     return modify_xen_mappings_cpu(s, e, _PAGE_NONE, cpu);
- }
- 
-+/* Setup a per-domain slot that maps all pCPU stacks. */
-+int map_all_stacks(struct domain *d);
-+int add_stack(const void *stack, unsigned int cpu);
-+
- #endif /* __ASM_X86_MM_H__ */
-diff --git a/xen/arch/x86/include/asm/smp.h b/xen/arch/x86/include/asm/smp.h
-index c8c79601343d..a17c609da4b6 100644
---- a/xen/arch/x86/include/asm/smp.h
-+++ b/xen/arch/x86/include/asm/smp.h
-@@ -79,6 +79,18 @@ extern bool unaccounted_cpus;
- 
- void *cpu_alloc_stack(unsigned int cpu);
- 
-+/*
-+ * Setup the per-CPU area stack mappings.
-+ *
-+ * @dest_cpu:  CPU where the mappings are to appear.
-+ * @stack_cpu: CPU whose stacks should be mapped.
-+ */
-+void cpu_set_stack_mappings(unsigned int dest_cpu, unsigned int stack_cpu);
-+
-+#define HAS_ARCH_SMP_CALLFUNC
-+void arch_smp_pre_callfunc(unsigned int cpu);
-+void arch_smp_post_callfunc(unsigned int cpu);
-+
- #endif /* !__ASSEMBLY__ */
- 
- #endif
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 8fea7465a9df..67ffdebb595e 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -87,6 +87,7 @@
-  * doing the final put_page(), and remove it from the iommu if so.
-  */
- 
-+#include <xen/cpu.h>
- #include <xen/init.h>
- #include <xen/ioreq.h>
- #include <xen/kernel.h>
-@@ -6352,31 +6353,40 @@ void free_perdomain_mappings(struct domain *d)
-     d->arch.perdomain_l3_pg = NULL;
- }
- 
--static void write_sss_token(unsigned long *ptr)
-+static void write_sss_token(unsigned long *ptr, unsigned long va)
+     make_cr3(v, _mfn(virt_to_mfn(pgt)));
+@@ -150,6 +151,8 @@ void hvm_clear_cpu_monitor_table(struct vcpu *v)
  {
-     /*
-      * A supervisor shadow stack token is its own linear address, with the
-      * busy bit (0) clear.
-      */
--    *ptr = (unsigned long)ptr;
-+    *ptr = va;
+     /* Poison %cr3, it will be updated when the vCPU is scheduled. */
+     make_cr3(v, INVALID_MFN);
++
++    paging_clear_cpu_monitor_table(v);
  }
  
--void memguard_guard_stack(void *p)
-+void memguard_guard_stack(void *p, unsigned int cpu)
- {
-+    unsigned long va =
-+        (opt_asi_hvm || opt_asi_pv) ? (unsigned long)PERCPU_STACK_ADDR(cpu)
-+                                    : (unsigned long)p;
-+
-     /* IST Shadow stacks.  4x 1k in stack page 0. */
-     if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
-     {
--        write_sss_token(p + (IST_MCE * IST_SHSTK_SIZE) - 8);
--        write_sss_token(p + (IST_NMI * IST_SHSTK_SIZE) - 8);
--        write_sss_token(p + (IST_DB  * IST_SHSTK_SIZE) - 8);
--        write_sss_token(p + (IST_DF  * IST_SHSTK_SIZE) - 8);
-+        write_sss_token(p + (IST_MCE * IST_SHSTK_SIZE) - 8,
-+                        va + (IST_MCE * IST_SHSTK_SIZE) - 8);
-+        write_sss_token(p + (IST_NMI * IST_SHSTK_SIZE) - 8,
-+                        va + (IST_NMI * IST_SHSTK_SIZE) - 8);
-+        write_sss_token(p + (IST_DB  * IST_SHSTK_SIZE) - 8,
-+                        va + (IST_DB  * IST_SHSTK_SIZE) - 8);
-+        write_sss_token(p + (IST_DF  * IST_SHSTK_SIZE) - 8,
-+                        va + (IST_DF  * IST_SHSTK_SIZE) - 8);
-     }
-     map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_SHSTK);
+ static int cf_check cpu_callback(
+@@ -1645,6 +1648,10 @@ int hvm_vcpu_initialise(struct vcpu *v)
+     int rc;
+     struct domain *d = v->domain;
  
-     /* Primary Shadow Stack.  1x 4k in stack page 5. */
-     p += PRIMARY_SHSTK_SLOT * PAGE_SIZE;
-+    va += PRIMARY_SHSTK_SLOT * PAGE_SIZE;
-     if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
--        write_sss_token(p + PAGE_SIZE - 8);
-+        write_sss_token(p + PAGE_SIZE - 8, va + PAGE_SIZE - 8);
- 
-     map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_SHSTK);
- }
-@@ -6567,6 +6577,105 @@ void setup_perdomain_slot(const struct vcpu *v, root_pgentry_t *root_pgt)
-                   root_pgt[root_table_offset(PERDOMAIN_VIRT_START)]);
- }
- 
-+static struct page_info *l2_all_stacks;
-+
-+int add_stack(const void *stack, unsigned int cpu)
-+{
-+    unsigned long va = (unsigned long)PERCPU_STACK_ADDR(cpu);
-+    struct page_info *pg;
-+    l2_pgentry_t *l2tab = NULL;
-+    l1_pgentry_t *l1tab = NULL;
-+    unsigned int nr;
-+    int rc = 0;
-+
-+    /*
-+     * Assume CPU stack allocation is always serialized, either because it's
-+     * done on the BSP during boot, or in case of hotplug, in stop machine
-+     * context.
-+     */
-+    ASSERT(system_state < SYS_STATE_active || cpu_in_hotplug_context());
-+
-+    if ( !opt_asi_hvm && !opt_asi_pv )
-+        return 0;
-+
-+    if ( !l2_all_stacks )
-+    {
-+        l2_all_stacks = alloc_domheap_page(NULL, MEMF_no_owner);
-+        if ( !l2_all_stacks )
-+            return -ENOMEM;
-+        l2tab = __map_domain_page(l2_all_stacks);
-+        clear_page(l2tab);
-+    }
-+    else
-+        l2tab = __map_domain_page(l2_all_stacks);
-+
-+    /* code assumes all the stacks can be mapped with a single l2. */
-+    ASSERT(l3_table_offset((unsigned long)percpu_fix_to_virt(PCPU_STACK_END)) ==
-+        l3_table_offset((unsigned long)percpu_fix_to_virt(PCPU_STACK_START)));
-+    for ( nr = 0 ; nr < (1U << STACK_ORDER) ; nr++)
-+    {
-+        l2_pgentry_t *pl2e = l2tab + l2_table_offset(va);
-+
-+        if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
-+        {
-+            pg = alloc_domheap_page(NULL, MEMF_no_owner);
-+            if ( !pg )
-+            {
-+                rc = -ENOMEM;
-+                break;
-+            }
-+            l1tab = __map_domain_page(pg);
-+            clear_page(l1tab);
-+            l2e_write(pl2e, l2e_from_page(pg, __PAGE_HYPERVISOR_RW));
-+        }
-+        else if ( !l1tab )
-+            l1tab = map_l1t_from_l2e(*pl2e);
-+
-+        l1e_write(&l1tab[l1_table_offset(va)],
-+                  l1e_from_mfn(virt_to_mfn(stack),
-+                               is_shstk_slot(nr) ? __PAGE_HYPERVISOR_SHSTK
-+                                                 : __PAGE_HYPERVISOR_RW));
-+
-+        va += PAGE_SIZE;
-+        stack += PAGE_SIZE;
-+
-+        if ( !l1_table_offset(va) )
-+        {
-+            unmap_domain_page(l1tab);
-+            l1tab = NULL;
-+        }
-+    }
-+
-+    unmap_domain_page(l1tab);
-+    unmap_domain_page(l2tab);
-+    /*
-+     * Don't care to free the intermediate page-tables on failure, can be used
-+     * to map other stacks.
-+     */
-+
-+    return rc;
-+}
-+
-+int map_all_stacks(struct domain *d)
-+{
-+    /*
-+     * Create the per-domain L3.  Pass a dummy PERDOMAIN_VIRT_START, but note
-+     * only the per-domain L3 is allocated when nr == 0.
-+     */
-+    int rc = create_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0, NULL, NULL);
-+    l3_pgentry_t *l3tab;
-+
-+    if ( rc )
-+        return rc;
-+
-+    l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
-+    l3tab[l3_table_offset((unsigned long)percpu_fix_to_virt(PCPU_STACK_START))]
-+        = l3e_from_page(l2_all_stacks, __PAGE_HYPERVISOR_RW);
-+    unmap_domain_page(l3tab);
-+
-+    return 0;
-+}
-+
- static void __init __maybe_unused build_assertions(void)
- {
-     /*
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 5bf81b81b46f..76f7d71b8c1c 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -808,8 +808,6 @@ static void __init noreturn reinit_bsp_stack(void)
-     /* Update SYSCALL trampolines */
-     percpu_traps_init();
- 
--    stack_base[0] = stack;
--
-     rc = setup_cpu_root_pgt(0);
-     if ( rc )
-         panic("Error %d setting up PV root page table\n", rc);
-@@ -1771,10 +1769,6 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
- 
-     system_state = SYS_STATE_boot;
- 
--    bsp_stack = cpu_alloc_stack(0);
--    if ( !bsp_stack )
--        panic("No memory for BSP stack\n");
--
-     console_init_ring();
-     vesa_init();
- 
-@@ -1961,6 +1955,16 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
- 
-     alternative_branches();
- 
-+    /*
-+     * Alloc the BSP stack closer to the point where the AP ones also get
-+     * allocated - and after the speculation mitigations have been initialized.
-+     * In order to set up the shadow stack token correctly Xen needs to know
-+     * whether per-CPU mapped stacks are being used.
-+     */
-+    bsp_stack = cpu_alloc_stack(0);
-+    if ( !bsp_stack )
-+        panic("No memory for BSP stack\n");
-+
-     /*
-      * Setup the local per-domain L3 for the BSP also, so it matches the state
-      * of the APs.
-@@ -2065,8 +2069,17 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-         info->last_spec_ctrl = default_xen_spec_ctrl;
-     }
- 
-+    stack_base[0] = bsp_stack;
-+
-     /* Copy the cpu info block, and move onto the BSP stack. */
--    bsp_info = get_cpu_info_from_stack((unsigned long)bsp_stack);
-+    if ( opt_asi_hvm || opt_asi_pv )
-+    {
-+        cpu_set_stack_mappings(0, 0);
-+        bsp_info = get_cpu_info_from_stack((unsigned long)PERCPU_STACK_ADDR(0));
-+    }
-+    else
-+        bsp_info = get_cpu_info_from_stack((unsigned long)bsp_stack);
-+
-     *bsp_info = *info;
- 
-     asm volatile ("mov %[stk], %%rsp; jmp %c[fn]" ::
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index 04c6a0572319..18a7196195cf 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -22,6 +22,7 @@
- #include <asm/hardirq.h>
- #include <asm/hpet.h>
- #include <asm/setup.h>
-+#include <asm/spec_ctrl.h>
- #include <irq_vectors.h>
- #include <mach_apic.h>
- 
-@@ -433,3 +434,31 @@ long cf_check cpu_down_helper(void *data)
-         ret = cpu_down(cpu);
-     return ret;
- }
-+
-+void arch_smp_pre_callfunc(unsigned int cpu)
-+{
-+    if ( (!opt_asi_pv && !opt_asi_hvm) || cpu == smp_processor_id() ||
-+         (!current->domain->arch.asi && !is_idle_vcpu(current)) ||
-+        /*
-+         * CPU#0 still runs on the .init stack when the APs are started, don't
-+         * attempt to map such stack.
-+         */
-+         (!cpu && system_state < SYS_STATE_active) )
-+        return;
-+
-+    cpu_set_stack_mappings(smp_processor_id(), cpu);
-+}
-+
-+void arch_smp_post_callfunc(unsigned int cpu)
-+{
-+    unsigned int i;
-+
-+    if ( (!opt_asi_pv && !opt_asi_hvm) || cpu == smp_processor_id() ||
-+         (!current->domain->arch.asi && !is_idle_vcpu(current)) )
-+        return;
-+
-+    for ( i = 0; i < (1U << STACK_ORDER); i++ )
-+        percpu_clear_fixmap(PERCPU_STACK_IDX(cpu) + i);
-+
-+    flush_area_local(PERCPU_STACK_ADDR(cpu), FLUSH_ORDER(STACK_ORDER));
-+}
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index d9841ed3b663..548e3102101c 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -579,7 +579,20 @@ static int do_boot_cpu(int apicid, int cpu)
-         printk("Booting processor %d/%d eip %lx\n",
-                cpu, apicid, start_eip);
- 
--    stack_start = stack_base[cpu] + STACK_SIZE - sizeof(struct cpu_info);
-+    if ( opt_asi_hvm || opt_asi_pv )
-+    {
-+        /*
-+         * Uniformly run with the stack mapping of the per-CPU area (including
-+         * the idle vCPU) if ASI is enabled for any domain type.
-+         */
-+        cpu_set_stack_mappings(cpu, cpu);
-+
-+        ASSERT(IS_ALIGNED((unsigned long)PERCPU_STACK_ADDR(cpu), STACK_SIZE));
-+
-+        stack_start = PERCPU_STACK_ADDR(cpu) + STACK_SIZE - sizeof(struct cpu_info);
-+    }
-+    else
-+        stack_start = stack_base[cpu] + STACK_SIZE - sizeof(struct cpu_info);
- 
-     /*
-      * If per-CPU idle root page table has been allocated, switch to it as
-@@ -1053,11 +1066,41 @@ void *cpu_alloc_stack(unsigned int cpu)
-     stack = alloc_xenheap_pages(STACK_ORDER, memflags);
- 
-     if ( stack )
--        memguard_guard_stack(stack);
-+    {
-+        int rc = add_stack(stack, cpu);
-+
-+        if ( rc )
-+        {
-+            printk(XENLOG_ERR "unable to map stack for CPU %u: %d\n", cpu, rc);
-+            free_xenheap_pages(stack, STACK_ORDER);
-+            return NULL;
-+        }
-+        memguard_guard_stack(stack, cpu);
-+    }
- 
-     return stack;
- }
- 
-+void cpu_set_stack_mappings(unsigned int dest_cpu, unsigned int stack_cpu)
-+{
-+    unsigned int i;
-+
-+    for ( i = 0; i < (1U << STACK_ORDER); i++ )
-+    {
-+        unsigned int flags = (is_shstk_slot(i) ? __PAGE_HYPERVISOR_SHSTK
-+                                               : __PAGE_HYPERVISOR_RW) |
-+                             (dest_cpu == stack_cpu ? _PAGE_GLOBAL : 0);
-+
-+        if ( is_shstk_slot(i) && dest_cpu != stack_cpu )
-+            continue;
-+
-+        percpu_set_fixmap_remote(dest_cpu, PERCPU_STACK_IDX(stack_cpu) + i,
-+                                 _mfn(virt_to_mfn(stack_base[stack_cpu] +
-+                                                  i * PAGE_SIZE)),
-+                                 flags);
-+    }
-+}
-+
- static int cpu_smpboot_alloc(unsigned int cpu)
- {
-     struct cpu_info *info;
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index b4fb95917023..28513c0e3d6a 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -609,10 +609,12 @@ void show_stack_overflow(unsigned int cpu, const struct cpu_user_regs *regs)
-     unsigned long esp = regs->rsp;
-     unsigned long curr_stack_base = esp & ~(STACK_SIZE - 1);
-     unsigned long esp_top, esp_bottom;
-+    const void *stack = current->domain->arch.asi ? PERCPU_STACK_ADDR(cpu)
-+                                                  : stack_base[cpu];
- 
--    if ( _p(curr_stack_base) != stack_base[cpu] )
-+    if ( _p(curr_stack_base) != stack )
-         printk("Current stack base %p differs from expected %p\n",
--               _p(curr_stack_base), stack_base[cpu]);
-+               _p(curr_stack_base), stack);
- 
-     esp_bottom = (esp | (STACK_SIZE - 1)) + 1;
-     esp_top    = esp_bottom - PRIMARY_STACK_SIZE;
-diff --git a/xen/common/efi/runtime.c b/xen/common/efi/runtime.c
-index d952c3ba785e..3a8233ed62ac 100644
---- a/xen/common/efi/runtime.c
-+++ b/xen/common/efi/runtime.c
-@@ -32,6 +32,7 @@ void efi_rs_leave(struct efi_rs_state *state);
- 
- #ifndef CONFIG_ARM
- # include <asm/i387.h>
-+# include <asm/spec_ctrl.h>
- # include <asm/xstate.h>
- # include <public/platform.h>
- #endif
-@@ -85,6 +86,7 @@ struct efi_rs_state efi_rs_enter(void)
-     static const u16 fcw = FCW_DEFAULT;
-     static const u32 mxcsr = MXCSR_DEFAULT;
-     struct efi_rs_state state = { .cr3 = 0 };
-+    root_pgentry_t *efi_pgt, *idle_pgt;
- 
-     if ( mfn_eq(efi_l4_mfn, INVALID_MFN) )
-         return state;
-@@ -98,6 +100,16 @@ struct efi_rs_state efi_rs_enter(void)
- 
-     efi_rs_on_cpu = smp_processor_id();
- 
-+    if ( opt_asi_pv || opt_asi_hvm )
-+    {
-+        /* Insert the idle per-domain slot for the stack mapping. */
-+        efi_pgt = map_domain_page(efi_l4_mfn);
-+        idle_pgt = maddr_to_virt(idle_vcpu[efi_rs_on_cpu]->arch.cr3);
-+        efi_pgt[root_table_offset(PERDOMAIN_VIRT_START)].l4 =
-+            idle_pgt[root_table_offset(PERDOMAIN_VIRT_START)].l4;
-+        unmap_domain_page(efi_pgt);
-+    }
-+
-     /* prevent fixup_page_fault() from doing anything */
-     irq_enter();
- 
-diff --git a/xen/common/smp.c b/xen/common/smp.c
-index a011f541f1ea..04f5aede0d3d 100644
---- a/xen/common/smp.c
-+++ b/xen/common/smp.c
-@@ -29,6 +29,7 @@ static struct call_data_struct {
-     void (*func) (void *info);
-     void *info;
-     int wait;
-+    unsigned int caller;
-     cpumask_t selected;
- } call_data;
- 
-@@ -63,6 +64,7 @@ void on_selected_cpus(
-     call_data.func = func;
-     call_data.info = info;
-     call_data.wait = wait;
-+    call_data.caller = smp_processor_id();
- 
-     smp_send_call_function_mask(&call_data.selected);
- 
-@@ -82,6 +84,12 @@ void smp_call_function_interrupt(void)
-     if ( !cpumask_test_cpu(cpu, &call_data.selected) )
-         return;
- 
-+    /*
-+     * TODO: use bounce buffers to pass callfunc data, so that when using ASI
-+     * there's no need to map remote CPU stacks.
-+     */
-+    arch_smp_pre_callfunc(call_data.caller);
-+
-     irq_enter();
- 
-     if ( unlikely(!func) )
-@@ -102,6 +110,8 @@ void smp_call_function_interrupt(void)
-     }
- 
-     irq_exit();
-+
-+    arch_smp_post_callfunc(call_data.caller);
- }
- 
- /*
-diff --git a/xen/include/xen/smp.h b/xen/include/xen/smp.h
-index 2ca9ff1bfcc1..610c279ca24c 100644
---- a/xen/include/xen/smp.h
-+++ b/xen/include/xen/smp.h
-@@ -76,4 +76,9 @@ extern void *stack_base[NR_CPUS];
- void initialize_cpu_data(unsigned int cpu);
- int setup_cpu_root_pgt(unsigned int cpu);
- 
-+#ifndef HAS_ARCH_SMP_CALLFUNC
-+static inline void arch_smp_pre_callfunc(unsigned int cpu) {}
-+static inline void arch_smp_post_callfunc(unsigned int cpu) {}
++#ifdef CONFIG_SHADOW_PAGING
++    v->arch.hvm.shadow_linear_l3 = INVALID_MFN;
 +#endif
 +
- #endif /* __XEN_SMP_H__ */
+     hvm_asid_flush_vcpu(v);
+ 
+     spin_lock_init(&v->arch.hvm.tm_lock);
+diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm/hvm/vcpu.h
+index 64c7a6fedea9..f7faaaa21521 100644
+--- a/xen/arch/x86/include/asm/hvm/vcpu.h
++++ b/xen/arch/x86/include/asm/hvm/vcpu.h
+@@ -149,8 +149,10 @@ struct hvm_vcpu {
+         uint16_t p2midx;
+     } fast_single_step;
+ 
+-    /* (MFN) hypervisor page table */
+-    pagetable_t         monitor_table;
++#ifdef CONFIG_SHADOW_PAGING
++    /* Reference to the linear L3 page table. */
++    mfn_t shadow_linear_l3;
++#endif
+ 
+     struct hvm_vcpu_asid n1asid;
+ 
+diff --git a/xen/arch/x86/include/asm/paging.h b/xen/arch/x86/include/asm/paging.h
+index 8a2a0af40874..c1e188bcd3c0 100644
+--- a/xen/arch/x86/include/asm/paging.h
++++ b/xen/arch/x86/include/asm/paging.h
+@@ -117,6 +117,8 @@ struct paging_mode {
+                                             unsigned long cr3,
+                                             paddr_t ga, uint32_t *pfec,
+                                             unsigned int *page_order);
++    void          (*set_cpu_monitor_table  )(struct vcpu *v);
++    void          (*clear_cpu_monitor_table)(struct vcpu *v);
+ #endif
+     pagetable_t   (*update_cr3            )(struct vcpu *v, bool noflush);
+ 
+@@ -288,6 +290,22 @@ static inline bool paging_flush_tlb(const unsigned long *vcpu_bitmap)
+     return current->domain->arch.paging.flush_tlb(vcpu_bitmap);
+ }
+ 
++static inline void paging_set_cpu_monitor_table(struct vcpu *v)
++{
++    const struct paging_mode *mode = paging_get_hostmode(v);
++
++    if ( mode->set_cpu_monitor_table )
++        mode->set_cpu_monitor_table(v);
++}
++
++static inline void paging_clear_cpu_monitor_table(struct vcpu *v)
++{
++    const struct paging_mode *mode = paging_get_hostmode(v);
++
++    if ( mode->clear_cpu_monitor_table )
++        mode->clear_cpu_monitor_table(v);
++}
++
+ #endif /* CONFIG_HVM */
+ 
+ /* Update all the things that are derived from the guest's CR3.
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 7f2666adaef4..13aa15f4db22 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -534,6 +534,12 @@ void write_ptbase(struct vcpu *v)
+     }
+     else
+     {
++        ASSERT(!is_hvm_domain(d) || !d->arch.asi
++#ifdef CONFIG_HVM
++               || mfn_eq(maddr_to_mfn(v->arch.cr3),
++                         virt_to_mfn(this_cpu(monitor_pgt)))
++#endif
++               );
+         /* Make sure to clear use_pv_cr3 and xen_cr3 before pv_cr3. */
+         cpu_info->use_pv_cr3 = false;
+         cpu_info->xen_cr3 = 0;
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index 0176e33bc9c7..d31c1db8a1ab 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -2413,16 +2413,12 @@ static void sh_update_paging_modes(struct vcpu *v)
+                 &SHADOW_INTERNAL_NAME(sh_paging_mode, 2);
+         }
+ 
+-        if ( pagetable_is_null(v->arch.hvm.monitor_table) )
++        if ( mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN) )
+         {
+-            mfn_t mmfn = sh_make_monitor_table(
+-                             v, v->arch.paging.mode->shadow.shadow_levels);
+-
+-            if ( mfn_eq(mmfn, INVALID_MFN) )
++            if ( sh_update_monitor_table(
++                     v, v->arch.paging.mode->shadow.shadow_levels) )
+                 return;
+ 
+-            v->arch.hvm.monitor_table = pagetable_from_mfn(mmfn);
+-            make_cr3(v, mmfn);
+             hvm_update_host_cr3(v);
+         }
+ 
+@@ -2440,8 +2436,8 @@ static void sh_update_paging_modes(struct vcpu *v)
+                  (v->arch.paging.mode->shadow.shadow_levels !=
+                   old_mode->shadow.shadow_levels) )
+             {
+-                /* Need to make a new monitor table for the new mode */
+-                mfn_t new_mfn, old_mfn;
++                /* Might need to make a new L3 linear table for the new mode */
++                mfn_t old_mfn;
+ 
+                 if ( v != current && vcpu_runnable(v) )
+                 {
+@@ -2455,24 +2451,21 @@ static void sh_update_paging_modes(struct vcpu *v)
+                     return;
+                 }
+ 
+-                old_mfn = pagetable_get_mfn(v->arch.hvm.monitor_table);
+-                v->arch.hvm.monitor_table = pagetable_null();
+-                new_mfn = sh_make_monitor_table(
+-                              v, v->arch.paging.mode->shadow.shadow_levels);
+-                if ( mfn_eq(new_mfn, INVALID_MFN) )
++                old_mfn = v->arch.hvm.shadow_linear_l3;
++                v->arch.hvm.shadow_linear_l3 = INVALID_MFN;
++                if ( sh_update_monitor_table(
++                         v, v->arch.paging.mode->shadow.shadow_levels) )
+                 {
+                     sh_destroy_monitor_table(v, old_mfn,
+                                              old_mode->shadow.shadow_levels);
+                     return;
+                 }
+-                v->arch.hvm.monitor_table = pagetable_from_mfn(new_mfn);
+-                SHADOW_PRINTK("new monitor table %"PRI_mfn "\n",
+-                               mfn_x(new_mfn));
++                SHADOW_PRINTK("new L3 linear table %"PRI_mfn "\n",
++                               mfn_x(v->arch.hvm.shadow_linear_l3));
+ 
+                 /* Don't be running on the old monitor table when we
+                  * pull it down!  Switch CR3, and warn the HVM code that
+                  * its host cr3 has changed. */
+-                make_cr3(v, new_mfn);
+                 if ( v == current )
+                     write_ptbase(v);
+                 hvm_update_host_cr3(v);
+@@ -2781,16 +2774,13 @@ void shadow_vcpu_teardown(struct vcpu *v)
+ 
+     sh_detach_old_tables(v);
+ #ifdef CONFIG_HVM
+-    if ( shadow_mode_external(d) )
++    if ( shadow_mode_external(d) &&
++         !mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN) )
+     {
+-        mfn_t mfn = pagetable_get_mfn(v->arch.hvm.monitor_table);
+-
+-        if ( mfn_x(mfn) )
+-            sh_destroy_monitor_table(
+-                v, mfn,
++        sh_destroy_monitor_table(
++                v, v->arch.hvm.shadow_linear_l3,
+                 v->arch.paging.mode->shadow.shadow_levels);
+-
+-        v->arch.hvm.monitor_table = pagetable_null();
++        v->arch.hvm.shadow_linear_l3 = INVALID_MFN;
+     }
+ #endif
+ 
+diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
+index 93922a71e511..15c75cf766bb 100644
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -736,30 +736,15 @@ bool cf_check shadow_flush_tlb(const unsigned long *vcpu_bitmap)
+     return true;
+ }
+ 
+-mfn_t sh_make_monitor_table(const struct vcpu *v, unsigned int shadow_levels)
++int sh_update_monitor_table(struct vcpu *v, unsigned int shadow_levels)
+ {
+     struct domain *d = v->domain;
+-    mfn_t m4mfn;
+-    l4_pgentry_t *l4e;
+ 
+-    ASSERT(!pagetable_get_pfn(v->arch.hvm.monitor_table));
++    ASSERT(mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN));
+ 
+     /* Guarantee we can get the memory we need */
+-    if ( !shadow_prealloc(d, SH_type_monitor_table, CONFIG_PAGING_LEVELS) )
+-        return INVALID_MFN;
+-
+-    m4mfn = shadow_alloc(d, SH_type_monitor_table, 0);
+-    mfn_to_page(m4mfn)->shadow_flags = 4;
+-
+-    l4e = map_domain_page(m4mfn);
+-
+-    /*
+-     * Create a self-linear mapping, but no shadow-linear mapping.  A
+-     * shadow-linear mapping will either be inserted below when creating
+-     * lower level monitor tables, or later in sh_update_cr3().
+-     */
+-    init_xen_l4_slots(l4e, m4mfn, INVALID_MFN, d->arch.perdomain_l3_pg,
+-                      false, true, false);
++    if ( !shadow_prealloc(d, SH_type_monitor_table, CONFIG_PAGING_LEVELS - 1) )
++        return -ENOMEM;
+ 
+     if ( shadow_levels < 4 )
+     {
+@@ -773,52 +758,54 @@ mfn_t sh_make_monitor_table(const struct vcpu *v, unsigned int shadow_levels)
+          */
+         m3mfn = shadow_alloc(d, SH_type_monitor_table, 0);
+         mfn_to_page(m3mfn)->shadow_flags = 3;
+-        l4e[l4_table_offset(SH_LINEAR_PT_VIRT_START)]
+-            = l4e_from_mfn(m3mfn, __PAGE_HYPERVISOR_RW);
+ 
+         m2mfn = shadow_alloc(d, SH_type_monitor_table, 0);
+         mfn_to_page(m2mfn)->shadow_flags = 2;
+         l3e = map_domain_page(m3mfn);
+         l3e[0] = l3e_from_mfn(m2mfn, __PAGE_HYPERVISOR_RW);
+         unmap_domain_page(l3e);
+-    }
+ 
+-    unmap_domain_page(l4e);
++        v->arch.hvm.shadow_linear_l3 = m3mfn;
++
++        /*
++         * If the vCPU is not the current one the L4 entry will be updated on
++         * context switch.
++         */
++        if ( v == current )
++            this_cpu(monitor_pgt)[l4_table_offset(SH_LINEAR_PT_VIRT_START)]
++                = l4e_from_mfn(m3mfn, __PAGE_HYPERVISOR_RW);
++    }
++    else if ( v == current )
++        /* The shadow linear mapping will be inserted in sh_update_cr3(). */
++        this_cpu(monitor_pgt)[l4_table_offset(SH_LINEAR_PT_VIRT_START)]
++            = l4e_empty();
+ 
+-    return m4mfn;
++    return 0;
+ }
+ 
+-void sh_destroy_monitor_table(const struct vcpu *v, mfn_t mmfn,
++void sh_destroy_monitor_table(const struct vcpu *v, mfn_t m3mfn,
+                               unsigned int shadow_levels)
+ {
+     struct domain *d = v->domain;
+ 
+-    ASSERT(mfn_to_page(mmfn)->u.sh.type == SH_type_monitor_table);
+-
+     if ( shadow_levels < 4 )
+     {
+-        mfn_t m3mfn;
+-        l4_pgentry_t *l4e = map_domain_page(mmfn);
+-        l3_pgentry_t *l3e;
+-        unsigned int linear_slot = l4_table_offset(SH_LINEAR_PT_VIRT_START);
++        l3_pgentry_t *l3e = map_domain_page(m3mfn);
++
++        ASSERT(!mfn_eq(m3mfn, INVALID_MFN));
++        ASSERT(mfn_to_page(m3mfn)->u.sh.type == SH_type_monitor_table);
+ 
+         /*
+          * Need to destroy the l3 and l2 monitor pages used
+          * for the linear map.
+          */
+-        ASSERT(l4e_get_flags(l4e[linear_slot]) & _PAGE_PRESENT);
+-        m3mfn = l4e_get_mfn(l4e[linear_slot]);
+-        l3e = map_domain_page(m3mfn);
+         ASSERT(l3e_get_flags(l3e[0]) & _PAGE_PRESENT);
+         shadow_free(d, l3e_get_mfn(l3e[0]));
+         unmap_domain_page(l3e);
+         shadow_free(d, m3mfn);
+-
+-        unmap_domain_page(l4e);
+     }
+-
+-    /* Put the memory back in the pool */
+-    shadow_free(d, mmfn);
++    else
++        ASSERT(mfn_eq(m3mfn, INVALID_MFN));
+ }
+ 
+ /**************************************************************************/
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
+index 0def0c073ca8..68c59233794f 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -3007,6 +3007,32 @@ static unsigned long cf_check sh_gva_to_gfn(
+     return gfn_x(gfn);
+ }
+ 
++static void cf_check set_cpu_monitor_table(struct vcpu *v)
++{
++    root_pgentry_t *pgt = this_cpu(monitor_pgt);
++
++    virt_to_page(pgt)->shadow_flags = 4;
++
++    /* Setup linear L3 entry. */
++    if ( !mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN) )
++        pgt[l4_table_offset(SH_LINEAR_PT_VIRT_START)] =
++            l4e_from_mfn(v->arch.hvm.shadow_linear_l3, __PAGE_HYPERVISOR_RW);
++    else
++        pgt[l4_table_offset(SH_LINEAR_PT_VIRT_START)] =
++            l4e_from_pfn(
++                pagetable_get_pfn(v->arch.paging.shadow.shadow_table[0]),
++                __PAGE_HYPERVISOR_RW);
++}
++
++static void cf_check clear_cpu_monitor_table(struct vcpu *v)
++{
++    root_pgentry_t *pgt = this_cpu(monitor_pgt);
++
++    virt_to_page(pgt)->shadow_flags = 0;
++
++    pgt[l4_table_offset(SH_LINEAR_PT_VIRT_START)] = l4e_empty();
++}
++
+ #endif /* CONFIG_HVM */
+ 
+ static inline void
+@@ -3033,8 +3059,11 @@ sh_update_linear_entries(struct vcpu *v)
+      */
+ 
+     /* Don't try to update the monitor table if it doesn't exist */
+-    if ( !shadow_mode_external(d) ||
+-         pagetable_get_pfn(v->arch.hvm.monitor_table) == 0 )
++    if ( !shadow_mode_external(d)
++#if SHADOW_PAGING_LEVELS == 3
++         || mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN)
++#endif
++       )
+         return;
+ 
+ #if !defined(CONFIG_HVM)
+@@ -3051,17 +3080,6 @@ sh_update_linear_entries(struct vcpu *v)
+                 pagetable_get_pfn(v->arch.paging.shadow.shadow_table[0]),
+                 __PAGE_HYPERVISOR_RW);
+     }
+-    else
+-    {
+-        l4_pgentry_t *ml4e;
+-
+-        ml4e = map_domain_page(pagetable_get_mfn(v->arch.hvm.monitor_table));
+-        ml4e[l4_table_offset(SH_LINEAR_PT_VIRT_START)] =
+-            l4e_from_pfn(
+-                pagetable_get_pfn(v->arch.paging.shadow.shadow_table[0]),
+-                __PAGE_HYPERVISOR_RW);
+-        unmap_domain_page(ml4e);
+-    }
+ 
+ #elif SHADOW_PAGING_LEVELS == 3
+ 
+@@ -3087,16 +3105,8 @@ sh_update_linear_entries(struct vcpu *v)
+                 + l2_linear_offset(SH_LINEAR_PT_VIRT_START);
+         else
+         {
+-            mfn_t l3mfn, l2mfn;
+-            l4_pgentry_t *ml4e;
+-            l3_pgentry_t *ml3e;
+-            int linear_slot = shadow_l4_table_offset(SH_LINEAR_PT_VIRT_START);
+-            ml4e = map_domain_page(pagetable_get_mfn(v->arch.hvm.monitor_table));
+-
+-            ASSERT(l4e_get_flags(ml4e[linear_slot]) & _PAGE_PRESENT);
+-            l3mfn = l4e_get_mfn(ml4e[linear_slot]);
+-            ml3e = map_domain_page(l3mfn);
+-            unmap_domain_page(ml4e);
++            mfn_t l2mfn;
++            l3_pgentry_t *ml3e = map_domain_page(v->arch.hvm.shadow_linear_l3);
+ 
+             ASSERT(l3e_get_flags(ml3e[0]) & _PAGE_PRESENT);
+             l2mfn = l3e_get_mfn(ml3e[0]);
+@@ -3341,9 +3351,13 @@ static pagetable_t cf_check sh_update_cr3(struct vcpu *v, bool noflush)
+     ///
+     /// v->arch.cr3
+     ///
+-    if ( shadow_mode_external(d) )
++    if ( shadow_mode_external(d) && v == current )
+     {
+-        make_cr3(v, pagetable_get_mfn(v->arch.hvm.monitor_table));
++#ifdef CONFIG_HVM
++        make_cr3(v, _mfn(virt_to_mfn(this_cpu(monitor_pgt))));
++#else
++        ASSERT_UNREACHABLE();
++#endif
+     }
+ #if SHADOW_PAGING_LEVELS == 4
+     else // not shadow_mode_external...
+@@ -4106,6 +4120,8 @@ const struct paging_mode sh_paging_mode = {
+     .invlpg                        = sh_invlpg,
+ #ifdef CONFIG_HVM
+     .gva_to_gfn                    = sh_gva_to_gfn,
++    .set_cpu_monitor_table         = set_cpu_monitor_table,
++    .clear_cpu_monitor_table       = clear_cpu_monitor_table,
+ #endif
+     .update_cr3                    = sh_update_cr3,
+     .guest_levels                  = GUEST_PAGING_LEVELS,
+diff --git a/xen/arch/x86/mm/shadow/private.h b/xen/arch/x86/mm/shadow/private.h
+index a5fc3a7676eb..6743aeefe12e 100644
+--- a/xen/arch/x86/mm/shadow/private.h
++++ b/xen/arch/x86/mm/shadow/private.h
+@@ -420,8 +420,8 @@ void shadow_unhook_mappings(struct domain *d, mfn_t smfn, int user_only);
+  * sh_{make,destroy}_monitor_table() depend only on the number of shadow
+  * levels.
+  */
+-mfn_t sh_make_monitor_table(const struct vcpu *v, unsigned int shadow_levels);
+-void sh_destroy_monitor_table(const struct vcpu *v, mfn_t mmfn,
++int sh_update_monitor_table(struct vcpu *v, unsigned int shadow_levels);
++void sh_destroy_monitor_table(const struct vcpu *v, mfn_t m3mfn,
+                               unsigned int shadow_levels);
+ 
+ /* VRAM dirty tracking helpers. */
 -- 
 2.45.2
 
