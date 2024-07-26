@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2D1C3DA49
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 15:41:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.765661.1176317 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5FB7C3DA49
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 16:26:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.765683.1176338 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXN4b-0004pP-OK; Fri, 26 Jul 2024 15:41:37 +0000
+	id 1sXNlf-0001Ns-Bl; Fri, 26 Jul 2024 16:26:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 765661.1176317; Fri, 26 Jul 2024 15:41:37 +0000
+Received: by outflank-mailman (output) from mailman id 765683.1176338; Fri, 26 Jul 2024 16:26:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXN4b-0004pI-KA; Fri, 26 Jul 2024 15:41:37 +0000
-Received: by outflank-mailman (input) for mailman id 765661;
- Fri, 26 Jul 2024 15:41:35 +0000
+	id 1sXNlf-0001Nl-7S; Fri, 26 Jul 2024 16:26:07 +0000
+Received: by outflank-mailman (input) for mailman id 765683;
+ Fri, 26 Jul 2024 16:26:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Bxzg=O2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sXMvL-00084Z-Ik
- for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 15:32:03 +0000
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [2607:f8b0:4864:20::835])
+ <SRS0=P8ZK=O2=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1sXNle-0001Nf-3B
+ for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 16:26:06 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3216d2c5-4b64-11ef-bbff-fd08da9f4363;
- Fri, 26 Jul 2024 17:31:58 +0200 (CEST)
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-44ff7cc5432so5018541cf.3
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 08:31:58 -0700 (PDT)
-Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-44fe8201583sm13962251cf.69.2024.07.26.08.31.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jul 2024 08:31:56 -0700 (PDT)
+ id bf236d53-4b6b-11ef-bc00-fd08da9f4363;
+ Fri, 26 Jul 2024 18:26:01 +0200 (CEST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a7a9a369055so201938666b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 09:26:01 -0700 (PDT)
+Received: from localhost ([185.25.67.249]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7acad91005sm193463566b.173.2024.07.26.09.26.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Jul 2024 09:26:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,504 +46,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3216d2c5-4b64-11ef-bbff-fd08da9f4363
+X-Inumbo-ID: bf236d53-4b6b-11ef-bc00-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1722007917; x=1722612717; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1722011161; x=1722615961; darn=lists.xenproject.org;
+        h=in-reply-to:references:subject:cc:to:from:message-id:date
+         :content-transfer-encoding:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=y0jFmKsOaRzFzsuDJr/vpzxDf870ieWIqAEP938hVyw=;
-        b=M7Qeu1AAlr0bQG8bOphO1sdcojnhZZLTcmLZp1Z8T+qyHIZ3L32hi40lz8Dx+apTol
-         wwtj4pTT4IU4v/Q0T2N1SPwX2wcCQgd65sK+1GpcKjiJwy+KO4tcH9TilJbsqbBfSgP9
-         IPjc6HO62lw93TFytJoVqfD5MJ5Ln5pcDkv5U=
+        bh=YlGYXb7vpgE153wxJcUKemLIuYFS/C4BxEM1AQOl8rI=;
+        b=XPu5sO25kfQLAKeiqfTO8Cjz/+hjJssmE8s6faUix8Rw2yCSGxeLE9vefSZd+693l0
+         78ZVYWp8j1WGYLDnrtqiiFWi0/Mvf/0lWbHC+bxs9ruG5R51RkCIrSHjOYokvYRVYgv1
+         DAeMN7h7wX9P76VxBQiuzVEFcrUMbIAlzaOw8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722007917; x=1722612717;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=y0jFmKsOaRzFzsuDJr/vpzxDf870ieWIqAEP938hVyw=;
-        b=xNhhr2hZwqIXClJVPSAFTpKMfaCcWrAgH44XtF2eLso/79fMcxU98Fu8xrh3NGVHKm
-         Taw0MnjWf7+v5YHUJY8JCOd36NDu46AtKb4AakEERzqFYvpdyDRMA+c+cJaKJ9LA+8tv
-         2+7HR21adF86zOIetTCTD1Nu+G5GG9nKfAPl7cCQ09zajnb+Z6LT2LCbSAVitv81/3wD
-         0GRGO/U+wEDOhk0l1x6QYA0vBCwrQqf+CJA+oo6bw5LfwVOLJMHMJTnQ8hifhBO41FIJ
-         UaTSK43IO8lEZqlix4L0lDMPB9H+ip1PcJyR1oVEPMNQP4ozJEy23HT42v+n8aHNFdrc
-         sy7A==
-X-Gm-Message-State: AOJu0YzKckbeIHrjeNUD7G8AuxoaJfUzDFAuuQb2ol9YogKBJwuEUABY
-	sN/Hc/rLTM371r7lF/4KCo1/wXRsEy3ksEVGDaeZl+6mT8Scwd53IjgBB9FjEXoLjb46ClBdxgC
-	G
-X-Google-Smtp-Source: AGHT+IGiS/h6u9qqSHvgUrluH594A0zTw0s1tnDElj/8eDjyLad+rVrps4h28Kg+Rh5qgtG1Fnzf4g==
-X-Received: by 2002:a05:622a:547:b0:44f:f7be:4d3e with SMTP id d75a77b69052e-45004d6fd41mr2322221cf.5.1722007917022;
-        Fri, 26 Jul 2024 08:31:57 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: alejandro.vallejo@cloud.com,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Tim Deegan <tim@xen.org>
-Subject: [PATCH 14/22] x86/hvm: use a per-pCPU monitor table in shadow mode
-Date: Fri, 26 Jul 2024 17:21:58 +0200
-Message-ID: <20240726152206.28411-15-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240726152206.28411-1-roger.pau@citrix.com>
-References: <20240726152206.28411-1-roger.pau@citrix.com>
-MIME-Version: 1.0
+        d=1e100.net; s=20230601; t=1722011161; x=1722615961;
+        h=in-reply-to:references:subject:cc:to:from:message-id:date
+         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=YlGYXb7vpgE153wxJcUKemLIuYFS/C4BxEM1AQOl8rI=;
+        b=k6RJ5BN4bl3CSNsdE2cxmdXz+5B8xgEo9gu4DjZ7nvTkJOxz5pu1kpwioQD8SF9tZP
+         qKdTRO9G8ZJn4PJITWSE2sH7cctzuBOg/tga7yK3NRuycUVPVAehHNb6my0mTTtoBkZd
+         f05JFUKVuiBZSw+RBgGOd0Kx/090s0vHMe6lZlEim44BubvPP+ZXlW8XOjYTlINsq0vn
+         pof8D6G1V9T6PDulTXz06X+sRLl+urTPnTZOqsMt9n8/Q7OQmWnB3famSiHco+6n3EQP
+         jQcLPDBIC5GsNpqbp5cD1r5VtMmKNxCYADsKTEH6BgMDSf/qlqXiUVQ8T2tT9Dq6n8X4
+         /LWg==
+X-Forwarded-Encrypted: i=1; AJvYcCXpktXGW90YflIcrrxdh7wxqG2Regy7CpKGwltkWgZ514zT6l4zUsO+nl7dWfntlvV1WtRyfxt8khFij8zhUQ4Xx6ucyp+uqkNRTHYzgB8=
+X-Gm-Message-State: AOJu0Yyf+hev+xEnQpdcPZuiz6mzzypu1HMGpM0cRTmVtmdPKZGI06F+
+	gnRyHkWrFA4Phi/LYPfrfj4/JZl856BMK6cYMt0yGxRryEkRc355L+7S74MXKb3BBDwnqFQfhs+
+	pyq4=
+X-Google-Smtp-Source: AGHT+IHwu4GZE1g+GQ/O/7EBDDYdZOWkGfJOmxAxidHBgWVaOYRM9eaEY2OMzyd5+7KItSHVG0cstA==
+X-Received: by 2002:a17:907:6d01:b0:a7a:a06b:eec3 with SMTP id a640c23a62f3a-a7d3ff9ed50mr1933366b.23.1722011160676;
+        Fri, 26 Jul 2024 09:26:00 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Fri, 26 Jul 2024 17:25:58 +0100
+Message-Id: <D2ZM0D609TOQ.2GQQWR1QALUPA@cloud.com>
+From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
+To: =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper"
+ <andrew.cooper3@citrix.com>, <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] x86/altcall: further refine clang workaround
+X-Mailer: aerc 0.17.0
+References: <20240725105634.16825-1-roger.pau@citrix.com>
+ <9ecd3a39-55bf-4a49-9f45-1e0abfad353a@suse.com> <ZqJnPvL1ilDDzM9V@macbook>
+ <a638b0e1-07a3-495c-b3b9-e450a50f9429@suse.com> <ZqNQwM3U8S5q-kg5@macbook>
+ <0f6b446a-0dda-4e59-807b-c0c0bcdf78bf@suse.com> <ZqNVs97wexqd5trA@macbook>
+ <4e2117f9-2a68-4032-9d1a-09965f97085f@suse.com>
+ <D2ZJA8MODIO2.9JHFXZO8LW7Z@cloud.com>
+ <D2ZJFUKTDIAL.2OE4EHLK6GGIB@cloud.com> <ZqO-RFZHdCrIuRok@macbook>
+In-Reply-To: <ZqO-RFZHdCrIuRok@macbook>
 
-Instead of allocating a monitor table for each vCPU when running in HVM shadow
-mode, use a per-pCPU monitor table, which gets the per-domain slot updated on
-guest context switch.
+On Fri Jul 26, 2024 at 4:18 PM BST, Roger Pau Monn=C3=A9 wrote:
+> On Fri, Jul 26, 2024 at 03:25:08PM +0100, Alejandro Vallejo wrote:
+> > On Fri Jul 26, 2024 at 3:17 PM BST, Alejandro Vallejo wrote:
+> > > On Fri Jul 26, 2024 at 9:05 AM BST, Jan Beulich wrote:
+> > > > On 26.07.2024 09:52, Roger Pau Monn=C3=A9 wrote:
+> > > > > On Fri, Jul 26, 2024 at 09:36:15AM +0200, Jan Beulich wrote:
+> > > > >> On 26.07.2024 09:31, Roger Pau Monn=C3=A9 wrote:
+> > > > >>> On Thu, Jul 25, 2024 at 05:00:22PM +0200, Jan Beulich wrote:
+> > > > >>>> On 25.07.2024 16:54, Roger Pau Monn=C3=A9 wrote:
+> > > > >>>>> On Thu, Jul 25, 2024 at 03:18:29PM +0200, Jan Beulich wrote:
+> > > > >>>>>> On 25.07.2024 12:56, Roger Pau Monne wrote:
+> > > > >>>>>>> --- a/xen/arch/x86/include/asm/alternative.h
+> > > > >>>>>>> +++ b/xen/arch/x86/include/asm/alternative.h
+> > > > >>>>>>> @@ -184,11 +184,11 @@ extern void alternative_branches(void=
+);
+> > > > >>>>>>>   * https://github.com/llvm/llvm-project/issues/82598
+> > > > >>>>>>>   */
+> > > > >>>>>>>  #define ALT_CALL_ARG(arg, n)                              =
+              \
+> > > > >>>>>>> -    register union {                                      =
+              \
+> > > > >>>>>>> -        typeof(arg) e[sizeof(long) / sizeof(arg)];        =
+              \
+> > > > >>>>>>> -        unsigned long r;                                  =
+              \
+> > > > >>>>>>> +    register struct {                                     =
+              \
+> > > > >>>>>>> +        typeof(arg) e;                                    =
+              \
+> > > > >>>>>>> +        char pad[sizeof(void *) - sizeof(arg)];           =
+              \
+> > > > >>>>>>
+> > > > >>>>>> One thing that occurred to me only after our discussion, and=
+ I then forgot
+> > > > >>>>>> to mention this before you would send a patch: What if sizeo=
+f(void *) =3D=3D
+> > > > >>>>>> sizeof(arg)? Zero-sized arrays are explicitly something we'r=
+e trying to
+> > > > >>>>>> get rid of.
+> > > > >>>>>
+> > > > >>>>> I wondered about this, but I though it was only [] that we we=
+re trying
+> > > > >>>>> to get rid of, not [0].
+> > > > >>>>
+> > > > >>>> Sadly (here) it's actually the other way around, aiui.
+> > > > >>>
+> > > > >>> The only other option I have in mind is using an oversized arra=
+y on
+> > > > >>> the union, like:
+> > > > >>>
+> > > > >>> #define ALT_CALL_ARG(arg, n)                                   =
+         \
+> > > > >>>     union {                                                    =
+         \
+> > > > >>>         typeof(arg) e[(sizeof(long) + sizeof(arg) - 1) / sizeof=
+(arg)];  \
+> > > > >>>         unsigned long r;                                       =
+         \
+> > > > >>>     } a ## n ## __  =3D {                                      =
+           \
+> > > > >>>         .e[0] =3D ({ BUILD_BUG_ON(sizeof(arg) > sizeof(void *))=
+; (arg); })\
+> > > > >>>     };                                                         =
+         \
+> > > > >>>     register unsigned long a ## n ## _ asm ( ALT_CALL_arg ## n =
+) =3D      \
+> > > > >>>         a ## n ## __.r
+> > > > >>
+> > > > >> Yet that's likely awful code-gen wise?
+> > > > >=20
+> > > > > Seems OK: https://godbolt.org/z/nsdo5Gs8W
+> > > >
+> > > > In which case why not go this route. If the compiler is doing fine =
+with
+> > > > that, maybe the array dimension expression could be further simplif=
+ied,
+> > > > accepting yet more over-sizing? Like "sizeof(void *) / sizeof (arg)=
+ + 1"
+> > > > or even simply "sizeof(void *)"? Suitably commented of course ...
+> > > >
+> > > > >> For the time being, can we perhaps
+> > > > >> just tighten the BUILD_BUG_ON(), as iirc Alejandro had suggested=
+?
+> > > > >=20
+> > > > > My main concern with tightening the BUILD_BUG_ON() is that then I
+> > > > > would also like to do so for the GCC one, so that build fails
+> > > > > uniformly.
+> > > >
+> > > > If we were to take that route, then yes, probably should constrain =
+both
+> > > > (with a suitable comment on the gcc one).
+> > > >
+> > > > Jan
+> > >
+> > > Yet another way would be to have an intermediate `long` to cast onto.=
+ Compilers
+> > > will optimise away the copy. It ignores the different-type aliasing r=
+ules in
+> > > the C spec, so there's an assumption that we have -fno-strict-aliasin=
+g. But I
+> > > belive we do? Otherwise it should pretty much work on anything.
+> > >
+> > > ```
+> > >   #define ALT_CALL_ARG(arg, n)                                       =
+       \
+> > >       unsigned long __tmp =3D 0;                                     =
+         \
+> > >       *(typeof(arg) *)&__tmp =3D                                     =
+         \
+> > >           ({ BUILD_BUG_ON(sizeof(arg) > sizeof(void *)); (arg); })   =
+       \
+> > >       register unsigned long a ## n ## _ asm ( ALT_CALL_arg ## n ) =
+=3D __tmp; \
+> > > ```
+> > >
+> > > fwiw, clang18 emits identical code compared with the previous godbolt=
+ link.
+> > >
+> > > Link: https://godbolt.org/z/facd1M9xa
+> > >
+> > > Cheers,
+> > > Alejandro
+> >=20
+> > Bah. s/b/__tmp/ in line15. Same output though, so the point still stand=
+s.
+>
+> Had to adjust it to:
+>
+> #define ALT_CALL_ARG(arg, n)                                             =
+ \
+>     unsigned long a ## n ## __ =3D 0;                                    =
+   \
+>     *(typeof(arg) *)&a ## n ## __ =3D                                    =
+   \
+>         ({ BUILD_BUG_ON(sizeof(arg) > sizeof(void *)); (arg); });        =
+ \
+>     register unsigned long a ## n ## _ asm ( ALT_CALL_arg ## n ) =3D a ##=
+ n ## __
+>
+> So that tmp__ is not defined multiple times for repeated
+> ALT_CALL_ARG() usages.
+>
+> Already tried something like this in the past, but it mixes code with
+> declarations, and that's forbidden in the current C standard that Xen
+> uses:
+>
+> ./arch/x86/include/asm/hvm/hvm.h:665:5: error: mixing declarations and co=
+de is incompatible with standards before C99 [-Werror,-Wdeclaration-after-s=
+tatement]
+>
+> The `*(typeof(arg) *)&__tmp =3D ...` line is considered code, and is
+> followed by further declarations.  Even if we moved both declarations
+> ahead of the assigns it would still complain when multiple
+> ALT_CALL_ARG() instances are used in the same altcall block.
+>
+> Thanks, Roger.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-I've tested this manually, but XenServer builds disable shadow support, so it
-possibly hasn't been given the same level of testing as the rest of the
-changes.
----
- xen/arch/x86/hvm/hvm.c              |  7 +++
- xen/arch/x86/include/asm/hvm/vcpu.h |  6 ++-
- xen/arch/x86/include/asm/paging.h   | 18 ++++++++
- xen/arch/x86/mm.c                   |  6 +++
- xen/arch/x86/mm/shadow/common.c     | 42 +++++++-----------
- xen/arch/x86/mm/shadow/hvm.c        | 65 ++++++++++++----------------
- xen/arch/x86/mm/shadow/multi.c      | 66 ++++++++++++++++++-----------
- xen/arch/x86/mm/shadow/private.h    |  4 +-
- 8 files changed, 120 insertions(+), 94 deletions(-)
+That _was_ forbidden in C89, but it has been allowed since. We have a warni=
+ng
+enabled to cause it to fail even if we always use C99-compatible compilers.=
+ I
+think we should change that.
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 3f771bc65677..419d78a79c51 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -141,6 +141,7 @@ void hvm_set_cpu_monitor_table(struct vcpu *v)
- 
-     ASSERT(pgt);
- 
-+    paging_set_cpu_monitor_table(v);
-     setup_perdomain_slot(v, pgt);
- 
-     make_cr3(v, _mfn(virt_to_mfn(pgt)));
-@@ -150,6 +151,8 @@ void hvm_clear_cpu_monitor_table(struct vcpu *v)
- {
-     /* Poison %cr3, it will be updated when the vCPU is scheduled. */
-     make_cr3(v, INVALID_MFN);
-+
-+    paging_clear_cpu_monitor_table(v);
- }
- 
- static int cf_check cpu_callback(
-@@ -1645,6 +1648,10 @@ int hvm_vcpu_initialise(struct vcpu *v)
-     int rc;
-     struct domain *d = v->domain;
- 
-+#ifdef CONFIG_SHADOW_PAGING
-+    v->arch.hvm.shadow_linear_l3 = INVALID_MFN;
-+#endif
-+
-     hvm_asid_flush_vcpu(v);
- 
-     spin_lock_init(&v->arch.hvm.tm_lock);
-diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm/hvm/vcpu.h
-index 64c7a6fedea9..f7faaaa21521 100644
---- a/xen/arch/x86/include/asm/hvm/vcpu.h
-+++ b/xen/arch/x86/include/asm/hvm/vcpu.h
-@@ -149,8 +149,10 @@ struct hvm_vcpu {
-         uint16_t p2midx;
-     } fast_single_step;
- 
--    /* (MFN) hypervisor page table */
--    pagetable_t         monitor_table;
-+#ifdef CONFIG_SHADOW_PAGING
-+    /* Reference to the linear L3 page table. */
-+    mfn_t shadow_linear_l3;
-+#endif
- 
-     struct hvm_vcpu_asid n1asid;
- 
-diff --git a/xen/arch/x86/include/asm/paging.h b/xen/arch/x86/include/asm/paging.h
-index 8a2a0af40874..c1e188bcd3c0 100644
---- a/xen/arch/x86/include/asm/paging.h
-+++ b/xen/arch/x86/include/asm/paging.h
-@@ -117,6 +117,8 @@ struct paging_mode {
-                                             unsigned long cr3,
-                                             paddr_t ga, uint32_t *pfec,
-                                             unsigned int *page_order);
-+    void          (*set_cpu_monitor_table  )(struct vcpu *v);
-+    void          (*clear_cpu_monitor_table)(struct vcpu *v);
- #endif
-     pagetable_t   (*update_cr3            )(struct vcpu *v, bool noflush);
- 
-@@ -288,6 +290,22 @@ static inline bool paging_flush_tlb(const unsigned long *vcpu_bitmap)
-     return current->domain->arch.paging.flush_tlb(vcpu_bitmap);
- }
- 
-+static inline void paging_set_cpu_monitor_table(struct vcpu *v)
-+{
-+    const struct paging_mode *mode = paging_get_hostmode(v);
-+
-+    if ( mode->set_cpu_monitor_table )
-+        mode->set_cpu_monitor_table(v);
-+}
-+
-+static inline void paging_clear_cpu_monitor_table(struct vcpu *v)
-+{
-+    const struct paging_mode *mode = paging_get_hostmode(v);
-+
-+    if ( mode->clear_cpu_monitor_table )
-+        mode->clear_cpu_monitor_table(v);
-+}
-+
- #endif /* CONFIG_HVM */
- 
- /* Update all the things that are derived from the guest's CR3.
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 7f2666adaef4..13aa15f4db22 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -534,6 +534,12 @@ void write_ptbase(struct vcpu *v)
-     }
-     else
-     {
-+        ASSERT(!is_hvm_domain(d) || !d->arch.asi
-+#ifdef CONFIG_HVM
-+               || mfn_eq(maddr_to_mfn(v->arch.cr3),
-+                         virt_to_mfn(this_cpu(monitor_pgt)))
-+#endif
-+               );
-         /* Make sure to clear use_pv_cr3 and xen_cr3 before pv_cr3. */
-         cpu_info->use_pv_cr3 = false;
-         cpu_info->xen_cr3 = 0;
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index 0176e33bc9c7..d31c1db8a1ab 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -2413,16 +2413,12 @@ static void sh_update_paging_modes(struct vcpu *v)
-                 &SHADOW_INTERNAL_NAME(sh_paging_mode, 2);
-         }
- 
--        if ( pagetable_is_null(v->arch.hvm.monitor_table) )
-+        if ( mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN) )
-         {
--            mfn_t mmfn = sh_make_monitor_table(
--                             v, v->arch.paging.mode->shadow.shadow_levels);
--
--            if ( mfn_eq(mmfn, INVALID_MFN) )
-+            if ( sh_update_monitor_table(
-+                     v, v->arch.paging.mode->shadow.shadow_levels) )
-                 return;
- 
--            v->arch.hvm.monitor_table = pagetable_from_mfn(mmfn);
--            make_cr3(v, mmfn);
-             hvm_update_host_cr3(v);
-         }
- 
-@@ -2440,8 +2436,8 @@ static void sh_update_paging_modes(struct vcpu *v)
-                  (v->arch.paging.mode->shadow.shadow_levels !=
-                   old_mode->shadow.shadow_levels) )
-             {
--                /* Need to make a new monitor table for the new mode */
--                mfn_t new_mfn, old_mfn;
-+                /* Might need to make a new L3 linear table for the new mode */
-+                mfn_t old_mfn;
- 
-                 if ( v != current && vcpu_runnable(v) )
-                 {
-@@ -2455,24 +2451,21 @@ static void sh_update_paging_modes(struct vcpu *v)
-                     return;
-                 }
- 
--                old_mfn = pagetable_get_mfn(v->arch.hvm.monitor_table);
--                v->arch.hvm.monitor_table = pagetable_null();
--                new_mfn = sh_make_monitor_table(
--                              v, v->arch.paging.mode->shadow.shadow_levels);
--                if ( mfn_eq(new_mfn, INVALID_MFN) )
-+                old_mfn = v->arch.hvm.shadow_linear_l3;
-+                v->arch.hvm.shadow_linear_l3 = INVALID_MFN;
-+                if ( sh_update_monitor_table(
-+                         v, v->arch.paging.mode->shadow.shadow_levels) )
-                 {
-                     sh_destroy_monitor_table(v, old_mfn,
-                                              old_mode->shadow.shadow_levels);
-                     return;
-                 }
--                v->arch.hvm.monitor_table = pagetable_from_mfn(new_mfn);
--                SHADOW_PRINTK("new monitor table %"PRI_mfn "\n",
--                               mfn_x(new_mfn));
-+                SHADOW_PRINTK("new L3 linear table %"PRI_mfn "\n",
-+                               mfn_x(v->arch.hvm.shadow_linear_l3));
- 
-                 /* Don't be running on the old monitor table when we
-                  * pull it down!  Switch CR3, and warn the HVM code that
-                  * its host cr3 has changed. */
--                make_cr3(v, new_mfn);
-                 if ( v == current )
-                     write_ptbase(v);
-                 hvm_update_host_cr3(v);
-@@ -2781,16 +2774,13 @@ void shadow_vcpu_teardown(struct vcpu *v)
- 
-     sh_detach_old_tables(v);
- #ifdef CONFIG_HVM
--    if ( shadow_mode_external(d) )
-+    if ( shadow_mode_external(d) &&
-+         !mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN) )
-     {
--        mfn_t mfn = pagetable_get_mfn(v->arch.hvm.monitor_table);
--
--        if ( mfn_x(mfn) )
--            sh_destroy_monitor_table(
--                v, mfn,
-+        sh_destroy_monitor_table(
-+                v, v->arch.hvm.shadow_linear_l3,
-                 v->arch.paging.mode->shadow.shadow_levels);
--
--        v->arch.hvm.monitor_table = pagetable_null();
-+        v->arch.hvm.shadow_linear_l3 = INVALID_MFN;
-     }
- #endif
- 
-diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
-index 93922a71e511..15c75cf766bb 100644
---- a/xen/arch/x86/mm/shadow/hvm.c
-+++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -736,30 +736,15 @@ bool cf_check shadow_flush_tlb(const unsigned long *vcpu_bitmap)
-     return true;
- }
- 
--mfn_t sh_make_monitor_table(const struct vcpu *v, unsigned int shadow_levels)
-+int sh_update_monitor_table(struct vcpu *v, unsigned int shadow_levels)
- {
-     struct domain *d = v->domain;
--    mfn_t m4mfn;
--    l4_pgentry_t *l4e;
- 
--    ASSERT(!pagetable_get_pfn(v->arch.hvm.monitor_table));
-+    ASSERT(mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN));
- 
-     /* Guarantee we can get the memory we need */
--    if ( !shadow_prealloc(d, SH_type_monitor_table, CONFIG_PAGING_LEVELS) )
--        return INVALID_MFN;
--
--    m4mfn = shadow_alloc(d, SH_type_monitor_table, 0);
--    mfn_to_page(m4mfn)->shadow_flags = 4;
--
--    l4e = map_domain_page(m4mfn);
--
--    /*
--     * Create a self-linear mapping, but no shadow-linear mapping.  A
--     * shadow-linear mapping will either be inserted below when creating
--     * lower level monitor tables, or later in sh_update_cr3().
--     */
--    init_xen_l4_slots(l4e, m4mfn, INVALID_MFN, d->arch.perdomain_l3_pg,
--                      false, true, false);
-+    if ( !shadow_prealloc(d, SH_type_monitor_table, CONFIG_PAGING_LEVELS - 1) )
-+        return -ENOMEM;
- 
-     if ( shadow_levels < 4 )
-     {
-@@ -773,52 +758,54 @@ mfn_t sh_make_monitor_table(const struct vcpu *v, unsigned int shadow_levels)
-          */
-         m3mfn = shadow_alloc(d, SH_type_monitor_table, 0);
-         mfn_to_page(m3mfn)->shadow_flags = 3;
--        l4e[l4_table_offset(SH_LINEAR_PT_VIRT_START)]
--            = l4e_from_mfn(m3mfn, __PAGE_HYPERVISOR_RW);
- 
-         m2mfn = shadow_alloc(d, SH_type_monitor_table, 0);
-         mfn_to_page(m2mfn)->shadow_flags = 2;
-         l3e = map_domain_page(m3mfn);
-         l3e[0] = l3e_from_mfn(m2mfn, __PAGE_HYPERVISOR_RW);
-         unmap_domain_page(l3e);
--    }
- 
--    unmap_domain_page(l4e);
-+        v->arch.hvm.shadow_linear_l3 = m3mfn;
-+
-+        /*
-+         * If the vCPU is not the current one the L4 entry will be updated on
-+         * context switch.
-+         */
-+        if ( v == current )
-+            this_cpu(monitor_pgt)[l4_table_offset(SH_LINEAR_PT_VIRT_START)]
-+                = l4e_from_mfn(m3mfn, __PAGE_HYPERVISOR_RW);
-+    }
-+    else if ( v == current )
-+        /* The shadow linear mapping will be inserted in sh_update_cr3(). */
-+        this_cpu(monitor_pgt)[l4_table_offset(SH_LINEAR_PT_VIRT_START)]
-+            = l4e_empty();
- 
--    return m4mfn;
-+    return 0;
- }
- 
--void sh_destroy_monitor_table(const struct vcpu *v, mfn_t mmfn,
-+void sh_destroy_monitor_table(const struct vcpu *v, mfn_t m3mfn,
-                               unsigned int shadow_levels)
- {
-     struct domain *d = v->domain;
- 
--    ASSERT(mfn_to_page(mmfn)->u.sh.type == SH_type_monitor_table);
--
-     if ( shadow_levels < 4 )
-     {
--        mfn_t m3mfn;
--        l4_pgentry_t *l4e = map_domain_page(mmfn);
--        l3_pgentry_t *l3e;
--        unsigned int linear_slot = l4_table_offset(SH_LINEAR_PT_VIRT_START);
-+        l3_pgentry_t *l3e = map_domain_page(m3mfn);
-+
-+        ASSERT(!mfn_eq(m3mfn, INVALID_MFN));
-+        ASSERT(mfn_to_page(m3mfn)->u.sh.type == SH_type_monitor_table);
- 
-         /*
-          * Need to destroy the l3 and l2 monitor pages used
-          * for the linear map.
-          */
--        ASSERT(l4e_get_flags(l4e[linear_slot]) & _PAGE_PRESENT);
--        m3mfn = l4e_get_mfn(l4e[linear_slot]);
--        l3e = map_domain_page(m3mfn);
-         ASSERT(l3e_get_flags(l3e[0]) & _PAGE_PRESENT);
-         shadow_free(d, l3e_get_mfn(l3e[0]));
-         unmap_domain_page(l3e);
-         shadow_free(d, m3mfn);
--
--        unmap_domain_page(l4e);
-     }
--
--    /* Put the memory back in the pool */
--    shadow_free(d, mmfn);
-+    else
-+        ASSERT(mfn_eq(m3mfn, INVALID_MFN));
- }
- 
- /**************************************************************************/
-diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
-index 0def0c073ca8..68c59233794f 100644
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -3007,6 +3007,32 @@ static unsigned long cf_check sh_gva_to_gfn(
-     return gfn_x(gfn);
- }
- 
-+static void cf_check set_cpu_monitor_table(struct vcpu *v)
-+{
-+    root_pgentry_t *pgt = this_cpu(monitor_pgt);
-+
-+    virt_to_page(pgt)->shadow_flags = 4;
-+
-+    /* Setup linear L3 entry. */
-+    if ( !mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN) )
-+        pgt[l4_table_offset(SH_LINEAR_PT_VIRT_START)] =
-+            l4e_from_mfn(v->arch.hvm.shadow_linear_l3, __PAGE_HYPERVISOR_RW);
-+    else
-+        pgt[l4_table_offset(SH_LINEAR_PT_VIRT_START)] =
-+            l4e_from_pfn(
-+                pagetable_get_pfn(v->arch.paging.shadow.shadow_table[0]),
-+                __PAGE_HYPERVISOR_RW);
-+}
-+
-+static void cf_check clear_cpu_monitor_table(struct vcpu *v)
-+{
-+    root_pgentry_t *pgt = this_cpu(monitor_pgt);
-+
-+    virt_to_page(pgt)->shadow_flags = 0;
-+
-+    pgt[l4_table_offset(SH_LINEAR_PT_VIRT_START)] = l4e_empty();
-+}
-+
- #endif /* CONFIG_HVM */
- 
- static inline void
-@@ -3033,8 +3059,11 @@ sh_update_linear_entries(struct vcpu *v)
-      */
- 
-     /* Don't try to update the monitor table if it doesn't exist */
--    if ( !shadow_mode_external(d) ||
--         pagetable_get_pfn(v->arch.hvm.monitor_table) == 0 )
-+    if ( !shadow_mode_external(d)
-+#if SHADOW_PAGING_LEVELS == 3
-+         || mfn_eq(v->arch.hvm.shadow_linear_l3, INVALID_MFN)
-+#endif
-+       )
-         return;
- 
- #if !defined(CONFIG_HVM)
-@@ -3051,17 +3080,6 @@ sh_update_linear_entries(struct vcpu *v)
-                 pagetable_get_pfn(v->arch.paging.shadow.shadow_table[0]),
-                 __PAGE_HYPERVISOR_RW);
-     }
--    else
--    {
--        l4_pgentry_t *ml4e;
--
--        ml4e = map_domain_page(pagetable_get_mfn(v->arch.hvm.monitor_table));
--        ml4e[l4_table_offset(SH_LINEAR_PT_VIRT_START)] =
--            l4e_from_pfn(
--                pagetable_get_pfn(v->arch.paging.shadow.shadow_table[0]),
--                __PAGE_HYPERVISOR_RW);
--        unmap_domain_page(ml4e);
--    }
- 
- #elif SHADOW_PAGING_LEVELS == 3
- 
-@@ -3087,16 +3105,8 @@ sh_update_linear_entries(struct vcpu *v)
-                 + l2_linear_offset(SH_LINEAR_PT_VIRT_START);
-         else
-         {
--            mfn_t l3mfn, l2mfn;
--            l4_pgentry_t *ml4e;
--            l3_pgentry_t *ml3e;
--            int linear_slot = shadow_l4_table_offset(SH_LINEAR_PT_VIRT_START);
--            ml4e = map_domain_page(pagetable_get_mfn(v->arch.hvm.monitor_table));
--
--            ASSERT(l4e_get_flags(ml4e[linear_slot]) & _PAGE_PRESENT);
--            l3mfn = l4e_get_mfn(ml4e[linear_slot]);
--            ml3e = map_domain_page(l3mfn);
--            unmap_domain_page(ml4e);
-+            mfn_t l2mfn;
-+            l3_pgentry_t *ml3e = map_domain_page(v->arch.hvm.shadow_linear_l3);
- 
-             ASSERT(l3e_get_flags(ml3e[0]) & _PAGE_PRESENT);
-             l2mfn = l3e_get_mfn(ml3e[0]);
-@@ -3341,9 +3351,13 @@ static pagetable_t cf_check sh_update_cr3(struct vcpu *v, bool noflush)
-     ///
-     /// v->arch.cr3
-     ///
--    if ( shadow_mode_external(d) )
-+    if ( shadow_mode_external(d) && v == current )
-     {
--        make_cr3(v, pagetable_get_mfn(v->arch.hvm.monitor_table));
-+#ifdef CONFIG_HVM
-+        make_cr3(v, _mfn(virt_to_mfn(this_cpu(monitor_pgt))));
-+#else
-+        ASSERT_UNREACHABLE();
-+#endif
-     }
- #if SHADOW_PAGING_LEVELS == 4
-     else // not shadow_mode_external...
-@@ -4106,6 +4120,8 @@ const struct paging_mode sh_paging_mode = {
-     .invlpg                        = sh_invlpg,
- #ifdef CONFIG_HVM
-     .gva_to_gfn                    = sh_gva_to_gfn,
-+    .set_cpu_monitor_table         = set_cpu_monitor_table,
-+    .clear_cpu_monitor_table       = clear_cpu_monitor_table,
- #endif
-     .update_cr3                    = sh_update_cr3,
-     .guest_levels                  = GUEST_PAGING_LEVELS,
-diff --git a/xen/arch/x86/mm/shadow/private.h b/xen/arch/x86/mm/shadow/private.h
-index a5fc3a7676eb..6743aeefe12e 100644
---- a/xen/arch/x86/mm/shadow/private.h
-+++ b/xen/arch/x86/mm/shadow/private.h
-@@ -420,8 +420,8 @@ void shadow_unhook_mappings(struct domain *d, mfn_t smfn, int user_only);
-  * sh_{make,destroy}_monitor_table() depend only on the number of shadow
-  * levels.
-  */
--mfn_t sh_make_monitor_table(const struct vcpu *v, unsigned int shadow_levels);
--void sh_destroy_monitor_table(const struct vcpu *v, mfn_t mmfn,
-+int sh_update_monitor_table(struct vcpu *v, unsigned int shadow_levels);
-+void sh_destroy_monitor_table(const struct vcpu *v, mfn_t m3mfn,
-                               unsigned int shadow_levels);
- 
- /* VRAM dirty tracking helpers. */
--- 
-2.45.2
+Regardless, I think it can be worked around. This compiles (otherwise
+untested):
 
+#define ALT_CALL_ARG(arg, n)
+    register unsigned long a ## n ## _ asm ( ALT_CALL_arg ## n ) =3D ({   \
+        unsigned long tmp =3D 0;                                          \
+        *(typeof(arg) *)&a ## n ## __ =3D (arg);                          \
+        BUILD_BUG_ON(sizeof(arg) > sizeof(void *));                     \
+        tmp;                                                            \
+    })
+
+That said, if the oversized temp union works, I'm fine with that too.
+
+Cheers,
+Alejandro
 
