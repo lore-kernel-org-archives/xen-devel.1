@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECA74C3DA70
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 15:31:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.765513.1176157 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B3AFC3DA7E
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 15:31:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.765515.1176177 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXMv0-0000yO-Ar; Fri, 26 Jul 2024 15:31:42 +0000
+	id 1sXMv2-0001Vu-Un; Fri, 26 Jul 2024 15:31:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 765513.1176157; Fri, 26 Jul 2024 15:31:42 +0000
+Received: by outflank-mailman (output) from mailman id 765515.1176177; Fri, 26 Jul 2024 15:31:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXMv0-0000yD-7y; Fri, 26 Jul 2024 15:31:42 +0000
-Received: by outflank-mailman (input) for mailman id 765513;
- Fri, 26 Jul 2024 15:31:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sXMv2-0001VO-Qx; Fri, 26 Jul 2024 15:31:44 +0000
+Received: by outflank-mailman (input) for mailman id 765515;
+ Fri, 26 Jul 2024 15:31:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Bxzg=O2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sXMuz-00084T-50
- for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 15:31:41 +0000
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [2607:f8b0:4864:20::f34])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 26aa0850-4b64-11ef-8776-851b0ebba9a2;
- Fri, 26 Jul 2024 17:31:39 +0200 (CEST)
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6b97097f7fdso5314326d6.0
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 08:31:39 -0700 (PDT)
+ id 1sXMv2-00084Z-1b
+ for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 15:31:44 +0000
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [2607:f8b0:4864:20::731])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2906e854-4b64-11ef-bbff-fd08da9f4363;
+ Fri, 26 Jul 2024 17:31:43 +0200 (CEST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7a1d6f47112so50000185a.0
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 08:31:43 -0700 (PDT)
 Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bb3f8d81e2sm17439186d6.25.2024.07.26.08.31.36
+ af79cd13be357-7a1d73ed33bsm186240685a.58.2024.07.26.08.31.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jul 2024 08:31:37 -0700 (PDT)
+ Fri, 26 Jul 2024 08:31:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,43 +46,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 26aa0850-4b64-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 2906e854-4b64-11ef-bbff-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1722007898; x=1722612698; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1722007902; x=1722612702; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JmNhqru4TlGrw3ILyEg6ph0OyPR73zD1eJAHzMTaW8w=;
-        b=YwoJa+jXdGxX2gahklZ0pc6vJclaPRbfY1eMfduE3W5Spgv0LIpt7b4HsmTm34mevH
-         AzMTN0yfDAKiIvx5g5/XEsRqXKto1SX/iqLlxCLL8vQ9euysukwra9Iu48Ox169BJVhN
-         mublEqQUz2ZYTBm0c47Riq+QYuz1WBUvsbuvY=
+        bh=dOEvkcqnun3SiCPLNVGMeM5jDZg54ALoRCfw9d7wQaw=;
+        b=cpzIamfP6qyJrMXqifj4si5HGpo+rD0LWImppcPOkWOEzHON5ysnDTuAB7cXnX/hu+
+         /zXU7NB8A+TnVPUhQahtF0fo6ql+IsG3njJ9JNzfBwa3VKukMbdCKTnlI4eSSjUow0CB
+         Mmju8PSGLwm5/0l6cakrayTanupNpq1pVlGTs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722007898; x=1722612698;
+        d=1e100.net; s=20230601; t=1722007902; x=1722612702;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=JmNhqru4TlGrw3ILyEg6ph0OyPR73zD1eJAHzMTaW8w=;
-        b=igfEBfUTg3BwnkYca0Ws0FztKrpBMm4L55APlsFFeO2pS/MUIyZeNYOwhGz9/qtgQ5
-         f8WmKCiWhi2vjDfP5j+FePrLVX+uWFFDajaTlKVs7Rq+eVWRvAuXKONDdnKIowQAKitG
-         LSRbGqUBvWTWh5goeg141jQrB6bawRKhjnP0bvfz1R0Iwee+ff57HTXT0Nzis/CTFLXj
-         tF0lRBc35t7cjuxSZkzpEXMuP9VORSiU8N/jQzfP1vLtlANosDgDDqxQeQIFkVR5CEwz
-         JxdrzLbDuwQ3Nz61QeSqfK/+3KK645zp6w3e2w62yiVOaoRoTZlI5Zlh9sZ89jxiSd85
-         dNUQ==
-X-Gm-Message-State: AOJu0YzRx+qaztXb7FHQ/i6PSxfhWJt1E2kKXbJf5dQGGZN6HyQ9l2aB
-	/0A4qhUY1Z9gwIEgfXI26T4jr0f/av+MvsVeI4nq0/KlYmsszS8DsdcNZXPY8vfe189HvIZc6CW
-	e
-X-Google-Smtp-Source: AGHT+IFVo7RCWrzdGCf8WbHKXJS7FPJoMhkuGB/902ihUsT3Fi3KBTh0NjvB6zh1fvY99h7U1GZriw==
-X-Received: by 2002:a05:6214:62e:b0:6b5:e403:4418 with SMTP id 6a1803df08f44-6bb5597d56dmr1948886d6.10.1722007897691;
-        Fri, 26 Jul 2024 08:31:37 -0700 (PDT)
+        bh=dOEvkcqnun3SiCPLNVGMeM5jDZg54ALoRCfw9d7wQaw=;
+        b=E77D+qEHWgyUtsTep0HW4BVklsRwKyaJHH5ULA1gmqXVQUKJH0sasfUDZyC9pbz4mm
+         mxdBJR1y1UdXmbIuPscL+R4jGjsZ1apMgolyQ9HJIaIrN8CBKGzox3i2dLtrG3i5jelg
+         nkMv6WL/gf6FLpYG2QQw0KkehHuOhuD7grIqDHqE0unEJ5/oNRgPVL714TV3d+PWP9nK
+         6RJ5Lpk79lV2HYbx3OKG7ULgXFLiAk2cXdqrBx5yGxvV+odMP1QvXp0caHepqFlHm4dK
+         QQZXUJjOQDH8DVtGq0FQV5uYBH4lZmSsQmxu3Vz+3nGaEgQgZMQqGR+CQouiUb+/y+vo
+         l6xQ==
+X-Gm-Message-State: AOJu0Yzf/kdtDthaOkdP8ArgolrXGQXPaOfD/nuusjM+CwzNlSgyNpdp
+	NG5MMYGaRjq83SS7us1evTWRpwL+vxD354iCI9xHUGQgoNq+uabpnzB/jwCwYHpZXZKQYFLizkx
+	/
+X-Google-Smtp-Source: AGHT+IGDtXcbJU9fFL56JcrQei4HNt94c4Zq8RiEGD8vSM+2WteFX2PTYvTW9/iZo0GgHcOnjLs8aw==
+X-Received: by 2002:a05:620a:17a7:b0:79f:1711:29fa with SMTP id af79cd13be357-7a1e52398f4mr14269485a.1.1722007901936;
+        Fri, 26 Jul 2024 08:31:41 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: alejandro.vallejo@cloud.com,
 	Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 05/22] x86/mm: make virt_to_xen_l1e() static
-Date: Fri, 26 Jul 2024 17:21:49 +0200
-Message-ID: <20240726152206.28411-6-roger.pau@citrix.com>
+Subject: [PATCH 07/22] x86/spec-ctrl: initialize per-domain XPTI in spec_ctrl_init_domain()
+Date: Fri, 26 Jul 2024 17:21:51 +0200
+Message-ID: <20240726152206.28411-8-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240726152206.28411-1-roger.pau@citrix.com>
 References: <20240726152206.28411-1-roger.pau@citrix.com>
@@ -90,43 +90,74 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-There are no callers outside the translation unit where it's defined, so make
-the function static.
+XPTI being a speculation mitigation feels better to be initialized in
+spec_ctrl_init_domain().
 
-No functional change intended.
+No functional change intended, although the call to spec_ctrl_init_domain() in
+arch_domain_create() needs to be moved ahead of pv_domain_initialise() for
+d->->arch.pv.xpti to be correctly set.
+
+Move it ahead of most of the initialization functions, since
+spec_ctrl_init_domain() doesn't depend on any member in the struct domain being
+set.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/include/asm/mm.h | 2 --
- xen/arch/x86/mm.c             | 2 +-
- 2 files changed, 1 insertion(+), 3 deletions(-)
+ xen/arch/x86/domain.c    | 4 ++--
+ xen/arch/x86/pv/domain.c | 2 --
+ xen/arch/x86/spec_ctrl.c | 4 ++++
+ 3 files changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 98b66edaca5e..b3853ae734fa 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -567,8 +567,6 @@ mfn_t alloc_xen_pagetable(void);
- void free_xen_pagetable(mfn_t mfn);
- void *alloc_mapped_pagetable(mfn_t *pmfn);
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index ccadfe0c9e70..3d3c14dbb5ae 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -842,6 +842,8 @@ int arch_domain_create(struct domain *d,
+         is_pv_domain(d) ? __HYPERVISOR_COMPAT_VIRT_START : ~0u;
+ #endif
  
--l1_pgentry_t *virt_to_xen_l1e(unsigned long v);
++    spec_ctrl_init_domain(d);
++
+     if ( (rc = paging_domain_init(d)) != 0 )
+         goto fail;
+     paging_initialised = true;
+@@ -908,8 +910,6 @@ int arch_domain_create(struct domain *d,
+ 
+     d->arch.msr_relaxed = config->arch.misc_flags & XEN_X86_MSR_RELAXED;
+ 
+-    spec_ctrl_init_domain(d);
 -
- int __sync_local_execstate(void);
+     return 0;
  
- /* Arch-specific portion of memory_op hypercall. */
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 01380fd82c9d..ca3d116b0e05 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -5087,7 +5087,7 @@ static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
-     return map_l2t_from_l3e(l3e) + l2_table_offset(v);
+  fail:
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 2a445bb17b99..86b74fb372d5 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -383,8 +383,6 @@ int pv_domain_initialise(struct domain *d)
+ 
+     d->arch.ctxt_switch = &pv_csw;
+ 
+-    d->arch.pv.xpti = is_hardware_domain(d) ? opt_xpti_hwdom : opt_xpti_domu;
+-
+     if ( !is_pv_32bit_domain(d) && use_invpcid && cpu_has_pcid )
+         switch ( ACCESS_ONCE(opt_pcid) )
+         {
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 40f6ae017010..5dc7a17b9354 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -1769,6 +1769,10 @@ void spec_ctrl_init_domain(struct domain *d)
+         (ibpb   ? SCF_entry_ibpb   : 0) |
+         (bhb    ? SCF_entry_bhb    : 0) |
+         0;
++
++    if ( pv )
++        d->arch.pv.xpti = is_hardware_domain(d) ? opt_xpti_hwdom
++                                                : opt_xpti_domu;
  }
  
--l1_pgentry_t *virt_to_xen_l1e(unsigned long v)
-+static l1_pgentry_t *virt_to_xen_l1e(unsigned long v)
- {
-     l2_pgentry_t *pl2e, l2e;
- 
+ void __init init_speculation_mitigations(void)
 -- 
 2.45.2
 
