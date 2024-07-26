@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90179C3DA4A
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 15:32:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.765538.1176237 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 179A2C3DA4A
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2024 15:37:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.765570.1176252 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXMvJ-0004WM-Re; Fri, 26 Jul 2024 15:32:01 +0000
+	id 1sXN0S-0007c4-QJ; Fri, 26 Jul 2024 15:37:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 765538.1176237; Fri, 26 Jul 2024 15:32:01 +0000
+Received: by outflank-mailman (output) from mailman id 765570.1176252; Fri, 26 Jul 2024 15:37:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sXMvJ-0004Va-Np; Fri, 26 Jul 2024 15:32:01 +0000
-Received: by outflank-mailman (input) for mailman id 765538;
- Fri, 26 Jul 2024 15:32:00 +0000
+	id 1sXN0S-0007bJ-LF; Fri, 26 Jul 2024 15:37:20 +0000
+Received: by outflank-mailman (input) for mailman id 765570;
+ Fri, 26 Jul 2024 15:37:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Bxzg=O2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sXMvH-00084T-Tp
- for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 15:32:00 +0000
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [2607:f8b0:4864:20::330])
+ id 1sXMvN-00084T-UO
+ for xen-devel@lists.xenproject.org; Fri, 26 Jul 2024 15:32:05 +0000
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [2607:f8b0:4864:20::f2b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3110a368-4b64-11ef-8776-851b0ebba9a2;
- Fri, 26 Jul 2024 17:31:57 +0200 (CEST)
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7035b2947a4so632328a34.3
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 08:31:57 -0700 (PDT)
+ id 34934c3e-4b64-11ef-8776-851b0ebba9a2;
+ Fri, 26 Jul 2024 17:32:02 +0200 (CEST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6b7b28442f9so9058466d6.3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jul 2024 08:32:02 -0700 (PDT)
 Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bb3fa94e7csm17499786d6.91.2024.07.26.08.31.54
+ 6a1803df08f44-6bb3f8d82a1sm17586896d6.8.2024.07.26.08.32.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jul 2024 08:31:54 -0700 (PDT)
+ Fri, 26 Jul 2024 08:32:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,43 +46,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3110a368-4b64-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 34934c3e-4b64-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1722007915; x=1722612715; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1722007921; x=1722612721; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Bm6SwbrLrL2F0whPBohLSi3P90SQDvaLyu2bafK8Eyw=;
-        b=BxdtNThbjEeZ+BYrnpa+C4wJ45o2O88QfK5jzQS8jusOtrdih2MXa7o8v20rUeBDvp
-         v0DPIVXY511ZBBu3VwVkJTQJZQSUWGOU7seNodwjREMvKVx8d9qQk1Sc4g4ZsFWxYKme
-         f8lde/VZ+/KV9MM0Eii73ol92SfYg0Obx8QIg=
+        bh=wcKEcIFuRVzpYWYIIO7wusSFWSLDiglqIhdKhUx/dZ0=;
+        b=pIliK6jM8ikuchh9GUCPAVsgDp3CyuTuzPpJqEQMb8N8yfXSLvlRmaF66XGpEew/rB
+         3Fbjo4QE3HHSD1vAk97HDXVJ+UNynJx1UkouwUrJmLtOm+ymTZ3kh8mav2Z6DxCPOQxQ
+         Rh1n6q9ueE84GmXJFHz548PzofuMr78MRRG9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722007915; x=1722612715;
+        d=1e100.net; s=20230601; t=1722007921; x=1722612721;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Bm6SwbrLrL2F0whPBohLSi3P90SQDvaLyu2bafK8Eyw=;
-        b=AXq1+7KJHZ0MUyf9xctBNg7BHrmgjAz/CA0e447ccDLvPzOiaZkkCt30OyMn+EWrZc
-         mOoEZVkTEU3ipGFtUVb99DaGKxHkyd4QlI41TzgTADb76ZrONV2K92dwH6ags39p9uM3
-         LxaCf1zW0/Pu7B3+qwWYDpTDMNVvSao2fe5Ajrz9F5HVF4TmjiVnAsp0C6HQR0psiOJ6
-         7+UMlcl9jZtT7563Xk+s94i/ZBIssRYTXnyx6Vge6bmxyD5iDtu0f9IYN/zmkvo2RdkN
-         bUwUB0VH3YEkp9VFXQ3HK0qoT7q7xaEoHuwmOtSaHtihcjdjztdIEsZVK8zWEgSztNtF
-         PRbw==
-X-Gm-Message-State: AOJu0Yyt9Lu2HScz2OitSeZExlS0CSe6CA4tm+tiZ/3bhwgpFQBSL9sX
-	vr1wGEYQ7QlIGvVjpnfB5taDIx/7oy67KZihdZS7xouDmU9DtMzIakX4PrUOdXUSJ3zmftzPrrG
-	i
-X-Google-Smtp-Source: AGHT+IHEhPUjKUQ4d5eJhvKBEzz6/++MROSwxGNSkIyqscU6O9baUOB7YZ72GYyoimg6xQnrkpiKKA==
-X-Received: by 2002:a05:6830:61c6:b0:703:79c6:a9ba with SMTP id 46e09a7af769-7092e695159mr8230070a34.7.1722007914842;
-        Fri, 26 Jul 2024 08:31:54 -0700 (PDT)
+        bh=wcKEcIFuRVzpYWYIIO7wusSFWSLDiglqIhdKhUx/dZ0=;
+        b=igFZNNUdwaInFFuZ7aF6wmGHTnN6Us/SihjebS2JrvdiqyPqv5JGRRkXS1qLRj1+0O
+         p0rEt6rXlDzjNWJoqmKq1S7cSqqHE0xb7aFq2fWa+gjmL8IY310oUS35XO8Uw7oj2PId
+         4piMIwQ14sWISiQXlHXwlMaFtZgrpvzGH13qehqamExVcdHeg1YN4/KStNi1coLkoe4u
+         p9phZtvbrqLZVnBPqqmwirTmb85AsWm97HP0sUB7Es5xOV0gfBvPfrNoNJ54g9Q0lWBK
+         Z6agMNvmIZrUKp7Pxl5wlWj1LUkil18VzgcvY1x+eLN8eew4nLS+7f/VAfxA3gJr08KQ
+         XIew==
+X-Gm-Message-State: AOJu0YzoQSEOqoBu+TMh6vvsrTA1XpuZJfnUrgT9YbZAW6fKSjTt9AXY
+	FdqIU8P5Ifl4am8N5MQwM87OOEA7VH9khYNuDnoMXNEwl2UB3S+ZYKD/cs+3L8yioPcaoIzsJm0
+	9
+X-Google-Smtp-Source: AGHT+IHqAu8Qz1BY8yZmp87C+3Fu28qPJ50Yvmj36fS5QokP/EOXTjLUGudnvfM7GSui/Mp4Dy/a3g==
+X-Received: by 2002:ad4:5e85:0:b0:6b0:90b4:1cb3 with SMTP id 6a1803df08f44-6bb55a7eef3mr1897296d6.32.1722007921198;
+        Fri, 26 Jul 2024 08:32:01 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: alejandro.vallejo@cloud.com,
 	Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 13/22] x86/hvm: use a per-pCPU monitor table in HAP mode
-Date: Fri, 26 Jul 2024 17:21:57 +0200
-Message-ID: <20240726152206.28411-14-roger.pau@citrix.com>
+Subject: [PATCH 16/22] x86/mm: introduce a per-CPU L3 table for the per-domain slot
+Date: Fri, 26 Jul 2024 17:22:00 +0200
+Message-ID: <20240726152206.28411-17-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240726152206.28411-1-roger.pau@citrix.com>
 References: <20240726152206.28411-1-roger.pau@citrix.com>
@@ -90,374 +90,197 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Instead of allocating a monitor table for each vCPU when running in HVM HAP
-mode, use a per-pCPU monitor table, which gets the per-domain slot updated on
-guest context switch.
+So far L4 slot 260 has always been per-domain, in other words: all vCPUs of a
+domain share the same L3 entry.  Currently only 3 slots are used in that L3
+table, which leaves plenty of room.
 
-This limits the amount of memory used for HVM HAP monitor tables to the amount
-of active pCPUs, rather than to the number of vCPUs.  It also simplifies vCPU
-allocation and teardown, since the monitor table handling is removed from
-there.
+Introduce a per-CPU L3 that's used the the domain has Address Space Isolation
+enabled.  Such per-CPU L3 gets currently populated using the same L3 entries
+present on the per-domain L3 (d->arch.perdomain_l3_pg).
 
-Note the switch to using a per-CPU monitor table is done regardless of whether
-Address Space Isolation is enabled or not.  Partly for the memory usage
-reduction, and also because it allows to simplify the VM tear down path by not
-having to cleanup the per-vCPU monitor tables.
+No functional change expected, as the per-CPU L3 is always a copy of the
+contents of d->arch.perdomain_l3_pg.
+
+Note that all the per-domain L3 entries are populated at domain create, and
+hence there's no need to sync the state of the per-CPU L3 as the domain won't
+yet be running when the L3 is modified.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-Note the monitor table is not made static because uses outside of the file
-where it's defined will be added by further patches.
----
- xen/arch/x86/hvm/hvm.c             | 60 ++++++++++++++++++++++++
- xen/arch/x86/hvm/svm/svm.c         |  5 ++
- xen/arch/x86/hvm/vmx/vmcs.c        |  1 +
- xen/arch/x86/hvm/vmx/vmx.c         |  4 ++
- xen/arch/x86/include/asm/hap.h     |  1 -
- xen/arch/x86/include/asm/hvm/hvm.h |  8 ++++
- xen/arch/x86/mm.c                  |  8 ++++
- xen/arch/x86/mm/hap/hap.c          | 75 ------------------------------
- xen/arch/x86/mm/paging.c           |  4 +-
- 9 files changed, 87 insertions(+), 79 deletions(-)
+ xen/arch/x86/include/asm/domain.h |  2 +
+ xen/arch/x86/include/asm/mm.h     |  4 ++
+ xen/arch/x86/mm.c                 | 80 +++++++++++++++++++++++++++++--
+ xen/arch/x86/setup.c              |  8 ++++
+ xen/arch/x86/smpboot.c            |  4 ++
+ 5 files changed, 95 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 7f4b627b1f5f..3f771bc65677 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -104,6 +104,54 @@ static const char __initconst warning_hvm_fep[] =
- static bool __initdata opt_altp2m_enabled;
- boolean_param("altp2m", opt_altp2m_enabled);
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 8c366be8c75f..7620a352b9e3 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -313,6 +313,8 @@ struct arch_domain
+ {
+     struct page_info *perdomain_l3_pg;
  
-+DEFINE_PER_CPU(root_pgentry_t *, monitor_pgt);
++    struct page_info *perdomain_l2_pgs[PERDOMAIN_SLOTS];
 +
-+static int allocate_cpu_monitor_table(unsigned int cpu)
+ #ifdef CONFIG_PV32
+     unsigned int hv_compat_vstart;
+ #endif
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 2c309f7b1444..34407fb0af06 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -633,4 +633,8 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+ /* Setup the per-domain slot in the root page table pointer. */
+ void setup_perdomain_slot(const struct vcpu *v, root_pgentry_t *root_pgt);
+ 
++/* Allocate a per-CPU local L3 table to use in the per-domain slot. */
++int allocate_perdomain_local_l3(unsigned int cpu);
++void free_perdomain_local_l3(unsigned int cpu);
++
+ #endif /* __ASM_X86_MM_H__ */
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 13aa15f4db22..1367f3361ffe 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -6079,6 +6079,12 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
+         l2tab = __map_domain_page(pg);
+         clear_page(l2tab);
+         l3tab[l3_table_offset(va)] = l3e_from_page(pg, __PAGE_HYPERVISOR_RW);
++        /*
++         * Keep a reference to the per-domain L3 entries in case a per-CPU L3
++         * is in use (as opposed to using perdomain_l3_pg).
++         */
++        ASSERT(!d->creation_finished);
++        d->arch.perdomain_l2_pgs[l3_table_offset(va)] = pg;
+     }
+     else
+         l2tab = map_l2t_from_l3e(l3tab[l3_table_offset(va)]);
+@@ -6368,11 +6374,79 @@ unsigned long get_upper_mfn_bound(void)
+     return min(max_mfn, 1UL << (paddr_bits - PAGE_SHIFT)) - 1;
+ }
+ 
++static DEFINE_PER_CPU(l3_pgentry_t *, local_l3);
++
++static void populate_perdomain(const struct domain *d, l4_pgentry_t *l4,
++                               l3_pgentry_t *l3)
 +{
-+    root_pgentry_t *pgt = alloc_xenheap_page();
++    unsigned int i;
 +
-+    if ( !pgt )
++    /* Populate the per-CPU L3 with the per-domain entries. */
++    for ( i = 0; i < ARRAY_SIZE(d->arch.perdomain_l2_pgs); i++ )
++    {
++        const struct page_info *pg = d->arch.perdomain_l2_pgs[i];
++
++        BUILD_BUG_ON(ARRAY_SIZE(d->arch.perdomain_l2_pgs) >
++                     L3_PAGETABLE_ENTRIES);
++        l3e_write(&l3[i], pg ? l3e_from_page(pg, __PAGE_HYPERVISOR_RW)
++                             : l3e_empty());
++    }
++
++    l4e_write(&l4[l4_table_offset(PERDOMAIN_VIRT_START)],
++              l4e_from_mfn(virt_to_mfn(l3), __PAGE_HYPERVISOR_RW));
++}
++
++int allocate_perdomain_local_l3(unsigned int cpu)
++{
++    const struct domain *d = idle_vcpu[cpu]->domain;
++    l3_pgentry_t *l3;
++    root_pgentry_t *root_pgt = maddr_to_virt(idle_vcpu[cpu]->arch.cr3);
++
++    ASSERT(!per_cpu(local_l3, cpu));
++
++    if ( !opt_asi_pv && !opt_asi_hvm )
++        return 0;
++
++    l3 = alloc_xenheap_page();
++    if ( !l3 )
 +        return -ENOMEM;
 +
-+    clear_page(pgt);
++    clear_page(l3);
 +
-+    init_xen_l4_slots(pgt, _mfn(virt_to_mfn(pgt)), INVALID_MFN, NULL,
-+                      false, true, false);
++    /* Setup the idle domain slots (current domain) in the L3. */
++    populate_perdomain(d, root_pgt, l3);
 +
-+    ASSERT(!per_cpu(monitor_pgt, cpu));
-+    per_cpu(monitor_pgt, cpu) = pgt;
++    per_cpu(local_l3, cpu) = l3;
 +
 +    return 0;
 +}
 +
-+static void free_cpu_monitor_table(unsigned int cpu)
++void free_perdomain_local_l3(unsigned int cpu)
 +{
-+    root_pgentry_t *pgt = per_cpu(monitor_pgt, cpu);
++    l3_pgentry_t *l3 = per_cpu(local_l3, cpu);
 +
-+    if ( !pgt )
++    if ( !l3 )
 +        return;
 +
-+    per_cpu(monitor_pgt, cpu) = NULL;
-+    free_xenheap_page(pgt);
++    per_cpu(local_l3, cpu) = NULL;
++    free_xenheap_page(l3);
 +}
 +
-+void hvm_set_cpu_monitor_table(struct vcpu *v)
-+{
-+    root_pgentry_t *pgt = this_cpu(monitor_pgt);
-+
-+    ASSERT(pgt);
-+
-+    setup_perdomain_slot(v, pgt);
-+
-+    make_cr3(v, _mfn(virt_to_mfn(pgt)));
-+}
-+
-+void hvm_clear_cpu_monitor_table(struct vcpu *v)
-+{
-+    /* Poison %cr3, it will be updated when the vCPU is scheduled. */
-+    make_cr3(v, INVALID_MFN);
-+}
-+
- static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
+ void setup_perdomain_slot(const struct vcpu *v, root_pgentry_t *root_pgt)
  {
-@@ -113,6 +161,9 @@ static int cf_check cpu_callback(
-     switch ( action )
-     {
-     case CPU_UP_PREPARE:
-+        rc = allocate_cpu_monitor_table(cpu);
-+        if ( rc )
-+            break;
-         rc = alternative_call(hvm_funcs.cpu_up_prepare, cpu);
-         break;
-     case CPU_DYING:
-@@ -121,6 +172,7 @@ static int cf_check cpu_callback(
-     case CPU_UP_CANCELED:
-     case CPU_DEAD:
-         alternative_vcall(hvm_funcs.cpu_dead, cpu);
-+        free_cpu_monitor_table(cpu);
-         break;
-     default:
-         break;
-@@ -154,6 +206,7 @@ static bool __init hap_supported(struct hvm_function_table *fns)
- static int __init cf_check hvm_enable(void)
- {
-     const struct hvm_function_table *fns = NULL;
-+    int rc;
- 
-     if ( cpu_has_vmx )
-         fns = start_vmx();
-@@ -205,6 +258,13 @@ static int __init cf_check hvm_enable(void)
- 
-     register_cpu_notifier(&cpu_nfb);
- 
-+    rc = allocate_cpu_monitor_table(0);
-+    if ( rc )
+-    l4e_write(&root_pgt[root_table_offset(PERDOMAIN_VIRT_START)],
+-              l4e_from_page(v->domain->arch.perdomain_l3_pg,
+-                            __PAGE_HYPERVISOR_RW));
++    const struct domain *d = v->domain;
++
++    if ( d->arch.asi )
 +    {
-+        printk(XENLOG_ERR "Error %d setting up HVM monitor page tables\n", rc);
-+        return rc;
++        l3_pgentry_t *l3 = this_cpu(local_l3);
++
++        ASSERT(l3);
++        populate_perdomain(d, root_pgt, l3);
 +    }
-+
-     return 0;
- }
- presmp_initcall(hvm_enable);
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 988250dbc154..a3fc033c0100 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -902,6 +902,8 @@ static void cf_check svm_ctxt_switch_from(struct vcpu *v)
-     if ( unlikely((read_efer() & EFER_SVME) == 0) )
-         return;
++    else if ( is_hvm_domain(d) || d->arch.pv.xpti )
++        l4e_write(&root_pgt[root_table_offset(PERDOMAIN_VIRT_START)],
++                  l4e_from_page(v->domain->arch.perdomain_l3_pg,
++                                __PAGE_HYPERVISOR_RW));
  
-+    hvm_clear_cpu_monitor_table(v);
-+
-     if ( !v->arch.fully_eager_fpu )
-         svm_fpu_leave(v);
- 
-@@ -957,6 +959,8 @@ static void cf_check svm_ctxt_switch_to(struct vcpu *v)
-         ASSERT(v->domain->arch.cpuid->extd.virt_ssbd);
-         amd_set_legacy_ssbd(true);
-     }
-+
-+    hvm_set_cpu_monitor_table(v);
- }
- 
- static void noreturn cf_check svm_do_resume(void)
-@@ -990,6 +994,7 @@ static void noreturn cf_check svm_do_resume(void)
-         hvm_migrate_pirqs(v);
-         /* Migrating to another ASID domain.  Request a new ASID. */
-         hvm_asid_flush_vcpu(v);
-+        hvm_update_host_cr3(v);
-     }
- 
-     if ( !vcpu_guestmode && !vlapic_hw_disabled(vlapic) )
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 9b6dc51f36ab..5d67c8157825 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -1957,6 +1957,7 @@ void cf_check vmx_do_resume(void)
-         v->arch.hvm.vmx.hostenv_migrated = 1;
- 
-         hvm_asid_flush_vcpu(v);
-+        hvm_update_host_cr3(v);
-     }
- 
-     debug_state = v->domain->debugger_attached
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index cbe91c679807..5863c57b2d4a 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -1153,6 +1153,8 @@ static void cf_check vmx_ctxt_switch_from(struct vcpu *v)
-     if ( unlikely(!this_cpu(vmxon)) )
-         return;
- 
-+    hvm_clear_cpu_monitor_table(v);
-+
-     if ( !v->is_running )
-     {
+     if ( !is_pv_64bit_vcpu(v) )
          /*
-@@ -1182,6 +1184,8 @@ static void cf_check vmx_ctxt_switch_to(struct vcpu *v)
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index c5a13b30daf4..5bf81b81b46f 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1961,6 +1961,14 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
  
-     if ( v->domain->arch.hvm.pi_ops.flags & PI_CSW_TO )
-         vmx_pi_switch_to(v);
+     alternative_branches();
+ 
++    /*
++     * Setup the local per-domain L3 for the BSP also, so it matches the state
++     * of the APs.
++     */
++    ret = allocate_perdomain_local_l3(0);
++    if ( ret )
++        panic("Error %d setting up local per-domain L3\n", ret);
 +
-+    hvm_set_cpu_monitor_table(v);
- }
- 
- 
-diff --git a/xen/arch/x86/include/asm/hap.h b/xen/arch/x86/include/asm/hap.h
-index f01ce73fb4f3..ae6760bc2bf5 100644
---- a/xen/arch/x86/include/asm/hap.h
-+++ b/xen/arch/x86/include/asm/hap.h
-@@ -24,7 +24,6 @@ int   hap_domctl(struct domain *d, struct xen_domctl_shadow_op *sc,
-                  XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
- int   hap_enable(struct domain *d, u32 mode);
- void  hap_final_teardown(struct domain *d);
--void  hap_vcpu_teardown(struct vcpu *v);
- void  hap_teardown(struct domain *d, bool *preempted);
- void  hap_vcpu_init(struct vcpu *v);
- int   hap_track_dirty_vram(struct domain *d,
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 1c01e22c8e62..6d9a1ae04feb 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -550,6 +550,14 @@ static inline void hvm_invlpg(struct vcpu *v, unsigned long linear)
-                        (1U << X86_EXC_AC) | \
-                        (1U << X86_EXC_MC))
- 
-+/*
-+ * Setup the per-domain slots of the per-cpu monitor table and update the vCPU
-+ * cr3 to use it.
-+ */
-+DECLARE_PER_CPU(root_pgentry_t *, monitor_pgt);
-+void hvm_set_cpu_monitor_table(struct vcpu *v);
-+void hvm_clear_cpu_monitor_table(struct vcpu *v);
-+
- /* Called in boot/resume paths.  Must cope with no HVM support. */
- static inline int hvm_cpu_up(void)
- {
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 35e929057d21..7f2666adaef4 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -6367,6 +6367,14 @@ void setup_perdomain_slot(const struct vcpu *v, root_pgentry_t *root_pgt)
-     l4e_write(&root_pgt[root_table_offset(PERDOMAIN_VIRT_START)],
-               l4e_from_page(v->domain->arch.perdomain_l3_pg,
-                             __PAGE_HYPERVISOR_RW));
-+
-+    if ( !is_pv_64bit_vcpu(v) )
-+        /*
-+         * HVM guests always have the compatibility L4 per-domain area because
-+         * bitness is not know, and can change at runtime.
-+         */
-+        l4e_write(&root_pgt[root_table_offset(PERDOMAIN_ALT_VIRT_START)],
-+                  root_pgt[root_table_offset(PERDOMAIN_VIRT_START)]);
- }
- 
- static void __init __maybe_unused build_assertions(void)
-diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
-index c8514ca0e917..3279aafcd7d8 100644
---- a/xen/arch/x86/mm/hap/hap.c
-+++ b/xen/arch/x86/mm/hap/hap.c
-@@ -387,46 +387,6 @@ int hap_set_allocation(struct domain *d, unsigned int pages, bool *preempted)
-     return 0;
- }
- 
--static mfn_t hap_make_monitor_table(struct vcpu *v)
--{
--    struct domain *d = v->domain;
--    struct page_info *pg;
--    l4_pgentry_t *l4e;
--    mfn_t m4mfn;
--
--    ASSERT(pagetable_get_pfn(v->arch.hvm.monitor_table) == 0);
--
--    if ( (pg = hap_alloc(d)) == NULL )
--        goto oom;
--
--    m4mfn = page_to_mfn(pg);
--    l4e = map_domain_page(m4mfn);
--
--    init_xen_l4_slots(l4e, m4mfn, INVALID_MFN, d->arch.perdomain_l3_pg,
--                      false, true, false);
--    unmap_domain_page(l4e);
--
--    return m4mfn;
--
-- oom:
--    if ( !d->is_dying &&
--         (!d->is_shutting_down || d->shutdown_code != SHUTDOWN_crash) )
--    {
--        printk(XENLOG_G_ERR "%pd: out of memory building monitor pagetable\n",
--               d);
--        domain_crash(d);
--    }
--    return INVALID_MFN;
--}
--
--static void hap_destroy_monitor_table(struct vcpu* v, mfn_t mmfn)
--{
--    struct domain *d = v->domain;
--
--    /* Put the memory back in the pool */
--    hap_free(d, mmfn);
--}
--
- /************************************************/
- /*          HAP DOMAIN LEVEL FUNCTIONS          */
- /************************************************/
-@@ -548,25 +508,6 @@ void hap_final_teardown(struct domain *d)
+     /*
+      * NB: when running as a PV shim VCPUOP_up/down is wired to the shim
+      * physical cpu_add/remove functions, so launch the guest with only
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index e07add36b1b6..40cc14799252 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -986,6 +986,7 @@ static void cpu_smpboot_free(unsigned int cpu, bool remove)
      }
- }
  
--void hap_vcpu_teardown(struct vcpu *v)
--{
--    struct domain *d = v->domain;
--    mfn_t mfn;
--
--    paging_lock(d);
--
--    if ( !paging_mode_hap(d) || !v->arch.paging.mode )
--        goto out;
--
--    mfn = pagetable_get_mfn(v->arch.hvm.monitor_table);
--    if ( mfn_x(mfn) )
--        hap_destroy_monitor_table(v, mfn);
--    v->arch.hvm.monitor_table = pagetable_null();
--
-- out:
--    paging_unlock(d);
--}
--
- void hap_teardown(struct domain *d, bool *preempted)
- {
-     struct vcpu *v;
-@@ -575,10 +516,6 @@ void hap_teardown(struct domain *d, bool *preempted)
-     ASSERT(d->is_dying);
-     ASSERT(d != current->domain);
+     cleanup_cpu_root_pgt(cpu);
++    free_perdomain_local_l3(cpu);
  
--    /* TODO - Remove when the teardown path is better structured. */
--    for_each_vcpu ( d, v )
--        hap_vcpu_teardown(v);
--
-     /* Leave the root pt in case we get further attempts to modify the p2m. */
-     if ( hvm_altp2m_supported() )
+     if ( per_cpu(stubs.addr, cpu) )
      {
-@@ -782,21 +719,9 @@ static void cf_check hap_update_paging_modes(struct vcpu *v)
+@@ -1100,6 +1101,9 @@ static int cpu_smpboot_alloc(unsigned int cpu)
+     per_cpu(stubs.addr, cpu) = stub_page + STUB_BUF_CPU_OFFS(cpu);
  
-     v->arch.paging.mode = hap_paging_get_mode(v);
- 
--    if ( pagetable_is_null(v->arch.hvm.monitor_table) )
--    {
--        mfn_t mmfn = hap_make_monitor_table(v);
--
--        if ( mfn_eq(mmfn, INVALID_MFN) )
--            goto unlock;
--        v->arch.hvm.monitor_table = pagetable_from_mfn(mmfn);
--        make_cr3(v, mmfn);
--        hvm_update_host_cr3(v);
--    }
--
-     /* CR3 is effectively updated by a mode change. Flush ASIDs, etc. */
-     hap_update_cr3(v, false);
- 
-- unlock:
-     paging_unlock(d);
-     put_gfn(d, cr3_gfn);
- }
-diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
-index bca320fffabf..8ba105b5cb0c 100644
---- a/xen/arch/x86/mm/paging.c
-+++ b/xen/arch/x86/mm/paging.c
-@@ -794,9 +794,7 @@ long do_paging_domctl_cont(
- 
- void paging_vcpu_teardown(struct vcpu *v)
- {
--    if ( hap_enabled(v->domain) )
--        hap_vcpu_teardown(v);
--    else
-+    if ( !hap_enabled(v->domain) )
-         shadow_vcpu_teardown(v);
- }
- 
+     rc = setup_cpu_root_pgt(cpu);
++    if ( rc )
++        goto out;
++    rc = allocate_perdomain_local_l3(cpu);
+     if ( rc )
+         goto out;
+     rc = -ENOMEM;
 -- 
 2.45.2
 
