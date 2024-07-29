@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7256EC52CDA
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2024 09:00:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.766467.1176950 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03033C3DA7F
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2024 09:00:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.766468.1176954 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYMEu-0000at-Mi; Mon, 29 Jul 2024 09:00:20 +0000
+	id 1sYMEv-0000e0-0C; Mon, 29 Jul 2024 09:00:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 766467.1176950; Mon, 29 Jul 2024 09:00:20 +0000
+Received: by outflank-mailman (output) from mailman id 766468.1176954; Mon, 29 Jul 2024 09:00:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYMEu-0000ak-Ie; Mon, 29 Jul 2024 09:00:20 +0000
-Received: by outflank-mailman (input) for mailman id 766467;
- Mon, 29 Jul 2024 09:00:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sYMEu-0000dm-Q8; Mon, 29 Jul 2024 09:00:20 +0000
+Received: by outflank-mailman (input) for mailman id 766468;
+ Mon, 29 Jul 2024 09:00:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tqVw=O5=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sYMEs-0000Lt-Qa
- for xen-devel@lists.xenproject.org; Mon, 29 Jul 2024 09:00:18 +0000
+ id 1sYMEt-0000M4-Gl
+ for xen-devel@lists.xenproject.org; Mon, 29 Jul 2024 09:00:19 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fa1f509f-4d88-11ef-bc01-fd08da9f4363;
- Mon, 29 Jul 2024 11:00:18 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f9b08f62-4d88-11ef-8776-851b0ebba9a2;
+ Mon, 29 Jul 2024 11:00:17 +0200 (CEST)
 Received: from truciolo.homenet.telecomitalia.it
  (host-87-20-207-105.retail.telecomitalia.it [87.20.207.105])
- by support.bugseng.com (Postfix) with ESMTPSA id 85A4B4EE075F;
- Mon, 29 Jul 2024 11:00:17 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 7DA4A4EE075C;
+ Mon, 29 Jul 2024 11:00:16 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,65 +42,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa1f509f-4d88-11ef-bc01-fd08da9f4363
+X-Inumbo-ID: f9b08f62-4d88-11ef-8776-851b0ebba9a2
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH v5 3/8] x86/traps: address violations of MISRA C Rule 16.3
-Date: Mon, 29 Jul 2024 11:00:04 +0200
-Message-Id: <89cbae91ca175eaaf3e639ee4cd1accd9aedb866.1722239813.git.federico.serafini@bugseng.com>
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [XEN PATCH v5 1/8] automation/eclair: fix deviation of MISRA C Rule 16.3
+Date: Mon, 29 Jul 2024 11:00:02 +0200
+Message-Id: <8cade55538836d76a038a090f272b02ebdcc22b3.1722239813.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1722239813.git.federico.serafini@bugseng.com>
 References: <cover.1722239813.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add break or pseudo keyword fallthrough to address violations of
-MISRA C Rule 16.3: "An unconditional `break' statement shall terminate
-every switch-clause".
+Add missing escape for the final dot of the fallthrough comment,
+extend the search of a fallthrough comment up to 2 lines after the last
+statement and improve the text of the justification.
 
-No functional change.
-
+Fixes: a128d8da91 ("automation/eclair: add deviations for MISRA C:2012 Rule 16.3")
+Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/arch/x86/traps.c | 3 +++
- 1 file changed, 3 insertions(+)
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index ee91fc56b1..7a9299ae6c 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -1186,6 +1186,7 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index 0af1cb93d1..88b49c23d8 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -482,9 +482,8 @@ safe."
+ -config=MC3R1.R16.3,reports+={safe, "any_area(end_loc(any_exp(text(/BUG\\(\\);/))))"}
+ -doc_end
  
-     default:
-         ASSERT_UNREACHABLE();
-+        break;
-     }
- }
+--doc_begin="Switch clauses not ending with the break statement are safe if an
+-explicit comment indicating the fallthrough intention is present."
+--config=MC3R1.R16.3,reports+={safe, "any_area(end_loc(any_exp(text(^(?s).*/\\* [fF]all ?through.? \\*/.*$,0..1))))"}
++-doc_begin="Switch clauses ending with an explicit comment indicating the fallthrough intention are safe."
++-config=MC3R1.R16.3,reports+={safe, "any_area(end_loc(any_exp(text(^(?s).*/\\* [fF]all ?through\\.? \\*/.*$,0..2))))"}
+ -doc_end
  
-@@ -1748,6 +1749,7 @@ static void io_check_error(const struct cpu_user_regs *regs)
-     {
-     case 'd': /* 'dom0' */
-         nmi_hwdom_report(_XEN_NMIREASON_io_error);
-+        break;
-     case 'i': /* 'ignore' */
-         break;
-     default:  /* 'fatal' */
-@@ -1768,6 +1770,7 @@ static void unknown_nmi_error(const struct cpu_user_regs *regs,
-     {
-     case 'd': /* 'dom0' */
-         nmi_hwdom_report(_XEN_NMIREASON_unknown);
-+        break;
-     case 'i': /* 'ignore' */
-         break;
-     default:  /* 'fatal' */
+ -doc_begin="Switch statements having a controlling expression of enum type deliberately do not have a default case: gcc -Wall enables -Wswitch which warns (and breaks the build as we use -Werror) if one of the enum labels is missing from the switch."
 -- 
 2.34.1
 
