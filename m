@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2E5CC3DA7F
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2024 09:00:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.766471.1176988 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F334C3DA61
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2024 09:00:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.766474.1177007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYMEx-0001Rn-4x; Mon, 29 Jul 2024 09:00:23 +0000
+	id 1sYMEy-0001t9-Ob; Mon, 29 Jul 2024 09:00:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 766471.1176988; Mon, 29 Jul 2024 09:00:23 +0000
+Received: by outflank-mailman (output) from mailman id 766474.1177007; Mon, 29 Jul 2024 09:00:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYMEw-0001Qs-W8; Mon, 29 Jul 2024 09:00:22 +0000
-Received: by outflank-mailman (input) for mailman id 766471;
- Mon, 29 Jul 2024 09:00:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sYMEy-0001sH-Dc; Mon, 29 Jul 2024 09:00:24 +0000
+Received: by outflank-mailman (input) for mailman id 766474;
+ Mon, 29 Jul 2024 09:00:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tqVw=O5=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sYMEu-0000Lt-Qx
- for xen-devel@lists.xenproject.org; Mon, 29 Jul 2024 09:00:20 +0000
+ id 1sYMEw-0000M4-6r
+ for xen-devel@lists.xenproject.org; Mon, 29 Jul 2024 09:00:22 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fab3f2b0-4d88-11ef-bc01-fd08da9f4363;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fadf6cce-4d88-11ef-8776-851b0ebba9a2;
  Mon, 29 Jul 2024 11:00:19 +0200 (CEST)
 Received: from truciolo.homenet.telecomitalia.it
  (host-87-20-207-105.retail.telecomitalia.it [87.20.207.105])
- by support.bugseng.com (Postfix) with ESMTPSA id 872954EE0761;
+ by support.bugseng.com (Postfix) with ESMTPSA id D3B3A4EE0763;
  Mon, 29 Jul 2024 11:00:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fab3f2b0-4d88-11ef-bc01-fd08da9f4363
+X-Inumbo-ID: fadf6cce-4d88-11ef-8776-851b0ebba9a2
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -50,79 +50,40 @@ Cc: consulting@bugseng.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v5 6/8] x86/hvm: add defensive statements in unreachable program points
-Date: Mon, 29 Jul 2024 11:00:07 +0200
-Message-Id: <a686f70406c33d689b040af5d4e14878cde8a36c.1722239813.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH v5 7/8] x86/mm: add defensive return
+Date: Mon, 29 Jul 2024 11:00:08 +0200
+Message-Id: <24501d2e7f5d82d8e5a483a80b35e04ce765a7cf.1722239813.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1722239813.git.federico.serafini@bugseng.com>
 References: <cover.1722239813.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As a defensive measure, make sure to signal an error to the caller
-if an unreachable program point is reached.
+Add defensive return statement at the end of an unreachable
+default case. Other than improve safety, this meets the requirements
+to deviate a violation of MISRA C Rule 16.3: "An unconditional `break'
+statement shall terminate every switch-clause".
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/arch/x86/hvm/emulate.c  | 1 +
- xen/arch/x86/hvm/hvm.c      | 4 ++++
- xen/arch/x86/hvm/vmx/vmcs.c | 2 ++
- 3 files changed, 7 insertions(+)
+No changes from v3 and v4, further feedback on this thread would be appreciated:
+https://lists.xenproject.org/archives/html/xen-devel/2024-07/msg00474.html
+---
+ xen/arch/x86/mm.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 135aa6fc22..b6ca5cb9d1 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -2673,6 +2673,7 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        return X86EMUL_UNHANDLEABLE;
-     }
- 
-     if ( hvmemul_ctxt->ctxt.retire.singlestep )
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 1d32f473a4..d7f195ba9a 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -4919,6 +4919,8 @@ static int do_altp2m_op(
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        rc = -EOPNOTSUPP;
-+        break;
-     }
- 
-  out:
-@@ -5020,6 +5022,8 @@ static int compat_altp2m_op(
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        rc = -EOPNOTSUPP;
-+        break;
-     }
- 
-     return rc;
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 9b6dc51f36..5787110a56 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -1446,6 +1446,7 @@ struct vmx_msr_entry *vmx_find_msr(const struct vcpu *v, uint32_t msr,
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        break;
-     }
- 
-     if ( !start )
-@@ -1598,6 +1599,7 @@ int vmx_del_msr(struct vcpu *v, uint32_t msr, enum vmx_msr_list_type type)
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        return -EINVAL;
-     }
- 
-     if ( !start )
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 95795567f2..8973e76dff 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -917,6 +917,7 @@ get_page_from_l1e(
+                 return 0;
+             default:
+                 ASSERT_UNREACHABLE();
++                return -EPERM;
+             }
+         }
+         else if ( l1f & _PAGE_RW )
 -- 
 2.34.1
 
