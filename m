@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73AB0C3DA61
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 07:56:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.767321.1177925 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A082C3DA61
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 08:04:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.767339.1177939 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYhir-0006q8-3k; Tue, 30 Jul 2024 07:56:41 +0000
+	id 1sYhpy-0000fX-0z; Tue, 30 Jul 2024 08:04:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 767321.1177925; Tue, 30 Jul 2024 07:56:41 +0000
+Received: by outflank-mailman (output) from mailman id 767339.1177939; Tue, 30 Jul 2024 08:04:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYhir-0006q1-14; Tue, 30 Jul 2024 07:56:41 +0000
-Received: by outflank-mailman (input) for mailman id 767321;
- Tue, 30 Jul 2024 07:56:39 +0000
+	id 1sYhpx-0000fQ-Ti; Tue, 30 Jul 2024 08:04:01 +0000
+Received: by outflank-mailman (input) for mailman id 767339;
+ Tue, 30 Jul 2024 08:04:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hr/k=O6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sYhip-0006o1-LK
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 07:56:39 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
+ id 1sYhpx-0000du-7A
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 08:04:01 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 400f98f2-4e49-11ef-bc01-fd08da9f4363;
- Tue, 30 Jul 2024 09:56:39 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a7aa212c1c9so586917866b.2
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 00:56:39 -0700 (PDT)
+ id 4772dacd-4e4a-11ef-bc01-fd08da9f4363;
+ Tue, 30 Jul 2024 10:04:00 +0200 (CEST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5af6a1afa63so4034745a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 01:04:00 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acac64b7csm609893166b.93.2024.07.30.00.56.37
+ a640c23a62f3a-a7acab233aasm611223066b.8.2024.07.30.01.03.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jul 2024 00:56:37 -0700 (PDT)
+ Tue, 30 Jul 2024 01:03:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 400f98f2-4e49-11ef-bc01-fd08da9f4363
+X-Inumbo-ID: 4772dacd-4e4a-11ef-bc01-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1722326198; x=1722930998; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1722326640; x=1722931440; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=NUBmyX8fwbzEcyTRBXhDHMwFZvkgD8DEHn8tOwLUNME=;
-        b=gREhWyg8S+CL51maHtHYJfxMLUO6MDc4PnMzye/acEJjzOBoJzmTJ+UxR45bF+UodU
-         acLchUnRdk4qaGoVXA3UxrCRTdbb16WDRf4R46IuC2nCGDrjwXeTPB9A8Z7KID72uDC6
-         ATM3gSKJISlrDKbxeYnAVG1k9PcY6O0A88p5KM341IOL+CZEpH4IUS+oUNhDmeFGm1q8
-         YzqGFsWVhdoCG494Scs6YVAiSRsd3mdP9Cds4mStkx4XRc2h4iGYc2xOTws+hKsN9gdr
-         5RIF4f0QZPpbR/6dfgZ7w//PptumLRgQ4JYcEpCmwNOHjQjtDDGHG2kCWi8MsZ9C892b
-         bw7g==
+        bh=yKvKgh0M2Q1xpxKFE4KbmHIwVWCai7Z03Un0lCACDJM=;
+        b=Yo8AnCur/fiE1E2T3L6smAhcxeNO+BVl8F2hZk39ctIR232ggn7CzBfwJksUeM2Ujx
+         urS1aSSEphgsyRe1zVt8ViaqTqq5sx5mwBpykF41h5Hhl4i9pr7I6mnTp/92f3rKGwkP
+         CCe2c7YbbD33qSwUG6kzmCDrKcl3acPnrQwSxsRSHp72psMt5gSdDkVImI63ojQ2ozQV
+         ZbyAEz/EEyD9O++HklHq1o96yy6fJf1ixkv4BDpidCyTLoCQGAa+GVPeY1y7JXkGy97W
+         /XT7yhKqkC2vwFjq/PP+NcUpUaRHnj0Y5OyGjFvPDbvDjLXHb4bDoXWoB3o0UfxOaZuh
+         KW3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722326198; x=1722930998;
+        d=1e100.net; s=20230601; t=1722326640; x=1722931440;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NUBmyX8fwbzEcyTRBXhDHMwFZvkgD8DEHn8tOwLUNME=;
-        b=EewFh9HKkTE3QN/0EMQQ0Pzzv3qtAXlLrDGFeTAkGbqYZyT6h0FQ0SktbhEjEOTCbn
-         8S7u7UQwagOiNVtb23e3Kb+7zjty6gfVugSrLpfekbKZ6Y6zvx7S2NeumdjpGMADgRTM
-         201v8X/uzIDfOH8NLoP9n+OJSwwbusq7M0cVYVsbIKxDTj6oKVkQ/gz/UJ6gB7P3zSKk
-         c/HXrdLptARyrnGYnR/ArnjNQ/k5Rb6jy0bhUEnWa8kRq3jHKb/ne35NJEsep1Zi5DXn
-         sKpSAz/xvwritQlxVDOtPA2zmkRFRm80zVjSWBER5nJw+DcclKIBo8gwo6dpMKWemNBt
-         BfgA==
-X-Forwarded-Encrypted: i=1; AJvYcCXU52VTiT3K+AO0hOyjfkP9JpN+BroH4F0ZgPxVSrrpFslOFVAO9qRfLMTUSS11+QV485bhYIzdVQtE3EPFgCYYeyjZZSsqMoA5kuHfk7c=
-X-Gm-Message-State: AOJu0Yy3Kt/DcKFRDB06Vaj5Yzcjqc1ZiEjYg+jDRbZqaENHXfn5R0K0
-	Q6/2ni4HZjA4fxrIYW9OnXChIM5g0ZQXxOAZsXPMED6d0q2B3BESWeBgsEBvug==
-X-Google-Smtp-Source: AGHT+IFeKXHa+iZm3YCGiyjLm+1Cjz8azkzisE0w9u5iNPElqQ+wPwEJ0w63Usuh3XRIFqDGgHhknQ==
-X-Received: by 2002:a17:907:1c19:b0:a6f:8265:8f2 with SMTP id a640c23a62f3a-a7d400d6673mr782289366b.37.1722326198155;
-        Tue, 30 Jul 2024 00:56:38 -0700 (PDT)
-Message-ID: <6c2ebc9e-cc0d-4139-80a2-4d7025989a9e@suse.com>
-Date: Tue, 30 Jul 2024 09:56:36 +0200
+        bh=yKvKgh0M2Q1xpxKFE4KbmHIwVWCai7Z03Un0lCACDJM=;
+        b=V2L+saSg2Tjg/+RUDutFQ3Kj708AaHp3wPTeKD15ElyITKE2fCVwJLrX1aThbcIJvM
+         znUb/8XFiCzXGv9yzodSA6dqKRm135NLfjejsbICbZwHuu0cA/7okWvzR7zXFwur/JMU
+         ONWWCkl/ek4vsJqN5BhLAk/ovUNoUmNXOuqkqKmp1eOFmRGOq4mZ553eT2TYXFV/xipN
+         RnGzUGW+sozQXtAWh8yT0HgSiAUZKYVgYwVoImxJUU7seMTqTWgW2+33FN/2c62d18V1
+         VbWnhTSVVfMXdQNQSxyWZe/vi5KPTBRvfKlRrDdGZms5mH8fulZvNyHxRApdUGRFoJED
+         X+nA==
+X-Forwarded-Encrypted: i=1; AJvYcCUVfuqe4nHtxC1MjhhKUWdBfrcm8YBxWTsWoT5miUM9KOTI6h1Rxni6D2UrPkukCZI70lfRL9jey+noxDJaN9/EifTzQCzWNtpr3Y7MIbw=
+X-Gm-Message-State: AOJu0YwW/2V9aWn6QbqgD8JSA/Mj3q+EfuCHV3ykl3gr3l3U/rm1FDwH
+	HggckreAOf4SwWEpTCDT0diMeiXwT8B/5kFHyR9SCmYYWIKhJD7vcyisjRBW8A==
+X-Google-Smtp-Source: AGHT+IEthjftmP1pChPfB1IXcVYdAE8KM1tCBu3OHw72pPXQJVHnD2AsZj2r7jaMT549XOPd63Jvgw==
+X-Received: by 2002:a17:906:7955:b0:a7a:84ec:8785 with SMTP id a640c23a62f3a-a7d40086e54mr760333366b.40.1722326639952;
+        Tue, 30 Jul 2024 01:03:59 -0700 (PDT)
+Message-ID: <0816a3b3-61b1-4382-b919-9d25f124ebbd@suse.com>
+Date: Tue, 30 Jul 2024 10:03:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/9] xen/riscv: introduce asm/pmap.h header
+Subject: Re: [PATCH v3 6/9] xen/riscv: introduce functionality to work with
+ cpu info
 To: oleksii.kurochko@gmail.com
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
@@ -91,9 +92,9 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
 References: <cover.1721834549.git.oleksii.kurochko@gmail.com>
- <11b5487659a9c76793e520c108cd92c6c84b908d.1721834549.git.oleksii.kurochko@gmail.com>
- <3359e37e-eaae-49ca-80a5-2bf70b9b46c7@suse.com>
- <78effb178b1ffe7ccb1714a13157e94f5e816b01.camel@gmail.com>
+ <4ea9005d4209e24df9b30a7b3c282276084a3cf1.1721834549.git.oleksii.kurochko@gmail.com>
+ <113b9d4a-d31c-4491-bf8c-96ac97d98f45@suse.com>
+ <370588e93fe59acb0ae1f26416541290004e593b.camel@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -119,78 +120,49 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <78effb178b1ffe7ccb1714a13157e94f5e816b01.camel@gmail.com>
+In-Reply-To: <370588e93fe59acb0ae1f26416541290004e593b.camel@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 29.07.2024 18:22, oleksii.kurochko@gmail.com wrote:
-> On Mon, 2024-07-29 at 16:29 +0200, Jan Beulich wrote:
+On 29.07.2024 18:32, oleksii.kurochko@gmail.com wrote:
+> On Mon, 2024-07-29 at 17:28 +0200, Jan Beulich wrote:
 >> On 24.07.2024 17:31, Oleksii Kurochko wrote:
->>> --- /dev/null
->>> +++ b/xen/arch/riscv/include/asm/pmap.h
->>> @@ -0,0 +1,33 @@
->>> +/* SPDX-License-Identifier: GPL-2.0 */
->>> +#ifndef ASM_PMAP_H
->>> +#define ASM_PMAP_H
->>> +
->>> +#include <xen/bug.h>
->>> +#include <xen/mm.h>
->>> +#include <xen/page-size.h>
->>> +
->>> +#include <asm/fixmap.h>
->>> +#include <asm/flushtlb.h>
->>> +#include <asm/system.h>
->>> +
->>> +static inline void arch_pmap_map(unsigned int slot, mfn_t mfn)
+>>> +static inline unsigned int smp_processor_id(void)
 >>> +{
->>> +    pte_t *entry = &xen_fixmap[slot];
->>> +    pte_t pte;
+>>> +    unsigned int id;
 >>> +
->>> +    ASSERT(!pte_is_valid(*entry));
+>>> +    id = get_processor_id();
 >>> +
->>> +    pte = mfn_to_xen_entry(mfn, PAGE_HYPERVISOR_RW);
->>> +    write_pte(entry, pte);
->>> +}
+>>> +    /*
+>>> +     * Technically the hartid can be greater than what a uint can
+>>> hold.
+>>> +     * If such a system were to exist, we will need to change
+>>> +     * the smp_processor_id() API to be unsigned long instead of
+>>> +     * unsigned int.
+>>> +     */
+>>> +    BUG_ON(id > UINT_MAX);
 >>
->> Perhaps add a comment to clarify why it's safe to omit a TLB flush
->> here.
->> Note that arch_pmap_unmap() having one is a necessary but not
->> sufficient
->> condition to that. In principle hardware may also cache "negative"
->> TLB
->> entries; I have no idea how RISC-V behaves in this regard, or whether
->> that aspect is actually left to implementations.
-> what do you mean by "negative" TLB? an old TLB entry which should be
-> invalidated?
+>> Compilers may complaing about this condition being always false. But:
+>> Why
+>> do you check against UINT_MAX, not against NR_CPUS? 
+> Because HART id theoretically could be greater then what unsigned int
+> can provide thereby NR_CPUS could be also greater then unsigned int (
+> or it can't ? ).
 
-No, I mean TLB entries saying "no valid translation here". I.e. avoiding
-recurring walks of something that was once found to have no translation.
+Well, there are two aspects here. On a system with billions of harts,
+we wouldn't be able to bring up all of them anyway. NR_CPUS is presently
+limited at about 16k.
 
->>> +static inline void arch_pmap_unmap(unsigned int slot)
->>> +{
->>> +    pte_t pte = {};
->>> +
->>> +    write_pte(&xen_fixmap[slot], pte);
->>> +
->>> +    flush_xen_tlb_range_va_local(FIXMAP_ADDR(slot), PAGE_SIZE);
->>> +}
->>
->> For both functions, even if mainly for documentation purposes, it may
->> be desirable to mark them __init. It's again a necessary (but not
->> sufficient) condition here, to validly use local TLB flushes only.
-> Does __init in this context means that it will be called only by boot
-> cpu at the start and that is it?
+Yet than I have no idea whether hart IDs need to be all consecutive. On
+other hardware (x86 for example), the analog APIC IDs don't need to be.
+Hence I could see there being large hart IDs (unless excluded somewhere
+in the spec), which then you map to consecutive Xen CPU IDs, all having
+relatively small numbers (less than NR_CPUS).
 
-No, and I said so in my reply. __init is indicative of the function not
-being suitable for runtime use, but it is not enough to indicate the
-function is also unsuitable for use as soon as a 2nd CPU is being brought
-up. Yet for the latter we have no proper annotation. Hence my suggestion
-to use the former to have at least a limited indicator.
-
-An alternative might be to add ASSERT(system_state < SYS_STATE_smp_boot).
-That, however, exists in common/pmap.c already anyway.
-
-Yet another alternative would be a clarifying comment.
+If hart IDs can be sparse and wider than 32 bits, then I'd suggest to
+use an appropriately typed array right away for the Xen -> hart
+translation. For the hart -> Xen translation, if also needed, an array
+may then not be appropriate to use.
 
 Jan
 
