@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8C44C3DA70
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 05:42:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.767230.1177851 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA5C0C3DA49
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 06:29:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.767270.1177866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYfd3-00012q-8R; Tue, 30 Jul 2024 05:42:33 +0000
+	id 1sYgM6-0007xI-PZ; Tue, 30 Jul 2024 06:29:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 767230.1177851; Tue, 30 Jul 2024 05:42:33 +0000
+Received: by outflank-mailman (output) from mailman id 767270.1177866; Tue, 30 Jul 2024 06:29:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYfd3-00011d-2y; Tue, 30 Jul 2024 05:42:33 +0000
-Received: by outflank-mailman (input) for mailman id 767230;
- Tue, 30 Jul 2024 04:02:41 +0000
+	id 1sYgM6-0007xB-Mr; Tue, 30 Jul 2024 06:29:06 +0000
+Received: by outflank-mailman (input) for mailman id 767270;
+ Tue, 30 Jul 2024 06:29:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EP8J=O6=yahoo.com=avikalpa@srs-se1.protection.inumbo.net>)
- id 1sYe4P-00047z-Kz
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 04:02:41 +0000
-Received: from sonic311-22.consmr.mail.sg3.yahoo.com
- (sonic311-22.consmr.mail.sg3.yahoo.com [106.10.244.39])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=hr/k=O6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sYgM5-0007x5-TJ
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 06:29:05 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8b9a03b3-4e28-11ef-8776-851b0ebba9a2;
- Tue, 30 Jul 2024 06:02:38 +0200 (CEST)
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic311.consmr.mail.sg3.yahoo.com with HTTP; Tue, 30 Jul 2024 04:02:29 +0000
-Received: by hermes--production-ir2-57d49df6b5-64vl7 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID a6a452cd5391e7bd45c6614673d5491f; 
- Tue, 30 Jul 2024 04:02:22 +0000 (UTC)
+ id 02e76180-4e3d-11ef-8776-851b0ebba9a2;
+ Tue, 30 Jul 2024 08:29:02 +0200 (CEST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-59589a9be92so6450437a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jul 2024 23:29:02 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5ac64eb3591sm6717367a12.67.2024.07.29.23.29.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Jul 2024 23:29:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,130 +47,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b9a03b3-4e28-11ef-8776-851b0ebba9a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1722312149; bh=aW3+eSQfsxuMVwhV9iZgk7IBkdQbWmEeUnyPqQY/GMo=; h=Date:To:Cc:From:Subject:References:From:Subject:Reply-To; b=SUVMnoBqRzbzW97WeYsOLwUSKBTApl0o5UXm43S8xle9zAaYZ/XFTdwUp6YNgKBhxVNoWWybN4wYndzpqIedOPy1Nd4VUuH7qX9yLdQpE+HXQ1L09UdxkRGo89jKMAJhA4ce0Qj9a94p9Tyfby23kRRNcap1zE1M7vQaXfYuZ5iSCB+sHFAB/XHbo1RZXGtFiBS26PfEM7lhsnUlzdZiC6bk9oTWi9MxkPbP3dTSYQMxG1eT9Dh00JtWYNiqfRwOtRZhx9nS27daTOvPQqP/xE9FYiuUAxqGHZBkNFXIHHeZhJArJADn8kpb04IxlIHoo6smWVW9QVoweN31xg42zw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1722312149; bh=e9ntVuWGP8U+iZJRjNooRQZWYfJeWe2kfbTOhFfNLXx=; h=X-Sonic-MF:Date:To:From:Subject:From:Subject; b=aqfuEtwQ31ObOyfCRWiQOxeSE4r3QSsxK+6s0p7xMgSHlV4CXNycupW3B82GXGVsNw2I9w+Au9NHmGwxAug/YhzQybqNrwzlvjBOBw1ufnqgGLkq3siNcgC051FQ3MWuVFyjXpn7yQ9Y3yAg8WZZb/mr3dMdmqfHPpo055ZmLX9ZgIiR5cA6xDCgxsqU3W8W8HEqpyYHSm8D3/plb/ldbKDmm474gz6NsksvWDY3eyd+HxJRpBaQSrLKFZcxUw4pm7XCd33PlEUXMhzPcSQ5CiQ/p2Tv2TDwLgHKkShA0UmyY4swPYiqgU/GMh3/C171y43oh2BVEr98m8gqYYwkAw==
-X-YMail-OSG: Tey3vWsVM1muYHYyLHsILzy6CM8QOBk.3QLF8Kr4ZM1_fVRxe.9PD8D9yb_KnsS
- IsTyRDF6n6vABI6FOqx3VEHSiu0j4aJao0mow_jXdKTkf8aM5O2VTggrapbItF31.tNfLhwRHY9F
- 9hGZYfDiKWx4L8kaBsskuL5GseF.jHxK7Sp0jR5ymvfbLNbjNtks3HL1B5zG9DFp5n0WbQKeB4Fw
- _65TrI_JKsRaDTGJf6vuOb0bx1XgOLE1Mp0La2TbdihRVpQGiR8L1MaYPEG3BXnTZBxlMMeq7Xa2
- NbA8M0a0e63DVIfB4BLw7QsfTfzKOp7sKwDlXIwh4VNRiHZSgKeGkHzYTc98pCG9l1Br.zfJN.8B
- eQ.aGs47u7iWp8XV99adKSVsbXBIqb80NYRvIx4uhB2lmR8Ny1WK_waW.ejmPZbHZz1IAf7HIk9l
- 3mLHRwsLz3XOgK8OHMHYWPs3AnKcqWDQvvcJpM5DAuGZzSMcUThSP_anXoHnTT6VEBpkgXeQqnWX
- RGhsL71Nz47ElTZicf.aUFB0zCnQYrOl0dwZQA_sQ_bp7abH.tbVI1GmgdielonRyhI.X1EYbWAm
- i5acSsHKDZsQoqdHF.4cohyrqho6DhPPh3wodWTjragHrgNfX_oO77.eAMar1iPfLGuVBfL2ezXX
- SnVWsKORJGD.U7SAp3MNo1GvHjOPchiqO3GD0.hud9snLVTZ34XnAG.ttwXYqv4EnMvgP_P4sre5
- 5TXieTbgljKHppU4UnmnWOg18AFHJNYCf3Q2Fjs2JEPiOjPPYylL1EU7pth7qIdtPOwvr4fWyB9B
- nTpHI7gwoxFAS7Fb2eImubEGudiUKqDRzowvKzm8iIW_jIDrE2wc21q7x6jyslClh4FMt9gf2Xdt
- qhHLRtWs4DNPmAx2SzrMrMzfbKcSY.b.7loQRr9.KMjj5Jtli1YwKzddqi5rT7SbbO81DGn5alqJ
- EiNX5t7ZQEkcKZLqlIldx915e4Q_pimSwLE9VPp97KS3bkuphe3GsoqRLvJYCgiM4oGqPW3XGmBK
- FpkoGfKAgsNUWIFxNrkXKzSazc8kXkQiBo7cexcybKok34EAEuAfIOc3CEOwLLXt7.r6sO9vSBBt
- Wdfn5bzEnN5FMLT7o4i.OBCnQRNsDikT0sloQC93AcRM58l4Mvq2PJPHkP_63aZu7wgC5RLwQi_F
- 72ykaIEelFUWBdGX3oa5K9GsdTsdGTy0vY6VtJ9QJATufyNOhE2wZPK7CZNeP0bvlIUSbFVtrtt4
- YxV47Q9CWef_EmVeUhqAEVUyjuvFMoKXZTkvKD8OPJ_F43KnMnNhnpBAOszVH3C7F0uw_y_8Nq0.
- dkbtmemnW3PHRujwy..LKvG8Dug8z5H.iGIGGXfMTX8TLIDonwFIJlOrGBdsLFn2Vo2GJPlY6B_Y
- QM63GZl7dhNnl23d9gynxBI93_AehAr7hAxHC7iQSnW_cstOct3T4ZWVmSPlN19otZ79n7lShsU_
- VxH.zGWPEb.36PBMLfJe8_tjW.AzgQs3k3oZOAhv_tjk56KddltHFqKaIEQYv9i76PhFpXipsjMQ
- VrnNFKFObHcGMvxzraIAyTCdLPjmPM.ZNV33r1pZ5x5U685nXWuYaL_Q398VS.1IUmBtbUW2roHq
- VFoJ1atUJwEp6ZHVhNLzzZpm8YpwpiE5i_Cv_YSDnA3gncBscQUxxK7kuUNGovIVwhR6PuCgZ1am
- 9uBqwKLPHuHswG49pB.OR8pS_VxdkmT9N9jrUul9sNG2FRIQPiGnv3jO75AZeZ8OKv.J1XcpKEha
- b4tBe4qJpF99JjxOLvFibtT1dVgAIYpprUiLTqXJTGCUJVPYgqw2HR046hftXMJ.hRowEKeSQ64f
- ApobH4w33cCKgT45_SGSibzbx4uyjaHG3lg5ohF5h3ZaRU3hMT4lj134eFBwt_9yNXlNxGuEryuW
- _f8kfq_WlaF.O5C7ASDoNP8pkPBynyCvgU0u2HctkD_QCklZjoRXgKmh1th.wLjwjiaNPikLtloF
- _JXPQAFqpIXFn_et5C.gcqzV1SzHIHS6HttaUUdgUq86TZPSJDaZpo2CKN_EMk.uiox0GEkJTgvn
- c_ACg.NZa.oX1kqDQYB1Selt6vJlp8h8aS7KbYnS0f5PKxa9BcNRmijH5alypzIwpByp_uLv4oYZ
- IWFkWG130qK9o2z8ePjUYxxdvfsaoDoIvI.rc1tkNykYnHD9Zaqpgwax0UD_vYKdWzOYfcmHu2h.
- NnZg-
-X-Sonic-MF: <avikalpa@yahoo.com>
-X-Sonic-ID: f070aa9a-c771-45f2-aa1b-5cfee1fd7865
-Message-ID: <05395ed2-3bf3-4926-8e24-c2e7ff37ed26@yahoo.com>
-Date: Tue, 30 Jul 2024 09:32:13 +0530
+X-Inumbo-ID: 02e76180-4e3d-11ef-8776-851b0ebba9a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1722320942; x=1722925742; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=o30rSjGyiLA+baByhVUoagAJ4Eom+O/0agfEBg6EUQY=;
+        b=Y8X/uwXypuewe9oKyzlviHbuV9eU/IZFOnM2enzEek0ud7BFCEUtyihQGzBHiH1JvU
+         7kf+Gokq1CmpKLX/XyiNOAOhWElMGPgwVYNTKZ+2BLLYO2Kb1Cf18EVz8oZuh6WkSO3e
+         KUtB+q05+ElPDogRc6QD1ftCe+KChxf2xMTiHPHJVsaIF6K/WaRvLfSe9viXB436DMae
+         eN4BmsbjbVOF84nb0AtjKX4O4Wd/2LzHgzJrKUeN99KS3x1dWyuH0pfVQCgS5c8IQ5iS
+         +vp2/5zXzJf9sCKIQd43hSsv1+zBGV2qQcma3rE+LWTNTHraCfA1f6snAnPN+Sa7qLyJ
+         4R6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1722320942; x=1722925742;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=o30rSjGyiLA+baByhVUoagAJ4Eom+O/0agfEBg6EUQY=;
+        b=kAHefk+Ligr6ZKEeNFsugcbthPwwZJoqOJnW4I6k01VQKTL/wzpb7EMikTtldsP9no
+         QmIjSzDinoqKlIZquOJXyun1MshEn4ZIn7EyLC3mgzkLeCdCGOJZDE3aokSZ642BSiZa
+         wkbvGBt+DWFGZrdCtudTbZNwYIK3UMcPqye5NgaKh53YU6IJJE4dJUW//1b3X3wK2UXi
+         yHUi6wEwbpnAdswdDFoJIuZz5KDS4FkrBTvQhfsN8+zXpYtzz0oeVvw7qFIZ5HeyVvuJ
+         FdbaMShqvf/VdsBStVQG5bwdwsyamMct7sUiD5Wod/i3PnSYpJIn60MboBM8GI4SbKLb
+         STEg==
+X-Forwarded-Encrypted: i=1; AJvYcCXT6Q9cjCJZIylmEaVyRaIGmjDUiv2N1V7g07tkUcWG/nb05zmwRbI1ho21MGF0DNmccvZJPJRy81GPHCq2bTqVsXF5hk+DiXFxlirn5oQ=
+X-Gm-Message-State: AOJu0YxQ/V5+WiVFI5mJ44I8q5bGXu0W35OCtRirE634ibkCKErq+5na
+	Q/9Suhr2sJxsGCSg2jGmS5VPF8dWrptJaaC78YVLNzMz7ojGd56mctASujaSFg==
+X-Google-Smtp-Source: AGHT+IH59fRTnHOIPue11mbvKplVBJZBUKMytES2o/lykZSYrTX/ZWE3ous8WgGmLHDSQaw9iZaPQw==
+X-Received: by 2002:a50:d7c5:0:b0:5a2:1f7b:dffa with SMTP id 4fb4d7f45d1cf-5b020101f53mr6212972a12.3.1722320941473;
+        Mon, 29 Jul 2024 23:29:01 -0700 (PDT)
+Message-ID: <1cf7a97f-b9fd-4daa-851b-fb0fc43a2817@suse.com>
+Date: Tue, 30 Jul 2024 08:29:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] xen: add no_instrument_function attributes
+To: Stewart Hildebrand <stewart.hildebrand@amd.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <20240729142421.137283-1-stewart.hildebrand@amd.com>
+ <20240729142421.137283-2-stewart.hildebrand@amd.com>
+ <baa57ab0-60c9-49b0-9601-09bea081ddd7@suse.com>
+ <5d015d47-0ba0-4a3d-861e-2c7712d9a97d@amd.com>
 Content-Language: en-US
-To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com
-From: A Kundu <avikalpa@yahoo.com>
-Subject: [KEXEC] Lacking documentation and kexec failure with Xen 4.19-rc4 and
- 4.20-dev on linux host
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-References: <05395ed2-3bf3-4926-8e24-c2e7ff37ed26.ref@yahoo.com>
-X-Mailer: WebService/1.1.22544 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.yahoo
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <5d015d47-0ba0-4a3d-861e-2c7712d9a97d@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I am experiencing issues using kexec to load Xen 4.19-rc4 and
-4.20-dev on a debian host.
+On 29.07.2024 20:56, Stewart Hildebrand wrote:
+> On 7/29/24 10:55, Jan Beulich wrote:
+>> On 29.07.2024 16:24, Stewart Hildebrand wrote:
+>>> In preparation for using -finstrument-functions option, we need to tag a
+>>> few functions that don't work well with such instrumentation. If we
+>>> don't intervene, we would end up with linker errors such as undefined
+>>> reference to __bad_cmpxchg.
+>>
+>> I can't spot mention of such a side effect from the documentation. Talk
+>> there is of function calls being added at function entry and exit.
+>> Nothing is being said that calls to other functions would also be
+>> affected.
+> 
+> Oddly, it seems the compiler fails remove the implementations of the
+> affected functions from the object files even though they are not called
+> in the generated code (because they were inlined). I can mention this in
+> the commit message.
+> 
+> For example, if no_instrument is omitted from __int_cmpxchg, feeding one
+> of the object files through aarch64-none-linux-gnu-objdump -d yields for
+> example:
+> 
+> 0000000000000048 <__int_cmpxchg>:
+>      <snip>
+>      16c:       94000000        bl      0 <__bad_cmpxchg>
+>      <snip>
+> 
+> Yet, __int_cmpxchg is not called by anything.
+> 
+> Even more oddly, this appears to be the case for both clang and gcc.
 
-The current documentation at
-https://xenbits.xenproject.org/docs/4.19-testing/misc/kexec_and_kdump.txt
-appears to be missing crucial details on properly using kexec
-with the --vmm option for loading Xen.
+Upon a 2nd, closer look this doesn't appear odd at all. The 1st
+argument to the two instrumentation functions is a pointer to the
+function, thus requiring instantiation somewhere. Question then is
+whether adding the attribute is an appropriate approach to the issue.
+Gcc doc kind of suggests to possibly use extern inline instead.
 
-kexec complains the --vmm option is not present.
-
-System information:
-$ uname -a
-Linux host 6.9.10-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.9.10-1 
-(2024-07-19) x86_64 GNU/Linux
-
-$ kexec --version # compiled from source tarball with ./configure --with-xen
-kexec-tools 2.0.29
-
-Steps to reproduce:
-
-1. Set variables:
-
-XEN_HYPERVISOR="/boot/xen.gz"
-XEN_CMD="dom0_mem=6G dom0_max_vcpus=6 dom0_vcpus_pin cpufreq=xen"
-
-2. Attempt to load Xen 4.19-rc4:
-
-# kexec -l "$XEN_HYPERVISOR" --command-line="$XEN_CMD"
-Could not find a free area of memory of 0x3b6001 bytes...
-elf_exec_build_load_relocatable: ELF exec load failed
-
-3. Attempt to load Xen 4.20-dev:
-
-# kexec -l "$XEN_HYPERVISOR" --command-line="$XEN_CMD"
-Could not find a free area of memory of 0x3f8001 bytes...
-elf_exec_build_load_relocatable: ELF exec load failed
-
-4. Follow the steps in the Xen manual at misc/kexec_and_kdump.txt:
-
-# Set variables
-
-XEN_IMAGE="/boot/xen-4.19-rc.gz"
-DOM0_IMAGE="/boot/vmlinuz-6.9.10-amd64"
-DOM0_INITRD="/boot/initrd.img-6.9.10-amd64"
-DOM0_MEMORY="6G"
-DOM0_CPUS="0-5"
-
-# Prepare Xen and dom0 command line arguments
-
-XEN_ARGS="no-real-mode dom0_mem=${DOM0_MEMORY}"
-DOM0_ARGS="max_cpus=6 dom0_max_vcpus=6 dom0_vcpus_pin"
-
-# Load Xen and dom0 kernel
-
-kexec -l --append="${XEN_ARGS} -- ${DOM0_ARGS}" --initrd=${DOM0_INITRD} \
-   --vmm=${XEN_IMAGE} ${DOM0_IMAGE}
-
-Result:
-kexec: unrecognized option '--vmm=/boot/xen-4.19-rc.gz'
-
-I have tried compiling kexec-tools 2.0.29 from source using
-./configure --with-xen, as well as using debian's apt version, but
-both result in the same "unrecognized option '--vmm'" error.
-
-Please provide guidance on the correct steps to get kexec working
-for loading Xen 4.19-rc4 and 4.20-dev. Additionally, I kindly
-request that the documentation be updated with these details to
-assist other users who may encounter this issue.
-
-If you need any further information to investigate this problem,
-please let me know.
-
-Thank you for your attention to this matter.
-
-A Kundu
+Jan
 
