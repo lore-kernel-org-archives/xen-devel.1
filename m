@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F13FAC3DA70
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 14:36:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.767890.1178596 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61957C3DA49
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 15:00:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.767908.1178605 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYnxN-0007FY-3z; Tue, 30 Jul 2024 14:36:05 +0000
+	id 1sYoKe-0004X1-0F; Tue, 30 Jul 2024 15:00:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 767890.1178596; Tue, 30 Jul 2024 14:36:05 +0000
+Received: by outflank-mailman (output) from mailman id 767908.1178605; Tue, 30 Jul 2024 15:00:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYnxN-0007FQ-18; Tue, 30 Jul 2024 14:36:05 +0000
-Received: by outflank-mailman (input) for mailman id 767890;
- Tue, 30 Jul 2024 14:36:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fTg3=O6=tklengyel.com=tamas@srs-se1.protection.inumbo.net>)
- id 1sYnxM-0006se-0x
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 14:36:04 +0000
-Received: from sender3-op-o17.zoho.com (sender3-op-o17.zoho.com
- [136.143.184.17]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0ae3800f-4e81-11ef-bc01-fd08da9f4363;
- Tue, 30 Jul 2024 16:36:02 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1722350157300640.2217030234874;
- Tue, 30 Jul 2024 07:35:57 -0700 (PDT)
-Received: by mail-yw1-f172.google.com with SMTP id
- 00721157ae682-64b417e1511so34461977b3.3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 07:35:57 -0700 (PDT)
+	id 1sYoKd-0004Wu-U0; Tue, 30 Jul 2024 15:00:07 +0000
+Received: by outflank-mailman (input) for mailman id 767908;
+ Tue, 30 Jul 2024 15:00:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=hr/k=O6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sYoKc-0003mk-7q
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 15:00:06 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 671a3e06-4e84-11ef-8776-851b0ebba9a2;
+ Tue, 30 Jul 2024 17:00:04 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a7ac469e4c4so917801666b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 08:00:04 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7acad9101dsm659011766b.176.2024.07.30.08.00.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jul 2024 08:00:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,77 +47,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0ae3800f-4e81-11ef-bc01-fd08da9f4363
-ARC-Seal: i=1; a=rsa-sha256; t=1722350159; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=hfCuvxWjoiiZ59yTIS/+pCEnZVhZFIjM8aPkjTWr1uW8sldNF7KLBAHZDlMeOXnHfmLCZuGoQDwocAr+YEUTZHejpwVUPxbWSKydMk8EVAZftB7/9MWTAcz/3x7mK5KLdN01B5o3aktZE9W4d8SkMSxiDH1vvBICV1FWqAXBf8E=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1722350159; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=D1ebpLyx8gR86eeQvtJ6wU+dy9ju+XdkIf9IVMlzmQo=; 
-	b=IWQTTMtKgJiM4J0eiFhshBJLWZe0rQNAeiMKhosaib/P8l4ExCJQi9xUWyY7SoJDXUEoP6liB3DxjLCUFqemPS3T3FILMChF9gV5I76nkJewYbfk6lEZ/rz3cRivaXM3jKt3V3vJfMwBDeloZwDf8WtFHllzxpbmDilY7z7gQt4=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=tklengyel.com;
-	spf=pass  smtp.mailfrom=tamas@tklengyel.com;
-	dmarc=pass header.from=<tamas@tklengyel.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1722350159;
-	s=zmail; d=tklengyel.com; i=tamas@tklengyel.com;
-	h=MIME-Version:References:In-Reply-To:From:From:Date:Date:Message-ID:Subject:Subject:To:To:Cc:Cc:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=D1ebpLyx8gR86eeQvtJ6wU+dy9ju+XdkIf9IVMlzmQo=;
-	b=SSOCsHId9pGL9VADvmBIofwfaPf+ej8y2A72njtlmmMDw9Ij/CHwxZq37KroEccu
-	Pnuyi9IhHZPudERwjZ53N3UpdXnWWn5ha4G92J9Jdy2PejmFviiSN9WcJYjGda/expN
-	xVe5j+8VhD2nXIMDyr/au6hAdbY3xbdj4w5U9uwc=
-X-Gm-Message-State: AOJu0YwBSH/yCRTB+dg0fKqsCjTnFZ0GilmC2JaXINYh13v65177//1D
-	7SrHI6Woo+gazohbKE0xYdQtFAdR8hV83z9xXHbKglYFZ3Fi8QV3XWu0z4l0ITFJ//1aSMMSXeG
-	ADhxY9dbqnD/qASQQPS8qjr8HL2I=
-X-Google-Smtp-Source: AGHT+IHIDQK94uXMQIslV+V0IpD1u6rhrvHxBU2KJjq7fSO/uzmi6beaomz9Nz2PlokD6uPkIgAA5EcTiCicGUDllNE=
-X-Received: by 2002:a05:6902:2807:b0:e0b:28ce:6156 with SMTP id
- 3f1490d57ef6-e0b5466b3bbmr11505415276.55.1722350156536; Tue, 30 Jul 2024
- 07:35:56 -0700 (PDT)
+X-Inumbo-ID: 671a3e06-4e84-11ef-8776-851b0ebba9a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1722351604; x=1722956404; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=4zTznF0DGycIcUBkxkOh13hpTTRPBbN/qrUzfNOmm8A=;
+        b=NpiVIK1PorhXG4HREbwsQgSGMMZA/iO2XmmKpW1i0EthkxRPJaFdZTFBv9K1UJr9Ul
+         N9Ec/74yVfvW+lUmdmM+5CT1EPB8IZXPr1l+IzUeSeORnBQ0uGwibRToEn58jCjnnBXU
+         F+upbNvEUqSYHg2KJf3dRE/XsvH3JaR/aNGNruUE2zjwdv9ppmadsJKNlmMBpHyc181b
+         v9fOkCXmyfCL/ssvDCoZgsAv7cNMRnopr2c7qISaiHy8Mp+teuafZnm1iy0SZFagRP/A
+         SVvlwmNqLeiFpcHktH+8CAOJY9lpQv4MKH4YQXXn4k+x81E72ILwtlQYluzODoI+MK1F
+         IcKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1722351604; x=1722956404;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4zTznF0DGycIcUBkxkOh13hpTTRPBbN/qrUzfNOmm8A=;
+        b=P7arilksX6e3NSNeFchPXBg+eobhCH4+4HalOGr+h4afe29U+YsM1Os4L5UujVRiEy
+         65m1HzMWiCW+J2o+qbqxKfpXmqss7KVrxRXAha2WU3l83BGvbSQJdAI8CcftCxZLTb7N
+         C13xttlWOuS/EYWZsni7uxL45tDI49+8uFX8OlGUBS2hfSX4rSRe9iG1BWVlPhRRUvrG
+         pOl+dPREfFCMwcQNYG/T/oi/pun5xMhr5jodQt/ugkGHrQr1MGaFg7bf73vN5yQa4N2O
+         +ArNTYt3g6L6QUJaFTbgXtm2zDOCroQ3Tvpc6BCQIM2OZNTStyI6kRCRdSSA1WybvccU
+         7FrQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXPcvUw06aRjCZE0yKVZGfXsXfvROSDqbcgr4xL0jykccONEnYn2E4ejbQrIgvc02Uzj3eft8UbAQK28FW++VgPimhkZcpVFq7f+dAvJ4g=
+X-Gm-Message-State: AOJu0Yz2Vv/mmbn5Q/uJVWueZyOCD7+OOpu2ZkZbIetWsGaEdi75JiRB
+	Mv/COm2dsz/JtKkyQ3iGHvfJlDUXnqbu5HQ9HiziUe3oy030wLuVdZ5ntThB1w==
+X-Google-Smtp-Source: AGHT+IFQZENJCmlK8hK2mOASGnJyj98+m/qnWmlLWGu55QaL2ZHv7KuSbXdd4NUydGI1roYbO5neCw==
+X-Received: by 2002:a17:907:6d07:b0:a7a:a138:dbc6 with SMTP id a640c23a62f3a-a7d8590dd7dmr236414066b.8.1722351603622;
+        Tue, 30 Jul 2024 08:00:03 -0700 (PDT)
+Message-ID: <8f595761-dd71-40bb-aac7-01bc5f17b7de@suse.com>
+Date: Tue, 30 Jul 2024 17:00:02 +0200
 MIME-Version: 1.0
-References: <cover.1722333634.git.Sergiy_Kibrik@epam.com> <b0292af6629ad483dd0a437960585cf5aa3a03cd.1722333634.git.Sergiy_Kibrik@epam.com>
-In-Reply-To: <b0292af6629ad483dd0a437960585cf5aa3a03cd.1722333634.git.Sergiy_Kibrik@epam.com>
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Date: Tue, 30 Jul 2024 10:35:19 -0400
-X-Gmail-Original-Message-ID: <CABfawhn_qiPGe75a1nKJYop45zN3uMdN_u7ok8wmwaRFSCGH4Q@mail.gmail.com>
-Message-ID: <CABfawhn_qiPGe75a1nKJYop45zN3uMdN_u7ok8wmwaRFSCGH4Q@mail.gmail.com>
-Subject: Re: [XEN PATCH v5 02/13] x86/monitor: guard altp2m usage
-To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-Cc: xen-devel@lists.xenproject.org, Alexandru Isaila <aisaila@bitdefender.com>, 
-	Petre Pircalabu <ppircalabu@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Jan Beulich <jbeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Xenia Ragiadakou <xenia.ragiadakou@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 9/9] xen/riscv: introduce early_fdt_map()
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1721834549.git.oleksii.kurochko@gmail.com>
+ <9b1d88b2ad6ba81e925fb4a560a2a2899b5e0b36.1721834549.git.oleksii.kurochko@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <9b1d88b2ad6ba81e925fb4a560a2a2899b5e0b36.1721834549.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 30, 2024 at 6:18=E2=80=AFAM Sergiy Kibrik <Sergiy_Kibrik@epam.c=
-om> wrote:
->
-> Explicitly check whether altp2m is on for domain when getting altp2m inde=
-x.
-> If explicit call to altp2m_active() always returns false, DCE will remove
-> call to altp2m_vcpu_idx().
->
-> p2m_get_mem_access() expects 0 as altp2m_idx parameter when altp2m not ac=
-tive
-> or not supported, so 0 is a fallback value then.
->
-> The puspose of that is later to be able to disable altp2m support and
+On 24.07.2024 17:31, Oleksii Kurochko wrote:
+> Introduce function which allows to map FDT to Xen.
+> 
+> Also, initialization of device_tree_flattened happens using early_fdt_map.
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-"purpose" misspelled here
+Acked-by: Jan Beulich <jbeulich@suse.com>
+with ...
 
-> exclude its code from the build completely, when not supported by target
-> platform (as of now it's supported for VT-d only).
+> @@ -64,6 +65,14 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+>  
+>      setup_fixmap_mappings();
+>  
+> +    device_tree_flattened = early_fdt_map(dtb_addr);
+> +    if ( !device_tree_flattened )
+> +        panic("Invalid device tree blob at physical address %#lx.\n"
+> +              "The DTB must be 8-byte aligned and must not exceed %lld "
+> +              "bytes in size.\n\n"
 
-Probably wanted to say "VT-x only" here
+... these two lines unwrapped, such that grep-ing for any part of the
+message line will always produce a hit. Line length restrictions don't
+apply in such situation, for this very reason.
 
->
-> Also all other calls to altp2m_vcpu_idx() are guarded by altp2m_active(),=
- so
-> this change puts usage of this routine in line with the rest of code.
->
-> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-
-With the commit message fixed (probably could be done when applied):
-Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
+Jan
 
