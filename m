@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13FD7C3DA49
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 12:15:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.767686.1178371 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B42F7C3DA7E
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 12:18:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.767694.1178392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYllZ-00016V-BJ; Tue, 30 Jul 2024 12:15:45 +0000
+	id 1sYlnh-0002Vn-2K; Tue, 30 Jul 2024 12:17:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 767686.1178371; Tue, 30 Jul 2024 12:15:45 +0000
+Received: by outflank-mailman (output) from mailman id 767694.1178392; Tue, 30 Jul 2024 12:17:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYllZ-00016O-8l; Tue, 30 Jul 2024 12:15:45 +0000
-Received: by outflank-mailman (input) for mailman id 767686;
- Tue, 30 Jul 2024 12:15:44 +0000
+	id 1sYlng-0002Vg-VZ; Tue, 30 Jul 2024 12:17:56 +0000
+Received: by outflank-mailman (input) for mailman id 767694;
+ Tue, 30 Jul 2024 12:17:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=hr/k=O6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sYllY-00016I-Fu
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 12:15:44 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=3jiA=O6=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sYlnf-0002To-I4
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 12:17:55 +0000
 Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
  [2a00:1450:4864:20::12d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 70d8cbd5-4e6d-11ef-8776-851b0ebba9a2;
- Tue, 30 Jul 2024 14:15:42 +0200 (CEST)
+ id bedecef6-4e6d-11ef-8776-851b0ebba9a2;
+ Tue, 30 Jul 2024 14:17:53 +0200 (CEST)
 Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-52efd530a4eso7010748e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 05:15:42 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acab23f62sm643080466b.16.2024.07.30.05.15.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jul 2024 05:15:41 -0700 (PDT)
+ 2adb3069b0e04-52efa9500e0so5499060e87.3
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 05:17:53 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7acab23132sm638852666b.27.2024.07.30.05.17.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jul 2024 05:17:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,149 +47,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 70d8cbd5-4e6d-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: bedecef6-4e6d-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1722341742; x=1722946542; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=t+yBq+PZ3qeR79tyRs5EQIzbiBScpMqImrplcSta1j4=;
-        b=WJdC0uanTOW7lREGerPilhoYhP1dU2XDqjpWLSalRJMT/K02Cf00P/E1/hQye7Gzne
-         /9deGUy2Ex/ye15aNtp3rDJAAtlk568mnPpHhEm6WEjLeUSVgIA7HYjHSTm8LQ+gBUMm
-         MrwUuE0oRVJiq4B0/3d1J9ryIJsioTTLHcLhzZ5z/0xs0rg8afh9DgPpcIxCZ25f4q00
-         wO8KpaG0W/wYOnrN0s89oWfUZZTs9QcGQBXlZkjQMk5nqpxyvNy+JYPnq/5YmnmlCDjE
-         mwCRQlOqFWLHrvh5jtCl/FrO1MKhzdmzPLnEEqq6+LWKRkCKJqZtUALArWGjBfFOGJsu
-         L5xg==
+        d=citrix.com; s=google; t=1722341872; x=1722946672; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oJt36nY/JnhLYtPKhz3iINvaXsKib9chEKF3Ew8HPvA=;
+        b=gj0GMDPMefbsZzysTD1QrbCVH+QeJdW5xDniYaAskjwijuAdV9qSlmThoVawnPtkV0
+         WTQzVAhJU0ey640icv8ea/KZxmpZ/DYZkK/gwb6jQgGfyUmvCG30X/ywILct3t2ohLN8
+         AmBxNAeaYU0YccGQ/4UF71jBlvj2owSpKys3c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722341742; x=1722946542;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=t+yBq+PZ3qeR79tyRs5EQIzbiBScpMqImrplcSta1j4=;
-        b=n4pD6dUOPJsmfKQ3m39nshf6rlTWa1XFPH2pRNUnpxbSVaSOqnIAzSK4/DSweunqm6
-         Z36zQoC0bt9VInAXnbkJOvrAlXS3DeWBWMgHJ98QXMAByZZ4k5ZGkC3su9ZZKx20YsWF
-         /SLQIdFxoiXZZ9ZAGNEq6/sMOsVzKIwizn3Jz4h0oQDvfxyAVsaa6GuvTBZY9IRqFaJu
-         smP5Jh+14vSbWq9ml2N7o3kKSMPG1azKvhzaPGZUaVHm6woFHpBc1dadhAYbBW/czcOF
-         9Z84R/4ylbQNeaysj/iaMFQFel8RhxDsGxUJlHGYp/C9+NlQdr2tWiiUNtFvusyaOcEU
-         9jYQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXvxjwBoVx9a8brKSYOdLjdXzTDlGY8AvwTjV2V/bJUJ/pcgaQIS1h6aZ12jPd2UUvm+8Krkx3nBCIRy58gkIMHSkRAugevkk1y2iAfxfU=
-X-Gm-Message-State: AOJu0YzmINWgdwIZQv/R2ASsgmmLlfwX3OUVsEyfxXTcxFXEu+mBrxJJ
-	At7BURUDWwyil8SLRwrLAq7MoFuE5iICYXVp43GHok8N2ESnB/BkoB+arMHTFg==
-X-Google-Smtp-Source: AGHT+IGFKhXdIOd2WDocyVb1hGYlwZVtn9OE7XK/rs8+KWPnhHfjNo21ePyNvhL+gXNl4CQA+OPtug==
-X-Received: by 2002:a19:915e:0:b0:52e:ff2a:217 with SMTP id 2adb3069b0e04-5309b2d7baamr6808175e87.50.1722341741682;
-        Tue, 30 Jul 2024 05:15:41 -0700 (PDT)
-Message-ID: <36944f26-1180-4eaa-aa5d-3186e65faeb8@suse.com>
-Date: Tue, 30 Jul 2024 14:15:40 +0200
+        d=1e100.net; s=20230601; t=1722341872; x=1722946672;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=oJt36nY/JnhLYtPKhz3iINvaXsKib9chEKF3Ew8HPvA=;
+        b=OFxkoaBUhuqahRGM7/fsCVVjwfJXOL2yyrF4g0s2cLfjPSF17H8Rx3LnPyz/f5CQO9
+         Y5rbDBSh4bcpwcUiVUO5qtiggQmE8ElHIkXMHvKICh4TOj7RmPwCXemOWTT3lA6lzPJ7
+         5K8nr8tqmm0+Di5My9XBI0lmCnF6JhhZ9oU7ZukcJIEunXcYdS7IRHQrlRtTDZI7srfn
+         Flvq4PKFtaeMVjEWn9dpkebd6m7ezmnxfCWpwgqWLA/Y3NWxpvAnMrlgo26FHq72GPXm
+         J20zoFIDu3SnVtOG+9FerPLq4154aTLhU5YRDg/e+c7upOuhZR/Zh2xGbYrnyae5lThB
+         383g==
+X-Gm-Message-State: AOJu0YzmP0ZBJuWENwQNsBhBExhVPLNmd31SwHRN8jSgksEikuEShWAn
+	PMv7xXjyoYd11OgdvXghqd3W6kJhgcNCABX5aojum1rYxuVERImAJHy/t13H3MYxd2A1YZ1tTBo
+	n
+X-Google-Smtp-Source: AGHT+IFc0u2RQD+LmaEGt1f8CY8IZectWqgNjeIMQbR+0lneeB4GEhs0HWO/e7J129/P5FGGoChtTg==
+X-Received: by 2002:ac2:4f07:0:b0:52e:a60e:3a08 with SMTP id 2adb3069b0e04-5309b25aa12mr9326707e87.11.1722341872315;
+        Tue, 30 Jul 2024 05:17:52 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH] x86/APIC: Drop APIC_BASE and use fix_to_virt()
+Date: Tue, 30 Jul 2024 13:17:49 +0100
+Message-Id: <20240730121749.637879-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/9] xen/riscv: introduce asm/pmap.h header
-To: oleksii.kurochko@gmail.com
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-References: <cover.1721834549.git.oleksii.kurochko@gmail.com>
- <11b5487659a9c76793e520c108cd92c6c84b908d.1721834549.git.oleksii.kurochko@gmail.com>
- <3359e37e-eaae-49ca-80a5-2bf70b9b46c7@suse.com>
- <78effb178b1ffe7ccb1714a13157e94f5e816b01.camel@gmail.com>
- <6c2ebc9e-cc0d-4139-80a2-4d7025989a9e@suse.com>
- <035f836a53966194048df5b720b94a78b0a490ae.camel@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <035f836a53966194048df5b720b94a78b0a490ae.camel@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 30.07.2024 13:39, oleksii.kurochko@gmail.com wrote:
-> On Tue, 2024-07-30 at 09:56 +0200, Jan Beulich wrote:
->> On 29.07.2024 18:22, oleksii.kurochko@gmail.com wrote:
->>> On Mon, 2024-07-29 at 16:29 +0200, Jan Beulich wrote:
->>>> On 24.07.2024 17:31, Oleksii Kurochko wrote:
->>>>> --- /dev/null
->>>>> +++ b/xen/arch/riscv/include/asm/pmap.h
->>>>> @@ -0,0 +1,33 @@
->>>>> +/* SPDX-License-Identifier: GPL-2.0 */
->>>>> +#ifndef ASM_PMAP_H
->>>>> +#define ASM_PMAP_H
->>>>> +
->>>>> +#include <xen/bug.h>
->>>>> +#include <xen/mm.h>
->>>>> +#include <xen/page-size.h>
->>>>> +
->>>>> +#include <asm/fixmap.h>
->>>>> +#include <asm/flushtlb.h>
->>>>> +#include <asm/system.h>
->>>>> +
->>>>> +static inline void arch_pmap_map(unsigned int slot, mfn_t mfn)
->>>>> +{
->>>>> +    pte_t *entry = &xen_fixmap[slot];
->>>>> +    pte_t pte;
->>>>> +
->>>>> +    ASSERT(!pte_is_valid(*entry));
->>>>> +
->>>>> +    pte = mfn_to_xen_entry(mfn, PAGE_HYPERVISOR_RW);
->>>>> +    write_pte(entry, pte);
->>>>> +}
->>>>
->>>> Perhaps add a comment to clarify why it's safe to omit a TLB
->>>> flush
->>>> here.
->>>> Note that arch_pmap_unmap() having one is a necessary but not
->>>> sufficient
->>>> condition to that. In principle hardware may also cache
->>>> "negative"
->>>> TLB
->>>> entries; I have no idea how RISC-V behaves in this regard, or
->>>> whether
->>>> that aspect is actually left to implementations.
->>> what do you mean by "negative" TLB? an old TLB entry which should
->>> be
->>> invalidated?
->>
->> No, I mean TLB entries saying "no valid translation here". I.e.
->> avoiding
->> recurring walks of something that was once found to have no
->> translation.
-> But we can't modify an existent entry because we have
-> "ASSERT(!pte_is_valid(*entry))" in pmap_map() function and we are doing
-> TLB flush during pmap_unmap().
+Right now the apic_mem_*() helpers only compile because sizeof(void *) ==
+sizeof(long long).  Switch to using fix_to_virt() which is a void *type.
 
-You _always_ modify an existing entry. That may be a not-present one, but
-that's still an entry. And that's part of why I think you still didn't
-understand what I said. A particular implementation, if permitted by the
-spec, may very well put in place a TLB entry when the result of a page
-walk was a non-present entry. So ...
+Also adjust the two places where the APIC/IO-APIC virtual address is rendered
+in a printk().
 
-> So when we will be in pmap_map() we are
-> sure that there is no TLB entry for the new pte.
+No functional change.
 
-..., can you point me at the part of the spec saying that such "negative"
-TLB entries are not permitted?
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
-Jan
+Split out of %L patch.
+---
+ xen/arch/x86/apic.c                |  4 ++--
+ xen/arch/x86/include/asm/apic.h    | 10 +++++++---
+ xen/arch/x86/include/asm/apicdef.h |  2 --
+ xen/arch/x86/io_apic.c             |  4 ++--
+ 4 files changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/xen/arch/x86/apic.c b/xen/arch/x86/apic.c
+index 6567af685a1b..7869c30e83f6 100644
+--- a/xen/arch/x86/apic.c
++++ b/xen/arch/x86/apic.c
+@@ -938,8 +938,8 @@ void __init init_apic_mappings(void)
+         apic_phys = mp_lapic_addr;
+ 
+     set_fixmap_nocache(FIX_APIC_BASE, apic_phys);
+-    apic_printk(APIC_VERBOSE, "mapped APIC to %08Lx (%08lx)\n", APIC_BASE,
+-                apic_phys);
++    apic_printk(APIC_VERBOSE, "mapped APIC to %p (%08lx)\n",
++                fix_to_virt(FIX_APIC_BASE), apic_phys);
+ 
+ __next:
+     /*
+diff --git a/xen/arch/x86/include/asm/apic.h b/xen/arch/x86/include/asm/apic.h
+index a7798de02993..25faa54d9d10 100644
+--- a/xen/arch/x86/include/asm/apic.h
++++ b/xen/arch/x86/include/asm/apic.h
+@@ -51,12 +51,16 @@ const struct genapic *apic_x2apic_probe(void);
+ 
+ static inline void apic_mem_write(unsigned int reg, uint32_t v)
+ {
+-	*((volatile u32 *)(APIC_BASE+reg)) = v;
++    volatile uint32_t *addr = fix_to_virt(FIX_APIC_BASE) + reg;
++
++    *addr = v;
+ }
+ 
+-static inline u32 apic_mem_read(unsigned int reg)
++static inline uint32_t apic_mem_read(unsigned int reg)
+ {
+-	return *((volatile u32 *)(APIC_BASE+reg));
++    volatile uint32_t *addr = fix_to_virt(FIX_APIC_BASE) + reg;
++
++    return *addr;
+ }
+ 
+ /* NOTE: in x2APIC mode, we should use apic_icr_write()/apic_icr_read() to
+diff --git a/xen/arch/x86/include/asm/apicdef.h b/xen/arch/x86/include/asm/apicdef.h
+index b0790fad1cdb..49e29ec80156 100644
+--- a/xen/arch/x86/include/asm/apicdef.h
++++ b/xen/arch/x86/include/asm/apicdef.h
+@@ -117,8 +117,6 @@
+ /* Applicable to vectors, TPR, and PPR. */
+ #define		APIC_PRIO_CLASS(v)	((v) & 0xF0)
+ 
+-#define APIC_BASE __fix_to_virt(FIX_APIC_BASE)
+-
+ #define MAX_IO_APICS 128
+ 
+ extern bool x2apic_enabled;
+diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
+index 7744b43f2414..772700584639 100644
+--- a/xen/arch/x86/io_apic.c
++++ b/xen/arch/x86/io_apic.c
+@@ -2596,8 +2596,8 @@ static void __init ioapic_init_mappings(void)
+         }
+ 
+         set_fixmap_nocache(idx, ioapic_phys);
+-        apic_printk(APIC_VERBOSE, "mapped IOAPIC to %08Lx (%08lx)\n",
+-                    __fix_to_virt(idx), ioapic_phys);
++        apic_printk(APIC_VERBOSE, "mapped IOAPIC to %p (%08lx)\n",
++                    fix_to_virt(idx), ioapic_phys);
+ 
+         if ( bad_ioapic_register(i) )
+         {
+-- 
+2.39.2
+
 
