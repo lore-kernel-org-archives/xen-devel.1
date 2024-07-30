@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C10C3DA7F
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 12:18:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.767693.1178382 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF0BEC3DA7E
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 12:20:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.767708.1178402 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYlnc-0002F0-Me; Tue, 30 Jul 2024 12:17:52 +0000
+	id 1sYlpu-0004vm-Eu; Tue, 30 Jul 2024 12:20:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 767693.1178382; Tue, 30 Jul 2024 12:17:52 +0000
+Received: by outflank-mailman (output) from mailman id 767708.1178402; Tue, 30 Jul 2024 12:20:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYlnc-0002Et-Jv; Tue, 30 Jul 2024 12:17:52 +0000
-Received: by outflank-mailman (input) for mailman id 767693;
- Tue, 30 Jul 2024 12:17:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sYlpu-0004vf-Bk; Tue, 30 Jul 2024 12:20:14 +0000
+Received: by outflank-mailman (input) for mailman id 767708;
+ Tue, 30 Jul 2024 12:20:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hr/k=O6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sYlnb-0002El-Ai
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 12:17:51 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bd0f7e09-4e6d-11ef-bc01-fd08da9f4363;
- Tue, 30 Jul 2024 14:17:50 +0200 (CEST)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5a156556fb4so6970279a12.3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 05:17:50 -0700 (PDT)
+ id 1sYlpt-0004vZ-5R
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 12:20:13 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 110d2e23-4e6e-11ef-8776-851b0ebba9a2;
+ Tue, 30 Jul 2024 14:20:11 +0200 (CEST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5af6a1afa7bso4388850a12.1
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 05:20:11 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5ac63b59aa5sm7243556a12.43.2024.07.30.05.17.49
+ 4fb4d7f45d1cf-5ac631b0464sm7195767a12.4.2024.07.30.05.20.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jul 2024 05:17:49 -0700 (PDT)
+ Tue, 30 Jul 2024 05:20:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd0f7e09-4e6d-11ef-bc01-fd08da9f4363
+X-Inumbo-ID: 110d2e23-4e6e-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1722341870; x=1722946670; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1722342011; x=1722946811; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=F/Ns7A9vLLtAkaOYavA9pBxbaBVNxBHRAR0jTb8lJxk=;
-        b=RHpYFOABTEs3WhKOax4G8NIXRA09GvsFceM73FkmRIB4sY/WcumMAS33YIrX9zg+Fh
-         9FjV3KsmipvZJSEctf3M0PH1dJPEwItmMCJ4lB6g9RhE6jV4TxPBlu7XaN7+a69YoZqW
-         xKTDuya9Ym1Fw2BUnfswKj/ZTHMTixqd4KsL/J40LJmusdgA3BLVbCQ1YNDBGlSeaPjb
-         tSoWqSgKfo5OK1yW/KHCUaPdMG7ZCpZ62ukN+/97Z9fESZA93hbLlx5B7BNicXJsdG8Q
-         rgAq+gMoonCaW/sLZW3f3iTPdk7pzhNKrnv9yDAS759GnoiMWXDI+jTwAoRaVK8MjyI2
-         3N6A==
+        bh=Yn8BgAw6Gp0DxNh8lZ3IYst5fC5UQL1IuYSVb6S5Xqo=;
+        b=DKy3TxvFJmCLIJHw52OAG0328g1pOxzDxQrHZnjTVHjCiFrT+JFR5aMUNafvJnbXjB
+         dsotdoRhEAOpP8bkqu4d8layjuc0ozrZ7iGWCPUk7o8iyoPvz/9UErRGcr/l2W/RVVso
+         dgDBHcfJJFbQqwDIe79Soptgtpd2XghWbuhSgfXDRo/XhT+eSrxD3p6jDO9Fywjx8zC/
+         8lgfyCkISOpeJ3PmmzTXuveetkvSrlZ7UcagzrD9NIVQtg9ekt/+cLDwgQeCfy1X4E4E
+         ++smXvGmAmlBCmMYugMR1EzZGvxl4Zi34R43jQ9JOgOPd/NNhfwmDpl9CO4CAzKXDHxn
+         LqCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722341870; x=1722946670;
+        d=1e100.net; s=20230601; t=1722342011; x=1722946811;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=F/Ns7A9vLLtAkaOYavA9pBxbaBVNxBHRAR0jTb8lJxk=;
-        b=JoU/cjIcKGcfC9IzuQEiFPYDtC10LYog1f8x3g2TKASDPJaC78TEl0sPdSXIV0rmdL
-         DXLefBcUFmD9B74CgWIKx6GK0wZXhy/lJOaxMRQcjBJ3QiVOIxle9PHzmjHe0RizTgJk
-         cPgYVLvuzvsemL1jgyCHThEgt9XEdZ8myORPjIqQVh1dbkarvyPqdqX4TI3uZJyS6ZGk
-         2it4+bM/69bLZi3vNHWs5iBVRMANOa7hs/EzQUsJbsnhhlAJxsqs0AIOsOFIOdvHt/vN
-         Q5L9coFwGt+h0ypYat2zpN62ktNn0Ma5W2YSiKjCiuAGwJ/gmN6b69viSfZHwaEH/Uax
-         gLaw==
-X-Forwarded-Encrypted: i=1; AJvYcCWW9VzUnqah5TKW9SYF7O41Mj/N5i/WxKjKgbLRA3CtoVG4L1ZPAt7vplE3Iz/UyPpZG/72BEwJl3iu8tOXIWcFo/zGTip7qNW4Ik5Yds4=
-X-Gm-Message-State: AOJu0Yz4U+bScxOBHvwWA/xl8LwhheGcYXQLS16bFJ9n/Uk8/jqXdb/t
-	UanI32A2DlCSO+Qr3LGJUQPArOi0ziLemDKUKsi9LUlMQZghWNJ+ZCGfgCw+dA==
-X-Google-Smtp-Source: AGHT+IFKRG+Y8ErrHF9ay4aRM7UwV1reznpmbqNPa1/BcBFZL8EHUonoK3KncWSrZIR3D/V5zcz0Ow==
-X-Received: by 2002:a05:6402:3508:b0:5aa:32bb:146 with SMTP id 4fb4d7f45d1cf-5b0226baf28mr7740110a12.38.1722341869700;
-        Tue, 30 Jul 2024 05:17:49 -0700 (PDT)
-Message-ID: <13aa38d9-9554-43d7-aa76-9599ae2824cc@suse.com>
-Date: Tue, 30 Jul 2024 14:17:48 +0200
+        bh=Yn8BgAw6Gp0DxNh8lZ3IYst5fC5UQL1IuYSVb6S5Xqo=;
+        b=jToatbC9/g4wq2/j0BE+XUDYLKYejpc/sP3esuu3uUCUl/wYbO+Z2fGupux8Y7+xog
+         NT8GC4ivXHeZFz0k6quKNXfVpS6ZqkWKd/iNwfyKkZfmciFiyD74HGOzyWKIzYvCs/7O
+         vyTUiR8a8sqL6C/y3etuncm++IMQGMPH9Hqzn+e/DxEQ0lHAR+JEV8zlse2Nw2waxxNS
+         q3OQHpWvP0R8zusFRgaUDyeW6kGwDLHKB8ELRdJH4o6hVkAryTA2V8vnGRv2WtMawpw8
+         2A/VWLBU/Z3LCuWXz2PeFTwARAxUjMCa8K2et/6lVYEUydK16IGCN12x3wlbwbWRSkxQ
+         2Vog==
+X-Forwarded-Encrypted: i=1; AJvYcCW1Ab1Fcz66aE/CW01wXUfa8UYQPwFWGTi71nBRAI499o6DYgHVkIokknv4+vmOkic5NEZg1sACYSxlhRO0JOsdzf+lj48FyrTF+uzZGkU=
+X-Gm-Message-State: AOJu0Yy8h1bFQhaQdJvnR7hARfvbTXzP2W3liDrwee5dW4Iuceuphntz
+	ceDshvxySdlxihJzio4fm7I7YmYQFzGk7Gs8249/rQOCFmqCHIK+ZD2THSuFDJfsFBMEXu4iKE0
+	=
+X-Google-Smtp-Source: AGHT+IEJfO7kXee9CNwbHnfZoZnd22D74Dxe37p4Gi8LoR92LrXu2eYMeH3Pewnc5apCO5S4NhoOtA==
+X-Received: by 2002:a50:c192:0:b0:5a4:622f:63c6 with SMTP id 4fb4d7f45d1cf-5b0205d5b5amr5760098a12.13.1722342010586;
+        Tue, 30 Jul 2024 05:20:10 -0700 (PDT)
+Message-ID: <404275f0-b7f7-4303-b6b9-88af9ccddc57@suse.com>
+Date: Tue, 30 Jul 2024 14:20:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 7/9] xen/riscv: introduce and init SBI RFENCE extension
-To: oleksii.kurochko@gmail.com
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-References: <cover.1721834549.git.oleksii.kurochko@gmail.com>
- <fb2d24731f870378d79077be39b1bc19cc655327.1721834549.git.oleksii.kurochko@gmail.com>
- <49d3a181-0830-4f55-83a4-c6c9fd54eb17@suse.com>
- <b7433d25bb3ca7a0f4e54f561b450b5724fb46dc.camel@gmail.com>
- <97554cbe-7009-4bc9-8205-7a9e0f29aad0@suse.com>
- <23ef6ff003d4170269eedfc7d3354965f060ba3f.camel@gmail.com>
+Subject: Re: [PATCH] x86/APIC: Drop APIC_BASE and use fix_to_virt()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20240730121749.637879-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -121,42 +114,43 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <23ef6ff003d4170269eedfc7d3354965f060ba3f.camel@gmail.com>
+In-Reply-To: <20240730121749.637879-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 30.07.2024 13:57, oleksii.kurochko@gmail.com wrote:
-> On Tue, 2024-07-30 at 11:17 +0200, Jan Beulich wrote:
->> On 30.07.2024 10:44, oleksii.kurochko@gmail.com wrote:
->>> On Mon, 2024-07-29 at 17:52 +0200, Jan Beulich wrote:
->>>> On 24.07.2024 17:31, Oleksii Kurochko wrote:
->>>>
->>>>
->>>>> +/*
->>>>> + * Send SFENCE_VMA to a set of target HARTs.
->>>>> + *
->>>>> + * @param hart_mask mask representing set of target HARTs
->>>>> + * @param start virtual address start
->>>>> + * @param size virtual address size
->>>>
->>>> Are these really virtual addresses, not somehow a bias and a
->>>> number
->>>> of bits (CPUs) or elements? From the rest of the patch I can't
->>>> deduce
->>>> what these two parameters express.
->>> According to SBI doc start is an virtual address:
->>> https://github.com/riscv-non-isa/riscv-sbi-doc/blob/master/src/ext-rfence.adoc?plain=1#L44
->>
->> Oh, so these are describing the VA range to be flushed. Okay.
->>
->>> and hart_mask is:
->>> • unsigned long hart_mask is a scalar bit-vector containing hartids
->>
->> Biased by hart_mask_base in the actual SBI call.
-> What word "biased" mean here?
+On 30.07.2024 14:17, Andrew Cooper wrote:
+> Right now the apic_mem_*() helpers only compile because sizeof(void *) ==
+> sizeof(long long).  Switch to using fix_to_virt() which is a void *type.
+> 
+> Also adjust the two places where the APIC/IO-APIC virtual address is rendered
+> in a printk().
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-The meaning of e.g. bit 0 in hart_mask will, aiui, be determined by
-hart_mask_base. If the latter is non-zero, the bit will not name hart 0.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+ideally ...
+
+> --- a/xen/arch/x86/include/asm/apic.h
+> +++ b/xen/arch/x86/include/asm/apic.h
+> @@ -51,12 +51,16 @@ const struct genapic *apic_x2apic_probe(void);
+>  
+>  static inline void apic_mem_write(unsigned int reg, uint32_t v)
+>  {
+> -	*((volatile u32 *)(APIC_BASE+reg)) = v;
+> +    volatile uint32_t *addr = fix_to_virt(FIX_APIC_BASE) + reg;
+> +
+> +    *addr = v;
+>  }
+>  
+> -static inline u32 apic_mem_read(unsigned int reg)
+> +static inline uint32_t apic_mem_read(unsigned int reg)
+>  {
+> -	return *((volatile u32 *)(APIC_BASE+reg));
+> +    volatile uint32_t *addr = fix_to_virt(FIX_APIC_BASE) + reg;
+
+... with const added here.
 
 Jan
 
