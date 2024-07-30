@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9A87C3DA7F
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 08:04:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.767345.1177950 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399D7C3DA61
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2024 08:20:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.767362.1177960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYhqI-00013l-Ai; Tue, 30 Jul 2024 08:04:22 +0000
+	id 1sYi5K-00041a-KT; Tue, 30 Jul 2024 08:19:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 767345.1177950; Tue, 30 Jul 2024 08:04:22 +0000
+Received: by outflank-mailman (output) from mailman id 767362.1177960; Tue, 30 Jul 2024 08:19:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sYhqI-00013e-85; Tue, 30 Jul 2024 08:04:22 +0000
-Received: by outflank-mailman (input) for mailman id 767345;
- Tue, 30 Jul 2024 08:04:21 +0000
+	id 1sYi5K-00041T-Gm; Tue, 30 Jul 2024 08:19:54 +0000
+Received: by outflank-mailman (input) for mailman id 767362;
+ Tue, 30 Jul 2024 08:19:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZYes=O6=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1sYhqH-0000d6-9E
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 08:04:21 +0000
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [2607:f8b0:4864:20::72a])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=HnHO=O6=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1sYi5J-00041N-5F
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2024 08:19:53 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 528a467d-4e4a-11ef-8776-851b0ebba9a2;
- Tue, 30 Jul 2024 10:04:19 +0200 (CEST)
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7a1da036d35so265442085a.0
- for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 01:04:19 -0700 (PDT)
-Received: from rossla-pc.eng.citrite.net ([185.25.67.249])
+ id 7dfda483-4e4c-11ef-8776-851b0ebba9a2;
+ Tue, 30 Jul 2024 10:19:51 +0200 (CEST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-59589a9be92so6571704a12.2
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Jul 2024 01:19:51 -0700 (PDT)
+Received: from ?IPV6:2003:e5:8729:4000:29eb:6d9d:3214:39d2?
+ (p200300e58729400029eb6d9d321439d2.dip0.t-ipconnect.de.
+ [2003:e5:8729:4000:29eb:6d9d:3214:39d2])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a1f0153705sm259963885a.108.2024.07.30.01.04.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jul 2024 01:04:17 -0700 (PDT)
+ a640c23a62f3a-a7acad41462sm599013366b.119.2024.07.30.01.19.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jul 2024 01:19:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,79 +49,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 528a467d-4e4a-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 7dfda483-4e4c-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1722326658; x=1722931458; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2h7HiiJXVeJ+i1ScVuKzptcWqQHcv9MhlmldDZ9sR80=;
-        b=etYe70o3jRmlzxfj4NIQIq7diIfMJV6mwgYeRbrM3Ka1NzWQl7QgwSiInQdg5CZnzy
-         +40p78dqUbabOjs43r3WgUmAmNebPmsWHac6tnPOtttGKrQyUIbYpSEkdu2iuL3Oj8v7
-         FJUNiWYZ9X8h5zPLhI7/GJl1DKTPmZnmVSSkw=
+        d=suse.com; s=google; t=1722327590; x=1722932390; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Avtw4N1eR+GiFCtanmTPhq54KY38UjoQBkTBOJ8ucHg=;
+        b=Xum7bXlai1fQZqzw7cDEYLb9NIeBYy5UmOVrkjLYUHm7QuqCC5OrH3yiqsw14kY0v1
+         85HIGGWSe+PWcZ9m7S4UWECwuyqkAz8PQIhf5NlXPxT9O3HWjB/KGRvWt8xUkF2hODe8
+         jJaoJL7KuKljA388V/gbShskb2yiTvHxR3tYexwI3aTcS3mW2LcBwIrizdUSPsOa9rVN
+         w6qAYTHjWJQRlH8CYwVMKlheJXSxcFBeRh2pQ+XwhK7whM0kqBH4LXv3SaG3D5hlJAzk
+         ZhcHxuwmXDbyIA2IErSIzqJQ2enZFxJJgjWk1aqX2k6UtRN/riwskzSkdqIH7JIUB/Nw
+         RZ6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722326658; x=1722931458;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2h7HiiJXVeJ+i1ScVuKzptcWqQHcv9MhlmldDZ9sR80=;
-        b=Wa43UNrkIYhb8VyzGzPFaquFkbNTpt5TLgZiafC6rnh+du5oPJqPC4Tcy599OzwJIQ
-         2yF00NZv1nBZyb+O+KDKbwB5JDmEu/uj+GhGx4bbRGQUp4E2Cl/M53C/1v+fupz3UzY3
-         qA1xyRN40zJprmZa4gO1bo1jelqdL3xtXplCSNxn/P2TBQViZarsygkFPL53O5utVytT
-         ZawC5mggTqUcanq3kg5HI7wXCTRBhDwHnm/m1EZZFnd3sDosPOshw+POScTXTXQX5oFF
-         azm7H0azcaZECD51LakVBHFBXdq5MYyOQxytKOr6dNb42rSwkVgdjEAJe9qN15Cc72PC
-         OCIw==
-X-Gm-Message-State: AOJu0YznvhCN2DxvJ+/pPZDwZ32OQTz8FySopg4amzcgMamfwSQVRIj8
-	UqAPvHRPxGu7m/1YPEmotEyh9kgkh0k4/iaLX8Iq4BRLf2+XkF9K5HEvFm4FatZvSY01hH8SEF0
-	=
-X-Google-Smtp-Source: AGHT+IFYzGTp4JN85y+xJB+bbDfT4w3vLxnCxFqldQRouVMaOxpVS0cEvsHMjaXmyq09TV+z7VmugA==
-X-Received: by 2002:a05:620a:45aa:b0:79f:38e:c015 with SMTP id af79cd13be357-7a1e52fc11emr1242934385a.62.1722326658280;
-        Tue, 30 Jul 2024 01:04:18 -0700 (PDT)
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH] bunzip2: fix rare decompression failure
-Date: Tue, 30 Jul 2024 09:03:42 +0100
-Message-ID: <20240730080342.1814470-1-ross.lagerwall@citrix.com>
-X-Mailer: git-send-email 2.45.2
+        d=1e100.net; s=20230601; t=1722327590; x=1722932390;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Avtw4N1eR+GiFCtanmTPhq54KY38UjoQBkTBOJ8ucHg=;
+        b=S1FehHXPD9DR4/zyY07dsFZlMqztSH9dxixDN/TBXVQ0eaoDSbg+nryhjIAz71ojhj
+         zdzMYROSywtPqD4vxNc3kj9OjU7CIXex+QKAc28fjvQO9TRVCyNdN+Iq46XQaFRRJYXK
+         7dzn7CQJmyOKcW4kLn/IyL3xSp/TtmXHNNTvvuBa8YFDH4vu8tVrK+1mojkMoMsbOgt/
+         Zr45IX99P/stCMWQoURqlGwvSup/8LyQYRqI/7ZrnDSYn/WO/ky2KjHop4cYSDxgUkAR
+         oSWurFV+UXbPM1ockxD0kXrfz1znUclqlCRCG4u+N2ePmwXaMSKSPOQO9A4DohwOidu9
+         BT4w==
+X-Forwarded-Encrypted: i=1; AJvYcCU1PSBrY4HmN5ridwesezYHoZvxMIcekpRHMWX5Tj+unqn8Dg3NNnuYVLJwK/Kb6p8mh/Ufqv3wDEr4zlCsVtv03sFvq+Ape4v1pfqnpLc=
+X-Gm-Message-State: AOJu0YxR+o7WWWGnu/W9cao2ZIR3WLDR9vWb40a69xwfaoZGa+2TTWTh
+	sOb1BTagpVR9Bj5wKUEztYXOvAWzXR4hd6xUHwIOfnYM5X4wn0Ex+deTVocOsss=
+X-Google-Smtp-Source: AGHT+IFtJfbuc2u/eqs3fRRONElGEKaG14fTy9PG8wn0MX65Vt4oWxjVm5SNDXnIIsDaAG7fIWy+1g==
+X-Received: by 2002:a17:907:72c1:b0:a7a:8876:4427 with SMTP id a640c23a62f3a-a7d40071af4mr757772966b.25.1722327590535;
+        Tue, 30 Jul 2024 01:19:50 -0700 (PDT)
+Message-ID: <8270bede-d548-481b-b349-e305a4f574c8@suse.com>
+Date: Tue, 30 Jul 2024 10:19:49 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] xen: silence maybe-unitialized warning
+To: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ xen-devel@lists.xenproject.org
+Cc: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>
+References: <20240729142421.137283-1-stewart.hildebrand@amd.com>
+ <20240729142421.137283-3-stewart.hildebrand@amd.com>
+ <b49f76cb-f22e-498e-83ae-68cc9840c48d@suse.com>
+ <e816ca86-3b1f-42ea-b338-de73d9fb6370@amd.com>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+In-Reply-To: <e816ca86-3b1f-42ea-b338-de73d9fb6370@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-The decompression code parses a huffman tree and counts the number of
-symbols for a given bit length.  In rare cases, there may be >= 256
-symbols with a given bit length, causing the unsigned char to overflow.
-This causes a decompression failure later when the code tries and fails to
-find the bit length for a given symbol.
+On 29.07.24 21:01, Stewart Hildebrand wrote:
+> On 7/29/24 11:03, Jürgen Groß wrote:
+>> On 29.07.24 16:24, Stewart Hildebrand wrote:
+>>> When building with gcc with -finstrument-functions, optimization level
+>>> -O1, CONFIG_HYPFS=y and # CONFIG_HAS_SCHED_GRANULARITY is not set, the
+>>> the following build warning (error) is encountered:
+>>>
+>>> common/sched/cpupool.c: In function ‘cpupool_gran_write’:
+>>> common/sched/cpupool.c:1220:26: error: ‘gran’ may be used uninitialized [-Werror=maybe-uninitialized]
+>>>    1220 |                      0 : cpupool_check_granularity(gran);
+>>>         |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>>> common/sched/cpupool.c:1207:21: note: ‘gran’ declared here
+>>>    1207 |     enum sched_gran gran;
+>>>         |                     ^~~~
+>>>
+>>> This is a false positive. Silence the warning (error) by initializing
+>>> the variable.
+>>>
+>>> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+>>
+>> Reviewed-by: Juergen Gross <jgross@suse.com>
+> 
+> Thanks!
+> 
+> It just occurred to me: should the subject prefix be xen/cpupool:
+> instead of plain xen: ?
 
-Since the maximum number of symbols is 258, use unsigned short instead.
+Probably, yes.
 
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
----
 
-This issue was noticed in Linux decompressing initrds but since Xen has
-the same decompression code, it is possible the issue occurs here too.
-
- xen/common/bunzip2.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/xen/common/bunzip2.c b/xen/common/bunzip2.c
-index 4466426941e0..79f17162b138 100644
---- a/xen/common/bunzip2.c
-+++ b/xen/common/bunzip2.c
-@@ -221,7 +221,8 @@ static int __init get_next_block(struct bunzip_data *bd)
- 	   RUNB) */
- 	symCount = symTotal+2;
- 	for (j = 0; j < groupCount; j++) {
--		unsigned char length[MAX_SYMBOLS], temp[MAX_HUFCODE_BITS+1];
-+		unsigned char length[MAX_SYMBOLS];
-+		unsigned short temp[MAX_HUFCODE_BITS+1];
- 		int	minLen,	maxLen, pp;
- 		/* Read Huffman code lengths for each symbol.  They're
- 		   stored in a way similar to mtf; record a starting
--- 
-2.45.2
-
+Juergen
 
