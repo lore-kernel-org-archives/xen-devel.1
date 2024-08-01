@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21574C3DA4A
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Aug 2024 16:59:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.769901.1180775 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3934C52D70
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Aug 2024 18:00:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.769918.1180794 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sZZ8t-0003ie-QI; Thu, 01 Aug 2024 16:59:07 +0000
+	id 1sZa5w-0005FU-6F; Thu, 01 Aug 2024 18:00:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 769901.1180775; Thu, 01 Aug 2024 16:59:07 +0000
+Received: by outflank-mailman (output) from mailman id 769918.1180794; Thu, 01 Aug 2024 18:00:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sZZ8t-0003iX-Ll; Thu, 01 Aug 2024 16:59:07 +0000
-Received: by outflank-mailman (input) for mailman id 769901;
- Thu, 01 Aug 2024 16:59:07 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sZZ8s-0003iN-V9; Thu, 01 Aug 2024 16:59:06 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sZZ8s-00022a-JU; Thu, 01 Aug 2024 16:59:06 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sZZ8s-0008IB-6C; Thu, 01 Aug 2024 16:59:06 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1sZZ8s-0002XG-5h; Thu, 01 Aug 2024 16:59:06 +0000
+	id 1sZa5w-0005F1-2s; Thu, 01 Aug 2024 18:00:08 +0000
+Received: by outflank-mailman (input) for mailman id 769918;
+ Thu, 01 Aug 2024 18:00:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SIAI=PA=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1sZa5u-0003yj-QB
+ for xen-devel@lists.xenproject.org; Thu, 01 Aug 2024 18:00:06 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e10c8e31-502f-11ef-8776-851b0ebba9a2;
+ Thu, 01 Aug 2024 20:00:05 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id C4BF4628B2;
+ Thu,  1 Aug 2024 18:00:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52ECFC32786;
+ Thu,  1 Aug 2024 18:00:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,72 +43,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=fnwzHwEjSNTNyRv8zOIJ6ACumfAO6HHBqRWu0xl5kqI=; b=PyeBDUZyCIzY0uu8gqM2lR4wDt
-	GXiURWaH68DP6VFwXkaM/kz6E3o7FLaINK5r9wNf+UDDsVQB8zYuxcAoeObCIBl4QhU0htf8hvbTG
-	YTxuV3LcyTB1JTp4i1j2e3VrltDYvQ3D1gTBdPTDoEgg71ix/HIWxZiM0lIosLOLqe18=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-187109-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: e10c8e31-502f-11ef-8776-851b0ebba9a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1722535203;
+	bh=9vXy1lbBgI84RpBNbMnqBJhbGyNY0ZEyIqugp0pKwUA=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=u1hMsOAOMjETrDcYHbRtpzgnwrS0cjKnvdTtAAzVl2bGFi5NlQA9YNZeBTCSlDwXM
+	 B7UqrY2uSu4hG6L1WgdCujT3tF74OC9VKv6i0+ftSJkGeBqYvKXbrMhQYKI1dGEJKh
+	 qiqdYYIVCj5pT4Nz6lFrr7YcmlSVn/xiVGFj2GWLEfv9xcld0jtSNL8VGHgfaaOUSU
+	 Mt8IdC9OLt1ajVhqFJkG1vaQ/2t0zw+IKe4kCu2ojHwyhZYdA6k6ntKba2vxALY1Ft
+	 ClwRQI1dwGU4nDcj32+28TAHFMAVSXWHpTCuMc/oX/nSe3FyOddjKUeX4Qx7Qduywh
+	 KJHZZuoegPkiA==
+Date: Thu, 1 Aug 2024 11:00:01 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    Julien Grall <julien@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] docs/misra: add R13.2 and R18.2 to rules.rst
+In-Reply-To: <83ABB601-629D-4D95-B124-E50896EB12B0@arm.com>
+Message-ID: <alpine.DEB.2.22.394.2408011044050.4857@ubuntu-linux-20-04-desktop>
+References: <alpine.DEB.2.22.394.2407301626460.4857@ubuntu-linux-20-04-desktop> <6575beb5-645a-470a-89a1-8485adeace60@suse.com> <alpine.DEB.2.22.394.2407311647170.4857@ubuntu-linux-20-04-desktop> <83ABB601-629D-4D95-B124-E50896EB12B0@arm.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Subject: [ovmf test] 187109: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=2d5390053ff934ec1e94b84f5bb67400b3b75841
-X-Osstest-Versions-That:
-    ovmf=a679ceca974e94a659f9b6b9e7a7900644220ef9
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 01 Aug 2024 16:59:06 +0000
+Content-Type: text/plain; charset=US-ASCII
 
-flight 187109 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/187109/
+On Thu, 1 Aug 2024, Bertrand Marquis wrote:
+> Hi Stefano,
+> 
+> > On 1 Aug 2024, at 01:50, Stefano Stabellini <sstabellini@kernel.org> wrote:
+> > 
+> > On Wed, 31 Jul 2024, Jan Beulich wrote:
+> >> On 31.07.2024 01:30, Stefano Stabellini wrote:
+> >>> --- a/docs/misra/rules.rst
+> >>> +++ b/docs/misra/rules.rst
+> >>> @@ -462,6 +462,15 @@ maintainers if you want to suggest a change.
+> >>>      - Initializer lists shall not contain persistent side effects
+> >>>      -
+> >>> 
+> >>> +   * - `Rule 13.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_13_02.c>`_
+> >>> +     - Required
+> >>> +     - The value of an expression and its persistent side-effects shall
+> >>> +       be the same under all permitted evaluation orders
+> >>> +     - Be aware that the static analysis tool Eclair might report
+> >>> +       several findings for Rule 13.2 of type "caution". These are
+> >>> +       instances where Eclair is unable to verify that the code is valid
+> >>> +       in regard to Rule 13.2. Caution reports are not violations.
+> >> 
+> >> Which doesn't make clear what our take is towards new code people may
+> >> submit.
+> > 
+> > Good point, see my comment below
+> > 
+> > 
+> >>> @@ -583,6 +592,15 @@ maintainers if you want to suggest a change.
+> >>>        submitting new patches please try to decrease the number of
+> >>>        violations when possible.
+> >>> 
+> >>> +   * - `Rule 18.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_18_02.c>`_
+> >>> +     - Required
+> >>> +     - Subtraction between pointers shall only be applied to pointers
+> >>> +       that address elements of the same array
+> >>> +     - Be aware that the static analysis tool Eclair might report
+> >>> +       several findings for Rule 18.2 of type "caution". These are
+> >>> +       instances where Eclair is unable to verify that the code is valid
+> >>> +       in regard to Rule 18.2. Caution reports are not violations.
+> >> 
+> >> And while the same wording is used here, I think it is pretty clear for
+> >> this that we'd reject changes where bad subtractions are used. IOW even
+> >> more so important to clarify the (possibly different) positions on what
+> >> is going to be added into the code base.
+> > 
+> > In both of these cases, we would reject code that doesn't follow R13.2
+> > and R18.2. I'll change it to the following:
+> > 
+> > 
+> > Be aware that the static analysis tool Eclair might report several
+> > findings for Rule 18.2 of type "caution". These are instances where
+> > Eclair is unable to verify that the code is valid in regard to Rule
+> > 18.2. Caution reports are not violations. Regardless, new code is
+> > expected to follow this rule.
+> 
+> I think that in both cases it is wrong to state that "cautions reported are
+> not violations" where those are cases where the tool is not sure so they
+> might be or not violations.
+> So I would change the sentence to "cautions might not be violations. The
+> rule should be followed in any case in new code submitted".
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 2d5390053ff934ec1e94b84f5bb67400b3b75841
-baseline version:
- ovmf                 a679ceca974e94a659f9b6b9e7a7900644220ef9
-
-Last test of basis   187108  2024-08-01 13:45:09 Z    0 days
-Testing same since   187109  2024-08-01 15:41:27 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Ard Biesheuvel <ardb@kernel.org>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   a679ceca97..2d5390053f  2d5390053ff934ec1e94b84f5bb67400b3b75841 -> xen-tested-master
+I am happy with your wording, I'll make the change
 
