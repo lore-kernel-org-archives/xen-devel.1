@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BBA8C3DA4A
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Aug 2024 13:38:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.771207.1181776 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6CFBC3DA4A
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Aug 2024 13:54:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.771219.1181799 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sZsUG-0008MH-Pb; Fri, 02 Aug 2024 13:38:28 +0000
+	id 1sZsjZ-0003Ks-Pn; Fri, 02 Aug 2024 13:54:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 771207.1181776; Fri, 02 Aug 2024 13:38:28 +0000
+Received: by outflank-mailman (output) from mailman id 771219.1181799; Fri, 02 Aug 2024 13:54:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sZsUG-0008MA-Lh; Fri, 02 Aug 2024 13:38:28 +0000
-Received: by outflank-mailman (input) for mailman id 771207;
- Fri, 02 Aug 2024 13:38:27 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1sZsUF-0008M4-Cp
- for xen-devel@lists.xenproject.org; Fri, 02 Aug 2024 13:38:27 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1sZsUB-0006IU-Oe; Fri, 02 Aug 2024 13:38:23 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.0.211])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1sZsUB-0004kg-IV; Fri, 02 Aug 2024 13:38:23 +0000
+	id 1sZsjZ-0003Jw-Kv; Fri, 02 Aug 2024 13:54:17 +0000
+Received: by outflank-mailman (input) for mailman id 771219;
+ Fri, 02 Aug 2024 13:54:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=14L3=PB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1sZsjY-00036j-OS
+ for xen-devel@lists.xenproject.org; Fri, 02 Aug 2024 13:54:16 +0000
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [2a00:1450:4864:20::22a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b4e9a8b5-50d6-11ef-bc03-fd08da9f4363;
+ Fri, 02 Aug 2024 15:54:16 +0200 (CEST)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2ef2d582e31so96118121fa.2
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Aug 2024 06:54:16 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2f15e1ae4easm1684271fa.43.2024.08.02.06.54.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Aug 2024 06:54:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,80 +46,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=0Mnt8qb6UUrag6u8E+Ls9M3d32DHCKoh+4f+CmWSTiw=; b=HS7mzkHP5yHFAQ3VmIwaVH3Eu4
-	Nf50FgEPVHbBEMypfkFRBcjpNdjmCloSMWVs/cFUv//Jw7kqaAU1hpCmlnmLowc+o23QlRF/LSLfk
-	OBiZvBEeRww15RORpSXOCl7EThD8s2ZMM7jeQ0OEkFl34HbIg4W0O00imwBOjl98DB5U=;
-Message-ID: <3e6340a5-1eea-4784-96c1-980419a3755d@xen.org>
-Date: Fri, 2 Aug 2024 14:38:22 +0100
+X-Inumbo-ID: b4e9a8b5-50d6-11ef-bc03-fd08da9f4363
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1722606855; x=1723211655; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9xMFnCQstUzRDpJ+Lt8V1NerdXhHxQ/jZPU/wjOAbGA=;
+        b=axmmV1u+JFrGY4t8gaewl3rsax935QuHnNRN9uoKtfGgdrjXJcCXPhNxJa2MgI2SYF
+         1g7XyYMHaF912EFkK3iFXN0vrhVlgDziAwzNGC0uupYidVvk3PK8XiqC0Tf4N3mU1JMm
+         IIV7h/zm4rDyzM7kB3HfM76eT6NigcVAr75iVrTvgmHYULEo1NSp6kkmrZiBQaalPqsi
+         q/TpFTPvBMKr/le6t9xDtqDPx4dD4xoQ+zQjnbMzdwR77BN+/7f3sVm1NKsnBeZhv5t9
+         NLeTcd2wiIExuQ2ovhLGLsLcRBh24lMrvp6cNkfGp/CqNeu8lVQSfZMaJSZdKDqf4Uuo
+         QvIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1722606855; x=1723211655;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9xMFnCQstUzRDpJ+Lt8V1NerdXhHxQ/jZPU/wjOAbGA=;
+        b=l1ndGbcZKO/5A1QJtSPntR9AQrDMU7ggqwM6VuMHbtUbxurSXBZw3wajO9P/PXz9Gx
+         kovcSJemEIPms89lDKnIIDcFQSzO28vaNaws/EkW8eGY9NwMeIVP+Ek1o+hMQ1u4dLrL
+         0aYGrDo/98H+6KnkDDsvTFD+CWWnFXk0mFhgpee0J9s/53J892c+jIdvh7Xh3B3Mp1MZ
+         g3WO7SkIeaGYmT9D+3a+NmcFguw3nQg9jyecwueY22VY9PUyc3vPa/SH5NAOyOmBFqfc
+         IVFCEau5HRSbcmLyIt1wDSNDJ6dZRqiM1m4hpLYIAvTyW0lUMDdwURPSrrnhdE56N5mS
+         6yKQ==
+X-Gm-Message-State: AOJu0Yy4UmOAG0RzNmTC/YszXUOpaKwtYenJn8bhZNf4ztg1CG27mwbM
+	FdxjV0P97sOW9bR8ZZzcaAoQMGrYG9z7siN3l3nr0GEHe4CPrBt4/8olTQ==
+X-Google-Smtp-Source: AGHT+IHxufmfzYuTB4oOeLssPmvuH/MFYbb7j6IzGfwer3jhklgSUL5HMxdQgEe6RvQlMF1MzkmnAg==
+X-Received: by 2002:a2e:2c11:0:b0:2ef:243b:6dce with SMTP id 38308e7fff4ca-2f15aa84ec7mr23882531fa.10.1722606855031;
+        Fri, 02 Aug 2024 06:54:15 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v12 3/3] xen/riscv: refactor decode_trap_cause()
+Date: Fri,  2 Aug 2024 15:54:09 +0200
+Message-ID: <88e15908d6ac363934b6da52091443af28bd7291.1722605952.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <cover.1722605952.git.oleksii.kurochko@gmail.com>
+References: <cover.1722605952.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 4/4] xen: arm: Enclose access to EL2 MMU specific
- registers under CONFIG_MMU
-Content-Language: en-GB
-To: Ayan Kumar Halder <ayan.kumar.halder@amd.com>, sstabellini@kernel.org,
- bertrand.marquis@arm.com, michal.orzel@amd.com, Volodymyr_Babchuk@epam.com
-Cc: xen-devel@lists.xenproject.org
-References: <20240802121443.1531693-1-ayan.kumar.halder@amd.com>
- <20240802121443.1531693-5-ayan.kumar.halder@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <20240802121443.1531693-5-ayan.kumar.halder@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Use array_access_nospec() to prevent guest speculation.
 
-On 02/08/2024 13:14, Ayan Kumar Halder wrote:
-> All the EL2 MMU specific registers are enclosed within CONFIG_MMU.
-> 
-> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-> ---
->   xen/arch/arm/traps.c | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-> index aac6c599f8..766aacee77 100644
-> --- a/xen/arch/arm/traps.c
-> +++ b/xen/arch/arm/traps.c
-> @@ -919,12 +919,14 @@ static void _show_registers(const struct cpu_user_regs *regs,
->   #endif
->       }
->       printk("  VTCR_EL2: %"PRIregister"\n", READ_SYSREG(VTCR_EL2));
-> -    printk(" VTTBR_EL2: %016"PRIx64"\n", ctxt->vttbr_el2);
+Avoid double access of trap_causes[cause].
 
-Can you #ifdef the field vttrb_el2 if it is not meant to be used?
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V12:
+ - New patch.
+---
+ xen/arch/riscv/traps.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
->       printk("\n");
->   
->       printk(" SCTLR_EL2: %"PRIregister"\n", READ_SYSREG(SCTLR_EL2));
->       printk("   HCR_EL2: %"PRIregister"\n", READ_SYSREG(HCR_EL2));
-> +#ifdef CONFIG_MMU
-> +    printk(" VTTBR_EL2: %016"PRIx64"\n", ctxt->vttbr_el2);
-
-VTCR_EL2 and VTTBR_EL2 needs to be read together. So I would prefer the 
-printk is not moved.
-
->       printk(" TTBR0_EL2: %016"PRIx64"\n", READ_SYSREG64(TTBR0_EL2));
-> +#endif
- >       printk("\n");>       printk("   ESR_EL2: %"PRIregister"\n", 
-regs->hsr);
->       printk(" HPFAR_EL2: %"PRIregister"\n", READ_SYSREG(HPFAR_EL2));
-> @@ -956,7 +958,9 @@ void show_registers(const struct cpu_user_regs *regs)
->       if ( guest_mode(regs) && is_32bit_domain(current->domain) )
->           ctxt.ifsr32_el2 = READ_SYSREG(IFSR32_EL2);
->   #endif
-> +#ifdef CONFIG_MMU
->       ctxt.vttbr_el2 = READ_SYSREG64(VTTBR_EL2);
-> +#endif
->   
->       _show_registers(regs, &ctxt, guest_mode(regs), current);
->   }
-
-Cheers,
-
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 72ffdcd79e..51f6e45ccc 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -7,6 +7,7 @@
+ 
+ #include <xen/bug.h>
+ #include <xen/lib.h>
++#include <xen/nospec.h>
+ #include <xen/sched.h>
+ 
+ #include <asm/processor.h>
+@@ -48,9 +49,10 @@ static const char *decode_trap_cause(unsigned long cause)
+         [CAUSE_STORE_GUEST_PAGE_FAULT] = "Guest Store/AMO Page Fault",
+     };
+ 
+-    if ( cause < ARRAY_SIZE(trap_causes) && trap_causes[cause] )
+-        return trap_causes[cause];
+-    return "UNKNOWN";
++    const char *res = cause < ARRAY_SIZE(trap_causes) ? array_access_nospec(trap_causes, cause)
++                                                      : NULL;
++
++    return res ?: "UNKNOWN";
+ }
+ 
+ static const char *decode_reserved_interrupt_cause(unsigned long irq_cause)
 -- 
-Julien Grall
+2.45.2
 
 
