@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F5BC3DA4A
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Aug 2024 09:34:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.771901.1182351 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8EEEC3DA7F
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Aug 2024 09:44:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.771931.1182366 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sau73-0007EY-5m; Mon, 05 Aug 2024 09:34:45 +0000
+	id 1sauGc-0001cY-8O; Mon, 05 Aug 2024 09:44:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 771901.1182351; Mon, 05 Aug 2024 09:34:45 +0000
+Received: by outflank-mailman (output) from mailman id 771931.1182366; Mon, 05 Aug 2024 09:44:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sau73-0007EL-0b; Mon, 05 Aug 2024 09:34:45 +0000
-Received: by outflank-mailman (input) for mailman id 771901;
- Mon, 05 Aug 2024 09:34:43 +0000
+	id 1sauGc-0001cR-5k; Mon, 05 Aug 2024 09:44:38 +0000
+Received: by outflank-mailman (input) for mailman id 771931;
+ Mon, 05 Aug 2024 09:44:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4fqT=PE=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sau71-0006k4-GS
- for xen-devel@lists.xenproject.org; Mon, 05 Aug 2024 09:34:43 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=006L=PE=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1sauGb-0001aQ-7x
+ for xen-devel@lists.xenproject.org; Mon, 05 Aug 2024 09:44:37 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f074c501-530d-11ef-8776-851b0ebba9a2;
- Mon, 05 Aug 2024 11:34:40 +0200 (CEST)
-Received: from truciolo.bugseng.com.homenet.telecomitalia.it
- (host-87-20-207-105.retail.telecomitalia.it [87.20.207.105])
- by support.bugseng.com (Postfix) with ESMTPSA id DD2AA4EE073D;
- Mon,  5 Aug 2024 11:34:39 +0200 (CEST)
+ id 5336454a-530f-11ef-8776-851b0ebba9a2;
+ Mon, 05 Aug 2024 11:44:35 +0200 (CEST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5a1c49632deso12764238a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Aug 2024 02:44:35 -0700 (PDT)
+Received: from [192.168.219.191] ([94.75.70.14])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5babb4ec55csm2319308a12.47.2024.08.05.02.44.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Aug 2024 02:44:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,173 +47,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f074c501-530d-11ef-8776-851b0ebba9a2
-From: Federico Serafini <federico.serafini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH 1/2] automation/eclair: sort monitored guidelines with -V
-Date: Mon,  5 Aug 2024 11:34:32 +0200
-Message-Id: <cc69ad735dd53b10237981ded44229f8e6894076.1722842330.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1722842330.git.federico.serafini@bugseng.com>
-References: <cover.1722842330.git.federico.serafini@bugseng.com>
+X-Inumbo-ID: 5336454a-530f-11ef-8776-851b0ebba9a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1722851075; x=1723455875; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=mzuxSTbL5Cxx/kk9TbbpNOLZT/vyDNKq19mBiAE1u34=;
+        b=dK0KKzZPkQozkSjzbJJWYRHjYsZRAjTNQzAakmYG+okKulsGhFD8PThw+1i5OfsDzE
+         1b0vK2NAQ0XMrrrMYjBKpAdg01VpEODAIoSSijDoTnGhhsmJuO5qI5Hxk0lWMZ0vkIrl
+         Yz9/tMCUkU6ScodQ5GM9A0+StoPtJFfqHLrV6wye8pDrHkwKhnd+K/eCsEMog0hFo3ve
+         K+UAwlDgIpRI4L7o6gIrBUfLZ0RuSb5g3rP2m1wbAIk2APx8fSxLFyv/NJMw1ksjWJDO
+         LmSfoiSlSRi+W85dt0V0QFUeZJrjHtkmfR8h6iruTekfclcvt4AQLBX2qk6rRUqYoU0N
+         7QIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1722851075; x=1723455875;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=mzuxSTbL5Cxx/kk9TbbpNOLZT/vyDNKq19mBiAE1u34=;
+        b=LT1u6MTVrAy5plX+cYeUnstRE9CWIjGtgLuxmK3CXEfawatGh/fC9a3jUJDnWYEmy+
+         NNbj0XhsacP94bYT8rsTmvChj4bbEWInX68FCjPrZ2Z195g/jyBQ+kpcx9zftIpuV2p1
+         +z8mr8xFf1m2GJ3LlbVwPYWMqWs3cxFhuMZR885DB2/l8bvR4JhEZC98mSL41/KHQ3SD
+         5n3rehNLGax7Msa5YTLQfbN3MugIUl1RBbznVlyAAcJwza61UCwQ08gG9JdEqy8gTVH1
+         1O3Z6dXppZQ+fpRfcW9FTrUMUZvRhpO49p1Q+e8Xc5e9HeF78FzoXDd+oJDzlq48WWYP
+         G0kw==
+X-Forwarded-Encrypted: i=1; AJvYcCXM/eANoPWWtXuI7UGCvG+zoPI37cJQMKgvxd3MWadVkq2pcuqDC7Xw8N8gCDC3+Phu+VuEdW86J5CI+R7ehUCy6hWDcyheq3BiS1Asrws=
+X-Gm-Message-State: AOJu0Yw7qvt9kgHcmBGbAAQ6jstWSaBt542+NAmDBurrk5f64NXJAsce
+	b5WYZQghg+zMCxd6rloTabplCO9QdWpjAtUhdEv4si6qWudK5j1T0jSmhg==
+X-Google-Smtp-Source: AGHT+IFz7Q/QeZaa7/2D31He2kegrSgerncFwKVtSpE4CxAkxCn9OZmGjY4cEeiaLM7hWSKkFDBM7w==
+X-Received: by 2002:a05:6402:14da:b0:5a1:aa6d:9469 with SMTP id 4fb4d7f45d1cf-5b7f5dc6bc2mr7208845a12.38.1722851074836;
+        Mon, 05 Aug 2024 02:44:34 -0700 (PDT)
+Message-ID: <3c03ff921b8c1950eb8376e94cdfb490ea28bf4b.camel@gmail.com>
+Subject: Re: [PATCH v7 1/9] xen/device-tree: Move Arm's setup.c bootinfo
+ functions to common
+From: oleksii.kurochko@gmail.com
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Shawn Anastasio <sanastasio@raptorengineering.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Bertrand Marquis
+ <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>,  "Daniel P. Smith"
+ <dpsmith@apertussolutions.com>
+Date: Mon, 05 Aug 2024 11:44:33 +0200
+In-Reply-To: <309d42dc-e540-4fbe-a69e-2be6414deb70@xen.org>
+References: <cover.1721834549.git.oleksii.kurochko@gmail.com>
+	 <102f8b60c55cdf2db5890b9fb1c2fb66e61c4a67.1721834549.git.oleksii.kurochko@gmail.com>
+	 <309d42dc-e540-4fbe-a69e-2be6414deb70@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3 (3.52.3-1.fc40app2) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-To improve readability, sort guidelines with -V.
+Hi Julien,
 
-No functional change.
----
- .../eclair_analysis/ECLAIR/monitored.ecl      | 92 +++++++++----------
- 1 file changed, 46 insertions(+), 46 deletions(-)
+On Mon, 2024-08-05 at 10:08 +0100, Julien Grall wrote:
+> Hi,
+>=20
+> On 24/07/2024 16:31, Oleksii Kurochko wrote:
+> > Changes in V5:
+> > =C2=A0 - add xen/include/xen/bootfdt.h to MAINTAINERS file.
+> > =C2=A0 - drop message "Early device tree parsing and".
+> > =C2=A0 - After rebase on top of the current staging the following
+> > changes were done:
+> > =C2=A0=C2=A0=C2=A0 - init bootinfo variable in <common/device-tree/boot=
+info.c>
+> > with BOOTINFO_INIT;
+> > =C2=A0=C2=A0=C2=A0 - update the code of dt_unreserved_regions():
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CONFIG_STATIC_SHM related ch=
+anges and getting of
+> > reserved_mem
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootinfo_get_shmem() ??
+> > =C2=A0=C2=A0=C2=A0 - update the code of meminfo_overlap_check():
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 add check ( INVALID_PADDR =
+=3D=3D bank_start ) to if case.
+> > =C2=A0=C2=A0=C2=A0 - update the code of check_reserved_regions_overlap(=
+):
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CONFIG_STATIC_SHM related ch=
+anges.
+> > =C2=A0=C2=A0=C2=A0 - struct bootinfo was updated ( CONFIG_STATIC_SHM ch=
+anges )
+> > =C2=A0=C2=A0=C2=A0 - add shared_meminfo ( because of CONFIG_STATIC_SHM =
+)
+> > =C2=A0=C2=A0=C2=A0 - struct struct membanks was update with __struct gr=
+oup so
+> > <xen/kernel> is
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 neeeded to be included in bootfdt.h
+> > =C2=A0=C2=A0=C2=A0 - move BOOTINFO_ACPI_INIT, BOOTINFO_SHMEM_INIT, BOOT=
+INFO_INIT
+> > to generic bootfdt.h
+> > =C2=A0=C2=A0=C2=A0 - bootinfo_get_reserved_mem(), bootinfo_get_mem(),
+> > bootinfo_get_acpi(),
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootinfo_get_shmem() and bootinfo_get_sh=
+mem_extra() were
+> > moved to xen/bootfdt.h
+> > =C2=A0 - s/arm32/CONFIG_SEPARATE_XENHEAP/
+>=20
+> I think this change deserve a comment in the commit message.
+Sure, I will mention that ( IIUC only this
+"s/arm32/CONFIG_SEPARATE_XENHEAP/" should be mentioned ).
 
-diff --git a/automation/eclair_analysis/ECLAIR/monitored.ecl b/automation/eclair_analysis/ECLAIR/monitored.ecl
-index 8a7e3f3cea..7b085a329a 100644
---- a/automation/eclair_analysis/ECLAIR/monitored.ecl
-+++ b/automation/eclair_analysis/ECLAIR/monitored.ecl
-@@ -2,58 +2,17 @@
- -enable=MC3R1.D1.1
- -enable=MC3R1.D2.1
- -enable=MC3R1.D4.1
-+-enable=MC3R1.D4.3
-+-enable=MC3R1.D4.7
- -enable=MC3R1.D4.10
- -enable=MC3R1.D4.11
- -enable=MC3R1.D4.12
- -enable=MC3R1.D4.14
---enable=MC3R1.D4.3
---enable=MC3R1.D4.7
---enable=MC3R1.R10.1
---enable=MC3R1.R10.2
- -enable=MC3R1.R1.1
---enable=MC3R1.R11.1
---enable=MC3R1.R11.7
---enable=MC3R1.R11.8
---enable=MC3R1.R11.9
---enable=MC3R1.R12.5
- -enable=MC3R1.R1.3
---enable=MC3R1.R13.6
---enable=MC3R1.R13.1
- -enable=MC3R1.R1.4
---enable=MC3R1.R14.1
---enable=MC3R1.R14.4
---enable=MC3R1.R16.2
---enable=MC3R1.R16.3
---enable=MC3R1.R16.4
---enable=MC3R1.R16.6
---enable=MC3R1.R16.7
---enable=MC3R1.R17.1
---enable=MC3R1.R17.3
---enable=MC3R1.R17.4
---enable=MC3R1.R17.5
---enable=MC3R1.R17.6
---enable=MC3R1.R18.6
---enable=MC3R1.R19.1
---enable=MC3R1.R20.12
---enable=MC3R1.R20.13
---enable=MC3R1.R20.14
---enable=MC3R1.R20.4
---enable=MC3R1.R20.7
---enable=MC3R1.R20.9
- -enable=MC3R1.R2.1
---enable=MC3R1.R21.10
---enable=MC3R1.R21.13
---enable=MC3R1.R21.17
---enable=MC3R1.R21.18
---enable=MC3R1.R21.19
---enable=MC3R1.R21.20
---enable=MC3R1.R21.21
---enable=MC3R1.R21.9
- -enable=MC3R1.R2.2
---enable=MC3R1.R22.2
---enable=MC3R1.R22.4
---enable=MC3R1.R22.5
---enable=MC3R1.R22.6
- -enable=MC3R1.R2.6
- -enable=MC3R1.R3.1
- -enable=MC3R1.R3.2
-@@ -72,32 +31,73 @@
- -enable=MC3R1.R7.3
- -enable=MC3R1.R7.4
- -enable=MC3R1.R8.1
---enable=MC3R1.R8.10
---enable=MC3R1.R8.12
---enable=MC3R1.R8.14
- -enable=MC3R1.R8.2
- -enable=MC3R1.R8.3
- -enable=MC3R1.R8.4
- -enable=MC3R1.R8.5
- -enable=MC3R1.R8.6
- -enable=MC3R1.R8.8
-+-enable=MC3R1.R8.10
-+-enable=MC3R1.R8.12
-+-enable=MC3R1.R8.14
- -enable=MC3R1.R9.2
- -enable=MC3R1.R9.3
- -enable=MC3R1.R9.4
- -enable=MC3R1.R9.5
-+-enable=MC3R1.R10.1
-+-enable=MC3R1.R10.2
-+-enable=MC3R1.R11.1
-+-enable=MC3R1.R11.7
-+-enable=MC3R1.R11.8
-+-enable=MC3R1.R11.9
-+-enable=MC3R1.R12.5
-+-enable=MC3R1.R13.1
-+-enable=MC3R1.R13.6
-+-enable=MC3R1.R14.1
-+-enable=MC3R1.R14.4
-+-enable=MC3R1.R16.2
-+-enable=MC3R1.R16.3
-+-enable=MC3R1.R16.4
-+-enable=MC3R1.R16.6
-+-enable=MC3R1.R16.7
-+-enable=MC3R1.R17.1
-+-enable=MC3R1.R17.3
-+-enable=MC3R1.R17.4
-+-enable=MC3R1.R17.5
-+-enable=MC3R1.R17.6
-+-enable=MC3R1.R18.6
- -enable=MC3R1.R18.8
-+-enable=MC3R1.R19.1
- -enable=MC3R1.R20.2
- -enable=MC3R1.R20.3
-+-enable=MC3R1.R20.4
- -enable=MC3R1.R20.6
-+-enable=MC3R1.R20.7
-+-enable=MC3R1.R20.9
- -enable=MC3R1.R20.11
-+-enable=MC3R1.R20.12
-+-enable=MC3R1.R20.13
-+-enable=MC3R1.R20.14
- -enable=MC3R1.R21.3
- -enable=MC3R1.R21.4
- -enable=MC3R1.R21.5
- -enable=MC3R1.R21.7
- -enable=MC3R1.R21.8
-+-enable=MC3R1.R21.9
-+-enable=MC3R1.R21.10
- -enable=MC3R1.R21.12
-+-enable=MC3R1.R21.13
-+-enable=MC3R1.R21.17
-+-enable=MC3R1.R21.18
-+-enable=MC3R1.R21.19
-+-enable=MC3R1.R21.20
-+-enable=MC3R1.R21.21
- -enable=MC3R1.R22.1
-+-enable=MC3R1.R22.2
- -enable=MC3R1.R22.3
-+-enable=MC3R1.R22.4
-+-enable=MC3R1.R22.5
-+-enable=MC3R1.R22.6
- -enable=MC3R1.R22.7
- -enable=MC3R1.R22.8
- -enable=MC3R1.R22.9
--- 
-2.34.1
+>=20
+> [...]
+>=20
+> > --- /dev/null
+> > +++ b/xen/common/device-tree/bootinfo.c
+> > @@ -0,0 +1,459 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> > +/*
+> > + * Derived from $xen/arch/arm/setup.c.
+>=20
+> I would suggest to mention the version of Xen this is derived from.
+Will it be enough only Xen version without commit hash?
 
+>=20
+> Acked-by: Julien Grall <jgrall@amazon.com>
+Thanks!
+
+~ Oleksii
 
