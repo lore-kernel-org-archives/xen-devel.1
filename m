@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FAFC52D7B
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Aug 2024 11:41:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.772826.1183264 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 804F0C3DA64
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Aug 2024 11:41:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.772827.1183274 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sbIZ6-0006TC-SE; Tue, 06 Aug 2024 11:41:20 +0000
+	id 1sbIZB-0006hx-2H; Tue, 06 Aug 2024 11:41:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 772826.1183264; Tue, 06 Aug 2024 11:41:20 +0000
+Received: by outflank-mailman (output) from mailman id 772827.1183274; Tue, 06 Aug 2024 11:41:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sbIZ6-0006T5-Oa; Tue, 06 Aug 2024 11:41:20 +0000
-Received: by outflank-mailman (input) for mailman id 772826;
- Tue, 06 Aug 2024 11:41:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sbIZA-0006hq-Vh; Tue, 06 Aug 2024 11:41:24 +0000
+Received: by outflank-mailman (input) for mailman id 772827;
+ Tue, 06 Aug 2024 11:41:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HPS5=PF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sbIZ5-0006Sz-Cc
- for xen-devel@lists.xenproject.org; Tue, 06 Aug 2024 11:41:19 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cb89295f-53e8-11ef-bc04-fd08da9f4363;
- Tue, 06 Aug 2024 13:41:18 +0200 (CEST)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-52f01ec08d6so612320e87.2
- for <xen-devel@lists.xenproject.org>; Tue, 06 Aug 2024 04:41:18 -0700 (PDT)
+ id 1sbIZ9-0006hC-2X
+ for xen-devel@lists.xenproject.org; Tue, 06 Aug 2024 11:41:23 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cc647c82-53e8-11ef-8776-851b0ebba9a2;
+ Tue, 06 Aug 2024 13:41:19 +0200 (CEST)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-52fcc56c882so3887358e87.0
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Aug 2024 04:41:19 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-530bba07891sm1466093e87.22.2024.08.06.04.41.16
+ 2adb3069b0e04-530bba07891sm1466093e87.22.2024.08.06.04.41.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 04:41:16 -0700 (PDT)
+ Tue, 06 Aug 2024 04:41:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,105 +46,264 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb89295f-53e8-11ef-bc04-fd08da9f4363
+X-Inumbo-ID: cc647c82-53e8-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722944477; x=1723549277; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=q5upltfC9xlBQsVci2xz+gISSqYTLts91WnziLkDiE0=;
-        b=hxgjNWA9tKSSQZy2Hd9ivWVtqTii3qL23zOgeFnDXN3w2ZNiyPiuKjt2XoJHzQ4irh
-         ZyKgU3bJl+8MDF9zC3n4InpyL9yMv7BnDO+u48PDZvXMyPSJKnEWSUYeP7LD2TQ2pzqF
-         cd9+jfTUiMfwV7IR96Oi7SdIO23CFE/4KlIxFihTAwDOU0hJVfZYO2wMpsZESWHM6+sQ
-         S1UBt4fynHmaslqKjav0tVrTUbeHwW+1/qPxtpiX2PhgdwbDDKhWhi0Os85So9RBu7Cr
-         wptkhQpB02QnzIZiXzcb5HZZojdJVEcazRAw6esm0GFd13sgj841ts44S1Xz7uF0uxTm
-         XsDQ==
+        d=gmail.com; s=20230601; t=1722944479; x=1723549279; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vG5ncRvairjCkr+MpN3fScaqyU5Vca5xbMf9rFGyo/E=;
+        b=RDaCIuR6YgiHcFVzLhqf1M/lsvRnPRT7GRD0wurekTkZaGFnRkII+7/+ELHJXREBkk
+         dTtriFXRFpbVqobsR400oc5KF6Zjg6e+gKazgzmUyOyZHunxZ1d4vWr0N/IxnL1VP99p
+         y84Hq3fqVtoUJgjYGKIu0uhtBGvPaWevjTyXxXr0E8oU+2G7Zd/a+885uf0bp7mNPpvQ
+         K8qU/lqTJhbsVv1KrOWuBIa4Bf0ekrfqB5n2/Ako376nu4AvU6l2Nj0PnqGDjInEjpwi
+         KZBxdxG/8+tJDnCedzhMYlWfltvmuGfzCHbLsx1sfsTamhx3h8QF5LlDektkkNW/4iEl
+         bdoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722944477; x=1723549277;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=q5upltfC9xlBQsVci2xz+gISSqYTLts91WnziLkDiE0=;
-        b=Z7qHvihjkZNtkurt22sH3lSDCELRpKkO0lbP6XV+9qhBZdh5jXkj438EnMr2X0nZiV
-         YCWoHyB/Q2OZt/ByOlZtloaNQ002tkdWOfVI7hVeswVMgukSUo5RSSzvVzMLGoZY6KLg
-         LWNUsCGzmSMlnh4MxBg5Yt7iNcTeOWEgWIsEHnDnDG9NjIamFoAths1sWeXk4/nl6QG1
-         q7k40aCi0QmdKIyMe5Y2cwxspmSU0NuzMYGVdDQINMf1SeQ3uxVeXOIXiFj8mJZU0bdK
-         n+aBCzIiOYeGH7C/NJDpWzHkVezXIsOuNJqW/obmo8x1jisnkTd6kLQNt6xSNI+LmaOw
-         vFdw==
-X-Gm-Message-State: AOJu0Yz4VFJdEh5fUd+ljp6ofrcFkK4MJIjDXEG7QQ4yssNMBS6JO04H
-	+H9qL+Pi1zaz1zuMoGxokvWUD/PG+sKgBQWh5VEnHQbSmSsk0ejrjDD3/g==
-X-Google-Smtp-Source: AGHT+IF34GC2zjw3ILcydfrdcGbCtCq8kocU7Q66JTBHp7tgOAPJsD0Sc17utXxnKcdm3NHCC5ohrw==
-X-Received: by 2002:a05:6512:3d04:b0:52e:9b15:1c60 with SMTP id 2adb3069b0e04-530bb3a5035mr11155570e87.48.1722944477156;
-        Tue, 06 Aug 2024 04:41:17 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1722944479; x=1723549279;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vG5ncRvairjCkr+MpN3fScaqyU5Vca5xbMf9rFGyo/E=;
+        b=Jy5JeWR1GjkYsLhNPuYqaTlzzRkY6CuVvTXVqekFc3/xi/hNPGLWNadGBJVRRniX2H
+         K9P8DfjBJTU+WSxLYLHuSEZhsddj/nIyRJtHPtE1Pp27ndZDemccTIKCXEW5z+ZH7zV7
+         EtddAy2iXZt3d+ewjOD0SExX/YoOAK3qd+9vl+v0LqoCmx1NitKw4hlTBNQcjYLKyug+
+         qFV7fPBC8GKh+ShWTZzBB5ATwirk2QYCX3HSlenVcWTA4TACzNdkxNP/5f0nTM2aUz49
+         dBaif1jCgDV4i3nOm9VBgmrZNPGzE5wQwi4ZxnD4BdLYOghphtwaErUS1QIMTEMvsSzB
+         Ym/A==
+X-Gm-Message-State: AOJu0YwYL4S4rdh8fn3iOqolPG+3+NARqTljPvt8hSP37Srj4tYgOzJg
+	hLiDBKZQV0TZE5jkAgv1R/ac9oVFxlRw6nIQhvFYc1Vx8VZZc5WukfJ44g==
+X-Google-Smtp-Source: AGHT+IEB7EuJa6UojpkoU5DZ+m4t37Ub0hQd0f/BxUhDU5i8Bgfw7ccYoRWRlEQLyx8Sa1w6/Vhx0w==
+X-Received: by 2002:a05:6512:3b06:b0:52c:ad70:6feb with SMTP id 2adb3069b0e04-530bb2e8691mr4009661e87.20.1722944478939;
+        Tue, 06 Aug 2024 04:41:18 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+Cc: Shawn Anastasio <sanastasio@raptorengineering.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v2 0/2] Common device tree stuff
-Date: Tue,  6 Aug 2024 13:41:12 +0200
-Message-ID: <cover.1722941799.git.oleksii.kurochko@gmail.com>
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v2 2/2] xen/common: Move Arm's bootfdt.c to common
+Date: Tue,  6 Aug 2024 13:41:14 +0200
+Message-ID: <c98165b4e168d74e8bca91ba7c111e6faaa309a4.1722941799.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <cover.1722941799.git.oleksii.kurochko@gmail.com>
+References: <cover.1722941799.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The current patch series introduces the common device tree functions
-between several architectures: Arm, PPC, RISC-V.
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
 
-Originally these patches were a part of Shawn's patch series [1].
-At that moment it was v4 version of this patches.
+Move Arm's bootfdt.c to xen/common so that it can be used by other
+device tree architectures like PPC and RISCV.
 
-After RISC-V started to need this changes these patches have been
-rebased on top of the current staging with addional updates after
-rebase.
-For some time, these patches from v5 to v7 version were the part of
-the patch series [2] but not to block almost ready patches for merging
-it was decided to move them to separate patch series.
+Remove stubs for process_shm_node() and early_print_info_shmem()
+from $xen/arch/arm/include/asm/static-shmem.h.
+These stubs are removed to avoid introducing them for architectures
+that do not support CONFIG_STATIC_SHM.
+The process_shm_node() stub is now implemented in common code to
+maintain the current behavior of early_scan_code() on ARM.
+The early_print_info_shmem() stub is only used in early_print_info(),
+so it's now guarded with #ifdef CONFIG_STATIC_SHM ... #endif.
 
-CI tests results:
- https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/1402476423
-
-[1]
-https://lore.kernel.org/xen-devel/cover.1712893887.git.sanastasio@raptorengineering.com/
-
-[2]
-https://lore.kernel.org/xen-devel/cover.1721834549.git.oleksii.kurochko@gmail.com/
+Suggested-by: Julien Grall <julien@xen.org>
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-Changes in v2:
- - add Acked-by: Julien Grall <julien@xen.org> for Patch 2
- - rename xen/common/device_tree.c to xen/common/device-tree.c
- - update MAINTAINERS file: drop xen/common/device_tree.c from it.
- - make diff smaller using git's options:
-      --diff-algorithm=minimal --find-renames
+Changes in V9:
+ - add Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-
-Shawn Anastasio (2):
-  xen/device-tree: Move Arm's setup.c bootinfo functions to common
-  xen/common: Move Arm's bootfdt.c to common
-
- MAINTAINERS                                   |   3 +-
- xen/arch/arm/Makefile                         |   1 -
- xen/arch/arm/include/asm/setup.h              | 198 +-------
- xen/arch/arm/include/asm/static-shmem.h       |   9 -
- xen/arch/arm/setup.c                          | 432 -----------------
- xen/common/Makefile                           |   2 +-
- xen/common/device-tree/Makefile               |   3 +
- .../arm => common/device-tree}/bootfdt.c      |  24 +-
- xen/common/device-tree/bootinfo.c             | 459 ++++++++++++++++++
- .../device-tree.c}                            |   0
- xen/include/xen/bootfdt.h                     | 209 ++++++++
- 11 files changed, 694 insertions(+), 646 deletions(-)
- create mode 100644 xen/common/device-tree/Makefile
+Changes in V8:
+ - Fix the change log for this patch ( accidentally the change log of the previous
+   patch was copied to this ).
+ - Drop the stub of process_shm_node() and early_print_info_shmem() in
+   xen/arch/arm/include/asm/static-shmem.h as it is moved to common code to not
+   re-introduce the same stub for each architecture which doesn't support
+   CONFIG_STATIC_SHM now.
+ - Drop Acked-by: Julien Grall <julien@xen.org> as after the Ack additional changes were
+   done so an additional review is needed.
+---
+Changes in V7:
+ - Nothing changed. Only rebase.
+---
+Changes in V6:
+ - update the version of the patch to v6.
+---
+Changes in v5:
+ - After rebase the Shawn's patch v4 on top of current staging the following
+   was done:
+   - add guard #ifdef CONFIG_STATIC_SHM around inclusion of <asm/static-shmem.h>
+     in common/device-tree/bootfdt.c.
+   - add stub for process_shm_node() in case CONFIG_STATIC_SHM isn't enabled.
+   - add guard around #ifdef CONFIG_STATIC_SHM aroud early_print_info_shmem() in
+     early_print_info().
+---
+Changes in v4:
+  - move function prototypes to patch 2's xen/include/bootfdt.h
+  - clean up #includes
+---
+ xen/arch/arm/Makefile                         |  1 -
+ xen/arch/arm/include/asm/setup.h              | 13 ----------
+ xen/arch/arm/include/asm/static-shmem.h       |  9 -------
+ xen/common/device-tree/Makefile               |  1 +
+ .../arm => common/device-tree}/bootfdt.c      | 24 +++++++++++++++----
+ xen/include/xen/bootfdt.h                     | 14 +++++++++++
+ 6 files changed, 34 insertions(+), 28 deletions(-)
  rename xen/{arch/arm => common/device-tree}/bootfdt.c (98%)
- create mode 100644 xen/common/device-tree/bootinfo.c
- rename xen/common/{device_tree.c => device-tree/device-tree.c} (100%)
- create mode 100644 xen/include/xen/bootfdt.h
 
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 45dc29ea53..da9c979dc4 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -10,7 +10,6 @@ obj-$(CONFIG_TEE) += tee/
+ obj-$(CONFIG_HAS_VPCI) += vpci.o
+ 
+ obj-$(CONFIG_HAS_ALTERNATIVE) += alternative.o
+-obj-y += bootfdt.init.o
+ obj-y += cpuerrata.o
+ obj-y += cpufeature.o
+ obj-y += decode.o
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 1748be29e5..64c227d171 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -41,19 +41,6 @@ void fw_unreserved_regions(paddr_t s, paddr_t e,
+                            void (*cb)(paddr_t ps, paddr_t pe),
+                            unsigned int first);
+ 
+-bool check_reserved_regions_overlap(paddr_t region_start, paddr_t region_size);
+-
+-struct bootmodule *add_boot_module(bootmodule_kind kind,
+-                                   paddr_t start, paddr_t size, bool domU);
+-struct bootmodule *boot_module_find_by_kind(bootmodule_kind kind);
+-struct bootmodule * boot_module_find_by_addr_and_kind(bootmodule_kind kind,
+-                                                             paddr_t start);
+-void add_boot_cmdline(const char *name, const char *cmdline,
+-                      bootmodule_kind kind, paddr_t start, bool domU);
+-struct bootcmdline *boot_cmdline_find_by_kind(bootmodule_kind kind);
+-struct bootcmdline * boot_cmdline_find_by_name(const char *name);
+-const char *boot_module_kind_as_string(bootmodule_kind kind);
+-
+ void init_pdx(void);
+ void setup_mm(void);
+ 
+diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
+index 806ee41cfc..fd0867c4f2 100644
+--- a/xen/arch/arm/include/asm/static-shmem.h
++++ b/xen/arch/arm/include/asm/static-shmem.h
+@@ -80,15 +80,6 @@ static inline int process_shm_chosen(struct domain *d,
+     return 0;
+ }
+ 
+-static inline int process_shm_node(const void *fdt, int node,
+-                                   uint32_t address_cells, uint32_t size_cells)
+-{
+-    printk("CONFIG_STATIC_SHM must be enabled for parsing static shared memory nodes\n");
+-    return -EINVAL;
+-}
+-
+-static inline void early_print_info_shmem(void) {};
+-
+ static inline void init_sharedmem_pages(void) {};
+ 
+ static inline int remove_shm_from_rangeset(const struct kernel_info *kinfo,
+diff --git a/xen/common/device-tree/Makefile b/xen/common/device-tree/Makefile
+index f813f7555f..990abd571a 100644
+--- a/xen/common/device-tree/Makefile
++++ b/xen/common/device-tree/Makefile
+@@ -1,2 +1,3 @@
++obj-y += bootfdt.init.o
+ obj-y += bootinfo.init.o
+ obj-y += device-tree.o
+diff --git a/xen/arch/arm/bootfdt.c b/xen/common/device-tree/bootfdt.c
+similarity index 98%
+rename from xen/arch/arm/bootfdt.c
+rename to xen/common/device-tree/bootfdt.c
+index 6e060111d9..f7998979c1 100644
+--- a/xen/arch/arm/bootfdt.c
++++ b/xen/common/device-tree/bootfdt.c
+@@ -4,18 +4,20 @@
+  *
+  * Copyright (C) 2012-2014 Citrix Systems, Inc.
+  */
+-#include <xen/types.h>
+-#include <xen/lib.h>
+-#include <xen/kernel.h>
+-#include <xen/init.h>
+-#include <xen/efi.h>
++
++#include <xen/bootfdt.h>
+ #include <xen/device_tree.h>
++#include <xen/efi.h>
++#include <xen/init.h>
++#include <xen/kernel.h>
+ #include <xen/lib.h>
+ #include <xen/libfdt/libfdt-xen.h>
+ #include <xen/sort.h>
+ #include <xsm/xsm.h>
+ #include <asm/setup.h>
++#ifdef CONFIG_STATIC_SHM
+ #include <asm/static-shmem.h>
++#endif
+ 
+ static void __init __maybe_unused build_assertions(void)
+ {
+@@ -436,6 +438,16 @@ static int __init process_domain_node(const void *fdt, int node,
+                                    MEMBANK_STATIC_DOMAIN);
+ }
+ 
++#ifndef CONFIG_STATIC_SHM
++static inline int process_shm_node(const void *fdt, int node,
++                                   uint32_t address_cells, uint32_t size_cells)
++{
++    printk("CONFIG_STATIC_SHM must be enabled for parsing static shared"
++            " memory nodes\n");
++    return -EINVAL;
++}
++#endif
++
+ static int __init early_scan_node(const void *fdt,
+                                   int node, const char *name, int depth,
+                                   u32 address_cells, u32 size_cells,
+@@ -495,7 +507,9 @@ static void __init early_print_info(void)
+                mem_resv->bank[i].start,
+                mem_resv->bank[i].start + mem_resv->bank[i].size - 1);
+     }
++#ifdef CONFIG_STATIC_SHM
+     early_print_info_shmem();
++#endif
+     printk("\n");
+     for ( i = 0 ; i < cmds->nr_mods; i++ )
+         printk("CMDLINE[%"PRIpaddr"]:%s %s\n", cmds->cmdline[i].start,
+diff --git a/xen/include/xen/bootfdt.h b/xen/include/xen/bootfdt.h
+index c39428d5f5..16fa05f38f 100644
+--- a/xen/include/xen/bootfdt.h
++++ b/xen/include/xen/bootfdt.h
+@@ -157,6 +157,20 @@ struct bootinfo {
+ 
+ extern struct bootinfo bootinfo;
+ 
++bool check_reserved_regions_overlap(paddr_t region_start,
++                                    paddr_t region_size);
++
++struct bootmodule *add_boot_module(bootmodule_kind kind,
++                                   paddr_t start, paddr_t size, bool domU);
++struct bootmodule *boot_module_find_by_kind(bootmodule_kind kind);
++struct bootmodule * boot_module_find_by_addr_and_kind(bootmodule_kind kind,
++                                                             paddr_t start);
++void add_boot_cmdline(const char *name, const char *cmdline,
++                      bootmodule_kind kind, paddr_t start, bool domU);
++struct bootcmdline *boot_cmdline_find_by_kind(bootmodule_kind kind);
++struct bootcmdline * boot_cmdline_find_by_name(const char *name);
++const char *boot_module_kind_as_string(bootmodule_kind kind);
++
+ void populate_boot_allocator(void);
+ 
+ size_t boot_fdt_info(const void *fdt, paddr_t paddr);
 -- 
 2.45.2
 
