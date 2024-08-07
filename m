@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3865C52D71
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00996C3DA7F
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2024 13:48:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.773500.1183943 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.773501.1183960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sbh1x-0005JH-EY; Wed, 07 Aug 2024 13:48:45 +0000
+	id 1sbh1y-0005qC-Ij; Wed, 07 Aug 2024 13:48:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 773500.1183943; Wed, 07 Aug 2024 13:48:45 +0000
+Received: by outflank-mailman (output) from mailman id 773501.1183960; Wed, 07 Aug 2024 13:48:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sbh1x-0005HQ-7G; Wed, 07 Aug 2024 13:48:45 +0000
-Received: by outflank-mailman (input) for mailman id 773500;
- Wed, 07 Aug 2024 13:48:43 +0000
+	id 1sbh1y-0005pG-FR; Wed, 07 Aug 2024 13:48:46 +0000
+Received: by outflank-mailman (input) for mailman id 773501;
+ Wed, 07 Aug 2024 13:48:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nE80=PG=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1sbh1v-0005AD-It
- for xen-devel@lists.xenproject.org; Wed, 07 Aug 2024 13:48:43 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
+ id 1sbh1x-0005AD-7r
+ for xen-devel@lists.xenproject.org; Wed, 07 Aug 2024 13:48:45 +0000
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [2a00:1450:4864:20::536])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c193147c-54c3-11ef-8776-851b0ebba9a2;
- Wed, 07 Aug 2024 15:48:41 +0200 (CEST)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5a10835487fso2854813a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 07 Aug 2024 06:48:41 -0700 (PDT)
+ id c2d5edc2-54c3-11ef-8776-851b0ebba9a2;
+ Wed, 07 Aug 2024 15:48:43 +0200 (CEST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5af51684d52so2139034a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Aug 2024 06:48:43 -0700 (PDT)
 Received: from EMEAENGAAD19049.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5b83960f353sm7017710a12.15.2024.08.07.06.48.40
+ 4fb4d7f45d1cf-5b83960f353sm7017710a12.15.2024.08.07.06.48.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 06:48:40 -0700 (PDT)
+ Wed, 07 Aug 2024 06:48:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c193147c-54c3-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: c2d5edc2-54c3-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1723038521; x=1723643321; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1723038523; x=1723643323; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=o7eodO/9HzqH08fbvCI7vy2Uyw8SnwXrkAc77uD4d2A=;
-        b=eBmFeBDkNd87aJhO+ZE7x/ImfPfj+wxGn0b6RqJRAry5eqGWjMu2VUkh3mniOF1LUY
-         8kJfDYYZkcDYt+MEkFIgHLYwdSVQlsQga4mP3d/xyAiQMoAPUJysjYgxXKw96el3Wxy/
-         GEmzKfZkfRwpLxhevcFbs85MkQwB77S3BpB7o=
+        bh=6ss20XkPoOS/17MJ2dIfZqErwnJ4zQ6MM+H++oOIE0s=;
+        b=RsJ/oxCBXDZjOo6aTCy7P52KXLoHF0bMgk3jQCQuPmRxpDzo1dSkDk5Nmi4d/zrf4x
+         Py37kFqTczOaBcS7dZLcM141TeAQKkoB4JlrxDUvbIKtjIC7h2sGVcLFMedSpdymynXY
+         kolwpFcbCjui/g6sPOkSlKgWYNOJRsxNZWc6M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723038521; x=1723643321;
+        d=1e100.net; s=20230601; t=1723038523; x=1723643323;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=o7eodO/9HzqH08fbvCI7vy2Uyw8SnwXrkAc77uD4d2A=;
-        b=Z/JNdUw//WdfpfZ1FMEzStTe2l3w2u/IHPrhWSFpk00EdoS/c5qQHpcsmvR7dR5+D/
-         C4dSPxIyitib2C8Bn07m9I4L924HopFlXXPXzRkyUuQ9FDd/HyOKLjTDBUx6t8URqPGD
-         omodKRDHbPyX183YMItTs3E2JR63diKKgu2f1OY2fGA+kcU5PCIsf3fIRMMO+3T1ZHzZ
-         ahVx73ytZ76Sq4kbMQsSCupIrklq08P7MnxHN0mYM6XJ/qAxx7+ZguPmr8afRGtWHCjy
-         5XJ4hESuJfK//08o2ltT6/TkqVzz9cPLxy/Z4xuCSycAPuRPPRaLaY57YuGQWL+ghNTN
-         QSnw==
-X-Gm-Message-State: AOJu0Ywkf6nM/fM8uHMTgUZwJzAKD1RYO2D0dprDUcwSk5Mz1qeX7jLk
-	dr+NwXnhu8lcWM53IJtongKm/79S0hkU7OWu38JCLXTiSxa+++hYLBP0qvmHi0X7g/Vmu6XMXOl
-	4
-X-Google-Smtp-Source: AGHT+IHfPjkr6YvB77y4L8XA3v+BcfW12X55BGLdGL+x8IdxKIMhcYOiZjiZPba6g4zjb1J6DD+tUA==
-X-Received: by 2002:a05:6402:2032:b0:5a3:a4d7:caf5 with SMTP id 4fb4d7f45d1cf-5b7f5dc13cemr11942212a12.36.1723038520673;
-        Wed, 07 Aug 2024 06:48:40 -0700 (PDT)
+        bh=6ss20XkPoOS/17MJ2dIfZqErwnJ4zQ6MM+H++oOIE0s=;
+        b=JVHKYraNbwEtI8D+cLoRtnWPBZj+wJPCA7AXrASwjL+JhzEd3ydOMjwRD+TC/42Nrc
+         ZEUsFMHMvXO/giEBO30xEkcVtkd7BrDtLYC8wzE+oijXrh0qB7ghdKPUZdRyEfFaKqtf
+         JSQvNGp7XnfWy+pCXNH4dWBqxeqslmd4m/u5Cx6NaeU9jtSKuUAjxeXeBsZjDfvCDVqX
+         j/l7ZMLTYGEEkrRK0ofxXxaI5GHtRob/URrMGxPPx99s5/axwntEzIo2JhZUN/M/mjfr
+         usla7QhOYRgeQXDBIlufE/PlzUJ/qlI46BLtXRUpckDIllVPLEaxfv68hcbeLzLAUhCl
+         A5mg==
+X-Gm-Message-State: AOJu0Yw0NRT+kziN9Ip7ahNDKXo9DlnNiAFATbWPjr1WKza70fUfW5k2
+	qcaLtPhpN4MJcCi9wvUdrc+uFkm8U62ibfedmOTs7yEUNdHzRwW6pUSaRKLo51mnLuB/TOyiKcR
+	C
+X-Google-Smtp-Source: AGHT+IHCXTM5fGaE9/iFzHECw4HaTuzn5M6eXxe17YBVWA7pFfxIaCBP3tiSHOseOczCK8WOgg8Oog==
+X-Received: by 2002:a50:ff0b:0:b0:5a0:f8a2:9cf4 with SMTP id 4fb4d7f45d1cf-5b7f5129b4bmr12290625a12.25.1723038522669;
+        Wed, 07 Aug 2024 06:48:42 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -82,41 +82,53 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 1/5] x86: Put trampoline in .init.data section
-Date: Wed,  7 Aug 2024 14:48:15 +0100
-Message-ID: <20240807134819.8987-2-alejandro.vallejo@cloud.com>
+Subject: [PATCH 3/5] x86: Set xen_phys_start and trampoline_xen_phys_start earlier
+Date: Wed,  7 Aug 2024 14:48:17 +0100
+Message-ID: <20240807134819.8987-4-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240807134819.8987-1-alejandro.vallejo@cloud.com>
 References: <20240807134819.8987-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This change allows to put the trampoline in a separate, not executable
-section. The trampoline contains a mix of code and data (data which
-is modified from C code during early start so must be writable).
-This is in preparation for W^X patch in order to satisfy UEFI CA
-memory mitigation requirements.
-At the moment .init.text and .init.data in EFI mode are put together
-so they will be in the same final section as before this patch.
+No reason to wait, if Xen image is loaded by EFI (not multiboot
+EFI path) these are set in efi_arch_load_addr_check, but
+not in the multiboot EFI code path.
+This change makes the 2 code paths more similar and allows
+the usage of these variables if needed.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
- xen/arch/x86/boot/head.S | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/arch/x86/boot/head.S | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index d8ac0f0494..f027ff45fd 100644
+index 296f76146a..5b82221038 100644
 --- a/xen/arch/x86/boot/head.S
 +++ b/xen/arch/x86/boot/head.S
-@@ -870,6 +870,8 @@ cmdline_parse_early:
- reloc:
-         .incbin "reloc.bin"
+@@ -259,6 +259,11 @@ __efi64_mb2_start:
+         jmp     x86_32_switch
  
-+        .section .init.data, "aw", @progbits
-+        .align 4
- ENTRY(trampoline_start)
- #include "trampoline.S"
- ENTRY(trampoline_end)
+ .Lefi_multiboot2_proto:
++        /* Save Xen image load base address for later use. */
++        lea     __image_base__(%rip),%rsi
++        movq    %rsi, xen_phys_start(%rip)
++        movl    %esi, trampoline_xen_phys_start(%rip)
++
+         /* Zero EFI SystemTable, EFI ImageHandle addresses and cmdline. */
+         xor     %esi,%esi
+         xor     %edi,%edi
+@@ -605,10 +610,6 @@ trampoline_setup:
+          * Called on legacy BIOS and EFI platforms.
+          */
+ 
+-        /* Save Xen image load base address for later use. */
+-        mov     %esi, sym_esi(xen_phys_start)
+-        mov     %esi, sym_esi(trampoline_xen_phys_start)
+-
+         /* Get bottom-most low-memory stack address. */
+         mov     sym_esi(trampoline_phys), %ecx
+         add     $TRAMPOLINE_SPACE,%ecx
 -- 
 2.45.2
 
