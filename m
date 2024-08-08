@@ -4,52 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D97C3DA4A
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2024 12:10:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.773965.1184479 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE7BC3DA4A
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2024 12:38:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.774011.1184518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sc1xt-0001Qo-Fx; Thu, 08 Aug 2024 12:09:57 +0000
+	id 1sc2PH-0000Zn-PJ; Thu, 08 Aug 2024 12:38:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 773965.1184479; Thu, 08 Aug 2024 12:09:57 +0000
+Received: by outflank-mailman (output) from mailman id 774011.1184518; Thu, 08 Aug 2024 12:38:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sc1xt-0001Qh-Cx; Thu, 08 Aug 2024 12:09:57 +0000
-Received: by outflank-mailman (input) for mailman id 773965;
- Thu, 08 Aug 2024 12:09:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sc2PH-0000Zg-Ma; Thu, 08 Aug 2024 12:38:15 +0000
+Received: by outflank-mailman (input) for mailman id 774011;
+ Thu, 08 Aug 2024 12:38:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eqo7=PH=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1sc1xs-0001Bl-30
- for xen-devel@lists.xenproject.org; Thu, 08 Aug 2024 12:09:56 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20620.outbound.protection.outlook.com
- [2a01:111:f403:2414::620])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1eb32eab-557f-11ef-8776-851b0ebba9a2;
- Thu, 08 Aug 2024 14:09:54 +0200 (CEST)
-Received: from MW4PR04CA0130.namprd04.prod.outlook.com (2603:10b6:303:84::15)
- by MN2PR12MB4469.namprd12.prod.outlook.com (2603:10b6:208:268::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.15; Thu, 8 Aug
- 2024 12:09:48 +0000
-Received: from CO1PEPF000042AA.namprd03.prod.outlook.com
- (2603:10b6:303:84:cafe::1b) by MW4PR04CA0130.outlook.office365.com
- (2603:10b6:303:84::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.15 via Frontend
- Transport; Thu, 8 Aug 2024 12:09:48 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CO1PEPF000042AA.mail.protection.outlook.com (10.167.243.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7828.19 via Frontend Transport; Thu, 8 Aug 2024 12:09:47 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 8 Aug
- 2024 07:09:45 -0500
-Received: from xcbayankuma40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via
- Frontend Transport; Thu, 8 Aug 2024 07:09:44 -0500
+ <SRS0=/QhG=PH=cloud.com=kelly.choi@srs-se1.protection.inumbo.net>)
+ id 1sc2PG-0000ZV-AY
+ for xen-devel@lists.xenproject.org; Thu, 08 Aug 2024 12:38:14 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 13a470f8-5583-11ef-bc04-fd08da9f4363;
+ Thu, 08 Aug 2024 14:38:13 +0200 (CEST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5a309d1a788so916782a12.3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Aug 2024 05:38:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,187 +42,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1eb32eab-557f-11ef-8776-851b0ebba9a2
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r45nxc5ioOZfh+axUX0eSv5kIqMvcqbSZMOJtkKbx5eH/lehbCQQaMeXTMuhSGZyOIDrXT6fE4DvcYAuPJHpmgt3bPWC99XAocT9cjUJrTuSaDQl6hetXXDKDTJ32rhRBg34nWvLrDcUjBwQXcFWZMJq6WOGG0io9M+cYJt8B+tjV4IIXM1N4xJXRecdQmUr4pF0CWfDBb+fUcxY0fnPoK9zn5dLZTCYPquA+wERigOWm3A59n2AncoaQ352FenJL31nlfs9M5gakS/Z+2SUMDJUfw64XsEet7bt9gmVzhj5uSBts0/Ew5egpbPd94nH2gd/5kEGOgnFSd/IaCv/bg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BwnutoGseyOzPvX5xpU7euJ358TBpCesIKsrFcbDnqU=;
- b=ugiShT6dDzYiTlOynD3opqKpHmCuXow995k/4PbLHW+QbhWYGHQxMwcRKSvq80ylVEQnnzkfAxcOCYnKlkSMD9QaY4DxjT7FSKp02OeS6d0ZDt+XSTKLGXJfqVYBU8bWLaqTmobVeJvepdYY+xwcK/Hfzl5JdG47sMekWIzQ+nO7jehGPH2fwk/3puRbqzN4a3mXOeEM6WoDZsW8KZOwxWPCS651nGLp+2hib1b7OIrDwaBXmOix4LJ+RbgWSWJtlYCoZPpq7neNaH6LUY56WXKlwawGLBqMboGBvNod0H7nWqEc1sGfty548UmfJaLP8aHp1Hi+NkJQkGVRitDxDQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BwnutoGseyOzPvX5xpU7euJ358TBpCesIKsrFcbDnqU=;
- b=syPB84+sX6kqZLMHisPRl9eo+E3JxK2hol2sw2rqvjn5XAA2Ng6Fcde+5lWl4YQxNtG055Zu+UrJK2An1ik33CH4rv34th9smBfB1pmdW1RS1UkN0vH3dgAAkKbx9D8Td4dSUV82BWT9mqTfHMrw68gPo/qNTDqNcdvnihpzw38=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-To: <sstabellini@kernel.org>, <bertrand.marquis@arm.com>,
-	<michal.orzel@amd.com>, <ayan.kumar.halder@amd.com>,
-	<Volodymyr_Babchuk@epam.com>, <julien@xen.org>
-CC: <xen-devel@lists.xenproject.org>, Penny Zheng <penny.zheng@arm.com>, "Wei
- Chen" <wei.chen@arm.com>
-Subject: [PATCH v2 2/4] xen: arm: make VMAP only support in MMU system
-Date: Thu, 8 Aug 2024 13:09:34 +0100
-Message-ID: <20240808120936.3299937-3-ayan.kumar.halder@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240808120936.3299937-1-ayan.kumar.halder@amd.com>
-References: <20240808120936.3299937-1-ayan.kumar.halder@amd.com>
+X-Inumbo-ID: 13a470f8-5583-11ef-bc04-fd08da9f4363
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1723120692; x=1723725492; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=55XU62OwrbRE56FeEwBbVUODmHZOLnWUZZQcJPhxs/g=;
+        b=TjzMcu0FPYwZ3admPkEgaiyo+7MJz1MojbhBVkE9g4tYGkb/zk4cJ/rf74G/nivTtd
+         6Es4LLIkuNgulA3ntWRDTb7pm5xo/ONGcoCoo9KGnk3vTwnNE62QACHBsbNjV1yUJMEC
+         fyWnHXZj8Zk3U6w+j0gmGQE7agIXXDVI1QxGM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1723120692; x=1723725492;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=55XU62OwrbRE56FeEwBbVUODmHZOLnWUZZQcJPhxs/g=;
+        b=j0kMJrtnA2W2ddEadcQp5W0Rd7h2uyWAQjn2vEbnMLrmcf7I4SMZ5UfI6eqAlkpt8b
+         AhAUAhd9Pa4USPIpcxfcCz7XtQ6pXkLNvGg6t5iLdB587Nd4KvUUloh12yWYzcEK2VHJ
+         UmBqjD3BYdYtIHQXyhOq0N96yoY8k63wyVCptAXMgexBjMl0nKsYbyNxG+XHKR6eQ/Bd
+         LB2lR5N3q61ZUGRL/5fNV8rMU1Uz6tCmNXKyIowQSnIGLqLXQVlPBN+8viW1lDTs6C0w
+         SkxpdqvSG0ljOw+SitMLKp2R1WLRuFqpBfi3wvdVlKlkvJ9X7ACl9/9EwFEO9Go19fH/
+         nfaw==
+X-Gm-Message-State: AOJu0YzlUVMbotdRgRXV7h3vf+nOfpGao9oJgyBhZQVYmOQxlZWffZbI
+	otgCZ2CZzBbJBIatSdOU/Aui+B7W9IybIOZR8U783FqeDfwUczPs2M+6Rd4fQXPbj6WacGN6omU
+	Hw9A2eveOymYSBNL4UJ0IeSjXTHfY4egchHKwF6AewHUdeLv+S8wgZA==
+X-Google-Smtp-Source: AGHT+IEF0yHfD/OfNb/iEL++ru35DvH+3RPQjcGRl9TxWNfKEUU0Hc+ff8dJR+qMlsjj806sCSt5s0Tj8zX39Hq75+k=
+X-Received: by 2002:a17:907:7e8b:b0:a7a:b385:37cd with SMTP id
+ a640c23a62f3a-a8090dafd3fmr136769666b.30.1723120691338; Thu, 08 Aug 2024
+ 05:38:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: ayan.kumar.halder@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000042AA:EE_|MN2PR12MB4469:EE_
-X-MS-Office365-Filtering-Correlation-Id: bbe88be2-003a-4d26-2cc1-08dcb7a2ffb7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Lc7ottl+1M2zg0f2LDpRfZmm711mqvS07oMMJjEjb9ygofS9Fpsm9knnJW83?=
- =?us-ascii?Q?huobFhSyaTujCPWzs4J5Gm/gg2zL6d+eqEZqHX2EH+rvwtcT1m3YngM301fw?=
- =?us-ascii?Q?a637cHm4egl+MR9g5eOjvRneXWSWMATLM9vJnBNrZeYEER27iyUvhhIXbFiM?=
- =?us-ascii?Q?hFq8JDP688CCDfow4GlSjJoYjCWbWShbv5m+4Lr1Iojyb5W3vSOHWdBtaaTO?=
- =?us-ascii?Q?A445dYyUzQtgWCGoDbmlDBlmOohCLaKUfBOvTj2uLQe1Ikzk5eDgqjbYCyKJ?=
- =?us-ascii?Q?AjT63sSifoANOyBb0fxn/2xZnMxP2y+fTjsYPUNlwxPyVW0YHL5WOZNHSKzS?=
- =?us-ascii?Q?CkVefcZFjuof6HKjio60ftcxL0fnbv/9Vs7XbIlAvS+JMQcOOXYHGxIek13s?=
- =?us-ascii?Q?enRadHUj9SnSRipk39ujUIwVp4lQc4HDgzvHozNrbOSUx+7acQa50CnTXo5b?=
- =?us-ascii?Q?ZtuvMKfZ7YtxjS9tgjKdjHS+SB0jmUDQ8OGPxvA4TiJBuK/78mtKAuSm4qrz?=
- =?us-ascii?Q?LZcdXaWbbRvUDH56MMeW0XEI3W8x2v9ORy3wnZfFGrYbU1KB7WJ9WfLIMxbJ?=
- =?us-ascii?Q?0MA0TOOMNkr9CysdGjSnjekPd9lDqWS81Rk37DfvQRTgogV+p4HWP/DmkmBE?=
- =?us-ascii?Q?XH9WnmSbPEsR8LzBboS5IL07L6uIhcuvrMKKIFhs5zpTA5PyOzmmNKMGzLQc?=
- =?us-ascii?Q?dggUjROLD5BcT+mEIBxV0+HldhYzXfo9fl+KOFalDYx1+VfpcHCovk6hwwsj?=
- =?us-ascii?Q?7qDrxRAYZajtwzONHavs2gEXFOCbU/bS1te+b4/RedYm1Nfrf7IApOJPg/9n?=
- =?us-ascii?Q?SzARhGjBNYxJ+Tq3nWWk/F8SknpFWzK9mLamuRH6pAL22b87Xtt9kNiOzSds?=
- =?us-ascii?Q?mmWiUDhokIUGcpZPiVqtzfyAWZcNd3oZiXv9RXuWfVnrD046qZSHat33Ry25?=
- =?us-ascii?Q?rzazvgDTeOHS3tas7l3VOfiRIHZAUcODNoh47Gpn4SwZIMbC9D2jJ/gdwXej?=
- =?us-ascii?Q?e1P8VgmB9tKvaCAS2duXCWw5qlFZlDNY/Pg0zwfBlgTffR8xLdLFTfGe/ICu?=
- =?us-ascii?Q?pJcVpZMVI7NNSyyFaH1SwiRZ8oOdMWKogkuMQN+ONghW9J5SCMWBWGjI8eYd?=
- =?us-ascii?Q?gbQ2SYB2gw/m2yYDxlVbkDPmj6rgCRpdLNgoQ151x9AYzQIoshoyUWnhrHKp?=
- =?us-ascii?Q?BXNRRGF0Jb08e4wCkI/dVCRpoVHw0LVhv4lXdzRRA3brYO4I0ZnO3vnRDqq5?=
- =?us-ascii?Q?84fgZAJJnHOw67O+xrzMulZt6yx09qDON0Aw6umV8kfSB8mO619QQhh0v78F?=
- =?us-ascii?Q?brH3vGqYaIKrooAQncsfnF6wtW++2SfQnMftdrzoupx1s7Xxppuci++p/+d5?=
- =?us-ascii?Q?EFZXqDYBJ/IBrMAjUHlCF+61rUoa?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2024 12:09:47.3953
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bbe88be2-003a-4d26-2cc1-08dcb7a2ffb7
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000042AA.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4469
+From: Kelly Choi <kelly.choi@cloud.com>
+Date: Thu, 8 Aug 2024 13:37:35 +0100
+Message-ID: <CAO-mL=zBMvaazPHCpVDZuJ_i5bjOeJXq8T3TvwBeQSWrv6iciA@mail.gmail.com>
+Subject: Call for help - Xen user documentation
+To: xen-devel <xen-devel@lists.xenproject.org>, xen-users@lists.xenproject.org
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Content-Type: multipart/alternative; boundary="000000000000b67dcd061f2b4c38"
 
-From: Penny Zheng <penny.zheng@arm.com>
+--000000000000b67dcd061f2b4c38
+Content-Type: text/plain; charset="UTF-8"
 
-VMAP is widely used in ALTERNATIVE feature to remap a range of memory
-with new memory attributes. Since this is highly dependent on virtual
-address translation, we choose to fold VMAP in MMU system.
+Hi all,
 
-In this patch, we introduce a new Kconfig CONFIG_HAS_VMAP, and make it
-only support in MMU system on ARM architecture. And ALTERNATIVE now
-depend on VMAP.
+As you'll know we've been working on an initiative to update documentation
+so that others in the community find it easier to learn about the Xen
+Project.
 
-HARDEN_BRANCH_PREDICTOR is now gated on HAS_VMAP as speculative
-attacks are not possible on non MMU based systems (ie Cortex-R52, R82).
-See https://developer.arm.com/Arm%20Security%20Center/Speculative%20Processor%20Vulnerability.
+@Alejandro Vallejo <alejandro.vallejo@cloud.com> has kindly started our
+Sphinx user documentation but we need your help adding to this!
 
-Split "https://patchwork.kernel.org/project/xen-devel/patch/20230626033443.2943270-16-Penny.Zheng@arm.com/"
-into Arm specific
+*All members of the community can contribute to this. *
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
-Signed-off-by: Wei Chen <wei.chen@arm.com>
-Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
----
-Changes from :-
+*GitLab Link: *https://gitlab.com/xen-project/people/agvallejo/xen-userguide
+*User facing link: *
+https://xen-project.gitlab.io/people/agvallejo/xen-userguide/introduction.html
 
-v1 - 1. HARDEN_BRANCH_PREDICTOR is now gated on HAS_VMAP.
-2. cpuerrata.c is not gated on HAS_VMAP.
+Once we have enough in our get started documentation, we will look to move
+it into the Xen namespace.
 
- xen/arch/arm/Kconfig   | 7 ++++++-
- xen/arch/arm/setup.c   | 2 ++
- xen/include/xen/vmap.h | 2 ++
- 3 files changed, 10 insertions(+), 1 deletion(-)
+*Why is this important?*
+Documentation and user guides may take time to create, but ultimately they
+help us by attracting new members into the community and getting more
+people involved with Xen. As a project we want more people contributing,
+helping with reviews, and engaging. To do this, we need to have guides in
+place to allow them to get started!
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 21d03d9f44..7d1dde89d7 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -12,7 +12,7 @@ config ARM_64
- config ARM
- 	def_bool y
- 	select FUNCTION_ALIGNMENT_4B
--	select HAS_ALTERNATIVE
-+	select HAS_ALTERNATIVE if HAS_VMAP
- 	select HAS_DEVICE_TREE
- 	select HAS_PASSTHROUGH
- 	select HAS_UBSAN
-@@ -58,9 +58,13 @@ config PADDR_BITS
- 	default 40 if ARM_PA_BITS_40
- 	default 48 if ARM_64
- 
-+config HAS_VMAP
-+	def_bool y
-+
- config MMU
- 	def_bool y
- 	select HAS_PMAP
-+	select HAS_VMAP
- 
- source "arch/Kconfig"
- 
-@@ -171,6 +175,7 @@ config ARM_SSBD
- 
- config HARDEN_BRANCH_PREDICTOR
- 	bool "Harden the branch predictor against aliasing attacks" if EXPERT
-+	depends on HAS_VMAP
- 	default y
- 	help
- 	  Speculation attacks against some high-performance processors rely on
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index cb2c0a16b8..7f686d2cca 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -447,7 +447,9 @@ void asmlinkage __init start_xen(unsigned long boot_phys_offset,
-      * It needs to be called after do_initcalls to be able to use
-      * stop_machine (tasklets initialized via an initcall).
-      */
-+#ifdef CONFIG_HAS_ALTERNATIVE
-     apply_alternatives_all();
-+#endif
-     enable_errata_workarounds();
-     enable_cpu_features();
- 
-diff --git a/xen/include/xen/vmap.h b/xen/include/xen/vmap.h
-index fdae37e950..4c7dfe58ba 100644
---- a/xen/include/xen/vmap.h
-+++ b/xen/include/xen/vmap.h
-@@ -141,7 +141,9 @@ void *arch_vmap_virt_end(void);
- /* Initialises the VMAP_DEFAULT virtual range */
- static inline void vm_init(void)
- {
-+#ifdef CONFIG_MMU
-     vm_init_type(VMAP_DEFAULT, (void *)VMAP_VIRT_START, arch_vmap_virt_end());
-+#endif
- }
- 
- #endif /* __XEN_VMAP_H__ */
--- 
-2.25.1
+We appreciate this is a community effort, and any time or resource you can
+contribute will help the Xen Project project thrive.
 
+Many thanks,
+Kelly Choi
+
+Community Manager
+Xen Project
+
+--000000000000b67dcd061f2b4c38
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi all,<div><br></div><div>As you&#39;ll know we&#39;ve be=
+en working on an initiative=C2=A0to update documentation so that others in =
+the community find it easier to learn about the Xen Project.=C2=A0</div><di=
+v><br></div><div><a class=3D"gmail_plusreply" id=3D"plusReplyChip-0" href=
+=3D"mailto:alejandro.vallejo@cloud.com" tabindex=3D"-1">@Alejandro Vallejo<=
+/a>=C2=A0has kindly started our Sphinx user documentation=C2=A0but we need =
+your help adding to this!=C2=A0</div><div><br></div><div><b>All=C2=A0member=
+s=C2=A0of the community can contribute to this.=C2=A0</b></div><div><br></d=
+iv><div><b>GitLab Link:=C2=A0</b><a href=3D"https://gitlab.com/xen-project/=
+people/agvallejo/xen-userguide">https://gitlab.com/xen-project/people/agval=
+lejo/xen-userguide</a></div><div><b>User facing link:=C2=A0</b><a href=3D"h=
+ttps://xen-project.gitlab.io/people/agvallejo/xen-userguide/introduction.ht=
+ml">https://xen-project.gitlab.io/people/agvallejo/xen-userguide/introducti=
+on.html</a></div><div>=C2=A0</div><div>Once we have enough in our get start=
+ed documentation, we will look to move it into the Xen namespace.=C2=A0</di=
+v><div><br></div><div><b>Why is this important?</b></div><div>Documentation=
+=C2=A0and user guides may take time to create, but ultimately=C2=A0they hel=
+p us by attracting new members into the community and getting more people i=
+nvolved with Xen. As a project we want more people contributing, helping wi=
+th reviews, and engaging. To do this, we need to have guides in place to al=
+low them to get started!=C2=A0</div><div><br></div><div>We appreciate this=
+=C2=A0is a community effort, and any time or resource you can contribute wi=
+ll help the Xen Project project thrive.=C2=A0</div><div><br></div><div><div=
+><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signatu=
+re"><div dir=3D"ltr"><div>Many thanks,</div><div>Kelly Choi</div><div><br><=
+/div><div><div style=3D"color:rgb(136,136,136)">Community Manager</div><div=
+ style=3D"color:rgb(136,136,136)">Xen Project=C2=A0<br></div></div></div></=
+div></div></div></div>
+
+--000000000000b67dcd061f2b4c38--
 
