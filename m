@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8099C3DA4A
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2024 13:31:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.774139.1184625 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83934C3DA4A
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2024 13:42:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.774151.1184640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sc3EM-0008S9-MX; Thu, 08 Aug 2024 13:31:02 +0000
+	id 1sc3PN-0002mT-Ux; Thu, 08 Aug 2024 13:42:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 774139.1184625; Thu, 08 Aug 2024 13:31:02 +0000
+Received: by outflank-mailman (output) from mailman id 774151.1184640; Thu, 08 Aug 2024 13:42:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sc3EM-0008S0-JL; Thu, 08 Aug 2024 13:31:02 +0000
-Received: by outflank-mailman (input) for mailman id 774139;
- Thu, 08 Aug 2024 13:31:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gzZp=PH=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sc3EL-0008Rq-49
- for xen-devel@lists.xenproject.org; Thu, 08 Aug 2024 13:31:01 +0000
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [2a00:1450:4864:20::233])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 72c74ea5-558a-11ef-8776-851b0ebba9a2;
- Thu, 08 Aug 2024 15:30:59 +0200 (CEST)
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2f16d2f2b68so13222491fa.3
- for <xen-devel@lists.xenproject.org>; Thu, 08 Aug 2024 06:30:59 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9ec8860sm731607066b.209.2024.08.08.06.30.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Aug 2024 06:30:58 -0700 (PDT)
+	id 1sc3PN-0002lX-Qy; Thu, 08 Aug 2024 13:42:25 +0000
+Received: by outflank-mailman (input) for mailman id 774151;
+ Thu, 08 Aug 2024 13:42:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zgd2=PH=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1sc3PM-0002jZ-Gg
+ for xen-devel@lists.xenproject.org; Thu, 08 Aug 2024 13:42:24 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0a59fba5-558c-11ef-bc04-fd08da9f4363;
+ Thu, 08 Aug 2024 15:42:23 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5bb8e62570fso1170344a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Aug 2024 06:42:23 -0700 (PDT)
+Received: from EMEAENGAAD19049.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5bbb2d35172sm676426a12.71.2024.08.08.06.42.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Aug 2024 06:42:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,105 +47,280 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 72c74ea5-558a-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 0a59fba5-558c-11ef-bc04-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1723123859; x=1723728659; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=c7yswg46iYRjmCAQDqekaVXbZBIqwIPJAVVIJjaG0+c=;
-        b=Dw9czV8vXNd+f6Urp2YisuJE9iMnhpr3vwO6y6pULaqtb8tv9U6lcMaedh2HLg+guW
-         BbYR3mhS0v+eHbp+vaIRGWg4/n+WwGrE+lIdTb3DjTvzLp+aiWREc8xod4Q6erWZZOEI
-         DasixbedX/lIUR68lD3XfnOdKZxeaV54pSHEO5BGF/sgCaMEf2a8X947uuRhpUbZLGaX
-         EZfHTJRYjhvCyCA2QV7LbuItkvSmCJnmE0895sMc4qhvgz8EePbVOteB6H6HypuWZp0I
-         A4Ty0pQWwIP8GxuUDG7ZAL2YBypt+6MDL2yZ0/3r2IVcEoxaA+kKt7LaD0uGkYg78ug4
-         1xjQ==
+        d=cloud.com; s=cloud; t=1723124542; x=1723729342; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iSMAJrbKIJks8IvZYbCfs4ficfe6mQhEmBJARLfZWYI=;
+        b=ahGvNw60o18MvNuwC9ph0jWilQucjKLLSlNJ8/oOj11VnKd6R/i1zz87Td69EfeAMi
+         G/xnKaHDNGlH/o8DJJGBoBnJbQdJMBWcfZ06ywir+1BN4JfV3N283e/Ivy6Igkcihqb2
+         0gYsjemwNl3+TaHtSyWKyOTpXPmOfZBzOzAzk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723123859; x=1723728659;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=c7yswg46iYRjmCAQDqekaVXbZBIqwIPJAVVIJjaG0+c=;
-        b=PMa0nloKmy9Wrsf6t4Pvkj64bIon0a0v4ir/5KPZqXIUprqueSsUDvDuT/IRYA7Jk8
-         hohc5tYxwjZV0z70Spx6ZNZycQfKozYhowGASxYSDyQfGQh5IFJqeGjuBE3T/gWJM0ax
-         Li1DMOgUDCgo8AmOxtZCMsljid7Gdkw+1RdRe5n4puHkfm9no/fE8nzxlY2EEaGDyfCo
-         36ULcXMyQis4zqt433zxFMZN3Sn/em3VPQD8iQJZyd8QC1QjLm4z/jh4wf4kYa0eWxpZ
-         +50H0i9dfFAZ/B0cni7DHLmXomrwCK+kxWwDC6gK41h/T501MXfMojCg5EH7SJ7aCvvT
-         3l6w==
-X-Gm-Message-State: AOJu0YzZuW9jZy1WSjedTypL3V7VK3TaCy+wY4eP/vOzeiRprDGTLumd
-	ovvlt0gf8CbR1FWjfO1oIehEpI57cS9iJ6Wc1Bs66MAgiy3KugKieO2cQ5MUqCdMgDSUFGrGa/4
-	=
-X-Google-Smtp-Source: AGHT+IFp2j1Q/KHB3Y0cT90mPoKS97XyvSAx2TSuwzQp4oqfRUfa1y8CB284P7J5K1u3evF4IZe9lw==
-X-Received: by 2002:a05:651c:19a6:b0:2f1:922f:8751 with SMTP id 38308e7fff4ca-2f19dd85aa8mr20555571fa.0.1723123858519;
-        Thu, 08 Aug 2024 06:30:58 -0700 (PDT)
-Message-ID: <0a082833-3d52-4c9d-8ea4-5be01986cd2c@suse.com>
-Date: Thu, 8 Aug 2024 15:30:58 +0200
+        d=1e100.net; s=20230601; t=1723124542; x=1723729342;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iSMAJrbKIJks8IvZYbCfs4ficfe6mQhEmBJARLfZWYI=;
+        b=qtfs3hlQn1wswrcvW8+VH5KO2qG1E8uCHR4Ng9m7mun1LmZrYd+UpihPSDzBS8JKes
+         mZuKOHrYH0i54dcnm4taHBXp2xKrWixGADtz0u6+1ZFzj739XOhHYoRIRCp7JHggG7Jv
+         XX7OxNvC+Ucia7wHt+TTyVx214dNq+e0Vbp2M8l30w2W8p8OSbtyTMe5Q6jnJdT+UQVU
+         2MPtAJMPZI1PUiYNbDcVlupPnfLvQkRBfxT3SZ672C11P09kYCp+82xh/zQJ4ctNPB5a
+         gz2vJQ0okL9xU0f+VXEIqpZW2hbx4H5CCN3pxL4u+sorsYpeVHHopgt0wxebHU9vgT/u
+         19Xg==
+X-Gm-Message-State: AOJu0YyytaWG32VL5yeWJ4ur4o6By4LA1std9Mp3L/HDsid/aJv8/bNc
+	VMIslpO0AnpPTFK1g5AUVq5rs5l6NH9Y5OaR20qsEWohDj9sz2ZWUWEZGSikLcyXBKayi0grPAh
+	Z
+X-Google-Smtp-Source: AGHT+IGUiGSqCpH1+k8o88g8/J60vQ87PRNGPIKuAkIy08w57jyD71wTYz5Zhj1rSM6hN8gmnr2Yvw==
+X-Received: by 2002:a05:6402:2108:b0:5a3:5218:5d80 with SMTP id 4fb4d7f45d1cf-5bbb233f281mr1587970a12.21.1723124542052;
+        Thu, 08 Aug 2024 06:42:22 -0700 (PDT)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 1/2] x86/fpu: Combine fpu_ctxt and xsave_area in arch_vcpu
+Date: Thu,  8 Aug 2024 14:41:49 +0100
+Message-ID: <20240808134150.29927-2-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240808134150.29927-1-alejandro.vallejo@cloud.com>
+References: <20240808134150.29927-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Marek Marczykowski <marmarek@invisiblethingslab.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/x2APIC: correct cluster tracking upon CPUs going down for
- S3
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Downing CPUs for S3 is somewhat special: Since we can expect the system
-to come back up in exactly the same hardware configuration, per-CPU data
-for the secondary CPUs isn't de-allocated (and then cleared upon re-
-allocation when the CPUs are being brought back up). Therefore the
-cluster_cpus per-CPU pointer will retain its value for all CPUs other
-than the final one in a cluster (i.e. in particular for all CPUs in the
-same cluster as CPU0). That, however, is in conflict with the assertion
-early in init_apic_ldr_x2apic_cluster().
+fpu_ctxt is either a pointer to the legacy x87/SSE save area (used by FXSAVE) or
+a pointer aliased with xsave_area that points to its fpu_sse subfield. Such
+subfield is at the base and is identical in size and layout to the legacy
+buffer.
 
-Note that the issue is avoided on Intel hardware, where we park CPUs
-instead of bringing them down.
+This patch merges the 2 pointers in the arch_vcpu into a single XSAVE area. In
+the very rare case in which the host doesn't support XSAVE all we're doing is
+wasting a tiny amount of memory and trading those for a lot more simplicity in
+the code.
 
-Extend the bypassing of the freeing to the suspend case, thus making
-suspend/resume also a tiny bit faster.
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+v2:
 
-Fixes: 2e6c8f182c9c ("x86: distinguish CPU offlining from CPU removal")
-Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  * Added BUILD_BUG_ON(sizeof(x) != sizeof(fpusse_t)) on forceful casts
+    involving fpusse_t.
+  * Reworded comment on top of vcpu_arch->user_regs
+  * Added missing whitespace in x86_emulate/blk.c
+---
+ xen/arch/x86/domctl.c             |  5 +++-
+ xen/arch/x86/hvm/emulate.c        |  4 +--
+ xen/arch/x86/hvm/hvm.c            |  5 +++-
+ xen/arch/x86/i387.c               | 45 +++++--------------------------
+ xen/arch/x86/include/asm/domain.h |  8 +++---
+ xen/arch/x86/x86_emulate/blk.c    |  3 ++-
+ xen/arch/x86/xstate.c             | 13 ++++++---
+ 7 files changed, 32 insertions(+), 51 deletions(-)
 
---- a/xen/arch/x86/genapic/x2apic.c
-+++ b/xen/arch/x86/genapic/x2apic.c
-@@ -228,7 +228,8 @@ static int cf_check update_clusterinfo(
-     case CPU_UP_CANCELED:
-     case CPU_DEAD:
-     case CPU_REMOVE:
--        if ( park_offline_cpus == (action != CPU_REMOVE) )
-+        if ( park_offline_cpus == (action != CPU_REMOVE) ||
-+             system_state == SYS_STATE_suspend )
-             break;
-         if ( per_cpu(cluster_cpus, cpu) )
-         {
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index 68b5b46d1a83..bceff6be0ff3 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -1344,7 +1344,10 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
+ #define c(fld) (c.nat->fld)
+ #endif
+ 
+-    memcpy(&c.nat->fpu_ctxt, v->arch.fpu_ctxt, sizeof(c.nat->fpu_ctxt));
++    memcpy(&c.nat->fpu_ctxt, &v->arch.xsave_area->fpu_sse,
++           sizeof(c.nat->fpu_ctxt));
++    BUILD_BUG_ON(sizeof(c.nat->fpu_ctxt) != sizeof(fpusse_t));
++
+     if ( is_pv_domain(d) )
+         c(flags = v->arch.pv.vgc_flags & ~(VGCF_i387_valid|VGCF_in_kernel));
+     else
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index feb4792cc567..03020542c3ba 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -2363,7 +2363,7 @@ static int cf_check hvmemul_get_fpu(
+         alternative_vcall(hvm_funcs.fpu_dirty_intercept);
+     else if ( type == X86EMUL_FPU_fpu )
+     {
+-        const fpusse_t *fpu_ctxt = curr->arch.fpu_ctxt;
++        const fpusse_t *fpu_ctxt = &curr->arch.xsave_area->fpu_sse;
+ 
+         /*
+          * Latch current register state so that we can back out changes
+@@ -2403,7 +2403,7 @@ static void cf_check hvmemul_put_fpu(
+ 
+     if ( aux )
+     {
+-        fpusse_t *fpu_ctxt = curr->arch.fpu_ctxt;
++        fpusse_t *fpu_ctxt = &curr->arch.xsave_area->fpu_sse;
+         bool dval = aux->dval;
+         int mode = hvm_guest_x86_mode(curr);
+ 
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index f49e29faf753..6607dba562a4 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -916,7 +916,10 @@ static int cf_check hvm_save_cpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
+ 
+     if ( v->fpu_initialised )
+     {
+-        memcpy(ctxt.fpu_regs, v->arch.fpu_ctxt, sizeof(ctxt.fpu_regs));
++        memcpy(ctxt.fpu_regs, &v->arch.xsave_area->fpu_sse,
++               sizeof(ctxt.fpu_regs));
++        BUILD_BUG_ON(sizeof(ctxt.fpu_regs) != sizeof(fpusse_t));
++
+         ctxt.flags = XEN_X86_FPU_INITIALISED;
+     }
+ 
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index 134e0bece519..fbb9d3584a3d 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -39,7 +39,7 @@ static inline void fpu_xrstor(struct vcpu *v, uint64_t mask)
+ /* Restore x87 FPU, MMX, SSE and SSE2 state */
+ static inline void fpu_fxrstor(struct vcpu *v)
+ {
+-    const fpusse_t *fpu_ctxt = v->arch.fpu_ctxt;
++    const fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+ 
+     /*
+      * Some CPUs don't save/restore FDP/FIP/FOP unless an exception
+@@ -151,7 +151,7 @@ static inline void fpu_xsave(struct vcpu *v)
+ /* Save x87 FPU, MMX, SSE and SSE2 state */
+ static inline void fpu_fxsave(struct vcpu *v)
+ {
+-    fpusse_t *fpu_ctxt = v->arch.fpu_ctxt;
++    fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
+ 
+     if ( fip_width != 4 )
+@@ -212,7 +212,7 @@ void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts)
+      * above) we also need to restore full state, to prevent subsequently
+      * saving state belonging to another vCPU.
+      */
+-    if ( v->arch.fully_eager_fpu || (v->arch.xsave_area && xstate_all(v)) )
++    if ( v->arch.fully_eager_fpu || xstate_all(v) )
+     {
+         if ( cpu_has_xsave )
+             fpu_xrstor(v, XSTATE_ALL);
+@@ -299,44 +299,14 @@ void save_fpu_enable(void)
+ /* Initialize FPU's context save area */
+ int vcpu_init_fpu(struct vcpu *v)
+ {
+-    int rc;
+-
+     v->arch.fully_eager_fpu = opt_eager_fpu;
+-
+-    if ( (rc = xstate_alloc_save_area(v)) != 0 )
+-        return rc;
+-
+-    if ( v->arch.xsave_area )
+-        v->arch.fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+-    else
+-    {
+-        BUILD_BUG_ON(__alignof(v->arch.xsave_area->fpu_sse) < 16);
+-        v->arch.fpu_ctxt = _xzalloc(sizeof(v->arch.xsave_area->fpu_sse),
+-                                    __alignof(v->arch.xsave_area->fpu_sse));
+-        if ( v->arch.fpu_ctxt )
+-        {
+-            fpusse_t *fpu_sse = v->arch.fpu_ctxt;
+-
+-            fpu_sse->fcw = FCW_DEFAULT;
+-            fpu_sse->mxcsr = MXCSR_DEFAULT;
+-        }
+-        else
+-            rc = -ENOMEM;
+-    }
+-
+-    return rc;
++    return xstate_alloc_save_area(v);
+ }
+ 
+ void vcpu_setup_fpu(struct vcpu *v, struct xsave_struct *xsave_area,
+                     const void *data, unsigned int fcw_default)
+ {
+-    /*
+-     * For the entire function please note that vcpu_init_fpu() (above) points
+-     * v->arch.fpu_ctxt into v->arch.xsave_area when XSAVE is available. Hence
+-     * accesses through both pointers alias one another, and the shorter form
+-     * is used here.
+-     */
+-    fpusse_t *fpu_sse = v->arch.fpu_ctxt;
++    fpusse_t *fpu_sse = &v->arch.xsave_area->fpu_sse;
+ 
+     ASSERT(!xsave_area || xsave_area == v->arch.xsave_area);
+ 
+@@ -373,10 +343,7 @@ void vcpu_setup_fpu(struct vcpu *v, struct xsave_struct *xsave_area,
+ /* Free FPU's context save area */
+ void vcpu_destroy_fpu(struct vcpu *v)
+ {
+-    if ( v->arch.xsave_area )
+-        xstate_free_save_area(v);
+-    else
+-        xfree(v->arch.fpu_ctxt);
++    xstate_free_save_area(v);
+ }
+ 
+ /*
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index bca3258d69ac..3da60af2a44a 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -592,11 +592,11 @@ struct pv_vcpu
+ struct arch_vcpu
+ {
+     /*
+-     * guest context (mirroring struct vcpu_guest_context) common
+-     * between pv and hvm guests
++     * Guest context common between PV and HVM guests. Includes general purpose
++     * registers, segment registers and other parts of the exception frame.
++     *
++     * It doesn't contain FPU state, as that lives in xsave_area instead.
+      */
+-
+-    void              *fpu_ctxt;
+     struct cpu_user_regs user_regs;
+ 
+     /* Debug registers. */
+diff --git a/xen/arch/x86/x86_emulate/blk.c b/xen/arch/x86/x86_emulate/blk.c
+index e790f4f90056..28b54f26fe29 100644
+--- a/xen/arch/x86/x86_emulate/blk.c
++++ b/xen/arch/x86/x86_emulate/blk.c
+@@ -11,7 +11,8 @@
+     !defined(X86EMUL_NO_SIMD)
+ # ifdef __XEN__
+ #  include <asm/xstate.h>
+-#  define FXSAVE_AREA current->arch.fpu_ctxt
++#  define FXSAVE_AREA ((struct x86_fxsr *) \
++                           (void *)&current->arch.xsave_area->fpu_sse)
+ # else
+ #  define FXSAVE_AREA get_fpu_save_area()
+ # endif
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index 5c4144d55e89..850ee31bd18c 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -507,9 +507,16 @@ int xstate_alloc_save_area(struct vcpu *v)
+     unsigned int size;
+ 
+     if ( !cpu_has_xsave )
+-        return 0;
+-
+-    if ( !is_idle_vcpu(v) || !cpu_has_xsavec )
++    {
++        /*
++         * This is bigger than FXSAVE_SIZE by 64 bytes, but it helps treating
++         * the FPU state uniformly as an XSAVE buffer even if XSAVE is not
++         * available in the host. Note the alignment restriction of the XSAVE
++         * area are stricter than those of the FXSAVE area.
++         */
++        size = XSTATE_AREA_MIN_SIZE;
++    }
++    else if ( !is_idle_vcpu(v) || !cpu_has_xsavec )
+     {
+         size = xsave_cntxt_size;
+         BUG_ON(size < XSTATE_AREA_MIN_SIZE);
+-- 
+2.45.2
+
 
