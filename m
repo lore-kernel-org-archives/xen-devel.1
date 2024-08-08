@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822ABC3DA4A
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2024 13:43:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.774178.1184695 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B51C3DA4A
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2024 13:46:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.774192.1184704 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sc3Q3-00055B-HH; Thu, 08 Aug 2024 13:43:07 +0000
+	id 1sc3T6-0006bd-2n; Thu, 08 Aug 2024 13:46:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 774178.1184695; Thu, 08 Aug 2024 13:43:07 +0000
+Received: by outflank-mailman (output) from mailman id 774192.1184704; Thu, 08 Aug 2024 13:46:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sc3Q3-00054u-D5; Thu, 08 Aug 2024 13:43:07 +0000
-Received: by outflank-mailman (input) for mailman id 774178;
- Thu, 08 Aug 2024 13:43:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sc3T6-0006bW-09; Thu, 08 Aug 2024 13:46:16 +0000
+Received: by outflank-mailman (input) for mailman id 774192;
+ Thu, 08 Aug 2024 13:46:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zgd2=PH=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1sc3Q2-0002jZ-06
- for xen-devel@lists.xenproject.org; Thu, 08 Aug 2024 13:43:06 +0000
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [2a00:1450:4864:20::12b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 23af659a-558c-11ef-bc04-fd08da9f4363;
- Thu, 08 Aug 2024 15:43:05 +0200 (CEST)
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-52f01ec08d6so1249300e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 08 Aug 2024 06:43:05 -0700 (PDT)
+ id 1sc3Pz-0003nA-M7
+ for xen-devel@lists.xenproject.org; Thu, 08 Aug 2024 13:43:03 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2184dabe-558c-11ef-8776-851b0ebba9a2;
+ Thu, 08 Aug 2024 15:43:01 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a7ac469e4c4so157256866b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Aug 2024 06:43:01 -0700 (PDT)
 Received: from EMEAENGAAD19049.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9ecb551sm741537166b.223.2024.08.08.06.43.03
+ a640c23a62f3a-a7dc9ecb551sm741537166b.223.2024.08.08.06.43.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 06:43:04 -0700 (PDT)
+ Thu, 08 Aug 2024 06:43:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,141 +47,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23af659a-558c-11ef-bc04-fd08da9f4363
+X-Inumbo-ID: 2184dabe-558c-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1723124584; x=1723729384; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1723124581; x=1723729381; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UeVUUABBzNI1adruZgcaqeCvylgkxU6xakNCgnT+U/k=;
-        b=jcAGCJDcIbKKlOuh80vcOez4bmNjVPdAVX/wUwU1IWKRsPEZXe5Q6aON1ax+f7nAd5
-         62Jr6dFEnLZ7JYQW0p9wH8PsnAzWRasCGHMIJnGmb9oLui7zwXXk0XI/lKHmgixLVPSd
-         d87pluyAN+bSP/5zly1vM8SPs/kzF8yF2zYVM=
+        bh=Ch+IX6lnENH71AXJ9ytitrdkxTivN5M0WBk5MWa3vLY=;
+        b=ZkHKGVlqj0wsNvVFcmRxs3Prt8FdgWl1Q37USeGO7MlEpr0wJjtu3rPaVWzEs5UR0E
+         G+12UbcTOPf1TbCziN3l2Eb/WJSA7BcCIy92vjB2KSdVVPDJy+fjfHi2wxoIXRjGmax5
+         jzQH3BC+BhY2UbT0WVi9mwD0B18GYsqTxDEbE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723124584; x=1723729384;
+        d=1e100.net; s=20230601; t=1723124581; x=1723729381;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UeVUUABBzNI1adruZgcaqeCvylgkxU6xakNCgnT+U/k=;
-        b=BNb+Lrj1zO6IqqMG83Scow8TrS8yO8Y8NTJ2eXr6UcOFgpEaq0BTYmd8jSEzYMXS3U
-         aqQWY4XoeC7r2cyLwRc6qz+ZAMebF/uhyj+i6G/PPasBCqO2Ox5Tm9wr7aKIHeL3cq4p
-         iHvlue64JN2u1N9MUCxxDuXjhZyKF5ynY+RNM0VSVVDj7unWC5MxHKisSqKfGgwu/qg9
-         wwrNaFCs8IM8ASR+G8ONYK80R44Y//hdXmI5LBNxmrfSXPoEYYerezOIGffT9GWKIya1
-         Qb35CMxOEtg/eOx5n7sVePBdoUugLRtLNp/eyKbclTolWUIqbny8UYeic54ZDPf8IqRu
-         H3Zg==
-X-Gm-Message-State: AOJu0YwUX1gLRmSHHJSxj+wYyupA0sro8dYoPKvMOihH7ozJHaJhg1qE
-	OnDGY2L7eYJeUoxdvE0ztwOqAWdZDfSVS2XvDh9Gzha/qvlvFc1P5HdJX13b1slrtABaVL1/x83
-	a
-X-Google-Smtp-Source: AGHT+IGwnI6doIkcRTJRGk4Xe7EFDfawKFpStiQEtCj1LLLr7uVkCmRQZvb0FGyZ5Ax36nuOK1TmMg==
-X-Received: by 2002:a05:6512:a95:b0:52e:9ab9:da14 with SMTP id 2adb3069b0e04-530e583f755mr1490222e87.31.1723124584432;
-        Thu, 08 Aug 2024 06:43:04 -0700 (PDT)
+        bh=Ch+IX6lnENH71AXJ9ytitrdkxTivN5M0WBk5MWa3vLY=;
+        b=VQQ+fgLgSw+4C9lxpgXtgYhV7DQ0cWbO6bQ/LRj2pmGxnDpbHD/5Ic0zr/9vTUwwOn
+         Rf4djYvRfvxUQo/KTeJvzgYNB66xXz7X269M4zewRY/K2ZgFRsgkKj7ExnO5fam5Cu1y
+         XXtc5pz8MT7WLmBlnNKX3UpBNF6dyknYxWi/KcYPkDrm8PdIgZ2BjYQClGzIcs/9+YdU
+         mXFywwwSHYo4D4MlNU0IFoJss8w2wohL7RNahGZWO7wwl0nHlegrhJTstf1/Yfi6WCY1
+         kIv19JF8s1tqQ8wCeBpa3HdLQj1Q2q814gf3ojCss4t+CowgDgLWgj4tq89shW0mlLIq
+         Hinw==
+X-Gm-Message-State: AOJu0YxrVIdTMCsYAsQa/700UV7fPGujsAq0ffNuNL/G5d7DBMz8KwkZ
+	jeoCOuVGWmNKRSvJn51Tawh+Uu5mUIsRmgm7hb/uXXkLMUTSny08MqJKD6f0SvZozS3tDshzzkE
+	4
+X-Google-Smtp-Source: AGHT+IGsqgUdRiVpKMpPF6V1Lc/b5Yh4OPDiUx9kn6eaKj8jLOwWi7WVZ/+J9WMPYpAW8iDl9C2VEQ==
+X-Received: by 2002:a17:907:ea2:b0:a6f:5609:954f with SMTP id a640c23a62f3a-a8091f1ebb5mr175979066b.12.1723124581075;
+        Thu, 08 Aug 2024 06:43:01 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v5 09/10] tools/libguest: Set distinct x2APIC IDs for each vCPU
-Date: Thu,  8 Aug 2024 14:42:49 +0100
-Message-ID: <20240808134251.29995-10-alejandro.vallejo@cloud.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v5 05/10] tools/hvmloader: Retrieve (x2)APIC IDs from the APs themselves
+Date: Thu,  8 Aug 2024 14:42:45 +0100
+Message-ID: <20240808134251.29995-6-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240808134251.29995-1-alejandro.vallejo@cloud.com>
 References: <20240808134251.29995-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Have toolstack populate the new x2APIC ID in the LAPIC save record with
-the proper IDs intended for each vCPU.
+Make it so the APs expose their own APIC IDs in a LUT. We can use that
+LUT to
+populate the MADT, decoupling the algorithm that relates CPU IDs and
+APIC IDs
+from hvmloader.
+
+While at this also remove ap_callin, as writing the APIC ID may serve
+the same
+purpose.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v5:
   * No change
 ---
- tools/libs/guest/xg_dom_x86.c | 38 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 37 insertions(+), 1 deletion(-)
+ tools/firmware/hvmloader/config.h       |  6 ++-
+ tools/firmware/hvmloader/hvmloader.c    |  4 +-
+ tools/firmware/hvmloader/smp.c          | 54 ++++++++++++++++++++-----
+ tools/include/xen-tools/common-macros.h |  5 +++
+ 4 files changed, 56 insertions(+), 13 deletions(-)
 
-diff --git a/tools/libs/guest/xg_dom_x86.c b/tools/libs/guest/xg_dom_x86.c
-index fafe7acb7e91..a3e4e2052128 100644
---- a/tools/libs/guest/xg_dom_x86.c
-+++ b/tools/libs/guest/xg_dom_x86.c
-@@ -1004,19 +1004,40 @@ static int vcpu_hvm(struct xc_dom_image *dom)
-         HVM_SAVE_TYPE(HEADER) header;
-         struct hvm_save_descriptor mtrr_d;
-         HVM_SAVE_TYPE(MTRR) mtrr;
-+        struct hvm_save_descriptor lapic_d;
-+        HVM_SAVE_TYPE(LAPIC) lapic;
-         struct hvm_save_descriptor end_d;
-         HVM_SAVE_TYPE(END) end;
-     } vcpu_ctx;
--    /* Context from full_ctx */
-+    /* Contexts from full_ctx */
-     const HVM_SAVE_TYPE(MTRR) *mtrr_record;
-+    const HVM_SAVE_TYPE(LAPIC) *lapic_record;
-     /* Raw context as taken from Xen */
-     uint8_t *full_ctx = NULL;
-+    xc_cpu_policy_t *policy = xc_cpu_policy_init();
-     int rc;
+diff --git a/tools/firmware/hvmloader/config.h b/tools/firmware/hvmloader/config.h
+index cd716bf39245..213ac1f28e17 100644
+--- a/tools/firmware/hvmloader/config.h
++++ b/tools/firmware/hvmloader/config.h
+@@ -4,6 +4,8 @@
+ #include <stdint.h>
+ #include <stdbool.h>
  
-     DOMPRINTF_CALLED(dom->xch);
- 
-     assert(dom->max_vcpus);
- 
-+    /*
-+     * Fetch the CPU policy of this domain. We need it to determine the APIC IDs
-+     * each of vCPU in a manner consistent with the exported topology.
-+     *
-+     * TODO: It's silly to query a policy we have ourselves created. It should
-+     *       instead be part of xc_dom_image
-+     */
++#include <xen/hvm/hvm_info_table.h>
 +
-+    rc = xc_cpu_policy_get_domain(dom->xch, dom->guest_domid, policy);
-+    if ( rc != 0 )
+ enum virtual_vga { VGA_none, VGA_std, VGA_cirrus, VGA_pt };
+ extern enum virtual_vga virtual_vga;
+ 
+@@ -48,8 +50,10 @@ extern uint8_t ioapic_version;
+ 
+ #define IOAPIC_ID           0x01
+ 
++extern uint32_t CPU_TO_X2APICID[HVM_MAX_VCPUS];
++
+ #define LAPIC_BASE_ADDRESS  0xfee00000
+-#define LAPIC_ID(vcpu_id)   ((vcpu_id) * 2)
++#define LAPIC_ID(vcpu_id)   (CPU_TO_X2APICID[(vcpu_id)])
+ 
+ #define PCI_ISA_DEVFN       0x08    /* dev 1, fn 0 */
+ #define PCI_ISA_IRQ_MASK    0x0c20U /* ISA IRQs 5,10,11 are PCI connected */
+diff --git a/tools/firmware/hvmloader/hvmloader.c b/tools/firmware/hvmloader/hvmloader.c
+index f8af88fabf24..5c02e8fc226a 100644
+--- a/tools/firmware/hvmloader/hvmloader.c
++++ b/tools/firmware/hvmloader/hvmloader.c
+@@ -341,11 +341,11 @@ int main(void)
+ 
+     printf("CPU speed is %u MHz\n", get_cpu_mhz());
+ 
++    smp_initialise();
++
+     apic_setup();
+     pci_setup();
+ 
+-    smp_initialise();
+-
+     perform_tests();
+ 
+     if ( bios->bios_info_setup )
+diff --git a/tools/firmware/hvmloader/smp.c b/tools/firmware/hvmloader/smp.c
+index 1b940cefd071..b0d4da111904 100644
+--- a/tools/firmware/hvmloader/smp.c
++++ b/tools/firmware/hvmloader/smp.c
+@@ -29,7 +29,34 @@
+ 
+ #include <xen/vcpu.h>
+ 
+-static int ap_callin;
++/**
++ * Lookup table of x2APIC IDs.
++ *
++ * Each entry is populated its respective CPU as they come online. This is required
++ * for generating the MADT with minimal assumptions about ID relationships.
++ */
++uint32_t CPU_TO_X2APICID[HVM_MAX_VCPUS];
++
++/** Tristate about x2apic being supported. -1=unknown */
++static int has_x2apic = -1;
++
++static uint32_t read_apic_id(void)
++{
++    uint32_t apic_id;
++
++    if ( has_x2apic )
++        cpuid(0xb, NULL, NULL, NULL, &apic_id);
++    else
 +    {
-+        xc_dom_panic(dom->xch, XC_INTERNAL_ERROR,
-+                     "%s: unable to fetch cpu policy for dom%u (rc=%d)",
-+                     __func__, dom->guest_domid, rc);
-+        goto out;
++        cpuid(1, NULL, &apic_id, NULL, NULL);
++        apic_id >>= 24;
 +    }
 +
++    /* Never called by cpu0, so should never return 0 */
++    ASSERT(apic_id);
++
++    return apic_id;
++}
+ 
+ static void cpu_setup(unsigned int cpu)
+ {
+@@ -37,13 +64,17 @@ static void cpu_setup(unsigned int cpu)
+     cacheattr_init();
+     printf("done.\n");
+ 
+-    if ( !cpu ) /* Used on the BSP too */
++    /* The BSP exits early because its APIC ID is known to be zero */
++    if ( !cpu )
+         return;
+ 
+     wmb();
+-    ap_callin = 1;
++    ACCESS_ONCE(CPU_TO_X2APICID[cpu]) = read_apic_id();
+ 
+-    /* After this point, the BSP will shut us down. */
++    /*
++     * After this point the BSP will shut us down. A write to
++     * CPU_TO_X2APICID[cpu] signals the BSP to bring down `cpu`.
++     */
+ 
+     for ( ;; )
+         asm volatile ( "hlt" );
+@@ -54,10 +85,6 @@ static void boot_cpu(unsigned int cpu)
+     static uint8_t ap_stack[PAGE_SIZE] __attribute__ ((aligned (16)));
+     static struct vcpu_hvm_context ap;
+ 
+-    /* Initialise shared variables. */
+-    ap_callin = 0;
+-    wmb();
+-
+     /* Wake up the secondary processor */
+     ap = (struct vcpu_hvm_context) {
+         .mode = VCPU_HVM_MODE_32B,
+@@ -90,10 +117,11 @@ static void boot_cpu(unsigned int cpu)
+         BUG();
+ 
      /*
-      * Get the full HVM context in order to have the header, it is not
-      * possible to get the header with getcontext_partial, and crafting one
-@@ -1111,6 +1132,8 @@ static int vcpu_hvm(struct xc_dom_image *dom)
-     vcpu_ctx.mtrr_d.typecode = HVM_SAVE_CODE(MTRR);
-     vcpu_ctx.mtrr_d.length = HVM_SAVE_LENGTH(MTRR);
-     vcpu_ctx.mtrr = *mtrr_record;
-+    vcpu_ctx.lapic_d.typecode = HVM_SAVE_CODE(LAPIC);
-+    vcpu_ctx.lapic_d.length = HVM_SAVE_LENGTH(LAPIC);
-     vcpu_ctx.end_d = bsp_ctx.end_d;
-     vcpu_ctx.end = bsp_ctx.end;
+-     * Wait for the secondary processor to complete initialisation.
++     * Wait for the secondary processor to complete initialisation,
++     * which is signaled by its x2APIC ID being written to the LUT.
+      * Do not touch shared resources meanwhile.
+      */
+-    while ( !ap_callin )
++    while ( !ACCESS_ONCE(CPU_TO_X2APICID[cpu]) )
+         cpu_relax();
  
-@@ -1125,6 +1148,18 @@ static int vcpu_hvm(struct xc_dom_image *dom)
-     {
-         vcpu_ctx.mtrr_d.instance = i;
- 
-+        lapic_record = hvm_get_save_record(full_ctx, HVM_SAVE_CODE(LAPIC), i);
-+        if ( !lapic_record )
-+        {
-+            xc_dom_panic(dom->xch, XC_INTERNAL_ERROR,
-+                         "%s: unable to get LAPIC[%d] save record", __func__, i);
-+            goto out;
-+        }
+     /* Take the secondary processor offline. */
+@@ -104,6 +132,12 @@ static void boot_cpu(unsigned int cpu)
+ void smp_initialise(void)
+ {
+     unsigned int i, nr_cpus = hvm_info->nr_vcpus;
++    uint32_t ecx;
 +
-+        vcpu_ctx.lapic = *lapic_record;
-+        vcpu_ctx.lapic.x2apic_id = x86_x2apic_id_from_vcpu_id(&policy->policy, i);
-+        vcpu_ctx.lapic_d.instance = i;
++    cpuid(1, NULL, NULL, &ecx, NULL);
++    has_x2apic = (ecx >> 21) & 1;
++    if ( has_x2apic )
++        printf("x2APIC supported\n");
+ 
+     printf("Multiprocessor initialisation:\n");
+     cpu_setup(0);
+diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
+index 60912225cb7a..336c6309d96e 100644
+--- a/tools/include/xen-tools/common-macros.h
++++ b/tools/include/xen-tools/common-macros.h
+@@ -108,4 +108,9 @@
+ #define get_unaligned(ptr)      get_unaligned_t(typeof(*(ptr)), ptr)
+ #define put_unaligned(val, ptr) put_unaligned_t(typeof(*(ptr)), val, ptr)
+ 
++#define __ACCESS_ONCE(x) ({                             \
++            (void)(typeof(x))0; /* Scalar typecheck. */ \
++            (volatile typeof(x) *)&(x); })
++#define ACCESS_ONCE(x) (*__ACCESS_ONCE(x))
 +
-         rc = xc_domain_hvm_setcontext(dom->xch, dom->guest_domid,
-                                       (uint8_t *)&vcpu_ctx, sizeof(vcpu_ctx));
-         if ( rc != 0 )
-@@ -1147,6 +1182,7 @@ static int vcpu_hvm(struct xc_dom_image *dom)
- 
-  out:
-     free(full_ctx);
-+    xc_cpu_policy_destroy(policy);
-     return rc;
- }
- 
+ #endif	/* __XEN_TOOLS_COMMON_MACROS__ */
 -- 
 2.45.2
 
