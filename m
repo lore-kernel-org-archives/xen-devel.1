@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C2B6C3DA7F
-	for <xen-devel@archiver.kernel.org>; Sun, 11 Aug 2024 00:15:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.775178.1185507 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD1DC52D7B
+	for <xen-devel@archiver.kernel.org>; Sun, 11 Aug 2024 07:37:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.775204.1185518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1scwEh-0004KM-SX; Sun, 11 Aug 2024 00:15:03 +0000
+	id 1sd38H-0004JY-7S; Sun, 11 Aug 2024 07:36:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 775178.1185507; Sun, 11 Aug 2024 00:15:03 +0000
+Received: by outflank-mailman (output) from mailman id 775204.1185518; Sun, 11 Aug 2024 07:36:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1scwEh-0004KF-Oy; Sun, 11 Aug 2024 00:15:03 +0000
-Received: by outflank-mailman (input) for mailman id 775178;
- Sun, 11 Aug 2024 00:15:02 +0000
+	id 1sd38H-0004JR-3D; Sun, 11 Aug 2024 07:36:53 +0000
+Received: by outflank-mailman (input) for mailman id 775204;
+ Sun, 11 Aug 2024 07:36:51 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1scwEg-0004K5-1Z; Sun, 11 Aug 2024 00:15:02 +0000
+ id 1sd38F-0004JH-ES; Sun, 11 Aug 2024 07:36:51 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1scwEf-0002fS-S0; Sun, 11 Aug 2024 00:15:01 +0000
+ id 1sd38F-0005ab-4r; Sun, 11 Aug 2024 07:36:51 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1scwEf-0001LB-BK; Sun, 11 Aug 2024 00:15:01 +0000
+ id 1sd38E-0002RT-Jo; Sun, 11 Aug 2024 07:36:50 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1scwEf-0004bf-Ak; Sun, 11 Aug 2024 00:15:01 +0000
+ id 1sd38E-0003ow-Hl; Sun, 11 Aug 2024 07:36:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,16 +47,17 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=ZWAaKgpsbj06IZf41KZrVGRZUksOEMSg9u16jDkIXMQ=; b=E/ARh8mhib/3CGhSHnF9DLB1kb
-	NX5oIRUvmUta0t5kIFLELY9IxWT40Ez3jU3i9pCQo6ZYfSTZo5cVwiqRoqYCkaydPoqQ3OO1zkkCX
-	5HmwhLztWoCpwchTAthm6Gqysz+30ZKqS+dg957Pjq62JlU0/isGU1l0cHOg8kQuO7Rw=;
+	bh=htev57g2fZ6REDh4AcBRhlhKlOJBIvfvF1Bpo9NYIwQ=; b=MkD2KcqFq5Dz8ivS3VI/P+7SrZ
+	MCcVmrWATr/Ia5lefc/He9r7FkWfDzin8CrtK8pym+6L1B8oYxD1dVC/gj0wu6rg0F+oxX8vV/Pqn
+	1Ho/EEC8w0ydvZLiZwgZd8bH1URhgyEYIH7sOtGBZlfV25Wa3GtroUwmSWOg1Q70kmp0=;
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-187207-mainreport@xen.org>
+Message-ID: <osstest-187208-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [linux-linus test] 187207: regressions - FAIL
+Subject: [linux-linus test] 187208: regressions - FAIL
 X-Osstest-Failures:
+    linux-linus:test-amd64-coresched-amd64-xl:debian-fixup:fail:regression
     linux-linus:test-arm64-arm64-examine:reboot:fail:regression
     linux-linus:test-arm64-arm64-xl-xsm:xen-boot:fail:regression
     linux-linus:test-arm64-arm64-xl-vhd:xen-boot:fail:regression
@@ -98,19 +99,20 @@ X-Osstest-Failures:
     linux-linus:test-armhf-armhf-xl-raw:migrate-support-check:fail:nonblocking
     linux-linus:test-armhf-armhf-xl-raw:saverestore-support-check:fail:nonblocking
 X-Osstest-Versions-This:
-    linux=34ac1e82e5a78d5ed7f647766f5b1b51ca4d983a
+    linux=5189dafa4cf950e675f02ee04b577dfbbad0d9b1
 X-Osstest-Versions-That:
     linux=f83e38fc9f1092f8a7a65ff2ea6a1ea6502efaf0
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 11 Aug 2024 00:15:01 +0000
+Date: Sun, 11 Aug 2024 07:36:50 +0000
 
-flight 187207 linux-linus real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/187207/
+flight 187208 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/187208/
 
 Regressions :-(
 
 Tests which did not succeed and are blocking,
 including tests which could not be run:
+ test-amd64-coresched-amd64-xl 13 debian-fixup            fail REGR. vs. 186827
  test-arm64-arm64-examine      8 reboot                   fail REGR. vs. 186827
  test-arm64-arm64-xl-xsm       8 xen-boot                 fail REGR. vs. 186827
  test-arm64-arm64-xl-vhd       8 xen-boot                 fail REGR. vs. 186827
@@ -155,13 +157,13 @@ Tests which did not succeed, but are not blocking:
  test-armhf-armhf-xl-raw      15 saverestore-support-check    fail   never pass
 
 version targeted for testing:
- linux                34ac1e82e5a78d5ed7f647766f5b1b51ca4d983a
+ linux                5189dafa4cf950e675f02ee04b577dfbbad0d9b1
 baseline version:
  linux                f83e38fc9f1092f8a7a65ff2ea6a1ea6502efaf0
 
 Last test of basis   186827  2024-07-16 19:43:06 Z   25 days
-Failing since        186925  2024-07-20 09:44:52 Z   21 days   45 attempts
-Testing same since   187205  2024-08-10 05:08:29 Z    0 days    2 attempts
+Failing since        186925  2024-07-20 09:44:52 Z   21 days   46 attempts
+Testing same since   187208  2024-08-11 00:44:19 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 2109 people touched revisions under test,
@@ -184,7 +186,7 @@ jobs:
  build-armhf-pvops                                            pass    
  build-i386-pvops                                             pass    
  test-amd64-amd64-xl                                          pass    
- test-amd64-coresched-amd64-xl                                pass    
+ test-amd64-coresched-amd64-xl                                fail    
  test-arm64-arm64-xl                                          fail    
  test-armhf-armhf-xl                                          pass    
  test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
@@ -267,5 +269,5 @@ Test harness code can be found at
 
 Not pushing.
 
-(No revision log; it would be 237283 lines long.)
+(No revision log; it would be 237681 lines long.)
 
