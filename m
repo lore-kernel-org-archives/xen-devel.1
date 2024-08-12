@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CCCDC3DA7F
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Aug 2024 13:04:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.775479.1185684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA6A3C52D7C
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Aug 2024 13:06:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.775488.1185698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sdUih-0006Mq-Go; Mon, 12 Aug 2024 13:04:19 +0000
+	id 1sdUke-00078H-3d; Mon, 12 Aug 2024 13:06:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 775479.1185684; Mon, 12 Aug 2024 13:04:19 +0000
+Received: by outflank-mailman (output) from mailman id 775488.1185698; Mon, 12 Aug 2024 13:06:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sdUih-0006Mj-E0; Mon, 12 Aug 2024 13:04:19 +0000
-Received: by outflank-mailman (input) for mailman id 775479;
- Mon, 12 Aug 2024 13:04:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sdUkd-00077c-VQ; Mon, 12 Aug 2024 13:06:19 +0000
+Received: by outflank-mailman (input) for mailman id 775488;
+ Mon, 12 Aug 2024 13:06:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=t0sR=PL=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sdUig-0006Md-Oi
- for xen-devel@lists.xenproject.org; Mon, 12 Aug 2024 13:04:18 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 60814b29-58ab-11ef-8776-851b0ebba9a2;
- Mon, 12 Aug 2024 15:04:15 +0200 (CEST)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a7ad02501c3so519208066b.2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Aug 2024 06:04:15 -0700 (PDT)
-Received: from [10.125.226.166] ([185.25.67.249])
+ <SRS0=FAji=PL=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
+ id 1sdUkc-00074b-Ss
+ for xen-devel@lists.xenproject.org; Mon, 12 Aug 2024 13:06:18 +0000
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [2a00:1450:4864:20::234])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a9d20988-58ab-11ef-bc05-fd08da9f4363;
+ Mon, 12 Aug 2024 15:06:18 +0200 (CEST)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2eeb1ba040aso58542581fa.1
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Aug 2024 06:06:18 -0700 (PDT)
+Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a80bb0e0643sm228062366b.47.2024.08.12.06.04.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Aug 2024 06:04:14 -0700 (PDT)
+ 38308e7fff4ca-2f29203d817sm8573481fa.99.2024.08.12.06.06.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Aug 2024 06:06:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,149 +47,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 60814b29-58ab-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: a9d20988-58ab-11ef-bc05-fd08da9f4363
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1723467855; x=1724072655; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=o+3HOJlQ0IGpR2wCuV6uV+BTcwB/YqqQtFkrIQUjEqQ=;
-        b=pQZ9kvntVgp9BaXA0DU0irno10a5CtF9AlzxZzanEbcSm+/sXxvBczYzrgXyqhBA2k
-         TCE02aam/pCsL6REJnVrlKfSKMxJ2nV1Ht8OdbtwAGqY8Rp8CKXyJoLmWPRzyZsBEa+L
-         nFu3LBLHhE2ijeUcJ8go+EDWAM9DkrpAawLN0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723467855; x=1724072655;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1723467978; x=1724072778; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=o+3HOJlQ0IGpR2wCuV6uV+BTcwB/YqqQtFkrIQUjEqQ=;
-        b=HMGTQ9qf9oTAvRk3yCUUAL02e7CAq8EfbwQ4NCjq8mx8CrPR/UVYwqq1OOk28WYvQ6
-         0Snu3RWU5nmiqGvpXm0VnDaqvi/JyTZ5f/HcCvIO+m8KxY72qD6FChbyEk1N5sMaVXsd
-         StfKrgsYoGAFZOdfRwC69mDTDVawfLYha3w5/8vVT54phwBoI+A0XqYX+Blop0Sk1Erh
-         Y2DYRmvhKfZ0Jq+DWkSPA8tePzWtd3OeNwZt2z0YKvUjWkJAcRcVGa+wGDIVYQXfX3NC
-         stVkki3LEI7P1Wef7HfxxMIRpUAxWAr3ilh9xt0gDqvCL1GwozU3ygIYlMY88HfbnHEW
-         nPbA==
-X-Forwarded-Encrypted: i=1; AJvYcCW966qfC7QLzalV3P+hTM9ZI8Mh61mewEOpgd0V9vWMObLLWldlEuEY3x9Bu39Nal56IeKjQufD+3gGlt7mzXHQJwtaAY2rBkmwFY2Vnng=
-X-Gm-Message-State: AOJu0YzyPcjacZlxpq9oaY5HTA5WazeIbehgW+7u8b1HM1+HbgZBgeK9
-	Y9PP32bOID2+PRIXzk+9CXA4zHfVp8SmkXd4rVYoMvTII30ad2f8Cy+za5pTprgLy6PjCSTEZib
-	C
-X-Google-Smtp-Source: AGHT+IHk03lz1T/6miy2aoL4WJ28V9nwqCGCnf7/ib91Ka4pBOw3ifiGQKlRgAJrTRpJ9LjTa5xrxw==
-X-Received: by 2002:a17:907:c8a3:b0:a7a:3928:3529 with SMTP id a640c23a62f3a-a80ed1bfe86mr20242066b.13.1723467854716;
-        Mon, 12 Aug 2024 06:04:14 -0700 (PDT)
-Message-ID: <a7d15429-ce49-43b1-9bbd-7b0129094388@citrix.com>
-Date: Mon, 12 Aug 2024 14:04:11 +0100
+        bh=FnvsVFgAwwQYqvVPxF+lYxfpYXdBbERxwoGEJpJUJUI=;
+        b=VNUXtoyXxFeQlfzRQujuWTNEWNDBK4+r8lCcvyE94P6T69/+izCk04ZsdYYCvuf6XZ
+         w2zvox0fZUY/mMmxzzhtSoijQP5HaOuT6T+1CW+v0JtPUl6u8S33U1o095yLy+4+SHmf
+         CDLqczOsstpMFnO6d6ofUQkcMfu1d1WA0oZd7skyQSr+hKGIeJq1fKeckB1lUD0wdgRJ
+         7UR5nUblFA0ftuKR6QswhIbuCsy3yi3Lt4ObIR6UBCKwo6k3REiXf8oNyDNyMqU6hsdV
+         qOBdO4qfKIZ5iz2A2wV1nM3Gp7JQyo17zNvT1CBFse4Psilp8tuPt96wSqsQYSNLSRG1
+         rijg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1723467978; x=1724072778;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FnvsVFgAwwQYqvVPxF+lYxfpYXdBbERxwoGEJpJUJUI=;
+        b=c8KMtCIKlelOfWneO5Z3xVcRpewFd99Wu4FSVCdVOAatmvcmW4XByU0AaW+m3L4uz0
+         DLHvD/kwd04RTdQ7NoFYYSvgTfbbsGna9l738qS9rSavM/S2tIT8xrur98UiwAVrC2GE
+         YjI/4WYFCiStCcH31fWu8cEwI4HBwR/OeliHpF4XECA1jtbeas8zhgvhrWN41uoInhwp
+         fxM7XFnQFwWsi/L2eUL13AZbieW3CXZo2ufDcZsJsMVdiJ0Pcy7qDvggbLeu8y7SW0CO
+         +EDYXDmi3ns25FKMD7iM+Op04PojDRenv8h31WCfsrLwArSMGnJB0wP8jj1xExj0J0T5
+         RsMw==
+X-Forwarded-Encrypted: i=1; AJvYcCVkjDmGjqH2VD+pvhwDPoYnV//v4qvUHKyG4g0ArqFmeUtehrwvLAh+6Ak07fdZnRDblnqPjLdVTDcfAMyDc0Li9CVnFXP1zs9YALh/w58=
+X-Gm-Message-State: AOJu0YxE0m0KOjh9cbMFZDW2E1r0W8z8u0eLiLo5uqcwyAqoIFMGQRyC
+	l1ayyFHyf0LHiDZqeldVGgoiilRbg+FePNZxHLe/Lwh4SpftOdae
+X-Google-Smtp-Source: AGHT+IEH+rt8R3wDG+QKY36k4z1epabtE0qsH5Q2v+VF3qRP2OiK5eGbpOcoKlfiNpSaMtmPoTatVw==
+X-Received: by 2002:a2e:721a:0:b0:2ef:1d79:cae7 with SMTP id 38308e7fff4ca-2f2b714cfddmr1523661fa.14.1723467977110;
+        Mon, 12 Aug 2024 06:06:17 -0700 (PDT)
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: sstabellini@kernel.org,
+	anthony@xenproject.org,
+	paul@xen.org,
+	peter.maydell@linaro.org,
+	alex.bennee@linaro.org,
+	xenia.ragiadakou@amd.com,
+	jason.andryuk@amd.com,
+	edgar.iglesias@amd.com,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v1 01/10] MAINTAINERS: Add docs/system/arm/xenpvh.rst
+Date: Mon, 12 Aug 2024 15:05:56 +0200
+Message-ID: <20240812130606.90410-2-edgar.iglesias@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240812130606.90410-1-edgar.iglesias@gmail.com>
+References: <20240812130606.90410-1-edgar.iglesias@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86emul: don't call ->read_segment() with x86_seg_none
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <81ae365f-98b4-4bb6-bbb6-c5423dfda038@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
- CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
- 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
- IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
- SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
- JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
- mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
- ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
- RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
- dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
- /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
- TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
- Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
- 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
- vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
- g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
- wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
- 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
- kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
- bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
- uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
- XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
- HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
- pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
- vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
- b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
- 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
- 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
- nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
- B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
- d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
- 6+ahAA==
-In-Reply-To: <81ae365f-98b4-4bb6-bbb6-c5423dfda038@suse.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 05/08/2024 2:26 pm, Jan Beulich wrote:
-> LAR, LSL, VERR, and VERW emulation involve calling protmode_load_seg()
-> with x86_seg_none. The fuzzer's read_segment() hook function has an
-> assertion which triggers in this case. Calling the hook function,
-> however, makes little sense for those insns, as there's no data to
-> retrieve. Instead zero-filling the output structure is what properly
-> corresponds to those insns being invoked with a NUL selector.
->
-> Fixes: 06a3b8cd7ad2 ("x86emul: support LAR/LSL/VERR/VERW")
-> Oss-fuzz: 70918
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> It is pure guesswork that one of those insns did trigger the assertion.
+From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Tamas handed me the repro seeing as I don't have access to the bugs.  It
-was VERR/VERW.
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+---
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-> The report from oss-fuzz sadly lacks details on the insn under
-> emulation.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 10af212632..a24c2e14d9 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -559,6 +559,7 @@ F: include/hw/xen/
+ F: include/sysemu/xen.h
+ F: include/sysemu/xen-mapcache.h
+ F: stubs/xen-hw-stub.c
++F: docs/system/arm/xenpvh.rst
+ 
+ Guest CPU Cores (NVMM)
+ ----------------------
+-- 
+2.43.0
 
-I've got a still-pending patch to add `--debug` to the harness to dump
-that information.
-
-> I'm further surprised that AFL never found this.
-
-I haven't done any AFL testing since 06a3b8cd7ad2 was added.
-
-This crash is specific to VERW/etc with a NULL selector, which will be a
-rare combination to encounter.
-
->
-> --- a/xen/arch/x86/x86_emulate/x86_emulate.c
-> +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-> @@ -839,7 +839,8 @@ protmode_load_seg(
->          case x86_seg_tr:
->              goto raise_exn;
->          }
-> -        if ( !_amd_like(cp) || vcpu_has_nscb() || !ops->read_segment ||
-> +        if ( seg == x86_seg_none || !_amd_like(cp) || vcpu_has_nscb() ||
-> +             !ops->read_segment ||
->               ops->read_segment(seg, sreg, ctxt) != X86EMUL_OKAY )
->              memset(sreg, 0, sizeof(*sreg));
->          else
-
-While this fixes the crash, I'm not sure it will behave correctly for
-VERR/VERW.
-
-protmode_load_seg() is unconditionally X86EMUL_OKAY for a NULL selector,
-and VERW checks for type != 0x8 which an empty attr will pass.
-
-Interestingly, both Intel and AMD state that the NULL selector is
-neither readable nor writeable.
-
-Also, looking at the emulator logic, we're missing the DPL vs
-CPL/RPL/Conforming checks.
-
-~Andrew
 
