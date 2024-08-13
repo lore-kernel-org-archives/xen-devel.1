@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E01C3DA7F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Aug 2024 01:11:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.775794.1185973 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC0FC3DA7F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Aug 2024 01:46:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.775805.1185992 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sdg3v-0005pi-4t; Tue, 13 Aug 2024 01:10:59 +0000
+	id 1sdgbk-0002RD-VM; Tue, 13 Aug 2024 01:45:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 775794.1185973; Tue, 13 Aug 2024 01:10:59 +0000
+Received: by outflank-mailman (output) from mailman id 775805.1185992; Tue, 13 Aug 2024 01:45:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sdg3v-0005pb-0O; Tue, 13 Aug 2024 01:10:59 +0000
-Received: by outflank-mailman (input) for mailman id 775794;
- Tue, 13 Aug 2024 01:10:58 +0000
+	id 1sdgbk-0002R6-SD; Tue, 13 Aug 2024 01:45:56 +0000
+Received: by outflank-mailman (input) for mailman id 775805;
+ Tue, 13 Aug 2024 01:45:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=nBzl=PM=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1sdg3u-0005pS-2u
- for xen-devel@lists.xenproject.org; Tue, 13 Aug 2024 01:10:58 +0000
-Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=jgOn=PM=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1sdgbj-0002Qe-Pp
+ for xen-devel@lists.xenproject.org; Tue, 13 Aug 2024 01:45:55 +0000
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [2604:1380:40e1:4800::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e312f55f-5910-11ef-8776-851b0ebba9a2;
- Tue, 13 Aug 2024 03:10:54 +0200 (CEST)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.18.1/8.17.1) with ESMTPS id 47D1AgJv027961
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Mon, 12 Aug 2024 21:10:48 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.18.1/8.15.2/Submit) id 47D1AfGi027960;
- Mon, 12 Aug 2024 18:10:41 -0700 (PDT) (envelope-from ehem)
+ id c6003687-5915-11ef-8776-851b0ebba9a2;
+ Tue, 13 Aug 2024 03:45:53 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id CA89ACE10D3;
+ Tue, 13 Aug 2024 01:45:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98C3AC4AF0D;
+ Tue, 13 Aug 2024 01:45:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,59 +44,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e312f55f-5910-11ef-8776-851b0ebba9a2
-Date: Mon, 12 Aug 2024 18:10:41 -0700
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>
-Cc: Andrei Semenov <andrei.semenov@vates.tech>, xen-devel@lists.xenproject.org,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: AMD EPYC virtual network performances
-Message-ID: <Zrqykdarr7JHaeOZ@mattapan.m5p.com>
-References: <959bbf84-24da-4da3-a059-dc1aa32b27ef@vates.tech>
- <352bba40-27fc-416b-985f-20e66c0c4b72@suse.com>
+X-Inumbo-ID: c6003687-5915-11ef-8776-851b0ebba9a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1723513551;
+	bh=ECjQDs9jziapBcyXSTtq2tx6hUghV1n/XxS12P5heA0=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=RL1TyfKukkhFoK7lg6aUIzmfh+UjCF4vgBgj42v8NqiVovWn08NTuEl/1OommeWCx
+	 eakdXydKoigcr39Mo32UuHCs/YG1M3OBrPyxngLg46TVYz3FATUxnnY0HzZkIcF9Yd
+	 xZMqPwlD5nrweeprJkCRwBIA87nkrBC80sGSi5dyt1QHcXZDVhbCiCLpa940JbV+tA
+	 EfSbNMaBoHu9PafV01E2G5RCkCd/+D8WQBsTxUYVNtHuHa8uPl1Dt8rgQzX09wvfXK
+	 U+4fUVTaP8HiQIqn86tC8bSUJQDnGkIzknVUcKsC1ycdrNGUfTip80tTECBLDblCau
+	 C89g7o2ir0RaA==
+Date: Mon, 12 Aug 2024 18:45:48 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+cc: qemu-devel@nongnu.org, sstabellini@kernel.org, anthony@xenproject.org, 
+    paul@xen.org, peter.maydell@linaro.org, alex.bennee@linaro.org, 
+    xenia.ragiadakou@amd.com, jason.andryuk@amd.com, edgar.iglesias@amd.com, 
+    xen-devel@lists.xenproject.org, qemu-arm@nongnu.org
+Subject: Re: [PATCH v1 02/10] hw/arm: xenpvh: Update file header to use
+ SPDX
+In-Reply-To: <20240812130606.90410-3-edgar.iglesias@gmail.com>
+Message-ID: <alpine.DEB.2.22.394.2408121646560.298534@ubuntu-linux-20-04-desktop>
+References: <20240812130606.90410-1-edgar.iglesias@gmail.com> <20240812130606.90410-3-edgar.iglesias@gmail.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <352bba40-27fc-416b-985f-20e66c0c4b72@suse.com>
+Content-Type: text/plain; charset=US-ASCII
 
-On Tue, Jul 09, 2024 at 11:37:07AM +0200, Jürgen Groß wrote:
+On Mon, 12 Aug 2024, Edgar E. Iglesias wrote:
+> From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 > 
-> In both directories you can see the number of spurious events by looking
-> into the spurious_events file.
+> Update file header to use SPDX and remove stray empty
+> comment line.
 > 
-> In the end the question is why so many spurious events are happening. Finding
-> the reason might be hard, though.
+> No functional changes.
+> 
+> Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
 
-Hopefully my comments on this drew your attention, yet lack of response
-suggests otherwise.  I'm wondering whether this is an APIC misprogramming
-issue, similar to the x2APIC issue which was causing trouble with recent
-AMD processors.
-
-Trying to go after the Linux software RAID1, my current attempt is
-"iommu=debug iommu=no-intremap".  I'm seeing *lots* of messages from
-spurious events in `xl dmesg`.  So many I have a difficult time believing
-they are related to hardware I/O.
-
-In which case could the performance problem observed by Andrei Semenov
-be due to misprogramming of [x2]APIC triggering spurious events?
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 
 
-If so this is actually rather serious as there is so much noise it is
-impossible to debug anything else.
-
-In other news logs are available for private (PGP) viewing.  If one of
-the core developers has an appropriate AMD machine (IOMMUv2, Zen 1 or
-later; >=2 available SATA ports) I would send a pair of devices *known*
-to manifest the RAID1 issue.
-
-
--- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
-
-
+> ---
+>  hw/arm/xen_arm.c | 19 +------------------
+>  1 file changed, 1 insertion(+), 18 deletions(-)
+> 
+> diff --git a/hw/arm/xen_arm.c b/hw/arm/xen_arm.c
+> index 6fad829ede..766a194fa1 100644
+> --- a/hw/arm/xen_arm.c
+> +++ b/hw/arm/xen_arm.c
+> @@ -1,24 +1,7 @@
+>  /*
+>   * QEMU ARM Xen PVH Machine
+>   *
+> - *
+> - * Permission is hereby granted, free of charge, to any person obtaining a copy
+> - * of this software and associated documentation files (the "Software"), to deal
+> - * in the Software without restriction, including without limitation the rights
+> - * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> - * copies of the Software, and to permit persons to whom the Software is
+> - * furnished to do so, subject to the following conditions:
+> - *
+> - * The above copyright notice and this permission notice shall be included in
+> - * all copies or substantial portions of the Software.
+> - *
+~ - * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> - * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> - * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+> - * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> - * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> - * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> - * THE SOFTWARE.
+> + * SPDX-License-Identifier: MIT
+>   */
+>  
+>  #include "qemu/osdep.h"
+> -- 
+> 2.43.0
+> 
 
