@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA84C52D7B
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Aug 2024 14:01:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.776322.1186448 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82D59C52D7B
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Aug 2024 14:21:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.776348.1186463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sds5a-0002kA-Sa; Tue, 13 Aug 2024 14:01:30 +0000
+	id 1sdsP9-0006q9-Mc; Tue, 13 Aug 2024 14:21:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 776322.1186448; Tue, 13 Aug 2024 14:01:30 +0000
+Received: by outflank-mailman (output) from mailman id 776348.1186463; Tue, 13 Aug 2024 14:21:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sds5a-0002k3-Pp; Tue, 13 Aug 2024 14:01:30 +0000
-Received: by outflank-mailman (input) for mailman id 776322;
- Tue, 13 Aug 2024 14:01:29 +0000
+	id 1sdsP9-0006oy-Hh; Tue, 13 Aug 2024 14:21:43 +0000
+Received: by outflank-mailman (input) for mailman id 776348;
+ Tue, 13 Aug 2024 14:21:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Wdkt=PM=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sds5Z-0002jx-G7
- for xen-devel@lists.xenproject.org; Tue, 13 Aug 2024 14:01:29 +0000
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [2a00:1450:4864:20::233])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EOoy=PM=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1sdsP8-0006mt-FM
+ for xen-devel@lists.xenproject.org; Tue, 13 Aug 2024 14:21:42 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 884d7266-597c-11ef-8776-851b0ebba9a2;
- Tue, 13 Aug 2024 16:01:27 +0200 (CEST)
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2f1798eaee6so52990131fa.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Aug 2024 07:01:27 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bd196a7b29sm2982709a12.56.2024.08.13.07.01.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Aug 2024 07:01:25 -0700 (PDT)
+ id 5b718e29-597f-11ef-8776-851b0ebba9a2;
+ Tue, 13 Aug 2024 16:21:40 +0200 (CEST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5af51684d52so5999063a12.1
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Aug 2024 07:21:40 -0700 (PDT)
+Received: from EMEAENGAAD19049.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a80f414e3basm73540966b.164.2024.08.13.07.21.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Aug 2024 07:21:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,284 +47,279 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 884d7266-597c-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 5b718e29-597f-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1723557686; x=1724162486; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=X1eSclQ2lPG1v/tyz4BC45xToY1RW2r4Zy/KO0O9PIc=;
-        b=gQKW8dBPkYSbauq6uGlZ1vckJfeoGWW9JVEcYPM6DHhl5uxCheDsJk2CXpFiiBHRjL
-         RhuimsmJlOTCoky0crOqBe6nhJYr3PKWf1n3uSUXNJRb28f4Q4cP4RCeIPsQ+jtxZKd+
-         u5fEy/fBlpsuGxXV9pmxDH6yIDWRu0xrJMUBVISigVi/ObZrgoFU9VxjsOeQ2PH0SHRE
-         Fra0K4zDHe8R0FsqxjGYcPhfyfMqa/Ol/lI8HskQm8H7mRrRcLx+jJyDKXAUoGccD8fh
-         11zVlD1HJaui5y9pqNz+fk0eKzjzoiqtxTLJMPkggNSLb1dcFK0bBjBvASA0v2tw+fyh
-         oSuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723557686; x=1724162486;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1723558899; x=1724163699; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=X1eSclQ2lPG1v/tyz4BC45xToY1RW2r4Zy/KO0O9PIc=;
-        b=Yb4de12G+VrpbW9aru9bThUOnySAfaqF8ejhE4d1qflP+pZ2VtvAKg31Y39uwlbu/Z
-         696jxtY/8kWR28ROOreJEuKnflb2ysYIf2RQwo+A6GFCQpmBUE2G2V3KVhJNewNIzvKh
-         ZDioLm8hDUfMEOh8xI2fV39MeXwxaYZFT3ciu+9F/WQ4EvE7hYern/Qqltx7GrAAHPSB
-         RrAEMF1zgCSjTX6VF3y2XtFRsx6+1ViL1ejjZzpLXAn0RCidQedupXH9HKj6Cl/70YnP
-         5l+JcavlS2skg9WR7KYkL1e4GbXDYDO5tNgknPSKmJJj7CVSa0QTKEf09tiiJQOMMbpG
-         PhQw==
-X-Forwarded-Encrypted: i=1; AJvYcCVM2DRPaFMRq8oWVY4IVXwckHwIREoQuquK945Om/++kMNY2r9eYgPU7M+fa4D0dyRi2H5GQ/9bojO/JjGJSZhovFyt0iLNS6nwU1Di2xA=
-X-Gm-Message-State: AOJu0Yxy2bFCG1Cxh6EiaPIrgN6WcNb9g0RBgvR+tHOtsxzbO/wsqMAo
-	U5L0KRHpIwmVC9Re/+RhnHmVAgYgVkSCpo0aiKkx3Q94xok3ZzmhulnuZ0Mx0Q==
-X-Google-Smtp-Source: AGHT+IGm5LXC+abpifOmChOcax9ircJfl7s+zmeaDALG3WoSVo/zfdg99EE/mpvBiWwQNiwtTaO8zg==
-X-Received: by 2002:a05:651c:2228:b0:2ec:1810:e50a with SMTP id 38308e7fff4ca-2f2b717811emr32658521fa.32.1723557686181;
-        Tue, 13 Aug 2024 07:01:26 -0700 (PDT)
-Message-ID: <74f88a45-a632-4ca6-9cee-95f52370b397@suse.com>
-Date: Tue, 13 Aug 2024 16:01:24 +0200
+        bh=fHqLGGO5tY3MJJjvPDYymgHnYwN09knhW+0e175iaHo=;
+        b=f8wby6C/BCHMLhiHO+xuxsX02fp+IwsPkTrFNuA1LKFmNHDiaG+jUCbitHZo3wSTd5
+         NTnkveyes4ZHlMgwpBRH9OGDEq0koOSki93Vp+fDRiFmZBLVh5/YZOJbZaUz6Zy08nNi
+         p79hLeO0//a8g74lN4gSL2T483Kyn6I6LHrDE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1723558899; x=1724163699;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fHqLGGO5tY3MJJjvPDYymgHnYwN09knhW+0e175iaHo=;
+        b=d7pD/TxaBO2C/NUadU0M+0QOUDN+ebyMqnW3WQfA8nf0v+DAPlCtsE5M5ILysJJ1C9
+         RvcwaJs5Gb8Uy4HNDZ5BsvZ/iGI2U3QZyLDlEuq2QG8A0KUSEFo+HSNEBFSEqRtjNLcj
+         27k0I3olHn132Tga0ckIn3dHd4tlpxJHJ8cPcAu87Cp61SerBdwxGksETs9pYoOOfeVJ
+         TMwl+oNQYJumRhJC4lC57FpCHxRjw9btij/DAwLkM+s+QkOvD3G7u6sNEQl5Z7glc2uq
+         QzkPKntqaNBxq0Ui6Tmuwqg+4EdkpxICzzn7rmimcZXZr0ZvUkfGMnBCi6DZw04JzWQk
+         X1fg==
+X-Gm-Message-State: AOJu0Yw5JZQFIZ9UKFW8tP6tbi1O9X7Lx5yr+fXwh6zvFevB/4C0WY+o
+	OM/otMbCmfe1sPV9qh91A0HWunT45m++6XWXNP8wg3qzHZtc3jSvUFSBds4lGP3SLuCOVLzpdm2
+	K
+X-Google-Smtp-Source: AGHT+IGtQFYWG4HZWjMh3SD3M9MAmsCh41T4WNpZlCfbgbn6BaHtGEgS/xhAxs3gi6VVnjG2dn5S4Q==
+X-Received: by 2002:a17:907:efe5:b0:a7a:aa35:408d with SMTP id a640c23a62f3a-a80ed1d679dmr289106766b.20.1723558899234;
+        Tue, 13 Aug 2024 07:21:39 -0700 (PDT)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 1/2] x86/fpu: Combine fpu_ctxt and xsave_area in arch_vcpu
+Date: Tue, 13 Aug 2024 15:21:18 +0100
+Message-ID: <20240813142119.29012-2-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240813142119.29012-1-alejandro.vallejo@cloud.com>
+References: <20240813142119.29012-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] x86/msi: fix locking for SR-IOV devices
-To: Stewart Hildebrand <stewart.hildebrand@amd.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20240812203938.981588-1-stewart.hildebrand@amd.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240812203938.981588-1-stewart.hildebrand@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 12.08.2024 22:39, Stewart Hildebrand wrote:
-> In commit 4f78438b45e2 ("vpci: use per-domain PCI lock to protect vpci
-> structure") a lock moved from allocate_and_map_msi_pirq() to the caller
-> and changed from pcidevs_lock() to read_lock(&d->pci_lock). However, one
-> call path wasn't updated to reflect the change, leading to a failed
-> assertion observed under the following conditions:
-> 
-> * PV dom0
-> * Debug build (debug=y) of Xen
-> * There is an SR-IOV device in the system with one or more VFs enabled
-> * Dom0 has loaded the driver for the VF and enabled MSI-X
-> 
-> (XEN) Assertion 'd || pcidevs_locked()' failed at drivers/passthrough/pci.c:535
-> (XEN) ----[ Xen-4.20-unstable  x86_64  debug=y  Not tainted ]----
-> ...
-> (XEN) Xen call trace:
-> (XEN)    [<ffff82d040284da8>] R pci_get_pdev+0x4c/0xab
-> (XEN)    [<ffff82d040344f5c>] F arch/x86/msi.c#read_pci_mem_bar+0x58/0x272
-> (XEN)    [<ffff82d04034530e>] F arch/x86/msi.c#msix_capability_init+0x198/0x755
-> (XEN)    [<ffff82d040345dad>] F arch/x86/msi.c#__pci_enable_msix+0x82/0xe8
-> (XEN)    [<ffff82d0403463e5>] F pci_enable_msi+0x3f/0x78
-> (XEN)    [<ffff82d04034be2b>] F map_domain_pirq+0x2a4/0x6dc
-> (XEN)    [<ffff82d04034d4d5>] F allocate_and_map_msi_pirq+0x103/0x262
-> (XEN)    [<ffff82d04035da5d>] F physdev_map_pirq+0x210/0x259
-> (XEN)    [<ffff82d04035e798>] F do_physdev_op+0x9c3/0x1454
-> (XEN)    [<ffff82d040329475>] F pv_hypercall+0x5ac/0x6af
-> (XEN)    [<ffff82d0402012d3>] F lstar_enter+0x143/0x150
-> 
-> In read_pci_mem_bar(), the VF obtains the struct pci_dev pointer for its
-> associated PF to access the vf_rlen array. This array is initialized in
-> pci_add_device() and is only populated in the associated PF's struct
-> pci_dev.
-> 
-> Add a link from the VF's struct pci_dev to the associated PF struct
-> pci_dev, ensuring the PF's struct doesn't get deallocated until all its
-> VFs have gone away. Access the vf_rlen array via the new link to the PF,
-> and remove the troublesome call to pci_get_pdev().
-> 
-> Add a call to pci_get_pdev() inside the pcidevs_lock()-locked section of
-> pci_add_device() to set up the link from VF to PF. In case the new
-> pci_add_device() invocation fails to find the associated PF (returning
-> NULL), we are no worse off than before: read_pci_mem_bar() will still
-> return 0 in that case.
-> 
-> Note that currently the only way for Xen to know if a device is a VF is
-> if the toolstack tells Xen about it. Using PHYSDEVOP_manage_pci_add for
-> a VF is not a case that Xen handles.
+fpu_ctxt is either a pointer to the legacy x87/SSE save area (used by FXSAVE) or
+a pointer aliased with xsave_area that points to its fpu_sse subfield. Such
+subfield is at the base and is identical in size and layout to the legacy
+buffer.
 
-How does the toolstack come into play here? It's still the Dom0 kernel to
-tell Xen, via PHYSDEVOP_pci_device_add (preferred) or
-PHYSDEVOP_manage_pci_add_ext (kind of deprecated; PHYSDEVOP_manage_pci_add
-is even more kind of deprecated).
+This patch merges the 2 pointers in the arch_vcpu into a single XSAVE area. In
+the very rare case in which the host doesn't support XSAVE all we're doing is
+wasting a tiny amount of memory and trading those for a lot more simplicity in
+the code.
 
-> --- a/xen/arch/x86/msi.c
-> +++ b/xen/arch/x86/msi.c
-> @@ -662,34 +662,32 @@ static int msi_capability_init(struct pci_dev *dev,
->      return 0;
->  }
->  
-> -static u64 read_pci_mem_bar(u16 seg, u8 bus, u8 slot, u8 func, u8 bir, int vf)
-> +static u64 read_pci_mem_bar(struct pf_info *pf_info, u16 seg, u8 bus, u8 slot,
-> +                            u8 func, u8 bir, int vf)
->  {
-> +    pci_sbdf_t sbdf = PCI_SBDF(seg, bus, slot, func);
->      u8 limit;
->      u32 addr, base = PCI_BASE_ADDRESS_0;
->      u64 disp = 0;
->  
->      if ( vf >= 0 )
->      {
-> -        struct pci_dev *pdev = pci_get_pdev(NULL,
-> -                                            PCI_SBDF(seg, bus, slot, func));
->          unsigned int pos;
->          uint16_t ctrl, num_vf, offset, stride;
->  
-> -        if ( !pdev )
-> -            return 0;
-> -
-> -        pos = pci_find_ext_capability(pdev->sbdf, PCI_EXT_CAP_ID_SRIOV);
-> -        ctrl = pci_conf_read16(pdev->sbdf, pos + PCI_SRIOV_CTRL);
-> -        num_vf = pci_conf_read16(pdev->sbdf, pos + PCI_SRIOV_NUM_VF);
-> -        offset = pci_conf_read16(pdev->sbdf, pos + PCI_SRIOV_VF_OFFSET);
-> -        stride = pci_conf_read16(pdev->sbdf, pos + PCI_SRIOV_VF_STRIDE);
-> +        pos = pci_find_ext_capability(sbdf, PCI_EXT_CAP_ID_SRIOV);
-> +        ctrl = pci_conf_read16(sbdf, pos + PCI_SRIOV_CTRL);
-> +        num_vf = pci_conf_read16(sbdf, pos + PCI_SRIOV_NUM_VF);
-> +        offset = pci_conf_read16(sbdf, pos + PCI_SRIOV_VF_OFFSET);
-> +        stride = pci_conf_read16(sbdf, pos + PCI_SRIOV_VF_STRIDE);
->  
->          if ( !pos ||
->               !(ctrl & PCI_SRIOV_CTRL_VFE) ||
->               !(ctrl & PCI_SRIOV_CTRL_MSE) ||
->               !num_vf || !offset || (num_vf > 1 && !stride) ||
->               bir >= PCI_SRIOV_NUM_BARS ||
-> -             !pdev->vf_rlen[bir] )
-> +             !pf_info ||
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+v3:
+  * Reverse memcpy() and BUILD_BUG_ON()
+  * Use sizeof(arg) rather than sizeof(type)
+---
+ xen/arch/x86/domctl.c             |  6 ++++-
+ xen/arch/x86/hvm/emulate.c        |  4 +--
+ xen/arch/x86/hvm/hvm.c            |  6 ++++-
+ xen/arch/x86/i387.c               | 45 +++++--------------------------
+ xen/arch/x86/include/asm/domain.h |  8 +++---
+ xen/arch/x86/x86_emulate/blk.c    |  3 ++-
+ xen/arch/x86/xstate.c             | 13 ++++++---
+ 7 files changed, 34 insertions(+), 51 deletions(-)
 
-See further down - I think it would be nice if we didn't need this new
-check.
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index 68b5b46d1a83..63fbceac0911 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -1344,7 +1344,11 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
+ #define c(fld) (c.nat->fld)
+ #endif
+ 
+-    memcpy(&c.nat->fpu_ctxt, v->arch.fpu_ctxt, sizeof(c.nat->fpu_ctxt));
++    BUILD_BUG_ON(sizeof(c.nat->fpu_ctxt) !=
++                 sizeof(v->arch.xsave_area->fpu_sse));
++    memcpy(&c.nat->fpu_ctxt, &v->arch.xsave_area->fpu_sse,
++           sizeof(c.nat->fpu_ctxt));
++
+     if ( is_pv_domain(d) )
+         c(flags = v->arch.pv.vgc_flags & ~(VGCF_i387_valid|VGCF_in_kernel));
+     else
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index feb4792cc567..03020542c3ba 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -2363,7 +2363,7 @@ static int cf_check hvmemul_get_fpu(
+         alternative_vcall(hvm_funcs.fpu_dirty_intercept);
+     else if ( type == X86EMUL_FPU_fpu )
+     {
+-        const fpusse_t *fpu_ctxt = curr->arch.fpu_ctxt;
++        const fpusse_t *fpu_ctxt = &curr->arch.xsave_area->fpu_sse;
+ 
+         /*
+          * Latch current register state so that we can back out changes
+@@ -2403,7 +2403,7 @@ static void cf_check hvmemul_put_fpu(
+ 
+     if ( aux )
+     {
+-        fpusse_t *fpu_ctxt = curr->arch.fpu_ctxt;
++        fpusse_t *fpu_ctxt = &curr->arch.xsave_area->fpu_sse;
+         bool dval = aux->dval;
+         int mode = hvm_guest_x86_mode(curr);
+ 
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index f49e29faf753..76bbb645b77a 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -916,7 +916,11 @@ static int cf_check hvm_save_cpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
+ 
+     if ( v->fpu_initialised )
+     {
+-        memcpy(ctxt.fpu_regs, v->arch.fpu_ctxt, sizeof(ctxt.fpu_regs));
++        BUILD_BUG_ON(sizeof(ctxt.fpu_regs) !=
++                     sizeof(v->arch.xsave_area->fpu_sse));
++        memcpy(ctxt.fpu_regs, &v->arch.xsave_area->fpu_sse,
++               sizeof(ctxt.fpu_regs));
++
+         ctxt.flags = XEN_X86_FPU_INITIALISED;
+     }
+ 
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index 134e0bece519..fbb9d3584a3d 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -39,7 +39,7 @@ static inline void fpu_xrstor(struct vcpu *v, uint64_t mask)
+ /* Restore x87 FPU, MMX, SSE and SSE2 state */
+ static inline void fpu_fxrstor(struct vcpu *v)
+ {
+-    const fpusse_t *fpu_ctxt = v->arch.fpu_ctxt;
++    const fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+ 
+     /*
+      * Some CPUs don't save/restore FDP/FIP/FOP unless an exception
+@@ -151,7 +151,7 @@ static inline void fpu_xsave(struct vcpu *v)
+ /* Save x87 FPU, MMX, SSE and SSE2 state */
+ static inline void fpu_fxsave(struct vcpu *v)
+ {
+-    fpusse_t *fpu_ctxt = v->arch.fpu_ctxt;
++    fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
+ 
+     if ( fip_width != 4 )
+@@ -212,7 +212,7 @@ void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts)
+      * above) we also need to restore full state, to prevent subsequently
+      * saving state belonging to another vCPU.
+      */
+-    if ( v->arch.fully_eager_fpu || (v->arch.xsave_area && xstate_all(v)) )
++    if ( v->arch.fully_eager_fpu || xstate_all(v) )
+     {
+         if ( cpu_has_xsave )
+             fpu_xrstor(v, XSTATE_ALL);
+@@ -299,44 +299,14 @@ void save_fpu_enable(void)
+ /* Initialize FPU's context save area */
+ int vcpu_init_fpu(struct vcpu *v)
+ {
+-    int rc;
+-
+     v->arch.fully_eager_fpu = opt_eager_fpu;
+-
+-    if ( (rc = xstate_alloc_save_area(v)) != 0 )
+-        return rc;
+-
+-    if ( v->arch.xsave_area )
+-        v->arch.fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+-    else
+-    {
+-        BUILD_BUG_ON(__alignof(v->arch.xsave_area->fpu_sse) < 16);
+-        v->arch.fpu_ctxt = _xzalloc(sizeof(v->arch.xsave_area->fpu_sse),
+-                                    __alignof(v->arch.xsave_area->fpu_sse));
+-        if ( v->arch.fpu_ctxt )
+-        {
+-            fpusse_t *fpu_sse = v->arch.fpu_ctxt;
+-
+-            fpu_sse->fcw = FCW_DEFAULT;
+-            fpu_sse->mxcsr = MXCSR_DEFAULT;
+-        }
+-        else
+-            rc = -ENOMEM;
+-    }
+-
+-    return rc;
++    return xstate_alloc_save_area(v);
+ }
+ 
+ void vcpu_setup_fpu(struct vcpu *v, struct xsave_struct *xsave_area,
+                     const void *data, unsigned int fcw_default)
+ {
+-    /*
+-     * For the entire function please note that vcpu_init_fpu() (above) points
+-     * v->arch.fpu_ctxt into v->arch.xsave_area when XSAVE is available. Hence
+-     * accesses through both pointers alias one another, and the shorter form
+-     * is used here.
+-     */
+-    fpusse_t *fpu_sse = v->arch.fpu_ctxt;
++    fpusse_t *fpu_sse = &v->arch.xsave_area->fpu_sse;
+ 
+     ASSERT(!xsave_area || xsave_area == v->arch.xsave_area);
+ 
+@@ -373,10 +343,7 @@ void vcpu_setup_fpu(struct vcpu *v, struct xsave_struct *xsave_area,
+ /* Free FPU's context save area */
+ void vcpu_destroy_fpu(struct vcpu *v)
+ {
+-    if ( v->arch.xsave_area )
+-        xstate_free_save_area(v);
+-    else
+-        xfree(v->arch.fpu_ctxt);
++    xstate_free_save_area(v);
+ }
+ 
+ /*
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index bca3258d69ac..3da60af2a44a 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -592,11 +592,11 @@ struct pv_vcpu
+ struct arch_vcpu
+ {
+     /*
+-     * guest context (mirroring struct vcpu_guest_context) common
+-     * between pv and hvm guests
++     * Guest context common between PV and HVM guests. Includes general purpose
++     * registers, segment registers and other parts of the exception frame.
++     *
++     * It doesn't contain FPU state, as that lives in xsave_area instead.
+      */
+-
+-    void              *fpu_ctxt;
+     struct cpu_user_regs user_regs;
+ 
+     /* Debug registers. */
+diff --git a/xen/arch/x86/x86_emulate/blk.c b/xen/arch/x86/x86_emulate/blk.c
+index e790f4f90056..28b54f26fe29 100644
+--- a/xen/arch/x86/x86_emulate/blk.c
++++ b/xen/arch/x86/x86_emulate/blk.c
+@@ -11,7 +11,8 @@
+     !defined(X86EMUL_NO_SIMD)
+ # ifdef __XEN__
+ #  include <asm/xstate.h>
+-#  define FXSAVE_AREA current->arch.fpu_ctxt
++#  define FXSAVE_AREA ((struct x86_fxsr *) \
++                           (void *)&current->arch.xsave_area->fpu_sse)
+ # else
+ #  define FXSAVE_AREA get_fpu_save_area()
+ # endif
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index 5c4144d55e89..850ee31bd18c 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -507,9 +507,16 @@ int xstate_alloc_save_area(struct vcpu *v)
+     unsigned int size;
+ 
+     if ( !cpu_has_xsave )
+-        return 0;
+-
+-    if ( !is_idle_vcpu(v) || !cpu_has_xsavec )
++    {
++        /*
++         * This is bigger than FXSAVE_SIZE by 64 bytes, but it helps treating
++         * the FPU state uniformly as an XSAVE buffer even if XSAVE is not
++         * available in the host. Note the alignment restriction of the XSAVE
++         * area are stricter than those of the FXSAVE area.
++         */
++        size = XSTATE_AREA_MIN_SIZE;
++    }
++    else if ( !is_idle_vcpu(v) || !cpu_has_xsavec )
+     {
+         size = xsave_cntxt_size;
+         BUG_ON(size < XSTATE_AREA_MIN_SIZE);
+-- 
+2.45.2
 
-> @@ -813,6 +811,7 @@ static int msix_capability_init(struct pci_dev *dev,
->          int vf;
->          paddr_t pba_paddr;
->          unsigned int pba_offset;
-> +        struct pf_info *pf_info = NULL;
-
-Pointer-to-const?
-
-> @@ -827,9 +826,12 @@ static int msix_capability_init(struct pci_dev *dev,
->              pslot = PCI_SLOT(dev->info.physfn.devfn);
->              pfunc = PCI_FUNC(dev->info.physfn.devfn);
->              vf = dev->sbdf.bdf;
-> +            if ( dev->virtfn.pf_pdev )
-> +                pf_info = &dev->virtfn.pf_pdev->physfn;
->          }
->  
-> -        table_paddr = read_pci_mem_bar(seg, pbus, pslot, pfunc, bir, vf);
-> +        table_paddr = read_pci_mem_bar(pf_info, seg, pbus, pslot, pfunc, bir,
-> +                                       vf);
-
-I don't think putting the new arg first is very nice. SBDF should remain
-first imo. Between the latter arguments I'm not as fussed.
-
-> @@ -446,7 +448,27 @@ static void free_pdev(struct pci_seg *pseg, struct pci_dev *pdev)
->  
->      list_del(&pdev->alldevs_list);
->      pdev_msi_deinit(pdev);
-> -    xfree(pdev);
-> +
-> +    if ( pdev->info.is_virtfn )
-> +    {
-> +        struct pci_dev *pf_pdev = pdev->virtfn.pf_pdev;
-> +
-> +        if ( pf_pdev )
-> +        {
-> +            list_del(&pdev->virtfn.next);
-> +            if ( pf_pdev->physfn.dealloc_pending &&
-> +                 list_empty(&pf_pdev->physfn.vf_list) )
-> +                xfree(pf_pdev);
-> +        }
-> +        xfree(pdev);
-> +    }
-> +    else
-> +    {
-> +        if ( list_empty(&pdev->physfn.vf_list) )
-> +            xfree(pdev);
-> +        else
-> +            pdev->physfn.dealloc_pending = true;
-> +    }
-
-Could I talk you into un-indenting the last if/else by a level, by making
-the earlier else and "else if()"?
-
-One aspect I didn't properly consider when making the suggestion: What if,
-without all VFs having gone away, the PF is re-added? In that case we
-would better recycle the existing structure. That's getting a little
-complicated, so maybe a better approach is to refuse the request (in
-pci_remove_device()) when the list isn't empty?
-
-> @@ -700,10 +722,22 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
->           * extended function.
->           */
->          if ( pdev->info.is_virtfn )
-> +        {
-> +            struct pci_dev *pf_pdev;
-> +
->              pdev->info.is_extfn = pf_is_extfn;
-> +            pf_pdev = pci_get_pdev(NULL,
-> +                                   PCI_SBDF(seg, info->physfn.bus,
-> +                                            info->physfn.devfn));
-> +            if ( pf_pdev )
-> +            {
-> +                pdev->virtfn.pf_pdev = pf_pdev;
-> +                list_add(&pdev->virtfn.next, &pf_pdev->physfn.vf_list);
-> +            }
-> +        }
-
-Hmm, yes, we can't really use the result of the earlier pci_get_pdev(), as
-we drop the lock intermediately. I wonder though if we wouldn't better fail
-the function if we can't find the PF instance.
-
-> --- a/xen/include/xen/pci.h
-> +++ b/xen/include/xen/pci.h
-> @@ -150,7 +150,17 @@ struct pci_dev {
->          unsigned int count;
->  #define PT_FAULT_THRESHOLD 10
->      } fault;
-> -    u64 vf_rlen[6];
-> +    struct pf_info {
-> +        /* Only populated for PFs (info.is_virtfn == false) */
-> +        uint64_t vf_rlen[PCI_SRIOV_NUM_BARS];
-> +        struct list_head vf_list;             /* List head */
-> +        bool dealloc_pending;
-> +    } physfn;
-> +    struct {
-> +        /* Only populated for VFs (info.is_virtfn == true) */
-> +        struct pci_dev *pf_pdev;              /* Link from VF to PF */
-> +        struct list_head next;                /* Entry in vf_list */
-
-For doubly-linked lists "next" isn't really a good name. Since both struct
-variants need such a member, why not use vf_list uniformly? That'll then
-also lower the significance of my other question:
-
-> +    } virtfn;
-
-Should the two new struct-s perhaps be a union?
-
-Jan
 
