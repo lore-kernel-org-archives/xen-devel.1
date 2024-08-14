@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AAE8C52D7F
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2024 08:28:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.776826.1186996 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6A74C52D7F
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2024 08:34:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.776833.1187006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1se9N1-0001M5-2j; Wed, 14 Aug 2024 08:28:39 +0000
+	id 1se9SR-0002tw-NH; Wed, 14 Aug 2024 08:34:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 776826.1186996; Wed, 14 Aug 2024 08:28:39 +0000
+Received: by outflank-mailman (output) from mailman id 776833.1187006; Wed, 14 Aug 2024 08:34:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1se9N0-0001Ly-W0; Wed, 14 Aug 2024 08:28:38 +0000
-Received: by outflank-mailman (input) for mailman id 776826;
- Wed, 14 Aug 2024 08:28:38 +0000
+	id 1se9SR-0002tp-KZ; Wed, 14 Aug 2024 08:34:15 +0000
+Received: by outflank-mailman (input) for mailman id 776833;
+ Wed, 14 Aug 2024 08:34:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NhoJ=PN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1se9N0-0001LZ-2E
- for xen-devel@lists.xenproject.org; Wed, 14 Aug 2024 08:28:38 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
+ id 1se9SQ-0002t1-Nk
+ for xen-devel@lists.xenproject.org; Wed, 14 Aug 2024 08:34:14 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3384169a-5a17-11ef-a505-bb4a2ccca743;
- Wed, 14 Aug 2024 10:28:36 +0200 (CEST)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5af326eddb2so1042612a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 14 Aug 2024 01:28:36 -0700 (PDT)
+ id fc3a8ba9-5a17-11ef-a505-bb4a2ccca743;
+ Wed, 14 Aug 2024 10:34:13 +0200 (CEST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5a79df5af51so1103265a12.0
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Aug 2024 01:34:13 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bd1968af77sm3591110a12.40.2024.08.14.01.28.35
+ a640c23a62f3a-a80f4183aa5sm145182266b.211.2024.08.14.01.34.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Aug 2024 01:28:35 -0700 (PDT)
+ Wed, 14 Aug 2024 01:34:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,46 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3384169a-5a17-11ef-a505-bb4a2ccca743
+X-Inumbo-ID: fc3a8ba9-5a17-11ef-a505-bb4a2ccca743
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1723624116; x=1724228916; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=6Nu4pPZi5zBW3bAq5eXnFW4GeiCLLJkowiSjAPbXk0A=;
-        b=LMuN1ofZSaGI3Qx+e2hw8ywfqqOhuEJb+BMPkG47mFDX1Bl5rXXsNx46FCRZ/CZgbY
-         U+Lx+CnCFXDH5OumfI1uHY7gbWiDDiv0aZPuE7FB2RRMoNDYfyBhFbwLJrEQukv3/4dr
-         QrVp0PLTDE8/t1bM6nLQrZqa0+VOas93AjZR1shg8hsYU5fSgozY9JzHxHK/62mQoGOV
-         xvJpcUn3ZuLMvUmsUcOHTEwYrFtoKOWx7IOSFOgPcmm1D1eG6KWxgpAFMs295QHXOgj6
-         BOFlH/aEiydoSccP3eryLXJwSbP94CgN7vwiyLsVwxEv3bC0taT0gRAK6M705lxjHBvd
-         2yKA==
+        d=suse.com; s=google; t=1723624453; x=1724229253; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=0p4AvId7LsdumQhFUTANpZvFp9Wi6kOxkHUOGtjN1Vo=;
+        b=c+eE5GozafZHEnwXB+M6Qys2iFXMju698+NV+r7hUh6Bh3w4H0KdsXGY8TR+Fau+ZA
+         uUH8D4B8GaSj02LCvYbR8eowxHX6Vtb6gG1Zos9FwDsNzLyTwcxHawiXTJ6UivTJ6miG
+         922bp3x8/c9ZBpQfjeF/1UDdul6OsewZ3XqE8o+yiTXBelk1hlj7eihglf91D437n6E+
+         XbI/bnOcPdHeUxYArYODw4GJBqefhgl1JLIKAXzC9fio4DRqOgEYKp/BRlHFOuROynP1
+         nE667yEpa08/hu2TdWliQJZGf2VWbtmg8jEsWKEh26tmOnW3g72BVjPjp/nNI42tZMdA
+         UYrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723624116; x=1724228916;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=6Nu4pPZi5zBW3bAq5eXnFW4GeiCLLJkowiSjAPbXk0A=;
-        b=r3Y/rqwHu4Sxoy6lX7LealSH/K9U+1LFORQyMRqMdX+B3njNJqPkLYus3GCaSGKg2H
-         5eAH8FZgsuB2uRKzIzqVR0Vka1YFDQhlm8DV8T82GOjGr3Zm3Xhpo5vuoB1SKOSZ5wrb
-         ANS719XCkD7otbGEhxDJ3VFQTZ/TBTiLB+4gY4TI/m2x5tuVz3BcN9hAKDpOkSMyjoCA
-         wv2a8KpGl5hh9bLX6E3/d/Ug4k1zbt/J8dkbMzWt+hPnt/Iud6tZpmlfFp4a9gQQPwfL
-         AFWIVg8MOuPSYcUE2S+v7ZHr8zOjIAvmPguzMc0rFy2xXZLid5RzipXblqJKC11dGJ3k
-         4AmA==
-X-Gm-Message-State: AOJu0YxO/M8jisZMScfS5PuJ8hIZwlt1d5L6gZpGlm/0ejt8g9CKOZa9
-	TkBeGKjrExGllxw9WuSR/5e7VMCENyNwnuCywUFrscTSJwC2fPw/a8uhfJMgWfkozQqiFarE7cE
+        d=1e100.net; s=20230601; t=1723624453; x=1724229253;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0p4AvId7LsdumQhFUTANpZvFp9Wi6kOxkHUOGtjN1Vo=;
+        b=kygENiHppVlDeTcOLtDOHGnOQU4gX6uUpRIE01UeJw00coctovt3p0RTZ+orDdAVcJ
+         QYRST3j2ijy8U0jpRou0Gy5wOUDyOKf6S4pkSp0auvlNuzNWlrV0uQN5Jhi/jiTyjLW6
+         HgDuWWiTEzFFFxefUQAutC6R8MAiYZbwQ8ussvB6unuohdAQA9cztqHHQi2Th9JPziAe
+         mV1z+WbazscchyQK2BO1eIRMsPcV+kg55/Dcj6bT6in9HBTZpTdYOr4j8I62J/zWu1AR
+         fdPQXp+K09dKn74I8qREHkimlAzSbfWaqqZZ8xlCi6VkuwpUG8jUk7F1kk7XJ8ZEM4F2
+         R0tQ==
+X-Gm-Message-State: AOJu0YygM8glkHEgyMN7WJ9MzJLtDaTYJ5o58h4Prjg/n46/lqsPXbSj
+	5B9gkl7uAzKNJ4BRI1AnWz5vZnrAvn5P7Tp50ELW+RZlugn1hJl5lLrNsy8R+lY/4YrMSSCBifU
 	=
-X-Google-Smtp-Source: AGHT+IFMiNfmATHueVOy0wRe/gQPpD2yaHzdlrEzRRIs6B2fvPRGiRKwTikAKXEvEZEPVCOrRdD6Ow==
-X-Received: by 2002:a05:6402:2742:b0:5a1:5c0c:cbd6 with SMTP id 4fb4d7f45d1cf-5bea5e53c6cmr1216959a12.8.1723624116048;
-        Wed, 14 Aug 2024 01:28:36 -0700 (PDT)
-Message-ID: <2500a119-1734-44c2-9868-640bcc8ead2d@suse.com>
-Date: Wed, 14 Aug 2024 10:28:34 +0200
+X-Google-Smtp-Source: AGHT+IHCfMpdstRu/v5hw1srj/M07bk/9QhvLIxwlBwAzcQHH0K5rtJ0DcGPTFre5wHNnCe1FUAzmA==
+X-Received: by 2002:a17:907:9814:b0:a7d:89ac:9539 with SMTP id a640c23a62f3a-a80f0a77484mr557770966b.7.1723624452906;
+        Wed, 14 Aug 2024 01:34:12 -0700 (PDT)
+Message-ID: <1512c261-dad4-472d-b6a7-aafd2cb5171b@suse.com>
+Date: Wed, 14 Aug 2024 10:34:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: [PATCH v5 1/3] x86/CPUID: adjust extended leaves out of range
+ clearing
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v5 0/3] x86/CPUID: leaf pruning
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <2500a119-1734-44c2-9868-640bcc8ead2d@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -111,25 +114,62 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <2500a119-1734-44c2-9868-640bcc8ead2d@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-These three related patches were previously part of the AMX series.
-For AVX10 some of this is going to be needed (or at least wanted) too,
-though, hence I'm now refreshing these separately. Neither of the
-three is strictly a functional prereq, but two of the three introduce
-new functions which then are further altered while adding AVX10 (and
-AMX) logic. Presumably none of these would be necessary anymore once
-toolstack side work planned by Andrew gets carried out.
+A maximum extended leaf input value with the high half different from
+0x8000 should not be considered valid - all leaves should be cleared in
+this case.
 
-All taken together: Until it is clear that one or more of these are
-strictly not needed / wanted (in this or another form), having these
-ahead of the actual work seems preferable over accidentally losing
-adjustments done for AVX10 / AMX (and down the road perhaps others).
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+TBD: Andrew suggested to drop this patch, but that sub-thread still has
+     a loose end. Hence, until I'm convinced otherwise, I've retained
+     this patch here. I don't think it conflicts with any of the
+     subsequent ones.
+---
+v2: Integrate into series.
 
-1: adjust extended leaves out of range clearing
-2: shrink max_{,sub}leaf fields according to actual leaf contents
-3: move bounding of max_{,sub}leaf fields to library code
+--- a/tools/tests/cpu-policy/test-cpu-policy.c
++++ b/tools/tests/cpu-policy/test-cpu-policy.c
+@@ -528,11 +528,22 @@ static void test_cpuid_out_of_range_clea
+             },
+         },
+         {
++            .name = "no extd",
++            .nr_markers = 0,
++            .p = {
++                /* Clears all markers. */
++                .extd.max_leaf = 0,
++
++                .extd.vendor_ebx = 0xc2,
++                .extd.raw_fms = 0xc2,
++            },
++        },
++        {
+             .name = "extd",
+             .nr_markers = 1,
+             .p = {
+                 /* Retains marker in leaf 0.  Clears others. */
+-                .extd.max_leaf = 0,
++                .extd.max_leaf = 0x80000000,
+                 .extd.vendor_ebx = 0xc2,
+ 
+                 .extd.raw_fms = 0xc2,
+--- a/xen/lib/x86/cpuid.c
++++ b/xen/lib/x86/cpuid.c
+@@ -285,7 +285,9 @@ void x86_cpu_policy_clear_out_of_range_l
+                     ARRAY_SIZE(p->xstate.raw) - 1);
+     }
+ 
+-    zero_leaves(p->extd.raw, (p->extd.max_leaf & 0xffff) + 1,
++    zero_leaves(p->extd.raw,
++                ((p->extd.max_leaf >> 16) == 0x8000
++                 ? (p->extd.max_leaf & 0xffff) + 1 : 0),
+                 ARRAY_SIZE(p->extd.raw) - 1);
+ }
+ 
 
-Jan
 
