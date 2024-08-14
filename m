@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2878C531DE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D20EC531DC
 	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2024 08:35:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.776847.1187025 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.776850.1187049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1se9T9-0003po-5v; Wed, 14 Aug 2024 08:34:59 +0000
+	id 1se9TB-0004H2-DA; Wed, 14 Aug 2024 08:35:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 776847.1187025; Wed, 14 Aug 2024 08:34:59 +0000
+Received: by outflank-mailman (output) from mailman id 776850.1187049; Wed, 14 Aug 2024 08:35:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1se9T9-0003pe-3J; Wed, 14 Aug 2024 08:34:59 +0000
-Received: by outflank-mailman (input) for mailman id 776847;
- Wed, 14 Aug 2024 08:34:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1se9TB-0004G8-4t; Wed, 14 Aug 2024 08:35:01 +0000
+Received: by outflank-mailman (input) for mailman id 776850;
+ Wed, 14 Aug 2024 08:35:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jxPN=PN=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1se9T7-0003IY-Pv
- for xen-devel@lists.xenproject.org; Wed, 14 Aug 2024 08:34:57 +0000
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [2607:f8b0:4864:20::72c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 15637184-5a18-11ef-8776-851b0ebba9a2;
- Wed, 14 Aug 2024 10:34:56 +0200 (CEST)
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7a1df0a9281so397778685a.1
- for <xen-devel@lists.xenproject.org>; Wed, 14 Aug 2024 01:34:56 -0700 (PDT)
+ id 1se9TA-0002t1-3f
+ for xen-devel@lists.xenproject.org; Wed, 14 Aug 2024 08:35:00 +0000
+Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
+ [2607:f8b0:4864:20::e2e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 175b8caa-5a18-11ef-a505-bb4a2ccca743;
+ Wed, 14 Aug 2024 10:34:59 +0200 (CEST)
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-492a01bce97so2246922137.2
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Aug 2024 01:34:59 -0700 (PDT)
 Received: from fziglio-xenia-fedora.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a4c7e05595sm407786785a.122.2024.08.14.01.34.53
+ af79cd13be357-7a4c7e05595sm407786785a.122.2024.08.14.01.34.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Aug 2024 01:34:54 -0700 (PDT)
+ Wed, 14 Aug 2024 01:34:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,75 +47,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 15637184-5a18-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 175b8caa-5a18-11ef-a505-bb4a2ccca743
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1723624495; x=1724229295; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BZa9e6Ro4WdFyS/CD9RCAzzR7cxVkwW0r40u2r8Z0Ts=;
-        b=bCTxZZM0tH4jjaWWvIUs2t2QyxygGWtLeyz1+Ld09kf0Bs54hlvtvt9f9X7g7mffVU
-         HLip8qHQ35T+wz05l/LEh4/j6biOgpXQvRHaDelmUYUHyn2c1OtbUlfYN6evCEKCO0zG
-         PS9HpKNO67MG4sUwRAhisGvzVEHwh7BthWuzs=
+        d=cloud.com; s=cloud; t=1723624498; x=1724229298; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hx6AIwlEbMHavC5DjEjakTrNbCVEjBb0SKVNkWMFXTc=;
+        b=hN5Oh2eW3WaDyDtMkMUKMYqhlwsaIHHRbPiZFw1qmF8JftzGcJ30bax86QiFXOG4sW
+         x2pJkGIlTsv5lfb/NDrJgUhMx5SqswPWpEfUiNE+9LlkID12mXA350jl59UbgKy+ytWD
+         xkXSqfCUeczJYMi+2B1HME+acSCyJovlXJn/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723624495; x=1724229295;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BZa9e6Ro4WdFyS/CD9RCAzzR7cxVkwW0r40u2r8Z0Ts=;
-        b=o8Oh+MJTBLqy+rdvrO3IKRXKkGXILqzdMHwR8gC/Eme5+wllF2BXJAwdzdQBnCb1fQ
-         Qtk2FdH3nx4XUGaAsIgVki4q+4fKpi/rY+08d5nsUpvaMRlSyB9C+iL/w+TTBCtfp//2
-         Pr/Nu7RqhfAn9MaVqXww7fLvadlaJn703VtmSaVjn8pju61QGsn+A6eGqGc3Bucl9ncJ
-         ffa95t0umHOjvb4IvKKc9LRMGDa0y+FO2SoQc+OgDWWRXjg2s7jtMg26e7BJ7WAd+ImM
-         v8Sj+86Yx5+zmycaOCeZi1wdC18xCFnyA0FUk7fefCWqLkjgWELJ4RQVkaN9BiFTj8AX
-         pZuA==
-X-Gm-Message-State: AOJu0YzxsR32o3qM9/naUV0x/LY1Y9fz6AiQ9ef7s9ZFrXXjC/naN54m
-	L3LyrLSpBofk8+0AxZc+cFRM4PXB5W2qyJo72gF43RTHh+TJWwIhdsuvkLG8Qxj+oJuKF6pWkFK
-	z
-X-Google-Smtp-Source: AGHT+IHabNrK44XvtF/+KU+rjUBwIe7O6mvUvG0svDszGSSuxM2iKcMD2fTnLWR2xukTKk8gkmQ2pw==
-X-Received: by 2002:a05:620a:19a9:b0:79f:947:8915 with SMTP id af79cd13be357-7a4ee33e7b2mr298596085a.29.1723624494854;
-        Wed, 14 Aug 2024 01:34:54 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1723624498; x=1724229298;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hx6AIwlEbMHavC5DjEjakTrNbCVEjBb0SKVNkWMFXTc=;
+        b=j6IktMvRA45hviFyWD9sPur/l+oA/6BMKCHA8OIM8+3YMsD8MK+BG9Zw/21HoqF0oF
+         30YAA3eL3e0oP92EF7bUb6HHrufGvb5JlRKGyfYUb59g99Dt6wEi8m/A0ch47njjdUYv
+         2kayIYQuSvLq9IK0xo9xRFtIqQjnTIFjNfvuCnDrdQFrgSf3BS76LiYiAeD7NeM4/1UK
+         /PHqyY+TvFcpxPjbavorYzmeeAtz5wLTtM+nuKmrgQ/ZSlB5Gw+1l4jzkK0yIVPNTx+f
+         NuZH7AZ2hUTp9qVpT46eqIP5ffWYxhZO3Y5jyTAcOzWu2a3cnLAWLScE6JNojrJdRFs8
+         FqCQ==
+X-Gm-Message-State: AOJu0YyqjeHFMYwAtJTHMcTepqFN5Qj2R8nwI2Po8rXPvvGyyOKNQgXC
+	sBhEKC1GkuT0cqonOI0Idu0rjFErLoX93okUynAIbpekd34uwQycSBofuzoLfdfykMx57wrmwYp
+	K
+X-Google-Smtp-Source: AGHT+IFL70GY1qUxURIAZQ+mo6txlE+c+ln237y0PC4cC3hmxTtF9rJyDjIROcbYWReJ7g4d9xoUaQ==
+X-Received: by 2002:a05:6102:3593:b0:48f:89cc:dd2b with SMTP id ada2fe7eead31-4975992d5efmr2467012137.11.1723624498219;
+        Wed, 14 Aug 2024 01:34:58 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v2 0/5] Support EFI multiboot loading using PE binary
-Date: Wed, 14 Aug 2024 09:34:09 +0100
-Message-ID: <20240814083428.3012-1-frediano.ziglio@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 3/5] x86: Force proper gdt_boot_base setting
+Date: Wed, 14 Aug 2024 09:34:12 +0100
+Message-ID: <20240814083428.3012-4-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240814083428.3012-1-frediano.ziglio@cloud.com>
+References: <20240814083428.3012-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Testing this feature in preparation for UEFI CA memory mitigation
-requirements I found some issues causing the loading to fail and
-other minor issues.
-Details in series commit messages.
-This is adding an additional way to boot Xen, using GrUB2+EFI
-(xen.efi:__efi64_mb2_start).
+Instead of relocate the value at that position compute it
+entirely and write it.
+During EFI boots sym_offs(SYMBOL) are potentially relocated
+causing the values to be corrupted.
+For PVH and BIOS the change won't be necessary but keep the
+code consistent.
 
-Changes since v1:
-- Changed title, apparently this is a kind of new mode;
-- address lot of comments (see "Changes" in other messages).
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+---
+ xen/arch/x86/boot/head.S | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-Frediano Ziglio (5):
-  x86: Put trampoline in .init.data section
-  x86: Set xen_phys_start and trampoline_xen_phys_start earlier
-  x86: Force proper gdt_boot_base setting
-  x86: Compensate relocation in case of EFI
-  x86: Rollback relocation in case of EFI multiboot
-
- xen/arch/x86/boot/Makefile          |  2 +-
- xen/arch/x86/boot/efi-reloc-image.c | 40 ++++++++++++++
- xen/arch/x86/boot/efi-reloc-image.h | 85 +++++++++++++++++++++++++++++
- xen/arch/x86/boot/head.S            | 72 ++++++++++++++++++------
- xen/arch/x86/efi/efi-boot.h         | 64 ++--------------------
- 5 files changed, 187 insertions(+), 76 deletions(-)
- create mode 100644 xen/arch/x86/boot/efi-reloc-image.c
- create mode 100644 xen/arch/x86/boot/efi-reloc-image.h
-
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index af598a60bf..666e341bc5 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -132,8 +132,7 @@ multiboot2_header:
+ gdt_boot_descr:
+         .word   .Ltrampoline_gdt_end - trampoline_gdt - 1
+ gdt_boot_base:
+-        .long   sym_offs(trampoline_gdt)
+-        .long   0 /* Needed for 64-bit lgdt */
++        .quad   0 /* Needed for 64-bit lgdt */
+ 
+ vga_text_buffer:
+         .long   0xb8000
+@@ -373,15 +372,16 @@ __efi64_mb2_start:
+ x86_32_switch:
+         mov     %r15,%rdi
+ 
+-        /* Store Xen image load base address in place accessible for 32-bit code. */
+-        lea     __image_base__(%rip),%esi
+-
+         cli
+ 
+         /* Initialize GDTR. */
+-        add     %esi,gdt_boot_base(%rip)
++        lea     trampoline_gdt(%rip), %esi
++        mov     %esi, gdt_boot_base(%rip)
+         lgdt    gdt_boot_descr(%rip)
+ 
++        /* Store Xen image load base address in place accessible for 32-bit code. */
++        lea     __image_base__(%rip),%esi
++
+         /* Reload code selector. */
+         pushq   $BOOT_CS32
+         lea     cs32_switch(%rip),%edx
+@@ -439,7 +439,8 @@ __pvh_start:
+         movb    $-1, sym_esi(opt_console_xen)
+ 
+         /* Prepare gdt and segments */
+-        add     %esi, sym_esi(gdt_boot_base)
++        lea     sym_esi(trampoline_gdt), %ecx
++        mov     %ecx, sym_esi(gdt_boot_base)
+         lgdt    sym_esi(gdt_boot_descr)
+ 
+         mov     $BOOT_DS, %ecx
+@@ -543,7 +544,8 @@ trampoline_bios_setup:
+          *
+          * Initialize GDTR and basic data segments.
+          */
+-        add     %esi,sym_esi(gdt_boot_base)
++        lea     sym_esi(trampoline_gdt), %ecx
++        mov     %ecx, sym_esi(gdt_boot_base)
+         lgdt    sym_esi(gdt_boot_descr)
+ 
+         mov     $BOOT_DS,%ecx
 -- 
 2.45.2
 
