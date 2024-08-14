@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 796D7C52D7F
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2024 08:58:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.776965.1187167 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA69C3DA4A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2024 08:58:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.776972.1187176 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1se9pJ-0008Ed-1A; Wed, 14 Aug 2024 08:57:53 +0000
+	id 1se9pb-0000RO-BF; Wed, 14 Aug 2024 08:58:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 776965.1187167; Wed, 14 Aug 2024 08:57:52 +0000
+Received: by outflank-mailman (output) from mailman id 776972.1187176; Wed, 14 Aug 2024 08:58:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1se9pI-0008EW-Sc; Wed, 14 Aug 2024 08:57:52 +0000
-Received: by outflank-mailman (input) for mailman id 776965;
- Wed, 14 Aug 2024 08:57:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1se9pb-0000RH-8R; Wed, 14 Aug 2024 08:58:11 +0000
+Received: by outflank-mailman (input) for mailman id 776972;
+ Wed, 14 Aug 2024 08:58:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NhoJ=PN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1se9lW-0004KL-BY
- for xen-devel@lists.xenproject.org; Wed, 14 Aug 2024 08:53:58 +0000
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [2a00:1450:4864:20::52e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id be14fb1c-5a1a-11ef-a505-bb4a2ccca743;
- Wed, 14 Aug 2024 10:53:57 +0200 (CEST)
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5a1337cfbb5so8321049a12.3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Aug 2024 01:53:57 -0700 (PDT)
+ id 1se9kt-0003yE-OB
+ for xen-devel@lists.xenproject.org; Wed, 14 Aug 2024 08:53:19 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a684e2b0-5a1a-11ef-8776-851b0ebba9a2;
+ Wed, 14 Aug 2024 10:53:18 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a7a8553db90so756743566b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Aug 2024 01:53:18 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bd187f3306sm3672671a12.17.2024.08.14.01.53.56
+ a640c23a62f3a-a80f3f4981dsm149376566b.18.2024.08.14.01.53.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Aug 2024 01:53:56 -0700 (PDT)
+ Wed, 14 Aug 2024 01:53:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be14fb1c-5a1a-11ef-a505-bb4a2ccca743
+X-Inumbo-ID: a684e2b0-5a1a-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1723625637; x=1724230437; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1723625598; x=1724230398; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=VGSyTsew86/TrCcru/Rk7R/2beYcoXHkI1pXLpAyXsw=;
-        b=cFwoTxsJOf6h//TszOXsk553mQ7qFbylgD6q9a1XeuNTqO9221CN6Ua6/NuLoy5+Jo
-         1t6VWwXsThdhhRiYGq5l1MZLzhf9uQqqYVn21id9gJFxexNOFDLVbAw+JNwbD12dR7S9
-         9lIDDV5nSOS2Z1OmKBtieTCrD4aKgMc7vFVel2VcWoPxTL6yUpXF0E2Dln9D4dG8kNeL
-         SDZyqBtyRMXSXvF+3VtXYrduKQ+hM+6iGRZLrQ+NonNPqs/mr5qnUZy2ERCIBsdieay1
-         c1Nxd5nZfTM/2J1SLDsMeS9QF7816y+9RKN3wL9GWolQYz/ZBoE6ByfJP9A1RIXxO81l
-         rVBw==
+        bh=D2/zh/bchaIimR3ZyxsWSS2VxTLjlJtCdjnQQPFRqsU=;
+        b=H8sp6iE16iq4oO+XVI9PfmMfNjOTT5eluwBGWOsHUtS09QxEWQhuTPFWqp9+kkkop+
+         whTTInR+T6T6C6r2QliK7KqQHy34eopKF2gLt8dCVLfaeBvO49JRwqQvonn0fIR8Po3r
+         woOHYCQZqcWUYHrkNxkrfF5+UqjHH8LNvX9U8O0zkvUTGBiPwVLdIIMYkERAA4XJeerX
+         +6L6D4GiGtb46ezUvQXLK4eGmVtN7h4PWCNW9CT5xVasNgwn4AMoX8FeRwVi0OHitWlZ
+         xSBbShN/IFVonFbo4L5v6v5EpK47PVmddymCUHxGTQYRXjzxbNEfSWko6xSZwbKIUujP
+         UVcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723625637; x=1724230437;
+        d=1e100.net; s=20230601; t=1723625598; x=1724230398;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=VGSyTsew86/TrCcru/Rk7R/2beYcoXHkI1pXLpAyXsw=;
-        b=AUEMv/o88rWTLYvkt2zQ3EdGR4RBIhmhRYTK/Uf4pjAdNRx+nYI0fFWc1eMfsWaVNJ
-         xc5paLw4Hx/GlTsbmAbR4gi78IhLDSajnlmBoSE6wIgmZUvGvCutsLJwUQt662UulJxc
-         Dc8kkvxuE9IOMD8JD32lldym7SAwmyiVPXAhJwKZv2zPakP9KgJG8wbVtbxKq5BZ6Clu
-         9mWjWmFP641X03viIc9jkPGou9b0xQtTGMWLTZZ5Vuu7TKEzO/AsCbggzsW0gPcemigG
-         GZbWBwzLKVOxB1xa5PEUsWZJ2bUuvNh8j8a5crT6K4HPyaeVyJli4l1ec5RmyhM/DX6G
-         yahA==
-X-Gm-Message-State: AOJu0YyX0LsV4jyWUGdFfneuAlKClZDCaeWhK/UoruvkfEN0iOn1Ai60
-	KoA4VOK1e9urnJMWX92h4eJwBbftT8xrst6e0MWfC+wSnebav43bYoYkyz3FRgMXKbzEJB+ZGK4
+        bh=D2/zh/bchaIimR3ZyxsWSS2VxTLjlJtCdjnQQPFRqsU=;
+        b=RHjYUcVFwmixC9smjJR/5HB4jqzWCSGTY6BgYg+7n3Ked7fa2Zy49b5jnQeXyd05LT
+         q5M5SnDuPqRroAzGPencay22hPH4FoRhfbEYbQGh+0VzUXE0njVDcCDC5AopipzVqNvc
+         kgovv28E53JsK9i4t/hFhiQBkU6+HJ2BJ41XWaPW+TNjfH2KP12ZVjsGAORVCEkngp0S
+         x0V5KybXS4G2QYe9F7+I7wuJInPaZZmcsmZg87xh0lc/b3zvWJhzSptOTaw+UZPBEhh/
+         wI0/Jzs0KOe8LvLg/fIk/6R29fKLtJulVsRgmJLZTgvNLblMVdMDrkp3mp2r8XXMohza
+         xkMQ==
+X-Gm-Message-State: AOJu0YxzTwpkU7cbld4Wj3Vm/t7WCZyM7y3TVOnRjyYYQ5u6YM47Jhnt
+	2RLr6b32tnGrmiIF6yRv6l4TlC/gC5jWVE+N5deWrMITz6Bi2GzzrR2NLlar6is5pfwWTC9pvKY
 	=
-X-Google-Smtp-Source: AGHT+IE68HR9zPeYJqpC26k+G87WcAmTROyAjMQ85LwKkgJVPau3FH01EvgH8hL4JVtRtVOGkObRrQ==
-X-Received: by 2002:a05:6402:1e91:b0:5a3:a4d7:caf5 with SMTP id 4fb4d7f45d1cf-5bea1cb3857mr1555308a12.36.1723625637144;
-        Wed, 14 Aug 2024 01:53:57 -0700 (PDT)
-Message-ID: <1791dda8-694b-4ef9-b8f7-86f1eeca7719@suse.com>
-Date: Wed, 14 Aug 2024 10:53:55 +0200
+X-Google-Smtp-Source: AGHT+IFgKj7V+kkgDhundAx9tQO+8VFSUIZ1P2ZCmJTPRhypVFYeDCV/UpjyI6VC3XW0M+lR87vQgg==
+X-Received: by 2002:a17:907:e20f:b0:a7a:9144:e256 with SMTP id a640c23a62f3a-a8366c388bamr133984966b.6.1723625597464;
+        Wed, 14 Aug 2024 01:53:17 -0700 (PDT)
+Message-ID: <4480c5c4-9b97-4fee-b086-22fc1006b7ac@suse.com>
+Date: Wed, 14 Aug 2024 10:53:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 8/9] x86emul/test: engage AVX512VL via command line option
+Subject: [PATCH v2 6/9] x86emul/test: drop cpu_has_avx512vl
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
@@ -117,40 +117,82 @@ In-Reply-To: <bcfea345-57c1-43d9-82b3-240b685486cc@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Now that we have machinery in testcase.mk to set vector length dependent
-flags for AVX512 tests, let's avoid using a pragma to enable AVX512VL
-insns for the compiler. This way, correct settings are in place from the
-very beginning of compilation.
-
-No change to the generated test blobs, and hence no functional change.
+AVX512VL not being a standalone feature anyway, but always needing
+to be combined with some other AVX512*, replace uses of
+cpu_has_avx512vl by just the feature bit check.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+v2: Re-base over dropping of Xeon Phi support.
 
---- a/tools/tests/x86_emulator/simd.h
-+++ b/tools/tests/x86_emulator/simd.h
-@@ -215,10 +215,6 @@ DECL_OCTET(half);
- # define __builtin_ia32_shuf_i32x4_512_mask __builtin_ia32_shuf_i32x4_mask
- # define __builtin_ia32_shuf_i64x2_512_mask __builtin_ia32_shuf_i64x2_mask
+--- a/tools/tests/x86_emulator/evex-disp8.c
++++ b/tools/tests/x86_emulator/evex-disp8.c
+@@ -1000,7 +1000,8 @@ static void test_group(const struct test
+     {
+         for ( j = 0; j < nr_vl; ++j )
+         {
+-            if ( vl[0] == VL_512 && vl[j] != VL_512 && !cpu_has_avx512vl )
++            if ( vl[0] == VL_512 && vl[j] != VL_512 &&
++                 !cpu_policy.feat.avx512vl )
+                 continue;
  
--# if VEC_SIZE > ELEM_SIZE && (defined(VEC_MAX) ? VEC_MAX : VEC_SIZE) < 64
--#  pragma GCC target ( "avx512vl" )
--# endif
--
- # define REN(insn, old, new)                     \
-     asm ( ".macro v" #insn #old " o:vararg \n\t" \
-           "v" #insn #new " \\o             \n\t" \
---- a/tools/tests/x86_emulator/testcase.mk
-+++ b/tools/tests/x86_emulator/testcase.mk
-@@ -7,8 +7,8 @@ $(call cc-options-add,CFLAGS,CC,$(EMBEDD
- ifneq ($(filter -mavx512%,$($(TESTCASE)-cflags)),)
+             switch ( tests[i].esz )
+--- a/tools/tests/x86_emulator/test_x86_emulator.c
++++ b/tools/tests/x86_emulator/test_x86_emulator.c
+@@ -131,7 +131,7 @@ static bool simd_check_avx512f(void)
  
- cflags-vsz64 :=
--cflags-vsz32 := -mprefer-vector-width=256
--cflags-vsz16 := -mprefer-vector-width=128
-+cflags-vsz32 := -mavx512vl -mprefer-vector-width=256
-+cflags-vsz16 := -mavx512vl -mprefer-vector-width=128
- # Scalar tests don't set VEC_SIZE (and VEC_MAX is used by S/G ones only)
- cflags-vsz   := -mprefer-vector-width=128
+ static bool simd_check_avx512f_vl(void)
+ {
+-    return cpu_has_avx512f && cpu_has_avx512vl;
++    return cpu_has_avx512f && cpu_policy.feat.avx512vl;
+ }
+ #define simd_check_avx512vl_sg simd_check_avx512f_vl
  
+@@ -143,7 +143,7 @@ static bool simd_check_avx512dq(void)
+ 
+ static bool simd_check_avx512dq_vl(void)
+ {
+-    return cpu_has_avx512dq && cpu_has_avx512vl;
++    return cpu_has_avx512dq && cpu_policy.feat.avx512vl;
+ }
+ 
+ static bool simd_check_avx512bw(void)
+@@ -154,7 +154,7 @@ static bool simd_check_avx512bw(void)
+ 
+ static bool simd_check_avx512bw_vl(void)
+ {
+-    return cpu_has_avx512bw && cpu_has_avx512vl;
++    return cpu_has_avx512bw && cpu_policy.feat.avx512vl;
+ }
+ 
+ static bool simd_check_avx512vbmi(void)
+@@ -164,7 +164,7 @@ static bool simd_check_avx512vbmi(void)
+ 
+ static bool simd_check_avx512vbmi_vl(void)
+ {
+-    return cpu_has_avx512_vbmi && cpu_has_avx512vl;
++    return cpu_has_avx512_vbmi && cpu_policy.feat.avx512vl;
+ }
+ 
+ static bool simd_check_avx512vbmi2(void)
+@@ -260,7 +260,7 @@ static bool simd_check_avx512fp16(void)
+ 
+ static bool simd_check_avx512fp16_vl(void)
+ {
+-    return cpu_has_avx512_fp16 && cpu_has_avx512vl;
++    return cpu_has_avx512_fp16 && cpu_policy.feat.avx512vl;
+ }
+ 
+ static void simd_set_regs(struct cpu_user_regs *regs)
+--- a/tools/tests/x86_emulator/x86-emulate.h
++++ b/tools/tests/x86_emulator/x86-emulate.h
+@@ -159,7 +159,6 @@ void wrpkru(unsigned int val);
+ #define cpu_has_avx512cd  (cpu_policy.feat.avx512cd && xcr0_mask(0xe6))
+ #define cpu_has_sha        cpu_policy.feat.sha
+ #define cpu_has_avx512bw  (cpu_policy.feat.avx512bw && xcr0_mask(0xe6))
+-#define cpu_has_avx512vl  (cpu_policy.feat.avx512vl && xcr0_mask(0xe6))
+ #define cpu_has_avx512_vbmi (cpu_policy.feat.avx512_vbmi && xcr0_mask(0xe6))
+ #define cpu_has_avx512_vbmi2 (cpu_policy.feat.avx512_vbmi2 && xcr0_mask(0xe6))
+ #define cpu_has_gfni       cpu_policy.feat.gfni
 
 
