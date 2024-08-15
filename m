@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04B32C3DA7F
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Aug 2024 12:16:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.778039.1188096 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D200C3DA7F
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Aug 2024 13:16:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.778062.1188126 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1seZOy-0000La-Ev; Thu, 15 Aug 2024 12:16:24 +0000
+	id 1seaKt-0001dA-5G; Thu, 15 Aug 2024 13:16:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 778039.1188096; Thu, 15 Aug 2024 12:16:24 +0000
+Received: by outflank-mailman (output) from mailman id 778062.1188126; Thu, 15 Aug 2024 13:16:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1seZOy-0000LT-CD; Thu, 15 Aug 2024 12:16:24 +0000
-Received: by outflank-mailman (input) for mailman id 778039;
- Thu, 15 Aug 2024 12:16:23 +0000
+	id 1seaKt-0001cW-1I; Thu, 15 Aug 2024 13:16:15 +0000
+Received: by outflank-mailman (input) for mailman id 778062;
+ Thu, 15 Aug 2024 13:16:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=/2Vq=PO=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1seZOx-0000LN-1E
- for xen-devel@lists.xenproject.org; Thu, 15 Aug 2024 12:16:23 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=aZnf=PO=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1seaKq-0000wd-W5
+ for xen-devel@lists.xenproject.org; Thu, 15 Aug 2024 13:16:12 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2e3a8b3e-5b00-11ef-8776-851b0ebba9a2;
- Thu, 15 Aug 2024 14:16:20 +0200 (CEST)
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2f3b8eb3df5so5874591fa.1
- for <xen-devel@lists.xenproject.org>; Thu, 15 Aug 2024 05:16:20 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bebbe7f92dsm813454a12.60.2024.08.15.05.16.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Aug 2024 05:16:19 -0700 (PDT)
+ id 8a0060eb-5b08-11ef-8776-851b0ebba9a2;
+ Thu, 15 Aug 2024 15:16:10 +0200 (CEST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a7a81bd549eso88666866b.3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Aug 2024 06:16:10 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8383947151sm100868666b.161.2024.08.15.06.16.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 06:16:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,174 +47,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e3a8b3e-5b00-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 8a0060eb-5b08-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1723724180; x=1724328980; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=GsR8ZL78tB2dFaI1XI1FBjlIiJxvI9ZB1N762qE70eo=;
-        b=GjAUIXSbVMa07QiMcj7WdDsysuMV1LFjIwFkQpVpHCpQNIWEdGBdaFJG7AvApTB0aT
-         hQXUmxpoDybUog4bMazB8UKl9YPOhm/9Kt5K0Q7Ng9nhfE47rEf7Er50gF4uKB3u4GN0
-         97h43QPtfiLFTFuIWlHEk1jyicEjK2mpsjEBj5LO/rQHDLjvMuWH2/oqpAuACENT9MZ3
-         vY/i8rNVaYfepoONtVIzdH0JE8YGTh0agEYDwGlxgR9VVkyV95mphTjDNoFzJNlM7ic7
-         wwH5RbxW5fFXO8zpAJNJaVHRSd/klFyj84X0fzWcSyxiTNUfpSHYkPYThoYLGaujYUKS
-         auMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723724180; x=1724328980;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1723727769; x=1724332569; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GsR8ZL78tB2dFaI1XI1FBjlIiJxvI9ZB1N762qE70eo=;
-        b=MjK9dAfbYJPhy/Bdwz2bD587hGtdDNTvalq0sF1uS0JbOwtDzaITO+RF3PYrdwMnZy
-         QOowVbsBLLrErexE287FQtGQKpn5nwv80ApOfxLm5VfQPRGc65u9DXahKVngTT2BRGUn
-         a7mGYrsg3OZ5BpJO4CHu0wY2VE7t1WlAhaYAAyFw1ola7KsMWGppSBcwwh4g4bTDVerq
-         n1Md0HEAEwgtcrwIaD6YUFyHnFj70DcOxP5WIM3FjZ0IHADddlHhsXi8DkGi2cXHS5db
-         s+2SXf/MRmhMaUi9GZQ3rPy2KaUhpHprCGE70iN+ygZ/r/PaprTD9ETjB53jQdY+ci5J
-         i3hg==
-X-Forwarded-Encrypted: i=1; AJvYcCVpiCx+izANdfQmFAgpKqUFu+zKlhPKw0Hv2PGWrBBrN8by/Sa99dh6YMOS7lMYbBVd5CpabtNpOZuZBfrJae16i4T9MW46M/u/eMEDqx0=
-X-Gm-Message-State: AOJu0Yz5yF6wK4lNASED47Sun7WvhhYS/HJ4ZuoVAZ91bc1LZ1KDyJhV
-	FEL/Nvhe2FIxBckBGDA9Znsmgetp8q+awbVtnKKO8lezNUkvXXPkEWtrNYrNEA==
-X-Google-Smtp-Source: AGHT+IE4LsrnJ4MYvocKdfbqpxMTxdeZuuNcXyKeTA1PdPi0TcG+1ayUrLnHBwtznCYjbTbIm/UKjw==
-X-Received: by 2002:a05:651c:4ca:b0:2f3:b76c:25c4 with SMTP id 38308e7fff4ca-2f3b76c2731mr10676201fa.37.1723724179807;
-        Thu, 15 Aug 2024 05:16:19 -0700 (PDT)
-Message-ID: <2ded848e-f2a5-4005-b4c6-09014a92122c@suse.com>
-Date: Thu, 15 Aug 2024 14:16:17 +0200
+        bh=9tKJRp+XTy2g8P71m3miHWyYMM1xvQ876gmk/7YMzdE=;
+        b=kkHMg/wKYI7u+77Z9pyvXCQ7Ua1Wvy2sH7QI8MkFuH6GIxe7Pdeb+XEXNlwZ5HqCVw
+         4o2z28rep87dIJRiwYFuLfEFm7u9LK2quGxlUdsI02VV4xZjmbC7gU/DeNVgOn52SM/G
+         Z4LxKE22qHwsNGQ15K7qT6S1tybfSTbJG+WzY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1723727769; x=1724332569;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9tKJRp+XTy2g8P71m3miHWyYMM1xvQ876gmk/7YMzdE=;
+        b=mMsE2AWh8ehhvDJrvaDw30EaIIeyflL9Ylo1tFXxFTi7mgOLBTRZtXXecACjg50ur1
+         f6tt9jNYOpfu7M7skoA4RY9n0KvWdSnvkdevqf3KqVYvgSj2la3cgsc7mOk0DK88RBZL
+         WcKFUyffGEQ1W1fTIinYiTTqp0feFvuLGcWoViyLqZbq2L5ClSt0I/e7nJRGLEYEL+rg
+         acQUWpXd02gt9uDC0FA+VwbSk9MUmaXlAZ8fhZqRo8gIV32hMr0OUVge8YR9n3HlWKKT
+         KQgyENuOWqTbbLkVzSf5r0Af0plLSmJdQJvTbALsiiduU2WpECzYoN+CwupzS+XtnoPm
+         fX4w==
+X-Gm-Message-State: AOJu0Yx45pM54tB5Z7cU2VjQbG2ur1/DYWKPqx067gIB6dPL+gbf197J
+	L4LsGGsEf4n9mhV3/TUZ7LgzyIA1/SDHF0fyOoOO+8tui2mL0VCJoiLRoduE5hhCfHrLKMlRu28
+	r
+X-Google-Smtp-Source: AGHT+IFC2pxB3ToqW0cMxLgozW3zl6w8bhllIPKTxNCmtTNehROADP+qNKSEMriajnZOgj0y5Q1qEQ==
+X-Received: by 2002:a17:907:f1de:b0:a7a:b43e:86cf with SMTP id a640c23a62f3a-a8366c359cemr467716966b.27.1723727769460;
+        Thu, 15 Aug 2024 06:16:09 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2 2/3] x86/pv: Fix merging of new status bits into %dr6
+Date: Thu, 15 Aug 2024 14:15:59 +0100
+Message-Id: <20240815131600.4037415-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240815131600.4037415-1-andrew.cooper3@citrix.com>
+References: <20240815131600.4037415-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 6/7] xen/riscv: page table handling
-To: oleksii.kurochko@gmail.com
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-References: <cover.1723214540.git.oleksii.kurochko@gmail.com>
- <8362795280a48702bef6f01d41d148edcf299935.1723214540.git.oleksii.kurochko@gmail.com>
- <85a4e760-07af-42bd-ac27-12a4fa5172cc@suse.com>
- <1e83981cff0b6c47aa941e7ffee0ce658aefef22.camel@gmail.com>
- <d41f3027-14c8-4716-9444-d8bc109bb2b7@suse.com>
- <be47249638cbae5e057279acd9a3464c218fbac8.camel@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <be47249638cbae5e057279acd9a3464c218fbac8.camel@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 15.08.2024 13:21, oleksii.kurochko@gmail.com wrote:
-> On Thu, 2024-08-15 at 10:09 +0200, Jan Beulich wrote:
->> On 14.08.2024 18:50, oleksii.kurochko@gmail.com wrote:
->>> On Tue, 2024-08-13 at 12:31 +0200, Jan Beulich wrote:
->>>> On 09.08.2024 18:19, Oleksii Kurochko wrote:
->>>>> RISC-V detects superpages using `pte.x` and `pte.r`, as there
->>>>> is no specific bit in the PTE for this purpose. From the RISC-V
->>>>> spec:
->>>>> ```
->>>>>   ...
->>>>>   4. Otherwise, the PTE is valid. If pte.r = 1 or pte.x = 1, go
->>>>> to
->>>>> step 5.
->>>>>      Otherwise, this PTE is a pointer to the next level of the
->>>>> page
->>>>> table.
->>>>>      ... .
->>>>>   5. A leaf PTE has been found.
->>>>>      ...
->>>>>   ...
->>>>> ```
->>>>>
->>>>> The code doesn’t support super page shattering so 4KB pages are
->>>>> used as
->>>>> default.
->>>>
->>>> ... you have this. Yet still callers expecting re-mapping in the
->>>> (large)
->>>> range they map can request small-page mappings right away.
->>> I am not sure that I fully understand what do you mean by "expcting
->>> re-
->>> mapping".
->>
->> Right now you have callers pass PTE_BLOCK when they know that no
->> small
->> page re-mappings are going to occur for an area. What I'm suggesting
->> is
->> that you invert this logic: Have callers pass PTE_SMALL when there is
->> a possibility that re-mapping requests may be issued later. Then,
->> later, by simply grep-ing for PTE_SMALL you'll be able to easily find
->> all candidates that possibly can be relaxed when super-page
->> shattering
->> starts being supported. That's going to be easier than finding all
->> instances where PTE_BLOCK is _not_used.
-> So if I understand correctly. Actually nothing will change in algorithm
-> of pt_update() and only PTE_SMALL should be introduced instead of
-> PTE_BLOCK. And if I will know that something will be better to map as
-> PTE_SMALL to not face shattering in case of unmap (for example) I just
-> can map this memory as PTE_SMALL and that is it?
+All #DB exceptions result in an update of %dr6, but this isn't captured in
+Xen's handling, and is buggy everywhere.
 
-That is it.
+To begin resolving this issue, add a new pending_dbg field to x86_event
+(unioned with cr2 to avoid taking any extra space), and introduce
+pv_inject_debug_exn() helpers to replace the current callers using
+pv_inject_hw_exception().
 
->>>>> +    spin_unlock(&xen_pt_lock);
->>>>
->>>> Does this really need to come after fence and flush?
->>> I think yes, as page table should be updated only by 1 CPU at the
->>> same
->>> time. And before give ability to other CPU to update page table we
->>> have
->>> to finish a work on current CPU.
->>
->> Can you then explain to me, perhaps by way of an example, what will
->> go
->> wrong if the unlock is ahead of the flush? (I'm less certain about
->> the
->> fence, and that's also less expensive.)
-> pt_update() will be called for interleaved region, for example, by
-> different CPUs:
-> 
->                      pt_update():
-> CPU1:                                    CPU2:
->  ...                                spin_lock(&xen_pt_lock);
-> RISCV_FENCE(rw, rw);                 ....
-> 
-> /* After this function will be
->    executed the following thing
->    can happen ------------------>  start to update page table
-> */                                 entries which was partially      
-> spin_unlock(&xen_pt_lock);         created during CPU1 but CPU2       
-> ....                               doesn't know about them yet        
-> ....                               because flush_tlb() ( sfence.vma ) 
-> ....                               wasn't done      
-> ....                                                                  
-> flush_tlb_range_va();
+Push the adjustment of v->arch.dr6 into pv_inject_event(), and use the new
+x86_merge_dr6() rather than the current incorrect logic.
 
-Not exactly: CPU2 knows about them as far as the memory used / modified
-goes, and that's all that matters for further page table modifications.
-CPU2 only doesn't know about the new page table entries yet when it comes
-to using them for a translation (by the hardware page walker). Yet this
-aspect is irrelevant here, if I'm not mistaken.
+A key property is that pending_dbg is taken with positive polarity to deal
+with RTM/BLD sensibly.  Most callers pass in a constant, but callers passing
+in a hardware %dr6 value need to XOR the value with X86_DR6_DEFAULT to flip to
+positive polarity.
 
-Jan
+This fixes the behaviour of the breakpoint status bits; specifically that any
+left pending are discarded when a new #DB is raised.  In principle it would
+fix RTM/BLD too, except PV guests can't turn these capabilities on to start
+with.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+v2:
+ * Rebase (~6y worth)
+ * Split PV changes out of joint HVM patch.
+---
+ xen/arch/x86/include/asm/domain.h      | 12 ++++++++++++
+ xen/arch/x86/pv/emul-priv-op.c         |  5 +----
+ xen/arch/x86/pv/emulate.c              |  6 ++----
+ xen/arch/x86/pv/ro-page-fault.c        |  2 +-
+ xen/arch/x86/pv/traps.c                | 16 ++++++++++++----
+ xen/arch/x86/traps.c                   |  2 +-
+ xen/arch/x86/x86_emulate/x86_emulate.h |  5 ++++-
+ 7 files changed, 33 insertions(+), 15 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index bca3258d69ac..90c959996914 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -731,6 +731,18 @@ static inline void pv_inject_hw_exception(unsigned int vector, int errcode)
+     pv_inject_event(&event);
+ }
+ 
++static inline void pv_inject_debug_exn(unsigned int pending_dbg)
++{
++    struct x86_event event = {
++        .vector      = X86_EXC_DB,
++        .type        = X86_EVENTTYPE_HW_EXCEPTION,
++        .error_code  = X86_EVENT_NO_EC,
++        .pending_dbg = pending_dbg,
++    };
++
++    pv_inject_event(&event);
++}
++
+ static inline void pv_inject_page_fault(int errcode, unsigned long cr2)
+ {
+     const struct x86_event event = {
+diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
+index aa11ecadaac0..3be02d85f2fe 100644
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -1366,10 +1366,7 @@ int pv_emulate_privileged_op(struct cpu_user_regs *regs)
+             ctxt.bpmatch |= DR_STEP;
+ 
+         if ( ctxt.bpmatch )
+-        {
+-            curr->arch.dr6 |= ctxt.bpmatch | DR_STATUS_RESERVED_ONE;
+-            pv_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
+-        }
++            pv_inject_debug_exn(ctxt.bpmatch);
+ 
+         /* fall through */
+     case X86EMUL_RETRY:
+diff --git a/xen/arch/x86/pv/emulate.c b/xen/arch/x86/pv/emulate.c
+index e7a1c0a2cc4f..aa8af96c30f3 100644
+--- a/xen/arch/x86/pv/emulate.c
++++ b/xen/arch/x86/pv/emulate.c
+@@ -71,11 +71,9 @@ void pv_emul_instruction_done(struct cpu_user_regs *regs, unsigned long rip)
+ {
+     regs->rip = rip;
+     regs->eflags &= ~X86_EFLAGS_RF;
++
+     if ( regs->eflags & X86_EFLAGS_TF )
+-    {
+-        current->arch.dr6 |= DR_STEP | DR_STATUS_RESERVED_ONE;
+-        pv_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
+-    }
++        pv_inject_debug_exn(X86_DR6_BS);
+ }
+ 
+ uint64_t pv_get_reg(struct vcpu *v, unsigned int reg)
+diff --git a/xen/arch/x86/pv/ro-page-fault.c b/xen/arch/x86/pv/ro-page-fault.c
+index cad28ef928ad..73c9f7578a87 100644
+--- a/xen/arch/x86/pv/ro-page-fault.c
++++ b/xen/arch/x86/pv/ro-page-fault.c
+@@ -390,7 +390,7 @@ int pv_ro_page_fault(unsigned long addr, struct cpu_user_regs *regs)
+         /* Fallthrough */
+     case X86EMUL_OKAY:
+         if ( ctxt.retire.singlestep )
+-            pv_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
++            pv_inject_debug_exn(X86_DR6_BS);
+ 
+         /* Fallthrough */
+     case X86EMUL_RETRY:
+diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
+index 83e84e276233..5a7341abf068 100644
+--- a/xen/arch/x86/pv/traps.c
++++ b/xen/arch/x86/pv/traps.c
+@@ -12,6 +12,7 @@
+ #include <xen/lib.h>
+ #include <xen/softirq.h>
+ 
++#include <asm/debugreg.h>
+ #include <asm/pv/trace.h>
+ #include <asm/shared.h>
+ #include <asm/traps.h>
+@@ -50,9 +51,9 @@ void pv_inject_event(const struct x86_event *event)
+     tb->cs    = ti->cs;
+     tb->eip   = ti->address;
+ 
+-    if ( event->type == X86_EVENTTYPE_HW_EXCEPTION &&
+-         vector == X86_EXC_PF )
++    switch ( vector | -(event->type == X86_EVENTTYPE_SW_INTERRUPT) )
+     {
++    case X86_EXC_PF:
+         curr->arch.pv.ctrlreg[2] = event->cr2;
+         arch_set_cr2(curr, event->cr2);
+ 
+@@ -62,9 +63,16 @@ void pv_inject_event(const struct x86_event *event)
+             error_code |= PFEC_user_mode;
+ 
+         trace_pv_page_fault(event->cr2, error_code);
+-    }
+-    else
++        break;
++
++    case X86_EXC_DB:
++        curr->arch.dr6 = x86_merge_dr6(curr->domain->arch.cpu_policy,
++                                       curr->arch.dr6, event->pending_dbg);
++        fallthrough;
++    default:
+         trace_pv_trap(vector, regs->rip, use_error_code, error_code);
++        break;
++    }
+ 
+     if ( use_error_code )
+     {
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 521ed4dd816d..06e4e3e9af90 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -2030,7 +2030,7 @@ void asmlinkage do_debug(struct cpu_user_regs *regs)
+         return;
+     }
+ 
+-    pv_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
++    pv_inject_debug_exn(0 /* N/A, already merged */);
+ }
+ 
+ void asmlinkage do_entry_CP(struct cpu_user_regs *regs)
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
+index d92be69d84d9..e8a0e572284c 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -78,7 +78,10 @@ struct x86_event {
+     uint8_t       type;         /* X86_EVENTTYPE_* */
+     uint8_t       insn_len;     /* Instruction length */
+     int32_t       error_code;   /* X86_EVENT_NO_EC if n/a */
+-    unsigned long cr2;          /* Only for X86_EXC_PF h/w exception */
++    union {
++        unsigned long cr2;         /* #PF */
++        unsigned long pending_dbg; /* #DB (new DR6 bits, positive polarity) */
++    };
+ };
+ 
+ /*
+-- 
+2.39.2
+
 
