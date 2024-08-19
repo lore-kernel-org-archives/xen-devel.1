@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3070C5320E
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Aug 2024 14:17:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.779762.1189444 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7089DC3DA4A
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Aug 2024 14:30:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.779773.1189454 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sg3Bq-0003M1-Oj; Mon, 19 Aug 2024 14:16:58 +0000
+	id 1sg3Od-0006YW-RK; Mon, 19 Aug 2024 14:30:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 779762.1189444; Mon, 19 Aug 2024 14:16:58 +0000
+Received: by outflank-mailman (output) from mailman id 779773.1189454; Mon, 19 Aug 2024 14:30:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sg3Bq-0003Lu-L4; Mon, 19 Aug 2024 14:16:58 +0000
-Received: by outflank-mailman (input) for mailman id 779762;
- Mon, 19 Aug 2024 14:16:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sg3Od-0006YP-OV; Mon, 19 Aug 2024 14:30:11 +0000
+Received: by outflank-mailman (input) for mailman id 779773;
+ Mon, 19 Aug 2024 14:30:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lvcB=PS=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1sg3Bp-0003Ln-0n
- for xen-devel@lists.xenproject.org; Mon, 19 Aug 2024 14:16:57 +0000
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [2607:f8b0:4864:20::331])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b009c1ae-5e35-11ef-a506-bb4a2ccca743;
- Mon, 19 Aug 2024 16:16:56 +0200 (CEST)
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7092ea69218so2808259a34.1
- for <xen-devel@lists.xenproject.org>; Mon, 19 Aug 2024 07:16:56 -0700 (PDT)
+ id 1sg3Ob-0006YJ-R6
+ for xen-devel@lists.xenproject.org; Mon, 19 Aug 2024 14:30:09 +0000
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [2607:f8b0:4864:20::82d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 882bb2f4-5e37-11ef-8776-851b0ebba9a2;
+ Mon, 19 Aug 2024 16:30:07 +0200 (CEST)
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-44feaa08040so24128291cf.2
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Aug 2024 07:30:07 -0700 (PDT)
+Received: from fziglio-xenia-fedora.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4536a07667fsm39827261cf.93.2024.08.19.07.30.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Aug 2024 07:30:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,111 +47,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b009c1ae-5e35-11ef-a506-bb4a2ccca743
+X-Inumbo-ID: 882bb2f4-5e37-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1724077015; x=1724681815; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=m/pApi+8umoTH5J9AzCFYX9iYJCXMacYCdoA/1DBtPU=;
-        b=fJvCsJcx03Of2vNDh9msF8bl/GeKek0GG45b5Zw0FOf8WPwxto1NzATNLDYgvE9RbW
-         K3jdBVNC/+IH8AcApLGUdTRFBfZikyuhHIV8NiopmK3F48yP3UBM0mDCJgNHFUbjDF9t
-         5d2ouZVNDYZYxgsFvwgGsT30+3ZHkDGfOnxWk=
+        d=cloud.com; s=cloud; t=1724077806; x=1724682606; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WvhEFpFEZitUDnn8XmXXXarBrCnZ17sXZuHR7Tqwj2w=;
+        b=hY24oA/Dc9CXESrV+A+6sqG6Uqc4Fm79h64fXpv2x/sFXVVrrc8ODsy9HvRS2bMiCu
+         f/YjVCIiOoU+/UPjgvjBAr0lSa8bQX4I0csOHloBMU68SsZIXir7c9syoaAC3+TdQHXj
+         NR/+FKjzaFVslaV+YuSdLmFbyRaq/fUOacKHw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724077015; x=1724681815;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=m/pApi+8umoTH5J9AzCFYX9iYJCXMacYCdoA/1DBtPU=;
-        b=VqdZ1VuNkBqQIMvuboWHGJ3m/8WXuhUT6Pzyi4KCwcRj7aHn0UlwsK3VnbeDchbeQr
-         /tMcmckGd3T1b6Xu8TMo6/yMjhbWi8EPiBNUoiAtbiB8oCEY2CQTTNtURNYboDah+4wd
-         CRdYQ0f1tKutk5BJxucwSD9nskxGFEs8xUk8Jt9V/PysUEFe96H9b4kF4zN5pr3/Hy9I
-         ylp9wmqhJ75f+3GJTaqlZfEuQqak7MSSliFHoWl1zOVuZ/mVOQJ4pLOw+bRQaMtXqgm0
-         SsC9wfLR8makrzcKrOwKXdBXxjxRb1CA+z9MKP74NMaIz1TMygJq1kIQFrYV3zQOzrlZ
-         0x3w==
-X-Forwarded-Encrypted: i=1; AJvYcCUx0Zi2F2hs3xvjF35KFNnjWtGQBzmy/+CC02Hzh5ZtDICKP/TdUc/31FwgQ2gPv4p68LZ8P7M3EpCQ77GTzTd/LXVR/GJg1ffb1oCxBcs=
-X-Gm-Message-State: AOJu0YzYFRN7bUR7lTieBWiZpmURSP1cD4aRMAm+BjwioPYCLoEn9Lub
-	u5mM0LMVEGP/B9h2BlFoztkbKrAJ7TEC5gKrm6lS7TJqnkwVyzmuuepHb8QxPNYJjZplKFMt33l
-	Q5Nn/XXTTRL8RAKLNX4xxgppDqS0VKc1URFA8CQ==
-X-Google-Smtp-Source: AGHT+IGdB4/gDPvFnGD7YfeGp2XV5S4ND3UDqIrkFNMKGb7VAAgIHG/dkgfRMLeO1wHU2JBEdlHSSEHq3J7ZL0Ynu3M=
-X-Received: by 2002:a05:6870:9619:b0:22a:57da:6fec with SMTP id
- 586e51a60fabf-26fff646d06mr6458269fac.16.1724077014595; Mon, 19 Aug 2024
- 07:16:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240807134819.8987-1-alejandro.vallejo@cloud.com>
- <20240807134819.8987-2-alejandro.vallejo@cloud.com> <ad72cc97-b9dd-4e7e-93f6-333805e40785@suse.com>
- <CACHz=Zh7wK58mbB762fnevHEKW9qhp-NRJ6buNe1b-qLxP0qPg@mail.gmail.com> <b9b40658-ff13-4240-98a2-4811411e31b6@suse.com>
-In-Reply-To: <b9b40658-ff13-4240-98a2-4811411e31b6@suse.com>
+        d=1e100.net; s=20230601; t=1724077806; x=1724682606;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WvhEFpFEZitUDnn8XmXXXarBrCnZ17sXZuHR7Tqwj2w=;
+        b=OXGiYGoC4USOhAQRSLZuXG2hEhilguTw9T3gQET5N8bdA4vAHjlJGXs4RG85iTNcSd
+         /MwUE9a7xXYQTen8J623X8fHpxYNX1y56RlcU4sJkACEqZTXrOkkNij1SNkLg2mQtok+
+         6Ea1Gsd3JDoPsl4j5Fn9EuYFYlsUePrE7XO62fmDINWRuCFLUL1E7bJBs4wymyU7jtG7
+         m0w5BJzFK3uqACM68JitU5eRKUUe3h2s1HeqGyo2mxlhz8c41DBhkpa56yY2qNNOj9sH
+         3KKBFofCxJYKk1pQHJer0p+RAH3mT1lhDezQnOmkmrrFr6lSsOs3yaIRS+U5VOVPLbjR
+         yCfg==
+X-Gm-Message-State: AOJu0Yw/Xtcv6i+Abi/cZxmMIgRK/KxxjcoA6O6ypJhKX9cjbJxL1dnS
+	KMJ5cbXMyk6N3M2zww+Hl1MZiSvJ80W76PTKgJYqzZ1gYExkZxQ+pTLJCd9c/YQfFO9AnPZWN0C
+	0
+X-Google-Smtp-Source: AGHT+IFb90nhZGmi5xzv/yIh5X7R3ga9l7E7Jf+G4mNOa1gORiXdczsJLB8P61B18OxbDjj3zKNzvw==
+X-Received: by 2002:ac8:5497:0:b0:453:74cd:a919 with SMTP id d75a77b69052e-45374cdaa8emr92118361cf.1.1724077806246;
+        Mon, 19 Aug 2024 07:30:06 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
-Date: Mon, 19 Aug 2024 15:16:43 +0100
-Message-ID: <CACHz=Zj8h-TeDa2Ey8EKKEOpXJqx9MnL+AGpdTBY1B8PZ0==mA@mail.gmail.com>
-Subject: Re: [PATCH 1/5] x86: Put trampoline in .init.data section
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: xen-devel@lists.xenproject.org
+Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v4] Avoid crash calling PrintErrMesg from efi_multiboot2
+Date: Mon, 19 Aug 2024 15:29:52 +0100
+Message-ID: <20240819142953.415817-1-frediano.ziglio@cloud.com>
+X-Mailer: git-send-email 2.46.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 8, 2024 at 9:54=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wrot=
-e:
->
-> On 08.08.2024 10:00, Frediano Ziglio wrote:
-> > On Thu, Aug 8, 2024 at 8:34=E2=80=AFAM Jan Beulich <jbeulich@suse.com> =
-wrote:
-> >>
-> >> On 07.08.2024 15:48, Alejandro Vallejo wrote:
-> >>> This change allows to put the trampoline in a separate, not executabl=
-e
-> >>> section. The trampoline contains a mix of code and data (data which
-> >>> is modified from C code during early start so must be writable).
-> >>> This is in preparation for W^X patch in order to satisfy UEFI CA
-> >>> memory mitigation requirements.
-> >>
-> >> Which, aiui, has the downside of disassembly of the section no longer
-> >> happening by default, when using objdump or similar tools, which go fr=
-om
-> >> section attributes. Why is it being in .init.text (and hence RX) not
-> >> appropriate? It should - in principle at least - be possible to avoid
-> >> all in-place writing to it, but instead only ever write to its relocat=
-ed
-> >> copy. Quite a bit more code churn of course.
-> >>
-> >> I wonder if we shouldn't put the trampoline in its own section, RWX in
-> >> the object file, and switched to whatever appropriate in the binary
-> >> (which really may be RX, not RW).
-> >
-> > We cannot have RWX to satisfy UEFI CA memory mitigation, that's why I
-> > had to move it, code sections should not be writeable. We can mark
-> > either RX or RW but we use the data very early so we are not able to
-> > change the permissions (we can try with all complications that this
-> > could bring like how to report an error at so early stages).
->
-> The early writing could be done away with, as indicated. There's not
-> really any strict requirement to write to the trampoline region within
-> the Xen image. All updates to it could in principle be done after it
-> was copied into low memory. Then (and of course only then) could it be
-> part of an RX section in the image, maybe .init.text, maybe a separate
-> .trampoline section.
->
-> Jan
+Although code is compiled with -fpic option data is not position
+independent. This causes data pointer to become invalid if
+code is not relocated properly which is what happens for
+efi_multiboot2 which is called by multiboot entry code.
 
-Hi Jan,
-   how strong are you on this? Is this "objdump" thing such a big
-issue? The code contains a lot of 16 bit code which would require
-additional options anyway. Won't be an assembly listing output more
-helpful instead?
-I tried to change the code to change only the final copy of the
-trampoline but it looks like lot of code assumes it can change the
-source of it (that is requiring it to be in a writeable section). For
-instance EFI change settings directly and then allocate space for the
-copy later. The allocation could be moved but there's a fallback on
-code that assumes that early allocation can fail.
-The trampoline relocation is done with PC relative addressing which is
-helpful if you are changing the source directly, not the copy.
-Could I ouput the trampoline in a code section ("ax" instead of "aw")
-and then later move it into .init.data section assuring .init.data is
-writeable but not executable?
+Code tested adding
+   PrintErrMesg(L"Test message", EFI_BUFFER_TOO_SMALL);
+in efi_multiboot2 before calling efi_arch_edd (this function
+can potentially call PrintErrMesg).
 
-Frediano
+Before the patch (XenServer installation on Qemu, xen replaced
+with vanilla xen.gz):
+  Booting `XenServer (Serial)'Booting `XenServer (Serial)'
+  Test message: !!!! X64 Exception Type - 0E(#PF - Page-Fault)  CPU Apic ID - 00000000 !!!!
+  ExceptionData - 0000000000000000  I:0 R:0 U:0 W:0 P:0 PK:0 SS:0 SGX:0
+  RIP  - 000000007DC29E46, CS  - 0000000000000038, RFLAGS - 0000000000210246
+  RAX  - 0000000000000000, RCX - 0000000000000050, RDX - 0000000000000000
+  RBX  - 000000007DAB4558, RSP - 000000007EFA1200, RBP - 0000000000000000
+  RSI  - FFFF82D040467A88, RDI - 0000000000000000
+  R8   - 000000007EFA1238, R9  - 000000007EFA1230, R10 - 0000000000000000
+  R11  - 000000007CF42665, R12 - FFFF82D040467A88, R13 - 000000007EFA1228
+  R14  - 000000007EFA1225, R15 - 000000007DAB45A8
+  DS   - 0000000000000030, ES  - 0000000000000030, FS  - 0000000000000030
+  GS   - 0000000000000030, SS  - 0000000000000030
+  CR0  - 0000000080010033, CR2 - FFFF82D040467A88, CR3 - 000000007EC01000
+  CR4  - 0000000000000668, CR8 - 0000000000000000
+  DR0  - 0000000000000000, DR1 - 0000000000000000, DR2 - 0000000000000000
+  DR3  - 0000000000000000, DR6 - 00000000FFFF0FF0, DR7 - 0000000000000400
+  GDTR - 000000007E9E2000 0000000000000047, LDTR - 0000000000000000
+  IDTR - 000000007E4E5018 0000000000000FFF,   TR - 0000000000000000
+  FXSAVE_STATE - 000000007EFA0E60
+  !!!! Find image based on IP(0x7DC29E46) (No PDB)  (ImageBase=000000007DC28000, EntryPoint=000000007DC2B917) !!!!
+
+After the patch:
+  Booting `XenServer (Serial)'Booting `XenServer (Serial)'
+  Test message: Buffer too small
+  BdsDxe: loading Boot0000 "UiApp" from Fv(7CB8BDC9-F8EB-4F34-AAEA-3EE4AF6516A1)/FvFile(462CAA21-7614-4503-836E-8AB6F4662331)
+  BdsDxe: starting Boot0000 "UiApp" from Fv(7CB8BDC9-F8EB-4F34-AAEA-3EE4AF6516A1)/FvFile(462CAA21-7614-4503-836E-8AB6F4662331)
+
+Fixes: 9180f5365524 ("x86: add multiboot2 protocol support for EFI platforms")
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+---
+ xen/common/efi/boot.c | 46 ++++++++++++++++++++++++++++++-------------
+ 1 file changed, 32 insertions(+), 14 deletions(-)
+---
+Changes since v1:
+- added "Fixes:" tag;
+- fixed cast style change.
+
+Changes since v2:
+- wrap long line.
+
+Changes since v3:
+- fixed "Fixes:" tag.
+
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index efbec00af9..fdbe75005c 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -287,19 +287,36 @@ static bool __init match_guid(const EFI_GUID *guid1, const EFI_GUID *guid2)
+ /* generic routine for printing error messages */
+ static void __init PrintErrMesg(const CHAR16 *mesg, EFI_STATUS ErrCode)
+ {
+-    static const CHAR16* const ErrCodeToStr[] __initconstrel = {
+-        [~EFI_ERROR_MASK & EFI_NOT_FOUND]           = L"Not found",
+-        [~EFI_ERROR_MASK & EFI_NO_MEDIA]            = L"The device has no media",
+-        [~EFI_ERROR_MASK & EFI_MEDIA_CHANGED]       = L"Media changed",
+-        [~EFI_ERROR_MASK & EFI_DEVICE_ERROR]        = L"Device error",
+-        [~EFI_ERROR_MASK & EFI_VOLUME_CORRUPTED]    = L"Volume corrupted",
+-        [~EFI_ERROR_MASK & EFI_ACCESS_DENIED]       = L"Access denied",
+-        [~EFI_ERROR_MASK & EFI_OUT_OF_RESOURCES]    = L"Out of resources",
+-        [~EFI_ERROR_MASK & EFI_VOLUME_FULL]         = L"Volume is full",
+-        [~EFI_ERROR_MASK & EFI_SECURITY_VIOLATION]  = L"Security violation",
+-        [~EFI_ERROR_MASK & EFI_CRC_ERROR]           = L"CRC error",
+-        [~EFI_ERROR_MASK & EFI_COMPROMISED_DATA]    = L"Compromised data",
+-        [~EFI_ERROR_MASK & EFI_BUFFER_TOO_SMALL]    = L"Buffer too small",
++#define ERROR_MESSAGE_LIST \
++    ERROR_MESSAGE(EFI_NOT_FOUND, "Not found") \
++    ERROR_MESSAGE(EFI_NO_MEDIA, "The device has no media") \
++    ERROR_MESSAGE(EFI_MEDIA_CHANGED, "Media changed") \
++    ERROR_MESSAGE(EFI_DEVICE_ERROR, "Device error") \
++    ERROR_MESSAGE(EFI_VOLUME_CORRUPTED, "Volume corrupted") \
++    ERROR_MESSAGE(EFI_ACCESS_DENIED, "Access denied") \
++    ERROR_MESSAGE(EFI_OUT_OF_RESOURCES, "Out of resources") \
++    ERROR_MESSAGE(EFI_VOLUME_FULL, "Volume is full") \
++    ERROR_MESSAGE(EFI_SECURITY_VIOLATION, "Security violation") \
++    ERROR_MESSAGE(EFI_CRC_ERROR, "CRC error") \
++    ERROR_MESSAGE(EFI_COMPROMISED_DATA, "Compromised data") \
++    ERROR_MESSAGE(EFI_BUFFER_TOO_SMALL, "Buffer too small")
++
++    static const struct ErrorStrings {
++        CHAR16 start;
++#undef ERROR_MESSAGE
++#define ERROR_MESSAGE(code, str) CHAR16 msg_ ## code[sizeof(str)];
++        ERROR_MESSAGE_LIST
++    } ErrorStrings __initconst = {
++        0
++#undef ERROR_MESSAGE
++#define ERROR_MESSAGE(code, str) , L ## str
++        ERROR_MESSAGE_LIST
++    };
++    static const uint16_t ErrCodeToStr[] __initconst = {
++#undef ERROR_MESSAGE
++#define ERROR_MESSAGE(code, str) \
++        [~EFI_ERROR_MASK & code] = offsetof(struct ErrorStrings, msg_ ## code),
++        ERROR_MESSAGE_LIST
+     };
+     EFI_STATUS ErrIdx = ErrCode & ~EFI_ERROR_MASK;
+ 
+@@ -308,7 +325,8 @@ static void __init PrintErrMesg(const CHAR16 *mesg, EFI_STATUS ErrCode)
+     PrintErr(L": ");
+ 
+     if( (ErrIdx < ARRAY_SIZE(ErrCodeToStr)) && ErrCodeToStr[ErrIdx] )
+-        mesg = ErrCodeToStr[ErrIdx];
++        mesg = (const CHAR16 *)((const void *)&ErrorStrings +
++                                ErrCodeToStr[ErrIdx]);
+     else
+     {
+         PrintErr(L"ErrCode: ");
+-- 
+2.46.0
+
 
