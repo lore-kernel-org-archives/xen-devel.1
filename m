@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A9ABC5472E
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2024 14:30:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.780532.1190192 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058B5C531DF
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2024 14:30:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.780536.1190232 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sgPs2-0001Y0-0l; Tue, 20 Aug 2024 14:30:02 +0000
+	id 1sgPsB-0003gu-MW; Tue, 20 Aug 2024 14:30:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 780532.1190192; Tue, 20 Aug 2024 14:30:01 +0000
+Received: by outflank-mailman (output) from mailman id 780536.1190232; Tue, 20 Aug 2024 14:30:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sgPs1-0001Xr-TV; Tue, 20 Aug 2024 14:30:01 +0000
-Received: by outflank-mailman (input) for mailman id 780532;
- Tue, 20 Aug 2024 14:30:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sgPsB-0003gc-GL; Tue, 20 Aug 2024 14:30:11 +0000
+Received: by outflank-mailman (input) for mailman id 780536;
+ Tue, 20 Aug 2024 14:30:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=prYO=PT=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1sgPs0-0000aG-SY
- for xen-devel@lists.xenproject.org; Tue, 20 Aug 2024 14:30:00 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id adb5a1ec-5f00-11ef-8776-851b0ebba9a2;
- Tue, 20 Aug 2024 16:29:59 +0200 (CEST)
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5333b2fbedaso2793478e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 20 Aug 2024 07:29:59 -0700 (PDT)
+ id 1sgPs9-0000m9-Ay
+ for xen-devel@lists.xenproject.org; Tue, 20 Aug 2024 14:30:09 +0000
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [2a00:1450:4864:20::22a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b3806914-5f00-11ef-a507-bb4a2ccca743;
+ Tue, 20 Aug 2024 16:30:08 +0200 (CEST)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2ef2d96164aso64441481fa.3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Aug 2024 07:30:08 -0700 (PDT)
 Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5330d41e1a0sm1782218e87.196.2024.08.20.07.29.57
+ 38308e7fff4ca-2f3b7729ca3sm17564031fa.124.2024.08.20.07.30.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Aug 2024 07:29:57 -0700 (PDT)
+ Tue, 20 Aug 2024 07:30:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,37 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: adb5a1ec-5f00-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: b3806914-5f00-11ef-a507-bb4a2ccca743
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724164199; x=1724768999; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1724164208; x=1724769008; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=j3FilNtR3ylHjSgCwXgc1/4kLFqGR/asrW9olruIp6U=;
-        b=OSJ5Q5IR63wVFpGW3Qi0fgH573k29Nk5TPTriToFD0Yje2sMPNREql/e3dLt4dYJXn
-         YKvZJKyGjudUEgiNzWg+USU07QfvwcQ2xRcXlxzoufElt6678fUPEZ78vCkMvbkAkNrs
-         MWim7cRFIHoAGMezoz398ofWx7Mw4JSWsWOhvyvsC5Tp8DIbQtVe4aNJPo8ZYhV+okwQ
-         4IpZ8rcOlxOePgi71hJao6TJMDf8n2yqCjOOd6x0zqAUgZVKE+Z2Lb5sJqKmM8TFwKp9
-         4OWVjT/FQM2wyKDPlNOvcwbugNqM4rY3G9/rosbUg1LMfoNa/4hWds3xhCiyqnAD/W0C
-         IAMw==
+        bh=nym7Vpc1+HcpD0fJwqv749eMWZaaEovUQaBKn9/MOQM=;
+        b=YYTK3sEbVSmHEhPrn2VXA2RyVEV88RXdnwDULLdptgIgdGnf7GWP3FGDp/lMKZQkhC
+         O8tQySTLUxofq1N3msTcTjjXW7nMz2vSCYycygX7ru+BBV+etBHY9PnAJGkB8XvcCqdf
+         p87izn6np1P3qOK/+yCz7Za71QPPxpLjuhHpBLe77F72qdPyX7hvkV+9qgGDdsuRwk0o
+         suSiDJeLgIPJpDta7it6Xbdyqszc4Ix5GLunFkiJUhofKEt0OW5I1XSxvH8jHwRPbbn3
+         E96KobmOV9tZ8z8i/D+WaLP8aREJda79zn4I6D65mPQZ8RJB7lRGP9PlFK8U06d+mlAw
+         Sc7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724164199; x=1724768999;
+        d=1e100.net; s=20230601; t=1724164208; x=1724769008;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=j3FilNtR3ylHjSgCwXgc1/4kLFqGR/asrW9olruIp6U=;
-        b=gqydiQ8eVJqm6AKTBAiE91gsXiaAheroMz6h+HL0raiI6pftHqjXqqDnJdKFwbEqfT
-         qVT2UIuQ3jEN1fUhtiFXpJ93rnK0ki5+RXC7Yt6RmUMF3DaK0lLqlw9IHi2VzYSkNKf7
-         8L5RuGRqrVlGOV83y9OnThTTJqNkf4RsWTmkrI9VwQCIXmTaH3dXpbdT5J8G3SIs293R
-         9lE5jPDUNSKAOzb+szlQdzsqkJfhCeTcM5kDxXfitlV0dTiQxrSsnsYi/g4wo9ta7YdT
-         +xsv7x2aF9UvfjRmuGyVRHGprX4J/TqUyLkCACNG2OF8Da4jKSqUoBsJq60bhrwhpX2G
-         Qiag==
-X-Forwarded-Encrypted: i=1; AJvYcCVRv2L1ScquuuanJW9RfHCJIURQhO3I8qmgxEbAsGAw6v2b74SgBBhYNJuR+uMEC0DiOf30n+ZDaNg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyLT/4zD7nY9kZT0KEVUj/Ab7fDF6KLXjlfPkB9bzAmZkzma59m
-	uKNEqH+8qC1LGKvNrf2/VRteyxdTiNE9W1Ahs6ZlqwxSsR6gXiWF
-X-Google-Smtp-Source: AGHT+IGQzw9towbWt3esYv6BylqAAAmG7i8maUZip7BzOASpnZ5frQ70BGwkwxAacACbTLNukHjFrw==
-X-Received: by 2002:a05:6512:224c:b0:52e:a008:8f55 with SMTP id 2adb3069b0e04-5331c6dcd38mr9613532e87.41.1724164198100;
-        Tue, 20 Aug 2024 07:29:58 -0700 (PDT)
+        bh=nym7Vpc1+HcpD0fJwqv749eMWZaaEovUQaBKn9/MOQM=;
+        b=oN2a8N4oUfJmBi3RRedniKsURYeuu0xsrBpLGuf06HDbi5cMHgO67ihBkd6vYr51Uh
+         +ow6EK5o8Zu/bXBS54crM+i3nb/XESnstU58hH8+bBvJL8BZcqXPDlTBor8qzYacPtKv
+         smTVEpMj039er6sKA+rhWyS5MaAbpCptoBZ0zFmc92s5Tum/rMUA+ksHjBqWBYJ1OsAE
+         QrBxWkQS0uabjPkZ0kbw1wlDsFQ6eYoDPmy/0hfZnOnG6XIsGyDuXjvh26rOUdyKXq40
+         x0oylAXfVamh+k5G46GijaoxbKjGSlJrjNPuDhCWcdqS2BfRhbLh+YntdH4BGuTqDWAc
+         a0yQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWf5WUHDJq28Y3K4JgtFltgS34iioaxLZqvl84d7fcPSbQNxY7sf54Y3q+9ueCJXKTQKQuIeF1om6Yu+MP6zmbc7Ifogws0M755TuCuWyI=
+X-Gm-Message-State: AOJu0YwZit246yw8Ak/9T2xgOCq0XMUs9ttRN23Si7OJp7U3HPZicf+z
+	h7GgdTS/HQLffAK8Aqgvp3j3AmAu1mdZOJRR1Ro1eS+S7k3t64eK
+X-Google-Smtp-Source: AGHT+IGvYq0XUQaDgo2b1zhaMjoLQlam8cibWHn5GgbCoSKj72iq1ZAvahi0NkyE48N8bfPt4YQ3Fg==
+X-Received: by 2002:a05:651c:b10:b0:2ef:26f2:d3e2 with SMTP id 38308e7fff4ca-2f3be574b20mr115566071fa.2.1724164207760;
+        Tue, 20 Aug 2024 07:30:07 -0700 (PDT)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: sstabellini@kernel.org,
@@ -90,9 +90,9 @@ Cc: sstabellini@kernel.org,
 	edgar.iglesias@amd.com,
 	xen-devel@lists.xenproject.org,
 	qemu-arm@nongnu.org
-Subject: [PATCH v2 04/12] hw/arm: xenpvh: Add support for SMP guests
-Date: Tue, 20 Aug 2024 16:29:41 +0200
-Message-ID: <20240820142949.533381-5-edgar.iglesias@gmail.com>
+Subject: [PATCH v2 08/12] hw/arm: xenpvh: Rename xen_arm.c -> xen-pvh.c
+Date: Tue, 20 Aug 2024 16:29:45 +0200
+Message-ID: <20240820142949.533381-9-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240820142949.533381-1-edgar.iglesias@gmail.com>
 References: <20240820142949.533381-1-edgar.iglesias@gmail.com>
@@ -101,65 +101,39 @@ Content-Transfer-Encoding: 8bit
 
 From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Add SMP support for Xen PVH ARM guests.
-Create ms->smp.max_cpus ioreq servers to handle hotplug.
+Rename xen_arm.c -> xen-pvh.c to better express that this
+is a PVH machine and to align with x86 HVM and future PVH
+machine filenames:
+hw/i386/xen/xen-hvm.c
+hw/i386/xen/xen-pvh.c (in preparation)
 
-Note that ms->smp.max_cpus will be passed to us by the
-user (Xen tools) set to the guests maxvcpus.
-
-The value in mc->max_cpus is an absolute maximum for the
--smp option and won't be used to setup ioreq servers unless
-the user explicitly specifies it with -smp.
-
-If the user doesn't pass -smp on the command-line, smp.cpus
-and smp.max_cpus will default to 1.
+No functional changes.
 
 Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- hw/arm/xen_arm.c | 23 +++++++++++++++++++++--
- 1 file changed, 21 insertions(+), 2 deletions(-)
+ hw/arm/meson.build              | 2 +-
+ hw/arm/{xen_arm.c => xen-pvh.c} | 0
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename hw/arm/{xen_arm.c => xen-pvh.c} (100%)
 
-diff --git a/hw/arm/xen_arm.c b/hw/arm/xen_arm.c
-index 5f75cc3779..fda65d0d8d 100644
---- a/hw/arm/xen_arm.c
-+++ b/hw/arm/xen_arm.c
-@@ -173,7 +173,7 @@ static void xen_arm_init(MachineState *machine)
+diff --git a/hw/arm/meson.build b/hw/arm/meson.build
+index 074612b40c..4059d0be2e 100644
+--- a/hw/arm/meson.build
++++ b/hw/arm/meson.build
+@@ -61,7 +61,7 @@ arm_ss.add(when: 'CONFIG_FSL_IMX6UL', if_true: files('fsl-imx6ul.c', 'mcimx6ul-e
+ arm_ss.add(when: 'CONFIG_NRF51_SOC', if_true: files('nrf51_soc.c'))
+ arm_ss.add(when: 'CONFIG_XEN', if_true: files(
+   'xen-stubs.c',
+-  'xen_arm.c',
++  'xen-pvh.c',
+ ))
  
-     xen_init_ram(machine);
- 
--    xen_register_ioreq(xam->state, machine->smp.cpus, &xen_memory_listener);
-+    xen_register_ioreq(xam->state, machine->smp.max_cpus, &xen_memory_listener);
- 
-     xen_create_virtio_mmio_devices(xam);
- 
-@@ -218,7 +218,26 @@ static void xen_arm_machine_class_init(ObjectClass *oc, void *data)
-     MachineClass *mc = MACHINE_CLASS(oc);
-     mc->desc = "Xen PVH ARM machine";
-     mc->init = xen_arm_init;
--    mc->max_cpus = 1;
-+
-+    /*
-+     * mc->max_cpus holds the MAX value allowed in the -smp command-line opts.
-+     *
-+     * 1. If users don't pass any -smp option:
-+     *   ms->smp.cpus will default to 1.
-+     *   ms->smp.max_cpus will default to 1.
-+     *
-+     * 2. If users pass -smp X:
-+     *   ms->smp.cpus will be set to X.
-+     *   ms->smp.max_cpus will also be set to X.
-+     *
-+     * 3. If users pass -smp X,maxcpus=Y:
-+     *   ms->smp.cpus will be set to X.
-+     *   ms->smp.max_cpus will be set to Y.
-+     *
-+     * In scenarios 2 and 3, if X or Y are set to something larger than
-+     * mc->max_cpus, QEMU will bail out with an error message.
-+     */
-+    mc->max_cpus = GUEST_MAX_VCPUS;
-     mc->default_machine_opts = "accel=xen";
-     /* Set explicitly here to make sure that real ram_size is passed */
-     mc->default_ram_size = 0;
+ system_ss.add(when: 'CONFIG_ARM_SMMUV3', if_true: files('smmu-common.c'))
+diff --git a/hw/arm/xen_arm.c b/hw/arm/xen-pvh.c
+similarity index 100%
+rename from hw/arm/xen_arm.c
+rename to hw/arm/xen-pvh.c
 -- 
 2.43.0
 
