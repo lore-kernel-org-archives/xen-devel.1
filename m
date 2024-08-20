@@ -4,47 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EBB4C5321D
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2024 08:27:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.780177.1189794 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C04CDC5320E
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2024 08:29:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.780183.1189805 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sgKDS-0005Gj-4e; Tue, 20 Aug 2024 08:27:46 +0000
+	id 1sgKEj-0005mk-Fk; Tue, 20 Aug 2024 08:29:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 780177.1189794; Tue, 20 Aug 2024 08:27:46 +0000
+Received: by outflank-mailman (output) from mailman id 780183.1189805; Tue, 20 Aug 2024 08:29:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sgKDS-0005Gc-1b; Tue, 20 Aug 2024 08:27:46 +0000
-Received: by outflank-mailman (input) for mailman id 780177;
- Tue, 20 Aug 2024 08:27:44 +0000
+	id 1sgKEj-0005md-Bd; Tue, 20 Aug 2024 08:29:05 +0000
+Received: by outflank-mailman (input) for mailman id 780183;
+ Tue, 20 Aug 2024 08:29:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=M/mv=PT=ti.com=a-singh21@srs-se1.protection.inumbo.net>)
- id 1sgKDQ-0005GW-1X
- for xen-devel@lists.xenproject.org; Tue, 20 Aug 2024 08:27:44 +0000
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (envelope-from <SRS0=yfvp=PT=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sgKEh-0005mV-OF
+ for xen-devel@lists.xenproject.org; Tue, 20 Aug 2024 08:29:03 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 10b2b315-5ece-11ef-a507-bb4a2ccca743;
- Tue, 20 Aug 2024 10:27:42 +0200 (CEST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47K8RWEF120230;
- Tue, 20 Aug 2024 03:27:32 -0500
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47K8RWg1071446
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 20 Aug 2024 03:27:32 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
- Aug 2024 03:27:31 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 20 Aug 2024 03:27:31 -0500
-Received: from localhost (nightbug.dhcp.ti.com [10.24.72.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47K8RU3m130710;
- Tue, 20 Aug 2024 03:27:31 -0500
+ id 419253b5-5ece-11ef-a507-bb4a2ccca743;
+ Tue, 20 Aug 2024 10:29:02 +0200 (CEST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5bf009cf4c0so1843674a12.1
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Aug 2024 01:29:02 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a83838c6760sm728733766b.23.2024.08.20.01.29.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Aug 2024 01:29:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,74 +47,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10b2b315-5ece-11ef-a507-bb4a2ccca743
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1724142452;
-	bh=yIzF3ngTZJQyuB6CBlMow9/583cX6Io7qcEhCzHEFrg=;
-	h=From:To:CC:Subject:Date;
-	b=f+jt/UTk3iM6OYpx9fxz0nd/JmALR9TcZSJIAE6ezrpbiib44B17pZJ3OVr9q/WXV
-	 t1FZdX2v8XSubN4dcizLWf8XGaOM4JyLkHpiGe21st2Qyn++hLWccrN2/PlwCKunRT
-	 RbxD4b4QwWXj0ApU6SEdrQOiIpdLvGhK4lejfYNM=
-From: Amneesh Singh <a-singh21@ti.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <sstabellini@kernel.org>,
-        Amneesh Singh
-	<a-singh21@ti.com>
-Subject: [PATCH v2] drivers: char: omap-uart: provide a default clock frequency
-Date: Tue, 20 Aug 2024 13:52:03 +0530
-Message-ID: <20240820082202.326644-1-a-singh21@ti.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 419253b5-5ece-11ef-a507-bb4a2ccca743
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1724142542; x=1724747342; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=pWmTRf+lqqwdFlkN10eJYZT7w32zxJLaePIz0o/Lf70=;
+        b=IkFLIGjE8lKPQhJYDpuiJQjdsWPSOadFz++A2+iM1Q0Kks7XvwjnWz2m/iDSPcO3rt
+         sfuF8Oe8WORjRRFObvAUbltc7WjK5Rhtg4GY3D0DNS1KIZ/aU2uCAVIhVd+gvzTfxA0M
+         tX0Y3bjnRruU7uD6Pytke5MFA0H0NHV1ktMT9PDg1/VHbqxBtRKOsE0+Fhan38mwqzeS
+         Dy/PsG8/sVRCqP9bTH5ZDtejY60oaTO7+Y7mFC1XicdBC8GfxgZcJJ4L0UOWgN2K2BWR
+         A6z6vBujcIFfvUTGEDOAPkp1HeDMpAeqlHcAMTuvc0c7QZkgmIJfZoj+nHrhIG8jiO/N
+         fubQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1724142542; x=1724747342;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pWmTRf+lqqwdFlkN10eJYZT7w32zxJLaePIz0o/Lf70=;
+        b=J1OAN/a1mnQYucI0GXZOk8EWIDW9QB1A87uJFeMCIfFHaS75OE1ALkuHjwGcGK1JGI
+         APMEycTmApbhDUlkl8LaslTzeJWbrfsAK35OuQEtIXszH/6WS4+7btg8Xp4yyhHc85Oy
+         RWPhh2KlcqP1MBF6ecVsLMsCjbAZHuX6oh8xehSLtYTBY3JK7K0zpG373VDsUNB5VfCN
+         H2LdU6wIY4YT1bizyx1VG8rTUmwuWKg7xbT3l61wH5RJiJ8i2Qyg3yYtwD7vZFEJWz0m
+         wpDNSkLyEvMVnMW0i6FqzlqUq4SQ7NtAH4GLYxtZmFCqxWefHnHrwZmqPyIN2uw/5bC2
+         FaHg==
+X-Forwarded-Encrypted: i=1; AJvYcCW53gdaCApuewMPcI9wvujw23FMZTe0oDcGgWSHwQ4AKJVl4howNL1muRcnqOlcngfuo8plUYLrj54=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw6FVCJPTylm/ZvIsNXWzlkzTiCyYkchFU/MlYSdB12RB/s1NsA
+	mpVp4QjOT5Mvarzjt3wFOB9LWni5rvFZ4thTbEMRw4GES7Dp/UvjAAODhbzA6w==
+X-Google-Smtp-Source: AGHT+IE6Q+yumPSaA4yB4wRaKEuNPBZP7rH5pqH/ZrgNa5ZaBHo+1ykUeQjOd02FSeuoP+so/JiYyg==
+X-Received: by 2002:a17:907:3fa6:b0:a7a:ba59:3164 with SMTP id a640c23a62f3a-a8392a160d8mr944638266b.53.1724142542132;
+        Tue, 20 Aug 2024 01:29:02 -0700 (PDT)
+Message-ID: <41837bb1-0251-4250-8f00-23d60cb1d664@suse.com>
+Date: Tue, 20 Aug 2024 10:29:00 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/7] xen: use correct end address of kernel for
+ conflict checking
+To: Juergen Gross <jgross@suse.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, linux-kernel@vger.kernel.org,
+ x86@kernel.org
+References: <20240820082012.31316-1-jgross@suse.com>
+ <20240820082012.31316-2-jgross@suse.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20240820082012.31316-2-jgross@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 
-Quite a few TI K3 devices do not have clock-frequency specified in their
-respective UART nodes. However hard-coding the frequency is not a
-solution as the function clock input can differ between SoCs. So, use a
-default frequency of 48MHz if the device tree does not specify one.
+On 20.08.2024 10:20, Juergen Gross wrote:
+> When running as a Xen PV dom0 the kernel is loaded by the hypervisor
+> using a different memory map than that of the host. In order to
+> minimize the required changes in the kernel, the kernel adapts its
+> memory map to that of the host. In order to do that it is checking
+> for conflicts of its load address with the host memory map.
+> 
+> Unfortunately the tested memory range does not include the .brk
+> area, which might result in crashes or memory corruption when this
+> area does conflict withe the memory map of the host.
+> 
+> Fix the test by using the _end label instead of __bss_stop.
+> 
+> Fixes: 808fdb71936c ("xen: check for kernel memory conflicting with memory layout")
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-Signed-off-by: Amneesh Singh <a-singh21@ti.com>
----
- xen/drivers/char/omap-uart.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
----
-v1: https://lore.kernel.org/all/20240719113313.145587-1-a-singh21@ti.com/T/
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-v1 -> v2
-- Ditch adding a dtuart option
-- Use a default value instead
-
-This default is the same one as found in the 8250_omap driver of the
-linux tree. Already tested with Xen.
-
-diff --git a/xen/drivers/char/omap-uart.c b/xen/drivers/char/omap-uart.c
-index 1079198..9d3d39c 100644
---- a/xen/drivers/char/omap-uart.c
-+++ b/xen/drivers/char/omap-uart.c
-@@ -48,6 +48,9 @@
- /* System configuration register */
- #define UART_OMAP_SYSC_DEF_CONF   0x0d   /* autoidle mode, wakeup is enabled */
- 
-+/* default clock frequency in hz */
-+#define UART_OMAP_DEFAULT_CLK_SPEED 48000000
-+
- #define omap_read(uart, off)       readl((uart)->regs + ((off) << REG_SHIFT))
- #define omap_write(uart, off, val) writel(val, \
-                                           (uart)->regs + ((off) << REG_SHIFT))
-@@ -322,8 +325,9 @@ static int __init omap_uart_init(struct dt_device_node *dev,
-     res = dt_property_read_u32(dev, "clock-frequency", &clkspec);
-     if ( !res )
-     {
--        printk("omap-uart: Unable to retrieve the clock frequency\n");
--        return -EINVAL;
-+        printk("omap-uart: Unable to retrieve the clock frequency, "
-+               "defaulting to %uHz\n", UART_OMAP_DEFAULT_CLK_SPEED);
-+        clkspec = UART_OMAP_DEFAULT_CLK_SPEED;
-     }
- 
-     uart->clock_hz = clkspec;
--- 
-2.34.1
 
 
