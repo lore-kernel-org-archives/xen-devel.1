@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C73AC5472C
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Aug 2024 16:06:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.781294.1190851 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00B9C5321D
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Aug 2024 16:06:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.781293.1190846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sgnqs-0004E1-1C; Wed, 21 Aug 2024 16:06:26 +0000
+	id 1sgnqr-0004BT-PX; Wed, 21 Aug 2024 16:06:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 781294.1190851; Wed, 21 Aug 2024 16:06:25 +0000
+Received: by outflank-mailman (output) from mailman id 781293.1190846; Wed, 21 Aug 2024 16:06:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sgnqr-0004CV-Sm; Wed, 21 Aug 2024 16:06:25 +0000
-Received: by outflank-mailman (input) for mailman id 781294;
+	id 1sgnqr-0004BM-LC; Wed, 21 Aug 2024 16:06:25 +0000
+Received: by outflank-mailman (input) for mailman id 781293;
  Wed, 21 Aug 2024 16:06:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0Njk=PU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sgnqp-0003sE-Od
+ id 1sgnqp-0003uu-EP
  for xen-devel@lists.xenproject.org; Wed, 21 Aug 2024 16:06:23 +0000
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [2a00:1450:4864:20::129])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4faece5b-5fd7-11ef-a508-bb4a2ccca743;
- Wed, 21 Aug 2024 18:06:23 +0200 (CEST)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-52f01613acbso1135482e87.1
- for <xen-devel@lists.xenproject.org>; Wed, 21 Aug 2024 09:06:23 -0700 (PDT)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4ead5d6b-5fd7-11ef-8776-851b0ebba9a2;
+ Wed, 21 Aug 2024 18:06:21 +0200 (CEST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-52efd8807aaso8706232e87.3
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Aug 2024 09:06:21 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5334c75a2cbsm18101e87.187.2024.08.21.09.06.21
+ 2adb3069b0e04-5334c75a2cbsm18101e87.187.2024.08.21.09.06.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 09:06:21 -0700 (PDT)
+ Wed, 21 Aug 2024 09:06:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4faece5b-5fd7-11ef-a508-bb4a2ccca743
+X-Inumbo-ID: 4ead5d6b-5fd7-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724256382; x=1724861182; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1724256381; x=1724861181; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SUWnXdeASKM3s0vW7zMmdmova3lTcgmrVyUhj9D0sEQ=;
-        b=m3j2xzRBYQz51sLqUih/NTDVf7/NSsJ4rTInJQ+Xarmkb191UgxucZ6zubyv98539m
-         k3Ci529XmK335nFBOKLyXW71ZvUO+Y/PbnCyUnlZ5V28/dnnfWGHeotiiDFySHfmUxJ3
-         ioon6H4CjXdmnA96y1veJzJkSj/rTqS/a1Tw0EjhnQqu6y6OMXoZ3tPk3ZxKws3zBEP7
-         pg5rhlLuDuWxbiCK9//STWouHkc/+OtQM+1GTtddza0nGf99BoPKQJpdThXM6S2dGaS9
-         UsEACwAeW+Vh9ND5A/kBf31WcY11ecezUdDFQtTQdd2CnG+bjAdGWv4hHG/ria1shKxX
-         DMsw==
+        bh=MJcUmlEBhml/DSOe7/LwB7DMmIhQg2ECn/XQF26RxOQ=;
+        b=aYMUKUWBVeIsGY0nZgav5EwgjquVY9n5ttkAYmXSNL2TQzkMDjqnGjN9VSJGn/iYhi
+         H+vpBE3oTlFDH+0sHXDMajB4nejSw31t7CbvVPT1dJE5pLCqJOOWnI9bpgtVHMDKKgV4
+         jTA923/ab4drcg73lBeDEcMMAnjol9hWG7ZTraWI2sQ5TVVxVVFWYeCIMDVTOabl1+1m
+         Ez+QtOzOIlxVGUWLvQMq/OXFME3LiSCuKEqRB0gP9ubPIRoKWwsasrsNmZ5Hr8t86Ewz
+         IG2nFPCB6/zRNfcQGJ2/UE1qdcokaGAQUwHoYM+raELf+DnUX7GJS1X7J/B184e49qmq
+         fo8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724256382; x=1724861182;
+        d=1e100.net; s=20230601; t=1724256381; x=1724861181;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SUWnXdeASKM3s0vW7zMmdmova3lTcgmrVyUhj9D0sEQ=;
-        b=lFDWd91FTkydXbgFtvEdgBjs/TsDUgoizTpJDqMr45HMK76vODA1tRuhC+j1WwyhAT
-         XyFCyOmtWZhuy4+74LPtT8bEubyKvF18ClvL32CcCAZypQiE1cJNVKfbfPVu4ebrCk2M
-         vc1VhGbw7JPYLjaSKVloZLAccUg3U6EDsNelJMj90M7FXg04lt3bg7IBYZAMTMPdCx6f
-         +dLFMVF1sMDPniV4Dv5YkbfTgKP+zVa6ElBVh2C47rnkabojKYoEJV8zDf7P0wgyNKXF
-         g1rvy0vOnH0neFpG+G4LXBlEIDEuQ2LaNZUNmJ2HrvbDbvdgtJ20EYIeWk/NU3358p6p
-         Sk8g==
-X-Gm-Message-State: AOJu0YxAWxEUpL1sHLG1iG/x/Rgu7NhuoCdz0ohTqArKH16EooM75O4V
-	d9eV/iFK8tzf7v5Gj1cTawt11updnoyqZ5OFG57fzHeQhi/9juP5pIAzYQ==
-X-Google-Smtp-Source: AGHT+IGly+3FqelWmnfZ4T6w26becCVTPBLUHuQXOh7Aci+pcMZxXbsLZRWwPuwV0jnSTRkjQ9mktg==
-X-Received: by 2002:a05:6512:1115:b0:52b:aae0:2d41 with SMTP id 2adb3069b0e04-5334caa4b27mr41128e87.28.1724256381689;
-        Wed, 21 Aug 2024 09:06:21 -0700 (PDT)
+        bh=MJcUmlEBhml/DSOe7/LwB7DMmIhQg2ECn/XQF26RxOQ=;
+        b=J9wY0ER9ZEulATVrfapKMkDwfPAYyFKpfaw5oEK7S8KMgirsd1C62AxAFEnX50T0Ka
+         Pajak1UHA4vOnbEI6mmHqdTXmcYKPgD2MKlDxLOVCoMEjy04zgjDUjwe0corS67lH3uw
+         meQPk3aV1tFWw5FHNkIxQbHbE73SOQWyomxkh9Oio08g3c8Q0LGFlQMKiKbfQCgtqlU+
+         +gRDLzKroxw8OIH12OUPJD+xcHc+NFlabs01oZIlyxVaJQwTpuxrn++2SKy3k+pXv4Jh
+         xKCnk50/2dZTUplulpXIRnkgeX02ppFA1sQ6VtNEDV6SmSWmYVTGJtLww/ZRQvNQDOcw
+         B+bw==
+X-Gm-Message-State: AOJu0Ywg7NJnXNSQ7JSFz1oxHVO+z7IPoYGBPy/wEFEoU2JYLpJu1+Th
+	mnxOWx95J9r6sTnMfBFoY4AJ1RaZ7ocYgWtvERM11VckecS1jaoOlNOwtA==
+X-Google-Smtp-Source: AGHT+IHNXlncZxBGdnzMvY3I4TMULDV+gDDUZIYPEq3r5sz55D2tBSipK/7C6CGpcJ+we/eb7sj4JQ==
+X-Received: by 2002:a05:6512:a91:b0:52f:ca2b:1d33 with SMTP id 2adb3069b0e04-53348551919mr1686167e87.20.1724256380111;
+        Wed, 21 Aug 2024 09:06:20 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -86,149 +86,100 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 3/7] xen/riscv: introduce asm/pmap.h header
-Date: Wed, 21 Aug 2024 18:06:12 +0200
-Message-ID: <f9cc8dd9179c6510583b85b2d00cf9600e098e10.1724256027.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v5 1/7] xen/riscv: use {read,write}{b,w,l,q}_cpu() to define {read,write}_atomic()
+Date: Wed, 21 Aug 2024 18:06:10 +0200
+Message-ID: <5140f9eb3d1cb0b69e3b1cbbcce6167ff8d59e4c.1724256026.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <cover.1724256026.git.oleksii.kurochko@gmail.com>
 References: <cover.1724256026.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce arch_pmap_{un}map functions and select HAS_PMAP for CONFIG_RISCV.
+In Xen, memory-ordered atomic operations are not necessary,
+based on {read,write}_atomic() implementations for other architectures.
+Therefore, {read,write}{b,w,l,q}_cpu() can be used instead of
+{read,write}{b,w,l,q}(), allowing the caller to decide if additional
+fences should be applied before or after {read,write}_atomic().
 
-Add pte_from_mfn() for use in arch_pmap_map().
-
-Introduce flush_xen_tlb_one_local() and use it in arch_pmap_{un}map().
+Change the declaration of _write_atomic() to accept a 'volatile void *'
+type for the 'x' argument instead of 'unsigned long'.
+This prevents compilation errors such as:
+1."discards 'volatile' qualifier from pointer target type," which occurs
+  due to the initialization of a volatile pointer,
+  e.g., `volatile uint8_t *ptr = p;` in _add_sized().
+2."incompatible type for argument 2 of '_write_atomic'," which can occur
+  when calling write_pte(), where 'x' is of type pte_t rather than
+  unsigned long.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V5:
- - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>.
- - Fix a typo in "Changes in V4":
-   - "drop flush_xen_tlb_range_va_local() as it isn't used in this patch" ->
-     "drop flush_xen_tlb_range_va() as it isn't used in this patch"
-   - "s/flush_xen_tlb_range_va_local/flush_tlb_range_va_local" ->
-     "s/flush_xen_tlb_one_local/flush_tlb_one_local"
+Changes in v5:
+ - new patch.
 ---
-Changes in V4:
- - mark arch_pmap_{un}map() as __init: documentation purpose and
-   a necessary (but not sufficient) condition here, to validly
-   use local TLB flushes only.
- - add flush_xen_tlb_one_local() to arch_pmap_map() as absense of
-   "negative" TLB entrues will be guaranted only in the case
-   when Svvptc extension is present.
- - s/mfn_from_pte/pte_from_mfn
- - drop mfn_to_xen_entry() as pte_from_mfn() does the same thing
- - add flags argument to pte_from_mfn().
- - update the commit message.
- - drop flush_xen_tlb_range_va() as it isn't used in this patch
- - s/flush_xen_tlb_one_local/flush_tlb_one_local
----
-Changes in V3:
- - rename argument of function mfn_to_xen_entry(..., attr -> flags ).
- - update the code of mfn_to_xen_entry() to use flags argument.
- - add blank in mfn_from_pte() in return line.
- - introduce flush_xen_tlb_range_va_local() and use it inside arch_pmap_{un}map().
- - s/__ASM_PMAP_H__/ASM_PMAP_H
- - add SPDX-License-Identifier: GPL-2.0 
----
- xen/arch/riscv/Kconfig                |  1 +
- xen/arch/riscv/include/asm/flushtlb.h |  6 +++++
- xen/arch/riscv/include/asm/page.h     |  6 +++++
- xen/arch/riscv/include/asm/pmap.h     | 36 +++++++++++++++++++++++++++
- 4 files changed, 49 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/pmap.h
+ xen/arch/riscv/include/asm/atomic.h | 25 +++++++++++--------------
+ 1 file changed, 11 insertions(+), 14 deletions(-)
 
-diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-index 259eea8d3b..0112aa8778 100644
---- a/xen/arch/riscv/Kconfig
-+++ b/xen/arch/riscv/Kconfig
-@@ -3,6 +3,7 @@ config RISCV
- 	select FUNCTION_ALIGNMENT_16B
- 	select GENERIC_BUG_FRAME
- 	select HAS_DEVICE_TREE
-+	select HAS_PMAP
+diff --git a/xen/arch/riscv/include/asm/atomic.h b/xen/arch/riscv/include/asm/atomic.h
+index 31b91a79c8..446c8c7928 100644
+--- a/xen/arch/riscv/include/asm/atomic.h
++++ b/xen/arch/riscv/include/asm/atomic.h
+@@ -31,21 +31,17 @@
  
- config RISCV_64
- 	def_bool y
-diff --git a/xen/arch/riscv/include/asm/flushtlb.h b/xen/arch/riscv/include/asm/flushtlb.h
-index 7ce32bea0b..f4a735fd6c 100644
---- a/xen/arch/riscv/include/asm/flushtlb.h
-+++ b/xen/arch/riscv/include/asm/flushtlb.h
-@@ -5,6 +5,12 @@
- #include <xen/bug.h>
- #include <xen/cpumask.h>
+ void __bad_atomic_size(void);
  
-+/* Flush TLB of local processor for address va. */
-+static inline void flush_tlb_one_local(vaddr_t va)
-+{
-+    asm volatile ( "sfence.vma %0" :: "r" (va) : "memory" );
-+}
-+
- /*
-  * Filter the given set of CPUs, removing those that definitely flushed their
-  * TLB since @page_timestamp.
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index a7419b93b2..55916eaa92 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -94,6 +94,12 @@ static inline pte_t read_pte(pte_t *p)
-     return read_atomic(p);
- }
+-/*
+- * Legacy from Linux kernel. For some reason they wanted to have ordered
+- * read/write access. Thereby read* is used instead of read*_cpu()
+- */
+ static always_inline void read_atomic_size(const volatile void *p,
+                                            void *res,
+                                            unsigned int size)
+ {
+     switch ( size )
+     {
+-    case 1: *(uint8_t *)res = readb(p); break;
+-    case 2: *(uint16_t *)res = readw(p); break;
+-    case 4: *(uint32_t *)res = readl(p); break;
++    case 1: *(uint8_t *)res = readb_cpu(p); break;
++    case 2: *(uint16_t *)res = readw_cpu(p); break;
++    case 4: *(uint32_t *)res = readl_cpu(p); break;
+ #ifndef CONFIG_RISCV_32
+-    case 8: *(uint32_t *)res = readq(p); break;
++    case 8: *(uint32_t *)res = readq_cpu(p); break;
+ #endif
+     default: __bad_atomic_size(); break;
+     }
+@@ -58,15 +54,16 @@ static always_inline void read_atomic_size(const volatile void *p,
+ })
  
-+static inline pte_t pte_from_mfn(mfn_t mfn, unsigned int flags)
-+{
-+    unsigned long pte = (mfn_x(mfn) << PTE_PPN_SHIFT) | flags;
-+    return (pte_t){ .pte = pte };
-+}
-+
- #endif /* __ASSEMBLY__ */
+ static always_inline void _write_atomic(volatile void *p,
+-                                       unsigned long x, unsigned int size)
++                                        volatile void *x,
++                                        unsigned int size)
+ {
+     switch ( size )
+     {
+-    case 1: writeb(x, p); break;
+-    case 2: writew(x, p); break;
+-    case 4: writel(x, p); break;
++    case 1: writeb_cpu(*(uint8_t *)x, p); break;
++    case 2: writew_cpu(*(uint16_t *)x, p); break;
++    case 4: writel_cpu(*(uint32_t *)x, p); break;
+ #ifndef CONFIG_RISCV_32
+-    case 8: writeq(x, p); break;
++    case 8: writeq_cpu(*(uint64_t *)x, p); break;
+ #endif
+     default: __bad_atomic_size(); break;
+     }
+@@ -75,7 +72,7 @@ static always_inline void _write_atomic(volatile void *p,
+ #define write_atomic(p, x)                              \
+ ({                                                      \
+     typeof(*(p)) x_ = (x);                              \
+-    _write_atomic(p, x_, sizeof(*(p)));                 \
++    _write_atomic(p, &x_, sizeof(*(p)));                \
+ })
  
- #endif /* _ASM_RISCV_PAGE_H */
-diff --git a/xen/arch/riscv/include/asm/pmap.h b/xen/arch/riscv/include/asm/pmap.h
-new file mode 100644
-index 0000000000..60065c996f
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/pmap.h
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef ASM_PMAP_H
-+#define ASM_PMAP_H
-+
-+#include <xen/bug.h>
-+#include <xen/init.h>
-+#include <xen/mm.h>
-+#include <xen/page-size.h>
-+
-+#include <asm/fixmap.h>
-+#include <asm/flushtlb.h>
-+#include <asm/system.h>
-+
-+static inline void __init arch_pmap_map(unsigned int slot, mfn_t mfn)
-+{
-+    pte_t *entry = &xen_fixmap[slot];
-+    pte_t pte;
-+
-+    ASSERT(!pte_is_valid(*entry));
-+
-+    pte = pte_from_mfn(mfn, PAGE_HYPERVISOR_RW);
-+    write_pte(entry, pte);
-+
-+    flush_tlb_one_local(FIXMAP_ADDR(slot));
-+}
-+
-+static inline void __init arch_pmap_unmap(unsigned int slot)
-+{
-+    pte_t pte = {};
-+
-+    write_pte(&xen_fixmap[slot], pte);
-+
-+    flush_tlb_one_local(FIXMAP_ADDR(slot));
-+}
-+
-+#endif /* ASM_PMAP_H */
+ static always_inline void _add_sized(volatile void *p,
 -- 
 2.46.0
 
