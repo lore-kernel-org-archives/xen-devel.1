@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B641EC5320E
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Aug 2024 23:06:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.782005.1191499 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A715C5472C
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Aug 2024 23:06:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.782002.1191470 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1shGtD-0005lI-Ci; Thu, 22 Aug 2024 23:06:47 +0000
+	id 1shGt9-00053G-K5; Thu, 22 Aug 2024 23:06:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 782005.1191499; Thu, 22 Aug 2024 23:06:47 +0000
+Received: by outflank-mailman (output) from mailman id 782002.1191470; Thu, 22 Aug 2024 23:06:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1shGtD-0005lB-9L; Thu, 22 Aug 2024 23:06:47 +0000
-Received: by outflank-mailman (input) for mailman id 782005;
- Thu, 22 Aug 2024 23:06:45 +0000
+	id 1shGt9-000539-H2; Thu, 22 Aug 2024 23:06:43 +0000
+Received: by outflank-mailman (input) for mailman id 782002;
+ Thu, 22 Aug 2024 23:06:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gAWf=PV=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1shGtB-00052v-Ke
- for xen-devel@lists.xenproject.org; Thu, 22 Aug 2024 23:06:45 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ id 1shGt8-00052v-MZ
+ for xen-devel@lists.xenproject.org; Thu, 22 Aug 2024 23:06:42 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 32d8ce17-60db-11ef-8776-851b0ebba9a2;
- Fri, 23 Aug 2024 01:06:44 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a86859e2fc0so173830866b.3
- for <xen-devel@lists.xenproject.org>; Thu, 22 Aug 2024 16:06:44 -0700 (PDT)
+ id 30dbc220-60db-11ef-8776-851b0ebba9a2;
+ Fri, 23 Aug 2024 01:06:40 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-533488ffaebso1516460e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Aug 2024 16:06:40 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a868f21ff19sm174676866b.39.2024.08.22.16.06.41
+ a640c23a62f3a-a868f21ff19sm174676866b.39.2024.08.22.16.06.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2024 16:06:41 -0700 (PDT)
+ Thu, 22 Aug 2024 16:06:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 32d8ce17-60db-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: 30dbc220-60db-11ef-8776-851b0ebba9a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1724368003; x=1724972803; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YpnZe/6Rj0UVvPnf3275lXIauGqfUzo8Cf5z0ZU/Amw=;
-        b=UwyaKJRH3kF5sHar/blpSxBxoVNxI/Rkn2BFwDCychf+aFhnx/gn93XE6H1koH6MWN
-         jjro5GCzGAHmhMLdQkDhP9aY0Uz+XL4JFLI35vU6SfzA24va9rwNAHkZoEck2kwXmjEF
-         QYnbiL0MKWwUdtd1ZprAdKt7ss9dT5HKiRA5o=
+        d=citrix.com; s=google; t=1724368000; x=1724972800; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=m2LeyzUwL5o7T7PpRPGH34rG7BC0CEXy4TaB1P1AwTY=;
+        b=N6y8gBZvGap8ZnbpfXZ9+SRbHNNmeLoXrEs/BrSDNHfQ8Qairt6hsLNWewZ8gVCips
+         M+W1Bc5EMBA9qlxdRbprssDq6+cx60GA+idb7i/ku9AE6AquLxKW6UMilVF3QnBkbCJ+
+         CFWgohkVLDmoUAL4AHJPv+YzRr/7oTK3zsofg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724368003; x=1724972803;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YpnZe/6Rj0UVvPnf3275lXIauGqfUzo8Cf5z0ZU/Amw=;
-        b=gLe6sPkY66BagCVL4SSZlewQ1KSoBUauQwZCkeN0/gwFSTAFYKYPhZi5MkWozhWmDJ
-         nh7CLAxoY0n8TxJ+gE/D1jl6QuaOkrJJDXaUGHHVhUQANSzLiMyRXLPj2amcupMWMK++
-         qgxlZM5qegMVWAzY0Chn0cJtJPqytEty9pGzWgpVQ7cOEUA6UI5kLODvXjHoJDQmBAQl
-         t5N2V151X79kgePoDhP9Dtyznd4QgJxc+c3Y+hWnxDwiukn06cg0fGFMFOnYm+hbSB12
-         KXJi3hrVhHy5PPKmmGakrFDHwTGgHFzY9oo88rLgt6qCLAfT5meq2QR0dDS6f3JiWWRx
-         e7iQ==
-X-Gm-Message-State: AOJu0Yx3Tl7BIKq6xZnaieqHH8tlTGUlHrUfBep4xkFWDYaT+21SZrAs
-	T27pMQaE+VEppPe13neT7/ee+dBBx14d4cVpIxtWKTUAipFce4iDn5rtJsVqwqgnnpO3aohrJl5
-	9
-X-Google-Smtp-Source: AGHT+IH6ftjYtMlhJLqOnuqIi9pKaUpCeM5Mae1UDb83A9+Z2/FTPNORDiie+hP4NqFf7A9vDzPXAg==
-X-Received: by 2002:a17:907:940a:b0:a86:9f56:21e6 with SMTP id a640c23a62f3a-a86a53005e7mr14271566b.33.1724368002530;
-        Thu, 22 Aug 2024 16:06:42 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1724368000; x=1724972800;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=m2LeyzUwL5o7T7PpRPGH34rG7BC0CEXy4TaB1P1AwTY=;
+        b=SfZ1G/2ELWMod5/QUG9xeqEypEASlK+wn4w1huzO5KqtwRLb3PVWlQ7DWATfu+p/8I
+         NAit+MhFcvjTQ7GBQdo4TfjjsJaKfg62yQ+cETeBobCBiPD8ICOmMPgJ/vEEL2OpD4mA
+         63ELimIYXV3Yuaup2EySTyXkk+hnkC993zjcDGR/CbSihMLIUR+55lt403DJQ+LwmqIG
+         51Y9aA/lSC8U/RWV4WY15Z8smAmV+KUutboj3jg3i/jCn+4PDmhsOF1wheR7yczE5BDs
+         En4bhFibDVEoXOj6jQcUEug3o35Sp5xtcCEDKQnc84RjLCqbtaCfPMRxVv7UIL1mh192
+         IWvQ==
+X-Gm-Message-State: AOJu0Yylk3XDYEZOF9b1af/dibFC6bwk59p0B51904L8Rqcg7oVBgNuy
+	7xoRhJJ0EN+XO0o1SKpQ1bgPReKwEd4CB2Hgdz3SdTLhqPJGywjL6YfyUr6SLZjff4zzDfFKjGB
+	M
+X-Google-Smtp-Source: AGHT+IEaVH2wJY8/h1/gFnkOs39vSqEqmt0IjwV8kWT2KBSrYXeuLEVPBeCoURFCMpIwWVDt1NBUqg==
+X-Received: by 2002:a05:6512:114d:b0:52e:9b68:d2d4 with SMTP id 2adb3069b0e04-534387be68cmr225605e87.56.1724367999136;
+        Thu, 22 Aug 2024 16:06:39 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,122 +87,52 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 3/9] xen/bitops: Convert 'hweight(x) > 1' to new multiple_bits_set()
-Date: Fri, 23 Aug 2024 00:06:29 +0100
-Message-Id: <20240822230635.954557-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/9] xen/bitops: hweight() cleanup/improvements
+Date: Fri, 23 Aug 2024 00:06:26 +0100
+Message-Id: <20240822230635.954557-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240822230635.954557-1-andrew.cooper3@citrix.com>
-References: <20240822230635.954557-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Using hweight() is an especially expensive way of determining simply if
-multiple bits are set in a value.  Worse, 4 of the 10 hweight() calls in Xen
-are of this form.
+The next phase of bitops cleanup.  This series:
 
-Switch to the new multiple_bits_set() helper.  This is far more efficient than
-the longhand hweight() algorithm and, owing to its simplicity, likely more
-efficient than even a dedicated instruction on a superscalar processor.
+ 1) Untangles the mess around hweight()
+ 2) Removes some unwise uses of hweight()
+ 3) Makes it work transparently for RISC-V
+ 4) Use the POPCNT instruction on x86 when available
 
-No functional change.
+https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1424000649
+https://cirrus-ci.com/build/4947148859506688
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Shawn Anastasio <sanastasio@raptorengineering.com>
+Andrew Cooper (9):
+  xen/bitops: Reinstate the please tidy message
+  xen/bitops: Introduce a multiple_bits_set() helper
+  xen/bitops: Convert 'hweight(x) > 1' to new multiple_bits_set()
+  xen/bitops: Drop the remnants of hweight{8,16}()
+  xen/bitops: Introduce generic_hweightl() and hweightl()
+  xen/bitops: Drop hweight_long() and use hweightl()
+  xen/bitops: Implement hweight64() in terms of hweightl()
+  xen/bitops: Implement hweight32() in terms of hweightl()
+  x86/bitops: Use the POPCNT instruction when available
 
-On x86, the code reduction speaks for itself:
+ xen/arch/arm/include/asm/bitops.h |  11 ----
+ xen/arch/ppc/include/asm/bitops.h |  11 +---
+ xen/arch/x86/cpu/vpmu.c           |   2 +-
+ xen/arch/x86/hvm/vlapic.c         |  10 +--
+ xen/arch/x86/include/asm/bitops.h |  30 ++++++---
+ xen/common/bitmap.c               |   4 +-
+ xen/common/bitops.c               |  41 ++++++++++++
+ xen/common/numa.c                 |   2 +-
+ xen/include/xen/bitops.h          | 102 +++++++++++++-----------------
+ xen/include/xen/self-tests.h      |  10 ++-
+ xen/lib/Makefile                  |   2 +
+ xen/lib/arch-generic-hweightl.S   |  46 ++++++++++++++
+ xen/lib/generic-hweightl.c        |  61 ++++++++++++++++++
+ 13 files changed, 232 insertions(+), 100 deletions(-)
+ create mode 100644 xen/lib/arch-generic-hweightl.S
+ create mode 100644 xen/lib/generic-hweightl.c
 
-  add/remove: 0/0 grow/shrink: 0/3 up/down: 0/-240 (-240)
-  Function                                     old     new   delta
-  vlapic_ipi                                   722     650     -72
-  numa_emulation                               577     497     -80
-  do_xenpmu_op                                1665    1577     -88
-
-That's an aweful lot of wasted calculation for the same answer.
-
-I can't find a way of enabling CONFIG_NUMA on ARM (yet?) so right now there's
-no change in any other architecture.  However, a synthetic helper shows the
-following on ARM32:
-
-  add/remove: 0/0 grow/shrink: 0/1 up/down: 0/-128 (-128)
-  Function                                     old     new   delta
-  test_mbs                                     176      48    -128
-
-and on ARM64:
-
-  add/remove: 0/0 grow/shrink: 0/1 up/down: 0/-44 (-44)
-  Function                                     old     new   delta
-  test_mbs                                      60      16     -44
-
-PPC64 has POPCNTD in a default build of Xen and by chance both algorithms
-compile to the same number of instructions.
-
-RISC-V doesn't have hweight() wired up yet at all.
----
- xen/arch/x86/cpu/vpmu.c   |  2 +-
- xen/arch/x86/hvm/vlapic.c | 10 ++++++----
- xen/common/numa.c         |  2 +-
- 3 files changed, 8 insertions(+), 6 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-index b2ba9994129b..a5bb1689c7d5 100644
---- a/xen/arch/x86/cpu/vpmu.c
-+++ b/xen/arch/x86/cpu/vpmu.c
-@@ -673,7 +673,7 @@ long do_xenpmu_op(
-     {
-         if ( (pmu_params.val &
-               ~(XENPMU_MODE_SELF | XENPMU_MODE_HV | XENPMU_MODE_ALL)) ||
--             (hweight64(pmu_params.val) > 1) )
-+             multiple_bits_set(pmu_params.val) )
-             return -EINVAL;
- 
-         /* 32-bit dom0 can only sample itself. */
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 2ec95942713e..4a3e21a65f9d 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -467,12 +467,14 @@ static bool is_multicast_dest(struct vlapic *vlapic, unsigned int short_hand,
-         return short_hand != APIC_DEST_SELF;
- 
-     if ( vlapic_x2apic_mode(vlapic) )
--        return dest_mode ? hweight16(dest) > 1 : dest == 0xffffffffU;
-+        return dest_mode ? multiple_bits_set((uint16_t)dest)
-+                         : dest == 0xffffffffU;
- 
-     if ( dest_mode )
--        return hweight8(dest &
--                        GET_xAPIC_DEST_FIELD(vlapic_get_reg(vlapic,
--                                                            APIC_DFR))) > 1;
-+    {
-+        dest &= GET_xAPIC_DEST_FIELD(vlapic_get_reg(vlapic, APIC_DFR));
-+        return multiple_bits_set((uint8_t)dest);
-+    }
- 
-     return dest == 0xff;
- }
-diff --git a/xen/common/numa.c b/xen/common/numa.c
-index 28a09766fabc..ce3991929ce5 100644
---- a/xen/common/numa.c
-+++ b/xen/common/numa.c
-@@ -546,7 +546,7 @@ static int __init numa_emulation(unsigned long start_pfn,
-     uint64_t sz = pfn_to_paddr(end_pfn - start_pfn) / numa_fake;
- 
-     /* Kludge needed for the hash function */
--    if ( hweight64(sz) > 1 )
-+    if ( multiple_bits_set(sz) )
-     {
-         uint64_t x = 1;
- 
 -- 
 2.39.2
 
