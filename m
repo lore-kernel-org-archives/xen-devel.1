@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED568C5472D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD5EBC5472E
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Aug 2024 10:52:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.782250.1191723 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.782252.1191744 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1shRtm-0004CW-7S; Fri, 23 Aug 2024 10:52:06 +0000
+	id 1shRtn-0004ff-NX; Fri, 23 Aug 2024 10:52:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 782250.1191723; Fri, 23 Aug 2024 10:52:06 +0000
+Received: by outflank-mailman (output) from mailman id 782252.1191744; Fri, 23 Aug 2024 10:52:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1shRtm-0004CP-4v; Fri, 23 Aug 2024 10:52:06 +0000
-Received: by outflank-mailman (input) for mailman id 782250;
- Fri, 23 Aug 2024 10:52:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1shRtn-0004fY-KY; Fri, 23 Aug 2024 10:52:07 +0000
+Received: by outflank-mailman (input) for mailman id 782252;
+ Fri, 23 Aug 2024 10:52:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=imIp=PW=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1shRtk-0004C8-Sn
- for xen-devel@lists.xenproject.org; Fri, 23 Aug 2024 10:52:04 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bad78ee3-613d-11ef-8776-851b0ebba9a2;
- Fri, 23 Aug 2024 12:52:02 +0200 (CEST)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-52f01b8738dso1400369e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 23 Aug 2024 03:52:02 -0700 (PDT)
+ id 1shRtl-0004CD-V1
+ for xen-devel@lists.xenproject.org; Fri, 23 Aug 2024 10:52:05 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bbd76ab1-613d-11ef-a50a-bb4a2ccca743;
+ Fri, 23 Aug 2024 12:52:04 +0200 (CEST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a8677ae5a35so220457066b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Aug 2024 03:52:04 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a868f47d1c3sm239923866b.169.2024.08.23.03.52.00
+ a640c23a62f3a-a868f47d1c3sm239923866b.169.2024.08.23.03.52.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 03:52:00 -0700 (PDT)
+ Fri, 23 Aug 2024 03:52:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bad78ee3-613d-11ef-8776-851b0ebba9a2
+X-Inumbo-ID: bbd76ab1-613d-11ef-a50a-bb4a2ccca743
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1724410322; x=1725015122; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AeHyNpXsgfseJeT0cvaTJIaBLC+Vx+eo9RM6HETHoAE=;
-        b=e4Pvcjmf4MEzL3kkX88B9GjdXoQceuVFzlBQ7qrC5TXSf6we08eCHtV34eTup3ViD7
-         1NBBqog61ku6of4TX17zBGXTgql05Ng9zXXRR2l8E3cJKn3e81wUxPwJu7JSXmwCqycw
-         rKKtfHFAP3wpqVIIudYHHP5I/rV3f5p/ARKtE=
+        d=citrix.com; s=google; t=1724410323; x=1725015123; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Rkmqzo+FkSOQbrEOiUy8aC0COpKqGUWCpQCBif5I/0E=;
+        b=UfFlb9peOR83wCMpgSL8IM6EIgZoGrT8fn+6OtQkdcI1mkm/bRmLK5zj/WuYKO8Xbb
+         wBINtuuSn8V13RfkqeZNsKSeCGa0H8+qO+UVYKPRYeKLGwa6hTdhRYkTUbdrX8g2EtcY
+         Eh48w89Bh2r9BQx7XP08fwb8W34XVqJcDUNbs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724410322; x=1725015122;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AeHyNpXsgfseJeT0cvaTJIaBLC+Vx+eo9RM6HETHoAE=;
-        b=MftPfsLW8xFuqOwd2ngf3EkOf06lqXVKEyLIn2TBxTQNAwB4BvTTIMGdx9+EYtJDRm
-         iaNxllkvn+pkLYwBeOMIamRMFoUYmq7WnQAY1O/DYOYA++cNJKxKhZIcqiedbvOuhZSh
-         nBS6d4e1OB7rFrXUb4y4aZkJKhFkxAHCRHkCJn8g3EYtRceITMJSeEydBslL2aDBCKyA
-         WdyBCVXoy0KwYdjdDbTk9c+mmRlSam3L9cXXO6PqF4wKocuLz9GmBrplK6HI+PIwIyYa
-         Yzp28OjZ+I5KKogI727RiOTFmDmXCpdsxMUYpE5hiDyKfXCtkjoKDj4q1HmsFck5JkB5
-         ye6w==
-X-Gm-Message-State: AOJu0YwA9w75rNwiZpJ/gOo71BKDP0vcNlDmZLsHU8knsg8Jwq2cub1D
-	O/dGeKVcu54wXXHHbKye/d6RQWvOEQAfqXrDaeNS5Jo52mM1/CbCLHTNpUYsDuEtSqTYBCoWULS
-	U
-X-Google-Smtp-Source: AGHT+IEQxCJOnxlTu8+00FLx7551MVKErmDQQstAwKkyi/JkA4dcwur1U8mrAjcvR1AIWJuVX/Eirg==
-X-Received: by 2002:a05:6512:2822:b0:52c:df6d:e52e with SMTP id 2adb3069b0e04-53438773a92mr1163686e87.16.1724410321121;
-        Fri, 23 Aug 2024 03:52:01 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1724410323; x=1725015123;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Rkmqzo+FkSOQbrEOiUy8aC0COpKqGUWCpQCBif5I/0E=;
+        b=fUcilPa6n5AFW4pc/BhKZ8CALBbmQvXOK4m4b3F24pLNV+2q5HrTkeQznlglTgnfD5
+         BbC6FOX7FIrbtb8+jMDc5nUfXlL/qSfPXR9spT1uViSmh3NeupmmwlxgUV+KefPqDjKG
+         avsNjfBzyYAa9loEAZQiDo9nBJXwmpgfOSOWsmlpom30tYXUQuELO8mOp1LIy60ribs6
+         8Lhkd7xyPG5BlpI/A8PAn0EnuFirnxT4FcnonaZzmmxVM4kk1QTyzQamFSxxURJ4wpR+
+         pLpYrd/GIW/lyd3iJKcE1BjX1O/hDYJ9eoL9CCl/x4SoGcl8cfMZRMa6IL9bHpA90Y2R
+         q8Kg==
+X-Gm-Message-State: AOJu0YwRKcBxdp9520NhcMxaf9CQl2OPK5yt8SMFc6YTePHx+mbRQsQ2
+	2w1oXen8IOmDXzebUjcJH0kBqa1hOJub0kayxU+G/KTbXv/gwuiQwRLwMTzkgV70FhsywepD6RX
+	2
+X-Google-Smtp-Source: AGHT+IGlQ1yte3xGjuGnwK9O4z3ou2vvpqXd81DCNTbUTe8SM3S0T2YqVc+EgRMHpNXdEbOnbmkjYw==
+X-Received: by 2002:a17:906:d264:b0:a86:a1cd:5a8c with SMTP id a640c23a62f3a-a86a52bb759mr120712666b.22.1724410323102;
+        Fri, 23 Aug 2024 03:52:03 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -83,28 +84,64 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Rob Hoes <Rob.Hoes@citrix.com>,
 	Andrii Sultanov <andrii.sultanov@cloud.com>,
 	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH 0/3] tools/ocaml: Incremental build fixes
-Date: Fri, 23 Aug 2024 11:51:54 +0100
-Message-Id: <20240823105157.991275-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/3] tools/ocaml: Drop o= rune
+Date: Fri, 23 Aug 2024 11:51:56 +0100
+Message-Id: <20240823105157.991275-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240823105157.991275-1-andrew.cooper3@citrix.com>
+References: <20240823105157.991275-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Various extra build bugfixes found while reviewing the `Stabilize Oxenstored's
-interface with` series.
+This hides a shell redirection which is quite rude.  It also opencodes
+$(move-if-changed) without the benefit of short-circuiting dependent logic
+when the content hasn't changed.
 
-Andrew Cooper (3):
-  tools/ocaml: Drop OCAMLOPTFLAG_G invocation
-  tools/ocaml: Drop o= rune
-  tools/ocaml: Fix the version embedded in META files
-
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Christian Lindig <christian.lindig@citrix.com>
+CC: David Scott <dave@recoil.org>
+CC: Edwin Török <edwin.torok@cloud.com>
+CC: Rob Hoes <Rob.Hoes@citrix.com>
+CC: Andrii Sultanov <andrii.sultanov@cloud.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>
+---
  tools/ocaml/Makefile.rules | 5 +++--
- tools/ocaml/common.make    | 7 ++-----
- 2 files changed, 5 insertions(+), 7 deletions(-)
+ tools/ocaml/common.make    | 2 --
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-
-base-commit: 5231765a4e6528a3208e49885b9eeff42519a6c1
+diff --git a/tools/ocaml/Makefile.rules b/tools/ocaml/Makefile.rules
+index 5638193edf8a..5d534d8754bf 100644
+--- a/tools/ocaml/Makefile.rules
++++ b/tools/ocaml/Makefile.rules
+@@ -40,13 +40,14 @@ ALL_OCAML_OBJS ?= $(OBJS)
+ 	$(call quiet-command, $(CC) $(CFLAGS) -c -o $@ $<,CC,$@)
+ 
+ META: META.in
+-	sed 's/@VERSION@/$(VERSION)/g' < $< $o
++	sed 's/@VERSION@/$(VERSION)/g' < $< > $@.tmp
++	$(call move-if-changed,$@.tmp,$@)
+ 
+ ALL_OCAML_OBJ_SOURCES=$(addsuffix .ml, $(ALL_OCAML_OBJS))
+ 
+ ifneq ($(MAKECMDGOALS),clean)
+ .ocamldep.make: $(ALL_OCAML_OBJ_SOURCES) Makefile $(OCAML_TOPLEVEL)/Makefile.rules
+-	$(call quiet-command, $(OCAMLDEP) $(ALL_OCAML_OBJ_SOURCES) *.mli $o,MLDEP,)
++	$(call quiet-command, $(OCAMLDEP) $(ALL_OCAML_OBJ_SOURCES) *.mli > $@.tmp; $(call move-if-changed,$@.tmp,$@),MLDEP,)
+ endif
+ 
+ clean: $(CLEAN_HOOKS)
+diff --git a/tools/ocaml/common.make b/tools/ocaml/common.make
+index 708d74617c8d..979cbe08459b 100644
+--- a/tools/ocaml/common.make
++++ b/tools/ocaml/common.make
+@@ -17,5 +17,3 @@ OCAMLCFLAGS += -g $(OCAMLINCLUDE) -w F -warn-error F
+ VERSION := 4.1
+ 
+ OCAMLDESTDIR ?= $(DESTDIR)$(shell $(OCAMLFIND) printconf destdir)
+-
+-o= >$@.new && mv -f $@.new $@
 -- 
 2.39.2
 
