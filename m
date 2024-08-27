@@ -4,35 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49762C54735
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Aug 2024 11:17:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.783839.1193116 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A380C54734
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Aug 2024 11:20:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.783853.1193136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1siuCQ-0004Zh-DR; Tue, 27 Aug 2024 11:17:22 +0000
+	id 1siuF8-0006ay-45; Tue, 27 Aug 2024 11:20:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 783839.1193116; Tue, 27 Aug 2024 11:17:22 +0000
+Received: by outflank-mailman (output) from mailman id 783853.1193136; Tue, 27 Aug 2024 11:20:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1siuCQ-0004Za-9p; Tue, 27 Aug 2024 11:17:22 +0000
-Received: by outflank-mailman (input) for mailman id 783839;
- Tue, 27 Aug 2024 11:17:21 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1siuF8-0006ar-1G; Tue, 27 Aug 2024 11:20:10 +0000
+Received: by outflank-mailman (input) for mailman id 783853;
+ Tue, 27 Aug 2024 11:20:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1siuCP-0004ZQ-Kq; Tue, 27 Aug 2024 11:17:21 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1siuCP-0004tv-CG; Tue, 27 Aug 2024 11:17:21 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1siuCO-0004dS-MI; Tue, 27 Aug 2024 11:17:20 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1siuCO-0002Uw-M0; Tue, 27 Aug 2024 11:17:20 +0000
+ (envelope-from <SRS0=S7uN=P2=redhat.com=pabeni@srs-se1.protection.inumbo.net>)
+ id 1siuF6-0006ag-O4
+ for xen-devel@lists.xenproject.org; Tue, 27 Aug 2024 11:20:08 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4f471e9e-6466-11ef-99a0-01e77a169b0f;
+ Tue, 27 Aug 2024 13:20:06 +0200 (CEST)
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-106-4CcvQ24IMS6xZFI4mXcidg-1; Tue, 27 Aug 2024 07:20:03 -0400
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3718e1d1847so3188568f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Aug 2024 04:20:03 -0700 (PDT)
+Received: from ?IPV6:2a0d:3344:1b67:7410::f71? ([2a0d:3344:1b67:7410::f71])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3730813c459sm12768823f8f.27.2024.08.27.04.20.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Aug 2024 04:20:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,72 +51,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=yqkXvS4PlIoTpBeX0jLBfHMcP5rHF50zbcFN22/EM+Y=; b=AJ3ExVa8oKeg1XjDVZUKHP3xoV
-	j9Po9w/RUsXTePiIO5Sc1nu6GHxBg7EIS7orgh5sjp7Fr69T3/yNcO5gPzapTmjgvb5YIEmc0GcT2
-	329DsRfAJitI3BNfXYrw1u2Fm7SvUetMm6GxD7I8kUulkXUCjBZY+tJL31r7dFYwdf/Y=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-187362-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 4f471e9e-6466-11ef-99a0-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1724757604;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=MECBd/hSEibWGsRQlj3xvU/VnK1E0855dY6x5mvZ7gA=;
+	b=cZsxPebUTcTccSil891HpRKkkxE9xMsSmYdGVUTikml66Dh0ix5Fx8Inm/9izE9BPBytit
+	ZxrPx+0rKcjbhSVO0PsxjZtfERMxFxBXp0ScOBD/cg/JU8iWTMgcMgv1+DmvLS2/9E7ZIg
+	zpvv0CCQpacFDqFo/o7wTrP5uwEu3Jg=
+X-MC-Unique: 4CcvQ24IMS6xZFI4mXcidg-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1724757602; x=1725362402;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=MECBd/hSEibWGsRQlj3xvU/VnK1E0855dY6x5mvZ7gA=;
+        b=dxhc57TcWgIHEVeh0yCHa5dwFmaj6rOrbKL0rX2l4YUfMcuGKCU7p9TsHa4ARc6RCy
+         L+wrUzdWfvGUilZYyXxRR/mcIOIwo0kg+OdGaYU4ANLWRh3cZioKWbYrI/YzkCtQPBKX
+         vdEh5zRFnIkgYduYOLEbDAmVIr/MIY2w4HROZwS9ssvulKgUaWxF7WRhJJTTGqIgBSWK
+         ezKKIM5JAx6fax6WIj8cUBAUEwGHyLK7eawvp+aCGiPPPlDud+tNxXgrm1xwd+x8xVBu
+         RLx43pqSPhXfQf8WNUVw1t9F/t4Axbwf/mqqlt23QGrDv+uhQ4Pflrj3lZ3GxGKLryn8
+         XLNw==
+X-Forwarded-Encrypted: i=1; AJvYcCWeUbtGKXFwL2LQGJQPAb1KD2xbHLbfsP0VBxjsjb9JwexCdW+NB8+VGDei2nmoN9rZYxOyB6TtcpE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxOpCRSxSnczvFBxTdlAu9g2BQVIVjZC9bVlUlwmQKYiJF9Qosq
+	cAjTuUZ6LiIi5jWacoAHZg5pyNAWvuEmosLdQIYKEXRX7YNvJL0l5n8pwjwEBvzt1aT7l/EJWY7
+	Mo6bSLK4O+BLOH3NWkPfmcK7uqX1QrD+ZSY2HDclkXLJFySz9CT5sY1mI2srg54Ng
+X-Received: by 2002:a5d:4e10:0:b0:371:8e9c:e608 with SMTP id ffacd0b85a97d-373118e3327mr10656412f8f.52.1724757602093;
+        Tue, 27 Aug 2024 04:20:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFYvhXTuSl+sI44eFe058b0E+jARsnoT9juypCVTahh5G9OkBjlQCUYH8EuqxJDKhKuXE431g==
+X-Received: by 2002:a5d:4e10:0:b0:371:8e9c:e608 with SMTP id ffacd0b85a97d-373118e3327mr10656385f8f.52.1724757601665;
+        Tue, 27 Aug 2024 04:20:01 -0700 (PDT)
+Message-ID: <fd2a06d5-370f-4e07-af84-cab089b82a4b@redhat.com>
+Date: Tue, 27 Aug 2024 13:19:59 +0200
 MIME-Version: 1.0
-Subject: [ovmf test] 187362: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=ccda91c28628aa70bca614f1f7b71ad7b5ca61e0
-X-Osstest-Versions-That:
-    ovmf=5a06afa7dd8ba8e99178fec9525be9e3fd2a4d3a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 27 Aug 2024 11:17:20 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net] net/xen-netback: prevent UAF in xenvif_flush_hash()
+To: Jeongjun Park <aha310510@gmail.com>, wei.liu@kernel.org, paul@xen.org
+Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+ madhuparnabhowmik04@gmail.com, xen-devel@lists.xenproject.org,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20240822181109.2577354-1-aha310510@gmail.com>
+From: Paolo Abeni <pabeni@redhat.com>
+In-Reply-To: <20240822181109.2577354-1-aha310510@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-flight 187362 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/187362/
+On 8/22/24 20:11, Jeongjun Park wrote:
+> During the list_for_each_entry_rcu iteration call of xenvif_flush_hash,
+> kfree_rcu does not exist inside the rcu read critical section, so if
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 ccda91c28628aa70bca614f1f7b71ad7b5ca61e0
-baseline version:
- ovmf                 5a06afa7dd8ba8e99178fec9525be9e3fd2a4d3a
+The above wording is confusing, do you mean "kfree_rcu does not exit 
+from "...?
 
-Last test of basis   187361  2024-08-27 06:16:29 Z    0 days
-Testing same since   187362  2024-08-27 09:15:18 Z    0 days    1 attempts
+> kfree_rcu is called when the rcu grace period ends during the iteration,
+> UAF occurs when accessing head->next after the entry becomes free.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Michael G.A. Holland <michael.holland@intel.com>
+The loop runs with irq disabled, the RCU critical section extends over 
+it, uninterrupted.
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+Do you have a splat for the reported UAF?
 
+This does not look the correct solution.
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+Thanks,
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+Paolo
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   5a06afa7dd..ccda91c286  ccda91c28628aa70bca614f1f7b71ad7b5ca61e0 -> xen-tested-master
 
