@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4210C5320E
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Aug 2024 10:03:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.783748.1193029 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C15C3C5472E
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Aug 2024 10:03:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.783746.1193016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sit32-0001EO-Dl; Tue, 27 Aug 2024 10:03:36 +0000
+	id 1sit31-00016E-RL; Tue, 27 Aug 2024 10:03:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 783748.1193029; Tue, 27 Aug 2024 10:03:36 +0000
+Received: by outflank-mailman (output) from mailman id 783746.1193016; Tue, 27 Aug 2024 10:03:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sit32-0001An-5P; Tue, 27 Aug 2024 10:03:36 +0000
-Received: by outflank-mailman (input) for mailman id 783748;
+	id 1sit31-000167-Of; Tue, 27 Aug 2024 10:03:35 +0000
+Received: by outflank-mailman (input) for mailman id 783746;
  Tue, 27 Aug 2024 10:03:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KoKo=P2=bounce.vates.tech=bounce-md_30504962.66cda473.v1-7a4fed8f626b46239c7b9e69b01f9ae2@srs-se1.protection.inumbo.net>)
- id 1sit31-00015q-61
- for xen-devel@lists.xenproject.org; Tue, 27 Aug 2024 10:03:35 +0000
-Received: from mail137-25.atl71.mandrillapp.com
- (mail137-25.atl71.mandrillapp.com [198.2.137.25])
+ <SRS0=lqxM=P2=bounce.vates.tech=bounce-md_30504962.66cda473.v1-8f1f9f88efe5427d845b945a4ac8ba8b@srs-se1.protection.inumbo.net>)
+ id 1sit30-00015q-GO
+ for xen-devel@lists.xenproject.org; Tue, 27 Aug 2024 10:03:34 +0000
+Received: from mail187-32.suw11.mandrillapp.com
+ (mail187-32.suw11.mandrillapp.com [198.2.187.32])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9e1e1761-645b-11ef-a0b0-8be0dac302b0;
- Tue, 27 Aug 2024 12:03:33 +0200 (CEST)
-Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail137-25.atl71.mandrillapp.com (Mailchimp) with ESMTP id
- 4WtNR76f1nz35hVnw
+ id 9d769d2c-645b-11ef-a0b0-8be0dac302b0;
+ Tue, 27 Aug 2024 12:03:32 +0200 (CEST)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-32.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4WtNR70lRPzQXg2bd
  for <xen-devel@lists.xenproject.org>; Tue, 27 Aug 2024 10:03:31 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 7a4fed8f626b46239c7b9e69b01f9ae2; Tue, 27 Aug 2024 10:03:31 +0000
+ 8f1f9f88efe5427d845b945a4ac8ba8b; Tue, 27 Aug 2024 10:03:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,44 +45,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e1e1761-645b-11ef-a0b0-8be0dac302b0
+X-Inumbo-ID: 9d769d2c-645b-11ef-a0b0-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
 	s=mte1; t=1724753011; x=1725013511;
-	bh=7a7nuSCUMb6yGcZ2VY1VCSVSooNS7myyKwj7gupd9Sg=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=BGl8ryRR8i+E7ZDBck6IQcBpLcF7nJhe9aNl7Atc7IPLP5tJve2KWslIHkZhrNSpt
-	 FBqu3KVR+wKIk1YoqQof2d2XmmgNGag2tzWa9KxmYZfJN4K5sAddc4X2GTya+C0z+n
-	 5u3O2EiihYVjoqlImseIYDzlWIn1evXFJmQ2bmfs5Y+C6ogF4bNK3xmxOzA5eyhh/O
-	 LF2vnRuXr/FsdjrMHiG2mUvDGFUnfOM0xv013wa/1UTuFlybQUcYsy8q5ncmpwKV3L
-	 uDw3c6VMVFm58oSpcyqXQWougpegSvtCtOuvkJWbUTomErFlyF8doih1DqxlQbzpGc
-	 BJRQncYbAJ7ow==
+	bh=85xl+42r3E+d5KYyQdGBwoXGanIObfXZWBWVlXbR904=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=Yq/8kFDTSFAWQ8f44lbhZ98PVMYaElQJC72k58LBa5HyUJnlboK8b0T8A3685spgI
+	 xJf+0E1IuX7xrZTTE6enJg+OMKzJXGJJNBdTmyl6OSyczYAeLPyjRkl9AXNmU/XsMT
+	 rSDhKnDoHrLSNTbgsgxSED1oN6qt09O33bZHz12mhxZacSMiWyqt7STq/w+7GJw36/
+	 l/hkvuCSfnt5dovHHotbtgYOe2KEHWrA0c329tvyHHoBtjCo1jkQHss+U7cB2f6R2t
+	 qXL2ee83Eb/2OQNk/M8sLIqNMMjSMTWQSswTmdwH0PtrzFis8O0mIa9ZlVPNUg41oD
+	 vKo2gks427BDw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
 	t=1724753011; x=1725013511; i=anthony.perard@vates.tech;
-	bh=7a7nuSCUMb6yGcZ2VY1VCSVSooNS7myyKwj7gupd9Sg=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=PxNbPq0ciuLpzcFi2jahKY47ZkV3O+eLoj7WjM0TS3f4tMY687kk7L2Je0U8907ZX
-	 1Nwdo00OUAWYyovSKthcRagcR6oze3zcrUFMIIEdi0u+MtGnHvsilE5g7CeaFeGeeX
-	 RdMn3N2ipWooszNxQkKFbGr1TdYkl+6f5Z44Dga64qfEC8ahJRh+d8HEpIfyuu6HbA
-	 8UrktSRjdT6e2vJzOgffTJZ0BSlPyZrSQ+P8Af8OF/aLEoVq5MzCo0aDPclGRGelDm
-	 hvzEMQJVFIZXTQs+WLfgpNzlm1c6wEmIfW+tN1B9SYbPrhiPzf1t5EZ1tQaLW55lbt
-	 loSlDQDBRChxg==
+	bh=85xl+42r3E+d5KYyQdGBwoXGanIObfXZWBWVlXbR904=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=Z9LGYjXE5Ajkz+ie05bmLGp4BWs4cD2NZbvPfd6IEnDuOCIP3Fr/pU1ldhq+G054v
+	 NecoP6fmO/oOUMafcRKWa4VY9xLhlBvwhCJR+E/gmLAgnBfiednTFC+kbjOMJnGa5U
+	 GqB/mbxXx7ft9Ux34zgWKqZPcfiMGbmDFC7Oct8cDD/pfETxldRLuFnXuvHTAlYU86
+	 GYjhIohI1wnQI8B5FsWlE5k7LELbb8gDn9Q7Wrta5yuYyG6am8VKOBupKHvC9S0UyW
+	 zkTbnqFprqebs7GNweQnOqDxiXRVDYwqYIdVCslxHNIkM3P1WNh2XlszvQZTWQ+jYT
+	 uepFTnHtBIGgw==
 From: Anthony PERARD <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?[XEN=20PATCH=203/3]=20libxl:=20Probe=20QEMU=20for=20-run-with=20user=3Duser=20and=20use=20it?=
+Subject: =?utf-8?Q?[XEN=20PATCH=200/3]=20libxl:=20Implement=20QEMU=20command=20line=20probe?=
 X-Mailer: git-send-email 2.39.2
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1724753011426
+X-Bm-Transport-Timestamp: 1724753010498
 To: xen-devel@lists.xenproject.org
 Cc: Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
-Message-Id: <20240827100328.23216-4-anthony.perard@vates.tech>
-In-Reply-To: <20240827100328.23216-1-anthony.perard@vates.tech>
-References: <20240827100328.23216-1-anthony.perard@vates.tech>
+Message-Id: <20240827100328.23216-1-anthony.perard@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.7a4fed8f626b46239c7b9e69b01f9ae2?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.8f1f9f88efe5427d845b945a4ac8ba8b?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20240827:md
 Date: Tue, 27 Aug 2024 10:03:31 +0000
@@ -90,57 +86,34 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-"-runas" is deprecated since QEMU 9.1 and will be remove in a future
-release.
+Patch series available in this git branch:
+https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.libxl-qemu-cmdline-probe-v1
 
-Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
----
- tools/libs/light/libxl_dm.c       | 12 ++++++++++--
- tools/libs/light/libxl_internal.h |  1 +
- 2 files changed, 11 insertions(+), 2 deletions(-)
+Starting with QEMU 9.0, the option "-chroot", that we use for the
+"dmrestrict" feature, is removed. We need to find out which to use
+between "-chroot" and "-run-with chroot=dir".
 
-diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 298fbb84fe..49995b14b8 100644
---- a/tools/libs/light/libxl_dm.c
-+++ b/tools/libs/light/libxl_dm.c
-@@ -2052,8 +2052,13 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-         }
- 
-         if (state->dm_runas) {
--            flexarray_append(dm_args, "-runas");
--            flexarray_append(dm_args, state->dm_runas);
-+            if (qemu_cmdline->have_runwith_user) {
-+                flexarray_append_pair(dm_args, "-run-with",
-+                                      GCSPRINTF("user=%s", state->dm_runas));
-+            } else {
-+                flexarray_append(dm_args, "-runas");
-+                flexarray_append(dm_args, state->dm_runas);
-+            }
-         }
-     }
-     flexarray_append(dm_args, NULL);
-@@ -3073,6 +3078,9 @@ static void device_model_probe_cmdline(libxl__egc *egc,
-                 if (!strcmp("chroot", libxl__json_object_get_string(o))) {
-                     dmss->qemu_cmdline.have_runwith_chroot = true;
-                 }
-+                else if (!strcmp("user", libxl__json_object_get_string(o))) {
-+                    dmss->qemu_cmdline.have_runwith_user = true;
-+                }
-             }
- 
-             /*
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index df93d904c2..5c61050f79 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -4145,6 +4145,7 @@ typedef struct libxl__dm_spawn_state libxl__dm_spawn_state;
- typedef struct libxl__qemu_available_cmd_line libxl__qemu_available_cmd_line;
- struct libxl__qemu_available_cmd_line {
-     bool have_runwith_chroot;
-+    bool have_runwith_user;
- };
- 
- typedef void libxl__dm_spawn_cb(libxl__egc *egc, libxl__dm_spawn_state*,
+Also, "-runas" is deprecated in QEMU 9.1 and will be remove in a future
+release, it's replaced with "-run-with user=user".
+
+To find out which command line option we can use, we'll spawn QEMU, and run the
+QMP command "query-command-line-options".
+
+Some example of running these patches:
+    with qemu-xen (8.0):
+        http://logs.test-lab.xenproject.org/osstest/logs/187352/
+    with QEMU (upstream, 9.1-rc3):
+        http://logs.test-lab.xenproject.org/osstest/logs/187353/
+
+Anthony PERARD (3):
+  libxl: Implement QEMU command line probe
+  libxl: Probe QEMU for -run-with chroot=dir and use it
+  libxl: Probe QEMU for -run-with user=user and use it
+
+ tools/libs/light/libxl_dm.c       | 297 +++++++++++++++++++++++++++---
+ tools/libs/light/libxl_internal.h |   7 +
+ 2 files changed, 278 insertions(+), 26 deletions(-)
+
 -- 
 
 
