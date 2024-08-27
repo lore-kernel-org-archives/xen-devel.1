@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF81C54739
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Aug 2024 13:58:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.784070.1193456 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C93C5472F
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Aug 2024 13:58:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.784071.1193466 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1siwhp-0004bs-F0; Tue, 27 Aug 2024 13:57:57 +0000
+	id 1siwhr-0004tc-ME; Tue, 27 Aug 2024 13:57:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 784070.1193456; Tue, 27 Aug 2024 13:57:57 +0000
+Received: by outflank-mailman (output) from mailman id 784071.1193466; Tue, 27 Aug 2024 13:57:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1siwhp-0004bl-BL; Tue, 27 Aug 2024 13:57:57 +0000
-Received: by outflank-mailman (input) for mailman id 784070;
- Tue, 27 Aug 2024 13:57:56 +0000
+	id 1siwhr-0004tL-IY; Tue, 27 Aug 2024 13:57:59 +0000
+Received: by outflank-mailman (input) for mailman id 784071;
+ Tue, 27 Aug 2024 13:57:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ovuO=P2=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1siwho-00047p-5u
- for xen-devel@lists.xenproject.org; Tue, 27 Aug 2024 13:57:56 +0000
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [2a00:1450:4864:20::52e])
+ id 1siwhq-00047p-4h
+ for xen-devel@lists.xenproject.org; Tue, 27 Aug 2024 13:57:58 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5c13d309-647c-11ef-a0b0-8be0dac302b0;
- Tue, 27 Aug 2024 15:57:55 +0200 (CEST)
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5bed83487aeso5778025a12.2
- for <xen-devel@lists.xenproject.org>; Tue, 27 Aug 2024 06:57:55 -0700 (PDT)
+ id 5d3fa71f-647c-11ef-a0b0-8be0dac302b0;
+ Tue, 27 Aug 2024 15:57:57 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a868d7f92feso700694466b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Aug 2024 06:57:57 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a86e588adf2sm113898966b.173.2024.08.27.06.57.53
+ a640c23a62f3a-a86e588adf2sm113898966b.173.2024.08.27.06.57.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 06:57:53 -0700 (PDT)
+ Tue, 27 Aug 2024 06:57:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c13d309-647c-11ef-a0b0-8be0dac302b0
+X-Inumbo-ID: 5d3fa71f-647c-11ef-a0b0-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1724767074; x=1725371874; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1724767076; x=1725371876; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GG6I/ExZxOSYobQF/vdPu38zR0FWgZTstjCiLrrIFG0=;
-        b=MCmjjpNMXpD0a2g1Hc4BAkYGMNPAKitkxzoNKlaS4XtaHY8gjS6Xf/taKgENk2VN9Y
-         V0hUknZLMt9TcBXfmP2eGSPGw1Mrrb/7+2/MCI8SUSESn5HrWpN8lQ6ALeydWIhiQyfC
-         9d7QEyHofboSqHVDP51OhyAco38xAg0ux+trQ=
+        bh=onbkRJjonSldeX+TKHvWoalIHglLaxnF1KDpl/v4wiA=;
+        b=uT8enpQLoIrW8DSrhlqvctPlFAqWtGJTBIKzU71f/nDyntq2WNJZ7P/CP9qehyD9aV
+         wbljrgpk+YhLg38EVpJrbG0n29+BYGMb4o8YEeNEt+ypHA80jhLu+j1gHNPwantqntOO
+         BBrocgVovvIqUgzQ1m0f+QO02ztjRdxUH/HsM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724767074; x=1725371874;
+        d=1e100.net; s=20230601; t=1724767076; x=1725371876;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=GG6I/ExZxOSYobQF/vdPu38zR0FWgZTstjCiLrrIFG0=;
-        b=fkuhc/SZOgd9C/o8XIvO1sUS7pyexqkTXVzVgs2wcs56bb5+cHt/TAcyXWsxmMdCjT
-         lWy0lky6DI3KL8DhVRRMPABLnIalFY8nn4SwRorO2EN6RJhL6vl07oLeR7ac/lN9Yztq
-         LCVSNeXXlxI0JqAzMTtGPjEJIleIoVUaceO25UrXQ2aotzQQ+JkqxUc45ynO8zt6FMMi
-         aMTv465ptmrWsKwhTWXVTRqr1UKtMj2EjDOUFVwiAPI8FK58BPj1MFx+r3ENPnTByHth
-         9tRwx/hdMeK0KLgpsYxsHKTPSCtV2kcPYqqqFpK0VKe6M0SZ7auQopueL4GqXIS7jSGJ
-         vjcw==
-X-Gm-Message-State: AOJu0YyyAURZ/sZkjTmRVAE2TpRGMOWUgLgV7efgwFD6LUxxygHWVdD6
-	3nSNbpkG2DgLh2hNbgqEDIkLqmNE9AU+pDYud3w53KQRuHxGeg/8bQiLyNVsahN3RYWUBAYoD7B
-	/
-X-Google-Smtp-Source: AGHT+IGPFcMG0+WuSEvzaLfVo4yvDOnp6oCLBMJgVrqDnI5Yvr5lFEvM6AhodWIgFxEHdcFp/6Tj+A==
-X-Received: by 2002:a17:907:7d94:b0:a86:b46b:860a with SMTP id a640c23a62f3a-a86e3be5cf1mr197371566b.54.1724767074158;
-        Tue, 27 Aug 2024 06:57:54 -0700 (PDT)
+        bh=onbkRJjonSldeX+TKHvWoalIHglLaxnF1KDpl/v4wiA=;
+        b=TvVdn/g1X/JlsZNnfuuwGzYJh7bBL9ImJsYQxaqAU5XwI9+gJLMl9uNe7d8GqIeTu2
+         XYh1C0ru8iP+crKR1wshdIYmmGAq2qbbCj2EZwtrBdp/hve94NG7Btpnvq2bCJtIebLs
+         PdsfDl7jqeMzjZF30khSzJqPHY4gAFWtTlVHnqrOiqRK/F3tNIRx4VEAPp2IhFOLZquJ
+         1T2bDzrukgsVcJ7JuHEPVoOf1DhK2EIZlbqCJSbErBxPBkK+I7Za1sNlYbIpJmHRbbjP
+         3O2yQhAQuqTwkoIlBCV0sycdgxuYiVT94UOLNdFN3JfkqrD+yh+PvIpLWrf/PL7v81C6
+         G18Q==
+X-Gm-Message-State: AOJu0YzFst2ANLV8wnjMGsnuEa+BL3L6IKsw69Erk4w7j6aL1IUeRGXQ
+	LwywPqkW2vr6m7lQG6pooCvbznI7K0PVDhsMBtMTxDsb9+PKFGeQTIIwfi8h+No3EUN3PtWEz6/
+	K
+X-Google-Smtp-Source: AGHT+IH7hZ1uEw4kAXnd6m6eSnLzFwncr1ABIEpVvj5g0O6NferXHSInSooeNemWXtI/6AQO/5hpRg==
+X-Received: by 2002:a17:907:6d0f:b0:a86:7e7f:69ab with SMTP id a640c23a62f3a-a86a52b367emr931155566b.15.1724767076098;
+        Tue, 27 Aug 2024 06:57:56 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 2/4] x86/hvm: Use for_each_set_bit() in hvm_emulate_writeback()
-Date: Tue, 27 Aug 2024 14:57:44 +0100
-Message-Id: <20240827135746.1908070-3-andrew.cooper3@citrix.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 4/4] x86/vmx: Rewrite vmx_sync_pir_to_irr() to be more efficient
+Date: Tue, 27 Aug 2024 14:57:46 +0100
+Message-Id: <20240827135746.1908070-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240827135746.1908070-1-andrew.cooper3@citrix.com>
 References: <20240827135746.1908070-1-andrew.cooper3@citrix.com>
@@ -90,80 +96,122 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-... which is more consise than the opencoded form.
+There are two issues.  First, pi_test_and_clear_on() pulls the cache-line to
+the CPU and dirties it even if there's nothing outstanding, but the final
+for_each_set_bit() is O(256) when O(8) would do, and would avoid multiple
+atomic updates to the same IRR word.
 
-Also, for production VMs, ~100% of emulations are simple MOVs, so it is likely
-that there are no segments to write back.
+Rewrite it from scratch, explaining what's going on at each step.
 
-Furthermore, now that find_{first,next}_bit() are no longer in use, the
-seg_reg_{accessed,dirty} fields aren't forced to be unsigned long, although
-they do need to remain unsigned int because of __set_bit() elsewhere.
+Bloat-o-meter reports 177 -> 145 (net -32), but the better aspect is the
+removal calls to __find_{first,next}_bit() hidden behind for_each_set_bit().
 
-No practical change.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Pulling current out into curr is good for code generation.  When using current
-in the loop, GCC can't retain the calculation across the call to
-hvm_set_segment_register() and is forced to re-read from the cpu_info block.
+The main purpose of this is to get rid of bitmap_for_each().
 
-However, if curr is initialised, it's calculated even in the likely path...
+v2:
+ * Extend the comments
 ---
- xen/arch/x86/hvm/emulate.c             | 20 ++++++++++----------
- xen/arch/x86/include/asm/hvm/emulate.h |  4 ++--
- 2 files changed, 12 insertions(+), 12 deletions(-)
+ xen/arch/x86/hvm/vmx/vmx.c | 70 +++++++++++++++++++++++++++++++++-----
+ 1 file changed, 62 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index feb4792cc567..732bdbab25b0 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -2908,18 +2908,18 @@ void hvm_emulate_init_per_insn(
- void hvm_emulate_writeback(
-     struct hvm_emulate_ctxt *hvmemul_ctxt)
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 12f8a66458db..1baed7e816c4 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2317,18 +2317,72 @@ static void cf_check vmx_deliver_posted_intr(struct vcpu *v, u8 vector)
+ 
+ static void cf_check vmx_sync_pir_to_irr(struct vcpu *v)
  {
--    enum x86_segment seg;
-+    struct vcpu *curr;
-+    unsigned int dirty = hvmemul_ctxt->seg_reg_dirty;
+-    struct vlapic *vlapic = vcpu_vlapic(v);
+-    unsigned int group, i;
+-    DECLARE_BITMAP(pending_intr, X86_NR_VECTORS);
++    struct pi_desc *desc = &v->arch.hvm.vmx.pi_desc;
++    union {
++        uint64_t _64[X86_NR_VECTORS / (sizeof(uint64_t) * 8)];
++        uint32_t _32[X86_NR_VECTORS / (sizeof(uint32_t) * 8)];
++    } vec;
++    uint32_t *irr;
++    bool on;
  
--    seg = find_first_bit(&hvmemul_ctxt->seg_reg_dirty,
--                         ARRAY_SIZE(hvmemul_ctxt->seg_reg));
-+    if ( likely(!dirty) )
-+        return;
+-    if ( !pi_test_and_clear_on(&v->arch.hvm.vmx.pi_desc) )
++    /*
++     * The PIR is a contended cacheline which bounces between the CPU(s) and
++     * IOMMU(s).  An IOMMU updates the entire PIR atomically, but we can't
++     * express the same on the CPU side, so care has to be taken.
++     *
++     * First, do a plain read of ON.  If the PIR hasn't been modified, this
++     * will keep the cacheline Shared and not pull it Excusive on the current
++     * CPU.
++     */
++    if ( !pi_test_on(desc) )
+         return;
  
--    while ( seg < ARRAY_SIZE(hvmemul_ctxt->seg_reg) )
--    {
--        hvm_set_segment_register(current, seg, &hvmemul_ctxt->seg_reg[seg]);
--        seg = find_next_bit(&hvmemul_ctxt->seg_reg_dirty,
--                            ARRAY_SIZE(hvmemul_ctxt->seg_reg),
--                            seg+1);
--    }
-+    curr = current;
+-    for ( group = 0; group < ARRAY_SIZE(pending_intr); group++ )
+-        pending_intr[group] = pi_get_pir(&v->arch.hvm.vmx.pi_desc, group);
++    /*
++     * Second, if the plain read said that ON was set, we must clear it with
++     * an atomic action.  This will bring the cachline to Exclusive on the
++     * current CPU.
++     *
++     * This should always succeed because noone else should be playing with
++     * the PIR behind our back, but assert so just in case.
++     */
++    on = pi_test_and_clear_on(desc);
++    ASSERT(on);
 +
-+    for_each_set_bit ( seg, dirty )
-+        hvm_set_segment_register(curr, seg, &hvmemul_ctxt->seg_reg[seg]);
++    /*
++     * The cacheline is now Exclusive on the current CPU, and because ON was
++     * set, some other entity (an IOMMU, or Xen on another CPU) has indicated
++     * that at PIR needs re-scanning.
++     *
++     * Note: Entities which can't update the entire cacheline atomically
++     *       (i.e. Xen on another CPU) are required to update PIR first, then
++     *       set ON.  Therefore, there is a corner case where we may have
++     *       found and processed the PIR updates "last time around" and only
++     *       found ON this time around.  This is fine; the logic still
++     *       operates correctly.
++     *
++     * Atomically read and clear the entire pending bitmap as fast as we, to
++     * reduce the window where another entity may steal the cacheline back
++     * from us.  This is a performance concern, not a correctness concern.  If
++     * the another entity does steal the cacheline back, we'll just wait to
++     * get it back again.
++     */
++    for ( unsigned int i = 0; i < ARRAY_SIZE(vec._64); ++i )
++        vec._64[i] = xchg(&desc->pir[i], 0);
 +
-+    hvmemul_ctxt->seg_reg_dirty = 0;
++    /*
++     * Finally, merge the pending vectors into IRR.  The IRR register is
++     * scattered in memory, so we have to do this 32 bits at a time.
++     */
++    irr = (uint32_t *)&vcpu_vlapic(v)->regs->data[APIC_IRR];
++    for ( unsigned int i = 0; i < ARRAY_SIZE(vec._32); ++i )
++    {
++        if ( !vec._32[i] )
++            continue;
+ 
+-    bitmap_for_each ( i, pending_intr, X86_NR_VECTORS )
+-        vlapic_set_vector(i, &vlapic->regs->data[APIC_IRR]);
++        asm ( "lock or %[val], %[irr]"
++              : [irr] "+m" (irr[i * 0x10])
++              : [val] "r" (vec._32[i]) );
++    }
  }
  
- /*
-diff --git a/xen/arch/x86/include/asm/hvm/emulate.h b/xen/arch/x86/include/asm/hvm/emulate.h
-index 29d679442e10..972cdf1fa0cf 100644
---- a/xen/arch/x86/include/asm/hvm/emulate.h
-+++ b/xen/arch/x86/include/asm/hvm/emulate.h
-@@ -36,8 +36,8 @@ struct hvm_emulate_ctxt {
-     unsigned int insn_buf_bytes;
- 
-     struct segment_register seg_reg[10];
--    unsigned long seg_reg_accessed;
--    unsigned long seg_reg_dirty;
-+    unsigned int seg_reg_accessed;
-+    unsigned int seg_reg_dirty;
- 
-     /*
-      * MFNs behind temporary mappings in the write callback.  The length is
+ static bool cf_check vmx_test_pir(const struct vcpu *v, uint8_t vec)
 -- 
 2.39.2
 
