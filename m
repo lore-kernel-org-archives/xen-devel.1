@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0D4C71155
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A5E1C71151
 	for <xen-devel@archiver.kernel.org>; Wed, 28 Aug 2024 22:04:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.785163.1194566 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.785167.1194606 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjQlk-0006ER-PE; Wed, 28 Aug 2024 22:04:00 +0000
+	id 1sjQlo-0007BU-WF; Wed, 28 Aug 2024 22:04:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 785163.1194566; Wed, 28 Aug 2024 22:04:00 +0000
+Received: by outflank-mailman (output) from mailman id 785167.1194606; Wed, 28 Aug 2024 22:04:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjQlk-0006EK-MO; Wed, 28 Aug 2024 22:04:00 +0000
-Received: by outflank-mailman (input) for mailman id 785163;
- Wed, 28 Aug 2024 22:03:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sjQlo-0007BJ-R7; Wed, 28 Aug 2024 22:04:04 +0000
+Received: by outflank-mailman (input) for mailman id 785167;
+ Wed, 28 Aug 2024 22:04:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mQTD=P3=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sjQlj-0006E0-AZ
- for xen-devel@lists.xenproject.org; Wed, 28 Aug 2024 22:03:59 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6be75a87-6589-11ef-a0b0-8be0dac302b0;
- Thu, 29 Aug 2024 00:03:57 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a8683dc3b17so470202666b.3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Aug 2024 15:03:57 -0700 (PDT)
+ id 1sjQln-0006E8-Nb
+ for xen-devel@lists.xenproject.org; Wed, 28 Aug 2024 22:04:03 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6f09f2af-6589-11ef-99a0-01e77a169b0f;
+ Thu, 29 Aug 2024 00:04:02 +0200 (CEST)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2f3e9fb6ee9so84001561fa.3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Aug 2024 15:04:02 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c0bb1c2d2esm2695898a12.16.2024.08.28.15.03.54
+ 4fb4d7f45d1cf-5c0bb1c2d2esm2695898a12.16.2024.08.28.15.03.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 15:03:54 -0700 (PDT)
+ Wed, 28 Aug 2024 15:03:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6be75a87-6589-11ef-a0b0-8be0dac302b0
+X-Inumbo-ID: 6f09f2af-6589-11ef-99a0-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1724882636; x=1725487436; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YY7MdvuXI6KKD8+0pPI2HR0N6tLhBf9qtdXr9xTRqOc=;
-        b=JVg+js8fhpXq0R7yHZOGyCwdSnLv9LB32l/WDbC7v8aVXiq0IULmFHNOigMaQs5Tod
-         mDwQJj4zLkSzSDyZr4/JwkWleJmhXwSb8IGpuFQ2aAAzCeEsolDY+bFTqWuJinTyEj4I
-         9v455mIuarMUdSyp8xBJQM7+hA3rKaLmI4o/w=
+        d=citrix.com; s=google; t=1724882641; x=1725487441; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jE7MF4AvTxU0huYOPOMOwWO7uwI5OHylKNn5LBEsDiE=;
+        b=Fyud8T8eUx8itFWQ9uj6AEwijMh64XFVIwQo1D2Ku0LpVc2FXHP1Wh0n+foZU+K1Ru
+         pY0Nl1fvQzqLqm9/yS9UrU/8UpsvKbQR2BgtBS0i7Gz1dZe7Cpvs3jLl4Teip/2+NQhD
+         aGQCbjwJLHw13B21XWPSIlFlF+awbJ2y7JK7o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724882636; x=1725487436;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YY7MdvuXI6KKD8+0pPI2HR0N6tLhBf9qtdXr9xTRqOc=;
-        b=PSLmzp43+k0Zqb6domwnBNSO0ikPtOltWH6IZm5X0kweB+fAoKoXJYKC2j1iosKire
-         GowEPdyu2rLymzZJb43RZurgTzwhVgw40Jb5UxcDsh5IXZvvZYnv+c6Oj8xjc/am0KWA
-         KhN0t8qULdft5L9opgtURQVoV+0ANbROvOzBSGp9WRHyfI9EuJbRwOEW2ByRYR27Mh2v
-         cOYcZ23D1mDSELOtCqVTj4hGLqoOfqCOGKz3AAp+PoYd2yrQ1mp40+dOS7hNp8GTVgkN
-         FujcbcsHn/9whJowCFLeYnmOW2MyoTFvOW5Sj4k0Zw/FcBNKPB/ED0FMe3jPecbIJ0/E
-         VR3g==
-X-Gm-Message-State: AOJu0YxI4vfYxH9CRLcDQ6ClcTkCmoYjocyusHwqRed6up2zsieszeR8
-	PGmIT6dL1RAXcO67yarzZs6BOgZz54H2YmDaNk8p7tXzjzTpIb6SSBi/WBpIefNsnJsNChWs1qf
-	j
-X-Google-Smtp-Source: AGHT+IEuHLfT8SF7T9SoGHK35Ew10y9xfRr96n0xd9gQtPh6jurJbr0jjpik5vI6lideD3kIfObDjw==
-X-Received: by 2002:a05:6402:90c:b0:5a1:2ce9:f416 with SMTP id 4fb4d7f45d1cf-5c21eda0c2bmr824009a12.37.1724882635259;
-        Wed, 28 Aug 2024 15:03:55 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1724882641; x=1725487441;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=jE7MF4AvTxU0huYOPOMOwWO7uwI5OHylKNn5LBEsDiE=;
+        b=jtZMiZ/GrGT6yVY98Cqm4Z1B3uE8fX02uYv2tXAuDPBIklmpOwGWWZlAWiKcZF2NIC
+         Is7ccXLiPYc40u6IjHadDGtdzDdo2XYclSjKj5F3ItZH4Pyag10DRusw3MxMkRkI/w8W
+         rO1Yi68SLbtyIn9twki5T5S1kvuuQyT/rZJ3czChtniOst9pqo8Glyfk/q/6YpdyotA9
+         9+oPtRqGdyUM+J6zvDo0xtxtjr2dubgt9t8Sd6JQgmbl/U/RP0SPz7opV6dw8Z/IcS5O
+         VSNiZIcaU0RPqxNsMvYpVgt1g4l7U4P8cx1b0W52lxPMb9UYFNcez1dpon8O411evRe3
+         Uh0g==
+X-Gm-Message-State: AOJu0YyGWT/b87zZYcd59eIJyRTOcSdCIYf+In452ja1sh3UuxN7/ygh
+	7rAdEPPmjUL9SSdOWwftmY7T1+iT3QVHOGWlcbkbBKN4tm8fTCCXG39IBkPKkPLXsKtxQOOGt8Y
+	/
+X-Google-Smtp-Source: AGHT+IGskY5mUpIjN+AdOMHhdI+obRxCcgVMM986wSrN/PLyjC7vqCbNurLLvgdunNzRC4wX05XAQg==
+X-Received: by 2002:a05:651c:1543:b0:2ef:2dfd:15e3 with SMTP id 38308e7fff4ca-2f6103a28femr5671851fa.19.1724882640541;
+        Wed, 28 Aug 2024 15:04:00 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
@@ -86,61 +88,144 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v2 00/11] xen/bitops: hweight() cleanup/improvements
-Date: Wed, 28 Aug 2024 23:03:40 +0100
-Message-Id: <20240828220351.2686408-1-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 04/11] xen/bitops: Introduce a multiple_bits_set() helper
+Date: Wed, 28 Aug 2024 23:03:44 +0100
+Message-Id: <20240828220351.2686408-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240828220351.2686408-1-andrew.cooper3@citrix.com>
+References: <20240828220351.2686408-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The next phase of bitops cleanup.  This series:
+This will be used to simplify real logic in the following patch.  Add compile
+and boot time testing as with other bitops.
 
- 1) Untangles the mess around hweight()
- 2) Removes some unwise uses of hweight()
- 3) Makes it work transparently for RISC-V
- 4) Use the POPCNT instruction on x86 when available
+Because the expression is so simple, implement it as a function-like macro
+which is generic on the type of it's argument, rather than having multiple
+variants.
 
-See individual patches for v2 changes.
+Testing function-like macros needs a minor adjustments to the infrastructure
+in xen/self-tests.h to avoid bracketing the fn parameter.  The utility of this
+outweighs the associated risks.
 
-https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1431232348
-https://cirrus-ci.com/build/6014616877137920
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 
-Andrew Cooper (11):
-  xen/compiler: Rename __attribute_const__ to attr_const
-  xen/bitops: Switch from __pure to attr_const
-  xen/bitops: Reinstate the please tidy message
-  xen/bitops: Introduce a multiple_bits_set() helper
-  xen/bitops: Convert 'hweight(x) > 1' to new multiple_bits_set()
-  xen/bitops: Drop the remnants of hweight{8,16}()
-  xen/bitops: Introduce generic_hweightl() and hweightl()
-  xen/bitops: Drop hweight_long() and use hweightl()
-  xen/bitops: Implement hweight32() in terms of hweightl()
-  xen/bitops: Implement hweight64() in terms of hweight{l,32}()
-  x86/bitops: Use the POPCNT instruction when available
+Name inevitably subject to nitpicking.  I'd prefer it to be shorter but I
+can't think of anything suitable.
 
- xen/arch/arm/include/asm/arm64/cpufeature.h |  12 +-
- xen/arch/arm/include/asm/bitops.h           |  11 --
- xen/arch/ppc/include/asm/bitops.h           |  11 +-
- xen/arch/x86/cpu/vpmu.c                     |   2 +-
- xen/arch/x86/hvm/vlapic.c                   |  10 +-
- xen/arch/x86/include/asm/bitops.h           |  32 ++++--
- xen/arch/x86/include/asm/byteorder.h        |   4 +-
- xen/arch/x86/include/asm/endbr.h            |   4 +-
- xen/common/bitmap.c                         |   4 +-
- xen/common/bitops.c                         |  40 +++++++
- xen/common/numa.c                           |   2 +-
- xen/include/xen/bitops.h                    | 118 +++++++++-----------
- xen/include/xen/byteorder/swab.h            |   6 +-
- xen/include/xen/compiler.h                  |   2 +-
- xen/include/xen/self-tests.h                |  10 +-
- xen/lib/Makefile                            |   2 +
- xen/lib/generic-hweightl.c                  |  49 ++++++++
- xen/lib/x86-generic-hweightl.c              |  69 ++++++++++++
- 18 files changed, 266 insertions(+), 122 deletions(-)
- create mode 100644 xen/lib/generic-hweightl.c
- create mode 100644 xen/lib/x86-generic-hweightl.c
+v2:
+ * Drop redundant CHECK() in the BITS_PER_LONG > 32 case.
+---
+ xen/common/bitops.c          | 23 +++++++++++++++++++++++
+ xen/include/xen/bitops.h     | 10 ++++++++++
+ xen/include/xen/self-tests.h | 10 ++++++++--
+ 3 files changed, 41 insertions(+), 2 deletions(-)
 
+diff --git a/xen/common/bitops.c b/xen/common/bitops.c
+index 9e532f0d87aa..b504dd1308b8 100644
+--- a/xen/common/bitops.c
++++ b/xen/common/bitops.c
+@@ -112,9 +112,32 @@ static void __init test_for_each_set_bit(void)
+         panic("for_each_set_bit(uint64) expected %#"PRIx64", got %#"PRIx64"\n", ull, ull_res);
+ }
+ 
++static void __init test_multiple_bits_set(void)
++{
++    /*
++     * multiple_bits_set() is generic on the type of it's parameter, as the
++     * internal expression is so simple.
++     */
++
++    CHECK(multiple_bits_set, 0, false);
++    CHECK(multiple_bits_set, 1, false);
++    CHECK(multiple_bits_set, 2, false);
++    CHECK(multiple_bits_set, 3, true);
++
++    CHECK(multiple_bits_set, 1 | (1UL << (BITS_PER_LONG - 1)), true);
++#if BITS_PER_LONG > 32
++    CHECK(multiple_bits_set, 1 | (1UL << 32), true);
++#endif
++
++    CHECK(multiple_bits_set, 0x8000000000000001ULL, true);
++    CHECK(multiple_bits_set, 0xc000000000000000ULL, true);
++}
++
+ static void __init __constructor test_bitops(void)
+ {
+     test_ffs();
+     test_fls();
+     test_for_each_set_bit();
++
++    test_multiple_bits_set();
+ }
+diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
+index 9f0a0ce4a73b..e7c2c5598275 100644
+--- a/xen/include/xen/bitops.h
++++ b/xen/include/xen/bitops.h
+@@ -298,6 +298,16 @@ static always_inline attr_const unsigned int fls64(uint64_t x)
+               __v && ((iter) = ffs_g(__v) - 1, true);   \
+               __v &= __v - 1 )
+ 
++/*
++ * Calculate if a value has two or more bits set.  Always use this in
++ * preference to an expression of the form 'hweight(x) > 1'.
++ */
++#define multiple_bits_set(x)                    \
++    ({                                          \
++        typeof(x) _v = (x);                     \
++        (_v & (_v - 1)) != 0;                   \
++    })
++
+ /* --------------------- Please tidy below here --------------------- */
+ 
+ #ifndef find_next_bit
+diff --git a/xen/include/xen/self-tests.h b/xen/include/xen/self-tests.h
+index e9a879489363..bd8a4867aa40 100644
+--- a/xen/include/xen/self-tests.h
++++ b/xen/include/xen/self-tests.h
+@@ -15,11 +15,14 @@
+  *
+  * Clang < 8 can't fold constants through static inlines, causing this to
+  * fail.  Simply skip it for incredibly old compilers.
++ *
++ * N.B. fn is intentionally not bracketed to allow us to test function-like
++ * macros too.
+  */
+ #if !defined(CONFIG_CC_IS_CLANG) || CONFIG_CLANG_VERSION >= 80000
+ #define COMPILE_CHECK(fn, val, res)                                     \
+     do {                                                                \
+-        typeof((fn)(val)) real = (fn)(val);                             \
++        typeof(fn(val)) real = fn(val);                                 \
+                                                                         \
+         if ( !__builtin_constant_p(real) )                              \
+             BUILD_ERROR("'" STR(fn(val)) "' not compile-time constant"); \
+@@ -34,10 +37,13 @@
+  * Check that Xen's runtime logic for fn(val) gives the expected answer.  This
+  * requires using HIDE() to prevent the optimiser from collapsing the logic
+  * into a constant.
++ *
++ * N.B. fn is intentionally not bracketed to allow us to test function-like
++ * macros too.
+  */
+ #define RUNTIME_CHECK(fn, val, res)                     \
+     do {                                                \
+-        typeof((fn)(val)) real = (fn)(HIDE(val));       \
++        typeof(fn(val)) real = fn(HIDE(val));           \
+                                                         \
+         if ( real != (res) )                            \
+             panic("%s: %s(%s) expected %u, got %u\n",   \
 -- 
 2.39.2
 
