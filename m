@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A5E1C71151
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Aug 2024 22:04:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.785167.1194606 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A78C71150
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Aug 2024 22:04:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.785165.1194579 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjQlo-0007BU-WF; Wed, 28 Aug 2024 22:04:05 +0000
+	id 1sjQll-0006ME-Ba; Wed, 28 Aug 2024 22:04:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 785167.1194606; Wed, 28 Aug 2024 22:04:04 +0000
+Received: by outflank-mailman (output) from mailman id 785165.1194579; Wed, 28 Aug 2024 22:04:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjQlo-0007BJ-R7; Wed, 28 Aug 2024 22:04:04 +0000
-Received: by outflank-mailman (input) for mailman id 785167;
- Wed, 28 Aug 2024 22:04:03 +0000
+	id 1sjQll-0006L2-58; Wed, 28 Aug 2024 22:04:01 +0000
+Received: by outflank-mailman (input) for mailman id 785165;
+ Wed, 28 Aug 2024 22:03:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mQTD=P3=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sjQln-0006E8-Nb
- for xen-devel@lists.xenproject.org; Wed, 28 Aug 2024 22:04:03 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
+ id 1sjQlj-0006E8-R2
+ for xen-devel@lists.xenproject.org; Wed, 28 Aug 2024 22:03:59 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6f09f2af-6589-11ef-99a0-01e77a169b0f;
- Thu, 29 Aug 2024 00:04:02 +0200 (CEST)
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2f3e9fb6ee9so84001561fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Aug 2024 15:04:02 -0700 (PDT)
+ id 6c704332-6589-11ef-99a0-01e77a169b0f;
+ Thu, 29 Aug 2024 00:03:57 +0200 (CEST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5bf006f37daso18895a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Aug 2024 15:03:57 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c0bb1c2d2esm2695898a12.16.2024.08.28.15.03.58
+ 4fb4d7f45d1cf-5c0bb1c2d2esm2695898a12.16.2024.08.28.15.03.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 15:03:58 -0700 (PDT)
+ Wed, 28 Aug 2024 15:03:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,38 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f09f2af-6589-11ef-99a0-01e77a169b0f
+X-Inumbo-ID: 6c704332-6589-11ef-99a0-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1724882641; x=1725487441; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1724882636; x=1725487436; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jE7MF4AvTxU0huYOPOMOwWO7uwI5OHylKNn5LBEsDiE=;
-        b=Fyud8T8eUx8itFWQ9uj6AEwijMh64XFVIwQo1D2Ku0LpVc2FXHP1Wh0n+foZU+K1Ru
-         pY0Nl1fvQzqLqm9/yS9UrU/8UpsvKbQR2BgtBS0i7Gz1dZe7Cpvs3jLl4Teip/2+NQhD
-         aGQCbjwJLHw13B21XWPSIlFlF+awbJ2y7JK7o=
+        bh=TA9zJhMMiP1cl4HW7H7RUH127emY4xJNbEczm6wLMBU=;
+        b=lyzXYIpTlZfTLoaktw/83gq7NnZCWtARmJkEIoQg5D4Pib7zbZpYyn2u5yNA7FpXnz
+         tgBz+3kgRjR0N/XlEzTqG5XYZGp365TraSWmolI/7gjXgeE8C8TZDB/VEqIXXYGxbtx8
+         zlYVTJKqy0j3GqSJmgtowx7G+ZG9qmpb/nU00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724882641; x=1725487441;
+        d=1e100.net; s=20230601; t=1724882636; x=1725487436;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jE7MF4AvTxU0huYOPOMOwWO7uwI5OHylKNn5LBEsDiE=;
-        b=jtZMiZ/GrGT6yVY98Cqm4Z1B3uE8fX02uYv2tXAuDPBIklmpOwGWWZlAWiKcZF2NIC
-         Is7ccXLiPYc40u6IjHadDGtdzDdo2XYclSjKj5F3ItZH4Pyag10DRusw3MxMkRkI/w8W
-         rO1Yi68SLbtyIn9twki5T5S1kvuuQyT/rZJ3czChtniOst9pqo8Glyfk/q/6YpdyotA9
-         9+oPtRqGdyUM+J6zvDo0xtxtjr2dubgt9t8Sd6JQgmbl/U/RP0SPz7opV6dw8Z/IcS5O
-         VSNiZIcaU0RPqxNsMvYpVgt1g4l7U4P8cx1b0W52lxPMb9UYFNcez1dpon8O411evRe3
-         Uh0g==
-X-Gm-Message-State: AOJu0YyGWT/b87zZYcd59eIJyRTOcSdCIYf+In452ja1sh3UuxN7/ygh
-	7rAdEPPmjUL9SSdOWwftmY7T1+iT3QVHOGWlcbkbBKN4tm8fTCCXG39IBkPKkPLXsKtxQOOGt8Y
-	/
-X-Google-Smtp-Source: AGHT+IGskY5mUpIjN+AdOMHhdI+obRxCcgVMM986wSrN/PLyjC7vqCbNurLLvgdunNzRC4wX05XAQg==
-X-Received: by 2002:a05:651c:1543:b0:2ef:2dfd:15e3 with SMTP id 38308e7fff4ca-2f6103a28femr5671851fa.19.1724882640541;
-        Wed, 28 Aug 2024 15:04:00 -0700 (PDT)
+        bh=TA9zJhMMiP1cl4HW7H7RUH127emY4xJNbEczm6wLMBU=;
+        b=hCh7KmDEMvZnpyoauCDBT2Fai5iMShq726JkLH3u2aTt4FsiOio8JEE3nYZ3S6NKxn
+         4Pakmnjv1PGhr8DZIr5B2N+Lw/dlmCrgY+7JInTd0iDNOnCRFOHpTYZqyVLoOnsoMKlO
+         SMpK6Y0/zsMkRxc1rgRpW+fSFzwG9JxcatwV/G4zZYIG/Xc7CajEmU5xQZSlbTzOWXID
+         +1mIMd4vUxSqQ1MLUq/QdKIg5TcjNH5c/fjqf37xwJbS2mLxP0IEB2J41FlwYGj+MnbM
+         DPbssmse1Q4whgtutIwahJMa7s6vijoprRZ9E6CcGHEyg3Oo5UHUem7/9/hfxJTKVnpU
+         ugUg==
+X-Gm-Message-State: AOJu0YwOD4rO/GR266l1+QibihGXDwHUDLwBpHkP/q1Y+LarA0qbbXIi
+	ecVEifQvb4UW2wgGfB5OdQztNtkI0mgOOqovnzpwLAj1Ws8g8MmEB+EK2kl+oOr7VgH+Z4SWuhI
+	l
+X-Google-Smtp-Source: AGHT+IGD9DKTjQXlDEnryzLj/nD4dCJYNsZnTxN+I9P6dA3O2JfEGef4Tj0eX54rIlOSfqwvDZUzNg==
+X-Received: by 2002:a05:6402:3506:b0:5c0:a8b8:dd6b with SMTP id 4fb4d7f45d1cf-5c22018ad3dmr620843a12.14.1724882636093;
+        Wed, 28 Aug 2024 15:03:56 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
@@ -88,9 +87,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v2 04/11] xen/bitops: Introduce a multiple_bits_set() helper
-Date: Wed, 28 Aug 2024 23:03:44 +0100
-Message-Id: <20240828220351.2686408-5-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 01/11] xen/compiler: Rename __attribute_const__ to attr_const
+Date: Wed, 28 Aug 2024 23:03:41 +0100
+Message-Id: <20240828220351.2686408-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240828220351.2686408-1-andrew.cooper3@citrix.com>
 References: <20240828220351.2686408-1-andrew.cooper3@citrix.com>
@@ -98,19 +97,12 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This will be used to simplify real logic in the following patch.  Add compile
-and boot time testing as with other bitops.
+There's no need for the name to be so verbose.
 
-Because the expression is so simple, implement it as a function-like macro
-which is generic on the type of it's argument, rather than having multiple
-variants.
+No functional change.
 
-Testing function-like macros needs a minor adjustments to the infrastructure
-in xen/self-tests.h to avoid bracketing the fn parameter.  The utility of this
-outweighs the associated risks.
-
+Suggest-by: Jan Beulich <JBeulich@suse.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
@@ -122,110 +114,168 @@ CC: Michal Orzel <michal.orzel@amd.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 
-Name inevitably subject to nitpicking.  I'd prefer it to be shorter but I
-can't think of anything suitable.
-
 v2:
- * Drop redundant CHECK() in the BITS_PER_LONG > 32 case.
+ * New
 ---
- xen/common/bitops.c          | 23 +++++++++++++++++++++++
- xen/include/xen/bitops.h     | 10 ++++++++++
- xen/include/xen/self-tests.h | 10 ++++++++--
- 3 files changed, 41 insertions(+), 2 deletions(-)
+ tools/libs/guest/xg_dom_decompress_unsafe_zstd.c |  2 +-
+ xen/arch/arm/include/asm/arm64/cpufeature.h      | 12 ++++++------
+ xen/arch/x86/include/asm/byteorder.h             |  4 ++--
+ xen/arch/x86/include/asm/endbr.h                 |  4 ++--
+ xen/include/xen/byteorder/swab.h                 |  6 +++---
+ xen/include/xen/compiler.h                       |  2 +-
+ 6 files changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/xen/common/bitops.c b/xen/common/bitops.c
-index 9e532f0d87aa..b504dd1308b8 100644
---- a/xen/common/bitops.c
-+++ b/xen/common/bitops.c
-@@ -112,9 +112,32 @@ static void __init test_for_each_set_bit(void)
-         panic("for_each_set_bit(uint64) expected %#"PRIx64", got %#"PRIx64"\n", ull, ull_res);
- }
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c b/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
+index 7cd266444bb1..ff45732a3616 100644
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
++++ b/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
+@@ -22,7 +22,7 @@ typedef uint16_t __be16;
+ typedef uint32_t __be32;
+ typedef uint64_t __be64;
  
-+static void __init test_multiple_bits_set(void)
-+{
-+    /*
-+     * multiple_bits_set() is generic on the type of it's parameter, as the
-+     * internal expression is so simple.
-+     */
-+
-+    CHECK(multiple_bits_set, 0, false);
-+    CHECK(multiple_bits_set, 1, false);
-+    CHECK(multiple_bits_set, 2, false);
-+    CHECK(multiple_bits_set, 3, true);
-+
-+    CHECK(multiple_bits_set, 1 | (1UL << (BITS_PER_LONG - 1)), true);
-+#if BITS_PER_LONG > 32
-+    CHECK(multiple_bits_set, 1 | (1UL << 32), true);
-+#endif
-+
-+    CHECK(multiple_bits_set, 0x8000000000000001ULL, true);
-+    CHECK(multiple_bits_set, 0xc000000000000000ULL, true);
-+}
-+
- static void __init __constructor test_bitops(void)
+-#define __attribute_const__
++#define attr_const
+ #define __force
+ #define always_inline
+ #define noinline
+diff --git a/xen/arch/arm/include/asm/arm64/cpufeature.h b/xen/arch/arm/include/asm/arm64/cpufeature.h
+index d9b9fa77cbd2..1bb503e857e9 100644
+--- a/xen/arch/arm/include/asm/arm64/cpufeature.h
++++ b/xen/arch/arm/include/asm/arm64/cpufeature.h
+@@ -44,25 +44,25 @@ struct arm64_ftr_bits {
+ 	s64		safe_val; /* safe value for FTR_EXACT features */
+ };
+ 
+-static inline int __attribute_const__
++static inline int attr_const
+ cpuid_feature_extract_signed_field_width(u64 features, int field, int width)
  {
-     test_ffs();
-     test_fls();
-     test_for_each_set_bit();
-+
-+    test_multiple_bits_set();
+ 	return (s64)(features << (64 - width - field)) >> (64 - width);
  }
-diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
-index 9f0a0ce4a73b..e7c2c5598275 100644
---- a/xen/include/xen/bitops.h
-+++ b/xen/include/xen/bitops.h
-@@ -298,6 +298,16 @@ static always_inline attr_const unsigned int fls64(uint64_t x)
-               __v && ((iter) = ffs_g(__v) - 1, true);   \
-               __v &= __v - 1 )
  
-+/*
-+ * Calculate if a value has two or more bits set.  Always use this in
-+ * preference to an expression of the form 'hweight(x) > 1'.
-+ */
-+#define multiple_bits_set(x)                    \
-+    ({                                          \
-+        typeof(x) _v = (x);                     \
-+        (_v & (_v - 1)) != 0;                   \
-+    })
-+
- /* --------------------- Please tidy below here --------------------- */
+-static inline int __attribute_const__
++static inline int attr_const
+ cpuid_feature_extract_signed_field(u64 features, int field)
+ {
+ 	return cpuid_feature_extract_signed_field_width(features, field, 4);
+ }
  
- #ifndef find_next_bit
-diff --git a/xen/include/xen/self-tests.h b/xen/include/xen/self-tests.h
-index e9a879489363..bd8a4867aa40 100644
---- a/xen/include/xen/self-tests.h
-+++ b/xen/include/xen/self-tests.h
-@@ -15,11 +15,14 @@
-  *
-  * Clang < 8 can't fold constants through static inlines, causing this to
-  * fail.  Simply skip it for incredibly old compilers.
-+ *
-+ * N.B. fn is intentionally not bracketed to allow us to test function-like
-+ * macros too.
+-static inline unsigned int __attribute_const__
++static inline unsigned int attr_const
+ cpuid_feature_extract_unsigned_field_width(u64 features, int field, int width)
+ {
+ 	return (u64)(features << (64 - width - field)) >> (64 - width);
+ }
+ 
+-static inline unsigned int __attribute_const__
++static inline unsigned int attr_const
+ cpuid_feature_extract_unsigned_field(u64 features, int field)
+ {
+ 	return cpuid_feature_extract_unsigned_field_width(features, field, 4);
+@@ -73,7 +73,7 @@ static inline u64 arm64_ftr_mask(const struct arm64_ftr_bits *ftrp)
+ 	return (u64)GENMASK(ftrp->shift + ftrp->width - 1, ftrp->shift);
+ }
+ 
+-static inline int __attribute_const__
++static inline int attr_const
+ cpuid_feature_extract_field_width(u64 features, int field, int width, bool sign)
+ {
+ 	return (sign) ?
+@@ -81,7 +81,7 @@ cpuid_feature_extract_field_width(u64 features, int field, int width, bool sign)
+ 		cpuid_feature_extract_unsigned_field_width(features, field, width);
+ }
+ 
+-static inline int __attribute_const__
++static inline int attr_const
+ cpuid_feature_extract_field(u64 features, int field, bool sign)
+ {
+ 	return cpuid_feature_extract_field_width(features, field, 4, sign);
+diff --git a/xen/arch/x86/include/asm/byteorder.h b/xen/arch/x86/include/asm/byteorder.h
+index e935f7b2b03b..a877c07f6796 100644
+--- a/xen/arch/x86/include/asm/byteorder.h
++++ b/xen/arch/x86/include/asm/byteorder.h
+@@ -4,13 +4,13 @@
+ #include <xen/types.h>
+ #include <xen/compiler.h>
+ 
+-static inline __attribute_const__ __u32 ___arch__swab32(__u32 x)
++static inline attr_const __u32 ___arch__swab32(__u32 x)
+ {
+     asm("bswap %0" : "=r" (x) : "0" (x));
+     return x;
+ }
+ 
+-static inline __attribute_const__ __u64 ___arch__swab64(__u64 val)
++static inline attr_const __u64 ___arch__swab64(__u64 val)
+ { 
+     union { 
+         struct { __u32 a,b; } s;
+diff --git a/xen/arch/x86/include/asm/endbr.h b/xen/arch/x86/include/asm/endbr.h
+index 3033e40d29a8..ba3bae714787 100644
+--- a/xen/arch/x86/include/asm/endbr.h
++++ b/xen/arch/x86/include/asm/endbr.h
+@@ -19,7 +19,7 @@
+  * gen_endbr64() is written deliberately to avoid the problematic operand, and
+  * marked __const__ as it is safe for the optimiser to hoist/merge/etc.
   */
- #if !defined(CONFIG_CC_IS_CLANG) || CONFIG_CLANG_VERSION >= 80000
- #define COMPILE_CHECK(fn, val, res)                                     \
-     do {                                                                \
--        typeof((fn)(val)) real = (fn)(val);                             \
-+        typeof(fn(val)) real = fn(val);                                 \
-                                                                         \
-         if ( !__builtin_constant_p(real) )                              \
-             BUILD_ERROR("'" STR(fn(val)) "' not compile-time constant"); \
-@@ -34,10 +37,13 @@
-  * Check that Xen's runtime logic for fn(val) gives the expected answer.  This
-  * requires using HIDE() to prevent the optimiser from collapsing the logic
-  * into a constant.
-+ *
-+ * N.B. fn is intentionally not bracketed to allow us to test function-like
-+ * macros too.
+-static inline uint32_t __attribute_const__ gen_endbr64(void)
++static inline uint32_t attr_const gen_endbr64(void)
+ {
+     uint32_t res;
+ 
+@@ -45,7 +45,7 @@ static inline void place_endbr64(void *ptr)
+  * contain an ENDBR64 instruction.  Use an encoding which isn't the default
+  * P6_NOP4.  Specifically, nopw (%rcx)
   */
- #define RUNTIME_CHECK(fn, val, res)                     \
-     do {                                                \
--        typeof((fn)(val)) real = (fn)(HIDE(val));       \
-+        typeof(fn(val)) real = fn(HIDE(val));           \
-                                                         \
-         if ( real != (res) )                            \
-             panic("%s: %s(%s) expected %u, got %u\n",   \
+-static inline uint32_t __attribute_const__ gen_endbr64_poison(void)
++static inline uint32_t attr_const gen_endbr64_poison(void)
+ {
+     uint32_t res;
+ 
+diff --git a/xen/include/xen/byteorder/swab.h b/xen/include/xen/byteorder/swab.h
+index b7e30f050385..9f817e3c4492 100644
+--- a/xen/include/xen/byteorder/swab.h
++++ b/xen/include/xen/byteorder/swab.h
+@@ -123,7 +123,7 @@
+ #endif /* OPTIMIZE */
+ 
+ 
+-static inline __attribute_const__ __u16 __fswab16(__u16 x)
++static inline attr_const __u16 __fswab16(__u16 x)
+ {
+     return __arch__swab16(x);
+ }
+@@ -136,7 +136,7 @@ static inline void __swab16s(__u16 *addr)
+     __arch__swab16s(addr);
+ }
+ 
+-static inline __attribute_const__ __u32 __fswab32(__u32 x)
++static inline attr_const __u32 __fswab32(__u32 x)
+ {
+     return __arch__swab32(x);
+ }
+@@ -150,7 +150,7 @@ static inline void __swab32s(__u32 *addr)
+ }
+ 
+ #ifdef __BYTEORDER_HAS_U64__
+-static inline __attribute_const__ __u64 __fswab64(__u64 x)
++static inline attr_const __u64 __fswab64(__u64 x)
+ {
+ #  ifdef __SWAB_64_THRU_32__
+     __u32 h = x >> 32;
+diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
+index 444bf80142c7..b118e4ba62eb 100644
+--- a/xen/include/xen/compiler.h
++++ b/xen/include/xen/compiler.h
+@@ -88,7 +88,7 @@
+ 
+ #define __constructor       __attribute__((__constructor__)) cf_check
+ #define __pure              __attribute__((__pure__))
+-#define __attribute_const__ __attribute__((__const__))
++#define attr_const          __attribute__((__const__))
+ #define __transparent__     __attribute__((__transparent_union__))
+ 
+ /*
 -- 
 2.39.2
 
