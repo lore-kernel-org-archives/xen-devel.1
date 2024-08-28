@@ -4,35 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 269E3C5472D
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Aug 2024 04:38:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.784467.1193808 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C6A9C5472D
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Aug 2024 06:11:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.784479.1193828 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjARI-0002I5-6p; Wed, 28 Aug 2024 04:37:48 +0000
+	id 1sjBtp-0001nk-1r; Wed, 28 Aug 2024 06:11:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 784467.1193808; Wed, 28 Aug 2024 04:37:48 +0000
+Received: by outflank-mailman (output) from mailman id 784479.1193828; Wed, 28 Aug 2024 06:11:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjARI-0002Hy-47; Wed, 28 Aug 2024 04:37:48 +0000
-Received: by outflank-mailman (input) for mailman id 784467;
- Wed, 28 Aug 2024 04:37:47 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sjARG-0002Ho-W4; Wed, 28 Aug 2024 04:37:47 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sjARG-0006tS-OB; Wed, 28 Aug 2024 04:37:46 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sjARG-0000gi-9i; Wed, 28 Aug 2024 04:37:46 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1sjARG-0001Yd-9G; Wed, 28 Aug 2024 04:37:46 +0000
+	id 1sjBto-0001nd-Uo; Wed, 28 Aug 2024 06:11:20 +0000
+Received: by outflank-mailman (input) for mailman id 784479;
+ Wed, 28 Aug 2024 06:11:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=/gvM=P3=bombadil.srs.infradead.org=BATV+4c6678e563c2e29e76cf+7675+infradead.org+hch@srs-se1.protection.inumbo.net>)
+ id 1sjBto-0001ZP-7E
+ for xen-devel@lists.xenproject.org; Wed, 28 Aug 2024 06:11:20 +0000
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [2607:7c80:54:3::133])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 572d1c0f-6504-11ef-a0b0-8be0dac302b0;
+ Wed, 28 Aug 2024 08:11:19 +0200 (CEST)
+Received: from [2001:4bb8:2dc:a2cd:2ccf:8fbe:8ab4:c9db] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1sjBtg-0000000E1uh-0axG; Wed, 28 Aug 2024 06:11:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,72 +42,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: 572d1c0f-6504-11ef-a0b0-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=3cfAQg0/2tmf884P4XrtpHXIyII8v0qyHI125kMktsQ=; b=R3z9q1JwjP73GusXcgj+A/iHiI
-	I3NZ5ikuJyeCG8hbjbMJZWQjFoFZPkb2WShdrfSJWAHWpAXjXx99REVEm5UhAJMpy4M285Bgn+mHP
-	ZOZRf/9yiCFTwzqmXjM90zYOMmJ5NbpVySidIy7yWevDstObRPOfQZxMCAJ+plIoWwQs=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-187373-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=xXPvEjkN13oRSPiD1VpIsI6lICkEOhwDSVN6M4ebF3M=; b=G6ceizxaxo/5YPTjysre3RE3P5
+	r6theemKFI6tHVBOtljvn4KkqxAS2QAOgq2kFNqL/qSweoZ78GG5roeidLnOxQYaFwBGFSvMgjIxT
+	Nd3VjlhZeAlYoMTPJ/A+LgEVZKiJo8/6vpC94GKnxo/yeszqxNmOI2uH+gYkKm6wByymb+IQbHgRs
+	lDgiPm0CITsg8ivicn6DOIMDexltTWRjLyX7eFt13Mh7KXkquOY+RUG+jycl2hgcaS99zex+kd+o9
+	eIbY6ta0tPyXUDbcb5Au2QNiyOxW5yX9stCLkEzWH5+UibAoch+LaUcS6z8gLwS5pfwAXC+wswjoI
+	AbBwVQ3w==;
+From: Christoph Hellwig <hch@lst.de>
+To: iommu@lists.linux.dev
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Bingbu Cao <bingbu.cao@intel.com>,
+	"Michael S . Tsirkin " <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	linux-kernel@vger.kernel.org,
+	linux-alpha@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-s390@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	virtualization@lists.linux.dev,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH 1/2] vdpa_sim: don't select DMA_OPS
+Date: Wed, 28 Aug 2024 09:10:28 +0300
+Message-ID: <20240828061104.1925127-2-hch@lst.de>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240828061104.1925127-1-hch@lst.de>
+References: <20240828061104.1925127-1-hch@lst.de>
 MIME-Version: 1.0
-Subject: [ovmf test] 187373: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=39a999eb1decf486c615489174912f2d278636d1
-X-Osstest-Versions-That:
-    ovmf=ded4191e1087c56e0bdeb118fd519d18cb353ef3
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 28 Aug 2024 04:37:46 +0000
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-flight 187373 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/187373/
+vdpa_sim has been fixed to not override the dma_map_ops in commit
+6c3d329e6486 ("vdpa_sim: get rid of DMA ops"), so don't select the
+symbol and don't depend on HAS_DMA.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 39a999eb1decf486c615489174912f2d278636d1
-baseline version:
- ovmf                 ded4191e1087c56e0bdeb118fd519d18cb353ef3
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/vdpa/Kconfig | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-Last test of basis   187372  2024-08-28 00:43:28 Z    0 days
-Testing same since   187373  2024-08-28 03:14:31 Z    0 days    1 attempts
+diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
+index 5265d09fc1c409..b08de3b7706109 100644
+--- a/drivers/vdpa/Kconfig
++++ b/drivers/vdpa/Kconfig
+@@ -11,8 +11,7 @@ if VDPA
+ 
+ config VDPA_SIM
+ 	tristate "vDPA device simulator core"
+-	depends on RUNTIME_TESTING_MENU && HAS_DMA
+-	select DMA_OPS
++	depends on RUNTIME_TESTING_MENU
+ 	select VHOST_RING
+ 	select IOMMU_IOVA
+ 	help
+-- 
+2.43.0
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Oliver Smith-Denny <osde@linux.microsoft.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   ded4191e10..39a999eb1d  39a999eb1decf486c615489174912f2d278636d1 -> xen-tested-master
 
