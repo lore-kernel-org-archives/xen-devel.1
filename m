@@ -4,65 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D66CAC83F0F
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Aug 2024 12:13:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.785789.1195282 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41361C83F0A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Aug 2024 12:15:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.785794.1195292 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sje1Y-0007Lp-GT; Thu, 29 Aug 2024 12:13:12 +0000
+	id 1sje3L-0007tT-Qi; Thu, 29 Aug 2024 12:15:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 785789.1195282; Thu, 29 Aug 2024 12:13:12 +0000
+Received: by outflank-mailman (output) from mailman id 785794.1195292; Thu, 29 Aug 2024 12:15:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sje1Y-0007Li-CS; Thu, 29 Aug 2024 12:13:12 +0000
-Received: by outflank-mailman (input) for mailman id 785789;
- Thu, 29 Aug 2024 12:13:12 +0000
+	id 1sje3L-0007tM-NZ; Thu, 29 Aug 2024 12:15:03 +0000
+Received: by outflank-mailman (input) for mailman id 785794;
+ Thu, 29 Aug 2024 12:15:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1zDJ=P4=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
- id 1sje1X-0007Lc-PT
- for xen-devel@lists.xenproject.org; Thu, 29 Aug 2024 12:13:11 +0000
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on2060c.outbound.protection.outlook.com
- [2a01:111:f403:2606::60c])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ImPG=P4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sje3K-0007tE-Ua
+ for xen-devel@lists.xenproject.org; Thu, 29 Aug 2024 12:15:02 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0e4c48df-6600-11ef-a0b0-8be0dac302b0;
- Thu, 29 Aug 2024 14:13:10 +0200 (CEST)
-Received: from AS4P251CA0004.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:5d2::6)
- by AM8PR08MB5747.eurprd08.prod.outlook.com (2603:10a6:20b:1c7::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.19; Thu, 29 Aug
- 2024 12:13:05 +0000
-Received: from AM4PEPF00027A6C.eurprd04.prod.outlook.com
- (2603:10a6:20b:5d2:cafe::46) by AS4P251CA0004.outlook.office365.com
- (2603:10a6:20b:5d2::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.28 via Frontend
- Transport; Thu, 29 Aug 2024 12:13:05 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM4PEPF00027A6C.mail.protection.outlook.com (10.167.16.90) with
- Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7918.13
- via Frontend Transport; Thu, 29 Aug 2024 12:13:05 +0000
-Received: ("Tessian outbound de2677e4ad72:v403");
- Thu, 29 Aug 2024 12:13:04 +0000
-Received: from L92bf38cd484f.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- AB606583-F662-42FF-A808-48BB7CB84518.1; 
- Thu, 29 Aug 2024 12:08:09 +0000
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id
- L92bf38cd484f.1 (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 29 Aug 2024 12:08:09 +0000
-Received: from DB9PR08MB6588.eurprd08.prod.outlook.com (2603:10a6:10:25a::24)
- by DU0PR08MB7884.eurprd08.prod.outlook.com (2603:10a6:10:3b0::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.19; Thu, 29 Aug
- 2024 12:08:06 +0000
-Received: from DB9PR08MB6588.eurprd08.prod.outlook.com
- ([fe80::a8fc:ea0d:baf1:23a]) by DB9PR08MB6588.eurprd08.prod.outlook.com
- ([fe80::a8fc:ea0d:baf1:23a%4]) with mapi id 15.20.7918.017; Thu, 29 Aug 2024
- 12:08:06 +0000
+ id 50f38c78-6600-11ef-a0b0-8be0dac302b0;
+ Thu, 29 Aug 2024 14:15:01 +0200 (CEST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a86cc0d10aaso61275366b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Aug 2024 05:15:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8989221c24sm71490766b.196.2024.08.29.05.15.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 29 Aug 2024 05:15:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,440 +47,251 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e4c48df-6600-11ef-a0b0-8be0dac302b0
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=Th5sh/f6vId0ZL2r4rRuLvjYaDUv/nwIfqtTp8gLpLo/xdChrUMHa1UuVQWCyAU45eNVcS8QJnwhGjhoXLiDA/H3nQKv26P9eWKMFWBtHWtVQfw9wnnd/cDOJU74YtCF9ZBeSbietw1eJ5zxOlpLn1R+72w4cCdmyoqY1fRuIh5wWZdLGOhVoC7l0gzYEbKUXKLiyt9w8r6hfDgmTJTusH5YFOdD7fFXzJ87pibFzuD0c5fHQrbNnT62paX0+qykSi8BHVx7kY0UAHbF/benv7RUI4vnPSBq31zKTLhFaACsKHjmY9zX/PVxwSOqYd1o3YXYTVUIFpE9/SvryHUS+Q==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3lHEmkpXMa2uyIswJkRQ6NHRDOX+iQAljOHVIeoGEwY=;
- b=cEPFe5KyztDFX8RK3Jgz7lvslPa2Ud85C09t2xOpFBxfLeE/e4q+RTLlijIXLRRn43Is6j1PQ+0WManWJeV3gpW1QF0CtMzYMjjM87QUX4H5clqidsNWTCPybEOtviWohtXHLR3silVa9b7gpE/s18nP6EfTt0jgKTHMTqHOhmnzNCsZTtjORJ9DPF5Cz2210JU0SaRPtG9mCIFCpx3ZRMvko7qUwatMyF45QfLTV6vxv2/kpT+xS0Pf6IEO7M6T+R0QMGKnCkDfwU1si6/XaApUILXTQvoTRykrc10dmeTPFMJD6sCrrKsTgPfFVkh5exApeSXtUToXzpz24tWbiw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3lHEmkpXMa2uyIswJkRQ6NHRDOX+iQAljOHVIeoGEwY=;
- b=BIUrPygOVC9t+05OexclindTwNygMAWxOL70UjwWnFDlFLpWmL3XIWKg+OirWuaysc8xh6TXBV92ELrsL4zsCcL2AbcCnCjO0LF34KsoyiCNM91XQfYNkTvg0RaQXGw9QRiA9aKd3+aWMIS3WagaSTgrFgAJe5gUhqzZgPcV43w=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 58dfc2f987a37f44
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=x6rLeLMPyJwdh9bI88XsVDiKWJmlm56UFeYh6M9xTrXN7gTci1sup+bhu2oEjOUolfgnV+TmDRJDpL2QFhUrkG9YkQMCFJ/6GbQWJ4prOIceKBsS8CuqyzgdgWErjkaFA7ZCMghHxIXjXwuVLNT9m9bSKCfqBK/eHmA+tlHR3hoItjvwtDIGv+CE3GAYALhiRRk9vyLGqqoKuPaXYhz515xCMvWqNDFHgOzlLsDEScNUb68yn4glz5/qPjhN7FEYLC+gEl2lkkX0XSODtSmQJnY9FLMdtnRgVrW3rHxEaOKgBOAFlKhDdqXJKPvZO3jNDyvDm75g9I2RVAR6/AJe4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3lHEmkpXMa2uyIswJkRQ6NHRDOX+iQAljOHVIeoGEwY=;
- b=VXG+8L2nOjV1q2tUmiwl5hv9MngUzd3G+cDC0/zGbM0SBvYM0ZaAF3VN0mn3Y5euqLhj7sZTW4AV/jzVk/YNtfAMp5NxLrMso+fdF7pW0Y85DLl/dOdHctHNyitwJ9MMNaUZkjA8nRuR9BiktlIYrAh8qGqzoXyt/WLomzjEcLRMZIQLZmllAqYdDKhy0PBG+Zbw/wEVP2OrK0vhv1rtP0q/Hea6RfPr812mavACa1OmrclpR+s6JG2RVPZVzK387N771UFKi2RvbqfA9n673maBx1lO64GKu7zTkcykteT34Rk9FnRPj+23B4njevHdCBVI9QlFLnR9piBoQkVBow==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3lHEmkpXMa2uyIswJkRQ6NHRDOX+iQAljOHVIeoGEwY=;
- b=BIUrPygOVC9t+05OexclindTwNygMAWxOL70UjwWnFDlFLpWmL3XIWKg+OirWuaysc8xh6TXBV92ELrsL4zsCcL2AbcCnCjO0LF34KsoyiCNM91XQfYNkTvg0RaQXGw9QRiA9aKd3+aWMIS3WagaSTgrFgAJe5gUhqzZgPcV43w=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Michal Orzel
-	<michal.orzel@amd.com>, Stefano Stabellini <sstabellini@kernel.org>, Artem
- Mygaiev <artem_mygaiev@epam.com>, Hisao Munakata
-	<hisao.munakata.vt@renesas.com>
-Subject: Re: [PATCH v2] docs: fusa: Add requirements for generic timer
-Thread-Topic: [PATCH v2] docs: fusa: Add requirements for generic timer
-Thread-Index: AQHa+gcFR3YtqyGnJ0KBJ/zbYknDerI+JBsA
-Date: Thu, 29 Aug 2024 12:08:06 +0000
-Message-ID: <43971A3E-4DE6-4DB2-83A4-265DDC3A1747@arm.com>
-References: <20240829113120.3980270-1-ayan.kumar.halder@amd.com>
-In-Reply-To: <20240829113120.3980270-1-ayan.kumar.halder@amd.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3776.700.51)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	DB9PR08MB6588:EE_|DU0PR08MB7884:EE_|AM4PEPF00027A6C:EE_|AM8PR08MB5747:EE_
-X-MS-Office365-Filtering-Correlation-Id: 783c6fd7-b971-4252-cbb3-08dcc823efde
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|366016|376014|1800799024|38070700018;
-X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?j1564+aAxS/jTfpifIk843D1JPYURFSH7aytwY5qeBV1x62tFjy3NNTsnIgZ?=
- =?us-ascii?Q?y2uRZOLoXEveRKaFndXlpztmwN0INdXBmzzQwnVjPEt2k1grn16S/HZlDl0q?=
- =?us-ascii?Q?QLKxcwcw+51vLbADI3W6P2RhjhmbdxQt8Y375niNV+6YsQ4yzjFWk7FLRh+P?=
- =?us-ascii?Q?baWE0gOusBDjpCzGOzivXUSMOp/g9PwoCTybJHo+puTvMligZojR1N/AwORe?=
- =?us-ascii?Q?xXnOsBAEeaO+a8lsKSEdHyommAj+C9bRf9WZ+3J+/h1MjhXa4xIzsD+Q+w4q?=
- =?us-ascii?Q?2RWStYQuxudjYlqy9+MYzf2K9YMp/12GCQyCM4ZNMiME7ZecpWIGUUGdxNGs?=
- =?us-ascii?Q?9x+9mZFKtMuwyWQQIAmDbJbcmpgJpYXSEtTP/6Osndqa7XZl+krwhaOXH5Lo?=
- =?us-ascii?Q?pA99WZVirGGfcSTr/I2MGgmklKxYNZADvwsKPnyX4K0mUM7eMlV9okoJzFL2?=
- =?us-ascii?Q?MLyzvTlh4n5akwzl5QZig5/FPebTWb0ClFAIPt8kTiKfAlrnI64Vy775Z2jR?=
- =?us-ascii?Q?2Dxj2tAQI2kyKCiWzj8sUPK0EOpkTV6oH9grrM7wRtxw/dDt6tMGxy8yD13U?=
- =?us-ascii?Q?4f+6vEwiBe0pPVbFo8YIt/50VebPwZL7yQS8cf1Gt/RFZFdJmTdk6Lpvu9kV?=
- =?us-ascii?Q?S8mdZNH85fwWDEkKGeDgj0mD69mDppPUzSNrTCHCQAWJy3/2QONlRNEbr6rU?=
- =?us-ascii?Q?4b51FysMlxiNHg8QzQ/NHaiSTZ22W9ObusaIehspc3ljSquLu+nsCMqhgXBm?=
- =?us-ascii?Q?Y3DHgzhVUb0d8l3Pqfnq6W/CHuEbsSQgKzzPHv4LrvDSCIpxtLV0s+VzksH1?=
- =?us-ascii?Q?vEOm4MQ7tLTKQJXRRZyIVHbNtBOmr6SGTiJhd8QBjJ1m8VGMA/RTN5+ErpJL?=
- =?us-ascii?Q?ww9FtZMj7jtbNTYhIt1oV1XqkseFSXmpEWYtqMhDAIY7hoDPQYaXMwk407an?=
- =?us-ascii?Q?e9L4X3PtLCAWBX8U4ghKWDCoEdfF8awTCWS3D71txLuOnJaq//u2FJGUh94U?=
- =?us-ascii?Q?Kvei0MzZUURzTVpGv7oiuxJM7dptXfcFusAO9KtaQ9sHwcsYlosbzlNFqYCE?=
- =?us-ascii?Q?T0joXrL2nNwT0WO1DX1x6mF3+u4RUrKo3AIhscPaLemfkudK8IUi/FlWrp67?=
- =?us-ascii?Q?5lP97UeJLM2mm0igK2uAT+dhuJs3ipkJhrZxh1u9ceV8BJkd1ysCfYuHgbAV?=
- =?us-ascii?Q?ZWKaE+VEr1hbAls4a8FvuoVqKYhhjnid/LHST5++grLIkj2poq93FVycujV2?=
- =?us-ascii?Q?LhJakO4rDOkEBKkXNJ6QjhRHFAZkmr/gldHeyordqiv1OtZnxWC225vwmaC6?=
- =?us-ascii?Q?eeOLGTucLJibP4Qrlm9xR+njQx18gYHvVu1pljtyOOPm6Px29JbUIt7hNKqi?=
- =?us-ascii?Q?w6sJxb1L4+et583YcmRZlVh1GPSPbfozRSKKgwiXk+f/POuDBQ=3D=3D?=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR08MB6588.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700018);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <D73BCB5C183545458344D8B0F0116A31@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 50f38c78-6600-11ef-a0b0-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1724933701; x=1725538501; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=BIcdrVvM45vUU1dn+CBgSjmywvRTg6UZEf81hF7tbHg=;
+        b=Qj7we+bXVv5XAjw3G4e81biZ775J0Tl7Z/DIGxpmSzsTocI2BfG9SWihHfrlo1sRIa
+         RAhRpvy+0NM9Cg8qwIq0eltDWK0lUUReZU73olbt2qQ4DwTHyCJp4AfK0z39M/xziJ0S
+         a4ooub0lifGYh6O3Q9i/QeAG2UtFHFlYZKr0Tugu/EgMT42HJvvkG5UyoMHK+PkPs83h
+         v1fV6VqfXdPfTY7N33gM54eQX2WvQ8ytA9JAFt/vhkNYcLfi7Z49HNoDzeM/4LICF547
+         1NHB2rASotiG3UTGdovZ6qgz2zPG96v6x3pGBzfrq1kxQ+XdRi1vqMJMJFFzNtSKIeHQ
+         Nxxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1724933701; x=1725538501;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=BIcdrVvM45vUU1dn+CBgSjmywvRTg6UZEf81hF7tbHg=;
+        b=i0wSjAmpdX+BANkNOcDLbFAFhd9wUpQrhy3jKGBA6VYAVcythCVBkW8E/WmnHCHPQ/
+         zIeHIX1mKTsEanhs6Sg47QCbpDOvSKeEuRJFTO5w/xqS08qNmdlsKoTItn8ElMnlJr31
+         56pAMa/lPgODmbuGHyc7OeFusvdDA9gFj4httRTEaHGsnwOoJn0gyVDNeGbRM6gAK6ge
+         gJhndT2TKyqx15xrJX/paJuJHdshL8UY/N5jwAWCgQRea1yk70gCjxN5RLu0ZWVOIvyk
+         TE7QbiXsuvL3Ue6H2CHNXCxwMVIJeHsKKaE406zzk1tbR/sR7qlrbMjhQuLVrE0OuGl4
+         BWvQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUpKTaEWbJNunll+gp4QGTJUkymnvfwSjq6GxTzsTandvGQOpugN9wfN1LO7bL+Duvpyg4krNCRkQg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwrWt1rOBWAXmIyvntpLFke3hLNA8u8eU06UTi8yR5bf40ipCsH
+	oGEERxDcFJ+9X/Z+xiktFn5HMZ7YDYk7LllVcafrwcjUL5WzPbh+6NzjnJr5Ww==
+X-Google-Smtp-Source: AGHT+IGNr6pWQ6URETWBryaMqp4RV7NbD2SdHTSPYjluh7GN6d1PfP/B027t624509kejEHWPREwlg==
+X-Received: by 2002:a17:907:7e92:b0:a86:7c6e:2bb9 with SMTP id a640c23a62f3a-a897f7892e8mr218934266b.2.1724933700901;
+        Thu, 29 Aug 2024 05:15:00 -0700 (PDT)
+Message-ID: <05a08778-7c3f-416e-a7ef-12a1472d3fce@suse.com>
+Date: Thu, 29 Aug 2024 14:14:59 +0200
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB7884
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-SkipListedInternetSender:
- ip=[2603:10a6:10:25a::24];domain=DB9PR08MB6588.eurprd08.prod.outlook.com
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM4PEPF00027A6C.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	37fa33a4-e105-49ff-9023-08dcc8233dce
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|35042699022|36860700013|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?wQJNkfk8Bbs5BsXl9D/cNhNoqLwP8W497p7chYLJtIgsNylSPAVhQ9xhQY4B?=
- =?us-ascii?Q?kndeGiPFyOepkhyHwiGDW+oRZ8v+eMsUWcFERLY15s7Xz3GzZPTBTkE+BeRW?=
- =?us-ascii?Q?kjAPaqJrVNRaEBMBB/mlgmB7eIcRqFKWGLR21z9qeFBVxqkauTA1CZ8XbuPL?=
- =?us-ascii?Q?mNVgr40pMHbk8BgPP6peb2BwP/CnRHLEv6Z6VY1Nt9EjNzYmtgmYexHQCA5I?=
- =?us-ascii?Q?hZgh5a8zaDPGIMLAUkMsCP9tyO9k0Ev8YX5JaomszW1wx+T9kCE16BKswFg9?=
- =?us-ascii?Q?pS6VdG+7+syKKvm32MG1CkSATLyAkXncZlsm6i7FJyfnFS+fF7h8bLwEob3J?=
- =?us-ascii?Q?pX1z43JtdIoD1ehilW86yUMo+4ouwZoGjdbhUwvEJn4y87tmGQVui/sK4c2O?=
- =?us-ascii?Q?ERuzlFohvwlUtDlzSezPRnS246If9NKDA5Dzmp822vc3em8M6TKheT4+SusD?=
- =?us-ascii?Q?Wryvr/t9doGrqvFmta1Hld6iHtnapYrDDQLQXcvjTXZvFbglYECuwUzia4Rq?=
- =?us-ascii?Q?An8CFgwbb9c+QM49PWsniSm+bh1C72wr9soC9lcn3TVbifyCXobN6Q19bGym?=
- =?us-ascii?Q?AlTpUuaGJ9ygUPf+nGqfFj1xhWiQrQrWMlUBxZpIyVH2AFyYKwKWXwFi0C4K?=
- =?us-ascii?Q?HQVprtgSvwe5Caa7R4HPMxKTNz+mKt6YTNkOv7lbzt2ilqR/9/QCm9Ikom8S?=
- =?us-ascii?Q?yqqcYAMGmq7g9rrSFckydY6HDUPrTQdmbyHUyB3ClGRzB85abMrJkNT7Uhb0?=
- =?us-ascii?Q?jG6sIFhiuwpIdoGtiM/uQPCd85lPBD0a1l7SiNv6/OaJtHsaSl0ntnwgpvsS?=
- =?us-ascii?Q?cXk++01144YT2l60dpZkcflDyR4FkBdLlObH7hghHOGNT24g6ln2nL6hWJS+?=
- =?us-ascii?Q?vCm4gngU2nnvFxZ4n6N0cOWMWj7aOEZT3a9SFkFtxqh4JCGlkjzEDiRoguhP?=
- =?us-ascii?Q?SeP1ng7ZvNMLzuo7gHWcoXk+QbFQxOiQUfWuYdehujhzfJuuMtxxjlnyw+ha?=
- =?us-ascii?Q?4sDIsZvCfd8mc/I4JH47kxBaiviP2g4XvI6+4UuCOyR+K1unw9cD97kyU+Mc?=
- =?us-ascii?Q?tn/RTl8q4LlsvCC2kg4utMpErdSGjfTKQefUv7QF7Dv5lJ/94Bm1r5+GOOTb?=
- =?us-ascii?Q?ea95hKy75kq6HzNx0iPPWDjs0T4tGr7LcsK7NII71BUacmeXFKxldJFLryYs?=
- =?us-ascii?Q?zzKqlSeMm9xCK++gzyGZRUOG874Erj+wXioxrEnj6BwD7dFHt/0/iHgNDKzX?=
- =?us-ascii?Q?lKXo9Tk2deZmq+AVXcN9Q/Hdt28p9g9FnWQ+iv5WV46jub3Xtay8ILuu5zqO?=
- =?us-ascii?Q?UOREwmAizV+oNlr38EUkDeVvtFcV6ZIvAMhRcXtKH/PkY4/tNHGnwzvA/pyX?=
- =?us-ascii?Q?w+Wg5ZM2faRnV21wq7qBA+T82fvIwvsnFuTL+xaaQVeXPkqtIwARi1O7LE9l?=
- =?us-ascii?Q?vV6u6omdtDZNeTqjcl7Zn7PZkdJCO2lr?=
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(35042699022)(36860700013)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2024 12:13:05.2909
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 783c6fd7-b971-4252-cbb3-08dcc823efde
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AM4PEPF00027A6C.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5747
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 6/7] xen/riscv: page table handling
+To: oleksii.kurochko@gmail.com
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1724256026.git.oleksii.kurochko@gmail.com>
+ <090e617d88b279ae88f1a7859875a7e1a0c6ae73.1724256027.git.oleksii.kurochko@gmail.com>
+ <c0005454-3b34-427d-8ea0-620aba632487@suse.com>
+ <ed84c53454cb63082aa96befe89a89d8f234ef71.camel@gmail.com>
+ <b83e7d23-2171-447f-a4e5-48563e4068a5@suse.com>
+ <4418002b93a3ae101e15e390dc537c726948bcb4.camel@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <4418002b93a3ae101e15e390dc537c726948bcb4.camel@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Ayan,
+On 29.08.2024 14:04, oleksii.kurochko@gmail.com wrote:
+> On Thu, 2024-08-29 at 09:01 +0200, Jan Beulich wrote:
+>> On 28.08.2024 18:11, oleksii.kurochko@gmail.com wrote:
+>>> On Tue, 2024-08-27 at 17:00 +0200, Jan Beulich wrote:
+>>>> On 21.08.2024 18:06, Oleksii Kurochko wrote:
+>>>>> @@ -68,6 +111,20 @@ static inline bool pte_is_valid(pte_t p)
+>>>>>      return p.pte & PTE_VALID;
+>>>>>  }
+>>>>>  
+>>>>> +inline bool pte_is_table(const pte_t p)
+>>>>> +{
+>>>>> +    return ((p.pte & (PTE_VALID |
+>>>>> +                      PTE_READABLE |
+>>>>> +                      PTE_WRITABLE |
+>>>>> +                      PTE_EXECUTABLE)) == PTE_VALID);
+>>>>> +}
+>>>>
+>>>> In how far is the READABLE check valid here? You (imo correctly)
+>>>> ...
+>>
+>> Oh, I wrongly picked on READABLE when it should have been the
+>> WRITABLE
+>> bit.
+>>
+>>>>> +static inline bool pte_is_mapping(const pte_t p)
+>>>>> +{
+>>>>> +    return (p.pte & PTE_VALID) &&
+>>>>> +           (p.pte & (PTE_WRITABLE | PTE_EXECUTABLE));
+>>>>> +}
+>>>>
+>>>> ... don't consider this bit here.
+>>> pte_is_mapping() seems to me is correct as according to the RISC-V
+>>> privileged spec:
+>>>    4. Otherwise, the PTE is valid. If pte.r = 1 or pte.x = 1, go to
+>>> step 
+>>>    5. Otherwise, this PTE is a pointer to the next level of the
+>>> page   
+>>>    table.
+>>>    5. A leaf PTE has been found. ...
+>>
+>> Right. And then why do you check all three of r, x, and w, when the
+>> doc
+>> mentions only r and x? There may be reasons, but such reasons then
+>> need
+>> clearly stating in a code comment, for people to understand why the
+>> code
+>> is not following the spec.
+> So I remembered why R, W, and X are checked. There is contradictory
+> information about these bits
+> (https://github.com/riscv/riscv-isa-manual/blob/main/src/supervisor.adoc?plain=1#L1317C64-L1321C10
+> ):
+> ```
+> The permission bits, R, W, and X, indicate whether the page is
+> readable, writable, and executable, respectively. When all three are
+> zero, the PTE is a pointer to the next level of the page table;
+> otherwise, it is a leaf PTE.
+> ```
+> 
+> However, it is also written here
+> (https://github.com/riscv/riscv-isa-manual/blob/main/src/supervisor.adoc?plain=1#L1539
+> ) that only pte.r and pte.x should be checked.
+> 
+> I can assume that the interpretation that R=W=X=0 indicates a pointer
+> to the next level of the page table could come from this statement
+> (https://github.com/riscv/riscv-isa-manual/blob/main/src/supervisor.adoc?plain=1#L1538
+> ):
+> ```
+> If _pte_._v_ = 0, or if _pte_._r_ = 0 and _pte_._w_ = 1, or if any bits
+> or encodings that are reserved for future standard use are set within
+> _pte_, stop and raise a page-fault exception corresponding to the
+> original access type.
+> ```
+> From this, I can assume that when pte.r = 0, pte.w should also always
+> be zero; otherwise, a page-fault exception will be raised. ( but it is
+> no obviously connected to if the PTE is a pointer to the next page
+> table or not... ).
 
+I don't view the information provided as contradictory, especially when
+further taking the "Encoding of PTE R/W/X fields" table into account: W
+set but the other two clear is "Reserved for future use."
 
-> On 29 Aug 2024, at 13:31, Ayan Kumar Halder <ayan.kumar.halder@amd.com> w=
-rote:
->=20
-> From: Michal Orzel <michal.orzel@amd.com>
->=20
-> Add the requirements for the use of generic timer by a domain
->=20
-> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+>>>>> + * If `mfn` is valid and flags has PTE_VALID bit set then it
+>>>>> means
+>>>>> that
+>>>>> + * inserting will be done.
+>>>>> + */
+>>>>
+>>>> What about mfn != INVALID_MFN and PTE_VALID clear?
+>>> PTE_VALID=0 will be always considered as destroying and no matter
+>>> what
+>>> is mfn value as in this case the removing is done in the way where
+>>> mfn
+>>> isn't used:
+>>
+>> Right, yet elsewhere you're restrictive as to MFN values valid to
+>> use.
+>> Not requiring INVALID_MFN here looks inconsistent to me.
+> but actually if we will leave ASSERT in pt_check_entry() we will be
+> sure that we are here with mfn = INVALID_MFN:
+>        /* Sanity check when removing a mapping. */
+>        else if ( (flags & (PTE_VALID | PTE_POPULATE)) == 0 )
+>        {
+>            /* We should be here with an invalid MFN. */
+>            ASSERT(mfn_eq(mfn, INVALID_MFN));
 
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Having such an assertion there is fine, but doesn't save you from getting
+comments correct / complete.
 
-Cheers
-Bertrand
+>>>         memset(&pte, 0x00, sizeof(pte));
+>>
+>> Just to mention it: I don't think memset() is a very good way of
+>> clearing
+>> a PTE, even if right here it's not a live one.
+> Just direct assigning would be better? 
 
-> ---
-> Changes from -
->=20
-> v1 - 1. Fixed some wordings as suggested in v1.
-> 2. Removed the comments which mentions Domain specific usage details.
->=20
-> .../reqs/design-reqs/arm64/generic-timer.rst  | 123 ++++++++++++++++++
-> docs/fusa/reqs/index.rst                      |   3 +
-> docs/fusa/reqs/intro.rst                      |   3 +-
-> docs/fusa/reqs/market-reqs/reqs.rst           |  34 +++++
-> docs/fusa/reqs/product-reqs/arm64/reqs.rst    |  23 ++++
-> 5 files changed, 185 insertions(+), 1 deletion(-)
-> create mode 100644 docs/fusa/reqs/design-reqs/arm64/generic-timer.rst
-> create mode 100644 docs/fusa/reqs/market-reqs/reqs.rst
-> create mode 100644 docs/fusa/reqs/product-reqs/arm64/reqs.rst
->=20
-> diff --git a/docs/fusa/reqs/design-reqs/arm64/generic-timer.rst b/docs/fu=
-sa/reqs/design-reqs/arm64/generic-timer.rst
-> new file mode 100644
-> index 0000000000..f2a0cd7fb8
-> --- /dev/null
-> +++ b/docs/fusa/reqs/design-reqs/arm64/generic-timer.rst
-> @@ -0,0 +1,123 @@
-> +.. SPDX-License-Identifier: CC-BY-4.0
-> +
-> +Generic Timer
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +The following are the requirements related to ARM Generic Timer [1] inte=
-rface
-> +exposed by Xen to Arm64 domains.
-> +
-> +Probe the Generic Timer device tree node from a domain
-> +------------------------------------------------------
-> +
-> +`XenSwdgn~arm64_generic_timer_probe_dt~1`
-> +
-> +Description:
-> +Xen shall generate a device tree node for the Generic Timer (in accordan=
-ce to
-> +ARM architected timer device tree binding [2]) in the domain device tree=
-.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +Domains can detect the presence of the Generic Timer device tree node.
-> +
-> +Covers:
-> + - `XenProd~emulated_timer~1`
-> +
-> +Read system counter frequency
-> +-----------------------------
-> +
-> +`XenSwdgn~arm64_generic_timer_read_freq~1`
-> +
-> +Description:
-> +Xen shall expose the frequency of the system counter to the domains in
-> +CNTFRQ_EL0 register and/or domain device tree's "clock-frequency" proper=
-ty.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Covers:
-> + - `XenProd~emulated_timer~1`
-> +
-> +Access CNTKCTL_EL1 system register from a domain
-> +------------------------------------------------
-> +
-> +`XenSwdgn~arm64_generic_timer_access_cntkctlel1~1`
-> +
-> +Description:
-> +Xen shall expose Counter-timer Kernel Control register (CNTKCTL_EL1) to =
-the
-> +domains.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Covers:
-> + - `XenProd~emulated_timer~1`
-> +
-> +Access virtual timer from a domain
-> +----------------------------------
-> +
-> +`XenSwdgn~arm64_generic_timer_access_virtual_timer~1`
-> +
-> +Description:
-> +Xen shall expose the virtual timer registers (CNTVCT_EL0, CNTV_CTL_EL0,
-> +CNTV_CVAL_EL0, CNTV_TVAL_EL0) to the domains.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Covers:
-> + - `XenProd~emulated_timer~1`
-> +
-> +Access physical timer from a domain
-> +-----------------------------------
-> +
-> +`XenSwdgn~arm64_generic_timer_access_physical_timer~1`
-> +
-> +Description:
-> +Xen shall expose physical timer registers (CNTPCT_EL0, CNTP_CTL_EL0,
-> +CNTP_CVAL_EL0, CNTP_TVAL_EL0) to the domains.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Covers:
-> + - `XenProd~emulated_timer~1`
-> +
-> +Trigger the virtual timer interrupt from a domain
-> +-------------------------------------------------
-> +
-> +`XenSwdgn~arm64_generic_timer_trigger_virtual_interrupt~1`
-> +
-> +Description:
-> +Xen shall generate virtual timer interrupts to domains when the virtual =
-timer
-> +condition is met.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Covers:
-> + - `XenProd~emulated_timer~1`
-> +
-> +Trigger the physical timer interrupt from a domain
-> +--------------------------------------------------
-> +
-> +`XenSwdgn~arm64_generic_timer_trigger_physical_interrupt~1`
-> +
-> +Description:
-> +Xen shall generate physical timer interrupts to domains when the physica=
-l timer
-> +condition is met.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Covers:
-> + - `XenProd~emulated_timer~1`
-> +
-> +[1] Arm Architecture Reference Manual for A-profile architecture, Chapte=
-r 11
-> +[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/t=
-ree/Documentation/devicetree/bindings/timer/arm,arch_timer.yaml
-> diff --git a/docs/fusa/reqs/index.rst b/docs/fusa/reqs/index.rst
-> index 78c02b1d9b..183f183b1f 100644
-> --- a/docs/fusa/reqs/index.rst
-> +++ b/docs/fusa/reqs/index.rst
-> @@ -7,3 +7,6 @@ Requirements documentation
->    :maxdepth: 2
->=20
->    intro
-> +   market-reqs
-> +   product-reqs
-> +   design-reqs/arm64
-> diff --git a/docs/fusa/reqs/intro.rst b/docs/fusa/reqs/intro.rst
-> index d67b18dd9f..245a219ff2 100644
-> --- a/docs/fusa/reqs/intro.rst
-> +++ b/docs/fusa/reqs/intro.rst
-> @@ -55,7 +55,8 @@ Title of the requirement
->   be 'XenMkt', 'XenProd' or 'XenSwdgn' to denote market, product or desig=
-n
->   requirement.
->   name - This denotes name of the requirement. In case of architecture sp=
-ecific
-> -  requirements, this starts with the architecture type (ie x86_64, arm64=
-).
-> +  requirements, this starts with the architecture type (eg x86_64, arm64=
-)
-> +  followed by component name (eg generic_timer) and action (eg read_xxx)=
-.
->   revision number - This gets incremented each time the requirement is mo=
-dified.
->=20
->=20
-> diff --git a/docs/fusa/reqs/market-reqs/reqs.rst b/docs/fusa/reqs/market-=
-reqs/reqs.rst
-> new file mode 100644
-> index 0000000000..9c98c84a9a
-> --- /dev/null
-> +++ b/docs/fusa/reqs/market-reqs/reqs.rst
-> @@ -0,0 +1,34 @@
-> +.. SPDX-License-Identifier: CC-BY-4.0
-> +
-> +Functional Requirements
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Run Arm64 VMs
-> +-------------
-> +
-> +`XenMkt~run_arm64_vms~1`
-> +
-> +Description:
-> +Xen shall run Arm64 VMs.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Needs:
-> + - XenProd
-> +
-> +Provide timer to the VMs
-> +------------------------
-> +
-> +`XenMkt~provide_timer_vms~1`
-> +
-> +Description:
-> +Xen shall provide a timer to a VM.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Needs:
-> + - XenProd
-> diff --git a/docs/fusa/reqs/product-reqs/arm64/reqs.rst b/docs/fusa/reqs/=
-product-reqs/arm64/reqs.rst
-> new file mode 100644
-> index 0000000000..7aa3eeab6a
-> --- /dev/null
-> +++ b/docs/fusa/reqs/product-reqs/arm64/reqs.rst
-> @@ -0,0 +1,23 @@
-> +.. SPDX-License-Identifier: CC-BY-4.0
-> +
-> +Domain Creation And Runtime
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-> +
-> +Emulated Timer
-> +--------------
-> +
-> +`XenProd~emulated_timer~1`
-> +
-> +Description:
-> +Xen shall grant access to "Arm Generic Timer" for the domains.
-> +
-> +Rationale:
-> +
-> +Comments:
-> +
-> +Covers:
-> + - `XenMkt~run_arm64_vms~1`
-> + - `XenMkt~provide_timer_vms~1`
-> +
-> +Needs:
-> + - XenSwdgn
-> --=20
-> 2.25.1
->=20
+Imo yes.
 
+>>>>  Also note that "`mfn` is
+>>>> valid" isn't the same as "mfn != INVALID_MFN". You want to be
+>>>> precise
+>>>> here,
+>>>> to avoid confusion later on. (I say that knowing that we're still
+>>>> fighting
+>>>> especially shadow paging code on x86 not having those properly
+>>>> separated.)
+>>> If it is needed to be precise and mfn is valid isn't the same as
+>>> "mfn
+>>> != INVALID_MFN" only for the case of shadow paging?
+>>
+>> No, I used shadow paging only as an example of where we have similar
+>> issues. I'd like to avoid that a new port starts out with introducing
+>> more instances of that. You want to properly separate INVALID_MFN
+>> from
+>> "invalid MFN", where the latter means any MFN where either nothing
+>> exists at all, or (see mfn_valid()) where no struct page_info exists.
+> Well, now I think I understand the difference between "INVALID_MFN" and
+> "invalid MFN."
+> 
+> Referring back to your original reply, I need to update the comment
+> above pt_update():
+> ```
+>    ...
+>      * If `mfn` is valid ( exist ) and flags has PTE_VALID bit set then it
+>    means that inserting will be done.
+> ```
+> Would this be correct and more precise?
+
+That depends on whether it correctly describes what the code does. If
+the code continues to check against INVALID_MFN, such a description
+wouldn't be correct. Also, just to re-iterate, ...
+
+> Based on the code for mfn_valid(), the separation is currently done
+> using the max_page value, which can't be initialized at the moment as
+> it requires reading the device tree file to obtain the RAM end.
+
+... mfn_valid() may return false for MMIO pages, for which it may still
+be legitimate to create mappings. IMO ...
+
+> We could use a placeholder for the RAM end (for example, a very high
+> value like -1UL) and then add __mfn_valid() within pt_update().
+> However, I'm not sure if this approach aligns with what you consider by
+> proper separation between INVALID_MFN and "invalid MFN."
+
+... throughout the code here you mean INVALID_MFN and never "invalid MFN".
+Populating page tables is lower a layer than where you want to be
+concerned with that distinction; the callers of these low level functions
+will need to make the distinction where necessary.
+
+Jan
 
