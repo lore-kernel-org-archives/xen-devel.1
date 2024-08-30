@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA7FCA0EF3
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Aug 2024 21:56:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.786758.1196509 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49123CA101B
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Aug 2024 21:56:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.786759.1196515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sk9bS-0002iF-B2; Fri, 30 Aug 2024 21:56:22 +0000
+	id 1sk9bS-0002nK-M0; Fri, 30 Aug 2024 21:56:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 786758.1196509; Fri, 30 Aug 2024 21:56:22 +0000
+Received: by outflank-mailman (output) from mailman id 786759.1196515; Fri, 30 Aug 2024 21:56:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sk9bS-0002gq-2C; Fri, 30 Aug 2024 21:56:22 +0000
-Received: by outflank-mailman (input) for mailman id 786758;
+	id 1sk9bS-0002kK-CL; Fri, 30 Aug 2024 21:56:22 +0000
+Received: by outflank-mailman (input) for mailman id 786759;
  Fri, 30 Aug 2024 21:56:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KiG6=P5=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1sk9WQ-0000Zf-1T
- for xen-devel@lists.xenproject.org; Fri, 30 Aug 2024 21:51:10 +0000
+ id 1sk9UM-00065G-PO
+ for xen-devel@lists.xenproject.org; Fri, 30 Aug 2024 21:49:02 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f5ba0d87-6719-11ef-99a1-01e77a169b0f;
- Fri, 30 Aug 2024 23:51:08 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1725054489185157.27284103749457;
- Fri, 30 Aug 2024 14:48:09 -0700 (PDT)
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id aa3bf009-6719-11ef-a0b1-8be0dac302b0;
+ Fri, 30 Aug 2024 23:49:01 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 172505447081714.54061475318008;
+ Fri, 30 Aug 2024 14:47:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f5ba0d87-6719-11ef-99a1-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; t=1725054491; cv=none; 
+X-Inumbo-ID: aa3bf009-6719-11ef-a0b1-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1725054472; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=EuGnOBmt9m/VVYVXJTTFa3ILqf+v+luBtSr/jYRWgoh8BFZkKOBZ0ap57WAC/aNKuOurd30kGqdZ9EuYnseqMH7rKzOzhUeL4idjUxaTYSk3eafIe80ACX1b8QZBIWyjzu28oVLNviDbftLcjVUe1btwkij8OWUhxRFiwYzOAuw=
+	b=W+sWhKs2BNLPpb3UGBqNNQ3s/h+I85dvSqj/MVRDT2a5B2IcR6G/dUXEvuH598i1uSjBYpDqoak4a8XnMdVnH33X01k6etUA+eOsvpi92Ye9NyD/uhOrS78rt52nzgJ1guNzH3SDCBUW/KXVVvP4WKpPKt11maAxQQEePsZTXqQ=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1725054491; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=1CoQkH+lHv+L/z16JNTEDasfAHp/vM4gE3D+btk1VDg=; 
-	b=ApXX6ZRn8dM9UjlWhKXCgfsNkuikD8zlP76mpYsNvozKvLthiyTMcfz0mNwV/BIhlh0rdCe2rk4WflwHK2xFQYw2gnuEPP2ELZpjxvNEJ4yi9hIvsp5hq1Vy+CWNO5eptrw6z7V+WBuvLFczIUUNUyel6zROCk2eM6ujy3xnBHA=
+	t=1725054472; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=Q0pSe2RfpDMnhePm+Qzlz8IPsCD571W7svuapogeYRE=; 
+	b=Dr2m674YWJRHRI16wy+9BAmDVULJAzf01TaxRpWrAH+JuvG1KmL3xIPpogks/IgFqgCAojJ17pKTJEhPCZR/GNF9wj/JrS+Ffyoo/SIvsi28vFJPmWULj8MsIT+DpZHSHWVdtBZscxTWlJLre0cRKBTwAOWH3WVjCTIJPe18aQM=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1725054491;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1725054472;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=1CoQkH+lHv+L/z16JNTEDasfAHp/vM4gE3D+btk1VDg=;
-	b=Qe5pJZwkJOmCZy2ZS+NXw1udAcRDK9I0V59Rpd1tHSvGIgVlTExzNueQMF45/t47
-	qzV9GFdiVg4+b0tzqP1/yRCL/qtu+x4fr+R4zKASf03pC0KKyk1rWEPwa88KBQyN3Q8
-	vcDIrEN7oM075KBPt9/0a6/G71m6l3ThlhMTeC/0=
+	bh=Q0pSe2RfpDMnhePm+Qzlz8IPsCD571W7svuapogeYRE=;
+	b=eWCZwr2S5GiGAD7qVm/FCN7HABPeVPVJae/4sfYLd200e0RqIwEMjN1MDQ1mVm3g
+	/K+37OG7ZRnaXJBtMaIHTgK2PhWMFZ9yDctGj4zbjOed6BcJeRcG1VYYbhq1rQJuiHf
+	iQX5dj6JmgNPB4MNOwpOdcOVUvVKOdxqzRsjW6tI=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -67,9 +67,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 27/44] x86/boot: relocate kextra into boot info
-Date: Fri, 30 Aug 2024 17:47:12 -0400
-Message-Id: <20240830214730.1621-28-dpsmith@apertussolutions.com>
+Subject: [PATCH v4 10/44] x86/boot: introduce boot module types
+Date: Fri, 30 Aug 2024 17:46:55 -0400
+Message-Id: <20240830214730.1621-11-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240830214730.1621-1-dpsmith@apertussolutions.com>
 References: <20240830214730.1621-1-dpsmith@apertussolutions.com>
@@ -77,78 +77,68 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Move kextra into struct boot_info, thus no longer needed to be passed as a
-parameter to create_dom0.
+This commit introduces module types of xen, kernel, and ramdisk to allow boot
+module detect code to tag the purpose of a boot module. This reduces the need
+for hard coded order assumptions and global variables to be used by consumers
+of boot modules, such as domain construction.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/include/asm/bootinfo.h |  2 ++
- xen/arch/x86/setup.c                | 12 ++++++------
- 2 files changed, 8 insertions(+), 6 deletions(-)
+ xen/arch/x86/include/asm/bootinfo.h | 9 +++++++++
+ xen/arch/x86/setup.c                | 3 +++
+ 2 files changed, 12 insertions(+)
 
 diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
-index 1a325f66b3ba..06b3ecaf7bec 100644
+index 3e0e36df096b..1b1b640f83f7 100644
 --- a/xen/arch/x86/include/asm/bootinfo.h
 +++ b/xen/arch/x86/include/asm/bootinfo.h
-@@ -41,6 +41,8 @@ struct boot_info {
-     const char *boot_loader_name;
-     const char *cmdline;
+@@ -11,9 +11,18 @@
+ #include <xen/multiboot.h>
+ #include <xen/types.h>
  
-+    const char *kextra;
++/* Boot module binary type / purpose */
++enum bootmod_type {
++    BOOTMOD_UNKNOWN,
++    BOOTMOD_XEN,
++    BOOTMOD_KERNEL,
++    BOOTMOD_RAMDISK,
++};
 +
-     paddr_t mmap_addr;
-     uint32_t mmap_length;
+ struct boot_module {
+     module_t *early_mod;
+     unsigned long headroom;
++    enum bootmod_type type;
  };
+ 
+ struct boot_info {
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index f58eb21d00d7..76f25e9d620c 100644
+index d4f557b4c50d..8d5450c981a8 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -946,8 +946,7 @@ static unsigned int __init copy_bios_e820(struct e820entry *map, unsigned int li
-     return n;
- }
+@@ -314,6 +314,7 @@ static void __init multiboot_to_bootinfo(multiboot_info_t *mbi, module_t *mods)
+         boot_mods[i].early_mod = &mods[i];
  
--static struct domain *__init create_dom0(const struct boot_info *bi,
--                                         const char *kextra)
-+static struct domain *__init create_dom0(const struct boot_info *bi)
- {
-     static char __initdata cmdline[MAX_GUEST_CMDLINE];
+     /* map the last mb module for xen entry */
++    boot_mods[info.nr_mods].type = BOOTMOD_XEN;
+     boot_mods[info.nr_mods].early_mod = &mods[info.nr_mods];
  
-@@ -1001,15 +1000,15 @@ static struct domain *__init create_dom0(const struct boot_info *bi,
-         panic("Error creating d%uv0\n", domid);
+     boot_info = &info;
+@@ -1197,6 +1198,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
  
-     /* Grab the DOM0 command line. */
--    if ( image->early_mod->string || kextra )
-+    if ( image->early_mod->string || bi->kextra )
+     bitmap_fill(module_map, boot_info->nr_mods);
+     __clear_bit(0, module_map); /* Dom0 kernel is always first */
++    boot_info->mods[0].type = BOOTMOD_KERNEL;
+ 
+     if ( pvh_boot )
      {
-         if ( image->early_mod->string )
-             safe_strcpy(cmdline, cmdline_cook(__va(image->early_mod->string),
-                         bi->boot_loader_name));
+@@ -2085,6 +2087,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+            cpu_has_nx ? "" : "not ");
  
--        if ( kextra )
-+        if ( bi->kextra )
-             /* kextra always includes exactly one leading space. */
--            safe_strcat(cmdline, kextra);
-+            safe_strcat(cmdline, bi->kextra);
- 
-         /* Append any extra parameters. */
-         if ( skip_ioapic_setup && !strstr(cmdline, "noapic") )
-@@ -1119,6 +1118,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-         *kextra = '\0';
-         kextra += 3;
-         while ( kextra[1] == ' ' ) kextra++;
-+        boot_info->kextra = kextra;
-     }
-     cmdline_parse(boot_info->cmdline);
- 
-@@ -2131,7 +2131,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-      * We're going to setup domain0 using the module(s) that we stashed safely
-      * above our heap. The second module, if present, is an initrd ramdisk.
-      */
--    dom0 = create_dom0(boot_info, kextra);
-+    dom0 = create_dom0(boot_info);
-     if ( !dom0 )
-         panic("Could not set up DOM0 guest OS\n");
- 
+     initrdidx = find_first_bit(module_map, boot_info->nr_mods);
++    boot_info->mods[initrdidx].type = BOOTMOD_RAMDISK;
+     if ( bitmap_weight(module_map, boot_info->nr_mods) > 1 )
+         printk(XENLOG_WARNING
+                "Multiple initrd candidates, picking module #%u\n",
 -- 
 2.30.2
 
