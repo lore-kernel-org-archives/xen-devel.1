@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3024CA0EFD
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Aug 2024 09:50:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.786324.1195902 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E6D1CA0EFB
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Aug 2024 09:52:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.786340.1195952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjyGH-0007uC-LL; Fri, 30 Aug 2024 09:49:45 +0000
+	id 1sjyJI-0002PS-39; Fri, 30 Aug 2024 09:52:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 786324.1195902; Fri, 30 Aug 2024 09:49:45 +0000
+Received: by outflank-mailman (output) from mailman id 786340.1195952; Fri, 30 Aug 2024 09:52:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sjyGH-0007u5-I6; Fri, 30 Aug 2024 09:49:45 +0000
-Received: by outflank-mailman (input) for mailman id 786324;
- Fri, 30 Aug 2024 09:49:44 +0000
+	id 1sjyJH-0002PL-W4; Fri, 30 Aug 2024 09:52:51 +0000
+Received: by outflank-mailman (input) for mailman id 786340;
+ Fri, 30 Aug 2024 09:52:50 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fTbV=P5=bounce.vates.tech=bounce-md_30504962.66d195b3.v1-1aeebc3cf2674cbf8c3aa11c57ca257b@srs-se1.protection.inumbo.net>)
- id 1sjyGF-0007to-Hc
- for xen-devel@lists.xenproject.org; Fri, 30 Aug 2024 09:49:43 +0000
-Received: from mail135-11.atl141.mandrillapp.com
- (mail135-11.atl141.mandrillapp.com [198.2.135.11])
+ <SRS0=oDj5=P5=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1sjyJG-0001wc-KF
+ for xen-devel@lists.xenproject.org; Fri, 30 Aug 2024 09:52:50 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2d59a5e8-66b5-11ef-a0b1-8be0dac302b0;
- Fri, 30 Aug 2024 11:49:41 +0200 (CEST)
-Received: from pmta14.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail135-11.atl141.mandrillapp.com (Mailchimp) with ESMTP id
- 4WwCzl6DwTzLfH0Q4
- for <xen-devel@lists.xenproject.org>; Fri, 30 Aug 2024 09:49:39 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 1aeebc3cf2674cbf8c3aa11c57ca257b; Fri, 30 Aug 2024 09:49:39 +0000
+ id 9e038f21-66b5-11ef-a0b1-8be0dac302b0;
+ Fri, 30 Aug 2024 11:52:49 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a86c476f679so197235666b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Aug 2024 02:52:50 -0700 (PDT)
+Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a89891db563sm194655566b.185.2024.08.30.02.52.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Aug 2024 02:52:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,86 +46,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d59a5e8-66b5-11ef-a0b1-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1725011379; x=1725271879;
-	bh=4sGqzl3pHWUWgo6zIvCEtetCdFeclMIXIb/FR8+SB4I=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=Ok8439v9HCJB3Rumc66JDiPPx+jV3A4iXnwHMzNEWD4Fku+SAkSNsK/K4P0328ESS
-	 69gyURoVqVz9vodTXHX+RUnFcCnHecIxvm1Iy8hkhc0kOD9KyOnbI7hcjTe9IoyZHl
-	 OdaeLq52Jc2ml1zcO9/kH/Kam86FXr2jZpN2+LvB5soIMU9x1BVkwRov9f6mqPQmlN
-	 fKNoyhU+ism5Sd+TB2lCDQLwqMvkFItn2HdmoP0d2OeQJDll8GbjXcgQvKqLs8itnl
-	 20uEuY4GVLkWM04ioB1r/eu0hsRltUqd0K5nJPIfMYs8Op4IZZy760EZ1i5oYevHwu
-	 SEMRKpfWsVJPw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1725011379; x=1725271879; i=anthony.perard@vates.tech;
-	bh=4sGqzl3pHWUWgo6zIvCEtetCdFeclMIXIb/FR8+SB4I=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=ogampzA65DubjkKOiMrLD7Dciql9sjmUYjG9uItq3vETHMX0VnyGPPTob/DobSwnu
-	 HjnKtfbACE4DqjLonoS2ablkyWaZp9tnVlFvAxMCTxHligNZUTztfETY+Vl6QeOKsu
-	 TXxEPBCxMxToFIjfZbnJQJswU8zR0dSQowG8zkRUPHkokgeTRkDrJYm39fXbxOydu7
-	 9JZkTJ4aEnIEJddRskIOEKm4IGgik5IoSmHzzZx4/dMIR82vUKSghdXzfGzX8JlwFP
-	 ypXnslOAunmrCZfBastXqnPXCBrWh1d6S2LO3b7Z56gx5GID5qZGmGigV4D6s+YByr
-	 Hu5vZBpmfEAVg==
-From: Anthony PERARD <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?[XEN=20PATCH=20v2=200/2]=20libxl:=20Implement=20QEMU=20command=20line=20probe?=
-X-Mailer: git-send-email 2.39.2
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1725011379275
+X-Inumbo-ID: 9e038f21-66b5-11ef-a0b1-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1725011569; x=1725616369; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Hgy6KsLd6IVjOwpOTywTcBhClUvG6CNwo7fjv2Ub9pE=;
+        b=CISCvTTikoh72V5M1EcMolC5AWIP9DqPjY8cnPV/2gGIe7/bKXPEVTbyZBW90i8/m6
+         QYOkJ6YVvVPOAi5AaQ4oHN8P1pdk6uUarvnBVkq5a9gSa3fT65Ee/pSf13/KnxXERR/O
+         8Lrq20/E5CaCVJaFxOB2xJpHh/QWxky2UcqcU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1725011569; x=1725616369;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Hgy6KsLd6IVjOwpOTywTcBhClUvG6CNwo7fjv2Ub9pE=;
+        b=eR3L7Di/v3wJA/CVrJFZf/IWkzordalNSbbUHaQWKxeVbSt+LddALuutT8TlxfqCIT
+         88Ap0SmitoYXc0ucjUyaer59PpdLb27OKJfxZzk/3+QUdx79nQ27E5GA7NKpiHQS0azu
+         l9iUayvy9sKCgbrvT6INF3lUZcJQDiPcJmpfwfdeemAiWNcHa5YBL/d3T3x5WFRgZNI9
+         2xsev6Gv0W/scFyxnqHtlRqmOc74bLIKb6RV9lrv6gc7unqmlIahAkgJUZQmI+R1yrVs
+         qN0A0EeQRKMRHWleEYdp5R+RkPwwJv33O2jOInPpcaTA9LRgXvC+e01avA86FQTyawzl
+         x4Vg==
+X-Gm-Message-State: AOJu0YzXHE2MMV6Eei6U6NCpaCDVrJmu5NV9oakvPdvUNkjKot/eeQI5
+	A9oLJxPIkeDTrVARrWbIZG/eBKnduOQYCM8GRpwh/bbq0mlFSfmibjfJwgSAoJdwaTWeB7cklE7
+	r
+X-Google-Smtp-Source: AGHT+IFxGczVF6OVtd6iF412SmeyKSsOp7M6/YaF4GjHiZ2HTlFEHYZsy4UU3cUI+jq5qcQVC4tb1w==
+X-Received: by 2002:a17:907:94cb:b0:a86:8d83:542d with SMTP id a640c23a62f3a-a897fa751f3mr483777566b.45.1725011568064;
+        Fri, 30 Aug 2024 02:52:48 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
-Message-Id: <20240830094937.40476-1-anthony.perard@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.1aeebc3cf2674cbf8c3aa11c57ca257b?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20240830:md
-Date: Fri, 30 Aug 2024 09:49:39 +0000
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 2/2] x86/time: prefer CMOS over EFI_GET_TIME
+Date: Fri, 30 Aug 2024 11:52:20 +0200
+Message-ID: <20240830095220.49473-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240830095220.49473-1-roger.pau@citrix.com>
+References: <20240830095220.49473-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Patch series available in this git branch:
-https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.libxl-qemu-cmdline-probe-v2
+The EFI_GET_TIME implementation is well known to be broken for many firmware
+implementations, for Xen the result on such implementations are:
 
-v2:
-- removed commited patch
-- rename "qemu_cmdline" to "qemu_opts" in struct field and func parameters.
-- rename "struct libxl__qemu_available_cmd_line" to
-  "struct libxl__qemu_available_opts".
+----[ Xen-4.19-unstable  x86_64  debug=y  Tainted:   C    ]----
+CPU:    0
+RIP:    e008:[<0000000062ccfa70>] 0000000062ccfa70
+[...]
+Xen call trace:
+   [<0000000062ccfa70>] R 0000000062ccfa70
+   [<00000000732e9a3f>] S 00000000732e9a3f
+   [<ffff82d04034f34f>] F arch/x86/time.c#get_cmos_time+0x1b3/0x26e
+   [<ffff82d04045926f>] F init_xen_time+0x28/0xa4
+   [<ffff82d040454bc4>] F __start_xen+0x1ee7/0x2578
+   [<ffff82d040203334>] F __high_start+0x94/0xa0
 
-Starting with QEMU 9.0, the option "-chroot", that we use for the
-"dmrestrict" feature, is removed. We need to find out which to use
-between "-chroot" and "-run-with chroot=dir".
+Pagetable walk from 0000000062ccfa70:
+ L4[0x000] = 000000207ef1c063 ffffffffffffffff
+ L3[0x001] = 000000005d6c0063 ffffffffffffffff
+ L2[0x116] = 8000000062c001e3 ffffffffffffffff (PSE)
 
-Also, "-runas" is deprecated in QEMU 9.1 and will be remove in a future
-release, it's replaced with "-run-with user=user".
+****************************************
+Panic on CPU 0:
+FATAL PAGE FAULT
+[error_code=0011]
+Faulting linear address: 0000000062ccfa70
+****************************************
 
-To find out which command line option we can use, we'll spawn QEMU, and run the
-QMP command "query-command-line-options".
+Swap the preference to default to CMOS first, and EFI later, in an attempt to
+use EFI_GET_TIME as a last resort option only.  Note that Linux for example
+doesn't allow calling the get_time method, and instead provides a dummy handler
+that unconditionally returns EFI_UNSUPPORTED on x86-64.
 
-Some example of running these patches:
-    with qemu-xen (8.0):
-        http://logs.test-lab.xenproject.org/osstest/logs/187352/
-    with QEMU (upstream, 9.1-rc3):
-        http://logs.test-lab.xenproject.org/osstest/logs/187353/
+Such change in the preferences requires some re-arranging of the function
+logic, so that panic messages with workaround suggestions are suitably printed.
 
-Anthony PERARD (2):
-  libxl: Probe QEMU for -run-with chroot=dir and use it
-  libxl: Probe QEMU for -run-with user=user and use it
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/time.c | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
- tools/libs/light/libxl_dm.c       | 90 +++++++++++++++++++++++++------
- tools/libs/light/libxl_internal.h |  6 +++
- 2 files changed, 80 insertions(+), 16 deletions(-)
-
+diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
+index 272ca2468ea6..0eee954809a9 100644
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -1305,24 +1305,36 @@ static unsigned long get_cmos_time(void)
+     static bool __read_mostly cmos_rtc_probe;
+     boolean_param("cmos-rtc-probe", cmos_rtc_probe);
+ 
++    if ( likely(!(acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC)) )
++        cmos_rtc_probe = false;
++
++    if ( (!(acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC) ||
++          cmos_rtc_probe) && read_cmos_time(&rtc, cmos_rtc_probe) )
++        return mktime(rtc.year, rtc.mon, rtc.day, rtc.hour, rtc.min, rtc.sec);
++
+     if ( efi_enabled(EFI_RS) )
+     {
+         unsigned long res = efi_get_time();
+ 
+         if ( res )
+             return res;
++
++        panic("Broken EFI_GET_TIME %s\n",
++              !cmos_rtc_probe ? "try booting with \"cmos-rtc-probe\" option"
++                              : "and no CMOS RTC found");
+     }
+ 
+-    if ( likely(!(acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC)) )
+-        cmos_rtc_probe = false;
+-    else if ( system_state < SYS_STATE_smp_boot && !cmos_rtc_probe )
++    /*
++     * No viable clock source found.  Attempt to provide some guidance to the
++     * user about possible workarounds to boot Xen on the system.
++     */
++    ASSERT(system_state < SYS_STATE_smp_boot);
++
++    if ( !cmos_rtc_probe )
+         panic("System with no CMOS RTC advertised must be booted from EFI"
+               " (or with command line option \"cmos-rtc-probe\")\n");
+ 
+-    if ( unlikely(!read_cmos_time(&rtc, cmos_rtc_probe)) )
+-        panic("No CMOS RTC found - system must be booted from EFI\n");
+-
+-    return mktime(rtc.year, rtc.mon, rtc.day, rtc.hour, rtc.min, rtc.sec);
++    panic("No CMOS RTC found - system must be booted from EFI\n");
+ }
+ 
+ static unsigned int __ro_after_init cmos_alias_mask;
 -- 
+2.46.0
 
-
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
 
