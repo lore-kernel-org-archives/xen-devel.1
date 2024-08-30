@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10C05CA101A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Aug 2024 21:57:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.786836.1196644 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F4BCA0EF3
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Aug 2024 21:57:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.786843.1196654 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sk9bx-0001vn-TH; Fri, 30 Aug 2024 21:56:53 +0000
+	id 1sk9c1-0002ky-8U; Fri, 30 Aug 2024 21:56:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 786836.1196644; Fri, 30 Aug 2024 21:56:53 +0000
+Received: by outflank-mailman (output) from mailman id 786843.1196654; Fri, 30 Aug 2024 21:56:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sk9bx-0001v6-NO; Fri, 30 Aug 2024 21:56:53 +0000
-Received: by outflank-mailman (input) for mailman id 786836;
- Fri, 30 Aug 2024 21:56:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sk9c1-0002jz-3u; Fri, 30 Aug 2024 21:56:57 +0000
+Received: by outflank-mailman (input) for mailman id 786843;
+ Fri, 30 Aug 2024 21:56:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KiG6=P5=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1sk9UE-00065G-M1
- for xen-devel@lists.xenproject.org; Fri, 30 Aug 2024 21:48:54 +0000
+ id 1sk9Wt-0000Zf-HG
+ for xen-devel@lists.xenproject.org; Fri, 30 Aug 2024 21:51:39 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a554d6ac-6719-11ef-a0b1-8be0dac302b0;
- Fri, 30 Aug 2024 23:48:53 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 172505446971316.97653174204663;
- Fri, 30 Aug 2024 14:47:49 -0700 (PDT)
+ [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0776c7e4-671a-11ef-99a1-01e77a169b0f;
+ Fri, 30 Aug 2024 23:51:37 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1725054493481659.7029863364719;
+ Fri, 30 Aug 2024 14:48:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,36 +40,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a554d6ac-6719-11ef-a0b1-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1725054471; cv=none; 
+X-Inumbo-ID: 0776c7e4-671a-11ef-99a1-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; t=1725054495; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=hHj7CnoyPUwHL2we26yrGRBkLa+C6Tfl+J2xTIeFDxw04Gh5hyGvL8FtkCH0ii1VirKxvnOEd43qMLBka8KNihEdeVAgldD/Vp2yN6/w6EW2O6Tumu/oh7iM9TBaa9q6PqrPzJLE2YydT/ydXLdtkBgT7kkb6Xwyn2PGRzX/PeY=
+	b=BUNATfUWScvd3LlCBz3oxWB4klY/a/ZFb0WrEEDkSF1GeZbYQ4cx7aKlbgUepwKpLrjCafVTI3ekJXbpJ8NMG4L8Aci498e7XlzGhrGpy4vhnpkkMOV4W1zNMwcu+9ApTU2BPuTbieZo3wytTXmmtAt5eP4ndwqAXkM77MEg1vk=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1725054471; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=Rr9hHCtWc2lrRTZc+Cw5XDkXel6MHlg11c0GsYwyIeY=; 
-	b=mJKWP48CQM2TVPXSnpmc6D6RvEmbtJbe/V8AePBbOwTgu5+yBMyl7JC6v6KUqFrTyR3/mUwgO9cZnYus0RHlIje0xZ17e5ew5YOCPybBBmmY/Z+XmnliPkkJvJ2J4OEqBLPd3P/xxzGDrcxgPx/SNVpLrlTjpMbedOmUss0+I7U=
+	t=1725054495; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=eI2uOeGg/sx1MKwSvVvpZfm5vXW9RsarhqsgbbBK1us=; 
+	b=SuKImHLz4umEcAcUr/53zbcU+rZYyhC59Ls2qWQlTDMotkWNlUjgsRg2cc43J6+Cr2OtYrl3qBPR6k/NE+7fL/mQax7RhPy7pS7Q3SsI64nioQ4XQbFEq1tkAg900G6jnlyYWlqH3jHvZX4OPrsg5OlbJacurXIZXnC0gNU5Ytw=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1725054471;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1725054495;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=Rr9hHCtWc2lrRTZc+Cw5XDkXel6MHlg11c0GsYwyIeY=;
-	b=DzIWdZhCLOVB5scc2EYji95CnsXAZG5GMStqp6sZ5SQqgiHzPD19Pnf8WqC2dXL6
-	VTmNJqTQfYCb+eb+O0/QC3qrfVzo3r4xxpfDntVkWBTBojXyYItS3nU34BtCQxEIbRi
-	Ul7nGtap4QYWs/4eM6QZ8KVicBxP8FT9R3YvO00w=
+	bh=eI2uOeGg/sx1MKwSvVvpZfm5vXW9RsarhqsgbbBK1us=;
+	b=uqc1l1dU+Rth/KAcN0NmNpMZpz42q7mguQYej0hai0CntRWZ1sIUhkcFCLPOgKrN
+	AU+xWY0U7N3P2x9d8iPIWU4WzF5UCe33b7lbt1mNuukzkq6WTsPR9gTKMRa0O9tFnND
+	h5TiCNPIIFMfJgxVBoGpDJYsIVOkVyg+p+ivSwyw=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	jason.andryuk@amd.com,
 	christopher.w.clark@gmail.com,
-	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 09/44] x86/boot: split bootstrap_map_addr() out of bootstrap_map()
-Date: Fri, 30 Aug 2024 17:46:54 -0400
-Message-Id: <20240830214730.1621-10-dpsmith@apertussolutions.com>
+Subject: [PATCH v4 31/44] x86/boot: convert dom0_construct_pvh to struct boot_module
+Date: Fri, 30 Aug 2024 17:47:16 -0400
+Message-Id: <20240830214730.1621-32-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240830214730.1621-1-dpsmith@apertussolutions.com>
 References: <20240830214730.1621-1-dpsmith@apertussolutions.com>
@@ -77,80 +77,76 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+This changes both the kernel and ramdisk parameters over to struct
+boot_module.
 
-Using an interface based on addresses directly, not modules.
-
-No functional change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/include/asm/setup.h |  1 +
- xen/arch/x86/setup.c             | 19 +++++++++++++------
- 2 files changed, 14 insertions(+), 6 deletions(-)
+ xen/arch/x86/dom0_build.c             |  2 +-
+ xen/arch/x86/hvm/dom0_build.c         | 11 +++++------
+ xen/arch/x86/include/asm/dom0_build.h |  7 +++----
+ 3 files changed, 9 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index d75589178b91..15dcb62cb5ac 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -34,6 +34,7 @@ void setup_io_bitmap(struct domain *d);
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index c39588b346b0..71b2e3afc1a1 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -610,7 +610,7 @@ int __init construct_dom0(struct domain *d, const struct boot_module *image,
+     process_pending_softirqs();
  
- unsigned long initial_images_nrpages(nodeid_t node);
- void discard_initial_images(void);
-+void *bootstrap_map_addr(uint64_t start, uint64_t end);
- void *bootstrap_map(const module_t *mod);
- 
- int remove_xen_ranges(struct rangeset *r);
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 82a4375683d2..d4f557b4c50d 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -436,24 +436,22 @@ static void __init normalise_cpu_order(void)
-  * Ensure a given physical memory range is present in the bootstrap mappings.
-  * Use superpage mappings to ensure that pagetable memory needn't be allocated.
-  */
--void *__init bootstrap_map(const module_t *mod)
-+void *__init bootstrap_map_addr(uint64_t start, uint64_t end)
- {
-     static unsigned long __initdata map_cur = BOOTSTRAP_MAP_BASE;
--    uint64_t start, end, mask = (1L << L2_PAGETABLE_SHIFT) - 1;
-+    uint64_t mask = (1L << L2_PAGETABLE_SHIFT) - 1;
-     void *ret;
- 
-     if ( system_state != SYS_STATE_early_boot )
--        return mod ? mfn_to_virt(mod->mod_start) : NULL;
-+        return end ? maddr_to_virt(start) : NULL;
- 
--    if ( !mod )
-+    if ( !end )
-     {
-         destroy_xen_mappings(BOOTSTRAP_MAP_BASE, BOOTSTRAP_MAP_LIMIT);
-         map_cur = BOOTSTRAP_MAP_BASE;
-         return NULL;
+     if ( is_hvm_domain(d) )
+-        rc = dom0_construct_pvh(d, image->early_mod, image->headroom, initrd->early_mod, cmdline);
++        rc = dom0_construct_pvh(d, image, initrd, cmdline);
+     else if ( is_pv_domain(d) )
+         rc = dom0_construct_pv(d, image, initrd, cmdline);
+     else
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index f3eddb684686..1579034ebfc0 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -1285,10 +1285,9 @@ static void __hwdom_init pvh_setup_mmcfg(struct domain *d)
      }
- 
--    start = (uint64_t)mod->mod_start << PAGE_SHIFT;
--    end = start + mod->mod_end;
-     if ( start >= end )
-         return NULL;
- 
-@@ -469,6 +467,15 @@ void *__init bootstrap_map(const module_t *mod)
-     return ret;
  }
  
-+void *__init bootstrap_map(const module_t *mod)
-+{
-+    if ( !mod )
-+        return bootstrap_map_addr(0, 0);
-+
-+    return bootstrap_map_addr(pfn_to_paddr(mod->mod_start),
-+                              pfn_to_paddr(mod->mod_start) + mod->mod_end);
-+}
-+
- static void __init move_memory(
-     uint64_t dst, uint64_t src, unsigned int size)
+-int __init dom0_construct_pvh(struct domain *d, const module_t *image,
+-                              unsigned long image_headroom,
+-                              module_t *initrd,
+-                              const char *cmdline)
++int __init dom0_construct_pvh(
++    struct domain *d, const struct boot_module *image,
++    struct boot_module *initrd, const char *cmdline)
  {
+     paddr_t entry, start_info;
+     int rc;
+@@ -1332,8 +1331,8 @@ int __init dom0_construct_pvh(struct domain *d, const module_t *image,
+         return rc;
+     }
+ 
+-    rc = pvh_load_kernel(d, image, image_headroom, initrd, bootstrap_map(image),
+-                         cmdline, &entry, &start_info);
++    rc = pvh_load_kernel(d, image->early_mod, image->headroom, initrd->early_mod,
++                         bootstrap_map_bm(image), cmdline, &entry, &start_info);
+     if ( rc )
+     {
+         printk("Failed to load Dom0 kernel\n");
+diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
+index 2ce5ea3851af..8f7b37f3d308 100644
+--- a/xen/arch/x86/include/asm/dom0_build.h
++++ b/xen/arch/x86/include/asm/dom0_build.h
+@@ -17,10 +17,9 @@ int dom0_construct_pv(
+     struct domain *d, const struct boot_module *image,
+     struct boot_module *initrd, const char *cmdline);
+ 
+-int dom0_construct_pvh(struct domain *d, const module_t *image,
+-                       unsigned long image_headroom,
+-                       module_t *initrd,
+-                       const char *cmdline);
++int dom0_construct_pvh(
++    struct domain *d, const struct boot_module *image,
++    struct boot_module *initrd, const char *cmdline);
+ 
+ unsigned long dom0_paging_pages(const struct domain *d,
+                                 unsigned long nr_pages);
 -- 
 2.30.2
 
