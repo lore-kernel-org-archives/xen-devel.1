@@ -4,37 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 383C0CD342C
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 17:01:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.788314.1197887 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B55A7CD13CF
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 18:41:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.788403.1197900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slAQs-0004yM-V5; Mon, 02 Sep 2024 17:01:38 +0000
+	id 1slBzD-0003xW-0q; Mon, 02 Sep 2024 18:41:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 788314.1197887; Mon, 02 Sep 2024 17:01:38 +0000
+Received: by outflank-mailman (output) from mailman id 788403.1197900; Mon, 02 Sep 2024 18:41:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slAQs-0004ww-Qw; Mon, 02 Sep 2024 17:01:38 +0000
-Received: by outflank-mailman (input) for mailman id 788314;
- Mon, 02 Sep 2024 17:01:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1slBzC-0003xP-Sw; Mon, 02 Sep 2024 18:41:10 +0000
+Received: by outflank-mailman (input) for mailman id 788403;
+ Mon, 02 Sep 2024 18:41:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uz6k=QA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1slAQq-0002e4-Qk
- for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 17:01:36 +0000
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [2a00:1450:4864:20::129])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 025a7b1f-694d-11ef-99a1-01e77a169b0f;
- Mon, 02 Sep 2024 19:01:34 +0200 (CEST)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5334879ba28so6234662e87.3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 10:01:34 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-535408410f5sm1677618e87.211.2024.09.02.10.01.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 10:01:32 -0700 (PDT)
+ <SRS0=HNBS=QA=epam.com=prvs=597514010e=artem_mygaiev@srs-se1.protection.inumbo.net>)
+ id 1slBzB-0003xI-Bi
+ for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 18:41:09 +0000
+Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
+ [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e97bb61d-695a-11ef-a0b2-8be0dac302b0;
+ Mon, 02 Sep 2024 20:41:06 +0200 (CEST)
+Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
+ by mx0a-0039f301.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 482EXVRw019208;
+ Mon, 2 Sep 2024 18:40:54 GMT
+Received: from duzpr83cu001.outbound.protection.outlook.com
+ (mail-northeuropeazlp17013012.outbound.protection.outlook.com [40.93.64.12])
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 41df7v8jkj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 02 Sep 2024 18:40:54 +0000 (GMT)
+Received: from AM9PR03MB7680.eurprd03.prod.outlook.com (2603:10a6:20b:41d::24)
+ by PAXPR03MB7998.eurprd03.prod.outlook.com (2603:10a6:102:21d::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.24; Mon, 2 Sep
+ 2024 18:40:50 +0000
+Received: from AM9PR03MB7680.eurprd03.prod.outlook.com
+ ([fe80::5d8b:ec56:b7cf:8c4c]) by AM9PR03MB7680.eurprd03.prod.outlook.com
+ ([fe80::5d8b:ec56:b7cf:8c4c%7]) with mapi id 15.20.7918.024; Mon, 2 Sep 2024
+ 18:40:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,814 +55,366 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 025a7b1f-694d-11ef-99a1-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725296494; x=1725901294; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WYqroMBWcl7WoQFaQrOJBLf6N/quwoFIhvYV7p00SsE=;
-        b=iG5n1H/d/g2Kaph8L9HnR2A6mKUZIZ7SXqoh61SN+u7Sl90mp2JhCLU6P/Fpei4Tiu
-         +BoNKpKhfN0kjU2tP6SUL/bPyvHo2HcQT310gkzR6MZrVW7bsD9e9DvYu4zyDY9f5d/D
-         WiXyF9Fj8vPOMO7S1u0Ryoh7DFIZzauLuRZYEuznje5Kuung7oRPtzT7397ouDzR1lzk
-         BQuZJpgSzZakYnwFCQNyVUc9pdPRzLH4Qjbyos82pt/cmEiI/hVoRI9dHI5jt3rlWG3I
-         Nax7Ep8YhEn1WrkobaGy+lcpiR2NT9QjUOORnVXNcj3lVLbRQOHCmrYosJKSna3WgwWm
-         +ydg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725296494; x=1725901294;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=WYqroMBWcl7WoQFaQrOJBLf6N/quwoFIhvYV7p00SsE=;
-        b=Et4tIZCDgLglm8NruG9HPNTcfjRoG22p5eVONLcIvp/NXPPbuu3aaGmkZRCm2pqyyE
-         GJDgJ1Mw/nCOJAsyr6i8dZWw5kImEM0xi9HTJHrsOHSS0zq2un2mk7DejXzGjayNYPRU
-         AVmsFEAJESl0J8a/5yscNgfcj+ukMHhXOffRCNFBxNprTGVqt15TItNGXvnhJDppRzAE
-         eX4cOqiA8IMLNRFj8gumVg0aTFeZVKelq9OAfNXZtB51BDMaxw1M+06ZRb/Urk1TEC8J
-         2DISKLkbgqw4YLSyjhXSPiAWSPSKfmr2H0dey2m3kyRI/zY0LaWKRGZzrHyfJwENlh1a
-         hurQ==
-X-Gm-Message-State: AOJu0YzbXxhS7JZmOF+ibtMuvfE11z8yyRWw8GDsp01HEF84O5JrSCr3
-	WllcuUgGPT37Xqg1e5WFglOY2OyYelZd9vIB0aUtrTm11SclnEAm5KCVwA==
-X-Google-Smtp-Source: AGHT+IFCrt73mN4fVz7oA/0WbF2+iN9vdDBlmLT3eOd+0yeHfnDMPxG+8NUkKRsW4M8KOWN2kLT1Ig==
-X-Received: by 2002:a05:6512:1382:b0:530:da96:a986 with SMTP id 2adb3069b0e04-53546b8dac1mr6481308e87.47.1725296492795;
-        Mon, 02 Sep 2024 10:01:32 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 8/9] xen/riscv: page table handling
-Date: Mon,  2 Sep 2024 19:01:21 +0200
-Message-ID: <7ebcc10fbea81ff59b24edc962bdc401dd73ee82.1725295716.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <cover.1725295716.git.oleksii.kurochko@gmail.com>
-References: <cover.1725295716.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: e97bb61d-695a-11ef-a0b2-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZBT8PNXFCOISjSJLWjuM/OAqsgvXXSrTiTxj2hWmG1hjpDdI30JHQLIjvZnSDvxJHEWe6ogEFLQys1mV5bZeZQOqolYL2FDG6lV6KHKP2qNV/kQLkAyE2BnIoZ+kkzFZkYt65ZaUX3JoMRlh+YlYIcJXvWxRS2q8dDZaPuNmuaucZ/neflMRzYXj/xbLTYncK1ctjXxrChnbfbPDjj3Z02j8Fy2hPzIr5B060stBjgtQZlxpsPSXq2GJvivnmCm4MdF71Vttz+GvH9VfxgQMiw781D9afoMPZq4g+i6SrwbeR0pX8Tscvvh6xmyTh0H9VLefJVODd08bJluk13ZTGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=enUvfgEjFVXYONnpXObTv6r57hsEY8Z+YAfc23vAJF0=;
+ b=EVaSign1ydHszGjlP5RzTPb5xhwkC5DpdgsKztQWMyHsJkRYRi8N4TSxER1GwFScI9dLqGEZtFx58sCAgNVJVM6M0JSMeUrSEvw0E5hxGJ3xd0/7+UL1UEWKNxy/ex5eDIAgAvItAqB1VIsNwXF4T/RyPhMsblb2nSSHOia75Jq+gR+yR2ZdnFZin2EnfvRG1/C76dJcWZ/27upW8452HlmbiqlZGy3AJmH2+uiNt8AmqHFR3QSnm/UyAkACaxmtawnS0ukBH4cBP7cinH/ssnpiPbjTrjFGYfSfu3gcP7U6SWWEIxgo374rNCWVIfgj+OawQGodD9ZXGZd4QTwsjw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=enUvfgEjFVXYONnpXObTv6r57hsEY8Z+YAfc23vAJF0=;
+ b=bNWn35vgyXtdNgxmy7VMBS/My/b2A0gE9BkWCk5OJwmTdB+xCzgRdoBx+wmzfTIOrSDVehrwdbAzHagopyN8lqReCFdS8eAUm8CbauhyjE/9CXJLCUwvrK3OKL3bJaTa8IMOGQqKpmN/zGpiZjX2i69y3Es5lcuBPJ3dU6QRreLdNed7RVuWaB1NtPfB09RGm7A2UO+PErXD9rvwXbysIfHc/ZbrS6M7i7e9ybEY+UV0VH+d0S1wkuoJiPVsj7P8aeWr3MFSc4XtrbIaQk7bjQ5UeTv9K2q2D1oFK3dQWSg64lOT9IsrPoFNsPtowD5Gl26y7eTA+28knL8BeG+s3A==
+From: Artem Mygaiev <Artem_Mygaiev@epam.com>
+To: Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
+        "sstabellini@kernel.org"
+	<sstabellini@kernel.org>,
+        "bertrand.marquis@arm.com"
+	<bertrand.marquis@arm.com>,
+        "michal.orzel@amd.com" <michal.orzel@amd.com>,
+        "julien@xen.org" <julien@xen.org>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v3 1/3] docs: Introduce Fusa Requirement and define
+ maintainers
+Thread-Topic: [PATCH v3 1/3] docs: Introduce Fusa Requirement and define
+ maintainers
+Thread-Index: AQHa6B4zV7H33y0wnUOPwFqbHhJFSLJE/mB9
+Date: Mon, 2 Sep 2024 18:40:50 +0000
+Message-ID:
+ <AM9PR03MB7680ECF1DDEBEF2DA1D0F9A1F4922@AM9PR03MB7680.eurprd03.prod.outlook.com>
+References: <20240806163157.2850636-1-ayan.kumar.halder@amd.com>
+ <20240806163157.2850636-2-ayan.kumar.halder@amd.com>
+In-Reply-To: <20240806163157.2850636-2-ayan.kumar.halder@amd.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM9PR03MB7680:EE_|PAXPR03MB7998:EE_
+x-ms-office365-filtering-correlation-id: 2693bcd9-f884-48f2-aed8-08dccb7ec4bd
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?R1vKz0FtVwB04+3js5CYiKYq/i9+tYhFYqbVgLVFyq03Je+fr28fnhgy5I?=
+ =?iso-8859-1?Q?2aK6kMZ8qknbwxdjNOzJMAGem6jHtbsPzCx6KsI4YmaKYA0ZYmRsgJSr8u?=
+ =?iso-8859-1?Q?UmPx9hLrzXdIOrdP1EBrJc+iqMpq+SJxIVX+QkYyyRlEYnEE6jOjsgAG2m?=
+ =?iso-8859-1?Q?blCB+BlciJt00v4bYyVCb1WlNJ86CWnGAw1mVAVrJ3KN5h7QFskDDvwnFn?=
+ =?iso-8859-1?Q?gkFSUbrwHV3SNQ2de3Ff8tUzJeHlmHL1L4ZD/+lhrFYrrwjivuMn+N1vni?=
+ =?iso-8859-1?Q?gY7Szv1Aqa7L7SXqv4HbbBntUbxP5wlOxCjY6ED2ES31u+xcP89hFZVoWX?=
+ =?iso-8859-1?Q?FEibAbL2uOd+bOVuo4J4VF54KPFnmNxgbqO0O6+wt6JuvmhKU1rCIrHR4j?=
+ =?iso-8859-1?Q?PlRVf4mH+ykc/9F8/8THulzXQlJmQpXcDWPdDb2p4YpwBG/BwDlHQOOq8z?=
+ =?iso-8859-1?Q?ItOXtMEnJh4rjH6BkWEBKSwmUlh7CZ+yWTAQlJRp+jNa1PUj6wRYSmy1Pn?=
+ =?iso-8859-1?Q?LgUkLcMXqJSDTAxKE8xUo26x95soI9KjTk8+I8CE4rJ5nldtQph9Q80qB4?=
+ =?iso-8859-1?Q?zZddZo+INu5QzQe4Sen1WrWW3u1WA/MIhsITTYYNNcDyTZZB+R3nyM0Arl?=
+ =?iso-8859-1?Q?AS9Qsrnr0Ce6LMVgwEIdQQuXivAGpCqtr3Qks0FHrj0knTCBkNYFEA6NPM?=
+ =?iso-8859-1?Q?34wYIDWWltndrtffsZ32Mm8F2SunD1vz/CBxo11HueOLKnBIDLJ0v0tHCU?=
+ =?iso-8859-1?Q?18MWScRjuazpuUw2xYMoEvNqHtJwlJc7NAAGzLWrDm/Tgek+5YGH+YSiUk?=
+ =?iso-8859-1?Q?GKWH7islA97mIZ50Pu6Ge8xRtuhWjEEjVbDwmGWD7x6pl99DATdekawFeW?=
+ =?iso-8859-1?Q?oK7UhB9KIaDYxlBiR2lsITGJuFLfbpb8Lc6j51We5ayeRgGeYOw2/1bLk6?=
+ =?iso-8859-1?Q?NHI4gniHHmxPxmMnWSA8bQB8XIT0tcjZWDK0Q6LOgWPZj30U2iQe/nvY38?=
+ =?iso-8859-1?Q?itdkf8ZHYsWdZ82MeSJzkDRc37V2/7vjJpxrOS9zwrGqrIlOYhbunJMVjh?=
+ =?iso-8859-1?Q?vIzkabg65ZEdwhRTIyD7gAYQ3kL2IPrlSt4UhtFql+aqZJIRGv7/ebqF4+?=
+ =?iso-8859-1?Q?humZc4QQv8pXzLSlIOTYNBpKfCXjkeLysNO9Hp7UkeXWqSxhFNdAUv6d+0?=
+ =?iso-8859-1?Q?QPmWlnvZYsiDfslG/Ya3BLHVX/vfQ8wzAvPPiIMrGssiwbnNjw2+R7byaY?=
+ =?iso-8859-1?Q?aXWBip+CI3/CUMyii6gn9rN3/j1wL2OOLzX2EKqMBt/HlM7HWzxYW/1mvZ?=
+ =?iso-8859-1?Q?vvTVjwCUoem+iO7mo/4DKg5PEjaoNLXC8hmViOMMBwta9ks8bQ7naFhxE/?=
+ =?iso-8859-1?Q?Dk1nldfPr0t/KM2Dgg7hU7aAri9r9Ih/uMcJ/RTXgp/eB0h+THs1E=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7680.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?r8Z5VRU82aENHPzxb1YbBV8ilEvgUIRPapp5cxF6d8DT2LUVy+8tQuSGtp?=
+ =?iso-8859-1?Q?/iFnWWPm72xLdQ9+UH60kpscBPRosEcNMYAjdU8gaOK5Y6qNOhcrjTtGER?=
+ =?iso-8859-1?Q?zzMRT9foEemkhkMOS5QbFjqW0F6lR1I8Dzsa46Husj7GurNeSYaTMWFI+s?=
+ =?iso-8859-1?Q?1qpONTSU7sVpp1wo4uMoAj66jM4yyfxyTCPeidB0GSIwSu999kBMCfnpc7?=
+ =?iso-8859-1?Q?g6oVkRNXnHppswaR3h3zDoyprbAfTo2XwDwybkvlsPJLA/9SVfSemdLC5/?=
+ =?iso-8859-1?Q?QswBo0HOZ2odMVwJE/LaH4n68hHRKU7QZITOvCU1y0k4PHqKv6sk22HCnk?=
+ =?iso-8859-1?Q?cbR7pwkKwXOj2kABufz8vT2f/fSsZ/+Zt4cM90ybjG6lxU8Ah8aAE//BNc?=
+ =?iso-8859-1?Q?1DdXImtG9pr9zPIx9VOqbHjCpD4bAmxfs0bSdehbqXxIfz3d56E6KM5pW6?=
+ =?iso-8859-1?Q?edW4/vN4+a2qcobGkFviydM1+1VZ6YX8z1GERc47yRQXo6X0P2Aolz9b0z?=
+ =?iso-8859-1?Q?rnlFGf93TC8ca8W2rLS4PG8kNkMYLrwvWKMaUZoBObQOsSEir+bF9fVZ7K?=
+ =?iso-8859-1?Q?Jjk7k6H5YOa0534W5BZ7LpKUsyvnJM42ObVyaHZd/ogl53812HlcIBO7XT?=
+ =?iso-8859-1?Q?o091yDPhD4LGPWkenLwa+3KD7U+yHUSeEtXpfgoK2yBXQm9BtTpVZWSlJT?=
+ =?iso-8859-1?Q?y3uXMA9Q4Vq3RPwOARcuZvy0d0mGFhY32tfdNPknV5kGanLLsl+C3He1LY?=
+ =?iso-8859-1?Q?oi1duCvqH6Q8fm4VDgne3zi/h8iYK2PhEZXbaNVRjf4HI9VV9ldAtVt7A9?=
+ =?iso-8859-1?Q?YCIep/gKAInsceBOe+sQHQvoXI7H4siI1PBnrPAfE3fMYeh/qQU2mkr84q?=
+ =?iso-8859-1?Q?MSeaMI+P9hJEAGRRfHrnAm3qVSI31/ZNCp3qojngjP6AY6YLMMUJVeOYWf?=
+ =?iso-8859-1?Q?Gejlvz/5+n40sZgEQ5/hddNuSe9ln1P58cdq2Pn7f+4MlSy7o/iz8NMwLm?=
+ =?iso-8859-1?Q?PXpZP1POV746DhH7MktsW9RdFSflsDHLklnxgqnEdM5yZXaE9FQveZZwne?=
+ =?iso-8859-1?Q?6S5xkWK49A3kAnUsmxq6Ey9qjCq7AFsYJv6XNR/khr5cLFqN09FQKWehaa?=
+ =?iso-8859-1?Q?eBkg3solDORs1Kj3yNM575eHPoORve+V5uJGYwdQ78wSeRC6PTZ5ctpPfl?=
+ =?iso-8859-1?Q?4fQM4YuqFPoJ0TmIrOLhoRGHoxL0AyBk4xb7HIhGqNU2DMB2GeSTZR2E7X?=
+ =?iso-8859-1?Q?QgVmFUG0aBqbQt5z0/FJUI3gxPoSGquYbIieGma4GRZCqUpcYGZwkw7S7l?=
+ =?iso-8859-1?Q?cOTWtmIakSAN22HdEYPxs8OSLG+8K8mRk0qT+92odZYGakMUh2pBV00cmf?=
+ =?iso-8859-1?Q?mbtr9PG0CrQxfrx8XYBvC2iBpM+BhezuQDZBWEDxi48ul9ACMvV6l88EF/?=
+ =?iso-8859-1?Q?QBMDKq8zFMoQXZAGEv5GXX64ke7/uWy5JX7kZemt2BfJgb/0FTnYvXcKY9?=
+ =?iso-8859-1?Q?VWk3yxJQBuVdxE7W9Bv0wzVPJenQte9udJJ7MKzfpxA802bz703oMoOjid?=
+ =?iso-8859-1?Q?sDcx5QWMaTM9/aaEOnZhFaHbFMFO0q7hTQHNke5LWiu5IX3P3d5K7FDM70?=
+ =?iso-8859-1?Q?DHBO5o0SHghy8qiIUdGsvZeTLmeuQatvPR?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7680.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2693bcd9-f884-48f2-aed8-08dccb7ec4bd
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Sep 2024 18:40:50.6532
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: pC6E+EBQCasi5OUEEk6GE1NnIjV7GvcmkP3KEdSyQM7RTcuiH167VBTe/TSc194pBhwYJtV1tiD/1PVmfE9Azw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR03MB7998
+X-Proofpoint-GUID: xRQ51itKbYxFcUffO_9ta72QwxIQkw07
+X-Proofpoint-ORIG-GUID: xRQ51itKbYxFcUffO_9ta72QwxIQkw07
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-02_04,2024-09-02_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 mlxscore=0
+ mlxlogscore=999 impostorscore=0 adultscore=0 suspectscore=0 phishscore=0
+ lowpriorityscore=0 clxscore=1011 malwarescore=0 spamscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2407110000 definitions=main-2409020148
 
-Implement map_pages_to_xen() which requires several
-functions to manage page tables and entries:
-- pt_update()
-- pt_mapping_level()
-- pt_update_entry()
-- pt_next_level()
-- pt_check_entry()
-
-To support these operations, add functions for creating,
-mapping, and unmapping Xen tables:
-- create_table()
-- map_table()
-- unmap_table()
-
-Introduce PTE_SMALL to indicate that 4KB mapping is needed
-and PTE_POPULATE.
-
-In addition introduce flush_tlb_range_va() for TLB flushing across
-CPUs after updating the PTE for the requested mapping.
-
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- riscv_encoding.h using hard tabs as it is used in XVisor from where
- this file has been taken and SATP_PPN_MASK was aligned using 3 hard
- tabs as it was done for the definitions aove SATP_PPN_MASK.
----
-Changes in V6:
- - update the commit message.
- - correct the comment above flush_tlb_range_va().
- - add PTE_READABLE to the check of pte.rwx permissions in
-   pte_is_mapping().
- - s/printk/dprintk in pt_check_entry().
- - drop unnecessary ASSERTS() in pt_check_entry().
- - drop checking of PTE_VALID flags in /* Sanity check when removing
-   a mapping */ because of the earlier check.
- - drop ASSERT(flags & PTE_POPULATE) in /* Sanity check when populating the page-table */
-   section as in the earlier if it is checked.
- - pt_next_level() changes:
-   - invert if ( alloc_tbl ) condition.
-   - drop local variable ret.
- - pt_update_entry() changes:
-   - invert definition of alloc_tbl.
-   - update the comment inside "if ( rc == XEN_TABLE_MAP_FAILED )".
-   - drop else for mentioned above if (...).
-   - clear some PTE flags before update.
- - s/xen_pt_lock/pt_lock
- - use PFN_DOWN() for vfn variable definition in pt_update().
- - drop definition of PTE_{R,W,X}_MASK.
- - introduce PTE_XWV_BITS and PTE_XWV_MASK() for convenience and use them in if (...)
-   in pt_update().
- - update the comment above pt_update().
- - change memset(&pte, 0x00, sizeof(pte)) to pte.pte = 0.
- - add the comment above pte_is_table().
- - add ASSERT in pte_is_mapping() to check the cases which are reserved for future
-   use.
----
-Changes in V5:
- - s/xen_{un}map/{un}map
- - introduce PTE_SMALL instead of PTE_BLOCK.
- - update the comment above defintion of PTE_4K_PAGES.
- - code style fixes.
- - s/RV_STAGE1_MODE > SATP_MODE_SV48/RV_STAGE1_MODE > SATP_MODE_SV39 around
-   DECLARE_OFFSETS macros.
- - change type of root_maddr from unsgined long to maddr_t.
- - drop duplicated check ( if (rc) break ) in pt_update() inside while cycle.
- - s/1U/1UL
- - put 'spin_unlock(&xen_pt_lock);' ahead of TLB flush in pt_update().
- - update the commit message.
- - update the comment above ASSERT() in map_pages_to_xen() and also update
-   the check within ASSERT() to check that flags has PTE_VALID bit set.
- - update the comment above pt_update() function.
- - add the comment inside pt_check_entry().
- - update the TLB flushing region in pt_update().
- - s/alloc_only/alloc_tbl
----
-Changes in V4:
- - update the commit message.
- - drop xen_ prefix for functions: xen_pt_update(), xen_pt_mapping_level(),
-   xen_pt_update_entry(), xen_pt_next_level(), xen_pt_check_entry().
- - drop 'select GENERIC_PT' for CONFIG_RISCV. There is no GENERIC_PT anymore.
- - update implementation of flush_xen_tlb_range_va and s/flush_xen_tlb_range_va/flush_tlb_range_va
- - s/pte_get_mfn/mfn_from_pte. Others similar definitions I decided not to touch as
-   they were introduced before and this patter of naming such type of macros will be applied
-   for newly introduced macros.
- - drop _PAGE_* definitions and use analogues of PTE_*.
- - introduce PTE_{W,X,R}_MASK and drop PAGE_{XN,W,X}_MASK. Also drop _PAGE_{*}_BIT
- - introduce PAGE_HYPERVISOR_RX.
- - drop unused now l3_table_offset.
- - drop struct pt_t as it was used only for one function. If it will be needed in the future
-   pt_t will be re-introduced.
- - code styles fixes in pte_is_table(). drop level argument from t.
- - update implementation and prototype of pte_is_mapping().
- - drop level argument from pt_next_level().
- - introduce definition of SATP_PPN_MASK.
- - isolate PPN of CSR_SATP before shift by PAGE_SHIFT.
- - drop set_permission() functions as it is not used more then once.
- - update prototype of pt_check_entry(): drop level argument as it is not used.
- - pt_check_entry():
-   - code style fixes
-   - update the sanity check when modifying an entry
-   - update the sanity check when when removing a mapping.
- - s/read_only/alloc_only.
- - code style fixes for pt_next_level().
- - pt_update_entry() changes:
-   - drop arch_level variable inisde pt_update_entry()
-   - drop convertion near virt to paddr_t in DECLARE_OFFSETS(offsets, virt);
-   - pull out "goto out inside first 'for' cycle.
-   - drop braces for 'if' cases which has only one line.
-   - ident 'out' label with one blank.
-   - update the comment above alloc_only and also definition to take into
-     account  that if pte population was requested or not.
-   - drop target variable and rename arch_target argument of the function to
-     target.
- - pt_mapping_level() changes:
-   - move the check if PTE_BLOCK should be mapped on the top of the function.
-   - change int i to unsigned int and update 'for' cycle correspondingly.
- - update prototye of pt_update():
-   - drop the comment  above nr_mfns and drop const to be consistent with other
-     arguments.
-   - always flush TLB at the end of the function as non-present entries can be put
-     in the TLB.
-   - add fence before TLB flush to ensure that PTEs are all updated before flushing.
- - s/XEN_TABLE_NORMAL_PAGE/XEN_TABLE_NORMAL
- - add a check in map_pages_to_xen() the mfn is not INVALID_MFN.
- - add the comment on top of pt_update() how mfn = INVALID_MFN is considered.
- - s/_PAGE_BLOCK/PTE_BLOCK.
- - add the comment with additional explanation for PTE_BLOCK.
- - drop defintion of FIRST_SIZE as it isn't used.
----
-Changes in V3:
- - new patch. ( Technically it is reworked version of the generic approach
-   which I tried to suggest in the previous version )
----
- xen/arch/riscv/Makefile                     |   1 +
- xen/arch/riscv/include/asm/flushtlb.h       |   9 +
- xen/arch/riscv/include/asm/mm.h             |   2 +
- xen/arch/riscv/include/asm/page.h           |  72 ++++
- xen/arch/riscv/include/asm/riscv_encoding.h |   1 +
- xen/arch/riscv/mm.c                         |   9 -
- xen/arch/riscv/pt.c                         | 423 ++++++++++++++++++++
- 7 files changed, 508 insertions(+), 9 deletions(-)
- create mode 100644 xen/arch/riscv/pt.c
-
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 2f2d6647a2..fca9fd93b6 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -1,6 +1,7 @@
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
- obj-y += entry.o
- obj-y += mm.o
-+obj-y += pt.o
- obj-$(CONFIG_RISCV_64) += riscv64/
- obj-y += sbi.o
- obj-y += setup.o
-diff --git a/xen/arch/riscv/include/asm/flushtlb.h b/xen/arch/riscv/include/asm/flushtlb.h
-index f4a735fd6c..43214f5e95 100644
---- a/xen/arch/riscv/include/asm/flushtlb.h
-+++ b/xen/arch/riscv/include/asm/flushtlb.h
-@@ -5,12 +5,21 @@
- #include <xen/bug.h>
- #include <xen/cpumask.h>
- 
-+#include <asm/sbi.h>
-+
- /* Flush TLB of local processor for address va. */
- static inline void flush_tlb_one_local(vaddr_t va)
- {
-     asm volatile ( "sfence.vma %0" :: "r" (va) : "memory" );
- }
- 
-+/* Flush a range of VA's hypervisor mappings from the TLB of all processors. */
-+static inline void flush_tlb_range_va(vaddr_t va, size_t size)
-+{
-+    BUG_ON(!sbi_has_rfence());
-+    sbi_remote_sfence_vma(NULL, va, size);
-+}
-+
- /*
-  * Filter the given set of CPUs, removing those that definitely flushed their
-  * TLB since @page_timestamp.
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index a0bdc2bc3a..ce1557bb27 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -42,6 +42,8 @@ static inline void *maddr_to_virt(paddr_t ma)
- #define virt_to_mfn(va)     __virt_to_mfn(va)
- #define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
- 
-+#define mfn_from_pte(pte) maddr_to_mfn(pte_to_paddr(pte))
-+
- struct page_info
- {
-     /* Each frame can be threaded onto a doubly-linked list. */
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index 55916eaa92..9b7d4fd597 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -21,6 +21,11 @@
- #define XEN_PT_LEVEL_MAP_MASK(lvl)  (~(XEN_PT_LEVEL_SIZE(lvl) - 1))
- #define XEN_PT_LEVEL_MASK(lvl)      (VPN_MASK << XEN_PT_LEVEL_SHIFT(lvl))
- 
-+/*
-+ * PTE format:
-+ * | XLEN-1  10 | 9             8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0
-+ *       PFN      reserved for SW   D   A   G   U   X   W   R   V
-+ */
- #define PTE_VALID                   BIT(0, UL)
- #define PTE_READABLE                BIT(1, UL)
- #define PTE_WRITABLE                BIT(2, UL)
-@@ -34,15 +39,51 @@
- #define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
- #define PTE_TABLE                   (PTE_VALID)
- 
-+#define PAGE_HYPERVISOR_RO          (PTE_VALID | PTE_READABLE)
- #define PAGE_HYPERVISOR_RW          (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
-+#define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE)
- 
- #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
- 
-+/*
-+ * The PTE format does not contain the following bits within itself;
-+ * they are created artificially to inform the Xen page table
-+ * handling algorithm. These bits should not be explicitly written
-+ * to the PTE entry.
-+ */
-+#define PTE_SMALL       BIT(10, UL)
-+#define PTE_POPULATE    BIT(11, UL)
-+
-+#define PTE_XWV_BITS    (PTE_WRITABLE | PTE_EXECUTABLE | PTE_VALID)
-+#define PTE_XWV_MASK(x) ((x) & PTE_XWV_BITS)
-+#define PTE_RWX_MASK(x) ((x) & (PTE_READABLE | PTE_WRITABLE | PTE_EXECUTABLE))
-+
- /* Calculate the offsets into the pagetables for a given VA */
- #define pt_linear_offset(lvl, va)   ((va) >> XEN_PT_LEVEL_SHIFT(lvl))
- 
- #define pt_index(lvl, va) (pt_linear_offset((lvl), (va)) & VPN_MASK)
- 
-+#define PAGETABLE_ORDER_MASK ((_AC(1, U) << PAGETABLE_ORDER) - 1)
-+#define TABLE_OFFSET(offs) (_AT(unsigned int, offs) & PAGETABLE_ORDER_MASK)
-+
-+#if RV_STAGE1_MODE > SATP_MODE_SV39
-+#error "need to to update DECLARE_OFFSETS macros"
-+#else
-+
-+#define l0_table_offset(va) TABLE_OFFSET(pt_linear_offset(0, va))
-+#define l1_table_offset(va) TABLE_OFFSET(pt_linear_offset(1, va))
-+#define l2_table_offset(va) TABLE_OFFSET(pt_linear_offset(2, va))
-+
-+/* Generate an array @var containing the offset for each level from @addr */
-+#define DECLARE_OFFSETS(var, addr)          \
-+    const unsigned int var[] = {            \
-+        l0_table_offset(addr),              \
-+        l1_table_offset(addr),              \
-+        l2_table_offset(addr),              \
-+    }
-+
-+#endif
-+
- /* Page Table entry */
- typedef struct {
- #ifdef CONFIG_RISCV_64
-@@ -68,6 +109,37 @@ static inline bool pte_is_valid(pte_t p)
-     return p.pte & PTE_VALID;
- }
- 
-+/*
-+ * From the RISC-V spec:
-+ *    Table 4.5 summarizes the encoding of the permission bits.
-+ *      X W R Meaning
-+ *      0 0 0 Pointer to next level of page table.
-+ *      0 0 1 Read-only page.
-+ *      0 1 0 Reserved for future use.
-+ *      0 1 1 Read-write page.
-+ *      1 0 0 Execute-only page.
-+ *      1 0 1 Read-execute page.
-+ *      1 1 0 Reserved for future use.
-+ *      1 1 1 Read-write-execute page.
-+ */
-+inline bool pte_is_table(const pte_t p)
-+{
-+    return ((p.pte & (PTE_VALID |
-+                      PTE_READABLE |
-+                      PTE_WRITABLE |
-+                      PTE_EXECUTABLE)) == PTE_VALID);
-+}
-+
-+static inline bool pte_is_mapping(const pte_t p)
-+{
-+    /* W = 1 || (X=1 && W=1) -> Reserved for future use */
-+    ASSERT((PTE_RWX_MASK(p.pte) != PTE_WRITABLE) ||
-+           (PTE_RWX_MASK(p.pte) != (PTE_WRITABLE | PTE_EXECUTABLE)));
-+
-+    return (p.pte & PTE_VALID) &&
-+           (p.pte & (PTE_READABLE | PTE_WRITABLE | PTE_EXECUTABLE));
-+}
-+
- static inline void invalidate_icache(void)
- {
-     BUG_ON("unimplemented");
-diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
-index 58abe5eccc..d80cef0093 100644
---- a/xen/arch/riscv/include/asm/riscv_encoding.h
-+++ b/xen/arch/riscv/include/asm/riscv_encoding.h
-@@ -164,6 +164,7 @@
- #define SSTATUS_SD			SSTATUS64_SD
- #define SATP_MODE			SATP64_MODE
- #define SATP_MODE_SHIFT			SATP64_MODE_SHIFT
-+#define SATP_PPN_MASK			_UL(0x00000FFFFFFFFFFF)
- 
- #define HGATP_PPN			HGATP64_PPN
- #define HGATP_VMID_SHIFT		HGATP64_VMID_SHIFT
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index b8ff91cf4e..e8430def14 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -369,12 +369,3 @@ int destroy_xen_mappings(unsigned long s, unsigned long e)
-     BUG_ON("unimplemented");
-     return -1;
- }
--
--int map_pages_to_xen(unsigned long virt,
--                     mfn_t mfn,
--                     unsigned long nr_mfns,
--                     unsigned int flags)
--{
--    BUG_ON("unimplemented");
--    return -1;
--}
-diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
-new file mode 100644
-index 0000000000..332ae90599
---- /dev/null
-+++ b/xen/arch/riscv/pt.c
-@@ -0,0 +1,423 @@
-+#include <xen/bug.h>
-+#include <xen/domain_page.h>
-+#include <xen/errno.h>
-+#include <xen/lib.h>
-+#include <xen/mm.h>
-+#include <xen/mm-frame.h>
-+#include <xen/pfn.h>
-+#include <xen/pmap.h>
-+#include <xen/spinlock.h>
-+
-+#include <asm/flushtlb.h>
-+#include <asm/page.h>
-+
-+static inline const mfn_t get_root_page(void)
-+{
-+    paddr_t root_maddr = (csr_read(CSR_SATP) & SATP_PPN_MASK) << PAGE_SHIFT;
-+
-+    return maddr_to_mfn(root_maddr);
-+}
-+
-+/* Sanity check of the entry. */
-+static bool pt_check_entry(pte_t entry, mfn_t mfn, unsigned int flags)
-+{
-+    /*
-+     * See the comment about the possible combination of (mfn, flags) in
-+     * the comment above pt_update().
-+     */
-+
-+    /* Sanity check when modifying an entry. */
-+    if ( (flags & PTE_VALID) && mfn_eq(mfn, INVALID_MFN) )
-+    {
-+        /* We don't allow modifying an invalid entry. */
-+        if ( !pte_is_valid(entry) )
-+        {
-+            dprintk(XENLOG_ERR, "Modifying invalid entry is not allowed\n");
-+            return false;
-+        }
-+
-+        /* We don't allow modifying a table entry */
-+        if ( pte_is_table(entry) )
-+        {
-+            dprintk(XENLOG_ERR, "Modifying a table entry is not allowed\n");
-+            return false;
-+        }
-+    }
-+    /* Sanity check when inserting a mapping */
-+    else if ( flags & PTE_VALID )
-+    {
-+        /*
-+         * We don't allow replacing any valid entry.
-+         *
-+         * Note that the function pt_update() relies on this
-+         * assumption and will skip the TLB flush (when Svvptc
-+         * extension will be ratified). The function will need
-+         * to be updated if the check is relaxed.
-+         */
-+        if ( pte_is_valid(entry) )
-+        {
-+            if ( pte_is_mapping(entry) )
-+                dprintk(XENLOG_ERR, "Changing MFN for a valid entry is not allowed (%#"PRI_mfn" -> %#"PRI_mfn")\n",
-+                       mfn_x(mfn_from_pte(entry)), mfn_x(mfn));
-+            else
-+                dprintk(XENLOG_ERR, "Trying to replace a table with a mapping\n");
-+            return false;
-+        }
-+    }
-+    /* Sanity check when removing a mapping. */
-+    else if ( !(flags & PTE_POPULATE) )
-+    {
-+        /* We should be here with an invalid MFN. */
-+        ASSERT(mfn_eq(mfn, INVALID_MFN));
-+
-+        /* We don't allow removing a table */
-+        if ( pte_is_table(entry) )
-+        {
-+            dprintk(XENLOG_ERR, "Removing a table is not allowed\n");
-+            return false;
-+        }
-+    }
-+    /* Sanity check when populating the page-table. No check so far. */
-+    else
-+    {
-+        /* We should be here with an invalid MFN */
-+        ASSERT(mfn_eq(mfn, INVALID_MFN));
-+    }
-+
-+    return true;
-+}
-+
-+static pte_t *map_table(mfn_t mfn)
-+{
-+    /*
-+     * During early boot, map_domain_page() may be unusable. Use the
-+     * PMAP to map temporarily a page-table.
-+     */
-+    if ( system_state == SYS_STATE_early_boot )
-+        return pmap_map(mfn);
-+
-+    return map_domain_page(mfn);
-+}
-+
-+static void unmap_table(const pte_t *table)
-+{
-+    /*
-+     * During early boot, map_table() will not use map_domain_page()
-+     * but the PMAP.
-+     */
-+    if ( system_state == SYS_STATE_early_boot )
-+        pmap_unmap(table);
-+    else
-+        unmap_domain_page(table);
-+}
-+
-+static int create_table(pte_t *entry)
-+{
-+    mfn_t mfn;
-+    void *p;
-+    pte_t pte;
-+
-+    if ( system_state != SYS_STATE_early_boot )
-+    {
-+        struct page_info *pg = alloc_domheap_page(NULL, 0);
-+
-+        if ( pg == NULL )
-+            return -ENOMEM;
-+
-+        mfn = page_to_mfn(pg);
-+    }
-+    else
-+        mfn = alloc_boot_pages(1, 1);
-+
-+    p = map_table(mfn);
-+    clear_page(p);
-+    unmap_table(p);
-+
-+    pte = pte_from_mfn(mfn, PTE_TABLE);
-+    write_pte(entry, pte);
-+
-+    return 0;
-+}
-+
-+#define XEN_TABLE_MAP_FAILED 0
-+#define XEN_TABLE_SUPER_PAGE 1
-+#define XEN_TABLE_NORMAL 2
-+
-+/*
-+ * Take the currently mapped table, find the corresponding entry,
-+ * and map the next table, if available.
-+ *
-+ * The alloc_tbl parameters indicates whether intermediate tables should
-+ * be allocated when not present.
-+ *
-+ * Return values:
-+ *  XEN_TABLE_MAP_FAILED: Either alloc_only was set and the entry
-+ *  was empty, or allocating a new page failed.
-+ *  XEN_TABLE_NORMAL: next level or leaf mapped normally
-+ *  XEN_TABLE_SUPER_PAGE: The next entry points to a superpage.
-+ */
-+static int pt_next_level(bool alloc_tbl, pte_t **table, unsigned int offset)
-+{
-+    pte_t *entry;
-+    mfn_t mfn;
-+
-+    entry = *table + offset;
-+
-+    if ( !pte_is_valid(*entry) )
-+    {
-+        if ( !alloc_tbl )
-+            return XEN_TABLE_MAP_FAILED;
-+
-+        if ( create_table(entry) )
-+            return XEN_TABLE_MAP_FAILED;
-+    }
-+
-+    if ( pte_is_mapping(*entry) )
-+        return XEN_TABLE_SUPER_PAGE;
-+
-+    mfn = mfn_from_pte(*entry);
-+
-+    unmap_table(*table);
-+    *table = map_table(mfn);
-+
-+    return XEN_TABLE_NORMAL;
-+}
-+
-+/* Update an entry at the level @target. */
-+static int pt_update_entry(mfn_t root, unsigned long virt,
-+                           mfn_t mfn, unsigned int target,
-+                           unsigned int flags)
-+{
-+    int rc;
-+    unsigned int level = HYP_PT_ROOT_LEVEL;
-+    pte_t *table;
-+    /*
-+     * The intermediate page table shouldn't be allocated when MFN isn't
-+     * valid and we are not populating page table.
-+     * This means we either modify permissions or remove an entry, or
-+     * inserting brand new entry.
-+     *
-+     * See the comment above pt_update() for an additional explanation about
-+     * combinations of (mfn, flags).
-+    */
-+    bool alloc_tbl = !mfn_eq(mfn, INVALID_MFN) || (flags & PTE_POPULATE);
-+    pte_t pte, *entry;
-+
-+    /* convenience aliases */
-+    DECLARE_OFFSETS(offsets, virt);
-+
-+    table = map_table(root);
-+    for ( ; level > target; level-- )
-+    {
-+        rc = pt_next_level(alloc_tbl, &table, offsets[level]);
-+        if ( rc == XEN_TABLE_MAP_FAILED )
-+        {
-+            rc = 0;
-+
-+            /*
-+             * We are here because pt_next_level has failed to map
-+             * the intermediate page table (e.g the table does not exist
-+             * and the pt shouldn't be allocated). It is a valid case when
-+             * removing a mapping as it may not exist in the page table.
-+             * In this case, just ignore it.
-+             */
-+            if ( flags & PTE_VALID )
-+            {
-+                printk("%s: Unable to map level %u\n", __func__, level);
-+                rc = -ENOENT;
-+            }
-+
-+            goto out;
-+        }
-+
-+        if ( rc != XEN_TABLE_NORMAL )
-+            break;
-+    }
-+
-+    if ( level != target )
-+    {
-+        printk("%s: Shattering superpage is not supported\n", __func__);
-+        rc = -EOPNOTSUPP;
-+        goto out;
-+    }
-+
-+    entry = table + offsets[level];
-+
-+    rc = -EINVAL;
-+    if ( !pt_check_entry(*entry, mfn, flags) )
-+        goto out;
-+
-+    /* We are removing the page */
-+    if ( !(flags & PTE_VALID) )
-+        /*
-+         * there is also a check in pt_check_entry() which check that
-+         * mfn=INVALID_MFN
-+         */
-+        pte.pte = 0;
-+    else
-+    {
-+        /* We are inserting a mapping => Create new pte. */
-+        if ( !mfn_eq(mfn, INVALID_MFN) )
-+            pte = pte_from_mfn(mfn, PTE_VALID);
-+        else /* We are updating the permission => Copy the current pte. */
-+            pte = *entry;
-+
-+        /* update permission according to the flags */
-+        pte.pte &= ~PTE_RWX_MASK(flags);
-+        pte.pte |= PTE_RWX_MASK(flags) | PTE_ACCESSED | PTE_DIRTY;
-+    }
-+
-+    write_pte(entry, pte);
-+
-+    rc = 0;
-+
-+ out:
-+    unmap_table(table);
-+
-+    return rc;
-+}
-+
-+/* Return the level where mapping should be done */
-+static int pt_mapping_level(unsigned long vfn, mfn_t mfn, unsigned long nr,
-+                            unsigned int flags)
-+{
-+    unsigned int level = 0;
-+    unsigned long mask;
-+    unsigned int i;
-+
-+    /* Use blocking mapping unless the caller requests 4K mapping */
-+    if ( unlikely(flags & PTE_SMALL) )
-+        return level;
-+
-+    /*
-+     * Don't take into account the MFN when removing mapping (i.e
-+     * MFN_INVALID) to calculate the correct target order.
-+     *
-+     * `vfn` and `mfn` must be both superpage aligned.
-+     * They are or-ed together and then checked against the size of
-+     * each level.
-+     *
-+     * `left` ( variable declared in pt_update() ) is not included
-+     * and checked separately to allow superpage mapping even if it
-+     * is not properly aligned (the user may have asked to map 2MB + 4k).
-+     */
-+    mask = !mfn_eq(mfn, INVALID_MFN) ? mfn_x(mfn) : 0;
-+    mask |= vfn;
-+
-+    for ( i = HYP_PT_ROOT_LEVEL; i != 0; i-- )
-+    {
-+        if ( !(mask & (BIT(XEN_PT_LEVEL_ORDER(i), UL) - 1)) &&
-+             (nr >= BIT(XEN_PT_LEVEL_ORDER(i), UL)) )
-+        {
-+            level = i;
-+            break;
-+        }
-+    }
-+
-+    return level;
-+}
-+
-+static DEFINE_SPINLOCK(pt_lock);
-+
-+/*
-+ * If `mfn` equals `INVALID_MFN`, it indicates that the following page table
-+ * update operation might be related to either:
-+ *   - populating the table (PTE_POPULATE will be set additionaly),
-+ *   - destroying a mapping (PTE_VALID = 0 and mfn = INVALID_MFN),
-+ *   - modifying an existing mapping ( PTE_VALID = 1 and mfn == INVALID_MFN ).
-+ *
-+ * If `mfn` != INVALID_MFN and flags has PTE_VALID bit set then it means that
-+ * inserting will be done.
-+ */
-+static int pt_update(unsigned long virt,
-+                     mfn_t mfn,
-+                     unsigned long nr_mfns,
-+                     unsigned int flags)
-+{
-+    int rc = 0;
-+    unsigned long vfn = PFN_DOWN(virt);
-+    unsigned long left = nr_mfns;
-+
-+    const mfn_t root = get_root_page();
-+
-+    /*
-+     * It is bad idea to have mapping both writeable and
-+     * executable.
-+     * When modifying/creating mapping (i.e PTE_VALID is set),
-+     * prevent any update if this happen.
-+     */
-+    if ( PTE_XWV_MASK(flags) == PTE_XWV_BITS )
-+    {
-+        printk("Mappings should not be both Writeable and Executable.\n");
-+        return -EINVAL;
-+    }
-+
-+    if ( !IS_ALIGNED(virt, PAGE_SIZE) )
-+    {
-+        printk("The virtual address is not aligned to the page-size.\n");
-+        return -EINVAL;
-+    }
-+
-+    spin_lock(&pt_lock);
-+
-+    while ( left )
-+    {
-+        unsigned int order, level;
-+
-+        level = pt_mapping_level(vfn, mfn, left, flags);
-+        order = XEN_PT_LEVEL_ORDER(level);
-+
-+        ASSERT(left >= BIT(order, UL));
-+
-+        rc = pt_update_entry(root, vfn << PAGE_SHIFT, mfn, level, flags);
-+        if ( rc )
-+            break;
-+
-+        vfn += 1UL << order;
-+        if ( !mfn_eq(mfn, INVALID_MFN) )
-+            mfn = mfn_add(mfn, 1UL << order);
-+
-+        left -= (1UL << order);
-+    }
-+
-+    /* Ensure that PTEs are all updated before flushing */
-+    RISCV_FENCE(rw, rw);
-+
-+    spin_unlock(&pt_lock);
-+
-+    /*
-+     * Always flush TLB at the end of the function as non-present entries
-+     * can be put in the TLB.
-+     *
-+     * The remote fence operation applies to the entire address space if
-+     * either:
-+     *  - start and size are both 0, or
-+     *  - size is equal to 2^XLEN-1.
-+     *
-+     * TODO: come up with something which will allow not to flash the entire
-+     *       address space.
-+     */
-+    flush_tlb_range_va(0, 0);
-+
-+    return rc;
-+}
-+
-+int map_pages_to_xen(unsigned long virt,
-+                     mfn_t mfn,
-+                     unsigned long nr_mfns,
-+                     unsigned int flags)
-+{
-+    /*
-+     * Ensure that flags has PTE_VALID bit as map_pages_to_xen() is supposed
-+     * to create a mapping.
-+     *
-+     * Ensure that we have a valid MFN before proceeding.
-+     *
-+     * If the MFN is invalid, pt_update() might misinterpret the operation,
-+     * treating it as either a population, a mapping destruction,
-+     * or a mapping modification.
-+     */
-+    ASSERT(!mfn_eq(mfn, INVALID_MFN) || (flags & PTE_VALID));
-+
-+    return pt_update(virt, mfn, nr_mfns, flags);
-+}
--- 
-2.46.0
-
+Hi Ayan=0A=
+Sorry for delay - I was ill and=A0then off for the whole August=0A=
+=0A=
+Just for the record:=0A=
+Acked-by: Artem Mygaiev <artem_mygaiev@epam.com>=0A=
+=0A=
+Best regards,=0A=
+-- Artem Mygaiev=0A=
+=0A=
+________________________________________=0A=
+From:=A0Ayan Kumar Halder <ayan.kumar.halder@amd.com>=0A=
+Sent:=A0Tuesday, August 6, 2024 19:31=0A=
+To:=A0sstabellini@kernel.org <sstabellini@kernel.org>; bertrand.marquis@arm=
+.com <bertrand.marquis@arm.com>; michal.orzel@amd.com <michal.orzel@amd.com=
+>; ayan.kumar.halder@amd.com <ayan.kumar.halder@amd.com>; Artem Mygaiev <ar=
+tem_mygaiev@epam.com>; julien@xen.org <julien@xen.org>=0A=
+Cc:=A0xen-devel@lists.xenproject.org <xen-devel@lists.xenproject.org>=0A=
+Subject:=A0[PATCH v3 1/3] docs: Introduce Fusa Requirement and define maint=
+ainers=0A=
+=A0=0A=
+The FUSA folder is expected to contain requirements and other documents=0A=
+to enable safety certification of Xen hypervisor.=0A=
+Added a intro to explain how the requirements are categorized, written=0A=
+and their supported status.=0A=
+Also, added index.rst for inclusion in build docs.=0A=
+=0A=
+Added maintainers for the same.=0A=
+=0A=
+Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>=0A=
+Acked-by: Bertrand Marquis <bertrand.marquis@arm.com>=0A=
+Acked-by: Michal Orzel <michal.orzel@amd.com>=0A=
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>=0A=
+---=0A=
+Changes from :-=0A=
+=0A=
+v1 - 1. Added a comment from Stefano.=0A=
+2. Added Ack.=0A=
+=0A=
+v2 - 1. Renamed README to intro and changed the format from MD to RST=0A=
+(as the majority of files are in RST format and it gets picked during=0A=
+building of the docs).=0A=
+However, the actual contents hasn't changed so I am keeping the acks.=0A=
+=0A=
+2. Added SPDX license identifier to the intro file.=0A=
+=0A=
+=A0MAINTAINERS=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=A0 9 +++++=0A=
+=A0docs/fusa/index.rst=A0=A0=A0=A0=A0 |=A0 9 +++++=0A=
+=A0docs/fusa/reqs/index.rst |=A0 9 +++++=0A=
+=A0docs/fusa/reqs/intro.rst | 86 ++++++++++++++++++++++++++++++++++++++++=
+=0A=
+=A04 files changed, 113 insertions(+)=0A=
+=A0create mode 100644 docs/fusa/index.rst=0A=
+=A0create mode 100644 docs/fusa/reqs/index.rst=0A=
+=A0create mode 100644 docs/fusa/reqs/intro.rst=0A=
+=0A=
+diff --git a/MAINTAINERS b/MAINTAINERS=0A=
+index 7c524a8a93..0d328e065c 100644=0A=
+--- a/MAINTAINERS=0A=
++++ b/MAINTAINERS=0A=
+@@ -314,6 +314,15 @@ F: xen/arch/x86/include/asm/x86_*/efi*.h=0A=
+=A0F:=A0=A0=A0=A0=A0 xen/common/efi/=0A=
+=A0F:=A0=A0=A0=A0=A0 xen/include/efi/=0A=
+=A0=0A=
++FUSA=0A=
++M:=A0=A0=A0=A0 Stefano Stabellini <sstabellini@kernel.org>=0A=
++M:=A0=A0=A0=A0 Bertrand Marquis <bertrand.marquis@arm.com>=0A=
++M:=A0=A0=A0=A0 Michal Orzel <michal.orzel@amd.com>=0A=
++M:=A0=A0=A0=A0 Ayan Kumar Halder <ayan.kumar.halder@amd.com>=0A=
++M:=A0=A0=A0=A0 Artem Mygaiev <artem_mygaiev@epam.com>=0A=
++S:=A0=A0=A0=A0 Supported=0A=
++F:=A0=A0=A0=A0 docs/fusa/=0A=
++=0A=
+=A0GDBSX DEBUGGER=0A=
+=A0M:=A0=A0=A0=A0=A0 Elena Ufimtseva <elena.ufimtseva@oracle.com>=0A=
+=A0S:=A0=A0=A0=A0=A0 Supported=0A=
+diff --git a/docs/fusa/index.rst b/docs/fusa/index.rst=0A=
+new file mode 100644=0A=
+index 0000000000..13bf4e8e23=0A=
+--- /dev/null=0A=
++++ b/docs/fusa/index.rst=0A=
+@@ -0,0 +1,9 @@=0A=
++.. SPDX-License-Identifier: CC-BY-4.0=0A=
++=0A=
++Functional Safety documentation=0A=
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=0A=
++=0A=
++.. toctree::=0A=
++=A0=A0 :maxdepth: 2=0A=
++=0A=
++=A0=A0 reqs=0A=
+diff --git a/docs/fusa/reqs/index.rst b/docs/fusa/reqs/index.rst=0A=
+new file mode 100644=0A=
+index 0000000000..78c02b1d9b=0A=
+--- /dev/null=0A=
++++ b/docs/fusa/reqs/index.rst=0A=
+@@ -0,0 +1,9 @@=0A=
++.. SPDX-License-Identifier: CC-BY-4.0=0A=
++=0A=
++Requirements documentation=0A=
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=0A=
++=0A=
++.. toctree::=0A=
++=A0=A0 :maxdepth: 2=0A=
++=0A=
++=A0=A0 intro=0A=
+diff --git a/docs/fusa/reqs/intro.rst b/docs/fusa/reqs/intro.rst=0A=
+new file mode 100644=0A=
+index 0000000000..d67b18dd9f=0A=
+--- /dev/null=0A=
++++ b/docs/fusa/reqs/intro.rst=0A=
+@@ -0,0 +1,86 @@=0A=
++.. SPDX-License-Identifier: CC-BY-4.0=0A=
++=0A=
++##################################=0A=
++Requirements Introduction Document=0A=
++##################################=0A=
++=0A=
++This folder contains a set of requirements describing Xen and its implemen=
+tation=0A=
++in a form suitable for a safety certification process.=0A=
++=0A=
++The status is experimental and it is maintained on a best effort basis. Th=
+e=0A=
++requirements may get slightly out of sync with the code. We are actively w=
+orking=0A=
++on a process to keep them updated, more details to follow.=0A=
++=0A=
++The requirements writing style is inspired from the ANSI/IEEE guide to Sof=
+tware=0A=
++Requirements Standard 830-1984.=0A=
++=0A=
++The requirements are categorized as follows :-=0A=
++=0A=
++1. Market requirements - They define the high level functionalities of the=
+=0A=
++hypervisor without going into concepts specific to Xen. Those should allow=
+ a=0A=
++system architect to understand wether Xen is providing the functionalities=
+ it=0A=
++needs for its system. This is the top level of the requirements.=0A=
++=0A=
++2. Product requirements - They define the Xen specific concepts and interf=
+aces=0A=
++provided by Xen without going into implementation details. One or several =
+of=0A=
++those requirements are linked to each market requirement. An Architect can=
+ use=0A=
++them understand how Xen fulfils a market need and design how Xen should be=
+ used=0A=
++in his system.=0A=
++=0A=
++3. Design requirements - They describe what the software implementation is=
+ doing=0A=
++from a technical point of view. One or several design requirement together=
+=0A=
++define how product requirements are fulfilled technically and are linked t=
+o=0A=
++them. An implementer can use them to know how to write or understand the X=
+en=0A=
++code.=0A=
++=0A=
++The requirements are linked using OpenFastTrace=0A=
++(https://urldefense.com/v3/__https://github.com/itsallcode/openfasttrace/b=
+lob/main/doc/user_guide.md__;!!GF_29dbcQIUBPA!3MNZCxyEF3Nx0ElHxeOSL8GQue43w=
+rSJ410vOujPqaM4D7gWoONkKa85oOiyDfxDy9iQ7xY4oyYT0DQ9nIPopGcKGbkI$ [github[.]=
+com]).=0A=
++OpenFastTrace parses through the requirements and generates a traceability=
+=0A=
++report.=0A=
++=0A=
++The following is the skeleton for a requirement.=0A=
++=0A=
++Title of the requirement=0A=
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=0A=
++=0A=
++`unique_tag`=0A=
++=0A=
++..=0A=
++=0A=
++=A0 Each requirement needs to have a unique tag associated. The format is=
+=0A=
++=A0 req_type~name~revision.=0A=
++=0A=
++=A0 Thus, it consists of three components :-=0A=
++=A0 requirement type - This denotes the category of requirement. Thus, it =
+shall=0A=
++=A0 be 'XenMkt', 'XenProd' or 'XenSwdgn' to denote market, product or desi=
+gn=0A=
++=A0 requirement.=0A=
++=A0 name - This denotes name of the requirement. In case of architecture s=
+pecific=0A=
++=A0 requirements, this starts with the architecture type (ie x86_64, arm64=
+).=0A=
++=A0 revision number - This gets incremented each time the requirement is m=
+odified.=0A=
++=0A=
++=0A=
++Description:=0A=
++This shall describe the requirement in a definitive tone. In other words,=
+=0A=
++the requirement begins with 'Xen shall ...'. Further, the description is=
+=0A=
++expected to be unambiguous and consistent.=0A=
++=0A=
++Rationale:=0A=
++This describes a rationale explaining the reason of the presence of the=0A=
++requirement when this can help the reader. This field can be left blank.=
+=0A=
++=0A=
++Comments:=0A=
++This describes the use cases for the requirement when this can help the=0A=
++reader. This field can be left blank as well.=0A=
++=0A=
++Covers:=0A=
++This denotes the unique_tag of the parent. This field is non existent for =
+the=0A=
++market requirement as it is the top level.=0A=
++=0A=
++Needs:=0A=
++This denotes the requirement type of its children. This field is non exist=
+ent=0A=
++for the design requirements as there are no subsequent requirements linked=
+ to=0A=
++them.=0A=
++=0A=
++=0A=
++The requirements are expected to the technically correct and follow the ab=
+ove=0A=
++guidelines.=0A=
+--=0A=
+2.25.1=0A=
 
