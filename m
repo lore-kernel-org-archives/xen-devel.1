@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E5EACD13CF
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 07:53:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.785550.1196966 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D238CA0ED3
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 08:07:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.787582.1196977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sl1sC-0003Oq-7X; Mon, 02 Sep 2024 07:53:16 +0000
+	id 1sl25U-00077m-Er; Mon, 02 Sep 2024 08:07:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 785550.1196966; Mon, 02 Sep 2024 07:53:16 +0000
+Received: by outflank-mailman (output) from mailman id 787582.1196977; Mon, 02 Sep 2024 08:07:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sl1sC-0003Oj-4h; Mon, 02 Sep 2024 07:53:16 +0000
-Received: by outflank-mailman (input) for mailman id 785550;
- Thu, 29 Aug 2024 08:47:32 +0000
+	id 1sl25U-00077f-Bq; Mon, 02 Sep 2024 08:07:00 +0000
+Received: by outflank-mailman (input) for mailman id 787582;
+ Mon, 02 Sep 2024 08:06:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=z4Tc=P4=vivo.com=shenlichuan@srs-se1.protection.inumbo.net>)
- id 1sjaoV-0007pE-Qq
- for xen-devel@lists.xenproject.org; Thu, 29 Aug 2024 08:47:32 +0000
-Received: from APC01-SG2-obe.outbound.protection.outlook.com
- (mail-sgaapc01on20600.outbound.protection.outlook.com
- [2a01:111:f400:feab::600])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=uQw9=QA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sl25T-00077Z-3k
+ for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 08:06:59 +0000
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [2a00:1450:4864:20::129])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 53782ce5-65e3-11ef-a0b0-8be0dac302b0;
- Thu, 29 Aug 2024 10:47:30 +0200 (CEST)
-Received: from SEZPR06MB5899.apcprd06.prod.outlook.com (2603:1096:101:e3::16)
- by KL1PR06MB5942.apcprd06.prod.outlook.com (2603:1096:820:de::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.27; Thu, 29 Aug
- 2024 08:47:22 +0000
-Received: from SEZPR06MB5899.apcprd06.prod.outlook.com
- ([fe80::8bfc:f1ee:8923:77ce]) by SEZPR06MB5899.apcprd06.prod.outlook.com
- ([fe80::8bfc:f1ee:8923:77ce%3]) with mapi id 15.20.7897.027; Thu, 29 Aug 2024
- 08:47:21 +0000
+ id 5343f677-6902-11ef-a0b2-8be0dac302b0;
+ Mon, 02 Sep 2024 10:06:58 +0200 (CEST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5343d2af735so3780664e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 01:06:58 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8988fefc12sm522286966b.9.2024.09.02.01.06.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Sep 2024 01:06:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,155 +47,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 53782ce5-65e3-11ef-a0b0-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eo2rNVowKfOj8Ezv3VDhMtAjioyTNa5L6cS2sH3Hg2gXz7QHQqHWTmLApYiP0C/U+zOMlHunY6Scd5ssgAKxCVpsqdkoqjC9WBNT39+9NZeG6O/JaMAfuIJ681wLP8mvmmng/RPjI24LkA3mN1dPtdpj5i+uJYcT7bn5pxkme6ecxEuD8M5G9zaoWbV3hyFqgxS2AVR87VqW9CvB+iSBjwjKvtUyuocBH3haH8o3phwUAeaf6FWbdsfWHOR5kt9S/lfIeTsM9l3aU+nUueCYD+cSYgR054/FMG7QL8v7sr//ZIEMRQuFWgENXi+zW3kWmliINxn70TCT8tmygTX0vA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b500lignV8qxF1i6AiXm6NJohaiRaqtiMNSYa1YkGLE=;
- b=DNgmUu0oL/TVdRKmSYmvX5s7gueXuM7WxVnTSAnez30xeuKBnEKANlDU9FADtZhjYffrKnoEZKhqzOHyIuBmwe7ARM930S+3TUAi+d7pGa9B46K3V2PjVIEG1GSvlLgNGB3EDm5sHjIeS4D5F1OQ4iyd6J7nAKptGWMPxawtlUM95/zi8m0zPv9O7wmURFMlR5qmBfEr9taXJNPdmRIPRjA9GBmgfQ8craoTx1k6ZFQIDOLdiPZNl4GJMMuOSoBXx0F3vwF8urQ5tyhooPTJwyH9snAmLn/m6NQzvZCSE1YlMCFmgbsTpZbGDh4pKVnT6BhD5qqg2fRhTJ6DzCSAVA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=b500lignV8qxF1i6AiXm6NJohaiRaqtiMNSYa1YkGLE=;
- b=I/zNwuxh51psqZwioXC8oCmpfXOoVtnEMoj8PbjfmqfVLoa0Vl5i+TElIEEubygqkT72W7Sc6WO40dRge4NGCZjUvtV2tfzEXA65N0bsAiJpZRiky2fs8cDo5YrlIJGRK/5TnTwkVqGQEsYRB0RmSDJdK/6kkdDTN4V+hIM3+psYrQqRaMFojf0vtzBacYDY4pYsVCh1928cL/opzZeO2FRfW59MBg5dv6CQrQDxSNM/fkG3YBmBSP5sblgQmUg8AJgzbP5xA4DTGcXyjDJ9xaebXxlsWYmv/rpZ/ub9eIf8BSxIVC3yxWKv9om+Hb9niJOn1QYiwx6CgI47WOc9VA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-From: Shen Lichuan <shenlichuan@vivo.com>
-To: jgross@suse.com,
-	sstabellini@kernel.org
-Cc: oleksandr_tyshchenko@epam.com,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	opensource.kernel@vivo.com,
-	Shen Lichuan <shenlichuan@vivo.com>
-Subject: [PATCH v1] xen/xenbus: Convert to use ERR_CAST()
-Date: Thu, 29 Aug 2024 16:47:10 +0800
-Message-Id: <20240829084710.30312-1-shenlichuan@vivo.com>
-X-Mailer: git-send-email 2.17.1
-Content-Type: text/plain
-X-ClientProxiedBy: TYXPR01CA0065.jpnprd01.prod.outlook.com
- (2603:1096:403:a::35) To SEZPR06MB5899.apcprd06.prod.outlook.com
- (2603:1096:101:e3::16)
+X-Inumbo-ID: 5343f677-6902-11ef-a0b2-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1725264417; x=1725869217; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=pW8n8dG1nmqjU3Mf5/iRNzcj7GbS5huOeHeDS4FR4Jc=;
+        b=WkjP322yIXjjeHGE1W6Hz1FrKMUHeIsII0eF42XQDtnH/LjwnEMxGIFwtYO8JjpKk0
+         MYe2AiLuUmyDOUnsTRd8ElK1RFJC+mJZcK0vE1Tqxp21Wu2cyLQI7cojZ1jrEQF8Pti+
+         3aN/wgh3JBoL340CSznRcSMqbrP8RaX+jq3FxjVLCFkSY2cd/fE9d+2o1g00U4uB4Die
+         NqcwH7NbjYO7Se8TgppN0J1DtWY/InpcDaWqEPXXd1WwWoCcEEN0sWPE29GrtBOB0IC/
+         qAKKpui3WZKrtlP3gqpxd7eN6ocx3g2QIcWQMiYzZrfmYHNYj0CnYsTsShSQ+8TVyMB5
+         UtmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1725264417; x=1725869217;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pW8n8dG1nmqjU3Mf5/iRNzcj7GbS5huOeHeDS4FR4Jc=;
+        b=pIVAjcylGuTJvMPbzwB4+Byru3zwn37YgNtCb9nP3TqOcwWHGObsYKeozynKz9+Boc
+         Njytvn6CATXr0HtKgxjlQVtchNyx36gZfOzGaFb9S4lOtW+IjctpeWw2lmVsLhX5T9dh
+         qSTCnEVosSsOxC4QAdiFk2e92jjZIOX2RghGsiUUH6Fj2V3lRJ6w/uJFSMXw8ks303F9
+         acabrCioNBI5fNH4eUVEvCUcA+7Bzh7Tew79f8LtBs+7F3L1dxMxLrRlfCmKOd3n25Ex
+         VbZhr5J4eacRlRHh29vaY0zDHeJvtA79gpv6dC8XzxUEcvHIjWnzTlGDXbRs4VcM8iWC
+         6Zkg==
+X-Forwarded-Encrypted: i=1; AJvYcCWmipBZ/WaOKXG7+w4ij/3LY337PITa2KmdRxWJHroL08NHhSQRYRFVhUHtFPkfT9G7s9coWFhXJoA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyWKx3UtqecGlYoFYGw13yMsNlCUW8SWmKYWGP+e6DSVHr6aBaA
+	beGBrn810Wgpcf2+4N/LRAMvvNOJL6GvPLsdZnid5e4Y1jJXUsMCNUjh8atkvHoJ+k/1jtxgxJo
+	=
+X-Google-Smtp-Source: AGHT+IFqmdsEsEvzYB/Q4FRRMNNKUf3IwWWGkfHnCsnOMk3/2MetxdJ5/yEBfdLDb7/hrl/6Nmd/jw==
+X-Received: by 2002:ac2:4e0d:0:b0:52f:d69e:bb38 with SMTP id 2adb3069b0e04-53546afd7c6mr6709418e87.2.1725264417196;
+        Mon, 02 Sep 2024 01:06:57 -0700 (PDT)
+Message-ID: <1cab3807-706b-44fc-a074-d44dfd9fd446@suse.com>
+Date: Mon, 2 Sep 2024 10:06:58 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5899:EE_|KL1PR06MB5942:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63fe6e8c-0a55-4558-9ec8-08dcc807326e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|52116014|366016|38350700014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?UN2IgSzRleQMV/lTtKTy3h4lLJjcNNKEXVsMktMZs8RgRzLFHcKxJE90kWpH?=
- =?us-ascii?Q?wfiecmm1WFrEz6cfiG+oev5nExyNUmSSFu4U7ONUllBHTiJycKq4qIGdSciV?=
- =?us-ascii?Q?F/VZlcUNWzZtWZ0nhDRswXWOF54HNOTu6ota68ACvLucQYrqBNcbjRHR79BP?=
- =?us-ascii?Q?nUlArXeYfOomG2kQ+gfcgbCKnHWcNfLYHIIWrWBjW/mE/O/mBMqImYTbYhLK?=
- =?us-ascii?Q?b3VNNOoOWp8xPl8OTMbYhpgu4k1f8qIO5XF39J9dAkWH+bqtmdwyOashTQsu?=
- =?us-ascii?Q?RcEYURi98JpfsOnME9+83uNESUOKKwLhzL25TCI1X7g2vFSv780wp7pLP76x?=
- =?us-ascii?Q?kg1IUx9fedK2Mmj8OVar1Kmjm7GkeMXHX5V5880gDf+VeBf/JZmVieZKEUL+?=
- =?us-ascii?Q?05QgR783kT4ApMvPzjLIuL4o9UZqYgyrljFpdivmJgXlOsbOjc8Izi/CvcTo?=
- =?us-ascii?Q?dYkQXKztln797a+CN+wecvIVpBgseKEAd4EQxa/J3N8/0oxrkyZmD2E9N68I?=
- =?us-ascii?Q?TrD6sfxLRn3JVnJ/b8Glc5wx5/KqAcF0Ro1nOzQ3lSDuDiAudiSlHaCGMXIt?=
- =?us-ascii?Q?/wU7CRq5z9w6pNFBPxt4bNbXxneAN1vXxa4Kd5FPQZmhBuc99EeFju/pP6B9?=
- =?us-ascii?Q?LoVQX3zQGGv2k8mfogYF9/HI3A1HvwEfRTUZoTYyzePQDXQEZN6JWLqjaSSl?=
- =?us-ascii?Q?mok/xHi6rg0K4HQNzj5RMnnf5+PRYef0XAsgaEseNQuhHgY/zLDuO0LLVFz/?=
- =?us-ascii?Q?7l4sm02LevJ6Yo/wd65CSZFCQg1ictQGk8ZmyGwLJfPSFXAZJMjZPjb7ivVW?=
- =?us-ascii?Q?ZScwV9PbsghfJOHXPgqIjsdCl7gxAx2pzVk46S7Rk64qq+PRy+DNs8Nhoy2s?=
- =?us-ascii?Q?m32SJI8WQDkzoeCeQ5DrgT/lOe+snt4zX6a8rmJ8xv/HNC2Zm5Wqe7kEp1IH?=
- =?us-ascii?Q?NVL3XYCZkPkvmy8kIVHrqybtts9c7xnVnTfljmoirjVZ9UlE6q6wx0XX87TG?=
- =?us-ascii?Q?8Zml+uH18l/1PZSIa64AFs5Q3zuHSn5so7N17W502QrVLnvdImUxKMKI4+2L?=
- =?us-ascii?Q?9zD8w2W+76vDCnnDl6Nzyp0yiYHKhSkNhBaE3uAYuFwLtQ/et3L9i9qdmABd?=
- =?us-ascii?Q?TNscYJhGlNvTP5HL01GOAkXgJl9VMDEHPkJLz3TDhfX6Dj6oikDCXEKKZFKf?=
- =?us-ascii?Q?+wn5xs9QWV0FNrXopiowIDMZZEfi0oW//CNX22AX3alIgks4PiE6yt6yNAvb?=
- =?us-ascii?Q?xuoZhd50SaTRDvQrrDpX/zFUuwJZkE5KnzxS4qZzV48DB+WFB2eCaO4VtyGK?=
- =?us-ascii?Q?hs4cfpBq7FSs4g7FIx0F58UX2H0ye1YPNQTAHq0b2xc75Bgfnu61yIpCfjor?=
- =?us-ascii?Q?6MIDBjyp0kCR/5CBC/bnG02du/U0KjxsGwH5AfoPZgiExUVdsg=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB5899.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?FiDEyz4/tF4XmV+wGadzZRYjXgJo1ij+XkYDx9eZqACUv0PwjwxxDK1cc5pz?=
- =?us-ascii?Q?lTaKGQvZffH4axVNXU/kxRrmtKRJ2+YBw5Ue+UslKLZYbsHGVdAPtvNr1AZF?=
- =?us-ascii?Q?S0EdvnIKhP+Nc4JSBkbAM/upgBzccc3079EmCsheNg6Npa3CSf84XwFLD/sx?=
- =?us-ascii?Q?S0qXXSG9wJsO0+XY4A22PLiqTrh0eO/a+iVVZEna/Zlt1zb/g8O0c4nsL5Vg?=
- =?us-ascii?Q?yP3WppxpgfIffN4sEnpFdqq89Y61O2U0FXZTFjH3T1qKn7JjkT5C3+DNvkC7?=
- =?us-ascii?Q?00cudv7pBE0yrYa1HOFqxK30mXUiDyoatIXqx0wXVxoCNAztbzmTROwbviB9?=
- =?us-ascii?Q?dBbGNl6XnY+Q7rQxmbQcgwTmRSHt2eROGe5TiX+opByqZY1V6jVGjFmXIp8+?=
- =?us-ascii?Q?DArKNw1AIBSRNxiMJcjtk1APr8H9myBeqhVnzb+4OU0KHSlOCr4kmka3Xe2P?=
- =?us-ascii?Q?TMcyGen/V2VQSjGW8Eu/cjt/9ECiMDuSjIAwfGD5rFmRfY0imgRVQP8waiz6?=
- =?us-ascii?Q?cnIbLnGx7zoLL6ZDa+6JjeDMHYBsxunzBqDSy19Jz6tJJClSF1yMOdNgpr/S?=
- =?us-ascii?Q?HvtMbwZGHjTy9Tg0ViJc6aZ+xcStohy4fYUdEi/ENTfVR4U3xgnPn5fwWsyQ?=
- =?us-ascii?Q?Mt1hZg7c/H3xUEraqOHeCUZiX4JafX4ewNN2ZDEx3awvlj9AQ5YiZaTjrr4B?=
- =?us-ascii?Q?3A2tzA6vgIjt0q79OM7a74vmXOHX/hkHuLOCjiEzYtx3nBbhwQTQuemy6DqH?=
- =?us-ascii?Q?72C4d6yCDUghYSY8jsydbvvxt4u2bQ/BuVovxvgCwAFNqPVuo5Elf9Wyye6G?=
- =?us-ascii?Q?LdJ/spPmbL+rdPkdxfJOAmNFAnW/1xNSUIC53XMg8lSxIA03lrIfShYwYYPO?=
- =?us-ascii?Q?ymypckXmNOykgwdr67o6VNOAMEXQMXBkQ3qSe9r4qibCOlWJkPv6dh44Qt+Y?=
- =?us-ascii?Q?c+TRtrPN/pKQ/uM8TyhtbHWOO6n6NTg9SFkg5iHzJw4GgbKI3XUKsdwAmqNJ?=
- =?us-ascii?Q?QglRXq8BA5BJYzV5/6jVWl9vuiz2VRR+Eycu8KCYuEHFwyw45pExc15N6yup?=
- =?us-ascii?Q?gdMc/muFxJKFQxwTf2xNSdE4jjc0kTR80/LSNDGSDXcM/DWvkve043iyf8pN?=
- =?us-ascii?Q?hyRxf5nYXnCzJ6mHbFTL1IBYoxb9PfbgS6EWorFCVF3zaLUi9em0jGVH7xkY?=
- =?us-ascii?Q?2DqROqCRajtcyq5vlsa1hdrtpRYemD0736sc53xV0hjjM7s/jpgONmSJx9pg?=
- =?us-ascii?Q?zaMoCybJ93L6T2PY1ZBgmd6p22xy2UZmfmpmGHgpMUFIOjdesbygvoN61oSL?=
- =?us-ascii?Q?7ulfMv1jht5LcOoUI8Z2TAHyrXYscgpDsfE7NIB4nD5wPOvrx0yL2INZFC32?=
- =?us-ascii?Q?uHVb3g5mAPCJ/RDbRrQaVgKaOQ/o3UROwu5EnA2RYkwlHN3RtGVXzoOtVl4W?=
- =?us-ascii?Q?kNPpGpGiIJU9aFa58taQqXZNC8ophbB8CFWYbYAVeJMY+JPh1qDiow39OsZo?=
- =?us-ascii?Q?U1kCP2g0g4nlLQPC8F46JMBlK9u/3zFIUBV2fbAqr7PBgArXeml/88skWyq/?=
- =?us-ascii?Q?TfaXGnravaTz1KZyoSxmU83U9mmVS25DQbyawJm2?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63fe6e8c-0a55-4558-9ec8-08dcc807326e
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5899.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2024 08:47:21.8505
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pz1Kgi5kucEOMF5kVu7zr+srHI/G97KRb5Zpw6SAfCp2ox1vir7CBfvNsIhMUcVlWzTf7ltqFq6nigwLMvH2vg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR06MB5942
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/11] x86/bitops: Use the POPCNT instruction when
+ available
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20240828220351.2686408-1-andrew.cooper3@citrix.com>
+ <20240828220351.2686408-12-andrew.cooper3@citrix.com>
+ <48377e77-2458-439c-b594-21bde610ffbb@suse.com>
+ <f661dca1-0583-4a83-89db-662473749df8@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <f661dca1-0583-4a83-89db-662473749df8@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Use ERR_CAST() as it is designed for casting an error pointer to 
-another type.
+On 30.08.2024 22:03, Andrew Cooper wrote:
+> On 29/08/2024 3:36 pm, Jan Beulich wrote:
+>> On 29.08.2024 00:03, Andrew Cooper wrote:
+>>> It has existed in x86 CPUs since 2008, so we're only 16 years late adding
+>>> support.  With all the other scafolding in place, implement arch_hweightl()
+>>> for x86.
+>>>
+>>> The only complication is that the call to arch_generic_hweightl() is behind
+>>> the compilers back.  Address this by writing it in ASM and ensure that it
+>>> preserves all registers.
+>>>
+>>> Copy the code generation from generic_hweightl().  It's not a complicated
+>>> algorithm, and is easy to regenerate if needs be, but cover it with the same
+>>> unit tests as test_generic_hweightl() just for piece of mind.
+>>>
+>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>>> ---
+>>> CC: Jan Beulich <JBeulich@suse.com>
+>>> CC: Roger Pau Monné <roger.pau@citrix.com>
+>>>
+>>> v2:
+>>>  * Fix MISRA 8.2 (parameter name) and 8.5 (single declaration) regressions.
+>>>  * Rename {arch->x86}-generic-hweightl.{S->c}
+>>>  * Adjust ASM formating
+>>>
+>>> The __constructor trick to cause any reference to $foo() to pull in
+>>> test_$foo() only works when both are in the same TU.  i.e. what I did in
+>>> v1 (putting test_arch_generic_hweightl() in the regular generic-hweightl.c)
+>>> didn't work.
+>> I'm afraid I don't understand this. What exactly didn't work, breaking in which
+>> way? Presumably as much as you, I don't really like the global asm() in a C
+>> file, when ideally the same could be written with less clutter in an assembly
+>> one.
+> 
+> We have lib-y because we wish to not include arch_generic_hweightl() if
+> it isn't referenced.
+> 
+> But, test_arch_generic_hweightl() unconditionally references
+> arch_generic_hweightl() (in CONFIG_SELF_TESTS builds).
 
-This macro utilizes the __force and __must_check modifiers, which instruct 
-the compiler to verify for errors at the locations where it is employed.
+Which I assumed was intentional: Always have the tests, to make sure the code
+doesn't go stale (or even break).
 
-Signed-off-by: Shen Lichuan <shenlichuan@vivo.com>
----
- drivers/xen/xenbus/xenbus_xs.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Looking at the v2 code again I notice that while now you're running the tests
+only when the to-be-tested function is referenced from elsewhere, the testing
+has become independent of CONFIG_SELF_TESTS. I don't think that was intended?
 
-diff --git a/drivers/xen/xenbus/xenbus_xs.c b/drivers/xen/xenbus/xenbus_xs.c
-index 028a182bcc9e..d32c726f7a12 100644
---- a/drivers/xen/xenbus/xenbus_xs.c
-+++ b/drivers/xen/xenbus/xenbus_xs.c
-@@ -427,12 +427,12 @@ char **xenbus_directory(struct xenbus_transaction t,
- 
- 	path = join(dir, node);
- 	if (IS_ERR(path))
--		return (char **)path;
-+		return ERR_CAST(path);
- 
- 	strings = xs_single(t, XS_DIRECTORY, path, &len);
- 	kfree(path);
- 	if (IS_ERR(strings))
--		return (char **)strings;
-+		return ERR_CAST(strings);
- 
- 	return split(strings, len, num);
- }
-@@ -465,7 +465,7 @@ void *xenbus_read(struct xenbus_transaction t,
- 
- 	path = join(dir, node);
- 	if (IS_ERR(path))
--		return (void *)path;
-+		return ERR_CAST(path);
- 
- 	ret = xs_single(t, XS_READ, path, len);
- 	kfree(path);
--- 
-2.17.1
+> Both {test_,}arch_generic_hweightl() do need to be in the same TU for
+> this to work (nicely), and I'm very uninterested in writing
+> test_arch_generic_hweightl() in asm.
 
+Well - surely absolutely no question about this last aspect.
+
+>>> This in turn means that arch_generic_hweightl() needs writing in a global asm
+>>> block, and also that we can't use FUNC()/END().  While we could adjust it to
+>>> work for GCC/binutils, we can't have CPP macros in Clang-IAS strings.
+>> What does Clang different from gcc there? I was hoping that at least their pre-
+>> processors would work in (sufficiently) similar ways.
+> 
+> It's inside a string, not outside, so CPP on the C file does nothing.
+> 
+> Passing CPP over the intermediate .S would work, but we don't have an
+> intermediate .S with Clang-IAS.
+
+There's never an intermediate .S; it's always .s (not subject to C pre-
+processing). Therefore I continue to struggle with how CPP macros would
+come into (inconsistent) play here, unless they were used in construction
+of the string literal (and then work similarly for gcc and Clang).
+
+But as you say, we want to avoid playing with the intermediate file in
+any event.
+
+Jan
 
