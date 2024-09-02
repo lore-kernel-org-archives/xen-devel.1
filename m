@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1451CA0ED3
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 17:01:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.788308.1197825 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E819CD13CF
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 17:01:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.788306.1197810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slAQl-00037r-H7; Mon, 02 Sep 2024 17:01:31 +0000
+	id 1slAQk-0002sz-LA; Mon, 02 Sep 2024 17:01:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 788308.1197825; Mon, 02 Sep 2024 17:01:31 +0000
+Received: by outflank-mailman (output) from mailman id 788306.1197810; Mon, 02 Sep 2024 17:01:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slAQl-000343-7t; Mon, 02 Sep 2024 17:01:31 +0000
-Received: by outflank-mailman (input) for mailman id 788308;
- Mon, 02 Sep 2024 17:01:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1slAQk-0002ss-HY; Mon, 02 Sep 2024 17:01:30 +0000
+Received: by outflank-mailman (input) for mailman id 788306;
+ Mon, 02 Sep 2024 17:01:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uz6k=QA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1slAQk-0002dz-DU
- for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 17:01:30 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ff9d6725-694c-11ef-a0b2-8be0dac302b0;
- Mon, 02 Sep 2024 19:01:29 +0200 (CEST)
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2f3f0bdbcd9so52191531fa.1
- for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 10:01:29 -0700 (PDT)
+ id 1slAQi-0002e4-SH
+ for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 17:01:28 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fdd62cb2-694c-11ef-99a1-01e77a169b0f;
+ Mon, 02 Sep 2024 19:01:27 +0200 (CEST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5343eeb4973so6794395e87.2
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 10:01:26 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-535408410f5sm1677618e87.211.2024.09.02.10.01.27
+ 2adb3069b0e04-535408410f5sm1677618e87.211.2024.09.02.10.01.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 10:01:27 -0700 (PDT)
+ Mon, 02 Sep 2024 10:01:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff9d6725-694c-11ef-a0b2-8be0dac302b0
+X-Inumbo-ID: fdd62cb2-694c-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725296489; x=1725901289; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VhrBEFGtPZRdWxQy1MAPcPMepK4SQW4esAy9pknAaq4=;
-        b=lWVYvoT+tkzrXC//iJdeL867F2qT1gDLeklDUIwR7m6G2TLqHPBOu19OLrOudTkkcA
-         g6AXmP5O6uCjs9vZWkJss76rrSMjRPAJAvF4PB6McIhSyIKSOw+pnwyNzEsb/uOc8qJp
-         I9yg8VYSF7fGGgkbRVwEoUrKg6NcZsU6b3APZNtQtjHGmKubCgjpgotTN1IcGrFy+LZg
-         rIyD7b4iyeaQxFlNFklHXgRbt5KFiQjMMgJh/k5gxiYeXdQVNxIy9rA+hSUOUzJ485I0
-         XPmtLDUByJa1LDPOqJTuwH75jidy22FFSthw1fTFfePeEN/DpDjXB1FXbueVMaO869ZT
-         MyrA==
+        d=gmail.com; s=20230601; t=1725296486; x=1725901286; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LzdIUadINpa+Ubifjdyp4TQMayGTpc5idrtnbU8z3pU=;
+        b=dd0lthEdSnfXBLJ6gnUG5e8LUfV/kCAQevZgjc4mJS1WiylS6HVAGHJ/eWClqPfJAR
+         H7C32JoUVFCw7xHZR2BC+NeRQXg73na7QV26lZsr58CU25vc43XB6kzXGZUALQ5e4NG8
+         xItGvmarUpANkJR2yGiwzSmJeIBO/G2PBJZmIr/fj+Cwu6U3/OXAQV24FxYjZCQ5WYfl
+         fdZhylrQmJ1e/WwlPZV/svbykweqAEL0o0S9BQxf22E70IIfVlTPgFlaxBYfeMr7jp54
+         CIA6k5304oVsuLpg51BmVI4u5QWTWQkhLJ8D/DuOwQye9tq2RC7dK55MSEPcxT8o27YF
+         lXKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725296489; x=1725901289;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VhrBEFGtPZRdWxQy1MAPcPMepK4SQW4esAy9pknAaq4=;
-        b=mk5fRidfTqVtwQyYbxyy3/Z2XWkK3NFzQsClyr1XDL5blENqNZn+lIvEbsLC2Lfj7l
-         4qZKsY+BvcJXoFRyiE2q3N5YSacjf6rP3CWGg1zjq1Kp/SxtY0uP0U9hTjq03TRWjQfb
-         5+fyNke/VcN9yTGedigZQa4K9PvVWz6BaAb20B3DR2chqEl04puLVk9tR9MVfoigdgyo
-         L+za93J6fnlKOGdBk512UV6pCstt8usveNODqYv6pHGiAtwN0s/78T5s72U1/ks0skhO
-         R8wIdH25ThQpBSQKrrkZQiKqPD6M6IMy2qbVdK+3xGSW+sS2ZjyYGTY1hRW1wT4unuXQ
-         2r0w==
-X-Gm-Message-State: AOJu0YxonHo6L+Y9umNQ5oNOSbv0hZEJaVqlOgMwCVaPgDNVwjmT7ZIR
-	JK/S4ZdefVAuJ9Kx5zSVkCvsvBlkVOgnSManHEI1NDjQfjzv2NuCBU8Ljw==
-X-Google-Smtp-Source: AGHT+IFFa1M8ACKBxL1lFnWok+mgQAdnsPXQHjvYLuCwMIgw8/f9HAaKcI6eOp2cHkK1vi3M3bGKFQ==
-X-Received: by 2002:a05:6512:3ba5:b0:535:3da2:8a4d with SMTP id 2adb3069b0e04-53546b907f6mr7432708e87.44.1725296488303;
-        Mon, 02 Sep 2024 10:01:28 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1725296486; x=1725901286;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LzdIUadINpa+Ubifjdyp4TQMayGTpc5idrtnbU8z3pU=;
+        b=EmMtUmgfo6ZywDSsqKpB+dcsFQBv4SBYgWEREc9neT9ETP7f/uFYPVnmQnUh3Hgis0
+         RlKrKm3nWDS4XVXmk9q7Lw/jSmLUQcZB1MicGDG2RKyS41v482DToLk+uZLZWEYXbujK
+         ttwaAs68+7k0Ws00RRZgx/sTokqcB0iXW9w9Jk5+AhS910H+D+Z7q5Bo+X/4WY12BQ2J
+         rwDIR/mTThklX5s97aye59ouqSgzNAIeeHISNIm8vYTywjyWBHj1ZYqwHrTRssBFkwzA
+         yn82l7gqEYUU8ZwF6e1qQzBBJBBWzcbUfmInjbYj9H257OBv70HuedthF0l2YEEVDPwE
+         vB6w==
+X-Gm-Message-State: AOJu0Yxuh9mRrk1dsTHVQEHwUay7v/4bD5iI5div2K3PGEOcS+ku2olg
+	CtKiuy4Z6EylKKBnqzbhjvPnnROxFPiOardusImQZ18tpuHiHEZnF7cnnw==
+X-Google-Smtp-Source: AGHT+IGOQs7MhwOkQEA7G8M8YIXjRnkD86n1m2t570J73sHdXMpY5EQttEZ7uqN6ZyvP2Kj/6dDttA==
+X-Received: by 2002:a05:6512:3054:b0:52c:76ac:329b with SMTP id 2adb3069b0e04-53546b5da64mr10291191e87.35.1725296485256;
+        Mon, 02 Sep 2024 10:01:25 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -86,103 +85,95 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 3/9] xen/riscv: allow write_atomic() to work with non-scalar types
-Date: Mon,  2 Sep 2024 19:01:16 +0200
-Message-ID: <44810c0c3faa4fd2d36a8be9a87c5022088c0e62.1725295716.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v6 0/9] RISCV device tree mapping
+Date: Mon,  2 Sep 2024 19:01:13 +0200
+Message-ID: <cover.1725295716.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <cover.1725295716.git.oleksii.kurochko@gmail.com>
-References: <cover.1725295716.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Update the 2nd argument of _write_atomic() from 'unsigned long x'
-to 'void *x' to allow write_atomic() to handle non-scalar types,
-aligning it with read_atomic(), which can work with non-scalar types.
+Current patch series introduces device tree mapping for RISC-V
+and necessary things for that such as:
+- Fixmap mapping
+- pmap
+- Xen page table processing
 
-Additionally, update the implementation of _add_sized() to use
-"writeX_cpu(readX_cpu(p) + x, p)" instead of
-"write_atomic(ptr, read_atomic(ptr) + x)" because 'ptr' is defined
-as 'volatile uintX_t *'.
-This avoids a compilation error that occurs when passing the 2nd
-argument to _write_atomic() (i.e., "passing argument 2 of '_write_atomic'
-discards 'volatile' qualifier from pointer target type") since the 2nd
-argument of _write_atomic() is now 'void *' instead of 'unsigned long'.
-
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v6:
- - new patch.
+ - Add patch to fix recursion when ASSERT(), BUG*(), panic() are called.
+ - Add patch to allow write_atomic() to work with  non-scalar types for consistence
+   with read_atomic().
+ - All other changes are patch specific so please look at the patch. 
 ---
- xen/arch/riscv/include/asm/atomic.h | 24 ++++++++++--------------
- 1 file changed, 10 insertions(+), 14 deletions(-)
+Changes in v5:
+ - The following patch was merged to staging:
+     [PATCH v3 3/9] xen/riscv: enable CONFIG_HAS_DEVICE_TREE
+ - Drop depedency from "RISCV basic exception handling implementation" as
+   it was meged to staging branch.
+ - All other changes are patch specific so please look at the patch.
+---
+Changes in v4:
+ - Drop depedency from common devicre tree patch series as it was merged to
+   staging.
+ - Update the cover letter message.
+ - All other changes are patch specific so please look at the patch.
+---
+Changes in v3:
+ - Introduce SBI RFENCE extension support.
+ - Introduce and initialize pcpu_info[] and __cpuid_to_hartid_map[] and functionality
+   to work with this arrays.
+ - Make page table handling arch specific instead of trying to make it generic.
+ - All other changes are patch specific so please look at the patch.
+---
+Changes in v2:
+ - Update the cover letter message
+ - introduce fixmap mapping
+ - introduce pmap
+ - introduce CONFIG_GENREIC_PT
+ - update use early_fdt_map() after MMU is enabled.
+---
 
-diff --git a/xen/arch/riscv/include/asm/atomic.h b/xen/arch/riscv/include/asm/atomic.h
-index 3c6bd86406..92b92fb4d4 100644
---- a/xen/arch/riscv/include/asm/atomic.h
-+++ b/xen/arch/riscv/include/asm/atomic.h
-@@ -54,16 +54,16 @@ static always_inline void read_atomic_size(const volatile void *p,
- })
- 
- static always_inline void _write_atomic(volatile void *p,
--                                        unsigned long x,
-+                                        void *x,
-                                         unsigned int size)
- {
-     switch ( size )
-     {
--    case 1: writeb_cpu(x, p); break;
--    case 2: writew_cpu(x, p); break;
--    case 4: writel_cpu(x, p); break;
-+    case 1: writeb_cpu(*(uint8_t *)x, p); break;
-+    case 2: writew_cpu(*(uint16_t *)x, p); break;
-+    case 4: writel_cpu(*(uint32_t *)x, p); break;
- #ifndef CONFIG_RISCV_32
--    case 8: writeq_cpu(x, p); break;
-+    case 8: writeq_cpu(*(uint64_t *)x, p); break;
- #endif
-     default: __bad_atomic_size(); break;
-     }
-@@ -72,7 +72,7 @@ static always_inline void _write_atomic(volatile void *p,
- #define write_atomic(p, x)                              \
- ({                                                      \
-     typeof(*(p)) x_ = (x);                              \
--    _write_atomic(p, x_, sizeof(*(p)));                 \
-+    _write_atomic(p, &x_, sizeof(*(p)));                \
- })
- 
- static always_inline void _add_sized(volatile void *p,
-@@ -82,27 +82,23 @@ static always_inline void _add_sized(volatile void *p,
-     {
-     case 1:
-     {
--        volatile uint8_t *ptr = p;
--        write_atomic(ptr, read_atomic(ptr) + x);
-+        writeb_cpu(readb_cpu(p) + x, p);
-         break;
-     }
-     case 2:
-     {
--        volatile uint16_t *ptr = p;
--        write_atomic(ptr, read_atomic(ptr) + x);
-+        writew_cpu(readw_cpu(p) + x, p);
-         break;
-     }
-     case 4:
-     {
--        volatile uint32_t *ptr = p;
--        write_atomic(ptr, read_atomic(ptr) + x);
-+        writel_cpu(readl_cpu(p) + x, p);
-         break;
-     }
- #ifndef CONFIG_RISCV_32
-     case 8:
-     {
--        volatile uint64_t *ptr = p;
--        write_atomic(ptr, read_atomic(ptr) + x);
-+        writeq_cpu(readw_cpu(p) + x, p);
-         break;
-     }
- #endif
+Oleksii Kurochko (9):
+  xen/riscv: prevent recursion when ASSERT(), BUG*(), or panic() are
+    called
+  xen/riscv: use {read,write}{b,w,l,q}_cpu() to define
+    {read,write}_atomic()
+  xen/riscv: allow write_atomic() to work with non-scalar types
+  xen/riscv: set up fixmap mappings
+  xen/riscv: introduce asm/pmap.h header
+  xen/riscv: introduce functionality to work with CPU info
+  xen/riscv: introduce and initialize SBI RFENCE extension
+  xen/riscv: page table handling
+  xen/riscv: introduce early_fdt_map()
+
+ xen/arch/riscv/Kconfig                      |   1 +
+ xen/arch/riscv/Makefile                     |   2 +
+ xen/arch/riscv/include/asm/atomic.h         |  37 +-
+ xen/arch/riscv/include/asm/config.h         |  16 +-
+ xen/arch/riscv/include/asm/fixmap.h         |  46 +++
+ xen/arch/riscv/include/asm/flushtlb.h       |  15 +
+ xen/arch/riscv/include/asm/mm.h             |   6 +
+ xen/arch/riscv/include/asm/page.h           |  91 +++++
+ xen/arch/riscv/include/asm/pmap.h           |  36 ++
+ xen/arch/riscv/include/asm/processor.h      |  27 +-
+ xen/arch/riscv/include/asm/riscv_encoding.h |   1 +
+ xen/arch/riscv/include/asm/sbi.h            |  63 +++
+ xen/arch/riscv/include/asm/smp.h            |   9 +
+ xen/arch/riscv/mm.c                         | 101 ++++-
+ xen/arch/riscv/pt.c                         | 423 ++++++++++++++++++++
+ xen/arch/riscv/riscv64/asm-offsets.c        |   2 +
+ xen/arch/riscv/riscv64/head.S               |  15 +
+ xen/arch/riscv/sbi.c                        | 274 ++++++++++++-
+ xen/arch/riscv/setup.c                      |  17 +
+ xen/arch/riscv/smp.c                        |  15 +
+ xen/arch/riscv/stubs.c                      |   2 +-
+ xen/arch/riscv/xen.lds.S                    |   2 +-
+ 22 files changed, 1166 insertions(+), 35 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/fixmap.h
+ create mode 100644 xen/arch/riscv/include/asm/pmap.h
+ create mode 100644 xen/arch/riscv/pt.c
+ create mode 100644 xen/arch/riscv/smp.c
+
 -- 
 2.46.0
 
