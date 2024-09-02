@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896E9CA0ED3
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 08:12:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.787598.1196997 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C534CD13CF
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 08:13:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.787602.1197006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sl2Av-0000lX-Cm; Mon, 02 Sep 2024 08:12:37 +0000
+	id 1sl2BW-0001FG-J8; Mon, 02 Sep 2024 08:13:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 787598.1196997; Mon, 02 Sep 2024 08:12:37 +0000
+Received: by outflank-mailman (output) from mailman id 787602.1197006; Mon, 02 Sep 2024 08:13:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sl2Av-0000lQ-8n; Mon, 02 Sep 2024 08:12:37 +0000
-Received: by outflank-mailman (input) for mailman id 787598;
- Mon, 02 Sep 2024 08:12:36 +0000
+	id 1sl2BW-0001F9-Gd; Mon, 02 Sep 2024 08:13:14 +0000
+Received: by outflank-mailman (input) for mailman id 787602;
+ Mon, 02 Sep 2024 08:13:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=X71w=QA=cloud.com=christian.lindig@srs-se1.protection.inumbo.net>)
- id 1sl2Au-0000lK-H0
- for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 08:12:36 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=uQw9=QA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sl2BW-0000lK-1u
+ for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 08:13:14 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1bb32fe2-6903-11ef-99a1-01e77a169b0f;
- Mon, 02 Sep 2024 10:12:34 +0200 (CEST)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a8682bb5e79so477424066b.2
- for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 01:12:34 -0700 (PDT)
-Received: from smtpclient.apple ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8989022481sm522614766b.86.2024.09.02.01.12.32
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 02 Sep 2024 01:12:33 -0700 (PDT)
+ id 3249ba51-6903-11ef-99a1-01e77a169b0f;
+ Mon, 02 Sep 2024 10:13:12 +0200 (CEST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5bec4e00978so3759632a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 01:13:12 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a89890090a1sm524381566b.49.2024.09.02.01.13.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Sep 2024 01:13:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,69 +47,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1bb32fe2-6903-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: 3249ba51-6903-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1725264754; x=1725869554; darn=lists.xenproject.org;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Y/k42lyGBztX+8wjghq1Tp9f+SjTjygX7y6Rsdo6DyI=;
-        b=IYZ/tPLZoaZljsdPtyt6wzSz/qWf6jxZrgtdTNaBnD8rSb+8TDyIdLgTHBpvfs5+GR
-         Rd/7u1B44sKXDoYmpUr+2G6nesR2dOBJYJJpGMP2QsyNBeZT6d5VkJ7s9mQIjChfB0sA
-         Ga/DFAMlwKYVctJHYTgXjkIr9JEvpUqHzOmT0=
+        d=suse.com; s=google; t=1725264792; x=1725869592; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=oQ1Dg8NghGAFkxzXOXgaInwt6JGUYKolZIL3UNy2b0g=;
+        b=gmnoCWyemagD+clOQ3l0uViXOWyfNur+NsSV6B9XYuxRib/Pcet3y5VJoInzgWVXYk
+         kwQvUX5pa4C8ACfmaH3bOfxwXM4/g4zQ/CPC+9NZDMMDC8mTiX+D7kM75PvXouBMCWDo
+         yqyxQLtemc5nTUt4cGgNX6IXGerPCOaYlpoVowUtSHhAsmi7daFP62pZzPvybjBWs36I
+         04CoMKdbTqk1OH/BfkwTG/z7wq5OqBwUHNroB9fZMnBuTFSncR2wPGws1wtfSacPd3uy
+         3ddL4t/hOq2Uk9Ih0lSz0HAfCnvXgBv3rVwaf3TkIu17iJohG4iFMQ3nfC9dJwJIOYs6
+         oFng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725264754; x=1725869554;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Y/k42lyGBztX+8wjghq1Tp9f+SjTjygX7y6Rsdo6DyI=;
-        b=Gl+bHWdz7ocF54uEPR4yo7qrAH0S1DXwQpiGx2z7xxmQcMWeb0yv9X55Mob4+k0vDm
-         Lp/8T4I44IxoLZihvlDFc6RvXcj/uKe6wGLkqTP2gy/dtMA6LWI1NPiSwpnTM04ubhmH
-         iGfODynLDSiwSp1IpK213hUrCcFP439L9P8ftmpKAnjwhkGsf61m+JUXW45PiI7Fuxv4
-         CioKAYXdW0IVWs7x9rsVeaCkkjDe/x7685/P3jgtyBVOzFkgfqQZuZsEoXaPaWEqeymh
-         yo0LbVOuqz2ODpTV6VClTS+KA9031k/mPiv2l5O5HhOU73MV0stR4v2TdYUZE7OST5WG
-         c9iw==
-X-Gm-Message-State: AOJu0YzUrvA3ooRxxTKEnR64w50DggvaNmh6bSplUWqq77MS2mdk3Oqi
-	Szve/V7+h775iIQv/VrHFh3exK0VbjphRJ/1YMTBYuqt7exlcpVwQFN9oOR6aROUwQ/uCF+ZH40
-	8
-X-Google-Smtp-Source: AGHT+IGgpayS9f/8AzZ1u+hQWy8kWsPDGhc+12t45hU+qW+rbBH9XovASkVk0Wp/0J2h9thuPQvbKA==
-X-Received: by 2002:a17:906:99c5:b0:a83:9573:45cc with SMTP id a640c23a62f3a-a89fad7b546mr218752566b.14.1725264753449;
-        Mon, 02 Sep 2024 01:12:33 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.600.62\))
-Subject: Re: [PATCH] tools/ocaml/xc: Drop the GC lock for all hypercalls
-From: Christian Lindig <christian.lindig@cloud.com>
-In-Reply-To: <20240830175309.2854442-1-andrew.cooper3@citrix.com>
-Date: Mon, 2 Sep 2024 09:12:21 +0100
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Christian Lindig <christian.lindig@citrix.com>,
- David Scott <dave@recoil.org>,
- =?utf-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@cloud.com>,
- Rob Hoes <Rob.Hoes@citrix.com>,
- Andrii Sultanov <andrii.sultanov@cloud.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <F8731728-EEDA-4671-973F-3B9AB426A839@cloud.com>
-References: <20240830175309.2854442-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20230601; t=1725264792; x=1725869592;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oQ1Dg8NghGAFkxzXOXgaInwt6JGUYKolZIL3UNy2b0g=;
+        b=JMrCi6He7BuNVc+XKPgcdyaaZMgow3iIer/oF5yghxb7jxSQbl7SlJes+FCzsQWCbK
+         XAeqfJzExUHrKdk6ldEaVwesVxtbLrvM4DioE4277Po7rC0CZG1cP6fqx+TshvyuotAV
+         nNiO87kCpk55nVVbAB2cAMZyYWi5woY0vRKYS4ABQ5C7+aj3GZNQe2y5EcMMGFSTFPiz
+         r0QFXt4dMcSuGvzT5aA+YGLFRfDwCybM3w04dpxsDpwHoAqhJhoZIz3DHLZ49Hyu6A0D
+         8m2Wsaa7FKBUWdUjhV+YlWvNxAwuI7bBbhrN9t14ygiDx21b8L9wfMIpxsCaXYupAwaF
+         niKw==
+X-Forwarded-Encrypted: i=1; AJvYcCXDQQXXvHe0882YkJQkYit5slTnaUfqXbcxAkpfyYg7oxz0O1LATy4RKjYd/JfE1sN7QcvcWusplOo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw+Qsl5k61dkXZ7g+RM0moZZa2AU/fyesz8fP565FD316cgEffH
+	ARDnzkrqA13vRwZoOmPtZKn0IjDtQwV5xJzUaq1iGPshBOlzIAtOhhlkJnc2xw==
+X-Google-Smtp-Source: AGHT+IG+S2iDod0gNAfUrlm4hUwyhrqWl2Xyq4KGEy1Z2Us7yLE7R/3mP3CQRHpXBewspyMTNco4+A==
+X-Received: by 2002:a17:907:d02:b0:a86:a178:42de with SMTP id a640c23a62f3a-a89faf98507mr251304466b.54.1725264791608;
+        Mon, 02 Sep 2024 01:13:11 -0700 (PDT)
+Message-ID: <ce69523a-fbc3-49c9-805c-5dcb82b4ac68@suse.com>
+Date: Mon, 2 Sep 2024 10:13:13 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] x86/time: prefer CMOS over EFI_GET_TIME
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-X-Mailer: Apple Mail (2.3774.600.62)
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, Roger Pau Monne <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20240830095220.49473-1-roger.pau@citrix.com>
+ <20240830095220.49473-3-roger.pau@citrix.com>
+ <ca2aa9b3-44cf-4a44-9111-1d7e8c9b4dff@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <ca2aa9b3-44cf-4a44-9111-1d7e8c9b4dff@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+On 30.08.2024 18:31, Andrew Cooper wrote:
+> I think the init logic wants to be:
+>  * If ACPI says we have an RTC, use it.
+>  * If ACPI says we have no RTC, probe to see if it's really there.
+>  * If we genuinely seem to not have an RTC, probe EFI.  This would be
+> quite invasive in the #PF handler, but not impossible.
 
+And would not necessarily be reliable: We can't exclude that paths taken
+are (slightly) different for multiple invocations.
 
-> On 30 Aug 2024, at 18:53, Andrew Cooper <andrew.cooper3@citrix.com> =
-wrote:
->=20
-> We should be doing this unilaterally.
+Jan
 
-Acked-by: Christian Lindig <christian.lindig@cloud.com>
-
-I would prefer to use caml_release_runtime_system(), =
-caml_acquire_runtime_system() which I think is a better name for these =
-functions. This could be likewise changed globally.
-
-=
-https://ocaml.org/manual/5.2/intfc.html#ss:parallel-execution-long-running=
--c-code
-
-=E2=80=94 C=
 
