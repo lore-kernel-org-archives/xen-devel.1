@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F6FACA0ED3
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 10:04:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.787718.1197157 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7374ECD13CF
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 10:04:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.787719.1197168 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sl3uk-0006c6-GJ; Mon, 02 Sep 2024 10:04:02 +0000
+	id 1sl3ul-0006qO-Ol; Mon, 02 Sep 2024 10:04:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 787718.1197157; Mon, 02 Sep 2024 10:04:02 +0000
+Received: by outflank-mailman (output) from mailman id 787719.1197168; Mon, 02 Sep 2024 10:04:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sl3uk-0006bz-DT; Mon, 02 Sep 2024 10:04:02 +0000
-Received: by outflank-mailman (input) for mailman id 787718;
- Mon, 02 Sep 2024 10:04:01 +0000
+	id 1sl3ul-0006qH-K5; Mon, 02 Sep 2024 10:04:03 +0000
+Received: by outflank-mailman (input) for mailman id 787719;
+ Mon, 02 Sep 2024 10:04:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qspk=QA=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sl3uj-0006bt-Ct
- for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 10:04:01 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ id 1sl3uk-0006bt-JT
+ for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 10:04:02 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id acbb487e-6912-11ef-a0b2-8be0dac302b0;
- Mon, 02 Sep 2024 12:04:00 +0200 (CEST)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a86933829dcso488105166b.3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 03:04:00 -0700 (PDT)
+ id addf0f1f-6912-11ef-a0b2-8be0dac302b0;
+ Mon, 02 Sep 2024 12:04:02 +0200 (CEST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a86933829dcso488109666b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 03:04:02 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a89940980a1sm480884466b.47.2024.09.02.03.03.58
+ a640c23a62f3a-a89940980a1sm480884466b.47.2024.09.02.03.03.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 03:03:58 -0700 (PDT)
+ Mon, 02 Sep 2024 03:03:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: acbb487e-6912-11ef-a0b2-8be0dac302b0
+X-Inumbo-ID: addf0f1f-6912-11ef-a0b2-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725271439; x=1725876239; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EMAwDS/CcS7+LltDEgvIf6YsNX7RMEQnOx38vzG9QIg=;
-        b=LPa6IFVojg19ZkZtydhlmSW6RoibZDEseZhwLMEESEvinhEQcP1tEVc/4waLyiAwEA
-         7JCB7DU8LrQ6lkzOn/FZhRoYF6lvImc6+70TSSdwo0XMCiuh3Ab2rfbLmFu3quT6i03j
-         aAcQqZxTG86tRR9Vn2vxPvPmvNxWOxW+Wno6k=
+        d=citrix.com; s=google; t=1725271441; x=1725876241; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=J73lYas918rR7iWV+lDtK48y+7c1UvPfL+lcXAL/B58=;
+        b=madkBvagX86hfn3vRTR/b13QPkT+0Z2ZQZeP5Oy9XSgM0KS+YdyVHoEbKgXHIV/1rz
+         yclGEwRQWQ17ntvWaWTpOMmpPC7DnPmU5yTKrw2YNlvAVd/arK0fV/VJ4VaVvio7QtWF
+         pMemqc17eTCGiXzNLY9sMC/9kDF+kuWTcNKO8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725271439; x=1725876239;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EMAwDS/CcS7+LltDEgvIf6YsNX7RMEQnOx38vzG9QIg=;
-        b=OChkWL46ACANp2gTLw3WZTvVYgGIx64zDuduQr47QXJc+yVx00OOUUJvXE+335Dhq+
-         wGstDUalbXe+DJ2LhCbGCO+SAouKItZiHxgLd5yUWeg3A9DVVPDXFtBufk4a0xjTZTrs
-         iNIkymch9FB1SVUItgyDYinpX5xSTungV9xVIkyWbQW0YuuNq/eExHoABxPCgvkBHiDT
-         mCwEYfvZsVQPy7ViViHzE1IPjvYIv2xIXxyv49A5Eg3oN20IVUUG6CXan2T9enKe3ZH+
-         lNo9KxYy2s/PtNjWRliGyTSg8a/MkzaF0Z9PN2R8CrU3lhaF9BFkZSLYUrbqwyyw1zjk
-         Ccqw==
-X-Gm-Message-State: AOJu0Yy2tu2MVmePHvGtxBwQhrPacvd9DUhNHpo0anpW+T33zZfc77YB
-	xl4CD6gPgvaNuJi6RkLHFF12er5vh3FDyaGFSROiqzFQO+rIgfZSCkvq6uSHpSbV1gM7BhrtAmS
-	b
-X-Google-Smtp-Source: AGHT+IH3ANyf7odu1TtN1uQ+SCs9274OZu5QFmKie74mOIIMg1GfIOys1/bw1taBwNP3dpGuU2/l0w==
-X-Received: by 2002:a17:907:26c8:b0:a86:812a:d2b6 with SMTP id a640c23a62f3a-a89fadc10c5mr238645966b.23.1725271438712;
-        Mon, 02 Sep 2024 03:03:58 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1725271441; x=1725876241;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=J73lYas918rR7iWV+lDtK48y+7c1UvPfL+lcXAL/B58=;
+        b=M/oLFAd7MAZ8rKaDh3jQrEApYvXC1aOQAmUUhenENgiNxNrGpEwIwZhZMl8t512atX
+         2dpF6eIfST96SKHGHOx6XFyY1tGn6wkm3IKGoL9GlFNvbAmxvlTTNADAhIRWM/MjNxEP
+         KnuSC9YqKns+ZIRR4vfTnnn2dUcCe1T0neIWC+P6Z9Ujq6PvB/SpA8GXuzB1KuOg4JnW
+         Hg+Twx27TfwkakszXVdt3jyyRXK76sswxs+04Rf9iAT9JeMxGtFiCpRfekD9u+oba6gW
+         r7EUC/nK/SWh2UwfkgorFGsUK3ZggcOZyL9fYK24KzXpVPI22fRuySrEHZnocohtbxE2
+         2TpQ==
+X-Gm-Message-State: AOJu0Yy/Soq1ekdzJrWcD/dM3HGFWslAKt9o+qYaRIBBAsRZpeD6fJ05
+	EyuYEK3uRMQdD+95Al44ntzho3ZLiPc9D7nNsOUdBsllhXeOEsl9V3A4Rfgd27nFR1GZOlbgU9i
+	X
+X-Google-Smtp-Source: AGHT+IHus+EVXN+jTI+WqQURvvEb9jfdz7ym4LDSAxMCufoTh60E5MQfHuFh8xAmNrt4bWiqWY/4lw==
+X-Received: by 2002:a17:907:2685:b0:a7a:b385:37c5 with SMTP id a640c23a62f3a-a89fadc10bamr269683866b.17.1725271440556;
+        Mon, 02 Sep 2024 03:04:00 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -82,32 +83,52 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 0/4] ARM: Cleanup following bitops improvements
-Date: Mon,  2 Sep 2024 11:03:51 +0100
-Message-Id: <20240902100355.3032079-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/4] ARM/vgic: Correct the expression for lr_all_full()
+Date: Mon,  2 Sep 2024 11:03:53 +0100
+Message-Id: <20240902100355.3032079-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240902100355.3032079-1-andrew.cooper3@citrix.com>
+References: <20240902100355.3032079-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Patch 1 has been posted before, but is included here just so it doesn't get
-lost.
+The current expression hits UB with 31 LRs (shifting into the sign bit), and
+malfunctions with 32 LRs (shifting beyond the range of int).  Swapping 1 for
+1ULL fixes some of these, but still malfunctions at 64 LRs which is the
+architectural limit.
 
-Patch 2 is a bugfix found by code inspection.
+Instead, shift -1ULL right in order to create the mask.
 
-Patches 3 and 4 switch to a more efficient form.
+Fixes: 596f885a3202 ("xen/arm: set GICH_HCR_UIE if all the LRs are in use")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
 
-Andrew Cooper (4):
-  ARM/div: Drop __div64_fls()
-  ARM/vgic: Correct the expression for lr_all_full()
-  ARM/vgic: Use for_each_set_bit() in gic_find_unused_lr()
-  ARM/vgic: Use for_each_set_bit() in vgic-mmio*
+Found by code inspection while doing bitops work.  I don't even know if
+there's a platform that really has 31 LRs, but the rest of Xen's code is
+written with the expectation that there may be 64.
+---
+ xen/arch/arm/gic-vgic.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- xen/arch/arm/gic-vgic.c          | 15 +++++++------
- xen/arch/arm/include/asm/div64.h | 18 +++-------------
- xen/arch/arm/vgic/vgic-mmio-v2.c |  3 +--
- xen/arch/arm/vgic/vgic-mmio.c    | 36 +++++++++++++++++++++-----------
- 4 files changed, 35 insertions(+), 37 deletions(-)
-
+diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
+index 9aa245a36d98..3f14aab2efc7 100644
+--- a/xen/arch/arm/gic-vgic.c
++++ b/xen/arch/arm/gic-vgic.c
+@@ -16,7 +16,8 @@
+ #include <asm/gic.h>
+ #include <asm/vgic.h>
+ 
+-#define lr_all_full() (this_cpu(lr_mask) == ((1 << gic_get_nr_lrs()) - 1))
++#define lr_all_full()                                           \
++    (this_cpu(lr_mask) == (-1ULL >> (64 - gic_get_nr_lrs())))
+ 
+ #undef GIC_DEBUG
+ 
 -- 
 2.39.2
 
