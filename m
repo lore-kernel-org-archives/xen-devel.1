@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C43BCD13CF
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 16:56:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.788299.1197790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1451CA0ED3
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Sep 2024 17:01:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.788308.1197825 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slAM0-00008W-Sk; Mon, 02 Sep 2024 16:56:36 +0000
+	id 1slAQl-00037r-H7; Mon, 02 Sep 2024 17:01:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 788299.1197790; Mon, 02 Sep 2024 16:56:36 +0000
+Received: by outflank-mailman (output) from mailman id 788308.1197825; Mon, 02 Sep 2024 17:01:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slAM0-00008O-PD; Mon, 02 Sep 2024 16:56:36 +0000
-Received: by outflank-mailman (input) for mailman id 788299;
- Mon, 02 Sep 2024 16:56:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1slAQl-000343-7t; Mon, 02 Sep 2024 17:01:31 +0000
+Received: by outflank-mailman (input) for mailman id 788308;
+ Mon, 02 Sep 2024 17:01:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Zhad=QA=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1slALz-000063-K9
- for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 16:56:35 +0000
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [2607:f8b0:4864:20::c2a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4e8191c1-694c-11ef-99a1-01e77a169b0f;
- Mon, 02 Sep 2024 18:56:33 +0200 (CEST)
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-5d5c7f23f22so2594233eaf.0
- for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 09:56:33 -0700 (PDT)
+ <SRS0=uz6k=QA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1slAQk-0002dz-DU
+ for xen-devel@lists.xenproject.org; Mon, 02 Sep 2024 17:01:30 +0000
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [2a00:1450:4864:20::236])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ff9d6725-694c-11ef-a0b2-8be0dac302b0;
+ Mon, 02 Sep 2024 19:01:29 +0200 (CEST)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2f3f0bdbcd9so52191531fa.1
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Sep 2024 10:01:29 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-535408410f5sm1677618e87.211.2024.09.02.10.01.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Sep 2024 10:01:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,131 +46,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4e8191c1-694c-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: ff9d6725-694c-11ef-a0b2-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1725296192; x=1725900992; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1725296489; x=1725901289; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Yh/3eqK+GZUJQ6ftrucdmX8AdYiqtnRRZT5E54ejb+8=;
-        b=e4K5hxtaXU2N83J47GxhSQLhqZ/ojH82eErd9/eh2ELgI3cHz/rLqu0bxE9T46ZS0O
-         q6ybxan5NR52k1WdiGC5uaeU1clmSKTZQItWZthE3QwXJso9BMC6faGmh5oD3XKSeiou
-         fA81N72UrrXK0L2q/zPxa3f4SJNaCbi32mNlY=
+        bh=VhrBEFGtPZRdWxQy1MAPcPMepK4SQW4esAy9pknAaq4=;
+        b=lWVYvoT+tkzrXC//iJdeL867F2qT1gDLeklDUIwR7m6G2TLqHPBOu19OLrOudTkkcA
+         g6AXmP5O6uCjs9vZWkJss76rrSMjRPAJAvF4PB6McIhSyIKSOw+pnwyNzEsb/uOc8qJp
+         I9yg8VYSF7fGGgkbRVwEoUrKg6NcZsU6b3APZNtQtjHGmKubCgjpgotTN1IcGrFy+LZg
+         rIyD7b4iyeaQxFlNFklHXgRbt5KFiQjMMgJh/k5gxiYeXdQVNxIy9rA+hSUOUzJ485I0
+         XPmtLDUByJa1LDPOqJTuwH75jidy22FFSthw1fTFfePeEN/DpDjXB1FXbueVMaO869ZT
+         MyrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725296192; x=1725900992;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1725296489; x=1725901289;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Yh/3eqK+GZUJQ6ftrucdmX8AdYiqtnRRZT5E54ejb+8=;
-        b=e7S+WfdBVsk2z6KSR6kba7p6aXB0Cg7lWfsmaUNqwfD1BPStHIedmYPSh14qpgICo2
-         mDR+LB0f0RFm5YySDH7++SuePKL7XCawo2haQ+mBHV+sOw/fPtHZK44uBKVLIgZIxFgX
-         /grhtRW3hOWVTziNblErv2uOwlVMXEUD2ZcrQBFQXK7bZBaIY/MyrIHPSWOP4gmoLWPt
-         1EVLpfk0466Rhj1TmcWLivoSPU6UVlyhlSHHCQAJNnZ+N/YgZpzWLRpJoXO+Y1btZNEi
-         usWiF9CclhvmLp2mMWZQ9uEdAi1ZfZA4mZcyEQbO/a2mOpEAX/pij+PbEhWsQrIKZw4e
-         Mfig==
-X-Gm-Message-State: AOJu0Yx1CKo3BJUofX4X6zEjhxT18AuHZCmEkytGAhvPesYwTTMu6vtm
-	GE9eM7VEq+NNORaRpcCd9HK7/4ER6+zwneilTMmhpoccOE8hpumtlVOdAJ/ZFp+xUlm4cWZTTYk
-	1z2R+rXsgu0ehLS5JFfxni/hwNXRXEQ5UrEM3kQ==
-X-Google-Smtp-Source: AGHT+IERElg/GV5+Vp4VVYH0i2mG/z9DnSn4ArHdfhJR4vtrCDZOcghbVueTRGIP1uHM2zioZHbXUYKmrcCGOaI5WzE=
-X-Received: by 2002:a05:6820:2707:b0:5ce:d2e3:b18 with SMTP id
- 006d021491bc7-5dfad03f169mr10254604eaf.8.1725296192095; Mon, 02 Sep 2024
- 09:56:32 -0700 (PDT)
+        bh=VhrBEFGtPZRdWxQy1MAPcPMepK4SQW4esAy9pknAaq4=;
+        b=mk5fRidfTqVtwQyYbxyy3/Z2XWkK3NFzQsClyr1XDL5blENqNZn+lIvEbsLC2Lfj7l
+         4qZKsY+BvcJXoFRyiE2q3N5YSacjf6rP3CWGg1zjq1Kp/SxtY0uP0U9hTjq03TRWjQfb
+         5+fyNke/VcN9yTGedigZQa4K9PvVWz6BaAb20B3DR2chqEl04puLVk9tR9MVfoigdgyo
+         L+za93J6fnlKOGdBk512UV6pCstt8usveNODqYv6pHGiAtwN0s/78T5s72U1/ks0skhO
+         R8wIdH25ThQpBSQKrrkZQiKqPD6M6IMy2qbVdK+3xGSW+sS2ZjyYGTY1hRW1wT4unuXQ
+         2r0w==
+X-Gm-Message-State: AOJu0YxonHo6L+Y9umNQ5oNOSbv0hZEJaVqlOgMwCVaPgDNVwjmT7ZIR
+	JK/S4ZdefVAuJ9Kx5zSVkCvsvBlkVOgnSManHEI1NDjQfjzv2NuCBU8Ljw==
+X-Google-Smtp-Source: AGHT+IFFa1M8ACKBxL1lFnWok+mgQAdnsPXQHjvYLuCwMIgw8/f9HAaKcI6eOp2cHkK1vi3M3bGKFQ==
+X-Received: by 2002:a05:6512:3ba5:b0:535:3da2:8a4d with SMTP id 2adb3069b0e04-53546b907f6mr7432708e87.44.1725296488303;
+        Mon, 02 Sep 2024 10:01:28 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 3/9] xen/riscv: allow write_atomic() to work with non-scalar types
+Date: Mon,  2 Sep 2024 19:01:16 +0200
+Message-ID: <44810c0c3faa4fd2d36a8be9a87c5022088c0e62.1725295716.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <cover.1725295716.git.oleksii.kurochko@gmail.com>
+References: <cover.1725295716.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-References: <20240830175309.2854442-1-andrew.cooper3@citrix.com>
- <CAEfZLvkhqA9urPyFqPp+bAeF-+X8dAs3+iC2NnpMdrUSwpuH5w@mail.gmail.com> <dfb2a806-65ff-49f1-8955-7eceea2bc566@citrix.com>
-In-Reply-To: <dfb2a806-65ff-49f1-8955-7eceea2bc566@citrix.com>
-From: Edwin Torok <edwin.torok@cloud.com>
-Date: Mon, 2 Sep 2024 17:56:21 +0100
-Message-ID: <CAEfZLvkMw9E+2VgVipTO0+ZgPtR3ZA91wayTq=CDLkxBL3n81A@mail.gmail.com>
-Subject: Re: [PATCH] tools/ocaml/xc: Drop the GC lock for all hypercalls
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, 
-	Christian Lindig <christian.lindig@citrix.com>, "dave@recoil.org" <dave@recoil.org>, 
-	Rob Hoes <Rob.Hoes@citrix.com>, Andrii Sultanov <andrii.sultanov@cloud.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Mon, Sep 2, 2024 at 5:38=E2=80=AFPM Andrew Cooper <andrew.cooper3@citrix=
-.com> wrote:
->
-> On 02/09/2024 9:10 am, Edwin Torok wrote:
-> > On Fri, Aug 30, 2024 at 6:53=E2=80=AFPM Andrew Cooper <andrew.cooper3@c=
-itrix.com> wrote:
-> >> We should be doing this unilaterally.
-> > Agreed, but we should do it safely, since last time I did this I
-> > learned about a few more instances of behaviours I previously thought
-> > to be safe, but that are undefined behaviour.
-> > Which probably means we have a bunch of other code to fixup (I should
-> > really finish my static analyzer project, and update it with the newly
-> > learned rules to catch all these...).
-> > See below for comments.
-> >
-> > Although there is one bug here we've previously known to avoid:
-> > String_val cannot be dereferenced with the lock released, that one is
-> > an OCaml value and will cause actual problems,
-> > so we need to caml_copy_string that one.
-> >
-> >> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> >> ---
-> >> CC: Christian Lindig <christian.lindig@citrix.com>
-> >> CC: David Scott <dave@recoil.org>
-> >> CC: Edwin T=C3=B6r=C3=B6k <edwin.torok@cloud.com>
-> >> CC: Rob Hoes <Rob.Hoes@citrix.com>
-> >> CC: Andrii Sultanov <andrii.sultanov@cloud.com>
-> >>
-> >> Also pulled out of a larger cleanup series.
-> >> ---
-> >>  tools/ocaml/libs/xc/xenctrl_stubs.c | 63 +++++++++++++++++++++++++++-=
--
-> >>  1 file changed, 60 insertions(+), 3 deletions(-)
-> >>
-> >> diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc=
-/xenctrl_stubs.c
-> >> index c78191f95abc..20487b21008f 100644
-> >> --- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-> >> +++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-> >> @@ -312,7 +312,10 @@ CAMLprim value stub_xc_domain_max_vcpus(value xch=
-_val, value domid,
-> >>         xc_interface *xch =3D xch_of_val(xch_val);
-> >>         int r;
-> >>
-> >> +       caml_enter_blocking_section();
-> >>         r =3D xc_domain_max_vcpus(xch, Int_val(domid), Int_val(max_vcp=
-us));
-> > We need to move the Int_val macros out of here, domid is registered as
-> > a GC root, so the GC *will* write to it (it'll write the same value).
->
-> How?
->
-> As value's, both domid and max_vcpu are integers living in GPRs.
+Update the 2nd argument of _write_atomic() from 'unsigned long x'
+to 'void *x' to allow write_atomic() to handle non-scalar types,
+aligning it with read_atomic(), which can work with non-scalar types.
 
-domid and max_vcpus are registered with CAMLparam macro, so their
-address is registered as a GC root,
-which the GC will see and go and update.
-The compiler may have cached this in a GPR, but we can't rely on that.
+Additionally, update the implementation of _add_sized() to use
+"writeX_cpu(readX_cpu(p) + x, p)" instead of
+"write_atomic(ptr, read_atomic(ptr) + x)" because 'ptr' is defined
+as 'volatile uintX_t *'.
+This avoids a compilation error that occurs when passing the 2nd
+argument to _write_atomic() (i.e., "passing argument 2 of '_write_atomic'
+discards 'volatile' qualifier from pointer target type") since the 2nd
+argument of _write_atomic() is now 'void *' instead of 'unsigned long'.
 
-In particular if you run the thread sanitizer in OCaml 5 it'll warn
-all over the place about this (I haven't gotten as far as having a
-full build with Xen and OCaml 5, I only have a XAPI build so far).
-See here for a discussion https://github.com/ocaml/ocaml/pull/13188.
-The GC could avoid the potential race here by checking whether the
-value is an integer prior to updating it, but that might have a
-(small) performance impact, so it is not done.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in v6:
+ - new patch.
+---
+ xen/arch/riscv/include/asm/atomic.h | 24 ++++++++++--------------
+ 1 file changed, 10 insertions(+), 14 deletions(-)
 
->
-> These expressions are not dereferencing  into the Ocaml Heap.
+diff --git a/xen/arch/riscv/include/asm/atomic.h b/xen/arch/riscv/include/asm/atomic.h
+index 3c6bd86406..92b92fb4d4 100644
+--- a/xen/arch/riscv/include/asm/atomic.h
++++ b/xen/arch/riscv/include/asm/atomic.h
+@@ -54,16 +54,16 @@ static always_inline void read_atomic_size(const volatile void *p,
+ })
+ 
+ static always_inline void _write_atomic(volatile void *p,
+-                                        unsigned long x,
++                                        void *x,
+                                         unsigned int size)
+ {
+     switch ( size )
+     {
+-    case 1: writeb_cpu(x, p); break;
+-    case 2: writew_cpu(x, p); break;
+-    case 4: writel_cpu(x, p); break;
++    case 1: writeb_cpu(*(uint8_t *)x, p); break;
++    case 2: writew_cpu(*(uint16_t *)x, p); break;
++    case 4: writel_cpu(*(uint32_t *)x, p); break;
+ #ifndef CONFIG_RISCV_32
+-    case 8: writeq_cpu(x, p); break;
++    case 8: writeq_cpu(*(uint64_t *)x, p); break;
+ #endif
+     default: __bad_atomic_size(); break;
+     }
+@@ -72,7 +72,7 @@ static always_inline void _write_atomic(volatile void *p,
+ #define write_atomic(p, x)                              \
+ ({                                                      \
+     typeof(*(p)) x_ = (x);                              \
+-    _write_atomic(p, x_, sizeof(*(p)));                 \
++    _write_atomic(p, &x_, sizeof(*(p)));                \
+ })
+ 
+ static always_inline void _add_sized(volatile void *p,
+@@ -82,27 +82,23 @@ static always_inline void _add_sized(volatile void *p,
+     {
+     case 1:
+     {
+-        volatile uint8_t *ptr = p;
+-        write_atomic(ptr, read_atomic(ptr) + x);
++        writeb_cpu(readb_cpu(p) + x, p);
+         break;
+     }
+     case 2:
+     {
+-        volatile uint16_t *ptr = p;
+-        write_atomic(ptr, read_atomic(ptr) + x);
++        writew_cpu(readw_cpu(p) + x, p);
+         break;
+     }
+     case 4:
+     {
+-        volatile uint32_t *ptr = p;
+-        write_atomic(ptr, read_atomic(ptr) + x);
++        writel_cpu(readl_cpu(p) + x, p);
+         break;
+     }
+ #ifndef CONFIG_RISCV_32
+     case 8:
+     {
+-        volatile uint64_t *ptr = p;
+-        write_atomic(ptr, read_atomic(ptr) + x);
++        writeq_cpu(readw_cpu(p) + x, p);
+         break;
+     }
+ #endif
+-- 
+2.46.0
 
-No, but they are reachable from a C pointer that is registered as a GC
-root in the OCaml GC.
-(the CAMLparam macro registers all its parameters as GC roots).
-
-Another option is to not register integers with CAMLparam, but that
-breaks symmetry, and it'd then be very easy to forget to register an
-OCaml parameter.
-
-Best regards,
---Edwin
-
->
-> ~Andrew
 
