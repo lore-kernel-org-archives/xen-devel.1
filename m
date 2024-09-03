@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E91CD342F
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2024 13:03:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.789150.1198687 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66D72CD342E
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2024 13:03:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.789153.1198712 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slTBu-0007bx-KY; Tue, 03 Sep 2024 13:03:26 +0000
+	id 1slTBy-0008FX-L1; Tue, 03 Sep 2024 13:03:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 789150.1198687; Tue, 03 Sep 2024 13:03:26 +0000
+Received: by outflank-mailman (output) from mailman id 789153.1198712; Tue, 03 Sep 2024 13:03:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slTBu-0007bL-HI; Tue, 03 Sep 2024 13:03:26 +0000
-Received: by outflank-mailman (input) for mailman id 789150;
- Tue, 03 Sep 2024 13:03:25 +0000
+	id 1slTBy-0008Em-FH; Tue, 03 Sep 2024 13:03:30 +0000
+Received: by outflank-mailman (input) for mailman id 789153;
+ Tue, 03 Sep 2024 13:03:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nxvv=QB=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1slTBt-00075o-6P
- for xen-devel@lists.xenproject.org; Tue, 03 Sep 2024 13:03:25 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ id 1slTBx-00075o-E3
+ for xen-devel@lists.xenproject.org; Tue, 03 Sep 2024 13:03:29 +0000
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [2a00:1450:4864:20::231])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e746b798-69f4-11ef-a0b2-8be0dac302b0;
- Tue, 03 Sep 2024 15:03:24 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-42bbc70caa4so34704315e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 03 Sep 2024 06:03:24 -0700 (PDT)
+ id e9df047b-69f4-11ef-a0b2-8be0dac302b0;
+ Tue, 03 Sep 2024 15:03:28 +0200 (CEST)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2f51b67e16dso60990161fa.3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Sep 2024 06:03:28 -0700 (PDT)
 Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42c84fcfa75sm55355515e9.25.2024.09.03.06.03.22
+ 5b1f17b1804b1-42c800554d6sm88155245e9.43.2024.09.03.06.03.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 06:03:22 -0700 (PDT)
+ Tue, 03 Sep 2024 06:03:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e746b798-69f4-11ef-a0b2-8be0dac302b0
+X-Inumbo-ID: e9df047b-69f4-11ef-a0b2-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725368603; x=1725973403; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1725368608; x=1725973408; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SWNpjBsAIPK60t6LFlUvJ8Y+91zPGK0954pEXqUaxFA=;
-        b=ZFha+ohE3p0b1zf4NxQyTfYi9++xHzXPFc9u4WbKuazXmiq0J9M39+mZ2zImCrSyLg
-         JkdkX4P+vgt+OZ1Anrlv+E0/zosJZ6s0fe4ZoeTCYr1hhduPsAJCbbcXsg7OlXAcXE6z
-         aKJbpWlKxLVrVa1RXUFqoy83ptffJpNzdQ7t4=
+        bh=jceNvRc/CuXKw5rQwzG8yXCY7o696EqY1ix9gGzcyRM=;
+        b=rZ34bLXN4P+MY9vB+yikXTrTZeXq7yVNVveljk+SN6qZAGyaCLLosOwqo3Ovfr0qUA
+         HNYAXpLcXXh/Gj9DWwLUBpvgSd2FiHXaA6nZT6g1Xf/o6rOokw5I2LvZZI0T9Zb+v/tY
+         W+fLMAm1Jj/uB7CXS3xxJUyr+1S/gnhEjCDmQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725368603; x=1725973403;
+        d=1e100.net; s=20230601; t=1725368608; x=1725973408;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SWNpjBsAIPK60t6LFlUvJ8Y+91zPGK0954pEXqUaxFA=;
-        b=gXaJTkcD5ki+gFxLapTjx61h9j/3BRXZBdsZLXmi6o9swCEPtzNrPeXIHiYLItcgP7
-         G5HIZszEE8Lu7Yfnk30DpRfAJzL7plp5zypPg1kKP4MYchKd0n1z6J3Bti2eTIdJE2rN
-         Es2kGfWtt3VzwYirBH3klgUKU39U1Vn7WKWTdTDK3fNnZWvmUU82oEjZ6veuyoeRmjHr
-         to6aoYpbGYc+9YYNpC6tQmPkHTQ5kUDGFGf0rmArvyAnATkjh95DlfD8s/gOkMS7uQm+
-         XE301COuJ7lWyXViMWHSMsxBqNRUFIfnVeHfCUCmDApw652UbiZvjy9DR65KB7KzColu
-         X/Ug==
-X-Gm-Message-State: AOJu0YyxWFlxJOeEZxpQxaNsy9sHjMqwIIUNUfbUyCRSkkLhxMK6vaQC
-	j8stIZWLoIHttNO9gWLNBOX9l1hY9w25UMGI16spsBJ/mYUhtgedTpZEUX/+RLwVEAGueCDm66j
-	j
-X-Google-Smtp-Source: AGHT+IFJPuLIBbs8tmthZcf2mEWK0Tf3VPt1gaXAlZbfd7dD3iHlHbB7Z04kR6ovPjIdRiHJTEsBlQ==
-X-Received: by 2002:a05:600c:3b85:b0:426:602d:a246 with SMTP id 5b1f17b1804b1-42c8dea66b1mr5528665e9.32.1725368602840;
-        Tue, 03 Sep 2024 06:03:22 -0700 (PDT)
+        bh=jceNvRc/CuXKw5rQwzG8yXCY7o696EqY1ix9gGzcyRM=;
+        b=vavzfEu98yyV5HlRP/Ftf87gaz06mkvnrotDRFea43NVv3fH6889fdNWi2/1HMufDE
+         HJ+/86k5QmEcEaX1UkbW6YJchbxdxl60iE0q4LE12eka+Eboh9F9GLj+cgKbzhGhTpHp
+         l54FhJQy89QnO/FJUq33IxbyyCT9Qgvf7HNfkcahP79M2OH+is8QbOkhq/UB753xjqSk
+         vGm5dkeJCI0HcLrJvSEvVchdBcI+8+N1cWvsdIIiNHysrZ90pstrZWoHwZp8bAe1Kj5O
+         Z0Sc2vLIVOKozn+lv1Gx4ODwa6UznKzC6CqT0xe8mxE9VHlckZPM/3yx3myxFES5RDYV
+         PuKQ==
+X-Gm-Message-State: AOJu0Yyo1DUdB1huHyV9TsAOx+/mDeukL/jwWoUuthkGhBaGdH9wTx+u
+	8KDj+96AlCAOq23Rn9wM8UP2Lv/Nf3h57jqo4t/sKHQzkfUOh8QCRRsAtz0X4b9k/7oEKL+fLoP
+	u
+X-Google-Smtp-Source: AGHT+IEDWCPrJWORvsJ13y/C7todzJDIqiW3XEZeizyR6oZMsdTVnezZK68W3iNYQHJoc5ZlvRvoOQ==
+X-Received: by 2002:a2e:be84:0:b0:2f3:b078:84bc with SMTP id 38308e7fff4ca-2f64d472191mr6632101fa.4.1725368606925;
+        Tue, 03 Sep 2024 06:03:26 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -81,9 +81,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v3 2/7] x86/time: move CMOS edge detection into read helper
-Date: Tue,  3 Sep 2024 15:02:58 +0200
-Message-ID: <20240903130303.71334-3-roger.pau@citrix.com>
+Subject: [PATCH v3 5/7] x86/time: prefer CMOS over EFI_GET_TIME
+Date: Tue,  3 Sep 2024 15:03:01 +0200
+Message-ID: <20240903130303.71334-6-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240903130303.71334-1-roger.pau@citrix.com>
 References: <20240903130303.71334-1-roger.pau@citrix.com>
@@ -91,105 +91,72 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Move the logic that ensures the CMOS RTC data is read just after it's been
-updated into the __get_cmos_time() function that does the register reads.  This
-requires returning a boolean from __get_cmos_time() to signal whether the read
-has been successfully performed after an update.
+The EFI_GET_TIME implementation is well known to be broken for many firmware
+implementations, for Xen the result on such implementations are:
 
-The goal, albeit not accomplished by this patch, is to be able to split the
-probing and the reading of the CMOS RTC data into two separate functions.
+----[ Xen-4.19-unstable  x86_64  debug=y  Tainted:   C    ]----
+CPU:    0
+RIP:    e008:[<0000000062ccfa70>] 0000000062ccfa70
+[...]
+Xen call trace:
+   [<0000000062ccfa70>] R 0000000062ccfa70
+   [<00000000732e9a3f>] S 00000000732e9a3f
+   [<ffff82d04034f34f>] F arch/x86/time.c#get_cmos_time+0x1b3/0x26e
+   [<ffff82d04045926f>] F init_xen_time+0x28/0xa4
+   [<ffff82d040454bc4>] F __start_xen+0x1ee7/0x2578
+   [<ffff82d040203334>] F __high_start+0x94/0xa0
 
-No functional change intended.
+Pagetable walk from 0000000062ccfa70:
+ L4[0x000] = 000000207ef1c063 ffffffffffffffff
+ L3[0x001] = 000000005d6c0063 ffffffffffffffff
+ L2[0x116] = 8000000062c001e3 ffffffffffffffff (PSE)
+
+****************************************
+Panic on CPU 0:
+FATAL PAGE FAULT
+[error_code=0011]
+Faulting linear address: 0000000062ccfa70
+****************************************
+
+Swap the preference to default to CMOS first, and EFI later, in an attempt to
+use EFI_GET_TIME as a last resort option only.  Note that Linux for example
+doesn't allow calling the get_time method, and instead provides a dummy handler
+that unconditionally returns EFI_UNSUPPORTED on x86-64.
+
+Such change in the preferences requires some re-arranging of the function
+logic, so that panic messages with workaround suggestions are suitably printed.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
 Changes since v2:
- - New in this version.
+ - Updated to match previous changes.
 ---
- xen/arch/x86/time.c | 50 +++++++++++++++++++++++----------------------
- 1 file changed, 26 insertions(+), 24 deletions(-)
+ xen/arch/x86/time.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index d022db4bd4a0..2a64687bf45b 100644
+index 8402131d7b6a..da3fd1555041 100644
 --- a/xen/arch/x86/time.c
 +++ b/xen/arch/x86/time.c
-@@ -1247,8 +1247,26 @@ struct rtc_time {
-     unsigned int year, mon, day, hour, min, sec;
- };
- 
--static void __get_cmos_time(struct rtc_time *rtc)
-+static bool __get_cmos_time(struct rtc_time *rtc)
- {
-+    s_time_t start, t1, t2;
-+    unsigned long flags;
-+
-+    spin_lock_irqsave(&rtc_lock, flags);
-+
-+    /* read RTC exactly on falling edge of update flag */
-+    start = NOW();
-+    do { /* may take up to 1 second... */
-+        t1 = NOW() - start;
-+    } while ( !(CMOS_READ(RTC_FREQ_SELECT) & RTC_UIP) &&
-+              t1 <= SECONDS(1) );
-+
-+    start = NOW();
-+    do { /* must try at least 2.228 ms */
-+        t2 = NOW() - start;
-+    } while ( (CMOS_READ(RTC_FREQ_SELECT) & RTC_UIP) &&
-+              t2 < MILLISECS(3) );
-+
-     rtc->sec  = CMOS_READ(RTC_SECONDS);
-     rtc->min  = CMOS_READ(RTC_MINUTES);
-     rtc->hour = CMOS_READ(RTC_HOURS);
-@@ -1268,11 +1286,15 @@ static void __get_cmos_time(struct rtc_time *rtc)
- 
-     if ( (rtc->year += 1900) < 1970 )
-         rtc->year += 100;
-+
-+    spin_unlock_irqrestore(&rtc_lock, flags);
-+
-+    return t1 <= SECONDS(1) && t2 < MILLISECS(3);
- }
- 
- static unsigned long get_cmos_time(void)
- {
--    unsigned long res, flags;
-+    unsigned long res;
-     struct rtc_time rtc;
-     unsigned int seconds = 60;
-     static bool __read_mostly cmos_rtc_probe;
-@@ -1293,29 +1315,9 @@ static unsigned long get_cmos_time(void)
- 
-     for ( ; ; )
+@@ -1564,14 +1564,14 @@ static void __init probe_wallclock(void)
+         wallclock_source = WALLCLOCK_XEN;
+         return;
+     }
+-    if ( efi_enabled(EFI_RS) && efi_get_time() )
++    if ( cmos_probe() )
      {
--        s_time_t start, t1, t2;
--
--        spin_lock_irqsave(&rtc_lock, flags);
--
--        /* read RTC exactly on falling edge of update flag */
--        start = NOW();
--        do { /* may take up to 1 second... */
--            t1 = NOW() - start;
--        } while ( !(CMOS_READ(RTC_FREQ_SELECT) & RTC_UIP) &&
--                  t1 <= SECONDS(1) );
--
--        start = NOW();
--        do { /* must try at least 2.228 ms */
--            t2 = NOW() - start;
--        } while ( (CMOS_READ(RTC_FREQ_SELECT) & RTC_UIP) &&
--                  t2 < MILLISECS(3) );
--
--        __get_cmos_time(&rtc);
--
--        spin_unlock_irqrestore(&rtc_lock, flags);
-+        bool success = __get_cmos_time(&rtc);
+-        wallclock_source = WALLCLOCK_EFI;
++        wallclock_source = WALLCLOCK_CMOS;
+         return;
+     }
+-    if ( cmos_probe() )
++    if ( efi_enabled(EFI_RS) && efi_get_time() )
+     {
+-        wallclock_source = WALLCLOCK_CMOS;
++        wallclock_source = WALLCLOCK_EFI;
+         return;
+     }
  
--        if ( likely(!cmos_rtc_probe) ||
--             t1 > SECONDS(1) || t2 >= MILLISECS(3) ||
-+        if ( likely(!cmos_rtc_probe) || !success ||
-              rtc.sec >= 60 || rtc.min >= 60 || rtc.hour >= 24 ||
-              !rtc.day || rtc.day > 31 ||
-              !rtc.mon || rtc.mon > 12 )
 -- 
 2.46.0
 
