@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A9ACD342E
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2024 07:05:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.788652.1198127 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93DD7CD342A
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2024 07:26:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.788690.1198136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slNbL-0004rp-HR; Tue, 03 Sep 2024 07:05:19 +0000
+	id 1slNvj-0002Nz-5h; Tue, 03 Sep 2024 07:26:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 788652.1198127; Tue, 03 Sep 2024 07:05:19 +0000
+Received: by outflank-mailman (output) from mailman id 788690.1198136; Tue, 03 Sep 2024 07:26:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slNbL-0004ri-EO; Tue, 03 Sep 2024 07:05:19 +0000
-Received: by outflank-mailman (input) for mailman id 788652;
- Tue, 03 Sep 2024 07:05:18 +0000
+	id 1slNvj-0002Ns-3A; Tue, 03 Sep 2024 07:26:23 +0000
+Received: by outflank-mailman (input) for mailman id 788690;
+ Tue, 03 Sep 2024 07:26:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eqql=QB=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1slNbK-0003uZ-KU
- for xen-devel@lists.xenproject.org; Tue, 03 Sep 2024 07:05:18 +0000
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20628.outbound.protection.outlook.com
- [2a01:111:f403:2416::628])
+ <SRS0=0nne=QB=darkstar.site=sakib@srs-se1.protection.inumbo.net>)
+ id 1slNvi-0002Nh-2l
+ for xen-devel@lists.xenproject.org; Tue, 03 Sep 2024 07:26:22 +0000
+Received: from pb-smtp2.pobox.com (pb-smtp2.pobox.com [64.147.108.71])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id df4c25f3-69c2-11ef-a0b2-8be0dac302b0;
- Tue, 03 Sep 2024 09:05:17 +0200 (CEST)
-Received: from DS7PR03CA0208.namprd03.prod.outlook.com (2603:10b6:5:3b6::33)
- by DM4PR12MB8497.namprd12.prod.outlook.com (2603:10b6:8:180::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Tue, 3 Sep
- 2024 07:04:52 +0000
-Received: from DS2PEPF00003445.namprd04.prod.outlook.com
- (2603:10b6:5:3b6:cafe::ef) by DS7PR03CA0208.outlook.office365.com
- (2603:10b6:5:3b6::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.25 via Frontend
- Transport; Tue, 3 Sep 2024 07:04:52 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF00003445.mail.protection.outlook.com (10.167.17.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Tue, 3 Sep 2024 07:04:50 +0000
-Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Sep
- 2024 02:04:45 -0500
+ id cfad377f-69c5-11ef-a0b2-8be0dac302b0;
+ Tue, 03 Sep 2024 09:26:20 +0200 (CEST)
+Received: from pb-smtp2.pobox.com (unknown [127.0.0.1])
+ by pb-smtp2.pobox.com (Postfix) with ESMTP id 1BFD53099A;
+ Tue,  3 Sep 2024 03:26:18 -0400 (EDT)
+ (envelope-from sakib@darkstar.site)
+Received: from pb-smtp2.nyi.icgroup.com (unknown [127.0.0.1])
+ by pb-smtp2.pobox.com (Postfix) with ESMTP id 1436630999;
+ Tue,  3 Sep 2024 03:26:18 -0400 (EDT)
+ (envelope-from sakib@darkstar.site)
+Received: from localhost (unknown [185.130.54.115])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by pb-smtp2.pobox.com (Postfix) with ESMTPSA id D4F9830998;
+ Tue,  3 Sep 2024 03:26:16 -0400 (EDT)
+ (envelope-from sakib@darkstar.site)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,178 +52,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: df4c25f3-69c2-11ef-a0b2-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MrSKR7mo4H47b+Wq9BPbpz1Zm2kUWwTfWMOTNKZ3Brbr9Fv1JxyDvlpbKQHcRJk9LzHAW2LEF+tSJsCYgs7T0ucq/x3jSQFrIPkqkV8e49Gb/rSehctbpfAJR3089NuWNTRCGsGdxdpiZlYOT5B5D9UjPFQ/dPYqvxS32mbMOZ+sH/egysad1HgucvmfwpqymVAIQDjMcZ7n3e+dAsdkBSboi3wyV4V5POrAE+lqq/c/SyBvlfnPrY5SkqXq6osopBPElyAQAkwZkZJCkifIwe9eEuQX6FglHep3eKSHrrkv5lr1n1LDgopEMQgmfz/uor7YNNPFvc2L5T56yKxzMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n9HsRibqBTCMt13S76pOCZKNm1S4OJKlQQcgJQgl9vA=;
- b=RI8SGTDSgwc8GjVioKIA6ojKpT7bj8UhAFwEdVWrXj1OpOw8ZsrdwnJC5IVpIRLVK/L7eAIDNzubuN7xBUBj6xUyFcDuuXhkHWGRIs8gk7PZDdzHIMCpxli+mgNdnKbCbZ+RgpgkkyK+oKygje5PL3lNEQmfdEEWOB7RSj/LY2Sp4gTuzwBcqyL0A+kxf+xDTDx3+pAhBfL5VeymPrqXnkG3kTVlpd0C8IXHAH0JBnNd5QFGU66pnR77pPPhhhYxV4BfbBZDn1GlR4EFaNy9/x5UxXDpYW7ydbNSkkPPDUCeh5DhyN19pzpr+/jwuIiigXCZbCog2jvVeB3wcAC5IQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n9HsRibqBTCMt13S76pOCZKNm1S4OJKlQQcgJQgl9vA=;
- b=1N8DT9HJRXsSPKzI16EUg77MYhkjOBc0/4piJFPr8HHOKfTmEoWWSNaaaJDz6QKhJmNUuuaTe3upEAlu0dPwUou3zkWQGooCfzhQruHltOp4pq+Eg/pnRiaEqRCFJtTkpA1hxpa30XksIYX8REUP2E7kYhwoAd6V6BCZ69JK79s=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jiqian Chen <Jiqian.Chen@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, George Dunlap
-	<gwd@xenproject.org>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Anthony PERARD <anthony@xenproject.org>, "Juergen
- Gross" <jgross@suse.com>, "Daniel P . Smith" <dpsmith@apertussolutions.com>,
-	Stewart Hildebrand <Stewart.Hildebrand@amd.com>, Jiqian Chen
-	<Jiqian.Chen@amd.com>, Huang Rui <ray.huang@amd.com>
-Subject: [XEN PATCH v14 2/5] x86/pvh: Allow (un)map_pirq when dom0 is PVH
-Date: Tue, 3 Sep 2024 15:04:21 +0800
-Message-ID: <20240903070424.982218-3-Jiqian.Chen@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240903070424.982218-1-Jiqian.Chen@amd.com>
-References: <20240903070424.982218-1-Jiqian.Chen@amd.com>
+X-Inumbo-ID: cfad377f-69c5-11ef-a0b2-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=pobox.com; h=from:to:cc
+	:subject:date:message-id:mime-version:content-transfer-encoding;
+	 s=sasl; bh=h5N0iXa3hJfHnwvrylkrQh0a0aEXV3QI2OpAYy71Hs0=; b=JOMs
+	H75W+XlXtvZ5OqtNhIqNUpf57gso+6nw0FkwcI9JPouuavC1OOYQD99npi+WbNW0
+	J/slrd4cFVHVQZHrLMCxEk3Y8bD+Qn+zNUm4A4rKEJAt/9trPRlZKWiCSiexeIf7
+	lfrdo7qYVu6JWjqr6CZiiCtDqatXGYeMJp8JiJo=
+From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [XEN PATCH v4] x86/intel: optional build of PSR support
+Date: Tue,  3 Sep 2024 10:26:14 +0300
+Message-Id: <20240903072614.291048-1-Sergiy_Kibrik@epam.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003445:EE_|DM4PR12MB8497:EE_
-X-MS-Office365-Filtering-Correlation-Id: 72efb3d9-3652-4163-1726-08dccbe6b45a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014|7416014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?HAUDxtmtEDRwQ/iz4LrFtIMAC86zoxQai4LTzs3ERgrHmKDdqE3cbme+1vjP?=
- =?us-ascii?Q?CViIOCh2R5aCezFQvzvrnLCMTDq+5+gFP1aZGAYx3MgBd9H1utSQ+GHgC8Jj?=
- =?us-ascii?Q?rSV72z8z0wBlw4e4r6IeQt2sHdQfDZYArp3bRRTs7ePTS3ycMmMXx4jd8CHE?=
- =?us-ascii?Q?n0+rsAgSNKbHGkdmIxUKvC8zbUZnpYWtShqDDPHrv3MVOkYWCu00vWf9oL8z?=
- =?us-ascii?Q?/USigjh9dYRsGZaGnBLXvrlv82OxRQ9vXlrDsTaCTgj50e0JjbOstNqAfpiH?=
- =?us-ascii?Q?vJbZgjK6myEqDxnLB5FRUSFaIMDzjpGH81MxQGiFYXcQpQ8l3Gh7ucNa8cc8?=
- =?us-ascii?Q?C0tT0/Casdxw3/8Hfwnt8gC33WX0qNViauRX1SSjm3iyzRO11G6f6sd75pBY?=
- =?us-ascii?Q?lGOvTzUcINGabHRI1wFg+K42ydfveuJ/q1EFUVFj9S1gJxt2a4F0w8lrgzDM?=
- =?us-ascii?Q?hVoeOCpp7CCJbLi6CFDEFjKP6N45ytdEXdl2HhFby/hgiPgMApJwHFEMJ8V1?=
- =?us-ascii?Q?9fdadJvU+QHfLs3c/2p/2q2otmMsVTobQh7X3GhUlx6SzlfU6X1+3zWEjAOE?=
- =?us-ascii?Q?WJ+OX1khmp462u8xmoNQoaYqD3nNuQhJAzoyyCL5WRsvsvdVvTdOZJTvIwzn?=
- =?us-ascii?Q?DFQcdAFHc9wW9SgvT87FG0cewwk1fT0hg3nYYlqaaT2buN8QgQIFgMRQs4bj?=
- =?us-ascii?Q?zhK+UM3Sty7gNRDbog5jsRjocAJV37CqhDVP9Uj9GCvocGSyQkGHuXA2jR+s?=
- =?us-ascii?Q?e0OQ1ltdsh+oKbBR3WbNJge8WSQtfXh6U093P15OLF1DApvImNIhBCxD9n7K?=
- =?us-ascii?Q?GOVgfnG8kTE8G4hw1TJ+ueoOGcXQwg9dN5P2/w4o5o5oEmegn+wrZvcCIyfi?=
- =?us-ascii?Q?wwIzqjRYpwFhTRLYm0MmfU36irTk4Gs3PXaNoB/p+d8R0UriP9B90JJvjEMI?=
- =?us-ascii?Q?tQS3wYU2YjSYt279FYoRrWZZmPu6L2UMB7X96gsKE30FL+kHpfzcHNA797DZ?=
- =?us-ascii?Q?/OnTWV+uKO/URA3RCwLBcInmqjdzS6uCtxWPEd40vdKetVewumsHFqjaFxp3?=
- =?us-ascii?Q?wRhJpPYAvOsc6+YqnRzL5+27YJ2KqP9cWYS0xo7lA+WqTEDzANlpakHvjSpP?=
- =?us-ascii?Q?8F5YO/sfampRyElaGyYXqK0svNraw9kj2xpRPr93AnXy/KqjD5XIbSMGm0XA?=
- =?us-ascii?Q?g+FAi9YuOv1om7BOUMsCCs2kdM2JDu8PMoUFlXp2T440eB7RPLTl+aYb3MtE?=
- =?us-ascii?Q?pPzXRwMuxVq9RlaDhPB6JQFmdde16Gqv6jDTklzyeOhiBlgGTNSqCfcLHpAi?=
- =?us-ascii?Q?azmpPm0qoDCgp1HTRrEs9PQi26/PwTA5LV/I050qypggzmOXinp9kzjwrJg1?=
- =?us-ascii?Q?4m65BqjdkDvOxPKjzsY2GE3hk5Vs7YKzjlYv2EPqtittHNtV24CQGPfAghZl?=
- =?us-ascii?Q?GFXou7iGayW/CqbhYrHkUH3W9Cc8ztl4?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014)(7416014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2024 07:04:50.5674
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 72efb3d9-3652-4163-1726-08dccbe6b45a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS2PEPF00003445.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB8497
+X-Pobox-Relay-ID:
+ CEAFD4E6-69C5-11EF-8B18-9B0F950A682E-90055647!pb-smtp2.pobox.com
+Content-Transfer-Encoding: quoted-printable
 
-When dom0 is PVH type and passthrough a device to HVM domU, Qemu code
-xen_pt_realize->xc_physdev_map_pirq and libxl code pci_add_dm_done->
-xc_physdev_map_pirq map a pirq for passthrough devices.
-In xc_physdev_map_pirq call stack, function hvm_physdev_op has a check
-has_pirq(currd), but currd is PVH dom0, PVH has no X86_EMU_USE_PIRQ flag,
-so it fails, PHYSDEVOP_map_pirq is not allowed for PVH dom0 in current
-codes.
+Platform Shared Resource feature is available for certain Intel's CPUs on=
+ly,
 
-But it is fine to map interrupts through pirq to a HVM domain whose
-XENFEAT_hvm_pirqs is not enabled. Because pirq field is used as a way to
-reference interrupts and it is just the way for the device model to
-identify which interrupt should be mapped to which domain, however
-has_pirq() is just to check if HVM domains route interrupts from
-devices(emulated or passthrough) through event channel, so, the has_pirq()
-check should not be applied to the PHYSDEVOP_map_pirq issued by dom0.
+Xen's implementation of PSR only supports Intel CPUs right now, hence it =
+can be
+made dependant on CONFIG_INTEL build option.
+Since platform implementation is not limited to single vendor, intermedia=
+te
+option CONFIG_PSR introduced, which selected by CONFIG_INTEL.
 
-So, allow PHYSDEVOP_map_pirq when dom0 is PVH and also allow
-PHYSDEVOP_unmap_pirq for the removal device path to unmap pirq. Then the
-interrupt of a passthrough device can be successfully mapped to pirq for domU.
+When !PSR then PSR-related sysctls XEN_SYSCTL_psr_cmt_op &
+XEN_SYSCTL_psr_alloc are off as well.
 
-Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
-Signed-off-by: Huang Rui <ray.huang@amd.com>
-Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-v13->v14 changes:
-Modified the commit message.
+v3 patch here:
+https://lore.kernel.org/xen-devel/20240829090559.149249-1-Sergiy_Kibrik@e=
+pam.com/
 
-v12->v13 changes:
-Removed the PHYSDEVOP_(un)map_pirq restriction check for pvh domU and added a corresponding description in the commit message.
-
-v11->v12 changes:
-Avoid using return, set error code instead when (un)map is not allowed.
-
-v10->v11 changes:
-Delete the judgment of "d==currd", so that we can prevent physdev_(un)map_pirq from being executed when domU has no pirq, instead of just preventing self-mapping.
-And modify the description of the commit message accordingly.
-
-v9->v10 changes:
-Indent the comments above PHYSDEVOP_map_pirq according to the code style.
-
-v8->v9 changes:
-Add a comment above PHYSDEVOP_map_pirq to describe why need this hypercall.
-Change "!is_pv_domain(d)" to "is_hvm_domain(d)", and "map.domid == DOMID_SELF" to "d == current->domian".
-
-v7->v8 changes:
-Add the domid check(domid == DOMID_SELF) to prevent self map when guest doesn't use pirq.
-That check was missed in the previous version.
-
-v6->v7 changes:
-Nothing.
-
-v5->v6 changes:
-Nothing.
-
-v4->v5 changes:
-Move the check of self map_pirq to physdev.c, and change to check if the caller has PIRQ flag, and just break for PHYSDEVOP_(un)map_pirq in hvm_physdev_op.
-
-v3->v4 changes:
-add check to prevent PVH self map.
-
-v2->v3 changes:
-Du to changes in the implementation of the second patch on kernel side(that it will do setup_gsi and map_pirq when assigning a device to passthrough), add PHYSDEVOP_setup_gsi for PVH dom0, and we need to support self mapping.
+changes in v4:
+ - introduced CONFIG_PSR
+ - changed description
+ - changes to psr stubs
+changes in v3:
+ - drop stubs for psr_domain_{init,free} & psr_ctxt_switch_to() and guard=
+ these
+   routines at call sites
+ - add stub for psr_cmt_enabled()
+ - drop some of #ifdef-s from arch_do_{domctl,sysctl}
 ---
- xen/arch/x86/hvm/hypercall.c | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/arch/x86/Kconfig           |  3 +++
+ xen/arch/x86/Kconfig.cpu       |  1 +
+ xen/arch/x86/Makefile          |  2 +-
+ xen/arch/x86/domctl.c          |  3 +++
+ xen/arch/x86/include/asm/psr.h | 10 ++++++++--
+ xen/arch/x86/sysctl.c          |  4 +++-
+ 6 files changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index f023f7879e24..81883c8d4f60 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -73,6 +73,8 @@ long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     {
-     case PHYSDEVOP_map_pirq:
-     case PHYSDEVOP_unmap_pirq:
-+        break;
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 7ef5c8bc48..1fcb7b3a26 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -284,6 +284,9 @@ endchoice
+ config GUEST
+ 	bool
+=20
++config PSR
++	bool
 +
-     case PHYSDEVOP_eoi:
-     case PHYSDEVOP_irq_status_query:
-     case PHYSDEVOP_get_free_pirq:
--- 
-2.34.1
+ config XEN_GUEST
+ 	bool "Xen Guest"
+ 	select GUEST
+diff --git a/xen/arch/x86/Kconfig.cpu b/xen/arch/x86/Kconfig.cpu
+index 5fb18db1aa..7c649a478b 100644
+--- a/xen/arch/x86/Kconfig.cpu
++++ b/xen/arch/x86/Kconfig.cpu
+@@ -13,6 +13,7 @@ config AMD
+ config INTEL
+ 	bool "Support Intel CPUs"
+ 	default y
++	select PSR
+ 	help
+ 	  Detection, tunings and quirks for Intel platforms.
+=20
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 286c003ec3..4db3c214b0 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -57,7 +57,7 @@ obj-y +=3D pci.o
+ obj-y +=3D percpu.o
+ obj-y +=3D physdev.o
+ obj-$(CONFIG_COMPAT) +=3D x86_64/physdev.o
+-obj-y +=3D psr.o
++obj-$(CONFIG_PSR) +=3D psr.o
+ obj-y +=3D setup.o
+ obj-y +=3D shutdown.o
+ obj-y +=3D smp.o
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index 68b5b46d1a..182f5fb11b 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -1195,6 +1195,7 @@ long arch_do_domctl(
+     case XEN_DOMCTL_psr_alloc:
+         switch ( domctl->u.psr_alloc.cmd )
+         {
++#ifdef CONFIG_PSR
+         case XEN_DOMCTL_PSR_SET_L3_CBM:
+             ret =3D psr_set_val(d, domctl->u.psr_alloc.target,
+                               domctl->u.psr_alloc.data,
+@@ -1257,6 +1258,8 @@ long arch_do_domctl(
+=20
+ #undef domctl_psr_get_val
+=20
++#endif /* CONFIG_PSR */
++
+         default:
+             ret =3D -EOPNOTSUPP;
+             break;
+diff --git a/xen/arch/x86/include/asm/psr.h b/xen/arch/x86/include/asm/ps=
+r.h
+index 51df78794c..7fa51f0cb3 100644
+--- a/xen/arch/x86/include/asm/psr.h
++++ b/xen/arch/x86/include/asm/psr.h
+@@ -69,12 +69,11 @@ extern struct psr_cmt *psr_cmt;
+=20
+ static inline bool psr_cmt_enabled(void)
+ {
+-    return !!psr_cmt;
++    return IS_ENABLED(CONFIG_PSR) ? !!psr_cmt : false;
+ }
+=20
+ int psr_alloc_rmid(struct domain *d);
+ void psr_free_rmid(struct domain *d);
+-void psr_ctxt_switch_to(struct domain *d);
+=20
+ int psr_get_info(unsigned int socket, enum psr_type type,
+                  uint32_t data[], unsigned int array_len);
+@@ -83,8 +82,15 @@ int psr_get_val(struct domain *d, unsigned int socket,
+ int psr_set_val(struct domain *d, unsigned int socket,
+                 uint64_t new_val, enum psr_type type);
+=20
++#ifdef CONFIG_PSR
++void psr_ctxt_switch_to(struct domain *d);
+ void psr_domain_init(struct domain *d);
+ void psr_domain_free(struct domain *d);
++#else
++static inline void psr_ctxt_switch_to(struct domain *d) {}
++static inline void psr_domain_init(struct domain *d) {}
++static inline void psr_domain_free(struct domain *d) {}
++#endif
+=20
+ #endif /* __ASM_PSR_H__ */
+=20
+diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
+index 1d40d82c5a..fedb533ce5 100644
+--- a/xen/arch/x86/sysctl.c
++++ b/xen/arch/x86/sysctl.c
+@@ -225,10 +225,11 @@ long arch_do_sysctl(
+=20
+     case XEN_SYSCTL_psr_alloc:
+     {
+-        uint32_t data[PSR_INFO_ARRAY_SIZE] =3D { };
++        uint32_t __maybe_unused data[PSR_INFO_ARRAY_SIZE] =3D { };
+=20
+         switch ( sysctl->u.psr_alloc.cmd )
+         {
++#ifdef CONFIG_PSR
+         case XEN_SYSCTL_PSR_get_l3_info:
+             ret =3D psr_get_info(sysctl->u.psr_alloc.target,
+                                PSR_TYPE_L3_CBM, data, ARRAY_SIZE(data));
+@@ -279,6 +280,7 @@ long arch_do_sysctl(
+             if ( __copy_field_to_guest(u_sysctl, sysctl, u.psr_alloc) )
+                 ret =3D -EFAULT;
+             break;
++#endif /* CONFIG_PSR */
+=20
+         default:
+             ret =3D -EOPNOTSUPP;
+--=20
+2.25.1
 
 
