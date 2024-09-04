@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 528FBCD4F22
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2024 14:57:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.790440.1200224 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F61ECD4857
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2024 14:57:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.790436.1200183 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slrRU-000272-3m; Wed, 04 Sep 2024 14:57:08 +0000
+	id 1slrRR-0001CA-Pg; Wed, 04 Sep 2024 14:57:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 790440.1200224; Wed, 04 Sep 2024 14:57:08 +0000
+Received: by outflank-mailman (output) from mailman id 790436.1200183; Wed, 04 Sep 2024 14:57:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slrRT-00026Q-Ux; Wed, 04 Sep 2024 14:57:07 +0000
-Received: by outflank-mailman (input) for mailman id 790440;
- Wed, 04 Sep 2024 14:57:06 +0000
+	id 1slrRR-0001C3-Mv; Wed, 04 Sep 2024 14:57:05 +0000
+Received: by outflank-mailman (input) for mailman id 790436;
+ Wed, 04 Sep 2024 14:57:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=S0IR=QC=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1slrRS-0001Be-Gf
- for xen-devel@lists.xenproject.org; Wed, 04 Sep 2024 14:57:06 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
+ id 1slrRP-0001Be-QU
+ for xen-devel@lists.xenproject.org; Wed, 04 Sep 2024 14:57:03 +0000
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [2a00:1450:4864:20::531])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f34c1b29-6acd-11ef-a0b3-8be0dac302b0;
- Wed, 04 Sep 2024 16:57:05 +0200 (CEST)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c2561e8041so4116224a12.2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Sep 2024 07:57:05 -0700 (PDT)
+ id f1a4bf85-6acd-11ef-a0b3-8be0dac302b0;
+ Wed, 04 Sep 2024 16:57:02 +0200 (CEST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5bef295a429so1070863a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Sep 2024 07:57:02 -0700 (PDT)
 Received: from fziglio-xenia-fedora.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3cc56c501sm18862a12.52.2024.09.04.07.57.04
+ 4fb4d7f45d1cf-5c3cc56c501sm18862a12.52.2024.09.04.07.57.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Sep 2024 07:57:04 -0700 (PDT)
+ Wed, 04 Sep 2024 07:57:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,190 +47,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f34c1b29-6acd-11ef-a0b3-8be0dac302b0
+X-Inumbo-ID: f1a4bf85-6acd-11ef-a0b3-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1725461825; x=1726066625; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1725461822; x=1726066622; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ZcvMYN+jr5XUIeIsxJiT1pxAH2bfq4XVsUerM53EAdk=;
-        b=L4e7st1QpUWX4pmJIfdMBnSCXb3EylFZ13rP0epa5667CvkWjsRmoCTrFSK5rW7TWM
-         vCbweW1k7GRZrH2CefiVtiECp6KKFMUrwahc+w3AgCxI40TFQmgsWrnjk4NVnJQg/xv+
-         GBPuRr4CbaU0KhEgAVsy2KZKYFXXARnDBXO+8=
+        bh=H2XLzta5aUPYVTAfd1K28dnU5rjnLpIfui7Cf5/r5KQ=;
+        b=jP8ZevKMqmmu/mAMD0kGn4lr4Zo+qcxrEJfw4TaVrxEc7QMWGsXSEiIbricKrCogXi
+         if09DwlKKuhBI6exLFSecbJE87cOOqUH0sAnC2w2kZxNx5CV/SpkzI5ZXRS+2v7i0dPY
+         3m/MW089iQXAYMdL6vtakwHMCe3HZJzIdZt/c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725461825; x=1726066625;
+        d=1e100.net; s=20230601; t=1725461822; x=1726066622;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ZcvMYN+jr5XUIeIsxJiT1pxAH2bfq4XVsUerM53EAdk=;
-        b=dS052MyKXb27l18F0ldSXn38H+MinUORQuhlJC7CRyDRoMK6AaZYVkQCTyCa1j1BhG
-         Z7qpKE6RJm8YwenI8bKnhcXoocBDtuiEzcKk46BLG26u9PryjYuQXxRudoRWHbMssKnP
-         9Go9EFG6KUuCyK8IakFp4LnDrHF7zw/DmtkWi3l0jUrhEzgK9QpAbmRjD5TQ7XDcFX0E
-         MHo3hChcWnIR2/EU8XLPDIDEjcxr8xkUHigDBq8sFxcZiPyuAdic6CDnV61X4JoJap93
-         VMXs9MJuu2sJQFUYG5HS9ufGSdK3GNQlekq6kTXQrT7hIgameaoxs+Z5Gb+61ljmsDGA
-         /t6g==
-X-Gm-Message-State: AOJu0YxzFSPTpEk/q3/NZNmikqI7SB58L6+mnNvJl+vTVwtva6rnxBnm
-	7ezo8UdGpBC1zT/Twv97X+z4y76s4Xf6W/ArGb2HhOkmGrbuIquA9/kdYqt9D3WYAAQLMW/eUJq
-	r
-X-Google-Smtp-Source: AGHT+IHTEBuxpy+UIZ/UjSONvgdj+wUsgOu58Nz4vjPcQQTv/Tufa8zRgvnXdsmUUxOdHP0H0GcFyw==
-X-Received: by 2002:a05:6402:3506:b0:5c2:6e5f:3bf9 with SMTP id 4fb4d7f45d1cf-5c26e5f3d09mr3653500a12.28.1725461824588;
-        Wed, 04 Sep 2024 07:57:04 -0700 (PDT)
+        bh=H2XLzta5aUPYVTAfd1K28dnU5rjnLpIfui7Cf5/r5KQ=;
+        b=lBlNYQunj0Ky/eB6e+NQD4CZPUR69QhW6RfXAqvhejr5PDLc11mp8BMzUKRsdcQfS9
+         RQCiVoXy+l4KnUVV1BrSPO3QoIeTnzGqgOhyG5iuBo8thtrzuMA6woVViJ9+fp08aSzg
+         8zmO6cezKzzHx6BB6CwmjVsULPR5SoW8bBDAKZab6DWkv5MulVhMVF/cS1RAfvkAL/ZJ
+         kN62Z1YOuLkLOe+XmTgxHQJ+pjdBejPzanjo8AR2/aC2nAvBun0ZRPoqOH9myKriR7cH
+         rIQmIJMFPCmpZW/JIJFHdehodDyDAwkFSwH3106dOXIXqp0qNfYfXiZ/sHpR4zaNq5jw
+         A0Sw==
+X-Gm-Message-State: AOJu0YxYq5mrK7jFNFh+2GnfTU4li1aIourUIyx6fdbl3c+XQESvwDmL
+	Ltn7dmGOCKg6Jlp4k+FF6uw2/G8FcOBwDzhpvsu+NBtowOdobuvwo0qrjOOoQV018CsoZQGE0OW
+	4
+X-Google-Smtp-Source: AGHT+IGqgeZCHMlbOlVzNCPm9aIs6RyyjIS1QCMGTLMuwlRgWzHc7PSzqeWrVWP56rm7TMUE30KSBw==
+X-Received: by 2002:a05:6402:210b:b0:5c2:5ca0:807a with SMTP id 4fb4d7f45d1cf-5c2caf22e50mr2018608a12.22.1725461821752;
+        Wed, 04 Sep 2024 07:57:01 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC 5/5] setup mapping for trampoline in setup_pagesXX
-Date: Wed,  4 Sep 2024 15:56:48 +0100
-Message-ID: <20240904145648.33707-6-frediano.ziglio@cloud.com>
+Subject: [RFC 1/5] Avoid usage of global in reloc.c
+Date: Wed,  4 Sep 2024 15:56:44 +0100
+Message-ID: <20240904145648.33707-2-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240904145648.33707-1-frediano.ziglio@cloud.com>
 References: <20240904145648.33707-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Reduce assembly code, make boot page mappings more similar between
-multiple paths (direct EFI and not).
+All code and dat from this file will go into a text section
+which we want to not be writeable.
 
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
- xen/arch/x86/boot/build32.lds.S |  2 ++
- xen/arch/x86/boot/head.S        | 10 ----------
- xen/arch/x86/boot/setup-pages.c | 25 ++++++++++++++++++-------
- xen/arch/x86/boot/x86_64.S      |  2 +-
- xen/arch/x86/include/asm/page.h |  3 ++-
- 5 files changed, 23 insertions(+), 19 deletions(-)
+ xen/arch/x86/boot/reloc.c | 62 ++++++++++++++++++++-------------------
+ 1 file changed, 32 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/x86/boot/build32.lds.S b/xen/arch/x86/boot/build32.lds.S
-index 3796f9603b..aca747eb1d 100644
---- a/xen/arch/x86/boot/build32.lds.S
-+++ b/xen/arch/x86/boot/build32.lds.S
-@@ -49,11 +49,13 @@ SECTIONS
-         DECLARE_IMPORT(__trampoline_seg_stop);
-         DECLARE_IMPORT(l2_xenmap);
-         DECLARE_IMPORT(l2_directmap);
-+        DECLARE_IMPORT(l1_bootmap);
-         DECLARE_IMPORT(l2_bootmap);
-         DECLARE_IMPORT(l3_bootmap);
-         DECLARE_IMPORT(_start);
-         DECLARE_IMPORT(_end);
-         DECLARE_IMPORT(xen_phys_start);
-+        DECLARE_IMPORT(trampoline_phys);
-         //DECLARE_IMPORT();
-         . = . + GAP;
-         *(.text)
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 5ae0c2009e..84d3c469de 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -765,16 +765,6 @@ trampoline_setup:
+diff --git a/xen/arch/x86/boot/reloc.c b/xen/arch/x86/boot/reloc.c
+index 201e38d544..de8487483a 100644
+--- a/xen/arch/x86/boot/reloc.c
++++ b/xen/arch/x86/boot/reloc.c
+@@ -72,11 +72,13 @@ struct vesa_mode_info {
+ #define get_mb2_data(tag, type, member)   (((const multiboot2_tag_##type##_t *)(tag))->member)
+ #define get_mb2_string(tag, type, member) ((uint32_t)get_mb2_data(tag, type, member))
  
-         call    setup_pages32
+-static uint32_t alloc;
++typedef struct memctx {
++    uint32_t alloc;
++} memctx;
  
--        /* Map l1_bootmap[] into l2_bootmap[0]. */
--        lea     __PAGE_HYPERVISOR + sym_esi(l1_bootmap), %eax
--        mov     %eax, sym_esi(l2_bootmap)
--
--        /* Map the permanent trampoline page into l1_bootmap[]. */
--        mov     sym_esi(trampoline_phys), %ecx
--        lea     __PAGE_HYPERVISOR_RX(%ecx), %edx /* %edx = PTE to write  */
--        shr     $PAGE_SHIFT, %ecx                /* %ecx = Slot to write */
--        mov     %edx, sym_offs(l1_bootmap)(%esi, %ecx, 8)
--
-         /* Apply relocations to bootstrap trampoline. */
-         mov     sym_esi(trampoline_phys), %eax
-         call    reloc_trampoline32
-diff --git a/xen/arch/x86/boot/setup-pages.c b/xen/arch/x86/boot/setup-pages.c
-index 0961282a01..f74734c036 100644
---- a/xen/arch/x86/boot/setup-pages.c
-+++ b/xen/arch/x86/boot/setup-pages.c
-@@ -9,8 +9,10 @@
- 
- #pragma GCC visibility push(hidden)
- extern char _start[], _end[];
--extern uint64_t l2_xenmap[512], l3_bootmap[512], l2_directmap[512], l2_bootmap[512];
-+extern uint64_t l2_xenmap[512], l2_directmap[512],
-+	l3_bootmap[512], l2_bootmap[512], l1_bootmap[512];
- extern unsigned long xen_phys_start;
-+extern unsigned long trampoline_phys;
- #pragma GCC visibility pop
- 
- #define _PAGE_PRESENT 0x001
-@@ -19,12 +21,11 @@ extern unsigned long xen_phys_start;
- #define _PAGE_DIRTY 0x040
- #define _PAGE_PSE 0x080
- #define _PAGE_GLOBAL 0x100
-+#define _PAGE_NX (1LLU << 63)
- 
- #define PAGE_HYPERVISOR       PAGE_HYPERVISOR_RW
- #define PAGE_HYPERVISOR_RW    (__PAGE_HYPERVISOR_RW | _PAGE_GLOBAL)
- #define __PAGE_HYPERVISOR_RW  (__PAGE_HYPERVISOR_RO | _PAGE_DIRTY | _PAGE_RW)
--// TODO
--#define _PAGE_NX 0
- #define __PAGE_HYPERVISOR_RO  (_PAGE_PRESENT | _PAGE_ACCESSED | _PAGE_NX)
- #define PAGE_HYPERVISOR_RWX   (__PAGE_HYPERVISOR | _PAGE_GLOBAL)
- #define __PAGE_HYPERVISOR     (__PAGE_HYPERVISOR_RX | _PAGE_DIRTY | _PAGE_RW)
-@@ -33,14 +34,16 @@ extern unsigned long xen_phys_start;
- #define L2_PAGETABLE_SHIFT 21
- #define L2_PAGETABLE_ENTRIES 512
- #define PAGE_SIZE 4096
-+#define PAGE_SHIFT 12
- #define l2_table_offset(a) (((a) >> L2_PAGETABLE_SHIFT) & (L2_PAGETABLE_ENTRIES - 1))
--#define l2e_from_paddr(a,f) ((a) | put_pte_flags(f))
--#define l3e_from_paddr(a,f) ((a) | put_pte_flags(f))
-+#define l1e_from_paddr(a, flags) ((a) | put_pte_flags(flags))
-+#define l2e_from_paddr(a, flags) ((a) | put_pte_flags(flags))
-+#define l3e_from_paddr(a, flags) ((a) | put_pte_flags(flags))
- #define l2e_add_flags(x, flags)    (x |= put_pte_flags(flags))
- typedef uint64_t l2_pgentry_t;
--static inline int64_t put_pte_flags(unsigned int x)
-+static inline uint64_t put_pte_flags(uint64_t x)
+-static uint32_t alloc_mem(uint32_t bytes)
++static uint32_t alloc_mem(uint32_t bytes, memctx *ctx)
  {
--    return (((int64_t)x & ~0xfff) << 40) | (x & 0xfff);
-+    return x;
+-    return alloc -= ROUNDUP(bytes, 16);
++    return ctx->alloc -= ROUNDUP(bytes, 16);
  }
  
- void __attribute__((__stdcall__)) setup_pages32(void)
-@@ -102,4 +105,12 @@ void setup_pages64(void)
-         l2_directmap[i] = pte;
+ static void zero_mem(uint32_t s, uint32_t bytes)
+@@ -85,11 +87,11 @@ static void zero_mem(uint32_t s, uint32_t bytes)
+         *(char *)s++ = 0;
+ }
+ 
+-static uint32_t copy_mem(uint32_t src, uint32_t bytes)
++static uint32_t copy_mem(uint32_t src, uint32_t bytes, memctx *ctx)
+ {
+     uint32_t dst, dst_ret;
+ 
+-    dst = alloc_mem(bytes);
++    dst = alloc_mem(bytes, ctx);
+     dst_ret = dst;
+ 
+     while ( bytes-- )
+@@ -98,7 +100,7 @@ static uint32_t copy_mem(uint32_t src, uint32_t bytes)
+     return dst_ret;
+ }
+ 
+-static uint32_t copy_string(uint32_t src)
++static uint32_t copy_string(uint32_t src, memctx *ctx)
+ {
+     uint32_t p;
+ 
+@@ -108,17 +110,17 @@ static uint32_t copy_string(uint32_t src)
+     for ( p = src; *(char *)p != '\0'; p++ )
+         continue;
+ 
+-    return copy_mem(src, p - src + 1);
++    return copy_mem(src, p - src + 1, ctx);
+ }
+ 
+-static struct hvm_start_info *pvh_info_reloc(uint32_t in)
++static struct hvm_start_info *pvh_info_reloc(uint32_t in, memctx *ctx)
+ {
+     struct hvm_start_info *out;
+ 
+-    out = _p(copy_mem(in, sizeof(*out)));
++    out = _p(copy_mem(in, sizeof(*out), ctx));
+ 
+     if ( out->cmdline_paddr )
+-        out->cmdline_paddr = copy_string(out->cmdline_paddr);
++        out->cmdline_paddr = copy_string(out->cmdline_paddr, ctx);
+ 
+     if ( out->nr_modules )
+     {
+@@ -127,51 +129,51 @@ static struct hvm_start_info *pvh_info_reloc(uint32_t in)
+ 
+         out->modlist_paddr =
+             copy_mem(out->modlist_paddr,
+-                     out->nr_modules * sizeof(struct hvm_modlist_entry));
++                     out->nr_modules * sizeof(struct hvm_modlist_entry), ctx);
+ 
+         mods = _p(out->modlist_paddr);
+ 
+         for ( i = 0; i < out->nr_modules; i++ )
+         {
+             if ( mods[i].cmdline_paddr )
+-                mods[i].cmdline_paddr = copy_string(mods[i].cmdline_paddr);
++                mods[i].cmdline_paddr = copy_string(mods[i].cmdline_paddr, ctx);
+         }
      }
- #undef l2_4G_offset
-+
-+    /* Map l1_bootmap[] into l2_bootmap[0]. */
-+    l2_bootmap[0] = l2e_from_paddr((unsigned long)l1_bootmap,
-+                                   __PAGE_HYPERVISOR);
-+
-+    /* Map the permanent trampoline page into l1_bootmap[]. */
-+    l1_bootmap[(unsigned long)trampoline_phys >> PAGE_SHIFT] =
-+        l1e_from_paddr((unsigned long)trampoline_phys, __PAGE_HYPERVISOR_RX);
+ 
+     return out;
  }
-diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
-index 04bb62ae86..230ae6e2fb 100644
---- a/xen/arch/x86/boot/x86_64.S
-+++ b/xen/arch/x86/boot/x86_64.S
-@@ -195,7 +195,7 @@ GLOBAL(__page_tables_end)
-         .section .init.data, "aw", @progbits
-         .align PAGE_SIZE, 0
  
--l1_bootmap:
-+GLOBAL(l1_bootmap)
-         .fill L1_PAGETABLE_ENTRIES, 8, 0
-         .size l1_bootmap, . - l1_bootmap
+-static multiboot_info_t *mbi_reloc(uint32_t mbi_in)
++static multiboot_info_t *mbi_reloc(uint32_t mbi_in, memctx *ctx)
+ {
+     int i;
+     multiboot_info_t *mbi_out;
  
-diff --git a/xen/arch/x86/include/asm/page.h b/xen/arch/x86/include/asm/page.h
-index e01af28916..7e8c506dbc 100644
---- a/xen/arch/x86/include/asm/page.h
-+++ b/xen/arch/x86/include/asm/page.h
-@@ -286,7 +286,8 @@ extern l2_pgentry_t l2_xenmap[L2_PAGETABLE_ENTRIES],
-     l2_bootmap[4*L2_PAGETABLE_ENTRIES];
- extern l3_pgentry_t l3_bootmap[L3_PAGETABLE_ENTRIES];
- extern l2_pgentry_t l2_directmap[4*L2_PAGETABLE_ENTRIES];
--extern l1_pgentry_t l1_fixmap[L1_PAGETABLE_ENTRIES];
-+extern l1_pgentry_t l1_fixmap[L1_PAGETABLE_ENTRIES],
-+    l1_bootmap[L1_PAGETABLE_ENTRIES];
- void paging_init(void);
- void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t l4e);
- #endif /* !defined(__ASSEMBLY__) */
+-    mbi_out = _p(copy_mem(mbi_in, sizeof(*mbi_out)));
++    mbi_out = _p(copy_mem(mbi_in, sizeof(*mbi_out), ctx));
+ 
+     if ( mbi_out->flags & MBI_CMDLINE )
+-        mbi_out->cmdline = copy_string(mbi_out->cmdline);
++        mbi_out->cmdline = copy_string(mbi_out->cmdline, ctx);
+ 
+     if ( mbi_out->flags & MBI_MODULES )
+     {
+         module_t *mods;
+ 
+         mbi_out->mods_addr = copy_mem(mbi_out->mods_addr,
+-                                      mbi_out->mods_count * sizeof(module_t));
++                                      mbi_out->mods_count * sizeof(module_t), ctx);
+ 
+         mods = _p(mbi_out->mods_addr);
+ 
+         for ( i = 0; i < mbi_out->mods_count; i++ )
+         {
+             if ( mods[i].string )
+-                mods[i].string = copy_string(mods[i].string);
++                mods[i].string = copy_string(mods[i].string, ctx);
+         }
+     }
+ 
+     if ( mbi_out->flags & MBI_MEMMAP )
+-        mbi_out->mmap_addr = copy_mem(mbi_out->mmap_addr, mbi_out->mmap_length);
++        mbi_out->mmap_addr = copy_mem(mbi_out->mmap_addr, mbi_out->mmap_length, ctx);
+ 
+     if ( mbi_out->flags & MBI_LOADERNAME )
+-        mbi_out->boot_loader_name = copy_string(mbi_out->boot_loader_name);
++        mbi_out->boot_loader_name = copy_string(mbi_out->boot_loader_name, ctx);
+ 
+     /* Mask features we don't understand or don't relocate. */
+     mbi_out->flags &= (MBI_MEMLIMITS |
+@@ -183,7 +185,7 @@ static multiboot_info_t *mbi_reloc(uint32_t mbi_in)
+     return mbi_out;
+ }
+ 
+-static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out)
++static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out, memctx *ctx)
+ {
+     const multiboot2_fixed_t *mbi_fix = _p(mbi_in);
+     const multiboot2_memory_map_t *mmap_src;
+@@ -197,7 +199,7 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out)
+     uint32_t ptr;
+     unsigned int i, mod_idx = 0;
+ 
+-    ptr = alloc_mem(sizeof(*mbi_out));
++    ptr = alloc_mem(sizeof(*mbi_out), ctx);
+     mbi_out = _p(ptr);
+     zero_mem(ptr, sizeof(*mbi_out));
+ 
+@@ -222,7 +224,7 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out)
+          * __start_xen() may put Xen image placement into it.
+          */
+         mbi_out->mods_addr = alloc_mem((mbi_out->mods_count + 1) *
+-                                       sizeof(*mbi_out_mods));
++                                       sizeof(*mbi_out_mods), ctx);
+         mbi_out_mods = _p(mbi_out->mods_addr);
+     }
+ 
+@@ -238,13 +240,13 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out)
+         case MULTIBOOT2_TAG_TYPE_BOOT_LOADER_NAME:
+             mbi_out->flags |= MBI_LOADERNAME;
+             ptr = get_mb2_string(tag, string, string);
+-            mbi_out->boot_loader_name = copy_string(ptr);
++            mbi_out->boot_loader_name = copy_string(ptr, ctx);
+             break;
+ 
+         case MULTIBOOT2_TAG_TYPE_CMDLINE:
+             mbi_out->flags |= MBI_CMDLINE;
+             ptr = get_mb2_string(tag, string, string);
+-            mbi_out->cmdline = copy_string(ptr);
++            mbi_out->cmdline = copy_string(ptr, ctx);
+             break;
+ 
+         case MULTIBOOT2_TAG_TYPE_BASIC_MEMINFO:
+@@ -263,7 +265,7 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out)
+             mbi_out->mmap_length /= get_mb2_data(tag, mmap, entry_size);
+             mbi_out->mmap_length *= sizeof(*mmap_dst);
+ 
+-            mbi_out->mmap_addr = alloc_mem(mbi_out->mmap_length);
++            mbi_out->mmap_addr = alloc_mem(mbi_out->mmap_length, ctx);
+ 
+             mmap_src = get_mb2_data(tag, mmap, entries);
+             mmap_dst = _p(mbi_out->mmap_addr);
+@@ -290,7 +292,7 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out)
+             mbi_out_mods[mod_idx].mod_start = get_mb2_data(tag, module, mod_start);
+             mbi_out_mods[mod_idx].mod_end = get_mb2_data(tag, module, mod_end);
+             ptr = get_mb2_string(tag, module, cmdline);
+-            mbi_out_mods[mod_idx].string = copy_string(ptr);
++            mbi_out_mods[mod_idx].string = copy_string(ptr, ctx);
+             mbi_out_mods[mod_idx].reserved = 0;
+             ++mod_idx;
+             break;
+@@ -356,19 +358,19 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out)
+ void *reloc(uint32_t magic, uint32_t in, uint32_t trampoline,
+             uint32_t video_info)
+ {
+-    alloc = trampoline;
++    memctx ctx = { trampoline };
+ 
+     switch ( magic )
+     {
+     case MULTIBOOT_BOOTLOADER_MAGIC:
+-        return mbi_reloc(in);
++        return mbi_reloc(in, &ctx);
+ 
+     case MULTIBOOT2_BOOTLOADER_MAGIC:
+-        return mbi2_reloc(in, video_info);
++        return mbi2_reloc(in, video_info, &ctx);
+ 
+     case XEN_HVM_START_MAGIC_VALUE:
+         if ( IS_ENABLED(CONFIG_PVH_GUEST) )
+-            return pvh_info_reloc(in);
++            return pvh_info_reloc(in, &ctx);
+         /* Fallthrough */
+ 
+     default:
 -- 
 2.46.0
 
