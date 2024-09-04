@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF99CD4F22
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EF98CD4F21
 	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2024 15:32:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.790491.1200262 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.790493.1200271 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slrzH-0003kK-J3; Wed, 04 Sep 2024 15:32:03 +0000
+	id 1slrzI-0003tO-4r; Wed, 04 Sep 2024 15:32:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 790491.1200262; Wed, 04 Sep 2024 15:32:03 +0000
+Received: by outflank-mailman (output) from mailman id 790493.1200271; Wed, 04 Sep 2024 15:32:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slrzH-0003kD-GL; Wed, 04 Sep 2024 15:32:03 +0000
-Received: by outflank-mailman (input) for mailman id 790491;
- Wed, 04 Sep 2024 15:32:01 +0000
+	id 1slrzH-0003qX-Vx; Wed, 04 Sep 2024 15:32:03 +0000
+Received: by outflank-mailman (input) for mailman id 790493;
+ Wed, 04 Sep 2024 15:32:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+MPF=QC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1slrzF-0003Vv-SL
- for xen-devel@lists.xenproject.org; Wed, 04 Sep 2024 15:32:01 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ id 1slrzH-0003Vv-9W
+ for xen-devel@lists.xenproject.org; Wed, 04 Sep 2024 15:32:03 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d3e75446-6ad2-11ef-a0b3-8be0dac302b0;
- Wed, 04 Sep 2024 17:32:00 +0200 (CEST)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a869f6ce2b9so733137566b.2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Sep 2024 08:32:00 -0700 (PDT)
+ id d53f1ab9-6ad2-11ef-a0b3-8be0dac302b0;
+ Wed, 04 Sep 2024 17:32:02 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a86e5e9ff05so788841066b.1
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Sep 2024 08:32:02 -0700 (PDT)
 Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8a6236cfb4sm5500966b.100.2024.09.04.08.31.58
+ a640c23a62f3a-a8a623a9939sm5236366b.158.2024.09.04.08.32.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Sep 2024 08:31:58 -0700 (PDT)
+ Wed, 04 Sep 2024 08:32:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3e75446-6ad2-11ef-a0b3-8be0dac302b0
+X-Inumbo-ID: d53f1ab9-6ad2-11ef-a0b3-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725463919; x=1726068719; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1725463921; x=1726068721; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3uSQihnqXCf2hMyHenOR5h3swtTmtaH+EXsprydBl94=;
-        b=qLcwj5qWBqiyRy6vRlWKzzJLFUIJpICHYXRKOiT75M259/YlyX2aERKvnUuhAIHo+E
-         Tj98jJ9vvbraWZ/AvCcYFCKg6g0QoqPPjSZC+/PNeFjpH6ia9syOig8Q40bGKM1u9Q8S
-         ZpMzH+4G5FKdPN+WGhyv6oBfhcrDsivt/FkeE=
+        bh=DdGzkJBMdRuuSYc3u2Hg7lyIJS3prPV9F25LIY9VB0g=;
+        b=jIUx0+iD7mdZYl5BppKwSa0orj9+kBko8FYH300AOIR56Fn1ZH2LhB2j6L40aZS/J6
+         t8JtoOznFJdPZ+SC6iaGfsJqFORRbjHEc5R11gxAGqRsrc1KVZEXN8hD6nHkBbroto6c
+         aGE1QjNAIy846OA3HOzgTgwAxw9uMv/Sa/56w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725463919; x=1726068719;
+        d=1e100.net; s=20230601; t=1725463921; x=1726068721;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=3uSQihnqXCf2hMyHenOR5h3swtTmtaH+EXsprydBl94=;
-        b=K12M5pWp8miV3zL9b8VInSv1LzVlmKlmfPJ3gsz7QBf/ygeW06mkya9mra5GIZ7g1w
-         R9nBedODf27uhqxKvriMmwDPvsOSIH3bxqwP7pIsIdH+EssWEeidMMGn3LHEwJp5ZUA9
-         65Fjh+fA/5p8S4skW+Ex/WbAlU2ovfrhH5uy3jBPckUR62Yg8bmvWfFPm8HSgdOZ4QWH
-         ovjW7bSJOqV7m5PAjHYFidsGM7N3DsfX74QWTqXlbzQqo/kUzJjHVTBhgpEOrXZzSp8E
-         DEpM9ElHQeqHh7rXnS64kQ3PZSbc4cgVwObqYqKFHo6MG2VAKMNO3uA+tgmZeVcEKHQu
-         U6/w==
-X-Gm-Message-State: AOJu0YwUE9Do4ha1K14U+UhsY+fiLNJpy51tI8YnqljPE/FfjOEdRU5J
-	iwzUgBMLINrciccGPe6eyT2lmqrBYQiTOEaz3b172MhuBX7jQphsmC2pyvgAO8rqpZGsbDU9IJd
-	d
-X-Google-Smtp-Source: AGHT+IHfzxlFNr7URNfg+tTFdYyvwqEKKJAiB7ZDtpDrq5OI9vbmMwcP4p+qHmEqgXi1l3nRowguDA==
-X-Received: by 2002:a17:907:3f09:b0:a86:8e3d:86e2 with SMTP id a640c23a62f3a-a8a32df30c3mr384486466b.11.1725463918850;
-        Wed, 04 Sep 2024 08:31:58 -0700 (PDT)
+        bh=DdGzkJBMdRuuSYc3u2Hg7lyIJS3prPV9F25LIY9VB0g=;
+        b=esvZY81nAF0s4mMLvifvrxLclXLcNRjttOjf6oAQJIkWU4eUDnhkVnIi/D93ATncm1
+         gSmUHaPMvbws2NcSEFF9lMO+ScqKy8cqDquyYEdD7sK4Ura1d0+erbh1Ra6U1Ih6osO3
+         WNR4t+hV9yQCgp7tdb/T9hDP9ARA0p18MRlX8s5TgY3UNR9p6vctA1E3OiiOLiyolTps
+         wm4lzgQ9FOJ5ZlSeGDvCRyPmqHcmLKc5lYZjOFcq+wjbfDCWy08gDSljwYcqTUujm/nx
+         8bzaMw+jOBaO2MBglVed/rMsrFOVJOo9n/U5aYUCtquOjqEj0ZIt57ALrazx/tTn6WcM
+         TV1Q==
+X-Gm-Message-State: AOJu0Yz6wZXrQVid7tGfvmabRqDdRvANsTG1hOmAiLFa/oOKE2iocBJy
+	Oeo5OmdS+JCDhY/3pKgFP/mHxnGUGPZQvkUxSWrolpbSj4X8B2RtyPi6wSmMpDm6Hb0ba3F83uB
+	B
+X-Google-Smtp-Source: AGHT+IE6XkMLQoiA77O1qAsVl6/RLfVs+qbzPjMR2qwXAUzpRGwUiFzq5NDzZGUZpra7+nYpqIMQRQ==
+X-Received: by 2002:a17:907:2da5:b0:a86:9cff:6798 with SMTP id a640c23a62f3a-a8a32ed4b43mr394525566b.30.1725463921126;
+        Wed, 04 Sep 2024 08:32:01 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -81,9 +81,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v4 1/6] x86/time: introduce helper to fetch Xen wallclock when running as a guest
-Date: Wed,  4 Sep 2024 17:31:46 +0200
-Message-ID: <20240904153151.83995-2-roger.pau@citrix.com>
+Subject: [PATCH v4 3/6] x86/time: split CMOS read and probe logic into function
+Date: Wed,  4 Sep 2024 17:31:48 +0200
+Message-ID: <20240904153151.83995-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240904153151.83995-1-roger.pau@citrix.com>
 References: <20240904153151.83995-1-roger.pau@citrix.com>
@@ -91,84 +91,123 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Move the current code in get_wallclock_time() to fetch the Xen wallclock
-information from the shared page when running as a guest into a separate
-helper.
+The current logic to probe for the CMOS RTC is open-coded in get_cmos_time(),
+move it to a separate function that both serves the purpose of testing for the
+CMOS RTC existence and returning its value.
+
+The goal is to be able to split the probing and the reading logic into separate
+helpers, and putting the current logic in a separate function helps simplifying
+further changes.
+
+A transient *rtc_p variable is introduced as a parameter to the function, that
+will be removed by further changes.  Also note that due to the code movement,
+now cmos_rtc_probe will only get cleared on a second call to get_cmos_time(),
+as the newly introduced cmos_probe() function doesn't modify the variable
+anymore.
 
 No functional change intended.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-Changes since v3:
- - Place ifdef blocks inside the function.
-
 Changes since v2:
  - New in this version.
 ---
- xen/arch/x86/time.c | 42 +++++++++++++++++++++++++-----------------
- 1 file changed, 25 insertions(+), 17 deletions(-)
+ xen/arch/x86/time.c | 59 +++++++++++++++++++++++++++------------------
+ 1 file changed, 35 insertions(+), 24 deletions(-)
 
 diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index a97d78484105..1959cc4a4f2b 100644
+index 571e23431ccd..1e3c13fc7360 100644
 --- a/xen/arch/x86/time.c
 +++ b/xen/arch/x86/time.c
-@@ -787,6 +787,30 @@ static struct platform_timesource __initdata_cf_clobber plt_xen_timer =
- };
- #endif
+@@ -1291,45 +1291,32 @@ static bool __get_cmos_time(struct rtc_time *rtc)
+     return t1 <= SECONDS(1) && t2 < MILLISECS(3);
+ }
  
-+static unsigned long read_xen_wallclock(void)
-+{
-+#ifdef CONFIG_XEN_GUEST
-+    struct shared_info *sh_info = XEN_shared_info;
-+    uint32_t wc_version;
-+    uint64_t wc_sec;
+-static unsigned long get_cmos_time(void)
++static bool cmos_probe(struct rtc_time *rtc_p, bool cmos_rtc_probe)
+ {
+-    unsigned long res;
+-    struct rtc_time rtc;
+     unsigned int seconds = 60;
+-    static bool __read_mostly cmos_rtc_probe;
+-    boolean_param("cmos-rtc-probe", cmos_rtc_probe);
+-
+-    if ( efi_enabled(EFI_RS) )
+-    {
+-        res = efi_get_time();
+-        if ( res )
+-            return res;
+-    }
+-
+-    if ( likely(!(acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC)) )
+-        cmos_rtc_probe = false;
+-    else if ( system_state < SYS_STATE_smp_boot && !cmos_rtc_probe )
+-        panic("System with no CMOS RTC advertised must be booted from EFI"
+-              " (or with command line option \"cmos-rtc-probe\")\n");
+ 
+     for ( ; ; )
+     {
+-        bool success = __get_cmos_time(&rtc);
++        bool success = __get_cmos_time(rtc_p);
++        struct rtc_time rtc = *rtc_p;
+ 
+-        if ( likely(!cmos_rtc_probe) || !success ||
++        if ( likely(!cmos_rtc_probe) )
++            return true;
 +
-+    ASSERT(xen_guest);
-+
-+    do {
-+        wc_version = sh_info->wc_version & ~1;
-+        smp_rmb();
-+
-+        wc_sec  = sh_info->wc_sec;
-+        smp_rmb();
-+    } while ( wc_version != sh_info->wc_version );
-+
-+    return wc_sec + read_xen_timer() / 1000000000;
-+#else
++        if ( !success ||
+              rtc.sec >= 60 || rtc.min >= 60 || rtc.hour >= 24 ||
+              !rtc.day || rtc.day > 31 ||
+              !rtc.mon || rtc.mon > 12 )
+-            break;
++            return false;
+ 
+         if ( seconds < 60 )
+         {
+             if ( rtc.sec != seconds )
+             {
+-                cmos_rtc_probe = false;
+                 acpi_gbl_FADT.boot_flags &= ~ACPI_FADT_NO_CMOS_RTC;
++                return true;
+             }
+-            break;
++            return false;
+         }
+ 
+         process_pending_softirqs();
+@@ -1337,7 +1324,31 @@ static unsigned long get_cmos_time(void)
+         seconds = rtc.sec;
+     }
+ 
+-    if ( unlikely(cmos_rtc_probe) )
 +    ASSERT_UNREACHABLE();
-+    return 0;
-+#endif
++    return false;
 +}
 +
- #ifdef CONFIG_HYPERV_GUEST
- /************************************************************
-  * HYPER-V REFERENCE TSC
-@@ -1497,24 +1521,8 @@ void rtc_guest_write(unsigned int port, unsigned int data)
++static unsigned long get_cmos_time(void)
++{
++    unsigned long res;
++    struct rtc_time rtc;
++    static bool __read_mostly cmos_rtc_probe;
++    boolean_param("cmos-rtc-probe", cmos_rtc_probe);
++
++    if ( efi_enabled(EFI_RS) )
++    {
++        res = efi_get_time();
++        if ( res )
++            return res;
++    }
++
++    if ( likely(!(acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC)) )
++        cmos_rtc_probe = false;
++    else if ( system_state < SYS_STATE_smp_boot && !cmos_rtc_probe )
++        panic("System with no CMOS RTC advertised must be booted from EFI"
++              " (or with command line option \"cmos-rtc-probe\")\n");
++
++    if ( !cmos_probe(&rtc, cmos_rtc_probe) )
+         panic("No CMOS RTC found - system must be booted from EFI\n");
  
- static unsigned long get_wallclock_time(void)
- {
--#ifdef CONFIG_XEN_GUEST
-     if ( xen_guest )
--    {
--        struct shared_info *sh_info = XEN_shared_info;
--        uint32_t wc_version;
--        uint64_t wc_sec;
--
--        do {
--            wc_version = sh_info->wc_version & ~1;
--            smp_rmb();
--
--            wc_sec  = sh_info->wc_sec;
--            smp_rmb();
--        } while ( wc_version != sh_info->wc_version );
--
--        return wc_sec + read_xen_timer() / 1000000000;
--    }
--#endif
-+        return read_xen_wallclock();
- 
-     return get_cmos_time();
- }
+     return mktime(rtc.year, rtc.mon, rtc.day, rtc.hour, rtc.min, rtc.sec);
 -- 
 2.46.0
 
