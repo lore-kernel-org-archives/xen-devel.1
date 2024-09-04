@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B040CD4851
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2024 14:57:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.790438.1200195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 722A4CD4853
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2024 14:57:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.790441.1200229 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slrRS-0001LK-Bf; Wed, 04 Sep 2024 14:57:06 +0000
+	id 1slrRU-0002Ad-EF; Wed, 04 Sep 2024 14:57:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 790438.1200195; Wed, 04 Sep 2024 14:57:06 +0000
+Received: by outflank-mailman (output) from mailman id 790441.1200229; Wed, 04 Sep 2024 14:57:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1slrRS-0001Ke-7B; Wed, 04 Sep 2024 14:57:06 +0000
-Received: by outflank-mailman (input) for mailman id 790438;
- Wed, 04 Sep 2024 14:57:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1slrRU-00029d-6l; Wed, 04 Sep 2024 14:57:08 +0000
+Received: by outflank-mailman (input) for mailman id 790441;
+ Wed, 04 Sep 2024 14:57:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=S0IR=QC=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1slrRQ-0001Be-K0
- for xen-devel@lists.xenproject.org; Wed, 04 Sep 2024 14:57:04 +0000
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [2a00:1450:4864:20::234])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f22c8885-6acd-11ef-a0b3-8be0dac302b0;
- Wed, 04 Sep 2024 16:57:03 +0200 (CEST)
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2f3edb2d908so22911411fa.2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Sep 2024 07:57:03 -0700 (PDT)
+ id 1slrRS-0001Bm-IQ
+ for xen-devel@lists.xenproject.org; Wed, 04 Sep 2024 14:57:06 +0000
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [2a00:1450:4864:20::229])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f2e2bd8d-6acd-11ef-99a1-01e77a169b0f;
+ Wed, 04 Sep 2024 16:57:04 +0200 (CEST)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2f3f90295a9so11247011fa.0
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Sep 2024 07:57:04 -0700 (PDT)
 Received: from fziglio-xenia-fedora.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3cc56c501sm18862a12.52.2024.09.04.07.57.01
+ 4fb4d7f45d1cf-5c3cc56c501sm18862a12.52.2024.09.04.07.57.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Sep 2024 07:57:02 -0700 (PDT)
+ Wed, 04 Sep 2024 07:57:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,523 +47,349 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f22c8885-6acd-11ef-a0b3-8be0dac302b0
+X-Inumbo-ID: f2e2bd8d-6acd-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1725461823; x=1726066623; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1725461824; x=1726066624; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mhuenP36n8TMCf74RJXF7g3MJ6TuGNcropEsMnWR+Rk=;
-        b=OghulXcBnAsCCzGu3dlqy7nClgnDfB7Q/pwBufg3z97Wdrq4e0c/D8PBvb1HdiZkdd
-         lwOtjhUD0hJr67pHdw5vPKPbA6tSVHLNEfYaIlFUNqAlw9p54/4nkROCmztuDgwtUdF6
-         MYj1/xDZK41umc8kNKu1qMPJQmL1hf9w0vWlY=
+        bh=cNu6Puv0e8keSxUHB/R0XRglCAGHnvUUM3m8vz4KfqY=;
+        b=ME2VYo9VRnmQDG84sXhlVn8lGLMJaXDHck9lEaJMztISuRankIqVIbp/IMMvvfc04z
+         lH1+nME6CJn7NjksPXvyNedff68qhAfwdCcI4Uj+CeRnNAxHEz0E4kcYUwg4R1uMGdzv
+         KDzJ4CwrO99lWF27W4ZyA8P+nMd2qOKpqPIHE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725461823; x=1726066623;
+        d=1e100.net; s=20230601; t=1725461824; x=1726066624;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mhuenP36n8TMCf74RJXF7g3MJ6TuGNcropEsMnWR+Rk=;
-        b=m1QL9FH5H6me9Bstbn7YUhzyCeM/DSdgZGU1sVtCNcBy16EnOgQaLkSeZnknEz4k40
-         npBLlJSous9hB3qesVxx1ycFut7Hq7O6xYYcR5kBdFU0BL3FD4N8gMmc4FbB6fKgxiqN
-         7H1jCXBKnIov0+hrID0JBqnsBOR2VVg/glc0PpG03QfX1m2Kyc8XtnedlnPU0zQ4gWUD
-         LoEkgC9Qlw96qb1HdSV5+4R6nQ9yNcpea+dVi0r3AMqDsleFzcOaBJ4lU45GobVUmv9i
-         +Y21++Z+1I+CG3oJrGNa6dkhK2cU1SmVU0T8FotxLkB9pLibO7+j45OfvKxY/XKmgBCd
-         UEMg==
-X-Gm-Message-State: AOJu0YwEcAnQKqLjjIGoAeqSbj0PqUpPvFN2jtd7aW0scX/L+phUFeyi
-	cztF8M8w/ujrjZvuC86RbiDdjniFD/vaURYxoN0dI969K7i5IjOqGvCJVTT50CckWTJyp+WoUQH
-	K
-X-Google-Smtp-Source: AGHT+IE/ZGUZ8ql2kd9pUeMGocx9V4rXrh5/OY7MrGom8aGtdFt0XR3t6lelnO/LleaOkNqgZ1FhBA==
-X-Received: by 2002:a2e:bc09:0:b0:2ef:2c91:502a with SMTP id 38308e7fff4ca-2f6443faf63mr62366771fa.3.1725461822493;
-        Wed, 04 Sep 2024 07:57:02 -0700 (PDT)
+        bh=cNu6Puv0e8keSxUHB/R0XRglCAGHnvUUM3m8vz4KfqY=;
+        b=eu+9P82zqanbFX6ZPBEL15ULmlxK1D5oPdbr06uDmt5n6WMWZM3BwzL2iRFjzrfb0p
+         bEThDt0mKog7Ncd+8j/S+U/er4Xf8JY58c0UQ9eJ2wiwHYRwIdCBIIgvFKx12sK/Ata3
+         u1tSRZFEuRg3ZV4j79dIc6bFfu0qvTbbTTk2fG5ue28QCiMKiALNDsG59GM6PehqeCdj
+         /IIPRnFNSp7QpgCnQP4ZsR3kt4IL45T0U1WkcL4lF3AsAdOwZtCoRvJFXhgSZrvuHZqY
+         Nvgj2BM5h4OCgiKcRAh52uDHD8ITjgvSNWGxiwrkW1nprMSuJZIXsEg7J6YbFckJ97gn
+         ZLMQ==
+X-Gm-Message-State: AOJu0YzpNC0HEDKP9Z9wnEHEm4sKGeWfLjNKD8W1BJsQVZzu7dco/7iw
+	vCvqTCJyGLOZq69kgq7FWbdZFp73LK2eTVSJ1BkyvkckbKf7gyNLA7YMWdEt22mYOWW+OF2ITZH
+	Q
+X-Google-Smtp-Source: AGHT+IH2iajKc/hwuONm00Xthdi39I7xcd2vmSPFrzl9jPAPQquPu7z8zcJP7eybp3yRtJlFAwefgQ==
+X-Received: by 2002:a2e:bc1a:0:b0:2f2:9a2e:c257 with SMTP id 38308e7fff4ca-2f651e5d42amr22342481fa.41.1725461823929;
+        Wed, 04 Sep 2024 07:57:03 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC 2/5] x86/boot: create a C bundle for 32 bit boot code and use it
-Date: Wed,  4 Sep 2024 15:56:45 +0100
-Message-ID: <20240904145648.33707-3-frediano.ziglio@cloud.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [RFC 4/5] Remove duplication preparing pages
+Date: Wed,  4 Sep 2024 15:56:47 +0100
+Message-ID: <20240904145648.33707-5-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240904145648.33707-1-frediano.ziglio@cloud.com>
 References: <20240904145648.33707-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The current method to include 32 bit C boot code is:
-- compile each function we want to use into a separate object file;
-- each function is compiled with -fpic option;
-- convert these object files to binary files. This operation removes GOP
-  which we don't want in the executable;
-- a small assembly part in each file add the entry point;
-- code can't have external references, all possible variables are passed
-  by value or pointer;
-- include these binary files in head.S.
-
-There are currently some limitations:
-- code is compiled separately, it's not possible to share a function
-  (like memcpy) between different functions to use;
-- although code is compiled with -fpic there's no certainty there are
-  no relocations, specifically data ones. This can lead into hard to
-  find bugs;
-- it's hard to add a simple function;
-- having to pass external variables makes hard to do multiple things
-  otherwise functions would require a lot of parameters so code would
-  have to be split into multiple functions which is not easy;
-- we generate a single text section containing data and code, not a
-  problem at the moment but if we want to add W^X protection it's
-  not helpful.
-
-Current change extends the current process:
-- all object files are linked together before getting converted making
-  possible to share code between the function we want to call;
-- a single object file is generated with all functions to use and
-  exported symbols to easily call;
-- variables to use are declared in linker script and easily used inside
-  C code. Declaring them manually could be annoying but makes also
-  easier to check them. Using external pointers can be still an issue if
-  they are not fixed. If an external symbol is not declared this gives a
-  link error;
-- linker script put data (bss and data) into a separate section and
-  check that that section is empty making sure code is W^X compatible;
-
-Some details of the implementation:
-- C code is compiled with -fpic flags (as before);
-- object files from C code are linked together;
-- the single bundled object file is linked with 2 slightly different
-  script files to generate 2 bundled object files;
-- the 2 bundled object files are converted to binary removing the need
-  for global offset tables;
-- a Python script is used to generate assembly source from the 2
-  binaries;
-- the single assembly file is compiled to generate final bundled object
-  file;
-- to detect possible unwanted relocation in data/code code is generated
-  with different addresses. This is enforced starting .text section at
-  different positions and adding a fixed "gap" at the beginning.
-  This makes sure code and data is position independent;
-- to detect used symbols in data/code symbols are placed in .text
-  section at different offsets (based on the line in the linker script).
-  This is needed as potentially a reference to a symbol is converted to
-  a reference to the containing section so multiple symbols could be
-  converted to reference to same symbol (section name) and we need to
-  distinguish them;
-- to avoid relocations
-- --orphan-handling=error option to linker is used to make sure we
-  account for all possible sections from C code;
-
-Current limitations:
-- the main one is the lack of support for 64 bit code. It would make
-  sure that even the code used for 64 bit (at the moment EFI code) is
-  code and data position independent. We cannot assume that code that
-  came from code compiled for 32 bit and compiled for 64 bit is code and
-  data position independent, different compiler options lead to
-  different code/data.
-
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+Pretty hacky, headers are not that compatible 32/64 bits
 ---
- .gitignore                                    |   3 +-
- xen/arch/x86/boot/Makefile                    |  28 ++-
- .../x86/boot/{build32.lds => build32.lds.S}   |  46 ++++-
- xen/arch/x86/boot/cmdline.c                   |   7 -
- xen/arch/x86/boot/head.S                      |  12 --
- xen/arch/x86/boot/reloc.c                     |   7 -
- xen/tools/make_output                         | 177 ++++++++++++++++++
- 7 files changed, 242 insertions(+), 38 deletions(-)
- rename xen/arch/x86/boot/{build32.lds => build32.lds.S} (62%)
- create mode 100755 xen/tools/make_output
+ xen/arch/x86/boot/Makefile        |   6 +-
+ xen/arch/x86/boot/build32.lds.S   |   8 +++
+ xen/arch/x86/boot/head.S          |  43 +-----------
+ xen/arch/x86/boot/setup-pages.c   | 105 ++++++++++++++++++++++++++++++
+ xen/arch/x86/boot/setup-pages64.c |   1 +
+ xen/arch/x86/efi/efi-boot.h       |  52 +--------------
+ 6 files changed, 121 insertions(+), 94 deletions(-)
+ create mode 100644 xen/arch/x86/boot/setup-pages.c
+ create mode 120000 xen/arch/x86/boot/setup-pages64.c
 
-diff --git a/.gitignore b/.gitignore
-index d8b57e32f8..442f3272de 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -251,8 +251,7 @@ xen/System.map
- xen/arch/x86/boot/mkelf32
- xen/arch/x86/boot/cmdline.S
- xen/arch/x86/boot/reloc.S
--xen/arch/x86/boot/*.bin
--xen/arch/x86/boot/*.lnk
-+xen/arch/x86/boot/build32.*.lds
- xen/arch/x86/efi.lds
- xen/arch/x86/efi/check.efi
- xen/arch/x86/efi/mkreloc
 diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index 8f5bbff0cc..ed8d55866d 100644
+index 42fd1721de..23e40769eb 100644
 --- a/xen/arch/x86/boot/Makefile
 +++ b/xen/arch/x86/boot/Makefile
-@@ -1,4 +1,4 @@
--obj-bin-y += head.o
-+obj-bin-y += head.o cbundle.o
+@@ -1,6 +1,6 @@
+-obj-bin-y += head.o cbundle.o reloc-trampoline64.o
++obj-bin-y += head.o cbundle.o reloc-trampoline64.o setup-pages64.o
  
- head-bin-objs := cmdline.o reloc.o
+-head-bin-objs := cmdline.o reloc.o reloc-trampoline.o
++head-bin-objs := cmdline.o reloc.o reloc-trampoline.o setup-pages.o
  
-@@ -9,7 +9,6 @@ targets   += $(head-bin-objs)
- head-bin-objs := $(addprefix $(obj)/,$(head-bin-objs))
- 
- $(obj)/head.o: AFLAGS-y += -Wa$(comma)-I$(obj)
--$(obj)/head.o: $(head-bin-objs:.o=.bin)
- 
- CFLAGS_x86_32 := $(subst -m64,-m32 -march=i686,$(XEN_TREEWIDE_CFLAGS))
- $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))
-@@ -24,10 +23,31 @@ $(head-bin-objs): XEN_CFLAGS := $(CFLAGS_x86_32) -fpic
- LDFLAGS_DIRECT-$(call ld-option,--warn-rwx-segments) := --no-warn-rwx-segments
- LDFLAGS_DIRECT += $(LDFLAGS_DIRECT-y)
- 
-+$(obj)/build32.final.lds: AFLAGS-y += -DFINAL
-+$(obj)/build32.other.lds $(obj)/build32.final.lds: $(src)/build32.lds.S
-+	$(call if_changed_dep,cpp_lds_S)
-+
- %.bin: %.lnk
- 	$(OBJCOPY) -j .text -O binary $< $@
- 
--%.lnk: %.o $(src)/build32.lds
--	$(LD) $(subst x86_64,i386,$(LDFLAGS_DIRECT)) -N -T $(filter %.lds,$^) -o $@ $<
-+$(obj)/cbundle.o: $(head-bin-objs) $(obj)/build32.other.lds $(obj)/build32.final.lds
-+## link all object files together
-+	$(LD) $(subst x86_64,i386,$(LDFLAGS_DIRECT)) -r -o $(obj)/cbundle.tmp.o $(head-bin-objs)
-+## link twice with 2 different layouts
-+	$(LD) $(subst x86_64,i386,$(LDFLAGS_DIRECT)) --orphan-handling=error -N -T $(obj)/build32.other.lds -o $@.1.o $(obj)/cbundle.tmp.o
-+	$(LD) $(subst x86_64,i386,$(LDFLAGS_DIRECT)) --orphan-handling=error -N -T $(obj)/build32.final.lds -Map $(obj)/cbundle.map -o $@.2.o $(obj)/cbundle.tmp.o
-+## extract binaries from them
-+	$(OBJCOPY) -j .text -O binary $@.1.o $@.1.bin
-+	$(OBJCOPY) -j .text -O binary $@.2.o $@.2.bin
-+## generate final assembly file combining and checking above binaries
-+	$(PYTHON) $(srctree)/tools/make_output \
-+		--script $(obj)/build32.final.lds \
-+		--bin1 $@.1.bin --bin2 $@.2.bin \
-+		--map $(obj)/cbundle.map --exports cmdline_parse_early,reloc \
-+		--section-header '.section .init.text, "ax", @progbits' \
-+		--output $(obj)/cbundle.s
-+	$(CC) -c $(obj)/cbundle.s -o $@.tmp
-+	rm -f $(obj)/cbundle.tmp.o $@.1.o $@.2.o $@.1.bin $@.2.bin $(obj)/cbundle.map $(obj)/cbundle.s $@
-+	mv $@.tmp $@
- 
- clean-files := *.lnk *.bin
-diff --git a/xen/arch/x86/boot/build32.lds b/xen/arch/x86/boot/build32.lds.S
-similarity index 62%
-rename from xen/arch/x86/boot/build32.lds
-rename to xen/arch/x86/boot/build32.lds.S
-index 56edaa727b..87d2a589b5 100644
---- a/xen/arch/x86/boot/build32.lds
+ nocov-y   += $(head-bin-objs)
+ noubsan-y += $(head-bin-objs)
+@@ -43,7 +43,7 @@ $(obj)/cbundle.o: $(head-bin-objs) $(obj)/build32.other.lds $(obj)/build32.final
+ 	$(PYTHON) $(srctree)/tools/make_output \
+ 		--script $(obj)/build32.final.lds \
+ 		--bin1 $@.1.bin --bin2 $@.2.bin \
+-		--map $(obj)/cbundle.map --exports cmdline_parse_early,reloc,reloc_trampoline32 \
++		--map $(obj)/cbundle.map --exports cmdline_parse_early,reloc,reloc_trampoline32,setup_pages32 \
+ 		--section-header '.section .init.text, "ax", @progbits' \
+ 		--output $(obj)/cbundle.s
+ 	$(CC) -c $(obj)/cbundle.s -o $@.tmp
+diff --git a/xen/arch/x86/boot/build32.lds.S b/xen/arch/x86/boot/build32.lds.S
+index 0b7341edeb..3796f9603b 100644
+--- a/xen/arch/x86/boot/build32.lds.S
 +++ b/xen/arch/x86/boot/build32.lds.S
-@@ -15,22 +15,54 @@
-  * with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--ENTRY(_start)
-+#undef ENTRY
-+
-+#ifdef FINAL
-+# define GAP 0
-+# define MULT 0
-+# define TEXT_START
-+#else
-+# define GAP 0x010200
-+# define MULT 1
-+# define TEXT_START 0x408020
-+#endif
-+# define DECLARE_IMPORT(name) name = . + (__LINE__ * MULT)
-+
-+ENTRY(dummy_start)
- 
- SECTIONS
- {
--  /* Merge code and data into one section. */
--  .text : {
-+  /* Merge code and read-only data into one section. */
-+  .text TEXT_START : {
-+        /* Silence linker warning, we are not going to use it */
-+        dummy_start = .;
-+
-+        /* Declare below any symbol name needed.
-+         * Each symbol should be on its own line.
-+         * It looks like a tedious work but we make sure the things we use.
-+         * Potentially they should be all variables. */
-+        DECLARE_IMPORT(__base_relocs_start);
-+        DECLARE_IMPORT(__base_relocs_end);
-+        . = . + GAP;
+@@ -47,6 +47,14 @@ SECTIONS
+         DECLARE_IMPORT(__trampoline_rel_stop);
+         DECLARE_IMPORT(__trampoline_seg_start);
+         DECLARE_IMPORT(__trampoline_seg_stop);
++        DECLARE_IMPORT(l2_xenmap);
++        DECLARE_IMPORT(l2_directmap);
++        DECLARE_IMPORT(l2_bootmap);
++        DECLARE_IMPORT(l3_bootmap);
++        DECLARE_IMPORT(_start);
++        DECLARE_IMPORT(_end);
++        DECLARE_IMPORT(xen_phys_start);
++        //DECLARE_IMPORT();
+         . = . + GAP;
          *(.text)
          *(.text.*)
--        *(.data)
--        *(.data.*)
-         *(.rodata)
-         *(.rodata.*)
-+  }
-+
-+  /* Writeable data sections. Check empty.
-+   * We collapse all into code section and we don't want it to be writeable. */
-+  .data : {
-+        *(.data)
-+        *(.data.*)
-         *(.bss)
-         *(.bss.*)
-   }
--
-+  /DISCARD/ : {
-+       *(.comment)
-+       *(.comment.*)
-+       *(.note.*)
-+  }
-   /* Dynamic linkage sections.  Collected simply so we can check they're empty. */
-   .got : {
-         *(.got)
-@@ -49,6 +81,7 @@ SECTIONS
-   }
-   .rel : {
-         *(.rel.*)
-+        *(.data.rel.*)
-   }
- }
- 
-@@ -64,3 +97,4 @@ ASSERT(SIZEOF(.igot.plt) == 0,    ".igot.plt non-empty")
- ASSERT(SIZEOF(.iplt) == 0,        ".iplt non-empty")
- ASSERT(SIZEOF(.plt) == 0,         ".plt non-empty")
- ASSERT(SIZEOF(.rel) == 0,         "leftover relocations")
-+ASSERT(SIZEOF(.data) == 0,        "we don't want data")
-diff --git a/xen/arch/x86/boot/cmdline.c b/xen/arch/x86/boot/cmdline.c
-index fc9241ede9..48062b21a0 100644
---- a/xen/arch/x86/boot/cmdline.c
-+++ b/xen/arch/x86/boot/cmdline.c
-@@ -23,13 +23,6 @@
-  *   - %eax      = &cmdline,
-  *   - %edx      = &early_boot_opts.
-  */
--asm (
--    "    .text                         \n"
--    "    .globl _start                 \n"
--    "_start:                           \n"
--    "    jmp  cmdline_parse_early      \n"
--    );
--
- #include <xen/compiler.h>
- #include <xen/kconfig.h>
- #include <xen/macros.h>
 diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 12bbb97f33..791a1fee80 100644
+index 8e35f2a791..5ae0c2009e 100644
 --- a/xen/arch/x86/boot/head.S
 +++ b/xen/arch/x86/boot/head.S
-@@ -870,18 +870,6 @@ trampoline_setup:
-         /* Jump into the relocated trampoline. */
-         lret
+@@ -763,48 +763,7 @@ trampoline_setup:
+         test    $(1 << L2_PAGETABLE_SHIFT) - 1, %eax
+         jnz     .Lnot_aligned
  
+-        /* Map Xen into the higher mappings using 2M superpages. */
+-        lea     _PAGE_PSE + PAGE_HYPERVISOR_RWX + sym_esi(_start), %eax
+-        mov     $sym_offs(_start),   %ecx   /* %eax = PTE to write ^      */
+-        mov     $sym_offs(_end - 1), %edx
+-        shr     $L2_PAGETABLE_SHIFT, %ecx   /* %ecx = First slot to write */
+-        shr     $L2_PAGETABLE_SHIFT, %edx   /* %edx = Final slot to write */
+-
+-1:      mov     %eax, sym_offs(l2_xenmap)(%esi, %ecx, 8)
+-        add     $1, %ecx
+-        add     $1 << L2_PAGETABLE_SHIFT, %eax
+-
+-        cmp     %edx, %ecx
+-        jbe     1b
+-
 -        /*
--         * cmdline and reloc are written in C, and linked to be 32bit PIC with
--         * entrypoints at 0 and using the fastcall convention.
+-         * Map Xen into the directmap (needed for early-boot pagetable
+-         * handling/walking), and identity map Xen into bootmap (needed for
+-         * the transition into long mode), using 2M superpages.
 -         */
--        ALIGN
--cmdline_parse_early:
--        .incbin "cmdline.bin"
+-        lea     sym_esi(_start), %ecx
+-        lea     -1 + sym_esi(_end), %edx
+-        lea     _PAGE_PSE + PAGE_HYPERVISOR_RWX(%ecx), %eax /* PTE to write. */
+-        shr     $L2_PAGETABLE_SHIFT, %ecx                   /* First slot to write. */
+-        shr     $L2_PAGETABLE_SHIFT, %edx                   /* Final slot to write. */
 -
--        ALIGN
--reloc:
--        .incbin "reloc.bin"
+-1:      mov     %eax, sym_offs(l2_bootmap)  (%esi, %ecx, 8)
+-        mov     %eax, sym_offs(l2_directmap)(%esi, %ecx, 8)
+-        add     $1, %ecx
+-        add     $1 << L2_PAGETABLE_SHIFT, %eax
 -
- ENTRY(trampoline_start)
- #include "trampoline.S"
- ENTRY(trampoline_end)
-diff --git a/xen/arch/x86/boot/reloc.c b/xen/arch/x86/boot/reloc.c
-index de8487483a..6652f9bde9 100644
---- a/xen/arch/x86/boot/reloc.c
-+++ b/xen/arch/x86/boot/reloc.c
-@@ -19,13 +19,6 @@
-  *   - %ecx       = TOPMOST_LOW_MEMORY_STACK_ADDRESS.
-  *   - 0x04(%esp) = BOOT_VIDEO_INFO_ADDRESS.
-  */
--asm (
--    "    .text                         \n"
--    "    .globl _start                 \n"
--    "_start:                           \n"
--    "    jmp  reloc                    \n"
--    );
+-        cmp     %edx, %ecx
+-        jbe     1b
 -
- #include <xen/compiler.h>
- #include <xen/macros.h>
- #include <xen/types.h>
-diff --git a/xen/tools/make_output b/xen/tools/make_output
-new file mode 100755
-index 0000000000..0644a4bf12
+-        /* Map 4x l2_bootmap[] into l3_bootmap[0...3] */
+-        lea     __PAGE_HYPERVISOR + sym_esi(l2_bootmap), %eax
+-        mov     %eax, 0  + sym_esi(l3_bootmap)
+-        add     $PAGE_SIZE, %eax
+-        mov     %eax, 8  + sym_esi(l3_bootmap)
+-        add     $PAGE_SIZE, %eax
+-        mov     %eax, 16 + sym_esi(l3_bootmap)
+-        add     $PAGE_SIZE, %eax
+-        mov     %eax, 24 + sym_esi(l3_bootmap)
++        call    setup_pages32
+ 
+         /* Map l1_bootmap[] into l2_bootmap[0]. */
+         lea     __PAGE_HYPERVISOR + sym_esi(l1_bootmap), %eax
+diff --git a/xen/arch/x86/boot/setup-pages.c b/xen/arch/x86/boot/setup-pages.c
+new file mode 100644
+index 0000000000..0961282a01
 --- /dev/null
-+++ b/xen/tools/make_output
-@@ -0,0 +1,177 @@
-+#!/usr/bin/env python3
++++ b/xen/arch/x86/boot/setup-pages.c
+@@ -0,0 +1,105 @@
++#include <xen/stdint.h>
++#include <xen/compiler.h>
++#include <xen/config.h>
++#ifndef __i386__
++#include <xen/mm.h>
++#endif
 +
-+import argparse
-+import re
-+import struct
-+import sys
++#if defined(__i386__)
 +
-+parser = argparse.ArgumentParser(description='Generate assembly file to merge into other code.')
-+parser.add_argument('--script', dest='script',
-+                    required=True,
-+                    help='Linker script for extracting symbols')
-+parser.add_argument('--bin1', dest='bin1',
-+                    required=True,
-+                    help='First binary')
-+parser.add_argument('--bin2', dest='bin2',
-+                    required=True,
-+                    help='Second binary')
-+parser.add_argument('--output', dest='output',
-+                    help='Output file')
-+parser.add_argument('--map', dest='mapfile',
-+                    help='Map file to read for symbols to export')
-+parser.add_argument('--exports', dest='exports',
-+                    help='Symbols to export')
-+parser.add_argument('--section-header', dest='section_header',
-+                    default='.text',
-+                    help='Section header declaration')
-+args = parser.parse_args()
++#pragma GCC visibility push(hidden)
++extern char _start[], _end[];
++extern uint64_t l2_xenmap[512], l3_bootmap[512], l2_directmap[512], l2_bootmap[512];
++extern unsigned long xen_phys_start;
++#pragma GCC visibility pop
 +
-+gap = 0x010200
-+text_diff = 0x408020
++#define _PAGE_PRESENT 0x001
++#define _PAGE_RW 0x002
++#define _PAGE_ACCESSED 0x020
++#define _PAGE_DIRTY 0x040
++#define _PAGE_PSE 0x080
++#define _PAGE_GLOBAL 0x100
 +
-+# Parse linker script for external symbols to use.
-+symbol_re = re.compile(r'\s+(\S+)\s*=\s*\.\s*\+\s*\((\d+)\s*\*\s*0\s*\)\s*;')
-+symbols = {}
-+lines = {}
-+for line in open(args.script):
-+    m = symbol_re.match(line)
-+    if not m:
-+        continue
-+    l = int(m.group(2))
-+    if l == 0:
-+        raise Exception(f"Invalid line number found:\n\t{line}")
-+    if l in symbols:
-+        raise Exception(f"Symbol with this line already present:\n\t{line}")
-+    symbols[l] = m.group(1)
-+    lines[m.group(1)] = l
++#define PAGE_HYPERVISOR       PAGE_HYPERVISOR_RW
++#define PAGE_HYPERVISOR_RW    (__PAGE_HYPERVISOR_RW | _PAGE_GLOBAL)
++#define __PAGE_HYPERVISOR_RW  (__PAGE_HYPERVISOR_RO | _PAGE_DIRTY | _PAGE_RW)
++// TODO
++#define _PAGE_NX 0
++#define __PAGE_HYPERVISOR_RO  (_PAGE_PRESENT | _PAGE_ACCESSED | _PAGE_NX)
++#define PAGE_HYPERVISOR_RWX   (__PAGE_HYPERVISOR | _PAGE_GLOBAL)
++#define __PAGE_HYPERVISOR     (__PAGE_HYPERVISOR_RX | _PAGE_DIRTY | _PAGE_RW)
++#define __PAGE_HYPERVISOR_RX  (_PAGE_PRESENT | _PAGE_ACCESSED)
 +
-+exports = []
-+if args.exports is not None:
-+    exports = dict([(name, None) for name in args.exports.split(',')])
++#define L2_PAGETABLE_SHIFT 21
++#define L2_PAGETABLE_ENTRIES 512
++#define PAGE_SIZE 4096
++#define l2_table_offset(a) (((a) >> L2_PAGETABLE_SHIFT) & (L2_PAGETABLE_ENTRIES - 1))
++#define l2e_from_paddr(a,f) ((a) | put_pte_flags(f))
++#define l3e_from_paddr(a,f) ((a) | put_pte_flags(f))
++#define l2e_add_flags(x, flags)    (x |= put_pte_flags(flags))
++typedef uint64_t l2_pgentry_t;
++static inline int64_t put_pte_flags(unsigned int x)
++{
++    return (((int64_t)x & ~0xfff) << 40) | (x & 0xfff);
++}
 +
-+# Parse mapfile, look for ther symbols we want to export.
-+if args.mapfile is not None:
-+    symbol_re = re.compile(r'\s{15,}0x([0-9a-f]+)\s+(\S+)\n')
-+    for line in open(args.mapfile):
-+        m = symbol_re.match(line)
-+        if not m or m.group(2) not in exports:
-+            continue
-+        addr = int(m.group(1), 16)
-+        exports[m.group(2)] = addr
-+for (name, addr) in exports.items():
-+    if addr is None:
-+        raise Exception(f"Required export symbols {name} not found")
++void setup_pages32(void)
++#elif defined (__x86_64__)
++void setup_pages64(void)
++#else
++#error Unknow architecture
++#endif
++{
++    unsigned int i;
 +
-+file1 = open(args.bin1, 'rb')
-+file2 = open(args.bin2, 'rb')
-+size1 = file1.seek(0, 2)
-+size2 = file2.seek(0, 2)
-+if size1 > size2:
-+    file1, file2 = file2, file1
-+    size1, size2 = size2, size1
-+if size2 != size1 + gap:
-+    raise Exception('File sizes do not match')
++    /*
++     * Map Xen into the higher mappings, using 2M superpages.
++     *
++     * NB: We are currently in physical mode, so a RIP-relative relocation
++     * against _start/_end result in our arbitrary placement by the bootloader
++     * in memory, rather than the intended high mappings position.  Subtract
++     * xen_phys_start to get the appropriate slots in l2_xenmap[].
++     */
++    for ( i =  l2_table_offset((unsigned long)_start   - xen_phys_start);
++          i <= l2_table_offset((unsigned long)_end - 1 - xen_phys_start); ++i )
++        l2_xenmap[i] =
++            l2e_from_paddr(xen_phys_start + (i << L2_PAGETABLE_SHIFT),
++                           PAGE_HYPERVISOR_RWX | _PAGE_PSE);
 +
-+file1.seek(0, 0)
-+data1 = file1.read(size1)
-+file2.seek(gap, 0)
-+data2 = file2.read(size1)
++    /* Check that there is at least 4G of mapping space in l2_*map[] */
++#ifndef __i386__
++    BUILD_BUG_ON((sizeof(l2_bootmap)   / L2_PAGETABLE_ENTRIES) < 4);
++    BUILD_BUG_ON((sizeof(l2_directmap) / L2_PAGETABLE_ENTRIES) < 4);
++#endif
 +
-+max_line = max(symbols.keys())
++    /* Initialize L3 boot-map page directory entries. */
++    for ( i = 0; i < 4; ++i )
++        l3_bootmap[i] = l3e_from_paddr((unsigned long)l2_bootmap + i * PAGE_SIZE,
++                                       __PAGE_HYPERVISOR);
++    /*
++     * Map Xen into the directmap (needed for early-boot pagetable
++     * handling/walking), and identity map Xen into bootmap (needed for the
++     * transition from the EFI pagetables to Xen), using 2M superpages.
++     *
++     * NB: We are currently in physical mode, so a RIP-relative relocation
++     * against _start/_end gets their real position in memory, which are the
++     * appropriate l2 slots to map.
++     */
++#define l2_4G_offset(a)                                                 \
++    (((a) >> L2_PAGETABLE_SHIFT) & (4 * L2_PAGETABLE_ENTRIES - 1))
 +
-+i = 0
-+references = {}
-+internals = 0
-+while i <= size1 - 4:
-+    n1 = struct.unpack('<I', data1[i:i+4])[0]
-+    n2 = struct.unpack('<I', data2[i:i+4])[0]
-+    i += 1
-+    # The two numbers are the same, no problems
-+    if n1 == n2:
-+        continue
-+    # Try to understand why they are different
-+    diff = n1 - n2
-+    if diff == -gap: # this is an internal relocation
-+        pos = i - 1
-+        print(f"Internal relocation found at position {pos:#x} "
-+              f"n1={n1:#x} n2={n2:#x} diff={diff:#x}", file=sys.stderr)
-+        i += 3
-+        internals += 1
-+        if internals >= 10:
-+            break
-+        continue
-+    # This is a relative relocation to a symbol, accepted, code/data is
-+    # relocatable.
-+    if diff < gap and diff >= gap - max_line:
-+        n = gap - diff
-+        symbol = symbols.get(n)
-+        # check we have a symbol
-+        if symbol is None:
-+            raise Exception(f"Cannot find symbol for line {n}")
-+        pos = i - 1
-+        print(f'Position {pos:#x} {n} {symbol}', file=sys.stderr)
-+        i += 3
-+        references[pos] = symbol
-+        continue
-+    # First byte is the same, move to next byte
-+    if diff & 0xff == 0 and i <= size1 - 4:
-+       continue
-+    # Probably a type of relocation we don't want or support
-+    pos = i - 1
-+    suggestion = ''
-+    symbol = symbols.get(-diff - text_diff)
-+    if symbol is not None:
-+        suggestion = f" Maybe {symbol} is not defined as hidden?"
-+    raise Exception(f"Unexpected difference found at {i:#x} "
-+                    f"n1={n1:#x} n2={n2:#x} diff={diff:#x}.{suggestion}")
-+if internals != 0:
-+    raise Exception("Previous relocations found")
++    for ( i  = l2_4G_offset((unsigned long)_start);
++          i <= l2_4G_offset((unsigned long)_end - 1); ++i )
++    {
++        l2_pgentry_t pte = l2e_from_paddr(i << L2_PAGETABLE_SHIFT,
++                                          __PAGE_HYPERVISOR | _PAGE_PSE);
 +
-+def line_bytes(buf, out):
-+    '''Output an assembly line with all bytes in "buf"'''
-+    print("\t.byte " + ','.join([str(n) for n in buf]), file=out)
++        l2_bootmap[i] = pte;
 +
-+def part(start, end, out):
-+    '''Output bytes of "data" from "start" to "end"'''
-+    while start < end:
-+        e = min(start + 16, end)
-+        line_bytes(data1[start:e], out)
-+        start = e
++        /* Bootmap RWX/Non-global.  Directmap RW/Global. */
++        l2e_add_flags(pte, PAGE_HYPERVISOR);
 +
-+def reference(pos, out):
-+    name = references[pos]
-+    n = struct.unpack('<I', data1[pos:pos+4])[0]
-+    sign = '+'
-+    if n >= (1 << 31):
-+        n -= (1 << 32)
-+    n += pos
-+    if n < 0:
-+        n = -n
-+        sign = '-'
-+    print(f"\t.hidden {name}\n\t.long {name} {sign} {n:#x} - .", file=out)
++        l2_directmap[i] = pte;
++    }
++#undef l2_4G_offset
++}
+diff --git a/xen/arch/x86/boot/setup-pages64.c b/xen/arch/x86/boot/setup-pages64.c
+new file mode 120000
+index 0000000000..9a5cf52290
+--- /dev/null
++++ b/xen/arch/x86/boot/setup-pages64.c
+@@ -0,0 +1 @@
++setup-pages.c
+\ No newline at end of file
+diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
+index 87a7f8abcf..4291af0b3d 100644
+--- a/xen/arch/x86/efi/efi-boot.h
++++ b/xen/arch/x86/efi/efi-boot.h
+@@ -615,9 +615,10 @@ static void __init efi_arch_edid(EFI_HANDLE gop_handle)
+ #endif
+ }
+ 
++void setup_pages64(void);
 +
-+def output(out):
-+    prev = 0
-+    exports_by_addr = {}
-+    for (sym, addr) in exports.items():
-+        exports_by_addr.setdefault(addr, []).append(sym)
-+    positions = list(references.keys())
-+    positions += list(exports_by_addr.keys())
-+    for pos in sorted(positions):
-+        part(prev, pos, out)
-+        prev = pos
-+        if pos in references:
-+            reference(pos, out)
-+            prev = pos + 4
-+        if pos in exports_by_addr:
-+            for sym in exports_by_addr[pos]:
-+                print(f"\t.global {sym}\n\t.hidden {sym}\n{sym}:", file=out)
-+    part(prev, size1, out)
-+
-+out = sys.stdout
-+if args.output is not None:
-+    out = open(args.output, 'w')
-+print(f'\t{args.section_header}', file=out)
-+output(out)
-+print('\n\t.section\t.note.GNU-stack,"",@progbits', file=out)
-+out.flush()
+ static void __init efi_arch_memory_setup(void)
+ {
+-    unsigned int i;
+     EFI_STATUS status;
+ 
+     /* Allocate space for trampoline (in first Mb). */
+@@ -641,54 +642,7 @@ static void __init efi_arch_memory_setup(void)
+     if ( !efi_enabled(EFI_LOADER) )
+         return;
+ 
+-    /*
+-     * Map Xen into the higher mappings, using 2M superpages.
+-     *
+-     * NB: We are currently in physical mode, so a RIP-relative relocation
+-     * against _start/_end result in our arbitrary placement by the bootloader
+-     * in memory, rather than the intended high mappings position.  Subtract
+-     * xen_phys_start to get the appropriate slots in l2_xenmap[].
+-     */
+-    for ( i =  l2_table_offset((UINTN)_start   - xen_phys_start);
+-          i <= l2_table_offset((UINTN)_end - 1 - xen_phys_start); ++i )
+-        l2_xenmap[i] =
+-            l2e_from_paddr(xen_phys_start + (i << L2_PAGETABLE_SHIFT),
+-                           PAGE_HYPERVISOR_RWX | _PAGE_PSE);
+-
+-    /* Check that there is at least 4G of mapping space in l2_*map[] */
+-    BUILD_BUG_ON((sizeof(l2_bootmap)   / L2_PAGETABLE_ENTRIES) < 4);
+-    BUILD_BUG_ON((sizeof(l2_directmap) / L2_PAGETABLE_ENTRIES) < 4);
+-
+-    /* Initialize L3 boot-map page directory entries. */
+-    for ( i = 0; i < 4; ++i )
+-        l3_bootmap[i] = l3e_from_paddr((UINTN)l2_bootmap + i * PAGE_SIZE,
+-                                       __PAGE_HYPERVISOR);
+-    /*
+-     * Map Xen into the directmap (needed for early-boot pagetable
+-     * handling/walking), and identity map Xen into bootmap (needed for the
+-     * transition from the EFI pagetables to Xen), using 2M superpages.
+-     *
+-     * NB: We are currently in physical mode, so a RIP-relative relocation
+-     * against _start/_end gets their real position in memory, which are the
+-     * appropriate l2 slots to map.
+-     */
+-#define l2_4G_offset(a)                                                 \
+-    (((a) >> L2_PAGETABLE_SHIFT) & (4 * L2_PAGETABLE_ENTRIES - 1))
+-
+-    for ( i  = l2_4G_offset((UINTN)_start);
+-          i <= l2_4G_offset((UINTN)_end - 1); ++i )
+-    {
+-        l2_pgentry_t pte = l2e_from_paddr(i << L2_PAGETABLE_SHIFT,
+-                                          __PAGE_HYPERVISOR | _PAGE_PSE);
+-
+-        l2_bootmap[i] = pte;
+-
+-        /* Bootmap RWX/Non-global.  Directmap RW/Global. */
+-        l2e_add_flags(pte, PAGE_HYPERVISOR);
+-
+-        l2_directmap[i] = pte;
+-    }
+-#undef l2_4G_offset
++    setup_pages64();
+ }
+ 
+ static void __init efi_arch_handle_module(const struct file *file,
 -- 
 2.46.0
 
