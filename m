@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6383DCE7AA0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A89CE7AA1
 	for <xen-devel@archiver.kernel.org>; Thu,  5 Sep 2024 22:08:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.791413.1201271 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.791410.1201247 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1smKeL-00018Q-Gm; Thu, 05 Sep 2024 22:08:21 +0000
+	id 1smKeJ-0000dM-RS; Thu, 05 Sep 2024 22:08:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 791413.1201271; Thu, 05 Sep 2024 22:08:21 +0000
+Received: by outflank-mailman (output) from mailman id 791410.1201247; Thu, 05 Sep 2024 22:08:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1smKeL-00017R-DT; Thu, 05 Sep 2024 22:08:21 +0000
-Received: by outflank-mailman (input) for mailman id 791413;
- Thu, 05 Sep 2024 22:08:20 +0000
+	id 1smKeJ-0000dF-NO; Thu, 05 Sep 2024 22:08:19 +0000
+Received: by outflank-mailman (input) for mailman id 791410;
+ Thu, 05 Sep 2024 22:08:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RJQt=QD=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1smKeK-0000d4-Bb
- for xen-devel@lists.xenproject.org; Thu, 05 Sep 2024 22:08:20 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
+ id 1smKeI-0000d4-Mr
+ for xen-devel@lists.xenproject.org; Thu, 05 Sep 2024 22:08:18 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5b4cc098-6bd3-11ef-99a1-01e77a169b0f;
- Fri, 06 Sep 2024 00:08:18 +0200 (CEST)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5356aa9a0afso2295014e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Sep 2024 15:08:18 -0700 (PDT)
+ id 5a154f2f-6bd3-11ef-99a1-01e77a169b0f;
+ Fri, 06 Sep 2024 00:08:16 +0200 (CEST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a8a7596b7dfso185583866b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Sep 2024 15:08:16 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8a6236d020sm187525166b.127.2024.09.05.15.08.16
+ a640c23a62f3a-a8a6236d020sm187525166b.127.2024.09.05.15.08.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Sep 2024 15:08:16 -0700 (PDT)
+ Thu, 05 Sep 2024 15:08:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5b4cc098-6bd3-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: 5a154f2f-6bd3-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725574098; x=1726178898; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nATHuqwrSOYw1vLuBUTAd5OQXfMll/9QK99fmcLPJNA=;
-        b=lsX2dNvrsrKnrM/Tmip1JgDLzD9WxBi/XqnbDx7pwr7cEZ9HsLbnxhDSPaJdBnzsLf
-         h0C0abTPUQZpndsDvNhelL/Sx0rncE/4tWZlbh2thzjw47VJJSBnPMAxOyHKOqM/38dY
-         2+DZ5GMErCHQodm81NJYUweUt7elzoqWyO6bk=
+        d=citrix.com; s=google; t=1725574095; x=1726178895; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=otXSVioNKq6rGHgrCWyc/zHRfbwJU6jCuFNJKj5f9rw=;
+        b=FU68bp5V1W60BaWdqMuO/eCweEcUfuNW6KiiQSrlQlH75+0F4KAa8g2PBbFIEQ5Spe
+         yhKz9x2iP+kVInkc5+mkPetoa+wyOuG7hyAjzh+30l88pIRBb9AH/3tpatjPWrm7+5lO
+         qyO5YeIADBiMlklTWA3MJ1/vBR6F9fGh6NFfo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725574098; x=1726178898;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nATHuqwrSOYw1vLuBUTAd5OQXfMll/9QK99fmcLPJNA=;
-        b=G7h2affOJjqOm1Vu9gR5RU5pcYq7Yb4u++ZbfwpDLgdGJNT5TlsehFovcKPbElZKao
-         A7jvfFvZKEMd7rNJaHZVz+cenByt11WB83DXwpQEix3KUJrfYeHxXWRN/0A8B8yhbwBL
-         Y3qddl9Dox2XJKHVr2lsBXXynVm9iCClCMgLNO9AZFEXz3Mq4CBGB/1ojPcijDkarMGj
-         YRA6vwcnG1SucP+48NEW7gIIdDf2+dK3v5LZGfFiRqHPR5J39OLswVpj8kdk0uie5Nvg
-         HYXFDp/ar6MUmsVUhSnFaDjVgd3BPdIIVzLWJZCTA4hfRD/6c/uYbCyufFpwqlA/p2SW
-         ab+w==
-X-Gm-Message-State: AOJu0Yx7NKbWms5LzqIf1IKk/MehtpRGDeJpiyhnxwKVo60kuSyOlpSi
-	4KcreynVs6oyF/AXn6B1+ymurirmR35P+RbXqcLbYAHob9yrrtr3s/YCzwrvbbv5v7Mh1k2UXuy
-	p
-X-Google-Smtp-Source: AGHT+IFnfWNe/Vn5XlLsBfNZy4sLg4dUFfxNInf0Ty0gLt3Dwei01aCguBoPhfCvv5xzwGwSwfM6Xw==
-X-Received: by 2002:a05:6512:b1e:b0:529:b718:8d00 with SMTP id 2adb3069b0e04-536587a68c7mr361172e87.8.1725574097013;
-        Thu, 05 Sep 2024 15:08:17 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1725574096; x=1726178896;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=otXSVioNKq6rGHgrCWyc/zHRfbwJU6jCuFNJKj5f9rw=;
+        b=rCk2bn1HjTpTXHIBbULWCwkXOOmECRi+pVidr7EpnG7gIlF4i5KSbyFLHtNMUwmPU2
+         1jeUD+kjkZ1iMwLS+gpeTde9teHQdcW7awpn2ud+2yOpEzmGdFh9qzfzPzmdghAgsTxU
+         uuz1TX1mAK8wybRBl3VWBMUuU6fu+APxjNVH8p7B66I++36xY9RNvC9l3SadMvYk+Tpu
+         VIOvseWkYDtaCYZeqMzBjiWFOq/VdtJlC88wuvyO8jdhdOczLTBg78N0czFwFS3CJLSP
+         qwpRbS+e/Cdxr+muJuUx29l8Fnt2aDMTI8JokF60AwCfDQKxXqFr5o41un/F+Yg4GGwj
+         wS0Q==
+X-Gm-Message-State: AOJu0YwPqX8RFykxfugL8s4HXVjJzEXiXbXWzqHiG+EWyI+CRiQwnv/O
+	j/2VWerQtTD1UAj7XmBgO7EAturuSs0Ybbnm/pXun7mzux5oIe4rRxwWaeWL0QNionumICZWHxf
+	Q
+X-Google-Smtp-Source: AGHT+IFL2ESsvo5L5V0U/6Hhv1zYMm+pOumlblHzWpZQHyRJ2nqe3RkOrtCHBw5kp6PNwQ6MWlJ8kg==
+X-Received: by 2002:a17:907:3da4:b0:a8a:8175:231c with SMTP id a640c23a62f3a-a8a8605bc68mr66371766b.18.1725574095122;
+        Thu, 05 Sep 2024 15:08:15 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -85,104 +84,47 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 2/5] xen/build: Drop unused includes of xen/cache.h
-Date: Thu,  5 Sep 2024 23:08:03 +0100
-Message-Id: <20240905220806.141300-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/5] xen: Remove legacy __read_mostly/__ro_after_init definitions
+Date: Thu,  5 Sep 2024 23:08:01 +0100
+Message-Id: <20240905220806.141300-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240905220806.141300-1-andrew.cooper3@citrix.com>
-References: <20240905220806.141300-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-None of these are used, not even transitively.
+This continues prior work done for PPC and RISCV.  Patches 1-4 are some header
+rearranging for x86, with the convenient side effect of letting ARM fall out
+in the wash in patch 5.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
----
- xen/arch/x86/bzimage.c               | 1 -
- xen/arch/x86/dmi_scan.c              | 1 -
- xen/arch/x86/include/asm/processor.h | 1 -
- xen/common/decompress.h              | 1 -
- xen/include/acpi/platform/aclinux.h  | 1 -
- xen/include/xen/rcupdate.h           | 1 -
- 6 files changed, 6 deletions(-)
+I've done a reasonable amount of Gitlab CI work, but I cant claim to have
+tried every possible combination.  RANDCONFIG might find some transitive paths
+I haven't spotted.
 
-diff --git a/xen/arch/x86/bzimage.c b/xen/arch/x86/bzimage.c
-index ac4fd428be0e..66f648f311e4 100644
---- a/xen/arch/x86/bzimage.c
-+++ b/xen/arch/x86/bzimage.c
-@@ -1,4 +1,3 @@
--#include <xen/cache.h>
- #include <xen/errno.h>
- #include <xen/lib.h>
- #include <xen/mm.h>
-diff --git a/xen/arch/x86/dmi_scan.c b/xen/arch/x86/dmi_scan.c
-index 81f80c053a7a..811bf355fba6 100644
---- a/xen/arch/x86/dmi_scan.c
-+++ b/xen/arch/x86/dmi_scan.c
-@@ -3,7 +3,6 @@
- #include <xen/kernel.h>
- #include <xen/string.h>
- #include <xen/init.h>
--#include <xen/cache.h>
- #include <xen/acpi.h>
- #include <asm/io.h>
- #include <asm/system.h>
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index e71dbb8d3fbf..26e2fb13699a 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -5,7 +5,6 @@
- #define __ASM_X86_PROCESSOR_H
- 
- #ifndef __ASSEMBLY__
--#include <xen/cache.h>
- #include <xen/types.h>
- #include <xen/smp.h>
- #include <xen/percpu.h>
-diff --git a/xen/common/decompress.h b/xen/common/decompress.h
-index e8195b353a15..4683eb6c7ea1 100644
---- a/xen/common/decompress.h
-+++ b/xen/common/decompress.h
-@@ -1,6 +1,5 @@
- #ifdef __XEN__
- 
--#include <xen/cache.h>
- #include <xen/decompress.h>
- #include <xen/init.h>
- #include <xen/string.h>
-diff --git a/xen/include/acpi/platform/aclinux.h b/xen/include/acpi/platform/aclinux.h
-index f5e0a6108e0b..a66c2e6d1d8f 100644
---- a/xen/include/acpi/platform/aclinux.h
-+++ b/xen/include/acpi/platform/aclinux.h
-@@ -47,7 +47,6 @@
- #define ACPI_USE_SYSTEM_CLIBRARY
- #define ACPI_USE_DO_WHILE_0
- 
--#include <xen/cache.h>
- #include <xen/string.h>
- #include <xen/kernel.h>
- #include <xen/ctype.h>
-diff --git a/xen/include/xen/rcupdate.h b/xen/include/xen/rcupdate.h
-index 6f2587058edb..95f4ad81c4a8 100644
---- a/xen/include/xen/rcupdate.h
-+++ b/xen/include/xen/rcupdate.h
-@@ -31,7 +31,6 @@
- #ifndef __XEN_RCUPDATE_H
- #define __XEN_RCUPDATE_H
- 
--#include <xen/cache.h>
- #include <xen/compiler.h>
- #include <xen/spinlock.h>
- #include <xen/cpumask.h>
+Andrew Cooper (5):
+  x86/build: Rework includes in genapic/probe.c
+  xen/build: Drop unused includes of xen/cache.h
+  x86/build: Swap cache.h includes for xen/sections.h
+  x86/cache: Drop legacy __read_mostly/__ro_after_init definitions
+  ARM/cache: Drop legacy __read_mostly/__ro_after_init definitions
+
+ xen/arch/arm/include/asm/cache.h     |  3 ---
+ xen/arch/x86/acpi/cpu_idle.c         |  3 ++-
+ xen/arch/x86/bzimage.c               |  1 -
+ xen/arch/x86/cpu-policy.c            |  2 +-
+ xen/arch/x86/dmi_scan.c              |  1 -
+ xen/arch/x86/genapic/probe.c         | 34 +++++++++++++---------------
+ xen/arch/x86/guest/hypervisor.c      |  2 +-
+ xen/arch/x86/include/asm/cache.h     |  3 ---
+ xen/arch/x86/include/asm/genapic.h   |  2 ++
+ xen/arch/x86/include/asm/processor.h |  1 -
+ xen/common/decompress.h              |  1 -
+ xen/common/efi/runtime.c             |  3 ++-
+ xen/include/acpi/platform/aclinux.h  |  1 -
+ xen/include/xen/cache.h              |  5 ----
+ xen/include/xen/lib.h                |  1 +
+ xen/include/xen/rcupdate.h           |  1 -
+ 16 files changed, 25 insertions(+), 39 deletions(-)
+
 -- 
 2.39.2
 
