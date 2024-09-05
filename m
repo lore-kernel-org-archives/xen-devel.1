@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65209CE7AA4
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Sep 2024 22:08:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.791411.1201254 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CDECE7AA2
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Sep 2024 22:08:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.791415.1201297 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1smKeK-0000gf-65; Thu, 05 Sep 2024 22:08:20 +0000
+	id 1smKeO-0001rc-7n; Thu, 05 Sep 2024 22:08:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 791411.1201254; Thu, 05 Sep 2024 22:08:20 +0000
+Received: by outflank-mailman (output) from mailman id 791415.1201297; Thu, 05 Sep 2024 22:08:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1smKeJ-0000gQ-Uv; Thu, 05 Sep 2024 22:08:19 +0000
-Received: by outflank-mailman (input) for mailman id 791411;
- Thu, 05 Sep 2024 22:08:19 +0000
+	id 1smKeO-0001rI-3h; Thu, 05 Sep 2024 22:08:24 +0000
+Received: by outflank-mailman (input) for mailman id 791415;
+ Thu, 05 Sep 2024 22:08:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RJQt=QD=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1smKeJ-0000d4-Ba
- for xen-devel@lists.xenproject.org; Thu, 05 Sep 2024 22:08:19 +0000
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [2a00:1450:4864:20::22d])
+ id 1smKeM-0000d4-Si
+ for xen-devel@lists.xenproject.org; Thu, 05 Sep 2024 22:08:22 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5ab4e46e-6bd3-11ef-99a1-01e77a169b0f;
- Fri, 06 Sep 2024 00:08:17 +0200 (CEST)
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2f3eabcd293so14937871fa.2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Sep 2024 15:08:17 -0700 (PDT)
+ id 5cd8793f-6bd3-11ef-99a1-01e77a169b0f;
+ Fri, 06 Sep 2024 00:08:21 +0200 (CEST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a86910caf9cso444595666b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Sep 2024 15:08:21 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8a6236d020sm187525166b.127.2024.09.05.15.08.15
+ a640c23a62f3a-a8a6236d020sm187525166b.127.2024.09.05.15.08.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Sep 2024 15:08:15 -0700 (PDT)
+ Thu, 05 Sep 2024 15:08:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ab4e46e-6bd3-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: 5cd8793f-6bd3-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725574096; x=1726178896; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1725574100; x=1726178900; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Y6ymGvYQ1tOTkYL6CVhzUbxQEQbDorO1VPkvnskpwj8=;
-        b=S7kLyRuGtKeOb0Ldu5Ssw7HSPsilll0Urs9bxWw+ywFc+vw2yLcYOmGpmjxlADY8ig
-         537NYYk+HyS15apO7/dtXVRKlrlj12aUftqoJ6lCOsrZMrHvtzw5LR2y7sPsVayuGY2h
-         2SKBf4Wtu2KCZvwO8nNpMuWJFZy87sdilvKS0=
+        bh=Z07Rt8xWRkaIJIJwoIRUcGqCQ60a5xLz+kCbQYTjXpk=;
+        b=QjOvMi/MapPD9rSa3kSa3WKlqhWgsxR3urb426eviUioQt4bH8GFlaIVqH+UCsXbwQ
+         ZSIup7yxLQOKZHC52USXhuZbPhE5MvoX/E3ykNzCu/WMj492nmOx3T3cljQXxJVTstwD
+         wsh/LfH+bcXGFDLESMlmkkEqB3hj/I8dGNV20=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725574096; x=1726178896;
+        d=1e100.net; s=20230601; t=1725574100; x=1726178900;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Y6ymGvYQ1tOTkYL6CVhzUbxQEQbDorO1VPkvnskpwj8=;
-        b=Hcu679KlEJn3jfreZBH/T3FxV8ZlNcV7UfZ+W7REgUldFTFKhH3S+/O0gb5RKIXsaL
-         fAC/ik3kAYCmI2jVqy5O0tLWOA13EUY9QwSR72f77DQC/B8RYYL20u/OYRaNZm/BqM3X
-         C7Szf77nYqa7i0DkDRPdvamUzT0GX0m9hp/HjKZi8lL7o3kgNbKnp6jpXFOeJFCOQr+R
-         +MyVhFHi0DLD2/+qEsJ+vgz5i4dqI9yJFdT/HGLcKah9jVPT6n3wJ43GbDc0kpTbKa2K
-         2wESaTjXoRnBIc/MUIjWcMTWhuoK0sJet51lYksDX3Db68RM++aV7DeR9Xi3bPYecDlk
-         JMeg==
-X-Gm-Message-State: AOJu0YyWb2KncPeFSkVWA5vyALK+oid4N0l2qrrpEQJIqMWvDYPNR7uh
-	fdsJU59CGQbwFNvx0yrxV1ba3/5kJ9OL3ko3TmCRCVGUHuga0ZBlGxeSunCvm+0+TUwmGWF4P/4
-	3
-X-Google-Smtp-Source: AGHT+IFcw8pctbt8BaM90sGdB9UwIKjhHJN3ZJ7yUUhXSrdYDg21H+OK+5afl3TNwF7Eo8QS9EOWPA==
-X-Received: by 2002:a05:6512:3b2a:b0:533:d3e:16f5 with SMTP id 2adb3069b0e04-536587fc619mr166203e87.38.1725574095937;
-        Thu, 05 Sep 2024 15:08:15 -0700 (PDT)
+        bh=Z07Rt8xWRkaIJIJwoIRUcGqCQ60a5xLz+kCbQYTjXpk=;
+        b=W7MA7m/3lcdrquYInxQRxWMlFMDMzP5pVz/pxC7eiTqD35q0J6IbSx6LushMN16HiN
+         aroT60euvy4ffq390fZY3U5k9UFATi4aIRfjQQ2U2TrDzM87KWHgNuNrnZ0LxHrlgiMb
+         Ulf9iQGvXpjqKmZt3dMCRnff2MrlHFjrHwrUQ2Ijl2K0W9z/cwsFZYdPBPeUJyjxVyKx
+         sEWXl6os8vDP1/3SWtR+/Au5vi3OPccYkOn/9NkTem/aoEQybGmaqujObGAvq65qHzrK
+         dNVV7WhWq1km7zjOB1QA3ofGbepVbvmNsfoA/fMpnCMEAjFvT+x5U5KgH3oq95yCYJ1o
+         NrpQ==
+X-Gm-Message-State: AOJu0YxNhrfDfjQ5w/XqRxCULfR1e58ilmY0pFehRqqp+VxoEM2MoWvF
+	RTxIOHTJFloCNjmHHtszFnGd3x8uPHGC1TA9r+YZXDkAjgU//77PyAfytszLo9sSabikMhbIHFU
+	9
+X-Google-Smtp-Source: AGHT+IH6MdX3GEZWCMtR7PcKtqVSBubYjR64pQJl/gJmLkC0I/kvdKtRQpDLIR5qfacWmOWx6ArYNw==
+X-Received: by 2002:a17:907:987:b0:a77:ca3b:996c with SMTP id a640c23a62f3a-a8a8604476emr74497766b.16.1725574099903;
+        Thu, 05 Sep 2024 15:08:19 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -85,9 +85,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 1/5] x86/build: Rework includes in genapic/probe.c
-Date: Thu,  5 Sep 2024 23:08:02 +0100
-Message-Id: <20240905220806.141300-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/5] x86/cache: Drop legacy __read_mostly/__ro_after_init definitions
+Date: Thu,  5 Sep 2024 23:08:05 +0100
+Message-Id: <20240905220806.141300-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240905220806.141300-1-andrew.cooper3@citrix.com>
 References: <20240905220806.141300-1-andrew.cooper3@citrix.com>
@@ -95,13 +95,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-probe.c includes a large number of headers which are unused, and not from
-churn so far as I can see in history.  Strip back to a reasonable set.
+Lots of files were picking these up transitively, including lib.h
 
-One complication is that genapic.h has to include xen/cpumask.h because
-there's no way to forward declare a cpumask_t.
-
-Also strip trailing whitespace while adjusting the file.
+However, lib.h needs __read_mostly for printk_once() and this has the side
+effect of kicking the transitive can down the road.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -113,83 +110,50 @@ CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 CC: Bertrand Marquis <bertrand.marquis@arm.com>
 CC: Michal Orzel <michal.orzel@amd.com>
 ---
- xen/arch/x86/genapic/probe.c       | 34 ++++++++++++++----------------
- xen/arch/x86/include/asm/genapic.h |  2 ++
- 2 files changed, 18 insertions(+), 18 deletions(-)
+ xen/arch/x86/include/asm/cache.h | 3 ---
+ xen/include/xen/cache.h          | 2 +-
+ xen/include/xen/lib.h            | 1 +
+ 3 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/genapic/probe.c b/xen/arch/x86/genapic/probe.c
-index 10ceeae4d247..946c3d3ce364 100644
---- a/xen/arch/x86/genapic/probe.c
-+++ b/xen/arch/x86/genapic/probe.c
-@@ -1,25 +1,23 @@
--/* Copyright 2003 Andi Kleen, SuSE Labs. 
-- * Subject to the GNU Public License, v.2 
-- * 
-+/* Copyright 2003 Andi Kleen, SuSE Labs.
-+ * Subject to the GNU Public License, v.2
-+ *
-  * Generic x86 APIC driver probe layer.
-- */  
--#include <xen/cpumask.h>
--#include <xen/string.h>
--#include <xen/kernel.h>
--#include <xen/ctype.h>
-+ */
-+#include <xen/bug.h>
-+#include <xen/errno.h>
- #include <xen/init.h>
- #include <xen/param.h>
--#include <asm/cache.h>
--#include <asm/fixmap.h>
--#include <asm/mpspec.h>
--#include <asm/apicdef.h>
--#include <asm/mach-generic/mach_apic.h>
--#include <asm/setup.h>
+diff --git a/xen/arch/x86/include/asm/cache.h b/xen/arch/x86/include/asm/cache.h
+index 956c05493e23..f15d10dc7f2d 100644
+--- a/xen/arch/x86/include/asm/cache.h
++++ b/xen/arch/x86/include/asm/cache.h
+@@ -9,9 +9,6 @@
+ #define L1_CACHE_SHIFT	(CONFIG_X86_L1_CACHE_SHIFT)
+ #define L1_CACHE_BYTES	(1 << L1_CACHE_SHIFT)
+ 
+-/* TODO: Phase out the use of this via cache.h */
+-#define __read_mostly __section(".data.read_mostly")
+-
+ #ifndef __ASSEMBLY__
+ 
+ void cache_flush(const void *addr, unsigned int size);
+diff --git a/xen/include/xen/cache.h b/xen/include/xen/cache.h
+index a19942fd63ef..90816ba05b1a 100644
+--- a/xen/include/xen/cache.h
++++ b/xen/include/xen/cache.h
+@@ -15,7 +15,7 @@
+ #define __cacheline_aligned __attribute__((__aligned__(SMP_CACHE_BYTES)))
+ #endif
+ 
+-#if defined(CONFIG_ARM) || defined(CONFIG_X86)
++#if defined(CONFIG_ARM)
+ /* TODO: Phase out the use of this via cache.h */
+ #define __ro_after_init __section(".data.ro_after_init")
+ #endif
+diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
+index e884a02ee8ce..81b722ea3e80 100644
+--- a/xen/include/xen/lib.h
++++ b/xen/include/xen/lib.h
+@@ -10,6 +10,7 @@
+ #include <xen/types.h>
+ #include <xen/xmalloc.h>
+ #include <xen/string.h>
 +#include <xen/sections.h>
-+#include <xen/string.h>
-+#include <xen/types.h>
-+
-+#include <asm/apic.h>
-+#include <asm/genapic.h>
  
- struct genapic __ro_after_init genapic;
- 
- static const struct genapic *const __initconstrel apic_probe[] = {
--	&apic_bigsmp, 
-+	&apic_bigsmp,
- 	&apic_default,	/* must be last */
- 	NULL,
- };
-@@ -57,8 +55,8 @@ static int __init cf_check genapic_apic_force(const char *str)
- }
- custom_param("apic", genapic_apic_force);
- 
--void __init generic_apic_probe(void) 
--{ 
-+void __init generic_apic_probe(void)
-+{
- 	int i;
- 
- 	record_boot_APIC_mode();
-@@ -75,4 +73,4 @@ void __init generic_apic_probe(void)
- 	BUG_ON(!genapic.name);
- 
- 	printk(KERN_INFO "Using APIC driver %s\n", genapic.name);
--} 
-+}
-diff --git a/xen/arch/x86/include/asm/genapic.h b/xen/arch/x86/include/asm/genapic.h
-index 970df8ffe0a4..a694371c6d16 100644
---- a/xen/arch/x86/include/asm/genapic.h
-+++ b/xen/arch/x86/include/asm/genapic.h
-@@ -1,6 +1,8 @@
- #ifndef _ASM_GENAPIC_H
- #define _ASM_GENAPIC_H 1
- 
-+#include <xen/cpumask.h>
-+
- /*
-  * Generic APIC driver interface.
-  *
+ #define __ACCESS_ONCE(x) ({                             \
+             (void)(typeof(x))0; /* Scalar typecheck. */ \
 -- 
 2.39.2
 
