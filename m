@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 013FAE6FE4B
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Sep 2024 22:29:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.792055.1202095 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C07C7E6FE4B
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Sep 2024 23:35:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.792074.1202114 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1smhSK-0000eK-4H; Fri, 06 Sep 2024 22:29:28 +0000
+	id 1smiTZ-00047y-V2; Fri, 06 Sep 2024 23:34:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 792055.1202095; Fri, 06 Sep 2024 22:29:28 +0000
+Received: by outflank-mailman (output) from mailman id 792074.1202114; Fri, 06 Sep 2024 23:34:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1smhSK-0000eD-0G; Fri, 06 Sep 2024 22:29:28 +0000
-Received: by outflank-mailman (input) for mailman id 792055;
- Fri, 06 Sep 2024 22:29:26 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1smhSI-0000e3-8d; Fri, 06 Sep 2024 22:29:26 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1smhSI-0004K5-1g; Fri, 06 Sep 2024 22:29:26 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1smhSH-0004xb-La; Fri, 06 Sep 2024 22:29:25 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1smhSH-0000Uo-LA; Fri, 06 Sep 2024 22:29:25 +0000
+	id 1smiTZ-00047r-SM; Fri, 06 Sep 2024 23:34:49 +0000
+Received: by outflank-mailman (input) for mailman id 792074;
+ Fri, 06 Sep 2024 23:34:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Y4lz=QE=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1smiTY-0003ro-Ps
+ for xen-devel@lists.xenproject.org; Fri, 06 Sep 2024 23:34:48 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9988f503-6ca8-11ef-99a1-01e77a169b0f;
+ Sat, 07 Sep 2024 01:34:46 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2F4F05C57ED;
+ Fri,  6 Sep 2024 23:34:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0AEB4C4CEC4;
+ Fri,  6 Sep 2024 23:34:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,373 +43,247 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=9IPmgc82Yz+LmawXgRcb0IVsdTqF6utttepUviddzY8=; b=KJ4CaY7c19BO2FxqpNTg1GZxvi
-	ArmOna4RRhu0ygqSdBVJeU/jXmxZJIeOVT5kiLgp6L8apEx93Srfmlso3qhB6X5o/u1uQqlQ/RPEx
-	0S1HgCDwOB1vbWmZRUjZUxV9i+SWhecQVUfpracLNc8z3q/wAayu5QDbvgVQt94IGiHY=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-187515-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 9988f503-6ca8-11ef-99a1-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1725665685;
+	bh=0GL3+CoOuOKR5yj/Punk2gjyeTB85okMiTKV7Yc+swc=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=XW/lgVvW8w6nni7aVfVUZR1Am4M9sk7XGM4xpScuvaxQBgYQe9Kw7qXKXknFnloJC
+	 s0dfQsG5RO9LFmtBshYKaWG2hWA7z2yWiJ1nGy/Wfjb0gSFgLlSQRL4bjv6Evd3fPE
+	 PKAXuJWns8gNqOVjG33pYUnCWchG1T4pZ5zx3snmVIm4Z0D4Y4JSoLCZ+/qn0e6FF3
+	 +VXzELwWdu5ENUF/uOFDaEXCGjYxOj13yIXT8zhYm2wQDyvmWPbaDw2WSqhV9BjrUu
+	 r1q/84MkkIkwD3Ksy3fNYFDyCbUXVUIaVjTsfkJK3lcKxMulTaMxEOsbL1LBlhSxRj
+	 XsJwVLirytjhQ==
+Date: Fri, 6 Sep 2024 16:34:42 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Grygorii Strashko <grygorii_strashko@epam.com>, 
+    Peng Fan <peng.fan@oss.nxp.com>, "julien@xen.org" <julien@xen.org>, 
+    Artem Mygaiev <Artem_Mygaiev@epam.com>
+Subject: Re: Follow up discussion for: [RFC v2] Introduce SCI-mediator
+ feature
+In-Reply-To: <460ec8fb-bae0-4681-b774-20cb564fa9c4@epam.com>
+Message-ID: <alpine.DEB.2.22.394.2409061543500.53815@ubuntu-linux-20-04-desktop>
+References: <460ec8fb-bae0-4681-b774-20cb564fa9c4@epam.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Subject: [xen-unstable test] 187515: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable:build-i386-xsm:xen-build:fail:regression
-    xen-unstable:build-i386:xen-build:fail:regression
-    xen-unstable:test-amd64-amd64-qemuu-freebsd12-amd64:guest-start/freebsd.repeat:fail:heisenbug
-    xen-unstable:build-i386-libvirt:build-check(1):blocked:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-qcow2:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-qcow2:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt-vhd:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt-vhd:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-raw:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-raw:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=a2de7dc4d845738e734b10fce6550c89c6b1092c
-X-Osstest-Versions-That:
-    xen=6471badeeec92db1cb8155066551f7509cd82efd
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 06 Sep 2024 22:29:25 +0000
+Content-Type: text/plain; charset=US-ASCII
 
-flight 187515 xen-unstable real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/187515/
+On Mon, 2 Sep 2024, Oleksii Moisieiev wrote:
+> Greetings,
+> 
+> After some time we are back to the development of the SCI-Mediator 
+> feature presented as RFC few years earlier.
+> Link to the RFC v2: 
+> https://lore.kernel.org/all/cover.1644341635.git.oleksii_moisieiev@epam.com/
+> 
+> Last time feature discussion was stalled at the following point:
+> - Device-tree bindings should be changed to provide proper device-id for 
+> SCMI devices which is upstreamed in the Linux Kernel by now:
+> https://patchew.org/linux/20240105130404.301172-1-gatien.chevallier@foss.st.com/20240105130404.301172-2-gatien.chevallier@foss.st.com/
+> 
+> That's why we went back to the development of the SCMI-Mediator feature. 
+> Our current setup is Dom0less with Zephyr as Control domain and Linux as 
+> DomU.
 
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-i386-xsm                6 xen-build                fail REGR. vs. 187498
- build-i386                    6 xen-build                fail REGR. vs. 187498
-
-Tests which are failing intermittently (not blocking):
- test-amd64-amd64-qemuu-freebsd12-amd64 21 guest-start/freebsd.repeat fail pass in 187507
-
-Tests which did not succeed, but are not blocking:
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 187498
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 187498
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 187498
- test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 187498
- test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 187498
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 187498
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
- test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-qcow2    14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-qcow2    15 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-vhd 15 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-raw      14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-raw      15 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  a2de7dc4d845738e734b10fce6550c89c6b1092c
-baseline version:
- xen                  6471badeeec92db1cb8155066551f7509cd82efd
-
-Last test of basis   187498  2024-09-04 19:40:48 Z    2 days
-Testing same since   187507  2024-09-05 15:14:45 Z    1 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               fail    
- build-amd64-xtf                                              pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   fail    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           blocked 
- build-amd64-prev                                             pass    
- build-i386-prev                                              pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-xtf-amd64-amd64-1                                       pass    
- test-xtf-amd64-amd64-2                                       pass    
- test-xtf-amd64-amd64-3                                       pass    
- test-xtf-amd64-amd64-4                                       pass    
- test-xtf-amd64-amd64-5                                       pass    
- test-amd64-amd64-xl                                          pass    
- test-amd64-coresched-amd64-xl                                pass    
- test-arm64-arm64-xl                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
- test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-amd64-xl-pvhv2-amd                                pass    
- test-amd64-amd64-dom0pvh-xl-amd                              pass    
- test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
- test-amd64-amd64-qemuu-freebsd12-amd64                       fail    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-amd64-xl-qemut-win7-amd64                         fail    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-armhf-armhf-xl-arndale                                  pass    
- test-amd64-amd64-examine-bios                                pass    
- test-amd64-amd64-xl-credit1                                  pass    
- test-arm64-arm64-xl-credit1                                  pass    
- test-armhf-armhf-xl-credit1                                  pass    
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  pass    
- test-armhf-armhf-xl-credit2                                  pass    
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-amd64-examine                                     pass    
- test-arm64-arm64-examine                                     pass    
- test-armhf-armhf-examine                                     pass    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-amd64-xl-pvhv2-intel                              pass    
- test-amd64-amd64-dom0pvh-xl-intel                            pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-amd64-livepatch                                   pass    
- test-amd64-amd64-migrupgrade                                 pass    
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
- test-amd64-amd64-pair                                        pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-amd64-xl-pvshim                                   pass    
- test-amd64-amd64-pygrub                                      pass    
- test-amd64-amd64-libvirt-qcow2                               pass    
- test-amd64-amd64-xl-qcow2                                    pass    
- test-armhf-armhf-xl-qcow2                                    pass    
- test-amd64-amd64-libvirt-raw                                 pass    
- test-arm64-arm64-libvirt-raw                                 pass    
- test-amd64-amd64-xl-raw                                      pass    
- test-armhf-armhf-xl-raw                                      pass    
- test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-amd64-xl-shadow                                   pass    
- test-arm64-arm64-xl-thunderx                                 pass    
- test-amd64-amd64-examine-uefi                                pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
- test-armhf-armhf-libvirt-vhd                                 pass    
- test-amd64-amd64-xl-vhd                                      pass    
- test-arm64-arm64-xl-vhd                                      pass    
+Hi Oleksii, great to hear that the binding was finally merged and the
+work can continue!
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+> Hereby I want to start a discussion about the correct approach of adding 
+> scmi nodes to the partial device tree for domain.
+> 
+> Current device-tree configuration we have for Xen and DomU domain are 
+> the following:
+> 
+> 1) Xen device-tree overlay:
+> &{/} {
+>          #address-cells = <0x02>;
+>          #size-cells = <0x01>;
+> 
+>          sram@3ff00000 {
+>                  compatible = "mmio-sram";
+>                  reg = <0x00 0x3ff00000 0x10000>;
+>                  #address-cells = <0x01>;
+>                  #size-cells = <0x01>;
+>                  ranges = <0x00 0x00 0x3ff00000 0x10000>;
+>                  phandle = <0x03>;
+> 
+>                  scmi_shm_0: scmi_shm@0 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x00 0x1000>;
+>                  };
+>                  scmi_shm_1: scmi_shm@1 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x1000 0x1000>;
+>                  };
+>                  scmi_shm_2: scmi_shm@2 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x2000 0x1000>;
+>                  };
+>                  scmi_shm_3: scmi_shm@3 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x3000 0x1000>;
+>                  };
+>                  scmi_shm_4: scmi_shm@4 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x4000 0x1000>;
+>                  };
+>                  scmi_shm_5: scmi_shm@5 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x5000 0x1000>;
+>                  };
+>                  scmi_shm_6: scmi_shm@6 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x6000 0x1000>;
+>                  };
+>                  scmi_shm_7: scmi_shm@7 {
+>                          compatible = "arm,scmi-shmem";
+>                          reg = <0x7000 0x1000>;
+>                  };
+>          };
+> };
+> &{/} {
+>                  domU {
+>                          compatible = "xen,domain";
+>   			 ...
+>                          xen,arm_sci = "scmi-smc";
+>                  };
+> 
+> };
+> &{/firmware/} {
+>          scmi: scmi {
+>                  compatible = "arm,scmi-smc";
+>                  arm,smc-id = <0x82000002>;
+>                  #address-cells = <0x01>;
+>                  #size-cells = <0x00>;
+>                  #access-controller-cells = <1>;
+>                  shmem = <&scmi_shm_0>;
+> 
+>                  epam,secondary-agents = <
+>                  1 0x82000003 &scmi_shm_1
+>                  2 0x82000004 &scmi_shm_2
+>                  3 0x82000005 &scmi_shm_3
+>                  4 0x82000006 &scmi_shm_4
+>                  5 0x82000007 &scmi_shm_5
+>                  6 0x82000008 &scmi_shm_6
+>                  7 0x82000009 &scmi_shm_7
+>                  >;
+> 
+>                  scmi_reset: protocol@16 {
+>                          reg = <0x16>;
+>                          #reset-cells = <0x01>;
+>                  };
+> 
+>                  scmi_clock: protocol@14 {
+>                          reg = <0x14>;
+>                          #clock-cells = <0x01>;
+>                          phandle = <0x04>;
+>                  };
+>          };
+> };
+> 
+> &pcie1 {
+>          resets = <&scmi_reset 0>, <&scmi_reset 1>, <&pcie_rescal>;
+>          access-controllers = <&scmi 1>;
+> };
+> 
+> As can be seen from overlay Xen reading the following information:
+> 1) Shared memory configuration as a list of shared memory pages. They 
+> will not go to the Control domain device-tree.
+> 2) SCMI configuration for Agent-id 0, which is Xen itself. This agent is 
+> responsible to set the device permissions for acces-controller device
+> 3) epam,secondary-agents (name probably should be changed) is the list 
+> of objects and corresponding shmems and smc-id for agents. Please note 
+> that all agents will use smc-id 0x82000002
+> and Xen-Mediator will make a calculation and provide agent-specific 
+> smc-id for ARM-TF
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+If this is a Xen specific (or hypervisor specific) configuration, then
+it could be under /chosen for Xen together with the other dom0less
+configurations and the Xen command line. For instance if 0x82000003-9
+are arbitrary numbers chosen by Xen, then this is could be under
+/chosen.
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+If this is a generic property of the SCMI connection, then we need to
+make it standard and part of
+Documentation/devicetree/bindings/firmware/arm,scmi.yaml. Or maybe it
+could just be derived automatically at boot by Xen probing and querying
+on the Agent0 connection?
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+> 4) List of scmi protocols and access-controller id, where scmi is 
+> accss-controller device
+> 5) domU configuration has xen,arm_sci = "scmi-smc" to enable scmi support
+> 
+> - DomU Domain device-tree
+> 
+> /{
+> 	 scmi { 
+> 
+>                   scmi_reset: protocol@16 {
+>                        reg = <0x16>;
+>                        #reset-cells = <0x01>;
+>                   };
+>          };
+> 	passthrough {
+> 	
+>                  pciex: pcie@1000120000 {
+>                          compatible = "brcm,bcm2712-pcie";
+>                          ...
+>                          resets = <&scmi_reset 1>, &<scmi_reset 2>;
+>                          ...
+> 
+>                  };
+> 	}
+> };
+> 
+> Where scmi node (similar to GIC could be either empty node, which will 
+> be recreated by XEN). Hardcoded device-tree phandle as was done for GIC 
+> is not supported because for scmi-pinctrl protocol there are no static 
+> subnode configuration.
+> During domain creation Xen mediator code will create scmi node with 
+> existing phandle and create a complete domain device-tree. Xen will use 
+> original xen device-tree as a base to create scmi nodes. It can use it 
+> either directly in dom0less mode or tools can read Xen device from hypfs 
+> to create device tree entries for DomUs.
 
 
-Not pushing.
+Now we have a way to automatically generate partial DTBs from the host
+DTB in ImageBuilder using Lopper:
+https://gitlab.com/xen-project/imagebuilder/-/blob/master/README.md?ref_type=heads
 
-------------------------------------------------------------
-commit a2de7dc4d845738e734b10fce6550c89c6b1092c
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Wed Sep 4 16:09:28 2024 +0200
+The user only needs to specify the path of the device to assign and the
+rest is done automatically by the tools, e.g.:
 
-    x86: fix UP build with gcc14
-    
-    The complaint is:
-    
-    In file included from ././include/xen/config.h:17,
-                     from <command-line>:
-    arch/x86/smpboot.c: In function ‘link_thread_siblings.constprop’:
-    ./include/asm-generic/percpu.h:16:51: error: array subscript [0, 0] is outside array bounds of ‘long unsigned int[1]’ [-Werror=array-bounds=]
-       16 |     (*RELOC_HIDE(&per_cpu__##var, __per_cpu_offset[cpu]))
-    ./include/xen/compiler.h:140:29: note: in definition of macro ‘RELOC_HIDE’
-      140 |     (typeof(ptr)) (__ptr + (off)); })
-          |                             ^~~
-    arch/x86/smpboot.c:238:27: note: in expansion of macro ‘per_cpu’
-      238 |     cpumask_set_cpu(cpu2, per_cpu(cpu_sibling_mask, cpu1));
-          |                           ^~~~~~~
-    In file included from ./arch/x86/include/generated/asm/percpu.h:1,
-                     from ./include/xen/percpu.h:30,
-                     from ./arch/x86/include/asm/cpuid.h:9,
-                     from ./arch/x86/include/asm/cpufeature.h:11,
-                     from ./arch/x86/include/asm/system.h:6,
-                     from ./include/xen/list.h:11,
-                     from ./include/xen/mm.h:68,
-                     from arch/x86/smpboot.c:12:
-    ./include/asm-generic/percpu.h:12:22: note: while referencing ‘__per_cpu_offset’
-       12 | extern unsigned long __per_cpu_offset[NR_CPUS];
-          |                      ^~~~~~~~~~~~~~~~
-    
-    Which I consider bogus in the first place ("array subscript [0, 0]" vs a
-    1-element array). Yet taking the experience from 99f942f3d410 ("Arm64:
-    adjust __irq_to_desc() to fix build with gcc14") I guessed that
-    switching function parameters to unsigned int (which they should have
-    been anyway) might help. And voilà ...
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+DOMU_PASSTHROUGH_PATHS[0] = "/amba/sdhci@f1050000"
 
-commit 3117e58ce03a0aecd945abe99778407a176fe2f1
-Author: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-Date:   Wed Sep 4 16:08:37 2024 +0200
 
-    x86/tboot: add Intel dependency
-    
-    Make the Intel-specific Trusted Boot implementation dependant on general Intel CPU support.
-    
-    Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
+I think we should try to make it easy to generate the DomU partial
+device tree using automatic tools like ImageBuilder and Lopper but
+also make it possible for users to hand-write the partial DTB if they
+want to.
 
-commit c5be91eb81403195643e8de287c86fbd728ad6cb
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Wed Sep 4 16:07:41 2024 +0200
+Is the SCMI device tree node just as simple as this?
 
-    mktarball: only archive Xen
-    
-    As was basically decided already a while ago, remove - in the simplest
-    possible way - the archiving of both qemu-s and mini-os from tarball
-    generation.
-    
-    With this the subtree-force-update-all prereq isn't needed anymore in
-    the top level Makefile. That goal, including the respective ones
-    underneath tools/, then also are unreferenced and hence are being
-    dropped, too.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+      scmi { 
 
-commit b20e3fbc3ec91b4534e51f6f724c3826dac0bdf3
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Wed Sep 4 16:06:42 2024 +0200
+               scmi_reset: protocol@16 {
+                    reg = <0x16>;
+                    #reset-cells = <0x01>;
+               };
+      };
 
-    x86emul: introduce a struct cpu_policy * local in x86_emulate()
-    
-    While of little effect right here, future patches (AVX10, AMX,
-    KeyLocker) will benefit more significantly.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+If so, it could probably be generated by Xen. But then we have a problem
+with the phandle. Without a fixed phandle, it becomes difficult
+(impossible?) to write the partial device tree for passthrough devices.
 
-commit 3c93a0da6bc201ebeb8a08d6bd339c9982985fcc
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Wed Sep 4 16:06:21 2024 +0200
+Maybe we could have a fixed phandle for the "scmi_reset" node
+(SCMI_RESET_PHANDLE) and another fixed phandle for the "scmi_power" node
+(SCMI_POWER_PHANDLE)?
 
-    x86emul/test: rename "cp"
-    
-    In preparation of introducing a const struct cpu_policy * local in
-    x86_emulate(), rename that global variable to something more suitable:
-    "cp" is our commonly used name for function parameters or local
-    variables of type struct cpu_policy *, and the present name of the
-    global could hence have interfered already.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit d7c18b8720824d7efc39ffa7296751e1812865a9
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Wed Sep 4 16:05:03 2024 +0200
-
-    SUPPORT.md: split XSM from Flask
-    
-    XSM is a generic framework, which in particular is also used by SILO.
-    With this it can't really be experimental: Arm mandates SILO for having
-    a security supported configuration.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-(qemu changes not included)
 
