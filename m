@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C8A9ECE57E
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 12:03:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.794382.1203294 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA79ECE57A
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 12:04:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.794399.1203313 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snd6n-00016K-20; Mon, 09 Sep 2024 12:03:05 +0000
+	id 1snd7u-0002hi-PM; Mon, 09 Sep 2024 12:04:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 794382.1203294; Mon, 09 Sep 2024 12:03:05 +0000
+Received: by outflank-mailman (output) from mailman id 794399.1203313; Mon, 09 Sep 2024 12:04:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snd6m-00016D-Vf; Mon, 09 Sep 2024 12:03:04 +0000
-Received: by outflank-mailman (input) for mailman id 794382;
- Mon, 09 Sep 2024 12:03:03 +0000
+	id 1snd7u-0002hb-MU; Mon, 09 Sep 2024 12:04:14 +0000
+Received: by outflank-mailman (input) for mailman id 794399;
+ Mon, 09 Sep 2024 12:04:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=H/dp=QH=cloud.com=andrii.sultanov@srs-se1.protection.inumbo.net>)
- id 1snd6l-0000ce-Ha
- for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 12:03:03 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
+ <SRS0=dA/l=QH=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
+ id 1snd7t-0002hP-KU
+ for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 12:04:13 +0000
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [2607:f8b0:4864:20::c2f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 770a7cff-6ea3-11ef-a0b5-8be0dac302b0;
- Mon, 09 Sep 2024 14:03:02 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5c241feb80dso10152064a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 05:03:03 -0700 (PDT)
-Received: from EMEAENGAAD87503.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25d65742sm331603066b.216.2024.09.09.05.03.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 05:03:01 -0700 (PDT)
+ id a0433d23-6ea3-11ef-a0b5-8be0dac302b0;
+ Mon, 09 Sep 2024 14:04:12 +0200 (CEST)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5e1b72fc5f3so1251777eaf.2
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 05:04:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,153 +42,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 770a7cff-6ea3-11ef-a0b5-8be0dac302b0
+X-Inumbo-ID: a0433d23-6ea3-11ef-a0b5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1725883382; x=1726488182; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=V5YgYhePmve9+WOG0QJ+xJp2hifKt7rcNXrTDKjPMNw=;
-        b=MgGAIX6hUaiLb09g1jFQlzIg/AkeAECQhpvsoa0irwd2cJYvDMrEGj+ii/nun8A981
-         AO6erf6Vz2nLrs/8r5u0pJcVKxRYaea+X1LKQQO09Qbrv6icorWgAgRpjtikdF2t9Obj
-         vBURs3LbmnodxHAOtFQvNcdm7H8Q4n9KxqbSA=
+        d=cloud.com; s=cloud; t=1725883451; x=1726488251; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=VYcuSuyuhC3DJlmVd353NRJwcrxM6mqAWTcYk0iyJYE=;
+        b=KNXas4flIfN/Qk9QaDzOJR685X/Bxov5uayrvOAugNiFvhFyzw26rq22F0/V2/fpON
+         4Q3jlZ6uYyI+Mzuei7VC+EJkGaDEemPwO3JCNxNV7N23CDf8PJpvprG6VOh6IXV0geDW
+         /g/ezo05qHw9djPnfjUhPcmtv6/PRwL4zfpvA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725883382; x=1726488182;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=V5YgYhePmve9+WOG0QJ+xJp2hifKt7rcNXrTDKjPMNw=;
-        b=Gn8LeaC/zSxEi4WmnwQu1jMrU+RVseEeVKNjFxkasal0ONond6uPXUa98URhtxUBlo
-         ragqLJvV2IxCNOm1kBECQ0A6mI/zyQzvrOuZj4zmTp5AjXviA+O7eyAWoyb6rTCeoROs
-         XSiQ3Vv6Fsb7pkPcnWoaR6Xybi1oL4uP8sy3r/KeEPD/+lZBrgl/lUmB8mncRW6yEtXX
-         hzEOZUY+x2SHKM0uPCcd4yN+emJtl4UyQ9uP7A83d3iooqNbt7xqYp6sasYYaj5HDoaW
-         1POIyjxnuZqJOM+BHdhw8KcQZoTMzD/Sr2W04Pfdmt8nQ/OvcQrWP7uqeygTBnH+TuRv
-         yX0A==
-X-Gm-Message-State: AOJu0YwJr/3+eA+fmGqWhZunqb6lAiHmBc8ggwYPX5FF39DB4KlWbVL9
-	zm3V8PiI4JDOCipUxIgpUXiDjRBjG5lO+RK42SMNmZy4AIIn/ABOwSNyqJ+aRsPPRq8KQQ/Zu43
-	4
-X-Google-Smtp-Source: AGHT+IEhKat/dVQxAoOE6/dZlJtqBM9eMnI0VlNRo38sAf0RhyCh7F+7UXxIYtY5adE1nPVHc/monQ==
-X-Received: by 2002:a17:907:7ba3:b0:a8d:6372:2d38 with SMTP id a640c23a62f3a-a8d63722f43mr166834066b.18.1725883381675;
-        Mon, 09 Sep 2024 05:03:01 -0700 (PDT)
-From: Andrii Sultanov <andrii.sultanov@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrii Sultanov <andrii.sultanov@cloud.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Christian Lindig <christian.lindig@cloud.com>
-Subject: [PATCH v3 2/3] tools/oxenstored: Load the plugin for Xenctrl.domain_getinfo
-Date: Mon,  9 Sep 2024 13:02:41 +0100
-Message-Id: <4da0d29b49325f3684c283219144f9fbf3c241d3.1725881488.git.andrii.sultanov@cloud.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1725881488.git.andrii.sultanov@cloud.com>
-References: <cover.1725881488.git.andrii.sultanov@cloud.com>
+        d=1e100.net; s=20230601; t=1725883451; x=1726488251;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VYcuSuyuhC3DJlmVd353NRJwcrxM6mqAWTcYk0iyJYE=;
+        b=KauIwcJQcGWacPsSbBja8rdMQ04m84T0SLFaNF2oaw1f62ZhDly+Lv8QwGnta7I/HL
+         jyQSqLFQS5UKs4/h5FzFta8yunWn4d6PKRzadXUmdiZe+0nPNTfMHwEFYdv7raVslmET
+         yjUdeIpBUThwvsZ++DXp8aoPhsIbvxxRH6/EIpWVEKOkwYzXzdY2/rxFl5ZG6nG/Q1AZ
+         FqnmHs+XPPWjSzV7o7pZVIZWgdn/ISLGZH1TZG74xRGrh8f8dHgL+VWjXSFweVaITnGB
+         /8vH1B0SfYf0Qj75ZJ/AnYkirdVhIjF53QtKCkLn6JP0i95YuYGyVUG2OQtxTyB8SREj
+         uuoA==
+X-Gm-Message-State: AOJu0YxB+MtNSiVddZTc+xNnlX31ciOZ1dfVFMDXt1LI0bfj3kFGm6MX
+	EITtTki6AT5NbwmSnMLfl8w4bRdhD7mMzWd9U+rN7w/Zcjl5ijNSfnIgaiAgJOLVeHy9EjZV0IQ
+	YXTgVF7hexwMmkHAfpu09ThJ14jCg50Q3T83P2A==
+X-Google-Smtp-Source: AGHT+IHjTRh044xebUMDNCOACfT5WJO6ARZ1qThVx2q1zkhMSj6m0MJCGNc/qOpjzFML78SGYL88xgxnLEHBqjp0u/g=
+X-Received: by 2002:a05:6820:1b89:b0:5e1:dd48:dffc with SMTP id
+ 006d021491bc7-5e1dd48eed0mr537904eaf.8.1725883450945; Mon, 09 Sep 2024
+ 05:04:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240909110329.84512-1-frediano.ziglio@cloud.com>
+ <20240909110329.84512-2-frediano.ziglio@cloud.com> <c05e0a14-269a-4608-9858-d6a64ae96fb9@suse.com>
+In-Reply-To: <c05e0a14-269a-4608-9858-d6a64ae96fb9@suse.com>
+From: Frediano Ziglio <frediano.ziglio@cloud.com>
+Date: Mon, 9 Sep 2024 13:04:00 +0100
+Message-ID: <CACHz=ZiQmduDU0TiSCXZwyPOESYFMFa+cW==LhAqDgP32Jp8Dg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] x86/boot: Add missing __XEN__ definition
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org
+Content-Type: multipart/alternative; boundary="0000000000000485c80621ae8ebe"
 
-Oxenstored dynamically loads the plugin provided in ocaml/libs/xsd_glue.
-The plugin is verified to be providing the specified plugin_interface
-during its loading.
+--0000000000000485c80621ae8ebe
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-If a V2 of the plugin is produced, V1 will still be present, and a new
-version should only be loaded if it's verified to exist
-(New oxenstored can run in an environment with only V1 of the plugin).
+On Mon, Sep 9, 2024 at 12:21=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
+te:
 
-The plugin is not switched to as of yet, the old Xenctrl stubs are still
-used.
+> On 09.09.2024 13:03, Frediano Ziglio wrote:
+> > --- a/xen/arch/x86/boot/Makefile
+> > +++ b/xen/arch/x86/boot/Makefile
+> > @@ -15,7 +15,7 @@ CFLAGS_x86_32 :=3D $(subst -m64,-m32
+> -march=3Di686,$(XEN_TREEWIDE_CFLAGS))
+> >  $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))
+> >  CFLAGS_x86_32 +=3D -Werror -fno-builtin -g0 -msoft-float -mregparm=3D3
+> >  CFLAGS_x86_32 +=3D -nostdinc -include $(filter
+> %/include/xen/config.h,$(XEN_CFLAGS))
+> > -CFLAGS_x86_32 +=3D $(filter -I% -O%,$(XEN_CFLAGS))
+> > +CFLAGS_x86_32 +=3D $(filter -I% -O%,$(XEN_CFLAGS)) -D__XEN__
+>
+> Any reason not to similarly make this -D% as a filter expression?
+>
+> Jan
+>
 
-Signed-off-by: Andrii Sultanov <andrii.sultanov@cloud.com>
-Acked-by: Christian Lindig <christian.lindig@cloud.com>
----
-* This commit is a result of the split of one oxenstored commit into two.
-* Remove configure and paths.m4 defines as suggested.
-* Reformat files appropriately
-* Use libexec/ocaml as the plugin root dir instead of libexec/bin
+I saw that a lot of defines are about processor support which do not make
+sense for 32 bit.
 
- tools/ocaml/xenstored/Makefile    |  5 ++++-
- tools/ocaml/xenstored/domains.ml  | 28 ++++++++++++++++++++++++++++
- tools/ocaml/xenstored/paths.ml.in |  1 +
- 3 files changed, 33 insertions(+), 1 deletion(-)
+Do you want me to add a comment in the commit?
 
-diff --git a/tools/ocaml/xenstored/Makefile b/tools/ocaml/xenstored/Makefile
-index fa45305d8c..5e8210a906 100644
---- a/tools/ocaml/xenstored/Makefile
-+++ b/tools/ocaml/xenstored/Makefile
-@@ -15,7 +15,8 @@ OCAMLINCLUDE += \
- 	-I $(OCAML_TOPLEVEL)/libs/xb \
- 	-I $(OCAML_TOPLEVEL)/libs/mmap \
- 	-I $(OCAML_TOPLEVEL)/libs/xc \
--	-I $(OCAML_TOPLEVEL)/libs/eventchn
-+	-I $(OCAML_TOPLEVEL)/libs/eventchn \
-+	-I $(OCAML_TOPLEVEL)/libs/xsd_glue
- 
- LIBS = syslog.cma syslog.cmxa poll.cma poll.cmxa
- syslog_OBJS = syslog
-@@ -59,6 +60,7 @@ INTF = symbol.cmi trie.cmi syslog.cmi systemd.cmi poll.cmi
- 
- XENSTOREDLIBS = \
- 	unix.cmxa \
-+	dynlink.cmxa \
- 	-ccopt -L -ccopt . syslog.cmxa \
- 	-ccopt -L -ccopt . systemd.cmxa \
- 	-ccopt -L -ccopt . poll.cmxa \
-@@ -66,6 +68,7 @@ XENSTOREDLIBS = \
- 	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/eventchn $(OCAML_TOPLEVEL)/libs/eventchn/xeneventchn.cmxa \
- 	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/xc $(OCAML_TOPLEVEL)/libs/xc/xenctrl.cmxa \
- 	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/xb $(OCAML_TOPLEVEL)/libs/xb/xenbus.cmxa \
-+	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/xsd_glue $(OCAML_TOPLEVEL)/libs/xsd_glue/plugin_interface_v1.cmxa \
- 	-ccopt -L -ccopt $(XEN_ROOT)/tools/libs/ctrl
- 
- PROGRAMS = oxenstored
-diff --git a/tools/ocaml/xenstored/domains.ml b/tools/ocaml/xenstored/domains.ml
-index 7a3056c364..c233065711 100644
---- a/tools/ocaml/xenstored/domains.ml
-+++ b/tools/ocaml/xenstored/domains.ml
-@@ -20,6 +20,34 @@ let warn fmt  = Logging.warn  "domains" fmt
- 
- let xc = Xenctrl.interface_open ()
- 
-+let load_plug fname =
-+  let fail_with fmt = Printf.ksprintf failwith fmt in
-+  let fname = Dynlink.adapt_filename fname in
-+  if Sys.file_exists fname then
-+    try Dynlink.loadfile fname with
-+    | Dynlink.Error err as e ->
-+      error "ERROR loading plugin '%s': %s\n%!" fname
-+        (Dynlink.error_message err);
-+      raise e
-+    | _ -> fail_with "Unknown error while loading plugin"
-+  else fail_with "Plugin file '%s' does not exist" fname
-+
-+let () =
-+  let plugins_dir = Paths.libexec ^ "/ocaml/xsd_glue/xenctrl_plugin/" in
-+  let filepath = plugins_dir ^ "domain_getinfo_v1.cmxs" in
-+  debug "Trying to load plugin '%s'\n%!" filepath;
-+  let list_files = Sys.readdir plugins_dir in
-+  debug "Directory listing of '%s'\n%!" plugins_dir ;
-+  Array.iter (fun x -> debug "\t%s\n%!" x) list_files;
-+  Dynlink.allow_only [ "Plugin_interface_v1" ];
-+  load_plug filepath
-+
-+module Plugin =
-+  (val Plugin_interface_v1.get_plugin_v1 ()
-+    : Plugin_interface_v1.Domain_getinfo_V1)
-+
-+let handle = Plugin.interface_open ()
-+
- type domains = {
-   eventchn: Event.t;
-   table: (Xenctrl.domid, Domain.t) Hashtbl.t;
-diff --git a/tools/ocaml/xenstored/paths.ml.in b/tools/ocaml/xenstored/paths.ml.in
-index 37949dc8f3..acb6ea4ca7 100644
---- a/tools/ocaml/xenstored/paths.ml.in
-+++ b/tools/ocaml/xenstored/paths.ml.in
-@@ -2,3 +2,4 @@ let xen_log_dir = "@XEN_LOG_DIR@"
- let xen_config_dir = "@XEN_CONFIG_DIR@"
- let xen_run_dir = "@XEN_RUN_DIR@"
- let xen_run_stored = "@XEN_RUN_STORED@"
-+let libexec = "@LIBEXEC@"
--- 
-2.39.2
+Frediano
 
+--0000000000000485c80621ae8ebe
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Mon, Sep 9, 2024 at 12:21=E2=80=AFPM Jan Beulich &lt;<a href=3D"m=
+ailto:jbeulich@suse.com">jbeulich@suse.com</a>&gt; wrote:<br></div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
+ solid rgb(204,204,204);padding-left:1ex">On 09.09.2024 13:03, Frediano Zig=
+lio wrote:<br>
+&gt; --- a/xen/arch/x86/boot/Makefile<br>
+&gt; +++ b/xen/arch/x86/boot/Makefile<br>
+&gt; @@ -15,7 +15,7 @@ CFLAGS_x86_32 :=3D $(subst -m64,-m32 -march=3Di686,$=
+(XEN_TREEWIDE_CFLAGS))<br>
+&gt;=C2=A0 $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))=
+<br>
+&gt;=C2=A0 CFLAGS_x86_32 +=3D -Werror -fno-builtin -g0 -msoft-float -mregpa=
+rm=3D3<br>
+&gt;=C2=A0 CFLAGS_x86_32 +=3D -nostdinc -include $(filter %/include/xen/con=
+fig.h,$(XEN_CFLAGS))<br>
+&gt; -CFLAGS_x86_32 +=3D $(filter -I% -O%,$(XEN_CFLAGS))<br>
+&gt; +CFLAGS_x86_32 +=3D $(filter -I% -O%,$(XEN_CFLAGS)) -D__XEN__<br>
+<br>
+Any reason not to similarly make this -D% as a filter expression?<br>
+<br>
+Jan<br></blockquote><div><br></div><div>I saw that a lot of defines are abo=
+ut processor support which do not make sense for 32 bit.</div><div><br></di=
+v><div>Do you want me to add a comment in the commit?<br></div><div><br></d=
+iv><div>Frediano</div><div>=C2=A0<br></div></div></div>
+
+--0000000000000485c80621ae8ebe--
 
