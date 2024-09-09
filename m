@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76DD4ECE579
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 10:06:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.794147.1202865 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4136CECE57A
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 10:08:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.794153.1202877 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snbI3-0008J9-J2; Mon, 09 Sep 2024 10:06:35 +0000
+	id 1snbJe-0000w4-TM; Mon, 09 Sep 2024 10:08:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 794147.1202865; Mon, 09 Sep 2024 10:06:35 +0000
+Received: by outflank-mailman (output) from mailman id 794153.1202877; Mon, 09 Sep 2024 10:08:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snbI3-0008J2-G0; Mon, 09 Sep 2024 10:06:35 +0000
-Received: by outflank-mailman (input) for mailman id 794147;
- Mon, 09 Sep 2024 10:06:34 +0000
+	id 1snbJe-0000vx-Qh; Mon, 09 Sep 2024 10:08:14 +0000
+Received: by outflank-mailman (input) for mailman id 794153;
+ Mon, 09 Sep 2024 10:08:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WnCw=QH=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1snbI2-00089c-CY
- for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 10:06:34 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
+ <SRS0=dA/l=QH=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
+ id 1snbJd-0000vm-BD
+ for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 10:08:13 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 315e1b1b-6e93-11ef-a0b5-8be0dac302b0;
- Mon, 09 Sep 2024 12:06:34 +0200 (CEST)
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2f761cfa5d8so16108391fa.2
- for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 03:06:34 -0700 (PDT)
-Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3ebd46886sm2785166a12.34.2024.09.09.03.06.32
+ id 6c1386bc-6e93-11ef-a0b5-8be0dac302b0;
+ Mon, 09 Sep 2024 12:08:12 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a8a789c4fc5so609354566b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 03:08:12 -0700 (PDT)
+Received: from fziglio-desktop.. ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25952671sm318275866b.68.2024.09.09.03.08.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 03:06:32 -0700 (PDT)
+ Mon, 09 Sep 2024 03:08:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,58 +47,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 315e1b1b-6e93-11ef-a0b5-8be0dac302b0
+X-Inumbo-ID: 6c1386bc-6e93-11ef-a0b5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725876393; x=1726481193; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=DgnN6KKjwKQiWNYJ0ZLdfCpd/y3NAcbZZBLivmi+KrI=;
-        b=MvHSlnqz0UkHDJBQmYuUHXnfwoaH3NhFFZ6drKkT3NmxYTm4UHeJS15QSPGaoqPZLE
-         LdKH8IGIj5ubDhL4GuXOobZZTRElyA8y8Mo7ELf+pwyEyPw53ZaJyMo6mM4N8FcfEonY
-         xh3+8Y/QnwHnDlcIhkZnEe11Ug/St9ZGhNX3I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725876393; x=1726481193;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1725876492; x=1726481292; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=DgnN6KKjwKQiWNYJ0ZLdfCpd/y3NAcbZZBLivmi+KrI=;
-        b=ByfG8/6DW5IjUqObD4rw6zWIXqMS9PDjG1NKErI3MNoHqOeifBAOpcGxinHJp2ZnsH
-         y5Q4PtaaIwbnnhQ92nN4a5omgg8Z5ufxJD0E+mW+C7aBCKwlZC6sVW1KUalhVs12vOp7
-         fc9iOZPkDD5LOM0xMHhazb99Tnm1drbJ8OBAXGLYDS4l9TUleRoj5/dTf2+gAAzV9g4G
-         yU4fUXu/PFwn00w6O3yiLnIYm6ucoksDtsLd7T6Su0RDFH9ru7iGapuYTdNTeac8gzVc
-         8r9bAE/1gO+cQ1S17vYfD14QYfnD94IHVMhN4yMTu4vWn1SjNcNynH9ECCa6pQGtPOzs
-         CTig==
-X-Gm-Message-State: AOJu0YxR6HDknEMVEfqui16rkI3PiayX0N0p59GRhXZuL1N5zjKrJxh/
-	fq9/tb5VCjPDiMvODN564coB3kHiRGMVRrBxVfG+x0wmy51UfAtztQ2vuFUId6U=
-X-Google-Smtp-Source: AGHT+IFeDKwDwR6+hyekEMUVYBgIIPmAeEsTu5O4EKRIfHJxFPYih38koU4MIFgv3ylvdxZUHQaqQw==
-X-Received: by 2002:a2e:bc21:0:b0:2f3:aed8:aa9b with SMTP id 38308e7fff4ca-2f751eaef7emr71101461fa.5.1725876393110;
-        Mon, 09 Sep 2024 03:06:33 -0700 (PDT)
-Date: Mon, 9 Sep 2024 12:06:31 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Kelly Choi <kelly.choi@cloud.com>,
-	"Charles-H. Schulz" <charles.schulz@vates.tech>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
-	Xen Project Advisory Board <advisory-board@lists.xenproject.org>
-Subject: Re: Setting up the Xen Communications Team
-Message-ID: <Zt7Ip9i6c8sh7nC6@macbook.local>
-References: <e56ff82c1a1d7398a5b38784fc84a7adf51ec918.camel@vates.tech>
- <PH8PR12MB7326CC5D9546BE7CBD8CAF7DBC8E2@PH8PR12MB7326.namprd12.prod.outlook.com>
- <alpine.DEB.2.22.394.2408210916300.3871186@ubuntu-linux-20-04-desktop>
- <CAO-mL=yH=jdFb+cZffJLNw=wU2DZj7JR0LEJJM3e1bsPVxyABQ@mail.gmail.com>
+        bh=/RNcIa4VUmuHv5b9/ojt3TkdG+ztZJJY4b/TwuAYnfg=;
+        b=PAkQeGpXoe5STMS7lrNVFU+uo87YtJ+XS8vqoov/3aPDr/b7JPgcgs6tl8a8nvfQL2
+         S8hlF0FLVbFC0Lv5U037fVmZPpezqIPHewQeB0hwXu/DtgRBrSb5w6lxi855F7h/HpoC
+         Sq0sA6oBFGKZ1w0J4J7OaanOON9+DL6japCPI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1725876492; x=1726481292;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=/RNcIa4VUmuHv5b9/ojt3TkdG+ztZJJY4b/TwuAYnfg=;
+        b=SWHU1EzD5Vs400m9DmSNIAwKYzAsmBlSrw5Relkgwr76d4icvewuHIRYKRj/7/7XUw
+         0gj7HE0DE9WWrnHEGKcvFu+dMNj3fNnq5PdV9IXHC2CLMeNqdUts2KhLP3fuZcQQrjTa
+         eVbQyPxK/A3FQBEP4voa500/9xLmLEVgDvlQcKxBpZZzy59UFiJWcAqVzFx057N5IISV
+         +5sRlSjWFJnnsrr5TDwe7FBanlJ/fhzUig1Ta6qADSfKXbPDasxBcdvBO46IkIqECel9
+         pRkoDERbq7m8y7uekoFPIfGQAZyr90xIi3sUqhl0IsaSa0UzM7RWTN/PNU3PNHrA4/xA
+         bC2w==
+X-Gm-Message-State: AOJu0Yw+qTbZkwRqX/RUECBJ5XOU0hynljqmkfZXitDaR1PlVKy0Rd/Z
+	ikN+DK3d6zhlGHw5YvAEaZ8hS/3Hjc9faqBFP0/V4VCKKnlvPDCH4CIG6KZ3h+iaLQO5Ws7xPLL
+	2
+X-Google-Smtp-Source: AGHT+IEbADYzy/dqMLQej1sRHAfZaCIOePLbr63zo+rRjh2SjKdY5fYG6kdL0tv0ifDa4eb/re0eIw==
+X-Received: by 2002:a17:907:6e8f:b0:a8a:8dd3:f135 with SMTP id a640c23a62f3a-a8a8dd3ffd8mr1036797866b.14.1725876491612;
+        Mon, 09 Sep 2024 03:08:11 -0700 (PDT)
+From: Frediano Ziglio <frediano.ziglio@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH] mm: Reuse PRI_gfn macro instead of manual specify the format
+Date: Mon,  9 Sep 2024 11:08:06 +0100
+Message-Id: <20240909100806.47280-2-frediano.ziglio@cloud.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240909100806.47280-1-frediano.ziglio@cloud.com>
+References: <20240909100806.47280-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CAO-mL=yH=jdFb+cZffJLNw=wU2DZj7JR0LEJJM3e1bsPVxyABQ@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 
-On Fri, Sep 06, 2024 at 01:54:13PM +0100, Kelly Choi wrote:
-> Hi all,
-> 
-> Thank you for your interest, we'll look into setting up a new Xen
-> PR/communications group.
-> If anyone else in the community would like to join, please reply directly
-> to this email.
+Macros are defined to avoid type mismatch in format strings
+but also to unify format amongst code.
+In the meantime expands to 9 hexadecimal digits.
 
-I would be interested in joining.
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+---
+ xen/common/grant_table.c   | 6 +++---
+ xen/include/xen/mm-frame.h | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-Thanks, Roger.
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index ab36f45ded..775cd7e065 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -1848,7 +1848,7 @@ gnttab_unpopulate_status_frames(struct domain *d, struct grant_table *gt)
+             if ( rc )
+             {
+                 gprintk(XENLOG_ERR,
+-                        "Could not remove status frame %u (GFN %#lx) from P2M\n",
++                        "Could not remove status frame %u (GFN %"PRI_gfn") from P2M\n",
+                         i, gfn_x(gfn));
+                 domain_crash(d);
+                 return rc;
+@@ -1863,7 +1863,7 @@ gnttab_unpopulate_status_frames(struct domain *d, struct grant_table *gt)
+             if ( paging_mode_translate(d) )
+             {
+                 gprintk(XENLOG_ERR,
+-                        "Wrong page state %#lx of status frame %u (GFN %#lx)\n",
++                        "Wrong page state %#lx of status frame %u (GFN %"PRI_gfn")\n",
+                         pg->count_info, i, gfn_x(gfn));
+                 domain_crash(d);
+             }
+@@ -3981,7 +3981,7 @@ void grant_table_warn_active_grants(struct domain *d)
+         if ( nr_active <= WARN_GRANT_MAX )
+             printk(XENLOG_G_DEBUG "d%d has active grant %x ("
+ #ifndef NDEBUG
+-                   "GFN %lx, "
++                   "GFN %"PRI_gfn", "
+ #endif
+                    "MFN: %#"PRI_mfn")\n",
+                    d->domain_id, ref,
+diff --git a/xen/include/xen/mm-frame.h b/xen/include/xen/mm-frame.h
+index d973aec901..6f9fcc2a6a 100644
+--- a/xen/include/xen/mm-frame.h
++++ b/xen/include/xen/mm-frame.h
+@@ -5,7 +5,7 @@
+ #include <xen/typesafe.h>
+ 
+ TYPE_SAFE(unsigned long, mfn);
+-#define PRI_mfn          "05lx"
++#define PRI_mfn          "09lx"
+ #define INVALID_MFN_RAW  (~0UL)
+ #define INVALID_MFN      _mfn(INVALID_MFN_RAW)
+ /*
+@@ -41,7 +41,7 @@ static inline bool mfn_eq(mfn_t x, mfn_t y)
+ }
+ 
+ TYPE_SAFE(unsigned long, gfn);
+-#define PRI_gfn          "05lx"
++#define PRI_gfn          "09lx"
+ #define INVALID_GFN_RAW  (~0UL)
+ #define INVALID_GFN      _gfn(INVALID_GFN_RAW)
+ /*
+-- 
+2.34.1
+
 
