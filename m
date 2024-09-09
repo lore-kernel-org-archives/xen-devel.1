@@ -4,65 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBCCEECE579
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 08:49:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.794035.1202689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70773ECE579
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 08:56:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.794039.1202698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sna59-0005CS-4k; Mon, 09 Sep 2024 08:49:11 +0000
+	id 1snaBw-0006hb-RO; Mon, 09 Sep 2024 08:56:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 794035.1202689; Mon, 09 Sep 2024 08:49:11 +0000
+Received: by outflank-mailman (output) from mailman id 794039.1202698; Mon, 09 Sep 2024 08:56:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sna59-0005CL-26; Mon, 09 Sep 2024 08:49:11 +0000
-Received: by outflank-mailman (input) for mailman id 794035;
- Mon, 09 Sep 2024 08:49:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xur/=QH=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
- id 1sna57-0005CF-MB
- for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 08:49:10 +0000
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on20630.outbound.protection.outlook.com
- [2a01:111:f403:260c::630])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5eb8cc9c-6e88-11ef-a0b5-8be0dac302b0;
- Mon, 09 Sep 2024 10:49:07 +0200 (CEST)
-Received: from DU6P191CA0070.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53e::18)
- by DB4PR08MB10342.eurprd08.prod.outlook.com (2603:10a6:10:3fe::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.17; Mon, 9 Sep
- 2024 08:49:01 +0000
-Received: from DB1PEPF00039230.eurprd03.prod.outlook.com
- (2603:10a6:10:53e:cafe::f6) by DU6P191CA0070.outlook.office365.com
- (2603:10a6:10:53e::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.24 via Frontend
- Transport; Mon, 9 Sep 2024 08:49:01 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB1PEPF00039230.mail.protection.outlook.com (10.167.8.103) with
- Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7918.13
- via Frontend Transport; Mon, 9 Sep 2024 08:49:00 +0000
-Received: ("Tessian outbound a180ae23ab28:v437");
- Mon, 09 Sep 2024 08:49:00 +0000
-Received: from L4bdc0942e8c9.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- F8D27FFD-48DD-48F4-AC1F-6F7851AFBE13.1; 
- Mon, 09 Sep 2024 08:48:51 +0000
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id
- L4bdc0942e8c9.1 (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Mon, 09 Sep 2024 08:48:51 +0000
-Received: from DBAPR08MB5798.eurprd08.prod.outlook.com (2603:10a6:10:1a6::21)
- by GV2PR08MB8510.eurprd08.prod.outlook.com (2603:10a6:150:b1::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.15; Mon, 9 Sep
- 2024 08:48:43 +0000
-Received: from DBAPR08MB5798.eurprd08.prod.outlook.com
- ([fe80::4a66:d3e2:570:9632]) by DBAPR08MB5798.eurprd08.prod.outlook.com
- ([fe80::4a66:d3e2:570:9632%6]) with mapi id 15.20.7962.014; Mon, 9 Sep 2024
- 08:48:43 +0000
+	id 1snaBw-0006hU-Or; Mon, 09 Sep 2024 08:56:12 +0000
+Received: by outflank-mailman (input) for mailman id 794039;
+ Mon, 09 Sep 2024 08:56:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=qOm0=QH=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1snaBv-0006hO-P7
+ for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 08:56:11 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5af88b16-6e89-11ef-99a1-01e77a169b0f;
+ Mon, 09 Sep 2024 10:56:08 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a7a843bef98so166065166b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 01:56:08 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25cee784sm315924166b.177.2024.09.09.01.56.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Sep 2024 01:56:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,218 +47,253 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5eb8cc9c-6e88-11ef-a0b5-8be0dac302b0
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=U4zaa0041cew3BnE2FlK2QLComAGYB5IPFWbgP7kRNPUcfZ7NG5QDsy2fGmPdO3IhPXgfyl7EmmnNX7rgOPx6+fpIdC1eAVE7YoTR2kPvZH4moyYn2N0HI6c0XF2F7MlcuaAY3PQe+Id6Zui0CaSri+/aJaevhOAU8SjieGA/eeTA0HLX2zd1Am758Lqfl0E8JUToDQJgx18xBlr3Y16oFWhinL4JvxK0/kjpeR0e37Tx2z9w1wQSADv7Pwo/zdl6oGN27xC1zgIbmzxa3bAzyU6/sHB3xrxLXFFPcVUvIuc0hZtwS0bhK/aii+oM5+2+2Q4I94tORJPnaVLr50I0g==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e4AADrSPJag9qHsAYBK9lyECw1QwVpdT4FuM6VjXR9s=;
- b=j6LEaUXXdoF21LBXCVCtBDNHW9/uZgjcbUeCodHlFpDJFxh9obB0qnOpz3wee5Bg56nED8JBnUP15Y1r+30teQyuvaSnW3JFU1+sENmwX1Qm98OseVADlCyKu1F2IAcmkqnL4CqROlb1iUBANW+8t/0Y6PVkexC6FUDaS+3UgEPXyycjfxY7JuR3Qx9fkt8ED7F4afAH8hdRbnVOCs7DrFZdtROfRQrSkUqzpj4cOklsxhbBR0KFQIpT4NkgNb0lB05i9MaC5gVDi1DtYnel8R/P9tl0bPeLl3vOVmlkeb+U1bbINThi2GMsGVzF1RolEZ04YWjBECZi9fS1ETDGwg==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e4AADrSPJag9qHsAYBK9lyECw1QwVpdT4FuM6VjXR9s=;
- b=XBfXIRFn0r7L9uUsebRFQjRXW/oQ0Zmd4JTN0lusE8TMnYshJTRMzpI5cCI88FMKjUIYiQYHXrOqZoghUFs99Z5z7cgZm3xoczgIVwO5ySoAtbXDwilaDLn3IL9XjSifwOtdZ9RMgIuHEbyo3RWz3p38aswTvm8TkijBYvs1PFU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 336331cb59cf66b6
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q9iIZACw48drQGmCAhEArLtnFPj8qBSownQTrrRIUjCAEfoa0VGg9sgPeWfdaHLz32HfoCrBa556oMbIwnHy5bW2uHkFDxfFlP5dr59zdTX9Omyy5D4KWYfdfmL65Xy+TWp+QIjwdgKSZdUPFnhuzmHThVMjqKhbO+1slWZHBDRDdTWxaUc1fwhWnQmiMVx8gnDb3i89lJiTNgpSErWQc2JHmawoWvef6Tezo7NhEhTcft6zMfbaKmNZKHPQu+BBrPk2nb7zm2BCZURL9wjC59AWWNU7ejqyfF83za3HVsc5lhMymaLww6sEbgwnfJMfQQS+oz9qPyYUJ6UpMBU6Lg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e4AADrSPJag9qHsAYBK9lyECw1QwVpdT4FuM6VjXR9s=;
- b=d6cV5iSafxSd9OcZqyFBqusxHiQbgIyHe4890hXZKYVrvYGrpAKWFUm9bOMGPkZEqAwElkm2/JaOtFJmMBc3wHIU3MykOOiOOQl2VwP1BB3jOpYECxRI2Oio2jzJfxsHa11rAGL/CcuhrzS2p9oXFdPqgaVlkA8skDIsZD6Phc5D3jH3HUjjYYXovdPUec+3yjZmgeil5mM2cHTrg1NZj+Cl+JZekliSftSvhvg6lbKmbW7/dMcWwyipEemjIxyYrHQgz258e3IAk4kVxJTdKSQbz3Mh3PJy0ZPVMp8vBEwsEift77RP1pic8A9wJgcgQ7nfFiMUhIEkyG3K/TLhBg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e4AADrSPJag9qHsAYBK9lyECw1QwVpdT4FuM6VjXR9s=;
- b=XBfXIRFn0r7L9uUsebRFQjRXW/oQ0Zmd4JTN0lusE8TMnYshJTRMzpI5cCI88FMKjUIYiQYHXrOqZoghUFs99Z5z7cgZm3xoczgIVwO5ySoAtbXDwilaDLn3IL9XjSifwOtdZ9RMgIuHEbyo3RWz3p38aswTvm8TkijBYvs1PFU=
-From: Luca Fancellu <Luca.Fancellu@arm.com>
-To: Julien Grall <julien@xen.org>
-CC: Ayan Kumar Halder <ayankuma@amd.com>, Ayan Kumar Halder
-	<ayan.kumar.halder@amd.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal
- Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v1 3/4] xen/arm: mpu: Create boot-time MPU protection
- regions
-Thread-Topic: [PATCH v1 3/4] xen/arm: mpu: Create boot-time MPU protection
- regions
-Thread-Index: AQHa9XoHude8SoLzqU+vDRBIKLz30bI8y1SAgArTwQCABvDngIAAryqA
-Date: Mon, 9 Sep 2024 08:48:43 +0000
-Message-ID: <B9014D46-43F4-4928-96B6-CA6167964578@arm.com>
-References: <20240823163127.3443404-1-ayan.kumar.halder@amd.com>
- <20240823163127.3443404-4-ayan.kumar.halder@amd.com>
- <f14c6fb3-0ab6-49e6-b0f1-622802a599f0@xen.org>
- <3819109b-de48-480b-b548-a5d9f45a541f@amd.com>
- <e1d1ed69-94e9-4625-ba49-9ebdb2b9581c@xen.org>
-In-Reply-To: <e1d1ed69-94e9-4625-ba49-9ebdb2b9581c@xen.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3776.700.51)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	DBAPR08MB5798:EE_|GV2PR08MB8510:EE_|DB1PEPF00039230:EE_|DB4PR08MB10342:EE_
-X-MS-Office365-Filtering-Correlation-Id: e537c071-4dcf-43ad-aed2-08dcd0ac3fda
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
-X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?cryvJ6p7dDAjRNqkKUc4Gv4enWZioi6yvfIr0tSBmoGPiL9w+Z2WY5fR2cU8?=
- =?us-ascii?Q?xACv7mSvi5tbZRe9/UUZjNcxb9kn5DPXhAuGvhuRSOvWibv9QZ9VXK0ccymB?=
- =?us-ascii?Q?58Pwtwt+nBOn3Kb3EOyYe5wqiC4d9uoFDif+qDXvsUkMdHnbW8GJqjaflh2G?=
- =?us-ascii?Q?rBMKAm1j5mk+Qygd/XVHMjdWIo9uyv7gletifepPe5u7lwQulRZFesdhp4Th?=
- =?us-ascii?Q?rrOrq32W1eygLdvQDztPSMb2TdoWnFjEFz1ov/CX9Ybn9FFFOTAlagAA2nNA?=
- =?us-ascii?Q?0wjBuk16VPYuJC/KR0SXB45rdrs7kijpghTuJhXCf6TAc2x2hX2w46Qsbl3t?=
- =?us-ascii?Q?ISZGzlhGFpJU5YnI+dFSWrrF35LnIiOrqi1gDbPOD/FLkggvtAzSkNoBdHNH?=
- =?us-ascii?Q?Hago6EGn0flBczTYS7iRwERYQ/A1ZJLeVn834mqbIHE4t+vG7QKE3/YbOeg8?=
- =?us-ascii?Q?wY+N45oXYA2DKeoeos8zQDRDuYHuKN7p6R7IAbVBkGgssvOMpdj3bUWA6J6t?=
- =?us-ascii?Q?gHKQJB6WvOEyB+xnBbnwYG7mwzoRRIeFLpLzyJbl6ld5ncuTeECLLqM+mbJ2?=
- =?us-ascii?Q?rz6ELIZp3UEQI4exD58xLfwpirj7jKurPUKqww2I0XhzD0pTF5zxbfnAW8hN?=
- =?us-ascii?Q?+algnszJY8VYbFKstgPYpLXYe4HILslLocvxu/1vQ8R9P0i+IVSJl5Af2Ept?=
- =?us-ascii?Q?UnLUa7A/l9oBFCSEmhHVU/H//+mL66dZeBoCXYUlnCZBFLJpOj8/XN39kKy8?=
- =?us-ascii?Q?OxzSLKyHrEQNAIxBVJbGO7ckZsPlfErqTxaER0d8/kkV7rQ8z4SIc5fPi/0s?=
- =?us-ascii?Q?i3R2na0Q8qpAZfMFR791Jc+BWl6n8Pl5HhzeplZrAMAxAgOujdSDd2KcbGRz?=
- =?us-ascii?Q?jsO31qZtPZKxA2OJT4K7wA9k14mLN/7JMx8SA7wf7eJ8d/lDrRg+xJe4OR5U?=
- =?us-ascii?Q?AiFfrqQ/HskTsHLBquRMTpubNAWyhXRS7DuaMLCZWdcn3CGLZX5MtPlOQPiB?=
- =?us-ascii?Q?4iN5RGXK1hq1kJ8Qtg05vTsi33P4T1Pzl8g7KBXXeI/smlIJSC81ALULxcaJ?=
- =?us-ascii?Q?9mG6QHKd8/8dWdc7d5NlKrayWpVgkZyu/DrpxGa05xuoDTeIb5LZ61a6iCmT?=
- =?us-ascii?Q?bvJ5ELvBTzn+hvChC9z2j/RU5ifz8zj4z96X9EJYfpadnqueAe/waDaI0/mP?=
- =?us-ascii?Q?N3nxw4Ha9QR1AbgSLMeoQnFUS+kh3a76pCXOwwiub49w6+CWJvf9/avdEhop?=
- =?us-ascii?Q?ME4cA/qbg80ZfH+M9LZNSI+J3SFmMBFc4ogSjCM7IVC1+VTMsuffyPeP8rey?=
- =?us-ascii?Q?twRDFr0QgkOz3vKN2ytUZGxtQVcgANPxZ+1PNd+MrvIvVsHB2XryhECswV1z?=
- =?us-ascii?Q?/aUoXJXkkPx0MlESf1ag53+RHRs4aamOGtF6QeZ8vI/Q8JE5Mw=3D=3D?=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DBAPR08MB5798.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <2D6875BEDA319B4F95E1B1128B90F0F2@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 5af88b16-6e89-11ef-99a1-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1725872168; x=1726476968; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=F/7kqLHdDKgEIlq3E/O7OBwKuPEjGvNwhqrKoQdmheo=;
+        b=TeUAcVMQxy/0jl4uDP3GD4b8gcT46T4/debxJ5opiNbCf136J/WYFM6RTasKVPFzrj
+         oKpiQkA8aACChK1WA6MmU8GtEGX8W8YPqyxcyMEeYBsGRpft5X01h6a5xTND+TbEMosW
+         vsXQLukpGtBPLn7rcxvageXWdx5nAYsOJMvVdhewtgVzIxqklIACSUmmdLYcEUabpHM/
+         kVlSk0jtzvg2mg86+yO6XYY1C1uiNWX5yNS4g0j8Fg+Y87Wam6ORoPnes9qI4dp+Nhjv
+         ED8zrIFtz5DqjnHKHETAhJjnR4eoRe3VrqTxLyl6iA3QeDMYW8aADhEMhUg3STUtpnVq
+         vwEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1725872168; x=1726476968;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=F/7kqLHdDKgEIlq3E/O7OBwKuPEjGvNwhqrKoQdmheo=;
+        b=cHwK39hKqGHSdBcM+S7EEfzFSv3jE94opuUa43cAikjHWwi5MrnCWjSziDVJinVZlL
+         CGlkwpZm3TNWQnLIfZnFKq8BxgVAlkVY1eXxlfNjldTDKH+cNnZX01Nn0apTIGChCvZ/
+         JutC2XEG9EY/c4bZ6MRQfHF2daorTu4gPcl28pn4zJiRPkDm+IMk0gMEXwxYEA40KMcD
+         63M4qszY/XqsvYx3lEioP/TXfmayD6gK4k8yuGtkUJXT41FLYBELRl42OX2Vc62w6OFb
+         wLHvarJtjFy9TlAX8PPpJZcQvhvHWteCcgpoG2H5UY0fX8iOMjaJ3emyisUU9EfMoehF
+         hWbQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUE6tAhVxSwujRuIoZvbrmgxdjoe7pERHf7sV/ejxxd8lGk1dtiN4xIj04jT/KdaL3/zxQcTxaK9Qk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yye1tY1XoiQfHas39bhwZXjLgtJcoI7TcnB8CICpHOFKQTmWect
+	m3Db+m2t06OfCoC/Dcd9Fft1RgJnK9o7t9QAiCNjQ7r67YUPSxTXLnrMue9hKg==
+X-Google-Smtp-Source: AGHT+IHmxU6o2UE3+CRAp9Id8R3AodLikwAli/g/a2y22dzJnIxrlCTogUb3ByhuTShNg0xE8gDIGg==
+X-Received: by 2002:a17:907:3f83:b0:a86:94e2:2a47 with SMTP id a640c23a62f3a-a8a885f8046mr867827866b.15.1725872168060;
+        Mon, 09 Sep 2024 01:56:08 -0700 (PDT)
+Message-ID: <3ef3295a-705f-4070-a223-774716e1f3a3@suse.com>
+Date: Mon, 9 Sep 2024 10:56:07 +0200
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB8510
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-SkipListedInternetSender:
- ip=[2603:10a6:10:1a6::21];domain=DBAPR08MB5798.eurprd08.prod.outlook.com
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB1PEPF00039230.eurprd03.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	fdfea4c1-ec61-4975-4597-08dcd0ac35f8
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|35042699022|82310400026|36860700013|1800799024|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Cb615KjkIgegKOgeuV3zJ9Ujw4d2oBJ1R8w0CEfrqEL0PX5pal0U4d9ypIOD?=
- =?us-ascii?Q?iNSEpJCfg35f/psJ7XbQKILo0Uc6IYkFzOb2fiYXHzUYZz+HyJCU10XnQVwU?=
- =?us-ascii?Q?KSsPuh9R9ZVnkqmNgvwztE/BSsAVgvN3eePoKRn7vj4/9EJviTmkWLKxGS1A?=
- =?us-ascii?Q?49NQSJINEDJaY+RIs/y7zmTagVbl1vcnXBJ4TRu4lUj0PVxV/nmDrOwnpoU0?=
- =?us-ascii?Q?dfA2dp9Lz/DYUKv05TwKu452vS9pNAxDJDXFLkJBmt04VXNiW3xT949Vq0vT?=
- =?us-ascii?Q?T+wGJujqAPAs+/UJSEXNjxm7KgwyLvhdtbilV+fFd0mCo7g2PkotLBZCxZuY?=
- =?us-ascii?Q?Ivqms+NkzoYi051mD9zVrpfH5TckkaqjjAxGcLz1SP/nbKd9Y9p320T4KLYh?=
- =?us-ascii?Q?LnepO7vJlQG/XSLUsid6kjEAwtXIrdg/Ed+i0alge9FFYxquPDWbuNoOWSVK?=
- =?us-ascii?Q?6GapmIpZMlNWJHHt5ECBMT7Vdzgc5UAbJ4A/TCFKKKS1Og0GSAVCcLtsElvR?=
- =?us-ascii?Q?MZttr/P8OYR4IYLMqoFPBex24X4o7Htka+O68oPWnXId/wGAGk7HSgW4irs+?=
- =?us-ascii?Q?Pb1uliHYe8ZSxsmOeJ6uqv5vI67a6RnTOp2s3x/kMvCx6/vzOXxa7tO9nJab?=
- =?us-ascii?Q?r7RH05cVI5B7p8L7D5dvyKiS9AbOPJDDMCYmgtR0FotydKhzWE/tCe1/iUfb?=
- =?us-ascii?Q?GgDf/kFdXAVHTYZiHPVgRkyiLhmdgfuHUEC6FByAjhyVrknxOlO6uR6jLtp4?=
- =?us-ascii?Q?gbwKzUiwXC/n6ul9PnE/OGkeQSdxp438jXUvntpwFMb0nAFdzaGj+MdUdLsP?=
- =?us-ascii?Q?QrWcwEzJKCWItV0VwRHtnF4drS+wCg7FeQHC6gh69xO2z6ZUKJyN/AyTkP0t?=
- =?us-ascii?Q?5Kv1VKq1tZN04InH1fseqPKkM8EFmd3uNCHuGx8xxi9Jf0PkFlg1HNzd75Rp?=
- =?us-ascii?Q?9EA1OuSvd52OhzSm9jNXeYdNtROHVXhD7q7us6Vr/rcLcW5PsB4qPBVGrcps?=
- =?us-ascii?Q?883gIJmEDDGZesOqD+Fqu59XE8tOVHTW4dMGg1DgSBBedHLi+dXwjmntaz0P?=
- =?us-ascii?Q?ZhY2PTBW5nJGeVh6fTqK8PaOWHJMW6QPfhvWZuK5oU6BANqBhb6r4VL7WnKj?=
- =?us-ascii?Q?7T7pBwPUJmjC/W/E5lTfqqO37O5wtweNwmOb6dCM52cIzuroz7EvdXVoeCK8?=
- =?us-ascii?Q?KNE5JpD9cOSSaOV0ZyJWvAVYAnyP6+w2d278o1F7njYZvt1maBlmJmxEBJUp?=
- =?us-ascii?Q?X2eYdjrbM87MQD60SW9xeceZyCHVQ48L51cyytnEriSycvCDhev78r3HACVk?=
- =?us-ascii?Q?JIq10H763mtL9/pDIwrhow4jOoAanns13i2+Rsb5gM19vfHT3cfBLuZ9/6Fb?=
- =?us-ascii?Q?8mZzRS2H31w1pL58aXb8AEzM+ovmcJBFXVTssO9aMtxFYD8JpQ9YePjJcs76?=
- =?us-ascii?Q?5/QcfamR7X7xSSHk4y6fIp0j73V3LB5y?=
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230040)(35042699022)(82310400026)(36860700013)(1800799024)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2024 08:49:00.4016
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e537c071-4dcf-43ad-aed2-08dcd0ac3fda
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB1PEPF00039230.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR08MB10342
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH v14 2/5] x86/pvh: Allow (un)map_pirq when dom0 is PVH
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: "Chen, Jiqian" <Jiqian.Chen@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ George Dunlap <gwd@xenproject.org>, Julien Grall <julien@xen.org>,
+ Anthony PERARD <anthony@xenproject.org>, Juergen Gross <jgross@suse.com>,
+ "Daniel P . Smith" <dpsmith@apertussolutions.com>,
+ "Hildebrand, Stewart" <Stewart.Hildebrand@amd.com>,
+ "Huang, Ray" <Ray.Huang@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <20240903070424.982218-1-Jiqian.Chen@amd.com>
+ <20240903070424.982218-3-Jiqian.Chen@amd.com>
+ <e8db9a54-fcbf-4f4c-803e-7b11838e22a4@suse.com>
+ <BL1PR12MB5849C65CAC35890158F6A32FE7932@BL1PR12MB5849.namprd12.prod.outlook.com>
+ <905fe9ef-d311-4956-b862-49f2f588afcd@suse.com>
+ <BL1PR12MB58492EE11D404B2E09DA0210E7932@BL1PR12MB5849.namprd12.prod.outlook.com>
+ <b2b7b716-974c-4172-ba68-261453a96932@suse.com>
+ <alpine.DEB.2.22.394.2409031839550.53815@ubuntu-linux-20-04-desktop>
+ <ea41eb5d-f8a1-4120-b5c1-70bdf02d8038@suse.com>
+ <BL1PR12MB5849E69A83D4BABAF544C22EE79D2@BL1PR12MB5849.namprd12.prod.outlook.com>
+ <f6a1f021-04cc-4dd3-bcea-97a7343399e1@suse.com>
+ <alpine.DEB.2.22.394.2409051521340.53815@ubuntu-linux-20-04-desktop>
+ <fb08f1bc-291d-4c97-b20e-7e4ba9f556c9@suse.com>
+ <alpine.DEB.2.22.394.2409061500390.53815@ubuntu-linux-20-04-desktop>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <alpine.DEB.2.22.394.2409061500390.53815@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Julien, Ayan,
+On 07.09.2024 01:34, Stefano Stabellini wrote:
+> On Fri, 6 Sep 2024, Jan Beulich wrote:
+>> On 06.09.2024 00:51, Stefano Stabellini wrote:
+>>> On Thu, 5 Sep 2024, Jan Beulich wrote:
+>>>> On 05.09.2024 08:45, Chen, Jiqian wrote:
+>>>>> HI,
+>>>>>
+>>>>> On 2024/9/4 14:04, Jan Beulich wrote:
+>>>>>> On 04.09.2024 03:43, Stefano Stabellini wrote:
+>>>>>>> On Tue, 3 Sep 2024, Jan Beulich wrote:
+>>>>>>>> On 03.09.2024 12:53, Chen, Jiqian wrote:
+>>>>>>>>> On 2024/9/3 17:25, Jan Beulich wrote:
+>>>>>>>>>> On 03.09.2024 09:58, Chen, Jiqian wrote:
+>>>>>>>>>>> On 2024/9/3 15:42, Jan Beulich wrote:
+>>>>>>>>>>>> On 03.09.2024 09:04, Jiqian Chen wrote:
+>>>>>>>>>>>>> When dom0 is PVH type and passthrough a device to HVM domU, Qemu code
+>>>>>>>>>>>>> xen_pt_realize->xc_physdev_map_pirq and libxl code pci_add_dm_done->
+>>>>>>>>>>>>> xc_physdev_map_pirq map a pirq for passthrough devices.
+>>>>>>>>>>>>> In xc_physdev_map_pirq call stack, function hvm_physdev_op has a check
+>>>>>>>>>>>>> has_pirq(currd), but currd is PVH dom0, PVH has no X86_EMU_USE_PIRQ flag,
+>>>>>>>>>>>>> so it fails, PHYSDEVOP_map_pirq is not allowed for PVH dom0 in current
+>>>>>>>>>>>>> codes.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> But it is fine to map interrupts through pirq to a HVM domain whose
+>>>>>>>>>>>>> XENFEAT_hvm_pirqs is not enabled. Because pirq field is used as a way to
+>>>>>>>>>>>>> reference interrupts and it is just the way for the device model to
+>>>>>>>>>>>>> identify which interrupt should be mapped to which domain, however
+>>>>>>>>>>>>> has_pirq() is just to check if HVM domains route interrupts from
+>>>>>>>>>>>>> devices(emulated or passthrough) through event channel, so, the has_pirq()
+>>>>>>>>>>>>> check should not be applied to the PHYSDEVOP_map_pirq issued by dom0.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> So, allow PHYSDEVOP_map_pirq when dom0 is PVH and also allow
+>>>>>>>>>>>>> PHYSDEVOP_unmap_pirq for the removal device path to unmap pirq. Then the
+>>>>>>>>>>>>> interrupt of a passthrough device can be successfully mapped to pirq for domU.
+>>>>>>>>>>>>
+>>>>>>>>>>>> As before: When you talk about just Dom0, ...
+>>>>>>>>>>>>
+>>>>>>>>>>>>> --- a/xen/arch/x86/hvm/hypercall.c
+>>>>>>>>>>>>> +++ b/xen/arch/x86/hvm/hypercall.c
+>>>>>>>>>>>>> @@ -73,6 +73,8 @@ long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+>>>>>>>>>>>>>      {
+>>>>>>>>>>>>>      case PHYSDEVOP_map_pirq:
+>>>>>>>>>>>>>      case PHYSDEVOP_unmap_pirq:
+>>>>>>>>>>>>> +        break;
+>>>>>>>>>>>>> +
+>>>>>>>>>>>>>      case PHYSDEVOP_eoi:
+>>>>>>>>>>>>>      case PHYSDEVOP_irq_status_query:
+>>>>>>>>>>>>>      case PHYSDEVOP_get_free_pirq:
+>>>>>>>>>>>>
+>>>>>>>>>>>> ... that ought to match the code. IOW you've again lost why it is okay(ish)
+>>>>>>>>>>>> (or even necessary) to also permit the op for non-Dom0 (e.g. a PVH stubdom).
+>>>>>>>>>>>> Similarly imo Dom0 using this on itself wants discussing.
+>>>>>>>>>>> Do you mean I need to talk about why permit this op for all HVM
+>>>>>>>>>>
+>>>>>>>>>> You don't need to invent reasons, but it needs making clear that wider than
+>>>>>>>>>> necessary (for your purpose) exposure is at least not going to be a problem.
+>>>>>>>>>>
+>>>>>>>>>>> and  where can prevent PVH domain calling this for self-mapping, not only dom0?
+>>>>>>>>>>
+>>>>>>>>>> Aiui use on itself is limited to Dom0, so only that would need clarifying
+>>>>>>>>>> (along the lines of the above, i.e. that/why it is not a problem). For
+>>>>>>>>>> has_pirq() domains use on oneself was already permitted before.
+>>>>>>>>>
+>>>>>>>>> Changed commit message to below. Please check and that will be great helpful if you would show me how to modify it.
+>>>>>>>>> {
+>>>>>>>>> x86/pvh: Allow (un)map_pirq when dom0 is PVH
+>>>>>>>>>
+>>>>>>>>> Problem: when dom0 is PVH type and passthrough a device to HVM domU, Qemu
+>>>>>>>>> code xen_pt_realize->xc_physdev_map_pirq and libxl code pci_add_dm_done->
+>>>>>>>>> xc_physdev_map_pirq map a pirq for passthrough devices.
+>>>>>>>>> In xc_physdev_map_pirq call stack, function hvm_physdev_op has a check
+>>>>>>>>> has_pirq(currd), but currd is PVH dom0, PVH has no X86_EMU_USE_PIRQ flag,
+>>>>>>>>> so it fails, PHYSDEVOP_map_pirq is not allowed for PVH dom0 in current
+>>>>>>>>> codes.
+>>>>>>>>>
+>>>>>>>>> To solve above problem, need to remove the chack has_pirq() for that
+>>>>>>>>> situation(PHYSDEVOP_map_pirq is issued by dom0 for domUs). But without
+>>>>>>>>> adding other restrictions, PHYSDEVOP_map_pirq will be allowed wider than
+>>>>>>>>> what the problem need.
+>>>>>>>>> So, clarify below:
+>>>>>>>>>
+>>>>>>>>> For HVM domUs whose XENFEAT_hvm_pirqs is not enabled,it is fine to map
+>>>>>>>>> interrupts through pirq for them. Because pirq field is used as a way to
+>>>>>>>>> reference interrupts and it is just the way for the device model to
+>>>>>>>>> identify which interrupt should be mapped to which domain, however
+>>>>>>>>> has_pirq() is just to check if HVM domains route interrupts from
+>>>>>>>>> devices(emulated or passthrough) through event channel, so, remove
+>>>>>>>>> has_pirq() check has no impact on HVM domUs.
+>>>>>>>>>
+>>>>>>>>> For PVH domUs that performs such an operation will fail at the check
+>>>>>>>>> xsm_map_dedomain_pirq() in physdev_map-nirq().
+>>>>>>>>>
+>>>>>>>>> For PVH dom0, it uses vpci and doesn't use event channel, as above talks,
+>>>>>>>>> it also has no impact.
+>>>>>>>>> }
+>>>>>>>>
+>>>>>>>> This is better than what you had before, and I don't really fancy re-
+>>>>>>>> writing the description effectively from scratch. So let's just go from
+>>>>>>>> there. As to the "excess" permission for the sub-ops: The main thing I'm
+>>>>>>>> after is that it be clarified that we're not going to introduce any
+>>>>>>>> security issues here. That requires auditing the code, and merely saying
+>>>>>>>> "also has no impact" is a little too little for my taste. For Dom0 an
+>>>>>>>> argument may be that it is overly powerful already anyway, even if for
+>>>>>>>> PVH we're a little more strict than for PV (I think).
+>>>>>>>
+>>>>>>> Hi Jan, for clarity and to make this actionable, are you suggesting to
+>>>>>>> clarify the commit message by adding wording around "Dom0 is overly
+>>>>>>> powerful already anyway so it is OK so this is OK" ?
+>>>>>>
+>>>>>> Yes, perhaps with "deemed" added. 
+>>>>> OK, for PVH dom0, I will change to " Dom0 is deemed overly powerful already anyway, so it is OK "
+>>>>
+>>>> I don't mind the deemed as you add it, but the important place to add it
+>>>> here is before "OK". I'm sorry, it didn't occur to me that after all the
+>>>> prior discussion this earlier reply of mine could still be mis-interpreted.
+>>>>
+>>>>>> And text for DomU-s similarly extended, as the pointing at the XSM check is presently incomplete (stubdom-s can
+>>>>>> pass that check, after all, as can de-priv qemu running in Dom0).
+>>>>> So sorry, I know so little about this, I can't explain these situations, could you tell me how to describe or help me write a paragraph?
+>>>>
+>>>> I'm afraid that in order to make (propose) such a change you need to be
+>>>> able to explain why it is okay to expose functionality beyond where it's
+>>>> presently exposed. It's not just writing a new paragraph that's needed
+>>>> here. You first need to _check_ that what you do is okay. And once you've
+>>>> done that checking, you then summarize that in writing.
+>>>  
+>>>
+>>> PHYSDEVOP_map_pirq ends up calling physdev_map_pirq which is protected
+>>> by:
+>>>
+>>>     ret = xsm_map_domain_pirq(XSM_DM_PRIV, d);
+>>>     if ( ret )
+>>>         return ret;
+>>>
+>>> Dom0 having permission to do PHYSDEVOP_map_pirq even without has_pirq is
+>>> fine. Device models are also OK because the code we are trying to enable
+>>> is in fact part of the device model. If someone were to run an HVM
+>>> stubdom they might need this patch as well.
+>>>
+>>> If PHYSDEVOP_map_pirq is allowed, also PHYSDEVOP_unmap_pirq should be
+>>> allowed.
+>>>
+>>> Is this explanation OK?
+>>
+>> This still solely focuses on why the functionality is wanted. There
+>> continues to be nothing about the wider exposure actually being safe.
+> 
+> I don't think I understand what you would like to be checked or
+> clarified...
+> 
+> The only wider exposure is to device models, and device models can do a
+> lot worse than mapping pirqs already. There is no wider exposure to
+> DomUs. Also PV device models can already do this.
 
->>>=20
->>>> +    msr   PRBAR_EL2, \prbar
->>>> +    msr   PRLAR_EL2, \prlar
->>>> +    dsb   sy
->> This should be visible to outer shareable domain atleast. The reason bei=
-ng one can use the SH[1:0] bits in PRBAR_EL2 to set the region to outer sha=
-reable.
->> Thus, the writes to these registers should be visible to outer shareable=
- domain as well.
->=20
-> I am a bit confused. SH[1:0] is about how the region will be accessed not=
- up to where should registers are visible. I was expecting that the MPU reg=
-isters only need to be visible to the MPU itself.
->=20
-> For instance, when using the MMU, the translation unit is in the non-shar=
-eable domain. So a 'nsh' is sufficient regardless of the shareability of th=
-e page/block.
->=20
-> This is explicitely written in the Arm Arm (see D5-4929 in ARM DDI 0487H.=
-a) but I can't find a similar section for the MPU yet. Although, I would be=
- a bit surprised if the MPU is not in the non-shareable domain... Maybe thi=
-s could be clarified with Arm?
+What do you mean by "worse"? I hope not "crash Xen"? And _that's_ what I
+want to have assurance of, e.g. a PVH/HVM DM not suddenly bringing Xen
+down, because these paths previously weren't accessible to them.
 
-I got the feedback that DSB SY is ok here
-
->=20
-> Anyway, for now, I am open to use 'dsb sy' with a TODO to revisit it.
->=20
->>>> +    isb
->=20
-> Re-quoting the spec from you previous answer:
->=20
-> ```
-> Writes to MPU registers are only guaranteed to be visible
-> following a Context synchronization event and DSB operation.
-> ```
->=20
-> So this suggests that it should be first an 'isb' and then a 'dsb'. Any r=
-eason you wrote it the other way around?
-
-I chased this internally and it was suggested the current order, dsb follow=
-ed by the isb: DSB ensures the completion of prior=20
-instructions before the next executes, and then ISB ensures subsequent inst=
-ruction fetch observes the updated MPU state.
-
-Probably I will raise something to make awareness around the misleading ord=
-er of that phrase.
-
-Cheers,
-Luca=
+Jan
 
