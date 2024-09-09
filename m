@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BE3EECE579
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 11:03:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.794281.1203094 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551F0ECE57A
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 11:03:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.794288.1203108 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sncAa-0007Jc-Pg; Mon, 09 Sep 2024 11:02:56 +0000
+	id 1sncBL-0007uR-DM; Mon, 09 Sep 2024 11:03:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 794281.1203094; Mon, 09 Sep 2024 11:02:56 +0000
+Received: by outflank-mailman (output) from mailman id 794288.1203108; Mon, 09 Sep 2024 11:03:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sncAa-0007JV-Mo; Mon, 09 Sep 2024 11:02:56 +0000
-Received: by outflank-mailman (input) for mailman id 794281;
- Mon, 09 Sep 2024 11:02:54 +0000
+	id 1sncBL-0007tJ-8m; Mon, 09 Sep 2024 11:03:43 +0000
+Received: by outflank-mailman (input) for mailman id 794288;
+ Mon, 09 Sep 2024 11:03:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WnCw=QH=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sncAY-0007JP-RN
- for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 11:02:54 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
+ <SRS0=dA/l=QH=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
+ id 1sncBK-0007rV-M9
+ for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 11:03:42 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0f35e9f1-6e9b-11ef-99a1-01e77a169b0f;
- Mon, 09 Sep 2024 13:02:52 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a8d4979b843so179926966b.3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 04:02:52 -0700 (PDT)
-Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25ced17asm328915766b.170.2024.09.09.04.02.50
+ id 2be16a09-6e9b-11ef-99a1-01e77a169b0f;
+ Mon, 09 Sep 2024 13:03:40 +0200 (CEST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a8d24f98215so229025966b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 04:03:40 -0700 (PDT)
+Received: from fziglio-desktop.. ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25ce96a7sm324623966b.158.2024.09.09.04.03.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 04:02:51 -0700 (PDT)
+ Mon, 09 Sep 2024 04:03:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,99 +47,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f35e9f1-6e9b-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: 2be16a09-6e9b-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725879772; x=1726484572; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=uzrt6NH22Q/60sNv5qJFHAzFsiPQUajoypNRKceWd04=;
-        b=oFA3+z6cMF0E/dmAo9o+81V6U8FjIM5Hi1xSct4SS95BG5bRCN5++tlNA5P0omrKRE
-         ez/AvjEPdmHzDH9PfB+vVU3AaQ5BdFBq/fbVLPFvxC+yiKOg3F14STENiF88DkPKrYV1
-         NXdXmCIyLPz+Y28d4T0E7BlJZUYrbiJvf0B2E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725879772; x=1726484572;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1725879820; x=1726484620; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uzrt6NH22Q/60sNv5qJFHAzFsiPQUajoypNRKceWd04=;
-        b=TMN9XKQcv6iu7TGee7vGnSm7cKQuaKd0mCA69m2bV4PvXdD6AfRVRlZ4Vt3sgwBEEL
-         Td12ct4kFRsRXVlG9y1e3catYa0iuWKgWZdZaytm2twbJXpeEdmUfUnOdPPqx7n6fLFh
-         D+7CuAzW+8xxvHWQa8EjiGToDyhWv5d8CqABDNhMNo/5qElv8lPQ18EWbAVaihHfgLkH
-         Lc/0fkNnqPhI173b+O7OI1uoycAT/72vGrMKkjtK6Sxfh7xUBF9r94ql7auR2XAtNXCC
-         ch3h7Po/5E5AINPfZrO2/tKN4/DIjEjFo3l8XNPJxrOXUWO7rD4mboh1YY86pcURu/v9
-         QkXg==
-X-Forwarded-Encrypted: i=1; AJvYcCWUrRFS8pM+nNnjaTNTo6x+A+g+CymxgEi9oXm9kfAX/D9L5L+Qva6kdnB0BM0bOYZ1Qax+NCXGQ9M=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywc4P09U42mOeI2gn+JR3NiK/Bn/HLmy46dI3VDRWMM0N2S0a3A
-	y0oPMNKNhfeiOrTETruSR5nIV9xOM0PP3IdKIiPqZA3fHPbLRYtfX6lVrZI0PXs=
-X-Google-Smtp-Source: AGHT+IGb4+dncTFaUQKSLCtb0zu2TB99hewA5BOt8QCK4E845ngtG4s74T5m1SBetMgui5xaYJQ+ng==
-X-Received: by 2002:a17:907:9606:b0:a86:9ba1:639e with SMTP id a640c23a62f3a-a8a885fb742mr1101360866b.26.1725879771596;
-        Mon, 09 Sep 2024 04:02:51 -0700 (PDT)
-Date: Mon, 9 Sep 2024 13:02:50 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v4 4/6] x86/time: introduce probing logic for the
- wallclock
-Message-ID: <Zt7V2mKWlETVLKVZ@macbook.local>
-References: <20240904153151.83995-1-roger.pau@citrix.com>
- <20240904153151.83995-5-roger.pau@citrix.com>
- <af5ce242-1ec9-4ccc-a531-2252b2d8c90d@suse.com>
+        bh=TXUmWlwTdTjWYOzxS3av+DQ/P/2LExw+a7gF6NCKfWQ=;
+        b=CGnaUTNlyHk5tN6Nq5C+nA95w50eBEGNDLlGHVYI6q7d2qB/7ydcqA2yPk7auKthpb
+         zQWnmLHst4cy6XgF6k9Z7JbXaq7Z8wKewRJStqCJ/Z69p2J3VhpHko+9j2qGgmu7LDbq
+         /t2XeyK5//YMdaDX3QmKOAl+rjm0fOW2S9dDA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1725879820; x=1726484620;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=TXUmWlwTdTjWYOzxS3av+DQ/P/2LExw+a7gF6NCKfWQ=;
+        b=PoZkZe1o7JGP4jOoG8cQGv6RmUFO5lPuLCwqq4OsgChqutJjYPN1SQjbAL7/JohPDi
+         0nBMYi1ZG5ClLPonipa7zQf0N6sSfsXQYf7BjpoUh50EeM60ermaGPgoESa3qsiZWHya
+         DUHnup9VrgYYnOvlyhxo+GKHfPdETrz4SFZYij13XRAktA89SZv6/n90oft5jXNRxCjH
+         fcfer3HWgJuxNBj13H5HgwZLoijr/MoOexnHKcgFcomOasRq8P2RplJQ6LbgH2NfG70z
+         mgUGBlpIVgHfIqLNXB1dSbP+4rKyT0eCNxpG/WBTxjYoMMyVLbwr7UuboXPMK4YYOpvC
+         IhDw==
+X-Gm-Message-State: AOJu0YxDsAt17+I8cLZyd6pHdBsKA8J41bKngEUcjE5GEbfuxzG3nIEf
+	L8KX3LyxVe0PEZvSW3jz5VtWjH8YMVHnJslS/RL2G+r7vddj38MsbFRkcGrFHfur3W6mDyywKUO
+	U
+X-Google-Smtp-Source: AGHT+IH/KIOeTgpAuyHh+E8dBDOBbLzcEFrM3RU228z91O7leohp83aA60ojGDVibVd9xzwEVk1Kqg==
+X-Received: by 2002:a17:907:980e:b0:a77:cca9:b212 with SMTP id a640c23a62f3a-a8d248a611amr445920866b.45.1725879819783;
+        Mon, 09 Sep 2024 04:03:39 -0700 (PDT)
+From: Frediano Ziglio <frediano.ziglio@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: Frediano Ziglio <frediano.ziglio@cloud.com>
+Subject: [PATCH v3 2/2] x86/boot: Add missing __XEN__ definition
+Date: Mon,  9 Sep 2024 12:03:29 +0100
+Message-Id: <20240909110329.84512-2-frediano.ziglio@cloud.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240909110329.84512-1-frediano.ziglio@cloud.com>
+References: <20240909110329.84512-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <af5ce242-1ec9-4ccc-a531-2252b2d8c90d@suse.com>
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 05, 2024 at 05:58:47PM +0200, Jan Beulich wrote:
-> On 04.09.2024 17:31, Roger Pau Monne wrote:
-> > --- a/xen/arch/x86/time.c
-> > +++ b/xen/arch/x86/time.c
-> > @@ -1291,14 +1291,23 @@ static bool __get_cmos_time(struct rtc_time *rtc)
-> >      return t1 <= SECONDS(1) && t2 < MILLISECS(3);
-> >  }
-> >  
-> > -static bool cmos_probe(struct rtc_time *rtc_p, bool cmos_rtc_probe)
-> > +static bool __initdata cmos_rtc_probe;
-> > +boolean_param("cmos-rtc-probe", cmos_rtc_probe);
-> > +
-> > +static bool __init cmos_probe(void)
-> 
-> I'm sorry for not paying attention to this earlier, but "cmos" alone
-> is misleading here and perhaps even more so for cmos_read(). These
-> aren't about the CMOS (storage) but the CMOS RTC. May I suggest
-> cmos_rtc_{probe,read}() instead?
+We are compiling Xen source code so we should define __XEN__
+macro.
 
-I've assumed that those living in time.c would be clear enough it's
-the CMOS RTC, but I'm fine with renaming to cmos_rtc_{probe,read}().
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+---
+ xen/arch/x86/boot/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> 
-> >  {
-> >      unsigned int seconds = 60;
-> >  
-> > +    if ( !(acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC) )
-> > +        return true;
-> > +
-> > +    if ( !cmos_rtc_probe )
-> > +        return false;
-> 
-> With this I think ...
-> 
-> >      for ( ; ; )
-> >      {
-> > -        bool success = __get_cmos_time(rtc_p);
-> > -        struct rtc_time rtc = *rtc_p;
-> > +        struct rtc_time rtc;
-> > +        bool success = __get_cmos_time(&rtc);
-> >  
-> >          if ( likely(!cmos_rtc_probe) )
-> >              return true;
-> 
-> ... this ends up being dead code.
+diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
+index dfe3cb7034..ff0f965876 100644
+--- a/xen/arch/x86/boot/Makefile
++++ b/xen/arch/x86/boot/Makefile
+@@ -15,7 +15,7 @@ CFLAGS_x86_32 := $(subst -m64,-m32 -march=i686,$(XEN_TREEWIDE_CFLAGS))
+ $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ CFLAGS_x86_32 += -Werror -fno-builtin -g0 -msoft-float -mregparm=3
+ CFLAGS_x86_32 += -nostdinc -include $(filter %/include/xen/config.h,$(XEN_CFLAGS))
+-CFLAGS_x86_32 += $(filter -I% -O%,$(XEN_CFLAGS))
++CFLAGS_x86_32 += $(filter -I% -O%,$(XEN_CFLAGS)) -D__XEN__
+ 
+ # override for 32bit binaries
+ $(head-bin-objs): CFLAGS_stack_boundary :=
+-- 
+2.34.1
 
-Indeed, I've missed to remove that one when moving the check outside
-of the for loop.
-
-Thanks, Roger.
 
