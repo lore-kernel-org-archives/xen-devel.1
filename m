@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28230ECE586
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 14:55:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.794627.1203641 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7546ECE584
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Sep 2024 14:55:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.794629.1203656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snfnS-0003mn-82; Mon, 09 Sep 2024 14:55:18 +0000
+	id 1snfnT-00043g-P0; Mon, 09 Sep 2024 14:55:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 794627.1203641; Mon, 09 Sep 2024 14:55:18 +0000
+Received: by outflank-mailman (output) from mailman id 794629.1203656; Mon, 09 Sep 2024 14:55:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snfnS-0003mg-5J; Mon, 09 Sep 2024 14:55:18 +0000
-Received: by outflank-mailman (input) for mailman id 794627;
- Mon, 09 Sep 2024 14:55:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1snfnT-00042I-J8; Mon, 09 Sep 2024 14:55:19 +0000
+Received: by outflank-mailman (input) for mailman id 794629;
+ Mon, 09 Sep 2024 14:55:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WnCw=QH=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1snfnR-0003YR-83
- for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 14:55:17 +0000
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [2a00:1450:4864:20::22a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 85e2f69b-6ebb-11ef-99a1-01e77a169b0f;
- Mon, 09 Sep 2024 16:55:15 +0200 (CEST)
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2f75428b9f8so30678911fa.3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 07:55:15 -0700 (PDT)
+ id 1snfnS-0003mf-FN
+ for xen-devel@lists.xenproject.org; Mon, 09 Sep 2024 14:55:18 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 86cede3d-6ebb-11ef-a0b5-8be0dac302b0;
+ Mon, 09 Sep 2024 16:55:17 +0200 (CEST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a8d3cde1103so275465266b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Sep 2024 07:55:17 -0700 (PDT)
 Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25ceaf4fsm351514766b.152.2024.09.09.07.55.12
+ a640c23a62f3a-a8d258317d6sm350985666b.29.2024.09.09.07.55.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 07:55:12 -0700 (PDT)
+ Mon, 09 Sep 2024 07:55:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,44 +46,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 85e2f69b-6ebb-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: 86cede3d-6ebb-11ef-a0b5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1725893715; x=1726498515; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1725893716; x=1726498516; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SzgDXYtJg5j6LBhNtCvSNUlOqDJy96VnpmbQz4pdFjA=;
-        b=shuZlL53/LsEZNxvdhEBsqLke6gV7/CymcoObyHOFwBWfE2x2P7iRn8pW5HBge8bpb
-         0hj2Q26r4sR2C22obBNLAH/3qikD007QyyrO0oqJzDmWLj+cEsua78Yc8gRFBUxxaKaS
-         8oVC1rgYD0QewUXWaRZ5GMYh2RGuQ8HWx8TaA=
+        bh=wTxNeOtTpgpkcU1eMs+pBEYVIkJMsd43OtRijP17qwg=;
+        b=dSYvkJm6zRMjNqJgwB6JGv57pxeKHRQtKoBIE+19EbggmSh9axcJwval6X0w9cEp+l
+         WDO5j5GvYY4Tch9To2iOUtgYXstI++pC2NmN7XabWpo/qKuvKZFwoner55e1otvokVD0
+         Ag6m6e2k0Twb6R1s6hEKy6zoDbTu0wnLO5DAE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725893715; x=1726498515;
+        d=1e100.net; s=20230601; t=1725893716; x=1726498516;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SzgDXYtJg5j6LBhNtCvSNUlOqDJy96VnpmbQz4pdFjA=;
-        b=ZwBQtgy3dRdBE4Vj1LVvx+dnjC6uJ/G7wUeTS12qxar0hNVb3HtbAPVKayoAQrOsCq
-         4VboIK2vJTDtm5JOkRTOcUn1F9iC7sBPAd2NpAIFdsTVynAcAidjxePTzq0dUrlN8h8/
-         UA1cBlMhIxN8WdLSD/231GZfeKyUt0rXyPTLzSfCWJM3jfxBxtf8hHzbZKplnFQbHzX8
-         gq9aX+EQ13Up1q33xhbu1Hfn+rBiPnAIE47j5YFQfTkBjd9DFuCvjdtN2YhktQ2jbKXs
-         3f/ml5Jq5VIhW/krozQTtfE8yXHNwH11ftgFLFRRUp3C5B+YWMETTXUvthUVQkKPmxs/
-         sn+w==
-X-Gm-Message-State: AOJu0Yzd+wjZ5ef4m2pvqn2aIWqLhetZBj7gC+zQjo9XxmKDilqe3FDN
-	mjIkN6kqFN1e9Z2i7FFoJXFpuNa42wx6ERov62IZdSAN5MZzGtqSRUaVfXQGqGanqQCQZvytp8+
-	K
-X-Google-Smtp-Source: AGHT+IF3ZkUNy/jr3w/Wt6ZHMU/LIrZM1q0T3siIkFtydQHSCn7lR5EsReWAiwYgwUCtWItn+G5l8Q==
-X-Received: by 2002:a2e:741:0:b0:2f6:4d1b:d9d6 with SMTP id 38308e7fff4ca-2f75a99e85dmr57388001fa.25.1725893714054;
-        Mon, 09 Sep 2024 07:55:14 -0700 (PDT)
+        bh=wTxNeOtTpgpkcU1eMs+pBEYVIkJMsd43OtRijP17qwg=;
+        b=msAntqXYZTKkusmDBDbrve84nMY2vS0pUZ6QuqeR6aaBNwy2OcqZgNknY+xbj+gSnZ
+         1LpxfbLICiy+S62hCTVki/MrKAmnItI7p5//rjD5vh40IEuksOcR66T2aryN4IH7tZUi
+         oSamH2ehlgbPHbwJR+Z8TmUOt/Rp9A8cpvh8hpXmrgrqEsEcS6lHvT+6GoeLUEQQ9Ngc
+         ztK+uvRO3RnOgcrsiNjHFLty6OkrIYIesCqkf1H8hn6I80pCkNOusgtnhZZ3I0PM70A8
+         MByVlNjJrNEKjXmFyZp12IB99B+XPqvglpV+UrrPSr3xWrjR8ZfkYndC/nhBBtr249tW
+         pXbg==
+X-Gm-Message-State: AOJu0YwC7HbTcBpY8Jl7ZNqX7GcB1j67qietgThWt8HOpzNPDjaDD3my
+	naUmE8N+UbECONWi28/CQm6pJaH/2Gq9vtXHjX2pxMIL/t/sszoc12GqljY6MhvLG0FmhsiuHpC
+	k
+X-Google-Smtp-Source: AGHT+IH6ud8BIVnvDcDx9sWO4zrhdmH/lNaVH8QzbGkj1oQf/a1nXTSSso+xFdynUxxPOtcQNvvZqA==
+X-Received: by 2002:a17:907:9627:b0:a77:cf9d:f495 with SMTP id a640c23a62f3a-a8d1c4d78f0mr792458466b.40.1725893716375;
+        Mon, 09 Sep 2024 07:55:16 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Roger Pau Monne <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v5 1/4] x86/time: pull cmos_rtc_probe outside of function and rename
-Date: Mon,  9 Sep 2024 16:54:52 +0200
-Message-ID: <20240909145455.7517-2-roger.pau@citrix.com>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 3/4] x86/time: introduce command line option to select wallclock
+Date: Mon,  9 Sep 2024 16:54:54 +0200
+Message-ID: <20240909145455.7517-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240909145455.7517-1-roger.pau@citrix.com>
 References: <20240909145455.7517-1-roger.pau@citrix.com>
@@ -91,73 +93,104 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Rename cmos_rtc_probe to opt_cmos_rtc_probe in order to better describe it
-being a command line option, and rename cmos_probe() function to
-cmos_rtc_probe().
+Allow setting the used wallclock from the command line.  When the option is set
+to a value different than `auto` the probing is bypassed and the selected
+implementation is used (as long as it's available).
 
-Also move opt_cmos_rtc_probe to being a static global variable in preparation
-for further changes that will require the variable being global to the file.
-
-No functional change intended.
+The `xen` and `efi` options require being booted as a Xen guest (with Xen guest
+supported built-in) or from UEFI firmware.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-Changes since v4:
- - New in this version.
+Changes since v3:
+ - Note xen option is only available if Xen guest support it built.
+ - Fix typo.
 ---
- xen/arch/x86/time.c | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+ docs/misc/xen-command-line.pandoc | 19 ++++++++++++++++++
+ xen/arch/x86/time.c               | 33 ++++++++++++++++++++++++++++++-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
 
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 0a66e1ee2d7e..1944b9d8eb9d 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -2821,6 +2821,25 @@ vwfi to `native` reduces irq latency significantly. It can also lead to
+ suboptimal scheduling decisions, but only when the system is
+ oversubscribed (i.e., in total there are more vCPUs than pCPUs).
+ 
++### wallclock (x86)
++> `= auto | xen | cmos | efi`
++
++> Default: `auto`
++
++Allow forcing the usage of a specific wallclock source.
++
++ * `auto` let the hypervisor select the clocksource based on internal
++   heuristics.
++
++ * `xen` force usage of the Xen shared_info wallclock when booted as a Xen
++   guest.  This option is only available if the hypervisor was compiled with
++   `CONFIG_XEN_GUEST` enabled.
++
++ * `cmos` force usage of the CMOS RTC wallclock.
++
++ * `efi` force usage of the EFI_GET_TIME run-time method when booted from EFI
++   firmware.
++
+ ### watchdog (x86)
+ > `= force | <boolean>`
+ 
 diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index f37300946e4e..ec48805a2239 100644
+index 1dcbd9f520f5..c6d3f19a56d1 100644
 --- a/xen/arch/x86/time.c
 +++ b/xen/arch/x86/time.c
-@@ -1291,7 +1291,10 @@ static bool __get_cmos_time(struct rtc_time *rtc)
-     return t1 <= SECONDS(1) && t2 < MILLISECS(3);
+@@ -1550,6 +1550,36 @@ static const char *__init wallclock_type_to_string(void)
+     return "";
  }
  
--static bool cmos_probe(struct rtc_time *rtc_p, bool cmos_rtc_probe)
-+static bool __read_mostly opt_cmos_rtc_probe;
-+boolean_param("cmos-rtc-probe", opt_cmos_rtc_probe);
++static int __init cf_check parse_wallclock(const char *arg)
++{
++    if ( !arg )
++        return -EINVAL;
 +
-+static bool cmos_rtc_probe(struct rtc_time *rtc_p)
++    if ( !strcmp("auto", arg) )
++        wallclock_source = WALLCLOCK_UNSET;
++    else if ( !strcmp("xen", arg) )
++    {
++        if ( !xen_guest )
++            return -EINVAL;
++
++        wallclock_source = WALLCLOCK_XEN;
++    }
++    else if ( !strcmp("cmos", arg) )
++        wallclock_source = WALLCLOCK_CMOS;
++    else if ( !strcmp("efi", arg) )
++    {
++        if ( !efi_enabled(EFI_RS) )
++            return -EINVAL;
++
++        wallclock_source = WALLCLOCK_EFI;
++    }
++    else
++        return -EINVAL;
++
++    return 0;
++}
++custom_param("wallclock", parse_wallclock);
++
+ static void __init probe_wallclock(void)
  {
-     unsigned int seconds = 60;
+     ASSERT(wallclock_source == WALLCLOCK_UNSET);
+@@ -2525,7 +2555,8 @@ int __init init_xen_time(void)
  
-@@ -1300,7 +1303,7 @@ static bool cmos_probe(struct rtc_time *rtc_p, bool cmos_rtc_probe)
-         bool success = __get_cmos_time(rtc_p);
-         struct rtc_time rtc = *rtc_p;
+     open_softirq(TIME_CALIBRATE_SOFTIRQ, local_time_calibration);
  
--        if ( likely(!cmos_rtc_probe) )
-+        if ( likely(!opt_cmos_rtc_probe) )
-             return true;
+-    probe_wallclock();
++    if ( wallclock_source == WALLCLOCK_UNSET )
++        probe_wallclock();
  
-         if ( !success ||
-@@ -1332,8 +1335,6 @@ static unsigned long get_cmos_time(void)
- {
-     unsigned long res;
-     struct rtc_time rtc;
--    static bool __read_mostly cmos_rtc_probe;
--    boolean_param("cmos-rtc-probe", cmos_rtc_probe);
+     printk(XENLOG_INFO "Wallclock source: %s\n", wallclock_type_to_string());
  
-     if ( efi_enabled(EFI_RS) )
-     {
-@@ -1343,12 +1344,12 @@ static unsigned long get_cmos_time(void)
-     }
- 
-     if ( likely(!(acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC)) )
--        cmos_rtc_probe = false;
--    else if ( system_state < SYS_STATE_smp_boot && !cmos_rtc_probe )
-+        opt_cmos_rtc_probe = false;
-+    else if ( system_state < SYS_STATE_smp_boot && !opt_cmos_rtc_probe )
-         panic("System with no CMOS RTC advertised must be booted from EFI"
-               " (or with command line option \"cmos-rtc-probe\")\n");
- 
--    if ( !cmos_probe(&rtc, cmos_rtc_probe) )
-+    if ( !cmos_rtc_probe(&rtc) )
-         panic("No CMOS RTC found - system must be booted from EFI\n");
- 
-     return mktime(rtc.year, rtc.mon, rtc.day, rtc.hour, rtc.min, rtc.sec);
 -- 
 2.46.0
 
