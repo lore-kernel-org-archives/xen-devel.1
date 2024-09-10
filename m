@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8556ECE582
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Sep 2024 10:09:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.795243.1204552 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7B0ECE564
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Sep 2024 10:18:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.795286.1204577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snxoK-0000nH-Ud; Tue, 10 Sep 2024 10:09:24 +0000
+	id 1snxwg-0006kt-Gl; Tue, 10 Sep 2024 10:18:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 795243.1204552; Tue, 10 Sep 2024 10:09:24 +0000
+Received: by outflank-mailman (output) from mailman id 795286.1204577; Tue, 10 Sep 2024 10:18:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snxoK-0000io-5x; Tue, 10 Sep 2024 10:09:24 +0000
-Received: by outflank-mailman (input) for mailman id 795243;
- Tue, 10 Sep 2024 10:09:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1snxwg-0006km-Dv; Tue, 10 Sep 2024 10:18:02 +0000
+Received: by outflank-mailman (input) for mailman id 795286;
+ Tue, 10 Sep 2024 10:18:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hUAX=QI=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1snxoI-0006in-7Y
- for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 10:09:22 +0000
+ <SRS0=W0jq=QI=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1snxwf-0006ke-6v
+ for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 10:18:01 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bd35b6c8-6f5c-11ef-99a1-01e77a169b0f;
- Tue, 10 Sep 2024 12:09:17 +0200 (CEST)
-Received: from truciolo.homenet.telecomitalia.it
- (host-79-37-206-90.retail.telecomitalia.it [79.37.206.90])
- by support.bugseng.com (Postfix) with ESMTPSA id 15E9C4EE07A5;
- Tue, 10 Sep 2024 12:09:17 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f4f56364-6f5d-11ef-a0b5-8be0dac302b0;
+ Tue, 10 Sep 2024 12:18:00 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id D33C84EE07A5;
+ Tue, 10 Sep 2024 12:17:59 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,63 +41,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd35b6c8-6f5c-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: f4f56364-6f5d-11ef-a0b5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1725962957; bh=w6dJg0N0Gwxpq3+C0w0/DqhPaRkVVEdL4S1X1KOxgVw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ME5hvuBvJq2k9ROgoGEt6BEY0aKD6A3zaSHZXK4gz+k+Gm8YD7dNOp6D+z+x2NK/V
-	 xpygvp88SnGTFHWs+BR5DCUStrqhbXHlr+n1Kz3YClEKH2uNtti+FIA/Kr8s5TO0/Y
-	 KYPybob31mGlgIILtUKLMopiQNtsCTzvD/WnHOguWWbaaSWsyBBGO7kaVSIz79mdkO
-	 wUiJ1acLbhJuSnR1f5zScmmXWPzexfivVtdTZ1ItCWS3Fse2otqEG0qpt+1M9xJRse
-	 6p6RB0jmBxSdX4LYiuGx66Qx7JSFzZ4/OMeC5wUBFNVzWiOhEpCnr0pJYske+dWq+D
-	 NibmBa9wn3nBA==
-From: Federico Serafini <federico.serafini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 11/12] xen/vpci: add defensive code
-Date: Tue, 10 Sep 2024 12:09:03 +0200
-Message-Id: <d65fde9a39546d0b7c8433d2f8884ddb7b039fb9.1725958417.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1725958416.git.federico.serafini@bugseng.com>
-References: <cover.1725958416.git.federico.serafini@bugseng.com>
+	t=1725963479; bh=vd48NYPv1hQfgAFaz+IETF5DS0GT7eFU3AfR4ZKF5hs=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=BZSP3Ks/jQBgS2Ee4kdIxWtFkpxdP05Wqksaenm6wX6+4HXA+L5PZgUtSaSSlTYAL
+	 GN5ptg2PxWIYbRS4q1GIlWFVaqAiwBwuGhSLxduqJtYO93cCwF7EZye+hVjxzcD8En
+	 XzfZnSAicVvWPek6xRUFrVYRVCu67Gu0bHqzQ13RgL9W+tZ1EeWlFAchxs5XOXa3OM
+	 MTo6y8JxRcjMxbRV1lk6oTSYK3mvBoa1Frzcb42OLd+xZXN5ML/H7pfOKBGhEDfNX1
+	 YDRbt2DqCSv//lde3jUl+5Mi9qbUQF/i7P7Q9mxA3d++OGbb8sz6xhPev//gfYZfNd
+	 +sNmCMNG/bcng==
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Tue, 10 Sep 2024 12:17:59 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
+ ayan.kumar.halder@amd.com, consulting@bugseng.com, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH v2] x86: p2m-pod: address violation of MISRA C Rule
+ 2.1
+In-Reply-To: <38c34b50-56a5-498a-8ed6-d57a8f02a964@suse.com>
+References: <43b3a42f9d323cc3f9747c56e8f59f9dffa69321.1719556140.git.nicola.vetrini@bugseng.com>
+ <38b57a6f-187c-440a-b3b4-9e7e124e1802@suse.com>
+ <25b6a974b7c9aaec32b11930168148a5@bugseng.com>
+ <4e54f8e0-43ce-4dd6-b1b4-cf72b59d96be@suse.com>
+ <1a139b44effdeefab6b3e0ee7ae0c43d@bugseng.com>
+ <38c34b50-56a5-498a-8ed6-d57a8f02a964@suse.com>
+Message-ID: <3f3f43e894a2b9e506dcfba38a578880@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add defensive code in unreachable program points.
-This also meets the requirements to deviate a violation of MISRA C:2012
-Rule 16.3: "An unconditional `break' statement shall terminate every
-switch-clause".
+On 2024-09-10 12:03, Jan Beulich wrote:
+> On 10.09.2024 11:53, Nicola Vetrini wrote:
+>> On 2024-09-10 11:08, Jan Beulich wrote:
+>>> On 10.09.2024 10:56, Nicola Vetrini wrote:
+>>>> On 2024-07-01 10:36, Jan Beulich wrote:
+>>>>> On 28.06.2024 08:30, Nicola Vetrini wrote:
+>>>>> This being about unreachable code, why are the domain_crash() not 
+>>>>> the
+>>>>> crucial points of "unreachability"? And even if they weren't there,
+>>>>> why
+>>>>> wouldn't it be the goto or ...
+>>>>> 
+>>>>>> --- a/xen/arch/x86/mm/p2m-pod.c
+>>>>>> +++ b/xen/arch/x86/mm/p2m-pod.c
+>>>>>> @@ -1040,6 +1040,7 @@ out_unmap:
+>>>>>>       * Something went wrong, probably crashing the domain.  Unmap
+>>>>>>       * everything and return.
+>>>>>>       */
+>>>>>> +    /* SAF-8-safe Rule 2.1: defensive programming */
+>>>>>>      for ( i = 0; i < count; i++ )
+>>>>>>          if ( map[i] )
+>>>>>>              unmap_domain_page(map[i]);
+>>>>> 
+>>>>> ... the label (just out of context) where the comment needs to go?
+>>>> 
+>>>> Because of the way this rule's configuration work, deviations are
+>>>> placed
+>>>> on the construct that ends up being the target of the 
+>>>> unreachability,
+>>> 
+>>> What's "target" here? What if this loop was removed from the 
+>>> function?
+>>> Then both the label and the domain_crash() invocations would still be
+>>> unreachable in debug builds. Are you telling me that this then 
+>>> wouldn't
+>>> be diagnosed by Eclair? Or that it would then consider the closing
+>>> figure brace of the function "the target of the unreachability"?
+>> 
+>> Exactly, the end brace is a target to which the "function end" 
+>> construct
+>> is associated.
+>> It would be kind of strange, though: why not just doing 
+>> "domain_crash();
+>> return;" in that case?
+> 
+> Sure, the question was theoretical. Now if "return" was used directly
+> there, what would then be the "target"? IOW - the more abstract 
+> question
+> of my earlier reply still wasn't answered.
+> 
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
- xen/drivers/vpci/msix.c | 4 ++++
- 1 file changed, 4 insertions(+)
+The return statement in
 
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index fbe710ab92..037f9a0449 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -364,6 +364,8 @@ static int adjacent_read(const struct domain *d, const struct vpci_msix *msix,
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        spin_unlock(&vpci->lock);
-+        return X86EMUL_UNHANDLEABLE;
-     }
-     spin_unlock(&vpci->lock);
- 
-@@ -512,6 +514,8 @@ static int adjacent_write(const struct domain *d, const struct vpci_msix *msix,
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        spin_unlock(&vpci->lock);
-+        return X86EMUL_UNHANDLEABLE;
-     }
-     spin_unlock(&vpci->lock);
- 
+...
+domain_crash();
+return;
+<~~~~~>
+
+Whichever statement is found to be unreachable in the current 
+preprocessed code.
+
 -- 
-2.34.1
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
