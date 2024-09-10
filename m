@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4857EEB64DE
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Sep 2024 14:30:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.795652.1205059 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E6B3ECE564
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Sep 2024 14:34:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.795661.1205091 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1so1sK-00047I-NA; Tue, 10 Sep 2024 14:29:48 +0000
+	id 1so1x1-00063K-UJ; Tue, 10 Sep 2024 14:34:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 795652.1205059; Tue, 10 Sep 2024 14:29:48 +0000
+Received: by outflank-mailman (output) from mailman id 795661.1205091; Tue, 10 Sep 2024 14:34:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1so1sK-00047B-K5; Tue, 10 Sep 2024 14:29:48 +0000
-Received: by outflank-mailman (input) for mailman id 795652;
- Tue, 10 Sep 2024 14:29:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=zCZR=QI=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1so1sI-000473-GF
- for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 14:29:46 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1f893da7-6f81-11ef-99a1-01e77a169b0f;
- Tue, 10 Sep 2024 16:29:44 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a8d2b4a5bf1so114463866b.2
- for <xen-devel@lists.xenproject.org>; Tue, 10 Sep 2024 07:29:44 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25ce9732sm488927566b.151.2024.09.10.07.29.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Sep 2024 07:29:43 -0700 (PDT)
+	id 1so1x1-00063D-OS; Tue, 10 Sep 2024 14:34:39 +0000
+Received: by outflank-mailman (input) for mailman id 795661;
+ Tue, 10 Sep 2024 14:34:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=FMfA=QI=oss.nxp.com=andrei.cherechesu@srs-se1.protection.inumbo.net>)
+ id 1so1x0-0005Zc-9a
+ for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 14:34:38 +0000
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [2a01:111:f403:c201::])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ce09137f-6f81-11ef-a0b5-8be0dac302b0;
+ Tue, 10 Sep 2024 16:34:37 +0200 (CEST)
+Received: from PA4PR04MB9565.eurprd04.prod.outlook.com (2603:10a6:102:26b::13)
+ by AS8PR04MB7557.eurprd04.prod.outlook.com (2603:10a6:20b:294::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.24; Tue, 10 Sep
+ 2024 14:34:34 +0000
+Received: from PA4PR04MB9565.eurprd04.prod.outlook.com
+ ([fe80::d8ae:2e16:5a97:1709]) by PA4PR04MB9565.eurprd04.prod.outlook.com
+ ([fe80::d8ae:2e16:5a97:1709%4]) with mapi id 15.20.7939.017; Tue, 10 Sep 2024
+ 14:34:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,127 +49,242 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f893da7-6f81-11ef-99a1-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1725978584; x=1726583384; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=lMupAigUAFMTX8s9ijgnH5O07hYh+HPlIchUXaApAOU=;
-        b=LXxhsEkWzVGQ1Bv93SRH6f2a7gKBJlCwVJXTtqv4v4b4Rm0zgTpY9OC60zsdB1tF61
-         t/XYmcRxr7tR3ixOBC9wD1iy5dVl2/kUrGriNUapjluraeDZrDKz5YAK4iN75s2EDkR7
-         rJWkgbF6hEXl2CmGSBEutiF7m0Ae0B9ofVu+OwyY7+85n0YSN7c4V6tYqVqjwjpMyDML
-         qiIFK0un+dN0xUqF4w4v7bpyXiOuhCICQ8Z4yeN5mM411c2dNih45hevTpqfqxrAEc9K
-         seLg9Z6NU5AC62NXN63SPx6PASGhw5mJ4dyvGbIiSP/B43n08lx46h82kQCKoBg9dhg6
-         Ol8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725978584; x=1726583384;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lMupAigUAFMTX8s9ijgnH5O07hYh+HPlIchUXaApAOU=;
-        b=MGgorWCh1tRC/cCgKl+WytDp1IANYWgW/ZUEzep5gqIfL3PmNoZIlOcs4+FyzfIFL5
-         TJnH0fRK7jZzV83wK0Qw8bjep/7VQg4wbISqhVG5cDPXTe17JIQK6ma+orFB0F4fMEFH
-         bgUMwLnLgAxwfAyrOZBmxWvbgeaXe4LvyyTgLVMAqcRxjuq9whR9psxQrmvUbD2V8B/o
-         /D6FHIEmDg7TanvGl3cE53rxM4z+O3leG78b8BGCXT2pB8hyZNj9ZFZkKFlg+K7vvRzX
-         xtNFVIZ1nKrXZocSFMtVLr7HYC/7R43m/XBfRBKetZEVwtr7JAoSiygvKRO8C5FbUiU4
-         V10g==
-X-Forwarded-Encrypted: i=1; AJvYcCWeUiMtnXhWfvG04X7muD1I/GI/HPLtGSk8/y+/IKE9Zoq9YGqu3XU02sj3C2tK9teC8zvVkDI97yU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw9CsCYTe2aBsNePx4jGdlhyYDlfE2/4zxzBOKwfGghWtclpMfS
-	MO+SEalDQBI4oOUe9J+H/maLyNV7OmWaNhS7Nc07uEilktX9vWl9YQbBqayrhgQObqS+a0UK90w
-	=
-X-Google-Smtp-Source: AGHT+IELwH9KBj84r5e+67IuPSozWSYDQzk7+fAva82QAPNq+iYQes2pa3USQW2dzNWYxHiTO/J5wQ==
-X-Received: by 2002:a17:907:968e:b0:a7a:a960:99ee with SMTP id a640c23a62f3a-a8ffab9759bmr93882166b.32.1725978583681;
-        Tue, 10 Sep 2024 07:29:43 -0700 (PDT)
-Message-ID: <7d55bda8-222a-46c8-a810-79ba5c0928d3@suse.com>
-Date: Tue, 10 Sep 2024 16:29:43 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 3/4] x86/time: introduce command line option to select
- wallclock
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20240909145455.7517-1-roger.pau@citrix.com>
- <20240909145455.7517-4-roger.pau@citrix.com>
- <985c0d70-55de-43ba-a1b3-811487bb05be@suse.com>
- <ZuBFNu_GFygZwvil@macbook.local>
- <a52b019c-3f1c-4528-91f4-7bc1258c87d9@suse.com>
- <ZuBWsn2wgf9g1Nyv@macbook.local>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ZuBWsn2wgf9g1Nyv@macbook.local>
-Content-Type: text/plain; charset=UTF-8
+X-Inumbo-ID: ce09137f-6f81-11ef-a0b5-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NbJucn1PTRonpZ3jfTH2oJqQdLrIOmHdh81FIUqKW+alE5wx27w1pW0OZdEmJZ8E11bVK1rA/03kpdbwtVDSt4cXNYF/w4QHBiX1B74CcEwWRzNWJZda9/f6R/Q4lIrWkD2cggrBuD/BW+jkfnXGCC2Inyi5UmvjitFkU9X62JEnyp1gRbITiZ6hugSgwjAqzMwqGoS6ngmlOdbRCj00lyQ5lMOxQOVVXOhzEBlwq78Abwj58Wq0coYPOqV2QKPhZcCjG3Nc8lP6OIu1zGLpUo6bHMD8Dh+9tdso3cP9PX1VLmrsMKYXjcdZ4Yz15Vxp5/zcLzgKL824CgTTrw3ujQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TsvmVTWn708dv9V0CssDtYwVcuOhbprlociipcLD3b8=;
+ b=Kp8+id+PbWf8AWBPHZ8zDM9Jzml7glc02Y/nDj7mn1qu0OJkI4KM5e0qFe6SyQGx85E0Sv8G+SgZD/qyLf+8zT8+4pat3qo+NFAH3btIV84Uh88VH8GEbJ05lxi+oMm0riph3nkSG3zeCMwUHxMnN2lH59Q2bsFGQqevQozC2RtnIJLxL18SaGylVuF8ERZd7xFPQ1JFMeopq3zjgQOrpzAymn6ga/e1CRcUJTdNlZlll/9sM64V1q0mw35ePkIuIhTdmW38hnJX0VA8lJTBJVAeG8YN2Z+PVx0Gp+33TBZQM+zOaRS3/gqEIaIFHHvygejqqhAD17bbpU4EGJMDlQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TsvmVTWn708dv9V0CssDtYwVcuOhbprlociipcLD3b8=;
+ b=rOpw4uHCW3HWpw4MbQoJBaQOrH9pa1uwoL/dLpJ7SlQTDuFOfHNutF43f2jOBu9pawk+V/lw9nYbVPCPO1eVbJ9eUGCkM8dQQf0IqpLAwb9W3IH2iF5RXkEcuLw/tIxrxU4SoMRkljiLMnOcG8qNA4CGlJI2ExHNMRytTdcuLCrVQzxK8EERY+lVbeRSi81M2OX57xAhbi0E+6tXC5FniYpmtX6lhz+DsJY+kKRdAEQutKYZNubRdSqHAHvSz8tTrrKUZ6b804pPsaUFyys1p5/dL+Ij1Kp11QRjT+fnXsm9Sy8fO2JdFs6XD1hg2ocFOxPAktpTC4Sp9vvsmTUSyQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+From: "Andrei Cherechesu (OSS)" <andrei.cherechesu@oss.nxp.com>
+To: xen-devel@lists.xenproject.org
+Cc: S32@nxp.com,
+	andrei.cherechesu@oss.nxp.com,
+	Andrei Cherechesu <andrei.cherechesu@nxp.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v1 2/5] xen/arm: Add NXP LINFlexD UART early printk support
+Date: Tue, 10 Sep 2024 17:34:08 +0300
+Message-ID: <20240910143411.178704-3-andrei.cherechesu@oss.nxp.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240910143411.178704-1-andrei.cherechesu@oss.nxp.com>
+References: <20240910143411.178704-1-andrei.cherechesu@oss.nxp.com>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AM0P190CA0019.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:208:190::29) To PA4PR04MB9565.eurprd04.prod.outlook.com
+ (2603:10a6:102:26b::13)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB9565:EE_|AS8PR04MB7557:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4f05d158-cd0c-402f-6169-08dcd1a5b0c8
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|52116014|376014|38350700014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?MloTrjUU3CyMd2oWBjqDRe3kU0Inqw7+SI92lO+E2SSEWujtbsrhOhBzs44P?=
+ =?us-ascii?Q?R1cZlrknv84XQHpm31A4PrA5qiIHXDYWuU1g+yh1hZU9ocrJ2gzQ2H7UBmg7?=
+ =?us-ascii?Q?+MJvZ04hzqWllFrOD/pePqg3QyjL0fwJrjIVpz4UVCNffFzmC78XO/wQyugm?=
+ =?us-ascii?Q?bCdRmHvQXS7aOeZAAf7p+k6MBmjkOiYRNqr6LmA/kH0nRVh91csO5U4L8VWs?=
+ =?us-ascii?Q?bybleHIhI0Cptzh1+wV2DjYodderY93QLbPls1t/50xMOPBiLpYSAMV1K4im?=
+ =?us-ascii?Q?VNdPZnv9Kc1aXBiKz0HTzgXILVO0qcMZRZRLj8s2OQE/+PqCR2ZQ6GvG4STP?=
+ =?us-ascii?Q?Cato3QR3ky/zdGZpEFlEDU6LOWBWH90hEIXNIbAYciSxQ/5IqMqQjV6NyZPE?=
+ =?us-ascii?Q?yfxOxL/hei96px4AxpzgHiFn1kS56uIXpI4irMQ7L6shpPVw3byEDqb0E9ti?=
+ =?us-ascii?Q?wvHqfi+RgklZl5KPBBU7D2YMQr2LYo13WzM3RyqFAMUnrJ2/pk96hwpmdwwC?=
+ =?us-ascii?Q?UrgdVzGFWhyeaYYO097HRFc96JW0LOV7dl906r8nHCPjbocELVgtloHbYXeG?=
+ =?us-ascii?Q?najYWTwRuCskespnFBKSXxq/eZqGYXb8jX/WIRA2Pwx9hN4wWDgKSGtI62qX?=
+ =?us-ascii?Q?57nWpHMHrqDwP3ojx65CtvgN73Urz+yTgGOKoaf1ptF4ZksNBwORdJa6/FIn?=
+ =?us-ascii?Q?ertj087AXiwcUBsA8IvOGhw4Oqag/sa77iB5BTHWzkMCvCaxTvy7JnEUE148?=
+ =?us-ascii?Q?Nh8VPlVoqZnaEOOHjzabErstzc65wTlkDlQcoTMFpGKHbYG+b7kcIIXCr8rP?=
+ =?us-ascii?Q?gi47b1y1WuiSNGCHAcksrcwo67NGCRs5qPC5tILanyfrDqt+BaSKQhzoiR9a?=
+ =?us-ascii?Q?jC5mrzzpyn9FOSuXviAQLitNd7YP/HRQ7ZFJFRpOyzJvcsh2wJuiLVcYcESX?=
+ =?us-ascii?Q?afk4zo71irjsl+REmkTjOgp7kaH0EtV8JZW6bDRN486FQY8Q1JHGFlzi2Bh0?=
+ =?us-ascii?Q?NbTEanaQGXBa8h8CX7Gms0OXBtkzx9HDJkIu6MT0QUXiTGv8/KyYKdVhgqC+?=
+ =?us-ascii?Q?mQQ8qWH8TlRzVjpLOxyyHGXT7kTED3zI1ZNd20NvEjPZRU3w+1SLtwKR7LiW?=
+ =?us-ascii?Q?R1kIyLBfkU1PH70B5K93aJUhSAcbXAncWijsR4VEBKSBMjw7lMet6Al2CD8j?=
+ =?us-ascii?Q?0GCoF+5nHUo0Z+FKQylVyhRAtpBrXJpwNUhqUmm5sA0zOVslXvOfXnHKjMtJ?=
+ =?us-ascii?Q?lNvS3Rp7QCCOkNf+T1UeG9E9Ho3tOFbft+ZJuLB7z9bNCoBOhqmFFumejoEb?=
+ =?us-ascii?Q?CNxw8el+tt3l+grAfdiMlMzSSksG5Jzk+WBPE9lgBT1cI7PT+AFKdTGm84gE?=
+ =?us-ascii?Q?Umm7u1OSoAELGTpj3jhOGjAgMVonL05irpbAS1PkxwooBvhE7g=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR04MB9565.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?n5/t7wQSQ3MGfQeFvIEo3KnoegH+hgqh8X8/VSwWdr9bdTlny0mJiOFWXcUA?=
+ =?us-ascii?Q?IVzZhhsILCUiXNViOOS0Af2eSIb7qADs32MLjNC4BySmQe3x6XtLrBplWLdq?=
+ =?us-ascii?Q?wqphkOzzyOOI/pillJh3Z4CKIYEk+uhwgkFli0ESCJDJPp6W/FtSjv8sLhuP?=
+ =?us-ascii?Q?aMuOgfawedZCD9P4DUaZPsb+tPl0Iq1K2i1BxSiXKuf5RFQME42+/+1conL+?=
+ =?us-ascii?Q?wacUkKYfOogJUiTDWVfLcv0oBwybh40ZnqNqMMvUKxDb2q+Kb4fxuIGm35rY?=
+ =?us-ascii?Q?rUtrma+AcVwqhXlWXhlC9B4SDkpAG+7z4WrQF2X25GuAxmNnZxg3d176NPlz?=
+ =?us-ascii?Q?PvS8EeooQeIWpVA58Neq3cmd/U9qt8jXGYH6JeaN5drSn9KDRJbwJ7oDNwLg?=
+ =?us-ascii?Q?QAoX8t253qpD3KasPboDMhjf0oMNY52PuSFdNZQi+p0WI/9xzDL8xMf/GxIl?=
+ =?us-ascii?Q?CoNiD7gsI4qDDn8EMwWCScAKH4ikKIWa2llF76NnjgbBFIMRGgJE4+xWVq8r?=
+ =?us-ascii?Q?DFxJiPvNBdF23oBWlR6I6iFjS5mDcQLT18Wj67AWFKpOx2qzfTzew4V4XhhF?=
+ =?us-ascii?Q?/lJ29yd9g9KRefWLoa5q1cgj2xbgwOKUJbwlAk4wcK7+J1gaDcS/+5Qp5Ku1?=
+ =?us-ascii?Q?nrGeMS2ZAjrnuZokHlSH1LjtpNdX2IOuOmSOSALCF51rBVeesUD+LW3wzCXe?=
+ =?us-ascii?Q?KZkQOpPMSgYtQEDU+EvaTkg586kZgz7IL+2yhDrqyiNSHEILGesqIXj1Rywt?=
+ =?us-ascii?Q?ywaNYyot2xmEhyNP8EUP5mv7zLg5njoU2lqB2Hwjl2PfFDXB7udvliXVmPSw?=
+ =?us-ascii?Q?9uvqg6Xt1QuFLfZoLlMIgDktDnbTvOLAB5XtKKxaz0EEpOxY769ELd/r+yZS?=
+ =?us-ascii?Q?dR/+UMifBC/zb1gfjcEu6J12MrpOi5Ld46Wsa4e+hhIppsEKF2OU8QUzMSla?=
+ =?us-ascii?Q?ESGo4i/5lXGPyiWIYX0EaYvrYLyWsEdXBJueDccdrWUe4P0uMKzJZBE16lia?=
+ =?us-ascii?Q?8YCG21a6ecbPBKBxiQgR9jEomB/fzXy3C+i+NaKTfyZ2+OeWLuGDoCysws4Q?=
+ =?us-ascii?Q?vIVW3n+CGbNpc+llH6GWDynZxkSzH5SKK1g7NddZ2Jn8Qk5+xWZN/lIInabW?=
+ =?us-ascii?Q?Z0D89m4UX5o4/gRoK9aodSdgUdMGSLsUy1MNr96qSRNccM5/MeatgfWGEKlc?=
+ =?us-ascii?Q?zHmdfOzJIgAmtVlNm3cylCEeU0FM+Px0hl/m7Iinewgn+E7872DvQHu1o8Np?=
+ =?us-ascii?Q?k4wtKCvBKLCb8DiXY6ZDk3FiFvKqaKXtCDbPeyFxR+WFUrVJgXROoUcjSmuY?=
+ =?us-ascii?Q?dM0C+4ect28BD4TCnzLwJjdqHocJFJKVDhmc8FTGs/dcqkPgaUpcu4+4r1oJ?=
+ =?us-ascii?Q?sfJZnIkbDBfQj5PuaByR9Klk3UJZ20hDAw7YdMSbPNjeKl3fqHQDwaDu5jCn?=
+ =?us-ascii?Q?w5cyNAselMrOFgZG21p10gj4scj0/6oeOTpY5fGlkCAS6dwPR59kjs8xzYKE?=
+ =?us-ascii?Q?RE1MKYs1/H7TYqKQAnHg4NnFUVXUFH5h+7g5TeBX+89CjaMfDgUJs9fvby7A?=
+ =?us-ascii?Q?Djye1rW3FnjhIPiyP1aryxlEYcFJNJu+SAk0Gxar20m2+EaVKCh+A8E7aOzp?=
+ =?us-ascii?Q?wQ=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f05d158-cd0c-402f-6169-08dcd1a5b0c8
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB9565.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2024 14:34:34.6854
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZiXL5d+BcK0fvvJBCnZvYgI/u0mhUjUQAVDQxwtrS3Ts/c7ksyZHCeogBaox1Q8DsxuUktZWn6a8KJJaqeLGDIwP2hELtu2T75iVm2+zcgo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7557
 
-On 10.09.2024 16:24, Roger Pau Monné wrote:
-> On Tue, Sep 10, 2024 at 03:49:52PM +0200, Jan Beulich wrote:
->> On 10.09.2024 15:10, Roger Pau Monné wrote:
->>>  Would you be fine with
->>> adding the following in init_xen_time():
->>>
->>>     /*
->>>      * EFI run time services can be disabled form the command line, hence the
->>>      * check for them cannot be done as part of the wallclock option parsing.
->>>      */
->>>     if ( wallclock_source == WALLCLOCK_EFI && !efi_enabled(EFI_RS) )
->>>         wallclock_source = WALLCLOCK_UNSET;
->>>
->>>     if ( wallclock_source == WALLCLOCK_UNSET )
->>>         probe_wallclock();
->>
->> ... this is probably the best we can do (nit: s/form/from/ in the comment;
->> maybe also "..., hence the check done as part of option parsing may not
->> suffice" or some such).
-> 
-> I didn't put in my previous reply, but I've removed the efi_enabled()
-> check from the option parsing and instead added this comment:
-> 
->         /*
->          * Checking if run-time services are available must be done after
->          * command line parsing.
->          */
-> 
-> I don't think there's much point in doing the check in
-> parse_wallclock() if it's not reliable, so your reference in the
-> comment to "the check done as part of option parsing" is no longer
-> valid.
+From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
 
-Hmm. Rejecting the option if we can is reasonable imo. "efi=rs" can imo only
-sensibly be used to override an earlier "efi=no-rs". Hence what we see while
-parsing the wallclock option gives us at least reasonable grounds to reject
-the option if EFI_RS is already clear. We then merely fail to reject the
-option if the flag is cleared later.
+This adds support for early printk debug via the NXP LINFlexD
+UART controller.
 
-Yet in the end I'd be happy to leave this particular aspect to you and the
-EFI maintainers.
+Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+Signed-off-by: Peter van der Perk <peter.vander.perk@nxp.com>
+---
+ xen/arch/arm/Kconfig.debug           | 14 +++++++
+ xen/arch/arm/arm64/debug-linflex.inc | 58 ++++++++++++++++++++++++++++
+ 2 files changed, 72 insertions(+)
+ create mode 100644 xen/arch/arm/arm64/debug-linflex.inc
 
-Jan
+diff --git a/xen/arch/arm/Kconfig.debug b/xen/arch/arm/Kconfig.debug
+index eec860e88e..a309f67f90 100644
+--- a/xen/arch/arm/Kconfig.debug
++++ b/xen/arch/arm/Kconfig.debug
+@@ -68,6 +68,16 @@ choice
+ 			provide the parameters for the i.MX LPUART rather than
+ 			selecting one of the platform specific options below if
+ 			you know the parameters for the port.
++	config EARLY_UART_CHOICE_LINFLEX
++		select EARLY_UART_LINFLEX
++		depends on ARM_64
++		bool "Early printk via NXP LINFlexD UART"
++		help
++			Say Y here if you wish the early printk to direct their
++			output to an NXP LINFlexD UART. You can use this option to
++			provide the parameters for the NXP LINFlexD UART rather than
++			selecting one of the platform specific options below if
++			you know the parameters for the port.
+ 	config EARLY_UART_CHOICE_MESON
+ 		select EARLY_UART_MESON
+ 		depends on ARM_64
+@@ -199,6 +209,9 @@ config EARLY_UART_EXYNOS4210
+ config EARLY_UART_IMX_LPUART
+ 	select EARLY_PRINTK
+ 	bool
++config EARLY_UART_LINFLEX
++	select EARLY_PRINTK
++	bool
+ config EARLY_UART_MESON
+ 	select EARLY_PRINTK
+ 	bool
+@@ -304,6 +317,7 @@ config EARLY_PRINTK_INC
+ 	default "debug-cadence.inc" if EARLY_UART_CADENCE
+ 	default "debug-exynos4210.inc" if EARLY_UART_EXYNOS4210
+ 	default "debug-imx-lpuart.inc" if EARLY_UART_IMX_LPUART
++	default "debug-linflex.inc" if EARLY_UART_LINFLEX
+ 	default "debug-meson.inc" if EARLY_UART_MESON
+ 	default "debug-mvebu.inc" if EARLY_UART_MVEBU
+ 	default "debug-pl011.inc" if EARLY_UART_PL011
+diff --git a/xen/arch/arm/arm64/debug-linflex.inc b/xen/arch/arm/arm64/debug-linflex.inc
+new file mode 100644
+index 0000000000..6ed704e104
+--- /dev/null
++++ b/xen/arch/arm/arm64/debug-linflex.inc
+@@ -0,0 +1,58 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * xen/arch/arm/arm64/debug-linflex.inc
++ *
++ * NXP LINFlexD UART specific debug code
++ *
++ * Andrei Cherechesu <andrei.cherechesu@nxp.com>
++ * Copyright 2018, 2021, 2023-2024 NXP
++ */
++
++#include <asm/asm_defns.h>
++#include <asm/linflex-uart.h>
++
++/*
++ * wait LINFlexD UART to be ready to transmit
++ * xb: register which contains the UART base address
++ * c: scratch register number
++ */
++.macro early_uart_ready xb, c
++    ldr   w\c, [\xb, #UARTCR]       /* <= Control Register */
++    and   w\c, w\c, #UARTCR_TFBM    /* Check Buffer/FIFO (0/1) Mode */
++    cbz   w\c, 2f                   /* Buffer Mode => return */
++1:
++    ldrb  w\c, [\xb, #UARTSR]       /* <= Status Register */
++    tst   w\c, #UARTSR_DTFTFF       /* FIFO Mode => Check DTF bit */
++    b.ne  1b
++2:
++.endm
++
++/*
++ * LINFlexD UART transmit character
++ * xb: register which contains the UART base address
++ * wt: register which contains the character to transmit
++ */
++.macro early_uart_transmit xb, wt
++    strb  \wt, [\xb, #BDRL]
++
++    ldr   \wt, [\xb, #UARTCR]       /* <= Control Register */
++    and   \wt, \wt, #UARTCR_TFBM    /* Check Buffer/FIFO (0/1) Mode */
++    cbnz  \wt, 2f                   /* FIFO Mode => goto exit */
++
++3:  /* Buffer Mode */
++    ldrb  \wt, [\xb, #UARTSR]       /* <= Status Register */
++    and   \wt, \wt, #UARTSR_DTFTFF  /* Check Transmission Completed */
++    cbz   \wt, 3b
++
++    ldr   \wt, [\xb, #UARTSR]       /* <= Status Register */
++    orr   \wt, \wt, #UARTSR_DTFTFF  /* Clear DTF bit */
++    str   \wt, [\xb, #UARTSR]
++2:
++.endm
++
++/*
++ * Local variables:
++ * mode: ASM
++ * indent-tabs-mode: nil
++ * End:
++ */
+\ No newline at end of file
+-- 
+2.45.2
+
 
