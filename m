@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75EDEECE564
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Sep 2024 14:44:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.795729.1205201 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F2F0ECE564
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Sep 2024 14:50:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.795735.1205211 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1so26s-0006GO-E4; Tue, 10 Sep 2024 14:44:50 +0000
+	id 1so2C6-0000E2-1o; Tue, 10 Sep 2024 14:50:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 795729.1205201; Tue, 10 Sep 2024 14:44:50 +0000
+Received: by outflank-mailman (output) from mailman id 795735.1205211; Tue, 10 Sep 2024 14:50:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1so26s-0006GH-A2; Tue, 10 Sep 2024 14:44:50 +0000
-Received: by outflank-mailman (input) for mailman id 795729;
- Tue, 10 Sep 2024 14:44:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1so2C5-0000Dv-TD; Tue, 10 Sep 2024 14:50:13 +0000
+Received: by outflank-mailman (input) for mailman id 795735;
+ Tue, 10 Sep 2024 14:50:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zCZR=QI=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1so26s-0006GB-0Z
- for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 14:44:50 +0000
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [2a00:1450:4864:20::134])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3afa74e6-6f83-11ef-a0b5-8be0dac302b0;
- Tue, 10 Sep 2024 16:44:49 +0200 (CEST)
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5365b6bd901so4758910e87.2
- for <xen-devel@lists.xenproject.org>; Tue, 10 Sep 2024 07:44:49 -0700 (PDT)
+ id 1so23X-0004pU-7G
+ for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 14:41:23 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bde4e3e4-6f82-11ef-99a1-01e77a169b0f;
+ Tue, 10 Sep 2024 16:41:19 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a8d13b83511so447664866b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Sep 2024 07:41:19 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25cea3eesm492957466b.145.2024.09.10.07.44.47
+ a640c23a62f3a-a8d25cf6a88sm486405666b.182.2024.09.10.07.41.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Sep 2024 07:44:48 -0700 (PDT)
+ Tue, 10 Sep 2024 07:41:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,52 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3afa74e6-6f83-11ef-a0b5-8be0dac302b0
+X-Inumbo-ID: bde4e3e4-6f82-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1725979489; x=1726584289; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=CnSkeptj05D9Sz4fhtAJdyYofegUAFpyI1beArrS6tM=;
-        b=X3KCWT3zdi4hUGmtgBXS4YnBmCjlfZ9zzGGk9GaB8xoGXl3q2RuxOn4esV1G6UfGkr
-         C6kf6ABxBIHtXHpAHDwVyv/WfkNKB6vrVlN0R0ddGbUptF7cA05AOpf2XNvlW/Dq6hly
-         LWvTc1tYVvtlWWk9/aHdGfbYBH3isJp0It+Kl5LUS1Vtt8Uas7epVVQyZiyPQavBpR4p
-         kNHrthersNp50M856FNg1MKtqvqkqHDAJWKpYvLDl3HODSJ/6k2+1tzQH4jjaPz/izns
-         L517RsoQfwR7jxloqS1RKe8BpHS6bjbwlWCIXi/miakysAiZf/4MuHAFHiN9h/m1DlbW
-         s3FQ==
+        d=suse.com; s=google; t=1725979279; x=1726584079; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=+an3treqQP08FQ/4v2IVBHHJXdUo5OxtUySraZtU00s=;
+        b=WWwGVS1FzMJ/Tp0id/F3+q5kpu1CqdJk/NytjTKpFQWVwHuCeNfJv/HBfMnVtLuUs8
+         uI3A2Dy+GexWZEFONjHPHh5FYWC5Wih5WaQ3Xh5grWRRNd1gTJiiZrjHd/9HhuXWKmN6
+         bWulY2mQsAVGg8vQfWONpce7aER/IHSPz7oKX5ebEt6gHhGz775jr7fEWdB359N+638r
+         WlSUq6M0sA6xxd/obtp5BvIU4bjm62uJzXSTuuh+6JCdqNyK8d6BWMh/wcNJwLPfrUoS
+         2pd65FzRKBUy6ZfiNkz6VAgNhZxT3lEtDXnqyBJh5a/zPAyyl56Ae1WtRLvr0PCMI2AZ
+         FUJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725979489; x=1726584289;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CnSkeptj05D9Sz4fhtAJdyYofegUAFpyI1beArrS6tM=;
-        b=aEq2rhpFpI5aHotlXfRtHQ8b9scCb4lKWPElSu2IUlBGkuHOZclk9fJ4xmDiMIibHH
-         jrhCPWkZgpv4d+viIok9gXh/eAgI3Wb8/8Cwpx6Wzb4CQjHwEW1FyKdEvW5t3OzTKJlF
-         QBMi1Ps5W+8dJ6jPmYYmGGwlkjkijWwyfRxvuC2AApOU7wndiLpkPlFoiCq3sAlxWbwE
-         oqTknDBJNBEr7jZnGs3knRS4Y9oiNUeQeNeGRQ6G2YWldA1ZQXNcMOFV+64fciPKN/lQ
-         uo0wpDxHhUCdpX7NWw7ewzggNEfnjdPxx3gtZ1ZCMG8mS5zIpTAEo8qDzQzAO2nUWKap
-         OcyQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWy/mjjmg6GGNnTOQRdH7U6OZXFw7PV73WQ3w5vZsnPHjp0P8Ygc3TfWD3oDDO88eXBisWPvIfRfLA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywym9FSbK+ezomCPGA2z4b575Efi17sPFG+TtdroS4C0yzXHckX
-	W7ZXXELwrGG+xJ9cgEgWuV7CpTWmWGPFPm6yeiaJWyePN4T3mY9tQ3KUaN3kHA==
-X-Google-Smtp-Source: AGHT+IFIpvqucvuabYwxaX7J+h3fY7Hz0hiUCYtrFPTMyMKCwvGjhh9FjysTjDaVv89MWKJ2Iyedog==
-X-Received: by 2002:a05:6512:3d02:b0:52c:e4bf:d55d with SMTP id 2adb3069b0e04-536587aa701mr8492164e87.8.1725979488425;
-        Tue, 10 Sep 2024 07:44:48 -0700 (PDT)
-Message-ID: <b0f76ea2-3700-44e8-b990-bd0d7acbcb0b@suse.com>
-Date: Tue, 10 Sep 2024 16:44:48 +0200
+        d=1e100.net; s=20230601; t=1725979279; x=1726584079;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+an3treqQP08FQ/4v2IVBHHJXdUo5OxtUySraZtU00s=;
+        b=bAxsSkvN/R8AzdJ/QaFZ4HBDVQ5telu7Rtx6d2tm1NcVkm7G13C7uNmOrt1AVg8mFj
+         S7LDIAvQE1eCQ6rDBVP9UecYcJ6M4vXHncdeQxBXeOn1rOFxgVvUCADgfoVaLY0NjXl/
+         Js/BXwnw7sicQx5vD46BVx9tpVBneeGn7PyHmPtMh2ErJxt7pQ3BtCvH1ZR2euMIolyL
+         vBVw2srRwiRbVgkoL/7eMgv/0fQLD4YE3vfOg4LbsPbzkfaXeZoQSUd1wWSCFqjliO3q
+         7ptY58KnlEN4oBs9LsB0jLtk8wvEi+iBFYxUYrL3UPg8KU2hWMQgiGArNoEAscSDFr1y
+         AjDQ==
+X-Gm-Message-State: AOJu0YwcIdw/dc5Xu6r2edfirYbZ06XN/IGcwTY/9Hi6OqImqd1hq4qT
+	VXibXmyS2y6pK8sgBQqP5vUE1EgS1ZiuAnft7wRifOSHeiFj7hDu+GlBSTQ60B2rTsRE6yUibH0
+	=
+X-Google-Smtp-Source: AGHT+IEL43VKLBgnsb/rYvhsWFRr2S0ZOZER3ChseZVfzNKPzJNE38MkCxUMvUjCV5fUJnkaoPwasw==
+X-Received: by 2002:a17:907:3f96:b0:a77:cbe5:413f with SMTP id a640c23a62f3a-a8ffaaa6494mr107386766b.4.1725979278891;
+        Tue, 10 Sep 2024 07:41:18 -0700 (PDT)
+Message-ID: <64883365-9ed1-45d4-a586-90b488480a82@suse.com>
+Date: Tue, 10 Sep 2024 16:41:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH 02/12] x86/time: address violations of MISRA C Rule
- 16.3
-To: Federico Serafini <federico.serafini@bugseng.com>
-Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1725958416.git.federico.serafini@bugseng.com>
- <cf6d83d970a99f21b90073e3583c26418c8b3b9f.1725958416.git.federico.serafini@bugseng.com>
-Content-Language: en-US
+Subject: [PATCH 6/7] x86/HVM: drop stdvga's "{g,s}r_index" struct members
 From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <cd97dd61-c75c-4ab6-b36f-b2b035c4a564@suse.com>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -116,20 +113,103 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <cf6d83d970a99f21b90073e3583c26418c8b3b9f.1725958416.git.federico.serafini@bugseng.com>
+In-Reply-To: <cd97dd61-c75c-4ab6-b36f-b2b035c4a564@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 10.09.2024 12:08, Federico Serafini wrote:
-> Address violations of MISRA C:2012 Rule 16.3:
-> "An unconditional `break' statement shall terminate every
-> switch-clause".
-> 
-> No functional change.
-> 
-> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+No consumers are left, hence the producer and the fields themselves can
+also go away. stdvga_outb() is then useless, rendering stdvga_out()
+useless as well. Hence the entire I/O port intercept can go away.
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
+--- a/xen/arch/x86/hvm/stdvga.c
++++ b/xen/arch/x86/hvm/stdvga.c
+@@ -37,62 +37,6 @@
+ #define VGA_MEM_BASE 0xa0000
+ #define VGA_MEM_SIZE 0x20000
+ 
+-static int stdvga_outb(uint64_t addr, uint8_t val)
+-{
+-    struct hvm_hw_stdvga *s = &current->domain->arch.hvm.stdvga;
+-    int rc = 1;
+-
+-    switch ( addr )
+-    {
+-    case 0x3c4:                 /* sequencer address register */
+-        s->sr_index = val;
+-        break;
+-
+-    case 0x3ce:                 /* graphics address register */
+-        s->gr_index = val;
+-        break;
+-
+-    default:
+-        rc = 0;
+-        break;
+-    }
+-
+-    return rc;
+-}
+-
+-static void stdvga_out(uint32_t port, uint32_t bytes, uint32_t val)
+-{
+-    switch ( bytes )
+-    {
+-    case 1:
+-        stdvga_outb(port, val);
+-        break;
+-
+-    case 2:
+-        stdvga_outb(port + 0, val >> 0);
+-        stdvga_outb(port + 1, val >> 8);
+-        break;
+-
+-    default:
+-        break;
+-    }
+-}
+-
+-static int cf_check stdvga_intercept_pio(
+-    int dir, unsigned int port, unsigned int bytes, uint32_t *val)
+-{
+-    struct hvm_hw_stdvga *s = &current->domain->arch.hvm.stdvga;
+-
+-    if ( dir == IOREQ_WRITE )
+-    {
+-        spin_lock(&s->lock);
+-        stdvga_out(port, bytes, *val);
+-        spin_unlock(&s->lock);
+-    }
+-
+-    return X86EMUL_UNHANDLEABLE; /* propagate to external ioemu */
+-}
+-
+ static int cf_check stdvga_mem_read(
+     const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
+     uint64_t *p_data)
+@@ -197,11 +141,6 @@ void stdvga_init(struct domain *d)
+     {
+         struct hvm_io_handler *handler;
+ 
+-        /* Sequencer registers. */
+-        register_portio_handler(d, 0x3c4, 2, stdvga_intercept_pio);
+-        /* Graphics registers. */
+-        register_portio_handler(d, 0x3ce, 2, stdvga_intercept_pio);
+-
+         /* VGA memory */
+         handler = hvm_next_io_handler(d);
+ 
+--- a/xen/arch/x86/include/asm/hvm/io.h
++++ b/xen/arch/x86/include/asm/hvm/io.h
+@@ -111,8 +111,6 @@ struct vpci_arch_msix_entry {
+ };
+ 
+ struct hvm_hw_stdvga {
+-    uint8_t sr_index;
+-    uint8_t gr_index;
+     struct page_info *vram_page[64];  /* shadow of 0xa0000-0xaffff */
+     spinlock_t lock;
+ };
 
 
