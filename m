@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBEF1EDE99A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3FB3EDE99C
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Sep 2024 10:09:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.795234.1204477 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.795239.1204511 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snxoE-0007Qh-1t; Tue, 10 Sep 2024 10:09:18 +0000
+	id 1snxoG-00088I-SP; Tue, 10 Sep 2024 10:09:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 795234.1204477; Tue, 10 Sep 2024 10:09:18 +0000
+Received: by outflank-mailman (output) from mailman id 795239.1204511; Tue, 10 Sep 2024 10:09:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1snxoD-0007QU-Ut; Tue, 10 Sep 2024 10:09:17 +0000
-Received: by outflank-mailman (input) for mailman id 795234;
- Tue, 10 Sep 2024 10:09:16 +0000
+	id 1snxoG-000874-GU; Tue, 10 Sep 2024 10:09:20 +0000
+Received: by outflank-mailman (input) for mailman id 795239;
+ Tue, 10 Sep 2024 10:09:18 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hUAX=QI=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1snxoC-0006hI-2u
- for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 10:09:16 +0000
+ id 1snxoE-0006hI-AU
+ for xen-devel@lists.xenproject.org; Tue, 10 Sep 2024 10:09:18 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bb55668f-6f5c-11ef-a0b5-8be0dac302b0;
- Tue, 10 Sep 2024 12:09:14 +0200 (CEST)
+ id bd7ee6d3-6f5c-11ef-a0b5-8be0dac302b0;
+ Tue, 10 Sep 2024 12:09:18 +0200 (CEST)
 Received: from truciolo.homenet.telecomitalia.it
  (host-79-37-206-90.retail.telecomitalia.it [79.37.206.90])
- by support.bugseng.com (Postfix) with ESMTPSA id 948624EE07BF;
- Tue, 10 Sep 2024 12:09:13 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 623FC4EE07BC;
+ Tue, 10 Sep 2024 12:09:17 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,36 +42,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb55668f-6f5c-11ef-a0b5-8be0dac302b0
+X-Inumbo-ID: bd7ee6d3-6f5c-11ef-a0b5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1725962954; bh=MaOKWAN8/iHkSkxPEna4IofkZpedWnhaY89MZEeE3co=;
+	t=1725962957; bh=Wzd19j+5sdHV5ycixT7bH8d010X065zNVcpGpfr7Qh8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jgHfikcoR4ZMGX2PA869SFMOKlxagBEL9HZX8QiMnq70BklAx7qbyPZu4gCeR9JBM
-	 on2OTlk6KV+/X5xZG1/uyQ9/mNj2TRFch7dXxq06t7SLOe/OT1DhD2KrptKeEmP5hT
-	 3dRXnmKmHjyLCLsO2+HzxAMA0yPnbVD+V/QZG5luHJFUQc+bWrddz7QCCBmt9PsDQY
-	 NXwMkpGmIV1h3ZoqLOfUi4cfDvffxt5+AOX/8Az+8tRK49GWkx5iX1CnxeAZJm3NXu
-	 cM6qL5B5wt/ktcpBkMwZRkTRcbSFY4fvIErPWvCmCObl5mx8lF/5zga10qN1yRwtmV
-	 +JAn1Y7kO75HA==
+	b=yQcXn6UqvvTYA/+d8iwzKMdvnAAyAabOwroyHaI81cEKFydQtk4qejFgWX7Qzx2z2
+	 zrsEdFJq6RJjcZ1/GAZSEQ9nmjOv59fxaLZ6ez8ng7bHGOB7aHuMCp7UkwSgTraDDc
+	 UtKdY06Ad5+s/Hy3is5k7rwiPULRpZFvhqlOer9G7Q0WRvKE7Q4HRHpnBRTQPyul25
+	 8Zu6OtKMzg/pCIcKotbKE7lTxun4YNcKYIHDaQr8ToPKGUKxEcLo6ZEp6J1RbLg3DB
+	 CQok6PkqcAWYaRm1g8yJ8J0/2gOtbOuQlKtnT2z6lKcfT7QByqZmShNd1ovmb0IS4j
+	 dWP5QZrdKmI3g==
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 03/12] x86/vm_event: address violation of MISRA C Rule 16.3
-Date: Tue, 10 Sep 2024 12:08:55 +0200
-Message-Id: <d45ca82c321f74fa320472e3309d4c30bdfb32b9.1725958416.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 12/12] xen/pci: address a violation of MISRA C Rule 16.3
+Date: Tue, 10 Sep 2024 12:09:04 +0200
+Message-Id: <fd3bb0369cc1666a6c4ad79c54ee8772c1e561c2.1725958417.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1725958416.git.federico.serafini@bugseng.com>
 References: <cover.1725958416.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Address a violation of MISRA C:2012 Rule 16.3:
+Address violations of MISRA C:2012 Rule 16.3:
 "An unconditional `break' statement shall terminate every
 switch-clause".
 
@@ -79,21 +75,25 @@ No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/arch/x86/vm_event.c | 1 +
- 1 file changed, 1 insertion(+)
+ xen/drivers/passthrough/pci.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/vm_event.c b/xen/arch/x86/vm_event.c
-index e6c7ad5337..0d15d363c3 100644
---- a/xen/arch/x86/vm_event.c
-+++ b/xen/arch/x86/vm_event.c
-@@ -190,6 +190,7 @@ static void vm_event_pack_segment_register(enum x86_segment segment,
- 
-     default:
-         ASSERT_UNREACHABLE();
+diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+index 5a446d3dce..a5705def3f 100644
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -170,8 +170,10 @@ static int __init cf_check parse_phantom_dev(const char *str)
+     {
+     case 1: case 2: case 4:
+         if ( *s )
+-    default:
+             return -EINVAL;
 +        break;
++    default:
++        return -EINVAL;
      }
- }
- #endif
+ 
+     phantom_devs[nr_phantom_devs++] = phantom;
 -- 
 2.34.1
 
