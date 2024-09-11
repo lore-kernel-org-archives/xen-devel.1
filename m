@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 985CDEE4987
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Sep 2024 10:04:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.796366.1205923 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27D2DEE498B
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Sep 2024 10:05:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.796368.1205938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1soKDR-0003dy-Vp; Wed, 11 Sep 2024 10:04:49 +0000
+	id 1soKDU-0003vo-Fe; Wed, 11 Sep 2024 10:04:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 796366.1205923; Wed, 11 Sep 2024 10:04:49 +0000
+Received: by outflank-mailman (output) from mailman id 796368.1205938; Wed, 11 Sep 2024 10:04:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1soKDR-0003dr-T3; Wed, 11 Sep 2024 10:04:49 +0000
-Received: by outflank-mailman (input) for mailman id 796366;
- Wed, 11 Sep 2024 10:04:49 +0000
+	id 1soKDU-0003ux-9x; Wed, 11 Sep 2024 10:04:52 +0000
+Received: by outflank-mailman (input) for mailman id 796368;
+ Wed, 11 Sep 2024 10:04:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TDmC=QJ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1soKDR-0003dj-3r
- for xen-devel@lists.xenproject.org; Wed, 11 Sep 2024 10:04:49 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
+ id 1soKDT-0003dj-DX
+ for xen-devel@lists.xenproject.org; Wed, 11 Sep 2024 10:04:51 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4722219c-7025-11ef-a0b5-8be0dac302b0;
- Wed, 11 Sep 2024 12:04:48 +0200 (CEST)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2f762de00e5so44921561fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Sep 2024 03:04:48 -0700 (PDT)
+ id 48b43047-7025-11ef-a0b5-8be0dac302b0;
+ Wed, 11 Sep 2024 12:04:50 +0200 (CEST)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2f7502f09fdso6978711fa.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Sep 2024 03:04:50 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2f75bffc9d6sm15338281fa.42.2024.09.11.03.04.45
+ 38308e7fff4ca-2f75bffc9d6sm15338281fa.42.2024.09.11.03.04.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 03:04:46 -0700 (PDT)
+ Wed, 11 Sep 2024 03:04:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,77 +46,277 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4722219c-7025-11ef-a0b5-8be0dac302b0
+X-Inumbo-ID: 48b43047-7025-11ef-a0b5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726049087; x=1726653887; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pn0sbp0UwkZ8169k+iUtfqTJyB1BGsroFkTPWXEUMwg=;
-        b=loM3W04zwYUdthA+WrynwoYReSdGLxJ2oO1PWCzI5PRPtxww7vcH4nY/63AGRlBOys
-         cMp1ZwI3r8tWy7LGnSmGgxCvHllpEM7jKUzpnEg72mQZA/CXXfW+Lv2oD9qLZ1lOEW7i
-         bVoj7I4ia3pmhlJuHdLeYC/3hgGAmj0CYU3LYTUkqU/EOrFoW4l45u2FWpDA++szhATn
-         YSimYUT2W5WQIWDNQ7167Q4HPH+sk1StwQMhoSSbI1ELbWukflsAHACD5NfkDdGqd41A
-         zlga1uMhnmOR+Wj87wlTMtPGzbDv0pOPpQGIAlk78XS1rcEZHyO2LJCU/PPxeR9j7NaE
-         sLcw==
+        d=gmail.com; s=20230601; t=1726049089; x=1726653889; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VMfC1nH5jIMgPGUj/YUy4F9FmE7AL/kPpwi07IGIBU8=;
+        b=lGOh1Th+Wt8wtii5dGq7Nf3xvCemlqZ41OahSnonTfnJZqbeGtM+kQnfBJ4unQ3TUb
+         wory2eZ/AmoHl4XV2eeg219wr4DAqF6M5yXS6ZAVC+w3opsDwkgayAEkvhwAhrWA6oxS
+         oRVNHj7y33KZRRH3I0so6dxRHLSbUwR6pwU6PNO9oh6b5IB0ykB7BljifQphtTmfTTif
+         06RsbQZY5SU7A+6otzjTJONxOwOcNcAbx+N03kXZWF3y2LUvTt05K9tTVdmxP/I1n+aS
+         /xFGjzFTOC7wQlcEHNcJZp/w/6buG2CdFsINcI7Mpac/nqkBmSggf3FVe3owXFpBkqWj
+         xm6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726049087; x=1726653887;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pn0sbp0UwkZ8169k+iUtfqTJyB1BGsroFkTPWXEUMwg=;
-        b=r0Mfsqt0G4YTwLJFLq+KxX3FiBisWJdoCUvjc6o3s4MmzaxSOHg5RHZhZgfh8Jdski
-         tI50Ns494sHVReKj+jl0sV4muWlk0gTc5kXOLZF8+5C0WY+qS78wSI8H/2HXDgQ1hMND
-         aXksJpcE9WkUz9RdK3hXvi0RJjR5NrkCf5z14AUOsYVLuU3iiruq+KpqXIYlNlhMVvZN
-         zRYODV9aA7qMTAloLdl4/62QAMfJLfxEM44Hw1UZ+xPs1KFqdkZyQhCSJQcuB5ltSqQe
-         838b5J6NLeRPHqVEGwgMoKCwpWlMkXahhYwjlnDkqfTj6iL0jnvvnpIWAdQC4JHNfLkJ
-         PqUw==
-X-Gm-Message-State: AOJu0YxovG5jBPKH3YFmKgxrWoGJX+L/2UmbEJQYF7VRUDmXOrJcSaK2
-	jh0knBl2HszeUV6uHJ65N/qYb+wFXeaupW5unft7O3tfD4pGMVuE75S6BA==
-X-Google-Smtp-Source: AGHT+IHQiCPC03SY3xZPiA1TcURdqn2QC7GOR2aGuYB3YZRcQK9B8zSy5V84poFdEesSPu7gcMb47Q==
-X-Received: by 2002:a05:651c:1501:b0:2f7:631a:6e0c with SMTP id 38308e7fff4ca-2f7631a71f6mr83341001fa.35.1726049086548;
-        Wed, 11 Sep 2024 03:04:46 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1726049089; x=1726653889;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=VMfC1nH5jIMgPGUj/YUy4F9FmE7AL/kPpwi07IGIBU8=;
+        b=AC4Qq/X7lZNXVUdQo3DLHbpC6yn84Ey6PWhNtrzCHtfycz9SqPtwEQixgcRn14HzOJ
+         KXsS43I6cUuysCwS15lzdz44qaq+YDMLM7wfm+U6RSIXSx2iaG8FKoGAdu5sulU+gJDA
+         2dEIxN9uu7WY5st+4mZFgQIaastD4DUTWv4Fz370BKrVKRHRJ46xVvCZhCmwFGYcE38d
+         sxk1TXKW/6BH/gHrot+FkoJ7j9igJR7lP4fK3bXhODv+K8u01YZEdBW7iU7jNxlim7VM
+         vMzfr62sK4LplE/ErkuHr0nqunsFWYISveUsVtpb2dCzrAnOBy6eg8cRN1ppr3bxsh5f
+         drgg==
+X-Gm-Message-State: AOJu0YzhbKze4qSTnZqehRar0P1gsSnwzDw6xlG+g9BGaAyiucLkhyHb
+	nGH9+8FvmbCYD9KEpokm+p6SsPF+EF6KBAEJDVh0vNIX2EBkiQ8Of7j2uw==
+X-Google-Smtp-Source: AGHT+IFlVNdYLqTCu4xkkTDM5I5j2GAnr2QyEZqIxrZ2XCMt1GwMiDLhysDiFKr/rOqZZEWGmvrU9A==
+X-Received: by 2002:a2e:be86:0:b0:2f4:f66f:d55a with SMTP id 38308e7fff4ca-2f7727185demr25313671fa.21.1726049089359;
+        Wed, 11 Sep 2024 03:04:49 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v1 0/3] Move {acpi_}device_init() and device_get_class() to common code
-Date: Wed, 11 Sep 2024 12:04:40 +0200
-Message-ID: <cover.1726048521.git.oleksii.kurochko@gmail.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v1 3/3] xen/common: move device initialization code to common code
+Date: Wed, 11 Sep 2024 12:04:43 +0200
+Message-ID: <128d17f3625807a26875b7a419fb56610424b18c.1726048521.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <cover.1726048521.git.oleksii.kurochko@gmail.com>
+References: <cover.1726048521.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The {acpi_}device_init() and device_get_class() functions are identical across Arm and
-RISC-V, and they are likely to remain the same for other architectures like PPC.
-Since there is no architecture-specific logic within these functions, they are good
-candidates to be moved to the common codebase.
+Remove the device initialization code from `xen/arch/arm/device.c`
+and move it to the common code to avoid duplication and make it accessible
+for both ARM and other architectures.
+device_get_class(), device_init(), _sdevice[] and _edevice[] are wrapped by
+"#ifdef CONFIG_HAS_DEVICE_TREE" for the case if an arch doesn't support
+device tree.
 
-This patch series refactors the code by moving these functions to the common directory,
-reducing code duplication and simplifying future maintenance.
+Remove unnecessary inclusions of <asm/device.h> and <xen/init.h> from
+`xen/arch/arm/device.c` as no code in the file relies on these headers.
+Fix the inclusion order by moving <asm/setup.h> after <xen/*> headers to
+resolve a compilation error:
+   ./include/public/xen.h:968:35: error: unknown type name 'uint64_t'
+    968 | __DEFINE_XEN_GUEST_HANDLE(uint64, uint64_t);
+        |                                   ^~~~~~~~
+   ./include/public/arch-arm.h:191:21: note: in definition of macro '___DEFINE_XEN_GUEST_HANDLE'
+   191 |     typedef union { type *p; uint64_aligned_t q; }              \
+       |                     ^~~~
+   ./include/public/xen.h:968:1: note: in expansion of macro '__DEFINE_XEN_GUEST_HANDLE'
+   968 | __DEFINE_XEN_GUEST_HANDLE(uint64, uint64_t);
+because <asm/setup.h> includes <public/version.h>, which in turn includes
+"xen.h", which requires <xen/types.h> to be processed correctly.
+Additionally, add <xen/device_tree.h> to `device.c` as functions from this
+header are used within the file.
 
-Oleksii Kurochko (3):
-  xen/ppc: add section for device information in linker script
-  xen/riscv: add section for device information in linker script
-  xen/common: move device initialization code to common code
+Additionally, the Makefile is updated to compile `device.o` conditionally
+based on whether `CONFIG_HAS_DEVICE_TREE` or `CONFIG_HAS_ACPI` is enabled,
+ensuring the correct device initialization code is included as needed.
 
- xen/arch/arm/device.c    | 71 +---------------------------------
- xen/arch/ppc/xen.lds.S   |  7 ++++
- xen/arch/riscv/xen.lds.S |  8 ++++
- xen/common/Makefile      |  1 +
- xen/common/device.c      | 82 ++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 100 insertions(+), 69 deletions(-)
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/arm/device.c | 71 ++-----------------------------------
+ xen/common/Makefile   |  1 +
+ xen/common/device.c   | 82 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 85 insertions(+), 69 deletions(-)
  create mode 100644 xen/common/device.c
 
+diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
+index 3e02cff008..5610cddcba 100644
+--- a/xen/arch/arm/device.c
++++ b/xen/arch/arm/device.c
+@@ -8,79 +8,12 @@
+  * Copyright (C) 2013 Linaro Limited.
+  */
+ 
+-#include <asm/device.h>
+-#include <asm/setup.h>
++#include <xen/device_tree.h>
+ #include <xen/errno.h>
+-#include <xen/init.h>
+ #include <xen/iocap.h>
+ #include <xen/lib.h>
+ 
+-extern const struct device_desc _sdevice[], _edevice[];
+-
+-#ifdef CONFIG_ACPI
+-extern const struct acpi_device_desc _asdevice[], _aedevice[];
+-#endif
+-
+-int __init device_init(struct dt_device_node *dev, enum device_class class,
+-                       const void *data)
+-{
+-    const struct device_desc *desc;
+-
+-    ASSERT(dev != NULL);
+-
+-    if ( !dt_device_is_available(dev) || dt_device_for_passthrough(dev) )
+-        return  -ENODEV;
+-
+-    for ( desc = _sdevice; desc != _edevice; desc++ )
+-    {
+-        if ( desc->class != class )
+-            continue;
+-
+-        if ( dt_match_node(desc->dt_match, dev) )
+-        {
+-            ASSERT(desc->init != NULL);
+-
+-            return desc->init(dev, data);
+-        }
+-
+-    }
+-
+-    return -EBADF;
+-}
+-
+-#ifdef CONFIG_ACPI
+-int __init acpi_device_init(enum device_class class, const void *data, int class_type)
+-{
+-    const struct acpi_device_desc *desc;
+-
+-    for ( desc = _asdevice; desc != _aedevice; desc++ )
+-    {
+-        if ( ( desc->class != class ) || ( desc->class_type != class_type ) )
+-            continue;
+-
+-        ASSERT(desc->init != NULL);
+-
+-        return desc->init(data);
+-    }
+-
+-    return -EBADF;
+-}
+-#endif
+-
+-enum device_class device_get_class(const struct dt_device_node *dev)
+-{
+-    const struct device_desc *desc;
+-
+-    ASSERT(dev != NULL);
+-
+-    for ( desc = _sdevice; desc != _edevice; desc++ )
+-    {
+-        if ( dt_match_node(desc->dt_match, dev) )
+-            return desc->class;
+-    }
+-
+-    return DEVICE_UNKNOWN;
+-}
++#include <asm/setup.h>
+ 
+ int map_irq_to_domain(struct domain *d, unsigned int irq,
+                       bool need_mapping, const char *devname)
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index fc52e0857d..703e26de1d 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -6,6 +6,7 @@ obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
+ obj-$(CONFIG_CORE_PARKING) += core_parking.o
+ obj-y += cpu.o
+ obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
++obj-$(call or,$(CONFIG_HAS_DEVICE_TREE),$(CONFIG_HAS_ACPI)) += device.o
+ obj-$(CONFIG_HAS_DEVICE_TREE) += device-tree/
+ obj-$(CONFIG_IOREQ_SERVER) += dm.o
+ obj-y += domain.o
+diff --git a/xen/common/device.c b/xen/common/device.c
+new file mode 100644
+index 0000000000..e34a7dc88e
+--- /dev/null
++++ b/xen/common/device.c
+@@ -0,0 +1,82 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Based on the code from:
++ *   xen/arch/arm/device.c
++ */
++
++#include <xen/bug.h>
++#include <xen/device_tree.h>
++#include <xen/errno.h>
++#include <xen/init.h>
++
++#include <asm-generic/device.h>
++
++#ifdef CONFIG_ACPI
++extern const struct acpi_device_desc _asdevice[], _aedevice[];
++#endif
++
++#ifdef CONFIG_HAS_DEVICE_TREE
++
++extern const struct device_desc _sdevice[], _edevice[];
++
++int __init device_init(struct dt_device_node *dev, enum device_class class,
++                       const void *data)
++{
++    const struct device_desc *desc;
++
++    ASSERT(dev != NULL);
++
++    if ( !dt_device_is_available(dev) || dt_device_for_passthrough(dev) )
++        return  -ENODEV;
++
++    for ( desc = _sdevice; desc != _edevice; desc++ )
++    {
++        if ( desc->class != class )
++            continue;
++
++        if ( dt_match_node(desc->dt_match, dev) )
++        {
++            ASSERT(desc->init != NULL);
++
++            return desc->init(dev, data);
++        }
++    }
++
++    return -EBADF;
++}
++
++enum device_class device_get_class(const struct dt_device_node *dev)
++{
++    const struct device_desc *desc;
++
++    ASSERT(dev != NULL);
++
++    for ( desc = _sdevice; desc != _edevice; desc++ )
++    {
++        if ( dt_match_node(desc->dt_match, dev) )
++            return desc->class;
++    }
++
++    return DEVICE_UNKNOWN;
++}
++
++#endif
++
++#ifdef CONFIG_ACPI
++int __init acpi_device_init(enum device_class class, const void *data, int class_type)
++{
++    const struct acpi_device_desc *desc;
++
++    for ( desc = _asdevice; desc != _aedevice; desc++ )
++    {
++        if ( ( desc->class != class ) || ( desc->class_type != class_type ) )
++            continue;
++
++        ASSERT(desc->init != NULL);
++
++        return desc->init(data);
++    }
++
++    return -EBADF;
++}
++#endif
 -- 
 2.46.0
 
