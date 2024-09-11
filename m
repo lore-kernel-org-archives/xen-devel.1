@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C12B2EE4987
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Sep 2024 10:01:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.796362.1205912 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 130DFEE498A
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Sep 2024 10:04:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.796367.1205932 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1soK9r-00033N-H7; Wed, 11 Sep 2024 10:01:07 +0000
+	id 1soKDU-0003tK-5k; Wed, 11 Sep 2024 10:04:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 796362.1205912; Wed, 11 Sep 2024 10:01:07 +0000
+Received: by outflank-mailman (output) from mailman id 796367.1205932; Wed, 11 Sep 2024 10:04:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1soK9r-00033G-EH; Wed, 11 Sep 2024 10:01:07 +0000
-Received: by outflank-mailman (input) for mailman id 796362;
- Wed, 11 Sep 2024 10:01:06 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1soK9q-00033A-Iv
- for xen-devel@lists.xenproject.org; Wed, 11 Sep 2024 10:01:06 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1soK9p-0007tf-Hg; Wed, 11 Sep 2024 10:01:05 +0000
-Received: from [15.248.2.235] (helo=[10.24.67.23])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1soK9p-00054J-BN; Wed, 11 Sep 2024 10:01:05 +0000
+	id 1soKDU-0003tB-2i; Wed, 11 Sep 2024 10:04:52 +0000
+Received: by outflank-mailman (input) for mailman id 796367;
+ Wed, 11 Sep 2024 10:04:51 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=TDmC=QJ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1soKDT-0003qL-1L
+ for xen-devel@lists.xenproject.org; Wed, 11 Sep 2024 10:04:51 +0000
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [2a00:1450:4864:20::22d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 47b35375-7025-11ef-99a1-01e77a169b0f;
+ Wed, 11 Sep 2024 12:04:49 +0200 (CEST)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2f762de00e5so44921661fa.3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Sep 2024 03:04:49 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2f75bffc9d6sm15338281fa.42.2024.09.11.03.04.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Sep 2024 03:04:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,58 +46,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=dsKhvNBhUALnWUrPmPzJ6i6IPFMiYXal4PtSSvk6H+c=; b=G0o3s4ODA7AFdCcOV6Y6yBW1t/
-	m9tGVaspT+aqI6+hatFTlanJJbZv5yYd1Gwh1iC/xphVoj+5HLx5UDjTdgtDL8oKXvvOsi+6yzZOH
-	1Gt2GeiGmUhgP1DoCN23COgK3gEASHGOz10W7ipqzVtOuWNG2pe6Zzg/9blzE9Q8XDNQ=;
-Message-ID: <2dc23b55-4ecc-4682-9f8f-ceb43763de4e@xen.org>
-Date: Wed, 11 Sep 2024 11:01:03 +0100
+X-Inumbo-ID: 47b35375-7025-11ef-99a1-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1726049088; x=1726653888; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=51h6mv9upk5WS3+HO2CH9gJt0hUadUltKpdY2DpAkkk=;
+        b=XYq+3+vZBv1hlaZP1ei4lYXlKI4Gz9L4mlQ8pDosmgDaYjZg+U34uQlcWElB+XW43e
+         527U7TJhq4yKfNfWS/f6Rlq2g8/igDZ22CXnQr4kzGwFFjqFDDbXlyuJThz47MRH2Qrf
+         sEn5e0SzPfP9eG9UXuzwvoGj3J6BMEw/0U21vPMIS+S+N63es1CfjET5Eku1nd2SK1bg
+         6pGtahKiRAstzj1fgEPNqqLlkWh3iHSFp3SQ+sri5gk6ualprKAiFkZUohIyE8f1VzIr
+         fH73dsZ2ep1QALINGEVA9XcRqDkBWpDtLjB+SqwRE0NN1ayyhrBv+u8EfK3R+WzPcLJO
+         T5xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1726049088; x=1726653888;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=51h6mv9upk5WS3+HO2CH9gJt0hUadUltKpdY2DpAkkk=;
+        b=GXDb0GvdY2XH5/3WHT2P+hSly9fVI9z0gSe1RlWJuWjUEuLOqJ6/ncx4UcyXBUjeJ2
+         A8wioghWMzUmqnyvRmFxvxW6UEc732yH3vrqgHB5V/YU30dvcBxmpXB6DhdgWc2jxe4W
+         y/oi27aOjnGdxFB/tQ+qybnR7r3MQx7tMi3upImTePEgnclaVDD9343Aei7kKKzDd83X
+         zJgliUo5Ejaz5iMKdAE3NuV8YbL09N69F5vC/78zyWoCcfG30rc+mMCprdtxqBOPCOtG
+         ABngUA6Lb3sbpnEs/DxbmQ4veMojDVwoTxoiTBZ7UhF/u4KFrZyWDHjIe0qC3eo9jyQJ
+         Ik5Q==
+X-Gm-Message-State: AOJu0YxkQ9n0nxMHbryboEADzyEVFRDxXpzxQG3NzV1waTOyoWU0mAXt
+	Cq3954Z6o9rMIcO5dsHCaXwXeaLKcRTgu1HqZK/tJDxnR3JsGqMsSgd5dA==
+X-Google-Smtp-Source: AGHT+IFtURDxmmmkXrMW8kYcmGmr0+GgnZ/nYXwDfQ16ITmkabL2/OoUzSmAJNKchBAH+jSNw5et0g==
+X-Received: by 2002:a2e:be09:0:b0:2f7:7ea4:2a1e with SMTP id 38308e7fff4ca-2f77ea438damr8569441fa.28.1726049087107;
+        Wed, 11 Sep 2024 03:04:47 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v1 1/3] xen/ppc: add section for device information in linker script
+Date: Wed, 11 Sep 2024 12:04:41 +0200
+Message-ID: <395dd494ad09b315e5e383aa41f8dad4548ba613.1726048521.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <cover.1726048521.git.oleksii.kurochko@gmail.com>
+References: <cover.1726048521.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm/gicv3: Fix ICH_VTR_EL2.ListRegs mask
-Content-Language: en-GB
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20240903122147.2226623-1-michal.orzel@amd.com>
- <024A34D9-7D40-437D-9CC2-2CCC25A5DC57@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <024A34D9-7D40-437D-9CC2-2CCC25A5DC57@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+Introduce a new `.dev.info` section in the PPC linker script to
+handle device-specific information.
+This section is aligned to `POINTER_ALIGN`, with `_sdevice` and `_edevice`
+marking the start and end of the section, respectively.
 
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/ppc/xen.lds.S | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-On 10/09/2024 09:49, Bertrand Marquis wrote:
-> Hi Michal,
-> 
->> On 3 Sep 2024, at 14:21, Michal Orzel <michal.orzel@amd.com> wrote:
->>
->> According to GIC spec IHI 0069H.b (12.4.9), the ListRegs field of
->> ICH_VTR_EL2 can have value between 0b00000..0b01111, as there can
->> be maximum 16 LRs (field value + 1). Fix the mask used to extract this
->> value which wrongly assumes there can be 64 (case for GICv2).
->>
->> Fixes: bc183a0235e0 ("xen/arm: Add support for GIC v3")
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-> 
-> Nice finding.
-
-+1. I guess we haven't seen any issue so far because the bits afterwards 
-are RES0.
-
-> 
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-
-Committed.
-
-Cheers,
-
+diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
+index 38cd857187..c087827d28 100644
+--- a/xen/arch/ppc/xen.lds.S
++++ b/xen/arch/ppc/xen.lds.S
+@@ -161,6 +161,13 @@ SECTIONS
+         __bss_end = .;
+     } :text
+ 
++    . = ALIGN(POINTER_ALIGN);
++    .dev.info : {
++      _sdevice = .;
++      *(.dev.info)
++      _edevice = .;
++    } :text
++
+     _end = . ;
+ 
+     /* Section for the device tree blob (if any). */
 -- 
-Julien Grall
+2.46.0
 
 
