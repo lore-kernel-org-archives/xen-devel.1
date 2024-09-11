@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93996EE4987
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Sep 2024 10:05:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.796369.1205953 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 738C8EE498F
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Sep 2024 10:50:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.796409.1205968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1soKDV-0004NA-LT; Wed, 11 Sep 2024 10:04:53 +0000
+	id 1soKux-00033m-S3; Wed, 11 Sep 2024 10:49:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 796369.1205953; Wed, 11 Sep 2024 10:04:53 +0000
+Received: by outflank-mailman (output) from mailman id 796409.1205968; Wed, 11 Sep 2024 10:49:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1soKDV-0004MC-Hi; Wed, 11 Sep 2024 10:04:53 +0000
-Received: by outflank-mailman (input) for mailman id 796369;
- Wed, 11 Sep 2024 10:04:51 +0000
+	id 1soKux-00033f-NM; Wed, 11 Sep 2024 10:49:47 +0000
+Received: by outflank-mailman (input) for mailman id 796409;
+ Wed, 11 Sep 2024 10:49:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TDmC=QJ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1soKDT-0003qL-Nd
- for xen-devel@lists.xenproject.org; Wed, 11 Sep 2024 10:04:51 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=z7kF=QJ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1soKux-00033Z-9V
+ for xen-devel@lists.xenproject.org; Wed, 11 Sep 2024 10:49:47 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4849b66a-7025-11ef-99a1-01e77a169b0f;
- Wed, 11 Sep 2024 12:04:50 +0200 (CEST)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2f752d9ab62so62261731fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Sep 2024 03:04:50 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2f75bffc9d6sm15338281fa.42.2024.09.11.03.04.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 03:04:47 -0700 (PDT)
+ id 8ea7f9a0-702b-11ef-99a1-01e77a169b0f;
+ Wed, 11 Sep 2024 12:49:45 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a8ce5db8668so143087866b.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Sep 2024 03:49:45 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25d5dc74sm597458266b.208.2024.09.11.03.49.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Sep 2024 03:49:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,85 +47,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4849b66a-7025-11ef-99a1-01e77a169b0f
+X-Inumbo-ID: 8ea7f9a0-702b-11ef-99a1-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726049089; x=1726653889; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PnZ4PyJt9lC/ZKtcJqrE5tYdg4IwjKtttouG4oOrql0=;
-        b=RsIbHubCce6QWkrJ/YvqCYmfyMoTgZ9MAykkxFTuhPFqL6/W11GbG7Ws5oSC/w27ZV
-         YrX784XwvpxGyKRnwyfBXKHcLlmaKXge1q4qnaHvkMbSUWktWiuhPmuJ4rIGQ3UMKZya
-         FGY7tMt97UO7Ge7a+9BOcgei6Qab0g/LpOIPXfG3p4TzbiOcsXa2VOdGEzrG1Hkp20ny
-         2+SqbvbpMDvZ2eopLgKDT01WUMtXbe9niZyWs2xO/J8XnG8zneSqrIlCxg5p3x6vCp54
-         Bc+24dttbBXhChQstuOe8sQ4LU0nPqZlIudrWWyswVmfL05bgqwzUVNh4XvdFLnu2FZq
-         luDA==
+        d=suse.com; s=google; t=1726051784; x=1726656584; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=XJRIiUlJ8ommq1PHN9jr7QCA5+Hpjzh9HVDPtbIjbv4=;
+        b=Y+5fxadzZ+EOIzB0DnOiFBVZsvj8lDXiCzkoCGC9LsGTp2xt/xYqMxU9Te7VFr3GUN
+         tzqKqCoPK+vxtUWpx24g1YkPLtnfFEo8AZJv6M67qes4sxzjF4yngqaW0C1Ws7bhRywu
+         0zo4xakOgkZfBWMwoaSP1p27+w72LbXo+4Qw9Bws5xnmyEnBWX6F5A9QsVYzV091u683
+         Wre7JNjm/moXZ2ifYXQDrTbzrGLoOJb/Kb1etImGfTKJgUPo/YQcxC22Bwp2Gs0Mt3Kt
+         Ti/RKGkNet4iuHEv5TTQEGOcD/LLgszp8/IdzEMGJaDbFitmXui75syBYJjHsch8ZJ/6
+         fvCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726049089; x=1726653889;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PnZ4PyJt9lC/ZKtcJqrE5tYdg4IwjKtttouG4oOrql0=;
-        b=u3u6eyXME4o4j/H+kBZslW5peBBcjkinO3i6+eIVraaRdX6r/wCMeMPUoO4FlSULhy
-         QBuN+qzbeMvMS1fQBSliyiVpaUmxKL228GpOu04FUo6UJWAtPotZzS6Lxbx6h5V2hbtS
-         xIoj8i3lRpo6VV+3PcCIOYzHp2JFQlaiFMQRKNF4It11x2BlGgEdwufp8g/v2lQBcKdD
-         HeZvSxNu8pcpqdhqLyJL15hNuCkDdGd2MxqwxAYk8xzzpFXqSgP4cs5Ey2dsCURH8JNU
-         2oMXw8jokd+8hbd2eQ4MQ/9spt41nm1rmLMhh6pIhvqemFcQzR8kWAy299pH96uAOHfc
-         S2IA==
-X-Gm-Message-State: AOJu0Yxj4Wr5WdkL0Jc4KWJtP3q4GpGDm5OiydhQp0IQWwQeO63c975f
-	85ajN2Rp/H9pWcDSHTQwtSmqMLqK2tONAs6ZY2Vv6eQUJn+LXH6iiZgigg==
-X-Google-Smtp-Source: AGHT+IHqnXu7p8otAESKMD/0cX4MQdhb4k2AhXwRJRxW2JVNp4NkMmaBMArCzweTmHCi7Z/EB2pJBg==
-X-Received: by 2002:a2e:a544:0:b0:2f6:4f17:aeaf with SMTP id 38308e7fff4ca-2f75b942356mr71375041fa.45.1726049087844;
-        Wed, 11 Sep 2024 03:04:47 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 2/3] xen/riscv: add section for device information in linker script
-Date: Wed, 11 Sep 2024 12:04:42 +0200
-Message-ID: <e0d5d5505c89a81997240a4099090c96d37c1bee.1726048521.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <cover.1726048521.git.oleksii.kurochko@gmail.com>
-References: <cover.1726048521.git.oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20230601; t=1726051784; x=1726656584;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XJRIiUlJ8ommq1PHN9jr7QCA5+Hpjzh9HVDPtbIjbv4=;
+        b=r4nfD9SX+dqLQ8S69bEcqjLLogIqeOWRGqbadTS/O7vVIOH5PvpmZlbYhGoabhNJzB
+         Bh4tTRnkhfkbLv+08TLN2T6/nQqWSsZj3a3zZOUktmQhx7Y3H5F+I+6SFgXriGR7xOsU
+         eoR4f9QnzOmDbiPdkRvOz4DDylymuLZUzPcKmBlfzPl0o9qMdjcCvCNqTKP9blwTayg6
+         0JO1AZGZkQln7xOpq49RzDdoSr3JvCmUafa+YCoHO1RvJ7J+uQrUwmYqRdpfbocvHh3i
+         eE6oIuPjqLlTGQ9vzMjj1edACkxO9/SDowrmrw/mcNKcWqvcCm5Vo1OBFwKSBmvWU4nD
+         JfrA==
+X-Forwarded-Encrypted: i=1; AJvYcCWp7RP3P0F/wsSLM6W/d3ipXV+HkS0Xk8XtR9s4tqtEiX8Er4Tt5EwkFkAO9jh4a9ueNPQO8+iwbUM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxcjd/RDVNaGlsQOSDh6bZTYMZyBnIyumQVfwUAcPFDxbsZtsiT
+	rQRrG666/dmr0EigE4tvZECJM7KWfbGmMuLaQYSzha5mM/2WVdFmp6h5GFMQSQ==
+X-Google-Smtp-Source: AGHT+IEkvupdJRmw6tee0Teg9pIjoP5P301zMol3pyLQlRc3cc8YuZwxrfxxvqmns27GQm1EN/xiPg==
+X-Received: by 2002:a17:907:268e:b0:a80:7193:bd93 with SMTP id a640c23a62f3a-a8ffab29894mr455746566b.25.1726051784463;
+        Wed, 11 Sep 2024 03:49:44 -0700 (PDT)
+Message-ID: <9537bdef-26f7-4a86-8bb8-52c7e409f742@suse.com>
+Date: Wed, 11 Sep 2024 12:49:43 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC XEN PATCH v15 3/4] tools: Add new function to get gsi from
+ dev
+To: Jiqian Chen <Jiqian.Chen@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>, Juergen Gross <jgross@suse.com>,
+ "Daniel P . Smith" <dpsmith@apertussolutions.com>,
+ Huang Rui <ray.huang@amd.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ xen-devel@lists.xenproject.org
+References: <20240911065832.1591273-1-Jiqian.Chen@amd.com>
+ <20240911065832.1591273-4-Jiqian.Chen@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20240911065832.1591273-4-Jiqian.Chen@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Introduce a new `.dev.info` section in the RISC-V linker script to
-handle device-specific information.
-This section is aligned to `POINTER_ALIGN`, with `_sdevice` and `_edevice`
-marking the start and end of the section, respectively.
+On 11.09.2024 08:58, Jiqian Chen wrote:
+> On PVH dom0, when passthrough a device to domU, QEMU and xl tools
+> want to use gsi number to do pirq mapping, see QEMU code
+> xen_pt_realize->xc_physdev_map_pirq, and xl code
+> pci_add_dm_done->xc_physdev_map_pirq, but in current codes, the gsi
+> number is got from file /sys/bus/pci/devices/<sbdf>/irq, that is
+> wrong, because irq is not equal with gsi, they are in different
+> spaces, so pirq mapping fails.
+> 
+> And in current codes, there is no method to get gsi for userspace.
+> For above purpose, add new function to get gsi, and the
+> corresponding ioctl is implemented on linux kernel side.
+> 
+> Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+> Signed-off-by: Huang Rui <ray.huang@amd.com>
+> Signed-off-by: Chen Jiqian <Jiqian.Chen@amd.com>
+> Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+> ---
+> RFC: it needs to wait for the corresponding third patch on linux kernel side to be merged.
+> https://lore.kernel.org/xen-devel/20240607075109.126277-4-Jiqian.Chen@amd.com/
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/arch/riscv/xen.lds.S | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I'm afraid I don't understand this remark: The change here (and similarly
+patch 4) ought to be independent of when the kernel change goes in. After
+all the libraries need to work on older Linux as well. Please clarify.
 
-diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
-index 070b19d915..e65707ce3f 100644
---- a/xen/arch/riscv/xen.lds.S
-+++ b/xen/arch/riscv/xen.lds.S
-@@ -157,6 +157,14 @@ SECTIONS
-         . = ALIGN(POINTER_ALIGN);
-         __bss_end = .;
-     } :text
-+
-+    . = ALIGN(POINTER_ALIGN);
-+    .dev.info : {
-+      _sdevice = .;
-+      *(.dev.info)
-+      _edevice = .;
-+    } :text
-+
-     _end = . ;
- 
-     /* Section for the device tree blob (if any). */
--- 
-2.46.0
-
+Jan
 
