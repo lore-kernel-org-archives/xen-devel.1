@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3520CFA375B
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Sep 2024 15:58:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.798302.1208515 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A62BFFA375B
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Sep 2024 15:58:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.798305.1208545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sp8gb-0001GK-VH; Fri, 13 Sep 2024 15:58:17 +0000
+	id 1sp8gy-0003Ni-Nk; Fri, 13 Sep 2024 15:58:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 798302.1208515; Fri, 13 Sep 2024 15:58:17 +0000
+Received: by outflank-mailman (output) from mailman id 798305.1208545; Fri, 13 Sep 2024 15:58:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sp8gb-0001Dm-On; Fri, 13 Sep 2024 15:58:17 +0000
-Received: by outflank-mailman (input) for mailman id 798302;
- Fri, 13 Sep 2024 15:58:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sp8gy-0003NW-L1; Fri, 13 Sep 2024 15:58:40 +0000
+Received: by outflank-mailman (input) for mailman id 798305;
+ Fri, 13 Sep 2024 15:58:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aSyI=QL=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sp8gZ-0000A5-Tn
- for xen-devel@lists.xenproject.org; Fri, 13 Sep 2024 15:58:16 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fc179766-71e8-11ef-a0b5-8be0dac302b0;
- Fri, 13 Sep 2024 17:58:14 +0200 (CEST)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53654dbde59so3215273e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 13 Sep 2024 08:58:14 -0700 (PDT)
+ id 1sp8gw-0000AA-VZ
+ for xen-devel@lists.xenproject.org; Fri, 13 Sep 2024 15:58:39 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fd1cd72d-71e8-11ef-99a2-01e77a169b0f;
+ Fri, 13 Sep 2024 17:58:16 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-53654dbde59so3215303e87.1
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Sep 2024 08:58:16 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5365f9038e3sm2348008e87.187.2024.09.13.08.58.13
+ 2adb3069b0e04-5365f9038e3sm2348008e87.187.2024.09.13.08.58.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 08:58:13 -0700 (PDT)
+ Fri, 13 Sep 2024 08:58:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc179766-71e8-11ef-a0b5-8be0dac302b0
+X-Inumbo-ID: fd1cd72d-71e8-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726243094; x=1726847894; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1726243096; x=1726847896; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=w3WDspjii0VAltRM3qKmp7xdoXVUt03Mt88o9yu2SuU=;
-        b=eSvrYwSDnk+niRAMDJBMjJ1pv5ffSMBNIfLheInhyzLESUYm//9w0fyTrnr0S58wCx
-         ZGLnbKpd2eP2Z1IrFYdDbwGrMAYN7bMI3pb7XwTGnosgogjTJZyJvtE+++eGfnaleC2n
-         G/8mPtWtnC1ofaUzBUc10zpGMtoTfPa/bX417yqV6eVlk92WGktkznUdwR5enX2QuCJS
-         W7bDU/UaDAMvZmBLpOEPQRoO72N9Kc5AiqVHPgbRlaYlRwpu2zmFB5qEGZPQDYfbe7f+
-         ydkaK71Uj5QrcmfQJI0+VfiZsEpq5lTxZSl+lz8Z52ApwwSj125SnZcD0FCcdhmGA4Al
-         GsIQ==
+        bh=h/ioVWfo+c25+X25ITa+H5O+IJ2AZFo+cHopUsdeVRk=;
+        b=MZdk5U8UYb8p0ROO0SVbVVAoGDf7gs8VnjYcZFR4ItmD3F8v8wCMUheOitf1d3QkMF
+         ouSD+S3mYWindOfkvwQB6iOwc/uOcVdPUXzqNPFcce+mdxTJcKJbibwHomKLWa2fazDp
+         g88vFnOENVl8buc0JHGVl0ClnuC5Lbtqj5aSISafIKm9SXmpdtbFtHBGJZxxD4QYjZnK
+         UEojevGjPO3Lf7+Z9aJFfMF1glebOBaGzaWwpnzi4p1VzgMi9X/KaHx8CbQLgGcJTV6K
+         Q2GD3jTs+jlx44Wa8xh7BP62L3I2M5T6E+oJx89WSzxbNUkn0V0Dyww0FuHL4DkO+Bwa
+         hbmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726243094; x=1726847894;
+        d=1e100.net; s=20230601; t=1726243096; x=1726847896;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=w3WDspjii0VAltRM3qKmp7xdoXVUt03Mt88o9yu2SuU=;
-        b=qkC5Fv5trSsh9olb234jADMIlYDbxpAZNEj5dMNjHcRdzgU7hgSj245n9DVPYTBtU5
-         u319kg6/8U6NzxO2q4YzsYyMkEjfjKQ9T4qrbFkKBZvoC2yU4cSSA/zJM3GBno8D4sx/
-         3XrPYi9Iq4hte79ZP5dl7u0C5faEfIAI+HhQg0FujRM0IACucsR8qFhsdsZ7RA7SXWg2
-         BVpA89D0NSNgWYyHhnu31zXlDlQfAdO8oAabWammsUsaMVFCsgDVK8eGCIWRsdbe+Np8
-         fiCtn1WKvAl9bRXsNLdmb8RDEMmp+Z51g8O4VfTq1UL2k5kVHBZwQIcG4zrAHiliaCBs
-         UwPA==
-X-Gm-Message-State: AOJu0Yzef0v5GxKESBpq5x8Vbrv2ugqTT342sd3Tty12IF6eAN/F+R50
-	jZS+62LVLjLOPCsKrrPPIW633bNJ5i2BmzUeVvf2UC/Tw3jjKisyy56czg==
-X-Google-Smtp-Source: AGHT+IEV22gr645i54OwDfW4/fkvAvM/YGHI09du8oRmJzzMSGy+jufcsMNcBBxReOI/Hm3WhWmdVA==
-X-Received: by 2002:a05:6512:3d04:b0:52c:ccb3:71f7 with SMTP id 2adb3069b0e04-53679075adcmr2385565e87.9.1726243093846;
-        Fri, 13 Sep 2024 08:58:13 -0700 (PDT)
+        bh=h/ioVWfo+c25+X25ITa+H5O+IJ2AZFo+cHopUsdeVRk=;
+        b=EhpuRuY8iAuwGdK5rQ0mlasTLQUJXesUUGqYiaTbO10OFRlME9544Kfua/EQwxecsz
+         oELxfxBH8xmJU+8cSJ9ipllSpDCWWTxryp9sFhhs4kv+tkzyKscnBTwoI+L3g8Sn4qCR
+         Xme+2P5LLNx/MkIxnFEuwViillWV/JbjYeRilCz4n+Ttspd/cJSaRpdezKvypZdSbhIu
+         XfxhB25AIdCMHrlhb+Hzhx79XzlySTusjBV3Ibav21RiNH8yAxQuLD5xk+TmWBgHW8ce
+         OFrUYEHp8EptcQ9qxak3P2ErV+ZcqOb1uysyAUJIFwXMdHKG2Uwk5dqgOSoHSpsQoHkL
+         dBCA==
+X-Gm-Message-State: AOJu0YwvrDFZd8/UXCaVbgKQ5KhTlggIZ3Vt3fMaQvCCeAbUohtkNdWz
+	II9liBqOtcR0TUkWD3LjUXKNskGyff7bL290EOLVdUkEWZIpMj/DHZX/bw==
+X-Google-Smtp-Source: AGHT+IG7IYI4VwgOMLP4Poeo2P8sp8gArtyVd6suZyTdMHCwIbh/u7kBtoUgT6sRevxjOaDNZ8EEpQ==
+X-Received: by 2002:a05:6512:2814:b0:52f:336:e846 with SMTP id 2adb3069b0e04-5366b933140mr4457499e87.14.1726243095545;
+        Fri, 13 Sep 2024 08:58:15 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -86,533 +86,165 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v7 6/8] xen/riscv: introduce and initialize SBI RFENCE extension
-Date: Fri, 13 Sep 2024 17:57:44 +0200
-Message-ID: <699cd9930bd49183ba8eab767030ef0c057b14c3.1726242605.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v7 8/8] xen/riscv: introduce early_fdt_map()
+Date: Fri, 13 Sep 2024 17:57:46 +0200
+Message-ID: <c62e94a7ac9176cb10a552dc406c092a11a2c6e2.1726242605.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <cover.1726242605.git.oleksii.kurochko@gmail.com>
 References: <cover.1726242605.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce functions to work with the SBI RFENCE extension for issuing
-various fence operations to remote CPUs.
+Introduce function which allows to map FDT to Xen.
 
-Add the sbi_init() function along with auxiliary functions and macro
-definitions for proper initialization and checking the availability of
-SBI extensions. Currently, this is implemented only for RFENCE.
-
-Introduce sbi_remote_sfence_vma() to send SFENCE_VMA instructions to
-a set of target HARTs. This will support the implementation of
-flush_xen_tlb_range_va().
-
-Integrate __sbi_rfence_v02 from Linux kernel 6.6.0-rc4 with minimal
-modifications:
- - Adapt to Xen code style.
- - Use cpuid_to_hartid() instead of cpuid_to_hartid_map[].
- - Update BIT(...) to BIT(..., UL).
- - Rename __sbi_rfence_v02_call to sbi_rfence_v02_real and
-   remove the unused arg5.
- - Handle NULL cpu_mask to execute rfence on all CPUs by calling
-   sbi_rfence_v02_real(..., 0UL, -1UL,...) instead of creating hmask.
- - change type for start_addr and size to vaddr_t and size_t.
- - Add an explanatory comment about when batching can and cannot occur,
-   and why batching happens in the first place.
+Also, initialization of device_tree_flattened happens using
+early_fdt_map().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V7:
- - fix some comment identations.
- - put as much as possible parameters on a line for sbi_remote_sfence_vma.
----
-Changes in V6:
- - align with zeros the definition of SBI_SPEC_VERSION_MINOR_MASK.
- - drop fallthrough in sbi_err_map_xen_errno() between 'case SBI_ERR_FAILURE'
-   and default.
- - update return type of sbi_{major,minor}_version() to unsigned int.
- - move BUG_ON(ret.value < 0); inside if ( !ret.error ) in sbi_ext_base_func().
- - print fid as %#lx instead of %lu.
- - print ret.error instead of what sbi_err_map_xen_errno() as it may lose
-   information.
- - drop unrelated information in the comment of the for_each_cpu cycle in
-   sbi_rfence_v02().
- - small refactoring in sbi_rfence_v02(): making uniform path for returning
-   result variable.
- - rename start_addr argument to start for sbi_remote_sfence_vma().
- - use sbi_err_map_xen_errno() inside sbi_probe_extension() to return an error
-   value instead of -EOPNOTSUPP.
- - s/unsigned long start/vaddr_t start
- - s/unsgined long size/size_t size
- - update the commit message.
+Changes in V6-V7:
+ - Nothing changed. Only rebase.
 ---
 Changes in V5:
- - update the comment for sbi_has_rfence().
- - update the comment for sbi_remote_sfence_vma().
- - update the prototype of sbi_remote_sfence_vma() and declare cpu_mask
-   argument as pointer to const.
- - use MASK_EXTR() for sbi_{major, minor}_version().
- - redefine SBI_SPEC_VERSION_MAJOR_MASK as 0x7F000000
- - drop SBI_SPEC_VERSION_MAJOR_SHIFT as unneeded.
- - add BUG_ON(ret.value < 0) inside sbi_ext_base_func() to be sure that
-   ret.value is always >= 0 as SBI spec explicitly doesn't say that.
- - s/__sbi_rfence_v02_real/sbi_rfence_v02_real
- - s/__sbi_rfence_v02/sbi_rfence_v02
- - s/__sbi_rfence/sbi_rfence
- - fold cases inside sbi_rfence_v02_real()
- - mark sbi_rfence_v02 with cf_check.
- - code style fixes in sbi_rfence_v02().
- - add the comment with explanation of algorithm used in sbi_rfence_v02().
- - use __ro_after_init for sbi_rfence variable.
- - add ASSERT(sbi_rfebce) inside sbi_remote_sfence_vma to be sure that it
-   is not NULL.
- - drop local variable ret inside sbi_init() and init sbi_spec_version
-   directly by return value of sbi_get_spec_version() as this function
-   should always be must always succeed.
- - add the comment above sbi_get_spec_version().
- - add BUG_ON for sbi_fw_id and sbi_fw_version() to be sure that they
-   have correct values.
- - make sbi_fw_id, sbi_fw_version as local because they are used only once
-   for printk().
- - s/veriosn/version
- - drop  BUG_ON("At the moment flush_xen_tlb_range_va() uses SBI rfence...")
-   as now we have ASSERT() in the flace where sbi_rfence is actually used.
- - update the commit message.
- - s/BUG_ON("Ooops. SBI spec version 0.1 detected. Need to add support")/panic("Ooops. SBI ...");
+ - drop usage of PTE_BLOCK for flag argument of map_pages_to_xen() in early_fdt_map()
+   as block mapping is now default behaviour. Also PTE_BLOCK was dropped in the patch
+   "xen/riscv: page table handling".
 ---
 Changes in V4:
- - update the commit message.
- - code style fixes
- - update return type of sbi_has_rfence() from int to bool and drop
-   conditional operator inside implementation.
- - Update mapping of SBI_ERR_FAILURE in sbi_err_map_xen_errno().
- - Update return type of sbi_spec_is_0_1() and drop conditional operator
-   inside implementation.
- - s/0x%lx/%#lx
- - update the comment above declaration of sbi_remote_sfence_vma() with
-   more detailed explanation what the function does.
- - update prototype of sbi_remote_sfence_vma(). Now it receives cpumask_t
-   and returns int.
- - refactor __sbi_rfence_v02() take from the Linux kernel as it takes into
-   account a case that hart id could be from different hbase. For example,
-   the case when hart IDs are the following 0, 3, 65, 2. Or the case when
-   hart IDs are unsorted: 0 3 1 2.
- - drop sbi_cpumask_to_hartmask() as it is not needed anymore
- - Update the prototype of sbi_remote_sfence_vma() and implemntation accordingly
-   to the fact it returns 'int'.
- - s/flush_xen_tlb_one_local/flush_tlb_one_local
+ - s/_PAGE_BLOCK/PTE_BLOCK
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - unwarap two lines in panic() in case when device_tree_flattened is NULL
+   so  grep-ing for any part of the message line will always produce a hit.
+ - slightly update the commit message.
 ---
 Changes in V3:
- - new patch.
+ - Code style fixes
+ - s/SZ_2M/MB(2)
+ - fix condition to check if early_fdt_map() in setup.c return NULL or not.
 ---
- xen/arch/riscv/include/asm/sbi.h |  62 +++++++
- xen/arch/riscv/sbi.c             | 273 ++++++++++++++++++++++++++++++-
- xen/arch/riscv/setup.c           |   3 +
- 3 files changed, 337 insertions(+), 1 deletion(-)
+Changes in V2:
+ - rework early_fdt_map to use map_pages_to_xen()
+ - move call early_fdt_map() to C code after MMU is enabled.
+---
+ xen/arch/riscv/include/asm/mm.h |  2 ++
+ xen/arch/riscv/mm.c             | 55 +++++++++++++++++++++++++++++++++
+ xen/arch/riscv/setup.c          |  7 +++++
+ 3 files changed, 64 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
-index 4d72a2295e..5947fed779 100644
---- a/xen/arch/riscv/include/asm/sbi.h
-+++ b/xen/arch/riscv/include/asm/sbi.h
-@@ -12,9 +12,42 @@
- #ifndef __ASM_RISCV_SBI_H__
- #define __ASM_RISCV_SBI_H__
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index ce1557bb27..4b7b00b850 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -259,4 +259,6 @@ static inline unsigned int arch_get_dma_bitsize(void)
  
-+#include <xen/cpumask.h>
-+
- #define SBI_EXT_0_1_CONSOLE_PUTCHAR		0x1
- #define SBI_EXT_0_1_SHUTDOWN			0x8
+ void setup_fixmap_mappings(void);
  
-+#define SBI_EXT_BASE                    0x10
-+#define SBI_EXT_RFENCE                  0x52464E43
++void *early_fdt_map(paddr_t fdt_paddr);
 +
-+/* SBI function IDs for BASE extension */
-+#define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
-+#define SBI_EXT_BASE_GET_IMP_ID         0x1
-+#define SBI_EXT_BASE_GET_IMP_VERSION    0x2
-+#define SBI_EXT_BASE_PROBE_EXT          0x3
-+
-+/* SBI function IDs for RFENCE extension */
-+#define SBI_EXT_RFENCE_REMOTE_FENCE_I           0x0
-+#define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA        0x1
-+#define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA_ASID   0x2
-+#define SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA       0x3
-+#define SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA_VMID  0x4
-+#define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA       0x5
-+#define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA_ASID  0x6
-+
-+#define SBI_SPEC_VERSION_MAJOR_MASK     0x7f000000
-+#define SBI_SPEC_VERSION_MINOR_MASK     0x00ffffff
-+
-+/* SBI return error codes */
-+#define SBI_SUCCESS             0
-+#define SBI_ERR_FAILURE         (-1)
-+#define SBI_ERR_NOT_SUPPORTED   (-2)
-+#define SBI_ERR_INVALID_PARAM   (-3)
-+#define SBI_ERR_DENIED          (-4)
-+#define SBI_ERR_INVALID_ADDRESS (-5)
-+
-+#define SBI_SPEC_VERSION_DEFAULT 0x1
-+
- struct sbiret {
-     long error;
-     long value;
-@@ -34,4 +67,33 @@ void sbi_console_putchar(int ch);
+ #endif /* _ASM_RISCV_MM_H */
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index e8430def14..4a628aef83 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -1,13 +1,16 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
  
- void sbi_shutdown(void);
- 
-+/*
-+ * Check underlying SBI implementation has RFENCE
-+ *
-+ * @return true for supported AND false for not-supported
-+ */
-+bool sbi_has_rfence(void);
-+
-+/*
-+ * Instructs the remote harts to execute one or more SFENCE.VMA
-+ * instructions, covering the range of virtual addresses between
-+ * [start_addr, start_addr + size).
-+ *
-+ * Returns 0 if IPI was sent to all the targeted harts successfully
-+ * or negative value if start_addr or size is not valid.
-+ *
-+ * @hart_mask a cpu mask containing all the target harts.
-+ * @param start virtual address start
-+ * @param size virtual address range size
-+ */
-+int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
-+                          size_t size);
-+
-+/*
-+ * Initialize SBI library
-+ *
-+ * @return 0 on success, otherwise negative errno on failure
-+ */
-+int sbi_init(void);
-+
- #endif /* __ASM_RISCV_SBI_H__ */
-diff --git a/xen/arch/riscv/sbi.c b/xen/arch/riscv/sbi.c
-index c7984344bc..4209520389 100644
---- a/xen/arch/riscv/sbi.c
-+++ b/xen/arch/riscv/sbi.c
-@@ -5,13 +5,26 @@
-  * (anup.patel@wdc.com).
-  *
-  * Modified by Bobby Eshleman (bobby.eshleman@gmail.com).
-+ * Modified by Oleksii Kurochko (oleksii.kurochko@gmail.com).
-  *
-  * Copyright (c) 2019 Western Digital Corporation or its affiliates.
-- * Copyright (c) 2021-2023 Vates SAS.
-+ * Copyright (c) 2021-2024 Vates SAS.
-  */
- 
-+#include <xen/compiler.h>
-+#include <xen/const.h>
-+#include <xen/cpumask.h>
-+#include <xen/errno.h>
-+#include <xen/init.h>
-+#include <xen/lib.h>
-+#include <xen/sections.h>
-+#include <xen/smp.h>
-+
-+#include <asm/processor.h>
- #include <asm/sbi.h>
- 
-+static unsigned long __ro_after_init sbi_spec_version = SBI_SPEC_VERSION_DEFAULT;
-+
- struct sbiret sbi_ecall(unsigned long ext, unsigned long fid,
-                         unsigned long arg0, unsigned long arg1,
-                         unsigned long arg2, unsigned long arg3,
-@@ -38,6 +51,26 @@ struct sbiret sbi_ecall(unsigned long ext, unsigned long fid,
-     return ret;
- }
- 
-+static int sbi_err_map_xen_errno(int err)
-+{
-+    switch ( err )
-+    {
-+    case SBI_SUCCESS:
-+        return 0;
-+    case SBI_ERR_DENIED:
-+        return -EACCES;
-+    case SBI_ERR_INVALID_PARAM:
-+        return -EINVAL;
-+    case SBI_ERR_INVALID_ADDRESS:
-+        return -EFAULT;
-+    case SBI_ERR_NOT_SUPPORTED:
-+        return -EOPNOTSUPP;
-+    case SBI_ERR_FAILURE:
-+    default:
-+        return -ENOSYS;
-+    };
-+}
-+
- void sbi_console_putchar(int ch)
- {
-     sbi_ecall(SBI_EXT_0_1_CONSOLE_PUTCHAR, 0, ch, 0, 0, 0, 0, 0);
-@@ -47,3 +80,241 @@ void sbi_shutdown(void)
- {
-     sbi_ecall(SBI_EXT_0_1_SHUTDOWN, 0, 0, 0, 0, 0, 0, 0);
- }
-+
-+static unsigned int sbi_major_version(void)
-+{
-+    return MASK_EXTR(sbi_spec_version, SBI_SPEC_VERSION_MAJOR_MASK);
-+}
-+
-+static unsigned int sbi_minor_version(void)
-+{
-+    return MASK_EXTR(sbi_spec_version, SBI_SPEC_VERSION_MINOR_MASK);
-+}
-+
-+static long sbi_ext_base_func(long fid)
-+{
-+    struct sbiret ret;
-+
-+    ret = sbi_ecall(SBI_EXT_BASE, fid, 0, 0, 0, 0, 0, 0);
-+
-+    if ( !ret.error )
-+    {
-+        /*
-+         * I wasn't able to find a case in the SBI spec where sbiret.value
-+         * could be negative.
-+         *
-+         * Unfortunately, the spec does not specify the possible values of
-+         * sbiret.value, but based on the description of the SBI function,
-+         * ret.value >= 0 when sbiret.error = 0. SPI spec specify only
-+         * possible value for sbiret.error (<= 0 whwere 0 is SBI_SUCCESS ).
-+         *
-+         * Just to be sure that SBI base extension functions one day won't
-+         * start to return a negative value for sbiret.value when
-+         * sbiret.error < 0 BUG_ON() is added.
-+         */
-+        BUG_ON(ret.value < 0);
-+
-+        return ret.value;
-+    }
-+    else
-+        return ret.error;
-+}
-+
-+static int sbi_rfence_v02_real(unsigned long fid,
-+                               unsigned long hmask, unsigned long hbase,
-+                               vaddr_t start, size_t size,
-+                               unsigned long arg4)
-+{
-+    struct sbiret ret = {0};
-+    int result = 0;
-+
-+    switch ( fid )
-+    {
-+    case SBI_EXT_RFENCE_REMOTE_FENCE_I:
-+        ret = sbi_ecall(SBI_EXT_RFENCE, fid, hmask, hbase,
-+                        0, 0, 0, 0);
-+        break;
-+
-+    case SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA:
-+    case SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA:
-+    case SBI_EXT_RFENCE_REMOTE_SFENCE_VMA:
-+        ret = sbi_ecall(SBI_EXT_RFENCE, fid, hmask, hbase,
-+                        start, size, 0, 0);
-+        break;
-+
-+    case SBI_EXT_RFENCE_REMOTE_SFENCE_VMA_ASID:
-+    case SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA_VMID:
-+    case SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA_ASID:
-+        ret = sbi_ecall(SBI_EXT_RFENCE, fid, hmask, hbase,
-+                        start, size, arg4, 0);
-+        break;
-+
-+    default:
-+        printk("%s: unknown function ID [%#lx]\n",
-+               __func__, fid);
-+        result = -EINVAL;
-+        break;
-+    };
-+
-+    if ( ret.error )
-+    {
-+        result = sbi_err_map_xen_errno(ret.error);
-+        printk("%s: hbase=%lu hmask=%#lx failed (error %ld)\n",
-+               __func__, hbase, hmask, ret.error);
-+    }
-+
-+    return result;
-+}
-+
-+static int cf_check sbi_rfence_v02(unsigned long fid,
-+                                   const cpumask_t *cpu_mask,
-+                                   vaddr_t start, size_t size,
-+                                   unsigned long arg4, unsigned long arg5)
-+{
-+    unsigned long hartid, cpuid, hmask = 0, hbase = 0, htop = 0;
-+    int result = -EINVAL;
-+
-+    /*
-+     * hart_mask_base can be set to -1 to indicate that hart_mask can be
-+     * ignored and all available harts must be considered.
-+     */
-+    if ( !cpu_mask )
-+        return sbi_rfence_v02_real(fid, 0UL, -1UL, start, size, arg4);
-+
-+    for_each_cpu ( cpuid, cpu_mask )
-+    {
-+        /*
-+         * Hart IDs might not necessarily be numbered contiguously in
-+         * a multiprocessor system.
-+         *
-+         * This means that it is possible for the hart ID mapping to look like:
-+         *  0, 1, 3, 65, 66, 69
-+         * In such cases, more than one call to sbi_rfence_v02_real() will be
-+         * needed, as a single hmask can only cover sizeof(unsigned long) CPUs:
-+         *  1. sbi_rfence_v02_real(hmask=0b1011, hbase=0)
-+         *  2. sbi_rfence_v02_real(hmask=0b1011, hbase=65)
-+         *
-+         * The algorithm below tries to batch as many harts as possible before
-+         * making an SBI call. However, batching may not always be possible.
-+         * For example, consider the hart ID mapping:
-+         *   0, 64, 1, 65, 2, 66 (1)
-+         *
-+         * Generally, batching is also possible for (1):
-+         *    First (0,1,2), then (64,65,66).
-+         * It just requires a different approach and updates to the current
-+         * algorithm.
-+         */
-+        hartid = cpuid_to_hartid(cpuid);
-+        if ( hmask )
-+        {
-+            if ( hartid + BITS_PER_LONG <= htop ||
-+                 hbase + BITS_PER_LONG <= hartid )
-+            {
-+                result = sbi_rfence_v02_real(fid, hmask, hbase,
-+                                             start, size, arg4);
-+                hmask = 0;
-+                if ( result )
-+                    break;
-+            }
-+            else if ( hartid < hbase )
-+            {
-+                /* shift the mask to fit lower hartid */
-+                hmask <<= hbase - hartid;
-+                hbase = hartid;
-+            }
-+        }
-+
-+        if ( !hmask )
-+        {
-+            hbase = hartid;
-+            htop = hartid;
-+        }
-+        else if ( hartid > htop )
-+            htop = hartid;
-+
-+        hmask |= BIT(hartid - hbase, UL);
-+    }
-+
-+    if ( hmask )
-+        result = sbi_rfence_v02_real(fid, hmask, hbase,
-+                                     start, size, arg4);
-+
-+    return result;
-+}
-+
-+static int (* __ro_after_init sbi_rfence)(unsigned long fid,
-+                                          const cpumask_t *cpu_mask,
-+                                          vaddr_t start,
-+                                          size_t size,
-+                                          unsigned long arg4,
-+                                          unsigned long arg5);
-+
-+int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
-+                          size_t size)
-+{
-+    ASSERT(sbi_rfence);
-+
-+    return sbi_rfence(SBI_EXT_RFENCE_REMOTE_SFENCE_VMA,
-+                      cpu_mask, start, size, 0, 0);
-+}
-+
-+/* This function must always succeed. */
-+#define sbi_get_spec_version()  \
-+    sbi_ext_base_func(SBI_EXT_BASE_GET_SPEC_VERSION)
-+
-+#define sbi_get_firmware_id()   \
-+    sbi_ext_base_func(SBI_EXT_BASE_GET_IMP_ID)
-+
-+#define sbi_get_firmware_version()  \
-+    sbi_ext_base_func(SBI_EXT_BASE_GET_IMP_VERSION)
-+
-+int sbi_probe_extension(long extid)
-+{
-+    struct sbiret ret;
-+
-+    ret = sbi_ecall(SBI_EXT_BASE, SBI_EXT_BASE_PROBE_EXT, extid,
-+                    0, 0, 0, 0, 0);
-+    if ( !ret.error && ret.value )
-+        return ret.value;
-+
-+    return sbi_err_map_xen_errno(ret.error);
-+}
-+
-+static bool sbi_spec_is_0_1(void)
-+{
-+    return (sbi_spec_version == SBI_SPEC_VERSION_DEFAULT);
-+}
-+
-+bool sbi_has_rfence(void)
-+{
-+    return (sbi_rfence != NULL);
-+}
-+
-+int __init sbi_init(void)
-+{
-+    sbi_spec_version = sbi_get_spec_version();
-+
-+    printk("SBI specification v%u.%u detected\n",
-+            sbi_major_version(), sbi_minor_version());
-+
-+    if ( !sbi_spec_is_0_1() )
-+    {
-+        long sbi_fw_id = sbi_get_firmware_id();
-+        long sbi_fw_version = sbi_get_firmware_version();
-+
-+        BUG_ON((sbi_fw_id < 0) || (sbi_fw_version < 0));
-+
-+        printk("SBI implementation ID=%#lx Version=%#lx\n",
-+            sbi_fw_id, sbi_fw_version);
-+
-+        if ( sbi_probe_extension(SBI_EXT_RFENCE) > 0 )
-+        {
-+            sbi_rfence = sbi_rfence_v02;
-+            printk("SBI v0.2 RFENCE extension detected\n");
-+        }
-+    }
-+    else
-+        panic("Ooops. SBI spec version 0.1 detected. Need to add support");
-+
-+    return 0;
-+}
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 0fd6c37b61..e73248c035 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -9,6 +9,7 @@
- #include <public/version.h>
++#include <xen/bootfdt.h>
+ #include <xen/bug.h>
+ #include <xen/compiler.h>
+ #include <xen/init.h>
+ #include <xen/kernel.h>
++#include <xen/libfdt/libfdt.h>
+ #include <xen/macros.h>
+ #include <xen/mm.h>
+ #include <xen/pfn.h>
+ #include <xen/sections.h>
++#include <xen/sizes.h>
  
  #include <asm/early_printk.h>
-+#include <asm/sbi.h>
- #include <asm/smp.h>
- #include <asm/traps.h>
- 
-@@ -48,6 +49,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
- 
-     trap_init();
- 
-+    sbi_init();
+ #include <asm/csr.h>
+@@ -369,3 +372,55 @@ int destroy_xen_mappings(unsigned long s, unsigned long e)
+     BUG_ON("unimplemented");
+     return -1;
+ }
 +
- #ifdef CONFIG_SELF_TESTS
-     test_macros_from_bug_h();
- #endif
++void * __init early_fdt_map(paddr_t fdt_paddr)
++{
++    /* We are using 2MB superpage for mapping the FDT */
++    paddr_t base_paddr = fdt_paddr & XEN_PT_LEVEL_MAP_MASK(1);
++    paddr_t offset;
++    void *fdt_virt;
++    uint32_t size;
++    int rc;
++
++    /*
++     * Check whether the physical FDT address is set and meets the minimum
++     * alignment requirement. Since we are relying on MIN_FDT_ALIGN to be at
++     * least 8 bytes so that we always access the magic and size fields
++     * of the FDT header after mapping the first chunk, double check if
++     * that is indeed the case.
++     */
++    BUILD_BUG_ON(MIN_FDT_ALIGN < 8);
++    if ( !fdt_paddr || fdt_paddr % MIN_FDT_ALIGN )
++        return NULL;
++
++    /* The FDT is mapped using 2MB superpage */
++    BUILD_BUG_ON(BOOT_FDT_VIRT_START % MB(2));
++
++    rc = map_pages_to_xen(BOOT_FDT_VIRT_START, maddr_to_mfn(base_paddr),
++                          MB(2) >> PAGE_SHIFT,
++                          PAGE_HYPERVISOR_RO);
++    if ( rc )
++        panic("Unable to map the device-tree.\n");
++
++    offset = fdt_paddr % XEN_PT_LEVEL_SIZE(1);
++    fdt_virt = (void *)BOOT_FDT_VIRT_START + offset;
++
++    if ( fdt_magic(fdt_virt) != FDT_MAGIC )
++        return NULL;
++
++    size = fdt_totalsize(fdt_virt);
++    if ( size > BOOT_FDT_VIRT_SIZE )
++        return NULL;
++
++    if ( (offset + size) > MB(2) )
++    {
++        rc = map_pages_to_xen(BOOT_FDT_VIRT_START + MB(2),
++                              maddr_to_mfn(base_paddr + MB(2)),
++                              MB(2) >> PAGE_SHIFT,
++                              PAGE_HYPERVISOR_RO);
++        if ( rc )
++            panic("Unable to map the device-tree\n");
++    }
++
++    return fdt_virt;
++}
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index e73248c035..2980e300c6 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -2,6 +2,7 @@
+ 
+ #include <xen/bug.h>
+ #include <xen/compile.h>
++#include <xen/device_tree.h>
+ #include <xen/init.h>
+ #include <xen/mm.h>
+ #include <xen/shutdown.h>
+@@ -57,6 +58,12 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     setup_fixmap_mappings();
+ 
++    device_tree_flattened = early_fdt_map(dtb_addr);
++    if ( !device_tree_flattened )
++        panic("Invalid device tree blob at physical address %#lx. The DTB must be 8-byte aligned and must not exceed %lld bytes in size.\n\n"
++              "Please check your bootloader.\n",
++              dtb_addr, BOOT_FDT_VIRT_SIZE);
++
+     printk("All set up\n");
+ 
+     machine_halt();
 -- 
 2.46.0
 
