@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CBC9FA375B
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Sep 2024 14:57:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.798263.1208415 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C88FFA375A
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Sep 2024 15:00:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.798270.1208435 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sp7jJ-0006G7-I5; Fri, 13 Sep 2024 14:57:01 +0000
+	id 1sp7mT-0008LX-7n; Fri, 13 Sep 2024 15:00:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 798263.1208415; Fri, 13 Sep 2024 14:57:01 +0000
+Received: by outflank-mailman (output) from mailman id 798270.1208435; Fri, 13 Sep 2024 15:00:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sp7jJ-0006G0-F3; Fri, 13 Sep 2024 14:57:01 +0000
-Received: by outflank-mailman (input) for mailman id 798263;
- Fri, 13 Sep 2024 14:57:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sp7mT-0008LQ-4D; Fri, 13 Sep 2024 15:00:17 +0000
+Received: by outflank-mailman (input) for mailman id 798270;
+ Fri, 13 Sep 2024 15:00:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9NjI=QL=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1sp7jI-0006Eg-OG
- for xen-devel@lists.xenproject.org; Fri, 13 Sep 2024 14:57:00 +0000
+ id 1sp7mR-0008LK-7K
+ for xen-devel@lists.xenproject.org; Fri, 13 Sep 2024 15:00:15 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6c912fa7-71e0-11ef-99a2-01e77a169b0f;
- Fri, 13 Sep 2024 16:56:58 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e127bfe6-71e0-11ef-a0b5-8be0dac302b0;
+ Fri, 13 Sep 2024 17:00:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 636B08286805;
- Fri, 13 Sep 2024 09:56:57 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 4B300828596A;
+ Fri, 13 Sep 2024 10:00:13 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id Rdvt9GqFln2w; Fri, 13 Sep 2024 09:56:56 -0500 (CDT)
+ with ESMTP id P6LyY1QoSsZI; Fri, 13 Sep 2024 10:00:12 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 9D8F8828570D;
- Fri, 13 Sep 2024 09:56:56 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id A6DB3828680E;
+ Fri, 13 Sep 2024 10:00:12 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id PMyGDivUkHzK; Fri, 13 Sep 2024 09:56:56 -0500 (CDT)
+ with ESMTP id Klukh_-OHBCw; Fri, 13 Sep 2024 10:00:12 -0500 (CDT)
 Received: from [10.11.0.2] (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id C12B482856E5;
- Fri, 13 Sep 2024 09:56:55 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id A4156828596A;
+ Fri, 13 Sep 2024 10:00:11 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,21 +53,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c912fa7-71e0-11ef-99a2-01e77a169b0f
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 9D8F8828570D
+X-Inumbo-ID: e127bfe6-71e0-11ef-a0b5-8be0dac302b0
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com A6DB3828680E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1726239416; bh=0HpECOm+w1am0fRscRuL87NutJZR1CrTwuUzc9VR1c8=;
+	t=1726239612; bh=jp0IutICP9nSFFZ61LGuxzmJTlY9XaOKnAAbm/cug/k=;
 	h=Message-ID:Date:MIME-Version:To:From;
-	b=bc959BGQJANO2aVjfcOqVtdQe/en2j4JDb26Onjh/VAK8TYG9RsjwUoioto1nldWe
-	 1w8EBqULYcRdbyTRShBzFv/3IDNCkPeKMbJxQDfJUwAx491ra1GRhYf4gNiw/1NezM
-	 tj9u/O+P/z0xJtCWUDuqWmB6jaq42JW9Vz5EUMQQ=
+	b=TcRjFLNLrjrk3020r2bRQc3re8eZTTRSaffjW0ksN0qtyd+t5fzzWPkVZR4YeMFRk
+	 6l6w2H3mSMk+evmQh0pYIT0xND/Mtk9wxdU1k6YBcxYXGjxetvcyiO4vsxCHJ5BELd
+	 c9rAkt3YHiSkoSWYIgVZwM7QgdWgrmyeId7zcwR8=
 X-Virus-Scanned: amavisd-new at rptsys.com
-Message-ID: <64bc1f64-6145-407a-ab3d-13d21abd5ef0@raptorengineering.com>
-Date: Fri, 13 Sep 2024 09:56:55 -0500
+Message-ID: <7066f690-274d-4987-8633-f183fdcee56e@raptorengineering.com>
+Date: Fri, 13 Sep 2024 10:00:10 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/5] xen/bitops: Drop the remnants of hweight{8,16}()
+Subject: Re: [PATCH v3 3/5] xen/bitops: Implement hweight32() in terms of
+ hweightl()
 To: Andrew Cooper <andrew.cooper3@citrix.com>,
  Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
@@ -77,22 +78,28 @@ Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  Michal Orzel <michal.orzel@amd.com>,
  Oleksii Kurochko <oleksii.kurochko@gmail.com>
 References: <20240904225530.3888315-1-andrew.cooper3@citrix.com>
- <20240904225530.3888315-3-andrew.cooper3@citrix.com>
+ <20240904225530.3888315-4-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
-In-Reply-To: <20240904225530.3888315-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20240904225530.3888315-4-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 Hi Andrew,
 
 On 9/4/24 5:55 PM, Andrew Cooper wrote:
-> They are no more.  No functional change.
+> ... and drop generic_hweight32().
+> 
+> As noted previously, the only two users of hweight32() are in __init paths.
+> 
+> The int-optimised form of generic_hweight() is only two instructions shorter
+> than the long-optimised form, and even then only on architectures which lack
+> fast multiplication, so there's no point providing an int-optimised form.
+> 
+> No functional change.
 > 
 > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 > Acked-by: Jan Beulich <jbeulich@suse.com>
-
-For the PPC parts:
 
 Acked-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 
