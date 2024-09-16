@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22DB3C3ABB2
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Sep 2024 07:45:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.799256.1209196 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 737CEC3ABA2
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Sep 2024 07:50:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.799277.1209205 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sq6Pk-0006T3-A5; Mon, 16 Sep 2024 07:44:52 +0000
+	id 1sq6VK-0000M5-U3; Mon, 16 Sep 2024 07:50:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 799256.1209196; Mon, 16 Sep 2024 07:44:52 +0000
+Received: by outflank-mailman (output) from mailman id 799277.1209205; Mon, 16 Sep 2024 07:50:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sq6Pk-0006Su-7C; Mon, 16 Sep 2024 07:44:52 +0000
-Received: by outflank-mailman (input) for mailman id 799256;
- Mon, 16 Sep 2024 07:44:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sq6VK-0000Ly-Qi; Mon, 16 Sep 2024 07:50:38 +0000
+Received: by outflank-mailman (input) for mailman id 799277;
+ Mon, 16 Sep 2024 07:50:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wse+=QO=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1sq6Pi-0006Ru-O6
- for xen-devel@lists.xenproject.org; Mon, 16 Sep 2024 07:44:50 +0000
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [2607:f8b0:4864:20::22f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8b2cd330-73ff-11ef-99a2-01e77a169b0f;
- Mon, 16 Sep 2024 09:44:46 +0200 (CEST)
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3e049185cfeso797159b6e.1
- for <xen-devel@lists.xenproject.org>; Mon, 16 Sep 2024 00:44:48 -0700 (PDT)
+ <SRS0=H51U=QO=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1sq6VI-0000Ls-Se
+ for xen-devel@lists.xenproject.org; Mon, 16 Sep 2024 07:50:36 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5b9e2d24-7400-11ef-a0b6-8be0dac302b0;
+ Mon, 16 Sep 2024 09:50:36 +0200 (CEST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-374c8cef906so3237995f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Sep 2024 00:50:35 -0700 (PDT)
+Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-378e72e4abfsm6446446f8f.16.2024.09.16.00.50.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Sep 2024 00:50:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,87 +46,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b2cd330-73ff-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 5b9e2d24-7400-11ef-a0b6-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1726472687; x=1727077487; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JmPqedV33wqJokiBOh7sauXbuqC6rA9+6TXEyLMFPx8=;
-        b=JXmsvC2bqNDHQPfK9XGLSWTBOxZuACW2ty8N39Hzps4Zrmr1py+HjZg7Tm7/u/FT4s
-         QL52skT6CInhcdEYxE4HJ7x7yL8sz/g57rOnzH6l2iYYlz/M04JAnri4KoRWEWtXTVYo
-         0kiZpC0PN2yhPa1HShoLwIu+pIG+iBF3Kbims=
+        d=citrix.com; s=google; t=1726473035; x=1727077835; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=9J04bZUpf8wHgxeZ3Zu6zfuoxjXqcwGopKTjpofGJZ4=;
+        b=qetnWR+al2KQZYq2w024/WhNNZN9lt6fmremQ539NnRdSOagIkV9RjpiLVo0scOPOK
+         6gomEoqqo9gfiyB+hYJIHUr+gVzeS97m0YR3NmU/Nbseb5IGPlcSqO26bJ+jGNrmvP8f
+         22kjfPHQzfiPf5aiC63vBc9S/dXzOmwIZ7rxU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726472687; x=1727077487;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JmPqedV33wqJokiBOh7sauXbuqC6rA9+6TXEyLMFPx8=;
-        b=Rtlwcufn/KFDjh/zet7g7trXBSDVQOn4b821CtRwncz4FDtP0ebXFtH+627SuJqH88
-         UQ8iL/r+zt46lrLMNtOF4eH8GWrqATSvCiytRW7YAcZuVIfUSbYyHeXbnbzbW3joF0un
-         h5VvTfc0tt6xVrJ8qgagXOhRCEgCiB8Sol0yUfiNSrLDqSc2mNUZXDHnK7LZonwGICPQ
-         Ivd7DBp/rjg6wXmha4luzOgfkeUl1wfzxwwEuKrAtc9dmUj18/M0zMyrL/lh2gho0iuG
-         0IS7ucqDIXW9FqFytMyEiqj8hnJ9dkanf2C/GUgjCS2PALi8rt2YsRAfjZoEBHPWYk//
-         rqTA==
-X-Forwarded-Encrypted: i=1; AJvYcCWP4KFfMXuHczEnDcHOUFQy7WGRtOg6g1fGhFjdrd3XND6KYsRlRoPYhczf6gJMMwEiPlLz4koORS8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzDsWOFC0Mca7ifIKG1GJ59f8tmpufrwpKLqzMsxqOKCSYKxSuB
-	dv6T8fo5W1JEucNILSVw7rbAduh6JCGCUyxIKopC0kldd2CGBIJ33+m0Bw8OPiY3xItOOXVd1S9
-	fUyppMmExFaZi2w/ufEVHRfxRbf2vba1SnPfVQw==
-X-Google-Smtp-Source: AGHT+IEQkg9sh/L04m8D5eAcLhRaGUJpAC+YGj0A9FLe3Rtuf2xagWbd2NRkD2kBkE0cqC8tITw0+uHuFTioq9Yb6oA=
-X-Received: by 2002:a05:6808:14cf:b0:3dd:cc7:957c with SMTP id
- 5614622812f47-3e07a0eee2bmr5814287b6e.8.1726472687356; Mon, 16 Sep 2024
- 00:44:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240910161612.242702-1-frediano.ziglio@cloud.com>
- <20240910161612.242702-2-frediano.ziglio@cloud.com> <76d6d359-d856-4c31-b7ef-30084d7a735c@suse.com>
-In-Reply-To: <76d6d359-d856-4c31-b7ef-30084d7a735c@suse.com>
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-Date: Mon, 16 Sep 2024 08:44:36 +0100
-Message-ID: <CACHz=ZhLNc4xUcLxbvZ+1G_+Y1peYsOpQAgcihWuV7wZ8u=T9A@mail.gmail.com>
-Subject: Re: [PATCH 1/3] x86/boot: Initialise BSS as soon as possible
+        d=1e100.net; s=20230601; t=1726473035; x=1727077835;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9J04bZUpf8wHgxeZ3Zu6zfuoxjXqcwGopKTjpofGJZ4=;
+        b=oEv5X+aNkACbS76i55Y/wzbZvCC22YE+XL5lXwKaDBq0JB8jlXqlxj3NJi+ZZ0ekKt
+         W7d5vVLk3qfN++tfwsnbqElfHic5EQo+l0UUv4J2wyXiZbDYaHa2sncJjRAruoZXl9ty
+         t0vscRbn9mpQGgR1735I2Fwyj4LFd+J0MPScl3bcrVkYh+3v0Lmz9ysStaEA+akbtrMr
+         7zHyrUmGjim7ScQ9orlndq419WQ42uwpODvtu5nWBzCpqMtBBm/3PAiyPtDu2wXUi8ak
+         gniHnPCAqgRy9ced41YNsiYOgiYVAXsK/Yu1JlPFl3+4pbwF6Z9zqdLm5VRJM6yOGPed
+         aNcw==
+X-Forwarded-Encrypted: i=1; AJvYcCUeGOvZaqgcP9ButSDoSjoPrUOZg+l8rMEWvuAY4NsR/x0icvIKPpGX+44+3siJAHxtExu+5W7yaB8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzpB7nzwDVklF1iS9oo6LjQgUKGiw5mMtfUDhf0xkbIVT7YhejG
+	EoyyGUajh7hApVKddF2AFR50I8/3LJlyyz41SPfRx5E5LjpVv1Fm64uliP2ksVg=
+X-Google-Smtp-Source: AGHT+IEFBBnhnHbUttpb2yOzOyRfuXcURQnyO6F3zklP/tjrqhk8HVGP/QYC5mIfjw0IHtM3SipB3g==
+X-Received: by 2002:adf:ec05:0:b0:374:c45a:8afb with SMTP id ffacd0b85a97d-378c2d0751cmr8665286f8f.19.1726473033252;
+        Mon, 16 Sep 2024 00:50:33 -0700 (PDT)
+Date: Mon, 16 Sep 2024 09:50:32 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v7 1/2] x86/time: introduce command line option to select
+ wallclock
+Message-ID: <ZufjSIH6yqKS5e_E@macbook.local>
+References: <20240913075907.34460-1-roger.pau@citrix.com>
+ <20240913075907.34460-2-roger.pau@citrix.com>
+ <bc713147-3235-4151-8026-1c922e871755@suse.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <bc713147-3235-4151-8026-1c922e871755@suse.com>
 
-On Sun, Sep 15, 2024 at 7:20=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 10.09.2024 18:16, Frediano Ziglio wrote:
-> > --- a/xen/arch/x86/boot/head.S
-> > +++ b/xen/arch/x86/boot/head.S
-> > @@ -231,6 +231,27 @@ __efi64_mb2_start:
-> >          /* VGA is not available on EFI platforms. */
-> >          movl   $0,vga_text_buffer(%rip)
-> >
-> > +        /*
-> > +         * Align the stack as UEFI spec requires. Keep it aligned
-> > +         * before efi_multiboot2() call by pushing/popping even
-> > +         * numbers of items on it.
-> > +         */
-> > +        and     $~15,%rsp
->
-> You don't use the stack below, so it's not clear if/why this needs
-> moving. If it does, please add the missing blank after the comma
-> (like you nicely do everywhere else).
->
+On Fri, Sep 13, 2024 at 02:38:14PM +0200, Jan Beulich wrote:
+> On 13.09.2024 09:59, Roger Pau Monne wrote:
+> > --- a/xen/arch/x86/time.c
+> > +++ b/xen/arch/x86/time.c
+> > @@ -1552,6 +1552,37 @@ static const char *__init wallclock_type_to_string(void)
+> >      return "";
+> >  }
+> >  
+> > +static int __init cf_check parse_wallclock(const char *arg)
+> > +{
+> > +    wallclock_source = WALLCLOCK_UNSET;
+> 
+> With this ...
+> 
+> > +    if ( !arg )
+> > +        return -EINVAL;
+> > +
+> > +    if ( !strcmp("auto", arg) )
+> > +        ASSERT(wallclock_source == WALLCLOCK_UNSET);
+> 
+> ... I'm not convinced this is (still) needed.
 
-Fixed the blank. The reason is more clear if you look at the last
-commit in the series, at least for the EFI part. For the BIOS/PVH part
-is less clear, but the rationale is the same. The commit came from a
-larger series where BIOS/PVH is mainly written in C so there is more
-clear.
+It reduces to an empty statement in release builds, and is IMO clearer
+code wise.  I could replace the assert with a comment, but IMO the
+assert conveys the same information in a more compact format and
+provides extra safety in case the code is changed and wallclock_source
+is no longer initialized to the expected value.
 
-> Apart from this there's the question on the precise placement of
-> the calls - see respective comment on patch 2 (which I needed to
-> look at first to have an opinion here).
->
-
-I think you removed too much context, not clear what code you are
-referring to, last hunk above is an "and" instruction.
-
-> Jan
-
-Frediano
+Thanks, Roger.
 
