@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA588C3ABB2
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Sep 2024 06:48:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.799167.1209023 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98A73C3ABB2
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Sep 2024 06:48:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.799169.1209042 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sq5Wd-0004fM-9v; Mon, 16 Sep 2024 06:47:55 +0000
+	id 1sq5Wn-0005Cb-OA; Mon, 16 Sep 2024 06:48:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 799167.1209023; Mon, 16 Sep 2024 06:47:55 +0000
+Received: by outflank-mailman (output) from mailman id 799169.1209042; Mon, 16 Sep 2024 06:48:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sq5Wd-0004fF-74; Mon, 16 Sep 2024 06:47:55 +0000
-Received: by outflank-mailman (input) for mailman id 799167;
- Mon, 16 Sep 2024 06:47:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sq5Wn-0005CU-LI; Mon, 16 Sep 2024 06:48:05 +0000
+Received: by outflank-mailman (input) for mailman id 799169;
+ Mon, 16 Sep 2024 06:48:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=tb4s=QO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1sq5Wc-0004f9-8D
- for xen-devel@lists.xenproject.org; Mon, 16 Sep 2024 06:47:54 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9822e90b-73f7-11ef-99a2-01e77a169b0f;
- Mon, 16 Sep 2024 08:47:52 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 1sq5Wm-0005Bn-VU
+ for xen-devel@lists.xenproject.org; Mon, 16 Sep 2024 06:48:04 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9e8d3a5b-73f7-11ef-a0b6-8be0dac302b0;
+ Mon, 16 Sep 2024 08:48:03 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 25E6D1F86B;
- Mon, 16 Sep 2024 06:47:51 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 7837C21BEC;
+ Mon, 16 Sep 2024 06:48:02 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D85E6139CE;
- Mon, 16 Sep 2024 06:47:50 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 39020139CE;
+ Mon, 16 Sep 2024 06:48:02 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 6jRUM5bU52Z/IAAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 16 Sep 2024 06:47:50 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id DrJuDKLU52aOIAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 16 Sep 2024 06:48:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,72 +54,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9822e90b-73f7-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1726469271; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=jDdjkbnsAiMFhfKjybazY963Vvy5Vm1vHgzynokF26w=;
-	b=nm/7SdsmLB716zqUjTRDXTuZ6Y+A2VHtxwQP70gWcmcCondbkBMHOQ2T+pXsYcjbHIQS6r
-	qF+Wi+NSFdatZV/TsWdhlwTZb/6MaeHSV1xoZD5EdPQjHu6Z4fV/QEYAe1HxqCCZkJfmKY
-	mmtRjtTfSr3rzXmfeEgUAenBhx0rQNo=
-Authentication-Results: smtp-out2.suse.de;
+X-Inumbo-ID: 9e8d3a5b-73f7-11ef-a0b6-8be0dac302b0
+Authentication-Results: smtp-out1.suse.de;
 	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1726469271; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=jDdjkbnsAiMFhfKjybazY963Vvy5Vm1vHgzynokF26w=;
-	b=nm/7SdsmLB716zqUjTRDXTuZ6Y+A2VHtxwQP70gWcmcCondbkBMHOQ2T+pXsYcjbHIQS6r
-	qF+Wi+NSFdatZV/TsWdhlwTZb/6MaeHSV1xoZD5EdPQjHu6Z4fV/QEYAe1HxqCCZkJfmKY
-	mmtRjtTfSr3rzXmfeEgUAenBhx0rQNo=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
 	iommu@lists.linux.dev
 Cc: Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 0/2] xen/swiotlb: fix 2 issues in xen-swiotlb
-Date: Mon, 16 Sep 2024 08:47:46 +0200
-Message-ID: <20240916064748.18071-1-jgross@suse.com>
+	xen-devel@lists.xenproject.org,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2 2/2] xen/swiotlb: fix allocated size
+Date: Mon, 16 Sep 2024 08:47:48 +0200
+Message-ID: <20240916064748.18071-3-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240916064748.18071-1-jgross@suse.com>
+References: <20240916064748.18071-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.997];
-	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid];
-	RCVD_TLS_ALL(0.00)[]
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	REPLY(-4.00)[]
+X-Rspamd-Queue-Id: 7837C21BEC
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 
-Fix 2 issues in xen-swiotlb:
+The allocated size in xen_swiotlb_alloc_coherent() and
+xen_swiotlb_free_coherent() is calculated wrong for the case of
+XEN_PAGE_SIZE not matching PAGE_SIZE. Fix that.
 
-- buffers need to be aligned properly
-- wrong buffer size if XEN_PAGE_SIZE < PAGE_SIZE
+Fixes: 7250f422da04 ("xen-swiotlb: use actually allocated size on check physical continuous")
+Reported-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch
+---
+ drivers/xen/swiotlb-xen.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Changes in V2:
-- added patch 2
-
-Juergen Gross (2):
-  xen/swiotlb: add alignment check for dma buffers
-  xen/swiotlb: fix allocated size
-
- drivers/xen/swiotlb-xen.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
-
+diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+index ddf5b1df632e..faa2fb7c74ae 100644
+--- a/drivers/xen/swiotlb-xen.c
++++ b/drivers/xen/swiotlb-xen.c
+@@ -147,7 +147,7 @@ xen_swiotlb_alloc_coherent(struct device *dev, size_t size,
+ 	void *ret;
+ 
+ 	/* Align the allocation to the Xen page size */
+-	size = 1UL << (order + XEN_PAGE_SHIFT);
++	size = ALIGN(size, XEN_PAGE_SIZE);
+ 
+ 	ret = (void *)__get_free_pages(flags, get_order(size));
+ 	if (!ret)
+@@ -179,7 +179,7 @@ xen_swiotlb_free_coherent(struct device *dev, size_t size, void *vaddr,
+ 	int order = get_order(size);
+ 
+ 	/* Convert the size to actually allocated. */
+-	size = 1UL << (order + XEN_PAGE_SHIFT);
++	size = ALIGN(size, XEN_PAGE_SIZE);
+ 
+ 	if (WARN_ON_ONCE(dma_handle + size - 1 > dev->coherent_dma_mask) ||
+ 	    WARN_ON_ONCE(range_straddles_page_boundary(phys, size)))
 -- 
 2.43.0
 
