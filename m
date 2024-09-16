@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9643FC3ABA2
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Sep 2024 14:14:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.799559.1209535 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D9C4C3ABB2
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Sep 2024 15:09:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.799583.1209587 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sqCUp-00089A-DW; Mon, 16 Sep 2024 14:14:31 +0000
+	id 1sqDLl-0006mA-EF; Mon, 16 Sep 2024 15:09:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 799559.1209535; Mon, 16 Sep 2024 14:14:31 +0000
+Received: by outflank-mailman (output) from mailman id 799583.1209587; Mon, 16 Sep 2024 15:09:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sqCUp-000893-Ax; Mon, 16 Sep 2024 14:14:31 +0000
-Received: by outflank-mailman (input) for mailman id 799559;
- Mon, 16 Sep 2024 14:14:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sqDLl-0006lq-8i; Mon, 16 Sep 2024 15:09:13 +0000
+Received: by outflank-mailman (input) for mailman id 799583;
+ Mon, 16 Sep 2024 15:09:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=H51U=QO=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sqCUo-00088x-8g
- for xen-devel@lists.xenproject.org; Mon, 16 Sep 2024 14:14:30 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fbc95a50-7435-11ef-99a2-01e77a169b0f;
- Mon, 16 Sep 2024 16:14:28 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c275491c61so6019315a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 16 Sep 2024 07:14:27 -0700 (PDT)
-Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bb89d69sm2779262a12.77.2024.09.16.07.14.26
+ <SRS0=CVXs=QO=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
+ id 1sqDLj-0006Jf-FO
+ for xen-devel@lists.xenproject.org; Mon, 16 Sep 2024 15:09:11 +0000
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [2607:f8b0:4864:20::d2a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a0340fe5-743d-11ef-a0b6-8be0dac302b0;
+ Mon, 16 Sep 2024 17:09:10 +0200 (CEST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-82cec47242eso171179139f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Sep 2024 08:09:10 -0700 (PDT)
+Received: from gmail.com (ip190-5-140-142.intercom.com.sv. [190.5.140.142])
+ by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3a092e9005csm16897935ab.79.2024.09.16.08.09.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 07:14:26 -0700 (PDT)
+ Mon, 16 Sep 2024 08:09:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,178 +47,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fbc95a50-7435-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: a0340fe5-743d-11ef-a0b6-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1726496067; x=1727100867; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Yhg4VNAEaodhmEhShwvldT0HWTu9pqwU7Ha2O5CXnK0=;
-        b=mTo20cWGbWBmvzmQ8iLGk9oJmBVxtj1TQw9KLLiepy3h+xnIAAtBSyWPZQreP+vGOj
-         UbPzjU7cstqeEie/5ZNEQymZd91QB6j11zVmxygdmBsXMKlJvRHO51z5XVQ4BsYzKhIT
-         w9bD9fRLDFxtmLcibg8K+9euKi+f8xcC4j0LY=
+        d=gmail.com; s=20230601; t=1726499349; x=1727104149; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tIDS2BgSDN2sYeAiwQv8u9Oegpn8pHfzCYrmX62ewXA=;
+        b=FzzBG2cAeI9OVS6ZfKSdMHbMb8qs2lb4Uzm/bb6rZEpRoGtFJI+8dnPeGGKq46FKaL
+         DrTD9uGwtvoTasRRKsJNe1oIwq+WRJTj3nZVUHdapH1SMHWNWQxqV3sZ8l0MKPIemOKb
+         bjT8oZm4a1Xazg2Dk5KY4VsdKjgJpYQSyt4D+Dg2rzdm7K+HjxnRbweZyQRBhFqtYlFW
+         hMsfaJivzSPvkXrWav8F+f2KANJ7AOVzqa8B0aekYnwZUUpM+pg8G1uH28ofACLeL0Jd
+         qEHvZU5akdQXwDrUn9K9p0zui0b7an2PdMIQ5m58WA5FLWo907zfuYEEZ7jgCX8FPBYt
+         tRyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726496067; x=1727100867;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Yhg4VNAEaodhmEhShwvldT0HWTu9pqwU7Ha2O5CXnK0=;
-        b=OLMbFG/vCd1DYJDM0ZDZXQu7bwmhYPkLmzXM7PKyWiDDT91CcGeLXOwbP9tGFgI+Qq
-         JCf8sKEt1uKhydtr0Mkgpa34ncMZmcRhLuGrZ56h0vXBNnzYwhJXY97jIUFEkvDDWGM6
-         OyyiWrwEbhXcBJCXxu5gxMIaNw29meKNSKlW4b7LC4Ua/H8fukEQvz99TPlcKX4N9+iC
-         Tb27t3f0ER9Ui8FQzX2iy4fajqWL148zPsmkg9I5lsGD268VJpov0EInTqPKVv2/091y
-         7E2lFZpel8qTw8piFovIfo60jKWeePrJIUiMujvSe2NXiPVrUvwLKOk43PeEnftFa3Uy
-         SAMw==
-X-Forwarded-Encrypted: i=1; AJvYcCU4mNBHlWiCw86Q3DXabR5bSU6/fIv3sfdnIeupaOL2C9PYWzvEWyE4e+4rTEgwMVYHT6Gg6oiuWfI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyCeccZXXzyNSvwAyPuyupUd3mXrPy5EHamqBAzMtqODKglfH92
-	trzQJfElGCxLWc8uyIM4tr+vFowm6jiSeMVRzCCom2Lrt7WULyzKLbaLvxuzF1U=
-X-Google-Smtp-Source: AGHT+IGfQOj5vO2FXs1/05YBLvs1Ei6SafVBu8yNB5xTzkorZrf4uGeC4Jdnn2bGM5UhAVIiOFwI8Q==
-X-Received: by 2002:a05:6402:1e95:b0:5c2:768d:23e with SMTP id 4fb4d7f45d1cf-5c413e4d08fmr16496281a12.27.1726496066794;
-        Mon, 16 Sep 2024 07:14:26 -0700 (PDT)
-Date: Mon, 16 Sep 2024 16:14:25 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+        d=1e100.net; s=20230601; t=1726499349; x=1727104149;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=tIDS2BgSDN2sYeAiwQv8u9Oegpn8pHfzCYrmX62ewXA=;
+        b=FmvFo+LilFldcF7C/MJlPggb9By+avz2HYZAbII2w8ceylCPyX2xb+dwJHCfhmaoOG
+         pGOishA+8J07A72cGGRT9xtsNnOjxigklpoi6YlUxvZdA1hcaH4T5Ompo/7C25/k6rh8
+         GXT1VEVzWAoPZQNY6fhExhUtXJ+FK11jVN1cT14xCqojBaJ1jHMfVlDVm3witT8qv+15
+         nxRs50AjXoaOCEmcU3Nxu6d4gKKP3S+Wt0IUjX4KNUtFvksAUWi4qTaHU8dZGNnppA1G
+         RdA7PCGKjTunYS16BhP0X2ckMOiimbaLohCmsrLHMF3sunRkRfyQMNyNE7a/UYW7hNBc
+         p+jA==
+X-Forwarded-Encrypted: i=1; AJvYcCVY5MUGU+9LXTiqJ6T7SMcfu/54lqqdT0bLI6g4F9xAxC26QHnEuexWNFuYf7/UkGzofUWPrgDNz0A=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwUmX9bm2h6S69FLcSKax0dtzqQon+8AW61InWJwz9nqJ/45i67
+	UHo9i9PiEtlvh/GDBrmbnq2ZqAHasF7vPwba+EKE5t5F2s9emmvC
+X-Google-Smtp-Source: AGHT+IE86ZuS/7NQzNvR5tLVOdqaKbQKcpupAoW/xUcVW9ix1XY+RyPuORlI+lKWYit0Zg+iCQOwZg==
+X-Received: by 2002:a05:6e02:12c5:b0:39f:325f:78e6 with SMTP id e9e14a558f8ab-3a0845a0d55mr130717185ab.0.1726499349478;
+        Mon, 16 Sep 2024 08:09:09 -0700 (PDT)
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: sstabellini@kernel.org,
+	anthony@xenproject.org,
+	paul@xen.org,
+	peter.maydell@linaro.org,
+	alex.bennee@linaro.org,
+	edgar.iglesias@amd.com,
 	xen-devel@lists.xenproject.org,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v7 1/2] x86/time: introduce command line option to select
- wallclock
-Message-ID: <Zug9QarN1j2M-z9w@macbook.local>
-References: <20240913075907.34460-1-roger.pau@citrix.com>
- <20240913075907.34460-2-roger.pau@citrix.com>
- <01b4b04f-d7ba-4526-b45f-2146bfc03cbe@citrix.com>
- <ZugwuGWIl2Xg7EMD@mail-itl>
+	qemu-arm@nongnu.org
+Subject: [PATCH v1 4/4] hw/arm: xenpvh: Enable PCI for ARM PVH
+Date: Mon, 16 Sep 2024 17:08:52 +0200
+Message-ID: <20240916150853.1216703-5-edgar.iglesias@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240916150853.1216703-1-edgar.iglesias@gmail.com>
+References: <20240916150853.1216703-1-edgar.iglesias@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ZugwuGWIl2Xg7EMD@mail-itl>
 
-On Mon, Sep 16, 2024 at 03:20:56PM +0200, Marek Marczykowski-Górecki wrote:
-> On Mon, Sep 16, 2024 at 02:11:08PM +0100, Andrew Cooper wrote:
-> > On 13/09/2024 8:59 am, Roger Pau Monne wrote:
-> > > diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-> > > index 959cf45b55d9..2a9b3b9b8975 100644
-> > > --- a/docs/misc/xen-command-line.pandoc
-> > > +++ b/docs/misc/xen-command-line.pandoc
-> > > @@ -2816,6 +2816,27 @@ vwfi to `native` reduces irq latency significantly. It can also lead to
-> > >  suboptimal scheduling decisions, but only when the system is
-> > >  oversubscribed (i.e., in total there are more vCPUs than pCPUs).
-> > >  
-> > > +### wallclock (x86)
-> > > +> `= auto | xen | cmos | efi`
-> > > +
-> > > +> Default: `auto`
-> > > +
-> > > +Allow forcing the usage of a specific wallclock source.
-> > > +
-> > > + * `auto` let the hypervisor select the clocksource based on internal
-> > > +   heuristics.
-> > > +
-> > > + * `xen` force usage of the Xen shared_info wallclock when booted as a Xen
-> > > +   guest.  This option is only available if the hypervisor was compiled with
-> > > +   `CONFIG_XEN_GUEST` enabled.
-> > > +
-> > > + * `cmos` force usage of the CMOS RTC wallclock.
-> > > +
-> > > + * `efi` force usage of the EFI_GET_TIME run-time method when booted from EFI
-> > > +   firmware.
-> > 
-> > For both `xen` and `efi`, something should be said about "if selected
-> > and not satisfied, Xen falls back to other heuristics".
+From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-There's a line just below that notes this: "If the selected option is
-invalid or not available Xen will default to `auto`."  I think it's
-clearer than having to comment on every specific option.
+Enable PCI support for the ARM Xen PVH machine.
 
-> > > +
-> > > +If the selected option is invalid or not available Xen will default to `auto`.
-> > 
-> > I'm afraid that I'm firmly of the opinion that "auto" on the cmdline is
-> > unnecessary complexity.  Auto is the default, and doesn't need
-> > specifying explicitly.  That in turn simplifies ...
-> 
-> What about overriding earlier choice? For example overriding a built-in
-> cmdline? That said, with the current code, the same can be achieved with
-> wallclock=foo, and living with the warning in boot log...
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+---
+ hw/arm/xen-pvh.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-It's IMO weird to ask the users to use wallclock=foo to override a
-previous command line wallclock option and fallback to the default
-behavior.
+diff --git a/hw/arm/xen-pvh.c b/hw/arm/xen-pvh.c
+index 28af3910ea..33f0dd5982 100644
+--- a/hw/arm/xen-pvh.c
++++ b/hw/arm/xen-pvh.c
+@@ -39,6 +39,16 @@ static void xen_arm_instance_init(Object *obj)
+                                          VIRTIO_MMIO_DEV_SIZE };
+ }
+ 
++static void xen_pvh_set_pci_intx_irq(void *opaque, int intx_irq, int level)
++{
++    XenPVHMachineState *s = XEN_PVH_MACHINE(opaque);
++    int irq = s->cfg.pci_intx_irq_base + intx_irq;
++
++    if (xendevicemodel_set_irq_level(xen_dmod, xen_domid, irq, level)) {
++        error_report("xendevicemodel_set_pci_intx_level failed");
++    }
++}
++
+ static void xen_arm_machine_class_init(ObjectClass *oc, void *data)
+ {
+     XenPVHMachineClass *xpc = XEN_PVH_MACHINE_CLASS(oc);
+@@ -69,7 +79,11 @@ static void xen_arm_machine_class_init(ObjectClass *oc, void *data)
+     /* Xen/ARM does not use buffered IOREQs.  */
+     xpc->handle_bufioreq = HVM_IOREQSRV_BUFIOREQ_OFF;
+ 
++    /* PCI INTX delivery.  */
++    xpc->set_pci_intx_irq = xen_pvh_set_pci_intx_irq;
++
+     /* List of supported features known to work on PVH ARM.  */
++    xpc->has_pci = true;
+     xpc->has_tpm = true;
+     xpc->has_virtio_mmio = true;
+ 
+-- 
+2.43.0
 
-> > > +
-> > >  ### watchdog (x86)
-> > >  > `= force | <boolean>`
-> > >  
-> > > diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-> > > index 29b026735e5d..e4751684951e 100644
-> > > --- a/xen/arch/x86/time.c
-> > > +++ b/xen/arch/x86/time.c
-> > > @@ -1552,6 +1552,37 @@ static const char *__init wallclock_type_to_string(void)
-> > >      return "";
-> > >  }
-> > >  
-> > > +static int __init cf_check parse_wallclock(const char *arg)
-> > > +{
-> > > +    wallclock_source = WALLCLOCK_UNSET;
-> > > +
-> > > +    if ( !arg )
-> > > +        return -EINVAL;
-> > > +
-> > > +    if ( !strcmp("auto", arg) )
-> > > +        ASSERT(wallclock_source == WALLCLOCK_UNSET);
-> > 
-> > ... this.
-> > 
-> > Hitting this assert will manifest as a system reboot/hang with no
-> > information on serial/VGA, because all of this runs prior to getting up
-> > the console.  You only get to see it on a PVH boot because we bodge the
-> > Xen console into default-existence.
-> 
-> This assert is no-op as wallclock_source is unconditionally set to WALLCLOCK_UNSET few lines above.
-
-As mentioned to Jan - I find it nicer than adding an empty statement.
-
-> > So, ASSERT()/etc really need avoiding wherever possible in cmdline parsing.
-> > 
-> > In this case, all it serves to do is break examples like `wallclock=xen
-> > wallclock=auto` case, which is unlike our latest-takes-precedence
-> > behaviour everywhere else.
-> > 
-> > > +    else if ( !strcmp("xen", arg) )
-> > > +    {
-> > > +        if ( !xen_guest )
-> > 
-> > We don't normally treat this path as an error when parsing (we know what
-> > it is, even if we can't action it).  Instead, there's no_config_param()
-> > to be more friendly (for PVH at least).
-> > 
-> > It's a bit awkward, but this should do:
-> > 
-> >     {
-> > #ifdef CONFIG_XEN_GUEST
-> >         wallclock_source = WALLCLOCK_XEN;
-> > #else
-> >         no_config_param("XEN_GUEST", "wallclock", s, ss);
-> > #endif
-> >     }
-> 
-> Can you boot the binary build with CONFIG_XEN_GUEST=y as native? If so,
-> the above will not be enough, a runtime check is needed anyway.
-> 
-> > There probably wants to be something similar for EFI, although it's not
-> > a plain CONFIG so it might be more tricky.
-> 
-> It needs to be runtime check here even more. Not only because of
-> different boot modes, but due to interaction with efi=no-rs (or any
-> other reason for not having runtime services). See the comment there.
-
-I agree with Marek, no_config_param() is not enough here: Xen needs to
-ensure it has been booted as a Xen guest, or that EFI run-time
-services are enabled in order to ensure the selected clock source is
-available.
-
-Thanks, Roger.
 
