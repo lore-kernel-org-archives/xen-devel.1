@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58C3AC3ABCB
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Sep 2024 23:50:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.799764.1209777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD38C3ABB2
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Sep 2024 00:53:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.799777.1209786 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sqLU4-00028K-1p; Mon, 16 Sep 2024 23:50:20 +0000
+	id 1sqMT7-0002ap-HH; Tue, 17 Sep 2024 00:53:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 799764.1209777; Mon, 16 Sep 2024 23:50:20 +0000
+Received: by outflank-mailman (output) from mailman id 799777.1209786; Tue, 17 Sep 2024 00:53:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sqLU3-00028D-Um; Mon, 16 Sep 2024 23:50:19 +0000
-Received: by outflank-mailman (input) for mailman id 799764;
- Mon, 16 Sep 2024 23:50:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=D3gN=QO=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1sqLU2-00027j-S1
- for xen-devel@lists.xenproject.org; Mon, 16 Sep 2024 23:50:18 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6c8510cc-7486-11ef-a0b7-8be0dac302b0;
- Tue, 17 Sep 2024 01:50:17 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B23245C3114;
- Mon, 16 Sep 2024 23:50:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 154FDC4CEC4;
- Mon, 16 Sep 2024 23:50:13 +0000 (UTC)
+	id 1sqMT7-0002ai-Ed; Tue, 17 Sep 2024 00:53:25 +0000
+Received: by outflank-mailman (input) for mailman id 799777;
+ Tue, 17 Sep 2024 00:53:23 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqMT5-0002aY-R1; Tue, 17 Sep 2024 00:53:23 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqMT5-0000VS-Nj; Tue, 17 Sep 2024 00:53:23 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqMT5-0000QT-8s; Tue, 17 Sep 2024 00:53:23 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqMT5-00061O-8P; Tue, 17 Sep 2024 00:53:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,81 +44,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c8510cc-7486-11ef-a0b7-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1726530616;
-	bh=EcihBU2MW+o0k8STiYL5wfgfRi+z+e3ydSW7l+a5gAw=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=RGB2J96z0XM6/2N1YgdJL1hrET9dwWbaDhoLTvF8NJVBBzsOIyCxVhID0f9Mm7/FI
-	 MDo1dFqc2ihsQb+75KauXTS95u5y7oB7kHJmJ8qMOv8nogC7ApweXU5PWRTKrTJmKE
-	 azIVOi20Ms9eLdjkPk9P9apALizLi5pnnfCeq5+PgYXW9V2UT0yYWQdaRsX13sOmq1
-	 KXrKpowqs+eUrVw1K5icr9oY6KsCKXROLDykw+7TaV3Aa9ntu0FHeOvv5ND1S1MtDZ
-	 FgW1X7STNq2ASK9rVzamI1jlbQulGfwtsbf0dJ7EJZzgndGWQg8LL4YmVGQ9Zaewpx
-	 BQmMWPto4BNxA==
-Date: Mon, 16 Sep 2024 16:50:12 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-cc: qemu-devel@nongnu.org, sstabellini@kernel.org, anthony@xenproject.org, 
-    paul@xen.org, peter.maydell@linaro.org, alex.bennee@linaro.org, 
-    edgar.iglesias@amd.com, xen-devel@lists.xenproject.org, 
-    qemu-arm@nongnu.org
-Subject: Re: [PATCH v1 4/4] hw/arm: xenpvh: Enable PCI for ARM PVH
-In-Reply-To: <20240916150853.1216703-5-edgar.iglesias@gmail.com>
-Message-ID: <alpine.DEB.2.22.394.2409161649590.1417852@ubuntu-linux-20-04-desktop>
-References: <20240916150853.1216703-1-edgar.iglesias@gmail.com> <20240916150853.1216703-5-edgar.iglesias@gmail.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=7V+3uZiCbClzM+zYy5xjjuE8GCZ0AydQMbDu0XuDN7Y=; b=njL7PoGi0vv2Dd+19yfeGqKsR8
+	QQxTDoep/Ry1kozfZBbTHGvnyxDglsBrjQUhY39bcewsxZUzRPoQpeGoR+TxwLw31XaaNzV0Kmp4d
+	9YRQauHqV+y8rZEAPSnIfaizbzEWY7Dy+x71vx7YoHh9foXTJBWDLnxetSpQdifWgpow=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-187723-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Subject: [xen-unstable-smoke test] 187723: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=4e1a3337455ea82f05b46fa467106ce6ec71c102
+X-Osstest-Versions-That:
+    xen=a8bf14f6f331d4f428010b4277b67c33f561ed19
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 17 Sep 2024 00:53:23 +0000
 
-On Mon, 16 Sep 2024, Edgar E. Iglesias wrote:
-> From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
-> 
-> Enable PCI support for the ARM Xen PVH machine.
-> 
-> Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+flight 187723 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/187723/
 
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  4e1a3337455ea82f05b46fa467106ce6ec71c102
+baseline version:
+ xen                  a8bf14f6f331d4f428010b4277b67c33f561ed19
+
+Last test of basis   187695  2024-09-13 18:00:24 Z    3 days
+Testing same since   187723  2024-09-16 21:03:54 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Michal Orzel <michal.orzel@amd.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
-> ---
->  hw/arm/xen-pvh.c | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
-> 
-> diff --git a/hw/arm/xen-pvh.c b/hw/arm/xen-pvh.c
-> index 28af3910ea..33f0dd5982 100644
-> --- a/hw/arm/xen-pvh.c
-> +++ b/hw/arm/xen-pvh.c
-> @@ -39,6 +39,16 @@ static void xen_arm_instance_init(Object *obj)
->                                           VIRTIO_MMIO_DEV_SIZE };
->  }
->  
-> +static void xen_pvh_set_pci_intx_irq(void *opaque, int intx_irq, int level)
-> +{
-> +    XenPVHMachineState *s = XEN_PVH_MACHINE(opaque);
-> +    int irq = s->cfg.pci_intx_irq_base + intx_irq;
-> +
-> +    if (xendevicemodel_set_irq_level(xen_dmod, xen_domid, irq, level)) {
-> +        error_report("xendevicemodel_set_pci_intx_level failed");
-> +    }
-> +}
-> +
->  static void xen_arm_machine_class_init(ObjectClass *oc, void *data)
->  {
->      XenPVHMachineClass *xpc = XEN_PVH_MACHINE_CLASS(oc);
-> @@ -69,7 +79,11 @@ static void xen_arm_machine_class_init(ObjectClass *oc, void *data)
->      /* Xen/ARM does not use buffered IOREQs.  */
->      xpc->handle_bufioreq = HVM_IOREQSRV_BUFIOREQ_OFF;
->  
-> +    /* PCI INTX delivery.  */
-> +    xpc->set_pci_intx_irq = xen_pvh_set_pci_intx_irq;
-> +
->      /* List of supported features known to work on PVH ARM.  */
-> +    xpc->has_pci = true;
->      xpc->has_tpm = true;
->      xpc->has_virtio_mmio = true;
->  
-> -- 
-> 2.43.0
-> 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   a8bf14f6f3..4e1a333745  4e1a3337455ea82f05b46fa467106ce6ec71c102 -> smoke
 
