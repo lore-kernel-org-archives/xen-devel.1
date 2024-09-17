@@ -4,37 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6ED8CAC592
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Sep 2024 16:16:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.800025.1209953 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D421CAC58F
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Sep 2024 17:14:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.800064.1209997 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sqarz-0001d9-8Z; Tue, 17 Sep 2024 16:16:03 +0000
+	id 1sqbmR-0003Y2-CO; Tue, 17 Sep 2024 17:14:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 800025.1209953; Tue, 17 Sep 2024 16:16:03 +0000
+Received: by outflank-mailman (output) from mailman id 800064.1209997; Tue, 17 Sep 2024 17:14:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sqarz-0001cd-0R; Tue, 17 Sep 2024 16:16:03 +0000
-Received: by outflank-mailman (input) for mailman id 800025;
- Tue, 17 Sep 2024 16:16:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fqUh=QP=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1sqary-0001Pu-2c
- for xen-devel@lists.xenproject.org; Tue, 17 Sep 2024 16:16:02 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 201ab6d0-7510-11ef-99a2-01e77a169b0f;
- Tue, 17 Sep 2024 18:15:59 +0200 (CEST)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5365b71a6bdso5039166e87.2
- for <xen-devel@lists.xenproject.org>; Tue, 17 Sep 2024 09:15:59 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5368704da27sm1234574e87.83.2024.09.17.09.15.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 09:15:58 -0700 (PDT)
+	id 1sqbmR-0003Xv-9e; Tue, 17 Sep 2024 17:14:23 +0000
+Received: by outflank-mailman (input) for mailman id 800064;
+ Tue, 17 Sep 2024 17:14:21 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqbmP-0003Xl-FQ; Tue, 17 Sep 2024 17:14:21 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqbmP-0003gz-3v; Tue, 17 Sep 2024 17:14:21 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqbmO-0007aT-JY; Tue, 17 Sep 2024 17:14:20 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1sqbmO-0002JJ-J2; Tue, 17 Sep 2024 17:14:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,116 +44,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 201ab6d0-7510-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726589758; x=1727194558; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Lm/1+4e3ZJBgxoi/GYAc1NQQlIkPFwoz0AdoMqlIYho=;
-        b=ikTT+2T5TMMcZJ1npP7htDirFoV1JpSsW7EcIGkBtF0Ujr6mvmvPm7/IsQtA2iYN9E
-         t/0kyEVMnuP3vb8FnVQetWihvFTQ+UBcKHlPaalzh6pYqJ0oMS/tnGoynfpd9xPbE+b2
-         Yiz4jClcGcQynVERWY0hmQ/3qKhIFl3bCG1FTLFcWl6QzaxuccX2UOPU+5ajhav2BmX3
-         ajDh3AqhqAcqoKlWVIaOfbPGPwuhqRB6Q3LPNB1QHND3npLVVB9GI0USlOJtpsseaKGL
-         W7uuxioVemUK6XGQsEL9PKeDSF8ECTEYx3EXgO9zgcQwk+DA99fupr3Ec0j4ZmU0/nLS
-         6Fiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726589758; x=1727194558;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Lm/1+4e3ZJBgxoi/GYAc1NQQlIkPFwoz0AdoMqlIYho=;
-        b=GEVYiFsUgn/axBeq32W/g0vTevhTjzxaxXPg6IMrZHsnm7CVGOhmTPL5EA7sAHKomr
-         Yfmx9B+DONU7NLiciu6DH1/VutkgSLvjhSLVIRxHKYpmXG2ZpP6vVM3EO010sI/fnM45
-         KPnjx/4r/5iwCCadDuwPEAAWp0S8lXzLZELkGlXKm1tJRgALLmFb19uvETQRg9ZZWBQJ
-         M9AdD+zJ7EKlmKSurSCE34mk7pLnb+SKVvN7TrBUeeMVz+gymscSd5yVlvrEsZexnTgK
-         6p9gQUGKnQ3DCGH+kwr7DRtaukv8IPE4z49tVp4+8vKcip2+1dcAQm9fqUTEsWHjacKD
-         GyFg==
-X-Gm-Message-State: AOJu0YyF+t/bpk5zeL/78lpzUiLjC+w65BHbPubjaSIVyYjWwWQH6p2X
-	DEEFkfVgcFTunKWtOlcoReg+y9Qha7tKgPbDXFnPQub4wxM2JJhUONWx5g==
-X-Google-Smtp-Source: AGHT+IFMX0RwsEJNJ8FstnMCi8De9M+shLAOZ9A5ig6cERy69nFxUWib7vyBYZ1dEfGwKgsAyGsSig==
-X-Received: by 2002:a05:6512:2c06:b0:536:88d0:4220 with SMTP id 2adb3069b0e04-53688d04697mr4048387e87.34.1726589758372;
-        Tue, 17 Sep 2024 09:15:58 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=1Anf4V1R8BkEjJdSJ4ancseato1EjT/1+rpShPiAYB8=; b=dBq+GlPpMV+qDDFbTvH7vr38ep
+	SzOjx9SXT63BXbNlliIBxL3yjynywpAUCfgY8AG86yjyU3bOQiw8sfIxKHAJsmMUOpXiiVlB5Cx1o
+	mXzrliZ5k3+lpttHEZ2VolJtwkB8Eq8kYTlqLFVmTUzI4eX6sZMPRkIcfiw3shQAp3cE=;
 To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 1/5] xen: define ACPI and DT device info sections macros
-Date: Tue, 17 Sep 2024 18:15:51 +0200
-Message-ID: <3049dd691f79c688751abaae63c0ccdc36680fbb.1726579819.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <cover.1726579819.git.oleksii.kurochko@gmail.com>
-References: <cover.1726579819.git.oleksii.kurochko@gmail.com>
-MIME-Version: 1.0
+Message-ID: <osstest-187732-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 187732: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=b0d1cb59c78e5ecad8988c8114982c93e846f361
+X-Osstest-Versions-That:
+    ovmf=670e263419eb875fd8dce0c8d18dd3ab02b83ba0
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 17 Sep 2024 17:14:20 +0000
 
-Introduce conditional macros to define device
-information sections based on the configuration of ACPI
-or device tree support. These sections are required for
-common code of device initialization and getting an information
-about a device.
+flight 187732 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/187732/
 
-These macros are expected to be used across different
-architectures (Arm, PPC, RISC-V), so they are moved to
-the common xen/xen.lds.h, based on their original definition
-in Arm.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 b0d1cb59c78e5ecad8988c8114982c93e846f361
+baseline version:
+ ovmf                 670e263419eb875fd8dce0c8d18dd3ab02b83ba0
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v2:
- - New patch.
----
- xen/include/xen/xen.lds.h | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+Last test of basis   187722  2024-09-16 16:43:13 Z    1 days
+Testing same since   187732  2024-09-17 15:43:39 Z    0 days    1 attempts
 
-diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
-index a17810bb28..aa7301139d 100644
---- a/xen/include/xen/xen.lds.h
-+++ b/xen/include/xen/xen.lds.h
-@@ -114,6 +114,21 @@
- 
- /* List of constructs other than *_SECTIONS in alphabetical order. */
- 
-+#define USE_DECL_SECTION(x) DECL_SECTION(x)
-+
-+#define NOUSE_DECL_SECTION(x) x :
-+
-+#ifdef CONFIG_ACPI
-+#define ACPI_DEV_INFO_SEC(secname, DECL_SECTION_MACROS_NAME)  \
-+    DECL_SECTION_MACROS_NAME(secname) {                     \
-+      _asdevice = .;                                        \
-+      *(secname)                                            \
-+      _aedevice = .;                                        \
-+    } :text
-+#else
-+#define ACPI_DEV_INFO_SEC(secname, DECL_SECTION_MACROS_NAME)
-+#endif /* CONFIG_ACPI */
-+
- #define BUGFRAMES                               \
-     __start_bug_frames_0 = .;                   \
-     *(.bug_frames.0)                            \
-@@ -131,6 +146,17 @@
-     *(.bug_frames.3)                            \
-     __stop_bug_frames_3 = .;
- 
-+#ifdef CONFIG_HAS_DEVICE_TREE
-+#define DT_DEV_INFO_SEC(secname, DECL_SECTION_MACROS_NAME)  \
-+    DECL_SECTION_MACROS_NAME(secname) {                     \
-+      _sdevice = .;                                         \
-+      *(secname)                                            \
-+      _edevice = .;                                         \
-+    } :text
-+#else
-+#define DECL_DT_DEV_INFO_SEC(secname, DECL_SECTION_MACROS_NAME)
-+#endif /* CONFIG_HAS_DEVICE_TREE */
-+
- #ifdef CONFIG_HYPFS
- #define HYPFS_PARAM              \
-        . = ALIGN(POINTER_ALIGN); \
--- 
-2.46.0
+------------------------------------------------------------
+People who touched revisions under test:
+  Phil Noh <Phil.Noh@amd.com>
 
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   670e263419..b0d1cb59c7  b0d1cb59c78e5ecad8988c8114982c93e846f361 -> xen-tested-master
 
