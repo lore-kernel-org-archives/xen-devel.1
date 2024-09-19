@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DCFCF3959
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Sep 2024 15:59:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.800817.1210816 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1358CF3959
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Sep 2024 16:11:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.800839.1210850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1srJZ9-0007Jk-8J; Thu, 19 Sep 2024 15:59:35 +0000
+	id 1srJkH-0003DT-UB; Thu, 19 Sep 2024 16:11:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 800817.1210816; Thu, 19 Sep 2024 15:59:35 +0000
+Received: by outflank-mailman (output) from mailman id 800839.1210850; Thu, 19 Sep 2024 16:11:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1srJZ9-0007Jd-5P; Thu, 19 Sep 2024 15:59:35 +0000
-Received: by outflank-mailman (input) for mailman id 800817;
- Thu, 19 Sep 2024 15:59:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1srJkH-0003DM-QB; Thu, 19 Sep 2024 16:11:05 +0000
+Received: by outflank-mailman (input) for mailman id 800839;
+ Thu, 19 Sep 2024 16:11:05 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hDEZ=QR=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1srJZ8-0007JX-0p
- for xen-devel@lists.xenproject.org; Thu, 19 Sep 2024 15:59:34 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 29516ae1-76a0-11ef-a0b8-8be0dac302b0;
- Thu, 19 Sep 2024 17:59:33 +0200 (CEST)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5365b6bd901so1181511e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 19 Sep 2024 08:59:33 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5369fa5ceb3sm631423e87.32.2024.09.19.08.59.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Sep 2024 08:59:31 -0700 (PDT)
+ id 1srJkH-0003DG-FI
+ for xen-devel@lists.xenproject.org; Thu, 19 Sep 2024 16:11:05 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c3a3c0c6-76a1-11ef-99a2-01e77a169b0f;
+ Thu, 19 Sep 2024 18:11:01 +0200 (CEST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2f75aa08a96so11874281fa.1
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Sep 2024 09:11:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,125 +42,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29516ae1-76a0-11ef-a0b8-8be0dac302b0
+X-Inumbo-ID: c3a3c0c6-76a1-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726761572; x=1727366372; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=w6O68B1dFkVC+NGetsOJNVPBZ3KQJrDF4Hl6BN3xL0Y=;
-        b=ejNeaprAOCkTanY6uRePqjabSs2b2M/K5YDZ5BtTkEtHHm4u+4Q9dtrUfqlFVzXxGH
-         gEBT13QSxYIJF/MhX4B7OUxorRsv8NBNH0r9B06A9fEkJTZfyEl6s0egUUMzGIpWTV2c
-         n5AAClaR4eAhuSPBaVbcge78R3QcYD6Y/U3QE40BUmx2YY1vMXvWrcYhwe/+Y60qHyQw
-         SWslwBVtRN6w03HPYJmBTwLUsMbDmUsQkApKKQDxvRJ1VD4jAJTDTUTEVNiis3SVzr2F
-         Nh/pCIwTmxwIjrgIrcHaFFikBSU+W6loXe1vSK623bYGRTvrkYBaS+DPopEfkb7LqzG6
-         4+5Q==
+        d=gmail.com; s=20230601; t=1726762261; x=1727367061; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=/tilfcY4bx5zjpDNOXuiwdSForepVxpSexTM0XWXMaA=;
+        b=Qk6wVLGPSk0T2IwIPM/mlhmcV7wQx6onA9JxbdHuqs04ZTFKHhjqZiCi+BktfcG8+W
+         cQK50h8WwGcVq3XE2Gm3FKPgl75VP2c7G/kuB0pL7gyFsU0NfZsctfc1TQ3SG3/iHlIm
+         qjSaDHgvp+JKSU9V0kEm1pOh5MkZFxQGQByP5MoleGiTiZpjUXR9vpnrLqmYBsaBLR4g
+         N48Adi2v5ymbzBE1TVTMlZSBwpwbLJunNkg9pvFQIz6zj4LE2HpizcAzwh7Hd+L0UZyS
+         SX4DWPLYk4PBulovSdFleTPqQOanT/AqKRcadMOIfhPXj8ZBVcd1tcYRRoC/asCUrJiK
+         +acw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726761572; x=1727366372;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=w6O68B1dFkVC+NGetsOJNVPBZ3KQJrDF4Hl6BN3xL0Y=;
-        b=CqBFa4219wU+9J6lWcrCNhen7kXhivtTO3R4fvbamo3v+pQRa4wLzCN9XOd3mvWmzy
-         jrIx9Q0u81X3vzna91zAZdPA7nXlOyZDHnlmTdIDMIcVhbfEI02xXSRdJWzLk9NLYRNr
-         neafVfLpPybpKisBo5s9d9NMCllVNfwnhKY/DWLVu8uf/diu37zE33wI5Rw8sUNIKf2y
-         VST1OriSbBMUCO7G47zIOAQ3qU949Ijqd0I8cRgc3oZ/ulSeBvfFYYhtMdvSS0AEURQ4
-         KhYmiqcOWoZIR004G+bI+rbaRMFcoxwQ6za6Fd6AThvPPvv5Zup+wzigyd9i35f/LPtv
-         b0pg==
-X-Gm-Message-State: AOJu0YyXoF9WYeDFv652+FBwQ+qiM9MVZWcLXZeT3Ey641HK3t+oLmJF
-	Y84xlOhCiS+x8v+4q0Picjn6Q3VZEYoNT8HsQNk8qDhsbfrLoihCJ+adTw==
-X-Google-Smtp-Source: AGHT+IEBW16nv7vOWNAlC6A8Aex3h0CQBJjbK6baJ+lqeWf4oOq7fjFCwN7iTGogyNyOzXOUvgsEEw==
-X-Received: by 2002:a05:6512:1390:b0:52c:90b6:170f with SMTP id 2adb3069b0e04-53678fc854dmr15947964e87.29.1726761571590;
-        Thu, 19 Sep 2024 08:59:31 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 0/2] Move percpu code to common
-Date: Thu, 19 Sep 2024 17:59:26 +0200
-Message-ID: <cover.1726746877.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.46.0
+        d=1e100.net; s=20230601; t=1726762261; x=1727367061;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=/tilfcY4bx5zjpDNOXuiwdSForepVxpSexTM0XWXMaA=;
+        b=T20xfMomkoLBItTi/Sy9xaHmeT0MZuvfuoD3jVL1KPg9sWK7I9XHNpoLn0qQxoDAbd
+         s87cCC9fEnhIVZ+XcVXgo+09+pQunHjrLh7VDFj96Bvz50QZyrem2TjGDhk/hpAxYcdv
+         +V6RsMfXYEYVOy0DKFWTdFu0qLBZ5iJtExXTuKnyazi7SASqcqZWZDC0zjbPGiEVQs4s
+         2LQam3ZNGVH+yjqhh77WQMtiNxhOHXdwvic5bLMMB4ubHfVRFUWEgh6Ohklj50M9FsQ7
+         9ZBaQe5tiGCjoYcEYC7db37/kc+TKiR71O7t1x+2p4Gl+RRpHKGU02uTCZOIHaFmrxy3
+         gulw==
+X-Gm-Message-State: AOJu0Yx89nboAbcxhn7fMlF5YzWDuCjR+RUoGXL+o4blkIHUHF9l7dTX
+	HsPJA4RgTiseUK/nJYiHzlz6s2J4ow7Qxxr4dGLrq70758VoRi3r0cKgfJSEaYT4TqPk/BbFv7Q
+	gPWiC6jwRwKEcDN3Xs0GAU4aNA/JYa4wT
+X-Google-Smtp-Source: AGHT+IF/lDH0NVa4xfJRsyYR4WEkHSbEu1HSDaUgJyt9dHa9/xQvwTh+5N7gRjG0nwaJJRjXpnQgoF12jo+LqriNbp8=
+X-Received: by 2002:a2e:a543:0:b0:2f7:708f:d1c3 with SMTP id
+ 38308e7fff4ca-2f7cb31c9f1mr797771fa.21.1726762260472; Thu, 19 Sep 2024
+ 09:11:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Date: Thu, 19 Sep 2024 18:10:24 +0200
+Message-ID: <CAMacjJya_30yczOSBR=3f7_wGVgaSw_fWh7jhPqn3EQ3h4i2pQ@mail.gmail.com>
+Subject: Xen 4.20 release schedule proposal
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Community Manager <community.manager@xenproject.org>, 
+	"committers @ xenproject . org" <committers@xenproject.org>
+Content-Type: multipart/alternative; boundary="00000000000025a9b106227b2b81"
 
-The per-CPU area management code, which is largely common across architectures,
-is a strong candidate for consolidation into common code.
+--00000000000025a9b106227b2b81
+Content-Type: text/plain; charset="UTF-8"
 
-Currently, there are three architectural-specific aspects that are not yet
-unified ( if they can be unified at all ):
-1. INVALID_PERCPU_AREA:
-  ARM:
-    #define INVALID_PERCPU_AREA (-(long)__per_cpu_start)
-  x86:
-    #define INVALID_PERCPU_AREA (0x8000000000000000UL - (unsigned long)__per_cpu_start)
-2. Return value when __per_cpu_offset Is Already Initialized:
-  Arm:
-    if (__per_cpu_offset[cpu] != INVALID_PERCPU_AREA)
-      return -EBUSY;
-  x86:
-    if (__per_cpu_offset[cpu] != INVALID_PERCPU_AREA)
-      return 0;
-3. Handling of CPU_RESUME_FAILED and CPU_REMOVE in cpu_percpu_callback:
-  Arm:
-    switch (action)
-    {
-    case CPU_UP_CANCELED:
-    case CPU_DEAD:
-        free_percpu_area(cpu);
-        break;
-    }
-  x86:
-    switch (action)
-    {
-    case CPU_UP_CANCELED:
-    case CPU_DEAD:
-    case CPU_RESUME_FAILED:
-        if (!park_offline_cpus && system_state != SYS_STATE_suspend)
-            free_percpu_area(cpu);
-        break;
-    case CPU_REMOVE:
-        if (park_offline_cpus)
-            free_percpu_area(cpu);
-        break;
-    }
+Hello everyone,
 
-These changes do not affect the functional behavior.
+Following the 8-month release cycle, also taking into account that 4.19
+has been released 27.07.24 and the next "good" month for release should
+be November according to [1] but it seems to me that it could be too short,
+below is the proposed release schedule that I come up with for Xen 4.20.
 
+Please don't hesitate to provide your feedback.
 
-Oleksii Kurochko (2):
-  xen: introduce common macros for per-CPU sections defintion
-  xen: move per-cpu area management into common code
+If there are no objections, I plan to update the Wiki page
+*Xen_Project_X.YY_Release_Notes* to make it easier to find our final
+schedule ( especially for the people who aren't following xen-devel mailing
+list ). As an additional benefit, it will also be accessible via
+*SUPPORT.md* (in the wiki at
+https://xenbits.xen.org/docs/unstable-staging/support-matrix.html).
 
- xen/arch/arm/Makefile             |   1 -
- xen/arch/arm/percpu.c             |  85 --------------------
- xen/arch/arm/xen.lds.S            |   9 +--
- xen/arch/ppc/stubs.c              |   1 -
- xen/arch/ppc/xen.lds.S            |   9 +--
- xen/arch/riscv/stubs.c            |   1 -
- xen/arch/x86/include/asm/Makefile |   1 -
- xen/arch/x86/include/asm/percpu.h |  18 +++++
- xen/arch/x86/percpu.c             |  92 ++--------------------
- xen/arch/x86/xen.lds.S            |   9 +--
- xen/common/Makefile               |   1 +
- xen/common/percpu.c               | 127 ++++++++++++++++++++++++++++++
- xen/include/asm-generic/percpu.h  |   8 ++
- xen/include/xen/xen.lds.h         |  10 +++
- 14 files changed, 172 insertions(+), 200 deletions(-)
- delete mode 100644 xen/arch/arm/percpu.c
- create mode 100644 xen/arch/x86/include/asm/percpu.h
- create mode 100644 xen/common/percpu.c
+Thanks!
 
--- 
-2.46.0
+** Proposed option: Wed March 12, 2024 **
+(+8 months from Xen 4.19 release)
 
+- Last posting date          Fri Dec 20, 2023 (+13 weeks from now)
+
+Patches adding new features are expected to be posted to the mailing
+list by this date, although perhaps not in their final version.
+
+- Feature freeze             Fri Jan 10, 2024 (+3 weeks from Last posting
+date)
+
+Patches adding new features should be committed by this date.
+Straightforward bugfixes may continue to be accepted by maintainers.
+
+- Code freeze                Fri Jan 31, 2025 (+3 weeks from Feature freeze)
+
+Bugfixes only.
+
+- Hard code freeze           Fri Feb 21, 2025 (+3 weeks from Code freeze)
+
+Bugfixes for serious bugs (including regressions), and low-risk fixes only.
+
+- Final commits              Fri March 7, 2025 (+2 weeks from Hard code
+freeze)
+
+Branch off staging-4.18.
+
+- Release                    Wed March 12, 2025
+
+[1] https://lists.xen.org/archives/html/xen-devel/2018-07/msg02240.html
+
+Best regards,
+ Oleksii
+
+--00000000000025a9b106227b2b81
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello everyone,<br><br>Following the 8-month release cycle=
+, also taking into account that 4.19<br>has been released 27.07.24 and the =
+next &quot;good&quot; month for release should<br>be November according to =
+[1] but it seems to me that it could be too short,<br>below is the proposed=
+ release schedule that I come up with for Xen 4.20.<br><br>Please don&#39;t=
+ hesitate to=C2=A0provide your feedback.=C2=A0<div><br></div><div>If there =
+are no objections, I plan to update the Wiki page <em>Xen_Project_X.YY_Rele=
+ase_Notes</em> to make it easier to find our final schedule ( especially fo=
+r the people who aren&#39;t following xen-devel mailing list ). As an addit=
+ional benefit, it will also be accessible via <em>SUPPORT.md</em> (in the w=
+iki at <a rel=3D"noopener" href=3D"https://xenbits.xen.org/docs/unstable-st=
+aging/support-matrix.html">https://xenbits.xen.org/docs/unstable-staging/su=
+pport-matrix.html</a>).<br></div><div><br></div><div>Thanks!<br><br>** Prop=
+osed option: Wed March 12, 2024 **<br>(+8 months from Xen 4.19 release)<br>=
+<br>- Last posting date =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Fri Dec 20, 2023 =
+(+13 weeks from now)<br><br>Patches adding new features are expected to be =
+posted to the mailing<br>list by this date, although perhaps not in their f=
+inal version.<br><br>- Feature freeze =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 Fri Jan 10, 2024 (+3 weeks from Last posting date)<br><br>Patches ad=
+ding new features should be committed by this date.<br>Straightforward bugf=
+ixes may continue to be accepted by maintainers.<br><br>- Code freeze =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Fri Jan 31, 2025 (+3 we=
+eks from Feature freeze)<br><br>Bugfixes only.<br><br>- Hard code freeze =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Fri Feb 21, 2025 (+3 weeks from Code fre=
+eze)<br><br>Bugfixes for serious bugs (including regressions), and low-risk=
+ fixes only.<br><br>- Final commits =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0Fri March 7, 2025 (+2 weeks from Hard code freeze)<br><br>Branch =
+off staging-4.18.<br><br>- Release =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Wed March 12, 2025<br><br>[1] <a href=3D"htt=
+ps://lists.xen.org/archives/html/xen-devel/2018-07/msg02240.html">https://l=
+ists.xen.org/archives/html/xen-devel/2018-07/msg02240.html</a><br><br>Best =
+regards,<br>=C2=A0Oleksii<br></div></div>
+
+--00000000000025a9b106227b2b81--
 
