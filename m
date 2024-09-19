@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388F3CE8D60
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Sep 2024 08:00:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.800548.1210486 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF08CE8D77
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Sep 2024 10:42:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.800582.1210509 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1srC5c-0000BV-GX; Thu, 19 Sep 2024 08:00:36 +0000
+	id 1srEba-0002f5-4w; Thu, 19 Sep 2024 10:41:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 800548.1210486; Thu, 19 Sep 2024 08:00:36 +0000
+Received: by outflank-mailman (output) from mailman id 800582.1210509; Thu, 19 Sep 2024 10:41:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1srC5c-0000BO-DG; Thu, 19 Sep 2024 08:00:36 +0000
-Received: by outflank-mailman (input) for mailman id 800548;
- Thu, 19 Sep 2024 08:00:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1exg=QR=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1srC5b-00089h-2G
- for xen-devel@lists.xenproject.org; Thu, 19 Sep 2024 08:00:35 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3e06f027-765d-11ef-99a2-01e77a169b0f;
- Thu, 19 Sep 2024 10:00:31 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a90188ae58eso63656766b.1
- for <xen-devel@lists.xenproject.org>; Thu, 19 Sep 2024 01:00:31 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a90612b3833sm686196966b.128.2024.09.19.01.00.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Sep 2024 01:00:30 -0700 (PDT)
+	id 1srEba-0002ey-1C; Thu, 19 Sep 2024 10:41:46 +0000
+Received: by outflank-mailman (input) for mailman id 800582;
+ Thu, 19 Sep 2024 10:41:44 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1srEbY-0002eo-O8; Thu, 19 Sep 2024 10:41:44 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1srEbY-0003ik-MF; Thu, 19 Sep 2024 10:41:44 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1srEbY-0005yz-5e; Thu, 19 Sep 2024 10:41:44 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1srEbY-0001TA-56; Thu, 19 Sep 2024 10:41:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,119 +44,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3e06f027-765d-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1726732831; x=1727337631; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/5XBTlP1TXEcRRwDcvdfbc6Qq+ncvIdAbw/WbPBlRnI=;
-        b=LHfia2+e3S9pvMXM47L5mbcWDlea9AReM6Rh4ndg9xLrt5h7SRAe4z33xNA1MubsIx
-         3e6jyw7xlt2JgIuPoIW3rHk5FgHgk9X8y/5/F/4fWHRokbqttCRv7uSod8gU7lFZgJsO
-         xr7uomfjmr234AF5Zh8gHm+PT34NnhjekUjew=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726732831; x=1727337631;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/5XBTlP1TXEcRRwDcvdfbc6Qq+ncvIdAbw/WbPBlRnI=;
-        b=YlmLrK/XVyi0Os6mzYnnMD/SoG7FR9cZRiU/0HeM5P6QxAaktLeTMhG9lqVxPAgImj
-         oWh3on4w/hoLjqiPC3MN7Ugq0OngdI+nMgvry+I9iKGwGRzYLnqH1jWi+9pgW5+xluhI
-         wOPsJKQFLdpgMposgbPz7B20vyop+31Vou2JpspKYUTC9Y4WfbbNX2MWThmPNLcCFpWr
-         ArVVWTpiYepZEF4JvNej3GQtywTN+2m6Fe5fD4OtJVIJXJXS/evubcnuRWZ3ZWhF3+gM
-         eyYPBkwkaQ3DlBuK3wvu6yG9SKRhOWkEC8w5Os81beNgEoApWVKtULTbMDqEtLi5XMa0
-         nVQg==
-X-Gm-Message-State: AOJu0YyA1rFj8cyUq0Q/FxbNoYPv3c5M8QW8mL/MX7kpGcy1BPvU7zr5
-	SwflzD6BtGdbnfXBdeCXFwA6sxnEaOYTr5WU28fzQLR9SS6SBNsPvcdYvTSpT24OGHKPqW6pqsk
-	x
-X-Google-Smtp-Source: AGHT+IESGS6X3JslvnpPsVjgHFuxRffa1ThI9Aoww6Jzb8p67+KQwdu33i5O57wA0HpSwxon7ulsuQ==
-X-Received: by 2002:a17:906:fd8b:b0:a8a:792c:4116 with SMTP id a640c23a62f3a-a902961a5f8mr2292692366b.40.1726732830857;
-        Thu, 19 Sep 2024 01:00:30 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=WYHzAED/n/6EK2wSFKA6/qQfO4SDUyjg1FI9YlnyIYs=; b=XNNiMN98py/9xmYf5bcpU4qKJ7
+	GuYCAWFINXHqRSCrLVFDvZV4A+CQGLm0dxh6araqffcDqhxeKVS5H1JuAYO+WygzUpKlxdWg9Vcwt
+	muRmtdXjnNpiEYoL2zSD5R6BivjXeXYU9p3PtQBSYMpvhAXjNQbta2r8inbZ3L88rYkw=;
 To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 1/3] x86: Put trampoline in separate .init.trampoline section
-Date: Thu, 19 Sep 2024 09:00:19 +0100
-Message-Id: <20240919080021.20155-2-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240919080021.20155-1-frediano.ziglio@cloud.com>
-References: <20240919080021.20155-1-frediano.ziglio@cloud.com>
-MIME-Version: 1.0
+Message-ID: <osstest-187757-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 187757: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=ff8a7d101f7d892dea96254bc1309c1a7c502e02
+X-Osstest-Versions-That:
+    ovmf=5901f19a877c87de73f6b28265ad5db60b2239e1
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 19 Sep 2024 10:41:44 +0000
 
-This change put the trampoline in a separate, not executable section.
-The trampoline contains a mix of code and data (data which
-is modified from C code during early start so must be writable).
-This is in preparation for W^X patch in order to satisfy UEFI CA
-memory mitigation requirements.
-At the moment .init.text and .init.data in EFI mode are put together
-so they will be in the same final section as before this patch.
-Putting in a separate section (even in final executables) allows
-to easily disassembly that section. As we need to have a writable
-section and as we can't have code and data together to satisfy W^X
-requirement we need to have a data section. However tools like objdump
-by default do not disassemble data sections. Forcing disassembly of
-data sections would result in a very large output and possibly crash
-of tools. Putting in a separate section allows to selectively
-disassemble that part of code using a command like
+flight 187757 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/187757/
 
-    objdump -m i386 -j .init.trampoline -d xen-syms
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 ff8a7d101f7d892dea96254bc1309c1a7c502e02
+baseline version:
+ ovmf                 5901f19a877c87de73f6b28265ad5db60b2239e1
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
-Changes since last version:
-- use completely separate section even on final executables
-  (suggested by Jan Beulich).
+Last test of basis   187744  2024-09-18 08:13:37 Z    1 days
+Testing same since   187757  2024-09-19 08:50:33 Z    0 days    1 attempts
 
-Changes since v1:
-- remove useless align.
+------------------------------------------------------------
+People who touched revisions under test:
+  Sami Mujawar <sami.mujawar@arm.com>
 
-Changes since v2:
-- remove change to alignment;
-- improved commit message.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
 
-Changes since v3:
-- split commit, add more requirements.
----
- xen/arch/x86/boot/head.S | 5 +++--
- xen/arch/x86/xen.lds.S   | 4 ++++
- 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 12bbb97f33..493286a9fb 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -882,8 +882,9 @@ cmdline_parse_early:
- reloc:
-         .incbin "reloc.bin"
- 
-+#include "x86_64.S"
-+
-+        .section .init.trampoline, "aw", @progbits
- ENTRY(trampoline_start)
- #include "trampoline.S"
- ENTRY(trampoline_end)
--
--#include "x86_64.S"
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index d48de67cfd..22fb7d8458 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -269,6 +269,10 @@ SECTIONS
-        __ctors_end = .;
-   } PHDR(text)
- 
-+  DECL_SECTION(.init.trampoline) {
-+       *(.init.trampoline)
-+  } PHDR(text)
-+
- #ifndef EFI
-   /*
-    * With --orphan-sections=warn (or =error) we need to handle certain linker
--- 
-2.34.1
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   5901f19a87..ff8a7d101f  ff8a7d101f7d892dea96254bc1309c1a7c502e02 -> xen-tested-master
 
