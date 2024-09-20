@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A48CF58FA
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Sep 2024 09:37:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.801077.1211100 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DC3CF58FA
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Sep 2024 09:37:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.801080.1211129 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sra4X-0000OV-NG; Fri, 20 Sep 2024 09:37:05 +0000
+	id 1sra4b-00016A-FY; Fri, 20 Sep 2024 09:37:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 801077.1211100; Fri, 20 Sep 2024 09:37:05 +0000
+Received: by outflank-mailman (output) from mailman id 801080.1211129; Fri, 20 Sep 2024 09:37:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sra4X-0000OO-KT; Fri, 20 Sep 2024 09:37:05 +0000
-Received: by outflank-mailman (input) for mailman id 801077;
- Fri, 20 Sep 2024 09:37:03 +0000
+	id 1sra4b-000161-Co; Fri, 20 Sep 2024 09:37:09 +0000
+Received: by outflank-mailman (input) for mailman id 801080;
+ Fri, 20 Sep 2024 09:37:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wh1w=QS=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sra4V-0000OC-NU
- for xen-devel@lists.xenproject.org; Fri, 20 Sep 2024 09:37:03 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
+ id 1sra4Z-0000OC-LW
+ for xen-devel@lists.xenproject.org; Fri, 20 Sep 2024 09:37:07 +0000
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [2a00:1450:4864:20::129])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e3e98b89-7733-11ef-a0b8-8be0dac302b0;
- Fri, 20 Sep 2024 11:37:02 +0200 (CEST)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5c4146c7d5dso2399243a12.3
- for <xen-devel@lists.xenproject.org>; Fri, 20 Sep 2024 02:37:02 -0700 (PDT)
+ id e6d5e6e2-7733-11ef-a0b8-8be0dac302b0;
+ Fri, 20 Sep 2024 11:37:07 +0200 (CEST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5365aa568ceso2249042e87.0
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Sep 2024 02:37:07 -0700 (PDT)
 Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bc88d82sm7030921a12.81.2024.09.20.02.37.00
+ a640c23a62f3a-a90612b38c8sm818163366b.103.2024.09.20.02.37.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 02:37:00 -0700 (PDT)
+ Fri, 20 Sep 2024 02:37:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,68 +46,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3e98b89-7733-11ef-a0b8-8be0dac302b0
+X-Inumbo-ID: e6d5e6e2-7733-11ef-a0b8-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1726825021; x=1727429821; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SIELB5IFnYt1OaK5gYb5qD4eQleLAnvXFgrDIsWDpAQ=;
-        b=FrRfrXgtyF7L8qYUjZ5/ZNY0tdkSYyYavYqaPm+RtiqRdW0mP5q2lNdi9B3yMCG1AZ
-         jPC5Rl/X9sZHCCqVQAPRhcflFv5sKj6h+Jv8mEpaHJcFW/1CAP9zgGr03ytYzQGajOpX
-         MlovpWrY0ooUaw4i82Cud4IGfD6FS6C3r/+dc=
+        d=citrix.com; s=google; t=1726825026; x=1727429826; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1N4dCytGEzetjbXwIG17gkrBm9HHnJ0smkpdbjRf43Q=;
+        b=apagAd7c7Wg+RAKFdXbBLHh4Zb2iNPASR2DAs/sfvFUQZYzi2K96LJygLj4KGvbON1
+         /3kj9vHnZtr8auqUQN4DEMiWxv7bw/S7kljT45kfb/gAjZUw3jY7DSIPrLdiCZAltwMz
+         MvAf3+eiR/8/hcGEn6nfViPnas0m7hDKfbBx4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726825021; x=1727429821;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SIELB5IFnYt1OaK5gYb5qD4eQleLAnvXFgrDIsWDpAQ=;
-        b=Gg8ySxzBhyxr9gh9l6NSu3EZPiop0c0YPUc447Q4Uaj7JpfVE6GdYNLUWS0qTvb79N
-         00TEtYAWwXWKtKxJrGIa8hmHCdknfRKlA9o+poQ7tIz/1WYAGcOLocJthSTl/XsR7DwR
-         QTVmHImjahrvVW45OIIw5ZJryb3Rh3bm0AbUR2dL0PRcHukk7zaHbQNGtQSa3uS8PbKi
-         P2g991jP1uZImx9LAUer8HGgi1mwaAcxBc/CvBTEFNMStYDokIplil2gXgdD5mAWW82e
-         dv+hafdEyHgFsezQ+tTB3GUQ3v923N20WtNoTj9vuFsuttgRfe7e0qyqVZkMqYfMugL0
-         YkbQ==
-X-Gm-Message-State: AOJu0Yz/Cj7pZw0bmyrHn5EqdQES7hU8fD+LqxvpQixkAQRboNdzrp93
-	pdkeyzoA/j1kIp1eGfTqCewNepw7QDtmozK3jo9f0T5ldwkrbachL1sDsglyGxc4liaDx8PS3yb
-	S
-X-Google-Smtp-Source: AGHT+IEmdO1bE6RH81r6Sgb7+rV0anCZ8rfUGk+S8VaSCxOSTvI3pcNA8rmkieSLuG5/I9rQOPbfhQ==
-X-Received: by 2002:a05:6402:2499:b0:5c2:4a98:7520 with SMTP id 4fb4d7f45d1cf-5c464a60ae0mr1547534a12.31.1726825021472;
-        Fri, 20 Sep 2024 02:37:01 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1726825026; x=1727429826;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=1N4dCytGEzetjbXwIG17gkrBm9HHnJ0smkpdbjRf43Q=;
+        b=ma9IV+AvXHLy9rel65YIarkx+tsk85IjHJw8CCppIFV9l3fOCPxdsKTRD1lSqWY0B1
+         1ym8RX/XADj+qmK5shCc7WDJmxjNYiizUPkAHWpeo2cxp6jxEsH1IxI9XhBifmH1EKql
+         mI1xqxcGwCBlEmA1cJsZYzvTV6DkNfAsk9Fvf3+7e+XuFDrLOjF1eE3Gl/49dy0wKeZL
+         1blDlGK1WDp3q4NLnb431qLOvmSHmTQw+39gD6OVaGFk5C59eOqtDqJdZUcuvQ+AEBkW
+         couOzR56AdwZ2pLk2Q+pCBD2WLnnJjhsaDnzn060NCzJXXKaKHR0YjuSHpJSPKDbfjoT
+         6d7w==
+X-Gm-Message-State: AOJu0YxeYtYXRK3LXm5sn6WpsNzB0bTTVwu1J/32pAS5F9kFcJKiyfwV
+	BWiwIqTWsz4/8fVGKpTaZ9MZxxanmLFvoChoBiAkAYC81VGuNewF+cSzjQYBVOzVeQs8C91zjA+
+	E
+X-Google-Smtp-Source: AGHT+IHhvvIt+KgvTO9l5R4mcB4EbpcBhhw6Mx5U5GtLiA1CWcOQ0GlWTILJbgfX9YNYLOncwU8dNQ==
+X-Received: by 2002:a05:6512:39c4:b0:536:a4f1:d214 with SMTP id 2adb3069b0e04-536ac2e705bmr1758118e87.19.1726825025701;
+        Fri, 20 Sep 2024 02:37:05 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 0/3] xen/livepatch: improvements to loading
-Date: Fri, 20 Sep 2024 11:36:52 +0200
-Message-ID: <20240920093656.48879-1-roger.pau@citrix.com>
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: [PATCH 2/3] xen/livepatch: do build-id check earlier
+Date: Fri, 20 Sep 2024 11:36:55 +0200
+Message-ID: <20240920093656.48879-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240920093656.48879-1-roger.pau@citrix.com>
+References: <20240920093656.48879-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+The check against the expected Xen build ID should be done ahead of attempting
+to apply the alternatives contained in the livepatch.
 
-Following series attempts to improve the loading of livepatches,
-specifically by doing the Xen build ID check ahead of processing any of
-the sections in the livepatch payload (alternatives, bug frames...).
+If the CPUID in the alternatives patching data is out of the scope of the
+running Xen featureset the BUG() in _apply_alternatives() will trigger thus
+bringing the system down.  Note the layout of struct alt_instr could also
+change between versions.  It's also possible for struct exception_table_entry
+to have changed format, hence possibly leading to other errors.
 
-Thanks, Roger.
+Move the Xen build ID check to be done ahead of any processing of the livepatch
+payload sections.
 
-Roger Pau Monne (3):
-  xen/livepatch: simplify and unify logic in prepare_payload()
-  xen/livepatch: do build-id check earlier
-  x86/alternatives: relax apply BUGs during runtime
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/common/livepatch.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
- xen/arch/x86/alternative.c                 |  29 +++--
- xen/arch/x86/include/asm/alternative.h     |   3 +-
- xen/common/livepatch.c                     | 121 ++++++++++-----------
- xen/test/livepatch/Makefile                |   5 +
- xen/test/livepatch/xen_alternatives_fail.c |  29 +++++
- 5 files changed, 114 insertions(+), 73 deletions(-)
- create mode 100644 xen/test/livepatch/xen_alternatives_fail.c
-
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index 8043954ad0fc..a20f9fb2294d 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -765,6 +765,11 @@ static int prepare_payload(struct payload *payload,
+     if ( rc )
+         return rc;
+ 
++    /* Perform the Xen build-id check ahead of doing any more processing. */
++    rc = xen_build_id_dep(payload);
++    if ( rc )
++        return rc;
++
+     /* Setup the virtual region with proper data. */
+     region = &payload->region;
+ 
+@@ -1097,10 +1102,6 @@ static int load_payload_data(struct payload *payload, void *raw, size_t len)
+     if ( rc )
+         goto out;
+ 
+-    rc = xen_build_id_dep(payload);
+-    if ( rc )
+-        goto out;
+-
+     rc = build_symbol_table(payload, &elf);
+     if ( rc )
+         goto out;
 -- 
 2.46.0
 
