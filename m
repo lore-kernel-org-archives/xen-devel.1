@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 842F5CF9C71
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2024 10:28:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.802570.1212887 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7905CF9C6F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2024 10:50:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.802602.1212900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1st2mX-00087d-LU; Tue, 24 Sep 2024 10:28:33 +0000
+	id 1st37N-0005TT-AP; Tue, 24 Sep 2024 10:50:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 802570.1212887; Tue, 24 Sep 2024 10:28:33 +0000
+Received: by outflank-mailman (output) from mailman id 802602.1212900; Tue, 24 Sep 2024 10:50:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1st2mX-00085y-Cj; Tue, 24 Sep 2024 10:28:33 +0000
-Received: by outflank-mailman (input) for mailman id 802570;
- Tue, 24 Sep 2024 10:28:31 +0000
+	id 1st37N-0005T2-70; Tue, 24 Sep 2024 10:50:05 +0000
+Received: by outflank-mailman (input) for mailman id 802602;
+ Tue, 24 Sep 2024 10:50:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CoXS=QW=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1st2mV-0007VZ-MX
- for xen-devel@lists.xenproject.org; Tue, 24 Sep 2024 10:28:31 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Vfmb=QW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1st37M-00053F-2Z
+ for xen-devel@lists.xenproject.org; Tue, 24 Sep 2024 10:50:04 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bddbc8a6-7a5f-11ef-99a2-01e77a169b0f;
- Tue, 24 Sep 2024 12:28:29 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5c40942358eso8871381a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 03:28:29 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c5cf4c5081sm591002a12.64.2024.09.24.03.28.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Sep 2024 03:28:27 -0700 (PDT)
+ id bece2382-7a62-11ef-99a2-01e77a169b0f;
+ Tue, 24 Sep 2024 12:50:00 +0200 (CEST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a8d2b4a5bf1so767281366b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 03:50:00 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9393134c8csm68183766b.217.2024.09.24.03.49.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 24 Sep 2024 03:49:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,374 +47,408 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bddbc8a6-7a5f-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: bece2382-7a62-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727173709; x=1727778509; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fbLHe+KIT4vUVGxSNbH+/EFWzF4HzdrZZ/iqRUuEl9c=;
-        b=EB20UfJsdU6z0P4dWVlPi8t3TwFDUFfeBtk8klnFEFPPRIG3IqdTKjsebm95FEJSzA
-         cYsAMcJEyA6Bk9Bswy8d2ghmdBVQ3mH4WfOgLYrbagNTSD1qeQItbylgze18siWSgGXi
-         LZaMgeuDyM/L7wkfBDdAD6GwySL9/lkZlxntM=
+        d=suse.com; s=google; t=1727174999; x=1727779799; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=27K5vmCiQQVqt+oDUyhnDsN5A+ZAhD89hzVpVdcMzpM=;
+        b=DDeo9nVW2guz/2fk0qzvD4a8ccXodAh6qO+qtB9vYkl/iLPX7vYOUFUwWpJm85mlUS
+         /oZXbrn3It8ng+IkDyY5gkABICL2/i1eL7EhR4iKbnrXygZA5InargglkAncgCA3v/mi
+         sfQHrwqikt/yOhqnxSl0WLB+tMBuNlBQ6njbwGgArDS6Q2LV0yLBc1FiZALApOvwo0hz
+         GxlzMWWn8vbPC26+cc5IK2ybraH/HsOcxxCxcy8eMKkrrlPJZ0dO+VHHmn//v1LKZ1+x
+         mQPgYGiDJv/8Me7JUUimIgLqJN0Q6dK3dyWivG5wwwhxv8XWEad0EkcO17blMhi12ydi
+         FzsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727173709; x=1727778509;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fbLHe+KIT4vUVGxSNbH+/EFWzF4HzdrZZ/iqRUuEl9c=;
-        b=FSSjJ2EFTU4lC0Htz6YUNpd8PrtASAfG5FQz6FUHHxX51pLlIuouEbXGTKft9h+xNF
-         ELgNu9j6/7h6OCkddlSkbeHCEO3or1WAYgErHDNkyG5pEfCUyQnCADytZuaat6v9tIqp
-         pfAeO7MLxJ0LgADLCY1y2wpY4RMkoFFbUwntkpQddenHs/G+HqPIWOkZfou0ZHoUYQ6J
-         hHFj4XOofoytjQxRa7Yu6WY1GT9taXqHnKo/8V6CNqIDWI1cBP/rv4fQemwNCigRRSP9
-         5W1JTMgmJKysIunpLhkBgjCQPB8JhmFdmdBd9mpRKAlFLLp+/9gQvVJyvAQHrIA/7coX
-         1KDQ==
-X-Gm-Message-State: AOJu0Yzv6lxRzFbXJKkdKNOU1ZqkRfP0lEp3ptZy8H+37UJVtaxUzTNO
-	4zSMjQ6A66toFHYOSX63TwpNVZw4drNtUbcpmvjBRmNUDJgGdBudfIebdWSzG97j2r4I4xzcqJe
-	a
-X-Google-Smtp-Source: AGHT+IEqo7OArTsQOLk9StjF8HYbj4xYotUCpXyZ401AZr+sXesV/rulOyzVQTM64R7IU7k53Il0BQ==
-X-Received: by 2002:a05:6402:2688:b0:5c2:5f31:8888 with SMTP id 4fb4d7f45d1cf-5c5cdfea23dmr3138321a12.15.1727173708941;
-        Tue, 24 Sep 2024 03:28:28 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v3 3/4] x86/boot: Rewrite EFI/MBI2 code partly in C
-Date: Tue, 24 Sep 2024 11:28:10 +0100
-Message-Id: <20240924102811.86884-4-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240924102811.86884-1-frediano.ziglio@cloud.com>
-References: <20240924102811.86884-1-frediano.ziglio@cloud.com>
+        d=1e100.net; s=20230601; t=1727174999; x=1727779799;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=27K5vmCiQQVqt+oDUyhnDsN5A+ZAhD89hzVpVdcMzpM=;
+        b=vV4YMyZcwlhrIvfPHHZeaadbBmAtqWH9Jl4k65+L/nYcxdfTwa0EQ83xHHm43xPomZ
+         tNf+hevAAV5XptWP/iMH5oRCGm0wD7x10TINNUZIjGLxjc2ajhrV5aParNwgpw7qHBV1
+         Y+8QqL0GPrFemLjciKuQqh07dOyzwYDSdD3pxwD8E/dpvCPIGCuhoIQxuBO2goZEv1AB
+         aE9x5tw4wXrrfKwn21OQsHjMHKM1sleDdexs9NMpcNr7qf6iZVgyrLuCSZHr0xxlubza
+         Q8CqrEuL2pAklSDQbkejEZ/AHmd0d8WpJMoYGgEOzO7yRg+huUPR9FBKvsQcIf0l4geq
+         yTzw==
+X-Forwarded-Encrypted: i=1; AJvYcCWKUyYe2VAYMOcj6iH7kiird0n6eJPPzY7W+a+VC7nipPbPeqaiMmkq/OS8B0upEQMbqHDbEeeWlco=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwwbwoTVOHgL7dYRVWmdTc2QcSeuOXyg9pCg/ZREHfy1aMQsyyz
+	E65LY+1RFXBaTKLZMFypn5UaaM6RXG32MExcB2NJOk8XiMlntty6i2V5206RpMCP6BEOrvnoh00
+	=
+X-Google-Smtp-Source: AGHT+IFOQe1YBizzIO+7bXDfAk+2cZxDksDjQaR4YHmIdGn/fMEcWfmIzf0eBzg2tvqO0XHBMEzCIA==
+X-Received: by 2002:a17:907:efc7:b0:a8d:439d:5c25 with SMTP id a640c23a62f3a-a90d4fdfe99mr1540424866b.4.1727174999219;
+        Tue, 24 Sep 2024 03:49:59 -0700 (PDT)
+Message-ID: <6100a4e0-5bf3-4555-90ae-20624171ff79@suse.com>
+Date: Tue, 24 Sep 2024 12:49:57 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 7/8] xen/riscv: page table handling
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1726242605.git.oleksii.kurochko@gmail.com>
+ <582c4cee40222e80faf1e465c011b07eeaf2c19f.1726242605.git.oleksii.kurochko@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <582c4cee40222e80faf1e465c011b07eeaf2c19f.1726242605.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-No need to have it coded in assembly.
+On 13.09.2024 17:57, Oleksii Kurochko wrote:
+> @@ -34,15 +39,50 @@
+>  #define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
+>  #define PTE_TABLE                   (PTE_VALID)
+>  
+> +#define PAGE_HYPERVISOR_RO          (PTE_VALID | PTE_READABLE)
+>  #define PAGE_HYPERVISOR_RW          (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
+> +#define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE)
+>  
+>  #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
+>  
+> +/*
+> + * The PTE format does not contain the following bits within itself;
+> + * they are created artificially to inform the Xen page table
+> + * handling algorithm. These bits should not be explicitly written
+> + * to the PTE entry.
+> + */
+> +#define PTE_SMALL       BIT(10, UL)
+> +#define PTE_POPULATE    BIT(11, UL)
+> +
+> +#define PTE_LEAF_MASK   (PTE_WRITABLE | PTE_EXECUTABLE | PTE_VALID)
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
-Changes since v1:
-- update some comments;
-- explain why %ebx is saved before calling efi_parse_mbi2;
-- move lea before test instruction;
-- removed asmlinkage from efi_multiboot2 and add to efi_parse_mbi2;
-- fix line length;
-- update an error message specifying "Multiboot2" instead of "Multiboot";
-- use obj-bin-X instead of obj-X in Makefile;
-- avoid restoring %eax (MBI magic).
----
- xen/arch/x86/boot/head.S      | 136 +++++++---------------------------
- xen/arch/x86/efi/Makefile     |   1 +
- xen/arch/x86/efi/efi-boot.h   |   6 +-
- xen/arch/x86/efi/parse-mbi2.c |  58 +++++++++++++++
- xen/arch/x86/efi/stub.c       |   3 +-
- 5 files changed, 89 insertions(+), 115 deletions(-)
- create mode 100644 xen/arch/x86/efi/parse-mbi2.c
+I continue to have trouble with this. The purpose you use it for has
+nothing to do with a "leaf" check. I therefore can only suggest again to
+simply drop this constant and expand its use. You don't even need to use
+it twice there:
 
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 80bba6ff21..6d8eec554b 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -122,8 +122,6 @@ multiboot2_header:
- .Lbad_cpu_msg: .asciz "ERR: Not a 64-bit CPU!"
- .Lbad_ldr_msg: .asciz "ERR: Not a Multiboot bootloader!"
- .Lbad_ldr_nbs: .asciz "ERR: Bootloader shutdown EFI x64 boot services!"
--.Lbad_ldr_nst: .asciz "ERR: EFI SystemTable is not provided by bootloader!"
--.Lbad_ldr_nih: .asciz "ERR: EFI ImageHandle is not provided by bootloader!"
- .Lbad_efi_msg: .asciz "ERR: EFI IA-32 platforms are not supported!"
- .Lbag_alg_msg: .asciz "ERR: Xen must be loaded at a 2Mb boundary!"
- .Lno_nx_msg:   .asciz "ERR: Not an NX-capable CPU!"
-@@ -162,17 +160,6 @@ early_error: /* Here to improve the disassembly. */
-         mov     $sym_offs(.Lno_nx_msg), %ecx
-         jmp     .Lget_vtb
- #endif
--.Lmb2_no_st:
--        /*
--         * Here we are on EFI platform. vga_text_buffer was zapped earlier
--         * because there is pretty good chance that VGA is unavailable.
--         */
--        mov     $sym_offs(.Lbad_ldr_nst), %ecx
--        jmp     .Lget_vtb
--.Lmb2_no_ih:
--        /* Ditto. */
--        mov     $sym_offs(.Lbad_ldr_nih), %ecx
--        jmp     .Lget_vtb
- .Lmb2_no_bs:
-         /*
-          * Ditto. Additionally, here there is a chance that Xen was started
-@@ -190,6 +177,10 @@ early_error: /* Here to improve the disassembly. */
-         mov     $sym_offs(.Lbad_efi_msg), %ecx
-         xor     %edi,%edi                       # No VGA text buffer
-         jmp     .Lprint_err
-+.Ldirect_error:
-+        mov     sym_esi(vga_text_buffer), %edi
-+        mov     %eax, %esi
-+        jmp     1f
- .Lget_vtb:
-         mov     sym_esi(vga_text_buffer), %edi
- .Lprint_err:
-@@ -236,7 +227,7 @@ __efi64_mb2_start:
- 
-         /*
-          * Align the stack as UEFI spec requires. Keep it aligned
--         * before efi_multiboot2() call by pushing/popping even
-+         * before efi_parse_mbi2() call by pushing/popping even
-          * numbers of items on it.
-          */
-         and     $~15, %rsp
-@@ -244,7 +235,7 @@ __efi64_mb2_start:
-         /*
-          * Initialize BSS (no nasty surprises!).
-          * It must be done earlier than in BIOS case
--         * because efi_multiboot2() touches it.
-+         * because efi_parse_mbi2() touches it.
-          */
-         mov     %eax, %edx
-         lea     __bss_start(%rip), %edi
-@@ -253,36 +244,30 @@ __efi64_mb2_start:
-         shr     $3, %ecx
-         xor     %eax, %eax
-         rep stosq
--        mov     %edx, %eax
- 
--        /* Check for Multiboot2 bootloader. */
--        cmp     $MULTIBOOT2_BOOTLOADER_MAGIC,%eax
--        je      .Lefi_multiboot2_proto
--
--        /* Jump to .Lnot_multiboot after switching CPU to x86_32 mode. */
--        lea     .Lnot_multiboot(%rip), %r15
--        jmp     x86_32_switch
-+        /* Save Multiboot2 magic on the stack. */
-+        push    %rdx
- 
--.Lefi_multiboot2_proto:
--        /* Zero EFI SystemTable, EFI ImageHandle addresses and cmdline. */
--        xor     %esi,%esi
--        xor     %edi,%edi
--        xor     %edx,%edx
-+        /* Save Multiboot2 pointer on the stack, keep the stack aligned. */
-+        push    %rbx
- 
--        /* Skip Multiboot2 information fixed part. */
--        lea     (MB2_fixed_sizeof+MULTIBOOT2_TAG_ALIGN-1)(%rbx),%ecx
--        and     $~(MULTIBOOT2_TAG_ALIGN-1),%ecx
-+        /*
-+         * efi_parse_mbi2() is called according to System V AMD64 ABI:
-+         *   - IN:  %edi - Multiboot2 magic, %rsi - Multiboot2 pointer.
-+         *   - OUT: %rax - error string.
-+         */
-+        mov     %edx, %edi
-+        mov     %rbx, %rsi
-+        call    efi_parse_mbi2
-+        lea     .Ldirect_error(%rip), %r15
-+        test    %rax, %rax
-+        jnz     x86_32_switch
- 
--.Lefi_mb2_tsize:
--        /* Check Multiboot2 information total size. */
--        mov     %ecx,%r8d
--        sub     %ebx,%r8d
--        cmp     %r8d,MB2_fixed_total_size(%rbx)
--        jbe     .Lrun_bs
-+        /* Restore Multiboot2 pointer. */
-+        pop     %rbx
- 
--        /* Are EFI boot services available? */
--        cmpl    $MULTIBOOT2_TAG_TYPE_EFI_BS,MB2_tag_type(%rcx)
--        jne     .Lefi_mb2_st
-+        /* Restore Multiboot2 magic. */
-+        pop     %rax
- 
-         /* We are on EFI platform and EFI boot services are available. */
-         incb    efi_platform(%rip)
-@@ -292,77 +277,6 @@ __efi64_mb2_start:
-          * be run on EFI platforms.
-          */
-         incb    skip_realmode(%rip)
--        jmp     .Lefi_mb2_next_tag
--
--.Lefi_mb2_st:
--        /* Get EFI SystemTable address from Multiboot2 information. */
--        cmpl    $MULTIBOOT2_TAG_TYPE_EFI64,MB2_tag_type(%rcx)
--        cmove   MB2_efi64_st(%rcx),%rsi
--        je      .Lefi_mb2_next_tag
--
--        /* Get EFI ImageHandle address from Multiboot2 information. */
--        cmpl    $MULTIBOOT2_TAG_TYPE_EFI64_IH,MB2_tag_type(%rcx)
--        cmove   MB2_efi64_ih(%rcx),%rdi
--        je      .Lefi_mb2_next_tag
--
--        /* Get command line from Multiboot2 information. */
--        cmpl    $MULTIBOOT2_TAG_TYPE_CMDLINE, MB2_tag_type(%rcx)
--        jne     .Lno_cmdline
--        lea     MB2_tag_string(%rcx), %rdx
--        jmp     .Lefi_mb2_next_tag
--.Lno_cmdline:
--
--        /* Is it the end of Multiboot2 information? */
--        cmpl    $MULTIBOOT2_TAG_TYPE_END,MB2_tag_type(%rcx)
--        je      .Lrun_bs
--
--.Lefi_mb2_next_tag:
--        /* Go to next Multiboot2 information tag. */
--        add     MB2_tag_size(%rcx),%ecx
--        add     $(MULTIBOOT2_TAG_ALIGN-1),%ecx
--        and     $~(MULTIBOOT2_TAG_ALIGN-1),%ecx
--        jmp     .Lefi_mb2_tsize
--
--.Lrun_bs:
--        /* Are EFI boot services available? */
--        cmpb    $0,efi_platform(%rip)
--
--        /* Jump to .Lmb2_no_bs after switching CPU to x86_32 mode. */
--        lea     .Lmb2_no_bs(%rip),%r15
--        jz      x86_32_switch
--
--        /* Is EFI SystemTable address provided by boot loader? */
--        test    %rsi,%rsi
--
--        /* Jump to .Lmb2_no_st after switching CPU to x86_32 mode. */
--        lea     .Lmb2_no_st(%rip),%r15
--        jz      x86_32_switch
--
--        /* Is EFI ImageHandle address provided by boot loader? */
--        test    %rdi,%rdi
--
--        /* Jump to .Lmb2_no_ih after switching CPU to x86_32 mode. */
--        lea     .Lmb2_no_ih(%rip),%r15
--        jz      x86_32_switch
--
--        /* Save Multiboot2 magic on the stack. */
--        push    %rax
--
--        /* Save EFI ImageHandle on the stack. */
--        push    %rdi
--
--        /*
--         * efi_multiboot2() is called according to System V AMD64 ABI:
--         *   - IN:  %rdi - EFI ImageHandle, %rsi - EFI SystemTable,
--         *          %rdx - MB2 cmdline
--         */
--        call    efi_multiboot2
--
--        /* Just pop an item from the stack. */
--        pop     %rax
--
--        /* Restore Multiboot2 magic. */
--        pop     %rax
- 
-         /* Jump to trampoline_setup after switching CPU to x86_32 mode. */
-         lea     trampoline_setup(%rip),%r15
-diff --git a/xen/arch/x86/efi/Makefile b/xen/arch/x86/efi/Makefile
-index 24dfecfad1..51140061fc 100644
---- a/xen/arch/x86/efi/Makefile
-+++ b/xen/arch/x86/efi/Makefile
-@@ -14,5 +14,6 @@ $(addprefix $(obj)/,$(EFIOBJ-y)): CFLAGS_stack_boundary := $(cflags-stack-bounda
- obj-y := common-stub.o stub.o
- obj-$(XEN_BUILD_EFI) := $(filter-out %.init.o,$(EFIOBJ-y))
- obj-bin-$(XEN_BUILD_EFI) := $(filter %.init.o,$(EFIOBJ-y))
-+obj-bin-y += parse-mbi2.o
- extra-$(XEN_BUILD_EFI) += buildid.o relocs-dummy.o
- nocov-$(XEN_BUILD_EFI) += stub.o
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index 7aa55e7aaf..859c01c13f 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -816,9 +816,9 @@ static const char *__init get_option(const char *cmd, const char *opt)
-     return o;
- }
- 
--void asmlinkage __init efi_multiboot2(EFI_HANDLE ImageHandle,
--                                      EFI_SYSTEM_TABLE *SystemTable,
--                                      const char *cmdline)
-+void __init efi_multiboot2(EFI_HANDLE ImageHandle,
-+                           EFI_SYSTEM_TABLE *SystemTable,
-+                           const char *cmdline)
- {
-     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop;
-     EFI_HANDLE gop_handle;
-diff --git a/xen/arch/x86/efi/parse-mbi2.c b/xen/arch/x86/efi/parse-mbi2.c
-new file mode 100644
-index 0000000000..6038f35b16
---- /dev/null
-+++ b/xen/arch/x86/efi/parse-mbi2.c
-@@ -0,0 +1,58 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+#include <xen/efi.h>
-+#include <xen/init.h>
-+#include <xen/multiboot2.h>
-+#include <asm/asm_defns.h>
-+#include <asm/efibind.h>
-+#include <efi/efidef.h>
-+#include <efi/eficapsule.h>
-+#include <efi/eficon.h>
-+#include <efi/efidevp.h>
-+#include <efi/efiapi.h>
-+
-+void __init efi_multiboot2(EFI_HANDLE ImageHandle,
-+                           EFI_SYSTEM_TABLE *SystemTable,
-+                           const char *cmdline);
-+
-+const char * asmlinkage __init
-+efi_parse_mbi2(uint32_t magic, const multiboot2_fixed_t *mbi)
-+{
-+    const multiboot2_tag_t *tag;
-+    EFI_HANDLE ImageHandle = NULL;
-+    EFI_SYSTEM_TABLE *SystemTable = NULL;
-+    const char *cmdline = NULL;
-+    bool have_bs = false;
-+
-+    if ( magic != MULTIBOOT2_BOOTLOADER_MAGIC )
-+        return "ERR: Not a Multiboot2 bootloader!";
-+
-+    /* Skip Multiboot2 information fixed part. */
-+    tag = _p(ROUNDUP((unsigned long)(mbi + 1), MULTIBOOT2_TAG_ALIGN));
-+
-+    for ( ; (const void *)tag - (const void *)mbi < mbi->total_size
-+            && tag->type != MULTIBOOT2_TAG_TYPE_END;
-+          tag = _p(ROUNDUP((unsigned long)((const void *)tag + tag->size),
-+                   MULTIBOOT2_TAG_ALIGN)) )
-+    {
-+        if ( tag->type == MULTIBOOT2_TAG_TYPE_EFI_BS )
-+            have_bs = true;
-+        else if ( tag->type == MULTIBOOT2_TAG_TYPE_EFI64 )
-+            SystemTable = _p(((const multiboot2_tag_efi64_t *)tag)->pointer);
-+        else if ( tag->type == MULTIBOOT2_TAG_TYPE_EFI64_IH )
-+            ImageHandle = _p(((const multiboot2_tag_efi64_ih_t *)tag)->pointer);
-+        else if ( tag->type == MULTIBOOT2_TAG_TYPE_CMDLINE )
-+            cmdline = ((const multiboot2_tag_string_t *)tag)->string;
-+    }
-+
-+    if ( !have_bs )
-+        return "ERR: Bootloader shutdown EFI x64 boot services!";
-+    if ( !SystemTable )
-+        return "ERR: EFI SystemTable is not provided by bootloader!";
-+    if ( !ImageHandle )
-+        return "ERR: EFI ImageHandle is not provided by bootloader!";
-+
-+    efi_multiboot2(ImageHandle, SystemTable, cmdline);
-+
-+    return NULL;
-+}
-diff --git a/xen/arch/x86/efi/stub.c b/xen/arch/x86/efi/stub.c
-index 2cd5c8d4dc..27d40964d5 100644
---- a/xen/arch/x86/efi/stub.c
-+++ b/xen/arch/x86/efi/stub.c
-@@ -17,7 +17,8 @@
-  */
- 
- void __init noreturn efi_multiboot2(EFI_HANDLE ImageHandle,
--                                    EFI_SYSTEM_TABLE *SystemTable)
-+                                    EFI_SYSTEM_TABLE *SystemTable,
-+                                    const char *cmdline)
- {
-     static const CHAR16 __initconst err[] =
-         L"Xen does not have EFI code build in!\r\nSystem halted!\r\n";
--- 
-2.34.1
+    if ( (flags & PTE_VALID) && (flags & PTE_WRITABLE) &&
+         (flags & PTE_EXECUTABLE) )
 
+I'd very much hope the compiler can transform this into a single check,
+matching what you have there presently.
+
+> @@ -68,6 +108,52 @@ static inline bool pte_is_valid(pte_t p)
+>      return p.pte & PTE_VALID;
+>  }
+>  
+> +/*
+> + * From the RISC-V spec:
+> + *   The V bit indicates whether the PTE is valid; if it is 0, all other bits
+> + *   in the PTE are don’t-cares and may be used freely by software.
+> + *
+> + *   If V=1 the encoding of PTE R/W/X bits could be find in Table 4.5.
+
+Please avoid using table numbers when not also specifying the precise doc
+version. Numbering changes, and it's table 5.5 in the doc I'm looking at.
+Use table names instead (also elsewhere of course).
+
+> + *   Table 4.5 summarizes the encoding of the permission bits.
+> + *      X W R Meaning
+> + *      0 0 0 Pointer to next level of page table.
+> + *      0 0 1 Read-only page.
+> + *      0 1 0 Reserved for future use.
+> + *      0 1 1 Read-write page.
+> + *      1 0 0 Execute-only page.
+> + *      1 0 1 Read-execute page.
+> + *      1 1 0 Reserved for future use.
+> + *      1 1 1 Read-write-execute page.
+> + */
+> +inline bool pte_is_table(const pte_t p)
+
+Missing static?
+
+We normally omit "const" on function arguments; the frequent request to add
+missing const is on pointed-to types. If you still want to have it, ...
+
+> +{
+> +    /*
+> +     * According to the spec if V=1 and W=1 then R also needs to be 1 as
+> +     * R = 0 is reserved for future use ( look at the Table 4.5 ) so check
+> +     * in ASSERT that if (V==1 && W==1) then R isn't 0.
+> +     *
+> +     * PAGE_HYPERVISOR_RW contains PTE_VALID too.
+> +     */
+> +    ASSERT(((p.pte & PAGE_HYPERVISOR_RW) != (PTE_VALID | PTE_WRITABLE)));
+> +
+> +    return ((p.pte & (PTE_VALID | PTE_ACCESS_MASK)) == PTE_VALID);
+> +}
+> +
+> +static inline bool pte_is_mapping(/*const*/ pte_t p)
+
+... I wonder why it's then commented out here.
+
+> +{
+> +    /*
+> +     * According to the spec if V=1 and W=1 then R also needs to be 1 as
+> +     * R = 0 is reserved for future use ( look at the Table 4.5 ) so check
+> +     * in ASSERT that if (V==1 && W==1) then R isn't 0.
+> +     *
+> +     * PAGE_HYPERVISOR_RW contains PTE_VALID too.
+> +     */
+> +    ASSERT(((p.pte & PAGE_HYPERVISOR_RW) != (PTE_VALID | PTE_WRITABLE)));
+
+I don't think the entire comment needs repeating; "See pte_is_table" will
+do.
+
+> --- /dev/null
+> +++ b/xen/arch/riscv/pt.c
+> @@ -0,0 +1,427 @@
+> +#include <xen/bug.h>
+> +#include <xen/domain_page.h>
+> +#include <xen/errno.h>
+> +#include <xen/lib.h>
+> +#include <xen/mm.h>
+> +#include <xen/pfn.h>
+> +#include <xen/pmap.h>
+> +#include <xen/spinlock.h>
+> +
+> +#include <asm/flushtlb.h>
+> +#include <asm/page.h>
+> +
+> +static inline const mfn_t get_root_page(void)
+
+const on a return type (and not a pointed-to type) is imo yet more unusual.
+
+> +{
+> +    paddr_t root_maddr = pfn_to_paddr(csr_read(CSR_SATP) & SATP_PPN_MASK);
+> +
+> +    return maddr_to_mfn(root_maddr);
+> +}
+> +
+> +/* Sanity check of the entry. */
+
+For my taste "the entry" is entirely unclear. How about "Sanity check a
+page table entry about to be updated as per an (MFN,flags) tuple." And
+then ...
+
+> +static bool pt_check_entry(pte_t entry, mfn_t mfn, unsigned int flags)
+> +{
+> +    /*
+> +     * See the comment about the possible combination of (mfn, flags) in
+> +     * the comment above pt_update().
+> +     */
+
+... move this comment up there as well.
+
+> +#define XEN_TABLE_MAP_FAILED 0
+> +#define XEN_TABLE_SUPER_PAGE 1
+> +#define XEN_TABLE_NORMAL 2
+> +
+> +/*
+> + * Take the currently mapped table, find the corresponding entry,
+> + * and map the next table, if available.
+> + *
+> + * The alloc_tbl parameters indicates whether intermediate tables should
+> + * be allocated when not present.
+> + *
+> + * Return values:
+> + *  XEN_TABLE_MAP_FAILED: Either alloc_only was set and the entry
+> + *  was empty, or allocating a new page failed.
+> + *  XEN_TABLE_NORMAL: next level or leaf mapped normally
+> + *  XEN_TABLE_SUPER_PAGE: The next entry points to a superpage.
+> + */
+> +static int pt_next_level(bool alloc_tbl, pte_t **table, unsigned int offset)
+> +{
+> +    pte_t *entry;
+> +    mfn_t mfn;
+> +
+> +    entry = *table + offset;
+> +
+> +    if ( !pte_is_valid(*entry) )
+> +    {
+> +        if ( !alloc_tbl )
+> +            return XEN_TABLE_MAP_FAILED;
+> +
+> +        if ( create_table(entry) )
+> +            return XEN_TABLE_MAP_FAILED;
+
+You're still losing the -ENOMEM here.
+
+> +    }
+> +
+> +    if ( pte_is_mapping(*entry) )
+> +        return XEN_TABLE_SUPER_PAGE;
+> +
+> +    mfn = mfn_from_pte(*entry);
+> +
+> +    unmap_table(*table);
+> +    *table = map_table(mfn);
+> +
+> +    return XEN_TABLE_NORMAL;
+> +}
+> +
+> +/* Update an entry at the level @target. */
+> +static int pt_update_entry(mfn_t root, unsigned long virt,
+> +                           mfn_t mfn, unsigned int target,
+> +                           unsigned int flags)
+> +{
+> +    int rc;
+> +    unsigned int level = HYP_PT_ROOT_LEVEL;
+> +    pte_t *table;
+> +    /*
+> +     * The intermediate page table shouldn't be allocated when MFN isn't
+> +     * valid and we are not populating page table.
+> +     * This means we either modify permissions or remove an entry, or
+> +     * inserting brand new entry.
+> +     *
+> +     * See the comment above pt_update() for an additional explanation about
+> +     * combinations of (mfn, flags).
+> +    */
+> +    bool alloc_tbl = !mfn_eq(mfn, INVALID_MFN) || (flags & PTE_POPULATE);
+> +    pte_t pte, *entry;
+> +
+> +    /* convenience aliases */
+> +    DECLARE_OFFSETS(offsets, virt);
+> +
+> +    table = map_table(root);
+> +    for ( ; level > target; level-- )
+> +    {
+> +        rc = pt_next_level(alloc_tbl, &table, offsets[level]);
+> +        if ( rc == XEN_TABLE_MAP_FAILED )
+> +        {
+> +            rc = 0;
+> +
+> +            /*
+> +             * We are here because pt_next_level has failed to map
+> +             * the intermediate page table (e.g the table does not exist
+> +             * and the pt couldn't be allocated). It is a valid case when
+> +             * removing a mapping as it may not exist in the page table.
+> +             * In this case, just ignore it.
+> +             */
+> +            if ( flags & (PTE_VALID | PTE_POPULATE) )
+> +            {
+> +                printk("%s: Unable to map level %u\n", __func__, level);
+
+dprintk()?
+
+> +                rc = -ENOMEM;
+
+While you're "restoring" -ENOMEM here, the condition used clear is different
+from that used to initialize alloc_tbl. They could be brought in sync, but
+imo it would be better to simply not lose the ENOMEM in the first place.
+
+> +            }
+> +
+> +            goto out;
+> +        }
+> +
+> +        if ( rc != XEN_TABLE_NORMAL )
+> +            break;
+> +    }
+> +
+> +    if ( level != target )
+> +    {
+> +        printk("%s: Shattering superpage is not supported\n", __func__);
+
+dprintk()?
+
+> +        rc = -EOPNOTSUPP;
+> +        goto out;
+> +    }
+> +
+> +    entry = table + offsets[level];
+> +
+> +    rc = -EINVAL;
+> +    if ( !pt_check_entry(*entry, mfn, flags) )
+> +        goto out;
+> +
+> +    /* We are removing the page */
+> +    if ( !(flags & PTE_VALID) )
+> +        /*
+> +         * there is also a check in pt_check_entry() which check that
+> +         * mfn=INVALID_MFN
+> +         */
+
+Nit: Comments are to start with a capital letter.
+
+> +        pte.pte = 0;
+> +    else
+> +    {
+> +        /* We are inserting a mapping => Create new pte. */
+> +        if ( !mfn_eq(mfn, INVALID_MFN) )
+> +            pte = pte_from_mfn(mfn, PTE_VALID);
+> +        else /* We are updating the permission => Copy the current pte. */
+> +        {
+> +            pte = *entry;
+> +            pte.pte &= ~(flags & PTE_ACCESS_MASK);
+
+Why does "flags" need using here? Simply clearing all PTE_ACCESS_MASK bits
+will do, won't it? And only that will guarantee that flags which are to be
+clear will actually be cleared.
+
+> +/*
+> + * If `mfn` equals `INVALID_MFN`, it indicates that the following page table
+> + * update operation might be related to either:
+> + *   - populating the table (PTE_POPULATE will be set additionaly),
+> + *   - destroying a mapping (PTE_VALID=0),
+> + *   - modifying an existing mapping (PTE_VALID=1).
+> + *
+> + * If `mfn` != INVALID_MFN and flags has PTE_VALID bit set then it means that
+> + * inserting will be done.
+> + */
+> +static int pt_update(unsigned long virt,
+
+Don't you have vaddr_t for variables/parameters like this one?
+
+> +                     mfn_t mfn,
+> +                     unsigned long nr_mfns,
+> +                     unsigned int flags)
+> +{
+> +    int rc = 0;
+> +    unsigned long vfn = PFN_DOWN(virt);
+> +    unsigned long left = nr_mfns;
+> +
+> +    const mfn_t root = get_root_page();
+
+Why the blank line between adjacent declarations?
+
+> +    /*
+> +     * It is bad idea to have mapping both writeable and
+> +     * executable.
+> +     * When modifying/creating mapping (i.e PTE_VALID is set),
+> +     * prevent any update if this happen.
+> +     */
+> +    if ( (flags & PTE_LEAF_MASK) == PTE_LEAF_MASK )
+> +    {
+> +        printk("Mappings should not be both Writeable and Executable\n");
+> +        return -EINVAL;
+> +    }
+> +
+> +    if ( !IS_ALIGNED(virt, PAGE_SIZE) )
+> +    {
+> +        printk("The virtual address is not aligned to the page-size\n");
+> +        return -EINVAL;
+> +    }
+
+Yet more dprintk() candidates.
+
+Jan
 
