@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0E1CF9C6B
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2024 16:42:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.803179.1213662 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE5B6CF9C79
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2024 16:42:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.803180.1213678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1st8cb-0007Se-As; Tue, 24 Sep 2024 16:42:41 +0000
+	id 1st8cc-0007u5-K1; Tue, 24 Sep 2024 16:42:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 803179.1213662; Tue, 24 Sep 2024 16:42:41 +0000
+Received: by outflank-mailman (output) from mailman id 803180.1213678; Tue, 24 Sep 2024 16:42:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1st8cb-0007SI-6y; Tue, 24 Sep 2024 16:42:41 +0000
-Received: by outflank-mailman (input) for mailman id 803179;
- Tue, 24 Sep 2024 16:42:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1st8cc-0007tE-GP; Tue, 24 Sep 2024 16:42:42 +0000
+Received: by outflank-mailman (input) for mailman id 803180;
+ Tue, 24 Sep 2024 16:42:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vi3U=QW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1st8ca-0006l4-C5
- for xen-devel@lists.xenproject.org; Tue, 24 Sep 2024 16:42:40 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 02749c78-7a94-11ef-99a2-01e77a169b0f;
- Tue, 24 Sep 2024 18:42:38 +0200 (CEST)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c40aea5c40so94150a12.0
- for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 09:42:38 -0700 (PDT)
+ id 1st8cb-0006ag-0C
+ for xen-devel@lists.xenproject.org; Tue, 24 Sep 2024 16:42:41 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0361a052-7a94-11ef-a0ba-8be0dac302b0;
+ Tue, 24 Sep 2024 18:42:40 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a8a837cec81so414400966b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 09:42:40 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c5cf4972f8sm925880a12.36.2024.09.24.09.42.36
+ 4fb4d7f45d1cf-5c5cf4972f8sm925880a12.36.2024.09.24.09.42.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Sep 2024 09:42:37 -0700 (PDT)
+ Tue, 24 Sep 2024 09:42:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,94 +46,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 02749c78-7a94-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 0361a052-7a94-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727196158; x=1727800958; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JpiTxUeUSpHZmFA9gDCH6CikYygBa+0X5ZnJt34uvZk=;
-        b=mJ5rTO0D8ZmPXvvIEvYYkkfecNOItq1Dg9gB9Yv4jaiqnR4du+4fx1NaHUTKNtkd2b
-         StY864oe8ibLpcgyoceLpbt3hmck8z1XurElpVw3rZjJxqcXOUO0opGjGj58OA8URhCe
-         /wcUXt3vbgNmKwZFJg3CMh/WmlyFtx7z3dWl0X0UU/LGqSDeFbzr/wk3j92wX2P8ERO2
-         HxDMjN1T/i913BWCCjFwFDTA+W13WRqssCuuB5YEvjWTDLviuYY2rblTfUEfrN1gfOqE
-         lWZtzOLucGltWHTmjjDOnZJggfxyn6vDDh4Ftass1bkNC6/sS7kAdLf8ruKaILRKnpus
-         X0uA==
+        d=gmail.com; s=20230601; t=1727196160; x=1727800960; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bp9beghPA+jXcegEyvP7wMfnc3wLxaxw+ebFwbltls0=;
+        b=MqBhHdmd9HNroHBiJ1uP5E0+j8eUyIKYqrgbGj2AIcR+xy8zlVewn4I5D/JSHqmINv
+         y7mbuAeVTGlyM5Eo9N8RGbXbb+jSgnyhBdwTcFuwEFiF8Pup8IrNJnCFelA1J0FN7rks
+         fHtP/iW4bSCJntSdmLXyZiWRC6qzn8bkxPLi/mnhZfq0PkFZj973zU1WcjAKu8dqfocn
+         jseUU8RaL2tzm9bqSeBWLwQZZUQ2nVPT3dFgQ/mJl0B8JaJN1Rr7cuZ39YGni4sNmH6l
+         OY8XAfVRvJ+IG/cx2ykfjYSkpbDN5ES/IiedJ8Rlhzp7LfKFP75MyHtwp+N4kXXSJRL7
+         DjEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727196158; x=1727800958;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=JpiTxUeUSpHZmFA9gDCH6CikYygBa+0X5ZnJt34uvZk=;
-        b=ZnUYkefX/8yTPOX+nfLc2kCrO0jJjmvngRMremo0Yl/PkzimH9Eo7/3DHlyq1t3g01
-         9edfwIOizWJnLK+j8tkdybxLBCaOvDcKaOscfETZc8JSIEuzkJcyJIijWhmf1GnBew+s
-         HBJnGxMwNM2BJ53cleYls7tePNNfh6AaPihMRMjzdJnKUwTz62v7SMEDbJvMyZ6jwykp
-         /2Pg7Ax71tlFr68M2Kzf3jGwWHeI9VBt/iJ9SHSMuNWlpUIi+rwPYJ1zzrCwY+nFkh//
-         2aIA/kLj6p9ObqnEfAkxw1/U5T2mJdneP1A2AuLkinhtWqFQVygsMupWEyBe3wX2tq6B
-         WG4w==
-X-Gm-Message-State: AOJu0YyHi+fa+JSq+NL9VPVkmj3Z7Pe4Kf+m1DTFGsFlCbRAvCzg+B+r
-	/DTU79w0tCXCvXrA5TmaUXcJMzZstCMdqo7q7ds6XmOyVmcEX+J3Lbaidw==
-X-Google-Smtp-Source: AGHT+IEUnXM7IZTZCimwbNEeZWLMVxAbf54udbfeB7ku6paT9NPSl/Lecl68FtioNsEGg/0eYCXzBw==
-X-Received: by 2002:a05:6402:4313:b0:5c7:18c7:a005 with SMTP id 4fb4d7f45d1cf-5c718c7a1ebmr2282328a12.10.1727196157622;
-        Tue, 24 Sep 2024 09:42:37 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1727196160; x=1727800960;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=bp9beghPA+jXcegEyvP7wMfnc3wLxaxw+ebFwbltls0=;
+        b=k72KmiWsH9sCspiTfPaxHa01sx4HbKq/ohaZk2IhiDdjBL/Ez/SFsXdkxHwkrnPPiw
+         sljY1AuzKoRIXNj+Tpu1oq2v972WGiJiabxuEtfvR3u7XLXbwx2SFTGuKCW109NYSW8k
+         n7YWAlPgTL3Y4GedDSTbYoTnjhHil3THYz/U3z9PmaTI3ITehPUoghy+/0m4YcPj/q5W
+         VLTmKdT2vMqdXRXvF3Aliif3gaZhsrzFLt4o53VOEK4/BQ36MIKHYz68Cu9zIUvV6TB/
+         VyzuEctRxvxULuICo2QhxEVO3/qdIlibFdSR2xwLLc8nPa5UHidhTj5UT0exzTChGLSs
+         cZYQ==
+X-Gm-Message-State: AOJu0YzIpy2LG4WtnqMswDdzUECdD2ve47UHpCT5f5ilLFUOeTbtDihL
+	11IUvAwvW5ScMuOAMxg9xpdsjmiCh9Aob8Wy1pJq02KdHgRTnr7bWRirBQ==
+X-Google-Smtp-Source: AGHT+IErM9Jc+846ggvulOl9WQ5PnxMxUZ+z+bT4bDXhTwwPZuew0fVwvbcBssDODwgsuNO/yRML+g==
+X-Received: by 2002:a05:6402:2753:b0:5c5:c1dc:9028 with SMTP id 4fb4d7f45d1cf-5c5c1dc9175mr8261128a12.33.1727196159539;
+        Tue, 24 Sep 2024 09:42:39 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v3 0/5] Move {acpi_}device_init() and device_get_class() to common code
-Date: Tue, 24 Sep 2024 18:42:29 +0200
-Message-ID: <cover.1727193766.git.oleksii.kurochko@gmail.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 2/5] xen/arm: use {DT,ACPI}_DEV_INFO for device info sections
+Date: Tue, 24 Sep 2024 18:42:31 +0200
+Message-ID: <1533aa9fe0a4464bd97a44fc1f68cac0a670640c.1727193766.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.46.1
+In-Reply-To: <cover.1727193766.git.oleksii.kurochko@gmail.com>
+References: <cover.1727193766.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The {acpi_}device_init() and device_get_class() functions are identical across
-Arm and RISC-V, and they are likely to remain the same for other architectures
-like PPC.
-Since there is no architecture-specific logic within these functions, they are
-good candidates to be moved to the common codebase.
+Refactor arm/xen.lds.S by replacing the inline definitions for
+device info sections with the newly introduced {DT,ACPI}_DEV_INFO
+macros from xen/xen.lds.h.
 
-This patch series refactors the code by moving these functions to the common
-directory, reducing code duplication and simplifying future maintenance.
-
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V3:
- - drop _SECTIONS from the name of the macros ADEV_INFO and DT_DEV_INFO
- - update the definion of macros ADEV_INFO and DT_DEV_INFO
- - drop DEVICE_INIT config.
----
-Changes in v2:
- - Introduce macros for definition of ACPI and Device Tree sections.
- - Introduce CONFIG_DEVICE_INIT to make common/device.o compilable only for Arm,
-   PPC and RISC-V.
+Changes in V2:
+ - use refactored ADEV_INFO and DT_DEV_INFO macros.
 ---
 
-Oleksii Kurochko (5):
-  xen: define ACPI and DT device info sections macros
-  xen/arm: use {DT,ACPI}_DEV_INFO for device info sections
-  xen/ppc: add section for device information in linker script
-  xen/riscv: add section for device information in linker script
-  xen/common: move device initialization code to common code
+ xen/arch/arm/xen.lds.S | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
- xen/arch/arm/device.c     | 71 +--------------------------------
- xen/arch/arm/xen.lds.S    | 10 +----
- xen/arch/ppc/xen.lds.S    |  5 +++
- xen/arch/riscv/xen.lds.S  |  5 +++
- xen/common/Makefile       |  2 +
- xen/common/device.c       | 82 +++++++++++++++++++++++++++++++++++++++
- xen/include/xen/xen.lds.h | 10 +++++
- 7 files changed, 108 insertions(+), 77 deletions(-)
- create mode 100644 xen/common/device.c
-
+diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+index bd884664ad..7317851871 100644
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -126,19 +126,13 @@ SECTIONS
+ 
+   . = ALIGN(8);
+   .dev.info : {
+-      _sdevice = .;
+-      *(.dev.info)
+-      _edevice = .;
++     DT_DEV_INFO
+   } :text
+ 
+-#ifdef CONFIG_ACPI
+   . = ALIGN(8);
+   .adev.info : {
+-      _asdevice = .;
+-      *(.adev.info)
+-      _aedevice = .;
++     ADEV_INFO
+   } :text
+-#endif
+ 
+   . = ALIGN(8);
+   .teemediator.info : {
 -- 
 2.46.1
 
