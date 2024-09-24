@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDEC5CF9C6B
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2024 15:26:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.803057.1213459 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ECFBCF9C6B
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2024 15:27:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.803063.1213469 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1st7Qz-000275-RE; Tue, 24 Sep 2024 15:26:37 +0000
+	id 1st7S3-0002e6-3t; Tue, 24 Sep 2024 15:27:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 803057.1213459; Tue, 24 Sep 2024 15:26:37 +0000
+Received: by outflank-mailman (output) from mailman id 803063.1213469; Tue, 24 Sep 2024 15:27:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1st7Qz-00026y-OP; Tue, 24 Sep 2024 15:26:37 +0000
-Received: by outflank-mailman (input) for mailman id 803057;
- Tue, 24 Sep 2024 15:26:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1st7S3-0002dx-0n; Tue, 24 Sep 2024 15:27:43 +0000
+Received: by outflank-mailman (input) for mailman id 803063;
+ Tue, 24 Sep 2024 15:27:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Vfmb=QW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1st7Qy-00026r-6D
- for xen-devel@lists.xenproject.org; Tue, 24 Sep 2024 15:26:36 +0000
+ id 1st7S1-0002dp-Q8
+ for xen-devel@lists.xenproject.org; Tue, 24 Sep 2024 15:27:41 +0000
 Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
  [2a00:1450:4864:20::632])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 61a857ec-7a89-11ef-99a2-01e77a169b0f;
- Tue, 24 Sep 2024 17:26:34 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8943278a-7a89-11ef-a0ba-8be0dac302b0;
+ Tue, 24 Sep 2024 17:27:40 +0200 (CEST)
 Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a8a897bd4f1so847339466b.3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 08:26:34 -0700 (PDT)
+ a640c23a62f3a-a8d4979b843so718276366b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 08:27:40 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93930d1126sm94234666b.114.2024.09.24.08.26.32
+ a640c23a62f3a-a93930caf21sm95390066b.98.2024.09.24.08.27.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Sep 2024 08:26:33 -0700 (PDT)
+ Tue, 24 Sep 2024 08:27:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61a857ec-7a89-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 8943278a-7a89-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1727191593; x=1727796393; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1727191660; x=1727796460; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=uX1ngt/DxSsOEYCKgxhijjKnVXytTg3E1xX35p21nSs=;
-        b=Y/sL0Vb2IJO3Lv/TAS0QLcqg+Ln6TZRmOYdfO1z8V5nl14shFQVPFe0kv7QdOl1466
-         Ss4E0UUmcO9rBA+UTemW0cQueFARKzgmzo8+OcIvkJOZtv+V7YNGHUldwJAH7dwmmVCz
-         tcPPlaC8kbuYa9nxagHttlXsd5O7MKbNFDs6VEI1ttdbld8bZkCq6MWO6c8kCnZiV5Um
-         TyfmHFMRyXKgF2dQLy94DWfWFUbG+bePS2jd0juyd8Ll+5DYbdSyv0k0CxiRg2kqwGVs
-         8YZm+LgNMLeMXZXeZ4g4V241gJaTCovafjXPNOvfuMhkXkatc01kSQdCMsoW10x0a8j8
-         1gpw==
+        bh=nHODZjJNYepNzWXL3r5jtyMEMW0/BmcOMDxCtIS0XS0=;
+        b=W1jf35wA2E3Zt+Pkd7+jb/p4j571o2+25edv++rN+jpXr1EmA5X+wWCe82Zc1TTp4Z
+         NwVeQ01ygT9krzdcbwLlacoYyhaXudL1BgQqdvzYmIz+O+zQIkWbfTxYHl9NnSBfyOqO
+         T2hgDCLEz4pddMIkwAQYA8JoMFVsTswh7b06vTFy3HO07ykPcUYix4ztXZ3wZfbuRK17
+         oyhIOjdlLFSm6A+ng/x3FYx9pb9vj59Y5pTyQe4Xl479rE4e5zFmWZrcRiv0KYNroJGK
+         h6F28t9RjhlcIsI++j9yp0Z1GAFq97oSGHsh8H7WdHq+32ZudtDyghQCxkOJwz4Hhf7Q
+         uzgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727191593; x=1727796393;
+        d=1e100.net; s=20230601; t=1727191660; x=1727796460;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uX1ngt/DxSsOEYCKgxhijjKnVXytTg3E1xX35p21nSs=;
-        b=s2t45UrHarh7Yr9J4a61c0Xm3baSbD8o9d5ncGpk7ib4yuMkh3Ck7uW+HkqOrsKSxH
-         cD7VPeh9pFyq44q/WDL5it301QPTgjwPV0PJJCWXsmq8oYyLbbhoSgE4W69oeIopkPot
-         hDyjGcVf0K3vM4Q3peEdp1SqgSnDfsNMXTtsSHJE5fQkJSyNRPvLLEZLbzBxH4rb8YHO
-         nRQxbF+oH/dzW4qO+soj6sMJuXcQ2sEV1/Nt6WKOtoOKKEv8AGlCrvIriAWshnmx0bEe
-         ctqiFMfcTR5avjGQJ2+GRUaqHz7H6sL7cpYPMqOTm3BaZTS8WHZVbGHsW0D9+9P3qEve
-         auZg==
-X-Forwarded-Encrypted: i=1; AJvYcCVOgCTfgj/PEQDWiPt2FyBxrKR9d3HKg3a64f6WWP2wVPuje0iL1DBXdkTpk9XVCG1Kzg0Lhs9Jzxk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyr/lph4Wbm1Az+p8yZAWsqgvaD/39NePsf1d3HNhII9vcYNjap
-	xu/3ZPxvDoHPOGTbpn0H2f/C83cs7Svr1JP+00u3HRugbjjkH8/VKwui9bNgyg==
-X-Google-Smtp-Source: AGHT+IGhmmsIZadbUKWp8y4hq710/K5YjgaK0uFNIBu/FNC5zt3wU/gLqh8/OlmJTxidzGJVDfQTEw==
-X-Received: by 2002:a17:907:2d88:b0:a8a:8cdb:83a7 with SMTP id a640c23a62f3a-a90d50fcf8bmr1817544866b.54.1727191593427;
-        Tue, 24 Sep 2024 08:26:33 -0700 (PDT)
-Message-ID: <d5dd9b06-6729-4c3f-b03d-b3e0255e0128@suse.com>
-Date: Tue, 24 Sep 2024 17:26:32 +0200
+        bh=nHODZjJNYepNzWXL3r5jtyMEMW0/BmcOMDxCtIS0XS0=;
+        b=fcThk7D2QFJwt4tG39iA9ekfBRVjEVeMyUDBzQ/Lz0EI3x+GL4ZcPBmm5CPtV0wuDY
+         X04vgOE9vgSJTZQEkrZZL0/IBsEO8DIh5n8DQbWbcnYJpiDiVSmNXTmlVpG7CCopjzJ1
+         Kbn+Lv9fegV+NfLu0rYsbDGuIwn6KjaE19D0DaUAYebqNT1rm2Y/NbR0/qjj6HYEWxwH
+         eM75+bL4dHLMVblphOvxPNhvYZhn47VfGelbIOZSifZpzX2uCzJYcGlUPqs7o4+u+XQe
+         WPm/16gEkHY8fwwMFyMZrMDldZALGsr6E0+G/akSJz0ZtEKCknQL/qnh7SfKobnP+w48
+         ktNQ==
+X-Gm-Message-State: AOJu0YwJiZcALgPySBPBCbsqJ4gzG9Bus/7jYhXWZ2ah0vzGgWeqxtwA
+	Ubk695ILGSsdrvCeKlKy5EIWS6XNvLuzn9UwHg0Fz9arXx6umQyovZpriM3zrA==
+X-Google-Smtp-Source: AGHT+IGi63fGxrOMn3hs+ioXx1Y65xPrSzTjfBBElrFi/zhVsFbkgovmRxdik9y3AdjmVBK7nDhKGw==
+X-Received: by 2002:a17:906:da83:b0:a91:158b:122c with SMTP id a640c23a62f3a-a91158b130emr452601566b.38.1727191659830;
+        Tue, 24 Sep 2024 08:27:39 -0700 (PDT)
+Message-ID: <b7a21dd2-e30b-4f16-8e3e-96245c8e277d@suse.com>
+Date: Tue, 24 Sep 2024 17:27:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] x86/boot: Rewrite EFI start part in C
-To: Frediano Ziglio <frediano.ziglio@cloud.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, xen-devel@lists.xenproject.org
-References: <20240910161612.242702-1-frediano.ziglio@cloud.com>
- <20240910161612.242702-4-frediano.ziglio@cloud.com>
- <5cf6fad1-16ce-46b4-9bed-151f936e3772@suse.com>
- <CACHz=Zifc9rKvfxh1EmH5VQQ1YtB7L-GUrBrMP734uc6Uhk_mQ@mail.gmail.com>
- <6133b856-1c02-486c-8932-b213e8b9ce0b@suse.com>
- <CACHz=Zg1UnDD9bXYgm01smay=mzRciNZ20v7ERi4OHsqSYGZFw@mail.gmail.com>
+Subject: Re: [PATCH] x86/APIC: Remove x2APIC pure cluster mode
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Matthew Barnes <matthew.barnes@cloud.com>
+Cc: xen-devel@lists.xenproject.org,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Community Manager <community.manager@xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <e43028a51f8cea02421d0856376faada8ab186d4.1726840133.git.matthew.barnes@cloud.com>
+ <ZvLWSEwbdL1kpvC6@macbook.local>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -121,80 +117,31 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CACHz=Zg1UnDD9bXYgm01smay=mzRciNZ20v7ERi4OHsqSYGZFw@mail.gmail.com>
+In-Reply-To: <ZvLWSEwbdL1kpvC6@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 24.09.2024 17:21, Frediano Ziglio wrote:
-> On Mon, Sep 23, 2024 at 3:26 PM Jan Beulich <jbeulich@suse.com> wrote:
+On 24.09.2024 17:10, Roger Pau Monné wrote:
+> On Mon, Sep 23, 2024 at 03:35:59PM +0100, Matthew Barnes wrote:
+>> With the introduction of mixed x2APIC mode (using cluster addressing for
+>> IPIs and physical for external interrupts) the use of pure cluster mode
+>> doesn't have any benefit.
 >>
-> 
-> ... omissis ...
-> 
+>> Remove the mode itself, leaving only the code required for logical
+>> addressing when sending IPIs.
 >>
->>>>> --- a/xen/arch/x86/efi/stub.c
->>>>> +++ b/xen/arch/x86/efi/stub.c
->>>>> @@ -17,7 +17,8 @@
->>>>>   */
->>>>>
->>>>>  void __init noreturn efi_multiboot2(EFI_HANDLE ImageHandle,
->>>>> -                                    EFI_SYSTEM_TABLE *SystemTable)
->>>>> +                                    EFI_SYSTEM_TABLE *SystemTable,
->>>>> +                                    const char *cmdline)
->>>>>  {
->>>>>      static const CHAR16 __initconst err[] =
->>>>>          L"Xen does not have EFI code build in!\r\nSystem halted!\r\n";
->>>>
->>>> This, if not a separate change, wants mentioning in the description.
->>>> It's a related observation that this wasn't properly updated, but
->>>> nothing that necessarily needs doing here. Question is whether the
->>>> declaration of the function wouldn't better go into a header now in
->>>> the first place.
->>>
->>> I had the same though about a header. But currently there's no such
->>> header, I mean it should be able to be included by both stub.c and
->>> efi-boot.h which are both x86 only code so it should go in
->>> xen/arch/x86/ I suppose. Suggestions? Maybe a different solution would
->>> be to have a xen/arch/x86/efi/efi-boot-stub.h instead of
->>> xen/arch/x86/efi/stub.c ?
->>
->> It's not quite the right place, but maybe (ab)using asm/efibind.h would
->> be slightly better than introducing asm/efi.h just for a single decl?
->>
->> Jan
+>> Implements: https://gitlab.com/xen-project/xen/-/issues/189
 > 
-> Okay, I found the comment on the header to place the declaration.
+> There's at least one extra bit which I would also like to see removed,
+> either in this patch, or as following patch.
 > 
-> Kind of works... but the headers are very crazily depending on each
-> other, the header change is
-> 
-> diff --git a/xen/arch/x86/include/asm/efibind.h
-> b/xen/arch/x86/include/asm/efibind.h
-> index bce02f3707..1fa5522a0d 100644
-> --- a/xen/arch/x86/include/asm/efibind.h
-> +++ b/xen/arch/x86/include/asm/efibind.h
-> @@ -1,2 +1,13 @@
-> #include <xen/types.h>
-> +#include <xen/init.h>
-> #include <asm/x86_64/efibind.h>
-> +#include <efi/efidef.h>
-> +#include <efi/eficapsule.h>
-> +#include <efi/eficon.h>
-> +#include <efi/efidevp.h>
-> +#include <efi/efiapi.h>
-> +
-> +void __init efi_multiboot2(EFI_HANDLE ImageHandle,
-> +                           EFI_SYSTEM_TABLE *SystemTable,
-> +                           const char *cmdline);
-> +
-> 
-> How does it sound ?
+> In struct arch_irq_desc we have 3 cpumasks: cpu_mask, old_cpu_mask and
+> pending_mask.  After dropping cluster mode for external interrupts,
+> those fields could become integers AFACT, as now interrupts can only
+> target a single CPU opposed to a logical CPU set.
 
-Hmm, no, not good at all. All these #include-s are against the purpose
-of the header. We'll need asm/efi.h then, I think.
-
-As an aside - you don't need xen/init.h here, as declarations shouldn't
-have __init attributes.
+Yeah, that very much wants to be a separate change.
 
 Jan
+
 
