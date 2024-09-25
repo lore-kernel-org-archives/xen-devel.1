@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 064B6CCF9E4
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:51:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804355.1215307 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5AAFCCF9E4
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:59:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.804367.1215317 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stUIL-0006Qx-Hu; Wed, 25 Sep 2024 15:51:13 +0000
+	id 1stUQ9-0003fu-Eg; Wed, 25 Sep 2024 15:59:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804355.1215307; Wed, 25 Sep 2024 15:51:13 +0000
+Received: by outflank-mailman (output) from mailman id 804367.1215317; Wed, 25 Sep 2024 15:59:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stUIL-0006Qq-E0; Wed, 25 Sep 2024 15:51:13 +0000
-Received: by outflank-mailman (input) for mailman id 804355;
- Wed, 25 Sep 2024 15:51:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xgw0=QX=cloud.com=bernhard.kaindl@srs-se1.protection.inumbo.net>)
- id 1stUIK-0006PO-Sr
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:51:12 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fbebdfc0-7b55-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:51:10 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a8d4093722bso1659366b.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:51:10 -0700 (PDT)
-Received: from localhost ([185.68.248.203]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9392f5485asm223739166b.88.2024.09.25.08.51.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 08:51:08 -0700 (PDT)
+	id 1stUQ9-0003fn-AN; Wed, 25 Sep 2024 15:59:17 +0000
+Received: by outflank-mailman (input) for mailman id 804367;
+ Wed, 25 Sep 2024 15:59:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=JxxI=QX=arndb.de=arnd@srs-se1.protection.inumbo.net>)
+ id 1stUQ8-0003eN-3U
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:59:16 +0000
+Received: from fout-a4-smtp.messagingengine.com
+ (fout-a4-smtp.messagingengine.com [103.168.172.147])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1af6431f-7b57-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 17:59:12 +0200 (CEST)
+Received: from phl-compute-10.internal (phl-compute-10.phl.internal
+ [10.202.2.50])
+ by mailfout.phl.internal (Postfix) with ESMTP id ECD7113803AA;
+ Wed, 25 Sep 2024 11:59:10 -0400 (EDT)
+Received: from phl-imap-11 ([10.202.2.101])
+ by phl-compute-10.internal (MEProxy); Wed, 25 Sep 2024 11:59:10 -0400
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id 792C62220071; Wed, 25 Sep 2024 11:59:09 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,231 +47,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fbebdfc0-7b55-11ef-a0ba-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727279469; x=1727884269; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9Tr2UcWiuyslUa0UHrNbt982S1/IvXvPFkiphxGh6Ps=;
-        b=BzgCxh2nWR1qvnNt9F2xMPntWKSUQLqASLtURFcH1qbi4ZS8R0iNHrSSuCjRkc+sns
-         wSRKQqYPr57aiRapV6/hzfwB0KKZjKd+OoH/7OpH7NJFgUV/9NKxxovkSI5NMtSKsOW1
-         r/f5Sz599zHXoFGw5o6G24T28aX/VXJgROfW0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727279469; x=1727884269;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9Tr2UcWiuyslUa0UHrNbt982S1/IvXvPFkiphxGh6Ps=;
-        b=SDhLCYgLmprD1rUr9QM+SKwlxwXVQHambcoi4h+JVx0Sg9vAR6We/yB160yhRoYb+x
-         6JS1qUKWWtzfBAp6go2oOou0Ljx0zM+9gBB5kxtCwImo+wTwh5wIYULiBzmxeMUjZNxv
-         sy9HqWsgwO1vKCUDK1CFrHUkVbGbieHMnYr5iSl/23dxKkzmRU6KOaKDbtA0BvBqHxtF
-         skI+xxdIvL+anlMyf6Y3+BTOLMzszc/fKdti0w1+lazow2AzhKCnHhWWv1Drm00iTsOi
-         jB76EA/ww/RAauSFTWM69uauYnDXxSSWiVKAsheeaQC0UR+TyIyptgfEYDNGxOGZ0AHK
-         bzJA==
-X-Gm-Message-State: AOJu0YzIDxAZdW6WrHe1G6yiLyXf7pat52DWLOw8xlTAaCdSABW5QSS3
-	3Hl3xHNaWBPc0gPsuQo+CNgAkQgDhNq0D+KnbIfNvHwa15PkhojKSQ87XT042xeGs43I4sJNBd1
-	Ur632NA==
-X-Google-Smtp-Source: AGHT+IFWfuokuuuWNzHFGVcwKKa2v70f+C98dZD2VjA/mXsI/lQDsPlXpq0Nc1HcxZuOAqrJdGdhFQ==
-X-Received: by 2002:a17:907:9602:b0:a90:3498:93b2 with SMTP id a640c23a62f3a-a93a033cb23mr362455066b.1.1727279469288;
-        Wed, 25 Sep 2024 08:51:09 -0700 (PDT)
-From: Bernhard Kaindl <bernhard.kaindl@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Bernhard Kaindl <bernhard.kaindl@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] docs: Add/Improve function documentation for NUMA code
-Date: Wed, 25 Sep 2024 17:50:45 +0200
-Message-ID: <88fecfc05c551b0329b555ef570feeb718a8c021.1727279356.git.bernhard.kaindl@cloud.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: 1af6431f-7b57-11ef-99a2-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1727279950;
+	 x=1727366350; bh=3HZx7sec5GV7f3nA3v8u1Fjv7A5gsnEaqY5PBAiqOkk=; b=
+	UVKMXiTjaRWc30bxZNATVWbRhgICrxpyR1x16ghxJOAQTl5BOunfXp9FwWV9WhlV
+	+aUa/RGQh0Kyz4py6ifpIJ0+eLmjwMyTDfXsi0XWrcC8RcdTOOgH0YZTuBZbucr/
+	z2c10MA43k2yciVzwTab6t6eXgWSHOOzeHnWuiGcynxher7cWBmML1U9Sevdd5iI
+	uzvkVwSmr0CDT4xYR/kN0N6RZhrsVcoWwgNNDis6Dv19wAKQhSHm5ns+KjaDg8od
+	S9wcHRzFhbGHOVeS9mXFTuId4wpU9p1MK04NIfi1O27zhlWafosj7W3qPNzL6+H+
+	DB2IwVwmKjOI85hzhAEKpQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1727279950; x=
+	1727366350; bh=3HZx7sec5GV7f3nA3v8u1Fjv7A5gsnEaqY5PBAiqOkk=; b=V
+	kQkxhzMWnh9soxOXto4eo35XEnniTH4Wu+9ZskAHzs93bDP7LBa6DgPrj6HceGdo
+	8YKYsjg/9l4PP68f+e9rStsWE3nv4yrfFwW9zxVUxAAoxu92B7DwkCnMDEB5z++5
+	B2Uj+lbSbXt+XIWbOH6RMp3gHONT6vsyJTj7kIzfZlBMjfQMJfIdjyljGakAIjbV
+	dxtEToc/zuQB6+/68rKtO42kB6GLy1P4svOtLC8opNfW/Ibh4Rj6RfYs1tmv6qEF
+	/xMtI7xZqb2slX9RiE52KgOWpCCVFgL5Cu2jlVC9WPk3512KFFuAVu9ynYuhKCE0
+	r2M9NYYjcQEpvrsJmEDGg==
+X-ME-Sender: <xms:TTP0ZqmgT4Iz-DjvOhb6TEsmbNcedL4jv-HXEBZ14JusRndh8E3guQ>
+    <xme:TTP0Zh1aAfi2-W_sHtCvZrcYc2NMKYejucSvVVwIJzXQiogHFgrFj3dCt8w6MAvoP
+    d41cQblQb2fa8wiyNo>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrvddthedgleehucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+    rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
+    htshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertdertddt
+    necuhfhrohhmpedftehrnhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnuggsrd
+    guvgeqnecuggftrfgrthhtvghrnhepfefhheetffduvdfgieeghfejtedvkeetkeejfeek
+    keelffejteevvdeghffhiefhnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlh
+    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrrhhnugesrghr
+    nhgusgdruggvpdhnsggprhgtphhtthhopeegtddpmhhouggvpehsmhhtphhouhhtpdhrtg
+    hpthhtohepmhgrthhhihgvuhdruggvshhnohihvghrshesvghffhhitghiohhsrdgtohhm
+    pdhrtghpthhtohepuhgsihiijhgrkhesghhmrghilhdrtghomhdprhgtphhtthhopegrrh
+    gusgdoghhithesghhoohhglhgvrdgtohhmpdhrtghpthhtohepihhrohhgvghrshesghho
+    ohhglhgvrdgtohhmpdhrtghpthhtohepjhhushhtihhnshhtihhtthesghhoohhglhgvrd
+    gtohhmpdhrtghpthhtohepphgvthgvrhiisehinhhfrhgruggvrggurdhorhhgpdhrtghp
+    thhtoheprggurhhirghnrdhhuhhnthgvrhesihhnthgvlhdrtghomhdprhgtphhtthhope
+    hkvghithhhpheskhgvihhthhhprdgtohhmpdhrtghpthhtoheprggtmhgvsehkvghrnhgv
+    lhdrohhrgh
+X-ME-Proxy: <xmx:TTP0ZorEpf8uhg8h7KUOuuyxmkFTuOqd8M-ijgxDXgHXHnEsCAqn1A>
+    <xmx:TTP0ZukWROg85Ojj1n7scTnPh_o5BOn4tFS4d6Wlg35ADB7gm5yxxQ>
+    <xmx:TTP0Zo3bonoZfA7r9k_xttbCf96LxvWQCw6nio7M3wIvLzzRaNhFBA>
+    <xmx:TTP0ZlvFerWdcwY5EIw3orvEavM3V7Yt9LqH5F0Xmjy4Y5rHiisqdQ>
+    <xmx:TjP0ZmWuFxpdl1lIuEttTBR3BrOqJ-pJA32wqZmkpWVgyRHgKyKtEXao>
+Feedback-ID: i56a14606:Fastmail
+X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Wed, 25 Sep 2024 15:58:38 +0000
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Ard Biesheuvel" <ardb+git@google.com>, linux-kernel@vger.kernel.org
+Cc: "Ard Biesheuvel" <ardb@kernel.org>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, "Andy Lutomirski" <luto@kernel.org>,
+ "Peter Zijlstra" <peterz@infradead.org>,
+ "Uros Bizjak" <ubizjak@gmail.com>, "Dennis Zhou" <dennis@kernel.org>,
+ "Tejun Heo" <tj@kernel.org>, "Christoph Lameter" <cl@linux.com>,
+ "Mathieu Desnoyers" <mathieu.desnoyers@efficios.com>,
+ "Paolo Bonzini" <pbonzini@redhat.com>,
+ "Vitaly Kuznetsov" <vkuznets@redhat.com>,
+ "Juergen Gross" <jgross@suse.com>,
+ "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Masahiro Yamada" <masahiroy@kernel.org>, "Kees Cook" <kees@kernel.org>,
+ "Nathan Chancellor" <nathan@kernel.org>,
+ "Keith Packard" <keithp@keithp.com>,
+ "Justin Stitt" <justinstitt@google.com>,
+ "Josh Poimboeuf" <jpoimboe@kernel.org>,
+ "Arnaldo Carvalho de Melo" <acme@kernel.org>,
+ "Namhyung Kim" <namhyung@kernel.org>, "Jiri Olsa" <jolsa@kernel.org>,
+ "Ian Rogers" <irogers@google.com>,
+ "Adrian Hunter" <adrian.hunter@intel.com>,
+ "Kan Liang" <kan.liang@linux.intel.com>, linux-doc@vger.kernel.org,
+ linux-pm@vger.kernel.org, kvm@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-efi@vger.kernel.org,
+ Linux-Arch <linux-arch@vger.kernel.org>, linux-sparse@vger.kernel.org,
+ linux-kbuild@vger.kernel.org, linux-perf-users@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, llvm@lists.linux.dev
+Message-Id: <c4868f63-b688-4489-a112-05bf04280bde@app.fastmail.com>
+In-Reply-To: <20240925150059.3955569-32-ardb+git@google.com>
+References: <20240925150059.3955569-30-ardb+git@google.com>
+ <20240925150059.3955569-32-ardb+git@google.com>
+Subject: Re: [RFC PATCH 02/28] Documentation: Bump minimum GCC version to 8.1
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
----
- xen/arch/x86/srat.c      | 45 ++++++++++++++++++++++++++++++++++++++--
- xen/arch/x86/x86_64/mm.c | 22 ++++++++++++++++++--
- xen/common/numa.c        | 27 ++++++++++++++++++++++--
- 3 files changed, 88 insertions(+), 6 deletions(-)
+On Wed, Sep 25, 2024, at 15:01, Ard Biesheuvel wrote:
+> From: Ard Biesheuvel <ardb@kernel.org>
+>
+> Bump the minimum GCC version to 8.1 to gain unconditional support for
+> referring to the per-task stack cookie using a symbol rather than
+> relying on the fixed offset of 40 bytes from %GS, which requires
+> elaborate hacks to support.
+>
+> Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+> ---
+>  Documentation/admin-guide/README.rst | 2 +-
+>  Documentation/process/changes.rst    | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/srat.c b/xen/arch/x86/srat.c
-index 688f410287..a7f6b79324 100644
---- a/xen/arch/x86/srat.c
-+++ b/xen/arch/x86/srat.c
-@@ -51,6 +51,22 @@ nodeid_t pxm_to_node(unsigned pxm)
- 	return NUMA_NO_NODE;
- }
- 
-+/**
-+ * @brief Set up a NUMA node based on the given proximity domain (pxm).
-+ *
-+ * If the proximity domain is already found in the pxm2node array, this function
-+ * returns the node ID associated with the given proximity domain.
-+ *
-+ * Otherwise, it assigns a new node ID to the proximity domain and returns it.
-+ * If the maximum number of nodes has been reached, it returns an error code.
-+ *
-+ * @param pxm The proximity domain to set up or to find in the pxm2node array.
-+ * @return The node ID associated with the given proximity domain,
-+ *         or NUMA_NO_NODE if the setup fails
-+ *         or the maximum number of nodes has been reached.
-+ *
-+ * @note Uses a static variable to assign the next NUMA node ID to be assigned.
-+ */
- nodeid_t setup_node(unsigned pxm)
- {
- 	nodeid_t node;
-@@ -212,7 +228,19 @@ acpi_numa_processor_affinity_init(const struct acpi_srat_cpu_affinity *pa)
- 		       pxm, pa->apic_id, node);
- }
- 
--/* Callback for parsing of the Proximity Domain <-> Memory Area mappings */
-+/**
-+ * @brief Initialize memory affinity for an SRAT memory affinity structure.
-+ * @param ma Pointer to the ACPI SRAT memory affinity structure to be parsed.
-+ *
-+ * Callback for parsing of the Proximity Domain <-> Memory Area mappings
-+ * provided by the ACPI SRAT(System Resource Affinity Table)
-+ *
-+ * This function is called during the initialization phase and is responsible
-+ * for setting up memory affinity information for NUMA nodes
-+ * based on the provided ACPI SRAT entries.
-+ *
-+ * If valid, it updates the memory block information for the specified node.
-+ */
- void __init
- acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
- {
-@@ -314,16 +342,29 @@ void __init srat_parse_regions(paddr_t addr)
- 	pfn_pdx_hole_setup(mask >> PAGE_SHIFT);
- }
- 
-+/**
-+ * @brief Find the proximity domain of a given NUMA node ID
-+ *
-+ * @param node The NUMA node ID to look up.
-+ * @return The proximity domain of the given NUMA node ID, or 0 if not found
-+ *
-+ * This funciton uses the pxm2node array to find the proximity domain:
-+ * The pxm2node array maps proximity domains to NUMA nodes and is indexed by the
-+ * proximity domain. Each entry contains the proximity domain and the NUMA node.
-+ */
- unsigned int numa_node_to_arch_nid(nodeid_t n)
- {
- 	unsigned int i;
- 
-+	/* If the NUMA node is found using the index, return the pxm directly: */
- 	if ((n < ARRAY_SIZE(pxm2node)) && (pxm2node[n].node == n))
- 		return pxm2node[n].pxm;
-+
-+	/* Else, scan over the pxm2node array to find the architecture node ID: */
- 	for (i = 0; i < ARRAY_SIZE(pxm2node); i++)
- 		if (pxm2node[i].node == n)
- 			return pxm2node[i].pxm;
--	return 0;
-+	return 0;  /* If the node ID is not found, return 0. */
- }
- 
- u8 __node_distance(nodeid_t a, nodeid_t b)
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index 0d8e602529..e8571000b2 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -1218,8 +1218,26 @@ static int mem_hotadd_check(unsigned long spfn, unsigned long epfn)
- }
- 
- /*
-- * A bit paranoid for memory allocation failure issue since
-- * it may be reason for memory add
-+ * @brief Add a contiguous range of pages to the Xen hypervisor heap
-+ *
-+ * Update the machine-to-phys (m2p) and frame tables, the max_page, max_pdx and
-+ * total_pages values, and set the page table entries for the new memory range.
-+ *
-+ * Also update the node_start_pfn and node_spanned_pages fields in the node_data
-+ * structure for the NUMA node that the memory range belongs to.
-+ *
-+ * If the NUMA node is offline, set the node's online flag.
-+ *
-+ * If the hardware domain uses an IOMMU and the IOMMU pagetable
-+ * is not using the HW domain's P2M table or is not kept in sync,
-+ * also update the IOMMU maps for the newly added memory.
-+ *
-+ * When memory allocations or adding the memory fails, revert any changes made.
-+ *
-+ * @param spfn The starting page frame number of the range.
-+ * @param epfn The ending page frame number of the range.
-+ * @param pxm The proximity domain of the range, which represents the NUMA node.
-+ * @return 0 on success, or a negative error code on failure.
-  */
- int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
- {
-diff --git a/xen/common/numa.c b/xen/common/numa.c
-index ce3991929c..5db0a6745e 100644
---- a/xen/common/numa.c
-+++ b/xen/common/numa.c
-@@ -140,6 +140,18 @@ bool __init numa_memblks_available(void)
- }
- 
- /*
-+ * @brief Update the memory blocks of a NUMA node.
-+ *
-+ * Check for overlaps and interleaves with existing memory blocks for the node.
-+ * If none, update the node's memory range and maintain the sorting of blocks.
-+ *
-+ * @param node The node ID for which memory blocks are being updated.
-+ * @param arch_nid The architecture node ID associated with the memory.
-+ * @param start The starting physical address of the memory block.
-+ * @param size The size of the memory block.
-+ * @param hotplug Indicates if the memory is being hotplugged.
-+ * @return true if the memory block was successfully added, false otherwise.
-+ *
-  * This function will be called by NUMA memory affinity initialization to
-  * update NUMA node's memory range. In this function, we assume all memory
-  * regions belonging to a single node are in one chunk. Holes (or MMIO
-@@ -264,8 +276,17 @@ bool __init numa_update_node_memblks(nodeid_t node, unsigned int arch_nid,
- }
- 
- /*
-+ * @brief Check if all RAM ranges are covered by NUMA nodes.
-+ *
-  * Sanity check to catch more bad SRATs (they are amazingly common).
-  * Make sure the PXMs cover all memory.
-+ *
-+ * This function iterates through the memory map and checks if each RAM range
-+ * is covered by any of the NUMA nodes. If a RAM range is not covered by any
-+ * node, it logs an error and returns false. If all RAM ranges are covered,
-+ * it returns true.
-+ *
-+ * @return true if all RAM ranges are covered by NUMA nodes, false otherwise.
-  */
- static bool __init nodes_cover_memory(void)
- {
-@@ -291,18 +312,20 @@ static bool __init nodes_cover_memory(void)
- 
-         do {
-             found = false;
-+            /* Loop over the NUMA nodes and if check they cover this mapping */
-             for_each_node_mask ( j, memory_nodes_parsed )
-+                /* Check if this node's spanned pages are inside this mapping */
-                 if ( start < numa_nodes[j].end && end > numa_nodes[j].start )
-                 {
-                     if ( start >= numa_nodes[j].start )
-                     {
--                        start = numa_nodes[j].end;
-+                        start = numa_nodes[j].end;  /* Check following memory */
-                         found = true;
-                     }
- 
-                     if ( end <= numa_nodes[j].end )
-                     {
--                        end = numa_nodes[j].start;
-+                        end = numa_nodes[j].start;  /* check preceding memory */
-                         found = true;
-                     }
-                 }
--- 
-2.43.0
+Acked-by: Arnd Bergmann <arnd@arndb.de>
 
+As we discussed during plumbers, I think this is reasonable,
+both the gcc-8.1 version and the timing after the 6.12-LTS
+kernel.
+
+We obviously need to go through all the other version checks
+to see what else can be cleaned up. I would suggest we also
+raise the binutils version to 2.30+, which is what RHEL8
+shipped alongside gcc-8. I have not found other distros that
+use older binutils in combination with gcc-8 or higher,
+Debian 10 uses binutils-2.31.
+I don't think we want to combine the additional cleanup with
+your series, but if we can agree on the version, we can do that
+in parallel.
+
+FWIW, here are links to the last few times we discussed this,
+and there are already has a few other things that would
+benefit from more modern compilers:
+
+https://lore.kernel.org/lkml/dca5b082-90d1-40ab-954f-8b3b6f51138c@app.fastmail.com/
+https://lore.kernel.org/lkml/CAFULd4biN8FPRtU54Q0QywfBFvvWV-s1M3kWF9YOmozyAX9+ZQ@mail.gmail.com/
+https://lore.kernel.org/lkml/CAK8P3a1Vt17Yry_gTQ0dwr7_tEoFhuec+mQzzKzFvZGD5Hrnow@mail.gmail.com/
+
+     Arnd
 
