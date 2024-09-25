@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0788CCF9E4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE786CCF9E2
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804102.1215083 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.804112.1215123 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiw-0007tl-60; Wed, 25 Sep 2024 15:14:38 +0000
+	id 1stTj0-0000bs-Ec; Wed, 25 Sep 2024 15:14:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804102.1215083; Wed, 25 Sep 2024 15:14:38 +0000
+Received: by outflank-mailman (output) from mailman id 804112.1215123; Wed, 25 Sep 2024 15:14:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiv-0007mQ-MN; Wed, 25 Sep 2024 15:14:37 +0000
-Received: by outflank-mailman (input) for mailman id 804102;
- Wed, 25 Sep 2024 15:02:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stTiz-0000Wi-Nw; Wed, 25 Sep 2024 15:14:41 +0000
+Received: by outflank-mailman (input) for mailman id 804112;
+ Wed, 25 Sep 2024 15:02:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=254E=QX=flex--ardb.bounces.google.com=3-SX0ZggKCVQwDzx+24F2AA270.yA8J09-z0H0774EFE.J09BDA50yF.AD2@srs-se1.protection.inumbo.net>)
- id 1stTX1-0002UM-Ii
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:19 +0000
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [2607:f8b0:4864:20::114a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 28849315-7b4f-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:02:19 +0200 (CEST)
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-6d7124939beso104377427b3.2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:19 -0700 (PDT)
+ <SRS0=QsEB=QX=flex--ardb.bounces.google.com=3Cyb0ZggKCWYEVHF+KMXKSSKPI.GSQbIR-HIZIPPMWXW.bIRTVSNIGX.SVK@srs-se1.protection.inumbo.net>)
+ id 1stTXK-0002k3-Iv
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:38 +0000
+Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
+ [2607:f8b0:4864:20::b49])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 332c4c14-7b4f-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 17:02:37 +0200 (CEST)
+Received: by mail-yb1-xb49.google.com with SMTP id
+ 3f1490d57ef6-e035949cc4eso10635671276.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 28849315-7b4f-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 332c4c14-7b4f-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276538; x=1727881338; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276556; x=1727881356; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=WebA59vxPkU4u7rhQajyH4BvEeqGZRhskbQXw1lowfs=;
-        b=bltNc210DV+lNvtCsuh7mnlnVNpa4SLhTYfIpX/0EPMWGKkMFSvSoOG2KROy6er6TW
-         YPSwUUH53s0UOWooHDySPwmCaKio1stBb8YY+0o60K5NYSj/7Squf4RnTwOavmpLkFKL
-         bEwi2ypcExMNcQXJzwYOsMeBpm9NTr36F9kckL1fDASMh7ZKt2RLCGeybdDPCrBQUmsr
-         mARlDpeD9kPkxWagIvb7fGUuAe6YhvmhKu0x2sDq61VaKxTwsblVA1FF4n1F+zvH33mS
-         u3PTt6ebZ9HUNv2P40mfFabxYjJZSyPudKTNk2lde2+6bn3YuqpqnhmW8pCCSGjzRjWH
-         V++w==
+        bh=yDR79FvO/p7pnSynPl14YMv6NBkHhQBDE9t/OHYGGd4=;
+        b=3jY5ROt97/csoi0j6IG4ByWefC8x3qvetk7Jtk3IDESZm+YI4Fd6EffTOUrWVUld0s
+         Br6Yn67O2P+c4MhA9IduyUaf24NhrZMjkbAfEJJAiVWZhmknGuRoTU1Of1rRJmLOiMDP
+         rjQGBxjtHpKYryYy5mqUPcmKdT5ikEpOfZpyGopWfAzkcXFosRaKdcPSIWxfDsF/Aron
+         Glo7YM/eGj0VLwcQBFnHdHbFVGHNgNaEWVLa5TQYWf7xq91ct1ndrXtVL7h4RLsn+XjI
+         B28VJhQIIh2zRY+7QYwdr4eHTW+ZqUcsy/JWZaZsVwCjLkijBSaB1xpzw4ZCS9ERvVB9
+         S46g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276538; x=1727881338;
+        d=1e100.net; s=20230601; t=1727276556; x=1727881356;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=WebA59vxPkU4u7rhQajyH4BvEeqGZRhskbQXw1lowfs=;
-        b=sRRBOAmqaS+K/zhl7N8l7gXHNY90uIYCExn+QCJJeW2rznzOxOJPtfwIjPjPcGVoqi
-         9CmcR6O4a+9H18ojSqh9TRZO4H6eqo7DSenv+K6+L/34s1Un7+2x0PKwcQFMLEKlDUEb
-         cAM6h4MHTUoPTwRwvjw8yvmPumSYFpTf/FSsW9X4zFhqvvPJFtSejfgile/FfQ8j+UKM
-         DC4acgBI2qye1xxeLX2/FfnWASvMrkGxpvvhcFg0+c/DT8TNdk68f0vaYOjhKa/vGNmX
-         8lD7ATUg4hWIaHxC24cAJgrpt7unIKfmoLlHRXeaTjmp+tGKWdlmKTIh40YIMczfzkb/
-         MH3w==
-X-Forwarded-Encrypted: i=1; AJvYcCXvbaO1IMcB/Gg0l/y3pmAopii/ZUHnTMc+JwJq/n8i4n90i2ekgpp0poMBb/jOoSd+1yB0m0AwPzY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzYxdYVu3cTzv5QIf5uuL2V4oMHtUqfi4TbvDlj88ZIYtQ3PLTI
-	DyfBudNSLP+9avkdJjAU7tq19igpXN/noP5Mr7WIQAi3ADjcnx86QNx4rIH1RHhgbwtTjA==
-X-Google-Smtp-Source: AGHT+IG1eaRHJ+k+oWi0MEewfWnHRvzWiyuPrZa2XUixnuMGDlz9gyzzCn4pjg7USYksDYWFG76nQbXB
+        bh=yDR79FvO/p7pnSynPl14YMv6NBkHhQBDE9t/OHYGGd4=;
+        b=KKU8Vq51zD+sCRglfjCM8SEAkIToP/TgQAYv0HVwrsAN+bIwLiWZgwIYpH2MxlTm6N
+         M7rq8dsDVjZijg+mGvtTR2bFRxhkMkbSozBudSLYVqILKVH832KwVIFN9KqJliz+7iME
+         ve8ZOLqmPYj2y8ilIpQzKmLBABc5Nkre38C+P5vqZ1cKJ/uDxKM+fE0TtOA/IhHs0XeE
+         G+Sh0/BfLhtQvESz7/F075NLJPolIvf71QbqY4WP/OWsRnDNK1XbgzPXijS5JPXwJIt5
+         uxyg3fowdyskH97dmx3hcSGikQ3P73VrYrF2g48z1efxqenrZREKCV3ttDJyS/r75o+u
+         QrfQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWOeIq9LrobtJODcJEEkh3yV+crQh18cmUwKXzoRqlYzU831OPaMpib90YY2qzw5MQw95wq3EkfG3U=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy+yskxyhmf1eAo3mFo5/70LWUxC3FauWtBVQDdjohnIZqwngcJ
+	M82cW3fFpNS6PBQtiR31/Rz97ydq6TnlWqj7EwYK91S6Yq8ruu2GfLj1DL6ER1m0BOntHQ==
+X-Google-Smtp-Source: AGHT+IHZ4KYfHMEhV3OEcung24V1cc8XfcFAbHD7O3r+Hgg2lidAI5AomtBdq038iHk4HR3+YtV8+eXL
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a81:7c46:0:b0:673:b39a:92ce with SMTP id
- 00721157ae682-6e21da5ea7bmr151347b3.3.1727276537527; Wed, 25 Sep 2024
- 08:02:17 -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:11 +0200
+ (user=ardb job=sendgmr) by 2002:a5b:ec8:0:b0:e0b:f93:fe8c with SMTP id
+ 3f1490d57ef6-e24d47abf13mr23895276.0.1727276555668; Wed, 25 Sep 2024 08:02:35
+ -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:18 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3674; i=ardb@kernel.org;
- h=from:subject; bh=R6ohiPGa3ul2ikQd2A7YE6wpEPvXq0bd6W2LGMrzZ/k=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6m4L/Wkc7n0aPQzsYULiEQZPMlgefsmsLHv4K8KPe
- c6T1d0dpSwMYhwMsmKKLAKz/77beXqiVK3zLFmYOaxMIEMYuDgFYCLF8YwMhwNCO7WWnu4+bHJ/
- R+KN+e/7+Z5GTZy4J83mRy0Xx+UbAowMLwuTAsXUc+SfqAVdK+gtnHdHT+jRjZtrv3D/ms77oD2 BCwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4435; i=ardb@kernel.org;
+ h=from:subject; bh=GHJcalcWc5Qb+zlhfpCjetJZ0xMQ4h6Eadch5mSu/kI=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6tGDolHZO8I/hR3x3e/2aucUz1XW9pJNyVMcgt6LK
+ d6perupo5SFQYyDQVZMkUVg9t93O09PlKp1niULM4eVCWQIAxenAExkjgkjw6k/n413NQiwSlie
+ DnVk14nq3/xeMf2gfMyRHcx1Ja3nuRj+h2Vr7vj9abJ2U31nzqv2/TMymqLWPwla++d7/1o/hhv mDAA=
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-41-ardb+git@google.com>
-Subject: [RFC PATCH 11/28] x86/pvh: Avoid absolute symbol references in .head.text
+Message-ID: <20240925150059.3955569-48-ardb+git@google.com>
+Subject: [RFC PATCH 18/28] x86/boot/64: Determine VA/PA offset before entering
+ C code
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,119 +111,102 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-The .head.text section contains code that may execute from a different
-address than it was linked at. This is fragile, given that the x86 ABI
-can refer to global symbols via absolute or relative references, and the
-toolchain assumes that these are interchangeable, which they are not in
-this particular case.
+Implicit absolute symbol references (e.g., taking the address of a
+global variable) must be avoided in the C code that runs from the early
+1:1 mapping of the kernel, given that this is a practice that violates
+assumptions on the part of the toolchain. I.e., RIP-relative and
+absolute references are expected to produce the same values, and so the
+compiler is free to choose either. However, the code currently assumes
+that RIP-relative references are never emitted here.
 
-In the case of the PVH code, there are some additional complications:
-- the absolute references are in 32-bit code, which get emitted with
-  R_X86_64_32 relocations, and these are not permitted in PIE code;
-- the code in question is not actually relocatable: it can only run
-  correctly from the physical load address specified in the ELF note.
+So an explicit virtual-to-physical offset needs to be used instead to
+derive the kernel virtual addresses of _text and _end, instead of simply
+taking the addresses and assuming that the compiler will not choose to
+use a RIP-relative references in this particular case.
 
-So rewrite the code to only rely on relative symbol references: these
-are always 32-bits wide, even in 64-bit code, and are resolved by the
-linker at build time.
+Currently, phys_base is already used to perform such calculations, but
+it is derived from the kernel virtual address of _text, which is taken
+using an implicit absolute symbol reference. So instead, derive this
+VA-to-PA offset in asm code, using the kernel VA of common_startup_64
+(which we already keep in a global variable for other reasons), and pass
+it to the C startup code.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- arch/x86/platform/pvh/head.S | 39 ++++++++++++++------
- 1 file changed, 27 insertions(+), 12 deletions(-)
+ arch/x86/include/asm/setup.h | 2 +-
+ arch/x86/kernel/head64.c     | 8 +++++---
+ arch/x86/kernel/head_64.S    | 9 ++++++++-
+ 3 files changed, 14 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
-index adbf57e83e4e..e6cb7da40e09 100644
---- a/arch/x86/platform/pvh/head.S
-+++ b/arch/x86/platform/pvh/head.S
-@@ -54,7 +54,20 @@ SYM_CODE_START(pvh_start_xen)
- 	UNWIND_HINT_END_OF_STACK
- 	cld
+diff --git a/arch/x86/include/asm/setup.h b/arch/x86/include/asm/setup.h
+index 0667b2a88614..85f4fde3515c 100644
+--- a/arch/x86/include/asm/setup.h
++++ b/arch/x86/include/asm/setup.h
+@@ -49,7 +49,7 @@ extern unsigned long saved_video_mode;
  
--	lgdt (_pa(gdt))
+ extern void reserve_standard_io_resources(void);
+ extern void i386_reserve_resources(void);
+-extern unsigned long __startup_64(unsigned long physaddr, struct boot_params *bp);
++extern unsigned long __startup_64(unsigned long p2v_offset, struct boot_params *bp);
+ extern void startup_64_setup_gdt_idt(void);
+ extern void early_setup_idt(void);
+ extern void __init do_early_exception(struct pt_regs *regs, int trapnr);
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index d4398261ad81..de33ac34773c 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -138,12 +138,14 @@ static unsigned long __head sme_postprocess_startup(struct boot_params *bp, pmdv
+  * doesn't have to generate PC-relative relocations when accessing globals from
+  * that function. Clang actually does not generate them, which leads to
+  * boot-time crashes. To work around this problem, every global pointer must
+- * be accessed using RIP_REL_REF().
++ * be accessed using RIP_REL_REF(). Kernel virtual addresses can be determined
++ * by subtracting p2v_offset from the RIP-relative address.
+  */
+-unsigned long __head __startup_64(unsigned long physaddr,
++unsigned long __head __startup_64(unsigned long p2v_offset,
+ 				  struct boot_params *bp)
+ {
+ 	pmd_t (*early_pgts)[PTRS_PER_PMD] = RIP_REL_REF(early_dynamic_pgts);
++	unsigned long physaddr = (unsigned long)&RIP_REL_REF(_text);
+ 	unsigned long pgtable_flags;
+ 	unsigned long load_delta;
+ 	pgdval_t *pgd;
+@@ -163,7 +165,7 @@ unsigned long __head __startup_64(unsigned long physaddr,
+ 	 * Compute the delta between the address I am compiled to run at
+ 	 * and the address I am actually running at.
+ 	 */
+-	load_delta = physaddr - (unsigned long)(_text - __START_KERNEL_map);
++	load_delta = __START_KERNEL_map + p2v_offset;
+ 	RIP_REL_REF(phys_base) = load_delta;
+ 
+ 	/* Is the address not 2M aligned? */
+diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+index ab6ccee81493..db71cf64204b 100644
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -99,13 +99,20 @@ SYM_CODE_START_NOALIGN(startup_64)
+ 	/* Sanitize CPU configuration */
+ 	call verify_cpu
+ 
 +	/*
-+	 * This is position dependent code that can only execute correctly from
-+	 * the physical address that the kernel was linked to run at. Use the
-+	 * symbols emitted for the ELF note to construct the build time physical
-+	 * address of pvh_start_xen(), without relying on absolute 32-bit ELF
-+	 * relocations, as these are not supported by the linker when running in
-+	 * -pie mode, and should be avoided in .head.text in general.
++	 * Use the 1:1 physical and kernel virtual addresses of
++	 * common_startup_64 to determine the physical-to-virtual offset, and
++	 * pass it as the first argument to __startup_64().
 +	 */
-+0:	mov $xen_elfnote_phys32_entry_offset - 0b, %ebp
-+	sub $xen_elfnote_phys32_entry - 0b, %ebp
++	leaq	common_startup_64(%rip), %rdi
++	subq	0f(%rip), %rdi
 +
-+	lea (gdt - pvh_start_xen)(%ebp), %eax
-+	add %eax, 2(%eax)
-+	lgdt (%eax)
+ 	/*
+ 	 * Perform pagetable fixups. Additionally, if SME is active, encrypt
+ 	 * the kernel and retrieve the modifier (SME encryption mask if SME
+ 	 * is active) to be added to the initial pgdir entry that will be
+ 	 * programmed into CR3.
+ 	 */
+-	leaq	_text(%rip), %rdi
+ 	movq	%r15, %rsi
+ 	call	__startup_64
  
- 	mov $PVH_DS_SEL,%eax
- 	mov %eax,%ds
-@@ -62,14 +75,14 @@ SYM_CODE_START(pvh_start_xen)
- 	mov %eax,%ss
- 
- 	/* Stash hvm_start_info. */
--	mov $_pa(pvh_start_info), %edi
-+	lea (pvh_start_info - pvh_start_xen)(%ebp), %edi
- 	mov %ebx, %esi
--	mov _pa(pvh_start_info_sz), %ecx
-+	mov (pvh_start_info_sz - pvh_start_xen)(%ebp), %ecx
- 	shr $2,%ecx
- 	rep
- 	movsl
- 
--	mov $_pa(early_stack_end), %esp
-+	lea (early_stack_end - pvh_start_xen)(%ebp), %esp
- 
- 	/* Enable PAE mode. */
- 	mov %cr4, %eax
-@@ -84,17 +97,21 @@ SYM_CODE_START(pvh_start_xen)
- 	wrmsr
- 
- 	/* Enable pre-constructed page tables. */
--	mov $_pa(init_top_pgt), %eax
-+	lea (init_top_pgt - pvh_start_xen)(%ebp), %eax
- 	mov %eax, %cr3
- 	mov $(X86_CR0_PG | X86_CR0_PE), %eax
- 	mov %eax, %cr0
- 
- 	/* Jump to 64-bit mode. */
--	ljmp $PVH_CS_SEL, $_pa(1f)
-+	lea  (1f - pvh_start_xen)(%ebp), %eax
-+	push $PVH_CS_SEL
-+	push %eax
-+	lret
- 
- 	/* 64-bit entry point. */
- 	.code64
- 1:
-+	UNWIND_HINT_END_OF_STACK
- 	/* Clear %gs so early per-CPU references target the per-CPU load area */
- 	mov $MSR_GS_BASE,%ecx
- 	xor %eax, %eax
-@@ -108,10 +125,8 @@ SYM_CODE_START(pvh_start_xen)
- 	call *%rax
- 
- 	/* startup_64 expects boot_params in %rsi. */
--	mov $_pa(pvh_bootparams), %rsi
--	mov $_pa(startup_64), %rax
--	ANNOTATE_RETPOLINE_SAFE
--	jmp *%rax
-+	lea pvh_bootparams(%rip), %rsi
-+	jmp startup_64
- 
- #else /* CONFIG_X86_64 */
- 
-@@ -146,8 +161,8 @@ SYM_CODE_END(pvh_start_xen)
- 	.section ".init.data","aw"
- 	.balign 8
- SYM_DATA_START_LOCAL(gdt)
--	.word gdt_end - gdt_start
--	.long _pa(gdt_start)
-+	.word gdt_end - gdt_start - 1
-+	.long gdt_start - gdt
- 	.word 0
- SYM_DATA_END(gdt)
- SYM_DATA_START_LOCAL(gdt_start)
 -- 
 2.46.0.792.g87dc391469-goog
 
