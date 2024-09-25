@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2729CCF9E4
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:15:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804149.1215193 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55E98CCF9E0
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:15:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.804154.1215214 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTjD-0003If-2Q; Wed, 25 Sep 2024 15:14:55 +0000
+	id 1stTjG-0004B3-Us; Wed, 25 Sep 2024 15:14:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804149.1215193; Wed, 25 Sep 2024 15:14:54 +0000
+Received: by outflank-mailman (output) from mailman id 804154.1215214; Wed, 25 Sep 2024 15:14:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTjB-0003BH-Ma; Wed, 25 Sep 2024 15:14:53 +0000
-Received: by outflank-mailman (input) for mailman id 804149;
- Wed, 25 Sep 2024 15:07:41 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stTjF-0003zY-Ay; Wed, 25 Sep 2024 15:14:57 +0000
+Received: by outflank-mailman (input) for mailman id 804154;
+ Wed, 25 Sep 2024 15:07:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=juIg=QX=flex--ardb.bounces.google.com=3BCb0ZggKCV87OA8+DFQDLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@srs-se1.protection.inumbo.net>)
- id 1stTXB-0002UM-OP
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:29 +0000
-Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com
- [2607:f8b0:4864:20::1149])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2ea307a7-7b4f-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:02:29 +0200 (CEST)
-Received: by mail-yw1-x1149.google.com with SMTP id
- 00721157ae682-6e21dcc7044so16151967b3.1
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:29 -0700 (PDT)
+ <SRS0=12nj=QX=flex--ardb.bounces.google.com=3Eyb0ZggKCW4MdPN+SUfSaaSXQ.OaYjQZ-PQhQXXUefe.jQZbdaVQOf.adS@srs-se1.protection.inumbo.net>)
+ id 1stTXS-0002k3-O0
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:46 +0000
+Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com
+ [2607:f8b0:4864:20::b4a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 38060100-7b4f-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 17:02:45 +0200 (CEST)
+Received: by mail-yb1-xb4a.google.com with SMTP id
+ 3f1490d57ef6-e02fff66a83so10698672276.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ea307a7-7b4f-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 38060100-7b4f-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276548; x=1727881348; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276564; x=1727881364; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ApY23d/9zEIgxeEREKcGvRSADQZAXD1f0/BrlQ4mdDw=;
-        b=EKAmJOjQ6+iTF9/E3EkTtDM4O2GcCl/CNK2kKU736G3mDSmjNrqvA7dKzyp3IyZtRn
-         3PydrlMkirR9gWaIysw1kruP9uFeZH/JEDdpQoilD1Pld+iu8U2NVRnsnm6jAKdwLN17
-         XXkiesbhhU+Jrq8lslabjVCoAnPN0M927ADZ7EhimVB4UH8M/3NN4X3B58foxIzV3JdM
-         7IYzYAxzOKaQ4Pe45f7ZEaxatXeerBjPkGq3arEgodBuVHNQ/q4pUO+zrA/3l/wAVpZu
-         6v67d5/1qpxeBmZ22gsE928VIgzdEibQ4IiBHSTHhDS2nvaEGpjScAwnBb8UJ2wqP6Bv
-         l7qQ==
+        bh=EvnpcmFQxcsGZvvXdDVNifJH/U/gKUWuX4k9X0rnjWY=;
+        b=zdYKtjTZL53sOPSej7O5Lk7pIq+c33T8Od1H4+/yb49Ag3zCBQApYLTNvIFolB7LHI
+         vDueO41KJCsQye7UsaZOPCejatQqzjRnJsApj5dbju4Hx3/9cdYRRDEnwbunbXYQ86ko
+         cPIJ0x3cPZj5CYvk4sMJURrEMHU7qlPjBor5d14thvTigXv1+2V3ZvCx8ukSGzLwCurU
+         RbsSuiPMe+O31uhXiLfDQ00cG1z2S+U4pjADkw9k+9UPlNrm1IDx01qM7qmHfOJebNBA
+         VsjnzpMIM3ppHtAwdwltDPcVMGHu7HnWi1/mdPzRdohpXSggHU2x2a6ryr3JI89465cf
+         Nizw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276548; x=1727881348;
+        d=1e100.net; s=20230601; t=1727276564; x=1727881364;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ApY23d/9zEIgxeEREKcGvRSADQZAXD1f0/BrlQ4mdDw=;
-        b=CCcyykQB9wf2rG53ANKaId45lD/7W1+1SeAkUfoqNSofEA5YLdjphEiS1NKPlh/+dK
-         k6W9n35HndCZflAn3hFpZPudba3cHQg8cuuIfD17ZSdTgOCzVySTgqT1HbxtwCOqZ7GT
-         +klzuwrc+RYb3HHvWjYq9fIBvF1wlzU5t0Q2c87VW9iRe7W4wCqdWf25Wu2GJ32Bwgyr
-         edmOMi0HhwHc/no1jW0BDwCm0TBd1pPlsrQLUEf+xlfuvAvBR9lwqvbwgzhq5GzRY+8Z
-         yncl8fG73XvGR1uEXB5hxP2ZzM7ibZMAI7IJkssFunnqO+wTr2jpNHsv0Lo6srTf2Vjr
-         g1Jg==
-X-Forwarded-Encrypted: i=1; AJvYcCXynMP9ii8ET86JXOQtyxHQTpZCuO5njUAU53xyBNZNejwoHc27kCuIdHaEgVfY13H0YA3PRM8iXLo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxdDckHbZguLsVtA/UXX/5PAMnLJIPgGp6bvkcCsT8oGemWvfJ4
-	eAENVmgk+IHuYBwZWOBEfZ/x3vwlFnw3i18ghpl+jrBtfsd/wS/fVaaE4QeEqXHemqcnGA==
-X-Google-Smtp-Source: AGHT+IG0+ryHhOjgZiIz9yF/upguc+H1WcXc9rbc3LtAhjefmA+cSn7SHizdSFamvUM2J9fCM9A9Vr3/
+        bh=EvnpcmFQxcsGZvvXdDVNifJH/U/gKUWuX4k9X0rnjWY=;
+        b=JSosPA49hNkiQXJrmkO7BkiRVz07ng9ntw+GYelvlSyL49tMAcPFHiUAkugH+GtVSr
+         0DoGb/ITZIf5Lux7SWs0CXHSAZhCLHZJzUoohzav2t7iYeq+nvkyc8FAoVAfBix8+qe4
+         f4+U6aHGW34GItWJE88BPugFhwprv3IoSyZv0TTIoFsLjU9iZSs2hRncicP7yntW07uR
+         kEheUx2weZe/GbwFmn0bLvuYy3tb/wcxgqgDFbAHswaSuK88bE/scTyi7uFvuDdmU92V
+         v9j6d2ac5khR5Pqb+OzSTmfBA2jen4fe0GLtnDV38SDRKdnEyNYNVPnb6o8Xm4ycpVWa
+         xywQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUO9HC0rV7oNgHO3Ls0bWrZ6rxc8F4WY1+Rz5M0iz5UQngkNZwkCX3NsJMqbQax+2IpHy7PSDphxEQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxGQklkFS2zMyDB4ZsTjv4mKm+DpSrS7tRjyb1dZ9uFKVLgr2K5
+	kHKLGQE6SKMmEwzxWn3daxU4kljfVZ+Lui9GCwBw3NRLDudlgpaZDJx/pI+sy0VUWOQ3Xg==
+X-Google-Smtp-Source: AGHT+IG8l7xPrwiQoCJNQ/ba3EMloi9V99YK0VEhh/KbnKIqVODzSQX4+kTe9p6XHA3xEE581cvXY/7/
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a05:690c:d85:b0:6db:e107:75a2 with SMTP id
- 00721157ae682-6e21da5c761mr429007b3.4.1727276548084; Wed, 25 Sep 2024
- 08:02:28 -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:15 +0200
+ (user=ardb job=sendgmr) by 2002:a25:fc20:0:b0:e25:17cb:352e with SMTP id
+ 3f1490d57ef6-e2517cb37ebmr1573276.9.1727276563646; Wed, 25 Sep 2024 08:02:43
+ -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:21 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=715; i=ardb@kernel.org;
- h=from:subject; bh=MI3z3hAzDWNLGP+bB6WD9qNMTMv7yb8jTXTlUIfHWCE=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6sHwPz3fHPWC8oK2RzHe5nszs/XmM4NX7P1ae3YFv
- bWd+fJLRykLgxgHg6yYIovA7L/vdp6eKFXrPEsWZg4rE8gQBi5OAZjI/9UMfwVfxZ9hrm+9xvze
- 6zfvw/cKoUe5Kv5w1pmKsYfxH/f4do3hf+75iD2ndC64zYjxsFPZpbpKIrxBk/fzstDCxW8eO9h OYgAA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2665; i=ardb@kernel.org;
+ h=from:subject; bh=aFznGPhrIJfcYbFW/zJm7PxtyN4XPqpBJvJpRLs7DOQ=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6smrOU/sUlwy2LTW237rV4pUONJ8T3XtdLO2DQ3bj
+ 80/F1nfUcrCIMbBICumyCIw+++7nacnStU6z5KFmcPKBDKEgYtTACYyyZHhn8LWprti0g+tdKf9
+ /bStUjGJXy/+qc4H120n962eP03h1yKG/wHHj7aK75zgynumw7x0V1PPmh2muXNy98WcvvZ74cO kJi4A
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-45-ardb+git@google.com>
-Subject: [RFC PATCH 15/28] x86/sync_core: Use RIP-relative addressing
+Message-ID: <20240925150059.3955569-51-ardb+git@google.com>
+Subject: [RFC PATCH 21/28] x86/head: Use PIC-compatible symbol references in
+ startup code
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,27 +111,85 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-Use RIP-relative accesses and avoid fixups at runtime.
+Use RIP-relative symbol references to make them compatible with running
+the linker in PIE mode.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- arch/x86/include/asm/sync_core.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/x86/kernel/head_64.S            | 14 +++++++++-----
+ arch/x86/kernel/relocate_kernel_64.S |  6 ++++--
+ 2 files changed, 13 insertions(+), 7 deletions(-)
 
-diff --git a/arch/x86/include/asm/sync_core.h b/arch/x86/include/asm/sync_core.h
-index ab7382f92aff..cfd2f3bca83b 100644
---- a/arch/x86/include/asm/sync_core.h
-+++ b/arch/x86/include/asm/sync_core.h
-@@ -31,7 +31,8 @@ static inline void iret_to_self(void)
- 		"pushfq\n\t"
- 		"mov %%cs, %0\n\t"
- 		"pushq %q0\n\t"
--		"pushq $1f\n\t"
-+		"leaq 1f(%%rip), %q0\n\t"
-+		"pushq %q0\n\t"
- 		"iretq\n\t"
- 		"1:"
- 		: "=&r" (tmp), ASM_CALL_CONSTRAINT : : "cc", "memory");
+diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+index db71cf64204b..cc2fec3de4b7 100644
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -182,8 +182,9 @@ SYM_INNER_LABEL(secondary_startup_64_no_verify, SYM_L_GLOBAL)
+ 	xorl	%r15d, %r15d
+ 
+ 	/* Derive the runtime physical address of init_top_pgt[] */
+-	movq	phys_base(%rip), %rax
+-	addq	$(init_top_pgt - __START_KERNEL_map), %rax
++	leaq	init_top_pgt(%rip), %rax
++	subq	$__START_KERNEL_map, %rax
++	addq	phys_base(%rip), %rax
+ 
+ 	/*
+ 	 * Retrieve the modifier (SME encryption mask if SME is active) to be
+@@ -314,7 +315,8 @@ SYM_INNER_LABEL(common_startup_64, SYM_L_LOCAL)
+ 
+ .Lsetup_cpu:
+ 	/* Get the per cpu offset for the given CPU# which is in ECX */
+-	movq	__per_cpu_offset(,%rcx,8), %rdx
++	leaq	__per_cpu_offset(%rip), %rdx
++	movq	(%rdx,%rcx,8), %rdx
+ #else
+ 	xorl	%edx, %edx /* zero-extended to clear all of RDX */
+ #endif /* CONFIG_SMP */
+@@ -325,7 +327,8 @@ SYM_INNER_LABEL(common_startup_64, SYM_L_LOCAL)
+ 	 *
+ 	 * RDX contains the per-cpu offset
+ 	 */
+-	movq	pcpu_hot + X86_current_task(%rdx), %rax
++	leaq	pcpu_hot + X86_current_task(%rip), %rax
++	movq	(%rax,%rdx), %rax
+ 	movq	TASK_threadsp(%rax), %rsp
+ 
+ 	/*
+@@ -346,7 +349,8 @@ SYM_INNER_LABEL(common_startup_64, SYM_L_LOCAL)
+ 	 */
+ 	subq	$16, %rsp
+ 	movw	$(GDT_SIZE-1), (%rsp)
+-	leaq	gdt_page(%rdx), %rax
++	leaq	gdt_page(%rip), %rax
++	addq	%rdx, %rax
+ 	movq	%rax, 2(%rsp)
+ 	lgdt	(%rsp)
+ 	addq	$16, %rsp
+diff --git a/arch/x86/kernel/relocate_kernel_64.S b/arch/x86/kernel/relocate_kernel_64.S
+index e9e88c342f75..cbfd0227ea3e 100644
+--- a/arch/x86/kernel/relocate_kernel_64.S
++++ b/arch/x86/kernel/relocate_kernel_64.S
+@@ -106,6 +106,9 @@ SYM_CODE_START_NOALIGN(relocate_kernel)
+ 	/* setup a new stack at the end of the physical control page */
+ 	lea	PAGE_SIZE(%r8), %rsp
+ 
++	/* take the virtual address of virtual_mapped() before jumping */
++	leaq	virtual_mapped(%rip), %r14
++
+ 	/* jump to identity mapped page */
+ 	addq	$(identity_mapped - relocate_kernel), %r8
+ 	pushq	%r8
+@@ -225,8 +228,7 @@ SYM_CODE_START_LOCAL_NOALIGN(identity_mapped)
+ 	movq	%rax, %cr3
+ 	lea	PAGE_SIZE(%r8), %rsp
+ 	call	swap_pages
+-	movq	$virtual_mapped, %rax
+-	pushq	%rax
++	pushq	%r14
+ 	ANNOTATE_UNRET_SAFE
+ 	ret
+ 	int3
 -- 
 2.46.0.792.g87dc391469-goog
 
