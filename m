@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A94E7C369AB
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 08:43:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.803577.1214279 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CAFC369AB
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 08:51:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.803618.1214299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stNc7-0006db-Ur; Wed, 25 Sep 2024 08:43:11 +0000
+	id 1stNkL-0002Aw-3M; Wed, 25 Sep 2024 08:51:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 803577.1214279; Wed, 25 Sep 2024 08:43:11 +0000
+Received: by outflank-mailman (output) from mailman id 803618.1214299; Wed, 25 Sep 2024 08:51:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stNc7-0006dF-R7; Wed, 25 Sep 2024 08:43:11 +0000
-Received: by outflank-mailman (input) for mailman id 803577;
- Wed, 25 Sep 2024 08:43:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stNkL-0002Ap-0D; Wed, 25 Sep 2024 08:51:41 +0000
+Received: by outflank-mailman (input) for mailman id 803618;
+ Wed, 25 Sep 2024 08:51:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aBXn=QX=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1stNc6-0005cc-NC
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 08:43:10 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 316db50a-7b1a-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 10:43:10 +0200 (CEST)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53659867cbdso9526179e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 01:43:10 -0700 (PDT)
-Received: from localhost ([213.195.124.163]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9392f342b2sm186015666b.35.2024.09.25.01.43.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 01:43:08 -0700 (PDT)
+ <SRS0=lFoA=QX=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1stNkK-0002Aj-45
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 08:51:40 +0000
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [2a00:1450:4864:20::531])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 601b3943-7b1b-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 10:51:38 +0200 (CEST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5c25f01879fso8083659a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 01:51:38 -0700 (PDT)
+Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9392f57fdfsm186568766b.90.2024.09.25.01.51.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Sep 2024 01:51:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,197 +47,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 316db50a-7b1a-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 601b3943-7b1b-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1727253789; x=1727858589; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OIoU0qLfgLq7otbwa+2RabVnL5gbGYSnBya+EH+CZUc=;
-        b=ERtN6oMhiFptWQSrK1zE+UjA9479uOME3KUOJxFAfwO/B++VYqEHOLDKcK7vAr4RS6
-         ES8aIMWrIF1XzhmqDfH73HZeWjx1xgAgTURet51w4oAq+Ub+4kEi9J6p13nynYYYDU+d
-         ZbhqxQ9oE5PZGB7xICwuh3sBRhmLBTl1XVXzs=
+        d=citrix.com; s=google; t=1727254297; x=1727859097; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=AAc33UcWa2W1MsvdYtPw5Yuse75KweBQxY31pqOUX4Y=;
+        b=T0zrpO29luhJluCw5sdFOH371UGYNESzFR5ETrkgbinM3obFgeeGipOKAHqJFqTrvM
+         GXaJifBk0sPqk3JKXQDKt+3lGf/b1vmbVay3nC72I+AREkjZupxnr/vzsybARCrOcZ1p
+         7wRcSQyO8YxXJc91NWB+OUg0I8BUFxAvNBjMw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727253789; x=1727858589;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OIoU0qLfgLq7otbwa+2RabVnL5gbGYSnBya+EH+CZUc=;
-        b=BqBPR6tvGF7RPM3hbGN1NMv9DztuIFizFzyQb5Ris6RJRlm+pAiVBIS8Uj4fHgwIQx
-         H0xOg/9JQUXvGDa/PpUmCGymehPHqEUaJpjeAdVal7Ev9325CkZa6FmP1LxxVb74kFbT
-         8AC17Ke5qAiJPr6aHFtjQDgOIV18/bWBrfChjMvCPbs5hpDIjDdzIDT4zB88tRTH4cU9
-         NRG8GniCKcZJRHKLOueasrLvNeGyi5X73r+51DcxddGP25jiZJYgP+G5at/zRqXGRY9V
-         5Yd8DKuzQu4VVLKAGgg9EKXlzIpMBU31mfDnzdzOB9g/GmrshFHJZaFhqojQW5Fa78E9
-         t12g==
-X-Gm-Message-State: AOJu0YwBdSd7zuMnhekvpMv9bXsyc3bV2YZo0Jiun/9PKkCVQUBqCIXG
-	X5C6kRBzYxlTdPvoENKF9dqcs1LditlqDeWcfN7ES6HmHH/iwYZ/MyDXgOKZbybNC5/eGaNjiM8
-	4
-X-Google-Smtp-Source: AGHT+IGAJxXrOJKWWYE++Az9EmNjRFtYtY10OTMbUrs4O6zomSSaPkMP+kehHNh2F/62zfuytT44Ig==
-X-Received: by 2002:a05:6512:a8d:b0:536:53e3:feae with SMTP id 2adb3069b0e04-5387048a6cbmr1383668e87.11.1727253789227;
-        Wed, 25 Sep 2024 01:43:09 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v2 5/6] x86/alternatives: do not BUG during apply
-Date: Wed, 25 Sep 2024 10:42:38 +0200
-Message-ID: <20240925084239.85649-6-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240925084239.85649-1-roger.pau@citrix.com>
-References: <20240925084239.85649-1-roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1727254297; x=1727859097;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AAc33UcWa2W1MsvdYtPw5Yuse75KweBQxY31pqOUX4Y=;
+        b=Ze62H74nwyYFrWjSu99BM6ixS88UWnbz+GkrvNnn3wLH1AFnIjWcLm7VHBgRW1hQiM
+         mZIg/PReXTmNlKSVXx3H6Edqv2uStlJmJ4i6vBAJe23D+dRIDCUyRiM0t1njwkZJnGGi
+         mcRh64JoMtzCPYwySCrE+hEW40Yfedarbppc2Oz6I298XeHnR/JUyhO4QgdkyYwO+Nii
+         ks7ZHaXMXTUefnVuMWj+hs9BD/QXwL7+hVOQUP2WiKwn9AGpR+h5qNGM4FdmKnGumKDE
+         IuKdVXZQ/4LGFZu/02Lu/bTQV92kd79cYBciijGlwZuXzi+OiKimUZbpCNfd+z9acIHy
+         22hg==
+X-Forwarded-Encrypted: i=1; AJvYcCWxzfucBL7X8IYOCp9nJo2HAuZULBHYGkYt0N7xUXUlbDBIIf+aYty1mBS4wyWOJyQG1b0VfJqVkr4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzY/tsXFvl71uRLfAW33TaoYzivqCvyiCU71gqGMaoYRFmM7NV7
+	YFHIMfRHqOQIZd3ZYNefZjkAKW5duceCeixymxIS8AEVE20zMIgWsipxGNcvxQw=
+X-Google-Smtp-Source: AGHT+IH8QgMzlflCGdmg3F/FcnTqu9kfRu3FLyrXcMzuXK1SVT0llZpztoxsoLcbGfLmMuTFx3GQLA==
+X-Received: by 2002:a17:907:1b02:b0:a8a:794b:9888 with SMTP id a640c23a62f3a-a93a03f578amr151816366b.36.1727254297349;
+        Wed, 25 Sep 2024 01:51:37 -0700 (PDT)
+Message-ID: <07b73cc7-2129-4ef8-8bc5-f85417f74ea7@citrix.com>
+Date: Wed, 25 Sep 2024 09:51:36 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/6] x86/alternative: build time check feature is in
+ range
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>
+References: <20240925084239.85649-1-roger.pau@citrix.com>
+ <20240925084239.85649-7-roger.pau@citrix.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20240925084239.85649-7-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-alternatives is used both at boot time, and when loading livepatch payloads.
-While for the former it makes sense to panic, it's not useful for the later, as
-for livepatches it's possible to fail to load the livepatch if alternatives
-cannot be resolved and continue operating normally.
+On 25/09/2024 9:42 am, Roger Pau Monne wrote:
+> diff --git a/xen/arch/x86/include/asm/alternative.h b/xen/arch/x86/include/asm/alternative.h
+> index 69555d781ef9..b7f155994b2c 100644
+> --- a/xen/arch/x86/include/asm/alternative.h
+> +++ b/xen/arch/x86/include/asm/alternative.h
+> @@ -7,6 +7,7 @@
+>  #include <xen/lib.h>
+>  #include <xen/stringify.h>
+>  #include <asm/asm-macros.h>
+> +#include <asm/cpufeatureset.h>
+>  
+>  struct __packed alt_instr {
+>      int32_t  orig_offset;   /* original instruction */
+> @@ -59,6 +60,9 @@ extern void alternative_branches(void);
+>                      alt_repl_len(n2)) "-" alt_orig_len)
+>  
+>  #define ALTINSTR_ENTRY(feature, num)                                    \
+> +        " .if " __stringify(feature) " >= " __stringify(NCAPINTS * 32) "\n"\
 
-Relax the BUGs in _apply_alternatives() to instead return an error code.  The
-caller will figure out whether the failures are fatal and panic.
+Please use STR() from macros.h.  It's shorter, and we're trying to
+retire the use of __stringify().
 
-Print an error message to provide some user-readable information about what
-went wrong.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v1:
- - Unconditionally return from _apply_alternative() and let the caller panic
-   if required.
- - Remove test, as next patch imposes restrictions that break the test.
----
- xen/arch/x86/alternative.c             | 46 ++++++++++++++++++++------
- xen/arch/x86/include/asm/alternative.h |  2 +-
- xen/common/livepatch.c                 | 10 +++++-
- 3 files changed, 46 insertions(+), 12 deletions(-)
-
-diff --git a/xen/arch/x86/alternative.c b/xen/arch/x86/alternative.c
-index 7824053c9d33..c8848ba6006e 100644
---- a/xen/arch/x86/alternative.c
-+++ b/xen/arch/x86/alternative.c
-@@ -175,9 +175,9 @@ extern void *const __initdata_cf_clobber_end[];
-  * invocation, such that no CALLs/JMPs to NULL pointers will be left
-  * around. See also the further comment below.
-  */
--static void init_or_livepatch _apply_alternatives(struct alt_instr *start,
--                                                  struct alt_instr *end,
--                                                  bool force)
-+static int init_or_livepatch _apply_alternatives(struct alt_instr *start,
-+                                                 struct alt_instr *end,
-+                                                 bool force)
- {
-     struct alt_instr *a, *base;
- 
-@@ -198,9 +198,29 @@ static void init_or_livepatch _apply_alternatives(struct alt_instr *start,
-         uint8_t buf[MAX_PATCH_LEN];
-         unsigned int total_len = a->orig_len + a->pad_len;
- 
--        BUG_ON(a->repl_len > total_len);
--        BUG_ON(total_len > sizeof(buf));
--        BUG_ON(a->cpuid >= NCAPINTS * 32);
-+        if ( a->repl_len > total_len )
-+        {
-+            printk(XENLOG_ERR
-+                   "alt replacement size (%#x) bigger than destination (%#x)\n",
-+                   a->repl_len, total_len);
-+            return -ENOSPC;
-+        }
-+
-+        if ( total_len > sizeof(buf) )
-+        {
-+            printk(XENLOG_ERR
-+                   "alt destination size (%#x) bigger than buffer (%#zx)\n",
-+                   total_len, sizeof(buf));
-+            return -ENOSPC;
-+        }
-+
-+        if ( a->cpuid >= NCAPINTS * 32 )
-+        {
-+             printk(XENLOG_ERR
-+                   "alt CPU feature (%#x) outside of featureset range (%#x)\n",
-+                   a->cpuid, NCAPINTS * 32);
-+            return -ERANGE;
-+        }
- 
-         /*
-          * Detect sequences of alt_instr's patching the same origin site, and
-@@ -356,12 +376,14 @@ static void init_or_livepatch _apply_alternatives(struct alt_instr *start,
- 
-         printk("altcall: Optimised away %u endbr64 instructions\n", clobbered);
-     }
-+
-+    return 0;
- }
- 
- #ifdef CONFIG_LIVEPATCH
--void apply_alternatives(struct alt_instr *start, struct alt_instr *end)
-+int apply_alternatives(struct alt_instr *start, struct alt_instr *end)
- {
--    _apply_alternatives(start, end, true);
-+    return _apply_alternatives(start, end, true);
- }
- #endif
- 
-@@ -383,6 +405,8 @@ static int __init cf_check nmi_apply_alternatives(
-      */
-     if ( !(alt_done & alt_todo) )
-     {
-+        int rc;
-+
-         /*
-          * Relax perms on .text to be RWX, so we can modify them.
-          *
-@@ -394,8 +418,10 @@ static int __init cf_check nmi_apply_alternatives(
-                                  PAGE_HYPERVISOR_RWX);
-         flush_local(FLUSH_TLB_GLOBAL);
- 
--        _apply_alternatives(__alt_instructions, __alt_instructions_end,
--                            alt_done);
-+        rc = _apply_alternatives(__alt_instructions, __alt_instructions_end,
-+                                 alt_done);
-+        if ( rc )
-+            panic("Unable to apply alternatives: %d\n", rc);
- 
-         /*
-          * Reinstate perms on .text to be RX.  This also cleans out the dirty
-diff --git a/xen/arch/x86/include/asm/alternative.h b/xen/arch/x86/include/asm/alternative.h
-index a86eadfaecbd..69555d781ef9 100644
---- a/xen/arch/x86/include/asm/alternative.h
-+++ b/xen/arch/x86/include/asm/alternative.h
-@@ -24,7 +24,7 @@ struct __packed alt_instr {
- 
- extern void add_nops(void *insns, unsigned int len);
- /* Similar to alternative_instructions except it can be run with IRQs enabled. */
--extern void apply_alternatives(struct alt_instr *start, struct alt_instr *end);
-+extern int apply_alternatives(struct alt_instr *start, struct alt_instr *end);
- extern void alternative_instructions(void);
- extern void alternative_branches(void);
- 
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 895c425cd5ea..c777f64d88d4 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -896,7 +896,15 @@ static int prepare_payload(struct payload *payload,
-                 return -EINVAL;
-             }
-         }
--        apply_alternatives(start, end);
-+
-+        rc = apply_alternatives(start, end);
-+        if ( rc )
-+        {
-+            printk(XENLOG_ERR LIVEPATCH "%s applying alternatives failed: %d\n",
-+                   elf->name, rc);
-+            return rc;
-+        }
-+
-     alt_done:;
- #else
-         printk(XENLOG_ERR LIVEPATCH "%s: We don't support alternative patching\n",
--- 
-2.46.0
-
+Happy to fix on commit.  Reviewed-by: Andrew Cooper
+<andrew.cooper3@citrix.com>
 
