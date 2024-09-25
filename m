@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F809CCF9E4
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804131.1215148 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0C2CCF9E0
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.804104.1215091 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTj3-0001Jg-Qj; Wed, 25 Sep 2024 15:14:45 +0000
+	id 1stTiw-00089U-W4; Wed, 25 Sep 2024 15:14:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804131.1215148; Wed, 25 Sep 2024 15:14:45 +0000
+Received: by outflank-mailman (output) from mailman id 804104.1215091; Wed, 25 Sep 2024 15:14:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTj2-0001DT-OG; Wed, 25 Sep 2024 15:14:44 +0000
-Received: by outflank-mailman (input) for mailman id 804131;
- Wed, 25 Sep 2024 15:06:37 +0000
+	id 1stTiw-00086G-Hf; Wed, 25 Sep 2024 15:14:38 +0000
+Received: by outflank-mailman (input) for mailman id 804104;
+ Wed, 25 Sep 2024 15:02:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1w1I=QX=flex--ardb.bounces.google.com=3Fib0ZggKCXEPgSQ+VXiVddVaT.RdbmTc-STkTaaXhih.mTcegdYTRi.dgV@srs-se1.protection.inumbo.net>)
- id 1stTXV-0002k3-1B
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:49 +0000
-Received: from mail-wr1-x44a.google.com (mail-wr1-x44a.google.com
- [2a00:1450:4864:20::44a])
+ <SRS0=G4Vb=QX=flex--ardb.bounces.google.com=3-yX0ZggKCVYyF1z+46H4CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@srs-se1.protection.inumbo.net>)
+ id 1stTX4-0002k3-IN
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:22 +0000
+Received: from mail-ed1-x54a.google.com (mail-ed1-x54a.google.com
+ [2a00:1450:4864:20::54a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 39ab8c52-7b4f-11ef-99a2-01e77a169b0f;
- Wed, 25 Sep 2024 17:02:47 +0200 (CEST)
-Received: by mail-wr1-x44a.google.com with SMTP id
- ffacd0b85a97d-37ccc99920dso235249f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:47 -0700 (PDT)
+ id 29f85010-7b4f-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 17:02:21 +0200 (CEST)
+Received: by mail-ed1-x54a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c4230b10a0so5599187a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 39ab8c52-7b4f-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 29f85010-7b4f-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276567; x=1727881367; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276540; x=1727881340; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=pNx8CgL2JjB1FACn8gZOCDgH3XlG/cZ7BMhQN82yM0M=;
-        b=HGdsDOCS6/7pimoGP36sOPYpLchRkC6uM1XuL4PL2C52JxF4xGOEpbJxy4pB7MHD4S
-         WbnTC3I4Nw6z2Vfy7fAl+qmXr84Mex+oGZIAHT5du3bwWG/2fRC6VSfv7Oim4mpKokzZ
-         Ssdb28sxl4gKUZZ95Xq7V5GUj+AY+6eaV3HC1bSkKGSjGJoCvwsobCfVCAPuDEEsc2uA
-         VXA3v3lUtreK6Nn+RCWKna0DUc0cxbHxjHP8vHW5fa2Zs7ku+BNXgIJTNj+i1mMPjNUl
-         ROA+Ka7POsnllX6uBmAFJOqey+I6GnDrWdGfj2Dt1QNiSsu/TMzSEmYEnKGOl3kiutZy
-         KERA==
+        bh=sMLI1adUSxUIp8UXfDcqdD38QxXI+e+F/+Ag4yCxL7E=;
+        b=RYbNlnXxxFLiRAJ9AyvJiPiOVrWfadEIV8YL8vDT8QzEr6RTf9W5EEXLvOktBt1xLF
+         CzyI1+XSoIZ1OW1jB6P1WO8MVQe6O9Sx0Q6HZWOWJMprZLUL5pDuHVCeKllX+1ayNhxR
+         95va/IzgXJQzIGqJDXFpueajato1uc+N8toEJNcRwFqOig8PoN1XbKd7U3ZK6iYO9WR+
+         W1NoWbjkCy2cFY8+I3ZLwYwFeA1B+ePUySj5RS3lVmu82HSdynYZFU35a+7+1KptNAG2
+         pIe3nFMOCTn+rtfJ5ow+WzTFOVtbGaSg3M/PDJHQHvc9vS0WXSgcJiiEjN2GKmJ0DcZD
+         t0cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276567; x=1727881367;
+        d=1e100.net; s=20230601; t=1727276540; x=1727881340;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=pNx8CgL2JjB1FACn8gZOCDgH3XlG/cZ7BMhQN82yM0M=;
-        b=Orkvd6W022Ga5CljHSr9bz6kTHTWdG1ceKuXiqWou/GIzt5EARTLCntH9HLJwACRGr
-         hWRO4BgxPgkW/beHs6bD7jJwKi4MOzqvwL91h4WGE+hyuoAcBC6vY6OaPQThk3RDR+mD
-         XG07CvotTaZqnpNOsUSl2GJGb68dLSRz0qJvgiIAsetyqAbMK9wGtIdQUtYZvhZdAfw3
-         xLqmTeK31M/DYCRScnBIn6Q8SNl5f0z+IfRZzHrRjznZCValf11SbGFcS20pxstWPo7a
-         pB+W+814wa45wQWATEZPDxmdO9V5zSbaTdJe1XhDVjTVQlD+eBTf07ygvkQDuNb3m02I
-         8Low==
-X-Forwarded-Encrypted: i=1; AJvYcCUaDKYxCOSlGTng8eJahfFy80Jxf3/fjIXmbhFUZLkXkol5B7cj0Yy0xqfA6lKkK8SWG8xKHur+tLE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzhbct48azb++cGSA8gX/ueTDlWedF+edQ/PakcQ1M5kgk7bKpu
-	q/6NBJHYjYwjy4cYvtP1/qkPRam/dDv/mxyti8/JMdEiHQlBWNNqZmD9mgNR3XjG2FOuvw==
-X-Google-Smtp-Source: AGHT+IHtZA65C9eNefhgBWqmYh0kGm6u7UMHidCQ+DZrqbEOemMqvMt90MEtVjIphkQcIFg1qUNObHvF
+        bh=sMLI1adUSxUIp8UXfDcqdD38QxXI+e+F/+Ag4yCxL7E=;
+        b=rgnQ/fCU9I26rgZkb1bZMiqIi0z+r2/LEtnak/r4uASA98juxmU/e3GSepZi/bHekP
+         e0Q1Z7PFOAd0VqOPxcttj7k8clZGFqnInvfp0az2I89Df0Bv7cxLfyB12GOJUhmQZGQV
+         /pOyQMPsdSe6oiDl6Nv/tV+1y4BvwXmWxFpFxUIt48mUgWwQkq2BhLCv+kK+E1vWt7JX
+         wLTjC2PzKSoTAOXV6qk5ZMRhPB1TbRtfLz4svvKole9zvbUIusSaukt3KS6n91CQqyHF
+         XCzP0ZGU8X+jHVSZgDaMrFDvGj/UBLiBnkIHTw/AcG8GXoFRbbotsKjbM+YrHaL6uqw/
+         DS5A==
+X-Forwarded-Encrypted: i=1; AJvYcCVraKT35Ric9qHKi9xddAn6FXWUw7WQmoyCg1o8YEmHSyvGF+CbWuPE5/KPs4KWx+yy0kR3hnShuKo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwiWexBmNdcvb4VbCY8Y1LN3YQ9SHOybxvz4wZzWFu70mAndJwS
+	e0QVstos7ApOTPiEJCAAZ0MHqiLkM/+6hF1ObjyWZEqnPLW+mTNfb/Dwz5JO+rK1xI01mg==
+X-Google-Smtp-Source: AGHT+IHqdrbnTURYSpf/5afh17e1i3rk5opqYbKAlLurQBauppiTWqSh5+YV6ICpl369+Ha35/G5jy3r
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a5d:5e04:0:b0:37c:c51b:d07f with SMTP id
- ffacd0b85a97d-37cc51bd43bmr945f8f.9.1727276566478; Wed, 25 Sep 2024 08:02:46
- -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:22 +0200
+ (user=ardb job=sendgmr) by 2002:a17:906:6d8:b0:a8a:76fd:ae67 with SMTP id
+ a640c23a62f3a-a93a061ba72mr129666b.10.1727276539991; Wed, 25 Sep 2024
+ 08:02:19 -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:12 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4300; i=ardb@kernel.org;
- h=from:subject; bh=LZda20wnQiwQiTXt6tiHm30A1wODb0KBnxm/teE+Lu4=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6unSO+7/NsayfzpQ7uW+6/sf035bm8SjMXouItt6v
- vsqNLN3lLIwiHEwyIopsgjM/vtu5+mJUrXOs2Rh5rAygQxh4OIUgIlUFzIyLClfembn6Wlfb79Z
- nLiyrmmade3VvmNH2xq0FwTP8FnOwsHwmyXhPONLDfu9MQfFQ+MyCsJWuy/VFOpa8t9x77FzLsv /8AAA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2056; i=ardb@kernel.org;
+ h=from:subject; bh=VKZKKQxE7f774DDxhaNjhf6gM8y+4CHtkhz4ITFKHVU=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6l6HjphM91K+tMbfPlum+q87xXbcaBq/plqB6J0rH
+ Clz7dQ6SlkYxDgYZMUUWQRm/3238/REqVrnWbIwc1iZQIYwcHEKwESez2L4w3XU9mNkQveSSXqf
+ bkfpTfktlPbu753X3m4//t4RvX456gUjw9ItwQrWWxY9aPiwtX3xVeeW5YpKNdGO1l4qU7KmnF4 VzwoA
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-52-ardb+git@google.com>
-Subject: [RFC PATCH 22/28] asm-generic: Treat PIC .data.rel.ro sections as .rodata
+Message-ID: <20240925150059.3955569-42-ardb+git@google.com>
+Subject: [RFC PATCH 12/28] x86/pm-trace: Use RIP-relative accesses for .tracedata
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,108 +110,57 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-When running the compiler in PIC/PIE mode, it will emit data objects
-that are 'const' in the context of the program into the .data.rel.ro
-section if they contain absolute addresses of statically allocated
-global objects. This helps the dynamic loader distinguish between
-objects that are truly const from objects that will need to be fixed up
-by the loader before starting the program.
-
-This is not a concern for the kernel, but it does mean those
-.data.rel.ro input sections need to be handled. So treat them as
-.rodata.
-
-It also means some explicit uses of .rodata for global structures
-containing absolute addresses need to be changed to .data.rel.ro to
-prevent the linker from warning about incompatible section flags.
+Use RIP-relative accesses and 32-bit offsets for .tracedata, to avoid
+the need for relocation fixups at boot time.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- include/asm-generic/vmlinux.lds.h       |  2 +-
- include/linux/compiler.h                |  2 +-
- scripts/kallsyms.c                      |  2 +-
- tools/objtool/check.c                   | 11 ++++++-----
- tools/objtool/include/objtool/special.h |  2 +-
- 5 files changed, 10 insertions(+), 9 deletions(-)
+ arch/x86/include/asm/pm-trace.h | 4 ++--
+ drivers/base/power/trace.c      | 6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
-index cc14d780c70d..2b079f73820f 100644
---- a/include/asm-generic/vmlinux.lds.h
-+++ b/include/asm-generic/vmlinux.lds.h
-@@ -456,7 +456,7 @@
- 	. = ALIGN((align));						\
- 	.rodata           : AT(ADDR(.rodata) - LOAD_OFFSET) {		\
- 		__start_rodata = .;					\
--		*(.rodata) *(.rodata.*)					\
-+		*(.rodata .rodata.* .data.rel.ro*)			\
- 		SCHED_DATA						\
- 		RO_AFTER_INIT_DATA	/* Read only after init */	\
- 		. = ALIGN(8);						\
-diff --git a/include/linux/compiler.h b/include/linux/compiler.h
-index ec55bcce4146..f7c48b7c0a6b 100644
---- a/include/linux/compiler.h
-+++ b/include/linux/compiler.h
-@@ -133,7 +133,7 @@ void ftrace_likely_update(struct ftrace_likely_data *f, int val,
- #define annotate_unreachable() __annotate_unreachable(__COUNTER__)
+diff --git a/arch/x86/include/asm/pm-trace.h b/arch/x86/include/asm/pm-trace.h
+index bfa32aa428e5..123faf978473 100644
+--- a/arch/x86/include/asm/pm-trace.h
++++ b/arch/x86/include/asm/pm-trace.h
+@@ -8,10 +8,10 @@
+ do {								\
+ 	if (pm_trace_enabled) {					\
+ 		const void *tracedata;				\
+-		asm volatile(_ASM_MOV " $1f,%0\n"		\
++		asm volatile("lea " _ASM_RIP(1f) ", %0\n"	\
+ 			     ".section .tracedata,\"a\"\n"	\
+ 			     "1:\t.word %c1\n\t"		\
+-			     _ASM_PTR " %c2\n"			\
++			     ".long %c2 - .\n"			\
+ 			     ".previous"			\
+ 			     :"=r" (tracedata)			\
+ 			     : "i" (__LINE__), "i" (__FILE__));	\
+diff --git a/drivers/base/power/trace.c b/drivers/base/power/trace.c
+index cd6e559648b2..686a0276ccfc 100644
+--- a/drivers/base/power/trace.c
++++ b/drivers/base/power/trace.c
+@@ -167,7 +167,7 @@ EXPORT_SYMBOL(set_trace_device);
+ void generate_pm_trace(const void *tracedata, unsigned int user)
+ {
+ 	unsigned short lineno = *(unsigned short *)tracedata;
+-	const char *file = *(const char **)(tracedata + 2);
++	const char *file = offset_to_ptr((int *)(tracedata + 2));
+ 	unsigned int user_hash_value, file_hash_value;
  
- /* Annotate a C jump table to allow objtool to follow the code flow */
--#define __annotate_jump_table __section(".rodata..c_jump_table")
-+#define __annotate_jump_table __section(".data.rel.ro.c_jump_table")
+ 	if (!x86_platform.legacy.rtc)
+@@ -187,9 +187,9 @@ static int show_file_hash(unsigned int value)
  
- #else /* !CONFIG_OBJTOOL */
- #define annotate_reachable()
-diff --git a/scripts/kallsyms.c b/scripts/kallsyms.c
-index 9c34b9397872..1700e97400aa 100644
---- a/scripts/kallsyms.c
-+++ b/scripts/kallsyms.c
-@@ -357,7 +357,7 @@ static void write_src(void)
- 	printf("#define ALGN .balign 4\n");
- 	printf("#endif\n");
- 
--	printf("\t.section .rodata, \"a\"\n");
-+	printf("\t.section .data.rel.ro, \"a\"\n");
- 
- 	output_label("kallsyms_num_syms");
- 	printf("\t.long\t%u\n", table_cnt);
-diff --git a/tools/objtool/check.c b/tools/objtool/check.c
-index 01237d167223..04725bd83232 100644
---- a/tools/objtool/check.c
-+++ b/tools/objtool/check.c
-@@ -2575,15 +2575,16 @@ static void mark_rodata(struct objtool_file *file)
- 	 * Search for the following rodata sections, each of which can
- 	 * potentially contain jump tables:
- 	 *
--	 * - .rodata: can contain GCC switch tables
--	 * - .rodata.<func>: same, if -fdata-sections is being used
--	 * - .rodata..c_jump_table: contains C annotated jump tables
-+	 * - .rodata .data.rel.ro		: can contain GCC switch tables
-+	 * - .rodata.<func> .data.rel.ro.<func>	: same, if -fdata-sections is being used
-+	 * - .data.rel.ro.c_jump_table		: contains C annotated jump tables
- 	 *
- 	 * .rodata.str1.* sections are ignored; they don't contain jump tables.
- 	 */
- 	for_each_sec(file, sec) {
--		if (!strncmp(sec->name, ".rodata", 7) &&
--		    !strstr(sec->name, ".str1.")) {
-+		if ((!strncmp(sec->name, ".rodata", 7) &&
-+		     !strstr(sec->name, ".str1.")) ||
-+		    !strncmp(sec->name, ".data.rel.ro", 12)) {
- 			sec->rodata = true;
- 			found = true;
- 		}
-diff --git a/tools/objtool/include/objtool/special.h b/tools/objtool/include/objtool/special.h
-index 86d4af9c5aa9..89ee12b1a138 100644
---- a/tools/objtool/include/objtool/special.h
-+++ b/tools/objtool/include/objtool/special.h
-@@ -10,7 +10,7 @@
- #include <objtool/check.h>
- #include <objtool/elf.h>
- 
--#define C_JUMP_TABLE_SECTION ".rodata..c_jump_table"
-+#define C_JUMP_TABLE_SECTION ".data.rel.ro.c_jump_table"
- 
- struct special_alt {
- 	struct list_head list;
+ 	match = 0;
+ 	for (tracedata = __tracedata_start ; tracedata < __tracedata_end ;
+-			tracedata += 2 + sizeof(unsigned long)) {
++			tracedata += 2 + sizeof(int)) {
+ 		unsigned short lineno = *(unsigned short *)tracedata;
+-		const char *file = *(const char **)(tracedata + 2);
++		const char *file = offset_to_ptr((int *)(tracedata + 2));
+ 		unsigned int hash = hash_string(lineno, file, FILEHASH);
+ 		if (hash != value)
+ 			continue;
 -- 
 2.46.0.792.g87dc391469-goog
 
