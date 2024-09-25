@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C73CCF9E6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0788CCF9E4
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804137.1215166 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.804102.1215083 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTj6-0001xE-VC; Wed, 25 Sep 2024 15:14:48 +0000
+	id 1stTiw-0007tl-60; Wed, 25 Sep 2024 15:14:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804137.1215166; Wed, 25 Sep 2024 15:14:48 +0000
+Received: by outflank-mailman (output) from mailman id 804102.1215083; Wed, 25 Sep 2024 15:14:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTj5-0001p2-8F; Wed, 25 Sep 2024 15:14:47 +0000
-Received: by outflank-mailman (input) for mailman id 804137;
- Wed, 25 Sep 2024 15:06:48 +0000
+	id 1stTiv-0007mQ-MN; Wed, 25 Sep 2024 15:14:37 +0000
+Received: by outflank-mailman (input) for mailman id 804102;
+ Wed, 25 Sep 2024 15:02:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sByw=QX=flex--ardb.bounces.google.com=3Gyb0ZggKCXYUlXV+acnaiiafY.WigrYh-XYpYffcmnm.rYhjlidYWn.ila@srs-se1.protection.inumbo.net>)
- id 1stTXZ-0002UM-9r
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:53 +0000
+ <SRS0=254E=QX=flex--ardb.bounces.google.com=3-SX0ZggKCVQwDzx+24F2AA270.yA8J09-z0H0774EFE.J09BDA50yF.AD2@srs-se1.protection.inumbo.net>)
+ id 1stTX1-0002UM-Ii
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:19 +0000
 Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
  [2607:f8b0:4864:20::114a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3c933c09-7b4f-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:02:52 +0200 (CEST)
+ id 28849315-7b4f-11ef-a0ba-8be0dac302b0;
+ Wed, 25 Sep 2024 17:02:19 +0200 (CEST)
 Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-6db7a8c6910so102668377b3.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:52 -0700 (PDT)
+ 00721157ae682-6d7124939beso104377427b3.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,51 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c933c09-7b4f-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 28849315-7b4f-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276571; x=1727881371; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276538; x=1727881338; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=q7Siui3EQaHZbOP2Zf5u6bj1Z6F9xVc5htz8ViId7Yw=;
-        b=UgQOwkIlTsd0WBE1LlF2Zrm2//t8ge8Bgz9/+aVGlFf6Zo+yAMX/YN0BUqP+oWM8HO
-         XzA4La0jXuKXbLUaE0AlzTY5IUvCw7Mo03Hq/teG9VPKNEbGVl5LBVzZGN371oVm10/X
-         qrdV39t/1lu2VqgSaM1UvjlK6YP6AGZqm08rzRm6Re2WAzBl2W+ANWkdZy0kD/1/Uj4B
-         wW0rFWK84MrYFnTXC/uxnJa1KKbkUc8kWxsEa/fYJ9x8dP3QJstIs/+uDCBfuhYf3CRG
-         AlFM10f7tJ1Hl+otrRWq0Y4uJAvRlR0cDn+Qp6D9cKe1NPHtl9m+uv+bw1tNhlDkD8aI
-         cy/w==
+        bh=WebA59vxPkU4u7rhQajyH4BvEeqGZRhskbQXw1lowfs=;
+        b=bltNc210DV+lNvtCsuh7mnlnVNpa4SLhTYfIpX/0EPMWGKkMFSvSoOG2KROy6er6TW
+         YPSwUUH53s0UOWooHDySPwmCaKio1stBb8YY+0o60K5NYSj/7Squf4RnTwOavmpLkFKL
+         bEwi2ypcExMNcQXJzwYOsMeBpm9NTr36F9kckL1fDASMh7ZKt2RLCGeybdDPCrBQUmsr
+         mARlDpeD9kPkxWagIvb7fGUuAe6YhvmhKu0x2sDq61VaKxTwsblVA1FF4n1F+zvH33mS
+         u3PTt6ebZ9HUNv2P40mfFabxYjJZSyPudKTNk2lde2+6bn3YuqpqnhmW8pCCSGjzRjWH
+         V++w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276571; x=1727881371;
+        d=1e100.net; s=20230601; t=1727276538; x=1727881338;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=q7Siui3EQaHZbOP2Zf5u6bj1Z6F9xVc5htz8ViId7Yw=;
-        b=wOT3B4bpc9ftAkbUHCZg4bPRkCISsOvcHqoUr/Hui1d8etcHkD0lpm2HxM+jNdgwPC
-         DwZZkYoa+rUoFSQ9jm8Epf5SVdFhlwKk3b12ETcH0Cdso/v7bHJx20Vus06aPLM2xKGI
-         7HuC/t5PndK6tc+F+dWSMvRRH090KY4hly0WUQvGJ4X2ZcHV7fJ3gPZwQMKktrOl7UQP
-         RgVPAOebYd9CV/CYlgJ/JOtSyoX60+/6MxTCX9o1gAyONSaRupxgPCHRU3VSqv22deHz
-         37L2vn63pjtpXDoBQv9LfCalSyCf3oolT6bvkTWhBCiQ20iSk8ELkQ/I9Fe4gM3ABH5w
-         nXDA==
-X-Forwarded-Encrypted: i=1; AJvYcCVsALQUbRkD0q3WAR/TNPPj8x44j5rjH2chx4oK4z9ocCXgqYDKOBDpE1KpksR/DLSqPwiDl1ZPLJA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz0Ipvq0XHjL6mYqNzM00mO8QtD8LztYLfgeiVLYshiyN1WnI3J
-	pHa6y/uFaKvHA2xBXboJo7QDkqzHzsxfF9Zo9+RmN8HGRq7fna2BQXAO8abd2sE3H74IGw==
-X-Google-Smtp-Source: AGHT+IGUGK/IbClqwN6y6QvmI8hCfQn6s2hVSiVHB1d+dhN6jVJxxhzTiRxXUiYwgEqTcxKFspPDWKFo
+        bh=WebA59vxPkU4u7rhQajyH4BvEeqGZRhskbQXw1lowfs=;
+        b=sRRBOAmqaS+K/zhl7N8l7gXHNY90uIYCExn+QCJJeW2rznzOxOJPtfwIjPjPcGVoqi
+         9CmcR6O4a+9H18ojSqh9TRZO4H6eqo7DSenv+K6+L/34s1Un7+2x0PKwcQFMLEKlDUEb
+         cAM6h4MHTUoPTwRwvjw8yvmPumSYFpTf/FSsW9X4zFhqvvPJFtSejfgile/FfQ8j+UKM
+         DC4acgBI2qye1xxeLX2/FfnWASvMrkGxpvvhcFg0+c/DT8TNdk68f0vaYOjhKa/vGNmX
+         8lD7ATUg4hWIaHxC24cAJgrpt7unIKfmoLlHRXeaTjmp+tGKWdlmKTIh40YIMczfzkb/
+         MH3w==
+X-Forwarded-Encrypted: i=1; AJvYcCXvbaO1IMcB/Gg0l/y3pmAopii/ZUHnTMc+JwJq/n8i4n90i2ekgpp0poMBb/jOoSd+1yB0m0AwPzY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzYxdYVu3cTzv5QIf5uuL2V4oMHtUqfi4TbvDlj88ZIYtQ3PLTI
+	DyfBudNSLP+9avkdJjAU7tq19igpXN/noP5Mr7WIQAi3ADjcnx86QNx4rIH1RHhgbwtTjA==
+X-Google-Smtp-Source: AGHT+IG1eaRHJ+k+oWi0MEewfWnHRvzWiyuPrZa2XUixnuMGDlz9gyzzCn4pjg7USYksDYWFG76nQbXB
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a05:690c:f90:b0:6c1:298e:5a7 with SMTP id
- 00721157ae682-6e21d9f2676mr100587b3.5.1727276571410; Wed, 25 Sep 2024
- 08:02:51 -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:24 +0200
+ (user=ardb job=sendgmr) by 2002:a81:7c46:0:b0:673:b39a:92ce with SMTP id
+ 00721157ae682-6e21da5ea7bmr151347b3.3.1727276537527; Wed, 25 Sep 2024
+ 08:02:17 -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:11 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2378; i=ardb@kernel.org;
- h=from:subject; bh=s5eg4POBUMz0+xutAa57cnb7wChxapKHTEsRfaj5xkM=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6rmrbx/K9pd0n9poZ7rKarM71/pb64Mu3OE7WFCew
- +trFZHXUcrCIMbBICumyCIw+++7nacnStU6z5KFmcPKBDKEgYtTACYiIMfIsHzp8ptxntWap0qz
- /54LMvVhTo1RvbxcftLGA6VFgfY+Jxn+B/cyx9dHTT/wO+rQQaXszxPMFk1geHr9aqrVTv/NPxI dmAE=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3674; i=ardb@kernel.org;
+ h=from:subject; bh=R6ohiPGa3ul2ikQd2A7YE6wpEPvXq0bd6W2LGMrzZ/k=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6m4L/Wkc7n0aPQzsYULiEQZPMlgefsmsLHv4K8KPe
+ c6T1d0dpSwMYhwMsmKKLAKz/77beXqiVK3zLFmYOaxMIEMYuDgFYCLF8YwMhwNCO7WWnu4+bHJ/
+ R+KN+e/7+Z5GTZy4J83mRy0Xx+UbAowMLwuTAsXUc+SfqAVdK+gtnHdHT+jRjZtrv3D/ms77oD2 BCwA=
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-54-ardb+git@google.com>
-Subject: [RFC PATCH 24/28] tools/objtool: Treat indirect ftrace calls as
- direct calls
+Message-ID: <20240925150059.3955569-41-ardb+git@google.com>
+Subject: [RFC PATCH 11/28] x86/pvh: Avoid absolute symbol references in .head.text
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -111,71 +110,119 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-In some cases, the compiler may rely on indirect calls using GOT slots
-as memory operands to emit function calls. This leaves it up to the
-linker to relax the call to a direct call if possible, i.e., if the
-destination address is known at link time and in range, which may not be
-the case when building shared libraries for user space.
+The .head.text section contains code that may execute from a different
+address than it was linked at. This is fragile, given that the x86 ABI
+can refer to global symbols via absolute or relative references, and the
+toolchain assumes that these are interchangeable, which they are not in
+this particular case.
 
-On x86, this may happen when building in PIC mode with ftrace enabled,
-and given that vmlinux is a fully linked binary, this relaxation is
-always possible, and therefore mandatory per the x86_64 psABI.
+In the case of the PVH code, there are some additional complications:
+- the absolute references are in 32-bit code, which get emitted with
+  R_X86_64_32 relocations, and these are not permitted in PIE code;
+- the code in question is not actually relocatable: it can only run
+  correctly from the physical load address specified in the ELF note.
 
-This means that the indirect calls to __fentry__ that are observeable in
-vmlinux.o will have been converted to direct calls in vmlinux, and can
-be treated as such by objtool.
+So rewrite the code to only rely on relative symbol references: these
+are always 32-bits wide, even in 64-bit code, and are resolved by the
+linker at build time.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- tools/objtool/check.c | 32 ++++++++++++++++++--
- 1 file changed, 30 insertions(+), 2 deletions(-)
+ arch/x86/platform/pvh/head.S | 39 ++++++++++++++------
+ 1 file changed, 27 insertions(+), 12 deletions(-)
 
-diff --git a/tools/objtool/check.c b/tools/objtool/check.c
-index 04725bd83232..94a56099e22d 100644
---- a/tools/objtool/check.c
-+++ b/tools/objtool/check.c
-@@ -1696,11 +1696,39 @@ static int add_call_destinations(struct objtool_file *file)
- 	struct reloc *reloc;
+diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
+index adbf57e83e4e..e6cb7da40e09 100644
+--- a/arch/x86/platform/pvh/head.S
++++ b/arch/x86/platform/pvh/head.S
+@@ -54,7 +54,20 @@ SYM_CODE_START(pvh_start_xen)
+ 	UNWIND_HINT_END_OF_STACK
+ 	cld
  
- 	for_each_insn(file, insn) {
--		if (insn->type != INSN_CALL)
-+		if (insn->type != INSN_CALL &&
-+		    insn->type != INSN_CALL_DYNAMIC)
- 			continue;
- 
- 		reloc = insn_reloc(file, insn);
--		if (!reloc) {
-+		if (insn->type == INSN_CALL_DYNAMIC) {
-+			if (!reloc)
-+				continue;
+-	lgdt (_pa(gdt))
++	/*
++	 * This is position dependent code that can only execute correctly from
++	 * the physical address that the kernel was linked to run at. Use the
++	 * symbols emitted for the ELF note to construct the build time physical
++	 * address of pvh_start_xen(), without relying on absolute 32-bit ELF
++	 * relocations, as these are not supported by the linker when running in
++	 * -pie mode, and should be avoided in .head.text in general.
++	 */
++0:	mov $xen_elfnote_phys32_entry_offset - 0b, %ebp
++	sub $xen_elfnote_phys32_entry - 0b, %ebp
 +
-+			/*
-+			 * GCC 13 and older on x86 will always emit the call to
-+			 * __fentry__ using a relaxable GOT-based symbol
-+			 * reference when operating in PIC mode, i.e.,
-+			 *
-+			 *   call   *0x0(%rip)
-+			 *             R_X86_64_GOTPCRELX  __fentry__-0x4
-+			 *
-+			 * where it is left up to the linker to relax this into
-+			 *
-+			 *   call   __fentry__
-+			 *   nop
-+			 *
-+			 * if __fentry__ turns out to be DSO local, which is
-+			 * always the case for vmlinux. Given that this
-+			 * relaxation is mandatory per the x86_64 psABI, these
-+			 * calls can simply be treated as direct calls.
-+			 */
-+			if (arch_ftrace_match(reloc->sym->name)) {
-+				insn->type = INSN_CALL;
-+				add_call_dest(file, insn, reloc->sym, false);
-+			}
-+
-+		} else if (!reloc) {
- 			dest_off = arch_jump_destination(insn);
- 			dest = find_call_destination(insn->sec, dest_off);
++	lea (gdt - pvh_start_xen)(%ebp), %eax
++	add %eax, 2(%eax)
++	lgdt (%eax)
  
+ 	mov $PVH_DS_SEL,%eax
+ 	mov %eax,%ds
+@@ -62,14 +75,14 @@ SYM_CODE_START(pvh_start_xen)
+ 	mov %eax,%ss
+ 
+ 	/* Stash hvm_start_info. */
+-	mov $_pa(pvh_start_info), %edi
++	lea (pvh_start_info - pvh_start_xen)(%ebp), %edi
+ 	mov %ebx, %esi
+-	mov _pa(pvh_start_info_sz), %ecx
++	mov (pvh_start_info_sz - pvh_start_xen)(%ebp), %ecx
+ 	shr $2,%ecx
+ 	rep
+ 	movsl
+ 
+-	mov $_pa(early_stack_end), %esp
++	lea (early_stack_end - pvh_start_xen)(%ebp), %esp
+ 
+ 	/* Enable PAE mode. */
+ 	mov %cr4, %eax
+@@ -84,17 +97,21 @@ SYM_CODE_START(pvh_start_xen)
+ 	wrmsr
+ 
+ 	/* Enable pre-constructed page tables. */
+-	mov $_pa(init_top_pgt), %eax
++	lea (init_top_pgt - pvh_start_xen)(%ebp), %eax
+ 	mov %eax, %cr3
+ 	mov $(X86_CR0_PG | X86_CR0_PE), %eax
+ 	mov %eax, %cr0
+ 
+ 	/* Jump to 64-bit mode. */
+-	ljmp $PVH_CS_SEL, $_pa(1f)
++	lea  (1f - pvh_start_xen)(%ebp), %eax
++	push $PVH_CS_SEL
++	push %eax
++	lret
+ 
+ 	/* 64-bit entry point. */
+ 	.code64
+ 1:
++	UNWIND_HINT_END_OF_STACK
+ 	/* Clear %gs so early per-CPU references target the per-CPU load area */
+ 	mov $MSR_GS_BASE,%ecx
+ 	xor %eax, %eax
+@@ -108,10 +125,8 @@ SYM_CODE_START(pvh_start_xen)
+ 	call *%rax
+ 
+ 	/* startup_64 expects boot_params in %rsi. */
+-	mov $_pa(pvh_bootparams), %rsi
+-	mov $_pa(startup_64), %rax
+-	ANNOTATE_RETPOLINE_SAFE
+-	jmp *%rax
++	lea pvh_bootparams(%rip), %rsi
++	jmp startup_64
+ 
+ #else /* CONFIG_X86_64 */
+ 
+@@ -146,8 +161,8 @@ SYM_CODE_END(pvh_start_xen)
+ 	.section ".init.data","aw"
+ 	.balign 8
+ SYM_DATA_START_LOCAL(gdt)
+-	.word gdt_end - gdt_start
+-	.long _pa(gdt_start)
++	.word gdt_end - gdt_start - 1
++	.long gdt_start - gdt
+ 	.word 0
+ SYM_DATA_END(gdt)
+ SYM_DATA_START_LOCAL(gdt_start)
 -- 
 2.46.0.792.g87dc391469-goog
 
