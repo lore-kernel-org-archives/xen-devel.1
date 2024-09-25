@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FF5CCF9E6
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 16:01:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804363.1215326 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7E64CCF9E6
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 16:08:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.804377.1215337 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stUS1-00063t-Mu; Wed, 25 Sep 2024 16:01:13 +0000
+	id 1stUYs-000890-CI; Wed, 25 Sep 2024 16:08:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804363.1215326; Wed, 25 Sep 2024 16:01:13 +0000
+Received: by outflank-mailman (output) from mailman id 804377.1215337; Wed, 25 Sep 2024 16:08:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stUS1-00063m-KG; Wed, 25 Sep 2024 16:01:13 +0000
-Received: by outflank-mailman (input) for mailman id 804363;
- Wed, 25 Sep 2024 15:54:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stUYs-00088t-9W; Wed, 25 Sep 2024 16:08:18 +0000
+Received: by outflank-mailman (input) for mailman id 804377;
+ Wed, 25 Sep 2024 16:08:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LwhS=QX=google.com=irogers@srs-se1.protection.inumbo.net>)
- id 1stUL6-0008TE-Gs
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:54:04 +0000
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [2607:f8b0:4864:20::136])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 62c977fa-7b56-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:54:03 +0200 (CEST)
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3a045f08fd6so308355ab.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:54:03 -0700 (PDT)
+ <SRS0=Mw3j=QX=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1stUYq-00086A-Mw
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 16:08:16 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5e088413-7b58-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 18:08:13 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5365aa568ceso45758e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 09:08:13 -0700 (PDT)
+Received: from [192.168.219.191] ([94.75.70.14])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9392f342b2sm226492366b.35.2024.09.25.09.08.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Sep 2024 09:08:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,209 +47,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 62c977fa-7b56-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 5e088413-7b58-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727279642; x=1727884442; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mtlWMtq+JiEyWaKdO0nlwORQa61CRpWkCRYLpleOmWc=;
-        b=k59Rbti/QWY6QawI5DZUaZ/AZhRr3NmccIOEXbFIeA6vy5y2eOOku0vX3x3MKmtGQu
-         549YvBbU9MUbgl+Bihu09XRMdpdy6CFNW3Tid4UI4u+/ltEZPdSPaNHHQBuwu9ObiIns
-         0w9wQWqxrr4RMIeEXTIIrepLMuxMhNzyD/7Gl+D7vvchs5EFe1tq+H5nA0p4A9AKZTcs
-         ZfO+w6vUQNxNJMwADEfj/NLMCz/KfTgO8pSScEIaC53wZ9p9p+y/DXaQH4h8bUt+GtK1
-         VyTY2HzpqLOLjpRaZ6H7at2dDRSW8Ve1EWKwrc7KOy069Q8mBlRHNKGssp9J4WQxUSj5
-         rFoQ==
+        d=gmail.com; s=20230601; t=1727280493; x=1727885293; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=6djaZ0i0UcLAQOEF1aMz+/6MjQ2USThbc7kTlX/IVDk=;
+        b=YBwHFE2Q7QkO1BzEFSmYkcyt+nf47WiYuzF9Gc1Eos+GLc4Dx+bLHWB9XDO9OKWxac
+         SP6CTeJL1hvBD4BNNXZb19dS9c+QieSq3jCAGMa+VpVqAolIQcfXNMWRfx4kZ3boKDq4
+         2Fk3Z2V1BcPosKX1c+5fwPX8aba22gCyKRuEeL7DcNSJdr26drHfDl9pHKS9Yq5H/p+a
+         dtEohsWw/aNRGtXzcDG0rftuATSg2AMpTTA72YwAqRmzcZuzwadoD6ZNTW5RJzHt1PV8
+         L2n+fdybl8ILEJ+0zKPVueo2+5Rzqgj3+6ydYAepQSHz2V2O471U+RA0aKwiGFA/oHNS
+         DLVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727279642; x=1727884442;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mtlWMtq+JiEyWaKdO0nlwORQa61CRpWkCRYLpleOmWc=;
-        b=A0sAJk1A3QJ4wix5ZjRDUMzonXL/KscCXqjj1T9mmRt5jrjhXfRUGvdmHKaARyaHbo
-         Q4A7XOlZpSyPo4mxuxD2FIgA8rrJSEJerEOJB/oRc+YlxQdPDT9wqN/PqM6Osas/8WYW
-         IixnzDlb+/3h5kAOkLFN0o9Ysw23uSL0SY6Pki6kzSfeao9CibiR+GdwUCaVy9CYVZog
-         Vdz0q3bp6nXoM38joKFIQ/tJFl/yKM36aWhVL7l2vOvZYxW8zs1AWeCXGqZ4Fnloc6OG
-         K2GZUa2ryrjAdR+9HN93+MMLGErlTSDhyFm/NL+hNOXUEKUvTGNtMiEaaDm8PMzEQAy1
-         wQyw==
-X-Forwarded-Encrypted: i=1; AJvYcCVOxOrcKK3XGzi4bmXfyd5zNOPluyxOurPg0kqg2lJgqGqTq9dg8HfTBUTCKy5W8FnJDUQ8Z2MotIk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyfswmOIQ6nRtJWvHr3gzS27icwOxkqbaFRFlpG0aI8AmGsSrgL
-	aCU9w5h6DEdR+yqQNZQFPP63D4ybCRnzMCCVDuVj+Cl4ZM6x7MLHAW20ZrJpkRVkq64BM6ZA7Tj
-	yLLKGCmhWhHyH3WGLyoYXuvnblxs74s0khT7+
-X-Google-Smtp-Source: AGHT+IECKVgNpXJyra6xJfQTQh6aQ7i0vY0ZTk0QtA5OBdxknRIVX3nOfLE4llLAa859tdiG19FbtS4i20eJ0xsZ7pg=
-X-Received: by 2002:a05:6e02:b2e:b0:3a0:926a:8d35 with SMTP id
- e9e14a558f8ab-3a27443ee75mr1540455ab.17.1727279641904; Wed, 25 Sep 2024
- 08:54:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240925150059.3955569-30-ardb+git@google.com> <20240925150059.3955569-35-ardb+git@google.com>
-In-Reply-To: <20240925150059.3955569-35-ardb+git@google.com>
-From: Ian Rogers <irogers@google.com>
-Date: Wed, 25 Sep 2024 08:53:50 -0700
-Message-ID: <CAP-5=fXw1rcgWgMeDSVqiDYh2XYApyaJpNvukvJ7vMs7ZPMr6g@mail.gmail.com>
-Subject: Re: [RFC PATCH 05/28] x86: Define the stack protector guard symbol explicitly
-To: Ard Biesheuvel <ardb+git@google.com>
-Cc: linux-kernel@vger.kernel.org, Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
-	Uros Bizjak <ubizjak@gmail.com>, Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, 
-	Christoph Lameter <cl@linux.com>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Paolo Bonzini <pbonzini@redhat.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, 
-	Juergen Gross <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Masahiro Yamada <masahiroy@kernel.org>, Kees Cook <kees@kernel.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Keith Packard <keithp@keithp.com>, 
-	Justin Stitt <justinstitt@google.com>, Josh Poimboeuf <jpoimboe@kernel.org>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>, 
-	Adrian Hunter <adrian.hunter@intel.com>, Kan Liang <kan.liang@linux.intel.com>, 
-	linux-doc@vger.kernel.org, linux-pm@vger.kernel.org, kvm@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-efi@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-sparse@vger.kernel.org, 
-	linux-kbuild@vger.kernel.org, linux-perf-users@vger.kernel.org, 
-	rust-for-linux@vger.kernel.org, llvm@lists.linux.dev
+        d=1e100.net; s=20230601; t=1727280493; x=1727885293;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=6djaZ0i0UcLAQOEF1aMz+/6MjQ2USThbc7kTlX/IVDk=;
+        b=O+C6FpfinfeB0DgcAkrGBoueViksE85EyryePJ4NcbDHCacBYmg99V9d/evc7Jfd4j
+         Wh2xlWZNeoVfgypz2LJKQ+ooH46GiVhgUjLwqyJHkwpBIZKRyIjPa1XyXmfrK/fLXWBs
+         4Taeka/iVVF4QH7ghxw0TquMy59TNTfrCu6Lzy5T2vL3ricoweneD4hjqfaGtoKUBRPM
+         y42BSs9LRt7qikhPZQc+zQ2dgyUnhFC/4ha/UGynDdQDmRJn2kzyLTtvtOzAGwuwerBB
+         E7KQE2P3tOATMOyxEVhCWHdZL1z7VhgLiSE6u62gH3lib36dMsjLYruyFtjLo9+fNqgr
+         7HPw==
+X-Forwarded-Encrypted: i=1; AJvYcCUCcjrxF8v30Z5yj8QJGd8j1fpRw5vCoeW3V5t3KkkVzSUeCez817Zqe7VPxnad4TCJUNbfbWwnjI8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyYvVkYgzrwENnYPc8q7ZNe8knf0U60sOcvYDZkAZmDYPkiW26I
+	g1kzcevbJ56ag0lkfZksceV9xT0a886jr8Hjfl1gfcN/YxCfIXv8
+X-Google-Smtp-Source: AGHT+IFZYWTDkbSqil3GuCgrvM2AL9hQcvrygCaygfWhMnA3SIyJlvdTtDmukDU9trDkfSg6If9mKw==
+X-Received: by 2002:a05:6512:1303:b0:536:5509:8862 with SMTP id 2adb3069b0e04-53877538bf6mr3117193e87.36.1727280492816;
+        Wed, 25 Sep 2024 09:08:12 -0700 (PDT)
+Message-ID: <81b676ae5958d93ecbc3a552c1c0a208dfa2d18a.camel@gmail.com>
+Subject: Re: [PATCH v3 1/5] xen: define ACPI and DT device info sections
+ macros
+From: oleksii.kurochko@gmail.com
+To: Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Bertrand Marquis
+ <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Date: Wed, 25 Sep 2024 18:08:11 +0200
+In-Reply-To: <82125953-99b5-4fde-83b8-51643cce793b@suse.com>
+References: <cover.1727193766.git.oleksii.kurochko@gmail.com>
+	 <7521839bd265e0520fc448adf50361d18dfe53df.1727193766.git.oleksii.kurochko@gmail.com>
+	 <82125953-99b5-4fde-83b8-51643cce793b@suse.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.4 (3.52.4-1.fc40app2) 
+MIME-Version: 1.0
 
-On Wed, Sep 25, 2024 at 8:02=E2=80=AFAM Ard Biesheuvel <ardb+git@google.com=
-> wrote:
->
-> From: Ard Biesheuvel <ardb@kernel.org>
->
-> Specify the guard symbol for the stack cookie explicitly, rather than
-> positioning it exactly 40 bytes into the per-CPU area. Doing so removes
-> the need for the per-CPU region to be absolute rather than relative to
-> the placement of the per-CPU template region in the kernel image, and
-> this allows the special handling for absolute per-CPU symbols to be
-> removed entirely.
->
-> This is a worthwhile cleanup in itself, but it is also a prerequisite
-> for PIE codegen and PIE linking, which can replace our bespoke and
-> rather clunky runtime relocation handling.
->
-> Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
-> ---
->  arch/x86/Makefile                     |  4 ++++
->  arch/x86/include/asm/init.h           |  2 +-
->  arch/x86/include/asm/processor.h      | 11 +++--------
->  arch/x86/include/asm/stackprotector.h |  4 ----
->  tools/perf/util/annotate.c            |  4 ++--
->  5 files changed, 10 insertions(+), 15 deletions(-)
->
-> diff --git a/arch/x86/Makefile b/arch/x86/Makefile
-> index 6b3fe6e2aadd..b78b7623a4a9 100644
-> --- a/arch/x86/Makefile
-> +++ b/arch/x86/Makefile
-> @@ -193,6 +193,10 @@ else
->          KBUILD_RUSTFLAGS +=3D -Cno-redzone=3Dy
->          KBUILD_RUSTFLAGS +=3D -Ccode-model=3Dkernel
->
-> +        ifeq ($(CONFIG_STACKPROTECTOR),y)
-> +                KBUILD_CFLAGS +=3D -mstack-protector-guard-symbol=3Dfixe=
-d_percpu_data
-> +        endif
-> +
->          # Don't emit relaxable GOTPCREL relocations
->          KBUILD_AFLAGS_KERNEL +=3D -Wa,-mrelax-relocations=3Dno
->          KBUILD_CFLAGS_KERNEL +=3D -Wa,-mrelax-relocations=3Dno
-> diff --git a/arch/x86/include/asm/init.h b/arch/x86/include/asm/init.h
-> index 14d72727d7ee..3ed0e8ec973f 100644
-> --- a/arch/x86/include/asm/init.h
-> +++ b/arch/x86/include/asm/init.h
-> @@ -2,7 +2,7 @@
->  #ifndef _ASM_X86_INIT_H
->  #define _ASM_X86_INIT_H
->
-> -#define __head __section(".head.text")
-> +#define __head __section(".head.text") __no_stack_protector
->
->  struct x86_mapping_info {
->         void *(*alloc_pgt_page)(void *); /* allocate buf for page table *=
-/
-> diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/proc=
-essor.h
-> index 4a686f0e5dbf..56bc36116814 100644
-> --- a/arch/x86/include/asm/processor.h
-> +++ b/arch/x86/include/asm/processor.h
-> @@ -402,14 +402,9 @@ struct irq_stack {
->  #ifdef CONFIG_X86_64
->  struct fixed_percpu_data {
->         /*
-> -        * GCC hardcodes the stack canary as %gs:40.  Since the
-> -        * irq_stack is the object at %gs:0, we reserve the bottom
-> -        * 48 bytes of the irq stack for the canary.
-> -        *
-> -        * Once we are willing to require -mstack-protector-guard-symbol=
-=3D
-> -        * support for x86_64 stackprotector, we can get rid of this.
-> +        * Since the irq_stack is the object at %gs:0, the bottom 8 bytes=
- of
-> +        * the irq stack are reserved for the canary.
->          */
-> -       char            gs_base[40];
->         unsigned long   stack_canary;
->  };
->
-> @@ -418,7 +413,7 @@ DECLARE_INIT_PER_CPU(fixed_percpu_data);
->
->  static inline unsigned long cpu_kernelmode_gs_base(int cpu)
->  {
-> -       return (unsigned long)per_cpu(fixed_percpu_data.gs_base, cpu);
-> +       return (unsigned long)&per_cpu(fixed_percpu_data, cpu);
->  }
->
->  extern asmlinkage void entry_SYSCALL32_ignore(void);
-> diff --git a/arch/x86/include/asm/stackprotector.h b/arch/x86/include/asm=
-/stackprotector.h
-> index 00473a650f51..d1dcd22a0a4c 100644
-> --- a/arch/x86/include/asm/stackprotector.h
-> +++ b/arch/x86/include/asm/stackprotector.h
-> @@ -51,10 +51,6 @@ static __always_inline void boot_init_stack_canary(voi=
-d)
->  {
->         unsigned long canary =3D get_random_canary();
->
-> -#ifdef CONFIG_X86_64
-> -       BUILD_BUG_ON(offsetof(struct fixed_percpu_data, stack_canary) !=
-=3D 40);
-> -#endif
-> -
->         current->stack_canary =3D canary;
->  #ifdef CONFIG_X86_64
->         this_cpu_write(fixed_percpu_data.stack_canary, canary);
-> diff --git a/tools/perf/util/annotate.c b/tools/perf/util/annotate.c
-> index 37ce43c4eb8f..7ecfedf5edb9 100644
-> --- a/tools/perf/util/annotate.c
-> +++ b/tools/perf/util/annotate.c
-> @@ -2485,10 +2485,10 @@ static bool is_stack_operation(struct arch *arch,=
- struct disasm_line *dl)
->
->  static bool is_stack_canary(struct arch *arch, struct annotated_op_loc *=
-loc)
->  {
-> -       /* On x86_64, %gs:40 is used for stack canary */
-> +       /* On x86_64, %gs:0 is used for stack canary */
->         if (arch__is(arch, "x86")) {
->                 if (loc->segment =3D=3D INSN_SEG_X86_GS && loc->imm &&
-> -                   loc->offset =3D=3D 40)
-> +                   loc->offset =3D=3D 0)
+On Wed, 2024-09-25 at 10:36 +0200, Jan Beulich wrote:
+> PPC's desire to use DECL_SECTION() can certainly be covered by
+> providing
+> a (trivial) DECL_SECTION() also for Arm and RISC-V. Seeing that even
+> x86
+> overrides the default to the trivial form for building xen.efi, I'm
+> inclined to suggest we should actually have a way for an arch to
+> indicate
+> to xen.lds.h that it wants just the trivial form (avoiding a later
+> #undef).
+If to go with what I suggested before then x86 will look like:
 
-As a new perf tool  can run on old kernels we may need to have this be
-something like:
-(loc->offset =3D=3D 40 /* pre v6.xx kernels */ || loc->offset =3D=3D 0 /*
-v6.xx and later */ )
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index d48de67cfd..911585541e 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -3,6 +3,10 @@
+=20
+ #include <xen/cache.h>
+ #include <xen/lib.h>
++
++#ifdef EFI
++#define SIMPLE_DECL_SECTION
++#endif
+ #include <xen/xen.lds.h>
+ #include <asm/page.h>
+ #undef ENTRY
+@@ -12,9 +16,7 @@
+=20
+ #define FORMAT "pei-x86-64"
+ #undef __XEN_VIRT_START
+-#undef DECL_SECTION
+ #define __XEN_VIRT_START __image_base__
+-#define DECL_SECTION(x) x :
+=20
+ ENTRY(efi_start)
+=20
+diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
+index a17810bb28..fb11ba7357 100644
+--- a/xen/include/xen/xen.lds.h
++++ b/xen/include/xen/xen.lds.h
+@@ -5,6 +5,8 @@
+  * Common macros to be used in architecture specific linker scripts.
+  */
+=20
++#ifdef SIMPLE_DECL_SECTION
++
+ /*
+  * Declare a section whose load address is based at PA 0 rather than
+  * Xen's virtual base address.
+@@ -15,6 +17,10 @@
+ # define DECL_SECTION(x) x : AT(ADDR(x) - __XEN_VIRT_START)
+ #endif
+=20
++#else /* SIMPLE_DECL_SECION */
++# define DECL_SECTION(x) x :
++#endif
++
+ /*
+  * To avoid any confusion, please note that the EFI macro does not
+correspond
+  * to EFI support and is used when linking a native EFI (i.e. PE/COFF)
+binary,
 
-We could make this dependent on the kernel by processing the os_release str=
-ing:
-https://git.kernel.org/pub/scm/linux/kernel/git/perf/perf-tools-next.git/tr=
-ee/tools/perf/util/env.h#n55
-but that could well be more trouble than it is worth.
-
-Thanks,
-Ian
-
->                         return true;
->         }
-
->
-> --
-> 2.46.0.792.g87dc391469-goog
->
+Does it make sense? Or it would be better to follow way for each
+architecture:
+   #undef DECL_SECTION
+   #define DECL_SECTION(x) x :
+  =20
+~ Oleksii
 
