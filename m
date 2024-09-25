@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4173FCF9C7E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804099.1215073 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1667DFC619B
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.804081.1215001 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiv-0007d1-Cd; Wed, 25 Sep 2024 15:14:37 +0000
+	id 1stTip-00065U-WF; Wed, 25 Sep 2024 15:14:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804099.1215073; Wed, 25 Sep 2024 15:14:37 +0000
+Received: by outflank-mailman (output) from mailman id 804081.1215001; Wed, 25 Sep 2024 15:14:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiu-0007Zq-Pz; Wed, 25 Sep 2024 15:14:36 +0000
-Received: by outflank-mailman (input) for mailman id 804099;
- Wed, 25 Sep 2024 15:02:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stTip-00064z-Qz; Wed, 25 Sep 2024 15:14:31 +0000
+Received: by outflank-mailman (input) for mailman id 804081;
+ Wed, 25 Sep 2024 15:01:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Shjt=QX=flex--ardb.bounces.google.com=39yX0ZggKCVIuBxv+02D08805y.w86Hy7-xyFy552CDC.Hy79B83ywD.8B0@srs-se1.protection.inumbo.net>)
- id 1stTWz-0002UM-4w
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:17 +0000
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [2607:f8b0:4864:20::114a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 26f2c6d0-7b4f-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:02:16 +0200 (CEST)
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-6d3e062dbeeso14659177b3.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:16 -0700 (PDT)
+ <SRS0=fVAW=QX=flex--ardb.bounces.google.com=33yX0ZggKCToWnZX+cepckkcha.Ykitaj-Zarahheopo.tajlnkfaYp.knc@srs-se1.protection.inumbo.net>)
+ id 1stTWc-0002k3-UV
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:01:54 +0000
+Received: from mail-wm1-x34a.google.com (mail-wm1-x34a.google.com
+ [2a00:1450:4864:20::34a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 18ffc7f3-7b4f-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 17:01:52 +0200 (CEST)
+Received: by mail-wm1-x34a.google.com with SMTP id
+ 5b1f17b1804b1-42cb33e6299so45729745e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:01:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 26f2c6d0-7b4f-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 18ffc7f3-7b4f-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276535; x=1727881335; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276512; x=1727881312; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=mwy8kTVjZ/08dn4MFhxsJ/CPkFSWb32MIOuFSl+DFsU=;
-        b=yuJL3YfnW9YPMSjKYiH8T4oVSqPYL2G32BXfjuSsEThWhl0PBUrmY+s1famn5m3AOJ
-         90lUqwn+jPiqbUilIFFE9cUecTnS9CF7L1dBmc9D51g0AuI9HIWWb/krz/hZr1MdnoGm
-         a8nV7dpYTYvJNpWopsnDZqXBezrYZwumt6iOP7upy788wxJhCVwTeQcTNfyARy+7UsSC
-         89cHyutiFHDA4wKbIiFGvS06/6lwTjUNBPwjZkFMYnDcCrqGdpWJfFTYwy6C3evSFqpK
-         3tqY13erx3phXeAOG1g6JOc8sxKPiXE6JpR4lVKw+N/qPeXJOGiPvTubb3Aig4oNMR0A
-         N/zQ==
+        bh=bvHrMBM7osvq1YNoyXkrrTpmrTIb8bNW96uzrIXNQu8=;
+        b=MG7R0YY+Tx2W+D5iKUDAZzVULY9gxuiQFXFYgFIbRsVClwykZSL8ueV0YvRZVXhai7
+         ZvC9ZcYiLcgdPex06HxOngRfGH3/yDk5VPd4pwy5Cmx10KqJN96ExrTRIl3wzzoIlO4r
+         0ntrMCTAMfoxuniNH+SBs3tqNazZ+RcSl3oTxDQd9QKncNsTx70ArBz3jrZu2EHiMjLY
+         ZkAOYVIhx0nNACVo5wSYWvXz52Ib9swxts+LiGgxkKoWw0qwCVwD5heDR+Eu3SKX3KDp
+         mR72qFt4F9Pm85iNPnKsl3UMiI+PxxrBSs8U9eyNg1YQ03nvc3HrPiL8bqLo208Cs/fk
+         vfrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276535; x=1727881335;
+        d=1e100.net; s=20230601; t=1727276512; x=1727881312;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=mwy8kTVjZ/08dn4MFhxsJ/CPkFSWb32MIOuFSl+DFsU=;
-        b=QWUbUOfBLSMxoUdTzUhs7BdY4EHi6AVTHINi4GN0MSeJuBrIwstVV/J55cN7KFH05w
-         9y0LERs4CvmAeVukqy8/FCa9EeoW6OV9vorxUxG8UUn3cv8wDwijbVhQ7DrysdKF8XSQ
-         7G1wEJT7t1Pyh0J3ZWTMDYqC1mopQI4U310aoudZ6qiHV5KSE3vHKbJ1YmsI9ociNFX4
-         kg47ZB2MGSJctMRRds04KrjVnB7wHHEd6LYhFoMmE8B9wBl2uo5bgOf4g4ASND2yh3zA
-         WoAK27fajDheWNWgO3Y5vllH1FjhBKcYptDm7Y+kCWoGoZj01njbs4odxUY9oIMAmZu7
-         JJNg==
-X-Forwarded-Encrypted: i=1; AJvYcCUHiGFuFMM820lk3rTmVZIkBY1h8/4SwGDbgdMNx6uZjHTCsJytbTCKK1N9hSSs/z6wP4MFh70SwFI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxba+2Elv/+n9AEjX5CHS/jSNdnmGKSJlVDOv+CWUqDzPl0Fc6g
-	gBIHBXT0ucNABvvydVsK/DRIL/gGJoleRZCl/3NdBuQaW4zhDJMj9f/x7DdkokBkroUi1g==
-X-Google-Smtp-Source: AGHT+IEEpXdESu+AVZ5xAH4ocoULrkWfhbmfoqTWPQarKhwafrufRJLTuhlZhXvWoZ56ZcFdzDjPCpOs
+        bh=bvHrMBM7osvq1YNoyXkrrTpmrTIb8bNW96uzrIXNQu8=;
+        b=kms8Rm2J4j/4wbpTOX6m3XP9aPjfWxMTai32iMz4TVU9lzTeeAFzLV0CwAaT7bpUhV
+         A5hJWu4AN3jsCrAYwHMJUdBKHgjFZ06vpKtPL6m5hBn5+nsnSNJIDPZhigWBp0JuWv0m
+         hBcF1Dc9G+qji9Naom+2oofVzjRwB3I5yMF11NPcogpmaDnyT5av/CcYVvVDA2faurUJ
+         /60YsAE/khR59+ZcyrYmwmjtj341CSV0Yb3bX2F+JqLV76C5wyLPpRTYFb/FE6akm+Zl
+         /6FuLMJ4O0caYP+5asd91ACpWe64a/rXa/eeKHmAX6eTzHIcQcoWysM1FReRARNmZEm2
+         re7A==
+X-Forwarded-Encrypted: i=1; AJvYcCV+b8xtSG1LYVB/q8hNrOrRLRIF7OzhwXZPwk/oRKUnPJwR4B1bXIOkSepcPfCWFbXlaR1uxLxEFbw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz4MUEsuA0B7omQiVKl5Sb96WjXcsdaOozis/MQ2xzbWOoOvVOj
+	uPlfSWvB7IKpZiGWexCnqzQUwrx1WicjhuZEjIkm8ioXJQB4VIDADI4AgW1w0Ky5HfcUzw==
+X-Google-Smtp-Source: AGHT+IGNEZwim//wtoUQ0IgEwXQAmuWMXuvjVNrkXztiUbXuSVle0sf2azOpfGly/wGUuNh4kSi9g764
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a05:690c:6a0d:b0:6da:3596:21b8 with SMTP id
- 00721157ae682-6e2089c8234mr1848507b3.4.1727276535155; Wed, 25 Sep 2024
- 08:02:15 -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:10 +0200
+ (user=ardb job=sendgmr) by 2002:a05:600c:4b23:b0:42c:b635:9ba7 with SMTP id
+ 5b1f17b1804b1-42e961449f9mr294105e9.3.1727276511763; Wed, 25 Sep 2024
+ 08:01:51 -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:01 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4217; i=ardb@kernel.org;
- h=from:subject; bh=umOxUEgpm+XSdzq7sqW2wzWT3DKWlT715fLzy00ZrIc=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6q4zMe0fH8zn/6yon+W25vvljx/znOb8fBedfXMvk
- 4PJy+hrHaUsDGIcDLJiiiwCs/++23l6olSt8yxZmDmsTCBDGLg4BWAiC5MZGX675CxMX+/71dxB
- RTLX6OaHWScZikUU3t9k3TfnWIl7YijDP8vjN+r/hng3npecsefHgZqi2WFz5zPUNTIeVXy24tT y6awA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1383; i=ardb@kernel.org;
+ h=from:subject; bh=kkus52hb+9U3rGqLGvcTtWiqi7ULiH1wdI2hpFI7/9I=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6loPG1eTz6/TRZ+ExF55v9yoPVaMz0DJP05TXvNix
+ 3yvWS87SlkYxDgYZMUUWQRm/3238/REqVrnWbIwc1iZQIYwcHEKwER0vzAyLNdk+Hf0DcN93e0c
+ kou2iV0ReKfEPrsn3ORh04fsoM3R+gz/0yZt5ne4cnJFldTMQpGfLor75ZYczDujFLCs+4iee6Q pMwA=
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-40-ardb+git@google.com>
-Subject: [RFC PATCH 10/28] x86/xen: Avoid relocatable quantities in Xen ELF notes
+Message-ID: <20240925150059.3955569-31-ardb+git@google.com>
+Subject: [RFC PATCH 01/28] x86/pvh: Call C code via the kernel virtual mapping
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,107 +110,40 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-Xen puts virtual and physical addresses into ELF notes that are treated
-by the linker as relocatable by default. Doing so is not only pointless,
-given that the ELF notes are only intended for consumption by Xen before
-the kernel boots. It is also a KASLR leak, given that the kernel's ELF
-notes are exposed via the world readable /sys/kernel/notes.
+Calling C code via a different mapping than it was linked at is
+problematic, because the compiler assumes that RIP-relative and absolute
+symbol references are interchangeable. GCC in particular may use
+RIP-relative per-CPU variable references even when not using -fpic.
 
-So emit these constants in a way that prevents the linker from marking
-them as relocatable. This involves place-relative relocations (which
-subtract their own virtual address from the symbol value) and linker
-provided absolute symbols that add the address of the place to the
-desired value.
+So call xen_prepare_pvh() via its kernel virtual mapping on x86_64, so
+that those RIP-relative references produce the correct values. This
+matches the pre-existing behavior for i386, which also invokes
+xen_prepare_pvh() via the kernel virtual mapping before invoking
+startup_32 with paging disabled again.
 
+Fixes: 7243b93345f7 ("xen/pvh: Bootstrap PVH guest")
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- arch/x86/kernel/vmlinux.lds.S | 13 +++++++++++++
- arch/x86/platform/pvh/head.S  |  6 +++---
- arch/x86/tools/relocs.c       |  1 +
- arch/x86/xen/xen-head.S       |  6 ++++--
- 4 files changed, 21 insertions(+), 5 deletions(-)
+ arch/x86/platform/pvh/head.S | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
-index 00f82db7b3e1..52b8db931d0f 100644
---- a/arch/x86/kernel/vmlinux.lds.S
-+++ b/arch/x86/kernel/vmlinux.lds.S
-@@ -111,6 +111,19 @@ PHDRS {
- SECTIONS
- {
- 	. = __START_KERNEL;
-+
-+#ifdef CONFIG_XEN_PV
-+xen_elfnote_entry_offset =
-+	ABSOLUTE(xen_elfnote_entry) + ABSOLUTE(startup_xen);
-+xen_elfnote_hypercall_page_offset =
-+	ABSOLUTE(xen_elfnote_hypercall_page) + ABSOLUTE(hypercall_page);
-+#endif
-+
-+#ifdef CONFIG_PVH
-+xen_elfnote_phys32_entry_offset =
-+	ABSOLUTE(xen_elfnote_phys32_entry) + ABSOLUTE(pvh_start_xen - LOAD_OFFSET);
-+#endif
-+
- #ifdef CONFIG_X86_32
- 	phys_startup_32 = ABSOLUTE(startup_32 - LOAD_OFFSET);
- #else
 diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
-index 11245ecdc08d..adbf57e83e4e 100644
+index f7235ef87bc3..a308b79a887c 100644
 --- a/arch/x86/platform/pvh/head.S
 +++ b/arch/x86/platform/pvh/head.S
-@@ -50,7 +50,7 @@
- #define PVH_CS_SEL		(PVH_GDT_ENTRY_CS * 8)
- #define PVH_DS_SEL		(PVH_GDT_ENTRY_DS * 8)
+@@ -101,7 +101,11 @@ SYM_CODE_START_LOCAL(pvh_start_xen)
+ 	xor %edx, %edx
+ 	wrmsr
  
--SYM_CODE_START_LOCAL(pvh_start_xen)
-+SYM_CODE_START(pvh_start_xen)
- 	UNWIND_HINT_END_OF_STACK
- 	cld
+-	call xen_prepare_pvh
++	/* Call xen_prepare_pvh() via the kernel virtual mapping */
++	leaq xen_prepare_pvh(%rip), %rax
++	addq $__START_KERNEL_map, %rax
++	ANNOTATE_RETPOLINE_SAFE
++	call *%rax
  
-@@ -165,5 +165,5 @@ SYM_DATA_START_LOCAL(early_stack)
- 	.fill BOOT_STACK_SIZE, 1, 0
- SYM_DATA_END_LABEL(early_stack, SYM_L_LOCAL, early_stack_end)
- 
--	ELFNOTE(Xen, XEN_ELFNOTE_PHYS32_ENTRY,
--	             _ASM_PTR (pvh_start_xen - __START_KERNEL_map))
-+	ELFNOTE(Xen, XEN_ELFNOTE_PHYS32_ENTRY, .global xen_elfnote_phys32_entry;
-+		xen_elfnote_phys32_entry: _ASM_PTR xen_elfnote_phys32_entry_offset - .)
-diff --git a/arch/x86/tools/relocs.c b/arch/x86/tools/relocs.c
-index 942c029a5067..22c2d3f07a57 100644
---- a/arch/x86/tools/relocs.c
-+++ b/arch/x86/tools/relocs.c
-@@ -57,6 +57,7 @@ static const char * const	sym_regex_kernel[S_NSYMTYPES] = {
- 	[S_ABS] =
- 	"^(xen_irq_disable_direct_reloc$|"
- 	"xen_save_fl_direct_reloc$|"
-+	"xen_elfnote_.+_offset$|"
- 	"VDSO|"
- 	"__kcfi_typeid_|"
- 	"__crc_)",
-diff --git a/arch/x86/xen/xen-head.S b/arch/x86/xen/xen-head.S
-index faadac7c29e6..4d246a48a85f 100644
---- a/arch/x86/xen/xen-head.S
-+++ b/arch/x86/xen/xen-head.S
-@@ -88,7 +88,8 @@ SYM_CODE_END(xen_cpu_bringup_again)
- 	ELFNOTE(Xen, XEN_ELFNOTE_VIRT_BASE,      _ASM_PTR __START_KERNEL_map)
- 	/* Map the p2m table to a 512GB-aligned user address. */
- 	ELFNOTE(Xen, XEN_ELFNOTE_INIT_P2M,       .quad (PUD_SIZE * PTRS_PER_PUD))
--	ELFNOTE(Xen, XEN_ELFNOTE_ENTRY,          _ASM_PTR startup_xen)
-+	ELFNOTE(Xen, XEN_ELFNOTE_ENTRY,          .globl xen_elfnote_entry;
-+		xen_elfnote_entry: _ASM_PTR xen_elfnote_entry_offset - .)
- 	ELFNOTE(Xen, XEN_ELFNOTE_FEATURES,       .ascii "!writable_page_tables")
- 	ELFNOTE(Xen, XEN_ELFNOTE_PAE_MODE,       .asciz "yes")
- 	ELFNOTE(Xen, XEN_ELFNOTE_L1_MFN_VALID,
-@@ -109,7 +110,8 @@ SYM_CODE_END(xen_cpu_bringup_again)
- #else
- # define FEATURES_DOM0 0
- #endif
--	ELFNOTE(Xen, XEN_ELFNOTE_HYPERCALL_PAGE, _ASM_PTR hypercall_page)
-+	ELFNOTE(Xen, XEN_ELFNOTE_HYPERCALL_PAGE, .globl xen_elfnote_hypercall_page;
-+		xen_elfnote_hypercall_page: _ASM_PTR xen_elfnote_hypercall_page_offset - .)
- 	ELFNOTE(Xen, XEN_ELFNOTE_SUPPORTED_FEATURES,
- 		.long FEATURES_PV | FEATURES_PVH | FEATURES_DOM0)
- 	ELFNOTE(Xen, XEN_ELFNOTE_LOADER,         .asciz "generic")
+ 	/* startup_64 expects boot_params in %rsi. */
+ 	mov $_pa(pvh_bootparams), %rsi
 -- 
 2.46.0.792.g87dc391469-goog
 
