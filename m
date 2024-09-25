@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D5ACF9C7E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2BA0CF9C7F
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804083.1215010 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.804089.1215029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiq-0006F4-Hh; Wed, 25 Sep 2024 15:14:32 +0000
+	id 1stTir-0006VG-R0; Wed, 25 Sep 2024 15:14:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804083.1215010; Wed, 25 Sep 2024 15:14:32 +0000
+Received: by outflank-mailman (output) from mailman id 804089.1215029; Wed, 25 Sep 2024 15:14:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiq-0006E5-AZ; Wed, 25 Sep 2024 15:14:32 +0000
-Received: by outflank-mailman (input) for mailman id 804083;
- Wed, 25 Sep 2024 15:01:55 +0000
+	id 1stTir-0006RS-9t; Wed, 25 Sep 2024 15:14:33 +0000
+Received: by outflank-mailman (input) for mailman id 804089;
+ Wed, 25 Sep 2024 15:02:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HSPS=QX=flex--ardb.bounces.google.com=34iX0ZggKCT0Zqca+fhsfnnfkd.bnlwdm-cdudkkhrsr.wdmoqnidbs.nqf@srs-se1.protection.inumbo.net>)
- id 1stTWd-0002UM-S3
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:01:55 +0000
-Received: from mail-wm1-x34a.google.com (mail-wm1-x34a.google.com
- [2a00:1450:4864:20::34a])
+ <SRS0=FllF=QX=flex--ardb.bounces.google.com=36iX0ZggKCUUhyki+np0nvvnsl.jvt4lu-kl2lsspz0z.4luwyvqlj0.vyn@srs-se1.protection.inumbo.net>)
+ id 1stTWm-0002UM-V4
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:04 +0000
+Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com
+ [2607:f8b0:4864:20::b4a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1a9edb4e-7b4f-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:01:55 +0200 (CEST)
-Received: by mail-wm1-x34a.google.com with SMTP id
- 5b1f17b1804b1-42f310f0ed2so5455765e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:01:55 -0700 (PDT)
+ id 1f4fd640-7b4f-11ef-a0ba-8be0dac302b0;
+ Wed, 25 Sep 2024 17:02:03 +0200 (CEST)
+Received: by mail-yb1-xb4a.google.com with SMTP id
+ 3f1490d57ef6-e1dc0585fbfso9533456276.3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a9edb4e-7b4f-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 1f4fd640-7b4f-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276515; x=1727881315; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276522; x=1727881322; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=yjSReXj8XxN+J1aHSpg+bgY7XO8zJXJrh2uX1BeFRGQ=;
-        b=svoGmyJb7vdOQpvetAFcCxLEGhY32/bWZxNmOUM7bzFkq6ycQlOGEy7t6wKprbfs5q
-         viqiau1wPKoed/AB98qgbUOMn+8cKvouDfDC1P9zmogiQNakEzeJyPP7GOEwDMBsC4hA
-         WjAFT3eH38OcU+gaS2KBru0FXU4BxtPd9qzs9aP1GNSzvfYxjpJIJgyWqEhwsMGRUvC2
-         l1W1EkGRm+zlM3X1N7ggshduT4/d1cT+T4i45XxZWGmanpRp9w5pc/ZT/Tx0NxCN/u9A
-         vF4lqAWZtlluMjcIaADliVfbFCk9oLpqkvcsUOhKkaJwoVrztXeNkvc8MM6OLNrLzpsM
-         h7rg==
+        bh=hcBJaG4CjYcevMfAnFyKwMdAr3oBLta0TuXom4JmDi8=;
+        b=dQsEZOGWYaFQ90s2E71Bs10dCUP9iy3IGeT9N0SedxW8/udyExYFdJp2f7cdLosK9Q
+         pXJbyuI1oG1Sqj3EQ4dBFC48/vZASTes+o2Zz/P+1AV4oWGFfsQVGn87kh9NtNGcuz3B
+         eGnQt0wjtIB2vc57iFuy4E64MonAaUamwYhiwBisVC8isBPlko/hER/HdGbvB1Hm1I5x
+         a7Bpe0O1DP57e4wAM5jchmHJ1jX6jzV/EBvmbnUujm127eTj3KXDayBjoYmUZAMGzPC2
+         qPNxTnoFp74YeSyllWzKNjOw6Qra3O2P8+YLrh5KsmvDbbO61kayxVMbZ4VFnMXOC+11
+         M6cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276515; x=1727881315;
+        d=1e100.net; s=20230601; t=1727276522; x=1727881322;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=yjSReXj8XxN+J1aHSpg+bgY7XO8zJXJrh2uX1BeFRGQ=;
-        b=UTpqsy2mPLZRcrxqC1lDtHQz9lXIapIXmYaVQ1SrKcDgMx9C2xXTLqi9C0xAfKSi4n
-         aPsSUJi9y9e/a+WACzCtw8MD9v5XsbGiEfY4W4ZHR4uiZP8/NRId1JOljlNgd8SIgC+I
-         JEz9VwXv/NoHG6IOB3AX85dXMqUesa43SRrLoOvcMm85zGToVGcwtUNXUSTUoPoSvu28
-         X2Aov/b9ncIvlXgzIXa3CIbF0xgI3uHaUWoyqsA5othrCw+oxBt2U2DAZBXNwT71nz3d
-         aANzXYUZGyc1VLKPWYGltBYTb3qDIYLNCiCm1EywREPdvQCAUUvSxA6o1SwdDz6nTtVD
-         S5kw==
-X-Forwarded-Encrypted: i=1; AJvYcCUO40/g0JZsiB9JRnsNtciiaoh7uT07JvOczEaQIY6hBwfm3ISXwLXCEpjD8Uh8eJ+Z34tBdJYUQm4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzAklYtyva2eG2mtPzBDndaTe4EFbW5kCuELGrtIHbDMAUcn6LZ
-	8UUlvz69rkWkEHjN/fIt2UBzhDiK8hL38cB19etppu6FdFcekx0WrICz8RSZoTIgac5CMQ==
-X-Google-Smtp-Source: AGHT+IGzIZ2o2YM9LwRx7GUBkPXP1nnHd93bOM06M/lDtcRNJJFbQb+/UGpm4f4GZO5kVPvAO8R9y3yP
+        bh=hcBJaG4CjYcevMfAnFyKwMdAr3oBLta0TuXom4JmDi8=;
+        b=OiQCvkZEcH9eVpNhDmfTxm/ff7brN/N0lXBSPO1lQWikzQZnXxKmaTVcumep9sf45S
+         /w6BpmwDZozcjmTskxy+Fj2LAlxpZCssGXSE9T8xIJYs1KLUfQUBzel6+hB77nqX3seR
+         Cwyej6GTx0X2hjPMIA6XwFMoXc817Fnse1kGBRFLawCNdn/O/lSxBU3+oFZP1VzsbPp5
+         mBIBnf2TigHYT/3BXuso4/wpc3jicMmdpHGMfuq15+2t5LhXZqXFPrETOpfMwOAJymau
+         lJK+Nnz3Y4Nl0NnUhGHRmfqH550r98k21X76FkbDoWWAdwajGD2Hco5wK02MTNmJmg8j
+         +Y4Q==
+X-Forwarded-Encrypted: i=1; AJvYcCVe/7TSNnxmZnia0vEn3pxUcSbJJ6hdtHGyqxfW+orSU6zh6pkfWgryotWZPb8vaihPQOyxYkuRHNU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzW4d9+u3nBj4+MkLwNKoh+74KuJvO9l3U6Bogg/WpLBZmaucAi
+	j1In8yrM/8k9upbw4gDhYtmCznzW80Njrbv3sr09uFoT6yBaI25YLCELzx2SZz/ndRo0Sg==
+X-Google-Smtp-Source: AGHT+IHVPP/hq0VdoG8mz8zZDpKENYQvppd12tQOBs96+ky0ZuGKlW9zxaw1GBiDRtGEwfqJMJeN7cfB
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a05:600c:214f:b0:42c:b32e:6ba7 with SMTP id
- 5b1f17b1804b1-42e9624246bmr34035e9.6.1727276514236; Wed, 25 Sep 2024 08:01:54
+ (user=ardb job=sendgmr) by 2002:a25:d695:0:b0:e1a:70ed:6ec9 with SMTP id
+ 3f1490d57ef6-e24d7352785mr29529276.2.1727276522332; Wed, 25 Sep 2024 08:02:02
  -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:02 +0200
+Date: Wed, 25 Sep 2024 17:01:05 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1869; i=ardb@kernel.org;
- h=from:subject; bh=Etb53DEUMtJxbS45M94XzvcBugumXuKFZ3M2B/KYBNo=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6jquDX165ub5J178W1mVH21S/GxP0fqUgljlqYpRR
- x60nEvpKGVhEONgkBVTZBGY/ffdztMTpWqdZ8nCzGFlAhnCwMUpABPRa2RkeBV2XNd/yacJf4IS
- mc47ex9ud90aJbN1Uf8PDSuxLfrPTjD8rwhuEVogxe0Xov++IjA4keVg55+fz6JEZeM/B04o0/B nBgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4340; i=ardb@kernel.org;
+ h=from:subject; bh=I7lWAHThqqqqnrpiqIQsu32XeIcDrKE8EBFU/14ypJ4=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6manxvx6ho28axaYV4atC9wvG5Igfbri2+G3gWYqn
+ maGuz52lLIwiHEwyIopsgjM/vtu5+mJUrXOs2Rh5rAygQxh4OIUgIl4nmVkaA1czF6Uafzbsi92
+ efGhdw7lev3pD99ze/Rc9uE4U+u6lZHhb2nzhL8Z7seME5YcX8rFdHZX6uJJe7jF87S7K1vP1Mh zAQA=
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-32-ardb+git@google.com>
-Subject: [RFC PATCH 02/28] Documentation: Bump minimum GCC version to 8.1
+Message-ID: <20240925150059.3955569-35-ardb+git@google.com>
+Subject: [RFC PATCH 05/28] x86: Define the stack protector guard symbol explicitly
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,43 +110,116 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-Bump the minimum GCC version to 8.1 to gain unconditional support for
-referring to the per-task stack cookie using a symbol rather than
-relying on the fixed offset of 40 bytes from %GS, which requires
-elaborate hacks to support.
+Specify the guard symbol for the stack cookie explicitly, rather than
+positioning it exactly 40 bytes into the per-CPU area. Doing so removes
+the need for the per-CPU region to be absolute rather than relative to
+the placement of the per-CPU template region in the kernel image, and
+this allows the special handling for absolute per-CPU symbols to be
+removed entirely.
+
+This is a worthwhile cleanup in itself, but it is also a prerequisite
+for PIE codegen and PIE linking, which can replace our bespoke and
+rather clunky runtime relocation handling.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- Documentation/admin-guide/README.rst | 2 +-
- Documentation/process/changes.rst    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/x86/Makefile                     |  4 ++++
+ arch/x86/include/asm/init.h           |  2 +-
+ arch/x86/include/asm/processor.h      | 11 +++--------
+ arch/x86/include/asm/stackprotector.h |  4 ----
+ tools/perf/util/annotate.c            |  4 ++--
+ 5 files changed, 10 insertions(+), 15 deletions(-)
 
-diff --git a/Documentation/admin-guide/README.rst b/Documentation/admin-guide/README.rst
-index f2bebff6a733..3dda41923ed6 100644
---- a/Documentation/admin-guide/README.rst
-+++ b/Documentation/admin-guide/README.rst
-@@ -259,7 +259,7 @@ Configuring the kernel
- Compiling the kernel
- --------------------
+diff --git a/arch/x86/Makefile b/arch/x86/Makefile
+index 6b3fe6e2aadd..b78b7623a4a9 100644
+--- a/arch/x86/Makefile
++++ b/arch/x86/Makefile
+@@ -193,6 +193,10 @@ else
+         KBUILD_RUSTFLAGS += -Cno-redzone=y
+         KBUILD_RUSTFLAGS += -Ccode-model=kernel
  
-- - Make sure you have at least gcc 5.1 available.
-+ - Make sure you have at least gcc 8.1 available.
-    For more information, refer to :ref:`Documentation/process/changes.rst <changes>`.
++        ifeq ($(CONFIG_STACKPROTECTOR),y)
++                KBUILD_CFLAGS += -mstack-protector-guard-symbol=fixed_percpu_data
++        endif
++
+         # Don't emit relaxable GOTPCREL relocations
+         KBUILD_AFLAGS_KERNEL += -Wa,-mrelax-relocations=no
+         KBUILD_CFLAGS_KERNEL += -Wa,-mrelax-relocations=no
+diff --git a/arch/x86/include/asm/init.h b/arch/x86/include/asm/init.h
+index 14d72727d7ee..3ed0e8ec973f 100644
+--- a/arch/x86/include/asm/init.h
++++ b/arch/x86/include/asm/init.h
+@@ -2,7 +2,7 @@
+ #ifndef _ASM_X86_INIT_H
+ #define _ASM_X86_INIT_H
  
-  - Do a ``make`` to create a compressed kernel image. It is also possible to do
-diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
-index 00f1ed7c59c3..59b7d3d8a577 100644
---- a/Documentation/process/changes.rst
-+++ b/Documentation/process/changes.rst
-@@ -29,7 +29,7 @@ you probably needn't concern yourself with pcmciautils.
- ====================== ===============  ========================================
-         Program        Minimal version       Command to check the version
- ====================== ===============  ========================================
--GNU C                  5.1              gcc --version
-+GNU C                  8.1              gcc --version
- Clang/LLVM (optional)  13.0.1           clang --version
- Rust (optional)        1.78.0           rustc --version
- bindgen (optional)     0.65.1           bindgen --version
+-#define __head	__section(".head.text")
++#define __head	__section(".head.text") __no_stack_protector
+ 
+ struct x86_mapping_info {
+ 	void *(*alloc_pgt_page)(void *); /* allocate buf for page table */
+diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/processor.h
+index 4a686f0e5dbf..56bc36116814 100644
+--- a/arch/x86/include/asm/processor.h
++++ b/arch/x86/include/asm/processor.h
+@@ -402,14 +402,9 @@ struct irq_stack {
+ #ifdef CONFIG_X86_64
+ struct fixed_percpu_data {
+ 	/*
+-	 * GCC hardcodes the stack canary as %gs:40.  Since the
+-	 * irq_stack is the object at %gs:0, we reserve the bottom
+-	 * 48 bytes of the irq stack for the canary.
+-	 *
+-	 * Once we are willing to require -mstack-protector-guard-symbol=
+-	 * support for x86_64 stackprotector, we can get rid of this.
++	 * Since the irq_stack is the object at %gs:0, the bottom 8 bytes of
++	 * the irq stack are reserved for the canary.
+ 	 */
+-	char		gs_base[40];
+ 	unsigned long	stack_canary;
+ };
+ 
+@@ -418,7 +413,7 @@ DECLARE_INIT_PER_CPU(fixed_percpu_data);
+ 
+ static inline unsigned long cpu_kernelmode_gs_base(int cpu)
+ {
+-	return (unsigned long)per_cpu(fixed_percpu_data.gs_base, cpu);
++	return (unsigned long)&per_cpu(fixed_percpu_data, cpu);
+ }
+ 
+ extern asmlinkage void entry_SYSCALL32_ignore(void);
+diff --git a/arch/x86/include/asm/stackprotector.h b/arch/x86/include/asm/stackprotector.h
+index 00473a650f51..d1dcd22a0a4c 100644
+--- a/arch/x86/include/asm/stackprotector.h
++++ b/arch/x86/include/asm/stackprotector.h
+@@ -51,10 +51,6 @@ static __always_inline void boot_init_stack_canary(void)
+ {
+ 	unsigned long canary = get_random_canary();
+ 
+-#ifdef CONFIG_X86_64
+-	BUILD_BUG_ON(offsetof(struct fixed_percpu_data, stack_canary) != 40);
+-#endif
+-
+ 	current->stack_canary = canary;
+ #ifdef CONFIG_X86_64
+ 	this_cpu_write(fixed_percpu_data.stack_canary, canary);
+diff --git a/tools/perf/util/annotate.c b/tools/perf/util/annotate.c
+index 37ce43c4eb8f..7ecfedf5edb9 100644
+--- a/tools/perf/util/annotate.c
++++ b/tools/perf/util/annotate.c
+@@ -2485,10 +2485,10 @@ static bool is_stack_operation(struct arch *arch, struct disasm_line *dl)
+ 
+ static bool is_stack_canary(struct arch *arch, struct annotated_op_loc *loc)
+ {
+-	/* On x86_64, %gs:40 is used for stack canary */
++	/* On x86_64, %gs:0 is used for stack canary */
+ 	if (arch__is(arch, "x86")) {
+ 		if (loc->segment == INSN_SEG_X86_GS && loc->imm &&
+-		    loc->offset == 40)
++		    loc->offset == 0)
+ 			return true;
+ 	}
+ 
 -- 
 2.46.0.792.g87dc391469-goog
 
