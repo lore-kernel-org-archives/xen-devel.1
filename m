@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0743CCF9E3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C73CCF9E6
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804132.1215156 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.804137.1215166 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTj5-0001Yh-4o; Wed, 25 Sep 2024 15:14:47 +0000
+	id 1stTj6-0001xE-VC; Wed, 25 Sep 2024 15:14:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804132.1215156; Wed, 25 Sep 2024 15:14:46 +0000
+Received: by outflank-mailman (output) from mailman id 804137.1215166; Wed, 25 Sep 2024 15:14:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTj3-0001Td-Ol; Wed, 25 Sep 2024 15:14:45 +0000
-Received: by outflank-mailman (input) for mailman id 804132;
- Wed, 25 Sep 2024 15:06:37 +0000
+	id 1stTj5-0001p2-8F; Wed, 25 Sep 2024 15:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 804137;
+ Wed, 25 Sep 2024 15:06:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QWIs=QX=flex--ardb.bounces.google.com=3CCb0ZggKCWMBSEC+HJUHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@srs-se1.protection.inumbo.net>)
- id 1stTXG-0002UM-AE
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:34 +0000
-Received: from mail-wr1-x449.google.com (mail-wr1-x449.google.com
- [2a00:1450:4864:20::449])
+ <SRS0=sByw=QX=flex--ardb.bounces.google.com=3Gyb0ZggKCXYUlXV+acnaiiafY.WigrYh-XYpYffcmnm.rYhjlidYWn.ila@srs-se1.protection.inumbo.net>)
+ id 1stTXZ-0002UM-9r
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:53 +0000
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [2607:f8b0:4864:20::114a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3199af2b-7b4f-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 17:02:33 +0200 (CEST)
-Received: by mail-wr1-x449.google.com with SMTP id
- ffacd0b85a97d-37a4d65df57so1279644f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:33 -0700 (PDT)
+ id 3c933c09-7b4f-11ef-a0ba-8be0dac302b0;
+ Wed, 25 Sep 2024 17:02:52 +0200 (CEST)
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-6db7a8c6910so102668377b3.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3199af2b-7b4f-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 3c933c09-7b4f-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276553; x=1727881353; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276571; x=1727881371; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=GQ1cTLWN/qm1UuyAwDsDiC37ecAWh5CqzUoGN/3jT3Q=;
-        b=UjUkaUv3IfntJwJ3EYnvMwX1fTbgHh5d0VVO5VSK8ZyemgXEabtTu5Oozwigl11H4p
-         iuAfOBn87B9HzGS3a86GXBbrQCpPaHfrV8amqP7ssg5zla/AzAA8xk/DHZ/O0HGCwN4T
-         1ILAF2Rw7Yqwi93RweBnhZya4VtzQHkZGi0SsTjqvWNjZbWPxtL/stu5dyRqxUQfdc/S
-         /aDvrMVaqQBxQkLNpFslkUEioMj5B+ZQbOuqPIGM9oTQZ3938nwm36PIG0lJVPzUYFIM
-         352tZRyKyGXVdSlx/ORhjiKaPYKHdVyiBA84mXfqWtV71j2csWRjBnXhq/zxmODRskuq
-         so5Q==
+        bh=q7Siui3EQaHZbOP2Zf5u6bj1Z6F9xVc5htz8ViId7Yw=;
+        b=UgQOwkIlTsd0WBE1LlF2Zrm2//t8ge8Bgz9/+aVGlFf6Zo+yAMX/YN0BUqP+oWM8HO
+         XzA4La0jXuKXbLUaE0AlzTY5IUvCw7Mo03Hq/teG9VPKNEbGVl5LBVzZGN371oVm10/X
+         qrdV39t/1lu2VqgSaM1UvjlK6YP6AGZqm08rzRm6Re2WAzBl2W+ANWkdZy0kD/1/Uj4B
+         wW0rFWK84MrYFnTXC/uxnJa1KKbkUc8kWxsEa/fYJ9x8dP3QJstIs/+uDCBfuhYf3CRG
+         AlFM10f7tJ1Hl+otrRWq0Y4uJAvRlR0cDn+Qp6D9cKe1NPHtl9m+uv+bw1tNhlDkD8aI
+         cy/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276553; x=1727881353;
+        d=1e100.net; s=20230601; t=1727276571; x=1727881371;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=GQ1cTLWN/qm1UuyAwDsDiC37ecAWh5CqzUoGN/3jT3Q=;
-        b=wmRB7wdHPUdZsWHXxbiMEq20cKJc5AyhL81y6pY/uP4fGlPQ6Yi5O8hyjFcRzTLNhr
-         Fyif78T4PtXpBtrwifN8LHa1navMoS1cjEiwx+lEXLSuWU1I/zROXALxEKSZ0AKDNcDe
-         bwfbuvqBwAZ2WqF/oMyeJv+WRk4cL6HfTPwZMCb6F09CuoE34mt4KpBebwRsXFye5cTj
-         zPyso2sMeFG31OkMBinNVV6Z0ylpXDNOQil+1hL6VyiAHxpHGs2fxTUUzFcKhe9qhKCZ
-         n++hxF/mQS0KOxPp8qHy4QiccW8Escb5E4On6U6PS0YV+xoMUMyOEcLn7DvzScPFk4DF
-         qsYQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUopZfmCSIcBTf9dNfxjSVQGWXz4Q/O6mqYSAoBmR8Btd/xr9Q0uVZ29WuwN85Rzfi1YaX6w9LrV2M=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YztBpuJybIzbycOGms7f1NqikwKrPWbvIPxp39lnVqB2Sli7HaQ
-	tXGXsWm+TnpOLVndA581Vh5TcMzZJVFhwFOJPrsh3pAFWACAfq7iDrcY+O7mOCyF7qgSuA==
-X-Google-Smtp-Source: AGHT+IEbuxsanqyADq8Deat2AYN/hrx0yHWhBh+K99NJ5NNzbtyXWGf28ibYOumK1/7kTAhssaq/BKmU
+        bh=q7Siui3EQaHZbOP2Zf5u6bj1Z6F9xVc5htz8ViId7Yw=;
+        b=wOT3B4bpc9ftAkbUHCZg4bPRkCISsOvcHqoUr/Hui1d8etcHkD0lpm2HxM+jNdgwPC
+         DwZZkYoa+rUoFSQ9jm8Epf5SVdFhlwKk3b12ETcH0Cdso/v7bHJx20Vus06aPLM2xKGI
+         7HuC/t5PndK6tc+F+dWSMvRRH090KY4hly0WUQvGJ4X2ZcHV7fJ3gPZwQMKktrOl7UQP
+         RgVPAOebYd9CV/CYlgJ/JOtSyoX60+/6MxTCX9o1gAyONSaRupxgPCHRU3VSqv22deHz
+         37L2vn63pjtpXDoBQv9LfCalSyCf3oolT6bvkTWhBCiQ20iSk8ELkQ/I9Fe4gM3ABH5w
+         nXDA==
+X-Forwarded-Encrypted: i=1; AJvYcCVsALQUbRkD0q3WAR/TNPPj8x44j5rjH2chx4oK4z9ocCXgqYDKOBDpE1KpksR/DLSqPwiDl1ZPLJA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz0Ipvq0XHjL6mYqNzM00mO8QtD8LztYLfgeiVLYshiyN1WnI3J
+	pHa6y/uFaKvHA2xBXboJo7QDkqzHzsxfF9Zo9+RmN8HGRq7fna2BQXAO8abd2sE3H74IGw==
+X-Google-Smtp-Source: AGHT+IGUGK/IbClqwN6y6QvmI8hCfQn6s2hVSiVHB1d+dhN6jVJxxhzTiRxXUiYwgEqTcxKFspPDWKFo
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a05:6000:1948:b0:371:8d08:6302 with SMTP id
- ffacd0b85a97d-37cc2466282mr1755f8f.2.1727276552813; Wed, 25 Sep 2024 08:02:32
- -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:17 +0200
+ (user=ardb job=sendgmr) by 2002:a05:690c:f90:b0:6c1:298e:5a7 with SMTP id
+ 00721157ae682-6e21d9f2676mr100587b3.5.1727276571410; Wed, 25 Sep 2024
+ 08:02:51 -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:24 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1089; i=ardb@kernel.org;
- h=from:subject; bh=Gk3vl5lcNVlUG5WaXx6+kW7e4vi5Wc78FqbNjCEkOO8=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6pHFHOXq05/1nFnPcudQmJ7wpr7dLDufJIa/O8C5x
- Txd0oW5o5SFQYyDQVZMkUVg9t93O09PlKp1niULM4eVCWQIAxenAExENobhf+k7pXk1KeYh8xfa
- vazOipusdTSTNTQtS+jqxsxgKQvlywz/y0srlXSWbHHluXU+4voFET+GHMONjSy3U2vjQqX5RWI YAQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2378; i=ardb@kernel.org;
+ h=from:subject; bh=s5eg4POBUMz0+xutAa57cnb7wChxapKHTEsRfaj5xkM=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6rmrbx/K9pd0n9poZ7rKarM71/pb64Mu3OE7WFCew
+ +trFZHXUcrCIMbBICumyCIw+++7nacnStU6z5KFmcPKBDKEgYtTACYiIMfIsHzp8ptxntWap0qz
+ /54LMvVhTo1RvbxcftLGA6VFgfY+Jxn+B/cyx9dHTT/wO+rQQaXszxPMFk1geHr9aqrVTv/NPxI dmAE=
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-47-ardb+git@google.com>
-Subject: [RFC PATCH 17/28] x86/hibernate: Prefer RIP-relative accesses
+Message-ID: <20240925150059.3955569-54-ardb+git@google.com>
+Subject: [RFC PATCH 24/28] tools/objtool: Treat indirect ftrace calls as
+ direct calls
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,36 +111,71 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-Replace some absolute symbol references with RIP-relative ones, so we
-don't need to fix them up at boot.
+In some cases, the compiler may rely on indirect calls using GOT slots
+as memory operands to emit function calls. This leaves it up to the
+linker to relax the call to a direct call if possible, i.e., if the
+destination address is known at link time and in range, which may not be
+the case when building shared libraries for user space.
+
+On x86, this may happen when building in PIC mode with ftrace enabled,
+and given that vmlinux is a fully linked binary, this relaxation is
+always possible, and therefore mandatory per the x86_64 psABI.
+
+This means that the indirect calls to __fentry__ that are observeable in
+vmlinux.o will have been converted to direct calls in vmlinux, and can
+be treated as such by objtool.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- arch/x86/power/hibernate_asm_64.S | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/objtool/check.c | 32 ++++++++++++++++++--
+ 1 file changed, 30 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/power/hibernate_asm_64.S b/arch/x86/power/hibernate_asm_64.S
-index 0a0539e1cc81..1d96a119d29d 100644
---- a/arch/x86/power/hibernate_asm_64.S
-+++ b/arch/x86/power/hibernate_asm_64.S
-@@ -39,7 +39,7 @@ SYM_FUNC_START(restore_registers)
- 	movq	%rax, %cr4;  # turn PGE back on
+diff --git a/tools/objtool/check.c b/tools/objtool/check.c
+index 04725bd83232..94a56099e22d 100644
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -1696,11 +1696,39 @@ static int add_call_destinations(struct objtool_file *file)
+ 	struct reloc *reloc;
  
- 	/* We don't restore %rax, it must be 0 anyway */
--	movq	$saved_context, %rax
-+	leaq	saved_context(%rip), %rax
- 	movq	pt_regs_sp(%rax), %rsp
- 	movq	pt_regs_bp(%rax), %rbp
- 	movq	pt_regs_si(%rax), %rsi
-@@ -70,7 +70,7 @@ SYM_FUNC_START(restore_registers)
- SYM_FUNC_END(restore_registers)
+ 	for_each_insn(file, insn) {
+-		if (insn->type != INSN_CALL)
++		if (insn->type != INSN_CALL &&
++		    insn->type != INSN_CALL_DYNAMIC)
+ 			continue;
  
- SYM_FUNC_START(swsusp_arch_suspend)
--	movq	$saved_context, %rax
-+	leaq	saved_context(%rip), %rax
- 	movq	%rsp, pt_regs_sp(%rax)
- 	movq	%rbp, pt_regs_bp(%rax)
- 	movq	%rsi, pt_regs_si(%rax)
+ 		reloc = insn_reloc(file, insn);
+-		if (!reloc) {
++		if (insn->type == INSN_CALL_DYNAMIC) {
++			if (!reloc)
++				continue;
++
++			/*
++			 * GCC 13 and older on x86 will always emit the call to
++			 * __fentry__ using a relaxable GOT-based symbol
++			 * reference when operating in PIC mode, i.e.,
++			 *
++			 *   call   *0x0(%rip)
++			 *             R_X86_64_GOTPCRELX  __fentry__-0x4
++			 *
++			 * where it is left up to the linker to relax this into
++			 *
++			 *   call   __fentry__
++			 *   nop
++			 *
++			 * if __fentry__ turns out to be DSO local, which is
++			 * always the case for vmlinux. Given that this
++			 * relaxation is mandatory per the x86_64 psABI, these
++			 * calls can simply be treated as direct calls.
++			 */
++			if (arch_ftrace_match(reloc->sym->name)) {
++				insn->type = INSN_CALL;
++				add_call_dest(file, insn, reloc->sym, false);
++			}
++
++		} else if (!reloc) {
+ 			dest_off = arch_jump_destination(insn);
+ 			dest = find_call_destination(insn->sec, dest_off);
+ 
 -- 
 2.46.0.792.g87dc391469-goog
 
