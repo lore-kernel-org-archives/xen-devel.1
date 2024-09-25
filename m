@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0C2CCF9E0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEB9CCF9E1
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804104.1215091 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.804141.1215175 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiw-00089U-W4; Wed, 25 Sep 2024 15:14:38 +0000
+	id 1stTj8-0002Gu-GP; Wed, 25 Sep 2024 15:14:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804104.1215091; Wed, 25 Sep 2024 15:14:38 +0000
+Received: by outflank-mailman (output) from mailman id 804141.1215175; Wed, 25 Sep 2024 15:14:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTiw-00086G-Hf; Wed, 25 Sep 2024 15:14:38 +0000
-Received: by outflank-mailman (input) for mailman id 804104;
- Wed, 25 Sep 2024 15:02:22 +0000
+	id 1stTj6-00025M-U6; Wed, 25 Sep 2024 15:14:48 +0000
+Received: by outflank-mailman (input) for mailman id 804141;
+ Wed, 25 Sep 2024 15:07:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=G4Vb=QX=flex--ardb.bounces.google.com=3-yX0ZggKCVYyF1z+46H4CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@srs-se1.protection.inumbo.net>)
- id 1stTX4-0002k3-IN
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:22 +0000
-Received: from mail-ed1-x54a.google.com (mail-ed1-x54a.google.com
- [2a00:1450:4864:20::54a])
+ <SRS0=Wloc=QX=flex--ardb.bounces.google.com=3GSb0ZggKCXQSjVT+YalYggYdW.UgepWf-VWnWddaklk.pWfhjgbWUl.gjY@srs-se1.protection.inumbo.net>)
+ id 1stTXX-0002k3-Qq
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:51 +0000
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [2607:f8b0:4864:20::114a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29f85010-7b4f-11ef-99a2-01e77a169b0f;
- Wed, 25 Sep 2024 17:02:21 +0200 (CEST)
-Received: by mail-ed1-x54a.google.com with SMTP id
- 4fb4d7f45d1cf-5c4230b10a0so5599187a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:21 -0700 (PDT)
+ id 3b257834-7b4f-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 17:02:50 +0200 (CEST)
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-6dbffbae597so115565287b3.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29f85010-7b4f-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 3b257834-7b4f-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276540; x=1727881340; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276569; x=1727881369; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=sMLI1adUSxUIp8UXfDcqdD38QxXI+e+F/+Ag4yCxL7E=;
-        b=RYbNlnXxxFLiRAJ9AyvJiPiOVrWfadEIV8YL8vDT8QzEr6RTf9W5EEXLvOktBt1xLF
-         CzyI1+XSoIZ1OW1jB6P1WO8MVQe6O9Sx0Q6HZWOWJMprZLUL5pDuHVCeKllX+1ayNhxR
-         95va/IzgXJQzIGqJDXFpueajato1uc+N8toEJNcRwFqOig8PoN1XbKd7U3ZK6iYO9WR+
-         W1NoWbjkCy2cFY8+I3ZLwYwFeA1B+ePUySj5RS3lVmu82HSdynYZFU35a+7+1KptNAG2
-         pIe3nFMOCTn+rtfJ5ow+WzTFOVtbGaSg3M/PDJHQHvc9vS0WXSgcJiiEjN2GKmJ0DcZD
-         t0cw==
+        bh=CRXmTW/MqFQ5H7gO5V6pXIYv4aezSxVZvDN4lDSH+kA=;
+        b=RjRXbaD0UrPuUl69kHn+8HUpGGmxM74QKSWkndr94lQjyJSS/BwPU6/2wq17/DPPBM
+         xcZNAUnqSmB4wsy3PlHhP+9hAD3gmLhH5c1uZ1otVvPjJILgpQb+SRTPvuBhx5+u7QSG
+         C1K3kj62JZSphhWR36GwH9AXFiYMouD2fxq6IYSnFTCaSrSTqRf7xvjnI4whMOkr56TJ
+         j9/BDZmNqpnxO0yByFc+GAtqN2QL/pU6LV46V4GP/o1F7fNIEuuNOzxg8Oosn/k+uMq4
+         90Miqf6SsEWtPboBp45nngJG7SbCT1TXC1EKc7l2LpnWbHJM6803Y8T4DER+yNNg3uIB
+         HfPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276540; x=1727881340;
+        d=1e100.net; s=20230601; t=1727276569; x=1727881369;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=sMLI1adUSxUIp8UXfDcqdD38QxXI+e+F/+Ag4yCxL7E=;
-        b=rgnQ/fCU9I26rgZkb1bZMiqIi0z+r2/LEtnak/r4uASA98juxmU/e3GSepZi/bHekP
-         e0Q1Z7PFOAd0VqOPxcttj7k8clZGFqnInvfp0az2I89Df0Bv7cxLfyB12GOJUhmQZGQV
-         /pOyQMPsdSe6oiDl6Nv/tV+1y4BvwXmWxFpFxUIt48mUgWwQkq2BhLCv+kK+E1vWt7JX
-         wLTjC2PzKSoTAOXV6qk5ZMRhPB1TbRtfLz4svvKole9zvbUIusSaukt3KS6n91CQqyHF
-         XCzP0ZGU8X+jHVSZgDaMrFDvGj/UBLiBnkIHTw/AcG8GXoFRbbotsKjbM+YrHaL6uqw/
-         DS5A==
-X-Forwarded-Encrypted: i=1; AJvYcCVraKT35Ric9qHKi9xddAn6FXWUw7WQmoyCg1o8YEmHSyvGF+CbWuPE5/KPs4KWx+yy0kR3hnShuKo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwiWexBmNdcvb4VbCY8Y1LN3YQ9SHOybxvz4wZzWFu70mAndJwS
-	e0QVstos7ApOTPiEJCAAZ0MHqiLkM/+6hF1ObjyWZEqnPLW+mTNfb/Dwz5JO+rK1xI01mg==
-X-Google-Smtp-Source: AGHT+IHqdrbnTURYSpf/5afh17e1i3rk5opqYbKAlLurQBauppiTWqSh5+YV6ICpl369+Ha35/G5jy3r
+        bh=CRXmTW/MqFQ5H7gO5V6pXIYv4aezSxVZvDN4lDSH+kA=;
+        b=mBXYVm8/rLOa2UWi6gs66d0H0i+CcMqcaVLRRK9hbBgCvskovD4u1ZHe+fOiGlK6YN
+         mRw3JR+rAvYW683B09IVVQIQpQKG/dbPt+eHcvBUIL/HzOHQwXom7CtUTBt9XsgUjZtL
+         ubWYAtJvGpU91dbJ8EYYuxBJTOfLlcnWU/e6Ctg+Zpdi5A/sx2bv7yWLfu3NCdpexAJj
+         BxnUBCKQSb7NaLM07PmcjizwtpzkqM3VA2vTyzQ2/JNTuemf8hdpuOVR8y1LOo9xmVUf
+         J4dViCyi1Pq/2v1Q5e8n58jtB204vi29qyMH/j882Fjzvs0dhyuZaptfD2rU5WaAoUiQ
+         EURw==
+X-Forwarded-Encrypted: i=1; AJvYcCU0xlTdyMxwABZBOWyLj2n6DwksF5ipurw7C6MnOznKL/lrexsQ0qAiqN6d3zaLZvxOEXyN4O8MWWc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzTHsrBBw5aqpjQlGsptEEI0wpUfRiWjDlASgxYdVxVd+IGsjtx
+	BuMKjKeUrWZRrhLRsXLSp8fZNPp9PTcWe0uGGu1LUIy1ZPU7R2202ASpWlbDCB1y8TEqmQ==
+X-Google-Smtp-Source: AGHT+IEC1dPqUcAfKXMWGhZtWcpNQB40zyIE7CTDx8E05n1FmrMxkCCUsqBlLo74/YEl/S1/swIJOPiD
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a17:906:6d8:b0:a8a:76fd:ae67 with SMTP id
- a640c23a62f3a-a93a061ba72mr129666b.10.1727276539991; Wed, 25 Sep 2024
- 08:02:19 -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:12 +0200
+ (user=ardb job=sendgmr) by 2002:a5b:841:0:b0:e1d:7ce:4844 with SMTP id
+ 3f1490d57ef6-e24d7ee7f12mr17133276.4.1727276569059; Wed, 25 Sep 2024 08:02:49
+ -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:23 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2056; i=ardb@kernel.org;
- h=from:subject; bh=VKZKKQxE7f774DDxhaNjhf6gM8y+4CHtkhz4ITFKHVU=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6l6HjphM91K+tMbfPlum+q87xXbcaBq/plqB6J0rH
- Clz7dQ6SlkYxDgYZMUUWQRm/3238/REqVrnWbIwc1iZQIYwcHEKwESez2L4w3XU9mNkQveSSXqf
- bkfpTfktlPbu753X3m4//t4RvX456gUjw9ItwQrWWxY9aPiwtX3xVeeW5YpKNdGO1l4qU7KmnF4 VzwoA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1309; i=ardb@kernel.org;
+ h=from:subject; bh=AFLlY9eKyU6HJQ3jUUf7ewU02HHQByNyZjoPWXcfJAc=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6pkD1l1SMr9PdplxF72UMD0WHhu/+uT9iz8dfy0Km
+ CzCpZrbUcrCIMbBICumyCIw+++7nacnStU6z5KFmcPKBDKEgYtTACbCVcjIsG+u8YbnfWsvLOy8
+ 8P/8g7N6wi1XH/y+rLV/v86EltfmLq8ZGR6dT3mnbCtQs96/+mLXk3mrOl5/49b4OFvBlCnX4bD oQm4A
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-42-ardb+git@google.com>
-Subject: [RFC PATCH 12/28] x86/pm-trace: Use RIP-relative accesses for .tracedata
+Message-ID: <20240925150059.3955569-53-ardb+git@google.com>
+Subject: [RFC PATCH 23/28] tools/objtool: Mark generated sections as writable
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,57 +110,37 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-Use RIP-relative accesses and 32-bit offsets for .tracedata, to avoid
-the need for relocation fixups at boot time.
+objtool generates ELF sections such as __mcount_loc, which carry
+absolute symbol references that need to be fixed up at boot time, based
+on the actual virtual placement of the kernel binary.
+
+This involves writing to the section at boot time, and in some cases
+(e.g., when using --pie and -z text), the lld linker is more pedantic
+about this, and complains about absolute relocations operating on
+read-only sections.
+
+None of this actually matters for vmlinux, which manages its own mapping
+permissions, and so we can just set the SHF_WRITE flag on those sections
+to make the linker happy.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- arch/x86/include/asm/pm-trace.h | 4 ++--
- drivers/base/power/trace.c      | 6 +++---
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ tools/objtool/elf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/include/asm/pm-trace.h b/arch/x86/include/asm/pm-trace.h
-index bfa32aa428e5..123faf978473 100644
---- a/arch/x86/include/asm/pm-trace.h
-+++ b/arch/x86/include/asm/pm-trace.h
-@@ -8,10 +8,10 @@
- do {								\
- 	if (pm_trace_enabled) {					\
- 		const void *tracedata;				\
--		asm volatile(_ASM_MOV " $1f,%0\n"		\
-+		asm volatile("lea " _ASM_RIP(1f) ", %0\n"	\
- 			     ".section .tracedata,\"a\"\n"	\
- 			     "1:\t.word %c1\n\t"		\
--			     _ASM_PTR " %c2\n"			\
-+			     ".long %c2 - .\n"			\
- 			     ".previous"			\
- 			     :"=r" (tracedata)			\
- 			     : "i" (__LINE__), "i" (__FILE__));	\
-diff --git a/drivers/base/power/trace.c b/drivers/base/power/trace.c
-index cd6e559648b2..686a0276ccfc 100644
---- a/drivers/base/power/trace.c
-+++ b/drivers/base/power/trace.c
-@@ -167,7 +167,7 @@ EXPORT_SYMBOL(set_trace_device);
- void generate_pm_trace(const void *tracedata, unsigned int user)
- {
- 	unsigned short lineno = *(unsigned short *)tracedata;
--	const char *file = *(const char **)(tracedata + 2);
-+	const char *file = offset_to_ptr((int *)(tracedata + 2));
- 	unsigned int user_hash_value, file_hash_value;
+diff --git a/tools/objtool/elf.c b/tools/objtool/elf.c
+index 3d27983dc908..26a39b010c92 100644
+--- a/tools/objtool/elf.c
++++ b/tools/objtool/elf.c
+@@ -1142,7 +1142,7 @@ struct section *elf_create_section(struct elf *elf, const char *name,
+ 	sec->sh.sh_entsize = entsize;
+ 	sec->sh.sh_type = SHT_PROGBITS;
+ 	sec->sh.sh_addralign = 1;
+-	sec->sh.sh_flags = SHF_ALLOC;
++	sec->sh.sh_flags = SHF_ALLOC | SHF_WRITE;
  
- 	if (!x86_platform.legacy.rtc)
-@@ -187,9 +187,9 @@ static int show_file_hash(unsigned int value)
- 
- 	match = 0;
- 	for (tracedata = __tracedata_start ; tracedata < __tracedata_end ;
--			tracedata += 2 + sizeof(unsigned long)) {
-+			tracedata += 2 + sizeof(int)) {
- 		unsigned short lineno = *(unsigned short *)tracedata;
--		const char *file = *(const char **)(tracedata + 2);
-+		const char *file = offset_to_ptr((int *)(tracedata + 2));
- 		unsigned int hash = hash_string(lineno, file, FILEHASH);
- 		if (hash != value)
- 			continue;
+ 	/* Add section name to .shstrtab (or .strtab for Clang) */
+ 	shstrtab = find_section_by_name(elf, ".shstrtab");
 -- 
 2.46.0.792.g87dc391469-goog
 
