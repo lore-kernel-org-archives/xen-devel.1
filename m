@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8151CCF9E1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2094CCF9E0
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:15:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804159.1215247 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.804157.1215226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTjO-00064m-Bm; Wed, 25 Sep 2024 15:15:06 +0000
+	id 1stTjK-0004kb-HM; Wed, 25 Sep 2024 15:15:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804159.1215247; Wed, 25 Sep 2024 15:15:05 +0000
+Received: by outflank-mailman (output) from mailman id 804157.1215226; Wed, 25 Sep 2024 15:15:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTjM-0005vx-L0; Wed, 25 Sep 2024 15:15:04 +0000
-Received: by outflank-mailman (input) for mailman id 804159;
+	id 1stTjH-0004Tb-CX; Wed, 25 Sep 2024 15:14:59 +0000
+Received: by outflank-mailman (input) for mailman id 804157;
  Wed, 25 Sep 2024 15:08:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IzCT=QX=flex--ardb.bounces.google.com=3ICb0ZggKCXsZqca+fhsfnnfkd.bnlwdm-cdudkkhrsr.wdmoqnidbs.nqf@srs-se1.protection.inumbo.net>)
- id 1stTXf-0002k3-F1
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:59 +0000
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [2607:f8b0:4864:20::114a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3f932ee6-7b4f-11ef-99a2-01e77a169b0f;
- Wed, 25 Sep 2024 17:02:57 +0200 (CEST)
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-6e20e4e55bbso31302567b3.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:57 -0700 (PDT)
+ <SRS0=ilOC=QX=flex--ardb.bounces.google.com=3JSb0ZggKCYAevhf+kmxksskpi.gsq1ir-hizippmwxw.1irtvsnigx.svk@srs-se1.protection.inumbo.net>)
+ id 1stTXi-0002UM-L3
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:03:02 +0000
+Received: from mail-wm1-x349.google.com (mail-wm1-x349.google.com
+ [2a00:1450:4864:20::349])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 425bbd5f-7b4f-11ef-a0ba-8be0dac302b0;
+ Wed, 25 Sep 2024 17:03:01 +0200 (CEST)
+Received: by mail-wm1-x349.google.com with SMTP id
+ 5b1f17b1804b1-42cb6dc3365so52467835e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:03:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3f932ee6-7b4f-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 425bbd5f-7b4f-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276576; x=1727881376; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276581; x=1727881381; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=NyUlP50R7ff/vN5G1h18De2z2GbJesVTam/AShMXJgw=;
-        b=TTGSC8GUJXMztNiV2M88C0L8+mLFEfHZpFhwyXgOB70IC2PqCE/QYGBY5flgP721ru
-         TL2wZP/wqQLTfh71E13TwovZ3twv5NfvdCnlMDRXyi9PVyxkwU5q0RsfsXNWr4b48Ger
-         Sr3PCZUO+nawoUCFRO7fbdZkUWRD/fjFRoxoqm4KQWAzbCNUYbGmzEy9ARuOPW4JO/op
-         K2pIbguKtoatGSn/FSN7D7doDW2zwga7HhZ15Qeg5nHhP0mArSmYIXKLmD7bpM4zseyj
-         h7qqQduapqnH8RjPMV2DbqHZ19r0oCV0GzvZOUVIcXWUlDHnsMaDbvegn0ibOc8DTL4J
-         /lcQ==
+        bh=H/fxT1DdHMwMyeW8np4BBTWW8phQCD6XQ4SETP482c8=;
+        b=TNELob0MTX4oWwGfYPikwsvJahLu4oJUvPpp/COGnOaHEMEVx7dDMH+N3fy548mL6y
+         +uT5HvektpNdr4EgnHExoN7MR7AdmJakl4D84Peev70DgwkoKB4MEgdsCd/8x9BmFf1I
+         ncmJTUkaVqVy/ussi6RiInhleriikSpPr/TDAlCHXBaOhnO4dc2juUGZVAAYwhy8XNJc
+         fML28gkTeXYmlHZ1ygLqTML0SPxzYH/aQegxJJxkkBQF+TyKK9LaVP3+AYsPOJ1POxsi
+         ETxntiH6aH6FFo9Nnn1to+tBzCh8pTVExovWdq3iGRXCBaPVlLZam2G19lAlrqPsUMdC
+         cOZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276576; x=1727881376;
+        d=1e100.net; s=20230601; t=1727276581; x=1727881381;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=NyUlP50R7ff/vN5G1h18De2z2GbJesVTam/AShMXJgw=;
-        b=kOC/XGF5daKkliIzuF1eB1HSqaIx62iUnpf2QANlSIhcSQz/SDhK3hPptNf52f7xlS
-         iW4ZehMl8D+9GckQlM1YjGl9rYLmQfaPnRb8j45SYeNqb6pcsu8icqOrGA22Q7cmB/dp
-         0QmRkCO1LubHSYI9peErvkNBc39Nypi7NlS9Kv4kwUMWMHVAFFbAtus8IWHQBKUzuvu4
-         FGdBTru7Ps1rUogS8AEoS5xlbrVG1cqSIN1dLqEdqprmxBvKz4UkwA026ixcYfssOgWq
-         fTgl5IB8mofzXcqStd5TwC5BhGnAAXPCLbtK9lZqflLrVnwUzZhpYKnouvc4t3EhugfU
-         J/NA==
-X-Forwarded-Encrypted: i=1; AJvYcCVfFRTa+ew/3EzVdIRCuqp2tdBODkJhzYXk/LOPp9nEYE7GlfAAj/9rwjpcknFnmURZdZmKaPDvnMQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzOp2W/LWZpUSkcK7LQAkYOQq9tvZICHRRPsAvY0hS5VuSTgGDF
-	fuTQAY5AW1qQ+P3agVkppg/G699lHUff9pEO14+tNWgULPQCYhxKOSJ5MaqwFB7mdbT0jA==
-X-Google-Smtp-Source: AGHT+IF9cT+1HnKGMG9rCL4XBpFAiRqL2rxQrsa7AeT9AU3GHDLsQi/G2t9Fg7OjYNkaCpx/AYMRBr5P
+        bh=H/fxT1DdHMwMyeW8np4BBTWW8phQCD6XQ4SETP482c8=;
+        b=AOJ2sJmuF3yF236tXhzrmylVpvU4cgZMdWY37JyMHcgZxSgjHfFzu4RiqLWNLGflVQ
+         69H93c6vPfrma4HbWllIXlEVKL7cfFIhsEDV9Zl4a11WNvdpSYp0hC8mkTRq3neDmUfm
+         9m+lXUX9pDLyTnABP1uagChRwiG/FuD5+59ncx3zaYxE6MQqzZ9Bu/Tc1G5NTu5GtJI5
+         bjbz4douMnNapi5MS7u5pD56XnSwNBqR2g/Kh/medPXI66sa4EBhxUHT78SHeNPMIXJq
+         cZwUDVqCrjPNNGt+QqtS1VIPOkiCvjzh8S88BqtE7jjPItV9erkd0ychLE52xnrEBHST
+         9NXQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWOYPtFuDeSyMDg7xE2LsEHdVXnnGaP59e4AZ3c0+VS8xHdJhaY0BFb8OTKgzIJXbiKpzU/vsEzPWU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwCAvOUPDHaQF2cV8rxOLPSeMJWZW2vog6dDo3Vfh2ohaCjwtwX
+	SqUgvsFHj7KTiQotksBzkhD2JotHCBn3/+LhUzNZQdN93KR4OMfCe6Rp5eliEcpakNFT3g==
+X-Google-Smtp-Source: AGHT+IH1WYrW/UKZ6ngnkIpIsR2dgkaJ0zFY0ft3XgXQ0QWdCfqsR4NIFZKbE/zMO6K3p2uoWgwYBDA5
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a05:690c:3149:b0:6de:19f:34d7 with SMTP id
- 00721157ae682-6e21d81e811mr94787b3.2.1727276576540; Wed, 25 Sep 2024 08:02:56
- -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:26 +0200
+ (user=ardb job=sendgmr) by 2002:a05:600c:5709:b0:42c:a879:3d0f with SMTP id
+ 5b1f17b1804b1-42e960af3c0mr226185e9.0.1727276581262; Wed, 25 Sep 2024
+ 08:03:01 -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:28 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7472; i=ardb@kernel.org;
- h=from:subject; bh=ZjnajWIKcY5DrOh/WpJS8LufZBk9grHctEdumwSdFZ4=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6oXaCAm2n4qhvN+cWPhMgzpaNBxMv/te55wX/7Z/7
- fXGH00dpSwMYhwMsmKKLAKz/77beXqiVK3zLFmYOaxMIEMYuDgFYCJp0owMs7Y8P9MQNOWv4+0U
- 10OXF7hWP92jueKnm9Tq9WavZtsdSmX4Z/Uk0GTGvv61f15k371aLH96espP9/0Kyz6kZF4+IJv 9hR8A
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11373; i=ardb@kernel.org;
+ h=from:subject; bh=vOsRO/wusTOgSIMrTbPQkuvbTEvedgqm5gFKQyyQ6LE=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6uU7KcXh52pbo2UXaeZq6U587fAt6o/qk6KOindLu
+ xmSJDk6SlkYxDgYZMUUWQRm/3238/REqVrnWbIwc1iZQIYwcHEKwES8vjP8D6r8/Whqj0Ue89/g
+ jLlev1knyS9cOWlNtI5Y6rLiT9GiiYwMF5pPLt85df5ck61Kskef/1wi37sr+6Xjrf+r3xWdTEj U5wUA
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-56-ardb+git@google.com>
-Subject: [RFC PATCH 26/28] x86/boot: Implement support for ELF RELA/RELR relocations
+Message-ID: <20240925150059.3955569-58-ardb+git@google.com>
+Subject: [RFC PATCH 28/28] x86/tools: Drop x86_64 support from 'relocs' tool
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,212 +110,380 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-Add support for standard dynamic ELF relocations to perform the virtual
-relocation of the core kernel at boot. The RELR format results in a 10x
-reduction in memory footprint of the relocation data, and can be
-generated by the linker directly. This removes the need for
-a) a host tool 'relocs' and a bespoke, clunky relocation table format
-   where the table is simply concatenated to the vmlinux payload when
-   building the decompressor;
-b) dependence on the --emit-relocs linker switch, which dumps static,
-   intermediate build time relocations into the ELF binary, to be
-   subsequently used as runtime relocations.
+The relocs tool is no longer used on vmlinux, which is the only 64-bit
+ELF executable that it used to operate on in the 64-bit build. (It is
+still used for parts of the decompressor)
 
-The latter is especially problematic, as linkers may apply relaxations
-that result in the code going out of sync with the static relocation
-that annotated it in the input. This requires additional work on the
-part of the linker to update the static relocation, which is not even
-possible in all cases. Therefore, it is much better to consume a
-runtime, dynamic relocation format in the way it was intended.
-
-This will require switching to linking vmlinux in PIE mode - this is
-implemented in a subsequent patch.
+So drop the 64-bit handling - it is dead code now.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- Documentation/arch/x86/zero-page.rst  |  3 +-
- arch/x86/Kconfig                      |  1 +
- arch/x86/include/asm/setup.h          |  1 +
- arch/x86/include/uapi/asm/bootparam.h |  2 +-
- arch/x86/kernel/head64.c              | 36 ++++++++++++++++++++
- arch/x86/kernel/head_64.S             |  5 +++
- arch/x86/kernel/vmlinux.lds.S         | 24 +++++++++----
- 7 files changed, 64 insertions(+), 8 deletions(-)
+ arch/x86/tools/Makefile        |   2 +-
+ arch/x86/tools/relocs.c        | 178 +-------------------
+ arch/x86/tools/relocs.h        |   9 +-
+ arch/x86/tools/relocs_64.c     |  18 --
+ arch/x86/tools/relocs_common.c |  11 +-
+ 5 files changed, 9 insertions(+), 209 deletions(-)
 
-diff --git a/Documentation/arch/x86/zero-page.rst b/Documentation/arch/x86/zero-page.rst
-index 45aa9cceb4f1..fd18b77113e2 100644
---- a/Documentation/arch/x86/zero-page.rst
-+++ b/Documentation/arch/x86/zero-page.rst
-@@ -3,7 +3,7 @@
- =========
- Zero Page
- =========
--The additional fields in struct boot_params as a part of 32-bit boot
-+The additional fields in struct boot_params as a part of 32/64-bit boot
- protocol of kernel. These should be filled by bootloader or 16-bit
- real-mode setup code of the kernel. References/settings to it mainly
- are in::
-@@ -20,6 +20,7 @@ Offset/Size	Proto	Name			Meaning
- 060/010		ALL	ist_info		Intel SpeedStep (IST) BIOS support information
- 						(struct ist_info)
- 070/008		ALL	acpi_rsdp_addr		Physical address of ACPI RSDP table
-+078/008		64-bit	kaslr_va_shift		Virtual kASLR displacement of the core kernel
- 080/010		ALL	hd0_info		hd0 disk parameter, OBSOLETE!!
- 090/010		ALL	hd1_info		hd1 disk parameter, OBSOLETE!!
- 0A0/010		ALL	sys_desc_table		System description table (struct sys_desc_table),
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 2852fcd82cbd..54cb1f14218b 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -26,6 +26,7 @@ config X86_64
- 	depends on 64BIT
- 	# Options that are inherently 64-bit kernel only:
- 	select ARCH_HAS_GIGANTIC_PAGE
-+	select ARCH_HAS_RELR
- 	select ARCH_SUPPORTS_INT128 if CC_HAS_INT128
- 	select ARCH_SUPPORTS_PER_VMA_LOCK
- 	select ARCH_SUPPORTS_HUGE_PFNMAP if TRANSPARENT_HUGEPAGE
-diff --git a/arch/x86/include/asm/setup.h b/arch/x86/include/asm/setup.h
-index 85f4fde3515c..a4d7dd81f773 100644
---- a/arch/x86/include/asm/setup.h
-+++ b/arch/x86/include/asm/setup.h
-@@ -51,6 +51,7 @@ extern void reserve_standard_io_resources(void);
- extern void i386_reserve_resources(void);
- extern unsigned long __startup_64(unsigned long p2v_offset, struct boot_params *bp);
- extern void startup_64_setup_gdt_idt(void);
-+extern void startup_64_apply_relocations(struct boot_params *bp);
- extern void early_setup_idt(void);
- extern void __init do_early_exception(struct pt_regs *regs, int trapnr);
+diff --git a/arch/x86/tools/Makefile b/arch/x86/tools/Makefile
+index 7278e2545c35..f7d12a9dccfc 100644
+--- a/arch/x86/tools/Makefile
++++ b/arch/x86/tools/Makefile
+@@ -40,7 +40,7 @@ $(obj)/insn_sanity.o: $(srctree)/tools/arch/x86/lib/insn.c $(srctree)/tools/arch
  
-diff --git a/arch/x86/include/uapi/asm/bootparam.h b/arch/x86/include/uapi/asm/bootparam.h
-index 9b82eebd7add..3389b1be234c 100644
---- a/arch/x86/include/uapi/asm/bootparam.h
-+++ b/arch/x86/include/uapi/asm/bootparam.h
-@@ -120,7 +120,7 @@ struct boot_params {
- 	__u64  tboot_addr;				/* 0x058 */
- 	struct ist_info ist_info;			/* 0x060 */
- 	__u64 acpi_rsdp_addr;				/* 0x070 */
--	__u8  _pad3[8];					/* 0x078 */
-+	__u64 kaslr_va_shift;				/* 0x078 */
- 	__u8  hd0_info[16];	/* obsolete! */		/* 0x080 */
- 	__u8  hd1_info[16];	/* obsolete! */		/* 0x090 */
- 	struct sys_desc_table sys_desc_table; /* obsolete! */	/* 0x0a0 */
-diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
-index 49e8ba1c0d34..6609e1012f2f 100644
---- a/arch/x86/kernel/head64.c
-+++ b/arch/x86/kernel/head64.c
-@@ -20,6 +20,7 @@
- #include <linux/io.h>
- #include <linux/memblock.h>
- #include <linux/cc_platform.h>
-+#include <linux/elf.h>
- #include <linux/pgtable.h>
+ HOST_EXTRACFLAGS += -I$(srctree)/tools/include
+ hostprogs	+= relocs
+-relocs-objs     := relocs_32.o relocs_64.o relocs_common.o
++relocs-objs     := relocs_32.o relocs_common.o
+ PHONY += relocs
+ relocs: $(obj)/relocs
+ 	@:
+diff --git a/arch/x86/tools/relocs.c b/arch/x86/tools/relocs.c
+index 22c2d3f07a57..ff5578e63ff8 100644
+--- a/arch/x86/tools/relocs.c
++++ b/arch/x86/tools/relocs.c
+@@ -28,12 +28,7 @@ struct relocs {
+ static struct relocs		relocs16;
+ static struct relocs		relocs32;
  
- #include <asm/asm.h>
-@@ -588,3 +589,38 @@ void __head startup_64_setup_gdt_idt(void)
+-#if ELF_BITS == 64
+-static struct relocs		relocs64;
+-# define FMT PRIu64
+-#else
+ # define FMT PRIu32
+-#endif
  
- 	startup_64_load_idt(handler);
- }
-+
-+#ifdef CONFIG_RELOCATABLE
-+void __head startup_64_apply_relocations(struct boot_params *bp)
-+{
-+	extern const Elf64_Rela __rela_start[], __rela_end[];
-+	extern const u64 __relr_start[], __relr_end[];
-+	u64 va_offset = (u64)RIP_REL_REF(_text) - __START_KERNEL;
-+	u64 va_shift = bp->kaslr_va_shift;
-+	u64 *place = NULL;
-+
-+	if (!va_shift)
-+		return;
-+
-+	for (const Elf64_Rela *r = __rela_start; r < __rela_end; r++) {
-+		if (ELF64_R_TYPE(r->r_info) != R_X86_64_RELATIVE)
-+			continue;
-+
-+		place = (u64 *)(r->r_offset + va_offset);
-+		*place += va_shift;
-+	}
-+
-+	for (const u64 *rel = __relr_start; rel < __relr_end; rel++) {
-+		if ((*rel & 1) == 0) {
-+			place = (u64 *)(*rel + va_offset);
-+			*place++ += va_shift;
-+			continue;
-+		}
-+
-+		for (u64 *p = place, r = *rel >> 1; r; p++, r >>= 1)
-+			if (r & 1)
-+				*p += va_shift;
-+		place += 63;
-+	}
-+}
-+#endif
-diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index cc2fec3de4b7..88cdc5a0c7a3 100644
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -74,6 +74,11 @@ SYM_CODE_START_NOALIGN(startup_64)
- 	cdq
- 	wrmsr
+ struct section {
+ 				Elf_Shdr         shdr;
+@@ -86,10 +81,6 @@ static const char * const	sym_regex_kernel[S_NSYMTYPES] = {
+ 	"__end_rodata_aligned|"
+ 	"__initramfs_start|"
+ 	"(jiffies|jiffies_64)|"
+-#if ELF_BITS == 64
+-	"__per_cpu_load|"
+-	"__end_rodata_hpage_align|"
+-#endif
+ 	"__vvar_page|"
+ 	"_end)$"
+ };
+@@ -210,27 +201,6 @@ static const char *rel_type(unsigned type)
+ {
+ 	static const char *type_name[] = {
+ #define REL_TYPE(X) [X] = #X
+-#if ELF_BITS == 64
+-		REL_TYPE(R_X86_64_NONE),
+-		REL_TYPE(R_X86_64_64),
+-		REL_TYPE(R_X86_64_PC64),
+-		REL_TYPE(R_X86_64_PC32),
+-		REL_TYPE(R_X86_64_GOT32),
+-		REL_TYPE(R_X86_64_PLT32),
+-		REL_TYPE(R_X86_64_COPY),
+-		REL_TYPE(R_X86_64_GLOB_DAT),
+-		REL_TYPE(R_X86_64_JUMP_SLOT),
+-		REL_TYPE(R_X86_64_RELATIVE),
+-		REL_TYPE(R_X86_64_GOTPCREL),
+-		REL_TYPE(R_X86_64_GOTPCRELX),
+-		REL_TYPE(R_X86_64_REX_GOTPCRELX),
+-		REL_TYPE(R_X86_64_32),
+-		REL_TYPE(R_X86_64_32S),
+-		REL_TYPE(R_X86_64_16),
+-		REL_TYPE(R_X86_64_PC16),
+-		REL_TYPE(R_X86_64_8),
+-		REL_TYPE(R_X86_64_PC8),
+-#else
+ 		REL_TYPE(R_386_NONE),
+ 		REL_TYPE(R_386_32),
+ 		REL_TYPE(R_386_PC32),
+@@ -246,7 +216,6 @@ static const char *rel_type(unsigned type)
+ 		REL_TYPE(R_386_PC8),
+ 		REL_TYPE(R_386_16),
+ 		REL_TYPE(R_386_PC16),
+-#endif
+ #undef REL_TYPE
+ 	};
+ 	const char *name = "unknown type rel type name";
+@@ -312,19 +281,9 @@ static uint32_t elf32_to_cpu(uint32_t val)
+ #define elf_half_to_cpu(x)	elf16_to_cpu(x)
+ #define elf_word_to_cpu(x)	elf32_to_cpu(x)
  
-+#ifdef CONFIG_RELOCATABLE
-+	movq	%r15, %rdi
-+	call	startup_64_apply_relocations
-+#endif
-+
- 	call	startup_64_setup_gdt_idt
+-#if ELF_BITS == 64
+-static uint64_t elf64_to_cpu(uint64_t val)
+-{
+-        return le64_to_cpu(val);
+-}
+-# define elf_addr_to_cpu(x)	elf64_to_cpu(x)
+-# define elf_off_to_cpu(x)	elf64_to_cpu(x)
+-# define elf_xword_to_cpu(x)	elf64_to_cpu(x)
+-#else
+ # define elf_addr_to_cpu(x)	elf32_to_cpu(x)
+ # define elf_off_to_cpu(x)	elf32_to_cpu(x)
+ # define elf_xword_to_cpu(x)	elf32_to_cpu(x)
+-#endif
  
- 	/* Now switch to __KERNEL_CS so IRET works reliably */
-diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
-index 52b8db931d0f..f7e832c2ac61 100644
---- a/arch/x86/kernel/vmlinux.lds.S
-+++ b/arch/x86/kernel/vmlinux.lds.S
-@@ -240,6 +240,18 @@ xen_elfnote_phys32_entry_offset =
- 	:init
- #endif
+ static int sym_index(Elf_Sym *sym)
+ {
+@@ -515,10 +474,7 @@ static void print_absolute_symbols(void)
+ 	int i;
+ 	const char *format;
  
-+	.init.rela : {
-+		__rela_start = .;
-+		*(.rela.*) *(.rela_*)
-+		__rela_end = .;
-+	}
-+
-+	.init.relr : {
-+		__relr_start = .;
-+		*(.relr.*)
-+		__relr_end = .;
-+	}
-+
- 	/*
- 	 * Section for code used exclusively before alternatives are run. All
- 	 * references to such code must be patched out by alternatives, normally
-@@ -469,12 +481,6 @@ xen_elfnote_phys32_entry_offset =
- 		*(.got) *(.igot.*)
+-	if (ELF_BITS == 64)
+-		format = "%5d %016"PRIx64" %5"PRId64" %10s %10s %12s %s\n";
+-	else
+-		format = "%5d %08"PRIx32"  %5"PRId32" %10s %10s %12s %s\n";
++	format = "%5d %08"PRIx32"  %5"PRId32" %10s %10s %12s %s\n";
+ 
+ 	printf("Absolute symbols\n");
+ 	printf(" Num:    Value Size  Type       Bind        Visibility  Name\n");
+@@ -559,10 +515,7 @@ static void print_absolute_relocs(void)
+ 	int i, printed = 0;
+ 	const char *format;
+ 
+-	if (ELF_BITS == 64)
+-		format = "%016"PRIx64" %016"PRIx64" %10s %016"PRIx64"  %s\n";
+-	else
+-		format = "%08"PRIx32" %08"PRIx32" %10s %08"PRIx32"  %s\n";
++	format = "%08"PRIx32" %08"PRIx32" %10s %08"PRIx32"  %s\n";
+ 
+ 	for (i = 0; i < shnum; i++) {
+ 		struct section *sec = &secs[i];
+@@ -694,104 +647,6 @@ static void walk_relocs(int (*process)(struct section *sec, Elf_Rel *rel,
  	}
- 	ASSERT(SIZEOF(.got) == 0, "Unexpected GOT entries detected!")
+ }
+ 
+-#if ELF_BITS == 64
+-
+-static int do_reloc64(struct section *sec, Elf_Rel *rel, ElfW(Sym) *sym,
+-		      const char *symname)
+-{
+-	unsigned r_type = ELF64_R_TYPE(rel->r_info);
+-	ElfW(Addr) offset = rel->r_offset;
+-	int shn_abs = (sym->st_shndx == SHN_ABS) && !is_reloc(S_REL, symname);
+-
+-	if (sym->st_shndx == SHN_UNDEF)
+-		return 0;
+-
+-	switch (r_type) {
+-	case R_X86_64_NONE:
+-		/* NONE can be ignored. */
+-		break;
+-
+-	case R_X86_64_PC32:
+-	case R_X86_64_PLT32:
+-		/*
+-		 * PC relative relocations don't need to be adjusted.
+-		 *
+-		 * NB: R_X86_64_PLT32 can be treated as R_X86_64_PC32.
+-		 */
+-		break;
+-
+-	case R_X86_64_PC64:
+-		/*
+-		 * Only used by jump labels
+-		 */
+-		break;
+-
+-	case R_X86_64_32:
+-	case R_X86_64_32S:
+-	case R_X86_64_64:
+-	case R_X86_64_GOTPCREL:
+-		if (shn_abs) {
+-			/*
+-			 * Whitelisted absolute symbols do not require
+-			 * relocation.
+-			 */
+-			if (is_reloc(S_ABS, symname))
+-				break;
+-
+-			die("Invalid absolute %s relocation: %s\n", rel_type(r_type), symname);
+-			break;
+-		}
+-
+-		if (r_type == R_X86_64_GOTPCREL) {
+-			Elf_Shdr *s = &secs[sec->shdr.sh_info].shdr;
+-			unsigned file_off = offset - s->sh_addr + s->sh_offset;
+-
+-			/*
+-			 * GOTPCREL relocations refer to instructions that load
+-			 * a 64-bit address via a 32-bit relative reference to
+-			 * the GOT.  In this case, it is the GOT entry that
+-			 * needs to be fixed up, not the immediate offset in
+-			 * the opcode. Note that the linker will have applied an
+-			 * addend of -4 to compensate for the delta between the
+-			 * relocation offset and the value of RIP when the
+-			 * instruction executes, and this needs to be backed out
+-			 * again. (Addends other than -4 are permitted in
+-			 * principle, but make no sense in practice so they are
+-			 * not supported.)
+-                         */
+-			if (rel->r_addend != -4) {
+-				die("invalid addend (%ld) for %s relocation: %s\n",
+-				    rel->r_addend, rel_type(r_type), symname);
+-				break;
+-			}
+-			offset += 4 + (int32_t)get_unaligned_le32(elf_image + file_off);
+-		}
+-
+-		/*
+-		 * Relocation offsets for 64 bit kernels are output
+-		 * as 32 bits and sign extended back to 64 bits when
+-		 * the relocations are processed.
+-		 * Make sure that the offset will fit.
+-		 */
+-		if ((int32_t)offset != (int64_t)offset)
+-			die("Relocation offset doesn't fit in 32 bits\n");
+-
+-		if (r_type == R_X86_64_64 || r_type == R_X86_64_GOTPCREL)
+-			add_reloc(&relocs64, offset);
+-		else
+-			add_reloc(&relocs32, offset);
+-		break;
+-
+-	default:
+-		die("Unsupported relocation type: %s (%d)\n", rel_type(r_type), r_type);
+-		break;
+-	}
+-
+-	return 0;
+-}
+-
+-#else
+-
+ static int do_reloc32(struct section *sec, Elf_Rel *rel, Elf_Sym *sym,
+ 		      const char *symname)
+ {
+@@ -902,8 +757,6 @@ static int do_reloc_real(struct section *sec, Elf_Rel *rel, Elf_Sym *sym, const
+ 	return 0;
+ }
+ 
 -#endif
 -
--	.plt : {
--		*(.plt) *(.plt.*) *(.iplt)
--	}
--	ASSERT(SIZEOF(.plt) == 0, "Unexpected run-time procedure linkages detected!")
+ static int cmp_relocs(const void *va, const void *vb)
+ {
+ 	const uint32_t *a, *b;
+@@ -939,17 +792,10 @@ static void emit_relocs(int as_text, int use_real_mode)
+ 	int (*write_reloc)(uint32_t, FILE *) = write32;
+ 	int (*do_reloc)(struct section *sec, Elf_Rel *rel, Elf_Sym *sym, const char *symname);
  
- 	.rel.dyn : {
- 		*(.rel.*) *(.rel_*)
-@@ -485,6 +491,12 @@ xen_elfnote_phys32_entry_offset =
- 		*(.rela.*) *(.rela_*)
- 	}
- 	ASSERT(SIZEOF(.rela.dyn) == 0, "Unexpected run-time relocations (.rela) detected!")
-+#endif
-+
-+	.plt : {
-+		*(.plt) *(.plt.*) *(.iplt)
-+	}
-+	ASSERT(SIZEOF(.plt) == 0, "Unexpected run-time procedure linkages detected!")
+-#if ELF_BITS == 64
+-	if (!use_real_mode)
+-		do_reloc = do_reloc64;
+-	else
+-		die("--realmode not valid for a 64-bit ELF file");
+-#else
+ 	if (!use_real_mode)
+ 		do_reloc = do_reloc32;
+ 	else
+ 		do_reloc = do_reloc_real;
+-#endif
+ 
+ 	/* Collect up the relocations */
+ 	walk_relocs(do_reloc);
+@@ -959,11 +805,7 @@ static void emit_relocs(int as_text, int use_real_mode)
+ 
+ 	/* Order the relocations for more efficient processing */
+ 	sort_relocs(&relocs32);
+-#if ELF_BITS == 64
+-	sort_relocs(&relocs64);
+-#else
+ 	sort_relocs(&relocs16);
+-#endif
+ 
+ 	/* Print the relocations */
+ 	if (as_text) {
+@@ -984,16 +826,6 @@ static void emit_relocs(int as_text, int use_real_mode)
+ 		for (i = 0; i < relocs32.count; i++)
+ 			write_reloc(relocs32.offset[i], stdout);
+ 	} else {
+-#if ELF_BITS == 64
+-		/* Print a stop */
+-		write_reloc(0, stdout);
+-
+-		/* Now print each relocation */
+-		for (i = 0; i < relocs64.count; i++)
+-			if (!i || relocs64.offset[i] != relocs64.offset[i - 1])
+-				write_reloc(relocs64.offset[i], stdout);
+-#endif
+-
+ 		/* Print a stop */
+ 		write_reloc(0, stdout);
+ 
+@@ -1027,12 +859,6 @@ static void print_reloc_info(void)
+ 	walk_relocs(do_reloc_info);
  }
  
- /*
+-#if ELF_BITS == 64
+-# define process process_64
+-#else
+-# define process process_32
+-#endif
+-
+ void process(FILE *fp, int use_real_mode, int as_text,
+ 	     int show_absolute_syms, int show_absolute_relocs,
+ 	     int show_reloc_info)
+diff --git a/arch/x86/tools/relocs.h b/arch/x86/tools/relocs.h
+index 7a509604ff92..ef9eec96bd62 100644
+--- a/arch/x86/tools/relocs.h
++++ b/arch/x86/tools/relocs.h
+@@ -32,10 +32,7 @@ enum symtype {
+ 	S_NSYMTYPES
+ };
+ 
+-void process_32(FILE *fp, int use_real_mode, int as_text,
+-		int show_absolute_syms, int show_absolute_relocs,
+-		int show_reloc_info);
+-void process_64(FILE *fp, int use_real_mode, int as_text,
+-		int show_absolute_syms, int show_absolute_relocs,
+-		int show_reloc_info);
++void process(FILE *fp, int use_real_mode, int as_text,
++	     int show_absolute_syms, int show_absolute_relocs,
++	     int show_reloc_info);
+ #endif /* RELOCS_H */
+diff --git a/arch/x86/tools/relocs_64.c b/arch/x86/tools/relocs_64.c
+deleted file mode 100644
+index 9029cb619cb1..000000000000
+--- a/arch/x86/tools/relocs_64.c
++++ /dev/null
+@@ -1,18 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-#include "relocs.h"
+-
+-#define ELF_BITS 64
+-
+-#define ELF_MACHINE             EM_X86_64
+-#define ELF_MACHINE_NAME        "x86_64"
+-#define SHT_REL_TYPE            SHT_RELA
+-#define Elf_Rel                 Elf64_Rela
+-
+-#define ELF_CLASS               ELFCLASS64
+-#define ELF_R_SYM(val)          ELF64_R_SYM(val)
+-#define ELF_R_TYPE(val)         ELF64_R_TYPE(val)
+-#define ELF_ST_TYPE(o)          ELF64_ST_TYPE(o)
+-#define ELF_ST_BIND(o)          ELF64_ST_BIND(o)
+-#define ELF_ST_VISIBILITY(o)    ELF64_ST_VISIBILITY(o)
+-
+-#include "relocs.c"
+diff --git a/arch/x86/tools/relocs_common.c b/arch/x86/tools/relocs_common.c
+index 6634352a20bc..167985ecd544 100644
+--- a/arch/x86/tools/relocs_common.c
++++ b/arch/x86/tools/relocs_common.c
+@@ -72,14 +72,9 @@ int main(int argc, char **argv)
+ 		die("Cannot read %s: %s", fname, strerror(errno));
+ 	}
+ 	rewind(fp);
+-	if (e_ident[EI_CLASS] == ELFCLASS64)
+-		process_64(fp, use_real_mode, as_text,
+-			   show_absolute_syms, show_absolute_relocs,
+-			   show_reloc_info);
+-	else
+-		process_32(fp, use_real_mode, as_text,
+-			   show_absolute_syms, show_absolute_relocs,
+-			   show_reloc_info);
++	process(fp, use_real_mode, as_text,
++		show_absolute_syms, show_absolute_relocs,
++		show_reloc_info);
+ 	fclose(fp);
+ 	return 0;
+ }
 -- 
 2.46.0.792.g87dc391469-goog
 
