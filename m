@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA86CF9C71
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 06:01:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.803446.1214001 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9F1CF9C77
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 06:01:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.803450.1214041 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stL5T-0002fN-QV; Wed, 25 Sep 2024 06:01:19 +0000
+	id 1stL5a-0003e7-0f; Wed, 25 Sep 2024 06:01:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 803446.1214001; Wed, 25 Sep 2024 06:01:19 +0000
+Received: by outflank-mailman (output) from mailman id 803450.1214041; Wed, 25 Sep 2024 06:01:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stL5T-0002fG-MZ; Wed, 25 Sep 2024 06:01:19 +0000
-Received: by outflank-mailman (input) for mailman id 803446;
- Wed, 25 Sep 2024 06:01:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stL5Z-0003dt-T1; Wed, 25 Sep 2024 06:01:25 +0000
+Received: by outflank-mailman (input) for mailman id 803450;
+ Wed, 25 Sep 2024 06:01:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0N7N=QX=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1stL5S-0002f4-DH
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 06:01:18 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 93d9c229-7b03-11ef-a0ba-8be0dac302b0;
- Wed, 25 Sep 2024 08:01:17 +0200 (CEST)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c2561e8041so8723927a12.2
- for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 23:01:16 -0700 (PDT)
+ id 1stL5Y-0002f5-On
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 06:01:24 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 96c229ce-7b03-11ef-99a2-01e77a169b0f;
+ Wed, 25 Sep 2024 08:01:21 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a8d2b24b7a8so102347766b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Sep 2024 23:01:21 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c5cf49de00sm1498937a12.55.2024.09.24.23.01.14
+ 4fb4d7f45d1cf-5c5cf49de00sm1498937a12.55.2024.09.24.23.01.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Sep 2024 23:01:14 -0700 (PDT)
+ Tue, 24 Sep 2024 23:01:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,199 +47,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 93d9c229-7b03-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 96c229ce-7b03-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727244075; x=1727848875; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1727244080; x=1727848880; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mMG64X3mGJaWpXbh6pb/sJ7+eBsDVLEV1JYMeayeiaU=;
-        b=OapMj+7LW0vRmwRhKkWfRRxTXr7qetLhCF1T1FXpkgFYhY2oh42Ox0eOKtJckttaku
-         ny2YmZIn6vZQsGZkJIz0TIk+0Z5GwwKkxrhS9Gp4dxZgPodGItpbvBSruauE0KRKtIP3
-         09VCZk7l1vhbyWSx69LtHMYtPkORdq0O0sE6U=
+        bh=wVxz4I4vyQGmSKY6Ub9yCNA7tMFmaRorNjlXLxFtjUc=;
+        b=icRQhwcV9C7fgPmLZok0xPqhq5SFvUEVzCqtzXCwIs0Nuc6zQHmbBubgL3wqOrFZmn
+         XMyMj+R3G93nTQgkvZ3/XnhByMbPl+j14zMWpIsFZRTFC7Hwsl6Tbc5GM859uvfDcJ0u
+         4+8X7E59LLpn7bc0PTcSOf84CWd3U+yL/10wQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727244075; x=1727848875;
+        d=1e100.net; s=20230601; t=1727244080; x=1727848880;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mMG64X3mGJaWpXbh6pb/sJ7+eBsDVLEV1JYMeayeiaU=;
-        b=JgtaOfwVf9N+Mt+WrXnb20vR0nVrxYH4eIJlKCiVW7e8xRq0lY3y3SPf/0c+Gj5Xzh
-         BzLoR8mKN+GuK3jFY29zBhdb8/fsJh4w9vwI1HBoG3QC5O9WK2TY8wX/bAOxfBqPoi+o
-         w2UgSDYAllcZjefYzpuOXQ7ejuZd5u4KXV/7i7NEVFbQqVZWo4ZcEA/VxHZmxaDn2G+J
-         M+iYassgNBdUDuIw8yK6nOA4rbAcOFQ4DXQO6JTO9Cx8AF28iIbrSy0vaHpwacmeJxVd
-         MaAObS7qN1i5cJuJbWgO5T+QrnKX3FkSy5dUGKL/qvpIcE99xKcUi2GgPAosi6W8Zp9q
-         EzGQ==
-X-Gm-Message-State: AOJu0Yxms3tGZGwx+1KWavxkIor2grUm7IzW6lEfWuERyqwT+0NVYR31
-	O+JJ7rgLBNQpwhLlEGD5QUIzA0KI9HZdJqQvYp8Uiu3y+g7t9lRC/rvxd/ovJinQL5h/bE7yAp4
-	a
-X-Google-Smtp-Source: AGHT+IGaiik3wO5yXHiW2A7GgsgCLSXHRDsnxs6vG8aPj6Uho48WYhVMhoOtM0QBwH9VlQlAAnyc/A==
-X-Received: by 2002:a05:6402:500a:b0:5c3:d18e:fc27 with SMTP id 4fb4d7f45d1cf-5c720750e89mr984809a12.33.1727244075460;
-        Tue, 24 Sep 2024 23:01:15 -0700 (PDT)
+        bh=wVxz4I4vyQGmSKY6Ub9yCNA7tMFmaRorNjlXLxFtjUc=;
+        b=iNOM75fkBOFkbCchF2A5VsnzYBodMxdiww/ePrb4d08VCRDt4ci5I9iSqaY2EaTtzu
+         9AvA88qVELfUNlUEj31Oq0FECOYJVT4tI2STHLFa0jqeW8kYMZDyZLzApfaNMs880PnO
+         en07pzV2uCjnf3nksCn7MuxHH6nSmVV8VZixuwXN0d639/MrE3yaP1QYcTJQZoJ5irLR
+         IOrwWefZtfSxxI7ro547DNx+9Fz3XPDSl429D6Y1xQCZqW2sQP8r7F+DZ4x+/82EpGx4
+         woIydejcZUglH811925pAa+2/+tkI0U11v/LPIHSkyRh6Gh8QMSqWCpuY/DCYK3sjTHo
+         rY6Q==
+X-Gm-Message-State: AOJu0Yyi9RWiCwZUGZbVY8BWebFHKrGagalBfs/M4s8cElrQdbMOsAra
+	SF4CWSVw1kyzE6N0y7D1KYonQ75XMrafyHMSvLrbULZ5vfjXMtdgevwaiaS5p1GvaYumAu/GQMt
+	+
+X-Google-Smtp-Source: AGHT+IGKaqBd9awEa1SGJvtToFN9ateo9a6+kddKbdn9a5nrY01jZMuIldAOnRilgdVuoUaZ6Ndk5w==
+X-Received: by 2002:a17:907:9447:b0:a90:c4a0:9b17 with SMTP id a640c23a62f3a-a92c4810ee5mr641184766b.9.1727244080231;
+        Tue, 24 Sep 2024 23:01:20 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 1/4] x86/boot: Initialise BSS sooner
-Date: Wed, 25 Sep 2024 07:00:58 +0100
-Message-Id: <20240925060101.259244-2-frediano.ziglio@cloud.com>
+Subject: [PATCH v4 4/4] x86/boot: Improve MBI2 structure check
+Date: Wed, 25 Sep 2024 07:01:01 +0100
+Message-Id: <20240925060101.259244-5-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240925060101.259244-1-frediano.ziglio@cloud.com>
 References: <20240925060101.259244-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Allows to call C code earlier.
-In order to safely call C code we need to setup stack, selectors and BSS.
+Tag structure should contain at least the tag header.
+Entire tag structure must be contained inside MBI2 data.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-Changes since v1:
-- improve commit message;
-- improve some comments;
-- fix some code style (spacing);
-- set trampoline_phys as 32 bit value;
-- use PAGE_SIZE mnemonic instead of 0x1000;
-- use local label.
+ xen/arch/x86/efi/parse-mbi2.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Changes since v3:
-- improved comment;
-- fixed indentation.
----
- xen/arch/x86/boot/head.S | 77 ++++++++++++++++++++--------------------
- 1 file changed, 39 insertions(+), 38 deletions(-)
-
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index cfc5a7b47d..267207e5a2 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -231,6 +231,27 @@ __efi64_mb2_start:
-         /* VGA is not available on EFI platforms. */
-         movl   $0,vga_text_buffer(%rip)
+diff --git a/xen/arch/x86/efi/parse-mbi2.c b/xen/arch/x86/efi/parse-mbi2.c
+index 89c562cf6a..0b080dfa92 100644
+--- a/xen/arch/x86/efi/parse-mbi2.c
++++ b/xen/arch/x86/efi/parse-mbi2.c
+@@ -13,6 +13,7 @@ efi_multiboot2_prelude(uint32_t magic, const multiboot2_fixed_t *mbi)
+     EFI_HANDLE ImageHandle = NULL;
+     EFI_SYSTEM_TABLE *SystemTable = NULL;
+     const char *cmdline = NULL;
++    const void *const mbi_end = (const void *)mbi + mbi->total_size;
+     bool have_bs = false;
  
-+        /*
-+         * Align the stack as UEFI spec requires. Keep it aligned
-+         * before efi_multiboot2() call by pushing/popping even
-+         * numbers of items on it.
-+         */
-+        and     $~15, %rsp
-+
-+        /*
-+         * Initialize BSS (no nasty surprises!).
-+         * It must be done earlier than in BIOS case
-+         * because efi_multiboot2() touches it.
-+         */
-+        mov     %eax, %edx
-+        lea     __bss_start(%rip), %edi
-+        lea     __bss_end(%rip), %ecx
-+        sub     %edi, %ecx
-+        shr     $3, %ecx
-+        xor     %eax, %eax
-+        rep stosq
-+        mov     %edx, %eax
-+
-         /* Check for Multiboot2 bootloader. */
-         cmp     $MULTIBOOT2_BOOTLOADER_MAGIC,%eax
-         je      .Lefi_multiboot2_proto
-@@ -321,34 +342,12 @@ __efi64_mb2_start:
-         lea     .Lmb2_no_ih(%rip),%r15
-         jz      x86_32_switch
+     if ( magic != MULTIBOOT2_BOOTLOADER_MAGIC )
+@@ -21,7 +22,9 @@ efi_multiboot2_prelude(uint32_t magic, const multiboot2_fixed_t *mbi)
+     /* Skip Multiboot2 information fixed part. */
+     tag = _p(ROUNDUP((unsigned long)(mbi + 1), MULTIBOOT2_TAG_ALIGN));
  
--        /*
--         * Align the stack as UEFI spec requires. Keep it aligned
--         * before efi_multiboot2() call by pushing/popping even
--         * numbers of items on it.
--         */
--        and     $~15,%rsp
--
-         /* Save Multiboot2 magic on the stack. */
-         push    %rax
- 
-         /* Save EFI ImageHandle on the stack. */
-         push    %rdi
- 
--        /*
--         * Initialize BSS (no nasty surprises!).
--         * It must be done earlier than in BIOS case
--         * because efi_multiboot2() touches it.
--         */
--        lea     __bss_start(%rip),%edi
--        lea     __bss_end(%rip),%ecx
--        sub     %edi,%ecx
--        shr     $3,%ecx
--        xor     %eax,%eax
--        rep stosq
--
--        /* Keep the stack aligned. Do not pop a single item off it. */
--        mov     (%rsp),%rdi
--
-         /*
-          * efi_multiboot2() is called according to System V AMD64 ABI:
-          *   - IN:  %rdi - EFI ImageHandle, %rsi - EFI SystemTable,
-@@ -434,6 +433,8 @@ __pvh_start:
-         /* Set up stack. */
-         lea     STACK_SIZE - CPUINFO_sizeof + sym_esi(cpu0_stack), %esp
- 
-+        call    .Linitialise_bss
-+
-         mov     %ebx, sym_esi(pvh_start_info_pa)
- 
-         /* Force xen console.  Will revert to user choice in init code. */
-@@ -459,6 +460,20 @@ __pvh_start:
- 
- #endif /* CONFIG_PVH_GUEST */
- 
-+.Linitialise_bss:
-+        /* Initialise the BSS.  Preserve %eax (BOOTLOADER_MAGIC). */
-+        mov     %eax, %ebp
-+
-+        lea     sym_esi(__bss_start), %edi
-+        lea     sym_esi(__bss_end), %ecx
-+        sub     %edi, %ecx
-+        xor     %eax, %eax
-+        shr     $2, %ecx
-+        rep stosl
-+
-+        mov     %ebp, %eax
-+        ret
-+
- __start:
-         cld
-         cli
-@@ -489,6 +504,8 @@ __start:
-         /* Set up stack. */
-         lea     STACK_SIZE - CPUINFO_sizeof + sym_esi(cpu0_stack), %esp
- 
-+        call    .Linitialise_bss
-+
-         /* Bootloaders may set multiboot{1,2}.mem_lower to a nonzero value. */
-         xor     %edx,%edx
- 
-@@ -645,22 +662,6 @@ trampoline_setup:
-          * reserved for trampoline code and data.
-          */
- 
--        /*
--         * Do not zero BSS on EFI platform here.
--         * It was initialized earlier.
--         */
--        cmpb    $0, sym_esi(efi_platform)
--        jnz     1f
--
--        /* Initialise the BSS. */
--        lea     sym_esi(__bss_start), %edi
--        lea     sym_esi(__bss_end), %ecx
--        sub     %edi,%ecx
--        xor     %eax,%eax
--        shr     $2,%ecx
--        rep stosl
--
--1:
-         /* Interrogate CPU extended features via CPUID. */
-         mov     $1, %eax
-         cpuid
+-    for ( ; (const void *)tag - (const void *)mbi < mbi->total_size
++    for ( ; (const void *)(tag + 1) <= mbi_end
++            && tag->size >= sizeof(*tag)
++            && (const void *)tag + tag->size <= mbi_end
+             && tag->type != MULTIBOOT2_TAG_TYPE_END;
+           tag = _p(ROUNDUP((unsigned long)((const void *)tag + tag->size),
+                    MULTIBOOT2_TAG_ALIGN)) )
 -- 
 2.34.1
 
