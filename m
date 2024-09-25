@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4827FC619D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 060EFCF9C7D
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804094.1215043 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.804107.1215103 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTis-0006uH-Qk; Wed, 25 Sep 2024 15:14:34 +0000
+	id 1stTiy-0008Ix-0j; Wed, 25 Sep 2024 15:14:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804094.1215043; Wed, 25 Sep 2024 15:14:34 +0000
+Received: by outflank-mailman (output) from mailman id 804107.1215103; Wed, 25 Sep 2024 15:14:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stTis-0006s4-I0; Wed, 25 Sep 2024 15:14:34 +0000
-Received: by outflank-mailman (input) for mailman id 804094;
- Wed, 25 Sep 2024 15:02:09 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1stTix-0008Ea-4p; Wed, 25 Sep 2024 15:14:39 +0000
+Received: by outflank-mailman (input) for mailman id 804107;
+ Wed, 25 Sep 2024 15:02:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0B/g=QX=flex--ardb.bounces.google.com=37yX0ZggKCUom3pn+su5s00sxq.o0y9qz-pq7qxxu454.9qz130vqo5.03s@srs-se1.protection.inumbo.net>)
- id 1stTWr-0002k3-Tc
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:09 +0000
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [2607:f8b0:4864:20::114a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 221ec0b3-7b4f-11ef-99a2-01e77a169b0f;
- Wed, 25 Sep 2024 17:02:08 +0200 (CEST)
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-6e2261adfdeso8785267b3.2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:08 -0700 (PDT)
+ <SRS0=1DAC=QX=flex--ardb.bounces.google.com=3_yX0ZggKCVo2J53+8AL8GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@srs-se1.protection.inumbo.net>)
+ id 1stTX6-0002UM-Nw
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2024 15:02:24 +0000
+Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
+ [2607:f8b0:4864:20::b49])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2ba19c93-7b4f-11ef-a0ba-8be0dac302b0;
+ Wed, 25 Sep 2024 17:02:24 +0200 (CEST)
+Received: by mail-yb1-xb49.google.com with SMTP id
+ 3f1490d57ef6-e035949cc4eso10635363276.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 08:02:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 221ec0b3-7b4f-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 2ba19c93-7b4f-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727276527; x=1727881327; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1727276543; x=1727881343; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=rTUv2yGZRT/iYzBSyilbN8CQ+H5OcaG9Xif73xCYTUU=;
-        b=4m4j+ahI6SvYCTSpT2GmWd9iTy8/TXm/gAi0vILSqXQmnAo74NzGJcPSSO4EW0+MHG
-         Q9XgpsnUKbnO+ouMbEJX0z45kicreIhN7OVs4TCsYaeky9KbLs5DVIjvf7dtCJ+T2DT0
-         9P4fikI0UBWzccrgYeWiEDo3aYQvpG2TNuqcAzNqxCFTatKmxKdqsSMqe+ZOnWUbiBnR
-         mHY+wYqqcd9/sKQdspWaggJJA7ZmxycLeHk+9cRutqbFK7vB8EUMsDAmpr/LTEq/QFeK
-         thkVQgOqkgPyKQXMTli+RIRKU7u98NnVBIw6ShGrtlzg8rOjgHN+ff/m0/paXLbhQFgC
-         4i+A==
+        bh=vu/ZbROFphQGBAR+273iXbk1tlXuWo8crbz4dEomRj0=;
+        b=TW2scN/LTDHYWp4wNaMlQkFwTLRjiBq8eEtajXeRp1/aQRmFm/ah0xqQhGIV0miBAG
+         sLNcNgurgDXn75/p0l9nd2V814sl+mRoJbiNxjhe06aISPDjCkQCcMaZ4P+NS0eWhsaQ
+         kU2UTh0pRu8WfblmdA8vhkEhDu5AKQPMHZC9kTDHnvE4QOyz0kOexKbIxadGMXlQYPPw
+         3qaUUAgF3YK0+nsAuLJVP7iQFKHtOcvam/9xVFA1Vm5JqLMNMrhOhfYg0z0SkhPQufL5
+         iduXXKF3vmTMRr68hbMm/E1nxKDm1CUZjM4BujkEMxdloB9gQv9o8Y1e09LEIsUIbRgD
+         oAFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727276527; x=1727881327;
+        d=1e100.net; s=20230601; t=1727276543; x=1727881343;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=rTUv2yGZRT/iYzBSyilbN8CQ+H5OcaG9Xif73xCYTUU=;
-        b=D8hopbCWIZYX84Ta016F7p68PuKQ+bYCjIm9a0j5IMUc+sRB5zImrUmCUVDtakQqWe
-         pmO4bkomBcy0hc8qgtacHER6/0blit2cPn9ovw6D2CUVsrT1ENKkTYVqZaJunspK45WE
-         Z2dSM6zpEItoKwRneImg07QOSqxUzX3BjJEOG4ab3oxly95tl4EG9oib/BVLFU+x5Meo
-         RQQfQX5khkI7AbVn+C/INSKa1RTU7FbMSngAbQ0AnQjhoIPdDKAcxRY6bcY7HeIAhQca
-         JSqLg84MLFAV5K23JelXt6aRpC0bttC2Pg3FErsUgno+k/Ldr62KecScRg8RBEGe/AqM
-         +dHQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUjB0RGgDDIb82d1+yPmTyHyaIYsDsEEBhSmeXHM27NS1t8RKvJJ9vrKAje7NgjwwjQWtsoWLec7Mw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzC3X7fmEPxZta2eiEABxKdR4O99IEvCSyz5/Ep/87boETbV1Hh
-	EPkOkyHaT6iors8kSfx2MAn8DK3sQtxeyVsnrtZd9NYSpabD/GLdbKdKMgWPkvofgiorug==
-X-Google-Smtp-Source: AGHT+IGLT7yTqD1HRbp0g+dVaksf1xzveaZLP+yFkMN9Z3pXXXvCU4M/LA5dyeTTzQHsrcQFQ2z7Ogbs
+        bh=vu/ZbROFphQGBAR+273iXbk1tlXuWo8crbz4dEomRj0=;
+        b=LrtxIMKQ4uysiA4rrcgjWjc3b06KAejNnejOJnJft1ptHAnu5AmSGJGopvRyYUb8Pr
+         Hv5MgTuwoPl6jTRK+kcMgHhG02v2r+W1+GGMF5KdUWB/0R0Xvk9pNAmFGHoxjFdY78jg
+         ZPK01wI/2SA/JKih6zoLRkvwFK5qyh0dzHNNp4gW2q46XcxKLNP8CEp8atPXRHN59ro6
+         xwPQ05/iVY016K4GG0k1AmLYSHd+00HMiEqOhC7FcoC346KVHsL/JnGaTbzEYzuWgi8I
+         DanvFEJqcF86ombT0m76NC9p4JLc1XHxVdbtbDVM5GFncjpVVWageqCwieu1nMREi+x8
+         gvbg==
+X-Forwarded-Encrypted: i=1; AJvYcCUBOuZ/R5mBbVskTzucHssTefNY14ixziawV6crwT4c6OUEqqX7kzU22d8KDnVutCurHlbXHWm03GY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwkZZwNneG8oHGvbLoHcr/8A/qwEnUegXOvQDvG0FXmnOlEDece
+	jKFUngw5VFTQvzAJvhawj96pe6GWuNhFHbwfOeAYSMLFHrYtwqCNLt3seFzzotCz6lpQZQ==
+X-Google-Smtp-Source: AGHT+IEyaWBDeaj2o4LzPpSYVvpQbis55gp/KI/SuWbxXUep7wBTAaa7DqSfUrTGsylfjBz2VoxVb7Nf
 X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
- (user=ardb job=sendgmr) by 2002:a05:690c:3583:b0:6b0:57ec:c5f9 with SMTP id
- 00721157ae682-6e21d0dc0d2mr147787b3.0.1727276527085; Wed, 25 Sep 2024
- 08:02:07 -0700 (PDT)
-Date: Wed, 25 Sep 2024 17:01:07 +0200
+ (user=ardb job=sendgmr) by 2002:a05:6902:1782:b0:e0b:958a:3344 with SMTP id
+ 3f1490d57ef6-e24da39b0c3mr17936276.10.1727276543053; Wed, 25 Sep 2024
+ 08:02:23 -0700 (PDT)
+Date: Wed, 25 Sep 2024 17:01:13 +0200
 In-Reply-To: <20240925150059.3955569-30-ardb+git@google.com>
 Mime-Version: 1.0
 References: <20240925150059.3955569-30-ardb+git@google.com>
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-X-Developer-Signature: v=1; a=openpgp-sha256; l=882; i=ardb@kernel.org;
- h=from:subject; bh=h9wNxRa08o4eoAqCSyYKOZyZKBTJUImThQPxe9qE/+Y=;
- b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6taH/xoldmidSK479WfKnGWr8jq4V3v+610hdCLdd
- HLxEtXHHaUsDGIcDLJiiiwCs/++23l6olSt8yxZmDmsTCBDGLg4BWAiB3cwMjS+ttry3/KZyAZx
- s7TOmpSVs1htspZOu2OitnHlgdL1srsY/goaVByePZOfkbc43zeoadWW9TLmExXTXvxNfTl7XfX dejYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1397; i=ardb@kernel.org;
+ h=from:subject; bh=OCB6ogDK8zWwsvV7jOJ7CFiQBF2ggvTbOxK6mQJaX9A=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIe2L6r76WO61FcfVRPyObM7vdxPl3nB63j7e+T6H1Wu+r
+ TX46mXYUcrCIMbBICumyCIw+++7nacnStU6z5KFmcPKBDKEgYtTACYyaR4jwzOv6S8kr9nwfXyX
+ 9iPzW9q5kzeEqzTXKbA29B6+VB8ddZORYZns0cK9u93/3DfuTd/m9X/T7v+32d81/dIy2BMjHfO RgwMA
 X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
-Message-ID: <20240925150059.3955569-37-ardb+git@google.com>
-Subject: [RFC PATCH 07/28] scripts/kallsyms: Avoid 0x0 as the relative base
+Message-ID: <20240925150059.3955569-43-ardb+git@google.com>
+Subject: [RFC PATCH 13/28] x86/kvm: Use RIP-relative addressing
 From: Ard Biesheuvel <ardb+git@google.com>
 To: linux-kernel@vger.kernel.org
 Cc: Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
@@ -110,32 +110,36 @@ Content-Type: text/plain; charset="UTF-8"
 
 From: Ard Biesheuvel <ardb@kernel.org>
 
-In some cases, LLVM's lld linker may emit the following symbol into the
-symbol table
-
-0000000000000000 ? _GLOBAL_OFFSET_TABLE_
-
-and its presence throws off the relative base logic in kallsyms. Since
-0x0 is never a valid relative base, just ignore it.
+Avoid absolute references in code, which require fixing up at boot time,
+and replace them with RIP-relative ones. In this particular case, due to
+the register pressure, they cannot be avoided entirely, so one absolute
+reference is retained but the resulting reference via the GOT is
+compatible with running the linker in PIE mode.
 
 Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 ---
- scripts/kallsyms.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/kernel/kvm.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/scripts/kallsyms.c b/scripts/kallsyms.c
-index 03852da3d249..09757d300a05 100644
---- a/scripts/kallsyms.c
-+++ b/scripts/kallsyms.c
-@@ -747,7 +747,7 @@ static void record_relative_base(void)
- 	unsigned int i;
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 263f8aed4e2c..8eac209a31aa 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -800,9 +800,11 @@ extern bool __raw_callee_save___kvm_vcpu_is_preempted(long);
+  * Hand-optimize version for x86-64 to avoid 8 64-bit register saving and
+  * restoring to/from the stack.
+  */
+-#define PV_VCPU_PREEMPTED_ASM						     \
+- "movq   __per_cpu_offset(,%rdi,8), %rax\n\t"				     \
+- "cmpb   $0, " __stringify(KVM_STEAL_TIME_preempted) "+steal_time(%rax)\n\t" \
++#define PV_VCPU_PREEMPTED_ASM						\
++ "leaq   __per_cpu_offset(%rip), %rax				\n\t"	\
++ "movq   (%rax,%rdi,8), %rax					\n\t"	\
++ "addq   steal_time@GOTPCREL(%rip), %rax			\n\t"	\
++ "cmpb   $0, " __stringify(KVM_STEAL_TIME_preempted) "(%rax)	\n\t"	\
+  "setne  %al\n\t"
  
- 	for (i = 0; i < table_cnt; i++)
--		if (!symbol_absolute(table[i])) {
-+		if (table[i]->addr && !symbol_absolute(table[i])) {
- 			/*
- 			 * The table is sorted by address.
- 			 * Take the first non-absolute symbol value.
+ DEFINE_ASM_FUNC(__raw_callee_save___kvm_vcpu_is_preempted,
 -- 
 2.46.0.792.g87dc391469-goog
 
