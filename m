@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4787CCFA17
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 05:29:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.804854.1215842 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B681CCF9E9
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 06:23:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.804910.1215876 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sth3Z-0005Mj-5z; Thu, 26 Sep 2024 05:28:49 +0000
+	id 1sthuO-00077H-IQ; Thu, 26 Sep 2024 06:23:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 804854.1215842; Thu, 26 Sep 2024 05:28:49 +0000
+Received: by outflank-mailman (output) from mailman id 804910.1215876; Thu, 26 Sep 2024 06:23:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sth3Z-0005Mc-1H; Thu, 26 Sep 2024 05:28:49 +0000
-Received: by outflank-mailman (input) for mailman id 804854;
- Thu, 26 Sep 2024 05:28:48 +0000
+	id 1sthuO-00077A-Fr; Thu, 26 Sep 2024 06:23:24 +0000
+Received: by outflank-mailman (input) for mailman id 804910;
+ Thu, 26 Sep 2024 06:23:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GedV=QY=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1sth3X-0004tQ-Rn
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 05:28:47 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=J7u3=QY=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sthuM-000771-O5
+ for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 06:23:22 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 336b11c4-7bc8-11ef-99a2-01e77a169b0f;
- Thu, 26 Sep 2024 07:28:45 +0200 (CEST)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a8d56155f51so65690666b.2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 22:28:45 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9392f34086sm304441766b.41.2024.09.25.22.28.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 22:28:44 -0700 (PDT)
+ id d2708137-7bcf-11ef-99a2-01e77a169b0f;
+ Thu, 26 Sep 2024 08:23:19 +0200 (CEST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5c40aea5c40so1113481a12.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Sep 2024 23:23:19 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c5cf4d7926sm2756610a12.93.2024.09.25.23.23.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Sep 2024 23:23:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,416 +47,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 336b11c4-7bc8-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: d2708137-7bcf-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727328525; x=1727933325; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kx8JGA034M8NBrlMGFRfncSjZOErw9IsHAHqwPQrpgo=;
-        b=ihnIk0EHDtZbEm4x0zAsyANP3yN4wmGYqyuUocoitu5dg5RpDl7uYHaD89bvkQ4Ro8
-         m5UwqR2cZgsIZAxi829lHOhMPHurkShB/hLvVE4v26kqutZ47WjI0kktSQEBUaM+hpcx
-         9rsCjZ/+QvpTz4toXeEJT2aEl0UQhjYg7RDmM=
+        d=suse.com; s=google; t=1727331799; x=1727936599; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=1hEH3ESYmZdhGK9b5Zr5K7sOCMwI55aB30tq5Zx8rP0=;
+        b=FC2j0vzxg5be1PxvmTHEvgIpJwXbuq5Wl7Cqa5XzeEWAv+7mHhHW1FVyQduQY3Fpn2
+         i8oyxaj12cjnDSjCALm1fJyga5O2uOkyrMaZVh5JqvHScSVymvG+nF+vgYlRtmf+z2Jm
+         NRJ2aTOWQPXz7nHRmK2Yv92ZaMA1srFYq7db9iGY+N/Z73/BLBi7QRWHslcPJyszIHXH
+         tKT/lZa1M6hKwsW5wAc/59N+PtcO+Y8V4EziOA3oWSx0TJe6/U/8m6eP410PZBp6KPfY
+         f517qpzH1QUQtQBYzcP4KEkQb5AJ1PMumPG+REy9NanLlVvNJvCcAn/ZnxEBfIg7lqiz
+         i7Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727328525; x=1727933325;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kx8JGA034M8NBrlMGFRfncSjZOErw9IsHAHqwPQrpgo=;
-        b=CcSx57qDmyYCuBjNO6SzIql0IyDLrE/xtzQvCFRl26P9237vEQdR4R4oY9aGtTsOdv
-         YbKQY4zpr1/i22c6BQ0YVaRT7fGZFgb7w7N9nFuKg6Xum1IctESysgATxSUSyeETsRjk
-         LaXHLlMIb/AKXGxv5JzsQRqFUQVkSItkOsiMmZaEpPS86IYrw6GSjBj0DFHQwZJcoS7B
-         oNdwa5OZ1gjH7ocB4GlFFCKpkYat/S/pjE9+wprdK1qkEx0WYtSEFIJedjwW01rKykjf
-         73LUtle642ICMsxj3heusshF6gdGa/WlKmI9+D7g7SSkbe36mzwUr2GkH9GcXKgF3JFO
-         gUkw==
-X-Gm-Message-State: AOJu0Yya0vlQxx+OIvswxK9K8QDIcnoqEql8OhqfA5KjXoXyCBnkD4m6
-	Ry6TUu/D4jiPVMFycvN/j7PJ2oHbZUrc7hIClG5UWq+Z02nEWQh5u8b95hvTEGGo/GAiPNJhfol
-	F
-X-Google-Smtp-Source: AGHT+IEX8Aw/srjv6G4KPcQ0vgUAUjpc5GbVFWNECvC4Mk4I/pZxAIO+AM8Oz7CEGkwAlRjk9D5kkg==
-X-Received: by 2002:a17:907:ea0:b0:a8a:9054:8391 with SMTP id a640c23a62f3a-a93a0341335mr355167066b.5.1727328524754;
-        Wed, 25 Sep 2024 22:28:44 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v5 2/3] x86/boot: Rewrite EFI/MBI2 code partly in C
-Date: Thu, 26 Sep 2024 06:28:32 +0100
-Message-Id: <20240926052833.465510-3-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240926052833.465510-1-frediano.ziglio@cloud.com>
-References: <20240926052833.465510-1-frediano.ziglio@cloud.com>
+        d=1e100.net; s=20230601; t=1727331799; x=1727936599;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1hEH3ESYmZdhGK9b5Zr5K7sOCMwI55aB30tq5Zx8rP0=;
+        b=pPZTfzy1ZE7cYDtxkaOTvV/2+ZqYCM57epgtQFcztJE4bwzkdRXD3mIM3fF9eiQZAx
+         R1qUi0gAgn98sc39tIfHnXJZEtmzkE5rmXD2iYb/W9oGdA9qm5bjAfjO3eDAbPZ67Btc
+         STcYBkiQvxFVIwraO+LSwz+OT9mN6FvYZbw/Y8nCpqc2XN1DARIQlqSa1pXCtsjlrf6j
+         3vDHhdhXLB1Cz5Dqxes6oLPiDGdVwQc/VEDk0XqjD3LFRw1kOVzL2YXkaNbl/T+4hJc3
+         0zWmzE1SES17ISvEukOVLXNkJ/SOpdo/gc+5SLSgiPjFVszwn3SA+YXW29dbDtwpKbl5
+         NuCg==
+X-Forwarded-Encrypted: i=1; AJvYcCWUMe+fIVKfVuVvcBm3rg/xkPg+yBarsDBpHSQWzhwlEQ7qdkang2Uuup29nGp44eOF+4WXEWgdAWw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxSXUd8djCI5EoZhsBd1QWrsZHXgFdkaODprQzgyMesQGzZpoXL
+	YN85lCOoAF7NndBQYmC2pUd40CYwMHedwuZW+/OyNIu1komxEftpfcQ5qYGBiUUVpN8k/lBMUa4
+	=
+X-Google-Smtp-Source: AGHT+IE1kuT5Oe9xW+022jtvT+eAPKYsPciMvCjZqhChqL94o6m9oJtkRfOT2bKOXs6D8rImSt+Tww==
+X-Received: by 2002:a05:6402:35d0:b0:5c3:d8fb:df6a with SMTP id 4fb4d7f45d1cf-5c8777d3471mr1995701a12.14.1727331798541;
+        Wed, 25 Sep 2024 23:23:18 -0700 (PDT)
+Message-ID: <540a900e-9bff-40d0-8ace-6b443bbfca41@suse.com>
+Date: Thu, 26 Sep 2024 08:23:17 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/5] xen: define ACPI and DT device info sections
+ macros
+To: oleksii.kurochko@gmail.com
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ xen-devel@lists.xenproject.org, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>
+References: <cover.1727193766.git.oleksii.kurochko@gmail.com>
+ <7521839bd265e0520fc448adf50361d18dfe53df.1727193766.git.oleksii.kurochko@gmail.com>
+ <82125953-99b5-4fde-83b8-51643cce793b@suse.com>
+ <81b676ae5958d93ecbc3a552c1c0a208dfa2d18a.camel@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <81b676ae5958d93ecbc3a552c1c0a208dfa2d18a.camel@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-No need to have it coded in assembly.
+On 25.09.2024 18:08, oleksii.kurochko@gmail.com wrote:
+> On Wed, 2024-09-25 at 10:36 +0200, Jan Beulich wrote:
+>> PPC's desire to use DECL_SECTION() can certainly be covered by
+>> providing
+>> a (trivial) DECL_SECTION() also for Arm and RISC-V. Seeing that even
+>> x86
+>> overrides the default to the trivial form for building xen.efi, I'm
+>> inclined to suggest we should actually have a way for an arch to
+>> indicate
+>> to xen.lds.h that it wants just the trivial form (avoiding a later
+>> #undef).
+> If to go with what I suggested before then x86 will look like:
+> 
+> diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+> index d48de67cfd..911585541e 100644
+> --- a/xen/arch/x86/xen.lds.S
+> +++ b/xen/arch/x86/xen.lds.S
+> @@ -3,6 +3,10 @@
+>  
+>  #include <xen/cache.h>
+>  #include <xen/lib.h>
+> +
+> +#ifdef EFI
+> +#define SIMPLE_DECL_SECTION
+> +#endif
+>  #include <xen/xen.lds.h>
+>  #include <asm/page.h>
+>  #undef ENTRY
+> @@ -12,9 +16,7 @@
+>  
+>  #define FORMAT "pei-x86-64"
+>  #undef __XEN_VIRT_START
+> -#undef DECL_SECTION
+>  #define __XEN_VIRT_START __image_base__
+> -#define DECL_SECTION(x) x :
+>  
+>  ENTRY(efi_start)
+>  
+> diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
+> index a17810bb28..fb11ba7357 100644
+> --- a/xen/include/xen/xen.lds.h
+> +++ b/xen/include/xen/xen.lds.h
+> @@ -5,6 +5,8 @@
+>   * Common macros to be used in architecture specific linker scripts.
+>   */
+>  
+> +#ifdef SIMPLE_DECL_SECTION
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
-Changes since v1:
-- update some comments;
-- explain why %ebx is saved before calling efi_parse_mbi2;
-- move lea before test instruction;
-- removed asmlinkage from efi_multiboot2 and add to efi_parse_mbi2;
-- fix line length;
-- update an error message specifying "Multiboot2" instead of "Multiboot";
-- use obj-bin-X instead of obj-X in Makefile;
-- avoid restoring %eax (MBI magic).
+#ifndef I guess?
 
-Changes since v3:
-- rename new function to efi_multiboot2_prelude;
-- declare efi_multiboot2 in a separate header.
+> @@ -15,6 +17,10 @@
+>  # define DECL_SECTION(x) x : AT(ADDR(x) - __XEN_VIRT_START)
+>  #endif
+>  
+> +#else /* SIMPLE_DECL_SECION */
+> +# define DECL_SECTION(x) x :
+> +#endif
+> +
+>  /*
+>   * To avoid any confusion, please note that the EFI macro does not
+> correspond
+>   * to EFI support and is used when linking a native EFI (i.e. PE/COFF)
+> binary,
+> 
+> Does it make sense? Or it would be better to follow way for each
+> architecture:
+>    #undef DECL_SECTION
+>    #define DECL_SECTION(x) x :
 
-Changes since v4:
-- fix some style and space;
-- fix MISRA requirement.
----
- xen/arch/x86/boot/head.S       | 142 +++++++--------------------------
- xen/arch/x86/efi/Makefile      |   1 +
- xen/arch/x86/efi/efi-boot.h    |   6 +-
- xen/arch/x86/efi/parse-mbi2.c  |  63 +++++++++++++++
- xen/arch/x86/efi/stub.c        |   3 +-
- xen/arch/x86/include/asm/efi.h |  18 +++++
- 6 files changed, 115 insertions(+), 118 deletions(-)
- create mode 100644 xen/arch/x86/efi/parse-mbi2.c
- create mode 100644 xen/arch/x86/include/asm/efi.h
+Hard to tell which one's better; I was asking myself that same question
+when writing an earlier reply. I'm slightly in favor of the form you have
+now.
 
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 6e3f791248..86f3a81222 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -121,8 +121,6 @@ multiboot2_header:
- .Lbad_cpu_msg: .asciz "ERR: Not a 64-bit CPU!"
- .Lbad_ldr_msg: .asciz "ERR: Not a Multiboot bootloader!"
- .Lbad_ldr_nbs: .asciz "ERR: Bootloader shutdown EFI x64 boot services!"
--.Lbad_ldr_nst: .asciz "ERR: EFI SystemTable is not provided by bootloader!"
--.Lbad_ldr_nih: .asciz "ERR: EFI ImageHandle is not provided by bootloader!"
- .Lbad_efi_msg: .asciz "ERR: EFI IA-32 platforms are not supported!"
- .Lbag_alg_msg: .asciz "ERR: Xen must be loaded at a 2Mb boundary!"
- .Lno_nx_msg:   .asciz "ERR: Not an NX-capable CPU!"
-@@ -161,17 +159,6 @@ early_error: /* Here to improve the disassembly. */
-         mov     $sym_offs(.Lno_nx_msg), %ecx
-         jmp     .Lget_vtb
- #endif
--.Lmb2_no_st:
--        /*
--         * Here we are on EFI platform. vga_text_buffer was zapped earlier
--         * because there is pretty good chance that VGA is unavailable.
--         */
--        mov     $sym_offs(.Lbad_ldr_nst), %ecx
--        jmp     .Lget_vtb
--.Lmb2_no_ih:
--        /* Ditto. */
--        mov     $sym_offs(.Lbad_ldr_nih), %ecx
--        jmp     .Lget_vtb
- .Lmb2_no_bs:
-         /*
-          * Ditto. Additionally, here there is a chance that Xen was started
-@@ -189,6 +176,10 @@ early_error: /* Here to improve the disassembly. */
-         mov     $sym_offs(.Lbad_efi_msg), %ecx
-         xor     %edi,%edi                       # No VGA text buffer
-         jmp     .Lprint_err
-+.Ldirect_error:
-+        mov     sym_esi(vga_text_buffer), %edi
-+        mov     %eax, %esi
-+        jmp     1f
- .Lget_vtb:
-         mov     sym_esi(vga_text_buffer), %edi
- .Lprint_err:
-@@ -235,7 +226,7 @@ __efi64_mb2_start:
- 
-         /*
-          * Align the stack as UEFI spec requires. Keep it aligned
--         * before efi_multiboot2() call by pushing/popping even
-+         * before efi_multiboot2_prelude() call by pushing/popping even
-          * numbers of items on it.
-          */
-         and     $~15, %rsp
-@@ -243,7 +234,7 @@ __efi64_mb2_start:
-         /*
-          * Initialize BSS (no nasty surprises!).
-          * It must be done earlier than in BIOS case
--         * because efi_multiboot2() touches it.
-+         * because efi_multiboot2_prelude() touches it.
-          */
-         mov     %eax, %edx
-         lea     __bss_start(%rip), %edi
-@@ -252,36 +243,30 @@ __efi64_mb2_start:
-         shr     $3, %ecx
-         xor     %eax, %eax
-         rep stosq
--        mov     %edx, %eax
--
--        /* Check for Multiboot2 bootloader. */
--        cmp     $MULTIBOOT2_BOOTLOADER_MAGIC,%eax
--        je      .Lefi_multiboot2_proto
--
--        /* Jump to .Lnot_multiboot after switching CPU to x86_32 mode. */
--        lea     .Lnot_multiboot(%rip), %r15
--        jmp     x86_32_switch
--
--.Lefi_multiboot2_proto:
--        /* Zero EFI SystemTable, EFI ImageHandle addresses and cmdline. */
--        xor     %esi,%esi
--        xor     %edi,%edi
--        xor     %edx,%edx
- 
--        /* Skip Multiboot2 information fixed part. */
--        lea     (MB2_fixed_sizeof+MULTIBOOT2_TAG_ALIGN-1)(%rbx),%ecx
--        and     $~(MULTIBOOT2_TAG_ALIGN-1),%ecx
--
--.Lefi_mb2_tsize:
--        /* Check Multiboot2 information total size. */
--        mov     %ecx,%r8d
--        sub     %ebx,%r8d
--        cmp     %r8d,MB2_fixed_total_size(%rbx)
--        jbe     .Lrun_bs
-+        /*
-+         * Spill MB2 magic.
-+         * Spill the pointer too, to keep the stack aligned.
-+         */
-+        push    %rdx
-+        push    %rbx
- 
--        /* Are EFI boot services available? */
--        cmpl    $MULTIBOOT2_TAG_TYPE_EFI_BS,MB2_tag_type(%rcx)
--        jne     .Lefi_mb2_st
-+        /*
-+         * efi_multiboot2_prelude() is called according to System V AMD64 ABI:
-+         *   - IN:  %edi - Multiboot2 magic,
-+         *          %rsi - Multiboot2 pointer.
-+         *   - OUT: %rax - error string.
-+         */
-+        mov     %edx, %edi
-+        mov     %rbx, %rsi
-+        call    efi_multiboot2_prelude
-+        lea     .Ldirect_error(%rip), %r15
-+        test    %rax, %rax
-+        jnz     x86_32_switch
-+
-+        /* Restore Multiboot2 pointer and magic. */
-+        pop     %rbx
-+        pop     %rax
- 
-         /* We are on EFI platform and EFI boot services are available. */
-         incb    efi_platform(%rip)
-@@ -291,77 +276,6 @@ __efi64_mb2_start:
-          * be run on EFI platforms.
-          */
-         incb    skip_realmode(%rip)
--        jmp     .Lefi_mb2_next_tag
--
--.Lefi_mb2_st:
--        /* Get EFI SystemTable address from Multiboot2 information. */
--        cmpl    $MULTIBOOT2_TAG_TYPE_EFI64,MB2_tag_type(%rcx)
--        cmove   MB2_efi64_st(%rcx),%rsi
--        je      .Lefi_mb2_next_tag
--
--        /* Get EFI ImageHandle address from Multiboot2 information. */
--        cmpl    $MULTIBOOT2_TAG_TYPE_EFI64_IH,MB2_tag_type(%rcx)
--        cmove   MB2_efi64_ih(%rcx),%rdi
--        je      .Lefi_mb2_next_tag
--
--        /* Get command line from Multiboot2 information. */
--        cmpl    $MULTIBOOT2_TAG_TYPE_CMDLINE, MB2_tag_type(%rcx)
--        jne     .Lno_cmdline
--        lea     MB2_tag_string(%rcx), %rdx
--        jmp     .Lefi_mb2_next_tag
--.Lno_cmdline:
--
--        /* Is it the end of Multiboot2 information? */
--        cmpl    $MULTIBOOT2_TAG_TYPE_END,MB2_tag_type(%rcx)
--        je      .Lrun_bs
--
--.Lefi_mb2_next_tag:
--        /* Go to next Multiboot2 information tag. */
--        add     MB2_tag_size(%rcx),%ecx
--        add     $(MULTIBOOT2_TAG_ALIGN-1),%ecx
--        and     $~(MULTIBOOT2_TAG_ALIGN-1),%ecx
--        jmp     .Lefi_mb2_tsize
--
--.Lrun_bs:
--        /* Are EFI boot services available? */
--        cmpb    $0,efi_platform(%rip)
--
--        /* Jump to .Lmb2_no_bs after switching CPU to x86_32 mode. */
--        lea     .Lmb2_no_bs(%rip),%r15
--        jz      x86_32_switch
--
--        /* Is EFI SystemTable address provided by boot loader? */
--        test    %rsi,%rsi
--
--        /* Jump to .Lmb2_no_st after switching CPU to x86_32 mode. */
--        lea     .Lmb2_no_st(%rip),%r15
--        jz      x86_32_switch
--
--        /* Is EFI ImageHandle address provided by boot loader? */
--        test    %rdi,%rdi
--
--        /* Jump to .Lmb2_no_ih after switching CPU to x86_32 mode. */
--        lea     .Lmb2_no_ih(%rip),%r15
--        jz      x86_32_switch
--
--        /* Save Multiboot2 magic on the stack. */
--        push    %rax
--
--        /* Save EFI ImageHandle on the stack. */
--        push    %rdi
--
--        /*
--         * efi_multiboot2() is called according to System V AMD64 ABI:
--         *   - IN:  %rdi - EFI ImageHandle, %rsi - EFI SystemTable,
--         *          %rdx - MB2 cmdline
--         */
--        call    efi_multiboot2
--
--        /* Just pop an item from the stack. */
--        pop     %rax
--
--        /* Restore Multiboot2 magic. */
--        pop     %rax
- 
-         /* Jump to trampoline_setup after switching CPU to x86_32 mode. */
-         lea     trampoline_setup(%rip),%r15
-diff --git a/xen/arch/x86/efi/Makefile b/xen/arch/x86/efi/Makefile
-index 24dfecfad1..51140061fc 100644
---- a/xen/arch/x86/efi/Makefile
-+++ b/xen/arch/x86/efi/Makefile
-@@ -14,5 +14,6 @@ $(addprefix $(obj)/,$(EFIOBJ-y)): CFLAGS_stack_boundary := $(cflags-stack-bounda
- obj-y := common-stub.o stub.o
- obj-$(XEN_BUILD_EFI) := $(filter-out %.init.o,$(EFIOBJ-y))
- obj-bin-$(XEN_BUILD_EFI) := $(filter %.init.o,$(EFIOBJ-y))
-+obj-bin-y += parse-mbi2.o
- extra-$(XEN_BUILD_EFI) += buildid.o relocs-dummy.o
- nocov-$(XEN_BUILD_EFI) += stub.o
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index 7aa55e7aaf..859c01c13f 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -816,9 +816,9 @@ static const char *__init get_option(const char *cmd, const char *opt)
-     return o;
- }
- 
--void asmlinkage __init efi_multiboot2(EFI_HANDLE ImageHandle,
--                                      EFI_SYSTEM_TABLE *SystemTable,
--                                      const char *cmdline)
-+void __init efi_multiboot2(EFI_HANDLE ImageHandle,
-+                           EFI_SYSTEM_TABLE *SystemTable,
-+                           const char *cmdline)
- {
-     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop;
-     EFI_HANDLE gop_handle;
-diff --git a/xen/arch/x86/efi/parse-mbi2.c b/xen/arch/x86/efi/parse-mbi2.c
-new file mode 100644
-index 0000000000..55a1777483
---- /dev/null
-+++ b/xen/arch/x86/efi/parse-mbi2.c
-@@ -0,0 +1,63 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/efi.h>
-+#include <xen/init.h>
-+#include <xen/multiboot2.h>
-+#include <asm/asm_defns.h>
-+#include <asm/efi.h>
-+
-+const char * asmlinkage __init
-+efi_multiboot2_prelude(uint32_t magic, const multiboot2_fixed_t *mbi)
-+{
-+    const multiboot2_tag_t *tag;
-+    EFI_HANDLE ImageHandle = NULL;
-+    EFI_SYSTEM_TABLE *SystemTable = NULL;
-+    const char *cmdline = NULL;
-+    bool have_bs = false;
-+
-+    if ( magic != MULTIBOOT2_BOOTLOADER_MAGIC )
-+        return "ERR: Not a Multiboot2 bootloader!";
-+
-+    /* Skip Multiboot2 information fixed part. */
-+    tag = _p(ROUNDUP((unsigned long)(mbi + 1), MULTIBOOT2_TAG_ALIGN));
-+
-+    for ( ; (const void *)tag - (const void *)mbi < mbi->total_size &&
-+            tag->type != MULTIBOOT2_TAG_TYPE_END;
-+          tag = _p(ROUNDUP((unsigned long)tag + tag->size,
-+                   MULTIBOOT2_TAG_ALIGN)) )
-+    {
-+        switch ( tag->type )
-+        {
-+        case MULTIBOOT2_TAG_TYPE_EFI_BS:
-+            have_bs = true;
-+            break;
-+
-+        case MULTIBOOT2_TAG_TYPE_EFI64:
-+            SystemTable = _p(((const multiboot2_tag_efi64_t *)tag)->pointer);
-+            break;
-+
-+        case MULTIBOOT2_TAG_TYPE_EFI64_IH:
-+            ImageHandle = _p(((const multiboot2_tag_efi64_ih_t *)tag)->pointer);
-+            break;
-+
-+        case MULTIBOOT2_TAG_TYPE_CMDLINE:
-+            cmdline = ((const multiboot2_tag_string_t *)tag)->string;
-+            break;
-+
-+        default:
-+            /* Satisfy MISRA requirement. */
-+            break;
-+        }
-+    }
-+
-+    if ( !have_bs )
-+        return "ERR: Bootloader shutdown EFI x64 boot services!";
-+    if ( !SystemTable )
-+        return "ERR: EFI SystemTable is not provided by bootloader!";
-+    if ( !ImageHandle )
-+        return "ERR: EFI ImageHandle is not provided by bootloader!";
-+
-+    efi_multiboot2(ImageHandle, SystemTable, cmdline);
-+
-+    return NULL;
-+}
-diff --git a/xen/arch/x86/efi/stub.c b/xen/arch/x86/efi/stub.c
-index 2cd5c8d4dc..27d40964d5 100644
---- a/xen/arch/x86/efi/stub.c
-+++ b/xen/arch/x86/efi/stub.c
-@@ -17,7 +17,8 @@
-  */
- 
- void __init noreturn efi_multiboot2(EFI_HANDLE ImageHandle,
--                                    EFI_SYSTEM_TABLE *SystemTable)
-+                                    EFI_SYSTEM_TABLE *SystemTable,
-+                                    const char *cmdline)
- {
-     static const CHAR16 __initconst err[] =
-         L"Xen does not have EFI code build in!\r\nSystem halted!\r\n";
-diff --git a/xen/arch/x86/include/asm/efi.h b/xen/arch/x86/include/asm/efi.h
-new file mode 100644
-index 0000000000..575a33e302
---- /dev/null
-+++ b/xen/arch/x86/include/asm/efi.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef X86_ASM_EFI_H
-+#define X86_ASM_EFI_H
-+
-+#include <xen/types.h>
-+#include <asm/x86_64/efibind.h>
-+#include <efi/efidef.h>
-+#include <efi/eficapsule.h>
-+#include <efi/eficon.h>
-+#include <efi/efidevp.h>
-+#include <efi/efiapi.h>
-+
-+void efi_multiboot2(EFI_HANDLE ImageHandle,
-+                    EFI_SYSTEM_TABLE *SystemTable,
-+                    const char *cmdline);
-+
-+#endif /* X86_ASM_EFI_H */
--- 
-2.34.1
-
+Jan
 
