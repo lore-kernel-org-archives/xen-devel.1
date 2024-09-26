@@ -4,33 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF2B0CDE01B
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 16:03:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.805682.1216844 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA08CDE017
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 16:04:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.805695.1216864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stqxn-0004aN-Qw; Thu, 26 Sep 2024 16:03:31 +0000
+	id 1stqym-0005eS-Fv; Thu, 26 Sep 2024 16:04:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 805682.1216844; Thu, 26 Sep 2024 16:03:31 +0000
+Received: by outflank-mailman (output) from mailman id 805695.1216864; Thu, 26 Sep 2024 16:04:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stqxn-0004aG-O5; Thu, 26 Sep 2024 16:03:31 +0000
-Received: by outflank-mailman (input) for mailman id 805682;
- Thu, 26 Sep 2024 16:03:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stqym-0005eL-C9; Thu, 26 Sep 2024 16:04:32 +0000
+Received: by outflank-mailman (input) for mailman id 805695;
+ Thu, 26 Sep 2024 16:04:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GedV=QY=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1stqxl-0004aA-Vk
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 16:03:30 +0000
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [2607:f8b0:4864:20::c31])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id de586d32-7c20-11ef-a0ba-8be0dac302b0;
- Thu, 26 Sep 2024 18:03:29 +0200 (CEST)
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5e1c49f9b9aso489872eaf.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Sep 2024 09:03:29 -0700 (PDT)
+ <SRS0=SdHj=QY=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1stqyl-0004pB-5U
+ for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 16:04:31 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 01e181df-7c21-11ef-99a2-01e77a169b0f;
+ Thu, 26 Sep 2024 18:04:29 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1727366662393981.5563844146808;
+ Thu, 26 Sep 2024 09:04:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,98 +40,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: de586d32-7c20-11ef-a0ba-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727366608; x=1727971408; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ocI98GCQtsPEI4zgmJX4GcppYV+CQKi48fAPsGMFMgM=;
-        b=l9Xw0JP4KPyA436BcycmuN9EMLz1Ju08BVnU+S4cmEMMQiSL0rdGr51E5R5YkJtDP6
-         HAMcnfk8euTSIfVAkBqGbvebCEe0fvqAkegLE6qZuOIAOvkxzk224IH3r/r+DoCgciAo
-         BJN++iuoZqvWNc/17xIMIx85xDUMEOXJYmrwI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727366608; x=1727971408;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ocI98GCQtsPEI4zgmJX4GcppYV+CQKi48fAPsGMFMgM=;
-        b=EKZlsk8L1uuwK2fayle1cvbD3k63R85d5wv0E9gK9bzYrnJgliGDGdrtTDpou//8DT
-         3w7d+4U4VGKRICcODjb6FCXG/qTwxd0W51jQPR0bAzmatPbr3G7lvlyKczOZklipoAgC
-         5w4JO4Lu7S99B3mNzl3FObmVBLBHwne/112wmJn8voZYWsEsvoa8HbpLaZzGf+e7ue0g
-         18aiWSXXgfzSZZr8hCjMKjhdBcvmzWARn/HqQ7ce0k0gSZ2zYg2lCXJP4gCuXp+B00iQ
-         ltxlw1z/DGZfVXPQ9gT+tzv3DI9G7LH+kACaAsE3lZpCco5sMopt3puwJG5d6Z3EeD5u
-         JkaA==
-X-Forwarded-Encrypted: i=1; AJvYcCULU2KSc8dRo4vK+W+uvCPdRc7pEIJPySfVmlgguarVnbGPNCcsqfjeszwL9HfrVoPeMdtrxq4pOSw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwTQPnlDgWNiu1tR0JHV2Hj28U6r4ja0QAnqlgVbgAGQLzKDJ6G
-	GM1UP3L+S9voym66wzeL0ue2AlHm8zJt6QTTsvMnG/U5bVHZb0kO1iijx/f39MC5H4gRObkpmjs
-	VP96w2zjeXQCEM6dILyQYJz8pTMNvLsz/klLDsw==
-X-Google-Smtp-Source: AGHT+IEqp+heVLAr1NxfJlzRqHpCDsBxuuOZcKatzgK8IhtbzQ7jT0sDdQKjrfoV2Czr2hVfhZeNSqjxE+rwwLq/4ng=
-X-Received: by 2002:a05:6870:9613:b0:270:4219:68fe with SMTP id
- 586e51a60fabf-287109f5cc7mr326641fac.1.1727366607735; Thu, 26 Sep 2024
- 09:03:27 -0700 (PDT)
+X-Inumbo-ID: 01e181df-7c21-11ef-99a2-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; t=1727366664; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=Pk7HxrIGlIsuV+9OEiUolPj8y7F+9zVxP1zTovhyrDh0f2TOrQcU7g395rwXAeXGUdsi3tE6VOpPa+jHfu5WHSQVa12PSxuhGEFgzXECXimpWXsH06t+AjBZLqFZzd8/I8sG6Yu4R4n6n+LI7iellkwvvCTES2BYyhBdS2eUzfw=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1727366664; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=/fzOEcA7PkLDQ7YGSGrVlpDs7e1ywsE2tRSLfN9Vu0M=; 
+	b=elWNb/pWzlfyKbAjZROhgjw1UbvSDvVX7O7pVA5a1CEMbuxIa7h3XE0ZLKMJ01AgRunTHusXAJa5509XidzalrXmKsHYdT8Su+2qPhTzQHppq3fT9d7UB6NvtrcNDHYmyYjKElbcfgRMDkBUN7yuOifj9rW2orqMMsY4utxiopE=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1727366664;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=/fzOEcA7PkLDQ7YGSGrVlpDs7e1ywsE2tRSLfN9Vu0M=;
+	b=K8mx7kBox7H2efLC6tBX6Qw3hkfC5aIT/3IHCiHFhPJMw3viXu5CELh8QRL8adtR
+	wvtqlsNDXOF4rDWwanQZKRgt2WpD6l5pdM7lDLjfM8LXk67LU4y3JVQwNKPL9jjRVzg
+	TOGjIpdxrnQLuITSSwA7wW7jA2foC8Ja0s7GKdE8=
+Message-ID: <3822e8a1-a5fe-48c5-990e-89fcccd5b2da@apertussolutions.com>
+Date: Thu, 26 Sep 2024 12:04:21 -0400
 MIME-Version: 1.0
-References: <20240926134823.688372-1-frediano.ziglio@cloud.com> <63129694-ace9-4b55-92c2-7cfb8a2c1386@suse.com>
-In-Reply-To: <63129694-ace9-4b55-92c2-7cfb8a2c1386@suse.com>
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-Date: Thu, 26 Sep 2024 17:03:16 +0100
-Message-ID: <CACHz=Zj0K+uYt7h80p3Crkom-VNoLbH_4Wt04jdNDYs28tApdg@mail.gmail.com>
-Subject: Re: [PATCH v2] drivers/video: Convert source files to UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 05/44] x86/boot: introduce struct boot_module
+Content-Language: en-US
 To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: jason.andryuk@amd.com, christopher.w.clark@gmail.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20240830214730.1621-1-dpsmith@apertussolutions.com>
+ <20240830214730.1621-6-dpsmith@apertussolutions.com>
+ <ac41cfe3-5ad2-4a6f-8e3d-973021923ec3@suse.com>
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
+ 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
+In-Reply-To: <ac41cfe3-5ad2-4a6f-8e3d-973021923ec3@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 
-On Thu, Sep 26, 2024 at 3:46=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 26.09.2024 15:48, Frediano Ziglio wrote:
-> > --- a/xen/drivers/video/font_8x14.c
-> > +++ b/xen/drivers/video/font_8x14.c
-> > @@ -2059,7 +2059,7 @@ static const unsigned char fontdata_8x14[FONTDATA=
-MAX] =3D {
-> >      0x00, /* 00000000 */
-> >      0x00, /* 00000000 */
-> >
-> > -    /* 128 0x80 '=C5=B8=CB=86 */
-> > +    /* 128 0x80 '=C3=82=C5=B8=C3=82=CB=86 */
->
-> I'm unconvinced this representation is any better. The data that follows
-> right here clearly means '=C3=87', not '=C5=B8'. Which is U+00c7, not U+0=
-080. I
-> don't have my Unicode manual to hand, but I seem to vaguely recall that
-> U+0080 doesn't really have a glyph associated with it.
->
-> Of course I'm also uncertain whether my mail UI actually correctly decode=
-d
-> the transfer encoding (base64) that you now used. In any event I'm unsure
-> of associating the upper 128 code points with any particular characters
-> (glyphs). We don't render UTF-8 to the console, and what those code point=
-s
-> mean is unknown until code page information is provided. I see the
-> following options:
-> 1) The glyphs represent what the bit patterns encode, encoded as UTF-8.
+On 9/4/24 02:33, Jan Beulich wrote:
+> On 30.08.2024 23:46, Daniel P. Smith wrote:
+>> @@ -303,6 +308,14 @@ static void __init multiboot_to_bootinfo(multiboot_info_t *mbi)
+>>           info.mmap_length = mbi->mmap_length;
+>>       }
+>>   
+>> +    info.mods = boot_mods;
+>> +
+>> +    for ( i=0; i < info.nr_mods; i++ )
+>> +        boot_mods[i].early_mod = &mods[i];
+>> +
+>> +    /* map the last mb module for xen entry */
+> 
+> Nit: Comment style.
 
-That was what I was trying to do.
-I wrongly thought it was latin1, in reality looking at the font (why
-not?) it's code page 437, so this commit is doing the right thing
-https://gitlab.com/xen-project/people/fziglio/xen/-/commit/7ca512e8ae21bb02=
-339ed7a1a78409827a08aea4.
-Now... I'm trying to send the patch to the mailing list, which seems
-easy, but I have to find the right combination of options, tools get
-very easily confused about (that's why I send the link of the commit,
-at least people can take a look and see that is correct)
+Ack, will fix as part of relocation per Andy's comment.
 
-> 2) The glyphs are simply omitted for the upper half of the range.
-> 3) We purge any encoding of particular glyphs for the upper half of the
->    range and instead expand the upper 128 entries to some placeholders
->    when rendering (like e.g. the Windows font I'm looking at, using a
->    boxed question mark).
->
-> Jan
-
-Trying to get the right email without spamming the ML.
-
-Frediano
+v/r,
+dps
 
