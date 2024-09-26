@@ -4,43 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC7AACCFA13
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 09:58:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.805138.1216180 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DC2CCF9E9
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 10:14:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.805155.1216201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stlGJ-0002UA-Im; Thu, 26 Sep 2024 09:58:15 +0000
+	id 1stlW4-0005lY-49; Thu, 26 Sep 2024 10:14:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 805138.1216180; Thu, 26 Sep 2024 09:58:15 +0000
+Received: by outflank-mailman (output) from mailman id 805155.1216201; Thu, 26 Sep 2024 10:14:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stlGJ-0002U3-G0; Thu, 26 Sep 2024 09:58:15 +0000
-Received: by outflank-mailman (input) for mailman id 805138;
- Thu, 26 Sep 2024 09:58:14 +0000
+	id 1stlW4-0005lR-16; Thu, 26 Sep 2024 10:14:32 +0000
+Received: by outflank-mailman (input) for mailman id 805155;
+ Thu, 26 Sep 2024 10:14:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SK2l=QY=darkstar.site=sakib@srs-se1.protection.inumbo.net>)
- id 1stlGI-0002Tx-22
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 09:58:14 +0000
-Received: from pb-smtp1.pobox.com (pb-smtp1.pobox.com [64.147.108.70])
+ <SRS0=2S5w=QY=bounce.vates.tech=bounce-md_30504962.66f53402.v1-8b1e87364ec749e9a3ab06a7add22449@srs-se1.protection.inumbo.net>)
+ id 1stlW3-0005XB-0K
+ for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 10:14:31 +0000
+Received: from mail177-9.suw61.mandrillapp.com
+ (mail177-9.suw61.mandrillapp.com [198.2.177.9])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d6b1f63a-7bed-11ef-a0ba-8be0dac302b0;
- Thu, 26 Sep 2024 11:58:12 +0200 (CEST)
-Received: from pb-smtp1.pobox.com (unknown [127.0.0.1])
- by pb-smtp1.pobox.com (Postfix) with ESMTP id A2A18181DE;
- Thu, 26 Sep 2024 05:58:10 -0400 (EDT)
- (envelope-from sakib@darkstar.site)
-Received: from pb-smtp1.nyi.icgroup.com (unknown [127.0.0.1])
- by pb-smtp1.pobox.com (Postfix) with ESMTP id 98FAB181DD;
- Thu, 26 Sep 2024 05:58:10 -0400 (EDT)
- (envelope-from sakib@darkstar.site)
-Received: from localhost (unknown [185.130.54.100])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by pb-smtp1.pobox.com (Postfix) with ESMTPSA id 33E68181DC;
- Thu, 26 Sep 2024 05:58:09 -0400 (EDT)
- (envelope-from sakib@darkstar.site)
+ id 1c950d43-7bf0-11ef-a0ba-8be0dac302b0;
+ Thu, 26 Sep 2024 12:14:29 +0200 (CEST)
+Received: from pmta14.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail177-9.suw61.mandrillapp.com (Mailchimp) with ESMTP id 4XDqFt4t2GzK5vrtM
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Sep 2024 10:14:26 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 8b1e87364ec749e9a3ab06a7add22449; Thu, 26 Sep 2024 10:14:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,282 +44,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6b1f63a-7bed-11ef-a0ba-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=pobox.com; h=from:to:cc
-	:subject:date:message-id:mime-version:content-transfer-encoding;
-	 s=sasl; bh=Kb5CaR8B/iX278zwrZHvcWGA59WlqeG+iZBQKipmdLs=; b=fW5M
-	g1AfalkJ5XXwoCTzsa2kTvH4o00E7KaKQzA8RpiGUmZR27swC6CR26PKSTp/K6k1
-	L82Cn+pqnFt0SsrHgPDujeNtK4qvc4Nb6CEE/5VNrklW0yCNOC76RKbW7GYq3Jry
-	knvmdnh/dl5UjQGzPyMgt2jeaLUYiAYeeuoy9SU=
-From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-Subject: [RFC PATCH] arm: introduce kconfig options to disable hypercalls
-Date: Thu, 26 Sep 2024 12:58:06 +0300
-Message-Id: <20240926095806.67149-1-Sergiy_Kibrik@epam.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 1c950d43-7bf0-11ef-a0ba-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1727345666; x=1727606166;
+	bh=DRimZkyYpcmRSMJFhksb4hjZDJ7L7Xbrn74CwG57nLQ=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=PcNK7XF9kRnnlvT9kGbORay6vWsL6O+Rtr0rnOG24qAZrkA+/HIf7lrTq3PNi2vpa
+	 aiJjklG1TCPArzdY4YU+1cqR0OzCk5jmDk7dnNqH12OiW0+j8LmW0qK0YCbFEgWtrc
+	 kZyfNZImwJY/WM0Q8xZcD9jwGJ/8zfCm1TI5mhslpZjIPoZNwUMPnKK4piqmhB+x07
+	 F/SZOu3JvJFY8Vx1eHJ30w4YFlnLB9BGpCaKsY+AMq5pfgP/Zw03NlVI41vQJms58b
+	 IQIL5c5rkbnVz+aOqPbzrBcXWOwzT9TyPmYO/snnaZ7xgXd6ElEldptlmiHUebW/+o
+	 wlFsRViXzAWhw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1727345666; x=1727606166; i=anthony.perard@vates.tech;
+	bh=DRimZkyYpcmRSMJFhksb4hjZDJ7L7Xbrn74CwG57nLQ=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=z394Zolb7zwu51I2V02EKnuWI1LoPjiI4ff/pA04qh80FrJYDFXuTf0RDkyRTCOop
+	 F34fKxGDYAyOMoEJwu72SryC442VwNtFz3gEcZcl55bzq9+hmxshoQrHYgIKh5+WOe
+	 le2IZV56UYP4viMzB+kUyDN67dab/iYoNe9D2tgs99qViSh/6J9LzpMTvsHRSQhYQ7
+	 XNNNJWm9QIt9pJA8v3Zpapja477MDrSGUKCrl5l1P3e9z749Xs2v65xATbcdyoMS6f
+	 C5qBjU6bOl9qW+opVcLCZp2hoIlfg3rLWOqQl3PZR2JqExS354FYwND7G9M0YJ+iFt
+	 tgK0NcfrABdUA==
+From: Anthony PERARD <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?[PATCH=202/2]=20hw/block/xen-block:=20Update=20sector-size=20handling?=
+X-Mailer: git-send-email 2.39.2
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1727345665867
+To: qemu-devel@nongnu.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>, Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Stefan Hajnoczi <stefanha@redhat.com>, Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, xen-devel@lists.xenproject.org, qemu-block@nongnu.org
+Message-Id: <20240926101334.2388-3-anthony.perard@vates.tech>
+In-Reply-To: <20240926101334.2388-1-anthony.perard@vates.tech>
+References: <20240926101334.2388-1-anthony.perard@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.8b1e87364ec749e9a3ab06a7add22449?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20240926:md
+Date: Thu, 26 Sep 2024 10:14:26 +0000
 MIME-Version: 1.0
-X-Pobox-Relay-ID:
- D591C672-7BED-11EF-B0DF-2BAEEB2EC81B-90055647!pb-smtp1.pobox.com
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
+The use of "feature-large-sector-size" have been removed from the
+protocol, as it hasn't been evenly implemented across all backend and
+frontend. Linux for example will happily expose "sector-size" != 512
+even when "feature-large-sector-size" hasn't been set by the frontend.
 
-It can be beneficial for some dom0less systems to further reduce Xen foot=
-print
-and disable some hypercalls handling code, which isn't going to be used i=
-n
-such systems. Each hypercall has a separate option to keep configuration
-flexible.
+The specification have been clarified regarding what "sector" is by
+Xen commit 221f2748e8da ("blkif: reconcile protocol specification with
+in-use implementations").
 
-Options to disable hypercalls:
-- domctl, sysctl
-- hvm
-- physdev
-- platform
+https://xenbits.xenproject.org/gitweb/?p=xen.git;a=commit;h=221f2748e8dabe8361b8cdfcffbeab9102c4c899
 
-Options are forced to be configurable only when DOM0LESS is enabled, so t=
-hat
-system won't become accidentally un-bootable when any hypercall is disabl=
-ed.
+So change QEMU to follow the updated specification.
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+Frontends that exposes "feature-large-sector-size" will most certainly
+misbehave if "sector-size" is different than 512, so don't even try.
+(Windows driver is likely to be the only one having implemented it.)
+
+Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
 ---
- xen/arch/arm/Makefile        | 10 +++++-----
- xen/common/Kconfig           | 26 ++++++++++++++++++++++++++
- xen/common/Makefile          |  4 ++++
- xen/common/domain.c          |  2 ++
- xen/include/hypercall-defs.c | 14 +++++++++++++-
- xen/include/xen/hypercall.h  | 20 ++++++++++++++++++++
- 6 files changed, 70 insertions(+), 6 deletions(-)
+ hw/block/dataplane/xen-block.c | 31 ++++++++++++++++++++++---------
+ hw/block/xen-block.c           |  8 ++++----
+ 2 files changed, 26 insertions(+), 13 deletions(-)
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 7792bff597..09fffa7002 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -18,7 +18,7 @@ obj-$(CONFIG_IOREQ_SERVER) +=3D dm.o
- obj-$(CONFIG_DOM0LESS_BOOT) +=3D dom0less-build.init.o
- obj-y +=3D domain.o
- obj-y +=3D domain_build.init.o
--obj-y +=3D domctl.o
-+obj-$(CONFIG_DOMCTL) +=3D domctl.o
- obj-$(CONFIG_EARLY_PRINTK) +=3D early_printk.o
- obj-y +=3D efi/
- obj-y +=3D gic.o
-@@ -29,7 +29,7 @@ obj-$(CONFIG_HAS_ITS) +=3D gic-v3-lpi.o
- obj-y +=3D guestcopy.o
- obj-y +=3D guest_atomics.o
- obj-y +=3D guest_walk.o
--obj-y +=3D hvm.o
-+obj-$(CONFIG_HVM_OP) +=3D hvm.o
- obj-y +=3D io.o
- obj-$(CONFIG_IOREQ_SERVER) +=3D ioreq.o
- obj-y +=3D irq.o
-@@ -41,8 +41,8 @@ obj-y +=3D monitor.o
- obj-y +=3D p2m.o
- obj-y +=3D percpu.o
- obj-y +=3D platform.o
--obj-y +=3D platform_hypercall.o
--obj-y +=3D physdev.o
-+obj-$(CONFIG_PLATFORM_HYP) +=3D platform_hypercall.o
-+obj-$(CONFIG_PHYSDEVOP) +=3D physdev.o
- obj-y +=3D processor.o
- obj-y +=3D psci.o
- obj-y +=3D setup.o
-@@ -52,7 +52,7 @@ obj-y +=3D smpboot.o
- obj-$(CONFIG_STATIC_EVTCHN) +=3D static-evtchn.init.o
- obj-$(CONFIG_STATIC_MEMORY) +=3D static-memory.init.o
- obj-$(CONFIG_STATIC_SHM) +=3D static-shmem.init.o
--obj-y +=3D sysctl.o
-+obj-$(CONFIG_SYSCTL) +=3D sysctl.o
- obj-y +=3D time.o
- obj-y +=3D traps.o
- obj-y +=3D vcpreg.o
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 90268d9249..7e4f51958d 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -516,4 +516,30 @@ config TRACEBUFFER
- 	  to be collected at run time for debugging or performance analysis.
- 	  Memory and execution overhead when not active is minimal.
-=20
-+menu "Supported hypercall interfaces"
-+	visible if DOM0LESS_BOOT && EXPERT
-+
-+config SYSCTL
-+	bool "Enable sysctl hypercall"
-+	default y
-+
-+config DOMCTL
-+	bool "Enable domctl hypercalls"
-+	default y
-+
-+config HVM_OP
-+	bool "Enable HVM hypercalls"
-+	depends on HVM
-+	default y
-+
-+config PLATFORM_HYP
-+	bool "Enable platform hypercalls"
-+	default y
-+
-+config PHYSDEVOP
-+	bool "Enable physdev hypercall"
-+	default y
-+
-+endmenu
-+
- endmenu
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index fc52e0857d..ea0557aee5 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -64,10 +64,14 @@ obj-bin-$(CONFIG_X86) +=3D $(foreach n,decompress bun=
-zip2 unxz unlzma lzo unlzo un
- obj-$(CONFIG_COMPAT) +=3D $(addprefix compat/,domain.o memory.o multical=
-l.o xlat.o)
-=20
- ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
-+ifeq ($(CONFIG_DOMCTL),y)
- obj-y +=3D domctl.o
-+endif
- obj-y +=3D monitor.o
-+ifeq ($(CONFIG_SYSCTL),y)
- obj-y +=3D sysctl.o
- endif
-+endif
-=20
- extra-y :=3D symbols-dummy.o
-=20
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 92263a4fbd..77d15a317f 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -1053,7 +1053,9 @@ int domain_kill(struct domain *d)
-         d->is_dying =3D DOMDYING_dying;
-         rspin_barrier(&d->domain_lock);
-         argo_destroy(d);
-+#ifdef CONFIG_DOMCTL
-         vnuma_destroy(d->vnuma);
-+#endif
-         domain_set_outstanding_pages(d, 0);
-         /* fallthrough */
-     case DOMDYING_dying:
-diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
-index 47c093acc8..93b4f5a1e3 100644
---- a/xen/include/hypercall-defs.c
-+++ b/xen/include/hypercall-defs.c
-@@ -235,8 +235,10 @@ set_callbacks                      compat   do      =
- -        -        -
- fpu_taskswitch                     do       do       -        -        -
- sched_op_compat                    do       do       -        -        d=
-ep
- #ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+#ifdef CONFIG_PLATFORM_HYP
- platform_op                        compat   do       compat   do       d=
-o
- #endif
-+#endif
- set_debugreg                       do       do       -        -        -
- get_debugreg                       do       do       -        -        -
- update_descriptor                  compat   do       -        -        -
-@@ -247,7 +249,9 @@ set_timer_op                       compat   do       =
-compat   do       -
- event_channel_op_compat            do       do       -        -        d=
-ep
- xen_version                        do       do       do       do       d=
-o
- console_io                         do       do       do       do       d=
-o
-+#ifdef CONFIG_PHYSDEV
- physdev_op_compat                  compat   do       -        -        d=
-ep
-+#endif
- #if defined(CONFIG_GRANT_TABLE)
- grant_table_op                     compat   do       hvm      hvm      d=
-o
- #elif defined(CONFIG_PV_SHIM)
-@@ -269,14 +273,20 @@ callback_op                        compat   do     =
-  -        -        -
- xenoprof_op                        compat   do       -        -        -
- #endif
- event_channel_op                   do       do       do:1     do:1     d=
-o:1
-+#ifdef CONFIG_PHYSDEVOP
- physdev_op                         compat   do       hvm      hvm      d=
-o_arm
--#ifdef CONFIG_HVM
-+#endif
-+#ifdef CONFIG_HVM_OP
- hvm_op                             do       do       do       do       d=
-o
- #endif
- #ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+#ifdef CONFIG_SYSCTL
- sysctl                             do       do       do       do       d=
-o
-+#endif
-+#ifdef CONFIG_DOMCTL
- domctl                             do       do       do       do       d=
-o
- #endif
-+#endif
- #ifdef CONFIG_KEXEC
- kexec_op                           compat   do       -        -        -
- #endif
-@@ -293,7 +303,9 @@ hypfs_op                           do       do       =
-do       do       do
- #endif
- mca                                do       do       -        -        -
- #ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+#ifdef CONFIG_DOMCTL
- paging_domctl_cont                 do       do       do       do       -
- #endif
-+#endif
-=20
- #endif /* !CPPCHECK */
-diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index f307dfb597..10d551c751 100644
---- a/xen/include/xen/hypercall.h
-+++ b/xen/include/xen/hypercall.h
-@@ -24,6 +24,26 @@
- /* Needs to be after asm/hypercall.h. */
- #include <xen/hypercall-defs.h>
-=20
-+#if !defined(CONFIG_DOMCTL) && !defined(CONFIG_DOM0LESS_BOOT)
-+#error "domctl and dom0less can't be disabled simultaneously"
-+#endif
-+
-+#if !defined(CONFIG_HVM_OP) && !defined(CONFIG_DOM0LESS_BOOT)
-+#error "hvm_op and dom0less can't be disabled simultaneously"
-+#endif
-+
-+#if !defined(CONFIG_PHYSDEVOP) && !defined(CONFIG_DOM0LESS_BOOT)
-+#error "physdevop and dom0less can't be disabled simultaneously"
-+#endif
-+
-+#if !defined(CONFIG_PLATFORM_HYP) && !defined(CONFIG_DOM0LESS_BOOT)
-+#error "platform hypercalls and dom0less can't be disabled simultaneousl=
-y"
-+#endif
-+
-+#if !defined(CONFIG_SYSCTL) && !defined(CONFIG_DOM0LESS_BOOT)
-+#error "sysctl and dom0less can't be disabled simultaneously"
-+#endif
-+
- extern long
- arch_do_domctl(
-     struct xen_domctl *domctl, struct domain *d,
---=20
-2.25.1
+diff --git a/hw/block/dataplane/xen-block.c b/hw/block/dataplane/xen-block.c
+index 98501e6885..43be97b4f3 100644
+--- a/hw/block/dataplane/xen-block.c
++++ b/hw/block/dataplane/xen-block.c
+@@ -176,7 +176,11 @@ static int xen_block_parse_request(XenBlockRequest *request)
+         goto err;
+     }
+ 
+-    request->start = request->req.sector_number * dataplane->sector_size;
++    request->start = request->req.sector_number * XEN_BLKIF_SECTOR_SIZE;
++    if (!QEMU_IS_ALIGNED(request->start, dataplane->sector_size)) {
++        error_report("error: sector_number missaligned with sector-size");
++        goto err;
++    }
+     for (i = 0; i < request->req.nr_segments; i++) {
+         if (i == BLKIF_MAX_SEGMENTS_PER_REQUEST) {
+             error_report("error: nr_segments too big");
+@@ -186,14 +190,23 @@ static int xen_block_parse_request(XenBlockRequest *request)
+             error_report("error: first > last sector");
+             goto err;
+         }
+-        if (request->req.seg[i].last_sect * dataplane->sector_size >=
++        if (request->req.seg[i].last_sect * XEN_BLKIF_SECTOR_SIZE >=
+             XEN_PAGE_SIZE) {
+             error_report("error: page crossing");
+             goto err;
+         }
++        if (!QEMU_IS_ALIGNED(request->req.seg[i].first_sect,
++                             dataplane->sector_size / XEN_BLKIF_SECTOR_SIZE)) {
++            error_report("error: first_sect missaligned with sector-size");
++            goto err;
++        }
+ 
+         len = (request->req.seg[i].last_sect -
+-               request->req.seg[i].first_sect + 1) * dataplane->sector_size;
++               request->req.seg[i].first_sect + 1) * XEN_BLKIF_SECTOR_SIZE;
++        if (!QEMU_IS_ALIGNED(len, dataplane->sector_size)) {
++            error_report("error: segment size missaligned with sector-size");
++            goto err;
++        }
+         request->size += len;
+     }
+     if (request->start + request->size > blk_getlength(dataplane->blk)) {
+@@ -227,17 +240,17 @@ static int xen_block_copy_request(XenBlockRequest *request)
+         if (to_domain) {
+             segs[i].dest.foreign.ref = request->req.seg[i].gref;
+             segs[i].dest.foreign.offset = request->req.seg[i].first_sect *
+-                dataplane->sector_size;
++                XEN_BLKIF_SECTOR_SIZE;
+             segs[i].source.virt = virt;
+         } else {
+             segs[i].source.foreign.ref = request->req.seg[i].gref;
+             segs[i].source.foreign.offset = request->req.seg[i].first_sect *
+-                dataplane->sector_size;
++                XEN_BLKIF_SECTOR_SIZE;
+             segs[i].dest.virt = virt;
+         }
+         segs[i].len = (request->req.seg[i].last_sect -
+                        request->req.seg[i].first_sect + 1) *
+-                      dataplane->sector_size;
++                      XEN_BLKIF_SECTOR_SIZE;
+         virt += segs[i].len;
+     }
+ 
+@@ -331,12 +344,12 @@ static bool xen_block_split_discard(XenBlockRequest *request,
+ 
+     /* Wrap around, or overflowing byte limit? */
+     if (sec_start + sec_count < sec_count ||
+-        sec_start + sec_count > INT64_MAX / dataplane->sector_size) {
++        sec_start + sec_count > INT64_MAX / XEN_BLKIF_SECTOR_SIZE) {
+         return false;
+     }
+ 
+-    byte_offset = sec_start * dataplane->sector_size;
+-    byte_remaining = sec_count * dataplane->sector_size;
++    byte_offset = sec_start * XEN_BLKIF_SECTOR_SIZE;
++    byte_remaining = sec_count * XEN_BLKIF_SECTOR_SIZE;
+ 
+     do {
+         byte_chunk = byte_remaining > BDRV_REQUEST_MAX_BYTES ?
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index aed1d5c330..8c150c6c69 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -189,10 +189,10 @@ static void xen_block_connect(XenDevice *xendev, Error **errp)
+         feature_large_sector_size = 0;
+     }
+ 
+-    if (feature_large_sector_size != 1 &&
++    if (feature_large_sector_size == 1 &&
+         conf->logical_block_size != XEN_BLKIF_SECTOR_SIZE) {
+-        error_setg(errp, "logical_block_size != %u not supported by frontend",
+-                   XEN_BLKIF_SECTOR_SIZE);
++        error_setg(errp,
++                   "\"feature-large-sector-size\" not supported by backend");
+         return;
+     }
+ 
+@@ -294,7 +294,7 @@ static void xen_block_set_size(XenBlockDevice *blockdev)
+     const char *type = object_get_typename(OBJECT(blockdev));
+     XenBlockVdev *vdev = &blockdev->props.vdev;
+     BlockConf *conf = &blockdev->props.conf;
+-    int64_t sectors = blk_getlength(conf->blk) / conf->logical_block_size;
++    int64_t sectors = blk_getlength(conf->blk) / XEN_BLKIF_SECTOR_SIZE;
+     XenDevice *xendev = XEN_DEVICE(blockdev);
+ 
+     trace_xen_block_size(type, vdev->disk, vdev->partition, sectors);
+-- 
 
+
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
