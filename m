@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C46ACDE01B
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 15:55:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.805674.1216834 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B50CDE020
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 16:03:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.805683.1216853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stqpP-0001xV-1I; Thu, 26 Sep 2024 15:54:51 +0000
+	id 1stqy0-0004qC-1F; Thu, 26 Sep 2024 16:03:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 805674.1216834; Thu, 26 Sep 2024 15:54:51 +0000
+Received: by outflank-mailman (output) from mailman id 805683.1216853; Thu, 26 Sep 2024 16:03:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stqpO-0001xO-Uo; Thu, 26 Sep 2024 15:54:50 +0000
-Received: by outflank-mailman (input) for mailman id 805674;
- Thu, 26 Sep 2024 15:54:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1stqxz-0004q5-Uh; Thu, 26 Sep 2024 16:03:43 +0000
+Received: by outflank-mailman (input) for mailman id 805683;
+ Thu, 26 Sep 2024 16:03:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SdHj=QY=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1stqpN-0001wz-If
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 15:54:49 +0000
-Received: from sender3-of-o59.zoho.com (sender3-of-o59.zoho.com
- [136.143.184.59]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a7739247-7c1f-11ef-a0ba-8be0dac302b0;
- Thu, 26 Sep 2024 17:54:48 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1727366079852608.2703727802802;
- Thu, 26 Sep 2024 08:54:39 -0700 (PDT)
+ id 1stqxy-0004pB-1h
+ for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 16:03:42 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e3fe7287-7c20-11ef-99a2-01e77a169b0f;
+ Thu, 26 Sep 2024 18:03:39 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 172736660725586.7212940189462;
+ Thu, 26 Sep 2024 09:03:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,39 +40,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7739247-7c1f-11ef-a0ba-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1727366081; cv=none; 
+X-Inumbo-ID: e3fe7287-7c20-11ef-99a2-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; t=1727366610; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=aM111958QrScZDs9kqEHEO78kMWhVb9YTSV1r1eMombozcLiy5Qff8WXQAaW8AZ1GeSCF1pA7DAlZzcolM0K0X1nU5xV4qpM1Mh8sgp04LCtKeLp4p9+/BOfsLIgeS14KP7bMb+Tptn4PNAJ9njdVw33xjBg5cyEiE1wLroeuEQ=
+	b=S5f8/fqpn3yewnnJkbgC1bNoi+DqUQLyEO/xUUCWHHKN9/HCdELIDgrg8bxklefOKdLuoY23oox7wlQntKiGhEVfT0SJ0Ywo3TeOjr+BunOTgN35KgPDIbom3584hEOtah6eSH4q9Mm0xR7s8Inx8ODqfZbfjY3Znefe/KXwweU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1727366081; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=NNG6+3IrY6oJosToOShvMkyWUgL3evGqGzph52TagfI=; 
-	b=Dnh0DNroZnGXiDQC/fHTDHNvuXE/AkphZHla7r7ufYpc7vVx3xzl7saeMdrupCIFbh9TizDm9/OF/D0NsoJYiEKPdjl/gjDGRlcELb1N0bZO5hs49Dt8GWRq9hxgt7/QpExsB8B6Za0Ko8M4ZBzB9oFfDFrCktNi+4Ng5HsasLI=
+	t=1727366610; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=Yhm8YElX58SenLl+/atJ7UYppjXZd8mhf6XqTG7Zo+E=; 
+	b=LOhERc9p1338ha8g7O9HBOdD/qWx/CRU3J+1WqRhXtX9MWz6GMazjMcTlUNEf2uUo+WvxGJv4YWstdlYc0FDirX57e30SLNrnF4qdUZ6h7TrAIuz9mkfHYc4V3NbNI6rj3NT5FTntERktIKWd/rmsAHtMee2bx1jtsxctjLKT9Y=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1727366081;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1727366610;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=NNG6+3IrY6oJosToOShvMkyWUgL3evGqGzph52TagfI=;
-	b=tVGcbDwCLHTsd8F6kkI8cX0/91pqnx6mANtpgJr3B8MNVwOtIDdJspb+m56wJ4fD
-	cphnwXF8QmagN/K6vaIq1acIvylCq49hDylv/PRHoGlGDo18diakcU7u2+91eCC03hq
-	MzvmmccwMH9LCd5Kee6znfZGakOFop7oex23x8yM=
-Message-ID: <165620b4-535d-4946-9819-19374d180d4f@apertussolutions.com>
-Date: Thu, 26 Sep 2024 11:54:38 -0400
+	bh=Yhm8YElX58SenLl+/atJ7UYppjXZd8mhf6XqTG7Zo+E=;
+	b=swBsCSjorX6Kq02ZT1iPZcQYSEJrbJzawDhh5Hjqxl5nsSrlTrf28d8JkhZrYcCN
+	UPYPY2aTmLiDQE/2vOPjOZZMpCiMT8YBwaAvVxKH7W0HS/jpUZur7WucIuzL4t7wFn/
+	7VIqLrrdzWgb46+0JUR0Yrm42SKW1Jrq11G2QHV4=
+Message-ID: <2ec7703b-c3e4-4539-9256-070634a99d2e@apertussolutions.com>
+Date: Thu, 26 Sep 2024 12:03:26 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 04/44] x86/boot: move mmap info to boot info
+Subject: Re: [PATCH v4 05/44] x86/boot: introduce struct boot_module
 Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 Cc: jason.andryuk@amd.com, christopher.w.clark@gmail.com,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
+ Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>
 References: <20240830214730.1621-1-dpsmith@apertussolutions.com>
- <20240830214730.1621-5-dpsmith@apertussolutions.com>
- <610f17d8-1399-48df-ace1-b31a848dd265@suse.com>
+ <20240830214730.1621-6-dpsmith@apertussolutions.com>
+ <bc8987f6-e2cf-4ab7-b493-6fd00b89108a@citrix.com>
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
  xsJuBFYrueARCACPWL3r2bCSI6TrkIE/aRzj4ksFYPzLkJbWLZGBRlv7HQLvs6i/K4y/b4fs
@@ -105,38 +104,106 @@ Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
  ke943EIUts9CmFAHt8cNPYOPRd20pPu4VFNBuT4fv9Ys0iv0XGCEP+sos7/pgJ3gV3pCOric
  p15jV4PCYQQYEQgACQUCViu54AIbDAAKCRBTc6WbYpR8Khu7AP9NJrBUn94C/3PeNbtQlEGZ
  NV46Mx5HF0P27lH3sFpNrwD/dVdZ5PCnHQYBZ287ZxVfVr4Zuxjo5yJbRjT93Hl0vMY=
-In-Reply-To: <610f17d8-1399-48df-ace1-b31a848dd265@suse.com>
+In-Reply-To: <bc8987f6-e2cf-4ab7-b493-6fd00b89108a@citrix.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-On 9/4/24 02:26, Jan Beulich wrote:
-> On 30.08.2024 23:46, Daniel P. Smith wrote:
+On 9/3/24 19:29, Andrew Cooper wrote:
+> On 30/08/2024 10:46 pm, Daniel P. Smith wrote:
+>> diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+>> index e785ed1c5982..844262495962 100644
 >> --- a/xen/arch/x86/include/asm/bootinfo.h
 >> +++ b/xen/arch/x86/include/asm/bootinfo.h
->> @@ -8,11 +8,16 @@
+>> @@ -8,10 +8,16 @@
 >>   #ifndef __XEN_X86_BOOTINFO_H__
 >>   #define __XEN_X86_BOOTINFO_H__
 >>   
->> +#include <xen/types.h>
+>> +#include <xen/multiboot.h>
+>>   #include <xen/types.h>
+>>   
+>> +struct boot_module {
+>> +    module_t *early_mod;
+> 
+> This could do with a /* Transitionary only */ comment.  In this patch
+> it's not too bad, but it does get worse as new fields are added, before
+> being removed.
+
+Yep, can add a comment.
+
+> I'd also drop the "early_" part.  I know it's the initial_images array
+> we're converting, but "early_" doesn't convey any extra meaning, and it
+> makes a number of lines get quite hairy.
+
+I can drop it.
+
+>> +};
 >> +
 >>   struct boot_info {
 >>       unsigned int nr_mods;
+>> +    struct boot_module *mods;
+> 
+> struct boot_module modules[MAX_NR_BOOTMODS + 1];
+> 
+> Probably at the end of the structure.  In turn it ...
+
+I can move it here, though just to be clear, are you suggesting that it 
+is kept at the end of the structure as more fields are added.
+
 >>   
 >>       const char *boot_loader_name;
 >>       const char *cmdline;
+>> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+>> index c6b45ced00ae..28fdbf4d4c2b 100644
+>> --- a/xen/arch/x86/setup.c
+>> +++ b/xen/arch/x86/setup.c
+>> @@ -278,12 +278,17 @@ custom_param("acpi", parse_acpi_param);
+>>   
+>>   static const char *cmdline_cook(const char *p, const char *loader_name);
+>>   
+>> +/* Max number of boot modules a bootloader can provide in addition to Xen */
+>> +#define MAX_NR_BOOTMODS 63
 >> +
->> +    paddr_t mmap_addr;
->> +    uint32_t mmap_length;
+>>   static const module_t *__initdata initial_images;
+>>   static struct boot_info __initdata *boot_info;
+>>   
+>> -static void __init multiboot_to_bootinfo(multiboot_info_t *mbi)
+>> +static void __init multiboot_to_bootinfo(multiboot_info_t *mbi, module_t *mods)
+>>   {
+>>       static struct boot_info __initdata info;
+>> +    static struct boot_module __initdata boot_mods[MAX_NR_BOOTMODS + 1];
 > 
-> Why would this need to be a fixed-width type, unless we went in the direction
-> of what Alejandro mentioned in reply to patch 1? IOW at least we want to be
-> consistent with which kind of types are used here.
+> ... drops this static.
 
-At of right now, I would prefer not to go down the path of a boot 
-protocol, but I am willing to have the discussion if a majority pushes 
-for it. Unless that happens, I will switch this to size_t.
+Will be dropped.
+
+>> +    unsigned int i;
+>>   
+>>       info.nr_mods = mbi->mods_count;
+>>   
+>> @@ -303,6 +308,14 @@ static void __init multiboot_to_bootinfo(multiboot_info_t *mbi)
+>>           info.mmap_length = mbi->mmap_length;
+>>       }
+>>   
+>> +    info.mods = boot_mods;
+>> +
+>> +    for ( i=0; i < info.nr_mods; i++ )
+> 
+> i = 0
+
+Ack.
+
+>> +        boot_mods[i].early_mod = &mods[i];
+>> +
+>> +    /* map the last mb module for xen entry */
+>> +    boot_mods[info.nr_mods].early_mod = &mods[info.nr_mods];
+> 
+> The comment is good, but note how this is just one extra iteration of
+> the loop, (so use <= for the bound).
+
+I will move the comment above the loop and adjust the condition.
 
 v/r,
 dps
+
 
