@@ -4,37 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B15E6CDE024
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 16:55:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.805755.1216994 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9899ACDE025
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 16:57:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.805796.1217024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1strlG-0002gP-2r; Thu, 26 Sep 2024 16:54:38 +0000
+	id 1stroG-0006E0-9V; Thu, 26 Sep 2024 16:57:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 805755.1216994; Thu, 26 Sep 2024 16:54:38 +0000
+Received: by outflank-mailman (output) from mailman id 805796.1217024; Thu, 26 Sep 2024 16:57:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1strlF-0002gD-Vx; Thu, 26 Sep 2024 16:54:37 +0000
-Received: by outflank-mailman (input) for mailman id 805755;
- Thu, 26 Sep 2024 16:54:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1stroG-0006Dt-6n; Thu, 26 Sep 2024 16:57:44 +0000
+Received: by outflank-mailman (input) for mailman id 805796;
+ Thu, 26 Sep 2024 16:57:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ukdd=QY=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1strlE-0001ST-Kl
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 16:54:36 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 02304502-7c28-11ef-99a2-01e77a169b0f;
- Thu, 26 Sep 2024 18:54:35 +0200 (CEST)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42cb57f8b41so15192465e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 26 Sep 2024 09:54:35 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c2979e00sm16981566b.158.2024.09.26.09.54.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 09:54:33 -0700 (PDT)
+ <SRS0=SdHj=QY=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1strlq-0001SU-Ax
+ for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 16:55:14 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 17f95047-7c28-11ef-a0ba-8be0dac302b0;
+ Thu, 26 Sep 2024 18:55:13 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1727369705031839.5978858011581;
+ Thu, 26 Sep 2024 09:55:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,93 +40,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 02304502-7c28-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727369674; x=1727974474; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QOoo4EKtPRFIE8HIHhg2CdM3Nn/tt0xPaUiavjCjh5s=;
-        b=Fa6S8BXqSUyfiY/XCI3gZQQwnRCEgOkRyBT+CEVlSn56AaTORXehfje1pi7Z9gpKFp
-         hEZjYJighwPeSGakXPZWq08J4AFU/V7VUMe04Oab8qEvABzEEe4mmdJMeT1qTMiZcKA9
-         SAnksmFetKQIPvRwDACG8lC7rl5NyA5PjONeYuHvohPvGd2WjPMEF+5DP9sHBCvaCM8+
-         b04DrfOPZmoLJAqp+c1+fX1YcCZoJnVDK582MS9E8Bn9fa4EEPhbX02zOjACJrtWtAS3
-         qf2yK7DS7CFCVqi7btN4QFR8tuNjcUOExAWcGjtYNB8hv+Uv1sZIf3TnM0/rLzV6m8aV
-         xh2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727369674; x=1727974474;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QOoo4EKtPRFIE8HIHhg2CdM3Nn/tt0xPaUiavjCjh5s=;
-        b=v7T8snq12OMlnnQwyQ07GgfS1EHBM2rWaPImH3mnHzS+s/G4X2l2h/IPaKG+bWcWP9
-         jENvrorIOXp9NUXpAGMz4mFsraewt8PfrFshZbcn7rw6WMsgDFI2s01GVeAw8EGk46ao
-         W5NN2Ep5O9CLDaNANP2Jm/va0vcI8COpmrFAq+gOHqe0ZqOpbNrLf0tTgBgGDsSrLMkW
-         njmXhlyF3qmgrwPNKsxWMickLwDlQhDFmqAt+uqtgJguJaj/FYXCkagNUDpXs673k3yZ
-         hTNL26dWTkeBIVqm/PAoP/99IsJlsXUniGsHBWQVKmQwypVfgYpqMPks1yBp8gvb4jCI
-         GcvA==
-X-Gm-Message-State: AOJu0Yz0vgcMdOp0FM41Mr22/NEDSUn0e5JQgKPZNXvRtBv1+AyAngGe
-	eFDy0HECE5ATG3RIHUL5r7XGIrRQYo7cgJfZOOUp9xU7Si6vfRGGw3/Psw==
-X-Google-Smtp-Source: AGHT+IHVFydoImr+LV17up08n5HYKJ9djPYqPRg6EgwtOFy6HXWX75X6Go6ebuOZdOGAUlNLyf7/Vw==
-X-Received: by 2002:a05:6000:b8b:b0:374:c658:706e with SMTP id ffacd0b85a97d-37cd5b04975mr165768f8f.39.1727369673981;
-        Thu, 26 Sep 2024 09:54:33 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 5/6] xen/riscv: add section for device information in linker script
-Date: Thu, 26 Sep 2024 18:54:24 +0200
-Message-ID: <b8b42cd4241ceb7f5b80c28579a421554300368f.1727365854.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.46.1
-In-Reply-To: <cover.1727365854.git.oleksii.kurochko@gmail.com>
-References: <cover.1727365854.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 17f95047-7c28-11ef-a0ba-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1727369706; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=gO0Tkv9cjbPD+U6MmGd7nHKDrf0ZIdyHBCj4DHuggMLEMRwwOP3yS479oIavzs8pwNWXhKzdQlhI6hHhFwcgawsUY7dW99FwIZr2l7aDLoPJqH6LXJTKhIIfNKwrryAKHsfI2IWAstA62GygS0+iaE0prAvdNFwhVRs1DzHoqNE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1727369706; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=7E8w9pZUwxfioCpPwkzlZRNZLXgEIQJhNg2k5qAmQmI=; 
+	b=OrscVVZ1HmcbJt/ebvefaCqgouwdY8IqYwLLUjo5xhjJ33odX4AXIAzJi/Dg40gd2TFbyDQrpePfXM1Y5zyvmnV6Ne6OrUwQ644jhXP7gfl8oWnjgdnTmOgq5Z6euN0ML4noVhJMRxI4cajdQF8UyEPdPhIGjljCnUeum8zwdMU=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1727369706;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=7E8w9pZUwxfioCpPwkzlZRNZLXgEIQJhNg2k5qAmQmI=;
+	b=Y49M3SNzV0PuIvcXbAPqqNQun4AZUwFNaANRXf9p0nUqvubXunnP43pO7RFvRXjK
+	0LXJS03npMDgbHd9M6wyhbpUf+8RGDeVypY6qrKucEnSNTB4Ujuk943nNC270sbxes3
+	8rR1Tm1d0mz5B8vfhX3b/+zkR6MyXZLA7iKwNRZU=
+Message-ID: <1a9ccd2e-0862-4797-8b7d-5f4942b83fa2@apertussolutions.com>
+Date: Thu, 26 Sep 2024 12:55:03 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 08/44] x86/boot: convert setup.c mod refs to early_mod
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: jason.andryuk@amd.com, christopher.w.clark@gmail.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20240830214730.1621-1-dpsmith@apertussolutions.com>
+ <20240830214730.1621-9-dpsmith@apertussolutions.com>
+ <789911fc-eb37-427e-9d3e-b82f93a61099@suse.com>
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
+ 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
+In-Reply-To: <789911fc-eb37-427e-9d3e-b82f93a61099@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 
-Introduce a new `.dev.info` section in the RISC-V linker script to
-handle device-specific information. This section is required by
-common code (common/device.c: device_init(), device_get_class() ).
-This section is aligned to `POINTER_ALIGN`, with `_sdevice` and `_edevice`
-marking the start and end of the section, respectively.
+On 9/4/24 02:47, Jan Beulich wrote:
+> On 30.08.2024 23:46, Daniel P. Smith wrote:
+>> To allow a slow conversion of x86 over to struct boot_module, start with
+>> replacing all references to struct mod to the early_mod element of struct
+>> boot_module. These serves twofold, first to allow the incremental transition
+>> from struct mod fields to struct boot_module fields.  The second is to allow
+>> the conversion of function definitions from taking struct mod parameters to
+>> accepting struct boot_module as needed when a transitioned field will be
+>> accessed.
+> 
+> Yet earlier it was mentioned that early_mod is a transitory name. Will all of
+> this then need touching a 2nd time?
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V4:
- - use newly refactored DT_DEV_INFO
----
-Changes in V3:
- - use refactored DT_DEV_INFO macros.
----
- xen/arch/riscv/xen.lds.S | 4 ++++
- 1 file changed, 4 insertions(+)
+Correct, but a lot of these references are parameters to functions who 
+then call other functions that are passed the reference, turtles all the 
+way down. To ease from having to wholesale convert every function down 
+when switching to struct boot_module, a methodical approach was taken. 
+To ensure there isn't an mix of using both the mods[] array and 
+bm->early_mod, I did a wholesale switch which allows the immediate drop 
+of the mods[] array. This way, as the last usage of early_mod is 
+removed, then it is known that it can be dropped from struct boot_module.
 
-diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
-index 871b47a235..c1400e0613 100644
---- a/xen/arch/riscv/xen.lds.S
-+++ b/xen/arch/riscv/xen.lds.S
-@@ -1,4 +1,6 @@
- #include <xen/lib.h>
-+
-+#define SIMPLE_DECL_SECTION
- #include <xen/xen.lds.h>
- 
- OUTPUT_ARCH(riscv)
-@@ -91,6 +93,8 @@ SECTIONS
-         CONSTRUCTORS
-     } :text
- 
-+    DT_DEV_INFO(.dev.info)            /* Devicetree based device info */
-+
-     . = ALIGN(PAGE_SIZE);             /* Init code and data */
-     __init_begin = .;
-     .init.text : {
--- 
-2.46.1
+The need for early_mod is that starting with __start_xen(), a commit can 
+be done for each function with the conversion to accepting struct 
+boot_module. The function is changed such that any accesses to address 
+and size at that level to use struct boot_module directly. Any function 
+calls within the function being converted that take an instance of 
+module_t, would be handed bm->early_mod. The next commit would then 
+descend into the next level, doing the same conversion.
 
+The only other approach is to have a commit for the conversion of each 
+function call in __start_xen() that accepts module_t along with the 
+entire call chain under that function. That gets ugly very quickly.
+
+v/r,
+dps
 
