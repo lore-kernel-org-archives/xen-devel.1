@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4504ACF9C7D
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 12:36:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.805416.1216503 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63EDCCF9C69
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2024 12:54:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.805431.1216522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stnjL-000637-Ic; Thu, 26 Sep 2024 12:36:23 +0000
+	id 1sto0J-00015T-CZ; Thu, 26 Sep 2024 12:53:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 805416.1216503; Thu, 26 Sep 2024 12:36:23 +0000
+Received: by outflank-mailman (output) from mailman id 805431.1216522; Thu, 26 Sep 2024 12:53:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1stnjL-000630-FS; Thu, 26 Sep 2024 12:36:23 +0000
-Received: by outflank-mailman (input) for mailman id 805416;
- Thu, 26 Sep 2024 12:36:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sto0J-00013H-9E; Thu, 26 Sep 2024 12:53:55 +0000
+Received: by outflank-mailman (input) for mailman id 805431;
+ Thu, 26 Sep 2024 12:53:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rvAu=QY=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1stnjK-00062e-G1
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 12:36:22 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eee543f9-7c03-11ef-a0ba-8be0dac302b0;
- Thu, 26 Sep 2024 14:36:20 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c874f6f119so1035082a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Sep 2024 05:36:20 -0700 (PDT)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c5cf4c5248sm3082485a12.70.2024.09.26.05.36.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Sep 2024 05:36:17 -0700 (PDT)
+ <SRS0=4Hhf=QY=bounce.vates.tech=bounce-md_30504962.66f5595e.v1-fe2bd7a58ced47f285932fb5db668bcf@srs-se1.protection.inumbo.net>)
+ id 1sto0H-0000wg-Mu
+ for xen-devel@lists.xenproject.org; Thu, 26 Sep 2024 12:53:53 +0000
+Received: from mail137-23.atl71.mandrillapp.com
+ (mail137-23.atl71.mandrillapp.com [198.2.137.23])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 60ac2c48-7c06-11ef-99a2-01e77a169b0f;
+ Thu, 26 Sep 2024 14:53:51 +0200 (CEST)
+Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail137-23.atl71.mandrillapp.com (Mailchimp) with ESMTP id
+ 4XDtnp20TWz1XLGNW
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Sep 2024 12:53:50 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ fe2bd7a58ced47f285932fb5db668bcf; Thu, 26 Sep 2024 12:53:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,122 +45,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eee543f9-7c03-11ef-a0ba-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1727354180; x=1727958980; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=1dTwBzs2aitPgUdmyF2RiXeqH8SUjI/4aRXzRQvnUmE=;
-        b=uzuPn0ilimVP/X/PzBcOCKchCXtSdOw3DqiDthcXUeFdqXZHdnlmDnPgz7pfL3Hf25
-         gerdH0UlWXdAgvoufO7jD2AG2+UI4pI3lJwuhNzcmCHKf40JZElpPzyBT0Y77eTjlWZc
-         E+m8Igv9Z6kTRd75pjtdAsRhavRP3srWy5pvA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727354180; x=1727958980;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1dTwBzs2aitPgUdmyF2RiXeqH8SUjI/4aRXzRQvnUmE=;
-        b=YMW55n1TQQ9DEtEUJEU+Ud/IVkl232WyTnTv+ExjI+Tm+J6Vaddl5Jv2iBiNCgdu7j
-         58WC8VEcyZUgtmqYojEWbh1GIk1+NU60ImgycVHdwnDhfTEdm2PMeh7IW5w/1xeWB+fd
-         vz8puaAWcSC3V5wLu3qZ31JYqryIxXvrXoU0qLlO9biwvf5q6hwwVyLmlhTp90oUwajY
-         clRGftk+OKoHzPkYFhzBqQwgV6qg9H8CwUx2K7htxDjqlGIh3B58RPFPju0u/WHyiIv9
-         JBsXHb/TGh0wwbWm0vhkhxCb8Vk3gaJJjHfVp7DXU2nX8+6ohKNMqyH7DvBzO/irOofV
-         7ymg==
-X-Forwarded-Encrypted: i=1; AJvYcCX7YvY98Bj42UP5yfA8exBFPZ1fOsCvuKumKpwPHdPt2NmLIOK8/Osm3L+HfZVSeK129MmboxmuGEE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwaPgIjW8K3fKF7umTZJXYA/hN3w3z1u9uK8dSD5xaBo0wFL5k0
-	gCJCjEONi8td9CEexpK9RtavgRkgiIm3trkP0m63iiZMPnw7wVB9cazazYYdXyI=
-X-Google-Smtp-Source: AGHT+IFH9GZm3ggdS80EypR8iBt5JVibRDpk+JQMzX6O7yICN3JvbA5X8/HyV06pmzV9DRSBfGL89w==
-X-Received: by 2002:a05:6402:2810:b0:5c7:1efc:a8c3 with SMTP id 4fb4d7f45d1cf-5c720623de0mr5187776a12.15.1727354180051;
-        Thu, 26 Sep 2024 05:36:20 -0700 (PDT)
-Message-ID: <6f7961ff-3940-4f56-b497-9af779b15d46@citrix.com>
-Date: Thu, 26 Sep 2024 13:36:15 +0100
+X-Inumbo-ID: 60ac2c48-7c06-11ef-99a2-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1727355230; x=1727615730;
+	bh=bqBQgdFu7ue35t1gEEJMNLjaBSVlQaaf2h4TrHlMzIA=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=nFjDeqALLCe4hlD+f1a6Gu+hEzOpHcXdo87mcv9WSYOAbJq2MTvnCAViCVqL8ELeL
+	 uDu1i97IH3Kown/JSCfcxZE908ZJMr8H3jcI722ufU9vNQWBCNjJ6dIt+uz95NPKhi
+	 EK/33yBaA970PVUag4ZBL2YYhjGjMSK4F9QmlZz8XxdJQ/s0cmE/1RqxWYpeyJwtnn
+	 wcXrhMmGTz0MAh7LeLq8SbnZ7T8oeY912DpUu9Y0dGKNX7XN3pB3uvj0D3g7+QqFzs
+	 +OkwnDEmp8XwMM8b3tvM2aMzzBS83n1fXPmg3mw8odjzgK/swNKr/Ql1esi4O3QWms
+	 uWFb21ZS9aFiQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1727355230; x=1727615730; i=anthony.perard@vates.tech;
+	bh=bqBQgdFu7ue35t1gEEJMNLjaBSVlQaaf2h4TrHlMzIA=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=ihqwDZRbi47tsDpw7XvJNeN2Pd7/XQ7PGDRVG5KoVrZhXfyxcDhnuOyjdYnCEiVBm
+	 DiRbYR3gPaPkaKVa2tZa5I8vSuQkLKgVvW9zzrn/7yS8vUdxo7JxckTrVXimKGY72p
+	 oZEUuKzLbCI1ZtePe2RAmFKVmmdEsmV/ET5EgZHQE/LWYzozEbVMeXUFrQEB6tIpBC
+	 pHxji9Hy5Sy7ff3aFHs+Gbrppz4plJ8hZugreZVm+F3lEjS/gGgGbNiPba+M1neTjW
+	 BL3i7mZiVd7sJgm6loXsRKNgEusvVodqgCJg9zZk9ZFJy6IZaXTRmBmX7EwbNNuWwP
+	 BMRmuArHw4ykA==
+From: Anthony PERARD <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?[XEN=20PATCH=201/2]=20blkif:=20Fix=20alignment=20description=20for=20discard=20request?=
+X-Mailer: git-send-email 2.39.2
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1727355229388
+To: xen-devel@lists.xenproject.org
+Cc: =?utf-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
+Message-Id: <20240926125347.23738-2-anthony.perard@vates.tech>
+In-Reply-To: <20240926125347.23738-1-anthony.perard@vates.tech>
+References: <20240926125347.23738-1-anthony.perard@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.fe2bd7a58ced47f285932fb5db668bcf?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20240926:md
+Date: Thu, 26 Sep 2024 12:53:50 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] arm: introduce kconfig options to disable hypercalls
-To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
- Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Jan Beulich <jbeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
-References: <20240926095806.67149-1-Sergiy_Kibrik@epam.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20240926095806.67149-1-Sergiy_Kibrik@epam.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On 26/09/2024 10:58 am, Sergiy Kibrik wrote:
-> diff --git a/xen/common/Makefile b/xen/common/Makefile
-> index fc52e0857d..ea0557aee5 100644
-> --- a/xen/common/Makefile
-> +++ b/xen/common/Makefile
-> @@ -64,10 +64,14 @@ obj-bin-$(CONFIG_X86) += $(foreach n,decompress bunzip2 unxz unlzma lzo unlzo un
->  obj-$(CONFIG_COMPAT) += $(addprefix compat/,domain.o memory.o multicall.o xlat.o)
->  
->  ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
-> +ifeq ($(CONFIG_DOMCTL),y)
->  obj-y += domctl.o
-> +endif
->  obj-y += monitor.o
-> +ifeq ($(CONFIG_SYSCTL),y)
->  obj-y += sysctl.o
->  endif
-> +endif
+The discard feature have an other xenstore node to described the size
+of the blocks than can be discarded, "discard-granularity", which
+default to "sector-size" when absent as noted in the properties and in
+note 4. So discard request should be aligned on this value.
 
-This patch is tagged ARM, but as you can see from this bodge, it's
-already used on x86 for SHIM_EXCLUSIVE mode.
+Fixes: 221f2748e8da ("blkif: reconcile protocol specification with in-use implementations")
+Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
+---
+ xen/include/public/io/blkif.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-(I came very close to insisting that it was done like this originally,
-but alas.)
+diff --git a/xen/include/public/io/blkif.h b/xen/include/public/io/blkif.h
+index 9b00d633d3..789bab65ab 100644
+--- a/xen/include/public/io/blkif.h
++++ b/xen/include/public/io/blkif.h
+@@ -668,7 +668,7 @@ typedef struct blkif_request blkif_request_t;
+  *
+  * The 'sector_number' field is in units of 512b, despite the value of the
+  * 'sector-size' xenstore node.  Note however that the offset in
+- * 'sector_number' must be aligned to 'sector-size'.
++ * 'sector_number' must be aligned to 'discard-granularity'.
+  */
+ struct blkif_request_discard {
+     uint8_t        operation;    /* BLKIF_OP_DISCARD                     */
+-- 
 
-Please incorporate PV_SHIM_EXCLUSIVE at the Kconfig level, and turn
-these into simple obj-$(...) += foo.o
 
-~Andrew
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
