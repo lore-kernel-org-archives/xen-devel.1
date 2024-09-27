@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2627ECDD1CD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B43CCDD1CF
 	for <xen-devel@archiver.kernel.org>; Fri, 27 Sep 2024 16:33:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.806404.1217803 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.806420.1217827 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1suDu0-0002rT-Ml; Fri, 27 Sep 2024 16:33:08 +0000
+	id 1suDuR-00050W-7F; Fri, 27 Sep 2024 16:33:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 806404.1217803; Fri, 27 Sep 2024 16:33:08 +0000
+Received: by outflank-mailman (output) from mailman id 806420.1217827; Fri, 27 Sep 2024 16:33:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1suDu0-0002r0-F1; Fri, 27 Sep 2024 16:33:08 +0000
-Received: by outflank-mailman (input) for mailman id 806404;
- Fri, 27 Sep 2024 16:33:07 +0000
+	id 1suDuR-00050H-3T; Fri, 27 Sep 2024 16:33:35 +0000
+Received: by outflank-mailman (input) for mailman id 806420;
+ Fri, 27 Sep 2024 16:33:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xL9K=QZ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1suDty-0001aD-Sj
- for xen-devel@lists.xenproject.org; Fri, 27 Sep 2024 16:33:06 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
+ id 1suDuP-0001aD-7Z
+ for xen-devel@lists.xenproject.org; Fri, 27 Sep 2024 16:33:33 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2c7a61e0-7cee-11ef-a0ba-8be0dac302b0;
- Fri, 27 Sep 2024 18:33:06 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a7a843bef98so298159966b.2
- for <xen-devel@lists.xenproject.org>; Fri, 27 Sep 2024 09:33:06 -0700 (PDT)
+ id 3a9b8ed4-7cee-11ef-a0ba-8be0dac302b0;
+ Fri, 27 Sep 2024 18:33:29 +0200 (CEST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5365cc68efaso2192132e87.1
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Sep 2024 09:33:29 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c27c59bdsm150607166b.50.2024.09.27.09.33.04
+ a640c23a62f3a-a93c27d47a2sm150697966b.89.2024.09.27.09.33.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Sep 2024 09:33:04 -0700 (PDT)
+ Fri, 27 Sep 2024 09:33:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,286 +46,290 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c7a61e0-7cee-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 3a9b8ed4-7cee-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727454785; x=1728059585; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1727454809; x=1728059609; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=X2QQxBgwKAcM3DvdSfBvFC6LEQQkOxf8BpaLss5/lZ0=;
-        b=OqWarkFzh4CZwJgBwFWdVS4nkhK6bx1FFo84r31r3ybcZd+AlL4k+I9Fvtz7vFcok2
-         XzgGnBS86qVMy8QzWzH4AD/XYRLGtUMes/lvvnAMY9AYIpJ7MTXYvXzTAMNI4ebBj3Ao
-         Rl4vkLmcVAFM9C5k80eAlF24VD6465tKUbo7zt1Hijq/eZiBXqSpSiPUFXXPbUuWEoD+
-         4cIT9RZsz7xlo3nNp+rDJAmWAsFjrIiotjYHAZNTCtJKwkqt2hXFZqVo/PgeDzDeNZe6
-         6WmiXpAU++PcLmm/vwFD3dBdMdVKhEBGjO/yTvviT3hCgshy2GFbv3cZJbJ9XYiYhogc
-         DBAA==
+        bh=/lmgDuLjmXqyvP8NcM6DuHkV8rf9NddkBsqcBWqHAn8=;
+        b=DcRox8PIEfd5AezHvP9fm8yKCMbBQ3zSwvUbsPaQzsqUBd6RLvqK03qPSQBJzguGuB
+         wTqxjI9xmmf0u/traLM2hcH421vo+33J/yy9l2wfbfIRVOHAUDXqoARByfQpoTcHL/Bs
+         OcRXHWBgT+bG0nJDFviB0A/5w2981CxW5CALvf9XlydkJ7KzDsmSnRKZmrCgz1hbrvCm
+         QVWWZ8aj6Bi/uIphW2qo3Dy6JbztHo107cTu1xnLhptjHVVq3zsMId0LYg+eh+r1IAwq
+         w63wWSTZKwYcQtGnyTfaVMb+2ziNDR/5lbOEFxfSReYa+v1dvnRRGSbgyPNDNS4bGVT+
+         iGig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727454785; x=1728059585;
+        d=1e100.net; s=20230601; t=1727454809; x=1728059609;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=X2QQxBgwKAcM3DvdSfBvFC6LEQQkOxf8BpaLss5/lZ0=;
-        b=HJpb8+29cDvQdruKEXltgcUmcfqvezdWY9VXgIt9hmFsoLO4xKZeTFRGZaa98WnVMM
-         ViOfeiFz2PL5ZkupcHYYS6bc/0IntKF3CcmSbjw7Z9ONAjmoayDGl5sTY/MlNrIEjfK+
-         eiRdcGIXXUyuhAH4s1LG8NYoNEbJYbc3M7qt0SgICY6ZfQ4gw4wPQ2qN4cg02jafy2oh
-         tJO+ybYsCb7JqVBUv4O6Brw5wabxPq6ozoaUl34l9acDN/y6x2VM0PCHRklxbxdQj2Oc
-         q3idd4ooQYDHiqm8F4hGX47yEEDTxkMlYAkn1My2Ur8YtCSjDzBm1QmG+i5EoZF8NfpY
-         2wwA==
-X-Gm-Message-State: AOJu0YyUmOtMxOpgyWs8DZ1oq5kOCPyT2hy1EXtjCO4xL9+G87CjFNqD
-	I6bZodjdTnbALsdsTJAEQuB4Adc1sNNIfVjX+5GNbIdaV7WcMS7sEMJBmw==
-X-Google-Smtp-Source: AGHT+IEcVT/jngnSHyPkDtg8R5eE+hbo8sqfo4/S4LE98s0mmpdW92PjjiuxdKOm6xNT+SofvdZnVw==
-X-Received: by 2002:a17:907:7f28:b0:a8a:835f:4cb9 with SMTP id a640c23a62f3a-a93c4a69b3bmr393643966b.46.1727454785287;
-        Fri, 27 Sep 2024 09:33:05 -0700 (PDT)
+        bh=/lmgDuLjmXqyvP8NcM6DuHkV8rf9NddkBsqcBWqHAn8=;
+        b=uJ4RYS/IjIMvguhes3tcosz0a/SVDGkV8pn1nJAetnOJC66mt+2iImWzqGjPgWkBOO
+         Vkr3HG/kv/3o3I6JJlVL5OQ3d6pui4rVY2wzfCMXeFlljYJmDH/mNglTgSIP9quGTSiF
+         iYt8rEUlH2YtTwrTCROs9h8FIcLRYJXeWOor8ekeQ2un4+vG8GNFL6YL11BPIkiYJk82
+         hrXBov23j4R3T8AjfCIhwF/mlEwBTFqaemF5Yq3WKxnLEwIkCxWncsxyHfyxabpNOX2T
+         gnweBFFVKdeFTfJVhl22kM4Ev4g3geQhxu9/n1gl0aDZO6uey/4L5FTt7A9TuVH5hSUr
+         7z/A==
+X-Gm-Message-State: AOJu0Yx0qAlbt/FeV17mmK+EegiHcjpFN3TCrJ/kbLF0VriYIFX9gJGp
+	mBFZQinb+jCjeFMB+y5aDrRyTG6i7+I4e+v/AQ2pAnfKz9Ewhry6goB8Eg==
+X-Google-Smtp-Source: AGHT+IFTk+0xcVyRNaQOYKV5gdNufK90rKVUmfyHd5wBS6DK1VS2FEAwdUQShzU1AVhotR1bO5Y1eQ==
+X-Received: by 2002:a05:6512:3404:b0:533:44e7:1b2a with SMTP id 2adb3069b0e04-5389fc70f6cmr3130607e87.40.1727454808829;
+        Fri, 27 Sep 2024 09:33:28 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v5 6/6] xen/common: move device initialization code to common code
-Date: Fri, 27 Sep 2024 18:32:56 +0200
-Message-ID: <acc882a010b15aeee1028dfbb7eff6df7d9b6cc9.1727452451.git.oleksii.kurochko@gmail.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v8 4/7] xen/riscv: introduce functionality to work with CPU info
+Date: Fri, 27 Sep 2024 18:33:16 +0200
+Message-ID: <3ffb3ffd38b2e0d3568bfd3f9ef974d61b0d2508.1727449154.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.46.1
-In-Reply-To: <cover.1727452451.git.oleksii.kurochko@gmail.com>
-References: <cover.1727452451.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <cover.1727449154.git.oleksii.kurochko@gmail.com>
+References: <cover.1727449154.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove the device initialization code from `xen/arch/arm/device.c`
-and move it to the common code to avoid duplication and make it accessible
-for both ARM and other architectures.
-device_get_class(), device_init(), _sdevice[] and _edevice[] are wrapped by
-"#ifdef CONFIG_HAS_DEVICE_TREE" for the case if an arch doesn't support
-device tree.
+Introduce struct pcpu_info to store pCPU-related information.
+Initially, it includes only processor_id and hart id, but it
+will be extended to include guest CPU information and
+temporary variables for saving/restoring vCPU registers.
 
-Remove unnecessary inclusions of <asm/device.h> and <xen/init.h> from
-`xen/arch/arm/device.c` as no code in the file relies on these headers.
-Fix the inclusion order by moving <asm/setup.h> after <xen/*> headers to
-resolve a compilation error:
-   ./include/public/xen.h:968:35: error: unknown type name 'uint64_t'
-    968 | __DEFINE_XEN_GUEST_HANDLE(uint64, uint64_t);
-        |                                   ^~~~~~~~
-   ./include/public/arch-arm.h:191:21: note: in definition of macro '___DEFINE_XEN_GUEST_HANDLE'
-   191 |     typedef union { type *p; uint64_aligned_t q; }              \
-       |                     ^~~~
-   ./include/public/xen.h:968:1: note: in expansion of macro '__DEFINE_XEN_GUEST_HANDLE'
-   968 | __DEFINE_XEN_GUEST_HANDLE(uint64, uint64_t);
-because <asm/setup.h> includes <public/version.h>, which in turn includes
-"xen.h", which requires <xen/types.h> to be processed correctly.
-Additionally, add <xen/device_tree.h> to `device.c` as functions from this
-header are used within the file.
+Add set_processor_id() function to set processor_id stored in
+pcpu_info.
+
+Define smp_processor_id() to provide accurate information,
+replacing the previous "dummy" value of 0.
+
+Initialize tp registers to point to pcpu_info[0].
+Set processor_id to 0 for logical CPU 0 and store the physical
+CPU ID in pcpu_info[0].
+
+Introduce helpers for getting/setting hart_id ( physical CPU id
+in RISC-V terms ) from Xen CPU id.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
-Changes in V5:
- - Reviewed-by: Michal Orzel <michal.orzel@amd.com>
----
-Changes in V4:
- - add Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V3:
- - drop DEVICE_INIT config.
- - update the commit message.
----
- xen/arch/arm/device.c | 71 ++-----------------------------------
- xen/common/Makefile   |  2 ++
- xen/common/device.c   | 82 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 86 insertions(+), 69 deletions(-)
- create mode 100644 xen/common/device.c
+ xen/arch/riscv/Makefile                |  1 +
+ xen/arch/riscv/include/asm/current.h   | 27 +++++++++++++++++++++++++-
+ xen/arch/riscv/include/asm/processor.h |  3 ---
+ xen/arch/riscv/include/asm/smp.h       | 18 +++++++++++++++++
+ xen/arch/riscv/riscv64/asm-offsets.c   |  3 +++
+ xen/arch/riscv/riscv64/head.S          | 14 +++++++++++++
+ xen/arch/riscv/setup.c                 |  5 +++++
+ xen/arch/riscv/smp.c                   | 15 ++++++++++++++
+ 8 files changed, 82 insertions(+), 4 deletions(-)
+ create mode 100644 xen/arch/riscv/smp.c
 
-diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
-index 3e02cff008..5610cddcba 100644
---- a/xen/arch/arm/device.c
-+++ b/xen/arch/arm/device.c
-@@ -8,79 +8,12 @@
-  * Copyright (C) 2013 Linaro Limited.
-  */
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index d192be7b55..6832549133 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -5,6 +5,7 @@ obj-$(CONFIG_RISCV_64) += riscv64/
+ obj-y += sbi.o
+ obj-y += setup.o
+ obj-y += shutdown.o
++obj-y += smp.o
+ obj-y += stubs.o
+ obj-y += traps.o
+ obj-y += vm_event.o
+diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
+index aedb6dc732..6f1ec4e190 100644
+--- a/xen/arch/riscv/include/asm/current.h
++++ b/xen/arch/riscv/include/asm/current.h
+@@ -3,12 +3,37 @@
+ #ifndef __ASM_CURRENT_H
+ #define __ASM_CURRENT_H
  
--#include <asm/device.h>
--#include <asm/setup.h>
-+#include <xen/device_tree.h>
- #include <xen/errno.h>
--#include <xen/init.h>
- #include <xen/iocap.h>
- #include <xen/lib.h>
- 
--extern const struct device_desc _sdevice[], _edevice[];
--
--#ifdef CONFIG_ACPI
--extern const struct acpi_device_desc _asdevice[], _aedevice[];
--#endif
--
--int __init device_init(struct dt_device_node *dev, enum device_class class,
--                       const void *data)
--{
--    const struct device_desc *desc;
--
--    ASSERT(dev != NULL);
--
--    if ( !dt_device_is_available(dev) || dt_device_for_passthrough(dev) )
--        return  -ENODEV;
--
--    for ( desc = _sdevice; desc != _edevice; desc++ )
--    {
--        if ( desc->class != class )
--            continue;
--
--        if ( dt_match_node(desc->dt_match, dev) )
--        {
--            ASSERT(desc->init != NULL);
--
--            return desc->init(dev, data);
--        }
--
--    }
--
--    return -EBADF;
--}
--
--#ifdef CONFIG_ACPI
--int __init acpi_device_init(enum device_class class, const void *data, int class_type)
--{
--    const struct acpi_device_desc *desc;
--
--    for ( desc = _asdevice; desc != _aedevice; desc++ )
--    {
--        if ( ( desc->class != class ) || ( desc->class_type != class_type ) )
--            continue;
--
--        ASSERT(desc->init != NULL);
--
--        return desc->init(data);
--    }
--
--    return -EBADF;
--}
--#endif
--
--enum device_class device_get_class(const struct dt_device_node *dev)
--{
--    const struct device_desc *desc;
--
--    ASSERT(dev != NULL);
--
--    for ( desc = _sdevice; desc != _edevice; desc++ )
--    {
--        if ( dt_match_node(desc->dt_match, dev) )
--            return desc->class;
--    }
--
--    return DEVICE_UNKNOWN;
--}
-+#include <asm/setup.h>
- 
- int map_irq_to_domain(struct domain *d, unsigned int irq,
-                       bool need_mapping, const char *devname)
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index fc52e0857d..9d962069f7 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -6,6 +6,8 @@ obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
- obj-$(CONFIG_CORE_PARKING) += core_parking.o
- obj-y += cpu.o
- obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
-+obj-$(CONFIG_HAS_DEVICE_TREE) += device.o
-+obj-$(filter-out $(CONFIG_X86),$(CONFIG_ACPI)) += device.o
- obj-$(CONFIG_HAS_DEVICE_TREE) += device-tree/
- obj-$(CONFIG_IOREQ_SERVER) += dm.o
- obj-y += domain.o
-diff --git a/xen/common/device.c b/xen/common/device.c
-new file mode 100644
-index 0000000000..33e0d58f2f
---- /dev/null
-+++ b/xen/common/device.c
-@@ -0,0 +1,82 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Based on the code from:
-+ *   xen/arch/arm/device.c
-+ */
-+
+-#include <xen/lib.h>
 +#include <xen/bug.h>
-+#include <xen/device_tree.h>
-+#include <xen/errno.h>
-+#include <xen/init.h>
++#include <xen/cache.h>
+ #include <xen/percpu.h>
 +
-+#include <asm/device.h>
+ #include <asm/processor.h>
+ 
+ #ifndef __ASSEMBLY__
+ 
++register struct pcpu_info *tp asm ( "tp" );
 +
-+#ifdef CONFIG_HAS_DEVICE_TREE
++struct pcpu_info {
++    unsigned int processor_id; /* Xen CPU id */
++    unsigned long hart_id; /* physical CPU id */
++} __cacheline_aligned;
 +
-+extern const struct device_desc _sdevice[], _edevice[];
++/* tp points to one of these */
++extern struct pcpu_info pcpu_info[NR_CPUS];
 +
-+int __init device_init(struct dt_device_node *dev, enum device_class class,
-+                       const void *data)
++#define set_processor_id(id)    do { \
++    tp->processor_id = (id);         \
++} while (0)
++
++static inline unsigned int smp_processor_id(void)
 +{
-+    const struct device_desc *desc;
++    unsigned int id = tp->processor_id;
 +
-+    ASSERT(dev != NULL);
++    BUG_ON(id >= NR_CPUS);
 +
-+    if ( !dt_device_is_available(dev) || dt_device_for_passthrough(dev) )
-+        return  -ENODEV;
-+
-+    for ( desc = _sdevice; desc != _edevice; desc++ )
-+    {
-+        if ( desc->class != class )
-+            continue;
-+
-+        if ( dt_match_node(desc->dt_match, dev) )
-+        {
-+            ASSERT(desc->init != NULL);
-+
-+            return desc->init(dev, data);
-+        }
-+    }
-+
-+    return -EBADF;
++    return id;
 +}
 +
-+enum device_class device_get_class(const struct dt_device_node *dev)
+ /* Which VCPU is "current" on this PCPU. */
+ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
+ 
+diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+index 3ae164c265..e42b353b4c 100644
+--- a/xen/arch/riscv/include/asm/processor.h
++++ b/xen/arch/riscv/include/asm/processor.h
+@@ -12,9 +12,6 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
+-/* TODO: need to be implemeted */
+-#define smp_processor_id() 0
+-
+ /* On stack VCPU state */
+ struct cpu_user_regs
+ {
+diff --git a/xen/arch/riscv/include/asm/smp.h b/xen/arch/riscv/include/asm/smp.h
+index b1ea91b1eb..a824be8e78 100644
+--- a/xen/arch/riscv/include/asm/smp.h
++++ b/xen/arch/riscv/include/asm/smp.h
+@@ -5,6 +5,8 @@
+ #include <xen/cpumask.h>
+ #include <xen/percpu.h>
+ 
++#include <asm/current.h>
++
+ DECLARE_PER_CPU(cpumask_var_t, cpu_sibling_mask);
+ DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
+ 
+@@ -14,6 +16,22 @@ DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
+  */
+ #define park_offline_cpus false
+ 
++/*
++ * Mapping between Xen logical cpu index and hartid.
++ */
++static inline unsigned long cpuid_to_hartid(unsigned long cpuid)
 +{
-+    const struct device_desc *desc;
-+
-+    ASSERT(dev != NULL);
-+
-+    for ( desc = _sdevice; desc != _edevice; desc++ )
-+    {
-+        if ( dt_match_node(desc->dt_match, dev) )
-+            return desc->class;
-+    }
-+
-+    return DEVICE_UNKNOWN;
++    return pcpu_info[cpuid].hart_id;
 +}
 +
-+#endif
-+
-+#ifdef CONFIG_ACPI
-+
-+extern const struct acpi_device_desc _asdevice[], _aedevice[];
-+
-+int __init acpi_device_init(enum device_class class, const void *data, int class_type)
++static inline void set_cpuid_to_hartid(unsigned long cpuid,
++                                       unsigned long hartid)
 +{
-+    const struct acpi_device_desc *desc;
-+
-+    for ( desc = _asdevice; desc != _aedevice; desc++ )
-+    {
-+        if ( ( desc->class != class ) || ( desc->class_type != class_type ) )
-+            continue;
-+
-+        ASSERT(desc->init != NULL);
-+
-+        return desc->init(data);
-+    }
-+
-+    return -EBADF;
++    pcpu_info[cpuid].hart_id = hartid;
 +}
 +
-+#endif
++void setup_tp(unsigned int cpuid);
++
+ #endif
+ 
+ /*
+diff --git a/xen/arch/riscv/riscv64/asm-offsets.c b/xen/arch/riscv/riscv64/asm-offsets.c
+index 9f663b9510..3b5daf3b36 100644
+--- a/xen/arch/riscv/riscv64/asm-offsets.c
++++ b/xen/arch/riscv/riscv64/asm-offsets.c
+@@ -1,5 +1,6 @@
+ #define COMPILE_OFFSETS
+ 
++#include <asm/current.h>
+ #include <asm/processor.h>
+ #include <xen/types.h>
+ 
+@@ -50,4 +51,6 @@ void asm_offsets(void)
+     OFFSET(CPU_USER_REGS_SSTATUS, struct cpu_user_regs, sstatus);
+     OFFSET(CPU_USER_REGS_PREGS, struct cpu_user_regs, pregs);
+     BLANK();
++    DEFINE(PCPU_INFO_SIZE, sizeof(struct pcpu_info));
++    BLANK();
+ }
+diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
+index 3261e9fce8..2a1b3dad91 100644
+--- a/xen/arch/riscv/riscv64/head.S
++++ b/xen/arch/riscv/riscv64/head.S
+@@ -1,4 +1,5 @@
+ #include <asm/asm.h>
++#include <asm/asm-offsets.h>
+ #include <asm/riscv_encoding.h>
+ 
+         .section .text.header, "ax", %progbits
+@@ -55,6 +56,10 @@ FUNC(start)
+          */
+         jal     reset_stack
+ 
++        /* Xen's boot cpu id is equal to 0 so setup TP register for it */
++        li      a0, 0
++        jal     setup_tp
++
+         /* restore hart_id ( bootcpu_id ) and dtb address */
+         mv      a0, s0
+         mv      a1, s1
+@@ -72,6 +77,15 @@ FUNC(reset_stack)
+         ret
+ END(reset_stack)
+ 
++/* void setup_tp(unsigned int xen_cpuid); */
++FUNC(setup_tp)
++        la      t0, pcpu_info
++        li      t1, PCPU_INFO_SIZE
++        mul     t1, a0, t1
++        add     tp, t0, t1
++        ret
++END(setup_tp)
++
+         .section .text.ident, "ax", %progbits
+ 
+ FUNC(turn_on_mmu)
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 82c5752da1..6e3a787dbe 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -9,6 +9,7 @@
+ #include <public/version.h>
+ 
+ #include <asm/early_printk.h>
++#include <asm/smp.h>
+ #include <asm/traps.h>
+ 
+ void arch_get_xen_caps(xen_capabilities_info_t *info)
+@@ -41,6 +42,10 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ {
+     remove_identity_mapping();
+ 
++    set_processor_id(0);
++
++    set_cpuid_to_hartid(0, bootcpu_id);
++
+     trap_init();
+ 
+ #ifdef CONFIG_SELF_TESTS
+diff --git a/xen/arch/riscv/smp.c b/xen/arch/riscv/smp.c
+new file mode 100644
+index 0000000000..4ca6a4e892
+--- /dev/null
++++ b/xen/arch/riscv/smp.c
+@@ -0,0 +1,15 @@
++#include <xen/smp.h>
++
++/*
++ * FIXME: make pcpu_info[] dynamically allocated when necessary
++ *        functionality will be ready
++ */
++/*
++ * tp points to one of these per cpu.
++ *
++ * hart_id would be valid (no matter which value) if its
++ * processor_id field is valid (less than NR_CPUS).
++ */
++struct pcpu_info pcpu_info[NR_CPUS] = { [0 ... NR_CPUS - 1] = {
++    .processor_id = NR_CPUS,
++}};
 -- 
 2.46.1
 
