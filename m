@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9008CF6497
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Sep 2024 07:27:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.807070.1218253 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB89ECF6491
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Sep 2024 07:28:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.807072.1218263 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svAo5-0005bY-Nw; Mon, 30 Sep 2024 07:26:57 +0000
+	id 1svAoz-0006Mh-1Y; Mon, 30 Sep 2024 07:27:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 807070.1218253; Mon, 30 Sep 2024 07:26:57 +0000
+Received: by outflank-mailman (output) from mailman id 807072.1218263; Mon, 30 Sep 2024 07:27:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svAo5-0005bR-LK; Mon, 30 Sep 2024 07:26:57 +0000
-Received: by outflank-mailman (input) for mailman id 807070;
- Mon, 30 Sep 2024 07:26:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1svAoy-0006Ma-UA; Mon, 30 Sep 2024 07:27:52 +0000
+Received: by outflank-mailman (input) for mailman id 807072;
+ Mon, 30 Sep 2024 07:27:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1QIX=Q4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1svAe1-0007Ms-Me
- for xen-devel@lists.xenproject.org; Mon, 30 Sep 2024 07:16:33 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eb40ca97-7efb-11ef-99a2-01e77a169b0f;
- Mon, 30 Sep 2024 09:16:32 +0200 (CEST)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5398cc2fcb7so1487181e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 30 Sep 2024 00:16:32 -0700 (PDT)
+ id 1svAox-0006MQ-Mf
+ for xen-devel@lists.xenproject.org; Mon, 30 Sep 2024 07:27:51 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7fff4d26-7efd-11ef-a0ba-8be0dac302b0;
+ Mon, 30 Sep 2024 09:27:51 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5398e33155fso1526966e87.3
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Sep 2024 00:27:50 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c88240517fsm4094921a12.4.2024.09.30.00.16.30
+ a640c23a62f3a-a93c2777214sm478897266b.36.2024.09.30.00.27.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Sep 2024 00:16:31 -0700 (PDT)
+ Mon, 30 Sep 2024 00:27:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,48 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb40ca97-7efb-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 7fff4d26-7efd-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1727680592; x=1728285392; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1727681270; x=1728286070; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=foimRIS275MpfFDXNsS49f2iptZHhoiDiKYcSLdjkGw=;
-        b=HScEIEuSnNsCGNAvZbpgTBOvLtBO2a0MS4eaEVi3i1evIYx/bEao9E/yZ/QwVJII8n
-         BV6x6JM5bZKDIfVl09tHESZ4XUlN1RiHJUeL17r15RCIQsiIU9reOZumkUMNu9eT2Hg9
-         jbCC9HlfAkiFRz9YmY07L86nwint3NYXVcXyZJbbZ728owyzEXrIrHpCWUseqlOZx9E7
-         ELfi0vwemsrZaBZmd6CjENzgTV6LnY551B2LQHEvitwDTHpdPCdDoEQLKwBsIMr4c+dC
-         jZHYB1t3t/sPMKDM0Fq8w7rKZoGLDW3AjM97vHcWk0DChjCPOGz0Uli6Oz4+q/XQekh3
-         Pc4w==
+        bh=Ha3p4L4JyHkoNbxHu5fyjnASeQonBflFUMrPv5EaFJs=;
+        b=I4mbjPnz2IgRXkVpHTDV4JoryxEw5bfLQlIYC+lB2GKzCkDogEUCuAsRaSJKTuuwDH
+         zihtUdN45llqW5OrVPDBGTX/K+sLfI5cqFxyP2Z1eEvjSaEa45YnVC/s8q7Mcxnh8Ley
+         CniZh4O1cI4rIBH0cnXY5Hehw2e16MhrHHniASxbO69Lfvbauyk9n9veIiS5AB8foene
+         MeZCCiV2GPZXC4ryP1XnDDFg2IS4l7Barf+on6cMUgOC4pxEBBL3haIiqWohEs69MwNs
+         92IcixpVvbNw3OyPCtIKduYwIgWtvsMljLAvLU0Nj7MGQZjIuyM9rAHJht4qqMtnAP5v
+         XmGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727680592; x=1728285392;
+        d=1e100.net; s=20230601; t=1727681270; x=1728286070;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=foimRIS275MpfFDXNsS49f2iptZHhoiDiKYcSLdjkGw=;
-        b=DNPksJrv7bX731AKUW4VBY+OXz6885gLg9I7qTtTcMXEbaovmxsvybqDmriesB90Ln
-         0K8++GvwTCJAy1vuKdE/prSEGMZ3UgvWa9uy5zqygqQVahmbi4eJzkEWJ9DTVp/SX5F+
-         Br+cAvjRIhkz7/4xdwesfp9BbyX8GG/Kj3JZdGoRbFgTTO97i9yZAMUDo7nqjiI+oVbE
-         Okw1bjw611ya7N0fDfBYkgia3MIKOZtx2FOB5h3Jf4CY97A8tTyH1unLGqH1sL61QWFf
-         M7xA8VCdstf6op2GrQ8TrbPD7xtHhJALoS/02BQuJtbIEPqQvr2Gg1C80qPiXAaBm6HP
-         h1Hg==
-X-Forwarded-Encrypted: i=1; AJvYcCVyZ01mw0TIP95/4WKavg/Yv1dRm3ZcQpra1Zjg1WZbuTiuTh6DYhtj9deaiqkVVTq0rY8xLu5/1/o=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx8ppdLFZ05zVBXxHaeywK4iUq8NuPlWokE9aB8zrT2O+eVhfdy
-	ChTDRfNWHxI4I8hRgAfC9nijPDfcOLS4t08lMVguz7l7rontXL2MKUm+qA3ROQ==
-X-Google-Smtp-Source: AGHT+IEyQnMzNJj4T0FdfpUw92OU0CTCnxpBFyqRbLnN5p+RzO1t7/sjMonCK2pDVIOU4UijozF4UQ==
-X-Received: by 2002:a05:6512:3192:b0:52c:e17c:3741 with SMTP id 2adb3069b0e04-5389fc3308fmr4870902e87.5.1727680591549;
-        Mon, 30 Sep 2024 00:16:31 -0700 (PDT)
-Message-ID: <aee1082c-f1ab-4bf9-a731-c9bf59add151@suse.com>
-Date: Mon, 30 Sep 2024 09:16:30 +0200
+        bh=Ha3p4L4JyHkoNbxHu5fyjnASeQonBflFUMrPv5EaFJs=;
+        b=Q8waC1px52LmeSy0ZVjj7fgbTHn4qxpa7WIDZsecFwbSy+X3UqI3kl5fMGbZQjt9Tz
+         uFEBoLcSzKDQbhQC66DIfBKtJ76Qu044Vlv4ZF6CC047lgYuqlMrfUIXX6z+YGTCp7v6
+         oH6vaOdhR8GgPCXh7rsz548MEPVwRB90PDg/l+WFoA/BnAYoKFE1sWrxHSL8ngqTw01p
+         CB6/R97XwpVToBa+9SVr/PFx0UDWnmTqabSbW8aikEwzWV2t8buSziBQN5zJXpQCyKoN
+         50Ck7yMEGz/9w2/gJ7xfOdTtpuEufODXiHGFruaNC2uhBa09CurC6N/Hirej6d6I0iUr
+         rREw==
+X-Forwarded-Encrypted: i=1; AJvYcCXyCCt20iWhrC13q5goBv4jHJ0QQyb8baAos3sfXQD0N7W5D/oVMqjn+tgxVQZ/STm4Zc3LxVliaMc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxVt2NxjiRCONPJRiWRBGuDK+Ssj3IhHjUetfd+G8olwC7Xlsd3
+	iEIgNgRxZ9FU8ErnZBorXgwNqFqthkXAbhtCNC9z9k4pcLejV5gv86y9u+SIVg==
+X-Google-Smtp-Source: AGHT+IG1b3ewiIaJyOQweTHoP6v93vrh7/DmtHHhYFY2IsGg4wRSExgqP7lnAjC08PTqKPRJPptZGQ==
+X-Received: by 2002:a05:6512:12d2:b0:52f:c148:f5e4 with SMTP id 2adb3069b0e04-5389fc3cb4bmr5630791e87.21.1727681270397;
+        Mon, 30 Sep 2024 00:27:50 -0700 (PDT)
+Message-ID: <db29de6d-5feb-4972-b60a-012f0dd9a307@suse.com>
+Date: Mon, 30 Sep 2024 09:27:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v6] x86/intel: optional build of PSR support
-To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-References: <20240926102607.95896-1-Sergiy_Kibrik@epam.com>
+Subject: Re: [PATCH v8 0/7] device tree mapping
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1727449154.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -114,22 +116,24 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240926102607.95896-1-Sergiy_Kibrik@epam.com>
+In-Reply-To: <cover.1727449154.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 26.09.2024 12:26, Sergiy Kibrik wrote:
-> Xen's implementation of PSR only supports Intel CPUs right now, hence it can be
-> made dependant on CONFIG_INTEL build option.
-> Since platform implementation is not limited to single vendor, intermediate
-> option CONFIG_X86_PSR introduced, which selected by CONFIG_INTEL.
+On 27.09.2024 18:33, Oleksii Kurochko wrote:
+> Current patch series introduces device tree mapping for RISC-V
+> and necessary things for that such as:
+> - Fixmap mapping
+> - pmap
+> - Xen page table processing
 > 
-> When !X86_PSR then PSR-related sysctls XEN_SYSCTL_psr_cmt_op &
-> XEN_SYSCTL_psr_alloc are off as well.
-> 
-> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+> ---
+> Changes in v8:
+>  - The following patch was merged to staging:
+>      [PATCH v5 1/7] xen/riscv: use {read,write}{b,w,l,q}_cpu() to define {read,write}_atomic()
+>  - All other changes are patch specific so please look at the patch.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Except that afaics none of the patches has any revision log.
 
-
+Jan
 
