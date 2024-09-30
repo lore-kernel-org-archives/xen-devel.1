@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C98ABCE835B
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Sep 2024 15:08:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.807431.1218873 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14B5CE835C
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Sep 2024 15:08:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.807435.1218913 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svI0e-000236-DZ; Mon, 30 Sep 2024 15:08:24 +0000
+	id 1svI0l-00031D-GP; Mon, 30 Sep 2024 15:08:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 807431.1218873; Mon, 30 Sep 2024 15:08:24 +0000
+Received: by outflank-mailman (output) from mailman id 807435.1218913; Mon, 30 Sep 2024 15:08:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svI0e-00022z-Ad; Mon, 30 Sep 2024 15:08:24 +0000
-Received: by outflank-mailman (input) for mailman id 807431;
- Mon, 30 Sep 2024 15:08:22 +0000
+	id 1svI0l-000311-Co; Mon, 30 Sep 2024 15:08:31 +0000
+Received: by outflank-mailman (input) for mailman id 807435;
+ Mon, 30 Sep 2024 15:08:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=1QIX=Q4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1svI0c-00022q-BI
- for xen-devel@lists.xenproject.org; Mon, 30 Sep 2024 15:08:22 +0000
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [2a00:1450:4864:20::231])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=PdoV=Q4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1svI0j-00022q-Lb
+ for xen-devel@lists.xenproject.org; Mon, 30 Sep 2024 15:08:29 +0000
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [2a00:1450:4864:20::22b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d3749afa-7f3d-11ef-99a2-01e77a169b0f;
- Mon, 30 Sep 2024 17:08:19 +0200 (CEST)
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2fad6de2590so5847751fa.0
- for <xen-devel@lists.xenproject.org>; Mon, 30 Sep 2024 08:08:19 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c882494863sm4536246a12.92.2024.09.30.08.08.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Sep 2024 08:08:17 -0700 (PDT)
+ id d8ceb4b8-7f3d-11ef-99a2-01e77a169b0f;
+ Mon, 30 Sep 2024 17:08:28 +0200 (CEST)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2fac49b17ebso12486181fa.0
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Sep 2024 08:08:27 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-538a0432219sm1264423e87.132.2024.09.30.08.08.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Sep 2024 08:08:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,126 +46,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3749afa-7f3d-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: d8ceb4b8-7f3d-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1727708898; x=1728313698; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iI9UhhIP46ohbqpT7wPLqw3ghHjlTKT7Zx5OV6H10J8=;
-        b=Gx/DGs4aksPihJG73KRCqwlhvNPBz3rUtitnflYkIADoxTTzOC/sAu/ohFFbZ+DV+b
-         JyoSiw41N4qxP2SsPNePdyTrA7OTXFTAXIYi29rHY2h0HXXk3tT4Kf3KnFGaaHc5J9Gj
-         Arl50MCQ2W7CIRUdMnajWDtNu2GTA7Lxt77aMYjQgDM3Z+Lnkei/rSxH+k4RUfqCVBvb
-         7hlgSnRpPV7ZP+6ACZY7L1pF9A7rkdSTR2wwLLU9hmiyq536VL8dEubnSK2vRqSJs+Bp
-         MV+4XiADtUJ92oeyq8A2YRYrLWI1Q3RYA5eQUqs+1fEJqxEO+axeCZdPjUn6ACFRjuby
-         2RDg==
+        d=gmail.com; s=20230601; t=1727708907; x=1728313707; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=d/37IdOCxVXI2z1guCYamgvqmlzEY2bjfj9nmrfmg4E=;
+        b=MAnG1ScBxLNvzfkD+zRAKoWNNNjzQ/K5+BEbp6sa+AUqavcBDs+HMIGeEhjXZL8JSK
+         TeHVC+CiSVNEDinvEoou7OOIOOtKVeDye2tnaVyAmdJSp6nFCmh8g+yg0iN2O9WasmEM
+         +vUk4UZJRQJ7YhnlSI5rNkxNUKHAEUV7UCkpI56GPuaNnOJRbmpNK8P6amOT1TZPhmbO
+         VW90mPdY+XB6c/EpyjTjaHUJBl8F6L//jFyha4sD7IUqueRXHjmyaSnnPoHBGXf9nYnq
+         Y4WTyy4k5455RNUdiSRyREs5zRH7Hhd/EuRKyLmfZFpfjcgUUkQoPH2d1oXO2hDg7eDw
+         HLhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727708898; x=1728313698;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=iI9UhhIP46ohbqpT7wPLqw3ghHjlTKT7Zx5OV6H10J8=;
-        b=ntBu0Xd6oKz6Xg2YMXuXxRH3UMVDOMLfe2ijBchL893ywn535ZOeAoNNcN1mvdiX1j
-         DnYH1wh4GQtZT4BsRFIMKwVoJxtpvwNuXxXNvstf2D0ccyqfC/gJkQ5kz3LW4hNLfInn
-         9s9i7dBRflYDEYL0jOHJvmi0z+5D/AZ6/MDEtfjNXSCncY1CwfttIV11DVJBUKtELo+N
-         EVS6ZIys8xRt3bZ/kPPBFvr2ettWzWVLNmrGXU93ba8giCtO+a+iTOOynudJrqQFpmkk
-         OAbjGCYAsOK5CT3ztNnRJsG8zz0p5P7cm+p49LySH5hQKaxAZr4NJf+/iDdjmn6V5xPl
-         R9KQ==
-X-Gm-Message-State: AOJu0YzcIar8IjYSwjMFC7SsCUXl4FAM8wrMQTEZ9MTiSJ6mLx4Z89Oi
-	L2cq+iAR92ju1wcPnqfx7FdW7os7V6s9mfy9cYSyXLihDABFpfymO8bArksUscjztwjcVshLX6g
-	=
-X-Google-Smtp-Source: AGHT+IFrnI3xsbgon9Ga4ryiqyTMdH9+aIS4v4fWBkwVtcQ+4Z1RJ59HDLgI+YV+M9Hy/CYG+iSwpw==
-X-Received: by 2002:a2e:be1c:0:b0:2fa:cd3d:4a76 with SMTP id 38308e7fff4ca-2facd3d4c8fmr30686311fa.43.1727708898203;
-        Mon, 30 Sep 2024 08:08:18 -0700 (PDT)
-Message-ID: <cae006a7-c1be-4608-a011-dda1fb4a0312@suse.com>
-Date: Mon, 30 Sep 2024 17:08:17 +0200
+        d=1e100.net; s=20230601; t=1727708907; x=1728313707;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=d/37IdOCxVXI2z1guCYamgvqmlzEY2bjfj9nmrfmg4E=;
+        b=NcHYO05EI58TelKfiLHcjLCYfpV/Cs2YzxH6Ydj81UqB6w3dm9XMSaKU7nxo0Ljc0y
+         8jZhneLaYhW42IkCH1KC9SLmbFqaOxm6ZYCSes3BtuwrpJXxrZJzih1YeA3qXosk6x6h
+         TKiXaz5sRxhhfbO0XcjjMwwU1YlSOyApeul0K9UCSMg1zHeuNszMgSnlF0U7roWShnmM
+         WjZ71lOc0EsYi2EPSN3jT90k7oKnOoMWfgE1dYgSln3lgTEpUOkVJPLMDstyEnMk+9jb
+         KZy+ZEiS2ub8L8u02X3q5epvoKtGvhFj7YYQwXoAqZtjF/aSczAJxfwR1wz19D9IRNjD
+         uBJA==
+X-Gm-Message-State: AOJu0Yxwu5yriCzSogqP51VKJwigLVagECHk3hhn/QjocJz7CoF/hxlB
+	oBR3/6XW498G/RLFUCnnkzba3kV6ohLtJgHf2alz5OhZpPa+1lpWKlBVDg==
+X-Google-Smtp-Source: AGHT+IGq/yaJsQpWzmrjwiC8QsA6trMJCZDFbf4/V9BBieWtt8Z4Zgm8g0b3EEMhx+BRdc6+0/KDEA==
+X-Received: by 2002:a05:6512:334f:b0:539:8847:d7e9 with SMTP id 2adb3069b0e04-5398847d900mr4524107e87.35.1727708906904;
+        Mon, 30 Sep 2024 08:08:26 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 2/3] xen/riscv: switch LINK_TO_LOAD() to virt_to_maddr()
+Date: Mon, 30 Sep 2024 17:08:21 +0200
+Message-ID: <9a462c58f3af0ff5e5d312777cd1552b2a5a930c.1727708665.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.46.1
+In-Reply-To: <cover.1727708665.git.oleksii.kurochko@gmail.com>
+References: <cover.1727708665.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86: prefer RDTSCP in rdtsc_ordered()
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-If available, its use is supposed to be cheaper than LFENCE+RDTSC, and
-is virtually guaranteed to be cheaper than MFENCE+RDTSC.
+Except for switching LINK_TO_LOAD() to virt_to_maddr(),
+LINK_TO_LOAD() is dropped, as virt_to_maddr() covers all
+the cases where LINK_TO_LOAD() is used.
 
-Unlike in rdtsc() use 64-bit local variables, eliminating the need for
-the compiler to emit a zero-extension insn for %eax (that's a cheap MOV,
-yet still pointless to have).
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/riscv/mm.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -108,18 +108,30 @@ static inline uint64_t rdtsc(void)
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 7a1919e07e..59da61716c 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -29,7 +29,6 @@ struct mmu_desc {
+ unsigned long __ro_after_init phys_offset;
  
- static inline uint64_t rdtsc_ordered(void)
- {
--	/*
--	 * The RDTSC instruction is not ordered relative to memory access.
--	 * The Intel SDM and the AMD APM are both vague on this point, but
--	 * empirically an RDTSC instruction can be speculatively executed
--	 * before prior loads.  An RDTSC immediately after an appropriate
--	 * barrier appears to be ordered as a normal load, that is, it
--	 * provides the same ordering guarantees as reading from a global
--	 * memory location that some other imaginary CPU is updating
--	 * continuously with a time stamp.
--	 */
--	alternative("lfence", "mfence", X86_FEATURE_MFENCE_RDTSC);
--	return rdtsc();
-+    uint64_t low, high, aux;
-+
-+    /*
-+     * The RDTSC instruction is not ordered relative to memory access.
-+     * The Intel SDM and the AMD APM are both vague on this point, but
-+     * empirically an RDTSC instruction can be speculatively executed
-+     * before prior loads.  An RDTSC immediately after an appropriate
-+     * barrier appears to be ordered as a normal load, that is, it
-+     * provides the same ordering guarantees as reading from a global
-+     * memory location that some other imaginary CPU is updating
-+     * continuously with a time stamp.
-+     *
-+     * RDTSCP, otoh, "does wait until all previous instructions have
-+     * executed and all previous loads are globally visible" (SDM) /
-+     * "forces all older instructions to retire before reading the
-+     * timestamp counter" (APM)
-+     */
-+    alternative_io_2("lfence; rdtsc",
-+                     "mfence; rdtsc", X86_FEATURE_MFENCE_RDTSC,
-+                     "rdtscp",        X86_FEATURE_RDTSCP,
-+                     ASM_OUTPUT2("=a" (low), "=d" (high), "=c" (aux)),
-+                     /* no inputs */);
-+
-+    return (high << 32) | low;
- }
+ #define LOAD_TO_LINK(addr) ((unsigned long)(addr) - phys_offset)
+-#define LINK_TO_LOAD(addr) ((unsigned long)(addr) + phys_offset)
  
- #define __write_tsc(val) wrmsrl(MSR_IA32_TSC, val)
+ /*
+  * It is expected that Xen won't be more then 2 MB.
+@@ -122,7 +121,7 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
+                 unsigned long paddr = (page_addr - map_start) + pa_start;
+                 unsigned int permissions = PTE_LEAF_DEFAULT;
+                 unsigned long addr = is_identity_mapping
+-                                     ? page_addr : LINK_TO_LOAD(page_addr);
++                                     ? page_addr : virt_to_maddr(page_addr);
+                 pte_t pte_to_be_written;
+ 
+                 index = pt_index(0, page_addr);
+@@ -225,7 +224,7 @@ void __init setup_fixmap_mappings(void)
+ 
+     BUG_ON(pte_is_valid(*pte));
+ 
+-    tmp = paddr_to_pte(LINK_TO_LOAD((unsigned long)&xen_fixmap), PTE_TABLE);
++    tmp = paddr_to_pte(virt_to_maddr(&xen_fixmap), PTE_TABLE);
+     write_pte(pte, tmp);
+ 
+     RISCV_FENCE(rw, rw);
+@@ -312,7 +311,7 @@ void __init remove_identity_mapping(void)
+     pte_t *pgtbl;
+     unsigned int index, xen_index;
+     unsigned long ident_start =
+-        LINK_TO_LOAD(turn_on_mmu) & XEN_PT_LEVEL_MAP_MASK(0);
++        virt_to_maddr((unsigned long)turn_on_mmu) & XEN_PT_LEVEL_MAP_MASK(0);
+ 
+     for ( pgtbl = stage1_pgtbl_root, i = CONFIG_PAGING_LEVELS; i; i-- )
+     {
+-- 
+2.46.1
+
 
