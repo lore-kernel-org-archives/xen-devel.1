@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95ECCF649D
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Sep 2024 09:45:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.807163.1218434 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F1D5CF6497
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Sep 2024 10:29:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.807176.1218442 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svCxN-0001Qk-5B; Mon, 30 Sep 2024 09:44:41 +0000
+	id 1svDe3-0007Vn-2A; Mon, 30 Sep 2024 10:28:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 807163.1218434; Mon, 30 Sep 2024 09:44:41 +0000
+Received: by outflank-mailman (output) from mailman id 807176.1218442; Mon, 30 Sep 2024 10:28:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svCxM-0001Qd-W2; Mon, 30 Sep 2024 09:44:40 +0000
-Received: by outflank-mailman (input) for mailman id 807163;
- Mon, 30 Sep 2024 09:44:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1svDe2-0007Vg-Vl; Mon, 30 Sep 2024 10:28:46 +0000
+Received: by outflank-mailman (input) for mailman id 807176;
+ Mon, 30 Sep 2024 10:28:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1QIX=Q4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1svCxL-0001QX-4l
- for xen-devel@lists.xenproject.org; Mon, 30 Sep 2024 09:44:39 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9b04a035-7f10-11ef-99a2-01e77a169b0f;
- Mon, 30 Sep 2024 11:44:37 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a8d0d0aea3cso642921566b.3
- for <xen-devel@lists.xenproject.org>; Mon, 30 Sep 2024 02:44:37 -0700 (PDT)
+ id 1svDe1-0007Va-1x
+ for xen-devel@lists.xenproject.org; Mon, 30 Sep 2024 10:28:45 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c44c4912-7f16-11ef-a0ba-8be0dac302b0;
+ Mon, 30 Sep 2024 12:28:43 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a8d2daa2262so483070366b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Sep 2024 03:28:43 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c2978b0csm514688066b.146.2024.09.30.02.44.35
+ a640c23a62f3a-a93c2947e3esm510350866b.111.2024.09.30.03.28.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Sep 2024 02:44:35 -0700 (PDT)
+ Mon, 30 Sep 2024 03:28:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,58 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b04a035-7f10-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: c44c4912-7f16-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1727689476; x=1728294276; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=1iVbAJsl2AA2a4KL9ExSW4mkm3OwoQX/Nv5rvQskHIc=;
-        b=fiQmO8pfzfKsgTabU3MIDZ3nLh6Q8g3I1fOCCLUYJqozTp6b9I9WRr2Hm2K2QXQFJS
-         2SYF1WHt8zN28VAc0wcyDFpg9BQ4jE7QjEd5E09cVwDrueEfekqiMivz+FgbDuUedBtE
-         UotX3Zr2verX+rU0sL8Z53PQAMlBNUh/5tP5OKwX/Bo0UTeqfRVnACqcINdRUHWZ+DJE
-         pjpUPgRRo9SCFfVNQv/913z6g8XM4SPSqGzE/GPK52GBt+gGS+1dyQqtk38ph3MFgoJ2
-         s2GKtSU5WCO7udpHl67flGYSPpgm1giy6wgBdo1W8IpHHbLBsrfAXLC/yLUlrn0m8Hl+
-         IZpA==
+        d=suse.com; s=google; t=1727692122; x=1728296922; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=ME4QojNVUiTbPsd9jwESzhxc0Hev6CvJD8k6A3wfRjU=;
+        b=bFgg0cALeFwNJBwxUBNzHLMLqncdCBgADhfT6D63GpwaXLpimBqTsW04F+qn0HuamS
+         xSG3FZYMbqyhHNtNsklMYwakUTf6UMn6mOMSvZCwKlMxM7WriuEysb3l2WU04GDwafNd
+         WctANhKIr81ow3dirny407PyM6xL2NJMIPrmX6bGYJfyjiGjARHdlit9iEwwuOSZlf1P
+         z8XDyRfq2rUDIBZGkE+b88BoM0bsZ2Ns0/Pjap6we5zeZ6BPl0yBJrxoGmJTQXMZ9XK6
+         UVTEZeZlgZ+qJ3shEGV/2gB45YSUSDWUnjG/wWL3qUVnfonQG+oTedBpLPteLN3305qc
+         3QUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727689476; x=1728294276;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1iVbAJsl2AA2a4KL9ExSW4mkm3OwoQX/Nv5rvQskHIc=;
-        b=ai9kgSvM2wDlEz7Fw49A85NX0qKj8qoA5b3HA1gsY/icbdExSFScqXq7GXI5kjV3wo
-         4jICbvGpAKmxqlECX99nPf0XskS1XYfDA4ADa1HdmXBdDGakbHc+JLV2Ty192PhzVIoS
-         wBUHWm8kzmsAWf+CxlkbnUUo4SZPNIRKMkC0jsobNmF8VohYa+uUR2OrHz97/d/kUmjr
-         pbijO/aQG1yoWt4u1U3nRcKTvTglkuRAGQ7RQKAgnSbklOwaGqJ1tuScBjwOMfiFqNFr
-         5qfi0J+vK5X5Sy3hOvFy8WQFG7CJlAHhg+W/N3mytnLxMKjDr1nzlZAXEilMhjAbTSV7
-         cApA==
-X-Forwarded-Encrypted: i=1; AJvYcCUC0KSz53A7hnkB0HU9Act9XhG1glgwQzjk3QXlMY70DX5mNk+Dokv3Lb44O8EtW14+J7j46aG9uXk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwpIKZupSzbH5JRmZz5sW5XPPM6Z56yxhTJnfV4Ssp07qGhKK9j
-	7hi9JbfOU5135ch/tSxPVbxIFgza0uCJOS7P9ajel4tTh0Y8kJ/UKcd3R8uTJA==
-X-Google-Smtp-Source: AGHT+IGLj4gIo3m/vZtJNE52CajIVAMfygN2zz5/VjmddtdKVQaaLZ9ttY1fK1LpkPME4f0TMenolg==
-X-Received: by 2002:a17:907:3e9f:b0:a8d:4e13:55f9 with SMTP id a640c23a62f3a-a93c4919a9dmr1277594166b.19.1727689476340;
-        Mon, 30 Sep 2024 02:44:36 -0700 (PDT)
-Message-ID: <276e0680-c63e-4e92-8bd4-2bfc7491e881@suse.com>
-Date: Mon, 30 Sep 2024 11:44:35 +0200
+        d=1e100.net; s=20230601; t=1727692122; x=1728296922;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ME4QojNVUiTbPsd9jwESzhxc0Hev6CvJD8k6A3wfRjU=;
+        b=tYJJYgpl5CwaoYX4hik4L4A/HIP4CCN1iJrpkTiRf8Gr/nGH8inovVH61rEQ8B7TDR
+         Qv6JQbJn2eWX+5rSDccXK6P6N9CRHr/d2wvSw9SrpsNmXfCG7oXRzi7IUL1NniEtG3H4
+         l+kEeeBKbhfnF2n7FiQrzHxj+Dw2VDpHbsGQndQ0ou4NHsgKdHm5SNwcjoNih99tX/zZ
+         ui2vqKE1WHwXXfKwjiDFaHgMZLv8mrqSGm/JnIig1RSQRuga47BQp2CyDc4qodukANmw
+         bIkMeut0y0yHcC/9uut7wI+SGVf2GUPXBdFBJhCdUDrno6vE0WGI121J3aVrpd+bW/xt
+         AI9w==
+X-Gm-Message-State: AOJu0YyVKpfIdiWy9YcCcAl2jcAbLuKFVe6I7py5HNftlLDr5NcN10XS
+	CKwGMBYJrrhx5AZcDlmYFQatyrl1I5/YWsTUgg5MCav5ytauy8YtlEyT7PqjqO7RedKL4/q6WLU
+	=
+X-Google-Smtp-Source: AGHT+IGKDcjMf4WpkwGak0rjb5ve4LVP0WGcsQujx+ppwik35Rmmh1+M2iHOexlGUBf3U96Mxtb08A==
+X-Received: by 2002:a17:907:9706:b0:a8d:1774:eb59 with SMTP id a640c23a62f3a-a93c4ab15dcmr1228584066b.54.1727692122413;
+        Mon, 30 Sep 2024 03:28:42 -0700 (PDT)
+Message-ID: <3b4a324c-dbe6-4647-a73a-afdb94ff2ecd@suse.com>
+Date: Mon, 30 Sep 2024 12:28:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v6] CODING_STYLE: Add a section on header guards
- naming conventions
-To: Frediano Ziglio <frediano.ziglio@cloud.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>,
- consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-References: <a68267c7465a9b0d2ed8f844a5e0145de50b0f3a.1725550985.git.alessandro.zucchelli@bugseng.com>
- <7357f6e8-2630-4027-b339-eedab9ae48c5@suse.com>
- <alpine.DEB.2.22.394.2409092149210.3672@ubuntu-linux-20-04-desktop>
- <44738f93-e99b-4f1c-9ed3-59dd2eac7aff@suse.com>
- <alpine.DEB.2.22.394.2409111808580.611587@ubuntu-linux-20-04-desktop>
- <24e33cc2-c9eb-4609-a074-51df81997aba@suse.com>
- <CACHz=Zg7_h8Aqpf2=Gwnec5+TnoxoERa=VZNaQ4F=t+1WKjOKg@mail.gmail.com>
-Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2] ioreq: don't wrongly claim "success" in
+ ioreq_send_buffered()
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -122,48 +112,43 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CACHz=Zg7_h8Aqpf2=Gwnec5+TnoxoERa=VZNaQ4F=t+1WKjOKg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 30.09.2024 11:12, Frediano Ziglio wrote:
-> On Mon, Sep 30, 2024 at 9:58 AM Jan Beulich <jbeulich@suse.com> wrote:
->>
->> On 12.09.2024 03:13, Stefano Stabellini wrote:
->>> Hi Jan, we have gone back and forth on this a few times, but neither
->>> Alessandro nor I fully understand your perspective. To help streamline
->>> the process and save time for everyone, I suggest you provide an example
->>> of the rules written in the style you believe is appropriate. Once you
->>> set the initial direction, Alessandro and I can continue and complete
->>> the rest in that preferred style.
->>
->> Header inclusion guards
->> -----------------------
->>
->> Unless otherwise specified, all header files should include proper
->> guards to prevent multiple inclusions. The following naming conventions
->> apply:
->>
->> - Guard names are derived from directory path underneath xen/ and the
->>   actual file name.  Path components are separated by double underscores.
->>   Alphabetic characters are converted to upper case.  Non-alphanumeric
->>   characters are replaced by single underscores.
-> 
-> Possibly there should be no cases; but about "Non-alphanumeric
-> characters are replaced by single underscores" are we talking about
-> sequences or single entities? I would say sequences so
-> "Non-alphanumeric character sequences are replaced by single
-> underscores".
-> For instance "foo--bar.h" -> "FOO_BAR_H" and not "foo--bar.h" -> "FOO__BAR_H".
+Returning a literal number is a bad idea anyway when all other returns
+use IOREQ_STATUS_* values. The function is dead on Arm, and mapping to
+X86EMUL_OKAY is surely wrong on x86.
 
-I think such files shouldn't be created in the first place. No matter
-whether you replace by a single underscore or a sequence thereof,
-ambiguities will arise.
+Fixes: f6bf39f84f82 ("x86/hvm: add support for broadcast of buffered ioreqs...")
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Shouldn't IOREQ_READ requests also be rejected here, for the result of
+a read not possibly coming from anywhere, yet a (bogus) caller then
+assuming some data was actually returned?
 
-> Another maybe not supported case is no ASCII characters in name. As
-> far as I can see they are not supported. Is it written somewhere?
+ioreq_send_buffered() being built on Arm is a violation of Misra rule
+2.1, which apparently Eclair doesn't flag (the rule is marked clean).
+---
+v2: Use IOREQ_STATUS_UNHANDLED.
 
-Yet more absurd names, imo, which even more so shouldn't be allowed in.
-
-Jan
+--- unstable.orig/xen/common/ioreq.c	2024-09-30 12:22:03.759445625 +0200
++++ unstable/xen/common/ioreq.c	2024-09-30 12:24:06.516408920 +0200
+@@ -1175,7 +1175,7 @@ static int ioreq_send_buffered(struct io
+         return IOREQ_STATUS_UNHANDLED;
+ 
+     /*
+-     * Return 0 for the cases we can't deal with:
++     * Return UNHANDLED for the cases we can't deal with:
+      *  - 'addr' is only a 20-bit field, so we cannot address beyond 1MB
+      *  - we cannot buffer accesses to guest memory buffers, as the guest
+      *    may expect the memory buffer to be synchronously accessed
+@@ -1183,7 +1183,7 @@ static int ioreq_send_buffered(struct io
+      *    support data_is_ptr we do not waste space for the count field either
+      */
+     if ( (p->addr > 0xfffffUL) || p->data_is_ptr || (p->count != 1) )
+-        return 0;
++        return IOREQ_STATUS_UNHANDLED;
+ 
+     switch ( p->size )
+     {
 
