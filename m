@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE315CE7D19
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 12:24:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.808059.1219846 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 056CECE7D19
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 12:38:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.808069.1219882 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svbvp-0000kv-AA; Tue, 01 Oct 2024 12:24:45 +0000
+	id 1svc9E-0003OB-Ku; Tue, 01 Oct 2024 12:38:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 808059.1219846; Tue, 01 Oct 2024 12:24:45 +0000
+Received: by outflank-mailman (output) from mailman id 808069.1219882; Tue, 01 Oct 2024 12:38:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svbvp-0000ko-7R; Tue, 01 Oct 2024 12:24:45 +0000
-Received: by outflank-mailman (input) for mailman id 808059;
- Tue, 01 Oct 2024 12:24:44 +0000
+	id 1svc9E-0003L6-DF; Tue, 01 Oct 2024 12:38:36 +0000
+Received: by outflank-mailman (input) for mailman id 808069;
+ Tue, 01 Oct 2024 12:38:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+oTF=Q5=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1svbvo-0000ki-ER
- for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 12:24:44 +0000
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
- [2a00:1450:4864:20::642])
+ <SRS0=qrgx=Q5=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1svc9D-0002va-1i
+ for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 12:38:35 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 22a4f42b-7ff0-11ef-99a2-01e77a169b0f;
- Tue, 01 Oct 2024 14:24:42 +0200 (CEST)
-Received: by mail-ej1-x642.google.com with SMTP id
- a640c23a62f3a-a93c1cc74fdso830994566b.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 05:24:42 -0700 (PDT)
-Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ id 1186ec32-7ff2-11ef-99a2-01e77a169b0f;
+ Tue, 01 Oct 2024 14:38:32 +0200 (CEST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5c87853df28so6153650a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 05:38:32 -0700 (PDT)
+Received: from mewpvdipd1023.corp.cloud.com ([52.166.251.127])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c27c70fesm700089266b.57.2024.10.01.05.24.40
+ 4fb4d7f45d1cf-5c88248ac03sm6132630a12.70.2024.10.01.05.38.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 05:24:40 -0700 (PDT)
+ Tue, 01 Oct 2024 05:38:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,129 +47,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22a4f42b-7ff0-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 1186ec32-7ff2-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1727785481; x=1728390281; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1727786311; x=1728391111; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qHkm+gTmN+S5hP1Q9mE4edudlBV+IDvZ/Wxl24devZo=;
-        b=ugbyEaEGFXDTnyR8o+7bO1koejkUPi1y6jVcxTF7fHmUgfYIC3MsSJR3u2qjqlESnf
-         R8IFNMxla3Byb70AGDjfUO+pVQZJ7mxWLyDW511zcL5urh4TpJ/qzay6Wf6URpwgjngs
-         8MjZlGeQhBF/2dQ4EARrkLdwrXroTRWkoauLs=
+        bh=UB02sToOMWoS+3+bvVBptWjoHbPyERDalpALvStk7iE=;
+        b=C26rpQfH5gIZ6gzOlY/vAxSiFxOAwu9t2tAqKdVoQqAWCG81shbNyXSIuOuc/LhBDO
+         agnwLrAiAU5AQ3FtoggFyG+zXSv1YKMnG3J5IuQkYDb43EWqV8wY1qgufm5rwl4ig1TE
+         ub3ycllDRLekx/BIw46uQvgoyDKWE56yk0mXg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727785481; x=1728390281;
+        d=1e100.net; s=20230601; t=1727786311; x=1728391111;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qHkm+gTmN+S5hP1Q9mE4edudlBV+IDvZ/Wxl24devZo=;
-        b=FmRK7QVnSswq0mY51VAYV51GrqzAHgxE2PzMT+kzDUYqFbQNE66OwDxMt3WmvpAj7m
-         wb0ZWom7gUKO1WWEVi1CS0L93PduuoxpdYZH04+hkHDWOyUddvgfLYvrEUozphcQ9n9y
-         KIj5MddKcnjyPt5s2UFZpF4pzM7za4yTmlHDWjxHcZDBrgdF1izkmzR+UiBnRc+CHIkc
-         bt8ju6butepMMEvX7MXtTdJB41b/JA4yqQ6XZZW0bK087utx/ybs/wyo7NO8GnqCf1uU
-         T/cCp/HEAfSNfae5Pr1v04rUHU1/6YWohexeCXSkFCNjIx/6v5usmwLpUQDb9FDziF5o
-         WeLg==
-X-Gm-Message-State: AOJu0Yw2CeZLPH57fLpjz4DwNP7BscyLBbKsd0vA/vUIdd5+gIW2OyDg
-	OM1oE9+vl+wI5++G1e973xsKoOG/8jK2LvFZlrC974RAud34VZ0jNe5Px4M2OHo2QJQYq+BFvmk
-	Tf3QFnA==
-X-Google-Smtp-Source: AGHT+IFXb+nZshPjMeWW4itYiYhIxAwo6/5FdstYB+n+kXcxh8r2whiBxQZfHzyKz+GNVCW6/W4dzw==
-X-Received: by 2002:a17:907:7e8c:b0:a8d:2ab2:c9a0 with SMTP id a640c23a62f3a-a93c4aae066mr1531904366b.53.1727785481370;
-        Tue, 01 Oct 2024 05:24:41 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+        bh=UB02sToOMWoS+3+bvVBptWjoHbPyERDalpALvStk7iE=;
+        b=aU0/p8yTG7zKpUHGkeWzAFWqsWoZIfhn2ocgDhAsmj2lZ1bUGbKedkpIqow0gbThK+
+         3rb1eUoOS8vzIvBJhbPfMEuOUk6y9ZQ6iZn1G/dn/+kGlfO97tEBCC7VerTUYclJ2WWq
+         tYzb6G3/5VbZT/LOuuIeXbLbkWsQmaeqPSd9DpYL6cjYXZq0sszGtodpNfZrAM4ylu1Y
+         6ywjEys9ac3oTbakS1m/qNvCjruWgdjv5r/jCymZQi2F52zQrVbGUCFKXRaMpZNW0ysj
+         lmIHib+43l4X2wMOXjZ0nNBTnVbjBVoE0ac60Og7vtQrMC9YAZi479c52FDOdKOkAioe
+         Wn3A==
+X-Gm-Message-State: AOJu0YzI7TJ2wcNG7QcveW5g2t1cODf35fWC2p2aLl3K2JBFsYl7KBxM
+	K00XQN9gV6S1eB3yR6PMxAXFryjT2WyRHqHBXERmVryBms4NGN8WhgWBh9NRqDKYgB4ScYIsArk
+	u6+k=
+X-Google-Smtp-Source: AGHT+IGO1GpmPkOQcfrmzXZzq9xBvb8Osa2Y450r5q4s9sfSXZx7bSEFH+ArJLFDVvvgsLXIky/HWQ==
+X-Received: by 2002:a05:6402:26c8:b0:5c4:1320:e5a3 with SMTP id 4fb4d7f45d1cf-5c8824e7972mr14658094a12.16.1727786311392;
+        Tue, 01 Oct 2024 05:38:31 -0700 (PDT)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 3/2] x86/pv: Rename pv.iobmp_limit to iobmp_nr and clarify behaviour
-Date: Tue,  1 Oct 2024 13:24:38 +0100
-Message-Id: <20241001122438.1454218-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20240930161837.1248144-1-andrew.cooper3@citrix.com>
-References: <20240930161837.1248144-1-andrew.cooper3@citrix.com>
+Subject: [PATCH v6 02/11] x86/vlapic: Move lapic migration checks to the check hooks
+Date: Tue,  1 Oct 2024 13:37:58 +0100
+Message-ID: <20241001123807.605-3-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20241001123807.605-1-alejandro.vallejo@cloud.com>
+References: <20241001123807.605-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Ever since it's introduction in commit 013351bd7ab3 ("Define new event-channel
-and physdev hypercalls"), the public interface was named nr_ports while the
-internal field was called iobmp_limit.
+While doing this, factor out checks common to architectural and hidden
+state.
 
-Rename the intenral field to iobmp_nr to match the public interface, and
-clarify that, when nonzero, Xen will read 2 bytes.
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+--
+Last reviewed in the topology series v3. Fell under the cracks.
 
-There isn't a perfect parallel with a real TSS, but iobmp_nr being 0 is the
-paravirt "no IOPB" case, and it is important that no read occurs in this case.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+  https://lore.kernel.org/xen-devel/ZlhP11Vvk6c1Ix36@macbook/
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/include/asm/domain.h | 2 +-
- xen/arch/x86/physdev.c            | 2 +-
- xen/arch/x86/pv/emul-priv-op.c    | 7 ++++++-
- xen/include/public/physdev.h      | 3 +++
- 4 files changed, 11 insertions(+), 3 deletions(-)
+ xen/arch/x86/hvm/vlapic.c | 84 ++++++++++++++++++++++++++-------------
+ 1 file changed, 56 insertions(+), 28 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 811251852f79..bdcdb8de09f1 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -573,7 +573,7 @@ struct pv_vcpu
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index 992355e511cd..101902cff889 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -1571,60 +1571,88 @@ static void lapic_load_fixup(struct vlapic *vlapic)
+                v, vlapic->loaded.id, vlapic->loaded.ldr, good_ldr);
+ }
  
-     /* I/O-port access bitmap. */
-     XEN_GUEST_HANDLE(uint8) iobmp; /* Guest kernel vaddr of the bitmap. */
--    unsigned int iobmp_limit; /* Number of ports represented in the bitmap. */
-+    unsigned int iobmp_nr;    /* Number of ports represented in the bitmap. */
- #define IOPL(val) MASK_INSR(val, X86_EFLAGS_IOPL)
-     unsigned int iopl;        /* Current IOPL for this VCPU, shifted left by
-                                * 12 to match the eflags register. */
-diff --git a/xen/arch/x86/physdev.c b/xen/arch/x86/physdev.c
-index d6dd622952a9..69fd42667c69 100644
---- a/xen/arch/x86/physdev.c
-+++ b/xen/arch/x86/physdev.c
-@@ -436,7 +436,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- #else
-         guest_from_compat_handle(curr->arch.pv.iobmp, set_iobitmap.bitmap);
- #endif
--        curr->arch.pv.iobmp_limit = set_iobitmap.nr_ports;
-+        curr->arch.pv.iobmp_nr = set_iobitmap.nr_ports;
-         break;
-     }
+-static int cf_check lapic_load_hidden(struct domain *d, hvm_domain_context_t *h)
+-{
+-    unsigned int vcpuid = hvm_load_instance(h);
+-    struct vcpu *v;
+-    struct vlapic *s;
  
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index e35285d4ab69..cefa38d56138 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -167,7 +167,12 @@ static int guest_io_okay(unsigned int port, unsigned int bytes,
-     if ( iopl_ok(v, regs) )
-         return X86EMUL_OKAY;
++static int lapic_check_common(const struct domain *d, unsigned int vcpuid)
++{
+     if ( !has_vlapic(d) )
+         return -ENODEV;
  
--    if ( (port + bytes) <= v->arch.pv.iobmp_limit )
-+    /*
-+     * When @iobmp_nr is non-zero, Xen, like real CPUs and the TSS IOPB,
-+     * always reads 2 bytes from @iobmp, which might be one byte beyond
-+     * @nr_ports.
-+     */
-+    if ( (port + bytes) <= v->arch.pv.iobmp_nr )
+     /* Which vlapic to load? */
+-    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
++    if ( !domain_vcpu(d, vcpuid) )
      {
-         const void *__user addr = v->arch.pv.iobmp.p + (port >> 3);
-         uint16_t mask;
-diff --git a/xen/include/public/physdev.h b/xen/include/public/physdev.h
-index 45e1c18541c8..3149049a9a57 100644
---- a/xen/include/public/physdev.h
-+++ b/xen/include/public/physdev.h
-@@ -87,6 +87,9 @@ DEFINE_XEN_GUEST_HANDLE(physdev_set_iopl_t);
- /*
-  * Set the current VCPU's I/O-port permissions bitmap.
-  * @arg == pointer to physdev_set_iobitmap structure.
-+ *
-+ * When @nr_ports is non-zero, Xen, like real CPUs and the TSS IOPB, always
-+ * reads 2 bytes from @bitmap, which might be one byte beyond @nr_ports.
-  */
- #define PHYSDEVOP_set_iobitmap           7
- struct physdev_set_iobitmap {
+-        dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no apic%u\n",
++        dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vCPU %u\n",
+                 d->domain_id, vcpuid);
+         return -EINVAL;
+     }
+-    s = vcpu_vlapic(v);
++
++    return 0;
++}
++
++static int cf_check lapic_check_hidden(const struct domain *d,
++                                       hvm_domain_context_t *h)
++{
++    unsigned int vcpuid = hvm_load_instance(h);
++    struct hvm_hw_lapic s;
++    int rc = lapic_check_common(d, vcpuid);
++
++    if ( rc )
++        return rc;
++
++    if ( hvm_load_entry_zeroextend(LAPIC, h, &s) != 0 )
++        return -ENODATA;
++
++    /* EN=0 with EXTD=1 is illegal */
++    if ( (s.apic_base_msr & (APIC_BASE_ENABLE | APIC_BASE_EXTD)) ==
++         APIC_BASE_EXTD )
++        return -EINVAL;
++
++    return 0;
++}
++
++static int cf_check lapic_load_hidden(struct domain *d, hvm_domain_context_t *h)
++{
++    unsigned int vcpuid = hvm_load_instance(h);
++    struct vcpu *v = d->vcpu[vcpuid];
++    struct vlapic *s = vcpu_vlapic(v);
+ 
+     if ( hvm_load_entry_zeroextend(LAPIC, h, &s->hw) != 0 )
++    {
++        ASSERT_UNREACHABLE();
+         return -EINVAL;
++    }
+ 
+     s->loaded.hw = 1;
+     if ( s->loaded.regs )
+         lapic_load_fixup(s);
+ 
+-    if ( !(s->hw.apic_base_msr & APIC_BASE_ENABLE) &&
+-         unlikely(vlapic_x2apic_mode(s)) )
+-        return -EINVAL;
+-
+     hvm_update_vlapic_mode(v);
+ 
+     return 0;
+ }
+ 
+-static int cf_check lapic_load_regs(struct domain *d, hvm_domain_context_t *h)
++static int cf_check lapic_check_regs(const struct domain *d,
++                                     hvm_domain_context_t *h)
+ {
+     unsigned int vcpuid = hvm_load_instance(h);
+-    struct vcpu *v;
+-    struct vlapic *s;
++    int rc;
+ 
+-    if ( !has_vlapic(d) )
+-        return -ENODEV;
++    if ( (rc = lapic_check_common(d, vcpuid)) )
++        return rc;
+ 
+-    /* Which vlapic to load? */
+-    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
+-    {
+-        dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no apic%u\n",
+-                d->domain_id, vcpuid);
+-        return -EINVAL;
+-    }
+-    s = vcpu_vlapic(v);
++    if ( !hvm_get_entry(LAPIC_REGS, h) )
++        return -ENODATA;
++
++    return 0;
++}
++
++static int cf_check lapic_load_regs(struct domain *d, hvm_domain_context_t *h)
++{
++    unsigned int vcpuid = hvm_load_instance(h);
++    struct vcpu *v = d->vcpu[vcpuid];
++    struct vlapic *s = vcpu_vlapic(v);
+ 
+     if ( hvm_load_entry(LAPIC_REGS, h, s->regs) != 0 )
+-        return -EINVAL;
++        ASSERT_UNREACHABLE();
+ 
+     s->loaded.id = vlapic_get_reg(s, APIC_ID);
+     s->loaded.ldr = vlapic_get_reg(s, APIC_LDR);
+@@ -1641,9 +1669,9 @@ static int cf_check lapic_load_regs(struct domain *d, hvm_domain_context_t *h)
+     return 0;
+ }
+ 
+-HVM_REGISTER_SAVE_RESTORE(LAPIC, lapic_save_hidden, NULL,
++HVM_REGISTER_SAVE_RESTORE(LAPIC, lapic_save_hidden, lapic_check_hidden,
+                           lapic_load_hidden, 1, HVMSR_PER_VCPU);
+-HVM_REGISTER_SAVE_RESTORE(LAPIC_REGS, lapic_save_regs, NULL,
++HVM_REGISTER_SAVE_RESTORE(LAPIC_REGS, lapic_save_regs, lapic_check_regs,
+                           lapic_load_regs, 1, HVMSR_PER_VCPU);
+ 
+ int vlapic_init(struct vcpu *v)
 -- 
-2.39.5
+2.46.0
 
 
