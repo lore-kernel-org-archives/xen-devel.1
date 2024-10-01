@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E34CEACD5
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 15:16:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.808250.1220131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79D19CEACD5
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 15:18:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.808254.1220141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svecG-0008QA-GQ; Tue, 01 Oct 2024 15:16:44 +0000
+	id 1svedb-0001DA-PK; Tue, 01 Oct 2024 15:18:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 808250.1220131; Tue, 01 Oct 2024 15:16:44 +0000
+Received: by outflank-mailman (output) from mailman id 808254.1220141; Tue, 01 Oct 2024 15:18:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svecG-0008Q3-CN; Tue, 01 Oct 2024 15:16:44 +0000
-Received: by outflank-mailman (input) for mailman id 808250;
- Tue, 01 Oct 2024 15:16:43 +0000
+	id 1svedb-0001D3-Mh; Tue, 01 Oct 2024 15:18:07 +0000
+Received: by outflank-mailman (input) for mailman id 808254;
+ Tue, 01 Oct 2024 15:18:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jjk+=Q5=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1svecF-0006cV-0f
- for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 15:16:43 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
+ id 1sveda-0001Ce-QN
+ for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 15:18:06 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 29de12a4-8008-11ef-a0ba-8be0dac302b0;
- Tue, 01 Oct 2024 17:16:42 +0200 (CEST)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a910860e4dcso64690766b.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 08:16:42 -0700 (PDT)
+ id 5bb4648a-8008-11ef-a0ba-8be0dac302b0;
+ Tue, 01 Oct 2024 17:18:06 +0200 (CEST)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5c8952f7f95so3115911a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 08:18:05 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c27773c0sm736022166b.1.2024.10.01.08.16.41
- for <xen-devel@lists.xenproject.org>
+ 4fb4d7f45d1cf-5c8ad571a92sm928966a12.51.2024.10.01.08.18.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Oct 2024 08:16:41 -0700 (PDT)
+ Tue, 01 Oct 2024 08:18:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,47 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29de12a4-8008-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 5bb4648a-8008-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1727795802; x=1728400602; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+        d=suse.com; s=google; t=1727795885; x=1728400685; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:cc:content-language
          :references:to:from:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=kDmhaPLV1KBtugpOb/drJdwa74rwyXxXKWWSRWQJz04=;
-        b=gF6krIrkP04Jda1lqW/drHBWTGFao1i/PTzNje2T5bOgta03uVvNVlqmhpYoYD/PyY
-         zSxmRYU6KfWJYoTvHRwSOK3O36jcH3Je5UtXAOZS/bNxR74zjeVHOml2coPMolirkr1D
-         fPrKx3ihExfS5gH1UjFKjUTkzWSgNLnmfFxsb4GC5IACbcclLSTzJqgaUP+l8gmwaYup
-         v8U7wXG58Nl5QFO2M2KSDw6K5FEKwsyLK/KHyfjTtrSAq84gEF88l7kACnRGld8QZHB0
-         aeFB+mWpKSGc1XPpPdMLiD8yWcbNmTUu1VRzFzZnVreTAknkydt+reWes4nSnckwt8JF
-         XTIg==
+        bh=e60l8OM3J3mEWjrRG/wj+VAi+SfyVlJ4UmMEasaEyyg=;
+        b=dePLSNEsS96r8zqVwiEy9Rx7nPpg8B0vg/W94O+vRHWxOdjHzKIG47C9P+PnZA1VnE
+         V1OBoKM9wET0Cu4TAL9yaHS8vUcDNP/GE+fU8rP+g9AhsGZskQK2sViCcDsZ1UizejTo
+         8lQYyhCrWYvk0jxhuYTQwlNGzfIcUMMDyVMFaBJB+4lh6TSE+xYWXIylI4PVv5B7+YyS
+         0J2atldS8P+2CsmRWIUkaHXcU5EVTJOyR+qI7WESoxUDedRCjHVtKvgu+/VCnJvE2FuD
+         elPKgoSJ+SagmT4ch3Hbz6Xg9fhKspG6yQaPwzfnn4MWSjZfbMeuonEzm/r4G9Pivyb3
+         BFtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727795802; x=1728400602;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+        d=1e100.net; s=20230601; t=1727795885; x=1728400685;
+        h=content-transfer-encoding:in-reply-to:autocrypt:cc:content-language
          :references:to:from:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=kDmhaPLV1KBtugpOb/drJdwa74rwyXxXKWWSRWQJz04=;
-        b=jySsXXIG5N00sZzCMdCHvDFjZpIhWsNqd/Q0HQM0QZqhtmboStw857lspcxcX+bHjW
-         giiZ6Yz1NI8SWd6K97LsV5K1YZm0FdhesTU8gPpMHutCiSWSE9YT4Dw4ceYcI6Vi3jOA
-         h0RM6LW0Pn8ZlKsi74Qu9OhtwIBvSJLxAZQZgPQfTmY7fqIvq4c3tVz5GR0UrK0wkMbQ
-         NvoPwh62kc+GAeWw4Wi2ZOkSa2IQIB4Gwv4JynY1yW6DhAwcCdLV3/lk1I8ly/gGwFwW
-         cI+3ZWvmPIZLPeaiVXgwOpCjS1DDAX+zOcGlb3kXQmOzq3QQ4lCVp5bf7HU7LJr0CmPP
-         YptA==
-X-Gm-Message-State: AOJu0Yy75Fa3nWLD7MRcTczyp38odbCCUiSowdA97uP3ooM2cFGpmnIx
-	q6y/8i596y+CsdQ9a4pkFHavlPEr1AjIb0NDi/1yf7yjtk2p4rRldejopTnjWs6Idisr5RmdHcw
+        bh=e60l8OM3J3mEWjrRG/wj+VAi+SfyVlJ4UmMEasaEyyg=;
+        b=gcTfwjw51HTMVOLbwg6Jb1/cuMNNm+QW1/OkfBzAuXzbrxt6lmEH5fAeHjiETSj06v
+         dFd/3fXhwYcvbk7B9cleR3g6cVs1D8FShXhjqhD2SaaJM/X4uGBu4+3TCQtMEj4ipdHG
+         c738vnTWmMoBSqjv+ibuFEVRa4Puj1Js/Da2VKZGSl2AsQIa+3wBq5xfQwRfeQH8nug7
+         IBOHdH8ksGIrthgT84BMmwm4jbmIvIu5IkOfTw8sYyDbaHYwR4osB3AEktFNgH4TTgVx
+         Qs/Xg2F/3odnLvI2Wr55TBoGl/FzedyQUyaNTFRmXsFsAnGgajTVm8oS330V6AOOXrrS
+         ZePw==
+X-Gm-Message-State: AOJu0YzYxkciiLho7Jjtu/1h4R9X0tnz2YfYLCqfcn3Ow3cXm0/Vbd/S
+	FlDwKY82h7ThL05CBOxg7OuQb9/wye/c7EzHtAR4jgeRvHWbzwUTg7Goy4QdIuWgkd1RUQanN4A
 	=
-X-Google-Smtp-Source: AGHT+IHOnm+9ZIJSbtd230MU90VUrqhjUsU9nVNxewRyh0vxzPstKQDAAw2vZdHSfRUktn4qz3+ZIg==
-X-Received: by 2002:a17:906:f59b:b0:a83:94bd:d913 with SMTP id a640c23a62f3a-a93c48e80d3mr1803406266b.10.1727795801661;
-        Tue, 01 Oct 2024 08:16:41 -0700 (PDT)
-Message-ID: <7edbc094-6b3a-47f0-92b7-879ca1d76548@suse.com>
-Date: Tue, 1 Oct 2024 17:16:40 +0200
+X-Google-Smtp-Source: AGHT+IGTJBIaSZgiJPEF9LAypFy2KxDlEDBhqAZMPtPgmQ0OlaNYU5UV30P3VinNj93wIdCp46NojQ==
+X-Received: by 2002:a05:6402:1e92:b0:5c8:9861:a2aa with SMTP id 4fb4d7f45d1cf-5c89861a5c0mr4560235a12.21.1727795885361;
+        Tue, 01 Oct 2024 08:18:05 -0700 (PDT)
+Message-ID: <07da5e97-42f6-49cc-8309-5ea64e2d3567@suse.com>
+Date: Tue, 1 Oct 2024 17:18:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v7 08/11] Arm32: use new-style entry annotations for MMU code
+Subject: [PATCH v7 11/11] Arm: purge ENTRY(), ENDPROC(), and ALIGN
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <e4bf47ca-2ae6-1fd4-56a6-e4e777150b64@suse.com>
  <98590a41-cee7-4ba3-a723-4e3ee3b55357@suse.com>
 Content-Language: en-US
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -116,177 +119,43 @@ In-Reply-To: <98590a41-cee7-4ba3-a723-4e3ee3b55357@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Locally override SYM_PUSH_SECTION() to retain the intended section
-association.
+They're no longer used. This also makes it unnecessary to #undef two of
+them in the linker script.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
 v7: New.
 
---- a/xen/arch/arm/arm32/mmu/head.S
-+++ b/xen/arch/arm/arm32/mmu/head.S
-@@ -160,6 +160,13 @@
- .endm
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
+@@ -53,17 +53,9 @@
  
- .section .text.idmap, "ax", %progbits
-+/*
-+ * Code below wants to all live in the section established above.  Annotations
-+ * from xen/linkage.h therefore may not switch sections (honoring
-+ * CONFIG_CC_SPLIT_SECTIONS).  Override the respective macro.
-+ */
-+#undef SYM_PUSH_SECTION
-+#define SYM_PUSH_SECTION(name, attr)
+ /* Linkage for ARM */
+ #ifdef __ASSEMBLY__
+-#define ALIGN .balign CONFIG_FUNCTION_ALIGNMENT
+-#define ENTRY(name)                             \
+-  .globl name;                                  \
+-  ALIGN;                                        \
+-  name:
+ #define GLOBAL(name)                            \
+   .globl name;                                  \
+   name:
+-#define ENDPROC(name) \
+-  .type name, %function; \
+-  END(name)
+ #endif
  
- /*
-  * Rebuild the boot pagetable's first-level entries. The structure
-@@ -174,7 +181,7 @@
-  *
-  * Clobbers r0 - r5
-  */
--create_page_tables:
-+FUNC_LOCAL(create_page_tables)
-         /* Prepare the page-tables for mapping Xen */
-         mov_w r0, XEN_VIRT_START
+ #include <xen/const.h>
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -6,8 +6,6 @@
+ #include <xen/lib.h>
+ #include <xen/xen.lds.h>
+ #include <asm/page.h>
+-#undef ENTRY
+-#undef ALIGN
  
-@@ -263,7 +270,7 @@ use_temporary_mapping:
+ ENTRY(start)
  
-         mov   r12, #1                /* r12 := temporary mapping created */
-         mov   pc, lr
--ENDPROC(create_page_tables)
-+END(create_page_tables)
- 
- /*
-  * Turn on the Data Cache and the MMU. The function will return
-@@ -276,7 +283,7 @@ ENDPROC(create_page_tables)
-  *
-  * Clobbers r0 - r5
-  */
--enable_mmu:
-+FUNC_LOCAL(enable_mmu)
-         PRINT("- Turning on paging -\r\n")
- 
-         /*
-@@ -346,7 +353,7 @@ enable_mmu:
-         teq   r12, #0
-         beq   remove_identity_mapping
-         b     remove_temporary_mapping
--ENDPROC(enable_mmu)
-+END(enable_mmu)
- 
- /*
-  * Switch to the runtime mapping. The logic depends on whether the
-@@ -366,7 +373,7 @@ ENDPROC(enable_mmu)
-  *
-  * Clobbers r0 - r4
-  */
--switch_to_runtime_mapping:
-+FUNC_LOCAL(switch_to_runtime_mapping)
-         /*
-          * Jump to the runtime mapping if the virt and phys are not
-          * clashing
-@@ -411,7 +418,7 @@ ready_to_switch:
-         PRINT_ID("- Jumping to runtime address -\r\n")
- 
-         mov   pc, lr
--ENDPROC(switch_to_runtime_mapping)
-+END(switch_to_runtime_mapping)
- 
- /*
-  * Enable mm (turn on the data cache and the MMU) for secondary CPUs.
-@@ -428,7 +435,7 @@ ENDPROC(switch_to_runtime_mapping)
-  *
-  * Clobbers r0 - r6
-  */
--ENTRY(enable_secondary_cpu_mm)
-+FUNC(enable_secondary_cpu_mm)
-         mov   r6, lr
- 
-         bl    create_page_tables
-@@ -456,7 +463,7 @@ ENTRY(enable_secondary_cpu_mm)
- 
-         /* Return to the virtual address requested by the caller. */
-         mov   pc, r6
--ENDPROC(enable_secondary_cpu_mm)
-+END(enable_secondary_cpu_mm)
- 
- /*
-  * Enable mm (turn on the data cache and the MMU) for the boot CPU.
-@@ -474,7 +481,7 @@ ENDPROC(enable_secondary_cpu_mm)
-  *
-  * Clobbers r0 - r6
-  */
--ENTRY(enable_boot_cpu_mm)
-+FUNC(enable_boot_cpu_mm)
-         mov   r6, lr
- 
- #ifdef CONFIG_EARLY_PRINTK
-@@ -491,7 +498,7 @@ ENTRY(enable_boot_cpu_mm)
-         /* Address in the runtime mapping to jump to after the MMU is enabled */
-         mov   lr, r6
-         b     enable_mmu
--ENDPROC(enable_boot_cpu_mm)
-+END(enable_boot_cpu_mm)
- 
- /*
-  * Remove the 1:1 map from the page-tables. It is not easy to keep track
-@@ -503,7 +510,7 @@ ENDPROC(enable_boot_cpu_mm)
-  *
-  * Clobbers r0 - r3
-  */
--remove_identity_mapping:
-+FUNC_LOCAL(remove_identity_mapping)
-         PRINT("- Removing the identity mapping -\r\n")
- 
-         /* r2:r3 := invalid page-table entry */
-@@ -518,14 +525,14 @@ remove_identity_mapping:
- 
-         flush_xen_tlb_local r0
-         mov   pc, lr
--ENDPROC(remove_identity_mapping)
-+END(remove_identity_mapping)
- 
- /*
-  * Remove the temporary mapping of Xen starting at TEMPORARY_XEN_VIRT_START.
-  *
-  * Clobbers r0 - r3
-  */
--remove_temporary_mapping:
-+FUNC_LOCAL(remove_temporary_mapping)
-         PRINT("- Removing the temporary mapping -\r\n")
- 
-         /* r2:r3 := invalid page-table entry */
-@@ -541,13 +548,14 @@ remove_temporary_mapping:
-         flush_xen_tlb_local r0
- 
-         mov  pc, lr
--ENDPROC(remove_temporary_mapping)
-+END(remove_temporary_mapping)
- 
- /* Fail-stop */
--fail:   PRINT("- Boot failed -\r\n")
-+FUNC_LOCAL(fail)
-+        PRINT("- Boot failed -\r\n")
- 1:      wfe
-         b     1b
--ENDPROC(fail)
-+END(fail)
- 
- /*
-  * Switch TTBR
-@@ -555,7 +563,7 @@ ENDPROC(fail)
-  *
-  * TODO: This code does not comply with break-before-make.
-  */
--ENTRY(switch_ttbr)
-+FUNC(switch_ttbr)
-         dsb                            /* Ensure the flushes happen before
-                                         * continuing */
-         isb                            /* Ensure synchronization with previous
-@@ -579,4 +587,4 @@ ENTRY(switch_ttbr)
-         isb
- 
-         mov pc, lr
--ENDPROC(switch_ttbr)
-+END(switch_ttbr)
 
 
