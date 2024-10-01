@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D2FCE7D08
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 10:10:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.807962.1219727 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9037CE7D0B
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 10:23:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.807972.1219747 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svZpy-0007YA-TF; Tue, 01 Oct 2024 10:10:34 +0000
+	id 1sva1u-0001yB-7q; Tue, 01 Oct 2024 10:22:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 807962.1219727; Tue, 01 Oct 2024 10:10:34 +0000
+Received: by outflank-mailman (output) from mailman id 807972.1219747; Tue, 01 Oct 2024 10:22:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svZpy-0007Y3-Pv; Tue, 01 Oct 2024 10:10:34 +0000
-Received: by outflank-mailman (input) for mailman id 807962;
- Tue, 01 Oct 2024 10:10:33 +0000
+	id 1sva1u-0001y4-5E; Tue, 01 Oct 2024 10:22:54 +0000
+Received: by outflank-mailman (input) for mailman id 807972;
+ Tue, 01 Oct 2024 10:22:52 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jjk+=Q5=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1svZpx-0007Xx-15
- for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 10:10:33 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=i7H1=Q5=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
+ id 1sva1s-0001jp-Oe
+ for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 10:22:52 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6414bf63-7fdd-11ef-a0ba-8be0dac302b0;
- Tue, 01 Oct 2024 12:10:31 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a90188ae58eso679089366b.1
- for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 03:10:31 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c297c2d2sm681559266b.183.2024.10.01.03.10.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Oct 2024 03:10:30 -0700 (PDT)
+ id 1d165702-7fdf-11ef-a0ba-8be0dac302b0;
+ Tue, 01 Oct 2024 12:22:51 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a910860e4dcso12575966b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 03:22:51 -0700 (PDT)
+Received: from fziglio-desktop.. ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a93c297bceesm681772966b.187.2024.10.01.03.22.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Oct 2024 03:22:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,159 +47,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6414bf63-7fdd-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 1d165702-7fdf-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1727777431; x=1728382231; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=atOslSW3AtxX2me6x5sBuob6Y4+ZjY9ICKjrMew4/uw=;
-        b=DUDxzIJXBrdZjTUCypgv29yEzM2yyEU26fQE97pp4JyYqwHYFN2KtFHYveFl5Vj8AR
-         nWSFA+CSDUYGdmV8V2gEEOANaff90YYIC1vRdIFzYVFliyLvGClJ4RsMIuY/1quahQiT
-         ykmCBOqYC6lQJhrK3acgp+z8vbwzK1mtn3L8yqncBc8lyakQDBchPtzaWbMrBOoru0ZO
-         TXfak9jhmSjJjDf2K4wirCiw9ROLxidbPPMuA6w4sdvywcWtp7H6GmAoVAQSiyCSJ0os
-         6zWebRReNS3pF4PdA9GPPYiX/FNWw9bxVA5snUcXMvsEG/bbARbWTyUaL9YICr+GEiM7
-         4PYQ==
+        d=cloud.com; s=cloud; t=1727778171; x=1728382971; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ec7IJ82TAUIZ24f2ims91e1OgLvu1KLsDjKQelIoz6M=;
+        b=AxfW4w+Ek5GuRpQAUFLX3Ylx2uWAv66BDdWLSHWUf5Qim9Jjivudazw/TPHTv1GDoO
+         x3Qpn1Hu/0oJazBtRhhYzLxQS+63GyJv6tYwDXdT69FHCwkofJFPexcxYZHk6SDIoc05
+         /N5tSXASTkc6xQsivUGyUNWP+YSfUw0NemRao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727777431; x=1728382231;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=atOslSW3AtxX2me6x5sBuob6Y4+ZjY9ICKjrMew4/uw=;
-        b=dV65iOhlKvR5f06tRrIt4VBwPRcfhNSyTseT6cP3fRy1AGIVsSnE1uccB3sfRaIGMG
-         FdB8Y1nNUjZJLvFtghzT8j+FsU5MAhIf5TXZfYQai0l0lpQdcDFiy/7FHSr1E74KW2mz
-         pvawwpVgiarEeac7WoLGLGiDjA4E/Ew+j35i2Vssh9orC8qaQn3YWKWrDYXntTuhmGS8
-         OXDzqb/WLAwh4pkw3OGz927wabVrF8Y8ikxkm1/EZ3B9WX7ubzxtTR11fbbHjW5E2Hfw
-         tcsVhbC2UHk/lpWbmltNWhvTrJ+9UGWNvdzZmadqx0BNKxKR0DeQ0nta+1CkEX9UghLp
-         gFEQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXZh9iAu9SwP+FEqaJxR/YzCkWk3M0RIZIkT/2NH5ZU06NuQaunY6fiNHA1UvUQpk6+yW2qUchA7C4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyDhfEEUxmHnJKfrFRUT25E6HLdPdChAIZfL9WHrGijZZUqzg9B
-	jGSfKKLU6Q2Oh9fOWTFeGoSWX7OOvVoWqsaRFnvW+6lNDFObQGyfWo2CW1I/Zw==
-X-Google-Smtp-Source: AGHT+IGtKAJQiZOtQl7EHpRDFj7csdz0MZxIUW8EKHW1OWdg5WUKZ/2zKwNyTqjXt4rYMbepLy4FEQ==
-X-Received: by 2002:a17:907:7283:b0:a8d:2faf:d33d with SMTP id a640c23a62f3a-a93c48f1d0dmr1356728166b.9.1727777431138;
-        Tue, 01 Oct 2024 03:10:31 -0700 (PDT)
-Message-ID: <7bb25b6d-3905-4d5a-a8df-6d258ce7b001@suse.com>
-Date: Tue, 1 Oct 2024 12:10:30 +0200
+        d=1e100.net; s=20230601; t=1727778171; x=1728382971;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ec7IJ82TAUIZ24f2ims91e1OgLvu1KLsDjKQelIoz6M=;
+        b=jKL6EznCconoWSnirehBToE1JEvItmJZeUcK71Z5XmIaJPXoPjc95EjjxAKrgjBEjq
+         VdTKVg+OipCY5BwjrhoV/bOUR7cZQKzwbwXDSOhYB93zZ/DBf21PmI/xEKUYHG6CCtOT
+         i064mYENkWNT3v5cqn26SJHyIrBbSOgcY4k/zN2Q+s6geGrZ5d6ZRmwopIPRcZE1KnOy
+         dWDODit2Dx0enxFIXEVXiFNkJ9gTD5/gJEOSyNb4zAqgIqS4mSM+S4Z7RYVF2GaaTFzX
+         k7zrJEcfIcv5mOUymGZNNbLCp/qxxFWSvPDgyGhSoG8RXXZNgCX678Odi8L4vu9IO6aT
+         /8Sw==
+X-Gm-Message-State: AOJu0YzQa5PMq1HYmdqicFivO3KU7YIIsIXomVKCXkaWZl9AFkPVbDAC
+	DsOyVtFBGzp9mtQwtgjl03ktVCoWBi53G7dIJukCOvbqLjyeTfZN4zcvY4pU6A6sdoNbrE4P2Pj
+	i
+X-Google-Smtp-Source: AGHT+IF1U8NDFlUm54dcpcQqlhSm+jEmpqFqtZ2h9Gbsw0Pp3jHFUvwvT3lgGlczbatDf8BJACaBqw==
+X-Received: by 2002:a17:907:7e8e:b0:a8d:555f:eeda with SMTP id a640c23a62f3a-a93c48e7fc2mr1768741066b.8.1727778170687;
+        Tue, 01 Oct 2024 03:22:50 -0700 (PDT)
+From: Frediano Ziglio <frediano.ziglio@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v7 2/2] x86/boot: Improve MBI2 structure check
+Date: Tue,  1 Oct 2024 11:22:39 +0100
+Message-Id: <20241001102239.2609631-3-frediano.ziglio@cloud.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241001102239.2609631-1-frediano.ziglio@cloud.com>
+References: <20241001102239.2609631-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86: prefer RDTSCP in rdtsc_ordered()
-From: Jan Beulich <jbeulich@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cae006a7-c1be-4608-a011-dda1fb4a0312@suse.com>
- <14ab2f50-e58c-4cb4-b976-4cb5ec14d908@citrix.com>
- <90f1dda1-b06e-40e6-be6b-ea99acba875f@suse.com>
- <07699749-f9b6-4d78-874c-ff61d76810dc@citrix.com>
- <a1b772bb-113b-4bb3-b58a-09bda98f5c2b@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <a1b772bb-113b-4bb3-b58a-09bda98f5c2b@suse.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 01.10.2024 12:02, Jan Beulich wrote:
-> On 01.10.2024 11:45, Andrew Cooper wrote:
->> On 01/10/2024 9:12 am, Jan Beulich wrote:
->>> On 30.09.2024 18:40, Andrew Cooper wrote:
->>>> On 30/09/2024 4:08 pm, Jan Beulich wrote:
->>>>> --- a/xen/arch/x86/include/asm/msr.h
->>>>> +++ b/xen/arch/x86/include/asm/msr.h
->>>>> @@ -108,18 +108,30 @@ static inline uint64_t rdtsc(void)
->>>>>  
->>>>>  static inline uint64_t rdtsc_ordered(void)
->>>>>  {
->>>>> -	/*
->>>>> -	 * The RDTSC instruction is not ordered relative to memory access.
->>>>> -	 * The Intel SDM and the AMD APM are both vague on this point, but
->>>>> -	 * empirically an RDTSC instruction can be speculatively executed
->>>>> -	 * before prior loads.  An RDTSC immediately after an appropriate
->>>>> -	 * barrier appears to be ordered as a normal load, that is, it
->>>>> -	 * provides the same ordering guarantees as reading from a global
->>>>> -	 * memory location that some other imaginary CPU is updating
->>>>> -	 * continuously with a time stamp.
->>>>> -	 */
->>>>> -	alternative("lfence", "mfence", X86_FEATURE_MFENCE_RDTSC);
->>>>> -	return rdtsc();
->>>>> +    uint64_t low, high, aux;
->>>>> +
->>>>> +    /*
->>>>> +     * The RDTSC instruction is not ordered relative to memory access.
->>>>> +     * The Intel SDM and the AMD APM are both vague on this point, but
->>>>> +     * empirically an RDTSC instruction can be speculatively executed
->>>>> +     * before prior loads.
->>>> This part of the comment is stale now.  For RDTSC, AMD state:
->>>>
->>>> "This instruction is not serializing. Therefore, there is no guarantee
->>>> that all instructions have completed at the time the time-stamp counter
->>>> is read."
->>>>
->>>> and for RDTSCP:
->>>>
->>>> "Unlike the RDTSC instruction, RDTSCP forces all older instructions to
->>>> retire before reading the time-stamp counter."
->>>>
->>>> i.e. it's dispatch serialising, given our new post-Spectre terminology.
->>> I don't read that as truly "dispatch serializing";
->>
->> That is precisely what dispatch serialising is and means.
->>
->> Both LFENCE and RDTSCP wait at dispatch until they're the only
->> instruction in the pipeline.  That is how they get the property of
->> waiting for all older instructions to retire before executing.
->>
->>> both Intel and AMD
->>> leave open whether subsequent insns would also be affected, or whether
->>> those could pass the RDTSCP.
->>
->> Superscalar pipelines which can dispatch more than one uop per cycle can
->> issue LFENCE/RDTSCP concurrently with younger instructions.
->>
->> This is why LFENCE; JMP * was retracted as safe alternative to
->> retpoline, and why the Intel docs call out explicitly that you need
->> LFENCE following the RDTSC(P) if you want it to complete before
->> subsequent instructions start.
-> 
-> Yet what you describe still only puts in place a relationship between
-> RDTSCP and what follows. What I was saying is that there's no guarantee
-> that insns following RDTSCP can't actually execute not only in parallel
-> with RDTSCP, but also in parallel with / ahead of earlier insns. Aiui
-> LFENCE makes this guarantee. IOW in
-> 
-> 	ADD ...; LFENCE; SUB ...
-> 
-> the SUB is guaranteed to dispatch only after the ADD, whereas in
-> 
-> 	ADD ...; RDTSCP; SUB ...
-> 
-> there doesn't appear to be such a guarantee; the only guarantee here is
-> for RDTSCP to dispatch after the ADD.
+Tag structure should contain at least the tag header.
+Entire tag structure must be contained inside MBI2 data.
 
-And btw, if there wasn't this difference, why would RDTSCP be any better
-than LFENCE; RDTSC?
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+---
+Changes since v6:
+- compare against total_size every time to avoid overflows.
+---
+ xen/arch/x86/efi/mbi2.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Jan
+diff --git a/xen/arch/x86/efi/mbi2.c b/xen/arch/x86/efi/mbi2.c
+index 55a1777483..935f3ae5d0 100644
+--- a/xen/arch/x86/efi/mbi2.c
++++ b/xen/arch/x86/efi/mbi2.c
+@@ -13,6 +13,7 @@ efi_multiboot2_prelude(uint32_t magic, const multiboot2_fixed_t *mbi)
+     EFI_HANDLE ImageHandle = NULL;
+     EFI_SYSTEM_TABLE *SystemTable = NULL;
+     const char *cmdline = NULL;
++    const void *const mbi_raw = (const void *)mbi;
+     bool have_bs = false;
+ 
+     if ( magic != MULTIBOOT2_BOOTLOADER_MAGIC )
+@@ -21,7 +22,9 @@ efi_multiboot2_prelude(uint32_t magic, const multiboot2_fixed_t *mbi)
+     /* Skip Multiboot2 information fixed part. */
+     tag = _p(ROUNDUP((unsigned long)(mbi + 1), MULTIBOOT2_TAG_ALIGN));
+ 
+-    for ( ; (const void *)tag - (const void *)mbi < mbi->total_size &&
++    for ( ; (const void *)(tag + 1) - mbi_raw <= mbi->total_size &&
++            tag->size >= sizeof(*tag) &&
++            (const void *)tag + tag->size - mbi_raw <= mbi->total_size &&
+             tag->type != MULTIBOOT2_TAG_TYPE_END;
+           tag = _p(ROUNDUP((unsigned long)tag + tag->size,
+                    MULTIBOOT2_TAG_ALIGN)) )
+-- 
+2.34.1
+
 
