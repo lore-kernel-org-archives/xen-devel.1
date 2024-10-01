@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1649CEB2D0
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 12:38:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.808071.1219904 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAF4FCE7D12
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 12:38:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.808075.1219935 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svc9G-00043H-9c; Tue, 01 Oct 2024 12:38:38 +0000
+	id 1svc9K-0004ip-Bz; Tue, 01 Oct 2024 12:38:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 808071.1219904; Tue, 01 Oct 2024 12:38:38 +0000
+Received: by outflank-mailman (output) from mailman id 808075.1219935; Tue, 01 Oct 2024 12:38:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svc9G-000424-5E; Tue, 01 Oct 2024 12:38:38 +0000
-Received: by outflank-mailman (input) for mailman id 808071;
- Tue, 01 Oct 2024 12:38:36 +0000
+	id 1svc9K-0004fx-0D; Tue, 01 Oct 2024 12:38:42 +0000
+Received: by outflank-mailman (input) for mailman id 808075;
+ Tue, 01 Oct 2024 12:38:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qrgx=Q5=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1svc9E-0002va-J8
- for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 12:38:36 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
+ id 1svc9I-0002va-5g
+ for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 12:38:40 +0000
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [2a00:1450:4864:20::531])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 12f91f00-7ff2-11ef-99a2-01e77a169b0f;
- Tue, 01 Oct 2024 14:38:35 +0200 (CEST)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-539983beb19so2209963e87.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 05:38:34 -0700 (PDT)
+ id 151b346c-7ff2-11ef-99a2-01e77a169b0f;
+ Tue, 01 Oct 2024 14:38:38 +0200 (CEST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5c88370ad7bso5521583a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 05:38:38 -0700 (PDT)
 Received: from mewpvdipd1023.corp.cloud.com ([52.166.251.127])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c88248ac03sm6132630a12.70.2024.10.01.05.38.32
+ 4fb4d7f45d1cf-5c88248ac03sm6132630a12.70.2024.10.01.05.38.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 05:38:33 -0700 (PDT)
+ Tue, 01 Oct 2024 05:38:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12f91f00-7ff2-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 151b346c-7ff2-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727786314; x=1728391114; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1727786318; x=1728391118; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=PVd0quTcANw6t1kPQZgBl2vPnkcivNSH35qvlQWbNfA=;
-        b=d1p7yQe3xHatPjEYCzn6b2xgMpJ0fz4dbYZ11N/EwPxxg0+YPYeSu/rQDyinPWgD/y
-         xyfdA5Cyqxb3P1mqKagn1u0BvTV8WaIKw0zsvsEMsGta6ucHyIptU+kROKjiluRjqg2I
-         hwP6TO79KTfoFhiLEw4digJ1Uh/V+HRdUQI/M=
+        bh=H8EtNk4UqEXSM3dt95fWtQHR5BEwc5KpYhDQ/7z9ZIg=;
+        b=goCwjj2dpIOVLsDW/6sF3h7MStEiElPR8T7ZoSYDURY6h8XAEzAq6aHSB4KYggVUyS
+         yDhMyyP4ICusImwxclGhYCJ6DPskEc0VnwQzxZxpo6Yt2yDDainjHSHR5PYhrmxqHH80
+         3cVVqsc4iv6ZrSlGM2jxjNbrYLELGdz8Szt44=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727786314; x=1728391114;
+        d=1e100.net; s=20230601; t=1727786318; x=1728391118;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=PVd0quTcANw6t1kPQZgBl2vPnkcivNSH35qvlQWbNfA=;
-        b=wYoHyKABAPFzqjQ6TpAvUyKsZzhlTWfV5YE6cPrhqLF68f3n7oKULeXH7jg043ypx2
-         NJAZfU6gNlrV+oPLc16CLnvL6M+QFieD7Exu2VmsAUVfgTp7FQgPKQ0AoifnKHe08ce9
-         unP3UwPQistP5m4/l4Y3oUebC/nYMyqx7PunWK+6Ln+0NUkz+f9jD1lsxeweFeTIbTkZ
-         bOmTKymlYQeugrzjicsaqbWuiNbzzC2/rUGAwPUxnaQSxcWfeSEC28t6lH+ITuO6eofe
-         uG9roLs7mUtpGVzm3djjByU1Qtf2vhM8WYfWrrOFtkm5lBHAgH49N/E5KtBSZW8XoFzV
-         uBdw==
-X-Gm-Message-State: AOJu0Yxs09mBlSn2FBWOODqkpcYgud/SlF+xn8X3glJuNZuHXNuDb3KG
-	RpZugWBzZpzmYPdVamTJ/Hy03J0kGygdJkoaBCQdug5sGJ7F7r3alhc4y9vqVVSwDDSVANSerwk
-	k0XU=
-X-Google-Smtp-Source: AGHT+IFIZdsgDe7OkBunGV418GKNfPWk9qD5xmnGo3xLqm5hKLnrUAbXKEYZofkVNRAbG8Z0A2xCSg==
-X-Received: by 2002:a05:6512:401e:b0:536:a4d8:917b with SMTP id 2adb3069b0e04-5389fc3a859mr8129082e87.19.1727786313930;
-        Tue, 01 Oct 2024 05:38:33 -0700 (PDT)
+        bh=H8EtNk4UqEXSM3dt95fWtQHR5BEwc5KpYhDQ/7z9ZIg=;
+        b=XN3DiPZ36q7UdDjy/S39tAG4YW8vPxHUzgU28wH7HAvim8fy71f0BjmvqKa0zcyNLf
+         VW92inYJoUijoP2Qwz+ZUiHqwFxaWrIC3PqFoujIFlnWESfvqWlBJ1U3rki1TiGa6XCq
+         gH/dRHvpIw0VdvQrROw9iONiNXLZE+rtfu6CSGE2Mb832SIjxHVtneiHb9Om32/byIzl
+         mhWdJS4m+RnI7TgpfsoYTRF4yEkySj1RuxZah3MhkkjyI80U0mDHxyAJ0PtYFAT54Hzo
+         b5P34n37HQL4w+atCY4kEV1PiRT8EMGMljKzf23hB6p1Zuk8NGML3gPhxIsBota8aJIs
+         R4+A==
+X-Gm-Message-State: AOJu0Yxi7s+tHuJO9QbHaCZfvX8zFQ3pKqvYH2Km8+FYda2/CS5G4FG/
+	ZU/r3EQGKWbNXh0W9NmaHBOuvgGTfKFCNOx71yx+uJoLjnnoGHbmY9vdaawJqhO1ZUA4lRlz0zP
+	cbiI=
+X-Google-Smtp-Source: AGHT+IFMXDOf/Otw2ehiWab//1ldD17rCzZeR9uZJz+L6BvKjmRUSVvVl6d+NaZy3/Zdw6iDz2ysIA==
+X-Received: by 2002:a05:6402:518b:b0:5c8:957a:b1e5 with SMTP id 4fb4d7f45d1cf-5c8957ab4fdmr6601697a12.16.1727786317202;
+        Tue, 01 Oct 2024 05:38:37 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -82,225 +82,225 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v6 05/11] tools/hvmloader: Retrieve (x2)APIC IDs from the APs themselves
-Date: Tue,  1 Oct 2024 13:38:01 +0100
-Message-ID: <20241001123807.605-6-alejandro.vallejo@cloud.com>
+Subject: [PATCH v6 09/11] xen/x86: Derive topologically correct x2APIC IDs from the policy
+Date: Tue,  1 Oct 2024 13:38:05 +0100
+Message-ID: <20241001123807.605-10-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20241001123807.605-1-alejandro.vallejo@cloud.com>
 References: <20241001123807.605-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Make it so the APs expose their own APIC IDs in a LUT. We can use that
-LUT to populate the MADT, decoupling the algorithm that relates CPU IDs
-and APIC IDs from hvmloader.
+Implements the helper for mapping vcpu_id to x2apic_id given a valid
+topology in a policy. The algo is written with the intention of
+extending it to leaves 0x1f and extended 0x26 in the future.
 
-While at this also remove ap_callin, as writing the APIC ID may serve
-the same purpose.
+Toolstack doesn't set leaf 0xb and the HVM default policy has it
+cleared, so the leaf is not implemented. In that case, the new helper
+just returns the legacy mapping.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- tools/firmware/hvmloader/config.h       |  5 ++-
- tools/firmware/hvmloader/hvmloader.c    |  6 +--
- tools/firmware/hvmloader/mp_tables.c    |  4 +-
- tools/firmware/hvmloader/smp.c          | 54 ++++++++++++++++++++-----
- tools/firmware/hvmloader/util.c         |  2 +-
- tools/include/xen-tools/common-macros.h |  5 +++
- 6 files changed, 60 insertions(+), 16 deletions(-)
+ tools/tests/cpu-policy/test-cpu-policy.c | 68 +++++++++++++++++++++
+ xen/include/xen/lib/x86/cpu-policy.h     | 11 ++++
+ xen/lib/x86/policy.c                     | 76 ++++++++++++++++++++++++
+ 3 files changed, 155 insertions(+)
 
-diff --git a/tools/firmware/hvmloader/config.h b/tools/firmware/hvmloader/config.h
-index cd716bf39245..17666a1fdb01 100644
---- a/tools/firmware/hvmloader/config.h
-+++ b/tools/firmware/hvmloader/config.h
-@@ -4,6 +4,8 @@
- #include <stdint.h>
- #include <stdbool.h>
- 
-+#include <xen/hvm/hvm_info_table.h>
-+
- enum virtual_vga { VGA_none, VGA_std, VGA_cirrus, VGA_pt };
- extern enum virtual_vga virtual_vga;
- 
-@@ -48,8 +50,9 @@ extern uint8_t ioapic_version;
- 
- #define IOAPIC_ID           0x01
- 
-+extern uint32_t CPU_TO_X2APICID[HVM_MAX_VCPUS];
-+
- #define LAPIC_BASE_ADDRESS  0xfee00000
--#define LAPIC_ID(vcpu_id)   ((vcpu_id) * 2)
- 
- #define PCI_ISA_DEVFN       0x08    /* dev 1, fn 0 */
- #define PCI_ISA_IRQ_MASK    0x0c20U /* ISA IRQs 5,10,11 are PCI connected */
-diff --git a/tools/firmware/hvmloader/hvmloader.c b/tools/firmware/hvmloader/hvmloader.c
-index f8af88fabf24..0ff190ff4ec0 100644
---- a/tools/firmware/hvmloader/hvmloader.c
-+++ b/tools/firmware/hvmloader/hvmloader.c
-@@ -224,7 +224,7 @@ static void apic_setup(void)
- 
-     /* 8259A ExtInts are delivered through IOAPIC pin 0 (Virtual Wire Mode). */
-     ioapic_write(0x10, APIC_DM_EXTINT);
--    ioapic_write(0x11, SET_APIC_ID(LAPIC_ID(0)));
-+    ioapic_write(0x11, SET_APIC_ID(CPU_TO_X2APICID[0]));
+diff --git a/tools/tests/cpu-policy/test-cpu-policy.c b/tools/tests/cpu-policy/test-cpu-policy.c
+index 870f7ecee0e5..ae7fc46a47d2 100644
+--- a/tools/tests/cpu-policy/test-cpu-policy.c
++++ b/tools/tests/cpu-policy/test-cpu-policy.c
+@@ -785,6 +785,73 @@ static void test_topo_from_parts(void)
+     }
  }
  
- struct bios_info {
-@@ -341,11 +341,11 @@ int main(void)
- 
-     printf("CPU speed is %u MHz\n", get_cpu_mhz());
- 
-+    smp_initialise();
-+
-     apic_setup();
-     pci_setup();
- 
--    smp_initialise();
--
-     perform_tests();
- 
-     if ( bios->bios_info_setup )
-diff --git a/tools/firmware/hvmloader/mp_tables.c b/tools/firmware/hvmloader/mp_tables.c
-index 77d3010406d0..494f5bb3d813 100644
---- a/tools/firmware/hvmloader/mp_tables.c
-+++ b/tools/firmware/hvmloader/mp_tables.c
-@@ -198,8 +198,10 @@ static void fill_mp_config_table(struct mp_config_table *mpct, int length)
- /* fills in an MP processor entry for VCPU 'vcpu_id' */
- static void fill_mp_proc_entry(struct mp_proc_entry *mppe, int vcpu_id)
- {
-+    ASSERT(CPU_TO_X2APICID[vcpu_id] < 0xFF );
-+
-     mppe->type = ENTRY_TYPE_PROCESSOR;
--    mppe->lapic_id = LAPIC_ID(vcpu_id);
-+    mppe->lapic_id = CPU_TO_X2APICID[vcpu_id];
-     mppe->lapic_version = 0x11;
-     mppe->cpu_flags = CPU_FLAG_ENABLED;
-     if ( vcpu_id == 0 )
-diff --git a/tools/firmware/hvmloader/smp.c b/tools/firmware/hvmloader/smp.c
-index 1b940cefd071..b0d4da111904 100644
---- a/tools/firmware/hvmloader/smp.c
-+++ b/tools/firmware/hvmloader/smp.c
-@@ -29,7 +29,34 @@
- 
- #include <xen/vcpu.h>
- 
--static int ap_callin;
-+/**
-+ * Lookup table of x2APIC IDs.
-+ *
-+ * Each entry is populated its respective CPU as they come online. This is required
-+ * for generating the MADT with minimal assumptions about ID relationships.
-+ */
-+uint32_t CPU_TO_X2APICID[HVM_MAX_VCPUS];
-+
-+/** Tristate about x2apic being supported. -1=unknown */
-+static int has_x2apic = -1;
-+
-+static uint32_t read_apic_id(void)
++static void test_x2apic_id_from_vcpu_id_success(void)
 +{
-+    uint32_t apic_id;
++    static const struct test {
++        unsigned int vcpu_id;
++        unsigned int threads_per_core;
++        unsigned int cores_per_pkg;
++        uint32_t x2apic_id;
++        uint8_t x86_vendor;
++    } tests[] = {
++        {
++            .vcpu_id = 3, .threads_per_core = 3, .cores_per_pkg = 8,
++            .x2apic_id = 1 << 2,
++        },
++        {
++            .vcpu_id = 6, .threads_per_core = 3, .cores_per_pkg = 8,
++            .x2apic_id = 2 << 2,
++        },
++        {
++            .vcpu_id = 24, .threads_per_core = 3, .cores_per_pkg = 8,
++            .x2apic_id = 1 << 5,
++        },
++        {
++            .vcpu_id = 35, .threads_per_core = 3, .cores_per_pkg = 8,
++            .x2apic_id = (35 % 3) | (((35 / 3) % 8) << 2) | ((35 / 24) << 5),
++        },
++        {
++            .vcpu_id = 96, .threads_per_core = 7, .cores_per_pkg = 3,
++            .x2apic_id = (96 % 7) | (((96 / 7) % 3) << 3) | ((96 / 21) << 5),
++        },
++    };
 +
-+    if ( has_x2apic )
-+        cpuid(0xb, NULL, NULL, NULL, &apic_id);
-+    else
++    const uint8_t vendors[] = {
++        X86_VENDOR_INTEL,
++        X86_VENDOR_AMD,
++        X86_VENDOR_CENTAUR,
++        X86_VENDOR_SHANGHAI,
++        X86_VENDOR_HYGON,
++    };
++
++    printf("Testing x2apic id from vcpu id success:\n");
++
++    /* Perform the test run on every vendor we know about */
++    for ( size_t i = 0; i < ARRAY_SIZE(vendors); ++i )
 +    {
-+        cpuid(1, NULL, &apic_id, NULL, NULL);
-+        apic_id >>= 24;
++        for ( size_t j = 0; j < ARRAY_SIZE(tests); ++j )
++        {
++            struct cpu_policy policy = { .x86_vendor = vendors[i] };
++            const struct test *t = &tests[j];
++            uint32_t x2apic_id;
++            int rc = x86_topo_from_parts(&policy, t->threads_per_core,
++                                         t->cores_per_pkg);
++
++            if ( rc ) {
++                fail("FAIL[%d] - 'x86_topo_from_parts() failed", rc);
++                continue;
++            }
++
++            x2apic_id = x86_x2apic_id_from_vcpu_id(&policy, t->vcpu_id);
++            if ( x2apic_id != t->x2apic_id )
++                fail("FAIL - '%s cpu%u %u t/c %u c/p'. bad x2apic_id: expected=%u actual=%u\n",
++                     x86_cpuid_vendor_to_str(policy.x86_vendor),
++                     t->vcpu_id, t->threads_per_core, t->cores_per_pkg,
++                     t->x2apic_id, x2apic_id);
++        }
++    }
++}
++
+ int main(int argc, char **argv)
+ {
+     printf("CPU Policy unit tests\n");
+@@ -803,6 +870,7 @@ int main(int argc, char **argv)
+     test_is_compatible_failure();
+ 
+     test_topo_from_parts();
++    test_x2apic_id_from_vcpu_id_success();
+ 
+     if ( nr_failures )
+         printf("Done: %u failures\n", nr_failures);
+diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
+index 116b305a1d7f..6fe19490d290 100644
+--- a/xen/include/xen/lib/x86/cpu-policy.h
++++ b/xen/include/xen/lib/x86/cpu-policy.h
+@@ -542,6 +542,17 @@ int x86_cpu_policies_are_compatible(const struct cpu_policy *host,
+                                     const struct cpu_policy *guest,
+                                     struct cpu_policy_errors *err);
+ 
++/**
++ * Calculates the x2APIC ID of a vCPU given a CPU policy
++ *
++ * If the policy lacks leaf 0xb falls back to legacy mapping of apic_id=cpu*2
++ *
++ * @param p          CPU policy of the domain.
++ * @param id         vCPU ID of the vCPU.
++ * @returns x2APIC ID of the vCPU.
++ */
++uint32_t x86_x2apic_id_from_vcpu_id(const struct cpu_policy *p, uint32_t id);
++
+ /**
+  * Synthesise topology information in `p` given high-level constraints
+  *
+diff --git a/xen/lib/x86/policy.c b/xen/lib/x86/policy.c
+index 16b09a427841..6dd9a2900ad7 100644
+--- a/xen/lib/x86/policy.c
++++ b/xen/lib/x86/policy.c
+@@ -2,6 +2,82 @@
+ 
+ #include <xen/lib/x86/cpu-policy.h>
+ 
++static uint32_t parts_per_higher_scoped_level(const struct cpu_policy *p,
++                                              size_t lvl)
++{
++    /*
++     * `nr_logical` reported by Intel is the number of THREADS contained in
++     * the next topological scope. For example, assuming a system with 2
++     * threads/core and 3 cores/module in a fully symmetric topology,
++     * `nr_logical` at the core level will report 6. Because it's reporting
++     * the number of threads in a module.
++     *
++     * On AMD/Hygon, nr_logical is already normalized by the higher scoped
++     * level (cores/complex, etc) so we can return it as-is.
++     */
++    if ( p->x86_vendor != X86_VENDOR_INTEL || !lvl )
++        return p->topo.subleaf[lvl].nr_logical;
++
++    return p->topo.subleaf[lvl].nr_logical /
++           p->topo.subleaf[lvl - 1].nr_logical;
++}
++
++uint32_t x86_x2apic_id_from_vcpu_id(const struct cpu_policy *p, uint32_t id)
++{
++    uint32_t shift = 0, x2apic_id = 0;
++
++    /* In the absence of topology leaves, fallback to traditional mapping */
++    if ( !p->topo.subleaf[0].type )
++        return id * 2;
++
++    /*
++     * `id` means different things at different points of the algo
++     *
++     * At lvl=0: global thread_id (same as vcpu_id)
++     * At lvl=1: global core_id
++     * At lvl=2: global socket_id (actually complex_id in AMD, module_id
++     *                             in Intel, but the name is inconsequential)
++     *
++     *                 +--+
++     *            ____ |#0| ______           <= 1 socket
++     *           /     +--+       \+--+
++     *       __#0__              __|#1|__    <= 2 cores/socket
++     *      /   |  \        +--+/  +-|+  \
++     *    #0   #1   #2      |#3|    #4    #5 <= 3 threads/core
++     *                      +--+
++     *
++     * ... and so on. Global in this context means that it's a unique
++     * identifier for the whole topology, and not relative to the level
++     * it's in. For example, in the diagram shown above, we're looking at
++     * thread #3 in the global sense, though it's #0 within its core.
++     *
++     * Note that dividing a global thread_id by the number of threads per
++     * core returns the global core id that contains it. e.g: 0, 1 or 2
++     * divided by 3 returns core_id=0. 3, 4 or 5 divided by 3 returns core
++     * 1, and so on. An analogous argument holds for higher levels. This is
++     * the property we exploit to derive x2apic_id from vcpu_id.
++     *
++     * NOTE: `topo` is currently derived from leaf 0xb, which is bound to two
++     * levels, but once we track leaves 0x1f (or extended 0x26) there will be a
++     * few more. The algorithm is written to cope with that case.
++     */
++    for ( uint32_t i = 0; i < ARRAY_SIZE(p->topo.raw); i++ )
++    {
++        uint32_t nr_parts;
++
++        if ( !p->topo.subleaf[i].type )
++            /* sentinel subleaf */
++            break;
++
++        nr_parts = parts_per_higher_scoped_level(p, i);
++        x2apic_id |= (id % nr_parts) << shift;
++        id /= nr_parts;
++        shift = p->topo.subleaf[i].id_shift;
 +    }
 +
-+    /* Never called by cpu0, so should never return 0 */
-+    ASSERT(apic_id);
-+
-+    return apic_id;
++    return (id << shift) | x2apic_id;
 +}
- 
- static void cpu_setup(unsigned int cpu)
- {
-@@ -37,13 +64,17 @@ static void cpu_setup(unsigned int cpu)
-     cacheattr_init();
-     printf("done.\n");
- 
--    if ( !cpu ) /* Used on the BSP too */
-+    /* The BSP exits early because its APIC ID is known to be zero */
-+    if ( !cpu )
-         return;
- 
-     wmb();
--    ap_callin = 1;
-+    ACCESS_ONCE(CPU_TO_X2APICID[cpu]) = read_apic_id();
- 
--    /* After this point, the BSP will shut us down. */
-+    /*
-+     * After this point the BSP will shut us down. A write to
-+     * CPU_TO_X2APICID[cpu] signals the BSP to bring down `cpu`.
-+     */
- 
-     for ( ;; )
-         asm volatile ( "hlt" );
-@@ -54,10 +85,6 @@ static void boot_cpu(unsigned int cpu)
-     static uint8_t ap_stack[PAGE_SIZE] __attribute__ ((aligned (16)));
-     static struct vcpu_hvm_context ap;
- 
--    /* Initialise shared variables. */
--    ap_callin = 0;
--    wmb();
--
-     /* Wake up the secondary processor */
-     ap = (struct vcpu_hvm_context) {
-         .mode = VCPU_HVM_MODE_32B,
-@@ -90,10 +117,11 @@ static void boot_cpu(unsigned int cpu)
-         BUG();
- 
-     /*
--     * Wait for the secondary processor to complete initialisation.
-+     * Wait for the secondary processor to complete initialisation,
-+     * which is signaled by its x2APIC ID being written to the LUT.
-      * Do not touch shared resources meanwhile.
-      */
--    while ( !ap_callin )
-+    while ( !ACCESS_ONCE(CPU_TO_X2APICID[cpu]) )
-         cpu_relax();
- 
-     /* Take the secondary processor offline. */
-@@ -104,6 +132,12 @@ static void boot_cpu(unsigned int cpu)
- void smp_initialise(void)
- {
-     unsigned int i, nr_cpus = hvm_info->nr_vcpus;
-+    uint32_t ecx;
 +
-+    cpuid(1, NULL, NULL, &ecx, NULL);
-+    has_x2apic = (ecx >> 21) & 1;
-+    if ( has_x2apic )
-+        printf("x2APIC supported\n");
- 
-     printf("Multiprocessor initialisation:\n");
-     cpu_setup(0);
-diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
-index d3b3f9038e64..7e1e105d79dd 100644
---- a/tools/firmware/hvmloader/util.c
-+++ b/tools/firmware/hvmloader/util.c
-@@ -827,7 +827,7 @@ static void acpi_mem_free(struct acpi_ctxt *ctxt,
- 
- static uint32_t acpi_lapic_id(unsigned cpu)
+ static unsigned int order(unsigned int n)
  {
--    return LAPIC_ID(cpu);
-+    return CPU_TO_X2APIC_ID[cpu];
- }
- 
- void hvmloader_acpi_build_tables(struct acpi_config *config,
-diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
-index 60912225cb7a..336c6309d96e 100644
---- a/tools/include/xen-tools/common-macros.h
-+++ b/tools/include/xen-tools/common-macros.h
-@@ -108,4 +108,9 @@
- #define get_unaligned(ptr)      get_unaligned_t(typeof(*(ptr)), ptr)
- #define put_unaligned(val, ptr) put_unaligned_t(typeof(*(ptr)), val, ptr)
- 
-+#define __ACCESS_ONCE(x) ({                             \
-+            (void)(typeof(x))0; /* Scalar typecheck. */ \
-+            (volatile typeof(x) *)&(x); })
-+#define ACCESS_ONCE(x) (*__ACCESS_ONCE(x))
-+
- #endif	/* __XEN_TOOLS_COMMON_MACROS__ */
+     ASSERT(n); /* clz(0) is UB */
 -- 
 2.46.0
 
