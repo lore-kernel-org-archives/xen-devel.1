@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12FF5CE7D1E
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 12:38:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.808070.1219888 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B291CE7D1B
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 12:38:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.808067.1219867 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svc9F-0003UZ-1l; Tue, 01 Oct 2024 12:38:37 +0000
+	id 1svc9D-0003AC-QD; Tue, 01 Oct 2024 12:38:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 808070.1219888; Tue, 01 Oct 2024 12:38:36 +0000
+Received: by outflank-mailman (output) from mailman id 808067.1219867; Tue, 01 Oct 2024 12:38:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1svc9E-0003TD-PC; Tue, 01 Oct 2024 12:38:36 +0000
-Received: by outflank-mailman (input) for mailman id 808070;
- Tue, 01 Oct 2024 12:38:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1svc9D-0003A5-N3; Tue, 01 Oct 2024 12:38:35 +0000
+Received: by outflank-mailman (input) for mailman id 808067;
+ Tue, 01 Oct 2024 12:38:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qrgx=Q5=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1svc9D-0002vk-2Y
- for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 12:38:35 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 12413986-7ff2-11ef-a0ba-8be0dac302b0;
- Tue, 01 Oct 2024 14:38:33 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c88b5c375fso4186274a12.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 05:38:33 -0700 (PDT)
+ id 1svc9C-0002va-1O
+ for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 12:38:34 +0000
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [2a00:1450:4864:20::633])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 10f95c99-7ff2-11ef-99a2-01e77a169b0f;
+ Tue, 01 Oct 2024 14:38:31 +0200 (CEST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a8a706236bfso450422566b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 05:38:31 -0700 (PDT)
 Received: from mewpvdipd1023.corp.cloud.com ([52.166.251.127])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c88248ac03sm6132630a12.70.2024.10.01.05.38.32
+ 4fb4d7f45d1cf-5c88248ac03sm6132630a12.70.2024.10.01.05.38.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 05:38:32 -0700 (PDT)
+ Tue, 01 Oct 2024 05:38:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,92 +47,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12413986-7ff2-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 10f95c99-7ff2-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727786313; x=1728391113; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1727786311; x=1728391111; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GfxQ3gahpFHXiNK/v5LJIeKG4M7IQS/lIxTTHFsFmsQ=;
-        b=WJP0XnI7o5Hq4PzXexDYaOXAjpeaJRb9nQlSR/vBUiyVjj2Ep7iB8NYG/7M0zkihB9
-         K4eNxacHOQ1CfvD9Odha4U9D5Q4P4kagHCDDn+u5fGm6NpMUPpr92fnjbRYNCC6zjD9C
-         LfVBNfBnOJXKhFtrk516cZDbM7WAe9f5L9gTk=
+        bh=6CLVhmVmABNvSZWpsVfABNNcbL+sBo7kkWt6jjP+OBE=;
+        b=NJ/szdGP36LpKNG2bVcKYbzIORaDGjl3I5iEdHoxURAQ+JQDnqAMWBSSWAd4XGInYj
+         FUTUEwaXk46QijxCWi+MwoZna31DnD6ooBABZMFT0OfG2+QRx/Ei2vvvraqell4aAfMd
+         WpgPdoe3mie20w0bFOYjwOAbdVcYY6XfD3XHk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727786313; x=1728391113;
+        d=1e100.net; s=20230601; t=1727786311; x=1728391111;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=GfxQ3gahpFHXiNK/v5LJIeKG4M7IQS/lIxTTHFsFmsQ=;
-        b=Aso8bWHj947CPHtwYIkNOZpXwYJ6IcQlK85+GpDxT3WOFM6HpqYadMDBpCVJIkzMnU
-         vZRcTf3QQ7uiFdHkdRKW+Dhqj0/1O+AHUN9QIjsIOZuQ2ZDuUIjsmvAUi8k9AfbGvv1z
-         fc+jfTcfhtKMKIenJfbAFCzV/8BguvwD3a/OirbW3s/o4kABOIY4hlXmBBSA09+tWvxc
-         bYqVJ0VpIZBylhx7ZxZoyXQc3BI7gdMO4ch/Ufd4LQ+VsDMyA6TuEwHIcuyWKeTf2nwT
-         +1JKgRmLcTpDXkT7tdpcF9Sp1fLSRWnFSjaOt6griUdc0iU9EmzL2G5LD9OukHPrW5Tp
-         gc/g==
-X-Gm-Message-State: AOJu0YxZCGfcXlylURgyAhidVIU9xN3Oo4ldDak4ALaOc/iyzDKFxCpf
-	A67KuDR72rQ1azfLDMAYsMG3IFHE6SBFmzse+hW2PB74XyTWOvQ79Vxgpcok//03RLw9HT70cX6
-	u078=
-X-Google-Smtp-Source: AGHT+IHYv9UQ1NH0BPBBzMwPwVzMJinEFh4rgxIxc5jc8prduA3Nll6k7VEnn7OBCAcZK3PkJF/3yA==
-X-Received: by 2002:a05:6402:2812:b0:5c8:8538:b770 with SMTP id 4fb4d7f45d1cf-5c88538bbbfmr13313247a12.8.1727786312880;
-        Tue, 01 Oct 2024 05:38:32 -0700 (PDT)
+        bh=6CLVhmVmABNvSZWpsVfABNNcbL+sBo7kkWt6jjP+OBE=;
+        b=YsYFmaE5QVS03GvPJYvGQAMWwWBavPBxXVQRhUCyGJY7YvrTFicZns+6L4nuSlLSPf
+         iV9yMc1qvfthAZOv/qYPPwax28NAG/S/5/9RmcGimBmbMiu12N4QVTZBD1KosjLASQSq
+         espHzA95wfEoHV88j7DHRkwU7YSfLW5KdAF+PcJdgBXCfw2R4f3ShaGSEunpica7rWWS
+         SYJUeoJpA0duHq9OAz9CDOBLjQgxfUKItlmmvUiiRRT8OsgYY8qHGJLDdIZYMy+sd20X
+         dcaZ5m6WdCJTccguUVcPUHcA+NsJZjJFy8g9vZh5b3tXmM/13s13XlvzATAywNfuHhSp
+         GJQA==
+X-Gm-Message-State: AOJu0YzYinCn532Z0LEhSC4Dg12R30Adfnqi5AAxo3w46dTe9KQfNrdx
+	Ag7SZz7+i02fsLxnJ+DzC3PO954TgJqB34i5RP95It9L1z6mO3IqeDwVvL7FoD/xzmSiL3yKuPo
+	kA2U=
+X-Google-Smtp-Source: AGHT+IGBeJtPNsZn+19IIMd92YMaOk91ubtWYoKiFy2/Ft20p7KGSCFMPdE+4Gfcl9TA9oN7LlEddw==
+X-Received: by 2002:a05:6402:2743:b0:5c8:9553:a1fb with SMTP id 4fb4d7f45d1cf-5c89553a26emr13424439a12.9.1727786310712;
+        Tue, 01 Oct 2024 05:38:30 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v6 04/11] xen/x86: Add supporting code for uploading LAPIC contexts during domain create
-Date: Tue,  1 Oct 2024 13:38:00 +0100
-Message-ID: <20241001123807.605-5-alejandro.vallejo@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v6 01/11] lib/x86: Relax checks about policy compatibility
+Date: Tue,  1 Oct 2024 13:37:57 +0100
+Message-ID: <20241001123807.605-2-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20241001123807.605-1-alejandro.vallejo@cloud.com>
 References: <20241001123807.605-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If toolstack were to upload LAPIC contexts as part of domain creation it
-would encounter a problem were the architectural state does not reflect
-the APIC ID in the hidden state. This patch ensures updates to the
-hidden state trigger an update in the architectural registers so the
-APIC ID in both is consistent.
+Allow a guest policy have up to leaf 0xb even if the host doesn't.
+Otherwise it's not possible to show leaf 0xb to guests we're emulating
+an x2APIC for on old AMD machines.
+
+No externally visible changes though because toolstack doesn't yet
+populate that leaf.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- xen/arch/x86/hvm/vlapic.c | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ tools/tests/cpu-policy/test-cpu-policy.c |  6 +++++-
+ xen/lib/x86/policy.c                     | 11 ++++++++++-
+ 2 files changed, 15 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 02570f9dd63a..a8183c3023da 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -1640,7 +1640,27 @@ static int cf_check lapic_load_hidden(struct domain *d, hvm_domain_context_t *h)
+diff --git a/tools/tests/cpu-policy/test-cpu-policy.c b/tools/tests/cpu-policy/test-cpu-policy.c
+index 301df2c00285..9216010b1c5d 100644
+--- a/tools/tests/cpu-policy/test-cpu-policy.c
++++ b/tools/tests/cpu-policy/test-cpu-policy.c
+@@ -586,6 +586,10 @@ static void test_is_compatible_success(void)
+                 .platform_info.cpuid_faulting = true,
+             },
+         },
++        {
++            .name = "Host missing leaf 0xb, Guest wanted",
++            .guest.basic.max_leaf = 0xb,
++        },
+     };
+     struct cpu_policy_errors no_errors = INIT_CPU_POLICY_ERRORS;
  
-     s->loaded.hw = 1;
-     if ( s->loaded.regs )
-+    {
-+        /*
-+         * We already processed architectural regs in lapic_load_regs(), so
-+         * this must be a migration. Fix up inconsistencies from any older Xen.
-+         */
-         lapic_load_fixup(s);
-+    }
-+    else
-+    {
-+        /*
-+         * We haven't seen architectural regs so this could be a migration or a
-+         * plain domain create. In the domain create case it's fine to modify
-+         * the architectural state to align it to the APIC ID that was just
-+         * uploaded and in the migrate case it doesn't matter because the
-+         * architectural state will be replaced by the LAPIC_REGS ctx later on.
-+         */
-+        if ( vlapic_x2apic_mode(s) )
-+            set_x2apic_id(s);
-+        else
-+            vlapic_set_reg(s, APIC_ID, SET_xAPIC_ID(s->hw.x2apic_id));
-+    }
+@@ -614,7 +618,7 @@ static void test_is_compatible_failure(void)
+     } tests[] = {
+         {
+             .name = "Host basic.max_leaf out of range",
+-            .guest.basic.max_leaf = 1,
++            .guest.basic.max_leaf = 0xc,
+             .e = { 0, -1, -1 },
+         },
+         {
+diff --git a/xen/lib/x86/policy.c b/xen/lib/x86/policy.c
+index f033d22785be..63bc96451d2c 100644
+--- a/xen/lib/x86/policy.c
++++ b/xen/lib/x86/policy.c
+@@ -15,7 +15,16 @@ int x86_cpu_policies_are_compatible(const struct cpu_policy *host,
+ #define FAIL_MSR(m) \
+     do { e.msr = (m); goto out; } while ( 0 )
  
-     hvm_update_vlapic_mode(v);
+-    if ( guest->basic.max_leaf > host->basic.max_leaf )
++    /*
++     * Old AMD hardware doesn't expose topology information in leaf 0xb. We
++     * want to emulate that leaf with credible information because it must be
++     * present on systems in which we emulate the x2APIC.
++     *
++     * For that reason, allow the max basic guest leaf to be larger than the
++     * hosts' up until 0xb.
++     */
++    if ( guest->basic.max_leaf > 0xb &&
++         guest->basic.max_leaf > host->basic.max_leaf )
+         FAIL_CPUID(0, NA);
  
+     if ( guest->feat.max_subleaf > host->feat.max_subleaf )
 -- 
 2.46.0
 
