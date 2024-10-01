@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3FCACE7D0C
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 10:23:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.807971.1219737 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5D22CE7D0F
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Oct 2024 10:42:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.807988.1219767 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sva1t-0001k7-1j; Tue, 01 Oct 2024 10:22:53 +0000
+	id 1svaKE-00076v-0q; Tue, 01 Oct 2024 10:41:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 807971.1219737; Tue, 01 Oct 2024 10:22:53 +0000
+Received: by outflank-mailman (output) from mailman id 807988.1219767; Tue, 01 Oct 2024 10:41:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sva1s-0001jz-Uy; Tue, 01 Oct 2024 10:22:52 +0000
-Received: by outflank-mailman (input) for mailman id 807971;
- Tue, 01 Oct 2024 10:22:52 +0000
+	id 1svaKD-00076o-UE; Tue, 01 Oct 2024 10:41:49 +0000
+Received: by outflank-mailman (input) for mailman id 807988;
+ Tue, 01 Oct 2024 10:41:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=i7H1=Q5=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1sva1s-0001jj-1R
- for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 10:22:52 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ <SRS0=+oTF=Q5=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1svaKC-00076i-ML
+ for xen-devel@lists.xenproject.org; Tue, 01 Oct 2024 10:41:48 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1c156599-7fdf-11ef-99a2-01e77a169b0f;
- Tue, 01 Oct 2024 12:22:49 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a8a897bd4f1so805995666b.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 03:22:49 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
+ id c18d6e69-7fe1-11ef-99a2-01e77a169b0f;
+ Tue, 01 Oct 2024 12:41:46 +0200 (CEST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a8d6d0fe021so932203966b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Oct 2024 03:41:46 -0700 (PDT)
+Received: from [10.125.226.166] ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c297bceesm681772966b.187.2024.10.01.03.22.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 03:22:48 -0700 (PDT)
+ a640c23a62f3a-a93c2997507sm685061966b.204.2024.10.01.03.41.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Oct 2024 03:41:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,96 +47,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1c156599-7fdf-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: c18d6e69-7fe1-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727778169; x=1728382969; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eUcmc6Mu2acDS7R5soe8iHrJBA3YNhBJnOk4lBLiwKQ=;
-        b=e+OmQVaW2cIYrLy0PipAxTlyWAlqzQ8EhA/scXyFprl9581hKDW7py6cMa5lOeOB1G
-         T7Wu5r6mxfSRHIGT1YfWiv+rCsfujxZd2Qwvy/llPkL90+iJ71bP2+jcelOZ7fJJYfO4
-         ZbqKI7Z5l5T4HkwBP8VSY2GVVa1L9DbmvFgyo=
+        d=citrix.com; s=google; t=1727779306; x=1728384106; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=U7dYBa1OCF97IFZB5isrQzgpYlDBKbJlJLWcO7+y57k=;
+        b=E9UTJ1TwCTm6ELuc/x5EigqTlcYDZ4UNi43DoroOLn0sAENGUnLw2XBdtXcxb9WktE
+         kP3fTtK7qsFcyN9H4wsQjmLdQPeI5B2Xu00WmuhWL/sKtcpikg0jD4rIpr+3zEaLWfbF
+         v5uQ8FEnZV5s4AoQgkFxU3paFQPnwDV93pvYg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727778169; x=1728382969;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=eUcmc6Mu2acDS7R5soe8iHrJBA3YNhBJnOk4lBLiwKQ=;
-        b=uF5/ngHfynOyFKCvuzRjI8ijXlKDj59SonkscFC8KqJgZKs5CBKkVKpJ+Xwh/E2REh
-         LH6mP/fkqI13qUSQ+j9HSaYCFoArGm+9crq7moF1COQgyNvhZNsFz7OsQu25B1wR+iMg
-         87JSXM1174f8n4ffOsmimrn/ea0jt5RqS9ReVhMVbog52z7dfs0Cmk40pGt/3ucA8gPp
-         aavWfZ3X/nbYaYXkScvJeh6RPo8QYnnjeio3Xk/HbrfPv5fPRBCmVCs6fNL7ZskkMqk5
-         r0bv0aYGgsaOA0e171Ol+DK+L1aon2il7ESXss9qnjc9GJcqi3K2+WN6APrzNWOjcnhF
-         oxmA==
-X-Gm-Message-State: AOJu0YxFLQMBHxJdT4jFjKlaW3LFpiIDv/0X7w9isQ/kGChAoIoEAesa
-	voJQLo2RGGsHi9/teS/8ecKQT9btmU3TRRl7zMHhv1+ac1kF4mkanrInVoQCpBuHYR/gpQrxvh9
-	m
-X-Google-Smtp-Source: AGHT+IGM3oiRAZWP3Yh57gYLyxG8rdQf6QI0EzQ9bvtGLBsIczXlvBfUScpmjgXArtV0xbnlLLbI5A==
-X-Received: by 2002:a17:907:7f8a:b0:a86:82e2:8c64 with SMTP id a640c23a62f3a-a93c492a76amr1688049766b.35.1727778169071;
-        Tue, 01 Oct 2024 03:22:49 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v7 0/2] x86/boot: Reduce assembly code
-Date: Tue,  1 Oct 2024 11:22:37 +0100
-Message-Id: <20241001102239.2609631-1-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1727779306; x=1728384106;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=U7dYBa1OCF97IFZB5isrQzgpYlDBKbJlJLWcO7+y57k=;
+        b=rXLSMAlEYsfxO/OCFI+bHEzQuqujPEg6EPjTPrSLJnn7RE+U6LigRd49UeoNjuaL8S
+         userUceiNFfrAjJFmtarrrkYFpfWr29jIaHMQC0vcYHLQZ8gK7w249ODFYxDfpHwvmcr
+         wkGdAdPoq+Ts8rr++0pXdWHPwjtqAwSOom1Pe0S7lszhccNY735VFKU/Z/TRpfcVKsGD
+         ytcIlWVc9E0/Vmv15k16AlN1ihgCgVjftXB+TJxZqqbagmGjSNrp5wl1ZoTt4nxshhR0
+         BDXpVBwMRaSSaAtF3t8/o5K6uZ8N6Snr6LGkIWcs+7KgJ76v+LPle68BrZWXrJA8p6Va
+         uRUQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWF9Tbf8dxPqy7T9jhJTHe5i5getwMzyVVA3M6gDurUcn9nrzvyzgS8SBk23VXv+KZs9y/UIyhgsr0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxkQ58VZzVpKLEqksVw/yW2lFE0jH6sVbXE+8GrZTvi4hepszLj
+	xlGldC0373pHehnZNIJ6kWI0vSpvotREQvhD7HCCfHQiebW4elspkAFrzEQKh6JaCD2fmiBHrGW
+	sGbA=
+X-Google-Smtp-Source: AGHT+IFA+wQltF9yXP8Opi96p5KojU3zgbE9NzIOmJUnJsFQNdf2AagdRkQFZ7mxUNLeTPg78eyjfA==
+X-Received: by 2002:a17:907:7fa9:b0:a7a:b561:3575 with SMTP id a640c23a62f3a-a93c4aec902mr1777075466b.56.1727779305806;
+        Tue, 01 Oct 2024 03:41:45 -0700 (PDT)
+Message-ID: <5cf7ef35-1887-494a-89c4-faa8f4f3e575@citrix.com>
+Date: Tue, 1 Oct 2024 11:41:43 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] x86/pv: Handle #PF correctly when reading the IO
+ permission bitmap
+To: Jan Beulich <jbeulich@suse.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20240930161837.1248144-1-andrew.cooper3@citrix.com>
+ <20240930161837.1248144-3-andrew.cooper3@citrix.com>
+ <4045d42b-76dd-464d-af26-85fd9b0b9f05@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <4045d42b-76dd-464d-af26-85fd9b0b9f05@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This series came from part of the work of removing duplications between
-boot code and rewriting part of code from assembly to C.
-Rewrites EFI code in pure C.
+On 01/10/2024 8:36 am, Jan Beulich wrote:
+> On 30.09.2024 18:18, Andrew Cooper wrote:
+>> RFC: Should we make the boundary check be (port + bytes + 8)?  That would be
+>> more correct, but liable to break unsuspecting VMs.  Maybe we should just
+>> comment our way out of it.
+> What would the "+ 8" be intended to express? (I take it you mean ...
+>
+>> --- a/xen/arch/x86/pv/emul-priv-op.c
+>> +++ b/xen/arch/x86/pv/emul-priv-op.c
+>> @@ -169,29 +169,26 @@ static intguest_io_okay(unsigned int port, unsigned int bytes,
+>>  
+>>      if ( (port + bytes) <= v->arch.pv.iobmp_limit )
+> ... this check, which looks correct to me as is. In particular with the
+> "+ 8" there would appear to be no way to access ports at the very top of
+> the 64k range anymore, as PHYSDEVOP_set_iobitmap handling caps nr_ports
+> at 64k. IOW I think "commenting our way out of it" is the only possible
+> approach.)
 
-Changes since v1, more details in specific commits:
-- style updates;
-- comments and descriptions improvements;
-- other improvements.
+This is actually a horrid corner case, different to what I was thinking
+yesterday.
 
-Changes since v2:
-- rebased on master, resolved conflicts;
-- add comment on trampoline section.
+In a real TSS, the CPU doesn't read past the TR limit.  Such accesses
+are turned into a permission failure.
 
-Changes since v3:
-- changed new function name;
-- declare efi_multiboot2 in a separate header;
-- distinguish entry point from using magic number;
-- other minor changes (see commens in commits).
+But in Xen, guest_io_okay() does read one byte past iobmp_limit.
 
-Changes since v4:
-- rebase on staging;
-- set %fs and %gs as other segment registers;
-- style and other changes.
+Previously, we'd consume what was there if it was accessible, or declare
+a permissions failure if it was inaccessible.  Now, we'll throw #PF back
+to the kernel with %cr2 beyond the the limit.
 
-Changes since v5:
-- fixed a typo.
 
-Changes since v6:
-- remove merged patch;
-- comment and style;
-- change some pointer checks to avoid overflows;
-- rename parse-mbi2.c to mbi2.c.
+It's not OK for Xen to be reading past the given limit; it's not how
+real CPUs behave.  Part of the problem is that, even since it's
+introduction in 013351bd7 (2006), the public interface was named
+nr_ports while Xen's internal field was called iobmp_limit.
 
-Frediano Ziglio (2):
-  x86/boot: Rewrite EFI/MBI2 code partly in C
-  x86/boot: Improve MBI2 structure check
+In terms of how it's used these days in PV guests:
 
- xen/arch/x86/boot/head.S       | 146 +++++++--------------------------
- xen/arch/x86/efi/Makefile      |   1 +
- xen/arch/x86/efi/efi-boot.h    |   7 +-
- xen/arch/x86/efi/mbi2.c        |  66 +++++++++++++++
- xen/arch/x86/efi/stub.c        |  10 +--
- xen/arch/x86/include/asm/efi.h |  18 ++++
- 6 files changed, 123 insertions(+), 125 deletions(-)
- create mode 100644 xen/arch/x86/efi/mbi2.c
- create mode 100644 xen/arch/x86/include/asm/efi.h
+Linux points the bitmap into it's real TSS, and sets nr_ports to either
+0 or 65536 depending on whether the userspace task is permitted to use
+IO ports or not.
 
--- 
-2.34.1
+NetBSD doesn't seem to use PHYSDEVOP_set_iobitmap at all, and only uses
+PHYSDEVOP_set_iopl.
 
+MiniOS uses neither.
+
+
+I think Xen's internal variable wants renaming to not be a limit, and
+the comment for PHYSDEVOP_set_iobitmap wants extending to note that,
+like a real TSS, Xen might read one byte beyond the end of the bitmap.
+
+I think this wants doing in a separate patch.  Thoughts?
+
+> With or without such a comment added
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+Thanks.
+
+~Andrew
 
