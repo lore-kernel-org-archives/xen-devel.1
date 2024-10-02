@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ED46CF8540
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Oct 2024 22:23:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.809066.1221217 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259A1CF8546
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Oct 2024 22:45:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.809082.1221226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sw7kj-0005nt-9I; Wed, 02 Oct 2024 22:23:25 +0000
+	id 1sw86E-0000qI-V6; Wed, 02 Oct 2024 22:45:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 809066.1221217; Wed, 02 Oct 2024 22:23:25 +0000
+Received: by outflank-mailman (output) from mailman id 809082.1221226; Wed, 02 Oct 2024 22:45:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sw7kj-0005nm-4M; Wed, 02 Oct 2024 22:23:25 +0000
-Received: by outflank-mailman (input) for mailman id 809066;
- Wed, 02 Oct 2024 22:23:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sw7kh-0005n3-6x; Wed, 02 Oct 2024 22:23:23 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sw7kg-0002HB-W6; Wed, 02 Oct 2024 22:23:22 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1sw7kg-00089B-HH; Wed, 02 Oct 2024 22:23:22 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1sw7kg-0004gG-Gp; Wed, 02 Oct 2024 22:23:22 +0000
+	id 1sw86E-0000qB-SA; Wed, 02 Oct 2024 22:45:38 +0000
+Received: by outflank-mailman (input) for mailman id 809082;
+ Wed, 02 Oct 2024 22:45:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=VgkK=Q6=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1sw86D-0000q5-Lr
+ for xen-devel@lists.xenproject.org; Wed, 02 Oct 2024 22:45:37 +0000
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
+ [2a00:1450:4864:20::541])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 09e91c26-8110-11ef-a0ba-8be0dac302b0;
+ Thu, 03 Oct 2024 00:45:35 +0200 (CEST)
+Received: by mail-ed1-x541.google.com with SMTP id
+ 4fb4d7f45d1cf-5c881aa669fso230422a12.0
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Oct 2024 15:45:36 -0700 (PDT)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a93c297bcd7sm922644666b.169.2024.10.02.15.45.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Oct 2024 15:45:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,84 +47,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=oxbPv8M5c4M5qz0U/sY3zm2n0GsVHSXPfk0ocz5Q15Q=; b=exTkD91/U2qY9Fy6yGwggrS3GE
-	xphcb4D0qYAhJxr+DTE/ab6lwDwkRZi5Yj/Jrc+rqflogMb8DnzaWAIp9n8rysT25Sk4vup9Ui+SK
-	I+iB5Qqymxh8ddvjg7wKh4W80NnVKT7L0xFuAd+3Vw7NlfLrDdVriWjWV4KsEpI4eTT4=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-187940-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 09e91c26-8110-11ef-a0ba-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1727909135; x=1728513935; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XQKinIj+ao5XakTxYELDZMWrgaWd31i2wYJlaitgELo=;
+        b=R0XU5zUvCq5hdLM31TFaaAddE1zrG7TelNmU8nPpIwlNtcfgcjy/Pb8sww4Oa0bl9N
+         vXvRtSCWB4woS6DTbYe0y8MpGVXFojKM1+BrU7gjCSioNOy/pqhzRtPgSuzN9mY8IjE4
+         jUrl1w186NbbJCVbH2s5wVmdKDkl90ZT1vp6Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727909135; x=1728513935;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XQKinIj+ao5XakTxYELDZMWrgaWd31i2wYJlaitgELo=;
+        b=abgBq6BxdUxrBGV3OS+TkJHU9Kf7DsXMvayhta6e4k0x5lZbPgwb6szUtLRmqdAHds
+         aowJimmpgqAryjDLZoqcSz1GDfMVHi3eOPcLGpfRjWnbvuLeHK+kq5KEF0FfI3oE4vcu
+         ZPSqITzAyHNnb1TUaL6LTQhgAZeIr7zkOeJufc3rq4v8znmN26oqO/RvzSpyi5BLXN1U
+         dxEmk0OTi4Tsk8ndr6nIhh5GP4rtGo8vOgbW8AP1RVTlTuZXjBdbtlB7j5QhPT+17+z8
+         qlYTeqecZkkrEyw6l+5syYqZeveTHYPQPX8N4/wltHxZyL8O7/2G0y/ZiTZoJtAai3N2
+         vvrQ==
+X-Gm-Message-State: AOJu0YyMVyIMPZctkW2+7PhjEXSWRrA54/NgiUjnqs+BxvAE1fbZUOiT
+	3j5m8FPHXNZQQ9SccWvmvA/GaLQeEyuNmT6RHnXs8gRijIFmVmeJXS0+iR7OC+Q98zyFUOL58YP
+	eTnOPpA==
+X-Google-Smtp-Source: AGHT+IGfc0DbP0ymIcklqw1/Gm6EkY+/u+eOb82gmg3nt66glGRxeMogouIzOXE7s+wFgB0KcL4pVw==
+X-Received: by 2002:a17:907:7fa7:b0:a8a:9195:922d with SMTP id a640c23a62f3a-a98f7fe6002mr519583366b.0.1727909134404;
+        Wed, 02 Oct 2024 15:45:34 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Jan Beulich <JBeulich@suse.com>
+Subject: [PATCH] stubdom: Fix newlib build with GCC-14
+Date: Wed,  2 Oct 2024 23:45:31 +0100
+Message-Id: <20241002224531.1966914-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 187940: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=41190d2ceb03b12ffc17a66c04de519c26a6052a
-X-Osstest-Versions-That:
-    xen=b102c9f1ce29262f33400920eeb41f23394ea99d
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 02 Oct 2024 22:23:22 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 187940 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/187940/
+Based on a fix from OpenSUSE, but adjusted to be Clang-compatible too.  Pass
+-Wno-implicit-function-declaration library-wide rather than using local GCC
+pragmas.
 
-Failures :-/ but no regressions.
+Fix of copy_past_newline() to avoid triggering -Wstrict-prototypes.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+Link: https://build.opensuse.org/request/show/1178775
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Doug Goldstein <cardoe@cardoe.com>
+CC: Jan Beulich <JBeulich@suse.com>
 
-version targeted for testing:
- xen                  41190d2ceb03b12ffc17a66c04de519c26a6052a
-baseline version:
- xen                  b102c9f1ce29262f33400920eeb41f23394ea99d
+The OpenSUSE Tumbleweed containers already reproduce this issue:
 
-Last test of basis   187933  2024-10-02 07:02:09 Z    0 days
-Testing same since   187940  2024-10-02 19:02:18 Z    0 days    1 attempts
+https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1479445899
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
+This wants backporting to all trees in due course.
+---
+ stubdom/Makefile                           |  2 ++
+ stubdom/newlib-fix-copy_past_newline.patch | 10 ++++++++++
+ 2 files changed, 12 insertions(+)
+ create mode 100644 stubdom/newlib-fix-copy_past_newline.patch
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 8c503c2bf8de..f8c31fd35d0d 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -97,10 +97,12 @@ newlib-$(NEWLIB_VERSION): newlib-$(NEWLIB_VERSION).tar.gz
+ 	patch -d $@ -p1 < newlib-disable-texinfo.patch
+ 	patch -d $@ -p1 < newlib-cygmon-gmon.patch
+ 	patch -d $@ -p1 < newlib-makedoc.patch
++	patch -d $@ -p1 < newlib-fix-copy_past_newline.patch
+ 	find $@ -type f | xargs perl -i.bak \
+ 		-pe 's/\b_(tzname|daylight|timezone)\b/$$1/g'
+ 	touch $@
+ 
++NEWLIB_CFLAGS += -Wno-implicit-function-declaration
+ NEWLIB_STAMPFILE=$(CROSS_ROOT)/$(GNU_TARGET_ARCH)-xen-elf/lib/libc.a
+ .PHONY: cross-newlib
+ cross-newlib: $(NEWLIB_STAMPFILE)
+diff --git a/stubdom/newlib-fix-copy_past_newline.patch b/stubdom/newlib-fix-copy_past_newline.patch
+new file mode 100644
+index 000000000000..f8452480bc80
+--- /dev/null
++++ b/stubdom/newlib-fix-copy_past_newline.patch
+@@ -0,0 +1,10 @@
++--- newlib-1.16.0/newlib/doc/makedoc.c.orig
+++++ newlib-1.16.0/newlib/doc/makedoc.c
++@@ -798,6 +798,7 @@ DEFUN( iscommand,(ptr, idx),
++ }
++
++
+++static unsigned int
++ DEFUN(copy_past_newline,(ptr, idx, dst),
++       string_type *ptr AND
++       unsigned int idx AND
 
+base-commit: 41190d2ceb03b12ffc17a66c04de519c26a6052a
+-- 
+2.39.5
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   b102c9f1ce..41190d2ceb  41190d2ceb03b12ffc17a66c04de519c26a6052a -> smoke
 
