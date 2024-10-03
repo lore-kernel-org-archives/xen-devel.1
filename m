@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 848FECF34BE
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 18:57:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.809817.1222345 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F003CF34C0
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 18:57:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.809822.1222396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swR0b-0007ZD-SW; Thu, 03 Oct 2024 18:57:05 +0000
+	id 1swR0m-0000X7-6f; Thu, 03 Oct 2024 18:57:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 809817.1222345; Thu, 03 Oct 2024 18:57:05 +0000
+Received: by outflank-mailman (output) from mailman id 809822.1222396; Thu, 03 Oct 2024 18:57:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swR0b-0007Z6-Pt; Thu, 03 Oct 2024 18:57:05 +0000
-Received: by outflank-mailman (input) for mailman id 809817;
- Thu, 03 Oct 2024 18:57:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1swR0m-0000Wb-2c; Thu, 03 Oct 2024 18:57:16 +0000
+Received: by outflank-mailman (input) for mailman id 809822;
+ Thu, 03 Oct 2024 18:57:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3wyt=Q7=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1swR0a-0007Yu-6r
- for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 18:57:04 +0000
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [2a00:1450:4864:20::230])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4715a050-81b9-11ef-a0ba-8be0dac302b0;
- Thu, 03 Oct 2024 20:57:03 +0200 (CEST)
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2facf48166bso18749831fa.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 11:57:03 -0700 (PDT)
+ id 1swR0k-00082k-As
+ for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 18:57:14 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4caddc82-81b9-11ef-99a2-01e77a169b0f;
+ Thu, 03 Oct 2024 20:57:12 +0200 (CEST)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2fac63abf63so15451941fa.1
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 11:57:12 -0700 (PDT)
 Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2faecbf6feesm2796571fa.18.2024.10.03.11.57.01
+ 38308e7fff4ca-2faecc13b2asm2706361fa.69.2024.10.03.11.57.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 11:57:01 -0700 (PDT)
+ Thu, 03 Oct 2024 11:57:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4715a050-81b9-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: 4caddc82-81b9-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727981823; x=1728586623; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=cdaNDaEOcn6vuQNjiuMDjzYnUO3vmcmh1n8TpB8KZRA=;
-        b=iqqAN6+ECcPR8Vo/eH6aBmLojnXBTlcAuHsArR+YHJQWeSfHBkHZnFbtbBbTzs+9B5
-         KNe9lG4TnX/eg6Szn9bc/e9bIeEosdVGfeech9SVBnz8OJQ9X8auFsYdExU2wlcwR9jC
-         WAL3TNi0HHyH3TseORfuIBjX03Zr9FEC78abcPCBbCk4ZuEMea5VHoj3YagnKsf8noTX
-         UPY9CZsTvf6Ndfi1F4EpjbsXgDznSTgcKwQcyY0vNcbamvp/DHBo/XfjW66hvlr5/F1c
-         G+7Gdlx551gWAhc9JVDp2jevAL/3VfyIFxrpqgHYB0muWc6rOEWNZYnI2pOS8PHo2Y8P
-         rNUw==
+        d=gmail.com; s=20230601; t=1727981832; x=1728586632; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7NqZgDSIdmym8k9v4wrElx9POiJdcsjS85l4BMSFw2Y=;
+        b=IFY7a/FyJzyfhvjgBBfsOp7pEBH5rtEGckImg9AlxNXtFefHzVpaop6sMdoudzwdCr
+         orq8hPfEvEBJ+QY6acH7bTCjo+LZo4N5Uc5zKv8l19gmy7Tc8x0smLo3c74J3Fp2JhWc
+         etpgNdAEOuK2WiSrbY/g4qjAiVN0lRuLKyUz68S2VeC2j0Dkm3B82bRk5x74tr+kk2JF
+         cAi/QCCIz/bUrhlvBIcEtJ4q7pTuPasw7VrgxlXPqKOYMw8kNNl0Ka9jQrRmy56dKUx4
+         EwRTNk3CSnGzS0iB800Dc+lS2qUnMNAjvEv81PABPIuy+w428vdzCXkx744lEPGcCFCa
+         O+3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727981823; x=1728586623;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=cdaNDaEOcn6vuQNjiuMDjzYnUO3vmcmh1n8TpB8KZRA=;
-        b=Lx7zus6p9cUNvBNo40TaB0mgah4tA2CyJ8rBiS0vC2jWk/2GEGEEYzc2xVz7JwlW0g
-         UB4D3Svb8UOg9VyyPeEY/9PqniHwZWTTlyKkkJ7shO/JPeVGf3Qrcr4l4LeD8pCXv7SX
-         N30iqK6SYuKDPaVGTWNABbBmbsV6FZtIpSBlHJi15lrols7wIEzQ6+E/FUCE52PnTFag
-         bAl/r5dedPi4p71obdgdKXzpAG1WY7fEuwfF99L7cWenTbvvzHdO1qaCzy5GtZangMMI
-         e0lGENT1ZU2nHFFpNZoMNUUUR62G2ihuYojbrDGOcPm5NJrJWj2w81qPLpZ0Tfone4zh
-         DIcQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUshneErrw+/USrmrieITJ/9Juh5Q09Nk5IiIzyupqfMeO24lbUdPCWiROpnIQ7Ga1bNoADUMSbpWA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwEc41TLoEBvbcEx81yYyqMT2Gq4uaQ+E2c9hDTGDPFHBisZQy1
-	MfZ0juG3qPlHNO4vn3Q61ROj9uF5Yfk+zQBBnE4Atq0MDqdoLJdw
-X-Google-Smtp-Source: AGHT+IFdeBkkNKz7zU2CTecNYILP4aX1U9f8WPyScxz91qp4ENEdsSBhsUSyvViSiJmd41SQ99VMWA==
-X-Received: by 2002:a2e:b8c3:0:b0:2ec:55b5:ed45 with SMTP id 38308e7fff4ca-2faf3c420b2mr190871fa.24.1727981822607;
-        Thu, 03 Oct 2024 11:57:02 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1727981832; x=1728586632;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=7NqZgDSIdmym8k9v4wrElx9POiJdcsjS85l4BMSFw2Y=;
+        b=JY/e9MeX4AHi5K7qlDRquLyZmtIaPATuvZ3ND/FK7FgpG4KyLMrFwJRX9chQOxwORR
+         P/XtQaFKY5Z6q0ouezVpXyfPlrF34NfE6eRcLVWJcxVfe0aCqRCIysmIsv01iYab3De0
+         /cdWXNNdKL3DlT+aQBu/eIo+9C2hCpXsm+JRfjmZj/2Bgw6wzRwDd/guLzglUJvoBGci
+         ZA8odQ6ywG7c7Rg/RTkAbwOV/aMluzg4KarWbgEfOyQizW+M3bhvOHIiHeQJgV7k2PXM
+         WgSiOfOx1y0ot2zWFagtcI+A7RAFi1Vo9nfx2HGghD8ZKeBtV6FMolvnD8nBAC5sIzA0
+         ywQw==
+X-Forwarded-Encrypted: i=1; AJvYcCVfL0v6Y6Op8yMAhIwnye27fLalZ6jLb055ji7sslPbX+oQrDP1mZyESJxLZafDt3oz8q2TLXUdRhg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwFjinsyRgngQFIpvQTmNzPw3FZUczwIAWAQajGOe20sG5YgQsa
+	Qaad8BtYaupaLf8PX8+D4b8Q3mp/ynrDL1roaSdauPOVPiTSnZyP
+X-Google-Smtp-Source: AGHT+IGdtsrhdXwp14pMpvdvc+CdpPcIPMIZgK2C81T/sez5hURdlMZpHD5usN8FxM0Nz2NV9uyp/Q==
+X-Received: by 2002:a2e:be20:0:b0:2f5:2ba:2c99 with SMTP id 38308e7fff4ca-2faf3c1400cmr307781fa.9.1727981832153;
+        Thu, 03 Oct 2024 11:57:12 -0700 (PDT)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: sstabellini@kernel.org,
@@ -84,61 +85,60 @@ Cc: sstabellini@kernel.org,
 	paul@xen.org,
 	peter.maydell@linaro.org,
 	edgar.iglesias@amd.com,
-	xen-devel@lists.xenproject.org
-Subject: [PULL v2 0/5] Xen Queue
-Date: Thu,  3 Oct 2024 20:56:49 +0200
-Message-ID: <20241003185655.1480819-1-edgar.iglesias@gmail.com>
+	xen-devel@lists.xenproject.org,
+	qemu-arm@nongnu.org
+Subject: [PULL v2 5/5] hw/arm: xenpvh: Enable PCI for ARM PVH
+Date: Thu,  3 Oct 2024 20:56:54 +0200
+Message-ID: <20241003185655.1480819-6-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241003185655.1480819-1-edgar.iglesias@gmail.com>
+References: <20241003185655.1480819-1-edgar.iglesias@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-The following changes since commit 423be09ab9492735924e73a2d36069784441ebc6:
+Enable PCI support for the ARM Xen PVH machine.
 
-  Merge tag 'warn-pull-request' of https://gitlab.com/marcandre.lureau/qemu into staging (2024-10-03 10:32:54 +0100)
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+---
+ hw/arm/xen-pvh.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-are available in the Git repository at:
-
-  https://gitlab.com/edgar.iglesias/qemu.git tags/edgar/xen-queue-2024-10-03-v2.for-upstream
-
-for you to fetch changes up to ca9275a4b11aced3074219d1712e29fce5036f72:
-
-  hw/arm: xenpvh: Enable PCI for ARM PVH (2024-10-03 19:37:35 +0200)
-
-----------------------------------------------------------------
-Edgars Xen Queue.
-
-----------------------------------------------------------------
-
-ChangeLog:
-
-v1 -> v2:
-* Removed left over trace call
-
-----------------------------------------------------------------
-
-Dr. David Alan Gilbert (1):
-      hw/xen: Remove deadcode
-
-Edgar E. Iglesias (4):
-      hw/xen: Expose handle_bufioreq in xen_register_ioreq
-      hw/xen: xenpvh: Disable buffered IOREQs for ARM
-      hw/xen: xenpvh: Add pci-intx-irq-base property
-      hw/arm: xenpvh: Enable PCI for ARM PVH
-
- hw/arm/xen-pvh.c                    |  17 ++++++
- hw/i386/xen/xen-hvm.c               |   4 +-
- hw/i386/xen/xen-pvh.c               |   3 ++
- hw/xen/xen-hvm-common.c             | 100 ++++++++++++++++++++++--------------
- hw/xen/xen-legacy-backend.c         |  18 -------
- hw/xen/xen-pvh-common.c             |  40 ++++++++++++++-
- hw/xen/xen_devconfig.c              |   8 ---
- include/hw/xen/xen-hvm-common.h     |   3 ++
- include/hw/xen/xen-legacy-backend.h |   5 --
- include/hw/xen/xen-pvh-common.h     |   3 ++
- include/hw/xen/xen_native.h         |   3 +-
- 11 files changed, 132 insertions(+), 72 deletions(-)
+diff --git a/hw/arm/xen-pvh.c b/hw/arm/xen-pvh.c
+index 28af3910ea..33f0dd5982 100644
+--- a/hw/arm/xen-pvh.c
++++ b/hw/arm/xen-pvh.c
+@@ -39,6 +39,16 @@ static void xen_arm_instance_init(Object *obj)
+                                          VIRTIO_MMIO_DEV_SIZE };
+ }
+ 
++static void xen_pvh_set_pci_intx_irq(void *opaque, int intx_irq, int level)
++{
++    XenPVHMachineState *s = XEN_PVH_MACHINE(opaque);
++    int irq = s->cfg.pci_intx_irq_base + intx_irq;
++
++    if (xendevicemodel_set_irq_level(xen_dmod, xen_domid, irq, level)) {
++        error_report("xendevicemodel_set_pci_intx_level failed");
++    }
++}
++
+ static void xen_arm_machine_class_init(ObjectClass *oc, void *data)
+ {
+     XenPVHMachineClass *xpc = XEN_PVH_MACHINE_CLASS(oc);
+@@ -69,7 +79,11 @@ static void xen_arm_machine_class_init(ObjectClass *oc, void *data)
+     /* Xen/ARM does not use buffered IOREQs.  */
+     xpc->handle_bufioreq = HVM_IOREQSRV_BUFIOREQ_OFF;
+ 
++    /* PCI INTX delivery.  */
++    xpc->set_pci_intx_irq = xen_pvh_set_pci_intx_irq;
++
+     /* List of supported features known to work on PVH ARM.  */
++    xpc->has_pci = true;
+     xpc->has_tpm = true;
+     xpc->has_virtio_mmio = true;
+ 
 -- 
 2.43.0
 
