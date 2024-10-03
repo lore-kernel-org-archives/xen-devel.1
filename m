@@ -4,38 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A2A3CF34A1
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 12:28:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.809429.1221770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D16CF34A9
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 12:57:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.809450.1221779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swKwj-00005l-OT; Thu, 03 Oct 2024 12:28:41 +0000
+	id 1swLOM-0008RK-1K; Thu, 03 Oct 2024 12:57:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 809429.1221770; Thu, 03 Oct 2024 12:28:41 +0000
+Received: by outflank-mailman (output) from mailman id 809450.1221779; Thu, 03 Oct 2024 12:57:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swKwj-00005d-Kw; Thu, 03 Oct 2024 12:28:41 +0000
-Received: by outflank-mailman (input) for mailman id 809429;
- Thu, 03 Oct 2024 12:28:39 +0000
+	id 1swLOL-0008RD-UW; Thu, 03 Oct 2024 12:57:13 +0000
+Received: by outflank-mailman (input) for mailman id 809450;
+ Thu, 03 Oct 2024 12:38:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=d1Re=Q7=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swKny-00043u-Sk
- for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 12:19:38 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c19d9bc9-8181-11ef-99a2-01e77a169b0f;
- Thu, 03 Oct 2024 14:19:37 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a8d6d0fe021so141913966b.1
- for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 05:19:37 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a991047319asm77328366b.184.2024.10.03.05.19.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 05:19:35 -0700 (PDT)
+ <SRS0=187q=Q7=bootlin.com=louis.chauvet@srs-se1.protection.inumbo.net>)
+ id 1swL6Q-0002mN-Nb
+ for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 12:38:43 +0000
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
+ [217.70.183.200]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6ac7f14a-8184-11ef-99a2-01e77a169b0f;
+ Thu, 03 Oct 2024 14:38:40 +0200 (CEST)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 1429220003;
+ Thu,  3 Oct 2024 12:38:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,318 +40,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c19d9bc9-8181-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727957976; x=1728562776; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=E1MdC3jU6tMF4gHR3lQp27v/4fUpmlKo+cCS73TVl10=;
-        b=P/WiekiWt7h8aLdwtv+JmfEWyr7R4Kj/bpzMd3P4Gl9b6mLWG+z6d5D9IyeYi+lJQr
-         4Pw2xlNLe2qPpzley2GA7rDNDv5YPnJ7quTSMo/jAmd4kvoKNzeIotQPekHFflaCA904
-         TB+AOZQ1Sf+FLZRGfkmbKDUEtXoB2KFGFY5vw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727957976; x=1728562776;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=E1MdC3jU6tMF4gHR3lQp27v/4fUpmlKo+cCS73TVl10=;
-        b=mxuF6j82UOkuB2kKhBAV7SMA/zs3xU8/bsW/j+j3OgxEVkARSoETDks32rXTrbpq+4
-         DhYaC2pBvLzMXXO0OJYG6YHCioeK+8c/z+Vs28AZFzdCGryl2jC9NaKGm/lkzfV63YCa
-         HRgoiGxK9scui2L/oWiIzma9qXLvASbSfh/pPxPye3Zua7UYj2oifzDq9SPKL/dDar1v
-         yfjjDytCrHydh0wKYyMNWYlB5/cJ0wSwe1QvsTN3K9owv14jz9iwJe25yIosSMnAJIME
-         dW6cg0Zw2yrxyG81odwnIVkTG0UDbrw2JeVdbY4028P/p3fKJFeEP3wmE/DzThbaCcRS
-         47TA==
-X-Gm-Message-State: AOJu0YyHcq1C//C7kXfM0slSUspUE6d2/gaqg1vB3GF6fJpa038Fx2sn
-	TUnZrAYq9QLki7oTHG0C3xjAJ2WXBdHE+GS1lpG6RO0nyFc+5PkwoXPXhQcF9XdA/QFo/TkNdRQ
-	9
-X-Google-Smtp-Source: AGHT+IFr5gvJEZaPDv4ew+VlipYtwSACXF/kpaaSAKTC0fecw8pMrN777gqGRLkOk4D4+wm+Y7NvyA==
-X-Received: by 2002:a17:907:eac:b0:a8a:8a31:c481 with SMTP id a640c23a62f3a-a98f837bc4dmr602449166b.42.1727957976309;
-        Thu, 03 Oct 2024 05:19:36 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 18/20] xen: Update header guards - VM event, mem access, monitor
-Date: Thu,  3 Oct 2024 13:19:06 +0100
-Message-Id: <20241003121908.362888-19-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241003121908.362888-1-frediano.ziglio@cloud.com>
-References: <20241003121908.362888-1-frediano.ziglio@cloud.com>
+X-Inumbo-ID: 6ac7f14a-8184-11ef-99a2-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1727959119;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=G1WWqv8PxjeMLKflSPYmbUe7DeomMcAnSm/A8iMPhzI=;
+	b=jaIPWC0Xu79mrXEmZMnQsiXzA9Wr3uoH8MULWQT5IUuNp55G4sX5QevmhszIPLVwNB8KAr
+	O3AkPLtQl5yloTMbuyNDdO+X5TRPKMqYEvSTrAQoGgw5IuBAjgFtNYLiG0d10jUZ4bA3FH
+	m1e4s8kFAAe17/+QzeW38cun4KUy2aCMbNTrAFDwf/82DfLhx3fqZMuDYE4KWwrNFUQiLe
+	EpyU5sN7nS1+Zc1hdPjgaFvbZTVp4v512I9O9Hvnt/yMn7PWEyyffcB8w/4zGq889GcVPI
+	rtotQp17FYcj62LrbVAqrFIRzZevDuIvYg4y31zSeUiM6gR48lVIIrxWlvKtpw==
+Date: Thu, 3 Oct 2024 14:38:35 +0200
+From: Louis Chauvet <louis.chauvet@bootlin.com>
+To: Ville Syrjala <ville.syrjala@linux.intel.com>
+Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Inki Dae <inki.dae@samsung.com>,
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+	Alain Volmat <alain.volmat@foss.st.com>,
+	Sandy Huang <hjc@rock-chips.com>, Jyri Sarha <jyri.sarha@iki.fi>,
+	Alexey Brodkin <abrodkin@synopsys.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	=?iso-8859-1?Q?Ma=EDra?= Canal <mairacanal@riseup.net>,
+	Zack Rusin <zack.rusin@broadcom.com>, amd-gfx@lists.freedesktop.org,
+	linux-mediatek@lists.infradead.org,
+	linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+	virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+	linux-renesas-soc@vger.kernel.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 2/2] drm: Move crtc->{x, y, mode, enabled} to legacy
+ sub-structure
+Message-ID: <Zv6QF2EmIcogtlLA@louis-chauvet-laptop>
+Mail-Followup-To: Ville Syrjala <ville.syrjala@linux.intel.com>,
+	dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Inki Dae <inki.dae@samsung.com>,
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+	Alain Volmat <alain.volmat@foss.st.com>,
+	Sandy Huang <hjc@rock-chips.com>, Jyri Sarha <jyri.sarha@iki.fi>,
+	Alexey Brodkin <abrodkin@synopsys.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	=?iso-8859-1?Q?Ma=EDra?= Canal <mairacanal@riseup.net>,
+	Zack Rusin <zack.rusin@broadcom.com>, amd-gfx@lists.freedesktop.org,
+	linux-mediatek@lists.infradead.org,
+	linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+	virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+	linux-renesas-soc@vger.kernel.org, xen-devel@lists.xenproject.org
+References: <20241002182200.15363-1-ville.syrjala@linux.intel.com>
+ <20241002182200.15363-3-ville.syrjala@linux.intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20241002182200.15363-3-ville.syrjala@linux.intel.com>
+X-GND-Sasl: louis.chauvet@bootlin.com
 
-Updated headers related to VM event, mem access AND monitor.
+Le 02/10/24 - 21:22, Ville Syrjala a écrit :
+> From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+> 
+> Atomic drivers shouldn't be using the legacy state stored
+> directly under drm_crtc. Move that junk into a 'legacy' sub
+> structure to highlight the offenders, of which there are
+> quite a few unfortunately.
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
- xen/arch/x86/include/asm/hvm/monitor.h  | 6 +++---
- xen/arch/x86/include/asm/hvm/vm_event.h | 6 +++---
- xen/arch/x86/include/asm/mem_access.h   | 6 +++---
- xen/arch/x86/include/asm/monitor.h      | 6 +++---
- xen/arch/x86/include/asm/vm_event.h     | 6 +++---
- xen/include/asm-generic/monitor.h       | 6 +++---
- xen/include/asm-generic/vm_event.h      | 6 +++---
- xen/include/public/vm_event.h           | 6 +++---
- xen/include/xen/mem_access.h            | 6 +++---
- xen/include/xen/monitor.h               | 6 +++---
- xen/include/xen/vm_event.h              | 6 +++---
- 11 files changed, 33 insertions(+), 33 deletions(-)
+Hi,
 
-diff --git a/xen/arch/x86/include/asm/hvm/monitor.h b/xen/arch/x86/include/asm/hvm/monitor.h
-index 02021be47b..8ef90a1b03 100644
---- a/xen/arch/x86/include/asm/hvm/monitor.h
-+++ b/xen/arch/x86/include/asm/hvm/monitor.h
-@@ -5,8 +5,8 @@
-  * Arch-specific hardware virtual machine monitor abstractions.
-  */
- 
--#ifndef __ASM_X86_HVM_MONITOR_H__
--#define __ASM_X86_HVM_MONITOR_H__
-+#ifndef ASM__X86__HVM__MONITOR_H
-+#define ASM__X86__HVM__MONITOR_H
- 
- #include <public/vm_event.h>
- 
-@@ -46,7 +46,7 @@ int hvm_monitor_vmexit(unsigned long exit_reason,
- int hvm_monitor_io(unsigned int port, unsigned int bytes,
-                    bool in, bool str);
- 
--#endif /* __ASM_X86_HVM_MONITOR_H__ */
-+#endif /* ASM__X86__HVM__MONITOR_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/include/asm/hvm/vm_event.h b/xen/arch/x86/include/asm/hvm/vm_event.h
-index 506a85c774..c03df6f15e 100644
---- a/xen/arch/x86/include/asm/hvm/vm_event.h
-+++ b/xen/arch/x86/include/asm/hvm/vm_event.h
-@@ -5,12 +5,12 @@
-  * Hardware virtual machine vm_event abstractions.
-  */
- 
--#ifndef __ASM_X86_HVM_VM_EVENT_H__
--#define __ASM_X86_HVM_VM_EVENT_H__
-+#ifndef ASM__X86__HVM__VM_EVENT_H
-+#define ASM__X86__HVM__VM_EVENT_H
- 
- void hvm_vm_event_do_resume(struct vcpu *v);
- 
--#endif /* __ASM_X86_HVM_VM_EVENT_H__ */
-+#endif /* ASM__X86__HVM__VM_EVENT_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/include/asm/mem_access.h b/xen/arch/x86/include/asm/mem_access.h
-index 1a52a10322..b774f2f8b6 100644
---- a/xen/arch/x86/include/asm/mem_access.h
-+++ b/xen/arch/x86/include/asm/mem_access.h
-@@ -11,8 +11,8 @@
-  * Parts based on earlier work by Michael A Fetterman, Ian Pratt et al.
-  */
- 
--#ifndef __ASM_X86_MEM_ACCESS_H__
--#define __ASM_X86_MEM_ACCESS_H__
-+#ifndef ASM__X86__MEM_ACCESS_H
-+#define ASM__X86__MEM_ACCESS_H
- 
- /*
-  * Setup vm_event request based on the access (gla is -1ull if not available).
-@@ -44,7 +44,7 @@ int p2m_set_suppress_ve_multi(struct domain *d,
- int p2m_get_suppress_ve(struct domain *d, gfn_t gfn, bool *suppress_ve,
-                         unsigned int altp2m_idx);
- 
--#endif /*__ASM_X86_MEM_ACCESS_H__ */
-+#endif /*ASM__X86__MEM_ACCESS_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/include/asm/monitor.h b/xen/arch/x86/include/asm/monitor.h
-index 3c64d8258f..2d0dde5041 100644
---- a/xen/arch/x86/include/asm/monitor.h
-+++ b/xen/arch/x86/include/asm/monitor.h
-@@ -19,8 +19,8 @@
-  * License along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __ASM_X86_MONITOR_H__
--#define __ASM_X86_MONITOR_H__
-+#ifndef ASM__X86__MONITOR_H
-+#define ASM__X86__MONITOR_H
- 
- #include <xen/sched.h>
- 
-@@ -126,4 +126,4 @@ static inline void arch_monitor_cleanup_domain(struct domain *d) {}
- bool monitored_msr(const struct domain *d, u32 msr);
- bool monitored_msr_onchangeonly(const struct domain *d, u32 msr);
- 
--#endif /* __ASM_X86_MONITOR_H__ */
-+#endif /* ASM__X86__MONITOR_H */
-diff --git a/xen/arch/x86/include/asm/vm_event.h b/xen/arch/x86/include/asm/vm_event.h
-index 46e77ed6d9..bac504ba70 100644
---- a/xen/arch/x86/include/asm/vm_event.h
-+++ b/xen/arch/x86/include/asm/vm_event.h
-@@ -5,8 +5,8 @@
-  * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-  */
- 
--#ifndef __ASM_X86_VM_EVENT_H__
--#define __ASM_X86_VM_EVENT_H__
-+#ifndef ASM__X86__VM_EVENT_H
-+#define ASM__X86__VM_EVENT_H
- 
- #include <xen/sched.h>
- #include <public/vm_event.h>
-@@ -45,4 +45,4 @@ void vm_event_sync_event(struct vcpu *v, bool value);
- 
- void vm_event_reset_vmtrace(struct vcpu *v);
- 
--#endif /* __ASM_X86_VM_EVENT_H__ */
-+#endif /* ASM__X86__VM_EVENT_H */
-diff --git a/xen/include/asm-generic/monitor.h b/xen/include/asm-generic/monitor.h
-index 1ade289099..e53f0823cb 100644
---- a/xen/include/asm-generic/monitor.h
-+++ b/xen/include/asm-generic/monitor.h
-@@ -9,8 +9,8 @@
-  *
-  */
- 
--#ifndef __ASM_GENERIC_MONITOR_H__
--#define __ASM_GENERIC_MONITOR_H__
-+#ifndef ASM_GENERIC__MONITOR_H
-+#define ASM_GENERIC__MONITOR_H
- 
- #include <xen/errno.h>
- #include <xen/lib.h>
-@@ -52,7 +52,7 @@ void arch_monitor_cleanup_domain(struct domain *d)
-     /* No arch-specific domain cleanup on GENERIC. */
- }
- 
--#endif /* __ASM_GENERIC_MONITOR_H__ */
-+#endif /* ASM_GENERIC__MONITOR_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/vm_event.h b/xen/include/asm-generic/vm_event.h
-index 620c7b971c..ff538b6ba4 100644
---- a/xen/include/asm-generic/vm_event.h
-+++ b/xen/include/asm-generic/vm_event.h
-@@ -5,8 +5,8 @@
-  * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-  */
- 
--#ifndef __ASM_GENERIC_VM_EVENT_H__
--#define __ASM_GENERIC_VM_EVENT_H__
-+#ifndef ASM_GENERIC__VM_EVENT_H
-+#define ASM_GENERIC__VM_EVENT_H
- 
- #include <xen/sched.h>
- #include <public/vm_event.h>
-@@ -52,4 +52,4 @@ void vm_event_reset_vmtrace(struct vcpu *v)
-     /* Nothing to do. */
- }
- 
--#endif /* __ASM_GENERIC_VM_EVENT_H__ */
-+#endif /* ASM_GENERIC__VM_EVENT_H */
-diff --git a/xen/include/public/vm_event.h b/xen/include/public/vm_event.h
-index 3a86f0e208..6b861b06f0 100644
---- a/xen/include/public/vm_event.h
-+++ b/xen/include/public/vm_event.h
-@@ -7,8 +7,8 @@
-  * Copyright (c) 2009 by Citrix Systems, Inc. (Patrick Colp)
-  */
- 
--#ifndef _XEN_PUBLIC_VM_EVENT_H
--#define _XEN_PUBLIC_VM_EVENT_H
-+#ifndef PUBLIC__VM_EVENT_H
-+#define PUBLIC__VM_EVENT_H
- 
- #include "xen.h"
- 
-@@ -440,7 +440,7 @@ typedef struct vm_event_st {
- DEFINE_RING_TYPES(vm_event, vm_event_request_t, vm_event_response_t);
- 
- #endif /* defined(__XEN__) || defined(__XEN_TOOLS__) */
--#endif /* _XEN_PUBLIC_VM_EVENT_H */
-+#endif /* PUBLIC__VM_EVENT_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/mem_access.h b/xen/include/xen/mem_access.h
-index 87d93b31f6..2d0e472934 100644
---- a/xen/include/xen/mem_access.h
-+++ b/xen/include/xen/mem_access.h
-@@ -19,8 +19,8 @@
-  * along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef _XEN_MEM_ACCESS_H
--#define _XEN_MEM_ACCESS_H
-+#ifndef XEN__MEM_ACCESS_H
-+#define XEN__MEM_ACCESS_H
- 
- #include <xen/types.h>
- #include <xen/mm.h>
-@@ -105,7 +105,7 @@ int mem_access_memop(unsigned long cmd,
- }
- #endif /* CONFIG_MEM_ACCESS */
- 
--#endif /* _XEN_MEM_ACCESS_H */
-+#endif /* XEN__MEM_ACCESS_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/monitor.h b/xen/include/xen/monitor.h
-index 713d54f7c1..be301826c0 100644
---- a/xen/include/xen/monitor.h
-+++ b/xen/include/xen/monitor.h
-@@ -19,8 +19,8 @@
-  * License along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __XEN_MONITOR_H__
--#define __XEN_MONITOR_H__
-+#ifndef XEN__MONITOR_H
-+#define XEN__MONITOR_H
- 
- #include <public/vm_event.h>
- 
-@@ -32,4 +32,4 @@ void monitor_guest_request(void);
- 
- int monitor_traps(struct vcpu *v, bool sync, vm_event_request_t *req);
- 
--#endif /* __XEN_MONITOR_H__ */
-+#endif /* XEN__MONITOR_H */
-diff --git a/xen/include/xen/vm_event.h b/xen/include/xen/vm_event.h
-index 9a86358b42..3f2cb6fba8 100644
---- a/xen/include/xen/vm_event.h
-+++ b/xen/include/xen/vm_event.h
-@@ -20,8 +20,8 @@
-  */
- 
- 
--#ifndef __VM_EVENT_H__
--#define __VM_EVENT_H__
-+#ifndef XEN__VM_EVENT_H
-+#define XEN__VM_EVENT_H
- 
- #include <xen/sched.h>
- #include <public/vm_event.h>
-@@ -98,7 +98,7 @@ void vm_event_set_registers(struct vcpu *v, vm_event_response_t *rsp);
- 
- void vm_event_monitor_next_interrupt(struct vcpu *v);
- 
--#endif /* __VM_EVENT_H__ */
-+#endif /* XEN__VM_EVENT_H */
- 
- /*
-  * Local variables:
+Do we need to do something particular in an atomic driver except using
+state content?
+
+I proposed some modifications for VKMS bellow. If you think this is good,
+I can send a patch to avoid being an offender :-) I just tested it, and it
+seems to work.
+
+> I'm hoping we could get all these fixed and then declare
+> the legacy state off limits for atomic drivers (which is
+> what did long ago for plane->fb/etc). And maybe eventually
+> turn crtc->legacy into a pointer and only allocate it on
+> legacy drivers.
+> 
+> TODO: hwmode should probably go there too but it probably
+>       needs a closer look, maybe other stuff too...
+
+[...]
+
+> diff --git a/drivers/gpu/drm/vkms/vkms_composer.c b/drivers/gpu/drm/vkms/vkms_composer.c
+> index 57a5769fc994..a7f8b1da6e85 100644
+> --- a/drivers/gpu/drm/vkms/vkms_composer.c
+> +++ b/drivers/gpu/drm/vkms/vkms_composer.c
+> @@ -187,7 +187,7 @@ static void blend(struct vkms_writeback_job *wb,
+>  
+>  	const struct pixel_argb_u16 background_color = { .a = 0xffff };
+>  
+> -	size_t crtc_y_limit = crtc_state->base.crtc->mode.vdisplay;
+> +	size_t crtc_y_limit = crtc_state->base.crtc->legacy.mode.vdisplay;
+
+	size_t crtc_y_limit = crtc_state->base.mode.vdisplay;
+
+>  	/*
+>  	 * The planes are composed line-by-line to avoid heavy memory usage. It is a necessary
+> @@ -270,7 +270,7 @@ static int compose_active_planes(struct vkms_writeback_job *active_wb,
+>  	if (WARN_ON(check_format_funcs(crtc_state, active_wb)))
+>  		return -EINVAL;
+>  
+> -	line_width = crtc_state->base.crtc->mode.hdisplay;
+> +	line_width = crtc_state->base.crtc->legacy.mode.hdisplay;
+
+	line_width = crtc_state->base.mode.hdisplay;
+
+>  	stage_buffer.n_pixels = line_width;
+>  	output_buffer.n_pixels = line_width;
+>  
+> diff --git a/drivers/gpu/drm/vkms/vkms_crtc.c b/drivers/gpu/drm/vkms/vkms_crtc.c
+> index a40295c18b48..780681ea77e4 100644
+> --- a/drivers/gpu/drm/vkms/vkms_crtc.c
+> +++ b/drivers/gpu/drm/vkms/vkms_crtc.c
+> @@ -64,7 +64,7 @@ static int vkms_enable_vblank(struct drm_crtc *crtc)
+>  	struct drm_vblank_crtc *vblank = drm_crtc_vblank_crtc(crtc);
+>  	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
+>  
+> -	drm_calc_timestamping_constants(crtc, &crtc->mode);
+> +	drm_calc_timestamping_constants(crtc, &crtc->legacy.mode);
+
+	drm_calc_timestamping_constants(crtc, &crtc->state->mode);
+
+>  	hrtimer_init(&out->vblank_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+>  	out->vblank_hrtimer.function = &vkms_vblank_simulate;
+> diff --git a/drivers/gpu/drm/vkms/vkms_writeback.c b/drivers/gpu/drm/vkms/vkms_writeback.c
+> index bc724cbd5e3a..27164cddb94d 100644
+> --- a/drivers/gpu/drm/vkms/vkms_writeback.c
+> +++ b/drivers/gpu/drm/vkms/vkms_writeback.c
+> @@ -131,8 +131,8 @@ static void vkms_wb_atomic_commit(struct drm_connector *conn,
+>  	struct drm_connector_state *conn_state = wb_conn->base.state;
+>  	struct vkms_crtc_state *crtc_state = output->composer_state;
+>  	struct drm_framebuffer *fb = connector_state->writeback_job->fb;
+> -	u16 crtc_height = crtc_state->base.crtc->mode.vdisplay;
+> -	u16 crtc_width = crtc_state->base.crtc->mode.hdisplay;
+> +	u16 crtc_height = crtc_state->base.crtc->legacy.mode.vdisplay;
+> +	u16 crtc_width = crtc_state->base.crtc->legacy.mode.hdisplay;
+
+	u16 crtc_height = crtc_state->base.mode.vdisplay;
+	u16 crtc_width = crtc_state->base.mode.hdisplay;
+
+>  	struct vkms_writeback_job *active_wb;
+>  	struct vkms_frame_info *wb_frame_info;
+>  	u32 wb_format = fb->format->format;
+
+[...]
+
 -- 
-2.34.1
-
+Louis Chauvet, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
