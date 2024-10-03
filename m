@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE47CF34BE
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 17:59:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.809684.1222152 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A55CCF34BD
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 17:59:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.809689.1222198 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swQ73-0007J2-Qn; Thu, 03 Oct 2024 17:59:41 +0000
+	id 1swQ78-0008Qq-2C; Thu, 03 Oct 2024 17:59:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 809684.1222152; Thu, 03 Oct 2024 17:59:41 +0000
+Received: by outflank-mailman (output) from mailman id 809689.1222198; Thu, 03 Oct 2024 17:59:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swQ73-0007HW-Lu; Thu, 03 Oct 2024 17:59:41 +0000
-Received: by outflank-mailman (input) for mailman id 809684;
- Thu, 03 Oct 2024 17:59:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1swQ77-0008Or-Rw; Thu, 03 Oct 2024 17:59:45 +0000
+Received: by outflank-mailman (input) for mailman id 809689;
+ Thu, 03 Oct 2024 17:59:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=d1Re=Q7=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swQ72-0006qR-6q
- for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 17:59:40 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 41760afb-81b1-11ef-99a2-01e77a169b0f;
- Thu, 03 Oct 2024 19:59:38 +0200 (CEST)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5366fd6fdf1so1866023e87.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 10:59:38 -0700 (PDT)
+ id 1swQ76-0006hm-0T
+ for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 17:59:44 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 44b00251-81b1-11ef-a0ba-8be0dac302b0;
+ Thu, 03 Oct 2024 19:59:43 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a86e9db75b9so192086866b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 10:59:43 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99104731a5sm111876166b.180.2024.10.03.10.59.36
+ a640c23a62f3a-a99104731a5sm111876166b.180.2024.10.03.10.59.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 10:59:36 -0700 (PDT)
+ Thu, 03 Oct 2024 10:59:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,85 +47,232 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41760afb-81b1-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 44b00251-81b1-11ef-a0ba-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727978377; x=1728583177; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1727978383; x=1728583183; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Tis/X/p31Jv/hBo4GPRCJx3SzpdwRvuuxDnrw7zrjpc=;
-        b=fOzgTcbRP4nQW1zAH0l6QbWKF9D6RK8jva2LS1xMlHgF1e0MpHvIZ6pbGKvPhDMZal
-         9qVfldsrpBO8zuNg2l5P5F8H/dKkhmD2MVRtR5kVcalY14lV0am8+Nvr+YJVoLNLZ1G+
-         U1tiHHGu3oXERMUfxxcH7JdmiecEMderqLoHs=
+        bh=Wa3ZmXvbNT3cVq7/5R5qVXzdHrXKzTt2KbYl/Ig19/Y=;
+        b=MhIS3tAXoGjekux3uGawy1lUfZutU/CFQ1Y1gPczRiLhl+RoOUOFYa5QFqq1kQkBIm
+         ds8+49rC39BfLRr+zBYfTKn3FDUiGIJgqdmAdkXlu821mdCMZdRHelpr08YPtgl5NQtw
+         afpApEqDpcuuMx+SFxS4tCrI1iF6846k8sZ0g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727978377; x=1728583177;
+        d=1e100.net; s=20230601; t=1727978383; x=1728583183;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Tis/X/p31Jv/hBo4GPRCJx3SzpdwRvuuxDnrw7zrjpc=;
-        b=X6oraX3hgrpsfpN493i0h6jV9ZP9tmeieL2CrEUD9BOLdL9fFoshsfFQouUnpJN+cH
-         N+G6m62RiMVmKkzx5pEIayxnfgq+q9FmLlCn8cjrHU2ErD+EVIqjmF5fPfQcark9IQpA
-         N6OKdyXCMLZx5K805+OdMsP7Snwbv5fxoRRlUTLjLtIhYa0+L+Nb3Z/lZkMy07YTJpQf
-         x19G3AKSaeXNLT9q17OpQm4bxYlDrRrC7Tsfsmw0kwhznAaJG90pWCpjq2dyFFHpl2rL
-         2szTN7iOhdbtcVsG2dbS3V20uZ/i4lECDmHOG5TAoLb9VUm3152EWymmXjHgN5P7so/1
-         5WEg==
-X-Gm-Message-State: AOJu0YyFJz1o37tBi7E/52g9wTuA5Dug5OvwMQ0j6M2e/dpKuftJL88W
-	MCXKL7pTNcY5DEkoIX6T7fZpHv7ABT7pTp9W58EJSp7lHZXdjMtPdV9jsTCAx5izykOdA0I6Bl6
+        bh=Wa3ZmXvbNT3cVq7/5R5qVXzdHrXKzTt2KbYl/Ig19/Y=;
+        b=mD0jezcyfert8F5nnNGCvCU1QvmDtjAcKm+8k1LO564k3L8DxgeFceAYjPsAaKzgG2
+         w/Va6kav7q4A6iqhWV/5J55nGJvUPyUHtWnNcNfILxA6pWHFx/T5q9L+R6686u1/pz8W
+         AIpzPR01GRIm86hYICzTsC7y+W2XoP6w7LsPh300Pd0yRenFTvhy9XH7f7RDZwmyCH3M
+         zrse7LDRvUcBKw+EQyOJa5tgzyRcyg+GoDPMlgsJfyNuLJ67QIibRn8XEMkQi+lc3EuJ
+         fSh1FhPLAA0Bm0/uG/ObRIarK1/p5z0okZwq+oik7mDpJs7lLJViBz0q2cu8jhRrsMGP
+         xgxQ==
+X-Gm-Message-State: AOJu0Yxu+BZeIBhqPaQc9Vci4esnMoOr3XQMV3JF3NPZJuwW8giDTQEo
+	QKH6hBb1xsuVnqYHEbxgFhApnF8hbrYO0UycqsNOaYn43cmnqicBosFN+Oy/W2iGPJZDBRIjHIJ
 	A
-X-Google-Smtp-Source: AGHT+IHWNtrEerC0l6TABn+oFr1YuLPwxe484b+d0gBWxci9wSQdrDpnJ3KTM4g8os1IiZiHDkxHjw==
-X-Received: by 2002:a05:6512:33ca:b0:536:581c:9d9f with SMTP id 2adb3069b0e04-539ab858762mr150407e87.24.1727978377066;
-        Thu, 03 Oct 2024 10:59:37 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEjxjA6pTGr7ylgT3GTWv5/9wJb3Hyjtu5O/LAyqSa46pfg9SkA7Yn75A+UQJlWRflZS2p8zA==
+X-Received: by 2002:a17:906:6a20:b0:a86:7ddf:2909 with SMTP id a640c23a62f3a-a991bd0947dmr21186366b.14.1727978382550;
+        Thu, 03 Oct 2024 10:59:42 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Christopher Clark <christopher.w.clark@gmail.com>
-Subject: [PATCH v2 04/19] xen: Update header guards - ARGO
-Date: Thu,  3 Oct 2024 18:59:04 +0100
-Message-Id: <20241003175919.472774-5-frediano.ziglio@cloud.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 10/19] xen: Update header guards - I/O MMU
+Date: Thu,  3 Oct 2024 18:59:10 +0100
+Message-Id: <20241003175919.472774-11-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241003175919.472774-1-frediano.ziglio@cloud.com>
 References: <20241003175919.472774-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Updated headers related to ARGO.
+Updated headers related to I/O MMU.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
- xen/include/public/argo.h | 4 ++--
- xen/include/xen/argo.h    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ xen/drivers/passthrough/amd/iommu-defs.h | 6 +++---
+ xen/drivers/passthrough/amd/iommu.h      | 6 +++---
+ xen/drivers/passthrough/ats.h            | 6 +++---
+ xen/drivers/passthrough/vtd/dmar.h       | 6 +++---
+ xen/drivers/passthrough/vtd/extern.h     | 6 +++---
+ xen/drivers/passthrough/vtd/iommu.h      | 4 ++--
+ xen/drivers/passthrough/vtd/vtd.h        | 6 +++---
+ xen/include/xen/iommu.h                  | 6 +++---
+ 8 files changed, 23 insertions(+), 23 deletions(-)
 
-diff --git a/xen/include/public/argo.h b/xen/include/public/argo.h
-index 84a4cb118b..32e46c4b5c 100644
---- a/xen/include/public/argo.h
-+++ b/xen/include/public/argo.h
-@@ -9,8 +9,8 @@
-  *
-  */
- 
--#ifndef __XEN_PUBLIC_ARGO_H__
--#define __XEN_PUBLIC_ARGO_H__
-+#ifndef PUBLIC__ARGO_H
-+#define PUBLIC__ARGO_H
- 
- #include "xen.h"
- 
-diff --git a/xen/include/xen/argo.h b/xen/include/xen/argo.h
-index fd4cfdd55c..3ef62dab19 100644
---- a/xen/include/xen/argo.h
-+++ b/xen/include/xen/argo.h
-@@ -12,8 +12,8 @@
+diff --git a/xen/drivers/passthrough/amd/iommu-defs.h b/xen/drivers/passthrough/amd/iommu-defs.h
+index c145248f9a..30b094f187 100644
+--- a/xen/drivers/passthrough/amd/iommu-defs.h
++++ b/xen/drivers/passthrough/amd/iommu-defs.h
+@@ -17,8 +17,8 @@
   * along with this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
--#ifndef __XEN_ARGO_H__
--#define __XEN_ARGO_H__
-+#ifndef XEN__ARGO_H
-+#define XEN__ARGO_H
+-#ifndef AMD_IOMMU_DEFS_H
+-#define AMD_IOMMU_DEFS_H
++#ifndef DRIVERS__PASSTHROUGH__AMD__IOMMU_DEFS_H
++#define DRIVERS__PASSTHROUGH__AMD__IOMMU_DEFS_H
  
- #include <xen/sched.h>
+ /* IOMMU Event Log entries: in power of 2 increments, minimum of 256 */
+ #define IOMMU_EVENT_LOG_DEFAULT_ENTRIES     512
+@@ -486,7 +486,7 @@ union amd_iommu_pte {
+ #define IOMMU_REG_BASE_ADDR_HIGH_MASK               0x000FFFFFU
+ #define IOMMU_REG_BASE_ADDR_HIGH_SHIFT              0
  
+-#endif /* AMD_IOMMU_DEFS_H */
++#endif /* DRIVERS__PASSTHROUGH__AMD__IOMMU_DEFS_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/drivers/passthrough/amd/iommu.h b/xen/drivers/passthrough/amd/iommu.h
+index 8d6f63d87f..c32e9e9a16 100644
+--- a/xen/drivers/passthrough/amd/iommu.h
++++ b/xen/drivers/passthrough/amd/iommu.h
+@@ -16,8 +16,8 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+-#ifndef AMD_IOMMU_H
+-#define AMD_IOMMU_H
++#ifndef DRIVERS__PASSTHROUGH__AMD__IOMMU_H
++#define DRIVERS__PASSTHROUGH__AMD__IOMMU_H
+ 
+ #include <xen/init.h>
+ #include <xen/types.h>
+@@ -372,4 +372,4 @@ static inline void iommu_set_addr_hi_to_reg(uint32_t *reg, uint32_t addr)
+                          IOMMU_REG_BASE_ADDR_HIGH_SHIFT, reg);
+ }
+ 
+-#endif /* AMD_IOMMU_H */
++#endif /* DRIVERS__PASSTHROUGH__AMD__IOMMU_H */
+diff --git a/xen/drivers/passthrough/ats.h b/xen/drivers/passthrough/ats.h
+index f5e1d254e0..68b1c600eb 100644
+--- a/xen/drivers/passthrough/ats.h
++++ b/xen/drivers/passthrough/ats.h
+@@ -12,8 +12,8 @@
+  * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef _ATS_H_
+-#define _ATS_H_
++#ifndef DRIVERS__PASSTHROUGH__ATS_H
++#define DRIVERS__PASSTHROUGH__ATS_H
+ 
+ #include <xen/pci_regs.h>
+ 
+@@ -50,5 +50,5 @@ static inline int pci_ats_device(int seg, int bus, int devfn)
+                                    PCI_EXT_CAP_ID_ATS);
+ }
+ 
+-#endif /* _ATS_H_ */
++#endif /* DRIVERS__PASSTHROUGH__ATS_H */
+ 
+diff --git a/xen/drivers/passthrough/vtd/dmar.h b/xen/drivers/passthrough/vtd/dmar.h
+index 61f71ca5e6..0ff4f36535 100644
+--- a/xen/drivers/passthrough/vtd/dmar.h
++++ b/xen/drivers/passthrough/vtd/dmar.h
+@@ -17,8 +17,8 @@
+  * Copyright (C) Shaohua Li <shaohua.li@intel.com>
+  */
+ 
+-#ifndef _DMAR_H_
+-#define _DMAR_H_
++#ifndef DRIVERS__PASSTHROUGH__VTD__DMAR_H
++#define DRIVERS__PASSTHROUGH__VTD__DMAR_H
+ 
+ #include <xen/list.h>
+ #include <xen/iommu.h>
+@@ -171,4 +171,4 @@ int vtd_hw_check(void);
+ void disable_pmr(struct vtd_iommu *iommu);
+ int is_igd_drhd(struct acpi_drhd_unit *drhd);
+ 
+-#endif /* _DMAR_H_ */
++#endif /* DRIVERS__PASSTHROUGH__VTD__DMAR_H */
+diff --git a/xen/drivers/passthrough/vtd/extern.h b/xen/drivers/passthrough/vtd/extern.h
+index 667590ee52..c16583c951 100644
+--- a/xen/drivers/passthrough/vtd/extern.h
++++ b/xen/drivers/passthrough/vtd/extern.h
+@@ -17,8 +17,8 @@
+  * Copyright (C) Weidong Han <weidong.han@intel.com>
+  */
+ 
+-#ifndef _VTD_EXTERN_H_
+-#define _VTD_EXTERN_H_
++#ifndef DRIVERS__PASSTHROUGH__VTD__EXTERN_H
++#define DRIVERS__PASSTHROUGH__VTD__EXTERN_H
+ 
+ #include "dmar.h"
+ #include <xen/keyhandler.h>
+@@ -114,4 +114,4 @@ void quirk_iommu_caps(struct vtd_iommu *iommu);
+ bool platform_supports_intremap(void);
+ bool platform_supports_x2apic(void);
+ 
+-#endif // _VTD_EXTERN_H_
++#endif // DRIVERS__PASSTHROUGH__VTD__EXTERN_H
+diff --git a/xen/drivers/passthrough/vtd/iommu.h b/xen/drivers/passthrough/vtd/iommu.h
+index 78aa8a96f5..29d350b23d 100644
+--- a/xen/drivers/passthrough/vtd/iommu.h
++++ b/xen/drivers/passthrough/vtd/iommu.h
+@@ -16,8 +16,8 @@
+  * Copyright (C) Ashok Raj <ashok.raj@intel.com>
+  */
+ 
+-#ifndef _INTEL_IOMMU_H_
+-#define _INTEL_IOMMU_H_
++#ifndef DRIVERS__PASSTHROUGH__VTD__IOMMU_H
++#define DRIVERS__PASSTHROUGH__VTD__IOMMU_H
+ 
+ #include <xen/iommu.h>
+ #include <asm/msi.h>
+diff --git a/xen/drivers/passthrough/vtd/vtd.h b/xen/drivers/passthrough/vtd/vtd.h
+index cb2df76eed..8aeff8c1f2 100644
+--- a/xen/drivers/passthrough/vtd/vtd.h
++++ b/xen/drivers/passthrough/vtd/vtd.h
+@@ -17,8 +17,8 @@
+  * Copyright (C) Weidong Han <weidong.han@intel.com>
+  */
+ 
+-#ifndef _VTD_H_
+-#define _VTD_H_
++#ifndef DRIVERS__PASSTHROUGH__VTD__VTD_H
++#define DRIVERS__PASSTHROUGH__VTD__VTD_H
+ 
+ #include <xen/iommu.h>
+ 
+@@ -72,4 +72,4 @@ struct msi_msg_remap_entry {
+     u32	data;		/* msi message data */
+ };
+ 
+-#endif // _VTD_H_
++#endif // DRIVERS__PASSTHROUGH__VTD__VTD_H
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 442ae5322d..b928c67e19 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -16,8 +16,8 @@
+  * Copyright (C) Allen Kay <allen.m.kay@intel.com>
+  */
+ 
+-#ifndef _IOMMU_H_
+-#define _IOMMU_H_
++#ifndef XEN__IOMMU_H
++#define XEN__IOMMU_H
+ 
+ #include <xen/mm-frame.h>
+ #include <xen/init.h>
+@@ -440,7 +440,7 @@ static inline int iommu_update_ire_from_msi(
+ }
+ #endif
+ 
+-#endif /* _IOMMU_H_ */
++#endif /* XEN__IOMMU_H */
+ 
+ /*
+  * Local variables:
 -- 
 2.34.1
 
