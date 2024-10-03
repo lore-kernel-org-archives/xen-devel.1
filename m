@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4124CF34BE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1FCDCF34C8
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 18:00:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.809683.1222146 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.809688.1222193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swQ73-0007B4-Ac; Thu, 03 Oct 2024 17:59:41 +0000
+	id 1swQ77-0008Jn-KJ; Thu, 03 Oct 2024 17:59:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 809683.1222146; Thu, 03 Oct 2024 17:59:41 +0000
+Received: by outflank-mailman (output) from mailman id 809688.1222193; Thu, 03 Oct 2024 17:59:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swQ73-0007Av-7b; Thu, 03 Oct 2024 17:59:41 +0000
-Received: by outflank-mailman (input) for mailman id 809683;
- Thu, 03 Oct 2024 17:59:39 +0000
+	id 1swQ77-0008Hy-Cu; Thu, 03 Oct 2024 17:59:45 +0000
+Received: by outflank-mailman (input) for mailman id 809688;
+ Thu, 03 Oct 2024 17:59:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=d1Re=Q7=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swQ71-0006qR-Gb
- for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 17:59:39 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
+ id 1swQ75-0006qR-7G
+ for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 17:59:43 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 40a86513-81b1-11ef-99a2-01e77a169b0f;
- Thu, 03 Oct 2024 19:59:36 +0200 (CEST)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5c89f3f28b6so1657464a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 10:59:36 -0700 (PDT)
+ id 42bb6e2a-81b1-11ef-99a2-01e77a169b0f;
+ Thu, 03 Oct 2024 19:59:40 +0200 (CEST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-539908f238fso1545471e87.2
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 10:59:40 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99104731a5sm111876166b.180.2024.10.03.10.59.33
+ a640c23a62f3a-a99104731a5sm111876166b.180.2024.10.03.10.59.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 10:59:33 -0700 (PDT)
+ Thu, 03 Oct 2024 10:59:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,3383 +47,3131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40a86513-81b1-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 42bb6e2a-81b1-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727978376; x=1728583176; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1727978379; x=1728583179; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yKa7ZcXOITGDqakjEDsbm4sbdyP3jhkr0kRdTJfqVq8=;
-        b=MDCGHG19Of3Nfwq5tDQH6xCoiYWNZv8yq0ZQoxVWZRD/jkcuXhI1Z52dHcCTmilQB/
-         aoS3nCCXEB63m3EkFryPSpWIwHdf1aEoKSaVOv3+Ou7n67iF1xWlygVkep2jj86pv1NY
-         VnkgrUzt6mhtJj418Awht2lrZMYGfzB58dcQQ=
+        bh=VaQPIr/iUhJbuSXHFgzk1pv0fVgLMa/FnSrLAtP3Sps=;
+        b=YTwepV7IljEvO45/m1udXDdgM3Fav6TP1s9xC5p0e3KoK/bzQZJ84mtH8urXgdgEan
+         exNuR8Oy8AhxwwN7TXyQLk66TMCqNUJDI6hk4ULWTrNkpHmTR0gXLI0arL+wPava4ovy
+         N4EPw9UlWZ1nwlyePbprWvKwUatrZ6GoCw6No=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727978376; x=1728583176;
+        d=1e100.net; s=20230601; t=1727978379; x=1728583179;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=yKa7ZcXOITGDqakjEDsbm4sbdyP3jhkr0kRdTJfqVq8=;
-        b=epedcDn2wIprcRmYc9K+rmbYUTTi5yZamzI5qAZJHCqFgBtNmtMfHk5b+ZBiB5AMK4
-         2Lyc1mxegGS33kAcvt18L0yGOwij2goq0pohPBMSakz5ak1ejRMz/Ht9XGa2+tSuGu2R
-         flRWHVILh/rEXOXjqiKERZHCqjjOIh7c+G+DDOyYmWvUiPMANl3Slbu+1z5yzkuUnjhH
-         uuTVKgZZk02jWIuYBBFOBmkLRbO8PpFSGzYyoRdjOiQtzzQ5OIertMMOxkOdrDTrucwv
-         BQfQRlkvCXscEiYCXoVCA7cILQFTKZGkH0EiWDo9wkOamnJCON23bN/bRP33tlOwlLSB
-         HDpA==
-X-Gm-Message-State: AOJu0Yy4bzoTCd1ddfUYUDASoD59H0ClTxj7u2V+4gUtwiPU2aZpVnqj
-	5HFP5vTIwymYXhh2hoeDIvB3ViCaoJ7c91d3LmpXsXqzn4m6H4uOi3zSgwNG2UzQljGx6FoEz5f
-	w
-X-Google-Smtp-Source: AGHT+IFYcpLkIKd1kaBdUVaHubimNO+D/AENlCPG4B2cxHe2zRwM/EzW+OZIFYNAaKUO/k0CkUtufg==
-X-Received: by 2002:a17:907:9281:b0:a86:94e2:2a47 with SMTP id a640c23a62f3a-a991bd08ac7mr20623566b.15.1727978374620;
-        Thu, 03 Oct 2024 10:59:34 -0700 (PDT)
+        bh=VaQPIr/iUhJbuSXHFgzk1pv0fVgLMa/FnSrLAtP3Sps=;
+        b=g+QbcXM6ET9qYE/SoRrwA97K59BACcEW3I1Ma+pT3OLz/QHmT8njVt9zQ7Adsbt3qX
+         5LyFkY0AUCaRyFNkx8K+uLbSDxJfYjMRomTFSe+kX0g1y/kP+cl3LlJZLihqyPWMLpRl
+         yb+Fenv/0JhUrSR9iIIEgu9jgM/V8JelCdUtLTpxKI56bW6fDHPD/oZLR0etUP7InfCZ
+         AtWMytdiFHLVXaN0b1hjgjENuG+fV8E8HNKs6y81an7WwoxJaKFV0r9Py4TxmvNirEDA
+         FWSSj9YWyJGt0u/oSOs0GcioSmOq9ia2TnQHQyELNmu3Kr/iNNSh4hZeA3uSQRRGHFSa
+         LDRQ==
+X-Gm-Message-State: AOJu0YwYsZzD02LuhO8M3g8NUFXZU6n7dTk9AzXgXs6LSO2MUJjvgL0t
+	ZrPtxlTx/lpeR5BkebQTu+CW4heDBA4VsktTMga0Q+ycaOIPG/oAsrE43NYZNiZ8m3MavohmCDl
+	U
+X-Google-Smtp-Source: AGHT+IGDUi7QlBvXA8JUwVpI1ZuTyFN02eMjmqsUfkFrUMQBZdYpN1nggsjgC4egSb3MJvDvxGReGg==
+X-Received: by 2002:a05:6512:3e0f:b0:535:3dae:a14b with SMTP id 2adb3069b0e04-539ab85cc35mr157560e87.2.1727978378167;
+        Thu, 03 Oct 2024 10:59:38 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 01/19] xen: Update header guards - Generic
-Date: Thu,  3 Oct 2024 18:59:01 +0100
-Message-Id: <20241003175919.472774-2-frediano.ziglio@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: [PATCH v2 05/19] xen: Update header guards - ARM
+Date: Thu,  3 Oct 2024 18:59:05 +0100
+Message-Id: <20241003175919.472774-6-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241003175919.472774-1-frediano.ziglio@cloud.com>
 References: <20241003175919.472774-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Updated headers not having specific maintainers.
+Updated headers related to ARM.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
-Changes since v1:
-- excluded public headers, their guards is an API;
-- moved here changes needed to compile.
----
- tools/libs/guest/xg_dom_decompress_unsafe_zstd.c | 2 +-
- xen/arch/arm/include/asm/hypercall.h             | 2 +-
- xen/arch/arm/include/asm/p2m.h                   | 2 +-
- xen/arch/x86/include/asm/hypercall.h             | 2 +-
- xen/arch/x86/include/asm/p2m.h                   | 2 +-
- xen/common/coverage/coverage.h                   | 4 ++--
- xen/common/coverage/gcov.h                       | 6 +++---
- xen/common/libelf/libelf-private.h               | 6 +++---
- xen/common/lz4/defs.h                            | 6 +++---
- xen/common/ubsan/ubsan.h                         | 4 ++--
- xen/common/xz/lzma2.h                            | 4 ++--
- xen/common/xz/private.h                          | 4 ++--
- xen/common/xz/stream.h                           | 4 ++--
- xen/common/zstd/bitstream.h                      | 6 +++---
- xen/common/zstd/error_private.h                  | 6 +++---
- xen/common/zstd/fse.h                            | 6 +++---
- xen/common/zstd/huf.h                            | 6 +++---
- xen/common/zstd/mem.h                            | 6 +++---
- xen/common/zstd/zstd_internal.h                  | 6 +++---
- xen/drivers/video/font.h                         | 6 +++---
- xen/drivers/video/lfb.h                          | 4 ++--
- xen/drivers/video/modelines.h                    | 4 ++--
- xen/include/asm-generic/altp2m.h                 | 6 +++---
- xen/include/asm-generic/atomic-ops.h             | 6 +++---
- xen/include/asm-generic/device.h                 | 6 +++---
- xen/include/asm-generic/div64.h                  | 4 ++--
- xen/include/asm-generic/hardirq.h                | 6 +++---
- xen/include/asm-generic/hypercall.h              | 8 ++++----
- xen/include/asm-generic/iocap.h                  | 6 +++---
- xen/include/asm-generic/paging.h                 | 6 +++---
- xen/include/asm-generic/percpu.h                 | 6 +++---
- xen/include/asm-generic/random.h                 | 6 +++---
- xen/include/asm-generic/softirq.h                | 6 +++---
- xen/include/crypto/rijndael.h                    | 6 +++---
- xen/include/crypto/vmac.h                        | 4 ++--
- xen/include/xen/8250-uart.h                      | 6 +++---
- xen/include/xen/acpi.h                           | 6 +++---
- xen/include/xen/alternative-call.h               | 6 +++---
- xen/include/xen/atomic.h                         | 6 +++---
- xen/include/xen/bitmap.h                         | 6 +++---
- xen/include/xen/bitops.h                         | 6 +++---
- xen/include/xen/bug.h                            | 6 +++---
- xen/include/xen/byteorder/big_endian.h           | 6 +++---
- xen/include/xen/byteorder/generic.h              | 6 +++---
- xen/include/xen/byteorder/little_endian.h        | 6 +++---
- xen/include/xen/byteorder/swab.h                 | 6 +++---
- xen/include/xen/cache.h                          | 6 +++---
- xen/include/xen/compat.h                         | 6 +++---
- xen/include/xen/compiler.h                       | 6 +++---
- xen/include/xen/config.h                         | 6 +++---
- xen/include/xen/console.h                        | 6 +++---
- xen/include/xen/consoled.h                       | 6 +++---
- xen/include/xen/const.h                          | 6 +++---
- xen/include/xen/coverage.h                       | 4 ++--
- xen/include/xen/cper.h                           | 4 ++--
- xen/include/xen/cpu.h                            | 6 +++---
- xen/include/xen/cpuidle.h                        | 6 +++---
- xen/include/xen/cpumask.h                        | 6 +++---
- xen/include/xen/ctype.h                          | 4 ++--
- xen/include/xen/decompress.h                     | 4 ++--
- xen/include/xen/delay.h                          | 6 +++---
- xen/include/xen/dm.h                             | 6 +++---
- xen/include/xen/dmi.h                            | 6 +++---
- xen/include/xen/domain.h                         | 6 +++---
- xen/include/xen/domain_page.h                    | 6 +++---
- xen/include/xen/dt-overlay.h                     | 6 +++---
- xen/include/xen/early_printk.h                   | 4 ++--
- xen/include/xen/earlycpio.h                      | 6 +++---
- xen/include/xen/efi.h                            | 6 +++---
- xen/include/xen/elf.h                            | 6 +++---
- xen/include/xen/elfcore.h                        | 6 +++---
- xen/include/xen/elfstructs.h                     | 6 +++---
- xen/include/xen/err.h                            | 6 +++---
- xen/include/xen/errno.h                          | 6 +++---
- xen/include/xen/event.h                          | 6 +++---
- xen/include/xen/grant_table.h                    | 6 +++---
- xen/include/xen/guest_access.h                   | 6 +++---
- xen/include/xen/gunzip.h                         | 4 ++--
- xen/include/xen/hypercall.h                      | 6 +++---
- xen/include/xen/init.h                           | 6 +++---
- xen/include/xen/inttypes.h                       | 6 +++---
- xen/include/xen/iocap.h                          | 6 +++---
- xen/include/xen/ioreq.h                          | 6 +++---
- xen/include/xen/irq.h                            | 6 +++---
- xen/include/xen/irq_cpustat.h                    | 6 +++---
- xen/include/xen/kconfig.h                        | 6 +++---
- xen/include/xen/kernel.h                         | 6 +++---
- xen/include/xen/keyhandler.h                     | 6 +++---
- xen/include/xen/lib.h                            | 6 +++---
- xen/include/xen/libelf.h                         | 6 +++---
- xen/include/xen/linkage.h                        | 6 +++---
- xen/include/xen/linux-compat.h                   | 6 +++---
- xen/include/xen/list.h                           | 6 +++---
- xen/include/xen/list_sort.h                      | 4 ++--
- xen/include/xen/lz4.h                            | 4 ++--
- xen/include/xen/lzo.h                            | 4 ++--
- xen/include/xen/macros.h                         | 6 +++---
- xen/include/xen/mm-frame.h                       | 6 +++---
- xen/include/xen/mm.h                             | 6 +++---
- xen/include/xen/msi.h                            | 4 ++--
- xen/include/xen/multiboot.h                      | 6 +++---
- xen/include/xen/multiboot2.h                     | 6 +++---
- xen/include/xen/multicall.h                      | 6 +++---
- xen/include/xen/nodemask.h                       | 6 +++---
- xen/include/xen/nospec.h                         | 6 +++---
- xen/include/xen/notifier.h                       | 6 +++---
- xen/include/xen/numa.h                           | 6 +++---
- xen/include/xen/p2m-common.h                     | 6 +++---
- xen/include/xen/page-defs.h                      | 6 +++---
- xen/include/xen/page-size.h                      | 4 ++--
- xen/include/xen/paging.h                         | 6 +++---
- xen/include/xen/param.h                          | 6 +++---
- xen/include/xen/pci.h                            | 6 +++---
- xen/include/xen/pci_regs.h                       | 6 +++---
- xen/include/xen/pdx.h                            | 6 +++---
- xen/include/xen/percpu.h                         | 6 +++---
- xen/include/xen/perfc.h                          | 6 +++---
- xen/include/xen/perfc_defn.h                     | 6 +++---
- xen/include/xen/pfn.h                            | 6 +++---
- xen/include/xen/pmap.h                           | 6 +++---
- xen/include/xen/pmstat.h                         | 6 +++---
- xen/include/xen/preempt.h                        | 6 +++---
- xen/include/xen/prefetch.h                       | 4 ++--
- xen/include/xen/pv_console.h                     | 6 +++---
- xen/include/xen/radix-tree.h                     | 6 +++---
- xen/include/xen/random.h                         | 6 +++---
- xen/include/xen/rangeset.h                       | 6 +++---
- xen/include/xen/rbtree.h                         | 6 +++---
- xen/include/xen/rcupdate.h                       | 6 +++---
- xen/include/xen/rwlock.h                         | 6 +++---
- xen/include/xen/sched.h                          | 6 +++---
- xen/include/xen/sections.h                       | 6 +++---
- xen/include/xen/self-tests.h                     | 6 +++---
- xen/include/xen/serial.h                         | 6 +++---
- xen/include/xen/shared.h                         | 6 +++---
- xen/include/xen/shutdown.h                       | 6 +++---
- xen/include/xen/sizes.h                          | 6 +++---
- xen/include/xen/smp.h                            | 6 +++---
- xen/include/xen/softirq.h                        | 6 +++---
- xen/include/xen/sort.h                           | 6 +++---
- xen/include/xen/spinlock.h                       | 6 +++---
- xen/include/xen/stdarg.h                         | 6 +++---
- xen/include/xen/stdbool.h                        | 6 +++---
- xen/include/xen/stdint.h                         | 6 +++---
- xen/include/xen/stop_machine.h                   | 6 +++---
- xen/include/xen/string.h                         | 6 +++---
- xen/include/xen/stringify.h                      | 6 +++---
- xen/include/xen/symbols.h                        | 6 +++---
- xen/include/xen/tasklet.h                        | 6 +++---
- xen/include/xen/time.h                           | 6 +++---
- xen/include/xen/timer.h                          | 6 +++---
- xen/include/xen/trace.h                          | 6 +++---
- xen/include/xen/types.h                          | 6 +++---
- xen/include/xen/typesafe.h                       | 6 +++---
- xen/include/xen/unaligned.h                      | 6 +++---
- xen/include/xen/version.h                        | 6 +++---
- xen/include/xen/vga.h                            | 6 +++---
- xen/include/xen/video.h                          | 6 +++---
- xen/include/xen/virtual_region.h                 | 6 +++---
- xen/include/xen/vmap.h                           | 6 +++---
- xen/include/xen/wait.h                           | 6 +++---
- xen/include/xen/warning.h                        | 4 ++--
- xen/include/xen/watchdog.h                       | 6 +++---
- xen/include/xen/xen.lds.h                        | 6 +++---
- xen/include/xen/xenoprof.h                       | 4 ++--
- xen/include/xen/xmalloc.h                        | 6 +++---
- xen/include/xen/xxhash.h                         | 6 +++---
- 167 files changed, 469 insertions(+), 469 deletions(-)
+ xen/arch/arm/arm32/lib/assembler.h                      | 6 +++---
+ xen/arch/arm/arm64/lib/assembler.h                      | 6 +++---
+ xen/arch/arm/decode.h                                   | 6 +++---
+ xen/arch/arm/include/asm/acpi.h                         | 6 +++---
+ xen/arch/arm/include/asm/alternative.h                  | 6 +++---
+ xen/arch/arm/include/asm/arm32/atomic.h                 | 6 +++---
+ xen/arch/arm/include/asm/arm32/bitops.h                 | 6 +++---
+ xen/arch/arm/include/asm/arm32/bug.h                    | 6 +++---
+ xen/arch/arm/include/asm/arm32/cmpxchg.h                | 4 ++--
+ xen/arch/arm/include/asm/arm32/flushtlb.h               | 6 +++---
+ xen/arch/arm/include/asm/arm32/insn.h                   | 6 +++---
+ xen/arch/arm/include/asm/arm32/io.h                     | 6 +++---
+ xen/arch/arm/include/asm/arm32/macros.h                 | 6 +++---
+ xen/arch/arm/include/asm/arm32/mm.h                     | 6 +++---
+ xen/arch/arm/include/asm/arm32/nospec.h                 | 6 +++---
+ xen/arch/arm/include/asm/arm32/page.h                   | 6 +++---
+ xen/arch/arm/include/asm/arm32/processor.h              | 6 +++---
+ xen/arch/arm/include/asm/arm32/sysregs.h                | 6 +++---
+ xen/arch/arm/include/asm/arm32/system.h                 | 4 ++--
+ xen/arch/arm/include/asm/arm32/traps.h                  | 6 +++---
+ xen/arch/arm/include/asm/arm32/vfp.h                    | 6 +++---
+ xen/arch/arm/include/asm/arm64/atomic.h                 | 4 ++--
+ xen/arch/arm/include/asm/arm64/bitops.h                 | 6 +++---
+ xen/arch/arm/include/asm/arm64/brk.h                    | 6 +++---
+ xen/arch/arm/include/asm/arm64/bug.h                    | 6 +++---
+ xen/arch/arm/include/asm/arm64/cmpxchg.h                | 4 ++--
+ xen/arch/arm/include/asm/arm64/cpufeature.h             | 4 ++--
+ xen/arch/arm/include/asm/arm64/efibind.h                | 4 ++--
+ xen/arch/arm/include/asm/arm64/flushtlb.h               | 6 +++---
+ xen/arch/arm/include/asm/arm64/hsr.h                    | 6 +++---
+ xen/arch/arm/include/asm/arm64/insn.h                   | 6 +++---
+ xen/arch/arm/include/asm/arm64/io.h                     | 6 +++---
+ xen/arch/arm/include/asm/arm64/macros.h                 | 6 +++---
+ xen/arch/arm/include/asm/arm64/mm.h                     | 6 +++---
+ xen/arch/arm/include/asm/arm64/nospec.h                 | 6 +++---
+ xen/arch/arm/include/asm/arm64/page.h                   | 6 +++---
+ xen/arch/arm/include/asm/arm64/processor.h              | 6 +++---
+ xen/arch/arm/include/asm/arm64/sve.h                    | 6 +++---
+ xen/arch/arm/include/asm/arm64/sysregs.h                | 4 ++--
+ xen/arch/arm/include/asm/arm64/system.h                 | 4 ++--
+ xen/arch/arm/include/asm/arm64/traps.h                  | 6 +++---
+ xen/arch/arm/include/asm/arm64/vfp.h                    | 6 +++---
+ xen/arch/arm/include/asm/asm_defns.h                    | 6 +++---
+ xen/arch/arm/include/asm/atomic.h                       | 6 +++---
+ xen/arch/arm/include/asm/bitops.h                       | 6 +++---
+ xen/arch/arm/include/asm/bug.h                          | 6 +++---
+ xen/arch/arm/include/asm/byteorder.h                    | 6 +++---
+ xen/arch/arm/include/asm/cache.h                        | 4 ++--
+ xen/arch/arm/include/asm/cadence-uart.h                 | 4 ++--
+ xen/arch/arm/include/asm/config.h                       | 6 +++---
+ xen/arch/arm/include/asm/cpregs.h                       | 4 ++--
+ xen/arch/arm/include/asm/cpuerrata.h                    | 6 +++---
+ xen/arch/arm/include/asm/cpufeature.h                   | 4 ++--
+ xen/arch/arm/include/asm/current.h                      | 6 +++---
+ xen/arch/arm/include/asm/div64.h                        | 4 ++--
+ xen/arch/arm/include/asm/dom0less-build.h               | 6 +++---
+ xen/arch/arm/include/asm/domain.h                       | 6 +++---
+ xen/arch/arm/include/asm/domain_build.h                 | 4 ++--
+ xen/arch/arm/include/asm/early_printk.h                 | 4 ++--
+ xen/arch/arm/include/asm/elf.h                          | 6 +++---
+ xen/arch/arm/include/asm/event.h                        | 4 ++--
+ xen/arch/arm/include/asm/exynos4210-uart.h              | 6 +++---
+ xen/arch/arm/include/asm/fixmap.h                       | 6 +++---
+ xen/arch/arm/include/asm/flushtlb.h                     | 6 +++---
+ xen/arch/arm/include/asm/gic.h                          | 4 ++--
+ xen/arch/arm/include/asm/gic_v3_defs.h                  | 6 +++---
+ xen/arch/arm/include/asm/gic_v3_its.h                   | 4 ++--
+ xen/arch/arm/include/asm/grant_table.h                  | 6 +++---
+ xen/arch/arm/include/asm/guest_access.h                 | 6 +++---
+ xen/arch/arm/include/asm/guest_atomics.h                | 6 +++---
+ xen/arch/arm/include/asm/guest_walk.h                   | 6 +++---
+ xen/arch/arm/include/asm/hsr.h                          | 6 +++---
+ xen/arch/arm/include/asm/hypercall.h                    | 6 +++---
+ xen/arch/arm/include/asm/imx-lpuart.h                   | 6 +++---
+ xen/arch/arm/include/asm/insn.h                         | 6 +++---
+ xen/arch/arm/include/asm/io.h                           | 4 ++--
+ xen/arch/arm/include/asm/iommu.h                        | 6 +++---
+ xen/arch/arm/include/asm/iommu_fwspec.h                 | 6 +++---
+ xen/arch/arm/include/asm/ioreq.h                        | 6 +++---
+ xen/arch/arm/include/asm/irq.h                          | 6 +++---
+ xen/arch/arm/include/asm/kernel.h                       | 6 +++---
+ xen/arch/arm/include/asm/livepatch.h                    | 6 +++---
+ xen/arch/arm/include/asm/lpae.h                         | 6 +++---
+ xen/arch/arm/include/asm/macros.h                       | 4 ++--
+ xen/arch/arm/include/asm/mem_access.h                   | 6 +++---
+ xen/arch/arm/include/asm/mm.h                           | 6 +++---
+ xen/arch/arm/include/asm/mmio.h                         | 6 +++---
+ xen/arch/arm/include/asm/mmu/layout.h                   | 6 +++---
+ xen/arch/arm/include/asm/mmu/mm.h                       | 6 +++---
+ xen/arch/arm/include/asm/mmu/p2m.h                      | 6 +++---
+ xen/arch/arm/include/asm/monitor.h                      | 6 +++---
+ xen/arch/arm/include/asm/new_vgic.h                     | 6 +++---
+ xen/arch/arm/include/asm/nospec.h                       | 6 +++---
+ xen/arch/arm/include/asm/p2m.h                          | 6 +++---
+ xen/arch/arm/include/asm/page-bits.h                    | 6 +++---
+ xen/arch/arm/include/asm/page.h                         | 6 +++---
+ xen/arch/arm/include/asm/pci.h                          | 6 +++---
+ xen/arch/arm/include/asm/perfc.h                        | 4 ++--
+ xen/arch/arm/include/asm/perfc_defn.h                   | 6 +++---
+ xen/arch/arm/include/asm/pl011-uart.h                   | 6 +++---
+ xen/arch/arm/include/asm/platform.h                     | 6 +++---
+ xen/arch/arm/include/asm/platforms/exynos5.h            | 6 +++---
+ xen/arch/arm/include/asm/platforms/midway.h             | 2 +-
+ xen/arch/arm/include/asm/platforms/omap5.h              | 4 ++--
+ xen/arch/arm/include/asm/platforms/vexpress.h           | 6 +++---
+ xen/arch/arm/include/asm/platforms/xilinx-zynqmp-eemi.h | 6 +++---
+ xen/arch/arm/include/asm/pmap.h                         | 6 +++---
+ xen/arch/arm/include/asm/processor.h                    | 6 +++---
+ xen/arch/arm/include/asm/procinfo.h                     | 4 ++--
+ xen/arch/arm/include/asm/psci.h                         | 6 +++---
+ xen/arch/arm/include/asm/regs.h                         | 6 +++---
+ xen/arch/arm/include/asm/scif-uart.h                    | 6 +++---
+ xen/arch/arm/include/asm/setup.h                        | 4 ++--
+ xen/arch/arm/include/asm/short-desc.h                   | 6 +++---
+ xen/arch/arm/include/asm/smccc.h                        | 6 +++---
+ xen/arch/arm/include/asm/smp.h                          | 4 ++--
+ xen/arch/arm/include/asm/spinlock.h                     | 6 +++---
+ xen/arch/arm/include/asm/static-evtchn.h                | 6 +++---
+ xen/arch/arm/include/asm/static-memory.h                | 6 +++---
+ xen/arch/arm/include/asm/static-shmem.h                 | 6 +++---
+ xen/arch/arm/include/asm/string.h                       | 6 +++---
+ xen/arch/arm/include/asm/sysregs.h                      | 6 +++---
+ xen/arch/arm/include/asm/system.h                       | 4 ++--
+ xen/arch/arm/include/asm/tee/ffa.h                      | 6 +++---
+ xen/arch/arm/include/asm/tee/optee_msg.h                | 6 +++---
+ xen/arch/arm/include/asm/tee/optee_rpc_cmd.h            | 6 +++---
+ xen/arch/arm/include/asm/tee/optee_smc.h                | 6 +++---
+ xen/arch/arm/include/asm/tee/tee.h                      | 6 +++---
+ xen/arch/arm/include/asm/time.h                         | 6 +++---
+ xen/arch/arm/include/asm/traps.h                        | 6 +++---
+ xen/arch/arm/include/asm/types.h                        | 6 +++---
+ xen/arch/arm/include/asm/vfp.h                          | 6 +++---
+ xen/arch/arm/include/asm/vgic-emul.h                    | 6 +++---
+ xen/arch/arm/include/asm/vgic.h                         | 6 +++---
+ xen/arch/arm/include/asm/vpl011.h                       | 6 +++---
+ xen/arch/arm/include/asm/vpsci.h                        | 6 +++---
+ xen/arch/arm/include/asm/vreg.h                         | 6 +++---
+ xen/arch/arm/include/asm/vtimer.h                       | 4 ++--
+ xen/arch/arm/tee/ffa_private.h                          | 6 +++---
+ xen/arch/arm/vgic/vgic-mmio.h                           | 4 ++--
+ xen/arch/arm/vgic/vgic.h                                | 4 ++--
+ xen/arch/arm/vpci.h                                     | 6 +++---
+ xen/arch/arm/vuart.h                                    | 6 +++---
+ xen/drivers/passthrough/arm/smmu-v3.h                   | 6 +++---
+ xen/include/public/arch-arm.h                           | 6 +++---
+ xen/include/public/arch-arm/hvm/save.h                  | 4 ++--
+ xen/include/public/arch-arm/smccc.h                     | 6 +++---
+ 147 files changed, 409 insertions(+), 409 deletions(-)
 
-diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c b/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
-index ff45732a36..8f6081bba6 100644
---- a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
-+++ b/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
-@@ -31,7 +31,7 @@ typedef uint64_t __be64;
- #undef ERROR
- 
- #define __BYTEORDER_HAS_U64__
--#define __TYPES_H__ /* xen/types.h guard */
-+#define XEN__TYPES_H /* xen/types.h guard */
- #include "../../xen/include/xen/byteorder/little_endian.h"
- #include "../../xen/include/xen/unaligned.h"
- #include "../../xen/include/xen/xxhash.h"
-diff --git a/xen/arch/arm/include/asm/hypercall.h b/xen/arch/arm/include/asm/hypercall.h
-index 07e231f8b5..0a23f8d484 100644
---- a/xen/arch/arm/include/asm/hypercall.h
-+++ b/xen/arch/arm/include/asm/hypercall.h
-@@ -1,5 +1,5 @@
- /* SAF-10-safe direct inclusion guard before */
--#ifndef __XEN_HYPERCALL_H__
-+#ifndef XEN__HYPERCALL_H
- #error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
- #endif
- 
-diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
-index 4818dd4b6a..c84fe8d97d 100644
---- a/xen/arch/arm/include/asm/p2m.h
-+++ b/xen/arch/arm/include/asm/p2m.h
-@@ -160,7 +160,7 @@ typedef enum {
-                              P2M_FOREIGN_TYPES))
- 
- /* All common type definitions should live ahead of this inclusion. */
--#ifdef _XEN_P2M_COMMON_H
-+#ifdef XEN__P2M_COMMON_H
- # error "xen/p2m-common.h should not be included directly"
- #endif
- #include <xen/p2m-common.h>
-diff --git a/xen/arch/x86/include/asm/hypercall.h b/xen/arch/x86/include/asm/hypercall.h
-index f6e9e2313b..e71b48d860 100644
---- a/xen/arch/x86/include/asm/hypercall.h
-+++ b/xen/arch/x86/include/asm/hypercall.h
-@@ -3,7 +3,7 @@
-  */
- 
- /* SAF-10-safe direct inclusion guard before */
--#ifndef __XEN_HYPERCALL_H__
-+#ifndef XEN__HYPERCALL_H
- #error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
- #endif
- 
-diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
-index e6de37f108..321c7b5941 100644
---- a/xen/arch/x86/include/asm/p2m.h
-+++ b/xen/arch/x86/include/asm/p2m.h
-@@ -392,7 +392,7 @@ struct p2m_domain {
- #define p2m_get_hostp2m(d)      ((d)->arch.p2m)
- 
- /* All common type definitions should live ahead of this inclusion. */
--#ifdef _XEN_P2M_COMMON_H
-+#ifdef XEN__P2M_COMMON_H
- # error "xen/p2m-common.h should not be included directly"
- #endif
- #include <xen/p2m-common.h>
-diff --git a/xen/common/coverage/coverage.h b/xen/common/coverage/coverage.h
-index aa66396c08..34400d0f4b 100644
---- a/xen/common/coverage/coverage.h
-+++ b/xen/common/coverage/coverage.h
-@@ -1,5 +1,5 @@
--#ifndef _XEN_COV_PRIV_H
--#define _XEN_COV_PRIV_H
-+#ifndef COMMON__COVERAGE__COVERAGE_H
-+#define COMMON__COVERAGE__COVERAGE_H
- 
- #include <xen/types.h>
- 
-diff --git a/xen/common/coverage/gcov.h b/xen/common/coverage/gcov.h
-index efc1fd7b00..f0f70019e3 100644
---- a/xen/common/coverage/gcov.h
-+++ b/xen/common/coverage/gcov.h
-@@ -1,5 +1,5 @@
--#ifndef _GCOV_H_
--#define _GCOV_H_
-+#ifndef COMMON__COVERAGE__GCOV_H
-+#define COMMON__COVERAGE__GCOV_H
- 
- #include <xen/guest_access.h>
- #include <xen/types.h>
-@@ -37,4 +37,4 @@ size_t gcov_info_to_gcda(char *buffer, const struct gcov_info *info);
- size_t gcov_store_uint32(void *buffer, size_t off, uint32_t v);
- size_t gcov_store_uint64(void *buffer, size_t off, uint64_t v);
- 
--#endif	/* _GCOV_H_ */
-+#endif	/* COMMON__COVERAGE__GCOV_H */
-diff --git a/xen/common/libelf/libelf-private.h b/xen/common/libelf/libelf-private.h
-index 197d7a7623..890fba8ae2 100644
---- a/xen/common/libelf/libelf-private.h
-+++ b/xen/common/libelf/libelf-private.h
-@@ -12,8 +12,8 @@
-  * You should have received a copy of the GNU Lesser General Public
-  * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-  */
--#ifndef __LIBELF_PRIVATE_H__
--#define __LIBELF_PRIVATE_H__
-+#ifndef COMMON__LIBELF__LIBELF_PRIVATE_H
-+#define COMMON__LIBELF__LIBELF_PRIVATE_H
- 
- #ifdef __XEN__
- 
-@@ -105,7 +105,7 @@ do { strncpy((d),(s),sizeof((d))-1);            \
-    * of memcpy, memset, memmove and strcpy.  Every call site
-    * must either use elf_mem*_unchecked, or elf_mem*_safe. */
- 
--#endif /* __LIBELF_PRIVATE_H__ */
-+#endif /* COMMON__LIBELF__LIBELF_PRIVATE_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/common/lz4/defs.h b/xen/common/lz4/defs.h
-index ecfbf07f83..6b974bc806 100644
---- a/xen/common/lz4/defs.h
-+++ b/xen/common/lz4/defs.h
-@@ -8,8 +8,8 @@
-  * published by the Free Software Foundation.
-  */
- 
--#ifndef COMMON_LZ4_DEFS_H
--#define COMMON_LZ4_DEFS_H
-+#ifndef COMMON__LZ4__DEFS_H
-+#define COMMON__LZ4__DEFS_H
- 
- #ifdef __XEN__
- #include <asm/byteorder.h>
-@@ -170,4 +170,4 @@ typedef struct _U64_S { u64 v; } U64_S;
- 		d = e;	\
- 	} while (0)
- 
--#endif /* COMMON_LZ4_DEFS_H */
-+#endif /* COMMON__LZ4__DEFS_H */
-diff --git a/xen/common/ubsan/ubsan.h b/xen/common/ubsan/ubsan.h
-index 9c7f3b9b6c..495e53a7fd 100644
---- a/xen/common/ubsan/ubsan.h
-+++ b/xen/common/ubsan/ubsan.h
-@@ -1,5 +1,5 @@
--#ifndef _LIB_UBSAN_H
--#define _LIB_UBSAN_H
-+#ifndef COMMON__UBSAN__UBSAN_H
-+#define COMMON__UBSAN__UBSAN_H
- 
- #include <xen/linux-compat.h>
- 
-diff --git a/xen/common/xz/lzma2.h b/xen/common/xz/lzma2.h
-index 06a7edb4d7..ba9afb0049 100644
---- a/xen/common/xz/lzma2.h
-+++ b/xen/common/xz/lzma2.h
-@@ -8,8 +8,8 @@
-  * You can do whatever you want with this file.
-  */
- 
--#ifndef XZ_LZMA2_H
--#define XZ_LZMA2_H
-+#ifndef COMMON__XZ__LZMA2_H
-+#define COMMON__XZ__LZMA2_H
- 
- /* Range coder constants */
- #define RC_SHIFT_BITS 8
-diff --git a/xen/common/xz/private.h b/xen/common/xz/private.h
-index 2299705378..b1345a9ddb 100644
---- a/xen/common/xz/private.h
-+++ b/xen/common/xz/private.h
-@@ -7,8 +7,8 @@
-  * You can do whatever you want with this file.
-  */
- 
--#ifndef XZ_PRIVATE_H
--#define XZ_PRIVATE_H
-+#ifndef COMMON__XZ__PRIVATE_H
-+#define COMMON__XZ__PRIVATE_H
- 
- #ifdef __XEN__
- #include <xen/kernel.h>
-diff --git a/xen/common/xz/stream.h b/xen/common/xz/stream.h
-index 8d9fbbe1b5..a4caa665fd 100644
---- a/xen/common/xz/stream.h
-+++ b/xen/common/xz/stream.h
-@@ -7,8 +7,8 @@
-  * You can do whatever you want with this file.
-  */
- 
--#ifndef XZ_STREAM_H
--#define XZ_STREAM_H
-+#ifndef COMMON__XZ__STREAM_H
-+#define COMMON__XZ__STREAM_H
- 
- /*
-  * See the .xz file format specification at
-diff --git a/xen/common/zstd/bitstream.h b/xen/common/zstd/bitstream.h
-index 2b06d4551f..c38afe399e 100644
---- a/xen/common/zstd/bitstream.h
-+++ b/xen/common/zstd/bitstream.h
-@@ -38,8 +38,8 @@
-  * You can contact the author at :
-  * - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
-  */
--#ifndef BITSTREAM_H_MODULE
--#define BITSTREAM_H_MODULE
-+#ifndef COMMON__ZSTD__BITSTREAM_H
-+#define COMMON__ZSTD__BITSTREAM_H
- 
- /*
- *  This API consists of small unitary functions, which must be inlined for best performance.
-@@ -377,4 +377,4 @@ ZSTD_STATIC unsigned BIT_endOfDStream(const BIT_DStream_t *DStream)
- 	return ((DStream->ptr == DStream->start) && (DStream->bitsConsumed == sizeof(DStream->bitContainer) * 8));
- }
- 
--#endif /* BITSTREAM_H_MODULE */
-+#endif /* COMMON__ZSTD__BITSTREAM_H */
-diff --git a/xen/common/zstd/error_private.h b/xen/common/zstd/error_private.h
-index fa84ae4fef..171525b252 100644
---- a/xen/common/zstd/error_private.h
-+++ b/xen/common/zstd/error_private.h
-@@ -16,8 +16,8 @@
- 
- /* Note : this module is expected to remain private, do not expose it */
- 
--#ifndef ERROR_H_MODULE
--#define ERROR_H_MODULE
-+#ifndef COMMON__ZSTD__ERROR_PRIVATE_H
-+#define COMMON__ZSTD__ERROR_PRIVATE_H
- 
- /**
-  * enum ZSTD_ErrorCode - zstd error codes
-@@ -102,4 +102,4 @@ static __attribute__((unused)) ZSTD_ErrorCode __init ZSTD_getErrorCode(
- 	return (ZSTD_ErrorCode)(0 - functionResult);
- }
- 
--#endif /* ERROR_H_MODULE */
-+#endif /* COMMON__ZSTD__ERROR_PRIVATE_H */
-diff --git a/xen/common/zstd/fse.h b/xen/common/zstd/fse.h
-index 5761e09f17..dc15c8cd7f 100644
---- a/xen/common/zstd/fse.h
-+++ b/xen/common/zstd/fse.h
-@@ -37,8 +37,8 @@
-  * You can contact the author at :
-  * - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
-  */
--#ifndef FSE_H
--#define FSE_H
-+#ifndef COMMON__ZSTD__FSE_H
-+#define COMMON__ZSTD__FSE_H
- 
- /*-*****************************************
- *  FSE_PUBLIC_API : control library symbols visibility
-@@ -567,4 +567,4 @@ ZSTD_STATIC unsigned FSE_endOfDState(const FSE_DState_t *DStatePtr) { return DSt
- 
- #define FSE_TABLESTEP(tableSize) ((tableSize >> 1) + (tableSize >> 3) + 3)
- 
--#endif /* FSE_H */
-+#endif /* COMMON__ZSTD__FSE_H */
-diff --git a/xen/common/zstd/huf.h b/xen/common/zstd/huf.h
-index 0e091dbffe..e2ed6cf82b 100644
---- a/xen/common/zstd/huf.h
-+++ b/xen/common/zstd/huf.h
-@@ -37,8 +37,8 @@
-  * You can contact the author at :
-  * - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
-  */
--#ifndef HUF_H_298734234
--#define HUF_H_298734234
-+#ifndef COMMON__ZSTD__HUF_H
-+#define COMMON__ZSTD__HUF_H
- 
- /* ***   Tool functions *** */
- #define HUF_BLOCKSIZE_MAX (128 * 1024) /**< maximum input size for a single block compressed with HUF_compress */
-@@ -206,4 +206,4 @@ size_t HUF_decompress1X_usingDTable(void *dst, size_t maxDstSize, const void *cS
- size_t HUF_decompress1X2_usingDTable(void *dst, size_t maxDstSize, const void *cSrc, size_t cSrcSize, const HUF_DTable *DTable);
- size_t HUF_decompress1X4_usingDTable(void *dst, size_t maxDstSize, const void *cSrc, size_t cSrcSize, const HUF_DTable *DTable);
- 
--#endif /* HUF_H_298734234 */
-+#endif /* COMMON__ZSTD__HUF_H */
-diff --git a/xen/common/zstd/mem.h b/xen/common/zstd/mem.h
-index ae1e305126..8e4228771c 100644
---- a/xen/common/zstd/mem.h
-+++ b/xen/common/zstd/mem.h
+diff --git a/xen/arch/arm/arm32/lib/assembler.h b/xen/arch/arm/arm32/lib/assembler.h
+index 6de2638a36..a79eef420f 100644
+--- a/xen/arch/arm/arm32/lib/assembler.h
++++ b/xen/arch/arm/arm32/lib/assembler.h
 @@ -14,8 +14,8 @@
-  * ("BSD").
+  *  Do not include any C declarations in this file - it is included by
+  *  assembler source.
   */
+-#ifndef __ASM_ASSEMBLER_H__
+-#define __ASM_ASSEMBLER_H__
++#ifndef ARM__ARM32__LIB__ASSEMBLER_H
++#define ARM__ARM32__LIB__ASSEMBLER_H
  
--#ifndef MEM_H_MODULE
--#define MEM_H_MODULE
-+#ifndef COMMON__ZSTD__MEM_H
-+#define COMMON__ZSTD__MEM_H
+ #ifndef __ASSEMBLY__
+ #error "Only include this from assembly code"
+@@ -322,4 +322,4 @@
+ 	.size \name , . - \name
+ 	.endm
  
- /*-****************************************
- *  Dependencies
-@@ -150,4 +150,4 @@ ZSTD_STATIC U32 ZSTD_readMINMATCH(const void *memPtr, U32 length)
- 	}
- }
+-#endif /* __ASM_ASSEMBLER_H__ */
++#endif /* ARM__ARM32__LIB__ASSEMBLER_H */
+diff --git a/xen/arch/arm/arm64/lib/assembler.h b/xen/arch/arm/arm64/lib/assembler.h
+index 3f9c0dcf5d..6560fae1f5 100644
+--- a/xen/arch/arm/arm64/lib/assembler.h
++++ b/xen/arch/arm/arm64/lib/assembler.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ASSEMBLER_H__
+-#define __ASM_ASSEMBLER_H__
++#ifndef ARM__ARM64__LIB__ASSEMBLER_H
++#define ARM__ARM64__LIB__ASSEMBLER_H
  
--#endif /* MEM_H_MODULE */
-+#endif /* COMMON__ZSTD__MEM_H */
-diff --git a/xen/common/zstd/zstd_internal.h b/xen/common/zstd/zstd_internal.h
-index 94f8c58622..93339813d6 100644
---- a/xen/common/zstd/zstd_internal.h
-+++ b/xen/common/zstd/zstd_internal.h
-@@ -14,8 +14,8 @@
-  * ("BSD").
-  */
+ #ifndef __ASSEMBLY__
+ #error "Only include this from assembly code"
+@@ -9,4 +9,4 @@
+ #define CPU_BE(x...)
+ #define CPU_LE(x...) x
  
--#ifndef ZSTD_CCOMMON_H_MODULE
--#define ZSTD_CCOMMON_H_MODULE
-+#ifndef COMMON__ZSTD__ZSTD_INTERNAL_H
-+#define COMMON__ZSTD__ZSTD_INTERNAL_H
- 
- /*-*******************************************************
- *  Compiler specifics
-@@ -373,4 +373,4 @@ size_t ZSTD_freeDDict(ZSTD_DDict *cdict);
- size_t ZSTD_freeCStream(ZSTD_CStream *zcs);
- size_t ZSTD_freeDStream(ZSTD_DStream *zds);
- 
--#endif /* ZSTD_CCOMMON_H_MODULE */
-+#endif /* COMMON__ZSTD__ZSTD_INTERNAL_H */
-diff --git a/xen/drivers/video/font.h b/xen/drivers/video/font.h
-index 7f720b3568..123a69dcef 100644
---- a/xen/drivers/video/font.h
-+++ b/xen/drivers/video/font.h
-@@ -8,8 +8,8 @@
-  *  for more details.
-  */
- 
--#ifndef _XEN_FONT_H
--#define _XEN_FONT_H
-+#ifndef DRIVERS__VIDEO__FONT_H
-+#define DRIVERS__VIDEO__FONT_H
- 
- struct font_desc {
-     const char *name;
-@@ -19,4 +19,4 @@ struct font_desc {
- 
- extern const struct font_desc font_vga_8x8, font_vga_8x14, font_vga_8x16;
- 
--#endif /* _XEN_FONT_H */
-+#endif /* DRIVERS__VIDEO__FONT_H */
-diff --git a/xen/drivers/video/lfb.h b/xen/drivers/video/lfb.h
-index 42161402d6..bee1bd3c28 100644
---- a/xen/drivers/video/lfb.h
-+++ b/xen/drivers/video/lfb.h
+-#endif /* __ASM_ASSEMBLER_H__ */
++#endif /* ARM__ARM64__LIB__ASSEMBLER_H */
+diff --git a/xen/arch/arm/decode.h b/xen/arch/arm/decode.h
+index 13db8ac968..00e9bbe085 100644
+--- a/xen/arch/arm/decode.h
++++ b/xen/arch/arm/decode.h
 @@ -17,8 +17,8 @@
   * GNU General Public License for more details.
   */
  
--#ifndef _XEN_LFB_H
--#define _XEN_LFB_H
-+#ifndef DRIVERS__VIDEO__LFB_H
-+#define DRIVERS__VIDEO__LFB_H
+-#ifndef __ARCH_ARM_DECODE_H_
+-#define __ARCH_ARM_DECODE_H_
++#ifndef ARM__DECODE_H
++#define ARM__DECODE_H
  
- #include <xen/init.h>
+ #include <asm/regs.h>
+ #include <asm/processor.h>
+@@ -73,7 +73,7 @@ union instr {
+ int decode_instruction(const struct cpu_user_regs *regs,
+                        mmio_info_t *info);
  
-diff --git a/xen/drivers/video/modelines.h b/xen/drivers/video/modelines.h
-index 9cb7cdde05..08d631b134 100644
---- a/xen/drivers/video/modelines.h
-+++ b/xen/drivers/video/modelines.h
-@@ -25,8 +25,8 @@
-  * Copyright (c) 2013 Citrix Systems
-  */
- 
--#ifndef _XEN_MODLINES_H
--#define _XEN_MODLINES_H
-+#ifndef DRIVERS__VIDEO__MODELINES_H
-+#define DRIVERS__VIDEO__MODELINES_H
- 
- struct modeline {
-     const char* mode;  /* in the form 1280x1024@60 */
-diff --git a/xen/include/asm-generic/altp2m.h b/xen/include/asm-generic/altp2m.h
-index 39865a842a..34ae943145 100644
---- a/xen/include/asm-generic/altp2m.h
-+++ b/xen/include/asm-generic/altp2m.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_ALTP2M_H
--#define __ASM_GENERIC_ALTP2M_H
-+#ifndef ASM_GENERIC__ALTP2M_H
-+#define ASM_GENERIC__ALTP2M_H
- 
- #include <xen/bug.h>
- 
-@@ -22,7 +22,7 @@ static inline unsigned int altp2m_vcpu_idx(const struct vcpu *v)
-     return 0;
- }
- 
--#endif /* __ASM_GENERIC_ALTP2M_H */
-+#endif /* ASM_GENERIC__ALTP2M_H */
+-#endif /* __ARCH_ARM_DECODE_H_ */
++#endif /* ARM__DECODE_H */
  
  /*
   * Local variables:
-diff --git a/xen/include/asm-generic/atomic-ops.h b/xen/include/asm-generic/atomic-ops.h
-index 98dd907942..b1f883c360 100644
---- a/xen/include/asm-generic/atomic-ops.h
-+++ b/xen/include/asm-generic/atomic-ops.h
-@@ -4,8 +4,8 @@
-  * forward inline declaration that can be synthesized from other atomic
-  * functions or being created from scratch.
-  */
--#ifndef _ASM_GENERIC_ATOMIC_OPS_H_
--#define _ASM_GENERIC_ATOMIC_OPS_H_
-+#ifndef ASM_GENERIC__ATOMIC_OPS_H
-+#define ASM_GENERIC__ATOMIC_OPS_H
- 
- #include <xen/atomic.h>
- #include <xen/lib.h>
-@@ -94,4 +94,4 @@ static inline int atomic_add_negative(int i, atomic_t *v)
- }
- #endif
- 
--#endif /* _ASM_GENERIC_ATOMIC_OPS_H_ */
-+#endif /* ASM_GENERIC__ATOMIC_OPS_H */
-diff --git a/xen/include/asm-generic/device.h b/xen/include/asm-generic/device.h
-index 1acd1ba1d8..eccd3159a9 100644
---- a/xen/include/asm-generic/device.h
-+++ b/xen/include/asm-generic/device.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_DEVICE_H__
--#define __ASM_GENERIC_DEVICE_H__
-+#ifndef ASM_GENERIC__DEVICE_H
-+#define ASM_GENERIC__DEVICE_H
- 
- #include <xen/stdbool.h>
- 
-@@ -127,7 +127,7 @@ __section(".adev.info") = {                                         \
- 
- #endif /* CONFIG_ACPI */
- 
--#endif /* __ASM_GENERIC_DEVICE_H__ */
-+#endif /* ASM_GENERIC__DEVICE_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/div64.h b/xen/include/asm-generic/div64.h
-index 068d8a11ad..774198f98b 100644
---- a/xen/include/asm-generic/div64.h
-+++ b/xen/include/asm-generic/div64.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_DIV64
--#define __ASM_GENERIC_DIV64
-+#ifndef ASM_GENERIC__DIV64_H
-+#define ASM_GENERIC__DIV64_H
- 
- #include <xen/types.h>
- 
-diff --git a/xen/include/asm-generic/hardirq.h b/xen/include/asm-generic/hardirq.h
-index ddccf460b9..09260b1b08 100644
---- a/xen/include/asm-generic/hardirq.h
-+++ b/xen/include/asm-generic/hardirq.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_HARDIRQ_H
--#define __ASM_GENERIC_HARDIRQ_H
-+#ifndef ASM_GENERIC__HARDIRQ_H
-+#define ASM_GENERIC__HARDIRQ_H
- 
- #include <xen/cache.h>
- #include <xen/smp.h>
-@@ -17,7 +17,7 @@ typedef struct {
- #define irq_enter()     (local_irq_count(smp_processor_id())++)
- #define irq_exit()      (local_irq_count(smp_processor_id())--)
- 
--#endif /* __ASM_GENERIC_HARDIRQ_H */
-+#endif /* ASM_GENERIC__HARDIRQ_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/hypercall.h b/xen/include/asm-generic/hypercall.h
-index 7743b35c0d..201b2cb301 100644
---- a/xen/include/asm-generic/hypercall.h
-+++ b/xen/include/asm-generic/hypercall.h
-@@ -1,12 +1,12 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __XEN_HYPERCALL_H__
-+#ifndef XEN__HYPERCALL_H
- #error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
- #endif
- 
--#ifndef __ASM_GENERIC_HYPERCALL_H__
--#define __ASM_GENERIC_HYPERCALL_H__
-+#ifndef ASM_GENERIC__HYPERCALL_H
-+#define ASM_GENERIC__HYPERCALL_H
- 
--#endif /* __ASM_GENERIC_HYPERCALL_H__ */
-+#endif /* ASM_GENERIC__HYPERCALL_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/iocap.h b/xen/include/asm-generic/iocap.h
-index dd7cb45488..1001fb629a 100644
---- a/xen/include/asm-generic/iocap.h
-+++ b/xen/include/asm-generic/iocap.h
-@@ -1,11 +1,11 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_IOCAP_H__
--#define __ASM_GENERIC_IOCAP_H__
-+#ifndef ASM_GENERIC__IOCAP_H
-+#define ASM_GENERIC__IOCAP_H
- 
- #define cache_flush_permitted(d)                        \
-     (!rangeset_is_empty((d)->iomem_caps))
- 
--#endif /* __ASM_GENERIC_IOCAP_H__ */
-+#endif /* ASM_GENERIC__IOCAP_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/paging.h b/xen/include/asm-generic/paging.h
-index 8df534cfdc..1a8fae6543 100644
---- a/xen/include/asm-generic/paging.h
-+++ b/xen/include/asm-generic/paging.h
-@@ -1,13 +1,13 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_PAGING_H__
--#define __ASM_GENERIC_PAGING_H__
-+#ifndef ASM_GENERIC__PAGING_H
-+#define ASM_GENERIC__PAGING_H
- 
- #include <xen/stdbool.h>
- 
- #define paging_mode_translate(d)    ((void)(d), true)
- #define paging_mode_external(d)     ((void)(d), true)
- 
--#endif /* __ASM_GENERIC_PAGING_H__ */
-+#endif /* ASM_GENERIC__PAGING_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/percpu.h b/xen/include/asm-generic/percpu.h
-index 60af4f9ff9..7302edb00c 100644
---- a/xen/include/asm-generic/percpu.h
-+++ b/xen/include/asm-generic/percpu.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_PERCPU_H__
--#define __ASM_GENERIC_PERCPU_H__
-+#ifndef ASM_GENERIC__PERCPU_H
-+#define ASM_GENERIC__PERCPU_H
- 
- #ifndef __ASSEMBLY__
- 
-@@ -25,7 +25,7 @@ void percpu_init_areas(void);
- 
- #endif
- 
--#endif /* __ASM_GENERIC_PERCPU_H__ */
-+#endif /* ASM_GENERIC__PERCPU_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/random.h b/xen/include/asm-generic/random.h
-index d0d35dd217..f2e6c1c11c 100644
---- a/xen/include/asm-generic/random.h
-+++ b/xen/include/asm-generic/random.h
-@@ -1,13 +1,13 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_RANDOM_H__
--#define __ASM_GENERIC_RANDOM_H__
-+#ifndef ASM_GENERIC__RANDOM_H
-+#define ASM_GENERIC__RANDOM_H
- 
- static inline unsigned int arch_get_random(void)
- {
-     return 0;
- }
- 
--#endif /* __ASM_GENERIC_RANDOM_H__ */
-+#endif /* ASM_GENERIC__RANDOM_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/softirq.h b/xen/include/asm-generic/softirq.h
-index 83be855e50..92144c7eca 100644
---- a/xen/include/asm-generic/softirq.h
-+++ b/xen/include/asm-generic/softirq.h
-@@ -1,12 +1,12 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_GENERIC_SOFTIRQ_H__
--#define __ASM_GENERIC_SOFTIRQ_H__
-+#ifndef ASM_GENERIC__SOFTIRQ_H
-+#define ASM_GENERIC__SOFTIRQ_H
- 
- #define NR_ARCH_SOFTIRQS       0
- 
- #define arch_skip_send_event_check(cpu) 0
- 
--#endif /* __ASM_GENERIC_SOFTIRQ_H__ */
-+#endif /* ASM_GENERIC__SOFTIRQ_H */
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/crypto/rijndael.h b/xen/include/crypto/rijndael.h
-index 4386be5878..52c7a2f622 100644
---- a/xen/include/crypto/rijndael.h
-+++ b/xen/include/crypto/rijndael.h
-@@ -25,8 +25,8 @@
-  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  */
--#ifndef __RIJNDAEL_H
--#define __RIJNDAEL_H
-+#ifndef CRYPTO__RIJNDAEL_H
-+#define CRYPTO__RIJNDAEL_H
- 
- #define AES_MAXKEYBITS	(256)
- #define AES_MAXKEYBYTES	(AES_MAXKEYBITS/8)
-@@ -55,4 +55,4 @@ int	rijndaelKeySetupDec(unsigned int [], const unsigned char [], int);
- void	rijndaelEncrypt(const unsigned int [], int, const unsigned char [16],
- 	    unsigned char [16]);
- 
--#endif /* __RIJNDAEL_H */
-+#endif /* CRYPTO__RIJNDAEL_H */
-diff --git a/xen/include/crypto/vmac.h b/xen/include/crypto/vmac.h
-index 457f3f5dd6..310fc77f5c 100644
---- a/xen/include/crypto/vmac.h
-+++ b/xen/include/crypto/vmac.h
-@@ -1,5 +1,5 @@
--#ifndef HEADER_VMAC_H
--#define HEADER_VMAC_H
-+#ifndef CRYPTO__VMAC_H
-+#define CRYPTO__VMAC_H
- 
- /* --------------------------------------------------------------------------
-  * VMAC and VHASH Implementation by Ted Krovetz (tdk@acm.org) and Wei Dai.
-diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
-index d13352940c..7915297a24 100644
---- a/xen/include/xen/8250-uart.h
-+++ b/xen/include/xen/8250-uart.h
+diff --git a/xen/arch/arm/include/asm/acpi.h b/xen/arch/arm/include/asm/acpi.h
+index 13756dd341..364cd671b4 100644
+--- a/xen/arch/arm/include/asm/acpi.h
++++ b/xen/arch/arm/include/asm/acpi.h
 @@ -19,8 +19,8 @@
-  * GNU General Public License for more details.
-  */
- 
--#ifndef __XEN_8250_UART_H__
--#define __XEN_8250_UART_H__
-+#ifndef XEN__8250_UART_H
-+#define XEN__8250_UART_H
- 
- /* Register offsets */
- #define UART_RBR          0x00    /* receive buffer       */
-@@ -129,7 +129,7 @@
- #define RESUME_DELAY      MILLISECS(10)
- #define RESUME_RETRIES    100
- 
--#endif /* __XEN_8250_UART_H__ */
-+#endif /* XEN__8250_UART_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/acpi.h b/xen/include/xen/acpi.h
-index bc4818c943..64efc0a7bc 100644
---- a/xen/include/xen/acpi.h
-+++ b/xen/include/xen/acpi.h
-@@ -21,8 +21,8 @@
   * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   */
  
--#ifndef _LINUX_ACPI_H
--#define _LINUX_ACPI_H
-+#ifndef XEN__ACPI_H
-+#define XEN__ACPI_H
+-#ifndef _ASM_ARM_ACPI_H
+-#define _ASM_ARM_ACPI_H
++#ifndef ASM__ARM__ACPI_H
++#define ASM__ARM__ACPI_H
  
- #ifndef _LINUX
- #define _LINUX
-@@ -204,4 +204,4 @@ static inline void acpi_dmar_reinstate(void) {}
+ #include <asm/setup.h>
  
- #endif /* __ASSEMBLY__ */
+@@ -78,4 +78,4 @@ static inline void enable_acpi(void)
+ #define enable_acpi()
+ #endif
  
--#endif /*_LINUX_ACPI_H*/
-+#endif /*XEN__ACPI_H*/
-diff --git a/xen/include/xen/alternative-call.h b/xen/include/xen/alternative-call.h
-index 10f7d7637e..a91ae14416 100644
---- a/xen/include/xen/alternative-call.h
-+++ b/xen/include/xen/alternative-call.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0 */
--#ifndef XEN_ALTERNATIVE_CALL
--#define XEN_ALTERNATIVE_CALL
-+#ifndef XEN__ALTERNATIVE_CALL_H
-+#define XEN__ALTERNATIVE_CALL_H
+-#endif /*_ASM_ARM_ACPI_H*/
++#endif /*ASM__ARM__ACPI_H*/
+diff --git a/xen/arch/arm/include/asm/alternative.h b/xen/arch/arm/include/asm/alternative.h
+index 22477d9497..9a03298a41 100644
+--- a/xen/arch/arm/include/asm/alternative.h
++++ b/xen/arch/arm/include/asm/alternative.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ALTERNATIVE_H
+-#define __ASM_ALTERNATIVE_H
++#ifndef ASM__ARM__ALTERNATIVE_H
++#define ASM__ARM__ALTERNATIVE_H
+ 
+ #include <asm/cpufeature.h>
+ #include <asm/insn.h>
+@@ -218,4 +218,4 @@ alternative_endif
+ #define ALTERNATIVE(oldinstr, newinstr, ...)   \
+ 	_ALTERNATIVE_CFG(oldinstr, newinstr, __VA_ARGS__, 1)
+ 
+-#endif /* __ASM_ALTERNATIVE_H */
++#endif /* ASM__ARM__ALTERNATIVE_H */
+diff --git a/xen/arch/arm/include/asm/arm32/atomic.h b/xen/arch/arm/include/asm/arm32/atomic.h
+index 33f9e73b19..f63efd173c 100644
+--- a/xen/arch/arm/include/asm/arm32/atomic.h
++++ b/xen/arch/arm/include/asm/arm32/atomic.h
+@@ -8,8 +8,8 @@
+  * it under the terms of the GNU General Public License version 2 as
+  * published by the Free Software Foundation.
+  */
+-#ifndef __ARCH_ARM_ARM32_ATOMIC__
+-#define __ARCH_ARM_ARM32_ATOMIC__
++#ifndef ASM__ARM__ARM32__ATOMIC_H
++#define ASM__ARM__ARM32__ATOMIC_H
  
  /*
-  * Some subsystems in Xen may have multiple implementations, which can be
-@@ -65,4 +65,4 @@
- #define __alt_call_maybe_initdata __ro_after_init
+  * ARMv6 UP and SMP safe atomic ops.  We use load exclusive and
+@@ -164,7 +164,7 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
+ 	return oldval;
+ }
  
- #endif /* !CONFIG_ALTERNATIVE_CALL */
--#endif /* XEN_ALTERNATIVE_CALL */
-+#endif /* XEN__ALTERNATIVE_CALL_H */
-diff --git a/xen/include/xen/atomic.h b/xen/include/xen/atomic.h
-index fa750a18ae..ecff44c23d 100644
---- a/xen/include/xen/atomic.h
-+++ b/xen/include/xen/atomic.h
-@@ -19,8 +19,8 @@
-  * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __XEN_ATOMIC_H__
--#define __XEN_ATOMIC_H__
-+#ifndef XEN__ATOMIC_H
-+#define XEN__ATOMIC_H
- 
- typedef struct { int counter; } atomic_t;
- 
-@@ -204,4 +204,4 @@ static inline int atomic_add_negative(int i, atomic_t *v);
-  */
- static inline int atomic_add_unless(atomic_t *v, int a, int u);
- 
--#endif /* __XEN_ATOMIC_H__ */
-+#endif /* XEN__ATOMIC_H */
-diff --git a/xen/include/xen/bitmap.h b/xen/include/xen/bitmap.h
-index 4b642cd420..83b80214bc 100644
---- a/xen/include/xen/bitmap.h
-+++ b/xen/include/xen/bitmap.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_BITMAP_H
--#define __XEN_BITMAP_H
-+#ifndef XEN__BITMAP_H
-+#define XEN__BITMAP_H
- 
- #ifndef __ASSEMBLY__
- 
-@@ -292,4 +292,4 @@ int bitmap_to_xenctl_bitmap(struct xenctl_bitmap *xenctl_bitmap,
- 
- #endif /* __ASSEMBLY__ */
- 
--#endif /* __XEN_BITMAP_H */
-+#endif /* XEN__BITMAP_H */
-diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
-index 12eb88fb12..540cd58e9f 100644
---- a/xen/include/xen/bitops.h
-+++ b/xen/include/xen/bitops.h
-@@ -1,5 +1,5 @@
--#ifndef XEN_BITOPS_H
--#define XEN_BITOPS_H
-+#ifndef XEN__BITOPS_H
-+#define XEN__BITOPS_H
- 
- #include <xen/compiler.h>
- #include <xen/types.h>
-@@ -438,4 +438,4 @@ static inline __u32 ror32(__u32 word, unsigned int shift)
- 
- #define BIT_WORD(nr) ((nr) / BITS_PER_LONG)
- 
--#endif /* XEN_BITOPS_H */
-+#endif /* XEN__BITOPS_H */
-diff --git a/xen/include/xen/bug.h b/xen/include/xen/bug.h
-index 99814c4bef..6f901fa1e4 100644
---- a/xen/include/xen/bug.h
-+++ b/xen/include/xen/bug.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_BUG_H__
--#define __XEN_BUG_H__
-+#ifndef XEN__BUG_H
-+#define XEN__BUG_H
- 
- #define BUGFRAME_run_fn 0
- #define BUGFRAME_warn   1
-@@ -157,7 +157,7 @@ int do_bug_frame(const struct cpu_user_regs *regs, unsigned long pc);
- 
- #endif /* !__ASSEMBLY__ */
- 
--#endif /* __XEN_BUG_H__ */
-+#endif /* XEN__BUG_H */
+-#endif /* __ARCH_ARM_ARM32_ATOMIC__ */
++#endif /* ASM__ARM__ARM32__ATOMIC_H */
  /*
   * Local variables:
   * mode: C
-diff --git a/xen/include/xen/byteorder/big_endian.h b/xen/include/xen/byteorder/big_endian.h
-index 40eb80a390..5b33acb577 100644
---- a/xen/include/xen/byteorder/big_endian.h
-+++ b/xen/include/xen/byteorder/big_endian.h
+diff --git a/xen/arch/arm/include/asm/arm32/bitops.h b/xen/arch/arm/include/asm/arm32/bitops.h
+index 0d7bb12d5c..6e4018df0c 100644
+--- a/xen/arch/arm/include/asm/arm32/bitops.h
++++ b/xen/arch/arm/include/asm/arm32/bitops.h
 @@ -1,5 +1,5 @@
--#ifndef __XEN_BYTEORDER_BIG_ENDIAN_H__
--#define __XEN_BYTEORDER_BIG_ENDIAN_H__
-+#ifndef XEN__BYTEORDER__BIG_ENDIAN_H
-+#define XEN__BYTEORDER__BIG_ENDIAN_H
- 
- #ifndef __BIG_ENDIAN
- #define __BIG_ENDIAN 4321
-@@ -99,4 +99,4 @@ static inline __u16 __be16_to_cpup(const __be16 *p)
- 
- #include <xen/byteorder/generic.h>
- 
--#endif /* __XEN_BYTEORDER_BIG_ENDIAN_H__ */
-+#endif /* XEN__BYTEORDER__BIG_ENDIAN_H */
-diff --git a/xen/include/xen/byteorder/generic.h b/xen/include/xen/byteorder/generic.h
-index 8a0006b755..f97eb4771b 100644
---- a/xen/include/xen/byteorder/generic.h
-+++ b/xen/include/xen/byteorder/generic.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_BYTEORDER_GENERIC_H__
--#define __XEN_BYTEORDER_GENERIC_H__
-+#ifndef XEN__BYTEORDER__GENERIC_H
-+#define XEN__BYTEORDER__GENERIC_H
+-#ifndef _ARM_ARM32_BITOPS_H
+-#define _ARM_ARM32_BITOPS_H
++#ifndef ASM__ARM__ARM32__BITOPS_H
++#define ASM__ARM__ARM32__BITOPS_H
  
  /*
-  * Generic Byte-reordering support
-@@ -65,4 +65,4 @@
- #define cpu_to_be16s __cpu_to_be16s
- #define be16_to_cpus __be16_to_cpus
+  * Little endian assembly bitops.  nr = 0 -> byte 0 bit 0.
+@@ -37,4 +37,4 @@ extern int _find_next_bit_be(const unsigned long *p, int size, int offset);
  
--#endif /* __XEN_BYTEORDER_GENERIC_H__ */
-+#endif /* XEN__BYTEORDER__GENERIC_H */
-diff --git a/xen/include/xen/byteorder/little_endian.h b/xen/include/xen/byteorder/little_endian.h
-index 4955632793..6e944dca1a 100644
---- a/xen/include/xen/byteorder/little_endian.h
-+++ b/xen/include/xen/byteorder/little_endian.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_BYTEORDER_LITTLE_ENDIAN_H__
--#define __XEN_BYTEORDER_LITTLE_ENDIAN_H__
-+#ifndef XEN__BYTEORDER__LITTLE_ENDIAN_H
-+#define XEN__BYTEORDER__LITTLE_ENDIAN_H
- 
- #ifndef __LITTLE_ENDIAN
- #define __LITTLE_ENDIAN 1234
-@@ -99,4 +99,4 @@ static inline __u16 __be16_to_cpup(const __be16 *p)
- 
- #include <xen/byteorder/generic.h>
- 
--#endif /* __XEN_BYTEORDER_LITTLE_ENDIAN_H__ */
-+#endif /* XEN__BYTEORDER__LITTLE_ENDIAN_H */
-diff --git a/xen/include/xen/byteorder/swab.h b/xen/include/xen/byteorder/swab.h
-index 9f817e3c44..96f8834e53 100644
---- a/xen/include/xen/byteorder/swab.h
-+++ b/xen/include/xen/byteorder/swab.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_BYTEORDER_SWAB_H__
--#define __XEN_BYTEORDER_SWAB_H__
-+#ifndef XEN__BYTEORDER__SWAB_H
-+#define XEN__BYTEORDER__SWAB_H
- 
- /*
-  * Byte-swapping, independently from CPU endianness
-@@ -180,4 +180,4 @@ static inline void __swab64s(__u64 *addr)
- #define swab32s __swab32s
- #define swab64s __swab64s
- 
--#endif /* __XEN_BYTEORDER_SWAB_H__ */
-+#endif /* XEN__BYTEORDER__SWAB_H */
-diff --git a/xen/include/xen/cache.h b/xen/include/xen/cache.h
-index 6ee174efa4..9aa5150188 100644
---- a/xen/include/xen/cache.h
-+++ b/xen/include/xen/cache.h
-@@ -1,5 +1,5 @@
--#ifndef __LINUX_CACHE_H
--#define __LINUX_CACHE_H
-+#ifndef XEN__CACHE_H
-+#define XEN__CACHE_H
- 
- #include <asm/cache.h>
- 
-@@ -15,4 +15,4 @@
- #define __cacheline_aligned __attribute__((__aligned__(SMP_CACHE_BYTES)))
  #endif
  
--#endif /* __LINUX_CACHE_H */
-+#endif /* XEN__CACHE_H */
-diff --git a/xen/include/xen/compat.h b/xen/include/xen/compat.h
-index 7ec9d6567e..d1f6463530 100644
---- a/xen/include/xen/compat.h
-+++ b/xen/include/xen/compat.h
-@@ -2,8 +2,8 @@
-  * compat.h
-  */
+-#endif /* _ARM_ARM32_BITOPS_H */
++#endif /* ASM__ARM__ARM32__BITOPS_H */
+diff --git a/xen/arch/arm/include/asm/arm32/bug.h b/xen/arch/arm/include/asm/arm32/bug.h
+index 25cce151dc..638a8be149 100644
+--- a/xen/arch/arm/include/asm/arm32/bug.h
++++ b/xen/arch/arm/include/asm/arm32/bug.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ARM32_BUG_H__
+-#define __ARM_ARM32_BUG_H__
++#ifndef ASM__ARM__ARM32__BUG_H
++#define ASM__ARM__ARM32__BUG_H
  
--#ifndef __XEN_COMPAT_H__
--#define __XEN_COMPAT_H__
-+#ifndef XEN__COMPAT_H
-+#define XEN__COMPAT_H
+ #include <xen/stringify.h>
+ 
+@@ -12,4 +12,4 @@
+ 
+ #define BUG_FN_REG r0
+ 
+-#endif /* __ARM_ARM32_BUG_H__ */
++#endif /* ASM__ARM__ARM32__BUG_H */
+diff --git a/xen/arch/arm/include/asm/arm32/cmpxchg.h b/xen/arch/arm/include/asm/arm32/cmpxchg.h
+index 8455eb7cc3..13f6a9cf19 100644
+--- a/xen/arch/arm/include/asm/arm32/cmpxchg.h
++++ b/xen/arch/arm/include/asm/arm32/cmpxchg.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM32_CMPXCHG_H
+-#define __ASM_ARM32_CMPXCHG_H
++#ifndef ASM__ARM__ARM32__CMPXCHG_H
++#define ASM__ARM__ARM32__CMPXCHG_H
+ 
+ #include <xen/bug.h>
+ #include <xen/prefetch.h>
+diff --git a/xen/arch/arm/include/asm/arm32/flushtlb.h b/xen/arch/arm/include/asm/arm32/flushtlb.h
+index 61c25a3189..dfeb0f3542 100644
+--- a/xen/arch/arm/include/asm/arm32/flushtlb.h
++++ b/xen/arch/arm/include/asm/arm32/flushtlb.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM32_FLUSHTLB_H__
+-#define __ASM_ARM_ARM32_FLUSHTLB_H__
++#ifndef ASM__ARM__ARM32__FLUSHTLB_H
++#define ASM__ARM__ARM32__FLUSHTLB_H
+ 
+ /*
+  * Every invalidation operation use the following patterns:
+@@ -57,7 +57,7 @@ static inline void __flush_xen_tlb_one(vaddr_t va)
+     asm volatile(STORE_CP32(0, TLBIMVAHIS) : : "r" (va) : "memory");
+ }
+ 
+-#endif /* __ASM_ARM_ARM32_FLUSHTLB_H__ */
++#endif /* ASM__ARM__ARM32__FLUSHTLB_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm32/insn.h b/xen/arch/arm/include/asm/arm32/insn.h
+index c800cbfff5..9693ad0606 100644
+--- a/xen/arch/arm/include/asm/arm32/insn.h
++++ b/xen/arch/arm/include/asm/arm32/insn.h
+@@ -13,8 +13,8 @@
+   * You should have received a copy of the GNU General Public License
+   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   */
+-#ifndef __ARCH_ARM_ARM32_INSN
+-#define __ARCH_ARM_ARM32_INSN
++#ifndef ASM__ARM__ARM32__INSN_H
++#define ASM__ARM__ARM32__INSN_H
  
  #include <xen/types.h>
- #ifdef CONFIG_HAS_COMPAT
-@@ -243,4 +243,4 @@ void xlat_vcpu_runstate_info(struct vcpu_runstate_info *native);
  
- #endif
+@@ -60,7 +60,7 @@ static inline uint32_t insn_set_branch_offset(uint32_t insn, int32_t offset)
+     return aarch32_set_branch_offset(insn, offset);
+ }
  
--#endif /* __XEN_COMPAT_H__ */
-+#endif /* XEN__COMPAT_H */
-diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
-index b118e4ba62..e1ec208873 100644
---- a/xen/include/xen/compiler.h
-+++ b/xen/include/xen/compiler.h
+-#endif /* !__ARCH_ARM_ARM32_INSN */
++#endif /* !ASM__ARM__ARM32__INSN_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm32/io.h b/xen/arch/arm/include/asm/arm32/io.h
+index 782b564809..c92dcaf1ca 100644
+--- a/xen/arch/arm/include/asm/arm32/io.h
++++ b/xen/arch/arm/include/asm/arm32/io.h
+@@ -18,8 +18,8 @@
+  *  18-Jun-2000 RMK    Removed virt_to_* and friends definitions
+  *  05-Oct-2004 BJD     Moved memory string functions to use void __iomem
+  */
+-#ifndef _ARM_ARM32_IO_H
+-#define _ARM_ARM32_IO_H
++#ifndef ASM__ARM__ARM32__IO_H
++#define ASM__ARM__ARM32__IO_H
+ 
+ #include <asm/system.h>
+ #include <asm/byteorder.h>
+@@ -113,4 +113,4 @@ static inline void writeq_relaxed_non_atomic(u64 val, volatile void __iomem *add
+ #define writew(v,c)             ({ __iowmb(); writew_relaxed(v,c); })
+ #define writel(v,c)             ({ __iowmb(); writel_relaxed(v,c); })
+ 
+-#endif /* _ARM_ARM32_IO_H */
++#endif /* ASM__ARM__ARM32__IO_H */
+diff --git a/xen/arch/arm/include/asm/arm32/macros.h b/xen/arch/arm/include/asm/arm32/macros.h
+index db681a7c7e..dc907117a2 100644
+--- a/xen/arch/arm/include/asm/arm32/macros.h
++++ b/xen/arch/arm/include/asm/arm32/macros.h
 @@ -1,5 +1,5 @@
--#ifndef __LINUX_COMPILER_H
--#define __LINUX_COMPILER_H
-+#ifndef XEN__COMPILER_H
-+#define XEN__COMPILER_H
+-#ifndef __ASM_ARM_ARM32_MACROS_H
+-#define __ASM_ARM_ARM32_MACROS_H
++#ifndef ASM__ARM__ARM32__MACROS_H
++#define ASM__ARM__ARM32__MACROS_H
  
- #if !defined(__GNUC__) || (__GNUC__ < 4)
- #error Sorry, your compiler is too old/not recognized.
-@@ -184,4 +184,4 @@
- # define CLANG_DISABLE_WARN_GCC_COMPAT_END
+ .macro ret
+         mov     pc, lr
+@@ -75,4 +75,4 @@
+ 
+ #endif /* !CONFIG_EARLY_PRINTK */
+ 
+-#endif /* __ASM_ARM_ARM32_MACROS_H */
++#endif /* ASM__ARM__ARM32__MACROS_H */
+diff --git a/xen/arch/arm/include/asm/arm32/mm.h b/xen/arch/arm/include/asm/arm32/mm.h
+index 856f2dbec4..4f22d9943a 100644
+--- a/xen/arch/arm/include/asm/arm32/mm.h
++++ b/xen/arch/arm/include/asm/arm32/mm.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ARM32_MM_H__
+-#define __ARM_ARM32_MM_H__
++#ifndef ASM__ARM__ARM32__MM_H
++#define ASM__ARM__ARM32__MM_H
+ 
+ #include <xen/percpu.h>
+ 
+@@ -22,7 +22,7 @@ static inline void arch_setup_page_tables(void)
+ {
+ }
+ 
+-#endif /* __ARM_ARM32_MM_H__ */
++#endif /* ASM__ARM__ARM32__MM_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/arm32/nospec.h b/xen/arch/arm/include/asm/arm32/nospec.h
+index be3c7712c8..ecb627b08f 100644
+--- a/xen/arch/arm/include/asm/arm32/nospec.h
++++ b/xen/arch/arm/include/asm/arm32/nospec.h
+@@ -1,6 +1,6 @@
+ /* Portions taken from Linux arch arm */
+-#ifndef __ASM_ARM32_NOSPEC_H
+-#define __ASM_ARM32_NOSPEC_H
++#ifndef ASM__ARM__ARM32__NOSPEC_H
++#define ASM__ARM__ARM32__NOSPEC_H
+ 
+ #define CSDB    ".inst  0xe320f014"
+ 
+@@ -20,7 +20,7 @@ static inline unsigned long array_index_mask_nospec(unsigned long idx,
+ }
+ #define array_index_mask_nospec array_index_mask_nospec
+ 
+-#endif /* __ASM_ARM32_NOSPEC_H */
++#endif /* ASM__ARM__ARM32__NOSPEC_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm32/page.h b/xen/arch/arm/include/asm/arm32/page.h
+index 6d1ff0636c..09e631d94a 100644
+--- a/xen/arch/arm/include/asm/arm32/page.h
++++ b/xen/arch/arm/include/asm/arm32/page.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ARM32_PAGE_H__
+-#define __ARM_ARM32_PAGE_H__
++#ifndef ASM__ARM__ARM32__PAGE_H
++#define ASM__ARM__ARM32__PAGE_H
+ 
+ #ifndef __ASSEMBLY__
+ 
+@@ -89,7 +89,7 @@ static inline uint64_t gva_to_ipa_par(vaddr_t va, unsigned int flags)
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __ARM_ARM32_PAGE_H__ */
++#endif /* ASM__ARM__ARM32__PAGE_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/arm32/processor.h b/xen/arch/arm/include/asm/arm32/processor.h
+index 4e679f3273..c9160c69e8 100644
+--- a/xen/arch/arm/include/asm/arm32/processor.h
++++ b/xen/arch/arm/include/asm/arm32/processor.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM32_PROCESSOR_H
+-#define __ASM_ARM_ARM32_PROCESSOR_H
++#ifndef ASM__ARM__ARM32__PROCESSOR_H
++#define ASM__ARM__ARM32__PROCESSOR_H
+ 
+ #define ACTLR_CAXX_SMP      (1<<6)
+ 
+@@ -58,7 +58,7 @@ struct cpu_user_regs
+ 
  #endif
  
--#endif /* __LINUX_COMPILER_H */
-+#endif /* XEN__COMPILER_H */
-diff --git a/xen/include/xen/config.h b/xen/include/xen/config.h
-index d888b2314d..5202d25a66 100644
---- a/xen/include/xen/config.h
-+++ b/xen/include/xen/config.h
+-#endif /* __ASM_ARM_ARM32_PROCESSOR_H */
++#endif /* ASM__ARM__ARM32__PROCESSOR_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm32/sysregs.h b/xen/arch/arm/include/asm/arm32/sysregs.h
+index 22871999af..3846ca73f4 100644
+--- a/xen/arch/arm/include/asm/arm32/sysregs.h
++++ b/xen/arch/arm/include/asm/arm32/sysregs.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM32_SYSREGS_H
+-#define __ASM_ARM_ARM32_SYSREGS_H
++#ifndef ASM__ARM__ARM32__SYSREGS_H
++#define ASM__ARM__ARM32__SYSREGS_H
+ 
+ #include <xen/stringify.h>
+ #include <asm/cpregs.h>
+@@ -86,7 +86,7 @@
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __ASM_ARM_ARM32_SYSREGS_H */
++#endif /* ASM__ARM__ARM32__SYSREGS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm32/system.h b/xen/arch/arm/include/asm/arm32/system.h
+index c617b40438..96060032a9 100644
+--- a/xen/arch/arm/include/asm/arm32/system.h
++++ b/xen/arch/arm/include/asm/arm32/system.h
+@@ -1,6 +1,6 @@
+ /* Portions taken from Linux arch arm */
+-#ifndef __ASM_ARM32_SYSTEM_H
+-#define __ASM_ARM32_SYSTEM_H
++#ifndef ASM__ARM__ARM32__SYSTEM_H
++#define ASM__ARM__ARM32__SYSTEM_H
+ 
+ #include <asm/arm32/cmpxchg.h>
+ 
+diff --git a/xen/arch/arm/include/asm/arm32/traps.h b/xen/arch/arm/include/asm/arm32/traps.h
+index e3c4a8b473..c234e4c051 100644
+--- a/xen/arch/arm/include/asm/arm32/traps.h
++++ b/xen/arch/arm/include/asm/arm32/traps.h
+@@ -1,7 +1,7 @@
+-#ifndef __ASM_ARM32_TRAPS__
+-#define __ASM_ARM32_TRAPS__
++#ifndef ASM__ARM__ARM32__TRAPS_H
++#define ASM__ARM__ARM32__TRAPS_H
+ 
+-#endif /* __ASM_ARM32_TRAPS__ */
++#endif /* ASM__ARM__ARM32__TRAPS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm32/vfp.h b/xen/arch/arm/include/asm/arm32/vfp.h
+index 2f2e4b24bb..fe17ff7b79 100644
+--- a/xen/arch/arm/include/asm/arm32/vfp.h
++++ b/xen/arch/arm/include/asm/arm32/vfp.h
+@@ -1,5 +1,5 @@
+-#ifndef _ARM_ARM32_VFP_H
+-#define _ARM_ARM32_VFP_H
++#ifndef ASM__ARM__ARM32__VFP_H
++#define ASM__ARM__ARM32__VFP_H
+ 
+ #define FPEXC_EX                (1U << 31)
+ #define FPEXC_EN                (1U << 30)
+@@ -30,7 +30,7 @@ struct vfp_state
+     uint32_t fpinst2;
+ };
+ 
+-#endif /* _ARM_ARM32_VFP_H */
++#endif /* ASM__ARM__ARM32__VFP_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/atomic.h b/xen/arch/arm/include/asm/arm64/atomic.h
+index 4460165295..1d4c886a07 100644
+--- a/xen/arch/arm/include/asm/arm64/atomic.h
++++ b/xen/arch/arm/include/asm/arm64/atomic.h
+@@ -19,8 +19,8 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#ifndef __ARCH_ARM_ARM64_ATOMIC
+-#define __ARCH_ARM_ARM64_ATOMIC
++#ifndef ASM__ARM__ARM64__ATOMIC_H
++#define ASM__ARM__ARM64__ATOMIC_H
+ 
+ /*
+  * AArch64 UP and SMP safe atomic ops.  We use load exclusive and
+diff --git a/xen/arch/arm/include/asm/arm64/bitops.h b/xen/arch/arm/include/asm/arm64/bitops.h
+index a6135838dc..93ec1bfc98 100644
+--- a/xen/arch/arm/include/asm/arm64/bitops.h
++++ b/xen/arch/arm/include/asm/arm64/bitops.h
+@@ -1,5 +1,5 @@
+-#ifndef _ARM_ARM64_BITOPS_H
+-#define _ARM_ARM64_BITOPS_H
++#ifndef ASM__ARM__ARM64__BITOPS_H
++#define ASM__ARM__ARM64__BITOPS_H
+ 
+ /* Based on linux/include/asm-generic/bitops/find.h */
+ 
+@@ -10,7 +10,7 @@
+ 
+ #endif /* CONFIG_GENERIC_FIND_FIRST_BIT */
+ 
+-#endif /* _ARM_ARM64_BITOPS_H */
++#endif /* ASM__ARM__ARM64__BITOPS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/brk.h b/xen/arch/arm/include/asm/arm64/brk.h
+index 3af153a053..e36841d4ca 100644
+--- a/xen/arch/arm/include/asm/arm64/brk.h
++++ b/xen/arch/arm/include/asm/arm64/brk.h
+@@ -6,8 +6,8 @@
+  * published by the Free Software Foundation.
+  */
+ 
+-#ifndef __ASM_ARM_ARM64_BRK
+-#define __ASM_ARM_ARM64_BRK
++#ifndef ASM__ARM__ARM64__BRK_H
++#define ASM__ARM__ARM64__BRK_H
+ 
+ /*
+  * #imm16 values used for BRK instruction generation
+@@ -28,7 +28,7 @@
+  */
+ #define AARCH64_BREAK_FAULT (AARCH64_BREAK_MON | (BRK_FAULT_IMM << 5))
+ 
+-#endif /* !__ASM_ARM_ARM64_BRK */
++#endif /* !ASM__ARM__ARM64__BRK_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/bug.h b/xen/arch/arm/include/asm/arm64/bug.h
+index 5e11c0dfd5..aedd7c20a7 100644
+--- a/xen/arch/arm/include/asm/arm64/bug.h
++++ b/xen/arch/arm/include/asm/arm64/bug.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ARM64_BUG_H__
+-#define __ARM_ARM64_BUG_H__
++#ifndef ASM__ARM__ARM64__BUG_H
++#define ASM__ARM__ARM64__BUG_H
+ 
+ #include <xen/stringify.h>
+ #include <asm/arm64/brk.h>
+@@ -8,4 +8,4 @@
+ 
+ #define BUG_FN_REG x0
+ 
+-#endif /* __ARM_ARM64_BUG_H__ */
++#endif /* ASM__ARM__ARM64__BUG_H */
+diff --git a/xen/arch/arm/include/asm/arm64/cmpxchg.h b/xen/arch/arm/include/asm/arm64/cmpxchg.h
+index f160e8e7bc..40db44da13 100644
+--- a/xen/arch/arm/include/asm/arm64/cmpxchg.h
++++ b/xen/arch/arm/include/asm/arm64/cmpxchg.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM64_CMPXCHG_H
+-#define __ASM_ARM64_CMPXCHG_H
++#ifndef ASM__ARM__ARM64__CMPXCHG_H
++#define ASM__ARM__ARM64__CMPXCHG_H
+ 
+ #include <xen/bug.h>
+ 
+diff --git a/xen/arch/arm/include/asm/arm64/cpufeature.h b/xen/arch/arm/include/asm/arm64/cpufeature.h
+index 1bb503e857..52cc65f307 100644
+--- a/xen/arch/arm/include/asm/arm64/cpufeature.h
++++ b/xen/arch/arm/include/asm/arm64/cpufeature.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM64_CPUFEATURES_H
+-#define __ASM_ARM_ARM64_CPUFEATURES_H
++#ifndef ASM__ARM__ARM64__CPUFEATURE_H
++#define ASM__ARM__ARM64__CPUFEATURE_H
+ 
+ /*
+  * CPU feature register tracking
+diff --git a/xen/arch/arm/include/asm/arm64/efibind.h b/xen/arch/arm/include/asm/arm64/efibind.h
+index a1323d452e..cdc25f9a9c 100644
+--- a/xen/arch/arm/include/asm/arm64/efibind.h
++++ b/xen/arch/arm/include/asm/arm64/efibind.h
+@@ -16,8 +16,8 @@ Abstract:
+ Revision History
+ 
+ --*/
+-#ifndef AARCH64_EFI_BIND
+-#define AARCH64_EFI_BIND
++#ifndef ASM__ARM__ARM64__EFIBIND_H
++#define ASM__ARM__ARM64__EFIBIND_H
+ #ifndef __GNUC__
+ #pragma pack()
+ #endif
+diff --git a/xen/arch/arm/include/asm/arm64/flushtlb.h b/xen/arch/arm/include/asm/arm64/flushtlb.h
+index 45642201d1..90b8187ef1 100644
+--- a/xen/arch/arm/include/asm/arm64/flushtlb.h
++++ b/xen/arch/arm/include/asm/arm64/flushtlb.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM64_FLUSHTLB_H__
+-#define __ASM_ARM_ARM64_FLUSHTLB_H__
++#ifndef ASM__ARM__ARM64__FLUSHTLB_H
++#define ASM__ARM__ARM64__FLUSHTLB_H
+ 
+ /*
+  * Every invalidation operation use the following patterns:
+@@ -90,7 +90,7 @@ TLB_HELPER_VA(__flush_xen_tlb_one, vae2is)
+ #undef TLB_HELPER
+ #undef TLB_HELPER_VA
+ 
+-#endif /* __ASM_ARM_ARM64_FLUSHTLB_H__ */
++#endif /* ASM__ARM__ARM64__FLUSHTLB_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/hsr.h b/xen/arch/arm/include/asm/arm64/hsr.h
+index 1495ccddea..7d89eca4b1 100644
+--- a/xen/arch/arm/include/asm/arm64/hsr.h
++++ b/xen/arch/arm/include/asm/arm64/hsr.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM64_HSR_H
+-#define __ASM_ARM_ARM64_HSR_H
++#ifndef ASM__ARM__ARM64__HSR_H
++#define ASM__ARM__ARM64__HSR_H
+ 
+ /* AArch 64 System Register Encodings */
+ #define __HSR_SYSREG_c0  0
+@@ -150,7 +150,7 @@
+ #define HSR_SYSREG_ID_AA64AFR1_EL1   HSR_SYSREG(3,0,c0,c5,5)
+ #define HSR_SYSREG_ID_AA64ZFR0_EL1   HSR_SYSREG(3,0,c0,c4,4)
+ 
+-#endif /* __ASM_ARM_ARM64_HSR_H */
++#endif /* ASM__ARM__ARM64__HSR_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/arm64/insn.h b/xen/arch/arm/include/asm/arm64/insn.h
+index ab290030ab..bd701e96c5 100644
+--- a/xen/arch/arm/include/asm/arm64/insn.h
++++ b/xen/arch/arm/include/asm/arm64/insn.h
+@@ -16,8 +16,8 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#ifndef __ARCH_ARM_ARM64_INSN
+-#define __ARCH_ARM_ARM64_INSN
++#ifndef ASM__ARM__ARM64__INSN_H
++#define ASM__ARM__ARM64__INSN_H
+ 
+ #include <xen/types.h>
+ #include <xen/stdbool.h>
+@@ -99,7 +99,7 @@ static inline uint32_t insn_set_branch_offset(uint32_t insn, int32_t offset)
+     return aarch64_set_branch_offset(insn, offset);
+ }
+ 
+-#endif /* !__ARCH_ARM_ARM64_INSN */
++#endif /* !ASM__ARM__ARM64__INSN_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/io.h b/xen/arch/arm/include/asm/arm64/io.h
+index 2e2ab24f78..607d2501f4 100644
+--- a/xen/arch/arm/include/asm/arm64/io.h
++++ b/xen/arch/arm/include/asm/arm64/io.h
+@@ -17,8 +17,8 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#ifndef _ARM_ARM64_IO_H
+-#define _ARM_ARM64_IO_H
++#ifndef ASM__ARM__ARM64__IO_H
++#define ASM__ARM__ARM64__IO_H
+ 
+ #include <asm/system.h>
+ #include <asm/byteorder.h>
+@@ -147,4 +147,4 @@ static inline void emulate_write(u64 addr)
+ #define outw(v, c) ( emulate_write(c) )
+ #define outl(v, c) ( emulate_write(c) )
+ 
+-#endif /* _ARM_ARM64_IO_H */
++#endif /* ASM__ARM__ARM64__IO_H */
+diff --git a/xen/arch/arm/include/asm/arm64/macros.h b/xen/arch/arm/include/asm/arm64/macros.h
+index 46f50655ad..968198bceb 100644
+--- a/xen/arch/arm/include/asm/arm64/macros.h
++++ b/xen/arch/arm/include/asm/arm64/macros.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM64_MACROS_H
+-#define __ASM_ARM_ARM64_MACROS_H
++#ifndef ASM__ARM__ARM64__MACROS_H
++#define ASM__ARM__ARM64__MACROS_H
+ 
+     /*
+      * @dst: Result of get_cpu_info()
+@@ -96,5 +96,5 @@
+  */
+ lr      .req    x30             /* link register */
+ 
+-#endif /* __ASM_ARM_ARM64_MACROS_H */
++#endif /* ASM__ARM__ARM64__MACROS_H */
+ 
+diff --git a/xen/arch/arm/include/asm/arm64/mm.h b/xen/arch/arm/include/asm/arm64/mm.h
+index b4f7545d2c..b79fd4d2cd 100644
+--- a/xen/arch/arm/include/asm/arm64/mm.h
++++ b/xen/arch/arm/include/asm/arm64/mm.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ARM64_MM_H__
+-#define __ARM_ARM64_MM_H__
++#ifndef ASM__ARM__ARM64__MM_H
++#define ASM__ARM__ARM64__MM_H
+ 
+ extern DEFINE_PAGE_TABLE(xen_pgtable);
+ 
+@@ -16,7 +16,7 @@ void arch_setup_page_tables(void);
+ 
+ void update_boot_mapping(bool enable);
+ 
+-#endif /* __ARM_ARM64_MM_H__ */
++#endif /* ASM__ARM__ARM64__MM_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/arm64/nospec.h b/xen/arch/arm/include/asm/arm64/nospec.h
+index 2364ca692b..dc8d5aacb4 100644
+--- a/xen/arch/arm/include/asm/arm64/nospec.h
++++ b/xen/arch/arm/include/asm/arm64/nospec.h
+@@ -1,6 +1,6 @@
+ /* Portions taken from Linux arch arm64 */
+-#ifndef __ASM_ARM64_NOSPEC_H
+-#define __ASM_ARM64_NOSPEC_H
++#ifndef ASM__ARM__ARM64__NOSPEC_H
++#define ASM__ARM__ARM64__NOSPEC_H
+ 
+ #define csdb()  asm volatile ( "hint #20" : : : "memory" )
+ 
+@@ -24,7 +24,7 @@ static inline unsigned long array_index_mask_nospec(unsigned long idx,
+ }
+ #define array_index_mask_nospec array_index_mask_nospec
+ 
+-#endif /* __ASM_ARM64_NOSPEC_H */
++#endif /* ASM__ARM__ARM64__NOSPEC_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/page.h b/xen/arch/arm/include/asm/arm64/page.h
+index e944985ee0..8fc0275290 100644
+--- a/xen/arch/arm/include/asm/arm64/page.h
++++ b/xen/arch/arm/include/asm/arm64/page.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ARM64_PAGE_H__
+-#define __ARM_ARM64_PAGE_H__
++#ifndef ASM__ARM__ARM64__PAGE_H
++#define ASM__ARM__ARM64__PAGE_H
+ 
+ #ifndef __ASSEMBLY__
+ 
+@@ -79,7 +79,7 @@ extern void clear_page(void *to);
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __ARM_ARM64_PAGE_H__ */
++#endif /* ASM__ARM__ARM64__PAGE_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/arm64/processor.h b/xen/arch/arm/include/asm/arm64/processor.h
+index c749f80ad9..965e9f44f7 100644
+--- a/xen/arch/arm/include/asm/arm64/processor.h
++++ b/xen/arch/arm/include/asm/arm64/processor.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM64_PROCESSOR_H
+-#define __ASM_ARM_ARM64_PROCESSOR_H
++#ifndef ASM__ARM__ARM64__PROCESSOR_H
++#define ASM__ARM__ARM64__PROCESSOR_H
+ 
+ #ifndef __ASSEMBLY__
+ 
+@@ -88,7 +88,7 @@ struct cpu_user_regs
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __ASM_ARM_ARM64_PROCESSOR_H */
++#endif /* ASM__ARM__ARM64__PROCESSOR_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/sve.h b/xen/arch/arm/include/asm/arm64/sve.h
+index a71d6a295d..155dd27766 100644
+--- a/xen/arch/arm/include/asm/arm64/sve.h
++++ b/xen/arch/arm/include/asm/arm64/sve.h
+@@ -5,8 +5,8 @@
+  * Copyright (C) 2022 ARM Ltd.
+  */
+ 
+-#ifndef _ARM_ARM64_SVE_H
+-#define _ARM_ARM64_SVE_H
++#ifndef ASM__ARM__ARM64__SVE_H
++#define ASM__ARM__ARM64__SVE_H
+ 
+ #include <xen/sched.h>
+ 
+@@ -60,7 +60,7 @@ static inline unsigned int get_sys_vl_len(void)
+ 
+ #endif /* CONFIG_ARM64_SVE */
+ 
+-#endif /* _ARM_ARM64_SVE_H */
++#endif /* ASM__ARM__ARM64__SVE_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
+index b593e4028b..ee2b2172db 100644
+--- a/xen/arch/arm/include/asm/arm64/sysregs.h
++++ b/xen/arch/arm/include/asm/arm64/sysregs.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_ARM64_SYSREGS_H
+-#define __ASM_ARM_ARM64_SYSREGS_H
++#ifndef ASM__ARM__ARM64__SYSREGS_H
++#define ASM__ARM__ARM64__SYSREGS_H
+ 
+ #include <xen/stringify.h>
+ 
+diff --git a/xen/arch/arm/include/asm/arm64/system.h b/xen/arch/arm/include/asm/arm64/system.h
+index 2e2ee212a1..d96a17c30d 100644
+--- a/xen/arch/arm/include/asm/arm64/system.h
++++ b/xen/arch/arm/include/asm/arm64/system.h
+@@ -1,6 +1,6 @@
+ /* Portions taken from Linux arch arm64 */
+-#ifndef __ASM_ARM64_SYSTEM_H
+-#define __ASM_ARM64_SYSTEM_H
++#ifndef ASM__ARM__ARM64__SYSTEM_H
++#define ASM__ARM__ARM64__SYSTEM_H
+ 
+ #include <asm/arm64/cmpxchg.h>
+ 
+diff --git a/xen/arch/arm/include/asm/arm64/traps.h b/xen/arch/arm/include/asm/arm64/traps.h
+index a347cb13d6..2d11192d22 100644
+--- a/xen/arch/arm/include/asm/arm64/traps.h
++++ b/xen/arch/arm/include/asm/arm64/traps.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM64_TRAPS__
+-#define __ASM_ARM64_TRAPS__
++#ifndef ASM__ARM__ARM64__TRAPS_H
++#define ASM__ARM__ARM64__TRAPS_H
+ 
+ void inject_undef64_exception(struct cpu_user_regs *regs, int instr_len);
+ 
+@@ -8,7 +8,7 @@ void do_sysreg(struct cpu_user_regs *regs,
+ 
+ void do_bad_mode(struct cpu_user_regs *regs, int reason);
+ 
+-#endif /* __ASM_ARM64_TRAPS__ */
++#endif /* ASM__ARM__ARM64__TRAPS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/arm64/vfp.h b/xen/arch/arm/include/asm/arm64/vfp.h
+index 4b399ccbfb..145b2803ec 100644
+--- a/xen/arch/arm/include/asm/arm64/vfp.h
++++ b/xen/arch/arm/include/asm/arm64/vfp.h
+@@ -1,5 +1,5 @@
+-#ifndef _ARM_ARM64_VFP_H
+-#define _ARM_ARM64_VFP_H
++#ifndef ASM__ARM__ARM64__VFP_H
++#define ASM__ARM__ARM64__VFP_H
+ 
+ /* ARM64 VFP instruction requires fpregs address to be 128-byte aligned */
+ #define __vfp_aligned __attribute__((aligned(16)))
+@@ -28,7 +28,7 @@ struct vfp_state
+     register_t fpsr;
+ };
+ 
+-#endif /* _ARM_ARM64_VFP_H */
++#endif /* ASM__ARM__ARM64__VFP_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/asm_defns.h b/xen/arch/arm/include/asm/asm_defns.h
+index 47efdf5234..c3e136b240 100644
+--- a/xen/arch/arm/include/asm/asm_defns.h
++++ b/xen/arch/arm/include/asm/asm_defns.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ASM_DEFNS_H__
+-#define __ARM_ASM_DEFNS_H__
++#ifndef ASM__ARM__ASM_DEFNS_H
++#define ASM__ARM__ASM_DEFNS_H
+ 
+ #ifndef COMPILE_OFFSETS
+ /* NB. Auto-generated from arch/.../asm-offsets.c */
+@@ -28,7 +28,7 @@
+ label:  .asciz msg;                             \
+ .popsection
+ 
+-#endif /* __ARM_ASM_DEFNS_H__ */
++#endif /* ASM__ARM__ASM_DEFNS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/atomic.h b/xen/arch/arm/include/asm/atomic.h
+index 517216d2a8..1af5ee851f 100644
+--- a/xen/arch/arm/include/asm/atomic.h
++++ b/xen/arch/arm/include/asm/atomic.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARCH_ARM_ATOMIC__
+-#define __ARCH_ARM_ATOMIC__
++#ifndef ASM__ARM__ATOMIC_H
++#define ASM__ARM__ATOMIC_H
+ 
+ #include <xen/atomic.h>
+ #include <xen/prefetch.h>
+@@ -227,7 +227,7 @@ static inline int atomic_add_unless(atomic_t *v, int a, int u)
+ 
+ #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
+ 
+-#endif /* __ARCH_ARM_ATOMIC__ */
++#endif /* ASM__ARM__ATOMIC_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/bitops.h b/xen/arch/arm/include/asm/bitops.h
+index f163d9bb45..001e2960c4 100644
+--- a/xen/arch/arm/include/asm/bitops.h
++++ b/xen/arch/arm/include/asm/bitops.h
+@@ -6,8 +6,8 @@
+  *  reworked by rmk.
+  */
+ 
+-#ifndef _ARM_BITOPS_H
+-#define _ARM_BITOPS_H
++#ifndef ASM__ARM__BITOPS_H
++#define ASM__ARM__BITOPS_H
+ 
+ #include <xen/macros.h>
+ 
+@@ -78,7 +78,7 @@ bool clear_mask16_timeout(uint16_t mask, volatile void *p,
+ #define arch_fls(x)  ((x) ? 32 - __builtin_clz(x) : 0)
+ #define arch_flsl(x) ((x) ? BITS_PER_LONG - __builtin_clzl(x) : 0)
+ 
+-#endif /* _ARM_BITOPS_H */
++#endif /* ASM__ARM__BITOPS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/bug.h b/xen/arch/arm/include/asm/bug.h
+index cacaf014ab..19d4645984 100644
+--- a/xen/arch/arm/include/asm/bug.h
++++ b/xen/arch/arm/include/asm/bug.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_BUG_H__
+-#define __ARM_BUG_H__
++#ifndef ASM__ARM__BUG_H
++#define ASM__ARM__BUG_H
+ 
+ #include <xen/types.h>
+ 
+@@ -82,7 +82,7 @@ struct bug_frame {
+     unreachable();                                              \
+ } while (0)
+ 
+-#endif /* __ARM_BUG_H__ */
++#endif /* ASM__ARM__BUG_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/byteorder.h b/xen/arch/arm/include/asm/byteorder.h
+index 9c712c4788..0a564c6aa3 100644
+--- a/xen/arch/arm/include/asm/byteorder.h
++++ b/xen/arch/arm/include/asm/byteorder.h
+@@ -1,11 +1,11 @@
+-#ifndef __ASM_ARM_BYTEORDER_H__
+-#define __ASM_ARM_BYTEORDER_H__
++#ifndef ASM__ARM__BYTEORDER_H
++#define ASM__ARM__BYTEORDER_H
+ 
+ #define __BYTEORDER_HAS_U64__
+ 
+ #include <xen/byteorder/little_endian.h>
+ 
+-#endif /* __ASM_ARM_BYTEORDER_H__ */
++#endif /* ASM__ARM__BYTEORDER_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/cache.h b/xen/arch/arm/include/asm/cache.h
+index b75c970b68..e60a27498d 100644
+--- a/xen/arch/arm/include/asm/cache.h
++++ b/xen/arch/arm/include/asm/cache.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARCH_ARM_CACHE_H
+-#define __ARCH_ARM_CACHE_H
++#ifndef ASM__ARM__CACHE_H
++#define ASM__ARM__CACHE_H
+ 
+ 
+ /* L1 cache line size */
+diff --git a/xen/arch/arm/include/asm/cadence-uart.h b/xen/arch/arm/include/asm/cadence-uart.h
+index 48680eea4b..7107ad3e0c 100644
+--- a/xen/arch/arm/include/asm/cadence-uart.h
++++ b/xen/arch/arm/include/asm/cadence-uart.h
+@@ -15,8 +15,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_CADENCE_UART_H__
+-#define __ASM_ARM_CADENCE_UART_H__
++#ifndef ASM__ARM__CADENCE_UART_H
++#define ASM__ARM__CADENCE_UART_H
+ 
+ #define R_UART_CR    0x00
+ #define UART_CR_RX_RST       0x01
+diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+index a2e22b659d..25a014f480 100644
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
 @@ -4,8 +4,8 @@
   * A Linux-style configuration list.
   */
  
--#ifndef __XEN_CONFIG_H__
--#define __XEN_CONFIG_H__
-+#ifndef XEN__CONFIG_H
-+#define XEN__CONFIG_H
+-#ifndef __ARM_CONFIG_H__
+-#define __ARM_CONFIG_H__
++#ifndef ASM__ARM__CONFIG_H
++#define ASM__ARM__CONFIG_H
  
- #ifdef CPPCHECK
- #include <generated/compiler-def.h>
-@@ -98,4 +98,4 @@
- #define ZERO_BLOCK_PTR ((void *)-1L)
+ #if defined(CONFIG_ARM_64)
+ # define LONG_BYTEORDER 3
+@@ -92,7 +92,7 @@ extern unsigned long frametable_virt_end;
+ #include <asm/macros.h>
  #endif
  
--#endif /* __XEN_CONFIG_H__ */
-+#endif /* XEN__CONFIG_H */
-diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
-index 6dfbade3ec..36956faa17 100644
---- a/xen/include/xen/console.h
-+++ b/xen/include/xen/console.h
-@@ -4,8 +4,8 @@
-  * Xen header file concerning console access.
-  */
- 
--#ifndef __CONSOLE_H__
--#define __CONSOLE_H__
-+#ifndef XEN__CONSOLE_H
-+#define XEN__CONSOLE_H
- 
- #include <xen/inttypes.h>
- #include <public/xen.h>
-@@ -50,4 +50,4 @@ void console_serial_puts(const char *s, size_t nr);
- 
- extern int8_t opt_console_xen;
- 
--#endif /* __CONSOLE_H__ */
-+#endif /* XEN__CONSOLE_H */
-diff --git a/xen/include/xen/consoled.h b/xen/include/xen/consoled.h
-index bd7ab6329e..6975e50631 100644
---- a/xen/include/xen/consoled.h
-+++ b/xen/include/xen/consoled.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_CONSOLED_H__
--#define __XEN_CONSOLED_H__
-+#ifndef XEN__CONSOLED_H
-+#define XEN__CONSOLED_H
- 
- #include <public/io/console.h>
- 
-@@ -8,7 +8,7 @@ struct xencons_interface *consoled_get_ring_addr(void);
- void consoled_guest_rx(void);
- void consoled_guest_tx(char c);
- 
--#endif /* __XEN_CONSOLED_H__ */
-+#endif /* XEN__CONSOLED_H */
+-#endif /* __ARM_CONFIG_H__ */
++#endif /* ASM__ARM__CONFIG_H */
  /*
   * Local variables:
   * mode: C
-diff --git a/xen/include/xen/const.h b/xen/include/xen/const.h
-index baf28ef144..16f550959d 100644
---- a/xen/include/xen/const.h
-+++ b/xen/include/xen/const.h
-@@ -1,7 +1,7 @@
- /* const.h: Macros for dealing with constants.  */
- 
--#ifndef __XEN_CONST_H__
--#define __XEN_CONST_H__
-+#ifndef XEN__CONST_H
-+#define XEN__CONST_H
- 
- /* Some constant macros are used in both assembler and
-  * C code.  Therefore we cannot annotate them always with
-@@ -23,4 +23,4 @@
- 
- #define BIT(pos, sfx)   (_AC(1, sfx) << (pos))
- 
--#endif /* __XEN_CONST_H__ */
-+#endif /* XEN__CONST_H */
-diff --git a/xen/include/xen/coverage.h b/xen/include/xen/coverage.h
-index ba5fb67947..76101455e0 100644
---- a/xen/include/xen/coverage.h
-+++ b/xen/include/xen/coverage.h
+diff --git a/xen/arch/arm/include/asm/cpregs.h b/xen/arch/arm/include/asm/cpregs.h
+index aec9e8f329..0732cce1f3 100644
+--- a/xen/arch/arm/include/asm/cpregs.h
++++ b/xen/arch/arm/include/asm/cpregs.h
 @@ -1,5 +1,5 @@
--#ifndef _XEN_COV_H
--#define _XEN_COV_H
-+#ifndef XEN__COVERAGE_H
-+#define XEN__COVERAGE_H
- 
- #ifdef CONFIG_COVERAGE
- #include <public/sysctl.h>
-diff --git a/xen/include/xen/cper.h b/xen/include/xen/cper.h
-index de8f385bdd..8528ae2447 100644
---- a/xen/include/xen/cper.h
-+++ b/xen/include/xen/cper.h
-@@ -18,8 +18,8 @@
-  * along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef LINUX_CPER_H
--#define LINUX_CPER_H
-+#ifndef XEN__CPER_H
-+#define XEN__CPER_H
- 
- #include <xen/types.h>
- #include <xen/string.h>
-diff --git a/xen/include/xen/cpu.h b/xen/include/xen/cpu.h
-index 6bf5786750..8ec0e8ef61 100644
---- a/xen/include/xen/cpu.h
-+++ b/xen/include/xen/cpu.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_CPU_H__
--#define __XEN_CPU_H__
-+#ifndef XEN__CPU_H
-+#define XEN__CPU_H
- 
- #include <xen/types.h>
- #include <xen/spinlock.h>
-@@ -83,4 +83,4 @@ int __cpu_up(unsigned int cpu);
- void __cpu_disable(void);
- void __cpu_die(unsigned int cpu);
- 
--#endif /* __XEN_CPU_H__ */
-+#endif /* XEN__CPU_H */
-diff --git a/xen/include/xen/cpuidle.h b/xen/include/xen/cpuidle.h
-index 705d0c1135..0e54eb7d9b 100644
---- a/xen/include/xen/cpuidle.h
-+++ b/xen/include/xen/cpuidle.h
-@@ -23,8 +23,8 @@
-  *
-  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  */
--#ifndef _XEN_CPUIDLE_H
--#define _XEN_CPUIDLE_H
-+#ifndef XEN__CPUIDLE_H
-+#define XEN__CPUIDLE_H
- 
- #include <xen/cpumask.h>
- #include <xen/spinlock.h>
-@@ -98,4 +98,4 @@ extern void cpuidle_wakeup_mwait(cpumask_t *mask);
- 
- extern void menu_get_trace_data(u32 *expected, u32 *pred);
- 
--#endif /* _XEN_CPUIDLE_H */
-+#endif /* XEN__CPUIDLE_H */
-diff --git a/xen/include/xen/cpumask.h b/xen/include/xen/cpumask.h
-index b713bb69a9..4324af7c36 100644
---- a/xen/include/xen/cpumask.h
-+++ b/xen/include/xen/cpumask.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_CPUMASK_H
--#define __XEN_CPUMASK_H
-+#ifndef XEN__CPUMASK_H
-+#define XEN__CPUMASK_H
+-#ifndef __ASM_ARM_CPREGS_H
+-#define __ASM_ARM_CPREGS_H
++#ifndef ASM__ARM__CPREGS_H
++#define ASM__ARM__CPREGS_H
  
  /*
-  * Cpumasks provide a bitmap suitable for representing the
-@@ -466,4 +466,4 @@ int cpumask_to_xenctl_bitmap(struct xenctl_bitmap *xenctl_cpumap,
- int xenctl_bitmap_to_cpumask(cpumask_var_t *cpumask,
-                              const struct xenctl_bitmap *xenctl_cpumap);
- 
--#endif /* __XEN_CPUMASK_H */
-+#endif /* XEN__CPUMASK_H */
-diff --git a/xen/include/xen/ctype.h b/xen/include/xen/ctype.h
-index 773ac27aa4..da4122f6ab 100644
---- a/xen/include/xen/ctype.h
-+++ b/xen/include/xen/ctype.h
+  * AArch32 Co-processor registers.
+diff --git a/xen/arch/arm/include/asm/cpuerrata.h b/xen/arch/arm/include/asm/cpuerrata.h
+index 8d7e7b9375..8c9e3e0104 100644
+--- a/xen/arch/arm/include/asm/cpuerrata.h
++++ b/xen/arch/arm/include/asm/cpuerrata.h
 @@ -1,5 +1,5 @@
--#ifndef _LINUX_CTYPE_H
--#define _LINUX_CTYPE_H
-+#ifndef XEN__CTYPE_H
-+#define XEN__CTYPE_H
+-#ifndef __ARM_CPUERRATA_H__
+-#define __ARM_CPUERRATA_H__
++#ifndef ASM__ARM__CPUERRATA_H
++#define ASM__ARM__CPUERRATA_H
  
- /*
-  * NOTE! This ctype does not handle EOF like the standard C
-diff --git a/xen/include/xen/decompress.h b/xen/include/xen/decompress.h
-index f5bc17f2b6..d65a3a4346 100644
---- a/xen/include/xen/decompress.h
-+++ b/xen/include/xen/decompress.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_GENERIC_H
--#define __XEN_GENERIC_H
-+#ifndef XEN__DECOMPRESS_H
-+#define XEN__DECOMPRESS_H
+ #include <asm/cpufeature.h>
+ #include <asm/alternative.h>
+@@ -74,7 +74,7 @@ static inline enum ssbd_state get_ssbd_state(void)
  
- typedef int decompress_fn(unsigned char *inbuf, unsigned int len,
-                           int (*fill)(void*, unsigned int),
-diff --git a/xen/include/xen/delay.h b/xen/include/xen/delay.h
-index 8fd3b8f99f..269c034ce1 100644
---- a/xen/include/xen/delay.h
-+++ b/xen/include/xen/delay.h
-@@ -1,5 +1,5 @@
--#ifndef _LINUX_DELAY_H
--#define _LINUX_DELAY_H
-+#ifndef XEN__DELAY_H
-+#define XEN__DELAY_H
- 
- /* Copyright (C) 1993 Linus Torvalds */
- 
-@@ -11,4 +11,4 @@ static inline void mdelay(unsigned long msec)
-         udelay(1000);
- }
- 
--#endif /* defined(_LINUX_DELAY_H) */
-+#endif /* defined(XEN__DELAY_H) */
-diff --git a/xen/include/xen/dm.h b/xen/include/xen/dm.h
-index 18417d57f1..27d69a5c91 100644
---- a/xen/include/xen/dm.h
-+++ b/xen/include/xen/dm.h
-@@ -14,8 +14,8 @@
-  * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __XEN_DM_H__
--#define __XEN_DM_H__
-+#ifndef XEN__DM_H
-+#define XEN__DM_H
- 
- #include <xen/types.h>
- 
-@@ -31,7 +31,7 @@ struct dmop_args {
- 
- int dm_op(const struct dmop_args *op_args);
- 
--#endif /* __XEN_DM_H__ */
-+#endif /* XEN__DM_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/dmi.h b/xen/include/xen/dmi.h
-index ed6ffda315..16f13195d7 100644
---- a/xen/include/xen/dmi.h
-+++ b/xen/include/xen/dmi.h
-@@ -1,5 +1,5 @@
--#ifndef __DMI_H__
--#define __DMI_H__
-+#ifndef XEN__DMI_H
-+#define XEN__DMI_H
- 
- enum dmi_field {
- 	DMI_NONE,
-@@ -44,4 +44,4 @@ extern void dmi_efi_get_table(const void *smbios, const void *smbios3);
- bool dmi_get_date(int field, int *yearp, int *monthp, int *dayp);
- extern void dmi_end_boot(void);
- 
--#endif	/* __DMI_H__ */
-+#endif	/* XEN__DMI_H */
-diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
-index 3de5635291..99f312e9b4 100644
---- a/xen/include/xen/domain.h
-+++ b/xen/include/xen/domain.h
-@@ -1,6 +1,6 @@
- 
--#ifndef __XEN_DOMAIN_H__
--#define __XEN_DOMAIN_H__
-+#ifndef XEN__DOMAIN_H
-+#define XEN__DOMAIN_H
- 
- #include <xen/numa.h>
- #include <xen/types.h>
-@@ -171,4 +171,4 @@ extern bool vmtrace_available;
- 
- extern bool vpmu_is_available;
- 
--#endif /* __XEN_DOMAIN_H__ */
-+#endif /* XEN__DOMAIN_H */
-diff --git a/xen/include/xen/domain_page.h b/xen/include/xen/domain_page.h
-index c89b149e54..4ccf28f26d 100644
---- a/xen/include/xen/domain_page.h
-+++ b/xen/include/xen/domain_page.h
-@@ -6,8 +6,8 @@
-  * Copyright (c) 2003-2006, Keir Fraser <keir@xensource.com>
-  */
- 
--#ifndef __XEN_DOMAIN_PAGE_H__
--#define __XEN_DOMAIN_PAGE_H__
-+#ifndef XEN__DOMAIN_PAGE_H
-+#define XEN__DOMAIN_PAGE_H
- 
- #include <xen/mm.h>
- 
-@@ -77,4 +77,4 @@ static inline void unmap_domain_page_global(const void *va) {};
-     (p) = NULL;                     \
- } while ( false )
- 
--#endif /* __XEN_DOMAIN_PAGE_H__ */
-+#endif /* XEN__DOMAIN_PAGE_H */
-diff --git a/xen/include/xen/dt-overlay.h b/xen/include/xen/dt-overlay.h
-index b2cedf3f2a..cd44a5cacb 100644
---- a/xen/include/xen/dt-overlay.h
-+++ b/xen/include/xen/dt-overlay.h
-@@ -8,8 +8,8 @@
-  * Written by Vikram Garhwal <vikram.garhwal@amd.com>
-  *
-  */
--#ifndef __XEN_DT_OVERLAY_H__
--#define __XEN_DT_OVERLAY_H__
-+#ifndef XEN__DT_OVERLAY_H
-+#define XEN__DT_OVERLAY_H
- 
- #include <xen/device_tree.h>
- #include <xen/list.h>
-@@ -58,7 +58,7 @@ static inline long dt_overlay_domctl(struct domain *d,
- }
  #endif
  
--#endif /* __XEN_DT_OVERLAY_H__ */
-+#endif /* XEN__DT_OVERLAY_H */
- 
+-#endif /* __ARM_CPUERRATA_H__ */
++#endif /* ASM__ARM__CPUERRATA_H */
  /*
   * Local variables:
-diff --git a/xen/include/xen/early_printk.h b/xen/include/xen/early_printk.h
-index 5d72293793..41ae0dded1 100644
---- a/xen/include/xen/early_printk.h
-+++ b/xen/include/xen/early_printk.h
-@@ -1,8 +1,8 @@
- /*
-  * printk() for use before the console is initialized
-  */
--#ifndef __XEN_EARLY_PRINTK_H__
--#define __XEN_EARLY_PRINTK_H__
-+#ifndef XEN__EARLY_PRINTK_H
-+#define XEN__EARLY_PRINTK_H
- 
- #include <xen/types.h>
- 
-diff --git a/xen/include/xen/earlycpio.h b/xen/include/xen/earlycpio.h
-index 16d9404d73..9e5d740be9 100644
---- a/xen/include/xen/earlycpio.h
-+++ b/xen/include/xen/earlycpio.h
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
+index 969e043f5b..b9f42beac7 100644
+--- a/xen/arch/arm/include/asm/cpufeature.h
++++ b/xen/arch/arm/include/asm/cpufeature.h
 @@ -1,5 +1,5 @@
--#ifndef _EARLYCPIO_H
--#define _EARLYCPIO_H
-+#ifndef XEN__EARLYCPIO_H
-+#define XEN__EARLYCPIO_H
+-#ifndef __ASM_ARM_CPUFEATURE_H
+-#define __ASM_ARM_CPUFEATURE_H
++#ifndef ASM__ARM__CPUFEATURE_H
++#define ASM__ARM__CPUFEATURE_H
  
- #define MAX_CPIO_FILE_NAME 18
- 
-@@ -12,4 +12,4 @@ struct cpio_data {
- struct cpio_data find_cpio_data(const char *path, void *data, size_t len,
- 				long *offset);
- 
--#endif /* _EARLYCPIO_H */
-+#endif /* XEN__EARLYCPIO_H */
-diff --git a/xen/include/xen/efi.h b/xen/include/xen/efi.h
-index 160804e294..bc3ddffd6d 100644
---- a/xen/include/xen/efi.h
-+++ b/xen/include/xen/efi.h
+ #ifdef CONFIG_ARM_64
+ #define cpu_feature64(c, feat)         ((c)->pfr64.feat)
+diff --git a/xen/arch/arm/include/asm/current.h b/xen/arch/arm/include/asm/current.h
+index 0be7ad6ef9..226cf953d7 100644
+--- a/xen/arch/arm/include/asm/current.h
++++ b/xen/arch/arm/include/asm/current.h
 @@ -1,5 +1,5 @@
--#ifndef __XEN_EFI_H__
--#define __XEN_EFI_H__
-+#ifndef XEN__EFI_H
-+#define XEN__EFI_H
- 
- #ifndef __ASSEMBLY__
- #include <xen/types.h>
-@@ -55,4 +55,4 @@ int efi_compat_runtime_call(struct compat_pf_efi_runtime_call *op);
- 
- #endif /* !__ASSEMBLY__ */
- 
--#endif /* __XEN_EFI_H__ */
-+#endif /* XEN__EFI_H */
-diff --git a/xen/include/xen/elf.h b/xen/include/xen/elf.h
-index 4199b4d6e6..48d8dc4ca8 100644
---- a/xen/include/xen/elf.h
-+++ b/xen/include/xen/elf.h
-@@ -24,8 +24,8 @@
-  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  */
- 
--#ifndef __XEN_ELF_H__
--#define __XEN_ELF_H__
-+#ifndef XEN__ELF_H
-+#define XEN__ELF_H
- 
- #include <xen/elfstructs.h>
- 
-@@ -34,4 +34,4 @@
- #define ELFNOTE_DESC(_n_) (ELFNOTE_NAME(_n_) + ELFNOTE_ALIGN((_n_)->namesz))
- #define ELFNOTE_NEXT(_n_) ((Elf_Note *)(ELFNOTE_DESC(_n_) + ELFNOTE_ALIGN((_n_)->descsz)))
- 
--#endif /* __XEN_ELF_H__ */
-+#endif /* XEN__ELF_H */
-diff --git a/xen/include/xen/elfcore.h b/xen/include/xen/elfcore.h
-index 0d78033424..e5b18a5eff 100644
---- a/xen/include/xen/elfcore.h
-+++ b/xen/include/xen/elfcore.h
-@@ -6,8 +6,8 @@
-  *
-  */
- 
--#ifndef __ELFCOREC_H__
--#define __ELFCOREC_H__
-+#ifndef XEN__ELFCORE_H
-+#define XEN__ELFCORE_H
- 
- #include <xen/types.h>
- #include <xen/elf.h>
-@@ -71,7 +71,7 @@ typedef struct crash_xen_info {
- #endif
- } crash_xen_info_t;
- 
--#endif /* __ELFCOREC_H__ */
-+#endif /* XEN__ELFCORE_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/elfstructs.h b/xen/include/xen/elfstructs.h
-index eb6b87a823..df4712c21a 100644
---- a/xen/include/xen/elfstructs.h
-+++ b/xen/include/xen/elfstructs.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_ELFSTRUCTS_H__
--#define __XEN_ELFSTRUCTS_H__
-+#ifndef XEN__ELFSTRUCTS_H
-+#define XEN__ELFSTRUCTS_H
- /*
-  * Copyright (c) 1995, 1996 Erik Theisen.  All rights reserved.
-  *
-@@ -620,4 +620,4 @@ typedef struct {
- #define AuxInfo		Aux64Info
- #endif
- 
--#endif /* __XEN_ELFSTRUCTS_H__ */
-+#endif /* XEN__ELFSTRUCTS_H */
-diff --git a/xen/include/xen/err.h b/xen/include/xen/err.h
-index cbdd1bf7f8..52ac753425 100644
---- a/xen/include/xen/err.h
-+++ b/xen/include/xen/err.h
-@@ -1,5 +1,5 @@
--#if !defined(__XEN_ERR_H__) && !defined(__ASSEMBLY__)
--#define __XEN_ERR_H__
-+#if !defined(XEN__ERR_H) && !defined(__ASSEMBLY__)
-+#define XEN__ERR_H
- 
- #include <xen/compiler.h>
- #include <xen/errno.h>
-@@ -41,4 +41,4 @@ static inline int __must_check PTR_RET(const void *ptr)
- 	return IS_ERR(ptr) ? PTR_ERR(ptr) : 0;
- }
- 
--#endif /* __XEN_ERR_H__ */
-+#endif /* XEN__ERR_H */
-diff --git a/xen/include/xen/errno.h b/xen/include/xen/errno.h
-index 506674701f..bb99a2fdd8 100644
---- a/xen/include/xen/errno.h
-+++ b/xen/include/xen/errno.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_ERRNO_H__
--#define __XEN_ERRNO_H__
-+#ifndef XEN__ERRNO_H
-+#define XEN__ERRNO_H
- 
- #ifndef __ASSEMBLY__
- 
-@@ -15,4 +15,4 @@ enum {
- 
- #endif /* __ASSEMBLY__ */
- 
--#endif /*  __XEN_ERRNO_H__ */
-+#endif /*  XEN__ERRNO_H */
-diff --git a/xen/include/xen/event.h b/xen/include/xen/event.h
-index 48b79f3d62..e0643abe53 100644
---- a/xen/include/xen/event.h
-+++ b/xen/include/xen/event.h
-@@ -6,8 +6,8 @@
-  * Copyright (c) 2002-2006, K A Fraser
-  */
- 
--#ifndef __XEN_EVENT_H__
--#define __XEN_EVENT_H__
-+#ifndef XEN__EVENT_H
-+#define XEN__EVENT_H
- 
- #include <xen/sched.h>
- #include <xen/smp.h>
-@@ -302,4 +302,4 @@ static inline int evtchn_port_poll(struct domain *d, evtchn_port_t port)
-     return rc;
- }
- 
--#endif /* __XEN_EVENT_H__ */
-+#endif /* XEN__EVENT_H */
-diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
-index 50edfecfb6..31e56925a7 100644
---- a/xen/include/xen/grant_table.h
-+++ b/xen/include/xen/grant_table.h
-@@ -20,8 +20,8 @@
-  * along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __XEN_GRANT_TABLE_H__
--#define __XEN_GRANT_TABLE_H__
-+#ifndef XEN__GRANT_TABLE_H
-+#define XEN__GRANT_TABLE_H
- 
- #include <xen/mm-frame.h>
- #include <xen/rwlock.h>
-@@ -117,4 +117,4 @@ static inline int gnttab_acquire_resource(
- 
- #endif /* CONFIG_GRANT_TABLE */
- 
--#endif /* __XEN_GRANT_TABLE_H__ */
-+#endif /* XEN__GRANT_TABLE_H */
-diff --git a/xen/include/xen/guest_access.h b/xen/include/xen/guest_access.h
-index 6489924db6..62b7d8838c 100644
---- a/xen/include/xen/guest_access.h
-+++ b/xen/include/xen/guest_access.h
-@@ -4,8 +4,8 @@
-  * Copyright (x) 2006, K A Fraser
-  */
- 
--#ifndef __XEN_GUEST_ACCESS_H__
--#define __XEN_GUEST_ACCESS_H__
-+#ifndef XEN__GUEST_ACCESS_H
-+#define XEN__GUEST_ACCESS_H
- 
- #include <asm/guest_access.h>
- #include <xen/types.h>
-@@ -186,7 +186,7 @@
- char *safe_copy_string_from_guest(XEN_GUEST_HANDLE(char) u_buf,
-                                   size_t size, size_t max_size);
- 
--#endif /* __XEN_GUEST_ACCESS_H__ */
-+#endif /* XEN__GUEST_ACCESS_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/gunzip.h b/xen/include/xen/gunzip.h
-index 805833127a..12fa062b87 100644
---- a/xen/include/xen/gunzip.h
-+++ b/xen/include/xen/gunzip.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_GUNZIP_H
--#define __XEN_GUNZIP_H
-+#ifndef XEN__GUNZIP_H
-+#define XEN__GUNZIP_H
- 
- int gzip_check(char *image, unsigned long image_len);
- int perform_gunzip(char *output, char *image, unsigned long image_len);
-diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index f307dfb597..93263390f9 100644
---- a/xen/include/xen/hypercall.h
-+++ b/xen/include/xen/hypercall.h
-@@ -2,8 +2,8 @@
-  * hypercall.h
-  */
- 
--#ifndef __XEN_HYPERCALL_H__
--#define __XEN_HYPERCALL_H__
-+#ifndef XEN__HYPERCALL_H
-+#define XEN__HYPERCALL_H
- 
- #include <xen/types.h>
- #include <xen/time.h>
-@@ -58,4 +58,4 @@ common_vcpu_op(int cmd,
- 
- void arch_get_xen_caps(xen_capabilities_info_t *info);
- 
--#endif /* __XEN_HYPERCALL_H__ */
-+#endif /* XEN__HYPERCALL_H */
-diff --git a/xen/include/xen/init.h b/xen/include/xen/init.h
-index 0a42238337..39ad1d71d4 100644
---- a/xen/include/xen/init.h
-+++ b/xen/include/xen/init.h
-@@ -1,5 +1,5 @@
--#ifndef _LINUX_INIT_H
--#define _LINUX_INIT_H
-+#ifndef XEN__INIT_H
-+#define XEN__INIT_H
- 
- /*
-  * Mark functions and data as being only used at initialization
-@@ -82,4 +82,4 @@ void do_initcalls(void);
- #define __hwdom_initdata  __initdata
- #endif
- 
--#endif /* _LINUX_INIT_H */
-+#endif /* XEN__INIT_H */
-diff --git a/xen/include/xen/inttypes.h b/xen/include/xen/inttypes.h
-index 28c0053f1c..b7172f8746 100644
---- a/xen/include/xen/inttypes.h
-+++ b/xen/include/xen/inttypes.h
-@@ -18,8 +18,8 @@
-  *	ISO C99: 7.8 Format conversion of integer types	<inttypes.h>
-  */
- 
--#ifndef _XEN_INTTYPES_H
--#define _XEN_INTTYPES_H	1
-+#ifndef XEN__INTTYPES_H
-+#define XEN__INTTYPES_H	1
- 
- #include <xen/types.h>
- 
-@@ -245,4 +245,4 @@
- # define SCNuPTR	__PRIPTR_PREFIX "u"
- # define SCNxPTR	__PRIPTR_PREFIX "x"
- 
--#endif /* _XEN_INTTYPES_H */
-+#endif /* XEN__INTTYPES_H */
-diff --git a/xen/include/xen/iocap.h b/xen/include/xen/iocap.h
-index ffbc48b60f..c9ec5c931b 100644
---- a/xen/include/xen/iocap.h
-+++ b/xen/include/xen/iocap.h
-@@ -4,8 +4,8 @@
-  * Per-domain I/O capabilities.
-  */
- 
--#ifndef __XEN_IOCAP_H__
--#define __XEN_IOCAP_H__
-+#ifndef XEN__IOCAP_H
-+#define XEN__IOCAP_H
- 
- #include <xen/sched.h>
- #include <xen/rangeset.h>
-@@ -66,4 +66,4 @@ static inline int iomem_deny_access(struct domain *d, unsigned long s,
-     ? irq__ : 0;                                        \
- })
- 
--#endif /* __XEN_IOCAP_H__ */
-+#endif /* XEN__IOCAP_H */
-diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index 29a17e8ff5..ce54ff2d57 100644
---- a/xen/include/xen/ioreq.h
-+++ b/xen/include/xen/ioreq.h
-@@ -16,8 +16,8 @@
-  * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __XEN_IOREQ_H__
--#define __XEN_IOREQ_H__
-+#ifndef XEN__IOREQ_H
-+#define XEN__IOREQ_H
- 
- #include <xen/sched.h>
- 
-@@ -138,7 +138,7 @@ bool arch_ioreq_server_get_type_addr(const struct domain *d, const ioreq_t *p,
-                                      uint8_t *type, uint64_t *addr);
- void arch_ioreq_domain_init(struct domain *d);
- 
--#endif /* __XEN_IOREQ_H__ */
-+#endif /* XEN__IOREQ_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/irq.h b/xen/include/xen/irq.h
-index 95034c0d6b..c037e104c3 100644
---- a/xen/include/xen/irq.h
-+++ b/xen/include/xen/irq.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_IRQ_H__
--#define __XEN_IRQ_H__
-+#ifndef XEN__IRQ_H
-+#define XEN__IRQ_H
- 
- #include <xen/cpumask.h>
- #include <xen/rcupdate.h>
-@@ -211,4 +211,4 @@ unsigned int arch_hwdom_irqs(const struct domain *d);
- void arch_evtchn_bind_pirq(struct domain *d, int pirq);
- #endif
- 
--#endif /* __XEN_IRQ_H__ */
-+#endif /* XEN__IRQ_H */
-diff --git a/xen/include/xen/irq_cpustat.h b/xen/include/xen/irq_cpustat.h
-index b9629f25c2..81e8f87d49 100644
---- a/xen/include/xen/irq_cpustat.h
-+++ b/xen/include/xen/irq_cpustat.h
-@@ -1,5 +1,5 @@
--#ifndef __irq_cpustat_h
--#define __irq_cpustat_h
-+#ifndef XEN__IRQ_CPUSTAT_H
-+#define XEN__IRQ_CPUSTAT_H
- 
- /*
-  * Contains default mappings for irq_cpustat_t, used by almost every
-@@ -26,4 +26,4 @@ extern irq_cpustat_t irq_stat[];
- #define local_irq_count(cpu)	__IRQ_STAT((cpu), __local_irq_count)
- #define mwait_wakeup(cpu)	__IRQ_STAT((cpu), __mwait_wakeup)
- 
--#endif	/* __irq_cpustat_h */
-+#endif	/* XEN__IRQ_CPUSTAT_H */
-diff --git a/xen/include/xen/kconfig.h b/xen/include/xen/kconfig.h
-index c25dc0f6c2..820836b0a1 100644
---- a/xen/include/xen/kconfig.h
-+++ b/xen/include/xen/kconfig.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_KCONFIG_H
--#define __XEN_KCONFIG_H
-+#ifndef XEN__KCONFIG_H
-+#define XEN__KCONFIG_H
- 
- #include <generated/autoconf.h>
- 
-@@ -46,4 +46,4 @@
- #define STATIC_IF_NOT(option) static_if_not(option)
- #endif
- 
--#endif /* __XEN_KCONFIG_H */
-+#endif /* XEN__KCONFIG_H */
-diff --git a/xen/include/xen/kernel.h b/xen/include/xen/kernel.h
-index c5b6cc9777..3b6687e990 100644
---- a/xen/include/xen/kernel.h
-+++ b/xen/include/xen/kernel.h
-@@ -1,5 +1,5 @@
--#ifndef _LINUX_KERNEL_H
--#define _LINUX_KERNEL_H
-+#ifndef XEN__KERNEL_H
-+#define XEN__KERNEL_H
- 
- /*
-  * 'kernel.h' contains some often-used function prototypes etc
-@@ -100,5 +100,5 @@ struct vcpu;
- void cf_check show_execution_state(const struct cpu_user_regs *regs);
- void vcpu_show_execution_state(struct vcpu *v);
- 
--#endif /* _LINUX_KERNEL_H */
-+#endif /* XEN__KERNEL_H */
- 
-diff --git a/xen/include/xen/keyhandler.h b/xen/include/xen/keyhandler.h
-index 6fee878fdf..5362e6de04 100644
---- a/xen/include/xen/keyhandler.h
-+++ b/xen/include/xen/keyhandler.h
-@@ -7,8 +7,8 @@
-  * nicer fashion than just editing the serial/keyboard drivers.
-  */
- 
--#ifndef __XEN_KEYHANDLER_H__
--#define __XEN_KEYHANDLER_H__
-+#ifndef XEN__KEYHANDLER_H
-+#define XEN__KEYHANDLER_H
- 
- #include <xen/types.h>
- 
-@@ -57,4 +57,4 @@ enum crash_reason {
- 
- void keyhandler_crash_action(enum crash_reason reason);
- 
--#endif /* __XEN_KEYHANDLER_H__ */
-+#endif /* XEN__KEYHANDLER_H */
-diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-index 81b722ea3e..5d75fca614 100644
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -1,5 +1,5 @@
--#ifndef __LIB_H__
--#define __LIB_H__
-+#ifndef XEN__LIB_H
-+#define XEN__LIB_H
- 
- #include <xen/macros.h>
- 
-@@ -202,4 +202,4 @@ void *bsearch(const void *key, const void *base, size_t num, size_t size,
- 
- #endif /* __ASSEMBLY__ */
- 
--#endif /* __LIB_H__ */
-+#endif /* XEN__LIB_H */
-diff --git a/xen/include/xen/libelf.h b/xen/include/xen/libelf.h
-index a99d33c251..82151e3292 100644
---- a/xen/include/xen/libelf.h
-+++ b/xen/include/xen/libelf.h
-@@ -20,8 +20,8 @@
-  * DEALINGS IN THE SOFTWARE.
-  */
- 
--#ifndef __XEN_LIBELF_H__
--#define __XEN_LIBELF_H__
-+#ifndef XEN__LIBELF_H
-+#define XEN__LIBELF_H
- 
- #if defined(__i386__) || defined(__x86_64__) || defined(__arm__) || defined(__aarch64__)
- #define XEN_ELF_LITTLE_ENDIAN
-@@ -504,4 +504,4 @@ static inline void ELF_ADVANCE_DEST(struct elf_binary *elf, uint64_t amount)
-  * is in use or until elf_set_xdest(,0,0) is called. */
- void elf_set_xdest(struct elf_binary *elf, void *addr, uint64_t size);
- 
--#endif /* __XEN_LIBELF_H__ */
-+#endif /* XEN__LIBELF_H */
-diff --git a/xen/include/xen/linkage.h b/xen/include/xen/linkage.h
-index 3d401b88c1..a81300ccff 100644
---- a/xen/include/xen/linkage.h
-+++ b/xen/include/xen/linkage.h
-@@ -1,5 +1,5 @@
--#ifndef __LINKAGE_H__
--#define __LINKAGE_H__
-+#ifndef XEN__LINKAGE_H
-+#define XEN__LINKAGE_H
- 
- #ifdef __ASSEMBLY__
- 
-@@ -64,4 +64,4 @@
- 
- #endif /*  __ASSEMBLY__ */
- 
--#endif /* __LINKAGE_H__ */
-+#endif /* XEN__LINKAGE_H */
-diff --git a/xen/include/xen/linux-compat.h b/xen/include/xen/linux-compat.h
-index 1f4186102a..32f08b03f0 100644
---- a/xen/include/xen/linux-compat.h
-+++ b/xen/include/xen/linux-compat.h
-@@ -6,8 +6,8 @@
-  * files.
-  */
- 
--#ifndef __XEN_LINUX_COMPAT_H__
--#define __XEN_LINUX_COMPAT_H__
-+#ifndef XEN__LINUX_COMPAT_H
-+#define XEN__LINUX_COMPAT_H
- 
- #include <xen/types.h>
- 
-@@ -21,4 +21,4 @@ typedef paddr_t phys_addr_t;
- 
- #define __ffs(x) (ffsl(x) - 1UL)
- 
--#endif /* __XEN_LINUX_COMPAT_H__ */
-+#endif /* XEN__LINUX_COMPAT_H */
-diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
-index 62169f4674..4cfb196940 100644
---- a/xen/include/xen/list.h
-+++ b/xen/include/xen/list.h
-@@ -4,8 +4,8 @@
-  * Useful linked-list definitions taken from the Linux kernel (2.6.18).
-  */
- 
--#ifndef __XEN_LIST_H__
--#define __XEN_LIST_H__
-+#ifndef XEN__LIST_H
-+#define XEN__LIST_H
- 
- #include <xen/bug.h>
- #include <asm/system.h>
-@@ -979,4 +979,4 @@ static inline void hlist_add_after_rcu(struct hlist_node *prev,
-           ({ tpos = hlist_entry(pos, typeof(*(tpos)), member); 1;});    \
-           (pos) = (pos)->next)
- 
--#endif /* __XEN_LIST_H__ */
-+#endif /* XEN__LIST_H */
-diff --git a/xen/include/xen/list_sort.h b/xen/include/xen/list_sort.h
-index 13ce0a55ec..9ec309ac83 100644
---- a/xen/include/xen/list_sort.h
-+++ b/xen/include/xen/list_sort.h
-@@ -1,5 +1,5 @@
--#ifndef _LINUX_LIST_SORT_H
--#define _LINUX_LIST_SORT_H
-+#ifndef XEN__LIST_SORT_H
-+#define XEN__LIST_SORT_H
- 
- #include <xen/types.h>
- 
-diff --git a/xen/include/xen/lz4.h b/xen/include/xen/lz4.h
-index fa20520110..fd11d01ef9 100644
---- a/xen/include/xen/lz4.h
-+++ b/xen/include/xen/lz4.h
-@@ -1,5 +1,5 @@
--#ifndef __LZ4_H__
--#define __LZ4_H__
-+#ifndef XEN__LZ4_H
-+#define XEN__LZ4_H
- 
- /*
-  * LZ4 Kernel Interface
-diff --git a/xen/include/xen/lzo.h b/xen/include/xen/lzo.h
-index e920027fad..7d3949e3f1 100644
---- a/xen/include/xen/lzo.h
-+++ b/xen/include/xen/lzo.h
-@@ -1,5 +1,5 @@
--#ifndef __LZO_H__
--#define __LZO_H__
-+#ifndef XEN__LZO_H
-+#define XEN__LZO_H
- /*
-  *  LZO Public Kernel Interface
-  *  A mini subset of the LZO real-time data compression library
-diff --git a/xen/include/xen/macros.h b/xen/include/xen/macros.h
-index 19caaa8026..9e470c7649 100644
---- a/xen/include/xen/macros.h
-+++ b/xen/include/xen/macros.h
-@@ -1,5 +1,5 @@
--#ifndef __MACROS_H__
--#define __MACROS_H__
-+#ifndef XEN__MACROS_H
-+#define XEN__MACROS_H
- 
- #define ROUNDUP(x, a) (((x) + (a) - 1) & ~((a) - 1))
- 
-@@ -147,7 +147,7 @@
- 
- #endif /* __ASSEMBLY__ */
- 
--#endif /* __MACROS_H__ */
-+#endif /* XEN__MACROS_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/mm-frame.h b/xen/include/xen/mm-frame.h
-index d973aec901..d8dffe22d6 100644
---- a/xen/include/xen/mm-frame.h
-+++ b/xen/include/xen/mm-frame.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_FRAME_NUM_H__
--#define __XEN_FRAME_NUM_H__
-+#ifndef XEN__MM_FRAME_H
-+#define XEN__MM_FRAME_H
- 
- #include <xen/kernel.h>
- #include <xen/typesafe.h>
-@@ -85,4 +85,4 @@ TYPE_SAFE(unsigned long, pfn);
- #define pfn_x
- #endif
- 
--#endif /* __XEN_FRAME_NUM_H__ */
-+#endif /* XEN__MM_FRAME_H */
-diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
-index 7561297a75..3a64b013c4 100644
---- a/xen/include/xen/mm.h
-+++ b/xen/include/xen/mm.h
-@@ -58,8 +58,8 @@
-  *   documented, meanings.
-  */
- 
--#ifndef __XEN_MM_H__
--#define __XEN_MM_H__
-+#ifndef XEN__MM_H
-+#define XEN__MM_H
- 
- #include <xen/bug.h>
- #include <xen/compiler.h>
-@@ -648,4 +648,4 @@ static inline void put_page_alloc_ref(struct page_info *page)
-     }
- }
- 
--#endif /* __XEN_MM_H__ */
-+#endif /* XEN__MM_H */
-diff --git a/xen/include/xen/msi.h b/xen/include/xen/msi.h
-index c903d0050c..4e462881ae 100644
---- a/xen/include/xen/msi.h
-+++ b/xen/include/xen/msi.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_MSI_H_
--#define __XEN_MSI_H_
-+#ifndef XEN__MSI_H
-+#define XEN__MSI_H
- 
- #include <xen/pci.h>
- 
-diff --git a/xen/include/xen/multiboot.h b/xen/include/xen/multiboot.h
-index 80a1761d9e..30959a5bb6 100644
---- a/xen/include/xen/multiboot.h
-+++ b/xen/include/xen/multiboot.h
-@@ -14,8 +14,8 @@
-    You should have received a copy of the GNU General Public License
-    along with this program; If not, see <http://www.gnu.org/licenses/>.  */
- 
--#ifndef __MULTIBOOT_H__
--#define __MULTIBOOT_H__
-+#ifndef XEN__MULTIBOOT_H
-+#define XEN__MULTIBOOT_H
- 
- #include "const.h"
- 
-@@ -130,4 +130,4 @@ typedef struct memory_map memory_map_t;
- 
- #endif /* __ASSEMBLY__ */
- 
--#endif /* __MULTIBOOT_H__ */
-+#endif /* XEN__MULTIBOOT_H */
-diff --git a/xen/include/xen/multiboot2.h b/xen/include/xen/multiboot2.h
-index f792040205..20c6082ea9 100644
---- a/xen/include/xen/multiboot2.h
-+++ b/xen/include/xen/multiboot2.h
-@@ -23,8 +23,8 @@
-  *  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  */
- 
--#ifndef __MULTIBOOT2_H__
--#define __MULTIBOOT2_H__
-+#ifndef XEN__MULTIBOOT2_H
-+#define XEN__MULTIBOOT2_H
- 
- /* The magic field should contain this.  */
- #define MULTIBOOT2_HEADER_MAGIC                         0xe85250d6
-@@ -232,4 +232,4 @@ typedef struct {
- } multiboot2_tag_module_t;
- #endif /* __ASSEMBLY__ */
- 
--#endif /* __MULTIBOOT2_H__ */
-+#endif /* XEN__MULTIBOOT2_H */
-diff --git a/xen/include/xen/multicall.h b/xen/include/xen/multicall.h
-index 5bebeca7b2..fd71dbd9a1 100644
---- a/xen/include/xen/multicall.h
-+++ b/xen/include/xen/multicall.h
-@@ -2,8 +2,8 @@
-  * multicall.h
-  */
- 
--#ifndef __XEN_MULTICALL_H__
--#define __XEN_MULTICALL_H__
-+#ifndef XEN__MULTICALL_H
-+#define XEN__MULTICALL_H
- 
- #ifdef CONFIG_COMPAT
- #include <compat/xen.h>
-@@ -27,4 +27,4 @@ enum mc_disposition {
-     mc_preempt,
- } arch_do_multicall_call(struct mc_state *mcs);
- 
--#endif /* __XEN_MULTICALL_H__ */
-+#endif /* XEN__MULTICALL_H */
-diff --git a/xen/include/xen/nodemask.h b/xen/include/xen/nodemask.h
-index 1dd6c7458e..8cab82c7a2 100644
---- a/xen/include/xen/nodemask.h
-+++ b/xen/include/xen/nodemask.h
-@@ -1,5 +1,5 @@
--#ifndef __LINUX_NODEMASK_H
--#define __LINUX_NODEMASK_H
-+#ifndef XEN__NODEMASK_H
-+#define XEN__NODEMASK_H
- 
- /*
-  * Nodemasks provide a bitmap suitable for representing the
-@@ -290,4 +290,4 @@ extern nodemask_t node_online_map;
- 
- #define for_each_online_node(node) for_each_node_mask((node), node_online_map)
- 
--#endif /* __LINUX_NODEMASK_H */
-+#endif /* XEN__NODEMASK_H */
-diff --git a/xen/include/xen/nospec.h b/xen/include/xen/nospec.h
-index 828dbd4e0a..99e6d5a6e9 100644
---- a/xen/include/xen/nospec.h
-+++ b/xen/include/xen/nospec.h
-@@ -4,8 +4,8 @@
- /* Copyright(c) 2018 Intel Corporation. All rights reserved. */
- /* Copyright(c) 2018 Citrix Systems R&D Ltd. All rights reserved. */
- 
--#ifndef XEN_NOSPEC_H
--#define XEN_NOSPEC_H
-+#ifndef XEN__NOSPEC_H
-+#define XEN__NOSPEC_H
- 
- #include <xen/stdbool.h>
- 
-@@ -87,7 +87,7 @@ static always_inline bool lock_evaluate_nospec(bool condition)
- #endif
- }
- 
--#endif /* XEN_NOSPEC_H */
-+#endif /* XEN__NOSPEC_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/notifier.h b/xen/include/xen/notifier.h
-index 05359e8a85..e2ce641311 100644
---- a/xen/include/xen/notifier.h
-+++ b/xen/include/xen/notifier.h
-@@ -7,8 +7,8 @@
-  * Original code from Linux kernel 2.6.27 (Alan Cox <Alan.Cox@linux.org>)
-  */
-  
--#ifndef __XEN_NOTIFIER_H__
--#define __XEN_NOTIFIER_H__
-+#ifndef XEN__NOTIFIER_H
-+#define XEN__NOTIFIER_H
- 
- #include <xen/types.h>
- #include <xen/errno.h>
-@@ -68,4 +68,4 @@ static inline int notifier_to_errno(int ret)
-     return (ret == NOTIFY_DONE) ? 0 : -(ret & ~NOTIFY_STOP_MASK);
- }
- 
--#endif /* __XEN_NOTIFIER_H__ */
-+#endif /* XEN__NOTIFIER_H */
-diff --git a/xen/include/xen/numa.h b/xen/include/xen/numa.h
-index fd1511a6fb..1617901fc2 100644
---- a/xen/include/xen/numa.h
-+++ b/xen/include/xen/numa.h
-@@ -1,5 +1,5 @@
--#ifndef _XEN_NUMA_H
--#define _XEN_NUMA_H
-+#ifndef XEN__NUMA_H
-+#define XEN__NUMA_H
- 
- #include <xen/mm-frame.h>
- 
-@@ -135,4 +135,4 @@ static inline nodeid_t mfn_to_nid(mfn_t mfn)
- 
- #define page_to_nid(pg) mfn_to_nid(page_to_mfn(pg))
- 
--#endif /* _XEN_NUMA_H */
-+#endif /* XEN__NUMA_H */
-diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
-index a322e738ef..7cee4c92f2 100644
---- a/xen/include/xen/p2m-common.h
-+++ b/xen/include/xen/p2m-common.h
-@@ -1,5 +1,5 @@
--#ifndef _XEN_P2M_COMMON_H
--#define _XEN_P2M_COMMON_H
-+#ifndef XEN__P2M_COMMON_H
-+#define XEN__P2M_COMMON_H
- 
- #include <xen/mm-frame.h>
- 
-@@ -41,4 +41,4 @@ int __must_check check_get_page_from_gfn(struct domain *d, gfn_t gfn,
-                                          struct page_info **page_p);
- 
- 
--#endif /* _XEN_P2M_COMMON_H */
-+#endif /* XEN__P2M_COMMON_H */
-diff --git a/xen/include/xen/page-defs.h b/xen/include/xen/page-defs.h
-index 682da6b7b4..c06f247921 100644
---- a/xen/include/xen/page-defs.h
-+++ b/xen/include/xen/page-defs.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PAGE_DEFS_H__
--#define __XEN_PAGE_DEFS_H__
-+#ifndef XEN__PAGE_DEFS_H
-+#define XEN__PAGE_DEFS_H
- 
- /* Helpers for different page granularities. */
- #define PAGE_SIZE_GRAN(gran)        ((paddr_t)1 << PAGE_SHIFT_##gran)
-@@ -32,4 +32,4 @@
- #define PAGE_MASK_1G                PAGE_MASK_GRAN(1G)
- #define PAGE_ALIGN_1G(addr)         PAGE_ALIGN_GRAN(1G, addr)
- 
--#endif /* __XEN_PAGE_DEFS_H__ */
-+#endif /* XEN__PAGE_DEFS_H */
-diff --git a/xen/include/xen/page-size.h b/xen/include/xen/page-size.h
-index 78ea57f324..b2a346e6b1 100644
---- a/xen/include/xen/page-size.h
-+++ b/xen/include/xen/page-size.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PAGE_SIZE_H__
--#define __XEN_PAGE_SIZE_H__
-+#ifndef XEN__PAGE_SIZE_H
-+#define XEN__PAGE_SIZE_H
- 
- #include <xen/const.h>
- #include <asm/page-bits.h>
-diff --git a/xen/include/xen/paging.h b/xen/include/xen/paging.h
-index a126c9bf58..08580a4c73 100644
---- a/xen/include/xen/paging.h
-+++ b/xen/include/xen/paging.h
-@@ -1,7 +1,7 @@
--#ifndef __XEN_PAGING_H__
--#define __XEN_PAGING_H__
-+#ifndef XEN__PAGING_H
-+#define XEN__PAGING_H
- 
- #include <asm/paging.h>
- #include <asm/p2m.h>
- 
--#endif /* __XEN_PAGING_H__ */
-+#endif /* XEN__PAGING_H */
-diff --git a/xen/include/xen/param.h b/xen/include/xen/param.h
-index 1bdbab34ab..970af8d779 100644
---- a/xen/include/xen/param.h
-+++ b/xen/include/xen/param.h
-@@ -1,5 +1,5 @@
--#ifndef _XEN_PARAM_H
--#define _XEN_PARAM_H
-+#ifndef XEN__PARAM_H
-+#define XEN__PARAM_H
- 
- #include <xen/bug.h>
- #include <xen/hypfs.h>
-@@ -196,4 +196,4 @@ static inline void no_config_param(const char *cfg, const char *param,
-            cfg, param, len, s);
- }
- 
--#endif /* _XEN_PARAM_H */
-+#endif /* XEN__PARAM_H */
-diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
-index 63e49f0117..b8c6727d1b 100644
---- a/xen/include/xen/pci.h
-+++ b/xen/include/xen/pci.h
-@@ -4,8 +4,8 @@
-  * PCI access functions.
-  */
- 
--#ifndef __XEN_PCI_H__
--#define __XEN_PCI_H__
-+#ifndef XEN__PCI_H
-+#define XEN__PCI_H
- 
- #include <xen/types.h>
- #include <xen/list.h>
-@@ -261,4 +261,4 @@ static inline int arch_pci_clean_pirqs(struct domain *d)
- }
- #endif /* CONFIG_HVM */
- 
--#endif /* __XEN_PCI_H__ */
-+#endif /* XEN__PCI_H */
-diff --git a/xen/include/xen/pci_regs.h b/xen/include/xen/pci_regs.h
-index 250ba106db..8a8f8e4b8e 100644
---- a/xen/include/xen/pci_regs.h
-+++ b/xen/include/xen/pci_regs.h
-@@ -19,8 +19,8 @@
-  *	The Hypertransport I/O Link Specification
-  */
- 
--#ifndef LINUX_PCI_REGS_H
--#define LINUX_PCI_REGS_H
-+#ifndef XEN__PCI_REGS_H
-+#define XEN__PCI_REGS_H
- 
- /*
-  * Conventional PCI and PCI-X Mode 1 devices have 256 bytes of
-@@ -616,4 +616,4 @@
- #define  PCI_SRIOV_VFM_MO	0x2	/* Active.MigrateOut */
- #define  PCI_SRIOV_VFM_AV	0x3	/* Active.Available */
- 
--#endif /* LINUX_PCI_REGS_H */
-+#endif /* XEN__PCI_REGS_H */
-diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
-index 23f3956db8..04a31e0629 100644
---- a/xen/include/xen/pdx.h
-+++ b/xen/include/xen/pdx.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PDX_H__
--#define __XEN_PDX_H__
-+#ifndef XEN__PDX_H
-+#define XEN__PDX_H
- 
- /*
-  * PDX (Page inDeX)
-@@ -239,7 +239,7 @@ static inline void pfn_pdx_hole_setup(unsigned long mask)
- }
- 
- #endif /* CONFIG_PDX_COMPRESSION */
--#endif /* __XEN_PDX_H__ */
-+#endif /* XEN__PDX_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/percpu.h b/xen/include/xen/percpu.h
-index 57522f346b..2cc1ed4a3a 100644
---- a/xen/include/xen/percpu.h
-+++ b/xen/include/xen/percpu.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PERCPU_H__
--#define __XEN_PERCPU_H__
-+#ifndef XEN__PERCPU_H
-+#define XEN__PERCPU_H
- 
- #define DECLARE_PER_CPU(type, name) \
-     extern __typeof__(type) per_cpu__ ## name
-@@ -33,4 +33,4 @@
- #define get_cpu_var(var) this_cpu(var)
- #define put_cpu_var(var)
- 
--#endif /* __XEN_PERCPU_H__ */
-+#endif /* XEN__PERCPU_H */
-diff --git a/xen/include/xen/perfc.h b/xen/include/xen/perfc.h
-index f9009dc388..85fa4d8397 100644
---- a/xen/include/xen/perfc.h
-+++ b/xen/include/xen/perfc.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PERFC_H__
--#define __XEN_PERFC_H__
-+#ifndef XEN__PERFC_H
-+#define XEN__PERFC_H
- 
- #ifdef CONFIG_PERF_COUNTERS
- 
-@@ -116,4 +116,4 @@ extern void cf_check perfc_reset(unsigned char key);
- 
- #endif /* CONFIG_PERF_COUNTERS */
- 
--#endif /* __XEN_PERFC_H__ */
-+#endif /* XEN__PERFC_H */
-diff --git a/xen/include/xen/perfc_defn.h b/xen/include/xen/perfc_defn.h
-index 0027d95a60..38865b614e 100644
---- a/xen/include/xen/perfc_defn.h
-+++ b/xen/include/xen/perfc_defn.h
-@@ -1,6 +1,6 @@
- /* This file is legitimately included multiple times. */
--/*#ifndef __XEN_PERFC_DEFN_H__*/
--/*#define __XEN_PERFC_DEFN_H__*/
-+/*#ifndef XEN__PERFC_DEFN_H*/
-+/*#define XEN__PERFC_DEFN_H*/
- 
- #include <asm/perfc_defn.h>
- 
-@@ -83,4 +83,4 @@ PERFCOUNTER(tickled_cpu_overridden, "csched2: tickled_cpu_overridden")
- 
- PERFCOUNTER(need_flush_tlb_flush,   "PG_need_flush tlb flushes")
- 
--/*#endif*/ /* __XEN_PERFC_DEFN_H__ */
-+/*#endif*/ /* XEN__PERFC_DEFN_H */
-diff --git a/xen/include/xen/pfn.h b/xen/include/xen/pfn.h
-index 1ca9b095e0..14fe4c8864 100644
---- a/xen/include/xen/pfn.h
-+++ b/xen/include/xen/pfn.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PFN_H__
--#define __XEN_PFN_H__
-+#ifndef XEN__PFN_H
-+#define XEN__PFN_H
+-#ifndef __ARM_CURRENT_H__
+-#define __ARM_CURRENT_H__
++#ifndef ASM__ARM__CURRENT_H
++#define ASM__ARM__CURRENT_H
  
  #include <xen/page-size.h>
- 
-@@ -9,4 +9,4 @@
- #define round_pgup(p)    (((p) + (PAGE_SIZE - 1)) & PAGE_MASK)
- #define round_pgdown(p)  ((p) & PAGE_MASK)
- 
--#endif /* __XEN_PFN_H__ */
-+#endif /* XEN__PFN_H */
-diff --git a/xen/include/xen/pmap.h b/xen/include/xen/pmap.h
-index 93e61b1087..7da30c1240 100644
---- a/xen/include/xen/pmap.h
-+++ b/xen/include/xen/pmap.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PMAP_H__
--#define __XEN_PMAP_H__
-+#ifndef XEN__PMAP_H
-+#define XEN__PMAP_H
- 
- /* Large enough for mapping 5 levels of page tables with some headroom */
- #define NUM_FIX_PMAP 8
-@@ -13,4 +13,4 @@ void pmap_unmap(const void *p);
- 
- #endif /* __ASSEMBLY__ */
- 
--#endif /* __XEN_PMAP_H__ */
-+#endif /* XEN__PMAP_H */
-diff --git a/xen/include/xen/pmstat.h b/xen/include/xen/pmstat.h
-index e6ab1423a9..38837ed8e3 100644
---- a/xen/include/xen/pmstat.h
-+++ b/xen/include/xen/pmstat.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PMSTAT_H_
--#define __XEN_PMSTAT_H_
-+#ifndef XEN__PMSTAT_H
-+#define XEN__PMSTAT_H
- 
- #include <xen/types.h>
- #include <public/platform.h> /* for struct xen_processor_power */
-@@ -14,4 +14,4 @@ int pmstat_reset_cx_stat(unsigned int cpu);
- int do_get_pm_info(struct xen_sysctl_get_pmstat *op);
- int do_pm_op(struct xen_sysctl_pm_op *op);
- 
--#endif /* __XEN_PMSTAT_H_ */
-+#endif /* XEN__PMSTAT_H */
-diff --git a/xen/include/xen/preempt.h b/xen/include/xen/preempt.h
-index aa059b497b..c1a41ba330 100644
---- a/xen/include/xen/preempt.h
-+++ b/xen/include/xen/preempt.h
-@@ -6,8 +6,8 @@
-  * Copyright (c) 2010, Keir Fraser <keir@xen.org>
-  */
- 
--#ifndef __XEN_PREEMPT_H__
--#define __XEN_PREEMPT_H__
-+#ifndef XEN__PREEMPT_H
-+#define XEN__PREEMPT_H
- 
- #include <xen/types.h>
  #include <xen/percpu.h>
-@@ -34,4 +34,4 @@ void ASSERT_NOT_IN_ATOMIC(void);
- #define ASSERT_NOT_IN_ATOMIC() ((void)0)
+@@ -65,7 +65,7 @@ do {                                                    \
+ 
  #endif
  
--#endif /* __XEN_PREEMPT_H__ */
-+#endif /* XEN__PREEMPT_H */
-diff --git a/xen/include/xen/prefetch.h b/xen/include/xen/prefetch.h
-index 85831f953f..70f4780285 100644
---- a/xen/include/xen/prefetch.h
-+++ b/xen/include/xen/prefetch.h
-@@ -7,8 +7,8 @@
-  *
-  */
- 
--#ifndef _LINUX_PREFETCH_H
--#define _LINUX_PREFETCH_H
-+#ifndef XEN__PREFETCH_H
-+#define XEN__PREFETCH_H
- 
- #include <asm/processor.h>
- #include <asm/cache.h>
-diff --git a/xen/include/xen/pv_console.h b/xen/include/xen/pv_console.h
-index 2133aa71cb..5c984dd543 100644
---- a/xen/include/xen/pv_console.h
-+++ b/xen/include/xen/pv_console.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_PV_CONSOLE_H__
--#define __XEN_PV_CONSOLE_H__
-+#ifndef XEN__PV_CONSOLE_H
-+#define XEN__PV_CONSOLE_H
- 
- #include <xen/serial.h>
- 
-@@ -21,7 +21,7 @@ static inline void pv_console_puts(const char *buf, size_t nr) { }
- static inline size_t pv_console_rx(void) { return 0; }
- 
- #endif /* !CONFIG_XEN_GUEST */
--#endif /* __XEN_PV_CONSOLE_H__ */
-+#endif /* XEN__PV_CONSOLE_H */
+-#endif /* __ARM_CURRENT_H__ */
++#endif /* ASM__ARM__CURRENT_H */
  /*
   * Local variables:
   * mode: C
-diff --git a/xen/include/xen/radix-tree.h b/xen/include/xen/radix-tree.h
-index 58c40312e6..4a3ad62702 100644
---- a/xen/include/xen/radix-tree.h
-+++ b/xen/include/xen/radix-tree.h
-@@ -16,8 +16,8 @@
-  * You should have received a copy of the GNU General Public License
-  * along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
--#ifndef _XEN_RADIX_TREE_H
--#define _XEN_RADIX_TREE_H
-+#ifndef XEN__RADIX_TREE_H
-+#define XEN__RADIX_TREE_H
- 
- #include <xen/types.h>
- #include <xen/lib.h>
-@@ -224,4 +224,4 @@ unsigned long radix_tree_next_hole(struct radix_tree_root *root,
- unsigned long radix_tree_prev_hole(struct radix_tree_root *root,
- 				unsigned long index, unsigned long max_scan);
- 
--#endif /* _XEN_RADIX_TREE_H */
-+#endif /* XEN__RADIX_TREE_H */
-diff --git a/xen/include/xen/random.h b/xen/include/xen/random.h
-index b950f03c0c..abb011d654 100644
---- a/xen/include/xen/random.h
-+++ b/xen/include/xen/random.h
-@@ -1,9 +1,9 @@
--#ifndef __XEN_RANDOM_H__
--#define __XEN_RANDOM_H__
-+#ifndef XEN__RANDOM_H
-+#define XEN__RANDOM_H
- 
- unsigned int get_random(void);
- 
- /* The value keeps unchange once initialized for each booting */
- extern unsigned int boot_random;
- 
--#endif /* __XEN_RANDOM_H__ */
-+#endif /* XEN__RANDOM_H */
-diff --git a/xen/include/xen/rangeset.h b/xen/include/xen/rangeset.h
-index 96c9180825..36bc2055a9 100644
---- a/xen/include/xen/rangeset.h
-+++ b/xen/include/xen/rangeset.h
-@@ -7,8 +7,8 @@
-  * Copyright (c) 2005, K A Fraser
-  */
- 
--#ifndef __XEN_RANGESET_H__
--#define __XEN_RANGESET_H__
-+#ifndef XEN__RANGESET_H
-+#define XEN__RANGESET_H
- 
- #include <xen/types.h>
- 
-@@ -100,7 +100,7 @@ void rangeset_swap(struct rangeset *a, struct rangeset *b);
- void rangeset_domain_printk(
-     struct domain *d);
- 
--#endif /* __XEN_RANGESET_H__ */
-+#endif /* XEN__RANGESET_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/rbtree.h b/xen/include/xen/rbtree.h
-index 77bf57d4ab..a8c5215e06 100644
---- a/xen/include/xen/rbtree.h
-+++ b/xen/include/xen/rbtree.h
-@@ -90,8 +90,8 @@ static inline struct page * rb_insert_page_cache(struct inode * inode,
- -----------------------------------------------------------------------
- */
- 
--#ifndef __RBTREE_H__
--#define __RBTREE_H__
-+#ifndef XEN__RBTREE_H
-+#define XEN__RBTREE_H
- 
- struct rb_node {
- 	unsigned long  __rb_parent_color;
-@@ -139,4 +139,4 @@ static inline void rb_link_node(struct rb_node * node, struct rb_node * parent,
- 	*rb_link = node;
- }
- 
--#endif /* __RBTREE_H__ */
-+#endif /* XEN__RBTREE_H */
-diff --git a/xen/include/xen/rcupdate.h b/xen/include/xen/rcupdate.h
-index 95f4ad81c4..5e0a8328ee 100644
---- a/xen/include/xen/rcupdate.h
-+++ b/xen/include/xen/rcupdate.h
-@@ -28,8 +28,8 @@
-  * http://lse.sourceforge.net/locking/rcupdate.html
-  */
- 
--#ifndef __XEN_RCUPDATE_H
--#define __XEN_RCUPDATE_H
-+#ifndef XEN__RCUPDATE_H
-+#define XEN__RCUPDATE_H
- 
- #include <xen/compiler.h>
- #include <xen/spinlock.h>
-@@ -179,4 +179,4 @@ void rcu_barrier(void);
- void rcu_idle_enter(unsigned int cpu);
- void rcu_idle_exit(unsigned int cpu);
- 
--#endif /* __XEN_RCUPDATE_H */
-+#endif /* XEN__RCUPDATE_H */
-diff --git a/xen/include/xen/rwlock.h b/xen/include/xen/rwlock.h
-index 4e78028218..129bba2a78 100644
---- a/xen/include/xen/rwlock.h
-+++ b/xen/include/xen/rwlock.h
-@@ -1,5 +1,5 @@
--#ifndef __RWLOCK_H__
--#define __RWLOCK_H__
-+#ifndef XEN__RWLOCK_H
-+#define XEN__RWLOCK_H
- 
- #include <xen/percpu.h>
- #include <xen/preempt.h>
-@@ -455,4 +455,4 @@ static inline void _percpu_write_unlock(percpu_rwlock_t **per_cpudata,
- #define DECLARE_PERCPU_RWLOCK_GLOBAL(name) DECLARE_PER_CPU(percpu_rwlock_t *, \
-                                                            name)
- 
--#endif /* __RWLOCK_H__ */
-+#endif /* XEN__RWLOCK_H */
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 90666576c2..968ec5f8db 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
+diff --git a/xen/arch/arm/include/asm/div64.h b/xen/arch/arm/include/asm/div64.h
+index 8fe17f0ff2..627583f04f 100644
+--- a/xen/arch/arm/include/asm/div64.h
++++ b/xen/arch/arm/include/asm/div64.h
 @@ -1,6 +1,6 @@
+ /* Taken from Linux arch/arm */
+-#ifndef __ASM_ARM_DIV64
+-#define __ASM_ARM_DIV64
++#ifndef ASM__ARM__DIV64_H
++#define ASM__ARM__DIV64_H
  
--#ifndef __SCHED_H__
--#define __SCHED_H__
-+#ifndef XEN__SCHED_H
-+#define XEN__SCHED_H
- 
+ #include <asm/system.h>
  #include <xen/types.h>
- #include <xen/spinlock.h>
-@@ -1276,7 +1276,7 @@ btcpupools_get_domain_pool_id(const struct dt_device_node *node)
- 
- #endif
- 
--#endif /* __SCHED_H__ */
-+#endif /* XEN__SCHED_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/sections.h b/xen/include/xen/sections.h
-index f2fac8d7fa..fbba123325 100644
---- a/xen/include/xen/sections.h
-+++ b/xen/include/xen/sections.h
+diff --git a/xen/arch/arm/include/asm/dom0less-build.h b/xen/arch/arm/include/asm/dom0less-build.h
+index 5864944bda..48c5c85ead 100644
+--- a/xen/arch/arm/include/asm/dom0less-build.h
++++ b/xen/arch/arm/include/asm/dom0less-build.h
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: GPL-2.0-only */
  
--#ifndef __XEN_SECTIONS_H__
--#define __XEN_SECTIONS_H__
-+#ifndef XEN__SECTIONS_H
-+#define XEN__SECTIONS_H
- 
- #include <xen/compiler.h>
- 
-@@ -27,7 +27,7 @@ extern char __init_begin[], __init_end[];
-  */
- #define __ro_after_init __section(".data.ro_after_init")
- 
--#endif /* !__XEN_SECTIONS_H__ */
-+#endif /* !XEN__SECTIONS_H */
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/self-tests.h b/xen/include/xen/self-tests.h
-index bd8a4867aa..149b48b804 100644
---- a/xen/include/xen/self-tests.h
-+++ b/xen/include/xen/self-tests.h
-@@ -4,8 +4,8 @@
-  * Helpers for Xen self-tests of basic logic, including confirming that
-  * examples which should be calculated by the compiler are.
-  */
--#ifndef XEN_SELF_TESTS_H
--#define XEN_SELF_TESTS_H
-+#ifndef XEN__SELF_TESTS_H
-+#define XEN__SELF_TESTS_H
- 
- #include <xen/lib.h>
- 
-@@ -59,4 +59,4 @@
-         RUNTIME_CHECK(fn, val, res);            \
-     } while ( 0 )
- 
--#endif /* XEN_SELF_TESTS_H */
-+#endif /* XEN__SELF_TESTS_H */
-diff --git a/xen/include/xen/serial.h b/xen/include/xen/serial.h
-index 3d21207a3d..1799c199ca 100644
---- a/xen/include/xen/serial.h
-+++ b/xen/include/xen/serial.h
-@@ -6,8 +6,8 @@
-  * Copyright (c) 2003-2008, K A Fraser
-  */
- 
--#ifndef __XEN_SERIAL_H__
--#define __XEN_SERIAL_H__
-+#ifndef XEN__SERIAL_H
-+#define XEN__SERIAL_H
- 
- #include <xen/init.h>
- #include <xen/spinlock.h>
-@@ -174,7 +174,7 @@ int dbgp_op(const struct physdev_dbgp_op *op);
- /* Baud rate was pre-configured before invoking the UART driver. */
- #define BAUD_AUTO (-1)
- 
--#endif /* __XEN_SERIAL_H__ */
-+#endif /* XEN__SERIAL_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/shared.h b/xen/include/xen/shared.h
-index 5b71342cab..31e1cca8c8 100644
---- a/xen/include/xen/shared.h
-+++ b/xen/include/xen/shared.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_SHARED_H__
--#define __XEN_SHARED_H__
-+#ifndef XEN__SHARED_H
-+#define XEN__SHARED_H
- 
- #ifdef CONFIG_COMPAT
- 
-@@ -47,4 +47,4 @@ extern vcpu_info_t dummy_vcpu_info;
- #define vcpu_info(v, field)        \
-         __vcpu_info(v, (vcpu_info_t *)(v)->vcpu_info_area.map, field)
- 
--#endif /* __XEN_SHARED_H__ */
-+#endif /* XEN__SHARED_H */
-diff --git a/xen/include/xen/shutdown.h b/xen/include/xen/shutdown.h
-index c7fa23aec1..9197b56d5f 100644
---- a/xen/include/xen/shutdown.h
-+++ b/xen/include/xen/shutdown.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_SHUTDOWN_H__
--#define __XEN_SHUTDOWN_H__
-+#ifndef XEN__SHUTDOWN_H
-+#define XEN__SHUTDOWN_H
- 
- #include <xen/compiler.h>
- #include <xen/types.h>
-@@ -12,4 +12,4 @@ void noreturn hwdom_shutdown(unsigned char reason);
- void noreturn machine_restart(unsigned int delay_millisecs);
- void noreturn machine_halt(void);
- 
--#endif /* __XEN_SHUTDOWN_H__ */
-+#endif /* XEN__SHUTDOWN_H */
-diff --git a/xen/include/xen/sizes.h b/xen/include/xen/sizes.h
-index f7b728ddab..16c1009fc2 100644
---- a/xen/include/xen/sizes.h
-+++ b/xen/include/xen/sizes.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_SIZES_H__
--#define __XEN_SIZES_H__
-+#ifndef XEN__SIZES_H
-+#define XEN__SIZES_H
- 
- /*
-  * Taken from kernel code include/linux/size.h
-@@ -45,4 +45,4 @@
- #define SZ_1G                           0x40000000
- #define SZ_2G                           0x80000000
- 
--#endif /* __XEN_SIZES_H__ */
-+#endif /* XEN__SIZES_H */
-diff --git a/xen/include/xen/smp.h b/xen/include/xen/smp.h
-index 2ca9ff1bfc..faffb49704 100644
---- a/xen/include/xen/smp.h
-+++ b/xen/include/xen/smp.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_SMP_H__
--#define __XEN_SMP_H__
-+#ifndef XEN__SMP_H
-+#define XEN__SMP_H
- 
- #include <asm/smp.h>
- 
-@@ -76,4 +76,4 @@ extern void *stack_base[NR_CPUS];
- void initialize_cpu_data(unsigned int cpu);
- int setup_cpu_root_pgt(unsigned int cpu);
- 
--#endif /* __XEN_SMP_H__ */
-+#endif /* XEN__SMP_H */
-diff --git a/xen/include/xen/softirq.h b/xen/include/xen/softirq.h
-index 33d6f2ecd2..6cceb109fa 100644
---- a/xen/include/xen/softirq.h
-+++ b/xen/include/xen/softirq.h
-@@ -1,5 +1,5 @@
--#if !defined(__XEN_SOFTIRQ_H__) && !defined(__ASSEMBLY__)
--#define __XEN_SOFTIRQ_H__
-+#if !defined(XEN__SOFTIRQ_H) && !defined(__ASSEMBLY__)
-+#define XEN__SOFTIRQ_H
- 
- /* Low-latency softirqs come first in the following list. */
- enum {
-@@ -40,4 +40,4 @@ void cpu_raise_softirq_batch_finish(void);
-  */
- void process_pending_softirqs(void);
- 
--#endif /* __XEN_SOFTIRQ_H__ */
-+#endif /* XEN__SOFTIRQ_H */
-diff --git a/xen/include/xen/sort.h b/xen/include/xen/sort.h
-index b953286284..110a54637b 100644
---- a/xen/include/xen/sort.h
-+++ b/xen/include/xen/sort.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_SORT_H__
--#define __XEN_SORT_H__
-+#ifndef XEN__SORT_H
-+#define XEN__SORT_H
- 
- #include <xen/types.h>
- 
-@@ -60,4 +60,4 @@ void sort(void *base, size_t num, size_t size,
-     }
- }
- 
--#endif /* __XEN_SORT_H__ */
-+#endif /* XEN__SORT_H */
-diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
-index 8825affb25..b84ac4d347 100644
---- a/xen/include/xen/spinlock.h
-+++ b/xen/include/xen/spinlock.h
-@@ -1,5 +1,5 @@
--#ifndef __SPINLOCK_H__
--#define __SPINLOCK_H__
-+#ifndef XEN__SPINLOCK_H
-+#define XEN__SPINLOCK_H
- 
- #include <xen/nospec.h>
- #include <xen/time.h>
-@@ -358,4 +358,4 @@ static always_inline void nrspin_lock_irq(rspinlock_t *l)
- #define nrspin_unlock_irqrestore(l, f) _nrspin_unlock_irqrestore(l, f)
- #define nrspin_unlock_irq(l)           _nrspin_unlock_irq(l)
- 
--#endif /* __SPINLOCK_H__ */
-+#endif /* XEN__SPINLOCK_H */
-diff --git a/xen/include/xen/stdarg.h b/xen/include/xen/stdarg.h
-index 29249a11a7..ec1f1d8378 100644
---- a/xen/include/xen/stdarg.h
-+++ b/xen/include/xen/stdarg.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_STDARG_H__
--#define __XEN_STDARG_H__
-+#ifndef XEN__STDARG_H
-+#define XEN__STDARG_H
- 
- typedef __builtin_va_list va_list;
- #define va_copy(dest, src)    __builtin_va_copy((dest), (src))
-@@ -7,4 +7,4 @@ typedef __builtin_va_list va_list;
- #define va_end(ap)            __builtin_va_end(ap)
- #define va_arg                __builtin_va_arg
- 
--#endif /* __XEN_STDARG_H__ */
-+#endif /* XEN__STDARG_H */
-diff --git a/xen/include/xen/stdbool.h b/xen/include/xen/stdbool.h
-index b0947a62b5..99f25d64f6 100644
---- a/xen/include/xen/stdbool.h
-+++ b/xen/include/xen/stdbool.h
-@@ -1,9 +1,9 @@
--#ifndef __XEN_STDBOOL_H__
--#define __XEN_STDBOOL_H__
-+#ifndef XEN__STDBOOL_H
-+#define XEN__STDBOOL_H
- 
- #define bool _Bool
- #define true 1
- #define false 0
- #define __bool_true_false_are_defined   1
- 
--#endif /* __XEN_STDBOOL_H__ */
-+#endif /* XEN__STDBOOL_H */
-diff --git a/xen/include/xen/stdint.h b/xen/include/xen/stdint.h
-index a40165c6ae..1e4319fd0f 100644
---- a/xen/include/xen/stdint.h
-+++ b/xen/include/xen/stdint.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __XEN_STDINT_H__
--#define __XEN_STDINT_H__
-+#ifndef XEN__STDINT_H
-+#define XEN__STDINT_H
- 
- #ifndef __INT8_TYPE__ /* GCC <= 4.4 */
- 
-@@ -30,4 +30,4 @@ typedef __UINT64_TYPE__    uint64_t;
- 
- #endif
- 
--#endif /* __XEN_STDINT_H__ */
-+#endif /* XEN__STDINT_H */
-diff --git a/xen/include/xen/stop_machine.h b/xen/include/xen/stop_machine.h
-index 0bbf71f112..7a3f22affc 100644
---- a/xen/include/xen/stop_machine.h
-+++ b/xen/include/xen/stop_machine.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_STOP_MACHINE_H__
--#define __XEN_STOP_MACHINE_H__
-+#ifndef XEN__STOP_MACHINE_H
-+#define XEN__STOP_MACHINE_H
- 
- /**
-  * stop_machine_run: freeze the machine on all CPUs and run this function
-@@ -16,4 +16,4 @@
-  * grabbing every spinlock in the kernel. */
- int stop_machine_run(int (*fn)(void *data), void *data, unsigned int cpu);
- 
--#endif /* __XEN_STOP_MACHINE_H__ */
-+#endif /* XEN__STOP_MACHINE_H */
-diff --git a/xen/include/xen/string.h b/xen/include/xen/string.h
-index bd4a8f48e9..0d7383ef9a 100644
---- a/xen/include/xen/string.h
-+++ b/xen/include/xen/string.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_STRING_H__
--#define __XEN_STRING_H__
-+#ifndef XEN__STRING_H
-+#define XEN__STRING_H
- 
- #include <xen/types.h>	/* for size_t */
- 
-@@ -100,7 +100,7 @@ void *memchr_inv(const void *s, int c, size_t n);
-     (strlcat(d, s, sizeof(d)) >= sizeof(d));    \
- })
- 
--#endif /* __XEN_STRING_H__ */
-+#endif /* XEN__STRING_H */
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/stringify.h b/xen/include/xen/stringify.h
-index 36808e0969..be4a979885 100644
---- a/xen/include/xen/stringify.h
-+++ b/xen/include/xen/stringify.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_STRINGIFY_H
--#define __XEN_STRINGIFY_H
-+#ifndef XEN__STRINGIFY_H
-+#define XEN__STRINGIFY_H
- 
- /* Indirect stringification.  Doing two levels allows the parameter to be a
-  * macro itself.  For example, compile with -DFOO=bar, __stringify(FOO)
-@@ -9,4 +9,4 @@
- #define __stringify_1(x...) #x
- #define __stringify(x...)   __stringify_1(x)
- 
--#endif /* !__XEN_STRINGIFY_H */
-+#endif /* !XEN__STRINGIFY_H */
-diff --git a/xen/include/xen/symbols.h b/xen/include/xen/symbols.h
-index 20bbb28ef2..d8adc03a07 100644
---- a/xen/include/xen/symbols.h
-+++ b/xen/include/xen/symbols.h
-@@ -1,5 +1,5 @@
--#ifndef _XEN_SYMBOLS_H
--#define _XEN_SYMBOLS_H
-+#ifndef XEN__SYMBOLS_H
-+#define XEN__SYMBOLS_H
- 
- #include <xen/types.h>
- 
-@@ -33,4 +33,4 @@ struct symbol_offset {
-     uint32_t stream; /* .. in the compressed stream.*/
-     uint32_t addr;   /* .. and in the fixed size address array. */
- };
--#endif /*_XEN_SYMBOLS_H*/
-+#endif /*XEN__SYMBOLS_H*/
-diff --git a/xen/include/xen/tasklet.h b/xen/include/xen/tasklet.h
-index 78760b694a..55ff906a31 100644
---- a/xen/include/xen/tasklet.h
-+++ b/xen/include/xen/tasklet.h
-@@ -7,8 +7,8 @@
-  * during per-tasklet initialisation.
-  */
- 
--#ifndef __XEN_TASKLET_H__
--#define __XEN_TASKLET_H__
-+#ifndef XEN__TASKLET_H
-+#define XEN__TASKLET_H
- 
- #include <xen/types.h>
- #include <xen/list.h>
-@@ -64,4 +64,4 @@ void softirq_tasklet_init(struct tasklet *t,
-                           void (*func)(void *data), void *data);
- void tasklet_subsys_init(void);
- 
--#endif /* __XEN_TASKLET_H__ */
-+#endif /* XEN__TASKLET_H */
-diff --git a/xen/include/xen/time.h b/xen/include/xen/time.h
-index 67c586b736..cf515fcdeb 100644
---- a/xen/include/xen/time.h
-+++ b/xen/include/xen/time.h
-@@ -5,8 +5,8 @@
-  * Copyright (c) 2002-2005 K A Fraser
-  */
- 
--#ifndef __XEN_TIME_H__
--#define __XEN_TIME_H__
-+#ifndef XEN__TIME_H
-+#define XEN__TIME_H
- 
- #include <xen/types.h>
- #include <public/xen.h>
-@@ -77,7 +77,7 @@ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds);
- 
- #include <asm/time.h>
- 
--#endif /* __XEN_TIME_H__ */
-+#endif /* XEN__TIME_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/timer.h b/xen/include/xen/timer.h
-index fb28517515..2fa5ba57ab 100644
---- a/xen/include/xen/timer.h
-+++ b/xen/include/xen/timer.h
-@@ -5,8 +5,8 @@
-  * Copyright (c) 2002-2005 K A Fraser
-  */
- 
--#ifndef _TIMER_H_
--#define _TIMER_H_
-+#ifndef XEN__TIMER_H
-+#define XEN__TIMER_H
- 
- #include <xen/spinlock.h>
- #include <xen/time.h>
-@@ -110,7 +110,7 @@ int reprogram_timer(s_time_t timeout);
- /* Calculate the aligned first tick time for a given periodic timer. */
- s_time_t align_timer(s_time_t firsttick, uint64_t period);
- 
--#endif /* _TIMER_H_ */
-+#endif /* XEN__TIMER_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/trace.h b/xen/include/xen/trace.h
-index 914cecbc18..4bdbdeffa8 100644
---- a/xen/include/xen/trace.h
-+++ b/xen/include/xen/trace.h
-@@ -18,8 +18,8 @@
-  * trace buffer contents can then be performed using a userland tool.
-  */
- 
--#ifndef __XEN_TRACE_H__
--#define __XEN_TRACE_H__
-+#ifndef XEN__TRACE_H
-+#define XEN__TRACE_H
- 
- #include <xen/types.h>
- #include <public/sysctl.h>
-@@ -91,4 +91,4 @@ static inline void trace_time(
- /* Create a trace record with time included. */
- #define TRACE_TIME(_e, ...) TRACE((_e) | TRC_HD_CYCLE_FLAG, ## __VA_ARGS__)
- 
--#endif /* __XEN_TRACE_H__ */
-+#endif /* XEN__TRACE_H */
-diff --git a/xen/include/xen/types.h b/xen/include/xen/types.h
-index 1bcc5a474f..f8ca8a7958 100644
---- a/xen/include/xen/types.h
-+++ b/xen/include/xen/types.h
-@@ -1,5 +1,5 @@
--#ifndef __TYPES_H__
--#define __TYPES_H__
-+#ifndef XEN__TYPES_H
-+#define XEN__TYPES_H
+-#ifndef __ASM_DOM0LESS_BUILD_H_
+-#define __ASM_DOM0LESS_BUILD_H_
++#ifndef ASM__ARM__DOM0LESS_BUILD_H
++#define ASM__ARM__DOM0LESS_BUILD_H
  
  #include <xen/stdbool.h>
- #include <xen/stdint.h>
-@@ -64,4 +64,4 @@ typedef unsigned int __attribute__((__mode__(__pointer__))) uintptr_t;
- #define test_and_set_bool(b)   xchg(&(b), true)
- #define test_and_clear_bool(b) xchg(&(b), false)
  
--#endif /* __TYPES_H__ */
-+#endif /* XEN__TYPES_H */
-diff --git a/xen/include/xen/typesafe.h b/xen/include/xen/typesafe.h
-index 7ecd3b4a8d..8898278e75 100644
---- a/xen/include/xen/typesafe.h
-+++ b/xen/include/xen/typesafe.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_TYPESAFE_H__
--#define __XEN_TYPESAFE_H__
-+#ifndef XEN__TYPESAFE_H
-+#define XEN__TYPESAFE_H
+@@ -20,7 +20,7 @@ static inline bool is_dom0less_mode(void)
  
- /*
-  * Compiler games to gain type safety between different logical integers.
-@@ -33,7 +33,7 @@
+ #endif /* CONFIG_DOM0LESS_BOOT */
  
- #endif
- 
--#endif /* __XEN_TYPESAFE_H__ */
-+#endif /* XEN__TYPESAFE_H */
+-#endif /* __ASM_DOM0LESS_BUILD_H_ */
++#endif /* ASM__ARM__DOM0LESS_BUILD_H */
  
  /*
   * Local variables:
-diff --git a/xen/include/xen/unaligned.h b/xen/include/xen/unaligned.h
-index d9bb599e65..d4e35c13e5 100644
---- a/xen/include/xen/unaligned.h
-+++ b/xen/include/xen/unaligned.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0 */
--#ifndef __XEN_UNALIGNED_H__
--#define __XEN_UNALIGNED_H__
-+#ifndef XEN__UNALIGNED_H
-+#define XEN__UNALIGNED_H
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index f1d72c6e48..f27353d9c8 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_DOMAIN_H__
+-#define __ASM_DOMAIN_H__
++#ifndef ASM__ARM__DOMAIN_H
++#define ASM__ARM__DOMAIN_H
  
- #ifdef __XEN__
- #include <xen/types.h>
-@@ -85,4 +85,4 @@ static inline void put_unaligned_le64(uint64_t val, void *p)
- 	put_unaligned_t(__le64, cpu_to_le64(val), p);
+ #include <xen/cache.h>
+ #include <xen/timer.h>
+@@ -310,7 +310,7 @@ static inline void update_guest_memory_policy(struct vcpu *v,
+                                               struct guest_memory_policy *gmp)
+ {}
+ 
+-#endif /* __ASM_DOMAIN_H__ */
++#endif /* ASM__ARM__DOMAIN_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
+index e712afbc7f..740a45f964 100644
+--- a/xen/arch/arm/include/asm/domain_build.h
++++ b/xen/arch/arm/include/asm/domain_build.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_DOMAIN_BUILD_H__
+-#define __ASM_DOMAIN_BUILD_H__
++#ifndef ASM__ARM__DOMAIN_BUILD_H
++#define ASM__ARM__DOMAIN_BUILD_H
+ 
+ #include <xen/sched.h>
+ #include <asm/kernel.h>
+diff --git a/xen/arch/arm/include/asm/early_printk.h b/xen/arch/arm/include/asm/early_printk.h
+index 46a5e562dd..5dc65483f1 100644
+--- a/xen/arch/arm/include/asm/early_printk.h
++++ b/xen/arch/arm/include/asm/early_printk.h
+@@ -7,8 +7,8 @@
+  * it under the terms of the GNU General Public License version 2 as
+  * published by the Free Software Foundation.
+  */
+-#ifndef __ARM_EARLY_PRINTK_H__
+-#define __ARM_EARLY_PRINTK_H__
++#ifndef ASM__ARM__EARLY_PRINTK_H
++#define ASM__ARM__EARLY_PRINTK_H
+ 
+ #include <xen/page-size.h>
+ #include <asm/fixmap.h>
+diff --git a/xen/arch/arm/include/asm/elf.h b/xen/arch/arm/include/asm/elf.h
+index 9e436e7556..d55e8a1912 100644
+--- a/xen/arch/arm/include/asm/elf.h
++++ b/xen/arch/arm/include/asm/elf.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_ELF_H__
+-#define __ARM_ELF_H__
++#ifndef ASM__ARM__ELF_H
++#define ASM__ARM__ELF_H
+ 
+ typedef struct {
+     unsigned long r0;
+@@ -20,7 +20,7 @@ typedef struct {
+     unsigned long pc;
+ } ELF_Gregset;
+ 
+-#endif /* __ARM_ELF_H__ */
++#endif /* ASM__ARM__ELF_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/event.h b/xen/arch/arm/include/asm/event.h
+index b14c166ad6..c0088bbb64 100644
+--- a/xen/arch/arm/include/asm/event.h
++++ b/xen/arch/arm/include/asm/event.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_EVENT_H__
+-#define __ASM_EVENT_H__
++#ifndef ASM__ARM__EVENT_H
++#define ASM__ARM__EVENT_H
+ 
+ #include <asm/domain.h>
+ 
+diff --git a/xen/arch/arm/include/asm/exynos4210-uart.h b/xen/arch/arm/include/asm/exynos4210-uart.h
+index e2ab4a43e4..21afc9e3f3 100644
+--- a/xen/arch/arm/include/asm/exynos4210-uart.h
++++ b/xen/arch/arm/include/asm/exynos4210-uart.h
+@@ -18,8 +18,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_EXYNOS4210_H
+-#define __ASM_ARM_EXYNOS4210_H
++#ifndef ASM__ARM__EXYNOS4210_UART_H
++#define ASM__ARM__EXYNOS4210_UART_H
+ 
+ 
+ /*
+@@ -100,7 +100,7 @@
+ #define UINTM_RXD       (1 << 0)
+ #define UINTM_ALLI      (UINTM_MODEM | UINTM_TXD | UINTM_ERROR | UINTM_RXD)
+ 
+-#endif /* __ASM_ARM_EXYNOS4210_H */
++#endif /* ASM__ARM__EXYNOS4210_UART_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/fixmap.h b/xen/arch/arm/include/asm/fixmap.h
+index 0cb5d54d1c..da6bf72bec 100644
+--- a/xen/arch/arm/include/asm/fixmap.h
++++ b/xen/arch/arm/include/asm/fixmap.h
+@@ -1,8 +1,8 @@
+ /*
+  * fixmap.h: compile-time virtual memory allocation
+  */
+-#ifndef __ASM_FIXMAP_H
+-#define __ASM_FIXMAP_H
++#ifndef ASM__ARM__FIXMAP_H
++#define ASM__ARM__FIXMAP_H
+ 
+ #include <xen/acpi.h>
+ #include <xen/pmap.h>
+@@ -45,4 +45,4 @@ static inline unsigned int virt_to_fix(vaddr_t vaddr)
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __ASM_FIXMAP_H */
++#endif /* ASM__ARM__FIXMAP_H */
+diff --git a/xen/arch/arm/include/asm/flushtlb.h b/xen/arch/arm/include/asm/flushtlb.h
+index e45fb6d97b..2239acf4fc 100644
+--- a/xen/arch/arm/include/asm/flushtlb.h
++++ b/xen/arch/arm/include/asm/flushtlb.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_FLUSHTLB_H__
+-#define __ASM_ARM_FLUSHTLB_H__
++#ifndef ASM__ARM__FLUSHTLB_H
++#define ASM__ARM__FLUSHTLB_H
+ 
+ #include <xen/cpumask.h>
+ 
+@@ -68,7 +68,7 @@ static inline void flush_xen_tlb_range_va(vaddr_t va,
+     isb();
  }
  
--#endif /* __XEN_UNALIGNED_H__ */
-+#endif /* XEN__UNALIGNED_H */
-diff --git a/xen/include/xen/version.h b/xen/include/xen/version.h
-index 93c5877363..858469684d 100644
---- a/xen/include/xen/version.h
-+++ b/xen/include/xen/version.h
+-#endif /* __ASM_ARM_FLUSHTLB_H__ */
++#endif /* ASM__ARM__FLUSHTLB_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
+index 541f0eeb80..edbeba6388 100644
+--- a/xen/arch/arm/include/asm/gic.h
++++ b/xen/arch/arm/include/asm/gic.h
+@@ -15,8 +15,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_GIC_H__
+-#define __ASM_ARM_GIC_H__
++#ifndef ASM__ARM__GIC_H
++#define ASM__ARM__GIC_H
+ 
+ #define NR_GIC_LOCAL_IRQS  NR_LOCAL_IRQS
+ #define NR_GIC_SGI         16
+diff --git a/xen/arch/arm/include/asm/gic_v3_defs.h b/xen/arch/arm/include/asm/gic_v3_defs.h
+index 2af093e774..39c594470b 100644
+--- a/xen/arch/arm/include/asm/gic_v3_defs.h
++++ b/xen/arch/arm/include/asm/gic_v3_defs.h
+@@ -15,8 +15,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_GIC_V3_DEFS_H__
+-#define __ASM_ARM_GIC_V3_DEFS_H__
++#ifndef ASM__ARM__GIC_V3_DEFS_H
++#define ASM__ARM__GIC_V3_DEFS_H
+ 
+ #include <xen/sizes.h>
+ 
+@@ -210,7 +210,7 @@ struct rdist_region {
+     bool single_rdist;
+ };
+ 
+-#endif /* __ASM_ARM_GIC_V3_DEFS_H__ */
++#endif /* ASM__ARM__GIC_V3_DEFS_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
+index c24d4752d0..f34b803f66 100644
+--- a/xen/arch/arm/include/asm/gic_v3_its.h
++++ b/xen/arch/arm/include/asm/gic_v3_its.h
+@@ -17,8 +17,8 @@
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef __ASM_ARM_ITS_H__
+-#define __ASM_ARM_ITS_H__
++#ifndef ASM__ARM__GIC_V3_ITS_H
++#define ASM__ARM__GIC_V3_ITS_H
+ 
+ #define GITS_CTLR                       0x000
+ #define GITS_IIDR                       0x004
+diff --git a/xen/arch/arm/include/asm/grant_table.h b/xen/arch/arm/include/asm/grant_table.h
+index d3c518a926..b104fc890c 100644
+--- a/xen/arch/arm/include/asm/grant_table.h
++++ b/xen/arch/arm/include/asm/grant_table.h
 @@ -1,5 +1,5 @@
--#ifndef __XEN_VERSION_H__
--#define __XEN_VERSION_H__
-+#ifndef XEN__VERSION_H
-+#define XEN__VERSION_H
+-#ifndef __ASM_GRANT_TABLE_H__
+-#define __ASM_GRANT_TABLE_H__
++#ifndef ASM__ARM__GRANT_TABLE_H
++#define ASM__ARM__GRANT_TABLE_H
+ 
+ #include <xen/grant_table.h>
+ #include <xen/kernel.h>
+@@ -76,7 +76,7 @@ int replace_grant_host_mapping(uint64_t gpaddr, mfn_t frame,
+ #define gnttab_need_iommu_mapping(d)                    \
+     (is_domain_direct_mapped(d) && is_iommu_enabled(d))
+ 
+-#endif /* __ASM_GRANT_TABLE_H__ */
++#endif /* ASM__ARM__GRANT_TABLE_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/guest_access.h b/xen/arch/arm/include/asm/guest_access.h
+index 18c88b70d7..2deaf968f9 100644
+--- a/xen/arch/arm/include/asm/guest_access.h
++++ b/xen/arch/arm/include/asm/guest_access.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_GUEST_ACCESS_H__
+-#define __ASM_ARM_GUEST_ACCESS_H__
++#ifndef ASM__ARM__GUEST_ACCESS_H
++#define ASM__ARM__GUEST_ACCESS_H
+ 
+ #include <xen/errno.h>
+ #include <xen/sched.h>
+@@ -31,7 +31,7 @@ int access_guest_memory_by_gpa(struct domain *d, paddr_t gpa, void *buf,
+ #define guest_handle_okay(hnd, nr) (1)
+ #define guest_handle_subrange_okay(hnd, first, last) (1)
+ 
+-#endif /* __ASM_ARM_GUEST_ACCESS_H__ */
++#endif /* ASM__ARM__GUEST_ACCESS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/guest_atomics.h b/xen/arch/arm/include/asm/guest_atomics.h
+index 8893eb9a55..29fc05f5e7 100644
+--- a/xen/arch/arm/include/asm/guest_atomics.h
++++ b/xen/arch/arm/include/asm/guest_atomics.h
+@@ -1,5 +1,5 @@
+-#ifndef _ARM_GUEST_ATOMICS_H
+-#define _ARM_GUEST_ATOMICS_H
++#ifndef ASM__ARM__GUEST_ATOMICS_H
++#define ASM__ARM__GUEST_ATOMICS_H
+ 
+ #include <xen/bitops.h>
+ #include <xen/sched.h>
+@@ -137,7 +137,7 @@ static inline uint64_t guest_cmpxchg64(struct domain *d,
+     return oldval;
+ }
+ 
+-#endif /* _ARM_GUEST_ATOMICS_H */
++#endif /* ASM__ARM__GUEST_ATOMICS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/guest_walk.h b/xen/arch/arm/include/asm/guest_walk.h
+index 8768ac9894..2be96d9020 100644
+--- a/xen/arch/arm/include/asm/guest_walk.h
++++ b/xen/arch/arm/include/asm/guest_walk.h
+@@ -1,5 +1,5 @@
+-#ifndef _XEN_GUEST_WALK_H
+-#define _XEN_GUEST_WALK_H
++#ifndef ASM__ARM__GUEST_WALK_H
++#define ASM__ARM__GUEST_WALK_H
+ 
+ /* Walk the guest's page tables in software. */
+ bool guest_walk_tables(const struct vcpu *v,
+@@ -7,7 +7,7 @@ bool guest_walk_tables(const struct vcpu *v,
+                        paddr_t *ipa,
+                        unsigned int *perms);
+ 
+-#endif /* _XEN_GUEST_WALK_H */
++#endif /* ASM__ARM__GUEST_WALK_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/hsr.h b/xen/arch/arm/include/asm/hsr.h
+index 9b91b28c48..d3e7b70835 100644
+--- a/xen/arch/arm/include/asm/hsr.h
++++ b/xen/arch/arm/include/asm/hsr.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_HSR_H
+-#define __ASM_ARM_HSR_H
++#ifndef ASM__ARM__HSR_H
++#define ASM__ARM__HSR_H
  
  #include <xen/types.h>
- #include <xen/elfstructs.h>
-@@ -27,4 +27,4 @@ int xen_build_id_check(const Elf_Note *n, unsigned int n_sz,
- static inline void xen_build_init(void) {};
+ 
+@@ -205,7 +205,7 @@ union hsr {
+ /* HSR.EC == HSR_{HVC32, HVC64, SMC64, SVC32, SVC64} */
+ #define HSR_XXC_IMM_MASK     (0xffff)
+ 
+-#endif /* __ASM_ARM_HSR_H */
++#endif /* ASM__ARM__HSR_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/hypercall.h b/xen/arch/arm/include/asm/hypercall.h
+index 0a23f8d484..95d38206b6 100644
+--- a/xen/arch/arm/include/asm/hypercall.h
++++ b/xen/arch/arm/include/asm/hypercall.h
+@@ -3,15 +3,15 @@
+ #error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
  #endif
  
--#endif /* __XEN_VERSION_H__ */
-+#endif /* XEN__VERSION_H */
-diff --git a/xen/include/xen/vga.h b/xen/include/xen/vga.h
-index ceb8a527ed..6f8cd20bd7 100644
---- a/xen/include/xen/vga.h
-+++ b/xen/include/xen/vga.h
-@@ -6,8 +6,8 @@
-  *  for more details.
+-#ifndef __ASM_ARM_HYPERCALL_H__
+-#define __ASM_ARM_HYPERCALL_H__
++#ifndef ASM__ARM__HYPERCALL_H
++#define ASM__ARM__HYPERCALL_H
+ 
+ #include <public/domctl.h> /* for arch_do_domctl */
+ 
+ long subarch_do_domctl(struct xen_domctl *domctl, struct domain *d,
+                        XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
+ 
+-#endif /* __ASM_ARM_HYPERCALL_H__ */
++#endif /* ASM__ARM__HYPERCALL_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/imx-lpuart.h b/xen/arch/arm/include/asm/imx-lpuart.h
+index fe859045dc..1e074649cf 100644
+--- a/xen/arch/arm/include/asm/imx-lpuart.h
++++ b/xen/arch/arm/include/asm/imx-lpuart.h
+@@ -17,8 +17,8 @@
+  * GNU General Public License for more details.
   */
  
--#ifndef _XEN_VGA_H
--#define _XEN_VGA_H
-+#ifndef XEN__VGA_H
-+#define XEN__VGA_H
+-#ifndef __ASM_ARM_IMX_LPUART_H__
+-#define __ASM_ARM_IMX_LPUART_H__
++#ifndef ASM__ARM__IMX_LPUART_H
++#define ASM__ARM__IMX_LPUART_H
  
- #include <xen/video.h>
+ /* 32-bit register definition */
+ #define UARTBAUD          (0x10)
+@@ -52,7 +52,7 @@
  
-@@ -21,4 +21,4 @@ void vesa_endboot(bool keep);
- static inline void vesa_init(void) {}
- #endif
+ #define UARTWATER_RXCNT_OFF     24
  
--#endif /* _XEN_VGA_H */
-+#endif /* XEN__VGA_H */
-diff --git a/xen/include/xen/video.h b/xen/include/xen/video.h
-index 1ee1aa46b1..2db8bbaa2e 100644
---- a/xen/include/xen/video.h
-+++ b/xen/include/xen/video.h
-@@ -6,8 +6,8 @@
-  *  for more details.
+-#endif /* __ASM_ARM_IMX_LPUART_H__ */
++#endif /* ASM__ARM__IMX_LPUART_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/insn.h b/xen/arch/arm/include/asm/insn.h
+index 27271e95f9..8aa66b2e95 100644
+--- a/xen/arch/arm/include/asm/insn.h
++++ b/xen/arch/arm/include/asm/insn.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARCH_ARM_INSN
+-#define __ARCH_ARM_INSN
++#ifndef ASM__ARM__INSN_H
++#define ASM__ARM__INSN_H
+ 
+ #ifndef __ASSEMBLY__
+ 
+@@ -18,7 +18,7 @@
+ /* On ARM32,64 instructions are always 4 bytes long. */
+ #define ARCH_PATCH_INSN_SIZE 4
+ 
+-#endif /* !__ARCH_ARM_INSN */
++#endif /* !ASM__ARM__INSN_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/io.h b/xen/arch/arm/include/asm/io.h
+index e426804424..2475fca9de 100644
+--- a/xen/arch/arm/include/asm/io.h
++++ b/xen/arch/arm/include/asm/io.h
+@@ -1,5 +1,5 @@
+-#ifndef _ASM_IO_H
+-#define _ASM_IO_H
++#ifndef ASM__ARM__IO_H
++#define ASM__ARM__IO_H
+ 
+ #if defined(CONFIG_ARM_32)
+ # include <asm/arm32/io.h>
+diff --git a/xen/arch/arm/include/asm/iommu.h b/xen/arch/arm/include/asm/iommu.h
+index d57bd8a38c..eba17ec695 100644
+--- a/xen/arch/arm/include/asm/iommu.h
++++ b/xen/arch/arm/include/asm/iommu.h
+@@ -11,8 +11,8 @@
+  * You should have received a copy of the GNU General Public License along with
+  * this program; If not, see <http://www.gnu.org/licenses/>.
+ */
+-#ifndef __ARCH_ARM_IOMMU_H__
+-#define __ARCH_ARM_IOMMU_H__
++#ifndef ASM__ARM__IOMMU_H
++#define ASM__ARM__IOMMU_H
+ 
+ struct arch_iommu
+ {
+@@ -34,7 +34,7 @@ int __must_check arm_iommu_unmap_page(struct domain *d, dfn_t dfn,
+                                       unsigned int order,
+                                       unsigned int *flush_flags);
+ 
+-#endif /* __ARCH_ARM_IOMMU_H__ */
++#endif /* ASM__ARM__IOMMU_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/iommu_fwspec.h b/xen/arch/arm/include/asm/iommu_fwspec.h
+index 5cdb53f8e8..f018e121f9 100644
+--- a/xen/arch/arm/include/asm/iommu_fwspec.h
++++ b/xen/arch/arm/include/asm/iommu_fwspec.h
+@@ -24,8 +24,8 @@
+  * License along with this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
--#ifndef _XEN_VIDEO_H
--#define _XEN_VIDEO_H
-+#ifndef XEN__VIDEO_H
-+#define XEN__VIDEO_H
+-#ifndef __ARCH_ARM_IOMMU_FWSPEC_H__
+-#define __ARCH_ARM_IOMMU_FWSPEC_H__
++#ifndef ASM__ARM__IOMMU_FWSPEC_H
++#define ASM__ARM__IOMMU_FWSPEC_H
  
- #include <public/xen.h>
+ /* per-device IOMMU instance data */
+ struct iommu_fwspec {
+@@ -55,7 +55,7 @@ static inline void dev_iommu_fwspec_set(struct device *dev,
+     dev->iommu_fwspec = fwspec;
+ }
  
-@@ -21,4 +21,4 @@ static inline void video_puts(const char *str, size_t nr) {}
- #define video_endboot() ((void)0)
- #endif
+-#endif /* __ARCH_ARM_IOMMU_FWSPEC_H__ */
++#endif /* ASM__ARM__IOMMU_FWSPEC_H */
  
--#endif /* _XEN_VIDEO_H */
-+#endif /* XEN__VIDEO_H */
-diff --git a/xen/include/xen/virtual_region.h b/xen/include/xen/virtual_region.h
-index a18dfb6fb0..860043ab76 100644
---- a/xen/include/xen/virtual_region.h
-+++ b/xen/include/xen/virtual_region.h
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/ioreq.h b/xen/arch/arm/include/asm/ioreq.h
+index 50185978d5..9300ba53d6 100644
+--- a/xen/arch/arm/include/asm/ioreq.h
++++ b/xen/arch/arm/include/asm/ioreq.h
+@@ -17,8 +17,8 @@
+  * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef __ASM_ARM_IOREQ_H__
+-#define __ASM_ARM_IOREQ_H__
++#ifndef ASM__ARM__IOREQ_H
++#define ASM__ARM__IOREQ_H
+ 
+ #ifdef CONFIG_IOREQ_SERVER
+ enum io_state handle_ioserv(struct cpu_user_regs *regs, struct vcpu *v);
+@@ -57,7 +57,7 @@ static inline void msix_write_completion(struct vcpu *v)
+ #define IOREQ_STATUS_UNHANDLED   IO_UNHANDLED
+ #define IOREQ_STATUS_RETRY       IO_RETRY
+ 
+-#endif /* __ASM_ARM_IOREQ_H__ */
++#endif /* ASM__ARM__IOREQ_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/irq.h b/xen/arch/arm/include/asm/irq.h
+index 88e060bf29..42abb6614e 100644
+--- a/xen/arch/arm/include/asm/irq.h
++++ b/xen/arch/arm/include/asm/irq.h
+@@ -1,5 +1,5 @@
+-#ifndef _ASM_HW_IRQ_H
+-#define _ASM_HW_IRQ_H
++#ifndef ASM__ARM__IRQ_H
++#define ASM__ARM__IRQ_H
+ 
+ #include <xen/device_tree.h>
+ #include <public/device_tree_defs.h>
+@@ -101,7 +101,7 @@ bool irq_type_set_by_domain(const struct domain *d);
+ void irq_end_none(struct irq_desc *irq);
+ #define irq_end_none irq_end_none
+ 
+-#endif /* _ASM_HW_IRQ_H */
++#endif /* ASM__ARM__IRQ_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+index 7e6e3c82a4..39452f984b 100644
+--- a/xen/arch/arm/include/asm/kernel.h
++++ b/xen/arch/arm/include/asm/kernel.h
+@@ -3,8 +3,8 @@
+  *
+  * Copyright (C) 2011 Citrix Systems, Inc.
+  */
+-#ifndef __ARCH_ARM_KERNEL_H__
+-#define __ARCH_ARM_KERNEL_H__
++#ifndef ASM__ARM__KERNEL_H
++#define ASM__ARM__KERNEL_H
+ 
+ #include <xen/device_tree.h>
+ #include <asm/domain.h>
+@@ -126,7 +126,7 @@ int kernel_probe(struct kernel_info *info, const struct dt_device_node *domain);
+  */
+ void kernel_load(struct kernel_info *info);
+ 
+-#endif /* #ifdef __ARCH_ARM_KERNEL_H__ */
++#endif /* #ifdef ASM__ARM__KERNEL_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/livepatch.h b/xen/arch/arm/include/asm/livepatch.h
+index 026af5e7dc..11fec2033c 100644
+--- a/xen/arch/arm/include/asm/livepatch.h
++++ b/xen/arch/arm/include/asm/livepatch.h
 @@ -3,8 +3,8 @@
   *
   */
  
--#ifndef __XEN_VIRTUAL_REGION_H__
--#define __XEN_VIRTUAL_REGION_H__
-+#ifndef XEN__VIRTUAL_REGION_H
-+#define XEN__VIRTUAL_REGION_H
+-#ifndef __XEN_ARM_LIVEPATCH_H__
+-#define __XEN_ARM_LIVEPATCH_H__
++#ifndef ASM__ARM__LIVEPATCH_H
++#define ASM__ARM__LIVEPATCH_H
  
- #include <xen/list.h>
- #include <xen/symbols.h>
-@@ -46,7 +46,7 @@ void unregister_virtual_region(struct virtual_region *r);
- void relax_virtual_region_perms(void);
- void tighten_virtual_region_perms(void);
+ #include <xen/sizes.h> /* For SZ_* macros. */
+ #include <asm/insn.h>
+@@ -24,7 +24,7 @@ extern void *vmap_of_xen_text;
+ #define ARCH_LIVEPATCH_RANGE SZ_128M
+ #endif
  
--#endif /* __XEN_VIRTUAL_REGION_H__ */
-+#endif /* XEN__VIRTUAL_REGION_H */
+-#endif /* __XEN_ARM_LIVEPATCH_H__ */
++#endif /* ASM__ARM__LIVEPATCH_H */
  
  /*
   * Local variables:
-diff --git a/xen/include/xen/vmap.h b/xen/include/xen/vmap.h
-index c1dd7ac22f..c94c4d68f1 100644
---- a/xen/include/xen/vmap.h
-+++ b/xen/include/xen/vmap.h
-@@ -5,8 +5,8 @@
-  * purpose area (VMAP_DEFAULT) and a livepatch-specific area (VMAP_XEN). The
-  * latter is used when loading livepatches and the former for everything else.
-  */
--#if !defined(__XEN_VMAP_H__) && defined(VMAP_VIRT_START)
--#define __XEN_VMAP_H__
-+#if !defined(XEN__VMAP_H) && defined(VMAP_VIRT_START)
-+#define XEN__VMAP_H
- 
- #include <xen/mm-frame.h>
- #include <xen/page-size.h>
-@@ -146,4 +146,4 @@ static inline void vm_init(void)
- #endif
- }
- 
--#endif /* __XEN_VMAP_H__ */
-+#endif /* XEN__VMAP_H */
-diff --git a/xen/include/xen/wait.h b/xen/include/xen/wait.h
-index 1c68bc564b..c890d3244d 100644
---- a/xen/include/xen/wait.h
-+++ b/xen/include/xen/wait.h
-@@ -6,8 +6,8 @@
-  * Copyright (c) 2010, Keir Fraser <keir@xen.org>
-  */
- 
--#ifndef __XEN_WAIT_H__
--#define __XEN_WAIT_H__
-+#ifndef XEN__WAIT_H
-+#define XEN__WAIT_H
- 
- #include <xen/types.h>
- #include <xen/list.h>
-@@ -56,4 +56,4 @@ void wait(void);
- void finish_wait(struct waitqueue_head *wq);
- void check_wakeup_from_wait(void);
- 
--#endif /* __XEN_WAIT_H__ */
-+#endif /* XEN__WAIT_H */
-diff --git a/xen/include/xen/warning.h b/xen/include/xen/warning.h
-index c0661d5140..eec3850ec1 100644
---- a/xen/include/xen/warning.h
-+++ b/xen/include/xen/warning.h
+diff --git a/xen/arch/arm/include/asm/lpae.h b/xen/arch/arm/include/asm/lpae.h
+index 4a1679cb33..ebf20ac121 100644
+--- a/xen/arch/arm/include/asm/lpae.h
++++ b/xen/arch/arm/include/asm/lpae.h
 @@ -1,5 +1,5 @@
--#ifndef _WARNING_H_
--#define _WARNING_H_
-+#ifndef XEN__WARNING_H
-+#define XEN__WARNING_H
+-#ifndef __ARM_LPAE_H__
+-#define __ARM_LPAE_H__
++#ifndef ASM__ARM__LPAE_H
++#define ASM__ARM__LPAE_H
  
- void warning_add(const char *warning);
- void warning_print(void);
-diff --git a/xen/include/xen/watchdog.h b/xen/include/xen/watchdog.h
-index 4c2840bd91..564bc7d8c1 100644
---- a/xen/include/xen/watchdog.h
-+++ b/xen/include/xen/watchdog.h
-@@ -4,8 +4,8 @@
-  * Common watchdog code
-  */
+ #ifndef __ASSEMBLY__
  
--#ifndef __XEN_WATCHDOG_H__
--#define __XEN_WATCHDOG_H__
-+#ifndef XEN__WATCHDOG_H
-+#define XEN__WATCHDOG_H
+@@ -284,7 +284,7 @@ lpae_t __aligned(PAGE_SIZE) name[XEN_PT_LPAE_ENTRIES * (nr)]
  
- #include <xen/types.h>
+ #define DEFINE_PAGE_TABLE(name) DEFINE_PAGE_TABLES(name, 1)
  
-@@ -32,4 +32,4 @@ bool watchdog_enabled(void);
- 
- #endif
- 
--#endif /* __XEN_WATCHDOG_H__ */
-+#endif /* XEN__WATCHDOG_H */
-diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
-index 24b8900ffe..c66b2c4c3b 100644
---- a/xen/include/xen/xen.lds.h
-+++ b/xen/include/xen/xen.lds.h
-@@ -1,5 +1,5 @@
--#ifndef __XEN_LDS_H__
--#define __XEN_LDS_H__
-+#ifndef XEN__XEN_LDS_H
-+#define XEN__XEN_LDS_H
+-#endif /* __ARM_LPAE_H__ */
++#endif /* ASM__ARM__LPAE_H */
  
  /*
-  * Common macros to be used in architecture specific linker scripts.
-@@ -171,4 +171,4 @@
- #define VPCI_ARRAY
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/macros.h b/xen/arch/arm/include/asm/macros.h
+index dc791245df..a6b212f4e3 100644
+--- a/xen/arch/arm/include/asm/macros.h
++++ b/xen/arch/arm/include/asm/macros.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_MACROS_H
+-#define __ASM_MACROS_H
++#ifndef ASM__ARM__MACROS_H
++#define ASM__ARM__MACROS_H
+ 
+ #ifndef __ASSEMBLY__
+ # error "This file should only be included in assembly file"
+diff --git a/xen/arch/arm/include/asm/mem_access.h b/xen/arch/arm/include/asm/mem_access.h
+index abac8032fc..22b3dc3786 100644
+--- a/xen/arch/arm/include/asm/mem_access.h
++++ b/xen/arch/arm/include/asm/mem_access.h
+@@ -14,8 +14,8 @@
+  * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef _ASM_ARM_MEM_ACCESS_H
+-#define _ASM_ARM_MEM_ACCESS_H
++#ifndef ASM__ARM__MEM_ACCESS_H
++#define ASM__ARM__MEM_ACCESS_H
+ 
+ #include <xen/types.h>
+ 
+@@ -59,7 +59,7 @@ p2m_mem_access_check_and_get_page(vaddr_t gva, unsigned long flag,
+ }
+ 
+ #endif /*CONFIG_MEM_ACCESS*/
+-#endif /* _ASM_ARM_MEM_ACCESS_H */
++#endif /* ASM__ARM__MEM_ACCESS_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 5abd4b0d1c..227f678a2e 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARCH_ARM_MM__
+-#define __ARCH_ARM_MM__
++#ifndef ASM__ARM__MM_H
++#define ASM__ARM__MM_H
+ 
+ #include <xen/kernel.h>
+ #include <asm/page.h>
+@@ -426,7 +426,7 @@ static inline void page_set_xenheap_gfn(struct page_info *p, gfn_t gfn)
+     } while ( (y = cmpxchg(&p->u.inuse.type_info, x, nx)) != x );
+ }
+ 
+-#endif /*  __ARCH_ARM_MM__ */
++#endif /*  ASM__ARM__MM_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/mmio.h b/xen/arch/arm/include/asm/mmio.h
+index b22cfdac5b..a0c5efeba7 100644
+--- a/xen/arch/arm/include/asm/mmio.h
++++ b/xen/arch/arm/include/asm/mmio.h
+@@ -16,8 +16,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_MMIO_H__
+-#define __ASM_ARM_MMIO_H__
++#ifndef ASM__ARM__MMIO_H
++#define ASM__ARM__MMIO_H
+ 
+ #include <xen/lib.h>
+ #include <xen/rwlock.h>
+@@ -92,7 +92,7 @@ void domain_io_free(struct domain *d);
+ void try_decode_instruction(const struct cpu_user_regs *regs,
+                             mmio_info_t *info);
+ 
+-#endif  /* __ASM_ARM_MMIO_H__ */
++#endif  /* ASM__ARM__MMIO_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/mmu/layout.h b/xen/arch/arm/include/asm/mmu/layout.h
+index a3b546465b..5fe3d1db57 100644
+--- a/xen/arch/arm/include/asm/mmu/layout.h
++++ b/xen/arch/arm/include/asm/mmu/layout.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef __ARM_MMU_LAYOUT_H__
+-#define __ARM_MMU_LAYOUT_H__
++#ifndef ASM__ARM__MMU__LAYOUT_H
++#define ASM__ARM__MMU__LAYOUT_H
+ 
+ /*
+  * ARM32 layout:
+@@ -140,7 +140,7 @@
+ 
  #endif
  
--#endif /* __XEN_LDS_H__ */
-+#endif /* XEN__XEN_LDS_H */
-diff --git a/xen/include/xen/xenoprof.h b/xen/include/xen/xenoprof.h
-index c3dac447d3..c50221d2a2 100644
---- a/xen/include/xen/xenoprof.h
-+++ b/xen/include/xen/xenoprof.h
-@@ -7,8 +7,8 @@
-  * written by Aravind Menon & Jose Renato Santos
-  */
- 
--#ifndef __XEN_XENOPROF_H__
--#define __XEN_XENOPROF_H__
-+#ifndef XEN__XENOPROF_H
-+#define XEN__XENOPROF_H
- 
- #define PMU_OWNER_NONE          0
- #define PMU_OWNER_XENOPROF      1
-diff --git a/xen/include/xen/xmalloc.h b/xen/include/xen/xmalloc.h
-index b903fa2e26..cd230bfde8 100644
---- a/xen/include/xen/xmalloc.h
-+++ b/xen/include/xen/xmalloc.h
+-#endif /* __ARM_MMU_LAYOUT_H__ */
++#endif /* ASM__ARM__MMU__LAYOUT_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/mmu/mm.h b/xen/arch/arm/include/asm/mmu/mm.h
+index c5e03a66bf..44cd9b9007 100644
+--- a/xen/arch/arm/include/asm/mmu/mm.h
++++ b/xen/arch/arm/include/asm/mmu/mm.h
 @@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+-#ifndef __ARM_MMU_MM_H__
+-#define __ARM_MMU_MM_H__
++#ifndef ASM__ARM__MMU__MM_H
++#define ASM__ARM__MMU__MM_H
  
--#ifndef __XMALLOC_H__
--#define __XMALLOC_H__
-+#ifndef XEN__XMALLOC_H
-+#define XEN__XMALLOC_H
+ /* Non-boot CPUs use this to find the correct pagetables. */
+ extern uint64_t init_ttbr;
+@@ -32,7 +32,7 @@ void dump_pt_walk(paddr_t ttbr, paddr_t addr,
+ /* Switch to a new root page-tables */
+ extern void switch_ttbr(uint64_t ttbr);
+ 
+-#endif /* __ARM_MMU_MM_H__ */
++#endif /* ASM__ARM__MMU__MM_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/mmu/p2m.h b/xen/arch/arm/include/asm/mmu/p2m.h
+index 58496c0b09..f085075d8f 100644
+--- a/xen/arch/arm/include/asm/mmu/p2m.h
++++ b/xen/arch/arm/include/asm/mmu/p2m.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+-#ifndef __ARM_MMU_P2M_H__
+-#define __ARM_MMU_P2M_H__
++#ifndef ASM__ARM__MMU__P2M_H
++#define ASM__ARM__MMU__P2M_H
+ 
+ extern unsigned int p2m_root_order;
+ extern unsigned int p2m_root_level;
+@@ -14,7 +14,7 @@ void p2m_tlb_flush_sync(struct p2m_domain *p2m);
+ 
+ void p2m_clear_root_pages(struct p2m_domain *p2m);
+ 
+-#endif /* __ARM_MMU_P2M_H__ */
++#endif /* ASM__ARM__MMU__P2M_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/monitor.h b/xen/arch/arm/include/asm/monitor.h
+index 77a3c1a36c..5ee181065e 100644
+--- a/xen/arch/arm/include/asm/monitor.h
++++ b/xen/arch/arm/include/asm/monitor.h
+@@ -19,8 +19,8 @@
+  * License along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef __ASM_ARM_MONITOR_H__
+-#define __ASM_ARM_MONITOR_H__
++#ifndef ASM__ARM__MONITOR_H
++#define ASM__ARM__MONITOR_H
+ 
+ #include <xen/sched.h>
+ #include <public/domctl.h>
+@@ -44,4 +44,4 @@ static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
+ 
+ int monitor_smc(void);
+ 
+-#endif /* __ASM_ARM_MONITOR_H__ */
++#endif /* ASM__ARM__MONITOR_H */
+diff --git a/xen/arch/arm/include/asm/new_vgic.h b/xen/arch/arm/include/asm/new_vgic.h
+index 1e76213893..8007d7d717 100644
+--- a/xen/arch/arm/include/asm/new_vgic.h
++++ b/xen/arch/arm/include/asm/new_vgic.h
+@@ -13,8 +13,8 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#ifndef __ASM_ARM_NEW_VGIC_H
+-#define __ASM_ARM_NEW_VGIC_H
++#ifndef ASM__ARM__NEW_VGIC_H
++#define ASM__ARM__NEW_VGIC_H
+ 
+ #include <asm/atomic.h>
+ #include <asm/mmio.h>
+@@ -198,7 +198,7 @@ static inline paddr_t vgic_dist_base(const struct vgic_dist *vgic)
+     return vgic->dbase;
+ }
+ 
+-#endif /* __ASM_ARM_NEW_VGIC_H */
++#endif /* ASM__ARM__NEW_VGIC_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/nospec.h b/xen/arch/arm/include/asm/nospec.h
+index efac51fc03..f06d40fba4 100644
+--- a/xen/arch/arm/include/asm/nospec.h
++++ b/xen/arch/arm/include/asm/nospec.h
+@@ -1,8 +1,8 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /* Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved. */
+ 
+-#ifndef _ASM_ARM_NOSPEC_H
+-#define _ASM_ARM_NOSPEC_H
++#ifndef ASM__ARM__NOSPEC_H
++#define ASM__ARM__NOSPEC_H
+ 
+ #if defined(CONFIG_ARM_32)
+ # include <asm/arm32/nospec.h>
+@@ -21,7 +21,7 @@ static inline void block_speculation(void)
+ {
+ }
+ 
+-#endif /* _ASM_ARM_NOSPEC_H */
++#endif /* ASM__ARM__NOSPEC_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index c84fe8d97d..edbcaad77e 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -1,5 +1,5 @@
+-#ifndef _XEN_P2M_H
+-#define _XEN_P2M_H
++#ifndef ASM__ARM__P2M_H
++#define ASM__ARM__P2M_H
+ 
+ #include <xen/mm.h>
+ #include <xen/radix-tree.h>
+@@ -449,7 +449,7 @@ static inline bool vcpu_has_cache_enabled(struct vcpu *v)
+     return (READ_SYSREG(SCTLR_EL1) & mask) == mask;
+ }
+ 
+-#endif /* _XEN_P2M_H */
++#endif /* ASM__ARM__P2M_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/page-bits.h b/xen/arch/arm/include/asm/page-bits.h
+index deb381ceeb..5a0fd0a93f 100644
+--- a/xen/arch/arm/include/asm/page-bits.h
++++ b/xen/arch/arm/include/asm/page-bits.h
+@@ -1,8 +1,8 @@
+-#ifndef __ARM_PAGE_SHIFT_H__
+-#define __ARM_PAGE_SHIFT_H__
++#ifndef ASM__ARM__PAGE_BITS_H
++#define ASM__ARM__PAGE_BITS_H
+ 
+ #define PAGE_SHIFT              12
+ 
+ #define PADDR_BITS              CONFIG_PADDR_BITS
+ 
+-#endif /* __ARM_PAGE_SHIFT_H__ */
++#endif /* ASM__ARM__PAGE_BITS_H */
+diff --git a/xen/arch/arm/include/asm/page.h b/xen/arch/arm/include/asm/page.h
+index 69f817d1e6..24849998aa 100644
+--- a/xen/arch/arm/include/asm/page.h
++++ b/xen/arch/arm/include/asm/page.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_PAGE_H__
+-#define __ARM_PAGE_H__
++#ifndef ASM__ARM__PAGE_H
++#define ASM__ARM__PAGE_H
+ 
+ #include <public/xen.h>
+ #include <xen/page-size.h>
+@@ -316,7 +316,7 @@ static inline int gva_to_ipa(vaddr_t va, paddr_t *paddr, unsigned int flags)
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __ARM_PAGE_H__ */
++#endif /* ASM__ARM__PAGE_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/pci.h b/xen/arch/arm/include/asm/pci.h
+index 7f77226c9b..ccef80687c 100644
+--- a/xen/arch/arm/include/asm/pci.h
++++ b/xen/arch/arm/include/asm/pci.h
+@@ -12,8 +12,8 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef __ARM_PCI_H__
+-#define __ARM_PCI_H__
++#ifndef ASM__ARM__PCI_H
++#define ASM__ARM__PCI_H
+ 
+ #ifdef CONFIG_HAS_PCI
+ 
+@@ -148,4 +148,4 @@ static inline int pci_get_new_domain_nr(void)
+ }
+ 
+ #endif  /*!CONFIG_HAS_PCI*/
+-#endif /* __ARM_PCI_H__ */
++#endif /* ASM__ARM__PCI_H */
+diff --git a/xen/arch/arm/include/asm/perfc.h b/xen/arch/arm/include/asm/perfc.h
+index 95c4b2b6b7..5c6a62720a 100644
+--- a/xen/arch/arm/include/asm/perfc.h
++++ b/xen/arch/arm/include/asm/perfc.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_PERFC_H__
+-#define __ASM_PERFC_H__
++#ifndef ASM__ARM__PERFC_H
++#define ASM__ARM__PERFC_H
+ 
+ static inline void arch_perfc_reset(void)
+ {
+diff --git a/xen/arch/arm/include/asm/perfc_defn.h b/xen/arch/arm/include/asm/perfc_defn.h
+index 3ab0391175..56d9541e5f 100644
+--- a/xen/arch/arm/include/asm/perfc_defn.h
++++ b/xen/arch/arm/include/asm/perfc_defn.h
+@@ -1,6 +1,6 @@
+ /* This file is legitimately included multiple times. */
+-/*#ifndef __XEN_PERFC_DEFN_H__*/
+-/*#define __XEN_PERFC_DEFN_H__*/
++/*#ifndef ASM__ARM__PERFC_DEFN_H*/
++/*#define ASM__ARM__PERFC_DEFN_H*/
+ 
+ PERFCOUNTER(invalid_hypercalls, "invalid hypercalls")
+ 
+@@ -76,7 +76,7 @@ PERFCOUNTER(maintenance_irqs, "Maintenance interrupts")
+ PERFCOUNTER(atomics_guest,    "atomics: guest access")
+ PERFCOUNTER(atomics_guest_paused,   "atomics: guest paused")
+ 
+-/*#endif*/ /* __XEN_PERFC_DEFN_H__ */
++/*#endif*/ /* ASM__ARM__PERFC_DEFN_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/pl011-uart.h b/xen/arch/arm/include/asm/pl011-uart.h
+index 27c9bfa444..ce6084784a 100644
+--- a/xen/arch/arm/include/asm/pl011-uart.h
++++ b/xen/arch/arm/include/asm/pl011-uart.h
+@@ -18,8 +18,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_PL011_H
+-#define __ASM_ARM_PL011_H
++#ifndef ASM__ARM__PL011_UART_H
++#define ASM__ARM__PL011_UART_H
+ 
+ #ifdef __ASSEMBLY__
+ 
+@@ -95,7 +95,7 @@
+ #define RIMI  (1<<0)  /* nUARTRI Modem interrupt mask */
+ #define ALLI  OEI|BEI|PEI|FEI|RTI|TXI|RXI|DSRMI|DCDMI|CTSMI|RIMI
+ 
+-#endif /* __ASM_ARM_PL011_H */
++#endif /* ASM__ARM__PL011_UART_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/platform.h b/xen/arch/arm/include/asm/platform.h
+index 997eb25216..d674858a06 100644
+--- a/xen/arch/arm/include/asm/platform.h
++++ b/xen/arch/arm/include/asm/platform.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_PLATFORM_H
+-#define __ASM_ARM_PLATFORM_H
++#ifndef ASM__ARM__PLATFORM_H
++#define ASM__ARM__PLATFORM_H
+ 
+ #include <xen/sched.h>
+ #include <xen/mm.h>
+@@ -70,7 +70,7 @@ __section(".arch.info") = {                                     \
+ #define PLATFORM_END                                            \
+ };
+ 
+-#endif /* __ASM_ARM_PLATFORM_H */
++#endif /* ASM__ARM__PLATFORM_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/platforms/exynos5.h b/xen/arch/arm/include/asm/platforms/exynos5.h
+index aef5c67084..90305fedff 100644
+--- a/xen/arch/arm/include/asm/platforms/exynos5.h
++++ b/xen/arch/arm/include/asm/platforms/exynos5.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_PLATFORMS_EXYNOS5_H
+-#define __ASM_ARM_PLATFORMS_EXYNOS5_H
++#ifndef ASM__ARM__PLATFORMS__EXYNOS5_H
++#define ASM__ARM__PLATFORMS__EXYNOS5_H
+ 
+ #define EXYNOS5_MCT_G_TCON          0x240       /* Relative to MCT_BASE */
+ #define EXYNOS5_MCT_G_TCON_START    (1 << 8)
+@@ -9,7 +9,7 @@
+ 
+ #define EXYNOS5_SWRESET             0x0400      /* Relative to PA_PMU */
+ 
+-#endif /* __ASM_ARM_PLATFORMS_EXYNOS5_H */
++#endif /* ASM__ARM__PLATFORMS__EXYNOS5_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/platforms/midway.h b/xen/arch/arm/include/asm/platforms/midway.h
+index 099e4350f9..b6396e64b3 100644
+--- a/xen/arch/arm/include/asm/platforms/midway.h
++++ b/xen/arch/arm/include/asm/platforms/midway.h
+@@ -1,5 +1,5 @@
+ #ifndef __ASM_ARM_PLATFORMS_MIDWAY_H
+-#define __ASM_ASM_PLATFORMS_MIDWAY_H
++#define ASM__ARM__PLATFORMS__MIDWAY_H
+ 
+ /* addresses of SREG registers for resetting the SoC */
+ #define MW_SREG_PWR_REQ             0xfff3cf00
+diff --git a/xen/arch/arm/include/asm/platforms/omap5.h b/xen/arch/arm/include/asm/platforms/omap5.h
+index c559c84b61..811db96281 100644
+--- a/xen/arch/arm/include/asm/platforms/omap5.h
++++ b/xen/arch/arm/include/asm/platforms/omap5.h
+@@ -1,4 +1,4 @@
+-#ifndef __ASM_ARM_PLATFORMS_OMAP5_H
++#ifndef ASM__ARM__PLATFORMS__OMAP5_H
+ #define __ASM_ASM_PLATFORMS_OMAP5_H
+ 
+ #define REALTIME_COUNTER_BASE                   0x48243200
+@@ -20,7 +20,7 @@
+ #define OMAP_AUX_CORE_BOOT_0_OFFSET             0x800
+ #define OMAP_AUX_CORE_BOOT_1_OFFSET             0x804
+ 
+-#endif /* __ASM_ARM_PLATFORMS_OMAP5_H */
++#endif /* ASM__ARM__PLATFORMS__OMAP5_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/platforms/vexpress.h b/xen/arch/arm/include/asm/platforms/vexpress.h
+index 8b45d3a850..da81c3d1a5 100644
+--- a/xen/arch/arm/include/asm/platforms/vexpress.h
++++ b/xen/arch/arm/include/asm/platforms/vexpress.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_PLATFORMS_VEXPRESS_H
+-#define __ASM_ARM_PLATFORMS_VEXPRESS_H
++#ifndef ASM__ARM__PLATFORMS__VEXPRESS_H
++#define ASM__ARM__PLATFORMS__VEXPRESS_H
+ 
+ /* V2M */
+ #define V2M_SYS_MMIO_BASE     (0x1c010000)
+@@ -26,7 +26,7 @@
+ /* Board-specific: base address of system controller */
+ #define SP810_ADDRESS 0x1C020000
+ 
+-#endif /* __ASM_ARM_PLATFORMS_VEXPRESS_H */
++#endif /* ASM__ARM__PLATFORMS__VEXPRESS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/platforms/xilinx-zynqmp-eemi.h b/xen/arch/arm/include/asm/platforms/xilinx-zynqmp-eemi.h
+index cf25a9014d..005199d019 100644
+--- a/xen/arch/arm/include/asm/platforms/xilinx-zynqmp-eemi.h
++++ b/xen/arch/arm/include/asm/platforms/xilinx-zynqmp-eemi.h
+@@ -11,8 +11,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_PLATFORMS_ZYNQMP_H
+-#define __ASM_ARM_PLATFORMS_ZYNQMP_H
++#ifndef ASM__ARM__PLATFORMS__XILINX_ZYNQMP_EEMI_H
++#define ASM__ARM__PLATFORMS__XILINX_ZYNQMP_EEMI_H
+ 
+ #include <asm/processor.h>
+ #include <asm/smccc.h>
+@@ -116,7 +116,7 @@ enum ipi_api_id {
+ 
+ extern bool zynqmp_eemi(struct cpu_user_regs *regs);
+ 
+-#endif /* __ASM_ARM_PLATFORMS_ZYNQMP_H */
++#endif /* ASM__ARM__PLATFORMS__XILINX_ZYNQMP_EEMI_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/pmap.h b/xen/arch/arm/include/asm/pmap.h
+index bca3381796..a14d89cb46 100644
+--- a/xen/arch/arm/include/asm/pmap.h
++++ b/xen/arch/arm/include/asm/pmap.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_PMAP_H__
+-#define __ASM_PMAP_H__
++#ifndef ASM__ARM__PMAP_H
++#define ASM__ARM__PMAP_H
+ 
+ #include <xen/mm.h>
+ 
+@@ -31,4 +31,4 @@ static inline void arch_pmap_unmap(unsigned int slot)
+     flush_xen_tlb_range_va_local(FIXMAP_ADDR(slot), PAGE_SIZE);
+ }
+ 
+-#endif /* __ASM_PMAP_H__ */
++#endif /* ASM__ARM__PMAP_H */
+diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
+index 8e02410465..4d8be173f9 100644
+--- a/xen/arch/arm/include/asm/processor.h
++++ b/xen/arch/arm/include/asm/processor.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_PROCESSOR_H
+-#define __ASM_ARM_PROCESSOR_H
++#ifndef ASM__ARM__PROCESSOR_H
++#define ASM__ARM__PROCESSOR_H
+ 
+ #ifndef __ASSEMBLY__
+ #include <xen/types.h>
+@@ -616,7 +616,7 @@ register_t get_default_cptr_flags(void);
+     } while (0)
+ 
+ #endif /* __ASSEMBLY__ */
+-#endif /* __ASM_ARM_PROCESSOR_H */
++#endif /* ASM__ARM__PROCESSOR_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/procinfo.h b/xen/arch/arm/include/asm/procinfo.h
+index 3a05f27784..d3b9f7d47c 100644
+--- a/xen/arch/arm/include/asm/procinfo.h
++++ b/xen/arch/arm/include/asm/procinfo.h
+@@ -18,8 +18,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_PROCINFO_H
+-#define __ASM_ARM_PROCINFO_H
++#ifndef ASM__ARM__PROCINFO_H
++#define ASM__ARM__PROCINFO_H
+ 
+ #include <xen/sched.h>
+ 
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index 4780972621..e4e1abbebc 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_PSCI_H__
+-#define __ASM_PSCI_H__
++#ifndef ASM__ARM__PSCI_H
++#define ASM__ARM__PSCI_H
+ 
+ #include <asm/smccc.h>
+ 
+@@ -82,7 +82,7 @@ void call_psci_system_reset(void);
+ #define PSCI_VERSION(major, minor)          \
+     (((major) << PSCI_VERSION_MAJOR_SHIFT) | (minor))
+ 
+-#endif /* __ASM_PSCI_H__ */
++#endif /* ASM__ARM__PSCI_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/regs.h b/xen/arch/arm/include/asm/regs.h
+index 0d9f239a77..47a22ef0a4 100644
+--- a/xen/arch/arm/include/asm/regs.h
++++ b/xen/arch/arm/include/asm/regs.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_REGS_H__
+-#define __ARM_REGS_H__
++#ifndef ASM__ARM__REGS_H
++#define ASM__ARM__REGS_H
+ 
+ #define PSR_MODE_MASK 0x1f
+ 
+@@ -74,7 +74,7 @@ static inline void uint64_to_regpair(register_t *reg0, register_t *reg1,
+ 
+ #endif
+ 
+-#endif /* __ARM_REGS_H__ */
++#endif /* ASM__ARM__REGS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/scif-uart.h b/xen/arch/arm/include/asm/scif-uart.h
+index bce3404898..23f4bfe3fc 100644
+--- a/xen/arch/arm/include/asm/scif-uart.h
++++ b/xen/arch/arm/include/asm/scif-uart.h
+@@ -18,8 +18,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_SCIF_UART_H
+-#define __ASM_ARM_SCIF_UART_H
++#ifndef ASM__ARM__SCIF_UART_H
++#define ASM__ARM__SCIF_UART_H
+ 
+ /* Register offsets (SCIF) */
+ #define SCIF_SCSMR     (0x00)    /* Serial mode register           */
+@@ -115,7 +115,7 @@
+ #define SCASSR_RDF     (1 << 1)    /* Receive FIFO Data Full */
+ #define SCASSR_DR      (1 << 0)    /* Receive Data Ready */
+ 
+-#endif /* __ASM_ARM_SCIF_UART_H */
++#endif /* ASM__ARM__SCIF_UART_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 64c227d171..95ac787e2f 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_SETUP_H_
+-#define __ARM_SETUP_H_
++#ifndef ASM__ARM__SETUP_H
++#define ASM__ARM__SETUP_H
+ 
+ #include <public/version.h>
+ #include <asm/p2m.h>
+diff --git a/xen/arch/arm/include/asm/short-desc.h b/xen/arch/arm/include/asm/short-desc.h
+index 9652a103c4..4d28e54598 100644
+--- a/xen/arch/arm/include/asm/short-desc.h
++++ b/xen/arch/arm/include/asm/short-desc.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_SHORT_DESC_H__
+-#define __ARM_SHORT_DESC_H__
++#ifndef ASM__ARM__SHORT_DESC_H
++#define ASM__ARM__SHORT_DESC_H
+ 
+ /*
+  * First level translation table descriptor types used by the AArch32
+@@ -127,4 +127,4 @@ typedef union {
+     short_desc_l2_lpage_t lpg;
+ } short_desc_t;
+ 
+-#endif /* __ARM_SHORT_DESC_H__ */
++#endif /* ASM__ARM__SHORT_DESC_H */
+diff --git a/xen/arch/arm/include/asm/smccc.h b/xen/arch/arm/include/asm/smccc.h
+index a289c48b7f..6c7735dece 100644
+--- a/xen/arch/arm/include/asm/smccc.h
++++ b/xen/arch/arm/include/asm/smccc.h
+@@ -13,8 +13,8 @@
+  *
+  */
+ 
+-#ifndef __ASM_ARM_SMCCC_H__
+-#define __ASM_ARM_SMCCC_H__
++#ifndef ASM__ARM__SMCCC_H
++#define ASM__ARM__SMCCC_H
+ 
+ #include <asm/alternative.h>
+ #include <asm/cpufeature.h>
+@@ -390,7 +390,7 @@ void arm_smccc_1_2_smc(const struct arm_smccc_1_2_regs *args,
+ #define ARM_SMCCC_RESERVED_RANGE_START  0x0
+ #define ARM_SMCCC_RESERVED_RANGE_END    0x0100FFFF
+ 
+-#endif  /* __ASM_ARM_SMCCC_H__ */
++#endif  /* ASM__ARM__SMCCC_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/smp.h b/xen/arch/arm/include/asm/smp.h
+index e99a3a3f53..e6c5601596 100644
+--- a/xen/arch/arm/include/asm/smp.h
++++ b/xen/arch/arm/include/asm/smp.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_SMP_H
+-#define __ASM_SMP_H
++#ifndef ASM__ARM__SMP_H
++#define ASM__ARM__SMP_H
+ 
+ #ifndef __ASSEMBLY__
+ #include <xen/cpumask.h>
+diff --git a/xen/arch/arm/include/asm/spinlock.h b/xen/arch/arm/include/asm/spinlock.h
+index 42b0f584fe..b1fd46336f 100644
+--- a/xen/arch/arm/include/asm/spinlock.h
++++ b/xen/arch/arm/include/asm/spinlock.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_SPINLOCK_H
+-#define __ASM_SPINLOCK_H
++#ifndef ASM__ARM__SPINLOCK_H
++#define ASM__ARM__SPINLOCK_H
+ 
+ #define arch_lock_acquire_barrier() smp_mb()
+ #define arch_lock_release_barrier() smp_mb()
+@@ -12,4 +12,4 @@
+ 
+ #define arch_lock_signal_wmb()  arch_lock_signal()
+ 
+-#endif /* __ASM_SPINLOCK_H */
++#endif /* ASM__ARM__SPINLOCK_H */
+diff --git a/xen/arch/arm/include/asm/static-evtchn.h b/xen/arch/arm/include/asm/static-evtchn.h
+index f964522f6a..5f7916f2ac 100644
+--- a/xen/arch/arm/include/asm/static-evtchn.h
++++ b/xen/arch/arm/include/asm/static-evtchn.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef __ASM_STATIC_EVTCHN_H_
+-#define __ASM_STATIC_EVTCHN_H_
++#ifndef ASM__ARM__STATIC_EVTCHN_H
++#define ASM__ARM__STATIC_EVTCHN_H
+ 
+ #ifdef CONFIG_STATIC_EVTCHN
+ 
+@@ -13,7 +13,7 @@ static inline void alloc_static_evtchn(void) {};
+ 
+ #endif /* CONFIG_STATIC_EVTCHN */
+ 
+-#endif /* __ASM_STATIC_EVTCHN_H_ */
++#endif /* ASM__ARM__STATIC_EVTCHN_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/static-memory.h b/xen/arch/arm/include/asm/static-memory.h
+index 804166e541..654d47eb77 100644
+--- a/xen/arch/arm/include/asm/static-memory.h
++++ b/xen/arch/arm/include/asm/static-memory.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef __ASM_STATIC_MEMORY_H_
+-#define __ASM_STATIC_MEMORY_H_
++#ifndef ASM__ARM__STATIC_MEMORY_H
++#define ASM__ARM__STATIC_MEMORY_H
+ 
+ #include <xen/pfn.h>
+ #include <asm/kernel.h>
+@@ -46,7 +46,7 @@ static inline void init_staticmem_pages(void) {};
+ 
+ #endif /* CONFIG_STATIC_MEMORY */
+ 
+-#endif /* __ASM_STATIC_MEMORY_H_ */
++#endif /* ASM__ARM__STATIC_MEMORY_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
+index fd0867c4f2..5e9b69d66f 100644
+--- a/xen/arch/arm/include/asm/static-shmem.h
++++ b/xen/arch/arm/include/asm/static-shmem.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef __ASM_STATIC_SHMEM_H_
+-#define __ASM_STATIC_SHMEM_H_
++#ifndef ASM__ARM__STATIC_SHMEM_H
++#define ASM__ARM__STATIC_SHMEM_H
  
  #include <xen/types.h>
- #include <xen/cache.h>
-@@ -171,4 +171,4 @@ unsigned long xmem_pool_get_used_size(struct xmem_pool *pool);
+ #include <asm/kernel.h>
+@@ -106,7 +106,7 @@ static inline void shm_mem_node_fill_reg_range(const struct kernel_info *kinfo,
+ 
+ #endif /* CONFIG_STATIC_SHM */
+ 
+-#endif /* __ASM_STATIC_SHMEM_H_ */
++#endif /* ASM__ARM__STATIC_SHMEM_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/string.h b/xen/arch/arm/include/asm/string.h
+index b485e49044..8cbcfca3f8 100644
+--- a/xen/arch/arm/include/asm/string.h
++++ b/xen/arch/arm/include/asm/string.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_STRING_H__
+-#define __ARM_STRING_H__
++#ifndef ASM__ARM__STRING_H
++#define ASM__ARM__STRING_H
+ 
+ 
+ /*
+@@ -42,7 +42,7 @@ void __memzero(void *ptr, size_t n);
+ 
+ #endif
+ 
+-#endif /* __ARM_STRING_H__ */
++#endif /* ASM__ARM__STRING_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/sysregs.h b/xen/arch/arm/include/asm/sysregs.h
+index 61e30c9e51..98523e96d3 100644
+--- a/xen/arch/arm/include/asm/sysregs.h
++++ b/xen/arch/arm/include/asm/sysregs.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_SYSREGS_H
+-#define __ASM_ARM_SYSREGS_H
++#ifndef ASM__ARM__SYSREGS_H
++#define ASM__ARM__SYSREGS_H
+ 
+ #if defined(CONFIG_ARM_32)
+ # include <asm/arm32/sysregs.h>
+@@ -33,7 +33,7 @@ static inline register_t read_sysreg_par(void)
+ 
+ #endif /*  !__ASSEMBLY__  */
+ 
+-#endif /* __ASM_ARM_SYSREGS_H */
++#endif /* ASM__ARM__SYSREGS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/system.h b/xen/arch/arm/include/asm/system.h
+index 65d5c8e423..e69340c71b 100644
+--- a/xen/arch/arm/include/asm/system.h
++++ b/xen/arch/arm/include/asm/system.h
+@@ -1,6 +1,6 @@
+ /* Portions taken from Linux arch arm */
+-#ifndef __ASM_SYSTEM_H
+-#define __ASM_SYSTEM_H
++#ifndef ASM__ARM__SYSTEM_H
++#define ASM__ARM__SYSTEM_H
+ 
+ #include <xen/lib.h>
+ #include <public/arch-arm.h>
+diff --git a/xen/arch/arm/include/asm/tee/ffa.h b/xen/arch/arm/include/asm/tee/ffa.h
+index 24cd4d99c8..ef7b21840a 100644
+--- a/xen/arch/arm/include/asm/tee/ffa.h
++++ b/xen/arch/arm/include/asm/tee/ffa.h
+@@ -7,8 +7,8 @@
+  * Copyright (C) 2023  Linaro Limited
   */
- unsigned long xmem_pool_get_total_size(struct xmem_pool *pool);
  
--#endif /* __XMALLOC_H__ */
-+#endif /* XEN__XMALLOC_H */
-diff --git a/xen/include/xen/xxhash.h b/xen/include/xen/xxhash.h
-index 6f2237cbcf..9ad85c85ce 100644
---- a/xen/include/xen/xxhash.h
-+++ b/xen/include/xen/xxhash.h
-@@ -72,8 +72,8 @@
-  * xxh32        6.8 GB/s            6.0 GB/s
+-#ifndef __ASM_ARM_TEE_FFA_H__
+-#define __ASM_ARM_TEE_FFA_H__
++#ifndef ASM__ARM__TEE__FFA_H
++#define ASM__ARM__TEE__FFA_H
+ 
+ #include <xen/const.h>
+ 
+@@ -31,4 +31,4 @@ static inline bool is_ffa_fid(uint32_t fid)
+ #define FFA_NR_FUNCS    0
+ #endif
+ 
+-#endif /*__ASM_ARM_TEE_FFA_H__*/
++#endif /*ASM__ARM__TEE__FFA_H*/
+diff --git a/xen/arch/arm/include/asm/tee/optee_msg.h b/xen/arch/arm/include/asm/tee/optee_msg.h
+index fe743dbde3..ec2d267981 100644
+--- a/xen/arch/arm/include/asm/tee/optee_msg.h
++++ b/xen/arch/arm/include/asm/tee/optee_msg.h
+@@ -2,8 +2,8 @@
+ /*
+  * Copyright (c) 2015-2017, Linaro Limited
   */
+-#ifndef _OPTEE_MSG_H
+-#define _OPTEE_MSG_H
++#ifndef ASM__ARM__TEE__OPTEE_MSG_H
++#define ASM__ARM__TEE__OPTEE_MSG_H
  
--#ifndef __XENXXHASH_H__
--#define __XENXXHASH_H__
-+#ifndef XEN__XXHASH_H
-+#define XEN__XXHASH_H
- 
+ #include <xen/bitops.h>
  #include <xen/types.h>
+@@ -307,4 +307,4 @@ struct optee_msg_arg {
+ #define OPTEE_MSG_CMD_UNREGISTER_SHM	5
+ #define OPTEE_MSG_FUNCID_CALL_WITH_ARG	0x0004
  
-@@ -256,4 +256,4 @@ void xxh32_copy_state(struct xxh32_state *dst, const struct xxh32_state *src);
+-#endif /* _OPTEE_MSG_H */
++#endif /* ASM__ARM__TEE__OPTEE_MSG_H */
+diff --git a/xen/arch/arm/include/asm/tee/optee_rpc_cmd.h b/xen/arch/arm/include/asm/tee/optee_rpc_cmd.h
+index d6b9dfe30c..891d23be6a 100644
+--- a/xen/arch/arm/include/asm/tee/optee_rpc_cmd.h
++++ b/xen/arch/arm/include/asm/tee/optee_rpc_cmd.h
+@@ -3,8 +3,8 @@
+  * Copyright (c) 2016-2017, Linaro Limited
   */
- void xxh64_copy_state(struct xxh64_state *dst, const struct xxh64_state *src);
  
--#endif /* __XENXXHASH_H__ */
-+#endif /* XEN__XXHASH_H */
+-#ifndef __OPTEE_RPC_CMD_H
+-#define __OPTEE_RPC_CMD_H
++#ifndef ASM__ARM__TEE__OPTEE_RPC_CMD_H
++#define ASM__ARM__TEE__OPTEE_RPC_CMD_H
+ 
+ /*
+  * All RPC is done with a struct optee_msg_arg as bearer of information,
+@@ -315,4 +315,4 @@
+ 
+ /* End of definition of protocol for command OPTEE_RPC_CMD_SOCKET */
+ 
+-#endif /*__OPTEE_RPC_CMD_H*/
++#endif /*ASM__ARM__TEE__OPTEE_RPC_CMD_H*/
+diff --git a/xen/arch/arm/include/asm/tee/optee_smc.h b/xen/arch/arm/include/asm/tee/optee_smc.h
+index 2f5c702326..6e0bde66d6 100644
+--- a/xen/arch/arm/include/asm/tee/optee_smc.h
++++ b/xen/arch/arm/include/asm/tee/optee_smc.h
+@@ -2,8 +2,8 @@
+ /*
+  * Copyright (c) 2015, Linaro Limited
+  */
+-#ifndef OPTEE_SMC_H
+-#define OPTEE_SMC_H
++#ifndef ASM__ARM__TEE__OPTEE_SMC_H
++#define ASM__ARM__TEE__OPTEE_SMC_H
+ 
+ /*
+  * This file is exported by OP-TEE and is in kept in sync between secure
+@@ -564,4 +564,4 @@
+ 	((((ret) & OPTEE_SMC_RETURN_RPC_PREFIX_MASK) == \
+ 		OPTEE_SMC_RETURN_RPC_PREFIX)))
+ 
+-#endif /* OPTEE_SMC_H */
++#endif /* ASM__ARM__TEE__OPTEE_SMC_H */
+diff --git a/xen/arch/arm/include/asm/tee/tee.h b/xen/arch/arm/include/asm/tee/tee.h
+index 0169fd746b..58659290d6 100644
+--- a/xen/arch/arm/include/asm/tee/tee.h
++++ b/xen/arch/arm/include/asm/tee/tee.h
+@@ -11,8 +11,8 @@
+  * published by the Free Software Foundation.
+  */
+ 
+-#ifndef __ARCH_ARM_TEE_TEE_H__
+-#define __ARCH_ARM_TEE_TEE_H__
++#ifndef ASM__ARM__TEE__TEE_H
++#define ASM__ARM__TEE__TEE_H
+ 
+ #include <xen/lib.h>
+ #include <xen/types.h>
+@@ -121,7 +121,7 @@ static inline void tee_free_domain_ctx(struct domain *d)
+ 
+ #endif  /* CONFIG_TEE */
+ 
+-#endif /* __ARCH_ARM_TEE_TEE_H__ */
++#endif /* ASM__ARM__TEE__TEE_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
+index 49ad8c1a6d..d4301ea852 100644
+--- a/xen/arch/arm/include/asm/time.h
++++ b/xen/arch/arm/include/asm/time.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_TIME_H__
+-#define __ARM_TIME_H__
++#ifndef ASM__ARM__TIME_H
++#define ASM__ARM__TIME_H
+ 
+ #include <asm/sysregs.h>
+ #include <asm/system.h>
+@@ -108,7 +108,7 @@ void preinit_xen_time(void);
+ 
+ void force_update_vcpu_system_time(struct vcpu *v);
+ 
+-#endif /* __ARM_TIME_H__ */
++#endif /* ASM__ARM__TIME_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/traps.h b/xen/arch/arm/include/asm/traps.h
+index 9a60dbf70e..2a935a9afb 100644
+--- a/xen/arch/arm/include/asm/traps.h
++++ b/xen/arch/arm/include/asm/traps.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_TRAPS__
+-#define __ASM_ARM_TRAPS__
++#ifndef ASM__ARM__TRAPS_H
++#define ASM__ARM__TRAPS_H
+ 
+ #include <asm/hsr.h>
+ #include <asm/processor.h>
+@@ -118,7 +118,7 @@ static inline register_t sign_extend(const struct hsr_dabt dabt, register_t r)
+ 
+ void finalize_instr_emulation(const struct instr_details *instr);
+ 
+-#endif /* __ASM_ARM_TRAPS__ */
++#endif /* ASM__ARM__TRAPS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/types.h b/xen/arch/arm/include/asm/types.h
+index b0a34ea730..28e55890dc 100644
+--- a/xen/arch/arm/include/asm/types.h
++++ b/xen/arch/arm/include/asm/types.h
+@@ -1,5 +1,5 @@
+-#ifndef __ARM_TYPES_H__
+-#define __ARM_TYPES_H__
++#ifndef ASM__ARM__TYPES_H
++#define ASM__ARM__TYPES_H
+ 
+ #if defined(CONFIG_ARM_32)
+ 
+@@ -37,7 +37,7 @@ typedef u64 register_t;
+ 
+ #endif
+ 
+-#endif /* __ARM_TYPES_H__ */
++#endif /* ASM__ARM__TYPES_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/vfp.h b/xen/arch/arm/include/asm/vfp.h
+index 142a91ef8b..b7cc2ba906 100644
+--- a/xen/arch/arm/include/asm/vfp.h
++++ b/xen/arch/arm/include/asm/vfp.h
+@@ -1,5 +1,5 @@
+-#ifndef _ASM_VFP_H
+-#define _ASM_VFP_H
++#ifndef ASM__ARM__VFP_H
++#define ASM__ARM__VFP_H
+ 
+ struct vcpu;
+ 
+@@ -14,7 +14,7 @@ struct vcpu;
+ void vfp_save_state(struct vcpu *v);
+ void vfp_restore_state(struct vcpu *v);
+ 
+-#endif /* _ASM_VFP_H */
++#endif /* ASM__ARM__VFP_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/vgic-emul.h b/xen/arch/arm/include/asm/vgic-emul.h
+index fd0cfa2175..cf3670a6cd 100644
+--- a/xen/arch/arm/include/asm/vgic-emul.h
++++ b/xen/arch/arm/include/asm/vgic-emul.h
+@@ -1,5 +1,5 @@
+-#ifndef __ASM_ARM_VGIC_EMUL_H__
+-#define __ASM_ARM_VGIC_EMUL_H__
++#ifndef ASM__ARM__VGIC_EMUL_H
++#define ASM__ARM__VGIC_EMUL_H
+ 
+ /*
+  * Helpers to create easily a case to match emulate a single register or
+@@ -21,7 +21,7 @@ static inline bool vgic_reg64_check_access(struct hsr_dabt dabt)
+     return ( dabt.size == DABT_DOUBLE_WORD || dabt.size == DABT_WORD );
+ }
+ 
+-#endif /* __ASM_ARM_VGIC_EMUL_H__ */
++#endif /* ASM__ARM__VGIC_EMUL_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgic.h
+index e309dca1ad..bb1e45554a 100644
+--- a/xen/arch/arm/include/asm/vgic.h
++++ b/xen/arch/arm/include/asm/vgic.h
+@@ -15,8 +15,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ASM_ARM_VGIC_H__
+-#define __ASM_ARM_VGIC_H__
++#ifndef ASM__ARM__VGIC_H
++#define ASM__ARM__VGIC_H
+ 
+ #ifdef CONFIG_NEW_VGIC
+ #include <asm/new_vgic.h>
+@@ -388,7 +388,7 @@ void vgic_sync_from_lrs(struct vcpu *v);
+ 
+ int vgic_vcpu_pending_irq(struct vcpu *v);
+ 
+-#endif /* __ASM_ARM_VGIC_H__ */
++#endif /* ASM__ARM__VGIC_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/vpl011.h b/xen/arch/arm/include/asm/vpl011.h
+index c09abcd7a9..bbfa5661d9 100644
+--- a/xen/arch/arm/include/asm/vpl011.h
++++ b/xen/arch/arm/include/asm/vpl011.h
+@@ -16,8 +16,8 @@
+  * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef _VPL011_H_
+-#define _VPL011_H_
++#ifndef ASM__ARM__VPL011_H
++#define ASM__ARM__VPL011_H
+ 
+ #include <public/domctl.h>
+ #include <public/io/ring.h>
+@@ -79,7 +79,7 @@ static inline int domain_vpl011_init(struct domain *d,
+ 
+ static inline void domain_vpl011_deinit(struct domain *d) { }
+ #endif
+-#endif  /* _VPL011_H_ */
++#endif  /* ASM__ARM__VPL011_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/vpsci.h b/xen/arch/arm/include/asm/vpsci.h
+index 0cca5e6830..fc158d827e 100644
+--- a/xen/arch/arm/include/asm/vpsci.h
++++ b/xen/arch/arm/include/asm/vpsci.h
+@@ -17,8 +17,8 @@
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifndef __ASM_VPSCI_H__
+-#define __ASM_VPSCI_H__
++#ifndef ASM__ARM__VPSCI_H
++#define ASM__ARM__VPSCI_H
+ 
+ #include <asm/psci.h>
+ 
+@@ -29,7 +29,7 @@
+ bool do_vpsci_0_1_call(struct cpu_user_regs *regs, uint32_t fid);
+ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid);
+ 
+-#endif /* __ASM_VPSCI_H__ */
++#endif /* ASM__ARM__VPSCI_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/vreg.h b/xen/arch/arm/include/asm/vreg.h
+index 387ce76e7e..97b9d71066 100644
+--- a/xen/arch/arm/include/asm/vreg.h
++++ b/xen/arch/arm/include/asm/vreg.h
+@@ -1,8 +1,8 @@
+ /*
+  * Helpers to emulate co-processor and system registers
+  */
+-#ifndef __ASM_ARM_VREG__
+-#define __ASM_ARM_VREG__
++#ifndef ASM__ARM__VREG_H
++#define ASM__ARM__VREG_H
+ 
+ typedef bool (*vreg_reg64_fn_t)(struct cpu_user_regs *regs, uint64_t *r,
+                                    bool read);
+@@ -145,4 +145,4 @@ VREG_REG_HELPERS(32, 0x3)
+ 
+ #undef VREG_REG_HELPERS
+ 
+-#endif /* __ASM_ARM_VREG__ */
++#endif /* ASM__ARM__VREG_H */
+diff --git a/xen/arch/arm/include/asm/vtimer.h b/xen/arch/arm/include/asm/vtimer.h
+index 9d4fb4c6e8..a2c54d000b 100644
+--- a/xen/arch/arm/include/asm/vtimer.h
++++ b/xen/arch/arm/include/asm/vtimer.h
+@@ -17,8 +17,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ARCH_ARM_VTIMER_H__
+-#define __ARCH_ARM_VTIMER_H__
++#ifndef ASM__ARM__VTIMER_H
++#define ASM__ARM__VTIMER_H
+ 
+ extern int domain_vtimer_init(struct domain *d,
+                               struct xen_arch_domainconfig *config);
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index 7c6b06f686..b32f4a21a2 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -3,8 +3,8 @@
+  * Copyright (C) 2023  Linaro Limited
+  */
+ 
+-#ifndef __FFA_PRIVATE_H__
+-#define __FFA_PRIVATE_H__
++#ifndef ARM__TEE__FFA_PRIVATE_H
++#define ARM__TEE__FFA_PRIVATE_H
+ 
+ #include <xen/const.h>
+ #include <xen/sizes.h>
+@@ -398,4 +398,4 @@ static inline int32_t ffa_rx_release(void)
+     return ffa_simple_call(FFA_RX_RELEASE, 0, 0, 0, 0);
+ }
+ 
+-#endif /*__FFA_PRIVATE_H__*/
++#endif /*ARM__TEE__FFA_PRIVATE_H*/
+diff --git a/xen/arch/arm/vgic/vgic-mmio.h b/xen/arch/arm/vgic/vgic-mmio.h
+index 3566cf237c..1bbcb778e9 100644
+--- a/xen/arch/arm/vgic/vgic-mmio.h
++++ b/xen/arch/arm/vgic/vgic-mmio.h
+@@ -13,8 +13,8 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#ifndef __XEN_ARM_VGIC_VGIC_MMIO_H__
+-#define __XEN_ARM_VGIC_VGIC_MMIO_H__
++#ifndef ARM__VGIC__VGIC_MMIO_H
++#define ARM__VGIC__VGIC_MMIO_H
+ 
+ struct vgic_register_region {
+     unsigned int reg_offset;
+diff --git a/xen/arch/arm/vgic/vgic.h b/xen/arch/arm/vgic/vgic.h
+index 534b24bcd3..3cb5e37077 100644
+--- a/xen/arch/arm/vgic/vgic.h
++++ b/xen/arch/arm/vgic/vgic.h
+@@ -14,8 +14,8 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#ifndef __XEN_ARM_VGIC_VGIC_H__
+-#define __XEN_ARM_VGIC_VGIC_H__
++#ifndef ARM__VGIC__VGIC_H
++#define ARM__VGIC__VGIC_H
+ 
+ /*
+  * We piggy-back on the already used KVM product ID,  but use a different
+diff --git a/xen/arch/arm/vpci.h b/xen/arch/arm/vpci.h
+index 3c713f3fcd..8d01a7c006 100644
+--- a/xen/arch/arm/vpci.h
++++ b/xen/arch/arm/vpci.h
+@@ -12,8 +12,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ARCH_ARM_VPCI_H__
+-#define __ARCH_ARM_VPCI_H__
++#ifndef ARM__VPCI_H
++#define ARM__VPCI_H
+ 
+ #ifdef CONFIG_HAS_VPCI
+ int domain_vpci_init(struct domain *d);
+@@ -30,7 +30,7 @@ static inline unsigned int domain_vpci_get_num_mmio_handlers(struct domain *d)
+ }
+ #endif
+ 
+-#endif /* __ARCH_ARM_VPCI_H__ */
++#endif /* ARM__VPCI_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/vuart.h b/xen/arch/arm/vuart.h
+index e90d84c6ed..697cb0225d 100644
+--- a/xen/arch/arm/vuart.h
++++ b/xen/arch/arm/vuart.h
+@@ -17,8 +17,8 @@
+  * GNU General Public License for more details.
+  */
+ 
+-#ifndef __ARCH_ARM_VUART_H__
+-#define __ARCH_ARM_VUART_H__
++#ifndef ARM__VUART_H
++#define ARM__VUART_H
+ 
+ struct domain;
+ 
+@@ -42,7 +42,7 @@ static inline void domain_vuart_free(struct domain *d) {};
+ 
+ #endif /* CONFIG_HWDOM_VUART */
+ 
+-#endif /* __ARCH_ARM_VUART_H__ */
++#endif /* ARM__VUART_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
+index f09048812c..d104588aea 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.h
++++ b/xen/drivers/passthrough/arm/smmu-v3.h
+@@ -5,8 +5,8 @@
+  * Copyright (C) 2022 ARM Limited
+  */
+ 
+-#ifndef _ARM_SMMU_V3_H
+-#define _ARM_SMMU_V3_H
++#ifndef DRIVERS__PASSTHROUGH__ARM__SMMU_V3_H
++#define DRIVERS__PASSTHROUGH__ARM__SMMU_V3_H
+ 
+ /* MMIO registers */
+ #define ARM_SMMU_IDR0			0x0
+@@ -668,4 +668,4 @@ struct arm_smmu_domain {
+ 	spinlock_t			devices_lock;
+ };
+ 
+-#endif /* _ARM_SMMU_V3_H */
++#endif /* DRIVERS__PASSTHROUGH__ARM__SMMU_V3_H */
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index e2412a1747..65dac78ce1 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -7,8 +7,8 @@
+  * Copyright 2011 (C) Citrix Systems
+  */
+ 
+-#ifndef __XEN_PUBLIC_ARCH_ARM_H__
+-#define __XEN_PUBLIC_ARCH_ARM_H__
++#ifndef PUBLIC__ARCH_ARM_H
++#define PUBLIC__ARCH_ARM_H
+ 
+ /*
+  * `incontents 50 arm_abi Hypercall Calling Convention
+@@ -542,7 +542,7 @@ typedef uint64_t xen_callback_t;
+ typedef struct xen_pmu_arch { uint8_t dummy; } xen_pmu_arch_t;
+ #endif
+ 
+-#endif /*  __XEN_PUBLIC_ARCH_ARM_H__ */
++#endif /*  PUBLIC__ARCH_ARM_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/include/public/arch-arm/hvm/save.h b/xen/include/public/arch-arm/hvm/save.h
+index fc1b28f59b..77ebe54aee 100644
+--- a/xen/include/public/arch-arm/hvm/save.h
++++ b/xen/include/public/arch-arm/hvm/save.h
+@@ -6,8 +6,8 @@
+  * Copyright (c) 2012 Citrix Systems Ltd.
+  */
+ 
+-#ifndef __XEN_PUBLIC_HVM_SAVE_ARM_H__
+-#define __XEN_PUBLIC_HVM_SAVE_ARM_H__
++#ifndef PUBLIC__ARCH_ARM__HVM__SAVE_H
++#define PUBLIC__ARCH_ARM__HVM__SAVE_H
+ 
+ #endif
+ 
+diff --git a/xen/include/public/arch-arm/smccc.h b/xen/include/public/arch-arm/smccc.h
+index 8a9321ebed..774f8c6987 100644
+--- a/xen/include/public/arch-arm/smccc.h
++++ b/xen/include/public/arch-arm/smccc.h
+@@ -7,8 +7,8 @@
+  * Copyright 2017 (C) EPAM Systems
+  */
+ 
+-#ifndef __XEN_PUBLIC_ARCH_ARM_SMCCC_H__
+-#define __XEN_PUBLIC_ARCH_ARM_SMCCC_H__
++#ifndef PUBLIC__ARCH_ARM__SMCCC_H
++#define PUBLIC__ARCH_ARM__SMCCC_H
+ 
+ #include "public/xen.h"
+ 
+@@ -37,7 +37,7 @@
+ #define SSSC_SMCCC_UID XEN_DEFINE_UUID(0xf863386fU, 0x4b39, 0x4cbd, 0x9220,\
+                                        0xce, 0x16, 0x41, 0xe5, 0x9f, 0x6f)
+ 
+-#endif /* __XEN_PUBLIC_ARCH_ARM_SMCCC_H__ */
++#endif /* PUBLIC__ARCH_ARM__SMCCC_H */
+ 
+ /*
+  * Local variables:
 -- 
 2.34.1
 
