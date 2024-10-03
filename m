@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB39CF34A1
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 12:19:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.809331.1221633 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868D5CF34A0
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Oct 2024 12:19:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.809336.1221678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swKns-0005cq-3W; Thu, 03 Oct 2024 12:19:32 +0000
+	id 1swKnx-0006yG-KW; Thu, 03 Oct 2024 12:19:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 809331.1221633; Thu, 03 Oct 2024 12:19:32 +0000
+Received: by outflank-mailman (output) from mailman id 809336.1221678; Thu, 03 Oct 2024 12:19:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swKnr-0005bb-Sx; Thu, 03 Oct 2024 12:19:31 +0000
-Received: by outflank-mailman (input) for mailman id 809331;
- Thu, 03 Oct 2024 12:19:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1swKnw-0006tM-VA; Thu, 03 Oct 2024 12:19:36 +0000
+Received: by outflank-mailman (input) for mailman id 809336;
+ Thu, 03 Oct 2024 12:19:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=d1Re=Q7=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swKnp-00043W-Vf
- for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 12:19:29 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bc7b6462-8181-11ef-a0ba-8be0dac302b0;
- Thu, 03 Oct 2024 14:19:28 +0200 (CEST)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5399041167cso1458781e87.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 05:19:28 -0700 (PDT)
+ id 1swKnt-00043u-Ua
+ for xen-devel@lists.xenproject.org; Thu, 03 Oct 2024 12:19:33 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id be7752cf-8181-11ef-99a2-01e77a169b0f;
+ Thu, 03 Oct 2024 14:19:31 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a8d4979b843so117374166b.3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Oct 2024 05:19:31 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a991047319asm77328366b.184.2024.10.03.05.19.26
+ a640c23a62f3a-a991047319asm77328366b.184.2024.10.03.05.19.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 05:19:27 -0700 (PDT)
+ Thu, 03 Oct 2024 05:19:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,72 +47,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc7b6462-8181-11ef-a0ba-8be0dac302b0
+X-Inumbo-ID: be7752cf-8181-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1727957968; x=1728562768; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1727957971; x=1728562771; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Q5H5vzGEUHF5T8160M9z8v6UqIQnE5siB1MdqRXTDEQ=;
-        b=hw3BqC7yrpokaKnjL/PQHed5zvBM6DotqfZres8QRYZjXTrGRA29/IDDwi44G0fmSF
-         y3qXnP6O1+kOXbsIOwK/YsubuqDnBpqmNKaZXM+nqB6ldr+UfcapegY8dl/IL22nda/w
-         l54d8+lavCsr4MbSt+EN5VWpnGqHgu0dYaFEs=
+        bh=JzvJYHGLE9z5OUSnbhsIqX8inHPsJLzDP+/krirdPTI=;
+        b=TgGNZXGM88dk2nvaXgt8GGXDyC69YB6/LmwzK8wTvBVafMV7QAsAK3vi7juvbIcfQH
+         4P9t9BvwLhnTrt6EC/BbQzH8J9Ns1ZfAJ3rxoBsEqn2VeyxMHhy4MfM/eOZ8g+i4BirR
+         XYcVNrCJazcn2+25zUE5e3n8AfyIku9l/Noh4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727957968; x=1728562768;
+        d=1e100.net; s=20230601; t=1727957971; x=1728562771;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Q5H5vzGEUHF5T8160M9z8v6UqIQnE5siB1MdqRXTDEQ=;
-        b=fIN+ay7K/XDv23W1es1JvVdO8ujuqZhXriBJUP8ZFOzGLnzh3qVo8XtVOIHlInmbHa
-         m712aPCBl2i97/Jrh2MR5cOHCIoTdCZU/UMXMdBU8OPvv6Eia3NhjIzL9qTBB5Z77Twm
-         OCdv/12dmLM4m8iibvA7tDRWCgBDv1G36jLz4Y3On8q2Y0++CicZXfEMwRQCS3bhF4x9
-         BpbjvuKDYwdmT8RGpFvmIvK4FMSkTtg59r2RsQSfokoyijhWlBGHSNMlHzNpcDZiAEWA
-         28suzwFCYh5wWtwUuRiQxil2/PNlt2j/SjOhddGMjvsBoVWz9B9AMD6o9jXePcWYlNky
-         l57g==
-X-Gm-Message-State: AOJu0YzcjNIyyglytJ0YSrK/dExk/DPrw1UQHEliXYma0YOoRXMX2SX1
-	wdkkMFTTo91jR/8j/yOiDLG0fL8I5OEROzzPhdok3oqzx7SLSuhpXqw+hW5Prx+KiNjMqyCeSta
-	P
-X-Google-Smtp-Source: AGHT+IGL5x4+MVjNlJWb1+E57yRrRCzzN/es9laf3hJyOm9QMpXF7n3UozNauxlIhv8NTRHmQuTi+w==
-X-Received: by 2002:a05:6512:3b06:b0:539:8d2c:c01a with SMTP id 2adb3069b0e04-539a067aff1mr6598414e87.29.1727957967733;
-        Thu, 03 Oct 2024 05:19:27 -0700 (PDT)
+        bh=JzvJYHGLE9z5OUSnbhsIqX8inHPsJLzDP+/krirdPTI=;
+        b=h1fMBgZcYhBPVXEKKlIpdxpC0jcbxoAoEpULKufKhs28OF2SUOnpW21a99l4Kxt2GU
+         n5KJ9y+4QXnoqY/y9BrqGwUqw9WV9Qbz7BeXpv/PbN1wS1rgwAyRcanV3r0fZEMmI9YX
+         tNJVsM+KwrsziMWIr07VYFAx52oTD+bpyrDHuQd3vcQF0sSK+Q7fLOiI5O82FKhU50DU
+         I5wm5jjIwy8B7fz/hkoj1LMC/brteMXzPpeiEv3HOjo7VT+aCpyL5aBp++F6fwg6N/lm
+         AUif1NALbeQOlT7Uq6dXVvsh1viU0WAmwRAZO9CstgcGiV/lmSTMXl/U3Fjo1heLr6ZG
+         F9dg==
+X-Gm-Message-State: AOJu0YzNNiAXbbkPV4/wcQuAuCqUBtFKiqECjFxeLD34ovDlOGuArgFF
+	1g180F9eNfc64g0CJxFwMsQTG6GHmL4vkvGRyzQEKf0dPh/LLm2XUWljtDorQaGAvzqqVt/BuSV
+	u
+X-Google-Smtp-Source: AGHT+IGOhSwTCr3X6dn4q1VWB2rQCWw5f55k4Sd8LXVO+G8Icl3NGLvpKNoV2CXmLLkI97IsRhGKWg==
+X-Received: by 2002:a17:907:3605:b0:a90:344a:7db6 with SMTP id a640c23a62f3a-a98f838ddfbmr565931466b.62.1727957971089;
+        Thu, 03 Oct 2024 05:19:31 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 08/20] xen: Update header guards - HYPFS
-Date: Thu,  3 Oct 2024 13:18:56 +0100
-Message-Id: <20241003121908.362888-9-frediano.ziglio@cloud.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 12/20] xen: Update header guards - KEXEC
+Date: Thu,  3 Oct 2024 13:19:00 +0100
+Message-Id: <20241003121908.362888-13-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241003121908.362888-1-frediano.ziglio@cloud.com>
 References: <20241003121908.362888-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Updated headers related to HYPFS.
+Updated headers related to KEXEC.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
- xen/include/xen/hypfs.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/include/xen/kexec.h  | 6 +++---
+ xen/include/xen/kimage.h | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
-index d8fcac23b4..d6f5725221 100644
---- a/xen/include/xen/hypfs.h
-+++ b/xen/include/xen/hypfs.h
+diff --git a/xen/include/xen/kexec.h b/xen/include/xen/kexec.h
+index e66eb6a8e5..d9d79902a9 100644
+--- a/xen/include/xen/kexec.h
++++ b/xen/include/xen/kexec.h
 @@ -1,5 +1,5 @@
--#ifndef __XEN_HYPFS_H__
--#define __XEN_HYPFS_H__
-+#ifndef XEN__HYPFS_H
-+#define XEN__HYPFS_H
+-#ifndef __XEN_KEXEC_H__
+-#define __XEN_KEXEC_H__
++#ifndef XEN__KEXEC_H
++#define XEN__KEXEC_H
  
- #ifdef CONFIG_HYPFS
- #include <xen/lib.h>
-@@ -206,4 +206,4 @@ unsigned int hypfs_dynid_entry_size(const struct hypfs_entry *template,
-                                     unsigned int id);
+ #include <xen/keyhandler.h>
+ 
+@@ -94,7 +94,7 @@ static inline void set_kexec_crash_area_size(u64 system_ram) {}
+ 
  #endif
  
--#endif /* __XEN_HYPFS_H__ */
-+#endif /* XEN__HYPFS_H */
+-#endif /* __XEN_KEXEC_H__ */
++#endif /* XEN__KEXEC_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/include/xen/kimage.h b/xen/include/xen/kimage.h
+index 348f07f5c8..139d4366ab 100644
+--- a/xen/include/xen/kimage.h
++++ b/xen/include/xen/kimage.h
+@@ -1,5 +1,5 @@
+-#ifndef __XEN_KIMAGE_H__
+-#define __XEN_KIMAGE_H__
++#ifndef XEN__KIMAGE_H
++#define XEN__KIMAGE_H
+ 
+ #define IND_DESTINATION  0x1
+ #define IND_INDIRECTION  0x2
+@@ -55,7 +55,7 @@ int kimage_build_ind(struct kexec_image *image, mfn_t ind_mfn,
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __XEN_KIMAGE_H__ */
++#endif /* XEN__KIMAGE_H */
+ 
+ /*
+  * Local variables:
 -- 
 2.34.1
 
