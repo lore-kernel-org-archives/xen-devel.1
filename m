@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E257CFA74C
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 08:29:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.810171.1222887 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DF38CFA753
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 09:30:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.810223.1222898 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swdgz-0000wB-2c; Fri, 04 Oct 2024 08:29:41 +0000
+	id 1swedI-0007S7-AA; Fri, 04 Oct 2024 09:29:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 810171.1222887; Fri, 04 Oct 2024 08:29:41 +0000
+Received: by outflank-mailman (output) from mailman id 810223.1222898; Fri, 04 Oct 2024 09:29:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swdgy-0000w4-W5; Fri, 04 Oct 2024 08:29:40 +0000
-Received: by outflank-mailman (input) for mailman id 810171;
- Fri, 04 Oct 2024 08:29:39 +0000
+	id 1swedI-0007S0-65; Fri, 04 Oct 2024 09:29:56 +0000
+Received: by outflank-mailman (input) for mailman id 810223;
+ Fri, 04 Oct 2024 09:29:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=njpt=RA=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swdVO-0005Kj-9w
- for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 08:17:42 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
+ <SRS0=IKoM=RA=darkstar.site=sakib@srs-se1.protection.inumbo.net>)
+ id 1swedG-0007Ru-O1
+ for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 09:29:54 +0000
+Received: from fforwardh-a2-smtp.messagingengine.com
+ (fforwardh-a2-smtp.messagingengine.com [103.168.172.197])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1f6b0787-8229-11ef-99a2-01e77a169b0f;
- Fri, 04 Oct 2024 10:17:40 +0200 (CEST)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5c5bca59416so2264198a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 04 Oct 2024 01:17:40 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99102858a4sm189829366b.49.2024.10.04.01.17.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 01:17:39 -0700 (PDT)
+ id 34676d90-8233-11ef-99a2-01e77a169b0f;
+ Fri, 04 Oct 2024 11:29:51 +0200 (CEST)
+Received: from phl-compute-08.internal (phl-compute-08.phl.internal
+ [10.202.2.48])
+ by mailfforwardh.phl.internal (Postfix) with ESMTP id E937329202B7;
+ Fri,  4 Oct 2024 05:29:49 -0400 (EDT)
+Received: from phl-frontend-01 ([10.202.2.160])
+ by phl-compute-08.internal (MEProxy); Fri, 04 Oct 2024 05:29:49 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 4 Oct 2024 05:29:48 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,296 +47,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f6b0787-8229-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728029860; x=1728634660; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ngf2pYsuazWK2xIYgIvfxzWZhbSrli1TcBM54fQEpbY=;
-        b=SevK/kwTcewwCcf2ppXVGMGg70onl/kTnaxMl1+V/wzHFgmJ3Rh95ki5Tn+XJM8g+c
-         xwdD5ExX1ndOx5BF0Y6cbg0UL5w4RlFPx1vX7nKZQ1YRUDzeyeBn/kmuJLNNgP81Dp3X
-         VuuNX6U3lsnnSCCaOIJ7/03lEqWdqp5TRobPQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728029860; x=1728634660;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ngf2pYsuazWK2xIYgIvfxzWZhbSrli1TcBM54fQEpbY=;
-        b=klpvNc+4uVNj7ETrhK1swJI48MF7PaF8U3NottB1WrTN7YiyaeJRfRU4zz7pEQnjtY
-         PHtB955WVfxkuPm4R2maMZZxnogfm06PSqflVfTIwkQMbEJEJP+U/DnF6xTPPCZd0oxw
-         GBtPXeij7mRa4eUyHLCMHpIl93sN9oUOpbZ9ce5HT+ytZ+ysDPj44QDGlBV4O4SSd7Ht
-         Uwzt/ILxlNHu0iORi4+0UkFV9N1VwIQsgcWwdxPn40570ZM0RUvWY1rngoKSM6aguyA8
-         /zcDmGPycX5UmmSrjFX4LHxf/zDv2T3V3n5G52UsGUA47fglnubHnphnoqikYJRMyW29
-         Qh7Q==
-X-Gm-Message-State: AOJu0YzAkbUZtSNFuOnO9y9BOjANZcL0qdlmU+FUMDZkXDfH5fsuo1sP
-	8TcsG4Mfr+ZLQhw414CiKIYYZi8IxDlHgh/f72FFViaRaNNGrvaRxcMmglM42OoKGZ+Jti9SyBT
-	J
-X-Google-Smtp-Source: AGHT+IE0BDCIHf6h370ut/vECkejWhP/9GuD2vZPowQCBQq3thTv44oL7LMnFNAelJj7YxwqE+1cIw==
-X-Received: by 2002:a17:907:f719:b0:a98:fa32:141c with SMTP id a640c23a62f3a-a991bd7a019mr156948766b.36.1728029859487;
-        Fri, 04 Oct 2024 01:17:39 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
+X-Inumbo-ID: 34676d90-8233-11ef-99a2-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pobox.com; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:message-id:mime-version:reply-to
+	:subject:subject:to:to; s=fm1; t=1728034189; x=1728120589; bh=eh
+	Og/ezBDvfKgSCDngUxEyEY7R0kWEf4bzv1DRPNRvo=; b=hWJHDQ++sYAMfWyVtM
+	s373JtwXvZB4cX7o0isasR0hCMUI1DYzRm7eRBk8WDoRwr7P55x6kwR5J4HRLm9L
+	n3FekGVlzVRFQS3tpI1jaQm5tJkjpy4e7lZgPtEk/QnDeWBTGgGyryF4dTVrxz4C
+	WL2SLIHfkrEhFqEQIk7xK/sNZ3hxq7zRamxE/pfyL6cYDN0GgH9nzN0IGLiJwou5
+	b3YDFYOdeU/kV+NS1Sm0mti4ho9Hg/mNq3pvpJCTQ2di4qmqAA9j+v6zofnihFru
+	j4xhs30Dwkh1QCpofPahNXCbeUrj4kSzThaNGrGhrJPWXdtNQ/cRsXvu5wAx69FK
+	WVRA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; t=1728034189; x=1728120589; bh=ehOg/ezBDvfKg
+	SCDngUxEyEY7R0kWEf4bzv1DRPNRvo=; b=p6xwCJAKsTRBYdSbTv46xF8JC8jA2
+	6jHCLv/hrtxjKtkQkAX856AYZQVz7qw7Vx8X/dvmy9R9wZl0ynBW0CvhUCVLYM7E
+	mh0BDQyk9LC2ZExO4rPufkrMp+lEQYl2OA+srntdTtwOmBati0oriz8mtpm4fdem
+	NsOSlB90S+dC6sdJJkmrNKRpzFXkqJeKhwfBe6CGWvC5ObUItzQT8f2Tf26DS9dW
+	Ny1pdJznAzrZfSPJCCg7P7Ix8V7eMDocHe36Fbp1kVsyzJMTcSRpH0JNLX00nkTr
+	iJ4Fr9S1x/0FLVGhjNBqd76R6nDU1gcB7fIA2PYtreBGzCfQmxRBSKEXg==
+X-ME-Sender: <xms:jbX_ZkNJ1Q_PZJlQ3Gg4xnYvmUyiwj8UI7aw6gutTu9fsiBbI_7IcA>
+    <xme:jbX_Zq9_XEmxT7d25x_-bv9qr-4nre8E502dJgCIEjBibuTY-1KE6hagVBAq8nCg0
+    B2FjYKtMIz4dFxLcPs>
+X-ME-Received: <xmr:jbX_ZrTvzcUmQ81ufSHrZtdrekKsC6IcPBQhzVxhw7EfGK9SzqG35BeSy87CUv216IAkL6sYw3lsaOuigDj0aJ_jCnRTnPRKMkd-gE2bSEcE43DK>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrvddvfedgudeiucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+    rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
+    htshculddquddttddmnecujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecu
+    hfhrohhmpefuvghrghhihicumfhisghrihhkuceoufgvrhhgihihpgfmihgsrhhikhesvg
+    hprghmrdgtohhmqeenucggtffrrghtthgvrhhnpeffvdelvdevgfdvjeeuvddvveefvdeu
+    geethfdtveeggeegleejveejteegveettdenucffohhmrghinhepkhgvrhhnvghlrdhorh
+    hgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepshgr
+    khhisgesuggrrhhkshhtrghrrdhsihhtvgdpnhgspghrtghpthhtohepiedpmhhouggvpe
+    hsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhp
+    rhhojhgvtghtrdhorhhgpdhrtghpthhtohepshgvrhhgihihpghkihgsrhhikhesvghprg
+    hmrdgtohhmpdhrtghpthhtohepjhgsvghulhhitghhsehsuhhsvgdrtghomhdprhgtphht
+    thhopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtghpthhtoh
+    eprhhoghgvrhdrphgruhestghithhrihigrdgtohhmpdhrtghpthhtohepshhsthgrsggv
+    lhhlihhniheskhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:jbX_Zssz3pQCVd8PyHmv0USeFUxQYE2fGugjqY2ZBd_iiMCX0xngpA>
+    <xmx:jbX_ZsczjAq5jfUhY-kiY-tOag7KFKl869yQO4rYhWIjBwEJ77bl-A>
+    <xmx:jbX_Zg1ykUKiUAatEZDpJq4hKmDgow6KoMosd7YN0GX3A5-k5f0w9w>
+    <xmx:jbX_Zg_P_uC9_30ZBxwNhyZsp27BxNerjo-wsJQ9jEAP9bknvGyj7A>
+    <xmx:jbX_Zr6Qj9b_TmLkee060P1fmDESsv9JZdmNMnkgCCFCxT3AbNar2jD7eW_b>
+Feedback-ID: id5d1ea8a:Fastmail
+From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
+Cc: Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 17/19] xen: Update header guards - VM event, mem access, monitor
-Date: Fri,  4 Oct 2024 09:17:11 +0100
-Message-Id: <20241004081713.749031-18-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241004081713.749031-1-frediano.ziglio@cloud.com>
-References: <20241004081713.749031-1-frediano.ziglio@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v1 0/3] configurable stdvga & pmtimer emulation
+Date: Fri,  4 Oct 2024 12:29:44 +0300
+Message-Id: <cover.1728032664.git.Sergiy_Kibrik@epam.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Updated headers related to VM event, mem access AND monitor.
+This series presents previously posted patches [1,2] with review comments
+addressed, Patches introduce build options for stdvga and ACPI PM timer
+emulation drivers to make them configurable with possibility to be disabled for
+finer-tuned setups that don't need this code.
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
- xen/arch/x86/include/asm/hvm/monitor.h  | 6 +++---
- xen/arch/x86/include/asm/hvm/vm_event.h | 6 +++---
- xen/arch/x86/include/asm/mem_access.h   | 6 +++---
- xen/arch/x86/include/asm/monitor.h      | 6 +++---
- xen/arch/x86/include/asm/vm_event.h     | 6 +++---
- xen/include/asm-generic/monitor.h       | 6 +++---
- xen/include/asm-generic/vm_event.h      | 6 +++---
- xen/include/xen/mem_access.h            | 6 +++---
- xen/include/xen/monitor.h               | 6 +++---
- xen/include/xen/vm_event.h              | 6 +++---
- 10 files changed, 30 insertions(+), 30 deletions(-)
----
-Changes since v2:
-- exclude missing public headers.
+New config options are now separated in a sub-menu, checks of emulation flags
+are added so that domain can't be created if it requires devices that had been
+disabled, patches were re-shaped a bit and other comments has been addressed.
 
-diff --git a/xen/arch/x86/include/asm/hvm/monitor.h b/xen/arch/x86/include/asm/hvm/monitor.h
-index 02021be47b..8ef90a1b03 100644
---- a/xen/arch/x86/include/asm/hvm/monitor.h
-+++ b/xen/arch/x86/include/asm/hvm/monitor.h
-@@ -5,8 +5,8 @@
-  * Arch-specific hardware virtual machine monitor abstractions.
-  */
- 
--#ifndef __ASM_X86_HVM_MONITOR_H__
--#define __ASM_X86_HVM_MONITOR_H__
-+#ifndef ASM__X86__HVM__MONITOR_H
-+#define ASM__X86__HVM__MONITOR_H
- 
- #include <public/vm_event.h>
- 
-@@ -46,7 +46,7 @@ int hvm_monitor_vmexit(unsigned long exit_reason,
- int hvm_monitor_io(unsigned int port, unsigned int bytes,
-                    bool in, bool str);
- 
--#endif /* __ASM_X86_HVM_MONITOR_H__ */
-+#endif /* ASM__X86__HVM__MONITOR_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/include/asm/hvm/vm_event.h b/xen/arch/x86/include/asm/hvm/vm_event.h
-index 506a85c774..c03df6f15e 100644
---- a/xen/arch/x86/include/asm/hvm/vm_event.h
-+++ b/xen/arch/x86/include/asm/hvm/vm_event.h
-@@ -5,12 +5,12 @@
-  * Hardware virtual machine vm_event abstractions.
-  */
- 
--#ifndef __ASM_X86_HVM_VM_EVENT_H__
--#define __ASM_X86_HVM_VM_EVENT_H__
-+#ifndef ASM__X86__HVM__VM_EVENT_H
-+#define ASM__X86__HVM__VM_EVENT_H
- 
- void hvm_vm_event_do_resume(struct vcpu *v);
- 
--#endif /* __ASM_X86_HVM_VM_EVENT_H__ */
-+#endif /* ASM__X86__HVM__VM_EVENT_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/include/asm/mem_access.h b/xen/arch/x86/include/asm/mem_access.h
-index 1a52a10322..b774f2f8b6 100644
---- a/xen/arch/x86/include/asm/mem_access.h
-+++ b/xen/arch/x86/include/asm/mem_access.h
-@@ -11,8 +11,8 @@
-  * Parts based on earlier work by Michael A Fetterman, Ian Pratt et al.
-  */
- 
--#ifndef __ASM_X86_MEM_ACCESS_H__
--#define __ASM_X86_MEM_ACCESS_H__
-+#ifndef ASM__X86__MEM_ACCESS_H
-+#define ASM__X86__MEM_ACCESS_H
- 
- /*
-  * Setup vm_event request based on the access (gla is -1ull if not available).
-@@ -44,7 +44,7 @@ int p2m_set_suppress_ve_multi(struct domain *d,
- int p2m_get_suppress_ve(struct domain *d, gfn_t gfn, bool *suppress_ve,
-                         unsigned int altp2m_idx);
- 
--#endif /*__ASM_X86_MEM_ACCESS_H__ */
-+#endif /*ASM__X86__MEM_ACCESS_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/include/asm/monitor.h b/xen/arch/x86/include/asm/monitor.h
-index 3c64d8258f..2d0dde5041 100644
---- a/xen/arch/x86/include/asm/monitor.h
-+++ b/xen/arch/x86/include/asm/monitor.h
-@@ -19,8 +19,8 @@
-  * License along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __ASM_X86_MONITOR_H__
--#define __ASM_X86_MONITOR_H__
-+#ifndef ASM__X86__MONITOR_H
-+#define ASM__X86__MONITOR_H
- 
- #include <xen/sched.h>
- 
-@@ -126,4 +126,4 @@ static inline void arch_monitor_cleanup_domain(struct domain *d) {}
- bool monitored_msr(const struct domain *d, u32 msr);
- bool monitored_msr_onchangeonly(const struct domain *d, u32 msr);
- 
--#endif /* __ASM_X86_MONITOR_H__ */
-+#endif /* ASM__X86__MONITOR_H */
-diff --git a/xen/arch/x86/include/asm/vm_event.h b/xen/arch/x86/include/asm/vm_event.h
-index 46e77ed6d9..bac504ba70 100644
---- a/xen/arch/x86/include/asm/vm_event.h
-+++ b/xen/arch/x86/include/asm/vm_event.h
-@@ -5,8 +5,8 @@
-  * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-  */
- 
--#ifndef __ASM_X86_VM_EVENT_H__
--#define __ASM_X86_VM_EVENT_H__
-+#ifndef ASM__X86__VM_EVENT_H
-+#define ASM__X86__VM_EVENT_H
- 
- #include <xen/sched.h>
- #include <public/vm_event.h>
-@@ -45,4 +45,4 @@ void vm_event_sync_event(struct vcpu *v, bool value);
- 
- void vm_event_reset_vmtrace(struct vcpu *v);
- 
--#endif /* __ASM_X86_VM_EVENT_H__ */
-+#endif /* ASM__X86__VM_EVENT_H */
-diff --git a/xen/include/asm-generic/monitor.h b/xen/include/asm-generic/monitor.h
-index 1ade289099..e53f0823cb 100644
---- a/xen/include/asm-generic/monitor.h
-+++ b/xen/include/asm-generic/monitor.h
-@@ -9,8 +9,8 @@
-  *
-  */
- 
--#ifndef __ASM_GENERIC_MONITOR_H__
--#define __ASM_GENERIC_MONITOR_H__
-+#ifndef ASM_GENERIC__MONITOR_H
-+#define ASM_GENERIC__MONITOR_H
- 
- #include <xen/errno.h>
- #include <xen/lib.h>
-@@ -52,7 +52,7 @@ void arch_monitor_cleanup_domain(struct domain *d)
-     /* No arch-specific domain cleanup on GENERIC. */
- }
- 
--#endif /* __ASM_GENERIC_MONITOR_H__ */
-+#endif /* ASM_GENERIC__MONITOR_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/asm-generic/vm_event.h b/xen/include/asm-generic/vm_event.h
-index 620c7b971c..ff538b6ba4 100644
---- a/xen/include/asm-generic/vm_event.h
-+++ b/xen/include/asm-generic/vm_event.h
-@@ -5,8 +5,8 @@
-  * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-  */
- 
--#ifndef __ASM_GENERIC_VM_EVENT_H__
--#define __ASM_GENERIC_VM_EVENT_H__
-+#ifndef ASM_GENERIC__VM_EVENT_H
-+#define ASM_GENERIC__VM_EVENT_H
- 
- #include <xen/sched.h>
- #include <public/vm_event.h>
-@@ -52,4 +52,4 @@ void vm_event_reset_vmtrace(struct vcpu *v)
-     /* Nothing to do. */
- }
- 
--#endif /* __ASM_GENERIC_VM_EVENT_H__ */
-+#endif /* ASM_GENERIC__VM_EVENT_H */
-diff --git a/xen/include/xen/mem_access.h b/xen/include/xen/mem_access.h
-index 87d93b31f6..2d0e472934 100644
---- a/xen/include/xen/mem_access.h
-+++ b/xen/include/xen/mem_access.h
-@@ -19,8 +19,8 @@
-  * along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef _XEN_MEM_ACCESS_H
--#define _XEN_MEM_ACCESS_H
-+#ifndef XEN__MEM_ACCESS_H
-+#define XEN__MEM_ACCESS_H
- 
- #include <xen/types.h>
- #include <xen/mm.h>
-@@ -105,7 +105,7 @@ int mem_access_memop(unsigned long cmd,
- }
- #endif /* CONFIG_MEM_ACCESS */
- 
--#endif /* _XEN_MEM_ACCESS_H */
-+#endif /* XEN__MEM_ACCESS_H */
- 
- /*
-  * Local variables:
-diff --git a/xen/include/xen/monitor.h b/xen/include/xen/monitor.h
-index 713d54f7c1..be301826c0 100644
---- a/xen/include/xen/monitor.h
-+++ b/xen/include/xen/monitor.h
-@@ -19,8 +19,8 @@
-  * License along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#ifndef __XEN_MONITOR_H__
--#define __XEN_MONITOR_H__
-+#ifndef XEN__MONITOR_H
-+#define XEN__MONITOR_H
- 
- #include <public/vm_event.h>
- 
-@@ -32,4 +32,4 @@ void monitor_guest_request(void);
- 
- int monitor_traps(struct vcpu *v, bool sync, vm_event_request_t *req);
- 
--#endif /* __XEN_MONITOR_H__ */
-+#endif /* XEN__MONITOR_H */
-diff --git a/xen/include/xen/vm_event.h b/xen/include/xen/vm_event.h
-index 9a86358b42..3f2cb6fba8 100644
---- a/xen/include/xen/vm_event.h
-+++ b/xen/include/xen/vm_event.h
-@@ -20,8 +20,8 @@
-  */
- 
- 
--#ifndef __VM_EVENT_H__
--#define __VM_EVENT_H__
-+#ifndef XEN__VM_EVENT_H
-+#define XEN__VM_EVENT_H
- 
- #include <xen/sched.h>
- #include <public/vm_event.h>
-@@ -98,7 +98,7 @@ void vm_event_set_registers(struct vcpu *v, vm_event_response_t *rsp);
- 
- void vm_event_monitor_next_interrupt(struct vcpu *v);
- 
--#endif /* __VM_EVENT_H__ */
-+#endif /* XEN__VM_EVENT_H */
- 
- /*
-  * Local variables:
+  -Sergiy
+
+  1. https://lore.kernel.org/xen-devel/20240912085709.858052-1-Sergiy_Kibrik@epam.com/
+  2. https://lore.kernel.org/xen-devel/20240916063757.990070-1-Sergiy_Kibrik@epam.com/
+
+
+Sergiy Kibrik (3):
+  x86/hvm: introduce config option for ACPI PM timer
+  x86/hvm: introduce config option for stdvga emulation
+  x86/hvm: make ACPI PM & stdvga emulation optional
+
+ xen/arch/x86/Kconfig               | 23 +++++++++++++++++++++++
+ xen/arch/x86/domain.c              |  6 ++++++
+ xen/arch/x86/hvm/Makefile          |  4 ++--
+ xen/arch/x86/include/asm/acpi.h    |  5 +++++
+ xen/arch/x86/include/asm/domain.h  |  6 ++++--
+ xen/arch/x86/include/asm/hvm/io.h  |  4 ++++
+ xen/arch/x86/include/asm/hvm/vpt.h | 10 ++++++++++
+ 7 files changed, 54 insertions(+), 4 deletions(-)
+
 -- 
-2.34.1
+2.25.1
 
 
