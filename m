@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE7BBCFA754
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 08:17:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.810096.1222816 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB0B7CFA752
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 08:17:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.810099.1222843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swdVP-0008Tm-Hd; Fri, 04 Oct 2024 08:17:43 +0000
+	id 1swdVU-0000pv-20; Fri, 04 Oct 2024 08:17:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 810096.1222816; Fri, 04 Oct 2024 08:17:43 +0000
+Received: by outflank-mailman (output) from mailman id 810099.1222843; Fri, 04 Oct 2024 08:17:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swdVP-0008Ra-1d; Fri, 04 Oct 2024 08:17:43 +0000
-Received: by outflank-mailman (input) for mailman id 810096;
- Fri, 04 Oct 2024 08:17:40 +0000
+	id 1swdVS-0000l1-Tu; Fri, 04 Oct 2024 08:17:46 +0000
+Received: by outflank-mailman (input) for mailman id 810099;
+ Fri, 04 Oct 2024 08:17:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=njpt=RA=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swdVL-0005Vm-SQ
- for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 08:17:39 +0000
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [2a00:1450:4864:20::22b])
+ id 1swdVN-0005Vm-Bv
+ for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 08:17:41 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1ec93ce4-8229-11ef-a0bb-8be0dac302b0;
- Fri, 04 Oct 2024 10:17:39 +0200 (CEST)
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2fabb837ddbso27407841fa.1
- for <xen-devel@lists.xenproject.org>; Fri, 04 Oct 2024 01:17:39 -0700 (PDT)
+ id 1fa4fed4-8229-11ef-a0bb-8be0dac302b0;
+ Fri, 04 Oct 2024 10:17:40 +0200 (CEST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a83562f9be9so181725066b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Oct 2024 01:17:40 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99102858a4sm189829366b.49.2024.10.04.01.17.38
+ a640c23a62f3a-a99102858a4sm189829366b.49.2024.10.04.01.17.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 01:17:38 -0700 (PDT)
+ Fri, 04 Oct 2024 01:17:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,77 +47,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ec93ce4-8229-11ef-a0bb-8be0dac302b0
+X-Inumbo-ID: 1fa4fed4-8229-11ef-a0bb-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728029859; x=1728634659; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1728029860; x=1728634660; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mwL1uhJmN7KffHDYwBpDV67hA/1FIcvi3fYvuqYkXWg=;
-        b=QvTFIBySjIHElGEs46DN3Axi783Y8KEchjkS//cuvo2JSXN3q8oj/8+fndnaIDnEHj
-         L3WgfJEGRiWgg9UoYCoHlM9+aIliW3XnKGwVluJh+MjP4sgTheyssHUKo4WeKVP8tFA6
-         OZcVXbKeYJY+BQB1YWfhYTcjDczfbNobyDSS4=
+        bh=I3DKuhQNv3MsZ5QX5cGeELREhQ+CQGQiRyTh9z9amE0=;
+        b=YMsPcRFvQMpQTvtd2qnBOgoq0x6AEmm63FsROKxudHdxS8K4gAqCjNA73QVoiGZUNN
+         HZVfZ8X7f7MaQJLTthMY0dDevhYNk8xVgxiOWDdhY6N68tqnp3S63323ps2xJbiPgR28
+         9KKE8DwfEBN35vyp2cSttzPtMjAgPhuXw9ZA4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728029859; x=1728634659;
+        d=1e100.net; s=20230601; t=1728029860; x=1728634660;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mwL1uhJmN7KffHDYwBpDV67hA/1FIcvi3fYvuqYkXWg=;
-        b=qWZAf20wG9TN8NITnnRsiRe5TqysXmBIB1LetQKRrXYs596xysI8MIMk2XZ1NDRg+z
-         ygrN6b8itxkjAOwo8ULh1b0t7Nj9K98FBLx7vqM6afNh9RjR7ys4jcVWk14o/Hhih7mG
-         2KLB0c6biw+wX9Y7BHGMEL4PwBAul7L7RfCM2wutyN2X2X4TUWikl8fgnO0ej+lntz/5
-         CV+v2YrHJY94r7/E4v5VnXi42FJoCDMK9SGQpMN2Rp1Hk2Nzm0PS7n2JM6wNe7fmsR/6
-         xp5SW2iaL03F22RzImygYKk9G844/vtDXc1UxkT3RS8pmhHSiPYSZ9OxDt9aYlA9knqr
-         8NxQ==
-X-Gm-Message-State: AOJu0Yw6qKL1Clx/4VRz37U3yLfB5vhx27DukxueFTdgzbBRYtSGNbMz
-	3PkQK9Xo1n3a6Nv7mIFVKv072UTVfg7PCGapscskWaj2S7Ct9f3NGZDuaT+SqZR7KX82g9AKO/v
-	P
-X-Google-Smtp-Source: AGHT+IFQXJm+VpGpBCeLngcFnt5tihTs8eI9yBxFhgHfLWlPIRs5tn6CeveFOaWvYQ+McywChJ8EYg==
-X-Received: by 2002:a05:651c:b0b:b0:2fa:f5f9:4194 with SMTP id 38308e7fff4ca-2faf5f94416mr8245731fa.27.1728029858634;
-        Fri, 04 Oct 2024 01:17:38 -0700 (PDT)
+        bh=I3DKuhQNv3MsZ5QX5cGeELREhQ+CQGQiRyTh9z9amE0=;
+        b=hYwfXrZ5U5GEaW8YZfCD7EHgeYBh4W6/ibnlECOcG1W6QJClWGzmjc31Eur8VcWLAa
+         RySbgq6M8/fOO0PNsnXyBDRpvLcPbjzKZlDq061f28NE3Hx3wnpu4qL5jYHjUBbvB9T1
+         AVu8RGWqDJmUS0nYg2QzxPbWAcd8WXjS96qHY/TK1my1WzyNjFwKDBpTAVYY9mDSOLnj
+         9PBf+/k7pbFlWNb8v9YktUvqVGjnBO7VfCYSWzs4t7lhatQvzXehINxClhmqBcPBi5vD
+         9AFjoArpPKXwcGTvfBljkFGkqsfSB4r9AvKu/stJ/mDgLUvCJ1oZQlZocwC21kE/hWT4
+         ncFg==
+X-Gm-Message-State: AOJu0Yz1oKIxou3hd02kevZiERUo/kgLqX67rM+YJLvk0E0ab2y6MILq
+	VX1+BbXH6PL2hgv42Szuw08r1r/E/B+/NmFsHT7dO41LUHgwIggaUPBi0q7cOftqWvjwxiOlFNr
+	N
+X-Google-Smtp-Source: AGHT+IE2P6bTmkP4WyoRi0mlV1wW2wJvlrHKdRpyxStOSbVPpyLjhCkn1VuZ5K2L5OgKcWoOcjudWA==
+X-Received: by 2002:a17:906:4fd0:b0:a8d:4db8:9edf with SMTP id a640c23a62f3a-a991bff02d6mr187522166b.42.1728029860154;
+        Fri, 04 Oct 2024 01:17:40 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Juergen Gross <jgross@suse.com>,
-	George Dunlap <gwd@xenproject.org>
-Subject: [PATCH v3 16/19] xen: Update header guards - Scheduling
-Date: Fri,  4 Oct 2024 09:17:10 +0100
-Message-Id: <20241004081713.749031-17-frediano.ziglio@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 18/19] xen: Update header guards - VPCI
+Date: Fri,  4 Oct 2024 09:17:12 +0100
+Message-Id: <20241004081713.749031-19-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241004081713.749031-1-frediano.ziglio@cloud.com>
 References: <20241004081713.749031-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Updated headers related to scheduling.
+Updated headers related to VPCI.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
- xen/common/sched/private.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/include/xen/vpci.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
-index c0e7c96d24..02ab905412 100644
---- a/xen/common/sched/private.h
-+++ b/xen/common/sched/private.h
-@@ -5,8 +5,8 @@
-  * Portions by Mark Williamson are (C) 2004 Intel Research Cambridge
-  */
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 41e7c3bc27..d2d2905447 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -1,5 +1,5 @@
+-#ifndef _XEN_VPCI_H_
+-#define _XEN_VPCI_H_
++#ifndef XEN__VPCI_H
++#define XEN__VPCI_H
  
--#ifndef __XEN_SCHED_IF_H__
--#define __XEN_SCHED_IF_H__
-+#ifndef COMMON__SCHED__PRIVATE_H
-+#define COMMON__SCHED__PRIVATE_H
+ #ifdef CONFIG_HAS_VPCI
  
- #include <xen/err.h>
- #include <xen/list.h>
-@@ -666,4 +666,4 @@ void cpupool_put(struct cpupool *pool);
- int cpupool_add_domain(struct domain *d, unsigned int poolid);
- void cpupool_rm_domain(struct domain *d);
- 
--#endif /* __XEN_SCHED_IF_H__ */
-+#endif /* COMMON__SCHED__PRIVATE_H */
 -- 
 2.34.1
 
