@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8B2CF8840
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 16:05:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.810518.1223229 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFA2CF8850
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 16:05:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.810516.1223204 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swknR-0006Ko-EA; Fri, 04 Oct 2024 16:04:49 +0000
+	id 1swknN-0005dM-Re; Fri, 04 Oct 2024 16:04:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 810518.1223229; Fri, 04 Oct 2024 16:04:49 +0000
+Received: by outflank-mailman (output) from mailman id 810516.1223204; Fri, 04 Oct 2024 16:04:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swknR-0006Kh-AL; Fri, 04 Oct 2024 16:04:49 +0000
-Received: by outflank-mailman (input) for mailman id 810518;
- Fri, 04 Oct 2024 16:04:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1swknN-0005cZ-NH; Fri, 04 Oct 2024 16:04:45 +0000
+Received: by outflank-mailman (input) for mailman id 810516;
+ Fri, 04 Oct 2024 16:04:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jgwL=RA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1swknP-0005bC-5M
- for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 16:04:47 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5fadd88b-826a-11ef-99a2-01e77a169b0f;
- Fri, 04 Oct 2024 18:04:45 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a8d29b7edc2so295947466b.1
- for <xen-devel@lists.xenproject.org>; Fri, 04 Oct 2024 09:04:45 -0700 (PDT)
+ id 1swknM-0005bD-V2
+ for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 16:04:44 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5e7a90fc-826a-11ef-a0bb-8be0dac302b0;
+ Fri, 04 Oct 2024 18:04:43 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a8d6d0fe021so375249366b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Oct 2024 09:04:43 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a992e5c3c8fsm10040166b.3.2024.10.04.09.04.43
+ a640c23a62f3a-a992e5c3c8fsm10040166b.3.2024.10.04.09.04.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 09:04:44 -0700 (PDT)
+ Fri, 04 Oct 2024 09:04:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5fadd88b-826a-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 5e7a90fc-826a-11ef-a0bb-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728057885; x=1728662685; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1728057883; x=1728662683; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hqQSvaZsrgtTFm5v43v0hmc6KczEuWu7/bK2WOCfUo0=;
-        b=I1uqN0+7U4XRv1FuZUTa8iRzSNzApVwLxkR4TxzlGURKR0FDc5hm3D2I7bQKmOD4Qv
-         4KGq9ZO7SNA9V6tEJkZQ1l9MGp+fmi7dHXYN1xdAR08/dOpHbmUyXpVQzVKrwKVTiQiP
-         URDKq9Yg5EisbdYO5gH2mGg3Xk36Yn+mqTHJpWJ1zf1Cw/a0czCWJ+Fq7vz27sLa0U1p
-         cb+WHBNp5D3SrjHRdaEEGIq+nftFSqvkmk9N77RIzh/0e3T1wHTSvwwOxWXw0avBr25B
-         nDHI5YzO+Gc8qISmta0GA3BObUVN5gYJhS7aVK8Rvpf0DQ5/o6ughM3xkrpu+2NErz+D
-         b0Tg==
+        bh=cdM3rVoapplxeHku40PfEDhlvEAoP8or8VBCiItUFOc=;
+        b=CkyNdKzM/VnFOel8c/5b6ET+cs1sOeb4SFdTj6a1zDZkSbSZzZrcSqFzzdTtd8H7uL
+         1d/JIhwDZKN82LogP0kXuwZR8Q4jijkKtbDrB7+hOVLm8AsTBwce5pWCcGNRI5osW5zl
+         FTNOvk3aLAdgZNUcqze/tti8O4df7C3Nk112Cni3EUBQwpHenkblB546zGZjIWv/7mLE
+         +ZCjco1ZJ5loDaHx+Zrgp04AfNpfzQYyR/5s+RiwjHb68Tw8C2Z4/ZeO2bPgwR0Fxuf/
+         tZ4EFLJ7XZ/Ci0vrZYoFo9K6mvQcfEcdjtybM1EdvQ77FivRWH73KC62MZJ1a41EA6kF
+         C8VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728057885; x=1728662685;
+        d=1e100.net; s=20230601; t=1728057883; x=1728662683;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=hqQSvaZsrgtTFm5v43v0hmc6KczEuWu7/bK2WOCfUo0=;
-        b=lig567CISkjJunnuke3GtGFctGKwh4XmAuJEK/Yh7R1CNS0uF+o+3s+B7oXE8SshK8
-         GnkIt9foHRR+Nkb/l8uq5KrLJc6AvVuwZpUXgHcS+1zX6PWfzKHyu83hAkcKJiOewm7P
-         kVg1WY6PjoWGj1pS2Vsc6EpAPsfMYpkeoWYFrxq3ZAsUsV9oL855bDcWSRoJMXLlaPaI
-         b+OnF9YBAzwYJE5LTGPa4Ng6F3P3bySXzohM+QDlNRG77lhDRkr6tJ0FpMDm4fQh3R36
-         OB5dhDm4GMfFcsm+3yBFCxa8SwD976OC5Y3FLM6cu3d0pCwX1Bx7qV8RWgh2mXtWzFEH
-         iHRg==
-X-Gm-Message-State: AOJu0YwUofxRSPhO59cgIpZVSGxyw4dlZ0OXAuOPgyzLO9drIU7wYDlh
-	46Oew8WfOYJOvmk0iIIn0bGe17Kwa03qbaNZqVLsUBV5sRf0BDNUD2mF3w==
-X-Google-Smtp-Source: AGHT+IHefne6h1GsX+idSo9x5A6CdmGL7HYn68bBluDq/B1wb/yLqFOA130XumpBdREIy8OrwPvoXg==
-X-Received: by 2002:a17:907:6d1b:b0:a90:34bf:844 with SMTP id a640c23a62f3a-a991c00f5e6mr321805766b.59.1728057884661;
-        Fri, 04 Oct 2024 09:04:44 -0700 (PDT)
+        bh=cdM3rVoapplxeHku40PfEDhlvEAoP8or8VBCiItUFOc=;
+        b=OmUNwvkaP9ysCua4oDWDU+Uj24ViCsPvU0MCzu9tTLiY3SnM2egHGOh3T9zQ3I+NsX
+         BxpFM2kdYsUuLk7y4slBM+CNmGAu4laU2evyn/OcNJr8e3HymOnIannwd9BIGo+dOuVm
+         MSGppURtm0fG4LoCnUNhXu4vjSm7Hxa9CJ1ePCKzdX10hYSpjUNouh3hC8mcyjzAZnio
+         SvihTkYYA3PWSIedi7B6Z7+8KJs+ojObvShwCfSPL1YSJmjlQu49gq7imWlTl288dBi1
+         31aBGBarVVQ6uU2scPQKYfW5H9jv7FzDozkhLOnUqxDVsUnBmnC4jzKqiaJ2u9cnlqjR
+         k1Yw==
+X-Gm-Message-State: AOJu0YwrZUt9jtm7HMoiVW04c9REiJWdA/Vfzcx2g4rBEWaiNKg5oBbO
+	bR9O01tISMQ8vrywqPzpc+fzEhtUNRvl3o1uVemh8eD0ylDe7MyuEDy9HA==
+X-Google-Smtp-Source: AGHT+IE++eGydoiKYdy+iIjJIslZ+fal52kCcQO0wvQi82zmiSnq0kh3OJ0mvrKPWReqFBzFK7D02A==
+X-Received: by 2002:a17:906:6a20:b0:a8d:51a7:d5e8 with SMTP id a640c23a62f3a-a991bd09b15mr370159466b.15.1728057882579;
+        Fri, 04 Oct 2024 09:04:42 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -86,53 +86,99 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 3/3] xen/riscv: register Xen's load address as a boot module
-Date: Fri,  4 Oct 2024 18:04:37 +0200
-Message-ID: <1850d637a9588a1b00bf07cf0e443486f3895938.1728057657.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 1/3] xen/riscv: implement virt_to_maddr()
+Date: Fri,  4 Oct 2024 18:04:35 +0200
+Message-ID: <25a0fa030db90c929379a799aa5e03bed0197665.1728057657.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <cover.1728057657.git.oleksii.kurochko@gmail.com>
 References: <cover.1728057657.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Avoid using BOOTMOD_XEN region for other purposes or boot modules
-which could result in memory corruption or undefined behaviour.
+Implement the virt_to_maddr() function to convert virtual addresses
+to machine addresses, including checks for address ranges such as
+the direct mapping area (DIRECTMAP_VIRT_START) and the Xen virtual
+address space. To implement this, the phys_offset variable is made
+accessible outside of riscv/mm.c.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
- - Drop local variable xen_bootmodule as it won't be used after initialization.
- - Drop unnecessary cast for the 3rd argument of add_boot_module() call in
-   start_xen().
- - Change BUG_ON(!xen_bootmodule) to panic().
+  - Drop casts in virt_to_maddr() for ASSERT which checks that VA is
+    in the range of where Xen is located.
+  - Add UL suffix for or XEN_VIRT_START by using _AC(..., UL) and add inclusion
+    of <xen/const.h>
+  - Add the comment above return which explains why there is no need
+    to do " - XEN_VIRT_START.
 ---
- xen/arch/riscv/setup.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ xen/arch/riscv/include/asm/config.h |  4 ++++
+ xen/arch/riscv/include/asm/mm.h     | 17 ++++++++++++++++-
+ xen/arch/riscv/mm.c                 |  2 +-
+ 3 files changed, 21 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 6d156c3a40..f531ca38ee 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 7dbb235685..8884aeab16 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -155,6 +155,10 @@
  
- #include <xen/bug.h>
-+#include <xen/bootfdt.h>
- #include <xen/compile.h>
- #include <xen/device_tree.h>
- #include <xen/init.h>
-@@ -44,6 +45,11 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
-               "Please check your bootloader.\n",
-               dtb_addr, BOOT_FDT_VIRT_SIZE);
+ #define IDENT_AREA_SIZE 64
  
-+    /* Register Xen's load address as a boot module. */
-+    if ( !add_boot_module(BOOTMOD_XEN, virt_to_maddr(_start),
-+                          _end - _start, false) )
-+        panic("Failed to add BOOTMOD_XEN\n");
++#ifndef __ASSEMBLY__
++extern unsigned long phys_offset;
++#endif
 +
-     printk("All set up\n");
+ #endif /* __RISCV_CONFIG_H__ */
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 4b7b00b850..0f7879d685 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -5,6 +5,7 @@
  
-     machine_halt();
+ #include <public/xen.h>
+ #include <xen/bug.h>
++#include <xen/const.h>
+ #include <xen/mm-frame.h>
+ #include <xen/pdx.h>
+ #include <xen/types.h>
+@@ -28,7 +29,21 @@ static inline void *maddr_to_virt(paddr_t ma)
+     return NULL;
+ }
+ 
+-#define virt_to_maddr(va) ({ BUG_ON("unimplemented"); 0; })
++static inline unsigned long virt_to_maddr(unsigned long va)
++{
++    ASSERT(va >= (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE));
++    if ((va >= DIRECTMAP_VIRT_START) &&
++        (va < (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE)))
++        return directmapoff_to_maddr(va - DIRECTMAP_VIRT_START);
++
++    BUILD_BUG_ON(XEN_VIRT_SIZE != MB(2));
++    ASSERT((va >> (PAGETABLE_ORDER + PAGE_SHIFT)) ==
++           (_AC(XEN_VIRT_START, UL) >> (PAGETABLE_ORDER + PAGE_SHIFT)));
++
++    /* phys_offset = load_start - XEN_VIRT_START */
++    return phys_offset + va;
++}
++#define virt_to_maddr(va) virt_to_maddr((unsigned long)(va))
+ 
+ /* Convert between Xen-heap virtual addresses and machine frame numbers. */
+ #define __virt_to_mfn(va)  mfn_x(maddr_to_mfn(virt_to_maddr(va)))
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 4a628aef83..7a1919e07e 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -26,7 +26,7 @@ struct mmu_desc {
+     pte_t *pgtbl_base;
+ };
+ 
+-static unsigned long __ro_after_init phys_offset;
++unsigned long __ro_after_init phys_offset;
+ 
+ #define LOAD_TO_LINK(addr) ((unsigned long)(addr) - phys_offset)
+ #define LINK_TO_LOAD(addr) ((unsigned long)(addr) + phys_offset)
 -- 
 2.46.2
 
