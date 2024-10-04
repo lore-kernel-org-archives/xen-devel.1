@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D058CFA750
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 08:17:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.810087.1222737 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41281CFA752
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Oct 2024 08:17:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.810085.1222723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swdVG-00069h-24; Fri, 04 Oct 2024 08:17:34 +0000
+	id 1swdVE-0005qH-UV; Fri, 04 Oct 2024 08:17:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 810087.1222737; Fri, 04 Oct 2024 08:17:33 +0000
+Received: by outflank-mailman (output) from mailman id 810085.1222723; Fri, 04 Oct 2024 08:17:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swdVF-00066a-OS; Fri, 04 Oct 2024 08:17:33 +0000
-Received: by outflank-mailman (input) for mailman id 810087;
- Fri, 04 Oct 2024 08:17:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1swdVE-0005oB-KQ; Fri, 04 Oct 2024 08:17:32 +0000
+Received: by outflank-mailman (input) for mailman id 810085;
+ Fri, 04 Oct 2024 08:17:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=njpt=RA=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swdVE-0005Kj-Ex
- for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 08:17:32 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 19a3ea8c-8229-11ef-99a2-01e77a169b0f;
- Fri, 04 Oct 2024 10:17:30 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a8d56155f51so200926166b.2
- for <xen-devel@lists.xenproject.org>; Fri, 04 Oct 2024 01:17:30 -0700 (PDT)
+ id 1swdVD-0005Vm-7m
+ for xen-devel@lists.xenproject.org; Fri, 04 Oct 2024 08:17:31 +0000
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [2a00:1450:4864:20::229])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 182a8205-8229-11ef-a0bb-8be0dac302b0;
+ Fri, 04 Oct 2024 10:17:28 +0200 (CEST)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2fad784e304so23629411fa.2
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Oct 2024 01:17:28 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99102858a4sm189829366b.49.2024.10.04.01.17.29
+ a640c23a62f3a-a99102858a4sm189829366b.49.2024.10.04.01.17.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 01:17:29 -0700 (PDT)
+ Fri, 04 Oct 2024 01:17:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,196 +47,604 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 19a3ea8c-8229-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 182a8205-8229-11ef-a0bb-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728029850; x=1728634650; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1728029847; x=1728634647; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=a/7R4MvznIwbKLMj3J7Q74kL2tb8WLc8B3HYmuuXkgk=;
-        b=Z7T4tMYh+yRRCjudQEu42UGNCv1BU5y3pKD0k31D4Me/jonF+SBC/kibOklTqfNiTW
-         A/RK0iF00uNcX8NoaIS8+pBSugdsGL40Plh59mFMB42kh11qtD+KMK9kc4TAOQxllp4d
-         RAjjZhbVTlpxb9LGM1OCB+yybVKxUiRDxNCJQ=
+        bh=pxANqrtnn+Jr20AColkGK04OoedxN3PRTLF8D5KxOTk=;
+        b=ciWD8DALsebQajqAEg8hxd0nG53uFnJCYirh5e38auBe9FQSeNawOv6Pb4hRTLkJXw
+         IrLMLwWUxSGPq7sVQVahntwMD9MxpudAuYIbBJfZDpzwnlxjtsmRvyxZXSzywEUee0Q3
+         rYaH43MdNpFx02FCWDpYNKsN0t/mXNZd1SR9I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728029850; x=1728634650;
+        d=1e100.net; s=20230601; t=1728029847; x=1728634647;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=a/7R4MvznIwbKLMj3J7Q74kL2tb8WLc8B3HYmuuXkgk=;
-        b=NUVQkvk+QcJAoZrpXELG5d37De03fMCXqL4U+hn5oluhDY/kKC2LUe/3EqOnyv4USX
-         0TgKABB1WHl46Fjt2UlFdoVFLfZyEcg3MrzQoJW+P8qYhIcFXPG0mPkZWkWe027+9VcT
-         JL4ehzUBJJUKRZPilrgsD8njkZNAokW2xcWpZ7Ak1Lon4hgJvEbqOtxqMGsmGDbXe1R7
-         F0aHsqf73/QczeVGU5SzIuXv0FFVTEnCPptoV5FfATG+0PuahEE55AftzOoRBZi7SFVb
-         gdI6stWBDUYdfDlmdRJNRjiU+7VPbmiMvXP1hZo77nAYfknPaiV/4B5s8XMEjfWSc+VW
-         0Gjg==
-X-Gm-Message-State: AOJu0Yz6v4ecVszgb/BS+fcVv7ihbxBabJSVmf3OclkcpFB2eqKEZrIx
-	7KWhu1/lLOmY29LuB4SoN3iNnw5EF1cd838BTSFhWIHobGkaB+LQC4AtgfzBzNEoYLbeUelkmXo
-	j
-X-Google-Smtp-Source: AGHT+IGnTBjpBHaSWeArps6sMhV+jxoDIvpHaLAw0apL0jcSb02ZF/wNbra7JfH19z5T2wtx+XMj4w==
-X-Received: by 2002:a17:907:2687:b0:a8d:fa3:bb24 with SMTP id a640c23a62f3a-a991bd1f7damr168155466b.23.1728029849801;
-        Fri, 04 Oct 2024 01:17:29 -0700 (PDT)
+        bh=pxANqrtnn+Jr20AColkGK04OoedxN3PRTLF8D5KxOTk=;
+        b=iW6cMVIXZpZKZPFYDO3CQG4Qb9AtkAoY7B0gRD2MAd9+R0TSsQ87azZyepoAFVYsI+
+         K4vogYiAKyELGWpqa2z4Cyb3LH9WnXMcAVpiCpK9T5/xoXxZNqVAp/6QcIV4nR5TG9AK
+         UlqCYRz38vAp46NWT87hhX8kLCSyXxxVk2mltfktoSi5ElM1EnXvHhHunBNfENWDz4kK
+         4sCRaC3ZSOd0DdBcTzZr05kUoSJfJl5EbGbOPmwvrJXOqUw4A58yHQFN4eV6V3OeaRgy
+         DueFFfhyAOMFkwujoZy3TUqVkyUPfE1CXi210LuLpuTuyZNrI82G1d87eUyUxD2B3ueg
+         I9Qw==
+X-Gm-Message-State: AOJu0YyvGYpZgMtjeS+qK7MelwoHQdPz7jIbzKXvJzi1c+fP7RUZS8Xy
+	Ff5MH6dB5gJt4neQ5RK5pkqGm9AolOq4/+xNATxUVuD4ljyqRi4lZs3IuxobvwHlGhO8Mqb0u6k
+	0
+X-Google-Smtp-Source: AGHT+IFTuTJa8dFDcCu0qANbNDY613R1eUcHlzI9sgDMr36tI6Fo+izBjlc5thFJCzDgCF9QwZoUxQ==
+X-Received: by 2002:a05:6512:104b:b0:530:aa3e:f3c with SMTP id 2adb3069b0e04-539ab87476dmr1074034e87.14.1728029847268;
+        Fri, 04 Oct 2024 01:17:27 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v3 06/19] xen: Update header guards - Device tree
-Date: Fri,  4 Oct 2024 09:17:00 +0100
-Message-Id: <20241004081713.749031-7-frediano.ziglio@cloud.com>
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v3 03/19] xen: Update header guards - ACPI
+Date: Fri,  4 Oct 2024 09:16:57 +0100
+Message-Id: <20241004081713.749031-4-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241004081713.749031-1-frediano.ziglio@cloud.com>
 References: <20241004081713.749031-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Updated headers related to device tree.
+Updated headers related to ACPI.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
- xen/common/libfdt/libfdt_internal.h | 6 +++---
- xen/include/xen/bootfdt.h           | 6 +++---
- xen/include/xen/device_tree.h       | 4 ++--
- xen/include/xen/libfdt/fdt.h        | 6 +++---
- xen/include/xen/libfdt/libfdt-xen.h | 6 +++---
- xen/include/xen/libfdt/libfdt.h     | 6 +++---
- xen/include/xen/libfdt/libfdt_env.h | 6 +++---
- 7 files changed, 20 insertions(+), 20 deletions(-)
+ xen/drivers/acpi/apei/apei-internal.h     | 4 ++--
+ xen/include/acpi/acconfig.h               | 6 +++---
+ xen/include/acpi/acexcep.h                | 6 +++---
+ xen/include/acpi/acglobal.h               | 6 +++---
+ xen/include/acpi/achware.h                | 6 +++---
+ xen/include/acpi/aclocal.h                | 6 +++---
+ xen/include/acpi/acmacros.h               | 4 ++--
+ xen/include/acpi/acnames.h                | 6 +++---
+ xen/include/acpi/acoutput.h               | 6 +++---
+ xen/include/acpi/acpi.h                   | 6 +++---
+ xen/include/acpi/acpiosxf.h               | 6 +++---
+ xen/include/acpi/acpixf.h                 | 6 +++---
+ xen/include/acpi/actables.h               | 6 +++---
+ xen/include/acpi/actbl.h                  | 6 +++---
+ xen/include/acpi/actbl1.h                 | 6 +++---
+ xen/include/acpi/actbl2.h                 | 6 +++---
+ xen/include/acpi/actbl3.h                 | 6 +++---
+ xen/include/acpi/actypes.h                | 6 +++---
+ xen/include/acpi/acutils.h                | 6 +++---
+ xen/include/acpi/apei.h                   | 4 ++--
+ xen/include/acpi/cpufreq/cpufreq.h        | 6 +++---
+ xen/include/acpi/cpufreq/processor_perf.h | 6 +++---
+ xen/include/acpi/pdc_intel.h              | 6 +++---
+ xen/include/acpi/platform/acenv.h         | 6 +++---
+ xen/include/acpi/platform/acgcc.h         | 6 +++---
+ xen/include/acpi/platform/aclinux.h       | 6 +++---
+ 26 files changed, 75 insertions(+), 75 deletions(-)
 
-diff --git a/xen/common/libfdt/libfdt_internal.h b/xen/common/libfdt/libfdt_internal.h
-index 16bda1906a..ba4d6527b0 100644
---- a/xen/common/libfdt/libfdt_internal.h
-+++ b/xen/common/libfdt/libfdt_internal.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
--#ifndef LIBFDT_INTERNAL_H
--#define LIBFDT_INTERNAL_H
-+#ifndef COMMON__LIBFDT__LIBFDT_INTERNAL_H
-+#define COMMON__LIBFDT__LIBFDT_INTERNAL_H
+diff --git a/xen/drivers/acpi/apei/apei-internal.h b/xen/drivers/acpi/apei/apei-internal.h
+index 90233077b7..8a5ed3fc33 100644
+--- a/xen/drivers/acpi/apei/apei-internal.h
++++ b/xen/drivers/acpi/apei/apei-internal.h
+@@ -3,8 +3,8 @@
+  * definations.
+  */
+ 
+-#ifndef APEI_INTERNAL_H
+-#define APEI_INTERNAL_H
++#ifndef DRIVERS__ACPI__APEI__APEI_INTERNAL_H
++#define DRIVERS__ACPI__APEI__APEI_INTERNAL_H
+ 
+ struct apei_exec_context;
+ 
+diff --git a/xen/include/acpi/acconfig.h b/xen/include/acpi/acconfig.h
+index 422f29c06c..f5b5192c46 100644
+--- a/xen/include/acpi/acconfig.h
++++ b/xen/include/acpi/acconfig.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef _ACCONFIG_H
+-#define _ACCONFIG_H
++#ifndef ACPI__ACCONFIG_H
++#define ACPI__ACCONFIG_H
+ 
+ /******************************************************************************
+  *
+@@ -203,4 +203,4 @@
+ #define ACPI_DEBUGGER_COMMAND_PROMPT    '-'
+ #define ACPI_DEBUGGER_EXECUTE_PROMPT    '%'
+ 
+-#endif				/* _ACCONFIG_H */
++#endif				/* ACPI__ACCONFIG_H */
+diff --git a/xen/include/acpi/acexcep.h b/xen/include/acpi/acexcep.h
+index 5d9f4841d2..455c4fe982 100644
+--- a/xen/include/acpi/acexcep.h
++++ b/xen/include/acpi/acexcep.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACEXCEP_H__
+-#define __ACEXCEP_H__
++#ifndef ACPI__ACEXCEP_H
++#define ACPI__ACEXCEP_H
+ 
  /*
-  * libfdt - Flat Device Tree manipulation
-  * Copyright (C) 2006 David Gibson, IBM Corporation.
-@@ -189,4 +189,4 @@ static inline bool can_assume_(int mask)
- /** helper macros for checking assumptions */
- #define can_assume(_assume)	can_assume_(ASSUME_ ## _assume)
+  * Exceptions returned by external ACPI interfaces
+@@ -300,4 +300,4 @@ char const *__initdata acpi_gbl_exception_names_ctrl[] = {
  
--#endif /* LIBFDT_INTERNAL_H */
-+#endif /* COMMON__LIBFDT__LIBFDT_INTERNAL_H */
-diff --git a/xen/include/xen/bootfdt.h b/xen/include/xen/bootfdt.h
-index 16fa05f38f..7cb01dbb1b 100644
---- a/xen/include/xen/bootfdt.h
-+++ b/xen/include/xen/bootfdt.h
-@@ -1,5 +1,5 @@
--#ifndef XEN_BOOTFDT_H
--#define XEN_BOOTFDT_H
-+#ifndef XEN__BOOTFDT_H
-+#define XEN__BOOTFDT_H
+ #endif				/* ACPI GLOBALS */
  
- #include <xen/types.h>
- #include <xen/kernel.h>
-@@ -206,4 +206,4 @@ static inline struct shmem_membank_extra *bootinfo_get_shmem_extra(void)
- }
- #endif
+-#endif				/* __ACEXCEP_H__ */
++#endif				/* ACPI__ACEXCEP_H */
+diff --git a/xen/include/acpi/acglobal.h b/xen/include/acpi/acglobal.h
+index c2a96097b9..96fb14d793 100644
+--- a/xen/include/acpi/acglobal.h
++++ b/xen/include/acpi/acglobal.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
  
--#endif /* XEN_BOOTFDT_H */
-+#endif /* XEN__BOOTFDT_H */
-diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index e6287305a7..5c4a419781 100644
---- a/xen/include/xen/device_tree.h
-+++ b/xen/include/xen/device_tree.h
-@@ -7,8 +7,8 @@
-  * it under the terms of the GNU General Public License version 2 as
+-#ifndef __ACGLOBAL_H__
+-#define __ACGLOBAL_H__
++#ifndef ACPI__ACGLOBAL_H
++#define ACPI__ACGLOBAL_H
+ 
+ /*
+  * Ensure that the globals are actually defined and initialized only once.
+@@ -110,4 +110,4 @@ extern char const *acpi_gbl_exception_names_ctrl[];
+ extern struct acpi_bit_register_info
+     acpi_gbl_bit_register_info[ACPI_NUM_BITREG];
+ 
+-#endif				/* __ACGLOBAL_H__ */
++#endif				/* ACPI__ACGLOBAL_H */
+diff --git a/xen/include/acpi/achware.h b/xen/include/acpi/achware.h
+index 7433fb47ac..6257ae4cd4 100644
+--- a/xen/include/acpi/achware.h
++++ b/xen/include/acpi/achware.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACHWARE_H__
+-#define __ACHWARE_H__
++#ifndef ACPI__ACHWARE_H
++#define ACPI__ACHWARE_H
+ 
+ /*
+  * hwregs - ACPI Register I/O
+@@ -59,4 +59,4 @@ acpi_hw_low_level_read(u32 width,
+ acpi_status
+ acpi_hw_low_level_write(u32 width, u32 value, struct acpi_generic_address *reg);
+ 
+-#endif				/* __ACHWARE_H__ */
++#endif				/* ACPI__ACHWARE_H */
+diff --git a/xen/include/acpi/aclocal.h b/xen/include/acpi/aclocal.h
+index 16e234f0de..38369db497 100644
+--- a/xen/include/acpi/aclocal.h
++++ b/xen/include/acpi/aclocal.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACLOCAL_H__
+-#define __ACLOCAL_H__
++#ifndef ACPI__ACLOCAL_H
++#define ACPI__ACLOCAL_H
+ 
+ /* acpisrc:struct_defs -- for acpisrc conversion */
+ 
+@@ -204,4 +204,4 @@ struct acpi_bit_register_info {
+ #define ACPI_ADDRESS_TYPE_IO_RANGE              1
+ #define ACPI_ADDRESS_TYPE_BUS_NUMBER_RANGE      2
+ 
+-#endif				/* __ACLOCAL_H__ */
++#endif				/* ACPI__ACLOCAL_H */
+diff --git a/xen/include/acpi/acmacros.h b/xen/include/acpi/acmacros.h
+index 86c503c20f..0f60a07594 100644
+--- a/xen/include/acpi/acmacros.h
++++ b/xen/include/acpi/acmacros.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACMACROS_H__
+-#define __ACMACROS_H__
++#ifndef ACPI__ACMACROS_H
++#define ACPI__ACMACROS_H
+ 
+ /*
+  * Data manipulation macros
+diff --git a/xen/include/acpi/acnames.h b/xen/include/acpi/acnames.h
+index 34bfae8a05..f85d3341fb 100644
+--- a/xen/include/acpi/acnames.h
++++ b/xen/include/acpi/acnames.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACNAMES_H__
+-#define __ACNAMES_H__
++#ifndef ACPI__ACNAMES_H
++#define ACPI__ACNAMES_H
+ 
+ /* Method names - these methods can appear anywhere in the namespace */
+ 
+@@ -80,4 +80,4 @@
+ #define ACPI_NS_ROOT_PATH       "\\"
+ #define ACPI_NS_SYSTEM_BUS      "_SB_"
+ 
+-#endif				/* __ACNAMES_H__  */
++#endif				/* ACPI__ACNAMES_H  */
+diff --git a/xen/include/acpi/acoutput.h b/xen/include/acpi/acoutput.h
+index c090a8b0bc..7a0283894b 100644
+--- a/xen/include/acpi/acoutput.h
++++ b/xen/include/acpi/acoutput.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACOUTPUT_H__
+-#define __ACOUTPUT_H__
++#ifndef ACPI__ACOUTPUT_H
++#define ACPI__ACOUTPUT_H
+ 
+ /*
+  * Debug levels and component IDs.  These are used to control the
+@@ -182,4 +182,4 @@
+ #define ACPI_NORMAL_DEFAULT         (ACPI_LV_INIT | ACPI_LV_WARN | ACPI_LV_ERROR)
+ #define ACPI_DEBUG_ALL              (ACPI_LV_AML_DISASSEMBLE | ACPI_LV_ALL_EXCEPTIONS | ACPI_LV_ALL)
+ 
+-#endif				/* __ACOUTPUT_H__ */
++#endif				/* ACPI__ACOUTPUT_H */
+diff --git a/xen/include/acpi/acpi.h b/xen/include/acpi/acpi.h
+index c852701ff2..f922fd8556 100644
+--- a/xen/include/acpi/acpi.h
++++ b/xen/include/acpi/acpi.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACPI_H__
+-#define __ACPI_H__
++#ifndef ACPI__ACPI_H
++#define ACPI__ACPI_H
+ 
+ #define PREFIX			"ACPI: "
+ 
+@@ -66,4 +66,4 @@
+ #include "achware.h"		/* Hardware defines and interfaces */
+ #include "acutils.h"		/* Utility interfaces */
+ 
+-#endif				/* __ACPI_H__ */
++#endif				/* ACPI__ACPI_H */
+diff --git a/xen/include/acpi/acpiosxf.h b/xen/include/acpi/acpiosxf.h
+index de83ea38c4..6264a727d3 100644
+--- a/xen/include/acpi/acpiosxf.h
++++ b/xen/include/acpi/acpiosxf.h
+@@ -44,8 +44,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACPIOSXF_H__
+-#define __ACPIOSXF_H__
++#ifndef ACPI__ACPIOSXF_H
++#define ACPI__ACPIOSXF_H
+ 
+ #include "platform/acenv.h"
+ #include "actypes.h"
+@@ -86,4 +86,4 @@ void ACPI_INTERNAL_VAR_XFACE acpi_os_printf(const char *format, ...);
+ 
+ void acpi_os_vprintf(const char *format, va_list args);
+ 
+-#endif				/* __ACPIOSXF_H__ */
++#endif				/* ACPI__ACPIOSXF_H */
+diff --git a/xen/include/acpi/acpixf.h b/xen/include/acpi/acpixf.h
+index 8b70154b8f..64373a3472 100644
+--- a/xen/include/acpi/acpixf.h
++++ b/xen/include/acpi/acpixf.h
+@@ -42,8 +42,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACXFACE_H__
+-#define __ACXFACE_H__
++#ifndef ACPI__ACPIXF_H
++#define ACPI__ACPIXF_H
+ 
+ #include "actypes.h"
+ #include "actbl.h"
+@@ -116,4 +116,4 @@ acpi_status acpi_leave_sleep_state_prep(u8 sleep_state);
+ 
+ acpi_status acpi_leave_sleep_state(u8 sleep_state);
+ 
+-#endif				/* __ACXFACE_H__ */
++#endif				/* ACPI__ACPIXF_H */
+diff --git a/xen/include/acpi/actables.h b/xen/include/acpi/actables.h
+index 527e1c9f9b..45a1e0c634 100644
+--- a/xen/include/acpi/actables.h
++++ b/xen/include/acpi/actables.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACTABLES_H__
+-#define __ACTABLES_H__
++#ifndef ACPI__ACTABLES_H
++#define ACPI__ACTABLES_H
+ 
+ acpi_status acpi_allocate_root_table(u32 initial_table_count);
+ 
+@@ -104,4 +104,4 @@ acpi_tb_install_table(acpi_physical_address address,
+ acpi_status
+ acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags);
+ 
+-#endif				/* __ACTABLES_H__ */
++#endif				/* ACPI__ACTABLES_H */
+diff --git a/xen/include/acpi/actbl.h b/xen/include/acpi/actbl.h
+index 3079176992..b022403359 100644
+--- a/xen/include/acpi/actbl.h
++++ b/xen/include/acpi/actbl.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACTBL_H__
+-#define __ACTBL_H__
++#ifndef ACPI__ACTBL_H
++#define ACPI__ACTBL_H
+ 
+ /*******************************************************************************
+  *
+@@ -358,4 +358,4 @@ enum acpi_prefered_pm_profiles {
+ #define ACPI_FADT_V5_SIZE       (u32) (ACPI_FADT_OFFSET (hypervisor_id))
+ #define ACPI_FADT_V6_SIZE       (u32) (sizeof (struct acpi_table_fadt))
+ 
+-#endif				/* __ACTBL_H__ */
++#endif				/* ACPI__ACTBL_H */
+diff --git a/xen/include/acpi/actbl1.h b/xen/include/acpi/actbl1.h
+index 923641fc9e..1b333399ca 100644
+--- a/xen/include/acpi/actbl1.h
++++ b/xen/include/acpi/actbl1.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACTBL1_H__
+-#define __ACTBL1_H__
++#ifndef ACPI__ACTBL1_H
++#define ACPI__ACTBL1_H
+ 
+ /*******************************************************************************
+  *
+@@ -1012,4 +1012,4 @@ struct acpi_srat_x2apic_cpu_affinity {
+ 
+ #pragma pack()
+ 
+-#endif				/* __ACTBL1_H__ */
++#endif				/* ACPI__ACTBL1_H */
+diff --git a/xen/include/acpi/actbl2.h b/xen/include/acpi/actbl2.h
+index ee96e990d6..7eb4e51b72 100644
+--- a/xen/include/acpi/actbl2.h
++++ b/xen/include/acpi/actbl2.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACTBL2_H__
+-#define __ACTBL2_H__
++#ifndef ACPI__ACTBL2_H
++#define ACPI__ACTBL2_H
+ 
+ /*******************************************************************************
+  *
+@@ -1268,4 +1268,4 @@ struct acpi_table_wdrt {
+ 
+ #pragma pack()
+ 
+-#endif				/* __ACTBL2_H__ */
++#endif				/* ACPI__ACTBL2_H */
+diff --git a/xen/include/acpi/actbl3.h b/xen/include/acpi/actbl3.h
+index 6858d3e60f..2407455102 100644
+--- a/xen/include/acpi/actbl3.h
++++ b/xen/include/acpi/actbl3.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACTBL3_H__
+-#define __ACTBL3_H__
++#ifndef ACPI__ACTBL3_H
++#define ACPI__ACTBL3_H
+ 
+ /*******************************************************************************
+  *
+@@ -639,4 +639,4 @@ struct acpi_table_stao {
+ 
+ #pragma pack()
+ 
+-#endif				/* __ACTBL3_H__ */
++#endif				/* ACPI__ACTBL3_H */
+diff --git a/xen/include/acpi/actypes.h b/xen/include/acpi/actypes.h
+index 49e0ab9bb4..17464f5a65 100644
+--- a/xen/include/acpi/actypes.h
++++ b/xen/include/acpi/actypes.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACTYPES_H__
+-#define __ACTYPES_H__
++#ifndef ACPI__ACTYPES_H
++#define ACPI__ACTYPES_H
+ 
+ /* acpisrc:struct_defs -- for acpisrc conversion */
+ 
+@@ -724,4 +724,4 @@ struct acpi_buffer {
+ #define ACPI_PRODUCER                   (u8) 0x00
+ #define ACPI_CONSUMER                   (u8) 0x01
+ 
+-#endif				/* __ACTYPES_H__ */
++#endif				/* ACPI__ACTYPES_H */
+diff --git a/xen/include/acpi/acutils.h b/xen/include/acpi/acutils.h
+index ac54adaa8c..7b0a8c677d 100644
+--- a/xen/include/acpi/acutils.h
++++ b/xen/include/acpi/acutils.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef _ACUTILS_H
+-#define _ACUTILS_H
++#ifndef ACPI__ACUTILS_H
++#define ACPI__ACUTILS_H
+ 
+ /* Types for Resource descriptor entries */
+ 
+@@ -196,4 +196,4 @@ acpi_ut_info(const char *module_name,
+  */
+ const char *acpi_ut_validate_exception(acpi_status status);
+ 
+-#endif				/* _ACUTILS_H */
++#endif				/* ACPI__ACUTILS_H */
+diff --git a/xen/include/acpi/apei.h b/xen/include/acpi/apei.h
+index 495819e362..6aed603745 100644
+--- a/xen/include/acpi/apei.h
++++ b/xen/include/acpi/apei.h
+@@ -2,8 +2,8 @@
+  * apei.h - ACPI Platform Error Interface
+  */
+ 
+-#ifndef ACPI_APEI_H
+-#define ACPI_APEI_H
++#ifndef ACPI__APEI_H
++#define ACPI__APEI_H
+ 
+ #include <xen/acpi.h>
+ #include <xen/cper.h>
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index 3f1b05a02e..6764d54f8f 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -11,8 +11,8 @@
   * published by the Free Software Foundation.
   */
--#ifndef __XEN_DEVICE_TREE_H__
--#define __XEN_DEVICE_TREE_H__
-+#ifndef XEN__DEVICE_TREE_H
-+#define XEN__DEVICE_TREE_H
  
- #include <asm/byteorder.h>
- #include <asm/device.h>
-diff --git a/xen/include/xen/libfdt/fdt.h b/xen/include/xen/libfdt/fdt.h
-index f2e68807f2..6a53d4705b 100644
---- a/xen/include/xen/libfdt/fdt.h
-+++ b/xen/include/xen/libfdt/fdt.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
--#ifndef FDT_H
--#define FDT_H
-+#ifndef XEN__LIBFDT__FDT_H
-+#define XEN__LIBFDT__FDT_H
- /*
-  * libfdt - Flat Device Tree manipulation
-  * Copyright (C) 2006 David Gibson, IBM Corporation.
-@@ -63,4 +63,4 @@ struct fdt_property {
- #define FDT_V16_SIZE	FDT_V3_SIZE
- #define FDT_V17_SIZE	(FDT_V16_SIZE + sizeof(fdt32_t))
+-#ifndef __XEN_CPUFREQ_PM_H__
+-#define __XEN_CPUFREQ_PM_H__
++#ifndef ACPI__CPUFREQ__CPUFREQ_H
++#define ACPI__CPUFREQ__CPUFREQ_H
  
--#endif /* FDT_H */
-+#endif /* XEN__LIBFDT__FDT_H */
-diff --git a/xen/include/xen/libfdt/libfdt-xen.h b/xen/include/xen/libfdt/libfdt-xen.h
-index a5340bc9f4..7cab9cef66 100644
---- a/xen/include/xen/libfdt/libfdt-xen.h
-+++ b/xen/include/xen/libfdt/libfdt-xen.h
-@@ -8,8 +8,8 @@
-  * Copyright (C) 2023, Advanced Micro Devices, Inc. All Rights Reserved.
+ #include <xen/types.h>
+ #include <xen/list.h>
+@@ -267,4 +267,4 @@ int set_hwp_para(struct cpufreq_policy *policy,
+ 
+ int acpi_cpufreq_register(void);
+ 
+-#endif /* __XEN_CPUFREQ_PM_H__ */
++#endif /* ACPI__CPUFREQ__CPUFREQ_H */
+diff --git a/xen/include/acpi/cpufreq/processor_perf.h b/xen/include/acpi/cpufreq/processor_perf.h
+index 301104e16f..2088e5ea67 100644
+--- a/xen/include/acpi/cpufreq/processor_perf.h
++++ b/xen/include/acpi/cpufreq/processor_perf.h
+@@ -1,5 +1,5 @@
+-#ifndef __XEN_PROCESSOR_PM_H__
+-#define __XEN_PROCESSOR_PM_H__
++#ifndef ACPI__CPUFREQ__PROCESSOR_PERF_H
++#define ACPI__CPUFREQ__PROCESSOR_PERF_H
+ 
+ #include <public/platform.h>
+ #include <public/sysctl.h>
+@@ -59,4 +59,4 @@ struct pm_px {
+ DECLARE_PER_CPU(struct pm_px *, cpufreq_statistic_data);
+ 
+ int cpufreq_cpu_init(unsigned int cpu);
+-#endif /* __XEN_PROCESSOR_PM_H__ */
++#endif /* ACPI__CPUFREQ__PROCESSOR_PERF_H */
+diff --git a/xen/include/acpi/pdc_intel.h b/xen/include/acpi/pdc_intel.h
+index abaa098b51..a6510b14fe 100644
+--- a/xen/include/acpi/pdc_intel.h
++++ b/xen/include/acpi/pdc_intel.h
+@@ -1,8 +1,8 @@
+ 
+ /* _PDC bit definition for Intel processors */
+ 
+-#ifndef __PDC_INTEL_H__
+-#define __PDC_INTEL_H__
++#ifndef ACPI__PDC_INTEL_H
++#define ACPI__PDC_INTEL_H
+ 
+ #define ACPI_PDC_REVISION_ID		1
+ 
+@@ -48,4 +48,4 @@
+ #define ACPI_PDC_T_MASK			(ACPI_PDC_T_FFH | \
+ 					 ACPI_PDC_SMP_T_SWCOORD)
+ 
+-#endif				/* __PDC_INTEL_H__ */
++#endif				/* ACPI__PDC_INTEL_H */
+diff --git a/xen/include/acpi/platform/acenv.h b/xen/include/acpi/platform/acenv.h
+index 83cdb77d75..33c253c094 100644
+--- a/xen/include/acpi/platform/acenv.h
++++ b/xen/include/acpi/platform/acenv.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
   */
  
--#ifndef LIBFDT_XEN_H
--#define LIBFDT_XEN_H
-+#ifndef XEN__LIBFDT__LIBFDT_XEN_H
-+#define XEN__LIBFDT__LIBFDT_XEN_H
- 
- #include <xen/libfdt/libfdt.h>
- 
-@@ -43,7 +43,7 @@ static inline int fdt_get_mem_rsv_paddr(const void *fdt, int n,
-     return ret;
- }
- 
--#endif /* LIBFDT_XEN_H */
-+#endif /* XEN__LIBFDT__LIBFDT_XEN_H */
+-#ifndef __ACENV_H__
+-#define __ACENV_H__
++#ifndef ACPI__PLATFORM__ACENV_H
++#define ACPI__PLATFORM__ACENV_H
  
  /*
-  * Local variables:
-diff --git a/xen/include/xen/libfdt/libfdt.h b/xen/include/xen/libfdt/libfdt.h
-index fabddbee8c..9ed4ee1705 100644
---- a/xen/include/xen/libfdt/libfdt.h
-+++ b/xen/include/xen/libfdt/libfdt.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
--#ifndef LIBFDT_H
--#define LIBFDT_H
-+#ifndef XEN__LIBFDT__LIBFDT_H
-+#define XEN__LIBFDT__LIBFDT_H
- /*
-  * libfdt - Flat Device Tree manipulation
-  * Copyright (C) 2006 David Gibson, IBM Corporation.
-@@ -2137,4 +2137,4 @@ const char *fdt_strerror(int errval);
- }
- #endif
+  * Configuration for ACPI tools and utilities
+@@ -362,4 +362,4 @@ typedef char *va_list;
+  * headers.
+  *
+  *****************************************************************************/
+-#endif				/* __ACENV_H__ */
++#endif				/* ACPI__PLATFORM__ACENV_H */
+diff --git a/xen/include/acpi/platform/acgcc.h b/xen/include/acpi/platform/acgcc.h
+index b355e98eeb..6b32e4eedd 100644
+--- a/xen/include/acpi/platform/acgcc.h
++++ b/xen/include/acpi/platform/acgcc.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
  
--#endif /* LIBFDT_H */
-+#endif /* XEN__LIBFDT__LIBFDT_H */
-diff --git a/xen/include/xen/libfdt/libfdt_env.h b/xen/include/xen/libfdt/libfdt_env.h
-index 8368787391..3b0d121a78 100644
---- a/xen/include/xen/libfdt/libfdt_env.h
-+++ b/xen/include/xen/libfdt/libfdt_env.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
--#ifndef LIBFDT_ENV_H
--#define LIBFDT_ENV_H
-+#ifndef XEN__LIBFDT__LIBFDT_ENV_H
-+#define XEN__LIBFDT__LIBFDT_ENV_H
- /*
-  * libfdt - Flat Device Tree manipulation
-  * Copyright (C) 2006 David Gibson, IBM Corporation.
-@@ -93,4 +93,4 @@ static inline size_t fdt_strnlen(const char *string, size_t max_count)
+-#ifndef __ACGCC_H__
+-#define __ACGCC_H__
++#ifndef ACPI__PLATFORM__ACGCC_H
++#define ACPI__PLATFORM__ACGCC_H
  
- #endif /* __APPLE__ */
+ /* Function name is used for debug output. Non-ANSI, compiler-dependent */
  
--#endif /* LIBFDT_ENV_H */
-+#endif /* XEN__LIBFDT__LIBFDT_ENV_H */
+@@ -62,4 +62,4 @@
+  */
+ #define ACPI_UNUSED_VAR __attribute__ ((unused))
+ 
+-#endif				/* __ACGCC_H__ */
++#endif				/* ACPI__PLATFORM__ACGCC_H */
+diff --git a/xen/include/acpi/platform/aclinux.h b/xen/include/acpi/platform/aclinux.h
+index a66c2e6d1d..32a853f1bc 100644
+--- a/xen/include/acpi/platform/aclinux.h
++++ b/xen/include/acpi/platform/aclinux.h
+@@ -41,8 +41,8 @@
+  * POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
+-#ifndef __ACLINUX_H__
+-#define __ACLINUX_H__
++#ifndef ACPI__PLATFORM__ACLINUX_H
++#define ACPI__PLATFORM__ACLINUX_H
+ 
+ #define ACPI_USE_SYSTEM_CLIBRARY
+ #define ACPI_USE_DO_WHILE_0
+@@ -82,4 +82,4 @@ void acpi_os_free_memory(void *ptr);
+ #define ACPI_ALLOCATE_ZEROED(a)	acpi_os_zalloc_memory(a)
+ #define ACPI_FREE(a)		acpi_os_free_memory(a)
+ 
+-#endif				/* __ACLINUX_H__ */
++#endif				/* ACPI__PLATFORM__ACLINUX_H */
 -- 
 2.34.1
 
