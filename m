@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8740FCF8873
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97692CF8874
 	for <xen-devel@archiver.kernel.org>; Sat,  5 Oct 2024 08:03:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.810793.1223531 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.810796.1223561 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swzkY-0004jl-9x; Sat, 05 Oct 2024 08:02:50 +0000
+	id 1swzkb-0005Qa-3a; Sat, 05 Oct 2024 08:02:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 810793.1223531; Sat, 05 Oct 2024 08:02:50 +0000
+Received: by outflank-mailman (output) from mailman id 810796.1223561; Sat, 05 Oct 2024 08:02:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1swzkY-0004jb-6w; Sat, 05 Oct 2024 08:02:50 +0000
-Received: by outflank-mailman (input) for mailman id 810793;
- Sat, 05 Oct 2024 08:02:48 +0000
+	id 1swzkb-0005QT-0L; Sat, 05 Oct 2024 08:02:53 +0000
+Received: by outflank-mailman (input) for mailman id 810796;
+ Sat, 05 Oct 2024 08:02:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+Cfp=RB=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1swzkW-0004jU-5l
- for xen-devel@lists.xenproject.org; Sat, 05 Oct 2024 08:02:48 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
+ id 1swzkZ-0004jU-9N
+ for xen-devel@lists.xenproject.org; Sat, 05 Oct 2024 08:02:51 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 34d09608-82f0-11ef-99a2-01e77a169b0f;
- Sat, 05 Oct 2024 10:02:46 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a93c1cc74fdso484341366b.3
- for <xen-devel@lists.xenproject.org>; Sat, 05 Oct 2024 01:02:46 -0700 (PDT)
+ id 36dd114d-82f0-11ef-99a2-01e77a169b0f;
+ Sat, 05 Oct 2024 10:02:49 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a98f6f777f1so370744266b.2
+ for <xen-devel@lists.xenproject.org>; Sat, 05 Oct 2024 01:02:49 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9933db9c5bsm84152366b.162.2024.10.05.01.02.44
+ a640c23a62f3a-a9933db9c5bsm84152366b.162.2024.10.05.01.02.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Oct 2024 01:02:44 -0700 (PDT)
+ Sat, 05 Oct 2024 01:02:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,104 +47,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 34d09608-82f0-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 36dd114d-82f0-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728115365; x=1728720165; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=DSOSkFDzcZVeK0xanaV/TWfr6wgMeDJVU7sjkkJBLCI=;
-        b=RhpQRZQ6aVKO2lvMav6OZuSzKiKxvW5SG5F5bTcJ0CWFkh40HUr96iCdGVTPA3Z0PO
-         r92HngNbcc7XTbQu2V5M9OwvMrFLx5kSl0VpfzNkViSb3FSz+xRj6TrTBVTOhvmgn114
-         Bmy5elgq/1BMP5qP3wDgtStgDhshQFc4Dh6jk=
+        d=cloud.com; s=cloud; t=1728115369; x=1728720169; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AkgUENXQdE4QNGEH0p3QPPSrj4g3gLBF4EM9E5qv2+o=;
+        b=Veiw+osfA1vrHrn5cQHIbvkCqiXUGZgJ2lBqpFrIU2J7wmhZwLwb023od9yO9EmoQ2
+         BX74MinEZ/pL00pBn8hFNWghjO5DuKchsGj5wiHvXimfT2PzZ4VNNDWRlYjnXOE9+RwJ
+         CgziziehXIs4KtMZo1o3r/PhkmiLSyDTM+6xg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728115365; x=1728720165;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=DSOSkFDzcZVeK0xanaV/TWfr6wgMeDJVU7sjkkJBLCI=;
-        b=nYynnyDBtXI7pmy9+ZYjozheXwynZrhzeueVytK389zE6LAmSr6+m4drifsus+I+19
-         ft96HjUXCRBqddgTah19beg6aa/t4vFUDw4tbQEWSAwXEI2Ust4IGBA7nS9uYrjbZn4v
-         gOgaudFvIVqZrJ8OpeG9wi1sDogXySZw/988m+juuyezyVaBptbOD/UDqCttuvAb6h4E
-         cXBLJZxBM05wIuzhlbZAN7dyLbGe38diDJrdUNBRReH6dX9HuzKj1T8BwoTNWT5gF3r3
-         8qjWP9ACCHBAaVfciBhB3qxohJ+JDTs8cHRB1cN4lZp9xPwRnr7KAH513wIer772lPrv
-         TSCQ==
-X-Gm-Message-State: AOJu0YygxbqgmGMXPokz/iTnYvIE0BEy6nSwm3kEvgNstRgthDyhZDtp
-	B+tP85wkdQLohIoQtyvD931GwVuYB0PeoOPOcixz++4vV5vYDCu7Do5rqZf6TBHpLr1Zc0+sxe2
-	b
-X-Google-Smtp-Source: AGHT+IFBF06wYetgIb/JTVH0ZkrEvUcoroa1qpDzGu8T94L2bnAAyBhe6/C9X2lZjMSx0x5PMUFYgg==
-X-Received: by 2002:a17:907:9281:b0:a90:c411:24e0 with SMTP id a640c23a62f3a-a991bd0bbf8mr528524066b.23.1728115365220;
-        Sat, 05 Oct 2024 01:02:45 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1728115369; x=1728720169;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=AkgUENXQdE4QNGEH0p3QPPSrj4g3gLBF4EM9E5qv2+o=;
+        b=wXVw9VqDTArLeUB5pmKgMpP1YciwpFgTpb3f/GK3pcmI/uo4iJutatlUEqIQizPgEs
+         sRf4ckdBNYmGXw9+DN5LQkD2tYhiMOyyRkKjY13Mz/U6OOcfHqZV7oBKBStglLHXWZzx
+         GOUq0tzdUyHi8jHtngxY1M0Qw/7n8oQfUCV15NIgdIHkQ4Gxl5rCY+qvk9Z7JXVe/wH0
+         PcVFjCqmJVPAhwCqa1ig+CYvrj/iHf+8vi4zPIWGaJeSGuOcI4LPv+8WSgDsaNy71URr
+         XPDDMR3ePW6pNeGmR0xx3I0gKFU6zhyVJuOfkb2HfiUjEZUM0HQYRHrkxsYB8L607E5D
+         GSeA==
+X-Gm-Message-State: AOJu0YyZZDUWj5CQxeGUDQ0ZudWmuqcN/mkBjSod750Q9LN/TEWno/0r
+	tGbPsLSAfQeKtyq++YwU6OPJhwh893mX/cFedkGJ4efrJ/22hjTO5/P+jiUJYwVyPLLeXbl84KV
+	I
+X-Google-Smtp-Source: AGHT+IGD10/+6BTK/Sv5XM2Jfi9l3GfoJjMZkSYzWZkmpgTC0u0ELD7e4hZqsapGvK8h5xPPOjmnUg==
+X-Received: by 2002:a17:907:9492:b0:a8d:2ec3:94f4 with SMTP id a640c23a62f3a-a991c07445amr555138766b.54.1728115368882;
+        Sat, 05 Oct 2024 01:02:48 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH 0/3] Reuse 32 bit C code more safely
-Date: Sat,  5 Oct 2024 09:02:30 +0100
-Message-Id: <20241005080233.1248850-1-frediano.ziglio@cloud.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 3/3] x86/boot: Use boot_vid_info and trampoline_phys variables directly from C code
+Date: Sat,  5 Oct 2024 09:02:33 +0100
+Message-Id: <20241005080233.1248850-4-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241005080233.1248850-1-frediano.ziglio@cloud.com>
+References: <20241005080233.1248850-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-First version as no RFC.
+No more need to pass from assembly code.
 
-This series attempt to:
-- use more C code, that is replace some assembly code with C;
-- avoid some code duplication between C and assembly;
-- prevent some issues having relocations in C code.
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+---
+ xen/arch/x86/boot/build32.lds.S |  1 +
+ xen/arch/x86/boot/head.S        | 14 +-------------
+ xen/arch/x86/boot/reloc.c       | 19 ++++++++++---------
+ 3 files changed, 12 insertions(+), 22 deletions(-)
 
-The idea is extending the current C to binary code conversion
-done for 32 bit C code called from head.S making sure relocations
-are safe and allowing external symbols usage from C code.
-
-Note that, as an addition, scripts generating code check for no
-data to allow code and data separation.
-
-More details of the implementation are in commit message 1/3,
-which is the largest patch.
-Patch 2/3 reuses code to relocate the trampoline between 32 and 64 bit.
-Patch 3/3 moves some code from assembly to C.
-
-Other RFC commits were excluded, I didn't manage to entangle the issues
-sharing headers between 32 and 64 bits.
-Since RFC code was more tested, also with CI and some incompatibility
-were fixed. On that it's weird that we need Python 3.8 for Qemu but we
-still use Python 2 for Xen. Shouldn't we bump requirement to Python 3
-even for Xen?
-
-Code boot successfully using:
-- BIOS boot;
-- EFI boot with Grub2 and ELF file;
-- direct EFI boot without Grub.
-
-Code is currently based on "staging" branch, currently commit
-6b20755c24ccd69d2482b45dfb9193940cdc346e.
-
-Frediano Ziglio (3):
-  x86/boot: create a C bundle for 32 bit boot code and use it
-  x86/boot: Reuse code to relocate trampoline
-  x86/boot: Use boot_vid_info and trampoline_phys variables directly
-    from C code
-
- .gitignore                                    |   5 +-
- xen/arch/x86/boot/Makefile                    |  38 +++-
- .../x86/boot/{build32.lds => build32.lds.S}   |  51 ++++-
- xen/arch/x86/boot/cmdline.c                   |  12 --
- xen/arch/x86/boot/head.S                      |  49 +----
- xen/arch/x86/boot/reloc-trampoline.c          |  30 +++
- xen/arch/x86/boot/reloc.c                     |  33 +--
- xen/arch/x86/efi/efi-boot.h                   |  15 +-
- xen/tools/combine_two_binaries                | 195 ++++++++++++++++++
- 9 files changed, 314 insertions(+), 114 deletions(-)
- rename xen/arch/x86/boot/{build32.lds => build32.lds.S} (57%)
- create mode 100644 xen/arch/x86/boot/reloc-trampoline.c
- create mode 100755 xen/tools/combine_two_binaries
-
+diff --git a/xen/arch/x86/boot/build32.lds.S b/xen/arch/x86/boot/build32.lds.S
+index 2d10a75fb1..6598a24e04 100644
+--- a/xen/arch/x86/boot/build32.lds.S
++++ b/xen/arch/x86/boot/build32.lds.S
+@@ -48,6 +48,7 @@ SECTIONS
+         DECLARE_IMPORT(__trampoline_seg_start);
+         DECLARE_IMPORT(__trampoline_seg_stop);
+         DECLARE_IMPORT(trampoline_phys);
++        DECLARE_IMPORT(boot_vid_info);
+         . = . + GAP;
+         *(.text)
+         *(.text.*)
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index ade2c5c43d..dcda91cfda 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -510,22 +510,10 @@ trampoline_setup:
+         mov     %esi, sym_esi(xen_phys_start)
+         mov     %esi, sym_esi(trampoline_xen_phys_start)
+ 
+-        /* Get bottom-most low-memory stack address. */
+-        mov     sym_esi(trampoline_phys), %ecx
+-        add     $TRAMPOLINE_SPACE,%ecx
+-
+-#ifdef CONFIG_VIDEO
+-        lea     sym_esi(boot_vid_info), %edx
+-#else
+-        xor     %edx, %edx
+-#endif
+-
+         /* Save Multiboot / PVH info struct (after relocation) for later use. */
+-        push    %edx                /* Boot video info to be filled from MB2. */
+         mov     %ebx, %edx          /* Multiboot / PVH information address. */
+-        /*      reloc(magic/eax, info/edx, trampoline/ecx, video/stk) using fastcall. */
++        /*      reloc(magic/eax, info/edx) using fastcall. */
+         call    reloc
+-        add     $4, %esp
+ 
+ #ifdef CONFIG_PVH_GUEST
+         cmpb    $0, sym_esi(pvh_boot)
+diff --git a/xen/arch/x86/boot/reloc.c b/xen/arch/x86/boot/reloc.c
+index 94b078d7b1..8527fa8d01 100644
+--- a/xen/arch/x86/boot/reloc.c
++++ b/xen/arch/x86/boot/reloc.c
+@@ -19,6 +19,9 @@
+ #include <xen/kconfig.h>
+ #include <xen/multiboot.h>
+ #include <xen/multiboot2.h>
++#include <xen/page-size.h>
++
++#include <asm/trampoline.h>
+ 
+ #include <public/arch-x86/hvm/start_info.h>
+ 
+@@ -176,7 +179,7 @@ static multiboot_info_t *mbi_reloc(uint32_t mbi_in, memctx *ctx)
+     return mbi_out;
+ }
+ 
+-static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out, memctx *ctx)
++static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, memctx *ctx)
+ {
+     const multiboot2_fixed_t *mbi_fix = _p(mbi_in);
+     const multiboot2_memory_map_t *mmap_src;
+@@ -185,7 +188,7 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out, memctx
+     memory_map_t *mmap_dst;
+     multiboot_info_t *mbi_out;
+ #ifdef CONFIG_VIDEO
+-    struct boot_video_info *video = NULL;
++    struct boot_video_info *video = &boot_vid_info;
+ #endif
+     uint32_t ptr;
+     unsigned int i, mod_idx = 0;
+@@ -290,12 +293,11 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out, memctx
+ 
+ #ifdef CONFIG_VIDEO
+         case MULTIBOOT2_TAG_TYPE_VBE:
+-            if ( video_out )
++            if ( video )
+             {
+                 const struct vesa_ctrl_info *ci;
+                 const struct vesa_mode_info *mi;
+ 
+-                video = _p(video_out);
+                 ci = (const void *)get_mb2_data(tag, vbe, vbe_control_info);
+                 mi = (const void *)get_mb2_data(tag, vbe, vbe_mode_info);
+ 
+@@ -321,7 +323,6 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out, memctx
+             if ( (get_mb2_data(tag, framebuffer, framebuffer_type) !=
+                   MULTIBOOT2_FRAMEBUFFER_TYPE_RGB) )
+             {
+-                video_out = 0;
+                 video = NULL;
+             }
+             break;
+@@ -346,10 +347,10 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, uint32_t video_out, memctx
+ }
+ 
+ /* SAF-1-safe */
+-void *reloc(uint32_t magic, uint32_t in, uint32_t trampoline,
+-            uint32_t video_info)
++void *reloc(uint32_t magic, uint32_t in)
+ {
+-    memctx ctx = { trampoline };
++    /* Get bottom-most low-memory stack address. */
++    memctx ctx = { (uint32_t)((long)trampoline_phys + TRAMPOLINE_SPACE) };
+ 
+     switch ( magic )
+     {
+@@ -357,7 +358,7 @@ void *reloc(uint32_t magic, uint32_t in, uint32_t trampoline,
+         return mbi_reloc(in, &ctx);
+ 
+     case MULTIBOOT2_BOOTLOADER_MAGIC:
+-        return mbi2_reloc(in, video_info, &ctx);
++        return mbi2_reloc(in, &ctx);
+ 
+     case XEN_HVM_START_MAGIC_VALUE:
+         if ( IS_ENABLED(CONFIG_PVH_GUEST) )
 -- 
 2.34.1
 
