@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68312CFB43F
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Oct 2024 21:52:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.811338.1223917 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F88CCFB424
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Oct 2024 21:52:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.811341.1223947 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxZAv-0007a5-81; Sun, 06 Oct 2024 21:52:25 +0000
+	id 1sxZBF-0000B3-1q; Sun, 06 Oct 2024 21:52:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 811338.1223917; Sun, 06 Oct 2024 21:52:25 +0000
+Received: by outflank-mailman (output) from mailman id 811341.1223947; Sun, 06 Oct 2024 21:52:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxZAv-0007Zy-4J; Sun, 06 Oct 2024 21:52:25 +0000
-Received: by outflank-mailman (input) for mailman id 811338;
- Sun, 06 Oct 2024 21:52:23 +0000
+	id 1sxZBE-0000Aw-U5; Sun, 06 Oct 2024 21:52:44 +0000
+Received: by outflank-mailman (input) for mailman id 811341;
+ Sun, 06 Oct 2024 21:52:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qR5E=RC=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1sxZAt-0007Zk-OC
- for xen-devel@lists.xenproject.org; Sun, 06 Oct 2024 21:52:23 +0000
-Received: from sender3-of-o58.zoho.com (sender3-of-o58.zoho.com
- [136.143.184.58]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 43674cee-842d-11ef-a0bb-8be0dac302b0;
- Sun, 06 Oct 2024 23:52:22 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1728251423076361.4005991604132;
- Sun, 6 Oct 2024 14:50:23 -0700 (PDT)
+ id 1sxZBE-0007Zk-1r
+ for xen-devel@lists.xenproject.org; Sun, 06 Oct 2024 21:52:44 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4fbdc0bc-842d-11ef-a0bb-8be0dac302b0;
+ Sun, 06 Oct 2024 23:52:43 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1728251426576325.80828550922445;
+ Sun, 6 Oct 2024 14:50:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43674cee-842d-11ef-a0bb-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1728251424; cv=none; 
+X-Inumbo-ID: 4fbdc0bc-842d-11ef-a0bb-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1728251428; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=Cm2yfDgYKVhiWdiJpNXBaqZCh9/wTnSqO8SGzK4i6Z2mEkoDfvn7ZaQtEFd37N1xSBjAiKfMd1b2p5Mg7D1JS9mdth0ESL+yyaBCW3jOP8Rlpf6bBk5DzLR6spYt1rzNg2USfy1EbmK2LdMywHEO220c6vuV/DuOWCPGpocKtt4=
+	b=N7iKppSVcfv0jDz46c/BvD4cZCGDru5iTva3GFu9FHVTvhmUf9lpTML2p4EIi9k9MUBmUIVXeQLPiuly8CG8ML123LKGsAA7mgAGjaNgrsNZbJwPFfvWMkJHyEwumFJnR+tGPSBZsAY9dLD1Zi9FbuW8Uvc76GXeuTD/Wed0ays=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1728251424; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=rsjinz7BtJ8PUF4bqFrjiANBKB2lhUkIggv9H9Y5wr0=; 
-	b=kXenxq/25XZNg6VAiDUYU2cr/yZp0s512PCAb+K53nXBh0byxnHgyNBSahYP1ZH+fH5WMkNHamDAX08LtWSR84NS9N/DjD7q9bFxFaxE8gzNSVdSQksmsrDMUOJBqYIRn4Wx0EkxSLSgkfrCEdXskCqytUbMroS/n5w0BIrztuM=
+	t=1728251428; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=VF4eHm6uxrTpSrtxk8vxbuolB5VgBKHNdcHv6nx9QeQ=; 
+	b=LJLNm2vN3suBgycEWjxJ09CR8EDgehILREXuI8TxjaGY2KRT56AuEoWTJjQ5scv3IPvg+44rj0AjobqOJcSh1vsnOX5jJ1Q0X74bZpEnxUKS+5pZyKu3ifk2VcybGsVfaSdiJlA9Hi/bIaJ6XtY+A7lhhnl4FWR85dQbiT0QYsE=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1728251424;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1728251428;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=rsjinz7BtJ8PUF4bqFrjiANBKB2lhUkIggv9H9Y5wr0=;
-	b=ehzm01XGqWInV9duJeZ9tiR0stjjoz0zfGP6K3UYKwH/3lybb1s+SnrcF+W59Guc
-	fxTfJVR6HrLql3mNUYSPYUIvPAW9JD3Q9cpRB/sDPeYfoChjjfZkxhNRJlk7lIcrlCN
-	95eZReM0hPWsK8zd0gsPWMPLoTkf1ojisL2432SE=
+	bh=VF4eHm6uxrTpSrtxk8vxbuolB5VgBKHNdcHv6nx9QeQ=;
+	b=jdwto2rbWK+65sAyB9UAyAZfy1cVxDbiBOPoToPpI6P7OBGsR3QtrR05OhORT9cT
+	I9VVlY4HKGk8CqJ+ShLQn5YhCdW/3s0s09AUO4ZLTuYPJNrp7aLsS/JbNWlp+lLcMXZ
+	hngLz9gRcYCJmjyAKs2gHJNOrO8hH6vCSqhyQgH4=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 16/44] x86/boot: introduce consumed flag for struct boot_module
-Date: Sun,  6 Oct 2024 17:49:27 -0400
-Message-Id: <20241006214956.24339-17-dpsmith@apertussolutions.com>
+Subject: [PATCH v5 19/44] x86/boot: use consumed boot module flag for microcode
+Date: Sun,  6 Oct 2024 17:49:30 -0400
+Message-Id: <20241006214956.24339-20-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241006214956.24339-1-dpsmith@apertussolutions.com>
 References: <20241006214956.24339-1-dpsmith@apertussolutions.com>
@@ -78,58 +78,101 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Allow the tracking of when a boot module has been consumed by a handler in the
-hypervisor independent of when it is claimed. The instances where the
-hypervisor does nothing beyond claiming, the dom0 kernel, dom0 ramdisk, and a
-placeholder for itself, are updated as being consumed at the time of being
-claimed.
+To track if the microcode boot module was loaded, a copy of the boot module is
+kept. The size element of this copy is set to zero as the indicator that the
+microcode was loaded. A side effect is that the modules have to be rescanned to
+find the boot module post-relocation, so the cache copy can be created.
+
+Use the consumed boot module flag to track the loading of the microcode boot
+module. This removes the need to manipulate the boot module size element, no
+longer requiring the copy, thus allowing it to be replaced by a reference. As a
+result it is no longer necessary to rescan the boot modules after relocation
+has occurred.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/include/asm/bootinfo.h | 1 +
- xen/arch/x86/setup.c                | 3 +++
- 2 files changed, 4 insertions(+)
+ xen/arch/x86/cpu/microcode/core.c | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
-index c79678840d31..7833b065eff1 100644
---- a/xen/arch/x86/include/asm/bootinfo.h
-+++ b/xen/arch/x86/include/asm/bootinfo.h
-@@ -34,6 +34,7 @@ struct boot_module {
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 7bcc17e0ab2f..5b42aad2fdd0 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -58,7 +58,7 @@
+  */
+ #define MICROCODE_UPDATE_TIMEOUT_US 1000000
  
-     uint32_t flags;
- #define BOOTMOD_FLAG_X86_RELOCATED     (1U << 0)
-+#define BOOTMOD_FLAG_X86_CONSUMED      (1U << 1)
- 
-     paddr_t start;
-     size_t size;
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 4f540c461b26..235b4e41f653 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -318,6 +318,7 @@ static struct boot_info __init *multiboot_fill_boot_info(unsigned long mbi_p)
- 
-     /* map the last mb module for xen entry */
-     bi->mods[bi->nr_modules].type = BOOTMOD_XEN;
-+    bi->mods[bi->nr_modules].flags |= BOOTMOD_FLAG_X86_CONSUMED;
-     bi->mods[bi->nr_modules].mod = &mods[bi->nr_modules];
- 
-     return bi;
-@@ -1196,6 +1197,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     bitmap_fill(module_map, bi->nr_modules);
-     __clear_bit(0, module_map); /* Dom0 kernel is always first */
-     bi->mods[0].type = BOOTMOD_KERNEL;
-+    bi->mods[0].flags |= BOOTMOD_FLAG_X86_CONSUMED;
- 
-     if ( pvh_boot )
+-static struct boot_module __initdata ucode_mod;
++static struct boot_module __initdata *ucode_mod;
+ static signed int __initdata ucode_mod_idx;
+ static bool __initdata ucode_mod_forced;
+ static unsigned int nr_cores;
+@@ -211,7 +211,7 @@ static void __init microcode_grab_module(
+          !__test_and_clear_bit(ucode_mod_idx, module_map) )
+         goto scan;
+     bi->mods[ucode_mod_idx].type = BOOTMOD_MICROCODE;
+-    ucode_mod = bi->mods[ucode_mod_idx];
++    ucode_mod = &bi->mods[ucode_mod_idx];
+ scan:
+     if ( ucode_scan )
+         microcode_scan_module(module_map, bi);
+@@ -769,10 +769,10 @@ static int __init cf_check microcode_init(void)
+         ucode_blob.size = 0;
+         ucode_blob.data = NULL;
+     }
+-    else if ( ucode_mod.size )
++    else if ( ucode_mod && !(ucode_mod->flags & BOOTMOD_FLAG_X86_CONSUMED) )
      {
-@@ -2085,6 +2087,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         bootstrap_map_bm(NULL);
+-        ucode_mod.size = 0;
++        ucode_mod->flags |= BOOTMOD_FLAG_X86_CONSUMED;
+     }
  
-     initrdidx = find_first_bit(module_map, bi->nr_modules);
-     bi->mods[initrdidx].type = BOOTMOD_RAMDISK;
-+    bi->mods[initrdidx].flags |= BOOTMOD_FLAG_X86_CONSUMED;
-     if ( bitmap_weight(module_map, bi->nr_modules) > 1 )
-         printk(XENLOG_WARNING
-                "Multiple initrd candidates, picking module #%u\n",
+     return 0;
+@@ -826,14 +826,14 @@ int __init microcode_init_cache(
+     if ( !ucode_ops.apply_microcode )
+         return -ENODEV;
+ 
+-    if ( ucode_scan )
+-        /* Need to rescan the modules because they might have been relocated */
++    /* Scan if microcode was not detected earlier */
++    if ( !ucode_mod )
+         microcode_scan_module(module_map, bi);
+ 
+-    if ( ucode_mod.size )
+-        rc = early_update_cache(bootstrap_map_bm(&ucode_mod),
+-                                ucode_mod.size);
+-    else if ( ucode_blob.size )
++    if ( ucode_mod && !(ucode_mod->flags & BOOTMOD_FLAG_X86_CONSUMED) )
++        rc = early_update_cache(bootstrap_map_bm(ucode_mod),
++                                ucode_mod->size);
++    else if ( ucode_mod && ucode_blob.size )
+         rc = early_update_cache(ucode_blob.data, ucode_blob.size);
+ 
+     return rc;
+@@ -851,10 +851,10 @@ static int __init early_microcode_update_cpu(void)
+         len = ucode_blob.size;
+         data = ucode_blob.data;
+     }
+-    else if ( ucode_mod.size )
++    else if ( ucode_mod && !(ucode_mod->flags & BOOTMOD_FLAG_X86_CONSUMED) )
+     {
+-        len = ucode_mod.size;
+-        data = bootstrap_map_bm(&ucode_mod);
++        len = ucode_mod->size;
++        data = bootstrap_map_bm(ucode_mod);
+     }
+ 
+     if ( !data )
+@@ -920,7 +920,7 @@ int __init early_microcode_init(unsigned long *module_map,
+ 
+     microcode_grab_module(module_map, bi);
+ 
+-    if ( ucode_mod.size || ucode_blob.size )
++    if ( ucode_mod || ucode_blob.size )
+         rc = early_microcode_update_cpu();
+ 
+     /*
 -- 
 2.30.2
 
