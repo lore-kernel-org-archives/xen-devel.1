@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 263BCCFB43F
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Oct 2024 21:57:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.811388.1224117 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4F35CFB424
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Oct 2024 21:57:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.811401.1224165 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxZFI-0000EY-8P; Sun, 06 Oct 2024 21:56:56 +0000
+	id 1sxZFR-0002DG-Ai; Sun, 06 Oct 2024 21:57:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 811388.1224117; Sun, 06 Oct 2024 21:56:56 +0000
+Received: by outflank-mailman (output) from mailman id 811401.1224165; Sun, 06 Oct 2024 21:57:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxZFI-0000EM-4Y; Sun, 06 Oct 2024 21:56:56 +0000
-Received: by outflank-mailman (input) for mailman id 811388;
- Sun, 06 Oct 2024 21:56:55 +0000
+	id 1sxZFR-0002Br-4Q; Sun, 06 Oct 2024 21:57:05 +0000
+Received: by outflank-mailman (input) for mailman id 811401;
+ Sun, 06 Oct 2024 21:57:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qR5E=RC=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1sxZDu-0007Zk-Pc
- for xen-devel@lists.xenproject.org; Sun, 06 Oct 2024 21:55:30 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b2fff737-842d-11ef-a0bb-8be0dac302b0;
- Sun, 06 Oct 2024 23:55:29 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1728251451864396.89237154171735;
- Sun, 6 Oct 2024 14:50:51 -0700 (PDT)
+ id 1sxZ9j-0006RM-FG
+ for xen-devel@lists.xenproject.org; Sun, 06 Oct 2024 21:51:11 +0000
+Received: from sender3-of-o58.zoho.com (sender3-of-o58.zoho.com
+ [136.143.184.58]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 186e355f-842d-11ef-a0bb-8be0dac302b0;
+ Sun, 06 Oct 2024 23:51:10 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 172825141245318.856694027254207;
+ Sun, 6 Oct 2024 14:50:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2fff737-842d-11ef-a0bb-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1728251453; cv=none; 
+X-Inumbo-ID: 186e355f-842d-11ef-a0bb-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1728251414; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=gUr1ufUEBitU+nDM0BWSLW+Xx/Hmfr4uUJ7xlx+234sllpYdyGknA5gSMWCbMau/MquWwq5RD4ijUNdSSaoBEBdSgBtoy8PEggI+4xEzhoLp7uArk1S8GaOPno/D7z+lKTfS0gMznOXRVjkw7dlLVd6H9e1oY15Bnn8G/9ErF58=
+	b=cm4ml96E4fcgfoUNWfSuPxDqelAqZ0lePU0r5/3SZRmqTO12TvlSGFYClPWgYy+WQ7uM7hyTJP3rYuWzue6Tu+NWlSmrsHSTAlvEBQeXLGkvn1LyyT5gP8FjiMWsMMywmf9GqD5qO4WSt96sIKoUmlmVQkfT9WGHFBlWYlwFQDc=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1728251453; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=lUf8dRXsSe31nIQ8ru6siZ++csVBXQ/vKqr++5VfORM=; 
-	b=hScijmFEh7BrkJmujyCZTUJJAkAs2+95VGStCtgi8B8kR9cEHpkjAW+yj0P3AffqXOFmo7BXqn1e41v4L+pnkx+O3S3mFdtj3XqDZ7erSwQtPbZ0j3smOidZuj1UWb8nCeMz+LQiflcVkO1a68NssK+I2Fj01LF4EAqcWcw+nPQ=
+	t=1728251414; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=wmEpNJvCOY3XSQWugWw1bHFHppHVSJwVFmalxOGZtqI=; 
+	b=lW0W2zWt6MbfSfzIZ+4Hj2h6xbhXlff8VC6AA+CfeA6Jd+axN2tDlzRMPCNKW8C0cxm54bd4EnYLXlTLhzFYbvSKj8Y7dbG9WDS+ciEqrkVPHIRlA5XaE0voU1Ma+z79opQii3qlv12/E7/K1H9dXNmjU8Cy38AhuSpOCZ2A+mg=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1728251453;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1728251414;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=lUf8dRXsSe31nIQ8ru6siZ++csVBXQ/vKqr++5VfORM=;
-	b=AgfTJL4QRtO6aQOjgJCvE70ZYtT2E7QXd8EQrvu+iy4V1bNFe8HdsAeQv3razu2I
-	3HSiC/o56QZbRySI9kZNljZaqWp/9legmkv3yVR+jgYozRKL0m+Ui1Iya8RMN7QxsnA
-	tj8cTyYW/deTCRBhwznDeieOp2fFJ0vkEwR4Iko0=
+	bh=wmEpNJvCOY3XSQWugWw1bHFHppHVSJwVFmalxOGZtqI=;
+	b=RUb41T8+0zFUMaqXfWuc0g5LkaRAHrNm3PhTsiZ36dzwgTlQiwvXpmtJ9q2hsqZ2
+	Hf4CotJkX/vKJIaANtlwk78//gI9foC1SiWvBcBwvE0GPmbGuaCNFb+oe28tuhjUFpf
+	DeH7576HCakcDhkvC4IGyeVo1gXVhBAr3x9rVNic=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 41/44] x86/boot: add struct domain to struct boot_domain
-Date: Sun,  6 Oct 2024 17:49:52 -0400
-Message-Id: <20241006214956.24339-42-dpsmith@apertussolutions.com>
+Subject: [PATCH v5 07/44] x86/boot: move headroom to boot modules
+Date: Sun,  6 Oct 2024 17:49:18 -0400
+Message-Id: <20241006214956.24339-8-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241006214956.24339-1-dpsmith@apertussolutions.com>
 References: <20241006214956.24339-1-dpsmith@apertussolutions.com>
@@ -78,79 +78,109 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Store a reference to the created domain in struct boot_domain.
+The purpose of struct boot_module is to encapsulate the state of boot module as
+it is processed by Xen. Locating boot module state struct boot_module reduces
+the number of global variables as well as the number of state variables that
+must be passed around. It also lays the groundwork for hyperlaunch mult-domain
+construction, where multiple instances of state variables like headroom will be
+needed.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/include/asm/bootdomain.h |  3 +++
- xen/arch/x86/setup.c                  | 15 +++++++--------
- 2 files changed, 10 insertions(+), 8 deletions(-)
+ xen/arch/x86/include/asm/bootinfo.h |  5 +++++
+ xen/arch/x86/setup.c                | 23 ++++++++++++++---------
+ 2 files changed, 19 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-index 00f7d9267965..2322c459e36a 100644
---- a/xen/arch/x86/include/asm/bootdomain.h
-+++ b/xen/arch/x86/include/asm/bootdomain.h
-@@ -10,6 +10,7 @@
- 
- #include <public/xen.h>
- 
-+struct domain;
- struct boot_module;
- 
- struct boot_domain {
-@@ -19,6 +20,8 @@ struct boot_domain {
- 
-     struct boot_module *kernel;
-     struct boot_module *ramdisk;
-+
-+    struct domain *d;
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index d19473d8941e..c7e6b4ebf0da 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -17,6 +17,11 @@
+ struct boot_module {
+     /* Transitionary only */
+     module_t *mod;
++    /*
++     * A boot module may contain a compressed kernel that Xen will need space
++     * reserved, into which it will be decompressed.
++     */
++    unsigned long headroom;
  };
  
- #endif
+ /*
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index f250638edf09..e6a231bd2d42 100644
+index ba9f110d98c6..dd82ca3d43e2 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -959,7 +959,6 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-         },
-     };
-     struct boot_domain *bd = &bi->domains[0];
--    struct domain *d;
- 
-     if ( opt_dom0_pvh )
-     {
-@@ -976,13 +975,13 @@ static struct domain *__init create_dom0(struct boot_info *bi)
- 
-     /* Create initial domain.  Not d0 for pvshim. */
-     bd->domid = get_initial_domain_id();
--    d = domain_create(bd->domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
--    if ( IS_ERR(d) )
--        panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(d));
-+    bd->d = domain_create(bd->domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
-+    if ( IS_ERR(bd->d) )
-+        panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(bd->d));
- 
--    init_dom0_cpuid_policy(d);
-+    init_dom0_cpuid_policy(bd->d);
- 
--    if ( alloc_dom0_vcpu0(d) == NULL )
-+    if ( alloc_dom0_vcpu0(bd->d) == NULL )
-         panic("Error creating d%uv0\n", bd->domid);
- 
-     /* Grab the DOM0 command line. */
-@@ -1014,10 +1013,10 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-         }
+@@ -1012,7 +1012,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+     struct boot_info *bi;
+     multiboot_info_t *mbi;
+     module_t *mod;
+-    unsigned long nr_pages, raw_max_page, modules_headroom, module_map[1];
++    unsigned long nr_pages, raw_max_page, module_map[1];
+     int i, j, e820_warn = 0, bytes = 0;
+     unsigned long eb_start, eb_end;
+     bool acpi_boot_table_init_done = false, relocated = false;
+@@ -1371,7 +1371,10 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         mod[bi->nr_modules].mod_end = __2M_rwdata_end - _stext;
      }
  
--    if ( construct_dom0(d, bd->kernel, bd->ramdisk, bd->cmdline) != 0 )
-+    if ( construct_dom0(bd->d, bd->kernel, bd->ramdisk, bd->cmdline) != 0 )
-         panic("Could not construct domain 0\n");
+-    modules_headroom = bzimage_headroom(bootstrap_map(mod), mod->mod_end);
++    bi->mods[0].headroom =
++        bzimage_headroom(bootstrap_map(bi->mods[0].mod),
++                         bi->mods[0].mod->mod_end);
++
+     bootstrap_map(NULL);
  
--    return d;
-+    return bd->d;
- }
+ #ifndef highmem_start
+@@ -1456,8 +1459,10 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+              * decompressor overheads of mod[0] (the dom0 kernel).  When we
+              * move mod[0], we incorporate this as extra space at the start.
+              */
+-            unsigned long headroom = j ? 0 : modules_headroom;
+-            unsigned long size = PAGE_ALIGN(headroom + mod[j].mod_end);
++            struct boot_module *bm = &bi->mods[j];
++            unsigned long size;
++
++            size = PAGE_ALIGN(bm->headroom + mod[j].mod_end);
  
- /* How much of the directmap is prebuilt at compile time. */
+             if ( mod[j].reserved )
+                 continue;
+@@ -1470,14 +1475,14 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+                 continue;
+ 
+             if ( s < end &&
+-                 (headroom ||
++                 (bm->headroom ||
+                   ((end - size) >> PAGE_SHIFT) > mod[j].mod_start) )
+             {
+-                move_memory(end - size + headroom,
++                move_memory(end - size + bm->headroom,
+                             (uint64_t)mod[j].mod_start << PAGE_SHIFT,
+                             mod[j].mod_end);
+                 mod[j].mod_start = (end - size) >> PAGE_SHIFT;
+-                mod[j].mod_end += headroom;
++                mod[j].mod_end += bm->headroom;
+                 mod[j].reserved = 1;
+             }
+         }
+@@ -1504,7 +1509,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+ #endif
+     }
+ 
+-    if ( modules_headroom && !mod->reserved )
++    if ( bi->mods[0].headroom && !mod->reserved )
+         panic("Not enough memory to relocate the dom0 kernel image\n");
+     for ( i = 0; i < bi->nr_modules; ++i )
+     {
+@@ -2056,7 +2061,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+      * We're going to setup domain0 using the module(s) that we stashed safely
+      * above our heap. The second module, if present, is an initrd ramdisk.
+      */
+-    dom0 = create_dom0(mod, modules_headroom,
++    dom0 = create_dom0(mod, bi->mods[0].headroom,
+                        initrdidx < bi->nr_modules ? mod + initrdidx : NULL,
+                        kextra, bi->loader);
+     if ( !dom0 )
 -- 
 2.30.2
 
