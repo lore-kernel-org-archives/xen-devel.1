@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74A7ACFB424
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C8DDCFB440
 	for <xen-devel@archiver.kernel.org>; Sun,  6 Oct 2024 21:58:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.811417.1224257 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.811411.1224217 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxZFw-0007oE-82; Sun, 06 Oct 2024 21:57:36 +0000
+	id 1sxZFk-0005kC-EG; Sun, 06 Oct 2024 21:57:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 811417.1224257; Sun, 06 Oct 2024 21:57:36 +0000
+Received: by outflank-mailman (output) from mailman id 811411.1224217; Sun, 06 Oct 2024 21:57:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxZFw-0007nL-4B; Sun, 06 Oct 2024 21:57:36 +0000
-Received: by outflank-mailman (input) for mailman id 811417;
- Sun, 06 Oct 2024 21:57:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sxZFk-0005jw-9k; Sun, 06 Oct 2024 21:57:24 +0000
+Received: by outflank-mailman (input) for mailman id 811411;
+ Sun, 06 Oct 2024 21:57:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qR5E=RC=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1sxZBh-00051E-1d
- for xen-devel@lists.xenproject.org; Sun, 06 Oct 2024 21:53:13 +0000
+ id 1sxZCa-0007Zk-7R
+ for xen-devel@lists.xenproject.org; Sun, 06 Oct 2024 21:54:08 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6090b9fa-842d-11ef-99a2-01e77a169b0f;
- Sun, 06 Oct 2024 23:53:11 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1728251431236817.04787703317;
- Sun, 6 Oct 2024 14:50:31 -0700 (PDT)
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 81de1d2d-842d-11ef-a0bb-8be0dac302b0;
+ Sun, 06 Oct 2024 23:54:07 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1728251439293836.8451746381855;
+ Sun, 6 Oct 2024 14:50:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6090b9fa-842d-11ef-99a2-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; t=1728251433; cv=none; 
+X-Inumbo-ID: 81de1d2d-842d-11ef-a0bb-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1728251441; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=lh3KVpki89otWeudeeH6H/BP6+EEsTgz29UixmIvZK3bmD+A6DB8m3RwBdWQBfD0FQuvqxhv1FwG0ltWi2p72FXxgFj+KLlvTplusBSft0Gc/7sGjYpY4nd4oYXabOEHYR0mNcyW2zB0VcFcF/apDbg7H4wEot5txFDJJlHqOS8=
+	b=f7uPFxnNxNSwS5iGpHo5I392MgLtFiItLuV6jVa9yt/nZ98gGC97UyCPtoKwXqUtY9B2nqS7Fr+EhFdut2+kgbL/weoMWMeAsPDAdDkvMEgmDwPdyMsbmRUZjjUDaC0j836VJrc/Hh8DSPc49+DGlXb+aZRuiLWT22Sqy9eML2I=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1728251433; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=+2Ke8GYb62UIWjB0JwnvDHRLpWBMoxBl4a1CfrQFltM=; 
-	b=ZJx3+cenL9JK8a0gyApg0qIYO++s67R+A6jg2cO3jLc43JiFQc42ILx2UIzB/3gz2/zgwCZb7uHA+dcOO22i/Bz5v62BLnQiiAwG3cG9VMTG1IrBICEFaLXiC+cBlUiNoQbC86YO1SAe8OZ6VvxBOadWrCOk53p4Kq8KKnU8idU=
+	t=1728251441; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=xkaiW9OjgWPFU0BNzVKSQC1ectLOUlTK2xVwSMDZnWo=; 
+	b=GX8CLeUxgYtdzfLIdTRoQNixNxpkzINuW8Zh3oIegqvqbrybiFwY346I1QZ7otYvIvGO39pL9ZkBr5K6ilu/jE4iKpfhM/8QgEy/KjZC3dlDGwsVw7/ieAuCygyHIcpW64FqkZUR5W41zdcjlV1Kg4fTEhxB6oFgBo56KthT5Eg=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1728251433;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1728251441;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=+2Ke8GYb62UIWjB0JwnvDHRLpWBMoxBl4a1CfrQFltM=;
-	b=dXz6sbI74T6TmjMqwbyo0edtylcAQ1m5W7glp/4Ut07IYu/gKqsVxbwiqH8fMTh+
-	QXmApr0nQCL3juUMcSxtbxKBL4dQ9p0REa7JEd4M6uMPM+qg0ZISkrgbq9pFlMaxdKE
-	GdjJ6EIN3bmi56XcgKrEFTX2nYUCk/vSeds20n2g=
+	bh=xkaiW9OjgWPFU0BNzVKSQC1ectLOUlTK2xVwSMDZnWo=;
+	b=XcRbXHzbJsjP4VxUjD09sKr0MASD6YuZNtPsTEOsl6uGp6P3qBN4xjeTmvatswo8
+	NLfZg84GZwqSsf7gLmpQ8WSet1KgN6CV2chNzZmw9kYyM8D0zE/3ZBznQfEcAF7a7Kl
+	nBzuh1QsH8DL5OWxn9p4ajju2PnVASO5doAPmnAw=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 23/44] x86/boot: remove module_map usage from xsm policy loading
-Date: Sun,  6 Oct 2024 17:49:34 -0400
-Message-Id: <20241006214956.24339-24-dpsmith@apertussolutions.com>
+Subject: [PATCH v5 30/44] x86/boot: convert dom0_construct_pv initrd param to struct boot_module
+Date: Sun,  6 Oct 2024 17:49:41 -0400
+Message-Id: <20241006214956.24339-31-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241006214956.24339-1-dpsmith@apertussolutions.com>
 References: <20241006214956.24339-1-dpsmith@apertussolutions.com>
@@ -78,109 +78,150 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
+This changes the type for the initrd parameter of dom0_construct_pv to be struct
+boot_module. This conversion requires several adjustments throughout dom0_construct_pv
+to account for the type change. Removes the usage of early_mod field for ramdisk module.
+
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/setup.c  | 2 +-
- xen/include/xsm/xsm.h | 9 +++------
- xen/xsm/xsm_core.c    | 6 ++----
- xen/xsm/xsm_policy.c  | 5 +----
- 4 files changed, 7 insertions(+), 15 deletions(-)
+ xen/arch/x86/dom0_build.c             |  2 +-
+ xen/arch/x86/include/asm/dom0_build.h |  2 +-
+ xen/arch/x86/pv/dom0_build.c          | 29 +++++++++++++++------------
+ 3 files changed, 18 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 90acd4180441..b0946216ea3f 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1865,7 +1865,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     mmio_ro_ranges = rangeset_new(NULL, "r/o mmio ranges",
-                                   RANGESETF_prettyprint_hex);
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index 54db578dd29f..1d05ee53a6d8 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -613,7 +613,7 @@ int __init construct_dom0(struct domain *d, const struct boot_module *image,
+         rc = dom0_construct_pvh(d, image->mod, image->headroom, initrd->mod,
+                                 cmdline);
+     else if ( is_pv_domain(d) )
+-        rc = dom0_construct_pv(d, image, initrd->mod, cmdline);
++        rc = dom0_construct_pv(d, image, initrd, cmdline);
+     else
+         panic("Cannot construct Dom0. No guest interface available\n");
  
--    xsm_multiboot_init(module_map, bi);
-+    xsm_multiboot_init(bi);
+diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
+index a1f36f7d360d..2ce5ea3851af 100644
+--- a/xen/arch/x86/include/asm/dom0_build.h
++++ b/xen/arch/x86/include/asm/dom0_build.h
+@@ -15,7 +15,7 @@ int dom0_setup_permissions(struct domain *d);
  
-     /*
-      * IOMMU-related ACPI table parsing may require some of the system domains
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 9e511ef8878c..791936e5285b 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -781,11 +781,9 @@ static inline int xsm_argo_send(const struct domain *d, const struct domain *t)
- #endif /* XSM_NO_WRAPPERS */
+ int dom0_construct_pv(
+     struct domain *d, const struct boot_module *image,
+-    module_t *initrd, const char *cmdline);
++    struct boot_module *initrd, const char *cmdline);
  
- #ifdef CONFIG_MULTIBOOT
--int xsm_multiboot_init(
--    unsigned long *module_map, const struct boot_info *bi);
-+int xsm_multiboot_init(struct boot_info *bi);
- int xsm_multiboot_policy_init(
--    unsigned long *module_map, const struct boot_info *bi,
--    void **policy_buffer, size_t *policy_size);
-+    struct boot_info *bi, void **policy_buffer, size_t *policy_size);
- #endif
+ int dom0_construct_pvh(struct domain *d, const module_t *image,
+                        unsigned long image_headroom,
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index 7b6afe64d799..16b8c1e40998 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -356,7 +356,7 @@ static struct page_info * __init alloc_chunk(struct domain *d,
  
- #ifdef CONFIG_HAS_DEVICE_TREE
-@@ -831,8 +829,7 @@ static const inline struct xsm_ops *silo_init(void)
- #include <xsm/dummy.h>
- 
- #ifdef CONFIG_MULTIBOOT
--static inline int xsm_multiboot_init (
--    unsigned long *module_map, const struct boot_info *bi)
-+static inline int xsm_multiboot_init(struct boot_info *bi)
+ static int __init dom0_construct(struct domain *d,
+                                  const struct boot_module *image,
+-                                 module_t *initrd,
++                                 struct boot_module *initrd,
+                                  const char *cmdline)
  {
-     return 0;
- }
-diff --git a/xen/xsm/xsm_core.c b/xen/xsm/xsm_core.c
-index 69d3800d4c39..0e74b96a4cc7 100644
---- a/xen/xsm/xsm_core.c
-+++ b/xen/xsm/xsm_core.c
-@@ -140,8 +140,7 @@ static int __init xsm_core_init(const void *policy_buffer, size_t policy_size)
- }
- 
- #ifdef CONFIG_MULTIBOOT
--int __init xsm_multiboot_init(
--    unsigned long *module_map, struct boot_info *bi)
-+int __init xsm_multiboot_init(struct boot_info *bi)
- {
-     int ret = 0;
-     void *policy_buffer = NULL;
-@@ -151,8 +150,7 @@ int __init xsm_multiboot_init(
- 
-     if ( XSM_MAGIC )
-     {
--        ret = xsm_multiboot_policy_init(module_map, bi, &policy_buffer,
--                                        &policy_size);
-+        ret = xsm_multiboot_policy_init(bi, &policy_buffer, &policy_size);
-         if ( ret )
+     int i, rc, order, machine;
+@@ -367,7 +367,8 @@ static int __init dom0_construct(struct domain *d,
+     unsigned long nr_pt_pages;
+     unsigned long alloc_spfn;
+     unsigned long alloc_epfn;
+-    unsigned long initrd_pfn = -1, initrd_mfn = 0;
++    unsigned long initrd_pfn = -1;
++    mfn_t  initrd_mfn = { 0 };
+     unsigned long count;
+     struct page_info *page = NULL;
+     unsigned int flush_flags = 0;
+@@ -376,7 +377,7 @@ static int __init dom0_construct(struct domain *d,
+     void *image_base = bootstrap_map_bm(image);
+     unsigned long image_len = image->size;
+     void *image_start = image_base + image->headroom;
+-    unsigned long initrd_len = initrd ? initrd->mod_end : 0;
++    unsigned long initrd_len = initrd ? initrd->size : 0;
+     l4_pgentry_t *l4tab = NULL, *l4start = NULL;
+     l3_pgentry_t *l3tab = NULL, *l3start = NULL;
+     l2_pgentry_t *l2tab = NULL, *l2start = NULL;
+@@ -612,7 +613,8 @@ static int __init dom0_construct(struct domain *d,
+         initrd_pfn = vinitrd_start ?
+                      (vinitrd_start - v_start) >> PAGE_SHIFT :
+                      domain_tot_pages(d);
+-        initrd_mfn = mfn = initrd->mod_start;
++        initrd_mfn = maddr_to_mfn(initrd->start);
++        mfn = mfn_x(initrd_mfn);
+         count = PFN_UP(initrd_len);
+         if ( d->arch.physaddr_bitsize &&
+              ((mfn + count - 1) >> (d->arch.physaddr_bitsize - PAGE_SHIFT)) )
+@@ -627,12 +629,13 @@ static int __init dom0_construct(struct domain *d,
+                     free_domheap_pages(page, order);
+                     page += 1UL << order;
+                 }
+-            memcpy(page_to_virt(page), mfn_to_virt(initrd->mod_start),
++            memcpy(page_to_virt(page), maddr_to_virt(initrd->start),
+                    initrd_len);
+-            mpt_alloc = (paddr_t)initrd->mod_start << PAGE_SHIFT;
++            mpt_alloc = initrd->start;
+             init_domheap_pages(mpt_alloc,
+                                mpt_alloc + PAGE_ALIGN(initrd_len));
+-            initrd->mod_start = initrd_mfn = mfn_x(page_to_mfn(page));
++            initrd_mfn = page_to_mfn(page);
++            initrd->start = mfn_to_maddr(initrd_mfn);
+         }
+         else
          {
-             bootstrap_map(NULL);
-diff --git a/xen/xsm/xsm_policy.c b/xen/xsm/xsm_policy.c
-index 921bb254b9d1..a22367a62e93 100644
---- a/xen/xsm/xsm_policy.c
-+++ b/xen/xsm/xsm_policy.c
-@@ -32,8 +32,7 @@
+@@ -640,9 +643,9 @@ static int __init dom0_construct(struct domain *d,
+                 if ( assign_pages(mfn_to_page(_mfn(mfn++)), 1, d, 0) )
+                     BUG();
+         }
+-        initrd->mod_end = 0;
++        initrd->size = 0;
  
- #ifdef CONFIG_MULTIBOOT
- int __init xsm_multiboot_policy_init(
--    unsigned long *module_map, struct boot_info *bi,
--    void **policy_buffer, size_t *policy_size)
-+    struct boot_info *bi, void **policy_buffer, size_t *policy_size)
- {
-     int i;
-     int rc = 0;
-@@ -42,7 +41,6 @@ int __init xsm_multiboot_policy_init(
+-        iommu_memory_setup(d, "initrd", mfn_to_page(_mfn(initrd_mfn)),
++        iommu_memory_setup(d, "initrd", mfn_to_page(initrd_mfn),
+                            PFN_UP(initrd_len), &flush_flags);
+     }
  
-     /*
-      * Try all modules and see whichever could be the binary policy.
--     * Adjust module_map for the module that is the binary policy.
-      */
-     for ( i = bi->nr_modules-1; i >= 1; i-- )
+@@ -654,7 +657,7 @@ static int __init dom0_construct(struct domain *d,
+                nr_pages - domain_tot_pages(d));
+     if ( initrd )
      {
-@@ -60,7 +58,6 @@ int __init xsm_multiboot_policy_init(
-             printk("Policy len %#lx, start at %p.\n",
-                    _policy_len,_policy_start);
+-        mpt_alloc = (paddr_t)initrd->mod_start << PAGE_SHIFT;
++        mpt_alloc = initrd->start;
+         printk("\n Init. ramdisk: %"PRIpaddr"->%"PRIpaddr,
+                mpt_alloc, mpt_alloc + initrd_len);
+     }
+@@ -763,7 +766,7 @@ static int __init dom0_construct(struct domain *d,
+         if ( count < initrd_pfn || count >= initrd_pfn + PFN_UP(initrd_len) )
+             mfn = pfn++;
+         else
+-            mfn = initrd_mfn++;
++            mfn = mfn_x(initrd_mfn) + 1;
+         *l1tab = l1e_from_pfn(mfn, compat ? COMPAT_L1_PROT : L1_PROT);
+         l1tab++;
  
--            __clear_bit(i, module_map);
-             bi->mods[i].type = BOOTMOD_XSM_POLICY;
-             break;
+@@ -882,7 +885,7 @@ static int __init dom0_construct(struct domain *d,
+         if ( pfn >= initrd_pfn )
+         {
+             if ( pfn < initrd_pfn + PFN_UP(initrd_len) )
+-                mfn = initrd->mod_start + (pfn - initrd_pfn);
++                mfn = paddr_to_pfn(initrd->start) + (pfn - initrd_pfn);
+             else
+                 mfn -= PFN_UP(initrd_len);
+         }
+@@ -1052,7 +1055,7 @@ out:
  
+ int __init dom0_construct_pv(struct domain *d,
+                              const struct boot_module *image,
+-                             module_t *initrd,
++                             struct boot_module *initrd,
+                              const char *cmdline)
+ {
+     int rc;
 -- 
 2.30.2
 
