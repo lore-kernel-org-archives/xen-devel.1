@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E019CFB43F
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:16:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.812032.1224691 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EAACFB441
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:16:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.812033.1224701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxoWl-00037T-Su; Mon, 07 Oct 2024 14:15:59 +0000
+	id 1sxoWn-0003MK-2P; Mon, 07 Oct 2024 14:16:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 812032.1224691; Mon, 07 Oct 2024 14:15:59 +0000
+Received: by outflank-mailman (output) from mailman id 812033.1224701; Mon, 07 Oct 2024 14:16:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxoWl-00037M-PA; Mon, 07 Oct 2024 14:15:59 +0000
-Received: by outflank-mailman (input) for mailman id 812032;
- Mon, 07 Oct 2024 14:15:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sxoWm-0003M9-Vt; Mon, 07 Oct 2024 14:16:00 +0000
+Received: by outflank-mailman (input) for mailman id 812033;
+ Mon, 07 Oct 2024 14:16:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aWQm=RD=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1sxoWl-0002dC-Bi
- for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:15:59 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ac0e4b21-84b6-11ef-99a2-01e77a169b0f;
- Mon, 07 Oct 2024 16:15:57 +0200 (CEST)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5c903f5bd0eso489154a12.3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Oct 2024 07:15:57 -0700 (PDT)
+ id 1sxoWm-0002yM-0e
+ for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:16:00 +0000
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [2a00:1450:4864:20::234])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ad1e8014-84b6-11ef-a0bb-8be0dac302b0;
+ Mon, 07 Oct 2024 16:15:59 +0200 (CEST)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2f7657f9f62so43340481fa.3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Oct 2024 07:15:59 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c8e05c119esm3386204a12.55.2024.10.07.07.15.56
+ 4fb4d7f45d1cf-5c8e05c119esm3386204a12.55.2024.10.07.07.15.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Oct 2024 07:15:56 -0700 (PDT)
+ Mon, 07 Oct 2024 07:15:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac0e4b21-84b6-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: ad1e8014-84b6-11ef-a0bb-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728310557; x=1728915357; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3VCbuxC6JGJm8j1BwRkys9Y1PD6avfaNtISsr+2/hAU=;
-        b=RQdXaZSfXU7maCCuR3W2wES031/535CsK1DGGSrXixDdvztAYdUkA6UF+aEOYiNcYO
-         EPblOtpH46NnI7htm4GCgE4GZRHcKugiCuuMPwhQe23dGDUxXQePHS35zTZXctxEqf+h
-         9dVXkOnYj4VOH6LwQtR3733Gqk7kp/RDWlRro=
+        d=cloud.com; s=cloud; t=1728310559; x=1728915359; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qIJLH+pNn+xqq0KYYUmnx97/J/kG6GN6HUy92X5OMa0=;
+        b=Cenvume+/1eXLkAOGI8TFA2+yxll8HKGlSohKjhNQ3JHfXXSZu1OCLKXxSKHbCbg3k
+         UN3aCk1GO5kNfJdER1uW4zC66qlb43gr+adpGXfmI9DFbezXuSMKWAqz/5szn0fpJfhz
+         H31wkAuMnRLshRQP8Oc3K/oa5pgq5nxnBeuAE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728310557; x=1728915357;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3VCbuxC6JGJm8j1BwRkys9Y1PD6avfaNtISsr+2/hAU=;
-        b=ZMbj3kAaoBq0EreWSF3R85EjfkaaRzPIY4GE+s0lc/2Z9NSu6KLDWRAECHMmQbHDyZ
-         0bFFkLgg7e6PF2bstMqOJreuf1LmR3c6XBwPRhPtIR5Ryfvc86HmBN4uHO3mGX8rFldH
-         RH9eWKh1ysocj/6VrCaxPg7spy2/orLwlYV3MgEFv3nboRZXiRQs/OeqhfVgKKPZyZI5
-         ww4xGClJkrVhwAGx4ZQ8GIGMgZc3wtFpQYM1dDU5wdK8oueCIVgqDWID2J8Ijd55zWRg
-         lUNB5l/N8lSi0e9RA0mZJMV7Opsqrahy0RI5r099gomXSy+lFgYbcvBTz/xM+jdbjqIl
-         B/0w==
-X-Gm-Message-State: AOJu0Yzso9ocM9zVCtAgMfSnhY34ohyMJR0WzVrOCLDNJ6QLkDE2wyxt
-	zc9H4qoYP4AOzevbLExN7zFVFFsN6jwNue1FC6F8ZaL1jwo6OcXR2p/9jirtndJFJT0S1o4NIkp
-	Y
-X-Google-Smtp-Source: AGHT+IGUmKrNBklvvNLErYZY3uJFOI579Vy2t8yLFBBWim+kwzXsY857xkGf5BHjOp+A9Az492dKJg==
-X-Received: by 2002:a05:6402:40cf:b0:5c2:4cbe:ac1c with SMTP id 4fb4d7f45d1cf-5c8d2d00f16mr10677343a12.4.1728310556988;
-        Mon, 07 Oct 2024 07:15:56 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1728310559; x=1728915359;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=qIJLH+pNn+xqq0KYYUmnx97/J/kG6GN6HUy92X5OMa0=;
+        b=BKefQE2d4hv5YSqvUzH480/kp1eLrQOwkcsZpuAyMsxjDIusN5444kU6nXFKJlI6rQ
+         ReZV0hDNW+NiD2lkibeXGb1nkZcz+plWWa12zC7CNhDFUSFi6gQGYMmfpUw0ec21I2wj
+         KddRwrkjSyAGFw9y2g3Eh7Ve3DIta9g1tz0qx15WA/BKIyJIun3XAMBePCAYz9dcVdst
+         aBSiSZC52Gg2QXMGJy4MRKET2nKPCiPvFuukii/N1+uZbu93017m/bQ0AZ02arJLhbTT
+         EassB7GRF9Nm28zmkIvt3q1XCgIj4GQozMwfzIDbSem88oFfNtl46lCWyvCsZ2OlCwgp
+         m8Ww==
+X-Gm-Message-State: AOJu0YzAGhjiWZ1aTnRQoIycO7Wlw7jMUXRrmWTp5cuLq1ovnLda+AAp
+	2Do/rePpkx6b0m8RRSXv2Iagx7QDyXFS9ImPRVKrkV89DjhczAhvmX/wHDQi1PCVFVhGGjVKKMR
+	j
+X-Google-Smtp-Source: AGHT+IFNbTQpUUEqggAFsPrlPpU+tdz/i1iNVix2p3NCtxBXowfuW1xn2FiwJJO1fIXkltbQdVMzQw==
+X-Received: by 2002:a05:651c:210e:b0:2f9:cf64:aaf6 with SMTP id 38308e7fff4ca-2faf3c30324mr51177771fa.17.1728310558686;
+        Mon, 07 Oct 2024 07:15:58 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
@@ -81,79 +82,49 @@ Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v2 0/6] Reuse 32 bit C code more safely
-Date: Mon,  7 Oct 2024 15:15:33 +0100
-Message-Id: <20241007141539.1899350-1-frediano.ziglio@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 2/6] x86/boot: Rationalise .gitignore
+Date: Mon,  7 Oct 2024 15:15:35 +0100
+Message-Id: <20241007141539.1899350-3-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241007141539.1899350-1-frediano.ziglio@cloud.com>
+References: <20241007141539.1899350-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series attempt to:
-- use more C code, that is replace some assembly code with C;
-- avoid some code duplication between C and assembly;
-- prevent some issues having relocations in C code.
+Strip all related content out of the root .gitignore, and provide a
+more local .gitignore's with up-to-date patterns.
 
-The idea is extending the current C to binary code conversion
-done for 32 bit C code called from head.S making sure relocations
-are safe and allowing external symbols usage from C code.
-
-Note that, as an addition, scripts generating code check for no
-data to allow code and data separation.
-
-More details of the implementation are in commit message 3/6,
-which is the largest patch.
-Patch 4/6 reuses code to relocate the trampoline between 32 and 64 bit.
-Patches 5/6 and 6/6 move some code from assembly to C.
-
-Other RFC commits were excluded, I didn't manage to entangle the issues
-sharing headers between 32 and 64 bits.
-Since RFC code was more tested, also with CI and some incompatibility
-were fixed. On that it's weird that we need Python 3.8 for Qemu but we
-still use Python 2 for Xen. Shouldn't we bump requirement to Python 3
-even for Xen?
-
-Code boot successfully using:
-- BIOS boot;
-- EFI boot with Grub2 and ELF file;
-- direct EFI boot without Grub.
-
-Code is currently based on "master" branch, currently commit
-6b20755c24ccd69d2482b45dfb9193940cdc346e.
-
-Changes since v1:
-- 2 preliminary commits for adjust .gitignore;
-- last commit split (one variable at a time);
-- lot of style and names changes;
-- first commit, now 3/6 had some build changes, more details on
-  commit message.
-
-Frediano Ziglio (6):
-  .gitignore: Remove not generated files
-  x86/boot: Rationalise .gitignore
-  x86/boot: create a C bundle for 32 bit boot code and use it
-  x86/boot: Reuse code to relocate trampoline
-  x86/boot: Use trampoline_phys variable directly from C code
-  x86/boot: Use boot_vid_info variable directly from C code
-
- .gitignore                                    |   5 -
- xen/arch/x86/boot/.gitignore                  |   4 +
- xen/arch/x86/boot/Makefile                    |  62 ++++--
- .../x86/boot/{build32.lds => build32.lds.S}   |  49 ++++-
- xen/arch/x86/boot/cmdline.c                   |  12 --
- xen/arch/x86/boot/head.S                      |  49 +----
- xen/arch/x86/boot/reloc-trampoline.c          |  36 ++++
- xen/arch/x86/boot/reloc.c                     |  33 +--
- xen/arch/x86/efi/efi-boot.h                   |  15 +-
- xen/tools/combine_two_binaries                | 198 ++++++++++++++++++
- 10 files changed, 344 insertions(+), 119 deletions(-)
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+---
+ .gitignore                   | 3 ---
+ xen/arch/x86/boot/.gitignore | 3 +++
+ 2 files changed, 3 insertions(+), 3 deletions(-)
  create mode 100644 xen/arch/x86/boot/.gitignore
- rename xen/arch/x86/boot/{build32.lds => build32.lds.S} (57%)
- create mode 100644 xen/arch/x86/boot/reloc-trampoline.c
- create mode 100755 xen/tools/combine_two_binaries
 
+diff --git a/.gitignore b/.gitignore
+index 5a75b204f7..dae97ebfd7 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -247,9 +247,6 @@ xen/.config
+ xen/.config.old
+ xen/.xen.elf32
+ xen/System.map
+-xen/arch/x86/boot/mkelf32
+-xen/arch/x86/boot/*.bin
+-xen/arch/x86/boot/*.lnk
+ xen/arch/x86/efi.lds
+ xen/arch/x86/efi/check.efi
+ xen/arch/x86/efi/mkreloc
+diff --git a/xen/arch/x86/boot/.gitignore b/xen/arch/x86/boot/.gitignore
+new file mode 100644
+index 0000000000..a379db7988
+--- /dev/null
++++ b/xen/arch/x86/boot/.gitignore
+@@ -0,0 +1,3 @@
++/mkelf32
++/*.bin
++/*.lnk
 -- 
 2.34.1
 
