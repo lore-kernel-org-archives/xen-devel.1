@@ -4,32 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 449D7CFB43F
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:29:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.812107.1224831 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02067CFB43F
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:44:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.812137.1224841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxojy-00056T-Tf; Mon, 07 Oct 2024 14:29:38 +0000
+	id 1sxoxu-000452-3v; Mon, 07 Oct 2024 14:44:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 812107.1224831; Mon, 07 Oct 2024 14:29:38 +0000
+Received: by outflank-mailman (output) from mailman id 812137.1224841; Mon, 07 Oct 2024 14:44:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxojy-00055m-Qj; Mon, 07 Oct 2024 14:29:38 +0000
-Received: by outflank-mailman (input) for mailman id 812107;
- Mon, 07 Oct 2024 14:29:37 +0000
+	id 1sxoxu-00044v-0B; Mon, 07 Oct 2024 14:44:02 +0000
+Received: by outflank-mailman (input) for mailman id 812137;
+ Mon, 07 Oct 2024 14:44:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/gRD=RD=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1sxoXO-0002dC-IW
- for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:16:38 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=ITCe=RD=cloud.com=matthew.barnes@srs-se1.protection.inumbo.net>)
+ id 1sxoxs-00042A-8N
+ for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:44:00 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2f69c14-84b6-11ef-99a2-01e77a169b0f;
- Mon, 07 Oct 2024 16:16:36 +0200 (CEST)
-Received: from truciolo.bugseng.com (unknown [37.162.58.49])
- by support.bugseng.com (Postfix) with ESMTPSA id 67D704EE0746;
- Mon,  7 Oct 2024 16:16:35 +0200 (CEST)
+ id 95b417b6-84ba-11ef-99a2-01e77a169b0f;
+ Mon, 07 Oct 2024 16:43:58 +0200 (CEST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5c40aea5c40so8814283a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Oct 2024 07:43:58 -0700 (PDT)
+Received: from mbarnes-x-u.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c8e0594944sm3253004a12.20.2024.10.07.07.43.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Oct 2024 07:43:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,71 +47,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2f69c14-84b6-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1728310596; bh=E7dB2FCofs9MFp7zihxh1wxnARDyNN7WgWI2FwQOK0E=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=xVPGjM9WjmZpi8GG7K9MaKDBHZwteFI3oEC0yibwshSbIA5MxmazJ2nlmAPH8z8XV
-	 ydBaf+FQ3AAfT6hfAwEp+ksKFO0j3UVtrKrGnAda5JHB1CZ95YQ3HUS/3Q1OZ2nTxQ
-	 H8syHKDPHxjy1fQyO5r4zkGDoCtrIXjXLuLv8lw5Kczd1hIT4IKijqL9g9v9qI11gI
-	 +qEtVlpB+dKouWU80A4wXuR4lR6tr4lT2lzuSLkIu6ghEwCTary4FKkxx9+cdLJx3x
-	 CXMSp0RmQwR08y0eiH6H9A5HEKEw+OjqeWqpyEo39l4OUfYP5eQLpvAWdO2oIA/i1I
-	 0gH2S1Owz3nLA==
-From: Federico Serafini <federico.serafini@bugseng.com>
+X-Inumbo-ID: 95b417b6-84ba-11ef-99a2-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1728312237; x=1728917037; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=sNAC+18oEUnhb5mytedDay7gb4s9baqUanV1IJn4ddk=;
+        b=Iao3N16ZYhmyXnB4iiJ8cnKls+Ja74LF117aAu4SneL8cbXfsFp+Z4XQ4h8myZ81f3
+         eBoURQPlebj/s5R0swcp15mrUwwDBqEdCmiAgAnqtnk/ptstf2bLJbysIqBWJWxb90fu
+         BCbLY8182fPXBzqE/QHGep2E08AdM+PevEzck=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728312237; x=1728917037;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=sNAC+18oEUnhb5mytedDay7gb4s9baqUanV1IJn4ddk=;
+        b=tkLxWVNWG1e1VvdZMUNuqlJw3TAIfsJftJBMVAWa8btXluoLe8Nv4uhKuKAd7FDhwy
+         klIJigrzM5G2WeYIY4cororBZgsfxhC6xMeQPy1LuqazVMf+fDS/+93ahR+ZfqC89sBw
+         SzChoy374pulXVN863PHhOv8eflcSJFhM5tMQRB+nX4r02tDvvOGdHZkZBb/hoytUWER
+         YeZJAEIhDECMmr8QUbzP8fDhziPa+VI2o/7XwIyK3iSFj75LpjZYRRVldNdotfttI3mV
+         JXSW+v0TGZaX7+FVmdVZeXv5LPCByB/OEDifnRkONUGf9TkiHyRc/n0EJgoqh0Xg58eJ
+         q1tA==
+X-Gm-Message-State: AOJu0YzsYwaFOeYSIdY79f7DxB+61FTCVwLl+gUxK1yPM4s4Hz0E+FFK
+	9PHhatuU46CZ4Gx8AgJPn5/dtfLu2E+10Vajt90G2qmwqynU0zGj6FqIkVxtMV/SI3YDloxpc34
+	R
+X-Google-Smtp-Source: AGHT+IHfl/BqmCCe9MxIo313nFBT75bWyhQ42eYn/Vq4XVqWpPa7GUB2WOsV0eiJUkQ4DK1WYnxY+Q==
+X-Received: by 2002:a05:6402:354d:b0:5c8:97b9:58a6 with SMTP id 4fb4d7f45d1cf-5c8d2f1d9e1mr12054541a12.1.1728312237360;
+        Mon, 07 Oct 2024 07:43:57 -0700 (PDT)
+From: Matthew Barnes <matthew.barnes@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH v2 3/4] xen/vpci: address violations of MISRA C Rule 16.3
-Date: Mon,  7 Oct 2024 16:16:18 +0200
-Message-ID: <a91c0223b827593f5c1a7ca7ece786266e5b8f52.1728308312.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1728308312.git.federico.serafini@bugseng.com>
-References: <cover.1728308312.git.federico.serafini@bugseng.com>
+Cc: Matthew Barnes <matthew.barnes@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2] x86/APIC: Switch flat driver to use phys dst for ext ints
+Date: Mon,  7 Oct 2024 15:34:43 +0100
+Message-Id: <0db68e62ffc428f553a30397df1e79068d26bb5f.1728311378.git.matthew.barnes@cloud.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Address violations of MISRA C:2012 Rule 16.3:
-"An unconditional `break' statement shall terminate every
-switch-clause".
+External interrupts via logical delivery mode in xAPIC do not benefit
+from targeting multiple CPUs and instead simply bloat up the vector
+space.
 
-No functional change.
+However the xAPIC flat driver currently uses logical delivery for
+external interrupts.
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+This patch switches the xAPIC flat driver to use physical destination
+mode for external interrupts, instead of logical destination mode.
+
+This patch also applies the following non-functional changes:
+- Remove now unused logical flat functions
+- Expand GENAPIC_FLAT and GENAPIC_PHYS macros, and delete them.
+
+Resolves: https://gitlab.com/xen-project/xen/-/issues/194
+Signed-off-by: Matthew Barnes <matthew.barnes@cloud.com>
 ---
-Changes from v2:
-- simply break without returning X86EMUL_UNHANDLEABLE.
-
-As pointed out by Jan, these functions only return X86EMUL_OKAY but:
-https://lists.xenproject.org/archives/html/xen-devel/2024-09/msg00727.html
-
-Do you have any comments?
+Changes in v2:
+- Reword commit message
+- Expand and delete GENAPIC_* macros
+- Bundle patch series into one patch
 ---
- xen/drivers/vpci/msix.c | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/arch/x86/genapic/bigsmp.c      |  8 +++++++-
+ xen/arch/x86/genapic/default.c     |  8 +++++++-
+ xen/arch/x86/genapic/delivery.c    | 10 ----------
+ xen/arch/x86/include/asm/genapic.h | 20 +-------------------
+ 4 files changed, 15 insertions(+), 31 deletions(-)
 
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index fbe710ab92..5bb4444ce2 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -364,6 +364,7 @@ static int adjacent_read(const struct domain *d, const struct vpci_msix *msix,
+diff --git a/xen/arch/x86/genapic/bigsmp.c b/xen/arch/x86/genapic/bigsmp.c
+index e97e4453a033..b2e721845275 100644
+--- a/xen/arch/x86/genapic/bigsmp.c
++++ b/xen/arch/x86/genapic/bigsmp.c
+@@ -46,5 +46,11 @@ static int __init cf_check probe_bigsmp(void)
  
-     default:
-         ASSERT_UNREACHABLE();
-+        break;
-     }
-     spin_unlock(&vpci->lock);
+ const struct genapic __initconst_cf_clobber apic_bigsmp = {
+ 	APIC_INIT("bigsmp", probe_bigsmp),
+-	GENAPIC_PHYS
++	.int_delivery_mode = dest_Fixed,
++	.int_dest_mode = 0, /* physical delivery */
++	.init_apic_ldr = init_apic_ldr_phys,
++	.vector_allocation_cpumask = vector_allocation_cpumask_phys,
++	.cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
++	.send_IPI_mask = send_IPI_mask_phys,
++	.send_IPI_self = send_IPI_self_legacy
+ };
+diff --git a/xen/arch/x86/genapic/default.c b/xen/arch/x86/genapic/default.c
+index a968836a1878..59c79afdb8fa 100644
+--- a/xen/arch/x86/genapic/default.c
++++ b/xen/arch/x86/genapic/default.c
+@@ -16,5 +16,11 @@
+ /* should be called last. */
+ const struct genapic __initconst_cf_clobber apic_default = {
+ 	APIC_INIT("default", NULL),
+-	GENAPIC_FLAT
++	.int_delivery_mode = dest_Fixed,
++	.int_dest_mode = 0, /* physical delivery */
++	.init_apic_ldr = init_apic_ldr_flat,
++	.vector_allocation_cpumask = vector_allocation_cpumask_phys,
++	.cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
++	.send_IPI_mask = send_IPI_mask_flat,
++	.send_IPI_self = send_IPI_self_legacy
+ };
+diff --git a/xen/arch/x86/genapic/delivery.c b/xen/arch/x86/genapic/delivery.c
+index d1f99bf6834a..3def78f380d3 100644
+--- a/xen/arch/x86/genapic/delivery.c
++++ b/xen/arch/x86/genapic/delivery.c
+@@ -19,16 +19,6 @@ void cf_check init_apic_ldr_flat(void)
+ 	apic_write(APIC_LDR, val);
+ }
  
-@@ -512,6 +513,7 @@ static int adjacent_write(const struct domain *d, const struct vpci_msix *msix,
+-const cpumask_t *cf_check vector_allocation_cpumask_flat(int cpu)
+-{
+-	return &cpu_online_map;
+-} 
+-
+-unsigned int cf_check cpu_mask_to_apicid_flat(const cpumask_t *cpumask)
+-{
+-	return cpumask_bits(cpumask)[0]&0xFF;
+-}
+-
+ /*
+  * PHYSICAL DELIVERY MODE (unicast to physical APIC IDs).
+  */
+diff --git a/xen/arch/x86/include/asm/genapic.h b/xen/arch/x86/include/asm/genapic.h
+index a694371c6d16..2f46f173c1d4 100644
+--- a/xen/arch/x86/include/asm/genapic.h
++++ b/xen/arch/x86/include/asm/genapic.h
+@@ -44,29 +44,11 @@ extern const struct genapic apic_bigsmp;
+ void cf_check send_IPI_self_legacy(uint8_t vector);
  
-     default:
-         ASSERT_UNREACHABLE();
-+        break;
-     }
-     spin_unlock(&vpci->lock);
+ void cf_check init_apic_ldr_flat(void);
+-unsigned int cf_check cpu_mask_to_apicid_flat(const cpumask_t *cpumask);
++const cpumask_t *cf_check vector_allocation_cpumask_phys(int cpu);
+ void cf_check send_IPI_mask_flat(const cpumask_t *cpumask, int vector);
+-const cpumask_t *cf_check vector_allocation_cpumask_flat(int cpu);
+-#define GENAPIC_FLAT \
+-	.int_delivery_mode = dest_LowestPrio, \
+-	.int_dest_mode = 1 /* logical delivery */, \
+-	.init_apic_ldr = init_apic_ldr_flat, \
+-	.vector_allocation_cpumask = vector_allocation_cpumask_flat, \
+-	.cpu_mask_to_apicid = cpu_mask_to_apicid_flat, \
+-	.send_IPI_mask = send_IPI_mask_flat, \
+-	.send_IPI_self = send_IPI_self_legacy
  
+ void cf_check init_apic_ldr_phys(void);
+ unsigned int cf_check cpu_mask_to_apicid_phys(const cpumask_t *cpumask);
+ void cf_check send_IPI_mask_phys(const cpumask_t *mask, int vector);
+-const cpumask_t *cf_check vector_allocation_cpumask_phys(int cpu);
+-#define GENAPIC_PHYS \
+-	.int_delivery_mode = dest_Fixed, \
+-	.int_dest_mode = 0 /* physical delivery */, \
+-	.init_apic_ldr = init_apic_ldr_phys, \
+-	.vector_allocation_cpumask = vector_allocation_cpumask_phys, \
+-	.cpu_mask_to_apicid = cpu_mask_to_apicid_phys, \
+-	.send_IPI_mask = send_IPI_mask_phys, \
+-	.send_IPI_self = send_IPI_self_legacy
+ 
+ #endif
 -- 
-2.43.0
+2.46.0
 
 
