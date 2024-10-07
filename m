@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C44CFB441
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:25:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.812052.1224761 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B052CCFB43F
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:26:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.812062.1224770 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxofU-0004s0-R6; Mon, 07 Oct 2024 14:25:00 +0000
+	id 1sxogs-0005Z4-8C; Mon, 07 Oct 2024 14:26:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 812052.1224761; Mon, 07 Oct 2024 14:25:00 +0000
+Received: by outflank-mailman (output) from mailman id 812062.1224770; Mon, 07 Oct 2024 14:26:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxofU-0004rt-OL; Mon, 07 Oct 2024 14:25:00 +0000
-Received: by outflank-mailman (input) for mailman id 812052;
- Mon, 07 Oct 2024 14:25:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=mBo3=RD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sxofU-0004rn-6L
- for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:25:00 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ee2c1515-84b7-11ef-99a2-01e77a169b0f;
- Mon, 07 Oct 2024 16:24:58 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9941a48ac8so260804566b.3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Oct 2024 07:24:58 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a993fdd2202sm309529566b.55.2024.10.07.07.24.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Oct 2024 07:24:57 -0700 (PDT)
+	id 1sxogs-0005Yx-5i; Mon, 07 Oct 2024 14:26:26 +0000
+Received: by outflank-mailman (input) for mailman id 812062;
+ Mon, 07 Oct 2024 14:26:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=/gRD=RD=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1sxoXO-0002yM-3E
+ for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:16:38 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c3bc471c-84b6-11ef-a0bb-8be0dac302b0;
+ Mon, 07 Oct 2024 16:16:37 +0200 (CEST)
+Received: from truciolo.bugseng.com (unknown [37.162.58.49])
+ by support.bugseng.com (Postfix) with ESMTPSA id 4C67E4EE074C;
+ Mon,  7 Oct 2024 16:16:36 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,87 +41,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ee2c1515-84b7-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1728311098; x=1728915898; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=6UzigQuNzrZ1FoMMvpeImqwe6ltTBix1eG3I2N7VJcg=;
-        b=VUBaKoujXweY9t/Xlu8O61Eh/Pq6cKuRhjKZblqmfXrvrAQN+2Man3YxZM5YYfy1bb
-         Uy0f3pFTnQ0/TTJC5FDOY6QspWn8ndC4mAf1hFXDDtVYyUsXrcjiFpNol7ax6MbJTlF4
-         8of/b9gwf2IItrfWGE9N4vhZ1DLqOodLRlx/pfsde9u2VdfCRfdGr99gALP++cw1nlOF
-         qk3d1eXq+uPDNKqfM/0lym0Hv3YdLd8XheJ0lB8W/VFhXKmwNF80VI2S9FhAynSXn7PP
-         J6RUcnM73nGKq78tdMmbJ0zA3fuj2L3gofIJDwrhBBp14Hx8u2wDH9FdenLZIbcNGb6t
-         QVig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728311098; x=1728915898;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6UzigQuNzrZ1FoMMvpeImqwe6ltTBix1eG3I2N7VJcg=;
-        b=Hy6v+kq8BMZunrlCRQdzhySqdMDm6BWktox/bEd9RbBZhJbA0b/XUVvG0YB+4eG0gM
-         XxYF+E6XolfwkCUcNMGbXAGEAbpyguQvIS/rYHtQtkKNunArrdWGiZgVY638hUJkvyfU
-         ilFNUswHCLezJvpEgCY6fJuxQmwC5Gts3SvhTZwPl6ChmvLoqWEUDHcjSuRi1AtBtUtJ
-         INZhPxwl3spkatCSmsRvflxZYOcjblyGrBbxhmDWStCQaU/xGqdY64p0h1cS0ruWqjxS
-         RthiNBOoUsa6kHI/vrF9tuf5fTD2Ym/5YwjMSPCTwYi/V+4BC9JSp1jGkr9+fZZxDDmy
-         hysA==
-X-Forwarded-Encrypted: i=1; AJvYcCV9c4gM5JwgharYBmcktf6bEYxpgPRxo1vxw6OmbeYGz1YSIdx7zTTSs66C6c4sOCDiAVdzyjxg338=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwhJF76/DEv9sDt7rqoYi2fIsnCFdt4V9aKMXJh9V+E1qrkcFfT
-	fErt3w1e4idvllyr2/MKDFo3smQec+Ox4lrEr6WjGsQypKk6JAUXMtzv2fbKmQ==
-X-Google-Smtp-Source: AGHT+IERRVvLSXhtAYFKXucaccBsI8R5m13Nc+37x3xEhCpGU0P9EZ7klNCQYmW9S2K/VWscyQZp2Q==
-X-Received: by 2002:a17:907:2cc2:b0:a99:6476:ce78 with SMTP id a640c23a62f3a-a99647705c3mr31432366b.17.1728311097692;
-        Mon, 07 Oct 2024 07:24:57 -0700 (PDT)
-Message-ID: <f334ebae-eeda-4582-92e6-1cfcfa765b67@suse.com>
-Date: Mon, 7 Oct 2024 16:24:56 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v2 1/4] x86/emul: add defensive code
-To: Federico Serafini <federico.serafini@bugseng.com>
-Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+X-Inumbo-ID: c3bc471c-84b6-11ef-a0bb-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1728310597; bh=Cj7N+K8vyoIngmTvtRYCAMfqpWWddHIl9pmTFZ7wneY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=HlM9scJN3uJ3HDUAg+2dJHb1oLxWkXIjhV32iHKtNcMKHzFdTtGNxjUfVtugP5QZf
+	 pinxogS46o5Y5Vq9wmzsTzfT5LtLERkht6uXnM+jIQGHCJbAQ45yG1ckvoTa5PBIH8
+	 hCLAgvPD74v/aZa42Ji+wDxzrJXWnrZstmeFw1bJMszg1MWt2GxMaEaibWDnRBaMwj
+	 LugF/OPtHc8rdwS/+F2oAsmwO/Wq935GBF+GPJyj7Ku3Ihp+rgZ481hUrV1EfT1cAh
+	 walqsVhR3YBwGY7C0LUc6C4CrKeQOizm7nVh8LJa7sfcezrrbU5S4tz8y4bOTrdrrC
+	 XUHLbd6hHFOxA==
+From: Federico Serafini <federico.serafini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	Federico Serafini <federico.serafini@bugseng.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v2 4/4] xen/pci: address a violation of MISRA C Rule 16.3
+Date: Mon,  7 Oct 2024 16:16:19 +0200
+Message-ID: <c662cae0f545a4e4e3921ae13bf69dc02884d9ee.1728308312.git.federico.serafini@bugseng.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1728308312.git.federico.serafini@bugseng.com>
 References: <cover.1728308312.git.federico.serafini@bugseng.com>
- <063bd71b535825715bd54ee9238bec2fc87f0bba.1728308312.git.federico.serafini@bugseng.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <063bd71b535825715bd54ee9238bec2fc87f0bba.1728308312.git.federico.serafini@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On 07.10.2024 16:16, Federico Serafini wrote:
-> Add defensive code after unreachable program points.
-> This also meets the requirements to deviate violations of MISRA C:2012
-> Rule 16.3: "An unconditional `break' statement shall terminate every
-> switch-clause".
-> 
-> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+Refactor the code to avoid an implicit fallthrough and address
+a violation of MISRA C:2012 Rule 16.3: "An unconditional `break'
+statement shall terminate every switch-clause".
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+No functional change.
 
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+---
+Changes in v2:
+- improved description.
+---
+ xen/drivers/passthrough/pci.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+index 5a446d3dce..a5705def3f 100644
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -170,8 +170,10 @@ static int __init cf_check parse_phantom_dev(const char *str)
+     {
+     case 1: case 2: case 4:
+         if ( *s )
+-    default:
+             return -EINVAL;
++        break;
++    default:
++        return -EINVAL;
+     }
+ 
+     phantom_devs[nr_phantom_devs++] = phantom;
+-- 
+2.43.0
 
 
