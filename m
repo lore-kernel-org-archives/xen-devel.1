@@ -4,46 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5630CFB441
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 10:35:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.811871.1224581 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72949CFB43F
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 10:36:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.811864.1224590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxl58-0003jB-D9; Mon, 07 Oct 2024 10:35:14 +0000
+	id 1sxl65-0004qu-NX; Mon, 07 Oct 2024 10:36:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 811871.1224581; Mon, 07 Oct 2024 10:35:14 +0000
+Received: by outflank-mailman (output) from mailman id 811864.1224590; Mon, 07 Oct 2024 10:36:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxl58-0003j3-AB; Mon, 07 Oct 2024 10:35:14 +0000
-Received: by outflank-mailman (input) for mailman id 811871;
- Mon, 07 Oct 2024 10:35:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1sxl65-0004qn-L2; Mon, 07 Oct 2024 10:36:13 +0000
+Received: by outflank-mailman (input) for mailman id 811864;
+ Mon, 07 Oct 2024 10:30:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4XqV=RD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1sxl56-0003GC-Gi
- for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 10:35:12 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de
- [2a07:de40:b251:101:10:150:64:1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d42bf279-8497-11ef-a0bb-8be0dac302b0;
- Mon, 07 Oct 2024 12:35:10 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 89CA121BF8;
- Mon,  7 Oct 2024 10:35:10 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 596C313786;
- Mon,  7 Oct 2024 10:35:10 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 1lMhFF65A2eFKgAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 07 Oct 2024 10:35:10 +0000
+ (envelope-from <SRS0=yj4Z=RD=syndicat.com=nd@srs-se1.protection.inumbo.net>)
+ id 1sxl0g-00031M-Pm
+ for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 10:30:39 +0000
+Received: from mail.syndicat.com (mail.syndicat.com [62.146.89.62])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 30b5e5f1-8497-11ef-99a2-01e77a169b0f;
+ Mon, 07 Oct 2024 12:30:36 +0200 (CEST)
+Received: from localhost.syndicat.com ([127.0.0.1]:62311 helo=localhost)
+ by mail.syndicat.com with esmtp (Syndicat PostHamster 12.2 4.96.1)
+ (envelope-from <nd@syndicat.com>) id 1sxkzy-0002o3-0X;
+ Mon, 07 Oct 2024 12:29:54 +0200
+Received: from mail.syndicat.com ([127.0.0.1])
+ by localhost (mail.syndicat.com [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id S8PNeOnJl_IF; Mon,  7 Oct 2024 12:29:53 +0200 (CEST)
+Received: from [62.89.4.53] (port=62965 helo=gongov.localnet)
+ by mail.syndicat.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Syndicat PostHamster 12.2 4.96.1) (envelope-from <nd@syndicat.com>)
+ id 1sxkzx-0007Je-1p; Mon, 07 Oct 2024 12:29:53 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,99 +49,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d42bf279-8497-11ef-a0bb-8be0dac302b0
-Authentication-Results: smtp-out1.suse.de;
-	none
-From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH 2/2] drop CONFIG_XC support
-Date: Mon,  7 Oct 2024 12:34:56 +0200
-Message-ID: <20241007103456.14946-3-jgross@suse.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241007103456.14946-1-jgross@suse.com>
-References: <20241007103456.14946-1-jgross@suse.com>
+X-Inumbo-ID: 30b5e5f1-8497-11ef-99a2-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=syndicat.com; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:Subject:Cc:Reply-To:To:From:Sender:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=EAprCz2Gwkm9+pncvZr2IJ9AQor7OnWEiPmOKypE4qM=; b=q80ZG8feEmafqmtw50AGULQgzC
+	IwN3tCOeXvM5hn1fH50Ucu4L6mzmZIoDlIrYPC0yiQNideCrU3IdTqYtQ50ikYSSj0bTzM7voe/9D
+	BYz1SC6qdLx8BGQJUAgxcfKWBkMnJ8JNITx6w3PL5lejmIZKo+Sb5KSRO4s7wBs5YoSE=;
+X-Virus-Scanned: amavisd-new at syndicat.com
+From: Niels Dettenbach <nd@syndicat.com>
+To: x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>
+Reply-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+ Ingo Molnar <mingo@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
+ linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 1/1] x86: SMP broken on Xen PV DomU since 6.9
+Date: Mon, 07 Oct 2024 12:29:46 +0200
+Message-ID: <3635258.LM0AJKV5NW@gongov>
+Organization: Syndicat IT&Internet
+In-Reply-To: <45f3a10c-8695-42cb-abb8-8c13ce1a476b@suse.com>
+References:
+ <2210883.Icojqenx9y@gongov> <864022534.0ifERbkFSE@gongov>
+ <45f3a10c-8695-42cb-abb8-8c13ce1a476b@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	REPLY(-4.00)[]
-X-Rspamd-Queue-Id: 89CA121BF8
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+Content-Type: multipart/signed; boundary="nextPart16948470.geO5KgaWL5";
+ micalg="pgp-sha512"; protocol="application/pgp-signature"
+X-Report-Abuse-To: abuse@syndicat.com (see https://www.syndicat.com/kontakt/kontakte/)
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - mail.syndicat.com
+X-AntiAbuse: Original Domain - lists.xenproject.org
+X-AntiAbuse: Sender Address Domain - syndicat.com
 
-CONFIG_XC is no longer needed with individual CONFIG_LIBXEN support.
+--nextPart16948470.geO5KgaWL5
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
+From: Niels Dettenbach <nd@syndicat.com>
+To: x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>
+Reply-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Subject: Re: [PATCH 1/1] x86: SMP broken on Xen PV DomU since 6.9
+Date: Mon, 07 Oct 2024 12:29:46 +0200
+Message-ID: <3635258.LM0AJKV5NW@gongov>
+Organization: Syndicat IT&Internet
+In-Reply-To: <45f3a10c-8695-42cb-abb8-8c13ce1a476b@suse.com>
+MIME-Version: 1.0
 
-Remove it, while disabling the CONFIG_LIBXEN items by default.
+Am Freitag, 4. Oktober 2024, 12:29:57  schrieb J=C3=BCrgen Gro=C3=9F:
+> On 04.10.24 12:05, Niels Dettenbach wrote:
+>=20
+> > Virtual machines under Xen Hypervisor (DomU) running in Xen PV mode use
+> > a
+> > special, nonstandard synthetized CPU topology which "just works" under
+> > kernels 6.9.x while newer kernels wrongly assuming a "crash kernel" and
+> > disable SMP (reducing to one CPU core) because the newer topology
+> > implementation produces a wrong error "[Firmware Bug]: APIC enumeration
+> > order not specification compliant" after new topology checks which are
+> > improper for Xen PV platform. As a result, the kernel disables SMP and
+> > activates just one CPU core within the PV DomU "VM" (DomU in PV mode).
+> >=20
+> > The patch disables the regarding checks if it is running in Xen PV
+> > mode (only) and bring back SMP / all CPUs as in the past to such DomU
+> > VMs. The Xen subsystem takes care of the proper interaction between
+> > "guest" (DomU) and the "host" (Dom0).
+> >=20
+> > Signed-off-by: Niels Dettenbach <nd@syndicat.com>
+>=20
+>=20
+> Does the attached patch instead of yours help?
+>=20
+> Compile tested only.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- Config.mk | 30 +++++++++---------------------
- 1 file changed, 9 insertions(+), 21 deletions(-)
 
-diff --git a/Config.mk b/Config.mk
-index d0fbacac..f59a0cf4 100644
---- a/Config.mk
-+++ b/Config.mk
-@@ -193,6 +193,15 @@ CONFIG-n += CONFIG_9PFRONT
- CONFIG-n += CONFIG_TPM_TIS
- CONFIG-n += CONFIG_TPMBACK
- CONFIG-n += CONFIG_BALLOON
-+CONFIG-n += CONFIG_LIBXENCALL
-+CONFIG-n += CONFIG_LIBXENCTRL
-+CONFIG-n += CONFIG_LIBXENDEVICEMODEL
-+CONFIG-n += CONFIG_LIBXENEVTCHN
-+CONFIG-n += CONFIG_LIBXENFOREIGNMEMORY
-+CONFIG-n += CONFIG_LIBXENGNTTAB
-+CONFIG-n += CONFIG_LIBXENGUEST
-+CONFIG-n += CONFIG_LIBXENTOOLCORE
-+CONFIG-n += CONFIG_LIBXENTOOLLOG
- # Setting CONFIG_USE_XEN_CONSOLE copies all print output to the Xen emergency
- # console apart of standard dom0 handled console.
- CONFIG-n += CONFIG_USE_XEN_CONSOLE
-@@ -201,8 +210,6 @@ CONFIG-y += CONFIG_PARAVIRT
- else
- CONFIG-n += CONFIG_PARAVIRT
- endif
--# Support legacy CONFIG_XC value
--CONFIG_XC ?= $(libc)
- 
- CONFIG-$(lwip) += CONFIG_LWIP
- 
-@@ -212,25 +219,6 @@ $(foreach i,$(CONFIG-n),$(eval $(i) ?= n))
- CONFIG-x += CONFIG_LIBXS
- CONFIG_LIBXS ?= $(CONFIG_XENBUS)
- 
--CONFIG-x += CONFIG_LIBXENCALL
--CONFIG-x += CONFIG_LIBXENCTRL
--CONFIG-x += CONFIG_LIBXENDEVICEMODEL
--CONFIG-x += CONFIG_LIBXENEVTCHN
--CONFIG-x += CONFIG_LIBXENFOREIGNMEMORY
--CONFIG-x += CONFIG_LIBXENGNTTAB
--CONFIG-x += CONFIG_LIBXENGUEST
--CONFIG-x += CONFIG_LIBXENTOOLCORE
--CONFIG-x += CONFIG_LIBXENTOOLLOG
--CONFIG_LIBXENCALL ?= $(CONFIG_XC)
--CONFIG_LIBXENCTRL ?= $(CONFIG_XC)
--CONFIG_LIBXENDEVICEMODEL ?= $(CONFIG_XC)
--CONFIG_LIBXENEVTCHN ?= $(CONFIG_XC)
--CONFIG_LIBXENFOREIGNMEMORY ?= $(CONFIG_XC)
--CONFIG_LIBXENGNTTAB ?= $(CONFIG_XC)
--CONFIG_LIBXENGUEST ?= $(CONFIG_XC)
--CONFIG_LIBXENTOOLCORE ?= $(CONFIG_XC)
--CONFIG_LIBXENTOOLLOG ?= $(CONFIG_XC)
--
- CONFIG-all := $(CONFIG-y) $(CONFIG-n) $(CONFIG-x)
- 
- # Export config items as compiler directives
--- 
-2.43.0
+it does =C3=9F)))
+
+
+domU:
+=2D- snip --
+vcpus=3D6
+cpu=3D"12,13,14,15,23,24"
+=2D- snap --
+
+
+=2D- snip --
+[    0.500458] cpu 0 spinlock event irq 1
+[    0.500485] VPMU disabled by hypervisor.
+[    0.501273] Performance Events: unsupported p6 CPU model 62 no PMU drive=
+r, software events only.
+[    0.501304] signal: max sigframe size: 1776
+[    0.501410] rcu: Hierarchical SRCU implementation.
+[    0.501428] rcu:     Max phase no-delay instances is 400.
+[    0.502032] NMI watchdog: Perf NMI watchdog permanently disabled
+[    0.502309] smp: Bringing up secondary CPUs ...
+[    0.502759] installing Xen timer for CPU 2
+[    0.503384] installing Xen timer for CPU 4
+[    0.503838] cpu 2 spinlock event irq 16
+[    0.503870] cpu 4 spinlock event irq 17
+[    0.504867] installing Xen timer for CPU 1
+[    0.505495] installing Xen timer for CPU 3
+[    0.506125] installing Xen timer for CPU 5
+[    0.506363] cpu 1 spinlock event irq 33
+[    0.507869] cpu 3 spinlock event irq 34
+[    0.507901] cpu 5 spinlock event irq 35
+[    0.507923] smp: Brought up 1 node, 6 CPUs
+=2D- snap --
+
+
+
+thank you very much!
+
+
+niels.
+
+
+--nextPart16948470.geO5KgaWL5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEen+3H2N8RDyGzUZnDbtaiEWSKkQFAmcDuBoACgkQDbtaiEWS
+KkQnsg/+KCqd6M8AuOs1taM3LOothfBX+XvsqupFVM3+d6q88qITNequbF+q5ktV
+QfVFy5i3GcIah1mx4cXMEBGipYczDEHQ9qQg2WnyRkgXBstPByztA2N47h7EyzXd
+UcEDcApFiuonMxVV6r5/j01OIRAmk7zLrJzDpzUkh6ybJV4rpj+b+rabboHS1wA3
+G5xmRCSZVGXQaxAKWUzt2IL/NEd0/36JvZgMukolf5Dj9Mbe8Uy7EhGxTCTUCQyO
+kbfb7kd/HVdW4+tFXAU+U18Lvmg/cKt0ECdv/Adj+8ZYBfAgAJyWglQIgGlozHCm
+OYPjBIEQe4KdODFg8xFa4Z4gQbEsfB1tZekj/rzMk54iHX71DYPNjCD9Mdk3+W1K
+EUtOnLDZuLklbNfr6fE2NLcClVG4BeaFAj4xwY4o7YxCz0KUlvJkX6wdHGojCu+F
+kvBIXDLu/0Kvor1mPSlsnWZ0No+pq1MsiRgXeLGhVW08wO4RQD9ZZAu/KEsjkZK+
+tw3jTazLcfxsJlh5zAK/toG0ST9HNac5AJ1BYjFKW6+wbVNIjlAkCAB/MLIaTmq4
+da0881C3+yYlk0aJMGSxqTW7S9hvECHsWoFak+6E/vy1pvYqJDrkAflYPufsVpjv
+RNo2XOKfCztP2oSOypiQJSdvl+9NwXWhbJvwc1m7HNWFHYU5xJQ=
+=WEKw
+-----END PGP SIGNATURE-----
+
+--nextPart16948470.geO5KgaWL5--
+
+
 
 
