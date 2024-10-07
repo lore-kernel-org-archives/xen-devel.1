@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE4CCFB441
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:28:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.812091.1224801 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB841CFB441
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:28:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.812092.1224812 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxoij-00020p-1J; Mon, 07 Oct 2024 14:28:21 +0000
+	id 1sxoiy-0002YQ-Be; Mon, 07 Oct 2024 14:28:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 812091.1224801; Mon, 07 Oct 2024 14:28:21 +0000
+Received: by outflank-mailman (output) from mailman id 812092.1224812; Mon, 07 Oct 2024 14:28:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxoii-00020i-Uw; Mon, 07 Oct 2024 14:28:20 +0000
-Received: by outflank-mailman (input) for mailman id 812091;
- Mon, 07 Oct 2024 14:28:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=mBo3=RD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1sxoih-0001vP-GX
- for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:28:19 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6504121e-84b8-11ef-99a2-01e77a169b0f;
- Mon, 07 Oct 2024 16:28:17 +0200 (CEST)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a995ec65c35so111246066b.1
- for <xen-devel@lists.xenproject.org>; Mon, 07 Oct 2024 07:28:17 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99525346b4sm164159166b.124.2024.10.07.07.28.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Oct 2024 07:28:16 -0700 (PDT)
+	id 1sxoiy-0002YB-5T; Mon, 07 Oct 2024 14:28:36 +0000
+Received: by outflank-mailman (input) for mailman id 812092;
+ Mon, 07 Oct 2024 14:28:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=/gRD=RD=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1sxoXL-0002yM-TY
+ for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:16:35 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c25ca249-84b6-11ef-a0bb-8be0dac302b0;
+ Mon, 07 Oct 2024 16:16:35 +0200 (CEST)
+Received: from truciolo.bugseng.com (unknown [37.162.58.49])
+ by support.bugseng.com (Postfix) with ESMTPSA id D37314EE0745;
+ Mon,  7 Oct 2024 16:16:33 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,91 +41,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6504121e-84b8-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1728311297; x=1728916097; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=mOFJP3SNRaQwpw2JZooN/AnokeTbtqrd1zcnTTIB/Mk=;
-        b=EeI5V2sp0gy9oJlyDukiUgxJKdLPYyT6Yxly3MP1S97VkJhDcxB7uIKaPnpT78gPV4
-         ALFv8rzXo+iayXZkzhFG1BC6kB8d1y4VgXVmr13/p9qi42iOtnRn1FxyUiYgza9ytnSc
-         /pvmGpZ5P0nr70Gj8vH1yp8i+dQr/6qiuzvOw0Y6uJgkSJCnuk75lqTfmTiohRMLTA74
-         /jdUXauuQ9ToHlCBa5vd7rvoqgKqqMsvODSLWcp+i+FbTRRBYG6EBJuhkZeLvIhyIU80
-         /RUe8V7twyIqjY6gmuEdk1BSPMnhaHWaULtHTTDoYw9Lt1hHzaiyNHnI6uyRqjkAmcKC
-         qFag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728311297; x=1728916097;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mOFJP3SNRaQwpw2JZooN/AnokeTbtqrd1zcnTTIB/Mk=;
-        b=D4YfrfqWC1hHtQZ4fdASmk3um86AutIk/YCzE25iq5Zn70Q27Q16P+BDHtofhqvJsO
-         x+8thWPm7UIr/kGbieI4PtfuLGV4azjjSGR0T5tC+Jspg9SUM0fxBxI97phsfS+sGXFn
-         mfL2h1czKVPvCGUWxdNI4BIBJnKiC9YbUjJi05yA7s15f4SuOHWBQNH0RJcoHKfI41iR
-         DL9ahGjr1dgB8j60b/IIr74gBKthjDUzdIJXvLH0k5lU9d2YgQ9+zwalZTGDPxvFEjzg
-         k8lg3/ITIWQWJDFwkU8ocrenVLIaSJH6K2PJq8z0v3wsO1cawHVinmIxzQqLzqg/7AOa
-         fWYg==
-X-Forwarded-Encrypted: i=1; AJvYcCVn7yaYg0UJ3kjontj6N6v8COAKm0fQbrnGsxoO2KUvUELoEJN/26c/OB5/uw8GlK+Sxgn+9Lzjx/U=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxTtBaedTiC8k/a8IWtqeyXBHPQKCNBJYjKPFNcm5fCXapbLjPf
-	vXmmEFUri7BuvlYewuRlSIcFPH1h+aKpeiRnug3gBz6levEcEFCc/Ywu7ncBB01C2WWix7d2lX4
-	=
-X-Google-Smtp-Source: AGHT+IFaGu/kOnvA1iw/mPJPo5u6+ziQTk777SZOLyK9maRGbVvItjyWpamVkBo1AnpEoyMPwcV9zA==
-X-Received: by 2002:a17:907:36c8:b0:a8d:43c5:9a16 with SMTP id a640c23a62f3a-a991cede585mr1313025966b.6.1728311297166;
-        Mon, 07 Oct 2024 07:28:17 -0700 (PDT)
-Message-ID: <d6c0cb7a-5a71-4018-abe1-4ed81a1da71b@suse.com>
-Date: Mon, 7 Oct 2024 16:28:16 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v2 2/4] x86/emul: address violations of MISRA C Rule
- 16.3
-To: Federico Serafini <federico.serafini@bugseng.com>
-Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+X-Inumbo-ID: c25ca249-84b6-11ef-a0bb-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1728310595; bh=bPGNGs/7gKws9KC4a8OFYQw2+N/QcDxZjIxN7dUNgMw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=kNh/5lISmIQ1gmhVCXsh3Ez15sbICvQAm7ysmvf676GQzNBIlv2V2aSe2xHDGo4sP
+	 wpMcgMFqQnALlSIk2QY9IIUG/O/+o7g8lL1lQjw4EdlaTtR+h1pEWtZFmMlpOiitUe
+	 ihO3ihs9V3gfIXk4jPbloTuP45zJ+Nz+bmCPE6keWYqjmGBlQHMzu9jX7WKKj1hw9W
+	 7Jxnt4WVAeh0EG3Az1cmMGCqfGi5DGFoD1sygqxPloAbZtZZzTVEE8DaHBCeOzn5WT
+	 lNeJNlRFbF8UuGpFzvDqgt3pOWIXySZzTCl9/+3IsSxKovXJMrJabk0nXwUwK2PVZL
+	 ivq6qW/m4a2Yg==
+From: Federico Serafini <federico.serafini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	Federico Serafini <federico.serafini@bugseng.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v2 2/4] x86/emul: address violations of MISRA C Rule 16.3
+Date: Mon,  7 Oct 2024 16:16:17 +0200
+Message-ID: <662440bc082fcb91ad9489999add02fc71416d45.1728308312.git.federico.serafini@bugseng.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1728308312.git.federico.serafini@bugseng.com>
 References: <cover.1728308312.git.federico.serafini@bugseng.com>
- <662440bc082fcb91ad9489999add02fc71416d45.1728308312.git.federico.serafini@bugseng.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <662440bc082fcb91ad9489999add02fc71416d45.1728308312.git.federico.serafini@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On 07.10.2024 16:16, Federico Serafini wrote:
-> @@ -457,6 +460,8 @@ int x86emul_fpu(struct x86_emulate_state *s,
->              case 7: /* fistp m64i */
->                  goto fpu_memdst64;
->              }
-> +            ASSERT_UNREACHABLE();
-> +            break;
+Add missing break statements to address violations of MISRA C:2012
+Rule 16.3 (An unconditional `break' statement shall terminate
+every switch-clause).
 
-"return X86EMUL_UNHANDLEABLE" like is also used just a few lines down
-from here?
+Make explicit unreachability of a program points with
+ASSERT_UNREACHABLE().
 
-Jan
+No functional change.
+
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+---
+Changes in v2:
+- unreachability made explicit.
+---
+ xen/arch/x86/x86_emulate/fpu.c         | 5 +++++
+ xen/arch/x86/x86_emulate/x86_emulate.c | 1 +
+ 2 files changed, 6 insertions(+)
+
+diff --git a/xen/arch/x86/x86_emulate/fpu.c b/xen/arch/x86/x86_emulate/fpu.c
+index 480d879657..f0dab346e0 100644
+--- a/xen/arch/x86/x86_emulate/fpu.c
++++ b/xen/arch/x86/x86_emulate/fpu.c
+@@ -218,6 +218,7 @@ int x86emul_fpu(struct x86_emulate_state *s,
+              */
+             if ( dst->type == OP_MEM && !s->fpu_ctrl && !fpu_check_write() )
+                 dst->type = OP_NONE;
++            break;
+         }
+         break;
+ 
+@@ -296,6 +297,7 @@ int x86emul_fpu(struct x86_emulate_state *s,
+             default:
+                 generate_exception(X86_EXC_UD);
+             }
++            break;
+         }
+         break;
+ 
+@@ -386,6 +388,7 @@ int x86emul_fpu(struct x86_emulate_state *s,
+              */
+             if ( dst->type == OP_MEM && !s->fpu_ctrl && !fpu_check_write() )
+                 dst->type = OP_NONE;
++            break;
+         }
+         break;
+ 
+@@ -457,6 +460,8 @@ int x86emul_fpu(struct x86_emulate_state *s,
+             case 7: /* fistp m64i */
+                 goto fpu_memdst64;
+             }
++            ASSERT_UNREACHABLE();
++            break;
+         }
+         break;
+ 
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
+index 6b6b8c8fe4..30674ec301 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -8310,6 +8310,7 @@ x86_emulate(
+         }
+         if ( rc != 0 )
+             goto done;
++        break;
+     default:
+         break;
+     }
+-- 
+2.43.0
 
 
