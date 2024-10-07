@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C97CCFB43F
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:26:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.812071.1224791 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE4CCFB441
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Oct 2024 14:28:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.812091.1224801 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxoh9-0006rq-Nw; Mon, 07 Oct 2024 14:26:43 +0000
+	id 1sxoij-00020p-1J; Mon, 07 Oct 2024 14:28:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 812071.1224791; Mon, 07 Oct 2024 14:26:43 +0000
+Received: by outflank-mailman (output) from mailman id 812091.1224801; Mon, 07 Oct 2024 14:28:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sxoh9-0006rj-KW; Mon, 07 Oct 2024 14:26:43 +0000
-Received: by outflank-mailman (input) for mailman id 812071;
- Mon, 07 Oct 2024 14:26:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=arWC=RD=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1sxoXb-0002yM-0G
- for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:16:51 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cb5b7f2f-84b6-11ef-a0bb-8be0dac302b0;
- Mon, 07 Oct 2024 16:16:50 +0200 (CEST)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5c718bb04a3so6355922a12.3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Oct 2024 07:16:50 -0700 (PDT)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99420bcc1esm293784766b.199.2024.10.07.07.16.49
+	id 1sxoii-00020i-Uw; Mon, 07 Oct 2024 14:28:20 +0000
+Received: by outflank-mailman (input) for mailman id 812091;
+ Mon, 07 Oct 2024 14:28:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=mBo3=RD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sxoih-0001vP-GX
+ for xen-devel@lists.xenproject.org; Mon, 07 Oct 2024 14:28:19 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6504121e-84b8-11ef-99a2-01e77a169b0f;
+ Mon, 07 Oct 2024 16:28:17 +0200 (CEST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a995ec65c35so111246066b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Oct 2024 07:28:17 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a99525346b4sm164159166b.124.2024.10.07.07.28.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Oct 2024 07:16:49 -0700 (PDT)
+ Mon, 07 Oct 2024 07:28:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,131 +47,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb5b7f2f-84b6-11ef-a0bb-8be0dac302b0
+X-Inumbo-ID: 6504121e-84b8-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1728310610; x=1728915410; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1728311297; x=1728916097; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=v9PKZQwIn/DtPDlzLfWy1uQqywpKMW3MzbGHsy0oE7A=;
-        b=lOMjpVJcv4/H+WmdDrvYQlXppoXf4UxUstX1Opoo/sTacr+COqq0hj4UHZCSWBLbui
-         ewQey1pl9kLrY5YkjsnBrVpR/MQkP/F2wosLwdJzdGg+nakX8NUQMRKvn1gRxiA0Rcsv
-         KhjBolkGFAqBfekJLhJQOTi8whGNT5ik6oa0s=
+        bh=mOFJP3SNRaQwpw2JZooN/AnokeTbtqrd1zcnTTIB/Mk=;
+        b=EeI5V2sp0gy9oJlyDukiUgxJKdLPYyT6Yxly3MP1S97VkJhDcxB7uIKaPnpT78gPV4
+         ALFv8rzXo+iayXZkzhFG1BC6kB8d1y4VgXVmr13/p9qi42iOtnRn1FxyUiYgza9ytnSc
+         /pvmGpZ5P0nr70Gj8vH1yp8i+dQr/6qiuzvOw0Y6uJgkSJCnuk75lqTfmTiohRMLTA74
+         /jdUXauuQ9ToHlCBa5vd7rvoqgKqqMsvODSLWcp+i+FbTRRBYG6EBJuhkZeLvIhyIU80
+         /RUe8V7twyIqjY6gmuEdk1BSPMnhaHWaULtHTTDoYw9Lt1hHzaiyNHnI6uyRqjkAmcKC
+         qFag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728310610; x=1728915410;
+        d=1e100.net; s=20230601; t=1728311297; x=1728916097;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=v9PKZQwIn/DtPDlzLfWy1uQqywpKMW3MzbGHsy0oE7A=;
-        b=WI+6ondPGKH9wrl+UdQW2LG7frZ4ELMp/DYTdXQILexa3v7Nx/fjJtjic1dC/GORez
-         1Ae+NQVisnakVFcBhD6kOlyYab5Mi7NyKtM9ELCIYb9qfUI7ibCVmfZfXxdx81ozOgjI
-         ENwfVDirp2z0HaVJ9/hoEd0dDIQ8fisLxFn+m2R+SasDJPFHjIb2mQp5kjjX2vR4xCeO
-         7XYZqXRa6Ktda93zoHWDmZktC2yNM30ppxRXh1AXD68l6K0HL4hQTNTkUquVDfT0u+vA
-         0xyy2oQQVc003wvUN9sDp44KA1gplMzmJAHxETvbVxyVFqoAhjzkygcKoekUJb1q+8Lz
-         aZiA==
-X-Forwarded-Encrypted: i=1; AJvYcCUQK4UhStGCaLTonEFj44mAqEUtTjNu5zeaBARP3oAyR01Z2X77TP1+Sa7IDCEgYyayqNEqkOtjBpQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzvNZfHyYmUGls1W8Sk/JVyd/vo5YRNfPcu1kh53PcwhpZOjiWp
-	PUYmslO/3tnstCS+QM6wmaUerHyGguz9E4/8YRtudEe+6hOsZxsgcjXlyVDxQ5E=
-X-Google-Smtp-Source: AGHT+IFzjg7iAkfO/wHvo/8jgxSTXCTz6uIYd3Y8CdEE2ov20gdY8rEkaM+a6xTrhhloAQBK/k3nHw==
-X-Received: by 2002:a17:907:94c3:b0:a86:96f5:fa81 with SMTP id a640c23a62f3a-a991bd757admr1565945966b.32.1728310609754;
-        Mon, 07 Oct 2024 07:16:49 -0700 (PDT)
-Message-ID: <765f0d29-8be8-4f53-90df-c9fbeb1eca68@citrix.com>
-Date: Mon, 7 Oct 2024 15:16:47 +0100
+        bh=mOFJP3SNRaQwpw2JZooN/AnokeTbtqrd1zcnTTIB/Mk=;
+        b=D4YfrfqWC1hHtQZ4fdASmk3um86AutIk/YCzE25iq5Zn70Q27Q16P+BDHtofhqvJsO
+         x+8thWPm7UIr/kGbieI4PtfuLGV4azjjSGR0T5tC+Jspg9SUM0fxBxI97phsfS+sGXFn
+         mfL2h1czKVPvCGUWxdNI4BIBJnKiC9YbUjJi05yA7s15f4SuOHWBQNH0RJcoHKfI41iR
+         DL9ahGjr1dgB8j60b/IIr74gBKthjDUzdIJXvLH0k5lU9d2YgQ9+zwalZTGDPxvFEjzg
+         k8lg3/ITIWQWJDFwkU8ocrenVLIaSJH6K2PJq8z0v3wsO1cawHVinmIxzQqLzqg/7AOa
+         fWYg==
+X-Forwarded-Encrypted: i=1; AJvYcCVn7yaYg0UJ3kjontj6N6v8COAKm0fQbrnGsxoO2KUvUELoEJN/26c/OB5/uw8GlK+Sxgn+9Lzjx/U=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxTtBaedTiC8k/a8IWtqeyXBHPQKCNBJYjKPFNcm5fCXapbLjPf
+	vXmmEFUri7BuvlYewuRlSIcFPH1h+aKpeiRnug3gBz6levEcEFCc/Ywu7ncBB01C2WWix7d2lX4
+	=
+X-Google-Smtp-Source: AGHT+IFaGu/kOnvA1iw/mPJPo5u6+ziQTk777SZOLyK9maRGbVvItjyWpamVkBo1AnpEoyMPwcV9zA==
+X-Received: by 2002:a17:907:36c8:b0:a8d:43c5:9a16 with SMTP id a640c23a62f3a-a991cede585mr1313025966b.6.1728311297166;
+        Mon, 07 Oct 2024 07:28:17 -0700 (PDT)
+Message-ID: <d6c0cb7a-5a71-4018-abe1-4ed81a1da71b@suse.com>
+Date: Mon, 7 Oct 2024 16:28:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/msr: add log messages to MSR state load error paths
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>
-References: <20241007140317.67478-1-roger.pau@citrix.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
- CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
- 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
- IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
- SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
- JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
- mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
- ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
- RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
- dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
- /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
- TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
- Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
- 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
- vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
- g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
- wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
- 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
- kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
- bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
- uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
- XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
- HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
- pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
- vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
- b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
- 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
- 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
- nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
- B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
- d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
- 6+ahAA==
-In-Reply-To: <20241007140317.67478-1-roger.pau@citrix.com>
+Subject: Re: [XEN PATCH v2 2/4] x86/emul: address violations of MISRA C Rule
+ 16.3
+To: Federico Serafini <federico.serafini@bugseng.com>
+Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1728308312.git.federico.serafini@bugseng.com>
+ <662440bc082fcb91ad9489999add02fc71416d45.1728308312.git.federico.serafini@bugseng.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <662440bc082fcb91ad9489999add02fc71416d45.1728308312.git.federico.serafini@bugseng.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 07/10/2024 3:03 pm, Roger Pau Monne wrote:
-> Some error paths in the MSR state loading logic don't contain error messages,
-> which makes debugging them quite hard without adding extra patches to print the
-> information.
->
-> Add two new log messages to the MSR state load path that print information
-> about the entry that failed to load.
->
-> No functional change intended.
->
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
->  xen/arch/x86/hvm/hvm.c | 9 +++++++++
+On 07.10.2024 16:16, Federico Serafini wrote:
+> @@ -457,6 +460,8 @@ int x86emul_fpu(struct x86_emulate_state *s,
+>              case 7: /* fistp m64i */
+>                  goto fpu_memdst64;
+>              }
+> +            ASSERT_UNREACHABLE();
+> +            break;
 
-Can we fix the PV side at the same time too?
+"return X86EMUL_UNHANDLEABLE" like is also used just a few lines down
+from here?
 
->  1 file changed, 9 insertions(+)
->
-> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-> index 69a25571db8d..c71087f636c4 100644
-> --- a/xen/arch/x86/hvm/hvm.c
-> +++ b/xen/arch/x86/hvm/hvm.c
-> @@ -1598,10 +1598,19 @@ static int cf_check hvm_load_cpu_msrs(struct domain *d, hvm_domain_context_t *h)
->              rc = guest_wrmsr(v, ctxt->msr[i].index, ctxt->msr[i].val);
->  
->              if ( rc != X86EMUL_OKAY )
-> +            {
-> +                printk(XENLOG_G_ERR
-> +                       "HVM%d.%d load MSR %#x with value %#lx failed: %d\n",
-> +                       d->domain_id, vcpuid, ctxt->msr[i].index,
-> +                       ctxt->msr[i].val, rc);
+Jan
 
-Just %pv please.  I don't want to propagate the (occasionally ambiguous)
-HVM%d form.
-
-Also, rc may not be great to render.  It's an X86EMUL_*, not an errno.
-
-And saying that, we have a discontinuity between PV and HVM.  PV
-translates !OKAY into -EINVAL, whereas HVM translates into -ENXIO.  /sigh
-
-~Andrew
 
