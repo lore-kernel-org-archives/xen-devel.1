@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA20CED274
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 08:39:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.812815.1225575 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F18CED27E
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 08:42:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.812823.1225584 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sy5kK-0003Og-0a; Tue, 08 Oct 2024 08:39:08 +0000
+	id 1sy5nE-0004yL-EY; Tue, 08 Oct 2024 08:42:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 812815.1225575; Tue, 08 Oct 2024 08:39:07 +0000
+Received: by outflank-mailman (output) from mailman id 812823.1225584; Tue, 08 Oct 2024 08:42:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sy5kJ-0003OZ-To; Tue, 08 Oct 2024 08:39:07 +0000
-Received: by outflank-mailman (input) for mailman id 812815;
- Tue, 08 Oct 2024 08:39:07 +0000
+	id 1sy5nE-0004yE-BM; Tue, 08 Oct 2024 08:42:08 +0000
+Received: by outflank-mailman (input) for mailman id 812823;
+ Tue, 08 Oct 2024 08:42:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/rYz=RE=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sy5kJ-00027a-7s
- for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 08:39:07 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Vy9o=RE=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1sy5nD-0004xD-3P
+ for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 08:42:07 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c7ae4b40-8550-11ef-a0bc-8be0dac302b0;
- Tue, 08 Oct 2024 10:39:06 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a93c1cc74fdso889699466b.3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Oct 2024 01:39:06 -0700 (PDT)
-Received: from localhost ([213.195.117.215]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a994d5fbef4sm301560066b.166.2024.10.08.01.39.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 01:39:05 -0700 (PDT)
+ id 32bf5ebf-8551-11ef-a0bc-8be0dac302b0;
+ Tue, 08 Oct 2024 10:42:06 +0200 (CEST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5c42f406e29so7096776a12.2
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Oct 2024 01:42:06 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9935ee4594sm453864466b.189.2024.10.08.01.42.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Oct 2024 01:42:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,122 +47,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c7ae4b40-8550-11ef-a0bc-8be0dac302b0
+X-Inumbo-ID: 32bf5ebf-8551-11ef-a0bc-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1728376746; x=1728981546; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XH4xpZLptCZ6C2dJ+MYc8/xilU4dhsL/mNlDZC0yzNk=;
-        b=kSgi0ZIQqibYtdaZZlOL8sNO1DIH5psPg13h+LVk3knD59zNI0KVaO+Mjm0EV8LX46
-         QZTKPiLr1iGWRdvqW7YeNMBPmd6yfaTI0iyoZ2EXx0hSBAClOD7PGwrX6G1Q9Lw6X0VM
-         Bh3ue62A/o7d6cZnYpN3ZW5bilf/upNGPvfq0=
+        d=suse.com; s=google; t=1728376926; x=1728981726; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=xWAQuuPY3Y+UKj3p0PpqioXI6PMXZagE2PwXUZ/T8mQ=;
+        b=NsFH+kQsPbXUuOXXqmfnEB2cPz4lil/KCvrXaN4ChNeVHayyEiR3/ZZJ8uYC0pQ9ts
+         0dUFH/iKHyHyTPtIlQzZZOJt7fTKBrwTl4mZZ3LZaztEvNBsGlbdci43Yypkw8fCwY6g
+         d8gbyskD24E+wAJmDJu6wRm5YRJIzTzHf2KKioJbBT2CPZLBYSmhZeRlesXV9mn6Jpda
+         cei+jMMUY6MtYPx/HQOkZZvkGVwwcNfggAEXZGNuRC+o17X0CEz7p+5jw1sU7ClbhgKf
+         II6oDAttNooAlpfUfAxSIzUPPNmHGI2BNCVg1w7agjOFqvRLVV3PbqQb7dZ8YM1G+S8q
+         4zAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728376746; x=1728981546;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XH4xpZLptCZ6C2dJ+MYc8/xilU4dhsL/mNlDZC0yzNk=;
-        b=o+bf1ClzW5ROpwmRuk9iJXSrneiB/6PGd0nv8tdp4e6rgAWnbOc7jI6WA9puaMhSzd
-         v+pu06NnuKTXk+g1XsvvKW8tjC5nL4NVCKLZFoOlb98kYSE+bskSpCg0HJkDZIvbJCpS
-         e0U+qmfnLiCTlfBzMBSeUlEyc7pkbIa7ySZPnbc8+l3s+jHw3tfBNLIMvmQ9Hp+qfP3a
-         PH34rTB8JDSicANOHMHEDnFF0IJ1dXAcuxLSKhGI9nrbL9nnHFvoZKBu0XxjQsU9V5O4
-         3Pjd+kuDus1IMeri6HJPexVnpJzZ/xOydO+Rg/dqMtrQ/sU+qFXOHGjplPV+Lljs0RXr
-         0oOg==
-X-Gm-Message-State: AOJu0YzlgsMcEH2J7zd0IuRa5+hUkHjRYYYycNUEVu7OrLa/b4mTNa2w
-	Ym+KOrvDM3jR9H3UdEr3xpzzMkYmuL3qYp87oJWbckmM4pWZh7xDpgGGbSBLolY37j1VF7X0xH8
-	8
-X-Google-Smtp-Source: AGHT+IEiTqV0Z7Wc62OgQfur6LtB6ahmdwOUDQuXTFad+6bufrugr/W2oDUY0dDzNfEND/ix/rixlQ==
-X-Received: by 2002:a17:907:6095:b0:a99:46ff:f4e6 with SMTP id a640c23a62f3a-a9947000935mr927692166b.61.1728376745825;
-        Tue, 08 Oct 2024 01:39:05 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2] x86/msr: add log messages to MSR state load error paths
-Date: Tue,  8 Oct 2024 10:39:01 +0200
-Message-ID: <20241008083901.72850-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
+        d=1e100.net; s=20230601; t=1728376926; x=1728981726;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xWAQuuPY3Y+UKj3p0PpqioXI6PMXZagE2PwXUZ/T8mQ=;
+        b=Jd+r8GRgIyy+MRcR0jt6lHaHcmRoo1GQeiYZwZC1PorirRv4Y7LEpVf7BNKlorG2tT
+         T4pDLfwmHNHy2cq7b21+ZPEhqjWsQK7uh241BdVbuIoOISDA06LAjztY34WfYxpyO1sR
+         mI9i9fygMj9veDJRx4sfx30OA9GhVPBiYKhFK5PACkYBj8b4IQIxCyEdI0uBRl/jv/JN
+         Qf880zaEBcaoxl06dal3IHtzKRWJNo3G0F/VZFzcdTXGWDDd75Ajvrp4VvqAxMf5UGlQ
+         GK8M21XT1lGBPM1cDpNs1MUnGkvWC8dGE6gP6HPB54VvwyvOZ1OTp8oaR2CYKypFjeqx
+         eKZw==
+X-Forwarded-Encrypted: i=1; AJvYcCVvOGEsZHPmIfXBFphSfGp+GVKiK0SJhE6pzZRMghQYSWkvpi5D2NUZQ+g3qrsqF4c0l2/FmgPM6cQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy81OXA3kKedqujvhrL+sDYOxMsPGQWlbVKcg9HyP86bNpq8ctW
+	eG9pRJQ9Y3E+fRhLAMez0NNfwR/j8jilTk43U7UVI1dACS4KonIpgFLNfgdoJRoeJBH1xuvPusI
+	=
+X-Google-Smtp-Source: AGHT+IHfc+jN9E6FOcW4F6hb05kYzApUrmg9nbK6IAr2e+5LHC3B333zcu5WC0sABjIWSEZ+vuhT3A==
+X-Received: by 2002:a17:907:7244:b0:a99:36e8:c353 with SMTP id a640c23a62f3a-a9936e8c51bmr1145427466b.56.1728376925753;
+        Tue, 08 Oct 2024 01:42:05 -0700 (PDT)
+Message-ID: <0b34d746-cc7c-4db0-96c4-44ae3d6c6172@suse.com>
+Date: Tue, 8 Oct 2024 10:42:04 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/domctl: fix maximum number of MSRs in
+ XEN_DOMCTL_{get,set}_vcpu_msrs
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <20241008083756.72829-1-roger.pau@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241008083756.72829-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Some error paths in the MSR state loading logic don't contain error messages,
-which makes debugging them quite hard without adding extra patches to print the
-information.
+On 08.10.2024 10:37, Roger Pau Monne wrote:
+> Since the addition of the MSR_AMD64_DR{1-4}_ADDRESS_MASK MSRs to the
+> msrs_to_send array, the calculations for the maximum number of MSRs that
+> the hypercall can handle is off by 4.
+> 
+> Remove the addition of 4 to the maximum number of MSRs that
+> XEN_DOMCTL_{set,get}_vcpu_msrs supports, as those are already part of the
+> array.
+> 
+> A further adjustment could be to subtract 4 from the maximum size if the DBEXT
+> CPUID feature is not exposed to the guest, but guest_{rd,wr}msr() will already
+> perform that check when fetching or loading the MSRs.  The maximum array is
+> used to indicate the caller of the buffer it needs to allocate in the get case,
+> and as an early input sanitation in the set case, using a buffer size slightly
+> lager than required is not an issue.
+> 
+> Fixes: 86d47adcd3c4 ('x86/msr: Handle MSR_AMD64_DR{0-3}_ADDRESS_MASK in the new MSR infrastructure')
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 
-Add two new log messages to the MSR state load path that print information
-about the entry that failed to load, for both PV and HVM.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-While there also adjust XEN_DOMCTL_set_vcpu_msrs to return -ENXIO in case the
-MSR is unhandled or can't be loaded, so it matches the error code used by HVM
-MSR loading (and it's less ambiguous than -EINVAL).
+> ---
+> I'm tempted to just get rid of nr_msrs and use ARRAY_SIZE(msrs_to_send)
+> instead, but refrained from doing it.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v1:
- - Add messages to PV MSR loading.
- - Return -ENXIO from PV loading path also.
- - Do not print the return code from guest_wrmsr(), it's not specially helpful
-   given the current logic, as it will always be X86EMUL_EXCEPTION in case of
-   failure.
----
- xen/arch/x86/domctl.c  | 8 ++++++++
- xen/arch/x86/hvm/hvm.c | 7 +++++++
- 2 files changed, 15 insertions(+)
+I think the variable would indeed better go away now. Yet that doesn't
+necessarily need to happen right here.
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index 96d816cf1a7d..f76de5be9437 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -1166,6 +1166,7 @@ long arch_do_domctl(
-                 if ( msr.reserved )
-                     break;
- 
-+                ret = -ENXIO;
-                 switch ( msr.index )
-                 {
-                 case MSR_SPEC_CTRL:
-@@ -1174,9 +1175,16 @@ long arch_do_domctl(
-                 case MSR_AMD64_DR0_ADDRESS_MASK:
-                 case MSR_AMD64_DR1_ADDRESS_MASK ... MSR_AMD64_DR3_ADDRESS_MASK:
-                     if ( guest_wrmsr(v, msr.index, msr.value) != X86EMUL_OKAY )
-+                    {
-+                        printk(XENLOG_G_ERR
-+                               "%pv load MSR %#x with value %#lx failed\n",
-+                               v, msr.index, msr.value);
-                         break;
-+                    }
-                     continue;
-                 }
-+                printk(XENLOG_G_ERR "%pv attempted load of unhandled MSR %#x\n",
-+                       v, msr.index);
-                 break;
-             }
- 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 69a25571db8d..200f0a414138 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1598,10 +1598,17 @@ static int cf_check hvm_load_cpu_msrs(struct domain *d, hvm_domain_context_t *h)
-             rc = guest_wrmsr(v, ctxt->msr[i].index, ctxt->msr[i].val);
- 
-             if ( rc != X86EMUL_OKAY )
-+            {
-+                printk(XENLOG_G_ERR
-+                       "HVM %pv load MSR %#x with value %#lx failed\n",
-+                       v, ctxt->msr[i].index, ctxt->msr[i].val);
-                 return -ENXIO;
-+            }
-             break;
- 
-         default:
-+            printk(XENLOG_G_ERR "HVM %pv attempted load of unhandled MSR %#x\n",
-+                   v, ctxt->msr[i].index);
-             return -ENXIO;
-         }
-     }
--- 
-2.46.0
-
+Jan
 
