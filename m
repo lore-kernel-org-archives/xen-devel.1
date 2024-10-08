@@ -4,52 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 439E8CEFC56
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 20:31:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.813525.1226500 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 989FDCEFC53
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 20:32:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.813533.1226510 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syGrB-0000pk-C3; Tue, 08 Oct 2024 20:30:57 +0000
+	id 1syGs3-0001OE-Oc; Tue, 08 Oct 2024 20:31:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 813525.1226500; Tue, 08 Oct 2024 20:30:57 +0000
+Received: by outflank-mailman (output) from mailman id 813533.1226510; Tue, 08 Oct 2024 20:31:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syGrB-0000pd-9D; Tue, 08 Oct 2024 20:30:57 +0000
-Received: by outflank-mailman (input) for mailman id 813525;
- Tue, 08 Oct 2024 20:30:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=A1UB=RE=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1syGr9-0000pX-L4
- for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 20:30:55 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20614.outbound.protection.outlook.com
- [2a01:111:f403:2412::614])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 35e8cf53-85b4-11ef-99a2-01e77a169b0f;
- Tue, 08 Oct 2024 22:30:53 +0200 (CEST)
-Received: from DM6PR05CA0055.namprd05.prod.outlook.com (2603:10b6:5:335::24)
- by CH3PR12MB9124.namprd12.prod.outlook.com (2603:10b6:610:1a7::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.23; Tue, 8 Oct
- 2024 20:30:48 +0000
-Received: from DS3PEPF000099DB.namprd04.prod.outlook.com
- (2603:10b6:5:335:cafe::61) by DM6PR05CA0055.outlook.office365.com
- (2603:10b6:5:335::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.17 via Frontend
- Transport; Tue, 8 Oct 2024 20:30:47 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099DB.mail.protection.outlook.com (10.167.17.197) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8048.13 via Frontend Transport; Tue, 8 Oct 2024 20:30:47 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 8 Oct
- 2024 15:30:46 -0500
-Received: from [172.21.103.178] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Tue, 8 Oct 2024 15:30:46 -0500
+	id 1syGs3-0001O7-Lv; Tue, 08 Oct 2024 20:31:51 +0000
+Received: by outflank-mailman (input) for mailman id 813533;
+ Tue, 08 Oct 2024 20:31:50 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1syGs1-0001Nv-RK
+ for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 20:31:49 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1syGs0-0001hZ-V0; Tue, 08 Oct 2024 20:31:48 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.244])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1syGs0-0000DA-O6; Tue, 08 Oct 2024 20:31:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,137 +41,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35e8cf53-85b4-11ef-99a2-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hxufrTSf1LsBpQdbl5qM4QLXS/TJ8oREV1hlmPOoNn1b7PCSBSHva6NqEzRGHlA7ZwJAoHlokreq2Ql2jI+gPA1k3ZTCMzper5F6ZltlHKhklIKcLZDiL/B4Roh1BUrejAGj/kTiR5bKxC67XgNI2qKVhCpKjQa0aU87mSc8nujwKfLQOeXTFYTIPFszxJXIL7QSJKsbuzi3wSbX5R8HVijKiQf+DiXuKvnfSe+WA1z/dVTuCR6zxxHGhqqBJJIm/6fvf9MrxISCuAWqiPMfA8Yicub/wV5DK2VhGRuVq2VVqMP+gmJCzmTTNlXg5xbMxtSSbvHDmLqKhsTbL57f0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y2Z5yRJm24XLUVVZ5YpJ0Bc6MGIe3htTRfRZ94mxDC4=;
- b=s+DL5nDXOUax5KGg/Re25o+8NIpl6S3FzqyQWxfpPdYTYcEQ3mR838mj7wuZO/2+Len2QkH1Mgf7jcr7qqKwaCvrisTibeu9uz0H5KHJSSyFDPqpzyjgOsIfET5AxRqSGnTUMQMHV4BpTRAIAbEqk+XlpODNJZJn0ww7DVDU42tt+FOgrBH7G72aDZg83u99/3qx+SEVDUX9SKwXKJrB+t/ED+3HLUC4YWiK1yMhs8GXMqTOhaXAELDPxVHDvCMprJVpSVAjjc4+HZzFLHAAErnfHWsaS4fxIhYNcZQGFC/cgXtZzeAjlpgQg6qZCLPvZlnEFWb5VbABlWgwGNUzbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=apertussolutions.com smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y2Z5yRJm24XLUVVZ5YpJ0Bc6MGIe3htTRfRZ94mxDC4=;
- b=PB18FdgMzHujutxFygr7WqEsxgXIbph5u5FpBNacagjWf4Y2IMAJaBdr+0JL3H7tBkyJo5h4w4U/E1XTtgZYoJMWXtKJddaUQYh1/JFpsrEhjNGEKO0KAPjWzrlwWto0eH8+LEiKaumCS7LpkdJdBQic4HIuEP7wGp3QzbkekI8=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <f77904b1-dce2-41cd-ab74-fca75a0a147c@amd.com>
-Date: Tue, 8 Oct 2024 15:30:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=uXjA5NYn5SalPiKV3aG7Ti5nzksIfO3TYPWZtziyO8o=; b=f0PsnuJq61sJdSvhYLDLJ3H7rH
+	UCOsTVypj7AszpkblEh6sgN+FIwFBDN3FLbSMgS6zkzo8MQ+EysnYBlVXgku18oCWYSIbImrnmQPA
+	d6NfGXdhsXGWY7/19vSTytVgYqfKQyn0Jcx4rGzbEREB+4u4DxkDRLSq3HFvBOkZHnD0=;
+Message-ID: <e2acb3bc-85ef-4d46-b392-5f1dad013226@xen.org>
+Date: Tue, 8 Oct 2024 21:31:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 38/44] x86/boot: introduce boot domain
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	<xen-devel@lists.xenproject.org>
-CC: <christopher.w.clark@gmail.com>, <stefano.stabellini@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <20241006214956.24339-1-dpsmith@apertussolutions.com>
- <20241006214956.24339-39-dpsmith@apertussolutions.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <20241006214956.24339-39-dpsmith@apertussolutions.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DB:EE_|CH3PR12MB9124:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7318ee63-d1dd-48cd-c241-08dce7d817d8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?NjlnRm9qUGcyODNHcjJjcEg2WTdubjNxcldhZnJCRGZBMk1yektUR2NuQ1N2?=
- =?utf-8?B?Q1VJUUZpOE1EUitsaURlRWx3b3dVUUNwTTRiZ3BhOGFOZTVQQ3EwS2VGL1dD?=
- =?utf-8?B?b0l1R1BxK2hyWnVuV3hLNWlKbjJJbnZ0STBoRkxkTDRqUDFpSkdTKzAzZFFm?=
- =?utf-8?B?OS9LeW5GUkNFNWovTmluMGVFSHFUdURQNE0yZm4vanN3WUs1NFVoaW1haXVO?=
- =?utf-8?B?VUhJR3lvRW9lMEN6aTYwbEUvL2ZSVW9zOXBqS2w5dkw1YXprYkpQYlFPdGtB?=
- =?utf-8?B?Z0pPOGNCZVpWQkdFSExxZkkxTGVmcHQ3Vm9PYnh2blg5QjJhU3EyUXRQa3Ji?=
- =?utf-8?B?eFhLUmVJZld2Wk5XM1B2S3MvdVVPS3hVeWlLTGlPb3VNc3JXd2IyMkdKQ2Mw?=
- =?utf-8?B?dlpacllVZnB5ZFVBT29zV1lrSnp5QWhraU1HNEpyWmgxbjdFQmExQkI1Z0tp?=
- =?utf-8?B?MG41RXd0MXZiSUJSc0RwOGFWMFgzWlloOTk3OW16eFQzUzVVdzhhWlFmOGV0?=
- =?utf-8?B?eUFHbFZ3SWkvc3NGK0FTQnR6Wm5rdjQ0VWJSUmhGNVF1ZStabzNUSkJHQURN?=
- =?utf-8?B?MEsvVDFHRFl3WkVJMEVtMFFYZDZxTVUyRzhwZEExR05hZTN3S3RNSkZQQldF?=
- =?utf-8?B?RVNuQXlPQVNZMWt0aGxsR2VvOWV5T0VCR0ovWkg4RlhkTXBiNVk1SU5obEVt?=
- =?utf-8?B?enU3MThBdkJTVGJxRGN6WnFjZHVXM09jU2tkenlEdVhETWJ2NGlWRlFneCtV?=
- =?utf-8?B?bWtsVUNoUWFySGdYc09jL0hxb1Y4Mm5vK0w2YUhyZkxLU2x0eVJnQVU2Kzla?=
- =?utf-8?B?QVhpUTFqcUM5TzVUeEFxU0xJdkpQRzZqMU9aWHFCVU9IVUlxdFBBODVNbTB3?=
- =?utf-8?B?Z25LS2dFSXpIZVBmUVlqaHdFVzFBUmk3RnR5K09xNUdnZWlBNjR6ZFVmNTBp?=
- =?utf-8?B?cmR5d3RYRmNvTHUwUUlsYW9ONmFyUGVsZ0gzRURhbnErM21zOFNsd2lTSnhh?=
- =?utf-8?B?ZXN0a1U5M1htMnZpNXl1RXpwaEh3Uy9KaXIwd05HRUxHM0tvaGhiaGcyY1Nw?=
- =?utf-8?B?WjV2bVVnRnJVcXptdUNzRXh0RndYUFBQN1ZrenY5QnBRZ3Jwcno1WnM1RUNy?=
- =?utf-8?B?Z0h2aXpoWlREbXozT0ZucDM1VEFTYzIvZVJlN1pJU1NFMUMwQVMwSTd6YU1L?=
- =?utf-8?B?VVFvanEzUFNiSndZNXZEeWYwT2tOa3RweklxMkxGR0hNWExTN0NKd1k1ODkz?=
- =?utf-8?B?cTJPNmdnMWdyaDdDOWYrU0podmprbzhTRjdmZVZ3bThXZStEa2IzbTJVSFUw?=
- =?utf-8?B?TDNiR1VhR01VQzlvNFkxZUhGdFVKSjN6dTdXd2JPNGx1VE1FTnFZUXpKQ29Y?=
- =?utf-8?B?WlZzNEZzdUJrajlra2I5L0ZQYURwZDM1MEhsekFOVXVWVE83NDh5RFExSU1I?=
- =?utf-8?B?SkdTZmxab3dqOXcxVXdWbXRxSi9POWU1cEhwR2htUmpsMGxSY2RqWkxjYVUr?=
- =?utf-8?B?cTFkOFZRS0ZWMmJnM1ovUmRFbDVmMUZEV0dLU2djYzBWTTYwRlRKckJjSnFp?=
- =?utf-8?B?a2l6a3NRSU5aRE5vMHRaaWlrOXRHZnRmWWpzbTVzWEViTWdGaEkyQlFiSDBj?=
- =?utf-8?B?SmlxRk4raU1zWG1qdmRPMGNCdGlWQU5odUprdmZ1TFc0aTB2Z01ld3ZvVTBL?=
- =?utf-8?B?ZnlqNk5EZ0d0czdwT3hXNDBXS1pNcnpXWFdhK04zMXhaODNab1FTeHY2Zjcy?=
- =?utf-8?B?YmxnNGVMOVNHUmYzM0dqdEZFS0NBaWhKNUR5eElwU1lpN2lmZFFkaWhaamR0?=
- =?utf-8?Q?i0ONXCPCYLiupYiqjqSXwm4sc6PAzi90GLXbI=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2024 20:30:47.6457
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7318ee63-d1dd-48cd-c241-08dce7d817d8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS3PEPF000099DB.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9124
+Subject: Re: [PATCH v2 5/8] xen/arm: platforms: Add NXP S32CC platform code
+Content-Language: en-GB
+To: Andrei Cherechesu <andrei.cherechesu@oss.nxp.com>,
+ xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
+Cc: S32@nxp.com, Andrei Cherechesu <andrei.cherechesu@nxp.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20240930114715.642978-1-andrei.cherechesu@oss.nxp.com>
+ <20240930114715.642978-6-andrei.cherechesu@oss.nxp.com>
+ <94dc1668-5215-424c-9dcb-1e343451d464@xen.org>
+ <b8419295-cc63-41b3-9f2d-277d81e5f85a@oss.nxp.com>
+ <a24807bd-5224-4110-bc0e-946287f5c90e@xen.org>
+ <1de8ea10-f801-45b9-ab6a-25465ecd6b76@oss.nxp.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <1de8ea10-f801-45b9-ab6a-25465ecd6b76@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 2024-10-06 17:49, Daniel P. Smith wrote:
-> To begin moving toward allowing the hypervisor to construct more than one
-> domain at boot, a container is needed for a domain's build information.
-> 
-> Introduce a new header, <xen/asm/bootdomain.h>, that contains the initial
-> struct boot_domain that encapsulate the build information for a domain.
-> 
-> No functional change intended.
-> 
-> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-> ---
->   xen/arch/x86/include/asm/bootdomain.h | 28 +++++++++++++++++++++++++++
->   xen/arch/x86/include/asm/bootinfo.h   |  5 +++++
->   xen/arch/x86/setup.c                  | 24 ++++++++---------------
->   3 files changed, 41 insertions(+), 16 deletions(-)
->   create mode 100644 xen/arch/x86/include/asm/bootdomain.h
-> 
-> diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-> new file mode 100644
-> index 000000000000..4285223ac5ab
-> --- /dev/null
-> +++ b/xen/arch/x86/include/asm/bootdomain.h
-> @@ -0,0 +1,28 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Copyright (c) 2024 Apertus Solutions, LLC
-> + * Author: Daniel P. Smith <dpsmith@apertussolutions.com>
-> + * Copyright (c) 2024 Christopher Clark <christopher.w.clark@gmail.com>
-> + */
-> +
-> +#ifndef __XEN_X86_BOOTDOMAIN_H__
-> +#define __XEN_X86_BOOTDOMAIN_H__
+Hi,
 
-ASM__X86__BOOTDOMAIN_H
+On 08/10/2024 20:01, Andrei Cherechesu wrote:
+> Hi Julien,
+> 
+> On 04/10/2024 19:24, Julien Grall wrote:
+>>
+>>
+>> On 04/10/2024 16:37, Andrei Cherechesu wrote:
+>>> Hi Julien, Stefano,
+>>
+>> Hi Andrei,
+>>
+>>>
+>>> On 01/10/2024 13:01, Julien Grall wrote:
+>>>> Hi Andrei,
+>>>>
+>>>> On 30/09/2024 12:47, Andrei Cherechesu (OSS) wrote:
+>>>>> From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+>>>>>
+>>>>> Add code for NXP S32CC platforms (S32G2, S32G3, S32R45).
+>>>>>
+>>>>> S32CC platforms use the NXP LINFlexD UART driver for
+>>>>> console by default, and rely on Dom0 having access to
+>>>>> SCMI services for system-level resources from firmware
+>>>>> at EL3.
+>>>>>
+>>>>> Platform-related quirks will be addressed in following
+>>>>> commits.
+>>>>
+>>>> I don't see any specific quirks in the series. Are you intended to send follow-up?
+>>>>
+>>>> [...]
+>>>
+>>> Well, we could use an opinion on some SoC erratum implementation
+>>> and if it would be acceptable for you or not, from any of
+>>> the ARM maintainers.
+>>>
+>>> The erratum is about some TLB Invalidate (tlbi) instruction
+>>> variants (by Virtual Address) which are handled incorrectly
+>>> in some cases (for some VAs), and that need to be replaced
+>>> with broader versions.
+>>
+>> Can you provide more details:
+>>    1. Is this a processor issue?
+>>    2. Which VAs are affected?
+>>    3. What is the impact if the erratum is hit?
+>>    3. Do we need to do anything on the behalf of the guests?
+> 
+> Sure:
+> 1. This is an SoC issue, present in a subset of the S32CC processors family.
+> 2. VAs whose bits [48:41] are not all zero.
+> 3. Well, TLB corruption.
 
-With that:
+Can you provide a bit more details? Is it a corruption within the same 
+stage/ASID/VMID? IOW if a guest corrupt the TLB, does this mean only the 
+stage-1?
 
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+Also, if a guest manage to corrupt its TLB, does this mean it could end 
+up to access host physical address it should not?
+
+BTW, do you have any more documentation about the erratum?
+
+> 4. There are instructions affected at both levels 1 and 2 of translation.
+> The guest will have to work its own way around it.
+> 
+> In Xen, just `tlbi vae2is` (only used in flush_xen_tlb_range_va()) seems to
+> be affected, and if we go with the 2nd approach from the ones proposed,
+> it should not be very ugly to implement. I am of course open to any of your
+> suggestions.
+> 
+>>
+>>
+>>> It doesn't apply for all S32CC platforms, but we can use the
+>>> Host DT compatible to identify this. My idea is that we define
+>>> a platform quirk for this and check for it using
+>>> platform_has_quirk().
+>>> Then, we either:>      - modify the definition for the affected 'tlbi' variant
+>>>       in arm64/flushtlb.h to actually execute the broader one
+>>>       if needed
+>>> or:
+>>>       - define a new wrapper for the tlbi variant we want to
+>>>       replace the affected one with
+>>>       - check for this quirk before its usage and call the
+>>>       more potent version if needed (there's only one
+>>>       occurrence of usage for the affected version).
+>>>
+>>> Number 2 seems better to me, it's more customizable and
+>>> it's similar to the existing handling for
+>>> PLATFORM_QUIRK_GIC_64K_STRIDE for some other Arm platform.
+>>
+>> I need a bit more details first (see my questions above). But if there are not many VAs affected, then we may be able to re-order the Xen memory layout to avoid the VAs. So we wouldn't need any specific change in the TLB flush operations.
+> 
+> I'm not sure what to say here, we would need to have the layout
+> limited under the mentioned VA range in our case, right?
+
+Correct. Is your SoC going to ever have more than a couple of TBs of memory?
+
+> What
+> about the GVA layout?
+
+That's control by the guest. We could potentially tell the guest less VA 
+is supported, but it is free to ignore.
+
+Can you clarify why we would need to care about the GVA layout?
+
+Cheers,
+
+-- 
+Julien Grall
 
