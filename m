@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43CCACED27D
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 08:38:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.812803.1225555 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA20CED274
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 08:39:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.812815.1225575 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sy5jP-0002CQ-DQ; Tue, 08 Oct 2024 08:38:11 +0000
+	id 1sy5kK-0003Og-0a; Tue, 08 Oct 2024 08:39:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 812803.1225555; Tue, 08 Oct 2024 08:38:11 +0000
+Received: by outflank-mailman (output) from mailman id 812815.1225575; Tue, 08 Oct 2024 08:39:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sy5jP-0002CJ-9q; Tue, 08 Oct 2024 08:38:11 +0000
-Received: by outflank-mailman (input) for mailman id 812803;
- Tue, 08 Oct 2024 08:38:09 +0000
+	id 1sy5kJ-0003OZ-To; Tue, 08 Oct 2024 08:39:07 +0000
+Received: by outflank-mailman (input) for mailman id 812815;
+ Tue, 08 Oct 2024 08:39:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/rYz=RE=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1sy5jN-00027a-G6
- for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 08:38:09 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
+ id 1sy5kJ-00027a-7s
+ for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 08:39:07 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a4a090be-8550-11ef-a0bc-8be0dac302b0;
- Tue, 08 Oct 2024 10:38:08 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a9950d27234so291934866b.1
- for <xen-devel@lists.xenproject.org>; Tue, 08 Oct 2024 01:38:07 -0700 (PDT)
+ id c7ae4b40-8550-11ef-a0bc-8be0dac302b0;
+ Tue, 08 Oct 2024 10:39:06 +0200 (CEST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a93c1cc74fdso889699466b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Oct 2024 01:39:06 -0700 (PDT)
 Received: from localhost ([213.195.117.215]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a993f13620dsm409753466b.215.2024.10.08.01.38.06
+ a640c23a62f3a-a994d5fbef4sm301560066b.166.2024.10.08.01.39.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 01:38:06 -0700 (PDT)
+ Tue, 08 Oct 2024 01:39:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,85 +46,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4a090be-8550-11ef-a0bc-8be0dac302b0
+X-Inumbo-ID: c7ae4b40-8550-11ef-a0bc-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1728376687; x=1728981487; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1728376746; x=1728981546; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=m3rWamNd2rtptE3YePGwHSfGEHWYJhUnCLfE+jd0lUs=;
-        b=v8rZwZQNKXgclQq1EDr1ddKbNI1MHlSCIks68bEMDnL/Yj/XSn+P2scIA44H+Cy4qK
-         67cyvgLwKsGO31gp9C4A1xaCRjAa1HKzt+/0IW45cXNfu4m+hIjZA4EdtrhU8C2d4j3Q
-         4dTCwqFbJKw6UTIr7ErKkIJm+hq5lvGT8VUdw=
+        bh=XH4xpZLptCZ6C2dJ+MYc8/xilU4dhsL/mNlDZC0yzNk=;
+        b=kSgi0ZIQqibYtdaZZlOL8sNO1DIH5psPg13h+LVk3knD59zNI0KVaO+Mjm0EV8LX46
+         QZTKPiLr1iGWRdvqW7YeNMBPmd6yfaTI0iyoZ2EXx0hSBAClOD7PGwrX6G1Q9Lw6X0VM
+         Bh3ue62A/o7d6cZnYpN3ZW5bilf/upNGPvfq0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728376687; x=1728981487;
+        d=1e100.net; s=20230601; t=1728376746; x=1728981546;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=m3rWamNd2rtptE3YePGwHSfGEHWYJhUnCLfE+jd0lUs=;
-        b=DKVv9Uan/IrpOaU64IxOEdrscm/8/3/T+uYW4FOXSAmCh1j4M1YLPRNF+/YTGlnBVz
-         w1D8izgwBHXGYrCGFQUEVKRarA5kx5wUBQYezb1IS62UBD02MUhUBeJKqYe/etczd+oy
-         QHkuN3JOMfK++D5aWi6iO4T5ESN9/M71vbmevCQ9M4MqLUYcwKyVJ+3UFfHaXfQJ/ZOo
-         cvS+rWHSzK0roKSMX2GiohUQfZyVheC6obrXOeavTueFthXIn09E3xe1DFAcuFRD6R8c
-         DQSqYSIsZ04de19WaionIawtavnUmCS0t0+oJYxCyr8X9wTRRFWe0Uow0tCLoI1A3i5p
-         BH+A==
-X-Gm-Message-State: AOJu0YxMTn/6irznasKyToYAWAOG5+Gg3+p/zZjjAvqlMxFREEI1YWRk
-	CGdd8/zmG0mkQ1ZsijyMwx7oC5yeR0AXq391CYVCQ2p+Alpgturu+ETe+EuIelbFx2dtXzlw2Bi
-	A
-X-Google-Smtp-Source: AGHT+IFZewXbZuFwWYvo/BnKc0vjjH0u4vA1EH8+3Nk1DBT90oUr5BgrimXMQU1AnM9Bmf41seUvXg==
-X-Received: by 2002:a17:907:9304:b0:a8d:7b7d:8c39 with SMTP id a640c23a62f3a-a991c03145bmr1519329266b.43.1728376687011;
-        Tue, 08 Oct 2024 01:38:07 -0700 (PDT)
+        bh=XH4xpZLptCZ6C2dJ+MYc8/xilU4dhsL/mNlDZC0yzNk=;
+        b=o+bf1ClzW5ROpwmRuk9iJXSrneiB/6PGd0nv8tdp4e6rgAWnbOc7jI6WA9puaMhSzd
+         v+pu06NnuKTXk+g1XsvvKW8tjC5nL4NVCKLZFoOlb98kYSE+bskSpCg0HJkDZIvbJCpS
+         e0U+qmfnLiCTlfBzMBSeUlEyc7pkbIa7ySZPnbc8+l3s+jHw3tfBNLIMvmQ9Hp+qfP3a
+         PH34rTB8JDSicANOHMHEDnFF0IJ1dXAcuxLSKhGI9nrbL9nnHFvoZKBu0XxjQsU9V5O4
+         3Pjd+kuDus1IMeri6HJPexVnpJzZ/xOydO+Rg/dqMtrQ/sU+qFXOHGjplPV+Lljs0RXr
+         0oOg==
+X-Gm-Message-State: AOJu0YzlgsMcEH2J7zd0IuRa5+hUkHjRYYYycNUEVu7OrLa/b4mTNa2w
+	Ym+KOrvDM3jR9H3UdEr3xpzzMkYmuL3qYp87oJWbckmM4pWZh7xDpgGGbSBLolY37j1VF7X0xH8
+	8
+X-Google-Smtp-Source: AGHT+IEiTqV0Z7Wc62OgQfur6LtB6ahmdwOUDQuXTFad+6bufrugr/W2oDUY0dDzNfEND/ix/rixlQ==
+X-Received: by 2002:a17:907:6095:b0:a99:46ff:f4e6 with SMTP id a640c23a62f3a-a9947000935mr927692166b.61.1728376745825;
+        Tue, 08 Oct 2024 01:39:05 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/domctl: fix maximum number of MSRs in XEN_DOMCTL_{get,set}_vcpu_msrs
-Date: Tue,  8 Oct 2024 10:37:55 +0200
-Message-ID: <20241008083756.72829-1-roger.pau@citrix.com>
+Subject: [PATCH v2] x86/msr: add log messages to MSR state load error paths
+Date: Tue,  8 Oct 2024 10:39:01 +0200
+Message-ID: <20241008083901.72850-1-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Since the addition of the MSR_AMD64_DR{1-4}_ADDRESS_MASK MSRs to the
-msrs_to_send array, the calculations for the maximum number of MSRs that
-the hypercall can handle is off by 4.
+Some error paths in the MSR state loading logic don't contain error messages,
+which makes debugging them quite hard without adding extra patches to print the
+information.
 
-Remove the addition of 4 to the maximum number of MSRs that
-XEN_DOMCTL_{set,get}_vcpu_msrs supports, as those are already part of the
-array.
+Add two new log messages to the MSR state load path that print information
+about the entry that failed to load, for both PV and HVM.
 
-A further adjustment could be to subtract 4 from the maximum size if the DBEXT
-CPUID feature is not exposed to the guest, but guest_{rd,wr}msr() will already
-perform that check when fetching or loading the MSRs.  The maximum array is
-used to indicate the caller of the buffer it needs to allocate in the get case,
-and as an early input sanitation in the set case, using a buffer size slightly
-lager than required is not an issue.
+While there also adjust XEN_DOMCTL_set_vcpu_msrs to return -ENXIO in case the
+MSR is unhandled or can't be loaded, so it matches the error code used by HVM
+MSR loading (and it's less ambiguous than -EINVAL).
 
-Fixes: 86d47adcd3c4 ('x86/msr: Handle MSR_AMD64_DR{0-3}_ADDRESS_MASK in the new MSR infrastructure')
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-I'm tempted to just get rid of nr_msrs and use ARRAY_SIZE(msrs_to_send)
-instead, but refrained from doing it.
+Changes since v1:
+ - Add messages to PV MSR loading.
+ - Return -ENXIO from PV loading path also.
+ - Do not print the return code from guest_wrmsr(), it's not specially helpful
+   given the current logic, as it will always be X86EMUL_EXCEPTION in case of
+   failure.
 ---
- xen/arch/x86/domctl.c | 4 ----
- 1 file changed, 4 deletions(-)
+ xen/arch/x86/domctl.c  | 8 ++++++++
+ xen/arch/x86/hvm/hvm.c | 7 +++++++
+ 2 files changed, 15 insertions(+)
 
 diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index f76de5be9437..37ebcb3abbc7 100644
+index 96d816cf1a7d..f76de5be9437 100644
 --- a/xen/arch/x86/domctl.c
 +++ b/xen/arch/x86/domctl.c
-@@ -1088,10 +1088,6 @@ long arch_do_domctl(
-              !is_pv_domain(d) )
+@@ -1166,6 +1166,7 @@ long arch_do_domctl(
+                 if ( msr.reserved )
+                     break;
+ 
++                ret = -ENXIO;
+                 switch ( msr.index )
+                 {
+                 case MSR_SPEC_CTRL:
+@@ -1174,9 +1175,16 @@ long arch_do_domctl(
+                 case MSR_AMD64_DR0_ADDRESS_MASK:
+                 case MSR_AMD64_DR1_ADDRESS_MASK ... MSR_AMD64_DR3_ADDRESS_MASK:
+                     if ( guest_wrmsr(v, msr.index, msr.value) != X86EMUL_OKAY )
++                    {
++                        printk(XENLOG_G_ERR
++                               "%pv load MSR %#x with value %#lx failed\n",
++                               v, msr.index, msr.value);
+                         break;
++                    }
+                     continue;
+                 }
++                printk(XENLOG_G_ERR "%pv attempted load of unhandled MSR %#x\n",
++                       v, msr.index);
+                 break;
+             }
+ 
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 69a25571db8d..200f0a414138 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -1598,10 +1598,17 @@ static int cf_check hvm_load_cpu_msrs(struct domain *d, hvm_domain_context_t *h)
+             rc = guest_wrmsr(v, ctxt->msr[i].index, ctxt->msr[i].val);
+ 
+             if ( rc != X86EMUL_OKAY )
++            {
++                printk(XENLOG_G_ERR
++                       "HVM %pv load MSR %#x with value %#lx failed\n",
++                       v, ctxt->msr[i].index, ctxt->msr[i].val);
+                 return -ENXIO;
++            }
              break;
  
--        /* Count maximum number of optional msrs. */
--        if ( boot_cpu_has(X86_FEATURE_DBEXT) )
--            nr_msrs += 4;
--
-         if ( domctl->cmd == XEN_DOMCTL_get_vcpu_msrs )
-         {
-             ret = 0; copyback = true;
+         default:
++            printk(XENLOG_G_ERR "HVM %pv attempted load of unhandled MSR %#x\n",
++                   v, ctxt->msr[i].index);
+             return -ENXIO;
+         }
+     }
 -- 
 2.46.0
 
