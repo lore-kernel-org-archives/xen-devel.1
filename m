@@ -4,32 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 989FDCEFC53
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 20:32:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.813533.1226510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 581E3CEFC5E
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Oct 2024 20:32:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.813534.1226520 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syGs3-0001OE-Oc; Tue, 08 Oct 2024 20:31:51 +0000
+	id 1syGsU-0001pb-0R; Tue, 08 Oct 2024 20:32:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 813533.1226510; Tue, 08 Oct 2024 20:31:51 +0000
+Received: by outflank-mailman (output) from mailman id 813534.1226520; Tue, 08 Oct 2024 20:32:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syGs3-0001O7-Lv; Tue, 08 Oct 2024 20:31:51 +0000
-Received: by outflank-mailman (input) for mailman id 813533;
- Tue, 08 Oct 2024 20:31:50 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1syGs1-0001Nv-RK
- for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 20:31:49 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1syGs0-0001hZ-V0; Tue, 08 Oct 2024 20:31:48 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.244])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1syGs0-0000DA-O6; Tue, 08 Oct 2024 20:31:48 +0000
+	id 1syGsT-0001pT-Tf; Tue, 08 Oct 2024 20:32:17 +0000
+Received: by outflank-mailman (input) for mailman id 813534;
+ Tue, 08 Oct 2024 20:32:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=A1UB=RE=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1syGsS-0001p4-B4
+ for xen-devel@lists.xenproject.org; Tue, 08 Oct 2024 20:32:16 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2413::600])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 66e8e49f-85b4-11ef-a0bc-8be0dac302b0;
+ Tue, 08 Oct 2024 22:32:15 +0200 (CEST)
+Received: from PH3PEPF000040A1.namprd05.prod.outlook.com (2603:10b6:518:1::52)
+ by PH7PR12MB6563.namprd12.prod.outlook.com (2603:10b6:510:211::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.22; Tue, 8 Oct
+ 2024 20:32:11 +0000
+Received: from SN1PEPF0002529E.namprd05.prod.outlook.com
+ (2a01:111:f403:f90e::4) by PH3PEPF000040A1.outlook.office365.com
+ (2603:1036:903:49::3) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.16 via Frontend
+ Transport; Tue, 8 Oct 2024 20:32:11 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SN1PEPF0002529E.mail.protection.outlook.com (10.167.242.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8048.13 via Frontend Transport; Tue, 8 Oct 2024 20:32:10 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 8 Oct
+ 2024 15:32:10 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 8 Oct
+ 2024 15:32:10 -0500
+Received: from [172.21.103.178] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Tue, 8 Oct 2024 15:32:09 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,143 +65,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=uXjA5NYn5SalPiKV3aG7Ti5nzksIfO3TYPWZtziyO8o=; b=f0PsnuJq61sJdSvhYLDLJ3H7rH
-	UCOsTVypj7AszpkblEh6sgN+FIwFBDN3FLbSMgS6zkzo8MQ+EysnYBlVXgku18oCWYSIbImrnmQPA
-	d6NfGXdhsXGWY7/19vSTytVgYqfKQyn0Jcx4rGzbEREB+4u4DxkDRLSq3HFvBOkZHnD0=;
-Message-ID: <e2acb3bc-85ef-4d46-b392-5f1dad013226@xen.org>
-Date: Tue, 8 Oct 2024 21:31:47 +0100
+X-Inumbo-ID: 66e8e49f-85b4-11ef-a0bc-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=H6/qsll3ylRsCEPCLvdzqO/rbX/DA67kfHU5W+dU5BK5Wrcq3+bD4+PC7JvKugl2UEA/GG2k+vqbxzr4aID+MMJBEUb1GDVHWPlzX0igIJ2zE3cHJ3mIs87oDAmI88qbxub4HnNWXxPwdEtAovqNkbl797PXy1FBwDxgQn5v1FUD+RdvRvQzAykjnkHpriXOzUHrCBW3NMv6bFzdSegOoW4qC7D2I3e05KFmEWipv+pZGtuCAY591lXIc0h0wix+ZhlorTqOP9dNmqRCCfzTux2xDaGosb+Oz83jE7yxVCImV9uWC4y5zAk9qXu3JhCeQ5Hmqik9xQmqGPpmZbp+nQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RDlCF00A96LP+NDay++TYORdKMopPqRMWMKotkuSvDI=;
+ b=y2cBboYpCvPS1Q+BQhddpKJ/hnVh9IMr+q52+AqGdQ5b+GfoNOfLetxf13zHI6rfwGc+E9QKKoPN6RIGqwgwyeVXkbgNWiXF/bnw9EdqISOx6jtRGrQePGrfaFL7oefaJOKMXqQAWmcG88MiNfqf9PH+n0wbliEUxA86oIYCfVuPSweQRMfg5eDgzgdsMVkKMxRSpAgEXlRrgas6p7NDnD29JC1HSSsvNgsP7nNSladqRYjlRpghMgD41mn2n8q5iCB3mRf9cGw2ZYAazbzMpA/1n+mf1Hm2y/GLBDPz8V7iu7zHLIj5c9izujPn+gzu1UkhRi52c7d5Hbyf2Jf0/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=apertussolutions.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RDlCF00A96LP+NDay++TYORdKMopPqRMWMKotkuSvDI=;
+ b=gDcQxH9FdUY/aQrXlp76apepz36WwE/gf5KpAHlBYuV0Osu2hBbZLybQrLEYMiVdgtzaTNOe2/kN5yHg5Pa3Z3y0O1sUqPXJD+jVgKhr68cRhZ7TaByTkmzT5j4u58V01XaZI7vRdNpRrCevsfOOeiXxC34J0/k2xpUNElxhwGM=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <a26fdd68-9cc8-470f-ab81-0aa3d1ae187e@amd.com>
+Date: Tue, 8 Oct 2024 15:31:30 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] xen/arm: platforms: Add NXP S32CC platform code
-Content-Language: en-GB
-To: Andrei Cherechesu <andrei.cherechesu@oss.nxp.com>,
- xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
-Cc: S32@nxp.com, Andrei Cherechesu <andrei.cherechesu@nxp.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20240930114715.642978-1-andrei.cherechesu@oss.nxp.com>
- <20240930114715.642978-6-andrei.cherechesu@oss.nxp.com>
- <94dc1668-5215-424c-9dcb-1e343451d464@xen.org>
- <b8419295-cc63-41b3-9f2d-277d81e5f85a@oss.nxp.com>
- <a24807bd-5224-4110-bc0e-946287f5c90e@xen.org>
- <1de8ea10-f801-45b9-ab6a-25465ecd6b76@oss.nxp.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <1de8ea10-f801-45b9-ab6a-25465ecd6b76@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v5 39/44] x86/boot: introduce domid field to struct
+ boot_domain
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	<xen-devel@lists.xenproject.org>
+CC: <christopher.w.clark@gmail.com>, <stefano.stabellini@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <20241006214956.24339-1-dpsmith@apertussolutions.com>
+ <20241006214956.24339-40-dpsmith@apertussolutions.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <20241006214956.24339-40-dpsmith@apertussolutions.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002529E:EE_|PH7PR12MB6563:EE_
+X-MS-Office365-Filtering-Correlation-Id: 42d62f75-f733-420b-01d5-08dce7d84956
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?WURia1ovVTh6dWJyeTA4VHNkNWtWMFFudW16QTlkOERaSXMxaWFNMkZoNEJX?=
+ =?utf-8?B?elA5dHdVNHpkL0lPUDdZK21jeitKcElNeVUxNFoxUWM4b3dTY2NmWjlSRTll?=
+ =?utf-8?B?OWZpMnY2N0t3WHZRY0sxblExMjZRazdkSml0MEJyZ0hvM3I0bmNiMmFRTVBj?=
+ =?utf-8?B?citaVitxcEEwS0dQdmQ3WE9yS0JKUGxobDZLd1pSY2FQSlBYNnZWVytNdmpr?=
+ =?utf-8?B?cUZmNStzTXhScDZ5OEUxblp3L0haVFRDWTBNWmZwQ1J0SEF4cEsyeWR4QUE4?=
+ =?utf-8?B?ZlJ1Rm5ZbWlkajdaV3RYd0l4MEtJTGtsMGZyWEdDb1R1U2t1S2g1RGgwVzRw?=
+ =?utf-8?B?UGZ4U05kTkVHdEJOVmdsRDhWa0xRRExONVpjaDFoUTBpb2tNeTl0WjZla1BP?=
+ =?utf-8?B?cWtHMGpWUWp4eEJNV1NPdjY0NDlSNklsTVFRdHJGbVhNeUdnNyt1NHJpNWRl?=
+ =?utf-8?B?dk1HWXk1RWdxNjVTZERxUlFOZjIyK01pOU9QeDdKMlhtWEF1aW5acFNlQlJh?=
+ =?utf-8?B?cWtWelNPeUVqUWs4SHNZWU5seEgyNVd0U0JlZ3BZa0FSY2hsL1Q2SFNpa1lB?=
+ =?utf-8?B?OTVCcVFFNlRoNE9zVFFTSzBDTkF0ejgzZ2NQdFNBdDlmcWpOQzJSV3pzWi9H?=
+ =?utf-8?B?LzlvQTNwQUNzZHN4VTdPTkpYTHNUWThBSE4vbEZDM1FOcVVGTUwrNFEva21m?=
+ =?utf-8?B?M3ZVRGFwUnU1VWkyaDhCN3Vidkc4SWtlbVNwTmRyNStxVVlmYms1a0Y1STRS?=
+ =?utf-8?B?Lzk1RFp0QXQrd1YrM3FTM1pMNEVyNnE4dWgzdDNmYW04V05rbDZ5U21RVTRW?=
+ =?utf-8?B?UnhSVmFXTS9YMlYzYS9NSkE5WWw2NW1iejlseXVUQlA3TWxIYll4Z1FvSXV0?=
+ =?utf-8?B?dm1wdyt6K2hFMkNxc3lpdEs2aEJHbmtWVWxZVHpvYStCQmZJc1hrUTVvTlRQ?=
+ =?utf-8?B?TnZub3pXL2JwV05JTWNvdStSRnZVLzlJSlVMZ3VCd3I0MmJBVnBrQWNNeFZP?=
+ =?utf-8?B?MlEvY0VEV1Yxb3VTKzREMXNadmdZY3NqZFlFb0ROcWk1c2JSb1pWZmFKQkdk?=
+ =?utf-8?B?czRrci9TdjZlV0lXcnZZWU41ZzcwQlFpYkIyYTBHNmViUDljMXlqRWt3U2k2?=
+ =?utf-8?B?N0RMaStPRWFSaWxuOVFTUFF3OW9QSzluT1lTeWwyaDR1Njdza21kLzdVVGtV?=
+ =?utf-8?B?VzBTR1BJcVRsTVhIa1drWHBhT25TN0tjWDhvZVRvZStNWXMvaW9KNzNUREtH?=
+ =?utf-8?B?ZmQxOXF4VHhtSWNOQ0Q0L0xZTDJqVldUZnNYRG9aTjNFaktheTY4cFFYTkpj?=
+ =?utf-8?B?N2R4MFhzcE04RXk3UDFTYVh1SkNac3dJK3lMVjQ1K25nK1U5WTVra1phMWd4?=
+ =?utf-8?B?TnMvYUVGLzJSSFlyT1BUVXBVR2NUR0xYc0NsNHNmTmVtMzJpRHlTU1p0VUZ2?=
+ =?utf-8?B?cFdxY05keTV2SWNoOWJrSFhPTWJiTDVEQWtDeG5lS0tITnlGaXRSczBxN3No?=
+ =?utf-8?B?THNTTkdjVzVVb3FnbmpKSXd5dmtJcTZCc0trRUEwRGxUVW85SGQ5Z0p5aHh1?=
+ =?utf-8?B?bS93c2lZWEhNVnJaZTgyN1l1QkNwOW5TZmFKN3IvTXRNaTJrZW5lZXIwV25h?=
+ =?utf-8?B?b3R3bEJBZDlhbVorem5RdTRUc2xvSlNVWlFyVjI0a2ZKY3I0UUFsaDdscmFp?=
+ =?utf-8?B?RjBHZ0pvTUFmOUowblM4WmNGQ2dHbG4rMlljd2pZazVrQm1LcWFvK1VrQUht?=
+ =?utf-8?B?dkMzcHY0MUY4THVpM0ZiekRVMndGa3loLzJ1QkhyWnlrZ3ZPZTQzZFA2UHBD?=
+ =?utf-8?Q?fe5vob2d81wzGbfeRmm/4ajy9hUUm0UaBg390=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2024 20:32:10.8312
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42d62f75-f733-420b-01d5-08dce7d84956
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SN1PEPF0002529E.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6563
 
-Hi,
-
-On 08/10/2024 20:01, Andrei Cherechesu wrote:
-> Hi Julien,
+On 2024-10-06 17:49, Daniel P. Smith wrote:
+> Add a domid field to struct boot_domain to hold the assigned domain id for the
+> domain. During initialization, ensure all instances of struct boot_domain have
+> the invalid domid to ensure that the domid must be set either by convention or
+> configuration.
 > 
-> On 04/10/2024 19:24, Julien Grall wrote:
->>
->>
->> On 04/10/2024 16:37, Andrei Cherechesu wrote:
->>> Hi Julien, Stefano,
->>
->> Hi Andrei,
->>
->>>
->>> On 01/10/2024 13:01, Julien Grall wrote:
->>>> Hi Andrei,
->>>>
->>>> On 30/09/2024 12:47, Andrei Cherechesu (OSS) wrote:
->>>>> From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
->>>>>
->>>>> Add code for NXP S32CC platforms (S32G2, S32G3, S32R45).
->>>>>
->>>>> S32CC platforms use the NXP LINFlexD UART driver for
->>>>> console by default, and rely on Dom0 having access to
->>>>> SCMI services for system-level resources from firmware
->>>>> at EL3.
->>>>>
->>>>> Platform-related quirks will be addressed in following
->>>>> commits.
->>>>
->>>> I don't see any specific quirks in the series. Are you intended to send follow-up?
->>>>
->>>> [...]
->>>
->>> Well, we could use an opinion on some SoC erratum implementation
->>> and if it would be acceptable for you or not, from any of
->>> the ARM maintainers.
->>>
->>> The erratum is about some TLB Invalidate (tlbi) instruction
->>> variants (by Virtual Address) which are handled incorrectly
->>> in some cases (for some VAs), and that need to be replaced
->>> with broader versions.
->>
->> Can you provide more details:
->>    1. Is this a processor issue?
->>    2. Which VAs are affected?
->>    3. What is the impact if the erratum is hit?
->>    3. Do we need to do anything on the behalf of the guests?
-> 
-> Sure:
-> 1. This is an SoC issue, present in a subset of the S32CC processors family.
-> 2. VAs whose bits [48:41] are not all zero.
-> 3. Well, TLB corruption.
+> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 
-Can you provide a bit more details? Is it a corruption within the same 
-stage/ASID/VMID? IOW if a guest corrupt the TLB, does this mean only the 
-stage-1?
-
-Also, if a guest manage to corrupt its TLB, does this mean it could end 
-up to access host physical address it should not?
-
-BTW, do you have any more documentation about the erratum?
-
-> 4. There are instructions affected at both levels 1 and 2 of translation.
-> The guest will have to work its own way around it.
-> 
-> In Xen, just `tlbi vae2is` (only used in flush_xen_tlb_range_va()) seems to
-> be affected, and if we go with the 2nd approach from the ones proposed,
-> it should not be very ugly to implement. I am of course open to any of your
-> suggestions.
-> 
->>
->>
->>> It doesn't apply for all S32CC platforms, but we can use the
->>> Host DT compatible to identify this. My idea is that we define
->>> a platform quirk for this and check for it using
->>> platform_has_quirk().
->>> Then, we either:>      - modify the definition for the affected 'tlbi' variant
->>>       in arm64/flushtlb.h to actually execute the broader one
->>>       if needed
->>> or:
->>>       - define a new wrapper for the tlbi variant we want to
->>>       replace the affected one with
->>>       - check for this quirk before its usage and call the
->>>       more potent version if needed (there's only one
->>>       occurrence of usage for the affected version).
->>>
->>> Number 2 seems better to me, it's more customizable and
->>> it's similar to the existing handling for
->>> PLATFORM_QUIRK_GIC_64K_STRIDE for some other Arm platform.
->>
->> I need a bit more details first (see my questions above). But if there are not many VAs affected, then we may be able to re-order the Xen memory layout to avoid the VAs. So we wouldn't need any specific change in the TLB flush operations.
-> 
-> I'm not sure what to say here, we would need to have the layout
-> limited under the mentioned VA range in our case, right?
-
-Correct. Is your SoC going to ever have more than a couple of TBs of memory?
-
-> What
-> about the GVA layout?
-
-That's control by the guest. We could potentially tell the guest less VA 
-is supported, but it is free to ignore.
-
-Can you clarify why we would need to care about the GVA layout?
-
-Cheers,
-
--- 
-Julien Grall
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
