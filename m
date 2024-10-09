@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E11CEDDA4
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 14:53:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.814717.1228331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143B5CEDDA4
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 14:58:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.814738.1228393 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syY4A-0005BW-N7; Wed, 09 Oct 2024 14:53:30 +0000
+	id 1syY8Q-0007KG-RH; Wed, 09 Oct 2024 14:57:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 814717.1228331; Wed, 09 Oct 2024 14:53:30 +0000
+Received: by outflank-mailman (output) from mailman id 814738.1228393; Wed, 09 Oct 2024 14:57:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syY4A-0005BP-KK; Wed, 09 Oct 2024 14:53:30 +0000
-Received: by outflank-mailman (input) for mailman id 814717;
- Wed, 09 Oct 2024 14:53:29 +0000
+	id 1syY8Q-0007K9-Ob; Wed, 09 Oct 2024 14:57:54 +0000
+Received: by outflank-mailman (input) for mailman id 814738;
+ Wed, 09 Oct 2024 14:57:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Z5PZ=RF=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1syY49-00058O-RM
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 14:53:29 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
+ id 1syY8P-0007K3-4u
+ for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 14:57:53 +0000
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [2a00:1450:4864:20::536])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3dcd7571-864e-11ef-99a2-01e77a169b0f;
- Wed, 09 Oct 2024 16:53:27 +0200 (CEST)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c91a7141b8so1507189a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 07:53:27 -0700 (PDT)
+ id db0af296-864e-11ef-99a2-01e77a169b0f;
+ Wed, 09 Oct 2024 16:57:51 +0200 (CEST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5c896b9b3e1so9598393a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 07:57:51 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a994205dc60sm575767566b.87.2024.10.09.07.53.26
+ a640c23a62f3a-a994046f466sm584852866b.61.2024.10.09.07.57.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Oct 2024 07:53:26 -0700 (PDT)
+ Wed, 09 Oct 2024 07:57:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3dcd7571-864e-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: db0af296-864e-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1728485607; x=1729090407; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1728485871; x=1729090671; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=9P1cDNBQclLOGOZUk43Glw+KrzAlUg5+fRnWA9w6CVw=;
-        b=WJD9TW1juab3zgSaMEtmpvJBT3iBxP0zL1dLSbka6bsM7SaJmjQzV2LvM4JlcYBSNj
-         uEeqtVF0TNfiztAH9nB7G0n9x/qqXEhB3stF2BUSAtH4MzHEqJa3tcecu2ZbfHwoFOK/
-         rKHMnRp4a1FeokmgyXxPoFNZVUctZwvls+YGB4LobWcQ9+bp1tCUEHxiv9UL5TlUEeS0
-         a9nvMvl2dgym3jaVRwwRTkFUYyfFF21XljkfgDF2WYdM337GO3YFwkZEwjMOyPBvS0FF
-         s3EIIkBZUgQenrdtSt22ilh7lqZZmyhkqrudO98BEYUwIyONCgt1CW6pcnmfkyClGig6
-         PE5w==
+        bh=NYKbJhG4biobtXvX0h2pUc2QvsxroHNriVtoW4Id+qs=;
+        b=TB8RaUG2uqRZ+vdkWScrjs06qhV+jJnCYHJBI++SgbCOEcDNsnxTFESoCHukYN9BYA
+         zUUzlV4GP9cp/6G+b+CeemNq7hlUFpeQvl1PfngYJE62Q3J5zl/4JScsRDSDIzLrjLPK
+         GhnicHCLk0LzXkhlvIi5RLRq4m5IcwN9wUi1cyHsdQqr+kWBF/DI5HC95Gj7VOplm+PH
+         h0EHZBnCHzw0fI2RhRlYDYrmZgFQjeBGu/Cf3axBwHSTOXxh1NKC41BCeIx1RKCS9BV0
+         G2YVSplKqamoO7/9NR6luuxIeUSmaP1+wqQkbnF4SLCNo3ReBPgAoKM1Rf0+9lFZkSDt
+         P05g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728485607; x=1729090407;
+        d=1e100.net; s=20230601; t=1728485871; x=1729090671;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9P1cDNBQclLOGOZUk43Glw+KrzAlUg5+fRnWA9w6CVw=;
-        b=iChXNCP++MvJ5KOHIJ/+6mFZlc6VyQnZi4ZNDA/n1NET0C4xf8K+2+LB7nRqSo469O
-         uJapeRgTpZBJFxGne0IS78aazqypFiZgiO3wwcaSsMyPW2tbmVbGB6Mf2QO4BxfM6+/6
-         DNLEMNLlPMsz5Z1EvyGYeFeBY+Ll/rzkppbHuWZBwaJsd/kdPMakb4YSlRQGJpwecsp0
-         zzuyuM+azFXRAgzo7zyuXVjyF5oHWZqIMbSGHVXRbrbQDVABzejAeG1xuvgFUCs4n+vy
-         2uznFQr2NyO1ueVhhQ53VFC4Y6HZL0K89TrEZmbkmdRxi22wTFI1tHLR23wQK+TOD2xM
-         n42A==
-X-Forwarded-Encrypted: i=1; AJvYcCVIESsV+vKM8CB5OEhHVo4bqRQ4uHWJE2OZwMEbA3glOEtKSnSXP7U7+1x7gjQ7mpsbWA5hxZt9swU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwVC+4LntqdHIEZ7+VAv2EWLgDcnYfryeNhT2YqMFew3goaK1GE
-	5jPKiVznMF3Sp2WvvROX0dJkJ+3ydmwQ+bYF7K01XXInlGFt84SHnVBgUiN04g==
-X-Google-Smtp-Source: AGHT+IEtiNwi8Z+QHFvE3tGWU2rQCuElh2e19o9OwH2pAJmsl3fu4sTN8xxRFykwxW6z0bZL+vWPiw==
-X-Received: by 2002:a17:907:c899:b0:a99:56e1:bd30 with SMTP id a640c23a62f3a-a998d313b3amr249260466b.42.1728485606892;
-        Wed, 09 Oct 2024 07:53:26 -0700 (PDT)
-Message-ID: <56fc2b5e-54c6-46df-a044-de6efcc427d4@suse.com>
-Date: Wed, 9 Oct 2024 16:53:26 +0200
+        bh=NYKbJhG4biobtXvX0h2pUc2QvsxroHNriVtoW4Id+qs=;
+        b=E0jlBIY+9vVw+xjsCubZjdagj7ZCUO3Qy+45mLN6eMh2knbiU51o2lLA7DPnBpLucO
+         ZMk9hwBIbPy5Edtbzzep/WndbaUfLZhwVT0COMn4OAEyf560B8WxGRzclVJACtxqCezw
+         hTmQCfpfXiITq5Ut708I++T2tcp/5jja6OLScRea6OR3/BEXrMRFz5OQxG2bENhRR/hx
+         1WnzzdTBsov86IJpI94mcEDVt07JA2o8wOiccVgG0gj3GXMsFpesLyCmtBtdeZP/ItbO
+         xokAVbfA5QReySVaqE/VYsL8XhiXiWMf4aJ6ZUvGWjRC/YLtMOLUgk06jy8evZzQWUUw
+         X7+w==
+X-Forwarded-Encrypted: i=1; AJvYcCWkAmRzlXEDp349rhG4SkXWVBKZ5DKFLGn05pgDLtQeUme+W0QC5NAUprEBJpOOMVw7GV1U0C6dWLk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxLA41QYRTOsDqO40hhPBJk4kEwSI3pDh5FlinG16jmL/+S/lyU
+	5SKM1/Krs2YHuSWUAuQfcMLgMLRxlh1+mH4lAlwfCCj8fC6jTKGfMmCRsleiag==
+X-Google-Smtp-Source: AGHT+IFL4wKSRnfmerRMhjMukTrdVerJLX+i6FpYOX+46Cfs3bYxEz84m70X1CCvJ6HEwg4Jyg9Tfg==
+X-Received: by 2002:a17:907:d5aa:b0:a77:b01b:f949 with SMTP id a640c23a62f3a-a998d20883amr270485366b.35.1728485870774;
+        Wed, 09 Oct 2024 07:57:50 -0700 (PDT)
+Message-ID: <9f5e9819-af2b-4de7-91f0-d0b7d35f57ba@suse.com>
+Date: Wed, 9 Oct 2024 16:57:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 09/11] xen/x86: Derive topologically correct x2APIC IDs
- from the policy
-To: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20241001123807.605-1-alejandro.vallejo@cloud.com>
- <20241001123807.605-10-alejandro.vallejo@cloud.com>
+Subject: Re: [PATCH v3 1/3] xen/riscv: implement virt_to_maddr()
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1728472163.git.oleksii.kurochko@gmail.com>
+ <9f7d9ebde6fc7224490d1fd565676e051c57a80d.1728472163.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -117,21 +117,22 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20241001123807.605-10-alejandro.vallejo@cloud.com>
+In-Reply-To: <9f7d9ebde6fc7224490d1fd565676e051c57a80d.1728472163.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 01.10.2024 14:38, Alejandro Vallejo wrote:
-> Implements the helper for mapping vcpu_id to x2apic_id given a valid
-> topology in a policy. The algo is written with the intention of
-> extending it to leaves 0x1f and extended 0x26 in the future.
+On 09.10.2024 15:45, Oleksii Kurochko wrote:
+> Implement the virt_to_maddr() function to convert virtual addresses
+> to machine addresses. The function includes checks for valid address
+> ranges, specifically the direct mapping region (DIRECTMAP_VIRT_START)
+> and the Xen's Linkage (XEN_VIRT_START) region. If the virtual address
+> falls outside of these regions, an assertion will trigger.
+> To implement this, the phys_offset variable is made accessible
+> outside of riscv/mm.c.
 > 
-> Toolstack doesn't set leaf 0xb and the HVM default policy has it
-> cleared, so the leaf is not implemented. In that case, the new helper
-> just returns the legacy mapping.
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Is the first sentence of this latter paragraph missing an "If" or "When"
-at the beginning? As written I'm afraid I can't really make sense of it.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
+
 
