@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8054ECED628
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 08:47:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.813926.1227005 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0CD0CED628
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 08:49:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.813941.1227015 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sySLy-0003ac-2P; Wed, 09 Oct 2024 08:47:30 +0000
+	id 1sySNr-0004rb-DP; Wed, 09 Oct 2024 08:49:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 813926.1227005; Wed, 09 Oct 2024 08:47:30 +0000
+Received: by outflank-mailman (output) from mailman id 813941.1227015; Wed, 09 Oct 2024 08:49:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sySLx-0003aV-Ub; Wed, 09 Oct 2024 08:47:29 +0000
-Received: by outflank-mailman (input) for mailman id 813926;
- Wed, 09 Oct 2024 08:47:28 +0000
+	id 1sySNr-0004qd-A9; Wed, 09 Oct 2024 08:49:27 +0000
+Received: by outflank-mailman (input) for mailman id 813941;
+ Wed, 09 Oct 2024 08:49:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qj4E=RF=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
- id 1sySD0-0005FO-U3
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 08:38:14 +0000
+ id 1sySDJ-0005FO-4L
+ for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 08:38:33 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d2077015-8619-11ef-a0bd-8be0dac302b0;
- Wed, 09 Oct 2024 10:38:13 +0200 (CEST)
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ id dd53aac3-8619-11ef-a0bd-8be0dac302b0;
+ Wed, 09 Oct 2024 10:38:32 +0200 (CEST)
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-616-TvXbMQwgPnWCiL0A48mcDw-1; Wed, 09 Oct 2024 04:38:11 -0400
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-7ae48475234so1704795985a.0
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 01:38:11 -0700 (PDT)
+ us-mta-332-ywa25oB_PFuUujWxGtL0vA-1; Wed, 09 Oct 2024 04:38:30 -0400
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-7aed2d01616so257554285a.1
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 01:38:30 -0700 (PDT)
 Received: from eisenberg.redhat.com (nat-pool-muc-t.redhat.com. [149.14.88.26])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7ae75615aa2sm439643585a.14.2024.10.09.01.38.01
+ af79cd13be357-7ae75615aa2sm439643585a.14.2024.10.09.01.38.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 01:38:10 -0700 (PDT)
+ Wed, 09 Oct 2024 01:38:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,39 +51,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d2077015-8619-11ef-a0bd-8be0dac302b0
+X-Inumbo-ID: dd53aac3-8619-11ef-a0bd-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1728463092;
+	s=mimecast20190719; t=1728463111;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=whIiuNRJJmYlfQ3wiaGZ/HmATem6GNPoxo7pUmmbAqQ=;
-	b=Bz6g2jtMcXJ35p1DBRCmU+vHVfDIx21l8GhMaNcfvqZnKjJOkcqnTegv+C0dclJFjMYyt0
-	218CqExSDlE98E2qUhFYk/qY28u4iXVhj2dWchIu8lJFW4Kw0CB//DYVrEMwmcedRcsojA
-	yA+GaUSgX9KvP/DiWg9m87GIzUWhTbc=
-X-MC-Unique: TvXbMQwgPnWCiL0A48mcDw-1
+	bh=u7xGfk4qndjTqagar0QlDaIVC8D2pMzlwDaMVJxc9mw=;
+	b=fX1Y18yAwx7II3ykm/z3uy0psGQZMJSusKxf6Cv1PKibOl7bQR3iZNExXDZcPGgX90aJyK
+	mWKtG8Wuir6xIPO22V/j9rC6WXPdKu7Ljx0PGxyHQVLVhzf+/0/IdAezujfHpZv38zs0QM
+	Fg2bBvwm42jOGe7DFyZDXvJG3djdXls=
+X-MC-Unique: ywa25oB_PFuUujWxGtL0vA-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728463091; x=1729067891;
+        d=1e100.net; s=20230601; t=1728463110; x=1729067910;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=whIiuNRJJmYlfQ3wiaGZ/HmATem6GNPoxo7pUmmbAqQ=;
-        b=Amj7/fgy4ZTtykF1EiAB9IGK1mvj9/ovEwC1GCWeG3UDwNNpdYS2YH8AbSgdv6ErKu
-         y6yj6gFLfjjNAdYP+bftwD6W23GX0vagEWrbROn1bcI05dcRKVJo4vOdwbo2DbIpmX7+
-         bXPuuckqwocMvRq/QobP+gB+X5+Y9U9lig/JBWmiQ6lVv7OThx1ufGG0P/m11TP+6reV
-         AsjlIEO0syV7zUwrj+J99yZbCza1CigDanYy6TEJ1gRUq5g/JEjG9jnM/aAFq3qxI629
-         tVvoxdZMJK6AlJY9xzm9+THWIEeEEXIa38DjABHzaMlolaml1tmB94dL5+3GK93JhVzx
-         NZgQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWVfKK1YIrO9mRRDuu8fqBh1s9eJr/Gh7AJy8Gj397M1Nf3qKOg5/J7jGDetKKTSHodkIj27hObUX8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxoXb5S3awtBFhuowHKC4VWIdWfsUmgG/v9W9pkg1DD2Eb+BK4O
-	TU0FGPv1KkAJebgwTzBFudTPr54Jojnejq3QhmwAgbMmLnARf193Js9zK0JjrQeEc/Vlfm3uSIq
-	HwfQpnYLq5OJQ/vRhvBZ6pwpVj7IwZJaU7/kZ9JtMli0UxOAXLOdQ498Ok5q+WuR8
-X-Received: by 2002:a05:620a:6006:b0:7a9:ab72:7374 with SMTP id af79cd13be357-7b10ed4fff8mr102281485a.35.1728463090674;
-        Wed, 09 Oct 2024 01:38:10 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE/MgCEUv0CJEAIc6rr0qvcu86NTMXEfUgLL+h2hiKBHzQb8C5W8ydxW51ghGpiTPgzdZQtmw==
-X-Received: by 2002:a05:620a:6006:b0:7a9:ab72:7374 with SMTP id af79cd13be357-7b10ed4fff8mr102275485a.35.1728463090297;
-        Wed, 09 Oct 2024 01:38:10 -0700 (PDT)
+        bh=u7xGfk4qndjTqagar0QlDaIVC8D2pMzlwDaMVJxc9mw=;
+        b=qCWYQHcd41vcx5j6Iq8k+JnzjV2j0vF1JXuYrhMP7h8jIxTPury6WkJymLk2WuJX0w
+         GHVAHmzZoXTRgVbouEIbi1J7VsfdWSP8w0kbx1zOfkhX4WFfZ4S6SIM4ZpkAHOy3vIZa
+         ssQkE8ctrnFD0JiBtJAqEsZ9Io7M3yAff9YgSwfPddMAbTYmjLGPVV/hrA+hrsnh61mK
+         pcnb6dR2GIhjzI5ylAHQ3lCQbYpyDSTk1EK1z9gc35l+Ftg1QO7eYHTbgWXu7DlC0c6K
+         m3C0klbtlbqaAvK2HZ68FDfY9t1vcFBMlxBq0/J9BeVDuV9Qu4JiIHk7/eSZHCVtZe8r
+         qLEA==
+X-Forwarded-Encrypted: i=1; AJvYcCXTiDIFyGpSEa9ajcqHFuaZxEIJO8ZcfNeiIh2NU/9ULW8F5/BdRyQ5QQ8RWtF2D8lVwf2bhA8Ld7w=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwZuicNn5DVeJ5sZ7aRrW8hSB9gFb5mp4FpUuSUdhs9r9J2+yui
+	+8oyhDtASrBuIbOBolMR/Ahb8MeZ56ghcpD+4LLfhV8nvGohhRzwcVMGAnZWRfEJXjcVKLMzKEs
+	auiT87q2W9aBdjM3vd3t+c4s++Ql8AuvyafszknA5G7A4ZnJHWY8paVwI5jmCuFvV
+X-Received: by 2002:a05:620a:460d:b0:7a9:befa:eeea with SMTP id af79cd13be357-7b079523fa5mr211578485a.10.1728463109640;
+        Wed, 09 Oct 2024 01:38:29 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGDFSvxtLv6Q0pe/4IBD0n4HBYmqOqMV7Zg8tkr7BJx3NcG6raccYdUXiO6MGZhunZjFhe2CA==
+X-Received: by 2002:a05:620a:460d:b0:7a9:befa:eeea with SMTP id af79cd13be357-7b079523fa5mr211570485a.10.1728463109176;
+        Wed, 09 Oct 2024 01:38:29 -0700 (PDT)
 From: Philipp Stanner <pstanner@redhat.com>
 To: Damien Le Moal <dlemoal@kernel.org>,
 	Niklas Cassel <cassel@kernel.org>,
@@ -157,9 +157,9 @@ Cc: linux-ide@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-sound@vger.kernel.org
-Subject: [RFC PATCH 10/13] staging: rts5280: Use always-managed version of pci_intx()
-Date: Wed,  9 Oct 2024 10:35:16 +0200
-Message-ID: <20241009083519.10088-11-pstanner@redhat.com>
+Subject: [RFC PATCH 12/13] HID: amd_sfh: Use always-managed version of pcim_intx()
+Date: Wed,  9 Oct 2024 10:35:18 +0200
+Message-ID: <20241009083519.10088-13-pstanner@redhat.com>
 X-Mailer: git-send-email 2.46.1
 In-Reply-To: <20241009083519.10088-1-pstanner@redhat.com>
 References: <20241009083519.10088-1-pstanner@redhat.com>
@@ -173,29 +173,53 @@ pci_intx() is a hybrid function which can sometimes be managed through
 devres. To remove this hybrid nature from pci_intx(), it is necessary to
 port users to either an always-managed or a never-managed version.
 
-rts5208 enables its PCI-Device with pcim_enable_device(). Thus, it needs the
-always-managed version.
+All users of amd_mp2_pci_remove(), where pci_intx() is used, call
+pcim_enable_device(), which is why the driver needs the always-managed
+version.
 
 Replace pci_intx() with pcim_intx().
 
 Signed-off-by: Philipp Stanner <pstanner@redhat.com>
 ---
- drivers/staging/rts5208/rtsx.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/hid/amd-sfh-hid/amd_sfh_pcie.c        | 4 ++--
+ drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/staging/rts5208/rtsx.c b/drivers/staging/rts5208/rtsx.c
-index c4f54c311d05..4831eb035bf7 100644
---- a/drivers/staging/rts5208/rtsx.c
-+++ b/drivers/staging/rts5208/rtsx.c
-@@ -246,7 +246,7 @@ static int rtsx_acquire_irq(struct rtsx_dev *dev)
- 	}
+diff --git a/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c b/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
+index 0c28ca349bcd..48cfd0c58241 100644
+--- a/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
++++ b/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
+@@ -122,7 +122,7 @@ int amd_sfh_irq_init_v2(struct amd_mp2_dev *privdata)
+ {
+ 	int rc;
  
- 	dev->irq = dev->pci->irq;
--	pci_intx(dev->pci, !chip->msi_en);
-+	pcim_intx(dev->pci, !chip->msi_en);
+-	pci_intx(privdata->pdev, true);
++	pcim_intx(privdata->pdev, true);
  
- 	return 0;
+ 	rc = devm_request_irq(&privdata->pdev->dev, privdata->pdev->irq,
+ 			      amd_sfh_irq_handler, 0, DRIVER_NAME, privdata);
+@@ -248,7 +248,7 @@ static void amd_mp2_pci_remove(void *privdata)
+ 	struct amd_mp2_dev *mp2 = privdata;
+ 	amd_sfh_hid_client_deinit(privdata);
+ 	mp2->mp2_ops->stop_all(mp2);
+-	pci_intx(mp2->pdev, false);
++	pcim_intx(mp2->pdev, false);
+ 	amd_sfh_clear_intr(mp2);
  }
+ 
+diff --git a/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c b/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
+index db36d87d5634..ec9feb8e023b 100644
+--- a/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
++++ b/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
+@@ -289,7 +289,7 @@ static void amd_mp2_pci_remove(void *privdata)
+ 	sfh_deinit_emp2();
+ 	amd_sfh_hid_client_deinit(privdata);
+ 	mp2->mp2_ops->stop_all(mp2);
+-	pci_intx(mp2->pdev, false);
++	pcim_intx(mp2->pdev, false);
+ 	amd_sfh_clear_intr(mp2);
+ }
+ 
 -- 
 2.46.1
 
