@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2879CEDDA3
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 15:15:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.814782.1228454 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5568CEDDA3
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 15:17:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.814795.1228473 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syYPU-00005m-J5; Wed, 09 Oct 2024 15:15:32 +0000
+	id 1syYRP-0002KI-53; Wed, 09 Oct 2024 15:17:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 814782.1228454; Wed, 09 Oct 2024 15:15:32 +0000
+Received: by outflank-mailman (output) from mailman id 814795.1228473; Wed, 09 Oct 2024 15:17:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syYPU-00005e-EZ; Wed, 09 Oct 2024 15:15:32 +0000
-Received: by outflank-mailman (input) for mailman id 814782;
- Wed, 09 Oct 2024 15:15:31 +0000
+	id 1syYRP-0002KB-19; Wed, 09 Oct 2024 15:17:31 +0000
+Received: by outflank-mailman (input) for mailman id 814795;
+ Wed, 09 Oct 2024 15:17:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=B0zC=RF=cloud.com=andrii.sultanov@srs-se1.protection.inumbo.net>)
- id 1syYPT-00005W-93
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 15:15:31 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Z5PZ=RF=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1syYRN-0002Jw-An
+ for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 15:17:29 +0000
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [2a00:1450:4864:20::633])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 51b4b2c0-8651-11ef-99a2-01e77a169b0f;
- Wed, 09 Oct 2024 17:15:29 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5c8a2579d94so8137980a12.0
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 08:15:29 -0700 (PDT)
-Received: from EMEAENGAAD87503.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c91fd5d187sm857407a12.82.2024.10.09.08.15.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 08:15:28 -0700 (PDT)
+ id 97d101e7-8651-11ef-99a2-01e77a169b0f;
+ Wed, 09 Oct 2024 17:17:27 +0200 (CEST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a99415adecaso183446966b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 08:17:27 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a99325c5c48sm665475466b.170.2024.10.09.08.17.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Oct 2024 08:17:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,62 +47,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 51b4b2c0-8651-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 97d101e7-8651-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728486928; x=1729091728; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=r+/86E6IyE1vne2BAybxM85VAVTaht9kCIik4VBf/yI=;
-        b=ZoTpIm+o3KWPwHQfcmjF+W2FubF5k7AvBpbLNvq1LtWubV8BzaisrI1QqGF5hlr0Co
-         pk9LUTuofG6g5ourt0sjU8stxCj727K3X0Mpqf8ZoDrCuIdYOp2sfNJzJKZwlhaZ7jBj
-         3bv6msYuHCNIOzqCBzIBGOsopuA7w+9LUPbTg=
+        d=suse.com; s=google; t=1728487046; x=1729091846; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=lxvQfl2rvl2g0BGGeiVI77GzKYdgwx9alNQm/Pa0XLk=;
+        b=Tz+On1Pkk/TXh0AMFJRPrnMIwE04WogtSodya2ct4J2yxKuxOPYJkkr07jsyDwfe4d
+         Vyk2ox+v3VkQl92MDgfcuQosrW6+MA5eKkddsmKMKk/FS9W51lR21ZCwcAQgWp2SZo/L
+         f/O00usdSph593oJjEFDTUAutRCTBPtBOH5vj5k56PZjjzM2Yd5v3XfPEGEhRDSuKffd
+         U5Ow6JAilEUrNBsELy9KwjaoSm9PFRcN5qY3Zcuby7P9d7X0oys3cdnfHhOqfISdDEzO
+         Bokk5UmZ3u6rumB5f8kfzpzINUJ0JnjUK4JhVR3K8aAiylEuNdDOnimaAyQycYyLMgtf
+         2t4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728486928; x=1729091728;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=r+/86E6IyE1vne2BAybxM85VAVTaht9kCIik4VBf/yI=;
-        b=Yl5LGDkhZ0hR6tMCobZFDxmkjHQ1SEGB2JepcLfo2MBl7k0bz7KYSzwWTVc74QRCE+
-         shtLVumoc5YJCgkuv6T89Vwfmus8okNsSeeJfo0VL1hXsvjLUKla2elczkddN8M4+emb
-         OVJnlDtL/MYSVeVMoHBiA/v4XHYZwT1UgFWZcmOyiaZD8WkcHjMPw/xj0DijdRh/wIU9
-         Qrpkh6qsg7hXrv2VUSKC9gvWoiBssHhJFDlEM9I+Mol+BLra0OyjcdTuKRswZscZwGWV
-         Js6s0072V4eKEJt6+sgS+iTgz/yls7tThToM08xOO9d73ZjabkLRx72pTc1yMHRdXjaD
-         wvjQ==
-X-Gm-Message-State: AOJu0YxsnbfHC7bGV9AOuMKZl/Jf6b58o0Tmb8WR3Xvv9j8MKez7GWss
-	rey8zjJfoBesss6bHww2sZjj+tlOswYwz4RAcrn22iEHovrbTVxumCfD/2DjutAZISuNnroynVO
-	d
-X-Google-Smtp-Source: AGHT+IEfsWJMqI1FWUQ07t0r+IqgNMs9Y8RYOPmremC1lEdDeVIGYNdZN6Q4RjUypk+J/xO6TKQggQ==
-X-Received: by 2002:a05:6402:13c3:b0:5c3:d908:98f0 with SMTP id 4fb4d7f45d1cf-5c91d543cccmr2442864a12.3.1728486928551;
-        Wed, 09 Oct 2024 08:15:28 -0700 (PDT)
-From: Andrii Sultanov <andrii.sultanov@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrii Sultanov <andrii.sultanov@cloud.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	Edwin Torok <edwin.torok@cloud.com>,
-	David Scott <dave@recoil.org>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v1 0/1] Oxenstored packaging fixes
-Date: Wed,  9 Oct 2024 16:15:19 +0100
-Message-Id: <cover.1728471268.git.andrii.sultanov@cloud.com>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20230601; t=1728487046; x=1729091846;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lxvQfl2rvl2g0BGGeiVI77GzKYdgwx9alNQm/Pa0XLk=;
+        b=dd1qsXu8bvyj8moFOQ78pr9dSp2XfNp+RoRKCUD+OG8XZqggE7UUd0sUwn4yOo/1D+
+         EPAq+Qn9mErnfzo3+t/1bU9oBph4r3EiTk0DPvqpLiGwOBFWtxdhKGSyEhabNHjCpeXA
+         O6rGzIcegfAmYuFWcBux3A0KcpCX3cLu4YsIq9Wzhf19CXGXPjxBHqina5wivCFkuywz
+         T5JhMl3sBGNb7WUzqCWDFEIy87uf2Rv8Xrr3MLf/LqEkHz+MNIz3mG55dFhnjzn1DWqx
+         O2HIEssK4qM65X+ak1Zp+chJBDVaiUAa15htNt3wh21LtgTrJtM0/WmrgtiFdzXo1+6H
+         V9TQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXAjmzcuTv5qm6sZym7+wXs8j9C9she2t6a+sQ2NDSz6jJhKGeNIS3ev4bA3UcJj0lehKGWtrUe2Ng=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxvQ2KM/IOxY9s9Ij1+7bL/6ZXccgzFiF9IKC0RRB0+b/Ruub/t
+	Ps15s8lDcg3iQkkWouCaqG0QywJLe+Fr63B1EC5ga11oRqCSiYVv4ofHfwRz1w==
+X-Google-Smtp-Source: AGHT+IGMLvRj1GY7hkcEDNDGYwVmBMn4K6JXXBpe/WAWP6brcP19oQIV6k+mYRkMIIQcmgbeaIxuag==
+X-Received: by 2002:a17:907:6e90:b0:a8d:41d8:14ad with SMTP id a640c23a62f3a-a9967ab47d7mr828829166b.29.1728487046409;
+        Wed, 09 Oct 2024 08:17:26 -0700 (PDT)
+Message-ID: <76faeab0-3c8d-426d-8019-871ebfebbf78@suse.com>
+Date: Wed, 9 Oct 2024 17:17:25 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 05/44] x86/boot: introduce struct boot_module
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Cc: jason.andryuk@amd.com, christopher.w.clark@gmail.com,
+ stefano.stabellini@amd.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20241006214956.24339-1-dpsmith@apertussolutions.com>
+ <20241006214956.24339-6-dpsmith@apertussolutions.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241006214956.24339-6-dpsmith@apertussolutions.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Following the work on stabilizing some interfaces used by oxenstored
-to allow bringing it out of the xen tree, there are some additional
-fixes needed around packaging the plugin interface.
+On 06.10.2024 23:49, Daniel P. Smith wrote:
+> @@ -302,6 +304,13 @@ static struct boot_info __init *multiboot_fill_boot_info(unsigned long mbi_p)
+>          bi->memmap_length = mbi->mmap_length;
+>      }
+>  
+> +    /*
+> +     * This will iterate over all modules to include an extra mb module, which
+> +     * should have been reserved to hold an entry for Xen.
+> +     */
+> +    for ( i = 0; i <= bi->nr_modules; i++ )
+> +        bi->mods[i].mod = &mods[i];
 
-With these changes, I was able to get the spec repo to build and the
-forked oxenstored to launch properly on the host.
+I find the comment difficult to follow / match with code here and elsewhere.
+How about "Iterate over all modules, including the extra one which should
+have been reserved for Xen itself"?
 
-Andrii Sultanov (1):
-  ocaml/libs: Remove xsd_glue_dev package, also install
-    plugin_interface_v1.a
-
- tools/ocaml/libs/xsd_glue/Makefile | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
-
--- 
-2.39.5
+Jan
 
 
