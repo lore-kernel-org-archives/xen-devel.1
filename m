@@ -4,38 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B56CED62A
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 08:23:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.813860.1226904 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ACD2CED62A
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 08:37:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.813878.1226943 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syRy6-0002Hp-VZ; Wed, 09 Oct 2024 08:22:50 +0000
+	id 1sySCN-0006KC-TB; Wed, 09 Oct 2024 08:37:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 813860.1226904; Wed, 09 Oct 2024 08:22:50 +0000
+Received: by outflank-mailman (output) from mailman id 813878.1226943; Wed, 09 Oct 2024 08:37:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syRy6-0002Hi-Sw; Wed, 09 Oct 2024 08:22:50 +0000
-Received: by outflank-mailman (input) for mailman id 813860;
- Wed, 09 Oct 2024 08:22:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Z5PZ=RF=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1syRy5-0002HY-2F
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 08:22:49 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aa4cfc52-8617-11ef-99a2-01e77a169b0f;
- Wed, 09 Oct 2024 10:22:47 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a994ecf79e7so47948966b.0
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 01:22:47 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a993f13620dsm553556966b.215.2024.10.09.01.22.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Oct 2024 01:22:46 -0700 (PDT)
+	id 1sySCN-0006IK-Ji; Wed, 09 Oct 2024 08:37:35 +0000
+Received: by outflank-mailman (input) for mailman id 813878;
+ Wed, 09 Oct 2024 08:37:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=qj4E=RF=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
+ id 1sySC7-0005FO-M4
+ for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 08:37:19 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b16cfbd0-8619-11ef-a0bd-8be0dac302b0;
+ Wed, 09 Oct 2024 10:37:19 +0200 (CEST)
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-43-fvUCPhF3O4eJdppvdTGHWw-1; Wed, 09 Oct 2024 04:37:16 -0400
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-7a9a6634b08so124380385a.0
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 01:37:16 -0700 (PDT)
+Received: from eisenberg.redhat.com (nat-pool-muc-t.redhat.com. [149.14.88.26])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7ae75615aa2sm439643585a.14.2024.10.09.01.37.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Oct 2024 01:37:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,87 +51,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aa4cfc52-8617-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1728462167; x=1729066967; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=cAFgz183wJIgXepemo3v3w1gU8IgIGcSvLo6kOlYkM4=;
-        b=hCxCCeBC6aZt90ub2nnwRUf0gWH2vc0kuC06/LGgaqK4kpTBBNCqPAswWrrHUwg3xS
-         ODIx/MnwzsPLo7lhKHyRCl+2D7yHprGYfXcCRBrukjh7MT21mJscIWHpmt/ej5wg2naE
-         ahYt0xDLvaKNe+4WR73zh4+3kvJyokBXBcLtBFC1LBlZqVDS0ugRMT6ZQf8jegYcn0eS
-         jdvmTcPcGA+PL5PYPeao7LRVkUyfGjeT4n/KW6oH9AZ8w2KUUukhaji9KwLMsUmcuFih
-         ErvBHxct3Mw4LBcu9WUefgwIWc4g+WhRGmNSpaSZ/rrOurNqkg7WpHLlNw6biJfjogN0
-         sH2g==
+X-Inumbo-ID: b16cfbd0-8619-11ef-a0bd-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1728463037;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=x2+4tkUVcLGJF5zHhr3G6hU1vXfnQU3y0JjqPGIiXBc=;
+	b=UjcAybwaw2kqxM+UBdxnR9CoTvvYKZ4N7l4mTHfI2u34MhXIGTnbf3c+z2Mg/YO6MO5KAs
+	L0uCX+oUeUkbBZwhsAaQ0/jTNZxU6xbG+4R1BBHjXZ/9moGyVxivOkpD5yK2pyZxtf/0fU
+	0w+4ZhN+10nKwhJyz26svJnV4SRw8vA=
+X-MC-Unique: fvUCPhF3O4eJdppvdTGHWw-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728462167; x=1729066967;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cAFgz183wJIgXepemo3v3w1gU8IgIGcSvLo6kOlYkM4=;
-        b=KzAaeQADJO+uJHlJ0LdX7VA+IV/A+B5x9rNE3q2AyybjiZmsMZaGpFCOcNQHH7esU1
-         4OVAp5+5DzRUTE3JwY0AFXghwsOZTdzNXz0NW8rx7Ng2maOUqQUQXQa9Z6f48lqfcqvS
-         BbTSssPeZ9TKpeR7PGUcfwllQus9z75gVBoaI06xEp8lVHuX4Ms94Yhg9xZeK0o4XEbr
-         r70Ovxt99IfVI2MBaSVxj7xtocUdn0G2CLhQXhFhTZh0KT0brYxPiuD0tzBiu+55R2mx
-         uXrmxwWEusw6QiPL8YCrh0mZCzRXxTsdf+azj0t99vgezhj4A6K+Zj+Bd2fWeU0GqAB7
-         9AAw==
-X-Forwarded-Encrypted: i=1; AJvYcCWqxhIZI6hOLPthGqB6s/NaKPifGnnYSzIjcwebrp+0BFuaUUxcy2n4E84Isr5I2+2qgWEFWOvg5pQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxuEhPC/FBOK65ZKyyXB9pE+/5c7Wq/lXXoPLw3AfmGcEMKQhHZ
-	k4BzYvSpAa58hk8kTfhx0RFNcq1amzaDgF8yoJbeWnVa3VvQ6sILET5XYNldmw==
-X-Google-Smtp-Source: AGHT+IF6SygvG7q1ZETdZz+YQ8XDtYXrDS5/8Be/fIvFADg8rpkyTY2fWSBhLLpQBYt8zVEhvooNig==
-X-Received: by 2002:a17:906:7314:b0:a99:6163:d4f8 with SMTP id a640c23a62f3a-a998d333d96mr143125166b.58.1728462166605;
-        Wed, 09 Oct 2024 01:22:46 -0700 (PDT)
-Message-ID: <8773c396-a67f-4e9a-8d98-ed133d2bb474@suse.com>
-Date: Wed, 9 Oct 2024 10:22:45 +0200
+        d=1e100.net; s=20230601; t=1728463036; x=1729067836;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=x2+4tkUVcLGJF5zHhr3G6hU1vXfnQU3y0JjqPGIiXBc=;
+        b=jbzpxuHusxmT6j9JFDl6wwQe4PRwMGCR3I6dH4CxYbowAm++1eV8us95/ZaaV59Wvf
+         jMOFJQs5kj0WWiaLbr2j8g5BU0OsRYFs8jMNaiLG3SK5QZxcjDK9dwYD3Qw9B4UdrpEi
+         BsvEVm3PP3o2WJchBbW65otbEcrqbL+WlKmxRWzzeCMgNM8TY9Zh/IMvS7KA777X7ZlZ
+         UWhxEE+a6ICX97APdfq+G7oVwwR6LvwXROIyi7UYzXGmay85whMk3+Uy4ZURrXzLGr1v
+         FyOZXc4Ols7m7FBpNPHJB/PPS+THHyFhLmA9VlXxRP2GZmLWNI3bElOtfAsWhP/mZSBF
+         J+9A==
+X-Forwarded-Encrypted: i=1; AJvYcCXmnXXwPzMTH9ldnpCdHnjVL46e8D+EPiGgw+x4S4H4lB0w8HjZUadP7ofvvoJ+Hfm91dr0AdnlUKA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwXht2t7rcZZdUd4oWl2VGhy2fBjaUkCQQtW8SsNGitz0tqpC1P
+	pAb2VvR6SMIPQW8IiB1YQY+zD1r2f5+TRGYWXC2KRmhStQwR5xmpJ87x47iI2f/FAvAZDYjdVsG
+	nv90BP24MVU91YqwmIig7NEBU8x3ARpruKN9fDMiR/SKz21aGtyZ2686DMd/XMat0
+X-Received: by 2002:a05:620a:2585:b0:7a1:e341:d543 with SMTP id af79cd13be357-7ae85f85358mr1004133085a.28.1728463035646;
+        Wed, 09 Oct 2024 01:37:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEO+/SwmcH6h0Vxkc+UACkKjxSzn/5VgASgM8SukkUVixA4gIuWgHYKW5iFaezTFbfMq+Vx5w==
+X-Received: by 2002:a05:620a:2585:b0:7a1:e341:d543 with SMTP id af79cd13be357-7ae85f85358mr1004126485a.28.1728463035252;
+        Wed, 09 Oct 2024 01:37:15 -0700 (PDT)
+From: Philipp Stanner <pstanner@redhat.com>
+To: Damien Le Moal <dlemoal@kernel.org>,
+	Niklas Cassel <cassel@kernel.org>,
+	Sergey Shtylyov <s.shtylyov@omp.ru>,
+	Basavaraj Natikar <basavaraj.natikar@amd.com>,
+	Jiri Kosina <jikos@kernel.org>,
+	Benjamin Tissoires <bentiss@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Alex Dubov <oakad@yahoo.com>,
+	Sudarsana Kalluru <skalluru@marvell.com>,
+	Manish Chopra <manishc@marvell.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Rasesh Mody <rmody@marvell.com>,
+	GR-Linux-NIC-Dev@marvell.com,
+	Igor Mitsyanko <imitsyanko@quantenna.com>,
+	Sergey Matyukevich <geomatsi@gmail.com>,
+	Kalle Valo <kvalo@kernel.org>,
+	Sanjay R Mehta <sanju.mehta@amd.com>,
+	Shyam Sundar S K <Shyam-sundar.S-k@amd.com>,
+	Jon Mason <jdmason@kudzu.us>,
+	Dave Jiang <dave.jiang@intel.com>,
+	Allen Hubbe <allenbh@gmail.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Philipp Stanner <pstanner@redhat.com>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Chen Ni <nichen@iscas.ac.cn>,
+	Ricky Wu <ricky_wu@realtek.com>,
+	Al Viro <viro@zeniv.linux.org.uk>,
+	Breno Leitao <leitao@debian.org>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Mostafa Saleh <smostafa@google.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Hannes Reinecke <hare@suse.de>,
+	John Garry <john.g.garry@oracle.com>,
+	Soumya Negi <soumya.negi97@gmail.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Yi Liu <yi.l.liu@intel.com>,
+	"Dr. David Alan Gilbert" <linux@treblig.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Ankit Agrawal <ankita@nvidia.com>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Eric Auger <eric.auger@redhat.com>,
+	Ye Bin <yebin10@huawei.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+	Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
+	Rui Salvaterra <rsalvaterra@gmail.com>,
+	Marc Zyngier <maz@kernel.org>
+Cc: linux-ide@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-input@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-wireless@vger.kernel.org,
+	ntb@lists.linux.dev,
+	linux-pci@vger.kernel.org,
+	linux-staging@lists.linux.dev,
+	kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-sound@vger.kernel.org
+Subject: [RFC PATCH 04/13] net/ethernet: Use never-managed version of pci_intx()
+Date: Wed,  9 Oct 2024 10:35:10 +0200
+Message-ID: <20241009083519.10088-5-pstanner@redhat.com>
+X-Mailer: git-send-email 2.46.1
+In-Reply-To: <20241009083519.10088-1-pstanner@redhat.com>
+References: <20241009083519.10088-1-pstanner@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 2/2] x86/boot: Improve MBI2 structure check
-To: Frediano Ziglio <frediano.ziglio@cloud.com>
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-References: <20241009080439.2411730-1-frediano.ziglio@cloud.com>
- <20241009080439.2411730-3-frediano.ziglio@cloud.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20241009080439.2411730-3-frediano.ziglio@cloud.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
 
-On 09.10.2024 10:04, Frediano Ziglio wrote:
-> Tag structure should contain at least the tag header.
-> Entire tag structure must be contained inside MBI2 data.
-> 
-> Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+pci_intx() is a hybrid function which can sometimes be managed through
+devres. To remove this hybrid nature from pci_intx(), it is necessary to
+port users to either an always-managed or a never-managed version.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+broadcom/bnx2x and brocade/bna enable their PCI-Device with
+pci_enable_device(). Thus, they need the never-managed version.
 
+Replace pci_intx() with pci_intx_unmanaged().
+
+Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+---
+ drivers/net/ethernet/broadcom/bnx2x/bnx2x_main.c | 2 +-
+ drivers/net/ethernet/brocade/bna/bnad.c          | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/ethernet/broadcom/bnx2x/bnx2x_main.c b/drivers/net/ethernet/broadcom/bnx2x/bnx2x_main.c
+index 678829646cec..2ae63d6e6792 100644
+--- a/drivers/net/ethernet/broadcom/bnx2x/bnx2x_main.c
++++ b/drivers/net/ethernet/broadcom/bnx2x/bnx2x_main.c
+@@ -1669,7 +1669,7 @@ static void bnx2x_igu_int_enable(struct bnx2x *bp)
+ 	REG_WR(bp, IGU_REG_PF_CONFIGURATION, val);
+ 
+ 	if (val & IGU_PF_CONF_INT_LINE_EN)
+-		pci_intx(bp->pdev, true);
++		pci_intx_unmanaged(bp->pdev, true);
+ 
+ 	barrier();
+ 
+diff --git a/drivers/net/ethernet/brocade/bna/bnad.c b/drivers/net/ethernet/brocade/bna/bnad.c
+index ece6f3b48327..2b37462d406e 100644
+--- a/drivers/net/ethernet/brocade/bna/bnad.c
++++ b/drivers/net/ethernet/brocade/bna/bnad.c
+@@ -2669,7 +2669,7 @@ bnad_enable_msix(struct bnad *bnad)
+ 		}
+ 	}
+ 
+-	pci_intx(bnad->pcidev, 0);
++	pci_intx_unmanaged(bnad->pcidev, 0);
+ 
+ 	return;
+ 
+-- 
+2.46.1
 
 
