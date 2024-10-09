@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EFFCCEDDA2
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 14:40:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.814654.1228260 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 907D2CEDD9E
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 14:42:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.814663.1228270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syXqx-00053i-2O; Wed, 09 Oct 2024 14:39:51 +0000
+	id 1syXtZ-0006ns-ED; Wed, 09 Oct 2024 14:42:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 814654.1228260; Wed, 09 Oct 2024 14:39:51 +0000
+Received: by outflank-mailman (output) from mailman id 814663.1228270; Wed, 09 Oct 2024 14:42:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syXqw-00053b-W8; Wed, 09 Oct 2024 14:39:50 +0000
-Received: by outflank-mailman (input) for mailman id 814654;
- Wed, 09 Oct 2024 14:39:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BLvJ=RF=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1syXqv-00051H-KN
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 14:39:49 +0000
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [2001:4860:4864:20::2b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 55378417-864c-11ef-a0bd-8be0dac302b0;
- Wed, 09 Oct 2024 16:39:48 +0200 (CEST)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2872134c806so2239799fac.3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 07:39:48 -0700 (PDT)
+	id 1syXtZ-0006nl-Bm; Wed, 09 Oct 2024 14:42:33 +0000
+Received: by outflank-mailman (input) for mailman id 814663;
+ Wed, 09 Oct 2024 14:42:32 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1syXtY-0006nb-Rr; Wed, 09 Oct 2024 14:42:32 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1syXtY-000359-Q8; Wed, 09 Oct 2024 14:42:32 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1syXtY-0000DR-3x; Wed, 09 Oct 2024 14:42:32 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1syXtY-0004aa-3S; Wed, 09 Oct 2024 14:42:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,118 +44,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55378417-864c-11ef-a0bd-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728484787; x=1729089587; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=A5VYZzA33/X7lo1locmMNQ9zjdbZ5WoZT3Ls76hGZ8c=;
-        b=lZPw1q8U6fLJMPtu2c6eBEx5qpVWIvMggqxqKhKIuSi6TCdR5N+rBClTtgabWAUD8U
-         YUen/yK9Rx62uQG2g12tt1EeZD2Trlswbu9wL2JCqFo281EPwNRn5S6MRz9tIX6u7Y/8
-         fMjmE/9n5hIxvoAGB4KrpUJf6OTSAVgikhEK8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728484787; x=1729089587;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=A5VYZzA33/X7lo1locmMNQ9zjdbZ5WoZT3Ls76hGZ8c=;
-        b=G1XN7Q6Wg4JOddRQ/xdq+tMdoYncp9Qr5U0gS7sKzts6v7DzyHY6cnIkFN949WMIyP
-         Zgn1dBGdQEiQjQSa2T6zGUI+VajsjKf6I1rsSdBgRQfyoOSsJ4JF2DPq5XFc1OeQJi30
-         w5XrKeu9n9iuC+M2weVJ2H2+2I4GR7pVFo4fPl//ql7JqEvIQF6sF9GI9hR58KS+kndb
-         hL90fDMplgCz1IXKDUxElXJ7IUw1D1xpbpleukgHXhzMmk5O7nvwZ1exS5rmDZbcXGpe
-         12fT/3FThjQalxfOd7Q+eo7TyJjGO0pRMHqlZvBNdzN37nOhObxy5mmiZi2jE7//3NvO
-         9g/g==
-X-Forwarded-Encrypted: i=1; AJvYcCVqI0gFlOwy0evEWBh8WFU63+Ab5TbtRcWnrlK7VaOQvT8oaxOyIetzJJpZc7aO+5OG3MgzhHn9RN0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yya9N11asTkuqH/S7K+UAq8qTQ4Bp1QDTF0Okg20AY9Lx7ikxgj
-	yZ1S1ycP31+JGLSTYva30vdGoPfYaVtpPydmwhR23Cpjw+2MFC32YSib25luGf4t8jnFg7yIYcc
-	n3l0qet/IhOaqjEaobiAyUhvkllg4sah407efQw==
-X-Google-Smtp-Source: AGHT+IH6qejYFYzLFfLVD6k3oEhDOGZlO74HgLGZyOngpOwrm5/fMzkWfKnBiQDZb2i4WDXQH7yEcWFfcykF3xLlKzo=
-X-Received: by 2002:a05:6870:2113:b0:277:e457:6057 with SMTP id
- 586e51a60fabf-2883450e7bbmr1812527fac.44.1728484787192; Wed, 09 Oct 2024
- 07:39:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <17b6b894-9b41-4e8c-a3a9-ce837797eac3@suse.com>
- <dee82fce-ffc8-493e-8d99-f5c3b321e5b3@suse.com> <a7b6fc68-a568-4b61-895d-c295ba3d3095@citrix.com>
- <b5b20a0c-7584-4885-b7b0-c4b1cba8c0bd@suse.com>
-In-Reply-To: <b5b20a0c-7584-4885-b7b0-c4b1cba8c0bd@suse.com>
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-Date: Wed, 9 Oct 2024 15:39:36 +0100
-Message-ID: <CACHz=ZjXdcBdPFwP4vNEgNMqaXfyJN1Ur_KVLfp4Y3zMs-J-VA@mail.gmail.com>
-Subject: Re: [PATCH 1/7] byteorder: replace __u16
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=JEPC0anYygbYIuv6TDtGXlwQfH7hzPZeGBljT3suDNA=; b=RFOJqm2K+ID3NecSS7JvVxDheI
+	TDu9e5i+7X49Msh2rmD2Sl1fKyd3pwz3pkuY3pyl0WuwjSjMh9TNI+yiDcH5bi2uz+m/TmPyoPTDP
+	yrjbV+GpcIptenr++JdqUFCn+RV37NotEeq3TRrykBAcl/enw5FF7AOYL5KtbE2ICSkc=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-188031-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 188031: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=7bac0a940e905941487c3a2f2f5fb6ee43ff040a
+X-Osstest-Versions-That:
+    ovmf=fd619ec4608564fe6cf5ba8f9ae986206355861e
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 09 Oct 2024 14:42:32 +0000
 
-On Wed, Oct 9, 2024 at 2:34=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wrot=
-e:
->
-> On 09.10.2024 15:20, Andrew Cooper wrote:
-> > On 09/10/2024 10:21 am, Jan Beulich wrote:
-> >> In {big,little}_endian.h the changes are entirely mechanical, except f=
-or
-> >> dealing with casting away of const from pointers-to-const on lines
-> >> touched anyway.
-> >>
-> >> In swab.h the casting of constants is done away with as well - I simpl=
-y
-> >> don't see what the respective comment is concerned about in our
-> >> environment (sizeof(int) >=3D 4, sizeof(long) >=3D {4,8} depending on
-> >> architecture, sizeof(long long) >=3D 8). The comment is certainly rele=
-vant
-> >> in more general cases. Excess parentheses are dropped as well,
-> >> ___swab16()'s local variable is renamed, and __arch__swab16()'s is
-> >> dropped as being redundant with ___swab16()'s.
-> >>
-> >> With that no uses of the type remain, so it moves to linux-compat.h.
-> >>
-> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> >> ---
-> >> I'm unconvinced of the need of the separate ___constant_swab16(). I'm
-> >> also unconvinced of the need for said constants (that even had casts o=
-n
-> >> them).
-> >
-> > There is a still-good series deleting the whole of byteorder/ and
-> > replacing it with a few-hundred line single header.
-> >
-> > It is the second thing stalled on a governance change (prohibited
-> > reasons to object to a change) which clearly no-one gives a damn about
-> > fixing.  In fact double spite because it denied a good engineer his
-> > first changes in Xen.
-> >
-> >
-> > I don't particularly feel like trying to polish byteorder.  I'm incline=
-d
-> > to rebase+repost Lin's patches, at which point the majority of this
-> > series simply disappears.
->
-> I wouldn't mind you doing so, as long as that other series then progresse=
-s.
-> What I don't want to get into is the other series being stuck rendering t=
-his
-> one stuck, too. Then it would imo be better to take this one first, rebas=
-e
-> the other on top, and work towards it becoming unstuck (whatever that tak=
-es;
-> I have no recollection of what the issue was back at the time, all I reca=
-ll
-> is that, yes, there was such work at some point).
->
-> Jan
->
+flight 188031 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/188031/
 
-I usually don't like stopping a series waiting for another series too.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 7bac0a940e905941487c3a2f2f5fb6ee43ff040a
+baseline version:
+ ovmf                 fd619ec4608564fe6cf5ba8f9ae986206355861e
 
-In these mostly automated large changes instead of a manual rebase I
-extract patches with "git format-patch", do the same automated replace
-with sed/perl (like "s/\<u32\>/uint32_t/" and so on) and apply with
-"git am".
+Last test of basis   188023  2024-10-09 06:15:04 Z    0 days
+Testing same since   188031  2024-10-09 11:13:23 Z    0 days    1 attempts
 
-My 2 cents.
+------------------------------------------------------------
+People who touched revisions under test:
+  Nhi Pham <nhi@os.amperecomputing.com>
 
-Frediano
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   fd619ec460..7bac0a940e  7bac0a940e905941487c3a2f2f5fb6ee43ff040a -> xen-tested-master
 
