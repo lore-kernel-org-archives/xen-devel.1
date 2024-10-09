@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A27CEE326
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 15:57:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.814874.1228568 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFBC0CEE32A
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 16:09:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.814889.1228608 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syZ3t-0007W9-5F; Wed, 09 Oct 2024 15:57:17 +0000
+	id 1syZFR-000599-W4; Wed, 09 Oct 2024 16:09:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 814874.1228568; Wed, 09 Oct 2024 15:57:17 +0000
+Received: by outflank-mailman (output) from mailman id 814889.1228608; Wed, 09 Oct 2024 16:09:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syZ3t-0007W2-1X; Wed, 09 Oct 2024 15:57:17 +0000
-Received: by outflank-mailman (input) for mailman id 814874;
- Wed, 09 Oct 2024 15:57:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1syZFR-00058w-Ru; Wed, 09 Oct 2024 16:09:13 +0000
+Received: by outflank-mailman (input) for mailman id 814889;
+ Wed, 09 Oct 2024 16:09:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hyzk=RF=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1syZ3r-0007Sl-4I
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 15:57:15 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 263b9b13-8657-11ef-99a2-01e77a169b0f;
- Wed, 09 Oct 2024 17:57:13 +0200 (CEST)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a9960371b62so334850566b.3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 08:57:13 -0700 (PDT)
-Received: from localhost ([52.166.251.127]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9944839974sm555298266b.218.2024.10.09.08.57.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Oct 2024 08:57:12 -0700 (PDT)
+ <SRS0=VGrO=RF=flex--ardb.bounces.google.com=3pqoGZwgKCVUxE0y+35G3BB381.zB9K1A-01I1885FGF.K1ACEB61zG.BE3@srs-se1.protection.inumbo.net>)
+ id 1syZFQ-0004OJ-Cm
+ for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 16:09:12 +0000
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [2607:f8b0:4864:20::114a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d2196a80-8658-11ef-a0bd-8be0dac302b0;
+ Wed, 09 Oct 2024 18:09:11 +0200 (CEST)
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-6e2acec0109so232117b3.3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 09:09:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,171 +42,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 263b9b13-8657-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: d2196a80-8658-11ef-a0bd-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728489433; x=1729094233; darn=lists.xenproject.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sYXNhzNRG73AjlXGRl78NU1q3MK86m6SRgnKz+EvApg=;
-        b=eESdirQmeYWN0wXUX4bbPrauirFcBmO6RtM6TVcNeSFs841SR+5lP2E6txinx8EAe8
-         l/Cq3qaQIFD5NcI3MW8jg9/w9sCnJIOppquwCr93oK04upyySOOapUoAyQDd029ft29b
-         rphUr8Ki6aTjAwkkWrwuGroO/A3nhop+0KTjo=
+        d=google.com; s=20230601; t=1728490150; x=1729094950; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=J4+JRDfPTu3i9TGQoGrO88TmpFKth6/64PHl7TNFJEg=;
+        b=krK6VjALPBBPhvit/RNtUFSPAIbU+i2L4Q5mT6N5+18rs95hsRWvOsBFSuZYOFuVgy
+         SgpV7Q/QxPbBWNKA3+j1WmUjRGZcrinxb5cteIXrSTUL30EeOBB9zr6O4hGfEBmUI6Qt
+         urXxmrV3QMRxE1QxOPWY2y8ft/e1jMkLCs1F7tzbSeKZ7qnND7hrIcpNbnk1e183RIP3
+         wbyvV1KWCWQoURzxWVOuUdzLpxkOYcyp0Ix70rX+/gOYVStEB2lTBReh1luVi9akUspD
+         5fiB/dZ+/ayx76/AvIirO/N3R7/+ivf3aJxrs5l0cwviQrveohffgf3cyUUFYN/1uQ6/
+         629Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728489433; x=1729094233;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=sYXNhzNRG73AjlXGRl78NU1q3MK86m6SRgnKz+EvApg=;
-        b=qeQwT4at10m5ityyjkfP6Adc1pzmd2uySPfSEarVQaEjAcOBjW8dzPDB/iiHXjbbW1
-         pQND1e+QcPZaubnVBedI0OgCD6CAYQWKo5bW73+o4FKsfmsm5fa5tOBxIMlteeCVcHs7
-         i7/LBSVZIZK0jD/yL6xl2eO+bDPzlxxSD/qKYwy/LivbT1RBexcI7BobwZDGVZUjtDXF
-         9DtJMTl9n0wbybzstFNqv31gQ9mUZ9aAOE/y1pDmQSV0HAwOcVWmPXEYFlRzveL+Lz8Z
-         OGlRvOmaTAmW4R8nLaQTZphrGxbXZeZNtYURz4d4h5I5x93rgWRSj9PGgrbeqC/ySsp0
-         GhhQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW3WIutxTIB5JoTB1KMTjHqtj0jXdrvNA0dZadtO1QPn3cd8L4Iz3pKikbiWWcZmCaiub95BL0qGOs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxpY15u1ds28Tks1c2m97EoPQ4hBCghaCeK39Xd1KN3waaV+fU2
-	kQcSBEIG0LLlr21K2SLtOV6MQ0iDghOBFmOTWIBVXLmKmIojBzTRuc/LH0Xe/Ck=
-X-Google-Smtp-Source: AGHT+IHFZJHe8ZLs0SxvXR97gzHVbytjnh2uk0hJP81YWcbk4O8KTQCfc7GHkvR+GO0SjhOXhl6rJw==
-X-Received: by 2002:a17:907:e29c:b0:a99:5629:b3ac with SMTP id a640c23a62f3a-a998d1e4d95mr296123166b.26.1728489432881;
-        Wed, 09 Oct 2024 08:57:12 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1728490150; x=1729094950;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=J4+JRDfPTu3i9TGQoGrO88TmpFKth6/64PHl7TNFJEg=;
+        b=KxczNzekl/niyvUXnAYfHcWPfONi3h6rFM0XAbDQA/athSFgJBAY32CiLliR7ZBoL2
+         cRHpV5a3cnIR5kxVrqnlwuZBCGXDxbTtTrMcKCxs8fmOjkJmeKTlzo/pUCy5LHbd6YNU
+         u12WT1V1KBUHBOrf40ZQVif6zPftfX0OVxL1XfunLfo3T5v3j9Q/Bp17hyotRUgIkqrx
+         LpdK0RmH2i3i9ltVAI1F5/jZa8IPvDDzXMUg1f/EU8QrlJ0ZOBneRXentpXcqZ6FSYpH
+         feYY7ckVnJBE/1H1miR6yQ/BdszZhJioxVbovxF5a1dqM0eauNWVnMIgzIw5rL3kGv4Y
+         O6Jg==
+X-Forwarded-Encrypted: i=1; AJvYcCW16LYUShDNHOzqtlGFuxli45POor3gcYrgajVjehWcHmc7UiitPj796fC9pxBVDyubwzQdosSnCTY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx7lu0hNDKVawW69jNVCy8bnBPhGGAJuXgOGdb3tCusK8/jtXG6
+	MkRnuBPxB3X78FGD0mqRTUiMBXrFihMx6afIldjZyBN5GNFxODK42BIsenBbDzE7jW/ZEA==
+X-Google-Smtp-Source: AGHT+IHh/v1gqKUGM1BBNWYUx+HRB+/b48NbVa7MzzwrUC5bvv7YGG3nH+h3kZviumtVaikoqrrnQUYJ
+X-Received: from palermo.c.googlers.com ([fda3:e722:ac3:cc00:7b:198d:ac11:8138])
+ (user=ardb job=sendgmr) by 2002:a05:690c:6206:b0:6dd:fda3:6568 with SMTP id
+ 00721157ae682-6e322466d9cmr656517b3.3.1728490150649; Wed, 09 Oct 2024
+ 09:09:10 -0700 (PDT)
+Date: Wed,  9 Oct 2024 18:04:42 +0200
+In-Reply-To: <20241009160438.3884381-7-ardb+git@google.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 09 Oct 2024 16:57:11 +0100
-Message-Id: <D4RED6YCM7AH.1QVPIV4K9SB5O@cloud.com>
-Cc: =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, "Anthony
- PERARD" <anthony.perard@vates.tech>, "Xen-devel"
- <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v6 01/11] lib/x86: Relax checks about policy
- compatibility
-From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
-To: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper"
- <andrew.cooper3@citrix.com>
-X-Mailer: aerc 0.18.2
-References: <20241001123807.605-1-alejandro.vallejo@cloud.com>
- <20241001123807.605-2-alejandro.vallejo@cloud.com>
- <1a57c4c9-baa9-44b4-8a3f-0f821d8c2484@suse.com>
-In-Reply-To: <1a57c4c9-baa9-44b4-8a3f-0f821d8c2484@suse.com>
+References: <20241009160438.3884381-7-ardb+git@google.com>
+X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1010; i=ardb@kernel.org;
+ h=from:subject; bh=+Q7W1GiOJkPeWPDKOBo9uqagjD9LHIgeoC2Mxh5XnwY=;
+ b=owGbwMvMwCFmkMcZplerG8N4Wi2JIZ1t5Wzjs1ffPY46eO1bpusehTCZdacXZnoeNXOLyWxmX
+ DlH7szhjlIWBjEOBlkxRRaB2X/f7Tw9UarWeZYszBxWJpAhDFycAjCRbdaMDEdb5ytZOn3ZKLTX
+ pfp7dSXXttVy8e9+vy+Nfj5V1CyCNYrhv6uByoSdnzjS98bXX9fpSBD+LWc9+VSxb4XCOdMJ2zc 7cQAA
+X-Mailer: git-send-email 2.47.0.rc0.187.ge670bccf7e-goog
+Message-ID: <20241009160438.3884381-10-ardb+git@google.com>
+Subject: [PATCH v3 3/5] x86/pvh: Omit needless clearing of phys_base
+From: Ard Biesheuvel <ardb+git@google.com>
+To: linux-kernel@vger.kernel.org
+Cc: Ard Biesheuvel <ardb@kernel.org>, Jason Andryuk <jason.andryuk@amd.com>, 
+	Juergen Gross <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, x86@kernel.org, 
+	xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+From: Ard Biesheuvel <ardb@kernel.org>
 
-On Wed Oct 9, 2024 at 10:40 AM BST, Jan Beulich wrote:
-> On 01.10.2024 14:37, Alejandro Vallejo wrote:
-> > --- a/xen/lib/x86/policy.c
-> > +++ b/xen/lib/x86/policy.c
-> > @@ -15,7 +15,16 @@ int x86_cpu_policies_are_compatible(const struct cpu=
-_policy *host,
-> >  #define FAIL_MSR(m) \
-> >      do { e.msr =3D (m); goto out; } while ( 0 )
-> > =20
-> > -    if ( guest->basic.max_leaf > host->basic.max_leaf )
-> > +    /*
-> > +     * Old AMD hardware doesn't expose topology information in leaf 0x=
-b. We
-> > +     * want to emulate that leaf with credible information because it =
-must be
-> > +     * present on systems in which we emulate the x2APIC.
-> > +     *
-> > +     * For that reason, allow the max basic guest leaf to be larger th=
-an the
-> > +     * hosts' up until 0xb.
-> > +     */
-> > +    if ( guest->basic.max_leaf > 0xb &&
-> > +         guest->basic.max_leaf > host->basic.max_leaf )
-> >          FAIL_CPUID(0, NA);
-> > =20
-> >      if ( guest->feat.max_subleaf > host->feat.max_subleaf )
->
-> I'm concerned by this in multiple ways:
->
-> 1) It's pretty ad hoc, and hence doesn't make clear how to deal with simi=
-lar
-> situations in the future.
+Since commit
 
-I agree. I don't have a principled suggestion for how to deal with other ca=
-ses
-where we might have to bump the max leaf. It may be safe (as is here becasu=
-e
-everything below it is either used or unimplemnted), but AFAIU some leaves
-might be problematic to expose, even as zeroes. I suspect that's the proble=
-m
-you hint at later on about AMX and AVX10?
+  d9ec1158056b ("x86/boot/64: Use RIP_REL_REF() to assign 'phys_base'")
 
->
-> 2) Why would we permit going up to leaf 0xb when x2APIC is off in the res=
-pective
-> leaf?
+phys_base is assigned directly rather than added to, so it is no longer
+necessary to clear it after use.
 
-I assume you mean when the x2APIC is not emulated? One reason is to avoid a
-migration barrier, as otherwise we can't migrate VMs created in "leaf
-0xb"-capable hardware to non-"leaf 0xb"-capable even though the migration i=
-s
-perfectly safe.
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+Tested-by: Jason Andryuk <jason.andryuk@amd.com>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/x86/platform/pvh/head.S | 7 -------
+ 1 file changed, 7 deletions(-)
 
-Also, it's benign and simplifies everything. Otherwise we have to find out
-during early creation not only whether the host has leaf 0xb, but also whet=
-her
-we're emulating an x2APIC or not.
+diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
+index 5a196fb3ebd8..7ca51a4da217 100644
+--- a/arch/x86/platform/pvh/head.S
++++ b/arch/x86/platform/pvh/head.S
+@@ -180,13 +180,6 @@ SYM_CODE_START_LOCAL(pvh_start_xen)
+ 	ANNOTATE_RETPOLINE_SAFE
+ 	call *%rax
+ 
+-	/*
+-	 * Clear phys_base.  __startup_64 will *add* to its value,
+-	 * so reset to 0.
+-	 */
+-	xor  %rbx, %rbx
+-	movq %rbx, phys_base(%rip)
+-
+ 	/* startup_64 expects boot_params in %rsi. */
+ 	lea pvh_bootparams(%rip), %rsi
+ 	jmp startup_64
+-- 
+2.47.0.rc0.187.ge670bccf7e-goog
 
-Furthermore, not doing this would actively prevent emulating an x2APIC on A=
-MD
-Lisbon-like silicon even though it's fine to do so. Note that we have a bro=
-ken
-invariant in existing code where the x2APIC is emulated and leaf 0xb is not
-exposed at all; not even to show the x2APIC IDs.
-
->
-> 3) We similarly force a higher extended leaf in order to accommodate the =
-LFENCE-
-> is-dispatch-serializing bit. Yet there's no similar extra logic there in =
-the
-> function here.
-
-That's done on the host policy though, so there's no clash.
-
-In calculate_host_policy()...
-
-```
-      /*
-       * For AMD/Hygon hardware before Zen3, we unilaterally modify LFENCE =
-to be
-       * dispatch serialising for Spectre mitigations.  Extend max_extd_lea=
-f
-       * beyond what hardware supports, to include the feature leaf contain=
-ing
-       * this information.
-       */
-      if ( cpu_has_lfence_dispatch )
-          max_extd_leaf =3D max(max_extd_leaf, 0x80000021U);
-```
-
-One could imagine doing the same for leaf 0xb and dropping this patch, but =
-then
-we'd have to synthesise something on that leaf for hardware that doesn't ha=
-ve
-it, which is a lot more annoying.
-
->
-> 4) While there the guest vs host check won't matter, the situation with A=
-MX and
-> AVX10 leaves imo still wants considering here right away. IOW (taken toge=
-ther
-> with at least 3) above) I think we need to first settle on a model for
-> collectively all max (sub)leaf handling. That in particular needs to prop=
-erly
-> spell out who's responsible for what (tool stack vs Xen).
-
-I'm not sure I follow. What's the situation with AMX and AVX10 that you ref=
-er
-to? I'd assume that making ad-hoc decisions on this is pretty much unavoida=
-ble,
-but maybe the solution to the problem you mention would highlight a more
-general approach.
-
->
-> Jan
-
-Cheers,
-Alejandro
 
