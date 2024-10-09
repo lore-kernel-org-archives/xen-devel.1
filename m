@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF14CED630
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 08:37:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.813884.1226975 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C643CED632
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2024 08:37:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.813870.1226915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sySCb-0007me-GD; Wed, 09 Oct 2024 08:37:49 +0000
+	id 1sySCM-0005pc-Gy; Wed, 09 Oct 2024 08:37:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 813884.1226975; Wed, 09 Oct 2024 08:37:49 +0000
+Received: by outflank-mailman (output) from mailman id 813870.1226915; Wed, 09 Oct 2024 08:37:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1sySCb-0007mT-DG; Wed, 09 Oct 2024 08:37:49 +0000
-Received: by outflank-mailman (input) for mailman id 813884;
- Wed, 09 Oct 2024 08:37:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sySCM-0005oj-EL; Wed, 09 Oct 2024 08:37:34 +0000
+Received: by outflank-mailman (input) for mailman id 813870;
+ Wed, 09 Oct 2024 08:36:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qj4E=RF=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
- id 1sySCa-00075z-BR
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 08:37:48 +0000
+ id 1sySBZ-0005FO-2h
+ for xen-devel@lists.xenproject.org; Wed, 09 Oct 2024 08:36:45 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c1e4d3a3-8619-11ef-99a2-01e77a169b0f;
- Wed, 09 Oct 2024 10:37:46 +0200 (CEST)
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9b8b3771-8619-11ef-a0bd-8be0dac302b0;
+ Wed, 09 Oct 2024 10:36:42 +0200 (CEST)
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-449-dMBsRrwbPBut4nBUtaQ81g-1; Wed, 09 Oct 2024 04:37:44 -0400
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-7acca6cbe87so1143038185a.1
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 01:37:44 -0700 (PDT)
+ us-mta-620-1xOK9-f3OGWC3-rITsu20w-1; Wed, 09 Oct 2024 04:36:40 -0400
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-7afcd3945fbso184292185a.3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 01:36:40 -0700 (PDT)
 Received: from eisenberg.redhat.com (nat-pool-muc-t.redhat.com. [149.14.88.26])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7ae75615aa2sm439643585a.14.2024.10.09.01.37.33
+ af79cd13be357-7ae75615aa2sm439643585a.14.2024.10.09.01.36.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 01:37:42 -0700 (PDT)
+ Wed, 09 Oct 2024 01:36:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,39 +51,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1e4d3a3-8619-11ef-99a2-01e77a169b0f
+X-Inumbo-ID: 9b8b3771-8619-11ef-a0bd-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1728463065;
+	s=mimecast20190719; t=1728463001;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JsGvGJm9MmViCmQHy+rwDTsxwdGI+an22CjgwnYtt0I=;
-	b=DlD8AC5FeAy12otSKJW3K7BOBbkihwJUfV25ldfUwtq+khE2Xao17JNFw31+swaMiPOeaj
-	7Jpif5VM0PlipxjDSNty8+MfYpvEki8iGKUYLPfQfb7BNK8m2/G8eaCTB+/cTVn3y30XRN
-	/C6COYsqe5HfH6By6kOGCpklm6h9WUk=
-X-MC-Unique: dMBsRrwbPBut4nBUtaQ81g-1
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=mOyNV1blUkGi8SBN/l2nmGqTH8tAJ4tec1wRLOcI2Z8=;
+	b=c2YPoBJLb3+dibEsK193hHusnbThaSYTbjnwgisk4TP6N364RwPgMlF4RKqlJyj5zeBSnB
+	WhZGuS49/b272eItXbIyLuXz43grN01icKcPQ9oNfu6zignJOyhCQ/pJNfeoiFRc5nE/it
+	HX30RBDGEjUbcTUbGtw1MfZE95rQv9k=
+X-MC-Unique: 1xOK9-f3OGWC3-rITsu20w-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728463063; x=1729067863;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JsGvGJm9MmViCmQHy+rwDTsxwdGI+an22CjgwnYtt0I=;
-        b=OPzNbDwYq4r/HHIokPbqYiTGpiI665s1OVGP8mvPnrEAisD5IfeVG0X0taJdXic9RQ
-         a6pkjCty2TlhiGjDKTk1upD5IbbTmearZ06eqFeYuguSXo3awZH0pYMGEq6S7AiJ0rp0
-         AkPyTQHsBiAZd5rJsEwEdE7MpkexWkH+kfmLiQU4qvIr7wBEaBVphya6TqqkXRadEzhE
-         aLsOQSK/Nthvh+mME8FWUVP7bbP3NE+VQw0u7DaRFY/HQPYUzZNX6i+lo0dmArDrfj9F
-         5pMAZ5mjR6sxENW/eaPza+4Zf0qlJs2ZWblNu2WDLdsTPsDSghcGo9QmGa2yC/HDJ7dA
-         oC/g==
-X-Forwarded-Encrypted: i=1; AJvYcCXll949hG15ugxeZ2T0V0aNTWKkWDHlzIY/D9gSGDwJQDWTGchIZujKnbydrnx4brX88e0lWa6HcTU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxMeEnCgPAS2e2Ku09vIVgwBvpYnpgk/I0aD8Re6AKEXhUEVVnb
-	4huDcJCdDSePhj8y/2ydKRn58Rs70h4CR53j8Cp+CvyBZzrj89/7/XCcdFg1Oh0X2LLgTvAb1qC
-	0fLVKRKIgB4YgKUCPo6HXGtvW8VfErhVP2AWXf3uWpSwkBJ9RgBO65P/RUnbbQH1n
-X-Received: by 2002:a05:620a:2a0e:b0:7ac:a6f9:2986 with SMTP id af79cd13be357-7b0874d79cdmr228240785a.56.1728463063335;
-        Wed, 09 Oct 2024 01:37:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFImvB9Qv7o17NV9RNqrUwhslSwlEiuBLwjyyln/SL0KXDFR9AO0zKFsp8+HNe0WvD5hbb1TQ==
-X-Received: by 2002:a05:620a:2a0e:b0:7ac:a6f9:2986 with SMTP id af79cd13be357-7b0874d79cdmr228232385a.56.1728463062845;
-        Wed, 09 Oct 2024 01:37:42 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1728462999; x=1729067799;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mOyNV1blUkGi8SBN/l2nmGqTH8tAJ4tec1wRLOcI2Z8=;
+        b=RiPPutncGjjwssUl6fB6Q0vuI9tlq4yi1D/XPhQJ65K/VHFIAPR2Cgg/zKd5abmNw7
+         MSZSVszTL214X4xs/MmhNCkvrjaR0NQMkc0rx7Ld8YF4ABZwZBHzxRhXQMFQqd8fJ1qJ
+         ifgPzCTJsMK92fLMJSR9UkTKsuq8aEIsHpay3kdZG6vJk00kS03ZhAoKhBulDfXlef6p
+         EheMU8uxi362LAW9sylAKpCHq7OO9tzWScpurw0yIhZuRu3VKLn2twhokfA+6yGQ35mK
+         qEOfswmzgd/FOpDpYnq5B0abThgc5XdFue6u3QG13XZ+Io7pcFCcIGCeBxmL0UrCOUj8
+         QK2A==
+X-Forwarded-Encrypted: i=1; AJvYcCWumdr56Cg4kXeYEZd+ViYQJZCr9Soq3fVi9vmovaSBY7z23dTk5L5V48x7qmx9E0DrEhp4Jacq1A0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwNF101GbjyRsNlmxvzJFYiGZN3vaw7no08QYNeAlWYbMFdGywJ
+	GccWKk1gooniLJzKSRjPhdxD3sf0p+maLYN/QDlTQQp8eBmxjVLK/U/c/+QUl19wN26w3uiEPvV
+	YSiggmCpdH9hwLM4pzbninYxCnHKRtayqCpBEi7h75LRcMlTHHrWUEWAen6qDcvoC
+X-Received: by 2002:a05:620a:29c7:b0:7a2:1db:e286 with SMTP id af79cd13be357-7b0874cd670mr234485685a.52.1728462999296;
+        Wed, 09 Oct 2024 01:36:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFU56nfNbRn4xRa9L06f5Bja7V/qokH03xrDBZWS39o5ckdxWurQft3H7j0iSjtDvnBZDt4+Q==
+X-Received: by 2002:a05:620a:29c7:b0:7a2:1db:e286 with SMTP id af79cd13be357-7b0874cd670mr234479185a.52.1728462998841;
+        Wed, 09 Oct 2024 01:36:38 -0700 (PDT)
 From: Philipp Stanner <pstanner@redhat.com>
 To: Damien Le Moal <dlemoal@kernel.org>,
 	Niklas Cassel <cassel@kernel.org>,
@@ -157,95 +156,74 @@ Cc: linux-ide@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-sound@vger.kernel.org
-Subject: [RFC PATCH 07/13] vfio/pci: Use never-managed version of pci_intx()
-Date: Wed,  9 Oct 2024 10:35:13 +0200
-Message-ID: <20241009083519.10088-8-pstanner@redhat.com>
+Subject: [RFC PATCH 00/13] Remove implicit devres from pci_intx()
+Date: Wed,  9 Oct 2024 10:35:06 +0200
+Message-ID: <20241009083519.10088-1-pstanner@redhat.com>
 X-Mailer: git-send-email 2.46.1
-In-Reply-To: <20241009083519.10088-1-pstanner@redhat.com>
-References: <20241009083519.10088-1-pstanner@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
 
-pci_intx() is a hybrid function which can sometimes be managed through
-devres. To remove this hybrid nature from pci_intx(), it is necessary to
-port users to either an always-managed or a never-managed version.
+Hi all,
 
-vfio enables its PCI-Device with pci_enable_device(). Thus, it
-needs the never-managed version.
+this series removes a problematic feature from pci_intx(). That function
+sometimes implicitly uses devres for automatic cleanup. We should get
+rid of this implicit behavior.
 
-Replace pci_intx() with pci_intx_unmanaged().
+To do so, a pci_intx() version that is always-managed, and one that is
+never-managed are provided. Then, all pci_intx() users are ported to the
+version they need. Afterwards, pci_intx() can be cleaned up and the
+users of the never-managed version be ported back to pci_intx().
 
-Signed-off-by: Philipp Stanner <pstanner@redhat.com>
----
- drivers/vfio/pci/vfio_pci_core.c  |  2 +-
- drivers/vfio/pci/vfio_pci_intrs.c | 10 +++++-----
- 2 files changed, 6 insertions(+), 6 deletions(-)
+This way we'd get this PCI API consistent again.
 
-diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-index 1ab58da9f38a..90240c8d51aa 100644
---- a/drivers/vfio/pci/vfio_pci_core.c
-+++ b/drivers/vfio/pci/vfio_pci_core.c
-@@ -498,7 +498,7 @@ int vfio_pci_core_enable(struct vfio_pci_core_device *vdev)
- 		if (vfio_pci_nointx(pdev)) {
- 			pci_info(pdev, "Masking broken INTx support\n");
- 			vdev->nointx = true;
--			pci_intx(pdev, 0);
-+			pci_intx_unmanaged(pdev, 0);
- 		} else
- 			vdev->pci_2_3 = pci_intx_mask_supported(pdev);
- 	}
-diff --git a/drivers/vfio/pci/vfio_pci_intrs.c b/drivers/vfio/pci/vfio_pci_intrs.c
-index 8382c5834335..40abb0b937a2 100644
---- a/drivers/vfio/pci/vfio_pci_intrs.c
-+++ b/drivers/vfio/pci/vfio_pci_intrs.c
-@@ -118,7 +118,7 @@ static bool __vfio_pci_intx_mask(struct vfio_pci_core_device *vdev)
- 	 */
- 	if (unlikely(!is_intx(vdev))) {
- 		if (vdev->pci_2_3)
--			pci_intx(pdev, 0);
-+			pci_intx_unmanaged(pdev, 0);
- 		goto out_unlock;
- 	}
- 
-@@ -132,7 +132,7 @@ static bool __vfio_pci_intx_mask(struct vfio_pci_core_device *vdev)
- 		 * mask, not just when something is pending.
- 		 */
- 		if (vdev->pci_2_3)
--			pci_intx(pdev, 0);
-+			pci_intx_unmanaged(pdev, 0);
- 		else
- 			disable_irq_nosync(pdev->irq);
- 
-@@ -178,7 +178,7 @@ static int vfio_pci_intx_unmask_handler(void *opaque, void *data)
- 	 */
- 	if (unlikely(!is_intx(vdev))) {
- 		if (vdev->pci_2_3)
--			pci_intx(pdev, 1);
-+			pci_intx_unmanaged(pdev, 1);
- 		goto out_unlock;
- 	}
- 
-@@ -296,7 +296,7 @@ static int vfio_intx_enable(struct vfio_pci_core_device *vdev,
- 	 */
- 	ctx->masked = vdev->virq_disabled;
- 	if (vdev->pci_2_3) {
--		pci_intx(pdev, !ctx->masked);
-+		pci_intx_unmanaged(pdev, !ctx->masked);
- 		irqflags = IRQF_SHARED;
- 	} else {
- 		irqflags = ctx->masked ? IRQF_NO_AUTOEN : 0;
-@@ -569,7 +569,7 @@ static void vfio_msi_disable(struct vfio_pci_core_device *vdev, bool msix)
- 	 * via their shutdown paths.  Restore for NoINTx devices.
- 	 */
- 	if (vdev->nointx)
--		pci_intx(pdev, 0);
-+		pci_intx_unmanaged(pdev, 0);
- 
- 	vdev->irq_type = VFIO_PCI_NUM_IRQS;
- }
+The last patch obviously reverts the previous patches that made drivers
+use pci_intx_unmanaged(). But this way it's easier to review and
+approve. It also makes sure that each checked out commit should provide
+correct behavior, not just the entire series as a whole.
+
+Merge plan for this would be to enter through the PCI tree.
+
+Please say so if you've got concerns with the general idea behind the
+RFC.
+
+Regards,
+P.
+
+Philipp Stanner (13):
+  PCI: Prepare removing devres from pci_intx()
+  ALSA: hda: hda_intel: Use always-managed version of pcim_intx()
+  drivers/xen: Use never-managed version of pci_intx()
+  net/ethernet: Use never-managed version of pci_intx()
+  net/ntb: Use never-managed version of pci_intx()
+  misc: Use never-managed version of pci_intx()
+  vfio/pci: Use never-managed version of pci_intx()
+  PCI: MSI: Use never-managed version of pci_intx()
+  ata: Use always-managed version of pci_intx()
+  staging: rts5280: Use always-managed version of pci_intx()
+  wifi: qtnfmac: use always-managed version of pcim_intx()
+  HID: amd_sfh: Use always-managed version of pcim_intx()
+  Remove devres from pci_intx()
+
+ drivers/ata/ahci.c                            |  2 +-
+ drivers/ata/ata_piix.c                        |  2 +-
+ drivers/ata/pata_rdc.c                        |  2 +-
+ drivers/ata/sata_sil24.c                      |  2 +-
+ drivers/ata/sata_sis.c                        |  2 +-
+ drivers/ata/sata_uli.c                        |  2 +-
+ drivers/ata/sata_vsc.c                        |  2 +-
+ drivers/hid/amd-sfh-hid/amd_sfh_pcie.c        |  4 ++--
+ drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c |  2 +-
+ .../wireless/quantenna/qtnfmac/pcie/pcie.c    |  2 +-
+ drivers/pci/devres.c                          | 24 +++----------------
+ drivers/pci/pci.c                             | 14 +----------
+ drivers/staging/rts5208/rtsx.c                |  2 +-
+ include/linux/pci.h                           |  1 +
+ sound/pci/hda/hda_intel.c                     |  2 +-
+ 15 files changed, 18 insertions(+), 47 deletions(-)
+
 -- 
 2.46.1
 
