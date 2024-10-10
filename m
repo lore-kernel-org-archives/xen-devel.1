@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9328FCF07BC
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Oct 2024 07:21:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.815575.1229561 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC87CF07BA
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Oct 2024 07:37:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.815597.1229571 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1synUU-0002My-0t; Thu, 10 Oct 2024 07:21:42 +0000
+	id 1synjc-0000z4-B4; Thu, 10 Oct 2024 07:37:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 815575.1229561; Thu, 10 Oct 2024 07:21:41 +0000
+Received: by outflank-mailman (output) from mailman id 815597.1229571; Thu, 10 Oct 2024 07:37:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1synUT-0002Mr-Ub; Thu, 10 Oct 2024 07:21:41 +0000
-Received: by outflank-mailman (input) for mailman id 815575;
- Thu, 10 Oct 2024 07:21:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=x0Zz=RG=amd.com=Basavaraj.Natikar@srs-se1.protection.inumbo.net>)
- id 1synU6-0001ql-14
- for xen-devel@lists.xenproject.org; Thu, 10 Oct 2024 07:21:18 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20605.outbound.protection.outlook.com
- [2a01:111:f403:2417::605])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3c68b440-86d8-11ef-a0bd-8be0dac302b0;
- Thu, 10 Oct 2024 09:21:16 +0200 (CEST)
-Received: from DM4PR12MB5040.namprd12.prod.outlook.com (2603:10b6:5:38b::19)
- by DS7PR12MB6240.namprd12.prod.outlook.com (2603:10b6:8:94::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.22; Thu, 10 Oct
- 2024 07:21:13 +0000
-Received: from DM4PR12MB5040.namprd12.prod.outlook.com
- ([fe80::a3dc:7ea1:9cc7:ce0f]) by DM4PR12MB5040.namprd12.prod.outlook.com
- ([fe80::a3dc:7ea1:9cc7:ce0f%6]) with mapi id 15.20.8048.013; Thu, 10 Oct 2024
- 07:21:13 +0000
+	id 1synjc-0000yx-8H; Thu, 10 Oct 2024 07:37:20 +0000
+Received: by outflank-mailman (input) for mailman id 815597;
+ Thu, 10 Oct 2024 07:37:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=GYHQ=RG=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1synjb-0000yr-Ff
+ for xen-devel@lists.xenproject.org; Thu, 10 Oct 2024 07:37:19 +0000
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [2a00:1450:4864:20::230])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 79a4d982-86da-11ef-99a2-01e77a169b0f;
+ Thu, 10 Oct 2024 09:37:17 +0200 (CEST)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2fac3f20f1dso5508291fa.3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Oct 2024 00:37:17 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c937119cb7sm397087a12.36.2024.10.10.00.37.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Oct 2024 00:37:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,237 +47,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c68b440-86d8-11ef-a0bd-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yAyqsh9YTDBR6ZcP+oMdSAG9ku8Rl/GBejocvQjCW6Zi6xXypie891ohxqmhzBvqt+r4t0TmvCKlfA13qMckLcBnKTZoB0/cMWH0GjdE1mz6nVtu0uMqA4RkL738FFTkmzzYJ+FflKbrRFmuulhUjUN23WiHz2d2LC1C0IPNKsvpysWLrW75lTvZDjB8mJlteHD/hCWqRFNVqc1wZZ4MlBOUmKbPdFD5E8gTQ+QWi8NKbPgwwP+WinSCUP/6K1PhNn/+KGC/tpkGezcUBiGOTFMbYVClI+Zm/Z8+QIsb0AH9yXYCEj9XTFHb2eZqaGwNT6awVpNgjF8faULAP+ScmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=q5gql8I0ZYim7nFHQSGwxiJ3GfafgB16EOhhTpoC0OI=;
- b=Mh5mVSc07CmOL1qAmVN9EtMSzOH+rZY4cRhn69TWOmjvx9v5+7CpJTlSOQAb5QSUzRGQyj+Qt4F8+CrjJ8WMw+OR3U9OBDXiyHAbzuDdlzos/uF+8SvRhSEN7DZwgpDzA4mcEy7TJ+BxTrhGbU/FK08sU2T+f4XcKdZB3vnGPHbRBvzlEqt1nHz8m4y7qTIHjnNhDkVxBTWcI4IfkbaX4Mi27HS59H10QxEBWQGuFvtM+cLEklOqkSuyGWpUMV2cc/qVglh2nngFNM+2OkvEnTkLfFcgfxPW6wS5KmfuweSYzkBLA0KSG/Ryx+ToOY4AoDdvuRSRia7L2EVe45dX9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=q5gql8I0ZYim7nFHQSGwxiJ3GfafgB16EOhhTpoC0OI=;
- b=gcNfwOG51d/lXjtp85kHgtnAoNZCEzJ2gR7yyrAKOHpP17As6WPgRudiZmDcrJ/4mgDv+6jVCWHfrqDp6AeVMnAQhgwV9CkXXY6gpwdiVo9WwH7j61XfY5X49ZKlHe4vfa1H6BkwbRW3ny3XI9SzEc6VrJfOJwfKfg4Zbj59gWc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <8f0de41f-8add-de50-fc59-fceff30b9e38@amd.com>
-Date: Thu, 10 Oct 2024 12:50:48 +0530
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [RFC PATCH 12/13] HID: amd_sfh: Use always-managed version of
- pcim_intx()
-To: Philipp Stanner <pstanner@redhat.com>, Damien Le Moal
- <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>,
- Sergey Shtylyov <s.shtylyov@omp.ru>,
- Basavaraj Natikar <basavaraj.natikar@amd.com>, Jiri Kosina
- <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Alex Dubov
- <oakad@yahoo.com>, Sudarsana Kalluru <skalluru@marvell.com>,
- Manish Chopra <manishc@marvell.com>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Rasesh Mody <rmody@marvell.com>, GR-Linux-NIC-Dev@marvell.com,
- Igor Mitsyanko <imitsyanko@quantenna.com>,
- Sergey Matyukevich <geomatsi@gmail.com>, Kalle Valo <kvalo@kernel.org>,
- Sanjay R Mehta <sanju.mehta@amd.com>,
- Shyam Sundar S K <Shyam-sundar.S-k@amd.com>, Jon Mason <jdmason@kudzu.us>,
- Dave Jiang <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Alex Williamson <alex.williamson@redhat.com>, Juergen Gross
- <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Mario Limonciello <mario.limonciello@amd.com>, Chen Ni <nichen@iscas.ac.cn>,
- Ricky Wu <ricky_wu@realtek.com>, Al Viro <viro@zeniv.linux.org.uk>,
- Breno Leitao <leitao@debian.org>, Kevin Tian <kevin.tian@intel.com>,
- Thomas Gleixner <tglx@linutronix.de>,
- =?UTF-8?Q?Ilpo_J=c3=a4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Mostafa Saleh <smostafa@google.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Hannes Reinecke <hare@suse.de>, John Garry <john.g.garry@oracle.com>,
- Soumya Negi <soumya.negi97@gmail.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Yi Liu <yi.l.liu@intel.com>, "Dr. David Alan Gilbert" <linux@treblig.org>,
- Christian Brauner <brauner@kernel.org>, Ankit Agrawal <ankita@nvidia.com>,
- Reinette Chatre <reinette.chatre@intel.com>,
- Eric Auger <eric.auger@redhat.com>, Ye Bin <yebin10@huawei.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Kai Vehmanen <kai.vehmanen@linux.intel.com>,
- Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
- Rui Salvaterra <rsalvaterra@gmail.com>, Marc Zyngier <maz@kernel.org>
-Cc: linux-ide@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-input@vger.kernel.org, netdev@vger.kernel.org,
- linux-wireless@vger.kernel.org, ntb@lists.linux.dev,
- linux-pci@vger.kernel.org, linux-staging@lists.linux.dev,
- kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-sound@vger.kernel.org
-References: <20241009083519.10088-1-pstanner@redhat.com>
- <20241009083519.10088-13-pstanner@redhat.com>
-Content-Language: en-US
-From: Basavaraj Natikar <bnatikar@amd.com>
-In-Reply-To: <20241009083519.10088-13-pstanner@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PN2PR01CA0185.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:e8::12) To DM4PR12MB5040.namprd12.prod.outlook.com
- (2603:10b6:5:38b::19)
+X-Inumbo-ID: 79a4d982-86da-11ef-99a2-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1728545837; x=1729150637; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=tQnXuhNqMxB9TrZXnrkJ3OQqznQ3f1gP5LlC3kIKJRQ=;
+        b=SBsphgEy5OvhSTUEk7vG2sX5uv+lNI0fQQyGk3viiWvTxeGJclVSvMKsi++g9l9hfi
+         dZuj7m2wx9KL60goAKuKIN7jX131pWfQWA7g9J44s8cAsdi8Wob2AEk9w+594z/zIS7Q
+         KC7fAyfrmSxNtCsz144PA8K3HGvQB0HRecy+i8/eBPGGWj55ViW4bKnMRIvvqKp7zzVe
+         yEX0FPvm5T4LX2nMmTK9FTWFkrvVl5vmlGU05x46n1t+6DsGKcQ2LJTumiUWmX2oLlVZ
+         FxU7bdc5G3PJTzSilK8Gu5iZNxNVTDfTf4kU+otMFODmsYzANiScWwiLd+LpNSg8ZRqd
+         dDjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728545837; x=1729150637;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tQnXuhNqMxB9TrZXnrkJ3OQqznQ3f1gP5LlC3kIKJRQ=;
+        b=NowYzZyGKZsdiUwYQu7tW4LowLWLvTMoou/oO1FMIt9wiTb6qmyZGuKu2A7Rlr8pAG
+         BVfuDmzRC+YKPnL83SuAXlNxysxcwe7spaiW295qzZvx7eD0eZPJ69FhZNbG7hKuLpgu
+         g/ElHT/ZcPiyQNb3YxnBMrO1HZtGlsMpp16PvYcd01bF3CBfQSR0dQt+Ki814wQCM7pr
+         7Uo9K/Ovn6oTZxh1p9xGFmRL5gX59+nLaCvbMrfDWskdikMGvmVCtI1gT/+QoHJE5FTu
+         GByO/T7pRXOhB8VNabDIkQAD4GZVRawwKTyec567y327RpjYoZdOOdoWXxsLFCD1k/8i
+         MxYQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVprt2GRM+aX229qt/TAUcr3ZXAgJ2SXTbF5WRgK+UdA2TX7Z25XT+AL/npiKcg5DZT7V4AmEZUnLk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywf4c9wKkqkEPWnRuYN7j7nZmzZIw+U6LFgguc73e2YAzg1DIyz
+	xFbYOatI3XkAJ6SBb00V1wEJ+I+dz788cwcv2Guhxkgia9kA1+YRj/uIZoEEcg==
+X-Google-Smtp-Source: AGHT+IHlmBrMf6y829tp/3wYt8FcIF+gpF58pDTBDybLvFVd1B8B20+aCzUsX7z5rdfzGhpI5DZZ+g==
+X-Received: by 2002:a05:651c:b0e:b0:2fa:ccae:d1c5 with SMTP id 38308e7fff4ca-2fb1872cdb0mr36957391fa.10.1728545836753;
+        Thu, 10 Oct 2024 00:37:16 -0700 (PDT)
+Message-ID: <18629419-6051-4d00-8b1a-218427b93ef6@suse.com>
+Date: Thu, 10 Oct 2024 09:37:15 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR12MB5040:EE_|DS7PR12MB6240:EE_
-X-MS-Office365-Filtering-Correlation-Id: 15c72fc0-62d3-409a-6ebe-08dce8fc1eb9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|7416014|366016|921020;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?T0FIdElJSzVXZlM1SDdVcW9xUHNGVEV0KzRSc3d3Q09RRm5LejNyVzFuMWpm?=
- =?utf-8?B?TyttQ0U3dzVnbzZNVFU4UUZQMzk2K05jZ0NoUW8zdG96NWNlbnBFU0hZQ2lV?=
- =?utf-8?B?Y1dsZHo5RUFvalUyT3EwUHRnYXpNMEdXS1daRU01YW9FSzdVU1dyMW1ORkpS?=
- =?utf-8?B?RnBBd2hNZVZsY3JtZjlqQU5XNjcyUHN5cVFyQVR2cEU4TXJJRGY0OWRaL1ly?=
- =?utf-8?B?K1NPa2hsU1l6azc5V2lyZ1ZKQU1USVVYaVFveTlSWHVPTXltMHBjYkVoai9T?=
- =?utf-8?B?UzlEeWx4aVNtV0Z0R3l0enRLQVFiUHpnT1haMkwvU3JxN041OGZJUHp0OVVK?=
- =?utf-8?B?MFhmM3NZRDJMZHpveHFVTTJ4SWQzaHAyTnBPTk1Ydzdjc3V1UjlqZk9VRE9U?=
- =?utf-8?B?SjdsNFNtQko1MmRBR0hRVDBuWWQ2RXVtOEVoQzlpT3UyQkNwekl5NWVIWE9K?=
- =?utf-8?B?V1prTTNmT1dpNDJBTXlmSXJGUWtOMjBsUEl0cTBJSFR0WW1mTGF4d2hac2VX?=
- =?utf-8?B?NFMzMUF4OFNkL2xTRnlNaTdYTm5YeTZxQ0psUkoxN1JsYitpVldyNFVVRnZH?=
- =?utf-8?B?ZEJZYUVvWDBxY0pCWVF5T0d2Q2ZYMlM0OThaMDkzOS9FMmdFN3dIUTVvMSsz?=
- =?utf-8?B?WVE4NHd1NThGQW4xSC9QbE5uOHNuUm54cWxwTmp6K3Npb2NuUkFQV3h0R3hW?=
- =?utf-8?B?NFRQNXhWalJoMVpyYkgwdm1ubmtVSGNoZmJxRm0zelR3VXZod01HaE5rUjJS?=
- =?utf-8?B?bGUrNUZvNGxPR2loWEhTTXVQQmdIbHpRQksvK2hIT2UwTmlOanliRnF6MDg1?=
- =?utf-8?B?aVNIdm1IcTk3OEVRV05yQkNlczJiVlRnZG1YM3ZBOFNlSkNGek5LSjVhWll5?=
- =?utf-8?B?bTRJRmw2OFNjZTMxZlF1ZnplVmZIUnVGU29CUjN1QTFBRTYwcG1LK1l5OUZB?=
- =?utf-8?B?aVpJTGVzUXAwZU14eEZiK0ZwcndHejh5a3M4T2FuemNCVGhNSkZoVFhwMkt5?=
- =?utf-8?B?bXpQdlpEMldIaWZVeXlMSVBkRkFHVWZGZExsaXVPR2tPYmNhbWs1T0g0V3JW?=
- =?utf-8?B?YzNua2V5NXpnWUdtaDVqS0cveUc2SW1pZVNkZWNGUXhrZjB2N050OWMxT0lP?=
- =?utf-8?B?ckpVN1Y2dkQ5Z1cxQmhjQkxwTVZzdzlHazZrcHB0WnFJVGVNdC92b08wWFpQ?=
- =?utf-8?B?VDBEeXZxdHplM0NCalhWNlJLVkdLbHpJaXA4S2JzS2xtcUdoMjVjalp6UExh?=
- =?utf-8?B?R28yUytsempHQjIrdHJmbGc2ZGFLM0ZCenZkdVR0OTN0OHVSY2xVVG1NR3Vi?=
- =?utf-8?B?TnZiMHRxWWNPTzUzdmhXVnErYlRBQWxOa3Jta0cvbHowU0UxTTZVSk5ScmpY?=
- =?utf-8?B?UGlOUWd2UEdzb0ZPNHdza1lEcG9KTkZPVjdmbnVSYnFWcENIZmJmMy9KYkhU?=
- =?utf-8?B?YTdTVlhUTVRPd25JdnovY0lVc1o0RU52ejRjTU9VZ3IyV1ovckZ6NGZjVUw5?=
- =?utf-8?B?a2hKRk9OUFc0bU03MWxYUTUwc1pHUytxcnEyaVgyNVo3MWNyRnFoR0JidjRG?=
- =?utf-8?B?K0VERjgxMnRvQ2VsWWpaUG5SMVFTaENXWm80cy9jNW84aUdEb0EzaXhhWGV2?=
- =?utf-8?B?U2hCSm1ZTlNCYVZDQzBzRFE5TVRDVC91VndsVVVtSzZQTW5EMHhNRWRMbVVl?=
- =?utf-8?B?WlhKT1F5MUMxTk9qWmJnenN2NU1QSWM4d1E3SmovVmdvS0RUam9Uc2ZRbVoz?=
- =?utf-8?Q?w96hM57Pd9ZE7qYoOPmR2yJ/T6t1IUhoELZFvY/?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB5040.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(921020);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MTBIZkQ4dTArdkhVQjRXazRzSXpZWFR0eTFoZG1XZnRUNWkwRWFUTzRIeVJK?=
- =?utf-8?B?Q1h1a0JwVmRmaFM4UmZZN01KN2djV05PVWJsM0RnTUVWYjJiVWk2dEFVODM2?=
- =?utf-8?B?R2FkSGZaRTBBZWZYcWIyeTRJdDhNQ0FlNmErdUtNckU3K2Y3bmJQNmdKeCtF?=
- =?utf-8?B?cHA3eWNqazJkdmJKZGJaOVFtREVvajVWa0NlYUdvSzhvcWdJWC9hdExvY1o4?=
- =?utf-8?B?QUk1c0lTUy9PYUxHWmx3cmo4QUUzUVZNNUdRYUl2NGlYYVhhQWpWTVp0MEdm?=
- =?utf-8?B?dEVUc1paM2ZYcXlmdmFrVVVSY0dBalVabXl5MFNCTldXZElTd0R0QUdRUjlt?=
- =?utf-8?B?cVNINEVyaWV3b2xnYVlkRitEdW0ydUV3SHVybXZKaGl5Q2Q4UGZSZVJRcTds?=
- =?utf-8?B?MHVpY2dRTy9YU2RFbWMrYTNVbU5nYTRpUklyaFJJR01OWGxKSnovd250eEVs?=
- =?utf-8?B?TGJmaTg0MDE4QlQ2SWhELzhQTk9FemcwamErTkdUWjhtZlFDcDQ0cGNTT3Ri?=
- =?utf-8?B?WkFsdlVURW1DMm81amM2VEdZdVJCTEdxM01mTWs3Vml4SDlFVEhxUmF1Wmtq?=
- =?utf-8?B?NFVFSVp3WFZiS0ZydXMwOEZ1V0JFS1dDcmRwVjU0VloxVW8xMGZaVUoxOW51?=
- =?utf-8?B?RmllcjA4NGNHYjlJR2ZONmZRbWN0ODhwcUFUaWIwV2FnWEIwa085aUZ5aDN2?=
- =?utf-8?B?QzBreEh4VFFOaEFVL2FydmV1Qmg2NDA3ZHVab05qUlVJdWJrWFZQcDlXVnEx?=
- =?utf-8?B?VklVYlpTZTNLaU81LzNwUHBYQTU0TnpvWVp1QmRqSEU4QStsZEovVkxJczRG?=
- =?utf-8?B?cVFyb2JKWXdDZ0JPWVdyUjFZZHVOWjM1MEl4MUcyMk9BUVAvdUxid2ZlNDE4?=
- =?utf-8?B?M1Q3VlJITHp2V0grQ0Y5anl4WFZ2UU9uYkRJc2d2R0JRSERwbkFTODdBdE5u?=
- =?utf-8?B?RXZtdTJSaitIS20yeHBSOXlQTEczamQxd2xKM0k2Y3lwMmZoTHVyaGhCMk5t?=
- =?utf-8?B?VVhnNFVZNWcrVDdRbWFNNTVrUlNIL01vUm9iQmFDbXAwUkhYcDA2NDQyMzBQ?=
- =?utf-8?B?clMrZjFXWTR2OWJhOTVCd1BkMmtpREdZVDJJU0FuS1prUlRWdDBMNXQxenRt?=
- =?utf-8?B?aWxCY1BiWWV3QnUrZ2lGbVFpZmRWK1VuRXpSN2NiMjZHWUNmRVZ4U21uUGIv?=
- =?utf-8?B?T25IbWlRRVJXcENFYTVEc1ZDTzdaZ3NPTFpTVTBPMlIwM3FwMlJ5bGVKY25V?=
- =?utf-8?B?MVB3b1lZQUkrVEZJeTh6TEUyRzA5WW5STzFMNEQ3TkxKejZobWFDVHE3RzdE?=
- =?utf-8?B?aUQ5d2hHa0R5bUFkSGdhMDVsV0JYTmtmTGFDd0d4RTRyN0REZXJPR0luS1c1?=
- =?utf-8?B?VVJCNkVoNDJvbGRmaDRJZlN3Tk9XQi9BYjBCb2NKOHhmL0VpZVFKekQxUURR?=
- =?utf-8?B?N0tIdWp5Z0VIcXBDMXlGdU5GSzNyQnY3TUo1TEhRTWRpOUFRSHJIVVR6Rjlp?=
- =?utf-8?B?blNSQ3RKRmd4TUJSeGhVTGk1ZWlDT2xoVWdtNEhtRDd3QkhHaVhKZWxTUlRV?=
- =?utf-8?B?TW1TSUpVYmwrOWpqMklqZDUydHQ1YVhJZnFTc1dxM2IwamtkQ2FvSDgycE1i?=
- =?utf-8?B?Nitqd3I1eEoySHB4NFYzUVlBSWFDdVdhaXhvR29DNTJnS1hiQzUyQlNZSFQr?=
- =?utf-8?B?Rk9vMWphSUQvaE85OW4xZHNYay81KzZ5MmRJREYvRzlxVlk3dlRiT1JUSEkv?=
- =?utf-8?B?WlVGMVgvVk5TQ3JQczIvbmcwYlpIc05PWXBURUpBM2luSG52Mk5xeTFFZ05v?=
- =?utf-8?B?bmZ1ZXVzbDU5b1Q4ckNoZ0RhQ1Y0WkVpdklraFJVUzZ5QnUyUkowSlYxamZH?=
- =?utf-8?B?K01LekNxSEVPdUprN29rc1AxbGUzbVhwNUVudXRpQVdyMHptT2ppejJTS2N0?=
- =?utf-8?B?M1JsQW5JVnNLUHdqK0pFemVuV1pHRm5YUjd3QVlpNitjbithUnpZdUg0SEpp?=
- =?utf-8?B?NXFnYlJ4MW1NU3lJWVd1c2J3bXFrR285TW5UZ1NXaGp1UUxQNHAwbXdSUGVF?=
- =?utf-8?B?Y21PSnJVaEJTbkltdUtZY2dKVFZIMGsySFRYMy9wSzJiemtMSTltNFpJMjZF?=
- =?utf-8?Q?KAjM/sLwRVzi5qSJwfywjdo5u?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15c72fc0-62d3-409a-6ebe-08dce8fc1eb9
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB5040.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2024 07:21:12.9064
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ClxSJbMypjwSgVNXE+ayKv16uEk8DwlwCohpEbKZJ5sfusyFiE3sCLj3f37cgUNKq4JuxS3ST++tOH1qsE/kgg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6240
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 01/11] lib/x86: Relax checks about policy compatibility
+To: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20241001123807.605-1-alejandro.vallejo@cloud.com>
+ <20241001123807.605-2-alejandro.vallejo@cloud.com>
+ <1a57c4c9-baa9-44b4-8a3f-0f821d8c2484@suse.com>
+ <D4RED6YCM7AH.1QVPIV4K9SB5O@cloud.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <D4RED6YCM7AH.1QVPIV4K9SB5O@cloud.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+On 09.10.2024 17:57, Alejandro Vallejo wrote:
+> On Wed Oct 9, 2024 at 10:40 AM BST, Jan Beulich wrote:
+>> On 01.10.2024 14:37, Alejandro Vallejo wrote:
+>>> --- a/xen/lib/x86/policy.c
+>>> +++ b/xen/lib/x86/policy.c
+>>> @@ -15,7 +15,16 @@ int x86_cpu_policies_are_compatible(const struct cpu_policy *host,
+>>>  #define FAIL_MSR(m) \
+>>>      do { e.msr = (m); goto out; } while ( 0 )
+>>>  
+>>> -    if ( guest->basic.max_leaf > host->basic.max_leaf )
+>>> +    /*
+>>> +     * Old AMD hardware doesn't expose topology information in leaf 0xb. We
+>>> +     * want to emulate that leaf with credible information because it must be
+>>> +     * present on systems in which we emulate the x2APIC.
+>>> +     *
+>>> +     * For that reason, allow the max basic guest leaf to be larger than the
+>>> +     * hosts' up until 0xb.
+>>> +     */
+>>> +    if ( guest->basic.max_leaf > 0xb &&
+>>> +         guest->basic.max_leaf > host->basic.max_leaf )
+>>>          FAIL_CPUID(0, NA);
+>>>  
+>>>      if ( guest->feat.max_subleaf > host->feat.max_subleaf )
+>>
+>> I'm concerned by this in multiple ways:
+>>
+>> 1) It's pretty ad hoc, and hence doesn't make clear how to deal with similar
+>> situations in the future.
+> 
+> I agree. I don't have a principled suggestion for how to deal with other cases
+> where we might have to bump the max leaf. It may be safe (as is here becasue
+> everything below it is either used or unimplemnted), but AFAIU some leaves
+> might be problematic to expose, even as zeroes. I suspect that's the problem
+> you hint at later on about AMX and AVX10?
 
-On 10/9/2024 2:05 PM, Philipp Stanner wrote:
-> pci_intx() is a hybrid function which can sometimes be managed through
-> devres. To remove this hybrid nature from pci_intx(), it is necessary to
-> port users to either an always-managed or a never-managed version.
->
-> All users of amd_mp2_pci_remove(), where pci_intx() is used, call
-> pcim_enable_device(), which is why the driver needs the always-managed
-> version.
->
-> Replace pci_intx() with pcim_intx().
->
-> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
-> ---
->   drivers/hid/amd-sfh-hid/amd_sfh_pcie.c        | 4 ++--
->   drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c | 2 +-
->   2 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c b/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
-> index 0c28ca349bcd..48cfd0c58241 100644
-> --- a/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
-> +++ b/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
-> @@ -122,7 +122,7 @@ int amd_sfh_irq_init_v2(struct amd_mp2_dev *privdata)
->   {
->   	int rc;
->   
-> -	pci_intx(privdata->pdev, true);
-> +	pcim_intx(privdata->pdev, true);
->   
->   	rc = devm_request_irq(&privdata->pdev->dev, privdata->pdev->irq,
->   			      amd_sfh_irq_handler, 0, DRIVER_NAME, privdata);
-> @@ -248,7 +248,7 @@ static void amd_mp2_pci_remove(void *privdata)
->   	struct amd_mp2_dev *mp2 = privdata;
->   	amd_sfh_hid_client_deinit(privdata);
->   	mp2->mp2_ops->stop_all(mp2);
-> -	pci_intx(mp2->pdev, false);
-> +	pcim_intx(mp2->pdev, false);
->   	amd_sfh_clear_intr(mp2);
->   }
->   
-> diff --git a/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c b/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
-> index db36d87d5634..ec9feb8e023b 100644
-> --- a/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
-> +++ b/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
-> @@ -289,7 +289,7 @@ static void amd_mp2_pci_remove(void *privdata)
->   	sfh_deinit_emp2();
->   	amd_sfh_hid_client_deinit(privdata);
->   	mp2->mp2_ops->stop_all(mp2);
-> -	pci_intx(mp2->pdev, false);
-> +	pcim_intx(mp2->pdev, false);
->   	amd_sfh_clear_intr(mp2);
->   }
->   
+Not exactly, but perhaps somewhat related (see below).
 
-Acked-by: Basavaraj Natikar <Basavaraj.Natikar@amd.com>
+>> 2) Why would we permit going up to leaf 0xb when x2APIC is off in the respective
+>> leaf?
+> 
+> I assume you mean when the x2APIC is not emulated? One reason is to avoid a
+> migration barrier, as otherwise we can't migrate VMs created in "leaf
+> 0xb"-capable hardware to non-"leaf 0xb"-capable even though the migration is
+> perfectly safe.
 
-Thanks,
---
-Basavaraj
+Leaf 0xb ought to be synthesized anyway (to match the guest's topology);
+hardware capabilities hence don't matter here.
 
+> Also, it's benign and simplifies everything. Otherwise we have to find out
+> during early creation not only whether the host has leaf 0xb, but also whether
+> we're emulating an x2APIC or not.
+
+The policy passed by the tool stack will tell you what the choice there was.
+
+> Furthermore, not doing this would actively prevent emulating an x2APIC on AMD
+> Lisbon-like silicon even though it's fine to do so.
+
+I'm afraid I don't understand this. If the tool stack cleared the x2APIC bit,
+x2APIC ought to not be emulated. If it sets it (as permitted by the max
+policy), x2APIC would be emulated.
+
+> Note that we have a broken
+> invariant in existing code where the x2APIC is emulated and leaf 0xb is not
+> exposed at all; not even to show the x2APIC IDs.
+
+Well, fixing this is what this series is about, isn't it?
+
+>> 3) We similarly force a higher extended leaf in order to accommodate the LFENCE-
+>> is-dispatch-serializing bit. Yet there's no similar extra logic there in the
+>> function here.
+> 
+> That's done on the host policy though, so there's no clash.
+
+There's no clash, sure, but ...
+
+> In calculate_host_policy()...
+> 
+> ```
+>       /*
+>        * For AMD/Hygon hardware before Zen3, we unilaterally modify LFENCE to be
+>        * dispatch serialising for Spectre mitigations.  Extend max_extd_leaf
+>        * beyond what hardware supports, to include the feature leaf containing
+>        * this information.
+>        */
+>       if ( cpu_has_lfence_dispatch )
+>           max_extd_leaf = max(max_extd_leaf, 0x80000021U);
+> ```
+> 
+> One could imagine doing the same for leaf 0xb and dropping this patch, but then
+> we'd have to synthesise something on that leaf for hardware that doesn't have
+> it, which is a lot more annoying.
+
+... we're doing things one way there and another way here. Which is generally
+undesirable imo.
+
+>> 4) While there the guest vs host check won't matter, the situation with AMX and
+>> AVX10 leaves imo still wants considering here right away. IOW (taken together
+>> with at least 3) above) I think we need to first settle on a model for
+>> collectively all max (sub)leaf handling. That in particular needs to properly
+>> spell out who's responsible for what (tool stack vs Xen).
+> 
+> I'm not sure I follow. What's the situation with AMX and AVX10 that you refer
+> to?
+
+See the prereq series to both, most recently posted at
+https://lists.xen.org/archives/html/xen-devel/2024-08/msg00591.html
+
+That's hacky; Andrew has indicated that he'd like to take care of this (mostly)
+in the tool stack instead. Yet so far nothing has surfaced, hence I'm keeping
+to have this dependency for both series.
+
+Jan
+
+> I'd assume that making ad-hoc decisions on this is pretty much unavoidable,
+> but maybe the solution to the problem you mention would highlight a more
+> general approach.
+> 
+> Cheers,
+> Alejandro
 
 
