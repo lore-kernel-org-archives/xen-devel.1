@@ -4,33 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C05BCEDDA9
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Oct 2024 03:20:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.815404.1229154 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D5CCF07A7
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Oct 2024 05:30:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.815413.1229171 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syjiF-0003Fm-4I; Thu, 10 Oct 2024 03:19:39 +0000
+	id 1sylku-0004p7-Nh; Thu, 10 Oct 2024 05:30:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 815404.1229154; Thu, 10 Oct 2024 03:19:39 +0000
+Received: by outflank-mailman (output) from mailman id 815413.1229171; Thu, 10 Oct 2024 05:30:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1syjiF-0003Ff-0w; Thu, 10 Oct 2024 03:19:39 +0000
-Received: by outflank-mailman (input) for mailman id 815404;
- Thu, 10 Oct 2024 03:19:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1sylku-0004oc-FS; Thu, 10 Oct 2024 05:30:32 +0000
+Received: by outflank-mailman (input) for mailman id 815413;
+ Thu, 10 Oct 2024 04:37:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5QbA=RG=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1syjiC-0003DE-UT
- for xen-devel@lists.xenproject.org; Thu, 10 Oct 2024 03:19:36 +0000
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [2607:f8b0:4864:20::234])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7886bd79-86b6-11ef-99a2-01e77a169b0f;
- Thu, 10 Oct 2024 05:19:34 +0200 (CEST)
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3e3e6d83138so308504b6e.2
- for <xen-devel@lists.xenproject.org>; Wed, 09 Oct 2024 20:19:34 -0700 (PDT)
+ <SRS0=fLQ4=RG=amd.com=Shyam-sundar.S-k@srs-se1.protection.inumbo.net>)
+ id 1sykvu-0001O5-7j
+ for xen-devel@lists.xenproject.org; Thu, 10 Oct 2024 04:37:50 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20610.outbound.protection.outlook.com
+ [2a01:111:f403:2416::610])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 65d37916-86c1-11ef-a0bd-8be0dac302b0;
+ Thu, 10 Oct 2024 06:37:48 +0200 (CEST)
+Received: from BL1PR12MB5176.namprd12.prod.outlook.com (2603:10b6:208:311::19)
+ by CY8PR12MB8300.namprd12.prod.outlook.com (2603:10b6:930:7d::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.16; Thu, 10 Oct
+ 2024 04:37:43 +0000
+Received: from BL1PR12MB5176.namprd12.prod.outlook.com
+ ([fe80::ed5b:dd2f:995a:bcf4]) by BL1PR12MB5176.namprd12.prod.outlook.com
+ ([fe80::ed5b:dd2f:995a:bcf4%4]) with mapi id 15.20.8048.017; Thu, 10 Oct 2024
+ 04:37:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,101 +49,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7886bd79-86b6-11ef-99a2-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728530373; x=1729135173; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6owvSIVu0EHqNm1yYzc7T8GlTeeFySz1jPIyk4PefAk=;
-        b=dViPvp4dMBb9bARP1tKYE2FxqvhAeYpdnyYIinPGFZtKVcjkq1A8A/owA6CK9lrYI7
-         vIAiVF4lFFrSz8QWl2pVDzlL0l4cPxUHj0f0bv2UAhzLdBwRdFC1CzP/J196EATT4oI2
-         r/n2g0pIrCRBGBHmAWRVFd0onXT7hI6Dw26Zg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728530373; x=1729135173;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6owvSIVu0EHqNm1yYzc7T8GlTeeFySz1jPIyk4PefAk=;
-        b=BIsipX+8OD5rmJPDALH5Qklvmyc3GBFQhlOjoxoG95JE14wDnoxxNIhewdvL3KuBMu
-         VCF+a7HNcqqDnSs6FscXbVWx/KasuEWvwBkHdvS3VMdqeF/tVNy3AfxuuZ5EQh2fIYVn
-         RG+H4MjI7+nMRrpve1av+Q2qERLMFvv29FlxJa0O4UPn8M80ubK2zbhhHINFxQLCOE0E
-         1udyQEirca/cF5ghB4MoHmy5cPtSr2J+tqpwpuLc6ya8Q+h9tosargldlKu5su6dxb/w
-         mgYlJKQCMqRRqEHtQJyAXoWrwdS5zupC4sm0o8CMkFlRfS5MEWLP5SpiLs6GsmrI3wO6
-         6Eow==
-X-Gm-Message-State: AOJu0Yxxce7Qa3kgklYgwlJCkBbFoAak+PmPbQ5pvXJxFT6m9QqPB1wW
-	jDmkIH2kTd2CBOc500j/gF/N8L9G0wwc0g/FjGFMHYBQjOEMttNfCD/LrZvnXqto2bqOkUDHBOv
-	9cjebYqMTlow6vLGQZVUVmuwecsKB/wMuQ8rd/A==
-X-Google-Smtp-Source: AGHT+IGK2g99VinlpXuFk+7xG5Aeig7+Zj/nrgnePEnjP+3phgIn4+HdC2oVl0w/iw41hiQTL0JBYAJRilVW1zZioWQ=
-X-Received: by 2002:a05:6870:e3d2:b0:260:f883:95f9 with SMTP id
- 586e51a60fabf-2883450c741mr3347240fac.42.1728530372966; Wed, 09 Oct 2024
- 20:19:32 -0700 (PDT)
+X-Inumbo-ID: 65d37916-86c1-11ef-a0bd-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wt+sTFgdvI5tvSL6o83xiWXZhdM/CyiYwDHlczpxwJJUsSM9FISfc2vQQBdDrc1NTv+aS5mYmwiFmaw+d6KqUmMGWdsd1TRHtJ2hne+czfIulzKUHN7c1LydjT0jvx9dpYymNpvS2Zl3/nXDNquQZ4R3m4so8qSgPjLAoJrEVEZ0M2NK/NzSKR1JEkWWhHurHnRIfo9NTxuTDxu5e5R+Mk4xwaFypSaECXLiLvwRVVUJia0AbZziTtj4LKh14U9iL9BndDewpkHeKOLaeGb3SeIAGnNrmyB2ZLKi75qW8n/lbS0TPdWurdD0MXqkR8x2FptN5NEfsL57SlLU7sJZUw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Klvl+0k+IcZY28S/d1xTQ0dsUop0L+0uOzjkH7sZpdg=;
+ b=JPGiWNAIVU52g+9AVEZKlSxjHV5OA0eMgJrvTM2s3WlhGeKt6TMyAMz/p4lEAhs+YO4J8bG6dbEwF9DnwnhxwuHUtcuEKZHzv3yW+NuDO8Vuz9TOnR8ko54RwiM3HmORjbfxbL6j05magh/TC5P4KoYyYsMLyuPxlhQk3JzIBEX5grE9Fm+VtgQzopQJ8E2MokWUliRiH77u3s4lkI6Jh0qGyoOWgrrYmObKwDAijhQK3K/Hu+Q95Qm/8aWrgdxMwIiNaBc+0MbF4WDarFzce6JGMSJTulvnhZH4Mq3ismnwd33/9cd+tvC+RrNiMG2mzGiWSDty/Tc6hSSfsTG3zg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Klvl+0k+IcZY28S/d1xTQ0dsUop0L+0uOzjkH7sZpdg=;
+ b=therNLnnQJoWAWU3GwEq8PHji3denVcw3rzffbsga/UXhBfUvNFvZ1Oa0mHWPjBZ560aecw057udqs6U8SezIGobiu+4l8SU4USBoN/J5Veg8gBVzgrJtaCdmXcp43is72mymh0oUgBlfdvh+rx0dUoqBEMKeGhH1t8eNZ3ASt4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <79ba9c9b-984d-41c7-be01-c6a8e7f7ebd2@amd.com>
+Date: Thu, 10 Oct 2024 10:07:18 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 05/13] net/ntb: Use never-managed version of
+ pci_intx()
+To: Philipp Stanner <pstanner@redhat.com>, Damien Le Moal
+ <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>,
+ Sergey Shtylyov <s.shtylyov@omp.ru>,
+ Basavaraj Natikar <basavaraj.natikar@amd.com>, Jiri Kosina
+ <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>,
+ Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Alex Dubov
+ <oakad@yahoo.com>, Sudarsana Kalluru <skalluru@marvell.com>,
+ Manish Chopra <manishc@marvell.com>, "David S. Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Rasesh Mody <rmody@marvell.com>, GR-Linux-NIC-Dev@marvell.com,
+ Igor Mitsyanko <imitsyanko@quantenna.com>,
+ Sergey Matyukevich <geomatsi@gmail.com>, Kalle Valo <kvalo@kernel.org>,
+ Sanjay R Mehta <sanju.mehta@amd.com>, Jon Mason <jdmason@kudzu.us>,
+ Dave Jiang <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Alex Williamson <alex.williamson@redhat.com>, Juergen Gross
+ <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Mario Limonciello <mario.limonciello@amd.com>, Chen Ni <nichen@iscas.ac.cn>,
+ Ricky Wu <ricky_wu@realtek.com>, Al Viro <viro@zeniv.linux.org.uk>,
+ Breno Leitao <leitao@debian.org>, Kevin Tian <kevin.tian@intel.com>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ Mostafa Saleh <smostafa@google.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Hannes Reinecke <hare@suse.de>, John Garry <john.g.garry@oracle.com>,
+ Soumya Negi <soumya.negi97@gmail.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Yi Liu <yi.l.liu@intel.com>, "Dr. David Alan Gilbert" <linux@treblig.org>,
+ Christian Brauner <brauner@kernel.org>, Ankit Agrawal <ankita@nvidia.com>,
+ Reinette Chatre <reinette.chatre@intel.com>,
+ Eric Auger <eric.auger@redhat.com>, Ye Bin <yebin10@huawei.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+ Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
+ Rui Salvaterra <rsalvaterra@gmail.com>, Marc Zyngier <maz@kernel.org>
+Cc: linux-ide@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-input@vger.kernel.org, netdev@vger.kernel.org,
+ linux-wireless@vger.kernel.org, ntb@lists.linux.dev,
+ linux-pci@vger.kernel.org, linux-staging@lists.linux.dev,
+ kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-sound@vger.kernel.org
+References: <20241009083519.10088-1-pstanner@redhat.com>
+ <20241009083519.10088-6-pstanner@redhat.com>
+Content-Language: en-US
+From: Shyam Sundar S K <Shyam-sundar.S-k@amd.com>
+In-Reply-To: <20241009083519.10088-6-pstanner@redhat.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PN3PR01CA0006.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:95::10) To BL1PR12MB5176.namprd12.prod.outlook.com
+ (2603:10b6:208:311::19)
 MIME-Version: 1.0
-References: <cover.1728471268.git.andrii.sultanov@cloud.com> <c9b47337615168e38fb6af2a80409f0a38ead901.1728471268.git.andrii.sultanov@cloud.com>
-In-Reply-To: <c9b47337615168e38fb6af2a80409f0a38ead901.1728471268.git.andrii.sultanov@cloud.com>
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-Date: Thu, 10 Oct 2024 04:19:21 +0100
-Message-ID: <CACHz=Zi82QfM0CBt+OVK3zDO_qYSUTKzGpy8NZWxXJX_EL+bLQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] ocaml/libs: Remove xsd_glue_dev package, also
- install plugin_interface_v1.a
-To: Andrii Sultanov <andrii.sultanov@cloud.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Christian Lindig <christian.lindig@citrix.com>, Edwin Torok <edwin.torok@cloud.com>, 
-	David Scott <dave@recoil.org>, Anthony PERARD <anthony.perard@vates.tech>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL1PR12MB5176:EE_|CY8PR12MB8300:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0c1b8c51-260f-4a03-6870-08dce8e54718
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|921020;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?S2xHMWc1WlVvbTVwWGt0QzVLY056QjVBSUpVZWV4WERRRHBoTlJLN3BIQ2xI?=
+ =?utf-8?B?bXFlbnJsd2F5ekxBVnk4bUg5cWZ4T25KY1owQzgwcEZRN1J4dit1bDIwRnN1?=
+ =?utf-8?B?SWtRL2VCTCtoRGw1RUwzbEpKRW93SDlzdnhsMktoMkZQQ2xIUjE1UGpuNjkw?=
+ =?utf-8?B?cXlmeVJUNVpyai9UaHRpOU1IOWc4b0tNeXc5NVJRRWxxRjlXNlpjOEw3RjBP?=
+ =?utf-8?B?azNZMi9xREs1UmFLc3NRRERFbVVGMWFEckNyd1JxampSLzNoM1hTem8wWTlW?=
+ =?utf-8?B?UTJvMmdTTWI2eGVlOFhWRm5qSHd3dWdhN0MreXRrQnlLTHpwaDVKYWRMSlJk?=
+ =?utf-8?B?L3NNQmQzUkovVDk0RURsYWNaNGpiaUZvV0JuWTdhTTFmMWRRZWxma0JRbzVX?=
+ =?utf-8?B?amlVSi9malo2SVI0UlBDOXIrNnA4RE1Ta3lrbUhoLzVVK3VzNXVWM05sdGhp?=
+ =?utf-8?B?Z0F5eG5uZ0xtcWNQZDI3eGUxUjlTQmZMT0dYaDRObERSWHpNajU1SWVRTHp2?=
+ =?utf-8?B?MWU0OVFiaGsyRFowUGNzcWdHZS9ia09NSUhPcnhLeHV0ZlhFeWNyd3VkZ295?=
+ =?utf-8?B?Wm50RGt6aVhtcGxTa1RVbEJmWUZlVXdvU0p5d3pMYnhvL0dSZER5U1gvWGpa?=
+ =?utf-8?B?eEE5MTBQVHV6MTZzZGJlOXllQVg0QlBITlBLcG9IRXNZMXVxZlZkR1BkSkc2?=
+ =?utf-8?B?UzBIclA1d0dNVklZaXg5WmxMVWYvaGMwMGlUOTJTZXBGZnRRbFNoaTdJeG9n?=
+ =?utf-8?B?WVg4RFp2RW1WeWtTdVh5ekJNVGJ2MmlOVXM4UEl6R1hEc2ttS1M3dUliNUFR?=
+ =?utf-8?B?TyttNDJSemFxL3dOMlp2Q3Q1ZXUwRUdXWHdnak8yQ1dKaVlURzBGNW5iR1FG?=
+ =?utf-8?B?MGlTaEtSdFl0VTROUFhuNmxOS1dHcGFpVWFtNkRHQUZBZU0vUUxEc3g3eVFU?=
+ =?utf-8?B?YTUvZkFGSTBPc0JkaHlFUmpCVjlIRGs1Nk1TbTVITzRwTjlRd3lvdlBLRDR3?=
+ =?utf-8?B?bEFqOXFaMDg2enIxUGlwVTF3bVBkOW1lN0pQWElBSDBaZjZpdTlKYjc2OEVp?=
+ =?utf-8?B?RkQra3hzZy9ucmh5WFZMRkRtY21mYzRra0RYaThHT2dsUkc0aEhJbmJkc1hB?=
+ =?utf-8?B?Z0hMQ3lFZnF1WUpVaG00WjZWUk9vNC9iQ1FldlZKWDluK0xuZ0hYY3psRVZK?=
+ =?utf-8?B?TkJOeFBhdmg0cllMWDBGUVpaKzF4bXpUVWVseU1BeFVlWWtQaDRzUlFtZU04?=
+ =?utf-8?B?RVdXUVEzUGpRWGR6WlpSQmUxWVRlRm1HQU1FQTEySUFJa21FQm9aWTJXN1Bz?=
+ =?utf-8?B?WGg2cmd2UmFYTzdlbG5oekhibkttR1NEbStnT2pEMDhWSlEyMkVjY3hXUUdN?=
+ =?utf-8?B?ZUVRaXdtYjhsL1lGRi9xdDZXaVBMRy91b1lBVkRIWHBGSzNnN1J6WHRUYjY4?=
+ =?utf-8?B?WXpVSXBGT0g4R1lVMFkvdS93K0NoQzJOVGp5Y1Vxdkx5SndscEwzM0hNY2FF?=
+ =?utf-8?B?VWtrR2JKcHlXWHpXSS8rd1IvK1IzVEtCM1dHcHBPVGpjWUI5ZGtOTStBTGhv?=
+ =?utf-8?B?Q2lJS2hTblFnNWwyUHZ2aGNTTU9Ram5wTHhDazhZeFovaFJQNzY1WDFWNllj?=
+ =?utf-8?B?VklpaERqa1B4VTR0QkM3N3lPUUlkWEozUVVHRkxPUk5vd1BnMGpEVWUxNEdq?=
+ =?utf-8?B?WWRZYnJmSjBaY2x4THNDcDFDNkY1VE5rTTBZSmNVU1lJVFBVbTkxc1FMbmIy?=
+ =?utf-8?Q?fQxbUSn8voWg9m72DR7CD+eGOfL+bKZKv4gl32N?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL1PR12MB5176.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(921020);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?dG9hUkhsZHBuK2JnNEFHa3V2VFdaVWw1Unh1cXVwWExaRkEvVWhUL01Wbk5y?=
+ =?utf-8?B?UjJ3bDliaXpuckw2aTNla2ZuV0U2eFNyM2h5Wk1Pa0E4eEFpVnhwekpaaU5K?=
+ =?utf-8?B?MCtZWEMxaFdKSXdWbEEwWWZyUzJrTVRiUFRTUVNZL095TWZDRTVHVzhCNG1J?=
+ =?utf-8?B?YkpNc2xMTUYwcTJnRENZaVJvMHdoTGVSbDNUek1YeGJKaHdtNWpqL0tFb0hz?=
+ =?utf-8?B?ZG9hdW5KRUxZek11UkxxMWV5MXpnZXY2UGQyVkdRU1l1WG9mNDlHVmlmL2c3?=
+ =?utf-8?B?dTErS05kckpkQkxBM2oyakJtQmpaemFlaGxtM3BZMExraGFVcW4xdVBoNE9I?=
+ =?utf-8?B?NFZRcjh2NllaUHZTS2J2NWpEUDd5aE9Xb0hwbnpsUGR2N3haOGRKc2t6allK?=
+ =?utf-8?B?NDcxN2R2TWt5RUcwWng4SVF6U1JHZ01MVHhTQjVIZ0F6YVNhQzNTSHJEN3U1?=
+ =?utf-8?B?Zm05ZTI3ZHVUYnRDNmxteVN3S1ZhTk9JZE5PZXJZblBVMXhhUGNSWm1SUkxW?=
+ =?utf-8?B?dnhZdkZEQ3BGTE5tdnZkck9pdTgwcmdYQ0FaWHVGVTN0YVYyamEwd0JiUzhZ?=
+ =?utf-8?B?V0xqVXNublJ0QmVHZ0FSM3JNbTlpYjJnTVc5QTFrY3BvWjE5dXZveWlzaUZv?=
+ =?utf-8?B?SU5uY0JVd0JjQzdCeU9IdUIwRFNtV0pUaGxreEVEQVZrVnBiczIyV3ExQ0tE?=
+ =?utf-8?B?OUhwaXpNOERSenBTTEEvK0FJVnQ2bWsyTmJtKzFOeWp6a3pBenMvTmVJdXpm?=
+ =?utf-8?B?MWZseTY5YUhkMmdaTGNKQU1CbGdLejRVYjhQWm45Sm1IbGpVaGtGUXVvTXZD?=
+ =?utf-8?B?eDF4TjBPQzFMRXo4U2dpcjQrTnlYc1h2RTA4VHFPc1pLSExoTExTczg0RTM5?=
+ =?utf-8?B?a2pBSG45V3VmS0hIWGM4TEpHSjdyemVFcnVPUjVqcm5TSGRQSDdXNzFZZ09w?=
+ =?utf-8?B?Q0xZemtUaTRwSzZheUY0N0tQZ2I0R1NWWEl6TUQ4bXhNVWdtbGUwck84czdB?=
+ =?utf-8?B?QU1zcm5QZVcycDh2azJBdU1BK3RoVFF2Z1RIUnRaY1VKT08ram9SWEY2TitN?=
+ =?utf-8?B?MDJaKy90YURzd1RHd1Q5ZkQzaTBKVTVnZ2JLYXpKOXBXeDRqV1pqNG1LN09p?=
+ =?utf-8?B?OVllMnpBYzJTU01qZU0zd28yY21sckJXWXJPdVBwRDdCclV1dkhwQkpMWmtj?=
+ =?utf-8?B?aFdrNWlkS1FDL1RyTVMzdnFpc0hoaTJTbWNmdllXaGJxVU4xYXVCTXFWYWZC?=
+ =?utf-8?B?Und0R1g3MFpDb01OMEhTNVpsRldlQk9CS2Y0aW1BT3lzeG85c2ZyamcwVTQy?=
+ =?utf-8?B?SWtPdTExSlBLVGdueitCYWVSZzlxWWlSdXFONDNZRm8rNTVmYS9EUDFXaXpX?=
+ =?utf-8?B?bFU4NHRRNFpnZWc5R1o5ZkE3T28zR3ZOVFI5ZWZXREdpUkZCbW4yblNKWmEr?=
+ =?utf-8?B?Z29zUWZJYTZmYytHbmF2U2dpV3ltNkYramlKeGNWbGtsNEVzUlJ4R3p6cDQ3?=
+ =?utf-8?B?UG9PNWpqeFhTTk1KNVQ3NHg1MS9KYzFQTVNJem5qbWhCMlk2QXNtb3RFUkJH?=
+ =?utf-8?B?TzRoUnhiVVloRElVTENEK3RYVjRXYVRDYnZBaG04SGlmWDZuMXlmTmU0S2pP?=
+ =?utf-8?B?d2NnUDVuY2QxS2VqMUg3WWVSb292UVFueVlwTGMrVlAvdEdUZlJ1YmI2aTZE?=
+ =?utf-8?B?Y05nZVhzaDZmZWRFMmdtc0FKVHFIS3dUSTB5eTRtdTBTdkFlenIvT0lGN3Qw?=
+ =?utf-8?B?OTQvVHhlTjlXMnRnamFzZmdvV0hDbFNsQkJFTFZlRmpwMmdRVUxPQy9ESVZm?=
+ =?utf-8?B?czF6ZXFDN3JmY0lIemlmY3A3NXRrZHpIUW9qNnB3QnFramNhM3JpLy9SVy9G?=
+ =?utf-8?B?QmUrVXFtUzR2MDNTOVVFTDFYNitqcjRkcnZ5bUlDT3FZei9xdjBvRHVCSENT?=
+ =?utf-8?B?OGMxaDFWRm9xY3NBYkk5aGFLNGpJbS9mSWtpbTF6RlFOci84ajV1cEJ5ZmpD?=
+ =?utf-8?B?NWVyZ3JtcUlwQytvYjcrTnlJYmJJWElGS0JacTI0RVl2dGcwVDZkOFA4VnQy?=
+ =?utf-8?B?NVlDY3dpOE9zc1Bmdkxnd3pMZ1VLWkhxRFRwdDlwOUh2by9NamVERWswbWxn?=
+ =?utf-8?Q?aNz1Ck4pRRLj+rsSsnFZlgFFQ?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c1b8c51-260f-4a03-6870-08dce8e54718
+X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5176.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2024 04:37:42.2623
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: m0qLPNHieptuXDE6QrWF4k80opazgWD0GToi3pf7VL4bTVZyBi0AGjqiZRu4iTS4nLBvzm+aG7oGgdARyHAgXA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8300
 
-On Wed, Oct 9, 2024 at 4:15=E2=80=AFPM Andrii Sultanov
-<andrii.sultanov@cloud.com> wrote:
->
-> xsd_glue_dev packaging is inconsistent with the rest of OCaml packages
-> and isn't actually necessary. .a is needed alongside compiled bytecode
 
-Being singular, should not be "The <NAME>.a is needed "... ?
-Or are there multiple archive files?
 
-> files during linking and was missed in the initial oxenstore plugin
-> work.
->
-> Specify OCAMLCFLAGS along with OCAMLOPTFLAGS.
->
-> Signed-off-by: Andrii Sultanov <andrii.sultanov@cloud.com>
+On 10/9/2024 14:05, Philipp Stanner wrote:
+> pci_intx() is a hybrid function which can sometimes be managed through
+> devres. To remove this hybrid nature from pci_intx(), it is necessary to
+> port users to either an always-managed or a never-managed version.
+> 
+> hw/amd and how/intel enable their PCI-Device with pci_enable_device().
+> Thus, they need the never-managed version.
+> 
+> Replace pci_intx() with pci_intx_unmanaged().
+> 
+> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+
+Acked-by: Shyam Sundar S K <Shyam-sundar.S-k@amd.com> #for ntb_hw_amd.c
+
 > ---
->  tools/ocaml/libs/xsd_glue/Makefile | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
->
-> diff --git a/tools/ocaml/libs/xsd_glue/Makefile b/tools/ocaml/libs/xsd_gl=
-ue/Makefile
-> index f84291f7fe..be68642968 100644
-> --- a/tools/ocaml/libs/xsd_glue/Makefile
-> +++ b/tools/ocaml/libs/xsd_glue/Makefile
-> @@ -5,6 +5,7 @@ include $(OCAML_TOPLEVEL)/common.make
->  SUBDIRS=3D domain_getinfo_plugin_v1
->
->  CFLAGS +=3D $(CFLAGS_xeninclude)
-> +OCAMLCFLAGS +=3D -opaque
->  OCAMLOPTFLAGS +=3D -opaque
->
->  OBJS =3D plugin_interface_v1
-> @@ -28,14 +29,11 @@ OCAML_NOC_LIBRARY =3D plugin_interface_v1
->  install: $(LIBS) META subdirs-install
->         mkdir -p $(OCAMLDESTDIR)
->         $(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xsd_glue
-> -       $(OCAMLFIND) install -destdir $(OCAMLDESTDIR) -ldconf ignore xsd_=
-glue META $(INTF) $(LIBS)
-> -       $(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xsd_glue_dev
-> -       $(OCAMLFIND) install -destdir $(OCAMLDESTDIR) -ldconf ignore xsd_=
-glue_dev META $(INTF) $(LIBS) *.ml *.mli
-> +       $(OCAMLFIND) install -destdir $(OCAMLDESTDIR) -ldconf ignore xsd_=
-glue META $(INTF) $(LIBS) *.a
->
->  .PHONY: uninstall
->  uninstall: subdirs-uninstall
->         $(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xsd_glue
-> -       $(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xsd_glue_dev
->
->  .PHONY: clean
->  clean: subdirs-clean
-
-Frediano
+>  drivers/ntb/hw/amd/ntb_hw_amd.c    | 4 ++--
+>  drivers/ntb/hw/intel/ntb_hw_gen1.c | 2 +-
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/ntb/hw/amd/ntb_hw_amd.c b/drivers/ntb/hw/amd/ntb_hw_amd.c
+> index d687e8c2cc78..b146f170e839 100644
+> --- a/drivers/ntb/hw/amd/ntb_hw_amd.c
+> +++ b/drivers/ntb/hw/amd/ntb_hw_amd.c
+> @@ -791,7 +791,7 @@ static int ndev_init_isr(struct amd_ntb_dev *ndev,
+>  err_msi_enable:
+>  
+>  	/* Try to set up intx irq */
+> -	pci_intx(pdev, 1);
+> +	pci_intx_unmanaged(pdev, 1);
+>  
+>  	rc = request_irq(pdev->irq, ndev_irq_isr, IRQF_SHARED,
+>  			 "ndev_irq_isr", ndev);
+> @@ -831,7 +831,7 @@ static void ndev_deinit_isr(struct amd_ntb_dev *ndev)
+>  		if (pci_dev_msi_enabled(pdev))
+>  			pci_disable_msi(pdev);
+>  		else
+> -			pci_intx(pdev, 0);
+> +			pci_intx_unmanaged(pdev, 0);
+>  	}
+>  }
+>  
+> diff --git a/drivers/ntb/hw/intel/ntb_hw_gen1.c b/drivers/ntb/hw/intel/ntb_hw_gen1.c
+> index 079b8cd79785..9ad9d7fe227e 100644
+> --- a/drivers/ntb/hw/intel/ntb_hw_gen1.c
+> +++ b/drivers/ntb/hw/intel/ntb_hw_gen1.c
+> @@ -445,7 +445,7 @@ int ndev_init_isr(struct intel_ntb_dev *ndev,
+>  
+>  	/* Try to set up intx irq */
+>  
+> -	pci_intx(pdev, 1);
+> +	pci_intx_unmanaged(pdev, 1);
+>  
+>  	rc = request_irq(pdev->irq, ndev_irq_isr, IRQF_SHARED,
+>  			 "ndev_irq_isr", ndev);
 
