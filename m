@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA90CFC507
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Oct 2024 08:54:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.818519.1231819 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72EBBCFC50A
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Oct 2024 09:12:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.818574.1231885 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t0Gpn-00089d-LS; Mon, 14 Oct 2024 08:53:47 +0000
+	id 1t0H7f-0006Y1-Mo; Mon, 14 Oct 2024 09:12:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 818519.1231819; Mon, 14 Oct 2024 08:53:47 +0000
+Received: by outflank-mailman (output) from mailman id 818574.1231885; Mon, 14 Oct 2024 09:12:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t0Gpn-000896-FM; Mon, 14 Oct 2024 08:53:47 +0000
-Received: by outflank-mailman (input) for mailman id 818519;
- Mon, 14 Oct 2024 08:53:47 +0000
+	id 1t0H7f-0006Xu-Hz; Mon, 14 Oct 2024 09:12:15 +0000
+Received: by outflank-mailman (input) for mailman id 818574;
+ Mon, 14 Oct 2024 09:12:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qGCd=RK=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1t0Gpm-000862-Vr
- for xen-devel@lists.xenproject.org; Mon, 14 Oct 2024 08:53:47 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ <SRS0=YPQf=RK=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
+ id 1t0H7d-0006Xo-O3
+ for xen-devel@lists.xenproject.org; Mon, 14 Oct 2024 09:12:13 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d27c7779-8a09-11ef-a0be-8be0dac302b0;
- Mon, 14 Oct 2024 10:53:46 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a99eb8b607aso227188766b.2
- for <xen-devel@lists.xenproject.org>; Mon, 14 Oct 2024 01:53:46 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
+ id 650b9561-8a0c-11ef-a0be-8be0dac302b0;
+ Mon, 14 Oct 2024 11:12:12 +0200 (CEST)
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-552-_HQKFDXmM1SjsZa0pWFkfQ-1; Mon, 14 Oct 2024 05:12:09 -0400
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-a93d0b27d37so357971266b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Oct 2024 02:12:08 -0700 (PDT)
+Received: from ?IPv6:2001:16b8:2d37:9800:1d57:78cf:c1ae:b0b3?
+ (200116b82d3798001d5778cfc1aeb0b3.dip.versatel-1u1.de.
+ [2001:16b8:2d37:9800:1d57:78cf:c1ae:b0b3])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99a80f2446sm551817766b.206.2024.10.14.01.53.44
+ a640c23a62f3a-a99f07c842csm290736366b.54.2024.10.14.02.12.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 01:53:44 -0700 (PDT)
+ Mon, 14 Oct 2024 02:12:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,555 +53,226 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d27c7779-8a09-11ef-a0be-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1728896025; x=1729500825; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uF49wRium9i4EoXLYTW2SLTmEeikurwbqD9tKvn/ty4=;
-        b=COvIKQ+KWp3XB3Fq0Qf/jwzqqX/tNqqrruZT/EMz/FU4Xnrb5R1/rsUah57TnTx87U
-         mfgvrLr+5KuHNvuGuA1MOvV+GkI+D2h/IRLM/WlyWj1vmXQ/ACqHHqCJZX5FBirCAuEy
-         xRGDpuPmJ4QFnWX6GhEXAen8W3HvVhCnlkNT8=
+X-Inumbo-ID: 650b9561-8a0c-11ef-a0be-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1728897130;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fo2G+KnEW2lnFj+6WF9Ml+ygqa1ze/YVj7KYt9dN/M0=;
+	b=SNgxb5CehU3QIEbj9YSlMEamnAUpbpzzoqnX0Ama2Ay9LTIbmU6fFZGk8u0W+xSRXRqEsW
+	jWyvO4Ps3HVztilzjEkEemLpSModifL76Ob1nAmAnj13PrsSOzqPtXnVtQ0GW9CQfhEP9/
+	7d03rtVgIndRU+KWk0IVGQMJBPC5yu4=
+X-MC-Unique: _HQKFDXmM1SjsZa0pWFkfQ-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728896025; x=1729500825;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uF49wRium9i4EoXLYTW2SLTmEeikurwbqD9tKvn/ty4=;
-        b=nmEDRPH8dc3TW9z4fcM0p8Q1oAhAIVGoYkmGQA+rJtKibt8vosv+YtbIwwA/CGAyL6
-         EnmuA/okBdt4LeELXTeMdHqf3a/wHHqHshG/KiF9b2n0VFPZIJYrB9cIf0kCogiWIoH7
-         b9NCfkb6Hp5BGRBBABiaIZSiNaSBxcHy/K2VjhPbv2sH9dDkO+qg9BOCZ9lxArFCdlqj
-         3V4Iu2DsPwn7T6v5Uxs3VKrswtSnFVtP0X+VhkX/x0jcMKmG6rn1h0PreCq0Lqm3fpH8
-         Y8EmKdyEV25+nenqBlEPT0bpggSncPrMxtXPuHDcJ23CCfd1nAeh7+VBk870PMBHzPk4
-         4P2w==
-X-Gm-Message-State: AOJu0Ywv4FCuwXjXF30zQwS7+1nVXg04mGN8rIBJ4/Km6TY+5EUJRC2E
-	M+Ek9SIGH861C+RZBws2JjLQXxpNNWAWpO9yrtH2Gmwmp4Nu2PHKsGk9M3xJdBqSilHsFskc1pv
-	h
-X-Google-Smtp-Source: AGHT+IH5ZbWN//oAAR1E4EBGs18FbAmIUsa7vCFIn2id5C5jlMOVBB9J9wqwvM57wwc+bXFYmWcktg==
-X-Received: by 2002:a17:907:84d:b0:a99:e939:d69e with SMTP id a640c23a62f3a-a99e939d95bmr684155466b.51.1728896025231;
-        Mon, 14 Oct 2024 01:53:45 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 2/6] x86/boot: create a C bundle for 32 bit boot code and use it
-Date: Mon, 14 Oct 2024 09:53:28 +0100
-Message-Id: <20241014085332.3254546-3-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241014085332.3254546-1-frediano.ziglio@cloud.com>
-References: <20241014085332.3254546-1-frediano.ziglio@cloud.com>
+        d=1e100.net; s=20230601; t=1728897128; x=1729501928;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=efYEDzJoXvnSDmPZhcwgS+G1MqF2s5kTREhSaGYut/4=;
+        b=QbvzTWokvFN1ke4nXhBC56fwp6dlXcu6t7VCu4Y7z+PNUbY89b4PH6fXeTbV+pz2kp
+         czY93oAhO+1B0O0hx79UfKhJJSm2uKZQY1p8sPGvPZfB4qga4zdNRZnqYX1uHDZHJKiF
+         cC8+AcuRlpgZRW2k1AeN7MVSnQCgToBh82SM7tPXmPEjMW7yU0MQ8X1eG4l1308GHU4d
+         DoG+2RflDdorjcSl3IkJmkItB3MSaGWHoM+0a6SNZLb2TZKtnIhOZyk0M7hnBKdThKaN
+         GcbfObO1rFvfT+EIqTaz63shqoprhoAHtOsqkxT66nrS3olkZbTlJRE8TZiIflziNmEy
+         PMeg==
+X-Forwarded-Encrypted: i=1; AJvYcCUpcJzw+BBmwuRs8r1QmPImau9WApEYtbi6X5y0dcILP6MQU9rX7jDijuyRHDNVDK0lyO4I+wpuKEY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzytmNq8QwOJdH1iA7seI2YcGFkvATX1DV4d7YHhjW9AuuVuQux
+	OnvVitA/1Wi4kf0T7zzP9cq6GZ/ezJYtSL5DQ+1LNfS04eT1g6D4n25TJ3d2BWyT6cltupOElKf
+	b+SBLbztkur/phUr5EeHSDT8ZYxRliUpeRK+F5GFMNNcGEyDIU6IrmCOLDISA9Q1d
+X-Received: by 2002:a17:907:9611:b0:a99:36ab:d843 with SMTP id a640c23a62f3a-a99b940ff26mr1050657466b.38.1728897127746;
+        Mon, 14 Oct 2024 02:12:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFnnCmW/otcj2gQQZVhAW9woFCE4udOO76Y7RHXvuu8hpYM4Kp8213Cwui9o9/A0ZQF2FNuJw==
+X-Received: by 2002:a17:907:9611:b0:a99:36ab:d843 with SMTP id a640c23a62f3a-a99b940ff26mr1050652366b.38.1728897127228;
+        Mon, 14 Oct 2024 02:12:07 -0700 (PDT)
+Message-ID: <3515493a0d0dd8f1b7df5a5677042946325ea6a8.camel@redhat.com>
+Subject: Re: [RFC PATCH 01/13] PCI: Prepare removing devres from pci_intx()
+From: Philipp Stanner <pstanner@redhat.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>, 
+ Sergey Shtylyov <s.shtylyov@omp.ru>, Basavaraj Natikar
+ <basavaraj.natikar@amd.com>, Jiri Kosina <jikos@kernel.org>,  Benjamin
+ Tissoires <bentiss@kernel.org>, Arnd Bergmann <arnd@arndb.de>, Greg
+ Kroah-Hartman <gregkh@linuxfoundation.org>, Alex Dubov <oakad@yahoo.com>,
+ Sudarsana Kalluru <skalluru@marvell.com>, Manish Chopra
+ <manishc@marvell.com>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo
+ Abeni <pabeni@redhat.com>, Rasesh Mody <rmody@marvell.com>,
+ GR-Linux-NIC-Dev@marvell.com, Igor Mitsyanko <imitsyanko@quantenna.com>,
+ Sergey Matyukevich <geomatsi@gmail.com>, Kalle Valo <kvalo@kernel.org>,
+ Sanjay R Mehta <sanju.mehta@amd.com>, Shyam Sundar S K
+ <Shyam-sundar.S-k@amd.com>, Jon Mason <jdmason@kudzu.us>, Dave Jiang
+ <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>, Bjorn Helgaas
+ <bhelgaas@google.com>, Alex Williamson <alex.williamson@redhat.com>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Oleksandr Tyshchenko
+ <oleksandr_tyshchenko@epam.com>, Jaroslav Kysela <perex@perex.cz>, Takashi
+ Iwai <tiwai@suse.com>, Mario Limonciello <mario.limonciello@amd.com>, Chen
+ Ni <nichen@iscas.ac.cn>, Ricky Wu <ricky_wu@realtek.com>, Al Viro
+ <viro@zeniv.linux.org.uk>, Breno Leitao <leitao@debian.org>, Kevin Tian
+ <kevin.tian@intel.com>, Thomas Gleixner <tglx@linutronix.de>, Ilpo
+ =?ISO-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>, Mostafa Saleh
+ <smostafa@google.com>, Hannes Reinecke <hare@suse.de>, John Garry
+ <john.g.garry@oracle.com>, Soumya Negi <soumya.negi97@gmail.com>, Jason
+ Gunthorpe <jgg@ziepe.ca>, Yi Liu <yi.l.liu@intel.com>, "Dr. David Alan
+ Gilbert" <linux@treblig.org>, Christian Brauner <brauner@kernel.org>, Ankit
+ Agrawal <ankita@nvidia.com>, Reinette Chatre <reinette.chatre@intel.com>,
+ Eric Auger <eric.auger@redhat.com>, Ye Bin <yebin10@huawei.com>, Marek
+ =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Kai Vehmanen
+ <kai.vehmanen@linux.intel.com>,  Peter Ujfalusi
+ <peter.ujfalusi@linux.intel.com>, Rui Salvaterra <rsalvaterra@gmail.com>,
+ Marc Zyngier <maz@kernel.org>, linux-ide@vger.kernel.org,
+ linux-kernel@vger.kernel.org,  linux-input@vger.kernel.org,
+ netdev@vger.kernel.org,  linux-wireless@vger.kernel.org,
+ ntb@lists.linux.dev, linux-pci@vger.kernel.org, 
+ linux-staging@lists.linux.dev, kvm@vger.kernel.org, 
+ xen-devel@lists.xenproject.org, linux-sound@vger.kernel.org
+Date: Mon, 14 Oct 2024 11:12:03 +0200
+In-Reply-To: <ZwktO8AUmFEakhVP@smile.fi.intel.com>
+References: <20241009083519.10088-1-pstanner@redhat.com>
+	 <20241009083519.10088-2-pstanner@redhat.com>
+	 <ZwfnULv2myACxnVb@smile.fi.intel.com>
+	 <f65e9fa01a1947782fc930876e5f84174408db67.camel@redhat.com>
+	 <ZwktO8AUmFEakhVP@smile.fi.intel.com>
+User-Agent: Evolution 3.52.4 (3.52.4-1.fc40)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The current method to include 32 bit C boot code is:
-- compile each function we want to use into a separate object file;
-- each function is compiled with -fpic option;
-- convert these object files to binary files. This operation removes GOP
-  which we don't want in the executable;
-- a small assembly part in each file add the entry point;
-- code can't have external references, all possible variables are passed
-  by value or pointer;
-- include these binary files in head.S.
+On Fri, 2024-10-11 at 16:50 +0300, Andy Shevchenko wrote:
+> On Fri, Oct 11, 2024 at 02:16:06PM +0200, Philipp Stanner wrote:
+> > On Thu, 2024-10-10 at 17:40 +0300, Andy Shevchenko wrote:
+> > > On Wed, Oct 09, 2024 at 10:35:07AM +0200, Philipp Stanner wrote:
+> > > > pci_intx() is a hybrid function which sometimes performs devres
+> > > > operations, depending on whether pcim_enable_device() has been
+> > > > used
+> > > > to
+> > > > enable the pci_dev. This sometimes-managed nature of the
+> > > > function
+> > > > is
+> > > > problematic. Notably, it causes the function to allocate under
+> > > > some
+> > > > circumstances which makes it unusable from interrupt context.
+> > > >=20
+> > > > To, ultimately, remove the hybrid nature from pci_intx(), it is
+> > > > first
+> > > > necessary to provide an always-managed and a never-managed
+> > > > version
+> > > > of that function. Then, all callers of pci_intx() can be ported
+> > > > to
+> > > > the
+> > > > version they need, depending whether they use
+> > > > pci_enable_device()
+> > > > or
+> > > > pcim_enable_device().
+>=20
+> > > > An always-managed function exists, namely pcim_intx(), for
+> > > > which
+> > > > __pcim_intx(), a never-managed version of pci_intx() had been
+> > > > implemented.
+> > >=20
+> > > > Make __pcim_intx() a public function under the name
+> > > > pci_intx_unmanaged(). Make pcim_intx() a public function.
+>=20
+> It seems I got confused by these two paragraphs. Why the double
+> underscored
+> function is even mentioned here?
 
-There are currently some limitations:
-- code is compiled separately, it's not possible to share a function
-  (like memcpy) between different functions to use;
-- although code is compiled with -fpic there's no certainty there are
-  no relocations, specifically data ones. This can lead into hard to
-  find bugs;
-- it's hard to add a simple function;
-- having to pass external variables makes hard to do multiple things
-  otherwise functions would require a lot of parameters so code would
-  have to be split into multiple functions which is not easy.
+It's mentioned because it's being moved.
 
-Current change extends the current process:
-- all object files are linked together before getting converted making
-  possible to share code between the function we want to call;
-- a single object file is generated with all functions to use and
-  exported symbols to easily call;
-- variables to use are declared in linker script and easily used inside
-  C code. Declaring them manually could be annoying but makes also
-  easier to check them. Using external pointers can be still an issue if
-  they are not fixed. If an external symbol is not declared this gives a
-  link error.
+>=20
+> > > To avoid an additional churn we can make just completely new
+> > > APIs,
+> > > namely:
+> > > pcim_int_x()
+> > > pci_int_x()
+> > >=20
+> > > You won't need all dirty dances with double underscored function
+> > > naming and
+> > > renaming.
+> >=20
+> > =C3=84hm.. I can't follow. The new version doesn't use double
+> > underscores
+> > anymore. __pcim_intx() is being removed, effectively.
+> > After this series, we'd end up with a clean:
+> >=20
+> > =09pci_intx() <-> pcim_intx()
+> >=20
+> > just as in the other PCI APIs.
+>=20
+> ...
+>=20
+> > > > +=09pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
+> > > > +
+> > > > +=09if (enable)
+> > > > +=09=09new =3D pci_command & ~PCI_COMMAND_INTX_DISABLE;
+> > > > +=09else
+> > > > +=09=09new =3D pci_command | PCI_COMMAND_INTX_DISABLE;
+> > > > +
+> > > > +=09if (new !=3D pci_command)
+> > >=20
+> > > I would use positive conditionals as easy to read (yes, a couple
+> > > of
+> > > lines
+> > > longer, but also a win is the indentation and avoiding an
+> > > additional
+> > > churn in
+> > > the future in case we need to add something in this branch.
+> >=20
+> > I can't follow. You mean:
+> >=20
+> > if (new =3D=3D pci_command)
+> > =C2=A0=C2=A0=C2=A0 return;
+> >=20
+> > ?
+> >=20
+> > That's exactly the same level of indentation.
+>=20
+> No, the body gets one level off.
+>=20
+> > Plus, I just copied the code.
+> >=20
+> > > > +=09=09pci_write_config_word(pdev, PCI_COMMAND, new);
+>=20
+> =09if (new =3D=3D pci_command)
+> =09=09return;
+>=20
+> =09pci_write_config_word(pdev, PCI_COMMAND, new);
+>=20
+> See the difference?
+> Also, imaging adding a new code in your case:
+>=20
+> =09if (new !=3D pci_command)
+> =09=09pci_write_config_word(pdev, PCI_COMMAND, new);
+>=20
+> =3D=3D>
+>=20
+> =09if (new !=3D pci_command) {
+> =09=09...foo...
+> =09=09pci_write_config_word(pdev, PCI_COMMAND, new);
+> =09=09...bar...
+> =09}
+>=20
+> And in mine:
+>=20
+> =09if (new =3D=3D pci_command)
+> =09=09return;
+>=20
+> =09...foo...
+> =09pci_write_config_word(pdev, PCI_COMMAND, new);
+> =09...bar...
+>=20
+> I hope it's clear now what I meant.
 
-Some details of the implementation:
-- C code is compiled with -fpic flags (as before);
-- object files from C code are linked together;
-- the single bundled object file is linked with 2 slightly different
-  script files to generate 2 bundled object files;
-- the 2 bundled object files are converted to binary removing the need
-  for global offset tables;
-- a Python script is used to generate assembly source from the 2
-  binaries;
-- the single assembly file is compiled to generate final bundled object
-  file;
-- to detect possible unwanted relocation in data/code code is generated
-  with different addresses. This is enforced starting .text section at
-  different positions and adding a fixed "gap" at the beginning.
-  This makes sure code and data is position independent;
-- to detect used symbols in data/code symbols are placed in .text
-  section at different offsets (based on the line in the linker script).
-  This is needed as potentially a reference to a symbol is converted to
-  a reference to the containing section so multiple symbols could be
-  converted to reference to same symbol (section name) and we need to
-  distinguish them;
-- --orphan-handling=error option to linker is used to make sure we
-  account for all possible sections from C code;
+It is clear.. I'm not necessarily convinced that it's better to review
+than just copying the pre-existing code, but if you really want it we
+can do it I guess.
 
-Current limitations:
-- the main one is the lack of support for 64 bit code. It would make
-  sure that even the code used for 64 bit (at the moment EFI code) is
-  code and data position independent. We cannot assume that code that
-  came from code compiled for 32 bit and compiled for 64 bit is code and
-  data position independent, different compiler options lead to
-  different code/data.
-
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
-Changes since v2:
-- removed W^X limitation, allowing data;
-- added some comments to python script;
-- added extension to python script;
-- added header to generated assembly code from python script;
-- added starting symbol to generated assembly code from python script
-  to make disassembly more clear;
-- other minor style changes to python script.
----
- xen/arch/x86/boot/.gitignore                  |   5 +-
- xen/arch/x86/boot/Makefile                    |  38 +++-
- .../x86/boot/{build32.lds => build32.lds.S}   |  35 ++-
- xen/arch/x86/boot/cmdline.c                   |  12 -
- xen/arch/x86/boot/head.S                      |  12 -
- xen/arch/x86/boot/reloc.c                     |  14 --
- xen/tools/combine_two_binaries.py             | 207 ++++++++++++++++++
- 7 files changed, 268 insertions(+), 55 deletions(-)
- rename xen/arch/x86/boot/{build32.lds => build32.lds.S} (70%)
- create mode 100755 xen/tools/combine_two_binaries.py
-
-diff --git a/xen/arch/x86/boot/.gitignore b/xen/arch/x86/boot/.gitignore
-index a379db7988..ebad650e5c 100644
---- a/xen/arch/x86/boot/.gitignore
-+++ b/xen/arch/x86/boot/.gitignore
-@@ -1,3 +1,4 @@
- /mkelf32
--/*.bin
--/*.lnk
-+/build32.*.lds
-+/built_in_32.*.bin
-+/built_in_32.*.map
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index 1199291d2b..23ad274c89 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -1,4 +1,5 @@
- obj-bin-y += head.o
-+obj-bin-y += built_in_32.o
- 
- obj32 := cmdline.32.o
- obj32 += reloc.32.o
-@@ -9,9 +10,6 @@ targets   += $(obj32)
- 
- obj32 := $(addprefix $(obj)/,$(obj32))
- 
--$(obj)/head.o: AFLAGS-y += -Wa$(comma)-I$(obj)
--$(obj)/head.o: $(obj32:.32.o=.bin)
--
- CFLAGS_x86_32 := $(subst -m64,-m32 -march=i686,$(XEN_TREEWIDE_CFLAGS))
- $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))
- CFLAGS_x86_32 += -Werror -fno-builtin -g0 -msoft-float -mregparm=3
-@@ -25,14 +23,34 @@ $(obj32): XEN_CFLAGS := $(CFLAGS_x86_32) -fpic
- $(obj)/%.32.o: $(src)/%.c FORCE
- 	$(call if_changed_rule,cc_o_c)
- 
-+orphan-handling-$(call ld-option,--orphan-handling=error) := --orphan-handling=error
- LDFLAGS_DIRECT-$(call ld-option,--warn-rwx-segments) := --no-warn-rwx-segments
- LDFLAGS_DIRECT += $(LDFLAGS_DIRECT-y)
- LD32 := $(LD) $(subst x86_64,i386,$(LDFLAGS_DIRECT))
- 
--%.bin: %.lnk
--	$(OBJCOPY) -j .text -O binary $< $@
--
--%.lnk: %.32.o $(src)/build32.lds
--	$(LD32) -N -T $(filter %.lds,$^) -o $@ $<
--
--clean-files := *.lnk *.bin
-+$(obj)/build32.final.lds: AFLAGS-y += -DFINAL
-+$(obj)/build32.other.lds $(obj)/build32.final.lds: $(src)/build32.lds.S FORCE
-+	$(call if_changed_dep,cpp_lds_S)
-+
-+# link all 32bit objects together
-+$(obj)/built_in_32.tmp.o: $(obj32)
-+	$(LD32) -r -o $@ $^
-+
-+$(obj)/built_in_32.%.bin: $(obj)/build32.%.lds $(obj)/built_in_32.tmp.o
-+## link bundle with a given layout
-+	$(LD32) $(orphan-handling-y) -N -T $< -Map $(obj)/built_in_32.$(*F).map -o $(obj)/built_in_32.$(*F).o $(obj)/built_in_32.tmp.o
-+## extract binaries from object
-+	$(OBJCOPY) -j .text -O binary $(obj)/built_in_32.$(*F).o $@
-+	rm -f $(obj)/built_in_32.$(*F).o
-+
-+# generate final object file combining and checking above binaries
-+$(obj)/built_in_32.S: $(obj)/built_in_32.other.bin $(obj)/built_in_32.final.bin
-+	$(PYTHON) $(srctree)/tools/combine_two_binaries.py \
-+		--script $(obj)/build32.final.lds \
-+		--bin1 $(obj)/built_in_32.other.bin \
-+		--bin2 $(obj)/built_in_32.final.bin \
-+		--map $(obj)/built_in_32.final.map \
-+		--exports cmdline_parse_early,reloc \
-+		--output $@
-+
-+clean-files := built_in_32.*.bin built_in_32.*.map build32.*.lds
-diff --git a/xen/arch/x86/boot/build32.lds b/xen/arch/x86/boot/build32.lds.S
-similarity index 70%
-rename from xen/arch/x86/boot/build32.lds
-rename to xen/arch/x86/boot/build32.lds.S
-index 56edaa727b..50c167aef0 100644
---- a/xen/arch/x86/boot/build32.lds
-+++ b/xen/arch/x86/boot/build32.lds.S
-@@ -15,22 +15,47 @@
-  * with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--ENTRY(_start)
-+#ifdef FINAL
-+# define GAP 0
-+# define MULT 0
-+# define TEXT_START
-+#else
-+# define GAP 0x010200
-+# define MULT 1
-+# define TEXT_START 0x408020
-+#endif
-+# define DECLARE_IMPORT(name) name = . + (__LINE__ * MULT)
-+
-+ENTRY(dummy_start)
- 
- SECTIONS
- {
-   /* Merge code and data into one section. */
--  .text : {
-+  .text TEXT_START : {
-+        /* Silence linker warning, we are not going to use it */
-+        dummy_start = .;
-+
-+        /* Declare below any symbol name needed.
-+         * Each symbol should be on its own line.
-+         * It looks like a tedious work but we make sure the things we use.
-+         * Potentially they should be all variables. */
-+        DECLARE_IMPORT(__base_relocs_start);
-+        DECLARE_IMPORT(__base_relocs_end);
-+        . = . + GAP;
-         *(.text)
-         *(.text.*)
--        *(.data)
--        *(.data.*)
-         *(.rodata)
-         *(.rodata.*)
-+        *(.data)
-+        *(.data.*)
-         *(.bss)
-         *(.bss.*)
-   }
--
-+  /DISCARD/ : {
-+       *(.comment)
-+       *(.comment.*)
-+       *(.note.*)
-+  }
-   /* Dynamic linkage sections.  Collected simply so we can check they're empty. */
-   .got : {
-         *(.got)
-diff --git a/xen/arch/x86/boot/cmdline.c b/xen/arch/x86/boot/cmdline.c
-index fc9241ede9..196c580e91 100644
---- a/xen/arch/x86/boot/cmdline.c
-+++ b/xen/arch/x86/boot/cmdline.c
-@@ -18,18 +18,6 @@
-  * Linux kernel source (linux/lib/string.c).
-  */
- 
--/*
-- * This entry point is entered from xen/arch/x86/boot/head.S with:
-- *   - %eax      = &cmdline,
-- *   - %edx      = &early_boot_opts.
-- */
--asm (
--    "    .text                         \n"
--    "    .globl _start                 \n"
--    "_start:                           \n"
--    "    jmp  cmdline_parse_early      \n"
--    );
--
- #include <xen/compiler.h>
- #include <xen/kconfig.h>
- #include <xen/macros.h>
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index c4de1dfab5..e0776e3896 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -759,18 +759,6 @@ trampoline_setup:
-         /* Jump into the relocated trampoline. */
-         lret
- 
--        /*
--         * cmdline and reloc are written in C, and linked to be 32bit PIC with
--         * entrypoints at 0 and using the fastcall convention.
--         */
--FUNC_LOCAL(cmdline_parse_early)
--        .incbin "cmdline.bin"
--END(cmdline_parse_early)
--
--FUNC_LOCAL(reloc)
--        .incbin "reloc.bin"
--END(reloc)
--
- ENTRY(trampoline_start)
- #include "trampoline.S"
- ENTRY(trampoline_end)
-diff --git a/xen/arch/x86/boot/reloc.c b/xen/arch/x86/boot/reloc.c
-index 8c58affcd9..94b078d7b1 100644
---- a/xen/arch/x86/boot/reloc.c
-+++ b/xen/arch/x86/boot/reloc.c
-@@ -12,20 +12,6 @@
-  *    Daniel Kiper <daniel.kiper@oracle.com>
-  */
- 
--/*
-- * This entry point is entered from xen/arch/x86/boot/head.S with:
-- *   - %eax       = MAGIC,
-- *   - %edx       = INFORMATION_ADDRESS,
-- *   - %ecx       = TOPMOST_LOW_MEMORY_STACK_ADDRESS.
-- *   - 0x04(%esp) = BOOT_VIDEO_INFO_ADDRESS.
-- */
--asm (
--    "    .text                         \n"
--    "    .globl _start                 \n"
--    "_start:                           \n"
--    "    jmp  reloc                    \n"
--    );
--
- #include <xen/compiler.h>
- #include <xen/macros.h>
- #include <xen/types.h>
-diff --git a/xen/tools/combine_two_binaries.py b/xen/tools/combine_two_binaries.py
-new file mode 100755
-index 0000000000..138c59287e
---- /dev/null
-+++ b/xen/tools/combine_two_binaries.py
-@@ -0,0 +1,207 @@
-+#!/usr/bin/env python3
-+
-+from __future__ import print_function
-+import argparse
-+import re
-+import struct
-+import sys
-+
-+parser = argparse.ArgumentParser(description='Generate assembly file to merge into other code.')
-+parser.add_argument('--script', dest='script',
-+                    required=True,
-+                    help='Linker script for extracting symbols')
-+parser.add_argument('--bin1', dest='bin1',
-+                    required=True,
-+                    help='First binary')
-+parser.add_argument('--bin2', dest='bin2',
-+                    required=True,
-+                    help='Second binary')
-+parser.add_argument('--output', dest='output',
-+                    help='Output file')
-+parser.add_argument('--map', dest='mapfile',
-+                    help='Map file to read for symbols to export')
-+parser.add_argument('--exports', dest='exports',
-+                    help='Symbols to export')
-+parser.add_argument('--section-header', dest='section_header',
-+                    default='.section .init.text, "ax", @progbits',
-+                    help='Section header declaration')
-+parser.add_argument('-v', '--verbose',
-+                    action='store_true')
-+args = parser.parse_args()
-+
-+gap = 0x010200
-+text_diff = 0x408020
-+
-+# Parse linker script for external symbols to use.
-+# Next regex matches expanded DECLARE_IMPORT lines in linker script.
-+symbol_re = re.compile(r'\s+(\S+)\s*=\s*\.\s*\+\s*\((\d+)\s*\*\s*0\s*\)\s*;')
-+symbols = {}
-+lines = {}
-+for line in open(args.script):
-+    m = symbol_re.match(line)
-+    if not m:
-+        continue
-+    (name, line_num) = (m.group(1), int(m.group(2)))
-+    if line_num == 0:
-+        raise Exception("Invalid line number found:\n\t" + line)
-+    if line_num in symbols:
-+        raise Exception("Symbol with this line already present:\n\t" + line)
-+    if name in lines:
-+        raise Exception("Symbol with this name already present:\n\t" + name)
-+    symbols[line_num] = name
-+    lines[name] = line_num
-+
-+exports = []
-+if args.exports is not None:
-+    exports = dict([(name, None) for name in args.exports.split(',')])
-+
-+# Parse mapfile, look for ther symbols we want to export.
-+if args.mapfile is not None:
-+    symbol_re = re.compile(r'\s{15,}0x([0-9a-f]+)\s+(\S+)\n')
-+    for line in open(args.mapfile):
-+        m = symbol_re.match(line)
-+        if not m or m.group(2) not in exports:
-+            continue
-+        addr = int(m.group(1), 16)
-+        exports[m.group(2)] = addr
-+for (name, addr) in exports.items():
-+    if addr is None:
-+        raise Exception("Required export symbols %s not found" % name)
-+
-+file1 = open(args.bin1, 'rb')
-+file2 = open(args.bin2, 'rb')
-+file1.seek(0, 2)
-+size1 = file1.tell()
-+file2.seek(0, 2)
-+size2 = file2.tell()
-+if size1 > size2:
-+    file1, file2 = file2, file1
-+    size1, size2 = size2, size1
-+if size2 != size1 + gap:
-+    raise Exception('File sizes do not match')
-+
-+file1.seek(0, 0)
-+data1 = file1.read(size1)
-+file2.seek(gap, 0)
-+data2 = file2.read(size1)
-+
-+max_line = max(symbols.keys())
-+
-+def to_int32(n):
-+    '''Convert a number to signed 32 bit integer truncating if needed'''
-+    mask = (1 << 32) - 1
-+    h = 1 << 31
-+    return (n & mask) ^ h - h
-+
-+i = 0
-+references = {}
-+internals = 0
-+while i <= size1 - 4:
-+    n1 = struct.unpack('<I', data1[i:i+4])[0]
-+    n2 = struct.unpack('<I', data2[i:i+4])[0]
-+    i += 1
-+    # The two numbers are the same, no problems
-+    if n1 == n2:
-+        continue
-+    # Try to understand why they are different
-+    diff = to_int32(n1 - n2)
-+    if diff == -gap: # this is an internal relocation
-+        pos = i - 1
-+        print("Internal relocation found at position %#x "
-+              "n1=%#x n2=%#x diff=%#x" % (pos, n1, n2, diff),
-+              file=sys.stderr)
-+        i += 3
-+        internals += 1
-+        if internals >= 10:
-+            break
-+        continue
-+    # This is a relative relocation to a symbol, accepted, code/data is
-+    # relocatable.
-+    if diff < gap and diff >= gap - max_line:
-+        n = gap - diff
-+        symbol = symbols.get(n)
-+        # check we have a symbol
-+        if symbol is None:
-+            raise Exception("Cannot find symbol for line %d" % n)
-+        pos = i - 1
-+        if args.verbose:
-+            print('Position %#x %d %s' % (pos, n, symbol), file=sys.stderr)
-+        i += 3
-+        references[pos] = symbol
-+        continue
-+    # First byte is the same, move to next byte
-+    if diff & 0xff == 0 and i <= size1 - 4:
-+       continue
-+    # Probably a type of relocation we don't want or support
-+    pos = i - 1
-+    suggestion = ''
-+    symbol = symbols.get(-diff - text_diff)
-+    if symbol is not None:
-+        suggestion = " Maybe %s is not defined as hidden?" % symbol
-+    raise Exception("Unexpected difference found at %#x "
-+                    "n1=%#x n2=%#x diff=%#x gap=%#x.%s" % \
-+                    (pos, n1, n2, diff, gap, suggestion))
-+if internals != 0:
-+    raise Exception("Previous relocations found")
-+
-+def line_bytes(buf, out):
-+    '''Output an assembly line with all bytes in "buf"'''
-+    # Python 2 compatibility
-+    if type(buf) == str:
-+        print("\t.byte " + ','.join([str(ord(c)) for c in buf]), file=out)
-+    else:
-+        print("\t.byte " + ','.join([str(n) for n in buf]), file=out)
-+
-+def part(start, end, out):
-+    '''Output bytes of "data" from "start" to "end"'''
-+    while start < end:
-+        e = min(start + 16, end)
-+        line_bytes(data1[start:e], out)
-+        start = e
-+
-+def reference(pos, out):
-+    name = references[pos]
-+    n = struct.unpack('<I', data1[pos:pos+4])[0]
-+    sign = '+'
-+    if n >= (1 << 31):
-+        n -= (1 << 32)
-+    n += pos
-+    if n < 0:
-+        n = -n
-+        sign = '-'
-+    print("\t.hidden %s\n"
-+          "\t.long %s %s %#x - ." % (name, name, sign, n),
-+          file=out)
-+
-+def output(out):
-+    prev = 0
-+    exports_by_addr = {}
-+    for (sym, addr) in exports.items():
-+        exports_by_addr.setdefault(addr, []).append(sym)
-+    positions = list(references.keys())
-+    positions += list(exports_by_addr.keys())
-+    for pos in sorted(positions):
-+        part(prev, pos, out)
-+        prev = pos
-+        if pos in references:
-+            reference(pos, out)
-+            prev = pos + 4
-+        if pos in exports_by_addr:
-+            for sym in exports_by_addr[pos]:
-+                print("\t.global %s\n"
-+                      "\t.hidden %s\n"
-+                      "%s:" % (sym, sym, sym),
-+                      file=out)
-+    part(prev, size1, out)
-+
-+out = sys.stdout
-+if args.output is not None:
-+    out = open(args.output, 'w')
-+print('''/*
-+ * File autogenerated by combine_two_binaries.py DO NOT EDIT
-+ */''', file=out)
-+print('\t' + args.section_header, file=out)
-+print('obj_start:', file=out)
-+output(out)
-+print('\n\t.section\t.note.GNU-stack,"",@progbits', file=out)
-+out.flush()
--- 
-2.34.1
+P.
 
 
