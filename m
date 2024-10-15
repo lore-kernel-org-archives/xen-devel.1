@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CD5D1F9C6
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Oct 2024 18:52:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.819318.1232613 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4FB0D1F9BD
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Oct 2024 18:52:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.819324.1232673 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t0me8-0006GM-JA; Tue, 15 Oct 2024 18:51:52 +0000
+	id 1t0meN-0007zj-6H; Tue, 15 Oct 2024 18:52:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 819318.1232613; Tue, 15 Oct 2024 18:51:52 +0000
+Received: by outflank-mailman (output) from mailman id 819324.1232673; Tue, 15 Oct 2024 18:52:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t0me8-0006GF-Fr; Tue, 15 Oct 2024 18:51:52 +0000
-Received: by outflank-mailman (input) for mailman id 819318;
- Tue, 15 Oct 2024 18:51:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t0meN-0007za-2S; Tue, 15 Oct 2024 18:52:07 +0000
+Received: by outflank-mailman (input) for mailman id 819324;
+ Tue, 15 Oct 2024 18:52:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UOCu=RL=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
- id 1t0me8-0006G4-1O
- for xen-devel@lists.xenproject.org; Tue, 15 Oct 2024 18:51:52 +0000
+ id 1t0meL-0006Um-VZ
+ for xen-devel@lists.xenproject.org; Tue, 15 Oct 2024 18:52:05 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 87b3f433-8b26-11ef-a0be-8be0dac302b0;
- Tue, 15 Oct 2024 20:51:48 +0200 (CEST)
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 91367b3a-8b26-11ef-99a2-01e77a169b0f;
+ Tue, 15 Oct 2024 20:52:04 +0200 (CEST)
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-609-W4BbnW53NFSgTcugynJgoA-1; Tue, 15 Oct 2024 14:51:45 -0400
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-a9a1b8d4563so63830766b.3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Oct 2024 11:51:45 -0700 (PDT)
+ us-mta-637-E9Bfkn6SNtilpe5qOzaEpw-1; Tue, 15 Oct 2024 14:52:02 -0400
+Received: by mail-ed1-f72.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9452d6321so3556863a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Oct 2024 11:52:01 -0700 (PDT)
 Received: from eisenberg.fritz.box
  (200116b82d5d5a0006e2615320d1d4db.dip.versatel-1u1.de.
  [2001:16b8:2d5d:5a00:6e2:6153:20d1:d4db])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c98d39a9a2sm974438a12.0.2024.10.15.11.51.39
+ 4fb4d7f45d1cf-5c98d39a9a2sm974438a12.0.2024.10.15.11.51.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 11:51:42 -0700 (PDT)
+ Tue, 15 Oct 2024 11:51:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 87b3f433-8b26-11ef-a0be-8be0dac302b0
+X-Inumbo-ID: 91367b3a-8b26-11ef-99a2-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1729018307;
+	s=mimecast20190719; t=1729018323;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=SU/PZdKXdnBqqSwxJC6QaxHUkhQ/Rh93i2Z0bgmQYHg=;
-	b=Ejkq3oCeQzRplWK1Ber+4RfhZGByV6RiGnFDCSvpfXjLFY9pClZKGC52zyWsLdhvvB+s51
-	UHL1rnJZabAV7Pgveri2vCyOZkFysoN9r+n2GvI8cDIOPC6aI0Svd7pkwH1P/RA71e/uYW
-	yZusZ581e2AesVmPmgLs1RwWx2grLUE=
-X-MC-Unique: W4BbnW53NFSgTcugynJgoA-1
+	bh=i/tiT1oHv++iZFY5S8iNVJ0nRwrLe5bjQFEltGuWg0g=;
+	b=euys1lBaWimYuPsd3pATiacwxgC2qFxyGWDsXYK/V38esHI/+7PjfaXSTb7XaAEbI9KxZN
+	cdAEcHKYEjlvVvGtB1y8DCMogi4vPBwZaCQnZSLVJJ6WJkpxFFXJPNz6xW7+96ZHgLjdfq
+	yIV9P30GjV6yFEZWOXEXWkZK/bTeKQ8=
+X-MC-Unique: E9Bfkn6SNtilpe5qOzaEpw-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729018304; x=1729623104;
+        d=1e100.net; s=20230601; t=1729018321; x=1729623121;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SU/PZdKXdnBqqSwxJC6QaxHUkhQ/Rh93i2Z0bgmQYHg=;
-        b=WMHhaNlRi6KX++9SC0pTxtrMWO/nayfpADdXmFCF6Li5ZESAhcZAVj3l07N7YKKW0I
-         yu4qOaKCSu3cc3svWUPRm4iJJriq14Y5GYPCUaFaJRxcpaT5V2qjZivJge1TNN/TRRnf
-         vkGAoZM/82TUQ49DAYho9u+kYfHVYWGIRkQPmh5n+3HHTsmBiygnmz4pPyRpg0RZATGz
-         W4f0qieJn7g5LZg++q692VnZQTA3HP2x6O3ZjJjT4kKmhbE7rNNLfgT03lL5xVqiDokH
-         ihn+3412fWR94bjGjaTfgGZfTHsdYBDtVV6yFUXpxe6t9pxs9+k406wmdM2xGMZRefgY
-         Vu6w==
-X-Forwarded-Encrypted: i=1; AJvYcCWb8CTmH5B+60tAbf7n4q4h0rwa5yxrSFAocjm1x+ptX/xwkpu8/CGcT5umXvOEHjAnDjn7CpQO95Q=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxYBEXHoq13OxHpF/bj2IO2ddaHTgvkRl25S2/eDtjXVsAap0Rc
-	N6tOqGY9u7UuRztLNi5T1ab2HTSmQMu+4be9WJ9MQNIZ+ztCBd4bvD5eaQW4ySgxlcmsB064hPF
-	oxmAle1sF6DNPzBPofnCedy1nFohpDquxLSR0rSLpocKYCchMoJ4/nGRUfPlT4pO6
-X-Received: by 2002:a05:6402:26d1:b0:5c5:da5e:68e with SMTP id 4fb4d7f45d1cf-5c95ac09876mr18284551a12.3.1729018303813;
-        Tue, 15 Oct 2024 11:51:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHZgBAdLrLu4wVCTKTVra2bi/zOy1A/yhu7xkqftgD6kovhQdMFl3ZjsIezqx0bvqyWUCvsqg==
-X-Received: by 2002:a05:6402:26d1:b0:5c5:da5e:68e with SMTP id 4fb4d7f45d1cf-5c95ac09876mr18284485a12.3.1729018303219;
-        Tue, 15 Oct 2024 11:51:43 -0700 (PDT)
+        bh=i/tiT1oHv++iZFY5S8iNVJ0nRwrLe5bjQFEltGuWg0g=;
+        b=jFTX4O6dnM1ebrFjyQJskR9im9STL5WJqpLIrBWve0rPQW8H9jiRZ5h3XnwNgNCYdI
+         zC05wSKYyHpVTejPneJcn0j30DJkrvtLwlMz5uHLiG/f2U+DRCC4TMP71Jw3MBoMgqkd
+         03rVRVj4bC4qJGgE+qJDTnMA7RjDgdVYZKSeCqRQTdlFL21KXLY2xcZRNJ/OJyDxkzb9
+         0oOZ7ngAY9ipn5w+JsIbOi0iuzUCjBV7vnclg5tcrubtYKxtOV6UIGXivcG2WuKtrvin
+         kyFVeV3Q49WfVsFR+b3bEU+c158DVe7BQrCs7iv5dEp0w/hMj2RhMPLyM+YkOZ1c6b1o
+         Ul+A==
+X-Forwarded-Encrypted: i=1; AJvYcCVKbY+Wza7K3WIRN99ImhpOIKDPrKQa4TZZql0kmVgedSaa3as80GDxaV21PJ2WtcYtmQRasJEnydQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyz0zDowUMOwFR11fS7mgkGgJShDOLt02DwnG01wf5w2lRXnxSm
+	+6gdWf5kru4n6oe85/Jr8H+N6MujpIP2Yg5wOcwB3ylz6AVPgY6xfE1GeLeqm0C1i7N4AH6zR7F
+	jxPsyt2YQe/yT9ksydGPM7qzqbtemrMHHVMS1Q3bFe5MZgr9IHdYy5iL8qhz05bnn
+X-Received: by 2002:a05:6402:42ca:b0:5c9:8584:12ae with SMTP id 4fb4d7f45d1cf-5c9858414famr4855326a12.29.1729018320676;
+        Tue, 15 Oct 2024 11:52:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHNUSaZzJFpcnbAyxu8SUqVbgRkCBc+0eZafkjjXXKs5iCySMs2In3PqmEp1mZm07oblnaLMw==
+X-Received: by 2002:a05:6402:42ca:b0:5c9:8584:12ae with SMTP id 4fb4d7f45d1cf-5c9858414famr4855284a12.29.1729018320158;
+        Tue, 15 Oct 2024 11:52:00 -0700 (PDT)
 From: Philipp Stanner <pstanner@redhat.com>
 To: Damien Le Moal <dlemoal@kernel.org>,
 	Niklas Cassel <cassel@kernel.org>,
@@ -153,9 +153,9 @@ Cc: linux-ide@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-sound@vger.kernel.org
-Subject: [PATCH 01/13] PCI: Prepare removing devres from pci_intx()
-Date: Tue, 15 Oct 2024 20:51:11 +0200
-Message-ID: <20241015185124.64726-2-pstanner@redhat.com>
+Subject: [PATCH 06/13] misc: Use never-managed version of pci_intx()
+Date: Tue, 15 Oct 2024 20:51:16 +0200
+Message-ID: <20241015185124.64726-7-pstanner@redhat.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241015185124.64726-1-pstanner@redhat.com>
 References: <20241015185124.64726-1-pstanner@redhat.com>
@@ -165,142 +165,65 @@ X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
 
-pci_intx() is a hybrid function which sometimes performs devres
-operations, depending on whether pcim_enable_device() has been used to
-enable the pci_dev. This sometimes-managed nature of the function is
-problematic. Notably, it causes the function to allocate under some
-circumstances which makes it unusable from interrupt context.
+pci_intx() is a hybrid function which can sometimes be managed through
+devres. To remove this hybrid nature from pci_intx(), it is necessary to
+port users to either an always-managed or a never-managed version.
 
-To, ultimately, remove the hybrid nature from pci_intx(), it is first
-necessary to provide an always-managed and a never-managed version
-of that function. Then, all callers of pci_intx() can be ported to the
-version they need, depending whether they use pci_enable_device() or
-pcim_enable_device().
+cardreader/rtsx_pcr.c and tifm_7xx1.c enable their PCI-Device with
+pci_enable_device(). Thus, they need the never-managed version.
 
-An always-managed function exists, namely pcim_intx(), for which
-__pcim_intx(), a never-managed version of pci_intx() had been
-implemented.
-
-Make __pcim_intx() a public function under the name
-pci_intx_unmanaged(). Make pcim_intx() a public function.
+Replace pci_intx() with pci_intx_unmanaged().
 
 Signed-off-by: Philipp Stanner <pstanner@redhat.com>
-Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 ---
- drivers/pci/devres.c | 24 +++---------------------
- drivers/pci/pci.c    | 28 ++++++++++++++++++++++++++++
- include/linux/pci.h  |  2 ++
- 3 files changed, 33 insertions(+), 21 deletions(-)
+ drivers/misc/cardreader/rtsx_pcr.c | 2 +-
+ drivers/misc/tifm_7xx1.c           | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/pci/devres.c b/drivers/pci/devres.c
-index b133967faef8..d32827a1f2f4 100644
---- a/drivers/pci/devres.c
-+++ b/drivers/pci/devres.c
-@@ -411,31 +411,12 @@ static inline bool mask_contains_bar(int mask, int bar)
- 	return mask & BIT(bar);
- }
+diff --git a/drivers/misc/cardreader/rtsx_pcr.c b/drivers/misc/cardreader/rtsx_pcr.c
+index be3d4e0e50cc..e25e6d560dd7 100644
+--- a/drivers/misc/cardreader/rtsx_pcr.c
++++ b/drivers/misc/cardreader/rtsx_pcr.c
+@@ -1057,7 +1057,7 @@ static int rtsx_pci_acquire_irq(struct rtsx_pcr *pcr)
+ 	}
  
--/*
-- * This is a copy of pci_intx() used to bypass the problem of recursive
-- * function calls due to the hybrid nature of pci_intx().
-- */
--static void __pcim_intx(struct pci_dev *pdev, int enable)
--{
--	u16 pci_command, new;
--
--	pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
--
--	if (enable)
--		new = pci_command & ~PCI_COMMAND_INTX_DISABLE;
--	else
--		new = pci_command | PCI_COMMAND_INTX_DISABLE;
--
--	if (new != pci_command)
--		pci_write_config_word(pdev, PCI_COMMAND, new);
--}
--
- static void pcim_intx_restore(struct device *dev, void *data)
- {
- 	struct pci_dev *pdev = to_pci_dev(dev);
- 	struct pcim_intx_devres *res = data;
- 
--	__pcim_intx(pdev, res->orig_intx);
-+	pci_intx_unmanaged(pdev, res->orig_intx);
- }
- 
- static struct pcim_intx_devres *get_or_create_intx_devres(struct device *dev)
-@@ -472,10 +453,11 @@ int pcim_intx(struct pci_dev *pdev, int enable)
- 		return -ENOMEM;
- 
- 	res->orig_intx = !enable;
--	__pcim_intx(pdev, enable);
-+	pci_intx_unmanaged(pdev, enable);
+ 	pcr->irq = pcr->pci->irq;
+-	pci_intx(pcr->pci, !pcr->msi_en);
++	pci_intx_unmanaged(pcr->pci, !pcr->msi_en);
  
  	return 0;
  }
-+EXPORT_SYMBOL_GPL(pcim_intx);
- 
- static void pcim_disable_device(void *pdev_raw)
- {
-diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
-index 7d85c04fbba2..d7fd0772a885 100644
---- a/drivers/pci/pci.c
-+++ b/drivers/pci/pci.c
-@@ -4476,6 +4476,34 @@ void pci_disable_parity(struct pci_dev *dev)
+diff --git a/drivers/misc/tifm_7xx1.c b/drivers/misc/tifm_7xx1.c
+index 1d54680d6ed2..5f9c7ccae8d2 100644
+--- a/drivers/misc/tifm_7xx1.c
++++ b/drivers/misc/tifm_7xx1.c
+@@ -327,7 +327,7 @@ static int tifm_7xx1_probe(struct pci_dev *dev,
+ 		goto err_out;
  	}
- }
  
-+/**
-+ * pci_intx - enables/disables PCI INTx for device dev, unmanaged version
-+ * @pdev: the PCI device to operate on
-+ * @enable: boolean: whether to enable or disable PCI INTx
-+ *
-+ * Enables/disables PCI INTx for device @pdev
-+ *
-+ * This function behavios identically to pci_intx(), but is never managed with
-+ * devres.
-+ */
-+void pci_intx_unmanaged(struct pci_dev *pdev, int enable)
-+{
-+	u16 pci_command, new;
-+
-+	pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
-+
-+	if (enable)
-+		new = pci_command & ~PCI_COMMAND_INTX_DISABLE;
-+	else
-+		new = pci_command | PCI_COMMAND_INTX_DISABLE;
-+
-+	if (new == pci_command)
-+		return;
-+
-+	pci_write_config_word(pdev, PCI_COMMAND, new);
-+}
-+EXPORT_SYMBOL_GPL(pci_intx_unmanaged);
-+
- /**
-  * pci_intx - enables/disables PCI INTx for device dev
-  * @pdev: the PCI device to operate on
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 573b4c4c2be6..6b8cde76d564 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -1353,6 +1353,7 @@ int __must_check pcim_set_mwi(struct pci_dev *dev);
- int pci_try_set_mwi(struct pci_dev *dev);
- void pci_clear_mwi(struct pci_dev *dev);
- void pci_disable_parity(struct pci_dev *dev);
-+void pci_intx_unmanaged(struct pci_dev *pdev, int enable);
- void pci_intx(struct pci_dev *dev, int enable);
- bool pci_check_and_mask_intx(struct pci_dev *dev);
- bool pci_check_and_unmask_intx(struct pci_dev *dev);
-@@ -2293,6 +2294,7 @@ static inline void pci_fixup_device(enum pci_fixup_pass pass,
- 				    struct pci_dev *dev) { }
- #endif
+-	pci_intx(dev, 1);
++	pci_intx_unmanaged(dev, 1);
  
-+int pcim_intx(struct pci_dev *pdev, int enabled);
- void __iomem *pcim_iomap(struct pci_dev *pdev, int bar, unsigned long maxlen);
- void __iomem *pcim_iomap_region(struct pci_dev *pdev, int bar,
- 				const char *name);
+ 	fm = tifm_alloc_adapter(dev->device == PCI_DEVICE_ID_TI_XX21_XX11_FM
+ 				? 4 : 2, &dev->dev);
+@@ -368,7 +368,7 @@ static int tifm_7xx1_probe(struct pci_dev *dev,
+ err_out_free:
+ 	tifm_free_adapter(fm);
+ err_out_int:
+-	pci_intx(dev, 0);
++	pci_intx_unmanaged(dev, 0);
+ 	pci_release_regions(dev);
+ err_out:
+ 	if (!pci_dev_busy)
+@@ -392,7 +392,7 @@ static void tifm_7xx1_remove(struct pci_dev *dev)
+ 		tifm_7xx1_sock_power_off(tifm_7xx1_sock_addr(fm->addr, cnt));
+ 
+ 	iounmap(fm->addr);
+-	pci_intx(dev, 0);
++	pci_intx_unmanaged(dev, 0);
+ 	pci_release_regions(dev);
+ 
+ 	pci_disable_device(dev);
 -- 
 2.47.0
 
