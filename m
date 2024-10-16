@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A4AD1AD2E
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:22:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.819756.1233211 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3AD2D1AD33
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:22:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.819760.1233255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10EP-0001UG-Cx; Wed, 16 Oct 2024 09:22:13 +0000
+	id 1t10EW-0002ry-S2; Wed, 16 Oct 2024 09:22:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 819756.1233211; Wed, 16 Oct 2024 09:22:13 +0000
+Received: by outflank-mailman (output) from mailman id 819760.1233255; Wed, 16 Oct 2024 09:22:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10EP-0001Su-8S; Wed, 16 Oct 2024 09:22:13 +0000
-Received: by outflank-mailman (input) for mailman id 819756;
- Wed, 16 Oct 2024 09:22:10 +0000
+	id 1t10EW-0002rT-Oy; Wed, 16 Oct 2024 09:22:20 +0000
+Received: by outflank-mailman (input) for mailman id 819760;
+ Wed, 16 Oct 2024 09:22:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zOTK=RM=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1t10EM-0001Po-Ss
- for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:10 +0000
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [2a00:1450:4864:20::232])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1e4cb635-8ba0-11ef-99a3-01e77a169b0f;
- Wed, 16 Oct 2024 11:22:09 +0200 (CEST)
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2fb559b0b00so22815681fa.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Oct 2024 02:22:09 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c98d7b735dsm1500429a12.81.2024.10.16.02.22.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 02:22:07 -0700 (PDT)
+ <SRS0=I0z3=RM=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
+ id 1t10EV-0001Po-69
+ for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:19 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 2337074b-8ba0-11ef-99a3-01e77a169b0f;
+ Wed, 16 Oct 2024 11:22:17 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 93092FEC;
+ Wed, 16 Oct 2024 02:22:46 -0700 (PDT)
+Received: from C3HXLD123V.arm.com (unknown [10.57.21.81])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5457F3F528;
+ Wed, 16 Oct 2024 02:22:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,230 +44,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1e4cb635-8ba0-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1729070528; x=1729675328; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=a7VcpN6y0URlDmG4dL4A6Jp+RGqHH6gYK9P+8EaJqbU=;
-        b=O8a09peI15Tqu5tarB83vv2VkJlMSbx+RNuuhQaBxmne4pCOyVsnYcgcFN0o08zizp
-         3AY/LcI1/JzWy0xhVURONIjqXH/xa5WGL5d1zeeBqx1Y8zdmOVnZkqpP5Ai6XXpv+sRx
-         +djRbbMjsWr4yiwDLo0gWPvUZkdo1KaoSuUaQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729070528; x=1729675328;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=a7VcpN6y0URlDmG4dL4A6Jp+RGqHH6gYK9P+8EaJqbU=;
-        b=wMv3byJeUR9p1vDGzkkWnmZ6vtsAFXMJAjSRZacCVXI40gZLy1n4jveqZaf/rrQsR0
-         s7ePTUzooQlb9HWJM64pT3r96vqCMMP7m1CRNjGQYStYHhitji7VwToGx42rm2tg009v
-         SX/NewKNXz/+1LNgxPtFNS7PrI0ibRLguH+CtZWOy+s0A5RCA3+A8Ml+M3/+9CbCkRd5
-         opMwHmM3hzK/rK3gQN1vL5hTFuLDfCMsVCQjezT2cAn3Va88N4Mj7HbrjQdzFhJYZ/eV
-         12Mqh5tQIPRrbwD+NX0cT5wRmmJxMuXFPmmGdjh8RnudxKwIqPCxFJfYRecuRUBjPQ0l
-         UhMQ==
-X-Gm-Message-State: AOJu0YwcazoalfEt1Nii3+bufV0aUzfkMEAYsVBATDqpRR+cZDWMXk7w
-	QyRTpCqOh1nxD9JsLXEmxq8s44Dx9cEkDN4QYv6tcRvY6nqUAAgsnNU/mxjFKvWjHdp8YmR1xzU
-	2
-X-Google-Smtp-Source: AGHT+IEOuhxjvaPkF0dYqQwfl81tkFDF31y8g8xuONjSKZq1ep8sAPuF7lVlLUs/1457fR1wsgjAFw==
-X-Received: by 2002:a2e:4609:0:b0:2fb:2bda:3872 with SMTP id 38308e7fff4ca-2fb3f31e022mr49194961fa.45.1729070528058;
-        Wed, 16 Oct 2024 02:22:08 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
+X-Inumbo-ID: 2337074b-8ba0-11ef-99a3-01e77a169b0f
+From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v5 2/5] x86/boot: Reuse code to relocate trampoline
-Date: Wed, 16 Oct 2024 10:21:51 +0100
-Message-Id: <20241016092154.1493035-3-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241016092154.1493035-1-frediano.ziglio@cloud.com>
-References: <20241016092154.1493035-1-frediano.ziglio@cloud.com>
+Cc: jens.wiklander@linaro.org,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [RFC PATCH 0/4] FF-A VM to VM support
+Date: Wed, 16 Oct 2024 11:21:54 +0200
+Message-ID: <cover.1729069025.git.bertrand.marquis@arm.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move code from efi-boot.h to a separate, new, reloc-trampoline.c file.
-Reuse this new code, compiling it for 32bit as well, to replace assembly
-code in head.S doing the same thing.
+This RFC serie is a first proposal to enable VM to VM communications
+through FF-A on Arm.
+It is sent as an RFC because some aspects of this serie will need to be
+discussed:
+- How to control/configure which VM can communicate with which VM
+- How to enable this without conflicting with Optee support
+- Would a system communicating with Optee without FF-A but using FF-A to
+  communicate between VM make any sense
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-Changes since v3:
-- fixed a typo in comment;
-- added Reviewed-by.
----
- xen/arch/x86/boot/Makefile           | 12 ++++++----
- xen/arch/x86/boot/build32.lds.S      |  5 ++++
- xen/arch/x86/boot/head.S             | 23 +-----------------
- xen/arch/x86/boot/reloc-trampoline.c | 36 ++++++++++++++++++++++++++++
- xen/arch/x86/efi/efi-boot.h          | 15 ++----------
- 5 files changed, 52 insertions(+), 39 deletions(-)
- create mode 100644 xen/arch/x86/boot/reloc-trampoline.c
+One main feature missing from this serie is the support for memory
+sharing or lending through FF-A. Implementing such a feature is raising
+the question of how to cleanly have FF-A mem sharing living on the side
+of Xen grantables.
 
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index c665a9b420..c57c9f83d3 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -1,12 +1,16 @@
- obj-bin-y += head.o
- obj-bin-y += built-in-32.o
-+obj-bin-y += $(obj64)
- 
- obj32 := cmdline.32.o
- obj32 += reloc.32.o
-+obj32 += reloc-trampoline.32.o
- 
--nocov-y   += $(obj32)
--noubsan-y += $(obj32)
--targets   += $(obj32)
-+obj64 := reloc-trampoline.o
-+
-+nocov-y   += $(obj32) $(obj64)
-+noubsan-y += $(obj32) $(obj64)
-+targets   += $(obj32) $(obj64)
- 
- obj32 := $(addprefix $(obj)/,$(obj32))
- 
-@@ -57,7 +61,7 @@ $(obj)/built-in-32.S: $(obj)/built-in-32.other.bin $(obj)/built-in-32.final.bin
- 		--bin1 $(obj)/built-in-32.other.bin \
- 		--bin2 $(obj)/built-in-32.final.bin \
- 		--map $(obj)/built-in-32.final.map \
--		--exports cmdline_parse_early,reloc \
-+		--exports cmdline_parse_early,reloc,reloc_trampoline32 \
- 		--output $@
- 
- clean-files := built-in-32.*.bin built-in-32.*.map build32.*.lds
-diff --git a/xen/arch/x86/boot/build32.lds.S b/xen/arch/x86/boot/build32.lds.S
-index e3f5e55261..fa282370f4 100644
---- a/xen/arch/x86/boot/build32.lds.S
-+++ b/xen/arch/x86/boot/build32.lds.S
-@@ -41,6 +41,11 @@ SECTIONS
-          * Potentially they should be all variables. */
-         DECLARE_IMPORT(__base_relocs_start);
-         DECLARE_IMPORT(__base_relocs_end);
-+        DECLARE_IMPORT(__trampoline_rel_start);
-+        DECLARE_IMPORT(__trampoline_rel_stop);
-+        DECLARE_IMPORT(__trampoline_seg_start);
-+        DECLARE_IMPORT(__trampoline_seg_stop);
-+        DECLARE_IMPORT(trampoline_phys);
-         . = . + GAP;
-         *(.text)
-         *(.text.*)
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index e0776e3896..ade2c5c43d 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -706,28 +706,7 @@ trampoline_setup:
-         mov     %edx, sym_offs(l1_bootmap)(%esi, %ecx, 8)
- 
-         /* Apply relocations to bootstrap trampoline. */
--        mov     sym_esi(trampoline_phys), %edx
--        lea     sym_esi(__trampoline_rel_start), %edi
--        lea     sym_esi(__trampoline_rel_stop), %ecx
--1:
--        mov     (%edi), %eax
--        add     %edx, (%edi, %eax)
--        add     $4,%edi
--
--        cmp     %ecx, %edi
--        jb      1b
--
--        /* Patch in the trampoline segment. */
--        shr     $4,%edx
--        lea     sym_esi(__trampoline_seg_start), %edi
--        lea     sym_esi(__trampoline_seg_stop), %ecx
--1:
--        mov     (%edi), %eax
--        mov     %dx, (%edi, %eax)
--        add     $4,%edi
--
--        cmp     %ecx, %edi
--        jb      1b
-+        call    reloc_trampoline32
- 
-         /* Do not parse command line on EFI platform here. */
-         cmpb    $0, sym_esi(efi_platform)
-diff --git a/xen/arch/x86/boot/reloc-trampoline.c b/xen/arch/x86/boot/reloc-trampoline.c
-new file mode 100644
-index 0000000000..0a74c1e75a
---- /dev/null
-+++ b/xen/arch/x86/boot/reloc-trampoline.c
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/compiler.h>
-+#include <xen/stdint.h>
-+#include <asm/trampoline.h>
-+
-+extern const int32_t __trampoline_rel_start[], __trampoline_rel_stop[];
-+extern const int32_t __trampoline_seg_start[], __trampoline_seg_stop[];
-+
-+#if defined(__i386__)
-+void reloc_trampoline32(void)
-+#elif defined (__x86_64__)
-+void reloc_trampoline64(void)
-+#else
-+#error Unknown architecture
-+#endif
-+{
-+    unsigned long phys = trampoline_phys;
-+    const int32_t *trampoline_ptr;
-+
-+    /*
-+     * Apply relocations to trampoline.
-+     *
-+     * This modifies the trampoline in place within Xen, so that it will
-+     * operate correctly when copied into place.
-+     */
-+    for ( trampoline_ptr = __trampoline_rel_start;
-+          trampoline_ptr < __trampoline_rel_stop;
-+          ++trampoline_ptr )
-+        *(uint32_t *)(*trampoline_ptr + (long)trampoline_ptr) += phys;
-+
-+    for ( trampoline_ptr = __trampoline_seg_start;
-+          trampoline_ptr < __trampoline_seg_stop;
-+          ++trampoline_ptr )
-+        *(uint16_t *)(*trampoline_ptr + (long)trampoline_ptr) = phys >> 4;
-+}
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index 94f3443364..1acceec471 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -103,27 +103,16 @@ static void __init efi_arch_relocate_image(unsigned long delta)
-     }
- }
- 
--extern const int32_t __trampoline_rel_start[], __trampoline_rel_stop[];
--extern const int32_t __trampoline_seg_start[], __trampoline_seg_stop[];
-+void reloc_trampoline64(void);
- 
- static void __init relocate_trampoline(unsigned long phys)
- {
--    const int32_t *trampoline_ptr;
--
-     trampoline_phys = phys;
- 
-     if ( !efi_enabled(EFI_LOADER) )
-         return;
- 
--    /* Apply relocations to trampoline. */
--    for ( trampoline_ptr = __trampoline_rel_start;
--          trampoline_ptr < __trampoline_rel_stop;
--          ++trampoline_ptr )
--        *(u32 *)(*trampoline_ptr + (long)trampoline_ptr) += phys;
--    for ( trampoline_ptr = __trampoline_seg_start;
--          trampoline_ptr < __trampoline_seg_stop;
--          ++trampoline_ptr )
--        *(u16 *)(*trampoline_ptr + (long)trampoline_ptr) = phys >> 4;
-+    reloc_trampoline64();
- }
- 
- static void __init place_string(u32 *addr, const char *s)
+This serie must be applied on top of [1] which introduces
+some rework of FF-A support required by this patch serie.
+
+!! This patch serie must no be merged !!
+
+[1] https://lore.kernel.org/xen-devel/cover.1729066788.git.bertrand.marquis@arm.com/
+
+Bertrand Marquis (4):
+  xen/arm: ffa: Introduce VM to VM support
+  xen/arm: ffa: Add buffer full notification support
+  xen/arm: ffa: Add indirect message between VM
+  xen/arm: ffa: Enable VM to VM without firmware
+
+ xen/arch/arm/tee/Kconfig        |  11 +++
+ xen/arch/arm/tee/ffa.c          |  11 +++
+ xen/arch/arm/tee/ffa_msg.c      |  96 +++++++++++++++++++--
+ xen/arch/arm/tee/ffa_notif.c    | 142 ++++++++++++++++++--------------
+ xen/arch/arm/tee/ffa_partinfo.c | 137 ++++++++++++++++++++++++------
+ xen/arch/arm/tee/ffa_private.h  |  25 ++++++
+ 6 files changed, 329 insertions(+), 93 deletions(-)
+
 -- 
-2.34.1
+2.47.0
 
 
