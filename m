@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE8FD1AD32
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A4AD1AD2E
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:22:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.819754.1233196 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.819756.1233211 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10EL-0001C8-QA; Wed, 16 Oct 2024 09:22:09 +0000
+	id 1t10EP-0001UG-Cx; Wed, 16 Oct 2024 09:22:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 819754.1233196; Wed, 16 Oct 2024 09:22:09 +0000
+Received: by outflank-mailman (output) from mailman id 819756.1233211; Wed, 16 Oct 2024 09:22:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10EL-0001C1-Mn; Wed, 16 Oct 2024 09:22:09 +0000
-Received: by outflank-mailman (input) for mailman id 819754;
- Wed, 16 Oct 2024 09:22:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t10EP-0001Su-8S; Wed, 16 Oct 2024 09:22:13 +0000
+Received: by outflank-mailman (input) for mailman id 819756;
+ Wed, 16 Oct 2024 09:22:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zOTK=RM=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1t10EJ-0001Bq-Rd
- for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:07 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1cfb6a3a-8ba0-11ef-a0be-8be0dac302b0;
- Wed, 16 Oct 2024 11:22:06 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-539e59dadebso5207882e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Oct 2024 02:22:06 -0700 (PDT)
+ id 1t10EM-0001Po-Ss
+ for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:10 +0000
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [2a00:1450:4864:20::232])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1e4cb635-8ba0-11ef-99a3-01e77a169b0f;
+ Wed, 16 Oct 2024 11:22:09 +0200 (CEST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2fb559b0b00so22815681fa.0
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Oct 2024 02:22:09 -0700 (PDT)
 Received: from fziglio-desktop.. ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c98d7b735dsm1500429a12.81.2024.10.16.02.22.05
+ 4fb4d7f45d1cf-5c98d7b735dsm1500429a12.81.2024.10.16.02.22.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 02:22:05 -0700 (PDT)
+ Wed, 16 Oct 2024 02:22:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,130 +47,229 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1cfb6a3a-8ba0-11ef-a0be-8be0dac302b0
+X-Inumbo-ID: 1e4cb635-8ba0-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1729070526; x=1729675326; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=h+uOIbnyYxZ/WLhPfKo8hVQOG+Rxo/yE/F0IsZGaydY=;
-        b=l2cuy58vKcX9FGuoPCMmkR2UiP27uh0K6qK5iSOFSD0MDcxZq/j6NvdTq5usELb/ta
-         Pzy5OBc2OiNZc0J+oWghP1I0X4gRNUWbkNQT/v+1BFynQFva6ckMc2e1mlQXISe0gn0W
-         PSWzrnfBXy8wXMJGgOUcvsMPRF6vLJsdr0LaQ=
+        d=cloud.com; s=cloud; t=1729070528; x=1729675328; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=a7VcpN6y0URlDmG4dL4A6Jp+RGqHH6gYK9P+8EaJqbU=;
+        b=O8a09peI15Tqu5tarB83vv2VkJlMSbx+RNuuhQaBxmne4pCOyVsnYcgcFN0o08zizp
+         3AY/LcI1/JzWy0xhVURONIjqXH/xa5WGL5d1zeeBqx1Y8zdmOVnZkqpP5Ai6XXpv+sRx
+         +djRbbMjsWr4yiwDLo0gWPvUZkdo1KaoSuUaQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729070526; x=1729675326;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=h+uOIbnyYxZ/WLhPfKo8hVQOG+Rxo/yE/F0IsZGaydY=;
-        b=kTplmYMhL7I7F2SU3+dXFxB409gvPOLsE3R+RNa3PIFLopIXrMEcauQYDNZMbDlEPk
-         GtzU4Imaa7q+RA128pEAhgrzDWNvnqRaBlWj5Da46OdsvnEYEKixvleE1+FmTUIgqiX7
-         M/O3xAfkACKxdpi3AnEGmzNFlV9bqe7j2RnK+xiUhss+iV2DN1xIs7z9ZOr4RjBl7loG
-         fXsO+GfoSesI1sAGywgCrf0E97z+BCc+DpETP3+zU21SELyr0m3YRZDayOwGjOZw/Eoy
-         dHeLzJP8TuE6i0MgeNTqCbfNP4SOsFLDJL82/gA1GWiLUJCdrrIIJFLpUZgGZbYaHe4R
-         WOzg==
-X-Gm-Message-State: AOJu0YxiqSpFtSNAibTuANpC1onSD0dIP/z9wQH9yagw+Y+ugdhXyuGd
-	wfDabrplH4jztMV05SSeU6JkDqdDPTTSh23F5QHdnrxqBXmGYYVmfrgWufP5VwWvY3zPtYkGLPa
-	z
-X-Google-Smtp-Source: AGHT+IE3kfc6ql6F3rMXWK2dycJ9PVsbboGylut87rU8ycpzzXulha+H48ehdThXLBWWR9CjMJwJwg==
-X-Received: by 2002:a05:6512:1283:b0:539:fcb7:8d53 with SMTP id 2adb3069b0e04-53a03f7cf60mr2115338e87.46.1729070526045;
-        Wed, 16 Oct 2024 02:22:06 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1729070528; x=1729675328;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=a7VcpN6y0URlDmG4dL4A6Jp+RGqHH6gYK9P+8EaJqbU=;
+        b=wMv3byJeUR9p1vDGzkkWnmZ6vtsAFXMJAjSRZacCVXI40gZLy1n4jveqZaf/rrQsR0
+         s7ePTUzooQlb9HWJM64pT3r96vqCMMP7m1CRNjGQYStYHhitji7VwToGx42rm2tg009v
+         SX/NewKNXz/+1LNgxPtFNS7PrI0ibRLguH+CtZWOy+s0A5RCA3+A8Ml+M3/+9CbCkRd5
+         opMwHmM3hzK/rK3gQN1vL5hTFuLDfCMsVCQjezT2cAn3Va88N4Mj7HbrjQdzFhJYZ/eV
+         12Mqh5tQIPRrbwD+NX0cT5wRmmJxMuXFPmmGdjh8RnudxKwIqPCxFJfYRecuRUBjPQ0l
+         UhMQ==
+X-Gm-Message-State: AOJu0YwcazoalfEt1Nii3+bufV0aUzfkMEAYsVBATDqpRR+cZDWMXk7w
+	QyRTpCqOh1nxD9JsLXEmxq8s44Dx9cEkDN4QYv6tcRvY6nqUAAgsnNU/mxjFKvWjHdp8YmR1xzU
+	2
+X-Google-Smtp-Source: AGHT+IEOuhxjvaPkF0dYqQwfl81tkFDF31y8g8xuONjSKZq1ep8sAPuF7lVlLUs/1457fR1wsgjAFw==
+X-Received: by 2002:a2e:4609:0:b0:2fb:2bda:3872 with SMTP id 38308e7fff4ca-2fb3f31e022mr49194961fa.45.1729070528058;
+        Wed, 16 Oct 2024 02:22:08 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v5 0/5] Reuse 32 bit C code more safely
-Date: Wed, 16 Oct 2024 10:21:49 +0100
-Message-Id: <20241016092154.1493035-1-frediano.ziglio@cloud.com>
+Subject: [PATCH v5 2/5] x86/boot: Reuse code to relocate trampoline
+Date: Wed, 16 Oct 2024 10:21:51 +0100
+Message-Id: <20241016092154.1493035-3-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241016092154.1493035-1-frediano.ziglio@cloud.com>
+References: <20241016092154.1493035-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series attempt to:
-- use more C code, that is replace some assembly code with C;
-- avoid some code duplication between C and assembly;
-- prevent some issues having relocations in C code.
+Move code from efi-boot.h to a separate, new, reloc-trampoline.c file.
+Reuse this new code, compiling it for 32bit as well, to replace assembly
+code in head.S doing the same thing.
 
-The idea is extending the current C to binary code conversion
-done for 32 bit C code called from head.S making sure relocations
-are safe and allowing external symbols usage from C code.
-
-More details of the implementation are in commit message 1/5,
-which is the largest patch.
-Patch 2/5 reuses code to relocate the trampoline between 32 and 64 bit.
-Patches 3/5 and 4/5 move some code from assembly to C.
-
-Other RFC commits were excluded, I didn't manage to entangle the issues
-sharing headers between 32 and 64 bits.
-Since RFC code was more tested, also with CI and some incompatibility
-were fixed. On that it's weird that we need Python 3.8 for Qemu but we
-still use Python 2 for Xen. Shouldn't we bump requirement to Python 3
-even for Xen?
-
-Code boots successfully using:
-- BIOS boot;
-- EFI boot with Grub2 and ELF file;
-- direct EFI boot without Grub.
-
-Code is currently based on "master" branch, currently commit
-3f6ee3db2e878398cfcde725399b4d1b04e92269.
-
-Changes since v1:
-- 2 preliminary commits for adjust .gitignore;
-- last commit split (one variable at a time);
-- lot of style and names changes;
-- first commit, now 3/6 had some build changes, more details on
-  commit message.
-
-Changes since v2:
-- removed merged commits;
-- reverted order of 2 commits;
-- remove some useless casts;
-- added change to comment.
-
+Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
 Changes since v3:
-- added a preparation commit for Makefiles (mainly written by Andrew Cooper);
-- added a comment improvement commit;
-- allows also data;
-- other minor style changes;
-- added some Reviewed-by.
-
-Changes since v4:
-- add build32.final.lds build32.other.lds to targets macro;
-- place some comments over a rule, not inside;
-- simplified linking and producing binary rule;
-- renamed built_in_32 to built-in-32, coding style;
-- fix minor indentation;
-- put magic numbers in Makefile and propagate them;
-- minor variable clanups in Python script;
-- add dependency to Python script.
-
-Frediano Ziglio (5):
-  x86/boot: create a C bundle for 32 bit boot code and use it
-  x86/boot: Reuse code to relocate trampoline
-  x86/boot: Use boot_vid_info variable directly from C code
-  x86/boot: Use trampoline_phys variable directly from C code
-  x86/boot: Clarify comment
-
- xen/arch/x86/boot/.gitignore                  |   5 +-
- xen/arch/x86/boot/Makefile                    |  51 +++-
- .../x86/boot/{build32.lds => build32.lds.S}   |  41 +++-
- xen/arch/x86/boot/cmdline.c                   |  12 -
- xen/arch/x86/boot/head.S                      |  49 +---
- xen/arch/x86/boot/reloc-trampoline.c          |  36 +++
- xen/arch/x86/boot/reloc.c                     |  35 +--
- xen/arch/x86/efi/efi-boot.h                   |  15 +-
- xen/tools/combine_two_binaries.py             | 218 ++++++++++++++++++
- 9 files changed, 348 insertions(+), 114 deletions(-)
- rename xen/arch/x86/boot/{build32.lds => build32.lds.S} (63%)
+- fixed a typo in comment;
+- added Reviewed-by.
+---
+ xen/arch/x86/boot/Makefile           | 12 ++++++----
+ xen/arch/x86/boot/build32.lds.S      |  5 ++++
+ xen/arch/x86/boot/head.S             | 23 +-----------------
+ xen/arch/x86/boot/reloc-trampoline.c | 36 ++++++++++++++++++++++++++++
+ xen/arch/x86/efi/efi-boot.h          | 15 ++----------
+ 5 files changed, 52 insertions(+), 39 deletions(-)
  create mode 100644 xen/arch/x86/boot/reloc-trampoline.c
- create mode 100755 xen/tools/combine_two_binaries.py
 
+diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
+index c665a9b420..c57c9f83d3 100644
+--- a/xen/arch/x86/boot/Makefile
++++ b/xen/arch/x86/boot/Makefile
+@@ -1,12 +1,16 @@
+ obj-bin-y += head.o
+ obj-bin-y += built-in-32.o
++obj-bin-y += $(obj64)
+ 
+ obj32 := cmdline.32.o
+ obj32 += reloc.32.o
++obj32 += reloc-trampoline.32.o
+ 
+-nocov-y   += $(obj32)
+-noubsan-y += $(obj32)
+-targets   += $(obj32)
++obj64 := reloc-trampoline.o
++
++nocov-y   += $(obj32) $(obj64)
++noubsan-y += $(obj32) $(obj64)
++targets   += $(obj32) $(obj64)
+ 
+ obj32 := $(addprefix $(obj)/,$(obj32))
+ 
+@@ -57,7 +61,7 @@ $(obj)/built-in-32.S: $(obj)/built-in-32.other.bin $(obj)/built-in-32.final.bin
+ 		--bin1 $(obj)/built-in-32.other.bin \
+ 		--bin2 $(obj)/built-in-32.final.bin \
+ 		--map $(obj)/built-in-32.final.map \
+-		--exports cmdline_parse_early,reloc \
++		--exports cmdline_parse_early,reloc,reloc_trampoline32 \
+ 		--output $@
+ 
+ clean-files := built-in-32.*.bin built-in-32.*.map build32.*.lds
+diff --git a/xen/arch/x86/boot/build32.lds.S b/xen/arch/x86/boot/build32.lds.S
+index e3f5e55261..fa282370f4 100644
+--- a/xen/arch/x86/boot/build32.lds.S
++++ b/xen/arch/x86/boot/build32.lds.S
+@@ -41,6 +41,11 @@ SECTIONS
+          * Potentially they should be all variables. */
+         DECLARE_IMPORT(__base_relocs_start);
+         DECLARE_IMPORT(__base_relocs_end);
++        DECLARE_IMPORT(__trampoline_rel_start);
++        DECLARE_IMPORT(__trampoline_rel_stop);
++        DECLARE_IMPORT(__trampoline_seg_start);
++        DECLARE_IMPORT(__trampoline_seg_stop);
++        DECLARE_IMPORT(trampoline_phys);
+         . = . + GAP;
+         *(.text)
+         *(.text.*)
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index e0776e3896..ade2c5c43d 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -706,28 +706,7 @@ trampoline_setup:
+         mov     %edx, sym_offs(l1_bootmap)(%esi, %ecx, 8)
+ 
+         /* Apply relocations to bootstrap trampoline. */
+-        mov     sym_esi(trampoline_phys), %edx
+-        lea     sym_esi(__trampoline_rel_start), %edi
+-        lea     sym_esi(__trampoline_rel_stop), %ecx
+-1:
+-        mov     (%edi), %eax
+-        add     %edx, (%edi, %eax)
+-        add     $4,%edi
+-
+-        cmp     %ecx, %edi
+-        jb      1b
+-
+-        /* Patch in the trampoline segment. */
+-        shr     $4,%edx
+-        lea     sym_esi(__trampoline_seg_start), %edi
+-        lea     sym_esi(__trampoline_seg_stop), %ecx
+-1:
+-        mov     (%edi), %eax
+-        mov     %dx, (%edi, %eax)
+-        add     $4,%edi
+-
+-        cmp     %ecx, %edi
+-        jb      1b
++        call    reloc_trampoline32
+ 
+         /* Do not parse command line on EFI platform here. */
+         cmpb    $0, sym_esi(efi_platform)
+diff --git a/xen/arch/x86/boot/reloc-trampoline.c b/xen/arch/x86/boot/reloc-trampoline.c
+new file mode 100644
+index 0000000000..0a74c1e75a
+--- /dev/null
++++ b/xen/arch/x86/boot/reloc-trampoline.c
+@@ -0,0 +1,36 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/compiler.h>
++#include <xen/stdint.h>
++#include <asm/trampoline.h>
++
++extern const int32_t __trampoline_rel_start[], __trampoline_rel_stop[];
++extern const int32_t __trampoline_seg_start[], __trampoline_seg_stop[];
++
++#if defined(__i386__)
++void reloc_trampoline32(void)
++#elif defined (__x86_64__)
++void reloc_trampoline64(void)
++#else
++#error Unknown architecture
++#endif
++{
++    unsigned long phys = trampoline_phys;
++    const int32_t *trampoline_ptr;
++
++    /*
++     * Apply relocations to trampoline.
++     *
++     * This modifies the trampoline in place within Xen, so that it will
++     * operate correctly when copied into place.
++     */
++    for ( trampoline_ptr = __trampoline_rel_start;
++          trampoline_ptr < __trampoline_rel_stop;
++          ++trampoline_ptr )
++        *(uint32_t *)(*trampoline_ptr + (long)trampoline_ptr) += phys;
++
++    for ( trampoline_ptr = __trampoline_seg_start;
++          trampoline_ptr < __trampoline_seg_stop;
++          ++trampoline_ptr )
++        *(uint16_t *)(*trampoline_ptr + (long)trampoline_ptr) = phys >> 4;
++}
+diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
+index 94f3443364..1acceec471 100644
+--- a/xen/arch/x86/efi/efi-boot.h
++++ b/xen/arch/x86/efi/efi-boot.h
+@@ -103,27 +103,16 @@ static void __init efi_arch_relocate_image(unsigned long delta)
+     }
+ }
+ 
+-extern const int32_t __trampoline_rel_start[], __trampoline_rel_stop[];
+-extern const int32_t __trampoline_seg_start[], __trampoline_seg_stop[];
++void reloc_trampoline64(void);
+ 
+ static void __init relocate_trampoline(unsigned long phys)
+ {
+-    const int32_t *trampoline_ptr;
+-
+     trampoline_phys = phys;
+ 
+     if ( !efi_enabled(EFI_LOADER) )
+         return;
+ 
+-    /* Apply relocations to trampoline. */
+-    for ( trampoline_ptr = __trampoline_rel_start;
+-          trampoline_ptr < __trampoline_rel_stop;
+-          ++trampoline_ptr )
+-        *(u32 *)(*trampoline_ptr + (long)trampoline_ptr) += phys;
+-    for ( trampoline_ptr = __trampoline_seg_start;
+-          trampoline_ptr < __trampoline_seg_stop;
+-          ++trampoline_ptr )
+-        *(u16 *)(*trampoline_ptr + (long)trampoline_ptr) = phys >> 4;
++    reloc_trampoline64();
+ }
+ 
+ static void __init place_string(u32 *addr, const char *s)
 -- 
 2.34.1
 
