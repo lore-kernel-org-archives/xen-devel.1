@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5245D1AD33
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:27:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.819817.1233295 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3A35D1AD39
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:37:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.819852.1233306 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10Jb-0006wb-Dm; Wed, 16 Oct 2024 09:27:35 +0000
+	id 1t10Sz-0000w2-9g; Wed, 16 Oct 2024 09:37:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 819817.1233295; Wed, 16 Oct 2024 09:27:35 +0000
+Received: by outflank-mailman (output) from mailman id 819852.1233306; Wed, 16 Oct 2024 09:37:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10Jb-0006wU-BA; Wed, 16 Oct 2024 09:27:35 +0000
-Received: by outflank-mailman (input) for mailman id 819817;
- Wed, 16 Oct 2024 09:27:34 +0000
+	id 1t10Sz-0000vv-6f; Wed, 16 Oct 2024 09:37:17 +0000
+Received: by outflank-mailman (input) for mailman id 819852;
+ Wed, 16 Oct 2024 09:37:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=I0z3=RM=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1t10El-0001Bq-Qm
- for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:35 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 2bf1599a-8ba0-11ef-a0be-8be0dac302b0;
- Wed, 16 Oct 2024 11:22:32 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 507A9FEC;
- Wed, 16 Oct 2024 02:23:01 -0700 (PDT)
-Received: from C3HXLD123V.arm.com (unknown [10.57.21.81])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 683CF3F528;
- Wed, 16 Oct 2024 02:22:30 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=r+g5=RM=kernel.org=kvalo@srs-se1.protection.inumbo.net>)
+ id 1t10Sx-0000ua-En
+ for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:37:15 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 392c18c0-8ba2-11ef-a0be-8be0dac302b0;
+ Wed, 16 Oct 2024 11:37:14 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 43C17A43BC2;
+ Wed, 16 Oct 2024 09:37:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A83DEC4CECF;
+ Wed, 16 Oct 2024 09:37:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,158 +43,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2bf1599a-8ba0-11ef-a0be-8be0dac302b0
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: jens.wiklander@linaro.org,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [RFC PATCH 3/4] xen/arm: ffa: Add indirect message between VM
-Date: Wed, 16 Oct 2024 11:21:57 +0200
-Message-ID: <52d9809a114965832ee632756152d9125e93d4ea.1729069025.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <cover.1729069025.git.bertrand.marquis@arm.com>
-References: <cover.1729069025.git.bertrand.marquis@arm.com>
+X-Inumbo-ID: 392c18c0-8ba2-11ef-a0be-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1729071431;
+	bh=3qs9RCIcBMaiRaaQowBtUAYRplzqstMrihAHPPNLmDY=;
+	h=From:To:Cc:Subject:References:Date:In-Reply-To:From;
+	b=TKOX9/0GP1+lza5sQLTeaGorlh3MWnyZcXGq05D/f/GBd2opmS8ChUbAgJdPb/CZ1
+	 yn5rFWuoHPLLh+d3Tn7faqhBzYHFIRUNCjskSa+aHE7Hk+eHTbbOc5TCSh9q9iJ3uy
+	 ecD+a1d8UI2TkI22bqwo5dXLynEXWBDFQZqY5PiV0eO3UFpqqqMhVJV65YiRQTDMNj
+	 WP2usCFu0zlWexw7EVaqgNj9e/FFPneDaR8h9YjjAPmN4hPc1uAoQejPiORMJPvOU5
+	 CWaLZFgGsjhgxS13aQ+7ta5bJuOGaob/3dXOYCK3/wDOU6szpcWpgz4jJlrkWESsRr
+	 s45FfeYSH4aKw==
+From: Kalle Valo <kvalo@kernel.org>
+To: Philipp Stanner <pstanner@redhat.com>
+Cc: Damien Le Moal <dlemoal@kernel.org>,  Niklas Cassel <cassel@kernel.org>,
+  Sergey Shtylyov <s.shtylyov@omp.ru>,  Basavaraj Natikar
+ <basavaraj.natikar@amd.com>,  Jiri Kosina <jikos@kernel.org>,  Benjamin
+ Tissoires <bentiss@kernel.org>,  Arnd Bergmann <arnd@arndb.de>,  Greg
+ Kroah-Hartman <gregkh@linuxfoundation.org>,  Alex Dubov <oakad@yahoo.com>,
+  Sudarsana Kalluru <skalluru@marvell.com>,  Manish Chopra
+ <manishc@marvell.com>,  "David S. Miller" <davem@davemloft.net>,  Eric
+ Dumazet <edumazet@google.com>,  Jakub Kicinski <kuba@kernel.org>,  Paolo
+ Abeni <pabeni@redhat.com>,  Rasesh Mody <rmody@marvell.com>,
+  GR-Linux-NIC-Dev@marvell.com,  Igor Mitsyanko <imitsyanko@quantenna.com>,
+  Sergey Matyukevich <geomatsi@gmail.com>,  Sanjay R Mehta
+ <sanju.mehta@amd.com>,  Shyam Sundar S K <Shyam-sundar.S-k@amd.com>,  Jon
+ Mason <jdmason@kudzu.us>,  Dave Jiang <dave.jiang@intel.com>,  Allen Hubbe
+ <allenbh@gmail.com>,  Bjorn Helgaas <bhelgaas@google.com>,  Alex
+ Williamson <alex.williamson@redhat.com>,  Juergen Gross <jgross@suse.com>,
+  Stefano Stabellini <sstabellini@kernel.org>,  Oleksandr Tyshchenko
+ <oleksandr_tyshchenko@epam.com>,  Jaroslav Kysela <perex@perex.cz>,
+  Takashi Iwai <tiwai@suse.com>,  Chen Ni <nichen@iscas.ac.cn>,  Mario
+ Limonciello <mario.limonciello@amd.com>,  Ricky Wu <ricky_wu@realtek.com>,
+  Al Viro <viro@zeniv.linux.org.uk>,  Breno Leitao <leitao@debian.org>,
+  Kevin Tian <kevin.tian@intel.com>,  Thomas Gleixner <tglx@linutronix.de>,
+  Ilpo =?utf-8?Q?J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,  Andy
+ Shevchenko
+ <andriy.shevchenko@linux.intel.com>,  Mostafa Saleh <smostafa@google.com>,
+  Jason Gunthorpe <jgg@ziepe.ca>,  Yi Liu <yi.l.liu@intel.com>,  Christian
+ Brauner <brauner@kernel.org>,  Ankit Agrawal <ankita@nvidia.com>,  Eric
+ Auger <eric.auger@redhat.com>,  Reinette Chatre
+ <reinette.chatre@intel.com>,  Ye Bin <yebin10@huawei.com>,  Marek
+ =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+  Pierre-Louis
+ Bossart <pierre-louis.bossart@linux.dev>,  Peter Ujfalusi
+ <peter.ujfalusi@linux.intel.com>,  Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>,  Kai Vehmanen
+ <kai.vehmanen@linux.intel.com>,  Rui Salvaterra <rsalvaterra@gmail.com>,
+  linux-ide@vger.kernel.org,  linux-kernel@vger.kernel.org,
+  linux-input@vger.kernel.org,  netdev@vger.kernel.org,
+  linux-wireless@vger.kernel.org,  ntb@lists.linux.dev,
+  linux-pci@vger.kernel.org,  kvm@vger.kernel.org,
+  xen-devel@lists.xenproject.org,  linux-sound@vger.kernel.org
+Subject: Re: [PATCH 10/13] wifi: qtnfmac: use always-managed version of
+ pcim_intx()
+References: <20241015185124.64726-1-pstanner@redhat.com>
+	<20241015185124.64726-11-pstanner@redhat.com>
+Date: Wed, 16 Oct 2024 12:36:58 +0300
+In-Reply-To: <20241015185124.64726-11-pstanner@redhat.com> (Philipp Stanner's
+	message of "Tue, 15 Oct 2024 20:51:20 +0200")
+Message-ID: <87y12o4ced.fsf@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Add support for indirect messages between VMs.
-This is only enabled if CONFIG_FFA_VM_TO_VM is selected.
+Philipp Stanner <pstanner@redhat.com> writes:
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
- xen/arch/arm/tee/ffa_msg.c | 96 ++++++++++++++++++++++++++++++++++----
- 1 file changed, 88 insertions(+), 8 deletions(-)
+> pci_intx() is a hybrid function which can sometimes be managed through
+> devres. To remove this hybrid nature from pci_intx(), it is necessary to
+> port users to either an always-managed or a never-managed version.
+>
+> qtnfmac enables its PCI-Device with pcim_enable_device(). Thus, it needs
+> the always-managed version.
+>
+> Replace pci_intx() with pcim_intx().
+>
+> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
 
-diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
-index 335f246ba657..25f184a06546 100644
---- a/xen/arch/arm/tee/ffa_msg.c
-+++ b/xen/arch/arm/tee/ffa_msg.c
-@@ -95,9 +95,12 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
-     const struct ffa_part_msg_rxtx *src_msg;
-     uint16_t dst_id, src_id;
-     int32_t ret;
--
--    if ( !ffa_fw_supports_fid(FFA_MSG_SEND2) )
--        return FFA_RET_NOT_SUPPORTED;
-+#ifdef CONFIG_FFA_VM_TO_VM
-+    struct domain *dst_d;
-+    struct ffa_ctx *dst_ctx;
-+    struct ffa_part_msg_rxtx *dst_msg;
-+    int err;
-+#endif
- 
-     if ( !spin_trylock(&src_ctx->tx_lock) )
-         return FFA_RET_BUSY;
-@@ -106,10 +109,10 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
-     src_id = src_msg->send_recv_id >> 16;
-     dst_id = src_msg->send_recv_id & GENMASK(15,0);
- 
--    if ( src_id != ffa_get_vm_id(src_d) || !FFA_ID_IS_SECURE(dst_id) )
-+    if ( src_id != ffa_get_vm_id(src_d) )
-     {
-         ret = FFA_RET_INVALID_PARAMETERS;
--        goto out_unlock_tx;
-+        goto out;
-     }
- 
-     /* check source message fits in buffer */
-@@ -118,12 +121,89 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
-          src_msg->msg_offset < sizeof(struct ffa_part_msg_rxtx) )
-     {
-         ret = FFA_RET_INVALID_PARAMETERS;
--        goto out_unlock_tx;
-+        goto out;
-     }
- 
--    ret = ffa_simple_call(FFA_MSG_SEND2, ((uint32_t)src_id) << 16, 0, 0, 0);
-+    if ( FFA_ID_IS_SECURE(dst_id) )
-+    {
-+        /* Message for a secure partition */
-+        if ( !ffa_fw_supports_fid(FFA_MSG_SEND2) )
-+        {
-+            ret = FFA_RET_NOT_SUPPORTED;
-+            goto out;
-+        }
-+
-+        ret = ffa_simple_call(FFA_MSG_SEND2, ((uint32_t)src_id) << 16, 0, 0,
-+                              0);
-+        goto out;
-+    }
- 
--out_unlock_tx:
-+#ifndef CONFIG_FFA_VM_TO_VM
-+    ret = FFA_RET_INVALID_PARAMETERS;
-+#else
-+    /* Message for a VM */
-+    if ( dst_id == 0 )
-+    {
-+        /* FF-A ID 0 is the hypervisor, this is not valid */
-+        ret = FFA_RET_INVALID_PARAMETERS;
-+        goto out;
-+    }
-+
-+    /* This is also checking that dest is not src */
-+    err = rcu_lock_live_remote_domain_by_id(dst_id - 1, &dst_d);
-+    if ( err )
-+    {
-+        ret = FFA_RET_INVALID_PARAMETERS;
-+        goto out;
-+    }
-+
-+    if ( dst_d->arch.tee == NULL )
-+    {
-+        ret = FFA_RET_INVALID_PARAMETERS;
-+        goto out_unlock;
-+    }
-+
-+    dst_ctx = dst_d->arch.tee;
-+    if ( !dst_ctx->guest_vers )
-+    {
-+        ret = FFA_RET_INVALID_PARAMETERS;
-+        goto out_unlock;
-+    }
-+
-+    /* This also checks that destination has set a Rx buffer */
-+    ret = ffa_rx_acquire(dst_d);
-+    if ( ret )
-+        goto out_unlock;
-+
-+    /* we need to have enough space in the destination buffer */
-+    if ( dst_ctx->page_count * FFA_PAGE_SIZE <
-+            (sizeof(struct ffa_part_msg_rxtx) + src_msg->msg_size) )
-+    {
-+        ret = FFA_RET_NO_MEMORY;
-+        ffa_rx_release(dst_d);
-+        goto out_unlock;
-+    }
-+
-+    dst_msg = dst_ctx->rx;
-+
-+    /* prepare destination header */
-+    dst_msg->flags = 0;
-+    dst_msg->reserved = 0;
-+    dst_msg->msg_offset = sizeof(struct ffa_part_msg_rxtx);
-+    dst_msg->send_recv_id = src_msg->send_recv_id;
-+    dst_msg->msg_size = src_msg->msg_size;
-+
-+    memcpy(dst_ctx->rx + sizeof(struct ffa_part_msg_rxtx),
-+           src_ctx->tx + src_msg->msg_offset, src_msg->msg_size);
-+
-+    /* receiver rx buffer will be released by the receiver*/
-+
-+out_unlock:
-+    rcu_unlock_domain(dst_d);
-+    if ( !ret )
-+        ffa_raise_rx_buffer_full(dst_d);
-+#endif
-+out:
-     spin_unlock(&src_ctx->tx_lock);
-     return ret;
- }
+Feel free to take this via the PCI tree:
+
+Acked-by: Kalle Valo <kvalo@kernel.org>
+
 -- 
-2.47.0
+https://patchwork.kernel.org/project/linux-wireless/list/
 
+https://wireless.wiki.kernel.org/en/developers/documentation/submittingpatches
 
