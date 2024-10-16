@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FFED1AD33
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:22:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.819759.1233245 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803C1D1AD33
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:23:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.819768.1233266 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10ER-0002KE-Lr; Wed, 16 Oct 2024 09:22:15 +0000
+	id 1t10Eh-0003us-50; Wed, 16 Oct 2024 09:22:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 819759.1233245; Wed, 16 Oct 2024 09:22:15 +0000
+Received: by outflank-mailman (output) from mailman id 819768.1233266; Wed, 16 Oct 2024 09:22:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10ER-0002Jf-D4; Wed, 16 Oct 2024 09:22:15 +0000
-Received: by outflank-mailman (input) for mailman id 819759;
- Wed, 16 Oct 2024 09:22:14 +0000
+	id 1t10Eh-0003ul-1C; Wed, 16 Oct 2024 09:22:31 +0000
+Received: by outflank-mailman (input) for mailman id 819768;
+ Wed, 16 Oct 2024 09:22:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zOTK=RM=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1t10EP-0001Bq-R5
- for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:13 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 204cab70-8ba0-11ef-a0be-8be0dac302b0;
- Wed, 16 Oct 2024 11:22:13 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a993a6348e0so475946166b.1
- for <xen-devel@lists.xenproject.org>; Wed, 16 Oct 2024 02:22:13 -0700 (PDT)
-Received: from fziglio-desktop.. ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c98d7b735dsm1500429a12.81.2024.10.16.02.22.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 02:22:11 -0700 (PDT)
+ <SRS0=I0z3=RM=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
+ id 1t10Ef-0001Bq-PT
+ for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:29 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 2a1b3bed-8ba0-11ef-a0be-8be0dac302b0;
+ Wed, 16 Oct 2024 11:22:29 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3F283FEC;
+ Wed, 16 Oct 2024 02:22:58 -0700 (PDT)
+Received: from C3HXLD123V.arm.com (unknown [10.57.21.81])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6076B3F528;
+ Wed, 16 Oct 2024 02:22:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,68 +44,258 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 204cab70-8ba0-11ef-a0be-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1729070532; x=1729675332; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/R9IwC5Rg/1YFlZU2XC6OhmnY2lp5++tA2yhEvcFGMk=;
-        b=VYXDCk2HCNtqZlXAtA1bxlq7cu8p27aslkiwWZf8BS0nZ2du1+aTD0tbhpUk3GRsJK
-         nmxOrla8hVpm31xc7wNTWfeSB5bNn9PPXdc0sjNd8B0d5mRm8llDRk70qYak0RBjEcz3
-         44n+H3TKErMU1tu/li6gHErjLz8kw5lsw6KMk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729070532; x=1729675332;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/R9IwC5Rg/1YFlZU2XC6OhmnY2lp5++tA2yhEvcFGMk=;
-        b=UN8vDgMKdU5nBU/ucDpJ8KlPYX31UsWp+2YOQ0AjTNSU977CPZp8aX5sloH+I7ZNbR
-         7amjRlp2CLDZKs5QrIEiEtLlqnsAJtla8HHQuaJMMqfPhfpiQtiZatXc8XpwiKwLOltK
-         P5jm9w8Km3pdSaQTkam2FH0ar4owooQAQBsgsNif0CAtUBAtSMOe+mt2zF4GgKysiYfa
-         MwThcXMl7/GeAgRzP5uGBAQH0KvwVWZ2Te/h7ZBYuHoVYUs34ZImcIq4OB+9rZyyZFdb
-         boBo+jbYaWQW1s1gatt12bz+6d5pgM+wV0XoX1ZITPAAndLQSkhP5WXLAE3FqjDu+90D
-         hc+w==
-X-Gm-Message-State: AOJu0Yydoq25646soZi55UeLoe7OKCh9DT5bwwhINtd/WyYmb43BiIh9
-	MjgXzBFnq2ZsGddrT2fpLKlC8VKJEpdU98wxa/YniAkUclAQ6i0HzOcrCbo7vg/1tMX+ia3E6Jg
-	Y
-X-Google-Smtp-Source: AGHT+IGPaXjFGGU05T4tItHMIKTuFU+ttj1/IJDwwxBlRLTFSP9/0FAys/YPdmjcNmjqw2XbKevvGw==
-X-Received: by 2002:a05:6402:3510:b0:5c9:5aac:c622 with SMTP id 4fb4d7f45d1cf-5c95ac09918mr23962555a12.5.1729070531754;
-        Wed, 16 Oct 2024 02:22:11 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
+X-Inumbo-ID: 2a1b3bed-8ba0-11ef-a0be-8be0dac302b0
+From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 5/5] x86/boot: Clarify comment
-Date: Wed, 16 Oct 2024 10:21:54 +0100
-Message-Id: <20241016092154.1493035-6-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241016092154.1493035-1-frediano.ziglio@cloud.com>
-References: <20241016092154.1493035-1-frediano.ziglio@cloud.com>
+Cc: jens.wiklander@linaro.org,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [RFC PATCH 1/4] xen/arm: ffa: Introduce VM to VM support
+Date: Wed, 16 Oct 2024 11:21:55 +0200
+Message-ID: <0475e48ace0acd862224e7ff628d11db94392871.1729069025.git.bertrand.marquis@arm.com>
+X-Mailer: git-send-email 2.47.0
+In-Reply-To: <cover.1729069025.git.bertrand.marquis@arm.com>
+References: <cover.1729069025.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
- xen/arch/x86/boot/reloc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Create a CONFIG_FFA_VM_TO_VM parameter to activate FFA communication
+between VMs.
+When activated list VMs in the system with FF-A support in part_info_get.
 
-diff --git a/xen/arch/x86/boot/reloc.c b/xen/arch/x86/boot/reloc.c
-index e50e161b27..e725cfb6eb 100644
---- a/xen/arch/x86/boot/reloc.c
-+++ b/xen/arch/x86/boot/reloc.c
-@@ -65,7 +65,7 @@ typedef struct memctx {
+WARNING: There is no filtering for now and all VMs are listed !!
+
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+ xen/arch/arm/tee/Kconfig        |  11 +++
+ xen/arch/arm/tee/ffa_partinfo.c | 135 ++++++++++++++++++++++++++------
+ xen/arch/arm/tee/ffa_private.h  |  12 +++
+ 3 files changed, 135 insertions(+), 23 deletions(-)
+
+diff --git a/xen/arch/arm/tee/Kconfig b/xen/arch/arm/tee/Kconfig
+index c5b0f88d7522..88a4c4c99154 100644
+--- a/xen/arch/arm/tee/Kconfig
++++ b/xen/arch/arm/tee/Kconfig
+@@ -28,5 +28,16 @@ config FFA
+ 
+ 	  [1] https://developer.arm.com/documentation/den0077/latest
+ 
++config FFA_VM_TO_VM
++    bool "Enable FF-A between VMs (UNSUPPORTED)" if UNSUPPORTED
++    default n
++    depends on FFA
++    help
++      This option enables to use FF-A between VMs.
++      This is experimental and there is no access control so any
++      guest can communicate with any other guest.
++
++      If unsure, say N.
++
+ endmenu
+ 
+diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
+index fde187dba4e5..d699a267cc76 100644
+--- a/xen/arch/arm/tee/ffa_partinfo.c
++++ b/xen/arch/arm/tee/ffa_partinfo.c
+@@ -77,7 +77,21 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+     };
+     uint32_t src_size, dst_size;
+     void *dst_buf;
+-    uint32_t ffa_sp_count = 0;
++    uint32_t ffa_vm_count = 0, ffa_sp_count = 0;
++#ifdef CONFIG_FFA_VM_TO_VM
++    struct domain *dom;
++
++    /* Count the number of VM with FF-A support */
++    rcu_read_lock(&domlist_read_lock);
++    for_each_domain( dom )
++    {
++        struct ffa_ctx *vm = dom->arch.tee;
++
++        if (dom != d && vm != NULL && vm->guest_vers != 0)
++            ffa_vm_count++;
++    }
++    rcu_read_unlock(&domlist_read_lock);
++#endif
+ 
      /*
-      * Simple bump allocator.
-      *
--     * It starts from the base of the trampoline and allocates downwards.
-+     * It starts on top of space reserved for the trampoline and allocates downwards.
-      */
-     uint32_t ptr;
- } memctx;
+      * If the guest is v1.0, he does not get back the entry size so we must
+@@ -127,33 +141,38 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+ 
+     dst_buf = ctx->rx;
+ 
+-    if ( !ffa_rx )
++    /* If not supported, we have ffa_sp_count=0 */
++    if ( ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
+     {
+-        ret = FFA_RET_DENIED;
+-        goto out_rx_release;
+-    }
++        if ( !ffa_rx )
++        {
++            ret = FFA_RET_DENIED;
++            goto out_rx_release;
++        }
+ 
+-    spin_lock(&ffa_rx_buffer_lock);
++        spin_lock(&ffa_rx_buffer_lock);
+ 
+-    ret = ffa_partition_info_get(uuid, 0, &ffa_sp_count, &src_size);
++        ret = ffa_partition_info_get(uuid, 0, &ffa_sp_count, &src_size);
+ 
+-    if ( ret )
+-        goto out_rx_hyp_unlock;
++        if ( ret )
++            goto out_rx_hyp_unlock;
+ 
+-    /*
+-     * ffa_partition_info_get() succeeded so we now own the RX buffer we
+-     * share with the SPMC. We must give it back using ffa_hyp_rx_release()
+-     * once we've copied the content.
+-     */
++        /*
++         * ffa_partition_info_get() succeeded so we now own the RX buffer we
++         * share with the SPMC. We must give it back using ffa_hyp_rx_release()
++         * once we've copied the content.
++         */
+ 
+-    /* we cannot have a size smaller than 1.0 structure */
+-    if ( src_size < sizeof(struct ffa_partition_info_1_0) )
+-    {
+-        ret = FFA_RET_NOT_SUPPORTED;
+-        goto out_rx_hyp_release;
++        /* we cannot have a size smaller than 1.0 structure */
++        if ( src_size < sizeof(struct ffa_partition_info_1_0) )
++        {
++            ret = FFA_RET_NOT_SUPPORTED;
++            goto out_rx_hyp_release;
++        }
+     }
+ 
+-    if ( ctx->page_count * FFA_PAGE_SIZE < ffa_sp_count * dst_size )
++    if ( ctx->page_count * FFA_PAGE_SIZE <
++         (ffa_sp_count + ffa_vm_count) * dst_size )
+     {
+         ret = FFA_RET_NO_MEMORY;
+         goto out_rx_hyp_release;
+@@ -185,18 +204,88 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+         }
+     }
+ 
++    if ( ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
++    {
++        ffa_hyp_rx_release();
++        spin_unlock(&ffa_rx_buffer_lock);
++    }
++
++#ifdef CONFIG_FFA_VM_TO_VM
++    if ( ffa_vm_count )
++    {
++        uint32_t curr = 0;
++        /* add the VM informations if any */
++        rcu_read_lock(&domlist_read_lock);
++        for_each_domain( dom )
++        {
++            struct ffa_ctx *vm = dom->arch.tee;
++
++            /*
++             * we do not add the VM calling to the list and only VMs with
++             * FF-A support
++             */
++            if (dom != d && vm != NULL && vm->guest_vers != 0)
++            {
++                /*
++                 * We do not have UUID info for VMs so use
++                 * the 1.0 structure so that we set UUIDs to
++                 * zero using memset
++                 */
++                struct ffa_partition_info_1_0 srcvm;
++
++                if ( curr == ffa_vm_count )
++                {
++                    /*
++                     * The number of domains changed since we counted them, we
++                     * can add new ones if there is enough space in the
++                     * destination buffer so check it or go out with an error.
++                     */
++                    ffa_vm_count++;
++                    if ( ctx->page_count * FFA_PAGE_SIZE <
++                         (ffa_sp_count + ffa_vm_count) * dst_size )
++                    {
++                        ret = FFA_RET_NO_MEMORY;
++                        rcu_read_unlock(&domlist_read_lock);
++                        goto out_rx_release;
++                    }
++                }
++
++                srcvm.id = ffa_get_vm_id(dom);
++                srcvm.execution_context = dom->max_vcpus;
++                srcvm.partition_properties = FFA_PART_VM_PROP;
++                if ( is_64bit_domain(dom) )
++                    srcvm.partition_properties |= FFA_PART_PROP_AARCH64_STATE;
++
++                memcpy(dst_buf, &srcvm, MIN(sizeof(srcvm), dst_size));
++
++                if ( dst_size > sizeof(srcvm) )
++                    memset(dst_buf + sizeof(srcvm), 0,
++                           dst_size - sizeof(srcvm));
++
++                dst_buf += dst_size;
++                curr++;
++            }
++        }
++        rcu_read_unlock(&domlist_read_lock);
++
++        /* the number of domains could have reduce since the initial count */
++        ffa_vm_count = curr;
++    }
++#endif
++
++    goto out;
++
+ out_rx_hyp_release:
+     ffa_hyp_rx_release();
+ out_rx_hyp_unlock:
+     spin_unlock(&ffa_rx_buffer_lock);
+ out_rx_release:
+-    if ( ret != FFA_RET_OK )
+-        ffa_rx_release(d);
++    ffa_rx_release(d);
+ out:
+     if ( ret )
+         ffa_set_regs_error(regs, ret);
+     else
+-        ffa_set_regs_success(regs, ffa_sp_count, dst_size);
++        ffa_set_regs_success(regs, ffa_sp_count + ffa_vm_count, dst_size);
+ }
+ 
+ static int32_t ffa_direct_req_send_vm(uint16_t sp_id, uint16_t vm_id,
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index d441c0ca5598..47dd6b5fadea 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -187,6 +187,18 @@
+  */
+ #define FFA_PARTITION_INFO_GET_COUNT_FLAG BIT(0, U)
+ 
++/*
++ * Partition properties we give for a normal world VM:
++ * - can send direct message but not receive them
++ * - can handle indirect messages
++ * - can receive notifications
++ * 32/64 bit flag is set depending on the VM
++ */
++#define FFA_PART_VM_PROP    (FFA_PART_PROP_DIRECT_REQ_SEND | \
++                             FFA_PART_PROP_INDIRECT_MSGS | \
++                             FFA_PART_PROP_RECV_NOTIF | \
++                             FFA_PART_PROP_IS_PE_ID)
++
+ /* Flags used in calls to FFA_NOTIFICATION_GET interface  */
+ #define FFA_NOTIF_FLAG_BITMAP_SP        BIT(0, U)
+ #define FFA_NOTIF_FLAG_BITMAP_VM        BIT(1, U)
 -- 
-2.34.1
+2.47.0
 
 
