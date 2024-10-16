@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4026D1AD33
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:23:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.819776.1233276 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09845D1AD33
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Oct 2024 09:26:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.819798.1233286 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10Ej-0004JS-KZ; Wed, 16 Oct 2024 09:22:33 +0000
+	id 1t10Ir-00069v-7R; Wed, 16 Oct 2024 09:26:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 819776.1233276; Wed, 16 Oct 2024 09:22:33 +0000
+Received: by outflank-mailman (output) from mailman id 819798.1233286; Wed, 16 Oct 2024 09:26:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t10Ej-0004JB-HJ; Wed, 16 Oct 2024 09:22:33 +0000
-Received: by outflank-mailman (input) for mailman id 819776;
- Wed, 16 Oct 2024 09:22:32 +0000
+	id 1t10Ir-00069o-2W; Wed, 16 Oct 2024 09:26:49 +0000
+Received: by outflank-mailman (input) for mailman id 819798;
+ Wed, 16 Oct 2024 09:26:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=I0z3=RM=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1t10Ei-0001Po-HX
- for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:32 +0000
+ id 1t10En-0001Po-DN
+ for xen-devel@lists.xenproject.org; Wed, 16 Oct 2024 09:22:37 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 2b108c2e-8ba0-11ef-99a3-01e77a169b0f;
- Wed, 16 Oct 2024 11:22:30 +0200 (CEST)
+ id 2ce41d79-8ba0-11ef-99a3-01e77a169b0f;
+ Wed, 16 Oct 2024 11:22:33 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B60151007;
- Wed, 16 Oct 2024 02:22:59 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C70891007;
+ Wed, 16 Oct 2024 02:23:02 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.21.81])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E501D3F528;
- Wed, 16 Oct 2024 02:22:28 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0223A3F528;
+ Wed, 16 Oct 2024 02:22:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b108c2e-8ba0-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 2ce41d79-8ba0-11ef-99a3-01e77a169b0f
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: jens.wiklander@linaro.org,
@@ -52,127 +52,316 @@ Cc: jens.wiklander@linaro.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [RFC PATCH 2/4] xen/arm: ffa: Add buffer full notification support
-Date: Wed, 16 Oct 2024 11:21:56 +0200
-Message-ID: <70a1fd32542901791fef0d528b0fb0fa94f8e814.1729069025.git.bertrand.marquis@arm.com>
+Subject: [RFC PATCH 4/4] xen/arm: ffa: Enable VM to VM without firmware
+Date: Wed, 16 Oct 2024 11:21:58 +0200
+Message-ID: <57c59cae4141dd9601d7b4e9260030a16809b764.1729069025.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <cover.1729069025.git.bertrand.marquis@arm.com>
 References: <cover.1729069025.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add support to raise a Rx buffer full notification to a VM.
-This function will be used for indirect message support between VM and
-is only activated if CONFIG_FFA_VM_TO_VM is selected.
+When VM to VM support is activated and there is no suitable FF-A support
+in the firmware, enable FF-A support for VMs to allow using it for VM to
+VM communications.
+If there is Optee running in the secure world and using the non FF-A
+communication system, having CONFIG_FFA_VM_TO_VM could be non functional
+(if optee is probed first) or Optee could be non functional (if FF-A is
+probed first) so it is not recommended to activate the configuration
+option for such systems.
 
-Even if there are 32 framework notifications possible, right now only
-one is defined so the implementation is simplified to only handle the
-buffer full notification using a boolean. If other framework
-notifications have to be supported one day, the design will have to be
-modified to handle it properly.
+To make buffer full notification work between VMs when there is not
+firmware, rework the notification handling and modify the global flag to
+only be used as check for firmware notification support instead.
+
+Modify part_info_get to return the list of VMs when there is no firmware
+support.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/arm/tee/ffa_notif.c   | 26 +++++++++++++++++++++-----
- xen/arch/arm/tee/ffa_private.h | 13 +++++++++++++
- 2 files changed, 34 insertions(+), 5 deletions(-)
+ xen/arch/arm/tee/ffa.c          |  11 +++
+ xen/arch/arm/tee/ffa_notif.c    | 118 ++++++++++++++++----------------
+ xen/arch/arm/tee/ffa_partinfo.c |   2 +
+ 3 files changed, 73 insertions(+), 58 deletions(-)
 
+diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+index 21d41b452dc9..6d427864f3da 100644
+--- a/xen/arch/arm/tee/ffa.c
++++ b/xen/arch/arm/tee/ffa.c
+@@ -324,8 +324,11 @@ static int ffa_domain_init(struct domain *d)
+     struct ffa_ctx *ctx;
+     int ret;
+ 
++#ifndef CONFIG_FFA_VM_TO_VM
+     if ( !ffa_fw_version )
+         return -ENODEV;
++#endif
++
+     /*
+      * We are using the domain_id + 1 as the FF-A ID for VMs as FF-A ID 0 is
+      * reserved for the hypervisor and we only support secure endpoints using
+@@ -549,7 +552,15 @@ err_no_fw:
+     bitmap_zero(ffa_fw_abi_supported, FFA_ABI_BITMAP_SIZE);
+     printk(XENLOG_WARNING "ARM FF-A No firmware support\n");
+ 
++#ifdef CONFIG_FFA_VM_TO_VM
++    INIT_LIST_HEAD(&ffa_teardown_head);
++    init_timer(&ffa_teardown_timer, ffa_teardown_timer_callback, NULL, 0);
++
++    printk(XENLOG_INFO "ARM FF-A only available between VMs\n");
++    return true;
++#else
+     return false;
++#endif
+ }
+ 
+ static const struct tee_mediator_ops ffa_ops =
 diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index 3c6418e62e2b..052b3e364a70 100644
+index 052b3e364a70..f2c87d1320de 100644
 --- a/xen/arch/arm/tee/ffa_notif.c
 +++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -93,6 +93,7 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
- void ffa_handle_notification_get(struct cpu_user_regs *regs)
+@@ -16,7 +16,7 @@
+ 
+ #include "ffa_private.h"
+ 
+-static bool __ro_after_init notif_enabled;
++static bool __ro_after_init fw_notif_enabled;
+ static unsigned int __ro_after_init notif_sri_irq;
+ 
+ int ffa_handle_notification_bind(struct cpu_user_regs *regs)
+@@ -27,21 +27,17 @@ int ffa_handle_notification_bind(struct cpu_user_regs *regs)
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
+ 
+-    if ( !notif_enabled )
+-        return FFA_RET_NOT_SUPPORTED;
+-
+     if ( (src_dst & 0xFFFFU) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+     if ( flags )    /* Only global notifications are supported */
+         return FFA_RET_DENIED;
+ 
+-    /*
+-     * We only support notifications from SP so no need to check the sender
+-     * endpoint ID, the SPMC will take care of that for us.
+-     */
+-    return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags, bitmap_hi,
+-                           bitmap_lo);
++    if ( FFA_ID_IS_SECURE(src_dst>>16) && fw_notif_enabled )
++        return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags,
++                               bitmap_hi, bitmap_lo);
++
++    return FFA_RET_NOT_SUPPORTED;
+ }
+ 
+ int ffa_handle_notification_unbind(struct cpu_user_regs *regs)
+@@ -51,32 +47,36 @@ int ffa_handle_notification_unbind(struct cpu_user_regs *regs)
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
+ 
+-    if ( !notif_enabled )
+-        return FFA_RET_NOT_SUPPORTED;
+-
+     if ( (src_dst & 0xFFFFU) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+-    /*
+-     * We only support notifications from SP so no need to check the
+-     * destination endpoint ID, the SPMC will take care of that for us.
+-     */
+-    return  ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_hi,
+-                            bitmap_lo);
++    if ( FFA_ID_IS_SECURE(src_dst>>16) && fw_notif_enabled )
++        return  ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_hi,
++                                bitmap_lo);
++
++    return FFA_RET_NOT_SUPPORTED;
+ }
+ 
+ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
  {
      struct domain *d = current->domain;
-+    struct ffa_ctx *ctx = d->arch.tee;
-     uint32_t recv = get_user_reg(regs, 1);
-     uint32_t flags = get_user_reg(regs, 2);
-     uint32_t w2 = 0;
-@@ -132,11 +133,7 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
-          */
-         if ( ( flags  & FFA_NOTIF_FLAG_BITMAP_SP ) &&
-              ( flags & FFA_NOTIF_FLAG_BITMAP_SPM ) )
--        {
--                struct ffa_ctx *ctx = d->arch.tee;
--
--                ACCESS_ONCE(ctx->notif.secure_pending) = false;
--        }
-+            ACCESS_ONCE(ctx->notif.secure_pending) = false;
+     struct ffa_ctx *ctx = d->arch.tee;
++    bool notif_pending = false;
  
-         arm_smccc_1_2_smc(&arg, &resp);
-         e = ffa_get_ret_code(&resp);
-@@ -156,6 +153,12 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
-             w6 = resp.a6;
+-    if ( !notif_enabled )
++#ifndef CONFIG_FFA_VM_TO_VM
++    if ( !fw_notif_enabled )
+     {
+         ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
+         return;
+     }
++#endif
+ 
+-    if ( test_and_clear_bool(ctx->notif.secure_pending) )
++    notif_pending = ctx->notif.secure_pending;
++#ifdef CONFIG_FFA_VM_TO_VM
++    notif_pending |= ctx->notif.buff_full_pending;
++#endif
++
++    if ( notif_pending )
+     {
+         /* A pending global notification for the guest */
+         ffa_set_regs(regs, FFA_SUCCESS_64, 0,
+@@ -103,11 +103,13 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+     uint32_t w6 = 0;
+     uint32_t w7 = 0;
+ 
+-    if ( !notif_enabled )
++#ifndef CONFIG_FFA_VM_TO_VM
++    if ( !fw_notif_enabled )
+     {
+         ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
+         return;
+     }
++#endif
+ 
+     if ( (recv & 0xFFFFU) != ffa_get_vm_id(d) )
+     {
+@@ -115,7 +117,8 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+         return;
      }
  
-+#ifdef CONFIG_FFA_VM_TO_VM
-+    if ( flags & FFA_NOTIF_FLAG_BITMAP_HYP &&
-+            test_and_clear_bool(ctx->notif.buff_full_pending) )
-+        w7 = FFA_NOTIF_RX_BUFFER_FULL;
-+#endif
+-    if ( flags & ( FFA_NOTIF_FLAG_BITMAP_SP | FFA_NOTIF_FLAG_BITMAP_SPM ) )
++    if ( fw_notif_enabled && (flags & ( FFA_NOTIF_FLAG_BITMAP_SP
++                                        | FFA_NOTIF_FLAG_BITMAP_SPM )) )
+     {
+         struct arm_smccc_1_2_regs arg = {
+             .a0 = FFA_NOTIFICATION_GET,
+@@ -170,15 +173,14 @@ int ffa_handle_notification_set(struct cpu_user_regs *regs)
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
+ 
+-    if ( !notif_enabled )
+-        return FFA_RET_NOT_SUPPORTED;
+-
+     if ( (src_dst >> 16) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+-    /* Let the SPMC check the destination of the notification */
+-    return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags, bitmap_lo,
+-                           bitmap_hi);
++    if ( FFA_ID_IS_SECURE(src_dst>>16) && fw_notif_enabled )
++        return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags, bitmap_lo,
++                               bitmap_hi);
 +
-     ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, w4, w5, w6, w7);
++    return FFA_RET_NOT_SUPPORTED;
  }
  
-@@ -178,6 +181,19 @@ int ffa_handle_notification_set(struct cpu_user_regs *regs)
-                            bitmap_hi);
+ #ifdef CONFIG_FFA_VM_TO_VM
+@@ -190,7 +192,7 @@ void ffa_raise_rx_buffer_full(struct domain *d)
+         return;
+ 
+     if ( !test_and_set_bool(ctx->notif.buff_full_pending) )
+-        vgic_inject_irq(d, d->vcpu[0], notif_sri_irq, true);
++        vgic_inject_irq(d, d->vcpu[0], GUEST_FFA_NOTIF_PEND_INTR_ID, true);
+ }
+ #endif
+ 
+@@ -363,7 +365,7 @@ void ffa_notif_init_interrupt(void)
+ {
+     int ret;
+ 
+-    if ( notif_enabled && notif_sri_irq < NR_GIC_SGI )
++    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
+     {
+         /*
+          * An error here is unlikely since the primary CPU has already
+@@ -394,47 +396,47 @@ void ffa_notif_init(void)
+     int ret;
+ 
+     /* Only enable fw notification if all ABIs we need are supported */
+-    if ( !(ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
+-           ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_DESTROY) &&
+-           ffa_fw_supports_fid(FFA_NOTIFICATION_GET) &&
+-           ffa_fw_supports_fid(FFA_NOTIFICATION_INFO_GET_64)) )
+-        return;
+-
+-    arm_smccc_1_2_smc(&arg, &resp);
+-    if ( resp.a0 != FFA_SUCCESS_32 )
+-        return;
+-
+-    irq = resp.a2;
+-    notif_sri_irq = irq;
+-    if ( irq >= NR_GIC_SGI )
+-        irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
+-    ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
+-    if ( ret )
++    if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
++         ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_DESTROY) &&
++         ffa_fw_supports_fid(FFA_NOTIFICATION_GET) &&
++         ffa_fw_supports_fid(FFA_NOTIFICATION_INFO_GET_64) )
+     {
+-        printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
+-               irq, ret);
+-        return;
+-    }
++        arm_smccc_1_2_smc(&arg, &resp);
++        if ( resp.a0 != FFA_SUCCESS_32 )
++            return;
+ 
+-    notif_enabled = true;
++        irq = resp.a2;
++        notif_sri_irq = irq;
++        if ( irq >= NR_GIC_SGI )
++            irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
++        ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
++        if ( ret )
++        {
++            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
++                   irq, ret);
++            return;
++        }
++        fw_notif_enabled = true;
++    }
  }
  
-+#ifdef CONFIG_FFA_VM_TO_VM
-+void ffa_raise_rx_buffer_full(struct domain *d)
-+{
-+    struct ffa_ctx *ctx = d->arch.tee;
-+
-+    if ( !ctx )
-+        return;
-+
-+    if ( !test_and_set_bool(ctx->notif.buff_full_pending) )
-+        vgic_inject_irq(d, d->vcpu[0], notif_sri_irq, true);
-+}
+ int ffa_notif_domain_init(struct domain *d)
+ {
+     int32_t res;
+ 
+-    if ( !notif_enabled )
+-        return 0;
++    if ( fw_notif_enabled )
++    {
+ 
+-    res = ffa_notification_bitmap_create(ffa_get_vm_id(d), d->max_vcpus);
+-    if ( res )
+-        return -ENOMEM;
++        res = ffa_notification_bitmap_create(ffa_get_vm_id(d), d->max_vcpus);
++        if ( res )
++            return -ENOMEM;
++    }
+ 
+     return 0;
+ }
+ 
+ void ffa_notif_domain_destroy(struct domain *d)
+ {
+-    if ( notif_enabled )
++    if ( fw_notif_enabled )
+         ffa_notification_bitmap_destroy(ffa_get_vm_id(d));
+ }
+diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
+index d699a267cc76..2e09440fe6c2 100644
+--- a/xen/arch/arm/tee/ffa_partinfo.c
++++ b/xen/arch/arm/tee/ffa_partinfo.c
+@@ -128,12 +128,14 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+         goto out;
+     }
+ 
++#ifndef CONFIG_FFA_VM_TO_VM
+     if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
+     {
+         /* Just give an empty partition list to the caller */
+         ret = FFA_RET_OK;
+         goto out;
+     }
 +#endif
-+
- /*
-  * Extract a 16-bit ID (index n) from the successful return value from
-  * FFA_NOTIFICATION_INFO_GET_64 or FFA_NOTIFICATION_INFO_GET_32. IDs are
-diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index 47dd6b5fadea..ad1dd04aeb7c 100644
---- a/xen/arch/arm/tee/ffa_private.h
-+++ b/xen/arch/arm/tee/ffa_private.h
-@@ -210,6 +210,8 @@
- #define FFA_NOTIF_INFO_GET_ID_COUNT_SHIFT   7
- #define FFA_NOTIF_INFO_GET_ID_COUNT_MASK    0x1F
  
-+#define FFA_NOTIF_RX_BUFFER_FULL        BIT(0, U)
-+
- /* Feature IDs used with FFA_FEATURES */
- #define FFA_FEATURE_NOTIF_PEND_INTR     0x1U
- #define FFA_FEATURE_SCHEDULE_RECV_INTR  0x2U
-@@ -298,6 +300,13 @@ struct ffa_ctx_notif {
-      * pending global notifications.
-      */
-     bool secure_pending;
-+
-+#ifdef CONFIG_FFA_VM_TO_VM
-+    /*
-+     * Pending Hypervisor framework notifications
-+     */
-+    bool buff_full_pending;
-+#endif
- };
- 
- struct ffa_ctx {
-@@ -370,6 +379,10 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs);
- void ffa_handle_notification_get(struct cpu_user_regs *regs);
- int ffa_handle_notification_set(struct cpu_user_regs *regs);
- 
-+#ifdef CONFIG_FFA_VM_TO_VM
-+void ffa_raise_rx_buffer_full(struct domain *d);
-+#endif
-+
- void ffa_handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid);
- int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs);
- 
+     ret = ffa_rx_acquire(d);
+     if ( ret != FFA_RET_OK )
 -- 
 2.47.0
 
