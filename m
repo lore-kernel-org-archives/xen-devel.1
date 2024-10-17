@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F0EFD3C525
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:17:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.820935.1234672 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8057D3C527
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:17:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.820939.1234682 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1U7M-0003gZ-37; Thu, 17 Oct 2024 17:16:56 +0000
+	id 1t1U7V-00049g-El; Thu, 17 Oct 2024 17:17:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 820935.1234672; Thu, 17 Oct 2024 17:16:56 +0000
+Received: by outflank-mailman (output) from mailman id 820939.1234682; Thu, 17 Oct 2024 17:17:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1U7M-0003gS-0I; Thu, 17 Oct 2024 17:16:56 +0000
-Received: by outflank-mailman (input) for mailman id 820935;
- Thu, 17 Oct 2024 17:16:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t1U7V-00049Z-B1; Thu, 17 Oct 2024 17:17:05 +0000
+Received: by outflank-mailman (input) for mailman id 820939;
+ Thu, 17 Oct 2024 17:17:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KqF2=RN=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t1TzA-00014B-HW
- for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:08:28 +0000
+ id 1t1TxO-0008TH-ST
+ for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:06:38 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6bd16e38-8caa-11ef-99a3-01e77a169b0f;
- Thu, 17 Oct 2024 19:08:26 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1729184658005873.5613662896585;
- Thu, 17 Oct 2024 10:04:18 -0700 (PDT)
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2b0226f4-8caa-11ef-a0be-8be0dac302b0;
+ Thu, 17 Oct 2024 19:06:38 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1729184642001935.7928067426468;
+ Thu, 17 Oct 2024 10:04:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6bd16e38-8caa-11ef-99a3-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; t=1729184660; cv=none; 
+X-Inumbo-ID: 2b0226f4-8caa-11ef-a0be-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1729184644; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=n7ZYi8u/rh/V7Dw9U4AhWRO/mKjxsLHcvk2bf9fVBZUnfCUuCkptJ9yzyu1VdzWzgU44ApHNdSUeLMwndFoWF4w8STrNUXNP5tIgUjpRsPUV5h3xqLf7X0jjv8vy1GjLGC2d5g4Z4C0NZ+6WC8MWDXNk+suElVcTu707am/nnd4=
+	b=VThMhDqlfyEbcCaSZ4XQ//QSDbd2FvoW9cNkyRyOmoBaUzboZAO8jIZQ684Sea4w4Jet6lIYaVAMgXg+iMB2ti8L/iYyXv+VsFB2P1E9HK4xwlnukuQjgUL2Nx1i+WXxDhFDbXLMBlZqCuvu92q538ubRWRT7gc77rCnhBuQl+4=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1729184660; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=JraRp4qDaDWJ2lj1CcSCRxF+QAMscl93p41Cp6mewpw=; 
-	b=anJC8yyyrOqRlOC/1FBaHJ6rqFhMr1m84qT2Jy/1vpZuBt5VrI9PqrKei0hXvy+VfxwPyiPtHnig1FlH7IgX7/+ET44C+QkOZWQYQt0pgH3wmFNBruUsAiZ/oxJtc8YOiX8HroIu6z8Z9MjAOE860kQnWTEQVT07+gl04TKXitM=
+	t=1729184644; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=a9E8yTqYav2aI/xh1POt8XbQvYtTU40bLqsYbWj2y9s=; 
+	b=aIkOl1TcwtmHYXqTQ8rMRfsLaKTijG8zrJvjstr2pTH8AKcEH8seC4pOwmBO+hB7FxMV1Z10c8qWWx8KbEscCD2eyetxKyewZTuCvj1Cf90Hzc0tZRxBXIjff7ykRGOT9B6omFkllzJfiwq6wI706TeSM9dZ3gYgaawPk+03wa0=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184660;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184644;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=JraRp4qDaDWJ2lj1CcSCRxF+QAMscl93p41Cp6mewpw=;
-	b=Ap1tYajcF/sRYx7/Ua6dS2DfhYOwNh/9hyXa3+gMfIPBDe0A9HWtIDb4f9TuVY8/
-	D4a0iHviwHMpz3h4Wd56ZcB1FpYjQiin12xmSV3itQ1W5v0GxNoWfo1zX6lzD3Xsj98
-	+YeheXOzZd6g2Ahif2l3CIrhgUw1TsriaOH0bT1w=
+	bh=a9E8yTqYav2aI/xh1POt8XbQvYtTU40bLqsYbWj2y9s=;
+	b=NCkCTvtSUm3XGj5CqdsH7YFc300BedFexRbHOP785xaw2+Ixc7K2d9ljI/IjUh5L
+	ny7r0a6y9ONM8g7ygDWHHIQnP0M1FX1HUP2uMY/8KL/dXoqY8F/P86c2RrRo/IPgUh1
+	AweAdVo2Fvm4nar/s4oJFrUCIx7nmnfINi7tRNpw=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v6 34/44] x86/boot: drop the use of initial_images unit global
-Date: Thu, 17 Oct 2024 13:03:14 -0400
-Message-Id: <20241017170325.3842-35-dpsmith@apertussolutions.com>
+Subject: [PATCH v6 21/44] x86/boot: convert ramdisk locating to struct boot_module
+Date: Thu, 17 Oct 2024 13:03:01 -0400
+Message-Id: <20241017170325.3842-22-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241017170325.3842-1-dpsmith@apertussolutions.com>
 References: <20241017170325.3842-1-dpsmith@apertussolutions.com>
@@ -78,67 +78,56 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
+Locate the first unclaimed struct boot_module and mark it as ramdisk. If there
+are any remaining unclaimed struct boot_module instances, report to the
+console. In the change, the new boot module iterator is used to find the
+initrd index, which returns a signed int. Switch initrdidx from unsigned to
+signed.
+
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
 ---
-
 Changes since v5:
-- coding style changes
+- adjusted initrdidx check for prior changes to boot module search function
 ---
- xen/arch/x86/setup.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
+ xen/arch/x86/setup.c | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
 
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index f5cd7eeb157c..f8b9c164c1cb 100644
+index a4ddcb908626..6ba8a893daf0 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -276,8 +276,6 @@ custom_param("acpi", parse_acpi_param);
+@@ -2083,16 +2083,23 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+            cpu_has_nx ? XENLOG_INFO : XENLOG_WARNING "Warning: ",
+            cpu_has_nx ? "" : "not ");
  
- static const char *cmdline_cook(const char *p, const char *loader_name);
- 
--static const struct boot_module *__initdata initial_images;
--
- struct boot_info __initdata xen_boot_info;
- 
- static struct boot_info *__init multiboot_fill_boot_info(unsigned long mbi_p)
-@@ -335,8 +333,8 @@ unsigned long __init initial_images_nrpages(nodeid_t node)
- 
-     for ( nr = i = 0; i < bi->nr_modules; ++i )
+-    initrdidx = find_first_bit(module_map, bi->nr_modules);
+-    if ( initrdidx < bi->nr_modules )
++    /*
++     * At this point all capabilities that consume boot modules should have
++     * claimed their boot modules. Find the first unclaimed boot module and
++     * claim it as the initrd ramdisk. Do a second search to see if there are
++     * any remaining unclaimed boot modules, and report them as unusued initrd
++     * candidates.
++     */
++    initrdidx = first_boot_module_index(bi, BOOTMOD_UNKNOWN);
++    if ( initrdidx < MAX_NR_BOOTMODS )
      {
--        unsigned long start = initial_images[i].mod->mod_start;
--        unsigned long end = start + PFN_UP(initial_images[i].mod->mod_end);
-+        unsigned long start = bi->mods[i].mod->mod_start;
-+        unsigned long end = start + PFN_UP(bi->mods[i].mod->mod_end);
- 
-         if ( end > node_start && node_end > start )
-             nr += min(node_end, end) - max(node_start, start);
-@@ -353,14 +351,12 @@ void __init discard_initial_images(void)
-     for ( i = 0; i < bi->nr_modules; ++i )
-     {
-         uint64_t start =
--            (uint64_t)initial_images[i].mod->mod_start << PAGE_SHIFT;
-+            (uint64_t)bi->mods[i].mod->mod_start << PAGE_SHIFT;
- 
--        init_domheap_pages(start,
--                           start + PAGE_ALIGN(initial_images[i].mod->mod_end));
-+        init_domheap_pages(start, start + PAGE_ALIGN(bi->mods[i].mod->mod_end));
+         bi->mods[initrdidx].type = BOOTMOD_RAMDISK;
+         bi->mods[initrdidx].flags |= BOOTMOD_FLAG_X86_CONSUMED;
++        if ( first_boot_module_index(bi, BOOTMOD_UNKNOWN) < MAX_NR_BOOTMODS )
++            printk(XENLOG_WARNING
++                   "Multiple initrd candidates, picking module #%u\n",
++                   initrdidx);
      }
+-    if ( bitmap_weight(module_map, bi->nr_modules) > 1 )
+-        printk(XENLOG_WARNING
+-               "Multiple initrd candidates, picking module #%u\n",
+-               initrdidx);
  
-     bi->nr_modules = 0;
--    initial_images = NULL;
- }
- 
- static void __init init_idle_domain(void)
-@@ -1380,8 +1376,6 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     set_kexec_crash_area_size((u64)nr_pages << PAGE_SHIFT);
-     kexec_reserve_area();
- 
--    initial_images = bi->mods;
--
-     for ( i = 0; i < bi->nr_modules; i++ )
-     {
-         if ( bi->mods[i].mod->mod_start & (PAGE_SIZE - 1) )
+     /*
+      * We're going to setup domain0 using the module(s) that we stashed safely
 -- 
 2.30.2
 
