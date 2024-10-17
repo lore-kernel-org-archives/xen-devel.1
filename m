@@ -4,31 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A79F0D3C525
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:19:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.820978.1234732 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B8B5D3C526
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:19:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.820980.1234747 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1U9W-0007R6-Mv; Thu, 17 Oct 2024 17:19:10 +0000
+	id 1t1U9Y-0007kd-9s; Thu, 17 Oct 2024 17:19:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 820978.1234732; Thu, 17 Oct 2024 17:19:10 +0000
+Received: by outflank-mailman (output) from mailman id 820980.1234747; Thu, 17 Oct 2024 17:19:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1U9W-0007Qx-Je; Thu, 17 Oct 2024 17:19:10 +0000
-Received: by outflank-mailman (input) for mailman id 820978;
- Thu, 17 Oct 2024 17:19:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t1U9Y-0007jU-2k; Thu, 17 Oct 2024 17:19:12 +0000
+Received: by outflank-mailman (input) for mailman id 820980;
+ Thu, 17 Oct 2024 17:19:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KqF2=RN=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t1Tzm-0008TH-Lk
- for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:09:06 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 823c5b74-8caa-11ef-a0be-8be0dac302b0;
- Thu, 17 Oct 2024 19:09:04 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 17291846641131020.5415294818473;
- Thu, 17 Oct 2024 10:04:24 -0700 (PDT)
+ <SRS0=c7jd=RN=amd.com=VictorM.Lira@srs-se1.protection.inumbo.net>)
+ id 1t1U9W-0007JO-7Y
+ for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:19:10 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20601.outbound.protection.outlook.com
+ [2a01:111:f403:2416::601])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e890d483-8cab-11ef-99a3-01e77a169b0f;
+ Thu, 17 Oct 2024 19:19:05 +0200 (CEST)
+Received: from MW4PR03CA0038.namprd03.prod.outlook.com (2603:10b6:303:8e::13)
+ by MN2PR12MB4192.namprd12.prod.outlook.com (2603:10b6:208:1d5::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.20; Thu, 17 Oct
+ 2024 17:19:00 +0000
+Received: from SJ1PEPF000023D0.namprd02.prod.outlook.com
+ (2603:10b6:303:8e:cafe::46) by MW4PR03CA0038.outlook.office365.com
+ (2603:10b6:303:8e::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.18 via Frontend
+ Transport; Thu, 17 Oct 2024 17:18:59 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF000023D0.mail.protection.outlook.com (10.167.244.4) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8069.17 via Frontend Transport; Thu, 17 Oct 2024 17:18:59 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Oct
+ 2024 12:18:58 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Oct
+ 2024 12:18:58 -0500
+Received: from xsjwoods50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 17 Oct 2024 12:18:58 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,112 +66,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 823c5b74-8caa-11ef-a0be-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1729184666; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=G9sG10XUydhECPLFpPpP4Gj5/KgVJVQcXfRjaOC5oWlrL8zFzWaAKfK73gv8k9j2jB3VDy+Nu9C2t6YdRKkUX0h5zMc7s+Ytqgp/7KOQjjjW+XAVR2unke/Z4+ucXODc71ln7P+KH8v/02qJNBj7HtvFh8Xc1SAuya0TqqBhcX4=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1729184666; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=BJ5VYIncE7+0Abn8b+L/cjX/uv1rXkaBhM0DRTxUuNQ=; 
-	b=OEDj4ZGTx7P0jgg7gqEkpX71lswsW2r7WLNGdghPKfLb+dwez9x0cc5YaEUnA8it8pjzUdylnM+UzdsSL/dlURZB1BoF4cjRfOvzuUtnOJPmz46LCgaeNVBjRlx3BMJuGroGj7pUNuyEpN9pKindfkcMydSUbNHs48Phhw7WM3k=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184666;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=BJ5VYIncE7+0Abn8b+L/cjX/uv1rXkaBhM0DRTxUuNQ=;
-	b=IXRNGp/QEirmwMm1/AiJDtxtQJ802FfZ9h8qYsp9jINm9o7ywTzn36Mg3zvorEXe
-	0YnSOm1w+xfCCh9bf1Pa1YtAc5TDnW8KbXRa2ztLVfUTBeNGZ/r2hlZR+qdfxPtrmLb
-	WikeVFtcw3/ErWtTF8l5Jd/a66LwvC+LTCoM87sw=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	jason.andryuk@amd.com,
-	christopher.w.clark@gmail.com,
-	stefano.stabellini@amd.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v6 39/44] x86/boot: introduce domid field to struct boot_domain
-Date: Thu, 17 Oct 2024 13:03:19 -0400
-Message-Id: <20241017170325.3842-40-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20241017170325.3842-1-dpsmith@apertussolutions.com>
-References: <20241017170325.3842-1-dpsmith@apertussolutions.com>
+X-Inumbo-ID: e890d483-8cab-11ef-99a3-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jdmJL0/wYW1Y56oRBoNi7c3jubLHR8UHUw0P3j99GAxvlEGKGEGlPYDWsnP9+K7HmD+s9vGdtA4Nj3w8E9jIUtSqY1ji4fYKMrQ7EzoYsk0XRm6OatwjCgzfd9JjsZrh+yn9OI/IfmGKkJAf4+tNfG8nGp+VZOXEIsiL1tu17aw5/536k20XVwWisXEBAdRCL5T5sIr1lQa+2JQVmqVNEqOWziyXnI4xCBEQlPhkuCAVYRzbNkLTWt/JYBMkOQr0Z2xdh78ei+MmXb15SKI0VBBi2pLCZ7hQi9BhEJErV86YaKXyjLDVhoDirQd4m07hMqyiRyfKlLVXk7AIV0zqCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mxvXkgc+im7eck3YggvnFHTjF0jIAu8u4EX91lFkEiA=;
+ b=W7/3S+PQbihLOP5h332+G/t93c6psSGkvnS4HWe8+FbQhLDWV+ePohIn2XVsivMhkdwmHEfDNA3wN7JXU2H91T3UnOIdx/1y2Kr9Fjv22S+14+OKbUZ6YqGOhZH1ZPvBVa2F2UQBQ2kvN3Pk9oPTU21W797B4Qd5SRHPhLcT9roPF+8aXW82wVvkfTKZdbbmUVw3Dkf28o9u+hF4dISPKufpNg0X2xRioVhep/zZKzuQbUzlslwKMJSV68o1HikPdB9zhIS2AvwXwom0ROeKgGPCJXpYCvfbOrNGjqUs3shsuGuuaMe4calN7DZEgvWACoHQ6fx9/GtooQfSXoZ49Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mxvXkgc+im7eck3YggvnFHTjF0jIAu8u4EX91lFkEiA=;
+ b=wTBtOWu5cR0FgFnGlzIIyeRVY5jMpRlkwmMbY+suaQzoJ2JkyEjwu+2N3NlQ/cK5/9ypwOpPP8dJDKC5jdqy0cQJbOGU/lKaPLfo5A89zUAbrEmQWwdhr8/yW/SS4/Yx3JByB2Zk7QESXRCP9HougaBtzezGrtyQtDW1gucvtbo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: <victorm.lira@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Victor Lira <victorm.lira@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v1 1/3] automation: add linux 6.6.56 artifact
+Date: Thu, 17 Oct 2024 10:18:26 -0700
+Message-ID: <15562cef1631443695d5ddab64c0737a327eb849.1729183051.git.victorm.lira@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1729183051.git.victorm.lira@amd.com>
+References: <cover.1729183051.git.victorm.lira@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: victorm.lira@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D0:EE_|MN2PR12MB4192:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9df8027b-6815-4369-72ba-08dceecfca40
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|36860700013|82310400026;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?m3Kndkitza9RkcqlsSuLk0m0boDRqal2GrfSFnKsIP642c3RKc9uKUFkAWdl?=
+ =?us-ascii?Q?HZN6gt9MU6T9nylS9zdFWbOJbCdC2wBX0nbc351MSaRA5arV8H0pJgS9WYvW?=
+ =?us-ascii?Q?BZ9btut5iMRsMzcalFyYq04uP81YTIr3ClK3s4TR+/GjYZPhLBViNkSAhovQ?=
+ =?us-ascii?Q?qKKMPsqcf2nUinMt8NsxaKYy/uuWYHjN0yrmxUb802wUaxTEkt4VCQLwkuH4?=
+ =?us-ascii?Q?D3UhYoYwEe9tYIZiTTW5pKbBH3PG/I9fZxyUlyH+2kTJTwRgy4WgRn/9NdYO?=
+ =?us-ascii?Q?hdtLIHrNphS8AyhMWfcxQJpFuifnx8lW5yUMAgcLW5et/P8Cc8tX4cRm4yHD?=
+ =?us-ascii?Q?ynGBFEQ4mVummB1lTjGq9hO7gmMuin85cSjDHsgQP9PQ3+MNAH1qHGCPudGf?=
+ =?us-ascii?Q?iqjWWhbiMSlZCx5vZ9YO+7sHQVIzbcDW1B/zJostuq3NggcUihUyKdA7bANi?=
+ =?us-ascii?Q?i0XHrdWs34sSN+QpAz5mFkBRcHcS2wcevl5GHX3n7zV8EPnxLusqg7lwEkJw?=
+ =?us-ascii?Q?1LJk6g0t+Kgb8VBaQ3UMG/LL00XcJWtp3ZCe1T5qDm3pdw2Mse5mML6WF+QW?=
+ =?us-ascii?Q?Aft4TnzV80C79ju4axMdPE4zY+Ev+o7NPRmH5xcP8jxoNawe3E9t6cC5K7vb?=
+ =?us-ascii?Q?1t5oLcWeDMDvcSKHibgVKFnpgOsrw9QpnC2z/lmpYczmzc5JDD8S5Q021XzH?=
+ =?us-ascii?Q?G67lbSYYAThvPazYYbOSrZhcy4sUgy3rYftXmyJQry1GbFYcmfDswf6shwzM?=
+ =?us-ascii?Q?+u/UD+TvdvdVvJUHjOI5VqwoQwToI5sa9ke3hMCM6GB7cXRlQs08gWvkLdys?=
+ =?us-ascii?Q?JU+cwvyKaggmxkaFX39JSVI4M3dewxWY1OrJ4M22BFYwzsGxGrrpT+XYG4sN?=
+ =?us-ascii?Q?rZl1sDgGlHtpPU7n0g2zDc8eiLTcgcL6wAdfajpRMAyo4juy8ttQNfF5yRCo?=
+ =?us-ascii?Q?eQSnd0Ex5X8Nguxe6upLGkZMCgwg6bprF+5LJVMxHIbx3cLEQvBbzbN1KYh8?=
+ =?us-ascii?Q?FI8GnpXbMxHDX/G7cO84Z/7r9VrqzCV5TPUYJMSHQtVCCfYtZ2n0KZIk5F6j?=
+ =?us-ascii?Q?AkEA2efUaNysYuXys3K+HOciEUuVEBqsyycEHwjr7y9tJoztK5u4hb+sSiEE?=
+ =?us-ascii?Q?sytqggU3UtOpxhszeAulNFzPOl2xQe3+qSE8Wply1sKMszNUKchDVRlS5lI4?=
+ =?us-ascii?Q?w4EEXsauwGWHpn7zc9Zrsp8ITnKDyIku8H9LoFDx8HXTccoLIBBb503RDhHW?=
+ =?us-ascii?Q?KBlvGUSkMe2kGw0JyHBp7cqhBZzh+1qWlX5JMwJpeT4hwDZlDUz08q3JdLri?=
+ =?us-ascii?Q?RSTbhMMHBsjJgD8U97f++9wuMQXbFZXf3WqBmGJ7NpjRapIpOsMdF9TidnQr?=
+ =?us-ascii?Q?HJDGClY=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2024 17:18:59.7067
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9df8027b-6815-4369-72ba-08dceecfca40
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF000023D0.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4192
 
-Add a domid field to struct boot_domain to hold the assigned domain id for the
-domain. During initialization, ensure all instances of struct boot_domain have
-the invalid domid to ensure that the domid must be set either by convention or
-configuration.
+From: Victor Lira <victorm.lira@amd.com>
 
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+Add dockerfile for building container image that holds linux 6.6.56
+bzImage for x86_64, using the same build process as the current 6.1.19
+image
+
+Signed-off-by: Victor Lira <victorm.lira@amd.com>
 ---
- xen/arch/x86/include/asm/bootdomain.h |  2 ++
- xen/arch/x86/setup.c                  | 12 +++++++-----
- 2 files changed, 9 insertions(+), 5 deletions(-)
+Cc: Doug Goldstein <cardoe@cardoe.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
+---
+ .../tests-artifacts/kernel/6.6.56.dockerfile  | 54 +++++++++++++++++++
+ 1 file changed, 54 insertions(+)
+ create mode 100644 automation/tests-artifacts/kernel/6.6.56.dockerfile
 
-diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-index 4285223ac5ab..d6264d554dba 100644
---- a/xen/arch/x86/include/asm/bootdomain.h
-+++ b/xen/arch/x86/include/asm/bootdomain.h
-@@ -11,6 +11,8 @@
- struct boot_module;
- 
- struct boot_domain {
-+    domid_t domid;
+diff --git a/automation/tests-artifacts/kernel/6.6.56.dockerfile b/automation/tests-artifacts/kernel/6.6.56.dockerfile
+new file mode 100644
+index 0000000000..5b6f2fe527
+--- /dev/null
++++ b/automation/tests-artifacts/kernel/6.6.56.dockerfile
+@@ -0,0 +1,54 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/amd64 debian:bookworm
++LABEL maintainer.name="The Xen Project" \
++      maintainer.email="xen-devel@lists.xenproject.org"
 +
-     struct boot_module *kernel;
-     struct boot_module *ramdisk;
- };
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index ccb5052e18be..e74526e20b5b 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -318,6 +318,9 @@ static struct boot_info *__init multiboot_fill_boot_info(unsigned long mbi_p)
-     bi->mods[bi->nr_modules].type = BOOTMOD_XEN;
-     bi->mods[bi->nr_modules].flags = BOOTMOD_FLAG_X86_CONSUMED;
- 
-+    for ( i = 0; i < MAX_NR_BOOTDOMS; i++ )
-+        bi->domains[i].domid = DOMID_INVALID;
++ENV DEBIAN_FRONTEND=noninteractive
++ENV LINUX_VERSION=6.6.56
++ENV USER root
 +
-     return bi;
- }
- 
-@@ -958,7 +961,6 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-     };
-     struct boot_domain *bd = &bi->domains[0];
-     struct domain *d;
--    domid_t domid;
- 
-     if ( opt_dom0_pvh )
-     {
-@@ -974,15 +976,15 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-         dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
- 
-     /* Create initial domain.  Not d0 for pvshim. */
--    domid = get_initial_domain_id();
--    d = domain_create(domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
-+    bd->domid = get_initial_domain_id();
-+    d = domain_create(bd->domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
-     if ( IS_ERR(d) )
--        panic("Error creating d%u: %ld\n", domid, PTR_ERR(d));
-+        panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(d));
- 
-     init_dom0_cpuid_policy(d);
- 
-     if ( alloc_dom0_vcpu0(d) == NULL )
--        panic("Error creating d%uv0\n", domid);
-+        panic("Error creating d%uv0\n", bd->domid);
- 
-     /* Grab the DOM0 command line. */
-     if ( bd->kernel->cmdline || bi->kextra )
--- 
-2.30.2
++RUN mkdir /build
++WORKDIR /build
++
++# build depends
++RUN apt-get update && \
++    apt-get --quiet --yes install \
++        build-essential \
++        libssl-dev \
++        bc \
++        curl \
++        flex \
++        bison \
++        libelf-dev \
++        && \
++    apt-get autoremove -y && \
++    apt-get clean && \
++    rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/* && \
++    \
++    # Build the kernel
++    curl -fsSLO https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-"$LINUX_VERSION".tar.xz && \
++    tar xvJf linux-"$LINUX_VERSION".tar.xz && \
++    cd linux-"$LINUX_VERSION" && \
++    make defconfig && \
++    make xen.config && \
++    scripts/config --enable BRIDGE && \
++    scripts/config --enable IGC && \
++    scripts/config --enable TUN && \
++    cp .config .config.orig && \
++    cat .config.orig | grep XEN | grep =m |sed 's/=m/=y/g' >> .config && \
++    make -j$(nproc) bzImage && \
++    cp arch/x86/boot/bzImage / && \
++    cd /build && \
++    rm -rf linux-"$LINUX_VERSION"* && \
++    \
++    # Clean up
++    apt-get --yes purge \
++        build-essential \
++        libssl-dev \
++        bc \
++        curl \
++        flex \
++        bison \
++        libelf-dev \
++        && \
++    apt-get autoremove -y
+--
+2.25.1
 
 
