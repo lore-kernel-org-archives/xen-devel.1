@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57B6FD3C526
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:17:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.820960.1234701 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DE9FD3C525
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:18:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.820968.1234711 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1U7y-0005Vu-RQ; Thu, 17 Oct 2024 17:17:34 +0000
+	id 1t1U8O-0006Ec-2e; Thu, 17 Oct 2024 17:18:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 820960.1234701; Thu, 17 Oct 2024 17:17:34 +0000
+Received: by outflank-mailman (output) from mailman id 820968.1234711; Thu, 17 Oct 2024 17:18:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1U7y-0005Vn-Os; Thu, 17 Oct 2024 17:17:34 +0000
-Received: by outflank-mailman (input) for mailman id 820960;
- Thu, 17 Oct 2024 17:17:33 +0000
+	id 1t1U8O-0006ET-09; Thu, 17 Oct 2024 17:18:00 +0000
+Received: by outflank-mailman (input) for mailman id 820968;
+ Thu, 17 Oct 2024 17:17:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KqF2=RN=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t1Tze-0008TH-L2
- for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:08:58 +0000
+ id 1t1Txe-0008TH-Dk
+ for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:06:54 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
  [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7e4aa548-8caa-11ef-a0be-8be0dac302b0;
- Thu, 17 Oct 2024 19:08:57 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1729184662893105.18560154820727;
- Thu, 17 Oct 2024 10:04:22 -0700 (PDT)
+ id 3453d31c-8caa-11ef-a0be-8be0dac302b0;
+ Thu, 17 Oct 2024 19:06:53 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1729184644453447.45974491621405;
+ Thu, 17 Oct 2024 10:04:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7e4aa548-8caa-11ef-a0be-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1729184665; cv=none; 
+X-Inumbo-ID: 3453d31c-8caa-11ef-a0be-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1729184646; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=fBe4WLb7EHSW3PylVLEICC3qQRDDiKHL+H0c+uF7mjXUy5PcrmKf+qG1f+lFY1FaTEm+rJdYCMxDPGRJVX/zTJsxy+pLukTSOLLDgnmyVLq5xFzEX6up4Uope85qacc6qakYc9V2YNGofkbqt+JkPuydUFfn31tClzqBDC92t9E=
+	b=n+mu8ezXWcs5uab9RtWpeEcNuIZz3J4tj/l91FTvYbwJ5O3gPGdos+RdqiEBiO4+AAz5Um26RWduIIRTMlGlzxSMqd/H+6HEfGUgM9pGc5FpxxHQbtdy70IF6LRi/FtOLcKyCuj3lAQPtTNT3jQp5/eJLJ5bHvu80OLijnnQYWA=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1729184665; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=S1LW22pFbnxH5JGQ8//MfzLwShQxKtqrPZfaGz84Hgg=; 
-	b=Osbbkoh/MPisEEZO+D7hShf3v40EoYGbEGjI6M3dRnpeoX55IQeNvxjd9Jx4ydAjCk71cBZd0stqBiPJ0WZBxqqFDvRnjiNbzWoyF262aBb579DcVinw+ZX1OykfpqBjGwWONu6eZkKHIzC91ulhOJoBpvnSNjip6pLwrN7OD1w=
+	t=1729184646; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=INdU8Vy7H1JFe+GjwDiltbnyksHVP3i84VMPvIn3WAY=; 
+	b=IM5m2bZpAHgXSJckzMrAzCyhZWgH94E41bX95fRmC1Nh/rFlgOkfiFKqMhbNMYmTayRi6tYLsTxx6F92p5lrHYyrqN2foBzpUrx70z8xUJyAG9IYG50HoxEaxOxo4NZ3b50zaRMCVk+07NCPvEyFg2QvweEoZ5jUNwOxen9KvuM=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184665;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184646;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=S1LW22pFbnxH5JGQ8//MfzLwShQxKtqrPZfaGz84Hgg=;
-	b=is4MgpcB2Qw7lJR60I4biW7RtZlThCKyy2HlGdCtygnA1/Dnl/VtyJOQ5nQ3qnIo
-	x0O/4vni9MAKVmUNEGCWt8jMAhmfvQ8W86OUoQKWUDLaINyE/BzXyvbgI95CPlYSDDY
-	ip+F2EqrX5YhPQ68F5dW77QqzYrrfLoRphOVPLiY=
+	bh=INdU8Vy7H1JFe+GjwDiltbnyksHVP3i84VMPvIn3WAY=;
+	b=QkiSudRVf/AxMqRDYQidDSOMYr8nhOeZb8TFC7qKG464V2iRvWqCaW/XQKvPGnyz
+	PJKp78zHMrtgPjIfktdSC9X5jy/ZGptWpLFV6094lX+sA4Uh89W+wUbC2MAlu8oLnzJ
+	4gLy8aB2swQ/A8SUN+vBw4kT+jqcACMg7aeIRT9s=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v6 38/44] x86/boot: introduce boot domain
-Date: Thu, 17 Oct 2024 13:03:18 -0400
-Message-Id: <20241017170325.3842-39-dpsmith@apertussolutions.com>
+Subject: [PATCH v6 23/44] x86/boot: remove module_map usage from xsm policy loading
+Date: Thu, 17 Oct 2024 13:03:03 -0400
+Message-Id: <20241017170325.3842-24-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241017170325.3842-1-dpsmith@apertussolutions.com>
 References: <20241017170325.3842-1-dpsmith@apertussolutions.com>
@@ -78,149 +78,116 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-To begin moving toward allowing the hypervisor to construct more than one
-domain at boot, a container is needed for a domain's build information.
-
-Introduce a new header, <xen/asm/bootdomain.h>, that contains the initial
-struct boot_domain that encapsulate the build information for a domain.
-
-No functional change intended.
-
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
- xen/arch/x86/include/asm/bootdomain.h | 28 +++++++++++++++++++++++++++
- xen/arch/x86/include/asm/bootinfo.h   |  5 +++++
- xen/arch/x86/setup.c                  | 23 +++++++---------------
- 3 files changed, 40 insertions(+), 16 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/bootdomain.h
+Changes since v5:
+- adjust comment to coding style
+---
+ xen/arch/x86/setup.c  | 2 +-
+ xen/include/xsm/xsm.h | 9 +++------
+ xen/xsm/xsm_core.c    | 6 ++----
+ xen/xsm/xsm_policy.c  | 9 ++-------
+ 4 files changed, 8 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-new file mode 100644
-index 000000000000..4285223ac5ab
---- /dev/null
-+++ b/xen/arch/x86/include/asm/bootdomain.h
-@@ -0,0 +1,28 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2024 Apertus Solutions, LLC
-+ * Author: Daniel P. Smith <dpsmith@apertussolutions.com>
-+ * Copyright (c) 2024 Christopher Clark <christopher.w.clark@gmail.com>
-+ */
-+
-+#ifndef __XEN_X86_BOOTDOMAIN_H__
-+#define __XEN_X86_BOOTDOMAIN_H__
-+
-+struct boot_module;
-+
-+struct boot_domain {
-+    struct boot_module *kernel;
-+    struct boot_module *ramdisk;
-+};
-+
-+#endif
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
-index b65b55c0a2c2..476f71a7633b 100644
---- a/xen/arch/x86/include/asm/bootinfo.h
-+++ b/xen/arch/x86/include/asm/bootinfo.h
-@@ -9,10 +9,14 @@
- #define __XEN_X86_BOOTINFO_H__
- 
- #include <xen/types.h>
-+#include <asm/bootdomain.h>
- 
- /* Max number of boot modules a bootloader can provide in addition to Xen */
- #define MAX_NR_BOOTMODS 63
- 
-+/* Max number of boot domains that Xen can construct */
-+#define MAX_NR_BOOTDOMS 1
-+
- /* Boot module binary type / purpose */
- enum bootmod_type {
-     BOOTMOD_UNKNOWN,
-@@ -63,6 +67,7 @@ struct boot_info {
- 
-     unsigned int nr_modules;
-     struct boot_module mods[MAX_NR_BOOTMODS + 1];
-+    struct boot_domain domains[MAX_NR_BOOTDOMS];
- };
- 
- /*
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index ae027667eb82..ccb5052e18be 100644
+index e1763d7e6548..91110ba96f73 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -956,20 +956,10 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-             .misc_flags = opt_dom0_msr_relaxed ? XEN_X86_MSR_RELAXED : 0,
-         },
-     };
--    unsigned int mod_idx = first_boot_module_index(bi, BOOTMOD_RAMDISK);
--    struct boot_module *image, *initrd;
-+    struct boot_domain *bd = &bi->domains[0];
-     struct domain *d;
-     domid_t domid;
+@@ -1863,7 +1863,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+     mmio_ro_ranges = rangeset_new(NULL, "r/o mmio ranges",
+                                   RANGESETF_prettyprint_hex);
  
--    /* Map boot_module to mb1 module for dom0 */
--    image = &bi->mods[0];
--
--    /* Map boot_module to mb1 module for initrd */
--    if ( mod_idx < 0 )
--        initrd = NULL;
--    else
--        initrd = &bi->mods[mod_idx];
--
-     if ( opt_dom0_pvh )
+-    xsm_multiboot_init(module_map, bi);
++    xsm_multiboot_init(bi);
+ 
+     /*
+      * IOMMU-related ACPI table parsing may require some of the system domains
+diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
+index f155d10e718c..791936e5285b 100644
+--- a/xen/include/xsm/xsm.h
++++ b/xen/include/xsm/xsm.h
+@@ -781,11 +781,9 @@ static inline int xsm_argo_send(const struct domain *d, const struct domain *t)
+ #endif /* XSM_NO_WRAPPERS */
+ 
+ #ifdef CONFIG_MULTIBOOT
+-int xsm_multiboot_init(
+-    unsigned long *module_map, struct boot_info *bi);
++int xsm_multiboot_init(struct boot_info *bi);
+ int xsm_multiboot_policy_init(
+-    unsigned long *module_map, struct boot_info *bi,
+-    void **policy_buffer, size_t *policy_size);
++    struct boot_info *bi, void **policy_buffer, size_t *policy_size);
+ #endif
+ 
+ #ifdef CONFIG_HAS_DEVICE_TREE
+@@ -831,8 +829,7 @@ static const inline struct xsm_ops *silo_init(void)
+ #include <xsm/dummy.h>
+ 
+ #ifdef CONFIG_MULTIBOOT
+-static inline int xsm_multiboot_init (
+-    unsigned long *module_map, struct boot_info *bi)
++static inline int xsm_multiboot_init(struct boot_info *bi)
+ {
+     return 0;
+ }
+diff --git a/xen/xsm/xsm_core.c b/xen/xsm/xsm_core.c
+index 6f034f70428d..50b665759aad 100644
+--- a/xen/xsm/xsm_core.c
++++ b/xen/xsm/xsm_core.c
+@@ -140,8 +140,7 @@ static int __init xsm_core_init(const void *policy_buffer, size_t policy_size)
+ }
+ 
+ #ifdef CONFIG_MULTIBOOT
+-int __init xsm_multiboot_init(
+-    unsigned long *module_map, struct boot_info *bi)
++int __init xsm_multiboot_init(struct boot_info *bi)
+ {
+     int ret = 0;
+     void *policy_buffer = NULL;
+@@ -151,8 +150,7 @@ int __init xsm_multiboot_init(
+ 
+     if ( XSM_MAGIC )
      {
-         dom0_cfg.flags |= (XEN_DOMCTL_CDF_hvm |
-@@ -995,11 +985,10 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-         panic("Error creating d%uv0\n", domid);
+-        ret = xsm_multiboot_policy_init(module_map, bi, &policy_buffer,
+-                                        &policy_size);
++        ret = xsm_multiboot_policy_init(bi, &policy_buffer, &policy_size);
+         if ( ret )
+         {
+             bootstrap_map_bm(NULL);
+diff --git a/xen/xsm/xsm_policy.c b/xen/xsm/xsm_policy.c
+index 921bb254b9d1..453c81df4a2d 100644
+--- a/xen/xsm/xsm_policy.c
++++ b/xen/xsm/xsm_policy.c
+@@ -32,18 +32,14 @@
  
-     /* Grab the DOM0 command line. */
--    if ( image->cmdline || bi->kextra )
-+    if ( bd->kernel->cmdline || bi->kextra )
+ #ifdef CONFIG_MULTIBOOT
+ int __init xsm_multiboot_policy_init(
+-    unsigned long *module_map, struct boot_info *bi,
+-    void **policy_buffer, size_t *policy_size)
++    struct boot_info *bi, void **policy_buffer, size_t *policy_size)
+ {
+     int i;
+     int rc = 0;
+     u32 *_policy_start;
+     unsigned long _policy_len;
+ 
+-    /*
+-     * Try all modules and see whichever could be the binary policy.
+-     * Adjust module_map for the module that is the binary policy.
+-     */
++    /* Try all modules and see whichever could be the binary policy. */
+     for ( i = bi->nr_modules-1; i >= 1; i-- )
      {
--        if ( image->cmdline )
--            safe_strcpy(cmdline,
--                        cmdline_cook(__va(image->cmdline),
-+        if ( bd->kernel->cmdline )
-+            safe_strcpy(cmdline, cmdline_cook(__va(bd->kernel->cmdline),
-                         bi->loader));
+         if ( bi->mods[i].type != BOOTMOD_UNKNOWN )
+@@ -60,7 +56,6 @@ int __init xsm_multiboot_policy_init(
+             printk("Policy len %#lx, start at %p.\n",
+                    _policy_len,_policy_start);
  
-         if ( bi->kextra )
-@@ -1023,7 +1012,7 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-         }
-     }
+-            __clear_bit(i, module_map);
+             bi->mods[i].type = BOOTMOD_XSM_POLICY;
+             break;
  
--    if ( construct_dom0(d, image, initrd, cmdline) != 0 )
-+    if ( construct_dom0(d, bd->kernel, bd->ramdisk, cmdline) != 0 )
-         panic("Could not construct domain 0\n");
- 
-     return d;
-@@ -1203,6 +1192,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     /* Dom0 kernel is always first */
-     bi->mods[0].type = BOOTMOD_KERNEL;
-     bi->mods[0].flags = BOOTMOD_FLAG_X86_CONSUMED;
-+    bi->domains[0].kernel = &bi->mods[0];
- 
-     if ( pvh_boot )
-     {
-@@ -2086,6 +2076,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     {
-         bi->mods[initrdidx].type = BOOTMOD_RAMDISK;
-         bi->mods[initrdidx].flags |= BOOTMOD_FLAG_X86_CONSUMED;
-+        bi->domains[0].ramdisk = &bi->mods[initrdidx];
-         if ( first_boot_module_index(bi, BOOTMOD_UNKNOWN) < MAX_NR_BOOTMODS )
-             printk(XENLOG_WARNING
-                    "Multiple initrd candidates, picking module #%u\n",
 -- 
 2.30.2
 
