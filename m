@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBD3D3C528
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:21:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.821053.1234862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D35CD3C525
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:21:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.821059.1234887 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1UBI-00079m-TO; Thu, 17 Oct 2024 17:21:00 +0000
+	id 1t1UBN-0007uu-Rm; Thu, 17 Oct 2024 17:21:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 821053.1234862; Thu, 17 Oct 2024 17:21:00 +0000
+Received: by outflank-mailman (output) from mailman id 821059.1234887; Thu, 17 Oct 2024 17:21:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1UBI-00079f-Q8; Thu, 17 Oct 2024 17:21:00 +0000
-Received: by outflank-mailman (input) for mailman id 821053;
- Thu, 17 Oct 2024 17:21:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t1UBN-0007tz-KL; Thu, 17 Oct 2024 17:21:05 +0000
+Received: by outflank-mailman (input) for mailman id 821059;
+ Thu, 17 Oct 2024 17:21:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KqF2=RN=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t1Txm-00014B-Tg
- for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:07:02 +0000
-Received: from sender3-of-o59.zoho.com (sender3-of-o59.zoho.com
- [136.143.184.59]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 38cd6bc6-8caa-11ef-99a3-01e77a169b0f;
- Thu, 17 Oct 2024 19:07:01 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1729184645708207.7226848723384;
- Thu, 17 Oct 2024 10:04:05 -0700 (PDT)
+ id 1t1U04-0008TH-IH
+ for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:09:24 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8dc2d6f9-8caa-11ef-a0be-8be0dac302b0;
+ Thu, 17 Oct 2024 19:09:23 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1729184667892741.9331042535918;
+ Thu, 17 Oct 2024 10:04:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38cd6bc6-8caa-11ef-99a3-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; t=1729184648; cv=none; 
+X-Inumbo-ID: 8dc2d6f9-8caa-11ef-a0be-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1729184670; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=SJYiZ1sUG49vabG9vcQXWN55T3uHptNU1UAWTTCUhGuzX4sb0NITpr7LUck7C36p+VnZutGul0pYr3k/mi5VufsxCfhs707nEBT40jWiundcnHOgJ2dgZHbd8o1vQ5VAE6CWUzBYCfQlxElg3z536OpmW8X9hj97UtbtQZgL3FE=
+	b=WVR/lDK+04iVOVW/0H/mHVl9L6kUHWCNJWWyghZxCuhKlHc4yQfq8WpNiXnkMQugs8k+RIccLmVyDuEDFkMARnlnSPqKZPEAl64FEOlraHKZDogGGgAEF6HzAU9IxcfVwSUHYV8ZJ/A4jhv4/cONHMBDlcbNF156qAXxTUhe268=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1729184648; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=AlPw4EAVQKE/AEdlatH3NgpfKfcwbCqOnaIcZsRcFfU=; 
-	b=NkkOhsKT9bH/kMaNOkR4KvOxRRnXWpggDWemdGITiY/O8ZMlsVUT6hXAxhjRJNW2DFTk7zpcwIGEqO0wdD0QjNcYDzV82phiDs18mZkNrMIrbEZJzxRj48e6ZMio4mo+95N0fxCKNFQmQNAbrzVfCCnyKZY3x65vToK2GAxFqFE=
+	t=1729184670; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=+1GsfAAD9TH3Wlh8fsiZ1qgiG1+d1IF1Bk8zaWFZI9U=; 
+	b=ebrqyv3CKounmHSUNcjhbQviXOLghOgMdrTbkGE8+YK5rCsdZgkVnYdXASMvjl+x0Nh5ONlzRWzExGSyV2L60T4JDofJbdFIG+bdw4YLtZom81jdKrm0JJekFdYCO9TqHWZ60EcsMVNfIn44RY1Yyi9nSuSh1gDrfB6KVq6TuIk=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184648;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184670;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=AlPw4EAVQKE/AEdlatH3NgpfKfcwbCqOnaIcZsRcFfU=;
-	b=ncTHZpOwvInORTU5zOa2lR3cK3RNc3VWl35npYLPcApdMoUXNO9cukYWWx/o0ETh
-	niJYbKYIKLrtbv/yQDByfZDl9hjQMNvKBjsxQud9flWzSIK7bwiOcseBGMZfefcFKYs
-	c8oP/zx5pmKlNkMQLFICiZxommBIEArKPW2js30g=
+	bh=+1GsfAAD9TH3Wlh8fsiZ1qgiG1+d1IF1Bk8zaWFZI9U=;
+	b=l53SLPqO/UvAc2AhBCNFOElQLLyAgDloPG62jPyUtOMKRBeTGvV5kg6bPyC6K/19
+	ap1KP+Q7nlw1wpt/H1/w+HUzBw2YdaKixh25040M4VyxfJFQG5/Wktq63PkIp/dm4AT
+	tpq7/5t2Uh90tGiSRMfz3G3gCVBEIxKvvW2yHvpg=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v6 24/44] x86/boot: remove module_map usage by ramdisk loading
-Date: Thu, 17 Oct 2024 13:03:04 -0400
-Message-Id: <20241017170325.3842-25-dpsmith@apertussolutions.com>
+Subject: [PATCH v6 42/44] x86/boot: convert construct_dom0 to struct boot_domain
+Date: Thu, 17 Oct 2024 13:03:22 -0400
+Message-Id: <20241017170325.3842-43-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241017170325.3842-1-dpsmith@apertussolutions.com>
 References: <20241017170325.3842-1-dpsmith@apertussolutions.com>
@@ -78,50 +78,78 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-The ramdisk loading is the last user of module_map, remove
-its usage and any remaining remnants of module_map.
+A struct boot_domain now encapsulates the domain reference, kernel, ramdisk,
+and command line for the domain being constructed. As a result of this
+encapsulation, construct_dom0 can now take a single struct boot_domain instead
+of these four parameters.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
 Changes since v5:
-- set excessive module check down to MAX_NR_BOOTMODS
+- moved back to using variable *d to hold domain reference locally
 ---
- xen/arch/x86/setup.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ xen/arch/x86/dom0_build.c        | 8 ++++----
+ xen/arch/x86/include/asm/setup.h | 4 +---
+ xen/arch/x86/setup.c             | 2 +-
+ 3 files changed, 6 insertions(+), 8 deletions(-)
 
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index 71b2e3afc1a1..34b4943de3b1 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -597,10 +597,10 @@ int __init dom0_setup_permissions(struct domain *d)
+     return rc;
+ }
+ 
+-int __init construct_dom0(struct domain *d, const struct boot_module *image,
+-                          struct boot_module *initrd, const char *cmdline)
++int __init construct_dom0(struct boot_domain *bd)
+ {
+     int rc;
++    struct domain *d = bd->d;
+ 
+     /* Sanity! */
+     BUG_ON(!pv_shim && d->domain_id != 0);
+@@ -610,9 +610,9 @@ int __init construct_dom0(struct domain *d, const struct boot_module *image,
+     process_pending_softirqs();
+ 
+     if ( is_hvm_domain(d) )
+-        rc = dom0_construct_pvh(d, image, initrd, cmdline);
++        rc = dom0_construct_pvh(bd->d, bd->kernel, bd->ramdisk, bd->cmdline);
+     else if ( is_pv_domain(d) )
+-        rc = dom0_construct_pv(d, image, initrd, cmdline);
++        rc = dom0_construct_pv(bd->d, bd->kernel, bd->ramdisk, bd->cmdline);
+     else
+         panic("Cannot construct Dom0. No guest interface available\n");
+ 
+diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+index f7958b56eab6..b049dc5ee17e 100644
+--- a/xen/arch/x86/include/asm/setup.h
++++ b/xen/arch/x86/include/asm/setup.h
+@@ -26,9 +26,7 @@ void subarch_init_memory(void);
+ 
+ void init_IRQ(void);
+ 
+-int construct_dom0(
+-    struct domain *d, const struct boot_module *image,
+-    struct boot_module *initrd, const char *cmdline);
++int construct_dom0(struct boot_domain *d);
+ void setup_io_bitmap(struct domain *d);
+ 
+ extern struct boot_info xen_boot_info;
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 91110ba96f73..08319f871a5d 100644
+index 494e48a7c836..d9ad27093611 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -1036,7 +1036,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     struct boot_info *bi;
-     multiboot_info_t *mbi;
-     module_t *mod;
--    unsigned long nr_pages, raw_max_page, module_map[1];
-+    unsigned long nr_pages, raw_max_page;
-     int i, j, e820_warn = 0, bytes = 0;
-     unsigned long eb_start, eb_end;
-     bool acpi_boot_table_init_done = false, relocated = false;
-@@ -1186,15 +1186,14 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-         panic("dom0 kernel not specified. Check bootloader configuration\n");
+@@ -1014,7 +1014,7 @@ static struct domain *__init create_dom0(struct boot_info *bi)
  
-     /* Check that we don't have a silly number of modules. */
--    if ( bi->nr_modules > sizeof(module_map) * 8 )
-+    if ( bi->nr_modules > MAX_NR_BOOTMODS )
-     {
--        bi->nr_modules = sizeof(module_map) * 8;
--        printk("Excessive boot modules - using the first %u only\n",
-+        bi->nr_modules = MAX_NR_BOOTMODS;
-+        printk("Excessive multiboot modules - using the first %u only\n",
-                bi->nr_modules);
-     }
+     bd->d = d;
  
--    bitmap_fill(module_map, bi->nr_modules);
--    __clear_bit(0, module_map); /* Dom0 kernel is always first */
-+    /* Dom0 kernel is always first */
-     bi->mods[0].type = BOOTMOD_KERNEL;
-     bi->mods[0].flags = BOOTMOD_FLAG_X86_CONSUMED;
+-    if ( construct_dom0(d, bd->kernel, bd->ramdisk, bd->cmdline) != 0 )
++    if ( construct_dom0(bd) != 0 )
+         panic("Could not construct domain 0\n");
  
+     return bd->d;
 -- 
 2.30.2
 
