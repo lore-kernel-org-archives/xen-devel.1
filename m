@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA8DD3C525
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:03:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.820819.1234429 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321ACD3C526
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:03:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.820820.1234439 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1Ttn-0005o2-22; Thu, 17 Oct 2024 17:02:55 +0000
+	id 1t1TuB-0006CW-AZ; Thu, 17 Oct 2024 17:03:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 820819.1234429; Thu, 17 Oct 2024 17:02:55 +0000
+Received: by outflank-mailman (output) from mailman id 820820.1234439; Thu, 17 Oct 2024 17:03:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1Ttm-0005nv-Va; Thu, 17 Oct 2024 17:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 820819;
- Thu, 17 Oct 2024 17:02:54 +0000
+	id 1t1TuB-0006CL-7I; Thu, 17 Oct 2024 17:03:19 +0000
+Received: by outflank-mailman (input) for mailman id 820820;
+ Thu, 17 Oct 2024 17:03:18 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0C1g=RN=bounce.vates.tech=bounce-md_30504962.67114339.v1-36c0712005714e83bc891fbb4b76035d@srs-se1.protection.inumbo.net>)
- id 1t1Ttm-0005np-EE
- for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:02:54 +0000
-Received: from mail186-28.suw21.mandrillapp.com
- (mail186-28.suw21.mandrillapp.com [198.2.186.28])
+ <SRS0=mMIn=RN=bounce.vates.tech=bounce-md_30504962.67114354.v1-ca06631e087c4c96a937f8f6e5a5c153@srs-se1.protection.inumbo.net>)
+ id 1t1TuA-0005np-7c
+ for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:03:18 +0000
+Received: from mail187-33.suw11.mandrillapp.com
+ (mail187-33.suw11.mandrillapp.com [198.2.187.33])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a45b3c37-8ca9-11ef-a0be-8be0dac302b0;
- Thu, 17 Oct 2024 19:02:52 +0200 (CEST)
-Received: from pmta10.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail186-28.suw21.mandrillapp.com (Mailchimp) with ESMTP id
- 4XTvKP4SRGzMQxdJX
- for <xen-devel@lists.xenproject.org>; Thu, 17 Oct 2024 17:02:49 +0000 (GMT)
+ id b3d5db19-8ca9-11ef-a0be-8be0dac302b0;
+ Thu, 17 Oct 2024 19:03:17 +0200 (CEST)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-33.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4XTvKw1GBGzBsThdd
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Oct 2024 17:03:16 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 36c0712005714e83bc891fbb4b76035d; Thu, 17 Oct 2024 17:02:49 +0000
+ ca06631e087c4c96a937f8f6e5a5c153; Thu, 17 Oct 2024 17:03:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,81 +45,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a45b3c37-8ca9-11ef-a0be-8be0dac302b0
+X-Inumbo-ID: b3d5db19-8ca9-11ef-a0be-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1729184569; x=1729445069;
-	bh=RuKXeiTwVLED9q8JXfpU9iyhN9lwitkaLd9n5bwKn5Q=;
+	s=mte1; t=1729184596; x=1729445096;
+	bh=Dp1aMJniWX6oCPINvn4tAgg/ci6dO3dy+/T+6RmcpKU=;
 	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=VdH3QFdi38fNtiDyHI0MX6NUTrezUGartAPiD2aEt/16UfQEVELiZgx8pAEoL72F5
-	 wUDqvPs8OFw3pg4UySkYbP9rlwS4pGKtf7zI3/AuGrkHhbvmX+0Tctit7QESAcybd5
-	 EJpmYmJz5xnHtHe3s4E+rONFTfcz/oUnzDldeL+diQJEHp531iDmolB3CyJE4eRpOV
-	 6uvG7q+R1PM4oEVkVPU5R2ltoVjClspmL1Ek2ZCUoGuYnx7IycivgItCVXYOMbFGzC
-	 f9bVb+YreClHaGa8WsdP3MYoV+m7ybd2T6H1jFax59pk4BPPm/dMblnVDdVTZMY2BB
-	 2R2kJsX7nYLnw==
+	b=Ok50UhxUXMgp3zdC/X+UnvFuVxwwv5uqKueQJnkqy0wsS0QiB9IhTNM8eoUlQKk3t
+	 I5Whu8upIF7YB/AFVi3W1BktI1BevbgadXcGaOAS4zjb/JxA9gkqSrpmeiFOuSRG9X
+	 0MPG9aBZBVpQeQVvgoALrUd2YWsGUWqc48OKqzWgy6YglaMhiLzOk0JKOXVxEm4UFW
+	 oIo57Wm10eQOhTaGctfO22pSmWwWQ4eCHhyUyYGKafVU4d+FctMU8kpd6sm0YewYRA
+	 We0jRILRS6kT7/rAnV1U80/sU2rHfobkmdVR/3NPYekfoaACH0uAX1PA5elHCCnB29
+	 g5KzHS8YkSldA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1729184569; x=1729445069; i=anthony.perard@vates.tech;
-	bh=RuKXeiTwVLED9q8JXfpU9iyhN9lwitkaLd9n5bwKn5Q=;
+	t=1729184596; x=1729445096; i=anthony.perard@vates.tech;
+	bh=Dp1aMJniWX6oCPINvn4tAgg/ci6dO3dy+/T+6RmcpKU=;
 	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=YSlsOHzcKPSrjvbUGRV68wA79xEVA3fham6R0PfZXwG0glLFrTurY0M1RkH2fIiid
-	 +mWZZ5pjJgsZwMtZRClHcr0qo5qbAYa/i17BcYrWknCSfV9wNZqqpKH+hrV026CtnD
-	 OOCgAXM8/sia0SZ18D2QAaGb/8TuonLwpQf80qjiiHwj/fNVqZFQkZilcXLsCgPvFr
-	 U1lYyNbWqG/jUwyQn5hwlbXodbXrbkZLj6RsqQ1KGj/aJ0fDeK48N/cctsjk2FRTBR
-	 IdUGoa3v8lq7Wol7yoQ+J38DrZXDrbQIowWieXhftzk+IGRu3myPbEeg90FHjsA0yJ
-	 lbeS1oDDvksDA==
+	b=WGj/GFZ9Dll2lcZgqCUH8WOJr/hJbTAzIvN0mzcZqWnEp+BZphn9FB+33kCN8nMZe
+	 CTyroeidy9New/El63Ngv7Lgl51YhCy15DsS3upreEAmO8m91qTmNCTxPod8tXKiue
+	 EVGVW3KzMHTc+SIWg/88e2fM4guhB6bBDeyLVKJwPMjVZWIw6NvUiOuhz21OwxH7kB
+	 exfeDZ2uLTYxSOGWWS5GW6C12Tug6EQtne+lov/qrlhJRlLp/V+7pGy3mvf9qslN9B
+	 gLV3amGtxaQ8TDWemEHhg9cLxklu1RAklzR26r+a8ttFRpXKGlDfpApHvjyFXmv/qd
+	 8aLVrqdCcCj+A==
 From: Anthony PERARD <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?Re:=20[XEN=20PATCH=20v1=201/3]=20automation:=20Fix=20URL=20to=20the=20gitlab=20container=20registry=20documentation?=
+Subject: =?utf-8?Q?Re:=20[XEN=20PATCH=20v1=203/3]=20CI:=20Refresh=20and=20upgrade=20the=20Fedora=20container?=
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1729184568275
+X-Bm-Transport-Timestamp: 1729184594407
 To: Javi Merino <javi.merino@cloud.com>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>
-Message-Id: <ZxFDN0rRfsg0iNBj@l14>
-References: <cover.1729170005.git.javi.merino@cloud.com> <5ebb776792a345724b43b0843aa41c21febcc843.1729170005.git.javi.merino@cloud.com>
-In-Reply-To: <5ebb776792a345724b43b0843aa41c21febcc843.1729170005.git.javi.merino@cloud.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, Juergen Gross <jgross@suse.com>, =?utf-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jan Beulich <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Message-Id: <ZxFDUf2zYE1Qzr6v@l14>
+References: <cover.1729170005.git.javi.merino@cloud.com> <178560672106e37648304f5e597cc0b16c8db6db.1729170005.git.javi.merino@cloud.com>
+In-Reply-To: <178560672106e37648304f5e597cc0b16c8db6db.1729170005.git.javi.merino@cloud.com>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.36c0712005714e83bc891fbb4b76035d?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.ca06631e087c4c96a937f8f6e5a5c153?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20241017:md
-Date: Thu, 17 Oct 2024 17:02:49 +0000
+Date: Thu, 17 Oct 2024 17:03:16 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 17, 2024 at 05:20:19PM +0100, Javi Merino wrote:
-> The gitlab documentation is now at
-> https://docs.gitlab.com/ee/administration/packages/container_registry.html
-
-This link seems to be for self-managed instance of gitlab, but the link
-in the patch looks fine.
-
+On Thu, Oct 17, 2024 at 05:20:21PM +0100, Javi Merino wrote:
+> From: Andrew Cooper <andrew.cooper3@citrix.com>
+> 
+> Fedora 29 is long out of date.  Move forward 5 years to Fedora 40.
+> 
+> Include all the usual improvements.  Rework the container to be non-root, use
+> heredocs for legibility, and switch to the new naming scheme.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 > Signed-off-by: Javi Merino <javi.merino@cloud.com>
 
-The patch description could be removed, so:
 Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
 
 Thanks,
-
-> ---
->  automation/build/README.md | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/automation/build/README.md b/automation/build/README.md
-> index bd0c0e041804..ecc898680c91 100644
-> --- a/automation/build/README.md
-> +++ b/automation/build/README.md
-> @@ -110,7 +110,7 @@ make -C automation/build opensuse/tumbleweed-x86_64 PUSH=1
->  
->  [BuildKit]: https://docs.docker.com/build/buildkit/
->  [registry]: https://gitlab.com/xen-project/xen/container_registry
-> -[registry help]: https://gitlab.com/help/user/project/container_registry
-> +[registry help]: https://docs.gitlab.com/ee/user/packages/container_registry/
->  
->  
->  Building/Running container for a different architecture
 
 -- 
 
