@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C8BD3C525
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:20:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.821019.1234802 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB2DD3C526
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Oct 2024 17:20:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.821038.1234842 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1UAb-00042s-1O; Thu, 17 Oct 2024 17:20:17 +0000
+	id 1t1UAu-0005f0-3o; Thu, 17 Oct 2024 17:20:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 821019.1234802; Thu, 17 Oct 2024 17:20:17 +0000
+Received: by outflank-mailman (output) from mailman id 821038.1234842; Thu, 17 Oct 2024 17:20:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t1UAa-00042l-UO; Thu, 17 Oct 2024 17:20:16 +0000
-Received: by outflank-mailman (input) for mailman id 821019;
- Thu, 17 Oct 2024 17:20:16 +0000
+	id 1t1UAt-0005en-Vx; Thu, 17 Oct 2024 17:20:35 +0000
+Received: by outflank-mailman (input) for mailman id 821038;
+ Thu, 17 Oct 2024 17:20:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KqF2=RN=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t1TyW-00014B-0C
- for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:07:48 +0000
+ id 1t1TyG-00014B-Ow
+ for xen-devel@lists.xenproject.org; Thu, 17 Oct 2024 17:07:32 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
  [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 539bd735-8caa-11ef-99a3-01e77a169b0f;
- Thu, 17 Oct 2024 19:07:46 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1729184651885979.0690248848649;
- Thu, 17 Oct 2024 10:04:11 -0700 (PDT)
+ id 4a73a28b-8caa-11ef-99a3-01e77a169b0f;
+ Thu, 17 Oct 2024 19:07:30 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1729184649380155.40519092477825;
+ Thu, 17 Oct 2024 10:04:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 539bd735-8caa-11ef-99a3-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; t=1729184654; cv=none; 
+X-Inumbo-ID: 4a73a28b-8caa-11ef-99a3-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; t=1729184651; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=HRGzO+0jOKUR/Meq44FRnVuwdp1uY7NXVVZifN8wuadlwVVxglBTFTCIXNOMEB8rFU0Cn23CGQAH8fS9dSLmSFCTH1d6yGrwoYAATRmAnrYE6secvf2XOSYFVcNJo7LjRPhGziCSf9co7ZcIuzcO87Bq5p8e9gtRbnPLhLiriMk=
+	b=Wpe+oEVSbYV3IhV6IBjYPlx3kNNAazLZxGPKXgbAFTVtxCHAg/uvodXXUT/rWOCuD19nIC5W8lVQmZx5Ts1f+Bv5N1XqfQ2gsBsvjMIhyKab5SJRbseFJZO/rILifvLmjtEQhi+tY7xpgyaH+1f8J/KXnG4AHUdZYzxOT57/V5I=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1729184654; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=cvWn5Yqu/hyHibZNnNCf1iWRt37Pr6iw0261tw9I/1o=; 
-	b=EyN6YhRwhAIouOy4xuxaqLrgtitgsZssr8DVFkozYUmzorXPJYJOFamAt2THm7Jrte3xKEmQtoPsCR4lmvbixRAb3rRQIhzcdNxG+PfoXh6OF0p0/SzBfdFa/BGvCLx6PCpC8oVw8IdIgKxiAWfLv9/AuF94uJVewwyQvBh2+Xo=
+	t=1729184651; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=m7ZLsFa0scaQr3iKRnGjSr9xOOYoJU1g28IpOugO1dA=; 
+	b=fKe7VX5oXbm9z9WyEMvAegXBpNfFZ2Hse/EWr6Ch9WPR84VWTOHGyApauOUNWW39+4VAo1j0hgIELO/vScTBytZJQd5Lhv2W4dYORyFTz6kB31RO5leLk0hsJHKTOsAACHFZFRDBtIUGY/ixRxiasV7ZoRfgVkkq5DGapym7r7w=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184654;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729184651;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=cvWn5Yqu/hyHibZNnNCf1iWRt37Pr6iw0261tw9I/1o=;
-	b=TRxOmHrFkMtsK4fC14yETXVYeGzzRVW+9ez0BTMeFHumoA0qnlqc2BDZXyeVWjas
-	9aTmOPSvcY6ECR6hWek0Pysc2Vf6JgYRgWMuIp+D9UZI7TI/ds04UiThOcC2CjmnL6L
-	WRTXqFpTlEbcBCf5LEOXbS08992Y2zOsx3gLtdN4=
+	bh=m7ZLsFa0scaQr3iKRnGjSr9xOOYoJU1g28IpOugO1dA=;
+	b=hPMDsb+3XYBveCTZ/4OUIthAHB6gh8TRBAWsQR+H7lvmIEYMvuFTlIg+5krCZaHr
+	atgYbglbip2cXpVnKto59kHe+ApwYH80LZ8NjvUuMe0dQhDf5Ub9WL4ehXnOIRPALE1
+	Wh47WspqpHO/viBaxPtIhxshp6Zi3YbkLbwK8qNE=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v6 29/44] x86/boot: convert dom0_construct_pv image param to struct boot_module
-Date: Thu, 17 Oct 2024 13:03:09 -0400
-Message-Id: <20241017170325.3842-30-dpsmith@apertussolutions.com>
+Subject: [PATCH v6 27/44] x86/boot: relocate kextra into boot info
+Date: Thu, 17 Oct 2024 13:03:07 -0400
+Message-Id: <20241017170325.3842-28-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241017170325.3842-1-dpsmith@apertussolutions.com>
 References: <20241017170325.3842-1-dpsmith@apertussolutions.com>
@@ -78,107 +78,78 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This changes the type for the image parameter of dom0_construct_pv to be struct
-boot_module. Removing the usage of early_mod field for kernel module.
+Move kextra into struct boot_info, thus no longer needed to be passed as a
+parameter to create_dom0.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-Changes since v5:
-- replaced bootstrap_map(NULL) with bootstrap_map_bm
----
- xen/arch/x86/dom0_build.c             |  3 +--
- xen/arch/x86/include/asm/dom0_build.h |  7 +++----
- xen/arch/x86/pv/dom0_build.c          | 16 +++++++---------
- 3 files changed, 11 insertions(+), 15 deletions(-)
+ xen/arch/x86/include/asm/bootinfo.h |  1 +
+ xen/arch/x86/setup.c                | 12 ++++++------
+ 2 files changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
-index 1eff3192f72d..54db578dd29f 100644
---- a/xen/arch/x86/dom0_build.c
-+++ b/xen/arch/x86/dom0_build.c
-@@ -613,8 +613,7 @@ int __init construct_dom0(struct domain *d, const struct boot_module *image,
-         rc = dom0_construct_pvh(d, image->mod, image->headroom, initrd->mod,
-                                 cmdline);
-     else if ( is_pv_domain(d) )
--        rc = dom0_construct_pv(d, image->mod, image->headroom, initrd->mod,
--                               cmdline);
-+        rc = dom0_construct_pv(d, image, initrd->mod, cmdline);
-     else
-         panic("Cannot construct Dom0. No guest interface available\n");
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index 8b63eb27d6dd..8dcda42b3400 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -57,6 +57,7 @@ struct boot_module {
+ struct boot_info {
+     const char *loader;
+     const char *cmdline;
++    const char *kextra;
  
-diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
-index 107c1ff98367..a1f36f7d360d 100644
---- a/xen/arch/x86/include/asm/dom0_build.h
-+++ b/xen/arch/x86/include/asm/dom0_build.h
-@@ -13,10 +13,9 @@ unsigned long dom0_compute_nr_pages(struct domain *d,
-                                     unsigned long initrd_len);
- int dom0_setup_permissions(struct domain *d);
- 
--int dom0_construct_pv(struct domain *d, const module_t *image,
--                      unsigned long image_headroom,
--                      module_t *initrd,
--                      const char *cmdline);
-+int dom0_construct_pv(
-+    struct domain *d, const struct boot_module *image,
-+    module_t *initrd, const char *cmdline);
- 
- int dom0_construct_pvh(struct domain *d, const module_t *image,
-                        unsigned long image_headroom,
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 262edb6bf2f0..f59597e50a11 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -355,8 +355,7 @@ static struct page_info * __init alloc_chunk(struct domain *d,
+     paddr_t memmap_addr;
+     size_t memmap_length;
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index e7573bc3f40b..2574d2f1fdb4 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -945,8 +945,7 @@ static unsigned int __init copy_bios_e820(struct e820entry *map, unsigned int li
+     return n;
  }
  
- static int __init dom0_construct(struct domain *d,
--                                 const module_t *image,
--                                 unsigned long image_headroom,
-+                                 const struct boot_module *image,
-                                  module_t *initrd,
-                                  const char *cmdline)
+-static struct domain *__init create_dom0(struct boot_info *bi,
+-                                         const char *kextra)
++static struct domain *__init create_dom0(struct boot_info *bi)
  {
-@@ -374,9 +373,9 @@ static int __init dom0_construct(struct domain *d,
-     unsigned int flush_flags = 0;
-     start_info_t *si;
-     struct vcpu *v = d->vcpu[0];
--    void *image_base = bootstrap_map(image);
--    unsigned long image_len = image->mod_end;
--    void *image_start = image_base + image_headroom;
-+    void *image_base = bootstrap_map_bm(image);
-+    unsigned long image_len = image->size;
-+    void *image_start = image_base + image->headroom;
-     unsigned long initrd_len = initrd ? initrd->mod_end : 0;
-     l4_pgentry_t *l4tab = NULL, *l4start = NULL;
-     l3_pgentry_t *l3tab = NULL, *l3start = NULL;
-@@ -830,7 +829,7 @@ static int __init dom0_construct(struct domain *d,
-         printk("Failed to load the kernel binary\n");
-         goto out;
-     }
--    bootstrap_map(NULL);
-+    bootstrap_map_bm(NULL);
+     static char __initdata cmdline[MAX_GUEST_CMDLINE];
  
-     if ( UNSET_ADDR != parms.virt_hypercall )
+@@ -1000,15 +999,15 @@ static struct domain *__init create_dom0(struct boot_info *bi,
+         panic("Error creating d%uv0\n", domid);
+ 
+     /* Grab the DOM0 command line. */
+-    if ( image->mod->string || kextra )
++    if ( image->mod->string || bi->kextra )
      {
-@@ -1052,8 +1051,7 @@ out:
- }
+         if ( image->mod->string )
+             safe_strcpy(cmdline, cmdline_cook(__va(image->mod->string),
+                         bi->loader));
  
- int __init dom0_construct_pv(struct domain *d,
--                             const module_t *image,
--                             unsigned long image_headroom,
-+                             const struct boot_module *image,
-                              module_t *initrd,
-                              const char *cmdline)
- {
-@@ -1072,7 +1070,7 @@ int __init dom0_construct_pv(struct domain *d,
-         write_cr4(read_cr4() & ~X86_CR4_SMAP);
+-        if ( kextra )
++        if ( bi->kextra )
+             /* kextra always includes exactly one leading space. */
+-            safe_strcat(cmdline, kextra);
++            safe_strcat(cmdline, bi->kextra);
+ 
+         /* Append any extra parameters. */
+         if ( skip_ioapic_setup && !strstr(cmdline, "noapic") )
+@@ -1102,6 +1101,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         *kextra = '\0';
+         kextra += 3;
+         while ( kextra[1] == ' ' ) kextra++;
++        bi->kextra = kextra;
      }
+     cmdline_parse(bi->cmdline);
  
--    rc = dom0_construct(d, image, image_headroom, initrd, cmdline);
-+    rc = dom0_construct(d, image, initrd, cmdline);
+@@ -2114,7 +2114,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+      * We're going to setup domain0 using the module(s) that we stashed safely
+      * above our heap. The second module, if present, is an initrd ramdisk.
+      */
+-    dom0 = create_dom0(bi, kextra);
++    dom0 = create_dom0(bi);
+     if ( !dom0 )
+         panic("Could not set up DOM0 guest OS\n");
  
-     if ( boot_cpu_has(X86_FEATURE_XEN_SMAP) )
-     {
 -- 
 2.30.2
 
