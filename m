@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 291E7D15DB5
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Oct 2024 15:46:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.823733.1237784 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F231D15DB4
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Oct 2024 15:46:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.823739.1237829 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t2uc0-0007C9-OU; Mon, 21 Oct 2024 15:46:28 +0000
+	id 1t2uc4-0008Na-N2; Mon, 21 Oct 2024 15:46:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 823733.1237784; Mon, 21 Oct 2024 15:46:28 +0000
+Received: by outflank-mailman (output) from mailman id 823739.1237829; Mon, 21 Oct 2024 15:46:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t2uc0-0007BL-Gu; Mon, 21 Oct 2024 15:46:28 +0000
-Received: by outflank-mailman (input) for mailman id 823733;
- Mon, 21 Oct 2024 15:46:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t2uc4-0008KR-Ev; Mon, 21 Oct 2024 15:46:32 +0000
+Received: by outflank-mailman (input) for mailman id 823739;
+ Mon, 21 Oct 2024 15:46:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FlK+=RR=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1t2ubz-0006wR-0e
- for xen-devel@lists.xenproject.org; Mon, 21 Oct 2024 15:46:27 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a0e3e2e9-8fc3-11ef-99a3-01e77a169b0f;
- Mon, 21 Oct 2024 17:46:25 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a9932aa108cso679844466b.2
- for <xen-devel@lists.xenproject.org>; Mon, 21 Oct 2024 08:46:25 -0700 (PDT)
+ id 1t2uc2-00072f-L2
+ for xen-devel@lists.xenproject.org; Mon, 21 Oct 2024 15:46:30 +0000
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [2a00:1450:4864:20::129])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a329ebb5-8fc3-11ef-a0be-8be0dac302b0;
+ Mon, 21 Oct 2024 17:46:29 +0200 (CEST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-539fbbadf83so5935511e87.0
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Oct 2024 08:46:29 -0700 (PDT)
 Received: from localhost.localdomain (0545937c.skybroadband.com.
  [5.69.147.124]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91370fe5sm215688966b.112.2024.10.21.08.46.23
+ a640c23a62f3a-a9a91370fe5sm215688966b.112.2024.10.21.08.46.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 08:46:24 -0700 (PDT)
+ Mon, 21 Oct 2024 08:46:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0e3e2e9-8fc3-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: a329ebb5-8fc3-11ef-a0be-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1729525584; x=1730130384; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5B5PBoQqeHRKR1XhKv6Vo5Hv+PtFd3V27vrqsynASyo=;
-        b=YUp2sDK27kKw7NCaFRU3BK3sI5kSuLxBFA9mGBebdbHnowNEO54uZjE2bL9MjwaUUI
-         s9o/oh/mbxf415h+tyN9HLIr8HJ/zBMvd5t5QljESiyPPhoi24HCjfzfkKRZATPjSYyq
-         ArBSEOQp6CyBcdCK5tmjMERgOvCBmODJgxcpk=
+        d=cloud.com; s=cloud; t=1729525588; x=1730130388; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kt6+5jEr1Vb36dNDj6FYHrZnMI7Ec+TK6iPRKwqkLa8=;
+        b=dYWfdIqie9JvNXBWGcz9yHXzD4Btc/2WwTI1L2GNS2H0PGsJ9qpmSb0xm+Jlgi30i6
+         XDs/Kmb5AeNyJ+GH8u1JYMsAJO/qWMBOxOMVUsqgghWJmFx1GlC97p4Lzu/7TqO5byGz
+         EuKMI7qlj0MPt5Amx8vcmtuA9AxYPLMox2tP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729525584; x=1730130384;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5B5PBoQqeHRKR1XhKv6Vo5Hv+PtFd3V27vrqsynASyo=;
-        b=WKPhTW69LjMwZvTB4qV4k1Iu8kYgB4FejIARDILIophFqoVD/SPQ5k4HAi0WDjexha
-         JEyLjy+3ZFwD+giWnssIv+F4WA7R7+Rz1iAK2ALj70QuCrXjbEADDUrRQyQRT2OlMuqe
-         Nml7o69wKR27SEp3Frp5PyNxtjGswOheoj8ZYIuUtXOu4Iblf/rv0+MMRKUwwWDOs88n
-         QUOb5K3GWJpfJb7jkQE9j9bkIJ4S5VZJQ36N3MbUM1IlXci4sC76F64uewX640ufFQp0
-         gml71uUlpGLIfvS3N5onywXk2PaOB5BAaGP2YLXxECEEkcFpvG/321tEbtOIeUrUL5XZ
-         4hpQ==
-X-Gm-Message-State: AOJu0YzcTsmqJV0ioqjWh7NLpC/Bd+FAOV+Z8p5KaxhvsM8DgN9lPzv8
-	K28o5o4hO6ScU8/mkGQkTsh3ofZPfq5XuyouXrtu9i0qFMtQs+ST6b5craCNs8zjaEU6AAntsbn
-	Y
-X-Google-Smtp-Source: AGHT+IF+JCOiVC4fd7XiDGOfaV8WDxj+tAE7Om1/oNXTfBv0GO/pofYATwd7v/kPNGfmsNDvABFGZA==
-X-Received: by 2002:a17:907:7ea8:b0:a9a:423:3278 with SMTP id a640c23a62f3a-a9a69c9883emr1068329066b.49.1729525584344;
-        Mon, 21 Oct 2024 08:46:24 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1729525588; x=1730130388;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kt6+5jEr1Vb36dNDj6FYHrZnMI7Ec+TK6iPRKwqkLa8=;
+        b=l7XGlkpLjPJLcCLCiIyGyd9zIl8NUOIKVSrxuP4WiPtH6S4r1Cc/HD2wzLBKYxd7N+
+         oAraV0aAqm1N9bl+ulfFXCRMlwTbw0iFJ0VE6rWUvMpj9nH0lciIkz+ZViD3cEMj92mA
+         2H2ywZlkrzJW2vi4ZkOBOVsdR1RgLVFHp2s2jJSQQ6KIND2OhCQjr8k8HAwFnYFUw9tR
+         u10NH573h7odvkYaBIOcKA4rxxRf4VR1FEhTEzhNGinnUErJZlyORq5mAn9shEdA1WeI
+         Wul+BMZfvWBvdT18MzT9eR6FvBYHTmrLQbSX7BDVjrXDCKk334Nv330QT7ShTzDiH4Bk
+         8Nmg==
+X-Gm-Message-State: AOJu0YyzoFEZ23cjvM/GxFKCtCoL5sjEKnYfeQb/ecmjYXpELfKv7PWY
+	YmA1uhcqHl6NTrSrkgsN9XYsW1gQNBoNQI8av/CI00U0MDHtIbCmy//naRZ2hjkeUrv5NAUi5cP
+	G
+X-Google-Smtp-Source: AGHT+IEVrJLMBoJ/8SaBB8jA+N4KaLZEj3RQfn5qwUH4alpb3yPxMwBg2zaGlHFDoRArLQYZjKNmAw==
+X-Received: by 2002:a05:6512:b19:b0:539:d2e2:41ff with SMTP id 2adb3069b0e04-53a15493465mr5426897e87.23.1729525588191;
+        Mon, 21 Oct 2024 08:46:28 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -82,110 +83,171 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v7 00/10] x86: Expose consistent topology to guests
-Date: Mon, 21 Oct 2024 16:45:50 +0100
-Message-ID: <20241021154600.11745-1-alejandro.vallejo@cloud.com>
+Subject: [PATCH v7 05/10] tools/libacpi: Use LUT of APIC IDs rather than function pointer
+Date: Mon, 21 Oct 2024 16:45:55 +0100
+Message-ID: <20241021154600.11745-6-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241021154600.11745-1-alejandro.vallejo@cloud.com>
+References: <20241021154600.11745-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Current topology handling is close to non-existent. As things stand, APIC IDs
-are allocated through the apic_id=vcpu_id*2 relation without giving any hints
-to the OS on how to parse the x2APIC ID of a given CPU and assuming the guest
-will assume 2 threads per core.
+Refactors libacpi so that a single LUT is the authoritative source of
+truth for the CPU to APIC ID mappings. This has a know-on effect in
+reducing complexity on future patches, as the same LUT can be used for
+configuring the APICs and configuring the ACPI tables for PVH.
 
-This series involves bringing x2APIC IDs into the migration stream, so older
-guests keep operating as they used to and enhancing Xen+toolstack so new guests
-get topology information consistent with their x2APIC IDs. As a side effect of
-this, x2APIC IDs are now packed and don't have (unless under a pathological
-case) gaps.
+Not functional change intended, because the same mappings are preserved.
 
-Further work ought to allow combining this topology configurations with
-gang-scheduling of guest hyperthreads into affine physical hyperthreads. For
-the time being it purposefully keeps the configuration of "1 socket" + "1
-thread per core" + "1 core per vCPU".
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+v7:
+  * NOTE: didn't add assert to libacpi as initially accepted in order to
+    protect libvirt from an assert failure.
+  * s/uint32_t/unsigned int/ in for loop of libxl.
+  * turned Xen-style loop in libxl to libxl-style.
+---
+ tools/firmware/hvmloader/util.c   | 7 +------
+ tools/include/xenguest.h          | 5 +++++
+ tools/libacpi/build.c             | 6 +++---
+ tools/libacpi/libacpi.h           | 2 +-
+ tools/libs/light/libxl_dom.c      | 5 +++++
+ tools/libs/light/libxl_x86_acpi.c | 7 +------
+ 6 files changed, 16 insertions(+), 16 deletions(-)
 
-===
-
-Other minor changes highlighted in each individual patch.
-
-Hypervisor prerequisites:
-
-  patch  1: lib/x86: Bump max basic leaf in {pv,hvm}_max_policy
-    * Conceptually similar to v6/patch1 ("Relax checks about policy
-      compatibility"), but operates on the max policies instead.
-  patch  2: xen/x86: Add initial x2APIC ID to the per-vLAPIC save area
-  patch  3: xen/x86: Add supporting code for uploading LAPIC contexts during
-           domain create
-
-hvmloader prerequisites
-
-  patch  4: tools/hvmloader: Retrieve (x2)APIC IDs from the APs themselves
-
-Toolstack prerequisites:
-
-  patch  5: tools/libacpi: Use LUT of APIC IDs rather than function pointer
-  patch  6: tools/libguest: Always set vCPU context in vcpu_hvm()
-
-No functional changes:
-
-  patch  7: xen/lib: Add topology generator for x86
-    * Tweaked the behaviour of the cache leaves on overflow and added stronger
-      checks.
-  patch  8: xen/x86: Derive topologically correct x2APIC IDs from the policy
-
-Final toolstack/xen stitching:
-
-  patch  9: tools/libguest: Set distinct x2APIC IDs for each vCPU
-  patch 10: xen/x86: Synthesise domain topologies
-
-v6: https://lore.kernel.org/xen-devel/20241001123807.605-1-alejandro.vallejo@cloud.com
-v5: https://lore.kernel.org/xen-devel/20240808134251.29995-1-alejandro.vallejo@cloud.com/
-v4: https://lore.kernel.org/xen-devel/cover.1719416329.git.alejandro.vallejo@cloud.com/
-v3: https://lore.kernel.org/xen-devel/cover.1716976271.git.alejandro.vallejo@cloud.com/
-v2: https://lore.kernel.org/xen-devel/cover.1715102098.git.alejandro.vallejo@cloud.com/
-v1: https://lore.kernel.org/xen-devel/20240109153834.4192-1-alejandro.vallejo@cloud.com/
-
-
-Alejandro Vallejo (10):
-  lib/x86: Bump max basic leaf in {pv,hvm}_max_policy
-  xen/x86: Add initial x2APIC ID to the per-vLAPIC save area
-  xen/x86: Add supporting code for uploading LAPIC contexts during
-    domain create
-  tools/hvmloader: Retrieve (x2)APIC IDs from the APs themselves
-  tools/libacpi: Use LUT of APIC IDs rather than function pointer
-  tools/libguest: Always set vCPU context in vcpu_hvm()
-  xen/lib: Add topology generator for x86
-  xen/x86: Derive topologically correct x2APIC IDs from the policy
-  tools/libguest: Set distinct x2APIC IDs for each vCPU
-  tools/x86: Synthesise domain topologies
-
- tools/firmware/hvmloader/config.h        |   5 +-
- tools/firmware/hvmloader/hvmloader.c     |   6 +-
- tools/firmware/hvmloader/mp_tables.c     |   4 +-
- tools/firmware/hvmloader/smp.c           |  57 +++++--
- tools/firmware/hvmloader/util.c          |   7 +-
- tools/include/xen-tools/common-macros.h  |   5 +
- tools/include/xenguest.h                 |   8 +
- tools/libacpi/build.c                    |   6 +-
- tools/libacpi/libacpi.h                  |   2 +-
- tools/libs/guest/xg_cpuid_x86.c          |  29 +++-
- tools/libs/guest/xg_dom_x86.c            |  93 +++++++----
- tools/libs/light/libxl_dom.c             |  25 +++
- tools/libs/light/libxl_x86_acpi.c        |   7 +-
- tools/tests/cpu-policy/test-cpu-policy.c | 201 +++++++++++++++++++++++
- xen/arch/x86/cpu-policy.c                |  15 +-
- xen/arch/x86/cpuid.c                     |  18 +-
- xen/arch/x86/hvm/vlapic.c                |  42 ++++-
- xen/arch/x86/include/asm/hvm/vlapic.h    |   1 +
- xen/include/public/arch-x86/hvm/save.h   |   2 +
- xen/include/xen/lib/x86/cpu-policy.h     |  27 +++
- xen/lib/x86/policy.c                     | 169 +++++++++++++++++++
- xen/lib/x86/private.h                    |   4 +
- 22 files changed, 649 insertions(+), 84 deletions(-)
-
-
-base-commit: 081683ea578da56dd20b9dc22a64d03c893b47ba
+diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
+index 821b3086a87d..afa3eb9d5775 100644
+--- a/tools/firmware/hvmloader/util.c
++++ b/tools/firmware/hvmloader/util.c
+@@ -825,11 +825,6 @@ static void acpi_mem_free(struct acpi_ctxt *ctxt,
+     /* ACPI builder currently doesn't free memory so this is just a stub */
+ }
+ 
+-static uint32_t acpi_lapic_id(unsigned cpu)
+-{
+-    return cpu_to_x2apic_id[cpu];
+-}
+-
+ void hvmloader_acpi_build_tables(struct acpi_config *config,
+                                  unsigned int physical)
+ {
+@@ -859,7 +854,7 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
+     }
+ 
+     config->lapic_base_address = LAPIC_BASE_ADDRESS;
+-    config->lapic_id = acpi_lapic_id;
++    config->cpu_to_apicid = cpu_to_x2apicid;
+     config->ioapic_base_address = IOAPIC_BASE_ADDRESS;
+     config->ioapic_id = IOAPIC_ID;
+     config->pci_isa_irq_mask = PCI_ISA_IRQ_MASK; 
+diff --git a/tools/include/xenguest.h b/tools/include/xenguest.h
+index e01f494b772a..aa50b78dfb89 100644
+--- a/tools/include/xenguest.h
++++ b/tools/include/xenguest.h
+@@ -22,6 +22,8 @@
+ #ifndef XENGUEST_H
+ #define XENGUEST_H
+ 
++#include "xen/hvm/hvm_info_table.h"
++
+ #define XC_NUMA_NO_NODE   (~0U)
+ 
+ #define XCFLAGS_LIVE      (1 << 0)
+@@ -236,6 +238,9 @@ struct xc_dom_image {
+ #if defined(__i386__) || defined(__x86_64__)
+     struct e820entry *e820;
+     unsigned int e820_entries;
++
++    /* LUT mapping cpu id to (x2)APIC ID */
++    uint32_t cpu_to_apicid[HVM_MAX_VCPUS];
+ #endif
+ 
+     xen_pfn_t vuart_gfn;
+diff --git a/tools/libacpi/build.c b/tools/libacpi/build.c
+index 2f29863db154..2ad1d461a2ec 100644
+--- a/tools/libacpi/build.c
++++ b/tools/libacpi/build.c
+@@ -74,7 +74,7 @@ static struct acpi_20_madt *construct_madt(struct acpi_ctxt *ctxt,
+     const struct hvm_info_table   *hvminfo = config->hvminfo;
+     int i, sz;
+ 
+-    if ( config->lapic_id == NULL )
++    if ( config->cpu_to_apicid == NULL )
+         return NULL;
+ 
+     sz  = sizeof(struct acpi_20_madt);
+@@ -148,7 +148,7 @@ static struct acpi_20_madt *construct_madt(struct acpi_ctxt *ctxt,
+         lapic->length  = sizeof(*lapic);
+         /* Processor ID must match processor-object IDs in the DSDT. */
+         lapic->acpi_processor_id = i;
+-        lapic->apic_id = config->lapic_id(i);
++        lapic->apic_id = config->cpu_to_apicid[i];
+         lapic->flags = (test_bit(i, hvminfo->vcpu_online)
+                         ? ACPI_LOCAL_APIC_ENABLED : 0);
+         lapic++;
+@@ -236,7 +236,7 @@ static struct acpi_20_srat *construct_srat(struct acpi_ctxt *ctxt,
+         processor->type     = ACPI_PROCESSOR_AFFINITY;
+         processor->length   = sizeof(*processor);
+         processor->domain   = config->numa.vcpu_to_vnode[i];
+-        processor->apic_id  = config->lapic_id(i);
++        processor->apic_id  = config->cpu_to_apicid[i];
+         processor->flags    = ACPI_LOCAL_APIC_AFFIN_ENABLED;
+         processor++;
+     }
+diff --git a/tools/libacpi/libacpi.h b/tools/libacpi/libacpi.h
+index deda39e5dbc4..e8f603ee18ee 100644
+--- a/tools/libacpi/libacpi.h
++++ b/tools/libacpi/libacpi.h
+@@ -84,7 +84,7 @@ struct acpi_config {
+     unsigned long rsdp;
+ 
+     /* x86-specific parameters */
+-    uint32_t (*lapic_id)(unsigned cpu);
++    const uint32_t *cpu_to_apicid; /* LUT mapping cpu id to (x2)APIC ID */
+     uint32_t lapic_base_address;
+     uint32_t ioapic_base_address;
+     uint16_t pci_isa_irq_mask;
+diff --git a/tools/libs/light/libxl_dom.c b/tools/libs/light/libxl_dom.c
+index 94fef374014e..5f4f6830e850 100644
+--- a/tools/libs/light/libxl_dom.c
++++ b/tools/libs/light/libxl_dom.c
+@@ -1082,6 +1082,11 @@ int libxl__build_hvm(libxl__gc *gc, uint32_t domid,
+ 
+     dom->container_type = XC_DOM_HVM_CONTAINER;
+ 
++#if defined(__i386__) || defined(__x86_64__)
++    for (unsigned int i = 0; i < info->max_vcpus; i++)
++        dom->cpu_to_apicid[i] = 2 * i; /* TODO: Replace by topo calculation */
++#endif
++
+     /* The params from the configuration file are in Mb, which are then
+      * multiplied by 1 Kb. This was then divided off when calling
+      * the old xc_hvm_build_target_mem() which then turned them to bytes.
+diff --git a/tools/libs/light/libxl_x86_acpi.c b/tools/libs/light/libxl_x86_acpi.c
+index 5cf261bd6794..585d4c8755cb 100644
+--- a/tools/libs/light/libxl_x86_acpi.c
++++ b/tools/libs/light/libxl_x86_acpi.c
+@@ -75,11 +75,6 @@ static void acpi_mem_free(struct acpi_ctxt *ctxt,
+ {
+ }
+ 
+-static uint32_t acpi_lapic_id(unsigned cpu)
+-{
+-    return cpu * 2;
+-}
+-
+ static int init_acpi_config(libxl__gc *gc, 
+                             struct xc_dom_image *dom,
+                             const libxl_domain_build_info *b_info,
+@@ -144,7 +139,7 @@ static int init_acpi_config(libxl__gc *gc,
+     config->hvminfo = hvminfo;
+ 
+     config->lapic_base_address = LAPIC_BASE_ADDRESS;
+-    config->lapic_id = acpi_lapic_id;
++    config->cpu_to_apicid = dom->cpu_to_apicid;
+     config->acpi_revision = 5;
+ 
+     rc = 0;
 -- 
 2.47.0
 
