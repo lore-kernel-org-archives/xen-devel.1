@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6263D3C927
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Oct 2024 00:56:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.822980.1236982 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ADA9D3C935
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Oct 2024 00:56:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.822970.1236954 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t2giv-0001vR-21; Mon, 21 Oct 2024 00:56:41 +0000
+	id 1t2giq-0000yI-Fu; Mon, 21 Oct 2024 00:56:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 822980.1236982; Mon, 21 Oct 2024 00:56:41 +0000
+Received: by outflank-mailman (output) from mailman id 822970.1236954; Mon, 21 Oct 2024 00:56:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t2giu-0001vC-UC; Mon, 21 Oct 2024 00:56:40 +0000
-Received: by outflank-mailman (input) for mailman id 822980;
- Mon, 21 Oct 2024 00:56:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t2giq-0000wW-AJ; Mon, 21 Oct 2024 00:56:36 +0000
+Received: by outflank-mailman (input) for mailman id 822970;
+ Mon, 21 Oct 2024 00:56:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Q0x4=RR=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t2gZz-000738-Uj
- for xen-devel@lists.xenproject.org; Mon, 21 Oct 2024 00:47:27 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0a69954d-8f46-11ef-a0be-8be0dac302b0;
- Mon, 21 Oct 2024 02:47:27 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1729471592962507.4627630240867;
- Sun, 20 Oct 2024 17:46:32 -0700 (PDT)
+ id 1t2gbl-0003Iq-2H
+ for xen-devel@lists.xenproject.org; Mon, 21 Oct 2024 00:49:17 +0000
+Received: from sender3-of-o57.zoho.com (sender3-of-o57.zoho.com
+ [136.143.184.57]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4ab63ad6-8f46-11ef-99a3-01e77a169b0f;
+ Mon, 21 Oct 2024 02:49:15 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1729471609370815.6656070423512;
+ Sun, 20 Oct 2024 17:46:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0a69954d-8f46-11ef-a0be-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1729471594; cv=none; 
+X-Inumbo-ID: 4ab63ad6-8f46-11ef-99a3-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; t=1729471611; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=mK3dy+ROetQibWDQkE2abbPJkr6Vvawn07z/3r4l9R6/eOQdmUtCtmVcoAp/UHYYPRI/J2a+LyrVZqkBsuABYmjX67AwkCKsJi6uXyiOwVlLhRNHz4sfIMts+nwJM8XJvoVRYziFGeR5u1s9pdIpQ2k/npu8kkFpFQbvMzkdxUE=
+	b=VOOV58aeXXstEaea5PEYY5hCNM5Cf2DbWfz2W9JspozDw/+uuMHZvc84UM+6/zOQJngg17ateZEawbZzi8ThwznVn0yhXIpVL3hoif0xQSgA5EZbnRUKg4cdalq2h+4CQMI6Poi9ZUeGjHXMYeRSU3CWB0AR6QGFuY8fYIBTllU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1729471594; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=Zg0/zrG8nOgRHoZJidNwfeDdFu4m0rBe5upUUFqNRlI=; 
-	b=EdBwnOe0sw8iK8jWcyW0mtp8RxiKfJuLsSUDXW5Viny8SY8BMGO3x8LRmPf3WD69I5Xn9udTkI7JKdbmZ0QIDkrTvqptn78YawwKsta4HOEfx8G/SmtZoGvJoQj6HC1ZS9I4Wo9XNNMySd1Gb94oyHEmSgrWM9tEZ1OoSj9jBlw=
+	t=1729471611; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=StSbCrB+Dkpm/0KxKKmbp9r7lXihj1wwfuzXw0D2zII=; 
+	b=DzdLNigp2vxkFU15ypRPfOMbmQkmJKfIrGQQQOqOX7BC6HcCkDG81j3sQVFeSixvbaKEK0yO5T9cwCC0ltJ4q0m+xleIOt0C9nnmkpwSJJgb0X1ary9aZiSQ9up0vNpwcJfzUPpVYulqrA3GhUo3cK4SXmkwWAMowI7i/mCyzCA=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729471594;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729471611;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=Zg0/zrG8nOgRHoZJidNwfeDdFu4m0rBe5upUUFqNRlI=;
-	b=Pv63iucLy2BAnqn+7M1Igu9pyL7cClzAcYZ5im4cNdjPK+wit+lVgb7o1XfducfZ
-	XjOQFUN3Mxmf8Pf8SvxO3chfoAm5HMkdkceeTNWvGZcAqB6OniqO5PqH3GjZfLLLPFN
-	j7bWdVFNQ4pC7pOh6+GwXgxHEjF6xpY4an0aHJBI=
+	bh=StSbCrB+Dkpm/0KxKKmbp9r7lXihj1wwfuzXw0D2zII=;
+	b=dXJQ+gs63Q0A8BdYYVq/jGFJDNiM0vKokc2EhktgXDOQvCoAaYHdsS5ZZJj++YUF
+	6mWDgRdSzh+tsmMKCryvQRCm1qbyuzI0aSgEtAu9msVEq4zRKcCZNztegQAbqz6Iycg
+	tVLwP8p+VKalsQDZqo0aScT54knUo9z9eldrG9Mo=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v7 08/38] x86/boot: populate boot module for xen entry
-Date: Sun, 20 Oct 2024 20:45:43 -0400
-Message-Id: <20241021004613.18793-9-dpsmith@apertussolutions.com>
+Subject: [PATCH v7 22/38] x86/boot: add cmdline to struct boot_module
+Date: Sun, 20 Oct 2024 20:45:57 -0400
+Message-Id: <20241021004613.18793-23-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241021004613.18793-1-dpsmith@apertussolutions.com>
 References: <20241021004613.18793-1-dpsmith@apertussolutions.com>
@@ -78,39 +78,60 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Populate the start and size fields for the Xen entry when populating them in
-the reserved module_t entry.
+Add a char pointer field, cmdline, to struct boot_module to hold the address
+pointed to by the string field of struct mod. This removes the need to use the
+early_mod field to get to the dom0 kernel command line.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
-Changes since v6:
-- apply correct conversion of assignment to mod_start
-- rewrite commit message to reflect code change
-
 Changes since v5:
-- corrected conversion function for a missed switch from mfn to maddr/paddr
+- changed boot_module element cmdline to paddr_t
 ---
- xen/arch/x86/setup.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ xen/arch/x86/include/asm/bootinfo.h | 2 ++
+ xen/arch/x86/setup.c                | 9 ++++++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
 
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index 9bd0e6336b4a..941363601db7 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -52,6 +52,8 @@ struct boot_module {
+     bool relocated:1;
+     bool consumed:1;
+ 
++    paddr_t cmdline;
++
+     paddr_t start;
+     size_t size;
+ };
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 2e87aa314389..4e5d4055e7dd 100644
+index 6f953edd7521..254aeb0c5e1b 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -1411,8 +1411,11 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-          * respective reserve_e820_ram() invocation below. No need to
-          * query efi_boot_mem_unused() here, though.
-          */
--        bi->mods[xen].mod->mod_start = virt_to_mfn(_stext);
--        bi->mods[xen].mod->mod_end = __2M_rwdata_end - _stext;
-+        bi->mods[xen].start = virt_to_maddr(_stext);
-+        bi->mods[xen].size = __2M_rwdata_end - _stext;
-+
-+        bi->mods[xen].mod->mod_start = paddr_to_pfn(bi->mods[xen].start);
-+        bi->mods[xen].mod->mod_end = bi->mods[xen].size;
-     }
+@@ -318,6 +318,8 @@ static struct boot_info *__init multiboot_fill_boot_info(unsigned long mbi_p)
+     {
+         bi->mods[i].mod = &mods[i];
  
-     bi->mods[0].headroom =
++        bi->mods[i].cmdline = (paddr_t)mods[i].string;
++
+         if ( !efi_enabled(EFI_LOADER) )
+         {
+             bi->mods[i].start = mods[i].mod_start;
+@@ -1016,10 +1018,11 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+         panic("Error creating d%uv0\n", domid);
+ 
+     /* Grab the DOM0 command line. */
+-    if ( image->mod->string || bi->kextra )
++    if ( image->cmdline || bi->kextra )
+     {
+-        if ( image->mod->string )
+-            safe_strcpy(cmdline, cmdline_cook(__va(image->mod->string),
++        if ( image->cmdline )
++            safe_strcpy(cmdline,
++                        cmdline_cook(__va(image->cmdline),
+                         bi->loader));
+ 
+         if ( bi->kextra )
 -- 
 2.30.2
 
