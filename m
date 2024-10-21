@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01605D3C927
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Oct 2024 00:57:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.823030.1237091 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF7DD3C935
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Oct 2024 00:57:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.823043.1237137 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t2gjY-0008Kr-HR; Mon, 21 Oct 2024 00:57:20 +0000
+	id 1t2gji-0001wP-UK; Mon, 21 Oct 2024 00:57:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 823030.1237091; Mon, 21 Oct 2024 00:57:20 +0000
+Received: by outflank-mailman (output) from mailman id 823043.1237137; Mon, 21 Oct 2024 00:57:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t2gjY-0008Ka-Cr; Mon, 21 Oct 2024 00:57:20 +0000
-Received: by outflank-mailman (input) for mailman id 823030;
- Mon, 21 Oct 2024 00:57:19 +0000
+	id 1t2gji-0001vF-Lr; Mon, 21 Oct 2024 00:57:30 +0000
+Received: by outflank-mailman (input) for mailman id 823043;
+ Mon, 21 Oct 2024 00:57:28 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Q0x4=RR=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t2gZs-000738-RL
- for xen-devel@lists.xenproject.org; Mon, 21 Oct 2024 00:47:20 +0000
-Received: from sender3-of-o58.zoho.com (sender3-of-o58.zoho.com
- [136.143.184.58]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 060d6c93-8f46-11ef-a0be-8be0dac302b0;
- Mon, 21 Oct 2024 02:47:19 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1729471591822568.8599150587428;
- Sun, 20 Oct 2024 17:46:31 -0700 (PDT)
+ id 1t2ga6-000738-Ow
+ for xen-devel@lists.xenproject.org; Mon, 21 Oct 2024 00:47:34 +0000
+Received: from sender3-of-o59.zoho.com (sender3-of-o59.zoho.com
+ [136.143.184.59]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0e7738f3-8f46-11ef-a0be-8be0dac302b0;
+ Mon, 21 Oct 2024 02:47:33 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1729471594102634.8207739049702;
+ Sun, 20 Oct 2024 17:46:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 060d6c93-8f46-11ef-a0be-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1729471593; cv=none; 
+X-Inumbo-ID: 0e7738f3-8f46-11ef-a0be-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1729471595; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=D6oyLCDD5DJpBPsrlA/M7BmHu9FXfhAZnT8g4rcfuK85qAjfgfl0Iv/dvtjK9L5aQqG/bNuf9kdoVLKr3Tu8nEBvkZv25i9EpTwCUEy06w5v4NHzZi/kcHdWsECJUCCzfvzuuCqAYMcTC6Rz+A1RK2+mBY49KSd0qw3PIU3oikk=
+	b=DwBCWLzNDovqZO5A9SXMghcH2KD50zs29+J6GUIcLtpoCvmPaS1zrNs85gIQEX9BiTBElkSayoF3xl7ABzdrskKCHsDOCsc/6Hy4N6VRSCIuWkrJo+xJRfVsla12uuB7MTseHX4p+T7kCV5uGK4t4I7pxLN5zmJ4N9hcgvHNyrg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1729471593; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=Vt87AgI0m9lK6tCp4TANNpG9kFhWx6vDUngb9zKNYKY=; 
-	b=FqSpP7+5QHeyC4Y6qtlVlUjNmculkc7LL+uFS/yubXnpSYHcuNaGUd+L6vvzLDTGvZw+v57KViPnlJdAW/6utgw1SE3Ugod6l5xn7GTFpnUZufHPl/iFYa1Tw5Df7oYR+0GvYj1Fn/5i+eVMA/1cYiKtpiD8vb6/P3NeMIoZsGo=
+	t=1729471595; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=gBcmVTmdjlVx1YSjoPePx3/LQoLpGu8yyKS5g8B8j3Q=; 
+	b=jyX2LyLDGO46yhvd0aPQxMj7fyBiJRf57HKzlL1nylqHBcBixsG49NhgY9e4Y1X4osqdJWicA7BrekyH4+DE5YsSilXZQJ4ECwX5DpV195SLKte3nMwRoD4SnhDeNfnyVipe+VDr2Bps9KD7pQ4zZ/e5ceYqnADpJd88sMSBiRk=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729471593;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729471595;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=Vt87AgI0m9lK6tCp4TANNpG9kFhWx6vDUngb9zKNYKY=;
-	b=KYpeI6fo1rWP+ZYhGVQP6arHGsxz9sKtVBFWwJUQi29+UH4ISJ9cHtWN76g0FS42
-	ViNDWGkaY9Zk4NYxWhadBX4NeRW9KC9TYY3ZE0Lax6OzAGTInRYMAsSPPVeEvrLCvhP
-	v7TuncPjDhlwlCzm3Vka9RUumOpd5lJ1eol887ls=
+	bh=gBcmVTmdjlVx1YSjoPePx3/LQoLpGu8yyKS5g8B8j3Q=;
+	b=HRxnN92+I8POhxf1RYKBqGlJk64RR2HEYD1BDj4K2x44SzNZObo6HwVYTIrH6VGy
+	IzcsEDOiqKtQ2S33Z7eNRDIAf+mapElmYN4c1E4FXL+IfOVWdMsVuiCQv3JU29CuhMC
+	QalrGqlJUQZRb293r7/mGRMUioJXCAiGQdzd88ko=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v7 07/38] x86/boot: add start and size fields to struct boot_module
-Date: Sun, 20 Oct 2024 20:45:42 -0400
-Message-Id: <20241021004613.18793-8-dpsmith@apertussolutions.com>
+Subject: [PATCH v7 09/38] x86/boot: transition relocation calculations to struct boot_module
+Date: Sun, 20 Oct 2024 20:45:44 -0400
+Message-Id: <20241021004613.18793-10-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241021004613.18793-1-dpsmith@apertussolutions.com>
 References: <20241021004613.18793-1-dpsmith@apertussolutions.com>
@@ -78,74 +78,97 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This commit introduces the start and size fields to struct boot_module and
-assigns their value during boot_info construction.
-
-The EFI entry point is a special case, as the EFI file loading boot service may
-load a file beyond the 4G barrier. As a result, to make the address fit in the
-32bit integer used by the MB1 module_t structure, the frame number is stored in
-mod_start and size in mod_end. Until the EFI entry point is enlightened to work
-with boot_info and boot_module, multiboot_fill_boot_info will handle the
-alternate values in mod_start and mod_end when EFI is detected.
+Use struct boot_module fields, start and size, when calculating the relocation
+address and size. It also ensures that early_mod references are kept in sync.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
 Changes since v6:
-- put the efi conversion for mod_start and mod_end back along with check
-- dropped unnecessary cast
-- updated the population of start and size fields to take into account efi
+- introduce local s and l refs for start and size, shortening the lines while
+  correcting the indentation style
 
 Changes since v5:
-- switched EFI population of mod_start/mod_end to addresses
+- removed unnecessary paddr_to_pfn, allowing condition to collapse to one line
+- correct a missed conversion from .mod->mod_start to .start
 ---
- xen/arch/x86/include/asm/bootinfo.h |  3 +++
- xen/arch/x86/setup.c                | 15 +++++++++++++++
- 2 files changed, 18 insertions(+)
+ xen/arch/x86/setup.c | 34 ++++++++++++++--------------------
+ 1 file changed, 14 insertions(+), 20 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
-index e8fba66eedc5..dbd22db3d063 100644
---- a/xen/arch/x86/include/asm/bootinfo.h
-+++ b/xen/arch/x86/include/asm/bootinfo.h
-@@ -46,6 +46,9 @@ struct boot_module {
-      *   relocated: indicates module has been relocated in memory.
-      */
-     bool relocated:1;
-+
-+    paddr_t start;
-+    size_t size;
- };
- 
- /*
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 17f74384b5c1..2e87aa314389 100644
+index 4e5d4055e7dd..b02391b887b1 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -315,10 +315,25 @@ static struct boot_info *__init multiboot_fill_boot_info(unsigned long mbi_p)
-      * reserved for Xen.
-      */
-     for ( i = 0; i < MAX_NR_BOOTMODS && i < bi->nr_modules; i++ )
-+    {
-         bi->mods[i].mod = &mods[i];
+@@ -1507,7 +1507,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+              * move mod[0], we incorporate this as extra space at the start.
+              */
+             struct boot_module *bm = &bi->mods[j];
+-            unsigned long size = PAGE_ALIGN(bm->headroom + bm->mod->mod_end);
++            unsigned long size = PAGE_ALIGN(bm->headroom + bm->size);
  
-+        if ( !efi_enabled(EFI_LOADER) )
-+        {
-+            bi->mods[i].start = mods[i].mod_start;
-+            bi->mods[i].size = mods[i].mod_end - mods[i].mod_start;
-+        }
-+        else
-+        {
-+            bi->mods[i].start = pfn_to_paddr(mods[i].mod_start);
-+            bi->mods[i].size = mods[i].mod_end;
-+        }
-+    }
-+
-     /* Variable 'i' should be one entry past the last module. */
-     bi->mods[i].mod = &mods[bi->nr_modules];
-+    bi->mods[i].start = mods[i].mod_start;
-+    bi->mods[i].size = mods[i].mod_end - mods[i].mod_start;
-     bi->mods[i].type = BOOTMOD_XEN;
+             if ( bm->relocated )
+                 continue;
+@@ -1519,15 +1519,13 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+             if ( highmem_start && end > highmem_start )
+                 continue;
  
-     return bi;
+-            if ( s < end &&
+-                 (bm->headroom ||
+-                  ((end - size) >> PAGE_SHIFT) > bm->mod->mod_start) )
++            if ( s < end && (bm->headroom || (end - size) > bm->start) )
+             {
+-                move_memory(end - size + bm->headroom,
+-                            (uint64_t)bm->mod->mod_start << PAGE_SHIFT,
+-                            bm->mod->mod_end);
+-                bm->mod->mod_start = (end - size) >> PAGE_SHIFT;
+-                bm->mod->mod_end += bm->headroom;
++                move_memory(end - size + bm->headroom, bm->start, bm->size);
++                bm->start = (end - size);
++                bm->mod->mod_start = paddr_to_pfn(bm->start);
++                bm->size += bm->headroom;
++                bm->mod->mod_end = bm->size;
+                 bm->relocated = true;
+             }
+         }
+@@ -1558,10 +1556,9 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         panic("Not enough memory to relocate the dom0 kernel image\n");
+     for ( i = 0; i < bi->nr_modules; ++i )
+     {
+-        uint64_t s = (uint64_t)bi->mods[i].mod->mod_start << PAGE_SHIFT;
++        uint64_t s = bi->mods[i].start;
+ 
+-        reserve_e820_ram(&boot_e820, s,
+-                         s + PAGE_ALIGN(bi->mods[i].mod->mod_end));
++        reserve_e820_ram(&boot_e820, s, s + PAGE_ALIGN(bi->mods[i].size));
+     }
+ 
+     if ( !xen_phys_start )
+@@ -1639,8 +1636,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+                 map_e = boot_e820.map[j].addr + boot_e820.map[j].size;
+                 for ( j = 0; j < bi->nr_modules; ++j )
+                 {
+-                    uint64_t end = pfn_to_paddr(bi->mods[j].mod->mod_start) +
+-                                   bi->mods[j].mod->mod_end;
++                    uint64_t end = bi->mods[j].start + bi->mods[j].size;
+ 
+                     if ( map_e < end )
+                         map_e = end;
+@@ -1714,12 +1710,10 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+ 
+     for ( i = 0; i < bi->nr_modules; ++i )
+     {
+-        set_pdx_range(bi->mods[i].mod->mod_start,
+-                      bi->mods[i].mod->mod_start +
+-                          PFN_UP(bi->mods[i].mod->mod_end));
+-        map_pages_to_xen((unsigned long)mfn_to_virt(bi->mods[i].mod->mod_start),
+-                         _mfn(bi->mods[i].mod->mod_start),
+-                         PFN_UP(bi->mods[i].mod->mod_end), PAGE_HYPERVISOR);
++        unsigned long s = bi->mods[i].start, l = bi->mods[i].size;
++        set_pdx_range(paddr_to_pfn(s), paddr_to_pfn(s) + PFN_UP(l));
++        map_pages_to_xen((unsigned long)maddr_to_virt(s), maddr_to_mfn(s),
++                         PFN_UP(l), PAGE_HYPERVISOR);
+     }
+ 
+ #ifdef CONFIG_KEXEC
 -- 
 2.30.2
 
