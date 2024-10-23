@@ -4,44 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84F31CF5386
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 13:11:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.824615.1238809 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D9DCF5389
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 13:16:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.824634.1238818 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3b8Q-0000AO-8B; Wed, 23 Oct 2024 13:10:46 +0000
+	id 1t3bDd-0001rC-1h; Wed, 23 Oct 2024 13:16:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 824615.1238809; Wed, 23 Oct 2024 13:10:46 +0000
+Received: by outflank-mailman (output) from mailman id 824634.1238818; Wed, 23 Oct 2024 13:16:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3b8Q-0000AB-5P; Wed, 23 Oct 2024 13:10:46 +0000
-Received: by outflank-mailman (input) for mailman id 824615;
- Wed, 23 Oct 2024 13:10:44 +0000
+	id 1t3bDc-0001r5-VG; Wed, 23 Oct 2024 13:16:08 +0000
+Received: by outflank-mailman (input) for mailman id 824634;
+ Wed, 23 Oct 2024 13:16:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=W0hE=RT=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1t3b8O-0006Ra-It
- for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 13:10:44 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Arnv=RT=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1t3bDc-0001qz-FG
+ for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 13:16:08 +0000
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [2001:4860:4864:20::2d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 34f4c3fd-9140-11ef-99a3-01e77a169b0f;
- Wed, 23 Oct 2024 15:10:42 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 26F581FDA3;
- Wed, 23 Oct 2024 13:10:42 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E969713A63;
- Wed, 23 Oct 2024 13:10:41 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id J8SFN9H1GGf7dwAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 23 Oct 2024 13:10:41 +0000
+ id f4fbb332-9140-11ef-99a3-01e77a169b0f;
+ Wed, 23 Oct 2024 15:16:05 +0200 (CEST)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-28cdd9d8d01so110133fac.1
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Oct 2024 06:16:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,338 +42,292 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 34f4c3fd-9140-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1729689042; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=E987LsdlIgzKQbdEFTgOeCDvrDTXQ5jG9XVD9+qlAzk=;
-	b=JTVYA1wSacsKybqp0fWSSRubXG1XKGyhEDETDfw3xbdSxZXFlQ4EemOFZnEoZZHeOhwmI5
-	Z4BXftGSJIGvNBwPENvX4CUv/TR3TSyVGO7qqUBtzgbsHSKA+oU+drHQm8Qb3TeiDEAC+Y
-	4cpUTLm+65lTGl5F0zW27vwSvD9CXMQ=
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1729689042; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=E987LsdlIgzKQbdEFTgOeCDvrDTXQ5jG9XVD9+qlAzk=;
-	b=JTVYA1wSacsKybqp0fWSSRubXG1XKGyhEDETDfw3xbdSxZXFlQ4EemOFZnEoZZHeOhwmI5
-	Z4BXftGSJIGvNBwPENvX4CUv/TR3TSyVGO7qqUBtzgbsHSKA+oU+drHQm8Qb3TeiDEAC+Y
-	4cpUTLm+65lTGl5F0zW27vwSvD9CXMQ=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH 6/6] tools/xenstored: use new stable interface instead of libxenctrl
-Date: Wed, 23 Oct 2024 15:10:05 +0200
-Message-ID: <20241023131005.32144-7-jgross@suse.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241023131005.32144-1-jgross@suse.com>
-References: <20241023131005.32144-1-jgross@suse.com>
+X-Inumbo-ID: f4fbb332-9140-11ef-99a3-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1729689364; x=1730294164; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iiTzAsiwQo9rZSFwrzFSJ7VZH2hOB+SYWxOqMjEecys=;
+        b=HeINMw/Hp1cSd/9sccTKnfCpbV/4ymIR5mGfRTyhZO4luKElAW7JIvXCMomy6aQ8Hb
+         zFq+JhCJTjAynAhaJ0Awj7b1+aYm6GvxSynVBeC3CVH2LR0eE9UE86R171Zv7FiMEcMs
+         diQf5Vhyns1Kh87fyodwxyZbqi3BKQygO3qungcHFPePasG2rfGJIBT33k1STHYQtiUD
+         O+prHimBN4VPP4FMur5rBFzkmbcpH/XmCEDJbSthd4zOuWRKKNmHbPAYAxnc68GfkzVt
+         7Q45ucwB+Sx+SDoD3cu2eg7NoLq+bTOatObF9n8iEpI9aT0iP9fkAdGnnRnK9QkBfXdt
+         34NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729689364; x=1730294164;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iiTzAsiwQo9rZSFwrzFSJ7VZH2hOB+SYWxOqMjEecys=;
+        b=P++7e4MAgpdm5x48KVwkcX9VhXO6AJQ3dklr9190hInFlgwQbQ8H7UjN6fDb0g7Ygh
+         kVn8tf197o5TYEUZwp+ihQA2uI0bKICNteduRKb4ZmeQte4vlnXgn3rNbp1T04iVXBBx
+         pMLR0MjQKhf8PE5mPZoUKuCG/s/WfU0pD+Q6HG52S2CYwywjPwcPFSj2sG9yRB2xGms0
+         9Bolnxoh7AqoC2vlkqIUg3Tb9JISVt8A8ZYq7Si5ZUb6pDpsVXwCutpybtOIEIMbbroO
+         zgcEuM/l1HjVuBTgb+Uv0iSzSkOflj6aylURV6/0ilLH+/ZB0nwFy4cRs4m4OQbEZWpV
+         KRNw==
+X-Gm-Message-State: AOJu0YzPRJ0Z8MrKgz2eIa1/Sd40qcKN+pQBVMy7cCnEmwK6dKQ3wQrk
+	sMrw6+/hu9XC99q/cfjClQgR0L+7RWI+d54RxNRi1qOOwpYy4XG/uAbweN6BJ+D8gOGKr/KCIdC
+	99JZo7UB9eJTTd2UWCF0wqY1jt0FYuMS/aoVVSQ==
+X-Google-Smtp-Source: AGHT+IFTSh6KR2gAKDyqO3gkOk76jS6PP18dk06ymLAIVNQvXO4bIPn6oDOucf7RA/6rZU0UdQ5x5ceGyurRdxz+KqQ=
+X-Received: by 2002:a05:6870:2046:b0:277:ef62:e6a7 with SMTP id
+ 586e51a60fabf-28ccb6acebfmr2655863fac.37.1729689363939; Wed, 23 Oct 2024
+ 06:16:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo];
-	RCVD_TLS_ALL(0.00)[]
+References: <cover.1729066788.git.bertrand.marquis@arm.com> <dec1c02aa0142263796c53b8df917fa25e2d2675.1729066788.git.bertrand.marquis@arm.com>
+In-Reply-To: <dec1c02aa0142263796c53b8df917fa25e2d2675.1729066788.git.bertrand.marquis@arm.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Wed, 23 Oct 2024 15:15:52 +0200
+Message-ID: <CAHUa44Gfkt-DOv0hZv+tPypgS59dVFrvLm=X-Dn=+Xu-hS-g+A@mail.gmail.com>
+Subject: Re: [PATCH v2 06/10] xen/arm: ffa: Use bit 15 convention for SPs
+To: Bertrand Marquis <bertrand.marquis@arm.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Replace the current use of the unstable xc_domain_getinfo_single()
-interface with the stable domctl XEN_DOMCTL_get_domain_state call
-via the new libxenmanage library.
+Hi Bertrand,
 
-This will remove the last usage of libxenctrl by Xenstore, so update
-the library dependencies accordingly.
+On Wed, Oct 16, 2024 at 10:32=E2=80=AFAM Bertrand Marquis
+<bertrand.marquis@arm.com> wrote:
+>
+> Make use and required to have bit 15 convention respected by secure
+> world (having bit 15 of IDs set for secure endpoints and non-set for
+> non-secure ones).
+> If any secure partition has an ID with bit 15 not set, it will not be
+> possible to contact or detect them.
+> Print an error log during probe for each secure endpoint detected with
+> bit 15 not set.
+>
+> We are switching to this convention because Xen is currently not using
+> VMIDs with bit 15 set so we are sure that no VM will have it set (this
+> is ensured by BUILD_BUG_ON in case this becomes false in the future).
+> It is allowing to easily distinguish between secure and non-secure
+> endpoints, preventing the need to store a list of secure endpoint IDs in
+> Xen.
+>
+> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> ---
+> Changes in v2:
+> - rebase
+> ---
+>  xen/arch/arm/tee/ffa.c          | 22 +++++++++++---
+>  xen/arch/arm/tee/ffa_partinfo.c | 54 +++++++++++++++++++++++++--------
+>  xen/arch/arm/tee/ffa_private.h  |  7 +++++
+>  xen/arch/arm/tee/ffa_shm.c      | 12 +++++++-
+>  4 files changed, 77 insertions(+), 18 deletions(-)
+>
+> diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+> index 4b55e8b48f01..a292003ca9fe 100644
+> --- a/xen/arch/arm/tee/ffa.c
+> +++ b/xen/arch/arm/tee/ffa.c
+> @@ -195,6 +195,14 @@ static void handle_msg_send_direct_req(struct cpu_us=
+er_regs *regs, uint32_t fid)
+>          goto out;
+>      }
+>
+> +    /* we do not support direct messages to VMs */
+> +    if ( !FFA_ID_IS_SECURE(src_dst & GENMASK(15,0)) )
+> +    {
+> +        resp.a0 =3D FFA_ERROR;
+> +        resp.a2 =3D FFA_RET_NOT_SUPPORTED;
+> +        goto out;
+> +    }
+> +
+>      arg.a1 =3D src_dst;
+>      arg.a2 =3D get_user_reg(regs, 2) & mask;
+>      arg.a3 =3D get_user_reg(regs, 3) & mask;
+> @@ -391,11 +399,15 @@ static int ffa_domain_init(struct domain *d)
+>
+>      if ( !ffa_fw_version )
+>          return -ENODEV;
+> -     /*
+> -      * We can't use that last possible domain ID or ffa_get_vm_id() wou=
+ld
+> -      * cause an overflow.
+> -      */
+> -    if ( d->domain_id >=3D UINT16_MAX)
+> +    /*
+> +     * We are using the domain_id + 1 as the FF-A ID for VMs as FF-A ID =
+0 is
+> +     * reserved for the hypervisor and we only support secure endpoints =
+using
+> +     * FF-A IDs with BIT 15 set to 1 so make sure those are not used by =
+Xen.
+> +     */
+> +    BUILD_BUG_ON(DOMID_FIRST_RESERVED >=3D UINT16_MAX);
+> +    BUILD_BUG_ON((DOMID_MASK & BIT(15, U)) !=3D 0);
+> +
+> +    if ( d->domain_id >=3D DOMID_FIRST_RESERVED )
+>          return -ERANGE;
+>
+>      ctx =3D xzalloc(struct ffa_ctx);
+> diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_parti=
+nfo.c
+> index 75a073d090e0..3cf801523296 100644
+> --- a/xen/arch/arm/tee/ffa_partinfo.c
+> +++ b/xen/arch/arm/tee/ffa_partinfo.c
+> @@ -169,14 +169,26 @@ void ffa_handle_partition_info_get(struct cpu_user_=
+regs *regs)
+>
+>      if ( ffa_sp_count > 0 )
+>      {
+> -        uint32_t n;
+> +        uint32_t n, real_num =3D ffa_sp_count;
 
-For now only do a direct replacement without using the functionality
-of obtaining information about domains having changed the state.
+Nit: how about n_limit instead of real_num?
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V1:
-- use library instead of direct hypercall, only replace current
-  libxenctrl use case
+>          void *src_buf =3D ffa_rx;
+>
+>          /* copy the secure partitions info */
+> -        for ( n =3D 0; n < ffa_sp_count; n++ )
+> +        for ( n =3D 0; n < real_num; n++ )
+>          {
+> -            memcpy(dst_buf, src_buf, dst_size);
+> -            dst_buf +=3D dst_size;
+> +            struct ffa_partition_info_1_1 *fpi =3D src_buf;
+> +
+> +            /* filter out SP not following bit 15 convention if any */
+> +            if ( FFA_ID_IS_SECURE(fpi->id) )
+> +            {
+> +                memcpy(dst_buf, src_buf, dst_size);
+> +                dst_buf +=3D dst_size;
+> +            }
+> +            else
+> +            {
+> +                printk(XENLOG_INFO "ffa: sp id 0x%04x skipped, bit 15 is=
+ 0\n",
+> +                       fpi->id);
 
-Please note that this patch can be committed only after the related
-Mini-OS patch "config: add support for libxenmanage" has gone in AND
-the Mini-OS commit-id has been updated in Config.mk accordingly!
----
- stubdom/Makefile                |  8 ++---
- stubdom/mini-os.mk              |  1 +
- tools/xenstored/Makefile        |  2 +-
- tools/xenstored/Makefile.common |  2 +-
- tools/xenstored/core.h          |  1 -
- tools/xenstored/domain.c        | 52 ++++++++++++---------------------
- tools/xenstored/lu.c            |  1 +
- tools/xenstored/lu_daemon.c     |  1 +
- 8 files changed, 28 insertions(+), 40 deletions(-)
+We have already logged this in init_subscribers() below. Is there a
+risk of flooding the logs with this?
 
-diff --git a/stubdom/Makefile b/stubdom/Makefile
-index 2a81af28a1..ca800b243c 100644
---- a/stubdom/Makefile
-+++ b/stubdom/Makefile
-@@ -307,7 +307,7 @@ endif
- # libraries under tools/libs
- #######
- 
--STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl guest
-+STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl guest manage
- 
- LIBDEP_guest := cross-zlib
- 
-@@ -465,7 +465,7 @@ grub: cross-polarssl grub-upstream $(CROSS_ROOT) grub-$(XEN_TARGET_ARCH)-minios-
- # xenstore
- ##########
- 
--xenstore-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog ctrl
-+xenstore-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog manage
- xenstore-minios.gen.cfg: xenstore-minios.cfg Makefile
- 	$(GEN_config) >$@
- 
-@@ -480,7 +480,7 @@ xenstore: $(CROSS_ROOT) xenstore-minios-config.mk
- # xenstorepvh
- #############
- 
--xenstorepvh-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog ctrl
-+xenstorepvh-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog manage
- xenstorepvh-minios.gen.cfg: xenstorepvh-minios.cfg Makefile
- 	$(GEN_config) >$@
- 
-@@ -523,7 +523,7 @@ else
- pv-grub-if-enabled:
- endif
- 
--XENSTORE_DEPS := libxenevtchn libxengnttab libxenctrl
-+XENSTORE_DEPS := libxenevtchn libxengnttab libxenmanage
- 
- .PHONY: xenstore-stubdom
- xenstore-stubdom: mini-os-$(XEN_TARGET_ARCH)-xenstore $(XENSTORE_DEPS) xenstore
-diff --git a/stubdom/mini-os.mk b/stubdom/mini-os.mk
-index 7e4968e026..be32302f9e 100644
---- a/stubdom/mini-os.mk
-+++ b/stubdom/mini-os.mk
-@@ -13,5 +13,6 @@ GNTTAB_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/gnttab
- CALL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/call
- FOREIGNMEMORY_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/foreignmemory
- DEVICEMODEL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/devicemodel
-+MANAGE_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/manage
- CTRL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/ctrl
- GUEST_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/guest
-diff --git a/tools/xenstored/Makefile b/tools/xenstored/Makefile
-index 09adfe1d50..81c42838e0 100644
---- a/tools/xenstored/Makefile
-+++ b/tools/xenstored/Makefile
-@@ -5,7 +5,7 @@ include Makefile.common
- 
- xenstored: LDLIBS += $(LDLIBS_libxenevtchn)
- xenstored: LDLIBS += $(LDLIBS_libxengnttab)
--xenstored: LDLIBS += $(LDLIBS_libxenctrl)
-+xenstored: LDLIBS += $(LDLIBS_libxenmanage)
- xenstored: LDLIBS += -lrt
- xenstored: LDLIBS += $(SOCKET_LIBS)
- 
-diff --git a/tools/xenstored/Makefile.common b/tools/xenstored/Makefile.common
-index 27fdb3b49e..271134fcc1 100644
---- a/tools/xenstored/Makefile.common
-+++ b/tools/xenstored/Makefile.common
-@@ -12,7 +12,7 @@ XENSTORED_OBJS-$(CONFIG_MiniOS) += minios.o lu_minios.o
- # Include configure output (config.h)
- CFLAGS += -include $(XEN_ROOT)/tools/config.h
- CFLAGS += $(CFLAGS_libxenevtchn)
--CFLAGS += $(CFLAGS_libxenctrl)
-+CFLAGS += $(CFLAGS_libxenmanage)
- CFLAGS += $(CFLAGS_libxentoolcore)
- 
- $(XENSTORED_OBJS-y): CFLAGS += $(CFLAGS_libxengnttab)
-diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
-index e58779e88c..632886cecf 100644
---- a/tools/xenstored/core.h
-+++ b/tools/xenstored/core.h
-@@ -19,7 +19,6 @@
- #ifndef _XENSTORED_CORE_H
- #define _XENSTORED_CORE_H
- 
--#include <xenctrl.h>
- #include <xengnttab.h>
- 
- #include <sys/types.h>
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 64c8fd0cc3..c0264d9477 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -34,14 +34,15 @@
- #include "control.h"
- 
- #include <xenevtchn.h>
--#include <xenctrl.h>
-+#include <xenmanage.h>
-+#include <xen-barrier.h>
- #include <xen/grant_table.h>
- 
- #ifdef __MINIOS__
- #include <mini-os/xenbus.h>
- #endif
- 
--static xc_interface **xc_handle;
-+static xenmanage_handle *xm_handle;
- xengnttab_handle **xgt_handle;
- static evtchn_port_t virq_port;
- 
-@@ -619,32 +620,28 @@ static int destroy_domain(void *_domain)
- 	return 0;
- }
- 
--static bool get_domain_info(unsigned int domid, xc_domaininfo_t *dominfo)
--{
--	return xc_domain_getinfo_single(*xc_handle, domid, dominfo) == 0;
--}
--
- static int check_domain(const void *k, void *v, void *arg)
- {
--	xc_domaininfo_t dominfo;
-+	unsigned int state;
- 	struct connection *conn;
--	bool dom_valid;
-+	int dom_invalid;
- 	struct domain *domain = v;
- 	bool *notify = arg;
- 
--	dom_valid = get_domain_info(domain->domid, &dominfo);
-+	dom_invalid = xenmanage_get_domain_info(xm_handle, domain->domid,
-+						&state, NULL);
- 	if (!domain->introduced) {
--		if (!dom_valid)
-+		if (dom_invalid)
- 			talloc_free(domain);
- 		return 0;
- 	}
--	if (dom_valid) {
--		if ((dominfo.flags & XEN_DOMINF_shutdown)
-+	if (!dom_invalid) {
-+		if ((state & XENMANAGE_GETDOMSTATE_STATE_SHUTDOWN)
- 		    && !domain->shutdown) {
- 			domain->shutdown = true;
- 			*notify = true;
- 		}
--		if (!(dominfo.flags & XEN_DOMINF_dying))
-+		if (!(state & XENMANAGE_GETDOMSTATE_STATE_DYING))
- 			return 0;
- 	}
- 	if (domain->conn) {
-@@ -786,10 +783,9 @@ static struct domain *find_or_alloc_domain(const void *ctx, unsigned int domid)
- static struct domain *find_or_alloc_existing_domain(unsigned int domid)
- {
- 	struct domain *domain;
--	xc_domaininfo_t dominfo;
- 
- 	domain = find_domain_struct(domid);
--	if (!domain && get_domain_info(domid, &dominfo))
-+	if (!domain && !xenmanage_get_domain_info(xm_handle, domid, NULL, NULL))
- 		domain = alloc_domain(NULL, domid);
- 
- 	return domain;
-@@ -1187,12 +1183,6 @@ int do_reset_watches(const void *ctx, struct connection *conn,
- 	return 0;
- }
- 
--static int close_xc_handle(void *_handle)
--{
--	xc_interface_close(*(xc_interface**)_handle);
--	return 0;
--}
--
- static int close_xgt_handle(void *_handle)
- {
- 	xengnttab_close(*(xengnttab_handle **)_handle);
-@@ -1258,15 +1248,9 @@ void domain_early_init(void)
- 	if (!domhash)
- 		barf_perror("Failed to allocate domain hashtable");
- 
--	xc_handle = talloc(talloc_autofree_context(), xc_interface*);
--	if (!xc_handle)
--		barf_perror("Failed to allocate domain handle");
--
--	*xc_handle = xc_interface_open(0,0,0);
--	if (!*xc_handle)
--		barf_perror("Failed to open connection to hypervisor");
--
--	talloc_set_destructor(xc_handle, close_xc_handle);
-+	xm_handle = xenmanage_open(NULL, 0);
-+	if (!xm_handle)
-+		barf_perror("Failed to open connection to libxenmanage");
- 
- 	xgt_handle = talloc(talloc_autofree_context(), xengnttab_handle*);
- 	if (!xgt_handle)
-@@ -1306,6 +1290,8 @@ void domain_deinit(void)
- {
- 	if (virq_port)
- 		xenevtchn_unbind(xce_handle, virq_port);
-+
-+	xenmanage_close(xm_handle);
- }
- 
- /*
-@@ -1335,13 +1321,13 @@ int domain_alloc_permrefs(struct node_perms *perms)
- {
- 	unsigned int i, domid;
- 	struct domain *d;
--	xc_domaininfo_t dominfo;
- 
- 	for (i = 0; i < perms->num; i++) {
- 		domid = perms->p[i].id;
- 		d = find_domain_struct(domid);
- 		if (!d) {
--			if (!get_domain_info(domid, &dominfo))
-+			if (xenmanage_get_domain_info(xm_handle, domid,
-+						      NULL, NULL))
- 				perms->p[i].perms |= XS_PERM_IGNORE;
- 			else if (!alloc_domain(NULL, domid))
- 				return ENOMEM;
-diff --git a/tools/xenstored/lu.c b/tools/xenstored/lu.c
-index bec2a84e10..4fccbbc195 100644
---- a/tools/xenstored/lu.c
-+++ b/tools/xenstored/lu.c
-@@ -11,6 +11,7 @@
- #include <stdlib.h>
- #include <syslog.h>
- #include <time.h>
-+#include <unistd.h>
- #include <sys/mman.h>
- #include <sys/stat.h>
- 
-diff --git a/tools/xenstored/lu_daemon.c b/tools/xenstored/lu_daemon.c
-index 6df6c80a2a..88d8d9e1b3 100644
---- a/tools/xenstored/lu_daemon.c
-+++ b/tools/xenstored/lu_daemon.c
-@@ -6,6 +6,7 @@
-  */
- 
- #include <syslog.h>
-+#include <unistd.h>
- #include <sys/stat.h>
- 
- #include "talloc.h"
--- 
-2.43.0
+Cheers,
+Jens
 
+> +                ffa_sp_count--;
+> +            }
+>              src_buf +=3D src_size;
+>          }
+>      }
+> @@ -276,10 +288,25 @@ static bool init_subscribers(uint16_t count, uint32=
+_t fpi_size)
+>      {
+>          fpi =3D ffa_rx + n * fpi_size;
+>
+> -        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED )
+> -            subscr_vm_created_count++;
+> -        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
+> -            subscr_vm_destroyed_count++;
+> +        /*
+> +         * We need to have secure partitions using bit 15 set convention=
+ for
+> +         * secure partition IDs.
+> +         * Inform the user with a log and discard giving created or dest=
+roy
+> +         * event to those IDs.
+> +         */
+> +        if ( !FFA_ID_IS_SECURE(fpi->id) )
+> +        {
+> +            printk(XENLOG_ERR "ffa: Firmware is not using bit 15 convent=
+ion for IDs !!\n"
+> +                              "ffa: Secure partition with id 0x%04x cann=
+ot be used\n",
+> +                              fpi->id);
+> +        }
+> +        else
+> +        {
+> +            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED=
+ )
+> +                subscr_vm_created_count++;
+> +            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROY=
+ED )
+> +                subscr_vm_destroyed_count++;
+> +        }
+>      }
+>
+>      if ( subscr_vm_created_count )
+> @@ -299,10 +326,13 @@ static bool init_subscribers(uint16_t count, uint32=
+_t fpi_size)
+>      {
+>          fpi =3D ffa_rx + n * fpi_size;
+>
+> -        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED )
+> -            subscr_vm_created[c_pos++] =3D fpi->id;
+> -        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
+> -            subscr_vm_destroyed[d_pos++] =3D fpi->id;
+> +        if ( FFA_ID_IS_SECURE(fpi->id) )
+> +        {
+> +            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED=
+ )
+> +                subscr_vm_created[c_pos++] =3D fpi->id;
+> +            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROY=
+ED )
+> +                subscr_vm_destroyed[d_pos++] =3D fpi->id;
+> +        }
+>      }
+>
+>      return true;
+> diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_privat=
+e.h
+> index e5bc73f9039e..afe69b43dbef 100644
+> --- a/xen/arch/arm/tee/ffa_private.h
+> +++ b/xen/arch/arm/tee/ffa_private.h
+> @@ -108,6 +108,13 @@
+>   */
+>  #define FFA_CTX_TEARDOWN_DELAY          SECONDS(1)
+>
+> +/*
+> + * We rely on the convention suggested but not mandated by the FF-A
+> + * specification that secure world endpoint identifiers have the bit 15
+> + * set and normal world have it set to 0.
+> + */
+> +#define FFA_ID_IS_SECURE(id)    ((id) & BIT(15, U))
+> +
+>  /* FF-A-1.1-REL0 section 10.9.2 Memory region handle, page 167 */
+>  #define FFA_HANDLE_HYP_FLAG             BIT(63, ULL)
+>  #define FFA_HANDLE_INVALID              0xffffffffffffffffULL
+> diff --git a/xen/arch/arm/tee/ffa_shm.c b/xen/arch/arm/tee/ffa_shm.c
+> index efa5b67db8e1..29675f9ba3f7 100644
+> --- a/xen/arch/arm/tee/ffa_shm.c
+> +++ b/xen/arch/arm/tee/ffa_shm.c
+> @@ -469,6 +469,7 @@ void ffa_handle_mem_share(struct cpu_user_regs *regs)
+>      int ret =3D FFA_RET_DENIED;
+>      uint32_t range_count;
+>      uint32_t region_offs;
+> +    uint16_t dst_id;
+>
+>      if ( !ffa_fw_supports_fid(FFA_MEM_SHARE_64) )
+>      {
+> @@ -537,6 +538,15 @@ void ffa_handle_mem_share(struct cpu_user_regs *regs=
+)
+>          goto out_unlock;
+>
+>      mem_access =3D ctx->tx + trans.mem_access_offs;
+> +
+> +    dst_id =3D ACCESS_ONCE(mem_access->access_perm.endpoint_id);
+> +    if ( !FFA_ID_IS_SECURE(dst_id) )
+> +    {
+> +        /* we do not support sharing with VMs */
+> +        ret =3D FFA_RET_NOT_SUPPORTED;
+> +        goto out_unlock;
+> +    }
+> +
+>      if ( ACCESS_ONCE(mem_access->access_perm.perm) !=3D FFA_MEM_ACC_RW )
+>      {
+>          ret =3D FFA_RET_NOT_SUPPORTED;
+> @@ -567,7 +577,7 @@ void ffa_handle_mem_share(struct cpu_user_regs *regs)
+>          goto out_unlock;
+>      }
+>      shm->sender_id =3D trans.sender_id;
+> -    shm->ep_id =3D ACCESS_ONCE(mem_access->access_perm.endpoint_id);
+> +    shm->ep_id =3D dst_id;
+>
+>      /*
+>       * Check that the Composite memory region descriptor fits.
+> --
+> 2.47.0
+>
 
