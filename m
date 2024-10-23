@@ -4,37 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5BFCCFA445
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 15:52:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.824768.1238962 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1311CFA448
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 15:55:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.824793.1238993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3de6-0005un-63; Wed, 23 Oct 2024 15:51:38 +0000
+	id 1t3dhe-0007uZ-Ul; Wed, 23 Oct 2024 15:55:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 824768.1238962; Wed, 23 Oct 2024 15:51:38 +0000
+Received: by outflank-mailman (output) from mailman id 824793.1238993; Wed, 23 Oct 2024 15:55:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3de6-0005tp-1m; Wed, 23 Oct 2024 15:51:38 +0000
-Received: by outflank-mailman (input) for mailman id 824768;
- Wed, 23 Oct 2024 15:51:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t3dhe-0007uS-S6; Wed, 23 Oct 2024 15:55:18 +0000
+Received: by outflank-mailman (input) for mailman id 824793;
+ Wed, 23 Oct 2024 15:55:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9cWG=RT=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1t3de4-0005bd-Tv
- for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 15:51:36 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id aead0d55-9156-11ef-a0be-8be0dac302b0;
- Wed, 23 Oct 2024 17:51:35 +0200 (CEST)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9abe139088so158736266b.1
- for <xen-devel@lists.xenproject.org>; Wed, 23 Oct 2024 08:51:35 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a912ee592sm493214466b.79.2024.10.23.08.51.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 08:51:34 -0700 (PDT)
+ <SRS0=fY0y=RT=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1t3dhd-0007pq-Kr
+ for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 15:55:17 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 30d27ce4-9157-11ef-99a3-01e77a169b0f;
+ Wed, 23 Oct 2024 17:55:15 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1729698905356654.7501812217625;
+ Wed, 23 Oct 2024 08:55:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,141 +40,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aead0d55-9156-11ef-a0be-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729698695; x=1730303495; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=h1/gFSOgI0n7fD5scAMG4iAUzufNhbJI1UL9lZIj5zM=;
-        b=Zk71UPDrnWoY++hFGPKQBAsCVAsJlBr56+deoeKqP/M138aUtadvOhOuxDTwcAYtVf
-         +I3oGbQ7MqRir6rld9u0guhcLk0je5SpYXnFmGsQKIkrjzqty4OIeoCgbuxn3vWi1SF6
-         aY7/iqcWwVuOqIuZltWnlndr+HUe+0rQH0+iGmJsTG6H2QG5uKjBAl+yruJUuFrSoTDQ
-         GCC5KYuKW4qmVWzeR0bjaMf+cnqVG4f/bXxyHRhHQYqhvUvMxp91N+7+XERQfUT3263B
-         Q7o8fqRYHcGuS8AfYJihoHwsRUbmpIOQliPlHHkhSK92mqnCN3H0GqNdmx6i70l8zXQL
-         X6Iw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729698695; x=1730303495;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=h1/gFSOgI0n7fD5scAMG4iAUzufNhbJI1UL9lZIj5zM=;
-        b=J2ffRWD2ebAk2Yi2V4ZTw8HlvgowhWec8dwsfHQmqLjfkhF05XmB/x5Bqar1uSc6jp
-         FxkVDzeL7uOyIX+ChnEyWj8JgV6lt9E270LZHF41YMp7F8UvOsrEXM0vs6TaQ9Er4Pmo
-         1vJeAhLw2ia7mfk8NFeuPN58+uepr12XOvFOLtEPJNm6LG7bpwQ7XUJF4EIxBG4RxJA+
-         PooG1672RMZfztlPbGL6FvZiSgCr6DRW2WVbIuaq1sM2fr+ENAetWAnWH+FnVW7Q3d+v
-         G/3F62KW+QgMdPdOc5p4MwGBDsIA54wKoDMgpcCKk98VQ6nC34dwa8jA52pgtzWYHFqK
-         dApA==
-X-Gm-Message-State: AOJu0YyHQAdA91mJgIjH+dWqzIOZX1348CqL2EU8IEjE+7joTSY/yHC6
-	QY3srC12qutkhi0KBhFB1oYk8xRetpuHZA8q9DnCzHEPOChyn4aODIyq0Q==
-X-Google-Smtp-Source: AGHT+IHz/V25m9u1OlsezUz8Gn3how6y3qg3H8yFaNBhmaZQT6vgjI8xnBXhKGQmXrWyYFCGTrWPXw==
-X-Received: by 2002:a17:906:6a25:b0:a9a:7899:eb87 with SMTP id a640c23a62f3a-a9abf84884amr360254966b.13.1729698694717;
-        Wed, 23 Oct 2024 08:51:34 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 2/3] xen/riscv: initialize the VMAP_DEFAULT virtual range
-Date: Wed, 23 Oct 2024 17:50:23 +0200
-Message-ID: <4ae2957044e4e17be652d5fd28d54fd38110e4cf.1729697111.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <cover.1729697111.git.oleksii.kurochko@gmail.com>
-References: <cover.1729697111.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 30d27ce4-9157-11ef-99a3-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; t=1729698908; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=GUElh1m/CFBQY72N22CHjH8K/u66RhbGwkUlU84CgMGv7HlSQ6ACPEFo7rc3kpyF9heXE78HdX+LYi6MS4yy3L5/g5gt4DjUW1hAb1pC/6CcIGaLbeOo62oL9rwRA42dNqA65TT9sUEda5bi46XRDPiLGRLSAjPuncy0yMNOb7I=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1729698908; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=ByjWusVPfbnuWZSa75rUWLRBXrn6qYPhbuIkO5sd82c=; 
+	b=NvDZk7LV1gNgeb75UC3JnztVGXQnPGhpT1ixITfXWZGMNp1pwpTrmdiFGa1SeBGW/RXVGxYygFbHe7xrRBEaAKXEGIfUyeDtXQ3uFsE/9lfAAZgcYAtYClmoqg83hh8Leukkcz81ILinPJ67dB/fwkuTlJ29hj3mAL1OFs5WnnE=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1729698908;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=ByjWusVPfbnuWZSa75rUWLRBXrn6qYPhbuIkO5sd82c=;
+	b=CeAHIp3KSaj+uexG9lUCvtJKOlYsSTed/dmWLD/cQ8HLX59nVI+DKMHvjqz7v+E9
+	6ocxFqYGl+6iBKeIuo59L7GPhZqq/FCJ5O6E9W4ph2moj2MxSi11qpiYMkAvH52RKyK
+	9BomY6gukiwYVPKQic8idEcxfIzmJARKD1Re7WTk=
+Message-ID: <ea2aeed1-91b7-47db-9354-d0634d0db9e8@apertussolutions.com>
+Date: Wed, 23 Oct 2024 11:55:03 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] xen: add new domctl get_changed_domain
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20241023131005.32144-1-jgross@suse.com>
+ <20241023131005.32144-4-jgross@suse.com>
+Content-Language: en-US
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+In-Reply-To: <20241023131005.32144-4-jgross@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 
-Call vm_init() to initialize the VMAP_DEFAULT virtual range.
+On 10/23/24 09:10, Juergen Gross wrote:
+> Add a new domctl sub-function to get data of a domain having changed
+> state (this is needed by Xenstore).
+> 
+> The returned state just contains the domid, the domain unique id,
+> and some flags (existing, shutdown, dying).
+> 
+> In order to enable Xenstore stubdom being built for multiple Xen
+> versions, make this domctl stable.  For stable domctls the
+> interface_version is specific to the respective domctl op and it is an
+> in/out parameter: On input the caller is specifying the desired version
+> of the op, while on output the hypervisor will return the used version
+> (this will be at max the caller supplied version, but might be lower in
+> case the hypervisor doesn't support this version).
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+> V1:
+> - use a domctl subop for the new interface (Jan Beulich)
+> ---
+>   tools/flask/policy/modules/dom0.te  |  2 +-
+>   xen/common/domain.c                 | 51 +++++++++++++++++++++++++++++
+>   xen/common/domctl.c                 | 19 ++++++++++-
+>   xen/common/event_channel.c          |  9 ++++-
+>   xen/include/public/domctl.h         | 33 +++++++++++++++++++
+>   xen/include/xen/event.h             |  6 ++++
+>   xen/include/xen/sched.h             |  2 ++
+>   xen/include/xsm/dummy.h             |  8 +++++
+>   xen/include/xsm/xsm.h               |  6 ++++
+>   xen/xsm/dummy.c                     |  1 +
+>   xen/xsm/flask/hooks.c               |  7 ++++
+>   xen/xsm/flask/policy/access_vectors |  2 ++
+>   12 files changed, 143 insertions(+), 3 deletions(-)
+> 
+> diff --git a/tools/flask/policy/modules/dom0.te b/tools/flask/policy/modules/dom0.te
+> index 16b8c9646d..6043c01b12 100644
+> --- a/tools/flask/policy/modules/dom0.te
+> +++ b/tools/flask/policy/modules/dom0.te
+> @@ -40,7 +40,7 @@ allow dom0_t dom0_t:domain {
+>   };
+>   allow dom0_t dom0_t:domain2 {
+>   	set_cpu_policy gettsc settsc setscheduler set_vnumainfo
+> -	get_vnumainfo psr_cmt_op psr_alloc get_cpu_policy
+> +	get_vnumainfo psr_cmt_op psr_alloc get_cpu_policy get_domain_state
 
-To support this, introduce the populate_pt_range() and
-arch_vmap_virt_end() functions, which are used by
-vm_init()->vm_init_type().
+I don't think that is where you want it, as that restricts dom0 to only 
+being able to make that call against dom0. The question I have is, are 
+you looking for this permission to be explicitly assigned to dom0 or to 
+the domain type that was allowed to create the domain. IMHO, I think you 
+would want the latter, so not only should the permission go here, but 
+also added to xen.if:create_domain_common.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Change in V2:
- - Acked-by: Jan Beulich <jbeulich@suse.com>
----
- xen/arch/riscv/mm.c    | 11 +++++------
- xen/arch/riscv/pt.c    |  6 ++++++
- xen/arch/riscv/setup.c |  3 +++
- 3 files changed, 14 insertions(+), 6 deletions(-)
+Additionally, I would also recommend adding the following to xenstore.te:
 
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index 5be5a7b52a..262cec811e 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -352,12 +352,6 @@ void arch_dump_shared_mem_info(void)
-     BUG_ON("unimplemented");
- }
- 
--int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
--{
--    BUG_ON("unimplemented");
--    return -1;
--}
--
- int xenmem_add_to_physmap_one(struct domain *d, unsigned int space,
-                               union add_to_physmap_extra extra,
-                               unsigned long idx, gfn_t gfn)
-@@ -544,3 +538,8 @@ void __init setup_mm(void)
- #else /* CONFIG_RISCV_32 */
- #error setup_mm(), setup_{directmap,frametable}_mapping() should be implemented for RV_32
- #endif
-+
-+void *__init arch_vmap_virt_end(void)
-+{
-+    return (void *)(VMAP_VIRT_START + VMAP_VIRT_SIZE);
-+}
-diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
-index cc5e2d3266..d62aceb36c 100644
---- a/xen/arch/riscv/pt.c
-+++ b/xen/arch/riscv/pt.c
-@@ -1,6 +1,7 @@
- #include <xen/bug.h>
- #include <xen/domain_page.h>
- #include <xen/errno.h>
-+#include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/mm.h>
- #include <xen/pfn.h>
-@@ -419,3 +420,8 @@ int map_pages_to_xen(unsigned long virt,
- 
-     return pt_update(virt, mfn, nr_mfns, flags);
- }
-+
-+int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-+{
-+    return pt_update(virt, INVALID_MFN, nr_mfns, PTE_POPULATE);
-+}
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 2887a18c0c..3652cb056d 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -7,6 +7,7 @@
- #include <xen/init.h>
- #include <xen/mm.h>
- #include <xen/shutdown.h>
-+#include <xen/vmap.h>
- 
- #include <public/version.h>
- 
-@@ -62,6 +63,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
- 
-     setup_mm();
- 
-+    vm_init();
-+
-     printk("All set up\n");
- 
-     machine_halt();
--- 
-2.47.0
+allow xenstore_t domain_type:domain get_domain_state
 
+>   allow dom0_t dom0_t:resource { add remove };
+>   
+
+...
+
+> @@ -866,6 +873,16 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+>                   __HYPERVISOR_domctl, "h", u_domctl);
+>           break;
+>   
+> +    case XEN_DOMCTL_get_domain_state:
+> +        ret = xsm_get_domain_state(XSM_HOOK, d);
+
+XSM_HOOK will allow any domain to make this call on any domain. What I 
+think you want here is XSM_XS_PRIV. That will allow either a domain 
+flagged as the xenstore domain or dom0 to make the call.
+
+> +        if ( ret )
+> +            break;
+> +
+> +        copyback = 1;
+> +        op->interface_version = XEN_DOMCTL_GETDOMSTATE_VERS_MAX;
+> +        ret = get_domain_state(&op->u.get_domain_state, d);
+> +        break;
+> +
+>       default:
+>           ret = arch_do_domctl(op, d, u_domctl);
+>           break;
+
+...
+
+> @@ -815,6 +816,13 @@ static XSM_INLINE int cf_check xsm_argo_send(
+>   
+>   #endif /* CONFIG_ARGO */
+>   
+> +static XSM_INLINE int cf_check xsm_get_domain_state(
+> +    XSM_DEFAULT_ARG struct domain *d)
+> +{
+> +    XSM_ASSERT_ACTION(XSM_HOOK);
+
+Per the above, this would need changed to XSM_XS_PRIV.
+
+> +    return xsm_default_action(action, current->domain, d);
+> +}
+> +
+>   #include <public/version.h>
+>   static XSM_INLINE int cf_check xsm_xen_version(XSM_DEFAULT_ARG uint32_t op)
+>   {
+
+...
+
+> @@ -1853,6 +1854,11 @@ static int cf_check flask_argo_send(
+>   
+>   #endif
+>   
+> +static int cf_check flask_get_domain_state(struct domain *d)
+> +{
+> +    return current_has_perm(d, SECCLASS_DOMAIN, DOMAIN__GET_DOMAIN_STATE);
+
+I believe you want SECCLASS_DOMAIN2 here.
+
+> +}
+> +
+>   static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+>       .set_system_active = flask_set_system_active,
+>       .security_domaininfo = flask_security_domaininfo,
+
+v/r,
+dps
 
