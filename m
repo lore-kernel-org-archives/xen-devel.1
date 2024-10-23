@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5352ACF5386
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 13:11:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.824608.1238779 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1944CF5386
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 13:11:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.824612.1238799 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3b89-0007IA-Bt; Wed, 23 Oct 2024 13:10:29 +0000
+	id 1t3b8J-00080z-0N; Wed, 23 Oct 2024 13:10:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 824608.1238779; Wed, 23 Oct 2024 13:10:29 +0000
+Received: by outflank-mailman (output) from mailman id 824612.1238799; Wed, 23 Oct 2024 13:10:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3b89-0007Hx-8m; Wed, 23 Oct 2024 13:10:29 +0000
-Received: by outflank-mailman (input) for mailman id 824608;
- Wed, 23 Oct 2024 13:10:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t3b8I-00080k-TR; Wed, 23 Oct 2024 13:10:38 +0000
+Received: by outflank-mailman (input) for mailman id 824612;
+ Wed, 23 Oct 2024 13:10:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W0hE=RT=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1t3b87-0006Ra-Ps
- for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 13:10:27 +0000
+ id 1t3b8I-0006ft-0s
+ for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 13:10:38 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2aefd767-9140-11ef-99a3-01e77a169b0f;
- Wed, 23 Oct 2024 15:10:25 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 31a3bb0e-9140-11ef-a0be-8be0dac302b0;
+ Wed, 23 Oct 2024 15:10:37 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6520721F9E;
- Wed, 23 Oct 2024 13:10:25 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 8FE5921FC5;
+ Wed, 23 Oct 2024 13:10:36 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1712813A63;
- Wed, 23 Oct 2024 13:10:25 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 611E613A63;
+ Wed, 23 Oct 2024 13:10:36 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id EAPoA8H1GGfQdwAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 23 Oct 2024 13:10:25 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id AYlGFsz1GGfwdwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 23 Oct 2024 13:10:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,460 +53,219 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2aefd767-9140-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 31a3bb0e-9140-11ef-a0be-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1729689025; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1729689036; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=rtCCiSYqzhqkGXHm58rEQmU6Y1e8RWcxAYmUU38jt1M=;
-	b=RfhUd+8M3on1g0OrGEqSSrQWGl6ctFvr16HrqLVVYXFy6NLDYgVu2btE39M70kco8AfnB9
-	fAId4RJyP9HHkRfTNVuqQ6Z+GfLQixkOyX59ra0pn3dk9GzYwAYhpBEGwvUTtZQ+VInW8p
-	EgbpNvCLa2wKFve6adw9I+F/Wn2hgQ8=
+	bh=EmT6zgQqGEJfhsBPK+vPVTMx6Z6hoNe7wMeQORVuQpA=;
+	b=Vi722Rtxr7buOD+/TexZ5zPitqdBE+rsc5ZVeotspxsDtU4knClg79iVkvPQuXfQYuDO40
+	DuFUmaSX7sur95zY4ix4ussKfTE9iukhqqyuab3Bff0fC3Jhsf85LV9ZmV5vKE1nia+wDM
+	cqUFgNiDJL+WJSjJIrmCzOmHTBgiYEs=
 Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=RfhUd+8M
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1729689025; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1729689036; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=rtCCiSYqzhqkGXHm58rEQmU6Y1e8RWcxAYmUU38jt1M=;
-	b=RfhUd+8M3on1g0OrGEqSSrQWGl6ctFvr16HrqLVVYXFy6NLDYgVu2btE39M70kco8AfnB9
-	fAId4RJyP9HHkRfTNVuqQ6Z+GfLQixkOyX59ra0pn3dk9GzYwAYhpBEGwvUTtZQ+VInW8p
-	EgbpNvCLa2wKFve6adw9I+F/Wn2hgQ8=
+	bh=EmT6zgQqGEJfhsBPK+vPVTMx6Z6hoNe7wMeQORVuQpA=;
+	b=Vi722Rtxr7buOD+/TexZ5zPitqdBE+rsc5ZVeotspxsDtU4knClg79iVkvPQuXfQYuDO40
+	DuFUmaSX7sur95zY4ix4ussKfTE9iukhqqyuab3Bff0fC3Jhsf85LV9ZmV5vKE1nia+wDM
+	cqUFgNiDJL+WJSjJIrmCzOmHTBgiYEs=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 3/6] xen: add new domctl get_changed_domain
-Date: Wed, 23 Oct 2024 15:10:02 +0200
-Message-ID: <20241023131005.32144-4-jgross@suse.com>
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 5/6] tools: add a dedicated header file for barrier definitions
+Date: Wed, 23 Oct 2024 15:10:04 +0200
+Message-ID: <20241023131005.32144-6-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241023131005.32144-1-jgross@suse.com>
 References: <20241023131005.32144-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 6520721F9E
-X-Spamd-Result: default: False [-3.01 / 50.00];
+X-Spamd-Result: default: False [-2.80 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RCVD_COUNT_TWO(0.00)[2];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_TLS_ALL(0.00)[];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
 	FROM_EQ_ENVFROM(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo];
+	RCVD_TLS_ALL(0.00)[]
 
-Add a new domctl sub-function to get data of a domain having changed
-state (this is needed by Xenstore).
+Instead of having to include xenctrl.h for getting definitions of cpu
+barriers, add a dedicated header for that purpose.
 
-The returned state just contains the domid, the domain unique id,
-and some flags (existing, shutdown, dying).
+Switch the xen-9pfsd daemon to use the new header instead of xenctrl.h.
 
-In order to enable Xenstore stubdom being built for multiple Xen
-versions, make this domctl stable.  For stable domctls the
-interface_version is specific to the respective domctl op and it is an
-in/out parameter: On input the caller is specifying the desired version
-of the op, while on output the hypervisor will return the used version
-(this will be at max the caller supplied version, but might be lower in
-case the hypervisor doesn't support this version).
+This is in preparation of making Xenstore independent from libxenctrl.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V1:
-- use a domctl subop for the new interface (Jan Beulich)
+- new patch
 ---
- tools/flask/policy/modules/dom0.te  |  2 +-
- xen/common/domain.c                 | 51 +++++++++++++++++++++++++++++
- xen/common/domctl.c                 | 19 ++++++++++-
- xen/common/event_channel.c          |  9 ++++-
- xen/include/public/domctl.h         | 33 +++++++++++++++++++
- xen/include/xen/event.h             |  6 ++++
- xen/include/xen/sched.h             |  2 ++
- xen/include/xsm/dummy.h             |  8 +++++
- xen/include/xsm/xsm.h               |  6 ++++
- xen/xsm/dummy.c                     |  1 +
- xen/xsm/flask/hooks.c               |  7 ++++
- xen/xsm/flask/policy/access_vectors |  2 ++
- 12 files changed, 143 insertions(+), 3 deletions(-)
+ tools/9pfsd/io.c            |  5 +++-
+ tools/include/xen-barrier.h | 51 +++++++++++++++++++++++++++++++++++++
+ tools/include/xenctrl.h     | 28 +-------------------
+ tools/libs/ctrl/Makefile    |  2 +-
+ 4 files changed, 57 insertions(+), 29 deletions(-)
+ create mode 100644 tools/include/xen-barrier.h
 
-diff --git a/tools/flask/policy/modules/dom0.te b/tools/flask/policy/modules/dom0.te
-index 16b8c9646d..6043c01b12 100644
---- a/tools/flask/policy/modules/dom0.te
-+++ b/tools/flask/policy/modules/dom0.te
-@@ -40,7 +40,7 @@ allow dom0_t dom0_t:domain {
- };
- allow dom0_t dom0_t:domain2 {
- 	set_cpu_policy gettsc settsc setscheduler set_vnumainfo
--	get_vnumainfo psr_cmt_op psr_alloc get_cpu_policy
-+	get_vnumainfo psr_cmt_op psr_alloc get_cpu_policy get_domain_state
- };
- allow dom0_t dom0_t:resource { add remove };
+diff --git a/tools/9pfsd/io.c b/tools/9pfsd/io.c
+index 468e0241f5..14cfcaf568 100644
+--- a/tools/9pfsd/io.c
++++ b/tools/9pfsd/io.c
+@@ -13,15 +13,18 @@
  
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 61b7899cb8..e55c6f6c5e 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -154,6 +154,57 @@ void domain_reset_states(void)
-     rcu_read_unlock(&domlist_read_lock);
- }
+ #include <assert.h>
+ #include <errno.h>
++#include <stdarg.h>
+ #include <stdbool.h>
++#include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <syslog.h>
++#include <unistd.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <dirent.h>
+ #include <fcntl.h>
+-#include <xenctrl.h>           /* For cpu barriers. */
++#include <xen-barrier.h>
+ #include <xen-tools/common-macros.h>
  
-+static void set_domain_state_info(struct xen_domctl_get_domain_state *info,
-+                                  const struct domain *d)
-+{
-+    info->state = XEN_DOMCTL_GETDOMSTATE_STATE_EXIST;
-+    if ( d->is_shut_down )
-+        info->state |= XEN_DOMCTL_GETDOMSTATE_STATE_SHUTDOWN;
-+    if ( d->is_dying == DOMDYING_dead )
-+        info->state |= XEN_DOMCTL_GETDOMSTATE_STATE_DYING;
-+    info->unique_id = d->unique_id;
-+}
-+
-+int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d)
-+{
-+    unsigned int dom;
-+
-+    memset(info, 0, sizeof(*info));
-+
-+    if ( d )
-+    {
-+        set_domain_state_info(info, d);
-+
-+        return 0;
-+    }
-+
-+    while ( (dom = find_first_bit(dom_state_changed, DOMID_MASK + 1)) <
-+            DOMID_FIRST_RESERVED )
-+    {
-+        d = rcu_lock_domain_by_id(dom);
-+
-+        if ( test_and_clear_bit(dom, dom_state_changed) )
-+        {
-+            info->domid = dom;
-+            if ( d )
-+            {
-+                set_domain_state_info(info, d);
-+
-+                rcu_unlock_domain(d);
-+            }
-+
-+            return 0;
-+        }
-+
-+        if ( d )
-+        {
-+            rcu_unlock_domain(d);
-+        }
-+    }
-+
-+    return -ENOENT;
-+}
-+
- static void __domain_finalise_shutdown(struct domain *d)
- {
-     struct vcpu *v;
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index ea16b75910..e030cce2ec 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -278,6 +278,11 @@ static struct vnuma_info *vnuma_init(const struct xen_domctl_vnuma *uinfo,
-     return ERR_PTR(ret);
- }
- 
-+static bool is_stable_domctl(uint32_t cmd)
-+{
-+    return cmd == XEN_DOMCTL_get_domain_state;
-+}
-+
- long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
- {
-     long ret = 0;
-@@ -288,7 +293,8 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-     if ( copy_from_guest(op, u_domctl, 1) )
-         return -EFAULT;
- 
--    if ( op->interface_version != XEN_DOMCTL_INTERFACE_VERSION )
-+    if ( op->interface_version != XEN_DOMCTL_INTERFACE_VERSION &&
-+         !is_stable_domctl(op->cmd) )
-         return -EACCES;
- 
-     switch ( op->cmd )
-@@ -309,6 +315,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-         fallthrough;
-     case XEN_DOMCTL_test_assign_device:
-     case XEN_DOMCTL_vm_event_op:
-+    case XEN_DOMCTL_get_domain_state:
-         if ( op->domain == DOMID_INVALID )
-         {
-             d = NULL;
-@@ -866,6 +873,16 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-                 __HYPERVISOR_domctl, "h", u_domctl);
-         break;
- 
-+    case XEN_DOMCTL_get_domain_state:
-+        ret = xsm_get_domain_state(XSM_HOOK, d);
-+        if ( ret )
-+            break;
-+
-+        copyback = 1;
-+        op->interface_version = XEN_DOMCTL_GETDOMSTATE_VERS_MAX;
-+        ret = get_domain_state(&op->u.get_domain_state, d);
-+        break;
-+
-     default:
-         ret = arch_do_domctl(op, d, u_domctl);
-         break;
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index 9b87d29968..13484b3e0d 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -969,11 +969,18 @@ static struct domain *global_virq_handlers[NR_VIRQS] __read_mostly;
- 
- static DEFINE_SPINLOCK(global_virq_handlers_lock);
- 
-+struct domain *get_global_virq_handler(uint32_t virq)
-+{
-+    ASSERT(virq_is_global(virq));
-+
-+    return global_virq_handlers[virq] ?: hardware_domain;
-+}
-+
- void send_global_virq(uint32_t virq)
- {
-     ASSERT(virq_is_global(virq));
- 
--    send_guest_global_virq(global_virq_handlers[virq] ?: hardware_domain, virq);
-+    send_guest_global_virq(get_global_virq_handler(virq), virq);
- }
- 
- int set_global_virq_handler(struct domain *d, uint32_t virq)
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 353f831e40..63607f7754 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -28,6 +28,7 @@
-  * Pure additions (e.g. new sub-commands) or compatible interface changes
-  * (e.g. adding semantics to 0-checked input fields or data to zeroed output
-  * fields) don't require a change of the version.
-+ * Stable ops are NOT covered by XEN_DOMCTL_INTERFACE_VERSION!
-  *
-  * Last version bump: Xen 4.19
-  */
-@@ -1236,7 +1237,37 @@ struct xen_domctl_dt_overlay {
- };
- #endif
- 
-+/*
-+ * XEN_DOMCTL_get_domain_state (stable interface)
+ #include "xen-9pfsd.h"
+diff --git a/tools/include/xen-barrier.h b/tools/include/xen-barrier.h
+new file mode 100644
+index 0000000000..62036f528b
+--- /dev/null
++++ b/tools/include/xen-barrier.h
+@@ -0,0 +1,51 @@
++/******************************************************************************
++ * xen-barrier.h
 + *
-+ * Get state information of a domain.
++ * Definition of CPU barriers, part of libxenctrl.
 + *
-+ * In case domain is DOMID_INVALID, return information about a domain having
-+ * changed state and reset the state change indicator for that domain. This
-+ * function is usable only by a domain having registered the VIRQ_DOM_EXC
-+ * event (normally Xenstore).
++ * Copyright (c) 2003-2004, K A Fraser.
 + *
-+ * Supported interface versions: 0x00000000
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation;
++ * version 2.1 of the License.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
 + */
-+#define XEN_DOMCTL_GETDOMSTATE_VERS_MAX    0
-+struct xen_domctl_get_domain_state {
-+    domid_t domid;
-+    uint16_t state;
-+#define XEN_DOMCTL_GETDOMSTATE_STATE_EXIST     0x0001  /* Domain is existing. */
-+#define XEN_DOMCTL_GETDOMSTATE_STATE_SHUTDOWN  0x0002  /* Shutdown finished. */
-+#define XEN_DOMCTL_GETDOMSTATE_STATE_DYING     0x0004  /* Domain dying. */
-+    uint32_t pad1;           /* Returned as 0. */
-+    uint64_t unique_id;      /* Unique domain identifier. */
-+    uint64_t pad2[6];        /* Returned as 0. */
-+};
 +
- struct xen_domctl {
++#ifndef XENBARRIER_H
++#define XENBARRIER_H
++
 +/*
-+ * Stable domctl ops:
-+ * interface_version is per cmd, hypervisor can support multiple versions
-+ * and will return used version (at max caller supplied value) in
-+ * interface_version on return.
++ *  DEFINITIONS FOR CPU BARRIERS
 + */
-     uint32_t cmd;
- #define XEN_DOMCTL_createdomain                   1
- #define XEN_DOMCTL_destroydomain                  2
-@@ -1325,6 +1356,7 @@ struct xen_domctl {
- #define XEN_DOMCTL_set_paging_mempool_size       86
- #define XEN_DOMCTL_dt_overlay                    87
- #define XEN_DOMCTL_gsi_permission                88
-+#define XEN_DOMCTL_get_domain_state              89 /* stable interface */
- #define XEN_DOMCTL_gdbsx_guestmemio            1000
- #define XEN_DOMCTL_gdbsx_pausevcpu             1001
- #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
-@@ -1391,6 +1423,7 @@ struct xen_domctl {
- #if defined(__arm__) || defined(__aarch64__)
-         struct xen_domctl_dt_overlay        dt_overlay;
- #endif
-+        struct xen_domctl_get_domain_state  get_domain_state;
-         uint8_t                             pad[128];
-     } u;
- };
-diff --git a/xen/include/xen/event.h b/xen/include/xen/event.h
-index 48b79f3d62..f380668609 100644
---- a/xen/include/xen/event.h
-+++ b/xen/include/xen/event.h
-@@ -43,6 +43,12 @@ void send_guest_global_virq(struct domain *d, uint32_t virq);
-  */
- int set_global_virq_handler(struct domain *d, uint32_t virq);
- 
-+/*
-+ * get_global_virq_handler: Get domain handling a global virq.
-+ *  @virq:     Virtual IRQ number (VIRQ_*), must be global
-+ */
-+struct domain *get_global_virq_handler(uint32_t virq);
 +
- /*
-  * send_guest_pirq:
-  *  @d:        Domain to which physical IRQ should be sent
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 667863263d..eb256de9d5 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -801,6 +801,8 @@ void domain_resume(struct domain *d);
- int domain_soft_reset(struct domain *d, bool resuming);
- 
- void domain_reset_states(void);
-+int get_domain_state(struct xen_domctl_get_domain_state *info,
-+                     struct domain *d);
- 
- int vcpu_start_shutdown_deferral(struct vcpu *v);
- void vcpu_end_shutdown_deferral(struct vcpu *v);
-diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
-index 7956f27a29..eaf5b05093 100644
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -173,6 +173,7 @@ static XSM_INLINE int cf_check xsm_domctl(
-     case XEN_DOMCTL_unbind_pt_irq:
-         return xsm_default_action(XSM_DM_PRIV, current->domain, d);
-     case XEN_DOMCTL_getdomaininfo:
-+    case XEN_DOMCTL_get_domain_state:
-         return xsm_default_action(XSM_XS_PRIV, current->domain, d);
-     default:
-         return xsm_default_action(XSM_PRIV, current->domain, d);
-@@ -815,6 +816,13 @@ static XSM_INLINE int cf_check xsm_argo_send(
- 
- #endif /* CONFIG_ARGO */
- 
-+static XSM_INLINE int cf_check xsm_get_domain_state(
-+    XSM_DEFAULT_ARG struct domain *d)
-+{
-+    XSM_ASSERT_ACTION(XSM_HOOK);
-+    return xsm_default_action(action, current->domain, d);
-+}
++#define xen_barrier() asm volatile ( "" : : : "memory")
 +
- #include <public/version.h>
- static XSM_INLINE int cf_check xsm_xen_version(XSM_DEFAULT_ARG uint32_t op)
- {
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 627c0d2731..933b3889c9 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -201,6 +201,7 @@ struct xsm_ops {
-     int (*argo_register_any_source)(const struct domain *d);
-     int (*argo_send)(const struct domain *d, const struct domain *t);
- #endif
-+    int (*get_domain_state)(struct domain *d);
- };
- 
- #ifdef CONFIG_XSM
-@@ -775,6 +776,11 @@ static inline int xsm_argo_send(const struct domain *d, const struct domain *t)
- 
- #endif /* CONFIG_ARGO */
- 
-+static inline int xsm_get_domain_state(struct domain *d)
-+{
-+    return alternative_call(xsm_ops.get_domain_state, d);
-+}
++#if defined(__i386__)
++#define xen_mb()  asm volatile ( "lock addl $0, -4(%%esp)" ::: "memory" )
++#define xen_rmb() xen_barrier()
++#define xen_wmb() xen_barrier()
++#elif defined(__x86_64__)
++#define xen_mb()  asm volatile ( "lock addl $0, -32(%%rsp)" ::: "memory" )
++#define xen_rmb() xen_barrier()
++#define xen_wmb() xen_barrier()
++#elif defined(__arm__)
++#define xen_mb()   asm volatile ("dmb" : : : "memory")
++#define xen_rmb()  asm volatile ("dmb" : : : "memory")
++#define xen_wmb()  asm volatile ("dmb" : : : "memory")
++#elif defined(__aarch64__)
++#define xen_mb()   asm volatile ("dmb sy" : : : "memory")
++#define xen_rmb()  asm volatile ("dmb sy" : : : "memory")
++#define xen_wmb()  asm volatile ("dmb sy" : : : "memory")
++#else
++#error "Define barriers"
++#endif
 +
- #endif /* XSM_NO_WRAPPERS */
++#endif /* XENBARRIER_H */
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 29617585c5..ea57e9dbb9 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -48,6 +48,7 @@
+ #include <xen/platform.h>
  
- #ifdef CONFIG_MULTIBOOT
-diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
-index e6ffa948f7..ce6fbdc6c5 100644
---- a/xen/xsm/dummy.c
-+++ b/xen/xsm/dummy.c
-@@ -148,6 +148,7 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
-     .argo_register_any_source      = xsm_argo_register_any_source,
-     .argo_send                     = xsm_argo_send,
- #endif
-+    .get_domain_state              = xsm_get_domain_state,
- };
+ #include "xentoollog.h"
++#include "xen-barrier.h"
  
- void __init xsm_fixup_ops(struct xsm_ops *ops)
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index dfa23738cd..b1bad7e420 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -686,6 +686,7 @@ static int cf_check flask_domctl(struct domain *d, unsigned int cmd,
-     case XEN_DOMCTL_memory_mapping:
-     case XEN_DOMCTL_set_target:
-     case XEN_DOMCTL_vm_event_op:
-+    case XEN_DOMCTL_get_domain_state:
+ #if defined(__i386__) || defined(__x86_64__)
+ #include <xen/foreign/x86_32.h>
+@@ -61,33 +62,6 @@
  
-     /* These have individual XSM hooks (arch/../domctl.c) */
-     case XEN_DOMCTL_bind_pt_irq:
-@@ -1853,6 +1854,11 @@ static int cf_check flask_argo_send(
+ #define INVALID_MFN  (~0UL)
  
- #endif
+-/*
+- *  DEFINITIONS FOR CPU BARRIERS
+- */
+-
+-#define xen_barrier() asm volatile ( "" : : : "memory")
+-
+-#if defined(__i386__)
+-#define xen_mb()  asm volatile ( "lock addl $0, -4(%%esp)" ::: "memory" )
+-#define xen_rmb() xen_barrier()
+-#define xen_wmb() xen_barrier()
+-#elif defined(__x86_64__)
+-#define xen_mb()  asm volatile ( "lock addl $0, -32(%%rsp)" ::: "memory" )
+-#define xen_rmb() xen_barrier()
+-#define xen_wmb() xen_barrier()
+-#elif defined(__arm__)
+-#define xen_mb()   asm volatile ("dmb" : : : "memory")
+-#define xen_rmb()  asm volatile ("dmb" : : : "memory")
+-#define xen_wmb()  asm volatile ("dmb" : : : "memory")
+-#elif defined(__aarch64__)
+-#define xen_mb()   asm volatile ("dmb sy" : : : "memory")
+-#define xen_rmb()  asm volatile ("dmb sy" : : : "memory")
+-#define xen_wmb()  asm volatile ("dmb sy" : : : "memory")
+-#else
+-#error "Define barriers"
+-#endif
+-
+-
+ #define XENCTRL_HAS_XC_INTERFACE 1
+ /* In Xen 4.0 and earlier, xc_interface_open and xc_evtchn_open would
+  * both return ints being the file descriptor.  In 4.1 and later, they
+diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
+index 5fe0bfad0c..acce8639d3 100644
+--- a/tools/libs/ctrl/Makefile
++++ b/tools/libs/ctrl/Makefile
+@@ -3,7 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
  
-+static int cf_check flask_get_domain_state(struct domain *d)
-+{
-+    return current_has_perm(d, SECCLASS_DOMAIN, DOMAIN__GET_DOMAIN_STATE);
-+}
-+
- static const struct xsm_ops __initconst_cf_clobber flask_ops = {
-     .set_system_active = flask_set_system_active,
-     .security_domaininfo = flask_security_domaininfo,
-@@ -1989,6 +1995,7 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
-     .argo_register_any_source = flask_argo_register_any_source,
-     .argo_send = flask_argo_send,
- #endif
-+    .get_domain_state = flask_get_domain_state,
- };
+ include Makefile.common
  
- const struct xsm_ops *__init flask_init(
-diff --git a/xen/xsm/flask/policy/access_vectors b/xen/xsm/flask/policy/access_vectors
-index a35e3d4c51..c9a8eeda4e 100644
---- a/xen/xsm/flask/policy/access_vectors
-+++ b/xen/xsm/flask/policy/access_vectors
-@@ -251,6 +251,8 @@ class domain2
-     resource_map
- # XEN_DOMCTL_get_cpu_policy
-     get_cpu_policy
-+# XEN_DOMCTL_get_domain_state
-+    get_domain_state
- }
+-LIBHEADER := xenctrl.h xenctrl_compat.h
++LIBHEADER := xenctrl.h xenctrl_compat.h xen-barrier.h
+ PKG_CONFIG_FILE := xencontrol.pc
+ PKG_CONFIG_NAME := Xencontrol
  
- # Similar to class domain, but primarily contains domctls related to HVM domains
 -- 
 2.43.0
 
