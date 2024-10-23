@@ -4,45 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29447CF5386
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 13:18:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.824667.1238833 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D415ACF538A
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2024 13:50:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.824683.1238843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3bFX-00030V-F1; Wed, 23 Oct 2024 13:18:07 +0000
+	id 1t3bkg-0000gO-UF; Wed, 23 Oct 2024 13:50:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 824667.1238833; Wed, 23 Oct 2024 13:18:07 +0000
+Received: by outflank-mailman (output) from mailman id 824683.1238843; Wed, 23 Oct 2024 13:50:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3bFX-00030O-C7; Wed, 23 Oct 2024 13:18:07 +0000
-Received: by outflank-mailman (input) for mailman id 824667;
- Wed, 23 Oct 2024 13:18:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=W0hE=RT=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1t3b8c-0006Ra-Ff
- for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 13:10:58 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a5d39e4-9140-11ef-99a3-01e77a169b0f;
- Wed, 23 Oct 2024 15:10:52 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4A0401FDA3;
- Wed, 23 Oct 2024 13:10:51 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 218B613A63;
- Wed, 23 Oct 2024 13:10:51 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id VoOzBtv1GGcIeAAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 23 Oct 2024 13:10:51 +0000
+	id 1t3bkg-0000gH-Qv; Wed, 23 Oct 2024 13:50:18 +0000
+Received: by outflank-mailman (input) for mailman id 824683;
+ Wed, 23 Oct 2024 13:50:17 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1uSz=RT=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
+ id 1t3bkf-0000gB-S3
+ for xen-devel@lists.xenproject.org; Wed, 23 Oct 2024 13:50:17 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bb51b244-9145-11ef-a0be-8be0dac302b0;
+ Wed, 23 Oct 2024 15:50:16 +0200 (CEST)
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-481-VWU3WUWKOciiiZ9qMlobJg-1; Wed, 23 Oct 2024 09:50:13 -0400
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4315e8e9b1cso5513165e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Oct 2024 06:50:13 -0700 (PDT)
+Received: from eisenberg.fritz.box ([2001:16b8:3dac:2f00:8834:dd3a:39b8:e43b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43186be7605sm16955265e9.19.2024.10.23.06.50.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Oct 2024 06:50:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,114 +51,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a5d39e4-9140-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1729689051; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=LFewm/PyRpGCHNCNmkuqU9cF9n06m4bxHZhH7BxdXMU=;
-	b=CnO/byiXVHpDym0EN2ob8KIWqZIg544Q0AT9OKrmSamYzGK7DbTX/pH2jGl1AZL1I/Flxy
-	OmYU0k6zHJGnh+bZa/c4cd6vHDcLesqG75MFXWlbaiK7vvL4BN2gRAIeeZ9MXKsGdKBVqT
-	+CTAFc6NsqdKiNP+UmH0k86AAnd0BOM=
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b="CnO/byiX"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1729689051; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=LFewm/PyRpGCHNCNmkuqU9cF9n06m4bxHZhH7BxdXMU=;
-	b=CnO/byiXVHpDym0EN2ob8KIWqZIg544Q0AT9OKrmSamYzGK7DbTX/pH2jGl1AZL1I/Flxy
-	OmYU0k6zHJGnh+bZa/c4cd6vHDcLesqG75MFXWlbaiK7vvL4BN2gRAIeeZ9MXKsGdKBVqT
-	+CTAFc6NsqdKiNP+UmH0k86AAnd0BOM=
-From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH] config: add support for libxenmanage
-Date: Wed, 23 Oct 2024 15:10:48 +0200
-Message-ID: <20241023131048.32240-1-jgross@suse.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: bb51b244-9145-11ef-a0be-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1729691415;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=0/+dEQYx4WTT1/4z8YC1ihy31/3sJwq8UjrD+U04yBQ=;
+	b=MkJqzqTMbLSoJbNMxJxMW6/vliEp7n689TifMbbNPh7UkEV98gGqZVqowSRRuP1eqKWFa6
+	ddXuplVWxO+//lYZ2F4S4JjKACXxTBXBeUoBW7TLDawx20as2w5hY4aeoqhUHkxkuCPCaM
+	WAeyWSXoeG65REeXmCg4XSjfvYRfXqU=
+X-MC-Unique: VWU3WUWKOciiiZ9qMlobJg-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729691412; x=1730296212;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=oO7/c3KxFQ4pCLrpHRIQyFFVX9SeNU/L27HBNV7OVps=;
+        b=DTY4UJBJ+tf/evTFJ1YW6jHtd6lt3k3mTdOUV7BlZeePRww7wcrURS98Fu8LOjh4GJ
+         PxJQJRjXKNSSHFVqtH5lXH88qQbQALgxJUSGLh3wC0K00AEa98ZUIrEKw6cCpPQrGkIr
+         9n/oaPeQPC7OtndavPDtQN1LwmJCbxTVj8svimslA1CLqCubquG3Dy0QHUWlC4blN2FF
+         vIUxPaEarOIjDRWabB63epWIVB/iPKFnRiubRlKh5KgzDxSFmQxdlpu32tRksayWRhL7
+         mCONZl2RXCHBuPCq73CiRhyzgU9sctdrrADRE3bqjjZrUtW5L/p+JNJsekGgbdCOObv1
+         gafQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWHoerYp4HpBlihXzuvpcWk1hyB88vKRRi/BwyF8dE4Ujx1xjknyb/XM2cxSYOut9xxLHOrqikWzzM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwLy9Gh13BPJdDNLXGGMhhBEifYAggSbicZDAKSBEaB6UeWKA2L
+	yqvFLhn7GANbWTXeywTkJPjmU0sseetk9RlmUuNq24/OKeaqooxR9izvDqbOPuWVkPvYg3Ur8z/
+	VHzXXoPlrccCTASSFmxsYe91+cJZCQ42+xxgcly0xZAJxivyK6nxrnWDllvoIRCPu
+X-Received: by 2002:a05:600c:4f43:b0:42f:84ec:3e0 with SMTP id 5b1f17b1804b1-4317bd88469mr48316755e9.9.1729691412237;
+        Wed, 23 Oct 2024 06:50:12 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHVbS2v+nb51IE57ofZXQEpzrUukFuey0NWkF8DOXs6/K2mGsAvF2UpvyCTTgP3Onw94z3R5g==
+X-Received: by 2002:a05:600c:4f43:b0:42f:84ec:3e0 with SMTP id 5b1f17b1804b1-4317bd88469mr48316115e9.9.1729691411741;
+        Wed, 23 Oct 2024 06:50:11 -0700 (PDT)
+Message-ID: <6f3db65fe9a5dcd1a7a8d9bd5352ecb248ef57b1.camel@redhat.com>
+Subject: Re: [PATCH 02/13] ALSA: hda_intel: Use always-managed version of
+ pcim_intx()
+From: Philipp Stanner <pstanner@redhat.com>
+To: Takashi Iwai <tiwai@suse.de>
+Cc: Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>, 
+ Sergey Shtylyov <s.shtylyov@omp.ru>, Basavaraj Natikar
+ <basavaraj.natikar@amd.com>, Jiri Kosina <jikos@kernel.org>,  Benjamin
+ Tissoires <bentiss@kernel.org>, Arnd Bergmann <arnd@arndb.de>, Greg
+ Kroah-Hartman <gregkh@linuxfoundation.org>, Alex Dubov <oakad@yahoo.com>,
+ Sudarsana Kalluru <skalluru@marvell.com>, Manish Chopra
+ <manishc@marvell.com>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo
+ Abeni <pabeni@redhat.com>, Rasesh Mody <rmody@marvell.com>,
+ GR-Linux-NIC-Dev@marvell.com, Igor Mitsyanko <imitsyanko@quantenna.com>,
+ Sergey Matyukevich <geomatsi@gmail.com>, Kalle Valo <kvalo@kernel.org>,
+ Sanjay R Mehta <sanju.mehta@amd.com>, Shyam Sundar S K
+ <Shyam-sundar.S-k@amd.com>, Jon Mason <jdmason@kudzu.us>, Dave Jiang
+ <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>, Bjorn Helgaas
+ <bhelgaas@google.com>, Alex Williamson <alex.williamson@redhat.com>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Oleksandr Tyshchenko
+ <oleksandr_tyshchenko@epam.com>, Jaroslav Kysela <perex@perex.cz>, Takashi
+ Iwai <tiwai@suse.com>, Chen Ni <nichen@iscas.ac.cn>, Mario Limonciello
+ <mario.limonciello@amd.com>, Ricky Wu <ricky_wu@realtek.com>, Al Viro
+ <viro@zeniv.linux.org.uk>, Breno Leitao <leitao@debian.org>, Kevin Tian
+ <kevin.tian@intel.com>, Thomas Gleixner <tglx@linutronix.de>, Ilpo
+ =?ISO-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>, Andy
+ Shevchenko <andriy.shevchenko@linux.intel.com>, Mostafa Saleh
+ <smostafa@google.com>, Jason Gunthorpe <jgg@ziepe.ca>, Yi Liu
+ <yi.l.liu@intel.com>,  Christian Brauner <brauner@kernel.org>, Ankit
+ Agrawal <ankita@nvidia.com>, Eric Auger <eric.auger@redhat.com>, Reinette
+ Chatre <reinette.chatre@intel.com>, Ye Bin <yebin10@huawei.com>, Marek
+ =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, Peter Ujfalusi
+ <peter.ujfalusi@linux.intel.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Kai Vehmanen
+ <kai.vehmanen@linux.intel.com>,  Rui Salvaterra <rsalvaterra@gmail.com>,
+ linux-ide@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-input@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-wireless@vger.kernel.org, ntb@lists.linux.dev,
+ linux-pci@vger.kernel.org,  kvm@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-sound@vger.kernel.org
+Date: Wed, 23 Oct 2024 15:50:09 +0200
+In-Reply-To: <87v7xk2ps5.wl-tiwai@suse.de>
+References: <20241015185124.64726-1-pstanner@redhat.com>
+	 <20241015185124.64726-3-pstanner@redhat.com> <87v7xk2ps5.wl-tiwai@suse.de>
+User-Agent: Evolution 3.52.4 (3.52.4-1.fc40)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4A0401FDA3
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	MIME_TRACE(0.00)[0:+];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_SOME(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add CONFIG_LIBXENMANAGE support.
+On Tue, 2024-10-22 at 16:08 +0200, Takashi Iwai wrote:
+> On Tue, 15 Oct 2024 20:51:12 +0200,
+> Philipp Stanner wrote:
+> >=20
+> > pci_intx() is a hybrid function which can sometimes be managed
+> > through
+> > devres. To remove this hybrid nature from pci_intx(), it is
+> > necessary to
+> > port users to either an always-managed or a never-managed version.
+> >=20
+> > hda_intel enables its PCI-Device with pcim_enable_device(). Thus,
+> > it needs
+> > the always-managed version.
+> >=20
+> > Replace pci_intx() with pcim_intx().
+> >=20
+> > Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> > ---
+> > =C2=A0sound/pci/hda/hda_intel.c | 2 +-
+> > =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/sound/pci/hda/hda_intel.c b/sound/pci/hda/hda_intel.c
+> > index b4540c5cd2a6..b44ca7b6e54f 100644
+> > --- a/sound/pci/hda/hda_intel.c
+> > +++ b/sound/pci/hda/hda_intel.c
+> > @@ -786,7 +786,7 @@ static int azx_acquire_irq(struct azx *chip,
+> > int do_disconnect)
+> > =C2=A0=09}
+> > =C2=A0=09bus->irq =3D chip->pci->irq;
+> > =C2=A0=09chip->card->sync_irq =3D bus->irq;
+> > -=09pci_intx(chip->pci, !chip->msi);
+> > +=09pcim_intx(chip->pci, !chip->msi);
+> > =C2=A0=09return 0;
+> > =C2=A0}
+> > =C2=A0
+>=20
+> Hm, it's OK-ish to do this as it's practically same as what
+> pci_intx()
+> currently does.=C2=A0 But, the current code can be a bit inconsistent
+> about
+> the original intx value.=C2=A0 pcim_intx() always stores !enable to
+> res->orig_intx unconditionally, and it means that the orig_intx value
+> gets overridden at each time pcim_intx() gets called.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-Please note that this patch should be committed only after the related
-Xen patch "tools/libs: add a new libxenmanage library" has been Acked,
-as otherwise it should either be dropped (in case the approach of
-adding a new library is being rejected) or changed (in case the name
-of the new library needs to be modified)!
+Yes.
 
- Config.mk | 2 ++
- Makefile  | 4 ++++
- 2 files changed, 6 insertions(+)
+>=20
+> Meanwhile, HD-audio driver does release and re-acquire the interrupt
+> after disabling MSI when something goes wrong, and pci_intx() call
+> above is a part of that procedure.=C2=A0 So, it can rewrite the
+> res->orig_intx to another value by retry without MSI.=C2=A0 And after the
+> driver removal, it'll lead to another state.
 
-diff --git a/Config.mk b/Config.mk
-index f59a0cf4..e493533a 100644
---- a/Config.mk
-+++ b/Config.mk
-@@ -46,6 +46,7 @@ GNTTAB_PATH ?= $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/gnttab
- CALL_PATH ?= $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/call
- FOREIGNMEMORY_PATH ?= $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/foreignmemory
- DEVICEMODEL_PATH ?= $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/devicemodel
-+MANAGE_PATH ?= $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/manage
- CTRL_PATH ?= $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)
- GUEST_PATH ?= $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)
- else
-@@ -202,6 +203,7 @@ CONFIG-n += CONFIG_LIBXENGNTTAB
- CONFIG-n += CONFIG_LIBXENGUEST
- CONFIG-n += CONFIG_LIBXENTOOLCORE
- CONFIG-n += CONFIG_LIBXENTOOLLOG
-+CONFIG-n += CONFIG_LIBXENMANAGE
- # Setting CONFIG_USE_XEN_CONSOLE copies all print output to the Xen emergency
- # console apart of standard dom0 handled console.
- CONFIG-n += CONFIG_USE_XEN_CONSOLE
-diff --git a/Makefile b/Makefile
-index ffa8d1a8..d094858a 100644
---- a/Makefile
-+++ b/Makefile
-@@ -159,6 +159,10 @@ ifeq ($(CONFIG_LIBXENCTRL),y)
- APP_LDLIBS += -L$(CTRL_PATH) -whole-archive -lxenctrl -no-whole-archive
- LIBS += $(CTRL_PATH)/libxenctrl.a
- endif
-+ifeq ($(CONFIG_LIBXENMANAGE),y)
-+APP_LDLIBS += -L$(MANAGE_PATH) -whole-archive -lxenmanage -no-whole-archive
-+LIBS += $(MANAGE_PATH)/libxenmanage.a
-+endif
- APP_LDLIBS += -lpci
- APP_LDLIBS += -lz
- APP_LDLIBS += -lm
--- 
-2.43.0
+I'm not sure that I understand this paragraph completely. Still, could
+a solution for the driver on the long-term just be to use pci_intx()?
+
+>=20
+> In anyway, as it doesn't change the current behavior, feel free to
+> take my ack for now:
+>=20
+> Acked-by: Takashi Iwai <tiwai@suse.de>
+
+Thank you,
+P.
+
+>=20
+>=20
+> thanks,
+>=20
+> Takashi
+>=20
 
 
