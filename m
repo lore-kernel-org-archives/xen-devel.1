@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA46CFA462
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABE6CCFA456
 	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 10:04:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825099.1239303 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.825104.1239349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3uhs-0005lV-PL; Thu, 24 Oct 2024 10:04:40 +0000
+	id 1t3uhw-00070N-LO; Thu, 24 Oct 2024 10:04:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825099.1239303; Thu, 24 Oct 2024 10:04:40 +0000
+Received: by outflank-mailman (output) from mailman id 825104.1239349; Thu, 24 Oct 2024 10:04:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3uhs-0005kj-I2; Thu, 24 Oct 2024 10:04:40 +0000
-Received: by outflank-mailman (input) for mailman id 825099;
- Thu, 24 Oct 2024 10:04:39 +0000
+	id 1t3uhw-0006zs-Hb; Thu, 24 Oct 2024 10:04:44 +0000
+Received: by outflank-mailman (input) for mailman id 825104;
+ Thu, 24 Oct 2024 10:04:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dalx=RU=cloud.com=javi.merino@srs-se1.protection.inumbo.net>)
- id 1t3uhr-0005hp-0O
- for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 10:04:39 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
+ id 1t3uhu-0005hp-0w
+ for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 10:04:42 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 604ba3ba-91ef-11ef-99a3-01e77a169b0f;
- Thu, 24 Oct 2024 12:04:37 +0200 (CEST)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c9693dc739so886931a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 03:04:37 -0700 (PDT)
+ id 620d4fbc-91ef-11ef-99a3-01e77a169b0f;
+ Thu, 24 Oct 2024 12:04:40 +0200 (CEST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5c96df52c52so839244a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 03:04:40 -0700 (PDT)
 Received: from localhost.localdomain ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cb66c72866sm5482506a12.95.2024.10.24.03.04.35
+ 4fb4d7f45d1cf-5cb66c72866sm5482506a12.95.2024.10.24.03.04.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 03:04:35 -0700 (PDT)
+ Thu, 24 Oct 2024 03:04:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,328 +47,221 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 604ba3ba-91ef-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 620d4fbc-91ef-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1729764276; x=1730369076; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1729764279; x=1730369079; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cByNa6/hk0GoMLekCJ3KNnYw1LRCV4BYv94ebYfTHDY=;
-        b=ibczguIw69WCyAJSY+G1QOiFFQ3ly8++IN72YDPCSW8yfc230QwIS2ax9fhrU3ElBq
-         Id6t9tHVZtm3cw47k/qAjB5eLY7wxHMMKJfnL5lgl03G3MsiaG7sR0sA8LtFpCDpxoeL
-         JauiBbJcQQWu2iUTEgx2WEAvSteoZftACaonU=
+        bh=sVlXuuK1xEQOAVzZHIn4SmM6Td3cV8czZgbgjjn4N1k=;
+        b=Q8nrdOzGkK55Zmt2DPH5sQg8CdUGmhdInXPJyzy1C1oMbIqcZWnMLllmYCS/58tl3q
+         XssAsKAqcHjJQVgorXXl/6NRQi1dVJnQjl2GOUU5sFv7J38pcsAlVmD24CSpJKnAunoH
+         Xs3FHZQBj1+ZxXWxhWuCJmV69HYiaD+gFt8NM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729764276; x=1730369076;
+        d=1e100.net; s=20230601; t=1729764279; x=1730369079;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=cByNa6/hk0GoMLekCJ3KNnYw1LRCV4BYv94ebYfTHDY=;
-        b=FstbKCx6yjivL/xqaqRo4BzqRoQyuZeO0prR0kjyi0pwukzuxsv7tiJ4waLC6enlMs
-         3JyL6pq6BL71cHUarU34U0ruL/4Wkw6/xIlhhGJx/SDLol9a77Nf9x6eyek9OAgAz7pE
-         vcCbUDyaYNGPdo7K2ENep5k4eMGNaAsMBi+Gb7L9ojwC4YWi7AynaSrgi335z8+jIkUl
-         vqMYxL7UPEjsMcBkQEBnbiZbchj0zEvAHfa7p+TJBHmCbgL26MnBFVGTFxFbWsL3iCUg
-         BUKLCAfRl4EVTdvHorcE0qRR/QGFV5geeI8RYsfChMF5SXcj9uSvcqAgX5LZimg8aILy
-         INqQ==
-X-Gm-Message-State: AOJu0YzxXFUmiGv4Ufq77DxBLkH9BjuwmaKAgkWFvb+Sq1IK1/8ORMfC
-	dmnapTCN6yc5Ib0VAEA0oQ8lGd8Y9m5AbsIgjqSd8q2NPwDOAL7xqP6E30kGGqKzocY41OKLi1S
-	408E=
-X-Google-Smtp-Source: AGHT+IFQc//FcRKMsdqTdoMjpQ/Mmo7CnGs5JPPRiH32Z17oE4kXL6W/C3ADvghplQLCCgUMn+hxvw==
-X-Received: by 2002:a05:6402:40d2:b0:5cb:68cf:c730 with SMTP id 4fb4d7f45d1cf-5cb8af7dde3mr4781805a12.5.1729764276275;
-        Thu, 24 Oct 2024 03:04:36 -0700 (PDT)
+        bh=sVlXuuK1xEQOAVzZHIn4SmM6Td3cV8czZgbgjjn4N1k=;
+        b=gwLdybB/2NbnMaHoCV1YsbL2ZtRpu//Y7x30WOzjISaZBcwJ4dtHHSufyRUHE0mK4c
+         ikw4ELglDhYSSKkBqjnlOXCFaAZpf0tlpT7lnnCQoQ9c4VQsY4RmISpSrxsGq7Pw3DYX
+         e4UTrcA+kEbPAIyeZ+atGv/95rCKirIvM0viFbMhdG3qleRsst7+eRCUQ5t16hg5ta83
+         JdT6ptxjFAY9bNde4gQ8RdjbzDCSGtfiwLAVaRBb+dasFN8qXQTNpqQape6QVJg8cGI2
+         n/XFFLJcDxGryDquO+7/VWj9YwQs7id+UHgCQ+3p6hCn/fjz7GZRE9uf+09LvBzch7XR
+         SDug==
+X-Gm-Message-State: AOJu0Yyvpkl+beRaAlzKUbsklazZdxOsAO1kq7DtjPEn3682Sg7amTAj
+	1eRpBIa8G5S3vWVkCdPT9mnr9Ti3GYm8bQxSwnYH9R9mbGPok851JGcWU3yEyxNISdsY55tdowg
+	hETc=
+X-Google-Smtp-Source: AGHT+IFRyLmoJZ+UKlceAWsFPEGXV05Q3R+N3UCSgoAj/TGPHmJLMNKyBsWpxxsHg+yLoujSrU3D1A==
+X-Received: by 2002:a05:6402:280e:b0:5cb:7318:800d with SMTP id 4fb4d7f45d1cf-5cb8b26d8f1mr4678502a12.32.1729764279375;
+        Thu, 24 Oct 2024 03:04:39 -0700 (PDT)
 From: Javi Merino <javi.merino@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Javi Merino <javi.merino@cloud.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH v1 1/6] CI: Refresh the Debian 12 x86_64 container
-Date: Thu, 24 Oct 2024 11:04:16 +0100
-Message-ID: <288fcc10dbcbdab1c33ebfb95bedf2366ba64122.1729760501.git.javi.merino@cloud.com>
+Subject: [XEN PATCH v1 6/6] CI: Run the builds and tests that use the Debian 12 containers as a normal user
+Date: Thu, 24 Oct 2024 11:04:21 +0100
+Message-ID: <c6d8547d500ac419ee4590decb9392f32f1f0d02.1729760501.git.javi.merino@cloud.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <cover.1729760501.git.javi.merino@cloud.com>
 References: <cover.1729760501.git.javi.merino@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Rework the container to use heredocs for readability, and use
-apt-get --no-install-recommends to keep the size down.
+Use FF_DISABLE_UMASK_FOR_DOCKER_EXECUTOR so that GitLab CI clones xen
+using the user in the image, instead of as root[0].
 
-This reduces the size of the (uncompressed) container from 3.44GB to 1.67GB.
+In qemu-smoke-dom0*.sh and qemu-alpine-x86_64.sh, use fakeroot to
+create the rootfs images that untar a tarball that create character
+devices.  cpio replicates the block and character devices, as well as
+preserving the uid and gid it sees in the current directory.  fakeroot
+lets tar think that it is creating block and character devices, and
+all files are owned by root, but it is all smokes and mirrors for
+cpio.
+
+[0] https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1736
 
 Signed-off-by: Javi Merino <javi.merino@cloud.com>
 ---
- automation/build/debian/12-x86_64.dockerfile | 68 ++++++++++++++++++++
- automation/build/debian/bookworm.dockerfile  | 57 ----------------
- automation/gitlab-ci/build.yaml              | 20 +++---
- automation/gitlab-ci/test.yaml               | 14 ++--
- automation/scripts/containerize              |  2 +-
- 5 files changed, 86 insertions(+), 75 deletions(-)
- create mode 100644 automation/build/debian/12-x86_64.dockerfile
- delete mode 100644 automation/build/debian/bookworm.dockerfile
 
+Regarding building the rootfs, I have chosen to use a fakeroot
+subshell for the entire process.  automation/scripts/qubes-x86-64.sh
+takes a different approach, it just uses fakeroot for the tar/cpio
+commands.  I prefer to do it this way but I am happy to be overridden
+if `fakeroot -s ../save tar` and `fakeroot -i ../save cpio` are
+preferred.
+
+ automation/build/debian/12-arm64v8.dockerfile   | 5 ++++-
+ automation/build/debian/12-x86_64.dockerfile    | 5 ++++-
+ automation/gitlab-ci/test.yaml                  | 4 ++++
+ automation/scripts/qemu-alpine-x86_64.sh        | 4 +++-
+ automation/scripts/qemu-smoke-dom0-arm64.sh     | 7 +++++--
+ automation/scripts/qemu-smoke-dom0less-arm64.sh | 5 +++--
+ 6 files changed, 23 insertions(+), 7 deletions(-)
+
+diff --git a/automation/build/debian/12-arm64v8.dockerfile b/automation/build/debian/12-arm64v8.dockerfile
+index 4da1b074aedb..c2617956ed77 100644
+--- a/automation/build/debian/12-arm64v8.dockerfile
++++ b/automation/build/debian/12-arm64v8.dockerfile
+@@ -10,6 +10,8 @@ RUN <<EOF
+ #!/bin/bash
+     set -eu
+ 
++    useradd --create-home user
++
+     apt-get update
+     DEPS=(
+         # Xen
+@@ -53,6 +55,7 @@ RUN <<EOF
+         curl
+         device-tree-compiler
+         expect
++        fakeroot
+         u-boot-qemu
+         # for imagebuilder
+         file
+@@ -64,5 +67,5 @@ RUN <<EOF
+     rm -rf /var/lib/apt/lists*
+ EOF
+ 
+-USER root
++USER user
+ WORKDIR /build
 diff --git a/automation/build/debian/12-x86_64.dockerfile b/automation/build/debian/12-x86_64.dockerfile
-new file mode 100644
-index 000000000000..e0ca8b7e9c91
---- /dev/null
+index e0ca8b7e9c91..98b23ea3eaa4 100644
+--- a/automation/build/debian/12-x86_64.dockerfile
 +++ b/automation/build/debian/12-x86_64.dockerfile
-@@ -0,0 +1,68 @@
-+# syntax=docker/dockerfile:1
-+FROM --platform=linux/amd64 debian:bookworm
-+LABEL maintainer.name="The Xen Project" \
-+      maintainer.email="xen-devel@lists.xenproject.org"
-+
-+ENV DEBIAN_FRONTEND=noninteractive
-+
-+# build depends
-+RUN <<EOF
-+#!/bin/bash
-+    set -eu
-+
-+    apt-get update
-+    DEPS=(
-+        # Xen
-+        bison
-+        build-essential
-+        checkpolicy
-+        clang
-+        flex
-+
-+        # Tools (general)
-+        ca-certificates
-+        expect
-+        git-core
-+        libnl-3-dev
-+        pkg-config
-+        wget
-+        # libxenguest dombuilder
-+        liblzma-dev
-+        zlib1g-dev
-+        # libacpi
-+        acpica-tools
-+        # libxl
-+        uuid-dev
-+        libyajl-dev
-+        # RomBIOS
-+        bcc
-+        bin86
-+        # xentop
-+        libncurses5-dev
-+        # Python bindings
-+        python3-dev
-+        python3-setuptools
-+        # Ocaml bindings/oxenstored
-+        ocaml-nox
-+        ocaml-findlib
-+        # To build the documentation
-+        pandoc
-+
-+        # for test phase, qemu-smoke-* jobs
-+        qemu-system-x86
-+
-+        # for qemu-alpine-x86_64-gcc
-+        busybox-static
-+        cpio
-+
-+        # For *-efi jobs
-+        ovmf
-+    )
-+
-+    apt-get -y --no-install-recommends install "${DEPS[@]}"
-+
-+    rm -rf /var/lib/apt/lists*
-+EOF
-+
-+USER root
-+WORKDIR /build
-diff --git a/automation/build/debian/bookworm.dockerfile b/automation/build/debian/bookworm.dockerfile
-deleted file mode 100644
-index 72e01aa58b55..000000000000
---- a/automation/build/debian/bookworm.dockerfile
-+++ /dev/null
-@@ -1,57 +0,0 @@
--# syntax=docker/dockerfile:1
--FROM --platform=linux/amd64 debian:bookworm
--LABEL maintainer.name="The Xen Project" \
--      maintainer.email="xen-devel@lists.xenproject.org"
--
--ENV DEBIAN_FRONTEND=noninteractive
--ENV USER root
--
--RUN mkdir /build
--WORKDIR /build
--
--# build depends
--RUN apt-get update && \
--    apt-get --quiet --yes install \
--        build-essential \
--        zlib1g-dev \
--        libncurses5-dev \
--        python3-dev \
--        python3-setuptools \
--        uuid-dev \
--        libyajl-dev \
--        libaio-dev \
--        libglib2.0-dev \
--        clang \
--        libpixman-1-dev \
--        pkg-config \
--        flex \
--        bison \
--        acpica-tools \
--        bin86 \
--        bcc \
--        liblzma-dev \
--        libnl-3-dev \
--        ocaml-nox \
--        libfindlib-ocaml-dev \
--        markdown \
--        transfig \
--        pandoc \
--        checkpolicy \
--        wget \
--        git \
--        nasm \
--        gnupg \
--        apt-transport-https \
--        golang \
--        # for test phase, qemu-smoke-* jobs
--        qemu-system-x86 \
--        expect \
--        # For *-efi jobs
--        ovmf \
--        # for test phase, qemu-alpine-* jobs
--        cpio \
--        busybox-static \
--        && \
--        apt-get autoremove -y && \
--        apt-get clean && \
--        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 09dd9e6ccbd0..eb2c23619a2c 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -341,15 +341,15 @@ alpine-3.18-gcc-debug:
-     CONTAINER: alpine:3.18
-     BUILD_QEMU_XEN: y
+@@ -10,6 +10,8 @@ RUN <<EOF
+ #!/bin/bash
+     set -eu
  
--debian-bookworm-gcc-debug:
-+debian-12-x86_64-gcc-debug:
-   extends: .gcc-x86-64-build-debug
-   variables:
--    CONTAINER: debian:bookworm
-+    CONTAINER: debian:12-x86_64
++    useradd --create-home user
++
+     apt-get update
+     DEPS=(
+         # Xen
+@@ -54,6 +56,7 @@ RUN <<EOF
+         # for qemu-alpine-x86_64-gcc
+         busybox-static
+         cpio
++        fakeroot
  
--debian-bookworm-clang-debug:
-+debian-12-x86_64-clang-debug:
-   extends: .clang-x86-64-build-debug
-   variables:
--    CONTAINER: debian:bookworm
-+    CONTAINER: debian:12-x86_64
+         # For *-efi jobs
+         ovmf
+@@ -64,5 +67,5 @@ RUN <<EOF
+     rm -rf /var/lib/apt/lists*
+ EOF
  
- debian-12-ppc64le-gcc-debug:
-   extends: .gcc-ppc64le-cross-build-debug
-@@ -553,20 +553,20 @@ debian-12-x86_64-gcc-ibt:
-     EXTRA_FIXED_RANDCONFIG: |
-       CONFIG_XEN_IBT=y
- 
--debian-bookworm-clang:
-+debian-12-x86_64-clang:
-   extends: .clang-x86-64-build
-   variables:
--    CONTAINER: debian:bookworm
-+    CONTAINER: debian:12-x86_64
- 
--debian-bookworm-gcc:
-+debian-12-x86_64-gcc:
-   extends: .gcc-x86-64-build
-   variables:
--    CONTAINER: debian:bookworm
-+    CONTAINER: debian:12-x86_64
- 
--debian-bookworm-gcc-randconfig:
-+debian-12-x86_64-gcc-randconfig:
-   extends: .gcc-x86-64-build
-   variables:
--    CONTAINER: debian:bookworm
-+    CONTAINER: debian:12-x86_64
-     RANDCONFIG: y
- 
- debian-bookworm-32-clang-debug:
+-USER root
++USER user
+ WORKDIR /build
 diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index e76a37bef32d..0812ddb42d9b 100644
+index 42baa82fe36f..71f2beb68c4f 100644
 --- a/automation/gitlab-ci/test.yaml
 +++ b/automation/gitlab-ci/test.yaml
-@@ -43,7 +43,7 @@
- .qemu-x86-64:
-   extends: .test-jobs-common
-   variables:
--    CONTAINER: debian:bookworm
-+    CONTAINER: debian:12-x86_64
-     LOGFILE: qemu-smoke-x86-64.log
-   artifacts:
-     paths:
-@@ -155,7 +155,7 @@
- build-each-commit-gcc:
-   extends: .test-jobs-common
-   variables:
--    CONTAINER: debian:bookworm
-+    CONTAINER: debian:12-x86_64
-     XEN_TARGET_ARCH: x86_64
-     CC: gcc
-   script:
-@@ -461,35 +461,35 @@ qemu-smoke-x86-64-gcc:
-   script:
-     - ./automation/scripts/qemu-smoke-x86-64.sh pv 2>&1 | tee ${LOGFILE}
-   needs:
--    - debian-bookworm-gcc-debug
-+    - debian-12-x86_64-gcc-debug
+@@ -1,6 +1,10 @@
+ .test-jobs-common:
+   stage: test
+   image: registry.gitlab.com/xen-project/xen/${CONTAINER}
++  variables:
++    # Clone xen as the user in the docker images, not root
++    # See https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1736
++    FF_DISABLE_UMASK_FOR_DOCKER_EXECUTOR: true
  
- qemu-smoke-x86-64-clang:
-   extends: .qemu-smoke-x86-64
-   script:
-     - ./automation/scripts/qemu-smoke-x86-64.sh pv 2>&1 | tee ${LOGFILE}
-   needs:
--    - debian-bookworm-clang-debug
-+    - debian-12-x86_64-clang-debug
+ .arm64-test-needs: &arm64-test-needs
+   - alpine-3.18-arm64-rootfs-export
+diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
+index 1ff689b577e3..2660403ab2b8 100755
+--- a/automation/scripts/qemu-alpine-x86_64.sh
++++ b/automation/scripts/qemu-alpine-x86_64.sh
+@@ -29,6 +29,7 @@ find . | cpio --create --format='newc' | gzip > ../initrd.cpio.gz
+ cd ..
  
- qemu-smoke-x86-64-gcc-pvh:
-   extends: .qemu-smoke-x86-64
-   script:
-     - ./automation/scripts/qemu-smoke-x86-64.sh pvh 2>&1 | tee ${LOGFILE}
-   needs:
--    - debian-bookworm-gcc-debug
-+    - debian-12-x86_64-gcc-debug
+ # initrd.tar.gz is Dom0 rootfs
++fakeroot <<EOF
+ mkdir -p rootfs
+ cd rootfs
+ tar xvzf ../initrd.tar.gz
+@@ -63,7 +64,8 @@ chmod +x etc/local.d/xen.start
+ echo "rc_verbose=yes" >> etc/rc.conf
+ # rebuild Dom0 rootfs
+ find . |cpio -H newc -o|gzip > ../xen-rootfs.cpio.gz
+-cd ../..
++EOF
++cd ..
  
- qemu-smoke-x86-64-clang-pvh:
-   extends: .qemu-smoke-x86-64
-   script:
-     - ./automation/scripts/qemu-smoke-x86-64.sh pvh 2>&1 | tee ${LOGFILE}
-   needs:
--    - debian-bookworm-clang-debug
-+    - debian-12-x86_64-clang-debug
+ cat >> binaries/pxelinux.0 << EOF
+ #!ipxe
+diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
+index 4d22a124df11..8f9bfd620ee3 100755
+--- a/automation/scripts/qemu-smoke-dom0-arm64.sh
++++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
+@@ -27,8 +27,10 @@ cd initrd
+ find . | cpio --create --format='newc' | gzip > ../initrd.cpio.gz
+ cd ..
  
- qemu-smoke-x86-64-gcc-efi:
-   extends: .qemu-smoke-x86-64
-   script:
-     - ./automation/scripts/qemu-smoke-x86-64-efi.sh pv 2>&1 | tee ${LOGFILE}
-   needs:
--    - debian-bookworm-gcc-debug
-+    - debian-12-x86_64-gcc-debug
+-mkdir -p rootfs
++fakeroot <<EOF
++mkdir rootfs
+ cd rootfs
++
+ tar xvzf ../initrd.tar.gz
+ mkdir proc
+ mkdir run
+@@ -58,7 +60,8 @@ xl create -c /root/test.cfg
+ chmod +x etc/local.d/xen.start
+ echo "rc_verbose=yes" >> etc/rc.conf
+ find . |cpio -H newc -o|gzip > ../xen-rootfs.cpio.gz
+-cd ../..
++EOF
++cd ..
  
- qemu-smoke-riscv64-gcc:
-   extends: .qemu-riscv64
-diff --git a/automation/scripts/containerize b/automation/scripts/containerize
-index 6ac02c42d124..ea6e1a9b18f4 100755
---- a/automation/scripts/containerize
-+++ b/automation/scripts/containerize
-@@ -34,7 +34,7 @@ case "_${CONTAINER}" in
-     _bullseye-riscv64) CONTAINER="${BASE}/debian:11-riscv64" ;;
-     _bookworm-riscv64) CONTAINER="${BASE}/debian:12-riscv64" ;;
-     _bookworm-x86_64-gcc-ibt) CONTAINER="${BASE}/debian:12-x86_64-gcc-ibt" ;;
--    _bookworm|_) CONTAINER="${BASE}/debian:bookworm" ;;
-+    _bookworm|_bookworm-x86_64|_) CONTAINER="${BASE}/debian:12-x86_64" ;;
-     _bookworm-i386) CONTAINER="${BASE}/debian:bookworm-i386" ;;
-     _bookworm-arm64v8-arm32-gcc) CONTAINER="${BASE}/debian:bookworm-arm64v8-arm32-gcc" ;;
-     _bookworm-arm64v8) CONTAINER="${BASE}/debian:bookworm-arm64v8" ;;
+ # XXX QEMU looks for "efi-virtio.rom" even if it is unneeded
+ curl -fsSLO https://github.com/qemu/qemu/raw/v5.2.0/pc-bios/efi-virtio.rom
+diff --git a/automation/scripts/qemu-smoke-dom0less-arm64.sh b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+index 83e1866ca6c5..2d60f22d68b7 100755
+--- a/automation/scripts/qemu-smoke-dom0less-arm64.sh
++++ b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+@@ -112,7 +112,8 @@ find . | cpio --create --format='newc' | gzip > ../binaries/initrd
+ cd ..
+ 
+ # DOM0 rootfs
+-mkdir -p rootfs
++fakeroot <<EOF
++mkdir rootfs
+ cd rootfs
+ tar xzf ../binaries/initrd.tar.gz
+ mkdir proc
+@@ -141,7 +142,7 @@ ${dom0_check}
+ chmod +x etc/local.d/xen.start
+ echo "rc_verbose=yes" >> etc/rc.conf
+ find . | cpio -H newc -o | gzip > ../binaries/dom0-rootfs.cpio.gz
+-cd ..
++EOF
+ 
+ # ImageBuilder
+ echo 'MEMORY_START="0x40000000"
 -- 
 2.45.2
 
