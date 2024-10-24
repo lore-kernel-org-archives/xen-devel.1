@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE0ACE8E80
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 14:27:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825346.1239545 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48FF5CE8E7F
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 14:27:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825349.1239576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3ynm-00048t-H6; Thu, 24 Oct 2024 14:27:02 +0000
+	id 1t3ynq-0004rW-A8; Thu, 24 Oct 2024 14:27:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825346.1239545; Thu, 24 Oct 2024 14:27:02 +0000
+Received: by outflank-mailman (output) from mailman id 825349.1239576; Thu, 24 Oct 2024 14:27:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3ynm-00048m-EX; Thu, 24 Oct 2024 14:27:02 +0000
-Received: by outflank-mailman (input) for mailman id 825346;
- Thu, 24 Oct 2024 14:27:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t3ynq-0004rL-7Y; Thu, 24 Oct 2024 14:27:06 +0000
+Received: by outflank-mailman (input) for mailman id 825349;
+ Thu, 24 Oct 2024 14:27:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jd6X=RU=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t3ynl-00048L-6M
- for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 14:27:01 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 07b73ecc-9214-11ef-a0bf-8be0dac302b0;
- Thu, 24 Oct 2024 16:27:00 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c9362c26d8so3732613a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 07:27:00 -0700 (PDT)
+ id 1t3yno-00048O-Th
+ for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 14:27:04 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 09bc6782-9214-11ef-99a3-01e77a169b0f;
+ Thu, 24 Oct 2024 16:27:03 +0200 (CEST)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5c948c41edeso1127887a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 07:27:03 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cb66c6b4e4sm5707409a12.61.2024.10.24.07.26.58
+ 4fb4d7f45d1cf-5cb66c6b4e4sm5707409a12.61.2024.10.24.07.27.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 07:26:58 -0700 (PDT)
+ Thu, 24 Oct 2024 07:27:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 07b73ecc-9214-11ef-a0bf-8be0dac302b0
+X-Inumbo-ID: 09bc6782-9214-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1729780019; x=1730384819; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1729780022; x=1730384822; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dVXd7SoQfi1YRwuP/bchb8oFe7nMu7FPsr69BeMQRRM=;
-        b=h/zWW9hfot0jC6bq1GDu4wIZadz8TduqHvPgF9xie0DvIp+FPMlG1oh9qJfmRkqNkx
-         NG2znVzaCjZpfLy5QUysl2SPcp0pJ9QnN4mH4U+SAVNys3mtYmt41X9BAs1znEvQmjYj
-         wAcfDIHmR7ItKlNeX75M50WCBeoWJsyAvGIsk=
+        bh=k/1V36zu8pl8T7xYRf9La+mccrttDt5v1Zny77BeDlA=;
+        b=oLJXcoQ2tWqUqHnNg+vTYDB7AFRbqlJHm0KRL/prGZ71CjRDGlpbhv9jXIRYnmv4OC
+         UUr7wpjePTYUoEg7p+0REsrFv1WlcMwFSvg5DgZx9SIqdxayY/L3lj30pFt1zmWtAA4B
+         4baywjGUwXtAKogEvcGJ2ljfkphOhC5pU5vSA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729780019; x=1730384819;
+        d=1e100.net; s=20230601; t=1729780022; x=1730384822;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=dVXd7SoQfi1YRwuP/bchb8oFe7nMu7FPsr69BeMQRRM=;
-        b=ho+VXHkrhCsD0JE+40wtqz+gDAEAqGAI4zSU/aT/qaNUIrWSB4piCro2kndT2kf7jf
-         N5TOJenNubGKhhXxRAx61R7LZ5jtYQHWqx7lqRNZUhtnxuf4gdkR6fTsnmmbFCtoeSJy
-         q/SrzT50sVsBvWtNiHgcPCOS8ZxYFv36qWIrXa2Jgjb7nfsfb9N3RCHXGNFx23qpE/Yr
-         zXQZ/Yzv+NHFj9Ucg1jHsOKpz4wKSSFdi1bhMW+3UymQhvZBBoc1TZE7oT8z/31XaYks
-         iSj5RkkbKZQLXtjmfH9TIbPayJlmrf+jIMWQ+wpGMEE2aPZjJY6nHWigOIJ+zFQJMh2M
-         jLvA==
-X-Gm-Message-State: AOJu0Yxb85EVYcKTG6u7TmdhJ2aPZ0tmkh6OLeVQ+XxGA5SusJ8dHfBa
-	YoCJtRQJ7jL1Rxr+7/Eb7OA6vPJ46qBW99PCY6LwRu3OFefv2XJoirT3/Es5JajGI1BS/qrP9cK
-	d
-X-Google-Smtp-Source: AGHT+IFdW0kax42rLgItyEEOWYAkOto/YtbLa80UVJKfCn0MH9m2V6QJhdd1EQujAwwV3XZEmg7iFA==
-X-Received: by 2002:a05:6402:538d:b0:5c5:c2a7:d535 with SMTP id 4fb4d7f45d1cf-5cba208256bmr2588565a12.16.1729780018684;
-        Thu, 24 Oct 2024 07:26:58 -0700 (PDT)
+        bh=k/1V36zu8pl8T7xYRf9La+mccrttDt5v1Zny77BeDlA=;
+        b=UZCl0vN4CjEAPsHHRwy3izVJbS7/FwXeTsuY3PGkFV56eSSgKVCbyE8Yez8NsaMW9n
+         2axhFktbQARLQ7tsvY0DxNA7jBSSIvg2onxhSK45ASgsPpjTKC6LKJc1HcqRJjwbPqkJ
+         +wjI+QbB2oyMZDDli0F4Og1dkLIHTxM2QU9dEXsjOA+zbMszECceSRLAYM6Gf2elL4EA
+         UGzsF4/FMvt2vr/55EkJ60PgknIv7bU096NHqiCzPCGsObtal4QC8WVsXUUgrcy1Jzbn
+         iDDUaEjvaR+LFsz6MgGLg2JItOqJev8McFk/DIle0Q76GBjBaEK2UPH+XqrO2WhGAk8u
+         pwEA==
+X-Gm-Message-State: AOJu0YwnLaVWKU/WhSr82VXShwK9vKcToHETQiCf7rEyoD4uEcGuLZAE
+	zN4Y8dqivOwCt18PB0aFoXkdTpiJwPS1i7wM6T9QZuWYQ79Bl7OzDmsKU93kZy02T62QLwFMLEL
+	l
+X-Google-Smtp-Source: AGHT+IH6p9gdO0AX6mLGCwEkRJD/oDfxz+x/AJPocHh/3hD6qDzdaNJNyDPqbrO7R32Qwdz4y9sHdg==
+X-Received: by 2002:a05:6402:254b:b0:5ca:da2:b2ca with SMTP id 4fb4d7f45d1cf-5cb8acba591mr6178431a12.19.1729780021899;
+        Thu, 24 Oct 2024 07:27:01 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 1/5] x86/boot: Drop initial_images pointer
-Date: Thu, 24 Oct 2024 15:26:50 +0100
-Message-Id: <20241024142654.989980-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/5] x86/boot: Introduce bootstrap_map_bm() to map boot_module's
+Date: Thu, 24 Oct 2024 15:26:52 +0100
+Message-Id: <20241024142654.989980-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241024142654.989980-1-andrew.cooper3@citrix.com>
 References: <20241024142654.989980-1-andrew.cooper3@citrix.com>
@@ -93,8 +93,8 @@ Content-Transfer-Encoding: 8bit
 
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 
-Now that the module list is encapsulated inside boot_info, we can do away with
-the initial_images pointer.
+Convert converting the call to bzimage_headroom(), as well as using
+bi->mod[0].  It will be used externally by later changes.
 
 No functional change.
 
@@ -106,61 +106,52 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
 
 v7.5:
- * Rearranged from several later patches
+ * Refectored/extracted from later in the series.
 ---
- xen/arch/x86/setup.c | 13 ++++---------
- 1 file changed, 4 insertions(+), 9 deletions(-)
+ xen/arch/x86/include/asm/setup.h | 2 ++
+ xen/arch/x86/setup.c             | 9 ++++++++-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
 
+diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+index 8b7843104ff7..4874ee8936fc 100644
+--- a/xen/arch/x86/include/asm/setup.h
++++ b/xen/arch/x86/include/asm/setup.h
+@@ -38,6 +38,8 @@ extern struct boot_info xen_boot_info;
+ unsigned long initial_images_nrpages(nodeid_t node);
+ void discard_initial_images(void);
+ 
++struct boot_module;
++void *bootstrap_map_bm(const struct boot_module *bm);
+ void *bootstrap_map(const module_t *mod);
+ void bootstrap_unmap(void);
+ 
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index fc18ba3e35b5..8c10fe51dfad 100644
+index 8e32d6c49c54..ee03725af380 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -276,8 +276,6 @@ custom_param("acpi", parse_acpi_param);
- 
- static const char *cmdline_cook(const char *p, const char *loader_name);
- 
--static const module_t *__initdata initial_images;
--
- struct boot_info __initdata xen_boot_info = {
-     .loader = "unknown",
-     .cmdline = "",
-@@ -332,8 +330,8 @@ unsigned long __init initial_images_nrpages(nodeid_t node)
- 
-     for ( nr = i = 0; i < bi->nr_modules; ++i )
-     {
--        unsigned long start = initial_images[i].mod_start;
--        unsigned long end = start + PFN_UP(initial_images[i].mod_end);
-+        unsigned long start = bi->mods[i].mod->mod_start;
-+        unsigned long end   = start + PFN_UP(bi->mods[i].mod->mod_end);
- 
-         if ( end > node_start && node_end > start )
-             nr += min(node_end, end) - max(node_start, start);
-@@ -349,14 +347,13 @@ void __init discard_initial_images(void)
- 
-     for ( i = 0; i < bi->nr_modules; ++i )
-     {
--        uint64_t start = (uint64_t)initial_images[i].mod_start << PAGE_SHIFT;
-+        uint64_t start = pfn_to_paddr(bi->mods[i].mod->mod_start);
- 
-         init_domheap_pages(start,
--                           start + PAGE_ALIGN(initial_images[i].mod_end));
-+                           start + PAGE_ALIGN(bi->mods[i].mod->mod_end));
-     }
- 
-     bi->nr_modules = 0;
--    initial_images = NULL;
+@@ -475,6 +475,11 @@ void *__init bootstrap_map(const module_t *mod)
+                               pfn_to_paddr(mod->mod_start) + mod->mod_end);
  }
  
- static void __init init_idle_domain(void)
-@@ -1376,8 +1373,6 @@ void asmlinkage __init noreturn __start_xen(void)
-     set_kexec_crash_area_size((u64)nr_pages << PAGE_SHIFT);
-     kexec_reserve_area();
++void *__init bootstrap_map_bm(const struct boot_module *bm)
++{
++    return bootstrap_map(bm->mod);
++}
++
+ void __init bootstrap_unmap(void)
+ {
+     bootstrap_map_addr(0, 0);
+@@ -1403,7 +1408,9 @@ void asmlinkage __init noreturn __start_xen(void)
+         mod[bi->nr_modules].mod_end = __2M_rwdata_end - _stext;
+     }
  
--    initial_images = mod;
--
-     for ( i = 0; !efi_enabled(EFI_LOADER) && i < bi->nr_modules; i++ )
-     {
-         if ( mod[i].mod_start & (PAGE_SIZE - 1) )
+-    modules_headroom = bzimage_headroom(bootstrap_map(mod), mod->mod_end);
++    modules_headroom =
++        bzimage_headroom(bootstrap_map_bm(&bi->mods[0]),
++                         bi->mods[0].mod->mod_end);
+     bootstrap_unmap();
+ 
+ #ifndef highmem_start
 -- 
 2.39.5
 
