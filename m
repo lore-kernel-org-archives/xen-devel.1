@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57310CE8E7E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE0ACE8E80
 	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 14:27:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825350.1239586 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.825346.1239545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3ynr-00057U-JU; Thu, 24 Oct 2024 14:27:07 +0000
+	id 1t3ynm-00048t-H6; Thu, 24 Oct 2024 14:27:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825350.1239586; Thu, 24 Oct 2024 14:27:07 +0000
+Received: by outflank-mailman (output) from mailman id 825346.1239545; Thu, 24 Oct 2024 14:27:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3ynr-00057H-Eb; Thu, 24 Oct 2024 14:27:07 +0000
-Received: by outflank-mailman (input) for mailman id 825350;
- Thu, 24 Oct 2024 14:27:06 +0000
+	id 1t3ynm-00048m-EX; Thu, 24 Oct 2024 14:27:02 +0000
+Received: by outflank-mailman (input) for mailman id 825346;
+ Thu, 24 Oct 2024 14:27:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jd6X=RU=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t3ynq-00048L-FE
- for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 14:27:06 +0000
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [2a00:1450:4864:20::52f])
+ id 1t3ynl-00048L-6M
+ for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 14:27:01 +0000
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [2a00:1450:4864:20::535])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0b4e705e-9214-11ef-a0bf-8be0dac302b0;
- Thu, 24 Oct 2024 16:27:06 +0200 (CEST)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5cb72918bddso1308115a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 07:27:05 -0700 (PDT)
+ id 07b73ecc-9214-11ef-a0bf-8be0dac302b0;
+ Thu, 24 Oct 2024 16:27:00 +0200 (CEST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9362c26d8so3732613a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 07:27:00 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cb66c6b4e4sm5707409a12.61.2024.10.24.07.27.04
+ 4fb4d7f45d1cf-5cb66c6b4e4sm5707409a12.61.2024.10.24.07.26.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 07:27:04 -0700 (PDT)
+ Thu, 24 Oct 2024 07:26:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b4e705e-9214-11ef-a0bf-8be0dac302b0
+X-Inumbo-ID: 07b73ecc-9214-11ef-a0bf-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1729780025; x=1730384825; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1729780019; x=1730384819; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=26Kd1CZ5EW/rvd6sicVOHZnpVwSK6DqF92g9LkP2sKY=;
-        b=LN+agBkzDbFDIvYPJbL2oCjm+JIKTvqpG7orGYGYkm67zySfejSgGW632EavNqqYkt
-         Ytk9NBc8n6/aFFwBFlcOa3n8GFcQW9JfzkAPDnWpDkmc8xFcXzyKd0xs+50+1p5CQXaQ
-         Cj5jOhqRIbo4izFyf2QTm1f4AuA3sCRI7mD8U=
+        bh=dVXd7SoQfi1YRwuP/bchb8oFe7nMu7FPsr69BeMQRRM=;
+        b=h/zWW9hfot0jC6bq1GDu4wIZadz8TduqHvPgF9xie0DvIp+FPMlG1oh9qJfmRkqNkx
+         NG2znVzaCjZpfLy5QUysl2SPcp0pJ9QnN4mH4U+SAVNys3mtYmt41X9BAs1znEvQmjYj
+         wAcfDIHmR7ItKlNeX75M50WCBeoWJsyAvGIsk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729780025; x=1730384825;
+        d=1e100.net; s=20230601; t=1729780019; x=1730384819;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=26Kd1CZ5EW/rvd6sicVOHZnpVwSK6DqF92g9LkP2sKY=;
-        b=EaPW3NBA7lrBk80fh2Tt/ywLThLahF0ip5ue1a2f0NSb2kXMIZwbqO35gEw9bZBAlv
-         +eXexfpMEfaeK5o9JuBFndlvWfXbH9cBor3BFJCR2JxTbfFAfT0zmeoakp4lqebnb7hc
-         Ue9y5Z0t4OXkuYuvQ4uwcKMSsvL2rSr79iUH2enOfBFpkj2k1UF3fCJ8OPDuQrf8Cin8
-         cYDkNgdQvv85jxzh4YkuKKvGvlzuuf6EJhhDz6WK8ZGbSO2hd8pOAkhGmsILfTQYePfu
-         IcRa91VuEGwUHphGjvQbthSVovrDOLvHiOQejPto+/fI0NaoREtWaYsr19MwmwNRX5P9
-         mdDg==
-X-Gm-Message-State: AOJu0YxKGDBx8GKnn9EPVcfdbbR0LfPLDVoqo4B0MyGogqPiWdTo/rRj
-	NSHmmBFXKct/ogG4hJxGhbfRdyke+eyZCHR8lCLQuxFdXw2BiWeVjeP+DodhzUn+s1KmL8VBBMR
-	J
-X-Google-Smtp-Source: AGHT+IHeJl50mZDISF1NQ6MLFe8fQzTOtXWRCvcbgTukvJ7hfs09TarAKjqp3QVYBzCgBU1kJbcCyw==
-X-Received: by 2002:a05:6402:254d:b0:5c9:4281:4515 with SMTP id 4fb4d7f45d1cf-5cb8acb7b0amr5833462a12.17.1729780024768;
-        Thu, 24 Oct 2024 07:27:04 -0700 (PDT)
+        bh=dVXd7SoQfi1YRwuP/bchb8oFe7nMu7FPsr69BeMQRRM=;
+        b=ho+VXHkrhCsD0JE+40wtqz+gDAEAqGAI4zSU/aT/qaNUIrWSB4piCro2kndT2kf7jf
+         N5TOJenNubGKhhXxRAx61R7LZ5jtYQHWqx7lqRNZUhtnxuf4gdkR6fTsnmmbFCtoeSJy
+         q/SrzT50sVsBvWtNiHgcPCOS8ZxYFv36qWIrXa2Jgjb7nfsfb9N3RCHXGNFx23qpE/Yr
+         zXQZ/Yzv+NHFj9Ucg1jHsOKpz4wKSSFdi1bhMW+3UymQhvZBBoc1TZE7oT8z/31XaYks
+         iSj5RkkbKZQLXtjmfH9TIbPayJlmrf+jIMWQ+wpGMEE2aPZjJY6nHWigOIJ+zFQJMh2M
+         jLvA==
+X-Gm-Message-State: AOJu0Yxb85EVYcKTG6u7TmdhJ2aPZ0tmkh6OLeVQ+XxGA5SusJ8dHfBa
+	YoCJtRQJ7jL1Rxr+7/Eb7OA6vPJ46qBW99PCY6LwRu3OFefv2XJoirT3/Es5JajGI1BS/qrP9cK
+	d
+X-Google-Smtp-Source: AGHT+IFdW0kax42rLgItyEEOWYAkOto/YtbLa80UVJKfCn0MH9m2V6QJhdd1EQujAwwV3XZEmg7iFA==
+X-Received: by 2002:a05:6402:538d:b0:5c5:c2a7:d535 with SMTP id 4fb4d7f45d1cf-5cba208256bmr2588565a12.16.1729780018684;
+        Thu, 24 Oct 2024 07:26:58 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P . Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH 5/5] x86/boot: Drop the mbi and mod pointers in __start_xen()
-Date: Thu, 24 Oct 2024 15:26:54 +0100
-Message-Id: <20241024142654.989980-6-andrew.cooper3@citrix.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 1/5] x86/boot: Drop initial_images pointer
+Date: Thu, 24 Oct 2024 15:26:50 +0100
+Message-Id: <20241024142654.989980-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241024142654.989980-1-andrew.cooper3@citrix.com>
 References: <20241024142654.989980-1-andrew.cooper3@citrix.com>
@@ -91,14 +91,14 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-We can't drop them fully yet, but we can limit their scope to almost nothing,
-which serves the same purpose.
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 
-This removes the ability to accidentally reintroduce buggy uses of
-__va(mbi->mods_addr).
+Now that the module list is encapsulated inside boot_info, we can do away with
+the initial_images pointer.
 
 No functional change.
 
+Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
@@ -106,62 +106,61 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
 
 v7.5:
- * New
+ * Rearranged from several later patches
 ---
- xen/arch/x86/setup.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ xen/arch/x86/setup.c | 13 ++++---------
+ 1 file changed, 4 insertions(+), 9 deletions(-)
 
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 5413e1c71be6..511cf5b97909 100644
+index fc18ba3e35b5..8c10fe51dfad 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -1026,8 +1026,6 @@ void asmlinkage __init noreturn __start_xen(void)
-     struct cpu_info *info = get_cpu_info(), *bsp_info;
-     unsigned int initrdidx, num_parked = 0;
-     struct boot_info *bi;
--    multiboot_info_t *mbi;
--    module_t *mod;
-     unsigned long nr_pages, raw_max_page, modules_headroom, module_map[1];
-     int i, j, e820_warn = 0, bytes = 0;
-     unsigned long eb_start, eb_end;
-@@ -1063,16 +1061,22 @@ void asmlinkage __init noreturn __start_xen(void)
+@@ -276,8 +276,6 @@ custom_param("acpi", parse_acpi_param);
  
-     if ( pvh_boot )
-     {
-+        multiboot_info_t *mbi;
-+        module_t *mod;
-+
-         pvh_init(&mbi, &mod);
-         /*
-          * mbi and mod are regular pointers to .initdata.  These remain valid
-          * across move_xen().
-          */
-+
-+        bi = multiboot_fill_boot_info(mbi, mod);
-     }
-     else
-     {
--        mbi = __va(multiboot_ptr);
--        mod = __va(mbi->mods_addr);
-+        multiboot_info_t *mbi = __va(multiboot_ptr);
-+
-+        bi = multiboot_fill_boot_info(mbi, __va(mbi->mods_addr));
+ static const char *cmdline_cook(const char *p, const char *loader_name);
  
-         /*
-          * For MB1/2, mbi and mod are directmap pointers into the trampoline.
-@@ -1085,12 +1089,8 @@ void asmlinkage __init noreturn __start_xen(void)
-         ASSERT(multiboot_ptr < MB(1) || xen_phys_start);
-     }
- 
--    bi = multiboot_fill_boot_info(mbi, mod);
-     bi->module_map = module_map; /* Temporary */
- 
--    /* Use bi-> instead */
--#define mbi DO_NOT_USE
+-static const module_t *__initdata initial_images;
 -
-     /* Parse the command-line options. */
-     if ( (kextra = strstr(bi->cmdline, " -- ")) != NULL )
+ struct boot_info __initdata xen_boot_info = {
+     .loader = "unknown",
+     .cmdline = "",
+@@ -332,8 +330,8 @@ unsigned long __init initial_images_nrpages(nodeid_t node)
+ 
+     for ( nr = i = 0; i < bi->nr_modules; ++i )
      {
+-        unsigned long start = initial_images[i].mod_start;
+-        unsigned long end = start + PFN_UP(initial_images[i].mod_end);
++        unsigned long start = bi->mods[i].mod->mod_start;
++        unsigned long end   = start + PFN_UP(bi->mods[i].mod->mod_end);
+ 
+         if ( end > node_start && node_end > start )
+             nr += min(node_end, end) - max(node_start, start);
+@@ -349,14 +347,13 @@ void __init discard_initial_images(void)
+ 
+     for ( i = 0; i < bi->nr_modules; ++i )
+     {
+-        uint64_t start = (uint64_t)initial_images[i].mod_start << PAGE_SHIFT;
++        uint64_t start = pfn_to_paddr(bi->mods[i].mod->mod_start);
+ 
+         init_domheap_pages(start,
+-                           start + PAGE_ALIGN(initial_images[i].mod_end));
++                           start + PAGE_ALIGN(bi->mods[i].mod->mod_end));
+     }
+ 
+     bi->nr_modules = 0;
+-    initial_images = NULL;
+ }
+ 
+ static void __init init_idle_domain(void)
+@@ -1376,8 +1373,6 @@ void asmlinkage __init noreturn __start_xen(void)
+     set_kexec_crash_area_size((u64)nr_pages << PAGE_SHIFT);
+     kexec_reserve_area();
+ 
+-    initial_images = mod;
+-
+     for ( i = 0; !efi_enabled(EFI_LOADER) && i < bi->nr_modules; i++ )
+     {
+         if ( mod[i].mod_start & (PAGE_SIZE - 1) )
 -- 
 2.39.5
 
