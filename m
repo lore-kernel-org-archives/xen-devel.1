@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C627CE8E74
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 13:22:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825237.1239435 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B88CE8E74
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 13:26:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825274.1239475 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3xn7-0004ml-BT; Thu, 24 Oct 2024 13:22:17 +0000
+	id 1t3xrN-0007nd-SR; Thu, 24 Oct 2024 13:26:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825237.1239435; Thu, 24 Oct 2024 13:22:17 +0000
+Received: by outflank-mailman (output) from mailman id 825274.1239475; Thu, 24 Oct 2024 13:26:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3xn7-0004me-8n; Thu, 24 Oct 2024 13:22:17 +0000
-Received: by outflank-mailman (input) for mailman id 825237;
- Thu, 24 Oct 2024 13:22:16 +0000
+	id 1t3xrN-0007nW-Pq; Thu, 24 Oct 2024 13:26:41 +0000
+Received: by outflank-mailman (input) for mailman id 825274;
+ Thu, 24 Oct 2024 13:26:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jd6X=RU=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t3xn6-0004K5-1y
- for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 13:22:16 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
+ <SRS0=fqEU=RU=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1t3xrM-0007Zn-M7
+ for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 13:26:40 +0000
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [2607:f8b0:4864:20::c29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fc598d78-920a-11ef-a0bf-8be0dac302b0;
- Thu, 24 Oct 2024 15:22:15 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9a26a5d6bfso116892066b.1
- for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 06:22:15 -0700 (PDT)
-Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a912ee592sm618574766b.79.2024.10.24.06.22.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 06:22:13 -0700 (PDT)
+ id 9973f986-920b-11ef-a0bf-8be0dac302b0;
+ Thu, 24 Oct 2024 15:26:39 +0200 (CEST)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5eba450531eso979613eaf.1
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 06:26:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,188 +42,492 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc598d78-920a-11ef-a0bf-8be0dac302b0
+X-Inumbo-ID: 9973f986-920b-11ef-a0bf-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1729776134; x=1730380934; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1729776398; x=1730381198; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XEK8lPkq2pM0BIHJkdhJ3DO8laaRlVDZkwJP1Ftbg9E=;
-        b=o4KPqv5Fn5t/pYZmo/MWrtbkcsoifJMy2fPde2f3O7me/TsYV13iIXcmkn4ALS8NZD
-         kE3nkla79mkqGTwffRSoE0CJcAdCuL9LB9AYWPWl9k+FPaZEW7gdxBPTyKJ7zu/HHGSs
-         dS+9mo9JOEGKf+QrP0ZOMXeCDGbZTfY7+a6FI=
+        bh=zDK1Kthmkq11fZLtTYuTWFAp0QcFOp3jEPfJ6MKxJw4=;
+        b=pUz8TS1ZIJSp3DsNcUTXqy7GOhTnCJ6uGk9JvQH5dHpQa6hlR2ed5n5157UdFH9wRt
+         X4LEix3kjMSzmkpUj+sEEQsYZqLqigrqTxoW/tk9s+vjAbFeMJ8BGBHOuG6W4jZTOcre
+         kh8RT6tkKjMUhfyGDRRn/PLIYwGHVgTbHh+yVPzuwFomcC8JGpPtGVH/fD7jByYSL3HK
+         s7tsVO1MRpbiZSCZE/T3ylaNC19w6pgJ1uq+f7LPbLAP1nll8Ysxg6kHBa3uvkDmdkNV
+         WAFcCtIbVtXnAr+7jIQ82DAkIU0zficM2M3kQChQ2O5pbXGKYSjavI1GZNMqhQ78cLwY
+         MX/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729776134; x=1730380934;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1729776398; x=1730381198;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XEK8lPkq2pM0BIHJkdhJ3DO8laaRlVDZkwJP1Ftbg9E=;
-        b=Y5efT7blj0P3Ig9iPLvNKyNvEJYQUMNONdIepv5Z5d8fhgWhIWCuQJ7Ne2h4NveRGf
-         Bmu3QFVJ+4efqq9ynUv7V6VY31735ItGpYuvLa8/zhhDXMOSHwLwLtSHWoHWnuP4wtoE
-         8ZEb+B+HUDlYN0yowTeHGNIOfKbE36YJZY5F/CIiu21I4iXVU8jF3Fyqdp5Jcbs9JtY7
-         IeYU+b+yzthiPu7E8gCHcwcqhD2jM97+bnXt8l3pC2YTtwFuq3NEVANxk4ALnet/D95r
-         9ebc6VTafLuipXODByTuyGYFJynYMyEaN2uFUt7uNHUIJmMDopPLcQKoRJvCZ6xSSDyh
-         LerA==
-X-Gm-Message-State: AOJu0YxicycdizUkyPO09hSpOC0OoudTfXGEmgBmkc1SjgKR6zqWlBQK
-	11lBChRXb547nRvx91GQlJdrVMYhUXdE6ownFzZpsJ1FmHBV8ZaG1cHHbeF32TqZc6cgzZzQjlj
-	u
-X-Google-Smtp-Source: AGHT+IFGHdvyoTwoaTjUB6lqWKhS3LAmydk5HgOI4qdq1YnBqpDv7EOvvHeclwZXEUaaSPgOAUHlIw==
-X-Received: by 2002:a17:907:3fa6:b0:a99:c0be:a8ac with SMTP id a640c23a62f3a-a9abf8b233amr554772866b.37.1729776134279;
-        Thu, 24 Oct 2024 06:22:14 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 3/5] x86/ucode: Rename the cpu_request_microcode() hook to parse()
-Date: Thu, 24 Oct 2024 14:22:03 +0100
-Message-Id: <20241024132205.987042-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241024132205.987042-1-andrew.cooper3@citrix.com>
-References: <20241024132205.987042-1-andrew.cooper3@citrix.com>
+        bh=zDK1Kthmkq11fZLtTYuTWFAp0QcFOp3jEPfJ6MKxJw4=;
+        b=NSyE+E62zrEYRvVtq+Vm1tCObf+LN2JLVWcN0beTLHO4ucKn5B/44EGt1H21qnCZUb
+         pZ8b+WjCWd8ASD8u5w8uKBeLkVgDEL8aMovDeVz4Sird7CEU37NVnz44vy6r+DS3+Vvt
+         UZKGZu/j5fX81EY3EpXj90R7Phv6LW+WuzQuHLZSDbLwpPrSF8Muuh4SIKTT+jfrJhFD
+         s3y6gZ6SgHZFGSvAZLNvD4zc5FJUCSWJUHY+7Tsaqv8g4QJe6S0UNqtEIc5XdGWS9Dch
+         bUwS4j329WWioCj+6ejWpALi/bD0Z+V5MJQkLj0SeapHrJxFmLfEknlGU7uOY76UI37k
+         wYNA==
+X-Gm-Message-State: AOJu0YzZKQ0XX1O5KlYV9s0w255K+ttCHLggrB6+JmDUS+h3mfqakaZE
+	OTem23yzEM4IE8HtW/EAck/k9ieWYr8hh9B6Z4BISsEPgSq+Tt3C91SyS+PANwwh3OpgTHEb5Sk
+	Gr0nYCoSOpog4Rq8DTn7dZ3qumYwS63xiSS5WzphcmSPYW6RPtqI=
+X-Google-Smtp-Source: AGHT+IH8xeg5Af5e53X3ZhkOZzJKpDa9Yj1w79p8sOzPxHV22/WeZ/vMMI7UsaNvYsOkrcwfuFxlDuZ1LdHkvACKfo0=
+X-Received: by 2002:a05:6870:2194:b0:286:ee46:f194 with SMTP id
+ 586e51a60fabf-28cebb3b41fmr981646fac.17.1729776398120; Thu, 24 Oct 2024
+ 06:26:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <cover.1729066788.git.bertrand.marquis@arm.com>
+ <84a39fbb681c1fdc2708d385e79bef1bbc9c6ae0.1729066788.git.bertrand.marquis@arm.com>
+ <CAHUa44F1ZDuVQkHTEmHC-x+u4kuLqphcjaK5c7wDnnenWuQi1Q@mail.gmail.com>
+ <CAHUa44EtL_hLqCD15jcvMEUxxt-289yXDaMDEs=h7EXUQxj8og@mail.gmail.com> <E9F7F794-8E9B-4997-9461-19B3145D7A09@arm.com>
+In-Reply-To: <E9F7F794-8E9B-4997-9461-19B3145D7A09@arm.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Thu, 24 Oct 2024 15:26:25 +0200
+Message-ID: <CAHUa44Hkc4fWH4-HVFEyia_dcrpP1sQTaH4KxOv0v+1DjF4Dmw@mail.gmail.com>
+Subject: Re: [PATCH v2 04/10] xen/arm: ffa: Fine granular call support
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, 
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-cpu_request_microcode() was never a good name, and the microcode suffix is
-redundant.  Rename it to simply parse().
+Hi Bertrand,
 
-Introduce ucode_parse() and ucode_parse_dup() wrappers around the parse()
-hook, also abstracting away the make_copy parameter and associated
-const-correctness.
+On Thu, Oct 24, 2024 at 12:01=E2=80=AFPM Bertrand Marquis
+<Bertrand.Marquis@arm.com> wrote:
+>
+> Hi Jens,
+>
+> > On 24 Oct 2024, at 10:15, Jens Wiklander <jens.wiklander@linaro.org> wr=
+ote:
+> >
+> > On Wed, Oct 23, 2024 at 11:58=E2=80=AFAM Jens Wiklander
+> > <jens.wiklander@linaro.org> wrote:
+> >>
+> >> Hi Bertrand,
+> >>
+> >> On Wed, Oct 16, 2024 at 10:32=E2=80=AFAM Bertrand Marquis
+> >> <bertrand.marquis@arm.com> wrote:
+> >>>
+> >>> Create a bitmap to store which feature is supported or not by the
+> >>> firmware and use it to filter which calls are done to the firmware.
+> >>>
+> >>> While there reoder ABI definition by numbers to easily find the min a=
+nd
+> >>> max ones.
+> >>>
+> >>> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> >>> ---
+> >>> Changes in v2:
+> >>> - rename fw_feat to abi and macros to FFA_ABI to be coherent with the
+> >>>  abi needed change done before
+> >>> - rework the macros to be simpler by directly defining MIN and MAX us=
+ing
+> >>>  only Function ids
+> >>> - check that requested function ids do not go over the bitmap size in
+> >>>  ffa_fw_supports_fid
+> >>> - add an ASSERT to make sure that we do not try to set bits outside o=
+f
+> >>>  the bitmap
+> >>> - turn off FF-A if there is not firmware support and adapt the commit
+> >>>  message to reflect this
+> >>> - add a compile time check that FFA_ABI_MIN < FFA_ABI_MAX
+> >>> - remove spurious line removal
+> >>> - restore proper cleanup of rxtx init in case of error
+> >>> - reorder ABI by numbers
+> >>> ---
+> >>> xen/arch/arm/tee/ffa.c          | 28 +++++++++++++++---------
+> >>> xen/arch/arm/tee/ffa_notif.c    |  7 ++++++
+> >>> xen/arch/arm/tee/ffa_partinfo.c | 30 +++++++++++++++++++++++++-
+> >>> xen/arch/arm/tee/ffa_private.h  | 38 ++++++++++++++++++++++++++++----=
+-
+> >>> xen/arch/arm/tee/ffa_rxtx.c     |  4 ++++
+> >>> xen/arch/arm/tee/ffa_shm.c      | 12 +++++++++++
+> >>> 6 files changed, 103 insertions(+), 16 deletions(-)
+> >>
+> >> Looks good.
+> >> Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+> >
+> > I'm sorry, I'm having second thoughts about this patch. I have two conc=
+erns:
+> > 1. Xen will complain at boot with XENLOG_INFO if an ABI function
+> > listed in ffa_fw_abi_needed is missing. With the current list of ABI
+> > functions that's somewhat OK since it was a cause of disabling FF-A
+> > support before. But as the list grows it may become annoying or even
+> > confusing since when Xen supports more features it may complain more
+> > even if there is no regression compared to previous versions. If we
+> > need to print anything perhaps XENLOG_DEBUG is better.
+>
+> This is only printed at boot and in the worst case it would list all need=
+ed ABI.
+> If the list printed becomes big, it probably means that almost nothing is
+> possible to do which might be interesting for the user.
+> Only seeing this information with debug prints might lead into normal use=
+rs
+> not understanding why communication with secure world are not working
+> without having a reason.
+> I would expect that the most common case will be for the list of printed
+> entries to be limited (right now it only prints something for 64bit shari=
+ng which
+> should be solved in Hafnium).
+> As Xen is already quite verbose in INFO mode during boot and this is not
+> a runtime print, I think it is ok.
 
-No functional change.
+With added support for FFA_MSG_SEND2 xen will start to complain that
+OP-TEE doesn't support that function, even if it's not needed. It
+should be harmless as long as it's not interpreted as an error.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/cpu/microcode/amd.c     |  4 ++--
- xen/arch/x86/cpu/microcode/core.c    | 22 ++++++++++++++++------
- xen/arch/x86/cpu/microcode/intel.c   |  4 ++--
- xen/arch/x86/cpu/microcode/private.h |  2 +-
- 4 files changed, 21 insertions(+), 11 deletions(-)
+>
+> > 2. FFA_FEATURES may return success for features not supported by the
+> > SPMC. How about only returning success for features in the
+> > ffa_fw_abi_needed bitmap?
+>
+> This would be a reinterpretation of the specification and could create
+> issues in some cases (some ABIs might be supported by Xen but not
+> by the SPMC and still work correctly this way) and even more when
+> we will have VM to VM.
+> The specification is saying that we should return what we support and
+> not what is supported by the SPMC. Filtering based on what is supported
+> by the SPMC and what will still work if not supported by the SPMC and
+> what we do not support even if it is supported by the SPMC might become
+> quickly very complex.
+>
+> What do you think we would gain from doing what you suggest instead of
+> what we have right now ?
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 0fe869eff119..3f147c10ca67 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -311,7 +311,7 @@ static int scan_equiv_cpu_table(const struct container_equiv_table *et)
-     return -ESRCH;
- }
- 
--static struct microcode_patch *cf_check cpu_request_microcode(
-+static struct microcode_patch *cf_check amd_ucode_parse(
-     const void *buf, size_t size, bool make_copy)
- {
-     const struct microcode_patch *saved = NULL;
-@@ -444,7 +444,7 @@ static struct microcode_patch *cf_check cpu_request_microcode(
- }
- 
- static const struct microcode_ops __initconst_cf_clobber amd_ucode_ops = {
--    .cpu_request_microcode            = cpu_request_microcode,
-+    .parse                            = amd_ucode_parse,
-     .collect_cpu_info                 = collect_cpu_info,
-     .apply_microcode                  = apply_microcode,
-     .compare_patch                    = compare_patch,
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index cad38d859eee..29655a44ae62 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -217,6 +217,18 @@ static void __init microcode_grab_module(struct boot_info *bi)
- 
- static struct microcode_ops __ro_after_init ucode_ops;
- 
-+/* Parse a ucode blob.  Returns a pointer to a heap-allocated copy, or PTR_ERR. */
-+static struct microcode_patch *ucode_parse_dup(const char *buf, size_t len)
-+{
-+    return alternative_call(ucode_ops.parse, buf, len, true);
-+}
-+
-+/* Parse a ucode blob.  Returns a pointer into @buf, or PTR_ERR. */
-+static const struct microcode_patch *ucode_parse(const char *buf, size_t len)
-+{
-+    return alternative_call(ucode_ops.parse, buf, len, false);
-+}
-+
- static DEFINE_SPINLOCK(microcode_mutex);
- 
- DEFINE_PER_CPU(struct cpu_signature, cpu_sig);
-@@ -604,9 +616,7 @@ static long cf_check ucode_update_hcall_cont(void *data)
-     }
- 
-     alternative_vcall(ucode_ops.collect_cpu_info);
--    patch_with_flags.patch = alternative_call(ucode_ops.cpu_request_microcode,
--                                              (const void *)buffer->buffer,
--                                              buffer->len, true);
-+    patch_with_flags.patch = ucode_parse_dup(buffer->buffer, buffer->len);
-     patch_with_flags.flags = buffer->flags;
-     xfree(buffer);
-     if ( IS_ERR(patch_with_flags.patch) )
-@@ -788,7 +798,7 @@ static int __init early_update_cache(const void *data, size_t len)
-         return -ENOMEM;
- 
-     alternative_vcall(ucode_ops.collect_cpu_info);
--    patch = alternative_call(ucode_ops.cpu_request_microcode, data, len, true);
-+    patch = ucode_parse_dup(data, len);
-     if ( IS_ERR(patch) )
-     {
-         printk(XENLOG_WARNING "Parsing microcode blob error %ld\n",
-@@ -832,7 +842,7 @@ static int __init early_microcode_update_cpu(void)
- {
-     const void *data = NULL;
-     size_t len;
--    struct microcode_patch *patch;
-+    const struct microcode_patch *patch;
- 
-     if ( ucode_blob.size )
-     {
-@@ -848,7 +858,7 @@ static int __init early_microcode_update_cpu(void)
-     if ( !data )
-         return -ENOMEM;
- 
--    patch = ucode_ops.cpu_request_microcode(data, len, false);
-+    patch = ucode_parse(data, len);
-     if ( IS_ERR(patch) )
-     {
-         printk(XENLOG_WARNING "Parsing microcode blob error %ld\n",
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index bad51f64724a..3d3f7e57db80 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -334,7 +334,7 @@ static int cf_check apply_microcode(const struct microcode_patch *patch,
-     return 0;
- }
- 
--static struct microcode_patch *cf_check cpu_request_microcode(
-+static struct microcode_patch *cf_check intel_ucode_parse(
-     const void *buf, size_t size, bool make_copy)
- {
-     int error = 0;
-@@ -406,7 +406,7 @@ static bool __init can_load_microcode(void)
- }
- 
- static const struct microcode_ops __initconst_cf_clobber intel_ucode_ops = {
--    .cpu_request_microcode            = cpu_request_microcode,
-+    .parse                            = intel_ucode_parse,
-     .collect_cpu_info                 = collect_cpu_info,
-     .apply_microcode                  = apply_microcode,
-     .compare_patch                    = compare_patch,
-diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
-index c72f060ac394..e30acee1536b 100644
---- a/xen/arch/x86/cpu/microcode/private.h
-+++ b/xen/arch/x86/cpu/microcode/private.h
-@@ -37,7 +37,7 @@ struct microcode_ops {
-      * If one is not found, (nothing matches the current CPU), return NULL.
-      * Also may return ERR_PTR(-err), e.g. bad container, out of memory.
-      */
--    struct microcode_patch *(*cpu_request_microcode)(
-+    struct microcode_patch *(*parse)(
-         const void *buf, size_t size, bool make_copy);
- 
-     /*
--- 
-2.39.5
+Yes, you're right I mistook FFA_FEATURE to cover the Framework, but
+it's only the interface. So returning success for all functions xen
+might be able to support is within specification.
 
+Cheers,
+Jens
+
+>
+> Cheers
+> Bertrand
+>
+> >
+> > Cheers,
+> > Jens
+> >
+> >>
+> >> Cheers,
+> >> Jens
+> >>
+> >>>
+> >>> diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+> >>> index 1ee6b2895e92..267d4435ac08 100644
+> >>> --- a/xen/arch/arm/tee/ffa.c
+> >>> +++ b/xen/arch/arm/tee/ffa.c
+> >>> @@ -72,7 +72,10 @@
+> >>> #include "ffa_private.h"
+> >>>
+> >>> /* Negotiated FF-A version to use with the SPMC, 0 if not there or su=
+pported */
+> >>> -static uint32_t __ro_after_init ffa_fw_version;
+> >>> +uint32_t __ro_after_init ffa_fw_version;
+> >>> +
+> >>> +/* Features supported by the SPMC or secure world when present */
+> >>> +DECLARE_BITMAP(ffa_fw_abi_supported, FFA_ABI_BITMAP_SIZE);
+> >>>
+> >>> struct ffa_fw_abi {
+> >>>     const uint32_t id;
+> >>> @@ -177,6 +180,13 @@ static void handle_msg_send_direct_req(struct cp=
+u_user_regs *regs, uint32_t fid)
+> >>>     else
+> >>>         mask =3D GENMASK_ULL(31, 0);
+> >>>
+> >>> +    if ( !ffa_fw_supports_fid(fid) )
+> >>> +    {
+> >>> +        resp.a0 =3D FFA_ERROR;
+> >>> +        resp.a2 =3D FFA_RET_NOT_SUPPORTED;
+> >>> +        goto out;
+> >>> +    }
+> >>> +
+> >>>     src_dst =3D get_user_reg(regs, 1);
+> >>>     if ( (src_dst >> 16) !=3D ffa_get_vm_id(d) )
+> >>>     {
+> >>> @@ -577,19 +587,16 @@ static bool ffa_probe(void)
+> >>>     else
+> >>>         ffa_fw_version =3D vers;
+> >>>
+> >>> -    /*
+> >>> -     * At the moment domains must support the same features used by =
+Xen.
+> >>> -     * TODO: Rework the code to allow domain to use a subset of the
+> >>> -     * features supported.
+> >>> -     */
+> >>>     for ( unsigned int i =3D 0; i < ARRAY_SIZE(ffa_fw_abi_needed); i+=
++ )
+> >>>     {
+> >>> -        if ( !ffa_abi_supported(ffa_fw_abi_needed[i].id) )
+> >>> -        {
+> >>> +        ASSERT(FFA_ABI_BITNUM(ffa_fw_abi_needed[i].id) < FFA_ABI_BIT=
+MAP_SIZE);
+> >>> +
+> >>> +        if ( ffa_abi_supported(ffa_fw_abi_needed[i].id) )
+> >>> +            set_bit(FFA_ABI_BITNUM(ffa_fw_abi_needed[i].id),
+> >>> +                    ffa_fw_abi_supported);
+> >>> +        else
+> >>>             printk(XENLOG_INFO "ARM FF-A Firmware does not support %s=
+\n",
+> >>>                    ffa_fw_abi_needed[i].name);
+> >>> -            goto err_no_fw;
+> >>> -        }
+> >>>     }
+> >>>
+> >>>     if ( !ffa_rxtx_init() )
+> >>> @@ -611,6 +618,7 @@ err_rxtx_destroy:
+> >>>     ffa_rxtx_destroy();
+> >>> err_no_fw:
+> >>>     ffa_fw_version =3D 0;
+> >>> +    bitmap_zero(ffa_fw_abi_supported, FFA_ABI_BITMAP_SIZE);
+> >>>     printk(XENLOG_WARNING "ARM FF-A No firmware support\n");
+> >>>
+> >>>     return false;
+> >>> diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_noti=
+f.c
+> >>> index 541e61d2f606..4b3e46318f4b 100644
+> >>> --- a/xen/arch/arm/tee/ffa_notif.c
+> >>> +++ b/xen/arch/arm/tee/ffa_notif.c
+> >>> @@ -377,6 +377,13 @@ void ffa_notif_init(void)
+> >>>     unsigned int irq;
+> >>>     int ret;
+> >>>
+> >>> +    /* Only enable fw notification if all ABIs we need are supported=
+ */
+> >>> +    if ( !(ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
+> >>> +           ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_DESTROY) &&
+> >>> +           ffa_fw_supports_fid(FFA_NOTIFICATION_GET) &&
+> >>> +           ffa_fw_supports_fid(FFA_NOTIFICATION_INFO_GET_64)) )
+> >>> +        return;
+> >>> +
+> >>>     arm_smccc_1_2_smc(&arg, &resp);
+> >>>     if ( resp.a0 !=3D FFA_SUCCESS_32 )
+> >>>         return;
+> >>> diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_p=
+artinfo.c
+> >>> index 93a03c6bc672..99c48f0e5c05 100644
+> >>> --- a/xen/arch/arm/tee/ffa_partinfo.c
+> >>> +++ b/xen/arch/arm/tee/ffa_partinfo.c
+> >>> @@ -77,7 +77,15 @@ int32_t ffa_handle_partition_info_get(uint32_t w1,=
+ uint32_t w2, uint32_t w3,
+> >>>      */
+> >>>     if ( w5 =3D=3D FFA_PARTITION_INFO_GET_COUNT_FLAG &&
+> >>>          ctx->guest_vers =3D=3D FFA_VERSION_1_1 )
+> >>> -        return ffa_partition_info_get(w1, w2, w3, w4, w5, count, fpi=
+_size);
+> >>> +    {
+> >>> +        if ( ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
+> >>> +            return ffa_partition_info_get(w1, w2, w3, w4, w5, count,=
+ fpi_size);
+> >>> +        else
+> >>> +        {
+> >>> +            *count =3D 0;
+> >>> +            return FFA_RET_OK;
+> >>> +        }
+> >>> +    }
+> >>>     if ( w5 )
+> >>>         return FFA_RET_INVALID_PARAMETERS;
+> >>>
+> >>> @@ -87,6 +95,18 @@ int32_t ffa_handle_partition_info_get(uint32_t w1,=
+ uint32_t w2, uint32_t w3,
+> >>>     if ( !spin_trylock(&ctx->rx_lock) )
+> >>>         return FFA_RET_BUSY;
+> >>>
+> >>> +    if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
+> >>> +    {
+> >>> +        if ( ctx->guest_vers =3D=3D FFA_VERSION_1_0 )
+> >>> +            *fpi_size =3D sizeof(struct ffa_partition_info_1_0);
+> >>> +        else
+> >>> +            *fpi_size =3D sizeof(struct ffa_partition_info_1_1);
+> >>> +
+> >>> +        *count =3D 0;
+> >>> +        ret =3D FFA_RET_OK;
+> >>> +        goto out;
+> >>> +    }
+> >>> +
+> >>>     if ( !ctx->page_count || !ctx->rx_is_free )
+> >>>         goto out;
+> >>>     spin_lock(&ffa_rx_buffer_lock);
+> >>> @@ -250,6 +270,11 @@ bool ffa_partinfo_init(void)
+> >>>     uint32_t count;
+> >>>     int e;
+> >>>
+> >>> +    if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) ||
+> >>> +         !ffa_fw_supports_fid(FFA_MSG_SEND_DIRECT_REQ_32) ||
+> >>> +         !ffa_rx || !ffa_tx )
+> >>> +        return false;
+> >>> +
+> >>>     e =3D ffa_partition_info_get(0, 0, 0, 0, 0, &count, &fpi_size);
+> >>>     if ( e )
+> >>>     {
+> >>> @@ -313,6 +338,9 @@ int ffa_partinfo_domain_init(struct domain *d)
+> >>>     unsigned int n;
+> >>>     int32_t res;
+> >>>
+> >>> +    if ( !ffa_fw_supports_fid(FFA_MSG_SEND_DIRECT_REQ_32) )
+> >>> +        return 0;
+> >>> +
+> >>>     ctx->vm_destroy_bitmap =3D xzalloc_array(unsigned long, count);
+> >>>     if ( !ctx->vm_destroy_bitmap )
+> >>>         return -ENOMEM;
+> >>> diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_pr=
+ivate.h
+> >>> index 045d9c4a0b56..85eb61c13464 100644
+> >>> --- a/xen/arch/arm/tee/ffa_private.h
+> >>> +++ b/xen/arch/arm/tee/ffa_private.h
+> >>> @@ -14,6 +14,7 @@
+> >>> #include <xen/spinlock.h>
+> >>> #include <xen/sched.h>
+> >>> #include <xen/time.h>
+> >>> +#include <xen/bitmap.h>
+> >>>
+> >>> /* Error codes */
+> >>> #define FFA_RET_OK                      0
+> >>> @@ -201,18 +202,17 @@
+> >>> #define FFA_INTERRUPT                   0x84000062U
+> >>> #define FFA_VERSION                     0x84000063U
+> >>> #define FFA_FEATURES                    0x84000064U
+> >>> -#define FFA_RX_ACQUIRE                  0x84000084U
+> >>> #define FFA_RX_RELEASE                  0x84000065U
+> >>> #define FFA_RXTX_MAP_32                 0x84000066U
+> >>> #define FFA_RXTX_MAP_64                 0xC4000066U
+> >>> #define FFA_RXTX_UNMAP                  0x84000067U
+> >>> #define FFA_PARTITION_INFO_GET          0x84000068U
+> >>> #define FFA_ID_GET                      0x84000069U
+> >>> -#define FFA_SPM_ID_GET                  0x84000085U
+> >>> +#define FFA_MSG_POLL                    0x8400006AU
+> >>> #define FFA_MSG_WAIT                    0x8400006BU
+> >>> #define FFA_MSG_YIELD                   0x8400006CU
+> >>> #define FFA_RUN                         0x8400006DU
+> >>> -#define FFA_MSG_SEND2                   0x84000086U
+> >>> +#define FFA_MSG_SEND                    0x8400006EU
+> >>> #define FFA_MSG_SEND_DIRECT_REQ_32      0x8400006FU
+> >>> #define FFA_MSG_SEND_DIRECT_REQ_64      0xC400006FU
+> >>> #define FFA_MSG_SEND_DIRECT_RESP_32     0x84000070U
+> >>> @@ -230,8 +230,6 @@
+> >>> #define FFA_MEM_RECLAIM                 0x84000077U
+> >>> #define FFA_MEM_FRAG_RX                 0x8400007AU
+> >>> #define FFA_MEM_FRAG_TX                 0x8400007BU
+> >>> -#define FFA_MSG_SEND                    0x8400006EU
+> >>> -#define FFA_MSG_POLL                    0x8400006AU
+> >>> #define FFA_NOTIFICATION_BITMAP_CREATE  0x8400007DU
+> >>> #define FFA_NOTIFICATION_BITMAP_DESTROY 0x8400007EU
+> >>> #define FFA_NOTIFICATION_BIND           0x8400007FU
+> >>> @@ -240,6 +238,25 @@
+> >>> #define FFA_NOTIFICATION_GET            0x84000082U
+> >>> #define FFA_NOTIFICATION_INFO_GET_32    0x84000083U
+> >>> #define FFA_NOTIFICATION_INFO_GET_64    0xC4000083U
+> >>> +#define FFA_RX_ACQUIRE                  0x84000084U
+> >>> +#define FFA_SPM_ID_GET                  0x84000085U
+> >>> +#define FFA_MSG_SEND2                   0x84000086U
+> >>> +
+> >>> +/**
+> >>> + * Encoding of features supported or not by the fw in a bitmap:
+> >>> + * - Function IDs are going from 0x60 to 0xFF
+> >>> + * - A function can be supported in 32 and/or 64bit
+> >>> + * The bitmap has one bit for each function in 32 and 64 bit.
+> >>> + */
+> >>> +#define FFA_ABI_ID(id)        ((id) & ARM_SMCCC_FUNC_MASK)
+> >>> +#define FFA_ABI_CONV(id)      (((id) >> ARM_SMCCC_CONV_SHIFT) & BIT(=
+0,U))
+> >>> +
+> >>> +#define FFA_ABI_MIN           FFA_ABI_ID(FFA_ERROR)
+> >>> +#define FFA_ABI_MAX           FFA_ABI_ID(FFA_MSG_SEND2)
+> >>> +
+> >>> +#define FFA_ABI_BITMAP_SIZE   (2 * (FFA_ABI_MAX - FFA_ABI_MIN + 1))
+> >>> +#define FFA_ABI_BITNUM(id)    ((FFA_ABI_ID(id) - FFA_ABI_MIN) << 1 |=
+ \
+> >>> +                               FFA_ABI_CONV(id))
+> >>>
+> >>> struct ffa_ctx_notif {
+> >>>     bool enabled;
+> >>> @@ -289,6 +306,8 @@ extern void *ffa_rx;
+> >>> extern void *ffa_tx;
+> >>> extern spinlock_t ffa_rx_buffer_lock;
+> >>> extern spinlock_t ffa_tx_buffer_lock;
+> >>> +extern uint32_t __ro_after_init ffa_fw_version;
+> >>> +extern DECLARE_BITMAP(ffa_fw_abi_supported, FFA_ABI_BITMAP_SIZE);
+> >>>
+> >>> bool ffa_shm_domain_destroy(struct domain *d);
+> >>> void ffa_handle_mem_share(struct cpu_user_regs *regs);
+> >>> @@ -401,4 +420,13 @@ static inline int32_t ffa_rx_release(void)
+> >>>     return ffa_simple_call(FFA_RX_RELEASE, 0, 0, 0, 0);
+> >>> }
+> >>>
+> >>> +static inline bool ffa_fw_supports_fid(uint32_t fid)
+> >>> +{
+> >>> +    BUILD_BUG_ON(FFA_ABI_MIN > FFA_ABI_MAX);
+> >>> +
+> >>> +    if ( FFA_ABI_BITNUM(fid) > FFA_ABI_BITMAP_SIZE)
+> >>> +        return false;
+> >>> +    return test_bit(FFA_ABI_BITNUM(fid), ffa_fw_abi_supported);
+> >>> +}
+> >>> +
+> >>> #endif /*__FFA_PRIVATE_H__*/
+> >>> diff --git a/xen/arch/arm/tee/ffa_rxtx.c b/xen/arch/arm/tee/ffa_rxtx.=
+c
+> >>> index 661764052e67..b6931c855779 100644
+> >>> --- a/xen/arch/arm/tee/ffa_rxtx.c
+> >>> +++ b/xen/arch/arm/tee/ffa_rxtx.c
+> >>> @@ -193,6 +193,10 @@ bool ffa_rxtx_init(void)
+> >>> {
+> >>>     int e;
+> >>>
+> >>> +    /* Firmware not there or not supporting */
+> >>> +    if ( !ffa_fw_supports_fid(FFA_RXTX_MAP_64) )
+> >>> +        return false;
+> >>> +
+> >>>     ffa_rx =3D alloc_xenheap_pages(get_order_from_pages(FFA_RXTX_PAGE=
+_COUNT), 0);
+> >>>     if ( !ffa_rx )
+> >>>         return false;
+> >>> diff --git a/xen/arch/arm/tee/ffa_shm.c b/xen/arch/arm/tee/ffa_shm.c
+> >>> index 370d83ec5cf8..efa5b67db8e1 100644
+> >>> --- a/xen/arch/arm/tee/ffa_shm.c
+> >>> +++ b/xen/arch/arm/tee/ffa_shm.c
+> >>> @@ -149,6 +149,9 @@ static int32_t ffa_mem_share(uint32_t tot_len, ui=
+nt32_t frag_len,
+> >>> static int32_t ffa_mem_reclaim(uint32_t handle_lo, uint32_t handle_hi=
+,
+> >>>                                uint32_t flags)
+> >>> {
+> >>> +    if ( !ffa_fw_supports_fid(FFA_MEM_RECLAIM) )
+> >>> +        return FFA_RET_NOT_SUPPORTED;
+> >>> +
+> >>>     return ffa_simple_call(FFA_MEM_RECLAIM, handle_lo, handle_hi, fla=
+gs, 0);
+> >>> }
+> >>>
+> >>> @@ -467,6 +470,12 @@ void ffa_handle_mem_share(struct cpu_user_regs *=
+regs)
+> >>>     uint32_t range_count;
+> >>>     uint32_t region_offs;
+> >>>
+> >>> +    if ( !ffa_fw_supports_fid(FFA_MEM_SHARE_64) )
+> >>> +    {
+> >>> +        ret =3D FFA_RET_NOT_SUPPORTED;
+> >>> +        goto out_set_ret;
+> >>> +    }
+> >>> +
+> >>>     /*
+> >>>      * We're only accepting memory transaction descriptors via the rx=
+/tx
+> >>>      * buffer.
+> >>> @@ -621,6 +630,9 @@ int ffa_handle_mem_reclaim(uint64_t handle, uint3=
+2_t flags)
+> >>>     register_t handle_lo;
+> >>>     int ret;
+> >>>
+> >>> +    if ( !ffa_fw_supports_fid(FFA_MEM_RECLAIM) )
+> >>> +        return FFA_RET_NOT_SUPPORTED;
+> >>> +
+> >>>     spin_lock(&ctx->lock);
+> >>>     shm =3D find_shm_mem(ctx, handle);
+> >>>     if ( shm )
+> >>> --
+> >>> 2.47.0
+>
+>
 
