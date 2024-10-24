@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE0FBCE8E70
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 13:22:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825240.1239466 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09A8FCE8E75
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 13:22:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825238.1239441 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3xnB-0005ZI-BC; Thu, 24 Oct 2024 13:22:21 +0000
+	id 1t3xn7-0004pb-N7; Thu, 24 Oct 2024 13:22:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825240.1239466; Thu, 24 Oct 2024 13:22:21 +0000
+Received: by outflank-mailman (output) from mailman id 825238.1239441; Thu, 24 Oct 2024 13:22:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3xnB-0005Z3-7O; Thu, 24 Oct 2024 13:22:21 +0000
-Received: by outflank-mailman (input) for mailman id 825240;
- Thu, 24 Oct 2024 13:22:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t3xn7-0004p4-Ga; Thu, 24 Oct 2024 13:22:17 +0000
+Received: by outflank-mailman (input) for mailman id 825238;
+ Thu, 24 Oct 2024 13:22:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jd6X=RU=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t3xn9-0004K5-8r
- for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 13:22:19 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fddcedac-920a-11ef-a0bf-8be0dac302b0;
- Thu, 24 Oct 2024 15:22:17 +0200 (CEST)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5c9388a00cfso939419a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 06:22:17 -0700 (PDT)
+ id 1t3xn6-0004KA-Gz
+ for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 13:22:16 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fc07d42f-920a-11ef-99a3-01e77a169b0f;
+ Thu, 24 Oct 2024 15:22:14 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a86e9db75b9so118895566b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 06:22:14 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a912ee592sm618574766b.79.2024.10.24.06.22.16
+ a640c23a62f3a-a9a912ee592sm618574766b.79.2024.10.24.06.22.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 06:22:16 -0700 (PDT)
+ Thu, 24 Oct 2024 06:22:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fddcedac-920a-11ef-a0bf-8be0dac302b0
+X-Inumbo-ID: fc07d42f-920a-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1729776137; x=1730380937; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1729776133; x=1730380933; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4+Vu4sa4HxAQKCzqJBSz5wGkRTNCR1UROUB1VCBQ9dk=;
-        b=vdk772wloLjmp6vG6mwCcBDim4POV6xDwwb/1VIE1F89sEAkyCxl9yqxxyV1w5htOa
-         wnWae8+73GH08WoLGG1wGAqVATfsv1fP7QFt6vtAASRypAO8j/FC5KISSSLc6XQR2cBc
-         fjjWrQEQB5slrqLTVe9FE820PwSokpg9CL5nQ=
+        bh=vje9cjl7S3MEL0v41NICuEDrNpFT2GOVFHe2wP6D174=;
+        b=MXhSz/AgaUTb1+YOyikG/qnyiGBComM/0+9LBZy/bdTjMPfQxNtnFMCpaU0nErfP1f
+         YzAL+afDDYjz4BGriFJzxfwUYgkicL3g+6gpjzEkOxoacP0dWlFlWhm/r4+cJkXUNLuR
+         /mQdldKTrIqExclRjxWKwhBQC9BjS/tEdHlrY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729776137; x=1730380937;
+        d=1e100.net; s=20230601; t=1729776133; x=1730380933;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4+Vu4sa4HxAQKCzqJBSz5wGkRTNCR1UROUB1VCBQ9dk=;
-        b=BV3pvY2MiSRIbMfJPn0q1uDc0X5Hg11TxLU59EprsThvwzTEeCulsqP9FKoCBE/7mf
-         ssO6FZ/KeyjetjvkyLMcm1X9U2wHYSYb4j94zxtYkQeFdR+wyeH89qC/HGwr4BYu7KFu
-         Jag+HfCnw06mCs7fQG7rxcDAtrYPUdfU69nVUsQeRziUaApCWU+QU6uYsTbcT4bShvYb
-         ECbfLioZzvLNCfnpXPkhDKT54daUz7ajLFpZ4KdT8A6YoEBgcTAEzxdNpFNnl/2s+4ty
-         MFg602pNjNJBO38HxouyGHvQJn/VD4QqRHgEc6YdSNHGnevBH1YSK+UD3evdCVzdMM+Q
-         /oDA==
-X-Gm-Message-State: AOJu0YyzvHw3utbdlU+XNAiww4DS2qHAXfQMPgPWoe5xtTjFXYEIG7th
-	QNAz8XLri4noSW2Zqitg71M7sIytFNm3hRRQG5UXxGMMd4Q5+D3VOCIYTBjNcB6HcV7EewOtHqQ
-	d
-X-Google-Smtp-Source: AGHT+IG5UiRpv59wek7ARqF1JmC/N1DSP8R4HlnvXFJTMftXoiNvYECFNOZrMesXeC1zgylbgJaWxg==
-X-Received: by 2002:a17:907:97cd:b0:a9a:13dd:2734 with SMTP id a640c23a62f3a-a9ad27600cbmr160663366b.36.1729776136782;
-        Thu, 24 Oct 2024 06:22:16 -0700 (PDT)
+        bh=vje9cjl7S3MEL0v41NICuEDrNpFT2GOVFHe2wP6D174=;
+        b=tSH+PBaulgyhXJ8p2IfeW11ctEgspbr7gz/TAVI2F+Qk+3Vs7WGsGCdRkd69sMdSTY
+         VqGCz+8dByBTFnke0jiXaBoe3R/z5XULebS594XfaVOdVdEzZ8Ffc9DNNioZWmFR68ZY
+         yA4dKiVK4iWvbGj4X5MrFlYZqVMF8BpDIXEShr5VKJmpQrmg26+/pf/xhZ3aHk9Vhk6y
+         bckHQ4T6NbDgUbd76fBcGQ1ECBojCM84lFrFlHZlyrL2/+WItUX+jNiRE4iig2YdrXcb
+         KpPK/qYgZLOPnkriFlgGIhaa0vZcfc6ABOqLHB8sDf+Q7qX8km8rTSyT0rfH1dpVQNTy
+         SSkA==
+X-Gm-Message-State: AOJu0YzLwEuEd9pX8FzmdzzOREOGwlr7bM9bAq6HVBDV3Icf3/g1T/Nd
+	xWO3VROug9bgykYARHIInkbrliRv67Dc/S616AaemgumFco0KQ5hE4LL5JtTzKkgNQErHw462pY
+	U
+X-Google-Smtp-Source: AGHT+IHOOtGnTEQAVB2sdCQ4P24Dc8w6u4STtsxpipSi9dy2lm9XP0oMoJtBQDdXW4FOf+OM7Hg54A==
+X-Received: by 2002:a17:907:6e8c:b0:a9a:46f5:d6d7 with SMTP id a640c23a62f3a-a9abf8459d0mr589610666b.5.1729776133455;
+        Thu, 24 Oct 2024 06:22:13 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 5/5] x86/ucode: Drop the match_reg[] field from AMD's microcode_patch
-Date: Thu, 24 Oct 2024 14:22:05 +0100
-Message-Id: <20241024132205.987042-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/5] x86/ucode: Drop the parse_blob() wrapper
+Date: Thu, 24 Oct 2024 14:22:02 +0100
+Message-Id: <20241024132205.987042-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241024132205.987042-1-andrew.cooper3@citrix.com>
 References: <20241024132205.987042-1-andrew.cooper3@citrix.com>
@@ -90,11 +90,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This was true in the K10 days, but even back then the match registers were
-really payload data rather than header data.
-
-But, it's really model specific data, and these days typically part of the
-signature, so is random data for all intents and purposes.
+This separates the collect_cpu_info() and cpu_request_microcode() calls for
+later cleanup, and frees up the name to be reused a little differently.
 
 No functional change.
 
@@ -102,37 +99,56 @@ Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-
-The single difference from this is:
-
-  @@ -207587,7 +207587,7 @@
-   ffff82d0402ad261:	4c 89 ce             	mov    %r9,%rsi
-   ffff82d0402ad264:	4c 39 c8             	cmp    %r9,%rax
-   ffff82d0402ad267:	0f 82 c2 11 f6 ff    	jb     ffff82d04020e42f <amd_ucode_parse.cold+0x55>
-  -ffff82d0402ad26d:	41 83 f9 3f          	cmp    $0x3f,%r9d
-  +ffff82d0402ad26d:	41 83 f9 1f          	cmp    $0x1f,%r9d
-   ffff82d0402ad271:	0f 86 b8 11 f6 ff    	jbe    ffff82d04020e42f <amd_ucode_parse.cold+0x55>
-   ffff82d0402ad277:	85 ed                	test   %ebp,%ebp
-   ffff82d0402ad279:	75 55                	jne    ffff82d0402ad2d0 <amd_ucode_parse+0x170>
-
-which is "mc->len < sizeof(struct microcode_patch)" expression in
-amd_ucode_parse().
 ---
- xen/arch/x86/cpu/microcode/amd.c | 1 -
- 1 file changed, 1 deletion(-)
+ xen/arch/x86/cpu/microcode/core.c | 21 ++++++---------------
+ 1 file changed, 6 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 1845f51ba330..54acd6928781 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -48,7 +48,6 @@ struct microcode_patch {
-     uint8_t  sb_rev_id;
-     uint8_t  bios_api_rev;
-     uint8_t  reserved1[3];
--    uint32_t match_reg[8];
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 21077b449c38..cad38d859eee 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -237,19 +237,6 @@ static struct patch_with_flags nmi_patch =
+     .patch  = ZERO_BLOCK_PTR,
  };
  
- #define UCODE_MAGIC                0x00414d44
+-/*
+- * Return a patch that covers current CPU. If there are multiple patches,
+- * return the one with the highest revision number. Return error If no
+- * patch is found and an error occurs during the parsing process. Otherwise
+- * return NULL.
+- */
+-static struct microcode_patch *parse_blob(const char *buf, size_t len)
+-{
+-    alternative_vcall(ucode_ops.collect_cpu_info);
+-
+-    return alternative_call(ucode_ops.cpu_request_microcode, buf, len, true);
+-}
+-
+ static void microcode_free_patch(const struct microcode_patch *patch)
+ {
+     xfree((struct microcode_patch *)patch);
+@@ -616,7 +603,10 @@ static long cf_check ucode_update_hcall_cont(void *data)
+         goto put;
+     }
+ 
+-    patch_with_flags.patch = parse_blob(buffer->buffer, buffer->len);
++    alternative_vcall(ucode_ops.collect_cpu_info);
++    patch_with_flags.patch = alternative_call(ucode_ops.cpu_request_microcode,
++                                              (const void *)buffer->buffer,
++                                              buffer->len, true);
+     patch_with_flags.flags = buffer->flags;
+     xfree(buffer);
+     if ( IS_ERR(patch_with_flags.patch) )
+@@ -797,7 +787,8 @@ static int __init early_update_cache(const void *data, size_t len)
+     if ( !data )
+         return -ENOMEM;
+ 
+-    patch = parse_blob(data, len);
++    alternative_vcall(ucode_ops.collect_cpu_info);
++    patch = alternative_call(ucode_ops.cpu_request_microcode, data, len, true);
+     if ( IS_ERR(patch) )
+     {
+         printk(XENLOG_WARNING "Parsing microcode blob error %ld\n",
 -- 
 2.39.5
 
