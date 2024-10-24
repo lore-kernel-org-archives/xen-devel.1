@@ -4,53 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05B2BD10395
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 23:27:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825583.1239851 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8C7D10395
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 23:48:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825600.1239871 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t47Ea-0008Cj-3l; Thu, 24 Oct 2024 23:27:16 +0000
+	id 1t47YH-0003PD-1l; Thu, 24 Oct 2024 23:47:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825583.1239851; Thu, 24 Oct 2024 23:27:16 +0000
+Received: by outflank-mailman (output) from mailman id 825600.1239871; Thu, 24 Oct 2024 23:47:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t47EZ-0008Cc-Vh; Thu, 24 Oct 2024 23:27:15 +0000
-Received: by outflank-mailman (input) for mailman id 825583;
- Thu, 24 Oct 2024 23:27:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t47YG-0003P6-T7; Thu, 24 Oct 2024 23:47:36 +0000
+Received: by outflank-mailman (input) for mailman id 825600;
+ Thu, 24 Oct 2024 23:47:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QKxT=RU=amd.com=VictorM.Lira@srs-se1.protection.inumbo.net>)
- id 1t47EY-0008CW-H8
- for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 23:27:14 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2062f.outbound.protection.outlook.com
- [2a01:111:f403:2415::62f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7f5d8c4d-925f-11ef-a0bf-8be0dac302b0;
- Fri, 25 Oct 2024 01:27:13 +0200 (CEST)
-Received: from CH5PR02CA0023.namprd02.prod.outlook.com (2603:10b6:610:1ed::24)
- by MW4PR12MB6684.namprd12.prod.outlook.com (2603:10b6:303:1ee::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17; Thu, 24 Oct
- 2024 23:27:08 +0000
-Received: from CH1PEPF0000A34B.namprd04.prod.outlook.com
- (2603:10b6:610:1ed:cafe::fc) by CH5PR02CA0023.outlook.office365.com
- (2603:10b6:610:1ed::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.18 via Frontend
- Transport; Thu, 24 Oct 2024 23:27:07 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH1PEPF0000A34B.mail.protection.outlook.com (10.167.244.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8093.14 via Frontend Transport; Thu, 24 Oct 2024 23:27:06 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Oct
- 2024 18:27:06 -0500
-Received: from xsjwoods50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 24 Oct 2024 18:27:05 -0500
+ <SRS0=V9Wq=RU=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1t47YF-0003P0-5G
+ for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 23:47:35 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 55c4beb8-9262-11ef-99a3-01e77a169b0f;
+ Fri, 25 Oct 2024 01:47:32 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 9F48A5C4B47;
+ Thu, 24 Oct 2024 23:46:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B5C7C4CEC7;
+ Thu, 24 Oct 2024 23:47:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,127 +43,240 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f5d8c4d-925f-11ef-a0bf-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fjQJC1JkY52kppIFxrjVg2RomsEUeJnmPt+arrI75x4zWRAdPLOhyQ3r+vbrFF6UYbqmhYViX43C4VJGNcLnXK5rJFwPnci0ZA6fn62+XfLUSz5lMbpUAv1oaQWnwBYSzV1ISRwHTIcv8/tlIaQ26qL44KwUkfDdgax3VrRXSsFzBRdwTPfV32GzZ2e2lOALx4Ycbo91jdauR22fFu8pyBVo5IVj1v149VHKziQPBM6cFKJx651Fuc/sdfl1tk0uW4nI27D5UZGHw04a+n3omm72U+PQpYUaBpE+CVMYRs+nMaGGnPLKxedrOoTzv+D5uq1RAxNtzIqXj2uwp24m0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6HuKqe4464Z1xh2mUL7kdN2VW0A0xjkcziv4tR7GBCo=;
- b=P/dmnnLldLzXFQoAm79/s86MNYCKwnkAPn6iSk93zADZAJ0NAbp6O5RXJdlWwjEVjXY+mQEsxE8RhFYLJMk/fQSYKihA/kZsy4CUp9tDGwjWj7Upn+5iyBH4Bq45lO86hwCzt2bDaHbfGbbK17EXtuQ9ErM+68gPhwdRBrT9i2wdVeVnPJrZC9AaSwZ+Xbjvth38dlPEhlrI1boNcmXh5wlUqSfwLOWVUpXmDegTRArbUXFX0+l/Xu0TLncHXc8aK57DTVTJhmhI8b7DsBll3L+H+wxxoG05NfZthumzh7ZJujqs4xJNMUwyWnX1LAzl3d1RAOAJXd3K0V37NWeJtQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6HuKqe4464Z1xh2mUL7kdN2VW0A0xjkcziv4tR7GBCo=;
- b=G2/M5g8JZk8iJUsqiJAeLgB3SwU8A0fFycCMf6VWDdiPaYYNbPoVoMLPlZaQnQTnchRkKI9DIgY0G4SJJW4svapzuFjngr56jyIy88kRHgkEBO0mGVJBiBFi3Nxe8cJYr4GOUomAPWDi9E3lrTA6hYxX1ZsDf9NZ6ljfrnEqEvw=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: <victorm.lira@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Victor Lira <victorm.lira@amd.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>, Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [TEST_ARTIFACTS PATCH v1 0/1] build: add x86_64 xen artifacts (argo)
-Date: Thu, 24 Oct 2024 16:26:48 -0700
-Message-ID: <cover.1729809799.git.victorm.lira@amd.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 55c4beb8-9262-11ef-99a3-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1729813650;
+	bh=ki5lJlSSikUVgMuaB9x7iJUB/P/ayoizS1rLBj7VnUo=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=awGxn6HS/CTG+R/CqqQ5neRiaUCKoXG8mjQu/gzoUQdd9dJpqeqy9SoUNyBPPOja+
+	 YA5MA7OwKqdG4kPuCRNN5qT1962kNGOzaUdY1ye0NG5ePf9/6F6uuNf2Sd0gc6UQEZ
+	 QrwSVR2ZgrS8aJJ9ebld8VedfL+w76+vetL5Hk9j/bqZb/29gspIGQFWX9dZsN/jSX
+	 zIGS9ChBmIXXeckqcoH4R735zp5+KklxPksiL0aMwgK7suE0Qvz52SaRgEuLsvht1Z
+	 1iHx4/9uqG5R0UM/Z1d/0B5cQzBFBXSE051kWK3kepvZ2Lq8F6jdC2Y1wEEHSabg+t
+	 2o+bAvlTsxg2Q==
+Date: Thu, 24 Oct 2024 16:47:28 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Javi Merino <javi.merino@cloud.com>
+cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [XEN PATCH v1 6/6] CI: Run the builds and tests that use the
+ Debian 12 containers as a normal user
+In-Reply-To: <c6d8547d500ac419ee4590decb9392f32f1f0d02.1729760501.git.javi.merino@cloud.com>
+Message-ID: <alpine.DEB.2.22.394.2410241631250.3833@ubuntu-linux-20-04-desktop>
+References: <cover.1729760501.git.javi.merino@cloud.com> <c6d8547d500ac419ee4590decb9392f32f1f0d02.1729760501.git.javi.merino@cloud.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: victorm.lira@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34B:EE_|MW4PR12MB6684:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92ab2637-1728-45a5-07a9-08dcf4836011
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|376014|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?JYkkhuFBeQ1w0cNghQ9xqKwO82jUQWEyZNE2tY2a0osw0/XnRXfLZsyYKIhA?=
- =?us-ascii?Q?by7PdMiDSVhz0pq9rwqzr98FdhCMnCHI0OLWVB5evZ51xZ6vD349MWXql5sH?=
- =?us-ascii?Q?HkTAYkY9nWNLaHZfeL1Q5l5h4cKS5IjiqrF00Ee0M3tldeTVNjoZOGbL2iZl?=
- =?us-ascii?Q?xIOonN9iYJot5O9nFKk5wUZJ2wjQOuTmHognubBiWNvSjpEuVtQljwFH9dBN?=
- =?us-ascii?Q?bwA+IzHGNLoUpy9xqFkIpwfrtXzsaqTWa3fLbvxzBXfqLhbVA6rOsJTVEXeU?=
- =?us-ascii?Q?b2VQsZYF08Z4LXDjVZiWUOkoT6rGGEV885Qp/RkMG35CjDB5BHWBLFST0lN4?=
- =?us-ascii?Q?u9/Q87/lLXYsWIi2+MI3YLy8SCTkEi3Y1hqINwJ0x0ZOKu3Y7JFQLH/fizec?=
- =?us-ascii?Q?gQzOxG/ah7Lx6JRpVjbjH+w5ZvT+DnfqZs7IzNIFdWTTKPCqa04tdzvO/qiB?=
- =?us-ascii?Q?BvTkJZWEDy0BfxkENdp48W5EKTu6AlE8KIy9k9hLg5xbCbPMyQnxW3e5tyvE?=
- =?us-ascii?Q?+E2/l2pbm5v3rR++WlzeKCM3bqAo4ea5d3skS82BiOehNLvvBkzfZX77tWhl?=
- =?us-ascii?Q?EO8vhUCECJHegfA4/0sSO36EzsFXhVI+cTjAxPhIUQZbh8XR5Vdx4wFZT1SX?=
- =?us-ascii?Q?GmvvrbKrMiU+CMIrHSJXcqEOTlFNsL3o0fPurVrtnCvF907Jptd4TV90sMTj?=
- =?us-ascii?Q?VdCChvF/vDOZD3N3ywvNG2eibtF+jVfScRNno3IDa4AhIlYcZTPWYLh1QCDY?=
- =?us-ascii?Q?xDKktjyND6guacbM86uYaYt1B+H0lP4QF6/OriwyXkGqIL6s8LKWIxmijQK4?=
- =?us-ascii?Q?iojG/q59ZtGYkwVyg8/smQCfxkWZhQkpJi5epajPjnAnV1B5zTNXBh8rhAxD?=
- =?us-ascii?Q?3isqQm97RrVZJZADXhe8Ao0hp0M084XP6S+B/DBywhMwuBG7+EXXZRDG0+4a?=
- =?us-ascii?Q?WLDdvy9oiKFsUmxCHXB7PqaF4pLxElM2FnhlfsmoJ0oD1zf3Gm8Xa6hPpwWj?=
- =?us-ascii?Q?j6OXzF0Q7xMkQFynCvOv7jmPseapsl7tP+CNFtWycZS4PRvLygQheK7xLm8K?=
- =?us-ascii?Q?79LKtWnBqNWWmv1kdyrgTukMJAv3rnfFv14ehFZKtRF0fIIO3cdvrA8Un1uW?=
- =?us-ascii?Q?6vGis4MZ7ZrPSRv8fhsxVUc8Wpzp+KE0BNZfFXxI5skTjHDjRKM5QDzlHIf3?=
- =?us-ascii?Q?ULr1JFoid5zllDRhqDU6/sPlXkIqkeirYkUtyCTwRcyqlEvTbNpMyppmXODL?=
- =?us-ascii?Q?KFBmhsOXHG8cgzpFvmnoi5e14SXizMnmGeung+JUDYsgZizxV35duMzQmSk5?=
- =?us-ascii?Q?wYZtlXbyOHviA5wm4+EwpPgiLJVFl/nq5KZYYpBaNESEATN1SKCYhd7VEIuN?=
- =?us-ascii?Q?gTGcJY97aYZvFugkiF243wcKjSEd+zajI4hHbSxWIf1oYmGwGQ=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2024 23:27:06.8608
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92ab2637-1728-45a5-07a9-08dcf4836011
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000A34B.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6684
+Content-Type: text/plain; charset=US-ASCII
 
-From: Victor Lira <victorm.lira@amd.com>
+On Thu, 24 Oct 2024, Javi Merino wrote:
+> Use FF_DISABLE_UMASK_FOR_DOCKER_EXECUTOR so that GitLab CI clones xen
+> using the user in the image, instead of as root[0].
+> 
+> In qemu-smoke-dom0*.sh and qemu-alpine-x86_64.sh, use fakeroot to
+> create the rootfs images that untar a tarball that create character
+> devices.  cpio replicates the block and character devices, as well as
+> preserving the uid and gid it sees in the current directory.  fakeroot
+> lets tar think that it is creating block and character devices, and
+> all files are owned by root, but it is all smokes and mirrors for
+> cpio.
+> 
+> [0] https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1736
+> 
+> Signed-off-by: Javi Merino <javi.merino@cloud.com>
+> ---
+> 
+> Regarding building the rootfs, I have chosen to use a fakeroot
+> subshell for the entire process.  automation/scripts/qubes-x86-64.sh
+> takes a different approach, it just uses fakeroot for the tar/cpio
+> commands.  I prefer to do it this way but I am happy to be overridden
+> if `fakeroot -s ../save tar` and `fakeroot -i ../save cpio` are
+> preferred.
+> 
+>  automation/build/debian/12-arm64v8.dockerfile   | 5 ++++-
+>  automation/build/debian/12-x86_64.dockerfile    | 5 ++++-
+>  automation/gitlab-ci/test.yaml                  | 4 ++++
+>  automation/scripts/qemu-alpine-x86_64.sh        | 4 +++-
+>  automation/scripts/qemu-smoke-dom0-arm64.sh     | 7 +++++--
+>  automation/scripts/qemu-smoke-dom0less-arm64.sh | 5 +++--
+>  6 files changed, 23 insertions(+), 7 deletions(-)
+> 
+> diff --git a/automation/build/debian/12-arm64v8.dockerfile b/automation/build/debian/12-arm64v8.dockerfile
+> index 4da1b074aedb..c2617956ed77 100644
+> --- a/automation/build/debian/12-arm64v8.dockerfile
+> +++ b/automation/build/debian/12-arm64v8.dockerfile
+> @@ -10,6 +10,8 @@ RUN <<EOF
+>  #!/bin/bash
+>      set -eu
+>  
+> +    useradd --create-home user
+> +
+>      apt-get update
+>      DEPS=(
+>          # Xen
+> @@ -53,6 +55,7 @@ RUN <<EOF
+>          curl
+>          device-tree-compiler
+>          expect
+> +        fakeroot
+>          u-boot-qemu
+>          # for imagebuilder
+>          file
+> @@ -64,5 +67,5 @@ RUN <<EOF
+>      rm -rf /var/lib/apt/lists*
+>  EOF
+>  
+> -USER root
+> +USER user
+>  WORKDIR /build
+> diff --git a/automation/build/debian/12-x86_64.dockerfile b/automation/build/debian/12-x86_64.dockerfile
+> index e0ca8b7e9c91..98b23ea3eaa4 100644
+> --- a/automation/build/debian/12-x86_64.dockerfile
+> +++ b/automation/build/debian/12-x86_64.dockerfile
+> @@ -10,6 +10,8 @@ RUN <<EOF
+>  #!/bin/bash
+>      set -eu
+>  
+> +    useradd --create-home user
+> +
+>      apt-get update
+>      DEPS=(
+>          # Xen
+> @@ -54,6 +56,7 @@ RUN <<EOF
+>          # for qemu-alpine-x86_64-gcc
+>          busybox-static
+>          cpio
+> +        fakeroot
+>  
+>          # For *-efi jobs
+>          ovmf
+> @@ -64,5 +67,5 @@ RUN <<EOF
+>      rm -rf /var/lib/apt/lists*
+>  EOF
+>  
+> -USER root
+> +USER user
+>  WORKDIR /build
 
-The current configuration of Xen CI generates test binaries using "export"
-jobs in every pipeline. This unecessarily uses a large amount of storage
-and network traffic because artifacts are duplicated over each project and
-branch that uses this configuration.
+This breaks the xilinx hardware jobs both arm and x86 as they
+require root inside the container at the moment
 
-Instead, use a separate repository to store test binaries, then they can be
-retrieved using GitLab CI built-in functionality. A test job can pull
-binaries from another project job using the "needs" syntax. This will pull
-from the most recent successful job on the specified branch. However, it
-will not wait for a currently running job to finish and will instead pull
-from previous jobs. This should not be a problem as we expect to change the
-binaries only rarely.
 
-Victor Lira (1):
-  build: add x86_64 xen artifacts (argo)
+> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+> index 42baa82fe36f..71f2beb68c4f 100644
+> --- a/automation/gitlab-ci/test.yaml
+> +++ b/automation/gitlab-ci/test.yaml
+> @@ -1,6 +1,10 @@
+>  .test-jobs-common:
+>    stage: test
+>    image: registry.gitlab.com/xen-project/xen/${CONTAINER}
+> +  variables:
+> +    # Clone xen as the user in the docker images, not root
+> +    # See https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1736
+> +    FF_DISABLE_UMASK_FOR_DOCKER_EXECUTOR: true
+>  
+>  .arm64-test-needs: &arm64-test-needs
+>    - alpine-3.18-arm64-rootfs-export
+> diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
+> index 1ff689b577e3..2660403ab2b8 100755
+> --- a/automation/scripts/qemu-alpine-x86_64.sh
+> +++ b/automation/scripts/qemu-alpine-x86_64.sh
+> @@ -29,6 +29,7 @@ find . | cpio --create --format='newc' | gzip > ../initrd.cpio.gz
+>  cd ..
+>  
+>  # initrd.tar.gz is Dom0 rootfs
+> +fakeroot <<EOF
+>  mkdir -p rootfs
+>  cd rootfs
+>  tar xvzf ../initrd.tar.gz
+> @@ -63,7 +64,8 @@ chmod +x etc/local.d/xen.start
+>  echo "rc_verbose=yes" >> etc/rc.conf
+>  # rebuild Dom0 rootfs
+>  find . |cpio -H newc -o|gzip > ../xen-rootfs.cpio.gz
+> -cd ../..
+> +EOF
+> +cd ..
 
- .gitlab-ci.yml                         | 50 ++++++++++++++++++++
- binaries/.gitignore                    |  3 ++
- images/Makefile                        | 20 ++++++++
- images/alpine/x86_64-build.dockerfile  | 31 +++++++++++++
- images/alpine/x86_64-rootfs.dockerfile |  4 ++
- scripts/x86_64-argo-linux.sh           | 63 ++++++++++++++++++++++++++
- scripts/x86_64-kernel-linux.sh         | 31 +++++++++++++
- scripts/x86_64-rootfs-alpine.sh        | 58 ++++++++++++++++++++++++
- 8 files changed, 260 insertions(+)
- create mode 100644 .gitlab-ci.yml
- create mode 100644 binaries/.gitignore
- create mode 100644 images/Makefile
- create mode 100644 images/alpine/x86_64-build.dockerfile
- create mode 100644 images/alpine/x86_64-rootfs.dockerfile
- create mode 100755 scripts/x86_64-argo-linux.sh
- create mode 100755 scripts/x86_64-kernel-linux.sh
- create mode 100755 scripts/x86_64-rootfs-alpine.sh
+I admit I am not a fan of this as it makes the script harder to read.
+Given that almost everything on this script and similar scripts is
+better run as root because it is all about repackaging cpio archivies,
+instead I would do this:
 
---
-2.25.1
+diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
+index 2660403ab2..7c0ec01e05 100755
+--- a/automation/scripts/qemu-alpine-x86_64.sh
++++ b/automation/scripts/qemu-alpine-x86_64.sh
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/usr/bin/fakeroot
+ 
+ set -ex -o pipefail
+ 
 
+Keeping in mind that anyone could push a branch without fakeroot to
+their personal tree triggering a gitlab-ci pipeline, the advantage of
+using fakeroot would be if we force the container execution envinronment
+(gitlab runner) to run containers as user. This is not currently the
+configuration we have. As of now, it doesn't bring an advantage.
+
+Given that the gitlab runners are in flux at the moment, and that this
+patch cannot work with the xilinx runners, I would ask you to please
+hold on on this patch until the gitlab runners are settled (~1 month).
+
+
+
+>  cat >> binaries/pxelinux.0 << EOF
+>  #!ipxe
+> diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
+> index 4d22a124df11..8f9bfd620ee3 100755
+> --- a/automation/scripts/qemu-smoke-dom0-arm64.sh
+> +++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
+> @@ -27,8 +27,10 @@ cd initrd
+>  find . | cpio --create --format='newc' | gzip > ../initrd.cpio.gz
+>  cd ..
+>  
+> -mkdir -p rootfs
+> +fakeroot <<EOF
+> +mkdir rootfs
+>  cd rootfs
+> +
+>  tar xvzf ../initrd.tar.gz
+>  mkdir proc
+>  mkdir run
+> @@ -58,7 +60,8 @@ xl create -c /root/test.cfg
+>  chmod +x etc/local.d/xen.start
+>  echo "rc_verbose=yes" >> etc/rc.conf
+>  find . |cpio -H newc -o|gzip > ../xen-rootfs.cpio.gz
+> -cd ../..
+> +EOF
+> +cd ..
+>  
+>  # XXX QEMU looks for "efi-virtio.rom" even if it is unneeded
+>  curl -fsSLO https://github.com/qemu/qemu/raw/v5.2.0/pc-bios/efi-virtio.rom
+> diff --git a/automation/scripts/qemu-smoke-dom0less-arm64.sh b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+> index 83e1866ca6c5..2d60f22d68b7 100755
+> --- a/automation/scripts/qemu-smoke-dom0less-arm64.sh
+> +++ b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+> @@ -112,7 +112,8 @@ find . | cpio --create --format='newc' | gzip > ../binaries/initrd
+>  cd ..
+>  
+>  # DOM0 rootfs
+> -mkdir -p rootfs
+> +fakeroot <<EOF
+> +mkdir rootfs
+>  cd rootfs
+>  tar xzf ../binaries/initrd.tar.gz
+>  mkdir proc
+> @@ -141,7 +142,7 @@ ${dom0_check}
+>  chmod +x etc/local.d/xen.start
+>  echo "rc_verbose=yes" >> etc/rc.conf
+>  find . | cpio -H newc -o | gzip > ../binaries/dom0-rootfs.cpio.gz
+> -cd ..
+> +EOF
+>  
+>  # ImageBuilder
+>  echo 'MEMORY_START="0x40000000"
+> -- 
+> 2.45.2
+> 
 
