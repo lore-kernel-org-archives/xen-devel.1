@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4055CFA451
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 10:04:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825102.1239322 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B411CFA457
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Oct 2024 10:04:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825103.1239346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3uht-00066T-QO; Thu, 24 Oct 2024 10:04:41 +0000
+	id 1t3uhw-0006wB-9H; Thu, 24 Oct 2024 10:04:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825102.1239322; Thu, 24 Oct 2024 10:04:41 +0000
+Received: by outflank-mailman (output) from mailman id 825103.1239346; Thu, 24 Oct 2024 10:04:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t3uht-00064G-Ed; Thu, 24 Oct 2024 10:04:41 +0000
-Received: by outflank-mailman (input) for mailman id 825102;
- Thu, 24 Oct 2024 10:04:40 +0000
+	id 1t3uhw-0006vv-5Z; Thu, 24 Oct 2024 10:04:44 +0000
+Received: by outflank-mailman (input) for mailman id 825103;
+ Thu, 24 Oct 2024 10:04:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dalx=RU=cloud.com=javi.merino@srs-se1.protection.inumbo.net>)
- id 1t3uhs-0005hp-0X
- for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 10:04:40 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
+ id 1t3uht-0005hp-BS
+ for xen-devel@lists.xenproject.org; Thu, 24 Oct 2024 10:04:41 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 609a36d6-91ef-11ef-99a3-01e77a169b0f;
- Thu, 24 Oct 2024 12:04:37 +0200 (CEST)
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-539e690479cso754391e87.3
- for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 03:04:37 -0700 (PDT)
+ id 61c814fe-91ef-11ef-99a3-01e77a169b0f;
+ Thu, 24 Oct 2024 12:04:39 +0200 (CEST)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-539ee1acb86so800338e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Oct 2024 03:04:39 -0700 (PDT)
 Received: from localhost.localdomain ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cb66c72866sm5482506a12.95.2024.10.24.03.04.36
+ 4fb4d7f45d1cf-5cb66c72866sm5482506a12.95.2024.10.24.03.04.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 03:04:36 -0700 (PDT)
+ Thu, 24 Oct 2024 03:04:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,87 +47,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 609a36d6-91ef-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 61c814fe-91ef-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1729764277; x=1730369077; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1729764279; x=1730369079; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LQWmvDlLDweK6ujseIAxFWUbMQufNhICWPD0ghEGPJ8=;
-        b=Tg+eaA9o6JthTTtnFFmyxTKIDNtk4tdOVpM6vncyP41BCqTdJNx0FD0vafZDlHf6/q
-         PMilH1m666sckCvwmy8F9Xh8NWE2Hdx7kivVbmK4kor35ArdbVNFKc5twliNubLcYPIf
-         dFHEocGoLtY//fX7h0zFpGc97q5gmvqyZZIPo=
+        bh=pcIExxCBgl8rLcW0jJPs5XFDwtrNHzge9tk1pTltCDM=;
+        b=ZTIL3peis0GHN2Yz6R0KDc5EhRSbV91sMTQiNDTcQXjkKo+lJMvlYcDrX/bwPj+/RA
+         tn938GBMkFOoS1j5eO+5Sr3uSS5b+nH2cB11fpMGZWtHVfjQaRmASe3xaGnUuegiR8C/
+         wWA72KoGmxvqLuTNXNcFOfqWOSVzQpLqpHZnk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729764277; x=1730369077;
+        d=1e100.net; s=20230601; t=1729764279; x=1730369079;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LQWmvDlLDweK6ujseIAxFWUbMQufNhICWPD0ghEGPJ8=;
-        b=qHTc82W4qSXbYLBagCtQXJ+BXSGBUbMqGeBpBZGAXVNsB86rKhTz8ncUfsn8ZyFIoG
-         nJZBnQhG3UOyEj53pt9YqIpa7s2wArQVkY7GK56vUlHxBWqMEEcOTKNQCf63Vo2603nC
-         YLajIMoLhT2flSh024u796f/K5BYQ6NPdr/xMT/Y5z/R60QZkxNBAyMZYLWXAjfBiHyk
-         ikRT54PHKZJIwTFqSBhD5MYJV7KqMk5qvPDTp9dV2m6EYULp3IUxoIwCwQcU5y7eaYdp
-         2zhhz2HFRyFOj3+vjqI4ivZxfz9PBKMiwRe2DKE3kl8VPR0+gkjpCsGMr+dxyV8P7xb+
-         lJcA==
-X-Gm-Message-State: AOJu0Yzi4p4DP5zGBGROkyy59caVTvltxLdclp/W63Fju2X/RoZGh+ks
-	DSXwi/ZvKDaJ4GAk/ImZ0wwm7/0fSU0Rque0IdO91lcJUzGK1F46OnRfvycwiuOMahlBS0ltiaH
-	7T1E=
-X-Google-Smtp-Source: AGHT+IHivd6x7FEdY3knn+Ey/pTnjQIOBE6BovxR+ERumwEH7ARZ/OZwbEEuuJNPlrNoyrODUcZZcA==
-X-Received: by 2002:a05:6512:400d:b0:539:964c:16d4 with SMTP id 2adb3069b0e04-53b1a347b64mr3085470e87.36.1729764276837;
-        Thu, 24 Oct 2024 03:04:36 -0700 (PDT)
+        bh=pcIExxCBgl8rLcW0jJPs5XFDwtrNHzge9tk1pTltCDM=;
+        b=QqCk46VZEIb6mUcDbePOtFd2rBw9Xl47rEqRARyyVVpjEq/dPyOuGYNe9rxd5eryaU
+         uFaXyHK/oXMOZeQcqp02mlv5SfIoa6ENMc/NOQnnKQJYGpw8/6XLbYYEe2DHf/Zcg9W5
+         ehKOhyc2ej/zYK+wNHd0YEKhNR1FJf+VyoCFhxYRCuo90/orq0TYnI4u3lpcUTYB5KFf
+         S5GC0hZIDncee25TGMCsBazZcAJzpmj2Mmr6aXkGgBpDPqfGsSbAwTi+nvjXtBp9glO1
+         z8e4ycOPwslrX7VXD1Ne2pN1+tZAItnuVb3cAFlZG+WWOg48cVrhVYIrvOEjwWI9GZA8
+         CEkA==
+X-Gm-Message-State: AOJu0YyygXLr9JNt8vi0lLY9jVX5hzVzqMRJ4gqOmZ0yKYjmm5vjOERH
+	eNt9TIOTTWy+HzuiVWhFAjxyg2M8FY+OOI3LZYBnBazD8YowVprQfulEmNhSlC0B5wJtJGZAwr+
+	+uWU=
+X-Google-Smtp-Source: AGHT+IHQijJSkYV+57Obt0d79pCzGC1jykeNC/JeuQYqLbS7uBPgBSPhvEinZde7rrhzZq+N3C0KQA==
+X-Received: by 2002:a05:6512:104a:b0:530:aa09:b6bf with SMTP id 2adb3069b0e04-53b1a303108mr3646425e87.24.1729764278793;
+        Thu, 24 Oct 2024 03:04:38 -0700 (PDT)
 From: Javi Merino <javi.merino@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Javi Merino <javi.merino@cloud.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH v1 2/6] CI: Refresh the Debian 12 x86_32 container
-Date: Thu, 24 Oct 2024 11:04:17 +0100
-Message-ID: <f542e8157d7fe419d7b274d749bffde086a28f32.1729760501.git.javi.merino@cloud.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [XEN PATCH v1 5/6] CI: Refresh the Debian 12 cppcheck container
+Date: Thu, 24 Oct 2024 11:04:20 +0100
+Message-ID: <a34d46bde06bab872c19119a7466ac8942a0c137.1729760501.git.javi.merino@cloud.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <cover.1729760501.git.javi.merino@cloud.com>
 References: <cover.1729760501.git.javi.merino@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Rework the container to be non-root, use heredocs for readability, and
-use apt-get --no-install-recommends to keep the size down.  Rename the
-job to x86_32, to be consistent with XEN_TARGET_ARCH and the
-naming scheme of all the other CI jobs:
-${VERSION}-${ARCH}-${BUILD_NAME}
+Rework the container to build and run cppcheck as a normal user.  Use
+heredocs for readability and use apt-get --no-install-recommends to
+keep the size down.
 
-Remove build dependencies for building QEMU, as we don't do it since
-e305256e69b1 ("CI: Stop building QEMU in general").
+Changed the libpcre3-dev dependency to libpcre3, as the -dev package
+is only needed for building, not for running.
 
-Remove build dependencies for the documentation as we don't have to
-build it for every single arch.
-
-This reduces the size of the container from 2.22GB to 1.32Gb.
+With the cleanups, the size of the container is reduced from 882MB to
+782MB.
 
 Signed-off-by: Javi Merino <javi.merino@cloud.com>
 ---
- automation/build/debian/12-x86_32.dockerfile  | 51 +++++++++++++++++++
- .../build/debian/bookworm-i386.dockerfile     | 50 ------------------
- automation/gitlab-ci/build.yaml               |  8 +--
- automation/scripts/containerize               |  2 +-
- 4 files changed, 56 insertions(+), 55 deletions(-)
- create mode 100644 automation/build/debian/12-x86_32.dockerfile
- delete mode 100644 automation/build/debian/bookworm-i386.dockerfile
 
-diff --git a/automation/build/debian/12-x86_32.dockerfile b/automation/build/debian/12-x86_32.dockerfile
+I tried updating cppcheck to the latest upstream version (2.15.0) but
+it reports misra errors like:
+
+    xen/common/sched/cpupool.c(0,0):internalError:error:Bailing out from analysis: Checking file failed: Failed to execute addon 'misra' - exitcode is 1
+    [...]
+    xen/arch/arm/decode.c(220,10):misra-config:error:Because of missing configuration, misra checking is incomplete. There can be false negatives! Variable 'type' is unknown
+
+The output log xen-cppcheck.txt from job #8164274901 which uses
+cppcheck 2.15.0 can be found at:
+https://gitlab.com/xen-project/people/javimerino/xen/-/jobs/8164274901/artifacts/browse
+
+Therefore, I'm keeping cppcheck at 2.7, which aligns with what
+docs/misra/cppcheck.txt says is the last tested version.
+
+ .../debian/12-arm64v8-cppcheck.dockerfile     | 80 +++++++++++++++++++
+ .../build/debian/bookworm-cppcheck.dockerfile | 54 -------------
+ automation/gitlab-ci/build.yaml               | 12 +--
+ automation/scripts/containerize               |  2 +-
+ 4 files changed, 87 insertions(+), 61 deletions(-)
+ create mode 100644 automation/build/debian/12-arm64v8-cppcheck.dockerfile
+ delete mode 100644 automation/build/debian/bookworm-cppcheck.dockerfile
+
+diff --git a/automation/build/debian/12-arm64v8-cppcheck.dockerfile b/automation/build/debian/12-arm64v8-cppcheck.dockerfile
 new file mode 100644
-index 000000000000..d3c67a256212
+index 000000000000..a839d4c57bda
 --- /dev/null
-+++ b/automation/build/debian/12-x86_32.dockerfile
-@@ -0,0 +1,51 @@
++++ b/automation/build/debian/12-arm64v8-cppcheck.dockerfile
+@@ -0,0 +1,80 @@
 +# syntax=docker/dockerfile:1
-+FROM --platform=linux/i386 debian:bookworm
++FROM --platform=linux/arm64/v8 debian:bookworm AS builder
++
++ENV DEBIAN_FRONTEND=noninteractive
++ENV CPPCHECK_VERSION=2.7
++
++# dependencies for cppcheck build
++RUN <<EOF
++#!/bin/bash
++    set -eu
++
++    apt-get update
++    DEPS=(
++        build-essential
++        ca-certificates
++        curl
++        libpcre3-dev
++        python-is-python3
++    )
++
++    apt-get -y --no-install-recommends install "${DEPS[@]}"
++
++    rm -rf /var/lib/apt/lists*
++EOF
++
++RUN useradd --home /build --create-home user
++
++WORKDIR /build
++USER user
++
++# cppcheck release build (see cppcheck readme.md)
++RUN <<EOF
++#!/bin/bash
++    set -eu
++
++    curl -fsSL https://github.com/danmar/cppcheck/archive/"$CPPCHECK_VERSION".tar.gz | tar xvz
++    cd cppcheck-"$CPPCHECK_VERSION"
++
++    MAKE_OPTS=(
++        MATCHCOMPILER=yes
++        DESTDIR=/build/out
++        FILESDIR="/usr/share/cppcheck"
++        HAVE_RULES=yes CXXFLAGS="-O2 -DNDEBUG -Wall -Wno-sign-compare -Wno-unused-function"
++    )
++    make install -j$(nproc) "${MAKE_OPTS[@]}"
++EOF
++
++FROM --platform=linux/arm64/v8 debian:bookworm
++COPY --from=builder /build/out/usr/bin/cppcheck /usr/bin/cppcheck
++COPY --from=builder /build/out/usr/share/cppcheck /usr/share/cppcheck
++
 +LABEL maintainer.name="The Xen Project" \
 +      maintainer.email="xen-devel@lists.xenproject.org"
 +
 +ENV DEBIAN_FRONTEND=noninteractive
 +ENV USER root
 +
-+# build depends
++# dependencies for cppcheck analysis including Xen-only build/cross-build
 +RUN <<EOF
 +#!/bin/bash
 +    set -eu
@@ -136,48 +197,57 @@ index 000000000000..d3c67a256212
 +
 +    apt-get update
 +    DEPS=(
-+        # Xen
 +        bison
 +        build-essential
-+        checkpolicy
-+        clang
++        python-is-python3
++        libpcre3
 +        flex
-+
-+        # Tools (general)
-+        ca-certificates
-+        git-core
-+        pkg-config
-+        wget
-+        # libacpi
-+        acpica-tools
-+        # libxl
-+        uuid-dev
-+        libyajl-dev
-+        # xentop
-+        libncurses5-dev
-+        # Python bindings
-+        python3-dev
-+        python3-setuptools
-+        # Ocaml bindings/oxenstored
-+        ocaml-nox
-+        ocaml-findlib
++        gcc-arm-linux-gnueabihf
++        gcc-x86-64-linux-gnu
 +    )
-+    apt-get -y --no-install-recommends install "${DEPS[@]}"
-+
++    apt-get --yes --no-install-recommends install "${DEPS[@]}"
 +    rm -rf /var/lib/apt/lists*
 +EOF
 +
 +USER user
 +WORKDIR /build
-+ENTRYPOINT ["linux32"]
-diff --git a/automation/build/debian/bookworm-i386.dockerfile b/automation/build/debian/bookworm-i386.dockerfile
+diff --git a/automation/build/debian/bookworm-cppcheck.dockerfile b/automation/build/debian/bookworm-cppcheck.dockerfile
 deleted file mode 100644
-index 66fa3121c54e..000000000000
---- a/automation/build/debian/bookworm-i386.dockerfile
+index fe4cd4a1aaab..000000000000
+--- a/automation/build/debian/bookworm-cppcheck.dockerfile
 +++ /dev/null
-@@ -1,50 +0,0 @@
+@@ -1,54 +0,0 @@
 -# syntax=docker/dockerfile:1
--FROM --platform=linux/i386 debian:bookworm
+-FROM --platform=linux/arm64/v8 debian:bookworm AS builder
+-
+-ENV DEBIAN_FRONTEND=noninteractive
+-ENV CPPCHECK_VERSION=2.7
+-ENV USER root
+-
+-# dependencies for cppcheck build
+-RUN apt-get update && \
+-    apt-get --quiet --yes install \
+-        curl \
+-        build-essential \
+-        python-is-python3 \
+-        libpcre3-dev
+-
+-RUN mkdir /build
+-WORKDIR /build
+-
+-# cppcheck release build (see cppcheck readme.md)
+-RUN curl -fsSLO https://github.com/danmar/cppcheck/archive/"$CPPCHECK_VERSION".tar.gz && \
+-    tar xvzf "$CPPCHECK_VERSION".tar.gz && \
+-    cd cppcheck-"$CPPCHECK_VERSION" && \
+-    make install -j$(nproc) \
+-        MATCHCOMPILER=yes \
+-        FILESDIR=/usr/share/cppcheck \
+-        HAVE_RULES=yes CXXFLAGS="-O2 -DNDEBUG -Wall -Wno-sign-compare -Wno-unused-function"
+-
+-FROM --platform=linux/arm64/v8 debian:bookworm
+-COPY --from=builder /usr/bin/cppcheck /usr/bin/cppcheck
+-COPY --from=builder /usr/share/cppcheck /usr/share/cppcheck
+-
 -LABEL maintainer.name="The Xen Project" \
 -      maintainer.email="xen-devel@lists.xenproject.org"
 -
@@ -187,82 +257,70 @@ index 66fa3121c54e..000000000000
 -RUN mkdir /build
 -WORKDIR /build
 -
--ENTRYPOINT ["linux32"]
--
--# build depends
+-# dependencies for cppcheck analysis including Xen-only build/cross-build
 -RUN apt-get update && \
 -    apt-get --quiet --yes install \
 -        build-essential \
--        zlib1g-dev \
--        libncurses5-dev \
--        python3-dev \
--        python3-setuptools \
--        uuid-dev \
--        libyajl-dev \
--        libaio-dev \
--        libglib2.0-dev \
--        clang \
--        libpixman-1-dev \
--        pkg-config \
+-        python-is-python3 \
+-        libpcre3-dev \
 -        flex \
 -        bison \
--        acpica-tools \
--        bin86 \
--        bcc \
--        liblzma-dev \
--        libc6-dev \
--        libnl-3-dev \
--        ocaml-nox \
--        libfindlib-ocaml-dev \
--        markdown \
--        transfig \
--        pandoc \
--        checkpolicy \
--        wget \
--        git \
--        nasm \
--        apt-transport-https \
+-        gcc-arm-linux-gnueabihf \
+-        gcc-x86-64-linux-gnu \
 -        && \
 -        apt-get autoremove -y && \
 -        apt-get clean && \
 -        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
 diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index eb2c23619a2c..1b322044ab19 100644
+index 380021d49f12..c57882b8846e 100644
 --- a/automation/gitlab-ci/build.yaml
 +++ b/automation/gitlab-ci/build.yaml
-@@ -569,15 +569,15 @@ debian-12-x86_64-gcc-randconfig:
-     CONTAINER: debian:12-x86_64
-     RANDCONFIG: y
+@@ -488,26 +488,26 @@ yocto-qemux86-64:
  
--debian-bookworm-32-clang-debug:
-+debian-12-x86_32-clang-debug:
-   extends: .clang-x86-32-build-debug
+ # Cppcheck analysis jobs
+ 
+-debian-bookworm-gcc-cppcheck:
++debian-12-x86_64-gcc-cppcheck:
+   extends: .gcc-x86-64-cross-build
    variables:
--    CONTAINER: debian:bookworm-i386
-+    CONTAINER: debian:12-x86_32
+-    CONTAINER: debian:bookworm-cppcheck
++    CONTAINER: debian:12-arm64v8-cppcheck
+     CROSS_COMPILE: /usr/bin/x86_64-linux-gnu-
+     CPPCHECK: y
+     HYPERVISOR_ONLY: y
  
--debian-bookworm-32-gcc-debug:
-+debian-12-x86_32-gcc-debug:
-   extends: .gcc-x86-32-build-debug
+-debian-bookworm-gcc-arm32-cppcheck:
++debian-12-arm32-gcc-cppcheck:
+   extends: .gcc-arm32-cross-build
    variables:
--    CONTAINER: debian:bookworm-i386
-+    CONTAINER: debian:12-x86_32
+-    CONTAINER: debian:bookworm-cppcheck
++    CONTAINER: debian:12-arm64v8-cppcheck
+     CROSS_COMPILE: /usr/bin/arm-linux-gnueabihf-
+     CPPCHECK: y
+     HYPERVISOR_ONLY: y
  
- fedora-40-x86_64-gcc:
-   extends: .gcc-x86-64-build
+-debian-bookworm-gcc-arm64-cppcheck:
++debian-12-arm64-gcc-cppcheck:
+   extends: .gcc-arm64-build
+   variables:
+-    CONTAINER: debian:bookworm-cppcheck
++    CONTAINER: debian:12-arm64v8-cppcheck
+     CPPCHECK: y
+     HYPERVISOR_ONLY: y
+ 
 diff --git a/automation/scripts/containerize b/automation/scripts/containerize
-index ea6e1a9b18f4..d72c22c103ff 100755
+index c9988bfe927d..e5502c81a759 100755
 --- a/automation/scripts/containerize
 +++ b/automation/scripts/containerize
-@@ -35,7 +35,7 @@ case "_${CONTAINER}" in
-     _bookworm-riscv64) CONTAINER="${BASE}/debian:12-riscv64" ;;
-     _bookworm-x86_64-gcc-ibt) CONTAINER="${BASE}/debian:12-x86_64-gcc-ibt" ;;
-     _bookworm|_bookworm-x86_64|_) CONTAINER="${BASE}/debian:12-x86_64" ;;
--    _bookworm-i386) CONTAINER="${BASE}/debian:bookworm-i386" ;;
-+    _bookworm-i386|_bookworm-x86_32) CONTAINER="${BASE}/debian:12-x86_32" ;;
-     _bookworm-arm64v8-arm32-gcc) CONTAINER="${BASE}/debian:bookworm-arm64v8-arm32-gcc" ;;
-     _bookworm-arm64v8) CONTAINER="${BASE}/debian:bookworm-arm64v8" ;;
-     _bookworm-cppcheck) CONTAINER="${BASE}/debian:bookworm-cppcheck" ;;
+@@ -38,7 +38,7 @@ case "_${CONTAINER}" in
+     _bookworm-i386|_bookworm-x86_32) CONTAINER="${BASE}/debian:12-x86_32" ;;
+     _bookworm-arm64v8-arm32-gcc) CONTAINER="${BASE}/debian:12-arm64v8-arm32-gcc" ;;
+     _bookworm-arm64v8) CONTAINER="${BASE}/debian:12-arm64v8" ;;
+-    _bookworm-cppcheck) CONTAINER="${BASE}/debian:bookworm-cppcheck" ;;
++    _bookworm-cppcheck) CONTAINER="${BASE}/debian:12-arm64v8-cppcheck" ;;
+     _opensuse-leap|_leap) CONTAINER="${BASE}/opensuse:leap-15.6-x86_64" ;;
+     _opensuse-tumbleweed|_tumbleweed) CONTAINER="${BASE}/opensuse:tumbleweed-x86_64" ;;
+     _xenial) CONTAINER="${BASE}/ubuntu:16.04-x86_64" ;;
 -- 
 2.45.2
 
