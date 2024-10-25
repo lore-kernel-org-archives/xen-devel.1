@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8611DD0C5FC
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 10:31:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825999.1240375 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DFA3D0C61B
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 14:47:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.826057.1240394 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4Haw-0005Dy-TK; Fri, 25 Oct 2024 10:31:02 +0000
+	id 1t4LaM-0002wj-Rh; Fri, 25 Oct 2024 14:46:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825999.1240375; Fri, 25 Oct 2024 10:31:02 +0000
+Received: by outflank-mailman (output) from mailman id 826057.1240394; Fri, 25 Oct 2024 14:46:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4Haw-0005Dr-QF; Fri, 25 Oct 2024 10:31:02 +0000
-Received: by outflank-mailman (input) for mailman id 825999;
- Fri, 25 Oct 2024 10:31:01 +0000
+	id 1t4LaM-0002wc-P6; Fri, 25 Oct 2024 14:46:42 +0000
+Received: by outflank-mailman (input) for mailman id 826057;
+ Fri, 25 Oct 2024 14:46:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hagD=RV=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t4Hav-0005BE-7O
- for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 10:31:01 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
+ id 1t4LaK-0002vA-OF
+ for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 14:46:40 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 397e7792-92bc-11ef-99a3-01e77a169b0f;
- Fri, 25 Oct 2024 12:30:58 +0200 (CEST)
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2fabb837ddbso29237541fa.1
- for <xen-devel@lists.xenproject.org>; Fri, 25 Oct 2024 03:30:59 -0700 (PDT)
+ id f02020ca-92df-11ef-99a3-01e77a169b0f;
+ Fri, 25 Oct 2024 16:46:37 +0200 (CEST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9428152c0so2439854a12.1
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Oct 2024 07:46:37 -0700 (PDT)
 Received: from [10.125.226.166] ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b1f02989bsm54774866b.80.2024.10.25.03.30.57
+ a640c23a62f3a-a9b30d6fdc5sm77872466b.163.2024.10.25.07.46.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Oct 2024 03:30:57 -0700 (PDT)
+ Fri, 25 Oct 2024 07:46:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 397e7792-92bc-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: f02020ca-92df-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1729852258; x=1730457058; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1729867597; x=1730472397; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=C5CkQd0BCM/pGul5I9/iyw5Q1vTMTxTJgG7VAFArIRE=;
-        b=mGz0Egw7B43jsXezb1TPDWXcWBAyXjzcOHimZwvce6Iq7GZomrzm3alP0oO4A/0L06
-         FzdWWsIPx/F404XUwen5Qj4w8EO3x7daArNHmZXTtEK9RKwQjUEN5hYhte2gkNKWniMm
-         doHME2w4B1/NVr+l+oc9rd7ZF2C0kVRhl0mjw=
+        bh=RsNLLDRKWTaCJ4d93PmSSMU/g7hkzJ7gZdeFBBZV5I4=;
+        b=YpEAflZnzDhsdWCB0pkOFLsVGOEvhnlgS23eKL7lQp3qYdBvnXZew7hbh69R7TXkmn
+         hE7nZ95QzsxSFrtcnszu84isKWhDswZjq5jd4nKBhxxXTK9PonUZ0ULEw+SSy91/+8Hi
+         U8eUYeqwRJmMwNFRJZyaQJD+cADROIbuO30ss=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729852258; x=1730457058;
+        d=1e100.net; s=20230601; t=1729867597; x=1730472397;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=C5CkQd0BCM/pGul5I9/iyw5Q1vTMTxTJgG7VAFArIRE=;
-        b=FP1cA0gDw4iVIO58rOU6GHF4Cx7P3Swt+soVQM92BdAFuIcXo15dTpeQ518LJ876kf
-         igytiv4eTttscu8Xg6NlimF1jir7pNl/Dl3FOHxxNSJBy9MG9VbvhMByv+Mdkqw+7y8z
-         SGVYsJTexij5ANO2Nsn0NySWhfjDbB8Y1XHjPe/BingJOOi43v/o/G6XCP9i+GrfFRKA
-         nzKZeH1Yz75SdLrkdccIvvzGA4nCyvNEAbvFM5VkIX/1RiDbhqPm1p8V0cHS30RaSC7a
-         OPxr06eOGkEYA7ZNAckaeeeTrj58xPFeFeDZFVLuTDJW18FrMA5iBetL95DqAWmDgVcc
-         DjHQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWAILX8Cq3UcOXMML5v+SYLUqGuI8QqCGHuXonwazM70b9ELaKNKnz/dMjdAKNP0O7g8Go3HWSeyOA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwYFh9TfQBM8iEjJSc/vm1GzR5ds95+bNdbIEnSI9vpMuWNofAY
-	Vss++WUylpmKXxwMS789tOgPHOuxmas9qPSJLrQC8XaT+pNsLYStoh7WpIgzzxw=
-X-Google-Smtp-Source: AGHT+IEAfPMf9p0bUmi+Xjiu7iOoy/yAN+Thgvmcq3WEobywbEfihu8PrkPyq3pyYSNWmAhedF/UjA==
-X-Received: by 2002:a05:6512:1282:b0:533:4785:82ab with SMTP id 2adb3069b0e04-53b1a315e50mr9246019e87.1.1729852258350;
-        Fri, 25 Oct 2024 03:30:58 -0700 (PDT)
-Message-ID: <8243b5b3-1615-4b46-80be-e1e0e8540be7@citrix.com>
-Date: Fri, 25 Oct 2024 11:30:55 +0100
+        bh=RsNLLDRKWTaCJ4d93PmSSMU/g7hkzJ7gZdeFBBZV5I4=;
+        b=f618qTUFN57KDYDtmiLqPZcdrzSDLU70wx4Wr1us+bs55xpSjh0QgeuXja15GbZKI9
+         i4ClCJF5ji+l3S6294flfLDFtXkZttxSP4TsRiFY58x/YC8ft3FQUbCN53e8HBAw5C5t
+         wxZ34owb46ZgEw1ZV/yu8cqak0ABcLBrRgvv/yAwxCwSI+vNyzsTfiv9Z483zf/h4bkq
+         UWCorI13M8V6p4TIKF/Cqsfe4sLIwxXqmyKitDhTBLuxrpKK3Ix/8k1pxQJbt3KJsfOF
+         VKqGr90OZmBPILReq/1OeQUP7MZbDs5lxDA/5+ttExiHSIJmXs7qq5JkI/KRjSQBb/nF
+         Lofg==
+X-Gm-Message-State: AOJu0YwgBfzlUPA19/Dv6NJj8LEJE4+QezHbi+3v4K81Qtqus3+RvTU2
+	sjg//due5z6SiLdLK3XRS+5efn+KT4UiSZmslutDrJRwiiy05ejP+RDRetVOfNE=
+X-Google-Smtp-Source: AGHT+IFMoW4HjIgIHYWftdnQ1RBMFu44iiHF3aP3ZjorsYxoRzWT9pd9u7vfxB02ObkUirt4pVGDnA==
+X-Received: by 2002:a17:906:dac2:b0:a99:5f2a:444d with SMTP id a640c23a62f3a-a9ad285ff6emr606667966b.56.1729867597009;
+        Fri, 25 Oct 2024 07:46:37 -0700 (PDT)
+Message-ID: <9cbbfe4c-ca22-42e4-94fc-873e177aa291@citrix.com>
+Date: Fri, 25 Oct 2024 15:46:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 01/13] xen/common: add cache coloring common code
-To: Carlo Nonato <carlo.nonato@minervasys.tech>,
- xen-devel@lists.xenproject.org
-Cc: andrea.bastoni@minervasys.tech, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Marco Solieri <marco.solieri@minervasys.tech>
-References: <20241025095014.42376-1-carlo.nonato@minervasys.tech>
- <20241025095014.42376-2-carlo.nonato@minervasys.tech>
+Subject: Re: [XEN PATCH v1 1/6] CI: Refresh the Debian 12 x86_64 container
+To: Javi Merino <javi.merino@cloud.com>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1729760501.git.javi.merino@cloud.com>
+ <288fcc10dbcbdab1c33ebfb95bedf2366ba64122.1729760501.git.javi.merino@cloud.com>
+ <f8452748-067d-48d3-8ed3-3adc98566aa3@citrix.com>
+ <opwqn4ewu3pvrmhoikglwzfzu7pwkiht7en4vtnmc755nxphvr@ilgcrk3bo2sa>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -133,35 +132,105 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <20241025095014.42376-2-carlo.nonato@minervasys.tech>
+In-Reply-To: <opwqn4ewu3pvrmhoikglwzfzu7pwkiht7en4vtnmc755nxphvr@ilgcrk3bo2sa>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 25/10/2024 10:50 am, Carlo Nonato wrote:
->  SUPPORT.md                        |   7 ++
->  docs/misc/cache-coloring.rst      | 116 ++++++++++++++++++++++++++++++
->  docs/misc/xen-command-line.pandoc |  37 ++++++++++
->  xen/common/Kconfig                |  22 ++++++
->  xen/common/Makefile               |   1 +
->  xen/common/keyhandler.c           |   3 +
->  xen/common/llc-coloring.c         | 111 ++++++++++++++++++++++++++++
->  xen/common/page_alloc.c           |   3 +
->  xen/include/xen/llc-coloring.h    |  36 ++++++++++
->  xen/include/xen/sched.h           |   5 ++
->  10 files changed, 341 insertions(+)
->  create mode 100644 docs/misc/cache-coloring.rst
->  create mode 100644 xen/common/llc-coloring.c
->  create mode 100644 xen/include/xen/llc-coloring.h
+On 24/10/2024 4:10 pm, Javi Merino wrote:
+> On Thu, Oct 24, 2024 at 03:04:10PM +0100, Andrew Cooper wrote:
+>> On 24/10/2024 11:04 am, Javi Merino wrote:
+>>> +
+>>> +    apt-get update
+>> apt-get -y
+> apt-get update refreshes the package lists.  -y doesn't do anything
+> here.  It is needed for "apt-get install" below but not for
+> apt-get update.  It would be needed for "apt-get upgrade", but
+> we don't.
 
-I see you've got cache-coloring.rst which is great, but it's not wired
-into the toctree.
+Hmm ok.  We might want to adjust the others to match then.
 
-We do have real Sphinx docs, https://xenbits.xen.org/docs/latest/
-rendered from the tree.  For now, feel free to put it in Unsorted Documents.
+>
+>>> +    DEPS=(
+>>> +        # Xen
+>>> +        bison
+>>> +        build-essential
+>>> +        checkpolicy
+>>> +        clang
+>>> +        flex
+>>> +
+>>> +        # Tools (general)
+>>> +        ca-certificates
+>> Interestingly, we've gained ca-certificates and dropped apt-transport-https.
+> ca-certificates is needed for curl, wget or anything that tries to
+> validate tls certificates.  It is a Recommends of libcurl, as
+> curl by default validates the ca certificate of https servers.
+>
+>> ca-certificates is a side effect of --no-install-recommends, so is
+>> fine.  I recall there being a specific reason why we needed
+>> apt-transport-https, but I can't recall why exactly.  Something about
+>> the LetsEncrypt Cert used by xenbits IIRC.
+> I dropped apt-transport-https because it doesn't make sense to have
+> it.  apt-transport-https allows apt to access package repositories over https,
+> but we were installing alongside all the other packages.  apt is never
+> used again, so giving it the ability to install packages over https is
+> pointless.
 
-Per the root COPYING file, Sphinx docs are licensed CC-BY-4.0.  Please
-include an SPDX tag, as you don't have one currently (see other rst
-files for how.)
+That is, as they say, an assumption.
+
+fe746c26c0d2 ("automation/gitlab: add https transport support to Debian
+images")
+
+Although, subsequently the use of apt.llvm.org was removed:
+
+a6b1e2b80fe2 ("automation: Remove clang-8 from Debian unstable container")
+7a2983757216 ("CI: Remove llvm-8 from the Debian Stretch container")
+
+So I guess we're back to being ok without it.
+>>> +        expect
+>> Expect is only for the test phase, so should move later.
+> I put it here because ./configure checks for it.
+
+It does?
+
+That's not necessary/expected.
+
+>> Any decompressor which we don't find a suitable devel package gets the
+>> hypervisor form instead.
+>>
+>>> +        # To build the documentation
+>>> +        pandoc
+>> I know we had pandoc before, but I'd like to drop it.
+>>
+>> I'm intending to turn off docs generally, and do them separately in a
+>> single job that has *all* the docs build dependencies, not a misc subset
+>> that the build system happens not to complain at.
+> I had the "build the docs as its own job" in my TODO list and was
+> going to drop pandoc from this dockerfile then.  I can remove pandoc
+> in this commit if you prefer.
+
+Dropping packages from existing containers is complicated, because the
+container (name) is shared with prior branches.  You have to wait until
+the oldest version of Xen which still uses the package leaves testing
+(== leaves security support, == 3y), or we've backported changes to all
+branches to drop the dependency.
+
+The rename here gives us leeway because this change won't clobber any
+older branches in Xen, but I don't want to set the precedent.
+
+>
+>> I'm on the fence about the Qemu build things.  It's off by default now,
+>> but the container never previously had meson/ninja so it wouldn't have
+>> built either.  Perhaps leave them out until someone complains.
+> I thought I had removed them.  Is there anything else that needs to
+> go?
+
+These containers are both for CI and human use, so "what happens in CI"
+isn't the only consideration.
+
+But, given that Qemu didn't build in the old container anyway, I'm not
+overly fussed about keeping it working in the new container.
+
+So yes, please keep the deps removed.  We can always add them back in later.
 
 ~Andrew
 
