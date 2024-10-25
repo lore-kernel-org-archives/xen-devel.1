@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07B54D0C5FA
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 09:51:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825707.1240020 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56555D0C5F8
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 09:51:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825720.1240110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4Gy3-0006Ho-NC; Fri, 25 Oct 2024 09:50:51 +0000
+	id 1t4GyK-000132-59; Fri, 25 Oct 2024 09:51:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825707.1240020; Fri, 25 Oct 2024 09:50:51 +0000
+Received: by outflank-mailman (output) from mailman id 825720.1240110; Fri, 25 Oct 2024 09:51:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4Gy3-0006Hd-Jp; Fri, 25 Oct 2024 09:50:51 +0000
-Received: by outflank-mailman (input) for mailman id 825707;
- Fri, 25 Oct 2024 09:50:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t4GyJ-00012W-Uj; Fri, 25 Oct 2024 09:51:07 +0000
+Received: by outflank-mailman (input) for mailman id 825720;
+ Fri, 25 Oct 2024 09:51:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=r3YV=RV=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1t4Gy1-0005WM-Ex
- for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 09:50:49 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9cfd4f0c-92b6-11ef-a0bf-8be0dac302b0;
- Fri, 25 Oct 2024 11:50:48 +0200 (CEST)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5c9454f3bfaso2075309a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 25 Oct 2024 02:50:48 -0700 (PDT)
+ id 1t4GyI-0006YL-5v
+ for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 09:51:06 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a6435bd3-92b6-11ef-99a3-01e77a169b0f;
+ Fri, 25 Oct 2024 11:51:04 +0200 (CEST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5c96936065dso2020749a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Oct 2024 02:51:04 -0700 (PDT)
 Received: from carlo-ubuntu.home
  (dynamic-adsl-94-34-131-227.clienti.tiscali.it. [94.34.131.227])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb629e17dsm446938a12.34.2024.10.25.02.50.46
+ 4fb4d7f45d1cf-5cbb629e17dsm446938a12.34.2024.10.25.02.51.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Oct 2024 02:50:47 -0700 (PDT)
+ Fri, 25 Oct 2024 02:51:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,37 +48,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9cfd4f0c-92b6-11ef-a0bf-8be0dac302b0
+X-Inumbo-ID: a6435bd3-92b6-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1729849848; x=1730454648; darn=lists.xenproject.org;
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1729849863; x=1730454663; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wlFDDa4ZrFLlxW+3Ne0OFz0TY2bWLtIk8s4XXnwOgUE=;
-        b=fgFqoLUhH7yKwSUqTsOMknfrgXaogXC/UWRQioCPMlZL/U/8lN4WDW4qBj6ppIQ9zl
-         /ThWqtSzrr4/auKETCcwgqnXALHzxYcq495kQbKZMWT0qd6s2cir1oCDq2H1ig9vnOjw
-         Baj+mhThfzhf92SstMGCk3awzrvJVFYMyHr/4oitS7IHf3OByWdWc8WO0Defqv+2jJLP
-         z7QW98DELl3MyOFYbpFfQdIqVSsyapxWGY9eyRGxu99/wJ+e8/S9M3jY+SE9KIWrqoO0
-         9EXIhrPAdJyy5Bh8UMJvQIU7YV9jtHKqLG2NBtfmeT3wQJJk0qoDDnIqg9bVyLQ+bRzx
-         0Tvw==
+        bh=toVf4KyxnPp4I0KVV2BzelFhOJn1fnz1pf3z2+XUHUg=;
+        b=w6M+a5XImTiGIwFz2XvO1ypyB7bCo3wlK69zHVSarc4SPrfBy3Stt2tlwkDMVBElpF
+         nZlES3p+TxW0ZpZq44oXrHAXbU4DpnXZwF2RPyNYMa4b7Hz8DWmf0wMF3cF8MYyCIAsf
+         ahHyTGy0P+4b0UdwzdiXSjXar2MkJOBRmOJ0Lbsdx/FjM+NM07hr0F5Bc9CU9WeySLkG
+         ByBMSKnLGlL7wGb1R/elJ5oq91Wf0PacQvY9FjFNyEWaGfsGTg14F4V/Gvj1mh4PFNbK
+         +gTZ6OpKfgpDa+XUSCieiP7HViHNtgI8rubmqZJF6wvqSYF9OxQpG0eAfIza3kZq/lVP
+         NbNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729849848; x=1730454648;
+        d=1e100.net; s=20230601; t=1729849863; x=1730454663;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wlFDDa4ZrFLlxW+3Ne0OFz0TY2bWLtIk8s4XXnwOgUE=;
-        b=pEkkyyLTvrJCCrgbmJYSqzGKMkQ3dBrOv5MT0mEa9RFW69q4yhQdAqL45tjY5e5Ar7
-         vBXgyd3H+PfGHpRG+xj+KSx+S0BmEulk3GTGKamDh1kbXoFmdhXaUfOQKx+3BEHZQng5
-         79UnAmtwwCp4yWywGWXCHkvsFMvSoOenM7tOIquTsK5SCQbxZR60/vnMu6pZfgzm9MCm
-         CUohe+Q+ScWB0aA6KxIhJs6lE8XbkYHcaH48cfDHRMB6xykwdyILbzth7tGNOnhB00wa
-         hDkHh90jJOLnZQHcN6t8opR3N/5Sm8tnN/CYLTyS8LfNi/O+OrluoYvYP875xy80Jko2
-         h5NA==
-X-Gm-Message-State: AOJu0YzXBoKOT4Woqv24pchLqFmrrjpwghwDTKnSMOXyp8fSHMD68lMx
-	g0Xm6+s5dyBfgtn8WQiJJNxu8OZR7rS3CVNa2RISAzDW2U5SVqwkRd9z8OZhdkIO0DhX0l+JjxY
-	v9aY=
-X-Google-Smtp-Source: AGHT+IGxAYmK0QJKqvmeb5tU723EYBX93t201MQkqBzPZDKjqdVKEpylh1KM7X9tWhPVW5XHS5R85w==
-X-Received: by 2002:a05:6402:3906:b0:5c9:813a:b1b3 with SMTP id 4fb4d7f45d1cf-5cb8b2a94f7mr8445936a12.35.1729849847920;
-        Fri, 25 Oct 2024 02:50:47 -0700 (PDT)
+        bh=toVf4KyxnPp4I0KVV2BzelFhOJn1fnz1pf3z2+XUHUg=;
+        b=rr0pGNLuNup/pT1BR04YFsQUBBHgkg4/KISLLB/X3QDbX0a0dIDN5JFPHCmso0L+8D
+         T4AypT29n4sVm2b843D1o6gRjWBT5vcoiyWadAubu7onBoLL9Q8NK+siO1pfElx1hxa+
+         0k+MGhM2k8hZUXbAyWIMr+vhPBulgFEs1FbUgW/KfklbdtrK/+g+b4zRo6QjmYHG+X7f
+         fWKhrrYDBJRVFAJNi/vFCAjA/tqoZLnLBvM8vhLwIoehHr1Mc4I6j3BpVzhTfQgA/63X
+         pA8XQgFCa11Wzmqv1w5IeBapzc2C3IUwkwCHA7UGH1EJ8829cUKSqBhDEB+JlNx2t3tk
+         tYsw==
+X-Gm-Message-State: AOJu0YzrAkISF79KiyMBbCim+H0ESAuoEWGErSgJYLUXqDXqQL8lJg28
+	Fs5vc6SFQSvMac6SD+z5Zah0QsuRiW5tKa3v7hAX6SxUCrmZqhdOB6kOBfA0a11z4hD0L+GVMzA
+	PbZU=
+X-Google-Smtp-Source: AGHT+IEv/1ADfL9tXdzn9+EzoF/Kf/RBlXUk3bkSOjvUqhG6oc2zB/euhgD8ddJwwIQGP0lvjsLV/w==
+X-Received: by 2002:a17:907:7251:b0:a9a:26a5:d508 with SMTP id a640c23a62f3a-a9abf84b05bmr759593266b.9.1729849863396;
+        Fri, 25 Oct 2024 02:51:03 -0700 (PDT)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
@@ -88,244 +88,282 @@ Cc: andrea.bastoni@minervasys.tech,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v9 03/13] xen/arm: permit non direct-mapped Dom0 construction
-Date: Fri, 25 Oct 2024 11:50:04 +0200
-Message-ID: <20241025095014.42376-4-carlo.nonato@minervasys.tech>
+Subject: [PATCH v9 12/13] xen/arm: make consider_modules() available for xen relocation
+Date: Fri, 25 Oct 2024 11:50:13 +0200
+Message-ID: <20241025095014.42376-13-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241025095014.42376-1-carlo.nonato@minervasys.tech>
 References: <20241025095014.42376-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Cache coloring requires Dom0 not to be direct-mapped because of its non
-contiguous mapping nature, so allocate_memory() is needed in this case.
-8d2c3ab18cc1 ("arm/dom0less: put dom0less feature code in a separate module")
-moved allocate_memory() in dom0less_build.c. In order to use it
-in Dom0 construction bring it back to domain_build.c and declare it in
-domain_build.h.
+Cache coloring must physically relocate Xen in order to color the hypervisor
+and consider_modules() is a key function that is needed to find a new
+available physical address.
 
-Take the opportunity to adapt the implementation of allocate_memory() so
-that it uses the host layout when called on the hwdom, via
-find_unallocated_memory().
+672d67f339c0 ("xen/arm: Split MMU-specific setup_mm() and related code out")
+moved consider_modules() under arm32. Move it to mmu/setup.c and make it
+non-static so that it can be used outside.
 
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
 ---
 v9:
 - no changes
 v8:
-- patch adapted to new changes to allocate_memory()
+- patch adapted to new changes to consider_modules()
 v7:
-- allocate_memory() now uses the host layout when called on the hwdom
+- moved consider_modules() to arm/mmu/setup.c
 v6:
 - new patch
 ---
- xen/arch/arm/dom0less-build.c           | 44 ------------
- xen/arch/arm/domain_build.c             | 96 ++++++++++++++++++++++++-
- xen/arch/arm/include/asm/domain_build.h |  1 +
- 3 files changed, 94 insertions(+), 47 deletions(-)
+ xen/arch/arm/arm32/mmu/mm.c      | 95 +------------------------------
+ xen/arch/arm/include/asm/setup.h |  3 +
+ xen/arch/arm/mmu/setup.c         | 97 ++++++++++++++++++++++++++++++++
+ 3 files changed, 101 insertions(+), 94 deletions(-)
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index d93a85434e..67b1503647 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -49,50 +49,6 @@ bool __init is_dom0less_mode(void)
-     return ( !dom0found && domUfound );
+diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
+index 063611412b..c5fcd19291 100644
+--- a/xen/arch/arm/arm32/mmu/mm.c
++++ b/xen/arch/arm/arm32/mmu/mm.c
+@@ -9,6 +9,7 @@
+ #include <asm/fixmap.h>
+ #include <asm/static-memory.h>
+ #include <asm/static-shmem.h>
++#include <asm/setup.h>
+ 
+ static unsigned long opt_xenheap_megabytes __initdata;
+ integer_param("xenheap_megabytes", opt_xenheap_megabytes);
+@@ -31,100 +32,6 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
+     directmap_virt_end = XENHEAP_VIRT_START + nr_mfns * PAGE_SIZE;
  }
  
--static void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
+-/*
+- * Returns the end address of the highest region in the range s..e
+- * with required size and alignment that does not conflict with the
+- * modules from first_mod to nr_modules.
+- *
+- * For non-recursive callers first_mod should normally be 0 (all
+- * modules and Xen itself) or 1 (all modules but not Xen).
+- */
+-static paddr_t __init consider_modules(paddr_t s, paddr_t e,
+-                                       uint32_t size, paddr_t align,
+-                                       int first_mod)
 -{
--    struct membanks *mem = kernel_info_get_mem(kinfo);
--    unsigned int i;
--    paddr_t bank_size;
+-    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
+-#ifdef CONFIG_STATIC_SHM
+-    const struct membanks *shmem = bootinfo_get_shmem();
+-#endif
+-    const struct bootmodules *mi = &bootinfo.modules;
+-    int i;
+-    int nr;
 -
--    printk(XENLOG_INFO "Allocating mappings totalling %ldMB for %pd:\n",
--           /* Don't want format this as PRIpaddr (16 digit hex) */
--           (unsigned long)(kinfo->unassigned_mem >> 20), d);
+-    s = (s+align-1) & ~(align-1);
+-    e = e & ~(align-1);
 -
--    mem->nr_banks = 0;
--    bank_size = MIN(GUEST_RAM0_SIZE, kinfo->unassigned_mem);
--    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM0_BASE),
--                               bank_size) )
--        goto fail;
+-    if ( s > e ||  e - s < size )
+-        return 0;
 -
--    bank_size = MIN(GUEST_RAM1_SIZE, kinfo->unassigned_mem);
--    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM1_BASE),
--                               bank_size) )
--        goto fail;
--
--    if ( kinfo->unassigned_mem )
--        goto fail;
--
--    for( i = 0; i < mem->nr_banks; i++ )
+-    /* First check the boot modules */
+-    for ( i = first_mod; i < mi->nr_mods; i++ )
 -    {
--        printk(XENLOG_INFO "%pd BANK[%d] %#"PRIpaddr"-%#"PRIpaddr" (%ldMB)\n",
--               d,
--               i,
--               mem->bank[i].start,
--               mem->bank[i].start + mem->bank[i].size,
--               /* Don't want format this as PRIpaddr (16 digit hex) */
--               (unsigned long)(mem->bank[i].size >> 20));
+-        paddr_t mod_s = mi->module[i].start;
+-        paddr_t mod_e = mod_s + mi->module[i].size;
+-
+-        if ( s < mod_e && mod_s < e )
+-        {
+-            mod_e = consider_modules(mod_e, e, size, align, i+1);
+-            if ( mod_e )
+-                return mod_e;
+-
+-            return consider_modules(s, mod_s, size, align, i+1);
+-        }
 -    }
 -
--    return;
+-    /*
+-     * i is the current bootmodule we are evaluating, across all
+-     * possible kinds of bootmodules.
+-     *
+-     * When retrieving the corresponding reserved-memory addresses, we
+-     * need to index the reserved_mem bank starting from 0, and only counting
+-     * the reserved-memory modules. Hence, we need to use i - nr.
+-     */
+-    nr = mi->nr_mods;
+-    for ( ; i - nr < reserved_mem->nr_banks; i++ )
+-    {
+-        paddr_t r_s = reserved_mem->bank[i - nr].start;
+-        paddr_t r_e = r_s + reserved_mem->bank[i - nr].size;
 -
--fail:
--    panic("Failed to allocate requested domain memory."
--          /* Don't want format this as PRIpaddr (16 digit hex) */
--          " %ldKB unallocated. Fix the VMs configurations.\n",
--          (unsigned long)kinfo->unassigned_mem >> 10);
+-        if ( s < r_e && r_s < e )
+-        {
+-            r_e = consider_modules(r_e, e, size, align, i + 1);
+-            if ( r_e )
+-                return r_e;
+-
+-            return consider_modules(s, r_s, size, align, i + 1);
+-        }
+-    }
+-
+-#ifdef CONFIG_STATIC_SHM
+-    nr += reserved_mem->nr_banks;
+-    for ( ; i - nr < shmem->nr_banks; i++ )
+-    {
+-        paddr_t r_s, r_e;
+-
+-        r_s = shmem->bank[i - nr].start;
+-
+-        /* Shared memory banks can contain INVALID_PADDR as start */
+-        if ( INVALID_PADDR == r_s )
+-            continue;
+-
+-        r_e = r_s + shmem->bank[i - nr].size;
+-
+-        if ( s < r_e && r_s < e )
+-        {
+-            r_e = consider_modules(r_e, e, size, align, i + 1);
+-            if ( r_e )
+-                return r_e;
+-
+-            return consider_modules(s, r_s, size, align, i + 1);
+-        }
+-    }
+-#endif
+-
+-    return e;
 -}
 -
- #ifdef CONFIG_VGICV2
- static int __init make_gicv2_domU_node(struct kernel_info *kinfo)
- {
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 2c30792de8..71bdc2b89c 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -456,6 +456,7 @@ bool __init allocate_domheap_memory(struct domain *d, paddr_t tot_size,
- 
-     return true;
- }
-+#endif
- 
- static bool __init guest_map_pages(struct domain *d, struct page_info *pg,
-                                    unsigned int order, void *extra)
-@@ -508,7 +509,6 @@ bool __init allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
- 
-     return true;
- }
--#endif
- 
  /*
-  * When PCI passthrough is available we want to keep the
-@@ -1003,6 +1003,93 @@ out:
-     return res;
+  * Find a contiguous region that fits in the static heap region with
+  * required size and alignment, and return the end address of the region
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 64c227d171..0c560d141f 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -89,6 +89,9 @@ struct init_info
+     unsigned int cpuid;
+ };
+ 
++paddr_t consider_modules(paddr_t s, paddr_t e, uint32_t size, paddr_t align,
++                         int first_mod);
++
+ #endif
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
+index 9664e85ee6..1cf62390e3 100644
+--- a/xen/arch/arm/mmu/setup.c
++++ b/xen/arch/arm/mmu/setup.c
+@@ -6,7 +6,10 @@
+  */
+ 
+ #include <xen/init.h>
++#include <xen/lib.h>
+ #include <xen/libfdt/libfdt.h>
++#include <xen/libfdt/libfdt-xen.h>
++#include <xen/llc-coloring.h>
+ #include <xen/sections.h>
+ #include <xen/sizes.h>
+ #include <xen/vmap.h>
+@@ -222,6 +225,100 @@ static void xen_pt_enforce_wnx(void)
+     flush_xen_tlb_local();
  }
  
-+void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
++/*
++ * Returns the end address of the highest region in the range s..e
++ * with required size and alignment that does not conflict with the
++ * modules from first_mod to nr_modules.
++ *
++ * For non-recursive callers first_mod should normally be 0 (all
++ * modules and Xen itself) or 1 (all modules but not Xen).
++ */
++paddr_t __init consider_modules(paddr_t s, paddr_t e,
++                                uint32_t size, paddr_t align,
++                                int first_mod)
 +{
-+    struct membanks *mem = kernel_info_get_mem(kinfo);
-+    unsigned int i, nr_banks = 2;
-+    paddr_t bank_start, bank_size;
-+    struct membanks *hwdom_ext_regions = NULL;
++    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
++#ifdef CONFIG_STATIC_SHM
++    const struct membanks *shmem = bootinfo_get_shmem();
++#endif
++    const struct bootmodules *mi = &bootinfo.modules;
++    int i;
++    int nr;
 +
-+    printk(XENLOG_INFO "Allocating mappings totalling %ldMB for %pd:\n",
-+           /* Don't want format this as PRIpaddr (16 digit hex) */
-+           (unsigned long)(kinfo->unassigned_mem >> 20), d);
++    s = (s+align-1) & ~(align-1);
++    e = e & ~(align-1);
 +
-+    mem->nr_banks = 0;
++    if ( s > e ||  e - s < size )
++        return 0;
++
++    /* First check the boot modules */
++    for ( i = first_mod; i < mi->nr_mods; i++ )
++    {
++        paddr_t mod_s = mi->module[i].start;
++        paddr_t mod_e = mod_s + mi->module[i].size;
++
++        if ( s < mod_e && mod_s < e )
++        {
++            mod_e = consider_modules(mod_e, e, size, align, i+1);
++            if ( mod_e )
++                return mod_e;
++
++            return consider_modules(s, mod_s, size, align, i+1);
++        }
++    }
++
 +    /*
-+     * Use host memory layout for hwdom. Only case for this is when LLC coloring
-+     * is enabled.
++     * i is the current bootmodule we are evaluating, across all
++     * possible kinds of bootmodules.
++     *
++     * When retrieving the corresponding reserved-memory addresses, we
++     * need to index the reserved_mem bank starting from 0, and only counting
++     * the reserved-memory modules. Hence, we need to use i - nr.
 +     */
-+    if ( is_hardware_domain(d) )
++    nr = mi->nr_mods;
++    for ( ; i - nr < reserved_mem->nr_banks; i++ )
 +    {
-+        ASSERT(llc_coloring_enabled);
++        paddr_t r_s = reserved_mem->bank[i - nr].start;
++        paddr_t r_e = r_s + reserved_mem->bank[i - nr].size;
 +
-+        hwdom_ext_regions = xzalloc_flex_struct(struct membanks, bank,
-+                                                NR_MEM_BANKS);
-+        if ( !hwdom_ext_regions )
-+            goto fail;
-+        hwdom_ext_regions->max_banks = NR_MEM_BANKS;
-+
-+        if ( find_unallocated_memory(kinfo, hwdom_ext_regions) )
-+            goto fail;
-+
-+        nr_banks = hwdom_ext_regions->nr_banks;
-+    }
-+
-+    for ( i = 0; kinfo->unassigned_mem > 0 && nr_banks > 0; i++, nr_banks-- )
-+    {
-+        if ( is_hardware_domain(d) )
++        if ( s < r_e && r_s < e )
 +        {
-+            bank_start = hwdom_ext_regions->bank[i].start;
-+            bank_size = hwdom_ext_regions->bank[i].size;
++            r_e = consider_modules(r_e, e, size, align, i + 1);
++            if ( r_e )
++                return r_e;
 +
-+            if ( bank_size < min_t(paddr_t, kinfo->unassigned_mem, MB(128)) )
-+                continue;
++            return consider_modules(s, r_s, size, align, i + 1);
 +        }
-+        else
-+        {
-+            if ( i == 0 )
-+            {
-+                bank_start = GUEST_RAM0_BASE;
-+                bank_size = GUEST_RAM0_SIZE;
-+            }
-+            else if ( i == 1 )
-+            {
-+                bank_start = GUEST_RAM1_BASE;
-+                bank_size = GUEST_RAM1_SIZE;
-+            }
-+            else
-+                goto fail;
-+        }
-+
-+        bank_size = MIN(bank_size, kinfo->unassigned_mem);
-+        if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(bank_start), bank_size) )
-+            goto fail;
 +    }
 +
-+    if ( kinfo->unassigned_mem )
-+        goto fail;
-+
-+    for( i = 0; i < mem->nr_banks; i++ )
++#ifdef CONFIG_STATIC_SHM
++    nr += reserved_mem->nr_banks;
++    for ( ; i - nr < shmem->nr_banks; i++ )
 +    {
-+        printk(XENLOG_INFO "%pd BANK[%d] %#"PRIpaddr"-%#"PRIpaddr" (%ldMB)\n",
-+               d,
-+               i,
-+               mem->bank[i].start,
-+               mem->bank[i].start + mem->bank[i].size,
-+               /* Don't want format this as PRIpaddr (16 digit hex) */
-+               (unsigned long)(mem->bank[i].size >> 20));
++        paddr_t r_s, r_e;
++
++        r_s = shmem->bank[i - nr].start;
++
++        /* Shared memory banks can contain INVALID_PADDR as start */
++        if ( INVALID_PADDR == r_s )
++            continue;
++
++        r_e = r_s + shmem->bank[i - nr].size;
++
++        if ( s < r_e && r_s < e )
++        {
++            r_e = consider_modules(r_e, e, size, align, i + 1);
++            if ( r_e )
++                return r_e;
++
++            return consider_modules(s, r_s, size, align, i + 1);
++        }
 +    }
++#endif
 +
-+    xfree(hwdom_ext_regions);
-+    return;
-+
-+fail:
-+    panic("Failed to allocate requested domain memory."
-+          /* Don't want format this as PRIpaddr (16 digit hex) */
-+          " %ldKB unallocated. Fix the VMs configurations.\n",
-+          (unsigned long)kinfo->unassigned_mem >> 10);
++    return e;
 +}
 +
- static int __init handle_pci_range(const struct dt_device_node *dev,
-                                    uint64_t addr, uint64_t len, void *data)
- {
-@@ -1223,7 +1310,7 @@ int __init make_hypervisor_node(struct domain *d,
- 
-         ext_regions->max_banks = NR_MEM_BANKS;
- 
--        if ( is_domain_direct_mapped(d) )
-+        if ( domain_use_host_layout(d) )
-         {
-             if ( !is_iommu_enabled(d) )
-                 res = find_unallocated_memory(kinfo, ext_regions);
-@@ -2152,7 +2239,10 @@ static int __init construct_dom0(struct domain *d)
-     /* type must be set before allocate_memory */
-     d->arch.type = kinfo.type;
- #endif
--    allocate_memory_11(d, &kinfo);
-+    if ( is_domain_direct_mapped(d) )
-+        allocate_memory_11(d, &kinfo);
-+    else
-+        allocate_memory(d, &kinfo);
-     find_gnttab_region(d, &kinfo);
- 
-     rc = process_shm_chosen(d, &kinfo);
-diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
-index e712afbc7f..5d77af2e8b 100644
---- a/xen/arch/arm/include/asm/domain_build.h
-+++ b/xen/arch/arm/include/asm/domain_build.h
-@@ -11,6 +11,7 @@ bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
-                              alloc_domheap_mem_cb cb, void *extra);
- bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
-                           paddr_t tot_size);
-+void allocate_memory(struct domain *d, struct kernel_info *kinfo);
- int construct_domain(struct domain *d, struct kernel_info *kinfo);
- int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
- int make_chosen_node(const struct kernel_info *kinfo);
+ /*
+  * Boot-time pagetable setup.
+  * Changes here may need matching changes in head.S
 -- 
 2.43.0
 
