@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC901D0C5F8
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 09:51:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825709.1240040 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE223D0C5F9
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 09:51:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825704.1239989 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4Gy7-0006rs-CT; Fri, 25 Oct 2024 09:50:55 +0000
+	id 1t4Gxy-0005WZ-RD; Fri, 25 Oct 2024 09:50:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825709.1240040; Fri, 25 Oct 2024 09:50:55 +0000
+Received: by outflank-mailman (output) from mailman id 825704.1239989; Fri, 25 Oct 2024 09:50:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4Gy7-0006rh-9T; Fri, 25 Oct 2024 09:50:55 +0000
-Received: by outflank-mailman (input) for mailman id 825709;
- Fri, 25 Oct 2024 09:50:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t4Gxy-0005WS-Oh; Fri, 25 Oct 2024 09:50:46 +0000
+Received: by outflank-mailman (input) for mailman id 825704;
+ Fri, 25 Oct 2024 09:50:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=r3YV=RV=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1t4Gy5-0006YL-Ra
- for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 09:50:53 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9ee8349c-92b6-11ef-99a3-01e77a169b0f;
- Fri, 25 Oct 2024 11:50:52 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c96df52c52so2405614a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 25 Oct 2024 02:50:52 -0700 (PDT)
+ id 1t4Gxx-0005WM-PJ
+ for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 09:50:46 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9a6f3f57-92b6-11ef-a0bf-8be0dac302b0;
+ Fri, 25 Oct 2024 11:50:44 +0200 (CEST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9709c9b0cso2486630a12.1
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Oct 2024 02:50:44 -0700 (PDT)
 Received: from carlo-ubuntu.home
  (dynamic-adsl-94-34-131-227.clienti.tiscali.it. [94.34.131.227])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb629e17dsm446938a12.34.2024.10.25.02.50.50
+ 4fb4d7f45d1cf-5cbb629e17dsm446938a12.34.2024.10.25.02.50.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Oct 2024 02:50:50 -0700 (PDT)
+ Fri, 25 Oct 2024 02:50:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,37 +48,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ee8349c-92b6-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 9a6f3f57-92b6-11ef-a0bf-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1729849851; x=1730454651; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uTdYd5K2CTjFCeSluro77ToeU6d5yg4QCK/iJOgalpA=;
-        b=Llm0q+RDYM++Lw99V+I4ejs/nfJPA/9f8AP0t3rzH0ZC426uIw69Yw5YR8oSgoZKWb
-         uMDjvP+xjNAHDHcP0HdFJSoPgKtuVFz9oGDhVl6uGPprlrRTDRf3nudbItNL6OUXphxh
-         8BD4R+u6qlA0H4Tj54UnYDBPItFhmMYMVg0Z2zXF64aZ2bQEOH3gPaDKs0zMFXZ0cpaH
-         7SOKuOevuhkBaD0hEaNQNKSFWptKEZ+VvQ3Smc0FNgY7rshEwNWzpz+3mASH7tSsriyD
-         w7fp6m3dHuVwEE9jSzGAUnuxt9wBxR+IJeof+lHKnHYkWwT8CoieVHqFpgP38fGpp9nK
-         41MA==
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1729849844; x=1730454644; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ke/yS6So1QM0AcCFZ2Tb1fxlmH3VGK/VDCVyweqhKNE=;
+        b=S+JKHbVzszPHV8rYhZAjF1tNLuTvZ5lGap7E9x9OVghqHd6t0mICGCJVcfwYEAg+D4
+         dio8X3RmsuYEr1U54vdIsW7uwmaB+ZJQRRnOFKgTqdZfUx62Q7Ttu6SaeGLWaFEcH688
+         1GXygYbUAcd8a0RgyrC5B6cpcfMk81L175hDxU+DKFHBuVM2duYjAcEoprpukTWv1uDk
+         R0GFeyu2U7glJTxSrkGzHyZ/D2EDShLCZQpZ7xWHD0AWj0tHGhYjutPqC4mWQ3QNNg2J
+         DHSu5A75yE3w6N5mVRGqbonUKnXZvrzC/5ljia8ET7dtiE1wex1cw4qmhrjMab6WMnSz
+         /5qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729849851; x=1730454651;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uTdYd5K2CTjFCeSluro77ToeU6d5yg4QCK/iJOgalpA=;
-        b=cUBihtziQvcaISiI0VLgDC/WfiEaLT+aqN4rcdmtv2K9oq3BLdeFsYXHASLL34qsXj
-         ywrXblYs/UWTvIjI5xpeJcwxL4B9s6JWlLNE5GVX/tKyqTYxQt5r243jjBu/BOYaINUo
-         KC9TJ4Yf/N0wC6YBU41/fuFIVeCd6OgOzJ1a8WIaCdF7anTb84fHMZJG8mG/eRpoog0Z
-         /qoSugE1FNjYn5UHQjZTvC4BVAMExQS4EerNtizGUp2OlA6s7I7MCvOL7fLzB2lXbvNE
-         7irXVskLjpR761zaI1LSGhO/4wMcO99dTuElOHPKzomoTu27iJxfsfXfuJQH0UXBm7no
-         3tIA==
-X-Gm-Message-State: AOJu0Yx1T0Jh6IO5EMa9MTPCCoKkFfZ+6x5Kt91EZm8wP6ykcc5Imp2C
-	XFNUPiZIiympX/uCHj5vTGCFYoUfaWcgkJbSgZnOGMlZnhiFT7oDwF34S5Oth2rHB5OZ+xai8R2
-	ZGXw=
-X-Google-Smtp-Source: AGHT+IEmCBs2qBB8c5FwlYPtMWhhk9p/JN0qNrprgQm1RFKjE9KbnkVFpYdlviBCfm8v+pWRtROdjw==
-X-Received: by 2002:a05:6402:3888:b0:5c9:36c4:cead with SMTP id 4fb4d7f45d1cf-5cb8b26f218mr5771064a12.34.1729849851098;
-        Fri, 25 Oct 2024 02:50:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1729849844; x=1730454644;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ke/yS6So1QM0AcCFZ2Tb1fxlmH3VGK/VDCVyweqhKNE=;
+        b=BKong60wetRz6RsTG7kGB5P05g8FD1Di2YFRCbNBQRKgWcQxIWn/R43DgWP1y2GBbb
+         HfMpsF2eTNhQpRsa3Rw1DYVpn7ryWrCbINDKRNqEf9dNmJayCxH8l4/QsaD8U+wGVZrv
+         EWsbdLP7nN9E20WL6mJEDAKPAKeCTfzaNelf2ypBCFREbvMY0Xsq4lPegRJ1WmMOexiq
+         TuSRQdEJ6ldjamTyiXqtBHbqS06dCchI6ssiO2JZsjerRkdqEwS/cj0GgoIj7/bBR4Zb
+         iuRW3h7jGKRvk+Yr6qAUr7uBDUhP5f8a/+mL429Qpje5M45EWYGppk8v7XoLQy0g0w0c
+         anXQ==
+X-Gm-Message-State: AOJu0Yw5PxQPijJM2hdXF/kyGuAGu57bmhDCnISYHYrza1mNCo2gXI9t
+	KeiBMsAaGMoEc4pH2N02kq1LdIIhDl9Q9n4L5SAgdxXyTLOnDiHs5vx1jkkE0+5Kv/H7s420aj3
+	RbeQ=
+X-Google-Smtp-Source: AGHT+IHRJzha8WgD21edp2ffGdFT4OLhu6dKa7F32lU1cjOanpF+c0FLTWyH5RUZP75xSmySbWe1jw==
+X-Received: by 2002:a05:6402:26d4:b0:5c5:c4b9:e68f with SMTP id 4fb4d7f45d1cf-5cb8ac36d9cmr7784490a12.5.1729849843544;
+        Fri, 25 Oct 2024 02:50:43 -0700 (PDT)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
@@ -87,250 +86,99 @@ Cc: andrea.bastoni@minervasys.tech,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Marco Solieri <marco.solieri@minervasys.tech>
-Subject: [PATCH v9 05/13] xen: extend domctl interface for cache coloring
-Date: Fri, 25 Oct 2024 11:50:06 +0200
-Message-ID: <20241025095014.42376-6-carlo.nonato@minervasys.tech>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v9 00/13] Arm cache coloring
+Date: Fri, 25 Oct 2024 11:50:01 +0200
+Message-ID: <20241025095014.42376-1-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241025095014.42376-1-carlo.nonato@minervasys.tech>
-References: <20241025095014.42376-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new domctl hypercall to allow the user to set LLC coloring
-configurations. Colors can be set only once, just after domain creation,
-since recoloring isn't supported.
+Shared caches in multi-core CPU architectures represent a problem for
+predictability of memory access latency. This jeopardizes applicability
+of many Arm platform in real-time critical and mixed-criticality
+scenarios. We introduce support for cache partitioning with page
+coloring, a transparent software technique that enables isolation
+between domains and Xen, and thus avoids cache interference.
 
-Based on original work from: Luca Miccio <lucmiccio@gmail.com>
+When creating a domain, a simple syntax (e.g. `0-3` or `4-11`) allows
+the user to define assignments of cache partitions ids, called colors,
+where assigning different colors guarantees no mutual eviction on cache
+will ever happen. This instructs the Xen memory allocator to provide
+the i-th color assignee only with pages that maps to color i, i.e. that
+are indexed in the i-th cache partition.
 
-Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-v9:
-- minor printk message changes
-- moved domain_llc_coloring_free() in this patch
-v8:
-- fixed memory leak on error path of domain_set_llc_colors()
-v7:
-- -EOPNOTSUPP returned in case of hypercall called without llc_coloring_enabled
-- domain_set_llc_colors_domctl() renamed to domain_set_llc_colors()
-- added padding and input bound checks to domain_set_llc_colors()
-- removed alloc_colors() helper usage from domain_set_llc_colors()
-v6:
-- reverted the XEN_DOMCTL_INTERFACE_VERSION bump
-- reverted to uint32 for the guest handle
-- explicit padding added to the domctl struct
-- rewrote domain_set_llc_colors_domctl() to be more explicit
-v5:
-- added a new hypercall to set colors
-- uint for the guest handle
-v4:
-- updated XEN_DOMCTL_INTERFACE_VERSION
----
- xen/common/domain.c            |  3 ++
- xen/common/domctl.c            | 10 +++++++
- xen/common/llc-coloring.c      | 55 ++++++++++++++++++++++++++++++++--
- xen/include/public/domctl.h    |  9 ++++++
- xen/include/xen/llc-coloring.h |  4 +++
- 5 files changed, 78 insertions(+), 3 deletions(-)
+The proposed implementation supports the dom0less feature.
+The proposed implementation doesn't support the static-mem feature.
+The solution has been tested in several scenarios, including Xilinx Zynq
+MPSoCs.
 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 92263a4fbd..842a23751a 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -34,6 +34,7 @@
- #include <xen/xenoprof.h>
- #include <xen/irq.h>
- #include <xen/argo.h>
-+#include <xen/llc-coloring.h>
- #include <asm/p2m.h>
- #include <asm/processor.h>
- #include <public/sched.h>
-@@ -1276,6 +1277,8 @@ void domain_destroy(struct domain *d)
- {
-     BUG_ON(!d->is_dying);
- 
-+    domain_llc_coloring_free(d);
-+
-     /* May be already destroyed, or get_domain() can race us. */
-     if ( atomic_cmpxchg(&d->refcnt, 0, DOMAIN_DESTROYED) != 0 )
-         return;
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index ea16b75910..6387dddbcd 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -8,6 +8,7 @@
- 
- #include <xen/types.h>
- #include <xen/lib.h>
-+#include <xen/llc-coloring.h>
- #include <xen/err.h>
- #include <xen/mm.h>
- #include <xen/sched.h>
-@@ -866,6 +867,15 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-                 __HYPERVISOR_domctl, "h", u_domctl);
-         break;
- 
-+    case XEN_DOMCTL_set_llc_colors:
-+        if ( op->u.set_llc_colors.pad )
-+            ret = -EINVAL;
-+        else if ( llc_coloring_enabled )
-+            ret = domain_set_llc_colors(d, &op->u.set_llc_colors);
-+        else
-+            ret = -EOPNOTSUPP;
-+        break;
-+
-     default:
-         ret = arch_do_domctl(op, d, u_domctl);
-         break;
-diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-index 35c6c36280..2ab0bb10a3 100644
---- a/xen/common/llc-coloring.c
-+++ b/xen/common/llc-coloring.c
-@@ -4,6 +4,7 @@
-  *
-  * Copyright (C) 2022 Xilinx Inc.
-  */
-+#include <xen/guest_access.h>
- #include <xen/keyhandler.h>
- #include <xen/llc-coloring.h>
- #include <xen/param.h>
-@@ -103,8 +104,7 @@ static void print_colors(const unsigned int *colors, unsigned int num_colors)
-     printk(" }\n");
- }
- 
--static bool __init check_colors(const unsigned int *colors,
--                                unsigned int num_colors)
-+static bool check_colors(const unsigned int *colors, unsigned int num_colors)
- {
-     unsigned int i;
- 
-@@ -180,7 +180,7 @@ void domain_dump_llc_colors(const struct domain *d)
-     print_colors(d->llc_colors, d->num_llc_colors);
- }
- 
--static void __init domain_set_default_colors(struct domain *d)
-+static void domain_set_default_colors(struct domain *d)
- {
-     printk(XENLOG_WARNING
-            "LLC color config not found for %pd, using all colors\n", d);
-@@ -217,6 +217,55 @@ int __init dom0_set_llc_colors(struct domain *d)
-     return 0;
- }
- 
-+int domain_set_llc_colors(struct domain *d,
-+                          const struct xen_domctl_set_llc_colors *config)
-+{
-+    unsigned int *colors;
-+
-+    if ( d->num_llc_colors )
-+        return -EEXIST;
-+
-+    if ( !config->num_llc_colors )
-+    {
-+        domain_set_default_colors(d);
-+        return 0;
-+    }
-+
-+    if ( config->num_llc_colors > max_nr_colors )
-+        return -EINVAL;
-+
-+    colors = xmalloc_array(unsigned int, config->num_llc_colors);
-+    if ( !colors )
-+        return -ENOMEM;
-+
-+    if ( copy_from_guest(colors, config->llc_colors, config->num_llc_colors) )
-+    {
-+        xfree(colors);
-+        return -EFAULT;
-+    }
-+
-+    if ( !check_colors(colors, config->num_llc_colors) )
-+    {
-+        printk(XENLOG_ERR "%pd: bad LLC color config\n", d);
-+        xfree(colors);
-+        return -EINVAL;
-+    }
-+
-+    d->llc_colors = colors;
-+    d->num_llc_colors = config->num_llc_colors;
-+
-+    return 0;
-+}
-+
-+void domain_llc_coloring_free(struct domain *d)
-+{
-+    if ( !llc_coloring_enabled || d->llc_colors == default_colors )
-+        return;
-+
-+    /* free pointer-to-const using __va(__pa()) */
-+    xfree(__va(__pa(d->llc_colors)));
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 353f831e40..e2d392d1e5 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -1236,6 +1236,13 @@ struct xen_domctl_dt_overlay {
- };
- #endif
- 
-+struct xen_domctl_set_llc_colors {
-+    /* IN LLC coloring parameters */
-+    uint32_t num_llc_colors;
-+    uint32_t pad;
-+    XEN_GUEST_HANDLE_64(uint32) llc_colors;
-+};
-+
- struct xen_domctl {
-     uint32_t cmd;
- #define XEN_DOMCTL_createdomain                   1
-@@ -1325,6 +1332,7 @@ struct xen_domctl {
- #define XEN_DOMCTL_set_paging_mempool_size       86
- #define XEN_DOMCTL_dt_overlay                    87
- #define XEN_DOMCTL_gsi_permission                88
-+#define XEN_DOMCTL_set_llc_colors                89
- #define XEN_DOMCTL_gdbsx_guestmemio            1000
- #define XEN_DOMCTL_gdbsx_pausevcpu             1001
- #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
-@@ -1391,6 +1399,7 @@ struct xen_domctl {
- #if defined(__arm__) || defined(__aarch64__)
-         struct xen_domctl_dt_overlay        dt_overlay;
- #endif
-+        struct xen_domctl_set_llc_colors    set_llc_colors;
-         uint8_t                             pad[128];
-     } u;
- };
-diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
-index baf6d4add1..b3801fca00 100644
---- a/xen/include/xen/llc-coloring.h
-+++ b/xen/include/xen/llc-coloring.h
-@@ -16,17 +16,21 @@ extern bool llc_coloring_enabled;
- void llc_coloring_init(void);
- void dump_llc_coloring_info(void);
- void domain_dump_llc_colors(const struct domain *d);
-+void domain_llc_coloring_free(struct domain *d);
- #else
- #define llc_coloring_enabled false
- 
- static inline void llc_coloring_init(void) {}
- static inline void dump_llc_coloring_info(void) {}
- static inline void domain_dump_llc_colors(const struct domain *d) {}
-+static inline void domain_llc_coloring_free(struct domain *d) {}
- #endif
- 
- unsigned int get_llc_way_size(void);
- void arch_llc_coloring_init(void);
- int dom0_set_llc_colors(struct domain *d);
-+int domain_set_llc_colors(struct domain *d,
-+                          const struct xen_domctl_set_llc_colors *config);
- 
- #endif /* __COLORING_H__ */
- 
+Carlo Nonato (12):
+  xen/common: add cache coloring common code
+  xen/arm: add initial support for LLC coloring on arm64
+  xen/arm: permit non direct-mapped Dom0 construction
+  xen/arm: add Dom0 cache coloring support
+  xen: extend domctl interface for cache coloring
+  tools: add support for cache coloring configuration
+  xen/arm: add support for cache coloring configuration via device-tree
+  xen/page_alloc: introduce preserved page flags macro
+  xen: add cache coloring allocator for domains
+  xen/arm: use domain memory to allocate p2m page tables
+  xen/arm: make consider_modules() available for xen relocation
+  xen/arm: add cache coloring support for Xen
+
+Luca Miccio (1):
+  xen/arm: add Xen cache colors command line parameter
+
+ SUPPORT.md                              |   7 +
+ docs/man/xl.cfg.5.pod.in                |   6 +
+ docs/misc/arm/device-tree/booting.txt   |   4 +
+ docs/misc/cache-coloring.rst            | 246 +++++++++++++++
+ docs/misc/xen-command-line.pandoc       |  70 +++++
+ tools/include/libxl.h                   |   5 +
+ tools/include/xenctrl.h                 |   9 +
+ tools/libs/ctrl/xc_domain.c             |  35 +++
+ tools/libs/light/libxl_create.c         |  18 ++
+ tools/libs/light/libxl_types.idl        |   1 +
+ tools/xl/xl_parse.c                     |  38 ++-
+ xen/arch/arm/Kconfig                    |   1 +
+ xen/arch/arm/Makefile                   |   1 +
+ xen/arch/arm/alternative.c              |  30 +-
+ xen/arch/arm/arm32/mmu/mm.c             |  95 +-----
+ xen/arch/arm/arm64/mmu/head.S           |  58 +++-
+ xen/arch/arm/arm64/mmu/mm.c             |  28 +-
+ xen/arch/arm/dom0less-build.c           |  60 +---
+ xen/arch/arm/domain_build.c             | 106 ++++++-
+ xen/arch/arm/include/asm/domain_build.h |   1 +
+ xen/arch/arm/include/asm/mm.h           |   5 +
+ xen/arch/arm/include/asm/mmu/layout.h   |   3 +
+ xen/arch/arm/include/asm/processor.h    |  16 +
+ xen/arch/arm/include/asm/setup.h        |   3 +
+ xen/arch/arm/llc-coloring.c             | 140 +++++++++
+ xen/arch/arm/mmu/p2m.c                  |   4 +-
+ xen/arch/arm/mmu/setup.c                | 195 +++++++++++-
+ xen/arch/arm/setup.c                    |  13 +-
+ xen/common/Kconfig                      |  30 ++
+ xen/common/Makefile                     |   1 +
+ xen/common/domain.c                     |   3 +
+ xen/common/domctl.c                     |  10 +
+ xen/common/keyhandler.c                 |   3 +
+ xen/common/llc-coloring.c               | 378 ++++++++++++++++++++++++
+ xen/common/page_alloc.c                 | 208 ++++++++++++-
+ xen/include/public/domctl.h             |   9 +
+ xen/include/xen/llc-coloring.h          |  63 ++++
+ xen/include/xen/sched.h                 |   5 +
+ xen/include/xen/xmalloc.h               |  12 +
+ 39 files changed, 1746 insertions(+), 174 deletions(-)
+ create mode 100644 docs/misc/cache-coloring.rst
+ create mode 100644 xen/arch/arm/llc-coloring.c
+ create mode 100644 xen/common/llc-coloring.c
+ create mode 100644 xen/include/xen/llc-coloring.h
+
 -- 
 2.43.0
 
