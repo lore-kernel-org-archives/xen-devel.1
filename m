@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E5D7D0C5F9
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 10:09:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825844.1240199 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F43D0C5F8
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 10:09:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825862.1240310 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4HFT-0001vV-Vw; Fri, 25 Oct 2024 10:08:51 +0000
+	id 1t4HFk-0006Cs-1R; Fri, 25 Oct 2024 10:09:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825844.1240199; Fri, 25 Oct 2024 10:08:51 +0000
+Received: by outflank-mailman (output) from mailman id 825862.1240310; Fri, 25 Oct 2024 10:09:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4HFT-0001tK-KE; Fri, 25 Oct 2024 10:08:51 +0000
-Received: by outflank-mailman (input) for mailman id 825844;
- Fri, 25 Oct 2024 10:08:50 +0000
+	id 1t4HFj-0006CH-Rr; Fri, 25 Oct 2024 10:09:07 +0000
+Received: by outflank-mailman (input) for mailman id 825862;
+ Fri, 25 Oct 2024 10:09:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=h5hx=RV=huawei.com=ruanjinjie@srs-se1.protection.inumbo.net>)
- id 1t4HFS-00014t-4g
- for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 10:08:50 +0000
+ id 1t4HFi-00014t-EZ
+ for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 10:09:06 +0000
 Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1ea77fac-92b9-11ef-a0bf-8be0dac302b0;
- Fri, 25 Oct 2024 12:08:47 +0200 (CEST)
+ id 268e3d55-92b9-11ef-a0bf-8be0dac302b0;
+ Fri, 25 Oct 2024 12:09:03 +0200 (CEST)
 Received: from mail.maildlp.com (unknown [172.19.163.252])
- by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4XZdjW6PJ5z1T95x;
- Fri, 25 Oct 2024 18:06:39 +0800 (CST)
+ by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4XZdjm2S6Hz1T8p8;
+ Fri, 25 Oct 2024 18:06:52 +0800 (CST)
 Received: from kwepemg200008.china.huawei.com (unknown [7.202.181.35])
- by mail.maildlp.com (Postfix) with ESMTPS id 1E0281800E2;
- Fri, 25 Oct 2024 18:08:44 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id 8ADF81800A5;
+ Fri, 25 Oct 2024 18:08:56 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by kwepemg200008.china.huawei.com
  (7.202.181.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 25 Oct
- 2024 18:08:42 +0800
+ 2024 18:08:54 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,7 +48,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ea77fac-92b9-11ef-a0bf-8be0dac302b0
+X-Inumbo-ID: 268e3d55-92b9-11ef-a0bf-8be0dac302b0
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <oleg@redhat.com>, <linux@armlinux.org.uk>, <will@kernel.org>,
 	<mark.rutland@arm.com>, <catalin.marinas@arm.com>, <sstabellini@kernel.org>,
@@ -70,9 +70,9 @@ To: <oleg@redhat.com>, <linux@armlinux.org.uk>, <will@kernel.org>,
 	<liuyuntao12@huawei.com>, <leobras@redhat.com>,
 	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
 	<xen-devel@lists.xenproject.org>
-Subject: [PATCH -next v4 08/19] arm64: entry: Rework arm64_preempt_schedule_irq()
-Date: Fri, 25 Oct 2024 18:06:49 +0800
-Message-ID: <20241025100700.3714552-9-ruanjinjie@huawei.com>
+Subject: [PATCH -next v4 17/19] entry: Add syscall arch functions to use generic syscall for arm64
+Date: Fri, 25 Oct 2024 18:06:58 +0800
+Message-ID: <20241025100700.3714552-18-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241025100700.3714552-1-ruanjinjie@huawei.com>
 References: <20241025100700.3714552-1-ruanjinjie@huawei.com>
@@ -83,74 +83,196 @@ X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
  kwepemg200008.china.huawei.com (7.202.181.35)
 
-Rework arm64_preempt_schedule_irq() to check whether it need
-resched in a check function arm64_irqentry_exit_need_resched().
+Add some syscall arch functions to support arm64 to use generic syscall
+code, which do not affect existing architectures that use generic entry:
 
-No functional changes.
+ - arch_pre/post_report_syscall_entry/exit().
 
+Also make syscall_exit_work() not static and move report_single_step() to
+thread_info.h, which can be used by arm64 later.
+
+Suggested-by: Mark Rutland <mark.rutland@arm.com>
+Suggested-by: Kevin Brodsky <kevin.brodsky@arm.com>
+Suggested-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- arch/arm64/kernel/entry-common.c | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ include/linux/entry-common.h  |   1 +
+ include/linux/thread_info.h   |  13 +++++
+ kernel/entry/syscall-common.c | 100 ++++++++++++++++++++++++++++++----
+ 3 files changed, 103 insertions(+), 11 deletions(-)
 
-diff --git a/arch/arm64/kernel/entry-common.c b/arch/arm64/kernel/entry-common.c
-index b57f6dc66115..a3414fb599fa 100644
---- a/arch/arm64/kernel/entry-common.c
-+++ b/arch/arm64/kernel/entry-common.c
-@@ -69,10 +69,10 @@ DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
- #define need_irq_preemption()	(IS_ENABLED(CONFIG_PREEMPTION))
+diff --git a/include/linux/entry-common.h b/include/linux/entry-common.h
+index 1ae3143d4b12..39a2d41af05e 100644
+--- a/include/linux/entry-common.h
++++ b/include/linux/entry-common.h
+@@ -178,4 +178,5 @@ void syscall_exit_to_user_mode_work(struct pt_regs *regs);
+  */
+ void syscall_exit_to_user_mode(struct pt_regs *regs);
+ 
++void syscall_exit_work(struct pt_regs *regs, unsigned long work);
  #endif
- 
--static void __sched arm64_preempt_schedule_irq(void)
-+static inline bool arm64_irqentry_exit_need_resched(void)
- {
- 	if (!need_irq_preemption())
--		return;
-+		return false;
- 
- 	/*
- 	 * Note: thread_info::preempt_count includes both thread_info::count
-@@ -80,7 +80,7 @@ static void __sched arm64_preempt_schedule_irq(void)
- 	 * preempt_count().
- 	 */
- 	if (READ_ONCE(current_thread_info()->preempt_count) != 0)
--		return;
-+		return false;
- 
- 	/*
- 	 * DAIF.DA are cleared at the start of IRQ/FIQ handling, and when GIC
-@@ -89,7 +89,7 @@ static void __sched arm64_preempt_schedule_irq(void)
- 	 * DAIF we must have handled an NMI, so skip preemption.
- 	 */
- 	if (system_uses_irq_prio_masking() && read_sysreg(daif))
--		return;
-+		return false;
- 
- 	/*
- 	 * Preempting a task from an IRQ means we leave copies of PSTATE
-@@ -99,8 +99,10 @@ static void __sched arm64_preempt_schedule_irq(void)
- 	 * Only allow a task to be preempted once cpufeatures have been
- 	 * enabled.
- 	 */
--	if (system_capabilities_finalized())
--		preempt_schedule_irq();
-+	if (!system_capabilities_finalized())
+diff --git a/include/linux/thread_info.h b/include/linux/thread_info.h
+index 9ea0b28068f4..062de9666ef3 100644
+--- a/include/linux/thread_info.h
++++ b/include/linux/thread_info.h
+@@ -55,6 +55,19 @@ enum syscall_work_bit {
+ #define SYSCALL_WORK_SYSCALL_AUDIT	BIT(SYSCALL_WORK_BIT_SYSCALL_AUDIT)
+ #define SYSCALL_WORK_SYSCALL_USER_DISPATCH BIT(SYSCALL_WORK_BIT_SYSCALL_USER_DISPATCH)
+ #define SYSCALL_WORK_SYSCALL_EXIT_TRAP	BIT(SYSCALL_WORK_BIT_SYSCALL_EXIT_TRAP)
++
++/*
++ * If SYSCALL_EMU is set, then the only reason to report is when
++ * SINGLESTEP is set (i.e. PTRACE_SYSEMU_SINGLESTEP).  This syscall
++ * instruction has been already reported in syscall_enter_from_user_mode().
++ */
++static inline bool report_single_step(unsigned long work)
++{
++	if (work & SYSCALL_WORK_SYSCALL_EMU)
 +		return false;
 +
-+	return true;
++	return work & SYSCALL_WORK_SYSCALL_EXIT_TRAP;
++}
+ #endif
+ 
+ #include <asm/thread_info.h>
+diff --git a/kernel/entry/syscall-common.c b/kernel/entry/syscall-common.c
+index 0eb036986ad4..73f87d09e04e 100644
+--- a/kernel/entry/syscall-common.c
++++ b/kernel/entry/syscall-common.c
+@@ -17,6 +17,49 @@ static inline void syscall_enter_audit(struct pt_regs *regs, long syscall)
+ 	}
+ }
+ 
++/**
++ * arch_pre_report_syscall_entry - Architecture specific work before
++ *				   report_syscall_entry().
++ *
++ * Invoked from syscall_trace_enter() to prepare for ptrace_report_syscall_entry().
++ * Defaults to NOP.
++ *
++ * The main purpose is for saving a general purpose register clobbered
++ * in the tracee.
++ */
++static inline unsigned long arch_pre_report_syscall_entry(struct pt_regs *regs);
++
++#ifndef arch_pre_report_syscall_entry
++static inline unsigned long arch_pre_report_syscall_entry(struct pt_regs *regs)
++{
++	return 0;
++}
++#endif
++
++/**
++ * arch_post_report_syscall_entry - Architecture specific work after
++ *			            report_syscall_entry().
++ *
++ * Invoked from syscall_trace_enter() after calling ptrace_report_syscall_entry().
++ * Defaults to NOP.
++ *
++ * The main purpose is for restoring a general purpose register clobbered
++ * in the trace saved in arch_pre_report_syscall_entry(), also it can
++ * do something arch-specific according to the return value of
++ * ptrace_report_syscall_entry().
++ */
++static inline void arch_post_report_syscall_entry(struct pt_regs *regs,
++						  unsigned long saved_reg,
++						  long ret);
++
++#ifndef arch_post_report_syscall_entry
++static inline void arch_post_report_syscall_entry(struct pt_regs *regs,
++						  unsigned long saved_reg,
++						  long ret)
++{
++}
++#endif
++
+ long syscall_trace_enter(struct pt_regs *regs, long syscall,
+ 				unsigned long work)
+ {
+@@ -34,7 +77,9 @@ long syscall_trace_enter(struct pt_regs *regs, long syscall,
+ 
+ 	/* Handle ptrace */
+ 	if (work & (SYSCALL_WORK_SYSCALL_TRACE | SYSCALL_WORK_SYSCALL_EMU)) {
++		unsigned long saved_reg = arch_pre_report_syscall_entry(regs);
+ 		ret = ptrace_report_syscall_entry(regs);
++		arch_post_report_syscall_entry(regs, saved_reg, ret);
+ 		if (ret || (work & SYSCALL_WORK_SYSCALL_EMU))
+ 			return -1L;
+ 	}
+@@ -71,20 +116,50 @@ noinstr void syscall_enter_from_user_mode_prepare(struct pt_regs *regs)
+ 	instrumentation_end();
+ }
+ 
+-/*
+- * If SYSCALL_EMU is set, then the only reason to report is when
+- * SINGLESTEP is set (i.e. PTRACE_SYSEMU_SINGLESTEP).  This syscall
+- * instruction has been already reported in syscall_enter_from_user_mode().
++/**
++ * arch_pre_report_syscall_exit - Architecture specific work before
++ *				  report_syscall_exit().
++ *
++ * Invoked from syscall_exit_work() to prepare for ptrace_report_syscall_exit().
++ * Defaults to NOP.
++ *
++ * The main purpose is for saving a general purpose register clobbered
++ * in the trace.
+  */
+-static inline bool report_single_step(unsigned long work)
+-{
+-	if (work & SYSCALL_WORK_SYSCALL_EMU)
+-		return false;
++static inline unsigned long arch_pre_report_syscall_exit(struct pt_regs *regs,
++							     unsigned long work);
+ 
+-	return work & SYSCALL_WORK_SYSCALL_EXIT_TRAP;
++#ifndef arch_pre_report_syscall_exit
++static inline unsigned long arch_pre_report_syscall_exit(struct pt_regs *regs,
++							     unsigned long work)
++{
++	return 0;
+ }
++#endif
++
++/**
++ * arch_post_report_syscall_exit - Architecture specific work after
++ *			           report_syscall_exit().
++ *
++ * Invoked from syscall_exit_work() after calling ptrace_report_syscall_exit().
++ * Defaults to NOP.
++ *
++ * The main purpose is for restoring a general purpose register clobbered
++ * in the trace saved in arch_pre_report_syscall_exit().
++ */
++static inline void arch_post_report_syscall_exit(struct pt_regs *regs,
++						 unsigned long saved_reg,
++						 unsigned long work);
++
++#ifndef arch_post_report_syscall_exit
++static inline void arch_post_report_syscall_exit(struct pt_regs *regs,
++						 unsigned long saved_reg,
++						 unsigned long work)
++{
++}
++#endif
+ 
+-static void syscall_exit_work(struct pt_regs *regs, unsigned long work)
++void syscall_exit_work(struct pt_regs *regs, unsigned long work)
+ {
+ 	bool step;
+ 
+@@ -107,8 +182,11 @@ static void syscall_exit_work(struct pt_regs *regs, unsigned long work)
+ 		trace_sys_exit(regs, syscall_get_return_value(current, regs));
+ 
+ 	step = report_single_step(work);
+-	if (step || work & SYSCALL_WORK_SYSCALL_TRACE)
++	if (step || work & SYSCALL_WORK_SYSCALL_TRACE) {
++		unsigned long saved_reg = arch_pre_report_syscall_exit(regs, work);
+ 		ptrace_report_syscall_exit(regs, step);
++		arch_post_report_syscall_exit(regs, saved_reg, work);
++	}
  }
  
  /*
-@@ -127,7 +129,8 @@ static void noinstr exit_to_kernel_mode(struct pt_regs *regs,
- 			return;
- 		}
- 
--		arm64_preempt_schedule_irq();
-+		if (arm64_irqentry_exit_need_resched())
-+			preempt_schedule_irq();
- 
- 		trace_hardirqs_on();
- 	} else {
 -- 
 2.34.1
 
