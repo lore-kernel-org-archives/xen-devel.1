@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C3FBD0C5F9
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 10:10:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.825850.1240269 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 792EAD0C5F8
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Oct 2024 10:10:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.825852.1240280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4HFd-0004Hq-CT; Fri, 25 Oct 2024 10:09:01 +0000
+	id 1t4HFf-0004kI-2k; Fri, 25 Oct 2024 10:09:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 825850.1240269; Fri, 25 Oct 2024 10:09:01 +0000
+Received: by outflank-mailman (output) from mailman id 825852.1240280; Fri, 25 Oct 2024 10:09:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t4HFc-0004Em-Ow; Fri, 25 Oct 2024 10:09:00 +0000
-Received: by outflank-mailman (input) for mailman id 825850;
- Fri, 25 Oct 2024 10:08:59 +0000
+	id 1t4HFe-0004ig-P2; Fri, 25 Oct 2024 10:09:02 +0000
+Received: by outflank-mailman (input) for mailman id 825852;
+ Fri, 25 Oct 2024 10:09:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=h5hx=RV=huawei.com=ruanjinjie@srs-se1.protection.inumbo.net>)
- id 1t4HFb-00014t-BY
- for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 10:08:59 +0000
+ id 1t4HFc-00014t-LX
+ for xen-devel@lists.xenproject.org; Fri, 25 Oct 2024 10:09:00 +0000
 Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 244f98a3-92b9-11ef-a0bf-8be0dac302b0;
- Fri, 25 Oct 2024 12:08:56 +0200 (CEST)
-Received: from mail.maildlp.com (unknown [172.19.162.254])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4XZdkJ0VWlzyTRq;
- Fri, 25 Oct 2024 18:07:20 +0800 (CST)
+ id 228fd744-92b9-11ef-a0bf-8be0dac302b0;
+ Fri, 25 Oct 2024 12:08:58 +0200 (CEST)
+Received: from mail.maildlp.com (unknown [172.19.88.194])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4XZdjf346yz10McY;
+ Fri, 25 Oct 2024 18:06:46 +0800 (CST)
 Received: from kwepemg200008.china.huawei.com (unknown [7.202.181.35])
- by mail.maildlp.com (Postfix) with ESMTPS id AB3BF18010F;
- Fri, 25 Oct 2024 18:08:53 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id E7F3D1400E3;
+ Fri, 25 Oct 2024 18:08:50 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by kwepemg200008.china.huawei.com
  (7.202.181.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 25 Oct
- 2024 18:08:52 +0800
+ 2024 18:08:49 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,7 +48,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 244f98a3-92b9-11ef-a0bf-8be0dac302b0
+X-Inumbo-ID: 228fd744-92b9-11ef-a0bf-8be0dac302b0
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <oleg@redhat.com>, <linux@armlinux.org.uk>, <will@kernel.org>,
 	<mark.rutland@arm.com>, <catalin.marinas@arm.com>, <sstabellini@kernel.org>,
@@ -70,9 +70,9 @@ To: <oleg@redhat.com>, <linux@armlinux.org.uk>, <will@kernel.org>,
 	<liuyuntao12@huawei.com>, <leobras@redhat.com>,
 	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
 	<xen-devel@lists.xenproject.org>
-Subject: [PATCH -next v4 15/19] entry: Add arch irqentry_exit_need_resched() for arm64
-Date: Fri, 25 Oct 2024 18:06:56 +0800
-Message-ID: <20241025100700.3714552-16-ruanjinjie@huawei.com>
+Subject: [PATCH -next v4 13/19] arm64: entry: Check dynamic resched when PREEMPT_DYNAMIC enabled
+Date: Fri, 25 Oct 2024 18:06:54 +0800
+Message-ID: <20241025100700.3714552-14-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241025100700.3714552-1-ruanjinjie@huawei.com>
 References: <20241025100700.3714552-1-ruanjinjie@huawei.com>
@@ -83,56 +83,87 @@ X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
  kwepemg200008.china.huawei.com (7.202.181.35)
 
-As the front patch 6 ~ 13 did, the arm64_preempt_schedule_irq() is
-same with the irq preempt schedule code of generic entry besides those
-architecture-related logic called arm64_irqentry_exit_need_resched().
+Check dynamic resched alone when PREEMPT_DYNAMIC enabled.
 
-So add arch irqentry_exit_need_resched() to support architecture-related
-need_resched() check logic, which do not affect existing architectures
-that use generic entry, but support arm64 to use generic irq entry.
+No functional changes.
 
-Suggested-by: Mark Rutland <mark.rutland@arm.com>
-Suggested-by: Kevin Brodsky <kevin.brodsky@arm.com>
-Suggested-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- kernel/entry/common.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ arch/arm64/include/asm/preempt.h |  3 +++
+ arch/arm64/kernel/entry-common.c | 21 +++++++++++----------
+ 2 files changed, 14 insertions(+), 10 deletions(-)
 
-diff --git a/kernel/entry/common.c b/kernel/entry/common.c
-index 2ad132c7be05..0cc117b658b8 100644
---- a/kernel/entry/common.c
-+++ b/kernel/entry/common.c
-@@ -143,6 +143,20 @@ noinstr irqentry_state_t irqentry_enter(struct pt_regs *regs)
+diff --git a/arch/arm64/include/asm/preempt.h b/arch/arm64/include/asm/preempt.h
+index d0f93385bd85..0f0ba250efe8 100644
+--- a/arch/arm64/include/asm/preempt.h
++++ b/arch/arm64/include/asm/preempt.h
+@@ -93,11 +93,14 @@ void dynamic_preempt_schedule(void);
+ #define __preempt_schedule()		dynamic_preempt_schedule()
+ void dynamic_preempt_schedule_notrace(void);
+ #define __preempt_schedule_notrace()	dynamic_preempt_schedule_notrace()
++void dynamic_irqentry_exit_cond_resched(void);
++#define irqentry_exit_cond_resched()	dynamic_irqentry_exit_cond_resched()
+ 
+ #else /* CONFIG_PREEMPT_DYNAMIC */
+ 
+ #define __preempt_schedule()		preempt_schedule()
+ #define __preempt_schedule_notrace()	preempt_schedule_notrace()
++#define irqentry_exit_cond_resched()	raw_irqentry_exit_cond_resched()
+ 
+ #endif /* CONFIG_PREEMPT_DYNAMIC */
+ #endif /* CONFIG_PREEMPTION */
+diff --git a/arch/arm64/kernel/entry-common.c b/arch/arm64/kernel/entry-common.c
+index 3b110dcf4fa3..152216201f84 100644
+--- a/arch/arm64/kernel/entry-common.c
++++ b/arch/arm64/kernel/entry-common.c
+@@ -61,10 +61,6 @@ static noinstr irqentry_state_t enter_from_kernel_mode(struct pt_regs *regs)
  	return ret;
  }
  
-+/**
-+ * arch_irqentry_exit_need_resched - Architecture specific need resched function
-+ *
-+ * Invoked from raw_irqentry_exit_cond_resched() to check if need resched.
-+ * Defaults return true.
-+ *
-+ * The main purpose is to permit arch to skip preempt a task from an IRQ.
-+ */
-+static inline bool arch_irqentry_exit_need_resched(void);
-+
-+#ifndef arch_irqentry_exit_need_resched
-+static inline bool arch_irqentry_exit_need_resched(void) { return true; }
-+#endif
-+
+-#ifdef CONFIG_PREEMPT_DYNAMIC
+-DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
+-#endif
+-
+ static inline bool arm64_irqentry_exit_need_resched(void)
+ {
+ 	/*
+@@ -92,17 +88,22 @@ static inline bool arm64_irqentry_exit_need_resched(void)
+ 
  void raw_irqentry_exit_cond_resched(void)
  {
+-#ifdef CONFIG_PREEMPT_DYNAMIC
+-	if (!static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
+-		return;
+-#endif
+-
  	if (!preempt_count()) {
-@@ -150,7 +164,7 @@ void raw_irqentry_exit_cond_resched(void)
- 		rcu_irq_exit_check_preempt();
- 		if (IS_ENABLED(CONFIG_DEBUG_ENTRY))
- 			WARN_ON_ONCE(!on_thread_stack());
--		if (need_resched())
-+		if (need_resched() && arch_irqentry_exit_need_resched())
+ 		if (need_resched() && arm64_irqentry_exit_need_resched())
  			preempt_schedule_irq();
  	}
  }
+ 
++#ifdef CONFIG_PREEMPT_DYNAMIC
++DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
++void dynamic_irqentry_exit_cond_resched(void)
++{
++	if (!static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
++		return;
++	raw_irqentry_exit_cond_resched();
++}
++#endif
++
+ /*
+  * Handle IRQ/context state management when exiting to kernel mode.
+  * After this function returns it is not safe to call regular kernel code,
+@@ -128,7 +129,7 @@ static void noinstr exit_to_kernel_mode(struct pt_regs *regs,
+ 		}
+ 
+ 		if (IS_ENABLED(CONFIG_PREEMPTION))
+-			raw_irqentry_exit_cond_resched();
++			irqentry_exit_cond_resched();
+ 
+ 		trace_hardirqs_on();
+ 	} else {
 -- 
 2.34.1
 
