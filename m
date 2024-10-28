@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F06D1359C
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2024 09:19:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.826299.1240541 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23FDCD13570
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2024 10:51:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.826376.1240596 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5Lu5-0006gx-3V; Mon, 28 Oct 2024 09:19:13 +0000
+	id 1t5NKs-0001G1-6z; Mon, 28 Oct 2024 10:50:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 826299.1240541; Mon, 28 Oct 2024 09:19:13 +0000
+Received: by outflank-mailman (output) from mailman id 826376.1240596; Mon, 28 Oct 2024 10:50:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5Lu4-0006fH-TX; Mon, 28 Oct 2024 09:19:12 +0000
-Received: by outflank-mailman (input) for mailman id 826299;
- Mon, 28 Oct 2024 09:19:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/lrK=RY=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t5Lu3-0005MP-DJ
- for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 09:19:11 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b0d03caf-950d-11ef-a0c2-8be0dac302b0;
- Mon, 28 Oct 2024 10:19:10 +0100 (CET)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9a6b4ca29bso503388266b.3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 02:19:10 -0700 (PDT)
-Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b1f05deb6sm355961566b.88.2024.10.28.02.19.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 02:19:08 -0700 (PDT)
+	id 1t5NKs-0001Fu-2b; Mon, 28 Oct 2024 10:50:58 +0000
+Received: by outflank-mailman (input) for mailman id 826376;
+ Mon, 28 Oct 2024 10:50:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=xGmR=RY=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1t5NKq-0001Fj-V8
+ for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 10:50:56 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 811b69cc-951a-11ef-99a3-01e77a169b0f;
+ Mon, 28 Oct 2024 11:50:54 +0100 (CET)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-539f2b95775so4717330e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 03:50:54 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9b1f029651sm365739266b.60.2024.10.28.03.50.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Oct 2024 03:50:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,228 +47,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0d03caf-950d-11ef-a0c2-8be0dac302b0
+X-Inumbo-ID: 811b69cc-951a-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1730107150; x=1730711950; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2tHJ9KvrKOuMjaRdKbRkR2CwfZwErwPkHq08Lc76WTw=;
-        b=kahqWksxgzonAQz1hLCbU2S8FFI6DVKIeBrsa/xBMnrbV6FIhTxLUjFO4yymZr934T
-         Fwp22CxvtECXf/VLMk8ogr5zoBKk5DmtUg2ZodOU/978FSgLVwSPT6Heg7y6iPJhmp29
-         jFIgRRJfO2m9NepiFzsdXGbrGZHP+zQIPS0+E=
+        d=suse.com; s=google; t=1730112653; x=1730717453; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=ytHLxOUBQj7jo0oLw5RmhEIuDi3qpemw2Zv/CHplmKA=;
+        b=S4+SBvmKaO5mQw7mvDYO+g2BMKT7zg971XY+UtiJDmM8VIugwzMNaJgIkzOBcCKmQM
+         IE4GL5RIiv3mawj8mwmdDuzCuadsQxGTur/cxu8CUD0HNWTGm9Iu2VxgipvGw3HXuzXY
+         GuNFoLBJVywrNkIKbY07Z9CWivaQO8wxsjS3GTkgxcIYg3h98z7T9uaBE/DBVlJKkJpL
+         inzTyRJ3tkd55jitfyYXDLyDMichu2MF2+FYeNIBChjqmnc1id45Cphxp4+9eQNAaWXl
+         zPcFkpQWO46u8WLzTixm1Ad/ocjypi/PMzkA0YHmqMxF0xznO5C1xIUtL9k6qBaLnmMf
+         r6zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730107150; x=1730711950;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2tHJ9KvrKOuMjaRdKbRkR2CwfZwErwPkHq08Lc76WTw=;
-        b=Gt6d52xzOfaHgt9I9Itrm4BN+Ka8bSBhSbPtaPLAeOKxmIl9FQO3b0PzDVUJdOjQSa
-         YPPelV3ASAAm8UpWyIQ2Ydxio9rA/WNF6sW9xGDK2Apmow7nRIkHBpIavkdTnR1FMctc
-         2aCxwWnmdg2YZZcFigOLDWxM45mW09V47gjI7ypBEzM2nC17vhp3C/4dbL/kTaqgoAP3
-         uGyQqbPzqUw4OXal5O9W/l5HJirpt2cKyg3HggiWt8TLX8tkfg/th5eMLVwbpn8f9Jo2
-         buGOPl+H/KMPpvGlHRhxT/vBCyXw+38OlhFKM9PAxUE8fe0D6funn3dV2ZwrYILE+BPx
-         2ULQ==
-X-Gm-Message-State: AOJu0YxDKyiUAKffccbHTWHC40TxlqyYM06ZyqCO5WgIWuwxnmBYZOWj
-	Jo6johjfjQ/Y9SCm/pu6GlUuZ3/b+4R5/pljLh3G4gBvPASHBqmjyFTkLh5IgI+2maydO7sWaxv
-	L
-X-Google-Smtp-Source: AGHT+IFnmPuo6iIDZ2uIcOkFOtwk+936hL3j8xHD3pymnaePQ9S+o2bupb6g8N/5ycChEVRj6IpzKg==
-X-Received: by 2002:a17:907:3f20:b0:a9a:375e:c167 with SMTP id a640c23a62f3a-a9de5c91a19mr711781366b.1.1730107149626;
-        Mon, 28 Oct 2024 02:19:09 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P . Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH 06/10] x86/ucode: Enforce invariant about module selection
-Date: Mon, 28 Oct 2024 09:18:52 +0000
-Message-Id: <20241028091856.2151603-7-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241028091856.2151603-1-andrew.cooper3@citrix.com>
-References: <20241028091856.2151603-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20230601; t=1730112653; x=1730717453;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ytHLxOUBQj7jo0oLw5RmhEIuDi3qpemw2Zv/CHplmKA=;
+        b=v40VvTDYBM3/AabH+3lD/7+pNPsisBIVXVcOQ/QJFlWLJ71gW4Z6kmUQp+jpRjIFxD
+         I+yVXEnezl3dfWZfxF87qq6n7yrbjddT6Thevn66fsrIZiwRXL6VlxnHPb4sH632MrEZ
+         0SJRwjZM/+ecp5Ila/lWSPEO18UcdA3skVGo1s+YhqcH8eYlpAtFlHXbpam+SRst1aCt
+         UQQ9pqbmnIVoVUWPEcb42nwTVq/RE+o/uww9FrH6lyFfU0B9gJlMStLvv/FVmu8Umv+v
+         gjXD0g0+YxHf0zfasMKajFNGzpWtllOotgAvipEhBzJ3ZUhILz/L2aAQ4ZE4F9/JX9yX
+         jclg==
+X-Forwarded-Encrypted: i=1; AJvYcCXMXMOIGJK6ASS5kaTe2xqADMRYByvC4IiVTPW8v9kJqmSYId7AjR0VS81gS82t2US83avndwn26Fo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxQyvRCVtL8PqZO7YAEq3QvY/xqwRniFVPnCJD6ZhPAlj7oOfzK
+	fzAU4yuct2qZRhCgmi3HI4cmJz5g+ImhIaY8XopwTjEqn0Ag1jU6iBRIm4sSPg==
+X-Google-Smtp-Source: AGHT+IH6H480UToRT5skdU7b9KFYxiGIAXioLXer99WzFv7f1NTumW6txNein21IzhJbsTRD/umh0w==
+X-Received: by 2002:a05:6512:b82:b0:53b:154c:f75d with SMTP id 2adb3069b0e04-53b348dc826mr5731088e87.31.1730112653383;
+        Mon, 28 Oct 2024 03:50:53 -0700 (PDT)
+Message-ID: <311e38eb-4d4a-44a1-9ae1-db40a79c9698@suse.com>
+Date: Mon, 28 Oct 2024 11:50:52 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] xen: add new domctl get_changed_domain
+To: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20241023131005.32144-1-jgross@suse.com>
+ <20241023131005.32144-4-jgross@suse.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241023131005.32144-4-jgross@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-The work to add the `ucode=nmi` cmdline option left a subtle corner case.
-Both scan and an explicit index could be selected, and we could really find a
-CPIO archive and explicit microcode file.
+On 23.10.2024 15:10, Juergen Gross wrote:
+> Add a new domctl sub-function to get data of a domain having changed
+> state (this is needed by Xenstore).
+> 
+> The returned state just contains the domid, the domain unique id,
+> and some flags (existing, shutdown, dying).
+> 
+> In order to enable Xenstore stubdom being built for multiple Xen
+> versions, make this domctl stable.  For stable domctls the
+> interface_version is specific to the respective domctl op and it is an
+> in/out parameter: On input the caller is specifying the desired version
+> of the op, while on output the hypervisor will return the used version
+> (this will be at max the caller supplied version, but might be lower in
+> case the hypervisor doesn't support this version).
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+> V1:
+> - use a domctl subop for the new interface (Jan Beulich)
 
-Worse, because the if/else chains for processing ucode_{blob,mod} are opposite
-ways around in early_microcode_load() and microcode_init_cache(), we can
-genuinely perform early microcode loading from the CPIO archive, then cache
-from the explicit file.
+Just as a preliminary reply: With Andrew's stabilization plans I'm not
+sure this, in particular including ...
 
-Therefore, enforce that only one selection method can be active.
+> @@ -1236,7 +1237,37 @@ struct xen_domctl_dt_overlay {
+>  };
+>  #endif
+>  
+> +/*
+> + * XEN_DOMCTL_get_domain_state (stable interface)
+> + *
+> + * Get state information of a domain.
+> + *
+> + * In case domain is DOMID_INVALID, return information about a domain having
+> + * changed state and reset the state change indicator for that domain. This
+> + * function is usable only by a domain having registered the VIRQ_DOM_EXC
+> + * event (normally Xenstore).
+> + *
+> + * Supported interface versions: 0x00000000
+> + */
+> +#define XEN_DOMCTL_GETDOMSTATE_VERS_MAX    0
+> +struct xen_domctl_get_domain_state {
+> +    domid_t domid;
+> +    uint16_t state;
+> +#define XEN_DOMCTL_GETDOMSTATE_STATE_EXIST     0x0001  /* Domain is existing. */
+> +#define XEN_DOMCTL_GETDOMSTATE_STATE_SHUTDOWN  0x0002  /* Shutdown finished. */
+> +#define XEN_DOMCTL_GETDOMSTATE_STATE_DYING     0x0004  /* Domain dying. */
+> +    uint32_t pad1;           /* Returned as 0. */
+> +    uint64_t unique_id;      /* Unique domain identifier. */
+> +    uint64_t pad2[6];        /* Returned as 0. */
+> +};
+> +
+>  struct xen_domctl {
+> +/*
+> + * Stable domctl ops:
+> + * interface_version is per cmd, hypervisor can support multiple versions
+> + * and will return used version (at max caller supplied value) in
+> + * interface_version on return.
+> + */
 
-Rename ucode_{scan,mod_idx} to have an opt_ prefix.  This is both for
-consistency with the rest of Xen, and to guarantee that we've got all
-instances of the variables covered in this change.  Explain how they're use.
-During cmdline/config parsing, always update both variables in pairs.
+... this (ab)use of the interface version, is the way to go. I think
+we want a brand new hypercall, with stability just like most other
+hypercalls have it. Backwards-incompatible interface changes then
+simply aren't allowed (as in: require a new sub-op instead).
 
-In early_microcode_load(), ASSERT() the invariant just in case.  Use a local
-variable for idx rather than operating on the static; we're the only consume
-of the value.
-
-Expand the index selection logic with comments and warnings to the user when
-something went wrong.
-
-Fixes: 5ed12565aa32 ("microcode: rendezvous CPUs in NMI handler and load ucode")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Daniel P. Smith <dpsmith@apertussolutions.com>
-
-Despite the fixes tag, this can't be backported (at least not in this form).
----
- xen/arch/x86/cpu/microcode/core.c | 76 +++++++++++++++++++++++--------
- 1 file changed, 57 insertions(+), 19 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 4c4003bf9687..fc31ab35c3c8 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -60,7 +60,6 @@
- #define MICROCODE_UPDATE_TIMEOUT_US 1000000
- 
- static module_t __initdata ucode_mod;
--static signed int __initdata ucode_mod_idx;
- static bool __initdata ucode_mod_forced;
- static unsigned int nr_cores;
- 
-@@ -97,11 +96,6 @@ struct patch_with_flags {
- };
- 
- static struct ucode_mod_blob __initdata ucode_blob;
--/*
-- * By default we will NOT parse the multiboot modules to see if there is
-- * cpio image with the microcode images.
-- */
--static bool __initdata ucode_scan;
- 
- /* By default, ucode loading is done in NMI handler */
- static bool ucode_in_nmi = true;
-@@ -109,13 +103,28 @@ static bool ucode_in_nmi = true;
- /* Protected by microcode_mutex */
- static const struct microcode_patch *microcode_cache;
- 
-+/*
-+ * opt_mod_idx and opt_scan have subtle semantics.
-+ *
-+ * The cmdline can either identify a module by number (inc -ve back-reference)
-+ * containing a raw microcode container, or select scan which instructs Xen to
-+ * search all modules for an uncompressed CPIO archive containing a file with
-+ * a vendor-dependent name.
-+ *
-+ * These options do not make sense when combined, so for the benefit of module
-+ * location we require that they are not both active together.
-+ */
-+static int __initdata opt_mod_idx;
-+static bool __initdata opt_scan;
-+
- /*
-  * Used by the EFI path only, when xen.cfg identifies an explicit microcode
-  * file.  Overrides ucode=<int>|scan on the regular command line.
-  */
- void __init microcode_set_module(unsigned int idx)
- {
--    ucode_mod_idx = idx;
-+    opt_mod_idx = idx;
-+    opt_scan = false;
-     ucode_mod_forced = 1;
- }
- 
-@@ -139,12 +148,16 @@ static int __init cf_check parse_ucode(const char *s)
-         else if ( !ucode_mod_forced ) /* Not forced by EFI */
-         {
-             if ( (val = parse_boolean("scan", s, ss)) >= 0 )
--                ucode_scan = val;
-+            {
-+                opt_scan = val;
-+                opt_mod_idx = 0;
-+            }
-             else
-             {
-                 const char *q;
- 
--                ucode_mod_idx = simple_strtol(s, &q, 0);
-+                opt_scan = false;
-+                opt_mod_idx = simple_strtol(s, &q, 0);
-                 if ( q != ss )
-                     rc = -EINVAL;
-             }
-@@ -166,7 +179,7 @@ static void __init microcode_scan_module(struct boot_info *bi)
-     int i;
- 
-     ucode_blob.size = 0;
--    if ( !ucode_scan )
-+    if ( !opt_scan )
-         return;
- 
-     if ( boot_cpu_data.x86_vendor == X86_VENDOR_AMD )
-@@ -792,7 +805,7 @@ static int __init cf_check microcode_init_cache(void)
-     if ( !ucode_ops.apply_microcode )
-         return -ENODEV;
- 
--    if ( ucode_scan )
-+    if ( opt_scan )
-         /* Need to rescan the modules because they might have been relocated */
-         microcode_scan_module(bi);
- 
-@@ -817,17 +830,42 @@ static int __init early_microcode_load(struct boot_info *bi)
-     const void *data = NULL;
-     size_t size;
-     struct microcode_patch *patch;
-+    int idx = opt_mod_idx;
-+
-+    /*
-+     * Cmdline parsing ensures this invariant holds, so that we don't end up
-+     * trying to mix multiple ways of finding the microcode.
-+     */
-+    ASSERT(idx == 0 || !opt_scan);
- 
--    if ( ucode_mod_idx < 0 )
--        ucode_mod_idx += bi->nr_modules;
--    if ( ucode_mod_idx <= 0 || ucode_mod_idx >= bi->nr_modules ||
--         !__test_and_clear_bit(ucode_mod_idx, bi->module_map) )
--        goto scan;
--    ucode_mod = *bi->mods[ucode_mod_idx].mod;
-- scan:
--    if ( ucode_scan )
-+    if ( opt_scan ) /* Scan for a CPIO archive */
-         microcode_scan_module(bi);
- 
-+    if ( idx ) /* Specific module nominated */
-+    {
-+        /*
-+         * Negative indicies can be used to reference from the end of the
-+         * modules.  e.g. ucode=-1 refers to the last module.
-+         */
-+        if ( idx < 0 )
-+            idx += bi->nr_modules;
-+
-+        if ( idx <= 0 || idx >= bi->nr_modules )
-+        {
-+            printk(XENLOG_WARNING "Microcode: Chosen module %d out of range [1, %u)\n",
-+                   idx, bi->nr_modules);
-+            return -ENODEV;
-+        }
-+
-+        if ( !__test_and_clear_bit(idx, bi->module_map) )
-+        {
-+            printk(XENLOG_WARNING "Microcode: Chosen module %d already used\n", idx);
-+            return -ENODEV;
-+        }
-+
-+        ucode_mod = *bi->mods[idx].mod;
-+    }
-+
-     if ( !ucode_mod.mod_end && !ucode_blob.size )
-         return 0;
- 
--- 
-2.39.5
-
+Jan
 
