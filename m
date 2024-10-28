@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D806D339A1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F0B2D339A2
 	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2024 15:50:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.826689.1241080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.826688.1241074 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5S0O-0001Mn-Di; Mon, 28 Oct 2024 15:50:08 +0000
+	id 1t5S0N-0001FH-SF; Mon, 28 Oct 2024 15:50:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 826689.1241080; Mon, 28 Oct 2024 15:50:08 +0000
+Received: by outflank-mailman (output) from mailman id 826688.1241074; Mon, 28 Oct 2024 15:50:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5S0O-0001LM-1s; Mon, 28 Oct 2024 15:50:08 +0000
-Received: by outflank-mailman (input) for mailman id 826689;
- Mon, 28 Oct 2024 15:50:07 +0000
+	id 1t5S0N-0001DL-Li; Mon, 28 Oct 2024 15:50:07 +0000
+Received: by outflank-mailman (input) for mailman id 826688;
+ Mon, 28 Oct 2024 15:50:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7IZ5=RY=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1t5S0N-0008FV-8j
- for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 15:50:07 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ id 1t5S0L-0008FV-Ho
+ for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 15:50:05 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4d1cebc9-9544-11ef-99a3-01e77a169b0f;
- Mon, 28 Oct 2024 16:50:05 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9a0c40849cso731818966b.3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 08:50:05 -0700 (PDT)
+ id 4c1752b5-9544-11ef-99a3-01e77a169b0f;
+ Mon, 28 Oct 2024 16:50:04 +0100 (CET)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5c95a962c2bso5541659a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 08:50:04 -0700 (PDT)
 Received: from localhost.localdomain ([217.156.233.154])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b3a0834a6sm387674066b.191.2024.10.28.08.50.04
+ a640c23a62f3a-a9b3a0834a6sm387674066b.191.2024.10.28.08.50.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 08:50:04 -0700 (PDT)
+ Mon, 28 Oct 2024 08:50:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d1cebc9-9544-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 4c1752b5-9544-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1730130605; x=1730735405; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1730130603; x=1730735403; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vCUIaO5AAUJAl3VVRobAf52t1sH+3QDwfli/NHe1tzs=;
-        b=cPAtnkReW2GjHosOwvGsYwTAOkydWbo96UeTiSRlrVpqo0ohTY7mlvtyCtkOmsJBQ3
-         fArpT3883r5gOsdxp8WGro8N70BJm/WjoPY00+e7QqHo6Pv+/lEugBsO5yeW+rDqM7yn
-         EPbZz0GQVoKc0MtE8UOZ5gDe+0PH9RT+WTscI=
+        bh=hY/UrTCQ/vWU0sbBxlJ8N5ALQVl83VMvY6/kdegt+f8=;
+        b=FJek+/D7mp0vn/T9HA2IbH50c731yiPg9/cjRpNDHKVx86eIvfLiQCvPG6ahNtbUR+
+         LV7oC4/RKRTUDyAy5j7XOQWW2/x5xlP4qma3T/3g1QZmlsJoWf7ltftn2eChnOZ7KCRs
+         MqYziWqu8Jj3YWUyg7HFH6gYg339cTt96FkkU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730130605; x=1730735405;
+        d=1e100.net; s=20230601; t=1730130603; x=1730735403;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vCUIaO5AAUJAl3VVRobAf52t1sH+3QDwfli/NHe1tzs=;
-        b=N4hcVtIKytbjnAVWOvodSrxKqnO4wiuJwBoE62VGnbUPUtihz171+ZEZoZFZSpGdNS
-         HDwV5sF/6ovR8he9Y5KDbqCKhfACwnsbPT58EQS/97OTGk4LR/YezEA3iu6ic2aeUF3A
-         BbBVhY8HZl7XoR3UE4kahX1CGgjH8k5h7Jl7ieMftzTa6mtjDwPm4+l7OebeQPxHvPHi
-         Nr9ApgCJ1+zM8srdR+x7iGq/Tcg3jOzYoaTPn5JGoVSCxvIS7lQrJ4k6HQONpZ6s1o7w
-         I8A/NK62uznZa7f7IVAdDGVpxhMx7Gv3LuzdLygnPdiTfiQX+oH5WjR4hEgtY7qJnLVX
-         eCEg==
-X-Gm-Message-State: AOJu0YyP4/foT71RTzdS+VPqXxhcAdyGmVoIb0gGzM9yg/Hr5H2td4Om
-	LD6Qpm5/5Bg8PJdBVdSX377vKwqXCxkexWjZaGAG7g1GXV4Pa1ZyU56YoDUmAAL/Q8jDQcfgw8c
-	f
-X-Google-Smtp-Source: AGHT+IE5VF1LUnql9xYflHwCakwiEC09wAgohLGgcWNnxyhKcGI4YZSpn8NZ2zgcm3u36Kdyu5zrtg==
-X-Received: by 2002:a17:906:794f:b0:a9a:4597:a7f3 with SMTP id a640c23a62f3a-a9de619876amr890640466b.62.1730130604948;
-        Mon, 28 Oct 2024 08:50:04 -0700 (PDT)
+        bh=hY/UrTCQ/vWU0sbBxlJ8N5ALQVl83VMvY6/kdegt+f8=;
+        b=Gly7dzCclPefjZNsd5+p9WUx8CvJxkN8DiUEr2eJGUEJt7iJUosNzK4tOs8t9SSWX4
+         FVzZn86SbHWOAsdjVnHQnsT8VnkWgD4CeazcBLqmVkgozhoxhU5UsWnEHTug0R2r6pJb
+         hOkUz7N3zQnNHm7FdN/7sembCbiKxNhlfa/zxRbbG+/k/MYOxNX0iQsaXTc5YzDpOKj5
+         QAvDszfa8bbB/a9xg9hJgkejWY5Fh7h4PdB+2ugmt2JXUku210uXfVja7XtOpA0Ye2z1
+         PoXtiPJp0Rrkhc44bYMX67tr9y8hd9KlKpfkTIAu1aJ7l9mpNlwML0HCX9bkYeAlYSDS
+         2YbQ==
+X-Gm-Message-State: AOJu0Yw5CAF7kEtNNwPRUTikoCYELzfx9gBKc61yed043r8CmPbM01TS
+	5fAKIKLMjvwHTAWkZacqqwDD+6viRlVyXQpB189EHrOV2WU2YKWl9/XAYfp/mg9LCkGNHky2Ca3
+	r
+X-Google-Smtp-Source: AGHT+IG6StWqjpAO8DYedOrCCnEILK72ffLHyWgeM9Uz/5/G68jTWsMGvKh3D3LSCUH1wOiNDrZUFg==
+X-Received: by 2002:a17:906:6a1d:b0:a9a:4f78:b8 with SMTP id a640c23a62f3a-a9de5c922c6mr748802166b.2.1730130603202;
+        Mon, 28 Oct 2024 08:50:03 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 06/14] x86/hvm: Map/unmap xsave area in hvmemul_{get,put}_fpu()
-Date: Mon, 28 Oct 2024 15:49:24 +0000
-Message-ID: <20241028154932.6797-7-alejandro.vallejo@cloud.com>
+Subject: [PATCH 04/14] x86/fpu: Map/umap xsave area in vcpu_{reset,setup}_fpu()
+Date: Mon, 28 Oct 2024 15:49:22 +0000
+Message-ID: <20241028154932.6797-5-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241028154932.6797-1-alejandro.vallejo@cloud.com>
 References: <20241028154932.6797-1-alejandro.vallejo@cloud.com>
@@ -94,51 +94,48 @@ No functional change.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- xen/arch/x86/hvm/emulate.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ xen/arch/x86/i387.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index f2bc6967dfcb..a6ddc9928f16 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -2371,7 +2371,8 @@ static int cf_check hvmemul_get_fpu(
-         alternative_vcall(hvm_funcs.fpu_dirty_intercept);
-     else if ( type == X86EMUL_FPU_fpu )
-     {
--        const fpusse_t *fpu_ctxt = &curr->arch.xsave_area->fpu_sse;
-+        const struct xsave_struct *xsave_area = vcpu_map_xsave_area(curr);
-+        const fpusse_t *fpu_ctxt = &xsave_area->fpu_sse;
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index 375a8274f632..a571bcb23c91 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -306,8 +306,10 @@ int vcpu_init_fpu(struct vcpu *v)
  
-         /*
-          * Latch current register state so that we can back out changes
-@@ -2397,6 +2398,8 @@ static int cf_check hvmemul_get_fpu(
-             else
-                 ASSERT(fcw == fpu_ctxt->fcw);
-         }
+ void vcpu_reset_fpu(struct vcpu *v)
+ {
++    struct xsave_struct *xsave_area = vcpu_map_xsave_area(v);
 +
-+        vcpu_unmap_xsave_area(curr, xsave_area);
-     }
- 
-     return X86EMUL_OKAY;
-@@ -2411,7 +2414,8 @@ static void cf_check hvmemul_put_fpu(
- 
-     if ( aux )
-     {
--        fpusse_t *fpu_ctxt = &curr->arch.xsave_area->fpu_sse;
-+        struct xsave_struct *xsave_area = vcpu_map_xsave_area(curr);
-+        fpusse_t *fpu_ctxt = &xsave_area->fpu_sse;
-         bool dval = aux->dval;
-         int mode = hvm_guest_x86_mode(curr);
- 
-@@ -2465,6 +2469,8 @@ static void cf_check hvmemul_put_fpu(
- 
-         fpu_ctxt->fop = aux->op;
- 
-+        vcpu_unmap_xsave_area(curr, xsave_area);
+     v->fpu_initialised = false;
+-    *v->arch.xsave_area = (struct xsave_struct) {
++    *xsave_area = (struct xsave_struct) {
+         .fpu_sse = {
+             .mxcsr = MXCSR_DEFAULT,
+             .fcw = FCW_RESET,
+@@ -315,15 +317,21 @@ void vcpu_reset_fpu(struct vcpu *v)
+         },
+         .xsave_hdr.xstate_bv = X86_XCR0_X87,
+     };
 +
-         /* Re-use backout code below. */
-         backout = X86EMUL_FPU_fpu;
-     }
++    vcpu_unmap_xsave_area(v, xsave_area);
+ }
+ 
+ void vcpu_setup_fpu(struct vcpu *v, const void *data)
+ {
++    struct xsave_struct *xsave_area = vcpu_map_xsave_area(v);
++
+     v->fpu_initialised = true;
+-    *v->arch.xsave_area = (struct xsave_struct) {
++    *xsave_area = (struct xsave_struct) {
+         .fpu_sse = *(const fpusse_t*)data,
+         .xsave_hdr.xstate_bv = XSTATE_FP_SSE,
+     };
++
++    vcpu_unmap_xsave_area(v, xsave_area);
+ }
+ 
+ /* Free FPU's context save area */
 -- 
 2.47.0
 
