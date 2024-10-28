@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B853CD33998
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 833F0D3399B
 	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2024 15:50:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.826687.1241070 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.826685.1241039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5S0N-0001A0-Jk; Mon, 28 Oct 2024 15:50:07 +0000
+	id 1t5S0K-00006t-Qh; Mon, 28 Oct 2024 15:50:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 826687.1241070; Mon, 28 Oct 2024 15:50:07 +0000
+Received: by outflank-mailman (output) from mailman id 826685.1241039; Mon, 28 Oct 2024 15:50:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5S0N-00019a-Bb; Mon, 28 Oct 2024 15:50:07 +0000
-Received: by outflank-mailman (input) for mailman id 826687;
- Mon, 28 Oct 2024 15:50:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t5S0K-00005H-K2; Mon, 28 Oct 2024 15:50:04 +0000
+Received: by outflank-mailman (input) for mailman id 826685;
+ Mon, 28 Oct 2024 15:50:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7IZ5=RY=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1t5S0L-000874-BW
- for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 15:50:05 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4ca4ce99-9544-11ef-a0c2-8be0dac302b0;
- Mon, 28 Oct 2024 16:50:04 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9a68480164so620241766b.3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 08:50:04 -0700 (PDT)
+ id 1t5S0J-0008FV-Bx
+ for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 15:50:03 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4a4527a6-9544-11ef-99a3-01e77a169b0f;
+ Mon, 28 Oct 2024 16:50:00 +0100 (CET)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a99f629a7aaso711148666b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 08:50:00 -0700 (PDT)
 Received: from localhost.localdomain ([217.156.233.154])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b3a0834a6sm387674066b.191.2024.10.28.08.50.03
+ a640c23a62f3a-a9b3a0834a6sm387674066b.191.2024.10.28.08.49.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 08:50:03 -0700 (PDT)
+ Mon, 28 Oct 2024 08:49:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,94 +47,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ca4ce99-9544-11ef-a0c2-8be0dac302b0
+X-Inumbo-ID: 4a4527a6-9544-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1730130604; x=1730735404; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=k5/TXen51hB68I6BFGT+jmFtlRjBnBfjDOpUJmu9hDE=;
-        b=TY/fIWVJd9hNosxSg3y3L6TwxGcyw7Z3XrbpVDP6KAO8hoYT8IWuoWN7fhgQSh5JGG
-         +bBsdgJR4MDfiAdoYrWFTpEMiT1TOo7spC056dsdxpo+U0KpKG/fhZU79WPIiYqJ99bY
-         ViUYA3oq4eJvH4rpmRy6UPRfPG6XgaiLJSg+M=
+        d=cloud.com; s=cloud; t=1730130600; x=1730735400; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=czbuFAPZSDRqGdAkOsiYgLR3DREhnvnkdIK4ff9uSdE=;
+        b=XRDbTsyhMX8Qdk8qIV64prBU5LXICbCHhY6Q+WmKPTWIR7HeBWn18/TAqhjXvJyYEV
+         4HYF2IpjnEERvUiZviWC8NHZlNbYQVJF/ipaVMN9oMU5fcyuTLmYkaiAekzOv8mX4jmq
+         5l6/JwldWXSB43caWeVrn5C4qwPyNcZNEPxCo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730130604; x=1730735404;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=k5/TXen51hB68I6BFGT+jmFtlRjBnBfjDOpUJmu9hDE=;
-        b=RNZV0/86H4+vsjKM0IYys36ILFAR9wTFeMPYBecQYl3eO8tljREINku+2EVhzV6dl6
-         fO2XhsxpHP9Pap1KENTjjcpzrZohtZlSkkR6xTjRNR3RVTStK6orPJcvNjYjqZFgVIkp
-         hfVhha+VXhw43FknpHKCOOXBxDsmLRajY8GjZzcel0iJFsAznIfJtiltF7yHB7VKKU5a
-         4tEBBLEFukgvYVQo/atFGN2hu0W8nXZax18exmHaT26sz2xfJECjnFT26gHqTCscTMGi
-         WS93vG7fzaNYdU/tL9KZxVfeb5xhiaJHZXZOmDR3AIqCPGpLiXPPgvIUh1x5VN2GkJuZ
-         zRig==
-X-Gm-Message-State: AOJu0Yxprcl01SzgNs+btBwc1R8S25lC6HwdnhEuwZj0vjwd/5jz/WwO
-	ztY4WCGg845vZx/vtnjhtCiO1xgUxsAzXvuJ4sTt2KeYxYtMQpvl9Bho7Wygh0BcXK5LIT/vNfI
-	G
-X-Google-Smtp-Source: AGHT+IEuqJAcG2GYWLVnnngxRLpaSRDV3BwBCu+v1OexXNCj5m10aMlavT0wiEaUKGuKYvkiTGsvTg==
-X-Received: by 2002:a17:906:6a1d:b0:a9a:18ee:5106 with SMTP id a640c23a62f3a-a9de61e95a5mr760804266b.65.1730130604050;
-        Mon, 28 Oct 2024 08:50:04 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1730130600; x=1730735400;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=czbuFAPZSDRqGdAkOsiYgLR3DREhnvnkdIK4ff9uSdE=;
+        b=lD7mdNjgyiOMvjNdS3DhGkTxgS3fs2KxFjEka59qTmFA5xW9Avlu0FjtThyuJvMAqp
+         N7s05ay/iGuVFgQ7RVPtazeN5eGgD/YJEcoUnEEq/rrrAp/XQrK4Qr6OCt+z0N6Yy9h+
+         rN0RTGGC+fBd/XnVAmsFo2kS1Yu1n8KKX+AIwQlzb69+nddGGLeSDVljBkjKN5YH/o9B
+         MOulLxrvNpG9kJ7WkZHV9GQu84M7TVQew1Mg647UdPNLgaS52tZ87CCGSEzdjDR1PomC
+         Y0WCbqRKG9QcVkWLfXH8hP9rDSM+SzLtzGQwm8RwtXHz9JZpxsjkM+/Y/RoDOhB491Y4
+         Cqfw==
+X-Gm-Message-State: AOJu0YyiRmSV2QY66xxc5Mt2RJqZygkyhUFGEayDkVA+N9guQZI0iq/l
+	nYzcHQ4W0CzVQN8qQCVLLHmJsquI7GeZ0j9f6PdI0rqGZyzGyIk5Y5qU6fM6rL1Z+JKNtd1lqT2
+	L
+X-Google-Smtp-Source: AGHT+IFGIdHAltL2XtMni+KJgXHV9/KCZ+WGVeJ9Y/UGlpHDeZfbzt3Wo7J2VZoi5e8szL+LzaFZAA==
+X-Received: by 2002:a17:907:ea3:b0:a99:f9fa:5c01 with SMTP id a640c23a62f3a-a9e22b3b53amr3734166b.32.1730130599962;
+        Mon, 28 Oct 2024 08:49:59 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 05/14] x86/xstate: Map/unmap xsave area in xstate_set_init() and handle_setbv()
-Date: Mon, 28 Oct 2024 15:49:23 +0000
-Message-ID: <20241028154932.6797-6-alejandro.vallejo@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	"Elias El Yandouzi" <eliasely@amazon.com>,
+	"Julien Grall" <julien@xen.org>
+Subject: [PATCH 00/14] x86: Address Space Isolation FPU preparations
+Date: Mon, 28 Oct 2024 15:49:18 +0000
+Message-ID: <20241028154932.6797-1-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241028154932.6797-1-alejandro.vallejo@cloud.com>
-References: <20241028154932.6797-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-No functional change.
+In a Xen build with Address Space Isolation the FPU state cannot come from the
+xenheap, as that means the FPU state of vCPU_A may be speculatively accesible
+from any pCPU running a hypercall on behalf of vCPU_B. This series prepares
+code that manipulates the FPU state to use wrappers that fetch said state from
+"elsewhere"[1]. Those wrappers will crystalise into something more than dummy
+accesors after existing ASI efforts are merged. So far, they are:
 
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
----
- xen/arch/x86/xstate.c | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+  a) Remove the directmap (Elias El Yadouzi):
+  https://lore.kernel.org/xen-devel/20240513134046.82605-1-eliasely@amazon.com/
 
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index af9e345a7ace..60e752a245ca 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -993,7 +993,12 @@ int handle_xsetbv(u32 index, u64 new_bv)
- 
-         clts();
-         if ( curr->fpu_dirtied )
--            asm ( "stmxcsr %0" : "=m" (curr->arch.xsave_area->fpu_sse.mxcsr) );
-+        {
-+            struct xsave_struct *xsave_area = vcpu_map_xsave_area(curr);
-+
-+            asm ( "stmxcsr %0" : "=m" (xsave_area->fpu_sse.mxcsr) );
-+            vcpu_unmap_xsave_area(curr, xsave_area);
-+        }
-         else if ( xstate_all(curr) )
-         {
-             /* See the comment in i387.c:vcpu_restore_fpu_eager(). */
-@@ -1048,7 +1053,7 @@ void xstate_set_init(uint64_t mask)
-     unsigned long cr0 = read_cr0();
-     unsigned long xcr0 = this_cpu(xcr0);
-     struct vcpu *v = idle_vcpu[smp_processor_id()];
--    struct xsave_struct *xstate = v->arch.xsave_area;
-+    struct xsave_struct *xstate;
- 
-     if ( ~xfeature_mask & mask )
-     {
-@@ -1061,8 +1066,10 @@ void xstate_set_init(uint64_t mask)
- 
-     clts();
- 
-+    xstate = vcpu_map_xsave_area(v);
-     memset(&xstate->xsave_hdr, 0, sizeof(xstate->xsave_hdr));
-     xrstor(v, mask);
-+    vcpu_unmap_xsave_area(v, xstate);
- 
-     if ( cr0 & X86_CR0_TS )
-         write_cr0(cr0);
+    Removes all confidential data pages from the directmap and sets up the
+    infrastructure to access them. Its trust boundary is the domain and builds
+    the foundations of the secret hiding API around {un,}map_domain_page().
+
+  b) x86: adventures in Address Space Isolation (Roger Pau Monne):
+  https://lore.kernel.org/xen-devel/20240726152206.28411-1-roger.pau@citrix.com/
+
+    Extends (a) to put the trust boundary at the vCPU instead so the threat
+    model covers mutually distrustful vCPUs of the same domain. Extends the
+    API for secret hiding to provide private pCPU-local resources. And an
+    efficient means of accessing resources of the "current" vCPU.
+
+In essence, the idea is to stop directly accessing a pointer in the vCPU
+structure and instead collect it indirectly via a macro invocation. The
+proposed API is a map/unmap pair in order to tame the complexity involved in
+the various cases uniformly (Does the domain run with ASI enabled? Is the vCPU
+"current"? Are we lazy-switching?).
+
+The series is somewhat long, but each patch is fairly trivial. If need be, I
+can fold back a lot of these onto single commits to make it shorter.
+
+  * Patch 1 refreshes of a couple of asserts back into something helpful. Can
+    be folded onto patches 12 and 13 if deemed too silly for a Fixes tag.
+
+  * Patch 2 is the introduction of the wrappers in isolation.
+
+  * Patches 3 - 10 are split for ease of review, but are conceptually the same
+    thing over and over (to stop using direct v->arch.xsave_area and to use
+    wrappers instead).
+
+  * Patch 11 cleans the idle vcpu state after using it as dumping groung. It's
+    not strictly required for this series, but I'm bound to forget to do it
+    later after we _do_ care and does no harm to do it now. It's otherwise
+    independent of the other patches (it clashes with 10, but only due to both
+    modifying the same code; it's conceptually independent).
+
+  * Patches 12 and 13 bite the bullet and enlightens the (f)xsave and (f)xrstor
+    abstractions to use the wrappers rather than direct access.
+
+  * Patches 14 is the last remaining direct use xsave area. It's too tricky to
+    introduce ahead of patches 12 and 13 because they need state passed not
+    available until those have gone in.
+
+[1] That "elsewhere" will be with high likelihood either the directmap (on
+non-ASI), some perma-mapped vCPU-local area (see series (b) at the top) or
+implemented as a transient mapping in the style of {un,}map_domain_page() for
+glacially cold accesses to non-current vCPUs. Importantly, writing the final
+macros involve the other series going in.
+
+Alejandro Vallejo (14):
+  x86/xstate: Update stale assertions in fpu_x{rstor,save}()
+  x86/xstate: Create map/unmap primitives for xsave areas
+  x86/hvm: Map/unmap xsave area in hvm_save_cpu_ctxt()
+  x86/fpu: Map/umap xsave area in vcpu_{reset,setup}_fpu()
+  x86/xstate: Map/unmap xsave area in xstate_set_init() and
+    handle_setbv()
+  x86/hvm: Map/unmap xsave area in hvmemul_{get,put}_fpu()
+  x86/domctl: Map/unmap xsave area in arch_get_info_guest()
+  x86/xstate: Map/unmap xsave area in {compress,expand}_xsave_states()
+  x86/emulator: Refactor FXSAVE_AREA to use wrappers
+  x86/mpx: Map/unmap xsave area in in read_bndcfgu()
+  x86/mpx: Adjust read_bndcfgu() to clean after itself
+  x86/fpu: Pass explicit xsave areas to fpu_(f)xsave()
+  x86/fpu: Pass explicit xsave areas to fpu_(f)xrstor()
+  x86/xstate: Make xstate_all() and vcpu_xsave_mask() take explicit
+    xstate
+
+ xen/arch/x86/domctl.c             |  9 +++--
+ xen/arch/x86/hvm/emulate.c        | 10 ++++-
+ xen/arch/x86/hvm/hvm.c            |  8 ++--
+ xen/arch/x86/i387.c               | 67 ++++++++++++++++++++-----------
+ xen/arch/x86/include/asm/xstate.h | 29 +++++++++++--
+ xen/arch/x86/x86_emulate/blk.c    | 10 ++++-
+ xen/arch/x86/xstate.c             | 51 ++++++++++++++++-------
+ 7 files changed, 130 insertions(+), 54 deletions(-)
+
 -- 
 2.47.0
 
