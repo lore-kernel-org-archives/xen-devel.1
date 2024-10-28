@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CFD0D13588
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7025D13593
 	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2024 09:19:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.826298.1240534 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.826301.1240560 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5Lu4-0006XR-GK; Mon, 28 Oct 2024 09:19:12 +0000
+	id 1t5Lu7-0007BU-NN; Mon, 28 Oct 2024 09:19:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 826298.1240534; Mon, 28 Oct 2024 09:19:12 +0000
+Received: by outflank-mailman (output) from mailman id 826301.1240560; Mon, 28 Oct 2024 09:19:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5Lu4-0006Wc-DB; Mon, 28 Oct 2024 09:19:12 +0000
-Received: by outflank-mailman (input) for mailman id 826298;
- Mon, 28 Oct 2024 09:19:11 +0000
+	id 1t5Lu7-0007Au-H3; Mon, 28 Oct 2024 09:19:15 +0000
+Received: by outflank-mailman (input) for mailman id 826301;
+ Mon, 28 Oct 2024 09:19:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/lrK=RY=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t5Lu3-0005yk-94
- for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 09:19:11 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ id 1t5Lu6-0005yk-JW
+ for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 09:19:14 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id afe37ec1-950d-11ef-99a3-01e77a169b0f;
- Mon, 28 Oct 2024 10:19:09 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a850270e2so677426566b.0
- for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 02:19:09 -0700 (PDT)
+ id b239fedf-950d-11ef-99a3-01e77a169b0f;
+ Mon, 28 Oct 2024 10:19:13 +0100 (CET)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9a0ec0a94fso572799566b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 02:19:13 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b1f05deb6sm355961566b.88.2024.10.28.02.19.06
+ a640c23a62f3a-a9b1f05deb6sm355961566b.88.2024.10.28.02.19.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 02:19:06 -0700 (PDT)
+ Mon, 28 Oct 2024 02:19:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: afe37ec1-950d-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: b239fedf-950d-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1730107148; x=1730711948; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1730107152; x=1730711952; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oICYqe4yhMzxG8joOnpcuB9tYuO3zHV62gOFfMxJa7M=;
-        b=W3KafJDx2IkapzBEPdM/Kv/m6YdPTmMCwrJJrd5jp/65m5rtoyCK5qXgstTZdj+2Es
-         FhGUJCFvzFHC5zPb13U5VfM8x5yn0wXQ5d4xSzhNZeTlGNlc+c0sitTidZ2jEUfqptuZ
-         GTEowN+QGdF0w5nnQITXk7yv12ymuPV6bAabc=
+        bh=s0bQWwaJpgsfZHiC3o/SG7G/jAI+5h9RvIivMx1nt38=;
+        b=Az2RTmn5ff2Ct6zz41gAjJZB9XfpGMD9+o0qlhKVrw/1Cl7EAbJ2POE30l4BTXmsS0
+         /nf56CIcfRsC7xGptB/dbR/MkShPTEIY4lRiLz0l4c0avCLNVj1HNh5dmix+HBhOgFuP
+         drfSrqMLm5pln0F8TPAgv3uWgWuU1yRDLoWTo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730107148; x=1730711948;
+        d=1e100.net; s=20230601; t=1730107152; x=1730711952;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=oICYqe4yhMzxG8joOnpcuB9tYuO3zHV62gOFfMxJa7M=;
-        b=cJnp22mqe0X/ECd6QCx5/caPAkC1npv7PSNMSUULbD9kqI+nmLZBvm7KNFEcehDO7Q
-         NQ7iuJ02H61DD5qq6JiIb0Y0/Eyej3cfGbCPnpKDoRNJhMZZie9g/GVSxe1/Dxcijfdk
-         ElSqoMRHlW5707HT8IxPb7KEFzWIuecIsFq7tUL772asuLKORN3kB9LLe95pF1TMzmEB
-         W0hOz+U5tH0yoGBFoJ3OJeN11yua0ex9jKpX8IH8QMYsBsMzPczL5PEuJ8+lVy1GfEgf
-         dAVIh0K8OmFsrefEBaDZF8IKm8M+L9hUk3ZrCO8yHrLmoxT26VAy8lLZK0OUv8mLkB22
-         V1DQ==
-X-Gm-Message-State: AOJu0YyfQG6yZMIoQMtJ4uS0oxxkizbsPqaoM/Kpk6338MH5vSJkU4OA
-	aNCfaml6JFGY95TI8FMkQBua/kUskBF4NSvrIUYlur9AFjozwpXM+itPr4G+8yStpY12OiDfRk6
-	h
-X-Google-Smtp-Source: AGHT+IFPmRBctsKkbYZfwJ/wA3cEUyI1GBO58kJ5TMNvnj+8riKv+CKvmi65G6mLHSuZnD3+BsL2RA==
-X-Received: by 2002:a17:907:a07:b0:a99:4ebc:82d4 with SMTP id a640c23a62f3a-a9de6192c15mr813457466b.55.1730107148172;
-        Mon, 28 Oct 2024 02:19:08 -0700 (PDT)
+        bh=s0bQWwaJpgsfZHiC3o/SG7G/jAI+5h9RvIivMx1nt38=;
+        b=aroNsNC1vxSkDGCqvdZ6nGa/+HHkdLs85Q4e6Q7PkCXQ27G9qKv74JCIyF5W9cNGMt
+         m+I8eY57H78HjIzHbH9qYw05qmMTecfFVcVWl7DJP3b+p+Cbbj9exVaQGHh1+Cp3rk/X
+         nR7wuJfs+4jJieBWtP6UN+zwylnmyO+uJZsP5xIi0qR36FOCgboK1w2hXxr8WbYhyXXx
+         NcCXbLTsWkkLcZLt5SpGvS3pA2Z696G4mtxcs1kljMX3NLfErYqG010mtEQQx2vqekyc
+         H10iB0HsRjdSZVh0EwbJ6g+pI0UytF9YLcP1UbcHkqTwx/GNjbJeG8hLNAePKfq48xyg
+         Kwaw==
+X-Gm-Message-State: AOJu0YyqzzmctjgmPzrRmQ4HDdILNIvbmFrOBQXLhwUpihBZYww3b7XT
+	OkvmfIARTopcQHAtG6RrF+n3HFObS/UEE1x8qCEkhMSUboANffKmQ+Phn9WKp1tpZ/EOQsmtBmQ
+	C
+X-Google-Smtp-Source: AGHT+IHUScjwHs+SIRSiBfF67ypzxxtUffXbIKI8gWWL9LwAwdGM1fnb3VoqaEvFjPGPmyn4qCNscQ==
+X-Received: by 2002:a17:906:f59b:b0:a99:f975:2e6 with SMTP id a640c23a62f3a-a9de5f6ddcbmr788105366b.35.1730107151905;
+        Mon, 28 Oct 2024 02:19:11 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH 05/10] x86/ucode: Fold microcode_grab_module() into its single caller
-Date: Mon, 28 Oct 2024 09:18:51 +0000
-Message-Id: <20241028091856.2151603-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 08/10] x86/ucode: Use bootstrap_unmap() in early_microcode_load()
+Date: Mon, 28 Oct 2024 09:18:54 +0000
+Message-Id: <20241028091856.2151603-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241028091856.2151603-1-andrew.cooper3@citrix.com>
 References: <20241028091856.2151603-1-andrew.cooper3@citrix.com>
@@ -91,7 +91,16 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-No functional change.
+If bootstrap_map() has provided a mapping, we must free it when done.  Failing
+to do so may cause a spurious failure for unrelated logic later.
+
+Inserting a bootstrap_unmap() here does not break the use of ucode_{blob,mod}
+any more than they already are.
+
+Add a printk noting when we didn't find a microcode patch.  It's at debug
+level, because this is the expected case on AMD Client systems, and SDPs, but
+for people trying to figure out why microcode loading isn't work, it might be
+helpful.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -99,50 +108,51 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/cpu/microcode/core.c | 23 +++++++++--------------
- 1 file changed, 9 insertions(+), 14 deletions(-)
+ xen/arch/x86/cpu/microcode/core.c | 20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 0b00e70f3b07..4c4003bf9687 100644
+index 6a87390ab770..28cfeab75a81 100644
 --- a/xen/arch/x86/cpu/microcode/core.c
 +++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -205,19 +205,6 @@ static void __init microcode_scan_module(struct boot_info *bi)
-     }
- }
- 
--static void __init microcode_grab_module(struct boot_info *bi)
--{
--    if ( ucode_mod_idx < 0 )
--        ucode_mod_idx += bi->nr_modules;
--    if ( ucode_mod_idx <= 0 || ucode_mod_idx >= bi->nr_modules ||
--         !__test_and_clear_bit(ucode_mod_idx, bi->module_map) )
--        goto scan;
--    ucode_mod = *bi->mods[ucode_mod_idx].mod;
--scan:
--    if ( ucode_scan )
--        microcode_scan_module(bi);
--}
--
- static struct microcode_ops __ro_after_init ucode_ops;
- 
- static DEFINE_SPINLOCK(microcode_mutex);
-@@ -831,7 +818,15 @@ static int __init early_microcode_load(struct boot_info *bi)
+@@ -823,6 +823,7 @@ static int __init early_microcode_load(struct boot_info *bi)
      size_t size;
      struct microcode_patch *patch;
+     int idx = opt_mod_idx;
++    int rc = 0;
  
--    microcode_grab_module(bi);
-+    if ( ucode_mod_idx < 0 )
-+        ucode_mod_idx += bi->nr_modules;
-+    if ( ucode_mod_idx <= 0 || ucode_mod_idx >= bi->nr_modules ||
-+         !__test_and_clear_bit(ucode_mod_idx, bi->module_map) )
-+        goto scan;
-+    ucode_mod = *bi->mods[ucode_mod_idx].mod;
-+ scan:
-+    if ( ucode_scan )
-+        microcode_scan_module(bi);
+     /*
+      * Cmdline parsing ensures this invariant holds, so that we don't end up
+@@ -878,15 +879,24 @@ static int __init early_microcode_load(struct boot_info *bi)
+     patch = ucode_ops.cpu_request_microcode(data, size, false);
+     if ( IS_ERR(patch) )
+     {
+-        printk(XENLOG_WARNING "Parsing microcode blob error %ld\n",
+-               PTR_ERR(patch));
+-        return PTR_ERR(patch);
++        rc = PTR_ERR(patch);
++        printk(XENLOG_WARNING "Microcode: Parse error %d\n", rc);
++        goto unmap;
+     }
  
-     if ( !ucode_mod.mod_end && !ucode_blob.size )
-         return 0;
+     if ( !patch )
+-        return -ENOENT;
++    {
++        printk(XENLOG_DEBUG "Microcode: No suitable patch found\n");
++        rc = -ENOENT;
++        goto unmap;
++    }
++
++    rc = microcode_update_cpu(patch, 0);
+ 
+-    return microcode_update_cpu(patch, 0);
++ unmap:
++    bootstrap_unmap();
++
++    return rc;
+ }
+ 
+ int __init early_microcode_init(struct boot_info *bi)
 -- 
 2.39.5
 
