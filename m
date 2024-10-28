@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 807D6D3399B
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2024 15:50:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.826697.1241158 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 396E8D33998
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2024 16:03:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.826778.1241180 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5S0Y-0003pu-1P; Mon, 28 Oct 2024 15:50:18 +0000
+	id 1t5SDE-0003B0-0g; Mon, 28 Oct 2024 16:03:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 826697.1241158; Mon, 28 Oct 2024 15:50:17 +0000
+Received: by outflank-mailman (output) from mailman id 826778.1241180; Mon, 28 Oct 2024 16:03:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5S0X-0003nf-LI; Mon, 28 Oct 2024 15:50:17 +0000
-Received: by outflank-mailman (input) for mailman id 826697;
- Mon, 28 Oct 2024 15:50:16 +0000
+	id 1t5SDD-0003At-Rk; Mon, 28 Oct 2024 16:03:23 +0000
+Received: by outflank-mailman (input) for mailman id 826778;
+ Mon, 28 Oct 2024 16:03:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7IZ5=RY=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1t5S0W-0008FV-42
- for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 15:50:16 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=xGmR=RY=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1t5SDD-0003An-C9
+ for xen-devel@lists.xenproject.org; Mon, 28 Oct 2024 16:03:23 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 50c7b84f-9544-11ef-99a3-01e77a169b0f;
- Mon, 28 Oct 2024 16:50:11 +0100 (CET)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a9a850270e2so737391466b.0
- for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 08:50:11 -0700 (PDT)
-Received: from localhost.localdomain ([217.156.233.154])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b3a0834a6sm387674066b.191.2024.10.28.08.50.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 08:50:10 -0700 (PDT)
+ id 272ca9d4-9546-11ef-99a3-01e77a169b0f;
+ Mon, 28 Oct 2024 17:03:21 +0100 (CET)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-539f72c913aso5744813e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2024 09:03:21 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-431935f744esm114660985e9.34.2024.10.28.09.03.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Oct 2024 09:03:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,210 +47,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50c7b84f-9544-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 272ca9d4-9546-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1730130611; x=1730735411; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oF/zafBR21s51XQ55xrj7f7wP/qB8eTuRfs/webK9Bc=;
-        b=f1cDNAWcjJX4J37+CTPWbXlYgvwX/Jz5sjH2B7yHzmXkRJgU3ENIiLy+se7hD4X/5f
-         t9zzo//623V/MD3zrgzOxkWBokb/ivVlcZh6YRNNOppxpM3jNzlNR3N17YI2Ge+ksIut
-         nFLh2yig6t4c+KXcsQDmuGECIrIOdvL85Qi3k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730130611; x=1730735411;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=suse.com; s=google; t=1730131400; x=1730736200; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=oF/zafBR21s51XQ55xrj7f7wP/qB8eTuRfs/webK9Bc=;
-        b=Zhfx38xO15hlv9imHY7hnIx1hzHQ3c2F052vKj6E4NiRsyNm+dSzNm3j+0yAF7gW5G
-         EJcqZPGl/WdA3V7FiCBSthw92ZzpwM0lC8fINJdV3MmkhTCb3pv+BGxMcq71+97pS//S
-         /iV7ilzkVp9oRS186o0mr2XJFcHKUy9QpLpmFweP5ZVM3G4vW+mQSZp7+TRqPlIx58Il
-         5LHPrhO5oHuc5LQt7jD+WnHDcprog85N9BVo/Ki0nOa5tumZQrg1P8GVXxLPKNWKTwsh
-         wQAYMdoF1kyzuDZuV2GS8mBRGJKDR8VrD/9lFgeSw+4i9PrUbp+VMYIl1m9mNUjKtaUJ
-         lGUg==
-X-Gm-Message-State: AOJu0YxTLAf+7xwjjeSJ6gE8lTThIfWiFDN4DQ8oma0mBFUK3xvddnLC
-	WtvNvVI2QDwiOcajB4ApCTf/mlcmRwpSMmgMK/dW+GnIuKStS+k7vVbuYImcHjslb2/VYZ9HyRS
-	H
-X-Google-Smtp-Source: AGHT+IF3/bhrLgSOziE7SwxQmzzMAg6HWwkCFCduzdTekcWhgq6v2MAPrFNTaOqxjidfqXp1wB6P8Q==
-X-Received: by 2002:a17:906:f591:b0:a9a:9df:5581 with SMTP id a640c23a62f3a-a9de5ee8bacmr837394266b.38.1730130611065;
-        Mon, 28 Oct 2024 08:50:11 -0700 (PDT)
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 13/14] x86/fpu: Pass explicit xsave areas to fpu_(f)xrstor()
-Date: Mon, 28 Oct 2024 15:49:31 +0000
-Message-ID: <20241028154932.6797-14-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241028154932.6797-1-alejandro.vallejo@cloud.com>
-References: <20241028154932.6797-1-alejandro.vallejo@cloud.com>
+        bh=Qgj69Cd/dAiOQr4jsPsRsdPGZRl2lr4O7CpY+NdIcKg=;
+        b=HBb2ZgzjKV9v8Y2NKC5du9d1k2l61sWYVaBYH42NQ1hCVl3HtrIuv0QTLBxlTAe2Cb
+         0ERrEZ6AIpEM2SYFvyLVRaZ8Wi4uzYEQliHfVKnGCGTGYMZpLEvHPaVl0cqzF1CYU407
+         jRXyveH7WTME/gSbhrVksese6LXKb0L8zbWwG7+qB+VOYjL/tSutm7v3AhiXW+cUOOLh
+         XqtyknG9K3uc4WC1/8LTKOsrLccdTq5Jy/0X6k69OSTsN2tLoyTeWpcxZWSzOf+PnOlN
+         0p9/2WoDsqB7aiX2YhfzifJn2xI94NKcTAbxq4rAcnPoS7S9DQFanAowecVz6yD6ZbjN
+         x66g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730131400; x=1730736200;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Qgj69Cd/dAiOQr4jsPsRsdPGZRl2lr4O7CpY+NdIcKg=;
+        b=Z/HTi2kd9xGDzAe53UKVMc1T9olGG19ovz6l7URWiVz4uIwsayO+FXGi3LgG9XW9xL
+         n8tITsvmZ8grY4YMH/LXFTGN3JTiMx33QxmGf7X/qzw/wbNXvNzRQPE6NutzeK/8E8Zu
+         EXDQwqcgPae23mQgnYk3kMKH02WJSNOCjGEMZUBE15RCGK4k3h56E7yXLYTjoZyaOiE+
+         gA0WH6P+4bWljldqy3u35uDE9fN6+juUv1s8ipjaqQ4UTROeD5s8JhSfc29Ng3D67mto
+         2vj+RfAcFgUBrOGH20DBZpX2h/jiu83tzujvgJ4NuOI9YHshIW08SfYDyPq5UFact5oI
+         DWiA==
+X-Gm-Message-State: AOJu0Yw020MK/HxHvY5mWV0IRai+htwzcsgf1IUvcpSRm6dl7IW2nQ13
+	UmiN/Pc/3dQCO14A+v3rJwQgdRnDmhOXogyS/IUEpCpxoKdWL8LVf5L7Jp+F/XO9NZXMkpJgcGM
+	=
+X-Google-Smtp-Source: AGHT+IHMEj5uN+E77renAJ9qLvrG8/erYlbeK1PEi2oVzi9SyyFi0TsupUvfAgk7kZfoFXL0wl+ieg==
+X-Received: by 2002:a05:6512:401f:b0:539:e317:b05f with SMTP id 2adb3069b0e04-53b348e2e0fmr4082587e87.28.1730131398870;
+        Mon, 28 Oct 2024 09:03:18 -0700 (PDT)
+Message-ID: <b2fdb048-cfc5-4f61-8507-bf8020e02132@suse.com>
+Date: Mon, 28 Oct 2024 17:03:17 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] earlycpio: constify find_cpio_data()'s "data" parameter
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-No functional change.
+As with 9cbf61445cda ("xen/earlycpio: Drop nextoff parameter"): While
+this is imported from Linux, the parameter not being pointer-to-const is
+dubious in the first place and we're not plausibly going to gain a write
+through it.
 
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
----
- xen/arch/x86/i387.c               | 26 ++++++++++++++++----------
- xen/arch/x86/include/asm/xstate.h |  2 +-
- xen/arch/x86/xstate.c             | 10 ++++++----
- 3 files changed, 23 insertions(+), 15 deletions(-)
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
-index 5950fbcf272e..7e1fb8ad8779 100644
---- a/xen/arch/x86/i387.c
-+++ b/xen/arch/x86/i387.c
-@@ -20,7 +20,8 @@
- /*     FPU Restore Functions   */
- /*******************************/
- /* Restore x87 extended state */
--static inline void fpu_xrstor(struct vcpu *v, uint64_t mask)
-+static inline void fpu_xrstor(struct vcpu *v, struct xsave_struct *xsave_area,
-+                              uint64_t mask)
- {
-     bool ok;
- 
-@@ -31,16 +32,14 @@ static inline void fpu_xrstor(struct vcpu *v, uint64_t mask)
-      */
-     ok = set_xcr0(v->arch.xcr0_accum | XSTATE_FP_SSE);
-     ASSERT(ok);
--    xrstor(v, mask);
-+    xrstor(v, xsave_area, mask);
-     ok = set_xcr0(v->arch.xcr0 ?: XSTATE_FP_SSE);
-     ASSERT(ok);
- }
- 
- /* Restore x87 FPU, MMX, SSE and SSE2 state */
--static inline void fpu_fxrstor(struct vcpu *v)
-+static inline void fpu_fxrstor(struct vcpu *v, const fpusse_t *fpu_ctxt)
- {
--    const fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
--
-     /*
-      * Some CPUs don't save/restore FDP/FIP/FOP unless an exception
-      * is pending. Clear the x87 state here by setting it to fixed
-@@ -197,6 +196,8 @@ static inline void fpu_fxsave(struct vcpu *v, fpusse_t *fpu_ctxt)
- /* Restore FPU state whenever VCPU is schduled in. */
- void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts)
- {
-+    struct xsave_struct *xsave_area;
-+
-     /* Restore nonlazy extended state (i.e. parts not tracked by CR0.TS). */
-     if ( !v->arch.fully_eager_fpu && !v->arch.nonlazy_xstate_used )
-         goto maybe_stts;
-@@ -211,12 +212,13 @@ void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts)
-      * above) we also need to restore full state, to prevent subsequently
-      * saving state belonging to another vCPU.
-      */
-+    xsave_area = vcpu_map_xsave_area(v);
-     if ( v->arch.fully_eager_fpu || xstate_all(v) )
-     {
-         if ( cpu_has_xsave )
--            fpu_xrstor(v, XSTATE_ALL);
-+            fpu_xrstor(v, xsave_area, XSTATE_ALL);
-         else
--            fpu_fxrstor(v);
-+            fpu_fxrstor(v, &xsave_area->fpu_sse);
- 
-         v->fpu_initialised = 1;
-         v->fpu_dirtied = 1;
-@@ -226,9 +228,10 @@ void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts)
-     }
-     else
-     {
--        fpu_xrstor(v, XSTATE_NONLAZY);
-+        fpu_xrstor(v, xsave_area, XSTATE_NONLAZY);
-         need_stts = true;
-     }
-+    vcpu_unmap_xsave_area(v, xsave_area);
- 
-  maybe_stts:
-     if ( need_stts )
-@@ -240,6 +243,7 @@ void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts)
+--- a/xen/common/earlycpio.c
++++ b/xen/common/earlycpio.c
+@@ -64,7 +64,8 @@ enum cpio_fields {
+  *              the match returned an empty filename string.
   */
- void vcpu_restore_fpu_lazy(struct vcpu *v)
+ 
+-struct cpio_data __init find_cpio_data(const char *path, void *data, size_t len)
++struct cpio_data __init find_cpio_data(
++	const char *path, const void *data, size_t len)
  {
-+    struct xsave_struct *xsave_area;
-     ASSERT(!is_idle_vcpu(v));
+ 	const size_t cpio_header_len = 8*C_NFIELDS - 2;
+ 	struct cpio_data cd = { NULL, 0, "" };
+--- a/xen/include/xen/earlycpio.h
++++ b/xen/include/xen/earlycpio.h
+@@ -9,6 +9,6 @@ struct cpio_data {
+ 	char name[MAX_CPIO_FILE_NAME];
+ };
  
-     /* Avoid recursion. */
-@@ -250,10 +254,12 @@ void vcpu_restore_fpu_lazy(struct vcpu *v)
+-struct cpio_data find_cpio_data(const char *path, void *data, size_t len);
++struct cpio_data find_cpio_data(const char *path, const void *data, size_t len);
  
-     ASSERT(!v->arch.fully_eager_fpu);
- 
-+    xsave_area = vcpu_map_xsave_area(v);
-     if ( cpu_has_xsave )
--        fpu_xrstor(v, XSTATE_LAZY);
-+        fpu_xrstor(v, xsave_area, XSTATE_LAZY);
-     else
--        fpu_fxrstor(v);
-+        fpu_fxrstor(v, &xsave_area->fpu_sse);
-+    vcpu_unmap_xsave_area(v, xsave_area);
- 
-     v->fpu_initialised = 1;
-     v->fpu_dirtied = 1;
-diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
-index 104fe0d44173..43f7731c2b17 100644
---- a/xen/arch/x86/include/asm/xstate.h
-+++ b/xen/arch/x86/include/asm/xstate.h
-@@ -98,7 +98,7 @@ void set_msr_xss(u64 xss);
- uint64_t get_msr_xss(void);
- uint64_t read_bndcfgu(void);
- void xsave(struct vcpu *v, struct xsave_struct *ptr, uint64_t mask);
--void xrstor(struct vcpu *v, uint64_t mask);
-+void xrstor(struct vcpu *v, struct xsave_struct *ptr, uint64_t mask);
- void xstate_set_init(uint64_t mask);
- bool xsave_enabled(const struct vcpu *v);
- int __must_check validate_xstate(const struct domain *d,
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index 518388e6e272..aa5c062f7e51 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -374,11 +374,10 @@ void xsave(struct vcpu *v, struct xsave_struct *ptr, uint64_t mask)
-         ptr->fpu_sse.x[FPU_WORD_SIZE_OFFSET] = fip_width;
- }
- 
--void xrstor(struct vcpu *v, uint64_t mask)
-+void xrstor(struct vcpu *v, struct xsave_struct *ptr, uint64_t mask)
- {
-     uint32_t hmask = mask >> 32;
-     uint32_t lmask = mask;
--    struct xsave_struct *ptr = v->arch.xsave_area;
-     unsigned int faults, prev_faults;
- 
-     /*
-@@ -992,6 +991,7 @@ int handle_xsetbv(u32 index, u64 new_bv)
-     mask &= curr->fpu_dirtied ? ~XSTATE_FP_SSE : XSTATE_NONLAZY;
-     if ( mask )
-     {
-+        struct xsave_struct *xsave_area = vcpu_map_xsave_area(curr);
-         unsigned long cr0 = read_cr0();
- 
-         clts();
-@@ -1010,7 +1010,9 @@ int handle_xsetbv(u32 index, u64 new_bv)
-             curr->fpu_dirtied = 1;
-             cr0 &= ~X86_CR0_TS;
-         }
--        xrstor(curr, mask);
-+        xrstor(curr, xsave_area, mask);
-+        vcpu_unmap_xsave_area(curr, xsave_area);
-+
-         if ( cr0 & X86_CR0_TS )
-             write_cr0(cr0);
-     }
-@@ -1080,7 +1082,7 @@ void xstate_set_init(uint64_t mask)
- 
-     xstate = vcpu_map_xsave_area(v);
-     memset(&xstate->xsave_hdr, 0, sizeof(xstate->xsave_hdr));
--    xrstor(v, mask);
-+    xrstor(v, xstate, mask);
-     vcpu_unmap_xsave_area(v, xstate);
- 
-     if ( cr0 & X86_CR0_TS )
--- 
-2.47.0
-
+ #endif /* _EARLYCPIO_H */
 
