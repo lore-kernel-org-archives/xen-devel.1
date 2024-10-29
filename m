@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D08DD2AB1D
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Oct 2024 11:04:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.827268.1241839 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8028ED2AB20
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Oct 2024 11:42:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.827285.1241863 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5k18-0000oa-1O; Tue, 29 Oct 2024 11:04:06 +0000
+	id 1t5kbx-0008Ia-J0; Tue, 29 Oct 2024 11:42:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 827268.1241839; Tue, 29 Oct 2024 11:04:06 +0000
+Received: by outflank-mailman (output) from mailman id 827285.1241863; Tue, 29 Oct 2024 11:42:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t5k17-0000oT-Uy; Tue, 29 Oct 2024 11:04:05 +0000
-Received: by outflank-mailman (input) for mailman id 827268;
- Tue, 29 Oct 2024 11:04:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rNzX=RZ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1t5k16-0000oN-2b
- for xen-devel@lists.xenproject.org; Tue, 29 Oct 2024 11:04:04 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7fd901d8-95e5-11ef-99a3-01e77a169b0f;
- Tue, 29 Oct 2024 12:03:59 +0100 (CET)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9a850270e2so857382166b.0
- for <xen-devel@lists.xenproject.org>; Tue, 29 Oct 2024 04:03:59 -0700 (PDT)
-Received: from localhost ([213.195.115.182]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b3099df78sm462206966b.158.2024.10.29.04.03.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 04:03:58 -0700 (PDT)
+	id 1t5kbx-0008IT-Fz; Tue, 29 Oct 2024 11:42:09 +0000
+Received: by outflank-mailman (input) for mailman id 827285;
+ Tue, 29 Oct 2024 11:42:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=uXRL=RZ=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1t5kbw-0008Gd-7b
+ for xen-devel@lists.xenproject.org; Tue, 29 Oct 2024 11:42:08 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cfe1a429-95ea-11ef-a0c3-8be0dac302b0;
+ Tue, 29 Oct 2024 12:42:02 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D0F4B1FB55;
+ Tue, 29 Oct 2024 11:42:00 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9DD65136A5;
+ Tue, 29 Oct 2024 11:42:00 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id adwYJQjKIGfKSQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 29 Oct 2024 11:42:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,173 +53,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7fd901d8-95e5-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzQiLCJoZWxvIjoibWFpbC1lajEteDYzNC5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjdmZDkwMWQ4LTk1ZTUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwMTk5ODM5Ljg0NjQzMSwic2VuZGVyIjoicm9nZXIucGF1QGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1730199838; x=1730804638; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ehkKqYBk4MDvgwnpI93uQoFn9xEAxJww89i0qH27hW0=;
-        b=q6YQyMPZJoiIYnUZTTsJa9dE52e0RJ3NkFk1tD0+yVyFLHhg53ll1J70UsBv2uPNIW
-         urbaXe+Jdj9KaWX9zMKoLHi3tZfH+0s7fJi01HVKPgfLvKvpiokUW0tkDxnGOl6z2wVW
-         Q6J7t+/upAakuuz0aZYca1uMc6w95iEf6Kqwg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730199838; x=1730804638;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ehkKqYBk4MDvgwnpI93uQoFn9xEAxJww89i0qH27hW0=;
-        b=ZqgMKX8cNNTGvmKaD3J1E2hx30D6ZjAAkRTDuhecTVckG3gLRcl1c9bzKHxC8gRcxX
-         IAL+Yy+tGgq1l6SLOBifCAzaUSW8sDyi4evSJ9p1KtLfDJqF2scW9tkdKwinNB8VeQ82
-         T1WLiVnl70GkV3EQB5uglssgwcIENsTf149hF2XoYREp9ky7TnSNB/vDhabR0deG2tYs
-         EOa5iCB9Grs1dKC5UgWEPw/OZFvtlKKzkLTapomfZHRL4rivpB0dML2mle8FAeDx4pHk
-         B0TjM2ZiBHDwfEUUEcE5me/kUQe/iO47kbOBkyS8uycdhbh3SYFyH6jwzEWjFzQ9rjNv
-         zGJA==
-X-Gm-Message-State: AOJu0YxqjJP5QZBSfC48VdK0a+Y4PXWo0TNveHzXqsxTW+1vGIKrLH/j
-	n5sTCEqBfdK3JPO96wTlG1PGEHApM7XJ2Cm4Xv+qWz/DOy7zOxeXjYaqz3Ya3UfTSsLdRo2YXRj
-	P
-X-Google-Smtp-Source: AGHT+IGmoevBLiXOgTdNpRm3nv6CVTujK9wbyEQ72ynO4U16KmRzecDh3M7EkUGKRdpYDA7HDLr3tA==
-X-Received: by 2002:a17:907:728e:b0:a99:389a:63c2 with SMTP id a640c23a62f3a-a9de61997d9mr1118591466b.62.1730199838328;
-        Tue, 29 Oct 2024 04:03:58 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Willi Junga <xenproject@ymy.be>,
-	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3] x86/io-apic: fix directed EOI when using AMD-Vi interrupt remapping
-Date: Tue, 29 Oct 2024 12:03:51 +0100
-Message-ID: <20241029110351.40531-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
+X-Inumbo-ID: cfe1a429-95ea-11ef-a0c3-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5NS4xMzUuMjIzLjEzMSIsImhlbG8iOiJzbXRwLW91dDIuc3VzZS5kZSJ9
+X-Custom-Transaction: eyJpZCI6ImNmZTFhNDI5LTk1ZWEtMTFlZi1hMGMzLThiZTBkYWMzMDJiMCIsInRzIjoxNzMwMjAyMTI1LjMwNjg3MSwic2VuZGVyIjoiamdyb3NzQHN1c2UuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1730202121; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=2eMJHLt456vECrCu/l8OxKrENcFTh4cA6cpXQSAO0YE=;
+	b=LG9N2mVREj2xU/47DbXEzCQTWLSc4diLosoB3R2BQy789XlPHGVQCGiOaIHaS3cOjim0LY
+	bO8gC7SnYI2DA/DsCbDDXxdRNDFCs4sSGahf6gSt8DrUgmTKVf7X6S6E0dizwUHAaQ0/2P
+	CPPnuhkmm/1XJL1xc/hzQIY4JMscjwg=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1730202120; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=2eMJHLt456vECrCu/l8OxKrENcFTh4cA6cpXQSAO0YE=;
+	b=gzmY9s0ZFTK2YUCSvJNni/KstZ2hKCsmdBfo3tpRmXWk3IQ2aRl52Z1NJ984GI8Jhufs6b
+	2ju/VVJ1gaDa5k9gTBe/NzlYxSmxWODHBA63MpS/TSujWjlK28XsxE0uAKc0ZxJTrjv9P9
+	xvjvY1FLcoMTQXysdIKOzKMJVDZFf5E=
+From: Juergen Gross <jgross@suse.com>
+To: minios-devel@lists.xenproject.org,
+	xen-devel@lists.xenproject.org
+Cc: samuel.thibault@ens-lyon.org,
+	Juergen Gross <jgross@suse.com>,
+	Natanael Copa <ncopa@alpinelinux.org>
+Subject: [Mini-OS PATCH] Add missing symbol exports for grub-pv
+Date: Tue, 29 Oct 2024 12:41:58 +0100
+Message-ID: <20241029114158.17231-1-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-2.80 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email];
+	RCVD_TLS_ALL(0.00)[]
 
-When using AMD-Vi interrupt remapping the vector field in the IO-APIC RTE is
-repurposed to contain part of the offset into the remapping table.  Previous to
-2ca9fbd739b8 Xen had logic so that the offset into the interrupt remapping
-table would match the vector.  Such logic was mandatory for end of interrupt to
-work, since the vector field (even when not containing a vector) is used by the
-IO-APIC to find for which pin the EOI must be performed.
+Grub-pv needs start_info_union and phys_to_machine_mapping to be
+accessible. Export both symbols.
 
-Introduce a table to store the EOI handlers when using interrupt remapping, so
-that the IO-APIC driver can translate pins into EOI handlers without having to
-read the IO-APIC RTE entry.  Note that to simplify the logic such table is used
-unconditionally when interrupt remapping is enabled, even if strictly it would
-only be required for AMD-Vi.
-
-Reported-by: Willi Junga <xenproject@ymy.be>
-Suggested-by: David Woodhouse <dwmw@amazon.co.uk>
-Fixes: 2ca9fbd739b8 ('AMD IOMMU: allocate IRTE entries instead of using a static mapping')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Fixes: 33411a11f848 ("Mini-OS: hide all symbols not exported via EXPORT_SYMBOLS()")
+Reported-by: Natanael Copa <ncopa@alpinelinux.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-Changes since v2:
- - Restore sentinel value.
+ arch/x86/mm.c    | 1 +
+ arch/x86/setup.c | 1 +
+ 2 files changed, 2 insertions(+)
 
-Changes since v1:
- - s/apic_pin_eoi/io_apic_pin_eoi/.
- - Expand comment about io_apic_pin_eoi usage and layout.
- - Use uint8_t instead of unsigned int as array type.
- - Do not use a sentinel value.
----
- xen/arch/x86/io_apic.c | 56 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 55 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index e40d2f7dbd75..64ba1c8d3da7 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -71,6 +71,26 @@ static int apic_pin_2_gsi_irq(int apic, int pin);
+diff --git a/arch/x86/mm.c b/arch/x86/mm.c
+index 572e762e..3ba6d917 100644
+--- a/arch/x86/mm.c
++++ b/arch/x86/mm.c
+@@ -55,6 +55,7 @@
+ #endif
  
- static vmask_t *__read_mostly vector_map[MAX_IO_APICS];
+ unsigned long *phys_to_machine_mapping;
++EXPORT_SYMBOL(phys_to_machine_mapping);
+ unsigned long mfn_zero;
+ pgentry_t *pt_base;
+ EXPORT_SYMBOL(pt_base);
+diff --git a/arch/x86/setup.c b/arch/x86/setup.c
+index b27bbed7..b613083b 100644
+--- a/arch/x86/setup.c
++++ b/arch/x86/setup.c
+@@ -41,6 +41,7 @@
+  * address of the shared_info structure, and things like that.
+  */
+ union start_info_union start_info_union;
++EXPORT_SYMBOL(start_info_union);
+ #endif
  
-+/*
-+ * Store the EOI handle when using interrupt remapping.
-+ *
-+ * If using AMD-Vi interrupt remapping the IO-APIC redirection entry remapped
-+ * format repurposes the vector field to store the offset into the Interrupt
-+ * Remap table.  This causes directed EOI to longer work, as the CPU vector no
-+ * longer matches the contents of the RTE vector field.  Add a translation
-+ * table so that directed EOI uses the value in the RTE vector field when
-+ * interrupt remapping is enabled.
-+ *
-+ * Note Intel VT-d Xen code still stores the CPU vector in the RTE vector field
-+ * when using the remapped format, but use the translation table uniformly in
-+ * order to avoid extra logic to differentiate between VT-d and AMD-Vi.
-+ *
-+ * The matrix is accessed as [#io-apic][#pin].  Note the field needs to handle
-+ * the range [-1, 255], as -1 (IRQ_VECTOR_UNASSIGNED) is used as a sentinel to
-+ * signal there's no cached value.
-+ */
-+static short **io_apic_pin_eoi;
-+
- static void share_vector_maps(unsigned int src, unsigned int dst)
- {
-     unsigned int pin;
-@@ -273,6 +293,13 @@ void __ioapic_write_entry(
-     {
-         __io_apic_write(apic, 0x11 + 2 * pin, eu.w2);
-         __io_apic_write(apic, 0x10 + 2 * pin, eu.w1);
-+        /*
-+         * Called in clear_IO_APIC_pin() before io_apic_pin_eoi is allocated.
-+         * Entry will be updated once the array is allocated and there's a
-+         * write against the pin.
-+         */
-+        if ( io_apic_pin_eoi )
-+            io_apic_pin_eoi[apic][pin] = e.vector;
-     }
-     else
-         iommu_update_ire_from_apic(apic, pin, e.raw);
-@@ -298,9 +325,17 @@ static void __io_apic_eoi(unsigned int apic, unsigned int vector, unsigned int p
-     /* Prefer the use of the EOI register if available */
-     if ( ioapic_has_eoi_reg(apic) )
-     {
-+        if ( io_apic_pin_eoi )
-+            vector = io_apic_pin_eoi[apic][pin];
-+
-         /* If vector is unknown, read it from the IO-APIC */
-         if ( vector == IRQ_VECTOR_UNASSIGNED )
-+        {
-             vector = __ioapic_read_entry(apic, pin, true).vector;
-+            if ( io_apic_pin_eoi )
-+                /* Update cached value so further EOI don't need to fetch it. */
-+                io_apic_pin_eoi[apic][pin] = vector;
-+        }
- 
-         *(IO_APIC_BASE(apic)+16) = vector;
-     }
-@@ -1022,8 +1057,27 @@ static void __init setup_IO_APIC_irqs(void)
- 
-     apic_printk(APIC_VERBOSE, KERN_DEBUG "init IO_APIC IRQs\n");
- 
-+    if ( iommu_intremap )
-+    {
-+        io_apic_pin_eoi = xmalloc_array(typeof(*io_apic_pin_eoi), nr_ioapics);
-+        BUG_ON(!io_apic_pin_eoi);
-+    }
-+
-     for (apic = 0; apic < nr_ioapics; apic++) {
--        for (pin = 0; pin < nr_ioapic_entries[apic]; pin++) {
-+        const unsigned int nr_entries = nr_ioapic_entries[apic];
-+
-+        if ( iommu_intremap )
-+        {
-+            io_apic_pin_eoi[apic] = xmalloc_array(typeof(**io_apic_pin_eoi),
-+                                                  nr_entries);
-+            BUG_ON(!io_apic_pin_eoi[apic]);
-+
-+            for ( pin = 0; pin < nr_entries; pin++ )
-+                io_apic_pin_eoi[apic][pin] = IRQ_VECTOR_UNASSIGNED;
-+        }
-+
-+        for ( pin = 0; pin < nr_entries; pin++ )
-+        {
-             /*
-              * add it to the IO-APIC irq-routing table:
-              */
+ /*
 -- 
-2.46.0
+2.43.0
 
 
