@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 775C4E6B277
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95078E6B278
 	for <xen-devel@archiver.kernel.org>; Fri,  1 Nov 2024 13:17:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.829111.1244193 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.829112.1244203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t6rWK-0000kV-S0; Fri, 01 Nov 2024 13:16:56 +0000
+	id 1t6rWN-00011B-3d; Fri, 01 Nov 2024 13:16:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 829111.1244193; Fri, 01 Nov 2024 13:16:56 +0000
+Received: by outflank-mailman (output) from mailman id 829112.1244203; Fri, 01 Nov 2024 13:16:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t6rWK-0000kO-Ow; Fri, 01 Nov 2024 13:16:56 +0000
-Received: by outflank-mailman (input) for mailman id 829111;
- Fri, 01 Nov 2024 13:16:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t6rWM-00010z-W0; Fri, 01 Nov 2024 13:16:58 +0000
+Received: by outflank-mailman (input) for mailman id 829112;
+ Fri, 01 Nov 2024 13:16:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1ZeD=R4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1t6rWJ-0000Hs-9W
- for xen-devel@lists.xenproject.org; Fri, 01 Nov 2024 13:16:55 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8ea2593e-9853-11ef-a0c5-8be0dac302b0;
+ id 1t6rWL-0000WD-8V
+ for xen-devel@lists.xenproject.org; Fri, 01 Nov 2024 13:16:57 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8e866fbe-9853-11ef-99a3-01e77a169b0f;
  Fri, 01 Nov 2024 14:16:51 +0100 (CET)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-53c73f01284so2345111e87.0
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-539f7606199so2014122e87.0
  for <xen-devel@lists.xenproject.org>; Fri, 01 Nov 2024 06:16:51 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53c7bdcbcf6sm549745e87.194.2024.11.01.06.16.45
+ 2adb3069b0e04-53c7bdcbcf6sm549745e87.194.2024.11.01.06.16.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2024 06:16:45 -0700 (PDT)
+ Fri, 01 Nov 2024 06:16:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,37 +46,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ea2593e-9853-11ef-a0c5-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMmEiLCJoZWxvIjoibWFpbC1sZjEteDEyYS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjhlYTI1OTNlLTk4NTMtMTFlZi1hMGM1LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwNDY3MDExLjYzMjExNywic2VuZGVyIjoib2xla3NpaS5rdXJvY2hrb0BnbWFpbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 8e866fbe-9853-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMzMiLCJoZWxvIjoibWFpbC1sZjEteDEzMy5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjhlODY2ZmJlLTk4NTMtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwNDY3MDExLjM4Nzc2Miwic2VuZGVyIjoib2xla3NpaS5rdXJvY2hrb0BnbWFpbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730467006; x=1731071806; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wj/BA7TzXLORt8+splUrdfYdcSoOnFHA3Scx8dfz8qw=;
-        b=SyNFcay/WnkgWmvPsLJiIIW7X1r6Ll0BX67Z9E0twDMjhH5Tc1ZOexDsF9tZhggg9/
-         rlcqdgNBvmt2anLljfR0GC/h3qKBktpkDPt8Zek/L4Hjnp0PS778uIlJM24+J/wGAf8m
-         o9iuBQ7WtwzjM3nnMX3/L7/K0Iq/lnHfJ/wP794XxZsr0JlMjRQylRQSClfTYaIcaYJq
-         pk0qzXoI6aGeNxnCUaDmbd6yY9o/1jUJaC0lX88hm/gStzYTXIwJwEBvHxqM8Mwqsk4C
-         38+0FaScG21CTlFDB6f7jeyMuSk4TXIL2ddiv1m9NVBdTTbL+niGgK5utu3w7B4Neo/2
-         VB0A==
+        d=gmail.com; s=20230601; t=1730467010; x=1731071810; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=raCa0Y19+glB0odfz1RMTbbLMqPF4E5Qqp9OuEhrM1g=;
+        b=DPzaaxiexH/8i3wfHvGCMsFZi5Ro8ERvvjjP4QavweyKNITbhyKfKeC3+QPCKPGXMo
+         ms4HnYJphjQcvVTj3BYcrGnRBdPb12X2rdfEwugwjlJapX4IXRV8tGLTV2QS2AqOypnG
+         RjAtIl5i4o7qiHXuwca2qXrpSOyHE/a/bL795iR+6aMz72NF5UK3nf8t6oqm5zmcmEHH
+         rR3FwtG/WYkKl6shOKzBTMs0ctfm6J7XXQkLDVu3Sj783Ql7gFWOiAGwQf/GDzS7Nlvt
+         Xo20Px3cs4tsV2Rhqob0x/Uw9vm181YyOec11V2xH48jAz8Ftr+pf3umjiw49qlxJSKv
+         Sb0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730467006; x=1731071806;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=wj/BA7TzXLORt8+splUrdfYdcSoOnFHA3Scx8dfz8qw=;
-        b=wCuxN7qo3Yp2C2lLqTazQAteUBr6zg0Ujo3d2Yotaqi/cqS1XXB8J2j3bAKcZvB8HI
-         Fp93dNhax+Hr2mh6CcahuHObj7DwW7/dgR+a4gq8mh9gNHtH/NFUORBDMNZ39t46CaVo
-         4DFNuEXIu5uu13J8XMj/vVo5/yJiuzF6QgYdkHf/atvt8bJF33CUezm2Qp8FwltNI2Af
-         VmkZBZOXFSQZto15MBCZJnW/B48yx/l9b8b0nnJd8yc9hnSCXNYU9diH+1UFZxFWoiNG
-         zLGRw19mmJPz9mbo+XQ0x6n5WqsnThvGyLCXBj+Cc/QWMmHyRXn3KJuwixK4udxrArVf
-         tY1w==
-X-Gm-Message-State: AOJu0Yx07RlAhmQLVo0Y/OFpwLsB9DpzRqDdu7Lrd9rFvnn2YIcFiMtp
-	zpzkIP6QrdklMnEW0IcHoatPXxRvc2ycXEPTPx2FHWWJ+aEZr9I8+/ifiw==
-X-Google-Smtp-Source: AGHT+IFqZFLhU6CFQaOBWHmhTPIFe7njEHAJRb9pBXDVEbLWPUm/DZxfwdfFjhBwQPi7iPxjd5CATg==
-X-Received: by 2002:a05:6512:3196:b0:536:568f:c5ed with SMTP id 2adb3069b0e04-53c79e15e5bmr3600679e87.1.1730467005747;
-        Fri, 01 Nov 2024 06:16:45 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1730467010; x=1731071810;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=raCa0Y19+glB0odfz1RMTbbLMqPF4E5Qqp9OuEhrM1g=;
+        b=olucdAaj1K9KYb2ShCLfr2E00oaaHjlIYOjLy8DoatpCyUoCi5R206jnsXIxB+pYY7
+         +X3KcVq7E8pPnze+lH8nACY3s6SnjXPnAlL3e+M4ELvVZmdpJJfrAy7EHWwKyzMYNiov
+         spL/su6aSu1DH7eEj7wC5pnGGqjn3o7/fb7oTbB3kgMkBBWHPyGjTBIHTIXk5bTeqIgg
+         EAcVtwLLc1s/yywcU4AlbH9JBA6Uyyx6vcmRf5jhdPNEeOYzZhwMkeLqE308TGTqWr9S
+         D3XsoT2NfoHqpLz3eE58aM4mpvxUu3hNaBTi1n11GBaMdrEqSbNhONNb6+FJgkxgXqty
+         OOlg==
+X-Gm-Message-State: AOJu0YzT7zbxF8AuP8QegyWdwmFjLtX7qEfK+Al/fwnLYQATfBG+DH2P
+	y2/D82J/ue1MBA2Y16dEV3z9QwH7Nqcmb4vZnW43YuSLdJuJ+RnNGnBINA==
+X-Google-Smtp-Source: AGHT+IEdYtglvc8ZrGe4Lg6gkk4TyLs2TxMc6upOoe9rOr1KLBp/NjIVK0naj8wGyjRpZY5zzJeERQ==
+X-Received: by 2002:a05:6512:281b:b0:536:55ef:69e8 with SMTP id 2adb3069b0e04-53b7eb9d73fmr6363459e87.0.1730467010294;
+        Fri, 01 Nov 2024 06:16:50 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -87,77 +88,100 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 0/3] Setup memory management for RISC-V
-Date: Fri,  1 Nov 2024 14:16:39 +0100
-Message-ID: <cover.1730465154.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 2/3] xen/riscv: initialize the VMAP_DEFAULT virtual range
+Date: Fri,  1 Nov 2024 14:16:41 +0100
+Message-ID: <98f8bd0253a8988283610fabb19de664a523c6f8.1730465154.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <cover.1730465154.git.oleksii.kurochko@gmail.com>
+References: <cover.1730465154.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Finish initializing the memory subsystem by mapping the direct map and
-frame table.
+Call vm_init() to initialize the VMAP_DEFAULT virtual range.
 
-In the case of RISC-V 64, which has a large virtual address space
-(the minimum supported MMU mode is Sv39, providing GBs of VA space),
-so frame table is mapped starting from physical address
-0 to ram_end.
-This simplifies the calculations and thereby improves performance for
-page_to_mfn(), mfn_to_page() as there is no frametable_base_pdx or
-frametable_base_mfn ( if CONFIG_PDX_COMPRESSION=n).
+To support this, introduce the populate_pt_range() and
+arch_vmap_virt_end() functions, which are used by
+vm_init()->vm_init_type().
 
-The directmap_virt_start is introduced and shifted lower in the VA space to
-(DIRECTMAP_VIRT_START - masked_low_bits_of_ram_start_address) to avoid
-wasting a large portion of the directmap space, this also allows for simple
-VA <-> PA translations. Also aligns DIRECTMAP_VIRT_START to a GB boundary
-(for Sv39; for other MMU mode boundaries will be bigger ) by masking the
-higher bits of the RAM start address to enable the use of superpages in
-map_pages_to_xen().
-
-In addition, initialize the VMAP_DEFAULT region, finalize the boot allocator,
-and update the system state from early_boot to boot.
-
-Introduce share_xen_page_with_guest() to deal with linkage error which occurs
-because of DCE:
-  riscv64-linux-gnu-ld: prelink.o: in function `tasklet_kill':
-  /build/xen/common/tasklet.c:176: undefined reference to
-     `share_xen_page_with_guest'
-  riscv64-linux-gnu-ld: ./.xen-syms.0: hidden symbol `share_xen_page_with_guest'
-    isn't defined riscv64-linux-gnu-ld: final link failed: bad value
-
-The function maddr_to_virt() is introduced as part of this patch series.
-
-virt_to_maddr() is updated as it is started to use direct_virt_start which is
-introduced in this patch series.
-
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V3:
- - Update the cover letter message as DIRECTMAP connected things were changed.
- - Update setup_mm(), setup_{directmap,frametable}_mappings.
- - Introduce ROUNDDOWN in <xen/macros.h>
- - All other details please look at the specific patch.
+Change in V2-V3:
+ - Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V2:
- - update the cover letter message.
- - merge first 3 patches to "introduce setup_mm()" patch as after setup_mm()
-   rework all the things in first two patches of v1 started to use changes
-   introduced in "introduce setup_mm()" patch.
- - add Acked-by for some patch series.
- - All other details please look at the specific patch.
----
+ xen/arch/riscv/mm.c    | 11 +++++------
+ xen/arch/riscv/pt.c    |  6 ++++++
+ xen/arch/riscv/setup.c |  3 +++
+ 3 files changed, 14 insertions(+), 6 deletions(-)
 
-Oleksii Kurochko (3):
-  xen/riscv: introduce setup_mm()
-  xen/riscv: initialize the VMAP_DEFAULT virtual range
-  xen/riscv: finalize boot allocator and transition to boot state
-
- xen/arch/riscv/include/asm/mm.h    |  13 ++-
- xen/arch/riscv/include/asm/setup.h |   2 +
- xen/arch/riscv/mm.c                | 152 +++++++++++++++++++++++++++--
- xen/arch/riscv/pt.c                |   6 ++
- xen/arch/riscv/setup.c             |  14 +++
- xen/include/xen/macros.h           |   1 +
- 6 files changed, 178 insertions(+), 10 deletions(-)
-
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 185008f4c6..db75aa1d4f 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -351,12 +351,6 @@ void arch_dump_shared_mem_info(void)
+     BUG_ON("unimplemented");
+ }
+ 
+-int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+-{
+-    BUG_ON("unimplemented");
+-    return -1;
+-}
+-
+ int xenmem_add_to_physmap_one(struct domain *d, unsigned int space,
+                               union add_to_physmap_extra extra,
+                               unsigned long idx, gfn_t gfn)
+@@ -564,3 +558,8 @@ void __init setup_mm(void)
+     setup_frametable_mappings(0, ram_end);
+     max_page = PFN_DOWN(ram_end);
+ }
++
++void *__init arch_vmap_virt_end(void)
++{
++    return (void *)(VMAP_VIRT_START + VMAP_VIRT_SIZE);
++}
+diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
+index cc5e2d3266..d62aceb36c 100644
+--- a/xen/arch/riscv/pt.c
++++ b/xen/arch/riscv/pt.c
+@@ -1,6 +1,7 @@
+ #include <xen/bug.h>
+ #include <xen/domain_page.h>
+ #include <xen/errno.h>
++#include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/mm.h>
+ #include <xen/pfn.h>
+@@ -419,3 +420,8 @@ int map_pages_to_xen(unsigned long virt,
+ 
+     return pt_update(virt, mfn, nr_mfns, flags);
+ }
++
++int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
++{
++    return pt_update(virt, INVALID_MFN, nr_mfns, PTE_POPULATE);
++}
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 2887a18c0c..3652cb056d 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -7,6 +7,7 @@
+ #include <xen/init.h>
+ #include <xen/mm.h>
+ #include <xen/shutdown.h>
++#include <xen/vmap.h>
+ 
+ #include <public/version.h>
+ 
+@@ -62,6 +63,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     setup_mm();
+ 
++    vm_init();
++
+     printk("All set up\n");
+ 
+     machine_halt();
 -- 
 2.47.0
 
