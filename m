@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E23F6E6B271
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Nov 2024 13:08:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.829093.1244163 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB265E6B277
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Nov 2024 13:09:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.829099.1244173 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t6rNj-00063f-G1; Fri, 01 Nov 2024 13:08:03 +0000
+	id 1t6rPM-0006g6-R7; Fri, 01 Nov 2024 13:09:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 829093.1244163; Fri, 01 Nov 2024 13:08:03 +0000
+Received: by outflank-mailman (output) from mailman id 829099.1244173; Fri, 01 Nov 2024 13:09:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t6rNj-00063V-CN; Fri, 01 Nov 2024 13:08:03 +0000
-Received: by outflank-mailman (input) for mailman id 829093;
- Fri, 01 Nov 2024 13:08:02 +0000
+	id 1t6rPM-0006fz-O3; Fri, 01 Nov 2024 13:09:44 +0000
+Received: by outflank-mailman (input) for mailman id 829099;
+ Fri, 01 Nov 2024 13:09:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=76Nm=R4=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t6rNi-00063P-MU
- for xen-devel@lists.xenproject.org; Fri, 01 Nov 2024 13:08:02 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
+ <SRS0=H3cE=R4=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1t6rPL-0006fp-3r
+ for xen-devel@lists.xenproject.org; Fri, 01 Nov 2024 13:09:43 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20608.outbound.protection.outlook.com
+ [2a01:111:f403:2418::608])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4f1e75cc-9852-11ef-99a3-01e77a169b0f;
- Fri, 01 Nov 2024 14:07:55 +0100 (CET)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5c99be0a4bbso2752226a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 01 Nov 2024 06:07:55 -0700 (PDT)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9e56498413sm177364766b.32.2024.11.01.06.07.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Nov 2024 06:07:54 -0700 (PDT)
+ id 89db5fcc-9852-11ef-99a3-01e77a169b0f;
+ Fri, 01 Nov 2024 14:09:35 +0100 (CET)
+Received: from BN9PR03CA0744.namprd03.prod.outlook.com (2603:10b6:408:110::29)
+ by SJ2PR12MB7941.namprd12.prod.outlook.com (2603:10b6:a03:4d3::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.32; Fri, 1 Nov
+ 2024 13:09:27 +0000
+Received: from BL6PEPF0001AB59.namprd02.prod.outlook.com
+ (2603:10b6:408:110:cafe::17) by BN9PR03CA0744.outlook.office365.com
+ (2603:10b6:408:110::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.23 via Frontend
+ Transport; Fri, 1 Nov 2024 13:09:27 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF0001AB59.mail.protection.outlook.com (10.167.241.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8114.16 via Frontend Transport; Fri, 1 Nov 2024 13:09:27 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 1 Nov
+ 2024 08:09:05 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 1 Nov
+ 2024 08:09:05 -0500
+Received: from [172.25.174.226] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Fri, 1 Nov 2024 08:09:03 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,173 +65,204 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4f1e75cc-9852-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MmIiLCJoZWxvIjoibWFpbC1lZDEteDUyYi5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjRmMWU3NWNjLTk4NTItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwNDY2NDc1LjY2ODQyMSwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1730466475; x=1731071275; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=WnFrf5qTHi0bq4qyG+/0K6pn4GTvB5MrDbXD0Tx4V7U=;
-        b=YRni+j80wijzx9LxFPmdXpYwE2RZk4VRwOWUhyoewVLB1tvEO115OLHW5zjkKK8Sau
-         1bI8aTZgexiHvkH4UM8uqev4InaNbHdNQKnNoAoRAWF3LQtToyZiL87zFnFNZmENw/+8
-         dOq8c5R8QoLlOfUukD1z25Jy83XfX5uB3katI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730466475; x=1731071275;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WnFrf5qTHi0bq4qyG+/0K6pn4GTvB5MrDbXD0Tx4V7U=;
-        b=ZwSHXjBpaTSHVKYumd37e2dNls56FsumJlgJsdn4bgKl78Zpa59miaDkXAT58OGAaq
-         Yl8dYbCPRnPFH0oRncMy70TutX9MWv/yiqYAl75YsmRmPcU2Ia1xGlpf9TSk0iSFxVjd
-         vSf0zXAzpj01jCPxuVM335nZfWYducAwhE631sCOoAjDA1Nou9/DF98y4HQIRgaDQdtR
-         3jGVuhDu7Kge+TN5V9xn9VbWerO42/TunU17XrOSKP6NJ8MiLf+WdSn64CCX+CFpDYKy
-         IMzHBZPKYxEB1OmFOoqCbHLxpt5HORGCV03XdvyJpt1KvZFSc/UkfLayiJFvOYbphlA4
-         /MRA==
-X-Gm-Message-State: AOJu0YwTlEAOl48cN4kqXW37ZSGU0cq1Ils0F0uEp2+wNzzOn3WpqGl5
-	OCoTr4ok7A7vZUR0QGXBMJoILwP6vgi5WTf1jIf//QcaymPM9+gIAfhdo0aalxo=
-X-Google-Smtp-Source: AGHT+IHDzupd+f/MkKVsoLZwEptd5+PzisNQzRioaexD0FzknJcpfaIvcMRTMhNDgKXikuAAciEGqg==
-X-Received: by 2002:a17:907:3e83:b0:a9a:7f87:904b with SMTP id a640c23a62f3a-a9e3a61eab8mr1124666466b.29.1730466474979;
-        Fri, 01 Nov 2024 06:07:54 -0700 (PDT)
-Message-ID: <2dd0b4b1-5ed6-4de0-bd0b-465f733a74e8@citrix.com>
-Date: Fri, 1 Nov 2024 13:07:53 +0000
+X-Inumbo-ID: 89db5fcc-9852-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDE6MTExOmY0MDM6MjQxODo6NjA4IiwiaGVsbyI6Ik5BTTEyLUJOOC1vYmUub3V0Ym91bmQucHJvdGVjdGlvbi5vdXRsb29rLmNvbSJ9
+X-Custom-Transaction: eyJpZCI6Ijg5ZGI1ZmNjLTk4NTItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwNDY2NTc1LjE0NzYwNywic2VuZGVyIjoic3Rld2FydC5oaWxkZWJyYW5kQGFtZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ox6MQ5PxHrzMpTN7IPfGzIIELuJYDMGL81t9SQowqakyfnlEem8xzWkXOFAMTKV9FXgZEKv3FgmAZ94eGPGUgp5xbW7LCLAwXCEVVt1b3WsUlu6siQCMjlpFPjs6J8j6TZ9i+eXG+bpTDRQbVQxTo7XrPR81b3alJ6WhuP3sOjpXkkBUSW3ojG/Y1qu9bx4FATYGlEpm23GaxzBI+RebWTRlsRcW0o9ssPG7TBADxWepg4hHQbtqHsnEGAVe2mqmSR+UNV0wUdWxYgvQucIEdsU9PIVJxWWBE/i5C44W+ozdfylqTMChhBHHxEVfGf8TPy+D7cjYqp+C/S1PQcnmdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bPj5OmXfMG436pc2FahpOI7vhljFFMGwqypiLg2zEu0=;
+ b=k3PIXncnmz0fAxq9jbUep0dUvvtkqtTlusy7K3vZy93BXp+a61jPNhyHwJxQ2rUxD/8opPq9fEIdJEG5D9emB7s7qRAC3Njs8BSO7hv1Y5Xym3+SFWD7bSHSuVTKo4mxQ5dcVGC4jvyOfj7xt3oCJW6cfDsNWaJcF2DdQkFi9H2nq2MgvWinuZxnmGO3D6CsRQZ0tAs3OFG63/T4EG2aL/xZ3o123oZaUnk6ugtvKJtWdNkWEDEVzIW9AMHDBKB+SKYYkkYa42+2jnFCkduwGcgQbwfDqHM3QNTDE/b+IQ3evZLWbubWoy22D7K4caLuqC4kNBkCjTDC0DqRgMVzEw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bPj5OmXfMG436pc2FahpOI7vhljFFMGwqypiLg2zEu0=;
+ b=vj3tbGyWLxxz4GwjquebFDMwr/WWDb8OvSplhzUCMGvPOHntpDvYNSPUyp2WBs23IKn8prdtYBn7+LN3Oo26i8HmUGlqJF1PJStPTJbnHWi1YdbeaIls8zP0/9AFwnRrieOzpb9duaom7TDrzU52+e+mVSSpOW9xkVJlp3dKu3o=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <356652df-b5b4-4c28-9c5c-4bfc4f36813f@amd.com>
+Date: Fri, 1 Nov 2024 09:09:02 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] scripts: Refine git-checkout.sh change for different
- branches
-To: Jason Andryuk <jason.andryuk@amd.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Jan Beulich <JBeulich@suse.com>, Julien Grall <julien@xen.org>
-References: <20241031134702.2913536-1-andrew.cooper3@citrix.com>
- <5d8f492d-6fa0-434d-8d01-f28376ed20be@citrix.com>
- <alpine.DEB.2.22.394.2410311543430.2525410@ubuntu-linux-20-04-desktop>
- <79c9b208-05f2-4520-80c8-930ef5cc4b5a@citrix.com>
- <33fa377c-2e23-45e3-a2a1-fda3097c4801@amd.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <33fa377c-2e23-45e3-a2a1-fda3097c4801@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: Re: [QEMU PATCH v9] xen/passthrough: use gsi to map pirq when dom0 is
+ PVH
+To: Jiqian Chen <Jiqian.Chen@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Anthony PERARD <anthony@xenproject.org>, "Paul
+ Durrant" <paul@xen.org>, "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+	"Michael S . Tsirkin" <mst@redhat.com>, Marcel Apfelbaum
+	<marcel.apfelbaum@gmail.com>
+CC: <qemu-devel@nongnu.org>, <xen-devel@lists.xenproject.org>, Huang Rui
+	<ray.huang@amd.com>
+References: <20241024090629.1944820-1-Jiqian.Chen@amd.com>
+Content-Language: en-US
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <20241024090629.1944820-1-Jiqian.Chen@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB05.amd.com: stewart.hildebrand@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB59:EE_|SJ2PR12MB7941:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9064314b-b6e7-4376-51f5-08dcfa766a0c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?SmY0Z2FPcjhneUF1K041dkRyZ1RFV0ZTby9peDdxeVFOckZyZDFnR0JPTXV2?=
+ =?utf-8?B?cnRJbHJDNkloRi9iMFNjcWdDQmFSTUhXZTI5VzVVMG1jWFFHbjE4L3NXMVd0?=
+ =?utf-8?B?ZmoxTWlKT3BuUHo4dzJZUDJIbEJYcmVRVCtJUGRNRE5GVWZwalE4QkhXby9B?=
+ =?utf-8?B?VWlMejhzTzJHMDd3d201dkoraWhaNlBUT25SSGc0dG1YTm1qZzJvQkxlcFlS?=
+ =?utf-8?B?cHBhS3NUSG93R01NSFNoR2d4Vm1SV1NIaWdibmRtUmxlMWtsTTI5Skt6TWc2?=
+ =?utf-8?B?eFlFQ0V0bW9SVTIyWVdkSFlDQTd6SjI3S0RJYnRXUDJYVnRucnh6UlJOeWcz?=
+ =?utf-8?B?TkFBejRrdXRKSFJmK3JaMDlJT2NYUkVaTjUxaldRVGFsOUNZMWYrQVB2elpx?=
+ =?utf-8?B?Mi9HRGY4SWRhbW9TTFFsb3g4NFl6blc1UXpNY1ZNdVpiakJJdWZVNFBmUXFP?=
+ =?utf-8?B?aVduRDhjMnFSbnJ3K1VZR2V4TmpCNm9BOHV0NmNydnc5OXVUZUZhaG5VN3Vj?=
+ =?utf-8?B?N1U0eHpsZStUZlZLTG5FN1Ivb3dIVFMzejVsZGRGbnovazZsdDAvS0U3RGpl?=
+ =?utf-8?B?Rlo2dWtKaFBIb1N1a1U3RjBaVjl0L0c0U0ZVeGR0dDVpNVFmUmFIUUc5UDUx?=
+ =?utf-8?B?aU5NYjFBOW9jU0xOazFueUMreVZyS2RYQk4valBCWjh3UFhJSkY5SDBHd01h?=
+ =?utf-8?B?clNVQ0tvRWxlbFN0aTR3dFFHQzE1dU1QS1IrMC9UK3Jhd3VIZ3ZYWWp6R0VL?=
+ =?utf-8?B?b2VkSGc5L1VBeVYzaHA5ZGJxd1A5a3JsMk1iSzBaZTRDcmFmcGVwOEtHUFpQ?=
+ =?utf-8?B?cTU3QndycVdiV0VhUkE0QW5qRmEyeXE3OWxsekZlZnFUYU5MaDYyVktnc1JT?=
+ =?utf-8?B?a2R3cUY1VVA3S1R0WE1WUyswT3ZjbmpoSGRxMTdxSHE2c21zSkJWTDBnKzNs?=
+ =?utf-8?B?TVZUNXBBRzJGajZJNDVsR2Z3L0pBZi93aVBySi9hb3I1RUs3K0UyQmlpN2JM?=
+ =?utf-8?B?enhWUnRlZ0h3aTUvQ3FaZ0cvQTdIUzlWazhqZC9sNkl2QjFUTTRueHBZYmJ1?=
+ =?utf-8?B?clNYeCswdnVaU21haC9xN0ExemJGU255cHRBZEVPQWtNVytLS1VsRXljaWpD?=
+ =?utf-8?B?ODBSc0hMZzNXZ2g3U2pCVWtML2xsbStRSEl6Q2xOTlNLZmMrTnM5M01keU5i?=
+ =?utf-8?B?VXV2VjFxdHF6QU8yblRRdmV1QStGSFRMYUJJdlJFb0lVZjdIa1F4bkp2WUtp?=
+ =?utf-8?B?OVpPNHdQaUpvZFVQb1NpT0NsNHByNFlwK085OXZKWkJVTUZkeDZxdWlHajEx?=
+ =?utf-8?B?aTlHQlkxRFhFd0dnNmRZT01oN0x2cjNUUFlXSUM4SG1MOXYyaFU1Q2dBRTRO?=
+ =?utf-8?B?cnUrUXdYYmswc0ViNjV4RGVudloxaUl5UjdCeEV0K3Z4TUFrcjg4bzFXbzhq?=
+ =?utf-8?B?VXRyMWV4WmFrcFhUNVNoeDFmTzZaaHZwdjJJNkdMUUVLTjFBOGx0cEwvSi93?=
+ =?utf-8?B?SGhnWW1vVkVrZjJENXNIaVJWS3dzaEtmdTBKNms4TkZ3RXNrRWlLNURSS1Rn?=
+ =?utf-8?B?bjZ0dnJTa1I5MDFXZzJPdTE4N3RWUVJCZEhRUzlQSTZIT1lndC9DTXlKQnZQ?=
+ =?utf-8?B?SnMreWI3bUlQRUZNSDI5WHdlKzNlcU9vTGRueElUTkg4TVZsVGVXRWJsVExU?=
+ =?utf-8?B?OHNmSWhHS0xXbjhDaEdDMGFQejJvRHlEczU0VmhHSnk2QjdNaWt4L1Z1OXJ6?=
+ =?utf-8?B?ODZNWDJzUTRuR1ZwSDg2cUpXWE1iVzYyajhCc0xPUUtTTHhiMjkwVHNoZVo0?=
+ =?utf-8?B?QW55bVk5UGR3WEpyek8vOVg1eEFCMGY3UU9zcmhEQzAzZC85Y1pOU0VIaCsr?=
+ =?utf-8?B?NUxhT0dtU21DRnpERG5pTmE3WmpuQmVMVm83NnE3TklCZFE9PQ==?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2024 13:09:27.1263
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9064314b-b6e7-4376-51f5-08dcfa766a0c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BL6PEPF0001AB59.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7941
 
-On 01/11/2024 12:26 pm, Jason Andryuk wrote:
-> On 2024-10-31 18:52, Andrew Cooper wrote:
->> On 31/10/2024 10:44 pm, Stefano Stabellini wrote:
->>>
->>> On Thu, 31 Oct 2024, Andrew Cooper wrote:
->>>
->>>> On 31/10/2024 1:47 pm, Andrew Cooper wrote:
->>>>> The change works for divergent branches, but doesn't work for
->>>>> explicit SHAs.
->>>>>
->>>>> Instead of passing `-b $TAG` to clone, explicitly fetch the $TAG
->>>>> we want after
->>>>> cloning.
->>>>>
->>>>> Fixes: c554ec124b12 ("scripts: Fix git-checkout.sh to work with
->>>>> branches other than master")
->>>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>>>> ---
->>>>> CC: Jan Beulich <JBeulich@suse.com>
->>>>> CC: Stefano Stabellini <sstabellini@kernel.org>
->>>>> CC: Julien Grall <julien@xen.org>
->>>>>
->>>>> Speculative fix, pending CI:
->>>>>   
->>>>> https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1521847529
->>>>>
->>>> Nope.  While this works on staging, it breaks on 4.17
->>>>
->>>> Back to the drawing board.
->>>   I am not certain about this but maybe we need:
->>>
->>>    $GIT fetch origin
->>>
->>> without the $TAG
->>
->> You need the $TAG to guide what to pull when it's not a parent of
->> master.
->>
->> For real tags (which live in a global namespace), and real SHAs (don't
->> need any further reference), creating a branch called `dummy` from them
->> works fine.
->>
->> The problem for branches is that $GIT fetch origin $TAG only updates
->> FETCH_HEAD and doesn't create a remote branch of the same name.  You can
->> do that with $GIT fetch origin $TAG:$TAG but only if you know that $TAG
->> is really a branch in the first place.
->>
->> Which circles back around to the original problem of not being able to
->> disambiguate what $TAG is until you've got the whole repository.
->>
->> I'm not aware of any way to ask the remote "do you know what type of
->> object $TAG actually is?" and that's probably because it would be a
->> reverse lookup through refs/ to figure out if it was a branch or not.
->>
->> I'm sure there must be a way of doing this...
->
-> I'm not clear on the exact problem
+On 10/24/24 05:06, Jiqian Chen wrote:
+> diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
+> index 3635d1b39f79..5b10d501d566 100644
+> --- a/hw/xen/xen_pt.c
+> +++ b/hw/xen/xen_pt.c
+> @@ -766,6 +766,50 @@ static void xen_pt_destroy(PCIDevice *d) {
+>  }
+>  /* init */
+>  
+> +#if CONFIG_XEN_CTRL_INTERFACE_VERSION >= 42000
+> +static bool xen_pt_need_gsi(void)
+> +{
+> +    FILE *fp;
+> +    int len;
+> +    char type[10];
 
-These were the failure following the original patch, which lead to this
-patch.
+A brief in-code comment to explain how you arrived at 10 would be
+appreciated.
 
-https://gitlab.com/xen-project/hardware/xen/-/pipelines/1521590040
+> +    const char *guest_type = "/sys/hypervisor/guest_type";
+> +
+> +    fp = fopen(guest_type, "r");
+> +    if (fp == NULL) {
+> +        error_report("Cannot open %s: %s", guest_type, strerror(errno));
+> +        return false;
+> +    }
+> +    fgets(type, sizeof(type), fp);
 
-and https://gitlab.com/xen-project/hardware/xen/-/jobs/8237236030#L267
-is one specific instance
+Please check the return value of fgets.
 
-> , but can you just checkout the FETCH_HEAD:
->
-> $GIT fetch origin $TAG
-> $GIT branch -D dummy >/dev/null 2>&1 ||:
-> $GIT checkout -b dummy FETCH_HEAD
+> +    fclose(fp);
+> +
+> +    len = strlen(type);
 
-Hmm yeah, that looks like it might work.  Thanks.  I'll have a play.
+Before passing to strlen, is "type" always guaranteed to have a
+terminating '\0' character?
 
-~Andrew
+> +    if (len) {
+> +        type[len - 1] = '\0';
+> +        if (!strcmp(type, "PVH")) {
+> +            return true;
+> +        }
+> +    }
+> +    return false;
+> +}
+> +
+> +static int xen_pt_map_pirq_for_gsi(PCIDevice *d, int *pirq)
+> +{
+> +    int gsi;
+> +    XenPCIPassthroughState *s = XEN_PT_DEVICE(d);
+> +
+> +    gsi = xc_pcidev_get_gsi(xen_xc,
+> +                            PCI_SBDF(s->real_device.domain,
+> +                                     s->real_device.bus,
+> +                                     s->real_device.dev,
+> +                                     s->real_device.func));
+> +    if (gsi >= 0) {
+> +        return xc_physdev_map_pirq_gsi(xen_xc, xen_domid, gsi, pirq);
+> +    }
+> +
+> +    return gsi;
+> +}
+> +#endif
+> +
+>  static void xen_pt_realize(PCIDevice *d, Error **errp)
+>  {
+>      ERRP_GUARD();
+> @@ -847,7 +891,16 @@ static void xen_pt_realize(PCIDevice *d, Error **errp)
+>          goto out;
+>      }
+>  
+> +#if CONFIG_XEN_CTRL_INTERFACE_VERSION >= 42000
+> +    if (xen_pt_need_gsi()) {
+> +        rc = xen_pt_map_pirq_for_gsi(d, &pirq);
+> +    } else {
+> +        rc = xc_physdev_map_pirq(xen_xc, xen_domid, machine_irq, &pirq);
+> +    }
+> +#else
+>      rc = xc_physdev_map_pirq(xen_xc, xen_domid, machine_irq, &pirq);
+> +#endif
+> +
+>      if (rc < 0) {
+>          XEN_PT_ERR(d, "Mapping machine irq %u to pirq %i failed, (err: %d)\n",
+>                     machine_irq, pirq, errno);
+> diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+> index eb26cac81098..07805aa8a5f3 100644
+> --- a/include/hw/pci/pci.h
+> +++ b/include/hw/pci/pci.h
+> @@ -23,6 +23,10 @@ extern bool pci_available;
+>  #define PCI_SLOT_MAX            32
+>  #define PCI_FUNC_MAX            8
+>  
+> +#define PCI_SBDF(seg, bus, dev, func) \
+> +            ((((uint32_t)(seg)) << 16) | \
+> +            (PCI_BUILD_BDF(bus, PCI_DEVFN(dev, func))))
+> +
+>  /* Class, Vendor and Device IDs from Linux's pci_ids.h */
+>  #include "hw/pci/pci_ids.h"
+>  
+
 
