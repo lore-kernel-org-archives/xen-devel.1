@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F9ACD2B931
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Nov 2024 14:34:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.830258.1245210 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2131FD2B933
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Nov 2024 14:34:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.830260.1245235 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8Kd0-0002ff-Qt; Tue, 05 Nov 2024 14:33:54 +0000
+	id 1t8Kd3-0003Hp-Bz; Tue, 05 Nov 2024 14:33:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 830258.1245210; Tue, 05 Nov 2024 14:33:54 +0000
+Received: by outflank-mailman (output) from mailman id 830260.1245235; Tue, 05 Nov 2024 14:33:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8Kd0-0002eV-No; Tue, 05 Nov 2024 14:33:54 +0000
-Received: by outflank-mailman (input) for mailman id 830258;
- Tue, 05 Nov 2024 14:33:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t8Kd3-0003HX-7B; Tue, 05 Nov 2024 14:33:57 +0000
+Received: by outflank-mailman (input) for mailman id 830260;
+ Tue, 05 Nov 2024 14:33:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SSsw=SA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1t8Kcz-0002Lm-KR
- for xen-devel@lists.xenproject.org; Tue, 05 Nov 2024 14:33:53 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f8fc86c5-9b82-11ef-99a3-01e77a169b0f;
- Tue, 05 Nov 2024 15:33:49 +0100 (CET)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5c937b5169cso600769a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 05 Nov 2024 06:33:49 -0800 (PST)
+ id 1t8Kd1-0002K5-Ig
+ for xen-devel@lists.xenproject.org; Tue, 05 Nov 2024 14:33:55 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id faffc597-9b82-11ef-a0c5-8be0dac302b0;
+ Tue, 05 Nov 2024 15:33:53 +0100 (CET)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5c94861ee25so2968683a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Nov 2024 06:33:53 -0800 (PST)
 Received: from localhost.localdomain ([217.156.233.154])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cee6a99ff2sm1395047a12.4.2024.11.05.06.33.47
+ 4fb4d7f45d1cf-5cee6a99ff2sm1395047a12.4.2024.11.05.06.33.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 06:33:48 -0800 (PST)
+ Tue, 05 Nov 2024 06:33:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,84 +47,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f8fc86c5-9b82-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MjkiLCJoZWxvIjoibWFpbC1lZDEteDUyOS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImY4ZmM4NmM1LTliODItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwODE3MjI5LjkxNDQ3MSwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: faffc597-9b82-11ef-a0c5-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzAiLCJoZWxvIjoibWFpbC1lZDEteDUzMC5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImZhZmZjNTk3LTliODItMTFlZi1hMGM1LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwODE3MjMzLjI0NjU3MSwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1730817229; x=1731422029; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1730817232; x=1731422032; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lm70mwHIeRKoNhCCFejzjDU9gu+VjbCXPS3BQfLbce0=;
-        b=Jbq9NOlxXEKCEAVMutHvn3NY6gBcL3xu8E0LACqzgbFFn7NJ6XQJwmmS/Wc2UEG5Q2
-         XqoNUPVGHZ8LNnwA39RKjnXJheVvKMmpy3WZBHoR6W0juYBWV2HHMIRI0FRmK4Ld1jIu
-         kuDd87x620yko9ktevApdRkVk2S9y18QyHzew=
+        bh=yyqgbdCyqz7WQBq4sAipK7yHeendz1D8ul3qjvP/+g8=;
+        b=HAITGYMUSd1lNIcdGPsrzp1k+itdrcqUkACAJWneEGU2TFJZBU/CMnfTOiJ/cJrrij
+         JTSRqURZUSRTzNfRmXFlsYf8gecxKBze1d8KTMtIpm8X37lReZbBp3r5xHYgcHl1GCHu
+         xFT8R1nxgrwS94imrr8uV/6Vynih48E8iSh0c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817229; x=1731422029;
+        d=1e100.net; s=20230601; t=1730817232; x=1731422032;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lm70mwHIeRKoNhCCFejzjDU9gu+VjbCXPS3BQfLbce0=;
-        b=OZcdzPBYWWNblG8dBSaBhSnMbR8qBqD9UklS1N/sZoAJ22qyK3vpzOjB+fiSMQ4d+l
-         DBvvfm0z5QWtRJtQLHnO6tCZ6Nn4IjsW9LgQClMu0wUbnijQBlFcXorYN/4suo1Xeh/J
-         p64rv9ekxPU5f4T16aar+8DdpQyCU8f7xh6x7KkupzwdmK/qDlKDxFm2xq/+2mKgXnOq
-         mMIe7EQMUMu/cveQx1faV33Rfc4O4I2pS55tZYF7xrrgatPuLbiS0vWm6f38hRX3rXUW
-         tZDSRz5PrTqPiQr5BlBr+RR+FsDC5aAnFobQ6043/FBEbG6y4cYLWYDfOtIXutI+O39b
-         sudQ==
-X-Gm-Message-State: AOJu0Yx4cWR4QdHhqN7eJ5nYIj5rPWDPfGQwpyOCv7YmfxFW73b/3GrX
-	PWcZ/ffbkEwjt68MN9iIe/UhIfKDGpGG8MDI+TYId/a26vPVhz/6LPuc6zQMqOSs1/BzSq+IMKu
-	6
-X-Google-Smtp-Source: AGHT+IEhWx2RuS/BYIBWDBc6maT4rwV0tb/DwlYlZRoeFkV4ZYnjAKsX+HD1obBYMGsMYslSbg1VMw==
-X-Received: by 2002:a05:6402:2748:b0:5ce:c7ce:145e with SMTP id 4fb4d7f45d1cf-5cec7ce17ccmr12100578a12.14.1730817228923;
-        Tue, 05 Nov 2024 06:33:48 -0800 (PST)
+        bh=yyqgbdCyqz7WQBq4sAipK7yHeendz1D8ul3qjvP/+g8=;
+        b=eUMdeZcUnqDNUHV/nLZd3jLloNFxCh6OGY5LYiv6lp8MSBOR0gYydVcVtLMLiUScQM
+         NUI0fUr0J9SJd+cnrLzeeQbcWt9LKw4HL86tglxTq8vL6v67vBiYDFgKGmtKoFaTythc
+         pM6t4Te//0WqvkWtWPQtLFocSk2Ayu0h69Tt2XvB45X2VVbzfpNDAL6gSRQvKG3lJAEW
+         iCieZr21ikDaLuB2fbBNA4SWj4KVeSjLCBzq5pm2xrgkOHiT/Dj3DwU/LeGj83A+kZxY
+         YAQw4DNPqqx6RgVd3kwEhjzSps4wYvnmHQ22n8O7X85HDhswsNJRr1TRZqCcIrcuxMvW
+         eHXg==
+X-Gm-Message-State: AOJu0YxZWv8zIUp/CrVWZa9S+pPd5nB0mJBMlsqwDWlP5AkL38H6n43C
+	mUSfEAw1Q0BOwzn/9cq9WKToljU3r94Cq/JEUAr93gahGrA4iajLspprgGruWLCuwz1IenhlGNs
+	P
+X-Google-Smtp-Source: AGHT+IF1jV35urzB96D/9HqoIOs+dpJXaGQ8XIKeUjyC6ubT8ayqoooLczkbqx7hS4HjBq+ce64o4w==
+X-Received: by 2002:a05:6402:5c9:b0:5ca:efe:10de with SMTP id 4fb4d7f45d1cf-5ceb9382a40mr18273172a12.30.1730817230969;
+        Tue, 05 Nov 2024 06:33:50 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 01/13] x86/xstate: Remove stale assertions in fpu_x{rstor,save}()
-Date: Tue,  5 Nov 2024 14:32:58 +0000
-Message-ID: <20241105143310.28301-2-alejandro.vallejo@cloud.com>
+Subject: [PATCH v2 03/13] x86/hvm: Map/unmap xsave area in hvm_save_cpu_ctxt()
+Date: Tue,  5 Nov 2024 14:33:00 +0000
+Message-ID: <20241105143310.28301-4-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241105143310.28301-1-alejandro.vallejo@cloud.com>
 References: <20241105143310.28301-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-After edb48e76458b("x86/fpu: Combine fpu_ctxt and xsave_area in arch_vcpu"),
-v->arch.xsave_area is always present and we can just remove these asserts.
+No functional change.
 
-Fixes: edb48e76458b("x86/fpu: Combine fpu_ctxt and xsave_area in arch_vcpu")
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v2:
-  * Remove asserts rather than refactor them.
-  * Trimmed and adjusted commit message
+  * No change
 ---
- xen/arch/x86/i387.c | 2 --
- 1 file changed, 2 deletions(-)
+ xen/arch/x86/hvm/hvm.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
-index 83f9b2502bff..3add0025e495 100644
---- a/xen/arch/x86/i387.c
-+++ b/xen/arch/x86/i387.c
-@@ -24,7 +24,6 @@ static inline void fpu_xrstor(struct vcpu *v, uint64_t mask)
- {
-     bool ok;
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 018d44a08b6b..c90654697cb1 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -914,11 +914,11 @@ static int cf_check hvm_save_cpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
  
--    ASSERT(v->arch.xsave_area);
-     /*
-      * XCR0 normally represents what guest OS set. In case of Xen itself,
-      * we set the accumulated feature mask before doing save/restore.
-@@ -136,7 +135,6 @@ static inline void fpu_xsave(struct vcpu *v)
-     uint64_t mask = vcpu_xsave_mask(v);
+     if ( v->fpu_initialised )
+     {
+-        BUILD_BUG_ON(sizeof(ctxt.fpu_regs) !=
+-                     sizeof(v->arch.xsave_area->fpu_sse));
+-        memcpy(ctxt.fpu_regs, &v->arch.xsave_area->fpu_sse,
+-               sizeof(ctxt.fpu_regs));
++        const struct xsave_struct *xsave_area = VCPU_MAP_XSAVE_AREA(v);
  
-     ASSERT(mask);
--    ASSERT(v->arch.xsave_area);
-     /*
-      * XCR0 normally represents what guest OS set. In case of Xen itself,
-      * we set the accumulated feature mask before doing save/restore.
++        BUILD_BUG_ON(sizeof(ctxt.fpu_regs) != sizeof(xsave_area->fpu_sse));
++        memcpy(ctxt.fpu_regs, &xsave_area->fpu_sse, sizeof(ctxt.fpu_regs));
++        VCPU_UNMAP_XSAVE_AREA(v, xsave_area);
+         ctxt.flags = XEN_X86_FPU_INITIALISED;
+     }
+ 
 -- 
 2.47.0
 
