@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87589D2B92E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B93B4D2B931
 	for <xen-devel@archiver.kernel.org>; Tue,  5 Nov 2024 14:34:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.830257.1245205 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.830267.1245304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8Kd0-0002YW-EE; Tue, 05 Nov 2024 14:33:54 +0000
+	id 1t8KdD-0005Qe-Vh; Tue, 05 Nov 2024 14:34:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 830257.1245205; Tue, 05 Nov 2024 14:33:54 +0000
+Received: by outflank-mailman (output) from mailman id 830267.1245304; Tue, 05 Nov 2024 14:34:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8Kd0-0002YP-BF; Tue, 05 Nov 2024 14:33:54 +0000
-Received: by outflank-mailman (input) for mailman id 830257;
- Tue, 05 Nov 2024 14:33:53 +0000
+	id 1t8KdD-0005PX-OF; Tue, 05 Nov 2024 14:34:07 +0000
+Received: by outflank-mailman (input) for mailman id 830267;
+ Tue, 05 Nov 2024 14:34:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SSsw=SA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1t8Kcz-0002K5-4A
- for xen-devel@lists.xenproject.org; Tue, 05 Nov 2024 14:33:53 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
+ id 1t8KdB-0002K5-OQ
+ for xen-devel@lists.xenproject.org; Tue, 05 Nov 2024 14:34:05 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f998a050-9b82-11ef-a0c5-8be0dac302b0;
- Tue, 05 Nov 2024 15:33:50 +0100 (CET)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c941623a5aso11544248a12.0
- for <xen-devel@lists.xenproject.org>; Tue, 05 Nov 2024 06:33:50 -0800 (PST)
+ id 00d4b073-9b83-11ef-a0c5-8be0dac302b0;
+ Tue, 05 Nov 2024 15:34:03 +0100 (CET)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5ceb03aaddeso5938205a12.2
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Nov 2024 06:34:03 -0800 (PST)
 Received: from localhost.localdomain ([217.156.233.154])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cee6a99ff2sm1395047a12.4.2024.11.05.06.33.49
+ 4fb4d7f45d1cf-5cee6a99ff2sm1395047a12.4.2024.11.05.06.34.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 06:33:49 -0800 (PST)
+ Tue, 05 Nov 2024 06:34:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,128 +47,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f998a050-9b82-11ef-a0c5-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzQiLCJoZWxvIjoibWFpbC1lZDEteDUzNC5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImY5OThhMDUwLTliODItMTFlZi1hMGM1LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwODE3MjMwLjg5NTk1NSwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 00d4b073-9b83-11ef-a0c5-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MmQiLCJoZWxvIjoibWFpbC1lZDEteDUyZC5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjAwZDRiMDczLTliODMtMTFlZi1hMGM1LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwODE3MjQzLjEzMzc5NCwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1730817230; x=1731422030; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1730817242; x=1731422042; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=B5MI75e4+hOjaOxFZKHpo9oTq8hdhATr+ZHahTSCs6U=;
-        b=PKYz8U1znWxozUwaYYMfdTV77Kp4otFElDwOVHx9mhAklzIW8t3iYXuGIFFlUauKvZ
-         icbQFsQYFxCqjYNi8BZ90e/JEtJtW0EfsjGp71yoAyWp67/baPa8GamEs9UdQaWoDl2y
-         Zstprrl5ANbXnZBF3lL6Ply/DVTmdKjMCiRl4=
+        bh=Jc35G27Gr3VkDuTcKUwBetak3Ic6rCOhMXfwTHHpMdE=;
+        b=dru1R5uas4DaJ2XypHDq0s6GgXyJkFEeLn5R0TDByDrodiM39u/T1ymHXQChZ9sVlU
+         rSNY1bLvorCJZqrRFVCP7mSCyIA8Lqvhu205uvSSphmrZ6HUuyG3WMTndWTfQwmZ9XkO
+         7y2v+jGG+Vvp0yAxt5a7WpwnrN382rSC/ka/Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817230; x=1731422030;
+        d=1e100.net; s=20230601; t=1730817242; x=1731422042;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=B5MI75e4+hOjaOxFZKHpo9oTq8hdhATr+ZHahTSCs6U=;
-        b=EenDw7AmIkEWo7D7xbVtQjFsouzGpB85c4nWAjjQiD0ilcUJ9teNdfwQ+I0Q6NKeyO
-         abhp8TTS+mYEHKI01XjS3sBSjWHNnuF9BuPK3HJjQumtAHUjd+iqP3zFLOUl+dkuP3Iu
-         5W9uKsJr5Ar0vmExlHWmHy6EV3qsQvzDauS98a/8P3TMhGqknx+9avUnutvqkt+L4Znx
-         W/0aXPe5/4WxCA/16ma4XsmTUOAi6SrlwjZy9LQRXX9jQAkOuOuG/oEX2NvpJvRzUGAF
-         IiYPCCO489oXyJWfbJ8vX/hjw88emR7cXZfwLl/2NbsdZg39J4iH2OWdurDVoQv1Y6I2
-         eOWA==
-X-Gm-Message-State: AOJu0Yz8+VZ9p0dB0/+4AH4lh5k0u3g0002DMfL0txvyQnp1xKjq18UI
-	SzccX8VY2U/mngwmNzisKX6DLepYkkcKyFc0ahxKCkg/5XuhGmc6yp03hgZCNA40EX/9e8LcOUk
-	q
-X-Google-Smtp-Source: AGHT+IElpRYa2awz+b5ZiTEQCetsqe4Q4xDPQIeYnAy0JSjDCDL+J66ma0sNHWP3O0Gl53xOoGT0Pg==
-X-Received: by 2002:a05:6402:51c7:b0:5ce:df98:ea7d with SMTP id 4fb4d7f45d1cf-5cedf98eb22mr4487574a12.8.1730817229985;
-        Tue, 05 Nov 2024 06:33:49 -0800 (PST)
+        bh=Jc35G27Gr3VkDuTcKUwBetak3Ic6rCOhMXfwTHHpMdE=;
+        b=uryXotXrtvYfvCWbJYJOykz/E1Ou5YM0yWQhZ+zF6jr9wK6du3fK5F3S9/EAeYJtLA
+         y5JJuBgyfZggoKXJupSkt+/07GYl96668WJkz0z267L2DgLpw/cuzUfprlZrwv0hCFNR
+         r0mFXXS17Bwh7ntwT8yQXOpC3xmfy5fTARmmW9+nm6Ll3keNFFnEFQpWR+pENveLwoKf
+         G1Ejncr6erofnRfp9jmKof3R7iW6/Udo+i+bnkIMB1brQ8BZ6AJvNn8/4iQmVwgPn5Jq
+         euZUz6IJx2Tu4Q/oV3Epuy/EVnpGphEL7uKCg4/yVAkqg8rbzhbiMlWvXGqMI8hqauyT
+         P1tA==
+X-Gm-Message-State: AOJu0Yw3JsBUU6HlR+Mau4ddThXpf9UYKgxE38jQu+xoSAO46gyiMqMv
+	2c29BQQzOfJFkOBWqawRm4Pp0SEV35NyLjMP5HCichIJ5/GH0tYJs7hhw6zj6RxueHDGhnhq8MX
+	2
+X-Google-Smtp-Source: AGHT+IH7kiUbK3mBgFNVwAoXuK6Xah394QabsKMkZvp2o5saOpNY3n0VT2XUZP6qGa/L1Iq16mEZgQ==
+X-Received: by 2002:a05:6402:2751:b0:5ce:cfed:6c4f with SMTP id 4fb4d7f45d1cf-5cecfed6cdbmr8807224a12.23.1730817242071;
+        Tue, 05 Nov 2024 06:34:02 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 02/13] x86/xstate: Create map/unmap primitives for xsave areas
-Date: Tue,  5 Nov 2024 14:32:59 +0000
-Message-ID: <20241105143310.28301-3-alejandro.vallejo@cloud.com>
+Subject: [PATCH v2 11/13] x86/fpu: Pass explicit xsave areas to fpu_(f)xsave()
+Date: Tue,  5 Nov 2024 14:33:08 +0000
+Message-ID: <20241105143310.28301-12-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241105143310.28301-1-alejandro.vallejo@cloud.com>
 References: <20241105143310.28301-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add infrastructure to simplify ASI handling. With ASI in the picture
-we'll have several different means of accessing the XSAVE area of a
-given vCPU, depending on whether a domain is covered by ASI or not and
-whether the vCPU is question is scheduled on the current pCPU or not.
-
-Having these complexities exposed at the call sites becomes unwieldy
-very fast. These wrappers are intended to be used in a similar way to
-map_domain_page() and unmap_domain_page(); The map operation will
-dispatch the appropriate pointer for each case in a future patch, while
-unmap will remain a no-op where no unmap is required (e.g: when there's
-no ASI) and remove the transient maping if one was required.
-
-Follow-up patches replace all uses of raw v->arch.xsave_area by this
-mechanism in preparation to add the beforementioned dispatch logic to be
-added at a later time.
+No functional change.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v2:
-  * Comment macros more heavily to show their performance characteristics.
-  * Addressed various nits in the macro comments.
-  * Macro names to uppercase.
+  * const-ified v
 ---
- xen/arch/x86/include/asm/xstate.h | 42 +++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
+ xen/arch/x86/i387.c               | 16 ++++++++++------
+ xen/arch/x86/include/asm/xstate.h |  2 +-
+ xen/arch/x86/xstate.c             |  3 +--
+ 3 files changed, 12 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
-index 07017cc4edfd..6b0daff0aeec 100644
---- a/xen/arch/x86/include/asm/xstate.h
-+++ b/xen/arch/x86/include/asm/xstate.h
-@@ -143,4 +143,46 @@ static inline bool xstate_all(const struct vcpu *v)
-            (v->arch.xcr0_accum & XSTATE_LAZY & ~XSTATE_FP_SSE);
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index a6ae323fa95f..73c52ce2f577 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -129,7 +129,7 @@ static inline uint64_t vcpu_xsave_mask(const struct vcpu *v)
  }
  
-+/*
-+ * Fetch a pointer to a vCPU's XSAVE area
-+ *
-+ * TL;DR: If v == current, the mapping is guaranteed to already exist.
-+ *
-+ * Despite the name, this macro might not actually map anything. The only case
-+ * in which a mutation of page tables is strictly required is when ASI==on &&
-+ * v!=current. For everything else the mapping already exists and needs not
-+ * be created nor destroyed.
-+ *
-+ *                         +-----------------+--------------+
-+ *                         |   v == current  | v != current |
-+ *          +--------------+-----------------+--------------+
-+ *          | ASI  enabled | per-vCPU fixmap |  actual map  |
-+ *          +--------------+-----------------+--------------+
-+ *          | ASI disabled |             directmap          |
-+ *          +--------------+--------------------------------+
-+ *
-+ * There MUST NOT be outstanding maps of XSAVE areas of the non-current vCPU
-+ * at the point of context switch. Otherwise, the unmap operation will
-+ * misbehave.
-+ *
-+ * TODO: Expand the macro to the ASI cases after infra to do so is in place.
-+ *
-+ * @param v Owner of the XSAVE area
-+ */
-+#define VCPU_MAP_XSAVE_AREA(v) ((v)->arch.xsave_area)
+ /* Save x87 extended state */
+-static inline void fpu_xsave(struct vcpu *v)
++static inline void fpu_xsave(const struct vcpu *v, struct xsave_struct *xsave_area)
+ {
+     bool ok;
+     uint64_t mask = vcpu_xsave_mask(v);
+@@ -141,15 +141,14 @@ static inline void fpu_xsave(struct vcpu *v)
+      */
+     ok = set_xcr0(v->arch.xcr0_accum | XSTATE_FP_SSE);
+     ASSERT(ok);
+-    xsave(v, mask);
++    xsave(v, xsave_area, mask);
+     ok = set_xcr0(v->arch.xcr0 ?: XSTATE_FP_SSE);
+     ASSERT(ok);
+ }
+ 
+ /* Save x87 FPU, MMX, SSE and SSE2 state */
+-static inline void fpu_fxsave(struct vcpu *v)
++static inline void fpu_fxsave(struct vcpu *v, fpusse_t *fpu_ctxt)
+ {
+-    fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
+ 
+     if ( fip_width != 4 )
+@@ -264,6 +263,8 @@ void vcpu_restore_fpu_lazy(struct vcpu *v)
+  */
+ static bool _vcpu_save_fpu(struct vcpu *v)
+ {
++    struct xsave_struct *xsave_area;
 +
-+/*
-+ * Drops the mapping of a vCPU's XSAVE area and nullifies its pointer on exit
-+ *
-+ * See VCPU_MAP_XSAVE_AREA() for additional information on the persistence of
-+ * these mappings. This macro only tears down the mappings in the ASI=on &&
-+ * v!=current case.
-+ *
-+ * TODO: Expand the macro to the ASI cases after infra to do so is in place.
-+ *
-+ * @param v Owner of the XSAVE area
-+ * @param x XSAVE blob of v
-+ */
-+#define VCPU_UNMAP_XSAVE_AREA(v, x) ({ (x) = NULL; })
+     if ( !v->fpu_dirtied && !v->arch.nonlazy_xstate_used )
+         return false;
+ 
+@@ -272,11 +273,14 @@ static bool _vcpu_save_fpu(struct vcpu *v)
+     /* This can happen, if a paravirtualised guest OS has set its CR0.TS. */
+     clts();
+ 
++    xsave_area = VCPU_MAP_XSAVE_AREA(v);
 +
- #endif /* __ASM_XSTATE_H */
+     if ( cpu_has_xsave )
+-        fpu_xsave(v);
++        fpu_xsave(v, xsave_area);
+     else
+-        fpu_fxsave(v);
++        fpu_fxsave(v, &xsave_area->fpu_sse);
+ 
++    VCPU_UNMAP_XSAVE_AREA(v, xsave_area);
+     v->fpu_dirtied = 0;
+ 
+     return true;
+diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
+index 6b0daff0aeec..bd286123c735 100644
+--- a/xen/arch/x86/include/asm/xstate.h
++++ b/xen/arch/x86/include/asm/xstate.h
+@@ -97,7 +97,7 @@ uint64_t get_xcr0(void);
+ void set_msr_xss(u64 xss);
+ uint64_t get_msr_xss(void);
+ uint64_t read_bndcfgu(void);
+-void xsave(struct vcpu *v, uint64_t mask);
++void xsave(const struct vcpu *v, struct xsave_struct *ptr, uint64_t mask);
+ void xrstor(struct vcpu *v, uint64_t mask);
+ void xstate_set_init(uint64_t mask);
+ bool xsave_enabled(const struct vcpu *v);
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index 9ecbef760277..f3e41f742c3c 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -300,9 +300,8 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
+     VCPU_UNMAP_XSAVE_AREA(v, xstate);
+ }
+ 
+-void xsave(struct vcpu *v, uint64_t mask)
++void xsave(const struct vcpu *v, struct xsave_struct *ptr, uint64_t mask)
+ {
+-    struct xsave_struct *ptr = v->arch.xsave_area;
+     uint32_t hmask = mask >> 32;
+     uint32_t lmask = mask;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
 -- 
 2.47.0
 
