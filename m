@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9778BD2B92D
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Nov 2024 13:59:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.830249.1245186 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 999BCD2B932
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Nov 2024 14:34:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.830261.1245244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8K5X-0004eJ-OD; Tue, 05 Nov 2024 13:59:19 +0000
+	id 1t8Kd5-0003al-JS; Tue, 05 Nov 2024 14:33:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 830249.1245186; Tue, 05 Nov 2024 13:59:19 +0000
+Received: by outflank-mailman (output) from mailman id 830261.1245244; Tue, 05 Nov 2024 14:33:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8K5X-0004eC-Il; Tue, 05 Nov 2024 13:59:19 +0000
-Received: by outflank-mailman (input) for mailman id 830249;
- Tue, 05 Nov 2024 13:59:18 +0000
+	id 1t8Kd5-0003aa-GB; Tue, 05 Nov 2024 14:33:59 +0000
+Received: by outflank-mailman (input) for mailman id 830261;
+ Tue, 05 Nov 2024 14:33:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lM+p=SA=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t8K5W-0004dn-0M
- for xen-devel@lists.xenproject.org; Tue, 05 Nov 2024 13:59:18 +0000
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [2a00:1450:4864:20::536])
+ <SRS0=SSsw=SA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1t8Kd3-0002Lm-Ji
+ for xen-devel@lists.xenproject.org; Tue, 05 Nov 2024 14:33:57 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1f9ce900-9b7e-11ef-99a3-01e77a169b0f;
- Tue, 05 Nov 2024 14:59:07 +0100 (CET)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5cec7cde922so5138596a12.3
- for <xen-devel@lists.xenproject.org>; Tue, 05 Nov 2024 05:59:07 -0800 (PST)
-Received: from [10.125.226.166] ([185.25.67.249])
+ id fbcc7573-9b82-11ef-99a3-01e77a169b0f;
+ Tue, 05 Nov 2024 15:33:54 +0100 (CET)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-539e13375d3so5709834e87.3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Nov 2024 06:33:54 -0800 (PST)
+Received: from localhost.localdomain ([217.156.233.154])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9eb17f9b62sm136577066b.165.2024.11.05.05.59.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Nov 2024 05:59:06 -0800 (PST)
+ 4fb4d7f45d1cf-5cee6a99ff2sm1395047a12.4.2024.11.05.06.33.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Nov 2024 06:33:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,100 +47,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f9ce900-9b7e-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzYiLCJoZWxvIjoibWFpbC1lZDEteDUzNi5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjFmOWNlOTAwLTliN2UtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwODE1MTQ3LjIwMTgxNCwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: fbcc7573-9b82-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMzMiLCJoZWxvIjoibWFpbC1sZjEteDEzMy5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImZiY2M3NTczLTliODItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwODE3MjM0LjU0NDQyMywic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1730815146; x=1731419946; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=bT2gp4HdavhNTZLihDwhjcaajBAKKyJgNrQkN9QoCtQ=;
-        b=fiZHoAobFgOFfLaYw0YbKYhQdpfT5Ui9cGFth/HoQUB3CMrJ4UkjUBaKlioFsXRQdl
-         sTIrsERF47YQCfNyvYg1dvWuOY7QN4Y/RxJb/B5wbP182mIDZQUrRtQZdfyMJUzmPrmP
-         KzwQTyWUSk8KEo8PNRACvx69ZtBRnEHjr4WPU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730815146; x=1731419946;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1730817234; x=1731422034; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bT2gp4HdavhNTZLihDwhjcaajBAKKyJgNrQkN9QoCtQ=;
-        b=JmNEdkkFbnV8b3zia9fgAoBS4nASrFxJBPv/tpUD54tesmeIhVI/aRQbjN30wxLFAY
-         wj6xrGZe9N263KyoXn2sJe5aM+Fk35ecpPBXdog28Qt4v578Kg8W5IkWGnpAoTofmUpX
-         nG+R+15AXgBseHDOqcq4hBhl+RbTWJd7pYhMOceiKMVqIoEZTCt7h7f02BDSjbMct5UT
-         gvpbV/GIo9oUblGBI4/K2huJ0RnbdVTT2IU/6EttjeVjNllfpeHEwM5Wxz0c7Q2qSDQ+
-         BjQcRt7i0TCdgPlxe+gqwAlNeQAZhSzmIpE0dUVq8t+pnHBC++PLqJBUACFYP/3UlbHF
-         JwMg==
-X-Forwarded-Encrypted: i=1; AJvYcCXSD2YlBg9HYpXbEIuFRctdSvB7TiXJjhypxEaFkl0EzNEibqvlG66NlY0xd7kAKG2W5HtFnfKcAmE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxWmYeLOrLA7qiidSuVOw+oxrK+GY3mWMh2tBmyi1fmdgehk7aB
-	5bJIPUwF8Ao70FCNo5VUlnZvGohD50Nev5ANoaALvw4Q2Lc/LB2y5NU0ZFR8i5k=
-X-Google-Smtp-Source: AGHT+IFbocSmjccCJ6tNgWRxgiUay+SIcuF3DOLYxkkxyt3DQYT7et+hRpPvvEnOYHGQ4UC/nxFQEw==
-X-Received: by 2002:a17:907:6093:b0:a9a:26a5:d508 with SMTP id a640c23a62f3a-a9e3a5757c8mr2095923566b.9.1730815146590;
-        Tue, 05 Nov 2024 05:59:06 -0800 (PST)
-Message-ID: <024be5b0-e0e2-4fb2-9561-124277b2d6e5@citrix.com>
-Date: Tue, 5 Nov 2024 13:59:02 +0000
+        bh=cccZT2nNkS7HwSnMjpqOOO6Pj9Rt1hTJOtUGj8Io0EM=;
+        b=cqvAj5hq1PfOP4NTs3I5y/dVM5hYvU49CVm5dH1egJD2yUuL2ZuCN9fhnf3nPU8eV0
+         YKacFgYt1lZ4wcLHvUpKPH3lAGAs9OkC2ceMbLkUVBKUcksFYuEFbEU8WNbmG5UnFCZT
+         ylHMnciva4isyDxkzHyfBGsh/L3+OjqCWBWj4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730817234; x=1731422034;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=cccZT2nNkS7HwSnMjpqOOO6Pj9Rt1hTJOtUGj8Io0EM=;
+        b=oJmpnsvGqWa6PrpxuY2gdYHVY7psur+QYz4ZMWDiR/q7i77HSfaQMsoroqBCV1PE/t
+         59DHsP1HbnphSDDYsMiXOKvAUOyp91uWJCPKsKWq+DSBcozQItJBkGmZdRJXTpcIvpLe
+         7F/bptu2fbFpxq2+TFEnt2vNNUDxurFveyJ/7OL58wCDT4NM/BeMrTvJ5LT8++Uxz2DZ
+         F2tztBoCAL9x4YoXzdPyYuX+2tIFg27MuNSVEhG2zAKSBR01VzWtIatrz9iD9P4Ye+rX
+         +dyFl2By6xHjH9rQBE4mxjippyMDrOqejE0YN9g8+9+Cm5MM4MDbIcxChtZtmwU/DLty
+         8VsA==
+X-Gm-Message-State: AOJu0YwX3SBpsV26eVykjVzf9J7LxleTWOL6fUjYMCWM9NyfLW9JTyVV
+	0HQF4s8nHgw+ZjM42l2J+e8i4ndKdgi9AbTF7tqrKGUEW1LGtkHF1Zs9dd8susI/EIrZQv3VAsA
+	g
+X-Google-Smtp-Source: AGHT+IHrNmRZfcX4aC6aS1DeA4a59+43m9OGjtNEUC2QU5MbtRtDnUQSzXyAAjVgiUZtRovM+6xiGQ==
+X-Received: by 2002:a05:6512:138e:b0:536:53f0:2f8e with SMTP id 2adb3069b0e04-53c79e8ecbdmr8749128e87.37.1730817233351;
+        Tue, 05 Nov 2024 06:33:53 -0800 (PST)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 05/13] x86/xstate: Map/unmap xsave area in xstate_set_init() and handle_setbv()
+Date: Tue,  5 Nov 2024 14:33:02 +0000
+Message-ID: <20241105143310.28301-6-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241105143310.28301-1-alejandro.vallejo@cloud.com>
+References: <20241105143310.28301-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86emul/test: drop an undue conditional
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <f1fc4064-a2dd-4287-81ba-a90ce5205e0e@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <f1fc4064-a2dd-4287-81ba-a90ce5205e0e@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 05/11/2024 1:53 pm, Jan Beulich wrote:
-> Gating the main part of what do_test() does is wrong: As it stands, the
-> "memory" forms of BNDC{L,N,U} weren't tested because of this mistake.
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+No functional change.
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+v2:
+  * Added comment highlighting fastpath for current
+---
+ xen/arch/x86/xstate.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index af9e345a7ace..401bdad2eb0d 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -993,7 +993,13 @@ int handle_xsetbv(u32 index, u64 new_bv)
+ 
+         clts();
+         if ( curr->fpu_dirtied )
+-            asm ( "stmxcsr %0" : "=m" (curr->arch.xsave_area->fpu_sse.mxcsr) );
++        {
++            /* has a fastpath for `current`, so there's no actual map */
++            struct xsave_struct *xsave_area = VCPU_MAP_XSAVE_AREA(curr);
++
++            asm ( "stmxcsr %0" : "=m" (xsave_area->fpu_sse.mxcsr) );
++            VCPU_UNMAP_XSAVE_AREA(curr, xsave_area);
++        }
+         else if ( xstate_all(curr) )
+         {
+             /* See the comment in i387.c:vcpu_restore_fpu_eager(). */
+@@ -1048,7 +1054,7 @@ void xstate_set_init(uint64_t mask)
+     unsigned long cr0 = read_cr0();
+     unsigned long xcr0 = this_cpu(xcr0);
+     struct vcpu *v = idle_vcpu[smp_processor_id()];
+-    struct xsave_struct *xstate = v->arch.xsave_area;
++    struct xsave_struct *xstate;
+ 
+     if ( ~xfeature_mask & mask )
+     {
+@@ -1061,8 +1067,10 @@ void xstate_set_init(uint64_t mask)
+ 
+     clts();
+ 
++    xstate = VCPU_MAP_XSAVE_AREA(v);
+     memset(&xstate->xsave_hdr, 0, sizeof(xstate->xsave_hdr));
+     xrstor(v, mask);
++    VCPU_UNMAP_XSAVE_AREA(v, xstate);
+ 
+     if ( cr0 & X86_CR0_TS )
+         write_cr0(cr0);
+-- 
+2.47.0
+
 
