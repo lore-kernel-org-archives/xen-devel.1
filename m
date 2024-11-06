@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C211D29FBE
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 09:05:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.830622.1245694 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC86D3E798
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 09:06:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.830620.1245683 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8byt-0002MD-Az; Wed, 06 Nov 2024 09:05:39 +0000
+	id 1t8bys-0002D7-Pl; Wed, 06 Nov 2024 09:05:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 830622.1245694; Wed, 06 Nov 2024 09:05:39 +0000
+Received: by outflank-mailman (output) from mailman id 830620.1245683; Wed, 06 Nov 2024 09:05:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8byt-0002LI-6v; Wed, 06 Nov 2024 09:05:39 +0000
-Received: by outflank-mailman (input) for mailman id 830622;
- Wed, 06 Nov 2024 09:05:38 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t8bys-0002D0-Mm; Wed, 06 Nov 2024 09:05:38 +0000
+Received: by outflank-mailman (input) for mailman id 830620;
+ Wed, 06 Nov 2024 09:05:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w0tz=SB=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1t8bys-0001ya-FA
- for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 09:05:38 +0000
+ id 1t8byr-0001yg-G3
+ for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 09:05:37 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 493dd53d-9c1e-11ef-a0c6-8be0dac302b0;
- Wed, 06 Nov 2024 10:05:36 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 473a7ece-9c1e-11ef-99a3-01e77a169b0f;
+ Wed, 06 Nov 2024 10:05:33 +0100 (CET)
 Received: from truciolo.bugseng.com (unknown [78.210.84.32])
- by support.bugseng.com (Postfix) with ESMTPSA id C49D14EE0758;
- Wed,  6 Nov 2024 10:05:34 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id A75A04EE0757;
+ Wed,  6 Nov 2024 10:05:31 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,63 +41,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 493dd53d-9c1e-11ef-a0c6-8be0dac302b0
+X-Inumbo-ID: 473a7ece-9c1e-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjE2Mi41NS4xMzEuNDciLCJoZWxvIjoic3VwcG9ydC5idWdzZW5nLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjQ5M2RkNTNkLTljMWUtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwODgzOTM2LjU5NzY2Nywic2VuZGVyIjoiZmVkZXJpY28uc2VyYWZpbmlAYnVnc2VuZy5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Custom-Transaction: eyJpZCI6IjQ3M2E3ZWNlLTljMWUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwODgzOTMzLjI5ODU2NSwic2VuZGVyIjoiZmVkZXJpY28uc2VyYWZpbmlAYnVnc2VuZy5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1730883936; bh=WaAA3OoEOEbFSloOEWY4Sj5LACBV6phGN2xiIDD6990=;
+	t=1730883932; bh=NK6/l84ndfnWAGmtP6OHIKeJ23lpGjO2dcrBNpNvUxU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=aXWAPO5OBZ6looPpQRywTLMA/Ja3ydbFMhT44yV8sZRIbdH4CoX9+nBHrFdFcahnh
-	 veWhMBE4HbLaLY6cvxxMfNyvW6s24Utn7NYk4154MFR2xeXibX7vftv6N6q5QtHwwZ
-	 Lxv9fXNngMAEVPqdugM6qaa/uS5aOj5yYh8usuLtIylTm1owpZVh2A8vrNNnqUW5Ro
-	 jcE9KNd5qXH6TT5TJ8uUGsg0AKx2vsseZ63KzLYQNi1k6/6t3QrfC3f9fDWBbBx4j5
-	 v6WEJGqo3IVWmMhLcpCJTigArsp+w1snhspSX9eRTyRPVI8LGJgue3cp6A/Dj0b4yl
-	 61ky1RCEe46vA==
+	b=Z99WuS2+UF6fyFzN31Z0VD+zX8Yr2veiL0kO+rtCMMubiWPiLRRDlBCeiibM3v3pD
+	 VzNYMfrUD71UOiicw1lx/b341KW4ECEoV21alKN3ERrW4vwPRqUr5GCuyQ2nBaErTj
+	 8fSJPcHUaC0wDCfjqRiqju+p5VqhuBCXo/idZ6OPJUaoO++iv8+45S52xi3rynj4dN
+	 LuE8CDXO2P4Bl8KikJZHfQa1W+cNQIiC1BbSXf4WJy0DRZV5KclPvAH9mYcQksKFdo
+	 GGp/f2UMQDbe1b8Vz/RQbRC2gnRb/KTELsnDlEzEGup95oK/TcF1lzpMnVcOgJA0Hj
+	 gvcgJiytRRwSQ==
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH 3/3] automation/eclair: tag Rule 16.3 as clean
-Date: Wed,  6 Nov 2024 10:04:47 +0100
-Message-ID: <4ab02498ab368964302b247341b1401eb53faa63.1730880832.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 1/3] x86/emul: define pseudo keyword fallthrough
+Date: Wed,  6 Nov 2024 10:04:45 +0100
+Message-ID: <a0341b50ece1ba1b5b346b54db7d2abdc150cb95.1730880832.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1730880832.git.federico.serafini@bugseng.com>
 References: <cover.1730880832.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Tag MISRA C:2012 Rule 16.3 as clean for both architectures:
-new violations will cause a failure of the CI/CD pipeline.
+The pseudo keyword fallthrough shall be used to make explicit the
+fallthrough intention at the end of a case statement (doing this
+through comments is deprecated).
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- automation/eclair_analysis/ECLAIR/tagging.ecl | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/x86/x86_emulate/x86_emulate.h | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/automation/eclair_analysis/ECLAIR/tagging.ecl b/automation/eclair_analysis/ECLAIR/tagging.ecl
-index e1d4ed012a..cb7d5743d2 100644
---- a/automation/eclair_analysis/ECLAIR/tagging.ecl
-+++ b/automation/eclair_analysis/ECLAIR/tagging.ecl
-@@ -64,6 +64,7 @@ MC3R1.R14.1||
- MC3R1.R14.3||
- MC3R1.R14.4||
- MC3R1.R16.2||
-+MC3R1.R16.3||
- MC3R1.R16.7||
- MC3R1.R17.1||
- MC3R1.R17.3||
-@@ -112,7 +113,7 @@ if(string_equal(target,"x86_64"),
- )
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
+index d75658eba0..f49b1e0dd8 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -23,6 +23,16 @@
+ # error Unknown compilation width
+ #endif
  
- if(string_equal(target,"arm64"),
--    service_selector({"additional_clean_guidelines","MC3R1.R2.1||MC3R1.R5.3||MC3.R11.2||MC3R1.R16.3||MC3R1.R16.6||MC3R1.R20.7"})
-+    service_selector({"additional_clean_guidelines","MC3R1.R2.1||MC3R1.R5.3||MC3.R11.2||MC3R1.R16.6||MC3R1.R20.7"})
- )
++/*
++ * Pseudo keyword 'fallthrough' to make explicit the fallthrough intention at
++ * the end of a case statement.
++ */
++#if (!defined(__clang__) && (__GNUC__ >= 7))
++# define fallthrough        __attribute__((__fallthrough__))
++#else
++# define fallthrough        do {} while (0)  /* fallthrough */
++#endif
++
+ struct x86_emulate_ctxt;
  
- -reports+={clean:added,"service(clean_guidelines_common||additional_clean_guidelines)"}
+ /*
 -- 
 2.43.0
 
