@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E249D44D5C
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 13:38:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.831025.1246179 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98633D44D64
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 13:40:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.831045.1246199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8gFB-0002CV-JJ; Wed, 06 Nov 2024 13:38:45 +0000
+	id 1t8gGL-0003Zc-AI; Wed, 06 Nov 2024 13:39:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 831025.1246179; Wed, 06 Nov 2024 13:38:45 +0000
+Received: by outflank-mailman (output) from mailman id 831045.1246199; Wed, 06 Nov 2024 13:39:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8gFB-0002CO-Gk; Wed, 06 Nov 2024 13:38:45 +0000
-Received: by outflank-mailman (input) for mailman id 831025;
- Wed, 06 Nov 2024 13:38:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t8gGL-0003ZV-6j; Wed, 06 Nov 2024 13:39:57 +0000
+Received: by outflank-mailman (input) for mailman id 831045;
+ Wed, 06 Nov 2024 13:39:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6nbp=SB=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1t8gFA-00015Z-Gv
- for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 13:38:44 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 700c2d7b-9c44-11ef-a0c6-8be0dac302b0;
- Wed, 06 Nov 2024 14:38:42 +0100 (CET)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a9a0ec0a94fso1066922166b.1
- for <xen-devel@lists.xenproject.org>; Wed, 06 Nov 2024 05:38:42 -0800 (PST)
-Received: from fziglio-desktop.lan (99.149.115.87.dyn.plus.net.
- [87.115.149.99]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432aa6ae615sm21785875e9.8.2024.11.06.05.06.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Nov 2024 05:06:33 -0800 (PST)
+ <SRS0=wNbQ=SB=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1t8gGK-0003Z3-K1
+ for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 13:39:56 +0000
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [2a00:1450:4864:20::236])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9949d733-9c44-11ef-99a3-01e77a169b0f;
+ Wed, 06 Nov 2024 14:39:51 +0100 (CET)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2fb6110c8faso63121301fa.1
+ for <xen-devel@lists.xenproject.org>; Wed, 06 Nov 2024 05:39:51 -0800 (PST)
+Received: from [10.125.226.166] ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9eb16a3bf6sm282781366b.24.2024.11.06.05.11.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 Nov 2024 05:11:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,92 +47,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 700c2d7b-9c44-11ef-a0c6-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzEiLCJoZWxvIjoibWFpbC1lajEteDYzMS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjcwMGMyZDdiLTljNDQtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwOTAwMzIyLjQ5MzQ1Nywic2VuZGVyIjoiZnJlZGlhbm8uemlnbGlvQGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 9949d733-9c44-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoyMzYiLCJoZWxvIjoibWFpbC1sajEteDIzNi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6Ijk5NDlkNzMzLTljNDQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwOTAwMzkxLjY1OTI3Niwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1730900322; x=1731505122; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jNXAAQEeft4M3yHeAl+E+8ZpS3tKf0AXKURNXRVDvkI=;
-        b=G9/wro57tjy1YNw9AEn5pnVIqz0EXLVPQ+FMEhiRYWriOYP6yfrVDyNyXD7nbZ27yz
-         hLBHYDs83cdBhkcEw8c8lAVAjY5jehY4VC4ELdOPMzuvvzOwh3BOd2U7h8KbaI9+EUAr
-         1utJOZepDYFTt44YgLrwmU1mQxtyVoypvBLv8=
+        d=citrix.com; s=google; t=1730900391; x=1731505191; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Eb4ZlEBdrUesJRtFoLJxjTO3FH3+xQ2X7hbwEozANNM=;
+        b=ioHtOeycM92691QIG99AAoKC767OCniA19T//ApEnuBsBAMkYvr1SHfwh2BD1Jr/7F
+         zzKI9qBYS8JSKXqBAUT/1crQQ6RTZstJrX257wGe5fRYbvaJljrMVoOYPBC+wfSqDuJ3
+         wugfIr7NpKC6//quO9cdhJXJQx/L7L3mL67yc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730900322; x=1731505122;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jNXAAQEeft4M3yHeAl+E+8ZpS3tKf0AXKURNXRVDvkI=;
-        b=vsn4LOgznxhBzUVTv0nheeWLhVt6JcET1lm7yB3BYTiscrpoa3bHlv0qF4s53fT055
-         NexXQfdfoAZkpGznrtUEzgLMu+aHNkE6mdUChRBU+BO0OZQ9W2t5sFMaBxDtKJf73Uai
-         VZ2viJHUKeS/RmqQG5GQo0UCwZoVKvDV1CQPM1JKk0R6QIglcaJH92SHNuWEodarlsJQ
-         ENVEGa77Eng7d0bCQd+yGSxzhyw+npS2taqyx86Bide2Zb3MhcB5LceMjoMyjIZzpGJD
-         bDFnci+XlW+MDP/xZxtFnYexmVvdZLyUVjzq1x4Lm8T4azxsI4tAg1K6hGiXpgrWYc+d
-         GjKA==
-X-Gm-Message-State: AOJu0Ywk8yLBok+KK1GDE3VIMG5APW/7+9oRj/23uS7kvkesl+a903A5
-	wyxjoAMVpQ/EmIJUJSZcUgH/GXaQTjGo6HIhCXxFrN5jVikSufdeh/zbr0tQyBNDhLik24kQcly
-	XSq4=
-X-Google-Smtp-Source: AGHT+IHtwN3ieirDaOOPhRyRU6kaYSf9448q2ZSYS/K6+6OC8xNmi7RTqs+tpo0NOe79hlbipOhFxQ==
-X-Received: by 2002:ac2:4a83:0:b0:533:44e7:1b2a with SMTP id 2adb3069b0e04-53d6bb3fad8mr6374380e87.40.1730898393970;
-        Wed, 06 Nov 2024 05:06:33 -0800 (PST)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 3/3] x86/boot: Explicitly list .{sym,shstr,str}tab in build32.lds.S
-Date: Wed,  6 Nov 2024 13:06:20 +0000
-Message-Id: <20241106130620.1928109-4-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241106130620.1928109-1-frediano.ziglio@cloud.com>
-References: <20241106130620.1928109-1-frediano.ziglio@cloud.com>
+        d=1e100.net; s=20230601; t=1730900391; x=1731505191;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Eb4ZlEBdrUesJRtFoLJxjTO3FH3+xQ2X7hbwEozANNM=;
+        b=ZUfPtMSfhSHxbV+ZbxEZJmYSckUJ0/9aBn6DPiS8kCb98QkBEm929v850PRTJMz7Vi
+         xJmYrOcsSmU35ThmIUKZ+ttdisnZDaMgtHDdm5xz3o1Aymuj5EYuxAQBYByMVQhCoxM4
+         zyA2RKb1VY71mefuAmbYz+Xffok28NlRd4NwrMl6GnNglRfhu9dfNlg0Mwtx9ZR4+vQ+
+         GdJ0Xetm/QEXCUvB/pf8lpD63thPRYuc+EAbj9qkRKUQdwxclKdoMi13VkrGMzIxEz++
+         guNm0ZIQ9tBrgVS3AzzK62ECXnamJaSiKjB42O9TFrC6b1+c3972BI1ZnRbs/QsI84Cf
+         uF6g==
+X-Gm-Message-State: AOJu0YyR+sPRjmrtiaSDJKd+2kad2c4P1mhqHAMb2T51c4RPQgu8Sz4D
+	mNAiTNEvMJbkigEsfG25vBXa3qc+w+aMNN/JS6CiR2pAj9fDopZolsbVJwcg+aw7CHlIBA8eYeV
+	V
+X-Google-Smtp-Source: AGHT+IGItccYorqO9/YYseq3f3D437tjeNzdTGEK/ifqtfhwdvNkV1Dr3Fi4OxHB439Ckg5b5clTlw==
+X-Received: by 2002:a17:907:971d:b0:a9a:13f8:60b9 with SMTP id a640c23a62f3a-a9de5fc7847mr3923686466b.36.1730898704211;
+        Wed, 06 Nov 2024 05:11:44 -0800 (PST)
+Message-ID: <7ab2705e-02ba-4e5f-8dd9-ac00a93ba39a@citrix.com>
+Date: Wed, 6 Nov 2024 13:11:42 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] CI: Fix package installation for Coverity run
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>
+References: <20241105204603.3412857-1-andrew.cooper3@citrix.com>
+ <ZytVxKOtQfR7DWeX@macbook>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <ZytVxKOtQfR7DWeX@macbook>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Currently, building with LLVM's LLD fails:
+On 06/11/2024 11:40 am, Roger Pau Monné wrote:
+> On Tue, Nov 05, 2024 at 08:46:03PM +0000, Andrew Cooper wrote:
+>> Something has changed recently in the Github Actions environment and the
+>> golang metapacakge resolves to something that no longer exists:
+>>
+>>   https://github.com/xen-project/xen/actions/runs/11539340171/job/32120834909
+>>
+>> Update metadata before installing, which fixes things.
+>>
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+>
+> Seems like the current Ubuntu image has a stale apt cache?  It's good
+> practice to update before we install anyway.
 
-    ld -melf_i386_fbsd  --orphan-handling=error -N -T ...
-    ld: error: <internal>:(.symtab) is being placed in '.symtab'
-    ld: error: <internal>:(.shstrtab) is being placed in '.shstrtab'
-    ld: error: <internal>:(.strtab) is being placed in '.strtab'
-    gmake[11]: *** [arch/x86/boot/Makefile:69:
-arch/x86/boot/built-in-32.base.bin] Error 1
+Thanks, and yeah.   As chance would have it, the problem resolved itself
+in this mornings run, but we should take the patch anyway.
 
-This is a consequence of --orphan-handling, and it appears that Binutils
-doesn't diagnose some orphaned sections even explicitly asked to do so.
+A couple of weeks ago, they did strip out one of the versions of Go, but
+it wasn't the version of Go we were trying to use.  But in hindsight,
+that doesn't mean that the metadata was kept properly up to date.
 
-List the sections explicitly.
-
-Fixes: aa9045e77130 ('x86/boot: Rework how 32bit C is linked/included for early boot')
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
- xen/arch/x86/boot/build32.lds.S | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/xen/arch/x86/boot/build32.lds.S b/xen/arch/x86/boot/build32.lds.S
-index 9b29f0184f..1e59732edd 100644
---- a/xen/arch/x86/boot/build32.lds.S
-+++ b/xen/arch/x86/boot/build32.lds.S
-@@ -66,6 +66,15 @@ SECTIONS
-        *(.comment.*)
-        *(.note.*)
-   }
-+  .shstrtab : {
-+       *(.shstrtab)
-+  }
-+  .strtab : {
-+       *(.strtab)
-+  }
-+  .symtab : {
-+       *(.symtab)
-+  }
-   /* Dynamic linkage sections.  Collected simply so we can check they're empty. */
-   .got : {
-         *(.got)
--- 
-2.34.1
-
+~Andrew
 
