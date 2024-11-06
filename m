@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CBA8D44D62
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 13:41:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.831064.1246208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 939A0D44D64
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 13:43:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.831076.1246229 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8gI7-0005TP-K4; Wed, 06 Nov 2024 13:41:47 +0000
+	id 1t8gJp-0006Y7-Co; Wed, 06 Nov 2024 13:43:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 831064.1246208; Wed, 06 Nov 2024 13:41:47 +0000
+Received: by outflank-mailman (output) from mailman id 831076.1246229; Wed, 06 Nov 2024 13:43:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8gI7-0005TI-HX; Wed, 06 Nov 2024 13:41:47 +0000
-Received: by outflank-mailman (input) for mailman id 831064;
- Wed, 06 Nov 2024 13:41:46 +0000
+	id 1t8gJp-0006Y0-8a; Wed, 06 Nov 2024 13:43:33 +0000
+Received: by outflank-mailman (input) for mailman id 831076;
+ Wed, 06 Nov 2024 13:43:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kC+v=SB=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1t8gI6-0005T1-EJ
- for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 13:41:46 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id dad9022d-9c44-11ef-a0c6-8be0dac302b0;
- Wed, 06 Nov 2024 14:41:41 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0F0EB497;
- Wed,  6 Nov 2024 05:42:11 -0800 (PST)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2799B3F66E;
- Wed,  6 Nov 2024 05:41:40 -0800 (PST)
+ <SRS0=6nbp=SB=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
+ id 1t8gJn-00061k-SF
+ for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 13:43:31 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1b4c4cf7-9c45-11ef-a0c6-8be0dac302b0;
+ Wed, 06 Nov 2024 14:43:29 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9acafdb745so182031166b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 06 Nov 2024 05:43:29 -0800 (PST)
+Received: from fziglio-desktop.lan (99.149.115.87.dyn.plus.net.
+ [87.115.149.99]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432aa6ae615sm21785875e9.8.2024.11.06.05.06.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Nov 2024 05:06:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,234 +47,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dad9022d-9c44-11ef-a0c6-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjIxNy4xNDAuMTEwLjE3MiIsImhlbG8iOiJmb3NzLmFybS5jb20ifQ==
-X-Custom-Transaction: eyJpZCI6ImRhZDkwMjJkLTljNDQtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwOTAwNTAyLjI4NTg5OSwic2VuZGVyIjoibHVjYS5mYW5jZWxsdUBhcm0uY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
-From: Luca Fancellu <luca.fancellu@arm.com>
+X-Inumbo-ID: 1b4c4cf7-9c45-11ef-a0c6-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzYiLCJoZWxvIjoibWFpbC1lajEteDYzNi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjFiNGM0Y2Y3LTljNDUtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwOTAwNjA5LjgxMjUwNywic2VuZGVyIjoiZnJlZGlhbm8uemlnbGlvQGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1730900608; x=1731505408; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iC/ssupFSJTkxCKBaHe1Umzon0/xq/exjo7F/imeSNg=;
+        b=EAUNq6nw/Nz17/07Rn5yc5xq0R7xhddAoit6lNCsyzTz5QQjvHvImsEsOTKdStRYGs
+         Oiws2ezk5G2RW4Siu/+6c17Hf0w2W6qxsoxa0RXB0r/o6Lp7xmmXEb7KD5Tx0ynS7Yib
+         MTJlhh7v6eNH5RZlwfnb82YykKW+iTtit2KgU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730900608; x=1731505408;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iC/ssupFSJTkxCKBaHe1Umzon0/xq/exjo7F/imeSNg=;
+        b=ek95aqTbYrzrn3QLwZ0GenhqZa3WaSkYsBkZGOZPmx68MfcGSCXS0xisRr59wPtYmR
+         y/Dq21w3pihEJ1gG4oj6egXSBBRt/Gg8DYAcm9hFw9rF9NHwS/DGqev6emm10BPyERXw
+         2i6oSpO5PrR/Jm+lN4ylMiICCR724ypin7gCHTIvg2HD1rCrsauw2jvSE+YUetJKXhtM
+         Sl6Gq8jwtc9aBZNYU821wFsXRi/cwOrUVxDVHYZ3py+98XCpEZsBIU8AnZ31a0V5TLy3
+         L7sddAPQEF11ElatU4o0QhdF2ga7908EhQP/4L9Ow8FwI69E5Piw84XWkI1YXeFsSnNw
+         inyg==
+X-Gm-Message-State: AOJu0YwTA0anN9gUIbOg58FBVIjeC2V4LrdhJbJEYc9GnZgSQ+8K8c5r
+	TlN2JaiS12FkDI965UsR6UGagGVzF5BNiFrGS9SY7S6I0jB8ewD3Xq3+YtsZ+EHmHC91AoZnk9k
+	sL7Q=
+X-Google-Smtp-Source: AGHT+IEENntri2GwURKmd0G7AZsIiYX384VHLbSgMbsVrqloeuvfhgfJSThdcXYnsWD/hYuXD7pGdA==
+X-Received: by 2002:a05:600c:1553:b0:42c:b98d:b993 with SMTP id 5b1f17b1804b1-432a9a74e90mr22612125e9.2.1730898390871;
+        Wed, 06 Nov 2024 05:06:30 -0800 (PST)
+From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Grygorii Strashko <grygorii_strashko@epam.com>
-Subject: [PATCH] xen/device-tree: Allow exact match for overlapping regions
-Date: Wed,  6 Nov 2024 13:41:32 +0000
-Message-Id: <20241106134132.2185492-1-luca.fancellu@arm.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 0/3] x86/boot: Fix build with LLVM toolchain
+Date: Wed,  6 Nov 2024 13:06:17 +0000
+Message-Id: <20241106130620.1928109-1-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There are some cases where the device tree exposes a memory range
-in both /memreserve/ and reserved-memory node, in this case the
-current code will stop Xen to boot since it will find that the
-latter range is clashing with the already recorded /memreserve/
-ranges.
+Fix some compatibility generating 32 bit code.
+LLVM has different object files and map files.
+Do not use map file as they are not standard.
 
-Furthermore, u-boot lists boot modules ranges, such as ramdisk,
-in the /memreserve/ part and even in this case this will prevent
-Xen to boot since it will see that the module memory range that
-it is going to add in 'add_boot_module' clashes with a /memreserve/
-range.
+Changes since v1:
+- do not use map files;
+- add a fix for file names and preprocessor definition name.
 
-When Xen populate the data structure that tracks the memory ranges,
-it also adds a memory type described in 'enum membank_type', so
-in order to fix this behavior, allow the 'check_reserved_regions_overlap'
-function to check for exact memory range match given a specific memory
-type; allowing reserved-memory node ranges and boot modules to have an
-exact match with ranges from /memreserve/.
+Changes since v2:
+- address comments.
 
-While there, set a type for the memory recorded during ACPI boot.
+Frediano Ziglio (3):
+  x86/boot: Fix intermediate file names to generate 32 bit code
+  x86/boot: Uses nm command instead of map file to get symbols
+  x86/boot: Explicitly list .{sym,shstr,str}tab in build32.lds.S
 
-Fixes: 53dc37829c31 ("xen/arm: Add DT reserve map regions to bootinfo.reserved_mem")
-Reported-by: Shawn Anastasio <sanastasio@raptorengineering.com>
-Reported-by: Grygorii Strashko <grygorii_strashko@epam.com>
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
-I tested this patch adding the same range in a /memreserve/ entry and
-/reserved-memory node, and by letting u-boot pass a ramdisk.
-I've also tested that a configuration running static shared memory still works
-fine.
----
- xen/arch/arm/efi/efi-boot.h       |  3 +-
- xen/arch/arm/static-shmem.c       |  2 +-
- xen/common/device-tree/bootfdt.c  |  9 +++++-
- xen/common/device-tree/bootinfo.c | 48 ++++++++++++++++++++++++-------
- xen/include/xen/bootfdt.h         |  9 +++++-
- 5 files changed, 57 insertions(+), 14 deletions(-)
+ xen/arch/x86/boot/Makefile        |  9 +++++----
+ xen/arch/x86/boot/build32.lds.S   | 11 ++++++++++-
+ xen/tools/combine_two_binaries.py | 19 ++++++++++++-------
+ 3 files changed, 27 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-index 199f5260229d..d35c991c856f 100644
---- a/xen/arch/arm/efi/efi-boot.h
-+++ b/xen/arch/arm/efi/efi-boot.h
-@@ -167,13 +167,14 @@ static bool __init meminfo_add_bank(struct membanks *mem,
-     if ( mem->nr_banks >= mem->max_banks )
-         return false;
- #ifdef CONFIG_ACPI
--    if ( check_reserved_regions_overlap(start, size) )
-+    if ( check_reserved_regions_overlap(start, size, MEMBANK_NONE) )
-         return false;
- #endif
- 
-     bank = &mem->bank[mem->nr_banks];
-     bank->start = start;
-     bank->size = size;
-+    bank->type = MEMBANK_DEFAULT;
- 
-     mem->nr_banks++;
- 
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-index aa80756c3ca5..149ed4b0a5ba 100644
---- a/xen/arch/arm/static-shmem.c
-+++ b/xen/arch/arm/static-shmem.c
-@@ -696,7 +696,7 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-         if (i < mem->max_banks)
-         {
-             if ( (paddr != INVALID_PADDR) &&
--                 check_reserved_regions_overlap(paddr, size) )
-+                 check_reserved_regions_overlap(paddr, size, MEMBANK_NONE) )
-                 return -EINVAL;
- 
-             /* Static shared memory shall be reserved from any other use. */
-diff --git a/xen/common/device-tree/bootfdt.c b/xen/common/device-tree/bootfdt.c
-index 927f59c64b0d..fb3a6ab95a22 100644
---- a/xen/common/device-tree/bootfdt.c
-+++ b/xen/common/device-tree/bootfdt.c
-@@ -176,8 +176,15 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
-     for ( i = 0; i < banks && mem->nr_banks < mem->max_banks; i++ )
-     {
-         device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
-+        /*
-+         * Some valid device trees, such as those generated by OpenPOWER
-+         * skiboot firmware, expose all reserved memory regions in the
-+         * FDT memory reservation block AND in the reserved-memory node which
-+         * has already been parsed. Thus, any matching overlaps in the
-+         * reserved_mem banks should be ignored.
-+         */
-         if ( mem == bootinfo_get_reserved_mem() &&
--             check_reserved_regions_overlap(start, size) )
-+             check_reserved_regions_overlap(start, size, MEMBANK_FDT_RESVMEM) )
-             return -EINVAL;
-         /* Some DT may describe empty bank, ignore them */
-         if ( !size )
-diff --git a/xen/common/device-tree/bootinfo.c b/xen/common/device-tree/bootinfo.c
-index f2e6a1145b7c..05038075e835 100644
---- a/xen/common/device-tree/bootinfo.c
-+++ b/xen/common/device-tree/bootinfo.c
-@@ -99,7 +99,8 @@ static void __init dt_unreserved_regions(paddr_t s, paddr_t e,
-  */
- static bool __init meminfo_overlap_check(const struct membanks *mem,
-                                          paddr_t region_start,
--                                         paddr_t region_size)
-+                                         paddr_t region_size,
-+                                         enum membank_type allow_match_type)
- {
-     paddr_t bank_start = INVALID_PADDR, bank_end = 0;
-     paddr_t region_end = region_start + region_size;
-@@ -113,12 +114,16 @@ static bool __init meminfo_overlap_check(const struct membanks *mem,
-         if ( INVALID_PADDR == bank_start || region_end <= bank_start ||
-              region_start >= bank_end )
-             continue;
--        else
--        {
--            printk("Region: [%#"PRIpaddr", %#"PRIpaddr") overlapping with bank[%u]: [%#"PRIpaddr", %#"PRIpaddr")\n",
--                   region_start, region_end, i, bank_start, bank_end);
--            return true;
--        }
-+
-+        if ( (allow_match_type != MEMBANK_NONE) &&
-+             (region_start == bank_start) && (region_end == bank_end) &&
-+             (allow_match_type == mem->bank[i].type) )
-+            continue;
-+
-+        printk("Region: [%#"PRIpaddr", %#"PRIpaddr") overlapping with bank[%u]: [%#"PRIpaddr", %#"PRIpaddr")\n",
-+                region_start, region_end, i, bank_start, bank_end);
-+        return true;
-+
-     }
- 
-     return false;
-@@ -169,9 +174,14 @@ void __init fw_unreserved_regions(paddr_t s, paddr_t e,
-  * with the existing reserved memory regions defined in bootinfo.
-  * Return true if the input physical address range is overlapping with any
-  * existing reserved memory regions, otherwise false.
-+ * The 'allow_match_type' parameter can be used to allow exact match of a
-+ * region with another memory region already recorded, but it needs to be used
-+ * only on memory regions that allows a type (reserved_mem, acpi). For all the
-+ * other cases, passing 'MEMBANK_NONE' will disable the exact match.
-  */
- bool __init check_reserved_regions_overlap(paddr_t region_start,
--                                           paddr_t region_size)
-+                                           paddr_t region_size,
-+                                           enum membank_type allow_match_type)
- {
-     const struct membanks *mem_banks[] = {
-         bootinfo_get_reserved_mem(),
-@@ -190,8 +200,21 @@ bool __init check_reserved_regions_overlap(paddr_t region_start,
-      * shared memory banks (when static shared memory feature is enabled)
-      */
-     for ( i = 0; i < ARRAY_SIZE(mem_banks); i++ )
--        if ( meminfo_overlap_check(mem_banks[i], region_start, region_size) )
-+    {
-+        enum membank_type type = allow_match_type;
-+
-+#ifdef CONFIG_STATIC_SHM
-+        /*
-+         * Static shared memory banks don't have a type, so for them disable
-+         * the exact match check.
-+         */
-+        if (mem_banks[i] == bootinfo_get_shmem())
-+            type = MEMBANK_NONE;
-+#endif
-+        if ( meminfo_overlap_check(mem_banks[i], region_start, region_size,
-+                                   type) )
-             return true;
-+    }
- 
-     /* Check if input region is overlapping with bootmodules */
-     if ( bootmodules_overlap_check(&bootinfo.modules,
-@@ -216,7 +239,12 @@ struct bootmodule __init *add_boot_module(bootmodule_kind kind,
-         return NULL;
-     }
- 
--    if ( check_reserved_regions_overlap(start, size) )
-+    /*
-+     * u-boot adds boot module such as ramdisk to the /memreserve/, since these
-+     * ranges are saved in reserved_mem at this stage, allow an eventual exact
-+     * match with MEMBANK_FDT_RESVMEM banks.
-+     */
-+    if ( check_reserved_regions_overlap(start, size, MEMBANK_FDT_RESVMEM) )
-         return NULL;
- 
-     for ( i = 0 ; i < mods->nr_mods ; i++ )
-diff --git a/xen/include/xen/bootfdt.h b/xen/include/xen/bootfdt.h
-index 16fa05f38f38..8f8a7ad882a4 100644
---- a/xen/include/xen/bootfdt.h
-+++ b/xen/include/xen/bootfdt.h
-@@ -23,6 +23,12 @@ typedef enum {
- }  bootmodule_kind;
- 
- enum membank_type {
-+    /*
-+     * The MEMBANK_NONE type is a special placeholder that should not be applied
-+     * to a memory bank, it is used as a special value in some function in order
-+     * to disable some feature.
-+     */
-+    MEMBANK_NONE = -1,
-     /*
-      * The MEMBANK_DEFAULT type refers to either reserved memory for the
-      * device/firmware (when the bank is in 'reserved_mem') or any RAM (when
-@@ -158,7 +164,8 @@ struct bootinfo {
- extern struct bootinfo bootinfo;
- 
- bool check_reserved_regions_overlap(paddr_t region_start,
--                                    paddr_t region_size);
-+                                    paddr_t region_size,
-+                                    enum membank_type allow_match_type);
- 
- struct bootmodule *add_boot_module(bootmodule_kind kind,
-                                    paddr_t start, paddr_t size, bool domU);
 -- 
 2.34.1
 
