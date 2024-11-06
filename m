@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF6AD29FBE
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 09:05:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.830619.1245673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E15B9D3E798
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Nov 2024 09:05:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.830621.1245687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8byr-0001yt-Kx; Wed, 06 Nov 2024 09:05:37 +0000
+	id 1t8byt-0002FF-19; Wed, 06 Nov 2024 09:05:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 830619.1245673; Wed, 06 Nov 2024 09:05:37 +0000
+Received: by outflank-mailman (output) from mailman id 830621.1245687; Wed, 06 Nov 2024 09:05:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8byr-0001yh-GP; Wed, 06 Nov 2024 09:05:37 +0000
-Received: by outflank-mailman (input) for mailman id 830619;
- Wed, 06 Nov 2024 09:05:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1t8bys-0002Eo-TV; Wed, 06 Nov 2024 09:05:38 +0000
+Received: by outflank-mailman (input) for mailman id 830621;
+ Wed, 06 Nov 2024 09:05:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w0tz=SB=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1t8byp-0001ya-JG
- for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 09:05:35 +0000
+ id 1t8byr-0001yg-Pp
+ for xen-devel@lists.xenproject.org; Wed, 06 Nov 2024 09:05:37 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 469904d1-9c1e-11ef-a0c6-8be0dac302b0;
- Wed, 06 Nov 2024 10:05:32 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 483db99a-9c1e-11ef-99a3-01e77a169b0f;
+ Wed, 06 Nov 2024 10:05:34 +0100 (CET)
 Received: from truciolo.bugseng.com (unknown [78.210.84.32])
- by support.bugseng.com (Postfix) with ESMTPSA id 1D1814EE0753;
- Wed,  6 Nov 2024 10:05:29 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 651304EE0756;
+ Wed,  6 Nov 2024 10:05:33 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,18 +41,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 469904d1-9c1e-11ef-a0c6-8be0dac302b0
+X-Inumbo-ID: 483db99a-9c1e-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjE2Mi41NS4xMzEuNDciLCJoZWxvIjoic3VwcG9ydC5idWdzZW5nLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjQ2OTkwNGQxLTljMWUtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwODgzOTMyLjI1MTA5Niwic2VuZGVyIjoiZmVkZXJpY28uc2VyYWZpbmlAYnVnc2VuZy5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Custom-Transaction: eyJpZCI6IjQ4M2RiOTlhLTljMWUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwODgzOTM0Ljg4NDk5LCJzZW5kZXIiOiJmZWRlcmljby5zZXJhZmluaUBidWdzZW5nLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1730883931; bh=FLjvsT56wnZdUW9ihgWebbU/BHeGLKqz6NMdyDugDdE=;
-	h=From:To:Cc:Subject:Date:From;
-	b=LcsuhhAFUSLcTtTjoF/pqdEmA4ewb18GZ6GxFQyjUNGI6r22GUxDUIEM3aTTBG2x1
-	 RUYA9cLpGZ8gkU8uiGUqpPWJooIQ3v5oXdA5hnXYkdVJ1+RZxPbPmbe1VT/TtHyP8Y
-	 lceZQpbI/YKm4BKPM1wY73/l9Y35H6iwv/qn5gkjpLmrMUckaf26+4jEL53z5m2gqo
-	 PwpLHvwWCHrebBR2iGpMaw9U9a6oNtQS7quiTpvmMbE6AQq5TGfV4IF6/L6ABhS9BX
-	 RrLW+8kfwgJUnNIm1vOCa+xcMvxAfea4DggKlg9J4NuVf7Hjj3fV9Jq0A8C7KkK4gL
-	 JPcxLtcYdj6Aw==
+	t=1730883934; bh=etnDQcjFydFYuWuYvuYIRamKA/E4dTICXmJpGZ5Jwgw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=gblwzgjfOWd/OUhrCVpzeYtzQDSANzxfL+AAzVK2YZJ0wIUNCzAG1kzJTF7a1yxwj
+	 0IGEmyWWSsWP39JNj78MA1bVwx73LxWrmbkrTzIFCo4Ik+Gdy1QGJbTrlQe/P9aHr3
+	 evMCCxUOFGX+FBKLgoLoo/bXLXDERw2XJt+f15FZ1qrwkEGPsv4W5P6bmHTQG4Mi22
+	 sBpMzsxNU6wIf6SOr5Z9bJPnmZTYY/BuKpydK/mzAV+AyR47q9xs8/SbXXClp2E76x
+	 /WcU7dsJ11Q25MtttZAEnXPbLsQH50MEk889b/rdo7ztGsDzuIfTEqlwR/iLqpJa1R
+	 NJosTV60UEzJw==
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -60,30 +60,75 @@ Cc: consulting@bugseng.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH 0/3] x86: address violations of MISRA C Rule 16.3
-Date: Wed,  6 Nov 2024 10:04:44 +0100
-Message-ID: <cover.1730880832.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 2/3] x86/emul: use pseudo keyword fallthrough
+Date: Wed,  6 Nov 2024 10:04:46 +0100
+Message-ID: <9be1812e391ce893afa028c05614b74cddb197b7.1730880832.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1730880832.git.federico.serafini@bugseng.com>
+References: <cover.1730880832.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Define pseudo keyword fallthrough for the x86 emulator,
-use it and tag the rule as clean.
+Make explicit the fallthrough intetion by adding the pseudo keyword
+where missing and refactor comments not following the agreed syntax.
 
-Federico Serafini (3):
-  x86/emul: define pseudo keyword fallthrough
-  x86/emul: use pseudo keyword fallthrough
-  automation/eclair: tag Rule 16.3 as clean
+This satisfies the requirements to deviate violations of
+MISRA C:2012 Rule 16.3 "An unconditional break statement shall
+terminate every switch-clause".
 
- automation/eclair_analysis/ECLAIR/tagging.ecl |  3 ++-
- xen/arch/x86/x86_emulate/decode.c             |  6 ++++--
- xen/arch/x86/x86_emulate/x86_emulate.c        |  2 ++
- xen/arch/x86/x86_emulate/x86_emulate.h        | 10 ++++++++++
- 4 files changed, 18 insertions(+), 3 deletions(-)
+No functional change.
 
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+---
+ xen/arch/x86/x86_emulate/decode.c      | 6 ++++--
+ xen/arch/x86/x86_emulate/x86_emulate.c | 2 ++
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/x86/x86_emulate/decode.c b/xen/arch/x86/x86_emulate/decode.c
+index 32b9276dc5..0a0751f2ed 100644
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -1356,7 +1356,8 @@ int x86emul_decode(struct x86_emulate_state *s,
+                         --disp8scale;
+                     break;
+                 }
+-                /* vcvt{,t}s{s,d}2usi need special casing: fall through */
++                /* vcvt{,t}s{s,d}2usi need special casing. */
++                fallthrough;
+             case 0x2c: /* vcvtts{s,d}2si need special casing */
+             case 0x2d: /* vcvts{s,d}2si need special casing */
+                 if ( evex_encoded() )
+@@ -1530,7 +1531,8 @@ int x86emul_decode(struct x86_emulate_state *s,
+                         disp8scale -= 1 + (s->evex.pfx == vex_66);
+                     break;
+                 }
+-                /* vcvt{,t}sh2usi needs special casing: fall through */
++                /* vcvt{,t}sh2usi needs special casing. */
++                fallthrough;
+             case 0x2c: case 0x2d: /* vcvt{,t}sh2si need special casing */
+                 disp8scale = 1;
+                 break;
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
+index 30674ec301..c38984b201 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -1460,6 +1460,7 @@ x86_emulate(
+ 
+         d = (d & ~DstMask) | DstMem;
+         /* Becomes a normal DstMem operation from here on. */
++        fallthrough;
+     case DstMem:
+         generate_exception_if(ea.type == OP_MEM && evex.z, X86_EXC_UD);
+         if ( state->simd_size != simd_none )
+@@ -1942,6 +1943,7 @@ x86_emulate(
+             break;
+         }
+         generate_exception_if((modrm_reg & 7) != 0, X86_EXC_UD);
++        fallthrough;
+     case 0x88 ... 0x8b: /* mov */
+     case 0xa0 ... 0xa1: /* mov mem.offs,{%al,%ax,%eax,%rax} */
+     case 0xa2 ... 0xa3: /* mov {%al,%ax,%eax,%rax},mem.offs */
 -- 
 2.43.0
 
