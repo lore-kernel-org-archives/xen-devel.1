@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9D1D43352
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 12:33:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.831797.1247173 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBBED43352
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 13:25:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.831813.1247194 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t91gy-0007FV-Dz; Thu, 07 Nov 2024 12:32:52 +0000
+	id 1t92Vo-0006K6-9K; Thu, 07 Nov 2024 13:25:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 831797.1247173; Thu, 07 Nov 2024 12:32:52 +0000
+Received: by outflank-mailman (output) from mailman id 831813.1247194; Thu, 07 Nov 2024 13:25:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t91gy-0007FO-Ax; Thu, 07 Nov 2024 12:32:52 +0000
-Received: by outflank-mailman (input) for mailman id 831797;
- Thu, 07 Nov 2024 12:32:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wb0k=SC=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1t91gx-0007FI-9e
- for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 12:32:51 +0000
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [2a00:1450:4864:20::12b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 657862e8-9d04-11ef-a0c6-8be0dac302b0;
- Thu, 07 Nov 2024 13:32:48 +0100 (CET)
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-53a0c160b94so891752e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 04:32:48 -0800 (PST)
-Received: from [192.168.219.191] ([94.75.70.14])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53d826a9d0asm196583e87.183.2024.11.07.04.32.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 04:32:45 -0800 (PST)
+	id 1t92Vo-0006Jz-6d; Thu, 07 Nov 2024 13:25:24 +0000
+Received: by outflank-mailman (input) for mailman id 831813;
+ Thu, 07 Nov 2024 13:25:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=aElt=SC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1t92Vm-0006Jr-7R
+ for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 13:25:22 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bb299c4e-9d0b-11ef-99a3-01e77a169b0f;
+ Thu, 07 Nov 2024 14:25:18 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-431695fa98bso7482955e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 05:25:18 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381ed970d4fsm1772255f8f.5.2024.11.07.05.25.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Nov 2024 05:25:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,348 +47,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 657862e8-9d04-11ef-a0c6-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMmIiLCJoZWxvIjoibWFpbC1sZjEteDEyYi5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjY1Nzg2MmU4LTlkMDQtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwOTgyNzY4LjAyOTE5Mywic2VuZGVyIjoib2xla3NpaS5rdXJvY2hrb0BnbWFpbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: bb299c4e-9d0b-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjozMmQiLCJoZWxvIjoibWFpbC13bTEteDMyZC5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImJiMjk5YzRlLTlkMGItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwOTg1OTE4LjQxOTM4NSwic2VuZGVyIjoiamJldWxpY2hAc3VzZS5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730982767; x=1731587567; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=KYSWrXMMRsd/cPCSRctkM5Gp0AVwIIS9n7AJfVx9F3s=;
-        b=IOrbweNGuh5C1EDSGyUUyaC652pB55mvT770iGkFY8mHSRO/fkkvI8YPN2hzawmEOf
-         XoPDgjsMqiG6MDuCOij/d6BvM/uho0+9uL0PVKP1o6H3Hn7z3dPJ4iB6YvRiSQQtakFa
-         Mtg7Jvo5wNdfAVyafFZ7ZBuT+Wa1FBnh37/YY0KI9HL1Fv0uXISG1xHE1Rr+TqYXikac
-         L4VLqye/NCiM4BO1se+T9tlvDM2EdfswBm/1HjgbJ7LSZyb4mNmLpp23rKlzdDg7353y
-         mjEOEkySfadgR5i2rqkEGcW7wOkfZVS0YjrhPyxzVGjxETG1JprlIzncxPhr+rc/1oHc
-         jwRQ==
+        d=suse.com; s=google; t=1730985918; x=1731590718; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=rmOpsxmaw+yexmtAZ6yYDZzEdgsmWXdBhsdga8bmoRU=;
+        b=SP93hAdTkYS9Z9MNujBo4g47OGa3MI0Lp8uWF1pLcvykXJBohhRoeXH6dAA+NXC5Yw
+         KyTUdPxEynKX9Sqgq8w/Urb3FLuGItl+0RV5BZoP2vEhUYfysWMPlRMN2b3DI2UVtbKJ
+         yUB+QMuQTSP+NYkzt8ShWBAh9XefGpsBV9GPgpFnCxWd+9fBdyJ9IrQcl2Y7O5GdBldS
+         TEDVmCvRnTbiY2wNF1j7Uo8WRUnYsjhzoZ8ktQJJQ923HG7CO4CV/Y+hxlrnj8jynWL3
+         s4IvU4vUGmujypTAXwh9MDBjp0lNipYvE2yrMZDZa8mscul9LRNo6b74jmQpoEWSg1Ux
+         W9OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730982767; x=1731587567;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=KYSWrXMMRsd/cPCSRctkM5Gp0AVwIIS9n7AJfVx9F3s=;
-        b=E6tH43v/Npn3J0Ap5QQCCgKQcUszE2RXRBq17nkx600rouJjVxD5n3dm9CU+tVjRF0
-         9IGBDJhYtsLuL4r2YoAevDpcwWuJNSGlgbs4UyzG5hZ21AfDWRxvkucP8/LNapXxEOo+
-         5ZMRYRPzwCoN0/Mhkp5YLrIxCtJIXXhxfwJKbo6O+XkOnJ87RKOUFK4nObCVgJ1r/gLR
-         s9C+rXLzR8Mf5baiuqDn33/zuFh99n87vOFK81Nm1+QtGxT1x9yI+7QK4F/hQoDUmrbw
-         SPrj/Vm7skYgf0RB1/dICoMEptkVefbajZr2L2T90MnLFEhvnyTuwmhvvaFsuZJyAm25
-         9xhQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVmHFA8gN3PhFo4KX/Js08vRmlQMPQ8VWcxurtvopl3Jg03fsVV78v3hm084vaRzNYw1eZAosOZX/Y=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxhvm78dzyncKF2DMnHjGrfxCxcgkWXdzpN67B2EbTpUp7DWeni
-	ihEyysXs9u5Shw+EO5xXnSZYiHbMe0TKkp/Qp/ZbUUBU3JdWqTpl
-X-Google-Smtp-Source: AGHT+IGCjq8xToywcD3TK3Ki2J54eeA0IPvlk1IgDQuaGV16P0FTN/gPL4FTDg9VRK1ys9WzCTjxmw==
-X-Received: by 2002:a05:6512:3d05:b0:536:55cf:3148 with SMTP id 2adb3069b0e04-53d65df8d2bmr11944597e87.31.1730982765863;
-        Thu, 07 Nov 2024 04:32:45 -0800 (PST)
-Message-ID: <779e315475c8fcbe6226767f96f67c88a0ad4eb7.camel@gmail.com>
-Subject: Re: [PATCH v3 1/3] xen/riscv: introduce setup_mm()
-From: oleksii.kurochko@gmail.com
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, Bob Eshleman	
- <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>, Andrew
- Cooper	 <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini	 <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Date: Thu, 07 Nov 2024 13:32:44 +0100
-In-Reply-To: <15f8c4d9-bd90-4b1e-9cea-53e62d601a58@suse.com>
-References: <cover.1730465154.git.oleksii.kurochko@gmail.com>
-	 <0f7cd809e848607408ff4615e55b847f5a524559.1730465154.git.oleksii.kurochko@gmail.com>
-	 <9e22b5ad-634f-48b7-b64c-fc44319a1d4d@suse.com>
-	 <8380261d24388e453e74514dad8216c97e3bebee.camel@gmail.com>
-	 <15f8c4d9-bd90-4b1e-9cea-53e62d601a58@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.1 (3.54.1-1.fc41app1) 
+        d=1e100.net; s=20230601; t=1730985918; x=1731590718;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rmOpsxmaw+yexmtAZ6yYDZzEdgsmWXdBhsdga8bmoRU=;
+        b=wnSnSBQcduwbKvqOFovPGQjlwcixUuZQ0vJBzImzlFX87mkGpRDqc9yjEfYK04RCwJ
+         UOJodCTR4NIRy/Q5zuE3trS3yiuzZv+G11sbNoV+Y3KAL7kS1sTjYhQjGGkkX+jlzJVv
+         PQalToBjjz0YuP7/OhVFreFzN+nBapAJdfx9VzeqdusukzOD8W1V7r0Yjtf3V19vWbiQ
+         k3xM4vzoPouVfgsbn2iNzBaBp7/sEIZl/dQanYFJnbCPHHOP45+5wSBrxxCsvE8nZLyl
+         d896AjzZvuQAXtrH+fH0/JUt1ERtzj30dkRMCMX6hHBHn/Jzss4A3HdEO6jOIqEPz3EB
+         /vSg==
+X-Gm-Message-State: AOJu0YxHVqZ3uKAoabu6c9CI5lUisRpPmPUXj5Glbes/RC5QGqI5g5pz
+	64/WlZNL+ygximKgIcnL2vINMrZVN65gYN4aPImjVMlkiwCbMkDqM/KWS+8efA==
+X-Google-Smtp-Source: AGHT+IEDLGlq7p+T8eIon8wikcW7xfGiAXP+9n1PzYIhxyDvC2yQnvy4sp+RowzPadDYkbGNq0xerw==
+X-Received: by 2002:a05:600c:1d1d:b0:42f:4f6:f8f3 with SMTP id 5b1f17b1804b1-4319ac6fbf7mr387567455e9.7.1730985917796;
+        Thu, 07 Nov 2024 05:25:17 -0800 (PST)
+Message-ID: <c5c95c48-94ad-47bd-9fe8-74cc048d3312@suse.com>
+Date: Thu, 7 Nov 2024 14:25:16 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/Kconfig: livepatch-build-tools requires debug
+ information
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <20241107084927.37748-1-roger.pau@citrix.com>
+ <66fd7b53-25f5-459b-8563-e33fccba90ef@citrix.com> <ZyyLAj6MZ3fvOFBC@macbook>
+ <22c59035-67e3-4e43-bfe0-26675a93e9ae@suse.com>
+ <e81ae2da-383f-4cc7-8213-66f8ccc9b6e7@citrix.com>
+ <b1ef3ffa-2021-45df-af46-098eb4cb3a46@suse.com>
+ <ce901e5e-2872-48c0-b3a0-52478d642706@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <ce901e5e-2872-48c0-b3a0-52478d642706@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2024-11-07 at 10:19 +0100, Jan Beulich wrote:
-> On 06.11.2024 13:44, oleksii.kurochko@gmail.com=C2=A0wrote:
-> > On Tue, 2024-11-05 at 16:20 +0100, Jan Beulich wrote:
-> > > On 01.11.2024 14:16, Oleksii Kurochko wrote:> @@ -423,3 +429,138
-> > > @@
-> > > void * __init early_fdt_map(paddr_t fdt_paddr)
-> > > > =C2=A0
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0 return fdt_virt;
-> > > > =C2=A0}
-> > > > +
-> > > > +vaddr_t __ro_after_init directmap_virt_start =3D
-> > > > DIRECTMAP_VIRT_START;
-> > > > +
-> > > > +#ifndef CONFIG_RISCV_32
-> > > > +
-> > > > +/* Map a frame table to cover physical addresses ps through pe
-> > > > */
-> > > > +static void __init setup_frametable_mappings(paddr_t ps,
-> > > > paddr_t
-> > > > pe)
-> > > > +{
-> > > > +=C2=A0=C2=A0=C2=A0 paddr_t aligned_ps =3D ROUNDUP(ps, PAGE_SIZE);
-> > > > +=C2=A0=C2=A0=C2=A0 paddr_t aligned_pe =3D ROUNDDOWN(pe, PAGE_SIZE)=
-;
-> > > > +=C2=A0=C2=A0=C2=A0 unsigned long nr_mfns =3D PFN_DOWN(aligned_pe -=
- aligned_ps);
-> > > > +=C2=A0=C2=A0=C2=A0 unsigned long frametable_size =3D nr_mfns *
-> > > > sizeof(*frame_table);
-> > > > +=C2=A0=C2=A0=C2=A0 mfn_t base_mfn;
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0 if ( frametable_size > FRAMETABLE_SIZE )
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 panic("The frametable c=
-annot cover [%#"PRIpaddr",
-> > > > %#"PRIpaddr")\n",
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 ps, pe);
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0 /*
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * align base_mfn and frametable_size to M=
-B(2) to have
-> > > > superpage mapping
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * in map_pages_to_xen()
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 */
-> > > > +=C2=A0=C2=A0=C2=A0 frametable_size =3D ROUNDUP(frametable_size, MB=
-(2));
-> > > > +=C2=A0=C2=A0=C2=A0 base_mfn =3D alloc_boot_pages(frametable_size >=
-> PAGE_SHIFT,
-> > > > PFN_DOWN(MB(2)));
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0 if ( map_pages_to_xen(FRAMETABLE_VIRT_START, ba=
-se_mfn,
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 PFN_DOWN(frametable_size),
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 PAGE_HYPERVISOR_RW) )
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 panic("frametable mappi=
-ngs failed: %#lx -> %#lx\n",
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 FRAMETABLE_VIRT_START, mfn_x(base_mfn));
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0 memset(&frame_table[0], -1, frametable_size);
-> > > > +=C2=A0=C2=A0=C2=A0 memset(&frame_table[PFN_DOWN(aligned_ps)],
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0, nr=
-_mfns * sizeof(*frame_table));
-> > >=20
-> > > Interesting - now you write out a huge amount of -1s, just to
-> > > then
-> > > overwrite
-> > > most of them with zeroes. I'm not going to insist that you change
-> > > this yet
-> > > another time, but the performance hit from this is going to bite
-> > > you/us as
-> > > soon as Xen is run on bigger-memory systems.
-> > I agree that validating or invalidating frames in a single pass
-> > would
-> > be preferable to nearly two passes. I=E2=80=99m considering whether the=
-re=E2=80=99s
-> > a
-> > way to ensure that frame_table is set to -1 at compile time.
->=20
-> How would that work, if the entire frame table is allocated
-> dynamically?
-Yeah, there is no way to work in dynamically allocated way. Then let's
-stick to ...
->=20
-> > It seems
-> > the best approach (and only one?) might be to initialize
-> > frame_table in
-> > one pass as follows:
-> > 1) [0, aligned_ps) =3D -1
-> > 2) [aligned_ps, nr_mfns * sizeof(*frame_table)) =3D 0
-> > 3) [nr_mfns * sizeof(*frame_table), frame_table_size) =3D -1
-> > Does this approach seem optimal?
->=20
-...
-> That's what I would have expected, yes.
+On 07.11.2024 13:17, Andrew Cooper wrote:
+> On 07/11/2024 11:57 am, Jan Beulich wrote:
+>> On 07.11.2024 12:30, Andrew Cooper wrote:
+>>> On 07/11/2024 9:48 am, Jan Beulich wrote:
+>>>> On 07.11.2024 10:40, Roger Pau Monné wrote:
+>>>>> On Thu, Nov 07, 2024 at 09:21:26AM +0000, Andrew Cooper wrote:
+>>>>>> On 07/11/2024 8:49 am, Roger Pau Monne wrote:
+>>>>>>> The tools infrastructure used to build livepatches for Xen
+>>>>>>> (livepatch-build-tools) consumes some DWARF debug information present in
+>>>>>>> xen-syms to generate a livepatch (see livepatch-build script usage of readelf
+>>>>>>> -wi).
+>>>>>>>
+>>>>>>> The current Kconfig defaults however will enable LIVEPATCH without DEBUG_INFO
+>>>>>>> on release builds, thus providing a default Kconfig selection that's not
+>>>>>>> suitable for livepatch-build-tools even when LIVEPATCH support is enabled,
+>>>>>>> because it's missing the DWARF debug section.
+>>>>>>>
+>>>>>>> Fix by forcing the selection of DEBUG_INFO from LIVEPATCH.
+>>>>>>>
+>>>>>>> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+>>>>>> Oops, yes.
+>>>>>>
+>>>>>> Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>>>>>>
+>>>>>> Fixes tag ?
+>>>>> Was borderline on adding one, but wasn't sure since it's strictly
+>>>>> livepatch-build-tools that requires the DWARF data, but custom made
+>>>>> livepatches (like the examples in tests) do not require such
+>>>>> information.
+>>> Ok.  I guess it doesn't matter too much.
+>>>
+>>>> At which point: Is "select" really appropriate then? Wouldn't it be more
+>>>> logical then to change DEBUG_INFO's default to take LIVEPATCH into account
+>>>> (still permitting people to turn debug info off if they know they won't
+>>>> need it)?
+>>> I am very disinterested in letting people who think they can do
+>>> livepatching without debug symbols shoot themselves in the foot like that.
+>>>
+>>> It's only debugging symbols.   If people *really* think they know
+>>> better, they can strip them themselves.
+>> Besides my abstract concern, let me also add a concrete practical one. I'm
+>> sure you've noticed that xen.efi is _much_ slower to link with debug info
+>> than without, or than xen-syms. That's a consequence of how GNU ld (really:
+>> libbfd) works internally. By not allowing DEBUG_INFO to stay off you're
+>> forcing me to either wait longer for every single one of my post-commit
+>> pre-push build tests, or to turn off LIVEPATCH there. The latter not really
+>> being a good idea.
+>>
+>> Nevertheless, as said in reply to Roger: Go ahead if you absolutely think
+>> that's the only sensible way.
+> 
+> I had noticed that link was taking a long time.  I hadn't realised it
+> was this specifically.
+> 
+> But to put this another way, you're arguing to intentionally avoid
+> fixing a sharp corner, because there's a perf issue in Binutils.
 
->=20
-> > > Plus, unless I'm mistaken, the function continues to rely on ps
-> > > =3D=3D 0
-> > > as
-> > > input. Just that the dependency is now better hidden.
-> > > Specifically if
-> > > you
-> > > calculate nr_mfns from the difference, and then use that for
-> > > allocation,
-> > > then you need to offset the start of the mapping you create
-> > > accordingly.
-> > I'm not quite understanding why the method of calculating nr_mfns
-> > affects how the frame_table is mapped. Isn=E2=80=99t it only necessary =
-to
-> > calculate the correct size of the frame_table that needs to be
-> > allocated?
->=20
-> Assume there's 4G of memory actually starting at 16G. Afaict you'll
-> allocate a frame table for those 4G, but you'll map it right at
-> FRAMETABLE_VIRT_START. Hence it'll cover the first 4G of physical
-> addresses, but _none_ of the actual memory you've got.
-I need to clarify some basics about the frame table.
+I understand there is a sharp corner, yet recall I had suggested an
+alternative. People changing defaults are responsible for what they're
+doing, after all.
 
-Does Xen expect that frame_table[0] =3D 0 (PA), frame_table[1] =3D 4k (PA),
-..., frame_table[x] =3D RAM_START_PA, frame_table[x+1] =3D RAM_START_PA +
-4k, and so on?
+> I will note that it was you who forced the generation of xen.efi on
+> everyone, even those who didn't want it, without any knob to turn it off.
 
-My understanding is that it could be done as follows: frame_table[0] =3D
-RAM_START_PA, frame_table[1] =3D RAM_START_PA + 4k, and so on, taking
-into account mfn_to_page() and page_to_mfn() logic. (And yes, in that
-case, the current implementations of mfn_to_page() and page_to_mfn()
-aren't correct and should be updated as suggested here:
-https://lore.kernel.org/xen-devel/cover.1730465154.git.oleksii.kurochko@gma=
-il.com/T/#me2fc410f3d4758b71a9974d0be18a36f50d683b1as
-as these implementations are based on that ps =3D=3D 0). With this setup,
-mapping FRAMETABLE_VIRT_START to base_mfn should be correct, shouldn=E2=80=
-=99t
-it?
+True, but if there's desire to turn it off, a knob can always be added.
+EFI support pre-dates the introduction of Kconfig by several years, iirc.
 
-With the current implementations of mfn_to_page() and page_to_mfn(), we
-either need to allocate a larger frame_table to cover the [0, ram_end)
-range (in which case mapping FRAMETABLE_VIRT_START to base_mfn would
-work), or change the mapping to frame_table=3D( FRAMETABLE_VIRT_START +
-PFN_DOWN(ram_start) ) -> base_mfn. Or to not loose virtual addrees
-space of FRAMETABLE ( so the mapping will still be
-FRAMETABLE_VIRT_START -> base_mfn ) to do the similar to directmap
-mapping ( or what the changes suggested in the link above). Is my
-understanding correct?
-
->=20
-> > > =C2=A0At
-> > > which point you may need to apply extra care to cover the case
-> > > where
-> > > sizeof(*frame_table) is not a power of two, and hence e.g. the
-> > > first
-> > > valid
-> > > page might have a struct instance straddling a page boundary.
-> > The first valid page is aligned_ps ( which is aligned on a page
-> > boundary ) so assuming that sizeof(*frame_table) < PAGE_SIZE we
-> > can't
-> > straddle a page boundary, can we?
->=20
-> But sizeof(*frame_table) < PAGE_SIZE means nothing as to the
-> alignment
-> of an individual struct instance in memory. Iirc sizeof(*frame_table)
-> is 48 for RISC-V, so the common alignment across struct instances
-> isn't
-> going to be better than 8, and there _will_ be instances straddling
-> page boundaries.
-If we speak about the alignment of an individual struct instance in
-memory, what is the issue with that, except that it could be less
-efficient when accessing this memory? This inefficiency could
-potentially be addressed by adding some padding to the struct page_info
-but then we will have bigger frame table size.
-Another issue I can see is that the size of the frame table could be
-calculated incorrectly. It may require an additional page to cover the
-case when the frame table size isn't aligned to PAGE_SIZE, but this is
-accounted for by rounding up the frame table size to 2MB
-(frametable_size =3D ROUNDUP(frametable_size, MB(2));) before allocating
-the frame table (base_mfn =3D alloc_boot_pages(frametable_size >>
-PAGE_SHIFT, PFN_DOWN(MB(2)));).
-
-Something else should be considered?
-
->=20
-> > > > +=C2=A0=C2=A0=C2=A0 /*
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * The base address may not be aligned to =
-the second level
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * size in case of Sv39 (e.g. 1GB when usi=
-ng 4KB pages).
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * This would prevent superpage mappings f=
-or all the
-> > > > regions
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * because the virtual address and machine=
- address should
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * both be suitably aligned.
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 *
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * Prevent that by offsetting the start of=
- the directmap
-> > > > virtual
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * address.
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0 */
-> > > > +=C2=A0=C2=A0=C2=A0 if ( map_pages_to_xen(DIRECTMAP_VIRT_START + (b=
-ase_addr &
-> > > > ~high_bits_mask),
-> > >=20
-> > > I'm afraid this is correct only for the first invocation of the
-> > > function.
-> > > For any further invocation you'd likely (attempt to) replace
-> > > previously
-> > > established mappings. I think that here you need to use
-> > > directmap_virt_start
-> > > instead.
-> > Banks are sorted by bank start address ( common/device-
-> > tree/bootfdt.c:623 ):
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * On Arm64 setup_directmap_m=
-appings() expects to be called
-> > with
-> > =C2=A0=C2=A0 the lowest
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * bank in memory first. Ther=
-e is no requirement that the DT
-> > will
-> > =C2=A0=C2=A0 provide
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * the banks sorted in ascend=
-ing order. So sort them
-> > through.
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sort(mem->bank, mem->nr_banks, siz=
-eof(struct membank),
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cmp_=
-memory_node, swap_memory_node);
-> > ( btw, comment is needed to be updated ... )
-> >=20
-> > Thereby no replacement should happen if I don't miss something.
->=20
-> I don't see how banks being sorted matters here. On the 2nd
-> invocation
-> you'll start mapping pages again from DIRECTMAP_VIRT_START plus an at
-> most 1G (for SV39) offset. If both banks have 2G, the resulting
-> mappings
-> will necessarily overlap, if I'm not mistaken.
-Yes, you are write, overlapping is really possible.
-
-Then __mfn_to_virt(base_mfn) to calculate VA of a bank start should be
-used:
-   @@ -473,24 +483,24 @@ static void __init
-   setup_directmap_mappings(unsigned long base_mfn,
-        {
-            directmap_mfn_start =3D _mfn(base_mfn);
-   =20
-   -        directmap_virt_start -=3D (base_addr & high_bits_mask);
-   +       /*
-   +        * The base address may not be aligned to the second level
-   +        * size in case of Sv39 (e.g. 1GB when using 4KB pages).
-   +        * This would prevent superpage mappings for all the regions
-   +        * because the virtual address and machine address should
-   +        * both be suitably aligned.
-   +        *
-   +        * Prevent that by offsetting the start of the directmap
-   virtual
-   +        * address.
-   +        */
-   +        directmap_virt_start -=3D (base_addr & high_bits_mask) +
-   (base_addr & ~high_bits_mask);
-        }
-   =20
-        if ( base_mfn < mfn_x(directmap_mfn_start) )
-            panic("cannot add directmap mapping at %#lx below heap
-   start %#lx\n",
-                  base_mfn, mfn_x(directmap_mfn_start));
-   =20
-   -    /*
-   -     * The base address may not be aligned to the second level
-   -     * size in case of Sv39 (e.g. 1GB when using 4KB pages).
-   -     * This would prevent superpage mappings for all the regions
-   -     * because the virtual address and machine address should
-   -     * both be suitably aligned.
-   -     *
-   -     * Prevent that by offsetting the start of the directmap
-   virtual
-   -     * address.
-   -     */
-   -    if ( map_pages_to_xen(DIRECTMAP_VIRT_START + (base_addr &
-   ~high_bits_mask),
-   +    if ( map_pages_to_xen((vaddr_t)mfn_to_virt(base_mfn),
-                              _mfn(base_mfn), nr_mfns,
-                              PAGE_HYPERVISOR_RW) )
-
-Thanks!
-
-~ Oleksii
+Jan
 
