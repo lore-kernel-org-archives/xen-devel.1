@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7730AD5AE75
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 09:25:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.831554.1246871 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18D77D5AE75
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 09:36:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.831563.1246891 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8ylJ-0005Ef-Ls; Thu, 07 Nov 2024 09:25:09 +0000
+	id 1t8ywF-0007Jn-Rm; Thu, 07 Nov 2024 09:36:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 831554.1246871; Thu, 07 Nov 2024 09:25:09 +0000
+Received: by outflank-mailman (output) from mailman id 831563.1246891; Thu, 07 Nov 2024 09:36:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8ylJ-0005EY-IW; Thu, 07 Nov 2024 09:25:09 +0000
-Received: by outflank-mailman (input) for mailman id 831554;
- Thu, 07 Nov 2024 09:25:08 +0000
+	id 1t8ywF-0007Je-Ng; Thu, 07 Nov 2024 09:36:27 +0000
+Received: by outflank-mailman (input) for mailman id 831563;
+ Thu, 07 Nov 2024 09:36:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aElt=SC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1t8ylI-0005ES-2v
- for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 09:25:08 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
+ id 1t8ywD-00074T-Ro
+ for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 09:36:25 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2c0a772e-9cea-11ef-99a3-01e77a169b0f;
- Thu, 07 Nov 2024 10:25:04 +0100 (CET)
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-539f6e1f756so712876e87.0
- for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 01:25:04 -0800 (PST)
+ id c007e870-9ceb-11ef-99a3-01e77a169b0f;
+ Thu, 07 Nov 2024 10:36:22 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43169902057so6162475e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 01:36:22 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432aa5b5db0sm52938515e9.5.2024.11.07.01.25.03
+ 5b1f17b1804b1-432aa5b5e56sm55465715e9.2.2024.11.07.01.36.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Nov 2024 01:25:03 -0800 (PST)
+ Thu, 07 Nov 2024 01:36:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c0a772e-9cea-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMzAiLCJoZWxvIjoibWFpbC1sZjEteDEzMC5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjJjMGE3NzJlLTljZWEtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwOTcxNTA0LjgyODg4NCwic2VuZGVyIjoiamJldWxpY2hAc3VzZS5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: c007e870-9ceb-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjozMzUiLCJoZWxvIjoibWFpbC13bTEteDMzNS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImMwMDdlODcwLTljZWItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwOTcyMTgyLjY3MDQ2LCJzZW5kZXIiOiJqYmV1bGljaEBzdXNlLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1730971504; x=1731576304; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1730972182; x=1731576982; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=55xtnYlRJmcZKTVbj5Xk7NZjM10t2C3yrI4zdzF2On8=;
-        b=WDQBRvEi5aX2q1Y4TWFP2qhaJPWIBDTShJUHAHC0WnQnnUAvPsnpNzB2AJ9Ht0KKzN
-         6+YQB2ujfKCY+f284/pnA+qYDnsEDpofNXsGUL4u95s0E71h6GZazkeguUhFcKPcUqx6
-         4box9TTpb9zT8aVYH9jdHBIMa8bYSpdBJKjmn5fqUdMiqLLrwSZ1RSLUbGCYTiusRqj2
-         KFjLjNEnkNHLPclbr0ZG1KeCVj8DtETWKFYX1h4uhXdx+3nhH5aS6AbR3mf/OxU9gvCv
-         7HIRN8QynIrVHUXg7kB0JnXUA7znu2Dx9Fw4KBhQXq6Dx8NhnlPpg8pwk7CkhiNR/DJ6
-         oU6g==
+        bh=DKQRtuORBujOIxBp4MUElYOGxn68m7mfgGkP1ICiRgA=;
+        b=Zuz24OUs2m0ptwhAJX+Opbog5mmTmsjWFrULM3zj95/2Oj4S86EXBbrWDG4mJwYWpm
+         39qgzqZn/XUnEBeqsEqi+9KijE3sjptR3vjR+e4xtkmOqeC+kcDquMRhttnJdC9NKNbv
+         hEdDrJVADI+ndQYLg587UCI/1RXH1/5CIhGtpVJdHCRuLPEc5lTBVF5+lQ8gXNB5ZaAD
+         pbuK+99RBly6D35AI5dPbE53KWyKwklzS5GHNpTLa9ZqNOX/kW0y8at9+Bp6Yxl2c5P1
+         W2Kv9XbBrAszIkFjjdwC7wF8NeCh6CYGzSMbGaBSF9rp2D3bdfPCu552R/CEMiaZ2rXW
+         vweQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730971504; x=1731576304;
+        d=1e100.net; s=20230601; t=1730972182; x=1731576982;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=55xtnYlRJmcZKTVbj5Xk7NZjM10t2C3yrI4zdzF2On8=;
-        b=m31dd/jFEnIzrG/BkVgxdd5/SzhgOltnHsfXwnusomAmpatieje9ItKjzQ5Oye3gKW
-         oAF3JR8bQjBSSJYYyuPPgi22xUklsvaJ/ZkX3Mg6xXLALieKELDBdsOqvyb5FDHiLzbo
-         lmWN1AnsB41PfguKe5dj2v+PpT982cK6981giFGDLxsXw5ePFp2wffQvN++p9YgdmDsQ
-         bQdSfqMzLlCZjoz2G7iaLxg6Kxzp86tbalh5Y4PoAUvlnjfzr9xTlDtewsR4ZZLcCsar
-         wXoDci5JlAcatOdGWM+ghBhDA0oAUy+/9O5vL0jsoAKK1kyEZ9TUf/W1pX1nJwTSfsPQ
-         JuuA==
-X-Gm-Message-State: AOJu0YzEodutO44ubonjOG5Qr6IaH2lDz8kc1/c2bu+icvaUyAqSf5ay
-	uMjFukbYX0wRpH3lUB7Q9p0k54l6rUZVa1QiBlGakLBZmfjpOIm8TTWCaGcmOg==
-X-Google-Smtp-Source: AGHT+IFtl7PEmQYB1DE3RhvcSsEkaqf3zbSuLCz07gMBXRuwp4DvU8u7neRCTn/WeFEs5kzypFhckg==
-X-Received: by 2002:a05:6512:1385:b0:539:e60a:6dd0 with SMTP id 2adb3069b0e04-53b34b373admr21873364e87.51.1730971504171;
-        Thu, 07 Nov 2024 01:25:04 -0800 (PST)
-Message-ID: <f731b7a3-9581-4acc-85d2-2b3decd35fae@suse.com>
-Date: Thu, 7 Nov 2024 10:25:02 +0100
+        bh=DKQRtuORBujOIxBp4MUElYOGxn68m7mfgGkP1ICiRgA=;
+        b=ZyYCOVdcuDB/W4HX/2eyI0BFxpHVqLr8H0uPfMJMJhYGCwjic/4alRcgs5a2qR5orL
+         n0q2+VOnSgka3sqXUdm5BWaymZhWq1Mbk7MLQA3x0XBD64BvSm7bej5lTG9yjwtmzqGl
+         za6ZhhfM5XE0pJbQzNZc2Ikeg/OSDZaqucPPqe5qGbq/9R1Fs3AG1hftXeWt4LmQybRP
+         M9demIbDQfVkCL1S9r77irWubBDiMqYtW93BUh6Gz5SHaAV+AH9huPChlsgE5w8GYP2I
+         m+nwWquPjMSCdtgVYdMYh9qQ1b7zuL2o3EyKm8F5Ga2Ipg+chmbn7yMRcuYqN8hsrT6A
+         jiGQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV+hEQnQqTa8q9AxMYi2cmUL1r/q5keGC0M9DoHr4zvozeQ554Tk4qpNavY4ySw0HE5uhpAHy6F5aw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwdxHM5IHQyJwxNrYldSINJCAmkmK8FjHKlSe9YonBPRv5C2OBB
+	awq+8CWeWn9Tn9/bnJ9hzH0bDtTKLDIGVJQ56MWYkScVdkWNq5V16mQX24LgVg==
+X-Google-Smtp-Source: AGHT+IHw5g8FnF1aaTZyz8nWa8rX2wktOL82P2IFxLdaC5CWOhZl91J1C1T3zifkhlimH27eH57Obw==
+X-Received: by 2002:a05:600c:190e:b0:42c:a905:9384 with SMTP id 5b1f17b1804b1-432b308d52cmr5211375e9.20.1730972182034;
+        Thu, 07 Nov 2024 01:36:22 -0800 (PST)
+Message-ID: <b633d472-6668-491b-82cb-2814c8aa5dbe@suse.com>
+Date: Thu, 7 Nov 2024 10:36:21 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH] xen/vpci: Fix UB in mask_write
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <559dfac91b8f097bc59c4de194fd2ae2b5b4144c.1730880005.git.mykyta_poturai@epam.com>
- <ZyswF4grJSNcVqY_@macbook> <Zysx4ZwCUv62uTBw@macbook>
- <6d3f322f-7047-4033-95b5-86751a58cc70@suse.com>
- <65d2043f-5e6f-4d84-8241-eb28dd94fc45@epam.com>
+Subject: Re: [PATCH v2 3/3] x86/boot: Fix build with LLVM toolchain
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Frediano Ziglio <frediano.ziglio@cloud.com>, xen-devel@lists.xenproject.org
+References: <20241106114150.1432512-1-frediano.ziglio@cloud.com>
+ <20241106114150.1432512-4-frediano.ziglio@cloud.com>
+ <8f87849c-916f-4532-a150-3205795c9e43@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -117,35 +117,45 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <65d2043f-5e6f-4d84-8241-eb28dd94fc45@epam.com>
+In-Reply-To: <8f87849c-916f-4532-a150-3205795c9e43@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 06.11.2024 13:26, Mykyta Poturai wrote:
-> On 06.11.2024 10:07, Roger Pau Monné wrote:>
->> Wait - how can msi->vectors ever be 0?  AFAICT there's no way in the
->> MSI logic to configure 0 vectors, there will always be at least 1 vector
->> enabled.
+On 06.11.2024 13:23, Andrew Cooper wrote:
+> On 06/11/2024 11:41 am, Frediano Ziglio wrote:
+>> This toolchain generates different object files.
+>> Object have 3 additional sections which must be handled by the
+>> linker script.
+>> Added sections need to have special type so we put them in
+>> separate sections as linker will copy type from input sections.
 >>
->> Maybe what you want, if this fix is for compliance reasons, is an
->> assert unreachable that msi->vectors > 0?
+>> Fixes: aa9045e77130 ('x86/boot: Rework how 32bit C is linked/included for early boot')
+>>
+>> Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 > 
-> I did some investigation and figured out that the value of 0 is being
-> set by guest writing to msi_control_reg. As far as I understand, the
-> control_write() function only checks that vectors are not greater than
-> the maximum allowed value, but does not check for 0.
+> The patch itself is fine, but the commit message is quite stale now
+> you've split the fix into 3 bits.  I'd recommend:
+> 
+> ---%<---
+> x86/boot: Explicitly list .{sym,shstr,str}tab in build32.lds.S
+> 
+> Currently, building with LLVM's LLD fails:
+> 
+>     ld -melf_i386_fbsd  --orphan-handling=error -N -T ...
+>     ld: error: <internal>:(.symtab) is being placed in '.symtab'
+>     ld: error: <internal>:(.shstrtab) is being placed in '.shstrtab'
+>     ld: error: <internal>:(.strtab) is being placed in '.strtab'
+>     gmake[11]: *** [arch/x86/boot/Makefile:69:
+> arch/x86/boot/built-in-32.base.bin] Error 1
+> 
+> This is a consequence of --orphan-handling, and it appears that Binutils
+> doesn't diagnose some orphaned sections even explicitly asked to do so.
 
-How that? How could it even check for 0, when 0 isn't possible? Quoting
-the code there:
-
-    unsigned int vectors = min_t(uint8_t,
-                                 1u << MASK_EXTR(val, PCI_MSI_FLAGS_QSIZE),
-                                 pdev->msi_maxvec);
-
-"val" in the guest written value. As that's used as a shift count, how
-could 0 result there? The only way I can see 0 ending up in vectors is
-when pdev->msi_maxvec was still zero. Yet that's then a bug in device
-initialization.
+With my binutils hat on, I'd like to express that I don't view this as a
+fair statement. GNU ld simply doesn't extend the concept of orphaned
+sections to purely control ones, which need processing / transforming in
+one way or another anyway. Instead I'm puzzled by lld's behavior
+requiring such sections to be named explicitly.
 
 Jan
 
