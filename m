@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38696D5AE79
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 09:36:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.831562.1246880 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CD7FD5AE7C
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 09:40:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.831579.1246900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8ywB-00074g-KH; Thu, 07 Nov 2024 09:36:23 +0000
+	id 1t8z04-0000yZ-9Y; Thu, 07 Nov 2024 09:40:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 831562.1246880; Thu, 07 Nov 2024 09:36:23 +0000
+Received: by outflank-mailman (output) from mailman id 831579.1246900; Thu, 07 Nov 2024 09:40:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t8ywB-00074Z-HN; Thu, 07 Nov 2024 09:36:23 +0000
-Received: by outflank-mailman (input) for mailman id 831562;
- Thu, 07 Nov 2024 09:36:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t8z04-0000yS-72; Thu, 07 Nov 2024 09:40:24 +0000
+Received: by outflank-mailman (input) for mailman id 831579;
+ Thu, 07 Nov 2024 09:40:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GEtt=SC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1t8ywA-00074T-CO
- for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 09:36:22 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bcc7723c-9ceb-11ef-99a3-01e77a169b0f;
- Thu, 07 Nov 2024 10:36:17 +0100 (CET)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5cedf5fe237so876906a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 01:36:17 -0800 (PST)
+ id 1t8z02-0000yM-VJ
+ for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 09:40:22 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4db1141e-9cec-11ef-a0c6-8be0dac302b0;
+ Thu, 07 Nov 2024 10:40:20 +0100 (CET)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a99f3a5a44cso91203966b.3
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 01:40:20 -0800 (PST)
 Received: from localhost ([213.195.124.162]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cf03b7f0eesm589363a12.31.2024.11.07.01.36.16
+ a640c23a62f3a-a9ee0a17651sm68457366b.38.2024.11.07.01.40.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 01:36:16 -0800 (PST)
+ Thu, 07 Nov 2024 01:40:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,86 +46,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bcc7723c-9ceb-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MmEiLCJoZWxvIjoibWFpbC1lZDEteDUyYS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImJjYzc3MjNjLTljZWItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwOTcyMTc3LjE4Njk4OSwic2VuZGVyIjoicm9nZXIucGF1QGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 4db1141e-9cec-11ef-a0c6-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmUiLCJoZWxvIjoibWFpbC1lajEteDYyZS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjRkYjExNDFlLTljZWMtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMwOTcyNDIwLjMwMDg1Mywic2VuZGVyIjoicm9nZXIucGF1QGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1730972176; x=1731576976; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1730972420; x=1731577220; darn=lists.xenproject.org;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:message-id:subject:cc:to:from:date:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=IL2yLEbWrQ6V2Lj7RiGk6bI3gNn4wSAKk94B1WfCVAg=;
-        b=fk+Bw2o2GzlsSHtDey0gDCyKgV7lLt4XuvvOsA0y2mwFO5d9OGOp7Gu6fDPUa09DSX
-         s27+gDaFGT37TG8WhqYt3fHF4CcnZDY+PNOqoKCvI7Ly/tTRsV82BACSHYNzQmk1LPlp
-         WH6DEST4v/ND8ULmUp0OEZgR3eXAd8G9+gAfo=
+        bh=3qMWNJHmcQtwiQmVgOTvSVZFEo9XJVvsxTt8A5Dc2kc=;
+        b=o25+pjj7X8DqHzZ+RyiUCF/5YmkikQBjv4EZJyJt7GaMZYBeUXtTlkmTMt9GyDz/w0
+         e53EvJ0FRJMygPxlUKtoJN7sLuqUvM6Kp0GvGHUbWKn3jzxDy+1ArPw8/zEwyodchoTg
+         PBjD/tvDoaOBLuKfDvqwwAoVP4FJAFsKayyXA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730972176; x=1731576976;
+        d=1e100.net; s=20230601; t=1730972420; x=1731577220;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=IL2yLEbWrQ6V2Lj7RiGk6bI3gNn4wSAKk94B1WfCVAg=;
-        b=oN0GvHM14heTmCNv7yTpDIYhVl0ap5DXyyu8UwKkmt+Ek9W4dbfnnRVGPDK0tzFjeO
-         ChJO3DEXuZ+yiNwwDFJcTjugnxYoH0lkTrH0vYTjPTBNGEtELpsOIuVqlHb5jkcnPahY
-         af2L05ULkAHgkDbYg1XAIrvuqM5K5shS9/XzLKckDN311GL5vBAXD/O6ruh67IUbJI0h
-         naPL0ZKr+jbmi5TFmHxATJj36ucPB74lo1WFjqWjfIvyElhUzCoSHJKRA++ZIYzbXkyp
-         QXgHdq+dN4hzgQCY+cyNkvpV7Lmk/j4hs2qZowBMF2acwvhNwxGFFnJiIItbIQNBzjQG
-         R5zw==
-X-Forwarded-Encrypted: i=1; AJvYcCVHUwhImDO/ty8iX3Gq5vkye5ZFonhRgrfMTN2KwEaT3hQMKxfGmxSIxtQI69padPxJv0yQADYRx6Y=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy4UoHVsLXshIgRI4yMqOv93obrNzlEbJJ2wdm/fFmnvKqVjqqs
-	+Ih4s8FuOv0I6ertUUNh+kei2IbgGwp6YxgSb9brB6iP3ci29ncYL8wOPi/67+/F3tCfRo/l5oM
-	N
-X-Google-Smtp-Source: AGHT+IGmwnQC6C2ckIm4fAaiXGdaI2B5+Rf/dya63Xa5NPQYfWomX2Co0YCbHp69nrKlFqI82DlfOA==
-X-Received: by 2002:a05:6402:518b:b0:5ce:fa47:2597 with SMTP id 4fb4d7f45d1cf-5cefa472620mr2865985a12.9.1730972176540;
-        Thu, 07 Nov 2024 01:36:16 -0800 (PST)
-Date: Thu, 7 Nov 2024 10:36:15 +0100
+        bh=3qMWNJHmcQtwiQmVgOTvSVZFEo9XJVvsxTt8A5Dc2kc=;
+        b=RbcdVsiRNdMGrS1jjvcu9ChmxQwiMGuTM1lglHVPvPrVtC7ZKvSPkRIba74rN9tJ3c
+         JvEgiU7PFg+4gd/U4vRp2FoFe8fKgbHuO0fqTpafoM9KE6kkZ1c1eM1cVFHNQoAV2cja
+         xxTulgnMb9bH5O8tACsB35Gj+7FuQpvEvU6qIID44Weqoxu5+0bT9c74iJ6WP0xifFSE
+         AI5Jz3hbrIniUdoo9l4+/E0heXIeLuzhjPbdHKQohNk1xSOFMRqbWNFt7CcnhjJFtdfO
+         TB9D77aogK1Nbg7+jBI/qskPfnDYj07ztGggJPI4rFqxgFoEjjOS7zSEnR0DNlrEJjia
+         T+jA==
+X-Gm-Message-State: AOJu0YzCne+nsM4rb0Mi5qd8i+alENFc/eWI0cSFGHfs0Fv6MDp/jt0t
+	UfJWOsPLhfWMSlaMmCBratNtBPGsSRxaVd4tQMXdGc+3TNMKzK70NB6/g/cv1cGMK90w6yO1Ymt
+	K
+X-Google-Smtp-Source: AGHT+IG2MI2CD4nzB8EXfyw7RJ/l7husDsFjajiS/iK+HiAy+yKiiaJR2i19dB8MmbNXko0Gr4FaZQ==
+X-Received: by 2002:a17:907:7fa6:b0:a9e:c2b5:198d with SMTP id a640c23a62f3a-a9ec2b51c03mr673296566b.42.1730972419652;
+        Thu, 07 Nov 2024 01:40:19 -0800 (PST)
+Date: Thu, 7 Nov 2024 10:40:18 +0100
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Mykyta Poturai <Mykyta_Poturai@epam.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [XEN PATCH] xen/vpci: Fix UB in mask_write
-Message-ID: <ZyyKD2knurwS4cMi@macbook>
-References: <559dfac91b8f097bc59c4de194fd2ae2b5b4144c.1730880005.git.mykyta_poturai@epam.com>
- <ZyswF4grJSNcVqY_@macbook>
- <Zysx4ZwCUv62uTBw@macbook>
- <6d3f322f-7047-4033-95b5-86751a58cc70@suse.com>
- <65d2043f-5e6f-4d84-8241-eb28dd94fc45@epam.com>
- <f731b7a3-9581-4acc-85d2-2b3decd35fae@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] xen/Kconfig: livepatch-build-tools requires debug
+ information
+Message-ID: <ZyyLAj6MZ3fvOFBC@macbook>
+References: <20241107084927.37748-1-roger.pau@citrix.com>
+ <66fd7b53-25f5-459b-8563-e33fccba90ef@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <f731b7a3-9581-4acc-85d2-2b3decd35fae@suse.com>
+In-Reply-To: <66fd7b53-25f5-459b-8563-e33fccba90ef@citrix.com>
 
-On Thu, Nov 07, 2024 at 10:25:02AM +0100, Jan Beulich wrote:
-> On 06.11.2024 13:26, Mykyta Poturai wrote:
-> > On 06.11.2024 10:07, Roger Pau Monné wrote:>
-> >> Wait - how can msi->vectors ever be 0?  AFAICT there's no way in the
-> >> MSI logic to configure 0 vectors, there will always be at least 1 vector
-> >> enabled.
-> >>
-> >> Maybe what you want, if this fix is for compliance reasons, is an
-> >> assert unreachable that msi->vectors > 0?
-> > 
-> > I did some investigation and figured out that the value of 0 is being
-> > set by guest writing to msi_control_reg. As far as I understand, the
-> > control_write() function only checks that vectors are not greater than
-> > the maximum allowed value, but does not check for 0.
+On Thu, Nov 07, 2024 at 09:21:26AM +0000, Andrew Cooper wrote:
+> On 07/11/2024 8:49 am, Roger Pau Monne wrote:
+> > The tools infrastructure used to build livepatches for Xen
+> > (livepatch-build-tools) consumes some DWARF debug information present in
+> > xen-syms to generate a livepatch (see livepatch-build script usage of readelf
+> > -wi).
+> >
+> > The current Kconfig defaults however will enable LIVEPATCH without DEBUG_INFO
+> > on release builds, thus providing a default Kconfig selection that's not
+> > suitable for livepatch-build-tools even when LIVEPATCH support is enabled,
+> > because it's missing the DWARF debug section.
+> >
+> > Fix by forcing the selection of DEBUG_INFO from LIVEPATCH.
+> >
+> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 > 
-> How that? How could it even check for 0, when 0 isn't possible? Quoting
-> the code there:
+> Oops, yes.
 > 
->     unsigned int vectors = min_t(uint8_t,
->                                  1u << MASK_EXTR(val, PCI_MSI_FLAGS_QSIZE),
->                                  pdev->msi_maxvec);
+> Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 > 
-> "val" in the guest written value. As that's used as a shift count, how
-> could 0 result there? The only way I can see 0 ending up in vectors is
-> when pdev->msi_maxvec was still zero. Yet that's then a bug in device
-> initialization.
+> Fixes tag ?
 
-See followup emails, I've arrived at the same conclusion and Mykyta
-confirmed it's msi_maxvec that's indeed 0.  Still waiting for them to
-figure out why msi_maxvec is 0.
+Was borderline on adding one, but wasn't sure since it's strictly
+livepatch-build-tools that requires the DWARF data, but custom made
+livepatches (like the examples in tests) do not require such
+information.
+
+Possibly:
+
+Fixes: 11ff40fa7bb5 ('xen/xsplice: Hypervisor implementation of XEN_XSPLICE_op')
+
+Which is the commit that originally introduced the CONFIG_XSPLICE option.
 
 Thanks, Roger.
 
