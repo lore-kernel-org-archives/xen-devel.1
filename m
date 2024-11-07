@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76F91D4335D
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 13:25:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.831814.1247204 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD37D43367
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Nov 2024 14:21:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.831840.1247215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t92Vr-0006YJ-Fn; Thu, 07 Nov 2024 13:25:27 +0000
+	id 1t93NQ-0006EW-Ji; Thu, 07 Nov 2024 14:20:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 831814.1247204; Thu, 07 Nov 2024 13:25:27 +0000
+Received: by outflank-mailman (output) from mailman id 831840.1247215; Thu, 07 Nov 2024 14:20:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t92Vr-0006YC-Cz; Thu, 07 Nov 2024 13:25:27 +0000
-Received: by outflank-mailman (input) for mailman id 831814;
- Thu, 07 Nov 2024 13:25:26 +0000
+	id 1t93NQ-0006EP-Gz; Thu, 07 Nov 2024 14:20:48 +0000
+Received: by outflank-mailman (input) for mailman id 831840;
+ Thu, 07 Nov 2024 14:20:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tRHX=SC=gmail.com=gragst.linux@srs-se1.protection.inumbo.net>)
- id 1t92Vq-0006Jr-Ri
- for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 13:25:26 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
+ <SRS0=Mm4d=SC=cloud.com=javi.merino@srs-se1.protection.inumbo.net>)
+ id 1t93NP-0006EJ-38
+ for xen-devel@lists.xenproject.org; Thu, 07 Nov 2024 14:20:47 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id be6d0503-9d0b-11ef-99a3-01e77a169b0f;
- Thu, 07 Nov 2024 14:25:23 +0100 (CET)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-539f6e1f756so975874e87.0
- for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 05:25:23 -0800 (PST)
-Received: from epuakyiw0a98.kyiv.epam.com (ll-22.209.223.85.sovam.net.ua.
- [85.223.209.22]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53d826af003sm214286e87.265.2024.11.07.05.25.18
+ id 77d29b94-9d13-11ef-99a3-01e77a169b0f;
+ Thu, 07 Nov 2024 15:20:41 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a99ebb390a5so392037766b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Nov 2024 06:20:41 -0800 (PST)
+Received: from localhost.localdomain ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9ee0a18539sm101346366b.27.2024.11.07.06.20.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 05:25:20 -0800 (PST)
+ Thu, 07 Nov 2024 06:20:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,96 +47,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be6d0503-9d0b-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMzIiLCJoZWxvIjoibWFpbC1sZjEteDEzMi5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImJlNmQwNTAzLTlkMGItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwOTg1OTIzLjc5ODI4Mywic2VuZGVyIjoiZ3JhZ3N0LmxpbnV4QGdtYWlsLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 77d29b94-9d13-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmIiLCJoZWxvIjoibWFpbC1lajEteDYyYi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6Ijc3ZDI5Yjk0LTlkMTMtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMwOTg5MjQxLjM2NTU3OSwic2VuZGVyIjoiamF2aS5tZXJpbm9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730985923; x=1731590723; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1730989240; x=1731594040; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bpKqtiiah/MyPzTQHICukxAGpceAk/bMRNOsccrstIk=;
-        b=Ck6rGt5hjBYKuDZcW8jySoolSPFzJX+hmjoAW9TPyPh5CgegNG+5t5wEsuhozJRxsT
-         BxyPH1fo5ubyLIbsHoeX2yFHns8htgXr5EbJOop3F00ZIdSrDqxSqj6ehVYRiLrbYYTM
-         aeTYQr0pPmuw4yEkkqul1E+R6DOP0Ci3yaA99Ygd4aHd1tCoejt3hTvVzyXW5+3/GzAt
-         IHHhIxU0ILP9ghl9hTTBbx7GeRtliOjyUfxyrqZAqhQFSHJLsPZitxEvRMbJ+QO1EYmX
-         IAJzge/npxpXVRJNcLyNDQt7d+al0HREJaLwRxXqMGtl1ICg4uGGRWoooIjrQFWj28/y
-         IE3A==
+        bh=y/U9+72wMeDNxXeJVAep/L+/jFQ+DgDjK+lqlpXNaNg=;
+        b=JsV4pLRNuF/oW3ygYZEY4qvJlaWrPrTO+8OIysA2+vdzqlK52cMTNYxwAruyym4CSE
+         Mc5F9qzacfvhpcTZo5jiC+VDZnly66G8+qiTnOw4Ul8gjo+hbZlqEq4tlogpGnGyWL00
+         YCS+KkDrU8h7GYeDjsn5s5rEX1GLKX90w4uUo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730985923; x=1731590723;
+        d=1e100.net; s=20230601; t=1730989240; x=1731594040;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=bpKqtiiah/MyPzTQHICukxAGpceAk/bMRNOsccrstIk=;
-        b=TK1Is6sKvgYlajvTVmFhpupORRdWX3qD45Tg+p5BJ4kE6DyfdUndUUpFmeSb+cBMAl
-         m2abEQNVh2DdRgGCQU0RnuqrmzdMkunEe7Vi6BKCFpMQH4rtZ6qRFhNt9zx3IiS/T2sU
-         8NmAuf6ZwK5OqHvEGvFHPcE4EQtoSRrZaBA+R/T7ZEkQT39aymTSCu3As+TEHLIdkwVb
-         v3LWEm9YdKXVvm/JX7WmbJIG0fWA66SE/yFVQbjWuRasEFJhCsGniwrKh+dRIHwAc1Ju
-         tVXDiwMJ6ibAKZDk/iD4Zrx+1TKNd0Wr5iXNrg06JF7ZImA2rzecinZr2v9au23MyU6J
-         Vw1g==
-X-Gm-Message-State: AOJu0Yzqza4g1oyKLFbXcjNbqW/7J6DROrDXOBQpoPMdYkZnXwNjFQRv
-	4l6/hqZvedJzsow4nWUlp3rNrFFNAhItFWP8hpXEO32xODLQ/YCYqYz74Ha8
-X-Google-Smtp-Source: AGHT+IFWhmelZY20geYJLdWJ1tRmBFGsoNiLCmj2ZIb8PPqeoNJJsJzX90s+FodxvE+6DeAjEFC2IQ==
-X-Received: by 2002:a05:6512:ad6:b0:539:fb6f:cb8d with SMTP id 2adb3069b0e04-53b348e1452mr23410418e87.27.1730985922468;
-        Thu, 07 Nov 2024 05:25:22 -0800 (PST)
-From: gragst.linux@gmail.com
-X-Google-Original-From: grygorii_strashko@epam.com
+        bh=y/U9+72wMeDNxXeJVAep/L+/jFQ+DgDjK+lqlpXNaNg=;
+        b=nxcMRxy3i2ES3S5stphJyTDYBeR85Vcl1HbOVu+bLXxGCQFbS6vvaIeN1MQc3PwXTO
+         UBLlliiXAD8hnqu1zeTUXHxvLAACW13oPfU9iZtWoJ0gdtYnptwhYSmzEivfEWol9oYD
+         QbW++F2OWn54eLu1iRfOggF1U58dCDyUlcSo/jFa3PwIKzOK9qmJwiBx/LWD7G+kQhzU
+         9QhylGSDNEirmH18aAHBmbMSMrLYoP7KBMnsdJsA9qlrulQdbbBFlOn1SauzwANrJnjJ
+         T/1z+3PolijfMSYb1e+zbwKbAgx1Im6N0dideqp7RfbjlArXlce/U+gntUwWLyq8xIzS
+         3kvA==
+X-Gm-Message-State: AOJu0Yzu/w5WMBJ7ruOVIq+2XvqkIBgSOj3L8l4EU6fZFSvqBZGHoYdB
+	kOjzk5TUGOrZC8fXXwyMKPkDa7Jk5fN1Ii3X8G0WzSW3Vib5Xn6xK8fnYVGXNMmQt5LSUvlKg3U
+	6RBo=
+X-Google-Smtp-Source: AGHT+IEU6eVutiiVjD49o1Wr6cLP7PRKeraQQD66Z4rsPHFohI0Dx78LUHcYbdOv4Eg4+qdX8/yL5g==
+X-Received: by 2002:a17:907:7b8e:b0:a99:ee26:f416 with SMTP id a640c23a62f3a-a9eeb0f94ffmr13039166b.14.1730989239080;
+        Thu, 07 Nov 2024 06:20:39 -0800 (PST)
+From: Javi Merino <javi.merino@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Grygorii Strashko <grygorii_strashko@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+Cc: Victor Lira <victorm.lira@amd.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Mykyta Poturai <Mykyta_Poturai@epam.com>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH] iommu/ipmmu-vmsa: Add Renesas R8A779G0 (R-Car V4H) support
-Date: Thu,  7 Nov 2024 15:25:01 +0200
-Message-Id: <20241107132501.724836-1-grygorii_strashko@epam.com>
-X-Mailer: git-send-email 2.34.1
+	Javi Merino <javi.merino@cloud.com>
+Subject: [TEST_ARTIFACTS PATCH v1] scripts: add lzo to the x86_64 alpine rootfs
+Date: Thu,  7 Nov 2024 14:19:33 +0000
+Message-ID: <20241107142012.2593333-1-javi.merino@cloud.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+In the qemu-alpine-x86_64-gcc test, we want to test libxenguest built
+with all libraries.  If we add lzo-dev to the alpine:3.18 container,
+libxenguest is linked against it.  However, as the initrd in the
+test-artifacts does not contain lzo, the qemu-alpine-x86_64-gcc gitlab
+CI job fails with:
 
-Add Renesas R8A779G0 (R-Car V4H) IPMMU support.
+  + bash /etc/init.d/xencommons start
+  Starting /usr/local/sbin/xenstored...
+  /etc/xen/scripts/launch-xenstore: line 90: echo: write error: Invalid argument
+  Setting domain 0 name, domid and JSON config...
+  Error loading shared library liblzo2.so.2: No such file or directory (needed by /usr/local/lib/libxenguest.so.4.20)
+  Error relocating /usr/local/lib/libxenguest.so.4.20: __lzo_init_v2: symbol not found
+  Error relocating /usr/local/lib/libxenguest.so.4.20: lzo1x_decompress_safe: symbol not found
+  Starting xenconsoled...
+  Starting QEMU as disk backend for dom0
+  + xl list
+  Error loading shared library liblzo2.so.2: No such file or directory (needed by /usr/local/lib/libxenguest.so.4.20)
+  Error relocating /usr/local/lib/libxenguest.so.4.20: __lzo_init_v2: symbol not found
+  Error relocating /usr/local/lib/libxenguest.so.4.20: lzo1x_decompress_safe: symbol not found
+  + xl create -c /root/test.cfg
+  Error loading shared library liblzo2.so.2: No such file or directory (needed by /usr/local/lib/libxenguest.so.4.20)
+  Error relocating /usr/local/lib/libxenguest.so.4.20: __lzo_init_v2: symbol not found
+  Error relocating /usr/local/lib/libxenguest.so.4.20: lzo1x_decompress_safe: symbol not found
+   *   Execution of "/etc/local.d/xen.start" failed.
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+Add lzo to the initrd that becomes the rootfs to install liblzo2.so.2 .
+
+Signed-off-by: Javi Merino <javi.merino@cloud.com>
 ---
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 6 ++++++
- 1 file changed, 6 insertions(+)
 
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index da011413c5c0..d828d9cf6afd 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -788,6 +788,7 @@ static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
- #define RCAR_PRODUCT_M3W     0x00005200
- #define RCAR_PRODUCT_M3N     0x00005500
- #define RCAR_PRODUCT_S4      0x00005A00
-+#define RCAR_PRODUCT_V4H     0x00005C00
- #define RCAR_CUT_MASK        0x000000FF
- #define RCAR_CUT_VER30       0x00000020
- 
-@@ -836,6 +837,7 @@ static __init bool ipmmu_stage2_supported(void)
-         break;
- 
-     case RCAR_PRODUCT_S4:
-+    case RCAR_PRODUCT_V4H:
-         stage2_supported = true;
-         break;
- 
-@@ -871,6 +873,10 @@ static const struct dt_device_match ipmmu_dt_match[] __initconst =
-         .compatible = "renesas,ipmmu-r8a779f0",
-         .data = &ipmmu_features_rcar_gen4,
-     },
-+    {
-+        .compatible = "renesas,ipmmu-r8a779g0",
-+        .data = &ipmmu_features_rcar_gen4,
-+    },
-     { /* sentinel */ },
- };
- 
+Tested in https://gitlab.com/xen-project/people/javimerino/test-artifacts/-/jobs/8295092924
+
+ scripts/x86_64-rootfs-alpine.sh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/scripts/x86_64-rootfs-alpine.sh b/scripts/x86_64-rootfs-alpine.sh
+index 28d8e30d8eac..f8b04c52f82e 100755
+--- a/scripts/x86_64-rootfs-alpine.sh
++++ b/scripts/x86_64-rootfs-alpine.sh
+@@ -12,6 +12,7 @@ apk add dbus
+ apk add bash
+ apk add python3
+ apk add zlib
++apk add lzo
+ apk add ncurses
+ apk add yajl
+ apk add libaio
 -- 
-2.34.1
+2.47.0
 
 
