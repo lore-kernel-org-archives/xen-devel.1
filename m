@@ -4,31 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228BAD6407A
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Nov 2024 19:20:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.832761.1248046 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1ADDD64084
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Nov 2024 19:58:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.832774.1248071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t9UX5-0004C0-Dy; Fri, 08 Nov 2024 19:20:35 +0000
+	id 1t9V7r-0000JY-Nk; Fri, 08 Nov 2024 19:58:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 832761.1248046; Fri, 08 Nov 2024 19:20:35 +0000
+Received: by outflank-mailman (output) from mailman id 832774.1248071; Fri, 08 Nov 2024 19:58:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t9UX5-0004Bt-Ax; Fri, 08 Nov 2024 19:20:35 +0000
-Received: by outflank-mailman (input) for mailman id 832761;
- Fri, 08 Nov 2024 19:20:34 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t9V7r-0000Id-HA; Fri, 08 Nov 2024 19:58:35 +0000
+Received: by outflank-mailman (input) for mailman id 832774;
+ Fri, 08 Nov 2024 19:58:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pHpy=SD=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1t9UX3-0004Bn-Vd
- for xen-devel@lists.xenproject.org; Fri, 08 Nov 2024 19:20:33 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 82dd2cb1-9e06-11ef-99a3-01e77a169b0f;
- Fri, 08 Nov 2024 20:20:28 +0100 (CET)
-Received: by mx.zohomail.com with SMTPS id 1731093620805707.5870524094822;
- Fri, 8 Nov 2024 11:20:20 -0800 (PST)
+ <SRS0=ALGw=SD=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1t9V7p-0008TS-LG
+ for xen-devel@lists.xenproject.org; Fri, 08 Nov 2024 19:58:33 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d3b31170-9e0b-11ef-a0c6-8be0dac302b0;
+ Fri, 08 Nov 2024 20:58:30 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9ef275b980so182263366b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Nov 2024 11:58:30 -0800 (PST)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9ee0dc5db6sm271523466b.119.2024.11.08.11.58.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Nov 2024 11:58:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,97 +47,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82dd2cb1-9e06-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzNi4xNDMuMTg4LjUxIiwiaGVsbyI6InNlbmRlcjQtb2YtbzUxLnpvaG8uY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjgyZGQyY2IxLTllMDYtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMDkzNjI5LjI4NTYyNiwic2VuZGVyIjoiZHBzbWl0aEBhcGVydHVzc29sdXRpb25zLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-ARC-Seal: i=1; a=rsa-sha256; t=1731093624; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=MzslziarQb9QrX6gxokLde2b+vAS4Lv0YD7IIxg5VER9iCYBV1nZQZXpS4Lqyb3p/UKt8X0ojI3Lwpyv+LS2PLMw8y2IjmFIpr8FvfoyzrmtuJdd50vDz9Hszm0zuFs4iL6t34Myq25+6rVH8wG1qnXfGLUGlJMM7rWhrH89gbg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1731093624; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=3SwoarSDdh+gZemX9amQd8J1gBrNVFneYdXOGW7iHo0=; 
-	b=h7cpdBGb2jIfYo2BOheRKmfO6Cl/UCCxazSRoIZT1k7G1JzWI3c8J7ZWn/siQa9unk/wUGCQhXECTzdkmhhYYFv1tFMqjEOgf8CG4+tHg/bt9+kY5B/CJdIXMYvxBC6VqZzqamZj2NW27uwF5J4Ko72sJrjvcDvnQqa+cU0aDEs=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1731093624;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=3SwoarSDdh+gZemX9amQd8J1gBrNVFneYdXOGW7iHo0=;
-	b=a1BDn47l7aertUJBg2asfCLMlVKPTKa6NiYzUGilgcN6eO5WEvivI/+QJthHFzPK
-	yrRjNl683UfGlcXfbJN8eikjGp2otwOQSLOpO6yXnWkxHpt6KeB/EjmujExDQVxOysH
-	92pmbc2u4j6lbKAFpcA2jl0aRx8xTbAJ39VKESiI=
-Message-ID: <0768fe0b-7e17-47ef-aa3e-8c8468792bef@apertussolutions.com>
-Date: Fri, 8 Nov 2024 14:20:19 -0500
+X-Inumbo-ID: d3b31170-9e0b-11ef-a0c6-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzYiLCJoZWxvIjoibWFpbC1lajEteDYzNi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImQzYjMxMTcwLTllMGItMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxMDk1OTEwLjY5MTQ5Nywic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1731095909; x=1731700709; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=G+dFm0a0Fhh1qywKmm6kV9dHHbNP/gyGU4Edu50c+o8=;
+        b=NDQv/yfhjL/mPnYvZESzX5bwfnOylZXbtS2WXzEHoXlElei9P85ky5cqIf+H06TxQ0
+         lu38xFp4dZusDq3lz4bw+MDGpIg0/G345oDbMG+Bjl6E6Gb1lTUcLEnHJuZEIQZL5fZ6
+         8+FDVkn39nqlnRH79qPbpDeFQqBPOYBUATUYY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731095909; x=1731700709;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=G+dFm0a0Fhh1qywKmm6kV9dHHbNP/gyGU4Edu50c+o8=;
+        b=MqNZmvSE1/Fg/gu3pWpQ7WjVxRU9XkNyQckRr0rM1YlLqfYeGPmC5ClhcLmivaro4D
+         WKRBqRFwBaTZXCheHe6hYXaiPMm/yEt6SIW2F1a/sLIr7Nu5KtiazS+7pMUpg22N0VcK
+         o8+aHEZ88y8Pok67W70RnhCOAozHs/R/gYM/pyQDVRVV5KYYeEyb1Tn/ss7n301xOXQX
+         JTioPOXTRdqYLNbQKLUfmgXpMEdTln1G/Ccbz5Pfnc9dC7bKkF6qGWZs2yGgwUmyOrsb
+         I2Rd2ukacpzNxRmU57sNfEPajNbUnb40vlQp8CJtubkKbrXFSZatoY6bAci+82c6AnCs
+         WKtg==
+X-Gm-Message-State: AOJu0YwDlOv2oAzd0Z5k/n+k4GOJ8C7l3AKUhaZLIs1v2hr6MqxrNCg1
+	AxnSC6IUh+VDlGtAE8sAlSGJMYd7G709eQ3EpO8ckJr2nLi10WzN8ZqFECtZ+tJ5OXxOgOqgvRG
+	W
+X-Google-Smtp-Source: AGHT+IEOhqfnb4iyEIZTlMK8aPLGxI8ZmGPT7RBh1fXdTFrp3d4nBhxCGtT3Ce/bAkTP4y3ZJ54+5g==
+X-Received: by 2002:a17:907:3e1d:b0:a99:f861:ebd with SMTP id a640c23a62f3a-a9eefeebe5amr408994766b.14.1731095909312;
+        Fri, 08 Nov 2024 11:58:29 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 02/10] x86: Drop includes of mach_apic.h
+Date: Fri,  8 Nov 2024 19:58:12 +0000
+Message-Id: <20241108195820.789716-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241108195820.789716-1-andrew.cooper3@citrix.com>
+References: <20241108195820.789716-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/12] x86/boot: introduce boot domain
-To: Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
-Cc: christopher.w.clark@gmail.com, stefano.stabellini@amd.com,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <20241102172551.17233-1-dpsmith@apertussolutions.com>
- <20241102172551.17233-11-dpsmith@apertussolutions.com>
- <eb450574-071e-48f5-aab2-0af469b909e1@amd.com>
-Content-Language: en-US
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-In-Reply-To: <eb450574-071e-48f5-aab2-0af469b909e1@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 
-On 11/7/24 15:58, Jason Andryuk wrote:
-> On 2024-11-02 13:25, Daniel P. Smith wrote:
->> To begin moving toward allowing the hypervisor to construct more than one
->> domain at boot, a container is needed for a domain's build information.
->> Introduce a new header, <xen/asm/bootdomain.h>, that contains the initial
->> struct boot_domain that encapsulate the build information for a domain.
->>
->> Add a kernel and ramdisk boot module reference along with a struct domain
->> reference to the new struct boot_domain. This allows a struct boot_domain
->> reference to be the only parameter necessary to pass down through the 
->> domain
->> construction call chain.
->>
->> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
->> ---
->> Changes since v7
->> - collapsed the incremental changes to the call chain into this commit
->> ---
-> 
->> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
->> index 18b93d6a272a..6e25a9f726c7 100644
->> --- a/xen/arch/x86/setup.c
->> +++ b/xen/arch/x86/setup.c
-> 
->> @@ -1026,11 +1019,11 @@ static struct domain *__init 
->> create_dom0(struct boot_info *bi)
->>           panic("Error creating d%uv0\n", domid);
->>       /* Grab the DOM0 command line. */
->> -    if ( image->cmdline_pa || bi->kextra )
->> +    if ( bd->kernel->cmdline_pa || bi->kextra )
->>       {
->> -        if ( image->cmdline_pa )
->> -            safe_strcpy(
->> -                cmdline, cmdline_cook(__va(image->cmdline_pa), bi- 
->> >loader));
->> +        if ( bd->kernel->cmdline_pa )
->> +            safe_strcpy(cmdline, cmdline_cook(__va(bd->kernel- 
->> >cmdline_pa),
->> +                        bi->loader));
-> 
-> I'd indent bi->loader so it lines up with __va, since bi->loader is the 
-> second argument to cmdline_cook().
+A number of files don't need mach_apic.h at all, or only need transitive
+dependenices.  Drop the includes.
 
-Ack.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/cpu/common.c        | 1 -
+ xen/arch/x86/cpu/intel.c         | 2 --
+ xen/arch/x86/genapic/delivery.c  | 3 ++-
+ xen/arch/x86/hpet.c              | 3 ++-
+ xen/arch/x86/smp.c               | 4 +++-
+ xen/arch/x86/x86_64/acpi_mmcfg.c | 1 -
+ 6 files changed, 7 insertions(+), 7 deletions(-)
 
-> With that:
-> 
-> Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index ff4cd2289797..067d855badf0 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -18,7 +18,6 @@
+ #include <asm/random.h>
+ #include <asm/setup.h>
+ #include <asm/shstk.h>
+-#include <mach_apic.h>
+ #include <public/sysctl.h> /* for XEN_INVALID_{SOCKET,CORE}_ID */
+ 
+ #include "cpu.h"
+diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
+index 807b708217e9..6a7347968ba2 100644
+--- a/xen/arch/x86/cpu/intel.c
++++ b/xen/arch/x86/cpu/intel.c
+@@ -14,8 +14,6 @@
+ #include <asm/i387.h>
+ #include <asm/trampoline.h>
+ 
+-#include <mach_apic.h>
+-
+ #include "cpu.h"
+ 
+ /*
+diff --git a/xen/arch/x86/genapic/delivery.c b/xen/arch/x86/genapic/delivery.c
+index 3def78f380d3..7bb7bd658650 100644
+--- a/xen/arch/x86/genapic/delivery.c
++++ b/xen/arch/x86/genapic/delivery.c
+@@ -1,9 +1,10 @@
+ #include <xen/irq.h>
+ #include <xen/sched.h>
++
++#include <asm/apic.h>
+ #include <asm/current.h>
+ #include <asm/smp.h>
+ #include <asm/hardirq.h>
+-#include <mach_apic.h>
+ 
+ /*
+  * LOGICAL FLAT DELIVERY MODE (multicast via bitmask to <= 8 logical APIC IDs).
+diff --git a/xen/arch/x86/hpet.c b/xen/arch/x86/hpet.c
+index 2f54d3188966..51ff7f12f5c0 100644
+--- a/xen/arch/x86/hpet.c
++++ b/xen/arch/x86/hpet.c
+@@ -13,11 +13,12 @@
+ #include <xen/numa.h>
+ #include <xen/param.h>
+ #include <xen/sched.h>
++
++#include <asm/apic.h>
+ #include <asm/fixmap.h>
+ #include <asm/div64.h>
+ #include <asm/hpet.h>
+ #include <asm/msi.h>
+-#include <mach_apic.h>
+ #include <xen/cpuidle.h>
+ 
+ #define MAX_DELTA_NS MILLISECS(10*1000)
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index 04c6a0572319..bd337e548c5a 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -14,7 +14,10 @@
+ #include <xen/delay.h>
+ #include <xen/perfc.h>
+ #include <xen/spinlock.h>
++
++#include <asm/apic.h>
+ #include <asm/current.h>
++#include <asm/genapic.h>
+ #include <asm/guest.h>
+ #include <asm/smp.h>
+ #include <asm/mc146818rtc.h>
+@@ -23,7 +26,6 @@
+ #include <asm/hpet.h>
+ #include <asm/setup.h>
+ #include <irq_vectors.h>
+-#include <mach_apic.h>
+ 
+ /* Helper functions to prepare APIC register values. */
+ static unsigned int prepare_ICR(unsigned int shortcut, int vector)
+diff --git a/xen/arch/x86/x86_64/acpi_mmcfg.c b/xen/arch/x86/x86_64/acpi_mmcfg.c
+index 7b0904622931..7fe5663c5984 100644
+--- a/xen/arch/x86/x86_64/acpi_mmcfg.c
++++ b/xen/arch/x86/x86_64/acpi_mmcfg.c
+@@ -37,7 +37,6 @@
+ #include <asm/io.h>
+ #include <asm/mpspec.h>
+ #include <asm/processor.h>
+-#include <mach_apic.h>
+ 
+ #include "mmconfig.h"
+ 
+-- 
+2.39.5
 
-Thanks,
-
-v/r,
-dps
 
