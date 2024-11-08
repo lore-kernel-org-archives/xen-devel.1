@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 183D4D64085
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4669D6408A
 	for <xen-devel@archiver.kernel.org>; Fri,  8 Nov 2024 19:58:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.832779.1248126 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.832772.1248055 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t9V7v-0001kk-W1; Fri, 08 Nov 2024 19:58:39 +0000
+	id 1t9V7q-0008Tq-6U; Fri, 08 Nov 2024 19:58:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 832779.1248126; Fri, 08 Nov 2024 19:58:39 +0000
+Received: by outflank-mailman (output) from mailman id 832772.1248055; Fri, 08 Nov 2024 19:58:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t9V7v-0001k0-Qi; Fri, 08 Nov 2024 19:58:39 +0000
-Received: by outflank-mailman (input) for mailman id 832779;
- Fri, 08 Nov 2024 19:58:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t9V7q-0008Tj-3g; Fri, 08 Nov 2024 19:58:34 +0000
+Received: by outflank-mailman (input) for mailman id 832772;
+ Fri, 08 Nov 2024 19:58:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ALGw=SD=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1t9V7u-0008TY-Jq
- for xen-devel@lists.xenproject.org; Fri, 08 Nov 2024 19:58:38 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d6820324-9e0b-11ef-99a3-01e77a169b0f;
- Fri, 08 Nov 2024 20:58:35 +0100 (CET)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5c9c28c1ecbso3208821a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 08 Nov 2024 11:58:35 -0800 (PST)
+ id 1t9V7p-0008TS-1R
+ for xen-devel@lists.xenproject.org; Fri, 08 Nov 2024 19:58:33 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d2629bec-9e0b-11ef-a0c6-8be0dac302b0;
+ Fri, 08 Nov 2024 20:58:28 +0100 (CET)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a86e9db75b9so407484366b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Nov 2024 11:58:28 -0800 (PST)
 Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0dc5db6sm271523466b.119.2024.11.08.11.58.33
+ a640c23a62f3a-a9ee0dc5db6sm271523466b.119.2024.11.08.11.58.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 11:58:33 -0800 (PST)
+ Fri, 08 Nov 2024 11:58:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,44 +47,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6820324-9e0b-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MmEiLCJoZWxvIjoibWFpbC1lZDEteDUyYS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImQ2ODIwMzI0LTllMGItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMDk1OTE1LjQ1MjczLCJzZW5kZXIiOiJhbmRyZXcuY29vcGVyQGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: d2629bec-9e0b-11ef-a0c6-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzEiLCJoZWxvIjoibWFpbC1lajEteDYzMS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImQyNjI5YmVjLTllMGItMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxMDk1OTA4LjUwNDU4Nywic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1731095914; x=1731700714; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1731095907; x=1731700707; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pYLPSJ4LnDxE4PBKWdzigEqbbkS/YUzGMHz1cObbzSM=;
-        b=eBifqC7RNAJMGsWO7CQudZZviiY2nS6g/+7/m7BSi3Z5kzyjYf/oJ37ACQ5n465jCS
-         2VUotdoAXM9/k/hVPjSN7uiKJYuN64arypaYXAkXZ/Xk8htrHU2YkX+KX4vikohYcd3D
-         r8Ez2/D5Mz+jtIraj79Dya+qjjgjzvUjUE+4s=
+        bh=bYie9AcBWI2S7AR0N11MSukBCPDyuxvyXWxJgl6q148=;
+        b=Ce34HUJi51sY9h8GqrU1K0EhG99I1+zcKK5euEZUzoMHv6AJH/JvE/Q/cktReb9NXr
+         N/gJ7ZpFL+iAqBK8DglC8yhoKk5EmWL+9/UjLKWO/WWPJ8rtZ5w8TSn5pcaMjYB2+uyY
+         +6Igp8ARu3/Tisu0lbLSwKPf8uFXoNjcvAwP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731095914; x=1731700714;
+        d=1e100.net; s=20230601; t=1731095907; x=1731700707;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pYLPSJ4LnDxE4PBKWdzigEqbbkS/YUzGMHz1cObbzSM=;
-        b=mRprT2knvG6XqjHca5W6s3/oS4xGw3RNYit1HXeCJ5hvJzTB+Du3IntSarZnOELpKk
-         ckvh9+Hx8WBqX3Tyk9STrY2BmKwKRiy//OJQHV6G+QMZUZ25BjYMa4GESQNdcNupEqsO
-         ZghUZRfvldJDkcEeammTI2IDsIJktHLNXHMDmPG5VWQVBuxpKKdB8+FGSFoDjGYiwAy6
-         PxE1D4DILVYoA5oGf9jNcEp3J0lY4ybDQ/J3i6xA7CLWwTlbpLat925fgB2AOMCC7Azc
-         zW3KxB0BjJJx880FdXwvGGuMB9OrSdFt4Q1e8LCpBBGZH1yoXLczcfdt1PyzDgemwAX9
-         282Q==
-X-Gm-Message-State: AOJu0YwJMgoTqM7B8nOYfSEFiINkpCLa7lqKqXFuU6Jw3HsualqcAMNz
-	oAYfZu+r3Vu3QARHcqt3n8H3UnbcyYxVlAB3seXZU3LkQhKYnO60QrHzJsGO4pXKklH1YYOpejU
-	u
-X-Google-Smtp-Source: AGHT+IElLsSjvElF2qNR+EDaQMrF6EoirLU7rCR/THkONc3tstOEx2T9+EaQ1ce4ezkwyEMa0wfgnA==
-X-Received: by 2002:a17:907:7b88:b0:a9e:441c:f74d with SMTP id a640c23a62f3a-a9eefee456bmr320848366b.16.1731095914232;
-        Fri, 08 Nov 2024 11:58:34 -0800 (PST)
+        bh=bYie9AcBWI2S7AR0N11MSukBCPDyuxvyXWxJgl6q148=;
+        b=fK9EfM2Ue8Dtm06NW8UCezWIYknL8RBsQnu4oXWi/zhCi5X3OL1tTBBE80AEXdSK1i
+         jd4kNGdHppqHsDdVhX24gMNVZbuwCJjS1ijxrKpgRQjjws4tLQD2k4ACCOR6QTD/Dlxk
+         KVXXJS1zt8kTE1RNtGHXEXVBpUFW6JlhfuTmIjAkqm6qv5olb3T6gu0DkXsCl9jjZq0s
+         C1sxZ6QyhSjq2UDVn59jWoeV9ieOGJmDqXSuQwdb5s8bJr8sWHR3oY+SDtDwKCg3qYvn
+         qtVy5Jz21IPrdijGjwR4wDhxoIRgk7yJZgoJpVT3OpvRqoNzkbvDhUtYPHtGvYBcU4QW
+         5tmA==
+X-Gm-Message-State: AOJu0YwR3DqiC6nvrMy6hFktJnBOwbzfuLVLNIk2Dpz5rGZNSap+KzlB
+	xDjn+oPfVcjZ/+IOvziEq5m3e52YQRBw0Af3OordR2sjfTyv1W2k/GfoyBr93JEEodLcEgnHUsm
+	a
+X-Google-Smtp-Source: AGHT+IFkwDRG0JuBnQUiz375sbx3PWclHmsV85IVLpeZpU/Z9XZFyOAYTDVEGQOuTd8OzCcEOvwLMw==
+X-Received: by 2002:a17:906:f598:b0:a9a:20b4:4078 with SMTP id a640c23a62f3a-a9eeff0da70mr350698466b.16.1731095907494;
+        Fri, 08 Nov 2024 11:58:27 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 07/10] x86/mach-apic: Drop check_apicid_present()
-Date: Fri,  8 Nov 2024 19:58:17 +0000
-Message-Id: <20241108195820.789716-8-andrew.cooper3@citrix.com>
+Subject: [PATCH 01/10] VT-d: Drop includes of mach_apic.h
+Date: Fri,  8 Nov 2024 19:58:11 +0000
+Message-Id: <20241108195820.789716-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241108195820.789716-1-andrew.cooper3@citrix.com>
 References: <20241108195820.789716-1-andrew.cooper3@citrix.com>
@@ -92,67 +92,65 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It's an unnecessary wrapper.
+Neither iommu.c nor quirks.c use any functionality.  iommu.c only uses it to
+transitively include apic.h and io_apic.h, while quirks.c is only depending on
+the ACLINUX wrapping of strtoul() which we spell simple_strtoul() everywhere
+else in Xen.
 
-It's also the only reason that smpboot.c includes mach_apic.h, other than for
-transitive dependencies.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/include/asm/mach-generic/mach_apic.h | 5 -----
- xen/arch/x86/smpboot.c                            | 6 ++++--
- 2 files changed, 4 insertions(+), 7 deletions(-)
+ xen/drivers/passthrough/vtd/iommu.c  | 5 ++++-
+ xen/drivers/passthrough/vtd/quirks.c | 4 ++--
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/mach-generic/mach_apic.h b/xen/arch/x86/include/asm/mach-generic/mach_apic.h
-index c8e0637f4424..7940c0234cb9 100644
---- a/xen/arch/x86/include/asm/mach-generic/mach_apic.h
-+++ b/xen/arch/x86/include/asm/mach-generic/mach_apic.h
-@@ -45,11 +45,6 @@ static inline int multi_timer_check(int apic, int irq)
-  * really not sure why, since all local APICs should have distinct physical
-  * IDs, and we need to know what they are.
-  */
--static inline int check_apicid_present(int apicid)
--{
--	return physid_isset(apicid, phys_cpu_present_map);
--}
--
- static inline void set_apicid(int phys_apicid, physid_mask_t *map)
- {
- 	physid_set(phys_apicid, *map);
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 9e79c1a6d6e6..42272a9844fa 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -20,6 +20,9 @@
- #include <xen/serial.h>
- #include <xen/numa.h>
- #include <xen/cpu.h>
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index e13be244c130..27a4d1640189 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -31,12 +31,15 @@
+ #include <xen/pci.h>
+ #include <xen/pci_regs.h>
+ #include <xen/keyhandler.h>
 +
 +#include <asm/apic.h>
 +#include <asm/io_apic.h>
- #include <asm/cpuidle.h>
- #include <asm/current.h>
- #include <asm/mc146818rtc.h>
-@@ -37,7 +40,6 @@
- #include <asm/tboot.h>
- #include <asm/trampoline.h>
- #include <irq_vectors.h>
+ #include <asm/msi.h>
+ #include <asm/nops.h>
+ #include <asm/irq.h>
+ #include <asm/hvm/vmx/vmx.h>
+ #include <asm/p2m.h>
 -#include <mach_apic.h>
- 
- unsigned long __read_mostly trampoline_phys;
- enum ap_boot_method __read_mostly ap_boot_method = AP_BOOT_NORMAL;
-@@ -1193,7 +1195,7 @@ void __init smp_prepare_cpus(void)
-      * CPU too, but we do it for the sake of robustness anyway.
-      * Makes no sense to do this check in clustered apic mode, so skip it
-      */
--    if ( !check_apicid_present(boot_cpu_physical_apicid) )
-+    if ( !physid_isset(boot_cpu_physical_apicid, phys_cpu_present_map) )
-     {
-         printk("weird, boot CPU (#%d) not listed by the BIOS.\n",
-                boot_cpu_physical_apicid);
++
+ #include "iommu.h"
+ #include "dmar.h"
+ #include "extern.h"
+diff --git a/xen/drivers/passthrough/vtd/quirks.c b/xen/drivers/passthrough/vtd/quirks.c
+index 950dcd56ef8a..dc3dac749ce6 100644
+--- a/xen/drivers/passthrough/vtd/quirks.c
++++ b/xen/drivers/passthrough/vtd/quirks.c
+@@ -32,7 +32,7 @@
+ #include <asm/msi.h>
+ #include <asm/irq.h>
+ #include <asm/pci.h>
+-#include <mach_apic.h>
++
+ #include "iommu.h"
+ #include "dmar.h"
+ #include "extern.h"
+@@ -321,7 +321,7 @@ static int __init cf_check parse_snb_timeout(const char *s)
+         else if ( strcmp(s, "cap") == 0 )
+             t = SNB_IGD_TIMEOUT;
+         else
+-            t = strtoul(s, &q, 0);
++            t = simple_strtoul(s, &q, 0);
+     }
+     else
+         t = t ? SNB_IGD_TIMEOUT_LEGACY : 0;
 -- 
 2.39.5
 
