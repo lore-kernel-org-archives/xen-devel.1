@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BAE2D5C0ED
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Nov 2024 15:20:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.832689.1247967 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7D6D5C0EF
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Nov 2024 15:38:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.832712.1247987 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t9QmI-00048V-UU; Fri, 08 Nov 2024 15:20:02 +0000
+	id 1t9R4H-0007ke-8C; Fri, 08 Nov 2024 15:38:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 832689.1247967; Fri, 08 Nov 2024 15:20:02 +0000
+Received: by outflank-mailman (output) from mailman id 832712.1247987; Fri, 08 Nov 2024 15:38:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1t9QmI-000480-Rm; Fri, 08 Nov 2024 15:20:02 +0000
-Received: by outflank-mailman (input) for mailman id 832689;
- Fri, 08 Nov 2024 15:20:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1t9R4H-0007kX-5Q; Fri, 08 Nov 2024 15:38:37 +0000
+Received: by outflank-mailman (input) for mailman id 832712;
+ Fri, 08 Nov 2024 15:38:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Gwdq=SD=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1t9QmI-0003tl-6U
- for xen-devel@lists.xenproject.org; Fri, 08 Nov 2024 15:20:02 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ea1b623c-9de4-11ef-99a3-01e77a169b0f;
- Fri, 08 Nov 2024 16:19:57 +0100 (CET)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a9acafdb745so463853966b.0
- for <xen-devel@lists.xenproject.org>; Fri, 08 Nov 2024 07:19:57 -0800 (PST)
-Received: from localhost ([213.195.120.105]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0dc580esm248774966b.106.2024.11.08.07.19.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 07:19:56 -0800 (PST)
+ <SRS0=kpLv=SD=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
+ id 1t9R4F-0007kR-5e
+ for xen-devel@lists.xenproject.org; Fri, 08 Nov 2024 15:38:35 +0000
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [2607:f8b0:4864:20::32a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 817feb4e-9de7-11ef-a0c6-8be0dac302b0;
+ Fri, 08 Nov 2024 16:38:31 +0100 (CET)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7180f2f5fb0so1475701a34.1
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Nov 2024 07:38:31 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,141 +42,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea1b623c-9de4-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmEiLCJoZWxvIjoibWFpbC1lajEteDYyYS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImVhMWI2MjNjLTlkZTQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMDc5MTk3LjkzODMwOSwic2VuZGVyIjoicm9nZXIucGF1QGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 817feb4e-9de7-11ef-a0c6-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjI2MDc6ZjhiMDo0ODY0OjIwOjozMmEiLCJoZWxvIjoibWFpbC1vdDEteDMyYS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjgxN2ZlYjRlLTlkZTctMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxMDgwMzExLjcyMjI2NCwic2VuZGVyIjoiZnJlZGlhbm8uemlnbGlvQGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1731079197; x=1731683997; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=NothjRa7hJs7krxw/fHeGCdJnIvRShxLJRNh0o3cmgk=;
-        b=wYxFEQ+Pyr83U8CwClCbDUmqEjueevLjGVYCpr1fBCeabTRgfvuSW2TgE+fAeQIXxO
-         yOodm6GHPJ+EVoREEPilI1+sP6N36uuxsxr34RjPeZ7RKpNDbamKnApphaVQzfYXHseo
-         8MZJyi2ssBo1ithNc974b9WxCM2zBnwfN6t3Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731079197; x=1731683997;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1731080310; x=1731685110; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NothjRa7hJs7krxw/fHeGCdJnIvRShxLJRNh0o3cmgk=;
-        b=AxFn8kIcEiva7Y5+Uculh49Xwpail7J14GagxD5vWPwQjyJ/Y7Yrhw6j4bhkHRLQSz
-         t6+xBzpgs7FqkUHIZYbWGl+rVXD7mxsCVFmnSeGlNceUnva/0+HswHkMMCTtQB1dtHOl
-         burDL10zttWq4DsWjv4fS+dfHbKCpLQr0TTfJokBqcyW0yVLtvy6fxhOTg5b9OXZ4jhd
-         F6uYF6sUb0Lkmgfa9rRklA+GdUPNXVH0s7AN15Yl58vwDYWqwBzbiDHAlwOwKxgzzjtj
-         42WDvSKCwAQrsdfXll+IBwuZeTIUqVse9tYjw5lRUa5nZJsPaB1sur9XExlL2mtWS2Bj
-         gglQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWEQuTSeDV+GVqJiZnWGdKPoo3xWdltakGCpAk7wojPZCx1T3Xl6DccSckEYdseAl3iRqeJTEId3wk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy9+jUOmDgkahbaWVUWMGP4cRNg6kh2XRPnL3+PyPtdhOfy7iFT
-	LT7WuOKzP+0Y/qGUEQJkbw5c2h6qtczma2iAzeUFef9oUCqcFzSNh41mxU0rA+g=
-X-Google-Smtp-Source: AGHT+IE1/T87ONUhJ6KbeDKX61K5vCZlDt/TqYnpNG6tUPtJNY3G3vwg3YXHf/WzetyW+J2pa7VMoA==
-X-Received: by 2002:a17:907:3188:b0:a9e:c4df:e3c9 with SMTP id a640c23a62f3a-a9eeff97fcemr317489966b.24.1731079197172;
-        Fri, 08 Nov 2024 07:19:57 -0800 (PST)
-Date: Fri, 8 Nov 2024 16:19:55 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Stewart Hildebrand <stewart.hildebrand@amd.com>
-Subject: Re: [PATCH v6 2/3] xen/pci: introduce PF<->VF links
-Message-ID: <Zy4sG915LicXNmIV@macbook>
-References: <20241018203913.1162962-1-stewart.hildebrand@amd.com>
- <20241018203913.1162962-3-stewart.hildebrand@amd.com>
- <56b5a45b-871d-41a4-8e1d-74d72020054f@suse.com>
- <9ab19f1b-0dee-490e-b4f6-b07e6ae6223b@amd.com>
- <9625de28-f05b-4317-89cf-d1fe843a43a8@suse.com>
- <D5GT0NR29WEF.216KE5GCTH1TL@cloud.com>
- <39b2a334-1298-4e83-b7b7-393c79964539@suse.com>
+        bh=PzkQ6yjrGMHNFOleLn3anvYPdWAO2I6q1VA1NHFPq9g=;
+        b=WF72ADTNL5/bwV2Wnr9A7FDXg9QMBzcpSmai+mJoxianfv3fFuc8YGOX/bvxmFhrB0
+         PRf+5amfrXuUzXRUVhEIINKkAHALMAjc96Wscj17t6HINMKKZFxV0cQT0LEPWoYt59BS
+         TNPyPWt7zJgiL9Gw6jSOxE6VvyoeUaPP4fM0k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731080310; x=1731685110;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=PzkQ6yjrGMHNFOleLn3anvYPdWAO2I6q1VA1NHFPq9g=;
+        b=U1PtpsotVI2kistLXqW3TX5XOYK3Ii1sdZBZJTgEiI1t0NU11a03/wgNUo8FXYvEzE
+         uaHW3ZMutZRCtY3vUA+LYq9mQ2iE2JP1B3uAFcdsE+CXYxlHl2VFm6sC23tGVh0wPaz5
+         O7WTIVl3FDVw02HHnLBuVotd+FOuP6jcVXb5ehMUZ2u9yjkvzjQYjsqnQsidukAafBm7
+         SygDyAqx6RqqVYdNDXhFRdQY3pMUh4j0Xuxncw0WEhWfuQsJQdrMuCNu6/SBY2Ja627i
+         m4l0B3I7UYPsvYxqjaokk3Hqwb+Nzdwck8ljpGqLzO6TzSQKrY+1Co8Cf0vzj+bSHJIl
+         DNEQ==
+X-Gm-Message-State: AOJu0YypCuDp4DvqKinize8ulVaZq4mZH0uu3LtVMRrdHIh3rNbgE2TI
+	dATrC5jW2ZCMQYyFAieb8mOxVzCV3QU2Q/Fc28b5cQfarXl+Mz9c4X5+46LyvM9+oBW0mZLyaLX
+	5PJ+IMPe+paklY1SPGtEdZtrkzLoRW4RDZ6GMdQ==
+X-Google-Smtp-Source: AGHT+IELsFKkJGA0G9/REqbDphWczSd5IZt69INWGXTBcpeEdSBiR8sQbsdoL7sLiubKSumZbbkwDwpBvY5rTEhRk3w=
+X-Received: by 2002:a05:6830:6186:b0:717:d012:a513 with SMTP id
+ 46e09a7af769-71a1c26869emr4265416a34.19.1731080310153; Fri, 08 Nov 2024
+ 07:38:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <39b2a334-1298-4e83-b7b7-393c79964539@suse.com>
+References: <20241108145335.315884-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20241108145335.315884-1-andrew.cooper3@citrix.com>
+From: Frediano Ziglio <frediano.ziglio@cloud.com>
+Date: Fri, 8 Nov 2024 15:38:17 +0000
+Message-ID: <CACHz=ZgN5UOFFMfH2MqD3ouSmGsk8_T+47W=F61nnUV7vGfV6w@mail.gmail.com>
+Subject: Re: [PATCH v2] x86/trampoline: Collect other scattered trampoline symbols
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich <JBeulich@suse.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 08, 2024 at 02:17:40PM +0100, Jan Beulich wrote:
-> On 08.11.2024 13:42, Alejandro Vallejo wrote:
-> > On Mon Nov 4, 2024 at 7:44 AM GMT, Jan Beulich wrote:
-> >> On 01.11.2024 21:16, Stewart Hildebrand wrote:
-> >>> +Daniel (XSM mention)
-> >>>
-> >>> On 10/28/24 13:02, Jan Beulich wrote:
-> >>>> On 18.10.2024 22:39, Stewart Hildebrand wrote:
-> >>>>> Add links between a VF's struct pci_dev and its associated PF struct
-> >>>>> pci_dev. Move the calls to pci_get_pdev()/pci_add_device() down to avoid
-> >>>>> dropping and re-acquiring the pcidevs_lock().
-> >>>>>
-> >>>>> During PF removal, unlink VF from PF and mark the VF broken. As before,
-> >>>>> VFs may exist without a corresponding PF, although now only with
-> >>>>> pdev->broken = true.
-> >>>>>
-> >>>>> The hardware domain is expected to remove the associated VFs before
-> >>>>> removing the PF. Print a warning in case a PF is removed with associated
-> >>>>> VFs still present.
-> >>>>>
-> >>>>> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
-> >>>>> ---
-> >>>>> Candidate for backport to 4.19 (the next patch depends on this one)
-> >>>>>
-> >>>>> v5->v6:
-> >>>>> * move printk() before ASSERT_UNREACHABLE()
-> >>>>> * warn about PF removal with VFs still present
-> >>>>
-> >>>> Hmm, maybe I didn't make this clear enough when commenting on v5: I wasn't
-> >>>> just after an adjustment to the commit message. I'm instead actively
-> >>>> concerned of the resulting behavior. Question is whether we can reasonably
-> >>>> do something about that.
-> >>>
-> >>> Right. My suggestion then is to go back to roughly how it was done in
-> >>> v4 [0]:
-> >>>
-> >>> * Remove the VFs right away during PF removal, so that we don't end up
-> >>> with stale VFs. Regarding XSM, assume that a domain with permission to
-> >>> remove the PF is also allowed to remove the VFs. We should probably also
-> >>> return an error from pci_remove_device in the case of removing the PF
-> >>> with VFs still present (and still perform the removals despite returning
-> >>> an error). Subsequent attempts by a domain to remove the VFs would
-> >>> return an error (as they have already been removed), but that's expected
-> >>> since we've taken a stance that PF-then-VF removal order is invalid
-> >>> anyway.
-> >>
-> >> Imo going back is not an option.
-> >>
-> >>> While the above is what I prefer, I just want to mention other options I
-> >>> considered for the scenario of PF removal with VFs still present:
-> >>>
-> >>> * Increase the "scariness" of the warning message added in v6.
-> >>>
-> >>> * Return an error from pci_remove_device (while still removing only the
-> >>> PF). We would be left with stale VFs in Xen. At least this would
-> >>> concretely inform dom0 that Xen takes issue with the PF-then-VF removal
-> >>> order. Subsequent attempts by a domain to remove VFs, however
-> >>> (un)likely, would succeed.
-> >>
-> >> Returning an error in such a case is a possibility, but comes with the
-> >> risk of confusion. Seeing such an error, a caller may itself assume the
-> >> device still is there, and retry its (with or without having removed the
-> >> VFs) removal at a later point.
-> >>
-> >>> * Return an error from pci_remove_device and keep the PF and VFs. This
-> >>> is IMO the worst option because then we would have a stale PF in
-> >>> addition to stale VFs.
+On Fri, Nov 8, 2024 at 2:53=E2=80=AFPM Andrew Cooper <andrew.cooper3@citrix=
+.com> wrote:
+>
+> ... and document them too.
+>
+> No functional change.
+>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: Jan Beulich <JBeulich@suse.com>
+> CC: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> CC: Frediano Ziglio <frediano.ziglio@cloud.com>
+> CC: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+>
+> v2:
+>  * Rebase
+>
+> video.h, edd.h and e820.h also contain trampoline symbols, but they're pr=
+etty
+> well contained headers already.
+>
+> kbd_shift_flags seems especially dubious.  It's a snapshot of the keyboar=
+d
+> state when Xen happened to pass through the trampoline, and surely cannot=
+ be
+> useful for dom0 in the slightest...
 
-I'm thinking probably this is the least bad option, and just force the
-owner of the PF to ensure there are no VFs left when removing the PF.
+I suppose an OT comment here.
+It's just passed as a firmware information back to dom0.
+It's used by the Linux kernel. See for instance
+https://gfiber.googlesource.com/kernel/bruno/+/801f6772cecea6cfc7da61aa1977=
+16ab64db5f9e/arch/x86/xen/enlighten.c.
 
-What sense does it make anyway to allow removing a PF with VFs still
-present?  Not sure exactly what the owner of the PF will do before
-calling pci_remove_device(), but it would seem to me the device should
-be ready for unplug (so SR-IOV disabled).  Calling pci_remove_device()
-with VFs still active points to an error to do proper cleanup by the
-owner of the PF.
+> ---
+>  xen/arch/x86/include/asm/processor.h  |  2 --
+>  xen/arch/x86/include/asm/setup.h      |  2 --
+>  xen/arch/x86/include/asm/trampoline.h | 15 +++++++++++++++
+>  3 files changed, 15 insertions(+), 4 deletions(-)
+>
+> diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/=
+asm/processor.h
+> index 26e2fb13699a..877651212273 100644
+> --- a/xen/arch/x86/include/asm/processor.h
+> +++ b/xen/arch/x86/include/asm/processor.h
+> @@ -96,8 +96,6 @@ extern void ctxt_switch_levelling(const struct vcpu *ne=
+xt);
+>  extern void (*ctxt_switch_masking)(const struct vcpu *next);
+>
+>  extern bool opt_cpu_info;
+> -extern u32 trampoline_efer;
+> -extern u64 trampoline_misc_enable_off;
+>
+>  /* Maximum width of physical addresses supported by the hardware. */
+>  extern unsigned int paddr_bits;
+> diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/=
+setup.h
+> index d7ed4f40024c..25c15ef9140d 100644
+> --- a/xen/arch/x86/include/asm/setup.h
+> +++ b/xen/arch/x86/include/asm/setup.h
+> @@ -48,8 +48,6 @@ int remove_xen_ranges(struct rangeset *r);
+>
+>  int cf_check stub_selftest(void);
+>
+> -extern uint8_t kbd_shift_flags;
+> -
+>  #ifdef NDEBUG
+>  # define highmem_start 0
+>  #else
+> diff --git a/xen/arch/x86/include/asm/trampoline.h b/xen/arch/x86/include=
+/asm/trampoline.h
+> index 57a1f85a539e..838c2f0b6fcd 100644
+> --- a/xen/arch/x86/include/asm/trampoline.h
+> +++ b/xen/arch/x86/include/asm/trampoline.h
+> @@ -85,9 +85,24 @@ extern uint32_t trampoline_xen_phys_start;
+>  /* A semaphore to indicate signs-of-life at the start of the AP boot pat=
+h. */
+>  extern uint8_t trampoline_cpu_started;
+>
+> +/*
+> + * Extra MSR_EFER settings when activating Long Mode.  EFER_NXE is neces=
+sary
+> + * for APs to boot if the BSP found and activated support.
+> + */
+> +extern uint32_t trampoline_efer;
+> +
+> +/*
+> + * When nonzero, clear the specified bits in MSR_MISC_ENABLE.  This is
+> + * necessary to clobber XD_DISABLE before trying to set MSR_EFER.NXE.
+> + */
+> +extern uint64_t trampoline_misc_enable_off;
+> +
+>  /* Quirks about video mode-setting on S3 resume. */
+>  extern uint8_t video_flags;
+>
+> +/* BIOS Int 16h, Fn 02h.  The keyboard shift status. */
+> +extern uint8_t kbd_shift_flags;
+> +
+>  /* Extended Display Identification Data, gathered from the BIOS. */
+>  extern uint16_t boot_edid_caps;
+>  extern uint8_t boot_edid_info[128];
+>
+> base-commit: 75035c386eeb8bd5dbed1831dbb96a35b31521f6
 
-Returning error from pci_remove_device() and doing nothing would seem
-fine to me.  There should be no stale PF or VFs in that case, as the
-caller has been notified the device has failed to be removed, so
-should treat the device as still present.
+Reviewed-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 
-Thanks. Roger.
+Frediano
 
