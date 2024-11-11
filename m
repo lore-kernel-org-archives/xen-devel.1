@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C59D2E9ED
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Nov 2024 13:12:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.833737.1249007 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F45BD2E9E6
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Nov 2024 13:12:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.833732.1248958 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUDJ-0001UW-Ko; Mon, 11 Nov 2024 13:12:17 +0000
+	id 1tAUDE-00007f-N4; Mon, 11 Nov 2024 13:12:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 833737.1249007; Mon, 11 Nov 2024 13:12:17 +0000
+Received: by outflank-mailman (output) from mailman id 833732.1248958; Mon, 11 Nov 2024 13:12:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUDJ-0001TF-Dw; Mon, 11 Nov 2024 13:12:17 +0000
-Received: by outflank-mailman (input) for mailman id 833737;
- Mon, 11 Nov 2024 13:12:15 +0000
+	id 1tAUDE-00007W-Ij; Mon, 11 Nov 2024 13:12:12 +0000
+Received: by outflank-mailman (input) for mailman id 833732;
+ Mon, 11 Nov 2024 13:12:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=//j0=SG=amazon.co.uk=prvs=038d26d0c=eliasely@srs-se1.protection.inumbo.net>)
- id 1tAUDH-0007pD-Tf
- for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:12:15 +0000
-Received: from smtp-fw-33001.amazon.com (smtp-fw-33001.amazon.com
- [207.171.190.10]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 90309600-a02e-11ef-99a3-01e77a169b0f;
- Mon, 11 Nov 2024 14:12:12 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.25.36.210])
- by smtp-border-fw-33001.sea14.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2024 13:12:01 +0000
-Received: from EX19MTAUEA002.ant.amazon.com [10.0.29.78:8022]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.2.148:2525]
+ id 1tAUDD-0007pD-8y
+ for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:12:11 +0000
+Received: from smtp-fw-6002.amazon.com (smtp-fw-6002.amazon.com [52.95.49.90])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8cff79c6-a02e-11ef-99a3-01e77a169b0f;
+ Mon, 11 Nov 2024 14:12:07 +0100 (CET)
+Received: from iad6-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.124.125.6])
+ by smtp-border-fw-6002.iad6.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2024 13:12:04 +0000
+Received: from EX19MTAUEB002.ant.amazon.com [10.0.0.204:33875]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.48.172:2525]
  with esmtp (Farcaster)
- id dff3dd00-8cd9-4bb9-b6ef-ebfce155ae6f; Mon, 11 Nov 2024 13:12:00 +0000 (UTC)
-Received: from EX19D008UEC002.ant.amazon.com (10.252.135.242) by
- EX19MTAUEA002.ant.amazon.com (10.252.134.9) with Microsoft SMTP Server
+ id 8b24fb90-c20d-42da-9514-cb3d2facd874; Mon, 11 Nov 2024 13:12:04 +0000 (UTC)
+Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
+ EX19MTAUEB002.ant.amazon.com (10.252.135.47) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:00 +0000
-Received: from EX19MTAUWA002.ant.amazon.com (10.250.64.202) by
- EX19D008UEC002.ant.amazon.com (10.252.135.242) with Microsoft SMTP Server
+ Mon, 11 Nov 2024 13:12:03 +0000
+Received: from EX19MTAUEA001.ant.amazon.com (10.252.134.203) by
+ EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:00 +0000
+ Mon, 11 Nov 2024 13:12:03 +0000
 Received: from email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com
- (10.25.36.210) by mail-relay.amazon.com (10.250.64.203) with Microsoft SMTP
+ (10.124.125.2) by mail-relay.amazon.com (10.252.134.102) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id
- 15.2.1258.34 via Frontend Transport; Mon, 11 Nov 2024 13:11:59 +0000
+ 15.2.1258.34 via Frontend Transport; Mon, 11 Nov 2024 13:12:03 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com [10.253.91.118])
  by email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com (Postfix) with
- ESMTPS id D055E42133; Mon, 11 Nov 2024 13:11:58 +0000 (UTC)
+ ESMTPS id B071742133; Mon, 11 Nov 2024 13:12:01 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,30 +62,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90309600-a02e-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjIwNy4xNzEuMTkwLjEwIiwiaGVsbyI6InNtdHAtZnctMzMwMDEuYW1hem9uLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjkwMzA5NjAwLWEwMmUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMzMwNzMyLjY1NDY0LCJzZW5kZXIiOiJwcnZzPTAzOGQyNmQwYz1lbGlhc2VseUBhbWF6b24uY28udWsiLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 8cff79c6-a02e-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjUyLjk1LjQ5LjkwIiwiaGVsbyI6InNtdHAtZnctNjAwMi5hbWF6b24uY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjhjZmY3OWM2LWEwMmUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMzMwNzI3Ljc1MTMwNiwic2VuZGVyIjoicHJ2cz0wMzhkMjZkMGM9ZWxpYXNlbHlAYW1hem9uLmNvLnVrIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1731330732; x=1762866732;
+  t=1731330727; x=1762866727;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/tLv/Mj9rM9rSMwdem6Juel9nD8vKLvFdLzTdroDEjo=;
-  b=pwIeb0jmMmYs967RITA9UYTZS8YR5ZZzdtWgUSTsg2t3OTscoY497a5+
-   QeAXpETKvR8+WBYG4H6R2NtBHG71pzofKyLk1z7/YY7JQTZx7lKmlIJPh
-   jc6CDAJLn7gb9QMEBV7N19oT6LjSfBuvl1DLj99mF4CUYiKEfe6gukCqW
-   M=;
+  bh=NWIwGRJXlVDN14kBG5n0Ww+/BOM/U6VioMpFX1uyIRk=;
+  b=D+wQ+XgGkxYROZyzWsoJ7s28Cb8xHF0j+4l6CSfk4NT5dCJO5h2UHF5C
+   5ODMQl/Be6MqNgzR6n/fkXYM0r5MeBvA8zGdcFSC7+8wU8wh+4j9kXgi5
+   tq3oKfDJGc47LrEW00IRB9cLm5AhhfbMjxq9SDxape8fX+jqKVDPO1fnu
+   E=;
 X-IronPort-AV: E=Sophos;i="6.12,145,1728950400"; 
-   d="scan'208";a="384186349"
-X-Farcaster-Flow-ID: dff3dd00-8cd9-4bb9-b6ef-ebfce155ae6f
+   d="scan'208";a="447823622"
+X-Farcaster-Flow-ID: 8b24fb90-c20d-42da-9514-cb3d2facd874
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
 	<hongyxia@amazon.com>, Julien Grall <jgrall@amazon.com>, Elias El Yandouzi
 	<eliasely@amazon.com>
-Subject: [PATCH V4 03/15] x86/pv: Rewrite how building PV dom0 handles domheap mappings
-Date: Mon, 11 Nov 2024 13:11:36 +0000
-Message-ID: <20241111131148.52568-4-eliasely@amazon.com>
+Subject: [PATCH V4 05/15] x86: Add a boot option to enable and disable the direct map
+Date: Mon, 11 Nov 2024 13:11:38 +0000
+Message-ID: <20241111131148.52568-6-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20241111131148.52568-1-eliasely@amazon.com>
 References: <20241111131148.52568-1-eliasely@amazon.com>
@@ -95,8 +95,11 @@ Content-Type: text/plain
 
 From: Hongyan Xia <hongyxia@amazon.com>
 
-Building a PV dom0 is allocating from the domheap but uses it like the
-xenheap. Use the pages as they should be.
+This is added as a Kconfig option as well as a boot command line option.
+While being generic, the Kconfig option is only usable for x86 at the moment.
+
+Note that there remains some users of the directmap at this point. The option
+is introduced now as it will be needed in follow-up patches.
 
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
@@ -104,166 +107,162 @@ Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
 ----
     Changes in V4:
-        * Reduce the scope of l{1,2,4}start_mfn variables
-        * Make the macro `UNMAP_MAP_AND_ADVANCE` return the new virtual address
-
-    Changes in V3:
-        * Fold following patch 'x86/pv: Map L4 page table for shim domain'
+        * Rename the Kconfig options
+        * Set opt_directmap to true if CONFIG_HAS_ONDEMAND_DIRECTMAP is not enabled
 
     Changes in V2:
-        * Clarify the commit message
-        * Break the patch in two parts
+        * Introduce a Kconfig option
+        * Reword the commit message
+        * Make opt_directmap and helper generic
 
     Changes since Hongyan's version:
-        * Rebase
-        * Remove spurious newline
+        * Reword the commit message
+        * opt_directmap is only modified during boot so mark it as
+          __ro_after_init
 
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 18b7a3e4e025..b03df609cadb 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -382,6 +382,7 @@ static int __init dom0_construct(struct domain *d,
-     l3_pgentry_t *l3tab = NULL, *l3start = NULL;
-     l2_pgentry_t *l2tab = NULL, *l2start = NULL;
-     l1_pgentry_t *l1tab = NULL, *l1start = NULL;
-+    mfn_t l3start_mfn = INVALID_MFN;
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 293dbc1a957b..10b0b2714661 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -799,6 +799,18 @@ that enabling this option cannot guarantee anything beyond what underlying
+ hardware guarantees (with, where available and known to Xen, respective
+ tweaks applied).
  
++### directmap (x86)
++> `= <boolean>`
++
++> Default: `true`
++
++Enable or disable fully populating the directmap region in Xen.
++
++By default, Xen creates the directmap region which maps all physical memory
++in that region. Disabling this option will sparsely populate the directmap,
++blocking exploits that leak secrets via speculative memory access in the
++directmap.
++
+ ### dma_bits
+ > `= <integer>`
+ 
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 9cdd04721afa..55f1e8702ab9 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -23,6 +23,7 @@ config X86
+ 	select HAS_IOPORTS
+ 	select HAS_KEXEC
+ 	select HAS_NS16550
++	select HAS_ONDEMAND_DIRECTMAP
+ 	select HAS_PASSTHROUGH
+ 	select HAS_PCI
+ 	select HAS_PCI_MSI
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 71a29b2cb3af..d3936bd173fa 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -620,11 +620,17 @@ void write_32bit_pse_identmap(uint32_t *l2);
+ /*
+  * x86 maps part of physical memory via the directmap region.
+  * Return whether the range of MFN falls in the directmap region.
++ *
++ * When boot command line sets directmap=no, the directmap will mostly be empty
++ * so this will always return false.
+  */
+ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+ {
+     unsigned long eva = min(DIRECTMAP_VIRT_END, HYPERVISOR_VIRT_END);
+ 
++    if ( !has_directmap() )
++        return false;
++
+     return (mfn + nr) <= (virt_to_mfn(eva - 1) + 1);
+ }
+ 
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 177f4024abca..a3c21ca05099 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1586,6 +1586,8 @@ void asmlinkage __init noreturn __start_xen(void)
+     if ( highmem_start )
+         xenheap_max_mfn(PFN_DOWN(highmem_start - 1));
+ 
++    printk("Booting with directmap %s\n", has_directmap() ? "full" : "on demand");
++
      /*
-      * This fully describes the memory layout of the initial domain. All
-@@ -719,22 +720,34 @@ static int __init dom0_construct(struct domain *d,
-         v->arch.pv.event_callback_cs    = FLAT_COMPAT_KERNEL_CS;
-     }
+      * Walk every RAM region and map it in its entirety (on x86/64, at least)
+      * and notify it to the boot allocator.
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 90268d92499a..72094c491756 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -71,6 +71,9 @@ config HAS_IOPORTS
+ config HAS_KEXEC
+ 	bool
  
-+#define UNMAP_MAP_AND_ADVANCE(mfn_var, virt_var, maddr) ({  \
-+    do {                                                    \
-+        unmap_domain_page(virt_var);                        \
-+        mfn_var = maddr_to_mfn(maddr);                      \
-+        maddr += PAGE_SIZE;                                 \
-+        virt_var = map_domain_page(mfn_var);                \
-+    } while ( false );                                      \
-+    virt_var;                                               \
-+})
++config HAS_ONDEMAND_DIRECTMAP
++	bool
 +
-     if ( !compat )
-     {
-+        mfn_t l4start_mfn;
-         maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l4_page_table;
--        l4start = l4tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+        l4tab = UNMAP_MAP_AND_ADVANCE(l4start_mfn, l4start, mpt_alloc);
-         clear_page(l4tab);
--        init_xen_l4_slots(l4tab, _mfn(virt_to_mfn(l4start)),
--                          d, INVALID_MFN, true);
--        v->arch.guest_table = pagetable_from_paddr(__pa(l4start));
-+        init_xen_l4_slots(l4tab, l4start_mfn, d, INVALID_MFN, true);
-+        v->arch.guest_table = pagetable_from_mfn(l4start_mfn);
-     }
-     else
-     {
-         /* Monitor table already created by switch_compat(). */
--        l4start = l4tab = __va(pagetable_get_paddr(v->arch.guest_table));
-+        mfn_t l4start_mfn = pagetable_get_mfn(v->arch.guest_table);
-+        l4start = l4tab = map_domain_page(l4start_mfn);
-         /* See public/xen.h on why the following is needed. */
-         maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l3_page_table;
-         l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+        UNMAP_MAP_AND_ADVANCE(l3start_mfn, l3start, mpt_alloc);
-     }
+ config HAS_PIRQ
+ 	bool
  
-     l4tab += l4_table_offset(v_start);
-@@ -743,15 +756,17 @@ static int __init dom0_construct(struct domain *d,
-     {
-         if ( !((unsigned long)l1tab & (PAGE_SIZE-1)) )
-         {
-+            mfn_t l1start_mfn;
-             maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l1_page_table;
--            l1start = l1tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+            l1tab = UNMAP_MAP_AND_ADVANCE(l1start_mfn, l1start, mpt_alloc);
-             clear_page(l1tab);
-             if ( count == 0 )
-                 l1tab += l1_table_offset(v_start);
-             if ( !((unsigned long)l2tab & (PAGE_SIZE-1)) )
-             {
-+                mfn_t l2start_mfn;
-                 maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l2_page_table;
--                l2start = l2tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+                l2tab = UNMAP_MAP_AND_ADVANCE(l2start_mfn, l2start, mpt_alloc);
-                 clear_page(l2tab);
-                 if ( count == 0 )
-                     l2tab += l2_table_offset(v_start);
-@@ -761,19 +776,19 @@ static int __init dom0_construct(struct domain *d,
-                     {
-                         maddr_to_page(mpt_alloc)->u.inuse.type_info =
-                             PGT_l3_page_table;
--                        l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+                        UNMAP_MAP_AND_ADVANCE(l3start_mfn, l3start, mpt_alloc);
-                     }
-                     l3tab = l3start;
-                     clear_page(l3tab);
-                     if ( count == 0 )
-                         l3tab += l3_table_offset(v_start);
--                    *l4tab = l4e_from_paddr(__pa(l3start), L4_PROT);
-+                    *l4tab = l4e_from_mfn(l3start_mfn, L4_PROT);
-                     l4tab++;
-                 }
--                *l3tab = l3e_from_paddr(__pa(l2start), L3_PROT);
-+                *l3tab = l3e_from_mfn(l2start_mfn, L3_PROT);
-                 l3tab++;
-             }
--            *l2tab = l2e_from_paddr(__pa(l1start), L2_PROT);
-+            *l2tab = l2e_from_mfn(l1start_mfn, L2_PROT);
-             l2tab++;
-         }
-         if ( count < initrd_pfn || count >= initrd_pfn + PFN_UP(initrd_len) )
-@@ -792,27 +807,32 @@ static int __init dom0_construct(struct domain *d,
+@@ -415,6 +418,20 @@ source "common/sched/Kconfig"
+ config CRYPTO
+ 	bool
  
-     if ( compat )
-     {
--        l2_pgentry_t *l2t;
--
-         /* Ensure the first four L3 entries are all populated. */
-         for ( i = 0, l3tab = l3start; i < 4; ++i, ++l3tab )
-         {
-             if ( !l3e_get_intpte(*l3tab) )
-             {
-+                mfn_t l2start_mfn;
-                 maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l2_page_table;
--                l2tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
--                clear_page(l2tab);
--                *l3tab = l3e_from_paddr(__pa(l2tab), L3_PROT);
-+                UNMAP_MAP_AND_ADVANCE(l2start_mfn, l2start, mpt_alloc);
-+                clear_page(l2start);
-+                *l3tab = l3e_from_mfn(l2start_mfn, L3_PROT);
-             }
-             if ( i == 3 )
-                 l3e_get_page(*l3tab)->u.inuse.type_info |= PGT_pae_xen_l2;
-         }
- 
--        l2t = map_l2t_from_l3e(l3start[3]);
--        init_xen_pae_l2_slots(l2t, d);
--        unmap_domain_page(l2t);
-+        UNMAP_DOMAIN_PAGE(l2start);
-+        l2start = map_l2t_from_l3e(l3start[3]);
-+        init_xen_pae_l2_slots(l2start, d);
-     }
- 
-+#undef UNMAP_MAP_AND_ADVANCE
++config ONDEMAND_DIRECTMAP
++    bool "On-Demand Directmap"
++    depends on HAS_ONDEMAND_DIRECTMAP
++    help
++		The directmap contains mapping for most of the RAM, making domain
++		memory easily accessible. While this can improve performance, it also
++		increases the vulnerability to speculation attacks.
 +
-+    UNMAP_DOMAIN_PAGE(l1start);
-+    UNMAP_DOMAIN_PAGE(l2start);
-+    UNMAP_DOMAIN_PAGE(l3start);
++		Enabling this feature allows the user to control whether the memory
++		is always mapped at boot or mapped only on demand (see the command line
++		option "directmap").
 +
-     /* Pages that are part of page tables must be read only. */
-     mark_pv_pt_pages_rdonly(d, l4start, vpt_start, nr_pt_pages, &flush_flags);
- 
-@@ -987,6 +1007,8 @@ static int __init dom0_construct(struct domain *d,
-         pv_shim_setup_dom(d, l4start, v_start, vxenstore_start, vconsole_start,
-                           vphysmap_start, si);
- 
-+    UNMAP_DOMAIN_PAGE(l4start);
++		If unsure, say N.
 +
- #ifdef CONFIG_COMPAT
-     if ( compat )
-         xlat_start_info(si, pv_shim ? XLAT_start_info_console_domU
+ config LIVEPATCH
+ 	bool "Live patching support"
+ 	default X86
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 33c8c917d984..b0be246780b7 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -175,6 +175,11 @@ paddr_t __ro_after_init mem_hotplug;
+ static char __initdata opt_badpage[100] = "";
+ string_param("badpage", opt_badpage);
+ 
++#ifdef CONFIG_HAS_ONDEMAND_DIRECTMAP
++bool __ro_after_init opt_directmap = true;
++boolean_param("directmap", opt_directmap);
++#endif
++
+ /*
+  * no-bootscrub -> Free pages are not zeroed during boot.
+  */
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 7561297a7553..9e3c9f3b6dfa 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -167,6 +167,17 @@ extern unsigned long max_page;
+ extern unsigned long total_pages;
+ extern paddr_t mem_hotplug;
+ 
++#ifdef CONFIG_HAS_ONDEMAND_DIRECTMAP
++    extern bool opt_directmap;
++#else
++    #define opt_directmap true
++#endif
++
++static inline bool has_directmap(void)
++{
++    return !IS_ENABLED(CONFIG_HAS_ONDEMAND_DIRECTMAP) || opt_directmap;
++}
++
+ /*
+  * Extra fault info types which are used to further describe
+  * the source of an access violation.
 -- 
 2.40.1
 
