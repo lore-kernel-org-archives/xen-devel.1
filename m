@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B18D2E9E7
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Nov 2024 13:12:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.833748.1249063 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF5BD2E9E6
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Nov 2024 13:12:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.833746.1249055 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUDS-0003Jc-39; Mon, 11 Nov 2024 13:12:26 +0000
+	id 1tAUDQ-0002v7-JD; Mon, 11 Nov 2024 13:12:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 833748.1249063; Mon, 11 Nov 2024 13:12:26 +0000
+Received: by outflank-mailman (output) from mailman id 833746.1249055; Mon, 11 Nov 2024 13:12:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUDR-0003Ha-Oc; Mon, 11 Nov 2024 13:12:25 +0000
-Received: by outflank-mailman (input) for mailman id 833748;
- Mon, 11 Nov 2024 13:12:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tAUDQ-0002tk-2s; Mon, 11 Nov 2024 13:12:24 +0000
+Received: by outflank-mailman (input) for mailman id 833746;
+ Mon, 11 Nov 2024 13:12:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=//j0=SG=amazon.co.uk=prvs=038d26d0c=eliasely@srs-se1.protection.inumbo.net>)
- id 1tAUDQ-0008Hn-Md
- for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:12:24 +0000
-Received: from smtp-fw-2101.amazon.com (smtp-fw-2101.amazon.com [72.21.196.25])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 95deb6a8-a02e-11ef-a0c6-8be0dac302b0;
- Mon, 11 Nov 2024 14:12:22 +0100 (CET)
-Received: from iad6-co-svc-p1-lb1-vlan3.amazon.com (HELO
- smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.124.125.6])
- by smtp-border-fw-2101.iad2.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2024 13:12:20 +0000
-Received: from EX19MTAUEC001.ant.amazon.com [10.0.44.209:10517]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.48.172:2525]
+ id 1tAUDO-0007pD-NL
+ for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:12:22 +0000
+Received: from smtp-fw-80007.amazon.com (smtp-fw-80007.amazon.com
+ [99.78.197.218]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 939511ca-a02e-11ef-99a3-01e77a169b0f;
+ Mon, 11 Nov 2024 14:12:19 +0100 (CET)
+Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
+ smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.25.36.210])
+ by smtp-border-fw-80007.pdx80.corp.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2024 13:12:16 +0000
+Received: from EX19MTAUEA001.ant.amazon.com [10.0.44.209:40485]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.25.25:2525]
  with esmtp (Farcaster)
- id 804aad27-cab7-4eac-9bdb-4779792ac1c9; Mon, 11 Nov 2024 13:12:19 +0000 (UTC)
-Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
- EX19MTAUEC001.ant.amazon.com (10.252.135.222) with Microsoft SMTP Server
+ id 97ed0e1a-4327-40d7-bc26-7f3f8399d6bf; Mon, 11 Nov 2024 13:12:15 +0000 (UTC)
+Received: from EX19D008UEC002.ant.amazon.com (10.252.135.242) by
+ EX19MTAUEA001.ant.amazon.com (10.252.134.203) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:12 +0000
-Received: from EX19MTAUEB002.ant.amazon.com (10.252.135.47) by
- EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
+ Mon, 11 Nov 2024 13:12:15 +0000
+Received: from EX19MTAUWA002.ant.amazon.com (10.250.64.202) by
+ EX19D008UEC002.ant.amazon.com (10.252.135.242) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:12 +0000
+ Mon, 11 Nov 2024 13:12:15 +0000
 Received: from email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com
- (10.124.125.2) by mail-relay.amazon.com (10.252.135.97) with Microsoft SMTP
+ (10.25.36.210) by mail-relay.amazon.com (10.250.64.203) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id
- 15.2.1258.34 via Frontend Transport; Mon, 11 Nov 2024 13:12:12 +0000
+ 15.2.1258.34 via Frontend Transport; Mon, 11 Nov 2024 13:12:15 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com [10.253.91.118])
  by email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com (Postfix) with
- ESMTPS id A8FE142135; Mon, 11 Nov 2024 13:12:10 +0000 (UTC)
+ ESMTPS id 447F942116; Mon, 11 Nov 2024 13:12:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,29 +62,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95deb6a8-a02e-11ef-a0c6-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjcyLjIxLjE5Ni4yNSIsImhlbG8iOiJzbXRwLWZ3LTIxMDEuYW1hem9uLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6Ijk1ZGViNmE4LWEwMmUtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxMzMwNzQyLjY1NzIyNCwic2VuZGVyIjoicHJ2cz0wMzhkMjZkMGM9ZWxpYXNlbHlAYW1hem9uLmNvLnVrIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 939511ca-a02e-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6Ijk5Ljc4LjE5Ny4yMTgiLCJoZWxvIjoic210cC1mdy04MDAwNy5hbWF6b24uY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjkzOTUxMWNhLWEwMmUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMzMwNzM5LjYyODcxMSwic2VuZGVyIjoicHJ2cz0wMzhkMjZkMGM9ZWxpYXNlbHlAYW1hem9uLmNvLnVrIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1731330743; x=1762866743;
+  t=1731330739; x=1762866739;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=t/Di9+ifphdv1CaRTq5b3lwW03qipQ4WvhcCEQKzEXA=;
-  b=TOVBV7MnznI4AaX8UADInVJln1hio2ycN2dwbSpHqXnW8RSGEVpTVGbb
-   clSb/vlxqQwb8tqZzogHBfjl3DAKkAIPMSFmf/rHGPhaKuAm3tWUIBz9I
-   uBrnCsIakZ5wbU2LZtFMH0UZ7XP3VRqjTmzOyB2AULFURGpwW6+y6x2E3
-   Q=;
+  bh=mafc3TENeclkrMcyk4CrldzkIWqGpdnNkd3t+61vW/E=;
+  b=GKnC4EPCipWpeBfG0JvFxOXfQAf0xaeRxkExpE5qzzP9LbV0R1BjU6kI
+   MV9RJbuCPobmMSh2AyEtLRA23hit1G1OpwzOuNGvm0isUfxOB8RpuEsrB
+   kXitmQYSIeiVs1ihl/PX+xUj7749CPcvEp2GY/iR0MqzRIwwi99x95CmC
+   g=;
 X-IronPort-AV: E=Sophos;i="6.12,145,1728950400"; 
-   d="scan'208";a="441710997"
-X-Farcaster-Flow-ID: 804aad27-cab7-4eac-9bdb-4779792ac1c9
+   d="scan'208";a="351236520"
+X-Farcaster-Flow-ID: 97ed0e1a-4327-40d7-bc26-7f3f8399d6bf
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Julien Grall
 	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
-Subject: [PATCH V4 12/15] xen/arm32: mm: Rename 'first' to 'root' in init_secondary_pagetables()
-Date: Mon, 11 Nov 2024 13:11:45 +0000
-Message-ID: <20241111131148.52568-13-eliasely@amazon.com>
+Subject: [PATCH V4 15/15] xen/arm64: Allow the admin to enable/disable the directmap
+Date: Mon, 11 Nov 2024 13:11:48 +0000
+Message-ID: <20241111131148.52568-16-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20241111131148.52568-1-eliasely@amazon.com>
 References: <20241111131148.52568-1-eliasely@amazon.com>
@@ -94,64 +94,149 @@ Content-Type: text/plain
 
 From: Julien Grall <jgrall@amazon.com>
 
-The arm32 version of init_secondary_pagetables() will soon be re-used
-for arm64 as well where the root table starts at level 0 rather than level 1.
+Implement the same command line option as x86 to enable/disable the
+directmap. By default this is kept enabled.
 
-So rename 'first' to 'root'.
+Also modify setup_directmap_mappings() to populate the L0 entries
+related to the directmap area.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
 ----
 
-    Changelog in v2:
-        * Rebase
-        * Fix typo
+    Changes in v2:
+        * Rely on the Kconfig option to enable Secret Hiding on Arm64
+        * Use generic helper instead of arch_has_directmap()
 
-diff --git a/xen/arch/arm/mmu/smpboot.c b/xen/arch/arm/mmu/smpboot.c
-index 4ffc8254a44b..37e91d72b785 100644
---- a/xen/arch/arm/mmu/smpboot.c
-+++ b/xen/arch/arm/mmu/smpboot.c
-@@ -109,32 +109,30 @@ int prepare_secondary_mm(int cpu)
- #else
- int prepare_secondary_mm(int cpu)
- {
--    lpae_t *first;
-+    lpae_t *root = alloc_xenheap_page();
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 10b0b2714661..c238b866061f 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -799,7 +799,7 @@ that enabling this option cannot guarantee anything beyond what underlying
+ hardware guarantees (with, where available and known to Xen, respective
+ tweaks applied).
  
--    first = alloc_xenheap_page(); /* root == first level on 32-bit 3-level trie */
--
--    if ( !first )
-+    if ( !root )
-     {
--        printk("CPU%u: Unable to allocate the first page-table\n", cpu);
-+        printk("CPU%u: Unable to allocate the root page-table\n", cpu);
-         return -ENOMEM;
-     }
+-### directmap (x86)
++### directmap (arm64, x86)
+ > `= <boolean>`
  
-     /* Initialise root pagetable from root of boot tables */
--    memcpy(first, per_cpu(xen_pgtable, 0), PAGE_SIZE);
--    per_cpu(xen_pgtable, cpu) = first;
-+    memcpy(root, per_cpu(xen_pgtable, 0), PAGE_SIZE);
-+    per_cpu(xen_pgtable, cpu) = root;
+ > Default: `true`
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index aa9e4c381c55..390fe3dd9ebf 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -7,6 +7,7 @@ config ARM_64
+ 	depends on !ARM_32
+ 	select 64BIT
+ 	select HAS_FAST_MULTIPLY
++	select HAS_SECRET_HIDING
  
-     if ( !init_domheap_mappings(cpu) )
-     {
-         printk("CPU%u: Unable to prepare the domheap page-tables\n", cpu);
-         per_cpu(xen_pgtable, cpu) = NULL;
--        free_xenheap_page(first);
-+        free_xenheap_page(root);
-         return -ENOMEM;
-     }
- 
-     clear_boot_pagetables();
- 
-     /* Set init_ttbr for this CPU coming up */
--    set_init_ttbr(first);
-+    set_init_ttbr(root);
- 
-     return 0;
+ config ARM
+ 	def_bool y
+diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
+index d7cb3ad2da80..320e9efde93e 100644
+--- a/xen/arch/arm/arm64/mmu/mm.c
++++ b/xen/arch/arm/arm64/mmu/mm.c
+@@ -170,16 +170,27 @@ void __init switch_ttbr(uint64_t ttbr)
+     update_identity_mapping(false);
  }
+ 
+-/* Map the region in the directmap area. */
++/*
++ * This either populate a valid fdirect map, or allocates empty L1 tables
++ * and creates the L0 entries for the given region in the direct map
++ * depending on has_directmap().
++ *
++ * When directmap=no, we still need to populate empty L1 tables in the
++ * directmap region. The reason is that the root page-table (i.e. L0)
++ * is per-CPU and secondary CPUs will initialize their root page-table
++ * based on the pCPU0 one. So L0 entries will be shared if they are
++ * pre-populated. We also rely on the fact that L1 tables are never
++ * freed.
++ */
+ static void __init setup_directmap_mappings(unsigned long base_mfn,
+                                             unsigned long nr_mfns)
+ {
++    unsigned long mfn_gb = base_mfn & ~((FIRST_SIZE >> PAGE_SHIFT) - 1);
+     int rc;
+ 
+     /* First call sets the directmap physical and virtual offset. */
+     if ( mfn_eq(directmap_mfn_start, INVALID_MFN) )
+     {
+-        unsigned long mfn_gb = base_mfn & ~((FIRST_SIZE >> PAGE_SHIFT) - 1);
+ 
+         directmap_mfn_start = _mfn(base_mfn);
+         directmap_base_pdx = mfn_to_pdx(_mfn(base_mfn));
+@@ -200,6 +211,24 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
+         panic("cannot add directmap mapping at %lx below heap start %lx\n",
+               base_mfn, mfn_x(directmap_mfn_start));
+ 
++    if ( !has_directmap() )
++    {
++        vaddr_t vaddr = (vaddr_t)__mfn_to_virt(base_mfn);
++        lpae_t *root = this_cpu(xen_pgtable);
++        unsigned int i, slot;
++
++        slot = first_table_offset(vaddr);
++        nr_mfns += base_mfn - mfn_gb;
++        for ( i = 0; i < nr_mfns; i += BIT(XEN_PT_LEVEL_ORDER(0), UL), slot++ )
++        {
++            lpae_t *entry = &root[slot];
++
++            if ( !lpae_is_valid(*entry) && !create_xen_table(entry) )
++                panic("Unable to populate zeroeth slot %u\n", slot);
++        }
++        return;
++    }
++
+     rc = map_pages_to_xen((vaddr_t)__mfn_to_virt(base_mfn),
+                           _mfn(base_mfn), nr_mfns,
+                           PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
+diff --git a/xen/arch/arm/include/asm/arm64/mm.h b/xen/arch/arm/include/asm/arm64/mm.h
+index b4f7545d2c87..2b1140a6b994 100644
+--- a/xen/arch/arm/include/asm/arm64/mm.h
++++ b/xen/arch/arm/include/asm/arm64/mm.h
+@@ -3,13 +3,10 @@
+ 
+ extern DEFINE_PAGE_TABLE(xen_pgtable);
+ 
+-/*
+- * On ARM64, all the RAM is currently direct mapped in Xen.
+- * Hence return always true.
+- */
++/* On Arm64, the user can chose whether all the RAM is directmap. */
+ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+ {
+-    return true;
++    return has_directmap();
+ }
+ 
+ void arch_setup_page_tables(void);
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index def939172cc5..0f3ffab6bab6 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -12,6 +12,7 @@
+ #include <xen/grant_table.h>
+ #include <xen/guest_access.h>
+ #include <xen/mm.h>
++#include <xen/param.h>
+ 
+ #include <xsm/xsm.h>
+ 
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index b33483b8eacf..2e0870dc8af6 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -328,6 +328,7 @@ void asmlinkage __init start_xen(unsigned long fdt_paddr)
+     cmdline_parse(cmdline);
+ 
+     setup_mm();
++    printk("Booting with directmap %s\n", has_directmap() ? "on" : "off");
+ 
+     vm_init();
+ 
 -- 
 2.40.1
 
