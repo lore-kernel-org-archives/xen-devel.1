@@ -4,53 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D009D2E9EC
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Nov 2024 13:23:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.833851.1249089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B65F5D2E9EC
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Nov 2024 13:24:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.833874.1249100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUNP-0001hs-83; Mon, 11 Nov 2024 13:22:43 +0000
+	id 1tAUPN-0003Di-NY; Mon, 11 Nov 2024 13:24:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 833851.1249089; Mon, 11 Nov 2024 13:22:43 +0000
+Received: by outflank-mailman (output) from mailman id 833874.1249100; Mon, 11 Nov 2024 13:24:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUNP-0001hl-4r; Mon, 11 Nov 2024 13:22:43 +0000
-Received: by outflank-mailman (input) for mailman id 833851;
- Mon, 11 Nov 2024 13:22:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tAUPN-0003Db-KH; Mon, 11 Nov 2024 13:24:45 +0000
+Received: by outflank-mailman (input) for mailman id 833874;
+ Mon, 11 Nov 2024 13:24:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=//j0=SG=amazon.co.uk=prvs=038d26d0c=eliasely@srs-se1.protection.inumbo.net>)
- id 1tAUDQ-0007pD-Gq
- for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:12:24 +0000
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com
- [99.78.197.220]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 955af1a3-a02e-11ef-99a3-01e77a169b0f;
- Mon, 11 Nov 2024 14:12:20 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.25.36.210])
- by smtp-border-fw-80009.pdx80.corp.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2024 13:12:15 +0000
-Received: from EX19MTAUEA002.ant.amazon.com [10.0.29.78:36658]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.2.104:2525]
- with esmtp (Farcaster)
- id ac223257-3a7f-4e86-a058-106d9f7abd51; Mon, 11 Nov 2024 13:12:15 +0000 (UTC)
-Received: from EX19D008UEC004.ant.amazon.com (10.252.135.170) by
- EX19MTAUEA002.ant.amazon.com (10.252.134.9) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:14 +0000
-Received: from EX19MTAUEC001.ant.amazon.com (10.252.135.222) by
- EX19D008UEC004.ant.amazon.com (10.252.135.170) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:14 +0000
-Received: from email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com
- (10.124.125.6) by mail-relay.amazon.com (10.252.135.200) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id
- 15.2.1258.34 via Frontend Transport; Mon, 11 Nov 2024 13:12:14 +0000
-Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
- (dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com [10.253.91.118])
- by email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com (Postfix) with
- ESMTPS id 14A6542135; Mon, 11 Nov 2024 13:12:12 +0000 (UTC)
+ <SRS0=eHe6=SG=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1tAUPM-0003DV-T2
+ for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:24:45 +0000
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2407::600])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4e1ee07b-a030-11ef-a0c6-8be0dac302b0;
+ Mon, 11 Nov 2024 14:24:41 +0100 (CET)
+Received: from PH8PR12MB7326.namprd12.prod.outlook.com (2603:10b6:510:216::7)
+ by CY5PR12MB6408.namprd12.prod.outlook.com (2603:10b6:930:3b::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28; Mon, 11 Nov
+ 2024 13:24:37 +0000
+Received: from PH8PR12MB7326.namprd12.prod.outlook.com
+ ([fe80::6d76:9c33:d230:8264]) by PH8PR12MB7326.namprd12.prod.outlook.com
+ ([fe80::6d76:9c33:d230:8264%6]) with mapi id 15.20.8137.022; Mon, 11 Nov 2024
+ 13:24:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,286 +49,217 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 955af1a3-a02e-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6Ijk5Ljc4LjE5Ny4yMjAiLCJoZWxvIjoic210cC1mdy04MDAwOS5hbWF6b24uY29tIn0=
-X-Custom-Transaction: eyJpZCI6Ijk1NWFmMWEzLWEwMmUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMzMwNzQxLjMxOTgzLCJzZW5kZXIiOiJwcnZzPTAzOGQyNmQwYz1lbGlhc2VseUBhbWF6b24uY28udWsiLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1731330741; x=1762866741;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=qjrn75nWLXXpz9kjXUbh4mnxt9U6w2NevKsH5Mgv7b8=;
-  b=R9Po9GNvVli4D9OXbDocvS9qiFmxE4LBwnC/IXoPUePkuG4+ErHxhqNQ
-   2L4wmRfFIyAHduZLZcygRIPVTeP+0QYCa/K8z6zSQNah+E+6B/4jPN1aS
-   VJJuX59uKaPN0GiDrEda3/wohySHvcOLdKEeYmCvxUkaXOQdvKYXv46Ux
-   4=;
-X-IronPort-AV: E=Sophos;i="6.12,145,1728950400"; 
-   d="scan'208";a="146255457"
-X-Farcaster-Flow-ID: ac223257-3a7f-4e86-a058-106d9f7abd51
-From: Elias El Yandouzi <eliasely@amazon.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Julien Grall
-	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
-Subject: [PATCH V4 14/15] xen/arm64: Implement a mapcache for arm64
-Date: Mon, 11 Nov 2024 13:11:47 +0000
-Message-ID: <20241111131148.52568-15-eliasely@amazon.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20241111131148.52568-1-eliasely@amazon.com>
-References: <20241111131148.52568-1-eliasely@amazon.com>
-MIME-Version: 1.0
+X-Inumbo-ID: 4e1ee07b-a030-11ef-a0c6-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDE6MTExOmY0MDM6MjQwNzo6NjAwIiwiaGVsbyI6Ik5BTTAyLUJOMS1vYmUub3V0Ym91bmQucHJvdGVjdGlvbi5vdXRsb29rLmNvbSJ9
+X-Custom-Transaction: eyJpZCI6IjRlMWVlMDdiLWEwMzAtMTFlZi1hMGM2LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxMzMxNDgxLjE3MzEyNiwic2VuZGVyIjoiYXlhbi5rdW1hci5oYWxkZXJAYW1kLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YIz0rNWhHUuJm25H3avVuvEmPcnb383JNqSUunoh9xVmDolZ0RHrGYWQO0y3aSljNtd2b505FI8ecwW1tvS8w4kWxXQTsy0ydSdqhE0hxzzINX6Vh958tdPmYKzFOUVniDZiQuO24LQ8WMlDX74D18BKGBhygpRx5ICsRTC9d3h05Tm5ZD6lghvbtGEuQ4tNz0kZlLm0tR0JCMe/LllQcQZekJ/sSyBdUEpxtiRG4V4x//UDIw/pL5uWih37bpq9K1MFuBRWOrLqkknRPqqbRj6+0HLjcNUGH/IOKqAYnZZNzTA74Z1XMqqDVv/pAEpTeZ7dbqJLm7zCcfJCRFLUYA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XXHNFALuEV2daFMczbBeHtKOYxvpnm6eXAZYP6+tHlQ=;
+ b=Exx7QnBpgo3LWadjH200LV1B53+MLQhReV3WZndd1tq0NBUaMKkvcTZNs6bcD4ppKxPtoVnf6+XOhfRll5SCVmo/8K/EV5DZFgiRLf0hywqtzH9I3+9OhT0TFakmlHPODTOgdu7s3Df72lXIEvQgWg4McGk2FtyQDJRUXjihRVrDNKTgKjgNHHX+RrgNfriY9Xq85JKKXaILPutsVJrE2YA4+iMXx8X5pBhEO4HKQTGRrXwg6NuHlF0ytHfpZFP7p36hIAh+C+wi1K+DWLKumbQg3h5fTqpuHFceBdwDL1nI2RctJHrUTgdql022Yi3lW9uym6dfHLKyVxvPAjyt2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XXHNFALuEV2daFMczbBeHtKOYxvpnm6eXAZYP6+tHlQ=;
+ b=hmU/gB4jIGQopXZEFrO/JapjTPw4ZjC6v7kvv9nENxwjYK6NFuo4Aq1VNAxLZwHHLOyWkiwiTXaVsKbt6qm5XziLI/Q9Ru1EVGhC7vS9SJok70R0+Kv362S8M69G+yWP39NA4YXpnAkF0c9RoqWX5XEV9KzueKC2sT8xWA1Mqno=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <2ca98e9c-1a4b-43a2-b707-097dc5093e39@amd.com>
+Date: Mon, 11 Nov 2024 13:24:32 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/2] xen/mmu: enable SMMU subsystem only in MMU
+To: Julien Grall <julien@xen.org>,
+ Ayan Kumar Halder <ayan.kumar.halder@amd.com>, xen-devel@lists.xenproject.org
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Rahul Singh <rahul.singh@arm.com>
+References: <20241108195918.856412-1-ayan.kumar.halder@amd.com>
+ <80ac1e78-5259-43d2-8b18-d5bd3abdca1b@xen.org>
+Content-Language: en-GB
+From: Ayan Kumar Halder <ayankuma@amd.com>
+In-Reply-To: <80ac1e78-5259-43d2-8b18-d5bd3abdca1b@xen.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-ClientProxiedBy: DUZP191CA0064.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:10:4fa::17) To PH8PR12MB7326.namprd12.prod.outlook.com
+ (2603:10b6:510:216::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH8PR12MB7326:EE_|CY5PR12MB6408:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5a907f06-e529-42f9-c258-08dd02543088
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?SmpRNll4Y3dkR3V1a1I5NVF6bnphRWJSVUI3SURPNys3VzhiNU1yUkx0WktJ?=
+ =?utf-8?B?WkgvdUYyQ1JWZFVlNXg2VkppNjVpeVFnOER3aVBieUh2QkFjU3F6TjhXQ01h?=
+ =?utf-8?B?S243ZmtuNTNudmhvcm8xU1YvZllvOHVZay8xWFhndEx6ckpnMDhjcHJLbkhS?=
+ =?utf-8?B?dTdUYzRHaEF6b3BGTEkwVDdBWDh6T2dGbm9pVWQwYzlVdWo3ZGZkSEtOU2NC?=
+ =?utf-8?B?MFBYajFTVGFFRzVjOGVGd1diZ2xNbWVSS2FHUmZYWGRzdFVucDlUS0tpNFhy?=
+ =?utf-8?B?dG5YTCtBRllpODNtMlFULzJmclRtQ0grdWVUTGtYZXlMVFhTQW1WQ1JlaFVK?=
+ =?utf-8?B?UFp5K2ZrMytHd0RFdU82MGEvSm4rUlE3cEdFcXh1YTZ0Q1dsaXU4SEcrTjN6?=
+ =?utf-8?B?SkJuWEM4ZTdnZ25HVGo3SDRZd3JjdzJJWFhsRFpHenBTSVR0ck01TjE3QmdP?=
+ =?utf-8?B?c2FKOWEwSUtuL3U0ckRTUlNOd25aZlVGRkk1OFhXVmhzNUhaa1FERi9uamVT?=
+ =?utf-8?B?dE9DNXV0MjhzQzZoR3R4cGRqNDA1d0UvRUtvdTVJSTFiMjJQMnNId1J0Q3Ba?=
+ =?utf-8?B?cTZ2TWRkRXZWbHUrVUxRc1A2aTBwNUd5emNoZy9SYXcyclNEdlI1bUk2Q2pX?=
+ =?utf-8?B?R2d3aWFmQlczREF4VVVnSVZSUnVDNDI5WFdNQ3dENWRwNXkzUC9wbGJTT1cx?=
+ =?utf-8?B?MU1VNkZRb1laSURQK212Qmd6YUt4M0VNM1Z0VERzTklrc25rNHVHY0lKZjd0?=
+ =?utf-8?B?V2VSYUd0MU01L2ZBamtKNy9sNUpTMXY3TEY0SEs1MDFCamFGMk1wRkk1dG1P?=
+ =?utf-8?B?TER0VlMvRkZtRFdpSkJ4dTkyWWtFbVBLck5EbkpOU213VTVEMGFrOHFhVkZC?=
+ =?utf-8?B?OFJxWWxzU2RRWmxyN0FrNHRMOEx2Rjg0R0MvRkhmZndzWWxUZ2wrcE5NNUc1?=
+ =?utf-8?B?dFdRTmRzWnVFekF4d2lOTlc4emdMbEo2QlB3Q3BWWnhYS0QxNjdiaTZ3RWE0?=
+ =?utf-8?B?T1dGaEwzc2lTTkU1N2V5dGdWVGduVDB1T3NFbFpQOUZQUmxnNTdabXFYVkNk?=
+ =?utf-8?B?Nkp4ZDd3a1dXQ0R5VUx2L29XY1gySEw1N2xBby9CdEN5RjBKOWRhSWhOMGJL?=
+ =?utf-8?B?RHJRYTRxWUxHOXNJaVRFWmZyeHZJN0JYZGtwalFtRzJWM09wZzlXZG8yVnE5?=
+ =?utf-8?B?K3lyS2RhcFJXam1Jc3N4L1ZLRFVEeXppVEp1TlZPc3NEOWVuOU55Zk0vZVE0?=
+ =?utf-8?B?YU1QZTF2Mklla0xxWm4xZ2ZlMmdOd2RTOU1naU9DdmVCOW4xeFp4UE0xZVgr?=
+ =?utf-8?B?S3pYMitSaDhLWkJGeVg4Q0NtMnFJOHRVWm5UTlA1bHdYM2RwNWRTb25OK2gw?=
+ =?utf-8?B?U1lxN1ZCWUR0amljRTE5SktKYm9BRlJlRnRsdFZuejBqYVhtSitQb2VLdXlD?=
+ =?utf-8?B?c3g2TEZpSnRYc3l3ZldMZkVKRU9WQ2dIQ1dvbUFDRm1rQnprWkcrR2dWdWJk?=
+ =?utf-8?B?K2dJck5wQ3cwU2tXcU9oQ0o3TjUrNm1OM3ZYNVR5eEdJUFVGeXI1U3E4RG5m?=
+ =?utf-8?B?V0l5ck1wQ2w3QU4vUElSY25Xem5YdkRtYk5UVURpeEcvYXU0OW01YzhNYUJ4?=
+ =?utf-8?B?cEJCNkhoak9teS9vRHlSOEdCbXdweElFdFZST3NzVW42RVZDV0RoWjNPSzBk?=
+ =?utf-8?B?U0FvTi83ZkJ5TDA3UnFKaDllcHFSNGJzZ2lZU1Z2VTlJSFY4ZHRtL2RnVWdl?=
+ =?utf-8?Q?/DSBfthkjR8ir7sNfw=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH8PR12MB7326.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?M2VDd2lWSFp1aVBRdFNXNkZpWVRJWGZJd2Q5K0t2V0M5SzlTbEFEaGVHN0V0?=
+ =?utf-8?B?RU9rTDY1VjkzQXNVME1xRzlKbElrTnNOby9TSVJmL2g0NDM4VHhOdFVBMytY?=
+ =?utf-8?B?VGpCVnozRGNJc0xEM25FOHVCbVhQN3Q3NXdHL0VMNUEvTFZ2ak5IY3Z1S0lo?=
+ =?utf-8?B?VmRHaDh6NjUvTzk3WlBoaVF5NGNFc21sM0w2VnVreWNLcG82UDVlYlNuQlYx?=
+ =?utf-8?B?RG5nWWtJM1c5TktiVlZ3WWRISGk3RjdOR1ZqMDUrL1ZTQXBuMlRxWWk1ZzV6?=
+ =?utf-8?B?M3lrNlBxRUR6cHBLcnFPUEVpTkwvVTNMVldzY3RhN29wOHByQVpocWoxb2I4?=
+ =?utf-8?B?ZFJZRTRpdnBFQ0F6WmtJTWhRQmZ0S0lScVoxRndnRkxCeEJpYTRlM1ppMkdi?=
+ =?utf-8?B?OTE3bnFQUEcvUnFqeFhYVXNadEJIemRwUXRzQ2p1Q1NJQXYyVWhudGMvVVN5?=
+ =?utf-8?B?MnhDZGRZTFN2K1N5K2dTZ2pvblRaSEhVWDNxYWlDUUlZWEJHUWNmcmF4Sk4x?=
+ =?utf-8?B?dG0vUWx5eVFiRkZveXBLa2ZwLzcxTlhUWnB2ZVVQNmE1R0k3cWxQY21Pb043?=
+ =?utf-8?B?SmpDRnhGQlU4WFhjalJIWjAzL1hVa2VzUTgvQmJLNU1iek53UEFvSUl4L2xn?=
+ =?utf-8?B?TlREWFV1U0F2WWVJYWI4Lzd5dnR6ZHVVQkJ2Rm01UitvbVZKQnBmTWJCZE8x?=
+ =?utf-8?B?SnVQWlJsU3k5WUtranQ1UFpGb0F6aEo1cjdneSt1bERpbzRtKytRc3pWb01K?=
+ =?utf-8?B?TVlMWHpmSXNiNlYwRllnRnVnRXBZeTgvVy93VU9QY2creUoxZXhuRnZ3M3RW?=
+ =?utf-8?B?WXJmQ3YybC9pbGFKOFVQbkMxQnpBNmhTei9sMmI1Q2hPNGZLNFRsYU5hSGFH?=
+ =?utf-8?B?SUhtb2plRWZVaGxJRlZ3N2FqY0F0YVpBaDBrTmpBWGxGd0JhQ1Z6OWlqN3lK?=
+ =?utf-8?B?NkhOZmMySEtOWGI4UDBRZmw4aFoyUER5NGo3REJKWmtldUV0OFZrZjNqTEww?=
+ =?utf-8?B?MHpDdk9TTkxEZWlOK1hrcXBIcVNuaEZ3WlE4UUhCRXZIdi9zQmR1MUZDb3g4?=
+ =?utf-8?B?SDltMTJyZ2VkU2hsb2pPTEtTSHR2L0ZQUWQ3a1Z1TnBMRE1Vd0dxc0VpZVd4?=
+ =?utf-8?B?OFBnZ0ZmbmRValVhdTc3MFZSMEd6aEJGd1JqT3NEM280Y1ZvYzdnaVV2azg4?=
+ =?utf-8?B?V3AwWEpiVzgwQnVvQksvYW5iQ2lJMG9DRXozdE5FTThubDRXYkovRVd0MWdN?=
+ =?utf-8?B?dU44ajMrZWRjRDExTGh0MHFwdWdGWkdwN0hqOWx5c1BEUmZCd05iQnRwczV5?=
+ =?utf-8?B?QUUwWG4yU2kvSVExdnVraVRkT01RVXJ6aURmM25ubFpYblJ2M1JaUE9Pakdj?=
+ =?utf-8?B?cHpYbkJ3WmJrSWRrc3R5dnh1QnFZU2lEdVp1bDVhL1RCNXRFbWJxMTY2ZU9a?=
+ =?utf-8?B?dGVWWUJXT21ySTVDcXlIMjV4cndEQlQweDNxZDNIc202M3drWktaSStxUjhE?=
+ =?utf-8?B?cWNCNnZURkw1b1NFdUhrNTZZVUozVVo3WWpYaGlpU3JDcWE0OWJBZmIyQ2NW?=
+ =?utf-8?B?cTBDeDVNcmozSDBFQkVhUk9yMnB5OGRDNzgrNzdOMHYxY0FETzJhQ0lCdk5H?=
+ =?utf-8?B?clZPalNHS2o2bVloNGkyNzZ0d0ZoekdZb1lMTXQ2TzQ1SzUvT1hoKy9oUVUr?=
+ =?utf-8?B?dnhBcXRJbW1hUVRUaW41NkEvRDgwUGdHQW5kTDZBWGdMMGM4K1FvQnBlNGdM?=
+ =?utf-8?B?Wm5lUHNTc2pWTitLZlpEaG40c2FoYzB0aDFaaHlhQXh0Z0o4aTFHVFRFa0NY?=
+ =?utf-8?B?WWs4Q2w4TTRZSkY3d0d2MjN6a0VxUVFoSmVsK1F1TnlSUWw4YjRKbjJjbkNW?=
+ =?utf-8?B?RGQ3Zy9TWG5IRHJpNUhPU3lOSlNpeS9NMkI3anJkbUI3QWdZNzJ1eFgzeGpG?=
+ =?utf-8?B?dE5qR2pCVW8zS1hUaGFxWHRBUTF0UEw0eEZFWkRwYXBnbWo3UUQrRW1FVzdR?=
+ =?utf-8?B?WDBMS2o2RExqeXRIaFFYTjZqQzBFMEFmelFOZ2ovbCtDb3RuUlFwMkpqV042?=
+ =?utf-8?B?aXJEM29KYzJ0RFVWMFBLeDZLQlZGV0h4dGZNRzQ1eFY3M3d5eGVYZWkyQmd1?=
+ =?utf-8?Q?L1aS4tZZz5+NjwXRu4P/LqOz6?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a907f06-e529-42f9-c258-08dd02543088
+X-MS-Exchange-CrossTenant-AuthSource: PH8PR12MB7326.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2024 13:24:37.2733
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8zu7ufQHEYC+wp455ViDaA00BViQdkxgLrkLG3hL5lNRNjzUCsiSTb1NoA9DrWTij9kuovyXSOeeC6445h5rDw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6408
 
-From: Julien Grall <jgrall@amazon.com>
 
-At the moment, on arm64, map_domain_page() is implemented using
-virt_to_mfn(). Therefore it is relying on the directmap.
+On 11/11/2024 11:12, Julien Grall wrote:
+> Hi,
+Hi Julien,
+>
+> On 08/11/2024 19:59, Ayan Kumar Halder wrote:
+>> From: Penny Zheng <Penny.Zheng@arm.com>
+>>
+>> In Xen, SMMU subsystem is supported for MMU system only. The reason 
+>> being SMMU
+>> driver uses the same page tables as MMU.
+>> Thus, we make it dependent on CONFIG_MMU.
+>>
+>> Signed-off-by: Penny Zheng <Penny.Zheng@arm.com>
+>> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+>> ---
+>>   xen/arch/arm/Kconfig            | 2 +-
+>>   xen/drivers/passthrough/Kconfig | 3 ++-
+>>   2 files changed, 3 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+>> index 15b2e4a227..3699e148e9 100644
+>> --- a/xen/arch/arm/Kconfig
+>> +++ b/xen/arch/arm/Kconfig
+>> @@ -16,7 +16,7 @@ config ARM
+>>       select HAS_DEVICE_TREE
+>>       select HAS_PASSTHROUGH
+>>       select HAS_UBSAN
+>> -    select IOMMU_FORCE_PT_SHARE
+>> +    select IOMMU_FORCE_PT_SHARE if MMU
+>
+> Realistically, everything under drivers/passthrough is MMU specific. 
+> So does it actually make any sense to select HAS_PASSTHROUGH right now?
 
-In a follow-up patch, we will allow the admin to remove the directmap.
-Therefore we want to implement a mapcache.
+Actually we are able to assign devices to different DomUs (eg UART1 to 
+domU1) as long as the device isn't behind an IOMMU. So in our case, the 
+passthrough device tree has this node
 
-Thanksfully there is already one for arm32. So select ARCH_ARM_DOMAIN_PAGE
-and add the necessary boiler plate to support 64-bit:
-    - The page-table start at level 0, so we need to allocate the level
-      1 page-table
-    - map_domain_page() should check if the page is in the directmap. If
-      yes, then use virt_to_mfn() to limit the performance impact
-      when the directmap is still enabled (this will be selectable
-      on the command line).
+         uart@9c0b0000 {
+             compatible = "arm,pl011\0arm,primecell";
+             reg = <0x00 0x9c0b0000 0x00 0x10000>;
+             interrupt-parent = <0x01>;
+             interrupts = <0x00 0x07 0x04>;
+             clock-names = "uartclk\0apb_pclk";
+             clocks = <0x06 0x07>;
+             xen,path = "/uart@9c0b0000";
+             xen,reg = <0x00 0x9c0b0000 0x00 0x10000 0x00 0x9c0b0000>;
+             xen,force-assign-without-iommu;
+         };
+So, should we still disable HAS_PASSTHROUGH for MPU ?
 
-Take the opportunity to replace first_table_offset(...) with offsets[...].
+- Ayan
 
-Note that, so far, arch_mfns_in_directmap() always return true on
-arm64. So the mapcache is not yet used. This will change in a
-follow-up patch.
-
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
-
-----
-
-    There are a few TODOs:
-        - It is becoming more critical to fix the mapcache
-          implementation (this is not compliant with the Arm Arm)
-        - Evaluate the performance
-
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 323c96736185..aa9e4c381c55 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -1,7 +1,6 @@
- config ARM_32
- 	def_bool y
- 	depends on "$(ARCH)" = "arm32"
--	select ARCH_MAP_DOMAIN_PAGE
- 
- config ARM_64
- 	def_bool y
-diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
-index c1c6450ca2e3..d7cb3ad2da80 100644
---- a/xen/arch/arm/arm64/mmu/mm.c
-+++ b/xen/arch/arm/arm64/mmu/mm.c
-@@ -4,6 +4,7 @@
- #include <xen/mm.h>
- #include <xen/pfn.h>
- 
-+#include <asm/domain_page.h>
- #include <asm/setup.h>
- #include <asm/static-memory.h>
- #include <asm/static-shmem.h>
-@@ -249,6 +250,14 @@ void __init setup_mm(void)
-     setup_frametable_mappings(ram_start, ram_end);
-     max_page = PFN_DOWN(ram_end);
- 
-+    /*
-+     * The allocators may need to use map_domain_page() (such as for
-+     * scrubbing pages). So we need to prepare the domheap area first.
-+     */
-+    if ( !init_domheap_mappings(smp_processor_id()) )
-+        panic("CPU%u: Unable to prepare the domheap page-tables\n",
-+              smp_processor_id());
-+
-     init_staticmem_pages();
-     init_sharedmem_pages();
- }
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index cbfaeb2c4da1..6545aeda3b13 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -429,6 +429,11 @@ static inline void page_set_xenheap_gfn(struct page_info *p, gfn_t gfn)
-     } while ( (y = cmpxchg(&p->u.inuse.type_info, x, nx)) != x );
- }
- 
-+/* Helpers to allocate, map and unmap a Xen page-table */
-+int create_xen_table(lpae_t *entry);
-+lpae_t *xen_map_table(mfn_t mfn);
-+void xen_unmap_table(const lpae_t *table);
-+
- #endif /*  __ARCH_ARM_MM__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/include/asm/mmu/layout.h b/xen/arch/arm/include/asm/mmu/layout.h
-index a3b546465b5a..c549420e8b25 100644
---- a/xen/arch/arm/include/asm/mmu/layout.h
-+++ b/xen/arch/arm/include/asm/mmu/layout.h
-@@ -35,9 +35,13 @@
-  *
-  *  32G -  64G   Frametable: 56 bytes per page for 2TB of RAM
-  *
-- * 0x00000a8000000000 - 0x00007fffffffffff (512GB+117TB, L0 slots [21..255])
-+ * 0x00000a8000000000 - 0x00007f7fffffffff (117TB, L0 slots [21..254])
-  *  Unused
-  *
-+ * 0x00007f8000000000 - 0x00007fffffffffff (512GB, L0 slot [255])
-+ *  (Relative offsets)
-+ *  0  -    2G    Domheap: on-demand-mapped
-+ *
-  * 0x0000800000000000 - 0x000084ffffffffff (5TB, L0 slots [256..265])
-  *  1:1 mapping of RAM
-  *
-@@ -130,6 +134,13 @@
- #define FRAMETABLE_SIZE        GB(32)
- #define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
- 
-+#define DOMHEAP_VIRT_START     SLOT0(255)
-+#define DOMHEAP_VIRT_SIZE      GB(2)
-+
-+#define DOMHEAP_ENTRIES        1024 /* 1024 2MB mapping slots */
-+/* Number of domheap pagetable pages required at the second level (2MB mappings) */
-+#define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
-+
- #define DIRECTMAP_VIRT_START   SLOT0(256)
- #define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (266 - 256))
- #define DIRECTMAP_VIRT_END     (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE - 1)
-diff --git a/xen/arch/arm/mmu/domain_page.c b/xen/arch/arm/mmu/domain_page.c
-index 3a43601623f0..72f200145d64 100644
---- a/xen/arch/arm/mmu/domain_page.c
-+++ b/xen/arch/arm/mmu/domain_page.c
-@@ -29,13 +29,30 @@ bool init_domheap_mappings(unsigned int cpu)
- {
-     unsigned int order = get_order_from_pages(DOMHEAP_SECOND_PAGES);
-     lpae_t *root = per_cpu(xen_pgtable, cpu);
-+    lpae_t *first;
-     unsigned int i, first_idx;
-     lpae_t *domheap;
-     mfn_t mfn;
- 
-+    /* Convenience aliases */
-+    DECLARE_OFFSETS(offsets, DOMHEAP_VIRT_START);
-+
-     ASSERT(root);
-     ASSERT(!per_cpu(xen_dommap, cpu));
- 
-+    /*
-+     * On Arm64, the root is at level 0. Therefore we need an extra step
-+     * to allocate the first level page-table.
-+     */
-+#ifdef CONFIG_ARM_64
-+    if ( create_xen_table(&root[offsets[0]]) )
-+        return false;
-+
-+    first = xen_map_table(lpae_get_mfn(root[offsets[0]]));
-+#else
-+    first = root;
-+#endif
-+
-     /*
-      * The domheap for cpu0 is initialized before the heap is initialized.
-      * So we need to use pre-allocated pages.
-@@ -56,16 +73,20 @@ bool init_domheap_mappings(unsigned int cpu)
-      * domheap mapping pages.
-      */
-     mfn = virt_to_mfn(domheap);
--    first_idx = first_table_offset(DOMHEAP_VIRT_START);
-+    first_idx = offsets[1];
-     for ( i = 0; i < DOMHEAP_SECOND_PAGES; i++ )
-     {
-         lpae_t pte = mfn_to_xen_entry(mfn_add(mfn, i), MT_NORMAL);
-         pte.pt.table = 1;
--        write_pte(&root[first_idx + i], pte);
-+        write_pte(&first[first_idx + i], pte);
-     }
- 
-     per_cpu(xen_dommap, cpu) = domheap;
- 
-+#ifdef CONFIG_ARM_64
-+    xen_unmap_table(first);
-+#endif
-+
-     return true;
- }
- 
-@@ -89,6 +110,10 @@ void *map_domain_page(mfn_t mfn)
-     lpae_t pte;
-     int i, slot;
- 
-+    /* Bypass the mapcache if the page is in the directmap */
-+    if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
-+        return mfn_to_virt(mfn);
-+
-     local_irq_save(flags);
- 
-     /* The map is laid out as an open-addressed hash table where each
-@@ -151,13 +176,25 @@ void *map_domain_page(mfn_t mfn)
- /* Release a mapping taken with map_domain_page() */
- void unmap_domain_page(const void *ptr)
- {
-+    unsigned long va = (unsigned long)ptr;
-     unsigned long flags;
-     lpae_t *map = this_cpu(xen_dommap);
--    int slot = ((unsigned long)ptr - DOMHEAP_VIRT_START) >> SECOND_SHIFT;
-+    unsigned int slot;
-+
-+    /* Below we assume that the domheap area doesn't start at 0 */
-+    BUILD_BUG_ON(DOMHEAP_VIRT_START == 0);
- 
--    if ( !ptr )
-+    /*
-+     * map_domain_page() may not have mapped anything if the address
-+     * is part of the directmap. So ignore anything outside of the
-+     * domheap.
-+     */
-+    if ( (va < DOMHEAP_VIRT_START) ||
-+         ((va - DOMHEAP_VIRT_START) >= DOMHEAP_VIRT_SIZE) )
-         return;
- 
-+    slot = (va - DOMHEAP_VIRT_START) >> SECOND_SHIFT;
-+
-     local_irq_save(flags);
- 
-     ASSERT(slot >= 0 && slot < DOMHEAP_ENTRIES);
-diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
-index 1ed1a53ab1f2..da33c6c52e39 100644
---- a/xen/arch/arm/mmu/pt.c
-+++ b/xen/arch/arm/mmu/pt.c
-@@ -33,7 +33,7 @@ mm_printk(const char *fmt, ...) {}
- #define HYP_PT_ROOT_LEVEL 1
- #endif
- 
--static lpae_t *xen_map_table(mfn_t mfn)
-+lpae_t *xen_map_table(mfn_t mfn)
- {
-     /*
-      * During early boot, map_domain_page() may be unusable. Use the
-@@ -45,7 +45,7 @@ static lpae_t *xen_map_table(mfn_t mfn)
-     return map_domain_page(mfn);
- }
- 
--static void xen_unmap_table(const lpae_t *table)
-+void xen_unmap_table(const lpae_t *table)
- {
-     /*
-      * During early boot, xen_map_table() will not use map_domain_page()
-@@ -228,7 +228,7 @@ void *ioremap(paddr_t pa, size_t len)
-     return ioremap_attr(pa, len, PAGE_HYPERVISOR_NOCACHE);
- }
- 
--static int create_xen_table(lpae_t *entry)
-+int create_xen_table(lpae_t *entry)
- {
-     mfn_t mfn;
-     void *p;
--- 
-2.40.1
-
+>
+>>     config ARCH_DEFCONFIG
+>>       string
+>> diff --git a/xen/drivers/passthrough/Kconfig 
+>> b/xen/drivers/passthrough/Kconfig
+>> index 78edd80536..75ad403dd3 100644
+>> --- a/xen/drivers/passthrough/Kconfig
+>> +++ b/xen/drivers/passthrough/Kconfig
+>> @@ -5,6 +5,7 @@ config HAS_PASSTHROUGH
+>>   if ARM
+>>   config ARM_SMMU
+>>       bool "ARM SMMUv1 and v2 driver"
+>> +    depends on MMU
+>>       default y
+>>       help
+>>         Support for implementations of the ARM System MMU architecture
+>> @@ -15,7 +16,7 @@ config ARM_SMMU
+>>     config ARM_SMMU_V3
+>>       bool "ARM Ltd. System MMU Version 3 (SMMUv3) Support" if EXPERT
+>> -    depends on ARM_64 && (!ACPI || BROKEN)
+>> +    depends on ARM_64 && (!ACPI || BROKEN) && MMU
+>>       help
+>>        Support for implementations of the ARM System MMU architecture
+>>        version 3. Driver is in experimental stage and should not be 
+>> used in
+>
+> Cheers,
+>
 
