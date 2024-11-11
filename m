@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DECE5D2E9EC
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5BAD2E9E9
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Nov 2024 13:12:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.833736.1248993 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.833729.1248928 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUDH-0000yU-27; Mon, 11 Nov 2024 13:12:15 +0000
+	id 1tAUD8-0007pQ-VX; Mon, 11 Nov 2024 13:12:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 833736.1248993; Mon, 11 Nov 2024 13:12:15 +0000
+Received: by outflank-mailman (output) from mailman id 833729.1248928; Mon, 11 Nov 2024 13:12:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAUDG-0000xX-Uj; Mon, 11 Nov 2024 13:12:14 +0000
-Received: by outflank-mailman (input) for mailman id 833736;
- Mon, 11 Nov 2024 13:12:13 +0000
+	id 1tAUD8-0007pJ-Sf; Mon, 11 Nov 2024 13:12:06 +0000
+Received: by outflank-mailman (input) for mailman id 833729;
+ Mon, 11 Nov 2024 13:12:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=//j0=SG=amazon.co.uk=prvs=038d26d0c=eliasely@srs-se1.protection.inumbo.net>)
- id 1tAUDF-0007pD-9I
- for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:12:13 +0000
-Received: from smtp-fw-52002.amazon.com (smtp-fw-52002.amazon.com
- [52.119.213.150]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8df78f85-a02e-11ef-99a3-01e77a169b0f;
- Mon, 11 Nov 2024 14:12:09 +0100 (CET)
+ id 1tAUD8-0007pD-8i
+ for xen-devel@lists.xenproject.org; Mon, 11 Nov 2024 13:12:06 +0000
+Received: from smtp-fw-52005.amazon.com (smtp-fw-52005.amazon.com
+ [52.119.213.156]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 88f10774-a02e-11ef-99a3-01e77a169b0f;
+ Mon, 11 Nov 2024 14:12:01 +0100 (CET)
 Received: from iad6-co-svc-p1-lb1-vlan3.amazon.com (HELO
  smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.124.125.6])
- by smtp-border-fw-52002.iad7.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2024 13:12:08 +0000
-Received: from EX19MTAUEC002.ant.amazon.com [10.0.44.209:28838]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.85.229:2525]
+ by smtp-border-fw-52005.iad7.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2024 13:11:58 +0000
+Received: from EX19MTAUEB002.ant.amazon.com [10.0.0.204:48770]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.13.234:2525]
  with esmtp (Farcaster)
- id 319c51b8-85f5-4ed2-8ac8-8e45a7ed2184; Mon, 11 Nov 2024 13:12:08 +0000 (UTC)
-Received: from EX19D008UEC003.ant.amazon.com (10.252.135.194) by
- EX19MTAUEC002.ant.amazon.com (10.252.135.253) with Microsoft SMTP Server
+ id 8605e4df-8454-4f66-9ec1-c086a3de2078; Mon, 11 Nov 2024 13:11:57 +0000 (UTC)
+Received: from EX19D008UEC002.ant.amazon.com (10.252.135.242) by
+ EX19MTAUEB002.ant.amazon.com (10.252.135.47) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:07 +0000
-Received: from EX19MTAUEB002.ant.amazon.com (10.252.135.47) by
- EX19D008UEC003.ant.amazon.com (10.252.135.194) with Microsoft SMTP Server
+ Mon, 11 Nov 2024 13:11:56 +0000
+Received: from EX19MTAUWC002.ant.amazon.com (10.250.64.143) by
+ EX19D008UEC002.ant.amazon.com (10.252.135.242) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Mon, 11 Nov 2024 13:12:07 +0000
+ Mon, 11 Nov 2024 13:11:55 +0000
 Received: from email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com
- (10.124.125.2) by mail-relay.amazon.com (10.252.135.97) with Microsoft SMTP
+ (10.25.36.210) by mail-relay.amazon.com (10.250.64.149) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id
- 15.2.1258.34 via Frontend Transport; Mon, 11 Nov 2024 13:12:06 +0000
+ 15.2.1258.34 via Frontend Transport; Mon, 11 Nov 2024 13:11:55 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com [10.253.91.118])
  by email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com (Postfix) with
- ESMTPS id 6993D42116; Mon, 11 Nov 2024 13:12:05 +0000 (UTC)
+ ESMTPS id DD88C42116; Mon, 11 Nov 2024 13:11:54 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,166 +62,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8df78f85-a02e-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjUyLjExOS4yMTMuMTUwIiwiaGVsbyI6InNtdHAtZnctNTIwMDIuYW1hem9uLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjhkZjc4Zjg1LWEwMmUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMzMwNzI5LjQ1NTMzNSwic2VuZGVyIjoicHJ2cz0wMzhkMjZkMGM9ZWxpYXNlbHlAYW1hem9uLmNvLnVrIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 88f10774-a02e-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjUyLjExOS4yMTMuMTU2IiwiaGVsbyI6InNtdHAtZnctNTIwMDUuYW1hem9uLmNvbSJ9
+X-Custom-Transaction: eyJpZCI6Ijg4ZjEwNzc0LWEwMmUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxMzMwNzIxLjg1MTU1MSwic2VuZGVyIjoicHJ2cz0wMzhkMjZkMGM9ZWxpYXNlbHlAYW1hem9uLmNvLnVrIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1731330729; x=1762866729;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=rB2rRpiYmlYYuH1CdMTLnLcInkmyXxjNS6D+YHWGoNQ=;
-  b=mU27vuLZTT6oQ6+MTdfN6xxUbq9qdH3bLzqIxHS93xgQPRzVgCl/JbxY
-   dB1o73Svcc9fJTTUo+AcsBoTRLnFnPEd68zOVttGENsIBuUAE6czE2i4D
-   ELWBE6z231wbj0guucwoaSwYQXZac4M7WG+JQERpjhJ2dRrBH5xCcI3Zh
-   4=;
+  t=1731330722; x=1762866722;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=yXXOHoIPHky88JTb9rF73LR/UCSBziQW9WWeOuavneQ=;
+  b=uZ6dWlSBiAMIq3s+PsCHYLuemp8SHlWiMrB2dfgELPpLGJzZUe+sL6/H
+   PkeESoi9Y4bcedJeWj4Mkpz4KpVunuG5l9jIj1qfLS2j/gZJgyrkXaUny
+   3+SLVhkV01Mdi8TsPDvCyyzmyYF3y7VC1uExDfERzCi0OkYWGVpl5+bKV
+   I=;
 X-IronPort-AV: E=Sophos;i="6.12,145,1728950400"; 
-   d="scan'208";a="673030963"
-X-Farcaster-Flow-ID: 319c51b8-85f5-4ed2-8ac8-8e45a7ed2184
+   d="scan'208";a="694473681"
+X-Farcaster-Flow-ID: 8605e4df-8454-4f66-9ec1-c086a3de2078
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
-	<hongyxia@amazon.com>, Julien Grall <jgrall@amazon.com>, Elias El Yandouzi
-	<eliasely@amazon.com>
-Subject: [PATCH V4 08/15] xen/page_alloc: Add a path for xenheap when there is no direct map
-Date: Mon, 11 Nov 2024 13:11:41 +0000
-Message-ID: <20241111131148.52568-9-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Elias El
+ Yandouzi" <eliasely@amazon.com>
+Subject: [PATCH V4 00/15] Remove the directmap 
+Date: Mon, 11 Nov 2024 13:11:33 +0000
+Message-ID: <20241111131148.52568-1-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20241111131148.52568-1-eliasely@amazon.com>
-References: <20241111131148.52568-1-eliasely@amazon.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Hongyan Xia <hongyxia@amazon.com>
+Hi all,
 
-When there is not an always-mapped direct map, xenheap allocations need
-to be mapped and unmapped on-demand.
+A few years ago, Wei Liu implemented a PoC to remove the directmap
+from Xen. The last version was sent by Hongyan Xia [1].
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
+I will start with thanking both Wei and Hongyan for the initial work
+to upstream the feature. A lot of patches already went in and this is
+the last few patches missing to effectively enable the feature.
 
-----
+=== What is the directmap? ===
 
-    I have left the call to map_pages_to_xen() and destroy_xen_mappings()
-    in the split heap for now. I am not entirely convinced this is necessary
-    because in that setup only the xenheap would be always mapped and
-    this doesn't contain any guest memory (aside the grant-table).
-    So map/unmapping for every allocation seems unnecessary.
+At the moment, on both arm64 and x86, most of the RAM is mapped
+in Xen address space. This means that domain memory is easily
+accessible in Xen.
 
-    Changes in v4:
-        * Call printk instead of dprintk()
+=== Why do we want to remove the directmap? ===
 
-    Changes in v2:
-        * Fix remaining wrong indentation in alloc_xenheap_pages()
+(Summarizing my understanding of the previous discussion)
 
-    Changes since Hongyan's version:
-        * Rebase
-        * Fix indentation in alloc_xenheap_pages()
-        * Fix build for arm32
+Speculation attacks (like Spectre SP1) rely on loading piece of memory
+in the cache. If the region is not mapped then it can't be loaded.
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index b0be246780b7..2cef521ad85a 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -2243,6 +2243,7 @@ void init_xenheap_pages(paddr_t ps, paddr_t pe)
- void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
- {
-     struct page_info *pg;
-+    void *virt_addr;
- 
-     ASSERT_ALLOC_CONTEXT();
- 
-@@ -2251,17 +2252,36 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
-     if ( unlikely(pg == NULL) )
-         return NULL;
- 
--    return page_to_virt(pg);
-+    virt_addr = page_to_virt(pg);
-+
-+    if ( !has_directmap() &&
-+         map_pages_to_xen((unsigned long)virt_addr, page_to_mfn(pg), 1UL << order,
-+                          PAGE_HYPERVISOR) )
-+    {
-+        /* Failed to map xenheap pages. */
-+        free_heap_pages(pg, order, false);
-+        return NULL;
-+    }
-+
-+    return virt_addr;
- }
- 
- 
- void free_xenheap_pages(void *v, unsigned int order)
- {
-+    unsigned long va = (unsigned long)v & PAGE_MASK;
-+
-     ASSERT_ALLOC_CONTEXT();
- 
-     if ( v == NULL )
-         return;
- 
-+    if ( !has_directmap() &&
-+         destroy_xen_mappings(va, va + (PAGE_SIZE << order)) )
-+        printk(XENLOG_WARNING,
-+                "Error while destroying xenheap mappings at %p, order %u\n",
-+                v, order);
-+
-     free_heap_pages(virt_to_page(v), order, false);
- }
- 
-@@ -2285,6 +2305,7 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
- {
-     struct page_info *pg;
-     unsigned int i;
-+    void *virt_addr;
- 
-     ASSERT_ALLOC_CONTEXT();
- 
-@@ -2297,16 +2318,28 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
-     if ( unlikely(pg == NULL) )
-         return NULL;
- 
-+    virt_addr = page_to_virt(pg);
-+
-+    if ( !has_directmap() &&
-+         map_pages_to_xen((unsigned long)virt_addr, page_to_mfn(pg), 1UL << order,
-+                          PAGE_HYPERVISOR) )
-+    {
-+        /* Failed to map xenheap pages. */
-+        free_domheap_pages(pg, order);
-+        return NULL;
-+    }
-+
-     for ( i = 0; i < (1u << order); i++ )
-         pg[i].count_info |= PGC_xen_heap;
- 
--    return page_to_virt(pg);
-+    return virt_addr;
- }
- 
- void free_xenheap_pages(void *v, unsigned int order)
- {
-     struct page_info *pg;
-     unsigned int i;
-+    unsigned long va = (unsigned long)v & PAGE_MASK;
- 
-     ASSERT_ALLOC_CONTEXT();
- 
-@@ -2318,6 +2351,12 @@ void free_xenheap_pages(void *v, unsigned int order)
-     for ( i = 0; i < (1u << order); i++ )
-         pg[i].count_info &= ~PGC_xen_heap;
- 
-+    if ( !has_directmap() &&
-+         destroy_xen_mappings(va, va + (PAGE_SIZE << order)) )
-+        printk(XENLOG_WARNING
-+                "Error while destroying xenheap mappings at %p, order %u\n",
-+                v, order);
-+
-     free_heap_pages(pg, order, true);
- }
- 
+So removing reducing the amount of memory mapped in Xen will also
+reduce the surface attack.
+
+=== What's the performance impact? ===
+
+As the guest memory is not always mapped, then the cost of mapping
+will increase. I haven't done the numbers with this new version, but
+some measurement were provided in the previous version for x86.
+
+=== Improvement possible ===
+
+The known area to improve on x86 are:
+   * Mapcache: There was a patch sent by Hongyan:
+     https://lore.kernel.org/xen-devel/4058e92ce21627731c49b588a95809dc0affd83a.1581015491.git.hongyxia@amazon.com/
+   * EPT: At the moment an guest page-tabel walk requires about 20 map/unmap.
+     This will have an very high impact on the performance. We need to decide
+     whether keep the EPT always mapped is a problem
+
+The original series didn't have support for Arm64. But as there were
+some interest, I have provided a PoC.
+
+There are more extra work for Arm64:
+   * The mapcache is quite simple. We would investigate the performance
+   * The mapcache should be made compliant to the Arm Arm (this is now
+     more critical).
+   * We will likely have the same problem as for the EPT.
+   * We have no support for merging table to a superpage, neither
+     free empty page-tables. (See more below)
+
+=== Implementation ===
+
+The subject is probably a misnomer. The directmap is still present but
+the RAM is not mapped by default. Instead, the region will still be used
+to map pages allocate via alloc_xenheap_pages().
+
+The advantage is the solution is simple (so IHMO good enough for been
+merged as a tech preview). The disadvantage is the page allocator is not
+trying to keep all the xenheap pages together. So we may end up to have
+an increase of page table usage.
+
+In the longer term, we should consider to remove the direct map
+completely and switch to vmap(). The main problem with this approach
+is it is frequent to use mfn_to_virt() in the code. So we would need
+to cache the mapping (maybe in the struct page_info).
+
+=== Why arm32 is not covered? ===
+
+On Arm32, the domheap and xenheap is always separated. So by design
+the guest memory is not mapped by default.
+
+At this stage, it seems unnecessary to have to map/unmap xenheap pages
+every time they are allocated.
+
+=== Why not using a separate domheap and xenheap? ===
+
+While a separate xenheap/domheap reduce the page-table usage (all
+xenheap pages are contiguous and could be always mapped), it is also
+currently less scalable because the split is fixed at boot time (XXX:
+Can this be dynamic?).
+
+=== Future of secret-free hypervisor ===
+
+There are some information in an e-mail from Andrew a few years ago:
+
+https://lore.kernel.org/xen-devel/e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com/
+
+Cheers,
+
+[1] https://lore.kernel.org/xen-devel/cover.1588278317.git.hongyxia@amazon.com/
+
+*** BLURB HERE ***
+
+Hongyan Xia (8):
+  x86: Create per-domain mapping for guest_root_pt
+  x86/pv: Rewrite how building PV dom0 handles domheap mappings
+  x86: Add a boot option to enable and disable the direct map
+  x86/domain_page: Remove the fast paths when mfn is not in the
+    directmap
+  xen/page_alloc: Add a path for xenheap when there is no direct map
+  x86/setup: Leave early boot slightly earlier
+  xen/page_alloc: vmap heap nodes when they are outside the direct map
+  x86/setup: Do not create valid mappings when directmap=no
+
+Julien Grall (5):
+  xen/x86: Add support for the PMAP
+  xen/arm32: mm: Rename 'first' to 'root' in init_secondary_pagetables()
+  xen/arm64: mm: Use per-pCPU page-tables
+  xen/arm64: Implement a mapcache for arm64
+  xen/arm64: Allow the admin to enable/disable the directmap
+
+Wei Liu (2):
+  x86/pv: Use copy_domain_page() to manage domheap pages during initrd
+    relocation
+  x86: Initialize mapcache for PV, HVM, and idle domains
+
+ docs/misc/xen-command-line.pandoc      | 12 ++++
+ xen/arch/arm/Kconfig                   |  2 +-
+ xen/arch/arm/arm64/mmu/mm.c            | 45 ++++++++++++-
+ xen/arch/arm/include/asm/arm32/mm.h    |  8 ---
+ xen/arch/arm/include/asm/arm64/mm.h    |  7 +-
+ xen/arch/arm/include/asm/domain_page.h | 13 ++++
+ xen/arch/arm/include/asm/mm.h          |  8 +++
+ xen/arch/arm/include/asm/mmu/layout.h  | 13 +++-
+ xen/arch/arm/include/asm/mmu/mm.h      |  2 +
+ xen/arch/arm/mm.c                      |  1 +
+ xen/arch/arm/mmu/domain_page.c         | 45 +++++++++++--
+ xen/arch/arm/mmu/pt.c                  | 12 ++--
+ xen/arch/arm/mmu/setup.c               | 28 +++-----
+ xen/arch/arm/mmu/smpboot.c             | 32 +++------
+ xen/arch/arm/setup.c                   |  2 +
+ xen/arch/x86/Kconfig                   |  1 +
+ xen/arch/x86/domain.c                  |  8 +--
+ xen/arch/x86/domain_page.c             | 72 ++++++++++++++------
+ xen/arch/x86/include/asm/config.h      | 10 ++-
+ xen/arch/x86/include/asm/domain.h      | 13 ++--
+ xen/arch/x86/include/asm/fixmap.h      | 31 +++++++++
+ xen/arch/x86/include/asm/mm.h          |  6 ++
+ xen/arch/x86/include/asm/pmap.h        | 35 ++++++++++
+ xen/arch/x86/mm.c                      | 12 ++++
+ xen/arch/x86/pv/dom0_build.c           | 70 +++++++++++++------
+ xen/arch/x86/pv/domain.c               | 45 +++++++++++--
+ xen/arch/x86/setup.c                   | 93 +++++++++++++++++++++++---
+ xen/arch/x86/x86_64/asm-offsets.c      |  1 +
+ xen/arch/x86/x86_64/entry.S            |  9 ++-
+ xen/common/Kconfig                     | 18 +++++
+ xen/common/domain.c                    |  9 +++
+ xen/common/page_alloc.c                | 77 ++++++++++++++++++---
+ xen/include/xen/mm.h                   | 11 +++
+ 33 files changed, 604 insertions(+), 147 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/domain_page.h
+ create mode 100644 xen/arch/x86/include/asm/pmap.h
+
 -- 
 2.40.1
 
