@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA7DD42BB5
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Nov 2024 17:37:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.834865.1250662 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C549D42BB5
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Nov 2024 17:41:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.834875.1250672 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAuoo-000659-Jr; Tue, 12 Nov 2024 17:36:46 +0000
+	id 1tAutE-0007rY-7a; Tue, 12 Nov 2024 17:41:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 834865.1250662; Tue, 12 Nov 2024 17:36:46 +0000
+Received: by outflank-mailman (output) from mailman id 834875.1250672; Tue, 12 Nov 2024 17:41:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAuoo-000652-HF; Tue, 12 Nov 2024 17:36:46 +0000
-Received: by outflank-mailman (input) for mailman id 834865;
- Tue, 12 Nov 2024 17:36:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tAutE-0007rR-4c; Tue, 12 Nov 2024 17:41:20 +0000
+Received: by outflank-mailman (input) for mailman id 834875;
+ Tue, 12 Nov 2024 17:41:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mdiu=SH=cloud.com=matthew.barnes@srs-se1.protection.inumbo.net>)
- id 1tAuon-00064w-ET
- for xen-devel@lists.xenproject.org; Tue, 12 Nov 2024 17:36:45 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ac8109b6-a11c-11ef-a0c7-8be0dac302b0;
- Tue, 12 Nov 2024 18:36:39 +0100 (CET)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9a628b68a7so1055396166b.2
- for <xen-devel@lists.xenproject.org>; Tue, 12 Nov 2024 09:36:40 -0800 (PST)
-Received: from mbarnes-x-u.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0deef3esm746325966b.141.2024.11.12.09.36.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 09:36:38 -0800 (PST)
+ <SRS0=6R0y=SH=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1tAutC-0007rL-OS
+ for xen-devel@lists.xenproject.org; Tue, 12 Nov 2024 17:41:18 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2061d.outbound.protection.outlook.com
+ [2a01:111:f403:2414::61d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4edb7c7c-a11d-11ef-99a3-01e77a169b0f;
+ Tue, 12 Nov 2024 18:41:15 +0100 (CET)
+Received: from BYAPR21CA0022.namprd21.prod.outlook.com (2603:10b6:a03:114::32)
+ by MW6PR12MB8708.namprd12.prod.outlook.com (2603:10b6:303:242::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28; Tue, 12 Nov
+ 2024 17:41:08 +0000
+Received: from SJ1PEPF00001CE1.namprd05.prod.outlook.com
+ (2603:10b6:a03:114:cafe::b4) by BYAPR21CA0022.outlook.office365.com
+ (2603:10b6:a03:114::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.16 via Frontend
+ Transport; Tue, 12 Nov 2024 17:41:08 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF00001CE1.mail.protection.outlook.com (10.167.242.9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8158.14 via Frontend Transport; Tue, 12 Nov 2024 17:41:07 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 12 Nov
+ 2024 11:41:06 -0600
+Received: from [172.30.86.253] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Tue, 12 Nov 2024 11:41:05 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,376 +61,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac8109b6-a11c-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzQiLCJoZWxvIjoibWFpbC1lajEteDYzNC5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImFjODEwOWI2LWExMWMtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNDMyOTk5Ljg2NzQyNiwic2VuZGVyIjoibWF0dGhldy5iYXJuZXNAY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1731432999; x=1732037799; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4dHtb4C0WC3jTkiClRLTbwiGLDfIKgOfntISQe9iTE8=;
-        b=S+Q8GX+7T4fIQLdJVVDqG5VN3mfU/aITZTiczya1/JU96j3D+qZ7STSaY/eu2pLPc0
-         2Nn+gox0uOjq49DtP+s+OXquEEd73zd5zOTszBfVG5l96mw7I1CAafoL8dl0s7IZgTuy
-         FgzKg2bUocGzLUb3WHHxzMgFzUnM5aNA2QWxc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731432999; x=1732037799;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4dHtb4C0WC3jTkiClRLTbwiGLDfIKgOfntISQe9iTE8=;
-        b=VincPFrJjjYfl4EaTCO6gpdExgtv2+Zh3lmRZ5oo1KB4ZsVggMaj5eEDq9QxOdAv8z
-         5IcT7c7JAa+4Oy2k39ZFKWGBX1dWBqAuwbIV0niucqqetqJ0V4eo2ufiQoUfNw9tSg5P
-         Q4pLIk9os8CqgnHZdIVEVfDMrrssvvrJKcZXNPHVaajrAZZWpFAqaCsT9JL+ywlREjgG
-         m+DXukNaLf42pDBmGYu4yPOuRGQzCuDilNsHfCOAP7uHZgTyl2gJBJpGuVrwPQQva/O/
-         zUsRBi80VSUJVtQiN958JYS6ShDVL7TAczRj7I6Bv8IB3D1XGUb1dC/cCtDdSsi6alcg
-         5iMw==
-X-Gm-Message-State: AOJu0YxXAxUSk2hMh66XQ3Gv+9xppy4hotNuexT+1UJizxXV2wx4dW8S
-	tjcR5Vf2qyN0q5C+o+0P9NMli9F6sJVjP3ft0hoM2ILr9BvLNFIV+hRcpXMCtnqVKVkee5fd0E/
-	4
-X-Google-Smtp-Source: AGHT+IF0UOvRLGygklKcZJ+srfbdfCdYMlXr8+i6cu93V0/IYVMXEHgrVOpu64PJntugmVoOZKs7rg==
-X-Received: by 2002:a17:906:6a20:b0:a99:61d1:348f with SMTP id a640c23a62f3a-a9ef0016c58mr1634215166b.52.1731432999128;
-        Tue, 12 Nov 2024 09:36:39 -0800 (PST)
-From: Matthew Barnes <matthew.barnes@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Matthew Barnes <matthew.barnes@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [XTF PATCH] Misaligned I/O Breakpoints
-Date: Tue, 12 Nov 2024 17:22:46 +0000
-Message-Id: <bb3e94bf31387725fdc0dca6ab2154c2d24d2bc0.1731427668.git.matthew.barnes@cloud.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 4edb7c7c-a11d-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDE6MTExOmY0MDM6MjQxNDo6NjFkIiwiaGVsbyI6Ik5BTTExLUJOOC1vYmUub3V0Ym91bmQucHJvdGVjdGlvbi5vdXRsb29rLmNvbSJ9
+X-Custom-Transaction: eyJpZCI6IjRlZGI3YzdjLWExMWQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNDMzMjc1LjE2MTQxNSwic2VuZGVyIjoic3Rld2FydC5oaWxkZWJyYW5kQGFtZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NddPkhpq3xAIcLREO44zdM46nHoKzQdAleidL7jTO/AORscc+2F5iw92YQwZKjJq3tE6WLFi492mGxpMdU6WdkD9137xGDyhR8wdfRQOhrCCDhVIH7yYZvfgYIIJWwkE0fS1IxAKaXTqYOIlVWQ36wtTdXUNFobwrneXz4b8T/J0AF0v/Z10liQ3r+dpU6oj9bs/8X6UbefdgHkF55CKuvEt7bhFh7ClqPStObCFzdlif+btETUi8ofsC3J7oYgScrLqxZOd7HwFnaoB2hoestGLHe7DaA70WHDqSbnAL01RwGBJhqKqfDcbwgdS09cVZxh1/EX9ieH5gN8cZ5GJAQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WJQvci0kCIKXPwYB4n0Chs115xklp9BM0XmPSlGqaZE=;
+ b=FMJjSQ900OnjvdXbk5EdkZ9T2e0qaUM1qP0uKP4jNnmPOjqEWtBA2fj2mit/OYjgMezCi4DHjArAa7VhfOetAjmXr6fhSJFjdtjtbp/XnlLn/sa2DH0ddhqY9mSTHj/YsOKLfsoZdYi8zgxncuJVAxl9zb5d4P41/LKg/dtqF8zmnOipck09maYNKUwz9ivXISgCAgmrSwl9TRslq6+5MX0U+OTjJ+njLiWyUas7fD2CJBQf2Qc7EgGpgGyIU0Boh0uweIsBEVoLjCxz4fn0KxTLqUNU8FjzHCMSwlXzYXxKF+huxd5C3rwnybpfmw1y7eMzKlcel5AEMZSzYO0t6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WJQvci0kCIKXPwYB4n0Chs115xklp9BM0XmPSlGqaZE=;
+ b=tqOgTY1k3+pryUuNqVCm7lermyE4be63pWfjRBtbPRRHaYIkWvN2UeAIC9X5C464NY6NnRSmE9FPy41c+t6Kb/RN8626E+HJ2Zpb1FewiIiD5DF7ViX5ab0kuqVOgsbK1Ebk0aptPsvQZhTjMN8ywm79wfpmH80NdaoHV1muRr8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <94b6224c-c285-4d4b-9b66-117125211438@amd.com>
+Date: Tue, 12 Nov 2024 12:41:04 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 2/3] xen/pci: introduce PF<->VF links
+To: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger.pau@citrix.com>
+CC: <xen-devel@lists.xenproject.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>
+References: <20241018203913.1162962-1-stewart.hildebrand@amd.com>
+ <20241018203913.1162962-3-stewart.hildebrand@amd.com>
+ <Zx_a57npsdRhLgYr@macbook> <b3f9a4a4-112b-4d58-afca-bc88ea2b1e11@amd.com>
+ <ZzMZpg3FCyc4SW4z@macbook> <f8bedb2a-1d32-4e99-885a-79a56c1bdd36@suse.com>
+Content-Language: en-US
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <f8bedb2a-1d32-4e99-885a-79a56c1bdd36@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Received-SPF: None (SATLEXMB04.amd.com: stewart.hildebrand@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE1:EE_|MW6PR12MB8708:EE_
+X-MS-Office365-Filtering-Correlation-Id: f570544f-184a-40b1-80a1-08dd034130c0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?UFJndkl3UCtGbnZEcjNlajdXd3dIM0dXYkw4TU50cTRHamNHSk5DS0FTUmlj?=
+ =?utf-8?B?dnRicktSZmJPZm1jRmM2aTduUFBZb2xkR2FMeGcwekU5UWdSRFZuMEh4VHp4?=
+ =?utf-8?B?RmVRaXQxU0lpSWNJVXNQMUM4QzB3TXFYNWZpdXJ6SGw1c3dWVU1qK1B1MG5n?=
+ =?utf-8?B?QjIvelNaKzdaQUJKN3YzVkRiYUh5aFkwMXFHYWFYVy9JaDdROWcwQS9QSURv?=
+ =?utf-8?B?WFFGSjltVTNJaStJQ3ROaVNYS1pqRVNjZG05dFkzQ0pqVDRhOG95ZDZvckgx?=
+ =?utf-8?B?S3plcXBHSFlQbzZJeUduQjVESU94cFl5dmZEVm5MYjJXSDhES0FDcWpOT1dS?=
+ =?utf-8?B?bnJGMDNhK3IvL3ZSN05iKzhtdDBQQlBWQm1uSi9PY1VTa0dnbGlMWVU3NTg3?=
+ =?utf-8?B?VnhLdGZWYzZKbWpyNytiQU9PN1BWbi9wK0tTN2ptTXVkbXpOVjU5YTRuVDh0?=
+ =?utf-8?B?VTZicVBJOFMwVVBQaU5SY2lIaFk3a1FVNktoZEhaTEVFTURobnNidXp5c2Np?=
+ =?utf-8?B?VlV5Y2lyWTBMK3RYSVNkbzJlVGc1MnNUeDZSbVhuemxyYzRWTXpNc3lNbUpO?=
+ =?utf-8?B?Yi8yblAzUlFIYmxvc2I3Q0ljdlJaV0pvN2dxZ0FPSENOajRsOTArUkcyaEli?=
+ =?utf-8?B?Uy8raUZEZTQyNlpaVlJDL05TT2FSRmJPNmR2RXk2RkJWNTNVdkVZQzFERk9U?=
+ =?utf-8?B?TzVQVEFoakk5SjNuRkVlaFMrZFk0bXpNbk4wcHByUDRVZzVNSVk3T3FJb0tR?=
+ =?utf-8?B?UHZmUWltVUN4NUhrZndOTXhMcCt3UUtlTGpYcVhCNGVacnhER1Q4YXVvZE5U?=
+ =?utf-8?B?YTQxWkF4TU5WTGd6bnRGR0IyTmY4U3BBdGxCcWZDU2lBOUVoTFBESWZKVnNN?=
+ =?utf-8?B?Yk90ZkxhakRlYUowV04xTC9TR1prZjB4Umc5Q2hYWHJoSkpCNVVlOE1ocVpY?=
+ =?utf-8?B?MHlBNU5pd2tqTVJjdFplUlcrU1lKeGtBeVU2TlgzL014TStYSzAxb0hBSStJ?=
+ =?utf-8?B?ZUJxM2lRU0FxbFRlMjFxSzVoem5lNFV2SUdlVy9PeVFLTTlWdUtidnFhUnNp?=
+ =?utf-8?B?UVRmT1FQSDR1eXZpMHZ4Q1MvenZKcG1pcks5L2xVSmh0djY0UlFNSHJySXFS?=
+ =?utf-8?B?OW90cml2T1VEZXp2azR3MDZJUHM5UFVRNjdkTXZkdXZYL3J2MHYySUgrdEVE?=
+ =?utf-8?B?Zi80MkowLzMxRDhsYTIwalp4ci9ucEkrYnhkWEpTQ3pQR3NkRHpXNUJkRmhj?=
+ =?utf-8?B?VlgwTWZVZ0dRemNqME1oV2xoY1R0aDZRNnA2cUtyYkdQZ01ncjJGSUNIUXNU?=
+ =?utf-8?B?TVlHUDIrNkhBV0Jrb2VxUUdxNTJUR294dkVSZU5KTGhQUHNLK3AwV21Gcnl2?=
+ =?utf-8?B?VkgyQVdWTHd4bmhQSmVET1ZZbld2YmJ0TzY5cmdZdnA1YitMWGVMT2ptcWk4?=
+ =?utf-8?B?SEFTYlUzaTJrTXIzRExTMkdpcGgyaGpJbmMzQkxzOGhtRGRIRVlkQ3VnTldG?=
+ =?utf-8?B?eHdaSVBGYVBLeU9FQmVOMW1wSWllTWRCQTIyVHRNMHB6cnVVL05nejVlc0pF?=
+ =?utf-8?B?MHk2UWdTaUw0Q08zNVNWSFArb0JCa3d2dVpCcjMwdjRxK2g4QlR0NDFJejYw?=
+ =?utf-8?B?V2czQXpBMnhEQ1RPUjdLejA1M0RwNGtVUnRwMGF6TkcybUFmem9ObE5WRXZD?=
+ =?utf-8?B?Q1RHRmtFM2JVWnZ5SDFCQm94bGlZUjBMbVJWSU83STFjWUJLeTM5bjQ0YnFz?=
+ =?utf-8?B?dEZLVWhDcHBQUFNrR3A1ajNtOFpjNzlCalJpYmV2VVFrNHdMcEVxdFdtdzdi?=
+ =?utf-8?B?ZWUyMHVRakpVdmp4aG54dGR3eXhEQUpyVyttU2l1ZERUb1lqSXlPMTdUYWNv?=
+ =?utf-8?B?R3N3NmQ4eVZRUFZyUElrOGVBd3NWVjBlSHR2dmV2SE8zcUE9PQ==?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2024 17:41:07.9970
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f570544f-184a-40b1-80a1-08dd034130c0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF00001CE1.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8708
 
-This xtf test tests a bug to hardware IO port breakpoints fixed by
-08aacc392d86 ("x86/emul: Fix misaligned IO breakpoint behaviour in PV guests")
+On 11/12/24 04:39, Jan Beulich wrote:
+> On 12.11.2024 10:02, Roger Pau Monné wrote:
+>> On Mon, Nov 11, 2024 at 03:07:28PM -0500, Stewart Hildebrand wrote:
+>>> On 10/28/24 14:41, Roger Pau Monné wrote:
+>>>> if ( !pdev->info.is_virtfn && !list_empty(&pdev->vf_list) )
+>>>> {
+>>>>     struct pci_dev *vf_pdev;
+>>>>
+>>>>     while ( (vf_pdev = list_first_entry_or_null(&pdev->vf_list,
+>>>>                                                 struct pci_dev,
+>>>> 						vf_list)) != NULL )
+>>>>     {
+>>>>         list_del(&vf_pdev->vf_list);
+>>>>         vf_pdev->virtfn.pf_pdev = NULL;
+>>>>         vf_pdev->broken = true;
+>>>>     }
+>>>>
+>>>>     printk(XENLOG_WARNING "PCI SR-IOV PF %pp removed with VFs still present\n",
+>>>>            &pdev->sbdf);
+>>>> }
+>>>
+>>> Yeah. Given that the consensus is leaning toward keeping the PF and
+>>> returning an error, here's my suggestion:
+>>>
+>>>     if ( !pdev->info.is_virtfn && !list_empty(&pdev->vf_list) )
+>>>     {
+>>>         struct pci_dev *vf_pdev;
+>>>
+>>>         list_for_each_entry(vf_pdev, &pdev->vf_list, vf_list)
+>>>             vf_pdev->broken = true;
+>>>
+>>>         pdev->broken = true;
+>>
+>> Do you need to mark the devices as broken?  My expectation would be
+>> that returning -EBUSY here should prevent the device from being
+>> removed, and hence there would be no breakage, just failure to fulfill
+>> the (possible) hot-unplug request.
+> 
+> That very much depends on Dom0 kernels then actually respecting the error,
+> and not considering the underlying hypercall a mere notification.
 
-Signed-off-by: Matthew Barnes <matthew.barnes@cloud.com>
----
- docs/all-tests.dox                       |   2 +
- tests/misaligned-io-breakpoints/Makefile |   9 +
- tests/misaligned-io-breakpoints/main.c   | 283 +++++++++++++++++++++++
- 3 files changed, 294 insertions(+)
- create mode 100644 tests/misaligned-io-breakpoints/Makefile
- create mode 100644 tests/misaligned-io-breakpoints/main.c
+All dom0 Linux does is print a warning:
 
-diff --git a/docs/all-tests.dox b/docs/all-tests.dox
-index 0a8b9130cfe8..66e35babe4d7 100644
---- a/docs/all-tests.dox
-+++ b/docs/all-tests.dox
-@@ -41,6 +41,8 @@ Coveres XSA-106 and XSA-156.
- 
- @subpage test-umip - Guest User-Mode Instruction Prevention support.
- 
-+@subpage test-misaligned-io-breakpoints - Misaligned I/O port hardware breakpoint test.
-+
- 
- @section index-xsa XSA Proof-of-Concept tests
- 
-diff --git a/tests/misaligned-io-breakpoints/Makefile b/tests/misaligned-io-breakpoints/Makefile
-new file mode 100644
-index 000000000000..9e4cd3eef761
---- /dev/null
-+++ b/tests/misaligned-io-breakpoints/Makefile
-@@ -0,0 +1,9 @@
-+include $(ROOT)/build/common.mk
-+
-+NAME      := misaligned-io-breakpoints
-+CATEGORY  := utility
-+TEST-ENVS := pv64
-+
-+obj-perenv += main.o
-+
-+include $(ROOT)/build/gen.mk
-diff --git a/tests/misaligned-io-breakpoints/main.c b/tests/misaligned-io-breakpoints/main.c
-new file mode 100644
-index 000000000000..d91222b29288
---- /dev/null
-+++ b/tests/misaligned-io-breakpoints/main.c
-@@ -0,0 +1,283 @@
-+/**
-+ * @file tests/misaligned-io-breakpoints/main.c
-+ * @ref test-misaligned-io-breakpoints - Misaligned I/O port hardware breakpoint test.
-+ *
-+ * @page test-misaligned-io-breakpoints Misaligned I/O Breakpoints
-+ *
-+ * When hardware breakpoints are configured on misaligned IO ports, the
-+ * hardware will mask the addresses based on the breakpoint width during
-+ * comparison.
-+ *
-+ * This test checks that the emulated behaviour of misaligned IO breakpoints
-+ * in PV guests match that of real hardware.
-+ *
-+ * @see tests/io-breakpoint-bug/main.c
-+ */
-+#include <xtf.h>
-+
-+enum width { _16, _32 };
-+
-+const char test_title[] = "Misaligned I/O Breakpoints";
-+
-+static const struct test {
-+    unsigned long breakpoint_port;
-+    enum width breakpoint_size;
-+    uint16_t io_op_port;
-+    enum width io_op_len;
-+    bool expect_breakpoint_trigger;
-+} tests[] = {
-+    /* 16-bit breakpoint, 16-bit I/O operation */
-+    { 0x09, _16, 0x06, _16, false },
-+    { 0x09, _16, 0x07, _16, true  },
-+    { 0x09, _16, 0x08, _16, true  },
-+    { 0x09, _16, 0x09, _16, true  },
-+    { 0x09, _16, 0x0a, _16, false },
-+
-+    { 0x0b, _16, 0x08, _16, false },
-+    { 0x0b, _16, 0x09, _16, true  },
-+    { 0x0b, _16, 0x0a, _16, true  },
-+    { 0x0b, _16, 0x0b, _16, true  },
-+    { 0x0b, _16, 0x0c, _16, false },
-+
-+    /* 16-bit breakpoint, 32-bit I/O operation */
-+    { 0x09, _16, 0x04, _32, false },
-+    { 0x09, _16, 0x05, _32, true  },
-+    { 0x09, _16, 0x06, _32, true  },
-+    { 0x09, _16, 0x07, _32, true  },
-+    { 0x09, _16, 0x08, _32, true  },
-+    { 0x09, _16, 0x09, _32, true  },
-+    { 0x09, _16, 0x0a, _32, false },
-+
-+    { 0x0b, _16, 0x06, _32, false },
-+    { 0x0b, _16, 0x07, _32, true  },
-+    { 0x0b, _16, 0x08, _32, true  },
-+    { 0x0b, _16, 0x09, _32, true  },
-+    { 0x0b, _16, 0x0a, _32, true  },
-+    { 0x0b, _16, 0x0b, _32, true  },
-+    { 0x0b, _16, 0x0c, _32, false },
-+
-+    /* 32-bit breakpoint, 16-bit I/O operation */
-+    { 0x09, _32, 0x06, _16, false },
-+    { 0x09, _32, 0x07, _16, true  },
-+    { 0x09, _32, 0x08, _16, true  },
-+    { 0x09, _32, 0x09, _16, true  },
-+    { 0x09, _32, 0x0a, _16, true  },
-+    { 0x09, _32, 0x0b, _16, true  },
-+    { 0x09, _32, 0x0c, _16, false },
-+
-+    { 0x0a, _32, 0x06, _16, false },
-+    { 0x0a, _32, 0x07, _16, true  },
-+    { 0x0a, _32, 0x08, _16, true  },
-+    { 0x0a, _32, 0x09, _16, true  },
-+    { 0x0a, _32, 0x0a, _16, true  },
-+    { 0x0a, _32, 0x0b, _16, true  },
-+    { 0x0a, _32, 0x0c, _16, false },
-+
-+    { 0x0b, _32, 0x06, _16, false },
-+    { 0x0b, _32, 0x07, _16, true  },
-+    { 0x0b, _32, 0x08, _16, true  },
-+    { 0x0b, _32, 0x09, _16, true  },
-+    { 0x0b, _32, 0x0a, _16, true  },
-+    { 0x0b, _32, 0x0b, _16, true  },
-+    { 0x0b, _32, 0x0c, _16, false },
-+
-+    { 0x0d, _32, 0x0a, _16, false },
-+    { 0x0d, _32, 0x0b, _16, true  },
-+    { 0x0d, _32, 0x0c, _16, true  },
-+    { 0x0d, _32, 0x0d, _16, true  },
-+    { 0x0d, _32, 0x0e, _16, true  },
-+    { 0x0d, _32, 0x0f, _16, true  },
-+    { 0x0d, _32, 0x10, _16, false },
-+
-+    { 0x0e, _32, 0x0a, _16, false },
-+    { 0x0e, _32, 0x0b, _16, true  },
-+    { 0x0e, _32, 0x0c, _16, true  },
-+    { 0x0e, _32, 0x0d, _16, true  },
-+    { 0x0e, _32, 0x0e, _16, true  },
-+    { 0x0e, _32, 0x0f, _16, true  },
-+    { 0x0e, _32, 0x10, _16, false },
-+
-+    { 0x0f, _32, 0x0a, _16, false },
-+    { 0x0f, _32, 0x0b, _16, true  },
-+    { 0x0f, _32, 0x0c, _16, true  },
-+    { 0x0f, _32, 0x0d, _16, true  },
-+    { 0x0f, _32, 0x0e, _16, true  },
-+    { 0x0f, _32, 0x0f, _16, true  },
-+    { 0x0f, _32, 0x10, _16, false },
-+
-+    /* 32-bit breakpoint, 32-bit I/O operation */
-+    { 0x09, _32, 0x04, _32, false },
-+    { 0x09, _32, 0x05, _32, true  },
-+    { 0x09, _32, 0x06, _32, true  },
-+    { 0x09, _32, 0x07, _32, true  },
-+    { 0x09, _32, 0x08, _32, true  },
-+    { 0x09, _32, 0x09, _32, true  },
-+    { 0x09, _32, 0x0a, _32, true  },
-+    { 0x09, _32, 0x0b, _32, true  },
-+    { 0x09, _32, 0x0c, _32, false },
-+
-+    { 0x0a, _32, 0x04, _32, false },
-+    { 0x0a, _32, 0x05, _32, true  },
-+    { 0x0a, _32, 0x06, _32, true  },
-+    { 0x0a, _32, 0x07, _32, true  },
-+    { 0x0a, _32, 0x08, _32, true  },
-+    { 0x0a, _32, 0x09, _32, true  },
-+    { 0x0a, _32, 0x0a, _32, true  },
-+    { 0x0a, _32, 0x0b, _32, true  },
-+    { 0x0a, _32, 0x0c, _32, false },
-+
-+    { 0x0b, _32, 0x04, _32, false },
-+    { 0x0b, _32, 0x05, _32, true  },
-+    { 0x0b, _32, 0x06, _32, true  },
-+    { 0x0b, _32, 0x07, _32, true  },
-+    { 0x0b, _32, 0x08, _32, true  },
-+    { 0x0b, _32, 0x09, _32, true  },
-+    { 0x0b, _32, 0x0a, _32, true  },
-+    { 0x0b, _32, 0x0b, _32, true  },
-+    { 0x0b, _32, 0x0c, _32, false },
-+
-+    { 0x0d, _32, 0x08, _32, false },
-+    { 0x0d, _32, 0x09, _32, true  },
-+    { 0x0d, _32, 0x0a, _32, true  },
-+    { 0x0d, _32, 0x0b, _32, true  },
-+    { 0x0d, _32, 0x0c, _32, true  },
-+    { 0x0d, _32, 0x0d, _32, true  },
-+    { 0x0d, _32, 0x0e, _32, true  },
-+    { 0x0d, _32, 0x0f, _32, true  },
-+    { 0x0d, _32, 0x10, _32, false },
-+
-+    { 0x0e, _32, 0x08, _32, false },
-+    { 0x0e, _32, 0x09, _32, true  },
-+    { 0x0e, _32, 0x0a, _32, true  },
-+    { 0x0e, _32, 0x0b, _32, true  },
-+    { 0x0e, _32, 0x0c, _32, true  },
-+    { 0x0e, _32, 0x0d, _32, true  },
-+    { 0x0e, _32, 0x0e, _32, true  },
-+    { 0x0e, _32, 0x0f, _32, true  },
-+    { 0x0e, _32, 0x10, _32, false },
-+
-+    { 0x0f, _32, 0x08, _32, false },
-+    { 0x0f, _32, 0x09, _32, true  },
-+    { 0x0f, _32, 0x0a, _32, true  },
-+    { 0x0f, _32, 0x0b, _32, true  },
-+    { 0x0f, _32, 0x0c, _32, true  },
-+    { 0x0f, _32, 0x0d, _32, true  },
-+    { 0x0f, _32, 0x0e, _32, true  },
-+    { 0x0f, _32, 0x0f, _32, true  },
-+    { 0x0f, _32, 0x10, _32, false },
-+};
-+
-+static void enable_debug_extensions(void)
-+{
-+    unsigned long cr4 = read_cr4();
-+
-+    if ( !(cr4 & X86_CR4_DE) )
-+        write_cr4(cr4 | X86_CR4_DE);
-+}
-+
-+static void init_breakpoint(enum width width)
-+{
-+    unsigned long io0, dr7;
-+
-+    switch (width)
-+    {
-+    case _16:
-+        io0 = DR7_SYM(0, G, IO, 16) | X86_DR7_GE | X86_DR7_DEFAULT;
-+        break;
-+    case _32:
-+        io0 = DR7_SYM(0, G, IO, 32) | X86_DR7_GE | X86_DR7_DEFAULT;
-+        break;
-+    default:
-+        xtf_failure("  Fail: Unknown width %d\n", width);
-+        return;
-+    }
-+
-+    write_dr7(io0);
-+
-+    if ( (dr7 = read_dr7()) != io0 )
-+        xtf_failure("  Fail: dr7 %#lx != io0 %#lx\n", dr7, io0);
-+}
-+
-+static void set_breakpoint(unsigned long io_port)
-+{
-+    unsigned long dr0;
-+
-+    write_dr0(io_port);
-+
-+    if ( (dr0 = read_dr0()) != io_port )
-+        xtf_failure("  Fail: dr0 %#lx != %#lx\n", dr0, io_port);
-+}
-+
-+/* Set vCPU IOPL to 1 to allow IO calls in kernel space */
-+static void set_iopl(void)
-+{
-+    unsigned int iopl = 1;
-+
-+    hypercall_physdev_op(PHYSDEVOP_set_iopl, &iopl);
-+}
-+
-+static exinfo_t io_op(uint16_t io_port, enum width io_op_len)
-+{
-+    exinfo_t fault = 0;
-+
-+    switch (io_op_len)
-+    {
-+    case _16:
-+        asm volatile ("outw %w0, %w1; 1:"
-+                      _ASM_EXTABLE_HANDLER(1b, 1b, %P[rec])
-+                      : "+a" (fault)
-+                      : "Nd" (io_port),
-+                        [rec] "p" (ex_record_fault_eax));
-+        break;
-+    case _32:
-+        asm volatile ("outl %k0, %w1; 1:"
-+                      _ASM_EXTABLE_HANDLER(1b, 1b, %P[rec])
-+                      : "+a" (fault)
-+                      : "Nd" (io_port),
-+                        [rec] "p" (ex_record_fault_eax));
-+        break;
-+    default:
-+        xtf_failure("  Fail: Unknown width %d\n", io_op_len);
-+        break;
-+    }
-+
-+    return fault;
-+}
-+
-+void test_main(void)
-+{
-+    unsigned int i;
-+
-+    enable_debug_extensions();
-+    set_iopl();
-+
-+    for ( i = 0; i < ARRAY_SIZE(tests); ++i )
-+    {
-+        const struct test *t = &tests[i];
-+
-+        /* arrange */
-+        init_breakpoint(t->breakpoint_size);
-+        set_breakpoint(t->breakpoint_port);
-+
-+        /* act */
-+        exinfo_t ex = io_op(t->io_op_port, t->io_op_len);
-+
-+        /* assert */
-+        if ( t->expect_breakpoint_trigger && ex != EXINFO_SYM(DB, 0) )
-+            xtf_failure("Fail: Expected trigger with breakpoint port 0x%02lx and io port 0x%02x, but got no trigger.\n", t->breakpoint_port, t->io_op_port);
-+        if ( !t->expect_breakpoint_trigger && ex == EXINFO_SYM(DB, 0) )
-+            xtf_failure("Fail: Expected no trigger with breakpoint port 0x%02lx and io port 0x%02x, but got trigger.\n", t->breakpoint_port, t->io_op_port);
-+    }
-+
-+    xtf_success(NULL);
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
--- 
-2.34.1
+# echo 1 > /sys/bus/pci/devices/0000\:01\:00.0/sriov_numvfs
+# echo 1 > /sys/bus/pci/devices/0000\:01\:00.0/remove
+[   56.738750]  0000:01:00.0: driver left SR-IOV enabled after remove
+(XEN) Attempted to remove PCI SR-IOV PF 0000:01:00.0 with VFs still present
+[   56.749904] pci 0000:01:00.0: Failed to delete - passthrough or MSI/MSI-X might fail!
+# echo $?
+0
 
+Subsequently, lspci reveals no entry for 0000:01:00.0. I think it's
+appropriate to mark them broken.
 
