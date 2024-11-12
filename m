@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4295D597A4
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Nov 2024 20:54:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.834910.1250706 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B0FD597A4
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Nov 2024 21:19:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.834939.1250756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAxtL-0006YT-LG; Tue, 12 Nov 2024 20:53:39 +0000
+	id 1tAyIL-0002cZ-7c; Tue, 12 Nov 2024 21:19:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 834910.1250706; Tue, 12 Nov 2024 20:53:39 +0000
+Received: by outflank-mailman (output) from mailman id 834939.1250756; Tue, 12 Nov 2024 21:19:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAxtL-0006YM-IP; Tue, 12 Nov 2024 20:53:39 +0000
-Received: by outflank-mailman (input) for mailman id 834910;
- Tue, 12 Nov 2024 20:53:38 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tAyIL-0002aE-2e; Tue, 12 Nov 2024 21:19:29 +0000
+Received: by outflank-mailman (input) for mailman id 834939;
+ Tue, 12 Nov 2024 21:19:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6R0y=SH=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1tAxtJ-0006YG-VU
- for xen-devel@lists.xenproject.org; Tue, 12 Nov 2024 20:53:38 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20620.outbound.protection.outlook.com
- [2a01:111:f403:2412::620])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2b9e2061-a138-11ef-a0c7-8be0dac302b0;
- Tue, 12 Nov 2024 21:53:33 +0100 (CET)
-Received: from BL1PR13CA0107.namprd13.prod.outlook.com (2603:10b6:208:2b9::22)
- by DS0PR12MB7704.namprd12.prod.outlook.com (2603:10b6:8:138::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.17; Tue, 12 Nov
- 2024 20:53:24 +0000
-Received: from MN1PEPF0000ECDB.namprd02.prod.outlook.com
- (2603:10b6:208:2b9:cafe::94) by BL1PR13CA0107.outlook.office365.com
- (2603:10b6:208:2b9::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.14 via Frontend
- Transport; Tue, 12 Nov 2024 20:53:24 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- MN1PEPF0000ECDB.mail.protection.outlook.com (10.167.242.139) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8158.14 via Frontend Transport; Tue, 12 Nov 2024 20:53:24 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 12 Nov
- 2024 14:53:23 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 12 Nov
- 2024 14:53:23 -0600
-Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Tue, 12 Nov 2024 14:53:22 -0600
+ <SRS0=qpNK=SH=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tAyIJ-0002GE-OU
+ for xen-devel@lists.xenproject.org; Tue, 12 Nov 2024 21:19:27 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c90b5a56-a13b-11ef-99a3-01e77a169b0f;
+ Tue, 12 Nov 2024 22:19:22 +0100 (CET)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a99f646ff1bso922054666b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 12 Nov 2024 13:19:22 -0800 (PST)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9ee0defaefsm762049066b.164.2024.11.12.13.19.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Nov 2024 13:19:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,106 +47,234 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b9e2061-a138-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDE6MTExOmY0MDM6MjQxMjo6NjIwIiwiaGVsbyI6Ik5BTTEwLU1XMi1vYmUub3V0Ym91bmQucHJvdGVjdGlvbi5vdXRsb29rLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjJiOWUyMDYxLWExMzgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNDQ0ODEzLjMyMDUxMywic2VuZGVyIjoic3Rld2FydC5oaWxkZWJyYW5kQGFtZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ybN83OVu3NECRKTklXs4GVlLlcGDrwS2voTvkExbdLLuQys4H/cMNXccwObGo6aaMCqSCdm8Pyoboj7+zSQgs+bMdswn8Tm/6D1s4/HFKDP4yY9qjudThRjWcsuws/QMOQ0+Ko94CBocbnPf4kLrmCHIGcVXXR1XekCj14gmp+i5Xw6OuPAYtK29GXGwt3jdTrArrIEbwnc7ZR3s5REZB4Z5y+9ObfHMcxNIEha8cOMMJEUaVvuLleTjztlfqtLqNdfoT7tNte47aLXpd0LMGFOVXx093jtEpel3odTach9Bj9qkT9sQGCk6xCw0bFLqBvemOc4x5iq0YinIA9KoTQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TznUirNIgng++pgaNb4AFp4lxySJRj7XVEi88zW4vFA=;
- b=sCGGkkUosXhNzyendSNHMi/6YyOz5nFS3YcSVp2MBZ2QpDMPcN6lWO7dsr7L2VfxRyB05E0hdlGhBDS29j+7Nd9ILsFhhme3HRFKkvIuPGfZZLTkMFOanMQol7QrC8+Tf9npoS7cAxw52Ov3kLMJatKpyjEetLZLBXHf9hRkeev9s/J5gyxGCVxJsHh+/p1c5Wyv/x0ZsgLPJIR5tWLA2m+HVv9u5+rWrsuzDMKMMaO+5/UqF0Fxjp2MTyQVBvdzgu1PsFw3l9vUfBiH6DdoWObtx2kvfH5sMTYVNpbGxCQYU3F6zw2hxqXzJtoEl/KUjY6LMTIUoWXgXi1oPesj4w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TznUirNIgng++pgaNb4AFp4lxySJRj7XVEi88zW4vFA=;
- b=We7QIC9UjFXNnbTIcd7ysEzXnEuE3fR4vLHvC3+wp1w56hRZ/OrxyUhoM6KHtJBPZFaLADdgojdFAFTMArKlodPwklS2WCO25+B4h1RWVuFDNtHTbGpp00DBsqwojUGHhNgNCpPH52SGPDZFj/+HMbp0B72BAOjzle5HS8twZPE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, "Teddy
- Astie" <teddy.astie@vates.tech>
-Subject: [PATCH v7 0/2] xen: SR-IOV fixes
-Date: Tue, 12 Nov 2024 15:53:18 -0500
-Message-ID: <20241112205321.186622-1-stewart.hildebrand@amd.com>
-X-Mailer: git-send-email 2.47.0
+X-Inumbo-ID: c90b5a56-a13b-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmMiLCJoZWxvIjoibWFpbC1lajEteDYyYy5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImM5MGI1YTU2LWExM2ItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNDQ2MzYyLjE1MzI3Miwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1731446361; x=1732051161; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bXeqEdvAbZY1hWBgh5PB6EHEOkfnXP4Z7DiK6RDTCRc=;
+        b=Y6eo8II4Sft87xefMFJ5TAX4WO5E7olFZJqfqbEh9+EhcIGtX9UJdH6nPGTuyKJ4jS
+         n+Emac6sgclu57N2Bz/TMrg44yfbyn+cfTcpbpyBLS4vFSX011hXASBG4xwJQKndFnKP
+         CELceyCN3WoyuJspyOjnaf1UnX0ZcHGnjgUxE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731446361; x=1732051161;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=bXeqEdvAbZY1hWBgh5PB6EHEOkfnXP4Z7DiK6RDTCRc=;
+        b=aD2Zlm6SaN1oNHvZopxa+X19UkR6mfOZdKMoFHnQl4Ze566pLjhqxTeT82nhj8AoJ5
+         PYw6bWlD1kBHre1e+RatGJa3bam0Yg3i9IKcTNUET6ZmhzOkEwi//JPHc/ONvdKVAkOv
+         pefygGdB7LYuVO8HTQlGoolD/BAcPksFcjXfs0XERtFEvuaHTvoqYTDElNSVbu3hYth7
+         ywD8BWQtuNE3dRLsMfPHxyWWIpPVSVZwSfdrXDU/TCb2/fwCq6Bn+tOMwDKglWO/gY5c
+         hHuZQhxPLpKxFjRR26/XJ6/w20tOFcWFlhq3YDbu6wgjnXRhs+ahSU3zI7O+x2ERG+wJ
+         Udgw==
+X-Gm-Message-State: AOJu0Yx7I9qt/Uzp2alfkog29x24aohe8RVRtcnfiBKPPwDtSxfTh6MU
+	owCt/+QapeSyimFeI2+/8Qynth5UIpMT21MwOaEbPn3T7QBqz8F3VjtE2DQH3A8TnOJUCTqy0Pz
+	l
+X-Google-Smtp-Source: AGHT+IFjrmJwiNSREOn7qFXBleK0HcSvHQ14DMXgAqdWjXwH2NYh+4Itd++JTpf1sV0e8HYJTjMHjw==
+X-Received: by 2002:a17:907:1b0e:b0:a9a:1792:f05 with SMTP id a640c23a62f3a-aa1b10a45a5mr450483466b.31.1731446361142;
+        Tue, 12 Nov 2024 13:19:21 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 2/3] x86/ucode: Fix cache handling in microcode_update_helper()
+Date: Tue, 12 Nov 2024 21:19:14 +0000
+Message-Id: <20241112211915.1473121-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241112211915.1473121-1-andrew.cooper3@citrix.com>
+References: <20241112211915.1473121-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECDB:EE_|DS0PR12MB7704:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8536dcc5-edda-4dc6-7263-08dd035c0cbe
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?B0DqtXgGnNZi9zf4gDsibbspakhpcbStCl+Jed4P8x5PcsVORIj2Aa3qGLoM?=
- =?us-ascii?Q?367cgPupxfbzryBq1XAR/vowVl9jSlsFBiQUX1CXBBzPdBx8qwben9+H6avc?=
- =?us-ascii?Q?ZiagyteOR3z536Lfd+bnATqgU5Ifm19emoJi/ftsTI3HqW91lRhWkUY0LRLM?=
- =?us-ascii?Q?F3k91oL0hfKVrmQEb31tA+Wf7PEjxdxhpYLl02n0/xg1SR1YCCXL3vIlyakf?=
- =?us-ascii?Q?H9R6SmoyjlN3TLC5qhHsWktDujoe0ew107Tf1BwFV0FzblO/ulwdnPZGfiYi?=
- =?us-ascii?Q?1aOeuoRBdl08eJeRHFfmaceHa1VU/ggwu3QZawRzt1QysTuX1Vhcv58oDpfx?=
- =?us-ascii?Q?nrmiQQELhD5MYv27kYazh9X9cRmn38lTHKiZyyes/9p2tppihubik/MIfgnG?=
- =?us-ascii?Q?2GUJlJxGmxYsisQPK1u5E3srwGzUd++hqO8uM+OUATGdkIxCseLwqwdG+doO?=
- =?us-ascii?Q?l48ZntH0is7fI27wF1kAPf55CLktoaAsgr1DowYd6r0rCLHQfvqPxBDgwoMy?=
- =?us-ascii?Q?Upq9ZsNJznAEPJX+mIWYPyjVPAk5eKZ+U/IozBfGa9lw8D6jwCXRKedaemg4?=
- =?us-ascii?Q?Bj/TY+GNuz1Ej1+IelD/wM4uDgyuWGLS/HfsW84BL31q6uHpnuncwTQsBa2X?=
- =?us-ascii?Q?t5AN1Is7r8d4VDJ6ZkHOkME3uawS3duZmD7CZUqiLHmc6yDELAEPWS4KJTct?=
- =?us-ascii?Q?EVyrSWZsa7kdFrSXfPgAAxSLV7BbVYjA6WxsRYw68eWdasVV5zKWwVivek5h?=
- =?us-ascii?Q?IvdWFbdYgr34OoRtdXgeXBxAoia1Lj/zqfrWUhunKk3bCEOb/1VRcMxKlUky?=
- =?us-ascii?Q?1QlXQC29jhuRYaXsJJEnuvb4pz9ak5QvsZ+Udzw8WX1kvLeF3POHdDEgtL39?=
- =?us-ascii?Q?yKTeJoAyR6z8j6qT+JmT55xn1y/ExP/oyImOiYI1Jlg/oUi+GmjMq3GiBGlT?=
- =?us-ascii?Q?H/dFH5y16dRXWU76zQNCSc8K/zWYU+De2CavF92Cp4XfdFaj92OQQQACIPPx?=
- =?us-ascii?Q?SQ+TWOSZvJfscpoGMTXtakCFjXQRzKoilKU57fwcpDc6+CriGfcKkjjssjWv?=
- =?us-ascii?Q?nF2dExjFySM8eYTn2GNDERDPkqW6toqJhRZV4uubaMBkFa4QrCodQTe/NICW?=
- =?us-ascii?Q?FYGhcL5lz/dvPKHSxeU0fEHPfVeFHSm2eZV5oNUgUAfskCDyM1Hr9Fl4XdYV?=
- =?us-ascii?Q?xthh2C3iEeIPneyJ9KxrThgIO7gH6giCEJ+CrIh09lfI9Vusplk1ZgpFxWEH?=
- =?us-ascii?Q?W0063JG7VZgW4TaMV/tZY5MVthzWiA49OSIrWcyypUQN2e6yr/gW2uQ7IyUF?=
- =?us-ascii?Q?NtvEX+hxBVY1xHlgpQTVb683fz9UB+8TF53+Y2U8wJwbovwFQgRLQbv/LpL2?=
- =?us-ascii?Q?ix/V5rvKv5ZI1jIhNBeZn3GfzZvyrc497uKUngDFFNrgoaF7PQ=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2024 20:53:24.1535
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8536dcc5-edda-4dc6-7263-08dd035c0cbe
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MN1PEPF0000ECDB.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7704
 
-Introduce PV<->VF links and fix a regressiong related to a locking
-change.
+microcode_update_cache() now has a single caller, but inlining it shows how
+unnecessarily complicated the logic really is.
 
-Stewart Hildebrand (2):
-  xen/pci: introduce PF<->VF links
-  x86/msi: fix locking for SR-IOV devices
+Outside of error paths, there is always one microcode patch to free.  Its
+either result of parse_blob(), or it's the old cached value.
 
- xen/arch/x86/msi.c            | 36 ++++++++-------
- xen/drivers/passthrough/pci.c | 82 +++++++++++++++++++++++++++--------
- xen/include/xen/pci.h         | 15 ++++++-
- 3 files changed, 100 insertions(+), 33 deletions(-)
+In order to fix this, have a local patch pointer (mostly to avoid the
+unnecessary verbosity of patch_with_flags.patch), and always free it at the
+end.  The only error path needing care is the IS_ERR(patch) path, which is
+easy enough to handle.
 
+Also, widen the scope of result.  We only need to call compare_patch() once,
+and the answer is still good later when updating the cache.  In order to
+update the cache, simply SWAP() the patch and the cache pointers, allowing the
+singular xfree() at the end to cover both cases.
 
-base-commit: 64d2290cf96bbf84bb8606f9bc784166ac610b1c
+This also removes all callers microcode_free_patch() which fixes the need to
+cast away const to allow it to compile.  This also removed several violations
+of MISRA Rule 11.8 which disallows casting away const.
+
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+---
+ xen/arch/x86/cpu/microcode/core.c | 66 +++++++++++--------------------
+ 1 file changed, 24 insertions(+), 42 deletions(-)
+
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 5897ec54032a..0cc5daa251e2 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -86,7 +86,7 @@ struct patch_with_flags {
+ static bool ucode_in_nmi = true;
+ 
+ /* Protected by microcode_mutex */
+-static const struct microcode_patch *microcode_cache;
++static struct microcode_patch *microcode_cache;
+ 
+ /*
+  * opt_mod_idx and opt_scan have subtle semantics.
+@@ -192,33 +192,6 @@ static struct microcode_patch *parse_blob(const char *buf, size_t len)
+     return alternative_call(ucode_ops.cpu_request_microcode, buf, len, true);
+ }
+ 
+-static void microcode_free_patch(const struct microcode_patch *patch)
+-{
+-    xfree((struct microcode_patch *)patch);
+-}
+-
+-/* Return true if cache gets updated. Otherwise, return false */
+-static bool microcode_update_cache(const struct microcode_patch *patch)
+-{
+-    ASSERT(spin_is_locked(&microcode_mutex));
+-
+-    if ( !microcode_cache )
+-        microcode_cache = patch;
+-    else if ( alternative_call(ucode_ops.compare_patch,
+-                               patch, microcode_cache) == NEW_UCODE )
+-    {
+-        microcode_free_patch(microcode_cache);
+-        microcode_cache = patch;
+-    }
+-    else
+-    {
+-        microcode_free_patch(patch);
+-        return false;
+-    }
+-
+-    return true;
+-}
+-
+ /* Returns true if ucode should be loaded on a given cpu */
+ static bool is_cpu_primary(unsigned int cpu)
+ {
+@@ -496,6 +469,8 @@ struct ucode_buf {
+ 
+ static long cf_check microcode_update_helper(void *data)
+ {
++    struct microcode_patch *patch = NULL;
++    enum microcode_match_result result;
+     int ret;
+     struct ucode_buf *buffer = data;
+     unsigned int cpu, updated;
+@@ -524,17 +499,20 @@ static long cf_check microcode_update_helper(void *data)
+         goto put;
+     }
+ 
+-    patch_with_flags.patch = parse_blob(buffer->buffer, buffer->len);
++    patch = parse_blob(buffer->buffer, buffer->len);
+     patch_with_flags.flags = buffer->flags;
++
+     xfree(buffer);
+-    if ( IS_ERR(patch_with_flags.patch) )
++
++    if ( IS_ERR(patch) )
+     {
+-        ret = PTR_ERR(patch_with_flags.patch);
++        ret = PTR_ERR(patch);
++        patch = NULL;
+         printk(XENLOG_WARNING "Parsing microcode blob error %d\n", ret);
+         goto put;
+     }
+ 
+-    if ( !patch_with_flags.patch )
++    if ( !patch )
+     {
+         printk(XENLOG_WARNING "microcode: couldn't find any matching ucode in "
+                               "the provided blob!\n");
+@@ -549,10 +527,7 @@ static long cf_check microcode_update_helper(void *data)
+     spin_lock(&microcode_mutex);
+     if ( microcode_cache )
+     {
+-        enum microcode_match_result result;
+-
+-        result = alternative_call(ucode_ops.compare_patch,
+-                                  patch_with_flags.patch, microcode_cache);
++        result = alternative_call(ucode_ops.compare_patch, patch, microcode_cache);
+ 
+         if ( result != NEW_UCODE &&
+              !(ucode_force && (result == OLD_UCODE || result == SAME_UCODE)) )
+@@ -561,12 +536,13 @@ static long cf_check microcode_update_helper(void *data)
+             printk(XENLOG_WARNING
+                    "microcode: couldn't find any newer%s revision in the provided blob!\n",
+                    ucode_force ? " (or a valid)" : "");
+-            microcode_free_patch(patch_with_flags.patch);
+             ret = -EEXIST;
+ 
+             goto put;
+         }
+     }
++    else
++        result = NEW_UCODE;
+     spin_unlock(&microcode_mutex);
+ 
+     cpumask_clear(&cpu_callin_map);
+@@ -593,14 +569,18 @@ static long cf_check microcode_update_helper(void *data)
+      *   this requirement can be relaxed in the future. Right now, this is
+      *   conservative and good.
+      */
++    patch_with_flags.patch = patch;
+     ret = stop_machine_run(do_microcode_update, &patch_with_flags, NR_CPUS);
+ 
+     updated = atomic_read(&cpu_updated);
+     if ( updated > 0 )
+     {
+-        spin_lock(&microcode_mutex);
+-        microcode_update_cache(patch_with_flags.patch);
+-        spin_unlock(&microcode_mutex);
++        if ( result == NEW_UCODE )
++        {
++            spin_lock(&microcode_mutex);
++            SWAP(patch, microcode_cache);
++            spin_unlock(&microcode_mutex);
++        }
+ 
+         /*
+          * Refresh the raw CPU policy, in case the features have changed.
+@@ -615,8 +595,6 @@ static long cf_check microcode_update_helper(void *data)
+         if ( ctxt_switch_masking )
+             alternative_vcall(ctxt_switch_masking, current);
+     }
+-    else
+-        microcode_free_patch(patch_with_flags.patch);
+ 
+     if ( updated && updated != nr_cores )
+         printk(XENLOG_ERR "ERROR: Updating microcode succeeded on %u cores and failed\n"
+@@ -627,6 +605,10 @@ static long cf_check microcode_update_helper(void *data)
+ 
+  put:
+     put_cpu_maps();
++
++    /* The parsed blob or old cached value, whichever we're not keeping. */
++    xfree(patch);
++
+     return ret;
+ }
+ 
 -- 
-2.47.0
+2.39.5
 
 
