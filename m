@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B317CD32D96
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Nov 2024 11:26:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.834398.1250023 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2970D32D9D
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Nov 2024 12:06:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.834422.1250075 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAp2S-00031k-KP; Tue, 12 Nov 2024 11:26:28 +0000
+	id 1tApem-0001Hi-3f; Tue, 12 Nov 2024 12:06:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 834398.1250023; Tue, 12 Nov 2024 11:26:28 +0000
+Received: by outflank-mailman (output) from mailman id 834422.1250075; Tue, 12 Nov 2024 12:06:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tAp2S-00031d-Ht; Tue, 12 Nov 2024 11:26:28 +0000
-Received: by outflank-mailman (input) for mailman id 834398;
- Tue, 12 Nov 2024 11:26:27 +0000
+	id 1tApem-0001Hb-0u; Tue, 12 Nov 2024 12:06:04 +0000
+Received: by outflank-mailman (input) for mailman id 834422;
+ Tue, 12 Nov 2024 12:06:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yVpr=SH=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tAp2R-00031H-CH
- for xen-devel@lists.xenproject.org; Tue, 12 Nov 2024 11:26:27 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
+ <SRS0=3GC9=SH=xenbits.xen.org=andrewcoop@srs-se1.protection.inumbo.net>)
+ id 1tApek-0000xb-32
+ for xen-devel@lists.xen.org; Tue, 12 Nov 2024 12:06:02 +0000
+Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f24b5cef-a0e8-11ef-99a3-01e77a169b0f;
- Tue, 12 Nov 2024 12:26:23 +0100 (CET)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9e8522c10bso857083666b.1
- for <xen-devel@lists.xenproject.org>; Tue, 12 Nov 2024 03:26:23 -0800 (PST)
-Received: from localhost ([213.195.123.63]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0dee5e6sm704321466b.137.2024.11.12.03.26.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 03:26:22 -0800 (PST)
+ id 75de791e-a0ee-11ef-99a3-01e77a169b0f;
+ Tue, 12 Nov 2024 13:05:52 +0100 (CET)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1tApeV-001dw3-1W;
+ Tue, 12 Nov 2024 12:05:47 +0000
+Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1tApeV-001S2c-2H;
+ Tue, 12 Nov 2024 12:05:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,90 +45,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f24b5cef-a0e8-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzQiLCJoZWxvIjoibWFpbC1lajEteDYzNC5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImYyNGI1Y2VmLWEwZTgtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNDEwNzgzLjkwMDgwMSwic2VuZGVyIjoicm9nZXIucGF1QGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1731410782; x=1732015582; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=YDUeboFTqpfDpgTyvfpA/Swkz5Hj6r2NHKCdkbebt5A=;
-        b=ZGfSVcJT4/oxKS6eE7BvVhd7zuSKf8SLiNOVrgIN8FEWuI7CmdvyRGhRHgLnGooNGp
-         2tuExP875XJYO6fWoDuGykyA/yntTC34MpWI2IoRE3t+/gV6JG9iBkLYQwnFkPAPmbvD
-         KYs7O3RHutA0eF9v1mApFXeTE0JRyEeska1Ew=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731410782; x=1732015582;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YDUeboFTqpfDpgTyvfpA/Swkz5Hj6r2NHKCdkbebt5A=;
-        b=Dm43JhM+KpWE10aTALIdSyul6CaMGa6k9dxxQgaK0SovlgrZ3QGwNQI4q98NXC1OlF
-         RlWEZ7CV1mC4v5xQRXKavZ+nsSBKN4LTxgaabRl+s7LGoXzwKaEYmmOHaeGoT0n2mthV
-         sWS76MxLSuWfc/ia9iHixoPJKavQ7NMw6CfMAOlovlRxFjM0c+H7N2cOLdMW1hDPIvPz
-         zbXfOugBU5RyLZc8Eii0Mx2mLU8rOwYwRT6U6k9hz7aCzih7TY3LpZia2XAlcnPxAEkt
-         MA3bymbCkkzjzRDPLYS8ehP/CY35Fmce04kMSLBsWecpu2zUVwTUruUpLDOsOkwSl4/B
-         UBmA==
-X-Forwarded-Encrypted: i=1; AJvYcCV7hK60LjNp9gteFmGdbWFBrrYihdn+TLYQ1FQJ8XB+vx68nRjA0t8RUDb7/VwH8ks7lFmYq0qSwfA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzCrpgzF1DRVfqrt/YXwTiOUhH3YBFdJGrUpyvajgivF6las084
-	YivKTYsKmqcFqBjYh8gykP8X4NcOWCqPn/Dt9vsdPckAzcJH1M2GTJQjiXHmldc=
-X-Google-Smtp-Source: AGHT+IEAMyArMZN66COTvW23x62lBLsbglG8DuIZGTgVFUxR5UVU5ftDDQqof+PQqDbAA1fuqahPeQ==
-X-Received: by 2002:a17:907:7b89:b0:a9a:5b84:ac81 with SMTP id a640c23a62f3a-a9eeffe9032mr1099774566b.31.1731410782507;
-        Tue, 12 Nov 2024 03:26:22 -0800 (PST)
-Date: Tue, 12 Nov 2024 12:26:21 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: Jan Beulich <jbeulich@suse.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [XEN PATCH] xen/vpci: Fix UB in mask_write
-Message-ID: <ZzM7XZmKfFxys819@macbook>
-References: <559dfac91b8f097bc59c4de194fd2ae2b5b4144c.1730880005.git.mykyta_poturai@epam.com>
- <ZyswF4grJSNcVqY_@macbook>
- <Zysx4ZwCUv62uTBw@macbook>
- <6d3f322f-7047-4033-95b5-86751a58cc70@suse.com>
- <65d2043f-5e6f-4d84-8241-eb28dd94fc45@epam.com>
- <ZytkOP_7nmeSVEYH@macbook>
- <7c57371b-803a-418b-97cb-55e79516eed4@epam.com>
- <ZyuDwnYj5-uCWrMy@macbook>
- <f5d8396b-26a7-476d-9871-63f603b983bd@epam.com>
+X-Inumbo-ID: 75de791e-a0ee-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjEwNC4xMzAuMjE1LjM3IiwiaGVsbyI6Im1haWwueGVucHJvamVjdC5vcmcifQ==
+X-Custom-Transaction: eyJpZCI6Ijc1ZGU3OTFlLWEwZWUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNDEzMTU1LjkyMzQ4MSwic2VuZGVyIjoiYW5kcmV3Y29vcEB4ZW5iaXRzLnhlbi5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVuLm9yZyJ9
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+X-Mailer: MIME-tools 5.510 (Entity 5.510)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 464 v2 (CVE-2024-45819) - libxl leaks data
+ to PVH guests via ACPI tables
+Message-Id: <E1tApeV-001S2c-2H@xenbits.xenproject.org>
+Date: Tue, 12 Nov 2024 12:05:47 +0000
+
+--=separator
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <f5d8396b-26a7-476d-9871-63f603b983bd@epam.com>
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 11, 2024 at 12:21:32PM +0000, Mykyta Poturai wrote:
-> On 06.11.24 16:57, Roger Pau Monné wrote:
-> > 
-> > Let's try to figure out what causes msi_maxvec to be 0 in your case
-> > and then we can see how to better detect this.  If msi_maxvec needs to
-> > be checked it should likely be done in init_msi().
-> > 
-> > Regards, Roger.
-> 
-> Hi everyone,
-> So I have done some more investigations, and I think it finally makes 
-> sense. The real cause of my crashes was a long-standing bug in yet to be 
-> upstreamed vpci patches where the register value and offset were swapped 
-> by mistake. And this bug was hidden for a long time because mask_write 
-> skipped actually doing anything, respecting vectors = 0, so I failed to 
-> spot it from the get-go.
-> 
-> Regarding msi_maxvec there seems to be an implicit dependency between 
-> CONFIG_HAS_VPCI and CONFIG_HAS_PCI_MSI. If HAS_PCI_MSI=n, then 
-> pdev_msi_init gets replaced with a stub and msi_maxvec remains 0, but it 
-> is still used in control_write unconditionally.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-Hello,
+            Xen Security Advisory CVE-2024-45819 / XSA-464
+                               version 2
 
-If HAS_PCI_MSI=n then vPCI shouldn't attempt to handle the MSI(-X)
-capabilities in the first place.  However that can lead to incorrect
-scenarios if vPCI is used for dom0, as vPCI not supporting MSI(-X)
-grants dom0 unmediated access to the capability registers, which won't
-result in a functional system at least on x86.
+            libxl leaks data to PVH guests via ACPI tables
 
-I think the more robust solution is for vPCI to require
-HAS_PCI_MSI=y.
+UPDATES IN VERSION 2
+====================
 
-Thanks, Roger.
+Public release.
+
+ISSUE DESCRIPTION
+=================
+
+PVH guests have their ACPI tables constructed by the toolstack.  The
+construction involves building the tables in local memory, which are
+then copied into guest memory.  While actually used parts of the local
+memory are filled in correctly, excess space that is being allocated is
+left with its prior contents.
+
+IMPACT
+======
+
+An unprivileged guest may be able to access sensitive information
+pertaining to the host, control domain, or other guests.
+
+VULNERABLE SYSTEMS
+==================
+
+Xen versions 4.8 and onwards are vulnerable.  Xen 4.7 and older are not
+vulnerable.
+
+Only x86 systems running PVH guests are vulnerable.  Architectures other
+than x86 are not vulnerable.
+
+Only PVH guests can leverage the vulnerability.  HVM and PV guests
+cannot leverage the vulnerability.  Note that PV guests when run inside
+the (PVH) shim can't leverage the vulnerability.
+
+MITIGATION
+==========
+
+Running only PV or HVM guests will avoid this vulnerability.
+
+CREDITS
+=======
+
+This issue was discovered by Jason Andryuk of AMD.
+
+RESOLUTION
+==========
+
+Applying the appropriate attached patch resolves this issue.
+
+Note that patches for released versions are generally prepared to
+apply to the stable branches, and may not apply cleanly to the most
+recent release tarball.  Downstreams are encouraged to update to the
+tip of the stable branch before applying these patches.
+
+xsa464.patch           xen-unstable - Xen 4.16.x
+
+$ sha256sum xsa464*
+16bca39d6136141e030276f588f1e77f634fce8301b42fb0848ddf2b611d835a  xsa464.patch
+$
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patches and/or mitigations described above (or
+others which are substantially similar) is permitted during the
+embargo, even on public-facing systems with untrusted guest users and
+administrators.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmczRE4MHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZTG8H+wV+jRjwQcgPa2OQBuedO8V0Lpu1DqQnANU//oZK
+4p5ntCeMJ9MnMlWGZhdOAwSQNgwYf17G2DezNK0XvRacfvB0/pUTH94EmKmyRkVl
+vGgs302HkNb0Il84JN/HA9TtK5+g2kSa5J5prV9tu+nGvRZ1zZPnBEFohXvXdjr7
+/KGSrbHbi5+6DdBZmmEUu65PLvQAochHvQLEHpoRp0MCVE8g0FQPFikmST39TLpJ
+6SFfVZjdmYfOUN1BYcH6AYCuCXZfbUOlqm9y1Z2EX6N0chQXsBDbOFx7/0ey23fw
+Wy9l49G//xaTR4X4uXTRiiXC7qxpclD0VKGlHKz1AUyUw6c=
+=lRfn
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa464.patch"
+Content-Disposition: attachment; filename="xsa464.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogSmFzb24gQW5kcnl1ayA8amFzb24uYW5kcnl1a0BhbWQuY29tPgpT
+dWJqZWN0OiBsaWJ4bDogVXNlIHplcm8tZWQgbWVtb3J5IGZvciBQVkggYWNw
+aSB0YWJsZXMKCnhsL2xpYnhsIG1lbW9yeSBpcyBsZWFraW5nIGludG8gYSBQ
+VkggZ3Vlc3QgdGhyb3VnaCB1bmluaXRpYWxpemVkCnBvcnRpb25zIG9mIHRo
+ZSBBQ1BJIHRhYmxlcy4KClVzZSBsaWJ4bF96YWxsb2MoKSB0byBvYnRhaW4g
+emVyby1lZCBtZW1vcnkgdG8gYXZvaWQgdGhpcyBpc3N1ZS4KClRoaXMgaXMg
+WFNBLTQ2NCAvIENWRS0yMDI0LTQ1ODE5LgoKU2lnbmVkLW9mZi1ieTogSmFz
+b24gQW5kcnl1ayA8amFzb24uYW5kcnl1a0BhbWQuY29tPgpGaXhlczogMTRj
+MGQzMjhkYTJiICgibGlieGwvYWNwaTogQnVpbGQgQUNQSSB0YWJsZXMgZm9y
+IEhWTWxpdGUgZ3Vlc3RzIikKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxq
+YmV1bGljaEBzdXNlLmNvbT4KCi0tLSBhL3Rvb2xzL2xpYnMvbGlnaHQvbGli
+eGxfeDg2X2FjcGkuYworKysgYi90b29scy9saWJzL2xpZ2h0L2xpYnhsX3g4
+Nl9hY3BpLmMKQEAgLTE3NiwxMCArMTc2LDExIEBAIGludCBsaWJ4bF9fZG9t
+X2xvYWRfYWNwaShsaWJ4bF9fZ2MgKmdjLAogICAgICAgICBnb3RvIG91dDsK
+ICAgICB9CiAKLSAgICBjb25maWcucnNkcCA9ICh1bnNpZ25lZCBsb25nKWxp
+YnhsX19tYWxsb2MoZ2MsIGxpYnhsX2N0eHQucGFnZV9zaXplKTsKLSAgICBj
+b25maWcuaW5mb3AgPSAodW5zaWduZWQgbG9uZylsaWJ4bF9fbWFsbG9jKGdj
+LCBsaWJ4bF9jdHh0LnBhZ2Vfc2l6ZSk7CisgICAgLyogVGhlc2UgYXJlIGFs
+bCBjb3BpZWQgaW50byBndWVzdCBtZW1vcnksIHNvIHVzZSB6ZXJvLWVkIG1l
+bW9yeS4gKi8KKyAgICBjb25maWcucnNkcCA9ICh1bnNpZ25lZCBsb25nKWxp
+YnhsX196YWxsb2MoZ2MsIGxpYnhsX2N0eHQucGFnZV9zaXplKTsKKyAgICBj
+b25maWcuaW5mb3AgPSAodW5zaWduZWQgbG9uZylsaWJ4bF9femFsbG9jKGdj
+LCBsaWJ4bF9jdHh0LnBhZ2Vfc2l6ZSk7CiAgICAgLyogUGFnZXMgdG8gaG9s
+ZCBBQ1BJIHRhYmxlcyAqLwotICAgIGxpYnhsX2N0eHQuYnVmID0gbGlieGxf
+X21hbGxvYyhnYywgTlVNX0FDUElfUEFHRVMgKgorICAgIGxpYnhsX2N0eHQu
+YnVmID0gbGlieGxfX3phbGxvYyhnYywgTlVNX0FDUElfUEFHRVMgKgogICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsaWJ4bF9jdHh0LnBh
+Z2Vfc2l6ZSk7CiAKICAgICAvKgo=
+
+--=separator--
 
