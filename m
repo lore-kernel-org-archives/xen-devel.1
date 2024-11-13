@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF185D41C3C
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Nov 2024 12:43:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.835556.1251462 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA53ED41C3D
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Nov 2024 12:43:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.835553.1251432 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBChu-00050a-MK; Wed, 13 Nov 2024 12:42:50 +0000
+	id 1tBChq-0004Ef-Ro; Wed, 13 Nov 2024 12:42:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 835556.1251462; Wed, 13 Nov 2024 12:42:50 +0000
+Received: by outflank-mailman (output) from mailman id 835553.1251432; Wed, 13 Nov 2024 12:42:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBChu-00050S-I6; Wed, 13 Nov 2024 12:42:50 +0000
-Received: by outflank-mailman (input) for mailman id 835556;
- Wed, 13 Nov 2024 12:42:48 +0000
+	id 1tBChq-0004EY-Op; Wed, 13 Nov 2024 12:42:46 +0000
+Received: by outflank-mailman (input) for mailman id 835553;
+ Wed, 13 Nov 2024 12:42:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RFXx=SI=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
- id 1tBChs-0003m3-QY
- for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 12:42:48 +0000
+ id 1tBCho-0003m3-Qv
+ for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 12:42:44 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c7aadf56-a1bc-11ef-99a3-01e77a169b0f;
- Wed, 13 Nov 2024 13:42:45 +0100 (CET)
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ id c231f22e-a1bc-11ef-99a3-01e77a169b0f;
+ Wed, 13 Nov 2024 13:42:36 +0100 (CET)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-501-EBEbK7cDOuCv1PKPQ0mhYg-1; Wed, 13 Nov 2024 07:42:42 -0500
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-37d4a211177so3850957f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 13 Nov 2024 04:42:42 -0800 (PST)
+ us-mta-186-sQjr1_DDNM6xdkxkxNLtww-1; Wed, 13 Nov 2024 07:42:34 -0500
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-37d5116f0a6so3762287f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Nov 2024 04:42:34 -0800 (PST)
 Received: from eisenberg.redhat.com (nat-pool-muc-u.redhat.com. [149.14.88.27])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed99aa18sm18023528f8f.61.2024.11.13.04.42.39
+ ffacd0b85a97d-381ed99aa18sm18023528f8f.61.2024.11.13.04.42.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 04:42:40 -0800 (PST)
+ Wed, 13 Nov 2024 04:42:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,42 +51,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c7aadf56-a1bc-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjE3MC4xMC4xMjkuMTI0IiwiaGVsbyI6InVzLXNtdHAtZGVsaXZlcnktMTI0Lm1pbWVjYXN0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImM3YWFkZjU2LWExYmMtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNTAxNzY1Ljc5MTA5Niwic2VuZGVyIjoicHN0YW5uZXJAcmVkaGF0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: c231f22e-a1bc-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjE3MC4xMC4xMzMuMTI0IiwiaGVsbyI6InVzLXNtdHAtZGVsaXZlcnktMTI0Lm1pbWVjYXN0LmNvbSJ9
+X-Custom-Transaction: eyJpZCI6ImMyMzFmMjJlLWExYmMtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNTAxNzU2Ljc2ODU5Mywic2VuZGVyIjoicHN0YW5uZXJAcmVkaGF0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1731501764;
+	s=mimecast20190719; t=1731501755;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=i/tiT1oHv++iZFY5S8iNVJ0nRwrLe5bjQFEltGuWg0g=;
-	b=gLpgthrpaLnM8v45rl7nPH20azm9xJdi6yTCZzkhTbGbboX0E6M00KkIC82urkaLgsX+5w
-	BT9x/Y7kKBFMu70GtPoN/vMvJN/XdD+BR1LQ+S6qLdQgQ3YvLhM6Yjvk4eSVksIPn/m99C
-	5CpLqC3itcNDYT8Cf9dvVkLbjEdDLz4=
-X-MC-Unique: EBEbK7cDOuCv1PKPQ0mhYg-1
-X-Mimecast-MFC-AGG-ID: EBEbK7cDOuCv1PKPQ0mhYg
+	bh=40yBQL1XcEoYGtru1ianOSHWnjsf7gEjQJGHFwcCtv4=;
+	b=KnH/ty2V1r8OYgyV9i4Ts9sW4veswdNYR6HLUkcoipdcpD2fcaP5DiOBoslZ5E9+ZqTHGt
+	PKiRBNipZk5iUwQmJPf47PGiQFH9FMQQQvLobT4QfZNPQcZN56eZ4/+IPzDobzUUBZOFJ3
+	o3hNkxWbbHwMpCEDC/yog31LEwRTgyU=
+X-MC-Unique: sQjr1_DDNM6xdkxkxNLtww-1
+X-Mimecast-MFC-AGG-ID: sQjr1_DDNM6xdkxkxNLtww
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731501762; x=1732106562;
+        d=1e100.net; s=20230601; t=1731501753; x=1732106553;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=i/tiT1oHv++iZFY5S8iNVJ0nRwrLe5bjQFEltGuWg0g=;
-        b=cpr2rcP+ohmmm6ZUEAt0ZLbS+rlWFwO0e4eX2pqxaf58bZkY48NYBALjjpAq0/vSJj
-         sPE9GY35nsRXVQJLGo9hadbJqzN9uVeVexieUb1io1v4pvbPoXQdHToAecNn5t+7PvPb
-         xY8if97yKlWjRgZopQf8cBBT2rhyFDx5FBI7uzuFM0rHVnjdXWpJY82tQLHctU1PUGjP
-         2qb+ewUu1SssOvQjeeXT0O3zyraVdAvPTEOiyeB6QcY+ZT3d0o6/WYhStgeHpQFgFzrs
-         qB4ndVlUk1I0AKeUcd2RmSBemFC+9h0ZaTfpz6EJQhXjPGp2h1uEyhduANgF5vgP1Pat
-         lOeA==
-X-Forwarded-Encrypted: i=1; AJvYcCVusIPCg4HmscM9GobaDCcdgZi1JghtJLnOuvLwS6yCemP0nEcRTlXEK8zKcgoAF6wzMBoGZh3u4jY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx3mjs76x6hDj+bhiWP6qaUuTvWwsPFePQyzkOsHwgRgaqjYy40
-	ND/w91x4N/uJJV27IVKU/Z4V1ujLIj/oEqs6O6oFyDUhlmHq4QEZd+PO+NDuk4+EaRCQVM+7qhZ
-	Wy1NZXjVywDhDFLSWsRM7Jn9tm1cMmwHFllZCe6kegNQ7caJmDFrvwxKLlOu6oMTh
-X-Received: by 2002:a5d:5983:0:b0:381:bdeb:1799 with SMTP id ffacd0b85a97d-381f186cd09mr18144186f8f.16.1731501761737;
-        Wed, 13 Nov 2024 04:42:41 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE5699iopflHa4MIh1vN3HWtOXM+FnSWh5U2CqZjf/QXNdmzfM7vRlX36oxsyFaMlA1GtkJXQ==
-X-Received: by 2002:a5d:5983:0:b0:381:bdeb:1799 with SMTP id ffacd0b85a97d-381f186cd09mr18144148f8f.16.1731501761273;
-        Wed, 13 Nov 2024 04:42:41 -0800 (PST)
+        bh=40yBQL1XcEoYGtru1ianOSHWnjsf7gEjQJGHFwcCtv4=;
+        b=KB8B8IU34eX9bAKGNq63Gt7kPV/HpjM1+BeH8iwbPfodJ9CFbcbeSD2+zBQE2/DSl5
+         HLqoVWldhZLjH97npvSzw4OY/wbmrSDmrpcutRUACpNv+Q/diHYag/I7mOGzuzpGIL+F
+         MlsocFP5AzitGuH8HOyXt7vuU8iPUlRc+IH20Gr1VIaTowZ+tTLpcB4eSmd5a6UWEWmu
+         c7Kv9kXLqqYB+2sbTah8HI/btIsc5ZL40vo6vrw79cbVAZVHduJH/aZlwJdQpbAXXZ1V
+         Qmp4AtJGuhxqPtxRunCH7pKeynmEnFekHzcRtg2fOMDbwCZywE+6tw3/xH4bA85d/aPH
+         NHUw==
+X-Forwarded-Encrypted: i=1; AJvYcCVltqZrGpIdKnQpi0SPBmopeXIXGlAKIBARTQ7dRsCutRPmxMwNpx8J5R7byFlhWbyGiF1mnZHKnoI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxbypjUTDLjyvjuXJRtNp8roUx13xfnNhDRuxwkNIs5R9ANuAVV
+	KhdhxCTqqp7Hm/FavvtS+UTGG0sCV4lHaKAHreEDtu6eLpTQnAiAOOLN/K00AtScFjiOFxCtgaw
+	AWD4EX2v2XEDKrsJXptO4jyTOOs0FMqYVdXmi7/W4LPxcc25ajfXjlDQGpD08LrBg
+X-Received: by 2002:a05:6000:1566:b0:37d:501f:483f with SMTP id ffacd0b85a97d-381f187fa4fmr18333248f8f.44.1731501752910;
+        Wed, 13 Nov 2024 04:42:32 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG88cAt9vbjd+Fv+tUe500AG/cZtHBmig9dl5++H5KHNhJiR6Bbh9nCCmpa1PrZQ9oi5jDTmQ==
+X-Received: by 2002:a05:6000:1566:b0:37d:501f:483f with SMTP id ffacd0b85a97d-381f187fa4fmr18333208f8f.44.1731501752404;
+        Wed, 13 Nov 2024 04:42:32 -0800 (PST)
 From: Philipp Stanner <pstanner@redhat.com>
 To: Damien Le Moal <dlemoal@kernel.org>,
 	Niklas Cassel <cassel@kernel.org>,
@@ -145,78 +145,156 @@ Cc: linux-ide@vger.kernel.org,
 	linux-pci@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 05/11] misc: Use never-managed version of pci_intx()
-Date: Wed, 13 Nov 2024 13:41:53 +0100
-Message-ID: <20241113124158.22863-7-pstanner@redhat.com>
+Subject: [PATCH v2 01/11] PCI: Prepare removing devres from pci_intx()
+Date: Wed, 13 Nov 2024 13:41:49 +0100
+Message-ID: <20241113124158.22863-3-pstanner@redhat.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241113124158.22863-2-pstanner@redhat.com>
 References: <20241113124158.22863-2-pstanner@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: rIjwW8Iiz7XGz1yyXLFjCakN5YARBSf46l2aQ4eqJlw_1731501762
+X-Mimecast-MFC-PROC-ID: EgVaA5KNzTbs94exyXtDfbYSJA4t4C_5cB5Di5dN-X8_1731501753
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
 
-pci_intx() is a hybrid function which can sometimes be managed through
-devres. To remove this hybrid nature from pci_intx(), it is necessary to
-port users to either an always-managed or a never-managed version.
+pci_intx() is a hybrid function which sometimes performs devres
+operations, depending on whether pcim_enable_device() has been used to
+enable the pci_dev. This sometimes-managed nature of the function is
+problematic. Notably, it causes the function to allocate under some
+circumstances which makes it unusable from interrupt context.
 
-cardreader/rtsx_pcr.c and tifm_7xx1.c enable their PCI-Device with
-pci_enable_device(). Thus, they need the never-managed version.
+To, ultimately, remove the hybrid nature from pci_intx(), it is first
+necessary to provide an always-managed and a never-managed version
+of that function. Then, all callers of pci_intx() can be ported to the
+version they need, depending whether they use pci_enable_device() or
+pcim_enable_device().
 
-Replace pci_intx() with pci_intx_unmanaged().
+An always-managed function exists, namely pcim_intx(), for which
+__pcim_intx(), a never-managed version of pci_intx() has been
+implemented.
+
+Make __pcim_intx() a public function under the name
+pci_intx_unmanaged(). Make pcim_intx() a public function.
 
 Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 ---
- drivers/misc/cardreader/rtsx_pcr.c | 2 +-
- drivers/misc/tifm_7xx1.c           | 6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ drivers/pci/devres.c | 24 +++---------------------
+ drivers/pci/pci.c    | 29 +++++++++++++++++++++++++++++
+ include/linux/pci.h  |  2 ++
+ 3 files changed, 34 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/misc/cardreader/rtsx_pcr.c b/drivers/misc/cardreader/rtsx_pcr.c
-index be3d4e0e50cc..e25e6d560dd7 100644
---- a/drivers/misc/cardreader/rtsx_pcr.c
-+++ b/drivers/misc/cardreader/rtsx_pcr.c
-@@ -1057,7 +1057,7 @@ static int rtsx_pci_acquire_irq(struct rtsx_pcr *pcr)
- 	}
+diff --git a/drivers/pci/devres.c b/drivers/pci/devres.c
+index b133967faef8..d32827a1f2f4 100644
+--- a/drivers/pci/devres.c
++++ b/drivers/pci/devres.c
+@@ -411,31 +411,12 @@ static inline bool mask_contains_bar(int mask, int bar)
+ 	return mask & BIT(bar);
+ }
  
- 	pcr->irq = pcr->pci->irq;
--	pci_intx(pcr->pci, !pcr->msi_en);
-+	pci_intx_unmanaged(pcr->pci, !pcr->msi_en);
+-/*
+- * This is a copy of pci_intx() used to bypass the problem of recursive
+- * function calls due to the hybrid nature of pci_intx().
+- */
+-static void __pcim_intx(struct pci_dev *pdev, int enable)
+-{
+-	u16 pci_command, new;
+-
+-	pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
+-
+-	if (enable)
+-		new = pci_command & ~PCI_COMMAND_INTX_DISABLE;
+-	else
+-		new = pci_command | PCI_COMMAND_INTX_DISABLE;
+-
+-	if (new != pci_command)
+-		pci_write_config_word(pdev, PCI_COMMAND, new);
+-}
+-
+ static void pcim_intx_restore(struct device *dev, void *data)
+ {
+ 	struct pci_dev *pdev = to_pci_dev(dev);
+ 	struct pcim_intx_devres *res = data;
+ 
+-	__pcim_intx(pdev, res->orig_intx);
++	pci_intx_unmanaged(pdev, res->orig_intx);
+ }
+ 
+ static struct pcim_intx_devres *get_or_create_intx_devres(struct device *dev)
+@@ -472,10 +453,11 @@ int pcim_intx(struct pci_dev *pdev, int enable)
+ 		return -ENOMEM;
+ 
+ 	res->orig_intx = !enable;
+-	__pcim_intx(pdev, enable);
++	pci_intx_unmanaged(pdev, enable);
  
  	return 0;
  }
-diff --git a/drivers/misc/tifm_7xx1.c b/drivers/misc/tifm_7xx1.c
-index 1d54680d6ed2..5f9c7ccae8d2 100644
---- a/drivers/misc/tifm_7xx1.c
-+++ b/drivers/misc/tifm_7xx1.c
-@@ -327,7 +327,7 @@ static int tifm_7xx1_probe(struct pci_dev *dev,
- 		goto err_out;
++EXPORT_SYMBOL_GPL(pcim_intx);
+ 
+ static void pcim_disable_device(void *pdev_raw)
+ {
+diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
+index 225a6cd2e9ca..c945811b207a 100644
+--- a/drivers/pci/pci.c
++++ b/drivers/pci/pci.c
+@@ -4480,6 +4480,35 @@ void pci_disable_parity(struct pci_dev *dev)
  	}
+ }
  
--	pci_intx(dev, 1);
-+	pci_intx_unmanaged(dev, 1);
++/**
++ * pci_intx_unmanaged - enables/disables PCI INTx for device dev,
++ * unmanaged version
++ * @pdev: the PCI device to operate on
++ * @enable: boolean: whether to enable or disable PCI INTx
++ *
++ * Enables/disables PCI INTx for device @pdev
++ *
++ * This function behavios identically to pci_intx(), but is never managed with
++ * devres.
++ */
++void pci_intx_unmanaged(struct pci_dev *pdev, int enable)
++{
++	u16 pci_command, new;
++
++	pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
++
++	if (enable)
++		new = pci_command & ~PCI_COMMAND_INTX_DISABLE;
++	else
++		new = pci_command | PCI_COMMAND_INTX_DISABLE;
++
++	if (new == pci_command)
++		return;
++
++	pci_write_config_word(pdev, PCI_COMMAND, new);
++}
++EXPORT_SYMBOL_GPL(pci_intx_unmanaged);
++
+ /**
+  * pci_intx - enables/disables PCI INTx for device dev
+  * @pdev: the PCI device to operate on
+diff --git a/include/linux/pci.h b/include/linux/pci.h
+index 573b4c4c2be6..6b8cde76d564 100644
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -1353,6 +1353,7 @@ int __must_check pcim_set_mwi(struct pci_dev *dev);
+ int pci_try_set_mwi(struct pci_dev *dev);
+ void pci_clear_mwi(struct pci_dev *dev);
+ void pci_disable_parity(struct pci_dev *dev);
++void pci_intx_unmanaged(struct pci_dev *pdev, int enable);
+ void pci_intx(struct pci_dev *dev, int enable);
+ bool pci_check_and_mask_intx(struct pci_dev *dev);
+ bool pci_check_and_unmask_intx(struct pci_dev *dev);
+@@ -2293,6 +2294,7 @@ static inline void pci_fixup_device(enum pci_fixup_pass pass,
+ 				    struct pci_dev *dev) { }
+ #endif
  
- 	fm = tifm_alloc_adapter(dev->device == PCI_DEVICE_ID_TI_XX21_XX11_FM
- 				? 4 : 2, &dev->dev);
-@@ -368,7 +368,7 @@ static int tifm_7xx1_probe(struct pci_dev *dev,
- err_out_free:
- 	tifm_free_adapter(fm);
- err_out_int:
--	pci_intx(dev, 0);
-+	pci_intx_unmanaged(dev, 0);
- 	pci_release_regions(dev);
- err_out:
- 	if (!pci_dev_busy)
-@@ -392,7 +392,7 @@ static void tifm_7xx1_remove(struct pci_dev *dev)
- 		tifm_7xx1_sock_power_off(tifm_7xx1_sock_addr(fm->addr, cnt));
- 
- 	iounmap(fm->addr);
--	pci_intx(dev, 0);
-+	pci_intx_unmanaged(dev, 0);
- 	pci_release_regions(dev);
- 
- 	pci_disable_device(dev);
++int pcim_intx(struct pci_dev *pdev, int enabled);
+ void __iomem *pcim_iomap(struct pci_dev *pdev, int bar, unsigned long maxlen);
+ void __iomem *pcim_iomap_region(struct pci_dev *pdev, int bar,
+ 				const char *name);
 -- 
 2.47.0
 
