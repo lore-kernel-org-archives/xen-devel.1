@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1538D41C23
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Nov 2024 09:30:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.835146.1250977 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35F51D41C23
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Nov 2024 09:31:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.835152.1250988 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tB9hf-0007Yf-8N; Wed, 13 Nov 2024 09:30:23 +0000
+	id 1tB9iO-0008AS-Gi; Wed, 13 Nov 2024 09:31:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 835146.1250977; Wed, 13 Nov 2024 09:30:23 +0000
+Received: by outflank-mailman (output) from mailman id 835152.1250988; Wed, 13 Nov 2024 09:31:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tB9hf-0007YY-5Y; Wed, 13 Nov 2024 09:30:23 +0000
-Received: by outflank-mailman (input) for mailman id 835146;
- Wed, 13 Nov 2024 09:30:22 +0000
+	id 1tB9iO-0008AL-Da; Wed, 13 Nov 2024 09:31:08 +0000
+Received: by outflank-mailman (input) for mailman id 835152;
+ Wed, 13 Nov 2024 09:31:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KbMU=SI=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tB9he-0007YE-55
- for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 09:30:22 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ <SRS0=Gr6F=SI=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tB9iM-0007YE-9p
+ for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 09:31:06 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e5a7c88e-a1a1-11ef-a0c7-8be0dac302b0;
- Wed, 13 Nov 2024 10:30:18 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-431688d5127so53644245e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 13 Nov 2024 01:30:18 -0800 (PST)
-Received: from localhost ([213.195.123.63]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432d55520adsm17410275e9.42.2024.11.13.01.30.17
+ id 006b0a28-a1a2-11ef-a0c7-8be0dac302b0;
+ Wed, 13 Nov 2024 10:31:03 +0100 (CET)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a9aa8895facso1222392366b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Nov 2024 01:31:03 -0800 (PST)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5cf03bb7530sm6929630a12.43.2024.11.13.01.31.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 01:30:17 -0800 (PST)
+ Wed, 13 Nov 2024 01:31:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,149 +47,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e5a7c88e-a1a1-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjozMmUiLCJoZWxvIjoibWFpbC13bTEteDMyZS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImU1YTdjODhlLWExYTEtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNDkwMjE4Ljg3MDIwNSwic2VuZGVyIjoicm9nZXIucGF1QGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 006b0a28-a1a2-11ef-a0c7-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmYiLCJoZWxvIjoibWFpbC1lajEteDYyZi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjAwNmIwYTI4LWExYTItMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNDkwMjYzLjcyMjMxMywic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1731490218; x=1732095018; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=pn1PcnvvtFA1beRUOHXw8tzQdDHoe+NbaF1T2kd4Q1c=;
-        b=iYJLXhhb9CsvokX3nPyWyoJ08Pn7F3amad3QUfu1B4Ty44qGG6N68zcD3KYrVktIX7
-         GLwCfrvzXGzlDKhWpCAk72/9pqOw49YrIxUL0l1aOH9WiVFD2UvTUYNipFWnG+UE8Y2r
-         iJ5f+7Fpw782VFJA82GThFBPchG24hzAtBagI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731490218; x=1732095018;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1731490263; x=1732095063; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pn1PcnvvtFA1beRUOHXw8tzQdDHoe+NbaF1T2kd4Q1c=;
-        b=CwtQ7kJ4OLJIZXBFjXqkDf2bUt58KRTIaUiHsAXNPDfmRATRWxoVG6PbK9AlnPsTZp
-         4lYWoFw73QUq3KczreeayJ6fwJiqRYChAxtZYjRxv+2mYWUwC14rRWXHvWCEq1SpcPPM
-         k9Apig46FogYZidgHibg+LuvaoY7cw/15OR1v6wfbBH/ZdrZaPuUlFLWjyCq7SnpbLP7
-         +eT1VqvHJqClbejmwoc5wPCKLnWhyIEv5K0crTxWXIG3ysB5oRL9GQCFsknSkm+zCOq4
-         1VqzwDg5JSBndIFnT3ffDlw9WsgBHAQhwiD6RaHw9Lu//IDbamLbdz19R5AGWOJIRi7x
-         q2pw==
-X-Gm-Message-State: AOJu0Yx9GVEFwyfiOn1WqzzsQrXacaSliDH2ACAAmtxyNTuXwopQl6Ve
-	1uc2ieDn+c3a2HDSxNllczbkM8iwpgptl8Vks+skUNNWomy0Zo5+kXjso/kMTII=
-X-Google-Smtp-Source: AGHT+IH7x4/lmZJxD2Oa5Ih+4k4z8eEFkEJuZHvRm+H/rNjXDHdEkYsIMuISnTKUe1iN5H8nDatVAQ==
-X-Received: by 2002:a05:600c:3b09:b0:431:3bf9:3ebb with SMTP id 5b1f17b1804b1-432b7518365mr163791215e9.24.1731490218126;
-        Wed, 13 Nov 2024 01:30:18 -0800 (PST)
-Date: Wed, 13 Nov 2024 10:30:16 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jiqian Chen <Jiqian.Chen@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] vpci: Add resizable bar support
-Message-ID: <ZzRxqO3_GEgs7W1I@macbook>
-References: <20241113080027.244240-1-Jiqian.Chen@amd.com>
+        bh=zs7n1P5X7Jke+I4bmzjJ2iKQwDiqHhXQ1kiL+k6H1ts=;
+        b=hnIKhJA9/EYKcsWU7HD0b2ZPs4dAp2vOi/1L8KgZToZ3dDMmrU2mIEIjCusPnFmo+Z
+         w0PO4PWyvahpmY3pwB/UQfTO7Wdpq4OGAVikMZhY3pvhamKfz0/8MEBbr/mse3jWXyCw
+         FV596PZayhvMvfyyRXAePHO5snWFDWIjTFw+A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731490263; x=1732095063;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zs7n1P5X7Jke+I4bmzjJ2iKQwDiqHhXQ1kiL+k6H1ts=;
+        b=hAhivLCkRiWDVe+wKJ3EDCNrNNVkfoOHGL9atw9/B26yI9y6VOPGy1sL3axbChTUzK
+         B3Y6woKxwqaVJXeVwWsE0h9m85jFxi4v7kgjeKJN3Up5rdCgGf0lTYoywat+tH2qbAhw
+         sihvfUYg4q+hbcruIpzqHAbnPv41cKdC2MvTnPHsbVPqs+GG8HO34/y47wB8Nnu+XZUO
+         WlfN9Ic+qxtTrrUozQT9Lf1eVMiv7HZsysXSEkGM4TW8EqlEYnzs0kVsSxK87GuWEBgq
+         uJktAsmzYyRd/my3LS+t1SPLuWVrTVIBWexkAyHueBnonPBD8BsETv2QtnQFgYX1Kbg8
+         eQsQ==
+X-Gm-Message-State: AOJu0YySM+SHRcwMPnxjSo6e3JghzIKgk0WLuJ6BvlCt4tWmBPNhesJv
+	60HtkXoMRTHm41RcZbP0eASGykV42YzNrrxwm+HszzcJ4Rp89ZIdlzqSU1yrcDC+L44nsuk7Cji
+	/
+X-Google-Smtp-Source: AGHT+IGF8u7M6B5/UBHjGhmB4aekj0WVqm3/KJd6Nrn1prSwc8n5Tj1nm9shu46HJCAPnxDeM9Rocw==
+X-Received: by 2002:a17:907:7f1f:b0:a99:f4be:7a6a with SMTP id a640c23a62f3a-a9eeffdc630mr2031668866b.47.1731490262648;
+        Wed, 13 Nov 2024 01:31:02 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
+	Frediano Ziglio <frediano.ziglio@cloud.com>,
+	Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Subject: [PATCH 1/2] x86/trampoline: Document how the trampoline is laid out
+Date: Wed, 13 Nov 2024 09:30:57 +0000
+Message-Id: <20241113093058.1562447-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241113093058.1562447-1-andrew.cooper3@citrix.com>
+References: <20241113093058.1562447-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20241113080027.244240-1-Jiqian.Chen@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 13, 2024 at 04:00:27PM +0800, Jiqian Chen wrote:
-> Some devices, like discrete GPU of amd, support resizable bar capability,
-> but vpci of Xen doesn't support this feature, so they fail to resize bars
-> and then cause probing failure.
-> 
-> According to PCIe spec, each bar that support resizing has two registers,
-> PCI_REBAR_CAP and PCI_REBAR_CTRL, so add these two registers and their
-> corresponding handler into vpci.
-> 
-> PCI_REBAR_CAP is RO, only provide reading.
-> 
-> PCI_REBAR_CTRL only has bar size is RW, so add write function to support
-> setting the new size.
+This is, to the best of my knowledge, accurate.  I am providing no comment on
+how sane I believe it to be.
 
-I think the logic to handle resizable BAR could be much simpler.  Some
-time ago I've made a patch to add support for it, but due to lack of
-hardware on my side to test it I've never submitted it.
+At the time of writing, the sizes of the regions are:
 
-My approach would be to detect the presence of the
-PCI_EXT_CAP_ID_REBAR capability in init_header(), and if the
-capability is present force the sizing of BARs each time they are
-mapped in modify_bars().  I don't think we need to trap accesses to
-the capability itself, as resizing can only happen when memory
-decoding is not enabled for the device.  It's enough to fetch the size
-of the BARs ahead of each enabling of memory decoding.
+          offset  size
+  AP:     0x0000  0x00b0
+  S3:     0x00b0  0x0140
+  Boot:   0x01f0  0x1780
+  Heap:   0x1970  0xe690
+  Stack:  0xf000  0x1000
 
-Note that memory decoding implies mapping the BARs into the p2m, which
-is already an expensive operation, the extra sizing is unlikely to
-make much of a difference performance wise.
+and wakeup_stack overlays boot_edd_info.
 
-I've found the following on my git tree and rebased on top of staging:
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Daniel P. Smith <dpsmith@apertussolutions.com>
+CC: Frediano Ziglio <frediano.ziglio@cloud.com>
+CC: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+ xen/arch/x86/include/asm/trampoline.h | 55 ++++++++++++++++++++++++++-
+ 1 file changed, 53 insertions(+), 2 deletions(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index ef6c965c081c..045aa4bdadc8 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -356,6 +356,30 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+diff --git a/xen/arch/x86/include/asm/trampoline.h b/xen/arch/x86/include/asm/trampoline.h
+index 8c1e0b48c2c9..d801bea400dc 100644
+--- a/xen/arch/x86/include/asm/trampoline.h
++++ b/xen/arch/x86/include/asm/trampoline.h
+@@ -37,12 +37,63 @@
+  * manually as part of placement.
+  */
  
-         ASSERT(rangeset_is_empty(bar->mem));
- 
-+        if ( bar->type != VPCI_BAR_ROM && header->bars_resizable &&
-+             (cmd & PCI_COMMAND_MEMORY) )
-+        {
-+            uint64_t addr, size;
++/*
++ * Layout of the trampoline.  Logical areas, in ascending order:
++ *
++ * 1) AP boot:
++ *
++ *    The INIT-SIPI-SIPI entrypoint.  This logic is stack-less so the identity
++ *    mapping (which must be executable) can at least be Read Only.
++ *
++ * 2) S3 resume:
++ *
++ *    The S3 wakeup logic may need to interact with the BIOS, so needs a
++ *    stack.  The stack pointer is set to trampoline_phys + 4k and clobbers an
++ *    undefined part of the the boot trampoline.  The stack is only used with
++ *    paging disabled.
++ *
++ * 3) Boot trampoline:
++ *
++ *    This region houses various data used by the AP/S3 paths too.  The boot
++ *    trampoline collects data from the BIOS (E820/EDD/EDID/etc), so needs a
++ *    stack.  The stack pointer is set to trampoline_phys + 64k and has 4k
++ *    space reserved.
++ *
++ * 4) Heap space:
++ *
++ *    The first 1k of heap space is statically allocated for VESA information.
++ *
++ *    The remainder of the heap is used by reloc(), logic which is otherwise
++ *    outside of the trampoline, to collect the bootloader metadata (cmdline,
++ *    module list, etc).  It does so with a bump allocator starting from the
++ *    end of the heap and allocating backwards.
++ *
++ * 5) Boot stack:
++ *
++ *    4k of space is reserved for the boot stack, at trampoline_phys + 64k.
++ *
++ * Therefore, when placed, it looks somewhat like this:
++ *
++ *    +--- trampoline_phys
++ *    v
++ *    |<-------------------------------64K------------------------------->|
++ *    |<-----4K----->|                                         |<---4K--->|
++ *    +----+----+----+-+---------------------------------------+----------+
++ *    | AP | S3 | Boot | Heap                                  |    Stack |
++ *    +----+----+------+---------------------------------------+----------+
++ *    ^           <~~^ ^                                    <~~^       <~~^
++ *    |              | +- trampoline_end[]                     |          |
++ *    |              +--- S3 Stack          reloc() allocator -+          |
++ *    +------------------ trampoline_start[]       Boot Stack ------------+
++ */
 +
-+            pci_size_mem_bar(pdev->sbdf, PCI_BASE_ADDRESS_0 + i * 4,
-+                             &addr, &size, 0);
-+
-+            if ( bar->addr != addr )
-+                printk(XENLOG_G_ERR
-+                       "%pp: BAR#%u address mismatch %#lx vs %#lx\n",
-+                       &pdev->sbdf, i, bar->addr, addr);
-+
-+            if ( bar->size != size )
-+            {
-+                printk(XENLOG_G_DEBUG
-+                       "%pp: detected BAR#%u size change (%#lx -> %#lx)\n",
-+                       &pdev->sbdf, i, bar->size, size);
-+                bar->size = size;
-+                end = PFN_DOWN(bar->addr + size - 1);
-+                end_guest = PFN_DOWN(bar->guest_addr + size - 1);
-+            }
-+        }
-+
-         /*
-          * Make sure that the guest set address has the same page offset
-          * as the physical address on the host or otherwise things won't work as
-@@ -870,6 +894,9 @@ static int cf_check init_header(struct pci_dev *pdev)
-     if ( pdev->ignore_bars )
-         return 0;
+ #include <xen/compiler.h>
+ #include <xen/types.h>
  
-+    header->bars_resizable = pci_find_ext_capability(pdev->sbdf,
-+                                                     PCI_EXT_CAP_ID_REBAR);
-+
-     cmd = pci_conf_read16(pdev->sbdf, PCI_COMMAND);
- 
-     /*
-diff --git a/xen/include/xen/pci_regs.h b/xen/include/xen/pci_regs.h
-index 250ba106dbd3..c543a2b86778 100644
---- a/xen/include/xen/pci_regs.h
-+++ b/xen/include/xen/pci_regs.h
-@@ -459,6 +459,7 @@
- #define PCI_EXT_CAP_ID_ARI	14
- #define PCI_EXT_CAP_ID_ATS	15
- #define PCI_EXT_CAP_ID_SRIOV	16
-+#define PCI_EXT_CAP_ID_REBAR	21
- 
- /* Advanced Error Reporting */
- #define PCI_ERR_UNCOR_STATUS	4	/* Uncorrectable Error Status */
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 41e7c3bc2791..45ebc1bb3356 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -129,6 +129,8 @@ struct vpci {
-          * upon to know whether BARs are mapped into the guest p2m.
-          */
-         bool bars_mapped      : 1;
-+        /* Device has the Resizable BARs capability. */
-+        bool bars_resizable   : 1;
-         /* FIXME: currently there's no support for SR-IOV. */
-     } header;
- 
+ /*
+- * Start and end of the trampoline section, as linked into Xen.  It is within
+- * the .init section and reclaimed after boot.
++ * Start and end of the trampoline section, as linked into Xen.  This covers
++ * the AP, S3 and Boot regions, but not the heap or stack.  It is within the
++ * .init section and reclaimed after boot.
+  */
+ /* SAF-0-safe */
+ extern char trampoline_start[], trampoline_end[];
+
+base-commit: 38febce5b35a7a4391906499b2046f01ec0129ca
+-- 
+2.39.5
+
 
