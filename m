@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E74E6D462B9
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Nov 2024 15:20:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.835820.1251672 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72150D462B9
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Nov 2024 15:24:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.835827.1251684 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBFAV-00016d-Nh; Wed, 13 Nov 2024 15:20:31 +0000
+	id 1tBFEZ-0001tp-9x; Wed, 13 Nov 2024 15:24:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 835820.1251672; Wed, 13 Nov 2024 15:20:31 +0000
+Received: by outflank-mailman (output) from mailman id 835827.1251684; Wed, 13 Nov 2024 15:24:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBFAV-00016W-L9; Wed, 13 Nov 2024 15:20:31 +0000
-Received: by outflank-mailman (input) for mailman id 835820;
- Wed, 13 Nov 2024 15:20:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tBFEZ-0001ti-5N; Wed, 13 Nov 2024 15:24:43 +0000
+Received: by outflank-mailman (input) for mailman id 835827;
+ Wed, 13 Nov 2024 15:24:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Gr6F=SI=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tBFAU-000158-Di
- for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 15:20:30 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cd9b614e-a1d2-11ef-a0c7-8be0dac302b0;
- Wed, 13 Nov 2024 16:20:23 +0100 (CET)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a9ec86a67feso1223940866b.1
- for <xen-devel@lists.xenproject.org>; Wed, 13 Nov 2024 07:20:23 -0800 (PST)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0a17635sm875703466b.17.2024.11.13.07.20.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Nov 2024 07:20:22 -0800 (PST)
+ <SRS0=l7vR=SI=intel.com=dave.jiang@srs-se1.protection.inumbo.net>)
+ id 1tBFEX-0001ta-Ky
+ for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 15:24:41 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 63188b79-a1d3-11ef-99a3-01e77a169b0f;
+ Wed, 13 Nov 2024 16:24:36 +0100 (CET)
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+ by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Nov 2024 07:24:33 -0800
+Received: from spandruv-desk1.amr.corp.intel.com (HELO [10.125.111.237])
+ ([10.125.111.237])
+ by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Nov 2024 07:24:28 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,152 +45,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd9b614e-a1d2-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmEiLCJoZWxvIjoibWFpbC1lajEteDYyYS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImNkOWI2MTRlLWExZDItMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNTExMjIzLjgxMjAxMiwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1731511223; x=1732116023; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=k8CNA90Q7I99YasGB+LdI1N5NvD0C301cHI5yI+RCac=;
-        b=Q8difbekgClrSRjKdSVJNn11x/2xlEYxcotdnv58pXT3YTgAxLRG5hGYifo3qq+mWY
-         Nm5qFbb0n/IrJCKQP/l3OYyirKdR5N6Hb0DSeWT8JGDNvT8iSac9ZD8+HAvnDvX8fCaF
-         tfXbDwB3oyAgcZtDL04TSXrMOCV9qk6RR6tjw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731511223; x=1732116023;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=k8CNA90Q7I99YasGB+LdI1N5NvD0C301cHI5yI+RCac=;
-        b=rgGs1OacQOmLBTqiCtlkzIoTxSC0m4M0Mz2bCQsfyLgTMIExj/NwKK/bm2b7a8Yt7S
-         Vok/2u4FnwPKk/CxmnhcbSz0Ap5JOf+BpzPdqR/NXoy9OREZZV7rJ3BcxMXg18uRTygo
-         CsHecffQPVm+b9xU4p6DeBcwpc75peM91jIGmaIRTpBMHif6zJYt9jScTN4T7ZDQY/3a
-         A5k4gvywgPCTajhTdS4xvNDZOdweilmXzXGIX5qij8mquFuiD6CQljoXt3/kiiX1GfGy
-         t7LotcMgyQVe++wltbHAMtqSucKnHZPK/ygFfbmIRBwO8RVz+BAiNCYcU4DjeRkdwIzq
-         5WmQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUnr63UtGKtsGZHcptUzFczFOWBMP8g2jgZJODABCoPxnZAFaa+6S2mZ19jn9BQLdH95BAAnmQVujk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyZD2v4Rk3PccmJm+xnwz09cVd20LyDsgOibRrszgXXf3BVzkHj
-	/R739chEOA7h6m0iW/QIb06pi3Vg5Zxq4TvvISIj/3GhLhjaYTA6qr2p2TECMT0=
-X-Google-Smtp-Source: AGHT+IHOrSZHhh0t9SF2YQNGaY8jraJZca/oOt547l4bl9EBzN5SjSDfI1Sw9izErW78las/3pRCXw==
-X-Received: by 2002:a17:907:6ea4:b0:a9a:515:1904 with SMTP id a640c23a62f3a-a9eeff0dc1bmr2079498066b.15.1731511222955;
-        Wed, 13 Nov 2024 07:20:22 -0800 (PST)
-Message-ID: <686facb6-0a6a-471c-a91c-b593cee7831a@citrix.com>
-Date: Wed, 13 Nov 2024 15:20:20 +0000
+X-Inumbo-ID: 63188b79-a1d3-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5Mi4xOTguMTYzLjExIiwiaGVsbyI6Im1nYW1haWwuaW50ZWwuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjYzMTg4Yjc5LWExZDMtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNTExNDc2LjczNjExMywic2VuZGVyIjoiZGF2ZS5qaWFuZ0BpbnRlbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1731511476; x=1763047476;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=/Qs+Z4ETO6HBDD0/r4vq50xWIIZZXaOFQHJesHfkTbA=;
+  b=lez+1czYEh4IsGdAKFu4AqBLb6GlTOsWzsnghDShYc61+vTh66hFndZO
+   f7A3LZsLZ9tstTtI6gz5kDtDCHoCpZv/e75BYPymhfWCkCgOrWELAa8LN
+   y0gls4BaNLwPtofitzjj0xx+2CKAX7j5EWRuv4FzExw8tDyAI0Bt6vQ61
+   egkqXlBZ8Z6EJTxbPOgC4u2wzC/aNBQ8+VTJkJW9xH7MHoni9JfNPTOEx
+   UTxO2RLuwVSVugWSwYR2m2PKSeVsvOuF/OGC7joTNZjMbtNHVo4LrE7P/
+   qfaNn+qJmHs6F12usZGQk1vrjFm45vOOH0WsOFCdvKhKP2tBRDG+mky3k
+   w==;
+X-CSE-ConnectionGUID: DHbbedNLQlejMxVqEgeWNg==
+X-CSE-MsgGUID: erdx9nabQ+G1q3+RNyY69w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11254"; a="42038090"
+X-IronPort-AV: E=Sophos;i="6.12,151,1728975600"; 
+   d="scan'208";a="42038090"
+X-CSE-ConnectionGUID: Eu78RBWmRsK0vvilN+bwhQ==
+X-CSE-MsgGUID: u7LspSQgTTqwqS7xt+wrPQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,151,1728975600"; 
+   d="scan'208";a="111214069"
+Message-ID: <decf5296-1c9b-49ab-8556-55a199e214ed@intel.com>
+Date: Wed, 13 Nov 2024 08:24:27 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: preparations for 4.19.1
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Kelly Choi <kelly.choi@cloud.com>,
- Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>,
- Alejandro Vallejo <alejandro.vallejo@cloud.com>
-References: <ddc41c9d-9754-4fde-bac0-6389511a7f7c@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <ddc41c9d-9754-4fde-bac0-6389511a7f7c@suse.com>
+Subject: Re: [PATCH v2 04/11] net/ntb: Use never-managed version of pci_intx()
+To: Philipp Stanner <pstanner@redhat.com>, Damien Le Moal
+ <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>,
+ Basavaraj Natikar <basavaraj.natikar@amd.com>, Jiri Kosina
+ <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>,
+ Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Alex Dubov
+ <oakad@yahoo.com>, Sudarsana Kalluru <skalluru@marvell.com>,
+ Manish Chopra <manishc@marvell.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Rasesh Mody <rmody@marvell.com>, GR-Linux-NIC-Dev@marvell.com,
+ Igor Mitsyanko <imitsyanko@quantenna.com>,
+ Sergey Matyukevich <geomatsi@gmail.com>, Kalle Valo <kvalo@kernel.org>,
+ Sanjay R Mehta <sanju.mehta@amd.com>,
+ Shyam Sundar S K <Shyam-sundar.S-k@amd.com>, Jon Mason <jdmason@kudzu.us>,
+ Allen Hubbe <allenbh@gmail.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Alex Williamson <alex.williamson@redhat.com>, Juergen Gross
+ <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Mario Limonciello <mario.limonciello@amd.com>, Chen Ni <nichen@iscas.ac.cn>,
+ Ricky Wu <ricky_wu@realtek.com>, Al Viro <viro@zeniv.linux.org.uk>,
+ Breno Leitao <leitao@debian.org>, Kevin Tian <kevin.tian@intel.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Mostafa Saleh <smostafa@google.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Yi Liu <yi.l.liu@intel.com>,
+ Kunwu Chan <chentao@kylinos.cn>, Ankit Agrawal <ankita@nvidia.com>,
+ Christian Brauner <brauner@kernel.org>,
+ Reinette Chatre <reinette.chatre@intel.com>,
+ Eric Auger <eric.auger@redhat.com>, Ye Bin <yebin10@huawei.com>
+Cc: linux-ide@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-input@vger.kernel.org, netdev@vger.kernel.org,
+ linux-wireless@vger.kernel.org, ntb@lists.linux.dev,
+ linux-pci@vger.kernel.org, kvm@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+References: <20241113124158.22863-2-pstanner@redhat.com>
+ <20241113124158.22863-6-pstanner@redhat.com>
+Content-Language: en-US
+From: Dave Jiang <dave.jiang@intel.com>
+In-Reply-To: <20241113124158.22863-6-pstanner@redhat.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-On 12/11/2024 1:00 pm, Jan Beulich wrote:
-> All,
->
-> the release is due by the end of the month. Please point out backports you find
-> missing from the respective staging branch, but which you consider relevant.
-
-Looking over the XenServer patchqueue:
-
-These are all bugfixes, some that came from customer bugs:
-
-e42e4d8c3e2c: tools/misc: xen-hvmcrash: Inject #DF instead of
-overwriting RIP
-42db2deb5e76: tools/libxs: Fix length check in xs_talkv()
-ba709d514aac: x86/viridian: Clarify some viridian logging strings
-d81dd3130351: x86/shutdown: change default reboot method preference
-0d69635d27cb: tools/ocaml: Remove '-cc $(CC)' from OCAMLOPTFLAGS
-8ffcf184affb: tools/ocaml: Fix OCaml libs rules
-126293eae648: tools/ocaml: Drop the OCAMLOPTFLAG_G invocation
-1965e9a93074: tools/ocaml: Fix the version embedded in META files
-e58a2858d588: x86/boot: Preserve the value clobbered by the load-base
-calculation
-
-This is a diagnostic improvement, also from a customer bug:
-
-2f413e22fa5e: x86/msr: add log messages to MSR state load error paths
-
-These are a SIGPIPE bugfix which happen to also have a perf
-improvement.  I cant remember if we discussed backporting them before. 
-(Juergen/Anthony?)
-
-42db2deb5e76: tools/libxs: Fix length check in xs_talkv()
-e2a93bed8b9e: tools/libxs: Rework xs_talkv() to take xsd_sockmsg within
-the iovec
-f050c03ce2ad: tools/libxs: Rationalise the definition of struct xs_handle
-046efe529e82: tools/libxs: Track whether we're using a socket or file
-ebaeb0c64a6d: tools/libxs: Use writev()/sendmsg() instead of write()
-a17b6db9b007: tools/libxs: Stop playing with SIGPIPE
-
-These are from a livepatching snafu:
-
-3a28da8f4daf: xen/livepatch: remove useless check for duplicated sections
-8c81423038f1: xen/livepatch: drop load_addr Elf section field
-86d09d16dd74: xen/livepatch: simplify and unify logic in prepare_payload()
-fa49f4be413c: xen/livepatch: do Xen build-id check earlier
-aa5a06d5d6ed: x86/alternatives: do not BUG during apply
-
-where the buildid check is much too late.
+Content-Transfer-Encoding: 7bit
 
 
-And from looking at staging:
 
-fa2d8318033e: x86/cpu-policy: Extend the guest max policy max leaf/subleaves
+On 11/13/24 5:41 AM, Philipp Stanner wrote:
+> pci_intx() is a hybrid function which can sometimes be managed through
+> devres. To remove this hybrid nature from pci_intx(), it is necessary to
+> port users to either an always-managed or a never-managed version.
+> 
+> hw/amd and how/intel enable their PCI-Device with pci_enable_device().
+> Thus, they need the never-managed version.
+> 
+> Replace pci_intx() with pci_intx_unmanaged().
+> 
+> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> Acked-by: Shyam Sundar S K <Shyam-sundar.S-k@amd.com> #for ntb_hw_amd.c
 
-This fixes a real issue on older AMD systems.
+Acked-by: Dave Jiang <dave.jiang@intel.com> # for ntb_hw_gen1.c
+> ---
+>  drivers/ntb/hw/amd/ntb_hw_amd.c    | 4 ++--
+>  drivers/ntb/hw/intel/ntb_hw_gen1.c | 2 +-
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/ntb/hw/amd/ntb_hw_amd.c b/drivers/ntb/hw/amd/ntb_hw_amd.c
+> index d687e8c2cc78..b146f170e839 100644
+> --- a/drivers/ntb/hw/amd/ntb_hw_amd.c
+> +++ b/drivers/ntb/hw/amd/ntb_hw_amd.c
+> @@ -791,7 +791,7 @@ static int ndev_init_isr(struct amd_ntb_dev *ndev,
+>  err_msi_enable:
+>  
+>  	/* Try to set up intx irq */
+> -	pci_intx(pdev, 1);
+> +	pci_intx_unmanaged(pdev, 1);
+>  
+>  	rc = request_irq(pdev->irq, ndev_irq_isr, IRQF_SHARED,
+>  			 "ndev_irq_isr", ndev);
+> @@ -831,7 +831,7 @@ static void ndev_deinit_isr(struct amd_ntb_dev *ndev)
+>  		if (pci_dev_msi_enabled(pdev))
+>  			pci_disable_msi(pdev);
+>  		else
+> -			pci_intx(pdev, 0);
+> +			pci_intx_unmanaged(pdev, 0);
+>  	}
+>  }
+>  
+> diff --git a/drivers/ntb/hw/intel/ntb_hw_gen1.c b/drivers/ntb/hw/intel/ntb_hw_gen1.c
+> index 079b8cd79785..9ad9d7fe227e 100644
+> --- a/drivers/ntb/hw/intel/ntb_hw_gen1.c
+> +++ b/drivers/ntb/hw/intel/ntb_hw_gen1.c
+> @@ -445,7 +445,7 @@ int ndev_init_isr(struct intel_ntb_dev *ndev,
+>  
+>  	/* Try to set up intx irq */
+>  
+> -	pci_intx(pdev, 1);
+> +	pci_intx_unmanaged(pdev, 1);
+>  
+>  	rc = request_irq(pdev->irq, ndev_irq_isr, IRQF_SHARED,
+>  			 "ndev_irq_isr", ndev);
 
-~Andrew
 
