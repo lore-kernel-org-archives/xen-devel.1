@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD1C4D41C3F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D94CD41C3E
 	for <xen-devel@archiver.kernel.org>; Wed, 13 Nov 2024 12:43:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.835555.1251453 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.835552.1251417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBChs-0004i9-F7; Wed, 13 Nov 2024 12:42:48 +0000
+	id 1tBChp-0003p9-Lj; Wed, 13 Nov 2024 12:42:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 835555.1251453; Wed, 13 Nov 2024 12:42:48 +0000
+Received: by outflank-mailman (output) from mailman id 835552.1251417; Wed, 13 Nov 2024 12:42:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBChs-0004hy-Bx; Wed, 13 Nov 2024 12:42:48 +0000
-Received: by outflank-mailman (input) for mailman id 835555;
- Wed, 13 Nov 2024 12:42:47 +0000
+	id 1tBChp-0003oV-GD; Wed, 13 Nov 2024 12:42:45 +0000
+Received: by outflank-mailman (input) for mailman id 835552;
+ Wed, 13 Nov 2024 12:42:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RFXx=SI=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
- id 1tBChr-0003m4-A2
- for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 12:42:47 +0000
+ id 1tBCho-0003m4-Bg
+ for xen-devel@lists.xenproject.org; Wed, 13 Nov 2024 12:42:44 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c766b23a-a1bc-11ef-a0c7-8be0dac302b0;
- Wed, 13 Nov 2024 13:42:45 +0100 (CET)
+ id c22ee1d4-a1bc-11ef-a0c7-8be0dac302b0;
+ Wed, 13 Nov 2024 13:42:36 +0100 (CET)
 Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
  [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-389-LLXNvxtiPoymLi2ZbYooGQ-1; Wed, 13 Nov 2024 07:42:40 -0500
+ us-mta-617-uaqureCkMxGI3q2SgPXraQ-1; Wed, 13 Nov 2024 07:42:31 -0500
 Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-381d07c377cso5245809f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 13 Nov 2024 04:42:40 -0800 (PST)
+ ffacd0b85a97d-37d432f9f5eso3589154f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Nov 2024 04:42:31 -0800 (PST)
 Received: from eisenberg.redhat.com (nat-pool-muc-u.redhat.com. [149.14.88.27])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed99aa18sm18023528f8f.61.2024.11.13.04.42.37
+ ffacd0b85a97d-381ed99aa18sm18023528f8f.61.2024.11.13.04.42.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 04:42:38 -0800 (PST)
+ Wed, 13 Nov 2024 04:42:29 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,42 +51,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c766b23a-a1bc-11ef-a0c7-8be0dac302b0
+X-Inumbo-ID: c22ee1d4-a1bc-11ef-a0c7-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjE3MC4xMC4xMjkuMTI0IiwiaGVsbyI6InVzLXNtdHAtZGVsaXZlcnktMTI0Lm1pbWVjYXN0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImM3NjZiMjNhLWExYmMtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNTAxNzY1LjQ5MDE5Mywic2VuZGVyIjoicHN0YW5uZXJAcmVkaGF0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Custom-Transaction: eyJpZCI6ImMyMmVlMWQ0LWExYmMtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNTAxNzU2LjY2MzE4LCJzZW5kZXIiOiJwc3Rhbm5lckByZWRoYXQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1731501764;
+	s=mimecast20190719; t=1731501755;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=gh5xBESPiuO8YtWqrs+YzUNc8fkB81YlCR9KwN+kONI=;
-	b=b4On77mXEGVG+7RQHGY1GwvLAdLGNeCi69RzXatZk/gvFL1r6VqSOMw2pmjqINIgyBxKLW
-	JbHJXa/JA17bPgXwXjhrG+KpMmPdBq24eCDA3/OmJxehIxxFS/IRRaVz9mgN9Evel8av+Q
-	yLO/whn2uRGXVve+NHf9Lzpd/6sSnYg=
-X-MC-Unique: LLXNvxtiPoymLi2ZbYooGQ-1
-X-Mimecast-MFC-AGG-ID: LLXNvxtiPoymLi2ZbYooGQ
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=gi/nDuPOQh+kW8YCVePTGgMsqduTQsEMI/h4REBTyU8=;
+	b=XPq3IzCJ1K/qL737veRrH5eMdIWbPVROD1Bv6J/fB/gVLEvbEmfG14bZW+a+n4zXKXSW8W
+	eS+lJvMa4zecUG1VZTPo5czrUEB4PFCY1rYLxtEmu3NtsLTAYerFo3tzq25UM1W2dFFfJl
+	jkEMZhjPdk0vdnT6UBWL7Q4TqJyeKLw=
+X-MC-Unique: uaqureCkMxGI3q2SgPXraQ-1
+X-Mimecast-MFC-AGG-ID: uaqureCkMxGI3q2SgPXraQ
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731501759; x=1732106559;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gh5xBESPiuO8YtWqrs+YzUNc8fkB81YlCR9KwN+kONI=;
-        b=Obqxg8/g/vYDxlO8SMId3I3dOW5ROYiXxkzlYvw++2WV6jmffgBunuVElvZmUju0dU
-         /+ivNY195hE7qf+gUGGgpNNCWtRaQN5CxJdMIrbouMEVbI4JSPT/aznPftt3OoTT6LcH
-         jU1IwFNLFqOf5U3UtnCWHCAb20z3Xt3yNb8XJiTyhx5ENftJjGZ0iyQuy7db8BJvP1l8
-         wCO/d3/cxa87PZ9aGY3j3J4TYAWkrjxRFjZ3MiZHAMgPQAtg43NBhn5HaY4HgS892z26
-         4v5druY6cPW/9d5vvcId0FFB5DguEki1mtkwSFgOg5M6tzhOWDaiD+JfvtM+l+uk5NNO
-         B5dg==
-X-Forwarded-Encrypted: i=1; AJvYcCWjrklDnqPwznyN5TPlsGSmACFq5yQckZtyWy9XpWZsxVFRC4nLSBWHWXy3cleOWxvXOGel5bGegMM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YygH1KvKPgrguBl29Jmut+F9NV2KC9Azj8BxxXKoZCN7lZ6ZrUd
-	NfKoPs20ns114VyqGdyGkSezXgQoGYvY++Mdvt20WGkp7dDk5GIpidWTAioTy//7qBjuM0mAtBM
-	9v/qjvEbwiE2e/N6guJUh6TuNMya0xWNBdkyIdW8fxxYiZv7N5NpTV0Eq3FK9Xx37
-X-Received: by 2002:a05:6000:1868:b0:37c:d1ea:f1ce with SMTP id ffacd0b85a97d-381f1871ae1mr21127488f8f.25.1731501759568;
-        Wed, 13 Nov 2024 04:42:39 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGjSkicOa2vHaglKeMl2d4NOiMMxDq6ITRAVtvhVhWcLJvAFiM/FAEZ/6qNVryGFEz3sYUTmQ==
-X-Received: by 2002:a05:6000:1868:b0:37c:d1ea:f1ce with SMTP id ffacd0b85a97d-381f1871ae1mr21127442f8f.25.1731501759149;
-        Wed, 13 Nov 2024 04:42:39 -0800 (PST)
+        d=1e100.net; s=20230601; t=1731501751; x=1732106551;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=gi/nDuPOQh+kW8YCVePTGgMsqduTQsEMI/h4REBTyU8=;
+        b=rJBQaPvnnOy54a9zQ/F+PLDSylV7LyNcqYTwYAKZEiMqF6NSi2woDBo8j/ScwwZx9j
+         AHigywLywZ3SXj7YvJ4FGow7se0acnI1wt6TvYLSbow7xvWp5m8aN75YZpITYakt0hUJ
+         ihYlIIyLuoOHPOb5CcaQCTdK4ICisP3ATgZ87ZY13q0+8u6V8XUPmmpMwLuVoMxtinyf
+         Gmt3W2Pf9F5jsItFUTYMxt/JX4wvczoMKYdRwi1R2YjU/0ufVmErQVuOOok0GliQyser
+         SAx/un7cfjB2XMDRpH//3WIdJNbIE0jju4Mdn5imcG/D91a9TIIrv/2lBsCtkTHoZVjO
+         pSVQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU9u/NlGiwNLtVsZUhtDnMVMSo44aKMYkWb7dS7SF0KhVOo/jMHIJj+f8j+aUt98Kc9yZVZ8PgwoEE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxFZHRL0jnEIsx6Duxo9yBt805lkC/wO1Kz9yTiwOCIWz6lyk87
+	XUi5U4DfF6y4NpDOnpdl3v9YIpFy6eWoz0ls8k4bE2TMrcAAJ2+oE9EzubKftzLJl6Ylwq749lO
+	G4X40CufOfrvfpMBJ/64hDZzMX+4/o/0JK3rNT8o+uCL7AH7pfrRaqzd7enp3Bwu1
+X-Received: by 2002:a5d:5f53:0:b0:381:f595:fd0a with SMTP id ffacd0b85a97d-3820810ffc0mr4675161f8f.16.1731501750632;
+        Wed, 13 Nov 2024 04:42:30 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEkW+KWr+FGBC4soAeZ9AbHODqoGfzXwj1GlUIlZwp3/7RfEbVzZfIvsQ3hNUEE9XJJckqbgQ==
+X-Received: by 2002:a5d:5f53:0:b0:381:f595:fd0a with SMTP id ffacd0b85a97d-3820810ffc0mr4675138f8f.16.1731501750223;
+        Wed, 13 Nov 2024 04:42:30 -0800 (PST)
 From: Philipp Stanner <pstanner@redhat.com>
 To: Damien Le Moal <dlemoal@kernel.org>,
 	Niklas Cassel <cassel@kernel.org>,
@@ -145,70 +144,92 @@ Cc: linux-ide@vger.kernel.org,
 	linux-pci@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 04/11] net/ntb: Use never-managed version of pci_intx()
-Date: Wed, 13 Nov 2024 13:41:52 +0100
-Message-ID: <20241113124158.22863-6-pstanner@redhat.com>
+Subject: [PATCH v2 00/11] Remove implicit devres from pci_intx()
+Date: Wed, 13 Nov 2024 13:41:48 +0100
+Message-ID: <20241113124158.22863-2-pstanner@redhat.com>
 X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241113124158.22863-2-pstanner@redhat.com>
-References: <20241113124158.22863-2-pstanner@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Q0LDnnmtXghAbUhAyw0mptgXnpWnLxST-BlJeS-COp0_1731501760
+X-Mimecast-MFC-PROC-ID: 7SqlCWKtB-P6JZC5A5Ro5qAxeTchc6wv-GOBC3X6vvw_1731501751
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
 
-pci_intx() is a hybrid function which can sometimes be managed through
-devres. To remove this hybrid nature from pci_intx(), it is necessary to
-port users to either an always-managed or a never-managed version.
+@Driver-Maintainers: Your driver might be touched by patch "Remove
+devres from pci_intx()". You might want to take a look.
 
-hw/amd and how/intel enable their PCI-Device with pci_enable_device().
-Thus, they need the never-managed version.
+Changes in v2:
+  - Drop pci_intx() deprecation patch.
+  - ata: Add RB from Sergey and Niklas.
+  - wifi: Add AB by Kalle.
+  - Drop INTx deprecation patch
+  - Drop ALSA / hda_intel patch because pci_intx() was removed from
+    there in the meantime.
 
-Replace pci_intx() with pci_intx_unmanaged().
+Changes since the RFC [1]:
+  - Add a patch deprecating pci{m}_intx(). (Heiner, Andy, Me)
+  - Add Acked-by's already given.
+  - Export pcim_intx() as a GPL function. (Alex)
+  - Drop patch for rts5280, since this driver will be removed quite
+    soon. (Philipp Hortmann, Greg)
+  - Use early-return in pci_intx_unmanaged() and pci_intx(). (Andy)
 
-Signed-off-by: Philipp Stanner <pstanner@redhat.com>
-Acked-by: Shyam Sundar S K <Shyam-sundar.S-k@amd.com> #for ntb_hw_amd.c
----
- drivers/ntb/hw/amd/ntb_hw_amd.c    | 4 ++--
- drivers/ntb/hw/intel/ntb_hw_gen1.c | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+Hi all,
 
-diff --git a/drivers/ntb/hw/amd/ntb_hw_amd.c b/drivers/ntb/hw/amd/ntb_hw_amd.c
-index d687e8c2cc78..b146f170e839 100644
---- a/drivers/ntb/hw/amd/ntb_hw_amd.c
-+++ b/drivers/ntb/hw/amd/ntb_hw_amd.c
-@@ -791,7 +791,7 @@ static int ndev_init_isr(struct amd_ntb_dev *ndev,
- err_msi_enable:
- 
- 	/* Try to set up intx irq */
--	pci_intx(pdev, 1);
-+	pci_intx_unmanaged(pdev, 1);
- 
- 	rc = request_irq(pdev->irq, ndev_irq_isr, IRQF_SHARED,
- 			 "ndev_irq_isr", ndev);
-@@ -831,7 +831,7 @@ static void ndev_deinit_isr(struct amd_ntb_dev *ndev)
- 		if (pci_dev_msi_enabled(pdev))
- 			pci_disable_msi(pdev);
- 		else
--			pci_intx(pdev, 0);
-+			pci_intx_unmanaged(pdev, 0);
- 	}
- }
- 
-diff --git a/drivers/ntb/hw/intel/ntb_hw_gen1.c b/drivers/ntb/hw/intel/ntb_hw_gen1.c
-index 079b8cd79785..9ad9d7fe227e 100644
---- a/drivers/ntb/hw/intel/ntb_hw_gen1.c
-+++ b/drivers/ntb/hw/intel/ntb_hw_gen1.c
-@@ -445,7 +445,7 @@ int ndev_init_isr(struct intel_ntb_dev *ndev,
- 
- 	/* Try to set up intx irq */
- 
--	pci_intx(pdev, 1);
-+	pci_intx_unmanaged(pdev, 1);
- 
- 	rc = request_irq(pdev->irq, ndev_irq_isr, IRQF_SHARED,
- 			 "ndev_irq_isr", ndev);
+this series removes a problematic feature from pci_intx(). That function
+sometimes implicitly uses devres for automatic cleanup. We should get
+rid of this implicit behavior.
+
+To do so, a pci_intx() version that is always-managed, and one that is
+never-managed are provided. Then, all pci_intx() users are ported to the
+version they need. Afterwards, pci_intx() can be cleaned up and the
+users of the never-managed version be ported back to pci_intx().
+
+This way we'd get this PCI API consistent again.
+
+Patch "Remove devres from pci_intx()" obviously reverts the previous
+patches that made drivers use pci_intx_unmanaged(). But this way it's
+easier to review and approve. It also makes sure that each checked out
+commit should provide correct behavior, not just the entire series as a
+whole.
+
+Merge plan for this is to enter through the PCI tree.
+
+[1] https://lore.kernel.org/all/20241009083519.10088-1-pstanner@redhat.com/
+
+
+Regards,
+P.
+
+
+Philipp Stanner (11):
+  PCI: Prepare removing devres from pci_intx()
+  drivers/xen: Use never-managed version of pci_intx()
+  net/ethernet: Use never-managed version of pci_intx()
+  net/ntb: Use never-managed version of pci_intx()
+  misc: Use never-managed version of pci_intx()
+  vfio/pci: Use never-managed version of pci_intx()
+  PCI: MSI: Use never-managed version of pci_intx()
+  ata: Use always-managed version of pci_intx()
+  wifi: qtnfmac: use always-managed version of pcim_intx()
+  HID: amd_sfh: Use always-managed version of pcim_intx()
+  Remove devres from pci_intx()
+
+ drivers/ata/ahci.c                            |  2 +-
+ drivers/ata/ata_piix.c                        |  2 +-
+ drivers/ata/pata_rdc.c                        |  2 +-
+ drivers/ata/sata_sil24.c                      |  2 +-
+ drivers/ata/sata_sis.c                        |  2 +-
+ drivers/ata/sata_uli.c                        |  2 +-
+ drivers/ata/sata_vsc.c                        |  2 +-
+ drivers/hid/amd-sfh-hid/amd_sfh_pcie.c        |  4 ++--
+ drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c |  2 +-
+ .../wireless/quantenna/qtnfmac/pcie/pcie.c    |  2 +-
+ drivers/pci/devres.c                          | 24 +++----------------
+ drivers/pci/pci.c                             | 16 +++----------
+ include/linux/pci.h                           |  1 +
+ 13 files changed, 18 insertions(+), 45 deletions(-)
+
 -- 
 2.47.0
 
