@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 091CAD68B26
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Nov 2024 14:20:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.836508.1252407 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A1ECD68B2D
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Nov 2024 14:58:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.836525.1252421 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBahx-0002yE-UA; Thu, 14 Nov 2024 14:20:29 +0000
+	id 1tBbIY-0007Ng-U0; Thu, 14 Nov 2024 14:58:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 836508.1252407; Thu, 14 Nov 2024 14:20:29 +0000
+Received: by outflank-mailman (output) from mailman id 836525.1252421; Thu, 14 Nov 2024 14:58:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBahx-0002y7-Qu; Thu, 14 Nov 2024 14:20:29 +0000
-Received: by outflank-mailman (input) for mailman id 836508;
- Thu, 14 Nov 2024 14:20:28 +0000
+	id 1tBbIY-0007NU-QE; Thu, 14 Nov 2024 14:58:18 +0000
+Received: by outflank-mailman (input) for mailman id 836525;
+ Thu, 14 Nov 2024 14:58:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3TDs=SJ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tBahw-0002y1-Qb
- for xen-devel@lists.xenproject.org; Thu, 14 Nov 2024 14:20:28 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
+ <SRS0=QegD=SJ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tBbIX-0007K7-3l
+ for xen-devel@lists.xenproject.org; Thu, 14 Nov 2024 14:58:17 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 96899994-a293-11ef-a0c7-8be0dac302b0;
- Thu, 14 Nov 2024 15:20:24 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9ed49edd41so116267966b.0
- for <xen-devel@lists.xenproject.org>; Thu, 14 Nov 2024 06:20:24 -0800 (PST)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e047cb4sm67793066b.166.2024.11.14.06.20.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 06:20:23 -0800 (PST)
+ id dfa8dea0-a298-11ef-a0c7-8be0dac302b0;
+ Thu, 14 Nov 2024 15:58:14 +0100 (CET)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf872ecce7so259578a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Nov 2024 06:58:14 -0800 (PST)
+Received: from localhost ([213.195.123.63]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa20e08128csm70554166b.175.2024.11.14.06.58.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2024 06:58:12 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,150 +46,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96899994-a293-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MjkiLCJoZWxvIjoibWFpbC1lajEteDYyOS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6Ijk2ODk5OTk0LWEyOTMtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNTk0MDI0LjI3NzY0Miwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: dfa8dea0-a298-11ef-a0c7-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MmMiLCJoZWxvIjoibWFpbC1lZDEteDUyYy5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImRmYThkZWEwLWEyOTgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNTk2Mjk0LjQ1MjI3MSwic2VuZGVyIjoicm9nZXIucGF1QGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1731594024; x=1732198824; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=cJnXthI6RT1kM32h4bRBg6KgzEy+vWKReKKP+zyw52A=;
-        b=u0Flerj4bMpIFOXykOMVPf/DoQjUo0Eolk8SrqFek/bdg2/drbPBbBwz6YUDkRjEQA
-         w6aJySrSem5XTwY0F6DILozauK9Pda+zJW/czuZqeIuK6w3PbEf2zqQZNm8dqm20FvHC
-         Pb/uG+YdWNFM+siHvc9UteOSn8hRK3jn+NNgI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731594024; x=1732198824;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1731596293; x=1732201093; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cJnXthI6RT1kM32h4bRBg6KgzEy+vWKReKKP+zyw52A=;
-        b=SXend49FLNMY+SCCEX/D4ookZmyu5UyNt8C74z0qsGs39mA+sYumUznS7Wyzmoi6BJ
-         E+ukVHYeSNYxwClvYEheiuz8Hg7gRpuAVyNL/GtrxftHeq51ptmrzzfn35r9isT3w0Ge
-         2a+eCrVZoKNSdlVwJ/Jn+ej+7KVejTb+UTuy4GpI3m1tCz080NpIgiha81hS5CnRnxR9
-         KVAg27JAcrA5hOgMPTOT7Vme4PbvVE0wLl+MthcyFCdOjbakY4WEyqaJzIvHxyMMhD9b
-         ZYJMAfw1othWLKPs1lnSlJIdPGKJcYTaN12HGtpXCQ5hyQFjYMsFQa0AKovomXlZAvSL
-         MwQQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXwtodE78W7ZC1twrRKndwymbCLga6E5Z+QE0ZfHuB2dxzvPyXQo1XxBuN0nPu5sixVc6x++XrAKbI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yygt3Sx2i2VjpFonHHeaNBnsbLsYU5xcZBK5whagmMKccpdxlUY
-	iXABYHNRV9CrqcloTr3IQLA/B24PQEE1Y+ehORqUxHbJbNiR4GzGMP9hZawz1dA=
-X-Google-Smtp-Source: AGHT+IH1gPTSm3us+pUTO6hVPnkNcMCLk0dYKhK/B3nfzh/GBCIBjBrdb/0Uc5vDeLmTwwcUuIvipA==
-X-Received: by 2002:a17:907:7f1f:b0:a9a:9ab:6233 with SMTP id a640c23a62f3a-a9eeff44cfcmr2664018866b.34.1731594023668;
-        Thu, 14 Nov 2024 06:20:23 -0800 (PST)
-Message-ID: <f380a78a-306e-4561-bed6-1f07db1bf744@citrix.com>
-Date: Thu, 14 Nov 2024 14:20:21 +0000
+        bh=wfQMcfiQzj+ufcVDBKz5TVkZtEEiPvugKRbHnXB/lrQ=;
+        b=FzGlNjucZDjpw0AijRclFEIT7DSg7BRDzJ/BochpDLQVK7W08SNHm+9rmOnfbGqssm
+         hg0og/CvK9ew/TevL/mVK/ffmttwP4Sp3bhbpwo3FR8/1KiHNLg+YxQiRjlhlzhV7VBd
+         dQEKE28UM4lzkxMuF6EQVZuIGlZwNuEj9yCnA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731596293; x=1732201093;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=wfQMcfiQzj+ufcVDBKz5TVkZtEEiPvugKRbHnXB/lrQ=;
+        b=cksGIP6DfYYo49iOtnYd6afpzUoIR7IyIApaaJsHyw46B/a0rwdEZNDyR1EFEeXbze
+         uEhNluAsNUK88eDZ7ELI1PPyQsU/kiknlgMDuJ+ezpv8w078egGQj9dAw/j+QiPrOx1P
+         ZGkW/En8Yp0qbpZ/7/GyStxCJT6Xu1ttk1el32w5jD85LTVt0vi8+MSdsBoWVFn/y2jf
+         vg3DEC9NAEskLq4Mlb0piv7gzjmjE/4v4aoqkXOWs1tIXcatv9ysVUX1WofkQ3xxFm5x
+         u4IRsLUwhGLf6GYlAoUvOhlzSDRtvChq0eAxjklluidxWEU/WBjlMBVQ30gIrsHN4WD9
+         SyPg==
+X-Gm-Message-State: AOJu0YzzMIX2xD3waLRIoQVo6wc0olT/PdbrKnqzHloqd8EP7kb+YNqw
+	v5kNzh8UnZ/ovRXN7/wDS3eNsrMRvQdUeXC0ZvJZKrYTtTaUkPSeN2xbiw8ySbM/LbXV2qTKomy
+	1
+X-Google-Smtp-Source: AGHT+IE0ZQ6RvAcMJ6lX5tXnowlkxGMbF/MoZJdwPsvl+DQl93dO5jjfxqCZnfnU6zmcnaQjskVLqg==
+X-Received: by 2002:a17:907:72c8:b0:a9a:1739:91e9 with SMTP id a640c23a62f3a-a9eefeebe72mr2495033866b.24.1731596293067;
+        Thu, 14 Nov 2024 06:58:13 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v3 1/4] x86/mm: introduce helpers to detect super page alignment
+Date: Thu, 14 Nov 2024 15:57:12 +0100
+Message-ID: <20241114145715.59777-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20241114145715.59777-1-roger.pau@citrix.com>
+References: <20241114145715.59777-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: preparations for 4.19.1
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Kelly Choi <kelly.choi@cloud.com>,
- Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>,
- Alejandro Vallejo <alejandro.vallejo@cloud.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <ddc41c9d-9754-4fde-bac0-6389511a7f7c@suse.com>
- <686facb6-0a6a-471c-a91c-b593cee7831a@citrix.com>
- <9482f40c-4913-4114-a951-6f92d95d4995@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
- CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
- 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
- IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
- SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
- JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
- mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
- ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
- RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
- dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
- /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
- TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
- Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
- 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
- vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
- g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
- wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
- 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
- kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
- bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
- uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
- XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
- HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
- pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
- vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
- b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
- 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
- 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
- nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
- B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
- d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
- 6+ahAA==
-In-Reply-To: <9482f40c-4913-4114-a951-6f92d95d4995@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 14/11/2024 12:46 pm, Jan Beulich wrote:
-> On 13.11.2024 16:20, Andrew Cooper wrote:
->> On 12/11/2024 1:00 pm, Jan Beulich wrote:
->>> the release is due by the end of the month. Please point out backports you find
->>> missing from the respective staging branch, but which you consider relevant.
->> Looking over the XenServer patchqueue:
-> First, overall - that's quite a few.
+Split the code that detects whether the physical and linear address of a
+mapping request are suitable to be used in an L3 or L2 slot.
 
-As chance would have it, we've just started efforts to move forward from
-4.17.
+No functional change intended.
 
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes since v2:
+ - Fix parenthesization of macro parameter.
+ - Add another usage of IS_L2E_ALIGNED().
 
->> ba709d514aac: x86/viridian: Clarify some viridian logging strings
-> Not really a backporting candidate imo.
->> This is a diagnostic improvement, also from a customer bug:
->>
->> 2f413e22fa5e: x86/msr: add log messages to MSR state load error paths
-> Again - not really a backporting candidate imo.
+Changes since v1:
+ - Make the macros local to map_pages_to_xen().
+ - Some adjustments to macro logic.
+---
+ xen/arch/x86/mm.c | 25 ++++++++++++++-----------
+ 1 file changed, 14 insertions(+), 11 deletions(-)
 
-There have been a steady stream of requests for help on list and on
-matrix, with people asking the wrong question because the Viridian error
-message is plain wrong for anyone who isn't an expert in the TLFS spec.
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 11933321a3d5..ebb50a7836ac 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -5493,6 +5493,13 @@ int map_pages_to_xen(
+     }                                          \
+ } while (0)
+ 
++/* Check if a (virt, mfn) tuple is aligned for a given slot level. */
++#define IS_LnE_ALIGNED(v, m, n)                                 \
++    IS_ALIGNED(PFN_DOWN(v) | mfn_x(m),                          \
++               (1UL << (PAGETABLE_ORDER * ((n) - 1))) - 1)
++#define IS_L2E_ALIGNED(v, m) IS_LnE_ALIGNED(v, m, 2)
++#define IS_L3E_ALIGNED(v, m) IS_LnE_ALIGNED(v, m, 3)
++
+     L3T_INIT(current_l3page);
+ 
+     while ( nr_mfns != 0 )
+@@ -5510,9 +5517,7 @@ int map_pages_to_xen(
+         L3T_LOCK(current_l3page);
+         ol3e = *pl3e;
+ 
+-        if ( cpu_has_page1gb &&
+-             !(((virt >> PAGE_SHIFT) | mfn_x(mfn)) &
+-               ((1UL << (L3_PAGETABLE_SHIFT - PAGE_SHIFT)) - 1)) &&
++        if ( cpu_has_page1gb && IS_L3E_ALIGNED(virt, mfn) &&
+              nr_mfns >= (1UL << (L3_PAGETABLE_SHIFT - PAGE_SHIFT)) &&
+              !(flags & (_PAGE_PAT | MAP_SMALL_PAGES)) )
+         {
+@@ -5631,8 +5636,7 @@ int map_pages_to_xen(
+         if ( !pl2e )
+             goto out;
+ 
+-        if ( ((((virt >> PAGE_SHIFT) | mfn_x(mfn)) &
+-               ((1u << PAGETABLE_ORDER) - 1)) == 0) &&
++        if ( IS_L2E_ALIGNED(virt, mfn) &&
+              (nr_mfns >= (1u << PAGETABLE_ORDER)) &&
+              !(flags & (_PAGE_PAT|MAP_SMALL_PAGES)) )
+         {
+@@ -5749,9 +5753,7 @@ int map_pages_to_xen(
+             nr_mfns -= 1UL;
+ 
+             if ( (flags == PAGE_HYPERVISOR) &&
+-                 ((nr_mfns == 0) ||
+-                  ((((virt >> PAGE_SHIFT) | mfn_x(mfn)) &
+-                    ((1u << PAGETABLE_ORDER) - 1)) == 0)) )
++                 ((nr_mfns == 0) || IS_L2E_ALIGNED(virt, mfn)) )
+             {
+                 unsigned long base_mfn;
+                 const l1_pgentry_t *l1t;
+@@ -5802,9 +5804,7 @@ int map_pages_to_xen(
+  check_l3:
+         if ( cpu_has_page1gb &&
+              (flags == PAGE_HYPERVISOR) &&
+-             ((nr_mfns == 0) ||
+-              !(((virt >> PAGE_SHIFT) | mfn_x(mfn)) &
+-                ((1UL << (L3_PAGETABLE_SHIFT - PAGE_SHIFT)) - 1))) )
++             ((nr_mfns == 0) || IS_L3E_ALIGNED(virt, mfn)) )
+         {
+             unsigned long base_mfn;
+             const l2_pgentry_t *l2t;
+@@ -5848,6 +5848,9 @@ int map_pages_to_xen(
+         }
+     }
+ 
++#undef IS_L3E_ALIGNED
++#undef IS_L2E_ALIGNED
++#undef IS_LnE_ALIGNED
+ #undef flush_flags
+ 
+     rc = 0;
+-- 
+2.46.0
 
-What is even worse is that I've been trying to fix this damn error
-message for 5 years
-https://lore.kernel.org/xen-devel/20190913160404.495-1-andrew.cooper3@citrix.com/T/#u
-because it had already been causing confusion for years prior.
-
-
-Good (or better) error messages are worth their weight in gold, for ease
-of investigating bug reports if nothing else.They really should be
-considered in the same category as bugfixes, IMO.
->> These are from a livepatching snafu:
->>
->> 3a28da8f4daf: xen/livepatch: remove useless check for duplicated sections
->> 8c81423038f1: xen/livepatch: drop load_addr Elf section field
->> 86d09d16dd74: xen/livepatch: simplify and unify logic in prepare_payload()
->> fa49f4be413c: xen/livepatch: do Xen build-id check earlier
->> aa5a06d5d6ed: x86/alternatives: do not BUG during apply
->>
->> where the buildid check is much too late.
-> I certainly agree with taking the last two. The first three though are all
-> "no functional change", which generally I'd prefer to omit unless they're
-> strictly prereqs, or diverging from master is deemed to be a severe issue.
-
-Patch 1 might be able to be excluded without too much trouble.
-
-Patch 2 and 3 are both prerequisites; the first to get a usable pointer
-early enough to do the check, and the second to get a suitable helper to
-perform the check with.
-
-~Andrew
 
