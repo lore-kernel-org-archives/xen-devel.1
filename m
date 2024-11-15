@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B035D68BD8
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:35:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838202.1254250 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 038F3D68BD7
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:35:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838225.1254259 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3xu-0000Ca-I9; Fri, 15 Nov 2024 21:34:54 +0000
+	id 1tC3yQ-0001Mb-PD; Fri, 15 Nov 2024 21:35:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838202.1254250; Fri, 15 Nov 2024 21:34:54 +0000
+Received: by outflank-mailman (output) from mailman id 838225.1254259; Fri, 15 Nov 2024 21:35:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3xu-0000CT-DY; Fri, 15 Nov 2024 21:34:54 +0000
-Received: by outflank-mailman (input) for mailman id 838202;
- Fri, 15 Nov 2024 21:34:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tC3yQ-0001MS-Mc; Fri, 15 Nov 2024 21:35:26 +0000
+Received: by outflank-mailman (input) for mailman id 838225;
+ Fri, 15 Nov 2024 21:35:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3xt-0007j5-EI
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:34:53 +0000
+ id 1tC3q6-0007DY-W7
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:26:51 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 71b5cb75-a399-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 22:34:50 +0100 (CET)
-Received: from [192.168.35.166] (c-73-118-245-227.hsd1.wa.comcast.net
- [73.118.245.227])
- by linux.microsoft.com (Postfix) with ESMTPSA id 684CD2064AE8;
- Fri, 15 Nov 2024 13:34:46 -0800 (PST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 51783b48-a398-11ef-99a3-01e77a169b0f;
+ Fri, 15 Nov 2024 22:26:47 +0100 (CET)
+Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 499B0206BCFF;
+ Fri, 15 Nov 2024 13:26:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,129 +41,281 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71b5cb75-a399-11ef-a0c7-8be0dac302b0
+X-Inumbo-ID: 51783b48-a398-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjcxYjVjYjc1LWEzOTktMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA2NDkxLjE3MjI5MSwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 684CD2064AE8
+X-Custom-Transaction: eyJpZCI6IjUxNzgzYjQ4LWEzOTgtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNzA2MDA3LjU2NzYyNywic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 499B0206BCFF
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1731706489;
-	bh=OEAxYqndmV97fB2t7JocLL7u1S4ql6E8JdtDlfM98mA=;
-	h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
-	b=Xurk/K9NZ4Pt7R0qwaS9VSYSKCTMSaNp/aapEsQZCtIT74ft5tvctXWuFivs3Zswx
-	 hrelPOn+ppZ3FOsJiI+79MeaWo7lX97CMgyLO8+gyOebFfO+/iJc5GjxBT3U1ILKzl
-	 NFamFr9+2AnMiAp4lQnkRWbNDRlCI9FqXsyeg14c=
-Message-ID: <ae1f83c3-88fe-4b75-9446-e7e711b954ae@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 13:34:46 -0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Cc: eahariha@linux.microsoft.com, netfilter-devel@vger.kernel.org,
- coreteam@netfilter.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, cocci@inria.fr,
- linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org,
- dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-block@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, linux-mm@kvack.org,
- linux-bluetooth@vger.kernel.org, linux-staging@lists.linux.dev,
- linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
- live-patching@vger.kernel.org, linux-sound@vger.kernel.org,
- etnaviv@lists.freedesktop.org, oss-drivers@corigine.com,
- linuxppc-dev@lists.ozlabs.org, Anna-Maria Behnsen
- <anna-maria@linutronix.de>, Michael Kelley <mhklinux@outlook.com>,
- Thomas Gleixner <tglx@linutronix.de>,
- Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
-Subject: Re: [PATCH 22/22] jiffies: Define secs_to_jiffies()
-To: Jeff Johnson <quic_jjohnson@quicinc.com>,
- Pablo Neira Ayuso <pablo@netfilter.org>,
- Jozsef Kadlecsik <kadlec@netfilter.org>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Julia Lawall <Julia.Lawall@inria.fr>,
- Nicolas Palix <nicolas.palix@imag.fr>, Daniel Mack <daniel@zonque.org>,
- Haojian Zhuang <haojian.zhuang@gmail.com>,
- Robert Jarzmik <robert.jarzmik@free.fr>, Russell King
- <linux@armlinux.org.uk>, Heiko Carstens <hca@linux.ibm.com>,
- Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev
- <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>,
- Sven Schnelle <svens@linux.ibm.com>, Ofir Bitton <obitton@habana.ai>,
- Oded Gabbay <ogabbay@kernel.org>, Lucas De Marchi
- <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Jeroen de Borst <jeroendb@google.com>,
- Praveen Kaligineedi <pkaligineedi@google.com>,
- Shailend Chand <shailend@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
- James Smart <james.smart@broadcom.com>,
- Dick Kennedy <dick.kennedy@broadcom.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Jens Axboe <axboe@kernel.dk>, Kalle Valo <kvalo@kernel.org>,
- Jeff Johnson <jjohnson@kernel.org>, Catalin Marinas
- <catalin.marinas@arm.com>, Andrew Morton <akpm@linux-foundation.org>,
- Jack Wang <jinpu.wang@cloud.ionos.com>, Marcel Holtmann
- <marcel@holtmann.org>, Johan Hedberg <johan.hedberg@gmail.com>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui
- <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Xiubo Li <xiubli@redhat.com>,
- Ilya Dryomov <idryomov@gmail.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- Jiri Kosina <jikos@kernel.org>, Miroslav Benes <mbenes@suse.cz>,
- Petr Mladek <pmladek@suse.com>, Joe Lawrence <joe.lawrence@redhat.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Louis Peens <louis.peens@corigine.com>, Michael Ellerman
- <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Naveen N Rao <naveen@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>
-References: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
- <20241115-converge-secs-to-jiffies-v1-22-19aadc34941b@linux.microsoft.com>
- <e1ff4b71-7abf-4ac6-8b82-86aad5394de6@quicinc.com>
-Content-Language: en-US
+	s=default; t=1731706003;
+	bh=61FzWbZx8SVE6r33ggD3SgPEq3e2wgbU4/WDXmU67Oo=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+	b=og1s1yT3C7qmGwpXC7BTRjelEYUxv+y/wT3aVo0+4J69TYgfP6zEFIO0yD8KBx7t/
+	 92Gtaxjx6bIrpJr767qFI9u3x1d6CtqjQKQq/ajvUlvLNnm+zvVjUogpR6HNP56Qc4
+	 chNj7CUafA0bTcDqKth0w7CAJ55sYrNQyLSK+jvY=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-In-Reply-To: <e1ff4b71-7abf-4ac6-8b82-86aad5394de6@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
+Date: Fri, 15 Nov 2024 21:26:27 +0000
+Subject: [PATCH v2 10/21] scsi: lpfc: Convert timeouts to secs_to_jiffies()
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20241115-converge-secs-to-jiffies-v2-10-911fb7595e79@linux.microsoft.com>
+References: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
+In-Reply-To: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
+To: Pablo Neira Ayuso <pablo@netfilter.org>, 
+ Jozsef Kadlecsik <kadlec@netfilter.org>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, Julia Lawall <Julia.Lawall@inria.fr>, 
+ Nicolas Palix <nicolas.palix@imag.fr>, Daniel Mack <daniel@zonque.org>, 
+ Haojian Zhuang <haojian.zhuang@gmail.com>, 
+ Robert Jarzmik <robert.jarzmik@free.fr>, 
+ Russell King <linux@armlinux.org.uk>, Heiko Carstens <hca@linux.ibm.com>, 
+ Vasily Gorbik <gor@linux.ibm.com>, 
+ Alexander Gordeev <agordeev@linux.ibm.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Sven Schnelle <svens@linux.ibm.com>, Ofir Bitton <obitton@habana.ai>, 
+ Oded Gabbay <ogabbay@kernel.org>, 
+ Lucas De Marchi <lucas.demarchi@intel.com>, 
+ =?utf-8?q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Jeroen de Borst <jeroendb@google.com>, 
+ Praveen Kaligineedi <pkaligineedi@google.com>, 
+ Shailend Chand <shailend@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+ James Smart <james.smart@broadcom.com>, 
+ Dick Kennedy <dick.kennedy@broadcom.com>, 
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
+ "Martin K. Petersen" <martin.petersen@oracle.com>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+ Jens Axboe <axboe@kernel.dk>, Kalle Valo <kvalo@kernel.org>, 
+ Jeff Johnson <jjohnson@kernel.org>, 
+ Catalin Marinas <catalin.marinas@arm.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ Jack Wang <jinpu.wang@cloud.ionos.com>, 
+ Marcel Holtmann <marcel@holtmann.org>, 
+ Johan Hedberg <johan.hedberg@gmail.com>, 
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>, 
+ Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, 
+ Josh Poimboeuf <jpoimboe@kernel.org>, Jiri Kosina <jikos@kernel.org>, 
+ Miroslav Benes <mbenes@suse.cz>, Petr Mladek <pmladek@suse.com>, 
+ Joe Lawrence <joe.lawrence@redhat.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Lucas Stach <l.stach@pengutronix.de>, 
+ Russell King <linux+etnaviv@armlinux.org.uk>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, 
+ Louis Peens <louis.peens@corigine.com>, 
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
+ Christophe Leroy <christophe.leroy@csgroup.eu>, 
+ Naveen N Rao <naveen@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>
+Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org, 
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org, cocci@inria.fr, 
+ linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org, 
+ linux-block@vger.kernel.org, linux-wireless@vger.kernel.org, 
+ ath11k@lists.infradead.org, linux-mm@kvack.org, 
+ linux-bluetooth@vger.kernel.org, linux-staging@lists.linux.dev, 
+ linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org, 
+ live-patching@vger.kernel.org, linux-sound@vger.kernel.org, 
+ etnaviv@lists.freedesktop.org, oss-drivers@corigine.com, 
+ linuxppc-dev@lists.ozlabs.org, 
+ Anna-Maria Behnsen <anna-maria@linutronix.de>, 
+ Easwar Hariharan <eahariha@linux.microsoft.com>
+X-Mailer: b4 0.14.2
 
-On 11/15/2024 1:30 PM, Jeff Johnson wrote:
-> On 11/15/2024 1:22 PM, Easwar Hariharan wrote:
->> secs_to_jiffies() is defined in hci_event.c and cannot be reused by
->> other call sites. Hoist it into the core code to allow conversion of the
->> ~1150 usages of msecs_to_jiffies() that either:
->>
->>  - use a multiplier value of 1000 or equivalently MSEC_PER_SEC, or
->>  - have timeouts that are denominated in seconds (i.e. end in 000)
->>
->> It's implemented as a macro to allow usage in static initializers.
->>
->> This will also allow conversion of yet more sites that use (sec * HZ)
->> directly, and improve their readability.
->>
->> Suggested-by: Michael Kelley <mhklinux@outlook.com>
->> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
->> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
->> Reviewed-by: Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
->> Link: https://lore.kernel.org/all/20241030-open-coded-timeouts-v3-1-9ba123facf88@linux.microsoft.com
-> 
-> your signed-off-by should be last.
-> 
-> and you have a patch ordering problem since this patch must come before all
-> the patches that use secs_to_jiffies(), otherwise this series cannot be bisected
+Changes made with the following Coccinelle rules:
 
-Thanks for the quick response, indeed this patch is already in tip[1], I
-pulled it in for testing the series but missed out on removing it before
-sending. Please review v2 that excludes this:
-https://lore.kernel.org/all/20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com/
+@@ constant C; @@
 
-[1]: https://git.kernel.org/tip/b35108a51cf7bab58d7eace1267d7965978bcdb8
+- msecs_to_jiffies(C * 1000)
++ secs_to_jiffies(C)
 
-Thanks,
-Easwar
+@@ constant C; @@
+
+- msecs_to_jiffies(C * MSEC_PER_SEC)
++ secs_to_jiffies(C)
+
+Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
+---
+ drivers/scsi/lpfc/lpfc_init.c      | 18 +++++++++---------
+ drivers/scsi/lpfc/lpfc_nportdisc.c |  8 ++++----
+ drivers/scsi/lpfc/lpfc_nvme.c      |  2 +-
+ drivers/scsi/lpfc/lpfc_sli.c       |  4 ++--
+ drivers/scsi/lpfc/lpfc_vmid.c      |  2 +-
+ 5 files changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/drivers/scsi/lpfc/lpfc_init.c b/drivers/scsi/lpfc/lpfc_init.c
+index 0dd451009b07914450dc70f2c981b690557c1d8c..12666c4c7986ae0bdfaa5c8f040b4ea0be64550d 100644
+--- a/drivers/scsi/lpfc/lpfc_init.c
++++ b/drivers/scsi/lpfc/lpfc_init.c
+@@ -598,7 +598,7 @@ lpfc_config_port_post(struct lpfc_hba *phba)
+ 		  jiffies + msecs_to_jiffies(1000 * timeout));
+ 	/* Set up heart beat (HB) timer */
+ 	mod_timer(&phba->hb_tmofunc,
+-		  jiffies + msecs_to_jiffies(1000 * LPFC_HB_MBOX_INTERVAL));
++		  jiffies + secs_to_jiffies(LPFC_HB_MBOX_INTERVAL));
+ 	clear_bit(HBA_HBEAT_INP, &phba->hba_flag);
+ 	clear_bit(HBA_HBEAT_TMO, &phba->hba_flag);
+ 	phba->last_completion_time = jiffies;
+@@ -1267,7 +1267,7 @@ lpfc_hb_mbox_cmpl(struct lpfc_hba * phba, LPFC_MBOXQ_t * pmboxq)
+ 	    !test_bit(FC_UNLOADING, &phba->pport->load_flag))
+ 		mod_timer(&phba->hb_tmofunc,
+ 			  jiffies +
+-			  msecs_to_jiffies(1000 * LPFC_HB_MBOX_INTERVAL));
++			  secs_to_jiffies(LPFC_HB_MBOX_INTERVAL));
+ 	return;
+ }
+ 
+@@ -1555,7 +1555,7 @@ lpfc_hb_timeout_handler(struct lpfc_hba *phba)
+ 		/* If IOs are completing, no need to issue a MBX_HEARTBEAT */
+ 		spin_lock_irq(&phba->pport->work_port_lock);
+ 		if (time_after(phba->last_completion_time +
+-				msecs_to_jiffies(1000 * LPFC_HB_MBOX_INTERVAL),
++				secs_to_jiffies(LPFC_HB_MBOX_INTERVAL),
+ 				jiffies)) {
+ 			spin_unlock_irq(&phba->pport->work_port_lock);
+ 			if (test_bit(HBA_HBEAT_INP, &phba->hba_flag))
+@@ -3352,7 +3352,7 @@ lpfc_block_mgmt_io(struct lpfc_hba *phba, int mbx_action)
+ 	spin_unlock_irqrestore(&phba->hbalock, iflag);
+ 	if (mbx_action == LPFC_MBX_NO_WAIT)
+ 		return;
+-	timeout = msecs_to_jiffies(LPFC_MBOX_TMO * 1000) + jiffies;
++	timeout = secs_to_jiffies(LPFC_MBOX_TMO) + jiffies;
+ 	spin_lock_irqsave(&phba->hbalock, iflag);
+ 	if (phba->sli.mbox_active) {
+ 		actcmd = phba->sli.mbox_active->u.mb.mbxCommand;
+@@ -4939,14 +4939,14 @@ int lpfc_scan_finished(struct Scsi_Host *shost, unsigned long time)
+ 		stat = 1;
+ 		goto finished;
+ 	}
+-	if (time >= msecs_to_jiffies(30 * 1000)) {
++	if (time >= secs_to_jiffies(30)) {
+ 		lpfc_printf_log(phba, KERN_INFO, LOG_INIT,
+ 				"0461 Scanning longer than 30 "
+ 				"seconds.  Continuing initialization\n");
+ 		stat = 1;
+ 		goto finished;
+ 	}
+-	if (time >= msecs_to_jiffies(15 * 1000) &&
++	if (time >= secs_to_jiffies(15) &&
+ 	    phba->link_state <= LPFC_LINK_DOWN) {
+ 		lpfc_printf_log(phba, KERN_INFO, LOG_INIT,
+ 				"0465 Link down longer than 15 "
+@@ -4960,7 +4960,7 @@ int lpfc_scan_finished(struct Scsi_Host *shost, unsigned long time)
+ 	if (vport->num_disc_nodes || vport->fc_prli_sent)
+ 		goto finished;
+ 	if (!atomic_read(&vport->fc_map_cnt) &&
+-	    time < msecs_to_jiffies(2 * 1000))
++	    time < secs_to_jiffies(2))
+ 		goto finished;
+ 	if ((phba->sli.sli_flag & LPFC_SLI_MBOX_ACTIVE) != 0)
+ 		goto finished;
+@@ -5194,8 +5194,8 @@ lpfc_vmid_poll(struct timer_list *t)
+ 		lpfc_worker_wake_up(phba);
+ 
+ 	/* restart the timer for the next iteration */
+-	mod_timer(&phba->inactive_vmid_poll, jiffies + msecs_to_jiffies(1000 *
+-							LPFC_VMID_TIMER));
++	mod_timer(&phba->inactive_vmid_poll,
++		  jiffies + secs_to_jiffies(LPFC_VMID_TIMER));
+ }
+ 
+ /**
+diff --git a/drivers/scsi/lpfc/lpfc_nportdisc.c b/drivers/scsi/lpfc/lpfc_nportdisc.c
+index 4574716c8764fba6d6db103f1f287b7cdb87cebc..4185717f35defbde483b4ff9b1d71c9c3d86a07d 100644
+--- a/drivers/scsi/lpfc/lpfc_nportdisc.c
++++ b/drivers/scsi/lpfc/lpfc_nportdisc.c
+@@ -914,7 +914,7 @@ lpfc_rcv_logo(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
+ 		    (ndlp->nlp_state >= NLP_STE_ADISC_ISSUE ||
+ 		     ndlp->nlp_state <= NLP_STE_PRLI_ISSUE)) {
+ 			mod_timer(&ndlp->nlp_delayfunc,
+-				  jiffies + msecs_to_jiffies(1000 * 1));
++				  jiffies + secs_to_jiffies(1));
+ 			spin_lock_irq(&ndlp->lock);
+ 			ndlp->nlp_flag |= NLP_DELAY_TMO;
+ 			spin_unlock_irq(&ndlp->lock);
+@@ -1355,7 +1355,7 @@ lpfc_rcv_els_plogi_issue(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
+ 	}
+ 
+ 	/* Put ndlp in npr state set plogi timer for 1 sec */
+-	mod_timer(&ndlp->nlp_delayfunc, jiffies + msecs_to_jiffies(1000 * 1));
++	mod_timer(&ndlp->nlp_delayfunc, jiffies + secs_to_jiffies(1));
+ 	spin_lock_irq(&ndlp->lock);
+ 	ndlp->nlp_flag |= NLP_DELAY_TMO;
+ 	spin_unlock_irq(&ndlp->lock);
+@@ -1975,7 +1975,7 @@ lpfc_cmpl_reglogin_reglogin_issue(struct lpfc_vport *vport,
+ 
+ 		/* Put ndlp in npr state set plogi timer for 1 sec */
+ 		mod_timer(&ndlp->nlp_delayfunc,
+-			  jiffies + msecs_to_jiffies(1000 * 1));
++			  jiffies + secs_to_jiffies(1));
+ 		spin_lock_irq(&ndlp->lock);
+ 		ndlp->nlp_flag |= NLP_DELAY_TMO;
+ 		spin_unlock_irq(&ndlp->lock);
+@@ -2798,7 +2798,7 @@ lpfc_rcv_prlo_npr_node(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
+ 
+ 	if ((ndlp->nlp_flag & NLP_DELAY_TMO) == 0) {
+ 		mod_timer(&ndlp->nlp_delayfunc,
+-			  jiffies + msecs_to_jiffies(1000 * 1));
++			  jiffies + secs_to_jiffies(1));
+ 		spin_lock_irq(&ndlp->lock);
+ 		ndlp->nlp_flag |= NLP_DELAY_TMO;
+ 		ndlp->nlp_flag &= ~NLP_NPR_ADISC;
+diff --git a/drivers/scsi/lpfc/lpfc_nvme.c b/drivers/scsi/lpfc/lpfc_nvme.c
+index fec23c7237304b471e58194726ff7932b0010385..64d7060e0d4cb628c74c0fa22ece2b956155c1ba 100644
+--- a/drivers/scsi/lpfc/lpfc_nvme.c
++++ b/drivers/scsi/lpfc/lpfc_nvme.c
+@@ -2236,7 +2236,7 @@ lpfc_nvme_lport_unreg_wait(struct lpfc_vport *vport,
+ 	 * wait. Print a message if a 10 second wait expires and renew the
+ 	 * wait. This is unexpected.
+ 	 */
+-	wait_tmo = msecs_to_jiffies(LPFC_NVME_WAIT_TMO * 1000);
++	wait_tmo = secs_to_jiffies(LPFC_NVME_WAIT_TMO);
+ 	while (true) {
+ 		ret = wait_for_completion_timeout(lport_unreg_cmp, wait_tmo);
+ 		if (unlikely(!ret)) {
+diff --git a/drivers/scsi/lpfc/lpfc_sli.c b/drivers/scsi/lpfc/lpfc_sli.c
+index 2ec6e55771b45ab70320a9ad1934d5ead2371d4c..b6f19c123e25a00c0eb4444476a7194d6b045824 100644
+--- a/drivers/scsi/lpfc/lpfc_sli.c
++++ b/drivers/scsi/lpfc/lpfc_sli.c
+@@ -9024,7 +9024,7 @@ lpfc_sli4_hba_setup(struct lpfc_hba *phba)
+ 
+ 	/* Start heart beat timer */
+ 	mod_timer(&phba->hb_tmofunc,
+-		  jiffies + msecs_to_jiffies(1000 * LPFC_HB_MBOX_INTERVAL));
++		  jiffies + secs_to_jiffies(LPFC_HB_MBOX_INTERVAL));
+ 	clear_bit(HBA_HBEAT_INP, &phba->hba_flag);
+ 	clear_bit(HBA_HBEAT_TMO, &phba->hba_flag);
+ 	phba->last_completion_time = jiffies;
+@@ -13335,7 +13335,7 @@ lpfc_sli_mbox_sys_shutdown(struct lpfc_hba *phba, int mbx_action)
+ 		lpfc_sli_mbox_sys_flush(phba);
+ 		return;
+ 	}
+-	timeout = msecs_to_jiffies(LPFC_MBOX_TMO * 1000) + jiffies;
++	timeout = secs_to_jiffies(LPFC_MBOX_TMO) + jiffies;
+ 
+ 	/* Disable softirqs, including timers from obtaining phba->hbalock */
+ 	local_bh_disable();
+diff --git a/drivers/scsi/lpfc/lpfc_vmid.c b/drivers/scsi/lpfc/lpfc_vmid.c
+index cc3e4736f2fe29e1fd4afe221c9c7c40ecf382d4..14dbfe954e423acc47d1b1c80160ff193783f500 100644
+--- a/drivers/scsi/lpfc/lpfc_vmid.c
++++ b/drivers/scsi/lpfc/lpfc_vmid.c
+@@ -278,7 +278,7 @@ int lpfc_vmid_get_appid(struct lpfc_vport *vport, char *uuid,
+ 		if (!(vport->phba->pport->vmid_flag & LPFC_VMID_TIMER_ENBLD)) {
+ 			mod_timer(&vport->phba->inactive_vmid_poll,
+ 				  jiffies +
+-				  msecs_to_jiffies(1000 * LPFC_VMID_TIMER));
++				  secs_to_jiffies(LPFC_VMID_TIMER));
+ 			vport->phba->pport->vmid_flag |= LPFC_VMID_TIMER_ENBLD;
+ 		}
+ 	}
+
+-- 
+2.34.1
+
 
