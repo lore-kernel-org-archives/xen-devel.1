@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BD7D6DDF3
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 11:53:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.837176.1253174 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FDB0D6DDED
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 11:53:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.837179.1253192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBusw-0007ng-Rg; Fri, 15 Nov 2024 11:53:10 +0000
+	id 1tBusy-0008C8-Ny; Fri, 15 Nov 2024 11:53:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 837176.1253174; Fri, 15 Nov 2024 11:53:10 +0000
+Received: by outflank-mailman (output) from mailman id 837179.1253192; Fri, 15 Nov 2024 11:53:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBusw-0007lq-Ey; Fri, 15 Nov 2024 11:53:10 +0000
-Received: by outflank-mailman (input) for mailman id 837176;
- Fri, 15 Nov 2024 11:53:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tBusy-00088T-2y; Fri, 15 Nov 2024 11:53:12 +0000
+Received: by outflank-mailman (input) for mailman id 837179;
+ Fri, 15 Nov 2024 11:53:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Akm3=SK=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tBusu-0005U9-Cr
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:08 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2c704f42-a348-11ef-99a3-01e77a169b0f;
- Fri, 15 Nov 2024 12:53:05 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9ed0ec0e92so219687566b.0
- for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:05 -0800 (PST)
+ id 1tBusw-0005UF-FV
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:10 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2e019b8d-a348-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 12:53:07 +0100 (CET)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aa3a79d4d59so270568166b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:07 -0800 (PST)
 Received: from localhost.localdomain (0545937c.skybroadband.com.
  [5.69.147.124]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.03
+ a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 03:53:03 -0800 (PST)
+ Fri, 15 Nov 2024 03:53:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,186 +47,316 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c704f42-a348-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmUiLCJoZWxvIjoibWFpbC1lajEteDYyZS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjJjNzA0ZjQyLWEzNDgtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNjcxNTg1LjIxODUzNywic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 2e019b8d-a348-11ef-a0c7-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzEiLCJoZWxvIjoibWFpbC1lajEteDYzMS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjJlMDE5YjhkLWEzNDgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcxNTg3LjgyNjk2Niwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1731671584; x=1732276384; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1731671587; x=1732276387; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tbzbnGY5b9VCsBtIJf+XEboWM0m6rBzXP5FkkZe8vV8=;
-        b=aymRs0YGOTds2TOl2MBBQXJgpWqyzn4AZLSvz1r/XTEiCZKS2mxm5NwQ3b2GP/r4eZ
-         g24oHlGD+6pV2Ogaq8t8zBq06+RaxEQoGARk8T252NAI03vg41ghH59ZnSXg+/2DWFiD
-         RTu585d1F7aBc1pewEv1wNFUJCKObTM3GgKGI=
+        bh=YTgBp3u8P0cZs4GoU1pcL/XsrDo/t/R26kaPSnnnZ/I=;
+        b=QRqOoqN6TNL+Uqykknt2PjpKKFg5G58/0oc5nPD2EgH2xErwrkK9Zyl1u5lCqfAe2D
+         Mlr4NJMbpgYgyjN31lM7VRaG5yJiD3RD1Z2wra45GqTaDpQWV6MUBC2WPIiYKpslR92k
+         JQXsr69ftEppoxpw1KN7kDae+AxhZZ720EtPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731671584; x=1732276384;
+        d=1e100.net; s=20230601; t=1731671587; x=1732276387;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=tbzbnGY5b9VCsBtIJf+XEboWM0m6rBzXP5FkkZe8vV8=;
-        b=g5VuXjssj77uQOxWBnFfm/tywt7rW4UR4xSRkExp95TAGeyZGATo26Lrkr28K3SKE/
-         ep8Ukj7EkHvzNaOrPodBTX4C2YPG6wCorO3/3bEre2xYHQyQ0faT+mG/lPP0Q1M7qht0
-         GeIZxdQxT9Sq+dYzDyzKP9d60RR50x0MyBx+fispyDff+5KziQEK27UvVauwu5YPgkwP
-         qrdwDQ/zH6T+HzISh6yUJMhqdSeDlWyUESebOkGdxYABV0+5zXPVZFfYrHckuHq69KzR
-         UUICCJ9fR0C7Lq/SdFo3RA0ae7+QnuX4bfQsTLO1yEmqBUoRBLiFN+j0KwotXeVgPY5+
-         79Lg==
-X-Gm-Message-State: AOJu0YyMnjaZK3l9I6WQ/aFHS1MTgyA//pEHl18AmgvmcWavyZcPu4rB
-	mXLqLfYlDMmnant8W62jPwF4VFSMBkJR7X4MCvVOEooh+gotDSNHvkcUEpen67vMFaxnXd4I7wL
-	4
-X-Google-Smtp-Source: AGHT+IEoZKaaro2gVDw6s0jZEmgVgGc0g3JA1rEf4FQjZi9vMd9pDARUKg2VgqJPwwuPjdnSUjNYjg==
-X-Received: by 2002:a17:907:701:b0:a9e:b471:8308 with SMTP id a640c23a62f3a-aa4835523d4mr198218066b.49.1731671584278;
-        Fri, 15 Nov 2024 03:53:04 -0800 (PST)
+        bh=YTgBp3u8P0cZs4GoU1pcL/XsrDo/t/R26kaPSnnnZ/I=;
+        b=LIaGNOyH5MYmTD4Zjyyv1VVnQT7DOpLJcdwrmoFcT0edHRTQ22H2vwx0Z3p6whNgxI
+         +Sh2pVRb55RequwHFt+VKFYdGk0vmgV9fKsOo2LdDRgePSy78HxXvMV+coMeGEedpBhq
+         bVo6goWe2/A+x3Tz6sqVFyTYMghLhMXyPKxWmQaYhFBsWk7linAgCEduPAx1vqK8lGCa
+         qhRFMmLrnCxSbGGkelK+KnpYwwvYXA+H1VqO93dLkHsJRQr9m/ggJUuO/scCVL0LOVOp
+         WaldrSw2umsgnNY/pm+SXdcBCWJvpThPLzplSdqCIRCrgGKMomS6puiZu96jz0HbxL7D
+         9FOg==
+X-Gm-Message-State: AOJu0Yy3ipifTA0l5LfgAAPt3zyg11V4NR1sq7aS32sVU6b4q0+2HPnp
+	lQw37hrf/++g0p1m5ygc3ykvicYw3GZ4kMp37qTaUYZwvze7eHJT54xLwbC7ah1VUSt8piSn7fY
+	3
+X-Google-Smtp-Source: AGHT+IGGf7chMiYoWULTA+4FqsplpwjC0gZstVC0KtP0DCVj+5C9GYogkSgo5Czrly1ZKHbWy2xagw==
+X-Received: by 2002:a17:907:3d86:b0:a9f:508:5924 with SMTP id a640c23a62f3a-aa483525ef4mr207071166b.43.1731671586933;
+        Fri, 15 Nov 2024 03:53:06 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Yann Dirson <yann.dirson@vates.tech>
-Subject: [RFC PATCH 10/25] tools/xenbindgen: Add support for includes in the TOML specs
-Date: Fri, 15 Nov 2024 11:51:39 +0000
-Message-ID: <20241115115200.2824-11-alejandro.vallejo@cloud.com>
+	Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [RFC PATCH 12/25] xen: Replace sysctl/readconsole with autogenerated version
+Date: Fri, 15 Nov 2024 11:51:41 +0000
+Message-ID: <20241115115200.2824-13-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
 References: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Adds include-like semantics to the TOML files. Note that "arch" is
-special to allow (a) generating all arch-specific files in one go and
-(b) demultiplex appropriately.
+Describe sysctl/readconsole as a TOML specification, remove old
+hand-coded version and replace it with autogenerated file.
 
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+While at it, transform the console driver to use uint8_t rather than
+char in order to mandate the type to be unsigned and ensure the ABI is
+not defined with regards to C-specific types.
+
+Also grant stubdom access to the new autogen folder, or it won't build.
+
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- tools/rust/xenbindgen/src/c_lang.rs | 39 ++++++++++++++++++++++++++++-
- tools/rust/xenbindgen/src/spec.rs   | 24 ++++++++++++++++++
- 2 files changed, 62 insertions(+), 1 deletion(-)
+ stubdom/Makefile                              |  2 +-
+ tools/rust/Makefile                           | 19 ++++++++
+ .../xenbindgen/extra/sysctl/readconsole.toml  | 43 +++++++++++++++++++
+ xen/drivers/char/console.c                    | 12 +++---
+ xen/include/public/autogen/sysctl.h           | 35 +++++++++++++++
+ xen/include/public/sysctl.h                   | 23 +---------
+ xen/include/public/xen.h                      |  1 +
+ 7 files changed, 108 insertions(+), 27 deletions(-)
+ create mode 100644 tools/rust/xenbindgen/extra/sysctl/readconsole.toml
+ create mode 100644 xen/include/public/autogen/sysctl.h
 
-diff --git a/tools/rust/xenbindgen/src/c_lang.rs b/tools/rust/xenbindgen/src/c_lang.rs
-index bba310233e60..be6be3756dc0 100644
---- a/tools/rust/xenbindgen/src/c_lang.rs
-+++ b/tools/rust/xenbindgen/src/c_lang.rs
-@@ -17,7 +17,7 @@
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 2a81af28a16e..5e919889836b 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -362,7 +362,7 @@ LINK_STAMPS := $(foreach dir,$(LINK_DIRS),$(dir)/stamp)
+ mk-headers-$(XEN_TARGET_ARCH): $(IOEMU_LINKFARM_TARGET) $(LINK_STAMPS)
+ 	mkdir -p include/xen && \
+           ln -sf $(wildcard $(XEN_ROOT)/xen/include/public/*.h) include/xen && \
+-          ln -sf $(addprefix $(XEN_ROOT)/xen/include/public/,arch-x86 hvm io xsm) include/xen && \
++          ln -sf $(addprefix $(XEN_ROOT)/xen/include/public/,arch-x86 autogen hvm io xsm) include/xen && \
+           ( [ -h include/xen/sys ] || ln -sf $(XEN_ROOT)/tools/include/xen-sys/MiniOS include/xen/sys ) && \
+           ( [ -h include/xen/libelf ] || ln -sf $(XEN_ROOT)/tools/include/xen/libelf include/xen/libelf ) && \
+ 	  mkdir -p include/xen-foreign && \
+diff --git a/tools/rust/Makefile b/tools/rust/Makefile
+index f5db0a9c5e81..80e2f0e2817e 100644
+--- a/tools/rust/Makefile
++++ b/tools/rust/Makefile
+@@ -3,6 +3,11 @@ XEN_ROOT=$(CURDIR)/../..
+ # Path to the Xen hypercall IDL parser
+ XENBINDGEN=$(CURDIR)/xenbindgen
  
- use std::fmt::Write;
- 
--use crate::spec::{BitmapDef, EnumDef, OutFileDef, StructDef, Typ};
-+use crate::spec::{BitmapDef, EnumDef, IncludeDef, OutFileDef, StructDef, Typ};
- 
- use convert_case::{Case, Casing};
- use log::{debug, error, trace};
-@@ -109,6 +109,39 @@ fn comment(out: &mut String, comment: &str, ind: Indentation) {
-     }
- }
- 
-+/// Adds specified `includes`. `arch` must be treated specially in order to
-+/// demultiplex the target architecture.
-+///
-+/// The reason for the inclusion must be printed as a comment on top of the
-+/// `include` itself.
-+fn includegen(out: &mut String, def: &IncludeDef) {
-+    if !def.imports.is_empty() {
-+        comment(
-+            out,
-+            &format!("for {}", def.imports.join(",\n    ")),
-+            Indentation(0),
-+        );
-+    }
++# Output folder for the autogenerated C headers
++#
++# Must contain autogenerated files only because they're all wiped on update
++AUTOGEN_C=$(XEN_ROOT)/xen/include/public/autogen/
 +
-+    if def.from == "arch" {
-+        writeln!(out, "#if defined(__i386__) || defined(__x86_64__)").unwrap();
-+        writeln!(out, "#include \"arch_x86.h\"").unwrap();
-+        writeln!(out, "#elif defined(__arm__) || defined(__aarch64__)").unwrap();
-+        writeln!(out, "#include \"arch_arm.h\"").unwrap();
-+        writeln!(out, "#elif defined(__powerpc64__)").unwrap();
-+        writeln!(out, "#include \"arch_ppc.h\"").unwrap();
-+        writeln!(out, "#elif defined(__riscv)").unwrap();
-+        writeln!(out, "#include \"arch_riscv.h\"").unwrap();
-+        writeln!(out, "#else").unwrap();
-+        writeln!(out, "#error \"Unsupported architecture\"").unwrap();
-+        writeln!(out, "#endif").unwrap();
-+    } else {
-+        writeln!(out, "#include \"{}.h\"", def.from).unwrap();
-+    }
-+
-+    writeln!(out).unwrap();
-+}
-+
- /// Write a C-compatible struct onto `out`
- fn structgen(out: &mut String, filedef: &OutFileDef, def: &StructDef) {
-     debug!("struct {}", def.name);
-@@ -212,6 +245,10 @@ pub fn parse(filedef: &OutFileDef) -> String {
-     writeln!(out, "#ifndef __XEN_AUTOGEN_{name}_H").unwrap();
-     writeln!(out, "#define __XEN_AUTOGEN_{name}_H\n").unwrap();
+ # Clippy settings for all Rust projects
+ CLIPPY_ARGS=-D warnings \
+             -D missing_docs \
+@@ -14,6 +19,20 @@ CLIPPY_ARGS=-D warnings \
+ .PHONY: all install uninstall clean
+ all install uninstall clean:
  
-+    for def in &filedef.includes {
-+        includegen(&mut out, def);
-+    }
++# Remove all autogenerated files
++.PHONY: clean-autogen
++clean-autogen:
++	rm -rf "${AUTOGEN_C}"
 +
-     for def in &filedef.enums {
-         enumgen(&mut out, def);
-     }
-diff --git a/tools/rust/xenbindgen/src/spec.rs b/tools/rust/xenbindgen/src/spec.rs
-index 4a9c5e7d028b..04be05187ac8 100644
---- a/tools/rust/xenbindgen/src/spec.rs
-+++ b/tools/rust/xenbindgen/src/spec.rs
-@@ -134,9 +134,24 @@ pub struct VariantDef {
-     pub value: u64,
- }
- 
-+/// Dependency links between files.
-+///
-+/// Used in specifications to state a number of types (described in `imports`)
-+/// is needed from another generated file (the `from` field).
-+#[derive(Debug, serde::Deserialize)]
-+pub struct IncludeDef {
-+    /// Name of the [`InFileDef`] that contains the imported tokens of
-+    /// `imports`.
-+    pub from: String,
-+    /// List of tokens used in this spec file that exist in `from`.
-+    pub imports: Vec<String>,
-+}
++# Refresh autogenerated files. Depending on clean-autogen is required in order
++# for removals of specification files to cause the removal of their
++# autogenerated files.
++.PHONY: update
++update: clean-autogen
++	# Update C bindings
++	cargo run --manifest-path "${XENBINDGEN}/Cargo.toml" -- --lang c \
++	          --indir "${XENBINDGEN}/extra" --outdir "${AUTOGEN_C}"
 +
- /// A language-agnostic specification.
- #[derive(Debug, serde::Deserialize)]
- struct InFileDef {
-+    /// List of types described in other [`InFileDef`] that are required here.
-+    includes: Option<Vec<IncludeDef>>,
-     /// List of structs described in this input specification.
-     structs: Option<Vec<StructDef>>,
-     /// List of lang-agnostic enumerated descriptions.
-@@ -152,7 +167,12 @@ struct InFileDef {
- pub struct OutFileDef {
-     /// The name of the output file, without the final extension.
-     pub name: String,
-+    /// Represents the dependencies between various [`OutFileDef`]. A language
-+    /// backend is free to ignore these if they are not required.
-+    pub includes: Vec<IncludeDef>,
-     /// List of structs described by all input spec files merged on this file.
-+    ///
-+    /// Implementation is lang-specific.
-     pub structs: Vec<StructDef>,
-     /// List of enumerated descriptions.
-     ///
-@@ -176,6 +196,7 @@ impl OutFileDef {
+ # Verify Rust crates pass lint checks. This is enforced in CI
+ .PHONY: verify
+ verify:
+diff --git a/tools/rust/xenbindgen/extra/sysctl/readconsole.toml b/tools/rust/xenbindgen/extra/sysctl/readconsole.toml
+new file mode 100644
+index 000000000000..868743a453ff
+--- /dev/null
++++ b/tools/rust/xenbindgen/extra/sysctl/readconsole.toml
+@@ -0,0 +1,43 @@
++[[structs]]
++name = "xen_sysctl_readconsole"
++description = "Read console content from Xen buffer ring."
++
++[[structs.fields]]
++name = "clear"
++description = "IN: Non-zero -> clear after reading."
++typ = { tag = "u8" }
++
++[[structs.fields]]
++name = "incremental"
++description = "IN: Non-zero -> start index specified by `index` field."
++typ = { tag = "u8" }
++
++[[structs.fields]]
++name = "_pad"
++description = "Unused."
++typ = { tag = "u16" }
++
++[[structs.fields]]
++name = "index"
++description = """
++IN:  Start index for consuming from ring buffer (if @incremental);
++OUT: End index after consuming from ring buffer."""
++typ = { tag = "u32" }
++
++[[structs.fields]]
++name = "buffer"
++description = """
++IN: Virtual address to write console data.
++
++NOTE: The pointer itself is IN, but the contents of the buffer are OUT."""
++typ = { tag = "ptr", args = { tag = "u8" } }
++
++[[structs.fields]]
++name = "count"
++description = "IN: Size of buffer; OUT: Bytes written to buffer."
++typ = { tag = "u32" }
++
++[[structs.fields]]
++name = "rsvd0_a"
++description = "Tail padding reserved to zero."
++typ = { tag = "u32" }
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 7da8c5296f3b..82f6ad7b32cb 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -42,6 +42,8 @@
+ #include <asm/vpl011.h>
+ #endif
  
-         let mut ret = Self {
-             name,
-+            includes: Vec::new(),
-             structs: Vec::new(),
-             enums: Vec::new(),
-             bitmaps: Vec::new(),
-@@ -195,6 +216,9 @@ impl OutFileDef {
-             if let Some(bitmaps) = filedef.bitmaps {
-                 ret.bitmaps.extend(bitmaps);
-             }
-+            if let Some(includes) = filedef.includes {
-+                ret.includes.extend(includes);
-+            }
-         }
++#include <public/xen.h>
++
+ /* console: comma-separated list of console outputs. */
+ static char __initdata opt_console[30] = OPT_CONSOLE_STR;
+ string_param("console", opt_console);
+@@ -108,8 +110,8 @@ size_param("conring_size", opt_conring_size);
  
-         Ok(ret)
+ #define _CONRING_SIZE 16384
+ #define CONRING_IDX_MASK(i) ((i)&(conring_size-1))
+-static char __initdata _conring[_CONRING_SIZE];
+-static char *__read_mostly conring = _conring;
++static uint8_t __initdata _conring[_CONRING_SIZE];
++static uint8_t *__read_mostly conring = _conring;
+ static uint32_t __read_mostly conring_size = _CONRING_SIZE;
+ static uint32_t conringc, conringp;
+ 
+@@ -339,10 +341,10 @@ static void conring_puts(const char *str, size_t len)
+ 
+ long read_console_ring(struct xen_sysctl_readconsole *op)
+ {
+-    XEN_GUEST_HANDLE_PARAM(char) str;
++    XEN_GUEST_HANDLE_PARAM(uint8_t) str;
+     uint32_t idx, len, max, sofar, c, p;
+ 
+-    str   = guest_handle_cast(op->buffer, char),
++    str   = guest_handle_cast(op->buffer, uint8_t),
+     max   = op->count;
+     sofar = 0;
+ 
+@@ -1052,7 +1054,7 @@ void __init console_init_preirq(void)
+ 
+ void __init console_init_ring(void)
+ {
+-    char *ring;
++    uint8_t *ring;
+     unsigned int i, order, memflags;
+     unsigned long flags;
+ 
+diff --git a/xen/include/public/autogen/sysctl.h b/xen/include/public/autogen/sysctl.h
+new file mode 100644
+index 000000000000..f728b13374d3
+--- /dev/null
++++ b/xen/include/public/autogen/sysctl.h
+@@ -0,0 +1,35 @@
++/*
++ * sysctl
++ *
++ * AUTOGENERATED. DO NOT MODIFY
++ */
++#ifndef __XEN_AUTOGEN_SYSCTL_H
++#define __XEN_AUTOGEN_SYSCTL_H
++
++/* Read console content from Xen buffer ring. */
++struct xen_sysctl_readconsole {
++    /* IN: Non-zero -> clear after reading. */
++    uint8_t clear;
++    /* IN: Non-zero -> start index specified by `index` field. */
++    uint8_t incremental;
++    /* Unused. */
++    uint16_t _pad;
++    /*
++     * IN:  Start index for consuming from ring buffer (if @incremental);
++     * OUT: End index after consuming from ring buffer.
++     */
++    uint32_t index;
++    /*
++     * IN: Virtual address to write console data.
++     *
++     * NOTE: The pointer itself is IN, but the contents of the buffer are OUT.
++     */
++    XEN_GUEST_HANDLE_64(uint8) buffer;
++    /* IN: Size of buffer; OUT: Bytes written to buffer. */
++    uint32_t count;
++    /* Tail padding reserved to zero. */
++    uint32_t rsvd0_a;
++};
++
++#endif /* __XEN_AUTOGEN_SYSCTL_H */
++
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index b0fec271d36f..9e773490a5ac 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -18,6 +18,8 @@
+ #include "domctl.h"
+ #include "physdev.h"
+ 
++#include "autogen/sysctl.h"
++
+ /*
+  * The interface version needs to be incremented by 1 in case the interface
+  * is modified in an incompatible way AND if the version hasn't been
+@@ -30,27 +32,6 @@
+  */
+ #define XEN_SYSCTL_INTERFACE_VERSION 0x00000015
+ 
+-/*
+- * Read console content from Xen buffer ring.
+- */
+-/* XEN_SYSCTL_readconsole */
+-struct xen_sysctl_readconsole {
+-    /* IN: Non-zero -> clear after reading. */
+-    uint8_t clear;
+-    /* IN: Non-zero -> start index specified by @index field. */
+-    uint8_t incremental;
+-    uint8_t pad0, pad1;
+-    /*
+-     * IN:  Start index for consuming from ring buffer (if @incremental);
+-     * OUT: End index after consuming from ring buffer.
+-     */
+-    uint32_t index;
+-    /* IN: Virtual address to write console data. */
+-    XEN_GUEST_HANDLE_64(char) buffer;
+-    /* IN: Size of buffer; OUT: Bytes written to buffer. */
+-    uint32_t count;
+-};
+-
+ /* Get trace buffers machine base address */
+ /* XEN_SYSCTL_tbuf_op */
+ struct xen_sysctl_tbuf_op {
+diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
+index e051f989a5ca..cc5133fc19b8 100644
+--- a/xen/include/public/xen.h
++++ b/xen/include/public/xen.h
+@@ -36,6 +36,7 @@ __DEFINE_XEN_GUEST_HANDLE(ulong, unsigned long);
+ #endif
+ DEFINE_XEN_GUEST_HANDLE(void);
+ 
++DEFINE_XEN_GUEST_HANDLE(uint8_t);
+ DEFINE_XEN_GUEST_HANDLE(uint64_t);
+ DEFINE_XEN_GUEST_HANDLE(xen_pfn_t);
+ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 -- 
 2.47.0
 
