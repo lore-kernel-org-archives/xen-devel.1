@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59EDD68BD7
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:41:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838352.1254389 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C341D68BD9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:41:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838355.1254405 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC44G-00037j-HO; Fri, 15 Nov 2024 21:41:28 +0000
+	id 1tC44I-0003Ue-4V; Fri, 15 Nov 2024 21:41:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838352.1254389; Fri, 15 Nov 2024 21:41:28 +0000
+Received: by outflank-mailman (output) from mailman id 838355.1254405; Fri, 15 Nov 2024 21:41:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC44G-00037Y-Cc; Fri, 15 Nov 2024 21:41:28 +0000
-Received: by outflank-mailman (input) for mailman id 838352;
- Fri, 15 Nov 2024 21:41:26 +0000
+	id 1tC44H-0003UW-U9; Fri, 15 Nov 2024 21:41:29 +0000
+Received: by outflank-mailman (input) for mailman id 838355;
+ Fri, 15 Nov 2024 21:41:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3qC-0007DY-0L
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:26:56 +0000
+ id 1tC3q4-0007DY-Vj
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:26:48 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 53a18b54-a398-11ef-99a3-01e77a169b0f;
- Fri, 15 Nov 2024 22:26:50 +0100 (CET)
+ id 5054a1a1-a398-11ef-99a3-01e77a169b0f;
+ Fri, 15 Nov 2024 22:26:45 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id E068E2064AE1;
- Fri, 15 Nov 2024 13:26:44 -0800 (PST)
+ by linux.microsoft.com (Postfix) with ESMTPSA id 5DA5E206BCFB;
+ Fri, 15 Nov 2024 13:26:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,25 +41,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 53a18b54-a398-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 5054a1a1-a398-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjUzYTE4YjU0LWEzOTgtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNzA2MDExLjAzMjUzNiwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com E068E2064AE1
+X-Custom-Transaction: eyJpZCI6IjUwNTRhMWExLWEzOTgtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNzA2MDA1LjY1NjMxOCwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 5DA5E206BCFB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1731706005;
-	bh=kyIMdoD81WSCHIuRs3t1IxAuP6vGJ5R59VD+r/6KKK0=;
+	s=default; t=1731706002;
+	bh=cDb5q9ey4rgvzuTMFsMkjW3R4ZHiX3a+lRd3JDjV6+Q=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=OvSN4ExTI3ztYwv8z22+okCfYqet5Vamjrrd8DLniE8bXBLrrqlExhm9XqqhqVQAv
-	 K9X4eAD6Lklhy7dtiZRCgteR1YNNFWOyXJy0qOlBw+SNmEx9GYlOniMke213AVuk1H
-	 UgCfCoB89XARJTc4CqTz96UEBf2hkM8Effwv9vsg=
+	b=NO84SskjrWC/WFvKvGdiMiujlTtBQUCv9VY6UYFsNxghNS3m5K63jnaoGusNsUnee
+	 5tLTM7woyBZaUNuUFMB3oWVBMOozS3J1y7PPugpo3cvaz/QXUdeGix3ePT8vCN2oIN
+	 gQ1ZKgfEKCkg+XmnS+/V2pj/LNnJYminStxSf4BY=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 21:26:34 +0000
-Subject: [PATCH v2 17/21] staging: vc04_services: Convert timeouts to
+Date: Fri, 15 Nov 2024 21:26:23 +0000
+Subject: [PATCH v2 06/21] mm: kmemleak: Convert timeouts to
  secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-converge-secs-to-jiffies-v2-17-911fb7595e79@linux.microsoft.com>
+Message-Id: <20241115-converge-secs-to-jiffies-v2-6-911fb7595e79@linux.microsoft.com>
 References: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
 In-Reply-To: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -143,22 +143,31 @@ Changes made with the following Coccinelle rules:
 
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ mm/kmemleak.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-index 133ed15f3dbcc07dc353c22d8522e11a08ee6f46..6bb2562e071c4e623e51852860c682e047f823df 100644
---- a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-+++ b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-@@ -59,7 +59,7 @@ static int bcm2835_audio_send_msg_locked(struct bcm2835_audio_instance *instance
+diff --git a/mm/kmemleak.c b/mm/kmemleak.c
+index 0400f5e8ac60de555f43d85f1d36f67e48b4ebed..2c099d0819b1896390b842af76069a46bffabc23 100644
+--- a/mm/kmemleak.c
++++ b/mm/kmemleak.c
+@@ -1816,7 +1816,7 @@ static int kmemleak_scan_thread(void *arg)
+ 	 * Wait before the first scan to allow the system to fully initialize.
+ 	 */
+ 	if (first_run) {
+-		signed long timeout = msecs_to_jiffies(SECS_FIRST_SCAN * 1000);
++		signed long timeout = secs_to_jiffies(SECS_FIRST_SCAN);
+ 		first_run = 0;
+ 		while (timeout && !kthread_should_stop())
+ 			timeout = schedule_timeout_interruptible(timeout);
+@@ -2202,7 +2202,7 @@ void __init kmemleak_init(void)
+ 		return;
  
- 	if (wait) {
- 		if (!wait_for_completion_timeout(&instance->msg_avail_comp,
--						 msecs_to_jiffies(10 * 1000))) {
-+						 secs_to_jiffies(10))) {
- 			dev_err(instance->dev,
- 				"vchi message timeout, msg=%d\n", m->type);
- 			return -ETIMEDOUT;
+ 	jiffies_min_age = msecs_to_jiffies(MSECS_MIN_AGE);
+-	jiffies_scan_wait = msecs_to_jiffies(SECS_SCAN_WAIT * 1000);
++	jiffies_scan_wait = secs_to_jiffies(SECS_SCAN_WAIT);
+ 
+ 	object_cache = KMEM_CACHE(kmemleak_object, SLAB_NOLEAKTRACE);
+ 	scan_area_cache = KMEM_CACHE(kmemleak_scan_area, SLAB_NOLEAKTRACE);
 
 -- 
 2.34.1
