@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5C34D68BE1
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:23:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838016.1253990 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AD4ED68BD8
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:23:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838027.1254072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3mG-0008Gm-6V; Fri, 15 Nov 2024 21:22:52 +0000
+	id 1tC3mP-00021H-HW; Fri, 15 Nov 2024 21:23:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838016.1253990; Fri, 15 Nov 2024 21:22:52 +0000
+Received: by outflank-mailman (output) from mailman id 838027.1254072; Fri, 15 Nov 2024 21:23:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3mF-0008Fe-Vv; Fri, 15 Nov 2024 21:22:51 +0000
-Received: by outflank-mailman (input) for mailman id 838016;
- Fri, 15 Nov 2024 21:22:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tC3mO-0001wc-FC; Fri, 15 Nov 2024 21:23:00 +0000
+Received: by outflank-mailman (input) for mailman id 838027;
+ Fri, 15 Nov 2024 21:22:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3mE-0007DI-A2
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:22:50 +0000
+ id 1tC3mK-0007DO-88
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:22:56 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id c2bd54f9-a397-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 22:22:47 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id c5e47f1c-a397-11ef-99a3-01e77a169b0f;
+ Fri, 15 Nov 2024 22:22:52 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id 5C04E206BCEA;
- Fri, 15 Nov 2024 13:22:43 -0800 (PST)
+ by linux.microsoft.com (Postfix) with ESMTPSA id 4F33820BEBD7;
+ Fri, 15 Nov 2024 13:22:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,25 +41,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2bd54f9-a397-11ef-a0c7-8be0dac302b0
+X-Inumbo-ID: c5e47f1c-a397-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImMyYmQ1NGY5LWEzOTctMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA1NzY4LjA5Mjk5Miwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 5C04E206BCEA
+X-Custom-Transaction: eyJpZCI6ImM1ZTQ3ZjFjLWEzOTctMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNzA1NzczLjI0MjA4Nywic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 4F33820BEBD7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1731705763;
-	bh=QYs6jKNkSqRMwxas8zTGS0f9EDen03tWxmE1GsbmPvQ=;
+	s=default; t=1731705765;
+	bh=DTjXQ8JEnxKHPkRfiey8gv8xkSCkh1L+oMakOx6bumQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=I95I66JgO1E7XQYaEm7ineOx+2MkduTJSN9e4D1cu0/NE7dcCwPndmzh7i/cNGesc
-	 2yzIBCvlbGPZzvMpNA+k96a1ZOGXJ+A0bPOMF6Lmuw/xKRtew/BB44Qgm554Xu3M7K
-	 XgYk3aN7aTdB7omQICy4E1708sGRqDk4h4Xf8u4c=
+	b=PrkdMSJsCXq7e/LVXAIqADh6VOx2LSK3q8Voqjd439eNhh8b6N4u5aB1nfKzAe2Tm
+	 +kT+vzsuhI8O0/+YRjBVlaEQ5kmFrot1X5DGJclM8+YlYZkjA4xQVjB3ZX/xX3Lrsj
+	 FbrAa2GDIV5JdurdApM8LMcIFqaWmUwvCMzOiXGc=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 21:22:37 +0000
-Subject: [PATCH 07/22] accel/habanalabs: Convert timeouts to
+Date: Fri, 15 Nov 2024 21:22:46 +0000
+Subject: [PATCH 16/22] Bluetooth: MGMT: Convert timeouts to
  secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-converge-secs-to-jiffies-v1-7-19aadc34941b@linux.microsoft.com>
+Message-Id: <20241115-converge-secs-to-jiffies-v1-16-19aadc34941b@linux.microsoft.com>
 References: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 In-Reply-To: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -143,37 +143,22 @@ Changes made with the following Coccinelle rules:
 
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- drivers/accel/habanalabs/common/device.c         | 2 +-
- drivers/accel/habanalabs/common/habanalabs_drv.c | 3 +--
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ net/bluetooth/mgmt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/accel/habanalabs/common/device.c b/drivers/accel/habanalabs/common/device.c
-index e0cf3b4343bb081638430f2552ed27431b488ff9..30277ae410d4b742ffb7bddc35498564ff96fe62 100644
---- a/drivers/accel/habanalabs/common/device.c
-+++ b/drivers/accel/habanalabs/common/device.c
-@@ -817,7 +817,7 @@ static void device_hard_reset_pending(struct work_struct *work)
- 		}
+diff --git a/net/bluetooth/mgmt.c b/net/bluetooth/mgmt.c
+index a429661b676a83ec2d34ed7e228195f39a153f9f..ca89c26d04ec64869e6b99de099d343f4c548ce5 100644
+--- a/net/bluetooth/mgmt.c
++++ b/net/bluetooth/mgmt.c
+@@ -209,7 +209,7 @@ static const u16 mgmt_untrusted_events[] = {
+ 	MGMT_EV_EXP_FEATURE_CHANGED,
+ };
  
- 		queue_delayed_work(hdev->reset_wq, &device_reset_work->reset_work,
--					msecs_to_jiffies(HL_PENDING_RESET_PER_SEC * 1000));
-+					secs_to_jiffies(HL_PENDING_RESET_PER_SEC));
- 	}
- }
+-#define CACHE_TIMEOUT	msecs_to_jiffies(2 * 1000)
++#define CACHE_TIMEOUT	secs_to_jiffies(2)
  
-diff --git a/drivers/accel/habanalabs/common/habanalabs_drv.c b/drivers/accel/habanalabs/common/habanalabs_drv.c
-index 708dfd10f39c584a6221c29015f4b0323574145a..5ec13f3a46f915e75b04582b28d51ba8bb50be78 100644
---- a/drivers/accel/habanalabs/common/habanalabs_drv.c
-+++ b/drivers/accel/habanalabs/common/habanalabs_drv.c
-@@ -362,8 +362,7 @@ static void fixup_device_params_per_asic(struct hl_device *hdev, int timeout)
- 		 * a different default timeout for Gaudi
- 		 */
- 		if (timeout == HL_DEFAULT_TIMEOUT_LOCKED)
--			hdev->timeout_jiffies = msecs_to_jiffies(GAUDI_DEFAULT_TIMEOUT_LOCKED *
--										MSEC_PER_SEC);
-+			hdev->timeout_jiffies = secs_to_jiffies(GAUDI_DEFAULT_TIMEOUT_LOCKED);
- 
- 		hdev->reset_upon_device_release = 0;
- 		break;
+ #define ZERO_KEY "\x00\x00\x00\x00\x00\x00\x00\x00" \
+ 		 "\x00\x00\x00\x00\x00\x00\x00\x00"
 
 -- 
 2.34.1
