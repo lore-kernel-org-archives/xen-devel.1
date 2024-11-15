@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56C0D68BD9
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:23:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838018.1254004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB30D68BE7
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:23:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838011.1253945 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3mH-00005R-9P; Fri, 15 Nov 2024 21:22:53 +0000
+	id 1tC3mD-0007G6-FX; Fri, 15 Nov 2024 21:22:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838018.1254004; Fri, 15 Nov 2024 21:22:53 +0000
+Received: by outflank-mailman (output) from mailman id 838011.1253945; Fri, 15 Nov 2024 21:22:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3mG-0008UL-Qh; Fri, 15 Nov 2024 21:22:52 +0000
-Received: by outflank-mailman (input) for mailman id 838018;
- Fri, 15 Nov 2024 21:22:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tC3mD-0007Fe-9Y; Fri, 15 Nov 2024 21:22:49 +0000
+Received: by outflank-mailman (input) for mailman id 838011;
+ Fri, 15 Nov 2024 21:22:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3mF-0007DO-8a
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:22:51 +0000
+ id 1tC3mB-0007DI-Uc
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:22:47 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id c2c30c00-a397-11ef-99a3-01e77a169b0f;
- Fri, 15 Nov 2024 22:22:47 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id c0564bf1-a397-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 22:22:43 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id E451D206BCE8;
+ by linux.microsoft.com (Postfix) with ESMTPSA id 1682D206BCE4;
  Fri, 15 Nov 2024 13:22:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -41,25 +41,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2c30c00-a397-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: c0564bf1-a397-11ef-a0c7-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImMyYzMwYzAwLWEzOTctMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNzA1NzY4LjE1MDg1Nywic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com E451D206BCE8
+X-Custom-Transaction: eyJpZCI6ImMwNTY0YmYxLWEzOTctMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA1NzY0LjIwNzQwOSwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 1682D206BCE4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1731705763;
-	bh=uwqJCSe3GXdPjGHghPvDBfnEwZdT0uYA3z4HTDFu1hA=;
+	s=default; t=1731705762;
+	bh=Q64Lap8gGilYnZS8wBYuXVtg6CkDWFgIDR5hpRb/qKY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=RVx2emb342NEz2mst6RfMUiki8VYrjbKedjHqPNNNkb4BXhLdZgldqHGBRr6S5V4l
-	 ot1jj3ag+tv5arCezMBNlcZVolqJ/kVXCKfLQi6UufSSi9gPBN5Z2YR5EAMTqKRljK
-	 uRWcAwELTERtWaAvz5gx5fAH4KPOOU/VcBtZ4kx8=
+	b=TpPSBC6Q0pyCMIPKcOfsvZX/wWIHu4+ejmKY8xw+0GecDvIAUfgwshz01AoOkZ0WD
+	 k4gHIei/egZSo7W0NlMAlHYHatQ5bzRsbZtX1NOQvIcE9aFKMDcUHtqmglM484AIGB
+	 /3Fdhfw7EN1qT/zCvUp8095p9P9VmicZ+TZgDM0I=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 21:22:35 +0000
-Subject: [PATCH 05/22] powerpc/papr_scm: Convert timeouts to
- secs_to_jiffies()
+Date: Fri, 15 Nov 2024 21:22:31 +0000
+Subject: [PATCH 01/22] netfilter: conntrack: Cleanup timeout definitions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-converge-secs-to-jiffies-v1-5-19aadc34941b@linux.microsoft.com>
+Message-Id: <20241115-converge-secs-to-jiffies-v1-1-19aadc34941b@linux.microsoft.com>
 References: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 In-Reply-To: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -129,36 +128,48 @@ Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
  Easwar Hariharan <eahariha@linux.microsoft.com>
 X-Mailer: b4 0.14.2
 
-Changes made with the following Coccinelle rules:
-
-@@ constant C; @@
-
-- msecs_to_jiffies(C * 1000)
-+ secs_to_jiffies(C)
-
-@@ constant C; @@
-
-- msecs_to_jiffies(C * MSEC_PER_SEC)
-+ secs_to_jiffies(C)
+None of the higher order definitions are used anymore, so remove
+definitions for minutes, hours, and days timeouts. Convert the seconds
+denominated timeouts to secs_to_jiffies()
 
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- arch/powerpc/platforms/pseries/papr_scm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ net/netfilter/nf_conntrack_proto_sctp.c | 21 ++++++++-------------
+ 1 file changed, 8 insertions(+), 13 deletions(-)
 
-diff --git a/arch/powerpc/platforms/pseries/papr_scm.c b/arch/powerpc/platforms/pseries/papr_scm.c
-index 9e297f88adc5d97d4dc7b267b0bfebd58e5cf193..9e8086ec66e0f0e555ac27933854c06cfcf91a04 100644
---- a/arch/powerpc/platforms/pseries/papr_scm.c
-+++ b/arch/powerpc/platforms/pseries/papr_scm.c
-@@ -543,7 +543,7 @@ static int drc_pmem_query_health(struct papr_scm_priv *p)
+diff --git a/net/netfilter/nf_conntrack_proto_sctp.c b/net/netfilter/nf_conntrack_proto_sctp.c
+index 4cc97f971264ed779434ab4597dd0162586b3736..6c95ac96fa42a39acafb5b88a7cf8898010e911c 100644
+--- a/net/netfilter/nf_conntrack_proto_sctp.c
++++ b/net/netfilter/nf_conntrack_proto_sctp.c
+@@ -39,20 +39,15 @@ static const char *const sctp_conntrack_names[] = {
+ 	[SCTP_CONNTRACK_HEARTBEAT_SENT]		= "HEARTBEAT_SENT",
+ };
  
- 	/* Jiffies offset for which the health data is assumed to be same */
- 	cache_timeout = p->lasthealth_jiffies +
--		msecs_to_jiffies(MIN_HEALTH_QUERY_INTERVAL * 1000);
-+		secs_to_jiffies(MIN_HEALTH_QUERY_INTERVAL);
+-#define SECS  * HZ
+-#define MINS  * 60 SECS
+-#define HOURS * 60 MINS
+-#define DAYS  * 24 HOURS
+-
+ static const unsigned int sctp_timeouts[SCTP_CONNTRACK_MAX] = {
+-	[SCTP_CONNTRACK_CLOSED]			= 10 SECS,
+-	[SCTP_CONNTRACK_COOKIE_WAIT]		= 3 SECS,
+-	[SCTP_CONNTRACK_COOKIE_ECHOED]		= 3 SECS,
+-	[SCTP_CONNTRACK_ESTABLISHED]		= 210 SECS,
+-	[SCTP_CONNTRACK_SHUTDOWN_SENT]		= 3 SECS,
+-	[SCTP_CONNTRACK_SHUTDOWN_RECD]		= 3 SECS,
+-	[SCTP_CONNTRACK_SHUTDOWN_ACK_SENT]	= 3 SECS,
+-	[SCTP_CONNTRACK_HEARTBEAT_SENT]		= 30 SECS,
++	[SCTP_CONNTRACK_CLOSED]			= secs_to_jiffies(10),
++	[SCTP_CONNTRACK_COOKIE_WAIT]		= secs_to_jiffies(3),
++	[SCTP_CONNTRACK_COOKIE_ECHOED]		= secs_to_jiffies(3),
++	[SCTP_CONNTRACK_ESTABLISHED]		= secs_to_jiffies(210),
++	[SCTP_CONNTRACK_SHUTDOWN_SENT]		= secs_to_jiffies(3),
++	[SCTP_CONNTRACK_SHUTDOWN_RECD]		= secs_to_jiffies(3),
++	[SCTP_CONNTRACK_SHUTDOWN_ACK_SENT]	= secs_to_jiffies(3),
++	[SCTP_CONNTRACK_HEARTBEAT_SENT]		= secs_to_jiffies(3),
+ };
  
- 	/* Fetch new health info is its older than MIN_HEALTH_QUERY_INTERVAL */
- 	if (time_after(jiffies, cache_timeout))
+ #define	SCTP_FLAG_HEARTBEAT_VTAG_FAILED	1
 
 -- 
 2.34.1
