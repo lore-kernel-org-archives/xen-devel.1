@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5F8D6DDF2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A66A4D6DDF3
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 11:53:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.837173.1253169 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.837170.1253137 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBusw-0007jC-8s; Fri, 15 Nov 2024 11:53:10 +0000
+	id 1tBuss-0006nG-Ru; Fri, 15 Nov 2024 11:53:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 837173.1253169; Fri, 15 Nov 2024 11:53:10 +0000
+Received: by outflank-mailman (output) from mailman id 837170.1253137; Fri, 15 Nov 2024 11:53:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBusw-0007ia-3N; Fri, 15 Nov 2024 11:53:10 +0000
-Received: by outflank-mailman (input) for mailman id 837173;
- Fri, 15 Nov 2024 11:53:08 +0000
+	id 1tBuss-0006kU-LX; Fri, 15 Nov 2024 11:53:06 +0000
+Received: by outflank-mailman (input) for mailman id 837170;
+ Fri, 15 Nov 2024 11:53:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Akm3=SK=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tBusu-0005UF-1x
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:08 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
+ id 1tBusr-0005UF-3I
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:05 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2ca2dcb8-a348-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 12:53:05 +0100 (CET)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-53b13ea6b78so2731475e87.2
- for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:05 -0800 (PST)
+ id 2ad09eef-a348-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 12:53:02 +0100 (CET)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aa1f73966a5so330068766b.2
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:02 -0800 (PST)
 Received: from localhost.localdomain (0545937c.skybroadband.com.
  [5.69.147.124]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.02
+ a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 03:53:02 -0800 (PST)
+ Fri, 15 Nov 2024 03:53:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,45 +47,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ca2dcb8-a348-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMmUiLCJoZWxvIjoibWFpbC1sZjEteDEyZS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjJjYTJkY2I4LWEzNDgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcxNTg1LjUzODAwNCwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 2ad09eef-a348-11ef-a0c7-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MjkiLCJoZWxvIjoibWFpbC1lajEteDYyOS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjJhZDA5ZWVmLWEzNDgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcxNTgyLjU5MTY5NCwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1731671585; x=1732276385; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1731671581; x=1732276381; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4UVXJgy4IHwj4NwXexnbXM0jpHKa0ukLk9RTwQ1hG1I=;
-        b=chfRZVlR38IjXdJcCLnlN5v5M8/A3TNgscAUsZQDAZQjcOYf7slZ5bkSvm7ZDB/Q+G
-         +e7RGUS7Xb+f2+NFU7+1dpbszqBk/c2U659T6Kom4zK34GSM/bi17ZavaTStK8HrnCuA
-         scA4WINPJEX+s7Tfpwu7enufidzhxt/HZzlXs=
+        bh=sytrPMdwvOY0m83CIY9iwMgAnzbQaeZ6sB2Zn3Z0ves=;
+        b=ia6OOIe7bDVLHBHjRD6YKKlPht7JvSDYOhYyVQ6BNAEv+LbsvqtcCIpcrB3MeG252R
+         Lag/ccoo9K3nrynhE2osLsiqqLpXpt1Nrd6qxOylJvJz7HdedWHeaQkybztMkOTs23+y
+         S6hnVDmmeGfRMZIWBMYchi09yVtEdFNDfkOdU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731671585; x=1732276385;
+        d=1e100.net; s=20230601; t=1731671581; x=1732276381;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4UVXJgy4IHwj4NwXexnbXM0jpHKa0ukLk9RTwQ1hG1I=;
-        b=tlsZMo5wA/Nyc1Iu0fvec4GmE2Ip6yxQzIQ8AOUpcu7wi/g3P/YMP8Cz1HrZYFN8w4
-         omZ14h76zZHUv7CrakKbOwKGjbcwQ3+B+Vxj0zEbA9nFQhtjnerdvcYLBQc2SutufMWX
-         xU2zt2cuUiPhf8DJHiY7b1wN91PfvrBx6YQXDPzjROr13sXFNHzVn4SuauolMJN1udGc
-         SNxHJRXvPjnUaPmNECe7qIpWkIGXDJh6/yIdfc8WywpZNrfakFrf6sk5WgQHmXNEM1Wc
-         wSnv7YhRtS0ApJbLFKwepKH6SUEGOmwLTXMigqK0dwBmOM/kyRmvRatSLz11QDuGQga4
-         qe0g==
-X-Gm-Message-State: AOJu0Ywvpk1MRhZ+pzI9qPn3X+mB5pozO1TpVNseukfD8W/N/xyfTTGZ
-	jmuTZO5xRkUYw0+lH3ZEpEzJyXUz5503mCRdChaM/7hLZz8j4OHF+cxd8/u5HfmPL2Ap5fE5xWw
-	3
-X-Google-Smtp-Source: AGHT+IHB6/A5vaCAqemK1HkjKE8fNgzdfB6BTygGqlZqFndf7w6R/839QxxCcp8cFQ89KFP8D28cVA==
-X-Received: by 2002:a05:6512:224b:b0:53d:a16e:3684 with SMTP id 2adb3069b0e04-53dab3b16ebmr1877359e87.41.1731671583351;
-        Fri, 15 Nov 2024 03:53:03 -0800 (PST)
+        bh=sytrPMdwvOY0m83CIY9iwMgAnzbQaeZ6sB2Zn3Z0ves=;
+        b=KfFolUdFcLq8xI6iIFHpu8zfdrcqxznCjngnC/Z2p3ChSKUh+dgBfc5SnIZm+/LM7l
+         jnVx6g8HB96/5y+4TgT/Y0bL0bLCT5OwAr4tc/a4S4WVCJnqY7MqQwWQgZmscwWdRMzW
+         Psfli61wjfzOHjv8SgHfQNyopOI8npiFtiCAtIEBTubqhk5xNvojq6PMF+fKBtyvk5Ql
+         bfkZidZBqSvebBw8zdcggeZBbYpnPnAApD256jFUfujsMiDBntfOUINWy6aspBeWbrZw
+         UsPOMwkpqJxZKLAvmcotdJmTs+wU4ntktCsxvoQP9jKKKQZjvq3vUi04Gbd24qjQAjYB
+         mxgA==
+X-Gm-Message-State: AOJu0YzwFVj4kvY7v1h786NKSRg6n38hmlK+QEFVVQBk5Jx6xemlgIl3
+	7MLn8dFMp0GxU6tR4i4R/3CO4Ik5dIQaKFGFgKwdmRRI9ZEcF+SXidlh7kF9/MIDu+h61MPujPa
+	E
+X-Google-Smtp-Source: AGHT+IGUG2gI1zP3YUOHglb/KaURYas4CdKMa21xCEvuFbstqXQ1lqYUtpzWfSRBrQSH8CDuFDrZvw==
+X-Received: by 2002:a17:906:eec9:b0:a9e:c954:6afb with SMTP id a640c23a62f3a-aa48355294dmr212971966b.51.1731671581436;
+        Fri, 15 Nov 2024 03:53:01 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Yann Dirson <yann.dirson@vates.tech>
-Subject: [RFC PATCH 09/25] tools/xenbindgen: Add support for bitmaps in TOML specs
-Date: Fri, 15 Nov 2024 11:51:38 +0000
-Message-ID: <20241115115200.2824-10-alejandro.vallejo@cloud.com>
+Subject: [RFC PATCH 07/25] tools/xenbindgen: Add support for structs in TOML specs
+Date: Fri, 15 Nov 2024 11:51:36 +0000
+Message-ID: <20241115115200.2824-8-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
 References: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
@@ -94,206 +94,193 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- tools/rust/xenbindgen/src/c_lang.rs | 62 ++++++++++++++++++++++++++++-
- tools/rust/xenbindgen/src/spec.rs   | 51 ++++++++++++++++++++++--
- 2 files changed, 108 insertions(+), 5 deletions(-)
+ tools/rust/xenbindgen/src/c_lang.rs | 56 ++++++++++++++++++++++++-
+ tools/rust/xenbindgen/src/spec.rs   | 64 ++++++++++++++++++++++++++++-
+ 2 files changed, 117 insertions(+), 3 deletions(-)
 
 diff --git a/tools/rust/xenbindgen/src/c_lang.rs b/tools/rust/xenbindgen/src/c_lang.rs
-index f15feca8df91..bba310233e60 100644
+index f05e36bb362f..597e0ed41362 100644
 --- a/tools/rust/xenbindgen/src/c_lang.rs
 +++ b/tools/rust/xenbindgen/src/c_lang.rs
-@@ -17,7 +17,7 @@
+@@ -17,9 +17,10 @@
  
  use std::fmt::Write;
  
--use crate::spec::{EnumDef, OutFileDef, StructDef, Typ};
-+use crate::spec::{BitmapDef, EnumDef, OutFileDef, StructDef, Typ};
+-use crate::spec::OutFileDef;
++use crate::spec::{OutFileDef, StructDef, Typ};
  
  use convert_case::{Case, Casing};
- use log::{debug, error, trace};
-@@ -51,6 +51,20 @@ fn structfield(filedef: &OutFileDef, typ: &Typ, name: &str) -> String {
-             )
-         }
-         Typ::Struct(x) => format!("struct {x} {name}"),
-+        Typ::Bitmap(x) => {
-+            // Dealing with bitfields at the ABI boundary is a
-+            // pain, so we just use the underlying type instead.
-+            let Some(e) = filedef.bitmaps.iter().find(|y| *x == y.name) else {
-+                error!("Can't find bitmap {x}. Typo?");
-+                trace!("{filedef:#?}");
-+                std::process::exit(1);
-+            };
++use log::{debug, trace};
+ 
+ /// An abstract indentation level. 0 is no indentation, 1 is [`INDENT_WIDTH`]
+ /// and so on.
+@@ -29,6 +30,39 @@ struct Indentation(usize);
+ /// Default width of each level of indentation
+ const INDENT_WIDTH: usize = 4;
+ 
++/// Create a C-compatible struct field. Without the terminating semicolon.
++fn structfield(typ: &Typ, name: &str) -> String {
++    match typ {
++        Typ::Ptr(x) => {
++            let t: &Typ = x;
 +            format!(
-+                "{} /* See {} */",
-+                structfield(filedef, &e.typ, name),
-+                e.name
++                "XEN_GUEST_HANDLE_64({}) {name}",
++                match t {
++                    Typ::U8 => "uint8",
++                    Typ::U16 => "uint16",
++                    Typ::U32 => "uint32",
++                    Typ::U64 => "uint64_aligned_t",
++                    Typ::I8 => "int8",
++                    Typ::I16 => "int16",
++                    Typ::I32 => "int32",
++                    Typ::I64 => "int64_aligned_t",
++                    _ => panic!("foo {t:?}"),
++                }
 +            )
 +        }
-         Typ::Enum(x) => {
-             // C can't use an enum as a field and fix its width. Look for its
-             // underlying layout and use that type instead.
-@@ -137,6 +151,48 @@ fn enumgen(out: &mut String, def: &EnumDef) {
-     writeln!(out).unwrap();
++        Typ::Struct(x) => format!("struct {x} {name}"),
++        Typ::Array(x, len) => format!("{}{name}[{len}]", structfield(x, "")),
++        Typ::U8 => format!("uint8_t {name}"),
++        Typ::U16 => format!("uint16_t {name}"),
++        Typ::U32 => format!("uint32_t {name}"),
++        Typ::U64 => format!("uint64_aligned_t {name}"),
++        Typ::I8 => format!("int8_t {name}"),
++        Typ::I16 => format!("int16_t {name}"),
++        Typ::I32 => format!("int32_t {name}"),
++        Typ::I64 => format!("int64_aligned_t {name}"),
++    }
++}
++
+ /// Add a comment to a struct or a field.
+ fn comment(out: &mut String, comment: &str, ind: Indentation) {
+     let spaces = " ".repeat(INDENT_WIDTH * ind.0);
+@@ -48,6 +82,22 @@ fn comment(out: &mut String, comment: &str, ind: Indentation) {
+     }
  }
  
-+/// Write a C-compatible enum onto `out`
-+fn bitmapgen(out: &mut String, def: &BitmapDef) {
-+    debug!("bitmap {}", def.name);
++/// Write a C-compatible struct onto `out`
++fn structgen(out: &mut String, def: &StructDef) {
++    debug!("struct {}", def.name);
 +
 +    comment(out, &def.description, Indentation(0));
-+    writeln!(out, "struct {} {{}}; /* GREP FODDER */", def.name).unwrap();
++    writeln!(out, "struct {} {{", def.name.to_case(Case::Snake)).unwrap();
++    for f in &def.fields {
++        trace!("  field {} type={:?}", f.name, f.typ);
 +
-+    let mut mask = 0;
-+    for f in &def.bits {
-+        trace!("  shift {}={}", f.name, f.shift);
-+
-+        if (1 << f.shift) & mask != 0 {
-+            error!("Bad shift({}) on {}. Shadows another bit.", f.shift, f.name);
-+            std::process::exit(1);
-+        }
-+
-+        mask |= 1 << f.shift;
-+
-+        comment(out, &f.description, Indentation(0));
-+        writeln!(
-+            out,
-+            "#define {}_{} (1U{} << {})",
-+            def.name.from_case(Case::Snake).to_case(Case::UpperSnake),
-+            f.name.from_case(Case::Snake).to_case(Case::UpperSnake),
-+            if def.typ == Typ::U64 { "LL" } else { "" },
-+            f.shift
-+        )
-+        .unwrap();
++        comment(out, &f.description, Indentation(1));
++        writeln!(out, "    {};", structfield(&f.typ, &f.name),).unwrap();
 +    }
-+
-+    comment(out, "Mask covering all defined bits", Indentation(0));
-+    writeln!(
-+        out,
-+        "#define {}__ALL ({:#X}U{})",
-+        def.name.from_case(Case::Snake).to_case(Case::UpperSnake),
-+        mask,
-+        if def.typ == Typ::U64 { "LL" } else { "" },
-+    )
-+    .unwrap();
++    writeln!(out, "}};").unwrap();
 +    writeln!(out).unwrap();
 +}
 +
  /// Generates a single `.h` file.
  ///
  /// `filedef` is a language-agnostic high level description of what the output
-@@ -160,6 +216,10 @@ pub fn parse(filedef: &OutFileDef) -> String {
-         enumgen(&mut out, def);
-     }
+@@ -67,6 +117,10 @@ pub fn parse(filedef: &OutFileDef) -> String {
+     writeln!(out, "#ifndef __XEN_AUTOGEN_{name}_H").unwrap();
+     writeln!(out, "#define __XEN_AUTOGEN_{name}_H\n").unwrap();
  
-+    for def in &filedef.bitmaps {
-+        bitmapgen(&mut out, def);
++    for def in &filedef.structs {
++        structgen(&mut out, def);
 +    }
 +
-     for def in &filedef.structs {
-         structgen(&mut out, filedef, def);
-     }
+     writeln!(out, "#endif /* __XEN_AUTOGEN_{name}_H */\n").unwrap();
+ 
+     out
 diff --git a/tools/rust/xenbindgen/src/spec.rs b/tools/rust/xenbindgen/src/spec.rs
-index f6cfedad2150..4a9c5e7d028b 100644
+index 08c4dc3a7eba..e183378329ad 100644
 --- a/tools/rust/xenbindgen/src/spec.rs
 +++ b/tools/rust/xenbindgen/src/spec.rs
-@@ -28,6 +28,7 @@ use log::{debug, info};
- #[derive(Debug, serde::Deserialize, PartialEq)]
- #[serde(rename_all = "lowercase", tag = "tag", content = "args")]
- pub enum Typ {
-+    Bitmap(String),
-     Enum(String),
-     Struct(String),
-     U8,
-@@ -72,7 +73,7 @@ pub struct FieldDef {
- pub struct EnumDef {
-     /// snake-cased name of this enumeration.
-     ///
--    /// Must be converted to whatever is idiomatic in the target language.
-+    /// Must be converted to idiomatic casing in the target language.
-     pub name: String,
-     /// Description of what the type is for.
-     ///
-@@ -88,11 +89,43 @@ pub struct EnumDef {
-     pub variants: Vec<VariantDef>,
- }
+@@ -17,9 +17,61 @@ use std::{fs::read_to_string, path::Path};
  
--/// A lang-agnostic description of a single variant of an enumerated type.
-+/// Lang-agnostic description of a bitmap type.
+ use log::{debug, info};
+ 
++/// An IDL type. A type may be a primitive integer, a pointer to an IDL type,
++/// an array of IDL types or a struct composed of IDL types. Every integer must
++/// be aligned to its size.
++///
++/// FIXME: This enumerated type is recovered as-is from the `typ` field in the
++/// TOML files. Ideally, that representation should be more ergonomic and the
++/// parser instructed to deal with it.
++#[allow(clippy::missing_docs_in_private_items)]
++#[derive(Debug, serde::Deserialize, PartialEq)]
++#[serde(rename_all = "lowercase", tag = "tag", content = "args")]
++pub enum Typ {
++    Struct(String),
++    U8,
++    U16,
++    U32,
++    U64,
++    I8,
++    I16,
++    I32,
++    I64,
++    Ptr(Box<Typ>),
++    Array(Box<Typ>, usize),
++}
++
++/// Deserialized form of a hypercall struct
 +#[derive(Debug, serde::Deserialize)]
-+pub struct BitmapDef {
-+    /// Snake-cased name of this bitmap.
-+    ///
-+    /// Must be converted to idiomatic casing in the target language.
++pub struct StructDef {
++    /// Name of the struct
 +    pub name: String,
-+    /// Description of what the type is for.
-+    ///
-+    /// Must be turned into documentation in the autogenerated file.
++    /// Description of what the struct is for. This string is added as a comment
++    /// on top of the autogenerated struct.
 +    pub description: String,
-+    /// Width of the type given as an equivalent primitive unsigned integer
-+    /// of the same width.
++    /// Fields contained in the struct. May be none, in which case it's a zero
++    /// length struct.
++    pub fields: Vec<FieldDef>,
++}
++
++/// Deserialized form of a field within a hypercall struct (see [`StructDef`])
++#[derive(Debug, serde::Deserialize)]
++pub struct FieldDef {
++    /// Name of the field
++    pub name: String,
++    /// Description of what the field is for. This string is added as a comment
++    /// on top of the autogenerated field.
++    pub description: String,
++    /// Type of the field.
 +    pub typ: Typ,
-+    /// List of bits in the bitmap with a described meaning. All other bits are
-+    /// reserved to zero.
-+    pub bits: Vec<BitDef>,
 +}
 +
-+/// Lang-agnostic description of a single bit within a particular bitmap type.
-+#[derive(Debug, serde::Deserialize)]
-+pub struct BitDef {
-+    /// Snake-cased name of this bit. Depending on the backend, the name
-+    /// might be prefixed by the name of its type (as is commonly done in C).
-+    pub name: String,
-+    /// Meaning of this bit in the context of its type.
-+    pub description: String,
-+    /// Position of the bit in the underlying type, following a little-endian
-+    /// convention.
-+    pub shift: u8,
-+}
-+
-+/// Lang-agnostic description of a single variant of an enumerated type.
+ /// A language-agnostic specification.
  #[derive(Debug, serde::Deserialize)]
- pub struct VariantDef {
--    /// Name of this variant. Depending on the backend, the name might be
--    /// prefixed by the name of its type (as is commonly done in C).
-+    /// Snake-cased name of this variant. Depending on the backend, the name
-+    /// might be prefixed by the name of its type (as is commonly done in C).
-     pub name: String,
-     /// Meaning of this variant in the context of its type.
-     pub description: String,
-@@ -108,6 +141,8 @@ struct InFileDef {
-     structs: Option<Vec<StructDef>>,
-     /// List of lang-agnostic enumerated descriptions.
-     enums: Option<Vec<EnumDef>>,
-+    /// List of lang-agnostic bitmap descriptions.
-+    bitmaps: Option<Vec<BitmapDef>>,
- }
+-struct InFileDef;
++struct InFileDef {
++    /// List of structs described in this input specification.
++    structs: Option<Vec<StructDef>>,
++}
  
  /// Description of an abstract output (i.e: `.rs`, `.h`, etc).
-@@ -123,6 +158,10 @@ pub struct OutFileDef {
-     ///
-     /// Implementation is lang-specific.
-     pub enums: Vec<EnumDef>,
-+    /// List of bitmap descriptions.
-+    ///
-+    /// Implementation is lang-specific.
-+    pub bitmaps: Vec<BitmapDef>,
+ ///
+@@ -28,6 +80,8 @@ struct InFileDef;
+ pub struct OutFileDef {
+     /// The name of the output file, without the final extension.
+     pub name: String,
++    /// List of structs described by all input spec files merged on this file.
++    pub structs: Vec<StructDef>,
  }
  
  impl OutFileDef {
-@@ -139,6 +178,7 @@ impl OutFileDef {
-             name,
-             structs: Vec::new(),
-             enums: Vec::new(),
-+            bitmaps: Vec::new(),
-         };
+@@ -40,13 +94,19 @@ impl OutFileDef {
+     pub fn new(name: String, dir: &Path) -> Result<Self, Error> {
+         info!("Reading {dir:?} to generate an output file");
+ 
+-        let ret = Self { name };
++        let mut ret = Self {
++            name,
++            structs: Vec::new(),
++        };
  
          for entry in from_ioerr(dir.read_dir())? {
-@@ -152,6 +192,9 @@ impl OutFileDef {
-             if let Some(enums) = filedef.enums {
-                 ret.enums.extend(enums);
-             }
-+            if let Some(bitmaps) = filedef.bitmaps {
-+                ret.bitmaps.extend(bitmaps);
+             let path = from_ioerr(entry)?.path();
+             debug!("Reading {:?} to generate outfile={}", path, ret.name);
+             let toml_str = from_ioerr(read_to_string(path))?;
+             let filedef: InFileDef = toml::from_str(&toml_str).map_err(Error::Toml)?;
++            if let Some(structs) = filedef.structs {
++                ret.structs.extend(structs);
 +            }
          }
  
