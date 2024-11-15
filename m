@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C56D68BE5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:23:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838010.1253939 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B273D68BDA
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:23:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838025.1254053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3mD-0007Dl-59; Fri, 15 Nov 2024 21:22:49 +0000
+	id 1tC3mM-0001PV-FC; Fri, 15 Nov 2024 21:22:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838010.1253939; Fri, 15 Nov 2024 21:22:49 +0000
+Received: by outflank-mailman (output) from mailman id 838025.1254053; Fri, 15 Nov 2024 21:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3mD-0007De-2Y; Fri, 15 Nov 2024 21:22:49 +0000
-Received: by outflank-mailman (input) for mailman id 838010;
- Fri, 15 Nov 2024 21:22:47 +0000
+	id 1tC3mL-0001Ly-R0; Fri, 15 Nov 2024 21:22:57 +0000
+Received: by outflank-mailman (input) for mailman id 838025;
+ Fri, 15 Nov 2024 21:22:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3mB-0007DI-9E
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:22:47 +0000
+ id 1tC3mJ-0007DI-4S
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:22:55 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id c095291f-a397-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 22:22:44 +0100 (CET)
+ id c4d7eec9-a397-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 22:22:51 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id 49A20206BCE5;
- Fri, 15 Nov 2024 13:22:42 -0800 (PST)
+ by linux.microsoft.com (Postfix) with ESMTPSA id A3C1720BEBD4;
+ Fri, 15 Nov 2024 13:22:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,24 +41,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c095291f-a397-11ef-a0c7-8be0dac302b0
+X-Inumbo-ID: c4d7eec9-a397-11ef-a0c7-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImMwOTUyOTFmLWEzOTctMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA1NzY0LjQ3NTg0NCwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 49A20206BCE5
+X-Custom-Transaction: eyJpZCI6ImM0ZDdlZWM5LWEzOTctMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA1NzcxLjQ1ODcwNiwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A3C1720BEBD4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1731705762;
-	bh=mjGmNlPTDeXtBIVnBruZVxnncRcSbkg/ti9M5w2fu78=;
+	s=default; t=1731705764;
+	bh=pCX0EpdqmyNkdZPLk4Z0q7m89NufhvHb1Y+2Mrmnnrk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Oh5o3W+QiJRTTPFI9dpb9A1AWSAOLDDOB8sqUPea54Qx6kUKHNmkqaArwACWjQxKB
-	 D55Uc4+WAewzxsbEk8laNjMjSMPfVawB+Zi45VRw0skgegejDy9IgBYr/0jKgvvqvH
-	 DeGMefeFQkwrmneQNUkhORZAjpQMci1rsg92zUBA=
+	b=b3Yj+H9ZO7cPCrzGt7MCUXvYWastksRinkPQTfKmYI5YUC6RTlLxuIDl1dZ9vx9cZ
+	 n8z6j+Y7jAIeRkA5bNrxlUKB96Yq3j9HWe6QAwTeEGIBKLrl97e7xcYOgedDgu8E7m
+	 FFC3fk0sFJpd64ZUMyFxpOhkKDs6flnQbO0zd4cg=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 21:22:32 +0000
-Subject: [PATCH 02/22] coccinelle: misc: Add secs_to_jiffies script
+Date: Fri, 15 Nov 2024 21:22:43 +0000
+Subject: [PATCH 13/22] xen/blkback: Convert timeouts to secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-converge-secs-to-jiffies-v1-2-19aadc34941b@linux.microsoft.com>
+Message-Id: <20241115-converge-secs-to-jiffies-v1-13-19aadc34941b@linux.microsoft.com>
 References: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 In-Reply-To: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -128,39 +128,36 @@ Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
  Easwar Hariharan <eahariha@linux.microsoft.com>
 X-Mailer: b4 0.14.2
 
-Suggested-by: Anna-Maria Behnsen <anna-maria@linutronix.de>
+Changes made with the following Coccinelle rules:
+
+@@ constant C; @@
+
+- msecs_to_jiffies(C * 1000)
++ secs_to_jiffies(C)
+
+@@ constant C; @@
+
+- msecs_to_jiffies(C * MSEC_PER_SEC)
++ secs_to_jiffies(C)
+
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- scripts/coccinelle/misc/secs_to_jiffies.cocci | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ drivers/block/xen-blkback/blkback.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/scripts/coccinelle/misc/secs_to_jiffies.cocci b/scripts/coccinelle/misc/secs_to_jiffies.cocci
-new file mode 100644
-index 0000000000000000000000000000000000000000..af762b1c0aac8f044f21150bfaafd9efc834ee87
---- /dev/null
-+++ b/scripts/coccinelle/misc/secs_to_jiffies.cocci
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+///
-+/// Find usages of:
-+/// - msecs_to_jiffies(value*1000)
-+/// - msecs_to_jiffies(value*MSEC_PER_SEC)
-+///
-+// Confidence: High
-+// Copyright: (C) 2024 Easwar Hariharan Microsoft
-+//
-+// Keywords: secs, seconds, jiffies
-+//
-+
-+@@ constant C; @@
-+
-+- msecs_to_jiffies(C * 1000)
-++ secs_to_jiffies(C)
-+
-+@@ constant C; @@
-+
-+- msecs_to_jiffies(C * MSEC_PER_SEC)
-++ secs_to_jiffies(C)
+diff --git a/drivers/block/xen-blkback/blkback.c b/drivers/block/xen-blkback/blkback.c
+index 838064593f62b75f3d937c0c041ea78dedbbaf84..a7c2b04ab943de9cbd69b596aad177a0534f7762 100644
+--- a/drivers/block/xen-blkback/blkback.c
++++ b/drivers/block/xen-blkback/blkback.c
+@@ -544,7 +544,7 @@ static void print_stats(struct xen_blkif_ring *ring)
+ 		 ring->st_rd_req, ring->st_wr_req,
+ 		 ring->st_f_req, ring->st_ds_req,
+ 		 ring->persistent_gnt_c, max_pgrants);
+-	ring->st_print = jiffies + msecs_to_jiffies(10 * 1000);
++	ring->st_print = jiffies + secs_to_jiffies(10);
+ 	ring->st_rd_req = 0;
+ 	ring->st_wr_req = 0;
+ 	ring->st_oo_req = 0;
 
 -- 
 2.34.1
