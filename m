@@ -4,31 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8807ED6DDFD
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 13:22:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.837621.1253548 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72490D6DDE3
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 13:28:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.837643.1253558 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBwHN-0004ov-7P; Fri, 15 Nov 2024 13:22:29 +0000
+	id 1tBwMc-0005kY-QK; Fri, 15 Nov 2024 13:27:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 837621.1253548; Fri, 15 Nov 2024 13:22:29 +0000
+Received: by outflank-mailman (output) from mailman id 837643.1253558; Fri, 15 Nov 2024 13:27:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBwHN-0004oo-4x; Fri, 15 Nov 2024 13:22:29 +0000
-Received: by outflank-mailman (input) for mailman id 837621;
- Fri, 15 Nov 2024 13:22:27 +0000
+	id 1tBwMc-0005kR-NP; Fri, 15 Nov 2024 13:27:54 +0000
+Received: by outflank-mailman (input) for mailman id 837643;
+ Fri, 15 Nov 2024 13:27:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=54cC=SK=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1tBw8R-0006v7-Un
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 13:13:15 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5d1fae5f-a353-11ef-99a3-01e77a169b0f;
- Fri, 15 Nov 2024 14:13:12 +0100 (CET)
-Received: by mx.zohomail.com with SMTPS id 1731676338126593.7092805148436;
- Fri, 15 Nov 2024 05:12:18 -0800 (PST)
+ <SRS0=olWw=SK=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tBwMb-0005kL-ON
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 13:27:53 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 67b2a603-a355-11ef-99a3-01e77a169b0f;
+ Fri, 15 Nov 2024 14:27:48 +0100 (CET)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5cb15b84544so2391810a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 05:27:48 -0800 (PST)
+Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5cf79c0ad25sm1576784a12.61.2024.11.15.05.27.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Nov 2024 05:27:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,114 +47,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d1fae5f-a353-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzNi4xNDMuMTg4LjUxIiwiaGVsbyI6InNlbmRlcjQtb2YtbzUxLnpvaG8uY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjVkMWZhZTVmLWEzNTMtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNjc2MzkzLjAxNzQ0Mywic2VuZGVyIjoiZHBzbWl0aEBhcGVydHVzc29sdXRpb25zLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-ARC-Seal: i=1; a=rsa-sha256; t=1731676340; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=Z9e/3YKyb3RRCE5tGYsc88W9Ea4/y5BTZ3oXrdZPV627uueOKJIfQoXWXCMFUnWuXJRaa93jnkV9iCbSDdwMEp+7CAxy6JpkBkwNlu69osdrJvwNWSTgc8rdfaAQLpdZKWJ36LbgRPKDrIsb+JskwhwfK9kMQcncr5LUSqGYSNE=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1731676340; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=bhl7E1mvlo9SO98XxLqZrhL5BHZQCoyp4nD+tEiZihE=; 
-	b=FLoJOgt4hMA0q6Qlkfk9BtOgxbNr2Q/7Mi6U2D1u83AIhqewpzbY5EFu7L5IEQWLMGb1lZEb2EM7c8296cVe+eHc8woy+PfGaqno6B8oJGeQGQ/TBbDQre2Wg9WQHUWiOY2tYq/BfPwYa+NKbm6Mqoj+ukZLmgWoUfBmeok4x0s=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1731676340;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=bhl7E1mvlo9SO98XxLqZrhL5BHZQCoyp4nD+tEiZihE=;
-	b=kFxRu0P+j0A0IlvOO+Yih4j31JT3Is7P4+aOLfP+U96Cgq7qeuOazqT5niKeuB5I
-	NY50+/gFKw8lxmNq+Lcw3oOe+h353PAGYNrcZr1dXptrundY8ScC/Jko8M/r3/gJFYK
-	f0nNnMAukrhe2xQmleQ3BeowE/ChvTlmxdC1cS5M=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	jason.andryuk@amd.com,
-	christopher.w.clark@gmail.com,
-	stefano.stabellini@amd.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v9 5/6] x86/boot: introduce domid field to struct boot_domain
-Date: Fri, 15 Nov 2024 08:12:03 -0500
-Message-Id: <20241115131204.32135-6-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20241115131204.32135-1-dpsmith@apertussolutions.com>
-References: <20241115131204.32135-1-dpsmith@apertussolutions.com>
+X-Inumbo-ID: 67b2a603-a355-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MmUiLCJoZWxvIjoibWFpbC1lZDEteDUyZS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjY3YjJhNjAzLWEzNTUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNjc3MjY4LjA3NjEyNCwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1731677265; x=1732282065; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DC6dK6rjdOCXvqT6W8geooDGMZt0T48ALYLa3p/WTrQ=;
+        b=G9ImQd6a9YxhLDX2JsnPEp1ehLzLDfyMK5EjEkv7fLKzyscCerfptw8sVHABHQpgfu
+         74LNZ7ubdfuv/f3RazX/QMgAW+sRZoMDhq8Y6FRpDmaGvSIaXMVufYi3N3ak1uBQABwD
+         A9zU4jZ4xSncXE4nGS4lBhZEYRi7jstFAHK6M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731677265; x=1732282065;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DC6dK6rjdOCXvqT6W8geooDGMZt0T48ALYLa3p/WTrQ=;
+        b=w26kaQsEwCAIUqppN06i5jSkFvANLgm6wLXzIahFUTLoHBLJAVyxdo463BirkNqvYU
+         4p79YdRAb6J0WAtMleyFWvnpAeIYfgxuAUyvIQ7B9kDMZbvQOVmgZPDBHc0XLe1i46s0
+         kOOyzKHZcXWIZLXRjdEjtC94gzWhUTNeWlwL3HGxM4fbVTelCZznYsWzT9wzVfl8hCLx
+         GwyR7lqvUZrJ+yJ1VFFX/ujUCjHIawS/uKQhchdNGKR044ZOnaQFObRnqHEYabyLyx+5
+         KsVWT3uvnekDGi/nGA9sevdie49KhRGB/8p4QUh1XkdRGwRBQuguhQMcRRCK6ykpLQXT
+         bIQA==
+X-Gm-Message-State: AOJu0Yx5p9zMgm41uqtbT7BX0D+/E1/RWk4mkq7U2Gib/w6CwrWYwUIR
+	3qtyCVLtZy4U8inoCfLRTrENMnq+pEs/CoFefan3yZgIMgDf+Fu4h6lhWNYr+9ptU3NClXS/+cx
+	A
+X-Google-Smtp-Source: AGHT+IEQvjTxcHmpEpE7H/TZBHNT3ekmYIUVPnqBIAEQZDAkYJJLiRj1wjRv5XXD4AFkjvCML14h3g==
+X-Received: by 2002:a05:6402:524e:b0:5cf:6674:c669 with SMTP id 4fb4d7f45d1cf-5cf8fc5488cmr1672020a12.7.1731677265236;
+        Fri, 15 Nov 2024 05:27:45 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"consulting @ bugseng . com" <consulting@bugseng.com>
+Subject: [PATCH] x86/emul: Adjust get_stub() to avoid shadowing an outer variable
+Date: Fri, 15 Nov 2024 13:27:42 +0000
+Message-Id: <20241115132742.2155370-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 
-Add a domid field to struct boot_domain to hold the assigned domain id for the
-domain. During initialization, ensure all instances of struct boot_domain have
-the invalid domid to ensure that the domid must be set either by convention or
-configuration.
+Eclair reports a violation of MISRA Rule 5.3.
 
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+get_stub() has a local ptr variable which genuinely shadows x86_emul_rmw()'s
+parameter of the same name.  The logic is correct, so the easiest fix is to
+rename one of variables.
+
+With this addressed, Rule 5.3 is clean, so mark it as such.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
- xen/arch/x86/include/asm/bootdomain.h |  2 ++
- xen/arch/x86/setup.c                  | 12 +++++++-----
- 2 files changed, 9 insertions(+), 5 deletions(-)
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: consulting@bugseng.com <consulting@bugseng.com>
 
-diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-index 12c19ab37bd8..3873f916f854 100644
---- a/xen/arch/x86/include/asm/bootdomain.h
-+++ b/xen/arch/x86/include/asm/bootdomain.h
-@@ -12,6 +12,8 @@ struct boot_module;
- struct domain;
+https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1545385154
+---
+ automation/eclair_analysis/ECLAIR/tagging.ecl |  1 +
+ xen/arch/x86/x86_emulate/private.h            | 10 +++++-----
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/automation/eclair_analysis/ECLAIR/tagging.ecl b/automation/eclair_analysis/ECLAIR/tagging.ecl
+index 16e7adb61fe8..9318e5b10ca8 100644
+--- a/automation/eclair_analysis/ECLAIR/tagging.ecl
++++ b/automation/eclair_analysis/ECLAIR/tagging.ecl
+@@ -35,6 +35,7 @@ MC3R1.R4.1||
+ MC3R1.R4.2||
+ MC3R1.R5.1||
+ MC3R1.R5.2||
++MC3R1.R5.3||
+ MC3R1.R5.4||
+ MC3R1.R5.6||
+ MC3R1.R6.1||
+diff --git a/xen/arch/x86/x86_emulate/private.h b/xen/arch/x86/x86_emulate/private.h
+index 172270a458bd..ef4745f56e27 100644
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -672,19 +672,19 @@ amd_like(const struct x86_emulate_ctxt *ctxt)
+ # include <asm/uaccess.h>
  
- struct boot_domain {
-+    domid_t domid;
-+
-     struct boot_module *kernel;
-     struct boot_module *ramdisk;
+ # define get_stub(stb) ({                                    \
+-    void *ptr;                                               \
++    void *_ptr;                                              \
+     BUILD_BUG_ON(STUB_BUF_SIZE / 2 < MAX_INST_LEN + 1);      \
+     ASSERT(!(stb).ptr);                                      \
+     (stb).addr = this_cpu(stubs.addr) + STUB_BUF_SIZE / 2;   \
+     (stb).ptr = map_domain_page(_mfn(this_cpu(stubs.mfn))) + \
+         ((stb).addr & ~PAGE_MASK);                           \
+-    ptr = memset((stb).ptr, 0xcc, STUB_BUF_SIZE / 2);        \
++    _ptr = memset((stb).ptr, 0xcc, STUB_BUF_SIZE / 2);       \
+     if ( cpu_has_xen_ibt )                                   \
+     {                                                        \
+-        place_endbr64(ptr);                                  \
+-        ptr += 4;                                            \
++        place_endbr64(_ptr);                                 \
++        _ptr += 4;                                           \
+     }                                                        \
+-    ptr;                                                     \
++    _ptr;                                                    \
+ })
  
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 2ccaa7dc965b..533a1e2bbe05 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -339,6 +339,9 @@ static struct boot_info *__init multiboot_fill_boot_info(
-     /* Variable 'i' should be one entry past the last module. */
-     bi->mods[i].type = BOOTMOD_XEN;
- 
-+    for ( i = 0; i < MAX_NR_BOOTDOMS; i++ )
-+        bi->domains[i].domid = DOMID_INVALID;
-+
-     return bi;
- }
- 
-@@ -977,7 +980,6 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-     };
-     struct boot_domain *bd = &bi->domains[0];
-     struct domain *d;
--    domid_t domid;
- 
-     if ( opt_dom0_pvh )
-     {
-@@ -993,15 +995,15 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-         dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
- 
-     /* Create initial domain.  Not d0 for pvshim. */
--    domid = get_initial_domain_id();
--    d = domain_create(domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
-+    bd->domid = get_initial_domain_id();
-+    d = domain_create(bd->domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
-     if ( IS_ERR(d) )
--        panic("Error creating d%u: %ld\n", domid, PTR_ERR(d));
-+        panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(d));
- 
-     init_dom0_cpuid_policy(d);
- 
-     if ( alloc_dom0_vcpu0(d) == NULL )
--        panic("Error creating d%uv0\n", domid);
-+        panic("Error creating d%uv0\n", bd->domid);
- 
-     /* Grab the DOM0 command line. */
-     if ( bd->kernel->cmdline_pa || bi->kextra )
+ # define put_stub(stb) ({             \
+
+base-commit: d2bbb0d4554aa08649985d790317ba78f0db22ff
 -- 
-2.30.2
+2.39.5
 
 
