@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3BEBD6DDED
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 12:00:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.837278.1253282 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8519D6DDED
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 12:01:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.837296.1253292 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBv03-0000dv-16; Fri, 15 Nov 2024 12:00:31 +0000
+	id 1tBv1C-0001Or-97; Fri, 15 Nov 2024 12:01:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 837278.1253282; Fri, 15 Nov 2024 12:00:31 +0000
+Received: by outflank-mailman (output) from mailman id 837296.1253292; Fri, 15 Nov 2024 12:01:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBv02-0000do-US; Fri, 15 Nov 2024 12:00:30 +0000
-Received: by outflank-mailman (input) for mailman id 837278;
- Fri, 15 Nov 2024 12:00:29 +0000
+	id 1tBv1C-0001Ok-6V; Fri, 15 Nov 2024 12:01:42 +0000
+Received: by outflank-mailman (input) for mailman id 837296;
+ Fri, 15 Nov 2024 12:01:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=olWw=SK=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tBv01-0000cC-P2
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 12:00:29 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
+ <SRS0=Akm3=SK=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1tButB-0005UF-NF
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:25 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 312a4637-a349-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 13:00:22 +0100 (CET)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c9454f3bfaso2309271a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 04:00:22 -0800 (PST)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df26a69sm172433766b.34.2024.11.15.04.00.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Nov 2024 04:00:21 -0800 (PST)
+ id 350c12ee-a348-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 12:53:20 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9a850270e2so324784966b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:20 -0800 (PST)
+Received: from localhost.localdomain (0545937c.skybroadband.com.
+ [5.69.147.124]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Nov 2024 03:53:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,145 +47,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 312a4637-a349-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzAiLCJoZWxvIjoibWFpbC1lZDEteDUzMC5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjMxMmE0NjM3LWEzNDktMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcyMDIyLjYwODg3Nywic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 350c12ee-a348-11ef-a0c7-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzYiLCJoZWxvIjoibWFpbC1lajEteDYzNi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjM1MGMxMmVlLWEzNDgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcxNjAwLjA4ODQ4NSwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1731672022; x=1732276822; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=CMZopKE3md8N+w4Qn8bVW0vtxEACylgofEOVSBRD2HI=;
-        b=l+3SEUvSnv69KGWtqliqIp9mv+NOlDlGuZ4DXnfCKqizvlzx2WiYBV0TTeDVmkoZsv
-         8nHulzkqLZgHZmxsCD52w/9jleqz9I88ozv+5NhMoCJgdzbnxP3GLJqfLeiEOBcbSfWo
-         1HBllx5GFGWmuD69i38Uck6aW01BSlD6kAqoo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731672022; x=1732276822;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1731671599; x=1732276399; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=CMZopKE3md8N+w4Qn8bVW0vtxEACylgofEOVSBRD2HI=;
-        b=swWRY991myJmUGFFuVq1g0ghQ9Car9YLEf30kwpsPkitNwjNuPKD54OYGlfULsma2D
-         V2V+wSQdEg3ojFtGwGlZQ9u5J7oa2dgXUSgyhzrjTHKlEDEsgPw0MAGn9qqGLw75EH23
-         DAXIzlgNzOVkU3dudEhmIUpTYR+4gN9TzMSjVxm87nx2AT2dYrx8080wPPddmYQlLZur
-         QrplgKdtyt+i18gSd6NNdSfgrz24J2yYuyxyw2zOMz1u4tJdHutjSsn+8aU9chiUk3zI
-         Bk/Xph+AdURGCtfK+azF8r4izn47YLucjAq5g5O1cyyQTWvJ1I36aHjgR8Md2RQltd5E
-         YQLQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVqsC37jVgipFYSHKMC5jFTkK4MdGnibXxZ7LjW3H8kXjXfyaHKl6LZ3Jsnc7Tik6wK+Sp1JdEaIZE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzK6OEIfRIRYG8ExzWHv1Le7Cb7kKObU682VXD2aCV/0/Gjcvrg
-	l2cCmAdarmtJkvC6mYIMU7UspoB3g3nniEaDfAbJ9k5cvUXVSZLC2ClJvdXmwU4cQCfF4oA8hQ8
-	P
-X-Google-Smtp-Source: AGHT+IFERjav1kVCdcBIsICs8xBVHD5vhl/zvudyRzdoG8gN0C2gBx8MQdTZ0h/wwhflEts/OiXJMw==
-X-Received: by 2002:a17:906:c141:b0:a99:375f:4523 with SMTP id a640c23a62f3a-aa4835288ddmr207440266b.44.1731672021894;
-        Fri, 15 Nov 2024 04:00:21 -0800 (PST)
-Message-ID: <2b13f12c-905d-478c-b525-a3a8c69d5ac7@citrix.com>
-Date: Fri, 15 Nov 2024 12:00:19 +0000
+        bh=5TtGZQt/o/0voOaBWuW5frWebRPJ5tcYXUj7qWmm5UM=;
+        b=cByWrLaV4JZ+ej7rI5qyHE/Jj5wvQ8+cyeb2H/byDHR97euSJeHkIipRqL+JBhwJeW
+         WGRfD1Zy83Sv2j9oibcdcW4M8SciMYtaM0NNhGGBM/CYVSZags2rUUcyn2CE4Ws8pHtl
+         WT9PaZXP7pGjSjRFrBRRqGEKlzOYMRwdvDmwE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731671599; x=1732276399;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5TtGZQt/o/0voOaBWuW5frWebRPJ5tcYXUj7qWmm5UM=;
+        b=aSYzGy+3xjSKx4Nqq7lg9l8EfpcLhJHPbStjGTxY/dQhMtsr8j4/0Z2nSP1sFwTWYy
+         2aZ1gXYk2u15zp+nhul19D0YI9Jsj9hGHPKTwFrXtkLXUNbwwjr5v4+qOqxkw+nCyvLa
+         2/j8vOLCHP14YkP+SD1dZdJioyjqi1150+F1qE+xOms40b8MdIhJ06Y/UKyg6f9I0foD
+         2MPFlOJrC9KsaSXnvkZ6sAuGhQxSZOPt4i2Z6ZkQyvXBbr9PKxMrz7VxCpHAxUyOc7uK
+         CupBQecGM9tMlB40SNWHrzfWEbqZS9RaC/xdhmcXmNWlbRBwFaLQlC+nhgKt+mlpiVC6
+         mHFA==
+X-Gm-Message-State: AOJu0YzdRsFHSKCeF4G3kucaPWEi+1mPNDWD5e8tj0MXNtzmkDpObU8I
+	31xUVee/px5zKgE9ZjgnXNWxaOuaP1HnVGej3urVQ/H7ONnpAx61T2AfSlOpLjB8QhFb3BtHek7
+	x
+X-Google-Smtp-Source: AGHT+IHqwuL6u7ZjChl11XwFW1ENcCh75yYnxH+6nO4Gf2UMXhuGEEd24iwFQNwokjSfqH88fD717Q==
+X-Received: by 2002:a17:907:9802:b0:a9a:1778:7024 with SMTP id a640c23a62f3a-aa483421c64mr210075266b.20.1731671598808;
+        Fri, 15 Nov 2024 03:53:18 -0800 (PST)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [RFC PATCH 23/25] licence: Add Unicode-DFS-2016 to the list of licences
+Date: Fri, 15 Nov 2024 11:51:52 +0000
+Message-ID: <20241115115200.2824-24-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
+References: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] common/vmap: Fall back to simple allocator when
- !HAS_VMAP
-To: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <20241115105036.218418-1-luca.fancellu@arm.com>
- <20241115105036.218418-2-luca.fancellu@arm.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20241115105036.218418-2-luca.fancellu@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 15/11/2024 10:50 am, Luca Fancellu wrote:
-> diff --git a/xen/include/xen/xvmalloc.h b/xen/include/xen/xvmalloc.h
-> index 440d85a284bb..802be6687085 100644
-> --- a/xen/include/xen/xvmalloc.h
-> +++ b/xen/include/xen/xvmalloc.h
-> @@ -40,20 +40,46 @@
->      ((typeof(ptr))_xvrealloc(ptr, offsetof(typeof(*(ptr)), field[nr]), \
->                               __alignof__(typeof(*(ptr)))))
->  
-> +#if defined(CONFIG_HAS_VMAP)
-> +
->  /* Free any of the above. */
->  void xvfree(void *va);
->  
-> +/* Underlying functions */
-> +void *_xvmalloc(size_t size, unsigned int align);
-> +void *_xvzalloc(size_t size, unsigned int align);
-> +void *_xvrealloc(void *va, size_t size, unsigned int align);
-> +
-> +#else
-> +
-> +static inline void xvfree(void *va)
-> +{
-> +    xfree(va);
-> +}
-> +
-> +void *_xvmalloc(size_t size, unsigned int align)
-> +{
-> +    return _xmalloc(size, align);
-> +}
-> +
-> +void *_xvzalloc(size_t size, unsigned int align)
-> +{
-> +    return _xzalloc(size, align);
-> +}
-> +
-> +void *_xvrealloc(void *va, size_t size, unsigned int align)
-> +{
-> +    return _xrealloc(va, size, align);
-> +}
-> +
-> +#endif
+It's transitively reached by Rust code.
 
-Does this really compile with the wrappers not being static inline ?
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+ LICENSES/Unicode-DFS-2016 | 56 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
+ create mode 100644 LICENSES/Unicode-DFS-2016
 
-That aside, could we not do this using conditional aliases, rather than
-wrapping the functions?  It would certainly be shorter, code wise.
+diff --git a/LICENSES/Unicode-DFS-2016 b/LICENSES/Unicode-DFS-2016
+new file mode 100644
+index 000000000000..eca277f05e0e
+--- /dev/null
++++ b/LICENSES/Unicode-DFS-2016
+@@ -0,0 +1,56 @@
++UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
++
++See Terms of Use for definitions of Unicode Inc.'s Data Files and Software.
++
++Unicode Data Files include all data files under the directories
++http://www.unicode.org/Public/, http://www.unicode.org/reports/,
++http://www.unicode.org/cldr/data/, http://source.icu-project.org/repos/icu/,
++http://www.unicode.org/ivd/data/, and
++http://www.unicode.org/utility/trac/browser/.
++
++Unicode Data Files do not include PDF online code charts under the directory
++http://www.unicode.org/Public/.
++
++Software includes any source code published in the Unicode Standard or under
++the directories http://www.unicode.org/Public/,
++http://www.unicode.org/reports/, http://www.unicode.org/cldr/data/,
++http://source.icu-project.org/repos/icu/, and
++http://www.unicode.org/utility/trac/browser/.
++
++NOTICE TO USER: Carefully read the following legal agreement. BY DOWNLOADING,
++INSTALLING, COPYING OR OTHERWISE USING UNICODE INC.'S DATA FILES ("DATA
++FILES"), AND/OR SOFTWARE ("SOFTWARE"), YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO
++BE BOUND BY, ALL OF THE TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT
++AGREE, DO NOT DOWNLOAD, INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR
++SOFTWARE.
++
++COPYRIGHT AND PERMISSION NOTICE
++
++Copyright © 1991-2016 Unicode, Inc. All rights reserved. Distributed under the
++Terms of Use in http://www.unicode.org/copyright.html.
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of the Unicode data files and any associated documentation (the "Data Files")
++or Unicode software and any associated documentation (the "Software") to deal
++in the Data Files or Software without restriction, including without
++limitation the rights to use, copy, modify, merge, publish, distribute, and/or
++sell copies of the Data Files or Software, and to permit persons to whom the
++Data Files or Software are furnished to do so, provided that either
++
++  * (a) this copyright and permission notice appear with all copies of the Data Files or Software, or 
++  * (b) this copyright and permission notice appear in associated Documentation. 
++
++THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
++KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD
++PARTY RIGHTS. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN
++THIS NOTICE BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL
++DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
++PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
++ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE
++DATA FILES OR SOFTWARE.
++
++Except as contained in this notice, the name of a copyright holder shall not
++be used in advertising or otherwise to promote the sale, use or other dealings
++in these Data Files or Software without prior written authorization of the
++copyright holder.
+-- 
+2.47.0
 
-~Andrew
 
