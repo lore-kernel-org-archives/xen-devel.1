@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FDB0D6DDED
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE857D6DDF2
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 11:53:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.837179.1253192 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.837186.1253238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBusy-0008C8-Ny; Fri, 15 Nov 2024 11:53:12 +0000
+	id 1tBut7-0001Ux-Ag; Fri, 15 Nov 2024 11:53:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 837179.1253192; Fri, 15 Nov 2024 11:53:12 +0000
+Received: by outflank-mailman (output) from mailman id 837186.1253238; Fri, 15 Nov 2024 11:53:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBusy-00088T-2y; Fri, 15 Nov 2024 11:53:12 +0000
-Received: by outflank-mailman (input) for mailman id 837179;
- Fri, 15 Nov 2024 11:53:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tBut6-0001Su-Df; Fri, 15 Nov 2024 11:53:20 +0000
+Received: by outflank-mailman (input) for mailman id 837186;
+ Fri, 15 Nov 2024 11:53:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Akm3=SK=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tBusw-0005UF-FV
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:10 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e019b8d-a348-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 12:53:07 +0100 (CET)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa3a79d4d59so270568166b.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:07 -0800 (PST)
+ id 1tBut2-0005U9-RE
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:16 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3104a531-a348-11ef-99a3-01e77a169b0f;
+ Fri, 15 Nov 2024 12:53:12 +0100 (CET)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a9a0ec0a94fso254097366b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:12 -0800 (PST)
 Received: from localhost.localdomain (0545937c.skybroadband.com.
  [5.69.147.124]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.06
+ a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 03:53:06 -0800 (PST)
+ Fri, 15 Nov 2024 03:53:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,316 +47,440 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e019b8d-a348-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzEiLCJoZWxvIjoibWFpbC1lajEteDYzMS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjJlMDE5YjhkLWEzNDgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcxNTg3LjgyNjk2Niwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 3104a531-a348-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzIiLCJoZWxvIjoibWFpbC1lajEteDYzMi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjMxMDRhNTMxLWEzNDgtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNjcxNTkyLjg4NjA3NSwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1731671587; x=1732276387; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1731671592; x=1732276392; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YTgBp3u8P0cZs4GoU1pcL/XsrDo/t/R26kaPSnnnZ/I=;
-        b=QRqOoqN6TNL+Uqykknt2PjpKKFg5G58/0oc5nPD2EgH2xErwrkK9Zyl1u5lCqfAe2D
-         Mlr4NJMbpgYgyjN31lM7VRaG5yJiD3RD1Z2wra45GqTaDpQWV6MUBC2WPIiYKpslR92k
-         JQXsr69ftEppoxpw1KN7kDae+AxhZZ720EtPk=
+        bh=cQe9V1AhYWf4ai4F0ROLJKgWqyUIcsqP1I8KYkQgors=;
+        b=La0jPCBV/Mv1UJUKVVO0NzSMUIXfUZ3Yre25rIj3Ipb6K1tlmZTNOsMRBkaYDneS/9
+         koBKQnKjqDlHgyiR6RhmtKhfSai6UxVz7JZJwO8q03D0Ztxwr5httpdMyydpsuRkPhQ1
+         yRX/79bcI6GV6CqjAAYKGFRuz0lguGW49vT30=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731671587; x=1732276387;
+        d=1e100.net; s=20230601; t=1731671592; x=1732276392;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YTgBp3u8P0cZs4GoU1pcL/XsrDo/t/R26kaPSnnnZ/I=;
-        b=LIaGNOyH5MYmTD4Zjyyv1VVnQT7DOpLJcdwrmoFcT0edHRTQ22H2vwx0Z3p6whNgxI
-         +Sh2pVRb55RequwHFt+VKFYdGk0vmgV9fKsOo2LdDRgePSy78HxXvMV+coMeGEedpBhq
-         bVo6goWe2/A+x3Tz6sqVFyTYMghLhMXyPKxWmQaYhFBsWk7linAgCEduPAx1vqK8lGCa
-         qhRFMmLrnCxSbGGkelK+KnpYwwvYXA+H1VqO93dLkHsJRQr9m/ggJUuO/scCVL0LOVOp
-         WaldrSw2umsgnNY/pm+SXdcBCWJvpThPLzplSdqCIRCrgGKMomS6puiZu96jz0HbxL7D
-         9FOg==
-X-Gm-Message-State: AOJu0Yy3ipifTA0l5LfgAAPt3zyg11V4NR1sq7aS32sVU6b4q0+2HPnp
-	lQw37hrf/++g0p1m5ygc3ykvicYw3GZ4kMp37qTaUYZwvze7eHJT54xLwbC7ah1VUSt8piSn7fY
-	3
-X-Google-Smtp-Source: AGHT+IGGf7chMiYoWULTA+4FqsplpwjC0gZstVC0KtP0DCVj+5C9GYogkSgo5Czrly1ZKHbWy2xagw==
-X-Received: by 2002:a17:907:3d86:b0:a9f:508:5924 with SMTP id a640c23a62f3a-aa483525ef4mr207071166b.43.1731671586933;
-        Fri, 15 Nov 2024 03:53:06 -0800 (PST)
+        bh=cQe9V1AhYWf4ai4F0ROLJKgWqyUIcsqP1I8KYkQgors=;
+        b=FmUSueyjK2cYzmqdWsGzEydARoai+GYgUBVW+uINy5XAMzScSDt+aaxn0Tj0BKKLqF
+         ubqYmg6etNI1bQ4Ele61i0DOwYUEIhTgiwVIFiOiWKzWBlAhyv6f3bV08B4XZHJaU9/Y
+         wwXyX1NxntupgzbQuCCr3f8f8xfLM89z61NOr/sZR7twnWFAJMdHns0IV4UYIwQ/sb4D
+         wBVHWETB7ybYO/2Hkx/1eqerLIxhyA3GkF+N9yWO1UDPuXMgIl53UE04n6VGUFb/JDMY
+         IUL99Fc9pe9GoQw/4UffdMaa2ZJIAFMPPPCyhDh/iTGOdgjnd6xxN5yJsxxoisyQydVf
+         TflA==
+X-Gm-Message-State: AOJu0Yx6lIFtfgTG7fB8nz65SiNm9O5ppGUXd5FT+YQl8hdb4yNM8AgP
+	JWte/ihtNqhGHJhBJOBVXRPy+F8zfjWWm/hqDwjE4rCDPAuppWWHN2NJdgcJgSxhVTQHTmv20U/
+	U
+X-Google-Smtp-Source: AGHT+IEQ4pcTgOIxYTLd0C0XYSXTAYZbmAqR/sFKc273vUTbXWV38/T35FJDfzjxrCK0vIaUGLkDjA==
+X-Received: by 2002:a17:907:868b:b0:a9a:422:ec7 with SMTP id a640c23a62f3a-aa4834827b2mr189416866b.32.1731671591958;
+        Fri, 15 Nov 2024 03:53:11 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Juergen Gross <jgross@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [RFC PATCH 12/25] xen: Replace sysctl/readconsole with autogenerated version
-Date: Fri, 15 Nov 2024 11:51:41 +0000
-Message-ID: <20241115115200.2824-13-alejandro.vallejo@cloud.com>
+	Christian Lindig <christian.lindig@citrix.com>,
+	David Scott <dave@recoil.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [RFC PATCH 16/25] xen/x86: Replace hand-crafted xen_arch_domainconfig with autogenerated one
+Date: Fri, 15 Nov 2024 11:51:45 +0000
+Message-ID: <20241115115200.2824-17-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
 References: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Describe sysctl/readconsole as a TOML specification, remove old
-hand-coded version and replace it with autogenerated file.
-
-While at it, transform the console driver to use uint8_t rather than
-char in order to mandate the type to be unsigned and ensure the ABI is
-not defined with regards to C-specific types.
-
-Also grant stubdom access to the new autogen folder, or it won't build.
-
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- stubdom/Makefile                              |  2 +-
- tools/rust/Makefile                           | 19 ++++++++
- .../xenbindgen/extra/sysctl/readconsole.toml  | 43 +++++++++++++++++++
- xen/drivers/char/console.c                    | 12 +++---
- xen/include/public/autogen/sysctl.h           | 35 +++++++++++++++
- xen/include/public/sysctl.h                   | 23 +---------
- xen/include/public/xen.h                      |  1 +
- 7 files changed, 108 insertions(+), 27 deletions(-)
- create mode 100644 tools/rust/xenbindgen/extra/sysctl/readconsole.toml
- create mode 100644 xen/include/public/autogen/sysctl.h
+ tools/libs/light/libxl_x86.c                  |  4 +-
+ tools/ocaml/libs/xc/xenctrl_stubs.c           |  4 +-
+ .../extra/arch-x86/domainconfig.toml          | 87 +++++++++++++++++++
+ .../xenbindgen/extra/domctl/createdomain.toml |  6 ++
+ xen/arch/x86/domain.c                         |  8 +-
+ xen/arch/x86/include/asm/domain.h             |  4 +-
+ xen/arch/x86/setup.c                          |  2 +-
+ xen/include/public/arch-x86/xen.h             | 51 -----------
+ xen/include/public/autogen/arch_x86.h         | 52 +++++++++++
+ xen/include/public/autogen/domctl.h           | 13 +++
+ 10 files changed, 170 insertions(+), 61 deletions(-)
+ create mode 100644 tools/rust/xenbindgen/extra/arch-x86/domainconfig.toml
+ create mode 100644 xen/include/public/autogen/arch_x86.h
 
-diff --git a/stubdom/Makefile b/stubdom/Makefile
-index 2a81af28a16e..5e919889836b 100644
---- a/stubdom/Makefile
-+++ b/stubdom/Makefile
-@@ -362,7 +362,7 @@ LINK_STAMPS := $(foreach dir,$(LINK_DIRS),$(dir)/stamp)
- mk-headers-$(XEN_TARGET_ARCH): $(IOEMU_LINKFARM_TARGET) $(LINK_STAMPS)
- 	mkdir -p include/xen && \
-           ln -sf $(wildcard $(XEN_ROOT)/xen/include/public/*.h) include/xen && \
--          ln -sf $(addprefix $(XEN_ROOT)/xen/include/public/,arch-x86 hvm io xsm) include/xen && \
-+          ln -sf $(addprefix $(XEN_ROOT)/xen/include/public/,arch-x86 autogen hvm io xsm) include/xen && \
-           ( [ -h include/xen/sys ] || ln -sf $(XEN_ROOT)/tools/include/xen-sys/MiniOS include/xen/sys ) && \
-           ( [ -h include/xen/libelf ] || ln -sf $(XEN_ROOT)/tools/include/xen/libelf include/xen/libelf ) && \
- 	  mkdir -p include/xen-foreign && \
-diff --git a/tools/rust/Makefile b/tools/rust/Makefile
-index f5db0a9c5e81..80e2f0e2817e 100644
---- a/tools/rust/Makefile
-+++ b/tools/rust/Makefile
-@@ -3,6 +3,11 @@ XEN_ROOT=$(CURDIR)/../..
- # Path to the Xen hypercall IDL parser
- XENBINDGEN=$(CURDIR)/xenbindgen
+diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
+index a3164a3077fe..a3d856957b54 100644
+--- a/tools/libs/light/libxl_x86.c
++++ b/tools/libs/light/libxl_x86.c
+@@ -8,7 +8,7 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+ {
+     switch(d_config->c_info.type) {
+     case LIBXL_DOMAIN_TYPE_HVM:
+-        config->arch.emulation_flags = (XEN_X86_EMU_ALL & ~XEN_X86_EMU_VPCI);
++        config->arch.emulation_flags = (XEN_X86_EMU__ALL & ~XEN_X86_EMU_VPCI);
+         if (!libxl_defbool_val(d_config->b_info.u.hvm.pirq))
+             config->arch.emulation_flags &= ~XEN_X86_EMU_USE_PIRQ;
+         break;
+@@ -24,7 +24,7 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
  
-+# Output folder for the autogenerated C headers
-+#
-+# Must contain autogenerated files only because they're all wiped on update
-+AUTOGEN_C=$(XEN_ROOT)/xen/include/public/autogen/
-+
- # Clippy settings for all Rust projects
- CLIPPY_ARGS=-D warnings \
-             -D missing_docs \
-@@ -14,6 +19,20 @@ CLIPPY_ARGS=-D warnings \
- .PHONY: all install uninstall clean
- all install uninstall clean:
+     config->arch.misc_flags = 0;
+     if (libxl_defbool_val(d_config->b_info.arch_x86.msr_relaxed))
+-        config->arch.misc_flags |= XEN_X86_MSR_RELAXED;
++        config->arch.misc_flags |= XEN_X86_MISC_MSR_RELAXED;
  
-+# Remove all autogenerated files
-+.PHONY: clean-autogen
-+clean-autogen:
-+	rm -rf "${AUTOGEN_C}"
-+
-+# Refresh autogenerated files. Depending on clean-autogen is required in order
-+# for removals of specification files to cause the removal of their
-+# autogenerated files.
-+.PHONY: update
-+update: clean-autogen
-+	# Update C bindings
-+	cargo run --manifest-path "${XENBINDGEN}/Cargo.toml" -- --lang c \
-+	          --indir "${XENBINDGEN}/extra" --outdir "${AUTOGEN_C}"
-+
- # Verify Rust crates pass lint checks. This is enforced in CI
- .PHONY: verify
- verify:
-diff --git a/tools/rust/xenbindgen/extra/sysctl/readconsole.toml b/tools/rust/xenbindgen/extra/sysctl/readconsole.toml
+     return 0;
+ }
+diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
+index 1f2cf41a9cc7..65ff4f636ea9 100644
+--- a/tools/ocaml/libs/xc/xenctrl_stubs.c
++++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
+@@ -260,12 +260,12 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
+ 
+ 		cfg.arch.emulation_flags = ocaml_list_to_c_bitmap
+ 			/* ! x86_arch_emulation_flags X86_EMU_ none */
+-			/* ! XEN_X86_EMU_ XEN_X86_EMU_ALL all */
++			/* ! XEN_X86_EMU_ XEN_X86_EMU__ALL all */
+ 			(VAL_EMUL_FLAGS);
+ 
+ 		cfg.arch.misc_flags = ocaml_list_to_c_bitmap
+ 			/* ! x86_arch_misc_flags X86_ none */
+-			/* ! XEN_X86_ XEN_X86_MSR_RELAXED all */
++			/* ! XEN_X86_ XEN_X86_MISC__ALL all */
+ 			(VAL_MISC_FLAGS);
+ 
+ #undef VAL_MISC_FLAGS
+diff --git a/tools/rust/xenbindgen/extra/arch-x86/domainconfig.toml b/tools/rust/xenbindgen/extra/arch-x86/domainconfig.toml
 new file mode 100644
-index 000000000000..868743a453ff
+index 000000000000..1f85b69de4a8
 --- /dev/null
-+++ b/tools/rust/xenbindgen/extra/sysctl/readconsole.toml
-@@ -0,0 +1,43 @@
++++ b/tools/rust/xenbindgen/extra/arch-x86/domainconfig.toml
+@@ -0,0 +1,87 @@
++[[bitmaps]]
++name = "xen_x86_emu"
++description = "Content of the `emulation_flags` field of the domain creation hypercall."
++typ = { tag = "u32" }
++
++[[bitmaps.bits]]
++name = "lapic"
++description = "Emulate Local APICs."
++shift = 0
++
++[[bitmaps.bits]]
++name = "hpet"
++description = "Emulate a HPET timer."
++shift = 1
++
++[[bitmaps.bits]]
++name = "pm"
++description = "Emulate the ACPI PM timer."
++shift = 2
++
++[[bitmaps.bits]]
++name = "rtc"
++description = "Emulate the RTC clock."
++shift = 3
++
++[[bitmaps.bits]]
++name = "ioapic"
++description = "Emulate an IOAPIC device."
++shift = 4
++
++[[bitmaps.bits]]
++name = "pic"
++description = "Emulate PIC devices."
++shift = 5
++
++[[bitmaps.bits]]
++name = "vga"
++description = "Emulate standard VGA."
++shift = 6
++
++[[bitmaps.bits]]
++name = "iommu"
++description = "Emulate an IOMMU."
++shift = 7
++
++[[bitmaps.bits]]
++name = "pit"
++description = "Emulate a PIT timer."
++shift = 8
++
++[[bitmaps.bits]]
++name = "use_pirq"
++description = "Route physical IRQs over event channels."
++shift = 9
++
++[[bitmaps.bits]]
++name = "vpci"
++description = "Handle PCI configuration space traps from within Xen."
++shift = 10
++
++################################################################################
++
++[[bitmaps]]
++name = "xen_x86_misc"
++description = "Contents of the `misc_flags` field of the domain creation hypercall"
++typ = { tag = "u32" }
++
++[[bitmaps.bits]]
++name = "msr_relaxed"
++description = "Grants access to the real physical MSR registers of the host."
++shift = 0
++
++################################################################################
++
 +[[structs]]
-+name = "xen_sysctl_readconsole"
-+description = "Read console content from Xen buffer ring."
++name = "xen_arch_domainconfig"
++description = "x86-specific domain settings."
 +
 +[[structs.fields]]
-+name = "clear"
-+description = "IN: Non-zero -> clear after reading."
-+typ = { tag = "u8" }
++name = "emulation_flags"
++description = "IN: Bitmap of devices to emulate."
++typ = { tag = "bitmap", args = "xen_x86_emu" }
 +
 +[[structs.fields]]
-+name = "incremental"
-+description = "IN: Non-zero -> start index specified by `index` field."
-+typ = { tag = "u8" }
++name = "misc_flags"
++description = "IN: Miscellaneous x86-specific toggles."
++typ = { tag = "bitmap", args = "xen_x86_misc" }
+diff --git a/tools/rust/xenbindgen/extra/domctl/createdomain.toml b/tools/rust/xenbindgen/extra/domctl/createdomain.toml
+index 02f65d134b55..3a6872aa325f 100644
+--- a/tools/rust/xenbindgen/extra/domctl/createdomain.toml
++++ b/tools/rust/xenbindgen/extra/domctl/createdomain.toml
+@@ -1,3 +1,9 @@
++[[includes]]
++from = "arch"
++imports = ["xen_arch_domainconfig"]
 +
-+[[structs.fields]]
-+name = "_pad"
-+description = "Unused."
-+typ = { tag = "u16" }
++################################################################################
 +
-+[[structs.fields]]
-+name = "index"
-+description = """
-+IN:  Start index for consuming from ring buffer (if @incremental);
-+OUT: End index after consuming from ring buffer."""
-+typ = { tag = "u32" }
-+
-+[[structs.fields]]
-+name = "buffer"
-+description = """
-+IN: Virtual address to write console data.
-+
-+NOTE: The pointer itself is IN, but the contents of the buffer are OUT."""
-+typ = { tag = "ptr", args = { tag = "u8" } }
-+
-+[[structs.fields]]
-+name = "count"
-+description = "IN: Size of buffer; OUT: Bytes written to buffer."
-+typ = { tag = "u32" }
-+
-+[[structs.fields]]
-+name = "rsvd0_a"
-+description = "Tail padding reserved to zero."
-+typ = { tag = "u32" }
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 7da8c5296f3b..82f6ad7b32cb 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -42,6 +42,8 @@
- #include <asm/vpl011.h>
+ [[enums]]
+ name = "xen_domctl_altp2m_mode"
+ description = "Content of the `altp2m_mode` field of the domain creation hypercall."
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 63a52a8ae23d..3c1c8f03aa81 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -708,7 +708,7 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+         }
+     }
+ 
+-    if ( config->arch.misc_flags & ~XEN_X86_MSR_RELAXED )
++    if ( config->arch.misc_flags & ~XEN_X86_MISC_MSR_RELAXED )
+     {
+         dprintk(XENLOG_INFO, "Invalid arch misc flags %#x\n",
+                 config->arch.misc_flags);
+@@ -735,7 +735,7 @@ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
+ {
+ #ifdef CONFIG_HVM
+     /* This doesn't catch !CONFIG_HVM case but it is better than nothing */
+-    BUILD_BUG_ON(X86_EMU_ALL != XEN_X86_EMU_ALL);
++    BUILD_BUG_ON(X86_EMU_ALL != XEN_X86_EMU__ALL);
  #endif
  
-+#include <public/xen.h>
+     if ( is_hvm_domain(d) )
+@@ -800,7 +800,7 @@ int arch_domain_create(struct domain *d,
+     if ( is_hardware_domain(d) && is_pv_domain(d) )
+         emflags |= XEN_X86_EMU_PIT;
+ 
+-    if ( emflags & ~XEN_X86_EMU_ALL )
++    if ( emflags & ~XEN_X86_EMU__ALL )
+     {
+         printk(XENLOG_G_ERR "d%d: Invalid emulation bitmap: %#x\n",
+                d->domain_id, emflags);
+@@ -887,7 +887,7 @@ int arch_domain_create(struct domain *d,
+ 
+     domain_cpu_policy_changed(d);
+ 
+-    d->arch.msr_relaxed = config->arch.misc_flags & XEN_X86_MSR_RELAXED;
++    d->arch.msr_relaxed = config->arch.misc_flags & XEN_X86_MISC_MSR_RELAXED;
+ 
+     return 0;
+ 
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index b79d6badd71c..119604fadb5d 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -12,6 +12,8 @@
+ #include <public/vcpu.h>
+ #include <public/hvm/hvm_info_table.h>
+ 
++#include <public/autogen/arch_x86.h>
 +
- /* console: comma-separated list of console outputs. */
- static char __initdata opt_console[30] = OPT_CONSOLE_STR;
- string_param("console", opt_console);
-@@ -108,8 +110,8 @@ size_param("conring_size", opt_conring_size);
+ #define has_32bit_shinfo(d)    ((d)->arch.has_32bit_shinfo)
  
- #define _CONRING_SIZE 16384
- #define CONRING_IDX_MASK(i) ((i)&(conring_size-1))
--static char __initdata _conring[_CONRING_SIZE];
--static char *__read_mostly conring = _conring;
-+static uint8_t __initdata _conring[_CONRING_SIZE];
-+static uint8_t *__read_mostly conring = _conring;
- static uint32_t __read_mostly conring_size = _CONRING_SIZE;
- static uint32_t conringc, conringp;
+ /*
+@@ -486,7 +488,7 @@ struct arch_domain
  
-@@ -339,10 +341,10 @@ static void conring_puts(const char *str, size_t len)
+ #define X86_EMU_PIT     XEN_X86_EMU_PIT
  
- long read_console_ring(struct xen_sysctl_readconsole *op)
- {
--    XEN_GUEST_HANDLE_PARAM(char) str;
-+    XEN_GUEST_HANDLE_PARAM(uint8_t) str;
-     uint32_t idx, len, max, sofar, c, p;
+-/* This must match XEN_X86_EMU_ALL in xen.h */
++/* This must match XEN_X86_EMU__ALL */
+ #define X86_EMU_ALL             (X86_EMU_LAPIC | X86_EMU_HPET |         \
+                                  X86_EMU_PM | X86_EMU_RTC |             \
+                                  X86_EMU_IOAPIC | X86_EMU_PIC |         \
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 65ea3fc86beb..d408af54d997 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -967,7 +967,7 @@ static struct domain *__init create_dom0(const module_t *image,
+         .max_grant_version = opt_gnttab_max_version,
+         .max_vcpus = dom0_max_vcpus(),
+         .arch = {
+-            .misc_flags = opt_dom0_msr_relaxed ? XEN_X86_MSR_RELAXED : 0,
++            .misc_flags = opt_dom0_msr_relaxed ? XEN_X86_MISC_MSR_RELAXED : 0,
+         },
+     };
+     struct domain *d;
+diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
+index fc2487986642..e864459cfd93 100644
+--- a/xen/include/public/arch-x86/xen.h
++++ b/xen/include/public/arch-x86/xen.h
+@@ -255,57 +255,6 @@ struct arch_shared_info {
+ };
+ typedef struct arch_shared_info arch_shared_info_t;
  
--    str   = guest_handle_cast(op->buffer, char),
-+    str   = guest_handle_cast(op->buffer, uint8_t),
-     max   = op->count;
-     sofar = 0;
- 
-@@ -1052,7 +1054,7 @@ void __init console_init_preirq(void)
- 
- void __init console_init_ring(void)
- {
--    char *ring;
-+    uint8_t *ring;
-     unsigned int i, order, memflags;
-     unsigned long flags;
- 
-diff --git a/xen/include/public/autogen/sysctl.h b/xen/include/public/autogen/sysctl.h
+-#if defined(__XEN__) || defined(__XEN_TOOLS__)
+-/*
+- * struct xen_arch_domainconfig's ABI is covered by
+- * XEN_DOMCTL_INTERFACE_VERSION.
+- */
+-struct xen_arch_domainconfig {
+-#define _XEN_X86_EMU_LAPIC          0
+-#define XEN_X86_EMU_LAPIC           (1U<<_XEN_X86_EMU_LAPIC)
+-#define _XEN_X86_EMU_HPET           1
+-#define XEN_X86_EMU_HPET            (1U<<_XEN_X86_EMU_HPET)
+-#define _XEN_X86_EMU_PM             2
+-#define XEN_X86_EMU_PM              (1U<<_XEN_X86_EMU_PM)
+-#define _XEN_X86_EMU_RTC            3
+-#define XEN_X86_EMU_RTC             (1U<<_XEN_X86_EMU_RTC)
+-#define _XEN_X86_EMU_IOAPIC         4
+-#define XEN_X86_EMU_IOAPIC          (1U<<_XEN_X86_EMU_IOAPIC)
+-#define _XEN_X86_EMU_PIC            5
+-#define XEN_X86_EMU_PIC             (1U<<_XEN_X86_EMU_PIC)
+-#define _XEN_X86_EMU_VGA            6
+-#define XEN_X86_EMU_VGA             (1U<<_XEN_X86_EMU_VGA)
+-#define _XEN_X86_EMU_IOMMU          7
+-#define XEN_X86_EMU_IOMMU           (1U<<_XEN_X86_EMU_IOMMU)
+-#define _XEN_X86_EMU_PIT            8
+-#define XEN_X86_EMU_PIT             (1U<<_XEN_X86_EMU_PIT)
+-#define _XEN_X86_EMU_USE_PIRQ       9
+-#define XEN_X86_EMU_USE_PIRQ        (1U<<_XEN_X86_EMU_USE_PIRQ)
+-#define _XEN_X86_EMU_VPCI           10
+-#define XEN_X86_EMU_VPCI            (1U<<_XEN_X86_EMU_VPCI)
+-
+-#define XEN_X86_EMU_ALL             (XEN_X86_EMU_LAPIC | XEN_X86_EMU_HPET |  \
+-                                     XEN_X86_EMU_PM | XEN_X86_EMU_RTC |      \
+-                                     XEN_X86_EMU_IOAPIC | XEN_X86_EMU_PIC |  \
+-                                     XEN_X86_EMU_VGA | XEN_X86_EMU_IOMMU |   \
+-                                     XEN_X86_EMU_PIT | XEN_X86_EMU_USE_PIRQ |\
+-                                     XEN_X86_EMU_VPCI)
+-    uint32_t emulation_flags;
+-
+-/*
+- * Select whether to use a relaxed behavior for accesses to MSRs not explicitly
+- * handled by Xen instead of injecting a #GP to the guest. Note this option
+- * doesn't allow the guest to read or write to the underlying MSR.
+- */
+-#define XEN_X86_MSR_RELAXED (1u << 0)
+-    uint32_t misc_flags;
+-};
+-
+-/* Max  XEN_X86_* constant. Used for ABI checking. */
+-#define XEN_X86_MISC_FLAGS_MAX XEN_X86_MSR_RELAXED
+-
+-#endif
+-
+ /*
+  * Representations of architectural CPUID and MSR information.  Used as the
+  * serialised version of Xen's internal representation.
+diff --git a/xen/include/public/autogen/arch_x86.h b/xen/include/public/autogen/arch_x86.h
 new file mode 100644
-index 000000000000..f728b13374d3
+index 000000000000..94f35218342e
 --- /dev/null
-+++ b/xen/include/public/autogen/sysctl.h
-@@ -0,0 +1,35 @@
++++ b/xen/include/public/autogen/arch_x86.h
+@@ -0,0 +1,52 @@
 +/*
-+ * sysctl
++ * arch-x86
 + *
 + * AUTOGENERATED. DO NOT MODIFY
 + */
-+#ifndef __XEN_AUTOGEN_SYSCTL_H
-+#define __XEN_AUTOGEN_SYSCTL_H
++#ifndef __XEN_AUTOGEN_ARCH_X86_H
++#define __XEN_AUTOGEN_ARCH_X86_H
 +
-+/* Read console content from Xen buffer ring. */
-+struct xen_sysctl_readconsole {
-+    /* IN: Non-zero -> clear after reading. */
-+    uint8_t clear;
-+    /* IN: Non-zero -> start index specified by `index` field. */
-+    uint8_t incremental;
-+    /* Unused. */
-+    uint16_t _pad;
-+    /*
-+     * IN:  Start index for consuming from ring buffer (if @incremental);
-+     * OUT: End index after consuming from ring buffer.
-+     */
-+    uint32_t index;
-+    /*
-+     * IN: Virtual address to write console data.
-+     *
-+     * NOTE: The pointer itself is IN, but the contents of the buffer are OUT.
-+     */
-+    XEN_GUEST_HANDLE_64(uint8) buffer;
-+    /* IN: Size of buffer; OUT: Bytes written to buffer. */
-+    uint32_t count;
-+    /* Tail padding reserved to zero. */
-+    uint32_t rsvd0_a;
++/* Content of the `emulation_flags` field of the domain creation hypercall. */
++struct xen_x86_emu {}; /* GREP FODDER */
++/* Emulate Local APICs. */
++#define XEN_X86_EMU_LAPIC (1U << 0)
++/* Emulate a HPET timer. */
++#define XEN_X86_EMU_HPET (1U << 1)
++/* Emulate the ACPI PM timer. */
++#define XEN_X86_EMU_PM (1U << 2)
++/* Emulate the RTC clock. */
++#define XEN_X86_EMU_RTC (1U << 3)
++/* Emulate an IOAPIC device. */
++#define XEN_X86_EMU_IOAPIC (1U << 4)
++/* Emulate PIC devices. */
++#define XEN_X86_EMU_PIC (1U << 5)
++/* Emulate standard VGA. */
++#define XEN_X86_EMU_VGA (1U << 6)
++/* Emulate an IOMMU. */
++#define XEN_X86_EMU_IOMMU (1U << 7)
++/* Emulate a PIT timer. */
++#define XEN_X86_EMU_PIT (1U << 8)
++/* Route physical IRQs over event channels. */
++#define XEN_X86_EMU_USE_PIRQ (1U << 9)
++/* Handle PCI configuration space traps from within Xen. */
++#define XEN_X86_EMU_VPCI (1U << 10)
++/* Mask covering all defined bits */
++#define XEN_X86_EMU__ALL (0x7FFU)
++
++/* Contents of the `misc_flags` field of the domain creation hypercall */
++struct xen_x86_misc {}; /* GREP FODDER */
++/* Grants access to the real physical MSR registers of the host. */
++#define XEN_X86_MISC_MSR_RELAXED (1U << 0)
++/* Mask covering all defined bits */
++#define XEN_X86_MISC__ALL (0x1U)
++
++/* x86-specific domain settings. */
++struct xen_arch_domainconfig {
++    /* IN: Bitmap of devices to emulate. */
++    uint32_t emulation_flags /* See xen_x86_emu */;
++    /* IN: Miscellaneous x86-specific toggles. */
++    uint32_t misc_flags /* See xen_x86_misc */;
 +};
 +
-+#endif /* __XEN_AUTOGEN_SYSCTL_H */
++#endif /* __XEN_AUTOGEN_ARCH_X86_H */
 +
-diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
-index b0fec271d36f..9e773490a5ac 100644
---- a/xen/include/public/sysctl.h
-+++ b/xen/include/public/sysctl.h
-@@ -18,6 +18,8 @@
- #include "domctl.h"
- #include "physdev.h"
+diff --git a/xen/include/public/autogen/domctl.h b/xen/include/public/autogen/domctl.h
+index bd1f4bedc727..276e05168688 100644
+--- a/xen/include/public/autogen/domctl.h
++++ b/xen/include/public/autogen/domctl.h
+@@ -6,6 +6,19 @@
+ #ifndef __XEN_AUTOGEN_DOMCTL_H
+ #define __XEN_AUTOGEN_DOMCTL_H
  
-+#include "autogen/sysctl.h"
++/* for xen_arch_domainconfig */
++#if defined(__i386__) || defined(__x86_64__)
++#include "arch_x86.h"
++#elif defined(__arm__) || defined(__aarch64__)
++#include "arch_arm.h"
++#elif defined(__powerpc64__)
++#include "arch_ppc.h"
++#elif defined(__riscv)
++#include "arch_riscv.h"
++#else
++#error "Unsupported architecture"
++#endif
 +
- /*
-  * The interface version needs to be incremented by 1 in case the interface
-  * is modified in an incompatible way AND if the version hasn't been
-@@ -30,27 +32,6 @@
-  */
- #define XEN_SYSCTL_INTERFACE_VERSION 0x00000015
- 
--/*
-- * Read console content from Xen buffer ring.
-- */
--/* XEN_SYSCTL_readconsole */
--struct xen_sysctl_readconsole {
--    /* IN: Non-zero -> clear after reading. */
--    uint8_t clear;
--    /* IN: Non-zero -> start index specified by @index field. */
--    uint8_t incremental;
--    uint8_t pad0, pad1;
--    /*
--     * IN:  Start index for consuming from ring buffer (if @incremental);
--     * OUT: End index after consuming from ring buffer.
--     */
--    uint32_t index;
--    /* IN: Virtual address to write console data. */
--    XEN_GUEST_HANDLE_64(char) buffer;
--    /* IN: Size of buffer; OUT: Bytes written to buffer. */
--    uint32_t count;
--};
--
- /* Get trace buffers machine base address */
- /* XEN_SYSCTL_tbuf_op */
- struct xen_sysctl_tbuf_op {
-diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
-index e051f989a5ca..cc5133fc19b8 100644
---- a/xen/include/public/xen.h
-+++ b/xen/include/public/xen.h
-@@ -36,6 +36,7 @@ __DEFINE_XEN_GUEST_HANDLE(ulong, unsigned long);
- #endif
- DEFINE_XEN_GUEST_HANDLE(void);
- 
-+DEFINE_XEN_GUEST_HANDLE(uint8_t);
- DEFINE_XEN_GUEST_HANDLE(uint64_t);
- DEFINE_XEN_GUEST_HANDLE(xen_pfn_t);
- DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
+ /* Content of the `altp2m_mode` field of the domain creation hypercall. */
+ enum xen_domctl_altp2m_mode {
+     /* Keep altp2m disabled */
 -- 
 2.47.0
 
