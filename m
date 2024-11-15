@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16005D6DDED
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 11:53:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.837182.1253216 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E8E3D6DDED
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 11:53:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.837185.1253230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBut3-0000lJ-75; Fri, 15 Nov 2024 11:53:17 +0000
+	id 1tBut5-0001Jo-S3; Fri, 15 Nov 2024 11:53:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 837182.1253216; Fri, 15 Nov 2024 11:53:17 +0000
+Received: by outflank-mailman (output) from mailman id 837185.1253230; Fri, 15 Nov 2024 11:53:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBut2-0000jo-Jv; Fri, 15 Nov 2024 11:53:16 +0000
-Received: by outflank-mailman (input) for mailman id 837182;
- Fri, 15 Nov 2024 11:53:14 +0000
+	id 1tBut5-0001HZ-Au; Fri, 15 Nov 2024 11:53:19 +0000
+Received: by outflank-mailman (input) for mailman id 837185;
+ Fri, 15 Nov 2024 11:53:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Akm3=SK=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tBut0-0005UF-8K
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:14 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
+ id 1tBut2-0005UF-8e
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 11:53:16 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 30624d4c-a348-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 12:53:11 +0100 (CET)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a9ed7d8d4e0so232688266b.1
- for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:11 -0800 (PST)
+ id 317a9d80-a348-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 12:53:13 +0100 (CET)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a9ec267b879so113468166b.2
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 03:53:13 -0800 (PST)
 Received: from localhost.localdomain (0545937c.skybroadband.com.
  [5.69.147.124]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.10
+ a640c23a62f3a-aa20e0860afsm173492766b.188.2024.11.15.03.53.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 03:53:10 -0800 (PST)
+ Fri, 15 Nov 2024 03:53:12 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 30624d4c-a348-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzEiLCJoZWxvIjoibWFpbC1lajEteDYzMS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjMwNjI0ZDRjLWEzNDgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcxNTkxLjgwNDQ0Miwic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 317a9d80-a348-11ef-a0c7-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MjkiLCJoZWxvIjoibWFpbC1lajEteDYyOS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjMxN2E5ZDgwLWEzNDgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjcxNTkzLjYzOTE0Mywic2VuZGVyIjoiYWxlamFuZHJvLnZhbGxlam9AY2xvdWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1731671591; x=1732276391; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1731671593; x=1732276393; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=u2zCTEiiXdj6Z3fAz2PaM6R8L2pJvU1ho+YloSy4GWA=;
-        b=YjbT0SMrx1qS6W+aM/WTWoJZ37H91fqbfVc3DD7wlrpOQE1xEx+y3DpXOzlAIHrB/0
-         /v8F7Vh5B7rIDnWS84cxZ4gHanWR6N5CAMeVfODbu9cvElV3CqVD/lTzfSOOGO4T+GTv
-         UYyhXja6Cx50WkGj5cb2j9FcucaF6OIhT+2t0=
+        bh=YdcqdHnAzRpCPLvdrirhNP7a31l6SrQju/bT6qqXrVU=;
+        b=YmWdTlDwHBXbwdfMD0UbUgKB3ZdQwRcSUJD4sAFQ2j6ecy59TxJZiDucKUUIZhy9nc
+         DMQAT16N6+PBOi8C89lrqEcn81ZScvLTNR0cNzAwOwTnGVzZwXM8cKRDxpaBP9CBpBpk
+         k2a7FVeQlKc4RPXR6m3wcfF/OFSzQrcAIuBhg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731671591; x=1732276391;
+        d=1e100.net; s=20230601; t=1731671593; x=1732276393;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=u2zCTEiiXdj6Z3fAz2PaM6R8L2pJvU1ho+YloSy4GWA=;
-        b=jOeEaE1KrhhgcKs4pECz/gDrVAwHXv+RFvsJbIio2c9B7IwMvKpNKehidi0pTNEEiz
-         a1kVp8bD7bzLKZyhyvkFtK0eg+SUYZDf5jXs2ziCWyY7vTMt504cZ6iDaflzSKuO58P3
-         sWdKFzrjxqVL8vC97KWj9uCxO/hMvJbgWXgrMZWqdIeX2klyYawV51ltEN+4qvtV3+cc
-         Ids7Mcak8uB8APLIte089n2Ar4wG0BqWo0GWjpNlwF3b0lqKAlJRpp3rv+xLcm43lJCv
-         1daN/Tkls3GlAg2s5msuoYo2LbQJC3zWrzdZPvy0nVEL4xb5opGcyo0trPjfbEUrhlbT
-         srVw==
-X-Gm-Message-State: AOJu0Yx/PdKuTl4aX+t3i+Y0zGhRMBoKu5bS433nBOerc2oLAQxGsNK7
-	gU+iECwNzQ5/awtaLc3hwSVBUf3lu1Me+k9sPwzfsQcHwJO1FO85v/hXQAWQvdHzY6EXCPajuAj
-	M
-X-Google-Smtp-Source: AGHT+IFupWoJxTg3mKC40rRRwGbsyM1HfRvOK5bnNBOwLcjXdsu/PUy6Jjq+KT54hxdALNM3LBR32Q==
-X-Received: by 2002:a17:906:daca:b0:a99:88ab:c7cb with SMTP id a640c23a62f3a-aa48347e0fbmr151752766b.33.1731671590923;
-        Fri, 15 Nov 2024 03:53:10 -0800 (PST)
+        bh=YdcqdHnAzRpCPLvdrirhNP7a31l6SrQju/bT6qqXrVU=;
+        b=SbcmlRjvJ/K/l7RlGe+qN24W9dvsDq99TterbOrW2vKWC4nUvFvuXYDwXPV299ShjP
+         5LzWtCtH3LpGAU1+peAYXBBpDIXZfTS5AkkPA+T76Y7LGSS5mBCb3R4T/kbeIa0S6omt
+         4iZ94MY8FZXBgs8e1eZnTVtwJ29TeTlFQC8YcYj6QP7mKzxYD/6R2Vpt6tzUsThCxcue
+         3z+O5jQMrjLbFsKM+278XLQV4Jswi4vboARlUysqJ4yHsy4QLE1CXqduS9ND0U+8y44G
+         DqeT5rAD4e0JdNw6SEe7Pbfaou1jUceOGsZEFjicQAPlOjqZ8DKcPmvIfWunxk3H4BXi
+         LHEQ==
+X-Gm-Message-State: AOJu0YyivA/CZ9Vd/m2oGU7lhIMtCJAj75+B+2bcmrixJmZYDo/qsky0
+	r+bZ5ngt7dbJEEuL2WIVXV4jrDLQsLpDlBRTnsn/ikGup4hWxXcctQAVxU0EvMFhFMv7qoe06oS
+	p
+X-Google-Smtp-Source: AGHT+IEDvV/405n73PWITIupZoKMG8c3LKgslPdtmAcYUaLjTP9TC/yezrFCJS0CrByvX0O/Df5EAw==
+X-Received: by 2002:a17:907:f19f:b0:aa4:844d:e5cb with SMTP id a640c23a62f3a-aa4844dfdaamr172436166b.48.1731671592851;
+        Fri, 15 Nov 2024 03:53:12 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -84,13 +84,10 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 15/25] xen/arm: Replace hand-crafted xen_arch_domainconfig with autogenerated one
-Date: Fri, 15 Nov 2024 11:51:44 +0000
-Message-ID: <20241115115200.2824-16-alejandro.vallejo@cloud.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [RFC PATCH 17/25] xen/ppc: Replace empty xen_arch_domainconfig with autogenerated one
+Date: Fri, 15 Nov 2024 11:51:46 +0000
+Message-ID: <20241115115200.2824-18-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
 References: <20241115115200.2824-1-alejandro.vallejo@cloud.com>
@@ -99,244 +96,56 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- .../extra/arch-arm/domainconfig.toml          | 83 +++++++++++++++++++
- xen/arch/arm/domain.c                         |  4 +-
- xen/arch/arm/tee/tee.c                        |  1 +
- xen/include/public/arch-arm.h                 | 36 --------
- xen/include/public/autogen/arch_arm.h         | 59 +++++++++++++
- 5 files changed, 145 insertions(+), 38 deletions(-)
- create mode 100644 tools/rust/xenbindgen/extra/arch-arm/domainconfig.toml
- create mode 100644 xen/include/public/autogen/arch_arm.h
+ .../xenbindgen/extra/arch-ppc/domainconfig.toml    |  4 ++++
+ xen/include/public/arch-ppc.h                      |  3 ---
+ xen/include/public/autogen/arch_ppc.h              | 14 ++++++++++++++
+ 3 files changed, 18 insertions(+), 3 deletions(-)
+ create mode 100644 tools/rust/xenbindgen/extra/arch-ppc/domainconfig.toml
+ create mode 100644 xen/include/public/autogen/arch_ppc.h
 
-diff --git a/tools/rust/xenbindgen/extra/arch-arm/domainconfig.toml b/tools/rust/xenbindgen/extra/arch-arm/domainconfig.toml
+diff --git a/tools/rust/xenbindgen/extra/arch-ppc/domainconfig.toml b/tools/rust/xenbindgen/extra/arch-ppc/domainconfig.toml
 new file mode 100644
-index 000000000000..d32963445765
+index 000000000000..ecf9f1d9937d
 --- /dev/null
-+++ b/tools/rust/xenbindgen/extra/arch-arm/domainconfig.toml
-@@ -0,0 +1,83 @@
-+[[enums]]
-+name = "xen_domctl_config_gic"
-+description = "Content of the `gic_version` field of the domainconfig struct."
-+typ = { tag = "u8" }
-+
-+[[enums.variants]]
-+name = "native"
-+description = "Emulate the underlying GIC present in the current host."
-+value = 0
-+
-+[[enums.variants]]
-+name = "v2"
-+description = "Emulate a GICv2."
-+value = 1
-+
-+[[enums.variants]]
-+name = "v3"
-+description = "Emulate a GICv3."
-+value = 2
-+
-+################################################################################
-+
-+[[enums]]
-+name = "xen_domctl_config_tee"
-+description = "TEE mediator exposed to the guest"
-+typ = { tag = "u16" }
-+
-+[[enums.variants]]
-+name = "none"
-+description = "No mediator. Guest can't communicate with the TEE."
-+value = 0
-+
-+[[enums.variants]]
-+name = "optee"
-+description = "Expose an OP-TEE mediator."
-+value = 1
-+
-+[[enums.variants]]
-+name = "ffa"
-+description = "Expose an FF-A mediator."
-+value = 2
-+
-+################################################################################
-+
++++ b/tools/rust/xenbindgen/extra/arch-ppc/domainconfig.toml
+@@ -0,0 +1,4 @@
 +[[structs]]
 +name = "xen_arch_domainconfig"
-+description = "arm-specific domain settings."
-+
-+[[structs.fields]]
-+name = "gic_version"
-+description = """IN/OUT: GIC version exposed to the guest.
-+
-+When `native` on input the output value holds the automatically chosen version."""
-+typ = { tag = "enum", args = "xen_domctl_config_gic" }
-+
-+[[structs.fields]]
-+name = "sve_vl"
-+description = "IN: SVE vector length (divided by 128) exposed to the guest."
-+typ = { tag = "u8" }
-+
-+[[structs.fields]]
-+name = "tee_type"
-+description = "IN: TEE mediator exposed to the guest."
-+typ = { tag = "enum", args = "xen_domctl_config_tee" }
-+
-+[[structs.fields]]
-+name = "nr_spis"
-+description = "IN: Number of SPIs exposed to the guest."
-+typ = { tag = "u32" }
-+
-+[[structs.fields]]
-+name = "clock_frequency"
-+description = """OUT
-+Based on the property clock-frequency in the DT timer node.
-+The property may be present when the bootloader/firmware doesn't
-+set correctly CNTFRQ which hold the timer frequency.
-+
-+As it's not possible to trap this register, we have to replicate
-+the value in the guest DT.
-+
-+= 0 => property not present
-+> 0 => Value of the property"""
-+typ = { tag = "u32" }
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 54e849b02f9e..57ed11598754 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -639,10 +639,10 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-     }
- 
-     /* The P2M table must always be shared between the CPU and the IOMMU */
--    if ( config->iommu_opts & XEN_DOMCTL_IOMMU_no_sharept )
-+    if ( config->iommu_opts & XEN_DOMCTL_IOMMU_OPTS_NO_SHAREPT )
-     {
-         dprintk(XENLOG_INFO,
--                "Unsupported iommu option: XEN_DOMCTL_IOMMU_no_sharept\n");
-+                "Unsupported iommu option: XEN_DOMCTL_IOMMU_OPTS_NO_SHAREPT\n");
-         return -EINVAL;
-     }
- 
-diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
-index 3f65e45a7892..c5f7629a227a 100644
---- a/xen/arch/arm/tee/tee.c
-+++ b/xen/arch/arm/tee/tee.c
-@@ -21,6 +21,7 @@
- #include <xen/types.h>
- 
- #include <asm/tee/tee.h>
-+#include <public/autogen/arch_arm.h>
- 
- extern const struct tee_mediator_desc _steemediator[], _eteemediator[];
- static const struct tee_mediator_desc __read_mostly *cur_mediator;
-diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-index e2412a17474e..42ce9e64ed00 100644
---- a/xen/include/public/arch-arm.h
-+++ b/xen/include/public/arch-arm.h
-@@ -315,42 +315,6 @@ struct vcpu_guest_context {
- typedef struct vcpu_guest_context vcpu_guest_context_t;
- DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
- 
--/*
-- * struct xen_arch_domainconfig's ABI is covered by
-- * XEN_DOMCTL_INTERFACE_VERSION.
-- */
--#define XEN_DOMCTL_CONFIG_GIC_NATIVE    0
--#define XEN_DOMCTL_CONFIG_GIC_V2        1
--#define XEN_DOMCTL_CONFIG_GIC_V3        2
--
--#define XEN_DOMCTL_CONFIG_TEE_NONE      0
--#define XEN_DOMCTL_CONFIG_TEE_OPTEE     1
--#define XEN_DOMCTL_CONFIG_TEE_FFA       2
--
--struct xen_arch_domainconfig {
--    /* IN/OUT */
--    uint8_t gic_version;
--    /* IN - Contains SVE vector length divided by 128 */
--    uint8_t sve_vl;
--    /* IN */
--    uint16_t tee_type;
--    /* IN */
--    uint32_t nr_spis;
--    /*
--     * OUT
--     * Based on the property clock-frequency in the DT timer node.
--     * The property may be present when the bootloader/firmware doesn't
--     * set correctly CNTFRQ which hold the timer frequency.
--     *
--     * As it's not possible to trap this register, we have to replicate
--     * the value in the guest DT.
--     *
--     * = 0 => property not present
--     * > 0 => Value of the property
--     *
--     */
--    uint32_t clock_frequency;
--};
- #endif /* __XEN__ || __XEN_TOOLS__ */
- 
++description = "ppc-specific domain settings."
++fields = []
+diff --git a/xen/include/public/arch-ppc.h b/xen/include/public/arch-ppc.h
+index 33a24e379551..1e0018e12c73 100644
+--- a/xen/include/public/arch-ppc.h
++++ b/xen/include/public/arch-ppc.h
+@@ -102,9 +102,6 @@ struct arch_shared_info {
  struct arch_vcpu_info {
-diff --git a/xen/include/public/autogen/arch_arm.h b/xen/include/public/autogen/arch_arm.h
+ };
+ 
+-struct xen_arch_domainconfig {
+-};
+-
+ typedef struct xen_pmu_arch { uint8_t dummy; } xen_pmu_arch_t;
+ 
+ #endif
+diff --git a/xen/include/public/autogen/arch_ppc.h b/xen/include/public/autogen/arch_ppc.h
 new file mode 100644
-index 000000000000..d19f639671e0
+index 000000000000..48fcc302f341
 --- /dev/null
-+++ b/xen/include/public/autogen/arch_arm.h
-@@ -0,0 +1,59 @@
++++ b/xen/include/public/autogen/arch_ppc.h
+@@ -0,0 +1,14 @@
 +/*
-+ * arch-arm
++ * arch-ppc
 + *
 + * AUTOGENERATED. DO NOT MODIFY
 + */
-+#ifndef __XEN_AUTOGEN_ARCH_ARM_H
-+#define __XEN_AUTOGEN_ARCH_ARM_H
++#ifndef __XEN_AUTOGEN_ARCH_PPC_H
++#define __XEN_AUTOGEN_ARCH_PPC_H
 +
-+/* Content of the `gic_version` field of the domainconfig struct. */
-+enum xen_domctl_config_gic {
-+    /* Emulate the underlying GIC present in the current host. */
-+    XEN_DOMCTL_CONFIG_GIC_NATIVE = 0,
-+    /* Emulate a GICv2. */
-+    XEN_DOMCTL_CONFIG_GIC_V2 = 1,
-+    /* Emulate a GICv3. */
-+    XEN_DOMCTL_CONFIG_GIC_V3 = 2,
-+};
-+
-+/* TEE mediator exposed to the guest */
-+enum xen_domctl_config_tee {
-+    /* No mediator. Guest can't communicate with the TEE. */
-+    XEN_DOMCTL_CONFIG_TEE_NONE = 0,
-+    /* Expose an OP-TEE mediator. */
-+    XEN_DOMCTL_CONFIG_TEE_OPTEE = 1,
-+    /* Expose an FF-A mediator. */
-+    XEN_DOMCTL_CONFIG_TEE_FFA = 2,
-+};
-+
-+/* arm-specific domain settings. */
++/* ppc-specific domain settings. */
 +struct xen_arch_domainconfig {
-+    /*
-+     * IN/OUT: GIC version exposed to the guest.
-+     *
-+     * When `native` on input the output value holds the automatically chosen version.
-+     */
-+    uint8_t gic_version /* See xen_domctl_config_gic */;
-+    /* IN: SVE vector length (divided by 128) exposed to the guest. */
-+    uint8_t sve_vl;
-+    /* IN: TEE mediator exposed to the guest. */
-+    uint16_t tee_type /* See xen_domctl_config_tee */;
-+    /* IN: Number of SPIs exposed to the guest. */
-+    uint32_t nr_spis;
-+    /*
-+     * OUT
-+     * Based on the property clock-frequency in the DT timer node.
-+     * The property may be present when the bootloader/firmware doesn't
-+     * set correctly CNTFRQ which hold the timer frequency.
-+     *
-+     * As it's not possible to trap this register, we have to replicate
-+     * the value in the guest DT.
-+     *
-+     * = 0 => property not present
-+     * > 0 => Value of the property
-+     */
-+    uint32_t clock_frequency;
 +};
 +
-+#endif /* __XEN_AUTOGEN_ARCH_ARM_H */
++#endif /* __XEN_AUTOGEN_ARCH_PPC_H */
 +
 -- 
 2.47.0
