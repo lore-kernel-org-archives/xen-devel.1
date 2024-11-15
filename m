@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2D63D6DDF8
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 12:47:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.837501.1253425 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87460D6DDF9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 12:48:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.837504.1253455 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBvjr-0005NO-PS; Fri, 15 Nov 2024 12:47:51 +0000
+	id 1tBvjw-00068F-Kx; Fri, 15 Nov 2024 12:47:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 837501.1253425; Fri, 15 Nov 2024 12:47:51 +0000
+Received: by outflank-mailman (output) from mailman id 837504.1253455; Fri, 15 Nov 2024 12:47:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tBvjr-0005NH-MQ; Fri, 15 Nov 2024 12:47:51 +0000
-Received: by outflank-mailman (input) for mailman id 837501;
- Fri, 15 Nov 2024 12:47:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tBvjw-000682-GY; Fri, 15 Nov 2024 12:47:56 +0000
+Received: by outflank-mailman (input) for mailman id 837504;
+ Fri, 15 Nov 2024 12:47:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TwMO=SK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tBvjq-0004n9-Lm
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 12:47:50 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d16f202f-a34f-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 13:47:48 +0100 (CET)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5c96b2a10e1so2976478a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 04:47:48 -0800 (PST)
+ id 1tBvjv-0005bz-A2
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 12:47:55 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d3a875c8-a34f-11ef-99a3-01e77a169b0f;
+ Fri, 15 Nov 2024 13:47:52 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9ed49edd41so309797866b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Nov 2024 04:47:52 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e08617esm177517666b.182.2024.11.15.04.47.46
+ a640c23a62f3a-aa20e08617esm177517666b.182.2024.11.15.04.47.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 04:47:46 -0800 (PST)
+ Fri, 15 Nov 2024 04:47:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,37 +46,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d16f202f-a34f-11ef-a0c7-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzEiLCJoZWxvIjoibWFpbC1lZDEteDUzMS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImQxNmYyMDJmLWEzNGYtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNjc0ODY4LjQ3OTg0Nywic2VuZGVyIjoib2xla3NpaS5rdXJvY2hrb0BnbWFpbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: d3a875c8-a34f-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzYiLCJoZWxvIjoibWFpbC1lajEteDYzNi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImQzYTg3NWM4LWEzNGYtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNjc0ODcyLjIxNjExNCwic2VuZGVyIjoib2xla3NpaS5rdXJvY2hrb0BnbWFpbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1731674867; x=1732279667; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=rEAdQHOht+sXlaWNLwPdJaPMbdoj6AeiqmUtGFUERz0=;
-        b=LEVJ8tMuzS9dYvxO9/oCP/dgidtZQc1K+goxGMIPpi5pLCN26plSO0ytUl2Nf+8khQ
-         CT6fAuHILW1uogx4CS/7AqYuwKZ5PLADDF2EZqKUxaBdCocMmdv4cjqCZ9JbG9gD6UW0
-         YD24dZomfNROTJ1epOaoDAfF5eCGpZS/zY7NSsqqU/pTNJ8VQoHlpFbNtTkJsfAo6ZL2
-         W9X7nWjeK3jaAvZJ9T+EL2savq7pKjwk4LFraWUP2LAhiG+lhYtivfVcZ1uTQQZgLwk9
-         eIuTXvxB5tdPNYU2jRY2F0TvaAKOr6tllpSnUjqutO1yU8NrV91XD1ss0SXqncMd/XTP
-         S8jw==
+        d=gmail.com; s=20230601; t=1731674870; x=1732279670; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fb2F3eq0F3Y0oXgz+Msta7iUhtnpQIl83uC+FFkcYuQ=;
+        b=hypkJ5ZO6j1w0rmcZkD+dPOlewJDRem0ZbnC6Ljba5RFYC7VGIf3/4vgyHgAoLbMrN
+         slVez7PztgcOZFEmFeP8Wd8IBeKSQKFQcY92E7gpAwcFMt2u9eqVAwN/z39I98BoYs/9
+         5IiP1UhzPkKgMwysghjiQNZcSBU3Hmd4looo8jRRckfDc5ih7rffVbDo43rxM+nrXLzt
+         /uGQFdaR120zykzfRaYsM05R7Wy3ViutM6va9hIicHMavqjIEBWIIs7FD4rlevN/fDfN
+         coYpLv9DbOkN/W4w3lZKaXt0/N8NpF/3s279ebMPKuojY1D73zyDtd8d7w0r47bZmhtL
+         rzaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731674867; x=1732279667;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=rEAdQHOht+sXlaWNLwPdJaPMbdoj6AeiqmUtGFUERz0=;
-        b=BisyVN7c5Y3a5WbJhOUK/dA9Vau2FGUyfo48kvcoqJXJexepR+cHZimXuxsf8Xmegq
-         udQ3uTLVPgGFs3F9qGe8STUwSy3971hhe8yxyR1SsJCLCNqOuSJxnZrfsoQ12WpoiTQo
-         SPfn68mX3nrjTzwg9VWHeL8U5+EhEt0TWB26cn7+nQiHcRas2eZEjP4qKnfMn63TRcXF
-         yzpRNpqu+f280mbJApY3OUIzX22Li3IlreWeyvCNeRr9EAMRvu6rfS4IZSJCmbJcbkK6
-         RZxkQCyl6Bj/fzg4frIDAclYlkyj1WeY1Db4cDSOBMDHw3nEw8BYVhllQlnlDBrp4uCu
-         4npA==
-X-Gm-Message-State: AOJu0YxlgVjmc7aFHlJjUpkJtKudoI9KG11P8HOBm3d8OUxv7ERy75b7
-	z4R3sR1ZQjy5aXjECK+uHVuGr9SIuA9nvhyKAD8N2kuA/B45pa2ldn1cQA==
-X-Google-Smtp-Source: AGHT+IG9UQYbSwpwDptxKtpu6y/RjNBv83Kme1MrkKK3zmN+2FgyjP5xqNwm7eu87OAlU/Ck0hXbbQ==
-X-Received: by 2002:a17:907:9288:b0:a9a:bbcc:508c with SMTP id a640c23a62f3a-aa4833f708cmr216150466b.2.1731674867026;
-        Fri, 15 Nov 2024 04:47:47 -0800 (PST)
+        d=1e100.net; s=20230601; t=1731674870; x=1732279670;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fb2F3eq0F3Y0oXgz+Msta7iUhtnpQIl83uC+FFkcYuQ=;
+        b=KJoJ1Dnw00ki2NmOXPKwC1Hd66qKC7fCN8jDS0B4CmeBxBtAIjth2dtOfZpOxla8Cz
+         ksvbiSaebGkst5nq10MEGRn4lw/CS3JjRkQL3nm4EgkHdLTfhihzFpeGf4WzlpytaJei
+         acywoJW1unBs3tSHGDPvjshLbAH+Xp2ssFQCLd7lEKkV6AzMnPvwlr4QZHgrUn8ZFFDY
+         zP3xYiwsPgZHNDT32FKTeHzvXas69PiVkB6Qu00KCbWI15q9F6+Sw5C0LcduNqIPTqt6
+         nUEAJvzRaz9hwx9X2cYdgjjgI8HQjIMiJDYAvo2CDOOMk6nB0dxqsPiOR9NBivOUqsPB
+         hP1Q==
+X-Gm-Message-State: AOJu0YyqH2Uf2H6HM+cfQ372wfFE00aS9biqvmJha9C5ieCHN4Dqssii
+	Lv+xb7/+Sj7dljcEl0br6PAfNQKOBBpKgN6vK3nrWqfNPQsemtukcRdWxg==
+X-Google-Smtp-Source: AGHT+IGTNUjDV0uFSCtDPMhxxNOznjd/eCWq2DbSvp/rF4qUn8WQx20dB75Ac0hrC8AgeMlENLKlSQ==
+X-Received: by 2002:a17:907:608a:b0:a9e:c947:8c5e with SMTP id a640c23a62f3a-aa483552958mr214567866b.57.1731674870229;
+        Fri, 15 Nov 2024 04:47:50 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -87,99 +88,50 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 0/3]  Setup memory management for RISC-V
-Date: Fri, 15 Nov 2024 13:47:41 +0100
-Message-ID: <cover.1731672668.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v6 3/3] xen/riscv: finalize boot allocator and transition to boot state
+Date: Fri, 15 Nov 2024 13:47:44 +0100
+Message-ID: <fdcd7c181cec2779a19b65e7460f6ba49fd9c4f9.1731672668.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <cover.1731672668.git.oleksii.kurochko@gmail.com>
+References: <cover.1731672668.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Finish initializing the memory subsystem by mapping the direct map and
-frame table.
+Add a call to end_boot_allocator() in start_xen() to finalize the
+boot memory allocator, moving free pages to the domain sub-allocator.
 
-The frametable_virt_start variable is introduced with substracting
-of an offest ( taking into account that RAM start could be not 0 ) to save
-virtual address space of FRAMETABLE. Also it simplifies the
-calculations and thereby improves performance for page_to_mfn(), mfn_to_page()
-as there is no frametable_base_pdx or frametable_base_mfn ( if CONFIG_PDX_COMPRESSION=n);
+After initializing the memory subsystem, update `system_state` from
+`SYS_STATE_early_boot` to `SYS_STATE_boot`, signifying the end of the
+early boot phase.
 
-The directmap_virt_start is introduced and shifted lower in the VA space to
-(DIRECTMAP_VIRT_START - masked_low_bits_of_ram_start_address) to avoid
-wasting a large portion of the directmap space, this also allows for simple
-VA <-> PA translations. Also aligns DIRECTMAP_VIRT_START to a GB boundary
-(for Sv39; for other MMU mode boundaries will be bigger ) by masking the
-bits of the RAM start address to enable the use of superpages in
-map_pages_to_xen().
-
-In addition, initialize the VMAP_DEFAULT region, finalize the boot allocator,
-and update the system state from early_boot to boot.
-
-Introduce share_xen_page_with_guest() to deal with linkage error which occurs
-because of DCE:
-  riscv64-linux-gnu-ld: prelink.o: in function `tasklet_kill':
-  /build/xen/common/tasklet.c:176: undefined reference to
-     `share_xen_page_with_guest'
-  riscv64-linux-gnu-ld: ./.xen-syms.0: hidden symbol `share_xen_page_with_guest'
-    isn't defined riscv64-linux-gnu-ld: final link failed: bad value
-
-The function maddr_to_virt() is introduced as part of this patch series.
-
-virt_to_maddr() is updated as it is started to use direct_virt_start which is
-introduced in this patch series.
-
-Introduce DIRECTMAP_VIRT_END to have a convient way to do some basic
-checks of address ranges.
-
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V6:
- - Rebase on top of current staging.
- - Update the cover letter message.
- - Other changes are only connected to path 1 of the current patch series some
-   please look at the changes there.
+Change in V2-V6:
+ - Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V5:
- - Rebase on top of current staging.
- - Drop unnecessary local variables.
- - Fix issue with virt_to_maddr() ( used DIRECTMAP_VIRT_START in if-condition
-   instead of direct_virt_start ).
- - Update setup_directmap_mappings() and setup_frametable_mappings() ( details
-   look in patch 1).
----
-Changes in V4:
- - Rebase on top of current staging.
- - Fix issues with setup_frametable_mappings() and setup_directmap_mappings().
- - Drop unnecessary local variables.
- - Minor log messsages fixes.
----
-Changes in V3:
- - Update the cover letter message as DIRECTMAP connected things were changed.
- - Update setup_mm(), setup_{directmap,frametable}_mappings.
- - Introduce ROUNDDOWN in <xen/macros.h>
- - All other details please look at the specific patch.
----
-Changes in V2:
- - update the cover letter message.
- - merge first 3 patches to "introduce setup_mm()" patch as after setup_mm()
-   rework all the things in first two patches of v1 started to use changes
-   introduced in "introduce setup_mm()" patch.
- - add Acked-by for some patch series.
- - All other details please look at the specific patch.
----
+ xen/arch/riscv/setup.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Oleksii Kurochko (3):
-  xen/riscv: introduce setup_mm()
-  xen/riscv: initialize the VMAP_DEFAULT virtual range
-  xen/riscv: finalize boot allocator and transition to boot state
-
- xen/arch/riscv/include/asm/config.h |   1 +
- xen/arch/riscv/include/asm/mm.h     |  20 ++--
- xen/arch/riscv/include/asm/setup.h  |   2 +
- xen/arch/riscv/mm.c                 | 159 ++++++++++++++++++++++++++--
- xen/arch/riscv/pt.c                 |   6 ++
- xen/arch/riscv/setup.c              |  14 +++
- xen/include/xen/macros.h            |   1 +
- 7 files changed, 191 insertions(+), 12 deletions(-)
-
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 3652cb056d..9680332fee 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -65,6 +65,14 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     vm_init();
+ 
++    end_boot_allocator();
++
++    /*
++     * The memory subsystem has been initialized, we can now switch from
++     * early_boot -> boot.
++     */
++    system_state = SYS_STATE_boot;
++
+     printk("All set up\n");
+ 
+     machine_halt();
 -- 
 2.47.0
 
