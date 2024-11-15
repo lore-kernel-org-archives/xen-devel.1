@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37062D68BD8
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:40:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838325.1254349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C188DD68BD8
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:40:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838327.1254358 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC43Y-0000cU-DV; Fri, 15 Nov 2024 21:40:44 +0000
+	id 1tC43e-0000xg-NF; Fri, 15 Nov 2024 21:40:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838325.1254349; Fri, 15 Nov 2024 21:40:44 +0000
+Received: by outflank-mailman (output) from mailman id 838327.1254358; Fri, 15 Nov 2024 21:40:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC43Y-0000cN-9y; Fri, 15 Nov 2024 21:40:44 +0000
-Received: by outflank-mailman (input) for mailman id 838325;
- Fri, 15 Nov 2024 21:40:43 +0000
+	id 1tC43e-0000xW-KZ; Fri, 15 Nov 2024 21:40:50 +0000
+Received: by outflank-mailman (input) for mailman id 838327;
+ Fri, 15 Nov 2024 21:40:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3q5-0007AP-Kp
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:26:49 +0000
+ id 1tC3q6-0007AP-L5
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:26:50 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 5157ade1-a398-11ef-a0c7-8be0dac302b0;
+ id 5201f946-a398-11ef-a0c7-8be0dac302b0;
  Fri, 15 Nov 2024 22:26:47 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id 17E88206BCFE;
+ by linux.microsoft.com (Postfix) with ESMTPSA id B08AC2174E41;
  Fri, 15 Nov 2024 13:26:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -41,25 +41,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5157ade1-a398-11ef-a0c7-8be0dac302b0
+X-Inumbo-ID: 5201f946-a398-11ef-a0c7-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjUxNTdhZGUxLWEzOTgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA2MDA3LjM0MTA2NSwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 17E88206BCFE
+X-Custom-Transaction: eyJpZCI6IjUyMDFmOTQ2LWEzOTgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA2MDA4LjI5NTE1Miwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com B08AC2174E41
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
 	s=default; t=1731706003;
-	bh=z5d0KiQ+mxHfS/dtMsbc4ttBd/lyUqPHYPOKqCM1B/M=;
+	bh=KRAKVqkmYHFKsYpIbPFWmWMGYVvfzvIpOOiOmhExdwo=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Qzjy8jhTqEhPkpbtMzhjO4pQ41WosaCc3rHXK7isQANvdHykkDrpnsXw2iEyDYrKZ
-	 bivctPWn2ufOhidk0VIZ+JFuRb3AziKQEhYq/E0XKlSC0nh99MCwSAdmHtPz39M16d
-	 mbtSMAjjgTqYd5iB3/X8WKQ1SIjBJafcvQ4z4Hts=
+	b=osivBUZmIsQLl2jL+ZDQlIu+P5dhzLcQCyWk2W1AvFXRp9qFe1ScWwkuHagBoxYIx
+	 W4f74U2umtM+/izGX31p0lh8kwNEI1l5coBYaWK3pMcVhuLLHE4asQeuLREQ90Mb9z
+	 ups8j6Ezd0JumeEqkyYkZ8sddPZGhvHCQNewXQdE=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 21:26:26 +0000
-Subject: [PATCH v2 09/21] drm/etnaviv: Convert timeouts to
+Date: Fri, 15 Nov 2024 21:26:29 +0000
+Subject: [PATCH v2 12/21] scsi: pm8001: Convert timeouts to
  secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-converge-secs-to-jiffies-v2-9-911fb7595e79@linux.microsoft.com>
+Message-Id: <20241115-converge-secs-to-jiffies-v2-12-911fb7595e79@linux.microsoft.com>
 References: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
 In-Reply-To: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -143,22 +143,22 @@ Changes made with the following Coccinelle rules:
 
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c | 2 +-
+ drivers/scsi/pm8001/pm8001_init.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c b/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
-index 721d633aece9d4c81f0019e4c55884f26ee61c60..0f5a2c885d0ab7029c7248e15d6ea3c31823b782 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
-@@ -100,7 +100,7 @@ int etnaviv_cmdbuf_init(struct etnaviv_cmdbuf_suballoc *suballoc,
- 		mutex_unlock(&suballoc->lock);
- 		ret = wait_event_interruptible_timeout(suballoc->free_event,
- 						       suballoc->free_space,
--						       msecs_to_jiffies(10 * 1000));
-+						       secs_to_jiffies(10));
- 		if (!ret) {
- 			dev_err(suballoc->dev,
- 				"Timeout waiting for cmdbuf space\n");
+diff --git a/drivers/scsi/pm8001/pm8001_init.c b/drivers/scsi/pm8001/pm8001_init.c
+index 33e1eba62ca12c2555419197ecdbebad817e4a6d..be88890716cc152b4687edf5e204d14bd177e188 100644
+--- a/drivers/scsi/pm8001/pm8001_init.c
++++ b/drivers/scsi/pm8001/pm8001_init.c
+@@ -734,7 +734,7 @@ static int pm8001_init_sas_add(struct pm8001_hba_info *pm8001_ha)
+ 		return -EIO;
+ 	}
+ 	time_remaining = wait_for_completion_timeout(&completion,
+-				msecs_to_jiffies(60*1000)); // 1 min
++				secs_to_jiffies(60)); // 1 min
+ 	if (!time_remaining) {
+ 		kfree(payload.func_specific);
+ 		pm8001_dbg(pm8001_ha, FAIL, "get_nvmd_req timeout\n");
 
 -- 
 2.34.1
