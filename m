@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C742D68BD7
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:36:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838246.1254279 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F152D68BD7
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:37:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838261.1254288 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3zf-0002xc-CP; Fri, 15 Nov 2024 21:36:43 +0000
+	id 1tC40F-0003le-K6; Fri, 15 Nov 2024 21:37:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838246.1254279; Fri, 15 Nov 2024 21:36:43 +0000
+Received: by outflank-mailman (output) from mailman id 838261.1254288; Fri, 15 Nov 2024 21:37:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC3zf-0002xV-9V; Fri, 15 Nov 2024 21:36:43 +0000
-Received: by outflank-mailman (input) for mailman id 838246;
- Fri, 15 Nov 2024 21:36:41 +0000
+	id 1tC40F-0003lX-HP; Fri, 15 Nov 2024 21:37:19 +0000
+Received: by outflank-mailman (input) for mailman id 838261;
+ Fri, 15 Nov 2024 21:37:18 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3mM-0007DI-4I
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:22:58 +0000
+ id 1tC3mO-0007DI-56
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:23:00 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id c64f9314-a397-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 22:22:53 +0100 (CET)
+ id c70f7192-a397-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 22:22:54 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id 88E5C20BEBD8;
- Fri, 15 Nov 2024 13:22:45 -0800 (PST)
+ by linux.microsoft.com (Postfix) with ESMTPSA id 06C52206BCEC;
+ Fri, 15 Nov 2024 13:22:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,25 +41,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c64f9314-a397-11ef-a0c7-8be0dac302b0
+X-Inumbo-ID: c70f7192-a397-11ef-a0c7-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImM2NGY5MzE0LWEzOTctMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA1NzczLjkyMzMyMywic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 88E5C20BEBD8
+X-Custom-Transaction: eyJpZCI6ImM3MGY3MTkyLWEzOTctMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA1Nzc1LjE3NzUzNywic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 06C52206BCEC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1731705765;
-	bh=kyIMdoD81WSCHIuRs3t1IxAuP6vGJ5R59VD+r/6KKK0=;
+	s=default; t=1731705766;
+	bh=DChbJW+DaqGHGWE0sMF41tmxT4FReQ1FKA/KDyHL32Y=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=hCMeIw/D2+NTRMQJ3FRDpZj2qT/7FbCaDMS9+XIuVvW9RIzS37PIUIxd4jF3sKpOq
-	 ONruuQqONZh6MCBIYTovcefPeKanNMMCVBGfAbtnor6PdXfG/kDS1Iyd6np+7CKiaV
-	 BV9SmXmoDsx8kPuPU+1F4sBj6APCWtu0lORTDJ94=
+	b=hyUr4x0SmruhyF9c/vR8v3QoqKPaKNqXRHaN80CQA/ABgyerOHG1uC/FlE1BJG1ZJ
+	 CRMPkjTTeOQg/xepSHO+SvOjz7TT6Fsw5oiwX3exTqn3S8Lu3Gz0gW082RgBKg6fy9
+	 2WD2Rqjpa40SDuhEDGd3pTV1EDPYLPZRKnHzJ7/U=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 21:22:47 +0000
-Subject: [PATCH 17/22] staging: vc04_services: Convert timeouts to
- secs_to_jiffies()
+Date: Fri, 15 Nov 2024 21:22:49 +0000
+Subject: [PATCH 19/22] livepatch: Convert timeouts to secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-converge-secs-to-jiffies-v1-17-19aadc34941b@linux.microsoft.com>
+Message-Id: <20241115-converge-secs-to-jiffies-v1-19-19aadc34941b@linux.microsoft.com>
 References: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 In-Reply-To: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -143,22 +142,78 @@ Changes made with the following Coccinelle rules:
 
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ samples/livepatch/livepatch-callbacks-busymod.c |  2 +-
+ samples/livepatch/livepatch-shadow-fix1.c       |  2 +-
+ samples/livepatch/livepatch-shadow-mod.c        | 10 +++++-----
+ 3 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-index 133ed15f3dbcc07dc353c22d8522e11a08ee6f46..6bb2562e071c4e623e51852860c682e047f823df 100644
---- a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-+++ b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-@@ -59,7 +59,7 @@ static int bcm2835_audio_send_msg_locked(struct bcm2835_audio_instance *instance
+diff --git a/samples/livepatch/livepatch-callbacks-busymod.c b/samples/livepatch/livepatch-callbacks-busymod.c
+index 378e2d40271a9717d09eff51d3d3612c679736fc..d0fd801a7c21b7d7939c29d83f9d993badcc9aba 100644
+--- a/samples/livepatch/livepatch-callbacks-busymod.c
++++ b/samples/livepatch/livepatch-callbacks-busymod.c
+@@ -45,7 +45,7 @@ static int livepatch_callbacks_mod_init(void)
+ {
+ 	pr_info("%s\n", __func__);
+ 	schedule_delayed_work(&work,
+-		msecs_to_jiffies(1000 * 0));
++		secs_to_jiffies(0));
+ 	return 0;
+ }
  
- 	if (wait) {
- 		if (!wait_for_completion_timeout(&instance->msg_avail_comp,
--						 msecs_to_jiffies(10 * 1000))) {
-+						 secs_to_jiffies(10))) {
- 			dev_err(instance->dev,
- 				"vchi message timeout, msg=%d\n", m->type);
- 			return -ETIMEDOUT;
+diff --git a/samples/livepatch/livepatch-shadow-fix1.c b/samples/livepatch/livepatch-shadow-fix1.c
+index 6701641bf12d454a770e49abeeb0dea92560e55e..948ea1f5760fed2fa27baf478c97cf98ad5c99a8 100644
+--- a/samples/livepatch/livepatch-shadow-fix1.c
++++ b/samples/livepatch/livepatch-shadow-fix1.c
+@@ -73,7 +73,7 @@ static struct dummy *livepatch_fix1_dummy_alloc(void)
+ 		return NULL;
+ 
+ 	d->jiffies_expire = jiffies +
+-		msecs_to_jiffies(1000 * EXPIRE_PERIOD);
++		secs_to_jiffies(EXPIRE_PERIOD);
+ 
+ 	/*
+ 	 * Patch: save the extra memory location into a SV_LEAK shadow
+diff --git a/samples/livepatch/livepatch-shadow-mod.c b/samples/livepatch/livepatch-shadow-mod.c
+index 7e753b0d2fa611524c9e2adbe02c8fa3e9b6015e..79296e6ccb119f521e86a121623855d841c9fc5e 100644
+--- a/samples/livepatch/livepatch-shadow-mod.c
++++ b/samples/livepatch/livepatch-shadow-mod.c
+@@ -102,7 +102,7 @@ static __used noinline struct dummy *dummy_alloc(void)
+ 		return NULL;
+ 
+ 	d->jiffies_expire = jiffies +
+-		msecs_to_jiffies(1000 * EXPIRE_PERIOD);
++		secs_to_jiffies(EXPIRE_PERIOD);
+ 
+ 	/* Oops, forgot to save leak! */
+ 	leak = kzalloc(sizeof(*leak), GFP_KERNEL);
+@@ -153,7 +153,7 @@ static void alloc_work_func(struct work_struct *work)
+ 	mutex_unlock(&dummy_list_mutex);
+ 
+ 	schedule_delayed_work(&alloc_dwork,
+-		msecs_to_jiffies(1000 * ALLOC_PERIOD));
++		secs_to_jiffies(ALLOC_PERIOD));
+ }
+ 
+ /*
+@@ -185,15 +185,15 @@ static void cleanup_work_func(struct work_struct *work)
+ 	mutex_unlock(&dummy_list_mutex);
+ 
+ 	schedule_delayed_work(&cleanup_dwork,
+-		msecs_to_jiffies(1000 * CLEANUP_PERIOD));
++		secs_to_jiffies(CLEANUP_PERIOD));
+ }
+ 
+ static int livepatch_shadow_mod_init(void)
+ {
+ 	schedule_delayed_work(&alloc_dwork,
+-		msecs_to_jiffies(1000 * ALLOC_PERIOD));
++		secs_to_jiffies(ALLOC_PERIOD));
+ 	schedule_delayed_work(&cleanup_dwork,
+-		msecs_to_jiffies(1000 * CLEANUP_PERIOD));
++		secs_to_jiffies(CLEANUP_PERIOD));
+ 
+ 	return 0;
+ }
 
 -- 
 2.34.1
