@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F414D68BD8
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:39:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838308.1254339 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37062D68BD8
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Nov 2024 21:40:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838325.1254349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC427-000767-3g; Fri, 15 Nov 2024 21:39:15 +0000
+	id 1tC43Y-0000cU-DV; Fri, 15 Nov 2024 21:40:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838308.1254339; Fri, 15 Nov 2024 21:39:15 +0000
+Received: by outflank-mailman (output) from mailman id 838325.1254349; Fri, 15 Nov 2024 21:40:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tC426-000760-WB; Fri, 15 Nov 2024 21:39:14 +0000
-Received: by outflank-mailman (input) for mailman id 838308;
- Fri, 15 Nov 2024 21:39:13 +0000
+	id 1tC43Y-0000cN-9y; Fri, 15 Nov 2024 21:40:44 +0000
+Received: by outflank-mailman (input) for mailman id 838325;
+ Fri, 15 Nov 2024 21:40:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OXi=SK=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tC3mR-0007DI-5c
- for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:23:03 +0000
+ id 1tC3q5-0007AP-Kp
+ for xen-devel@lists.xenproject.org; Fri, 15 Nov 2024 21:26:49 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id c8203873-a397-11ef-a0c7-8be0dac302b0;
- Fri, 15 Nov 2024 22:22:56 +0100 (CET)
+ id 5157ade1-a398-11ef-a0c7-8be0dac302b0;
+ Fri, 15 Nov 2024 22:26:47 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id A22AA206BCEE;
- Fri, 15 Nov 2024 13:22:46 -0800 (PST)
+ by linux.microsoft.com (Postfix) with ESMTPSA id 17E88206BCFE;
+ Fri, 15 Nov 2024 13:26:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,26 +41,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8203873-a397-11ef-a0c7-8be0dac302b0
+X-Inumbo-ID: 5157ade1-a398-11ef-a0c7-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzLjc3LjE1NC4xODIiLCJoZWxvIjoibGludXgubWljcm9zb2Z0LmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImM4MjAzODczLWEzOTctMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA1Nzc2Ljk2ODc4Niwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A22AA206BCEE
+X-Custom-Transaction: eyJpZCI6IjUxNTdhZGUxLWEzOTgtMTFlZi1hMGM3LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxNzA2MDA3LjM0MTA2NSwic2VuZGVyIjoiZWFoYXJpaGFAbGludXgubWljcm9zb2Z0LmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 17E88206BCFE
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1731705766;
-	bh=8an4FgjBOt1s+5Gzupd7mugSuJBcUUHR7ha3x9HR0Ag=;
+	s=default; t=1731706003;
+	bh=z5d0KiQ+mxHfS/dtMsbc4ttBd/lyUqPHYPOKqCM1B/M=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=iplUk1Nduoh9asilHgzn6HQycVN1VFv/mFBOdW0Mpd4aq8sOOirOgItcWBMTidM3Q
-	 FvxfPpyBxEWdptBjBV3AGgplTOjNGMgWDICXRk9fFUvguk5wrwqFw5sjChgX9PZPt7
-	 /h1a1SkEI1LPNYXASotI6c+cUqHfSyHVemxnfBAU=
+	b=Qzjy8jhTqEhPkpbtMzhjO4pQ41WosaCc3rHXK7isQANvdHykkDrpnsXw2iEyDYrKZ
+	 bivctPWn2ufOhidk0VIZ+JFuRb3AziKQEhYq/E0XKlSC0nh99MCwSAdmHtPz39M16d
+	 mbtSMAjjgTqYd5iB3/X8WKQ1SIjBJafcvQ4z4Hts=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Fri, 15 Nov 2024 21:22:52 +0000
-Subject: [PATCH 22/22] jiffies: Define secs_to_jiffies()
+Date: Fri, 15 Nov 2024 21:26:26 +0000
+Subject: [PATCH v2 09/21] drm/etnaviv: Convert timeouts to
+ secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-converge-secs-to-jiffies-v1-22-19aadc34941b@linux.microsoft.com>
-References: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
-In-Reply-To: <20241115-converge-secs-to-jiffies-v1-0-19aadc34941b@linux.microsoft.com>
+Message-Id: <20241115-converge-secs-to-jiffies-v2-9-911fb7595e79@linux.microsoft.com>
+References: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
+In-Reply-To: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
  Jozsef Kadlecsik <kadlec@netfilter.org>, 
  "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
@@ -125,70 +126,39 @@ Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
  etnaviv@lists.freedesktop.org, oss-drivers@corigine.com, 
  linuxppc-dev@lists.ozlabs.org, 
  Anna-Maria Behnsen <anna-maria@linutronix.de>, 
- Easwar Hariharan <eahariha@linux.microsoft.com>, 
- Michael Kelley <mhklinux@outlook.com>, Thomas Gleixner <tglx@linutronix.de>, 
- Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
+ Easwar Hariharan <eahariha@linux.microsoft.com>
 X-Mailer: b4 0.14.2
 
-secs_to_jiffies() is defined in hci_event.c and cannot be reused by
-other call sites. Hoist it into the core code to allow conversion of the
-~1150 usages of msecs_to_jiffies() that either:
+Changes made with the following Coccinelle rules:
 
- - use a multiplier value of 1000 or equivalently MSEC_PER_SEC, or
- - have timeouts that are denominated in seconds (i.e. end in 000)
+@@ constant C; @@
 
-It's implemented as a macro to allow usage in static initializers.
+- msecs_to_jiffies(C * 1000)
++ secs_to_jiffies(C)
 
-This will also allow conversion of yet more sites that use (sec * HZ)
-directly, and improve their readability.
+@@ constant C; @@
 
-Suggested-by: Michael Kelley <mhklinux@outlook.com>
+- msecs_to_jiffies(C * MSEC_PER_SEC)
++ secs_to_jiffies(C)
+
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Reviewed-by: Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
-Link: https://lore.kernel.org/all/20241030-open-coded-timeouts-v3-1-9ba123facf88@linux.microsoft.com
 ---
- include/linux/jiffies.h   | 13 +++++++++++++
- net/bluetooth/hci_event.c |  2 --
- 2 files changed, 13 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/linux/jiffies.h b/include/linux/jiffies.h
-index 1220f0fbe5bf9fb6c559b4efd603db3e97db9b65..0a7382753c6b636fe285599953e314fb7479ea01 100644
---- a/include/linux/jiffies.h
-+++ b/include/linux/jiffies.h
-@@ -526,6 +526,19 @@ static __always_inline unsigned long msecs_to_jiffies(const unsigned int m)
- 	}
- }
- 
-+/**
-+ * secs_to_jiffies: - convert seconds to jiffies
-+ * @_secs: time in seconds
-+ *
-+ * Conversion is done by simple multiplication with HZ
-+ *
-+ * secs_to_jiffies() is defined as a macro rather than a static inline
-+ * function so it can be used in static initializers.
-+ *
-+ * Return: jiffies value
-+ */
-+#define secs_to_jiffies(_secs) ((_secs) * HZ)
-+
- extern unsigned long __usecs_to_jiffies(const unsigned int u);
- #if !(USEC_PER_SEC % HZ)
- static inline unsigned long _usecs_to_jiffies(const unsigned int u)
-diff --git a/net/bluetooth/hci_event.c b/net/bluetooth/hci_event.c
-index 0bbad90ddd6f87e87c03859bae48a7901d39b634..7b35c58bbbeb79f2b50a02212771fb283ba5643d 100644
---- a/net/bluetooth/hci_event.c
-+++ b/net/bluetooth/hci_event.c
-@@ -42,8 +42,6 @@
- #define ZERO_KEY "\x00\x00\x00\x00\x00\x00\x00\x00" \
- 		 "\x00\x00\x00\x00\x00\x00\x00\x00"
- 
--#define secs_to_jiffies(_secs) msecs_to_jiffies((_secs) * 1000)
--
- /* Handle HCI Event packets */
- 
- static void *hci_ev_skb_pull(struct hci_dev *hdev, struct sk_buff *skb,
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c b/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
+index 721d633aece9d4c81f0019e4c55884f26ee61c60..0f5a2c885d0ab7029c7248e15d6ea3c31823b782 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
++++ b/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
+@@ -100,7 +100,7 @@ int etnaviv_cmdbuf_init(struct etnaviv_cmdbuf_suballoc *suballoc,
+ 		mutex_unlock(&suballoc->lock);
+ 		ret = wait_event_interruptible_timeout(suballoc->free_event,
+ 						       suballoc->free_space,
+-						       msecs_to_jiffies(10 * 1000));
++						       secs_to_jiffies(10));
+ 		if (!ret) {
+ 			dev_err(suballoc->dev,
+ 				"Timeout waiting for cmdbuf space\n");
 
 -- 
 2.34.1
