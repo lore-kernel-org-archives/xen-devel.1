@@ -4,47 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8943D68BE5
-	for <xen-devel@archiver.kernel.org>; Sat, 16 Nov 2024 10:50:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.838775.1254764 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BFFAD68BE9
+	for <xen-devel@archiver.kernel.org>; Sat, 16 Nov 2024 11:01:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.838796.1254776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tCGNY-0007BN-Rk; Sat, 16 Nov 2024 10:50:12 +0000
+	id 1tCGYN-000151-Te; Sat, 16 Nov 2024 11:01:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 838775.1254764; Sat, 16 Nov 2024 10:50:12 +0000
+Received: by outflank-mailman (output) from mailman id 838796.1254776; Sat, 16 Nov 2024 11:01:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tCGNY-0007BG-Oj; Sat, 16 Nov 2024 10:50:12 +0000
-Received: by outflank-mailman (input) for mailman id 838775;
- Sat, 16 Nov 2024 10:50:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zi9u=SL=csgroup.eu=christophe.leroy@srs-se1.protection.inumbo.net>)
- id 1tCGNX-0007AL-1X
- for xen-devel@lists.xenproject.org; Sat, 16 Nov 2024 10:50:11 +0000
-Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 8b0bce22-a408-11ef-99a3-01e77a169b0f;
- Sat, 16 Nov 2024 11:50:07 +0100 (CET)
-Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4Xr96l4nktz9sSR;
- Sat, 16 Nov 2024 11:26:55 +0100 (CET)
-Received: from pegase2.c-s.fr ([172.26.127.65])
- by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Rix4G3fNzwWP; Sat, 16 Nov 2024 11:26:55 +0100 (CET)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4Xr96l3NDXz9sSL;
- Sat, 16 Nov 2024 11:26:55 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 508DD8B7A0;
- Sat, 16 Nov 2024 11:26:55 +0100 (CET)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id fK7yTXDd_6AZ; Sat, 16 Nov 2024 11:26:55 +0100 (CET)
-Received: from [192.168.232.159] (POS169858.IDSI0.si.c-s.fr [192.168.232.159])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id B911A8B763;
- Sat, 16 Nov 2024 11:26:51 +0100 (CET)
+	id 1tCGYN-00014u-Oh; Sat, 16 Nov 2024 11:01:23 +0000
+Received: by outflank-mailman (input) for mailman id 838796;
+ Sat, 16 Nov 2024 11:01:22 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1tCGYM-000128-Nj
+ for xen-devel@lists.xenproject.org; Sat, 16 Nov 2024 11:01:22 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1tCGYL-0080cm-1R;
+ Sat, 16 Nov 2024 11:01:21 +0000
+Received: from [2a02:8012:3a1:0:dc92:b14d:2764:76ac]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1tCGYL-007xEH-1i;
+ Sat, 16 Nov 2024 11:01:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,135 +41,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b0bce22-a408-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjkzLjE3LjIzNS4xMCIsImhlbG8iOiJwZWdhc2UyLmMtcy5mciJ9
-X-Custom-Transaction: eyJpZCI6IjhiMGJjZTIyLWE0MDgtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxNzU0MjA3LjI0NTE5NSwic2VuZGVyIjoiY2hyaXN0b3BoZS5sZXJveUBjc2dyb3VwLmV1IiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
-X-Virus-Scanned: amavisd-new at c-s.fr
-X-Virus-Scanned: amavisd-new at c-s.fr
-Message-ID: <e0d15960-4fb9-4458-b080-89791d2f5d2a@csgroup.eu>
-Date: Sat, 16 Nov 2024 11:26:51 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=AGKFih8c648I8YMEXe0w+lnDdKx8anJr1brQWuQONYU=; b=sEylcHHLqi+JSrsg7R9PxkQLQg
+	8d5bl0eB2PmdreHWPtvZKu31oWPxrmHdlJ+N42088cP35jCfyl9FtOfkJ75gmrpB8BQJ0YrnYxS9v
+	1488QfFDbnXmrFiDYt5gi2q+R2BshZfTy6ffFT3wg9CCIfiFYEavwPbpBtja7lTW/Nr8=;
+Message-ID: <f583e39d-8da4-4cb3-a698-3d982843eafe@xen.org>
+Date: Sat, 16 Nov 2024 11:01:20 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/21] arm: pxa: Convert timeouts to use
- secs_to_jiffies()
-To: Easwar Hariharan <eahariha@linux.microsoft.com>,
- Pablo Neira Ayuso <pablo@netfilter.org>,
- Jozsef Kadlecsik <kadlec@netfilter.org>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Julia Lawall <Julia.Lawall@inria.fr>,
- Nicolas Palix <nicolas.palix@imag.fr>, Daniel Mack <daniel@zonque.org>,
- Haojian Zhuang <haojian.zhuang@gmail.com>,
- Robert Jarzmik <robert.jarzmik@free.fr>, Russell King
- <linux@armlinux.org.uk>, Heiko Carstens <hca@linux.ibm.com>,
- Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev
- <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>,
- Sven Schnelle <svens@linux.ibm.com>, Ofir Bitton <obitton@habana.ai>,
- Oded Gabbay <ogabbay@kernel.org>, Lucas De Marchi
- <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Jeroen de Borst <jeroendb@google.com>,
- Praveen Kaligineedi <pkaligineedi@google.com>,
- Shailend Chand <shailend@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
- James Smart <james.smart@broadcom.com>,
- Dick Kennedy <dick.kennedy@broadcom.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Jens Axboe <axboe@kernel.dk>, Kalle Valo <kvalo@kernel.org>,
- Jeff Johnson <jjohnson@kernel.org>, Catalin Marinas
- <catalin.marinas@arm.com>, Andrew Morton <akpm@linux-foundation.org>,
- Jack Wang <jinpu.wang@cloud.ionos.com>, Marcel Holtmann
- <marcel@holtmann.org>, Johan Hedberg <johan.hedberg@gmail.com>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui
- <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Xiubo Li <xiubli@redhat.com>,
- Ilya Dryomov <idryomov@gmail.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- Jiri Kosina <jikos@kernel.org>, Miroslav Benes <mbenes@suse.cz>,
- Petr Mladek <pmladek@suse.com>, Joe Lawrence <joe.lawrence@redhat.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Louis Peens <louis.peens@corigine.com>, Michael Ellerman
- <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Naveen N Rao <naveen@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>
-Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org, cocci@inria.fr,
- linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org,
- dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-block@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, linux-mm@kvack.org,
- linux-bluetooth@vger.kernel.org, linux-staging@lists.linux.dev,
- linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
- live-patching@vger.kernel.org, linux-sound@vger.kernel.org,
- etnaviv@lists.freedesktop.org, oss-drivers@corigine.com,
- linuxppc-dev@lists.ozlabs.org, Anna-Maria Behnsen <anna-maria@linutronix.de>
-References: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
- <20241115-converge-secs-to-jiffies-v2-3-911fb7595e79@linux.microsoft.com>
-Content-Language: fr-FR
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-In-Reply-To: <20241115-converge-secs-to-jiffies-v2-3-911fb7595e79@linux.microsoft.com>
+Subject: Re: [PATCH 2/6] xen: add bitmap to indicate per-domain state changes
+Content-Language: en-GB
+To: Jan Beulich <jbeulich@suse.com>, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
+ <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20241023131005.32144-1-jgross@suse.com>
+ <20241023131005.32144-3-jgross@suse.com>
+ <6823a222-63ad-4a5a-83d2-70c6f39f38c0@suse.com>
+ <fadbb6da-a314-4f1b-8a59-92c1c201dd09@suse.com>
+ <7b4015a0-9d02-40a9-9919-10e7bdd73291@suse.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <7b4015a0-9d02-40a9-9919-10e7bdd73291@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
+Hi Jan & Juergen,
 
+On 04/11/2024 09:35, Jan Beulich wrote:
+> On 01.11.2024 07:48, Jürgen Groß wrote:
+>> On 31.10.24 11:59, Jan Beulich wrote:
+>>> On 23.10.2024 15:10, Juergen Gross wrote:
+>>>> Add a bitmap with one bit per possible domid indicating the respective
+>>>> domain has changed its state (created, deleted, dying, crashed,
+>>>> shutdown).
+>>>>
+>>>> Registering the VIRQ_DOM_EXC event will result in setting the bits for
+>>>> all existing domains and resetting all other bits.
+>>>
+>>> That's furthering the "there can be only one consumer" model that also
+>>> is used for VIRQ_DOM_EXC itself. I consider the existing model flawed
+>>> (nothing keeps a 2nd party with sufficient privilege from invoking
+>>> XEN_DOMCTL_set_virq_handler a 2nd time, taking away the notification
+>>> from whoever had first requested it), and hence I dislike this being
+>>> extended. Conceivably multiple parties may indeed be interested in
+>>> this kind of information. At which point resetting state when the vIRQ
+>>> is bound is questionable (or the data would need to become per-domain
+>>> rather than global, or even yet more fine-grained, albeit
+>>> ->virq_to_evtchn[] is also per-domain, when considering global vIRQ-s).
+>>
+>> The bitmap is directly tied to the VIRQ_DOM_EXC anyway, as it is that
+>> event which makes the consumer look into the bitmap via the new hypercall.
+>>
+>> If we decide to allow multiple consumers of VIRQ_DOM_EXC, we'll need to
+>> have one bitmap per consumer of the event. This is not very hard to
+>> modify.
 
-Le 15/11/2024 à 22:26, Easwar Hariharan a écrit :
-> [Vous ne recevez pas souvent de courriers de eahariha@linux.microsoft.com. Découvrez pourquoi ceci est important à https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> Changes made with the following Coccinelle rules:
-> 
-> @@ constant C; @@
-> 
-> - msecs_to_jiffies(C * 1000)
-> + secs_to_jiffies(C)
-> 
-> @@ constant C; @@
-> 
-> - msecs_to_jiffies(C * MSEC_PER_SEC)
-> + secs_to_jiffies(C)
-> 
-> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
-> ---
->   arch/arm/mach-pxa/sharpsl_pm.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/arch/arm/mach-pxa/sharpsl_pm.c b/arch/arm/mach-pxa/sharpsl_pm.c
-> index 72fa2e3fd35318e5a63c121ed7990a56a56b134c..bbbd06bc79bbb94fb258562e5a382acaf3c277b3 100644
-> --- a/arch/arm/mach-pxa/sharpsl_pm.c
-> +++ b/arch/arm/mach-pxa/sharpsl_pm.c
-> @@ -31,9 +31,9 @@
->   /*
->    * Constants
->    */
-> -#define SHARPSL_CHARGE_ON_TIME_INTERVAL        (msecs_to_jiffies(1*60*1000))  /* 1 min */
-> -#define SHARPSL_CHARGE_FINISH_TIME             (msecs_to_jiffies(10*60*1000)) /* 10 min */
-> -#define SHARPSL_BATCHK_TIME                    (msecs_to_jiffies(15*1000))    /* 15 sec */
-> +#define SHARPSL_CHARGE_ON_TIME_INTERVAL        (secs_to_jiffies(60))  /* 1 min */
-> +#define SHARPSL_CHARGE_FINISH_TIME             (secs_to_jiffies(10*60)) /* 10 min */
-> +#define SHARPSL_BATCHK_TIME                    (secs_to_jiffies(15))    /* 15 sec */
+While in principle I agree that having multiple consumers of 
+VIRQ_DOM_EXC would be great. I have some scalability concern because now 
+we would end up to have to update N bitmap every time. So we would need 
+to put a limit to N. I don't think there is a good limit...
 
-This comment is completely useless now.
+So overall, I am not entirely convinced it is worth the trouble.
 
-The other ones are probably also kind of useless, everybody knows 1 min 
-= 60 sec. See https://docs.kernel.org/process/coding-style.html#commenting
+Cheers,
 
-
-
->   #define SHARPSL_BATCHK_TIME_SUSPEND            (60*10)                        /* 10 min */
-> 
->   #define SHARPSL_WAIT_CO_TIME                   15  /* 15 sec */
-> 
-> --
-> 2.34.1
-> 
+-- 
+Julien Grall
 
