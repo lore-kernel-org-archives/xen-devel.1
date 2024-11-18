@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3098D43FF1
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Nov 2024 08:49:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.839117.1254936 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8E3AD43FEF
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Nov 2024 08:49:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.839115.1254923 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tCxRx-0005XH-TX; Mon, 18 Nov 2024 08:49:37 +0000
+	id 1tCxRx-0005H2-8H; Mon, 18 Nov 2024 08:49:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 839117.1254936; Mon, 18 Nov 2024 08:49:37 +0000
+Received: by outflank-mailman (output) from mailman id 839115.1254923; Mon, 18 Nov 2024 08:49:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tCxRx-0005VK-N5; Mon, 18 Nov 2024 08:49:37 +0000
-Received: by outflank-mailman (input) for mailman id 839117;
- Mon, 18 Nov 2024 08:49:36 +0000
+	id 1tCxRx-0005FZ-0T; Mon, 18 Nov 2024 08:49:37 +0000
+Received: by outflank-mailman (input) for mailman id 839115;
+ Mon, 18 Nov 2024 08:49:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Wasq=SN=bounce.vates.tech=bounce-md_30504962.673aff99.v1-b69a6f8cf02f44949a0860350e2ff77a@srs-se1.protection.inumbo.net>)
- id 1tCxRw-0005D3-Nn
- for xen-devel@lists.xenproject.org; Mon, 18 Nov 2024 08:49:36 +0000
-Received: from mail136-26.atl41.mandrillapp.com
- (mail136-26.atl41.mandrillapp.com [198.2.136.26])
+ <SRS0=cNZr=SN=bounce.vates.tech=bounce-md_30504962.673aff99.v1-5969053c717d4bfb859f5f7a4154c65f@srs-se1.protection.inumbo.net>)
+ id 1tCxRv-0005D3-2Z
+ for xen-devel@lists.xenproject.org; Mon, 18 Nov 2024 08:49:35 +0000
+Received: from mail180-8.suw31.mandrillapp.com
+ (mail180-8.suw31.mandrillapp.com [198.2.180.8])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 063fdedf-a58a-11ef-99a3-01e77a169b0f;
+ id 061e5204-a58a-11ef-99a3-01e77a169b0f;
  Mon, 18 Nov 2024 09:49:30 +0100 (CET)
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-26.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4XsLsP1tG0zJKF3ZY
+Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail180-8.suw31.mandrillapp.com (Mailchimp) with ESMTP id 4XsLsP1JPtz3sNTdQ
  for <xen-devel@lists.xenproject.org>; Mon, 18 Nov 2024 08:49:29 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- b69a6f8cf02f44949a0860350e2ff77a; Mon, 18 Nov 2024 08:49:29 +0000
+ 5969053c717d4bfb859f5f7a4154c65f; Mon, 18 Nov 2024 08:49:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,46 +44,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 063fdedf-a58a-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5OC4yLjEzNi4yNiIsImhlbG8iOiJtYWlsMTM2LTI2LmF0bDQxLm1hbmRyaWxsYXBwLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjA2M2ZkZWRmLWE1OGEtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxOTE5NzcxLjA3NzE4LCJzZW5kZXIiOiJib3VuY2UtbWRfMzA1MDQ5NjIuNjczYWZmOTkudjEtYjY5YTZmOGNmMDJmNDQ5NDlhMDg2MDM1MGUyZmY3N2FAYm91bmNlLnZhdGVzLnRlY2giLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 061e5204-a58a-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5OC4yLjE4MC44IiwiaGVsbyI6Im1haWwxODAtOC5zdXczMS5tYW5kcmlsbGFwcC5jb20ifQ==
+X-Custom-Transaction: eyJpZCI6IjA2MWU1MjA0LWE1OGEtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxOTE5NzcwLjc0ODE5Niwic2VuZGVyIjoiYm91bmNlLW1kXzMwNTA0OTYyLjY3M2FmZjk5LnYxLTU5NjkwNTNjNzE3ZDRiZmI4NTlmNWY3YTQxNTRjNjVmQGJvdW5jZS52YXRlcy50ZWNoIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
 	s=mte1; t=1731919769; x=1732180269;
-	bh=r0skW4u++Ca1L9bVDD6J0qBy4MGffGcnZfM3V9qqDH4=;
+	bh=OHbPZUdflYInf3pACcvlIdJaYJKwR1NVIIEYSmzoDXE=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=CUSe+Ir4k3tMdpAj/Dd/Rbeja0nVh2sGHOLkPgH0I6pObb/A2ojIVqpI155JNEJTN
-	 mu9kMzEHdWGdxgy7vhEHQdoM8XK0pvqKw/dvWDvmhiB+ke4cmT7cBtwYEBBeG6jL+9
-	 hnsQyXfjzwsx1oy2ZpI5Ywx21CKQfYS+JciuVP3DetsCiz6BBlNxOBRsLm+/DoECri
-	 rvZgw4bmGQuARrTy5TN3G/PdjMNJs44ljPN20UcIPgtdIbhDGRBFRMWpjyCWrOdkvb
-	 cn5Wrno7RFSCYaTrYb6WUrydRvQClvcwctR6Olh7tm1eP2MA+1ovCdsPG3SYtGuc2q
-	 mVlvtwq1h7yog==
+	b=IkMzdBlK5IyGcizR/Wre563ZV3WIhZujNCHxh5ZW+zM4psW0C5Gxb0Wd4N0tGhPy1
+	 oE9JzC9y/F/5FUxS1Kj1E4OwNWMvn7MzYpJBfTdmloLJtpah9bIMVps/B/91jxZiPj
+	 nItJp68f3bFyx4Rzo7jv3sOjV1WggGueqrrBm7yTDBt4Fkri05y6kDU/tlIYIeeoVa
+	 a+5ofvkvbJWrnCtC9b9tZXOmO+sMKEdF2hb60lJZpV4h1a52XYq+uxmROTd9541PWj
+	 S2hn3+6U7AAbisGtcVLJNX65Uy41UBx01jFzgw2M8qESTDzaATIMYlixUa9C/eRF6X
+	 SlRRoLTiXGnCA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
 	t=1731919769; x=1732180269; i=ngoc-tu.dinh@vates.tech;
-	bh=r0skW4u++Ca1L9bVDD6J0qBy4MGffGcnZfM3V9qqDH4=;
+	bh=OHbPZUdflYInf3pACcvlIdJaYJKwR1NVIIEYSmzoDXE=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=I1Rjv4A+RIHq82t//DCkW/wl3q9n90J8I02rPWxgjhLlT59UALbxKz9A43kr80FA3
-	 Hg0OUCVD9eCSMhwtc0a0MjEHQMfhZG6CQZCPwuYEbEVz7iNljd81OCf6VrQoqzN8LI
-	 06Nla8fgKOgO6aLi2vLdjSv1mTyZlidpU0NMM8pPde1sJFFRAVop22d3jFcxX+bTYI
-	 maEi5WBjZgjhYYgVv0ig2F9rBy+bQT14gSlSFZH3k1cU51m4zLT1HzzQYwnzCz47f1
-	 a0Y/shOW4MrLYai7/Pos21hMaxK8jpmI6xu8fnKzZAi2DEfPSixhRNL2DBb6xcA4wU
-	 UWkAPaImYTWfA==
+	b=0q5lwBBXvABTG7aqF6HlA5nNdc7EXhJF+ILJay9j09VfEXZLTidj2SCqsMOwkyRtO
+	 GeZe2A1c90XGuPy0mSpMTF/SzOiZ8dl9TrmrNiNiKRYNnqPRmlhLO5vJvhNEDjWQCb
+	 0L08ZQzY+2wsPxg4QbwtNiIuMcWVPFVAd4yblizRbD0jlQpajj/SYEwMnS8Lor2uN1
+	 +BhGqXqVtjcaF+vdYd9OuoWUwTWPDgSxPjDoogU1J5swfUbmWn3Z51t7D8sBmBI+4T
+	 p8sg3qVjOFZpENO8QAR4zRBBqb7rfVNLQbcSu6vPAJF247yBgnlDM9JnC73jHS2YlF
+	 cU0mYKSAJcX+A==
 From: ngoc-tu.dinh@vates.tech
-Subject: =?utf-8?Q?[PATCH=201/4]=20x86:=20Add=20Intel=20architectural=20LBR=20featureset=20bits?=
+Subject: =?utf-8?Q?[PATCH=202/4]=20x86:=20Add=20architectural=20LBR=20declarations?=
 X-Mailer: git-send-email 2.43.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1731919768581
+X-Bm-Transport-Timestamp: 1731919768728
 To: xen-devel@lists.xenproject.org
 Cc: "Tu Dinh" <ngoc-tu.dinh@vates.tech>
-Message-Id: <20241118084914.22268-2-ngoc-tu.dinh@vates.tech>
+Message-Id: <20241118084914.22268-3-ngoc-tu.dinh@vates.tech>
 In-Reply-To: <20241118084914.22268-1-ngoc-tu.dinh@vates.tech>
 References: <20241118084914.22268-1-ngoc-tu.dinh@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.b69a6f8cf02f44949a0860350e2ff77a?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.5969053c717d4bfb859f5f7a4154c65f?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20241118:md
 Date: Mon, 18 Nov 2024 08:49:29 +0000
@@ -94,220 +93,33 @@ Content-Transfer-Encoding: 7bit
 
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 
-Expose ARCH_LBR feature to guests.
-
-Extend CPU featureset with 3 words for CPUID leaf 0x1c.
-
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
 ---
- tools/libs/guest/xg_cpuid_x86.c             |  2 +-
- tools/misc/xen-cpuid.c                      |  3 ++
- xen/arch/x86/cpu-policy.c                   |  3 ++
- xen/arch/x86/cpu/common.c                   |  7 ++++
- xen/include/public/arch-x86/cpufeatureset.h | 28 ++++++++++++++-
- xen/include/xen/lib/x86/cpu-policy.h        | 38 ++++++++++++++++++++-
- xen/lib/x86/cpuid.c                         |  6 ++++
- 7 files changed, 84 insertions(+), 3 deletions(-)
+ xen/arch/x86/include/asm/msr-index.h | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
-index 4453178100..64d9baa538 100644
---- a/tools/libs/guest/xg_cpuid_x86.c
-+++ b/tools/libs/guest/xg_cpuid_x86.c
-@@ -656,7 +656,7 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
-             p->policy.feat.mpx = test_bit(X86_FEATURE_MPX, host_featureset);
-         }
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index 9cdb5b2625..867deab3c6 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -304,6 +304,17 @@
+ #define MSR_IA32_LASTINTFROMIP		0x000001dd
+ #define MSR_IA32_LASTINTTOIP		0x000001de
  
--        p->policy.basic.max_leaf = min(p->policy.basic.max_leaf, 0xdu);
-+        p->policy.basic.max_leaf = min(p->policy.basic.max_leaf, 0x1cu);
-         p->policy.feat.max_subleaf = 0;
-         p->policy.extd.max_leaf = min(p->policy.extd.max_leaf, 0x8000001c);
-     }
-diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
-index 4c4593528d..4f0fb0a6ea 100644
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -37,6 +37,9 @@ static const struct {
-     { "CPUID 0x00000007:1.edx",     "7d1" },
-     { "MSR_ARCH_CAPS.lo",         "m10Al" },
-     { "MSR_ARCH_CAPS.hi",         "m10Ah" },
-+    { "CPUID 0x0000001c.eax",       "1Ca" },
-+    { "CPUID 0x0000001c.ebx",       "1Cb" },
-+    { "CPUID 0x0000001c.ecx",       "1Cc" },
- };
- 
- #define COL_ALIGN "24"
-diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
-index 78bc9872b0..cf6b212fb6 100644
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -271,6 +271,8 @@ static void recalculate_misc(struct cpu_policy *p)
- 
-     p->basic.raw[0xc] = EMPTY_LEAF;
- 
-+    zero_leaves(p->basic.raw, 0xe, 0x1b);
++/* Architectural LBR state MSRs */
++#define MSR_IA32_LASTBRANCH_CTL		0x000014ce
++#define  LASTBRANCH_CTL_LBREN		(1<<0) /* Enable LBR recording */
++#define  LASTBRANCH_CTL_VALID		_AC(0x7f000f, ULL)
++#define MSR_IA32_LASTBRANCH_DEPTH	0x000014cf
++#define MSR_IA32_LER_INFO		0x000001e0
++#define MSR_IA32_LASTBRANCH_0_INFO	0x00001200
++#define MSR_IA32_LASTBRANCH_0_FROM_IP	0x00001500
++#define MSR_IA32_LASTBRANCH_0_TO_IP	0x00001600
++#define MAX_MSR_ARCH_LASTBRANCH_FROM_TO	64
 +
-     p->extd.e1d &= ~CPUID_COMMON_1D_FEATURES;
+ #define MSR_IA32_POWER_CTL		0x000001fc
  
-     /* Most of Power/RAS hidden from guests. */
-@@ -303,6 +305,7 @@ static void recalculate_misc(struct cpu_policy *p)
-         zero_leaves(p->basic.raw, 0x2, 0x3);
-         memset(p->cache.raw, 0, sizeof(p->cache.raw));
-         zero_leaves(p->basic.raw, 0x9, 0xa);
-+        p->basic.raw[0x1c] = EMPTY_LEAF;
- 
-         p->extd.vendor_ebx = p->basic.vendor_ebx;
-         p->extd.vendor_ecx = p->basic.vendor_ecx;
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 067d855bad..4c8eb188e9 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -505,6 +505,13 @@ static void generic_identify(struct cpuinfo_x86 *c)
- 			    &c->x86_capability[FEATURESET_Da1],
- 			    &tmp, &tmp, &tmp);
- 
-+	if (c->cpuid_level >= 0x1c)
-+		cpuid(0x1c,
-+			  &c->x86_capability[FEATURESET_1Ca],
-+			  &c->x86_capability[FEATURESET_1Cb],
-+			  &c->x86_capability[FEATURESET_1Cc],
-+			  &tmp);
-+
- 	if (test_bit(X86_FEATURE_ARCH_CAPS, c->x86_capability))
- 		rdmsr(MSR_ARCH_CAPABILITIES,
- 		      c->x86_capability[FEATURESET_m10Al],
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index 8fa3fb711a..9304856fba 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -284,7 +284,7 @@ XEN_CPUFEATURE(SERIALIZE,     9*32+14) /*A  SERIALIZE insn */
- XEN_CPUFEATURE(HYBRID,        9*32+15) /*   Heterogeneous platform */
- XEN_CPUFEATURE(TSXLDTRK,      9*32+16) /*a  TSX load tracking suspend/resume insns */
- XEN_CPUFEATURE(PCONFIG,       9*32+18) /*   PCONFIG instruction */
--XEN_CPUFEATURE(ARCH_LBR,      9*32+19) /*   Architectural Last Branch Record */
-+XEN_CPUFEATURE(ARCH_LBR,      9*32+19) /*S  Architectural Last Branch Record */
- XEN_CPUFEATURE(CET_IBT,       9*32+20) /*   CET - Indirect Branch Tracking */
- XEN_CPUFEATURE(AMX_BF16,      9*32+22) /*   AMX BFloat16 instruction */
- XEN_CPUFEATURE(AVX512_FP16,   9*32+23) /*A  AVX512 FP16 instructions */
-@@ -379,6 +379,32 @@ XEN_CPUFEATURE(RFDS_CLEAR,         16*32+28) /*!A| Register File(s) cleared by V
- 
- /* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.edx, word 17 */
- 
-+/* Intel-defined CPU features, CPUID level 0x0000001c.eax, word 18 */
-+XEN_CPUFEATURE(LBR_DEPTH_8,        18*32+ 0) /*S  Depth 8 */
-+XEN_CPUFEATURE(LBR_DEPTH_16,       18*32+ 1) /*S  Depth 16 */
-+XEN_CPUFEATURE(LBR_DEPTH_24,       18*32+ 2) /*S  Depth 24 */
-+XEN_CPUFEATURE(LBR_DEPTH_32,       18*32+ 3) /*S  Depth 32 */
-+XEN_CPUFEATURE(LBR_DEPTH_40,       18*32+ 4) /*S  Depth 40 */
-+XEN_CPUFEATURE(LBR_DEPTH_48,       18*32+ 5) /*S  Depth 48 */
-+XEN_CPUFEATURE(LBR_DEPTH_56,       18*32+ 6) /*S  Depth 56 */
-+XEN_CPUFEATURE(LBR_DEPTH_64,       18*32+ 7) /*S  Depth 64 */
-+XEN_CPUFEATURE(LBR_DCST_RST,       18*32+30) /*S  Deep C-state reset */
-+XEN_CPUFEATURE(LBR_LIP,            18*32+31) /*S  IP is linear IP */
-+
-+/* Intel-defined CPU features, CPUID level 0x0000001c.ebx, word 19 */
-+XEN_CPUFEATURE(LBR_CPL_FILTER,      19*32+ 0) /*S  CPL filtering */
-+XEN_CPUFEATURE(LBR_BR_FILTER,       19*32+ 1) /*S  Branch filtering */
-+XEN_CPUFEATURE(LBR_CALL_STACK_MODE, 19*32+ 2) /*S  Call stack mode */
-+
-+/* Intel-defined CPU features, CPUID level 0x0000001c.ecx, word 20 */
-+XEN_CPUFEATURE(LBR_MISPRED,        20*32+ 0) /*S  Mispredict mode */
-+XEN_CPUFEATURE(LBR_TIMED,          20*32+ 1) /*S  Timed mode */
-+XEN_CPUFEATURE(LBR_BR_TYPE,        20*32+ 2) /*S  Branch type */
-+XEN_CPUFEATURE(LBR_EVT_FMT0,       20*32+16) /*!S Event type format bit 0 */
-+XEN_CPUFEATURE(LBR_EVT_FMT1,       20*32+17) /*!S Event type format bit 1 */
-+XEN_CPUFEATURE(LBR_EVT_FMT2,       20*32+18) /*!S Event type format bit 2 */
-+XEN_CPUFEATURE(LBR_EVT_FMT3,       20*32+19) /*!S Event type format bit 3 */
-+
- #endif /* XEN_CPUFEATURE */
- 
- /* Clean up from a default include.  Close the enum (for C). */
-diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
-index f43e1a3b21..afd66b4158 100644
---- a/xen/include/xen/lib/x86/cpu-policy.h
-+++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -22,6 +22,9 @@
- #define FEATURESET_7d1       15 /* 0x00000007:1.edx    */
- #define FEATURESET_m10Al     16 /* 0x0000010a.eax      */
- #define FEATURESET_m10Ah     17 /* 0x0000010a.edx      */
-+#define FEATURESET_1Ca       18 /* 0x0000001c.eax      */
-+#define FEATURESET_1Cb       19 /* 0x0000001c.ebx      */
-+#define FEATURESET_1Cc       20 /* 0x0000001c.ecx      */
- 
- struct cpuid_leaf
- {
-@@ -85,7 +88,7 @@ unsigned int x86_cpuid_lookup_vendor(uint32_t ebx, uint32_t ecx, uint32_t edx);
-  */
- const char *x86_cpuid_vendor_to_str(unsigned int vendor);
- 
--#define CPUID_GUEST_NR_BASIC      (0xdu + 1)
-+#define CPUID_GUEST_NR_BASIC      (0x1cu + 1)
- #define CPUID_GUEST_NR_CACHE      (5u + 1)
- #define CPUID_GUEST_NR_FEAT       (2u + 1)
- #define CPUID_GUEST_NR_TOPO       (1u + 1)
-@@ -158,6 +161,39 @@ struct cpu_policy
-             uint64_t :64, :64; /* Leaf 0xb - Topology. */
-             uint64_t :64, :64; /* Leaf 0xc - rsvd */
-             uint64_t :64, :64; /* Leaf 0xd - XSTATE. */
-+
-+            uint64_t :64, :64; /* Leaf 0xe - rsvd */
-+            uint64_t :64, :64; /* Leaf 0xf - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x10 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x11 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x12 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x13 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x14 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x15 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x16 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x17 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x18 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x19 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x1a - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x1b - rsvd */
-+
-+            union {
-+                uint32_t _1Ca;
-+                struct {
-+                    uint32_t supported_depths:8;
-+                    uint32_t :22;
-+                    uint32_t deep_cstate_reset:1;
-+                    uint32_t ip_contains_lip:1;
-+                };
-+            };
-+            union {
-+                uint32_t _1Cb;
-+                struct { DECL_BITFIELD(1Cb); };
-+            };
-+            union {
-+                uint32_t _1Cc;
-+                struct { DECL_BITFIELD(1Cc); };
-+            };
-         };
-     } basic;
- 
-diff --git a/xen/lib/x86/cpuid.c b/xen/lib/x86/cpuid.c
-index eb7698dc73..4d19349b17 100644
---- a/xen/lib/x86/cpuid.c
-+++ b/xen/lib/x86/cpuid.c
-@@ -81,6 +81,9 @@ void x86_cpu_policy_to_featureset(
-     fs[FEATURESET_7d1]       = p->feat._7d1;
-     fs[FEATURESET_m10Al]     = p->arch_caps.lo;
-     fs[FEATURESET_m10Ah]     = p->arch_caps.hi;
-+    fs[FEATURESET_1Ca]       = p->basic._1Ca;
-+    fs[FEATURESET_1Cb]       = p->basic._1Cb;
-+    fs[FEATURESET_1Cc]       = p->basic._1Cc;
- }
- 
- void x86_cpu_featureset_to_policy(
-@@ -104,6 +107,9 @@ void x86_cpu_featureset_to_policy(
-     p->feat._7d1             = fs[FEATURESET_7d1];
-     p->arch_caps.lo          = fs[FEATURESET_m10Al];
-     p->arch_caps.hi          = fs[FEATURESET_m10Ah];
-+    p->basic._1Ca            = fs[FEATURESET_1Ca];
-+    p->basic._1Cb            = fs[FEATURESET_1Cb];
-+    p->basic._1Cc            = fs[FEATURESET_1Cc];
- }
- 
- void x86_cpu_policy_recalc_synth(struct cpu_policy *p)
+ #define MSR_IA32_MTRR_PHYSBASE(n)   (0x00000200 + 2 * (n))
 -- 
 2.43.0
 
