@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8E3AD43FEF
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Nov 2024 08:49:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.839115.1254923 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B84B9D43FEF
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Nov 2024 08:53:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.839154.1254966 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tCxRx-0005H2-8H; Mon, 18 Nov 2024 08:49:37 +0000
+	id 1tCxV1-0005QN-Lm; Mon, 18 Nov 2024 08:52:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 839115.1254923; Mon, 18 Nov 2024 08:49:37 +0000
+Received: by outflank-mailman (output) from mailman id 839154.1254966; Mon, 18 Nov 2024 08:52:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tCxRx-0005FZ-0T; Mon, 18 Nov 2024 08:49:37 +0000
-Received: by outflank-mailman (input) for mailman id 839115;
- Mon, 18 Nov 2024 08:49:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cNZr=SN=bounce.vates.tech=bounce-md_30504962.673aff99.v1-5969053c717d4bfb859f5f7a4154c65f@srs-se1.protection.inumbo.net>)
- id 1tCxRv-0005D3-2Z
- for xen-devel@lists.xenproject.org; Mon, 18 Nov 2024 08:49:35 +0000
-Received: from mail180-8.suw31.mandrillapp.com
- (mail180-8.suw31.mandrillapp.com [198.2.180.8])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 061e5204-a58a-11ef-99a3-01e77a169b0f;
- Mon, 18 Nov 2024 09:49:30 +0100 (CET)
-Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail180-8.suw31.mandrillapp.com (Mailchimp) with ESMTP id 4XsLsP1JPtz3sNTdQ
- for <xen-devel@lists.xenproject.org>; Mon, 18 Nov 2024 08:49:29 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 5969053c717d4bfb859f5f7a4154c65f; Mon, 18 Nov 2024 08:49:29 +0000
+	id 1tCxV1-0005QG-Iu; Mon, 18 Nov 2024 08:52:47 +0000
+Received: by outflank-mailman (input) for mailman id 839154;
+ Mon, 18 Nov 2024 08:52:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=i7IS=SN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tCxV0-0005QA-KD
+ for xen-devel@lists.xenproject.org; Mon, 18 Nov 2024 08:52:46 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 798455cb-a58a-11ef-a0c8-8be0dac302b0;
+ Mon, 18 Nov 2024 09:52:43 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-432d9bb168cso21812825e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Nov 2024 00:52:43 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432da265f28sm152169985e9.17.2024.11.18.00.52.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Nov 2024 00:52:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,90 +47,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 061e5204-a58a-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5OC4yLjE4MC44IiwiaGVsbyI6Im1haWwxODAtOC5zdXczMS5tYW5kcmlsbGFwcC5jb20ifQ==
-X-Custom-Transaction: eyJpZCI6IjA2MWU1MjA0LWE1OGEtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMxOTE5NzcwLjc0ODE5Niwic2VuZGVyIjoiYm91bmNlLW1kXzMwNTA0OTYyLjY3M2FmZjk5LnYxLTU5NjkwNTNjNzE3ZDRiZmI4NTlmNWY3YTQxNTRjNjVmQGJvdW5jZS52YXRlcy50ZWNoIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1731919769; x=1732180269;
-	bh=OHbPZUdflYInf3pACcvlIdJaYJKwR1NVIIEYSmzoDXE=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=IkMzdBlK5IyGcizR/Wre563ZV3WIhZujNCHxh5ZW+zM4psW0C5Gxb0Wd4N0tGhPy1
-	 oE9JzC9y/F/5FUxS1Kj1E4OwNWMvn7MzYpJBfTdmloLJtpah9bIMVps/B/91jxZiPj
-	 nItJp68f3bFyx4Rzo7jv3sOjV1WggGueqrrBm7yTDBt4Fkri05y6kDU/tlIYIeeoVa
-	 a+5ofvkvbJWrnCtC9b9tZXOmO+sMKEdF2hb60lJZpV4h1a52XYq+uxmROTd9541PWj
-	 S2hn3+6U7AAbisGtcVLJNX65Uy41UBx01jFzgw2M8qESTDzaATIMYlixUa9C/eRF6X
-	 SlRRoLTiXGnCA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1731919769; x=1732180269; i=ngoc-tu.dinh@vates.tech;
-	bh=OHbPZUdflYInf3pACcvlIdJaYJKwR1NVIIEYSmzoDXE=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=0q5lwBBXvABTG7aqF6HlA5nNdc7EXhJF+ILJay9j09VfEXZLTidj2SCqsMOwkyRtO
-	 GeZe2A1c90XGuPy0mSpMTF/SzOiZ8dl9TrmrNiNiKRYNnqPRmlhLO5vJvhNEDjWQCb
-	 0L08ZQzY+2wsPxg4QbwtNiIuMcWVPFVAd4yblizRbD0jlQpajj/SYEwMnS8Lor2uN1
-	 +BhGqXqVtjcaF+vdYd9OuoWUwTWPDgSxPjDoogU1J5swfUbmWn3Z51t7D8sBmBI+4T
-	 p8sg3qVjOFZpENO8QAR4zRBBqb7rfVNLQbcSu6vPAJF247yBgnlDM9JnC73jHS2YlF
-	 cU0mYKSAJcX+A==
-From: ngoc-tu.dinh@vates.tech
-Subject: =?utf-8?Q?[PATCH=202/4]=20x86:=20Add=20architectural=20LBR=20declarations?=
-X-Mailer: git-send-email 2.43.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1731919768728
-To: xen-devel@lists.xenproject.org
-Cc: "Tu Dinh" <ngoc-tu.dinh@vates.tech>
-Message-Id: <20241118084914.22268-3-ngoc-tu.dinh@vates.tech>
-In-Reply-To: <20241118084914.22268-1-ngoc-tu.dinh@vates.tech>
-References: <20241118084914.22268-1-ngoc-tu.dinh@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.5969053c717d4bfb859f5f7a4154c65f?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20241118:md
-Date: Mon, 18 Nov 2024 08:49:29 +0000
+X-Inumbo-ID: 798455cb-a58a-11ef-a0c8-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjozMzEiLCJoZWxvIjoibWFpbC13bTEteDMzMS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6Ijc5ODQ1NWNiLWE1OGEtMTFlZi1hMGM4LThiZTBkYWMzMDJiMCIsInRzIjoxNzMxOTE5OTYzLjY0MzM0MSwic2VuZGVyIjoiamJldWxpY2hAc3VzZS5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1731919963; x=1732524763; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=XZk+bWx9T7B8AmhurcwVX9EBFu/eX9nrjXsCVUFCAHE=;
+        b=ShHf3PUTaf7tkkYMMVMi2hv4pHJBSi9KcreMIYRZG2qHAOpz5kChSUlkebUiNY1Wlx
+         D6xcNCLu3QAte0dQO9yK+pBrz5w9Ik0WIBTPm8WwNCfZIYKyvsOB9ydi7fHYT4pSHAdG
+         qEXX08rNvFGeyolYkW3LQ/HfpoStE+QtUBEV/y19jVzroDnIIpWWysKaz1Bvxhtkv48a
+         D+6FQ9HKtHhdORcYiM6T9X+S/MS3HjE5WIkq11oordo7h5sbGOvSMvxt8tc3jMwSy9ov
+         X/lcRh7qaVQlLMDDqfxEfwPjFiGWoyIV9vMtCBOPQwO2TFkSEsdH+3Bi5zeqxThts58S
+         SfHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731919963; x=1732524763;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XZk+bWx9T7B8AmhurcwVX9EBFu/eX9nrjXsCVUFCAHE=;
+        b=nDf1rWCNhvbQiRcNFj8o768asame+813+CIfmEgJiJxCnXjnJb1hDRMNCl4vMibPYz
+         wdPI2jtEtwXuItczNqqfHvfPYI/32YGeKYXxMEwc4AN0YLlJEWqOVvOAF6Kx69rCVVPy
+         lzLeDT1ZtxZqCLxw9Dtp8InNfxW/fUz/tyr3+SBqoFQvZ7au0jZFVqJ7CSFmYNu7VO1z
+         3eRcVrce8QfvRr6O76yWvvAOwVH2eYlIFlQaJP/jzJZMHhq2oOdmvfbAOp4EEsJuNlub
+         1UGFVuZXJBqeM7yklqDl0/w2WKIksGeZi86jisi7J+fMAs54MYFMVT68F0XCCesYrEtO
+         OkkQ==
+X-Gm-Message-State: AOJu0YxbSx5cQ7xyUjSob+kDodnCRnjABqElagm6Azsc5VcBkYPbQCIW
+	2Nmr3YHQitrebHQRtCvFq4mg/8Lx4clcfz9zoN7UHhEsfW0qjLxlt1BqqKj15ssOdoGiUDmwxiw
+	=
+X-Google-Smtp-Source: AGHT+IGi3yH+l3f+ub5Efrvmv61A8KIohaidsHlXvVX2/4BF65KV9UgUmhVTugTF0o9q/F2bObfmTA==
+X-Received: by 2002:a05:600c:1d1d:b0:431:3b80:6ca7 with SMTP id 5b1f17b1804b1-432d9767819mr143916025e9.13.1731919963071;
+        Mon, 18 Nov 2024 00:52:43 -0800 (PST)
+Message-ID: <7706bd63-8f26-4eb8-8dc0-67b302597e3b@suse.com>
+Date: Mon, 18 Nov 2024 09:52:41 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] Virtualize architectural LBRs
+To: ngoc-tu.dinh@vates.tech
+References: <20241118084914.22268-1-ngoc-tu.dinh@vates.tech>
+Content-Language: en-US
+Cc: xen-devel@lists.xenproject.org
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241118084914.22268-1-ngoc-tu.dinh@vates.tech>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+On 18.11.2024 09:49, ngoc-tu.dinh@vates.tech wrote:
+> From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+> 
+> Intel model-specific last branch records (LBRs) were replaced by
+> architectural LBRs (see Chapter 20 of Intel SDM volume 3B). This
+> patchset implements virtual LBRs for HVM guests using Intel's "load
+> guest IA32_LBR_CTL" and "clear IA32_LBR_CTL" VMX controls.
+> 
+> Add the necessary CPUID and VMX feature checks into Xen. Note that in
+> this patchset, MSR_IA32_LASTBRANCH_DEPTH is only allowed to be equal to
+> that of the host's.
+> 
+> Tu Dinh (4):
+>   x86: Add Intel architectural LBR featureset bits
+>   x86: Add architectural LBR declarations
+>   x86: Adjust arch LBR CPU policy
+>   x86/vmx: Virtualize architectural LBRs
+> 
+>  tools/libs/guest/xg_cpuid_x86.c             |   2 +-
+>  tools/misc/xen-cpuid.c                      |   3 +
+>  xen/arch/x86/cpu-policy.c                   |  39 +++
+>  xen/arch/x86/cpu/common.c                   |   7 +
+>  xen/arch/x86/hvm/vmx/vmcs.c                 |  11 +-
+>  xen/arch/x86/hvm/vmx/vmx.c                  | 269 ++++++++++++++------
+>  xen/arch/x86/include/asm/hvm/vmx/vmcs.h     |   8 +
+>  xen/arch/x86/include/asm/msr-index.h        |  11 +
+>  xen/include/public/arch-x86/cpufeatureset.h |  28 +-
+>  xen/include/xen/lib/x86/cpu-policy.h        |  38 ++-
+>  xen/lib/x86/cpuid.c                         |   6 +
+>  11 files changed, 339 insertions(+), 83 deletions(-)
 
-Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
----
- xen/arch/x86/include/asm/msr-index.h | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Looking over just the files touched: No change to XSAVE logic at all?
 
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 9cdb5b2625..867deab3c6 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -304,6 +304,17 @@
- #define MSR_IA32_LASTINTFROMIP		0x000001dd
- #define MSR_IA32_LASTINTTOIP		0x000001de
- 
-+/* Architectural LBR state MSRs */
-+#define MSR_IA32_LASTBRANCH_CTL		0x000014ce
-+#define  LASTBRANCH_CTL_LBREN		(1<<0) /* Enable LBR recording */
-+#define  LASTBRANCH_CTL_VALID		_AC(0x7f000f, ULL)
-+#define MSR_IA32_LASTBRANCH_DEPTH	0x000014cf
-+#define MSR_IA32_LER_INFO		0x000001e0
-+#define MSR_IA32_LASTBRANCH_0_INFO	0x00001200
-+#define MSR_IA32_LASTBRANCH_0_FROM_IP	0x00001500
-+#define MSR_IA32_LASTBRANCH_0_TO_IP	0x00001600
-+#define MAX_MSR_ARCH_LASTBRANCH_FROM_TO	64
-+
- #define MSR_IA32_POWER_CTL		0x000001fc
- 
- #define MSR_IA32_MTRR_PHYSBASE(n)   (0x00000200 + 2 * (n))
--- 
-2.43.0
-
-
-
-Ngoc Tu Dinh | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+Jan
 
