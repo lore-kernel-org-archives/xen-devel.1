@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C154CD44162
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9849AD44161
 	for <xen-devel@archiver.kernel.org>; Tue, 19 Nov 2024 14:13:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.840127.1255958 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.840134.1256006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tDOzA-0000f9-Oa; Tue, 19 Nov 2024 14:13:44 +0000
+	id 1tDOzF-0001qm-LJ; Tue, 19 Nov 2024 14:13:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 840127.1255958; Tue, 19 Nov 2024 14:13:44 +0000
+Received: by outflank-mailman (output) from mailman id 840134.1256006; Tue, 19 Nov 2024 14:13:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tDOzA-0000dq-Fh; Tue, 19 Nov 2024 14:13:44 +0000
-Received: by outflank-mailman (input) for mailman id 840127;
- Tue, 19 Nov 2024 14:13:42 +0000
+	id 1tDOzE-0001ov-V4; Tue, 19 Nov 2024 14:13:48 +0000
+Received: by outflank-mailman (input) for mailman id 840134;
+ Tue, 19 Nov 2024 14:13:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PDt+=SO=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1tDOz8-0007nd-Gi
- for xen-devel@lists.xenproject.org; Tue, 19 Nov 2024 14:13:42 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
+ id 1tDOzD-0007nd-A2
+ for xen-devel@lists.xenproject.org; Tue, 19 Nov 2024 14:13:47 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 79162290-a680-11ef-99a3-01e77a169b0f;
- Tue, 19 Nov 2024 15:13:39 +0100 (CET)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aa4d257eb68so96839966b.0
- for <xen-devel@lists.xenproject.org>; Tue, 19 Nov 2024 06:13:39 -0800 (PST)
+ id 7abe0fae-a680-11ef-99a3-01e77a169b0f;
+ Tue, 19 Nov 2024 15:13:41 +0100 (CET)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a9e8522c10bso883628366b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Nov 2024 06:13:41 -0800 (PST)
 Received: from carlo-ubuntu.home.arpa
  (host-95-230-250-178.business.telecomitalia.it. [95.230.250.178])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df4e7bfsm655228166b.42.2024.11.19.06.13.37
+ a640c23a62f3a-aa20df4e7bfsm655228166b.42.2024.11.19.06.13.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 06:13:37 -0800 (PST)
+ Tue, 19 Nov 2024 06:13:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,300 +48,549 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79162290-a680-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmYiLCJoZWxvIjoibWFpbC1lajEteDYyZi5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6Ijc5MTYyMjkwLWE2ODAtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyMDI1NjE5LjEwNjIzOSwic2VuZGVyIjoiY2FybG8ubm9uYXRvQG1pbmVydmFzeXMudGVjaCIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 7abe0fae-a680-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MmQiLCJoZWxvIjoibWFpbC1lajEteDYyZC5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6IjdhYmUwZmFlLWE2ODAtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyMDI1NjIxLjg5NjI1Miwic2VuZGVyIjoiY2FybG8ubm9uYXRvQG1pbmVydmFzeXMudGVjaCIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1732025618; x=1732630418; darn=lists.xenproject.org;
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1732025621; x=1732630421; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xGl1NPcoKCzlCr5yeY5HUYbNu793pD/X8ieGOenUdQs=;
-        b=F7HlF21GD5WAb9lHwP7IIAK+r7lRl9REDnE7i5susjlG9E8g7qGhF9iaJYe1thgOr7
-         u6RuMVB/pT8vKCVlxIyLMkYMp9wF/MXQHXc9PRYeyitzh6FNII4lO75UO/kzWXeoLmNc
-         LIMAvlLRLVLpOvZSEsXrUg3fUgVLMcwDztIAPPPBYNS8bk8yItX8m/WJtHAJ7mUgzhIt
-         XSPc4B6GQdDS75NKm0KauKK6dEFE/Gf/hSkBdXJcKOjhIgH+1byZf580r7O+uA5ga6eP
-         vjWE4dpIJ8DY/1bBekLUukdumXcyPdh0wNSb4BXZ+aRRFEtutRdWZ/bTDl7Sj9fkbyn5
-         4Jgw==
+        bh=VkAgXKh8Koi8z5n6i/kl9t7Sp2mlO1uEGFbwkt4m0bI=;
+        b=O5pHYf8/Cux4i/d76RnDN7v/5Ql7QW43HWXjJTYpG1I9ULcsggkiJhbgKEnH4RfNAs
+         N9Mv7wGE30tPjgb7LQHcQB33n0AbUz9ytJ/d920f1jJhCorTi9yOU6fFvpes1mrTeGkf
+         extQ5AbtxtfaW0k4gddajGmQ3IkJle8QqJfzV0T+jgM4qYiRQ9ek2NWuk8haqDZLPiqf
+         ktbji1TLQDLKlOKCap1Wf/WxX2eTsAu+1WC1bOP1PqcAppt3FZYwtwzKrHv7QmiGEApJ
+         VmsWtycH9UGq6qlMyVoyy/wFmZmE/ceaAcxg5kVb3mK6NwIQWRNQA+Zx2YxGdK2JlhJs
+         Cq6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732025618; x=1732630418;
+        d=1e100.net; s=20230601; t=1732025621; x=1732630421;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xGl1NPcoKCzlCr5yeY5HUYbNu793pD/X8ieGOenUdQs=;
-        b=GU7xZO6gLA9xH1WRgOtObQ93wfTlnJuhu9BcyxXu7bNrhLgkzYHQW78D6bvY+yVbfZ
-         nAlbwsIHI2Q8hPNA/N7o718s8+/LIijy6VNmu4b+7xQUHUe3Ax7tk1BzVO4PMu36C5gt
-         QWGX4FUv0/qX+a0VOjJ3rCQ6DsYru2Q3ijiJRj2jBXIhXeOLhzK6r4B5x9ObLobdUo4c
-         d3pOq3l2bVvqIga/7hRkx9rp3S/EmSDFlGM2kQjNgVPELToGBPam3DZ8TP0uiVRJO5ml
-         1vkTBEheHD3XO14p/LiNrVqfc0f9uTZCoAdb8w1VKw5alNeXTJ2s/+PiDtxh0HdRsB+G
-         mBbQ==
-X-Gm-Message-State: AOJu0YxmAd41Fn1d7SG3n7TFq6xCeIo4R9zaztmQ+6IyymMa/dUhhCVg
-	QyHTUTADw/jzmqchCzkIrz+6PjPXrZxLU+DG40WHKzUcK4g31JqNVry+215bdNd/36GlY73LYPS
-	U
-X-Google-Smtp-Source: AGHT+IEqDxwaqbb2cYZOH6tuEZ0+kf/vgPj+5cg51RprfpwnY4qM+R+2mRarAD5ntd+Mvea9Ltzw4A==
-X-Received: by 2002:a17:907:1c8d:b0:a99:5587:2a1f with SMTP id a640c23a62f3a-aa4c7e39719mr410109566b.15.1732025618223;
-        Tue, 19 Nov 2024 06:13:38 -0800 (PST)
+        bh=VkAgXKh8Koi8z5n6i/kl9t7Sp2mlO1uEGFbwkt4m0bI=;
+        b=M5qMctarLUwhCBDfnKpOrn4sLYvzwUpQm2EboAHOq37dIpiOB35e5Z02z8UTkSFsH0
+         mE/CFDAWh5Q53yelphWycnowmQ0qDyTX7aVX++VPBSHOm/FuwLTuCpTzWto9a/O+Kj65
+         8hhMh/i9sCFc9hd1nQ6OY4nr1CkYA8unwjSlF2p/RG1Z0JewXr0g+vA32fAufOZE0a72
+         UcpfpvmRP9yQrcVPVwT/3+kcQxbKuv0zbRRL7W6vd3NHjF9CVZp4F7JCCOIq0ErZFeNz
+         ZatroCUX+gCoYW06GpZRvDbfG36wdXxy4XWKYJXMkHxIN828Pnb+ijcuRc4CBgfQX28b
+         6tww==
+X-Gm-Message-State: AOJu0Yxft/1bqumcQPHb7yDS1dLgPHuJPmDgrBAftJ9SdzckPfwYKECG
+	ibKF4Cy2SZ4a1hLMXNcmsYigNjJ0etccl0MOqEIPzpI9fUJxD+c69muZM1GJHJ8FwG8XfUYDAMD
+	a
+X-Google-Smtp-Source: AGHT+IE11x0rEusCWHz6Ptg1lf4VWi8EAPIBSA/VB5+51c7m9FLkGII7BQHg++zMYMeVEgYq+kASJQ==
+X-Received: by 2002:a17:907:3687:b0:a99:f777:c6ef with SMTP id a640c23a62f3a-aa4c7dfd87fmr377303066b.3.1732025621004;
+        Tue, 19 Nov 2024 06:13:41 -0800 (PST)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
 	marco.solieri@minervasys.tech,
 	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v10 06/12] tools: add support for cache coloring configuration
-Date: Tue, 19 Nov 2024 15:13:23 +0100
-Message-ID: <20241119141329.44221-7-carlo.nonato@minervasys.tech>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v10 09/12] xen: add cache coloring allocator for domains
+Date: Tue, 19 Nov 2024 15:13:26 +0100
+Message-ID: <20241119141329.44221-10-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241119141329.44221-1-carlo.nonato@minervasys.tech>
 References: <20241119141329.44221-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new "llc_colors" parameter that defines the LLC color assignment for
-a domain. The user can specify one or more color ranges using the same
-syntax used everywhere else for color config described in the
-documentation.
-The parameter is defined as a list of strings that represent the color
-ranges.
+Add a new memory page allocator that implements the cache coloring mechanism.
+The allocation algorithm enforces equal frequency distribution of cache
+partitions, following the coloring configuration of a domain. This allows
+for an even utilization of cache sets for every domain.
 
-Documentation is also added.
+Pages are stored in a color-indexed array of lists. Those lists are filled
+by a simple init function which computes the color of each page.
+When a domain requests a page, the allocator extracts the page from the list
+with the maximum number of free pages among those that the domain can access,
+given its coloring configuration.
+
+The allocator can only handle requests of order-0 pages. This allows for
+easier implementation and since cache coloring targets only embedded systems,
+it's assumed not to be a major problem.
+
+The buddy allocator must coexist with the colored one because the Xen heap
+isn't colored. For this reason a new Kconfig option and a command line
+parameter are added to let the user set the amount of memory reserved for
+the buddy allocator. Even when cache coloring is enabled, this memory
+isn't managed by the colored allocator.
+
+Colored heap information is dumped in the dump_heap() debug-key function.
 
 Based on original work from: Luca Miccio <lucmiccio@gmail.com>
 
-Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
 Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
 ---
 v10:
-- no changes
+- stated explicit dependency on CONFIG_LLC_COLORING for buddy-alloc-size
+- fix for MISRA rule 20.7 parenthesis
 v9:
-- turned warning into error in case of coloring not enabled
+- added ASSERT(order == 0) when freeing a colored page
+- moved buddy_alloc_size initialization logic in Kconfig
 v8:
-- warn the user in case of coloring not supported at hypervisor level
+- requests that uses MEMF_* flags that can't be served are now going to fail
+- free_color_heap_page() is called directly from free_heap_pages()
 v7:
-- removed unneeded NULL check before xc_hypercall_buffer_free() in
-  xc_domain_set_llc_colors()
+- requests to alloc_color_heap_page() now fail if MEMF_bits is used
 v6:
-- no edits
+- colored allocator functions are now static
 v5:
-- added LIBXL_HAVE_BUILDINFO_LLC_COLORS
-- moved color configuration in xc_domain_set_llc_colors() cause of the new
-  hypercall
+- Carlo Nonato as the new author
+- the colored allocator balances color usage for each domain and it searches
+  linearly only in the number of colors (FIXME removed)
+- addedd scrub functionality
+- removed stub functions (still requires some macro definition)
+- addr_to_color turned to mfn_to_color for easier operations
+- removed BUG_ON in init_color_heap_pages() in favor of panic()
+- only non empty page lists are logged in dump_color_heap()
 v4:
-- removed overlapping color ranges checks during parsing
-- moved hypercall buffer initialization in libxenctrl
+- moved colored allocator code after buddy allocator because it now has
+  some dependencies on buddy functions
+- buddy_alloc_size is now used only by the colored allocator
+- fixed a bug that allowed the buddy to merge pages when they were colored
+- free_color_heap_page() now calls mark_page_free()
+- free_color_heap_page() uses of the frametable array for faster searches
+- added FIXME comment for the linear search in free_color_heap_page()
+- removed alloc_color_domheap_page() to let the colored allocator exploit
+  some more buddy allocator code
+- alloc_color_heap_page() now allocs min address pages first
+- reduced the mess in end_boot_allocator(): use the first loop for
+  init_color_heap_pages()
+- fixed page_list_add_prev() (list.h) since it was doing the opposite of
+  what it was supposed to do
+- fixed page_list_add_prev() (non list.h) to check also for next existence
+- removed unused page_list_add_next()
+- moved p2m code in another patch
 ---
- docs/man/xl.cfg.5.pod.in         |  6 +++++
- tools/include/libxl.h            |  5 +++++
- tools/include/xenctrl.h          |  9 ++++++++
- tools/libs/ctrl/xc_domain.c      | 35 +++++++++++++++++++++++++++++
- tools/libs/light/libxl_create.c  | 18 +++++++++++++++
- tools/libs/light/libxl_types.idl |  1 +
- tools/xl/xl_parse.c              | 38 +++++++++++++++++++++++++++++++-
- 7 files changed, 111 insertions(+), 1 deletion(-)
+ docs/misc/cache-coloring.rst      |  37 ++++++
+ docs/misc/xen-command-line.pandoc |  14 +++
+ xen/arch/arm/include/asm/mm.h     |   5 +
+ xen/common/Kconfig                |   8 ++
+ xen/common/llc-coloring.c         |  13 +++
+ xen/common/page_alloc.c           | 188 +++++++++++++++++++++++++++++-
+ xen/include/xen/llc-coloring.h    |   4 +
+ 7 files changed, 265 insertions(+), 4 deletions(-)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index ac3f88fd57..8e1422104e 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -3074,6 +3074,12 @@ raised.
+diff --git a/docs/misc/cache-coloring.rst b/docs/misc/cache-coloring.rst
+index c14b6ee2f4..25f015c2de 100644
+--- a/docs/misc/cache-coloring.rst
++++ b/docs/misc/cache-coloring.rst
+@@ -11,6 +11,9 @@ To compile LLC coloring support set ``CONFIG_LLC_COLORING=y``.
+ If needed, change the maximum number of colors with
+ ``CONFIG_LLC_COLORS_ORDER=<n>``.
  
- =over 4
- 
-+=item B<llc_colors=[ "RANGE", "RANGE", ...]>
++If needed, change the buddy allocator reserved size with
++``CONFIG_BUDDY_ALLOCATOR_SIZE=<n>``.
 +
-+Specify the Last Level Cache (LLC) color configuration for the guest.
-+B<RANGE> can be either a single color value or a hypen-separated closed
-+interval of colors (such as "0-4").
+ Runtime configuration is done via `Command line parameters`_.
+ For DomUs follow `DomUs configuration`_.
+ 
+@@ -108,6 +111,8 @@ Specific documentation is available at `docs/misc/xen-command-line.pandoc`.
+ +----------------------+-------------------------------+
+ | ``dom0-llc-colors``  | Dom0 color configuration      |
+ +----------------------+-------------------------------+
++| ``buddy-alloc-size`` | Buddy allocator reserved size |
+++----------------------+-------------------------------+
+ 
+ Colors selection format
+ ***********************
+@@ -195,6 +200,17 @@ the ``llc-colors`` option. For example:
+ **Note:** If no color configuration is provided for a domain, the default one,
+ which corresponds to all available colors is used instead.
+ 
++Colored allocator and buddy allocator
++*************************************
 +
- =item B<nr_spis="NR_SPIS">
++The colored allocator distributes pages based on color configurations of
++domains so that each domains only gets pages of its own colors.
++The colored allocator is meant as an alternative to the buddy allocator because
++its allocation policy is by definition incompatible with the generic one. Since
++the Xen heap is not colored yet, we need to support the coexistence of the two
++allocators and some memory must be left for the buddy one. Buddy memory
++reservation is configured via Kconfig or via command-line.
++
+ Known issues and limitations
+ ****************************
  
- An optional integer parameter specifying the number of SPIs (Shared
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 8d32428ea9..f8fe4afd7d 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -1379,6 +1379,11 @@ void libxl_mac_copy(libxl_ctx *ctx, libxl_mac *dst, const libxl_mac *src);
-  */
- #define LIBXL_HAVE_BUILDINFO_HVM_SYSTEM_FIRMWARE
+@@ -205,3 +221,24 @@ In the domain configuration, "xen,static-mem" allows memory to be statically
+ allocated to the domain. This isn't possible when LLC coloring is enabled,
+ because that memory can't be guaranteed to use only colors assigned to the
+ domain.
++
++Cache coloring is intended only for embedded systems
++####################################################
++
++The current implementation aims to satisfy the need of predictability in
++embedded systems with small amount of memory to be managed in a colored way.
++Given that, some shortcuts are taken in the development. Expect worse
++performances on larger systems.
++
++Colored allocator can only make use of order-0 pages
++####################################################
++
++The cache coloring technique relies on memory mappings and on the smallest
++mapping granularity to achieve the maximum number of colors (cache partitions)
++possible. This granularity is what is normally called a page and, in Xen
++terminology, the order-0 page is the smallest one. The fairly simple
++colored allocator currently implemented, makes use only of such pages.
++It must be said that a more complex one could, in theory, adopt higher order
++pages if the colors selection contained adjacent colors. Two subsequent colors,
++for example, can be represented by an order-1 page, four colors correspond to
++an order-2 page, etc.
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index bfdc8b0002..3a70c49c05 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -270,6 +270,20 @@ and not running softirqs. Reduce this if softirqs are not being run frequently
+ enough. Setting this to a high value may cause boot failure, particularly if
+ the NMI watchdog is also enabled.
  
-+/*
-+ * The libxl_domain_build_info has the llc_colors array.
-+ */
-+#define LIBXL_HAVE_BUILDINFO_LLC_COLORS 1
++### buddy-alloc-size (arm64)
++> `= <size>`
++
++> Default: `64M`
++
++Amount of memory reserved for the buddy allocator when colored allocator is
++active. This option is available only when `CONFIG_LLC_COLORING` is enabled.
++The colored allocator is meant as an alternative to the buddy allocator,
++because its allocation policy is by definition incompatible with the generic
++one. Since the Xen heap systems is not colored yet, we need to support the
++coexistence of the two allocators for now. This parameter, which is optional
++and for expert only, it's used to set the amount of memory reserved to the
++buddy allocator.
++
+ ### cet
+     = List of [ shstk=<bool>, ibt=<bool> ]
+ 
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 5abd4b0d1c..c1a5ac7bee 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -145,6 +145,11 @@ struct page_info
+ #else
+ #define PGC_static     0
+ #endif
++#ifdef CONFIG_LLC_COLORING
++/* Page is cache colored */
++#define _PGC_colored      PG_shift(4)
++#define PGC_colored       PG_mask(1, 4)
++#endif
+ /* ... */
+ /* Page is broken? */
+ #define _PGC_broken       PG_shift(7)
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index b4ec6893be..bbd4738d4e 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -537,4 +537,12 @@ config LLC_COLORS_ORDER
+ 	  The default value corresponds to an 8 MiB 16-ways LLC, which should be
+ 	  more than what's needed in the general case.
+ 
++config BUDDY_ALLOCATOR_SIZE
++	int "Buddy allocator reserved memory size (MiB)" if LLC_COLORING
++	default "0" if !LLC_COLORING
++	default "64"
++	help
++	  Amount of memory reserved for the buddy allocator to serve Xen heap,
++	  working alongside the colored one.
++
+ endmenu
+diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
+index 14e056fb10..6ba9fb72ca 100644
+--- a/xen/common/llc-coloring.c
++++ b/xen/common/llc-coloring.c
+@@ -28,6 +28,9 @@ static unsigned int __ro_after_init default_colors[NR_LLC_COLORS];
+ static unsigned int __initdata dom0_colors[NR_LLC_COLORS];
+ static unsigned int __initdata dom0_num_colors;
+ 
++#define mfn_color_mask              (max_nr_colors - 1)
++#define mfn_to_color(mfn)           (mfn_x(mfn) & mfn_color_mask)
 +
  /*
-  * ERROR_REMUS_XXX error code only exists from Xen 4.5, Xen 4.6 and it
-  * is changed to ERROR_CHECKPOINT_XXX in Xen 4.7
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 29617585c5..aa2b4b04f3 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -2667,6 +2667,15 @@ int xc_livepatch_replace(xc_interface *xch, char *name, uint32_t timeout, uint32
- int xc_domain_cacheflush(xc_interface *xch, uint32_t domid,
-                          xen_pfn_t start_pfn, xen_pfn_t nr_pfns);
- 
-+/*
-+ * Set LLC colors for a domain.
-+ * It can only be used directly after domain creation. An attempt to use it
-+ * afterwards will result in an error.
-+ */
-+int xc_domain_set_llc_colors(xc_interface *xch, uint32_t domid,
-+                             const unsigned int *llc_colors,
-+                             unsigned int num_llc_colors);
-+
- #if defined(__arm__) || defined(__aarch64__)
- int xc_dt_overlay(xc_interface *xch, void *overlay_fdt,
-                   uint32_t overlay_fdt_size, uint8_t overlay_op);
-diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
-index e3538ec0ba..4ed339e6e4 100644
---- a/tools/libs/ctrl/xc_domain.c
-+++ b/tools/libs/ctrl/xc_domain.c
-@@ -2195,6 +2195,41 @@ int xc_domain_soft_reset(xc_interface *xch,
-     domctl.domain = domid;
-     return do_domctl(xch, &domctl);
+  * Parse the coloring configuration given in the buf string, following the
+  * syntax below.
+@@ -311,6 +314,16 @@ int __init domain_set_llc_colors_from_str(struct domain *d, const char *str)
+     return 0;
  }
-+
-+int xc_domain_set_llc_colors(xc_interface *xch, uint32_t domid,
-+                             const unsigned int *llc_colors,
-+                             unsigned int num_llc_colors)
+ 
++unsigned int page_to_llc_color(const struct page_info *pg)
 +{
-+    struct xen_domctl domctl = {};
-+    DECLARE_HYPERCALL_BUFFER(uint32_t, local);
-+    int ret = -1;
-+
-+    if ( num_llc_colors )
-+    {
-+        size_t bytes = sizeof(uint32_t) * num_llc_colors;
-+
-+        local = xc_hypercall_buffer_alloc(xch, local, bytes);
-+        if ( local == NULL )
-+        {
-+            PERROR("Could not allocate LLC colors for set_llc_colors");
-+            ret = -ENOMEM;
-+            goto out;
-+        }
-+        memcpy(local, llc_colors, bytes);
-+        set_xen_guest_handle(domctl.u.set_llc_colors.llc_colors, local);
-+    }
-+
-+    domctl.cmd = XEN_DOMCTL_set_llc_colors;
-+    domctl.domain = domid;
-+    domctl.u.set_llc_colors.num_llc_colors = num_llc_colors;
-+
-+    ret = do_domctl(xch, &domctl);
-+
-+out:
-+    xc_hypercall_buffer_free(xch, local);
-+
-+    return ret;
++    return mfn_to_color(page_to_mfn(pg));
 +}
++
++unsigned int get_max_nr_llc_colors(void)
++{
++    return max_nr_colors;
++}
++
  /*
   * Local variables:
   * mode: C
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index edeadd57ef..e03599ea99 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -747,6 +747,24 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-             /* A new domain now exists */
-             *domid = local_domid;
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 34cd473150..27431a9bd2 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -159,8 +159,12 @@
+ #define PGC_static 0
+ #endif
  
-+            ret = xc_domain_set_llc_colors(ctx->xch, local_domid,
-+                                           b_info->llc_colors,
-+                                           b_info->num_llc_colors);
-+            if (ret < 0) {
-+                if (errno == EOPNOTSUPP) {
-+                    if (b_info->num_llc_colors > 0) {
-+                        LOGED(ERROR, local_domid,
-+                            "LLC coloring not enabled in the hypervisor");
-+                        rc = ERROR_FAIL;
-+                        goto out;
-+                    }
-+                } else {
-+                    LOGED(ERROR, local_domid, "LLC colors allocation failed");
-+                    rc = ERROR_FAIL;
-+                    goto out;
-+                }
-+            }
+-#define PGC_no_buddy_merge PGC_static
+-#define PGC_preserved (PGC_extra | PGC_static | PGC_broken)
++#ifndef PGC_colored
++#define PGC_colored 0
++#endif
 +
-             rc = libxl__is_domid_recent(gc, local_domid, &recent);
-             if (rc)
-                 goto out;
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 4e65e6fda5..bd4b8721ff 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -616,6 +616,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
-     ("ioports",          Array(libxl_ioport_range, "num_ioports")),
-     ("irqs",             Array(uint32, "num_irqs")),
-     ("iomem",            Array(libxl_iomem_range, "num_iomem")),
-+    ("llc_colors",       Array(uint32, "num_llc_colors")),
-     ("claim_mode",	     libxl_defbool),
-     ("event_channels",   uint32),
-     ("kernel",           string),
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index e3a4800f6e..3d85be7dd4 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1296,7 +1296,7 @@ void parse_config_data(const char *config_source,
-     XLU_ConfigList *cpus, *vbds, *nics, *pcis, *cvfbs, *cpuids, *vtpms,
-                    *usbctrls, *usbdevs, *p9devs, *vdispls, *pvcallsifs_devs;
-     XLU_ConfigList *channels, *ioports, *irqs, *iomem, *viridian, *dtdevs,
--                   *mca_caps, *smbios;
-+                   *mca_caps, *smbios, *llc_colors;
-     int num_ioports, num_irqs, num_iomem, num_cpus, num_viridian, num_mca_caps;
-     int num_smbios;
-     int pci_power_mgmt = 0;
-@@ -1304,6 +1304,7 @@ void parse_config_data(const char *config_source,
-     int pci_permissive = 0;
-     int pci_seize = 0;
-     int i, e;
-+    int num_llc_colors;
-     char *kernel_basename;
++#define PGC_no_buddy_merge (PGC_static | PGC_colored)
++#define PGC_preserved (PGC_extra | PGC_static | PGC_broken | PGC_colored)
  
-     libxl_domain_create_info *c_info = &d_config->c_info;
-@@ -1447,6 +1448,41 @@ void parse_config_data(const char *config_source,
-     if (!xlu_cfg_get_long (config, "maxmem", &l, 0))
-         b_info->max_memkb = l * 1024;
+ #ifndef PGT_TYPE_INFO_INITIALIZER
+ #define PGT_TYPE_INFO_INITIALIZER 0
+@@ -1457,6 +1461,8 @@ static bool mark_page_free(struct page_info *pg, mfn_t mfn)
+     return pg_offlined;
+ }
  
-+    if (!xlu_cfg_get_list(config, "llc_colors", &llc_colors, &num_llc_colors, 0)) {
-+        int cur_index = 0;
++static void free_color_heap_page(struct page_info *pg, bool need_scrub);
 +
-+        b_info->num_llc_colors = 0;
-+        for (i = 0; i < num_llc_colors; i++) {
-+            uint32_t start = 0, end = 0, k;
+ /* Free 2^@order set of pages. */
+ static void free_heap_pages(
+     struct page_info *pg, unsigned int order, bool need_scrub)
+@@ -1481,6 +1487,15 @@ static void free_heap_pages(
+             pg[i].count_info |= PGC_need_scrub;
+             poison_one_page(&pg[i]);
+         }
 +
-+            buf = xlu_cfg_get_listitem(llc_colors, i);
-+            if (!buf) {
-+                fprintf(stderr,
-+                        "xl: Can't get element %d in LLC color list\n", i);
-+                exit(1);
-+            }
++        if ( pg->count_info & PGC_colored )
++        {
++            ASSERT(order == 0);
 +
-+            if (sscanf(buf, "%" SCNu32 "-%" SCNu32, &start, &end) != 2) {
-+                if (sscanf(buf, "%" SCNu32, &start) != 1) {
-+                    fprintf(stderr, "xl: Invalid LLC color range: %s\n", buf);
-+                    exit(1);
-+                }
-+                end = start;
-+            } else if (start > end) {
-+                fprintf(stderr,
-+                        "xl: Start LLC color is greater than end: %s\n", buf);
-+                exit(1);
-+            }
++            free_color_heap_page(pg, need_scrub);
++            spin_unlock(&heap_lock);
++            return;
++        }
+     }
+ 
+     avail[node][zone] += 1 << order;
+@@ -1945,6 +1960,155 @@ static unsigned long avail_heap_pages(
+     return free_pages;
+ }
+ 
++/*************************
++ * COLORED SIDE-ALLOCATOR
++ *
++ * Pages are grouped by LLC color in lists which are globally referred to as the
++ * color heap. Lists are populated in end_boot_allocator().
++ * After initialization there will be N lists where N is the number of
++ * available colors on the platform.
++ */
++static struct page_list_head *__ro_after_init _color_heap;
++#define color_heap(color) (&_color_heap[color])
 +
-+            b_info->num_llc_colors += (end - start) + 1;
-+            b_info->llc_colors = (uint32_t *)realloc(b_info->llc_colors,
-+                        sizeof(*b_info->llc_colors) * b_info->num_llc_colors);
++static unsigned long *__ro_after_init free_colored_pages;
 +
-+            for (k = start; k <= end; k++)
-+                b_info->llc_colors[cur_index++] = k;
++/* Memory required for buddy allocator to work with colored one */
++static unsigned long __initdata buddy_alloc_size =
++    MB(CONFIG_BUDDY_ALLOCATOR_SIZE);
++size_param("buddy-alloc-size", buddy_alloc_size);
++
++#ifdef CONFIG_LLC_COLORING
++#define domain_num_llc_colors(d) ((d)->num_llc_colors)
++#define domain_llc_color(d, i)   ((d)->llc_colors[i])
++#else
++#define domain_num_llc_colors(d) 0
++#define domain_llc_color(d, i)   0
++#endif
++
++static void free_color_heap_page(struct page_info *pg, bool need_scrub)
++{
++    unsigned int color;
++
++    color = page_to_llc_color(pg);
++    free_colored_pages[color]++;
++    /*
++     * Head insertion allows re-using cache-hot pages in configurations without
++     * sharing of colors.
++     */
++    page_list_add(pg, color_heap(color));
++}
++
++static struct page_info *alloc_color_heap_page(unsigned int memflags,
++                                               const struct domain *d)
++{
++    struct page_info *pg = NULL;
++    unsigned int i, color = 0;
++    unsigned long max = 0;
++    bool need_tlbflush = false;
++    uint32_t tlbflush_timestamp = 0;
++    bool need_scrub;
++
++    if ( memflags & ~(MEMF_no_refcount | MEMF_no_owner | MEMF_no_tlbflush |
++                      MEMF_no_icache_flush | MEMF_no_scrub) )
++        return NULL;
++
++    spin_lock(&heap_lock);
++
++    for ( i = 0; i < domain_num_llc_colors(d); i++ )
++    {
++        unsigned long free = free_colored_pages[domain_llc_color(d, i)];
++
++        if ( free > max )
++        {
++            color = domain_llc_color(d, i);
++            pg = page_list_first(color_heap(color));
++            max = free;
 +        }
 +    }
 +
-     if (!xlu_cfg_get_long (config, "vcpus", &l, 0)) {
-         vcpus = l;
-         if (libxl_cpu_bitmap_alloc(ctx, &b_info->avail_vcpus, l)) {
++    if ( !pg )
++    {
++        spin_unlock(&heap_lock);
++        return NULL;
++    }
++
++    need_scrub = pg->count_info & PGC_need_scrub;
++    pg->count_info = PGC_state_inuse | (pg->count_info & PGC_preserved);
++    free_colored_pages[color]--;
++    page_list_del(pg, color_heap(color));
++
++    if ( !(memflags & MEMF_no_tlbflush) )
++        accumulate_tlbflush(&need_tlbflush, pg, &tlbflush_timestamp);
++
++    init_free_page_fields(pg);
++
++    spin_unlock(&heap_lock);
++
++    if ( !(memflags & MEMF_no_scrub) )
++    {
++        if ( need_scrub )
++            scrub_one_page(pg);
++        else
++            check_one_page(pg);
++    }
++
++    if ( need_tlbflush )
++        filtered_flush_tlb_mask(tlbflush_timestamp);
++
++    flush_page_to_ram(mfn_x(page_to_mfn(pg)),
++                      !(memflags & MEMF_no_icache_flush));
++
++    return pg;
++}
++
++static void __init init_color_heap_pages(struct page_info *pg,
++                                         unsigned long nr_pages)
++{
++    unsigned int i;
++    bool need_scrub = opt_bootscrub == BOOTSCRUB_IDLE;
++
++    if ( buddy_alloc_size >= PAGE_SIZE )
++    {
++        unsigned long buddy_pages = min(PFN_DOWN(buddy_alloc_size), nr_pages);
++
++        init_heap_pages(pg, buddy_pages);
++        nr_pages -= buddy_pages;
++        buddy_alloc_size -= buddy_pages << PAGE_SHIFT;
++        pg += buddy_pages;
++    }
++
++    if ( !_color_heap )
++    {
++        unsigned int max_nr_colors = get_max_nr_llc_colors();
++
++        _color_heap = xmalloc_array(struct page_list_head, max_nr_colors);
++        free_colored_pages = xzalloc_array(unsigned long, max_nr_colors);
++        if ( !_color_heap || !free_colored_pages )
++            panic("Can't allocate colored heap. Buddy reserved size is too low");
++
++        for ( i = 0; i < max_nr_colors; i++ )
++            INIT_PAGE_LIST_HEAD(color_heap(i));
++    }
++
++    for ( i = 0; i < nr_pages; i++ )
++    {
++        pg[i].count_info = PGC_colored;
++        free_color_heap_page(&pg[i], need_scrub);
++    }
++}
++
++static void dump_color_heap(void)
++{
++    unsigned int color;
++
++    printk("Dumping color heap info\n");
++    for ( color = 0; color < get_max_nr_llc_colors(); color++ )
++        if ( free_colored_pages[color] > 0 )
++            printk("Color heap[%u]: %lu pages\n",
++                   color, free_colored_pages[color]);
++}
++
+ void __init end_boot_allocator(void)
+ {
+     unsigned int i;
+@@ -1964,7 +2128,13 @@ void __init end_boot_allocator(void)
+     for ( i = nr_bootmem_regions; i-- > 0; )
+     {
+         struct bootmem_region *r = &bootmem_region_list[i];
+-        if ( r->s < r->e )
++
++        if ( r->s >= r->e )
++            continue;
++
++        if ( llc_coloring_enabled )
++            init_color_heap_pages(mfn_to_page(_mfn(r->s)), r->e - r->s);
++        else
+             init_heap_pages(mfn_to_page(_mfn(r->s)), r->e - r->s);
+     }
+     nr_bootmem_regions = 0;
+@@ -2460,7 +2630,14 @@ struct page_info *alloc_domheap_pages(
+     if ( memflags & MEMF_no_owner )
+         memflags |= MEMF_no_refcount;
+ 
+-    if ( !dma_bitsize )
++    /* Only domains are supported for coloring */
++    if ( d && llc_coloring_enabled )
++    {
++        /* Colored allocation must be done on 0 order */
++        if ( order || (pg = alloc_color_heap_page(memflags, d)) == NULL )
++            return NULL;
++    }
++    else if ( !dma_bitsize )
+         memflags &= ~MEMF_no_dma;
+     else if ( (dma_zone = bits_to_zone(dma_bitsize)) < zone_hi )
+         pg = alloc_heap_pages(dma_zone + 1, zone_hi, order, memflags, d);
+@@ -2686,6 +2863,9 @@ static void cf_check dump_heap(unsigned char key)
+             continue;
+         printk("Node %d has %lu unscrubbed pages\n", i, node_need_scrub[i]);
+     }
++
++    if ( llc_coloring_enabled )
++        dump_color_heap();
+ }
+ 
+ static __init int cf_check register_heap_trigger(void)
+diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
+index 76d3cbae0e..90daf214cd 100644
+--- a/xen/include/xen/llc-coloring.h
++++ b/xen/include/xen/llc-coloring.h
+@@ -34,6 +34,10 @@ int domain_set_llc_colors(struct domain *d,
+                           const struct xen_domctl_set_llc_colors *config);
+ int domain_set_llc_colors_from_str(struct domain *d, const char *str);
+ 
++struct page_info;
++unsigned int page_to_llc_color(const struct page_info *pg);
++unsigned int get_max_nr_llc_colors(void);
++
+ #endif /* __COLORING_H__ */
+ 
+ /*
 -- 
 2.43.0
 
