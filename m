@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BC84D4415E
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Nov 2024 14:14:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.840133.1255993 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EB51D44162
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Nov 2024 14:22:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.840203.1256033 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tDOzE-0001Y9-5I; Tue, 19 Nov 2024 14:13:48 +0000
+	id 1tDP6t-0007jH-7i; Tue, 19 Nov 2024 14:21:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 840133.1255993; Tue, 19 Nov 2024 14:13:48 +0000
+Received: by outflank-mailman (output) from mailman id 840203.1256033; Tue, 19 Nov 2024 14:21:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tDOzD-0001Wk-Ra; Tue, 19 Nov 2024 14:13:47 +0000
-Received: by outflank-mailman (input) for mailman id 840133;
- Tue, 19 Nov 2024 14:13:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tDP6t-0007jA-53; Tue, 19 Nov 2024 14:21:43 +0000
+Received: by outflank-mailman (input) for mailman id 840203;
+ Tue, 19 Nov 2024 14:21:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PDt+=SO=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1tDOzC-0007nd-9x
- for xen-devel@lists.xenproject.org; Tue, 19 Nov 2024 14:13:46 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7b557aec-a680-11ef-99a3-01e77a169b0f;
- Tue, 19 Nov 2024 15:13:42 +0100 (CET)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5ced377447bso7885388a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 19 Nov 2024 06:13:42 -0800 (PST)
-Received: from carlo-ubuntu.home.arpa
- (host-95-230-250-178.business.telecomitalia.it. [95.230.250.178])
+ <SRS0=ydLn=SO=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tDP6s-0007dt-Lb
+ for xen-devel@lists.xenproject.org; Tue, 19 Nov 2024 14:21:42 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 966b8a53-a681-11ef-a0ca-8be0dac302b0;
+ Tue, 19 Nov 2024 15:21:37 +0100 (CET)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a99eb8b607aso127619266b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Nov 2024 06:21:37 -0800 (PST)
+Received: from [10.125.226.166] ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df4e7bfsm655228166b.42.2024.11.19.06.13.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 06:13:41 -0800 (PST)
+ a640c23a62f3a-aa20e043316sm656195366b.135.2024.11.19.06.21.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Nov 2024 06:21:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,205 +47,217 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b557aec-a680-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzQiLCJoZWxvIjoibWFpbC1lZDEteDUzNC5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjdiNTU3YWVjLWE2ODAtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyMDI1NjIyLjg2MTc1Miwic2VuZGVyIjoiY2FybG8ubm9uYXRvQG1pbmVydmFzeXMudGVjaCIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 966b8a53-a681-11ef-a0ca-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzAiLCJoZWxvIjoibWFpbC1lajEteDYzMC5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6Ijk2NmI4YTUzLWE2ODEtMTFlZi1hMGNhLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyMDI2MDk3Ljc5MTM3NCwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1732025622; x=1732630422; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3AJ6okQYUIeSH/YkzEeG8TfAqCBqc7r0nOUuYA65Dfs=;
-        b=f5J6aQYanOhIGkoVr0o6GGPIVteYK/H42X5CUU7HSKgE1S89ofcdCIxGUmankLslDd
-         KlcEdHFJOqlbEj6xsXcCCOooLYZ8WrR2UFIx169kk49/sKT3jYdl6VPQ4/jovqiRJpck
-         jA9vlAfyBQ00zbwUHdopQXA1CaoX2AMVihJ4zGFrFfE+95CNj2pZlxwyJvIeIPxcw6Al
-         jB07THOR2ta0FA+fRZ0rEBuLKZh3ibmwF6V6Ruz6pNlc1iTiMLpmInIyn4bfgiEMbECD
-         AIVDCJldvjhPysXSVVpz7EJmBf2QTGX1kEgQGEEMwfqL0J4DcE+SLhBbS8bPh178OLtQ
-         Ri3A==
+        d=citrix.com; s=google; t=1732026097; x=1732630897; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=aLvJ3gMSLd1W/oSfXodJhG+t9ir2LHLsSl1Al3oYzmA=;
+        b=M6UrcmZc3d/05iwU331jq0/XoSmL1WpjvN4yu9Tnq/Tab4X54z3/YZFERUjUl7r1Qb
+         bv44n9y/4Hr1InE3SWH3aDVJdZkBrYMjEAVx782JKm7TV12UyNTl8dmIQHoxuAY8A++E
+         VpfOOZN4okl6kE81kLO15K5MLEvjRCna8R5VY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732025622; x=1732630422;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3AJ6okQYUIeSH/YkzEeG8TfAqCBqc7r0nOUuYA65Dfs=;
-        b=pQRIX+8y3PEP1YPimWMFyqRulYX6ZjBn0/Jnkoub49mf61QciMM7BGOusPGxczPciA
-         R8kuiQjX54hhh+6kTwakAR7EpTL+Dpzr9aRcCSZjRJ+ZgdD2EasvehXPqe2J2x/v8MNy
-         RG3ng4xgmD83mzMV5H9vFRSYn+DFboQmdTc56X7Fdre06H7k0qgpeCORkIDhlsqP6uR0
-         99PRloTbiHMKQWDAndthEbmt2R8pACYgsRwo+0doHnxyBbcUGGgt4VlFsqXrOGO0YUT5
-         Fnzf7MMl4tcgEQBhdM+hZWDl6hRkw/IU4W5mSGj/7gDXJu0LE5My0UdLuuEly1Cmod2k
-         yM1g==
-X-Gm-Message-State: AOJu0YwF/Eflyqwct7X/qjs/D+bpsDlXcn1lhH3OYMgxFI5RXcWK4jvN
-	JS/gf98PPfOapjFDd9W9Nusfwu3axjG2Z5ZalbwmeiQehdq4GHoIYy/vixZI46HQ0rdazUaTJBm
-	Q
-X-Google-Smtp-Source: AGHT+IHQ/5pea+N6U8Ama8taGDG4dsUijf3lo4Y7emSDPUeo9qTcWRL51/89uNTQls715GmOB2CWrg==
-X-Received: by 2002:a05:6402:2688:b0:5cf:bfab:f0ca with SMTP id 4fb4d7f45d1cf-5cfbfabf229mr7009224a12.32.1732025621953;
-        Tue, 19 Nov 2024 06:13:41 -0800 (PST)
-From: Carlo Nonato <carlo.nonato@minervasys.tech>
-To: xen-devel@lists.xenproject.org
-Cc: andrea.bastoni@minervasys.tech,
-	marco.solieri@minervasys.tech,
-	Luca Miccio <lucmiccio@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Carlo Nonato <carlo.nonato@minervasys.tech>
-Subject: [PATCH v10 10/12] xen/arm: add Xen cache colors command line parameter
-Date: Tue, 19 Nov 2024 15:13:27 +0100
-Message-ID: <20241119141329.44221-11-carlo.nonato@minervasys.tech>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241119141329.44221-1-carlo.nonato@minervasys.tech>
-References: <20241119141329.44221-1-carlo.nonato@minervasys.tech>
+        d=1e100.net; s=20230601; t=1732026097; x=1732630897;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=aLvJ3gMSLd1W/oSfXodJhG+t9ir2LHLsSl1Al3oYzmA=;
+        b=pFf9VMy0aEA1jPuI1UhVEddzBIG/BVCltuF0j0OeJbfovWcl9p3EljdJq+RN/ZbR18
+         0HuD/OdNVU/wTf6oViPc6/EYaGByMhf8PcWkJCt5rHvl2DJAXHZixpqVUsuyBfv4xE08
+         QcUicpo9SrQFthkcMf9AU24zOi37FmqVPSNFsiabR3P6dt/KlakMfoXctw3VIVSX8Qjo
+         qrvA84nBP66Dy7A3TN1EiGJcKSv4+UIfVRbu/lB6zDi/cPRHIc8m+i6Da4bwRFgkTyYZ
+         YjI8+6cOXPiHcTVmw7G0tMCS6PYYudFtaVF8IY8Y2MJAfd/wxO1aGwzVzakpTBgKJ2Zg
+         wsHw==
+X-Forwarded-Encrypted: i=1; AJvYcCWpFyeNYeHcCvcJuuL4cfjGj5BiPcMsoWrz3fzb8tGCIKJp2Y4lFoLpCSuJ84ExvfSROqwCLK/xc2E=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzxt+QZOXIbQpoekoOVDNDJTVt0xEovBpQw7g1MMGOT8QqEDJHH
+	Ggq1HHD5yfdmAxDUm4S68ZDOnhQUWN281pgMxRnm9Cek9+xbBlqXuyLKb1cssZ8=
+X-Google-Smtp-Source: AGHT+IEgQU73TcXWqZKsN3ETJG5Le2bVQ0Y2zrc24Y6PPWJwkjhyGZrVZTELzle//NNPgvUoXeCOwQ==
+X-Received: by 2002:a17:907:3f98:b0:a9a:26a1:1963 with SMTP id a640c23a62f3a-aa4833f66c5mr1567138966b.7.1732026097185;
+        Tue, 19 Nov 2024 06:21:37 -0800 (PST)
+Message-ID: <05127810-a5d3-46f7-9a5b-8f5ac1ab8b87@citrix.com>
+Date: Tue, 19 Nov 2024 14:21:35 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] x86/msi: fix Misra Rule 20.7 in msi.h
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>
+References: <20241119103444.23296-1-roger.pau@citrix.com>
+ <20241119103444.23296-3-roger.pau@citrix.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20241119103444.23296-3-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Luca Miccio <lucmiccio@gmail.com>
+On 19/11/2024 10:34 am, Roger Pau Monne wrote:
+> Prune unused macros and adjust the remaining ones to parenthesize macro
+> arguments.
+>
+> No functional change intended.
+>
+> Singed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 
-Add a new command line parameter to configure Xen cache colors.
-These colors are dumped together with other coloring info.
+It's a little early for carol season, isn't it?
 
-Benchmarking the VM interrupt response time provides an estimation of
-LLC usage by Xen's most latency-critical runtime task. Results on Arm
-Cortex-A53 on Xilinx Zynq UltraScale+ XCZU9EG show that one color, which
-reserves 64 KiB of L2, is enough to attain best responsiveness:
-- Xen 1 color latency:  3.1 us
-- Xen 2 color latency:  3.1 us
+It would help to identify which macros are being dropped, because the
+diff is far from simple to read.
 
-Since this is the most common target for Arm cache coloring, the default
-amount of Xen colors is set to one.
+AFAICT, its:
 
-More colors are instead very likely to be needed on processors whose L1
-cache is physically-indexed and physically-tagged, such as Cortex-A57.
-In such cases, coloring applies to L1 also, and there typically are two
-distinct L1-colors. Therefore, reserving only one color for Xen would
-senselessly partitions a cache memory that is already private, i.e.
-underutilize it.
+  msi_disable()
+  msi_enable()
+  msix_enable()
+  msix_disable()
+  msix_unmask()
+  msix_mask()
 
-Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
-Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-v10:
-- no changes
-v9:
-- no changes
-v8:
-- added bound check on xen_colors in llc_coloring_init()
-v7:
-- removed XEN_DEFAULT_COLOR
-- XEN_DEFAULT_NUM_COLORS is now used in a for loop to set xen default colors
----
- docs/misc/cache-coloring.rst      |  2 ++
- docs/misc/xen-command-line.pandoc | 10 ++++++++++
- xen/common/llc-coloring.c         | 31 ++++++++++++++++++++++++++++++-
- 3 files changed, 42 insertions(+), 1 deletion(-)
+Splitting this change does make a marginal improvement in the diff, and
+a substantial improvement in `git diff --color-word`'s ability to review
+this change.
 
-diff --git a/docs/misc/cache-coloring.rst b/docs/misc/cache-coloring.rst
-index 25f015c2de..f967df7360 100644
---- a/docs/misc/cache-coloring.rst
-+++ b/docs/misc/cache-coloring.rst
-@@ -113,6 +113,8 @@ Specific documentation is available at `docs/misc/xen-command-line.pandoc`.
- +----------------------+-------------------------------+
- | ``buddy-alloc-size`` | Buddy allocator reserved size |
- +----------------------+-------------------------------+
-+| ``xen-llc-colors``   | Xen color configuration       |
-++----------------------+-------------------------------+
- 
- Colors selection format
- ***********************
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 3a70c49c05..992e1f993e 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2923,6 +2923,16 @@ mode.
- **WARNING: `x2apic_phys` is deprecated and superseded by `x2apic-mode`.
- The latter takes precedence if both are set.**
- 
-+### xen-llc-colors (arm64)
-+> `= List of [ <integer> | <integer>-<integer> ]`
-+
-+> Default: `0: the lowermost color`
-+
-+Specify Xen LLC color configuration. This options is available only when
-+`CONFIG_LLC_COLORING` is enabled.
-+Two colors are most likely needed on platforms where private caches are
-+physically indexed, e.g. the L1 instruction cache of the Arm Cortex-A57.
-+
- ### xenheap_megabytes (arm32)
- > `= <size>`
- 
-diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-index 6ba9fb72ca..6e7a652884 100644
---- a/xen/common/llc-coloring.c
-+++ b/xen/common/llc-coloring.c
-@@ -12,6 +12,7 @@
- #include <xen/param.h>
- 
- #define NR_LLC_COLORS          (1U << CONFIG_LLC_COLORS_ORDER)
-+#define XEN_DEFAULT_NUM_COLORS 1
- 
- bool __ro_after_init llc_coloring_enabled;
- boolean_param("llc-coloring", llc_coloring_enabled);
-@@ -28,6 +29,9 @@ static unsigned int __ro_after_init default_colors[NR_LLC_COLORS];
- static unsigned int __initdata dom0_colors[NR_LLC_COLORS];
- static unsigned int __initdata dom0_num_colors;
- 
-+static unsigned int __ro_after_init xen_colors[NR_LLC_COLORS];
-+static unsigned int __ro_after_init xen_num_colors;
-+
- #define mfn_color_mask              (max_nr_colors - 1)
- #define mfn_to_color(mfn)           (mfn_x(mfn) & mfn_color_mask)
- 
-@@ -86,7 +90,14 @@ static int __init parse_dom0_colors(const char *s)
- }
- custom_param("dom0-llc-colors", parse_dom0_colors);
- 
--static void print_colors(const unsigned int colors[], unsigned int num_colors)
-+static int __init parse_xen_colors(const char *s)
-+{
-+    return parse_color_config(s, xen_colors, ARRAY_SIZE(xen_colors),
-+                              &xen_num_colors);
-+}
-+custom_param("xen-llc-colors", parse_xen_colors);
-+
-+static void print_colors(const unsigned int *colors, unsigned int num_colors)
- {
-     unsigned int i;
- 
-@@ -167,6 +178,22 @@ void __init llc_coloring_init(void)
-     for ( i = 0; i < max_nr_colors; i++ )
-         default_colors[i] = i;
- 
-+    if ( !xen_num_colors )
-+    {
-+        unsigned int i;
-+
-+        xen_num_colors = MIN(XEN_DEFAULT_NUM_COLORS, max_nr_colors);
-+
-+        printk(XENLOG_WARNING
-+               "Xen LLC color config not found. Using first %u colors\n",
-+               xen_num_colors);
-+        for ( i = 0; i < xen_num_colors; i++ )
-+            xen_colors[i] = i;
-+    }
-+    else if ( xen_num_colors > max_nr_colors ||
-+              !check_colors(xen_colors, xen_num_colors) )
-+        panic("Bad LLC color config for Xen\n");
-+
-     arch_llc_coloring_init();
- }
- 
-@@ -177,6 +204,8 @@ void dump_llc_coloring_info(void)
- 
-     printk("LLC coloring info:\n");
-     printk("    Number of LLC colors supported: %u\n", max_nr_colors);
-+    printk("    Xen LLC colors (%u): ", xen_num_colors);
-+    print_colors(xen_colors, xen_num_colors);
- }
- 
- void domain_dump_llc_colors(const struct domain *d)
--- 
-2.43.0
+You've also introduced uses of MASK_EXTR() and MASK_INSR(), which at
+least ought to be noted in the commit message.  Technically I think it's
+a bugfix for multi_msi_enable(), because I think it now won't overflow
+the 3-bit field if an overly large num is passed in.
 
+
+Bloat-o-meter reports:
+
+add/remove: 0/0 grow/shrink: 3/1 up/down: 15/-61 (-46)
+Function                                     old     new   delta
+set_iommu_interrupt_handler                  366     373      +7
+write_msi_msg                                348     352      +4
+init_msi                                     574     578      +4
+pci_enable_msi                              1084    1023     -61
+
+
+Taking the first example, that's caused by swapping this:
+
+> iommu->msi.msi.mpos = ( ((!!(control & 0x80)) == 1) ?
+> iommu->msi.msi_attrib.pos+16 : iommu->msi.msi_attrib.pos+16 -4);
+
+for this:
+
+> iommu->msi.msi.mpos = ((iommu->msi.msi_attrib.pos) + 16 -
+> (((!!((control) & 0x80))) ? 0 : 4));
+
+and code generation changing from a CMOV to straight-line arithmetic.
+
+In write_msi_msg(), we actually drop a conditional branch and replace it
+with straight-line arithmetic.
+
+init_msi() gets a substantial restructuring, but it looks like two
+branches are dropped.
+
+pci_enable_msi() has the biggest change, but doesn't obviously reduce
+the number of branches.  There is clearly less register setup around
+existing branches, so my best guess is that the new macro forms are more
+amenable to common-sub-expression-elimination.
+
+
+Either way, it's all minor.  Staring at the diff for long enough, I'm
+pretty sure it's all good.
+
+> ---
+>  xen/arch/x86/include/asm/msi.h | 35 ++++++++++++++--------------------
+>  1 file changed, 14 insertions(+), 21 deletions(-)
+>
+> diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
+> index 748bc3cd6d8b..49a576383288 100644
+> --- a/xen/arch/x86/include/asm/msi.h
+> +++ b/xen/arch/x86/include/asm/msi.h
+> @@ -147,33 +147,26 @@ int msi_free_irq(struct msi_desc *entry);
+>   */
+>  #define NR_HP_RESERVED_VECTORS 	20
+>  
+> -#define msi_control_reg(base)		(base + PCI_MSI_FLAGS)
+> -#define msi_lower_address_reg(base)	(base + PCI_MSI_ADDRESS_LO)
+> -#define msi_upper_address_reg(base)	(base + PCI_MSI_ADDRESS_HI)
+> +#define msi_control_reg(base)		((base) + PCI_MSI_FLAGS)
+> +#define msi_lower_address_reg(base)	((base) + PCI_MSI_ADDRESS_LO)
+> +#define msi_upper_address_reg(base)	((base) + PCI_MSI_ADDRESS_HI)
+>  #define msi_data_reg(base, is64bit)	\
+> -	( (is64bit == 1) ? base+PCI_MSI_DATA_64 : base+PCI_MSI_DATA_32 )
+> +	((base) + ((is64bit) ? PCI_MSI_DATA_64 : PCI_MSI_DATA_32))
+>  #define msi_mask_bits_reg(base, is64bit) \
+> -	( (is64bit == 1) ? base+PCI_MSI_MASK_BIT : base+PCI_MSI_MASK_BIT-4)
+> +	((base) + PCI_MSI_MASK_BIT - ((is64bit) ? 0 : 4))
+>  #define msi_pending_bits_reg(base, is64bit) \
+>  	((base) + PCI_MSI_MASK_BIT + ((is64bit) ? 4 : 0))
+> -#define msi_disable(control)		control &= ~PCI_MSI_FLAGS_ENABLE
+>  #define multi_msi_capable(control) \
+> -	(1 << ((control & PCI_MSI_FLAGS_QMASK) >> 1))
+> +	(1U << MASK_EXTR(control, PCI_MSI_FLAGS_QMASK))
+>  #define multi_msi_enable(control, num) \
+> -	control |= (((fls(num) - 1) << 4) & PCI_MSI_FLAGS_QSIZE);
+> -#define is_64bit_address(control)	(!!(control & PCI_MSI_FLAGS_64BIT))
+> -#define is_mask_bit_support(control)	(!!(control & PCI_MSI_FLAGS_MASKBIT))
+> -#define msi_enable(control, num) multi_msi_enable(control, num); \
+> -	control |= PCI_MSI_FLAGS_ENABLE
+> -
+> -#define msix_control_reg(base)		(base + PCI_MSIX_FLAGS)
+> -#define msix_table_offset_reg(base)	(base + PCI_MSIX_TABLE)
+> -#define msix_pba_offset_reg(base)	(base + PCI_MSIX_PBA)
+> -#define msix_enable(control)	 	control |= PCI_MSIX_FLAGS_ENABLE
+> -#define msix_disable(control)	 	control &= ~PCI_MSIX_FLAGS_ENABLE
+> -#define msix_table_size(control) 	((control & PCI_MSIX_FLAGS_QSIZE)+1)
+> -#define msix_unmask(address)	 	(address & ~PCI_MSIX_VECTOR_BITMASK)
+> -#define msix_mask(address)		(address | PCI_MSIX_VECTOR_BITMASK)
+> +	((control) |= MASK_INSR(fls(num) - 1, PCI_MSI_FLAGS_QSIZE))
+> +#define is_64bit_address(control)	!!((control) & PCI_MSI_FLAGS_64BIT)
+> +#define is_mask_bit_support(control)	!!((control) & PCI_MSI_FLAGS_MASKBIT)
+
+You need to retain the outermost brackets for other MISRA reasons.
+
+I'm happy to fix up on commit, even splitting the patch (seeing as I've
+already done the split in order to review the rest).
+
+~Andrew
 
