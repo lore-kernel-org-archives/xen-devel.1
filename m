@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73AE5D62060
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Nov 2024 10:15:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.839871.1255677 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C600D60D1B
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Nov 2024 10:16:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.839868.1255657 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tDLGr-00036E-S4; Tue, 19 Nov 2024 10:15:45 +0000
+	id 1tDLGh-0002UG-Be; Tue, 19 Nov 2024 10:15:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 839871.1255677; Tue, 19 Nov 2024 10:15:45 +0000
+Received: by outflank-mailman (output) from mailman id 839868.1255657; Tue, 19 Nov 2024 10:15:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tDLGr-000361-Nz; Tue, 19 Nov 2024 10:15:45 +0000
-Received: by outflank-mailman (input) for mailman id 839871;
- Tue, 19 Nov 2024 10:15:44 +0000
+	id 1tDLGh-0002U9-7b; Tue, 19 Nov 2024 10:15:35 +0000
+Received: by outflank-mailman (input) for mailman id 839868;
+ Tue, 19 Nov 2024 10:15:33 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4ioL=SO=bounce.vates.tech=bounce-md_30504962.673c6549.v1-8302679767524367a79a93a9fe957b94@srs-se1.protection.inumbo.net>)
- id 1tDLGq-0002Fw-JQ
- for xen-devel@lists.xenproject.org; Tue, 19 Nov 2024 10:15:44 +0000
-Received: from mail136-26.atl41.mandrillapp.com
- (mail136-26.atl41.mandrillapp.com [198.2.136.26])
+ <SRS0=0dmh=SO=bounce.vates.tech=bounce-md_30504962.673c653f.v1-40ce3e99be984ec999e1dd0e97b54b82@srs-se1.protection.inumbo.net>)
+ id 1tDLGf-0002Fw-KB
+ for xen-devel@lists.xenproject.org; Tue, 19 Nov 2024 10:15:33 +0000
+Received: from mail180-8.suw31.mandrillapp.com
+ (mail180-8.suw31.mandrillapp.com [198.2.180.8])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a872587-a65f-11ef-99a3-01e77a169b0f;
- Tue, 19 Nov 2024 11:15:41 +0100 (CET)
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-26.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4Xt0kK5QMxzJKF3pv
- for <xen-devel@lists.xenproject.org>; Tue, 19 Nov 2024 10:15:37 +0000 (GMT)
+ id 333c608c-a65f-11ef-99a3-01e77a169b0f;
+ Tue, 19 Nov 2024 11:15:29 +0100 (CET)
+Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail180-8.suw31.mandrillapp.com (Mailchimp) with ESMTP id 4Xt0k76LnDz3sNN6m
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Nov 2024 10:15:27 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 8302679767524367a79a93a9fe957b94; Tue, 19 Nov 2024 10:15:37 +0000
+ 40ce3e99be984ec999e1dd0e97b54b82; Tue, 19 Nov 2024 10:15:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,80 +44,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a872587-a65f-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5OC4yLjEzNi4yNiIsImhlbG8iOiJtYWlsMTM2LTI2LmF0bDQxLm1hbmRyaWxsYXBwLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6IjNhODcyNTg3LWE2NWYtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyMDExMzQxLjQ1OTMxMiwic2VuZGVyIjoiYm91bmNlLW1kXzMwNTA0OTYyLjY3M2M2NTQ5LnYxLTgzMDI2Nzk3Njc1MjQzNjdhNzlhOTNhOWZlOTU3Yjk0QGJvdW5jZS52YXRlcy50ZWNoIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: 333c608c-a65f-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5OC4yLjE4MC44IiwiaGVsbyI6Im1haWwxODAtOC5zdXczMS5tYW5kcmlsbGFwcC5jb20ifQ==
+X-Custom-Transaction: eyJpZCI6IjMzM2M2MDhjLWE2NWYtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyMDExMzI5LjQyNjg5MSwic2VuZGVyIjoiYm91bmNlLW1kXzMwNTA0OTYyLjY3M2M2NTNmLnYxLTQwY2UzZTk5YmU5ODRlYzk5OWUxZGQwZTk3YjU0YjgyQGJvdW5jZS52YXRlcy50ZWNoIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1732011337; x=1732271837;
-	bh=/DRu8gQgvvfdcVbSOLin4M8g9as0i3t/ZsNNAzxTS+I=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=Fxu0UWAG34EwPCtYnMzK1UO8ImEe5XNmR6SyZJHMvQEiQU8LO+zwfv/Hqm6AZjb2U
-	 cnNpKoKmrQSOLxEBj0Mi4X5SamJiJTTqTlcR4K2h5CBILOjvn9t7r4oBRzJa+P6EeA
-	 RjMHZ9OtGVlOAGb3aLxt/5UwiSD55L+G9oDnQFZFp12Z3IuXsLIXkHtw4GYSqvZzbP
-	 EMNPUgozmKDPJRK98HehnKHszWKlfbxmt56WzowIKE8RBd2C5J6tLcIJEwUHQywlUD
-	 Uvaa9oQLApQe3eeguK0qu7IHSCwVuZL3VD8VNXyZ3xoIkLRcPiCUUW7RHTKOtYWhk2
-	 sqf8ZGci42xcQ==
+	s=mte1; t=1732011327; x=1732271827;
+	bh=HR2hDnjhAgEJ8WW/gV410/qk4KVU8YB7FIJYf9zTtIk=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=brGrOgC/vqHmJpXRfLqoxwPJrOKupIJBPT+9ZdyJn3zahw8cEcPb7itKRfueKXIMP
+	 UcXEMwm4E/y9FJ8Z6P5JRCWGMCbD/tK31v6Eq6aiojlnDxUMtLA9PA7OadcQutWC3k
+	 7XuUPzMrNyjfYjnWiXhbLIEOsLqPexsi/oTL3pi5TU4dlYhef7EHKgAmgWDrM5BMXk
+	 h6oQff9D0gRfetHY+Ndwt09kmwcs/jZ9ZudPqEAO65r5f0AvY7ADPvwh31gV/qNLJi
+	 1sEVjUFRg+0lkKy1Mqrh5mZMVX4EQ3wVf3OYFPQ891gIjfV6EAEovhapeQaK1Yzk30
+	 qg4qmFf046Lew==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1732011337; x=1732271837; i=anthony.perard@vates.tech;
-	bh=/DRu8gQgvvfdcVbSOLin4M8g9as0i3t/ZsNNAzxTS+I=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=sZnscscAkLVtk4dRwW/+S8zCEusNu4Fi6bFzVRCLY+B3EQIjgQfcOR2N6yuLfFWjM
-	 AXNxUeuXD6ujip+Y/Ij/BCD1dmxHv5Iu9Kj+pKMGP3i53TY61emGGu+xeMk9N5dlAA
-	 4LyI8+aGWnxCiEWseaCFCJi70AGHyXjr1EJ7nMcle/Z0XzYdR/NHyCCwROjdIqJqXZ
-	 8+feEm+ABZEM/jpiSkdHOpD9jNIqQbMVyl3tzxYS4zk2U7ZayUS/3evB5N3y+bp+of
-	 K3iHcOlcrUx8lluYbso7DoIUbkAouVRIv9lj+kG7a8lueHv7/ONB0Gus0ha0UUsoF4
-	 xGJAH78SadumQ==
+	t=1732011327; x=1732271827; i=anthony.perard@vates.tech;
+	bh=HR2hDnjhAgEJ8WW/gV410/qk4KVU8YB7FIJYf9zTtIk=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=t15bFwARbjiUg99xAfxhFT8Zp6jDT0iLJ4wHNxMSGv3N/2ANO1G7qcQntg3yKU1zR
+	 0IOIzNbWfEwFv7xSoj8AuJ4xhHAAQJwvYH7T9Zc7nPFDBPHqGcwcf5q+Z3JXQOpKYQ
+	 ktl+NXSByRWhNj4Ddhust+cId/01K4kdsBWnD/t7pfDxhOKIfpi4G70lUv9VegUj1h
+	 jzEK77x8UzRG4xwSGZgT1ZNBCmgjLCwuEpU5lRRBxpDVW3WwRxyBLfNV3/ioDohi2t
+	 sK6uJQMRc/E/bNQ06SGdg5iaGqFnyiZ9uH1z8Oj+tdoq5Vy6jeKTHZGodx57UbX2WW
+	 lTZ324UNho5SQ==
 From: "Anthony PERARD" <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?[XEN=20PATCH=20v2=200/3]=20CI:=20Allow=20automatic=20rebuild=20of=20rolling=20release=20containers?=
+Subject: =?utf-8?Q?[XEN=20PATCH=20v2=202/3]=20CI:=20Define=20XEN=5FREGISTRY=20variable?=
 X-Mailer: git-send-email 2.39.5
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1732011325912
+X-Bm-Transport-Timestamp: 1732011326911
 To: xen-devel@lists.xenproject.org
-Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Doug Goldstein" <cardoe@cardoe.com>, "Stefano Stabellini" <sstabellini@kernel.org>
-Message-Id: <20241119101449.49747-1-anthony.perard@vates.tech>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Stefano Stabellini" <sstabellini@kernel.org>, "Doug Goldstein" <cardoe@cardoe.com>
+Message-Id: <20241119101449.49747-3-anthony.perard@vates.tech>
+In-Reply-To: <20241119101449.49747-1-anthony.perard@vates.tech>
+References: <20241119101449.49747-1-anthony.perard@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.8302679767524367a79a93a9fe957b94?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.40ce3e99be984ec999e1dd0e97b54b82?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20241119:md
-Date: Tue, 19 Nov 2024 10:15:37 +0000
+Date: Tue, 19 Nov 2024 10:15:27 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Patch series available in this git branch:
-https://xenbits.xenproject.org/git-http/people/aperard/xen-unstable.git br.gitlab-ci-rebuild-arch-container-v2
+This allow to change the registry used for container in a single
+place, and could be controlled via other mean.
 
-v2:
-- remove the logic to test containers once rebuilt, and only do container build
-  in the pipeline.
+Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+ .gitlab-ci.yml                  | 3 +++
+ automation/gitlab-ci/build.yaml | 4 ++--
+ automation/gitlab-ci/test.yaml  | 2 +-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
 
-Hi,
-
-This patch series would allow to setup a scheduled pipeline on GitLab which
-would rebuild containers.
-
-To enable this, just running a pipeline with XEN_CI_REBUILD_CONTAINERS=1 will
-do.
-
-I intend to add a scheduled pipeline to run once a month.
-
-Thanks,
-
-Anthony PERARD (3):
-  CI: Remove deprecated "only:variables" in favor of "rules:if"
-  CI: Define XEN_REGISTRY variable
-  CI: New stage "containers" to rebuild some containers
-
- .gitlab-ci.yml                       | 19 +++++++++++++++---
- automation/gitlab-ci/build.yaml      |  4 ++--
- automation/gitlab-ci/containers.yaml | 29 ++++++++++++++++++++++++++++
- automation/gitlab-ci/test.yaml       | 17 +++++++---------
- 4 files changed, 54 insertions(+), 15 deletions(-)
- create mode 100644 automation/gitlab-ci/containers.yaml
-
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index ef4484e09a..941e5822e8 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -1,3 +1,6 @@
++variables:
++  XEN_REGISTRY: registry.gitlab.com/xen-project/xen
++
+ workflow:
+   rules:
+     - if: $CI_COMMIT_BRANCH =~ /^(master|smoke|^coverity-tested\/.*|stable-.*)$/
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index ce39b0ee21..1ca6764225 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -1,6 +1,6 @@
+ .build-tmpl: &build
+   stage: build
+-  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
++  image: ${XEN_REGISTRY}/${CONTAINER}
+   script:
+     - ./automation/scripts/build 2>&1 | tee build.log
+   artifacts:
+@@ -208,7 +208,7 @@
+ 
+ .yocto-test:
+   stage: build
+-  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
++  image: ${XEN_REGISTRY}/${CONTAINER}
+   script:
+     - ./automation/build/yocto/build-yocto.sh -v --log-dir=./logs --xen-dir=`pwd` ${YOCTO_BOARD} ${YOCTO_OUTPUT}
+   variables:
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index ab5c8be0cd..1822e3ea5f 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -1,6 +1,6 @@
+ .test-jobs-common:
+   stage: test
+-  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
++  image: ${XEN_REGISTRY}/${CONTAINER}
+ 
+ .arm64-test-needs: &arm64-test-needs
+   - alpine-3.18-arm64-rootfs-export
 -- 
 
 
