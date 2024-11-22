@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E456BE65D3B
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2024 09:34:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.841793.1257293 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91266E65D3E
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2024 09:34:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.841796.1257315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tEQ3T-0003fL-Ej; Fri, 22 Nov 2024 09:34:23 +0000
+	id 1tEQ3V-00042r-Ch; Fri, 22 Nov 2024 09:34:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 841793.1257293; Fri, 22 Nov 2024 09:34:23 +0000
+Received: by outflank-mailman (output) from mailman id 841796.1257315; Fri, 22 Nov 2024 09:34:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tEQ3T-0003fB-Al; Fri, 22 Nov 2024 09:34:23 +0000
-Received: by outflank-mailman (input) for mailman id 841793;
- Fri, 22 Nov 2024 09:34:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tEQ3V-00041W-5j; Fri, 22 Nov 2024 09:34:25 +0000
+Received: by outflank-mailman (input) for mailman id 841796;
+ Fri, 22 Nov 2024 09:34:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=o6Qa=SR=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1tEQ3S-0003Ql-8q
- for xen-devel@lists.xenproject.org; Fri, 22 Nov 2024 09:34:22 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f2476440-a8b4-11ef-a0cc-8be0dac302b0;
- Fri, 22 Nov 2024 10:34:18 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-382423e1f7aso1238562f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 22 Nov 2024 01:34:18 -0800 (PST)
+ id 1tEQ3T-0003h5-Ts
+ for xen-devel@lists.xenproject.org; Fri, 22 Nov 2024 09:34:23 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f33284cc-a8b4-11ef-99a3-01e77a169b0f;
+ Fri, 22 Nov 2024 10:34:20 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43168d9c6c9so16785675e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Nov 2024 01:34:20 -0800 (PST)
 Received: from localhost.localdomain ([87.115.149.99])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433cde16abasm21427775e9.19.2024.11.22.01.34.17
+ 5b1f17b1804b1-433cde16abasm21427775e9.19.2024.11.22.01.34.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2024 01:34:17 -0800 (PST)
+ Fri, 22 Nov 2024 01:34:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,80 +47,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f2476440-a8b4-11ef-a0cc-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo0MjkiLCJoZWxvIjoibWFpbC13cjEteDQyOS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImYyNDc2NDQwLWE4YjQtMTFlZi1hMGNjLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyMjY4MDU4LjYwNDM5NSwic2VuZGVyIjoiZnJlZGlhbm8uemlnbGlvQGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: f33284cc-a8b4-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjozMmYiLCJoZWxvIjoibWFpbC13bTEteDMyZi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImYzMzI4NGNjLWE4YjQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyMjY4MDYwLjE0NjMyNCwic2VuZGVyIjoiZnJlZGlhbm8uemlnbGlvQGNsb3VkLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1732268057; x=1732872857; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1732268059; x=1732872859; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=y0Aj5W+j63+NuGcn0ZB3t9CEq3oH9AJf5/KiiQiC1a0=;
-        b=DltuG8wiFM11m+gahYtY7Dw01gyRWqw99t3Wbn3+JpQSMuf7D5p5E04UP7Lmq+C7iw
-         rKsXZw+5/yegJ/nynOgejcDNI/gCAeRQ9+hoiJ2LFehgIPw41csRv9/E50pB3r5P5JTr
-         +g9+sCrsYdDjFnU0AG5LM6b7OrYqyJAvlV2rw=
+        bh=S9P+7ZFehIpPa+fzpjshgI13fOA+PXjg5ryC8YmcWr4=;
+        b=Il5WZ2+8NYx/DNyb9RgrRxOSmxSRVqphu9Y8+GBARLKiqEJ4IIskLZkDGLP026/foB
+         V8eySMFYsa1RwK0gQX1y+PUsNyS/fCrD61k8DNTRbCxh5VTV4+nVKulD96X5x6RdW6jJ
+         T5oCbNxYMha0y3dm1TfMCO7ccxLbdGEj9b2U8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732268057; x=1732872857;
+        d=1e100.net; s=20230601; t=1732268059; x=1732872859;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=y0Aj5W+j63+NuGcn0ZB3t9CEq3oH9AJf5/KiiQiC1a0=;
-        b=K658k3WzL8xo2M7Psx+PEYc4yNmDh0zcFA4AQk8d18mZim4IFRWaQFy+hbTxzHbjtP
-         8HIyCcON5qcM3uE3KwPlp79OLTO8SiE6q/7DUGhM6QfOgPSEDyL6sFY+ov84fx7D1//E
-         sX/t3sJYyyv75XG6b+FfsTYcHjlEaZiffuWjVeEvXaZNksK8DR3MuqOa+FIU14F28xw/
-         K5TRgPl7beUDiOpvsytYUfKdxFzneHVtgwyrcahHyTQPAtYLjXPePt3AAIRURVzQhfAK
-         KPMOnvT3K5NDDUgjdk4GrJrcvKX/4FO0bMVrvab10OEFPxKM0Yk6v2SQO5eu7kcUmodD
-         84hw==
-X-Gm-Message-State: AOJu0YzCfoA5NhOdowC+On3Aqhz8PfksH2ozl1Q3HyTm+sN0OrOPWUKw
-	yamx6QVC6T/c4ILceIXC6JGUoq4Lm5D4Xnnf09ERYv4MWivuJoP5VXecd/DXrox7yA9/3bNs/WV
-	8F5I=
-X-Gm-Gg: ASbGncsRR0vQBkNNKqZOKvQOT9WUkzERoIHO8tUfzAEWuK7NomQUMxYRoybJQapzBsz
-	zC62gpxl46AJaz7DOeI99Nr75yQbbPgsh+WVcR/vrgsaFIbM5uUgZNv0RCF2/cHEb8+Iys5pgBt
-	8I933IBkBZfBqjC5szTc3VBYdtVw+ueTPk578N1TSK/jhjRjrLz4lA4LKqltCQda5tzBfxw1w3R
-	iOogXNKevoflcMFd432YHa3U45nPlpkmmYmEOxuoSl2/RtXpmPMjDtGEKa/Eyr+C1Spwg==
-X-Google-Smtp-Source: AGHT+IEoKDi872bJ7XgCPBqMWAU668/ao8l/n2sRLkR94Hw3rysbJY3JLdtZx/GavkwDxgBVA/W7lA==
-X-Received: by 2002:a05:6000:389:b0:382:37b2:87ee with SMTP id ffacd0b85a97d-38260b581b7mr1949072f8f.21.1732268057653;
-        Fri, 22 Nov 2024 01:34:17 -0800 (PST)
+        bh=S9P+7ZFehIpPa+fzpjshgI13fOA+PXjg5ryC8YmcWr4=;
+        b=pehJEpyecBnboSc6cUOPhzi4Y57l6RtsG+wfdVsxKVmYSh9A90t4JMCy53viBu7iJW
+         8dD5DQf1wVN64rEZ6vUGmYGxg/IHuESEYSOtEWZH+DcHyLc3B9z9Zkuhnaz0ZUTEueAK
+         Wl+cCvnrlw4ypo2HH6RxGWxh1ZMN/OOlOBnsWmBTmmxAng/sS0ag4Lg7lbI0kYhnun6r
+         rAiFXfTltANnz/EgQ2i3FM3WnGaHq3gW9Uyk0OiPv7Ns+farmkJK205Y/mwv8tbuiNE1
+         4tnQsQ8EQBuLtL1Zz6n4bhaxXhUhJ6kbI07SSVeLTK6ZCW7dnbHVGsfSwmR4QJ8T8U/V
+         yJ2Q==
+X-Gm-Message-State: AOJu0Yyj+E7V5/teMxBMlv3pwwsY+PwwPyV/qZfXD2zS6DtzRj3d4Ruw
+	mw6WvpvFZRgspf+whgpMcXFkOsi/kWM2q10eMLdjnpjiyc4qMsIA/mE6EfpLbYO3fEm3El2G5PI
+	t6DE=
+X-Gm-Gg: ASbGnctM+rZGzqY/pJIgJtX5/2/bz67zUrLdeV12y85Ee4rrA1Cu4RNARsJNbhpJMhy
+	5gyNXqatps9LIHIXF9fOfySfxnbNlBhuuc12RHBCxQ3c56jaoHCeDxMKE7f+q0VLY0anYghAWDH
+	VFllJEMQiVx8QKc6Ngj+nlS7bkDn1gDUlxHBONDzsjuIHWFiETMG3bwGeOxn+n++WZPvpoRyPLu
+	EYG3MuXj9bX/yY4AQ2EC5PGykRvizas99NR0NaujTau8Ov30vGKyJG7pt4EYS1Xl1DjbQ==
+X-Google-Smtp-Source: AGHT+IHquO76tm3Afjb8UWXeMVBPqDiBL7+TVDSGOJO4rtyIk5MtI0LS7cuGChe6gYm0cm3DnxCoqw==
+X-Received: by 2002:a05:600c:3b94:b0:433:6cf9:5e65 with SMTP id 5b1f17b1804b1-433ce4af3bfmr15568005e9.29.1732268059305;
+        Fri, 22 Nov 2024 01:34:19 -0800 (PST)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 1/4] Use an include/boot directory to override headers for boot code
-Date: Fri, 22 Nov 2024 09:33:55 +0000
-Message-Id: <20241122093358.478774-2-frediano.ziglio@cloud.com>
+Subject: [PATCH v2 3/4] x86/boot: Move some settings to C
+Date: Fri, 22 Nov 2024 09:33:57 +0000
+Message-Id: <20241122093358.478774-4-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241122093358.478774-1-frediano.ziglio@cloud.com>
 References: <20241122093358.478774-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Not all headers can be used by 32 bit boot code.
-Allows to override some headers, we don't want to mess up with
-main headers as most of the code is only 64 bit so the easy stuff should
-be done for 64 bit declarations.
-Boot headers should be 64 bit compatibles to avoid having multiple
-declarations.
+Initialise multiboot_ptr and pvh_start_info_pa from C code.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
 ---
- xen/arch/x86/boot/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/x86/boot/build32.lds.S           |  3 +++
+ xen/arch/x86/boot/head.S                  | 10 --------
+ xen/arch/x86/boot/reloc.c                 | 28 ++++++++++++++++++-----
+ xen/arch/x86/include/asm/guest/pvh-boot.h |  1 +
+ 4 files changed, 26 insertions(+), 16 deletions(-)
 
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index d457876659..13d4583173 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -18,7 +18,7 @@ CFLAGS_x86_32 := $(subst -m64,-m32 -march=i686,$(XEN_TREEWIDE_CFLAGS))
- $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))
- CFLAGS_x86_32 += -Werror -fno-builtin -g0 -msoft-float -mregparm=3
- CFLAGS_x86_32 += -nostdinc -include $(filter %/include/xen/config.h,$(XEN_CFLAGS))
--CFLAGS_x86_32 += $(filter -I% -O%,$(XEN_CFLAGS)) -D__XEN__
-+CFLAGS_x86_32 += -I$(srctree)/arch/x86/include/boot $(filter -I% -O%,$(XEN_CFLAGS)) -D__XEN__
+diff --git a/xen/arch/x86/boot/build32.lds.S b/xen/arch/x86/boot/build32.lds.S
+index 1e59732edd..1726c17c88 100644
+--- a/xen/arch/x86/boot/build32.lds.S
++++ b/xen/arch/x86/boot/build32.lds.S
+@@ -51,6 +51,9 @@ SECTIONS
+         DECLARE_IMPORT(__trampoline_seg_stop);
+         DECLARE_IMPORT(trampoline_phys);
+         DECLARE_IMPORT(boot_vid_info);
++        DECLARE_IMPORT(multiboot_ptr);
++        DECLARE_IMPORT(pvh_boot);
++        DECLARE_IMPORT(pvh_start_info_pa);
+         . = . + GAP;
+         *(.text)
+         *(.text.*)
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index 1b3bd16fe5..510b3cfe6c 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -517,16 +517,6 @@ trampoline_setup:
+         /*      reloc(magic/eax, info/edx) using fastcall. */
+         call    reloc
  
- # override for 32bit binaries
- $(obj32): CFLAGS_stack_boundary :=
+-#ifdef CONFIG_PVH_GUEST
+-        cmpb    $0, sym_esi(pvh_boot)
+-        je      1f
+-        mov     %eax, sym_esi(pvh_start_info_pa)
+-        jmp     2f
+-#endif
+-1:
+-        mov     %eax, sym_esi(multiboot_ptr)
+-2:
+-
+         /* Interrogate CPU extended features via CPUID. */
+         mov     $1, %eax
+         cpuid
+diff --git a/xen/arch/x86/boot/reloc.c b/xen/arch/x86/boot/reloc.c
+index 7a375ad41c..8f757813ee 100644
+--- a/xen/arch/x86/boot/reloc.c
++++ b/xen/arch/x86/boot/reloc.c
+@@ -17,13 +17,15 @@
+ #include <xen/types.h>
+ 
+ #include <xen/kconfig.h>
+-#include <xen/multiboot.h>
+ #include <xen/multiboot2.h>
+ #include <xen/page-size.h>
++#include <xen/bug.h>
+ 
+ #include <asm/trampoline.h>
++#include <asm/setup.h>
+ 
+ #include <public/arch-x86/hvm/start_info.h>
++#include <asm/guest/pvh-boot.h>
+ 
+ #ifdef CONFIG_VIDEO
+ # include "video.h"
+@@ -347,27 +349,41 @@ static multiboot_info_t *mbi2_reloc(uint32_t mbi_in, memctx *ctx)
+ }
+ 
+ /* SAF-1-safe */
+-void *reloc(uint32_t magic, uint32_t in)
++void reloc(uint32_t magic, uint32_t in)
+ {
+     memctx ctx = { trampoline_phys + TRAMPOLINE_HEAP_END };
+ 
++    void *res;
++
+     switch ( magic )
+     {
+     case MULTIBOOT_BOOTLOADER_MAGIC:
+-        return mbi_reloc(in, &ctx);
++        res = mbi_reloc(in, &ctx);
++        break;
+ 
+     case MULTIBOOT2_BOOTLOADER_MAGIC:
+-        return mbi2_reloc(in, &ctx);
++        res = mbi2_reloc(in, &ctx);
++        break;
+ 
+     case XEN_HVM_START_MAGIC_VALUE:
+         if ( IS_ENABLED(CONFIG_PVH_GUEST) )
+-            return pvh_info_reloc(in, &ctx);
++        {
++            res = pvh_info_reloc(in, &ctx);
++            break;
++        }
+         /* Fallthrough */
+ 
+     default:
+         /* Nothing we can do */
+-        return NULL;
++        res = NULL;
+     }
++
++#ifdef CONFIG_PVH_GUEST
++    if ( pvh_boot )
++        pvh_start_info_pa = (unsigned long)res;
++#endif
++
++    multiboot_ptr = (unsigned long)res;
+ }
+ 
+ /*
+diff --git a/xen/arch/x86/include/asm/guest/pvh-boot.h b/xen/arch/x86/include/asm/guest/pvh-boot.h
+index 247ba6899e..b5ad2b11a4 100644
+--- a/xen/arch/x86/include/asm/guest/pvh-boot.h
++++ b/xen/arch/x86/include/asm/guest/pvh-boot.h
+@@ -13,6 +13,7 @@
+ #ifdef CONFIG_PVH_GUEST
+ 
+ extern bool pvh_boot;
++extern uint32_t pvh_start_info_pa;
+ 
+ void pvh_init(multiboot_info_t **mbi, module_t **mod);
+ void pvh_print_info(void);
 -- 
 2.34.1
 
