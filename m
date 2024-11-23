@@ -4,31 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B49D75E5D
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Nov 2024 18:31:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.842209.1257677 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 651B6E6688E
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Nov 2024 22:45:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.842275.1257694 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tEuuT-0005X4-2J; Sat, 23 Nov 2024 18:31:09 +0000
+	id 1tEysR-0008Py-2a; Sat, 23 Nov 2024 22:45:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 842209.1257677; Sat, 23 Nov 2024 18:31:09 +0000
+Received: by outflank-mailman (output) from mailman id 842275.1257694; Sat, 23 Nov 2024 22:45:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tEuuS-0005Wm-SE; Sat, 23 Nov 2024 18:31:08 +0000
-Received: by outflank-mailman (input) for mailman id 842209;
- Sat, 23 Nov 2024 18:31:08 +0000
+	id 1tEysQ-0008Pr-Tx; Sat, 23 Nov 2024 22:45:18 +0000
+Received: by outflank-mailman (input) for mailman id 842275;
+ Sat, 23 Nov 2024 22:45:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=waGT=SS=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1tEumt-0006MT-Ib
- for xen-devel@lists.xenproject.org; Sat, 23 Nov 2024 18:23:19 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 019bc668-a9c8-11ef-a0cc-8be0dac302b0;
- Sat, 23 Nov 2024 19:23:17 +0100 (CET)
-Received: by mx.zohomail.com with SMTPS id 1732386071864907.6802124955447;
- Sat, 23 Nov 2024 10:21:11 -0800 (PST)
+ <SRS0=iYdR=SS=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1tEysO-0008Pk-UZ
+ for xen-devel@lists.xenproject.org; Sat, 23 Nov 2024 22:45:17 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20616.outbound.protection.outlook.com
+ [2a01:111:f403:2415::616])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9955056a-a9ec-11ef-a0cc-8be0dac302b0;
+ Sat, 23 Nov 2024 23:45:12 +0100 (CET)
+Received: from PH8PR12MB7326.namprd12.prod.outlook.com (2603:10b6:510:216::7)
+ by SA3PR12MB7952.namprd12.prod.outlook.com (2603:10b6:806:316::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.18; Sat, 23 Nov
+ 2024 22:45:07 +0000
+Received: from PH8PR12MB7326.namprd12.prod.outlook.com
+ ([fe80::6d76:9c33:d230:8264]) by PH8PR12MB7326.namprd12.prod.outlook.com
+ ([fe80::6d76:9c33:d230:8264%6]) with mapi id 15.20.8158.021; Sat, 23 Nov 2024
+ 22:45:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,125 +49,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 019bc668-a9c8-11ef-a0cc-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzNi4xNDMuMTg4LjUxIiwiaGVsbyI6InNlbmRlcjQtb2YtbzUxLnpvaG8uY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjAxOWJjNjY4LWE5YzgtMTFlZi1hMGNjLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyMzg2MTk3LjYyNTczMSwic2VuZGVyIjoiZHBzbWl0aEBhcGVydHVzc29sdXRpb25zLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
-ARC-Seal: i=1; a=rsa-sha256; t=1732386076; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=jiDTkyhg1PvFAUImU9Eo45XMlkkg3TroZ5+v4MjHS3CahYpFLkwPj3f22Zx/0497GWdS3WnROUVhPfMTq438fM8CeTa/RSAGbDTcyPdxNq5vf5FeU5EVuBadu3mu2ucFEbeLEAeRIGl4FKXLUb2MljtXUbTthVvqWnlbaEzS9ug=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1732386076; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=P31ngclTABjM2fHDD0BXApDz5VKpKh+1+vkjeCGngCQ=; 
-	b=Y9xbEq5vXvq8Xg1tPQmj+65BEzwe0hZEMedD3bDtdI6U19BSiq92TqKEn5cnIVQUvRFLqRyEulHaltnWAwV0mliJWIuNsuMqIC4TH/ZNBhK5B5G8zTWsTTV+yk4qz6vHZDX0hY5+tYY8EAHV1CbipDz90H4t8WLPVZRzUSNLLn8=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1732386076;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=P31ngclTABjM2fHDD0BXApDz5VKpKh+1+vkjeCGngCQ=;
-	b=kORFGEXrPEW+vOCh1FJPls/nJ1VRBxFBecSurziXVRVg71GWTDZAGQ9G6uS61+F3
-	TmxBqBlcfXJvQhlO/3ix3o7m31RBYD/kieijkBIXuIG7SJCYyHU+EIaapgHLUfAorLX
-	wIC1TVruiDFgnEHLQGha1Z3iScFVVtmc3mz1QTck=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	jason.andryuk@amd.com,
-	christopher.w.clark@gmail.com,
-	stefano.stabellini@amd.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 12/15] x86/hyperlaunch: specify dom0 mode with device tree
-Date: Sat, 23 Nov 2024 13:20:41 -0500
-Message-Id: <20241123182044.30687-13-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20241123182044.30687-1-dpsmith@apertussolutions.com>
-References: <20241123182044.30687-1-dpsmith@apertussolutions.com>
+X-Inumbo-ID: 9955056a-a9ec-11ef-a0cc-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDE6MTExOmY0MDM6MjQxNTo6NjE2IiwiaGVsbyI6Ik5BTTExLURNNi1vYmUub3V0Ym91bmQucHJvdGVjdGlvbi5vdXRsb29rLmNvbSJ9
+X-Custom-Transaction: eyJpZCI6Ijk5NTUwNTZhLWE5ZWMtMTFlZi1hMGNjLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNDAxOTEyLjQ2MTU0OCwic2VuZGVyIjoiYXlhbi5rdW1hci5oYWxkZXJAYW1kLmNvbSIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=h9LgAiHnG4jtGtRH+iKa3uJGm6jItq030xwuRvbwtxval6AqJIreQhTMvcSEOA2oUJC3uoPoAVfMoR+Ricl8v7/TxqsNMzGLANW70UkghLx7LWrhR0LGgw4bpK95n4Rb5pt5/U1GVhq94a9XWWQcqSmmCPqRtf1aU8PV1xxdddlHHRwxjFoIFbV/TmU9ubOpN1z1iY7O7VWaQBSIHzLcdxQ8XTvmofeQme+oP+eN1yj17lE/ONvtQUnzR58J1uC285UyoBwAeuYr7ufucFVIOWamq8dAhcSWiqyoZILBRv5jPFN18pbac9tZ8/Jy25aKYoPsz5i9E4lbfSEBYA1ttA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DIsUFxLWVgrt9rFh1IDI86ze+7+xzkVzf2F9JNyc0xw=;
+ b=NSvBjwW06LjgR2Ec9qip9+AYX5gopxNIwOz1QPIuX1aJICtKWlw9/ss8at8lFDwX1t1aZBkqtswqxqClXLTACAGzTBbqOxYA6X7dxyox364kn9jI6z8MWfGvQpLBVszyhN45lMJUlTkgInAStxs26iTveqOnYUCUSfw+sQoEJrE3hw1Lxlqq+LY+LcAAOR2em86OGVW53cAc27q3qfG9oc2JncU6bYo3R1wgr8cVhB6R2Yoz8+umLgkJ8NR22swkk4chQma8KtGMwPW6ONwR/N/ffNyZAf+bDxsou8QZ30R6q74ly1zEKAl7nxNactLeflJJ6CKSH+ntTOCy2hPnmQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DIsUFxLWVgrt9rFh1IDI86ze+7+xzkVzf2F9JNyc0xw=;
+ b=fHyBcHs9cltxwizFDTZ0mLtJ5J0BoVYnBQbU7LSBQC6HBQQp6etzjeajzbfWA1mT8J7xXN/cOLYqtUyMKaRARlVSbgmiAzidOv7DF+1pTidMUh1ikFJCuur4rKpjO3f0bjBwCu5+XS/4lxVeE4eXbbXiKEEyfq96l9cW2tRlg5s=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <0b58ff6d-e3ed-43dd-8700-83fe989b5d7f@amd.com>
+Date: Sun, 24 Nov 2024 02:44:58 +0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs/sphinx: Fix FUSA indexing
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <JBeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>
+References: <20241122164908.3240056-1-andrew.cooper3@citrix.com>
+Content-Language: en-GB
+From: Ayan Kumar Halder <ayankuma@amd.com>
+In-Reply-To: <20241122164908.3240056-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PNYP287CA0047.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:23e::24) To PH8PR12MB7326.namprd12.prod.outlook.com
+ (2603:10b6:510:216::7)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH8PR12MB7326:EE_|SA3PR12MB7952:EE_
+X-MS-Office365-Filtering-Correlation-Id: 286f6f8a-a5fc-4bec-9dad-08dd0c107a7d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?c0xVUHN3M3BjZWNWaGQxaFkvdzlwV095QmkwQTZWMmRzUm45QWs3L2lBS1pG?=
+ =?utf-8?B?UWlZU0h4REhXelZhUlpiTld2QU54MjFpQjdUSWRxM3QvZ2szOUdWTGY4SndZ?=
+ =?utf-8?B?NkxIUC83Nks2cElZYkFhbkt0WXpEQnZ5cnFpNEx3VmU5K09pbVprRDZSUUdq?=
+ =?utf-8?B?dFZBbi84OUcxeENDaHVPRVZ2ajVTTXVUS0hXaGQyMVdaeUNLNXZSc25WUVNN?=
+ =?utf-8?B?NTE3ZHI1NStpdHZQNmVkQ0ZpUkJscXpQc1d2cjZ5YUc4Z1hkNkFhcFNRQ2FU?=
+ =?utf-8?B?UzlYMjBNZXJ6QmlMT1RkNlArZWU5SVdrYnp3U3AvWGdud0dPUlN6QU5YWS8v?=
+ =?utf-8?B?Z3pzdE5NZGlwNVZFSThwcCsyNHhNQmU2bksxcHdtOW9Zbjc4dTVmWjExYXVL?=
+ =?utf-8?B?eGVaMi9LckZrN2JxWVdUNGh3eERTTllxazZMa3BMdEkvWEEyWjA3QUhHMytV?=
+ =?utf-8?B?Y0tZQlZhSW1sZGVnR3k5SXlvdUE4NEhiWkxHdnIvWWx1bWU0SFRNWXFGTjk4?=
+ =?utf-8?B?TElGYkdzZ0xlWUtveDJUK0tSNDVZM2NocFBlMnQzdExDZndVRGF2YzBFcWY3?=
+ =?utf-8?B?Uk1TMk84bVdnZjMrNXFBSGFHRkQzYjJYeDdJTzRpZE0xckw0K2tUbDZ2TUVx?=
+ =?utf-8?B?VG4zK0EwK0d0MnR5NS9Ma0RzRXhTdEl3REtTTGNYNmQ2UlNDeHlVQitNVHJx?=
+ =?utf-8?B?bXhjWStJM1ZJaVNZanV3TkVKTk1lN0wxN2pNVWlGVDR0d3BWbVRsdFAxS0pE?=
+ =?utf-8?B?OVkyWTEvbFRZSEtFUVc2MzRBeXR2ODljS1BETUs4RVNjMFNQbGJXZHd5bmZr?=
+ =?utf-8?B?czBoQmlzUkVTNWh1OXVGNzdCYUl4VmtoYjdHQnVxeHRyNjVKMlhQQmw3TmNH?=
+ =?utf-8?B?R204eU9GTkNnZEYvclNzczFwZDB4cE1NMmp4SXA2aTVCTWpLSDdyOXdPcWZP?=
+ =?utf-8?B?eDQ2VG5IYzlnVDg4aXQ1MlpDL1hGWDdrMDQzVkE5QjlWbi9oaGM1SkxsRnNt?=
+ =?utf-8?B?UXo0V0lzRkxwMEIvemlrayt5c0pZOVB4enlaR0JrVHdCazhCZjhXVGhGaEEr?=
+ =?utf-8?B?SmVyd0ZrUW1pYXVXZXBxMEE0czBwaDZ5MEFOOHU4RHJiMEVwR040OFNpN21R?=
+ =?utf-8?B?b0hlSzRQQTlzM094OC90MmVYZDczVE42dTZ5d1ByQ2JQOGlveWRBd0p0dDA1?=
+ =?utf-8?B?cmVEV3JkVkVaSVpkZlc2WFA4MWxibjRwc1A2VlJVU2pSTmZUK0NrOXMwQ2sr?=
+ =?utf-8?B?a1VyREhheWFmbVdIZmROOGl4WW1USFRoKzRkZ0JYVkVzUk9id2hYUmZJOXlW?=
+ =?utf-8?B?MHNrSTRSVmJyL1FrZExpMjZ4aFZtWW5nRTl5elpoYy9jTnlEUWRYVXl4ZEd2?=
+ =?utf-8?B?SVJEaC93Q01XQ2VJeVdzOVRIUFEvU1N6VmZJSGRZbEZIVHlqam05ZFJuMmIr?=
+ =?utf-8?B?ckZjUHVyL0cxOUkrd3pubGw5Zldwc3FuSkhtYkNDTDBCRVlNMWVJMHlyeS9W?=
+ =?utf-8?B?eEF2NG5JY1VXU2RYU1M0RlRkc2ZmSytpZW5nWTR5N2ZUTk05VHd0eE9kZ3JI?=
+ =?utf-8?B?aitKcURkMlRta25EWWE5bGdoS2tEekgvN0xpZDhqNzVTd0s0VzZIbERBaVp2?=
+ =?utf-8?B?WmZaWlBHSnYwK2JDZC9QNFpUMmhpM0dsSWMyRzVaZ1JMcENjN1M0UmNpRXd1?=
+ =?utf-8?B?OVVRRERWNnlPb1MrREFLRUR0cUkwYVF6Q0VMbm80RzY3R1I2V0o2SDhVUmJm?=
+ =?utf-8?B?aE9QbStsbXR1eW9RcTBPb1owMjY3c0VsejZuTkdsZ0dOaW1xZWhoQ3F6ZERj?=
+ =?utf-8?B?RnZ1TUZjWGJTK2V1YkpxQT09?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH8PR12MB7326.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?ZzRFK05qcldNQS9acjBxcHpGcWp0YW1LYUJLK3oxdFZwVmxIL2cvcFNRaVpl?=
+ =?utf-8?B?M3lmbm5pR2x3cG9nNUVpc2pCdVFRWnF5YWwrYlZmTFZnU01oU3ZneHhJRUE5?=
+ =?utf-8?B?TTU2UTM3MTVWOEViaFdhcTA5aUthOTAxTHFHNGpYeGVOclM4UTJHMHVrdUN5?=
+ =?utf-8?B?SldqazUycFJnQk1KUVZ4a2lhOUhHOFNKYVNDUTc3bG5pcEdrdVZSVEhJZFdu?=
+ =?utf-8?B?STZhUFU5VE01ZGM5Y3BCaHk2UjdWcXMyZ0x5eHRHcDVkcE5kWDRnQ1NBUkhD?=
+ =?utf-8?B?S3EzQ1JaWGdINGpZTzlsMzVRdG1iUGsyclZMVHY2SEM3MFkveDVsV2h3Z3FP?=
+ =?utf-8?B?a0dRKzlzbFNyVUs5VVBheVdQTE9FZ1AzOENoblRMWEVNKzNoUi9UNmRyc3Zv?=
+ =?utf-8?B?b3hjVEJES25PczViU3k2UXMxZGwyb29uRU5XMkdhZCs4UjZXWFY2TS9YY0hq?=
+ =?utf-8?B?NkxTZU1OZXhYQTRHMnc4NElpVlFuc3dzNWNIYnhxU2hvc3JBdUMrMnJLSG45?=
+ =?utf-8?B?T01SamhldjlkblhNRGRqVjdPU2MrS2tFeUU0dmFkZWpjVEhZMVgreWRSeCt0?=
+ =?utf-8?B?MFJlUTJNbHI1YURVclFJNSs3dktnckpOREViQWRmWHo5U3VlRlE4UVZHZ3Vo?=
+ =?utf-8?B?Q05hbFBMMG84WWZuT3JXSlJPMHBOWUdhbmwzNzVzclhLdCs2aUJOeGVOR1h3?=
+ =?utf-8?B?bGo5L2FGQ010QVFGSnIzN3NQL1NyMXZwM0UzbEdod1Z6QXJublg5QWpkR2pC?=
+ =?utf-8?B?dEdhSFBNc1BHRWFxL1dBQVZDYTd0WU5EVTAyZG1RWUJxa2ZPNEFacXpDVjgx?=
+ =?utf-8?B?MTM1SllFclk1UlpRL1hvNlBFblNOTnAxZWdIYUdhcXBsd1l4NGlLNC80bzUw?=
+ =?utf-8?B?K3VscENYVFBsRzBBemVjYjlocFZLL0hiQmVVK2J2ckUyRWdKQnZ0RVJkSW45?=
+ =?utf-8?B?dzAyNzVwdHo2OS9qZFRJVVpLV3NhY3dxdlJBbCtscDBxejJqOU9ZVmUxSGpi?=
+ =?utf-8?B?YUFBYlBhbnVyYyt0K2QwM1I2MHNSUklrdUxyWkRFWnRYS3A5SEx0RUExOFVE?=
+ =?utf-8?B?SExVUm1aWk44d1Bqck1lQlVjSys3VnV6U3NCNGhPaFFVbnR6VjlFTkRwS0hK?=
+ =?utf-8?B?dFNwUzhCNURTODh0aU5JakdIbWNONDNHeGt6U1dLVjNQeHlIeHl1dmQ3c3FS?=
+ =?utf-8?B?ZkNOZ1Q2NGdtYVhCK3oyVEV2ckxnQjVZTVpDaGk5MU9FNEpqZzN5S3RnaWRU?=
+ =?utf-8?B?MDhsMkRTZzdmRlZpZHA2b0d1UFpxYTJBaE5EZ0FxWFhmM2VQK0I4eDdDVXVG?=
+ =?utf-8?B?a2VlNGxTejJWQU13RE14TW1qM0ZxQWJ0MGJFbFVtKzk4WFNEOG94blRRRk9r?=
+ =?utf-8?B?c0NsWFBzaVY5K2xBL1E2Ymk2dmllQnF6ZTJIV0N3VGR2Q093S3ZqUFh4TS9p?=
+ =?utf-8?B?TGhSQ25CbkZQZ2xRSk9HaDlFVWdYdEF0cWNidlYzamMvNk03b3p2ZFExeFFa?=
+ =?utf-8?B?eTMxL3hJdGU5ajluWFloVUtSaGY4bU9IN1psK0JhK1N3b2t4ZU1FRDdZWkNn?=
+ =?utf-8?B?bW9EUHJnRDNKQldzOExSWXRxUk5OMGZQKzdqMU10YnBvSW15VHJId0MxZTNI?=
+ =?utf-8?B?dlBWTjh3NVJkTHJNRzFzQ3YyOERlamNFRmpHR3BBRGxuSHY1cW12SWdmOWNm?=
+ =?utf-8?B?dFFwdzZ4ZGZhc0Q3UFl3ZWVUSFpIYjNiRW5SaktNRDdvTGI1d2Mrb1dYOEE0?=
+ =?utf-8?B?KzVUaGFvWFpzNjRpS01nUW8zdDZOL2kyb2ZOMHRGeWVWSk5BdGkrZTY3Y1Rn?=
+ =?utf-8?B?enFXaVJSNEIvWE1lNUhueHp6L2tBYllZdWUyV0YvUG5ZdzQwaHlFQUZKbnRE?=
+ =?utf-8?B?bGd4bDlXVFpGbHVMR3puYzlGTUdZVmlRSXladSttTXlnRXZqYWNiL1NCK2V1?=
+ =?utf-8?B?VnM3bmpSLzhMb2JVRlQ5YUNqUWY3QWhqYzdIMzc3dDNaMGdVZHlZNVV3ZXVq?=
+ =?utf-8?B?NjExTUZnbmtCMTF6TGZEVFk0WStlLzJwSEFKWEZlWG9UcTJvaWt1SFlETFZk?=
+ =?utf-8?B?cVJsVVV2ejgzV3o4bmZnM1JHNGt2NmZ0SWZGRFZOS0JFNzdmdzMrb2pBeU9L?=
+ =?utf-8?Q?++/FFCodxhN36Bty1mIyenbUX?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 286f6f8a-a5fc-4bec-9dad-08dd0c107a7d
+X-MS-Exchange-CrossTenant-AuthSource: PH8PR12MB7326.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2024 22:45:07.4148
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9dYCEwFEY+8ALDjBUWbAjSy7i/q3fkbudmmabmMVJ+dvleN/98i1cUbSSbfpyntmV0CH9jMAmQisQ3Gqhph3Fg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB7952
 
-Enable selecting the mode in which the domain will be built and ran. This
-includes:
 
-- whether it will be either a 32/64 bit domain
-- if it will be run as a PV or HVM domain
-- and if it will require a device model (not applicable for dom0)
+On 22/11/2024 20:49, Andrew Cooper wrote:
+> CAUTION: This message has originated from an External Source. Please use proper judgment and caution when opening attachments, clicking links, or responding to this email.
+>
+>
+> Sphinx complains:
+>
+>    docs/fusa/index.rst:6: WARNING: toctree contains reference to nonexisting document 'fusa/reqs'
+>    docs/fusa/reqs/index.rst:6: WARNING: toctree contains reference to nonexisting document 'fusa/reqs/market-reqs'
+>    docs/fusa/reqs/index.rst:6: WARNING: toctree contains reference to nonexisting document 'fusa/reqs/product-reqs'
+>    docs/fusa/reqs/index.rst:6: WARNING: toctree contains reference to nonexisting document 'fusa/reqs/design-reqs/arm64'
+>
+>    docs/fusa/index.rst: WARNING: document isn't included in any toctree
+>    docs/fusa/reqs/design-reqs/arm64/generic-timer.rst: WARNING: document isn't included in any toctree
+>    docs/fusa/reqs/design-reqs/arm64/sbsa-uart.rst: WARNING: document isn't included in any toctree
+>    docs/fusa/reqs/index.rst: WARNING: document isn't included in any toctree
+>    docs/fusa/reqs/market-reqs/reqs.rst: WARNING: document isn't included in any toctree
+>    docs/fusa/reqs/product-reqs/arm64/reqs.rst: WARNING: document isn't included in any toctree
+>
+> Fix the toctrees.
+>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-In the device tree, this will be represented as a bit map that will be carried
-through into struct boot_domain.
-
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
----
- xen/arch/x86/domain_builder/fdt.c     | 19 +++++++++++++++++++
- xen/arch/x86/include/asm/bootdomain.h |  6 ++++++
- xen/arch/x86/setup.c                  |  3 ++-
- 3 files changed, 27 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/domain_builder/fdt.c b/xen/arch/x86/domain_builder/fdt.c
-index 3a6b4fbc09a9..09e72d96a752 100644
---- a/xen/arch/x86/domain_builder/fdt.c
-+++ b/xen/arch/x86/domain_builder/fdt.c
-@@ -141,6 +141,25 @@ static int __init process_domain_node(
-             bd->domid = (domid_t)val;
-             printk("  domid: %d\n", bd->domid);
-         }
-+        if ( match_fdt_property(fdt, prop, "mode" ) )
-+        {
-+            if ( fdt_prop_as_u32(prop, &bd->mode) != 0 )
-+            {
-+                printk("  failed processing mode for domain %s\n",
-+                       name == NULL ? "unknown" : name);
-+                return -EINVAL;
-+            }
-+
-+            printk("  mode: ");
-+            if ( !(bd->mode & BUILD_MODE_PARAVIRT) ) {
-+                if ( bd->mode & BUILD_MODE_ENABLE_DM )
-+                    printk("HVM\n");
-+                else
-+                    printk("PVH\n");
-+            }
-+            else
-+                printk("PV\n");
-+        }
-     }
- 
-     fdt_for_each_subnode(node, fdt, dom_node)
-diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-index ffda1509a63f..50c33d183e07 100644
---- a/xen/arch/x86/include/asm/bootdomain.h
-+++ b/xen/arch/x86/include/asm/bootdomain.h
-@@ -18,6 +18,12 @@ struct boot_domain {
- 
-     domid_t domid;
- 
-+                                          /* On     | Off    */
-+#define BUILD_MODE_PARAVIRT      (1 << 0) /* PV     | PVH/HVM */
-+#define BUILD_MODE_ENABLE_DM     (1 << 1) /* HVM    | PVH     */
-+#define BUILD_MODE_LONG          (1 << 2) /* 64 BIT | 32 BIT  */
-+    uint32_t mode;
-+
-     struct boot_module *kernel;
-     struct boot_module *ramdisk;
- 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 317349b80ac6..dae25721994d 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1006,7 +1006,8 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-     struct boot_domain *bd = &bi->domains[0];
-     struct domain *d;
- 
--    if ( opt_dom0_pvh )
-+    if ( opt_dom0_pvh ||
-+         (bi->hyperlaunch_enabled && !(bd->mode & BUILD_MODE_PARAVIRT)) )
-     {
-         dom0_cfg.flags |= (XEN_DOMCTL_CDF_hvm |
-                            ((hvm_hap_supported() && !opt_dom0_shadow) ?
--- 
-2.30.2
+Reviewed-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
 
 
