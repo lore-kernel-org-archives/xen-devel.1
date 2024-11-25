@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66AF8D58D5A
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Nov 2024 15:16:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.842798.1258485 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E715AD58D5A
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Nov 2024 15:18:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.842824.1258495 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tFaod-0001Nf-1y; Mon, 25 Nov 2024 15:15:55 +0000
+	id 1tFaqu-0002FZ-EN; Mon, 25 Nov 2024 15:18:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 842798.1258485; Mon, 25 Nov 2024 15:15:55 +0000
+Received: by outflank-mailman (output) from mailman id 842824.1258495; Mon, 25 Nov 2024 15:18:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tFaoc-0001NX-V2; Mon, 25 Nov 2024 15:15:54 +0000
-Received: by outflank-mailman (input) for mailman id 842798;
- Mon, 25 Nov 2024 15:15:53 +0000
+	id 1tFaqu-0002FS-BU; Mon, 25 Nov 2024 15:18:16 +0000
+Received: by outflank-mailman (input) for mailman id 842824;
+ Mon, 25 Nov 2024 15:18:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=mqqh=SU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tFaob-0001NF-UJ
- for xen-devel@lists.xenproject.org; Mon, 25 Nov 2024 15:15:53 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ id 1tFagM-0003aM-Nd
+ for xen-devel@lists.xenproject.org; Mon, 25 Nov 2024 15:07:22 +0000
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [2a00:1450:4864:20::535])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2819672f-ab40-11ef-a0cd-8be0dac302b0;
- Mon, 25 Nov 2024 16:15:51 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-434a1639637so5766675e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 25 Nov 2024 07:15:51 -0800 (PST)
+ id f789e8a3-ab3e-11ef-a0cd-8be0dac302b0;
+ Mon, 25 Nov 2024 16:07:20 +0100 (CET)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5ceb03aadb1so6230989a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Nov 2024 07:07:20 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43499bdfc0fsm73468575e9.19.2024.11.25.07.15.49
+ 4fb4d7f45d1cf-5d01d3b88a7sm4211936a12.31.2024.11.25.07.07.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Nov 2024 07:15:50 -0800 (PST)
+ Mon, 25 Nov 2024 07:07:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2819672f-ab40-11ef-a0cd-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjozMmUiLCJoZWxvIjoibWFpbC13bTEteDMyZS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjI4MTk2NzJmLWFiNDAtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNTQ3NzUxLjI3NzUsInNlbmRlciI6ImpiZXVsaWNoQHN1c2UuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Inumbo-ID: f789e8a3-ab3e-11ef-a0cd-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzUiLCJoZWxvIjoibWFpbC1lZDEteDUzNS5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImY3ODllOGEzLWFiM2UtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNTQ3MjQwLjI3NDc1NCwic2VuZGVyIjoiamJldWxpY2hAc3VzZS5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1732547751; x=1733152551; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1732547240; x=1733152040; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=6Rt7SMGZpWzGl0ygHzpmt9iX7x/9cyy3QYKd49U7x4A=;
-        b=Pgk1r2+qTEhIKSfo4KXN1fr0FkXYjrjh+4Nn7jcfpmzzciMHTg11yz+RQA5LKyaBNK
-         SarxrteHJgwUSR4MmpuEIrYQsyoiefTZW6Mzt7squpC80p/tzL4sYilKvv3GVjLNgEZo
-         bVtkZRwVa5ZM4JzByMJ5RPOacTWVVDs3rbUnVyhRoh3qVv7w4+DA3eyx/8aQNz/w9ddg
-         zFizeZ5gjbP/WMOeOfLZ/SVI/BT2my6Ba8MUSuE5MpYpKutnfEWDS9fhQns7Ij3mU3FV
-         IJkbIGOJGKiXs/DecOKIyH7FM1C2NA0A4KLQa5B+wK2IAWjx+LJVz/C5xpm0WX+ET6T5
-         SEYg==
+        bh=k+1d1eHTAbN7qx8eZxxGuToNd+oa2jtDcMn6UWnYD5k=;
+        b=Bl44DEnHcf2inRdL5baHlRuyPMVfm+ebTM0EQ/I6xwvyHGIQfAdnbO+QZaW+Jo6rOu
+         glhsjr31a2UMNZ3rj/xQuv73TTQvhkqGQVLlu/I04szdYuVYIqGQqtAXSmAq80w+xccX
+         cwbz9hJGP2L6mWnXDC6+99JRbCJ9bMomRvzN5BxsXsHW6RUJX9GcOeZunV9x7dHdWGTc
+         8iau9xSvQX4eQVP1h70/VvUYuzGNXt/xXpszTUn932d2zR4GGTTruOJlWUJ/JTrkTxc2
+         rhThZJdnBQnzrOcNvmGo2ijp4YBeFeLqEbsXu54bC5txKJQQgUQj075q4EBqyNlDaOXL
+         GnAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732547751; x=1733152551;
+        d=1e100.net; s=20230601; t=1732547240; x=1733152040;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=6Rt7SMGZpWzGl0ygHzpmt9iX7x/9cyy3QYKd49U7x4A=;
-        b=LSbQrAEBivm8yVc1/0kW1X5GHx99XzRMSTjW6bSH6PzUagh+XhMuuAJWKaV7sAIyNb
-         NfdZ7W6RD+FlFsgxEmlePT0Y2p0WBGEY8RI7rGLrt0vsTWjX0PAElnzIujmWIk71Dua9
-         4lt011vyI2z8FImxsXxFKmPsVgOnBW2bKt7e1+dzcy9L4z0yi30805aoBwVCMVPxWAU/
-         npfpCUh50Bycko1+i9Mj+/9CUp542yPiarUOGyLYeGi7uBASP0mk6D6bIcu1tTskJZv+
-         ZcylReXGP+j9Q7S0fK+ZTjFribPJ0N9Q6Eyi/Sephb0DrT/bZnZ1hh9FoOB7MI7fQOsf
-         DAlg==
-X-Gm-Message-State: AOJu0YykQ4ZoqZRsCYr15HZXmLUnB/y8A+yIUGF+SQsZrlSPncHjLwOH
-	XHfJbOCDfQGAOBYhXmxgsm9p5iLchFlo/jZ3EjS4scdO3VMQXlj8/ZREOHzhrseU1HGjCZ4qIJc
+        bh=k+1d1eHTAbN7qx8eZxxGuToNd+oa2jtDcMn6UWnYD5k=;
+        b=K9lra+f0Nj5N3q5eFBQwp1t/+4mAVmOzvAwOuxmw7LiL4lF9WroSTtFVzSRAsOzF9o
+         Mb3iovEqDwvBc1viqcUOzhvn7z8VgmLar4gerMYJ3b50EtoHi/N4In+o/yv8HAEDWJQ6
+         4jBjiB1gslrrqnQ7o2S+If/pm8pvFbDsoxAZbAslrHJu01gabE8Y90Ag//Vf+/Z2VWMM
+         GLw6iXFrGO3SgzE09WQZnU6XKjEFdcfqt0Y2eQ+Hna0MDz5EerfZHsK+hocn3HDOCApS
+         x1FI6BtyznqtSpHd7uzCI6TAq8lX1BxRrhlGqeSwSzTqBeo5ml049GDyjiX0C0K7SCsI
+         3NhA==
+X-Gm-Message-State: AOJu0YzPo94wNKPLQD3LA+ZjZyM9oe/LHp/DBfTtW+BLyqr5CYG7YVN2
+	MoU4KTyPZeox1m7gbHPLciBKKni9Q0WUVj53B92IcKNfBPmrkTMYIfeSVQqyzM3rr6O3G+daH1s
 	=
-X-Gm-Gg: ASbGnct8tYh0RRlKRf2jT83s5bizulms5hndZ/LxhMDRgokQ55BMFE91lxX9KWvspom
-	GOtpA4f2HA44kZ0Ytp7p6Gmg/Xz/YZzYe0wEsVGBCHWomP5rIAr0G0+HqIvOFaLQZwsVdyNjrKz
-	LfiI5G9AT1p5C+5P9QZ/1e4cnUg4sRG/bTrWodtQHOUk+UaKL9ZgJ9dcbEaIRv7j1fXrOuLA2Nc
-	IUgtIL5UcwE3tuRgkREoj2D3odwbInurETBa3zo/pBQVlpeFh6JtnAGkqIPbfC7ED4aY+9pUg53
-	jcELWJdGU+EpVi3eFBkpmNj7C86V5HkYTAo=
-X-Google-Smtp-Source: AGHT+IHIdwO1/kmBMbSzRc2tO32O71nDHVfl2hV7/GbvC6N2YVBcLBl0tlbMu0lm0aFGyeaEHjC9FQ==
-X-Received: by 2002:a05:600c:1d0f:b0:432:d735:cc73 with SMTP id 5b1f17b1804b1-433ce424ff9mr110023085e9.11.1732547750515;
-        Mon, 25 Nov 2024 07:15:50 -0800 (PST)
-Message-ID: <e995156e-c84a-426f-8d20-bebc8ccb3961@suse.com>
-Date: Mon, 25 Nov 2024 16:15:49 +0100
+X-Gm-Gg: ASbGnctIymFQtTDy8Kxll4GSXmFl7DZyPFMNn6ttAOYtGh9yIiy5z+dc1vHuam430fm
+	G1OLFHaJ0NE0AgXlpAjFDqPRJI2of9JHDBc+O45etm1yt2OBsCPSPjE4dqbAuWk2VYZ02ATU5nL
+	o6BzhgGExIKW5w31vHZeLo39bTMQNR2Ex/eB8nJba2mzOi9ttCYo+gSyX6ZLWFWaTnVKi2dENp9
+	UomPJqjE5La95B4j8SXmujAJoVrmGOnz0ZAnKPXdww7+jwJYuq33EIPGmMWRrR3+enxvRKqFPt9
+	M+c9xJFFtOxH9hUL7dtOiOp62C3kbkPgPTk=
+X-Google-Smtp-Source: AGHT+IHbPhNiogIELLJ6cjXrvcWfeM5Il4LLgbQ3SkT0Fk+63R+PZDTuXBm6j3vc+bR/y0Wh5uomdw==
+X-Received: by 2002:a05:6402:27c8:b0:5cf:657b:bf0 with SMTP id 4fb4d7f45d1cf-5d0207c1530mr9370345a12.29.1732547238555;
+        Mon, 25 Nov 2024 07:07:18 -0800 (PST)
+Message-ID: <df9668f1-7d26-4c14-a8d2-0f2107f68ca2@suse.com>
+Date: Mon, 25 Nov 2024 16:07:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 2/2] libxl/ACPI: bound RSDP allocation
+Subject: [PATCH v7 4/7] x86/cpu-policy: re-arrange no-VMX logic
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Juergen Gross <jgross@suse.com>
-References: <7455ff48-4bbc-465c-baff-d5c0ff684dfd@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <3a25cd59-e1cb-4bfc-b868-fb11599d22f5@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -120,59 +120,50 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <7455ff48-4bbc-465c-baff-d5c0ff684dfd@suse.com>
+In-Reply-To: <3a25cd59-e1cb-4bfc-b868-fb11599d22f5@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-First instroduce a manifest constant, to avoid open-coding 64 in several
-places. Then use this constant to bound the allocation.
+Move the PKS check into an "else" for the corresponding "if()", such
+that further adjustments (like for USER_MSR) can easily be put there as
+well.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-Similarly bounding the info "page" allocation would be nice, but would
-require knowing libacpi's struct acpi_info size here.
+v5: Re-base.
+v4: New.
 
---- a/tools/libs/light/libxl_x86_acpi.c
-+++ b/tools/libs/light/libxl_x86_acpi.c
-@@ -20,6 +20,8 @@
- 
-  /* Number of pages holding ACPI tables */
- #define NUM_ACPI_PAGES 16
-+/* Hard-coded size of RSDP */
-+#define RSDP_LEN 64
- #define ALIGN(p, a) (((p) + ((a) - 1)) & ~((a) - 1))
- 
- struct libxl_acpi_ctxt {
-@@ -177,7 +179,7 @@ int libxl__dom_load_acpi(libxl__gc *gc,
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -756,19 +756,20 @@ static void __init calculate_hvm_max_pol
+         if ( !cpu_has_vmx_xsaves )
+             __clear_bit(X86_FEATURE_XSAVES, fs);
      }
++    else
++    {
++        /*
++         * Xen doesn't use PKS, so the guest support for it has opted to not use
++         * the VMCS load/save controls for efficiency reasons.  This depends on
++         * the exact vmentry/exit behaviour, so don't expose PKS in other
++         * situations until someone has cross-checked the behaviour for safety.
++         */
++        __clear_bit(X86_FEATURE_PKS, fs);
++    }
  
-     /* These are all copied into guest memory, so use zero-ed memory. */
--    config.rsdp = (unsigned long)libxl__zalloc(gc, libxl_ctxt.page_size);
-+    config.rsdp = (unsigned long)libxl__zalloc(gc, RSDP_LEN);
-     config.infop = (unsigned long)libxl__zalloc(gc, libxl_ctxt.page_size);
-     /* Pages to hold ACPI tables */
-     libxl_ctxt.buf = libxl__zalloc(gc, NUM_ACPI_PAGES *
-@@ -204,18 +206,18 @@ int libxl__dom_load_acpi(libxl__gc *gc,
-                       libxl_ctxt.guest_start) >> libxl_ctxt.page_shift;
+     if ( !cpu_has_vmx_msrlist )
+         __clear_bit(X86_FEATURE_MSRLIST, fs);
  
-     dom->acpi_modules[0].data = (void *)config.rsdp;
--    dom->acpi_modules[0].length = 64;
-+    dom->acpi_modules[0].length = RSDP_LEN;
-     /*
-      * Some Linux versions cannot properly process hvm_start_info.rsdp_paddr
-      * and so we need to put RSDP in location that can be discovered by ACPI's
--     * standard search method, in R-O BIOS memory (we chose last 64 bytes)
-+     * standard search method, in R-O BIOS memory (we chose last RSDP_LEN bytes)
-      */
-     if (strcmp(xc_dom_guest_os(dom), "linux") ||
-         xc_dom_feature_get(dom, XENFEAT_linux_rsdp_unrestricted))
-         dom->acpi_modules[0].guest_addr_out = ACPI_INFO_PHYSICAL_ADDRESS +
-             (1 + acpi_pages_num) * libxl_ctxt.page_size;
-     else
--        dom->acpi_modules[0].guest_addr_out = 0x100000 - 64;
-+        dom->acpi_modules[0].guest_addr_out = 0x100000 - RSDP_LEN;
- 
-     dom->acpi_modules[1].data = (void *)config.infop;
-     dom->acpi_modules[1].length = libxl_ctxt.page_size;
+-    /*
+-     * Xen doesn't use PKS, so the guest support for it has opted to not use
+-     * the VMCS load/save controls for efficiency reasons.  This depends on
+-     * the exact vmentry/exit behaviour, so don't expose PKS in other
+-     * situations until someone has cross-checked the behaviour for safety.
+-     */
+-    if ( !cpu_has_vmx )
+-        __clear_bit(X86_FEATURE_PKS, fs);
+-
+     /* 
+      * Make adjustments to possible (nested) virtualization features exposed
+      * to the guest
 
 
