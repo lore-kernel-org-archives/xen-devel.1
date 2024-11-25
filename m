@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E715AD58D5A
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Nov 2024 15:18:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.842824.1258495 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D37DD58D5A
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Nov 2024 15:19:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.842834.1258505 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tFaqu-0002FZ-EN; Mon, 25 Nov 2024 15:18:16 +0000
+	id 1tFarh-0002t0-PE; Mon, 25 Nov 2024 15:19:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 842824.1258495; Mon, 25 Nov 2024 15:18:16 +0000
+Received: by outflank-mailman (output) from mailman id 842834.1258505; Mon, 25 Nov 2024 15:19:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tFaqu-0002FS-BU; Mon, 25 Nov 2024 15:18:16 +0000
-Received: by outflank-mailman (input) for mailman id 842824;
- Mon, 25 Nov 2024 15:18:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tFarh-0002sr-MN; Mon, 25 Nov 2024 15:19:05 +0000
+Received: by outflank-mailman (input) for mailman id 842834;
+ Mon, 25 Nov 2024 15:19:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=mqqh=SU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tFagM-0003aM-Nd
- for xen-devel@lists.xenproject.org; Mon, 25 Nov 2024 15:07:22 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f789e8a3-ab3e-11ef-a0cd-8be0dac302b0;
- Mon, 25 Nov 2024 16:07:20 +0100 (CET)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5ceb03aadb1so6230989a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 25 Nov 2024 07:07:20 -0800 (PST)
+ id 1tFarg-0002ed-2j
+ for xen-devel@lists.xenproject.org; Mon, 25 Nov 2024 15:19:04 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9912bfbd-ab40-11ef-99a3-01e77a169b0f;
+ Mon, 25 Nov 2024 16:19:00 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43163667f0eso40907375e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Nov 2024 07:19:00 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d01d3b88a7sm4211936a12.31.2024.11.25.07.07.17
+ 5b1f17b1804b1-433cde98b4dsm132705555e9.43.2024.11.25.07.18.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Nov 2024 07:07:18 -0800 (PST)
+ Mon, 25 Nov 2024 07:18:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,56 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f789e8a3-ab3e-11ef-a0cd-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo1MzUiLCJoZWxvIjoibWFpbC1lZDEteDUzNS5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImY3ODllOGEzLWFiM2UtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNTQ3MjQwLjI3NDc1NCwic2VuZGVyIjoiamJldWxpY2hAc3VzZS5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 9912bfbd-ab40-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjozMmYiLCJoZWxvIjoibWFpbC13bTEteDMyZi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6Ijk5MTJiZmJkLWFiNDAtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNTQ3OTQwLjgxNDM0MSwic2VuZGVyIjoiamJldWxpY2hAc3VzZS5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1732547240; x=1733152040; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=k+1d1eHTAbN7qx8eZxxGuToNd+oa2jtDcMn6UWnYD5k=;
-        b=Bl44DEnHcf2inRdL5baHlRuyPMVfm+ebTM0EQ/I6xwvyHGIQfAdnbO+QZaW+Jo6rOu
-         glhsjr31a2UMNZ3rj/xQuv73TTQvhkqGQVLlu/I04szdYuVYIqGQqtAXSmAq80w+xccX
-         cwbz9hJGP2L6mWnXDC6+99JRbCJ9bMomRvzN5BxsXsHW6RUJX9GcOeZunV9x7dHdWGTc
-         8iau9xSvQX4eQVP1h70/VvUYuzGNXt/xXpszTUn932d2zR4GGTTruOJlWUJ/JTrkTxc2
-         rhThZJdnBQnzrOcNvmGo2ijp4YBeFeLqEbsXu54bC5txKJQQgUQj075q4EBqyNlDaOXL
-         GnAA==
+        d=suse.com; s=google; t=1732547940; x=1733152740; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Bbzl4+WdF2uCFxZFiU3I43axHjlGKuMk0FeLDNxovys=;
+        b=HffpTL2H8oENuruUV13AYX3TKdBdG8CieOEBiLTz5GiwEnz3kw9ZbWe3qG0K3gJ4jg
+         zFOr1Xrq4yloyNyMNpv5woSMBUVf1g8oPAGrwevoatd5HLl7vqgFsPsOZ38PwcCGOppa
+         mQbQXHr4mol8JGcgM4+2EKZSNPVrcf0yEXXMzILoK8Yb8hXdkGNIb8HjMKJnBQC180Bx
+         A57lu5nxI8e6sHwAA/3+ryGtHDR/uerQJCLYRLZRgenrSLQ/jr11wGOkcfoiupj9KYaF
+         gDnPNopHU2hTrT6bCRVtsXppFwqfvIziuWIn5gIQ6jpzrUQ6ufrx4b0b8wuxP7x4Qe6U
+         8VrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732547240; x=1733152040;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=k+1d1eHTAbN7qx8eZxxGuToNd+oa2jtDcMn6UWnYD5k=;
-        b=K9lra+f0Nj5N3q5eFBQwp1t/+4mAVmOzvAwOuxmw7LiL4lF9WroSTtFVzSRAsOzF9o
-         Mb3iovEqDwvBc1viqcUOzhvn7z8VgmLar4gerMYJ3b50EtoHi/N4In+o/yv8HAEDWJQ6
-         4jBjiB1gslrrqnQ7o2S+If/pm8pvFbDsoxAZbAslrHJu01gabE8Y90Ag//Vf+/Z2VWMM
-         GLw6iXFrGO3SgzE09WQZnU6XKjEFdcfqt0Y2eQ+Hna0MDz5EerfZHsK+hocn3HDOCApS
-         x1FI6BtyznqtSpHd7uzCI6TAq8lX1BxRrhlGqeSwSzTqBeo5ml049GDyjiX0C0K7SCsI
-         3NhA==
-X-Gm-Message-State: AOJu0YzPo94wNKPLQD3LA+ZjZyM9oe/LHp/DBfTtW+BLyqr5CYG7YVN2
-	MoU4KTyPZeox1m7gbHPLciBKKni9Q0WUVj53B92IcKNfBPmrkTMYIfeSVQqyzM3rr6O3G+daH1s
-	=
-X-Gm-Gg: ASbGnctIymFQtTDy8Kxll4GSXmFl7DZyPFMNn6ttAOYtGh9yIiy5z+dc1vHuam430fm
-	G1OLFHaJ0NE0AgXlpAjFDqPRJI2of9JHDBc+O45etm1yt2OBsCPSPjE4dqbAuWk2VYZ02ATU5nL
-	o6BzhgGExIKW5w31vHZeLo39bTMQNR2Ex/eB8nJba2mzOi9ttCYo+gSyX6ZLWFWaTnVKi2dENp9
-	UomPJqjE5La95B4j8SXmujAJoVrmGOnz0ZAnKPXdww7+jwJYuq33EIPGmMWRrR3+enxvRKqFPt9
-	M+c9xJFFtOxH9hUL7dtOiOp62C3kbkPgPTk=
-X-Google-Smtp-Source: AGHT+IHbPhNiogIELLJ6cjXrvcWfeM5Il4LLgbQ3SkT0Fk+63R+PZDTuXBm6j3vc+bR/y0Wh5uomdw==
-X-Received: by 2002:a05:6402:27c8:b0:5cf:657b:bf0 with SMTP id 4fb4d7f45d1cf-5d0207c1530mr9370345a12.29.1732547238555;
-        Mon, 25 Nov 2024 07:07:18 -0800 (PST)
-Message-ID: <df9668f1-7d26-4c14-a8d2-0f2107f68ca2@suse.com>
-Date: Mon, 25 Nov 2024 16:07:17 +0100
+        d=1e100.net; s=20230601; t=1732547940; x=1733152740;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Bbzl4+WdF2uCFxZFiU3I43axHjlGKuMk0FeLDNxovys=;
+        b=q/WcdMAHTPJQInZJcMT9lGSsCpJxu6fIh76FrsHq2qNuZwVCA++ApeGNKyp/gCMH0l
+         EqRIeRRvB97pyz4a1HG26hRkLcHB5Ly2CYI09YHyYMKfsdNkPqHdvi04/gTnkYTcNBGg
+         faA/Vwlej2iEJxFgedjQvx8aRCqa3PYj4DiFHLFtd8wUwlvwxC6jIf+Js/rQeuZaUkmv
+         m2XrHQBlemj2HK+h4Rd/g/FqH6FYM4W6yW+AqpDmyK6MNe2wf+T7tFCuL+03XdKah+8a
+         AqcdslHe67nMV4wkzfVuG2NZnKGpKlBn8GTgGAWf/boojO13Pmlrz2M01hCDEOMiC4vs
+         uh7A==
+X-Forwarded-Encrypted: i=1; AJvYcCU6himAwL8HlV3A846nn2ZLn5QxOv5eiQdElS96f2qKFCobTddOu2z40POW/521vZKqapjCwmezmbk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YziQEQXjjcIsx1ta5as4VBkuIh/QGPRzjyX9xfkO7S/rDEY+04/
+	mM6cXnrk6fSjLQwK8AEOP1fvMAXjjVc1pE8TQ2Y7H6E+vcz5RP0WK+YoZ/EC/g==
+X-Gm-Gg: ASbGncsG+jCHTQYA12p7t4vkVCKQ7IEZaA0tfkC29HrUDOcrzJRL6oiWV1pT0baGP/k
+	RiE6rcM2EFwLmXo+PFR/3T4UgIGcqX8iKDH9sbWCudpGvCRFbJae5Yupixi44KmA2tyFMK0gppV
+	4KPrNnag4QSWwOLRRUONuH9krlbgv7ruCrrNTHEYC4OV+FKo+wmA6B1XN3IL9H0jbajud4gunsI
+	fKZfSOj6j8gXI8m1guuSBa8t2Yvf5ycz+VmyhDn0tjq7tEG/bLyNSDl+fdZr2ZZEJrzgsHGXgDj
+	WtKhhIr3IitYn4VeDPVzxN4xBT27tm8hSM8=
+X-Google-Smtp-Source: AGHT+IFZSvI10ODL8rU+rszr/9jzKHlhkzvR+dY/mPY0TikooRIWjPIp8s0uT+OGSAmbtpMdNl0W7w==
+X-Received: by 2002:a05:600c:3d8d:b0:432:d82d:6a6c with SMTP id 5b1f17b1804b1-433ce4e74f4mr122093825e9.30.1732547940238;
+        Mon, 25 Nov 2024 07:19:00 -0800 (PST)
+Message-ID: <095d7f9b-ca64-4241-a268-ae481dec4535@suse.com>
+Date: Mon, 25 Nov 2024 16:18:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v7 4/7] x86/cpu-policy: re-arrange no-VMX logic
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <3a25cd59-e1cb-4bfc-b868-fb11599d22f5@suse.com>
+Subject: Re: [PATCH] x86/pv: don't populate the GDT/LDT L3 slot at domain
+ creation
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <20241121171504.55383-1-roger.pau@citrix.com>
 Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -120,50 +120,21 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <3a25cd59-e1cb-4bfc-b868-fb11599d22f5@suse.com>
+In-Reply-To: <20241121171504.55383-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Move the PKS check into an "else" for the corresponding "if()", such
-that further adjustments (like for USER_MSR) can easily be put there as
-well.
+On 21.11.2024 18:15, Roger Pau Monne wrote:
+> The current code in pv_domain_initialise() populates the L3 slot used for the
+> GDT/LDT, however that's not needed, since the create_perdomain_mapping() in
+> pv_create_gdt_ldt_l1tab() will already take care of allocating an L2 and
+> populating the L3 entry if not present.
+> 
+> No functional change intended.
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v5: Re-base.
-v4: New.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -756,19 +756,20 @@ static void __init calculate_hvm_max_pol
-         if ( !cpu_has_vmx_xsaves )
-             __clear_bit(X86_FEATURE_XSAVES, fs);
-     }
-+    else
-+    {
-+        /*
-+         * Xen doesn't use PKS, so the guest support for it has opted to not use
-+         * the VMCS load/save controls for efficiency reasons.  This depends on
-+         * the exact vmentry/exit behaviour, so don't expose PKS in other
-+         * situations until someone has cross-checked the behaviour for safety.
-+         */
-+        __clear_bit(X86_FEATURE_PKS, fs);
-+    }
- 
-     if ( !cpu_has_vmx_msrlist )
-         __clear_bit(X86_FEATURE_MSRLIST, fs);
- 
--    /*
--     * Xen doesn't use PKS, so the guest support for it has opted to not use
--     * the VMCS load/save controls for efficiency reasons.  This depends on
--     * the exact vmentry/exit behaviour, so don't expose PKS in other
--     * situations until someone has cross-checked the behaviour for safety.
--     */
--    if ( !cpu_has_vmx )
--        __clear_bit(X86_FEATURE_PKS, fs);
--
-     /* 
-      * Make adjustments to possible (nested) virtualization features exposed
-      * to the guest
 
 
