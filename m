@@ -4,56 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15B4AD6552F
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 17:20:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.843947.1259526 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA18FD65531
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 17:28:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.843977.1259543 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tFzEO-0004vY-QR; Tue, 26 Nov 2024 17:20:08 +0000
+	id 1tFzMX-0006pb-Qe; Tue, 26 Nov 2024 17:28:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 843947.1259526; Tue, 26 Nov 2024 17:20:08 +0000
+Received: by outflank-mailman (output) from mailman id 843977.1259543; Tue, 26 Nov 2024 17:28:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tFzEO-0004uv-MS; Tue, 26 Nov 2024 17:20:08 +0000
-Received: by outflank-mailman (input) for mailman id 843947;
- Tue, 26 Nov 2024 17:20:07 +0000
+	id 1tFzMX-0006pU-Ma; Tue, 26 Nov 2024 17:28:33 +0000
+Received: by outflank-mailman (input) for mailman id 843977;
+ Tue, 26 Nov 2024 17:28:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lzfN=SV=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1tFzEN-0004k8-9N
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 17:20:07 +0000
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2060f.outbound.protection.outlook.com
- [2a01:111:f403:2407::60f])
+ <SRS0=58W+=SV=bounce.vates.tech=bounce-md_30504962.67460538.v1-66637e0ed7a34aef89b0ac50fb23cbee@srs-se1.protection.inumbo.net>)
+ id 1tFzMW-0006pO-G2
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 17:28:32 +0000
+Received: from mail134-5.atl141.mandrillapp.com
+ (mail134-5.atl141.mandrillapp.com [198.2.134.5])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ab4bdcd1-ac1a-11ef-99a3-01e77a169b0f;
- Tue, 26 Nov 2024 18:20:02 +0100 (CET)
-Received: from BLAPR03CA0041.namprd03.prod.outlook.com (2603:10b6:208:32d::16)
- by MW6PR12MB8900.namprd12.prod.outlook.com (2603:10b6:303:244::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.20; Tue, 26 Nov
- 2024 17:19:55 +0000
-Received: from BN3PEPF0000B06B.namprd21.prod.outlook.com
- (2603:10b6:208:32d:cafe::55) by BLAPR03CA0041.outlook.office365.com
- (2603:10b6:208:32d::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8182.20 via Frontend Transport; Tue,
- 26 Nov 2024 17:19:54 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B06B.mail.protection.outlook.com (10.167.243.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8230.0 via Frontend Transport; Tue, 26 Nov 2024 17:19:54 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 26 Nov
- 2024 11:19:52 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 26 Nov
- 2024 11:19:52 -0600
-Received: from amd-BIRMANPLUS.mshome.net (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39
- via Frontend Transport; Tue, 26 Nov 2024 11:19:52 -0600
+ id d7d8cb93-ac1b-11ef-99a3-01e77a169b0f;
+ Tue, 26 Nov 2024 18:28:26 +0100 (CET)
+Received: from pmta10.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail134-5.atl141.mandrillapp.com (Mailchimp) with ESMTP id
+ 4XyV0S5JtGzG0CCNb
+ for <xen-devel@lists.xenproject.org>; Tue, 26 Nov 2024 17:28:24 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 66637e0ed7a34aef89b0ac50fb23cbee; Tue, 26 Nov 2024 17:28:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,172 +45,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab4bdcd1-ac1a-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDE6MTExOmY0MDM6MjQwNzo6NjBmIiwiaGVsbyI6Ik5BTTAyLUJOMS1vYmUub3V0Ym91bmQucHJvdGVjdGlvbi5vdXRsb29rLmNvbSJ9
-X-Custom-Transaction: eyJpZCI6ImFiNGJkY2QxLWFjMWEtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjQxNjAyLjYxNjgyMSwic2VuZGVyIjoiamFzb24uYW5kcnl1a0BhbWQuY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yunzMZ21GMUd/h77Vtl5ARGp3smqCcADElWnwjFAsOL5l564FOgeLRyYBAQPeo0mpnqzClvmuXssQej9JXavHmxx+Z8ykwm4Fw4232E+0wbjaVwwGfGt8klngqoiQ2MXuH8Rcoidvg93ebVECMp4rc8/Uw5D8sevObOWB1ki+zgjLrbdPpvfOnBdM9Rro7tpte4ARXkrSPzr1AFDN0TXrpmQYAvcvbtBpQJhTOU67vnGgwROjIHlBir1kpAzZx04Lm8rgPQkvBUdVTdqOentKJGBHxupET37lAZikvESgIUVxATB5V+z71dNi4DJR22Fbz0BFdo51T965lECQuyMMg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uu7AKaBE7cQGMVaJpznh0ldBUuYX3CfpL80utGtzydc=;
- b=aCSim3baJZEMxj3tiQqZUrWXJgBNyUsqBRVSAeWC5kBfX96ardZkI4EfTozwA7XDPj9b0NVtQJRIzioGToFPIslZCP789ou00ei9pUZewKBg20fpZvjAYQCmT3EZo1u75mRyCcClDZ1Z3uhcrGdhd2EXDD3j003o7sMZ3uUzCg5rUG67vgheaBwpdizZCFaIdL4BUwzj8HmDxGlgbKXWVRiS/hT5/IFOw8uL83afT0ILTPJCMcip8WaJ1AqctHaOo3Jgx1urtMUYgahOGoFQj1CqnOIFAw6BLWb0WBDXajye4WYZNjuvCWY+HdMMK3hCGit4IejhtXd4TQzWm6T8Dg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uu7AKaBE7cQGMVaJpznh0ldBUuYX3CfpL80utGtzydc=;
- b=a2L/qfJ7d9ZR14WBQdIZUGrGNRqa3IbBew/U5mRWIRCdbw3njicCiJ/DyO/EW4OMExoGF4AK4m8GjyuQYY+sWUPB2Dt3BHZH3KLJRzpbGQETxMPPPuHcbpYlCdZECILTBYvbpWAZ1AL+bxM9kMSok3tH4vHXGuRQBdEy7HzMtKg=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jason Andryuk <jason.andryuk@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Anthony PERARD
-	<anthony.perard@vates.tech>
-Subject: [PATCH v2 1/2] xl: Keep monitoring suspended domain
-Date: Tue, 26 Nov 2024 12:19:40 -0500
-Message-ID: <20241126171941.170897-2-jason.andryuk@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241126171941.170897-1-jason.andryuk@amd.com>
-References: <20241126171941.170897-1-jason.andryuk@amd.com>
+X-Inumbo-ID: d7d8cb93-ac1b-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjE5OC4yLjEzNC41IiwiaGVsbyI6Im1haWwxMzQtNS5hdGwxNDEubWFuZHJpbGxhcHAuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImQ3ZDhjYjkzLWFjMWItMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjQyMTA2LjcxMDg3Niwic2VuZGVyIjoiYm91bmNlLW1kXzMwNTA0OTYyLjY3NDYwNTM4LnYxLTY2NjM3ZTBlZDdhMzRhZWY4OWIwYWM1MGZiMjNjYmVlQGJvdW5jZS52YXRlcy50ZWNoIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1732642104; x=1732902604;
+	bh=P+qM1w/y12acB8iR/jp4snyiIcnwcoYsTw8t3cVTlN8=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=lcDJW3d5ojQ/IX5sLj9+9W95CDFdiF64lGC0Rf7bP1DJN/7xSI4syjBGt85uR8KQ9
+	 +tqswwyaqEHo+23/ZbG+cHXAU/h151xj0VlTWn0VMUKc98HcXVllYHMCEIxNC0BpYd
+	 edJyirTXENmHijh7/pz+QhhHI1deu62SThSTq9bXhtvPSppMWDhyHbcRnEJERzcwUz
+	 0r16/Saya0ZG4ydUdD3gH86RULCLwSqOVFv4XFrnyaQBaDr/DLITpv2LU2O03hCe1Z
+	 kwBF5nRigk/Pt3ynN5OXVVHmXVFBcTlDHBpE/6YjonthucofAkxr72LKInc2Cbs9ZL
+	 4TgzcjXu5m+Ew==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1732642104; x=1732902604; i=anthony.perard@vates.tech;
+	bh=P+qM1w/y12acB8iR/jp4snyiIcnwcoYsTw8t3cVTlN8=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=0UofJUZLgZWlNnk1UFmQRJMRR9k5XnjJqBXPffkxnAmpAJ8sEBFfog5ph9KH/YR/u
+	 DadIlSrWfCSPZsnfOl5SsybIaLh0ptqZB3eMT19HoObHClelEjgj2Tg4GoB7FEZ137
+	 lPxWM1vY8ubKMSgG/7uwS6EhxCkcJk970z5v72a9cdu0v+HPpYju7QBwLX3u0eJ5mu
+	 RvwaPMbPo4Vk9KwxvWUHrZXjUhkKwDvWujcqf2uDkzxY8F+sCUhsBk9NARCm/L3eJZ
+	 ni9VeTCWJhE9USFBTb+gE3Dbq5v2IUsmzWxebsGIhkXIcKaSGABYsoQjxrwYc2B4v0
+	 o7YKL6EQ6jYxA==
+From: "Anthony PERARD" <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH=205/6]=20tools:=20add=20a=20dedicated=20header=20file=20for=20barrier=20definitions?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1732642104050
+To: "Juergen Gross" <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org
+Message-Id: <Z0YFN13jUJMNb-7h@l14>
+References: <20241023131005.32144-1-jgross@suse.com> <20241023131005.32144-6-jgross@suse.com>
+In-Reply-To: <20241023131005.32144-6-jgross@suse.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.66637e0ed7a34aef89b0ac50fb23cbee?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20241126:md
+Date: Tue, 26 Nov 2024 17:28:24 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06B:EE_|MW6PR12MB8900:EE_
-X-MS-Office365-Filtering-Correlation-Id: 147dd5bd-b82b-443a-eaae-08dd0e3e8b76
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?5npzX6wCUbq63ixJdcRcao1pPiyeHxd2pm5rjOhPzqENbH73qBffa0Bb2zQk?=
- =?us-ascii?Q?M3qe65qSHdNbo26CltgT9w9RQxwHLoIvt9fFrjdFKzomqWGLIg0mBVeBrzxD?=
- =?us-ascii?Q?tx7LTyyUgMOooR3+tooKpJsbeke2//XmUDoBYX6WhbMsH9hJrvnwN0dAiD+N?=
- =?us-ascii?Q?SN95vsDw/inpSS+u7M+X70e/V79tVOAn7DaKiWSrWRy642PSFFGG1vqlKDEh?=
- =?us-ascii?Q?/o2PCYWuWPL8zWXtwvHwwV3NE70HbNu7Ly9j3nOOUhvdw5+orOq4vuquEUnO?=
- =?us-ascii?Q?ylNa2aq+VOYWobsZGRUwtK1zVpydJzXgg9UeQiCg1ohi4mCNNhOxsBcbhzk1?=
- =?us-ascii?Q?hanQX9pqDRs+1Koh3gvSYqfythe3EFKPZ13ZXCBAkq4Px87/rYvJ9lgurlT2?=
- =?us-ascii?Q?l4V+oKAvJ+6Km1B67WS1xFv+C2H3YFe0tHysxLELEuL2J1yG7ByRzYmV0gaG?=
- =?us-ascii?Q?V46GAkPKbAyQf889a+pETT8GopS3ualWwF33NDrZWuyabK6j6KQE2wVoEZHI?=
- =?us-ascii?Q?z041TaQ+rD5BnK7XxRrj+nNRs44eG2N1OwpGfTALyibTvik9itnnLYyNb1rG?=
- =?us-ascii?Q?XdUbOq6Ml+XfeDAog8J3o4P/AWHo5XR4jyCfLgbtO6+Jg5iqJYiD7h8JlUnJ?=
- =?us-ascii?Q?0ySZ3guZ39Rm/jMfZLHkXLr6x2H89AOOScag6/RFndUTKL4vTt+OxykG+Vrj?=
- =?us-ascii?Q?zsA8mwdxrS6vPNXsbA6H4Pu2rUuO1sii0XhzNh0FuEiHe9cvt7KnCGcMEsmX?=
- =?us-ascii?Q?k6epN7NmNv8boCYYHv5Dh0K8LtqUSZUMA36XMax8SGXnA0NqK/XREMia+hng?=
- =?us-ascii?Q?dORNbhF+Qf47VOIgKN2GGEU2/yLZyCyqZDK5bm53Bk5iWlxJoQ9V/XbrMD52?=
- =?us-ascii?Q?zhALCt14QdHj7uhi87lF/sA/j+hnrHLcBzfVzxRWiKc3PXTvVF9Nf4t3bcCV?=
- =?us-ascii?Q?tH1qWrqysUVISQCPWggayamDB2WSR3d3puyx1/B6iWTQksYOV4ZnSOggvdsl?=
- =?us-ascii?Q?kcyJxUYglq0oLrwp1UHPwuNa6wdItYh2oTNfzCiREEbsRH7p6PkHhUOMSiwZ?=
- =?us-ascii?Q?ORSZCKmvFy5mEAwLdePN+q/0AKvf/FaXGxULk8VjeKy0Xy/JWlhndpdfBpPV?=
- =?us-ascii?Q?q9QwWlYhDOrGZn1terZdtkbeND/YQGYKsR27KzyUiamuQPbx6gGipzQn4rqj?=
- =?us-ascii?Q?2l5ZXSHAgAWdK1DKFI1dPGAWc0lBYngJFFiNvtVduUcvkagr31UJdhftxCzv?=
- =?us-ascii?Q?8aWNPMMDuykx487SWCdq+3Id+I98OYeEEaOQYzszDs7Uz3Wpc3IodWu8+JhC?=
- =?us-ascii?Q?WwE95szjYcrGeG2FrOFoH/oD5NPvVMiLtcsCrH+lrK5ARUm7qklGEKbwin22?=
- =?us-ascii?Q?MBYJLhpssUy4DUXsGSYI5b4WhZfm0IcTtyoNg82/nrWV2EwT/MlwK9YngWFF?=
- =?us-ascii?Q?NPp6VO7wshVIFrDEIJTIE2CkqNS0Znp1?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2024 17:19:54.6441
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 147dd5bd-b82b-443a-eaae-08dd0e3e8b76
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B06B.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8900
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-When a VM transitioned to LIBXL_SHUTDOWN_REASON_SUSPEND, the xl daemon
-was exiting as 0 = DOMAIN_RESTART_NONE "No domain restart".
-Later, when the VM actually shutdown, the missing xl daemon meant the
-domain wasn't cleaned up properly.
+On Wed, Oct 23, 2024 at 03:10:04PM +0200, Juergen Gross wrote:
+> diff --git a/tools/include/xen-barrier.h b/tools/include/xen-barrier.h
+> new file mode 100644
+> index 0000000000..62036f528b
+> --- /dev/null
+> +++ b/tools/include/xen-barrier.h
+> @@ -0,0 +1,51 @@
+> +/******************************************************************************
+> + * xen-barrier.h
+> + *
+> + * Definition of CPU barriers, part of libxenctrl.
 
-Add a new DOMAIN_RESTART_SUSPENDED to handle the case.  The xl daemon
-keeps running to react to future shutdown events.
+Does it needs to be part of "libxenctrl" ? :-) Since the goal is to be
+able to use the header without xenctrl.
 
-The domain death event needs to be re-enabled to catch subsequent
-events.  The libxl_evgen_domain_death is moved from death_list to
-death_reported, and then it isn't found on subsequent iterations through
-death_list.  We enable the new event before disabling the old event, to
-keep the xenstore watch active.  If it is unregistered and
-re-registered, it'll fire immediately for our suspended domain which
-will end up continuously re-triggering.
+> + *
+> + * Copyright (c) 2003-2004, K A Fraser.
 
-Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
----
- tools/xl/xl.h           |  1 +
- tools/xl/xl_vmcontrol.c | 18 +++++++++++++++++-
- 2 files changed, 18 insertions(+), 1 deletion(-)
+I'm not sure this copyright line is enough, looking at `git blame`.
 
-diff --git a/tools/xl/xl.h b/tools/xl/xl.h
-index 9c86bb1d98..967d034cfe 100644
---- a/tools/xl/xl.h
-+++ b/tools/xl/xl.h
-@@ -301,6 +301,7 @@ typedef enum {
-     DOMAIN_RESTART_NORMAL,       /* Domain should be restarted */
-     DOMAIN_RESTART_RENAME,       /* Domain should be renamed and restarted */
-     DOMAIN_RESTART_SOFT_RESET,   /* Soft reset should be performed */
-+    DOMAIN_RESTART_SUSPENDED,    /* Domain suspended - keep looping */
- } domain_restart_type;
- 
- extern void printf_info_sexp(int domid, libxl_domain_config *d_config, FILE *fh);
-diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
-index fa1a4420e3..c45d497c28 100644
---- a/tools/xl/xl_vmcontrol.c
-+++ b/tools/xl/xl_vmcontrol.c
-@@ -417,7 +417,7 @@ static domain_restart_type handle_domain_death(uint32_t *r_domid,
-         break;
-     case LIBXL_SHUTDOWN_REASON_SUSPEND:
-         LOG("Domain has suspended.");
--        return 0;
-+        return DOMAIN_RESTART_SUSPENDED;
-     case LIBXL_SHUTDOWN_REASON_CRASH:
-         action = d_config->on_crash;
-         break;
-@@ -1030,6 +1030,7 @@ start:
-         }
-     }
-     while (1) {
-+        libxl_evgen_domain_death *deathw2 = NULL;
-         libxl_event *event;
-         ret = domain_wait_event(domid, &event);
-         if (ret) goto out;
-@@ -1100,9 +1101,24 @@ start:
-                 ret = 0;
-                 goto out;
- 
-+            case DOMAIN_RESTART_SUSPENDED:
-+                LOG("Continue waiting for domain %u", domid);
-+                /*
-+                 * Enable a new event before disabling the old.  This ensures
-+                 * the xenstore watch remains active.  Otherwise it'll fire
-+                 * immediately on re-registration and find our suspended domain.
-+                 */
-+                ret = libxl_evenable_domain_death(ctx, domid, 0, &deathw2);
-+                if (ret) goto out;
-+                libxl_evdisable_domain_death(ctx, deathw);
-+                deathw = deathw2;
-+                deathw2 = NULL;
-+                break;
-+
-             default:
-                 abort();
-             }
-+            break;
- 
-         case LIBXL_EVENT_TYPE_DOMAIN_DEATH:
-             LOG("Domain %u has been destroyed.", domid);
+Keir introduce xen_barrier macro in 2012, in
+8d3f757328e1 ("libxc: Update rmb/wmb for x86.")
+Stefano introduced the Arm macro in 2012, in daa314fe1938 ("arm: compile
+libxc"), and Ian in 2013 in ae4b6f29a983 ("tools: libxc: arm64
+support").
+There's been a modification by Andrew in 2020, so Citrix copyright,
+in de16a8fa0db7 ("x86: Use LOCK ADD instead of MFENCE for smp_mb()").
+
+So overall, we probably want:
+Copyright (C) 2003-2012, K A Fraser.
+Copyright (C) 2012-2020 Citrix Systems, Inc.
+
+
+> + *
+> + * This library is free software; you can redistribute it and/or
+> + * modify it under the terms of the GNU Lesser General Public
+> + * License as published by the Free Software Foundation;
+> + * version 2.1 of the License.
+> + *
+> + * This library is distributed in the hope that it will be useful,
+> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+> + * Lesser General Public License for more details.
+> + *
+> + * You should have received a copy of the GNU Lesser General Public
+> + * License along with this library; If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#ifndef XENBARRIER_H
+> +#define XENBARRIER_H
+
+With an extra '_' for the '-' in the header filename?
+    XEN_BARRIER_H
+
+
+Otherwise, the rest of the patch looks fine to me, even without the rest
+of the series.
+
+Cheers,
+
 -- 
-2.34.1
 
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
