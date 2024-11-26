@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C09D66BA5
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844049.1259616 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11DD1D66BA7
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844052.1259624 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tn-0000i3-22; Tue, 26 Nov 2024 23:23:15 +0000
+	id 1tG4tn-0000nZ-Cz; Tue, 26 Nov 2024 23:23:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844049.1259616; Tue, 26 Nov 2024 23:23:15 +0000
+Received: by outflank-mailman (output) from mailman id 844052.1259624; Tue, 26 Nov 2024 23:23:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tm-0000g8-S1; Tue, 26 Nov 2024 23:23:14 +0000
-Received: by outflank-mailman (input) for mailman id 844049;
- Tue, 26 Nov 2024 23:22:03 +0000
+	id 1tG4tn-0000mE-4r; Tue, 26 Nov 2024 23:23:15 +0000
+Received: by outflank-mailman (input) for mailman id 844052;
+ Tue, 26 Nov 2024 23:22:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4sd-0000At-CO
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:03 +0000
+ id 1tG4se-0000At-CO
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:04 +0000
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a43e29d-ac4d-11ef-99a3-01e77a169b0f;
- Wed, 27 Nov 2024 00:21:56 +0100 (CET)
+ id 3ae27bca-ac4d-11ef-99a3-01e77a169b0f;
+ Wed, 27 Nov 2024 00:21:57 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 953F4A401CE;
+ by nyc.source.kernel.org (Postfix) with ESMTP id E9453A41665;
  Tue, 26 Nov 2024 23:20:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 237A6C4CED0;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 56E98C4CED7;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0AAF3D66B89;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 4A42ED66B84;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,30 +47,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a43e29d-ac4d-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 3ae27bca-ac4d-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjE0Ny43NS4xOTMuOTEiLCJoZWxvIjoibnljLnNvdXJjZS5rZXJuZWwub3JnIn0=
-X-Custom-Transaction: eyJpZCI6IjNhNDNlMjlkLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE3LjA3NjY1MSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Custom-Transaction: eyJpZCI6IjNhZTI3YmNhLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE3Ljk3MDI5MSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1732663315;
-	bh=1Tgv8W8Bg/t7u7numSd+mYVQFp79uUbY0gFJ5smR4Lk=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=MxC05qFAfdrGXMJupF6DpUCwnsBeGG/dWqvYNpoWMqdbWB7XIPJ/0BsaxJDGiT9oj
-	 rKeW35vU4ZCTkwi5OvYSvofXfkDjoOosDWNlqa9tpAcEl1dv/vezZjs+HZ9bdfoqyD
-	 tjmh7Ao/As3QGqRA70HjNEx0M8r8wjx4gnspTZL6s3qr3VGTmQyekwG5XvmQgNXME1
-	 Ss9D3Nkcyp7W0D1EP1ixpAbnSrHUOEGPw0hU989G1oSExF+dCpiQoeMHi6IxeWGIqB
-	 kzb4PXANFrypj2mK4X7XbvMhofmlj8F3PqPgG7qtV7JGuFJHnBFCDo+hkb5yICTfN/
-	 GJjcv3acu7YlQ==
+	bh=hhpepZyC6+B98tKRYu7FEASFfIF/3/TSsCfLQMcZ32A=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=qnzUmTBBnyPw/PBcHJlWArvKyI3BqwPBho6sr0Ljp4rDl716NfDn4W/kR5sa24HeN
+	 LfQqL14pYIaW5oKjKa+2wWEQQqLcYQJUaxaX8lFThkeZ4wfrVxqa8riVBoZ+pmXa6G
+	 e5DZ+xsajgVkEYhLPPHs2zODp10ZEE9ocsKEsGSx6CBmZRBLJ21xSFiBVJotMKDIci
+	 GjXijXXt4ITNwNyav8sKH8kwvnJ4lMB8dPxNL0+/muqV+4hLhgFyb840SKGcF4PKV6
+	 WL+APewHdNypUEBBSXUA/yv5fEa67mtK4tUfX8LirE2kXWxb5ury8wvshCHtOYW/jy
+	 SbzrPLNILgJtQ==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Subject: [PATCH 00/36] Introduce NS8250 UART emulator
-Date: Tue, 26 Nov 2024 15:21:50 -0800
-Message-Id: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
+Date: Tue, 26 Nov 2024 15:21:53 -0800
+Subject: [PATCH 03/36] xen: introduce resource.h
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAA5YRmcC/x3MPQqAMAxA4atIZgM2NPhzFXGoGjVLlVaLIN7d4
- vgN7z0QJahE6IoHgiSNuvsMUxYwbc6vgjpnA1VkjSHGdLlwoo8NcYXJIDs7cj05plYgV0eQRe/
- /2A/v+wF3B1M6YQAAAA==
-X-Change-ID: 20241125-vuart-ns8250-v1-5a4b57ca529e
+Message-Id: <20241126-vuart-ns8250-v1-v1-3-87b9a8375b7a@ford.com>
+References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
+In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
  Andrew Cooper <andrew.cooper3@citrix.com>, 
  =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
@@ -90,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=7092;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=4665;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=1Tgv8W8Bg/t7u7numSd+mYVQFp79uUbY0gFJ5smR4Lk=;
- b=TMajczvcEwZsVEZSpSBygegHOC6glKacY9NMJVzDrOE6mZAG5Nlxrk9ABAf2L7b1iwKOE+wnP
- f9KyyxjAaIWCU4GkH6hcub7e2wRit1jrLBqZb0DdWFhI1kC1++YP8wr
+ bh=Q8GpN19knhkzccfTAV4prViqD1gvBrGqV7AxMvPxGlg=;
+ b=R204wyNJVDFwtxunVQ6uTri4iQAm0/nHG/UG64/jv9N7oGTk83gB3DKrDKESdQQu1IVN9xlm7
+ 3k8U0eTtjb9DPHLtDbGKT5MQ/HAPZ4KbuEtGVkcnzKJn04P8qSywJYz
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -102,161 +100,143 @@ X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
 X-Original-From: Denis Mukhin <dmukhin@ford.com>
 Reply-To: dmukhin@ford.com
 
-The patch series introduces initial in-hypervisor emulator for
-NS8250/NS16x50-compatible UARTs under CONFIG_HAS_VUART_NS8250.
+From: Denis Mukhin <dmukhin@ford.com>
 
-In parallel domain creation scenario (hyperlaunch), NS8520 emulator helps
-early guest OS bringup debugging, because it eliminates dependency on the
-external emulator being operational by the time domains are created. Also,
-there's no early console facility similar to vpl011 to support x86 guest OS
-bring up.
+Move resource definitions to a new architecture-agnostic shared header file.
 
-The NS8250 emulator is disabled by default.
-
-Series
-======
-- patches 1-2: some miscellaneous random fixes, added into the series
-  because I stepped into those while debugging NS8250 emulator.
-
-- patches 3-14: preparation fixes for xen console and NS8250 emulator.
-
-- patches 15-29: xen console driver cleanup and preparation for enabling
-  physical serial console focus assignment to the guest VM w/ virtual NS8250.
-
-- patches 30-36: initial NS8250 emulator. That adds the I/O port emulator
-  for legacy PC COM UARTs, Kconfig option, enabling emulator and libxl
-  plumbing.
-
-Limitations
-===========
-- Only x86;
-- Only Linux guest tested so far;
-- Only legacy COM{1,2,3,4} resources, no customization;
-- Only Xen console as a backend, no inter-domain communication (similar to
-  vpl011 on Arm);
-- Only 8-bit characters;
-- Baud rate is not emulated;
-- FIFO-less mode is not emulated properly;
-- RX FIFO interrupt moderation (FCR) is not emulated properly, TL16C750
-  has special FCR handling;
-- No integration w/ VM snapshotting (HVM_REGISTER_SAVE_RESTORE() and
-  friends);
-- Assumes no ISA-device IRQ sharing;
-- MMIO-based UART is not supported.
-
-Testing
-=======
-
-I tested boot of HVM linux guest w/ OVMF as the virtual firmware.
-
-The emulator, if enabled via CONFIG_HAS_VUART_NS8250=y, will use COM1 (0x3f8)
-resources by default.
-
-To test w/ virtual COM1, the guest kernel parameters should contain
-  earlycon=uart,io,0x3f8,115200n8 console=uart,io,0x3f8,115200n8
-
-Xen is able to forward physical console input to the domain w/ virtual NS8250.
-To switch the console focus press Ctrl+aaa. If console= is given to the HVM
-kernel, then the user shall be able to see the login prompt on xen console once
-console focus is switched to the HVM guest.
+It will be used in follow on NS8250 emulator code to describe legacy
+PC COM resources.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
-Denis Mukhin (36):
-      x86/setup: fix typo in acpi=off description
-      xsm/flask: missing breaks, MISRA rule 16.4
-      xen: introduce resource.h
-      xen/irq: introduce NO_IRQ
-      xen/xmalloc: add kmalloc() and kfree() aliases
-      xen/ctype: introduce isconsole()
-      arm/vuart: use guest_printk()
-      arm/vuart: make domain_has_vuart() public
-      riscv/domain: introduce domain_has_vuart()
-      ppc/domain: introduce domain_has_vuart()
-      x86/domain: introduce domain_has_vuart()
-      x86/domain: print emulation_flags
-      xen/domain: add get_initial_domain_id()
-      xen/domain: enable max_init_domid for all architectures
-      xen/console: move vpl011-related code to vpl011 emulator
-      xen/console: rename console_input_domain
-      xen/console: rename switch_serial_input() to console_find_owner()
-      xen/console: rename console_rx to console_owner
-      xen/console: introduce printk_common()
-      xen/console: introduce consoled_is_enabled()
-      xen/console: introduce use of 'is_console' flag
-      xen/console: introduce console_set_owner()
-      xen/console: introduce console_owner_domid()
-      xen/console: introduce console_init_owner()
-      xen/console: introduce handle_keypress_in_domain()
-      xen/console: introduce console_write()
-      xen/console: introduce hwdom_crashconsole=
-      xen/console: simplify console owner switch hint
-      xen/console: make console buffer size configurable
-      xen/8250-uart: add missing definitions
-      x86/hvm: add HVM-specific Kconfig
-      x86/hvm: add helpers for raising guest IRQs
-      x86/hvm: introduce NS8250 UART emulator
-      x86/domain: implement domain_has_vuart()
-      xen/console: enable console owners w/ emulated NS8250
-      docs/misc: update console documentation
+ xen/common/device-tree/device-tree.c | 21 +------------------
+ xen/drivers/passthrough/arm/smmu.c   | 15 +-------------
+ xen/include/xen/resource.h           | 40 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 42 insertions(+), 34 deletions(-)
 
- docs/misc/console.txt                       |   48 +-
- docs/misc/xen-command-line.pandoc           |    5 +
- tools/libs/light/libxl_x86.c                |    6 +-
- tools/ocaml/libs/xc/xenctrl.ml              |    1 +
- tools/ocaml/libs/xc/xenctrl.mli             |    1 +
- tools/python/xen/lowlevel/xc/xc.c           |    4 +-
- xen/arch/arm/include/asm/domain.h           |    9 +
- xen/arch/arm/include/asm/setup.h            |    2 -
- xen/arch/arm/include/asm/vpl011.h           |    2 +-
- xen/arch/arm/setup.c                        |    2 -
- xen/arch/arm/vpl011.c                       |   21 +-
- xen/arch/arm/vuart.c                        |    9 +-
- xen/arch/ppc/include/asm/domain.h           |    2 +
- xen/arch/ppc/include/asm/setup.h            |    2 -
- xen/arch/riscv/include/asm/domain.h         |    2 +
- xen/arch/riscv/include/asm/setup.h          |    2 -
- xen/arch/x86/Kconfig                        |   66 +-
- xen/arch/x86/dom0_build.c                   |    2 +
- xen/arch/x86/domain.c                       |   16 +-
- xen/arch/x86/hvm/Kconfig                    |   77 ++
- xen/arch/x86/hvm/Makefile                   |    1 +
- xen/arch/x86/hvm/hvm.c                      |   10 +-
- xen/arch/x86/hvm/irq.c                      |   24 +
- xen/arch/x86/hvm/vuart_ns8250.c             | 1012 +++++++++++++++++++++++++++
- xen/arch/x86/include/asm/domain.h           |    8 +-
- xen/arch/x86/include/asm/hvm/domain.h       |    5 +
- xen/arch/x86/include/asm/hvm/irq.h          |    3 +
- xen/arch/x86/include/asm/hvm/vuart_ns8250.h |   75 ++
- xen/arch/x86/include/asm/pv/shim.h          |    4 +-
- xen/arch/x86/include/asm/setup.h            |    3 +-
- xen/arch/x86/pv/shim.c                      |    6 +-
- xen/arch/x86/setup.c                        |    2 +-
- xen/common/device-tree/device-tree.c        |   21 +-
- xen/common/domain.c                         |   41 +-
- xen/drivers/char/Kconfig                    |   23 +
- xen/drivers/char/console.c                  |  379 +++++-----
- xen/drivers/char/consoled.c                 |   18 +-
- xen/drivers/passthrough/arm/smmu.c          |   19 +-
- xen/include/public/arch-x86/xen.h           |   14 +-
- xen/include/xen/8250-uart.h                 |   82 ++-
- xen/include/xen/console.h                   |    4 +-
- xen/include/xen/consoled.h                  |   35 +-
- xen/include/xen/ctype.h                     |    3 +
- xen/include/xen/domain.h                    |    4 +
- xen/include/xen/irq.h                       |    1 +
- xen/include/xen/lib.h                       |    3 +
- xen/include/xen/resource.h                  |   40 ++
- xen/include/xen/xmalloc.h                   |    5 +
- xen/xsm/flask/hooks.c                       |    4 +
- 49 files changed, 1778 insertions(+), 350 deletions(-)
----
-base-commit: c8e3e39085bf97d1afb775d54884d239387e32cd
-change-id: 20241125-vuart-ns8250-v1-5a4b57ca529e
+diff --git a/xen/common/device-tree/device-tree.c b/xen/common/device-tree/device-tree.c
+index d0528c5825651f7cc9ebca0c949229c9083063c6..e8f810b2fe10890c033ed3a9d4ca627010ad019b 100644
+--- a/xen/common/device-tree/device-tree.c
++++ b/xen/common/device-tree/device-tree.c
+@@ -24,6 +24,7 @@
+ #include <xen/ctype.h>
+ #include <asm/setup.h>
+ #include <xen/err.h>
++#include <xen/resource.h>
+ 
+ const void *device_tree_flattened;
+ dt_irq_xlate_func dt_irq_xlate;
+@@ -535,26 +536,6 @@ int dt_child_n_size_cells(const struct dt_device_node *parent)
+     return __dt_n_size_cells(parent, true);
+ }
+ 
+-/*
+- * These are defined in Linux where much of this code comes from, but
+- * are currently unused outside this file in the context of Xen.
+- */
+-#define IORESOURCE_BITS         0x000000ff      /* Bus-specific bits */
+-
+-#define IORESOURCE_TYPE_BITS    0x00001f00      /* Resource type */
+-#define IORESOURCE_IO           0x00000100      /* PCI/ISA I/O ports */
+-#define IORESOURCE_MEM          0x00000200
+-#define IORESOURCE_REG          0x00000300      /* Register offsets */
+-#define IORESOURCE_IRQ          0x00000400
+-#define IORESOURCE_DMA          0x00000800
+-#define IORESOURCE_BUS          0x00001000
+-
+-#define IORESOURCE_PREFETCH     0x00002000      /* No side effects */
+-#define IORESOURCE_READONLY     0x00004000
+-#define IORESOURCE_CACHEABLE    0x00008000
+-#define IORESOURCE_RANGELENGTH  0x00010000
+-#define IORESOURCE_SHADOWABLE   0x00020000
+-
+ /*
+  * Default translator (generic bus)
+  */
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index 03d22bce1e497e41834c273f9048b98dcbd48a54..aa6a968b574dce7cc753e8070fad3a6e585cd9e7 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -50,6 +50,7 @@
+ #include <xen/rbtree.h>
+ #include <xen/sched.h>
+ #include <xen/sizes.h>
++#include <xen/resource.h>
+ #include <asm/atomic.h>
+ #include <asm/device.h>
+ #include <asm/io.h>
+@@ -70,22 +71,8 @@
+ #define of_property_read_u32(np, pname, out) (!dt_property_read_u32(np, pname, out))
+ #define of_property_read_bool dt_property_read_bool
+ #define of_parse_phandle_with_args dt_parse_phandle_with_args
+-
+-/* Xen: Helpers to get device MMIO and IRQs */
+-struct resource
+-{
+-	paddr_t addr;
+-	paddr_t size;
+-	unsigned int type;
+-};
+-
+-#define resource_size(res) (res)->size;
+-
+ #define platform_device dt_device_node
+ 
+-#define IORESOURCE_MEM 0
+-#define IORESOURCE_IRQ 1
+-
+ static struct resource *platform_get_resource(struct platform_device *pdev,
+ 					      unsigned int type,
+ 					      unsigned int num)
+diff --git a/xen/include/xen/resource.h b/xen/include/xen/resource.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..4962e17da8387b7f324317482b19cc9fe71433fc
+--- /dev/null
++++ b/xen/include/xen/resource.h
+@@ -0,0 +1,40 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * System resource description.
++ *
++ * Reference:
++ *   include/linux/ioport.h
++ */
++#if !defined(XEN__RESOURCE_H)
++#define XEN__RESOURCE_H
++
++#define IORESOURCE_BITS         0x000000FFU      /* Bus-specific bits */
++
++#define IORESOURCE_TYPE_BITS    0x00001F00U      /* Resource type */
++#define IORESOURCE_IO           0x00000100U      /* PCI/ISA I/O ports */
++#define IORESOURCE_MEM          0x00000200U
++#define IORESOURCE_REG          0x00000300U      /* Register offsets */
++#define IORESOURCE_IRQ          0x00000400U
++#define IORESOURCE_DMA          0x00000800U
++#define IORESOURCE_BUS          0x00001000U
++
++#define IORESOURCE_PREFETCH     0x00002000U      /* No side effects */
++#define IORESOURCE_READONLY     0x00004000U
++#define IORESOURCE_CACHEABLE    0x00008000U
++#define IORESOURCE_RANGELENGTH  0x00010000U
++#define IORESOURCE_SHADOWABLE   0x00020000U
++
++#define IORESOURCE_UNKNOWN      (~0U)
++
++struct resource {
++    paddr_t addr;
++    paddr_t size;
++    unsigned int type;
++};
++
++#define resource_size(res) (res)->size;
++
++#define foreach_resource(res) \
++    for (; res && res->type != IORESOURCE_UNKNOWN; res++)
++
++#endif /* #if !defined(XEN__RESOURCE_H) */
 
-Best regards,
 -- 
-Denis Mukhin <dmukhin@ford.com>
+2.34.1
 
 
 
