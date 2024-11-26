@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 855F5D6555A
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 20:59:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844030.1259582 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FAD6D66B8E
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844069.1259703 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG2eQ-0007zG-Kp; Tue, 26 Nov 2024 20:59:14 +0000
+	id 1tG4tt-0002nj-EV; Tue, 26 Nov 2024 23:23:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844030.1259582; Tue, 26 Nov 2024 20:59:14 +0000
+Received: by outflank-mailman (output) from mailman id 844069.1259703; Tue, 26 Nov 2024 23:23:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG2eQ-0007z9-Gk; Tue, 26 Nov 2024 20:59:14 +0000
-Received: by outflank-mailman (input) for mailman id 844030;
- Tue, 26 Nov 2024 20:59:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tG4ts-0002kw-U1; Tue, 26 Nov 2024 23:23:20 +0000
+Received: by outflank-mailman (input) for mailman id 844069;
+ Tue, 26 Nov 2024 23:22:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zdLj=SV=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tG2eO-0007z3-UY
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 20:59:13 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 460a8b45-ac39-11ef-99a3-01e77a169b0f;
- Tue, 26 Nov 2024 21:59:06 +0100 (CET)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53de79c2be4so2416944e87.2
- for <xen-devel@lists.xenproject.org>; Tue, 26 Nov 2024 12:59:06 -0800 (PST)
-Received: from andrewcoop.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b52fe71sm634611266b.110.2024.11.26.12.59.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Nov 2024 12:59:04 -0800 (PST)
+ <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
+ id 1tG4si-0000Ao-MC
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:08 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3dbf5b85-ac4d-11ef-a0cd-8be0dac302b0;
+ Wed, 27 Nov 2024 00:22:02 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id E47905C5D70;
+ Tue, 26 Nov 2024 23:21:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1DBFDC4CED7;
+ Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 11E83D66B94;
+ Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,270 +47,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 460a8b45-ac39-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMmMiLCJoZWxvIjoibWFpbC1sZjEteDEyYy5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjQ2MGE4YjQ1LWFjMzktMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjU0NzQ2LjE2NDUyMiwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1732654745; x=1733259545; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LnCpP9z2EwL5D6PvnYeqcyj+x2bh3rEMK+pVctjlxSA=;
-        b=ipZyVMuhJYTAulwE0GslVANAEtNtfDsrxmDg8dBP4NX1Ty82y9HK8AFuFdFhV85orF
-         pfIok9wxZ4YBstbIvzQVO1zKkYHCNDVuOYIZnq37kL2QyRrWgtU3+dszX9RzLi9HsGIT
-         M4em1WNQm+qOn8HXoPP1qzAiosLdG+z1hKfe8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732654745; x=1733259545;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=LnCpP9z2EwL5D6PvnYeqcyj+x2bh3rEMK+pVctjlxSA=;
-        b=nK28N3XPPvAzrCEelidR/xoHsHJQH3hL2z0jgqn4UCqH9yE+EX5P6bobIAet2GDXod
-         auD2VDNNPR8wCgmvbMUfXWNjdmGzY09C1ZnXzaD9rzj+1/9ygTB5VI7KhwMx62RKOg9W
-         Od2v+g79KxNPyfHn6wlB7BNwQca5qxSeDVqtdn8Lv/xTQae5HdFaH8m/usg1GjlK9gF1
-         KEimy8IHGxyqCCFm7kdRgb5Aa2GeOg46/+4TZBVcKwLzDPSXItK9/ZuHpRKESRbGNUtc
-         fmTkUaIWO+CXhUt0hdOE1MsoyLH1F3z+3ySd8y2w7LqPgHQNXVxS51uNLLV67SEpqK0a
-         +k+Q==
-X-Gm-Message-State: AOJu0YwbJT6CXcmWUMYlUmJRh1bVfvPpi1s6c3NOMjx1bPk9MW3lEasx
-	Vs6MmDwyqYgIDpy5wiDzGXO11AKiBuBSoWAT7pi/WyGMyYrkSdw7oBGLDIxGpffDdi7sqIB1srx
-	n
-X-Gm-Gg: ASbGnct855+ONd2lvv5luwLRx8m/29UmvPssF2J6MHJkTGs3QTeAV1mu6kocK7XExKW
-	6azWpbxqz4pbKYWIJXtSvCTFcieb+GNO1jMVuLSIwiw9HMGklFlqPdYlyXPjsqaNbSn3DHFH5I8
-	P3lUDLn5TDQw2BaMoMYIzI9a+j4tnZxFpr9evA9XjuY0Ok82p6/D4OI62E4bgNi77Fxh4gshOhm
-	JkcxmiQQOQDnm5y087s1vClYkndQuq8HwGx3TIZTTSY3m2c0/Ok07TaguVFhdJ5LFfwYpb23Sav
-X-Google-Smtp-Source: AGHT+IH6xVp04axj0HxoP6HVsIrh0zwIBMqNICJmwueDdc2fwhxt/WjeSAGKQBBrtfIb5tliYDvApw==
-X-Received: by 2002:a05:6512:3c9d:b0:53d:e948:4c6e with SMTP id 2adb3069b0e04-53df00d02camr235572e87.13.1732654744867;
-        Tue, 26 Nov 2024 12:59:04 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Javi Merino <javi.merino@cloud.com>
-Subject: [PATCH] x86/APIC: Remove workaround Pentium 3AP APIC_ESR erratum
-Date: Tue, 26 Nov 2024 20:58:59 +0000
-Message-Id: <20241126205859.23090-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <3270b77c005745dcf56cc833bdf3e4c703190b05.1732639041.git.javi.merino@cloud.com>
-References: <3270b77c005745dcf56cc833bdf3e4c703190b05.1732639041.git.javi.merino@cloud.com>
+X-Inumbo-ID: 3dbf5b85-ac4d-11ef-a0cd-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
+X-Custom-Transaction: eyJpZCI6IjNkYmY1Yjg1LWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzIzLjI1ODE0NSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1732663317;
+	bh=xN3Qk4AnkavJDz1+2oRzOsxhatlUANXuldhRbnVqaL0=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=ItYXHoJ/mJNsPDSZ9pf4Ui726UpgFmylp5LAsOGmc2yZqvNzSjIAKc+fMV+PdsJnC
+	 RxLCIck1Wfcv7eF+HknLfAxJO3jiVLxxpII/Kl6TpWtC4ct7bFEvLWhMjp+d9vAmHP
+	 P3iuRXB3dQJQtffNjDd8pjaYCsMO1maYRtTENwECy0JhRRkr39RkuNR454sLuDH503
+	 /egBzxIdcif4Zqt16DnAkRv5CWX5Ye9QkvhYwsm7O42u/G+sGk0WKSUlEAYMnCCCZn
+	 sJR8lW7x5wSmgrdL7nhCuJPqJFMoB5Bd1flhz7j4z2RcMg/GJoXQh12ijlgRx/5dmO
+	 GYQ8r9hIxUlDg==
+From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
+Date: Tue, 26 Nov 2024 15:22:14 -0800
+Subject: [PATCH 24/36] xen/console: introduce console_init_owner()
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20241126-vuart-ns8250-v1-v1-24-87b9a8375b7a@ford.com>
+References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
+In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
+To: Jan Beulich <jbeulich@suse.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+ Bertrand Marquis <bertrand.marquis@arm.com>, 
+ Michal Orzel <michal.orzel@amd.com>, Rahul Singh <rahul.singh@arm.com>, 
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bob Eshleman <bobbyeshleman@gmail.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Shawn Anastasio <sanastasio@raptorengineering.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>, 
+ Christian Lindig <christian.lindig@citrix.com>, 
+ David Scott <dave@recoil.org>, 
+ =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=1949;
+ i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
+ bh=9IHMF1BdeViUoT1r1xwy88EM2J39hJxCdMpf6FUj+oc=;
+ b=iU++HT4kXEU4fCx3MfdSPop0eCxgapVBalO1zTfRHftl7NMTURPkAWlnTI41PiCDlyw5pkYq5
+ YJOq/CZ6Y6lD6glLNem8Mfog6GMWKqhpPKh/ks4hfwiAJ0sIF3uEIrW
+X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
+ pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
+X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
+ auth_id=287
+X-Original-From: Denis Mukhin <dmukhin@ford.com>
+Reply-To: dmukhin@ford.com
 
-The SDM instructs software to write 0 to ESR prior to reading it.  However,
-due to an original Pentium erratum, most logic skips the write based on there
-being more than 3 LVTs; a stand-in to identify the Pentium.
+From: Denis Mukhin <dmukhin@ford.com>
 
-Xen, being 64bit, doesn't need compatibility for i586 processors.
+console_init_owner() is introduced for selecting the boot-time console owner.
 
-Introduce a new apic_read_esr() helper, quoting the SDM to explain why a
-function named apic_read_esr() has a write in it too.
-
-Use the new helper throughout apic.c and smpboot.c, which allows us to remove
-some useless reads of APIC_LVR.  This in turn removes the external callers of
-get_maxlvt(), so make it local to apic.c
-
-No practical change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Javi Merino <javi.merino@cloud.com>
+ xen/drivers/char/console.c | 27 +++++++++++++++++----------
+ 1 file changed, 17 insertions(+), 10 deletions(-)
 
-Based on Javi's patch correcting error_interrupt()
-
-Bloat-o-meter reports:
-
-  add/remove: 0/1 grow/shrink: 0/3 up/down: 0/-269 (-269)
-  Function                                     old     new   delta
-  get_maxlvt                                    48       -     -48
-  __cpu_up                                    1465    1417     -48
-  clear_local_APIC                            1109    1050     -59
-  setup_local_APIC                             942     828    -114
----
- xen/arch/x86/apic.c             | 29 ++++++++++-------------------
- xen/arch/x86/include/asm/apic.h | 24 +++++++++++++++++++++++-
- xen/arch/x86/smpboot.c          | 17 ++++-------------
- 3 files changed, 37 insertions(+), 33 deletions(-)
-
-diff --git a/xen/arch/x86/apic.c b/xen/arch/x86/apic.c
-index b4f542d25918..017d97054b06 100644
---- a/xen/arch/x86/apic.c
-+++ b/xen/arch/x86/apic.c
-@@ -142,7 +142,7 @@ int get_physical_broadcast(void)
-         return 0xf;
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index a8ab5c2bcb98e4cadf9ad2c9ad28d297977d0557..6261bdb5a2ac1075bc89fa408c0fd6cfef380ae6 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -554,6 +554,22 @@ static void console_find_owner(void)
+         console_set_owner(DOMID_XEN);
  }
  
--int get_maxlvt(void)
-+static int get_maxlvt(void)
- {
-     unsigned int v = apic_read(APIC_LVR);
- 
-@@ -209,9 +209,7 @@ void clear_local_APIC(void)
-         apic_write(APIC_LDR, v);
-     }
- 
--    if (maxlvt > 3)        /* Due to Pentium errata 3AP and 11AP. */
--        apic_write(APIC_ESR, 0);
--    apic_read(APIC_ESR);
-+    apic_read_esr();
- }
- 
- void __init connect_bsp_APIC(void)
-@@ -488,7 +486,7 @@ static void resume_x2apic(void)
- 
- void setup_local_APIC(bool bsp)
- {
--    unsigned long oldvalue, value, maxlvt;
-+    unsigned long oldvalue, value;
-     int i, j;
- 
-     BUILD_BUG_ON((SPURIOUS_APIC_VECTOR & 0x0f) != 0x0f);
-@@ -614,17 +612,13 @@ void setup_local_APIC(bool bsp)
-         value = APIC_DM_NMI | APIC_LVT_MASKED;
-     apic_write(APIC_LVT1, value);
- 
--    maxlvt = get_maxlvt();
--    if (maxlvt > 3)     /* Due to the Pentium erratum 3AP. */
--        apic_write(APIC_ESR, 0);
--    oldvalue = apic_read(APIC_ESR);
-+    oldvalue = apic_read_esr();
- 
-     value = ERROR_APIC_VECTOR;      // enables sending errors
-     apic_write(APIC_LVTERR, value);
--    /* spec says clear errors after enabling vector. */
--    if (maxlvt > 3)
--        apic_write(APIC_ESR, 0);
--    value = apic_read(APIC_ESR);
-+
-+    value = apic_read_esr();
-+
-     if (value != oldvalue)
-         apic_printk(APIC_VERBOSE,
-                     "ESR value before enabling vector: %#lx  after: %#lx\n",
-@@ -719,11 +713,9 @@ int lapic_resume(void)
-     apic_write(APIC_LVTT, apic_pm_state.apic_lvtt);
-     apic_write(APIC_TDCR, apic_pm_state.apic_tdcr);
-     apic_write(APIC_TMICT, apic_pm_state.apic_tmict);
--    apic_write(APIC_ESR, 0);
--    apic_read(APIC_ESR);
-+    apic_read_esr();
-     apic_write(APIC_LVTERR, apic_pm_state.apic_lvterr);
--    apic_write(APIC_ESR, 0);
--    apic_read(APIC_ESR);
-+    apic_read_esr();
-     local_irq_restore(flags);
-     return 0;
- }
-@@ -1389,8 +1381,7 @@ static void cf_check error_interrupt(void)
-     unsigned int i;
- 
-     /* First tickle the hardware, only then report what went on. -- REW */
--    apic_write(APIC_ESR, 0);
--    v = apic_read(APIC_ESR);
-+    v = apic_read_esr();
-     ack_APIC_irq();
- 
-     for ( i = 0; i < ARRAY_SIZE(entries); ++i )
-diff --git a/xen/arch/x86/include/asm/apic.h b/xen/arch/x86/include/asm/apic.h
-index d8eda6df6d86..337eb5cf6642 100644
---- a/xen/arch/x86/include/asm/apic.h
-+++ b/xen/arch/x86/include/asm/apic.h
-@@ -151,6 +151,29 @@ static inline u32 get_apic_id(void)
-     return x2apic_enabled ? id : GET_xAPIC_ID(id);
- }
- 
-+static inline uint32_t apic_read_esr(void)
++static void console_init_owner(void)
 +{
++    domid_t domid;
++
 +    /*
-+     * The SDM states:
-+     *   Before attempt to read from the ESR, software should first write to
-+     *   it. (The value written does not affect the values read subsequently;
-+     *   only zero may be written in x2APIC mode.) This write clears any
-+     *   previously logged errors and updates the ESR with any errors detected
-+     *   since the last write to the ESR. This write also rearms the APIC
-+     *   error interrupt triggering mechanism.
++     * If user specifies so, we fool the switch routine to redirect input
++     * straight back to Xen.
 +     */
-+    if ( x2apic_enabled )
-+    {
-+        apic_wrmsr(APIC_ESR, 0);
-+        return apic_rdmsr(APIC_ESR);
-+    }
++    if ( opt_conswitch[1] == 'x' )
++        domid = DOMID_XEN;
 +    else
-+    {
-+        apic_mem_write(APIC_ESR, 0);
-+        return apic_mem_read(APIC_ESR);
-+    }
++        domid = get_initial_domain_id();
++
++    console_set_owner(domid);
 +}
 +
- void apic_wait_icr_idle(void);
+ static void __serial_rx(char c)
+ {
+     switch ( console_owner )
+@@ -1143,14 +1159,6 @@ void __init console_endboot(void)
  
- int get_physical_broadcast(void);
-@@ -161,7 +184,6 @@ static inline void ack_APIC_irq(void)
- 	apic_write(APIC_EOI, 0);
+     video_endboot();
+ 
+-    /*
+-     * If user specifies so, we fool the switch routine to redirect input
+-     * straight back to Xen. I use this convoluted method so we still print
+-     * a useful 'how to switch' message.
+-     */
+-    if ( opt_conswitch[1] == 'x' )
+-        console_owner = DOMID_XEN;
+-
+     register_keyhandler('w', dump_console_ring_key,
+                         "synchronously dump console ring buffer (dmesg)", 0);
+     register_irq_keyhandler('+', &do_inc_thresh,
+@@ -1160,8 +1168,7 @@ void __init console_endboot(void)
+     register_irq_keyhandler('G', &do_toggle_guest,
+                             "toggle host/guest log level adjustment", 0);
+ 
+-    /* Serial input is directed to DOM0 by default. */
+-    console_find_owner();
++    console_init_owner();
  }
  
--extern int get_maxlvt(void);
- extern void clear_local_APIC(void);
- extern void connect_bsp_APIC (void);
- extern void disconnect_bsp_APIC (int virt_wire_setup);
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 79a79c54c304..7c77125fe715 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -422,7 +422,7 @@ void asmlinkage start_secondary(void *unused)
- static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
- {
-     unsigned long send_status = 0, accept_status = 0;
--    int maxlvt, timeout, i;
-+    int timeout, i;
- 
-     /*
-      * Normal AP startup uses an INIT-SIPI-SIPI sequence.
-@@ -444,8 +444,7 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
-     /*
-      * Be paranoid about clearing APIC errors.
-      */
--    apic_write(APIC_ESR, 0);
--    apic_read(APIC_ESR);
-+    apic_read_esr();
- 
-     if ( send_INIT )
-     {
-@@ -495,13 +494,10 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
-         }
-     }
- 
--    maxlvt = get_maxlvt();
--
-     for ( i = 0; i < 2; i++ )
-     {
-         Dprintk("Sending STARTUP #%d.\n", i+1);
--        apic_write(APIC_ESR, 0);
--        apic_read(APIC_ESR);
-+        apic_read_esr();
-         Dprintk("After apic_write.\n");
- 
-         /*
-@@ -529,12 +525,7 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
-             udelay(200);
-         }
- 
--        /* Due to the Pentium erratum 3AP. */
--        if ( maxlvt > 3 )
--        {
--            apic_write(APIC_ESR, 0);
--        }
--        accept_status = (apic_read(APIC_ESR) & 0xEF);
-+        accept_status = apic_read_esr() & 0xEF;
-         if ( send_status || accept_status )
-             break;
-     }
+ int __init console_has(const char *device)
 
-base-commit: c8e3e39085bf97d1afb775d54884d239387e32cd
-prerequisite-patch-id: 1f86bfc85bb08e12c21535d5c527f555f192d4e7
 -- 
-2.39.5
+2.34.1
+
 
 
