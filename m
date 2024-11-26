@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A8DD66B8E
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:32:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844236.1259842 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 113E9D66B8E
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:32:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844257.1259851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG52D-0006JF-TU; Tue, 26 Nov 2024 23:31:57 +0000
+	id 1tG52h-0007Lh-40; Tue, 26 Nov 2024 23:32:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844236.1259842; Tue, 26 Nov 2024 23:31:57 +0000
+Received: by outflank-mailman (output) from mailman id 844257.1259851; Tue, 26 Nov 2024 23:32:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG52D-0006J2-Od; Tue, 26 Nov 2024 23:31:57 +0000
-Received: by outflank-mailman (input) for mailman id 844236;
- Tue, 26 Nov 2024 23:31:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tG52h-0007La-15; Tue, 26 Nov 2024 23:32:27 +0000
+Received: by outflank-mailman (input) for mailman id 844257;
+ Tue, 26 Nov 2024 23:32:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4sr-0000Ao-NS
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:17 +0000
+ id 1tG4sp-0000At-EC
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:15 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 404f6775-ac4d-11ef-a0cd-8be0dac302b0;
- Wed, 27 Nov 2024 00:22:06 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3f7da23a-ac4d-11ef-99a3-01e77a169b0f;
+ Wed, 27 Nov 2024 00:22:05 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6AF2F5C5D0C;
- Tue, 26 Nov 2024 23:21:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 98D78C4CED3;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 874FF5C5BF6;
+ Tue, 26 Nov 2024 23:21:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B79D1C4CED0;
+ Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8F6D5D66B98;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id AB5C4D66B9D;
+ Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 404f6775-ac4d-11ef-a0cd-8be0dac302b0
+X-Inumbo-ID: 3f7da23a-ac4d-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
-X-Custom-Transaction: eyJpZCI6IjQwNGY2Nzc1LWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzI2Ljc1MjY5LCJzZW5kZXIiOiJkZXZudWxsK2RtdWtoaW4uZm9yZC5jb21Aa2VybmVsLm9yZyIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Custom-Transaction: eyJpZCI6IjNmN2RhMjNhLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzI1LjM2NDIxLCJzZW5kZXIiOiJkZXZudWxsK2RtdWtoaW4uZm9yZC5jb21Aa2VybmVsLm9yZyIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1732663316;
-	bh=owjhPqMN/sfHwDFdAwELQ23W67gacGzY3DCmgAbUG18=;
+	s=k20201202; t=1732663317;
+	bh=WDr/PwUo7NPVqK8vVCu/sN3ApYHaNVXqHBFVutTjEsg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=NrMOAdLWUjxpQz3jaTxfnIXSc3yKGQn5VCrM887lJG30+7SRR1m+YUy5YlEcFkp0M
-	 OJsvdRn8FAPajpezUSl0Sf87pH2Ogh5aRLuTT9gqp+iK8hccTVgGERmlYTDxgoArhl
-	 hv4l1Q/H7aAZZKPUcms8C6n6fhp38uP5oNP5O/6B1Mof6km8+A6KVfrL9JcsmRQkX/
-	 FxWeUwazxd3RdPZ71lg3iYfUstVBycrMbCtoMUXZwUEmHlJmiHBnAOxF2o5kv3u4EI
-	 BSRVjDxvivfiSX6me7SV92jQNHVDQSsC9Ocmxhl7FXM/u/rPsnMkWaA4jZQ6d9qdMJ
-	 C5AQExxiB710g==
+	b=bkBhss7xSShP7C40xt01FhoPGq5cQEMVzQF4f2cY3ApbZPrWn7RayCwmhkqJRhEhj
+	 d6yKiwYR+jFN1eG47mBUGxoEWMABee3dAqxyeK0yi/0MD+1Km5Ebt9i3+JdaS5RJu3
+	 aw2qgl3uxapuufS+U+6DSi0HA2ElrQecaX47KVibJZSY+TAx0NohANkA9ZxMHdM7z6
+	 jRCwe5WFfl6Ug2eaHwfbVtOur+sA67kkVw//QOvpq7ZQSqCdIM9EWMr3HLEuZuVjlq
+	 XiZqAPJ26GgjnQ1c1Qyzc/jfAXYECd8GAN/u5bpwh465T4X/OnTnjuNlD67+T6SoGv
+	 d16BKhnKRlEpg==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:22:08 -0800
-Subject: [PATCH 18/36] xen/console: rename console_rx to console_owner
+Date: Tue, 26 Nov 2024 15:22:22 -0800
+Subject: [PATCH 32/36] x86/hvm: add helpers for raising guest IRQs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-18-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-32-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -88,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=3503;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=1876;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=adx3ttDq9DGxs5v/iNqFG/t0SkuLKBWjA23PcHLO1+c=;
- b=IGxjWhFAg7XglUWziOn324G97nMmVYuDMsHVRirzfW0FLmtntUSWMQ0+UUZF6Y5jWsWkcWmKg
- K0SKJ9oAAGaAf7mlgCU66d5Ocl+sy3UFeBq8D1SW6JucgTfyS4RY07A
+ bh=7BbjWtYddozrVOKtAkZI0QGQoqm6ofyyNdgxey+37YU=;
+ b=ThSK3I1nGSONSUOI8mLhfE3bYgxEWNIeTGmqKGF4Wt0hASsaBfM9mvC9LGsCTP8xT/H1gbzAI
+ 1Ak2zfg3dNeDPlENUq8QeW8vsLJWhYmLYPD53ex/4VN5v6wLCj5aagQ
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -102,107 +102,66 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Preparation for the follow on change to switch console_owner to
-domid_t address space.
+Added convenience wrappers for asserting/de-asserting interrupts in the
+hardware emulation code.
+
+That will be used for PCI-based NS8250 emulator.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/drivers/char/console.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ xen/arch/x86/hvm/irq.c             | 24 ++++++++++++++++++++++++
+ xen/arch/x86/include/asm/hvm/irq.h |  3 +++
+ 2 files changed, 27 insertions(+)
 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index f8a7db385c9525cabc69ceb1a84d73f57863aa45..86bf899ada8f8221ffc77bcffb1f58777a22198e 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -467,11 +467,11 @@ static void cf_check dump_console_ring_key(unsigned char key)
-  */
- #define switch_code (opt_conswitch[0]-'a'+1)
- /*
-- * console_rx=0 => input to xen
-- * console_rx=1 => input to dom0 (or the sole shim domain)
-- * console_rx=N => input to dom(N-1)
-+ * console_owner=0 => input to xen
-+ * console_owner=1 => input to dom0 (or the sole shim domain)
-+ * console_owner=N => input to dom(N-1)
-  */
--static unsigned int __read_mostly console_rx = 0;
-+static unsigned int __read_mostly console_owner = 0;
- 
- #define max_console_rx (max_init_domid + 1)
- 
-@@ -479,15 +479,15 @@ static unsigned int __read_mostly console_rx = 0;
- /* Make sure to rcu_unlock_domain after use */
- struct domain *rcu_lock_domain_console_owner(void)
- {
--    if ( console_rx == 0 )
-+    if ( console_owner == 0 )
-             return NULL;
--    return rcu_lock_domain_by_id(console_rx - 1);
-+    return rcu_lock_domain_by_id(console_owner - 1);
+diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
+index 1eab44defca4c82ec35769617c66c380cc07d1b6..9e3a50d21dcf281c1015116094e47795c51ed5d0 100644
+--- a/xen/arch/x86/hvm/irq.c
++++ b/xen/arch/x86/hvm/irq.c
+@@ -242,6 +242,30 @@ void hvm_isa_irq_deassert(
+     spin_unlock(&d->arch.hvm.irq_lock);
  }
- #endif
  
- static void console_find_owner(void)
++void hvm_irq_raise(struct domain *d, unsigned int irq)
++{
++    if ( irq < NR_ISAIRQS )
++    {
++        hvm_isa_irq_assert(d, irq, NULL);
++    }
++    else
++    {
++        hvm_gsi_assert(d, irq);
++    }
++}
++
++void hvm_irq_lower(struct domain *d, unsigned int irq)
++{
++    if ( irq < NR_ISAIRQS )
++    {
++        hvm_isa_irq_deassert(d, irq);
++    }
++    else
++    {
++        hvm_gsi_deassert(d, irq);
++    }
++}
++
+ static void hvm_set_callback_irq_level(struct vcpu *v)
  {
--    unsigned int next_rx = console_rx;
-+    unsigned int next_rx = console_owner;
+     struct domain *d = v->domain;
+diff --git a/xen/arch/x86/include/asm/hvm/irq.h b/xen/arch/x86/include/asm/hvm/irq.h
+index 87e89993a44f48f366fa84e851688f383cb562d4..27bb9f64171c1b8aac2cf119699e60c91e727177 100644
+--- a/xen/arch/x86/include/asm/hvm/irq.h
++++ b/xen/arch/x86/include/asm/hvm/irq.h
+@@ -210,6 +210,9 @@ void hvm_maybe_deassert_evtchn_irq(void);
+ void hvm_assert_evtchn_irq(struct vcpu *v);
+ void hvm_set_callback_via(struct domain *d, uint64_t via);
  
-     /*
-      * Rotate among Xen, dom0 and boot-time created domUs while skipping
-@@ -500,7 +500,7 @@ static void console_find_owner(void)
++void hvm_irq_raise(struct domain *d, unsigned int irq);
++void hvm_irq_lower(struct domain *d, unsigned int irq);
++
+ struct pirq;
+ bool hvm_domain_use_pirq(const struct domain *d, const struct pirq *pirq);
  
-         if ( next_rx++ >= max_console_rx )
-         {
--            console_rx = 0;
-+            console_owner = 0;
-             printk("*** Serial input to Xen");
-             break;
-         }
-@@ -515,7 +515,7 @@ static void console_find_owner(void)
-         if ( d )
-         {
-             rcu_unlock_domain(d);
--            console_rx = next_rx;
-+            console_owner = next_rx;
-             printk("*** Serial input to DOM%u", domid);
-             break;
-         }
-@@ -529,7 +529,7 @@ static void console_find_owner(void)
- 
- static void __serial_rx(char c)
- {
--    switch ( console_rx )
-+    switch ( console_owner )
-     {
-     case 0:
-         return handle_keypress(c, false);
-@@ -552,7 +552,7 @@ static void __serial_rx(char c)
- #ifdef CONFIG_SBSA_VUART_CONSOLE
-     default:
-     {
--        struct domain *d = rcu_lock_domain_by_id(console_rx - 1);
-+        struct domain *d = rcu_lock_domain_by_id(console_owner - 1);
- 
-         /*
-          * If we have a properly initialized vpl011 console for the
-@@ -563,7 +563,7 @@ static void __serial_rx(char c)
-             vpl011_rx_char_xen(d, c);
-         else
-             printk("Cannot send chars to Dom%d: no UART available\n",
--                   console_rx - 1);
-+                   console_owner - 1);
- 
-         if ( d != NULL )
-             rcu_unlock_domain(d);
-@@ -1116,7 +1116,7 @@ void __init console_endboot(void)
-      * a useful 'how to switch' message.
-      */
-     if ( opt_conswitch[1] == 'x' )
--        console_rx = max_console_rx;
-+        console_owner = max_console_rx;
- 
-     register_keyhandler('w', dump_console_ring_key,
-                         "synchronously dump console ring buffer (dmesg)", 0);
 
 -- 
 2.34.1
