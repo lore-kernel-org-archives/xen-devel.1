@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D389D66BA1
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844055.1259633 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51ED3D66BA4
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844048.1259606 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tn-000115-S7; Tue, 26 Nov 2024 23:23:15 +0000
+	id 1tG4tm-0000XD-Lc; Tue, 26 Nov 2024 23:23:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844055.1259633; Tue, 26 Nov 2024 23:23:15 +0000
+Received: by outflank-mailman (output) from mailman id 844048.1259606; Tue, 26 Nov 2024 23:23:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tn-0000za-Ft; Tue, 26 Nov 2024 23:23:15 +0000
-Received: by outflank-mailman (input) for mailman id 844055;
- Tue, 26 Nov 2024 23:22:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tG4tm-0000V3-Gc; Tue, 26 Nov 2024 23:23:14 +0000
+Received: by outflank-mailman (input) for mailman id 844048;
+ Tue, 26 Nov 2024 23:22:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4se-0000Ao-LM
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:04 +0000
+ id 1tG4sc-0000At-CM
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:02 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3d68389e-ac4d-11ef-a0cd-8be0dac302b0;
- Wed, 27 Nov 2024 00:22:02 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3aa2fa8b-ac4d-11ef-99a3-01e77a169b0f;
+ Wed, 27 Nov 2024 00:21:57 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id EB2D95C5CB9;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 78BB95C5BEA;
  Tue, 26 Nov 2024 23:21:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 24EECC4CED7;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6B1C8C4CEDB;
+ Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 19CF7D66B93;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 596E7D66B88;
+ Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d68389e-ac4d-11ef-a0cd-8be0dac302b0
+X-Inumbo-ID: 3aa2fa8b-ac4d-11ef-99a3-01e77a169b0f
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
-X-Custom-Transaction: eyJpZCI6IjNkNjgzODllLWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzIyLjY5OTU3NCwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Custom-Transaction: eyJpZCI6IjNhYTJmYThiLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE3Ljg5MTk3MSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1732663316;
-	bh=2WgWqZsNDflVD6JmnKTRAOPbRC5jJUlqppnLV6LXXy4=;
+	s=k20201202; t=1732663315;
+	bh=jP7Qo7rqdlhdDtQjECWtHV/Nhjgbh2HMa37UuR2ELXI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=HZNZNKqgwaqz1KQn2n9Opxrj6816OOMoiXpti9Bn7hSOYnvixMKkCUmFKaBaEhzph
-	 Sz4VMsj81Hzs/PfkGBnwl+f6KCl5xiQLGLDzNWqr8ekYWoNKoRBzyJ19KXkwGRV06T
-	 SVNWyam3s87wCS4a5DrxYg/BcE+CSbW1svyvCFr+BJc+j4gRVp5K3vmm2m6UZBqzer
-	 wAj9QvBnHSCX1Jd4Ykhaegh7WQW7FHSjcsXPWEIrdhe0ICveHsM8mu0T26TwWCNvdN
-	 AF/WG6mmmxKyYjwQJZ/ouij7VbTQLjifFUNfgm639nZYsmAb/BWxxzS+N+0kXpA7Ez
-	 NszparVX9JDtA==
+	b=fa5bqt+h1xnsBmKLWN7RhsQfcSmOrhJvxsFWm7LcFlX4ah/uxa/fA2KRGR0PdI8Vf
+	 DdppIqEwozhki1m1+mmysleQ1sjqM/oCYx15QRdFQZdp0BhMBqtU3XIGMsdnkgf9Nl
+	 a6lgFHE4Nm9KAnpb4WvEji9B8K5Kx/nFjYu9iaEdkUmCNvid3n2rs/Hx3a4U1Hl9BA
+	 e6qxS7fc11oYzkOTDo+DJjbKJU+H8v45MObr+DkF8HTuCzNknL8r+rtKNK0QSLZInB
+	 3NzaBj0qmfyv5wZMl73GWH4fIiBML8YQgHe2Zqz8z9XuvUpVN5EVJUPtzcbg7bxp/f
+	 jEw+zh0UEunPg==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:22:02 -0800
-Subject: [PATCH 12/36] x86/domain: print emulation_flags
+Date: Tue, 26 Nov 2024 15:21:54 -0800
+Subject: [PATCH 04/36] xen/irq: introduce NO_IRQ
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-12-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-4-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -88,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=1263;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=616;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=732gIMLcaCgGTFTHv9vAjNIT6ES/ZZttjeIUCT3F6PI=;
- b=2D1GntxceEk8CMvCOGVcGx8ZV/nfrqT6w+jxAmtSvt6YKGse6dADcw0/VXr3voTosV5dqLTi0
- bWeqzqNK8CfARQ2L2mPeU6iFTzP8vSKt5Jjr+TxraPvuDidph2v/E57
+ bh=dP3fe+TbEoRyzDIKnwZpy2zc7XNhJoHUDN0gqSrT6Sc=;
+ b=ZK/Egrhd1ftyBDG8fHCbgj99AZ9DcnZ5TxuavepL4iKCTofpCdmvmPQJY/yN3M2p29rTI4mg6
+ v8M76j0gxtADkBiXTcySpLMh1uQQabkcw/KIGK4vj4s7sXp5Zfzx7iQ
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -102,36 +102,25 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Print d->arch.emulation_flags on the console for better traceability while
-debugging in-hypervisor hardware emulators.
+Introduce definition for IRQ resource checks.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/x86/domain.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ xen/include/xen/irq.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 78a13e6812c9120901d0a70fb3bc1bd6a8b6917d..c88d422a64544531c1e1058fa484364bb4277d1e 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -818,11 +818,15 @@ int arch_domain_create(struct domain *d,
+diff --git a/xen/include/xen/irq.h b/xen/include/xen/irq.h
+index 95034c0d6bb5f0aa7d5bb572aca59872508a438a..aee878293ecc0de6a938bcfea1140d36b4de745a 100644
+--- a/xen/include/xen/irq.h
++++ b/xen/include/xen/irq.h
+@@ -53,6 +53,7 @@ struct irqaction {
+ #define AUTO_ASSIGN_IRQ         (-1)
+ #define NEVER_ASSIGN_IRQ        (-2)
+ #define FREE_TO_ASSIGN_IRQ      (-3)
++#define NO_IRQ                  (-4)
  
-     if ( !emulation_flags_ok(d, emflags) )
-     {
--        printk(XENLOG_G_ERR "d%d: Xen does not allow %s domain creation "
-+        printk(XENLOG_G_ERR "d%d: Xen does not allow %s %sdomain creation "
-                "with the current selection of emulators: %#x\n",
--               d->domain_id, is_hvm_domain(d) ? "HVM" : "PV", emflags);
-+               d->domain_id,
-+               is_hvm_domain(d) ? "HVM" : "PV",
-+               is_hardware_domain(d) ? "(hardware) " : "",
-+               emflags);
-         return -EOPNOTSUPP;
-     }
-+    printk(XENLOG_G_INFO "d%d: emulation_flags %#x\n", d->domain_id, emflags);
-     d->arch.emulation_flags = emflags;
+ struct irq_desc;
  
- #ifdef CONFIG_PV32
 
 -- 
 2.34.1
