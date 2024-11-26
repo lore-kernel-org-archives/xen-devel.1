@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D95D1D66B8E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797A9D66BA3
 	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844060.1259668 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.844056.1259644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tq-0001jU-9W; Tue, 26 Nov 2024 23:23:18 +0000
+	id 1tG4to-0001Ey-Gd; Tue, 26 Nov 2024 23:23:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844060.1259668; Tue, 26 Nov 2024 23:23:18 +0000
+Received: by outflank-mailman (output) from mailman id 844056.1259644; Tue, 26 Nov 2024 23:23:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tp-0001hF-KO; Tue, 26 Nov 2024 23:23:17 +0000
-Received: by outflank-mailman (input) for mailman id 844060;
- Tue, 26 Nov 2024 23:22:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tG4to-00019f-1g; Tue, 26 Nov 2024 23:23:16 +0000
+Received: by outflank-mailman (input) for mailman id 844056;
+ Tue, 26 Nov 2024 23:22:05 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4sg-0000Ao-Lb
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:06 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3d87a499-ac4d-11ef-a0cd-8be0dac302b0;
- Wed, 27 Nov 2024 00:22:02 +0100 (CET)
+ id 1tG4sf-0000At-Ch
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:05 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3b1d5cd9-ac4d-11ef-99a3-01e77a169b0f;
+ Wed, 27 Nov 2024 00:21:58 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 550B45C5CF1;
- Tue, 26 Nov 2024 23:21:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 83748C4CEDD;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id BE78C5C5C99;
+ Tue, 26 Nov 2024 23:21:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id EC458C4CEDA;
+ Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 7C9CCD66B8E;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id E4272D66B8E;
+ Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,27 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d87a499-ac4d-11ef-a0cd-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjI2MDQ6MTM4MDo0NjQxOmM1MDA6OjEiLCJoZWxvIjoiZGZ3LnNvdXJjZS5rZXJuZWwub3JnIn0=
-X-Custom-Transaction: eyJpZCI6IjNkODdhNDk5LWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzIyLjg5ODM2Miwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 3b1d5cd9-ac4d-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
+X-Custom-Transaction: eyJpZCI6IjNiMWQ1Y2Q5LWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE4LjY1OTU0MSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1732663316;
-	bh=Cap5cSdXQnJhIWZIJycGmw66XTO7q8HjNlh67Jy7JB4=;
+	bh=W3lsM6sLlkNO6zjU1lHZ+u6ONjEFm+ba+WSVSjVypa4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Roi4bnO89HuQscE/mllmZ4di8KrGNkAEgaFCrZwspwH1JCGP7EeSelMhqJp3FtN2p
-	 1vmqcBEY6PtxBqWJW1VUHMpW/bPH5B+YC80zhJx30UowTy+ZgCQQnJEd0hnAn1Hlkt
-	 XcGKUReaRSPFHSjEvr5WInFgGkBvQkKepHz1F2TNg2MZxcNVm5HUfJxwzd27u0Wdt2
-	 DjdOJziJugSXgtF7Jn3f6bo30Ln6l01S2E8qR9nY0G4TFpac36FqwR/86tOFX/ts/x
-	 nKhPwQFQosdNK6Bir87YPHUpd+Dfu25EOC3kfrmlu72LVexy+/k0LtMpla4qGDvOj8
-	 CoRT7AHq/AL0A==
+	b=DWG5xl3PA9EWYt6A1foAYmpaGYGMDxUuqrePoRwb34UBxkzHa5bijAvMJaKswoYGE
+	 mGxMhoSwcGciCHgvN7fPLDgFcdZltrZ9IrstLF6xp0Q7Lh4VGnuFKQTjTJ9JxOy2sv
+	 kgNn3LK4TBCfKcYlUS482xV5IlxiuafjKkZz9vEBPqAp3xsbXvN537pzwk9xWdkJKC
+	 L0qrNyy38R/bxl8vWq4c0OjN29o73zGBrd88pM/A1T9p7MVzirlRw5TAY4NHCzjbkj
+	 mzzc6d876TccV6N2sJVcgikRV1N7dapXeam0YqCjLLLER6S8Qk6+TQoIqCE2WDHeig
+	 4/ZGBjHRZKwjA==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:22:07 -0800
-Subject: [PATCH 17/36] xen/console: rename switch_serial_input() to
- console_find_owner()
+Date: Tue, 26 Nov 2024 15:22:00 -0800
+Subject: [PATCH 10/36] ppc/domain: introduce domain_has_vuart()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-17-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-10-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -90,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=1478;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=728;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=kkv+AJB+iT69SEANPtdQ4jOx6o8Fe+p28DiGHObsMCE=;
- b=34yyRPfAwR5Xa4Xuz4/BOFOrcATMDRQQnnZ5y9UsR0hdVr18qx/Zq/l4GCrf/HFvgLYIzpxwv
- YVD7bNrxNZHCYCzTZGhZp5eE+8zkM7+FIcjsbE+IX79uUTZFrdW6EHP
+ bh=t3QJZEOM8PRrx5tFAM37Q5lrsCWx/ouiwIRJrERCogM=;
+ b=f8wXFvd3jIkFIxNMBQ/Axu1bbqXBT0SUKFv83mK3ibYkFiQYPB/1CIit84amN75UuJ8kKxZhP
+ qoa3sZDsWsYBHULljtv9I1Vynu51trtpjkriYMTMTyEbSz/qdAX7tC/
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -104,46 +102,26 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Updated the name to highlight the logic of selection the physical console
-owner: existing code does not switch only serial console, it also switches
-video console and debugging console (debug I/O port and console hypercall).
+Introduce domain_has_vuart() for PPC port to be used in the console driver.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/drivers/char/console.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/arch/ppc/include/asm/domain.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 01fcbd5581d11f8f4f2b23592255b5c744430a3e..f8a7db385c9525cabc69ceb1a84d73f57863aa45 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -485,7 +485,7 @@ struct domain *rcu_lock_domain_console_owner(void)
- }
- #endif
+diff --git a/xen/arch/ppc/include/asm/domain.h b/xen/arch/ppc/include/asm/domain.h
+index 3a447272c6f28586bf0d610929adbf228579e13f..764978e6a61b9d7220ec10fe0763e3424d07d27a 100644
+--- a/xen/arch/ppc/include/asm/domain.h
++++ b/xen/arch/ppc/include/asm/domain.h
+@@ -10,6 +10,8 @@ struct hvm_domain
+     uint64_t              params[HVM_NR_PARAMS];
+ };
  
--static void switch_serial_input(void)
-+static void console_find_owner(void)
- {
-     unsigned int next_rx = console_rx;
++#define domain_has_vuart(d)         false
++
+ /* TODO: Implement */
+ #define guest_mode(r) ({ (void)(r); BUG_ON("unimplemented"); 0; })
  
-@@ -588,7 +588,7 @@ static void cf_check serial_rx(char c)
-         /* We eat CTRL-<switch_char> in groups of 3 to switch console input. */
-         if ( ++switch_code_count == 3 )
-         {
--            switch_serial_input();
-+            console_find_owner();
-             switch_code_count = 0;
-         }
-         return;
-@@ -1128,7 +1128,7 @@ void __init console_endboot(void)
-                             "toggle host/guest log level adjustment", 0);
- 
-     /* Serial input is directed to DOM0 by default. */
--    switch_serial_input();
-+    console_find_owner();
- }
- 
- int __init console_has(const char *device)
 
 -- 
 2.34.1
