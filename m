@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797A9D66BA3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE8AD66B86
 	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844056.1259644 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.844047.1259602 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4to-0001Ey-Gd; Tue, 26 Nov 2024 23:23:16 +0000
+	id 1tG4tm-0000S5-Dm; Tue, 26 Nov 2024 23:23:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844056.1259644; Tue, 26 Nov 2024 23:23:16 +0000
+Received: by outflank-mailman (output) from mailman id 844047.1259602; Tue, 26 Nov 2024 23:23:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4to-00019f-1g; Tue, 26 Nov 2024 23:23:16 +0000
-Received: by outflank-mailman (input) for mailman id 844056;
- Tue, 26 Nov 2024 23:22:05 +0000
+	id 1tG4tm-0000Qp-7M; Tue, 26 Nov 2024 23:23:14 +0000
+Received: by outflank-mailman (input) for mailman id 844047;
+ Tue, 26 Nov 2024 23:22:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4sf-0000At-Ch
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:05 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 1tG4sc-0000At-3S
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:02 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3b1d5cd9-ac4d-11ef-99a3-01e77a169b0f;
- Wed, 27 Nov 2024 00:21:58 +0100 (CET)
+ id 3abaf4ed-ac4d-11ef-99a3-01e77a169b0f;
+ Wed, 27 Nov 2024 00:21:57 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BE78C5C5C99;
- Tue, 26 Nov 2024 23:21:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id EC458C4CEDA;
+ by nyc.source.kernel.org (Postfix) with ESMTP id BD963A41660;
+ Tue, 26 Nov 2024 23:20:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 47EA8C4CED2;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E4272D66B8E;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 37680D66B8A;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b1d5cd9-ac4d-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
-X-Custom-Transaction: eyJpZCI6IjNiMWQ1Y2Q5LWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE4LjY1OTU0MSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 3abaf4ed-ac4d-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjE0Ny43NS4xOTMuOTEiLCJoZWxvIjoibnljLnNvdXJjZS5rZXJuZWwub3JnIn0=
+X-Custom-Transaction: eyJpZCI6IjNhYmFmNGVkLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE3Ljg5NTQ0NCwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1732663316;
-	bh=W3lsM6sLlkNO6zjU1lHZ+u6ONjEFm+ba+WSVSjVypa4=;
+	s=k20201202; t=1732663315;
+	bh=cKINO/Hsop/bfc6jLIz0xl2D+OXz60jGYySFfpDcAlU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=DWG5xl3PA9EWYt6A1foAYmpaGYGMDxUuqrePoRwb34UBxkzHa5bijAvMJaKswoYGE
-	 mGxMhoSwcGciCHgvN7fPLDgFcdZltrZ9IrstLF6xp0Q7Lh4VGnuFKQTjTJ9JxOy2sv
-	 kgNn3LK4TBCfKcYlUS482xV5IlxiuafjKkZz9vEBPqAp3xsbXvN537pzwk9xWdkJKC
-	 L0qrNyy38R/bxl8vWq4c0OjN29o73zGBrd88pM/A1T9p7MVzirlRw5TAY4NHCzjbkj
-	 mzzc6d876TccV6N2sJVcgikRV1N7dapXeam0YqCjLLLER6S8Qk6+TQoIqCE2WDHeig
-	 4/ZGBjHRZKwjA==
+	b=q5St0jFa5oFUvjtCcRCeWJmo6nYrhlIHDG52k32aN6SMTRRJ/SPvVvpVGXpn7yJ5C
+	 dFdQRzjsTwehBpnCGgLBzkzeOgmKwSRK+TR5NwnZQ0BMxFyUgzADvvckX31MpRHKE4
+	 xz48heyE1k5iquEGcUE51LjUw36xlXsaXHEh+UtYPHV2wf7aoXXnb2NxifKhG00N49
+	 A55dQF8MPu9VzDAG6cUnEhbKBYRk+AsxkynSiPxMMIK96hvppfssOfNycH3etAiLZi
+	 5VvucsQ+xGcrQqXUqotLn1vvutpDF8Z2cpyXJsRMztpKmQa0o6SYDLgYtOWjKokVWW
+	 ARdgoCOj25yuQ==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:22:00 -0800
-Subject: [PATCH 10/36] ppc/domain: introduce domain_has_vuart()
+Date: Tue, 26 Nov 2024 15:21:52 -0800
+Subject: [PATCH 02/36] xsm/flask: missing breaks, MISRA rule 16.4
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-10-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-2-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -88,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=728;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=1534;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=t3QJZEOM8PRrx5tFAM37Q5lrsCWx/ouiwIRJrERCogM=;
- b=f8wXFvd3jIkFIxNMBQ/Axu1bbqXBT0SUKFv83mK3ibYkFiQYPB/1CIit84amN75UuJ8kKxZhP
- qoa3sZDsWsYBHULljtv9I1Vynu51trtpjkriYMTMTyEbSz/qdAX7tC/
+ bh=Om6cdnbe5fxG+CPjXPUOumzF0XPQ191PKf8s/8GFQ90=;
+ b=w8ahloFDu924cxnDNLZ4R1wwM6DWcNf1t2DrnlPft9LzkIetQCU1BI/6U654/5ljvXy08gkyR
+ 0sUOpQD/agmCgTz6kCaQ8aW0762sTvVUZlawmKG9f0feuH2wHd5/HYB
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -102,26 +102,54 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Introduce domain_has_vuart() for PPC port to be used in the console driver.
+While working on console forwarding for virtual NS8250 I stepped into
+  flask_domain_alloc_security()
+where break statement was missing in default case which violates MISRA
+rule 16.4.
+
+Fixed everywhere in hooks.c.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/ppc/include/asm/domain.h | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/xsm/flask/hooks.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/xen/arch/ppc/include/asm/domain.h b/xen/arch/ppc/include/asm/domain.h
-index 3a447272c6f28586bf0d610929adbf228579e13f..764978e6a61b9d7220ec10fe0763e3424d07d27a 100644
---- a/xen/arch/ppc/include/asm/domain.h
-+++ b/xen/arch/ppc/include/asm/domain.h
-@@ -10,6 +10,8 @@ struct hvm_domain
-     uint64_t              params[HVM_NR_PARAMS];
- };
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index dfa23738cd8a9fd91eda23d9c328c3cc55d31418..a79474ffe43af19f602a6c067eab6b40dba0d946 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -198,6 +198,7 @@ static int cf_check flask_domain_alloc_security(struct domain *d)
+             else if ( pv_shim )
+                 dsec->sid = SECINITSID_DOMU;
+         }
++        break;
+     }
  
-+#define domain_has_vuart(d)         false
-+
- /* TODO: Implement */
- #define guest_mode(r) ({ (void)(r); BUG_ON("unimplemented"); 0; })
+     dsec->self_sid = dsec->sid;
+@@ -342,6 +343,7 @@ static int cf_check flask_evtchn_send(struct domain *d, struct evtchn *chn)
+         break;
+     default:
+         rc = avc_unknown_permission("event channel state", chn->state);
++        break;
+     }
  
+     return rc;
+@@ -1310,6 +1312,7 @@ static int cf_check flask_hvm_param(struct domain *d, unsigned long op)
+         break;
+     default:
+         perm = HVM__HVMCTL;
++        break;
+     }
+ 
+     return current_has_perm(d, SECCLASS_HVM, perm);
+@@ -2013,6 +2016,7 @@ const struct xsm_ops *__init flask_init(
+     case FLASK_BOOTPARAM_INVALID:
+     default:
+         panic("Flask: Invalid value for flask= boot parameter.\n");
++        break;
+     }
+ 
+     avc_init();
 
 -- 
 2.34.1
