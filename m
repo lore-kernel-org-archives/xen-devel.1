@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F36D66B9A
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:38:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844355.1259921 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11509D66B9A
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:39:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844364.1259931 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG58X-0003qG-7b; Tue, 26 Nov 2024 23:38:29 +0000
+	id 1tG593-0004bW-Fy; Tue, 26 Nov 2024 23:39:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844355.1259921; Tue, 26 Nov 2024 23:38:29 +0000
+Received: by outflank-mailman (output) from mailman id 844364.1259931; Tue, 26 Nov 2024 23:39:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG58X-0003q9-4H; Tue, 26 Nov 2024 23:38:29 +0000
-Received: by outflank-mailman (input) for mailman id 844355;
- Tue, 26 Nov 2024 23:38:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tG593-0004bP-DV; Tue, 26 Nov 2024 23:39:01 +0000
+Received: by outflank-mailman (input) for mailman id 844364;
+ Tue, 26 Nov 2024 23:38:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4sn-0000At-E0
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:13 +0000
+ id 1tG4so-0000Ao-NJ
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:14 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3dbddc90-ac4d-11ef-99a3-01e77a169b0f;
- Wed, 27 Nov 2024 00:22:02 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3f92f938-ac4d-11ef-a0cd-8be0dac302b0;
+ Wed, 27 Nov 2024 00:22:06 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BDF735C5D37;
- Tue, 26 Nov 2024 23:21:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E73D3C4CED3;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4F80A5C5D8A;
+ Tue, 26 Nov 2024 23:21:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 778B7C4CEDB;
+ Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id DB2FED66B94;
- Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 6B238D66B94;
+ Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3dbddc90-ac4d-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 3f92f938-ac4d-11ef-a0cd-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
-X-Custom-Transaction: eyJpZCI6IjNkYmRkYzkwLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzIzLjE4OTI5Niwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Custom-Transaction: eyJpZCI6IjNmOTJmOTM4LWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzI2LjMyOTA4MSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1732663317;
-	bh=Msd9ALOQsKWgqYjqZp3vEbU4YxKp+IL/6j5doF/TX4s=;
+	bh=lj/mfdQca1gsUrIVD1+Z6uLYfT5KncbYzGoRr8znGg8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=EjGuXXXvARbSkfc9IeVFfmDHBQewfsHXB2SXcmmGhSEvXVTaV5iWWdnXzabgyJMwH
-	 +B5r5Dapx/vEoY/eyz5JhORRlBsB0xnQ2a8FoW5puADacIjjtYIyGkiLIhNX0HjDVC
-	 FGkTol8ab/a+6vKnUS41q9cGlMb7mjKysuc2cBgm3N4lzTYJX30pRJko+rhXJfcGYt
-	 Jj4SZkbqShKLlqH01xPdfnHWxkxZmXo8hYKCjcawD/AMa7gR9MxMJ7XEfM0gASX3E7
-	 dNFMElmgkVxhKRPxT/vr/jXLwNXBsQBhZsjfCtbRCdQY63rpKkATQiAhj3RupE5tkt
-	 rldH3hv+7xf/Q==
+	b=lTwL1lLxHQLzdkVdjZUQ3xsKci5v5odyqqMyYMPKv3tGFO3xyeaHNrTYTvvtLdsdK
+	 Kvynjxx6BZtaBegtDmSZtYTY23fGx7Dt5weqMf6lE74dy6l2w+E91Ebvl5TFhS3Kbx
+	 zusPn0uPxT+H1hzK6yPJdbOlyQI9y3tNoRHN3lwCd+cFp3qftklpB8Zvp98Y0kNlhe
+	 puSPncppxvOf7Dv0QwqjN88qOQ3W0KeYfaxfyZKqzlsQ1SONSpcu38a5jctu0NTTVZ
+	 39nl21KByRFDIWOh4Eh6lZcueLdEpYChXKnnTzrXr8tBtztdD2igoy0gZLPNDH1riC
+	 S05WRt+GoBeKw==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:22:12 -0800
-Subject: [PATCH 22/36] xen/console: introduce console_set_owner()
+Date: Tue, 26 Nov 2024 15:22:19 -0800
+Subject: [PATCH 29/36] xen/console: make console buffer size configurable
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-22-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-29-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -88,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=6105;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=2270;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=LaoLtTtPVB803Wx66ywoNWCuGefL+9P7BcXWkOi4Ttw=;
- b=4lK/8BHVyfy3woSRpKh5PM02ENnqP+ItqkfEgYigMPj6lRFJWcPJsSQvqyG1yASQpUrz6O30O
- flL6r/RmuUgA0bIlRawQx23oGAn7Yvbn6WD6FIZY6jvjVBKaIN+E4lv
+ bh=AKwyQAvwjj+wQmu1WwmpWDVO3KxHtjslwmqsRTzrAD0=;
+ b=2HaC4h5V7Nqz/P9NOv91yjhDKAIlxkFFwtZ/HQqHYBGIHO0FUCz24w2vidaasH3dA1AmaxlAe
+ FHROVQWFA36AM3r9ufqu45LJzuW/14PyrFrvxk30PhdkkGk/KDETzzI
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -102,212 +102,70 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-console_set_owner() is introduced for setting the new console owner.
+Add new CONRING_LOG_SHIFT Kconfig parameter to specify the boot console buffer
+size as a power of 2.
 
-Switches console owner to domain ID vs range of integer numbers mapped to
-domain IDs.
+Bump default size to 32 KiB.
 
-This a public API to console driver, will be used in the follow on code change.
-
+Link: https://gitlab.com/xen-project/xen/-/issues/185
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/drivers/char/console.c | 122 ++++++++++++++++++++++++++-------------------
- xen/include/xen/console.h  |   1 +
- 2 files changed, 71 insertions(+), 52 deletions(-)
+ xen/drivers/char/Kconfig   | 23 +++++++++++++++++++++++
+ xen/drivers/char/console.c |  4 ++--
+ 2 files changed, 25 insertions(+), 2 deletions(-)
 
+diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+index e175d07c022b051c5af4e689061adba72f9b54a0..2c754545cf05e740bd3d59d88de464f3653fb68e 100644
+--- a/xen/drivers/char/Kconfig
++++ b/xen/drivers/char/Kconfig
+@@ -93,6 +93,29 @@ config SERIAL_TX_BUFSIZE
+ 
+ 	  Default value is 32768 (32KiB).
+ 
++config CONRING_LOG_SHIFT
++	int "Console buffer size"
++	range 14 25
++	default 15
++	help
++	  Select the boot console buffer size as a power of 2.
++	  Run-time console buffer size is the same as the boot console size,
++	  unless enforced via 'conring_size=' boot parameter.
++
++	  Examples:
++	    25 =>  32 MiB
++	    24 =>  16 MiB
++	    23 =>   8 MiB
++	    22 =>   4 MiB
++	    21 =>   2 MiB
++	    20 =>   1 MiB
++	    19 => 512 KiB
++	    18 => 256 KiB
++	    17 => 128 KiB
++	    16 =>  64 KiB
++	    15 =>  32 KiB
++	    14 =>  16 KiB
++
+ config XHCI
+ 	bool "XHCI DbC UART driver"
+ 	depends on X86
 diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 8cbac54c66044ae8581e486a782102b75c8bfaa9..52cf64dbf6fd18d599cb88835d03501a23b3e3c4 100644
+index 9f67ecb26f5ab1183d17c83631a17b45cfefd5ab..24a8263045b0e5ecf901d08e627f34a80edd297d 100644
 --- a/xen/drivers/char/console.c
 +++ b/xen/drivers/char/console.c
-@@ -463,82 +463,100 @@ static void cf_check dump_console_ring_key(unsigned char key)
+@@ -102,11 +102,11 @@ static int cf_check parse_console_timestamps(const char *s);
+ custom_runtime_param("console_timestamps", parse_console_timestamps,
+                      con_timestamp_mode_upd);
  
- /*
-  * CTRL-<switch_char> changes input direction, rotating among Xen, Dom0,
-- * and the DomUs started from Xen at boot.
-+ * and the DomUs.
-  */
- #define switch_code (opt_conswitch[0]-'a'+1)
-+
- /*
-- * console_owner=0 => input to xen
-- * console_owner=1 => input to dom0 (or the sole shim domain)
-- * console_owner=N => input to dom(N-1)
-+ * Current console owner domain ID: either Xen or domain w/ d->is_console ==
-+ * true.
-+ *
-+ * Initialized in console_endboot().
-  */
--static unsigned int __read_mostly console_owner = 0;
-+static domid_t __read_mostly console_owner;
+-/* conring_size: allows a large console ring than default (16kB). */
++/* conring_size: allows a large console ring than default (32 KiB). */
+ static uint32_t __initdata opt_conring_size;
+ size_param("conring_size", opt_conring_size);
  
--#define max_console_rx (max_init_domid + 1)
-+static struct domain *rcu_lock_domain_console_by_id(domid_t domid)
-+{
-+    struct domain *d;
-+
-+    d = rcu_lock_domain_by_id(domid);
-+
-+    if ( d == NULL )
-+        return NULL;
-+
-+    if ( d->is_console )
-+        return d;
-+
-+    rcu_unlock_domain(d);
-+
-+    return NULL;
-+}
- 
--#ifdef CONFIG_SBSA_VUART_CONSOLE
- /* Make sure to rcu_unlock_domain after use */
- struct domain *rcu_lock_domain_console_owner(void)
- {
--    if ( console_owner == 0 )
--            return NULL;
--    return rcu_lock_domain_by_id(console_owner - 1);
-+    return rcu_lock_domain_console_by_id(console_owner);
- }
--#endif
- 
--static void console_find_owner(void)
-+static bool console_owner_possible(domid_t domid)
- {
--    unsigned int next_rx = console_owner;
--
--    /*
--     * Rotate among Xen, dom0 and boot-time created domUs while skipping
--     * switching serial input to non existing domains.
--     */
--    for ( ; ; )
--    {
--        domid_t domid;
--        struct domain *d;
--
--        if ( next_rx++ >= max_console_rx )
--        {
--            console_owner = 0;
--            printk("*** Serial input to Xen");
--            break;
--        }
--
--        if ( consoled_is_enabled() && next_rx == 1 )
--            domid = get_initial_domain_id();
--        else
--            domid = next_rx - 1;
--
--        d = rcu_lock_domain_by_id(domid);
--        if ( d == NULL )
--            continue;
--
--        if ( d->is_console )
--        {
--            rcu_unlock_domain(d);
--            console_owner = next_rx;
--            printk("*** Serial input to DOM%u", domid);
--            break;
--        }
-+    struct domain *d;
- 
-+    d = rcu_lock_domain_console_by_id(domid);
-+    if ( d != NULL )
-         rcu_unlock_domain(d);
--    }
-+
-+    return d != NULL;
-+}
-+
-+int console_set_owner(domid_t domid)
-+{
-+    if ( domid == DOMID_XEN )
-+        printk("*** Serial input to Xen");
-+    else if ( console_owner_possible(domid) )
-+        printk("*** Serial input to DOM%u", domid);
-+    else
-+        return -ENOENT;
-+
-+    console_owner = domid;
- 
-     if ( switch_code )
-         printk(" (type 'CTRL-%c' three times to switch input)",
-                opt_conswitch[0]);
-     printk("\n");
-+
-+    return 0;
-+}
-+
-+/*
-+ * Switch console input focus.
-+ * Rotates input focus among Xen, dom0 and boot-time created domUs while
-+ * skipping switching serial input to non existing domains.
-+ */
-+static void console_find_owner(void)
-+{
-+    domid_t i, n = max_init_domid + 1;
-+
-+    if ( console_owner == DOMID_XEN )
-+        i = get_initial_domain_id();
-+    else
-+        i = console_owner + 1;
-+
-+    for ( ; i < n; i++ )
-+        if ( !console_set_owner(i) )
-+            break;
-+    if ( i == n )
-+        console_set_owner(DOMID_XEN);
- }
- 
- static void __serial_rx(char c)
- {
-     switch ( console_owner )
-     {
--    case 0:
-+    case DOMID_XEN:
-         return handle_keypress(c, false);
- 
--    case 1:
-+    case 0:
-         /*
-          * Deliver input to the hardware domain buffer, unless it is
-          * already full.
-@@ -556,7 +574,7 @@ static void __serial_rx(char c)
- #ifdef CONFIG_SBSA_VUART_CONSOLE
-     default:
-     {
--        struct domain *d = rcu_lock_domain_by_id(console_owner - 1);
-+        struct domain *d = rcu_lock_domain_by_id(console_owner);
- 
-         /*
-          * If we have a properly initialized vpl011 console for the
-@@ -567,7 +585,7 @@ static void __serial_rx(char c)
-             vpl011_rx_char_xen(d, c);
-         else
-             printk("Cannot send chars to Dom%d: no UART available\n",
--                   console_owner - 1);
-+                   console_owner);
- 
-         if ( d != NULL )
-             rcu_unlock_domain(d);
-@@ -1126,7 +1144,7 @@ void __init console_endboot(void)
-      * a useful 'how to switch' message.
-      */
-     if ( opt_conswitch[1] == 'x' )
--        console_owner = max_console_rx;
-+        console_owner = DOMID_XEN;
- 
-     register_keyhandler('w', dump_console_ring_key,
-                         "synchronously dump console ring buffer (dmesg)", 0);
-diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
-index 0e211e44d9703c804e18f52c9743916f8d2a9d4e..57c482cfbf2da15b011e64841ea086e779f4588d 100644
---- a/xen/include/xen/console.h
-+++ b/xen/include/xen/console.h
-@@ -32,6 +32,7 @@ void console_start_log_everything(void);
- void console_end_log_everything(void);
- 
- struct domain *rcu_lock_domain_console_owner(void);
-+int console_set_owner(domid_t);
- 
- /*
-  * Steal output from the console. Returns +ve identifier, else -ve error.
+-#define _CONRING_SIZE 16384
++#define _CONRING_SIZE       (1U << CONFIG_CONRING_LOG_SHIFT)
+ #define CONRING_IDX_MASK(i) ((i)&(conring_size-1))
+ static char __initdata _conring[_CONRING_SIZE];
+ static char *__read_mostly conring = _conring;
 
 -- 
 2.34.1
