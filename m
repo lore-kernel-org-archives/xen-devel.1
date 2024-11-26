@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F320D66B9D
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844045.1259593 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F461D66B9A
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844064.1259675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tl-0000MH-Sm; Tue, 26 Nov 2024 23:23:13 +0000
+	id 1tG4tq-0001zY-Or; Tue, 26 Nov 2024 23:23:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844045.1259593; Tue, 26 Nov 2024 23:23:13 +0000
+Received: by outflank-mailman (output) from mailman id 844064.1259675; Tue, 26 Nov 2024 23:23:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tl-0000MA-OX; Tue, 26 Nov 2024 23:23:13 +0000
-Received: by outflank-mailman (input) for mailman id 844045;
- Tue, 26 Nov 2024 23:22:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tG4tq-0001vr-BJ; Tue, 26 Nov 2024 23:23:18 +0000
+Received: by outflank-mailman (input) for mailman id 844064;
+ Tue, 26 Nov 2024 23:22:07 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4sb-0000Ao-91
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:01 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3a6e18f8-ac4d-11ef-a0cd-8be0dac302b0;
- Wed, 27 Nov 2024 00:21:57 +0100 (CET)
+ id 1tG4sh-0000At-DJ
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:07 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3b4c2a0c-ac4d-11ef-99a3-01e77a169b0f;
+ Wed, 27 Nov 2024 00:21:58 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id AC7B8A401D8;
- Tue, 26 Nov 2024 23:20:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 3A719C4CED3;
+ by dfw.source.kernel.org (Postfix) with ESMTP id D661C5C5CAF;
+ Tue, 26 Nov 2024 23:21:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C21D2C4CEE2;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 1D6EAD66B88;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id BA0CBD66B91;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a6e18f8-ac4d-11ef-a0cd-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjE0Ny43NS4xOTMuOTEiLCJoZWxvIjoibnljLnNvdXJjZS5rZXJuZWwub3JnIn0=
-X-Custom-Transaction: eyJpZCI6IjNhNmUxOGY4LWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzE3LjQyMjY3LCJzZW5kZXIiOiJkZXZudWxsK2RtdWtoaW4uZm9yZC5jb21Aa2VybmVsLm9yZyIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
+X-Inumbo-ID: 3b4c2a0c-ac4d-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
+X-Custom-Transaction: eyJpZCI6IjNiNGMyYTBjLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE4Ljk1OTI3NCwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1732663315;
-	bh=Yb0mvdyBQS1c7dAPhUGgIsRh+rcogZBJTDsqTjxJ3hs=;
+	bh=JpvOelHa4b8SSlnyQ1G57JyTx7oZcL2ofFdr2MblKyY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=G379LioZzb3INaF2u6erQbpZ0mHNJM6NtXCtFwfgkkuivFbiPCwplSphDrw9rXnEK
-	 j7OIGwcs2UrkkOTWmrjtJMblVivSnLXVA9bV7WRupIUWNdooiGLxvQ3kQzffCypdm8
-	 y20BYGp2Fl1E1CXAYVnsNhEjcmYMbPJLdGVKSuULPehJgzwyvVqwroEnrCqRT77a07
-	 ZlreXPxqEpm7c0zJCzeowVKqQuzHZHuqAzRDIXcRwRlCazW5ORj/NANrNsfjzQZtGG
-	 kUoEi4+2yhntsQCttMPLAXqhUHpq/Kx5CI8j31llSMCXR3I2Vc8hkwEDdiOE+MoZB9
-	 2GYYk8Z3fXYEA==
+	b=YwCJJpa3gtvCn9Qm4iP4NOkC+7XhwtWQDOZWYAA6YMle8/6n+LE81uOUvvvJpTyp6
+	 0IBg461zR4gjtHFTMFrbkD+PJEv3ajXrMu2MG+Suzg5q0AoqrEFV1+5xXmtSozQqye
+	 2CS307sIfEJ0YF5DV3K46kDexwD5Fa8OhbASvVdjzKD0Dploy+iPY53wjfdDzt3rqf
+	 0cZeku7tSyKpj9V+sskg7yQLekpV1th2TjLmj0Cm0SpLp2be6L4RpMFwCXj2mNX3CB
+	 uZQvJcebdHLdGawbA2l3kHr1DOZvUWpHZuWjLbmYxU7csWdizWNmKPgovbzABQzA+Z
+	 4F3HVY8IByytA==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:21:51 -0800
-Subject: [PATCH 01/36] x86/setup: fix typo in acpi=off description
+Date: Tue, 26 Nov 2024 15:21:59 -0800
+Subject: [PATCH 09/36] riscv/domain: introduce domain_has_vuart()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-1-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-9-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -88,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=913;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=677;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=7yTBjRl8lmc1tg+ZFlXhUwzuZwMkcPhVqwc9gw3xsIQ=;
- b=fGhLeTafOQHdmZPBdD9bIVheTVXsfAPHD70yBmhJl2mjqDLgSZD+W7NfTS1UpjOjg5WWyO82s
- 3nLC9cTHbFbD0Zur6mUCtIfo/TkKIfkB94RsV1dDD42fBf/p2X0hkh9
+ bh=Fxckvj4Rq3ciLOXnJC51fJ7legC3d6vrDts1ke6yfmU=;
+ b=TSM/n3jP/hKn1R5R46t8lGXKgXQW9Tyfrrj8oA8KSn8tY69MNLUbX+Yv33RoFU6wp81P1amtR
+ +jBKzcZRr28AL3WaamkV1l7PcFmGc64Z5+C8v2tVYQqRalGfZwHKDNg
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -102,24 +102,26 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
+Introduce domain_has_vuart() for RISC-V port to be used in the console driver.
+
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/x86/setup.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/riscv/include/asm/domain.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index d8661d7ca699c96f38229c75ad0a8626c6f675d4..0a748e2c14122d6c5d692bc5691e8cbe13a32c81 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -83,7 +83,7 @@ int8_t __initdata opt_probe_port_aliases = -1;
- boolean_param("probe-port-aliases", opt_probe_port_aliases);
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index c3d965a559b6ce3661bf17166d0c51853ff295a2..efbc4f1ea2619a187fe30ede17d96de01e599220 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -10,6 +10,8 @@ struct hvm_domain
+     uint64_t              params[HVM_NR_PARAMS];
+ };
  
- /* **** Linux config option: propagated to domain0. */
--/* "acpi=off":    Sisables both ACPI table parsing and interpreter. */
-+/* "acpi=off":    Disables both ACPI table parsing and interpreter. */
- /* "acpi=force":  Override the disable blacklist.                   */
- /* "acpi=ht":     Limit ACPI just to boot-time to enable HT.        */
- /* "acpi=noirq":  Disables ACPI interrupt routing.                  */
++#define domain_has_vuart(d)         false
++
+ struct arch_vcpu_io {
+ };
+ 
 
 -- 
 2.34.1
