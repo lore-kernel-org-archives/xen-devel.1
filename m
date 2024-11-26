@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11DD1D66BA7
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844052.1259624 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2480ED66BAB
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844046.1259596 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tn-0000nZ-Cz; Tue, 26 Nov 2024 23:23:15 +0000
+	id 1tG4tm-0000OO-40; Tue, 26 Nov 2024 23:23:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844052.1259624; Tue, 26 Nov 2024 23:23:15 +0000
+Received: by outflank-mailman (output) from mailman id 844046.1259596; Tue, 26 Nov 2024 23:23:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tn-0000mE-4r; Tue, 26 Nov 2024 23:23:15 +0000
-Received: by outflank-mailman (input) for mailman id 844052;
- Tue, 26 Nov 2024 23:22:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tG4tl-0000Ni-VH; Tue, 26 Nov 2024 23:23:13 +0000
+Received: by outflank-mailman (input) for mailman id 844046;
+ Tue, 26 Nov 2024 23:22:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4se-0000At-CO
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:04 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3ae27bca-ac4d-11ef-99a3-01e77a169b0f;
+ id 1tG4sb-0000Ao-I9
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:01 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3aa60ca8-ac4d-11ef-a0cd-8be0dac302b0;
  Wed, 27 Nov 2024 00:21:57 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id E9453A41665;
- Tue, 26 Nov 2024 23:20:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 56E98C4CED7;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8DBEA5C5C0D;
+ Tue, 26 Nov 2024 23:21:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 79CDAC4CEDD;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 4A42ED66B84;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 6BC62D66B89;
  Tue, 26 Nov 2024 23:21:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ae27bca-ac4d-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjE0Ny43NS4xOTMuOTEiLCJoZWxvIjoibnljLnNvdXJjZS5rZXJuZWwub3JnIn0=
-X-Custom-Transaction: eyJpZCI6IjNhZTI3YmNhLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzE3Ljk3MDI5MSwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 3aa60ca8-ac4d-11ef-a0cd-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
+X-Custom-Transaction: eyJpZCI6IjNhYTYwY2E4LWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzE4LjA5Nzk5Miwic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1732663315;
-	bh=hhpepZyC6+B98tKRYu7FEASFfIF/3/TSsCfLQMcZ32A=;
+	bh=xRl/VI33XtcNQyJ8toSM7CxORY63SAcLHHhJDp/5VHE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=qnzUmTBBnyPw/PBcHJlWArvKyI3BqwPBho6sr0Ljp4rDl716NfDn4W/kR5sa24HeN
-	 LfQqL14pYIaW5oKjKa+2wWEQQqLcYQJUaxaX8lFThkeZ4wfrVxqa8riVBoZ+pmXa6G
-	 e5DZ+xsajgVkEYhLPPHs2zODp10ZEE9ocsKEsGSx6CBmZRBLJ21xSFiBVJotMKDIci
-	 GjXijXXt4ITNwNyav8sKH8kwvnJ4lMB8dPxNL0+/muqV+4hLhgFyb840SKGcF4PKV6
-	 WL+APewHdNypUEBBSXUA/yv5fEa67mtK4tUfX8LirE2kXWxb5ury8wvshCHtOYW/jy
-	 SbzrPLNILgJtQ==
+	b=RdupsLJVIRafQLWxJMPEhpP/XHYk4ho+6qgZbdxC8XWaZKfDeIdNdkxnFyp5JmVMD
+	 bymk/6NP2NGllgK/rnULmAZNoSi9ArJupKYHrs8c7J4eOO87gCwDmpd+kP8TW7chPq
+	 GPtg76P4sN/1vs8Wc3mg82ZjzroFo8mLGeCEzAjgM0OZ65hkvaaL8cKSGU9BT2t9tB
+	 T8Q92HbKVu7M9XePQndcz3RfJ1J21soYc9KCRwMHiSmGY0C1Uc07qblTocMmoburKs
+	 9Yy6Y9xAmpK+dwHCcX9WGZJZjUQUWe8kSEhqaBf9S/XeHwEfsdCpl/P9JTwfUGi8Aq
+	 HFQgAR3Tfy4HA==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:21:53 -0800
-Subject: [PATCH 03/36] xen: introduce resource.h
+Date: Tue, 26 Nov 2024 15:21:55 -0800
+Subject: [PATCH 05/36] xen/xmalloc: add kmalloc() and kfree() aliases
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-3-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-5-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -88,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=4665;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=2077;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=Q8GpN19knhkzccfTAV4prViqD1gvBrGqV7AxMvPxGlg=;
- b=R204wyNJVDFwtxunVQ6uTri4iQAm0/nHG/UG64/jv9N7oGTk83gB3DKrDKESdQQu1IVN9xlm7
- 3k8U0eTtjb9DPHLtDbGKT5MQ/HAPZ4KbuEtGVkcnzKJn04P8qSywJYz
+ bh=izvZS5PqvGBio87RDretaNG85fhbAWhHk9N0az9Fz9c=;
+ b=DxooxiraEmxSjKMVEBBQD4C5YYEkrJbAOK1wZaShOd6buUxM3dQFSSYYVIfElWUereMJvfwLg
+ Wj8gFWn4yIjB0TL6qPikxL3D5RpBO5Qg26QYelUQogHdovGoR4kWouc
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -102,138 +102,55 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Move resource definitions to a new architecture-agnostic shared header file.
+Move existing aliases to a common header so those could be used in the new
+code.
 
-It will be used in follow on NS8250 emulator code to describe legacy
-PC COM resources.
+The code looks simpler w/ kmalloc(): type specification of the
+object being allocated is not required, e.g.:
+...
+  struct my_obj_s *obj;
+
+  obj = kmalloc(sizeof(*obj), 0);
+...
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/common/device-tree/device-tree.c | 21 +------------------
- xen/drivers/passthrough/arm/smmu.c   | 15 +-------------
- xen/include/xen/resource.h           | 40 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 42 insertions(+), 34 deletions(-)
+ xen/drivers/passthrough/arm/smmu.c | 4 ----
+ xen/include/xen/xmalloc.h          | 5 +++++
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/xen/common/device-tree/device-tree.c b/xen/common/device-tree/device-tree.c
-index d0528c5825651f7cc9ebca0c949229c9083063c6..e8f810b2fe10890c033ed3a9d4ca627010ad019b 100644
---- a/xen/common/device-tree/device-tree.c
-+++ b/xen/common/device-tree/device-tree.c
-@@ -24,6 +24,7 @@
- #include <xen/ctype.h>
- #include <asm/setup.h>
- #include <xen/err.h>
-+#include <xen/resource.h>
- 
- const void *device_tree_flattened;
- dt_irq_xlate_func dt_irq_xlate;
-@@ -535,26 +536,6 @@ int dt_child_n_size_cells(const struct dt_device_node *parent)
-     return __dt_n_size_cells(parent, true);
- }
- 
--/*
-- * These are defined in Linux where much of this code comes from, but
-- * are currently unused outside this file in the context of Xen.
-- */
--#define IORESOURCE_BITS         0x000000ff      /* Bus-specific bits */
--
--#define IORESOURCE_TYPE_BITS    0x00001f00      /* Resource type */
--#define IORESOURCE_IO           0x00000100      /* PCI/ISA I/O ports */
--#define IORESOURCE_MEM          0x00000200
--#define IORESOURCE_REG          0x00000300      /* Register offsets */
--#define IORESOURCE_IRQ          0x00000400
--#define IORESOURCE_DMA          0x00000800
--#define IORESOURCE_BUS          0x00001000
--
--#define IORESOURCE_PREFETCH     0x00002000      /* No side effects */
--#define IORESOURCE_READONLY     0x00004000
--#define IORESOURCE_CACHEABLE    0x00008000
--#define IORESOURCE_RANGELENGTH  0x00010000
--#define IORESOURCE_SHADOWABLE   0x00020000
--
- /*
-  * Default translator (generic bus)
-  */
 diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index 03d22bce1e497e41834c273f9048b98dcbd48a54..aa6a968b574dce7cc753e8070fad3a6e585cd9e7 100644
+index aa6a968b574dce7cc753e8070fad3a6e585cd9e7..b343dbc32282136ccb95654ae2756eaa8a51149f 100644
 --- a/xen/drivers/passthrough/arm/smmu.c
 +++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -50,6 +50,7 @@
- #include <xen/rbtree.h>
- #include <xen/sched.h>
- #include <xen/sizes.h>
-+#include <xen/resource.h>
- #include <asm/atomic.h>
- #include <asm/device.h>
- #include <asm/io.h>
-@@ -70,22 +71,8 @@
- #define of_property_read_u32(np, pname, out) (!dt_property_read_u32(np, pname, out))
- #define of_property_read_bool dt_property_read_bool
- #define of_parse_phandle_with_args dt_parse_phandle_with_args
--
--/* Xen: Helpers to get device MMIO and IRQs */
--struct resource
--{
--	paddr_t addr;
--	paddr_t size;
--	unsigned int type;
--};
--
--#define resource_size(res) (res)->size;
--
- #define platform_device dt_device_node
+@@ -136,11 +136,7 @@ typedef enum irqreturn irqreturn_t;
+ #define dev_name(dev) dt_node_full_name(dev_to_dt(dev))
  
--#define IORESOURCE_MEM 0
--#define IORESOURCE_IRQ 1
--
- static struct resource *platform_get_resource(struct platform_device *pdev,
- 					      unsigned int type,
- 					      unsigned int num)
-diff --git a/xen/include/xen/resource.h b/xen/include/xen/resource.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..4962e17da8387b7f324317482b19cc9fe71433fc
---- /dev/null
-+++ b/xen/include/xen/resource.h
-@@ -0,0 +1,40 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * System resource description.
-+ *
-+ * Reference:
-+ *   include/linux/ioport.h
-+ */
-+#if !defined(XEN__RESOURCE_H)
-+#define XEN__RESOURCE_H
+ /* Alias to Xen allocation helpers */
+-#define kfree xfree
+-#define kmalloc(size, flags)		_xmalloc(size, sizeof(void *))
+-#define kzalloc(size, flags)		_xzalloc(size, sizeof(void *))
+ #define devm_kzalloc(dev, size, flags)	_xzalloc(size, sizeof(void *))
+-#define kmalloc_array(size, n, flags)	_xmalloc_array(size, sizeof(void *), n)
+ #define devm_kcalloc(dev, n, size, flags)			\
+ 	_xzalloc_array(size, sizeof(void *), n)
+ 
+diff --git a/xen/include/xen/xmalloc.h b/xen/include/xen/xmalloc.h
+index b903fa2e26e198fc80fc6010c3165cc50b1197c7..eea8cced51d9fe784b558201a68648e1672d624f 100644
+--- a/xen/include/xen/xmalloc.h
++++ b/xen/include/xen/xmalloc.h
+@@ -16,6 +16,11 @@
+ #define xmalloc(_type) ((_type *)_xmalloc(sizeof(_type), __alignof__(_type)))
+ #define xzalloc(_type) ((_type *)_xzalloc(sizeof(_type), __alignof__(_type)))
+ 
++#define kfree                           xfree
++#define kmalloc(size, flags)            _xmalloc(size, sizeof(void *))
++#define kzalloc(size, flags)            _xzalloc(size, sizeof(void *))
++#define kmalloc_array(size, n, flags)   _xmalloc_array(size, sizeof(void *), n)
 +
-+#define IORESOURCE_BITS         0x000000FFU      /* Bus-specific bits */
-+
-+#define IORESOURCE_TYPE_BITS    0x00001F00U      /* Resource type */
-+#define IORESOURCE_IO           0x00000100U      /* PCI/ISA I/O ports */
-+#define IORESOURCE_MEM          0x00000200U
-+#define IORESOURCE_REG          0x00000300U      /* Register offsets */
-+#define IORESOURCE_IRQ          0x00000400U
-+#define IORESOURCE_DMA          0x00000800U
-+#define IORESOURCE_BUS          0x00001000U
-+
-+#define IORESOURCE_PREFETCH     0x00002000U      /* No side effects */
-+#define IORESOURCE_READONLY     0x00004000U
-+#define IORESOURCE_CACHEABLE    0x00008000U
-+#define IORESOURCE_RANGELENGTH  0x00010000U
-+#define IORESOURCE_SHADOWABLE   0x00020000U
-+
-+#define IORESOURCE_UNKNOWN      (~0U)
-+
-+struct resource {
-+    paddr_t addr;
-+    paddr_t size;
-+    unsigned int type;
-+};
-+
-+#define resource_size(res) (res)->size;
-+
-+#define foreach_resource(res) \
-+    for (; res && res->type != IORESOURCE_UNKNOWN; res++)
-+
-+#endif /* #if !defined(XEN__RESOURCE_H) */
+ /*
+  * Allocate space for a typed object and copy an existing instance.
+  *
 
 -- 
 2.34.1
