@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73FFBD66BAA
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844081.1259758 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DFE0D66B9A
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:23:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844078.1259745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4u0-0004Rt-UG; Tue, 26 Nov 2024 23:23:28 +0000
+	id 1tG4ty-00041x-Pg; Tue, 26 Nov 2024 23:23:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844081.1259758; Tue, 26 Nov 2024 23:23:28 +0000
+Received: by outflank-mailman (output) from mailman id 844078.1259745; Tue, 26 Nov 2024 23:23:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG4tz-0004Ku-FA; Tue, 26 Nov 2024 23:23:27 +0000
-Received: by outflank-mailman (input) for mailman id 844081;
- Tue, 26 Nov 2024 23:22:11 +0000
+	id 1tG4tx-0003yO-NI; Tue, 26 Nov 2024 23:23:25 +0000
+Received: by outflank-mailman (input) for mailman id 844078;
+ Tue, 26 Nov 2024 23:22:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4sl-0000Ao-Mn
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:11 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ id 1tG4sk-0000Ao-MS
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:10 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3f7e5ad1-ac4d-11ef-a0cd-8be0dac302b0;
- Wed, 27 Nov 2024 00:22:05 +0100 (CET)
+ id 3f492bb9-ac4d-11ef-a0cd-8be0dac302b0;
+ Wed, 27 Nov 2024 00:22:04 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5A14E5C5D97;
- Tue, 26 Nov 2024 23:21:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8904BC4CED3;
- Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0054A5C5DA4;
+ Tue, 26 Nov 2024 23:21:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2A80AC4CEDB;
+ Tue, 26 Nov 2024 23:21:58 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 80BA4D66B8E;
- Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 21B5FD66B9D;
+ Tue, 26 Nov 2024 23:21:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3f7e5ad1-ac4d-11ef-a0cd-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjI2MDQ6MTM4MDo0NjQxOmM1MDA6OjEiLCJoZWxvIjoiZGZ3LnNvdXJjZS5rZXJuZWwub3JnIn0=
-X-Custom-Transaction: eyJpZCI6IjNmN2U1YWQxLWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzI1LjM1MDAwMywic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 3f492bb9-ac4d-11ef-a0cd-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
+X-Custom-Transaction: eyJpZCI6IjNmNDkyYmI5LWFjNGQtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNjYzMzI1LjAwMzU0LCJzZW5kZXIiOiJkZXZudWxsK2RtdWtoaW4uZm9yZC5jb21Aa2VybmVsLm9yZyIsInJlY2lwaWVudCI6Inhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyJ9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1732663317;
-	bh=XhlyTKT6Hlfb0qF61veOPFsm+lhyRH3KNfs5+i2StaA=;
+	s=k20201202; t=1732663318;
+	bh=YBcSY6jiH0oljNDw524ilFoQbBSFGheVZRh8mWFvphc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=gTcMOlTcS220ZM2r3z/DMYmj2iowjMt3qadytRFodvrayrx+QnwWiMg91clSJiJj+
-	 cFJ9n1Ia714FZLG8xgMviWPsttV/UzwdV8NBFJB4mjpO2uDUiQNTUyQy5xHaD7YMpa
-	 X9dlVpa8vrb1Usnn89466SRbjYHEZF20hf2ryG9UbH8sDKual57tXsH0eDEzBJLjbM
-	 uPCp30t6v+1gI7tXUgvoWcUvmVKobFtQ6hFXWwfsqC2lJAasw7eT7Z6q4MiyYt9Lw4
-	 P50S+94VXQgnowVD+aZ89YSKtm1BrODQz7iVNuLVz1TtCfHl6aBZN09AzNyqGt96si
-	 yc1pRzOUoiNmg==
+	b=MoYlYSuIPCnu4b1HHhuKXukwkOccdSQUeZFE42H1bU6Wt2EZ6uyaQv+nIwJzW3pE6
+	 Bg1CIxMkJ0kVWBwSk35mcZL70XCPj0xIgbWG8W0rWSiO4VQuTGH/c4fn5XFyphjxk1
+	 3yD5e4/vVXdjMzA/Qq/uFAOIt1Id6EhdbdO/prkOBLlXgkSv5i0RUc0y3B6MxFDcl9
+	 C7ZMyMeFT94Ij8KXqfiqHOA5Xh0h2+TvVj30nuDi3f6qUSuCXLgQBBJOEXKbO3cv3D
+	 TU0nzE7hODveOO6yKOeMTiwolRk222khkUESkmRxDElOHVWwYQzzk+zc6rEoq2U3b6
+	 Z3ApgaxGuiMOA==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:22:20 -0800
-Subject: [PATCH 30/36] xen/8250-uart: add missing definitions
+Date: Tue, 26 Nov 2024 15:22:26 -0800
+Subject: [PATCH 36/36] docs/misc: update console documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-30-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-36-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -89,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=7186;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=5611;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=oejdv1gxnsCTTpK0zev/wdrMthybKBcbIC8U8s3WUPs=;
- b=/MaDwKP9awtaJDnFOE38qqIxCqUh/XIedVanwgDnvHPxhEduc2YVmEpIhzLVWa/T0f6THEh4s
- nu/8XGQN8rGCDv5+owOfQdvcFbtjw+36ayeQrOU70Rz12/xHWMGYE64
+ bh=O/e2TuAbfREf6sK5Rox2Z4H+zlo5Q3N8ksFZglsK7sE=;
+ b=XavKhjZA3mfK4h09UVfAzuoD+nqYtkqc4418biMqkmSexlVgea/EgM0/sVOixRT0rGc6Is/Ke
+ gmcR6+YgzKOD7ftpuWh53AGZUZYrdt+D/f3ZpAPz7y6T7Ams0JNWAsX
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -103,153 +102,107 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Added missing definitions needed for NS8250 UART emulator.
+Minor update related to virtual UART support.
+
+Also:
+ s/pv/PV/g
+ s/hvm/HVM/g
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/include/xen/8250-uart.h | 82 +++++++++++++++++++++++++++++++++------------
- 1 file changed, 61 insertions(+), 21 deletions(-)
+ docs/misc/console.txt | 48 +++++++++++++++++++++++++-----------------------
+ 1 file changed, 25 insertions(+), 23 deletions(-)
 
-diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
-index d13352940c13c50bac17d4cdf2f3bf584380776a..51c9b8c5fc3b8d9fa4b93f7722acb963fdf52a3d 100644
---- a/xen/include/xen/8250-uart.h
-+++ b/xen/include/xen/8250-uart.h
-@@ -32,16 +32,22 @@
- #define UART_MCR          0x04    /* Modem control        */
- #define UART_LSR          0x05    /* line status          */
- #define UART_MSR          0x06    /* Modem status         */
-+#define UART_SCR          0x07    /* Scratch pad          */
- #define UART_USR          0x1f    /* Status register (DW) */
- #define UART_DLL          0x00    /* divisor latch (ls) (DLAB=1) */
- #define UART_DLM          0x01    /* divisor latch (ms) (DLAB=1) */
- #define UART_XR_EFR       0x09    /* Enhanced function register (Exar) */
+diff --git a/docs/misc/console.txt b/docs/misc/console.txt
+index 4e180f88ba1312d8fcc47d27622ec347d387ce12..b5411b4d74b6d3d920a4fbb2ce6033a239ec5832 100644
+--- a/docs/misc/console.txt
++++ b/docs/misc/console.txt
+@@ -4,11 +4,11 @@ Xen PV Console notes
+                                         stefano.stabellini@eu.citrix.com
  
-+/* ns8250 emulator: range of emulated registers [0..UART_MAX-1] */
-+#define UART_MAX          (UART_SCR + 1)
+ 
+-Xen traditionally provided a single pv console to pv guests, storing the
++Xen traditionally provided a single PV console to PV guests, storing the
+ relevant information in xenstore under /local/domain/$DOMID/console.
+ 
+-Now many years after the introduction of the pv console we have
+-multiple pv consoles support for pv and hvm guests; multiple pv
++Now many years after the introduction of the PV console we have
++multiple PV consoles support for PV and HVM guests; multiple PV
+ console backends (qemu and xenconsoled, see limitations below) and
+ emulated serial cards too.
+ 
+@@ -103,48 +103,50 @@ The supported values are only xenconsoled or ioemu; xenconsoled has
+ several limitations: it can only be used for the first PV or virtual UART
+ console and it can only connect to a pty.
+ 
+-Emulated serials are provided by qemu-dm only to hvm guests; the number
+-of emulated serials depends on how many "-serial" command line options
+-are given to qemu. The output of a serial is specified as argument to
+-the -serial command line option to qemu. Qemu writes the tty name to
+-xenstore in the following path:
++Emulated serials are provided to HVM guests by qemu-dm or in-hypervisor UART
++emulator (Xen needs to be re-compiled).
 +
- /* Interrupt Enable Register */
- #define UART_IER_ERDAI    0x01    /* rx data recv'd       */
- #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
- #define UART_IER_ELSI     0x04    /* rx line status       */
- #define UART_IER_EMSI     0x08    /* MODEM status         */
-+#define UART_IER_MASK \
-+    (UART_IER_ERDAI | UART_IER_ETHREI | UART_IER_ELSI | UART_IER_EMSI)
++In qemu-dm case, the number of emulated serials depends on how many "-serial"
++command line options are given to qemu. The output of a serial is specified as
++argument to the -serial command line option to qemu. Qemu writes the tty name
++to xenstore in the following path:
  
- /* Interrupt Identification Register */
- #define UART_IIR_NOINT    0x01    /* no interrupt pending */
-@@ -51,12 +57,21 @@
- #define UART_IIR_THR      0x02    /*  - tx reg. empty     */
- #define UART_IIR_MSI      0x00    /*  - MODEM status      */
- #define UART_IIR_BSY      0x07    /*  - busy detect (DW) */
-+#define UART_IIR_FE0      BIT(6, U) /* FIFO enable #0 */
-+#define UART_IIR_FE1      BIT(7, U) /* FIFO enable #1 */
-+#define UART_IIR_FE_MASK  (UART_IIR_FE0 | UART_IIR_FE1)
+ /local/domain/$DOMID/serial/$SERIAL_NUM/tty
  
- /* FIFO Control Register */
--#define UART_FCR_ENABLE   0x01    /* enable FIFO          */
--#define UART_FCR_CLRX     0x02    /* clear Rx FIFO        */
--#define UART_FCR_CLTX     0x04    /* clear Tx FIFO        */
--#define UART_FCR_DMA      0x10    /* enter DMA mode       */
-+#define UART_FCR_ENABLE     BIT(0, U)   /* enable FIFO          */
-+#define UART_FCR_CLRX       BIT(1, U)   /* clear Rx FIFO        */
-+#define UART_FCR_CLTX       BIT(2, U)   /* clear Tx FIFO        */
-+#define UART_FCR_DMA        BIT(3, U)   /* enter DMA mode       */
-+#define UART_FCR_RESERVED0  BIT(4, U)   /* reserved; always 0   */
-+#define UART_FCR_RESERVED1  BIT(5, U)   /* reserved; always 0   */
-+#define UART_FCR_RTB0       BIT(6, U)   /* receiver trigger bit #0 */
-+#define UART_FCR_RTB1       BIT(7, U)   /* receiver trigger bit #1 */
-+#define UART_FCR_TRG_MASK   (UART_FCR_RTB0 | UART_FCR_RTB1)
-+
- #define UART_FCR_TRG1     0x00    /* Rx FIFO trig lev 1   */
- #define UART_FCR_TRG4     0x40    /* Rx FIFO trig lev 4   */
- #define UART_FCR_TRG8     0x80    /* Rx FIFO trig lev 8   */
-@@ -64,17 +79,17 @@
+ xenconsole is the tool to connect to a PV or virtual UART console or an
+ emulated serial that has a pty as output. Xenconsole takes a domid as
+-parameter plus an optional console type (pv for PV consoles, vuart for
++parameter plus an optional console type (PV for PV consoles, vuart for
+ virtual UART or serial for emulated serials) and console number.
+ Depending on the type and console number, xenconsole will look for the tty
+ node in different xenstore paths, as described above.  If the user doesn't
+-specify the console type xenconsole will try to guess: if the guest is a pv
+-guest it defaults to PV console, if the guest is an hvm guest it defaults to
++specify the console type xenconsole will try to guess: if the guest is a PV
++guest it defaults to PV console, if the guest is an HVM guest it defaults to
+ emulated serial.
  
- /*
-  * Note: The FIFO trigger levels are chip specific:
-- *	RX:76 = 00  01  10  11	TX:54 = 00  01  10  11
-- * PC16550D:	 1   4   8  14		xx  xx  xx  xx
-- * TI16C550A:	 1   4   8  14          xx  xx  xx  xx
-- * TI16C550C:	 1   4   8  14          xx  xx  xx  xx
-- * ST16C550:	 1   4   8  14		xx  xx  xx  xx
-- * ST16C650:	 8  16  24  28		16   8  24  30	PORT_16650V2
-- * NS16C552:	 1   4   8  14		xx  xx  xx  xx
-- * ST16C654:	 8  16  56  60		 8  16  32  56	PORT_16654
-- * TI16C750:	 1  16  32  56		xx  xx  xx  xx	PORT_16750
-- * TI16C752:	 8  16  56  60		 8  16  32  56
-- * Tegra:	 1   4   8  14		16   8   4   1	PORT_TEGRA
-+ *  RX:76 = 00  01  10  11  TX:54 = 00  01  10  11
-+ * PC16550D:     1   4   8  14      xx  xx  xx  xx
-+ * TI16C550A:    1   4   8  14      xx  xx  xx  xx
-+ * TI16C550C:    1   4   8  14      xx  xx  xx  xx
-+ * ST16C550:     1   4   8  14      xx  xx  xx  xx
-+ * ST16C650:     8  16  24  28      16   8  24  30  PORT_16650V2
-+ * NS16C552:     1   4   8  14      xx  xx  xx  xx
-+ * ST16C654:     8  16  56  60       8  16  32  56  PORT_16654
-+ * TI16C750:     1  16  32  56      xx  xx  xx  xx  PORT_16750
-+ * TI16C752:     8  16  56  60       8  16  32  56
-+ * Tegra:        1   4   8  14      16   8   4   1  PORT_TEGRA
-  */
- #define UART_FCR_R_TRIG_00 0x00
- #define UART_FCR_R_TRIG_01 0x40
-@@ -96,11 +111,32 @@
- #define UART_LCR_CONF_MODE_B	0xBF		/* Configuration mode B */
+-By default xl creates a pv console for hvm guests, plus an emulated
++By default xl creates a PV console for HVM guests, plus an emulated
+ serial if the user specified 'serial = "pty"' in the VM config file.
+-Considering that xenconsole defaults to emulated serials for hvm guests,
++Considering that xenconsole defaults to emulated serials for HVM guests,
+ executing xl create -c "domain" causes xenconsole to attach to the
+ emulated serial tty. This is most probably what the user wanted because
+-currently no bootloaders support xen pv consoles so the only way to
++currently no bootloaders support xen PV consoles so the only way to
+ interact with a bootloader like grub over a console is to use the
+ emulated serial.
+-However the pv console is still easy to use with Linux PV on HVM guests:
++However the PV console is still easy to use with Linux PV on HVM guests:
+ the user just need to pass "console=hvc0" to the kernel command line and
+ then execute "xl console -t pv <domain>" to connect to it.
  
- /* Modem Control Register */
--#define UART_MCR_DTR      0x01    /* Data Terminal Ready  */
--#define UART_MCR_RTS      0x02    /* Request to Send      */
--#define UART_MCR_OUT2     0x08    /* OUT2: interrupt mask */
--#define UART_MCR_LOOP     0x10    /* Enable loopback test mode */
--#define UART_MCR_TCRTLR   0x40    /* Access TCR/TLR (TI16C752, EFR[4]=1) */
-+#define UART_MCR_DTR            BIT(0, U)   /* Data Terminal Ready  */
-+#define UART_MCR_RTS            BIT(1, U)   /* Request to Send      */
-+#define UART_MCR_OUT1           BIT(2, U)   /* OUT1: interrupt mask */
-+#define UART_MCR_OUT2           BIT(3, U)   /* OUT2: interrupt mask */
-+#define UART_MCR_LOOP           BIT(4, U)   /* Enable loopback test mode */
-+#define UART_MCR_RESERVED0      BIT(5, U)   /* Reserved #0 */
-+#define UART_MCR_RESERVED1      BIT(6, U)   /* Reserved #1 */
-+#define UART_MCR_TCRTLR         BIT(6, U)   /* Access TCR/TLR (TI16C752, EFR[4]=1) */
-+#define UART_MCR_RESERVED2      BIT(7, U)   /* Reserved #2 */
-+#define UART_MCR_MASK \
-+    (UART_MCR_DTR | UART_MCR_RTS | \
-+     UART_MCR_OUT1 | UART_MCR_OUT2 | \
-+     UART_MCR_LOOP)
-+
-+/* Modem Status Register */
-+#define UART_MSR_DCTS           BIT(0, U)   /* Change in CTS */
-+#define UART_MSR_DDSR           BIT(1, U)   /* Change in DSR */
-+#define UART_MSR_TERI           BIT(2, U)   /* Change in RI */
-+#define UART_MSR_DDCD           BIT(3, U)   /* Change in CTS */
-+#define UART_MSR_CTS            BIT(4, U)
-+#define UART_MSR_DSR            BIT(5, U)
-+#define UART_MSR_RI             BIT(6, U)
-+#define UART_MSR_DCD            BIT(7, U)
-+#define UART_MSR_SHIFT          4
-+#define UART_MSR_DELTA \
-+    (UART_MSR_DCTS | UART_MSR_DDSR | UART_MSR_TERI | UART_MSR_DDCD)
+ When using stubdoms the serial cards are still emulated by qemu (this
+ time running in the stubdom), the number of serial cards and where the
+ output goes is still specified using qemu command line options.
+-The difference is that for each emulated serial card there must be a pv
++The difference is that for each emulated serial card there must be a PV
+ console connection between the stubdom and dom0 to export the serial
+-output from the stubdom to dom0. The pv console backend for stubdom's pv
+-consoles is always ioemu because multiple pv consoles support is a
+-requirement in this case, considering that minios has its own pv console
+-too. In order to simplify the setup when using stubdoms the hvm guest
+-can only have one pv console with xenstored as backend (the stubdom
+-could provide pv console backends to the hvm guest but then it would
+-need another pv console connection for each console backend to export
++output from the stubdom to dom0. The PV console backend for stubdom's PV
++consoles is always ioemu because multiple PV consoles support is a
++requirement in this case, considering that minios has its own PV console
++too. In order to simplify the setup when using stubdoms the HVM guest
++can only have one PV console with xenstored as backend (the stubdom
++could provide PV console backends to the HVM guest but then it would
++need another PV console connection for each console backend to export
+ the pty to dom0).
  
- /* Line Status Register */
- #define UART_LSR_DR       0x01    /* Data ready           */
-@@ -111,6 +147,7 @@
- #define UART_LSR_THRE     0x20    /* Xmit hold reg empty  */
- #define UART_LSR_TEMT     0x40    /* Xmitter empty        */
- #define UART_LSR_ERR      0x80    /* Error                */
-+#define UART_LSR_MASK     (UART_LSR_OE | UART_LSR_BI)
- 
- /* These parity settings can be ORed directly into the LCR. */
- #define UART_PARITY_NONE  (0<<3)
-@@ -119,7 +156,10 @@
- #define UART_PARITY_MARK  (5<<3)
- #define UART_PARITY_SPACE (7<<3)
- 
--/* Frequency of external clock source. This definition assumes PC platform. */
-+/*
-+ * Frequency of external UART clock source.
-+ * Same as IBM PC master input clock frequency.
-+ */
- #define UART_CLOCK_HZ     1843200
- 
- /* Bits in Exar specific UART_XR_EFR register */
+ The xenconsole program supports a very simple protocol to notify parent about
 
 -- 
 2.34.1
