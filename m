@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A036CD66B8E
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:30:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844188.1259792 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65216D66B9A
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Nov 2024 23:31:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844207.1259801 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG512-0003hl-Hb; Tue, 26 Nov 2024 23:30:44 +0000
+	id 1tG51j-0004Rh-Oq; Tue, 26 Nov 2024 23:31:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844188.1259792; Tue, 26 Nov 2024 23:30:44 +0000
+Received: by outflank-mailman (output) from mailman id 844207.1259801; Tue, 26 Nov 2024 23:31:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tG512-0003he-ET; Tue, 26 Nov 2024 23:30:44 +0000
-Received: by outflank-mailman (input) for mailman id 844188;
- Tue, 26 Nov 2024 23:30:43 +0000
+	id 1tG51j-0004Ra-Lu; Tue, 26 Nov 2024 23:31:27 +0000
+Received: by outflank-mailman (input) for mailman id 844207;
+ Tue, 26 Nov 2024 23:31:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rasV=SV=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tG4st-0000At-EW
- for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:19 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ id 1tG4ss-0000At-EW
+ for xen-devel@lists.xenproject.org; Tue, 26 Nov 2024 23:22:18 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3fde0617-ac4d-11ef-99a3-01e77a169b0f;
+ id 4052cc30-ac4d-11ef-99a3-01e77a169b0f;
  Wed, 27 Nov 2024 00:22:06 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 023A95C5D75;
- Tue, 26 Nov 2024 23:21:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2EA58C4CED8;
- Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 424AC5C5CDF;
+ Tue, 26 Nov 2024 23:21:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 720A2C4CED0;
+ Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 26DF0D66B9A;
- Tue, 26 Nov 2024 23:21:57 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 68E9ED66B97;
+ Tue, 26 Nov 2024 23:21:56 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,26 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3fde0617-ac4d-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjI2MDQ6MTM4MDo0NjQxOmM1MDA6OjEiLCJoZWxvIjoiZGZ3LnNvdXJjZS5rZXJuZWwub3JnIn0=
-X-Custom-Transaction: eyJpZCI6IjNmZGUwNjE3LWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzI2Ljc1MjkwMywic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: 4052cc30-ac4d-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjEzOS4xNzguODQuMjE3IiwiaGVsbyI6ImRmdy5zb3VyY2Uua2VybmVsLm9yZyJ9
+X-Custom-Transaction: eyJpZCI6IjQwNTJjYzMwLWFjNGQtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNjYzMzI2Ljc2MzYwMywic2VuZGVyIjoiZGV2bnVsbCtkbXVraGluLmZvcmQuY29tQGtlcm5lbC5vcmciLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1732663317;
-	bh=Fe2836fVTLNAm3WsnALDDlo7tZdWGBnob9UKBanM8xI=;
+	s=k20201202; t=1732663316;
+	bh=Bn46VxfAkAcMhv6DUkrTdMnTNfB+okMDoUD+Om5BMyY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=J468pXVt8bOqy5i6t8qfP65xQmcXe+5MRsCF3WbpQP8490hVNvowZ0irJcnakiJKy
-	 xqfQHD5GExSMWUtTvk6CjkvYWGd+f1kB/GCid2DX34E/uMtZz2Sqiw3ncPsnKKe+Aw
-	 lCqD9pEu0lsqRMXKYR5R4ZIUFjriLbV2shx5VyiRtqo3TB2w2bxS9QUUHpVM2eTTFh
-	 POHQcMAIFaDN3qSFzrd41r+QRK0u+B/4k7oVMOWA5MVuOJKSGAgAQjlFhHrf77wNsx
-	 c3pbqB4KCwhUK8FaY/ivZNcWcpV7MHMAZMBtTPB1LZujkwzNMx9vnVguBWqzOl5EJs
-	 JOdfysywjGVjQ==
+	b=m6JM8GCJGhtrmxVQvqrmhKB9kFFTklfeOAlWO5/+UU2fq0kgrPSgUXV6ImmQXliNa
+	 TfqmqY4ZmR/6s4p2kAyF3HNG0ut8Z0gsysqmZWF470Wo/ILXdRF3ezJCHsPdh2Mvuw
+	 Tk6zBz9+FTdtUMwHsSZgOMn8BREHv9vNoS0fZSD8f6/pg2pf5QRxkbeGBjOeq3BTjD
+	 sF7MdJ9TbqgNWk92LP7fd8QPrv/eIJ6QRXFDlpXs1zGpBEdaL1F8GwrjFE0dVR9Y/U
+	 x0zD9U98I/Es1TkqFRukmmZtmfM0Eg2O9WikFnfJm8sNmqKEg1LIx8966xPMTllta0
+	 I9bwC9b578QoQ==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Tue, 26 Nov 2024 15:22:15 -0800
-Subject: [PATCH 25/36] xen/console: introduce handle_keypress_in_domain()
+Date: Tue, 26 Nov 2024 15:22:06 -0800
+Subject: [PATCH 16/36] xen/console: rename console_input_domain
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241126-vuart-ns8250-v1-v1-25-87b9a8375b7a@ford.com>
+Message-Id: <20241126-vuart-ns8250-v1-v1-16-87b9a8375b7a@ford.com>
 References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 In-Reply-To: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
 To: Jan Beulich <jbeulich@suse.com>, 
@@ -89,11 +88,11 @@ To: Jan Beulich <jbeulich@suse.com>,
  =?utf-8?q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=4030;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732663312; l=2162;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=WFmMQGLVJ0pT89tmxZ0ESYKHXHYqZV3StRB9Oqc56Go=;
- b=GoTkJnk83G9LUzBwpX7Aka4GbqCU17s/CyNsDUtmb57uNiKM4uuDJ+oKcwJiPDwset63x3jYN
- YB7yk8Qun2gBof4pKaDDjOz1+GkUp1ER7gJzYPIEFEAEe0lcgNWckUO
+ bh=//8B6RWBIW7SNgnF2T6+HEA2/O3wgsD0ciOR+76PaLM=;
+ b=F6KU38cCC+uW7VC+/FDMuTylh4u51qK5IZuAVjuLIRIwoAHjJEwX1ZcwPeWYsBp7Jcz2UZs+H
+ m3VQ/gQTRhgDEAbVrKlIKpMw6P5C7JIWDqUAjxReSCvMICF7iavKNUM
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -103,139 +102,58 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-With introduction of NS8250 emulator for x86, the logic of switching console
-focus gets more convoluted: HVM domain w/ NS8205 must be able to receive the
-physical console input for guest VM debugging.
+console_input_domain() takes an RCU lock to protect domain structure.
+That implies call to rcu_unlock_domain() after use.
 
-Also, existing code does not honor `hardware_dom=` xen command line parameter
-(hardware domain ID does _not_ necessarily starts from 0).
-
-Introduce handle_keypress_in_domain() to account for all scenarios of console
-input forwarding.
+Rename console_input_domain() to rcu_lock_domain_console_owner() to
+highlight the need of calling rcu_unlock_domain().
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/drivers/char/console.c | 102 ++++++++++++++++++++++++++-------------------
- 1 file changed, 59 insertions(+), 43 deletions(-)
+ xen/arch/arm/vpl011.c      | 2 +-
+ xen/drivers/char/console.c | 2 +-
+ xen/include/xen/console.h  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index 3e1487b101053891c9c0fb7fb50af1c547d4cbf3..07ef872d72b7881a70f4a938dcd6bea4c30198d9 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -78,7 +78,7 @@ static void vpl011_write_data_xen(struct domain *d, uint8_t data)
+     unsigned long flags;
+     struct vpl011 *vpl011 = &d->arch.vpl011;
+     struct vpl011_xen_backend *intf = vpl011->backend.xen;
+-    struct domain *input = console_input_domain();
++    struct domain *input = rcu_lock_domain_console_owner();
+ 
+     VPL011_LOCK(d, flags);
+ 
 diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 6261bdb5a2ac1075bc89fa408c0fd6cfef380ae6..4439e00763631969767719053cdc81e67c2cda2c 100644
+index 0af4b551801356f242f1770b3826608136d65653..01fcbd5581d11f8f4f2b23592255b5c744430a3e 100644
 --- a/xen/drivers/char/console.c
 +++ b/xen/drivers/char/console.c
-@@ -570,54 +570,70 @@ static void console_init_owner(void)
-     console_set_owner(domid);
- }
+@@ -477,7 +477,7 @@ static unsigned int __read_mostly console_rx = 0;
  
--static void __serial_rx(char c)
-+static void handle_keypress_in_domain(struct domain *d, char c)
+ #ifdef CONFIG_SBSA_VUART_CONSOLE
+ /* Make sure to rcu_unlock_domain after use */
+-struct domain *console_input_domain(void)
++struct domain *rcu_lock_domain_console_owner(void)
  {
--    switch ( console_owner )
-+    int rc = 0;
-+
-+    /*
-+     * Deliver input to the emulated UART.
-+     */
-+    if ( domain_has_vuart(d) )
-     {
--    case DOMID_XEN:
--        return handle_keypress(c, false);
--
--    case 0:
--        /*
--         * Deliver input to the hardware domain buffer, unless it is
--         * already full.
--         */
--        if ( (serial_rx_prod - serial_rx_cons) != SERIAL_RX_SIZE )
--            serial_rx_ring[SERIAL_RX_MASK(serial_rx_prod++)] = c;
--
--        /*
--         * Always notify the hardware domain: prevents receive path from
--         * getting stuck.
--         */
--        send_global_virq(VIRQ_CONSOLE);
--        break;
--
--#ifdef CONFIG_SBSA_VUART_CONSOLE
--    default:
--    {
--        struct domain *d = rcu_lock_domain_by_id(console_owner);
--
--        /*
--         * If we have a properly initialized vpl011 console for the
--         * domain, without a full PV ring to Dom0 (in that case input
--         * comes from the PV ring), then send the character to it.
--         */
--        if ( d != NULL )
--            vpl011_rx_char_xen(d, c);
--        else
--            printk("Cannot send chars to Dom%d: no UART available\n",
--                   console_owner);
--
--        if ( d != NULL )
--            rcu_unlock_domain(d);
--
--        break;
--    }
-+#if defined(CONFIG_SBSA_VUART_CONSOLE)
-+        rc = vpl011_rx_char_xen(d, c);
- #endif
-     }
-+    /*
-+     * Deliver input to the hardware domain buffer.
-+     */
-+    else if ( d == hardware_domain )
-+    {
-+        /*
-+         * Deliver input to the PV shim console.
-+         */
-+        if ( consoled_is_enabled() )
-+            rc = consoled_guest_tx(c);
-+        else
-+        {
-+            /*
-+             * Deliver input to the hardware domain buffer, unless it is
-+             * already full.
-+             */
-+            if ( (serial_rx_prod - serial_rx_cons) != SERIAL_RX_SIZE )
-+                serial_rx_ring[SERIAL_RX_MASK(serial_rx_prod++)] = c;
+     if ( console_rx == 0 )
+             return NULL;
+diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
+index 6dfbade3ece36352c74f1124305da945b210f2a7..0e211e44d9703c804e18f52c9743916f8d2a9d4e 100644
+--- a/xen/include/xen/console.h
++++ b/xen/include/xen/console.h
+@@ -31,7 +31,7 @@ void console_end_sync(void);
+ void console_start_log_everything(void);
+ void console_end_log_everything(void);
  
--    if ( consoled_is_enabled() )
--        consoled_guest_tx(c);
-+            /*
-+             * Always notify the hardware domain: prevents receive path from
-+             * getting stuck.
-+             */
-+            send_global_virq(VIRQ_CONSOLE);
-+            rc = 0;
-+        }
-+    }
-+    /*
-+     * Deliver input to the PV shim console.
-+     */
-+    else if ( consoled_is_enabled() )
-+        rc = consoled_guest_tx(c);
-+
-+    if ( rc )
-+        printk(KERN_WARNING "console input domain %d: not ready: %d\n",
-+               d->domain_id, rc);
-+
-+}
-+
-+static void __serial_rx(char c)
-+{
-+    struct domain *d;
-+
-+    d = rcu_lock_domain_console_owner();
-+    if ( d != NULL )
-+    {
-+        handle_keypress_in_domain(d, c);
-+        rcu_unlock_domain(d);
-+    }
-+    else
-+        handle_keypress(c, false);
- }
+-struct domain *console_input_domain(void);
++struct domain *rcu_lock_domain_console_owner(void);
  
- static void cf_check serial_rx(char c)
+ /*
+  * Steal output from the console. Returns +ve identifier, else -ve error.
 
 -- 
 2.34.1
