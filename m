@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCE0D6ACC4
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Nov 2024 12:50:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844756.1260310 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BACED6ACCA
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Nov 2024 13:03:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844820.1260320 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tGHV1-00069a-M1; Wed, 27 Nov 2024 12:50:31 +0000
+	id 1tGHh2-0001Tg-NH; Wed, 27 Nov 2024 13:02:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844756.1260310; Wed, 27 Nov 2024 12:50:31 +0000
+Received: by outflank-mailman (output) from mailman id 844820.1260320; Wed, 27 Nov 2024 13:02:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tGHV1-00069G-IK; Wed, 27 Nov 2024 12:50:31 +0000
-Received: by outflank-mailman (input) for mailman id 844756;
- Wed, 27 Nov 2024 12:50:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tGHh2-0001TZ-Ki; Wed, 27 Nov 2024 13:02:56 +0000
+Received: by outflank-mailman (input) for mailman id 844820;
+ Wed, 27 Nov 2024 13:02:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pugq=SW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tGHUz-0004Yu-Sq
- for xen-devel@lists.xenproject.org; Wed, 27 Nov 2024 12:50:29 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2a4e90cb-acbe-11ef-99a3-01e77a169b0f;
- Wed, 27 Nov 2024 13:50:22 +0100 (CET)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-53ded167ae3so2115686e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 27 Nov 2024 04:50:22 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53dd8cb7f00sm2023267e87.7.2024.11.27.04.50.21
+ id 1tGHh0-0001TM-Oo
+ for xen-devel@lists.xenproject.org; Wed, 27 Nov 2024 13:02:54 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e87c9210-acbf-11ef-a0cd-8be0dac302b0;
+ Wed, 27 Nov 2024 14:02:51 +0100 (CET)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-53de8ecb39bso2145675e87.2
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Nov 2024 05:02:51 -0800 (PST)
+Received: from [192.168.219.191] ([94.75.70.14])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-53dd24459f1sm2287393e87.24.2024.11.27.05.02.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 04:50:21 -0800 (PST)
+ Wed, 27 Nov 2024 05:02:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,229 +47,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a4e90cb-acbe-11ef-99a3-01e77a169b0f
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMzYiLCJoZWxvIjoibWFpbC1sZjEteDEzNi5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6IjJhNGU5MGNiLWFjYmUtMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNzExODIyLjY1NTcxOSwic2VuZGVyIjoib2xla3NpaS5rdXJvY2hrb0BnbWFpbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
+X-Inumbo-ID: e87c9210-acbf-11ef-a0cd-8be0dac302b0
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjoxMmIiLCJoZWxvIjoibWFpbC1sZjEteDEyYi5nb29nbGUuY29tIn0=
+X-Custom-Transaction: eyJpZCI6ImU4N2M5MjEwLWFjYmYtMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNzEyNTcxLjE4MzEyMiwic2VuZGVyIjoib2xla3NpaS5rdXJvY2hrb0BnbWFpbC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732711822; x=1733316622; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uXt3gxcLfSewdGxxgtLt+uhH1+qMZe5HJDTdu4QBaWc=;
-        b=Y4vys3ZzsxfNINTzYCENgnfx209sUtvXiGhtLGMZOU7ROySiZqqOwrLThmmS2y7rA+
-         fTXTxQN2ckdVe9te9SWbQl2X9cvWb8LTSW+dUMEnZgzmm+/BuVhomVzJhzJD6czbCohl
-         hkk+1jzJgvAwtTkGdma+kUDW3XotqIbHz6b2oSmCLElQAstM0JQ2lXu5cQEyF0d/z0XO
-         5nc5tdlcF/B7N/I4Dw6VPJR2tKnsIJruU2n3BzHgjN1SpD9SrToE+z2ktOKUGkYlTncU
-         s8OHcfaINfr+pSK9fB6U960YeJBhVnOaDxM96+4DqG2ZUl0RDrgNovdqHdCxhICwEwxZ
-         I+fA==
+        d=gmail.com; s=20230601; t=1732712570; x=1733317370; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Sv/P2ja8M29CeLuOtPNdZOQ0kZ3jbzmBwT468MbRvik=;
+        b=PyeEwLT7cU1kbj1agEq4piXw+WvSmi5t1FWG+hkCVbZId22UfeDxpn5ux9FJvAsRDX
+         vWCaQfLtFDVvv2I4kHxznXcUuQB+QORIddYsep3pR7r6cWT0S3zoXCD/o9P0e0PyOlPg
+         THZtMx1gcuMnlu78HeDNEbVy7tFdAa6MKdjiCAAF/NJyvW5Y87Hu4qa4H03yJhV2/ZrX
+         RVktl9C+ldBv59FrzjeC67aNDd3C4OvigQSj7KHenr+rHFqP3Pwggx31oix6bQi91BvP
+         xYs6Szg12f6nnvp3YKepaGmpedP5/SaoyGbwHkeFDczmH2NUz4K1zK0tqcL1QHleAwuC
+         PGnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732711822; x=1733316622;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uXt3gxcLfSewdGxxgtLt+uhH1+qMZe5HJDTdu4QBaWc=;
-        b=lnDq8mBIUmbwQwJt2l75zQkdjtxk8y+6YI2KlCtc6Ssu4E9CIjXShtiex6Bwk0DArn
-         vLu+/RnoAzHDPJk1Du4WQ/lV5+Akva3T2m7MMsZEHcxX/6dJ6+7NGFWtZ79ksjt2aDr1
-         0nW7Z0qOVsW57Ul5IHMrsyotMum0fRkRyI+ZL5rjMrmtznSRoi4XVjRUq7Ah33NmVRtF
-         gJlDap8OMwKFiliMTUpInTzgFa3/SGepAS4tB4WiDQog1/laqvLESpnBFbe83XJLe93B
-         Eop14aAG5+uDQhV3Ab9PGBrqYR96cQOlwWnmff6UpZYd431jtnDZh7BI9xzmmD0e6rZ/
-         FmPA==
-X-Gm-Message-State: AOJu0YyxpjnlskMODLKkLAkX8BYJwbuwLhu/G0ahut4kw+O+Wu1eKTyc
-	jkPYdfExd5JC9nCJefTobil/wpFbiuJQh95LhVY8ZvlET3OpH37BWjukTA==
-X-Gm-Gg: ASbGncv51+jbdBa4N6/jV27R/0N/321b3orGGcKmOvW6zJPKQ9gT1SpMW+9UtIrr656
-	WG5R7/eS1ByEmwlDYgFs0tnIsFoupmaCKYLoCcppSjdUFouQU+On/DvQ12dsCYTrmmqXmPUNQVi
-	ksn4zPK8K/iLydyuI2VtoNzA9iY6YZPbN/B2gFT/vr4ACworssjs0IhRqzLr1CT5yR9WWV5E62+
-	mnERMXTBassW3NC5X+GTpdqFDDcPneJarN4xFeeyts12GkNCIw=
-X-Google-Smtp-Source: AGHT+IESECb2bmfgazPXddPxX+IKMj6wv/oqPxGegKktP50aiHa41a3AflK1U38r/m44ekdyq1RshA==
-X-Received: by 2002:a05:6512:b14:b0:53d:ecf2:3347 with SMTP id 2adb3069b0e04-53df00d1b4emr1395380e87.21.1732711821608;
-        Wed, 27 Nov 2024 04:50:21 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 5/6] xen/riscv: implement relocate_fdt()
-Date: Wed, 27 Nov 2024 13:50:14 +0100
-Message-ID: <c157b03a8cb6d9c4910136b5d73260b47c55554e.1732709650.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <cover.1732709650.git.oleksii.kurochko@gmail.com>
-References: <cover.1732709650.git.oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20230601; t=1732712570; x=1733317370;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Sv/P2ja8M29CeLuOtPNdZOQ0kZ3jbzmBwT468MbRvik=;
+        b=QZMXzBuvE9qBjbnlh97DCSCDBP+kpqvNDyMhzkTt25Iw4u+Yc2/vO8WygQecpS1M9Z
+         lcyptDBXbg9PXSIkvGsYkBZl/EbDVqvXGjgk8R8MKzI/jBgOoEVBZFCrydDk9FnD2/fI
+         TI46VLzajgRljsRV3LoD/RJodWfszyBg2M89k9a54KAoyPNFV9gPXXTNUUWEYOIuZ9x1
+         rbAchHllrco4HZvYwCuZ1ShgMHba3lEBQnAbAWr1bpt6ia7/RfMTD/XOLSsiMCLy5eXj
+         eweYxW9JKzkSKCET97GITxiE5wGrATPfd8VmmoV9iGfzOuAedmh+Gu2RWaGefSca9sUu
+         dyCQ==
+X-Gm-Message-State: AOJu0YxZEOEBq3q9IA3a8R7G/UMP6baM8q9ZmV+FjF7JIxqRQrug8aiI
+	0A1UD56rM+wmioSzFHqcEitRm4EcgtbYTAAVQNKg3TP2bJ8Gjcdk
+X-Gm-Gg: ASbGnctRuNQrvsbZT6OrIXNvdUE0uWPufdgpsUGMX4TBn2fVAjUG7urz3rfX0ADc1GG
+	nYtYQ2sYmI1Ksi0B6b8RBB6UJeWRcnGwjF9L1zPJzlG0DPpR/zzCh+gPsNO+bzymUvWsBZBaSw7
+	AlUcwmOTNWx/OQXqW0kad9hfJQaI0VHFq02KazaSslxE72d/TGStg/8ebS0W1XZhH5hmlV9qf+H
+	94t+NNnmEIOSA6ZzhsZKPvEqW4+jpXQzzrJcf0cyIuyjmNW47YyXBFcA+NLMB0=
+X-Google-Smtp-Source: AGHT+IGshyedBFh2L+cUzV2uL39uQ2yJLbDsjuQ3FbNQL9WWH1jp/peiMT5oLW2bncNN/QPcMqhcsA==
+X-Received: by 2002:a05:6512:3e1f:b0:53d:d65e:772a with SMTP id 2adb3069b0e04-53df0111ec3mr1417345e87.47.1732712570025;
+        Wed, 27 Nov 2024 05:02:50 -0800 (PST)
+Message-ID: <bc3136303d0e88017a5e3da21f97f9da28213acf.camel@gmail.com>
+Subject: Re: [PATCH 09/36] riscv/domain: introduce domain_has_vuart()
+From: oleksii.kurochko@gmail.com
+To: dmukhin@ford.com, Jan Beulich <jbeulich@suse.com>, Andrew Cooper	
+ <andrew.cooper3@citrix.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?=	
+ <roger.pau@citrix.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,  Michal Orzel
+ <michal.orzel@amd.com>, Rahul Singh <rahul.singh@arm.com>, Volodymyr
+ Babchuk	 <Volodymyr_Babchuk@epam.com>, Alistair Francis
+ <alistair.francis@wdc.com>,  Bob Eshleman <bobbyeshleman@gmail.com>, Connor
+ Davis <connojdavis@gmail.com>, Shawn Anastasio	
+ <sanastasio@raptorengineering.com>, Anthony PERARD
+ <anthony.perard@vates.tech>,  Juergen Gross <jgross@suse.com>, Christian
+ Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>,  Marek
+ =?ISO-8859-1?Q?Marczykowski-G=F3recki?=	 <marmarek@invisiblethingslab.com>
+Cc: xen-devel@lists.xenproject.org
+Date: Wed, 27 Nov 2024 14:02:48 +0100
+In-Reply-To: <20241126-vuart-ns8250-v1-v1-9-87b9a8375b7a@ford.com>
+References: <20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com>
+	 <20241126-vuart-ns8250-v1-v1-9-87b9a8375b7a@ford.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.54.1 (3.54.1-1.fc41app1) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-relocate_fdt() relocates FDT to Xen heap instead of using early mapping
-as it is expected that discard_initial_modules() ( is supposed to call
-in the future ) discards the FDT boot module and remove_early_mappings()
-destroys the early mapping.
+On Tue, 2024-11-26 at 15:21 -0800, Denis Mukhin via B4 Relay wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
+>=20
+> Introduce domain_has_vuart() for RISC-V port to be used in the
+> console driver.
+>=20
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+> =C2=A0xen/arch/riscv/include/asm/domain.h | 2 ++
+> =C2=A01 file changed, 2 insertions(+)
+>=20
+> diff --git a/xen/arch/riscv/include/asm/domain.h
+> b/xen/arch/riscv/include/asm/domain.h
+> index
+> c3d965a559b6ce3661bf17166d0c51853ff295a2..efbc4f1ea2619a187fe30ede17d
+> 96de01e599220 100644
+> --- a/xen/arch/riscv/include/asm/domain.h
+> +++ b/xen/arch/riscv/include/asm/domain.h
+> @@ -10,6 +10,8 @@ struct hvm_domain
+> =C2=A0=C2=A0=C2=A0=C2=A0 uint64_t=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 params[HVM_NR_PARAMS];
+> =C2=A0};
+> =C2=A0
+> +#define domain_has_vuart(d)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 false
+> +
+> =C2=A0struct arch_vcpu_io {
+> =C2=A0};
 
-To implement that the following things are introduced as they are called
-by internals of xmalloc_bytes() which is used in relocate_fdt():
-1. As RISC-V may have non-coherent access for RAM ( f.e., in case
-   of non-coherent IO devices ) flush_page_to_ram() is implemented
-   to ensure that cache and RAM are consistent for such platforms.
-2. copy_from_paddr() to copy FDT from a physical address to allocated
-   by xmalloc_bytes() in Xen heap.
-3. virt_to_page() to convert virtual address to page. Also introduce
-   directmap_virt_end to check that VA argument of virt_to_page() is
-   inside directmap region.
+LGTM: Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/arch/riscv/include/asm/mm.h   | 10 ++++++--
- xen/arch/riscv/include/asm/page.h | 10 ++++++--
- xen/arch/riscv/mm.c               |  3 +++
- xen/arch/riscv/setup.c            | 41 +++++++++++++++++++++++++++++++
- 4 files changed, 60 insertions(+), 4 deletions(-)
+Probably it would be nice instead of having stub ( #define
+domain_has_vuart(d) false ) in arch specific code, just ifdef-ing it
+and put somewhere in
+<xen/domain.h> to not introduce this definition for each architecture
+which doesn't support vuart now.
 
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index 699ed23f0d..25fd38531f 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -8,11 +8,13 @@
- #include <xen/const.h>
- #include <xen/mm-frame.h>
- #include <xen/pdx.h>
-+#include <xen/pfn.h>
- #include <xen/types.h>
- 
- #include <asm/page-bits.h>
- 
- extern vaddr_t directmap_virt_start;
-+extern vaddr_t directmap_virt_end;
- 
- #define pfn_to_paddr(pfn) ((paddr_t)(pfn) << PAGE_SHIFT)
- #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
-@@ -148,8 +150,12 @@ static inline void *page_to_virt(const struct page_info *pg)
- /* Convert between Xen-heap virtual addresses and page-info structures. */
- static inline struct page_info *virt_to_page(const void *v)
- {
--    BUG_ON("unimplemented");
--    return NULL;
-+    unsigned long va = (unsigned long)v;
-+
-+    ASSERT(va >= DIRECTMAP_VIRT_START);
-+    ASSERT(va <= directmap_virt_end);
-+
-+    return frametable_virt_start + PFN_DOWN(va - directmap_virt_start);
- }
- 
- /*
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index 0f297141d3..c245a4273f 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -7,6 +7,7 @@
- 
- #include <xen/bug.h>
- #include <xen/const.h>
-+#include <xen/domain_page.h>
- #include <xen/errno.h>
- #include <xen/types.h>
- 
-@@ -172,10 +173,15 @@ static inline void invalidate_icache(void)
- #define clear_page(page) memset((void *)(page), 0, PAGE_SIZE)
- #define copy_page(dp, sp) memcpy(dp, sp, PAGE_SIZE)
- 
--/* TODO: Flush the dcache for an entire page. */
- static inline void flush_page_to_ram(unsigned long mfn, bool sync_icache)
- {
--    BUG_ON("unimplemented");
-+    void *v = map_domain_page(_mfn(mfn));
-+
-+    clean_and_invalidate_dcache_va_range(v, PAGE_SIZE);
-+    unmap_domain_page(v);
-+
-+    if ( sync_icache )
-+        invalidate_icache();
- }
- 
- /* Write a pagetable entry. */
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index f2bf279bac..c614d547a6 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -419,6 +419,7 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
- }
- 
- vaddr_t __ro_after_init directmap_virt_start = DIRECTMAP_VIRT_START;
-+vaddr_t __ro_after_init directmap_virt_end;
- 
- struct page_info *__ro_after_init frametable_virt_start = frame_table;
- 
-@@ -556,6 +557,8 @@ void __init setup_mm(void)
-         setup_directmap_mappings(PFN_DOWN(bank_start), PFN_DOWN(bank_size));
-     }
- 
-+    directmap_virt_end = directmap_virt_start + ram_end - 1;
-+
-     setup_frametable_mappings(ram_start, ram_end);
-     max_page = PFN_DOWN(ram_end);
- }
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 9680332fee..ff667260ec 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -12,6 +12,7 @@
- #include <public/version.h>
- 
- #include <asm/early_printk.h>
-+#include <asm/fixmap.h>
- #include <asm/sbi.h>
- #include <asm/setup.h>
- #include <asm/smp.h>
-@@ -26,6 +27,46 @@ void arch_get_xen_caps(xen_capabilities_info_t *info)
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-     __aligned(STACK_SIZE);
- 
-+/**
-+ * copy_from_paddr - copy data from a physical address
-+ * @dst: destination virtual address
-+ * @paddr: source physical address
-+ * @len: length to copy
-+ */
-+void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
-+{
-+    void *src = (void *)FIXMAP_ADDR(FIX_MISC);
-+
-+    while (len) {
-+        unsigned long l, s;
-+
-+        s = paddr & (PAGE_SIZE - 1);
-+        l = min(PAGE_SIZE - s, len);
-+
-+        set_fixmap(FIX_MISC, maddr_to_mfn(paddr), PAGE_HYPERVISOR_RW);
-+        memcpy(dst, src + s, l);
-+        clean_dcache_va_range(dst, l);
-+        clear_fixmap(FIX_MISC);
-+
-+        paddr += l;
-+        dst += l;
-+        len -= l;
-+    }
-+}
-+
-+/* Relocate the FDT in Xen heap */
-+static void * __init relocate_fdt(paddr_t dtb_paddr, size_t dtb_size)
-+{
-+    void *fdt = xmalloc_bytes(dtb_size);
-+
-+    if ( !fdt )
-+        panic("Unable to allocate memory for relocating the Device-Tree.\n");
-+
-+    copy_from_paddr(fdt, dtb_paddr, dtb_size);
-+
-+    return fdt;
-+}
-+
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
- {
--- 
-2.47.0
+Thanks.
 
+~ Oleksii
 
