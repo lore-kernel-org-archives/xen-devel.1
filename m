@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D84C9D6ACF1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B41FED6ACEF
 	for <xen-devel@archiver.kernel.org>; Wed, 27 Nov 2024 16:08:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844909.1260489 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.844903.1260462 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tGKad-0005nF-T9; Wed, 27 Nov 2024 16:08:31 +0000
+	id 1tGKaZ-0004rX-O3; Wed, 27 Nov 2024 16:08:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844909.1260489; Wed, 27 Nov 2024 16:08:31 +0000
+Received: by outflank-mailman (output) from mailman id 844903.1260462; Wed, 27 Nov 2024 16:08:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tGKad-0005lv-J4; Wed, 27 Nov 2024 16:08:31 +0000
-Received: by outflank-mailman (input) for mailman id 844909;
- Wed, 27 Nov 2024 16:08:30 +0000
+	id 1tGKaZ-0004qM-Im; Wed, 27 Nov 2024 16:08:27 +0000
+Received: by outflank-mailman (input) for mailman id 844903;
+ Wed, 27 Nov 2024 16:08:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8BRf=SW=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1tGKac-0002q2-1M
- for xen-devel@lists.xenproject.org; Wed, 27 Nov 2024 16:08:30 +0000
+ id 1tGKaY-0002q2-5L
+ for xen-devel@lists.xenproject.org; Wed, 27 Nov 2024 16:08:26 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id d6619fab-acd9-11ef-a0cd-8be0dac302b0;
- Wed, 27 Nov 2024 17:08:27 +0100 (CET)
+ id d3ff74cd-acd9-11ef-a0cd-8be0dac302b0;
+ Wed, 27 Nov 2024 17:08:23 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 90B2E1477;
- Wed, 27 Nov 2024 08:08:57 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6F1A31477;
+ Wed, 27 Nov 2024 08:08:53 -0800 (PST)
 Received: from C3HXLD123V.arm.com (unknown [10.57.58.181])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A39BD3F5A1;
- Wed, 27 Nov 2024 08:08:25 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 056973F5A1;
+ Wed, 27 Nov 2024 08:08:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6619fab-acd9-11ef-a0cd-8be0dac302b0
+X-Inumbo-ID: d3ff74cd-acd9-11ef-a0cd-8be0dac302b0
 X-Custom-Connection: eyJyZW1vdGVpcCI6IjIxNy4xNDAuMTEwLjE3MiIsImhlbG8iOiJmb3NzLmFybS5jb20ifQ==
-X-Custom-Transaction: eyJpZCI6ImQ2NjE5ZmFiLWFjZDktMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNzIzNzA4LjA1NjM4Nywic2VuZGVyIjoiYmVydHJhbmQubWFycXVpc0Bhcm0uY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+X-Custom-Transaction: eyJpZCI6ImQzZmY3NGNkLWFjZDktMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNzIzNzA0LjE5Nzk3Nywic2VuZGVyIjoiYmVydHJhbmQubWFycXVpc0Bhcm0uY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: jens.wiklander@linaro.org,
@@ -54,181 +54,52 @@ Cc: jens.wiklander@linaro.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v3 08/10] xen/arm: ffa: move message function into ffa_msg.c
-Date: Wed, 27 Nov 2024 17:07:40 +0100
-Message-ID: <c189c1ba68832567617eafde30da1471df4e7e01.1732702210.git.bertrand.marquis@arm.com>
+Subject: [PATCH v3 06/10] xen/arm: ffa: Use bit 15 convention for SPs
+Date: Wed, 27 Nov 2024 17:07:38 +0100
+Message-ID: <0b987183498242587f3795e870a7395b132ec9ee.1732702210.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <cover.1732702210.git.bertrand.marquis@arm.com>
 References: <cover.1732702210.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move the direct message handling function in its own source file and
-rename it to have a ffa_ prefix.
-This is a preparation to add support for indirect messages which will
-go into this newly created source file.
+Make use and required to have bit 15 convention respected by secure
+world (having bit 15 of IDs set for secure endpoints and non-set for
+non-secure ones).
+If any secure partition has an ID with bit 15 not set, it will not be
+possible to contact or detect them.
+Print an error log during probe for each secure endpoint detected with
+bit 15 not set.
+
+We are switching to this convention because Xen is currently not using
+VMIDs with bit 15 set so we are sure that no VM will have it set (this
+is ensured by BUILD_BUG_ON in case this becomes false in the future).
+It is allowing to easily distinguish between secure and non-secure
+endpoints, preventing the need to store a list of secure endpoint IDs in
+Xen.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 ---
 Changes in v3:
-- add Jens R-b
+- rename real_num to n_limit
+- remove log of skipped SP due to invalid ID as it is already printed
 Changes in v2:
 - rebase
 ---
- xen/arch/arm/tee/Makefile      |  1 +
- xen/arch/arm/tee/ffa.c         | 69 +----------------------------
- xen/arch/arm/tee/ffa_msg.c     | 80 ++++++++++++++++++++++++++++++++++
- xen/arch/arm/tee/ffa_private.h |  2 +
- 4 files changed, 84 insertions(+), 68 deletions(-)
- create mode 100644 xen/arch/arm/tee/ffa_msg.c
+ xen/arch/arm/tee/ffa.c          | 22 ++++++++++----
+ xen/arch/arm/tee/ffa_partinfo.c | 51 +++++++++++++++++++++++++--------
+ xen/arch/arm/tee/ffa_private.h  |  7 +++++
+ xen/arch/arm/tee/ffa_shm.c      | 12 +++++++-
+ 4 files changed, 74 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/arm/tee/Makefile b/xen/arch/arm/tee/Makefile
-index 7c0f46f7f446..0848c833fec3 100644
---- a/xen/arch/arm/tee/Makefile
-+++ b/xen/arch/arm/tee/Makefile
-@@ -3,5 +3,6 @@ obj-$(CONFIG_FFA) += ffa_shm.o
- obj-$(CONFIG_FFA) += ffa_partinfo.o
- obj-$(CONFIG_FFA) += ffa_rxtx.o
- obj-$(CONFIG_FFA) += ffa_notif.o
-+obj-$(CONFIG_FFA) += ffa_msg.o
- obj-y += tee.o
- obj-$(CONFIG_OPTEE) += optee.o
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index bc2722d53fd7..8488fe6af9c0 100644
+index 4b283a4de5d0..0026ac9134ad 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -167,73 +167,6 @@ static void handle_version(struct cpu_user_regs *regs)
-     ffa_set_regs(regs, FFA_MY_VERSION, 0, 0, 0, 0, 0, 0, 0);
- }
+@@ -195,6 +195,14 @@ static void handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
+         goto out;
+     }
  
--static void handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
--{
--    struct arm_smccc_1_2_regs arg = { .a0 = fid, };
--    struct arm_smccc_1_2_regs resp = { };
--    struct domain *d = current->domain;
--    uint32_t src_dst;
--    uint64_t mask;
--
--    if ( smccc_is_conv_64(fid) )
--        mask = GENMASK_ULL(63, 0);
--    else
--        mask = GENMASK_ULL(31, 0);
--
--    if ( !ffa_fw_supports_fid(fid) )
--    {
--        resp.a0 = FFA_ERROR;
--        resp.a2 = FFA_RET_NOT_SUPPORTED;
--        goto out;
--    }
--
--    src_dst = get_user_reg(regs, 1);
--    if ( (src_dst >> 16) != ffa_get_vm_id(d) )
--    {
--        resp.a0 = FFA_ERROR;
--        resp.a2 = FFA_RET_INVALID_PARAMETERS;
--        goto out;
--    }
--
--    /* we do not support direct messages to VMs */
--    if ( !FFA_ID_IS_SECURE(src_dst & GENMASK(15,0)) )
--    {
--        resp.a0 = FFA_ERROR;
--        resp.a2 = FFA_RET_NOT_SUPPORTED;
--        goto out;
--    }
--
--    arg.a1 = src_dst;
--    arg.a2 = get_user_reg(regs, 2) & mask;
--    arg.a3 = get_user_reg(regs, 3) & mask;
--    arg.a4 = get_user_reg(regs, 4) & mask;
--    arg.a5 = get_user_reg(regs, 5) & mask;
--    arg.a6 = get_user_reg(regs, 6) & mask;
--    arg.a7 = get_user_reg(regs, 7) & mask;
--
--    arm_smccc_1_2_smc(&arg, &resp);
--    switch ( resp.a0 )
--    {
--    case FFA_ERROR:
--    case FFA_SUCCESS_32:
--    case FFA_SUCCESS_64:
--    case FFA_MSG_SEND_DIRECT_RESP_32:
--    case FFA_MSG_SEND_DIRECT_RESP_64:
--        break;
--    default:
--        /* Bad fid, report back to the caller. */
--        memset(&resp, 0, sizeof(resp));
--        resp.a0 = FFA_ERROR;
--        resp.a1 = src_dst;
--        resp.a2 = FFA_RET_ABORTED;
--    }
--
--out:
--    ffa_set_regs(regs, resp.a0, resp.a1 & mask, resp.a2 & mask, resp.a3 & mask,
--                 resp.a4 & mask, resp.a5 & mask, resp.a6 & mask,
--                 resp.a7 & mask);
--}
--
- static void handle_features(struct cpu_user_regs *regs)
- {
-     struct domain *d = current->domain;
-@@ -351,7 +284,7 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
-         break;
-     case FFA_MSG_SEND_DIRECT_REQ_32:
-     case FFA_MSG_SEND_DIRECT_REQ_64:
--        handle_msg_send_direct_req(regs, fid);
-+        ffa_handle_msg_send_direct_req(regs, fid);
-         return true;
-     case FFA_MEM_SHARE_32:
-     case FFA_MEM_SHARE_64:
-diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
-new file mode 100644
-index 000000000000..ae263e54890e
---- /dev/null
-+++ b/xen/arch/arm/tee/ffa_msg.c
-@@ -0,0 +1,80 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (C) 2024  Linaro Limited
-+ */
-+
-+#include <xen/const.h>
-+#include <xen/sizes.h>
-+#include <xen/types.h>
-+
-+#include <asm/smccc.h>
-+#include <asm/regs.h>
-+
-+#include "ffa_private.h"
-+
-+void ffa_handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
-+{
-+    struct arm_smccc_1_2_regs arg = { .a0 = fid, };
-+    struct arm_smccc_1_2_regs resp = { };
-+    struct domain *d = current->domain;
-+    uint32_t src_dst;
-+    uint64_t mask;
-+
-+    if ( smccc_is_conv_64(fid) )
-+        mask = GENMASK_ULL(63, 0);
-+    else
-+        mask = GENMASK_ULL(31, 0);
-+
-+    if ( !ffa_fw_supports_fid(fid) )
-+    {
-+        resp.a0 = FFA_ERROR;
-+        resp.a2 = FFA_RET_NOT_SUPPORTED;
-+        goto out;
-+    }
-+
-+    src_dst = get_user_reg(regs, 1);
-+    if ( (src_dst >> 16) != ffa_get_vm_id(d) )
-+    {
-+        resp.a0 = FFA_ERROR;
-+        resp.a2 = FFA_RET_INVALID_PARAMETERS;
-+        goto out;
-+    }
-+
 +    /* we do not support direct messages to VMs */
 +    if ( !FFA_ID_IS_SECURE(src_dst & GENMASK(15,0)) )
 +    {
@@ -237,49 +108,165 @@ index 000000000000..ae263e54890e
 +        goto out;
 +    }
 +
-+    arg.a1 = src_dst;
-+    arg.a2 = get_user_reg(regs, 2) & mask;
-+    arg.a3 = get_user_reg(regs, 3) & mask;
-+    arg.a4 = get_user_reg(regs, 4) & mask;
-+    arg.a5 = get_user_reg(regs, 5) & mask;
-+    arg.a6 = get_user_reg(regs, 6) & mask;
-+    arg.a7 = get_user_reg(regs, 7) & mask;
+     arg.a1 = src_dst;
+     arg.a2 = get_user_reg(regs, 2) & mask;
+     arg.a3 = get_user_reg(regs, 3) & mask;
+@@ -391,11 +399,15 @@ static int ffa_domain_init(struct domain *d)
+ 
+     if ( !ffa_fw_version )
+         return -ENODEV;
+-     /*
+-      * We can't use that last possible domain ID or ffa_get_vm_id() would
+-      * cause an overflow.
+-      */
+-    if ( d->domain_id >= UINT16_MAX)
++    /*
++     * We are using the domain_id + 1 as the FF-A ID for VMs as FF-A ID 0 is
++     * reserved for the hypervisor and we only support secure endpoints using
++     * FF-A IDs with BIT 15 set to 1 so make sure those are not used by Xen.
++     */
++    BUILD_BUG_ON(DOMID_FIRST_RESERVED >= UINT16_MAX);
++    BUILD_BUG_ON((DOMID_MASK & BIT(15, U)) != 0);
 +
-+    arm_smccc_1_2_smc(&arg, &resp);
-+    switch ( resp.a0 )
-+    {
-+    case FFA_ERROR:
-+    case FFA_SUCCESS_32:
-+    case FFA_SUCCESS_64:
-+    case FFA_MSG_SEND_DIRECT_RESP_32:
-+    case FFA_MSG_SEND_DIRECT_RESP_64:
-+        break;
-+    default:
-+        /* Bad fid, report back to the caller. */
-+        memset(&resp, 0, sizeof(resp));
-+        resp.a0 = FFA_ERROR;
-+        resp.a1 = src_dst;
-+        resp.a2 = FFA_RET_ABORTED;
-+    }
++    if ( d->domain_id >= DOMID_FIRST_RESERVED )
+         return -ERANGE;
+ 
+     ctx = xzalloc(struct ffa_ctx);
+diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
+index 75a073d090e0..74324e1d9d3f 100644
+--- a/xen/arch/arm/tee/ffa_partinfo.c
++++ b/xen/arch/arm/tee/ffa_partinfo.c
+@@ -169,14 +169,23 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+ 
+     if ( ffa_sp_count > 0 )
+     {
+-        uint32_t n;
++        uint32_t n, n_limit = ffa_sp_count;
+         void *src_buf = ffa_rx;
+ 
+         /* copy the secure partitions info */
+-        for ( n = 0; n < ffa_sp_count; n++ )
++        for ( n = 0; n < n_limit; n++ )
+         {
+-            memcpy(dst_buf, src_buf, dst_size);
+-            dst_buf += dst_size;
++            struct ffa_partition_info_1_1 *fpi = src_buf;
 +
-+out:
-+    ffa_set_regs(regs, resp.a0, resp.a1 & mask, resp.a2 & mask, resp.a3 & mask,
-+                 resp.a4 & mask, resp.a5 & mask, resp.a6 & mask,
-+                 resp.a7 & mask);
-+}
++            /* filter out SP not following bit 15 convention if any */
++            if ( FFA_ID_IS_SECURE(fpi->id) )
++            {
++                memcpy(dst_buf, src_buf, dst_size);
++                dst_buf += dst_size;
++            }
++            else
++                ffa_sp_count--;
++
+             src_buf += src_size;
+         }
+     }
+@@ -276,10 +285,25 @@ static bool init_subscribers(uint16_t count, uint32_t fpi_size)
+     {
+         fpi = ffa_rx + n * fpi_size;
+ 
+-        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED )
+-            subscr_vm_created_count++;
+-        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
+-            subscr_vm_destroyed_count++;
++        /*
++         * We need to have secure partitions using bit 15 set convention for
++         * secure partition IDs.
++         * Inform the user with a log and discard giving created or destroy
++         * event to those IDs.
++         */
++        if ( !FFA_ID_IS_SECURE(fpi->id) )
++        {
++            printk(XENLOG_ERR "ffa: Firmware is not using bit 15 convention for IDs !!\n"
++                              "ffa: Secure partition with id 0x%04x cannot be used\n",
++                              fpi->id);
++        }
++        else
++        {
++            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED )
++                subscr_vm_created_count++;
++            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
++                subscr_vm_destroyed_count++;
++        }
+     }
+ 
+     if ( subscr_vm_created_count )
+@@ -299,10 +323,13 @@ static bool init_subscribers(uint16_t count, uint32_t fpi_size)
+     {
+         fpi = ffa_rx + n * fpi_size;
+ 
+-        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED )
+-            subscr_vm_created[c_pos++] = fpi->id;
+-        if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
+-            subscr_vm_destroyed[d_pos++] = fpi->id;
++        if ( FFA_ID_IS_SECURE(fpi->id) )
++        {
++            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_CREATED )
++                subscr_vm_created[c_pos++] = fpi->id;
++            if ( fpi->partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
++                subscr_vm_destroyed[d_pos++] = fpi->id;
++        }
+     }
+ 
+     return true;
 diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index 9adfe687c3c9..02162e0ee4c7 100644
+index e5bc73f9039e..afe69b43dbef 100644
 --- a/xen/arch/arm/tee/ffa_private.h
 +++ b/xen/arch/arm/tee/ffa_private.h
-@@ -360,6 +360,8 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs);
- void ffa_handle_notification_get(struct cpu_user_regs *regs);
- int ffa_handle_notification_set(struct cpu_user_regs *regs);
+@@ -108,6 +108,13 @@
+  */
+ #define FFA_CTX_TEARDOWN_DELAY          SECONDS(1)
  
-+void ffa_handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid);
++/*
++ * We rely on the convention suggested but not mandated by the FF-A
++ * specification that secure world endpoint identifiers have the bit 15
++ * set and normal world have it set to 0.
++ */
++#define FFA_ID_IS_SECURE(id)    ((id) & BIT(15, U))
 +
- static inline uint16_t ffa_get_vm_id(const struct domain *d)
- {
-     /* +1 since 0 is reserved for the hypervisor in FF-A */
+ /* FF-A-1.1-REL0 section 10.9.2 Memory region handle, page 167 */
+ #define FFA_HANDLE_HYP_FLAG             BIT(63, ULL)
+ #define FFA_HANDLE_INVALID              0xffffffffffffffffULL
+diff --git a/xen/arch/arm/tee/ffa_shm.c b/xen/arch/arm/tee/ffa_shm.c
+index efa5b67db8e1..29675f9ba3f7 100644
+--- a/xen/arch/arm/tee/ffa_shm.c
++++ b/xen/arch/arm/tee/ffa_shm.c
+@@ -469,6 +469,7 @@ void ffa_handle_mem_share(struct cpu_user_regs *regs)
+     int ret = FFA_RET_DENIED;
+     uint32_t range_count;
+     uint32_t region_offs;
++    uint16_t dst_id;
+ 
+     if ( !ffa_fw_supports_fid(FFA_MEM_SHARE_64) )
+     {
+@@ -537,6 +538,15 @@ void ffa_handle_mem_share(struct cpu_user_regs *regs)
+         goto out_unlock;
+ 
+     mem_access = ctx->tx + trans.mem_access_offs;
++
++    dst_id = ACCESS_ONCE(mem_access->access_perm.endpoint_id);
++    if ( !FFA_ID_IS_SECURE(dst_id) )
++    {
++        /* we do not support sharing with VMs */
++        ret = FFA_RET_NOT_SUPPORTED;
++        goto out_unlock;
++    }
++
+     if ( ACCESS_ONCE(mem_access->access_perm.perm) != FFA_MEM_ACC_RW )
+     {
+         ret = FFA_RET_NOT_SUPPORTED;
+@@ -567,7 +577,7 @@ void ffa_handle_mem_share(struct cpu_user_regs *regs)
+         goto out_unlock;
+     }
+     shm->sender_id = trans.sender_id;
+-    shm->ep_id = ACCESS_ONCE(mem_access->access_perm.endpoint_id);
++    shm->ep_id = dst_id;
+ 
+     /*
+      * Check that the Composite memory region descriptor fits.
 -- 
 2.47.0
 
