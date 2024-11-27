@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F0DD6ACF1
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Nov 2024 16:08:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.844888.1260398 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E91AD6ACF1
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Nov 2024 16:08:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.844893.1260418 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tGKa0-0002qF-Nt; Wed, 27 Nov 2024 16:07:52 +0000
+	id 1tGKaQ-0003ZL-5v; Wed, 27 Nov 2024 16:08:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 844888.1260398; Wed, 27 Nov 2024 16:07:52 +0000
+Received: by outflank-mailman (output) from mailman id 844893.1260418; Wed, 27 Nov 2024 16:08:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tGKa0-0002q8-Ka; Wed, 27 Nov 2024 16:07:52 +0000
-Received: by outflank-mailman (input) for mailman id 844888;
- Wed, 27 Nov 2024 16:07:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tGKaQ-0003ZE-3E; Wed, 27 Nov 2024 16:08:18 +0000
+Received: by outflank-mailman (input) for mailman id 844893;
+ Wed, 27 Nov 2024 16:08:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=k0uU=SW=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tGKa0-0002q2-5W
- for xen-devel@lists.xenproject.org; Wed, 27 Nov 2024 16:07:52 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bcf9357c-acd9-11ef-a0cd-8be0dac302b0;
- Wed, 27 Nov 2024 17:07:45 +0100 (CET)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-aa539d2b4b2so186837366b.1
- for <xen-devel@lists.xenproject.org>; Wed, 27 Nov 2024 08:07:45 -0800 (PST)
-Received: from [10.125.226.166] ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa53683eafbsm564294866b.189.2024.11.27.08.01.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 27 Nov 2024 08:01:26 -0800 (PST)
+ <SRS0=8BRf=SW=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
+ id 1tGKaP-00034d-7G
+ for xen-devel@lists.xenproject.org; Wed, 27 Nov 2024 16:08:17 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id cdfb3c6a-acd9-11ef-99a3-01e77a169b0f;
+ Wed, 27 Nov 2024 17:08:13 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4C8F01477;
+ Wed, 27 Nov 2024 08:08:43 -0800 (PST)
+Received: from C3HXLD123V.arm.com (unknown [10.57.58.181])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D98AA3F5A1;
+ Wed, 27 Nov 2024 08:08:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,106 +44,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bcf9357c-acd9-11ef-a0cd-8be0dac302b0
-X-Custom-Connection: eyJyZW1vdGVpcCI6IjJhMDA6MTQ1MDo0ODY0OjIwOjo2MzMiLCJoZWxvIjoibWFpbC1lajEteDYzMy5nb29nbGUuY29tIn0=
-X-Custom-Transaction: eyJpZCI6ImJjZjkzNTdjLWFjZDktMTFlZi1hMGNkLThiZTBkYWMzMDJiMCIsInRzIjoxNzMyNzIzNjY1LjYyNDczOSwic2VuZGVyIjoiYW5kcmV3LmNvb3BlckBjbG91ZC5jb20iLCJyZWNpcGllbnQiOiJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcifQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1732723665; x=1733328465; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=QOajJGkqrRzAKADAAd0z4wDNLTiv7h8Mem5y4HKc3DQ=;
-        b=hOWNmhJnZy0COtCr/l1ExzOmiLpjSEv7wlUmBY3/TVmeWw8vHp1TTBpRt4sdj2yAcE
-         wF7Hr51v0iJT4umnAASrHUU24OuPbgDzEfX0nSCK3BzGt/nIVzL2GuPfk1DYzmoWN7Tl
-         iy72I36TdqFm4C40x+58k0ExdMip/SKFGHp+8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732723665; x=1733328465;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QOajJGkqrRzAKADAAd0z4wDNLTiv7h8Mem5y4HKc3DQ=;
-        b=s/rBpy1vBlEwTOZg9tAh+NkKeNeaEvNDlblkCQHHazMrr/RJApmi1ZzSdsJTo+syqL
-         stbKzeriTNs4jw15fUOfMHD1GTif0+51NxZxKvvZNe+UigyyHuCeSIr1c4kUbP+1+FW+
-         8A1F6iFakvPlQEkNRDu8F2OxLwjxdj1I5JrlREv8lDW/mbA936vUxDmYPG0omYLBanN3
-         1BShaY4546w4aYTx3/4iP5DqC1YsWdPgHjiQNy+lrU50G30j4o9Cz0KDjoKXw3aveaCn
-         c67aV4qoC4i94KfRjz814jOQKqN9+Ul0TS8xQPbJZ5IBNGapqi9rgGkUCDObK18hACvV
-         A0jQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUYrn2TCprcnRgXUmhMI5sBZfOSbwP6UFLwtiJnDBDW1YRa/nYVRLpeOpYO0lix/pzj9QYGIZrIWpY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YznKNUgIZ2UtIK8NoZ0uW6d4XaXf1ATgW0tHJI5n5vK3hRQWDaV
-	euQSD/uIdbIqMTnjuVYXh+BEBVm+Wbq2Wr6ZxhvycakS5d/w2QG9xH4lMR+jhThOdY0QXBVmXv9
-	9
-X-Gm-Gg: ASbGncsv9S9pvjwfU3v+aksYr2muX0Alrki/Ym7b3043rolwc+DO9FQwXKYIJ4cKE9g
-	j7dZNxZjH0F07MlTTP385pOQqdSMwGRWPjCd4S6IqroKDuNEFJSw3BiiuSPGotGZ3oeaFzHbVLW
-	HVE/RN/u1VYsQWUnpXPGZq+rmAolVzJ8t2yy1WF1ItLP353RMgiVVFg2wHn6by5eaP3RzAJHrx4
-	wzoAlOGyeQr7/mTCTAjOv1U2KkHpqNEKSx4TtDeICpYJ2/ki22pqIcy8ireRFc=
-X-Google-Smtp-Source: AGHT+IGPnZhdvtnmsbSlmCcmCjJBUEl9+5gdqhl3v+xdk9DnErnQuzIpauOLC/heQXuhIXf3X+AW6Q==
-X-Received: by 2002:a17:906:3ca9:b0:a9a:616c:459e with SMTP id a640c23a62f3a-aa57fbe94f9mr353507966b.27.1732723286833;
-        Wed, 27 Nov 2024 08:01:26 -0800 (PST)
-Message-ID: <c4b7b7bc-1956-444b-a613-971a60f9a27e@citrix.com>
-Date: Wed, 27 Nov 2024 16:01:23 +0000
+X-Inumbo-ID: cdfb3c6a-acd9-11ef-99a3-01e77a169b0f
+X-Custom-Connection: eyJyZW1vdGVpcCI6IjIxNy4xNDAuMTEwLjE3MiIsImhlbG8iOiJmb3NzLmFybS5jb20ifQ==
+X-Custom-Transaction: eyJpZCI6ImNkZmIzYzZhLWFjZDktMTFlZi05OWEzLTAxZTc3YTE2OWIwZiIsInRzIjoxNzMyNzIzNjk0LjA4MjUyNiwic2VuZGVyIjoiYmVydHJhbmQubWFycXVpc0Bhcm0uY29tIiwicmVjaXBpZW50IjoieGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIn0=
+From: Bertrand Marquis <bertrand.marquis@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: jens.wiklander@linaro.org,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v3 01/10] xen/arm: ffa: Rework firmware discovery
+Date: Wed, 27 Nov 2024 17:07:33 +0100
+Message-ID: <3fcc536cd2e13d0421839fc6890daeda71cfac44.1732702210.git.bertrand.marquis@arm.com>
+X-Mailer: git-send-email 2.47.0
+In-Reply-To: <cover.1732702210.git.bertrand.marquis@arm.com>
+References: <cover.1732702210.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86emul: MOVBE requires a memory operand
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <157a6ac0-6929-4e01-8588-7e5591427654@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <157a6ac0-6929-4e01-8588-7e5591427654@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 27/11/2024 7:15 am, Jan Beulich wrote:
-> The reg-reg forms should cause #UD; they come into existence only with
-> APX, where MOVBE also extends BSWAP (for the latter not being "eligible"
-> to a REX2 prefix).
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Rework firmware discovery during probe:
+- move prints into the probe
+- rename ffa_version to ffa_fw_version as the variable identifies the
+  version of the firmware and not the one we support
+- add error prints when allocation fail during probe
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+No functional changes.
+
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+Changes in v3:
+- Revert spurious change assigning major_vers
+- Remove error print in ffa_rxtx_init as we have already a print in the
+  main init function
+Changes in v2:
+- Fix error message when we fail to retrieve ffa_version
+- Move back printing the firmware version before checking supported
+  features
+- Use Warning instead of Info to inform user that FF-A is not supported
+  in firmware.
+---
+ xen/arch/arm/tee/ffa.c      | 41 ++++++++++++++++++++++---------------
+ xen/arch/arm/tee/ffa_rxtx.c |  4 +---
+ 2 files changed, 26 insertions(+), 19 deletions(-)
+
+diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+index 022089278e1c..5a7f297ca5c6 100644
+--- a/xen/arch/arm/tee/ffa.c
++++ b/xen/arch/arm/tee/ffa.c
+@@ -71,8 +71,8 @@
+ 
+ #include "ffa_private.h"
+ 
+-/* Negotiated FF-A version to use with the SPMC */
+-static uint32_t __ro_after_init ffa_version;
++/* Negotiated FF-A version to use with the SPMC, 0 if not there or supported */
++static uint32_t __ro_after_init ffa_fw_version;
+ 
+ 
+ /*
+@@ -105,10 +105,7 @@ static bool ffa_get_version(uint32_t *vers)
+ 
+     arm_smccc_1_2_smc(&arg, &resp);
+     if ( resp.a0 == FFA_RET_NOT_SUPPORTED )
+-    {
+-        gprintk(XENLOG_ERR, "ffa: FFA_VERSION returned not supported\n");
+         return false;
+-    }
+ 
+     *vers = resp.a0;
+ 
+@@ -372,7 +369,7 @@ static int ffa_domain_init(struct domain *d)
+     struct ffa_ctx *ctx;
+     int ret;
+ 
+-    if ( !ffa_version )
++    if ( !ffa_fw_version )
+         return -ENODEV;
+      /*
+       * We can't use that last possible domain ID or ffa_get_vm_id() would
+@@ -505,6 +502,9 @@ static bool ffa_probe(void)
+      */
+     BUILD_BUG_ON(PAGE_SIZE != FFA_PAGE_SIZE);
+ 
++    printk(XENLOG_INFO "ARM FF-A Mediator version %u.%u\n",
++           FFA_MY_VERSION_MAJOR, FFA_MY_VERSION_MINOR);
++
+     /*
+      * psci_init_smccc() updates this value with what's reported by EL-3
+      * or secure world.
+@@ -514,22 +514,23 @@ static bool ffa_probe(void)
+         printk(XENLOG_ERR
+                "ffa: unsupported SMCCC version %#x (need at least %#x)\n",
+                smccc_ver, ARM_SMCCC_VERSION_1_2);
+-        return false;
++        goto err_no_fw;
+     }
+ 
+     if ( !ffa_get_version(&vers) )
+-        return false;
++    {
++        gprintk(XENLOG_ERR, "Cannot retrieve the FFA version\n");
++        goto err_no_fw;
++    }
+ 
+     if ( vers < FFA_MIN_SPMC_VERSION || vers > FFA_MY_VERSION )
+     {
+         printk(XENLOG_ERR "ffa: Incompatible version %#x found\n", vers);
+-        return false;
++        goto err_no_fw;
+     }
+ 
+     major_vers = (vers >> FFA_VERSION_MAJOR_SHIFT) & FFA_VERSION_MAJOR_MASK;
+     minor_vers = vers & FFA_VERSION_MINOR_MASK;
+-    printk(XENLOG_INFO "ARM FF-A Mediator version %u.%u\n",
+-           FFA_MY_VERSION_MAJOR, FFA_MY_VERSION_MINOR);
+     printk(XENLOG_INFO "ARM FF-A Firmware version %u.%u\n",
+            major_vers, minor_vers);
+ 
+@@ -546,12 +547,18 @@ static bool ffa_probe(void)
+          !check_mandatory_feature(FFA_MEM_SHARE_32) ||
+          !check_mandatory_feature(FFA_MEM_RECLAIM) ||
+          !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
+-        return false;
++    {
++        printk(XENLOG_ERR "ffa: Mandatory feature not supported by fw\n");
++        goto err_no_fw;
++    }
+ 
+-    if ( !ffa_rxtx_init() )
+-        return false;
++    ffa_fw_version = vers;
+ 
+-    ffa_version = vers;
++    if ( !ffa_rxtx_init() )
++    {
++        printk(XENLOG_ERR "ffa: Error during RXTX buffer init\n");
++        goto err_no_fw;
++    }
+ 
+     if ( !ffa_partinfo_init() )
+         goto err_rxtx_destroy;
+@@ -564,7 +571,9 @@ static bool ffa_probe(void)
+ 
+ err_rxtx_destroy:
+     ffa_rxtx_destroy();
+-    ffa_version = 0;
++err_no_fw:
++    ffa_fw_version = 0;
++    printk(XENLOG_WARNING "ARM FF-A No firmware support\n");
+ 
+     return false;
+ }
+diff --git a/xen/arch/arm/tee/ffa_rxtx.c b/xen/arch/arm/tee/ffa_rxtx.c
+index 661764052e67..c8bc516a19be 100644
+--- a/xen/arch/arm/tee/ffa_rxtx.c
++++ b/xen/arch/arm/tee/ffa_rxtx.c
+@@ -203,10 +203,8 @@ bool ffa_rxtx_init(void)
+ 
+     e = ffa_rxtx_map(__pa(ffa_tx), __pa(ffa_rx), FFA_RXTX_PAGE_COUNT);
+     if ( e )
+-    {
+-        printk(XENLOG_ERR "ffa: Failed to map rxtx: error %d\n", e);
+         goto err;
+-    }
++
+     return true;
+ 
+ err:
+-- 
+2.47.0
+
 
