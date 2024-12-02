@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35289D7833D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9683ED73619
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Dec 2024 16:59:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.846777.1262021 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.846765.1261936 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tI9lu-0001jU-Ko; Mon, 02 Dec 2024 16:59:42 +0000
+	id 1tI9ll-0007hU-0U; Mon, 02 Dec 2024 16:59:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 846777.1262021; Mon, 02 Dec 2024 16:59:42 +0000
+Received: by outflank-mailman (output) from mailman id 846765.1261936; Mon, 02 Dec 2024 16:59:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tI9lu-0001ga-6w; Mon, 02 Dec 2024 16:59:42 +0000
-Received: by outflank-mailman (input) for mailman id 846777;
- Mon, 02 Dec 2024 16:59:40 +0000
+	id 1tI9lk-0007gd-Qw; Mon, 02 Dec 2024 16:59:32 +0000
+Received: by outflank-mailman (input) for mailman id 846765;
+ Mon, 02 Dec 2024 16:59:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=no4W=S3=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1tI9lr-0006x4-LI
- for xen-devel@lists.xenproject.org; Mon, 02 Dec 2024 16:59:39 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
+ id 1tI9li-0006x4-G8
+ for xen-devel@lists.xenproject.org; Mon, 02 Dec 2024 16:59:30 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d01b1c2d-b0ce-11ef-99a3-01e77a169b0f;
- Mon, 02 Dec 2024 17:59:37 +0100 (CET)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5d0bdeb0374so3449397a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 02 Dec 2024 08:59:37 -0800 (PST)
+ id c9afe829-b0ce-11ef-99a3-01e77a169b0f;
+ Mon, 02 Dec 2024 17:59:26 +0100 (CET)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aa54adcb894so592012866b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Dec 2024 08:59:26 -0800 (PST)
 Received: from carlo-ubuntu.home.arpa
  (host-95-230-250-178.business.telecomitalia.it. [95.230.250.178])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa5998e64c4sm526802666b.97.2024.12.02.08.59.35
+ a640c23a62f3a-aa5998e64c4sm526802666b.97.2024.12.02.08.59.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 08:59:36 -0800 (PST)
+ Mon, 02 Dec 2024 08:59:25 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,685 +48,619 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d01b1c2d-b0ce-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: c9afe829-b0ce-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1733158777; x=1733763577; darn=lists.xenproject.org;
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1733158766; x=1733763566; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jLbjZwSsMBhbP6FhXxodaS+Dw8jqZO+nNvFUCEAf4WQ=;
-        b=dYdDMogB8QoTbJvjXB4TwSfiyVhhgwaFXN4b/HQNg8MbgGd1QSMIwQDQ9sMj0xpjcU
-         wsfcKviWWFh7ygV/44c/zAe9ZpVeYRIZAgahgUw/TbxSY7d8NTHNddWJtKrdn7toeWMy
-         msEjOmqrABeWxqs0FHXl7yIxfr6poZCEjcjdK7dlrMCXz79SFZYQwiLw/w3RdjpWqVLI
-         bcQyhXwuRT7OeP0/qT76yKObSzD2zeU69vCeDENhbmwJYv1GrODRWy79wzJANBkJ4uMg
-         oDH4u2OiyyLyd1Wyi/hcUyMLLEYwXJyfPNJwrla6WudED2zXBabpt/Qxzi0BKY+QyMru
-         iLEA==
+        bh=JHLIjqNln10+uaaGPR6Goi/c1sEntGahZG9YudcBl6s=;
+        b=nwLK0uIrER4O2w3WP0oY9aA1j9aVxBeHF7wX+U50mW8GKkSwnhLUF9/CcZFJKUAkhW
+         +decTTSo8zeUZPu67AmhaW2FSQSkXlHNR/lOIIy/5Y1vkT+QaQyUMqFUBBEDIC3aTgis
+         GJ1qaGEgZKf937QNRWwMLjYfrlh1G9dddrhCm2Ixnpd+qh7euZ0NH3Two/zSEVlbgZHI
+         VtNEnPlou2EFxn7Rc8wJAVkaRgG/XU5otHIS8142m76DyQB38xApwSx5jrSwc96CtxxQ
+         fvU2nAObEGh44EQl2WCwWUPUmOdNkPo5Renizot3XofDJuc74QMhlrif73NsKC3bfnQv
+         iKpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733158777; x=1733763577;
+        d=1e100.net; s=20230601; t=1733158766; x=1733763566;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jLbjZwSsMBhbP6FhXxodaS+Dw8jqZO+nNvFUCEAf4WQ=;
-        b=JwHRqC0owu2ifzfOg8GNxu8hItzXqx44z8Qh38CccWdHA/l0hHuh8bm/KuqccEA9Qq
-         Th3nRDERiTloLiQB5cIBH1J8HsIb5zQwVAg1w1jxLGgfjFIJNPKoZoUB13ewdhzHYD3V
-         8Jc+hg9ubBgZrNwSnV1uWKxRCbRuPK9t4LG8G1ctgScs3/mymQfDpSXRVdby3hEXU85+
-         RqbqHBdvt8RCHsyx5wVum8kbzXM446EqZQ97egg9VKIUb0Qm+fmW/dS5sGiLoapMyrrF
-         zCOGinQ5uyII6rKsNnKRXdex8hhP8mDKbQhNRCfTl3oTbeKxfUYrCVYaJuf+AWT3xh+w
-         lsoQ==
-X-Gm-Message-State: AOJu0YzKzxaUjBoi17jifgiEHUpcWYPedaPpukSh0iIclggQzhL+2Wdv
-	GKYWMn0kaaYE8oVAz7wCytQn2Z/8QjRpnB3q1ZE590Rc5aZCpmBnm6pUeXbYb/yXVerLlLR6H5T
-	z
-X-Gm-Gg: ASbGncvt3l3zTOZSiNwFIZQrqorl6RpjxZbPmqq+NDVCkWkfIG96ZY2M4dN7rIU3cwx
-	YydZnZA8xnevri7qQ3sFcc73+vCns9UGa06DnqCf670faBnafuYi7/zkP7p4e7J7Dr691FNNq3/
-	P07U4NJq6/6GpkySqncTSNm2/PbzHZskB1AtMMu6GThn9OgIvoaGpftdUWbthwzjf7A93h46IZf
-	7HRRR8l7Rpsc/XIk4J7Nh/u/Jl03GrK7nD/EHIEseLHISZhNsVxKGSLwxSGHo7G6ZeLNP9/egv3
-	ajF7Ms463yTCpS5s2cm6VgPfFSC9aw9yijFIej0eSLRCgsh1Mex7
-X-Google-Smtp-Source: AGHT+IEsMeY8tJTcRZ/irSPCXsIki96bRQtsE2O99r8NeN/Y5vw5MLh2IGvkhfJsUG7F8Abaqi/UUA==
-X-Received: by 2002:a17:906:3d2a:b0:aa5:3423:2dfe with SMTP id a640c23a62f3a-aa580f33384mr1969822066b.25.1733158776539;
-        Mon, 02 Dec 2024 08:59:36 -0800 (PST)
+        bh=JHLIjqNln10+uaaGPR6Goi/c1sEntGahZG9YudcBl6s=;
+        b=kS5a/BU/yWmp/i8rCstOtbWFETOgFYWmUSNU59pNj44WiQXnv4R6fUb+fDUIHkkEPn
+         dfvGVC0xHWwPGWjbAREAPMKJRys9qvGsx3OfFFFK8OGqKk+y1NEcsPusAr46QbkUAURM
+         NgrZwtJZNOnVN/iEoMZfWcjCom4BSdhUh4SjqkvaQ7KLXoOsPGZXpMSBjpNtZanA41F/
+         LkPjBzK9ilpZLfAzIGl2HuWnBxs76vzBeEpSkD4sVEBG8d4WOwEz4JQ7jq1LYjov6kSL
+         K37MKG9a5ea1w33wRTuQDs0Ae0MvVuYmtIEL2t2LFCNDY4KLy5c1f7GQwn2tJ0/Gux9U
+         TIhA==
+X-Gm-Message-State: AOJu0Yx8iNKXatiNmH+jQTbKcGGV/eJ88v6ej0ncoVPsHd3THRQMx6d3
+	Cbv75aEuxDR33EXlHV+b+3DGDtqT0tr5hhNpfPs3BoRjDEaiG22421yxla6njJwhpEB5qxRELC3
+	U
+X-Gm-Gg: ASbGnctMdZLmtq/z0qiOvNNamVCCO32Ncp2ilj7uvcuJrFDx8wsXj8LJ1Q5JaYZ/2WG
+	/UzhZnF+vBdQn21Okba2Y5RdneP1/lwwPCroI+DkHXiQSJe2HzUksUCJG0ayD15eD7dW25D+ASR
+	KMGzLL62XasLSFvGvY/9SAxrduJoWHIoNXRoz1qi4MprtaYvnuKm1iNX5cRQJfY5QJdTRq3uPdQ
+	26fmBy01B6IJI5MPR4mX5ZuwuUKDiy+/KPoDj6U/jCcEJi7s9t2DsFMP3/Bzln+Km6FjnOt1rYp
+	CiFeGvcbGbLpeo8CkRqWmQcjfeEpWAWQcRGM0poQZgBSAvB1/hs8
+X-Google-Smtp-Source: AGHT+IHq+mPW+7hN/xHplIh/FSA2AJTOopTHeCCqUeuziyhDmQ/ahN1vH+jFcmEE6BKUhmxRRpwA1A==
+X-Received: by 2002:a17:906:3299:b0:aa5:2237:67af with SMTP id a640c23a62f3a-aa580edf62dmr1878429566b.9.1733158765672;
+        Mon, 02 Dec 2024 08:59:25 -0800 (PST)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
 	marco.solieri@minervasys.tech,
 	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v11 12/12] xen/arm: add cache coloring support for Xen image
-Date: Mon,  2 Dec 2024 17:59:21 +0100
-Message-ID: <20241202165921.249585-13-carlo.nonato@minervasys.tech>
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v11 01/12] xen/common: add cache coloring common code
+Date: Mon,  2 Dec 2024 17:59:10 +0100
+Message-ID: <20241202165921.249585-2-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241202165921.249585-1-carlo.nonato@minervasys.tech>
 References: <20241202165921.249585-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Xen image is relocated to a new colored physical space. Some relocation
-functionalities must be brought back:
-- the virtual address of the new space is taken from 0c18fb76323b
-  ("xen/arm: Remove unused BOOT_RELOC_VIRT_START").
-- relocate_xen() and get_xen_paddr() are taken from f60658c6ae47
-  ("xen/arm: Stop relocating Xen").
+Last Level Cache (LLC) coloring allows to partition the cache in smaller
+chunks called cache colors.
 
-setup_pagetables() must be adapted for coloring and for relocation. Runtime
-page tables are used to map the colored space, but they are also linked in
-boot tables so that the new space is temporarily available for relocation.
-This implies that Xen protection must happen after the copy.
+Since not all architectures can actually implement it, add a HAS_LLC_COLORING
+Kconfig option.
+LLC_COLORS_ORDER Kconfig option has a range maximum of 10 (2^10 = 1024)
+because that's the number of colors that fit in a 4 KiB page when integers
+are 4 bytes long.
 
-Finally, since the alternative framework needs to remap the Xen text and
-inittext sections, this operation must be done in a coloring-aware way.
-The function xen_remap_colored() is introduced for that.
+LLC colors are a property of the domain, so struct domain has to be extended.
+
+Based on original work from: Luca Miccio <lucmiccio@gmail.com>
 
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
 Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
-Reviewed-by: Jan Beulich <jbeulich@suse.com> # common
+Acked-by: Michal Orzel <michal.orzel@amd.com>
 ---
 v11:
-- else if -> if in xen_colored_mfn()
+- __COLORING_H__ -> __XEN_LLC_COLORING_H__ in llc-coloring.h
+- added SPDX tag to cache-coloring.rst
+- llc-coloring=off now takes precedence over other cmdline options
+- removed useless #includes
 v10:
-- no changes
+- fixed commit message to use LLC_COLORS_ORDER
+- added documentation to index.rst
+- moved check on CONFIG_NUMA in arch/arm/Kconfig (next patch)
+- fixed copyright line
+- fixed array type for colors parameter in print_colors()
+- added check on (way_size & ~PAGE_MASK)
 v9:
-- patch adapted to changes to setup_pagetables()
+- dropped _MAX_ from CONFIG_MAX_LLC_COLORS_ORDER
 v8:
-- moved xen_colored_map_size() to arm/llc-coloring.c
+- minor documentation fixes
+- "llc-coloring=on" is inferred from "llc-nr-ways" and "llc-size" usage
+- turned CONFIG_NR_LLC_COLORS to CONFIG_MAX_LLC_COLORS_ORDER, base-2 exponent
+- moved Kconfig options to common/Kconfig
+- don't crash if computed max_nr_colors is too large
 v7:
-- added BUG_ON() checks to arch_llc_coloring_init() and
-  create_llc_coloring_mappings()
+- SUPPORT.md changes added to this patch
+- extended documentation to better address applicability of cache coloring
+- "llc-nr-ways" and "llc-size" params introduced in favor of "llc-way-size"
+- moved dump_llc_coloring_info() call in 'm' keyhandler (pagealloc_info())
 v6:
-- squashed with BOOT_RELOC_VIRT_START patch
-- consider_modules() moved in another patch
-- removed psci and smpboot code because of new idmap work already handles that
-- moved xen_remap_colored() in alternative.c since it's only used there
-- removed xen_colored_temp[] in favor of xen_xenmap[] usage for mapping
-- use of boot_module_find_by_kind() to remove the need of extra parameter in
-  setup_pagetables()
-- moved get_xen_paddr() in arm/llc-coloring.c since it's only used there
+- moved almost all code in common
+- moved documentation in this patch
+- reintroduced range for CONFIG_NR_LLC_COLORS
+- reintroduced some stub functions to reduce the number of checks on
+  llc_coloring_enabled
+- moved domain_llc_coloring_free() in same patch where allocation happens
+- turned "d->llc_colors" to pointer-to-const
+- llc_coloring_init() now returns void and panics if errors are found
 v5:
-- FIXME: consider_modules copy pasted since it got moved
+- used - instead of _ for filenames
+- removed domain_create_llc_colored()
+- removed stub functions
+- coloring domain fields are now #ifdef protected
 v4:
-- removed set_value_for_secondary() because it was wrongly cleaning cache
-- relocate_xen() now calls switch_ttbr_id()
+- Kconfig options moved to xen/arch
+- removed range for CONFIG_NR_LLC_COLORS
+- added "llc_coloring_enabled" global to later implement the boot-time
+  switch
+- added domain_create_llc_colored() to be able to pass colors
+- added is_domain_llc_colored() macro
 ---
- xen/arch/arm/alternative.c            | 30 +++++++-
- xen/arch/arm/arm64/mmu/head.S         | 58 +++++++++++++++-
- xen/arch/arm/arm64/mmu/mm.c           | 28 ++++++--
- xen/arch/arm/include/asm/mmu/layout.h |  3 +
- xen/arch/arm/llc-coloring.c           | 63 +++++++++++++++++
- xen/arch/arm/mmu/setup.c              | 99 +++++++++++++++++++++++----
- xen/arch/arm/setup.c                  | 10 ++-
- xen/common/llc-coloring.c             | 18 +++++
- xen/include/xen/llc-coloring.h        | 14 ++++
- 9 files changed, 302 insertions(+), 21 deletions(-)
+ SUPPORT.md                        |   7 ++
+ docs/index.rst                    |   1 +
+ docs/misc/cache-coloring.rst      | 118 +++++++++++++++++++++++++++++
+ docs/misc/xen-command-line.pandoc |  37 +++++++++
+ xen/common/Kconfig                |  21 ++++++
+ xen/common/Makefile               |   1 +
+ xen/common/keyhandler.c           |   3 +
+ xen/common/llc-coloring.c         | 121 ++++++++++++++++++++++++++++++
+ xen/common/page_alloc.c           |   3 +
+ xen/include/xen/llc-coloring.h    |  36 +++++++++
+ xen/include/xen/sched.h           |   5 ++
+ 11 files changed, 353 insertions(+)
+ create mode 100644 docs/misc/cache-coloring.rst
+ create mode 100644 xen/common/llc-coloring.c
+ create mode 100644 xen/include/xen/llc-coloring.h
 
-diff --git a/xen/arch/arm/alternative.c b/xen/arch/arm/alternative.c
-index d99b507093..0fcf4e451d 100644
---- a/xen/arch/arm/alternative.c
-+++ b/xen/arch/arm/alternative.c
-@@ -9,6 +9,7 @@
- #include <xen/init.h>
- #include <xen/types.h>
- #include <xen/kernel.h>
+diff --git a/SUPPORT.md b/SUPPORT.md
+index 82239d0294..998faf5635 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -401,6 +401,13 @@ by maintaining multiple physical to machine (p2m) memory mappings.
+     Status, x86 HVM: Tech Preview
+     Status, ARM: Tech Preview
+ 
++### Cache coloring
++
++Allows to reserve Last Level Cache (LLC) partitions for Dom0, DomUs and Xen
++itself.
++
++    Status, Arm64: Experimental
++
+ ## Resource Management
+ 
+ ### CPU Pools
+diff --git a/docs/index.rst b/docs/index.rst
+index 1d44796d72..1bb8d02ea3 100644
+--- a/docs/index.rst
++++ b/docs/index.rst
+@@ -66,6 +66,7 @@ Documents in need of some rearranging.
+    misc/xen-makefiles/makefiles
+    misra/index
+    fusa/index
++   misc/cache-coloring
+ 
+ 
+ Miscellanea
+diff --git a/docs/misc/cache-coloring.rst b/docs/misc/cache-coloring.rst
+new file mode 100644
+index 0000000000..371f21a0e7
+--- /dev/null
++++ b/docs/misc/cache-coloring.rst
+@@ -0,0 +1,118 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Xen cache coloring user guide
++=============================
++
++The cache coloring support in Xen allows to reserve Last Level Cache (LLC)
++partitions for Dom0, DomUs and Xen itself. Currently only ARM64 is supported.
++Cache coloring realizes per-set cache partitioning in software and is applicable
++to shared LLCs as implemented in Cortex-A53, Cortex-A72 and similar CPUs.
++
++To compile LLC coloring support set ``CONFIG_LLC_COLORING=y``.
++
++If needed, change the maximum number of colors with
++``CONFIG_LLC_COLORS_ORDER=<n>``.
++
++Runtime configuration is done via `Command line parameters`_.
++
++Background
++**********
++
++Cache hierarchy of a modern multi-core CPU typically has first levels dedicated
++to each core (hence using multiple cache units), while the last level is shared
++among all of them. Such configuration implies that memory operations on one
++core (e.g. running a DomU) are able to generate interference on another core
++(e.g. hosting another DomU). Cache coloring realizes per-set cache-partitioning
++in software and mitigates this, guaranteeing more predictable performances for
++memory accesses.
++Software-based cache coloring is particularly useful in those situations where
++no hardware mechanisms (e.g., DSU-based way partitioning) are available to
++partition caches. This is the case for e.g., Cortex-A53, A57 and A72 CPUs that
++feature a L2 LLC cache shared among all cores.
++
++The key concept underlying cache coloring is a fragmentation of the memory
++space into a set of sub-spaces called colors that are mapped to disjoint cache
++partitions. Technically, the whole memory space is first divided into a number
++of subsequent regions. Then each region is in turn divided into a number of
++subsequent sub-colors. The generic i-th color is then obtained by all the
++i-th sub-colors in each region.
++
++::
++
++                            Region j            Region j+1
++                .....................   ............
++                .                     . .
++                .                       .
++            _ _ _______________ _ _____________________ _ _
++                |     |     |     |     |     |     |
++                | c_0 | c_1 |     | c_n | c_0 | c_1 |
++           _ _ _|_____|_____|_ _ _|_____|_____|_____|_ _ _
++                    :                       :
++                    :                       :...         ... .
++                    :                            color 0
++                    :...........................         ... .
++                                                :
++          . . ..................................:
++
++How colors are actually defined depends on the function that maps memory to
++cache lines. In case of physically-indexed, physically-tagged caches with linear
++mapping, the set index is found by extracting some contiguous bits from the
++physical address. This allows colors to be defined as shown in figure: they
++appear in memory as subsequent blocks of equal size and repeats themselves after
++``n`` different colors, where ``n`` is the total number of colors.
++
++If some kind of bit shuffling appears in the mapping function, then colors
++assume a different layout in memory. Those kind of caches aren't supported by
++the current implementation.
++
++**Note**: Finding the exact cache mapping function can be a really difficult
++task since it's not always documented in the CPU manual. As said Cortex-A53, A57
++and A72 are known to work with the current implementation.
++
++How to compute the number of colors
++###################################
++
++Given the linear mapping from physical memory to cache lines for granted, the
++number of available colors for a specific platform is computed using three
++parameters:
++
++- the size of the LLC.
++- the number of the LLC ways.
++- the page size used by Xen.
++
++The first two parameters can be found in the processor manual, while the third
++one is the minimum mapping granularity. Dividing the cache size by the number of
++its ways we obtain the size of a way. Dividing this number by the page size,
++the number of total cache colors is found. So for example an Arm Cortex-A53
++with a 16-ways associative 1 MiB LLC can isolate up to 16 colors when pages are
++4 KiB in size.
++
++Effective colors assignment
++###########################
++
++When assigning colors, if one wants to avoid cache interference between two
++domains, different colors needs to be used for their memory.
++
++Command line parameters
++***********************
++
++Specific documentation is available at `docs/misc/xen-command-line.pandoc`.
++
+++----------------------+-------------------------------+
++| **Parameter**        | **Description**               |
+++----------------------+-------------------------------+
++| ``llc-coloring``     | Enable coloring at runtime    |
+++----------------------+-------------------------------+
++| ``llc-size``         | Set the LLC size              |
+++----------------------+-------------------------------+
++| ``llc-nr-ways``      | Set the LLC number of ways    |
+++----------------------+-------------------------------+
++
++Auto-probing of LLC specs
++#########################
++
++LLC size and number of ways are probed automatically by default.
++
++LLC specs can be manually set via the above command line parameters. This
++bypasses any auto-probing and it's used to overcome failing situations, such as
++flawed probing logic, or for debugging/testing purposes.
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 293dbc1a95..abd8dae96f 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -1708,6 +1708,43 @@ This option is intended for debugging purposes only.  Enable MSR_DEBUGCTL.LBR
+ in hypervisor context to be able to dump the Last Interrupt/Exception To/From
+ record with other registers.
+ 
++### llc-coloring (arm64)
++> `= <boolean>`
++
++> Default: `false`
++
++Flag to enable or disable LLC coloring support at runtime. This option is
++available only when `CONFIG_LLC_COLORING` is enabled. See the general
++cache coloring documentation for more info.
++
++### llc-nr-ways (arm64)
++> `= <integer>`
++
++> Default: `Obtained from hardware`
++
++Specify the number of ways of the Last Level Cache. This option is available
++only when `CONFIG_LLC_COLORING` is enabled. LLC size and number of ways are used
++to find the number of supported cache colors. By default the value is
++automatically computed by probing the hardware, but in case of specific needs,
++it can be manually set. Those include failing probing and debugging/testing
++purposes so that it's possible to emulate platforms with different number of
++supported colors. If set, also "llc-size" must be set, otherwise the default
++will be used. Note that using both options implies "llc-coloring=on".
++
++### llc-size (arm64)
++> `= <size>`
++
++> Default: `Obtained from hardware`
++
++Specify the size of the Last Level Cache. This option is available only when
++`CONFIG_LLC_COLORING` is enabled. LLC size and number of ways are used to find
++the number of supported cache colors. By default the value is automatically
++computed by probing the hardware, but in case of specific needs, it can be
++manually set. Those include failing probing and debugging/testing purposes so
++that it's possible to emulate platforms with different number of supported
++colors. If set, also "llc-nr-ways" must be set, otherwise the default will be
++used. Note that using both options implies "llc-coloring=on".
++
+ ### lock-depth-size
+ > `= <integer>`
+ 
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 90268d9249..b4ec6893be 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -71,6 +71,9 @@ config HAS_IOPORTS
+ config HAS_KEXEC
+ 	bool
+ 
++config HAS_LLC_COLORING
++	bool
++
+ config HAS_PIRQ
+ 	bool
+ 
+@@ -516,4 +519,22 @@ config TRACEBUFFER
+ 	  to be collected at run time for debugging or performance analysis.
+ 	  Memory and execution overhead when not active is minimal.
+ 
++config LLC_COLORING
++	bool "Last Level Cache (LLC) coloring" if EXPERT
++	depends on HAS_LLC_COLORING
++
++config LLC_COLORS_ORDER
++	int "Maximum number of LLC colors (base-2 exponent)"
++	range 1 10
++	default 7
++	depends on LLC_COLORING
++	help
++	  Controls the build-time size of various arrays associated with LLC
++	  coloring. The value is a base-2 exponent. Refer to cache coloring
++	  documentation for how to compute the number of colors supported by the
++	  platform. This is only an upper bound. The runtime value is autocomputed
++	  or manually set via cmdline parameters.
++	  The default value corresponds to an 8 MiB 16-ways LLC, which should be
++	  more than what's needed in the general case.
++
+ endmenu
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index b279b09bfb..cba3b32733 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -25,6 +25,7 @@ obj-y += keyhandler.o
+ obj-$(CONFIG_KEXEC) += kexec.o
+ obj-$(CONFIG_KEXEC) += kimage.o
+ obj-$(CONFIG_LIVEPATCH) += livepatch.o livepatch_elf.o
++obj-$(CONFIG_LLC_COLORING) += llc-coloring.o
+ obj-$(CONFIG_MEM_ACCESS) += mem_access.o
+ obj-y += memory.o
+ obj-y += multicall.o
+diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
+index 6da291b34e..6ea54838d4 100644
+--- a/xen/common/keyhandler.c
++++ b/xen/common/keyhandler.c
+@@ -5,6 +5,7 @@
+ #include <asm/regs.h>
+ #include <xen/delay.h>
+ #include <xen/keyhandler.h>
 +#include <xen/llc-coloring.h>
- #include <xen/mm.h>
- #include <xen/vmap.h>
- #include <xen/smp.h>
-@@ -191,6 +192,27 @@ static int __apply_alternatives_multi_stop(void *xenmap)
-     return 0;
- }
- 
-+static void __init *xen_remap_colored(mfn_t xen_mfn, paddr_t xen_size)
-+{
-+    unsigned int i;
-+    void *xenmap;
-+    mfn_t *xen_colored_mfns, mfn;
-+
-+    xen_colored_mfns = xmalloc_array(mfn_t, xen_size >> PAGE_SHIFT);
-+    if ( !xen_colored_mfns )
-+        panic("Can't allocate LLC colored MFNs\n");
-+
-+    for_each_xen_colored_mfn ( xen_mfn, mfn, i )
-+    {
-+        xen_colored_mfns[i] = mfn;
-+    }
-+
-+    xenmap = vmap(xen_colored_mfns, xen_size >> PAGE_SHIFT);
-+    xfree(xen_colored_mfns);
-+
-+    return xenmap;
-+}
-+
- /*
-  * This function should only be called during boot and before CPU0 jump
-  * into the idle_loop.
-@@ -209,8 +231,12 @@ void __init apply_alternatives_all(void)
-      * The text and inittext section are read-only. So re-map Xen to
-      * be able to patch the code.
-      */
--    xenmap = __vmap(&xen_mfn, 1U << xen_order, 1, 1, PAGE_HYPERVISOR,
--                    VMAP_DEFAULT);
-+    if ( llc_coloring_enabled )
-+        xenmap = xen_remap_colored(xen_mfn, xen_size);
-+    else
-+        xenmap = __vmap(&xen_mfn, 1U << xen_order, 1, 1, PAGE_HYPERVISOR,
-+                        VMAP_DEFAULT);
-+
-     /* Re-mapping Xen is not expected to fail during boot. */
-     BUG_ON(!xenmap);
- 
-diff --git a/xen/arch/arm/arm64/mmu/head.S b/xen/arch/arm/arm64/mmu/head.S
-index 665a51a337..a1fc9a82f1 100644
---- a/xen/arch/arm/arm64/mmu/head.S
-+++ b/xen/arch/arm/arm64/mmu/head.S
-@@ -428,6 +428,61 @@ FUNC_LOCAL(fail)
-         b     1b
- END(fail)
- 
-+/*
-+ * Copy Xen to new location and switch TTBR
-+ * x0    ttbr
-+ * x1    source address
-+ * x2    destination address
-+ * x3    length
-+ *
-+ * Source and destination must be word aligned, length is rounded up
-+ * to a 16 byte boundary.
-+ *
-+ * MUST BE VERY CAREFUL when saving things to RAM over the copy
-+ */
-+ENTRY(relocate_xen)
-+        /*
-+         * Copy 16 bytes at a time using:
-+         *   x9: counter
-+         *   x10: data
-+         *   x11: data
-+         *   x12: source
-+         *   x13: destination
-+         */
-+        mov     x9, x3
-+        mov     x12, x1
-+        mov     x13, x2
-+
-+1:      ldp     x10, x11, [x12], #16
-+        stp     x10, x11, [x13], #16
-+
-+        subs    x9, x9, #16
-+        bgt     1b
-+
-+        /*
-+         * Flush destination from dcache using:
-+         *   x9: counter
-+         *   x10: step
-+         *   x11: vaddr
-+         *
-+         * This is to ensure data is visible to the instruction cache
-+         */
-+        dsb   sy
-+
-+        mov   x9, x3
-+        ldr   x10, =dcache_line_bytes /* x10 := step */
-+        ldr   x10, [x10]
-+        mov   x11, x2
-+
-+1:      dc    cvac, x11
-+
-+        add   x11, x11, x10
-+        subs  x9, x9, x10
-+        bgt   1b
-+
-+        /* No need for dsb/isb because they are alredy done in switch_ttbr_id */
-+        b switch_ttbr_id
-+
- /*
-  * Switch TTBR
-  *
-@@ -453,7 +508,8 @@ FUNC(switch_ttbr_id)
- 
-         /*
-          * 5) Flush I-cache
--         * This should not be necessary but it is kept for safety.
-+         * This should not be necessary in the general case, but it's needed
-+         * for cache coloring because code is relocated in that case.
-          */
-         ic     iallu
-         isb
-diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
-index 671eaadbc1..3732d5897e 100644
---- a/xen/arch/arm/arm64/mmu/mm.c
-+++ b/xen/arch/arm/arm64/mmu/mm.c
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
- #include <xen/init.h>
-+#include <xen/llc-coloring.h>
- #include <xen/mm.h>
- #include <xen/pfn.h>
- 
-@@ -138,27 +139,46 @@ void update_boot_mapping(bool enable)
- }
- 
- extern void switch_ttbr_id(uint64_t ttbr);
-+extern void relocate_xen(uint64_t ttbr, void *src, void *dst, size_t len);
- 
- typedef void (switch_ttbr_fn)(uint64_t ttbr);
-+typedef void (relocate_xen_fn)(uint64_t ttbr, void *src, void *dst, size_t len);
- 
- void __init switch_ttbr(uint64_t ttbr)
- {
--    vaddr_t id_addr = virt_to_maddr(switch_ttbr_id);
--    switch_ttbr_fn *fn = (switch_ttbr_fn *)id_addr;
-+    vaddr_t vaddr, id_addr;
-     lpae_t pte;
- 
-+    if ( llc_coloring_enabled )
-+        vaddr = (vaddr_t)relocate_xen;
-+    else
-+        vaddr = (vaddr_t)switch_ttbr_id;
-+
-+    id_addr = virt_to_maddr(vaddr);
-+
-     /* Enable the identity mapping in the boot page tables */
-     update_identity_mapping(true);
- 
-     /* Enable the identity mapping in the runtime page tables */
--    pte = pte_of_xenaddr((vaddr_t)switch_ttbr_id);
-+    pte = pte_of_xenaddr(vaddr);
-     pte.pt.table = 1;
-     pte.pt.xn = 0;
-     pte.pt.ro = 1;
-     write_pte(&xen_third_id[third_table_offset(id_addr)], pte);
- 
-     /* Switch TTBR */
--    fn(ttbr);
-+    if ( llc_coloring_enabled )
-+    {
-+        relocate_xen_fn *fn = (relocate_xen_fn *)id_addr;
-+
-+        fn(ttbr, _start, (void *)BOOT_RELOC_VIRT_START, _end - _start);
-+    }
-+    else
-+    {
-+        switch_ttbr_fn *fn = (switch_ttbr_fn *)id_addr;
-+
-+        fn(ttbr);
-+    }
- 
-     /*
-      * Disable the identity mapping in the runtime page tables.
-diff --git a/xen/arch/arm/include/asm/mmu/layout.h b/xen/arch/arm/include/asm/mmu/layout.h
-index a3b546465b..19c0ec63a5 100644
---- a/xen/arch/arm/include/asm/mmu/layout.h
-+++ b/xen/arch/arm/include/asm/mmu/layout.h
-@@ -30,6 +30,7 @@
-  *  10M -  12M   Fixmap: special-purpose 4K mapping slots
-  *  12M -  16M   Early boot mapping of FDT
-  *  16M -  18M   Livepatch vmap (if compiled in)
-+ *  16M -  24M   Cache-colored Xen text, data, bss (temporary, if compiled in)
-  *
-  *   1G -   2G   VMAP: ioremap and early_ioremap
-  *
-@@ -74,6 +75,8 @@
- #define BOOT_FDT_VIRT_START     (FIXMAP_VIRT_START + FIXMAP_VIRT_SIZE)
- #define BOOT_FDT_VIRT_SIZE      _AT(vaddr_t, MB(4))
- 
-+#define BOOT_RELOC_VIRT_START   (BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE)
-+
- #ifdef CONFIG_LIVEPATCH
- #define LIVEPATCH_VMAP_START    (BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE)
- #define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
-diff --git a/xen/arch/arm/llc-coloring.c b/xen/arch/arm/llc-coloring.c
-index 6c8fa6b576..8e10a505db 100644
---- a/xen/arch/arm/llc-coloring.c
-+++ b/xen/arch/arm/llc-coloring.c
-@@ -10,6 +10,7 @@
- #include <xen/types.h>
- 
- #include <asm/processor.h>
-+#include <asm/setup.h>
- #include <asm/sysregs.h>
- 
- /* Return the LLC way size by probing the hardware */
-@@ -64,8 +65,70 @@ unsigned int __init get_llc_way_size(void)
-     return line_size * num_sets;
- }
- 
-+/**
-+ * get_xen_paddr - get physical address to relocate Xen to
-+ *
-+ * Xen is relocated to as near to the top of RAM as possible and
-+ * aligned to a XEN_PADDR_ALIGN boundary.
-+ */
-+static paddr_t __init get_xen_paddr(paddr_t xen_size)
-+{
-+    const struct membanks *mem = bootinfo_get_mem();
-+    paddr_t min_size, paddr = 0;
-+    unsigned int i;
-+
-+    min_size = (xen_size + (XEN_PADDR_ALIGN-1)) & ~(XEN_PADDR_ALIGN-1);
-+
-+    /* Find the highest bank with enough space. */
-+    for ( i = 0; i < mem->nr_banks; i++ )
-+    {
-+        const struct membank *bank = &mem->bank[i];
-+        paddr_t s, e;
-+
-+        if ( bank->size >= min_size )
-+        {
-+            e = consider_modules(bank->start, bank->start + bank->size,
-+                                 min_size, XEN_PADDR_ALIGN, 0);
-+            if ( !e )
-+                continue;
-+
-+#ifdef CONFIG_ARM_32
-+            /* Xen must be under 4GB */
-+            if ( e > GB(4) )
-+                e = GB(4);
-+            if ( e < bank->start )
-+                continue;
-+#endif
-+
-+            s = e - min_size;
-+
-+            if ( s > paddr )
-+                paddr = s;
-+        }
-+    }
-+
-+    if ( !paddr )
-+        panic("Not enough memory to relocate Xen\n");
-+
-+    printk("Placing Xen at 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
-+           paddr, paddr + min_size);
-+
-+    return paddr;
-+}
-+
-+static paddr_t __init xen_colored_map_size(void)
-+{
-+    return ROUNDUP((_end - _start) * get_max_nr_llc_colors(), XEN_PADDR_ALIGN);
-+}
-+
- void __init arch_llc_coloring_init(void)
- {
-+    struct bootmodule *xen_bootmodule = boot_module_find_by_kind(BOOTMOD_XEN);
-+
-+    BUG_ON(!xen_bootmodule);
-+
-+    xen_bootmodule->size = xen_colored_map_size();
-+    xen_bootmodule->start = get_xen_paddr(xen_bootmodule->size);
- }
- 
- /*
-diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
-index 196974f3e2..1d8d7eb70c 100644
---- a/xen/arch/arm/mmu/setup.c
-+++ b/xen/arch/arm/mmu/setup.c
-@@ -7,6 +7,7 @@
- 
- #include <xen/init.h>
- #include <xen/libfdt/libfdt.h>
-+#include <xen/llc-coloring.h>
+ #include <xen/param.h>
  #include <xen/sections.h>
- #include <xen/sizes.h>
- #include <xen/vmap.h>
-@@ -20,6 +21,9 @@
- #undef virt_to_mfn
- #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
+ #include <xen/shutdown.h>
+@@ -304,6 +305,8 @@ static void cf_check dump_domains(unsigned char key)
  
-+#define virt_to_reloc_virt(virt) \
-+    (((vaddr_t)virt) - XEN_VIRT_START + BOOT_RELOC_VIRT_START)
+         arch_dump_domain_info(d);
+ 
++        domain_dump_llc_colors(d);
 +
- /* Main runtime page tables */
+         rangeset_domain_printk(d);
  
- /*
-@@ -69,6 +73,7 @@ static void __init __maybe_unused build_assertions(void)
-     /* 2MB aligned regions */
-     BUILD_BUG_ON(XEN_VIRT_START & ~SECOND_MASK);
-     BUILD_BUG_ON(FIXMAP_ADDR(0) & ~SECOND_MASK);
-+    BUILD_BUG_ON(BOOT_RELOC_VIRT_START & ~SECOND_MASK);
-     /* 1GB aligned regions */
- #ifdef CONFIG_ARM_32
-     BUILD_BUG_ON(XENHEAP_VIRT_START & ~FIRST_MASK);
-@@ -138,6 +143,9 @@ static void __init __maybe_unused build_assertions(void)
- 
- lpae_t __init pte_of_xenaddr(vaddr_t va)
- {
-+    if ( llc_coloring_enabled )
-+        va = virt_to_reloc_virt(va);
+         dump_pageframe_info(d);
+diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
+new file mode 100644
+index 0000000000..54d76e3aca
+--- /dev/null
++++ b/xen/common/llc-coloring.c
+@@ -0,0 +1,121 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Last Level Cache (LLC) coloring common code
++ *
++ * Copyright (C) 2024, Advanced Micro Devices, Inc.
++ * Copyright (C) 2024, Minerva Systems SRL
++ */
++#include <xen/keyhandler.h>
++#include <xen/llc-coloring.h>
++#include <xen/param.h>
 +
-     return mfn_to_xen_entry(virt_to_mfn(va), MT_NORMAL);
- }
- 
-@@ -316,9 +324,44 @@ paddr_t __init consider_modules(paddr_t s, paddr_t e,
-     return e;
- }
- 
-+static void __init create_llc_coloring_mappings(void)
++#define NR_LLC_COLORS          (1U << CONFIG_LLC_COLORS_ORDER)
++
++/*
++ * -1: not specified (disabled unless llc-size and llc-nr-ways present)
++ *  0: explicitly disabled through cmdline
++ *  1: explicitly enabled through cmdline
++ */
++static int8_t __ro_after_init llc_coloring_enabled = -1;
++boolean_param("llc-coloring", llc_coloring_enabled);
++
++static unsigned int __initdata llc_size;
++size_param("llc-size", llc_size);
++static unsigned int __initdata llc_nr_ways;
++integer_param("llc-nr-ways", llc_nr_ways);
++/* Number of colors available in the LLC */
++static unsigned int __ro_after_init max_nr_colors;
++
++static void print_colors(const unsigned int colors[], unsigned int num_colors)
 +{
-+    lpae_t pte;
 +    unsigned int i;
-+    struct bootmodule *xen_bootmodule = boot_module_find_by_kind(BOOTMOD_XEN);
-+    mfn_t start_mfn = maddr_to_mfn(xen_bootmodule->start), mfn;
 +
-+    for_each_xen_colored_mfn ( start_mfn, mfn, i )
++    printk("{ ");
++    for ( i = 0; i < num_colors; i++ )
 +    {
-+        pte = mfn_to_xen_entry(mfn, MT_NORMAL);
-+        pte.pt.table = 1; /* level 3 mappings always have this bit set */
-+        xen_xenmap[i] = pte;
-+    }
++        unsigned int start = colors[i], end = start;
 +
-+    for ( i = 0; i < XEN_NR_ENTRIES(2); i++ )
-+    {
-+        vaddr_t va = BOOT_RELOC_VIRT_START + (i << XEN_PT_LEVEL_SHIFT(2));
++        printk("%u", start);
 +
-+        pte = mfn_to_xen_entry(virt_to_mfn(xen_xenmap +
-+                                           i * XEN_PT_LPAE_ENTRIES),
-+                               MT_NORMAL);
-+        pte.pt.table = 1;
-+        write_pte(&boot_second[second_table_offset(va)], pte);
++        for ( ; i < num_colors - 1 && end + 1 == colors[i + 1]; i++, end++ )
++            ;
++
++        if ( start != end )
++            printk("-%u", end);
++
++        if ( i < num_colors - 1 )
++            printk(", ");
 +    }
++    printk(" }\n");
 +}
 +
- /*
-- * Boot-time pagetable setup.
-+ * Boot-time pagetable setup with coloring support
-  * Changes here may need matching changes in head.S
-+ *
-+ * The cache coloring support consists of:
-+ * - Create colored mapping that conforms to Xen color selection in xen_xenmap[]
-+ * - Link the mapping in boot page tables using BOOT_RELOC_VIRT_START as vaddr
-+ * - pte_of_xenaddr() takes care of translating addresses to the new space
-+ *   during runtime page tables creation
-+ * - Relocate xen and update TTBR with the new address in the colored space
-+ *   (see switch_ttbr())
-+ * - Protect the new space
-  */
- void __init setup_pagetables(void)
- {
-@@ -326,6 +369,9 @@ void __init setup_pagetables(void)
-     lpae_t pte, *p;
-     int i;
- 
-+    if ( llc_coloring_enabled )
-+        create_llc_coloring_mappings();
++void __init llc_coloring_init(void)
++{
++    unsigned int way_size;
 +
-     arch_setup_page_tables();
- 
- #ifdef CONFIG_ARM_64
-@@ -353,13 +399,7 @@ void __init setup_pagetables(void)
-             break;
-         pte = pte_of_xenaddr(va);
-         pte.pt.table = 1; /* third level mappings always have this bit set */
--        if ( is_kernel_text(va) || is_kernel_inittext(va) )
--        {
--            pte.pt.xn = 0;
--            pte.pt.ro = 1;
--        }
--        if ( is_kernel_rodata(va) )
--            pte.pt.ro = 1;
-+        pte.pt.xn = 0; /* Permissions will be enforced later. Allow execution */
-         xen_xenmap[i] = pte;
++    if ( (llc_coloring_enabled < 0) && (llc_size && llc_nr_ways) )
++    {
++        llc_coloring_enabled = true;
++        way_size = llc_size / llc_nr_ways;
++    }
++    else if ( !llc_coloring_enabled )
++        return;
++    else
++    {
++        way_size = get_llc_way_size();
++        if ( !way_size )
++            panic("LLC probing failed and 'llc-size' or 'llc-nr-ways' missing\n");
++    }
++
++    if ( way_size & ~PAGE_MASK )
++        panic("LLC way size must be a multiple of PAGE_SIZE\n");
++
++    /*
++     * The maximum number of colors must be a power of 2 in order to correctly
++     * map them to bits of an address.
++     */
++    max_nr_colors = way_size >> PAGE_SHIFT;
++
++    if ( max_nr_colors & (max_nr_colors - 1) )
++        panic("Number of LLC colors (%u) isn't a power of 2\n", max_nr_colors);
++
++    if ( max_nr_colors > NR_LLC_COLORS )
++    {
++        printk(XENLOG_WARNING
++               "Number of LLC colors (%u) too big. Using configured max %u\n",
++               max_nr_colors, NR_LLC_COLORS);
++        max_nr_colors = NR_LLC_COLORS;
++    }
++    else if ( max_nr_colors < 2 )
++        panic("Number of LLC colors %u < 2\n", max_nr_colors);
++
++    arch_llc_coloring_init();
++}
++
++void dump_llc_coloring_info(void)
++{
++    if ( !llc_coloring_enabled )
++        return;
++
++    printk("LLC coloring info:\n");
++    printk("    Number of LLC colors supported: %u\n", max_nr_colors);
++}
++
++void domain_dump_llc_colors(const struct domain *d)
++{
++    if ( !llc_coloring_enabled )
++        return;
++
++    printk("%u LLC colors: ", d->num_llc_colors);
++    print_colors(d->llc_colors, d->num_llc_colors);
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 92abed6514..55d561e93c 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -126,6 +126,7 @@
+ #include <xen/irq.h>
+ #include <xen/keyhandler.h>
+ #include <xen/lib.h>
++#include <xen/llc-coloring.h>
+ #include <xen/mm.h>
+ #include <xen/nodemask.h>
+ #include <xen/numa.h>
+@@ -2644,6 +2645,8 @@ static void cf_check pagealloc_info(unsigned char key)
      }
  
-@@ -385,13 +425,48 @@ void __init setup_pagetables(void)
-     ttbr = virt_to_maddr(cpu0_pgtable);
- #endif
- 
--    switch_ttbr(ttbr);
--
--    xen_pt_enforce_wnx();
--
- #ifdef CONFIG_ARM_32
-     per_cpu(xen_pgtable, 0) = cpu0_pgtable;
- #endif
+     printk("    Dom heap: %lukB free\n", total << (PAGE_SHIFT-10));
 +
-+    if ( llc_coloring_enabled )
-+        ttbr = virt_to_maddr(virt_to_reloc_virt(THIS_CPU_PGTABLE));
-+
-+    switch_ttbr(ttbr);
-+
-+    /* Protect Xen */
-+    for ( i = 0; i < XEN_NR_ENTRIES(3); i++ )
-+    {
-+        vaddr_t va = XEN_VIRT_START + (i << PAGE_SHIFT);
-+        lpae_t *entry = xen_xenmap + i;
-+
-+        if ( !is_kernel(va) )
-+            break;
-+
-+        pte = read_atomic(entry);
-+
-+        if ( is_kernel_text(va) || is_kernel_inittext(va) )
-+        {
-+            pte.pt.xn = 0;
-+            pte.pt.ro = 1;
-+        } else if ( is_kernel_rodata(va) ) {
-+            pte.pt.ro = 1;
-+            pte.pt.xn = 1;
-+        } else {
-+            pte.pt.xn = 1;
-+            pte.pt.ro = 0;
-+        }
-+
-+        write_pte(entry, pte);
-+    }
-+
-+    /*
-+     * We modified live page-tables. Ensure the TLBs are invalidated
-+     * before setting enforcing the WnX permissions.
-+     */
-+    flush_xen_tlb_local();
-+
-+    xen_pt_enforce_wnx();
++    dump_llc_coloring_info();
  }
  
- void *__init arch_vmap_virt_end(void)
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 568a49b274..5e2c519ce8 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -304,8 +304,6 @@ void asmlinkage __init start_xen(unsigned long fdt_paddr)
-     /* Initialize traps early allow us to get backtrace when an error occurred */
-     init_traps();
- 
--    setup_pagetables();
--
-     smp_clear_cpu_maps();
- 
-     device_tree_flattened = early_fdt_map(fdt_paddr);
-@@ -329,6 +327,14 @@ void asmlinkage __init start_xen(unsigned long fdt_paddr)
- 
-     llc_coloring_init();
- 
-+    /*
-+     * Page tables must be setup after LLC coloring initialization because
-+     * coloring info are required in order to create colored mappings
-+     */
-+    setup_pagetables();
-+    /* Device-tree was mapped in boot page tables, remap it in the new tables */
-+    device_tree_flattened = early_fdt_map(fdt_paddr);
-+
-     setup_mm();
- 
-     vm_init();
-diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-index 2e7c0f505d..2d6aed5fb4 100644
---- a/xen/common/llc-coloring.c
-+++ b/xen/common/llc-coloring.c
-@@ -38,6 +38,8 @@ static unsigned int __ro_after_init xen_num_colors;
- 
- #define mfn_color_mask              (max_nr_colors - 1)
- #define mfn_to_color(mfn)           (mfn_x(mfn) & mfn_color_mask)
-+#define get_mfn_with_color(mfn, color) \
-+    (_mfn((mfn_x(mfn) & ~mfn_color_mask) | (color)))
- 
- /*
-  * Parse the coloring configuration given in the buf string, following the
-@@ -359,6 +361,22 @@ unsigned int get_max_nr_llc_colors(void)
-     return max_nr_colors;
- }
- 
-+mfn_t __init xen_colored_mfn(mfn_t mfn)
-+{
-+    unsigned int i, color = mfn_to_color(mfn);
-+
-+    for ( i = 0; i < xen_num_colors; i++ )
-+    {
-+        if ( color == xen_colors[i] )
-+            return mfn;
-+        if ( color < xen_colors[i] )
-+            return get_mfn_with_color(mfn, xen_colors[i]);
-+    }
-+
-+    /* Jump to next color space (max_nr_colors mfns) and use the first color */
-+    return get_mfn_with_color(mfn_add(mfn, max_nr_colors), xen_colors[0]);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
+ static __init int cf_check pagealloc_keyhandler_init(void)
 diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
-index b3f2fa22bc..4f10a5310f 100644
---- a/xen/include/xen/llc-coloring.h
+new file mode 100644
+index 0000000000..0acd8d0ad6
+--- /dev/null
 +++ b/xen/include/xen/llc-coloring.h
-@@ -8,6 +8,8 @@
- #ifndef __XEN_LLC_COLORING_H__
- #define __XEN_LLC_COLORING_H__
- 
-+#include <xen/mm-frame.h>
-+
- struct domain;
- struct page_info;
- struct xen_domctl_set_llc_colors;
-@@ -28,6 +30,17 @@ static inline void domain_dump_llc_colors(const struct domain *d) {}
- static inline void domain_llc_coloring_free(struct domain *d) {}
- #endif
- 
-+/**
-+ * Iterate over each Xen mfn in the colored space.
-+ * @start_mfn:  the first mfn that needs to be colored.
-+ * @mfn:        the current mfn.
-+ * @i:          loop index.
+@@ -0,0 +1,36 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Last Level Cache (LLC) coloring common header
++ *
++ * Copyright (C) 2024, Advanced Micro Devices, Inc.
++ * Copyright (C) 2024, Minerva Systems SRL
 + */
-+#define for_each_xen_colored_mfn(start_mfn, mfn, i) \
-+    for ( i = 0, mfn = xen_colored_mfn(start_mfn);  \
-+          i < (_end - _start) >> PAGE_SHIFT;        \
-+          i++, mfn = xen_colored_mfn(mfn_add(mfn, 1)) )
++#ifndef __XEN_LLC_COLORING_H__
++#define __XEN_LLC_COLORING_H__
 +
- unsigned int get_llc_way_size(void);
- void arch_llc_coloring_init(void);
- int dom0_set_llc_colors(struct domain *d);
-@@ -36,6 +49,7 @@ int domain_set_llc_colors(struct domain *d,
- int domain_set_llc_colors_from_str(struct domain *d, const char *str);
- unsigned int page_to_llc_color(const struct page_info *pg);
- unsigned int get_max_nr_llc_colors(void);
-+mfn_t xen_colored_mfn(mfn_t mfn);
++struct domain;
++
++#ifdef CONFIG_LLC_COLORING
++void llc_coloring_init(void);
++void dump_llc_coloring_info(void);
++void domain_dump_llc_colors(const struct domain *d);
++#else
++static inline void llc_coloring_init(void) {}
++static inline void dump_llc_coloring_info(void) {}
++static inline void domain_dump_llc_colors(const struct domain *d) {}
++#endif
++
++unsigned int get_llc_way_size(void);
++void arch_llc_coloring_init(void);
++
++#endif /* __XEN_LLC_COLORING_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 76e39378b3..bc798a2f61 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -637,6 +637,11 @@ struct domain
  
- #endif /* __XEN_LLC_COLORING_H__ */
+     /* Holding CDF_* constant. Internal flags for domain creation. */
+     unsigned int cdf;
++
++#ifdef CONFIG_LLC_COLORING
++    unsigned int num_llc_colors;
++    const unsigned int *llc_colors;
++#endif
+ };
  
+ static inline struct page_list_head *page_to_list(
 -- 
 2.43.0
 
