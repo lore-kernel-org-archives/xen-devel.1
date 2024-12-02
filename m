@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD79E6C5E3
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 01:09:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.847165.1262304 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D7DE6C5E5
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 01:09:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.847115.1262288 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIHPa-0000ku-7S; Tue, 03 Dec 2024 01:09:10 +0000
+	id 1tIHPZ-0000UA-DB; Tue, 03 Dec 2024 01:09:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 847165.1262304; Tue, 03 Dec 2024 01:09:10 +0000
+Received: by outflank-mailman (output) from mailman id 847115.1262288; Tue, 03 Dec 2024 01:09:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIHPa-0000iH-2u; Tue, 03 Dec 2024 01:09:10 +0000
-Received: by outflank-mailman (input) for mailman id 847165;
- Tue, 03 Dec 2024 01:00:37 +0000
+	id 1tIHPZ-0000U3-9b; Tue, 03 Dec 2024 01:09:09 +0000
+Received: by outflank-mailman (input) for mailman id 847115;
+ Mon, 02 Dec 2024 21:17:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=soDL=S4=flex--kevinloughlin.bounces.google.com=3KVhOZw0KAFQ60H497AG237492AA270.yA8@srs-se1.protection.inumbo.net>)
- id 1tIHHJ-0004Oy-Ft
- for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 01:00:37 +0000
-Received: from mail-oa1-x4a.google.com (mail-oa1-x4a.google.com
- [2001:4860:4864:20::4a])
+ <SRS0=au2i=S3=gmail.com=christian.gmeiner@srs-se1.protection.inumbo.net>)
+ id 1tIDn2-0005Ky-72
+ for xen-devel@lists.xenproject.org; Mon, 02 Dec 2024 21:17:08 +0000
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [2607:f8b0:4864:20::102b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 01407258-b112-11ef-a0d3-8be0dac302b0;
- Tue, 03 Dec 2024 02:00:36 +0100 (CET)
-Received: by mail-oa1-x4a.google.com with SMTP id
- 586e51a60fabf-29e422f0433so1842407fac.3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Dec 2024 17:00:36 -0800 (PST)
+ id c7ddd56d-b0f2-11ef-a0d3-8be0dac302b0;
+ Mon, 02 Dec 2024 22:17:06 +0100 (CET)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2ee786b3277so1966855a91.1
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Dec 2024 13:17:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,212 +42,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 01407258-b112-11ef-a0d3-8be0dac302b0
+X-Inumbo-ID: c7ddd56d-b0f2-11ef-a0d3-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1733187635; x=1733792435; darn=lists.xenproject.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=d+a3eBnHKvD8AQod1gMB/LKTW1oN3to08D39Docv/eQ=;
-        b=MAnPcCO5k7gMSM7zwVCsDFPTcrgDAHrL5jkMdpwuabPU6UeObqFqWAz2/fgtBHGkWt
-         BgP3FkwM9i62CV4aR6a3Jy15/NdWpa6YBRg9EkaBfA0M3tVxjnchZnm9gyEoaHiRnGY2
-         fEgXVNkruswC2eZeD6HuYZXHVILA8T6vuPVzsdbnOI6dQDeWY90q8IHyhth/gFQXo/l9
-         oTRfkz6UqO/6wsMmnrRTxgs0xfIpqhSzsV/AhLdjwXBRmhusxV0jTqhpSexYsjDwVHNY
-         /iDWb/ucSCz5/y1vKPmoq9oF6ucWxoxUIznfMxgCz6T4BpPIe0Ntmw1P62g51eftYa1c
-         +tSA==
+        d=gmail.com; s=20230601; t=1733174225; x=1733779025; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=FZHtDSci4mxW9uObrOpyGXF4tVtVRk+OAevn+2+RUUc=;
+        b=irXez6Hhcq3PUsFFmw9oUtx/fqzYNG1iWCVXZt7DX/0GoKVcyDJ9qxh6wvgrZEvMaG
+         UeTZmDv4CPDP1BaewBDjir0aACXZlzWfk2MHfy5JqyJ1aA8w59wN4nsTW0cW+iZeSck0
+         ny+8VOR0Mw1vpD28RJKLpyQzc5FMlnyOnfZ8xuiNjOJwxgaLiChFB+K33n2B9HPycOew
+         dLEoS6r3yPPZZmJQHld8tt1/tilsoVwJ6pSTXdnPZJkLB+mhAHrGL38+xat4Ijz8bcPC
+         ncWbFc+dyzyMdUvHdue9TlRJkAT2wo1iXa3q1E/Kb4wildxySe4R0E0WCHHcDVX7ElEL
+         ie0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733187635; x=1733792435;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=d+a3eBnHKvD8AQod1gMB/LKTW1oN3to08D39Docv/eQ=;
-        b=uGvH6wv2ICY+RrF7hZSmIfbkwX5rDVk/z9bIJeGeqqC59ogMromlMsprDMX9MayrfM
-         5hxbZbDCLj14QNyKty0UYdaqL5abveDxiMB+sAUSWEaUxGw9NBbRb0soC4b0tcAzUnWe
-         1jLE/hE/roQmAZg+m9DetBDg/jNtqRjWQHRmAlWAYEUO8bknbKCYFV/noTz6Ps3P86x5
-         9Xq9iff3tZc18FZNBdDpI4/GbGVLXknqASOZN/LOiEdApPUjFkWDIqkdwVXntKxBQLlY
-         Yrk4VrcCsDgAMSX7Vgod0odD8m2YDgOUppb0cLXwubwqMhAAePEMfgLp7XIRDQa09u0y
-         EluA==
-X-Forwarded-Encrypted: i=1; AJvYcCVJVkbBTkK7PfybxCDRB1Vovf7u5h2EmlRQic7/ywcefHfh1nfCxhXgR/bapS5LnwGVP/1dwR16JHc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxneZbyNEZVy/16SMidNwKHDFboBydXU9GudeoRP8/KBHxalRG/
-	t/p9IGvJKwv9t81fV5Te09xrlC5Whmi49UrT+mlTIGgWnVBsfKe4Qq53kdbru98uj8Z46Rx4Jga
-	rnR+SXlLRFnnTLsTr5bx2yq5A8RBTKA==
-X-Google-Smtp-Source: AGHT+IHlAWUl/6xhfzZLqge5+mtkzOWOXTSZQKntjfye63eE/1sMNIDsJdEGUh7DCOLnVMK90ja1kBMWTjMKXb6+Bxua
-X-Received: from ioay19.prod.google.com ([2002:a6b:c413:0:b0:841:802b:8e24])
- (user=kevinloughlin job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6602:2b85:b0:83a:872f:4b98 with SMTP id ca18e2360f4ac-8445b53e7d6mr104251439f.2.1733187625111;
- Mon, 02 Dec 2024 17:00:25 -0800 (PST)
-Date: Tue,  3 Dec 2024 00:59:20 +0000
-In-Reply-To: <20241203005921.1119116-1-kevinloughlin@google.com>
-Mime-Version: 1.0
-References: <20241203005921.1119116-1-kevinloughlin@google.com>
-X-Mailer: git-send-email 2.47.0.338.g60cca15819-goog
-Message-ID: <20241203005921.1119116-2-kevinloughlin@google.com>
-Subject: [RFC PATCH 1/2] x86, lib, xenpv: Add WBNOINVD helper functions
-From: Kevin Loughlin <kevinloughlin@google.com>
-To: linux-kernel@vger.kernel.org
-Cc: seanjc@google.com, pbonzini@redhat.com, tglx@linutronix.de, 
-	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, 
-	hpa@zytor.com, kvm@vger.kernel.org, thomas.lendacky@amd.com, 
-	pgonda@google.com, sidtelang@google.com, mizhang@google.com, 
-	virtualization@lists.linux.dev, xen-devel@lists.xenproject.org, 
-	bcm-kernel-feedback-list@broadcom.com, 
-	Kevin Loughlin <kevinloughlin@google.com>
+        d=1e100.net; s=20230601; t=1733174225; x=1733779025;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=FZHtDSci4mxW9uObrOpyGXF4tVtVRk+OAevn+2+RUUc=;
+        b=HJVfXfkQlSRzQxyoXSG6FvIKNvLF+I5xbLVWUyJrnk8e5k2Egg/O6EQJPCNAKboRA/
+         LMk56VXucbI3Spe3x2Cpzqvwo6HEcTE7fAeFiKIcSxpn9cCs73JRHC2NdA2GV8ERaJkC
+         561+pfMJLORRQt/IHo9In7n2patINbo8DUodyAVIPFqceYYN/+pfGdZsU8MUt3dTpa7K
+         j5lYEWbiCxhKBQlQAPxI7pRmLzkh3kMX8fShm4YzZSfLidzLt3a2asCEpyvTCPUjSRH9
+         cuLg1atQ8GU3FshhgOSsXnb3/IXg8hFawbssx4qEKBpT2GJVR1B4e2Bf8j8XPp82U8By
+         HmDA==
+X-Forwarded-Encrypted: i=1; AJvYcCUpyGStZGWb2KANvfgjaDIhZIkNbbhA3DMnq6J7XG5dX4SqT1KsHZVXe/AphJCB1YZJS2ihAZfj65Y=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx6uJTpnynMaW6/9e2oFkND21micrRNGFVfFdsmkHM4H6iQ4BzH
+	dhb4g1H1du6j81QSMMXP2SzC4t8ols82gXdOXJBw9KPdI9w64hGygqvqH7nDloX/yWgWY3D6Xhj
+	MkOBgrrtt7Hokqu2Xpk+GMYaOQfI=
+X-Gm-Gg: ASbGncvCS/hRcbvbMqABWyHohj1UDZQAguawq4E/01ZODmk9KaGQ3UrtOBKNYlkLQA+
+	b/dvU+/3PyfXcEmOu6IvlVrqPEgKFjg==
+X-Google-Smtp-Source: AGHT+IFDh1yb6d6zM40EzPJelJu2iVMH0WClLwmjysRWgfnYNSB8awfS5UuhO/EqqMc0eH1dffTLKgwFM99xaAmy4L8=
+X-Received: by 2002:a17:90b:1c09:b0:2ee:3cc1:793a with SMTP id
+ 98e67ed59e1d1-2ef0124c720mr32029a91.29.1733174224966; Mon, 02 Dec 2024
+ 13:17:04 -0800 (PST)
+MIME-Version: 1.0
+References: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
+ <20241115-converge-secs-to-jiffies-v2-9-911fb7595e79@linux.microsoft.com>
+In-Reply-To: <20241115-converge-secs-to-jiffies-v2-9-911fb7595e79@linux.microsoft.com>
+From: Christian Gmeiner <christian.gmeiner@gmail.com>
+Date: Mon, 2 Dec 2024 22:16:53 +0100
+Message-ID: <CAH9NwWdjXKH-AcKa-prwdqj2JqWLYVp1qM+0kxtQYSwo1J1c7g@mail.gmail.com>
+Subject: Re: [PATCH v2 09/21] drm/etnaviv: Convert timeouts to secs_to_jiffies()
+To: Easwar Hariharan <eahariha@linux.microsoft.com>
+Cc: Pablo Neira Ayuso <pablo@netfilter.org>, Jozsef Kadlecsik <kadlec@netfilter.org>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Julia Lawall <Julia.Lawall@inria.fr>, Nicolas Palix <nicolas.palix@imag.fr>, 
+	Daniel Mack <daniel@zonque.org>, Haojian Zhuang <haojian.zhuang@gmail.com>, 
+	Robert Jarzmik <robert.jarzmik@free.fr>, Russell King <linux@armlinux.org.uk>, 
+	Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, 
+	Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, 
+	Sven Schnelle <svens@linux.ibm.com>, Ofir Bitton <obitton@habana.ai>, 
+	Oded Gabbay <ogabbay@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, 
+	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+	Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, 
+	Shailend Chand <shailend@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	James Smart <james.smart@broadcom.com>, Dick Kennedy <dick.kennedy@broadcom.com>, 
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, 
+	"Martin K. Petersen" <martin.petersen@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Jens Axboe <axboe@kernel.dk>, Kalle Valo <kvalo@kernel.org>, Jeff Johnson <jjohnson@kernel.org>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	Jack Wang <jinpu.wang@cloud.ionos.com>, Marcel Holtmann <marcel@holtmann.org>, 
+	Johan Hedberg <johan.hedberg@gmail.com>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Xiubo Li <xiubli@redhat.com>, 
+	Ilya Dryomov <idryomov@gmail.com>, Josh Poimboeuf <jpoimboe@kernel.org>, Jiri Kosina <jikos@kernel.org>, 
+	Miroslav Benes <mbenes@suse.cz>, Petr Mladek <pmladek@suse.com>, 
+	Joe Lawrence <joe.lawrence@redhat.com>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+	Lucas Stach <l.stach@pengutronix.de>, Russell King <linux+etnaviv@armlinux.org.uk>, 
+	Louis Peens <louis.peens@corigine.com>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy <christophe.leroy@csgroup.eu>, 
+	Naveen N Rao <naveen@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>, netfilter-devel@vger.kernel.org, 
+	coreteam@netfilter.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	cocci@inria.fr, linux-arm-kernel@lists.infradead.org, 
+	linux-s390@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	intel-xe@lists.freedesktop.org, linux-scsi@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, linux-block@vger.kernel.org, 
+	linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
+	linux-mm@kvack.org, linux-bluetooth@vger.kernel.org, 
+	linux-staging@lists.linux.dev, linux-rpi-kernel@lists.infradead.org, 
+	ceph-devel@vger.kernel.org, live-patching@vger.kernel.org, 
+	linux-sound@vger.kernel.org, etnaviv@lists.freedesktop.org, 
+	oss-drivers@corigine.com, linuxppc-dev@lists.ozlabs.org, 
+	Anna-Maria Behnsen <anna-maria@linutronix.de>
 Content-Type: text/plain; charset="UTF-8"
 
-In line with WBINVD usage, add WBONINVD helper functions, accounting
-for kernels built with and without CONFIG_PARAVIRT_XXL.
+>
+> Changes made with the following Coccinelle rules:
+>
+> @@ constant C; @@
+>
+> - msecs_to_jiffies(C * 1000)
+> + secs_to_jiffies(C)
+>
+> @@ constant C; @@
+>
+> - msecs_to_jiffies(C * MSEC_PER_SEC)
+> + secs_to_jiffies(C)
+>
+> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 
-Signed-off-by: Kevin Loughlin <kevinloughlin@google.com>
----
- arch/x86/include/asm/paravirt.h       |  7 +++++++
- arch/x86/include/asm/paravirt_types.h |  1 +
- arch/x86/include/asm/smp.h            |  7 +++++++
- arch/x86/include/asm/special_insns.h  | 12 +++++++++++-
- arch/x86/kernel/paravirt.c            |  6 ++++++
- arch/x86/lib/cache-smp.c              | 12 ++++++++++++
- arch/x86/xen/enlighten_pv.c           |  1 +
- 7 files changed, 45 insertions(+), 1 deletion(-)
+Reviewed-by: Christian Gmeiner <cgmeiner@igalia.com>
 
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index d4eb9e1d61b8..c040af2d8eff 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -187,6 +187,13 @@ static __always_inline void wbinvd(void)
- 	PVOP_ALT_VCALL0(cpu.wbinvd, "wbinvd", ALT_NOT_XEN);
- }
- 
-+extern noinstr void pv_native_wbnoinvd(void);
-+
-+static __always_inline void wbnoinvd(void)
-+{
-+	PVOP_ALT_VCALL0(cpu.wbnoinvd, "wbnoinvd", ALT_NOT_XEN);
-+}
-+
- static inline u64 paravirt_read_msr(unsigned msr)
- {
- 	return PVOP_CALL1(u64, cpu.read_msr, msr);
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 8d4fbe1be489..9a3f38ad1958 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -87,6 +87,7 @@ struct pv_cpu_ops {
- #endif
- 
- 	void (*wbinvd)(void);
-+	void (*wbnoinvd)(void);
- 
- 	/* cpuid emulation, mostly so that caps bits can be disabled */
- 	void (*cpuid)(unsigned int *eax, unsigned int *ebx,
-diff --git a/arch/x86/include/asm/smp.h b/arch/x86/include/asm/smp.h
-index ca073f40698f..ecf93a243b83 100644
---- a/arch/x86/include/asm/smp.h
-+++ b/arch/x86/include/asm/smp.h
-@@ -112,6 +112,7 @@ void native_play_dead(void);
- void play_dead_common(void);
- void wbinvd_on_cpu(int cpu);
- int wbinvd_on_all_cpus(void);
-+int wbnoinvd_on_all_cpus(void);
- 
- void smp_kick_mwait_play_dead(void);
- 
-@@ -160,6 +161,12 @@ static inline int wbinvd_on_all_cpus(void)
- 	return 0;
- }
- 
-+static inline int wbnoinvd_on_all_cpus(void)
-+{
-+	wbnoinvd();
-+	return 0;
-+}
-+
- static inline struct cpumask *cpu_llc_shared_mask(int cpu)
- {
- 	return (struct cpumask *)cpumask_of(0);
-diff --git a/arch/x86/include/asm/special_insns.h b/arch/x86/include/asm/special_insns.h
-index aec6e2d3aa1d..c2d16ddcd79b 100644
---- a/arch/x86/include/asm/special_insns.h
-+++ b/arch/x86/include/asm/special_insns.h
-@@ -117,7 +117,12 @@ static inline void wrpkru(u32 pkru)
- 
- static __always_inline void native_wbinvd(void)
- {
--	asm volatile("wbinvd": : :"memory");
-+	asm volatile("wbinvd" : : : "memory");
-+}
-+
-+static __always_inline void native_wbnoinvd(void)
-+{
-+	asm volatile("wbnoinvd" : : : "memory");
- }
- 
- static inline unsigned long __read_cr4(void)
-@@ -173,6 +178,11 @@ static __always_inline void wbinvd(void)
- 	native_wbinvd();
- }
- 
-+static __always_inline void wbnoinvd(void)
-+{
-+	native_wbnoinvd();
-+}
-+
- #endif /* CONFIG_PARAVIRT_XXL */
- 
- static __always_inline void clflush(volatile void *__p)
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index fec381533555..a66b708d8a1e 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -121,6 +121,11 @@ noinstr void pv_native_wbinvd(void)
- 	native_wbinvd();
- }
- 
-+noinstr void pv_native_wbnoinvd(void)
-+{
-+	native_wbnoinvd();
-+}
-+
- static noinstr void pv_native_safe_halt(void)
- {
- 	native_safe_halt();
-@@ -149,6 +154,7 @@ struct paravirt_patch_template pv_ops = {
- 	.cpu.write_cr0		= native_write_cr0,
- 	.cpu.write_cr4		= native_write_cr4,
- 	.cpu.wbinvd		= pv_native_wbinvd,
-+	.cpu.wbnoinvd		= pv_native_wbnoinvd,
- 	.cpu.read_msr		= native_read_msr,
- 	.cpu.write_msr		= native_write_msr,
- 	.cpu.read_msr_safe	= native_read_msr_safe,
-diff --git a/arch/x86/lib/cache-smp.c b/arch/x86/lib/cache-smp.c
-index 7af743bd3b13..7ac5cca53031 100644
---- a/arch/x86/lib/cache-smp.c
-+++ b/arch/x86/lib/cache-smp.c
-@@ -20,3 +20,15 @@ int wbinvd_on_all_cpus(void)
- 	return 0;
- }
- EXPORT_SYMBOL(wbinvd_on_all_cpus);
-+
-+static void __wbnoinvd(void *dummy)
-+{
-+	wbnoinvd();
-+}
-+
-+int wbnoinvd_on_all_cpus(void)
-+{
-+	on_each_cpu(__wbnoinvd, NULL, 1);
-+	return 0;
-+}
-+EXPORT_SYMBOL(wbnoinvd_on_all_cpus);
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index d6818c6cafda..a5c76a6f8976 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1162,6 +1162,7 @@ static const typeof(pv_ops) xen_cpu_ops __initconst = {
- 		.write_cr4 = xen_write_cr4,
- 
- 		.wbinvd = pv_native_wbinvd,
-+		.wbnoinvd = pv_native_wbnoinvd,
- 
- 		.read_msr = xen_read_msr,
- 		.write_msr = xen_write_msr,
+> ---
+>  drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c b/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
+> index 721d633aece9d4c81f0019e4c55884f26ee61c60..0f5a2c885d0ab7029c7248e15d6ea3c31823b782 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_cmdbuf.c
+> @@ -100,7 +100,7 @@ int etnaviv_cmdbuf_init(struct etnaviv_cmdbuf_suballoc *suballoc,
+>                 mutex_unlock(&suballoc->lock);
+>                 ret = wait_event_interruptible_timeout(suballoc->free_event,
+>                                                        suballoc->free_space,
+> -                                                      msecs_to_jiffies(10 * 1000));
+> +                                                      secs_to_jiffies(10));
+>                 if (!ret) {
+>                         dev_err(suballoc->dev,
+>                                 "Timeout waiting for cmdbuf space\n");
+>
+> --
+> 2.34.1
+>
+
+
 -- 
-2.47.0.338.g60cca15819-goog
+greets
+--
+Christian Gmeiner, MSc
 
+https://christian-gmeiner.info/privacypolicy
 
