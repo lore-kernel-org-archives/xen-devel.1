@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76685D7833E
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Dec 2024 16:59:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.846766.1261944 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FAADD7833F
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Dec 2024 16:59:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.846773.1261993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tI9ll-0007sB-FP; Mon, 02 Dec 2024 16:59:33 +0000
+	id 1tI9lr-0000pm-1B; Mon, 02 Dec 2024 16:59:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 846766.1261944; Mon, 02 Dec 2024 16:59:33 +0000
+Received: by outflank-mailman (output) from mailman id 846773.1261993; Mon, 02 Dec 2024 16:59:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tI9ll-0007rJ-9L; Mon, 02 Dec 2024 16:59:33 +0000
-Received: by outflank-mailman (input) for mailman id 846766;
- Mon, 02 Dec 2024 16:59:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tI9lq-0000np-EU; Mon, 02 Dec 2024 16:59:38 +0000
+Received: by outflank-mailman (input) for mailman id 846773;
+ Mon, 02 Dec 2024 16:59:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=no4W=S3=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1tI9lk-0006x4-7h
- for xen-devel@lists.xenproject.org; Mon, 02 Dec 2024 16:59:32 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cbf9f788-b0ce-11ef-99a3-01e77a169b0f;
- Mon, 02 Dec 2024 17:59:30 +0100 (CET)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-53dd59a2bc1so4860354e87.2
- for <xen-devel@lists.xenproject.org>; Mon, 02 Dec 2024 08:59:30 -0800 (PST)
+ id 1tI9lp-0006wq-0U
+ for xen-devel@lists.xenproject.org; Mon, 02 Dec 2024 16:59:37 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cf78e0e6-b0ce-11ef-a0d2-8be0dac302b0;
+ Mon, 02 Dec 2024 17:59:36 +0100 (CET)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-53de8ecafeeso4908664e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Dec 2024 08:59:36 -0800 (PST)
 Received: from carlo-ubuntu.home.arpa
  (host-95-230-250-178.business.telecomitalia.it. [95.230.250.178])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa5998e64c4sm526802666b.97.2024.12.02.08.59.28
+ a640c23a62f3a-aa5998e64c4sm526802666b.97.2024.12.02.08.59.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 08:59:29 -0800 (PST)
+ Mon, 02 Dec 2024 08:59:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,306 +48,322 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cbf9f788-b0ce-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: cf78e0e6-b0ce-11ef-a0d2-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1733158770; x=1733763570; darn=lists.xenproject.org;
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1733158775; x=1733763575; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uPDYDU9V+cT61NhOvEC9qVLU2fWBxFfDL0pDRFCfADs=;
-        b=rxbhCpqgZafgQaWYMqPWpKNqw/+AHnJePzclEdzJd8CifIzEQUIjpXlieg9czVp7/3
-         6Tp4LdaC1hJY5nL93ERx6L7pJ2gVoKWwc1ugerBSDW1hXKERLW4xyd620l05rz9mFl7z
-         AmV3/D1/21g2gkJtRsXUTjMz9MVhrsYTIPpjwdQ8z/jAbfjgw68+vTXCYewMXDbQOdO4
-         1VN0mYWuThCOJCcyNx/z6D5CRg/AxWWAlcu3LyLd97aHLGV9ChHsGRX8lnjn+w4/yB8p
-         DHGe/YESaPN98a8/VmSZCVheQUCjzt3yoTP18n20o8WGoEQfuxyU3Hqa4A+5WUQPBzkk
-         sFHQ==
+        bh=SQLU0z+L0dGPs9j3VJOLeVLjnDV4HcwqVQ59IBOieiw=;
+        b=l6secaQPM6CHW3+nmmnL/eFyIXRuh90goQzrmrT6phh58IRCrtrj6uQzpQsZ7+nhM5
+         XcqCi9EQ6nwXmqUGWNu2emj3dIXSjWhDqdWxPF3uX+5E3/jD3hc8B80nyphE274o7qpM
+         kOzmQTJemldY28GrYMeg0eOxdHgnveekE8PasW/0pohdjTrCCrfC5jyMFKNtS4O5/nCb
+         JZE2gopDieSY9HpDwVruEdG+zzqdoNWDAp84B5fGYTsiHGiATYiN3lzd7D/HG9Cjj8SK
+         BTmFtRWpe4lytzXk7ng2RckRT6HN2HS2b43CPAKSPddvq0OPUYgG79yc6e4QthbHVmWZ
+         F4IQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733158770; x=1733763570;
+        d=1e100.net; s=20230601; t=1733158775; x=1733763575;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uPDYDU9V+cT61NhOvEC9qVLU2fWBxFfDL0pDRFCfADs=;
-        b=UATpVOX/3ZL2uRae7Bkm/6CUASA+VBsxjVHGNAjFUFfqs1Ev80yQsI4rgC+Wmc/QQQ
-         WlNCYDagXnUbohNoTmAqi+Ej+P3ULyK837vZvssviBw1Kw+nG/pDtlNkDioyscv1+1sZ
-         q5c03qQDFMerBcoqH9EnwtH8Ds0e18G03MgBOFID2BBjQ+ZqdO95dwqujpouWmD9Kqq1
-         qcGUGx6mIstCzKqAfpUB4fvCrDL83ujHWGZ51m95/N4lIA4xeXORIcG3RpmPE6P1KPYc
-         e7H997EC6xZRo1Tl045JO4HbPMT03Xd2ywvHO8d4ej05r42aBVgTfbzgTy4nkCiGSq3j
-         +fmQ==
-X-Gm-Message-State: AOJu0Ywa+GwoMbWKiwnPO6pPVg6j/6rac7ULnHjz2obvBzLTSLYvIpFL
-	9VWrq1hLLrO6lzTPLZtqAKA5bJAdXZopJJGGGg7VuQ+6PU+OmSCQDkNpb+dquyS+C5XUMaeKqrn
-	u
-X-Gm-Gg: ASbGncvZPIMtNYuedDV4ywY1qUg9qB/lETg4VPzoydzvj7a/8cISwsBf5ntS8DGdYXJ
-	7U/ILhX9ky+FgB+nzBYB8//+7oKwtPs22fqj93pFO+FkoLe273ByKv7dxpP7/0xYM2wBJJ8kmEg
-	2zl9YHnUry/ExGCJ3Pm9c2nwLW0GpEFqOuovmwSZFwJWRpl+AlWuRJadF3YH94bozC/dzMir60i
-	FXYnA9X6U2p64Zgsqq07vfAxqk27l1aXiVkClAAvVWEoNZ+CQRVrQxG6MiOAqsTdVGopoA2jLyU
-	klSK2njhcufH+sduFTNL/g9O53dUcelj3Loo2aCJ9EgBBj/HUke6
-X-Google-Smtp-Source: AGHT+IGU9K5UrKiaW80g16K3SmuTHJjnReFkYfE1nN+bAa8o8fbCMxAm+qhH44scGK11AjAKmyVRag==
-X-Received: by 2002:a05:6512:3ba3:b0:53d:cf93:8072 with SMTP id 2adb3069b0e04-53df00ff250mr12783810e87.38.1733158769685;
-        Mon, 02 Dec 2024 08:59:29 -0800 (PST)
+        bh=SQLU0z+L0dGPs9j3VJOLeVLjnDV4HcwqVQ59IBOieiw=;
+        b=Gww2ztHHMpZgnvJmP95ano3/5PN3CQmOTdvMd1lG+ZGtPujT+UJPyKsxQqfzyFwVpV
+         dta1mMgH8FiMeCdPl+/xMSG8+g+HCs+dBhYOVjL5DKgJf1dLPnPGiuZodtfvOakyUzmJ
+         mkuy8TXcvb7kJP1t0gwS/9UxJ5YRK7BHVG9pqEjP+zxavaH4uY0czsYZsoc2/ypuFicG
+         x1zury2anvqS+5KC/J1Slcvbc82CFLFoRwIiSYZbnHS37fr9ltPusZrZ5XlLzfbFDMyI
+         ZUev1Ex8TSUmj7ZGFfF0lo41JOzcAq0tHRQ8il1afoY5KG0Fhj44UguCq6aE5VEQhyrw
+         JyNw==
+X-Gm-Message-State: AOJu0YywZK9//xO+dVBj5+8HD3Q1QjGthoOZnO/1Qtc0JuBQD2WRhH58
+	4GzIM8AIXHx3x/t5CEJ+TDW6+CKbc45fMWjRorVEMPoWOvjfmf/llGadupr2qTZGZfksTVuVBcO
+	w
+X-Gm-Gg: ASbGnctRly8hboR8KVBSqJUf5UuH3rWC9GJBTQo9dGLv3o+J+eAeqisIEV06lm/jIo2
+	dSP5qWy9C0OWLTZygANR5CWbNiPzlRHxcv8pI71xtpFvliKIAYXzP4xCMfF6ydUtElZQ4gVkCyR
+	siS8qA2x30Gp5oU/TbeXVqHceB4kivX8in5rtnnz3PqCcAgUn3You8xzfMMDbkmI8SBEeiSIGYN
+	5kAjqHLKLuCn/wRu/uOrCHjvTGvB3f73or4vqcfC6eJyUxBbmvtjC+KLEEmPEKEo9Y5mu3FEL1/
+	g0rUKuKgFR3LfYYP9y0lumFB7CVncGgmevJiWsIz84gEYCLqtI2o
+X-Google-Smtp-Source: AGHT+IFcthVhkf4BkBdZ3UvYNyO3JNKzXHzfDVFYUXTj/ROlFjZIToNYkja9jc7/mLFmlkM7PuSk2A==
+X-Received: by 2002:a05:6512:3e1d:b0:539:e12c:bba7 with SMTP id 2adb3069b0e04-53df00a9f2amr12143887e87.12.1733158775555;
+        Mon, 02 Dec 2024 08:59:35 -0800 (PST)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
 	marco.solieri@minervasys.tech,
 	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v11 05/12] xen: extend domctl interface for cache coloring
-Date: Mon,  2 Dec 2024 17:59:14 +0100
-Message-ID: <20241202165921.249585-6-carlo.nonato@minervasys.tech>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v11 11/12] xen/arm: make consider_modules() available for xen relocation
+Date: Mon,  2 Dec 2024 17:59:20 +0100
+Message-ID: <20241202165921.249585-12-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241202165921.249585-1-carlo.nonato@minervasys.tech>
 References: <20241202165921.249585-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new domctl hypercall to allow the user to set LLC coloring
-configurations. Colors can be set only once, just after domain creation,
-since recoloring isn't supported.
+Cache coloring must physically relocate Xen in order to color the hypervisor
+and consider_modules() is a key function that is needed to find a new
+available physical address.
 
-Based on original work from: Luca Miccio <lucmiccio@gmail.com>
+672d67f339c0 ("xen/arm: Split MMU-specific setup_mm() and related code out")
+moved consider_modules() under arm32. Move it to mmu/setup.c and make it
+non-static so that it can be used outside.
 
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
 v11:
-- no changes
+- removed useless #include
 v10:
 - no changes
 v9:
-- minor printk message changes
-- moved domain_llc_coloring_free() in this patch
+- no changes
 v8:
-- fixed memory leak on error path of domain_set_llc_colors()
+- patch adapted to new changes to consider_modules()
 v7:
-- -EOPNOTSUPP returned in case of hypercall called without llc_coloring_enabled
-- domain_set_llc_colors_domctl() renamed to domain_set_llc_colors()
-- added padding and input bound checks to domain_set_llc_colors()
-- removed alloc_colors() helper usage from domain_set_llc_colors()
+- moved consider_modules() to arm/mmu/setup.c
 v6:
-- reverted the XEN_DOMCTL_INTERFACE_VERSION bump
-- reverted to uint32 for the guest handle
-- explicit padding added to the domctl struct
-- rewrote domain_set_llc_colors_domctl() to be more explicit
-v5:
-- added a new hypercall to set colors
-- uint for the guest handle
-v4:
-- updated XEN_DOMCTL_INTERFACE_VERSION
+- new patch
 ---
- xen/common/domain.c            |  3 ++
- xen/common/domctl.c            | 10 +++++++
- xen/common/llc-coloring.c      | 55 ++++++++++++++++++++++++++++++++--
- xen/include/public/domctl.h    |  9 ++++++
- xen/include/xen/llc-coloring.h |  5 ++++
- 5 files changed, 79 insertions(+), 3 deletions(-)
+ xen/arch/arm/arm32/mmu/mm.c      | 95 +-------------------------------
+ xen/arch/arm/include/asm/setup.h |  3 +
+ xen/arch/arm/mmu/setup.c         | 94 +++++++++++++++++++++++++++++++
+ 3 files changed, 98 insertions(+), 94 deletions(-)
 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 92263a4fbd..842a23751a 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -34,6 +34,7 @@
- #include <xen/xenoprof.h>
- #include <xen/irq.h>
- #include <xen/argo.h>
-+#include <xen/llc-coloring.h>
- #include <asm/p2m.h>
- #include <asm/processor.h>
- #include <public/sched.h>
-@@ -1276,6 +1277,8 @@ void domain_destroy(struct domain *d)
- {
-     BUG_ON(!d->is_dying);
- 
-+    domain_llc_coloring_free(d);
-+
-     /* May be already destroyed, or get_domain() can race us. */
-     if ( atomic_cmpxchg(&d->refcnt, 0, DOMAIN_DESTROYED) != 0 )
-         return;
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index ea16b75910..6387dddbcd 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -8,6 +8,7 @@
- 
- #include <xen/types.h>
- #include <xen/lib.h>
-+#include <xen/llc-coloring.h>
- #include <xen/err.h>
- #include <xen/mm.h>
- #include <xen/sched.h>
-@@ -866,6 +867,15 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-                 __HYPERVISOR_domctl, "h", u_domctl);
-         break;
- 
-+    case XEN_DOMCTL_set_llc_colors:
-+        if ( op->u.set_llc_colors.pad )
-+            ret = -EINVAL;
-+        else if ( llc_coloring_enabled )
-+            ret = domain_set_llc_colors(d, &op->u.set_llc_colors);
-+        else
-+            ret = -EOPNOTSUPP;
-+        break;
-+
-     default:
-         ret = arch_do_domctl(op, d, u_domctl);
-         break;
-diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-index 8f076849c1..2a0ee695c8 100644
---- a/xen/common/llc-coloring.c
-+++ b/xen/common/llc-coloring.c
-@@ -5,6 +5,7 @@
-  * Copyright (C) 2024, Advanced Micro Devices, Inc.
-  * Copyright (C) 2024, Minerva Systems SRL
-  */
-+#include <xen/guest_access.h>
- #include <xen/keyhandler.h>
- #include <xen/llc-coloring.h>
+diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
+index 063611412b..903d946f07 100644
+--- a/xen/arch/arm/arm32/mmu/mm.c
++++ b/xen/arch/arm/arm32/mmu/mm.c
+@@ -7,6 +7,7 @@
  #include <xen/param.h>
-@@ -109,8 +110,7 @@ static void print_colors(const unsigned int colors[], unsigned int num_colors)
-     printk(" }\n");
+ #include <xen/pfn.h>
+ #include <asm/fixmap.h>
++#include <asm/setup.h>
+ #include <asm/static-memory.h>
+ #include <asm/static-shmem.h>
+ 
+@@ -31,100 +32,6 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
+     directmap_virt_end = XENHEAP_VIRT_START + nr_mfns * PAGE_SIZE;
  }
  
--static bool __init check_colors(const unsigned int colors[],
--                                unsigned int num_colors)
-+static bool check_colors(const unsigned int colors[], unsigned int num_colors)
- {
-     unsigned int i;
+-/*
+- * Returns the end address of the highest region in the range s..e
+- * with required size and alignment that does not conflict with the
+- * modules from first_mod to nr_modules.
+- *
+- * For non-recursive callers first_mod should normally be 0 (all
+- * modules and Xen itself) or 1 (all modules but not Xen).
+- */
+-static paddr_t __init consider_modules(paddr_t s, paddr_t e,
+-                                       uint32_t size, paddr_t align,
+-                                       int first_mod)
+-{
+-    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
+-#ifdef CONFIG_STATIC_SHM
+-    const struct membanks *shmem = bootinfo_get_shmem();
+-#endif
+-    const struct bootmodules *mi = &bootinfo.modules;
+-    int i;
+-    int nr;
+-
+-    s = (s+align-1) & ~(align-1);
+-    e = e & ~(align-1);
+-
+-    if ( s > e ||  e - s < size )
+-        return 0;
+-
+-    /* First check the boot modules */
+-    for ( i = first_mod; i < mi->nr_mods; i++ )
+-    {
+-        paddr_t mod_s = mi->module[i].start;
+-        paddr_t mod_e = mod_s + mi->module[i].size;
+-
+-        if ( s < mod_e && mod_s < e )
+-        {
+-            mod_e = consider_modules(mod_e, e, size, align, i+1);
+-            if ( mod_e )
+-                return mod_e;
+-
+-            return consider_modules(s, mod_s, size, align, i+1);
+-        }
+-    }
+-
+-    /*
+-     * i is the current bootmodule we are evaluating, across all
+-     * possible kinds of bootmodules.
+-     *
+-     * When retrieving the corresponding reserved-memory addresses, we
+-     * need to index the reserved_mem bank starting from 0, and only counting
+-     * the reserved-memory modules. Hence, we need to use i - nr.
+-     */
+-    nr = mi->nr_mods;
+-    for ( ; i - nr < reserved_mem->nr_banks; i++ )
+-    {
+-        paddr_t r_s = reserved_mem->bank[i - nr].start;
+-        paddr_t r_e = r_s + reserved_mem->bank[i - nr].size;
+-
+-        if ( s < r_e && r_s < e )
+-        {
+-            r_e = consider_modules(r_e, e, size, align, i + 1);
+-            if ( r_e )
+-                return r_e;
+-
+-            return consider_modules(s, r_s, size, align, i + 1);
+-        }
+-    }
+-
+-#ifdef CONFIG_STATIC_SHM
+-    nr += reserved_mem->nr_banks;
+-    for ( ; i - nr < shmem->nr_banks; i++ )
+-    {
+-        paddr_t r_s, r_e;
+-
+-        r_s = shmem->bank[i - nr].start;
+-
+-        /* Shared memory banks can contain INVALID_PADDR as start */
+-        if ( INVALID_PADDR == r_s )
+-            continue;
+-
+-        r_e = r_s + shmem->bank[i - nr].size;
+-
+-        if ( s < r_e && r_s < e )
+-        {
+-            r_e = consider_modules(r_e, e, size, align, i + 1);
+-            if ( r_e )
+-                return r_e;
+-
+-            return consider_modules(s, r_s, size, align, i + 1);
+-        }
+-    }
+-#endif
+-
+-    return e;
+-}
+-
+ /*
+  * Find a contiguous region that fits in the static heap region with
+  * required size and alignment, and return the end address of the region
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 64c227d171..0c560d141f 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -89,6 +89,9 @@ struct init_info
+     unsigned int cpuid;
+ };
  
-@@ -191,7 +191,7 @@ void domain_dump_llc_colors(const struct domain *d)
-     print_colors(d->llc_colors, d->num_llc_colors);
++paddr_t consider_modules(paddr_t s, paddr_t e, uint32_t size, paddr_t align,
++                         int first_mod);
++
+ #endif
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
+index 9664e85ee6..196974f3e2 100644
+--- a/xen/arch/arm/mmu/setup.c
++++ b/xen/arch/arm/mmu/setup.c
+@@ -222,6 +222,100 @@ static void xen_pt_enforce_wnx(void)
+     flush_xen_tlb_local();
  }
  
--static void __init domain_set_default_colors(struct domain *d)
-+static void domain_set_default_colors(struct domain *d)
- {
-     printk(XENLOG_WARNING
-            "LLC color config not found for %pd, using all colors\n", d);
-@@ -228,6 +228,55 @@ int __init dom0_set_llc_colors(struct domain *d)
-     return 0;
- }
- 
-+int domain_set_llc_colors(struct domain *d,
-+                          const struct xen_domctl_set_llc_colors *config)
++/*
++ * Returns the end address of the highest region in the range s..e
++ * with required size and alignment that does not conflict with the
++ * modules from first_mod to nr_modules.
++ *
++ * For non-recursive callers first_mod should normally be 0 (all
++ * modules and Xen itself) or 1 (all modules but not Xen).
++ */
++paddr_t __init consider_modules(paddr_t s, paddr_t e,
++                                uint32_t size, paddr_t align,
++                                int first_mod)
 +{
-+    unsigned int *colors;
++    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
++#ifdef CONFIG_STATIC_SHM
++    const struct membanks *shmem = bootinfo_get_shmem();
++#endif
++    const struct bootmodules *mi = &bootinfo.modules;
++    int i;
++    int nr;
 +
-+    if ( d->num_llc_colors )
-+        return -EEXIST;
++    s = (s+align-1) & ~(align-1);
++    e = e & ~(align-1);
 +
-+    if ( !config->num_llc_colors )
-+    {
-+        domain_set_default_colors(d);
++    if ( s > e ||  e - s < size )
 +        return 0;
-+    }
 +
-+    if ( config->num_llc_colors > max_nr_colors )
-+        return -EINVAL;
-+
-+    colors = xmalloc_array(unsigned int, config->num_llc_colors);
-+    if ( !colors )
-+        return -ENOMEM;
-+
-+    if ( copy_from_guest(colors, config->llc_colors, config->num_llc_colors) )
++    /* First check the boot modules */
++    for ( i = first_mod; i < mi->nr_mods; i++ )
 +    {
-+        xfree(colors);
-+        return -EFAULT;
++        paddr_t mod_s = mi->module[i].start;
++        paddr_t mod_e = mod_s + mi->module[i].size;
++
++        if ( s < mod_e && mod_s < e )
++        {
++            mod_e = consider_modules(mod_e, e, size, align, i+1);
++            if ( mod_e )
++                return mod_e;
++
++            return consider_modules(s, mod_s, size, align, i+1);
++        }
 +    }
 +
-+    if ( !check_colors(colors, config->num_llc_colors) )
++    /*
++     * i is the current bootmodule we are evaluating, across all
++     * possible kinds of bootmodules.
++     *
++     * When retrieving the corresponding reserved-memory addresses, we
++     * need to index the reserved_mem bank starting from 0, and only counting
++     * the reserved-memory modules. Hence, we need to use i - nr.
++     */
++    nr = mi->nr_mods;
++    for ( ; i - nr < reserved_mem->nr_banks; i++ )
 +    {
-+        printk(XENLOG_ERR "%pd: bad LLC color config\n", d);
-+        xfree(colors);
-+        return -EINVAL;
++        paddr_t r_s = reserved_mem->bank[i - nr].start;
++        paddr_t r_e = r_s + reserved_mem->bank[i - nr].size;
++
++        if ( s < r_e && r_s < e )
++        {
++            r_e = consider_modules(r_e, e, size, align, i + 1);
++            if ( r_e )
++                return r_e;
++
++            return consider_modules(s, r_s, size, align, i + 1);
++        }
 +    }
 +
-+    d->llc_colors = colors;
-+    d->num_llc_colors = config->num_llc_colors;
++#ifdef CONFIG_STATIC_SHM
++    nr += reserved_mem->nr_banks;
++    for ( ; i - nr < shmem->nr_banks; i++ )
++    {
++        paddr_t r_s, r_e;
 +
-+    return 0;
-+}
++        r_s = shmem->bank[i - nr].start;
 +
-+void domain_llc_coloring_free(struct domain *d)
-+{
-+    if ( !llc_coloring_enabled || d->llc_colors == default_colors )
-+        return;
++        /* Shared memory banks can contain INVALID_PADDR as start */
++        if ( INVALID_PADDR == r_s )
++            continue;
 +
-+    /* free pointer-to-const using __va(__pa()) */
-+    xfree(__va(__pa(d->llc_colors)));
++        r_e = r_s + shmem->bank[i - nr].size;
++
++        if ( s < r_e && r_s < e )
++        {
++            r_e = consider_modules(r_e, e, size, align, i + 1);
++            if ( r_e )
++                return r_e;
++
++            return consider_modules(s, r_s, size, align, i + 1);
++        }
++    }
++#endif
++
++    return e;
 +}
 +
  /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 353f831e40..e2d392d1e5 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -1236,6 +1236,13 @@ struct xen_domctl_dt_overlay {
- };
- #endif
- 
-+struct xen_domctl_set_llc_colors {
-+    /* IN LLC coloring parameters */
-+    uint32_t num_llc_colors;
-+    uint32_t pad;
-+    XEN_GUEST_HANDLE_64(uint32) llc_colors;
-+};
-+
- struct xen_domctl {
-     uint32_t cmd;
- #define XEN_DOMCTL_createdomain                   1
-@@ -1325,6 +1332,7 @@ struct xen_domctl {
- #define XEN_DOMCTL_set_paging_mempool_size       86
- #define XEN_DOMCTL_dt_overlay                    87
- #define XEN_DOMCTL_gsi_permission                88
-+#define XEN_DOMCTL_set_llc_colors                89
- #define XEN_DOMCTL_gdbsx_guestmemio            1000
- #define XEN_DOMCTL_gdbsx_pausevcpu             1001
- #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
-@@ -1391,6 +1399,7 @@ struct xen_domctl {
- #if defined(__arm__) || defined(__aarch64__)
-         struct xen_domctl_dt_overlay        dt_overlay;
- #endif
-+        struct xen_domctl_set_llc_colors    set_llc_colors;
-         uint8_t                             pad[128];
-     } u;
- };
-diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
-index 4ce14e4e4a..cbebe0816c 100644
---- a/xen/include/xen/llc-coloring.h
-+++ b/xen/include/xen/llc-coloring.h
-@@ -9,6 +9,7 @@
- #define __XEN_LLC_COLORING_H__
- 
- struct domain;
-+struct xen_domctl_set_llc_colors;
- 
- #ifdef CONFIG_LLC_COLORING
- extern int8_t llc_coloring_enabled;
-@@ -16,17 +17,21 @@ extern int8_t llc_coloring_enabled;
- void llc_coloring_init(void);
- void dump_llc_coloring_info(void);
- void domain_dump_llc_colors(const struct domain *d);
-+void domain_llc_coloring_free(struct domain *d);
- #else
- #define llc_coloring_enabled false
- 
- static inline void llc_coloring_init(void) {}
- static inline void dump_llc_coloring_info(void) {}
- static inline void domain_dump_llc_colors(const struct domain *d) {}
-+static inline void domain_llc_coloring_free(struct domain *d) {}
- #endif
- 
- unsigned int get_llc_way_size(void);
- void arch_llc_coloring_init(void);
- int dom0_set_llc_colors(struct domain *d);
-+int domain_set_llc_colors(struct domain *d,
-+                          const struct xen_domctl_set_llc_colors *config);
- 
- #endif /* __XEN_LLC_COLORING_H__ */
- 
+  * Boot-time pagetable setup.
+  * Changes here may need matching changes in head.S
 -- 
 2.43.0
 
