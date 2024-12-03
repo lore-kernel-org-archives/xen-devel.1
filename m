@@ -4,42 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00EE5E69E9D
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 10:23:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.847829.1262888 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5478E69E88
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 10:25:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.847848.1262897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIQ4K-0007qI-BM; Tue, 03 Dec 2024 10:23:48 +0000
+	id 1tIQ5z-0000Ol-MW; Tue, 03 Dec 2024 10:25:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 847829.1262888; Tue, 03 Dec 2024 10:23:48 +0000
+Received: by outflank-mailman (output) from mailman id 847848.1262897; Tue, 03 Dec 2024 10:25:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIQ4K-0007qB-8C; Tue, 03 Dec 2024 10:23:48 +0000
-Received: by outflank-mailman (input) for mailman id 847829;
- Tue, 03 Dec 2024 10:23:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tIQ5z-0000Oe-JX; Tue, 03 Dec 2024 10:25:31 +0000
+Received: by outflank-mailman (input) for mailman id 847848;
+ Tue, 03 Dec 2024 10:25:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lc0I=S4=redhat.com=thuth@srs-se1.protection.inumbo.net>)
- id 1tIQ4I-0007oa-IP
- for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 10:23:46 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ac4976ed-b160-11ef-99a3-01e77a169b0f;
- Tue, 03 Dec 2024 11:23:44 +0100 (CET)
-Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
- [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-594-pNdf7GLvNait0MZc-Mskig-1; Tue, 03 Dec 2024 05:23:40 -0500
-Received: by mail-yw1-f199.google.com with SMTP id
- 00721157ae682-6ef7c67eeb8so41018527b3.3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Dec 2024 02:23:40 -0800 (PST)
-Received: from [192.168.0.7] (ip-109-42-51-199.web.vodafone.de.
- [109.42.51.199]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d87fe890a3sm53397756d6.29.2024.12.03.02.23.36
+ (envelope-from <SRS0=D5Za=S4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tIQ5x-0000OY-Nt
+ for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 10:25:29 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ead32d23-b160-11ef-a0d3-8be0dac302b0;
+ Tue, 03 Dec 2024 11:25:28 +0100 (CET)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-385f4a4093eso1311336f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Dec 2024 02:25:28 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-385eeb999f4sm6692160f8f.109.2024.12.03.02.25.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Dec 2024 02:23:39 -0800 (PST)
+ Tue, 03 Dec 2024 02:25:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,159 +47,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac4976ed-b160-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1733221423;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=kmyxVJ+YUkcgpMOIJZRmGj3gv31AXTUXR3Mg+4OB2T0=;
-	b=dwlktHBupXvfVnzHUbOVNwXSA0UKg3dv1c6lWCuw5sfp9Pu/Oww2b+ag85Ikjp/HbEPBJ5
-	DC9cVlE9eHwB1DYEbn9dKieaYPEM5J+3toH8hoMYoEE5XKkMYqGRNyiReDCOs2S0C1XeVA
-	8JS4mVuLyv0LTkf2WciQCyU0Pqh8UEs=
-X-MC-Unique: pNdf7GLvNait0MZc-Mskig-1
-X-Mimecast-MFC-AGG-ID: pNdf7GLvNait0MZc-Mskig
+X-Inumbo-ID: ead32d23-b160-11ef-a0d3-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1733221528; x=1733826328; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=VPh2ldz1/G2jFFaI8XyezhAGeaXAdERd0SaJwon5RNs=;
+        b=VtIdy2sGpaUlRIKsy2iUrSIW46rd4R2d8h7nq5GIqGPsLjn6JRiqindwJFQf00lFdH
+         X1Lu6m57juf2Qcz3tas79r/yDuokKT29OxIR6aO9jsTiZGKNTCWUheZYk0SLRH4WSyHH
+         dlrAPB4WW087HMfR1NidkycjQUgPMGLfl9z9VN7/ZO7UgU75FSAtS6Qs3fh9y7Wa6RH+
+         QYArTdf5LepVbPaWhN53vGct9EijMDD7jBlwHFxPVR9R1/LZTpaIwB5H/FSBkqkgq31J
+         d3Mn9Zfn23iOBIrStRbS4L58TyW3z8uP/iPFGyyEdJ9s2A4mJywyjm6zXfCzKe6CJ4jf
+         /QcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733221420; x=1733826220;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kmyxVJ+YUkcgpMOIJZRmGj3gv31AXTUXR3Mg+4OB2T0=;
-        b=jlYaogiasyZDpaiV1qi+REsK4+3K13lyKqXNdZzWWSh6HhXbDM/4ch5OkHVXAKOXuS
-         VHqbiagIdbhUluEkttlfp8ZathH9AMkyGOu9ckaJxqcHEobNrgYKawA8uVqy1vzX/TGK
-         wixj8uz/hrzsylDfFlhWmbSauDAHHOuxoWLBY1JWr18yL11xr/+83Fv+vo7eDfympxlN
-         cIJB3RJRuXxMi/+ehytBgRLMcQrNRnNU+XijrhfJMFTDrC0J6KDn/w/2vEZpLe8iO2wY
-         dAEcI4f2mBFoDn+IxtmBPTf8kM58cV3m44wcVBR0TLtMcZDB53b59V/E/MH+SUeylwZe
-         sYtg==
-X-Forwarded-Encrypted: i=1; AJvYcCVCGIh6OBh2dCZJ8q5DdPIi8H76fJMWohQDIonR7R9T5jqMZlkBnQ7tkMMA6YQFX+JrOeY/xBzq4PI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw6pyAFllDt2Nl6iCIZz0I5H1MF8fFxZUwSbzjRZlfwk/+kbT0I
-	XWPNprgG2hc+ondcfdo9mTB3GXVIEAg4PpvJ8JKeYqaZRuZVhLM4l9WUyLqilWpe0aVHJ8IRvTN
-	hwgqIGR81ftaYlWONEjECjj+mahGdzywAubi+7rtwLILRhrgy4mZehbcPNpdc+9Mu
-X-Gm-Gg: ASbGncs3Y4GG5AVJsRmdNvDoi4D8eLqWxVQfBA+5d9m/HYYBeMRVjeMnoc77gnxs7t1
-	rrhXLA2Quvv1kGbrL6/lH2FOflH70mB85GjB2iXDhEEbsLZWvvFN1zTyR/E+tQBSedo9AQmSmQq
-	Amv5Q3Y99oAHoW13u1jBxGMhJ6Wow68LkIPFZ/LA0yWOYAdltiIbIs1TQOxQhNjfdUqctSOvCkT
-	DzS675i9adrp/BeUdlBlvCmErmTLdQzcqvRujLqpLoX2XNSQ23r1umeFOBbMfxcp8/67kv2GaSE
-	UIDAFQ==
-X-Received: by 2002:a05:690c:498c:b0:6ef:6d37:1844 with SMTP id 00721157ae682-6eface0165amr26104437b3.7.1733221419704;
-        Tue, 03 Dec 2024 02:23:39 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHhLH5mlnPSZDMavmUUFnJVktKyJMWmluLB4C8Hy0mLsNN/3vDHojrXbS5zn/OAP8RhyeXzIw==
-X-Received: by 2002:a05:690c:498c:b0:6ef:6d37:1844 with SMTP id 00721157ae682-6eface0165amr26104227b3.7.1733221419366;
-        Tue, 03 Dec 2024 02:23:39 -0800 (PST)
-Message-ID: <a4f32fe4-37e8-4695-a2d2-46943b4893d7@redhat.com>
-Date: Tue, 3 Dec 2024 11:23:34 +0100
+        d=1e100.net; s=20230601; t=1733221528; x=1733826328;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VPh2ldz1/G2jFFaI8XyezhAGeaXAdERd0SaJwon5RNs=;
+        b=VZ5NS62Xtqzh1Uvv1/ofjlL0p5Z2e9mI3w17yeLlaSA2GpeLyiXkSqlRcQdmwDwyko
+         lWKD6hDZLttadBKqMfgrA9kbWgi2odRu+Oh2yHOtNoxtm+jrrcH0U6X2qwnAYSbsQK3E
+         8mUlVhpHZdTz3j7u7TYJ823OTOqVUkLB0J0+jqrb6JZJUYsTJQNN8z1i+fTUgXN5zCiD
+         I0lMXCO3+K6BDCLa9YkV0mNStmPJe9/2+nO2bVjmNjZ0S9BdbsoHg0MImom90AmmgvdN
+         CFGAvpZN+XfwO0/FYpB22+/0O+XBCCvJO1y6WvpP2q5SfXcFHsm46rH/DnmaJehOsSkS
+         IEDQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVp8b7ZSCUJfS9ww0d7kpgaF5Ro53sg2GrYtT1ZrWn1/YSVX7PV6kg+OjRpKEhmVHzHdB+LCXjU32I=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw5YqPPGG1+Kfz9JSuXzNLoTlDImI5fGySTtkQa95xhoeKVZ6Wc
+	4+dqhZWUow4pLUbg7ODCPwTeiJQTMQL7ibZKuz2Hvb6rbZ7sRIi2IRc+yK5+Fw==
+X-Gm-Gg: ASbGncuOObVfraDtHTgeRZGeHhJaX7MaElgxHvU5gwtPloTM0zq5YF4UdDhtM2bmq9x
+	yKoL0DslNnWkhKyGhmdNLvjPnsz6tWJj4fPAHs3BqLM/p0yw21vLK/Ro1z/L6sHCXBQ8VtG3Adw
+	57I/1JLlruB1wq3N7picQbWem7B0a0/G7OmuIvA1itWVBuIfsSeHK/kRCDKpDPEO1F9vJ53qiDP
+	7ML84VILAUKN/vzn8As8Gbg54ftZBpkTJEwiuUGPDSsXKMXKa+bdxGr3JyevFBxx8+nZGpEYsKb
+	eLrEjK90qQszx5baQUXtRJsMkMnKlXc1ZAI=
+X-Google-Smtp-Source: AGHT+IFHNtlggfT7nu9s/M230KeN+MlGNk+ZRjf9NsqYgO5w8V/NK1qoxAJKJonFr+ZM9yvzilK+Mw==
+X-Received: by 2002:a5d:64cb:0:b0:385:e43a:4ded with SMTP id ffacd0b85a97d-385fd42d1b4mr1739176f8f.57.1733221528217;
+        Tue, 03 Dec 2024 02:25:28 -0800 (PST)
+Message-ID: <617be60d-1807-4bae-98cc-2a438598e07f@suse.com>
+Date: Tue, 3 Dec 2024 11:25:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] tests/functional/test_virtio_gpu: Remove legacy
- '-machine foo,accel=bar'
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org,
- Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org
-References: <20241203092153.60590-1-philmd@linaro.org>
- <20241203092153.60590-3-philmd@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20241203092153.60590-3-philmd@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: wIf5NZF8eGUBMIeYhrmytIKAme05zwBleI6hKqdn80Y_1733221420
-X-Mimecast-Originator: redhat.com
+Subject: Re: [PATCH v4 4/5] xen/arm: Check for Static Heap feature when
+ freeing resources
+To: Luca Fancellu <luca.fancellu@arm.com>
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Chen <wei.chen@arm.com>,
+ xen-devel@lists.xenproject.org
+References: <20241203094811.427076-1-luca.fancellu@arm.com>
+ <20241203094811.427076-5-luca.fancellu@arm.com>
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241203094811.427076-5-luca.fancellu@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 03/12/2024 10.21, Philippe Mathieu-Daudé wrote:
-> Since commit 6f6e1698a68 ("vl: configure accelerators from -accel
-> options") we prefer the '-accel bar' command line option.
+On 03.12.2024 10:48, Luca Fancellu wrote:
+> From: Penny Zheng <Penny.Zheng@arm.com>
 > 
-> Replace '-machine foo,accel=bar' -> '-machine foo -accel bar' in
-> functional tests.
+> If the Xen heap is statically configured in Device Tree, its size is
+> definite, so only the defined memory shall be given to the boot
+> allocator. Have a check where init_domheap_pages() is called
+> which takes into account if static heap feature is used.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   tests/functional/test_virtio_gpu.py | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
+> Extract static_heap flag from init data bootinfo, as it will be needed
+> after destroying the init data section, rename it to using_static_heap
+> and use it to tell whether the Xen static heap feature is enabled.
 > 
-> diff --git a/tests/functional/test_virtio_gpu.py b/tests/functional/test_virtio_gpu.py
-> index d5027487ac4..cc0ec234861 100755
-> --- a/tests/functional/test_virtio_gpu.py
-> +++ b/tests/functional/test_virtio_gpu.py
-> @@ -61,7 +61,8 @@ def test_virtio_vga_virgl(self):
->           self.vm.set_console()
->           self.vm.add_args("-cpu", "host")
->           self.vm.add_args("-m", "2G")
-> -        self.vm.add_args("-machine", "pc,accel=kvm")
-> +        self.vm.add_args('-accel', 'kvm')
-> +        self.vm.add_args("-machine", "pc")
+> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+> Signed-off-by: Wei Chen <wei.chen@arm.com>
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 
-While you're at it, could you please change this test to use 
-"self.set_machine('pc')" at the very beginning of the test function instead 
-of using -machine pc here? That way the test gets properly skipped in case 
-the machine is not available in the QEMU binary.
+Reviewed-by: Jan Beulich <jbeulich@suse.com> # common
 
-  Thanks,
-   Thomas
-
-
->           self.vm.add_args("-device", "virtio-vga-gl")
->           self.vm.add_args("-display", "egl-headless")
->           self.vm.add_args(
-> @@ -118,10 +119,11 @@ def test_vhost_user_vga_virgl(self):
->           )
->   
->           self.vm.set_console()
-> +        self.vm.add_args('-accel', 'kvm')
->           self.vm.add_args("-cpu", "host")
->           self.vm.add_args("-m", "2G")
->           self.vm.add_args("-object", "memory-backend-memfd,id=mem,size=2G")
-> -        self.vm.add_args("-machine", "pc,memory-backend=mem,accel=kvm")
-> +        self.vm.add_args("-machine", "pc,memory-backend=mem")
->           self.vm.add_args("-chardev", "socket,id=vug,fd=%d" % qemu_sock.fileno())
->           self.vm.add_args("-device", "vhost-user-vga,chardev=vug")
->           self.vm.add_args("-display", "egl-headless")
 
 
