@@ -4,45 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4538D7833F
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 09:43:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.847691.1262758 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59016D4979A
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 09:48:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.847711.1262788 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIPR1-0007mY-9g; Tue, 03 Dec 2024 09:43:11 +0000
+	id 1tIPW8-00014X-CR; Tue, 03 Dec 2024 09:48:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 847691.1262758; Tue, 03 Dec 2024 09:43:11 +0000
+Received: by outflank-mailman (output) from mailman id 847711.1262788; Tue, 03 Dec 2024 09:48:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIPR1-0007mR-5q; Tue, 03 Dec 2024 09:43:11 +0000
-Received: by outflank-mailman (input) for mailman id 847691;
- Tue, 03 Dec 2024 09:43:09 +0000
+	id 1tIPW8-00014O-8K; Tue, 03 Dec 2024 09:48:28 +0000
+Received: by outflank-mailman (input) for mailman id 847711;
+ Tue, 03 Dec 2024 09:48:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=L6AI=S4=redhat.com=berrange@srs-se1.protection.inumbo.net>)
- id 1tIPQz-0007Yh-MM
- for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 09:43:09 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fffb194a-b15a-11ef-99a3-01e77a169b0f;
- Tue, 03 Dec 2024 10:43:08 +0100 (CET)
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-365-jUBPHpOAMHWdwhWg_maZJw-1; Tue,
- 03 Dec 2024 04:43:01 -0500
-Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C3C591955D45; Tue,  3 Dec 2024 09:43:00 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.37])
- by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8F78A1956089; Tue,  3 Dec 2024 09:42:57 +0000 (UTC)
+ <SRS0=iaGl=S4=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1tIPW6-0000ZC-QG
+ for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 09:48:26 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id bd469e41-b15b-11ef-99a3-01e77a169b0f;
+ Tue, 03 Dec 2024 10:48:25 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A13741BF3;
+ Tue,  3 Dec 2024 01:48:52 -0800 (PST)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 592C23F58B;
+ Tue,  3 Dec 2024 01:48:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,67 +44,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fffb194a-b15a-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1733218987;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=I+JRUYnBGGGQCm69OO+rjh8nq3v9YjWxvZA969LR9Tw=;
-	b=bSvTOInJMRaJVATcnvR5w6P950rAQULYJNM/G0mMxFmjmbxpTHyCWJOMRDLLugpgjSjWMu
-	1AuOkfKXIN4U/OYT5LDojwYyS5spJhsUCYLBSkNblp+HNwO+Lp+mY0AvgOjqzEk67gLpPy
-	y7XuLO6/nbCQJcWzQE/U7PECg0YZzso=
-X-MC-Unique: jUBPHpOAMHWdwhWg_maZJw-1
-X-Mimecast-MFC-AGG-ID: jUBPHpOAMHWdwhWg_maZJw
-Date: Tue, 3 Dec 2024 09:42:53 +0000
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
-	xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org,
-	Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
-	Thomas Huth <thuth@redhat.com>
-Subject: Re: [PATCH 6/7] accel/kvm: Remove mentions of legacy '-machine
- foo,accel=bar'
-Message-ID: <Z07SnalqtT8hYsSZ@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20241203092153.60590-1-philmd@linaro.org>
- <20241203092153.60590-7-philmd@linaro.org>
+X-Inumbo-ID: bd469e41-b15b-11ef-99a3-01e77a169b0f
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v4 2/5] arm/setup: Move MMU specific extern declarations to mmu/setup.h
+Date: Tue,  3 Dec 2024 09:48:07 +0000
+Message-Id: <20241203094811.427076-3-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241203094811.427076-1-luca.fancellu@arm.com>
+References: <20241203094811.427076-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20241203092153.60590-7-philmd@linaro.org>
-User-Agent: Mutt/2.2.13 (2024-03-09)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-On Tue, Dec 03, 2024 at 10:21:52AM +0100, Philippe Mathieu-Daudé wrote:
-> Since commit 6f6e1698a68 ("vl: configure accelerators from -accel
-> options") we prefer the '-accel bar' command line option.
-> 
-> Update the documentation when KVM is referred to.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->  docs/bypass-iommu.txt            | 3 ++-
->  docs/nvdimm.txt                  | 2 +-
->  docs/specs/tpm.rst               | 2 +-
->  docs/system/arm/cpu-features.rst | 2 +-
->  docs/system/cpu-hotplug.rst      | 2 +-
->  docs/system/ppc/powernv.rst      | 2 +-
->  docs/system/ppc/pseries.rst      | 4 ++--
->  scripts/device-crash-test        | 2 +-
->  8 files changed, 10 insertions(+), 9 deletions(-)
+Move some extern declarations related to MMU structures and define
+from asm/setup.h to asm/mmu/setup.h, in order to increase encapsulation
+and allow the MPU part to build, since it has no clue about them.
 
-Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
+---
+CHanges from v3:
+ - add Ack-by Julien
+Changes from v1:
+ - Moved extern to mmu/setup.h instead of mmu/mm.h
+ - moved also pte_of_xenaddr()
+---
+---
+ xen/arch/arm/include/asm/mmu/setup.h | 31 ++++++++++++++++++++++++++++
+ xen/arch/arm/include/asm/setup.h     | 20 ++++++------------
+ 2 files changed, 37 insertions(+), 14 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/mmu/setup.h
 
-
-With regards,
-Daniel
+diff --git a/xen/arch/arm/include/asm/mmu/setup.h b/xen/arch/arm/include/asm/mmu/setup.h
+new file mode 100644
+index 000000000000..3fe752b04c63
+--- /dev/null
++++ b/xen/arch/arm/include/asm/mmu/setup.h
+@@ -0,0 +1,31 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++#ifndef __ARM_MMU_SETUP_H__
++#define __ARM_MMU_SETUP_H__
++
++#include <asm/lpae.h>
++#include <asm/mmu/layout.h>
++
++extern lpae_t boot_pgtable[XEN_PT_LPAE_ENTRIES];
++
++#ifdef CONFIG_ARM_64
++extern lpae_t boot_first[XEN_PT_LPAE_ENTRIES];
++extern lpae_t boot_first_id[XEN_PT_LPAE_ENTRIES];
++#endif
++extern lpae_t boot_second[XEN_PT_LPAE_ENTRIES];
++extern lpae_t boot_second_id[XEN_PT_LPAE_ENTRIES];
++extern lpae_t boot_third[XEN_PT_LPAE_ENTRIES * XEN_NR_ENTRIES(2)];
++extern lpae_t boot_third_id[XEN_PT_LPAE_ENTRIES];
++
++/* Find where Xen will be residing at runtime and return a PT entry */
++lpae_t pte_of_xenaddr(vaddr_t va);
++
++#endif /* __ARM_MMU_SETUP_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 64c227d171fc..a5a80d9b477f 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -6,6 +6,12 @@
+ #include <xen/bootfdt.h>
+ #include <xen/device_tree.h>
+ 
++#if defined(CONFIG_MMU)
++# include <asm/mmu/setup.h>
++#elif !defined(CONFIG_MPU)
++# error "Unknown memory management layout"
++#endif
++
+ #define MAX_FDT_SIZE SZ_2M
+ 
+ struct map_range_data
+@@ -65,20 +71,6 @@ int map_irq_to_domain(struct domain *d, unsigned int irq,
+ int map_range_to_domain(const struct dt_device_node *dev,
+                         uint64_t addr, uint64_t len, void *data);
+ 
+-extern lpae_t boot_pgtable[XEN_PT_LPAE_ENTRIES];
+-
+-#ifdef CONFIG_ARM_64
+-extern lpae_t boot_first[XEN_PT_LPAE_ENTRIES];
+-extern lpae_t boot_first_id[XEN_PT_LPAE_ENTRIES];
+-#endif
+-extern lpae_t boot_second[XEN_PT_LPAE_ENTRIES];
+-extern lpae_t boot_second_id[XEN_PT_LPAE_ENTRIES];
+-extern lpae_t boot_third[XEN_PT_LPAE_ENTRIES * XEN_NR_ENTRIES(2)];
+-extern lpae_t boot_third_id[XEN_PT_LPAE_ENTRIES];
+-
+-/* Find where Xen will be residing at runtime and return a PT entry */
+-lpae_t pte_of_xenaddr(vaddr_t va);
+-
+ extern const char __ro_after_init_start[], __ro_after_init_end[];
+ 
+ struct init_info
 -- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+2.34.1
 
 
