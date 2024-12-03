@@ -4,52 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58432D49799
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 09:22:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.847531.1262638 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FA3E6C61A
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 09:22:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.847534.1262647 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIP6v-00050k-4O; Tue, 03 Dec 2024 09:22:25 +0000
+	id 1tIP6w-0005JY-AB; Tue, 03 Dec 2024 09:22:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 847531.1262638; Tue, 03 Dec 2024 09:22:25 +0000
+Received: by outflank-mailman (output) from mailman id 847534.1262647; Tue, 03 Dec 2024 09:22:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIP6u-00050Q-Uh; Tue, 03 Dec 2024 09:22:24 +0000
-Received: by outflank-mailman (input) for mailman id 847531;
- Tue, 03 Dec 2024 09:22:23 +0000
+	id 1tIP6w-0005Is-62; Tue, 03 Dec 2024 09:22:26 +0000
+Received: by outflank-mailman (input) for mailman id 847534;
+ Tue, 03 Dec 2024 09:22:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BRE5=S4=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1tIP6t-0003Be-A2
- for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 09:22:23 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20615.outbound.protection.outlook.com
- [2a01:111:f403:2418::615])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=yzh2=S4=linaro.org=philmd@srs-se1.protection.inumbo.net>)
+ id 1tIP6u-0003Be-Tf
+ for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 09:22:24 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 195ce481-b158-11ef-a0d3-8be0dac302b0;
- Tue, 03 Dec 2024 10:22:22 +0100 (CET)
-Received: from PH7P221CA0012.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:32a::29)
- by SJ2PR12MB9138.namprd12.prod.outlook.com (2603:10b6:a03:565::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.18; Tue, 3 Dec
- 2024 09:22:18 +0000
-Received: from SN1PEPF0002BA4F.namprd03.prod.outlook.com
- (2603:10b6:510:32a:cafe::a9) by PH7P221CA0012.outlook.office365.com
- (2603:10b6:510:32a::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.19 via Frontend Transport; Tue,
- 3 Dec 2024 09:22:18 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002BA4F.mail.protection.outlook.com (10.167.242.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8230.7 via Frontend Transport; Tue, 3 Dec 2024 09:22:17 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Dec
- 2024 03:22:17 -0600
-Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39
- via Frontend Transport; Tue, 3 Dec 2024 03:22:16 -0600
+ id 1aff5178-b158-11ef-a0d3-8be0dac302b0;
+ Tue, 03 Dec 2024 10:22:24 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9e8522445dso749760466b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Dec 2024 01:22:24 -0800 (PST)
+Received: from localhost.localdomain ([176.187.209.146])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa5997d5646sm594152766b.62.2024.12.03.01.22.22
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 03 Dec 2024 01:22:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,132 +47,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 195ce481-b158-11ef-a0d3-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cBgZLFfpYaLzX/yXbxdPY/UI0b5NbIyRwBDgQFRinFEC72f0muCOUZ5nGSvb8bLyxGTxhp8plV9r+bDXAbbBqa08Al29zE0HSbp3Z2GCvboOX4wxr589DLoh+xnAk6eN0XP24R7dBzZ9VIW3I8piZCMfbrpaaPG3ATNQmBTsenMroIMigsUqsy2ZR3s/CBsS2J0WPQ8wizEZocEv1K9hhfwPlotnZ80FkyaDDi/Zj48XkzbBzETqPdEj17Tb9pI5yTKoJOaePz2QyzwA7cyrlT1wYu5gfOKU3c7r1uT0BIpkpddZNws1Mjy9LA/guBB82rVH2aEqQcHOt7kQitKLUQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d8Ct+reimjzemVFaJskhM5hwM6oYG5iOA7cDYiFPT+0=;
- b=anWwzURrizqnCABPcVVr1djt87hNBHtW+9GtFmKAF8lRS38Nf0S5U7BkLuaqx4pWjEMhHi9fTqtbKMMc0I1ORFK169y45Um/qrtCTJn9f806bg3FwstvE7wNemPlMyeypBSoRyR3Q4XJLHosDgk2ZaskayBzp3/viMwB/sD0TsVrwbaK3hJEuKN+jGs2fp5nZknRm5vv4OwrGMJgurYtAK+wcnT4Ul0SjXNkCX7fOMUMhffYsURtSPYa56qqW+0/nsXcDk1M9FDZTyLhrw9rvonIXO5q1REEefMW0eJpX+RLWtZMwVSXWundkPIPIqkU2cUt2XUhqsyfiO2rWH7a5w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d8Ct+reimjzemVFaJskhM5hwM6oYG5iOA7cDYiFPT+0=;
- b=NAsHdnERL7twTQibDbV8x9PzWI7KDvOLBEGbj7VZ46H4OUiE3MVPkR9XECtHEcjEMU3YV3hYoQVy3fzVIREYotNyNmCY+q6vN9FoTT6EpfjQWW9NGBAsDHW7c4ftbi60d5/BuVYSspxvzEPaCqHxtioBvlkKf0Vmo/HmaAej/QQ=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>
-Subject: [PATCH] bootfdt: Add missing trailing commas in BOOTINFO_{ACPI,SHMEM}_INIT
-Date: Tue, 3 Dec 2024 10:22:14 +0100
-Message-ID: <20241203092214.276453-1-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 1aff5178-b158-11ef-a0d3-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1733217744; x=1733822544; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PERYJEjYxWhdPat57HCXQqDRHV3hL1ijs4gpAo4T2SI=;
+        b=OAPp2F7CGPnbKaxNH77iXorhXZARMk94mid2A7Vi+u3xwQfyqnUX7yKIyiKu+WbXSV
+         9d2V/hZEq/uudkefH8QFhysyuA1AXMSHPU3/bKySLtlOj5psf2Zl84RXSaSM0HeRvAW9
+         TWqqYWaCY4o6J4xAlhCozWy/nETadKT3yw2mIdSnLueBxtFbS8Es02PzK9M+UFybAeW0
+         9zwbqNTTwdvpUicXWCkz5DmxjxGa2dXVbXihkpFtEjFT5kT3czax/Cy/cG1vzfDJWmav
+         ulU3yXFDcCvecNpf5+Ey+/WSuw4MKnzUgX15oXzbbptIdrmaGrdVBp0C5Msfxae7mOGC
+         Y/WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733217744; x=1733822544;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=PERYJEjYxWhdPat57HCXQqDRHV3hL1ijs4gpAo4T2SI=;
+        b=vu1sD6pMYt/bQdL4t5C5mgThgT5LUJ9JbpViHNzEDDDrENtqhzRDW7Pdmb9FxcddrS
+         Pi7ba6Knu4ah5ZWSIHX4h9ob9dqJG3/er6zdKCe5xxtfIt8NAIRg7wOqZIyWUx0revH7
+         L+AZy28u7ltTMTUuAICyGiHwgRX2hQXu1FShi+bdQMjiBtO7ItrHKTFSc3u4H+G8zvhF
+         Pw8Pp3j5bicbHays7qiK8bZVL/x9n/aZZ0NX7OD0Yty4wipb3MgmyUmfUTIU01I7Jset
+         HgnscYvJoSPJbhqPgQcQmw3jWz183BpRTb2svl0OxiEwG4yh0K+K7eNCG5Jly5zUDm30
+         OHvg==
+X-Forwarded-Encrypted: i=1; AJvYcCUuP4SJznzeoHDM7t/PLY88junkOe4la8e4bSES/rZzXOO2PDnP9ylUM3FwllRdtOg//W5f41VUU5k=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzYn2fewyGqjHirBg52hbZTcrDXoP3ACsQWrLsFXrmMnq5oLKki
+	ZZzFKwSdHaKl1ir+8kwO1cRw478r2rg3FDkaouZMzkLRU2X+UZm5IDs3qQQCxCI=
+X-Gm-Gg: ASbGncufnFMG9WW50iB4UNKuY0i/wAwJJPSS0g3kIwaQl7PQMRbS7xNlu2Im0/AVcpc
+	S2W3ve9fnVWdgdzjsaGR/JB/IRjhlf0rkRu4laqXPU140f5LCJb04LarFqT2LMEBeRxPXfP9dmh
+	u6lveScG1OStmO/Ws/1clkIbm3aAJ34CPxaV+XWinWCV5X61hocK00uNS/oR6rp/TsCa/+YNflz
+	5d8KA78UsStiDpMyvwkjO/wnINIuCqp9HKfgj2YQAvzWdPfNUcc+duyltMnod8YuhRS7zMa
+X-Google-Smtp-Source: AGHT+IG/10KRcSJmHbz27onCyU5ZPCzMEQmMKXxzXO8/y/6O5dpHc4TRW51Ux3lkFGHoBQyD1B/v6w==
+X-Received: by 2002:a17:907:7623:b0:a9e:26ad:d0a with SMTP id a640c23a62f3a-aa5f7f18ec8mr118492466b.58.1733217743897;
+        Tue, 03 Dec 2024 01:22:23 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+	=?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	xen-devel@lists.xenproject.org,
+	qemu-ppc@nongnu.org,
+	Markus Armbruster <armbru@redhat.com>,
+	qemu-arm@nongnu.org,
+	Thomas Huth <thuth@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 5/7] accel/tcg: Remove mentions of legacy '-machine foo,accel=bar'
+Date: Tue,  3 Dec 2024 10:21:51 +0100
+Message-ID: <20241203092153.60590-6-philmd@linaro.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241203092153.60590-1-philmd@linaro.org>
+References: <20241203092153.60590-1-philmd@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.orzel@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4F:EE_|SJ2PR12MB9138:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1348204b-83ec-458e-4911-08dd137bfb83
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?5k49ED2teQTjiUBgqewajBjPsN/L1cieqHs0BUm06VZMLEwA7J0801ItolXn?=
- =?us-ascii?Q?sVJjrvBol6R0D6wBvT4GehdK2OGbl3GRY9mU9tw7LJIa9S4PwyPwECdXwUX7?=
- =?us-ascii?Q?qu6HA5z7KizMEGEIANJrvJoCsvwmfGffjFuwC3dClcMncqnybTjJaGxbBdrF?=
- =?us-ascii?Q?15mEpxxWHN4AE2WgaYfzi4NlSSGAxFbvr5LwJ5o3goX53VsmIdHRsPqZIub6?=
- =?us-ascii?Q?2e3IpQjfglDMRqUjKcZ889YKO65FITsrNY9TN8WqschdihGXUwgfZ4GBx/nA?=
- =?us-ascii?Q?kHC8FQEPi4kLt4WhoGcjbOZgOcKmOrTbrBBUNp8+RkCc979qLyTspmQ56hHM?=
- =?us-ascii?Q?np0tUUbvwcJOfnpaKN9iXZiEy+ZxzjPKufs2kU/DSwLz1dTnzgzoFpxh7PkP?=
- =?us-ascii?Q?r332sSsifCmH0CcLHHL3o2ClTIobntAVnw2ohj+gF4VR6V5ADpkoGpYVg0eJ?=
- =?us-ascii?Q?AVTM2LI/A3uDp8ZGiCXNzusGNEpdVAZtEl6hWrQlatvTAe36t0SM0WYd3D3l?=
- =?us-ascii?Q?93NbPDPoCVVhts0x2TYykM4IF8RM+P3Q2b5KzZ40gWozLzETcfTN8ytTpR4I?=
- =?us-ascii?Q?VPAIMc202icXzvmI6L+Zz92wXXsVhSfmSR9ZYNKEN1HrXyV3Gsyrgzj4YIyc?=
- =?us-ascii?Q?ARJHmtFQGMNf7bHiGIVkh3wsELSbtMqoZ8JUGEW06XHlJYznayl4Ud89gUP/?=
- =?us-ascii?Q?XgJN/4sCeqyMkANEhq33Fn6uZErmZ5zq1YQcZtKZ7c5EBmAz9r3i4x8SyHLg?=
- =?us-ascii?Q?Ysch2CAK4iaRu6btWyHiIpzMv0jRSKpsTgwu5ZI4HpfcliO6gQmJdcTHTPVi?=
- =?us-ascii?Q?OR3lLDuzs1121ioqg0veCByH/LGgla1vgBkEZt89WgucJ8a4yKUW1Vnk+F6w?=
- =?us-ascii?Q?sSGaVAhlx8ZKfYolXfWJCpB1LiP6y0eV+RscWw8YLMJs23kA61zKMw62cCvY?=
- =?us-ascii?Q?T5AZE8XWgHUjkjGElqQus6WH8njS2U5eI+wwq/2n1eTziAbLOceoiI4Xz+w0?=
- =?us-ascii?Q?MRk87zN4As5As/cEdEC6EaNWMNbs9UFRduBDd/TcqJBRYcwV7XkD+6xCt+Tw?=
- =?us-ascii?Q?WuZF2FtoQmk+YDmXoYaJNBPw++3rwR9ltYCdS+yhlM4fW6/8YAPGg8zf6wNm?=
- =?us-ascii?Q?WoM7DWRiH9Epb2TzCNA4tINrEIlNs5+qbkzGu5YMLeXojQdX2jcnI0TxInZO?=
- =?us-ascii?Q?eIha79yPa4T9RSBxPe0tHzDfU7zUOu5ry1uvsoeWNNGaEnlUkr+1xA2ed0Wo?=
- =?us-ascii?Q?VFZSrLUcu3YZWU29hnS+VwNTI5/EqDfWY/pEPsVAEiMmmhm+P6XYGu1yJii+?=
- =?us-ascii?Q?V7RQEyjsLGpyVJWQdb8ug6WZ0TrggKXIZNNSljnoaW6C69rHj5Be2wnhMJ8g?=
- =?us-ascii?Q?lvv6y1pHaxTcbBEsg0KmNJHM7BY4BXJsJnbxE2SOTLDErIPXsgpg69hhbvpz?=
- =?us-ascii?Q?xQygr/JFnYiaf/1E17pUT+duKV7zutO6?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 09:22:17.7287
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1348204b-83ec-458e-4911-08dd137bfb83
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF0002BA4F.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB9138
 
-Commit a14593e3995a extended BOOTINFO_{ACPI,SHMEM}_INIT initializers
-list with a new 'type' member but forgot to add trailing commas (they
-were present before). This results in a build failure when building
-with CONFIG_ACPI=y and CONFIG_STATIC_SHM=y:
-./include/xen/bootfdt.h:155:5: error: request for member 'shmem' in something not a structure or union
-  155 |     .shmem.common.max_banks = NR_SHMEM_BANKS,       \
-      |     ^
-./include/xen/bootfdt.h:168:5: note: in expansion of macro 'BOOTINFO_SHMEM_INIT'
-  168 |     BOOTINFO_SHMEM_INIT                             \
-      |     ^~~~~~~~~~~~~~~~~~~
-common/device-tree/bootinfo.c:22:39: note: in expansion of macro 'BOOTINFO_INIT'
-   22 | struct bootinfo __initdata bootinfo = BOOTINFO_INIT;
+Since commit 6f6e1698a68 ("vl: configure accelerators from -accel
+options") we prefer the '-accel bar' command line option.
 
-Fixes: a14593e3995a ("xen/device-tree: Allow region overlapping with /memreserve/ ranges")
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Update the documentation when TCG is referred to.
+
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- xen/include/xen/bootfdt.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ docs/about/removed-features.rst | 2 +-
+ linux-user/s390x/target_proc.h  | 2 +-
+ accel/tcg/monitor.c             | 4 ++--
+ system/vl.c                     | 2 +-
+ tests/qtest/qmp-cmd-test.c      | 2 +-
+ 5 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/include/xen/bootfdt.h b/xen/include/xen/bootfdt.h
-index cea40ee11706..343c48b73d2c 100644
---- a/xen/include/xen/bootfdt.h
-+++ b/xen/include/xen/bootfdt.h
-@@ -145,7 +145,7 @@ struct bootinfo {
- #ifdef CONFIG_ACPI
- #define BOOTINFO_ACPI_INIT                          \
-     .acpi.common.max_banks = NR_MEM_BANKS,          \
--    .acpi.common.type = MEMORY
-+    .acpi.common.type = MEMORY,
- #else
- #define BOOTINFO_ACPI_INIT
- #endif
-@@ -153,7 +153,7 @@ struct bootinfo {
- #ifdef CONFIG_STATIC_SHM
- #define BOOTINFO_SHMEM_INIT                         \
-     .shmem.common.max_banks = NR_SHMEM_BANKS,       \
--    .shmem.common.type = STATIC_SHARED_MEMORY
-+    .shmem.common.type = STATIC_SHARED_MEMORY,
- #else
- #define BOOTINFO_SHMEM_INIT
- #endif
+diff --git a/docs/about/removed-features.rst b/docs/about/removed-features.rst
+index ee6455aeeeb..d96dc5e80bc 100644
+--- a/docs/about/removed-features.rst
++++ b/docs/about/removed-features.rst
+@@ -216,7 +216,7 @@ The ``enforce-config-section`` property was replaced by the
+ ``-no-kvm`` (removed in 5.2)
+ ''''''''''''''''''''''''''''
+ 
+-The ``-no-kvm`` argument was a synonym for setting ``-machine accel=tcg``.
++The ``-no-kvm`` argument was a synonym for setting ``-accel tcg``.
+ 
+ ``-realtime`` (removed in 6.0)
+ ''''''''''''''''''''''''''''''
+diff --git a/linux-user/s390x/target_proc.h b/linux-user/s390x/target_proc.h
+index a4a4821ea5c..f443d8f8080 100644
+--- a/linux-user/s390x/target_proc.h
++++ b/linux-user/s390x/target_proc.h
+@@ -7,7 +7,7 @@
+ #define S390X_TARGET_PROC_H
+ 
+ /*
+- * Emulate what a Linux kernel running in qemu-system-s390x -M accel=tcg would
++ * Emulate what a Linux kernel running in 'qemu-system-s390x -accel tcg' would
+  * show in /proc/cpuinfo.
+  *
+  * Skip the following in order to match the missing support in op_ecag():
+diff --git a/accel/tcg/monitor.c b/accel/tcg/monitor.c
+index 093efe97144..0430b6e1514 100644
+--- a/accel/tcg/monitor.c
++++ b/accel/tcg/monitor.c
+@@ -204,7 +204,7 @@ HumanReadableText *qmp_x_query_jit(Error **errp)
+     g_autoptr(GString) buf = g_string_new("");
+ 
+     if (!tcg_enabled()) {
+-        error_setg(errp, "JIT information is only available with accel=tcg");
++        error_setg(errp, "JIT information is only available with TCG");
+         return NULL;
+     }
+ 
+@@ -226,7 +226,7 @@ HumanReadableText *qmp_x_query_opcount(Error **errp)
+ 
+     if (!tcg_enabled()) {
+         error_setg(errp,
+-                   "Opcode count information is only available with accel=tcg");
++                   "Opcode count information is only available with TCG");
+         return NULL;
+     }
+ 
+diff --git a/system/vl.c b/system/vl.c
+index 54998fdbc7e..c056fcb740c 100644
+--- a/system/vl.c
++++ b/system/vl.c
+@@ -2385,7 +2385,7 @@ static void configure_accelerators(const char *progname)
+         for (tmp = accel_list; *tmp; tmp++) {
+             /*
+              * Filter invalid accelerators here, to prevent obscenities
+-             * such as "-machine accel=tcg,,thread=single".
++             * such as "-accel tcg,,thread=single".
+              */
+             if (accel_find(*tmp)) {
+                 qemu_opts_parse_noisily(qemu_find_opts("accel"), *tmp, true);
+diff --git a/tests/qtest/qmp-cmd-test.c b/tests/qtest/qmp-cmd-test.c
+index 2c15f609584..83f4a2b451b 100644
+--- a/tests/qtest/qmp-cmd-test.c
++++ b/tests/qtest/qmp-cmd-test.c
+@@ -49,7 +49,7 @@ static int query_error_class(const char *cmd)
+         { "query-vm-generation-id", ERROR_CLASS_GENERIC_ERROR },
+         /* Only valid with a USB bus added */
+         { "x-query-usb", ERROR_CLASS_GENERIC_ERROR },
+-        /* Only valid with accel=tcg */
++        /* Only valid with TCG */
+         { "x-query-jit", ERROR_CLASS_GENERIC_ERROR },
+         { "x-query-opcount", ERROR_CLASS_GENERIC_ERROR },
+         { "xen-event-list", ERROR_CLASS_GENERIC_ERROR },
 -- 
-2.25.1
+2.45.2
 
 
