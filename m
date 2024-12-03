@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FDEE6C61A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B632E6C619
 	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 08:22:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.847300.1262436 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.847293.1262412 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIOAb-0000HU-6g; Tue, 03 Dec 2024 08:22:09 +0000
+	id 1tIOAa-0008PG-4D; Tue, 03 Dec 2024 08:22:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 847300.1262436; Tue, 03 Dec 2024 08:22:09 +0000
+Received: by outflank-mailman (output) from mailman id 847293.1262412; Tue, 03 Dec 2024 08:22:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIOAa-0000FF-R6; Tue, 03 Dec 2024 08:22:08 +0000
-Received: by outflank-mailman (input) for mailman id 847300;
- Tue, 03 Dec 2024 08:17:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tIOAZ-0008Or-W4; Tue, 03 Dec 2024 08:22:07 +0000
+Received: by outflank-mailman (input) for mailman id 847293;
+ Tue, 03 Dec 2024 08:16:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=x39C=S4=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1tIO6Y-0006iL-Kv
- for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 08:17:58 +0000
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20614.outbound.protection.outlook.com
- [2a01:111:f403:2409::614])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 18c32e9e-b14f-11ef-99a3-01e77a169b0f;
- Tue, 03 Dec 2024 09:17:56 +0100 (CET)
-Received: from SJ2PR07CA0011.namprd07.prod.outlook.com (2603:10b6:a03:505::20)
- by LV8PR12MB9081.namprd12.prod.outlook.com (2603:10b6:408:188::12)
+ id 1tIO4l-0006fu-5h
+ for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 08:16:07 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2061a.outbound.protection.outlook.com
+ [2a01:111:f403:2415::61a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d6c5211e-b14e-11ef-a0d3-8be0dac302b0;
+ Tue, 03 Dec 2024 09:16:05 +0100 (CET)
+Received: from BY3PR10CA0024.namprd10.prod.outlook.com (2603:10b6:a03:255::29)
+ by CY8PR12MB7610.namprd12.prod.outlook.com (2603:10b6:930:9a::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.18; Tue, 3 Dec
- 2024 08:17:52 +0000
-Received: from SJ1PEPF000023D4.namprd21.prod.outlook.com
- (2603:10b6:a03:505:cafe::54) by SJ2PR07CA0011.outlook.office365.com
- (2603:10b6:a03:505::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.19; Tue, 3 Dec
+ 2024 08:16:00 +0000
+Received: from SJ1PEPF000023D3.namprd21.prod.outlook.com
+ (2603:10b6:a03:255:cafe::13) by BY3PR10CA0024.outlook.office365.com
+ (2603:10b6:a03:255::29) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.18 via Frontend Transport; Tue,
- 3 Dec 2024 08:17:51 +0000
+ 3 Dec 2024 08:15:59 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF000023D4.mail.protection.outlook.com (10.167.244.69) with Microsoft
+ SJ1PEPF000023D3.mail.protection.outlook.com (10.167.244.68) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8251.1 via Frontend Transport; Tue, 3 Dec 2024 08:17:50 +0000
+ 15.20.8251.1 via Frontend Transport; Tue, 3 Dec 2024 08:15:59 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Tue, 3 Dec 2024 02:15:14 -0600
+ 15.1.2507.39; Tue, 3 Dec 2024 02:13:05 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 18c32e9e-b14f-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: d6c5211e-b14e-11ef-a0d3-8be0dac302b0
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RzRVv/8MQzO1pA2BcmN8CA7FPWGJDSWWIecgf1+X1DD2pNvTcDi+OTFpGLMBxps+XEBL3Q/JMHv8cXQpHD6Oap0KadkkOBOet0WqPrP8XWN2gyVkscLS/k+N3wSip8ouCiPzvIAOeLhl4oQEC8fXAiAP5ZXcrshQY/Hk9CRWX0/s0sWlLVTni0Js4MYBStw8wuK9Z7N6wc4gr8oLHSb7LVImITKzsemGlm4Yrv3jS1sslqvisyPzGXywTiHkxhWn9KOfIPA4UUVIhRYi3x2d+sVu5xwwtj2+m7cQqRZLeGwxsokKltI8rWlTm5A18+EZID3spKhDt7O9uAV4ZwEohw==
+ b=QD5I0XmGN/cozyynmRCQly4xwqQFuFWu40PVHdzdOuR3O55htGbVJkr+d1e+noOt4wdG08eKK2IEtb56pkE+U+f9kDOevxEBu3yLK4CFP404fnqDps/2dj0kEqmfHK532co+3+wFOt0iMxuu/Ak40dqh9HamT0Nd68f5Q2HKSlMPYUkeSgyRK6QJKvul4QHARJ4WewBsy/WTbTtzfLZa90POcqbU/dA9jy0K90e8zR08kJGvPgZ+sYw9hfYomcYG30UyHutR3c/p5ud4uAPNejIt02O93Z9ZWXV7DLgR+JqwJxWVXr0FamkKjyJVY9ySs1JWQd5f656Sd0VZbm6h9g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z0U8rdCyjQTujNhBIGlymmnhb0TRmAlHR3r/R+Vaoss=;
- b=jmwnFeEddpbPpWfiLDgpU6bE7AztxkU/+ojDLAOMIsUPerQpkmPXIxd6UQ2kEmEKt7jctl8Ep+sE6Rq/VYQPjekGGkfeLvHAdAgdLVU+/K1oMq11jm/F3pEnyJjHaSQ+RU0OFopWgokeJaNz+1glgk+0urCciJG9Yh4t7t/oUuZCG0+Jq+LgMt3WeWFhAXSHV55YxgRVw2AU1MjNm/vfgFdGnWbRfL5wZORmYxkSBw8I35f4MsHgr+Ql6Lk04nzmBsBA6ZxVweHx+TxxVhc7MglnNc1O8O2Zt88eKF7oWWSHv9jfg/1muvO1M8Ekh7WZAoFwAutap5rDsE03jJT8wg==
+ bh=gcv16TAN0uUZcF80nkgtKyHscsZfjQCW9TkOZr32cuk=;
+ b=h5c1MQtaT0tNABSc3OsHz2IOLIrgrtA1s3LbPSiXNMqnsSLWAA5Wi5B/OQiVTwo1LHvwy6zMWZKUq1elrNB1rwPqY7caMvxUGtI//mmCAmNGhTB4H2a7GkSAMWPIwfFZ5p7qf+OtAQ0ztg4wt0mLPsHSnjOKTXES0C+3hrdSKNj2qfwHkKJHdlpdDBLL5iQpED1zULz6RhTDzjDmq3vtGhppCIORz6yI6qP0LBeRSRCquCzz9w9Tw9hah2bbH55RSuUhz+Hd6iHy/MUzYKmdhLdlMSlOfrdKwKbqfKVTfA/0CiNRpznZQXXtKkRyfQSBOaLA3v4D4Yq5V5H8ZOKsNw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z0U8rdCyjQTujNhBIGlymmnhb0TRmAlHR3r/R+Vaoss=;
- b=ZIgXMDZ4FB0Pcyb4SxP5CbqrljaQlbJTpE5QXFvl9gIBC8/XeaohLJI9lY6Vd2tOEJahK2MFBILdq3O0zJP3Uo56GucfwTDykOhuBfwHrUHgvo87l21127ujTzRNaaU1m/sI/DI17qHGa95jl12i1/XswRPgPoQKwHPxTSD51zU=
+ bh=gcv16TAN0uUZcF80nkgtKyHscsZfjQCW9TkOZr32cuk=;
+ b=el/Pa6wxBt4zegLUrB0zke9uJSmq0OASOxqvPxoTrh1EA3q6v2UmeUfL6PdHULL9MHauv0Q4EvYOkoQ+U5dMA00t2P5ErvSw9d/wJWPdCs04S36iuYg6KSFZflYdy1n9XBIOwlrscFbV9WtfLeBkXjEWcj80RL/gAUq4Wq0wSyM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,11 +86,10 @@ CC: <stefano.stabellini@amd.com>, <Ray.Huang@amd.com>,
 	<Xenia.Ragiadakou@amd.com>, <Jason.Andryuk@amd.com>, <penny.zheng@amd.com>,
 	Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>, "Andrew
  Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>
-Subject: [PATCH v1 04/11] xen/x86: get processor max speed from DMI table
-Date: Tue, 3 Dec 2024 16:11:04 +0800
-Message-ID: <20241203081111.463400-5-Penny.Zheng@amd.com>
+	<roger.pau@citrix.com>
+Subject: [PATCH v1 01/11] xen/x86: add CPPC feature flag for AMD processors
+Date: Tue, 3 Dec 2024 16:11:01 +0800
+Message-ID: <20241203081111.463400-2-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241203081111.463400-1-Penny.Zheng@amd.com>
 References: <20241203081111.463400-1-Penny.Zheng@amd.com>
@@ -102,130 +101,94 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D4:EE_|LV8PR12MB9081:EE_
-X-MS-Office365-Filtering-Correlation-Id: d5fed296-43bd-4d34-737d-08dd1372fab9
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D3:EE_|CY8PR12MB7610:EE_
+X-MS-Office365-Filtering-Correlation-Id: 55dd04e2-4651-402c-3915-08dd1372b810
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
+	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?IYLPJvog9Bsgq+YJ+0VMgfT8z4rPNAt2pXUer7CCY3NiuwAXQt453ApjQFIW?=
- =?us-ascii?Q?/7ND6ClnRHPuI7IgcYwxsAhz00RvLEA94LOqfqvU8upYq0Pzq3qYHQN9KSzI?=
- =?us-ascii?Q?SIR3xg5IaI+XMRf/KMOfloLlxYe7iiVHdfpnl+SNWr1cLuAqNBmZ6KNAT77I?=
- =?us-ascii?Q?uO0Zx+Y5HH/tibTVWtcV9t5MlL70tyEMY6jDiRP0x1sYFiXr8u+fMlyRMDgQ?=
- =?us-ascii?Q?CVhRoy516RNaOTHdz4SkzOrsV4n5QVONlBVs3TFTh9LZ4fbEGXR4DHqi5s6B?=
- =?us-ascii?Q?oNj8HrnAW3dPWGn3ucunMJ6XuuZ36PciXIRQSZ4YCcTHrPVeCz6dVi8mwunU?=
- =?us-ascii?Q?Gix7SXi122CHMcBXLJMAx2Oe34RIK1wtrsIoQFhK9VQlpX7c2GbYEPe42LSg?=
- =?us-ascii?Q?yComDBM9lePXA0T6qs5UKxJoP0IYQBrR+gT6e7boM4/UaP6lOku2AV+V3Dx0?=
- =?us-ascii?Q?LR1X49sfNBdD3o6++h0EUkp/YCc9igGb42XhvLJo6xP9xGzdVSvEkeS30Gim?=
- =?us-ascii?Q?nDSFvLRPQX9/8e3dq5r+UhIZC8f+mFe8VxUcNwUxDZqqKMYAIUzOqalgu0fh?=
- =?us-ascii?Q?9/OfMiteu/dqsZqmN6paBy2opRSd6TpjiVjQSYE95Egq4ao3B1VDR4e2vrza?=
- =?us-ascii?Q?J3/L0Sa0x034gw1h/1NNYAq1rOaUh0kre7YbiSzh6QTA9B/N0g/DS7M0AR1d?=
- =?us-ascii?Q?AeBNyeKNU2vib/PNhIVhaFB04fvsVpZ09fHsajG3sg88q/dGcxTg0A32IeVQ?=
- =?us-ascii?Q?d2x1APVPpszRD+odZiLLYP2Ra5dZ52FDSmdrg5Bcs1MdouMAQg4Y2uYchsPU?=
- =?us-ascii?Q?8yG4U28mpXrIm70SUYkso/JZJCduyjmRGi7+7jX1fgJ+28oQfWYas/u+yTEt?=
- =?us-ascii?Q?WfXlBLywcCsPCD4HvaIPEjdOO/LaYLr4wuVKh24OYcDGqyb0FPkMRg+hxHbt?=
- =?us-ascii?Q?A0stXpPpXRZKMeoqPgF25NNqSHt97uVrW0eBQjVXwJqWS6TzzSLczBk/XT/p?=
- =?us-ascii?Q?V0zhliIZ7Dji+s4morFV0rVtwao1volj9BYF+cThNjMkHGwYKpID9tcXqLGd?=
- =?us-ascii?Q?snSwcIKfF5tQ+mkEjBzKag+3fbCSNwxMWF5LvY6PqRc1as4LpRS63nidZhvt?=
- =?us-ascii?Q?J35JNUNJeEmTLm6fzHY2gdbh/XQEXBJDslFu7OesNON+830hRpZu6fDmlXhC?=
- =?us-ascii?Q?5lc5XNfxSxlJ8oQrpAuqV6MGM2Zf9523k9PVZE/gx+BfWdVuEor3CZHLGb1M?=
- =?us-ascii?Q?xCAqZ9x3GgRK/9KURiD7oIPhCdo4FHEeAPrDnqVcs0DkUIQD9s2a0j/z8AHH?=
- =?us-ascii?Q?1MFbuLOGQroVpXTzZ2GYO/kI9FLI38lG4pMBTMAMsZuq3msXLe0wufbhEFDs?=
- =?us-ascii?Q?RKsdTHJ4d2KSZoccuZKaucljysVZAy/C4cYBoqPcNllKy7Lkp3bXL7yb25tt?=
- =?us-ascii?Q?ryfNU50JXCtl0SE47GIavaZWbEZ7/YNe?=
+	=?us-ascii?Q?IM43IzqbFs5eNIWXHAU+n3FB1dXYAoZeNBHvcPP7EB50l1O4FUJ84S64sTpP?=
+ =?us-ascii?Q?jyedxh15OUPwyaFOFpku1MLkzrlcJeqBzGNUvyh0ii1k+0W0bV/JjXxlwR9o?=
+ =?us-ascii?Q?GvUorKXNKOa53RlNaPk3Zjgcd/MK2bbr371fKbI7muLr/Gwi/rDQlzr2n0aU?=
+ =?us-ascii?Q?wQlIPhyaozMCSGtNhKi2eWuoY3T60poy/uyMAWKq1t504aID+I3ztCyFfWke?=
+ =?us-ascii?Q?APIc8wFv/ZJBvTz3zaFGAXAbcTpac6OU6M/EhARJwWsKLCF/RxAQBOX0VJ+c?=
+ =?us-ascii?Q?wqVR71ceF9mzdeAjRJhxUPVR3xlAnNJ+mCMI+/qR4BspkXNdeUkhYcx120Uc?=
+ =?us-ascii?Q?bvr2iWaj0pVFooe9w4jSdQeCa1dghbf1MzVJTFmCXbH2yhToFe1GAvwBOHjz?=
+ =?us-ascii?Q?hnmyLMimHTaQkSp2e6NoVAcFIYMAWvalXu5E5y6rFc/DXT9eItMJcLlXmYSE?=
+ =?us-ascii?Q?WKFSVCC9SOi8KEMuEM5lRlu3+ekuisU8ogkR9gsXaC9cmE4AKc8jw/QEMA+I?=
+ =?us-ascii?Q?iWFbmWzF1N/fkNEW5hgTVQPNf8bv7YZWKYJXIA/+R3swTnkqSUxoivNadVyk?=
+ =?us-ascii?Q?aG56O6HKTxG8FY8eUwqZk41K074QT2nacuUDeXg1suwqzZRFwK4bOgDSV0Yl?=
+ =?us-ascii?Q?LTffLLDyLGDTHqyx0BDTlBVsDh/Q4EW5LSgPGrI/+13Cfk7DhaO0TpGeqMF8?=
+ =?us-ascii?Q?hKavgJ4D23qIECLIIWl2D3hm+fkauFuhuokraGbKi9C68z4qHOwGceSGOH90?=
+ =?us-ascii?Q?SIHLxfH/Dcd6gkXy0AfSpEEZHlJsIcau80niZf1MyUZcNFpcoRy3eekpz//4?=
+ =?us-ascii?Q?7cOodGcSSIkujT+TqLOi+kSoq2Fppj78ftAF3+StlFZBA+vizhlu1ODY8o6a?=
+ =?us-ascii?Q?Vik3weOiU/5a4wnfoiAZ6M4lnpIq26z22V9YSDxvONsTJYry9VEGGYVI/+95?=
+ =?us-ascii?Q?ZhzWgkaD33LgVEqLs8z6VMw+zy68TUZ1SSYewz6tDjfrBZCptnXmg5P/936E?=
+ =?us-ascii?Q?QwMgW+PrGWowWplBy0w/UBDC0EsSOenT/DWXcxtZ+8S6bO+ZmlclR2T1tOg8?=
+ =?us-ascii?Q?PgT5Q+eyyqe1twFP059LI833CXORf0Owuzxk1wqrv9xai8v4hs+8aGVToHtU?=
+ =?us-ascii?Q?+CQCNX3f+ZSNPIzQVnT1ChBvUA4YqyjrWEh3Mi21wrOpFylbLne0tsBSfhNG?=
+ =?us-ascii?Q?Z+/YXASAk9Oze+1y8PwyyZJKNQzEkGULVoEgUmSgem9KeeqRjjEMWYV+eVRy?=
+ =?us-ascii?Q?MmIviVelrVSqioVqYL/5J3l8t8gGTQNZtWDMl2SD4I52k5q55r5l7sgKMRUg?=
+ =?us-ascii?Q?0T3Auq7IGqAZ5Xi0qEGsYgd0pl9hP+Rx/mL9TvOKV1KjTEsUYlEMeiKqBmET?=
+ =?us-ascii?Q?uHvCFuWPtsG6ofmYmkwSeo5KfzuyS1/FxdDvBIUdRzzc4f90lFDoJnDl4ipP?=
+ =?us-ascii?Q?jdIrFM2GgvF+sv4M3/IppKctVAju2+DY?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 08:17:50.8416
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 08:15:59.0186
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d5fed296-43bd-4d34-737d-08dd1372fab9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 55dd04e2-4651-402c-3915-08dd1372b810
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000023D4.namprd21.prod.outlook.com
+	SJ1PEPF000023D3.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9081
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7610
 
-When _CPC table could not provide processor frequency range
-values for OS governor, we need to read processor max frequency
-as anchor point.
+Add Collaborative Processor Performance Control feature flag for
+AMD processors.
 
-For AMD processors, we rely on parsing DMI table to get processor
-max speed.
+amd-pstate is the AMD CPU performance scaling driver that
+introduces a new CPU frequency control mechanism on modern AMD
+APU and CPU series.
+There are two types of hardware implementations: "Full MSR Support"
+and "Shared Memory Support".
+
+Right now, xen will only implement "Full MSR Support", and this new
+feature flag indicates whether processor has this feature or not.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 ---
- xen/arch/x86/dmi_scan.c            | 19 +++++++++++++++++++
- xen/include/acpi/cpufreq/cpufreq.h |  2 ++
- xen/include/xen/dmi.h              |  5 +++++
- 3 files changed, 26 insertions(+)
+ xen/arch/x86/include/asm/cpufeature.h       | 1 +
+ xen/include/public/arch-x86/cpufeatureset.h | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/xen/arch/x86/dmi_scan.c b/xen/arch/x86/dmi_scan.c
-index 2fcc485295..ec9073c04b 100644
---- a/xen/arch/x86/dmi_scan.c
-+++ b/xen/arch/x86/dmi_scan.c
-@@ -10,6 +10,8 @@
- #include <xen/efi.h>
- #include <xen/pci.h>
- #include <xen/pci_regs.h>
-+#include <xen/unaligned.h>
-+#include <acpi/cpufreq/cpufreq.h>
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index 3a06b6f297..6935703e71 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -170,6 +170,7 @@ static inline bool boot_cpu_has(unsigned int feat)
+ #define cpu_has_amd_ssbd        boot_cpu_has(X86_FEATURE_AMD_SSBD)
+ #define cpu_has_virt_ssbd       boot_cpu_has(X86_FEATURE_VIRT_SSBD)
+ #define cpu_has_ssb_no          boot_cpu_has(X86_FEATURE_SSB_NO)
++#define cpu_has_cppc            boot_cpu_has(X86_FEATURE_CPPC)
+ #define cpu_has_auto_ibrs       boot_cpu_has(X86_FEATURE_AUTO_IBRS)
  
- #define memcpy_fromio    memcpy
- #define alloc_bootmem(l) xmalloc_bytes(l)
-@@ -680,6 +682,23 @@ static void __init cf_check dmi_decode(const struct dmi_header *dm)
- 				dmi_string(dm, data[6])));
- 			dmi_save_ident(dm, DMI_BOARD_VERSION, 6);
- 			break;
-+		case DMI_ENTRY_PROCESSOR:
-+			dmi_max_speed_mhz = 0;
-+			if ( dm->length >= DMI_ENTRY_PROCESSOR_MIN_LENGTH )
-+			{
-+				dmi_max_speed_mhz = (uint16_t)get_unaligned((const uint16_t *)
-+						(dm + DMI_PROCESSOR_MAX_SPEED_OFFSET));
-+				if ( !dmi_max_speed_mhz )
-+					dmi_printk(("Warnning: read zero value for Processor Max Speed\n"));
-+			}
-+			/*
-+			 * Real stupid fallback value, just in case there is no
-+			 * actual value set.
-+			 */
-+			dmi_max_speed_mhz = dmi_max_speed_mhz ? : 1;
-+
-+			dmi_printk(("Processor Max Speed: %u\n", dmi_max_speed));
-+			break;
- 	}
- }
- 
-diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
-index 71e8ca91f0..acf133430b 100644
---- a/xen/include/acpi/cpufreq/cpufreq.h
-+++ b/xen/include/acpi/cpufreq/cpufreq.h
-@@ -271,4 +271,6 @@ int acpi_cpufreq_register(void);
- int amd_pstate_cmdline_parse(const char *s, const char *e);
- int amd_pstate_register_driver(void);
- 
-+extern uint16_t dmi_max_speed_mhz;
-+
- #endif /* __XEN_CPUFREQ_PM_H__ */
-diff --git a/xen/include/xen/dmi.h b/xen/include/xen/dmi.h
-index ed6ffda315..158bb6228a 100644
---- a/xen/include/xen/dmi.h
-+++ b/xen/include/xen/dmi.h
-@@ -1,6 +1,11 @@
- #ifndef __DMI_H__
- #define __DMI_H__
- 
-+/* Minimum struct length needed for the DMI processor entry we want */
-+#define DMI_ENTRY_PROCESSOR_MIN_LENGTH  48
-+/* Offset in the DMI processor entry for the max frequency */
-+#define DMI_PROCESSOR_MAX_SPEED_OFFSET  0x14
-+
- enum dmi_field {
- 	DMI_NONE,
- 	DMI_BIOS_VENDOR,
+ /* CPUID level 0x00000007:0.edx */
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 8fa3fb711a..15f707639b 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -265,6 +265,7 @@ XEN_CPUFEATURE(AMD_PPIN,      8*32+23) /*   Protected Processor Inventory Number
+ XEN_CPUFEATURE(AMD_SSBD,      8*32+24) /*S  MSR_SPEC_CTRL.SSBD available */
+ XEN_CPUFEATURE(VIRT_SSBD,     8*32+25) /*!  MSR_VIRT_SPEC_CTRL.SSBD */
+ XEN_CPUFEATURE(SSB_NO,        8*32+26) /*A  Hardware not vulnerable to SSB */
++XEN_CPUFEATURE(CPPC,          8*32+27) /*A  Collaborative Processor Performance Control */
+ XEN_CPUFEATURE(PSFD,          8*32+28) /*S  MSR_SPEC_CTRL.PSFD */
+ XEN_CPUFEATURE(BTC_NO,        8*32+29) /*A  Hardware not vulnerable to Branch Type Confusion */
+ XEN_CPUFEATURE(IBPB_RET,      8*32+30) /*A  IBPB clears RSB/RAS too. */
 -- 
 2.34.1
 
