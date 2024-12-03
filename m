@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14751E69E9E
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Dec 2024 23:30:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.847131.1262258 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115D8E69E9F
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Dec 2024 00:16:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.847151.1262278 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIFs2-00057h-Ko; Mon, 02 Dec 2024 23:30:26 +0000
+	id 1tIGai-0003Dj-F4; Tue, 03 Dec 2024 00:16:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 847131.1262258; Mon, 02 Dec 2024 23:30:26 +0000
+Received: by outflank-mailman (output) from mailman id 847151.1262278; Tue, 03 Dec 2024 00:16:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIFs2-00057a-Gi; Mon, 02 Dec 2024 23:30:26 +0000
-Received: by outflank-mailman (input) for mailman id 847131;
- Mon, 02 Dec 2024 23:30:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tIGai-0003Dc-Bm; Tue, 03 Dec 2024 00:16:36 +0000
+Received: by outflank-mailman (input) for mailman id 847151;
+ Tue, 03 Dec 2024 00:16:36 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iA98=S3=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1tIFs0-00057U-JT
- for xen-devel@lists.xenproject.org; Mon, 02 Dec 2024 23:30:24 +0000
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20604.outbound.protection.outlook.com
- [2a01:111:f403:2406::604])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 65aef7bc-b105-11ef-a0d3-8be0dac302b0;
- Tue, 03 Dec 2024 00:30:22 +0100 (CET)
-Received: from CH0P220CA0017.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:ef::34)
- by SN7PR12MB8027.namprd12.prod.outlook.com (2603:10b6:806:32a::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.18; Mon, 2 Dec
- 2024 23:30:17 +0000
-Received: from CH1PEPF0000AD7E.namprd04.prod.outlook.com
- (2603:10b6:610:ef:cafe::c4) by CH0P220CA0017.outlook.office365.com
- (2603:10b6:610:ef::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.18 via Frontend Transport; Mon,
- 2 Dec 2024 23:30:17 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH1PEPF0000AD7E.mail.protection.outlook.com (10.167.244.87) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8230.7 via Frontend Transport; Mon, 2 Dec 2024 23:30:16 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Dec
- 2024 17:30:16 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Dec
- 2024 17:30:16 -0600
-Received: from [172.25.146.163] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 2 Dec 2024 17:30:15 -0600
+ <SRS0=On7Z=S4=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tIGai-0003DW-4M
+ for xen-devel@lists.xenproject.org; Tue, 03 Dec 2024 00:16:36 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id da1ccb81-b10b-11ef-99a3-01e77a169b0f;
+ Tue, 03 Dec 2024 01:16:33 +0100 (CET)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa543c4db92so716928266b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Dec 2024 16:16:33 -0800 (PST)
+Received: from andrewcoop.eng.citrite.net ([90.240.255.120])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa59990a8e5sm555423666b.173.2024.12.02.16.16.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Dec 2024 16:16:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,142 +47,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65aef7bc-b105-11ef-a0d3-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NKi/vrtKO2hxxM/BDXL0thDUAdrlWI2Bx9ujQkaZ4g9OBBQA68/btaLFfHTl4BzZoVECaPDnk49abHYnVxtxhRYOr2HvAQGD4LgXW9YluZeiN4cxv6l5t6xLROiNbpgqSQS0KDdLFBmTS359+yjYthQsFxCaaZmbZi/fmVWb78uynNJMJmJ926TYoRxM551xl3jPCKbj0Qy+OWdUmEoaV6wsDad1scxQgAasxW9DgrRwiNWRtEwN5rGv2MR9OVchvDkSLxWwdFnG2Oghx6Af1bvnMgXxYYpSgEtxIBl2qn2RpzpTueyffF0C1lgn8LXExB2YeYYnhMOu1R3xs8IQLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yr4+xPwlByZzVA0fa5bri/NPFAgZZCBLCSr7JMRSsUw=;
- b=Dn/6WH2FNVauIj2v/3MapWtgSwL11AyNLOSEWPD/ze5oKSPOzu2IkmP531Pwo0t3Rl3YWdZr26Kb1igA2lVJA0yWmPrsPGV2q9UfFSkKFQ1a+Y3sfLFBWr3LGW/R2dyJgMfurVmy4EWXhGfusqf8Uc0EyttIze5eq40XYJADAv0ARbkot+pkmupPHaEgsJaTIVcG6XoEa+7Xnfb4LLl0sOdfTpk9yNwLbAid10c51YB8k/3Ki8wUg0UzDQM1ki4e9oV+//rP95AQIAl84LKcHMFk85168/yLMou0DCrs3p/KNKuSUSJ0fZUtvqbIZelpIsFHpmpHUX5LoeAvcAFyYg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yr4+xPwlByZzVA0fa5bri/NPFAgZZCBLCSr7JMRSsUw=;
- b=Ak6QMlX41qHjs4DgVTZWxCarlElRz1o9nP/d+ZI0FuNeTRhabA1Of60Y92XlZl2F/O+7JF9SGaO1SZqGYBCscNEzXm/efJWGkTJJVciCPUWUM6pDjG3mCBRdtTr7onrpWSoXBtOURhrHJxm1O6U0FUEW7K5d8zz1tmY3ZFri4BE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <f82fdbc8-c77c-4551-88af-495c7d1db95e@amd.com>
-Date: Mon, 2 Dec 2024 18:30:14 -0500
+X-Inumbo-ID: da1ccb81-b10b-11ef-99a3-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1733184993; x=1733789793; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vayJHxmC3miwlguVJZfGiN5O+5EOjDwaWf4pKmb+Tjk=;
+        b=khN8fAUL36gTyh2kJWutao2NnmYseI1NOvi5Q2rvpRRhw5GcGvcoEab8NpJFGJBoc/
+         jbdMZfCElcOYfn4AwpsL9H5tJhUyzRqQ0omd4d7k4ibp/sSsWIgfA3Wpaq+OyL+RXjYL
+         h6WgP9Gl5dubHpZAZWsK9YlH85CFFbZmsSxTg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733184993; x=1733789793;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vayJHxmC3miwlguVJZfGiN5O+5EOjDwaWf4pKmb+Tjk=;
+        b=QTILD3edOJwfySLPycK8Exx6GumOYPvxa2g8awgNUnp7JM/c2TcdTQ9aAraPikrQpf
+         3m6VqBVo9O/1bwBup8RLLF8Ils0K94P9viYjeGLqWtb7akHzs6R9rZrMzWav3+l2gTjg
+         CwgAvu03nO3McyRVikr3wKcz8UzGYe2LwoNb/KOkN/XCygPBhnxJh7zII5YwTnPqNyhe
+         LQYrwH6zShaoNH5FD0RuM2X8Qu6dmniSiuqkp8XJuVKusaDgsMw74OxIr4lTUbaYRWH5
+         rMdNtmw/RqxCFch416KfCjJon108t5I6joq6KYnFlGZEEdubUjsgHKm0Wpdyf8FzaT68
+         J1qQ==
+X-Gm-Message-State: AOJu0YyxENZ+vuLZw8Pb7jF53P/0twxwN+w6QfrSQ2uUrdnGgGwTtolL
+	rU7+MXaWlX4ocTHofCyl9S/125ZVWwIBp5csFPIUxX86sR8lseD37eC8iOxHHO+FIMKDXQNK3Cy
+	jl3c=
+X-Gm-Gg: ASbGncttt4wZ2XEqA7dUtIVbL3sfHJJV3k77kLPkEii5pfd4QJ+Iwz5SGPA76kqmFRO
+	yod36jpEQdHy6/CAhvR0hzhkoSr+pzGnEoguk0c1CmytYfMM/xltGU9BSyGVMCULasC2ENSPVu8
+	N4jsDFwubO3v/G89IsJEXVOeTfkeP8JYChBh86O10BN3OkgWtyMyzuAcXgEt8iDeUjwmBG6Hk50
+	Xbo8x8N/Rhn3Wt9qSXVaxMtXBlFVYDG25rg7Fzuz+GgrVzJOqpY87ZDD4pOM/FU6STT4ftQaPdq
+	Yw==
+X-Google-Smtp-Source: AGHT+IFiF8+vfBFdlHkHlQu8gizE6sadjFeF8npnXqLtJuQka2R0mkoQ+vGiR+KBIpRLM9CTiDQT9A==
+X-Received: by 2002:a17:906:3d32:b0:aa5:1dc0:7c1 with SMTP id a640c23a62f3a-aa5f7ccf566mr15938966b.9.1733184992715;
+        Mon, 02 Dec 2024 16:16:32 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH] libs/guest: Fix migration compatibility with a security-patched Xen 4.13
+Date: Tue,  3 Dec 2024 00:16:29 +0000
+Message-Id: <20241203001629.132594-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Jason Andryuk <jason.andryuk@amd.com>
-Subject: Re: [PATCH v2 1/2] xl: Keep monitoring suspended domain
-To: Jan Beulich <jbeulich@suse.com>, Anthony PERARD
-	<anthony.perard@vates.tech>
-CC: <xen-devel@lists.xenproject.org>
-References: <20241126171941.170897-1-jason.andryuk@amd.com>
- <20241126171941.170897-2-jason.andryuk@amd.com> <Z0ieLBwYt2jm_WAa@l14>
- <95754086-9c90-4765-b386-299baf2b5f94@suse.com>
-Content-Language: en-US
-In-Reply-To: <95754086-9c90-4765-b386-299baf2b5f94@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7E:EE_|SN7PR12MB8027:EE_
-X-MS-Office365-Filtering-Correlation-Id: ca6d7622-5f95-46de-7010-08dd13294776
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?WTFDMEoxMklXR0FQeXdoK3c3K0IrWWdrTnRDYkk3dC9JTVEzb0NHODhtdTd6?=
- =?utf-8?B?cTcrVkw2REdld2NWNG9jZkNBMmhKQVhOUk1LblhSUjRqbXBEdm9xWUNhQlY2?=
- =?utf-8?B?TGJhbVlYMGhvUzRkOEdLL3VQVWo5TkQ5ajk4KzZ2WnNyMERTWHJxOTJ6UDlo?=
- =?utf-8?B?Zm9VTlZ5TjkxbzFmTEdMcXJyZzE2c2RRWnBwL0ZsNnNua1g1SndId1VrSS80?=
- =?utf-8?B?VzZaN0xMT1MxaG5ML2JzUzVQalo4SFpNbnR4SWp0cDBGRG9Kb2VJN2ZIcko4?=
- =?utf-8?B?dUdJbkdSSXhwSVhOZnE3Q0FoMmkxdHREeGNVZGlrYTJtSFp1YllLdjl3ckRG?=
- =?utf-8?B?UHAwdXBuQ2VES0tZRkRkbitVMk9MRzR2MTV4aW1xQmY4VXlQbXZQbU9wYVFP?=
- =?utf-8?B?ejdwZzVJa0tGQzZjWkJTUWgrZlY1OHcydStjMnp6SDYzZ3NkUks0RStLa3d1?=
- =?utf-8?B?V2FZOUYzZytBbUNSSjdKSDVmU0I2QjJqUWgxYk53UGhzRkQ3SmlORG5JUWlS?=
- =?utf-8?B?bDZjL0w5OVVRWGN6bmFhNFBtZ0w2NS9mTXBoSWNpVytVeW9OQ2thZXRNRVNF?=
- =?utf-8?B?TFNMSlYveEU5ZWV5cllXUWNONXFpemF3bEMzazhETUtZREl2WUJjTUFrUWZr?=
- =?utf-8?B?RndYZ1NKQjRYVGZ3blNmcmRTSG8vODRCTXNaWmt2L0RBSjJxdjh4cmVBaVhw?=
- =?utf-8?B?UENqNFkyb2czSnlVcU9nMVpzRDJDVTVDM1ZFRC9ma2tDV3ZaSlhlZkNtRUV0?=
- =?utf-8?B?VEZtSHZuSlhGQUVjTHZCSi9wT2pZTjNia2d5dDFzWDZJanI3Q0tQU214UWZh?=
- =?utf-8?B?YXE2Rmx2Q1FoL250dXR6QUhOUC9LNUMzU0FIRDB4alZPeGdiNWo4ZWo5dklK?=
- =?utf-8?B?N3NodllKWjhhWWxmNkliUk1rL1B1YktRY1JpbG90UHJnbkhGbG9ybzRRZitS?=
- =?utf-8?B?VXZ4clNRZkpLUEV4UjBOZ3J5Ym13djNTY1ZLNURvUTFGVXcrKzlTbS9NTWNF?=
- =?utf-8?B?SEtPM21LZ2RoVllXdE5QT3R1dHhnQzNTZTdCT2xmcHdSdS80NXpCYjlJc2lh?=
- =?utf-8?B?M2hRTG1MWHZhcnYvWXdtRE9OY1lIRHJyL01oSS9zSDNhbll0RUJsK1ZXb1JX?=
- =?utf-8?B?a2hJaHBGWFQvbjJWemdYbTNYcnFZakduYUo3bjhzM0RWUjNJVEN1KzV6SDUz?=
- =?utf-8?B?MU5lZmEyK1dwdmQ0WlhXK0xMcDhOTEk2MFZkMjJvSFovZzVCdHpCdWJTWFdP?=
- =?utf-8?B?K0g2azVVTG1NWU5vTHNUQnR4djgydGQ4eC9HSVJTaWoxd3pxckZUalFrdnBE?=
- =?utf-8?B?ZUpPa3lTVlJqN2FPZVJjbkRIenc2N1UxdmxTQ3B3V2RNbFFBaXB5NzloK3lH?=
- =?utf-8?B?WWpkakxzR1hXYVEyQnJLQW4xYWJMc3hmY3NMV2w0YXd6T1E1UjhlYjlYWDdG?=
- =?utf-8?B?VExkY0h6bG5NRUxyd0RDTURUbTNtV3E3NXBxcHF2eEkxcFU5T2ViYzhETC9k?=
- =?utf-8?B?L2ViMklmUEdOdFJsM0lURGxLZTNlbFpsS1VZZjFHQkRuaDJLMjEvUVJ5ZlFS?=
- =?utf-8?B?dGRWTUcwRmZ4aU9GVFVwcVBObXZNWmgrbzdVYk9mbG1nQko5b1RJWUR2dmxL?=
- =?utf-8?B?WUFCNXF5Vmswc3d0Q1lhTHdVL1F5ZkkxTWt2OWtOVHREaFRFRktpUEhDWjFT?=
- =?utf-8?B?R1dQOThjN2tQR3ZadjVwMjkxZVFBT0N6aDFMbEk1OUpyM1IvUmQ2K0lPa3VK?=
- =?utf-8?B?eHUyL0pSeHVtR1FXZEROenlLQk16bUh2amRreWNrb1B6VmV2YmN0TkE3TmQ3?=
- =?utf-8?B?VFVOeDdsRENLSVNEQ0I3czVMRGdoamRlZFBRWDJPM0FPNmtwcmZ1dHIxQ3RE?=
- =?utf-8?B?L0l6eHgxMzFpeTRTSU4ycVMrU1VtSm5BUVVQMm5NWHRBc2U4eDNaSVJOT0Qw?=
- =?utf-8?Q?RHmgg67/qoWo/bQYv4wQPXRx1iwNYtY4?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2024 23:30:16.8603
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ca6d7622-5f95-46de-7010-08dd13294776
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000AD7E.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8027
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 2024-12-02 03:53, Jan Beulich wrote:
-> On 28.11.2024 17:45, Anthony PERARD wrote:
->> On Tue, Nov 26, 2024 at 12:19:40PM -0500, Jason Andryuk wrote:
->>> When a VM transitioned to LIBXL_SHUTDOWN_REASON_SUSPEND, the xl daemon
->>> was exiting as 0 = DOMAIN_RESTART_NONE "No domain restart".
->>> Later, when the VM actually shutdown, the missing xl daemon meant the
->>> domain wasn't cleaned up properly.
->>>
->>> Add a new DOMAIN_RESTART_SUSPENDED to handle the case.  The xl daemon
->>> keeps running to react to future shutdown events.
->>>
->>> The domain death event needs to be re-enabled to catch subsequent
->>> events.  The libxl_evgen_domain_death is moved from death_list to
->>> death_reported, and then it isn't found on subsequent iterations through
->>> death_list.  We enable the new event before disabling the old event, to
->>> keep the xenstore watch active.  If it is unregistered and
->>> re-registered, it'll fire immediately for our suspended domain which
->>> will end up continuously re-triggering.
->>>
->>> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
->>
->> Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
-> 
-> While committing I was wondering: Does this want/need backporting (and hence
-> was it perhaps lacking a Fixes: tag)?
+xc_cpuid_apply_policy() provides compatibility for migration of a pre-4.14 VM
+where no CPUID data was provided in the stream.
 
-Thanks, Jan.
+It guesses the various max-leaf limits, based on what was true at the time of
+writing, but this was not correctly adapted when speculative security issues
+forced the advertisement of new feature bits.  Of note are:
 
-I don't think it's really worth backporting.  Mainly, it hasn't been an 
-issue in the last 14 years.  A Linux domU doesn't suspend itself - it 
-only does so in response to a xenstore watch.  A domU *could* suspend 
-itself without the xenstore watch, but that doesn't seem to happen in 
-practice.  Since xl has not been able to generate those xenstore events 
-prior to the `xl suspend` introduction, this code path hasn't run or 
-been an issue.
+ * LFENCE-DISPATCH, in leaf 0x80000021.eax
+ * BHI-CTRL, in leaf 0x7[2].edx
 
-The tag would be:
-Fixes: 1a0e17891f ("xl: support on_{poweroff,reboot,crash} domain 
-configuration options.")
+In both cases, a VM booted on a security-patched Xen 4.13, and then migrated
+on to any newer version of Xen on the same or compatible hardware would have
+these features stripped back because Xen is still editing the cpu-policy for
+sanity behind the back of the toolstack.
 
-Regards,
-Jason
+For VMs using BHI_DIS_S to mitigate Native-BHI, this resulted in a failure to
+restore the guests MSR_SPEC_CTRL setting:
+
+  (XEN) HVM d7v0 load MSR 0x48 with value 0x401 failed
+  (XEN) HVM7 restore: failed to load entry 20/0 rc -6
+
+Fixes: e9b4fe263649 ("x86/cpuid: support LFENCE always serialising CPUID bit")
+Fixes: f3709b15fc86 ("x86/cpuid: Infrastructure for cpuid word 7:2.edx")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+
+Every option here is terrible.  This is the least terrible one I could come up
+with.
+
+XenServer, still the only caller to provide featureset into
+xc_cpuid_apply_policy() could in principle reverse engineer these two numbers
+from the non-zero-ness of the passed-in feature words.  However, such an
+approach more complicated, equally as fragile, and not reusable with the
+current plans to re-integrate the shrinking logic.  i.e. this is the least
+invasive option.
+---
+ tools/libs/guest/xg_cpuid_x86.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
+index 4453178100ad..263a9d4787b6 100644
+--- a/tools/libs/guest/xg_cpuid_x86.c
++++ b/tools/libs/guest/xg_cpuid_x86.c
+@@ -640,7 +640,8 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+          *
+          * This restore path is used for incoming VMs with no CPUID data
+          * i.e. originated on Xen 4.13 or earlier.  We must invent a policy
+-         * compatible with what Xen 4.13 would have done on the same hardware.
++         * compatible with what a security-patched Xen 4.13 would have done on
++         * the same hardware.
+          *
+          * Specifically:
+          * - Clamp max leaves.
+@@ -657,8 +658,8 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+         }
+ 
+         p->policy.basic.max_leaf = min(p->policy.basic.max_leaf, 0xdu);
+-        p->policy.feat.max_subleaf = 0;
+-        p->policy.extd.max_leaf = min(p->policy.extd.max_leaf, 0x8000001c);
++        p->policy.feat.max_subleaf = min(p->policy.feat.max_subleaf, 0x2u);
++        p->policy.extd.max_leaf = min(p->policy.extd.max_leaf, 0x80000021);
+     }
+ 
+     if ( featureset )
+
+base-commit: 126b0a6e537ce1d486a29e35cfeec1f222a74d11
+-- 
+2.39.5
+
 
