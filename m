@@ -4,33 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EEE2E7716B
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Dec 2024 14:33:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.848587.1263452 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99872E7716E
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Dec 2024 14:48:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.848625.1263462 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIqQz-00071z-8B; Wed, 04 Dec 2024 14:32:57 +0000
+	id 1tIqfe-0000XY-Ev; Wed, 04 Dec 2024 14:48:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 848587.1263452; Wed, 04 Dec 2024 14:32:57 +0000
+Received: by outflank-mailman (output) from mailman id 848625.1263462; Wed, 04 Dec 2024 14:48:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIqQz-00071s-49; Wed, 04 Dec 2024 14:32:57 +0000
-Received: by outflank-mailman (input) for mailman id 848587;
- Wed, 04 Dec 2024 14:30:14 +0000
+	id 1tIqfe-0000XR-BS; Wed, 04 Dec 2024 14:48:06 +0000
+Received: by outflank-mailman (input) for mailman id 848625;
+ Wed, 04 Dec 2024 14:48:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Vacz=S5=gmail.com=alchark@srs-se1.protection.inumbo.net>)
- id 1tIqOM-0005sF-4T
- for xen-devel@lists.xenproject.org; Wed, 04 Dec 2024 14:30:14 +0000
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [2607:f8b0:4864:20::832])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=NeK1=S5=bounce.vates.tech=bounce-md_30504962.67506ba1.v1-78a7af3d9efe4da895ea52e44101c412@srs-se1.protection.inumbo.net>)
+ id 1tIqfd-0000XL-2K
+ for xen-devel@lists.xenproject.org; Wed, 04 Dec 2024 14:48:05 +0000
+Received: from mail136-20.atl41.mandrillapp.com
+ (mail136-20.atl41.mandrillapp.com [198.2.136.20])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 452237c3-b24c-11ef-a0d4-8be0dac302b0;
- Wed, 04 Dec 2024 15:30:13 +0100 (CET)
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-4668486dec2so50520481cf.3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Dec 2024 06:30:13 -0800 (PST)
+ id c2ee70d5-b24e-11ef-a0d4-8be0dac302b0;
+ Wed, 04 Dec 2024 15:48:03 +0100 (CET)
+Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail136-20.atl41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4Y3L3j0dMDzCf9Q9t
+ for <xen-devel@lists.xenproject.org>; Wed,  4 Dec 2024 14:48:01 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 78a7af3d9efe4da895ea52e44101c412; Wed, 04 Dec 2024 14:48:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,91 +45,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 452237c3-b24c-11ef-a0d4-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733322611; x=1733927411; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=l4ORUpe0pVZmQmvkw1nu+aTOjOaP1O5zfh0k3pgSPzo=;
-        b=GVgvQ+3+LKHEMDfnYXBcetqITur8s8TnO1CafJymu78jNYMmR414HYkWAMCOWJjJ4M
-         pNUP1AELaTPhYwT5uKJCVA7rH7AhrZGoIjz+AyINEP6IOdtk2qUwvZUMLA1xqwFW5h2b
-         0sIsN6g4j9GQsLlCqn9+MxggRO8TpoWQxezJbZfXSZ3+ra6DdShwx7P7dPV8jURV9Vqm
-         h+oERGOiUVZlJbnBpxomAoWPnJgTRQVvTfouxHttxLqrISytPGzu3wyiP2RtRQsa+yiS
-         o+zeIJ8q8nPlRDUPnzbqTL6IF4zoIY4vdOYNnBkTHcbouwm2A8bTWSVOlwj+jXjCk8Ge
-         k5Ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733322611; x=1733927411;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=l4ORUpe0pVZmQmvkw1nu+aTOjOaP1O5zfh0k3pgSPzo=;
-        b=Z/dgYmxH4kYDBqB5P3aJWBrRQBdamizYSxdK+6RPjkVPYVQD8aPWnZoJCzVnWuvNMS
-         yDsYxu6VUmgdRtmE5Db7ARGRj7lJbn5lNlK07daPqpuXbxliIWCvNbbu50AayqySOVQC
-         MXJksLXUfjuOzmxWFTALuKMJrKNJA2D41erIxbwsxSnKAiBjOV+JBYAVQZlBpMFlO0wH
-         ywIcXjZjUiqPEacFLNTCcUT2SAesgk71hRZC/0q99DBw59q9NX36Fg6yZfCpC29vVuhr
-         x1ekZAkuJ5mYT6ZylwC3PMQXaJeg3CSm71zhnIPwSILiuoLoGh2KzF1V35HqQH4d+NrB
-         qQHQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWibUoZh2QAkDIHenCX6NSyJmKTIrj+CEf40hwo2FPjMRGcGAwpnV/dnNmIeORBXC+CzvJYudICSz4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxWuyCLvhpbGAd4M2erLgW4TtnOl1F7XJzt3OtsMiC0sWiGmpMK
-	eYO50KCWguLt2quXDei9Jb9+pLK6kTHihCRsSYz0gW0Bh4uHOtF/TyET3USJkKrgDoEmGCOOMOP
-	45o/y/4d3dlNdt12xzHRgV+AmTQc=
-X-Gm-Gg: ASbGnct0d8IPMoa0RZprcsAvMUv5KoSzlpqWnQiA6gaablCprrLl85L/g87Y4tCjgd6
-	/17wId8MJUnqKzfGxGDJD+POBsVmJEWQ=
-X-Google-Smtp-Source: AGHT+IFz9AqjuEgEtpGhSGQOZnrxRUdrncSun9IdkUiaSxXNrzlUhCJKBQf8IWnzX9RSbBxpI0ATkHRWJCCRT5JjEU8=
-X-Received: by 2002:a05:622a:1801:b0:463:60a9:74c0 with SMTP id
- d75a77b69052e-4670c09df44mr91467951cf.14.1733322611045; Wed, 04 Dec 2024
- 06:30:11 -0800 (PST)
+X-Inumbo-ID: c2ee70d5-b24e-11ef-a0d4-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1733323681; x=1733584181;
+	bh=u35DPZ8ea1kMaR4tSzEAnpDkJRruFsNUg1/+5+OYYAY=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=aZ5NTpH5L0jVYhaSp06jSRH5qBinj0rX3TOqIQaKxEsm/J0i2G1S7z3JKX6KZkqdt
+	 30Pnn1wXVsuS3i3FWXsxy+8rFryVEqk34Vj8BGfWJMuG4VV1Lqqo64dgznda6VMtm+
+	 vn+kzE7wPmIm9hVFvyFQEWfvtPj35tRisXgQlN9FFtsXC5ht4rPYG3psOzAMdZ18H5
+	 bHGlmFAf6/j8k0x86NX/ef/WJcrp4KyKkpLvtk2PUt8j3QrcY9kdvGCktKvcSUQx24
+	 /6C1gNsS1fsibtgWRuImvlpi78/mKw+o+z53eQXZwhpq0WQMc99wJVi2v0wfYx81DI
+	 KG/JwIZy64Txg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1733323681; x=1733584181; i=teddy.astie@vates.tech;
+	bh=u35DPZ8ea1kMaR4tSzEAnpDkJRruFsNUg1/+5+OYYAY=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=fsNVnAHqsZ2UnMRdfaXjGuKee9vrmkzZZ4GAHy11d8VxKM7ae8ph8Cdnq5I4h0z2D
+	 TTNVOAG8yXTTmWBetYtrMVbEg3CHvAtWLKha/xQW5wrSwvHK6YMQfIieMMO4rWAC7d
+	 k8YDUXi4CpCdLhdESO3ibTVFTHE7Qo9bUlTFLfPFSiGRsK5doEOsg0k4NOoa1bJ6Sh
+	 AHRjut227qC9Sj/6oi/Gvyopmo8psDQax5Kdd8Rltmne75l6GLSSRRaEVwJdVGVbKW
+	 P/Z8Bvv9NCFKnmDjIRydGN6iug0STAoa0QIECn88F7L7+oUMiR4Ay3Nrkh7gILb20b
+	 YvKvEqIJrQvAw==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20[RFC=20PATCH=2019/25]=20xen:=20Replace=20hand-crafted=20domctl/createdomain=20with=20autogenerated=20version?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1733323679366
+Message-Id: <e92aa801-fd2a-402e-9848-3019f094d194@vates.tech>
+To: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>, xen-devel@lists.xenproject.org
+Cc: "Anthony PERARD" <anthony.perard@vates.tech>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Jan Beulich" <jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
+References: <20241115115200.2824-1-alejandro.vallejo@cloud.com> <20241115115200.2824-20-alejandro.vallejo@cloud.com>
+In-Reply-To: <20241115115200.2824-20-alejandro.vallejo@cloud.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.78a7af3d9efe4da895ea52e44101c412?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20241204:md
+Date: Wed, 04 Dec 2024 14:48:01 +0000
 MIME-Version: 1.0
-References: <20241202194107.105119-1-afd@ti.com> <20241202194107.105119-5-afd@ti.com>
-In-Reply-To: <20241202194107.105119-5-afd@ti.com>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Wed, 4 Dec 2024 17:30:00 +0300
-Message-ID: <CABjd4YxYjX2bHSBMmPxH-5muQL5TG_ATS8B0+vCdNKJARke6BQ@mail.gmail.com>
-Subject: Re: [PATCH v4 4/5] ARM: vt8500: Switch to new sys-off handler API
-To: Andrew Davis <afd@ti.com>
-Cc: Arnd Bergmann <arnd@arndb.de>, Andre Przywara <andre.przywara@arm.com>, 
-	Russell King <linux@armlinux.org.uk>, Daniel Mack <daniel@zonque.org>, 
-	Haojian Zhuang <haojian.zhuang@gmail.com>, Robert Jarzmik <robert.jarzmik@free.fr>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Stefano Stabellini <sstabellini@kernel.org>, 
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Hi Andrew,
+Hello,
 
-On Mon, Dec 2, 2024 at 10:41=E2=80=AFPM Andrew Davis <afd@ti.com> wrote:
->
-> Kernel now supports chained power-off handlers. Use
-> register_platform_power_off() that registers a platform level power-off
-> handler. Legacy pm_power_off() will be removed once all drivers and archs
-> are converted to the new sys-off API.
->
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
->  arch/arm/mach-vt8500/vt8500.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-vt8500/vt8500.c b/arch/arm/mach-vt8500/vt8500.=
-c
-> index 0ab40087ae1cc..1d294255d7083 100644
-> --- a/arch/arm/mach-vt8500/vt8500.c
-> +++ b/arch/arm/mach-vt8500/vt8500.c
-> @@ -141,7 +141,7 @@ static void __init vt8500_init(void)
->                         pr_err("%s:ioremap(power_off) failed\n", __func__=
-);
->         }
->         if (pmc_base)
-> -               pm_power_off =3D &vt8500_power_off;
-> +               register_platform_power_off(vt8500_power_off);
+There is a alternative relevant way of representing "handle" (keeping  :
 
-This really calls for a separate tiny driver under drivers/power to
-remove the legacy single-register remapping higher up in this
-function... Pending that:
+> +[[structs.fields]]
+> +name = "handle"
+> +description = "IN: Unique identifier for this guest given by the toolstack."
+> +typ = { tag = "array", args = [{ tag = "u8" }, 16]  }
+> +
 
-Acked-by: Alexey Charkov <alchark@gmail.com>
+We can introduce a "guest_handle" type which is represented either as :
+- C: xen_guest_handle_t (basically uint8_t[16])
+- Rust: uuid::Uuid (which is uuid::Bytes thus [u8; 16]) [1]
+(we would need to add uuid = "1" as a dependency on xen-sys)
 
-Best regards,
-Alexey
+The toolstack currently uses and represents this handle as a UUID, so I 
+suppose we can keep this representation and being able to manipulate 
+those as Uuid as well (and having new_v4 functions and similar).
+
+[1] https://docs.rs/uuid/1.11.0/uuid/struct.Uuid.html#abi
+
+Cheers
+Teddy
+
+
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
