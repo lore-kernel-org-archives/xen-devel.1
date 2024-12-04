@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DDEE7716B
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Dec 2024 14:08:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.848576.1263422 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 622B3E77175
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Dec 2024 14:31:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.848589.1263431 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIq2h-0002Cu-Me; Wed, 04 Dec 2024 14:07:51 +0000
+	id 1tIqPd-0005xr-Fd; Wed, 04 Dec 2024 14:31:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 848576.1263422; Wed, 04 Dec 2024 14:07:51 +0000
+Received: by outflank-mailman (output) from mailman id 848589.1263431; Wed, 04 Dec 2024 14:31:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tIq2h-0002Cn-JK; Wed, 04 Dec 2024 14:07:51 +0000
-Received: by outflank-mailman (input) for mailman id 848576;
- Wed, 04 Dec 2024 14:07:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tIqPd-0005xk-Cu; Wed, 04 Dec 2024 14:31:33 +0000
+Received: by outflank-mailman (input) for mailman id 848589;
+ Wed, 04 Dec 2024 14:31:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jaeH=S5=bounce.vates.tech=bounce-md_30504962.67506230.v1-c9fb72217ccc4995aaeed03a349a81c1@srs-se1.protection.inumbo.net>)
- id 1tIq2f-0002Ch-Rm
- for xen-devel@lists.xenproject.org; Wed, 04 Dec 2024 14:07:50 +0000
-Received: from mail180-27.suw31.mandrillapp.com
- (mail180-27.suw31.mandrillapp.com [198.2.180.27])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 22315ec5-b249-11ef-99a3-01e77a169b0f;
- Wed, 04 Dec 2024 15:07:45 +0100 (CET)
-Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail180-27.suw31.mandrillapp.com (Mailchimp) with ESMTP id
- 4Y3K9D0fBJz6CQQJm
- for <xen-devel@lists.xenproject.org>; Wed,  4 Dec 2024 14:07:44 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- c9fb72217ccc4995aaeed03a349a81c1; Wed, 04 Dec 2024 14:07:44 +0000
+ <SRS0=thoz=S5=intel.com=jani.nikula@srs-se1.protection.inumbo.net>)
+ id 1tIqPb-0005xe-I6
+ for xen-devel@lists.xenproject.org; Wed, 04 Dec 2024 14:31:31 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 71a8107e-b24c-11ef-a0d4-8be0dac302b0;
+ Wed, 04 Dec 2024 15:31:28 +0100 (CET)
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+ by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Dec 2024 06:31:26 -0800
+Received: from mwiniars-desk2.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.205])
+ by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Dec 2024 06:31:21 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,74 +45,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22315ec5-b249-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1733321264; x=1733581764;
-	bh=8t8U+zgJZtjkj5kbEmTvYvbrqtJ0B+UOcaKS+uPHTwA=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=Kkq+WcAxE1t0ekfNV9Rpx1E3Am0kypqX1/X/mm+soY/9j2sKGMjj0tk+ZhzQXtzpm
-	 /Ogca7bH6ndLDZMuxCz7JdTRB/nQbx/A+TA0KSCx2MLx5gDibNssvtz5I29ZkGI3H2
-	 1MTXCe/n+C84ZrqTI3ZslZhf9tl0qM9tKUPsTb3zsm0y3lNy3AjvdhwHSTLvJ/7deJ
-	 mNO99CIV04PS0jXfq3ujzR/jk40D6WIINOIMAiyzBdw8IaHkZThboEkNjXz701HL9U
-	 7xfUqHk1/srvtzxIWCozEDbxFZUDuQdP3n47KMoxYZVka+7ZhTJClWSncDTiTE4p1d
-	 zjVThhG7SFT/Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1733321264; x=1733581764; i=anthony.perard@vates.tech;
-	bh=8t8U+zgJZtjkj5kbEmTvYvbrqtJ0B+UOcaKS+uPHTwA=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=1EeQIKbXBQmeDGzGukAJ+aesdDpasHBCrOo9sO8/TZfEGPyXU3/3t2HDMWYqPI3QY
-	 R3zMGVeVplqL9Cy0pK8y2+kRHD8z3r2cpnXNnMs0ZbxDZGKLeLt68eK4k5tJPCfJZU
-	 B3wjCxUBqTaysTIiWzrB5JUY7mTdaY3FDsBnA08tzeCO5SpX/p2Ms6JvFQOynir3A7
-	 OD9y967/+/CVyS4q0wEeT/8Ua2s5tUTyD3n/dEBqnLKMr9dlnXne8WgMs7Ul4AtTB/
-	 Tv2UTpGooaH+c+OJ6KPoG1XoCKYdT5mYYEF3SSVFuZOnTAf0ovycrbOslEwba7Y9lA
-	 OE2dpVqLQLv8Q==
-From: "Anthony PERARD" <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=20v11=2006/12]=20tools:=20add=20support=20for=20cache=20coloring=20configuration?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1733321263150
-To: "Carlo Nonato" <carlo.nonato@minervasys.tech>
-Cc: xen-devel@lists.xenproject.org, andrea.bastoni@minervasys.tech, marco.solieri@minervasys.tech, "Nick Rosbrook" <rosbrookn@gmail.com>, "George Dunlap" <gwd@xenproject.org>, "Juergen Gross" <jgross@suse.com>
-Message-Id: <Z1BiLvkBxgoPgl7F@l14>
-References: <20241202165921.249585-1-carlo.nonato@minervasys.tech> <20241202165921.249585-7-carlo.nonato@minervasys.tech>
-In-Reply-To: <20241202165921.249585-7-carlo.nonato@minervasys.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.c9fb72217ccc4995aaeed03a349a81c1?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20241204:md
-Date: Wed, 04 Dec 2024 14:07:44 +0000
+X-Inumbo-ID: 71a8107e-b24c-11ef-a0d4-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1733322688; x=1764858688;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=dTapqBXiBmZ3/iS1nkrTPcg40STqJyfdMGiif+W/trs=;
+  b=mlsdN0yyPJDjcGIwIiZKOJeSSqwsaIzlJFDV3zdz3ygPsovIArloIIhU
+   RaoNR8Fo9D88VaOjVAfs2QDhvvPcz6gXo2teF/Fiz1KCg5PXkLm9JJCIy
+   MdRa33UpMrs2Gg98CUebEB6k+MlIb1J+zExz2JEo/SnZunCSw/cWO7kOx
+   ddmtLtBC0eEKiGtqfQzhVeGuzQJgw3OxkW5jH0qr+CrmQ1tt6M1yzCNg9
+   3VxWckicjuWElhof/tU4e4j8g5Iq8E9Q6F+CSosCdnjWm4AwapyKmMt7F
+   PU6CpMvMeksgQbuUql0hG46/VHYQmCnZzRcFMZp59yHoWS4iylG8h4A2X
+   w==;
+X-CSE-ConnectionGUID: W5yT81heTSaStyJ4Y7MeJg==
+X-CSE-MsgGUID: aXkMWb5JQdG7po/SfdRpNg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="44255526"
+X-IronPort-AV: E=Sophos;i="6.12,207,1728975600"; 
+   d="scan'208";a="44255526"
+X-CSE-ConnectionGUID: qP9l167GS5WX+6j0tx76Uw==
+X-CSE-MsgGUID: 0lE6/Rr8R8asFhrmSkn/wg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,207,1728975600"; 
+   d="scan'208";a="93963339"
+From: Jani Nikula <jani.nikula@intel.com>
+To: dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org
+Cc: jani.nikula@intel.com,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v2 1/3] drm/xen: remove redundant initialization info print
+Date: Wed,  4 Dec 2024 16:31:10 +0200
+Message-Id: <900b3836c80a23923ede034ab10eb344be1e35bd.1733322525.git.jani.nikula@intel.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <cover.1733322525.git.jani.nikula@intel.com>
+References: <cover.1733322525.git.jani.nikula@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 
-On Mon, Dec 02, 2024 at 05:59:15PM +0100, Carlo Nonato wrote:
-> Add a new "llc_colors" parameter that defines the LLC color assignment for
-> a domain. The user can specify one or more color ranges using the same
-> syntax used everywhere else for color config described in the
-> documentation.
-> The parameter is defined as a list of strings that represent the color
-> ranges.
-> 
-> Documentation is also added.
-> 
-> Based on original work from: Luca Miccio <lucmiccio@gmail.com>
-> 
-> Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-> Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+drm_dev_register() already prints the same information on successful
+init. Remove the redundant prints.
 
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+Acked-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
 
-Thanks,
+---
 
+Note: I prefer to merge this together with the next patch via
+drm-misc-next.
+
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
+Cc: xen-devel@lists.xenproject.org
+---
+ drivers/gpu/drm/xen/xen_drm_front.c | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/xen/xen_drm_front.c b/drivers/gpu/drm/xen/xen_drm_front.c
+index aab79c5e34c2..931d855bfbe8 100644
+--- a/drivers/gpu/drm/xen/xen_drm_front.c
++++ b/drivers/gpu/drm/xen/xen_drm_front.c
+@@ -525,11 +525,6 @@ static int xen_drm_drv_init(struct xen_drm_front_info *front_info)
+ 	if (ret)
+ 		goto fail_register;
+ 
+-	DRM_INFO("Initialized %s %d.%d.%d %s on minor %d\n",
+-		 xen_drm_driver.name, xen_drm_driver.major,
+-		 xen_drm_driver.minor, xen_drm_driver.patchlevel,
+-		 xen_drm_driver.date, drm_dev->primary->index);
+-
+ 	return 0;
+ 
+ fail_register:
 -- 
+2.39.5
 
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
 
