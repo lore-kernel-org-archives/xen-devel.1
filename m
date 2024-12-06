@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C94ADE7717B
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:42:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.849426.1264150 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A84E77173
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:42:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.849427.1264161 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQAB-0008Oa-OF; Fri, 06 Dec 2024 04:41:59 +0000
+	id 1tJQAE-0000Nf-0h; Fri, 06 Dec 2024 04:42:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 849426.1264150; Fri, 06 Dec 2024 04:41:59 +0000
+Received: by outflank-mailman (output) from mailman id 849427.1264161; Fri, 06 Dec 2024 04:42:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQAA-0008LS-Jx; Fri, 06 Dec 2024 04:41:58 +0000
-Received: by outflank-mailman (input) for mailman id 849426;
- Fri, 06 Dec 2024 04:41:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tJQAC-0000FC-G9; Fri, 06 Dec 2024 04:42:00 +0000
+Received: by outflank-mailman (input) for mailman id 849427;
+ Fri, 06 Dec 2024 04:41:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5aHD=S7=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tJQA1-0004Ka-Mg
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:49 +0000
+ id 1tJQA2-0004Kb-0D
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:50 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 634e9c37-b38c-11ef-a0d5-8be0dac302b0;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 631bd654-b38c-11ef-99a3-01e77a169b0f;
  Fri, 06 Dec 2024 05:41:42 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E84FD5C7316;
+ by dfw.source.kernel.org (Postfix) with ESMTP id A45025C730F;
  Fri,  6 Dec 2024 04:40:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 88145C4CED1;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 29627C4CED2;
  Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 7E850E77171;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 1D715E77171;
  Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,24 +47,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 634e9c37-b38c-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 631bd654-b38c-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1733460098;
-	bh=1+CfSEkR8zxLHnRjqs6FthJiLe4CA0nTnQb0fq6KDB8=;
+	bh=ta4eTkD9D4OUBDs5UKjXmM1SaNyKboC1ozVSiJGJ9fk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=mOcVJpk4N5JHbTIyQQM8RLgj5RcdtbYqIFONH8W+JhIioNg9ggVz6vQn60b1I24H+
-	 zJQzrY1JeyR8kb7iDNydGZZZyXM0zrZo4Z/v7FCa/YLOtHLtmN+74nG6wgrsLKZoKL
-	 YOWUr/TWWSxcLbTCoE/zctSUS+zkxY8bQ1bGEkGNwfdPKVnaZsukpxcd5+RBRUJJ+G
-	 G6eTtn/+DTVdbxcMbhcAz28RcFptGq/kgILDn+UleKb5teBht70HcGRbKTrzZyHEv2
-	 y1tGL2n/9Gzv0kzSHHUVNIVEfiK1ZcOqTXr6VYEWlLgZO3MDLyFj+iseYCtMHwql6I
-	 xIkYJL4STxTQw==
+	b=BDbPVXF39OLBkCaf44ChkLhfEnQh5AA+aAdEPGz42TrorphDQ5B9IysAgtboJ8JpO
+	 LarM+rfzESVampW03fvqLyj2Q7M81cs7XOohi+JDio2oKLKApsINaz/ymZOjFR2D9h
+	 NHF/6csdv/BH73wIOyXxxkQglBOdBJY+UekbpuouGyNilrPqmDk003hjOAciPjm1sq
+	 jKKfbPdpjsg8m1r+fl1MXQQglbTfw4GVB7rWEpj5AZ4HFAyUU2WdJYULjiynVXgInB
+	 0oNwIyaC8YV2YHIqvnHs7V+xoFmIUG/zdGmoNyZkAp1LBxnP58CVJsT5+RByVr3bCe
+	 AKGQGvCv5u1NA==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Thu, 05 Dec 2024 20:41:48 -0800
-Subject: [PATCH v2 18/35] xen/console: introduce use of 'is_console' flag
+Date: Thu, 05 Dec 2024 20:41:43 -0800
+Subject: [PATCH v2 13/35] xen/console: rename console_input_domain
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-vuart-ns8250-v1-18-e9aa923127eb@ford.com>
+Message-Id: <20241205-vuart-ns8250-v1-13-e9aa923127eb@ford.com>
 References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 In-Reply-To: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -73,11 +73,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=4575;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=2162;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=c1qncLIbvdXkIva3csVS48o24QoMrU3zNKu5KbZwS0s=;
- b=WG1ksIYw4EgMLqSvIv9tHZhu+lH3WcqfWVayi+nfHijfuS+xnIvMui9g5p5iudJvKLVyMnVUq
- PSoDBtHWfQ7CsaFONJoLb62ddxjajRWzEKEVzmeJCrzkAq7eNAreWBp
+ bh=TjvkwSY30h8BpopVytXRbdfBD9IC9WbY4nf7jp2MPFs=;
+ b=zeaE1xdzcz1rmGEWkbbULiMYNpdF8vIKM2kxIXRGbDkvs9GB3XLoGOpOKjhPDnOFynaL6G94y
+ BDNF2sVTre6A39d5KuhX2puYeT9E2Bn+u1uXzBcSjf+s9GgIpAmb6ZQ
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -87,137 +87,58 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-The code now inspects d->is_console flag to decide whether the console focus
-should move to the domain w/ console after administrator presses <Ctrl+aaa>.
+console_input_domain() takes an RCU lock to protect domain structure.
+That implies call to rcu_unlock_domain() after use.
 
-Console owner domain switch logic updated accordingly.
+Rename console_input_domain() to rcu_lock_domain_console_owner() to
+highlight the need of calling rcu_unlock_domain().
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/arm/dom0less-build.c |  2 +-
- xen/arch/arm/domain.c         |  1 +
- xen/arch/arm/domctl.c         |  1 +
- xen/arch/x86/pv/shim.c        |  2 ++
- xen/common/domain.c           |  2 ++
- xen/drivers/char/console.c    | 14 ++++++++++----
- 6 files changed, 17 insertions(+), 5 deletions(-)
+ xen/arch/arm/vpl011.c      | 2 +-
+ xen/drivers/char/console.c | 2 +-
+ xen/include/xen/console.h  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index de64ee930fdfe9a1c2842761275641485f69f675..32b5e8e16a28ae9a4951c8b7815638e69b66406a 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -833,6 +833,7 @@ static int __init construct_domU(struct domain *d,
-             return rc;
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index fe36fe2bd1529a4114884580ded6d6fa55a22f0e..4d682e98553303b4a12f5cd7e5e67ab096cd7cc2 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -78,7 +78,7 @@ static void vpl011_write_data_xen(struct domain *d, uint8_t data)
+     unsigned long flags;
+     struct vpl011 *vpl011 = &d->arch.vpl011;
+     struct vpl011_xen_backend *intf = vpl011->backend.xen;
+-    struct domain *input = console_input_domain();
++    struct domain *input = rcu_lock_domain_console_owner();
  
-         d->arch.emulation_flags |= ARM_EMU_VUART;
-+        d->is_console = true;
-     }
+     VPL011_LOCK(d, flags);
  
-     rc = prepare_dtb_domU(d, &kinfo);
-@@ -1015,7 +1016,6 @@ void __init create_domUs(void)
-             panic("Error creating domain %s (rc = %ld)\n",
-                   dt_node_name(node), PTR_ERR(d));
- 
--        d->is_console = true;
-         dt_device_set_used_by(node, d->domain_id);
- 
-         rc = construct_domU(d, node);
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 02f9d59b38b4b7f6f73d97c421c9948c90e681d5..c52d6e932a9a71b620ecefacc1e884338858e3ea 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -781,6 +781,7 @@ int arch_domain_create(struct domain *d,
-             goto fail;
- 
-         d->arch.emulation_flags |= ARM_EMU_VUART;
-+        d->is_console = true;
-     }
- 
-     if ( (rc = domain_vpci_init(d)) != 0 )
-diff --git a/xen/arch/arm/domctl.c b/xen/arch/arm/domctl.c
-index f80d34bf5f3d323a15db7f032073be52ea1009ae..81b5caf17c4e0badb2eefa90b1522c107f844d06 100644
---- a/xen/arch/arm/domctl.c
-+++ b/xen/arch/arm/domctl.c
-@@ -46,6 +46,7 @@ static int handle_vuart_init(struct domain *d,
-     {
-         vuart_op->evtchn = info.evtchn;
-         d->arch.emulation_flags |= ARM_EMU_VUART;
-+        d->is_console = true;
-     }
- 
-     return rc;
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index 17cb30620290c76cf42251f70cfa4199c0e165d1..a55c1d2a1e616f8979677a198eb9caabc3afc6bf 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -238,6 +238,8 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
-      * guest from depleting the shim memory pool.
-      */
-     d->max_pages = domain_tot_pages(d);
-+
-+    d->is_console = true;
- }
- 
- static void write_start_info(struct domain *d)
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 9e57dd4122a726e2fb42efe9c029e775202be0e6..aab546c0a8535e4f007cbbc9c5c552bcf66b5807 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -682,6 +682,8 @@ struct domain *domain_create(domid_t domid,
- 
-         old_hwdom = hardware_domain;
-         hardware_domain = d;
-+
-+        d->is_console = true;
-     }
- 
-     TRACE_TIME(TRC_DOM0_DOM_ADD, d->domain_id);
 diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 60c055396b697869b04b9132b0dcfa832fabe932..8cbac54c66044ae8581e486a782102b75c8bfaa9 100644
+index 0af4b551801356f242f1770b3826608136d65653..01fcbd5581d11f8f4f2b23592255b5c744430a3e 100644
 --- a/xen/drivers/char/console.c
 +++ b/xen/drivers/char/console.c
-@@ -1,8 +1,8 @@
- /******************************************************************************
-  * console.c
-- * 
-+ *
-  * Emergency console I/O for Xen and the domain-0 guest OS.
-- * 
-+ *
-  * Copyright (c) 2002-2004, K A Fraser.
-  *
-  * Added printf_ratelimit
-@@ -509,14 +509,20 @@ static void console_find_owner(void)
-             domid = get_initial_domain_id();
-         else
-             domid = next_rx - 1;
-+
-         d = rcu_lock_domain_by_id(domid);
--        if ( d )
-+        if ( d == NULL )
-+            continue;
-+
-+        if ( d->is_console )
-         {
-             rcu_unlock_domain(d);
-             console_owner = next_rx;
-             printk("*** Serial input to DOM%u", domid);
-             break;
-         }
-+
-+        rcu_unlock_domain(d);
-     }
+@@ -477,7 +477,7 @@ static unsigned int __read_mostly console_rx = 0;
  
-     if ( switch_code )
-@@ -814,7 +820,7 @@ static int printk_prefix_check(char *p, char **pp)
-     return ((atomic_read(&print_everything) != 0) ||
-             (loglvl < lower_thresh) ||
-             ((loglvl < upper_thresh) && printk_ratelimit()));
--} 
-+}
- 
- static int cf_check parse_console_timestamps(const char *s)
+ #ifdef CONFIG_SBSA_VUART_CONSOLE
+ /* Make sure to rcu_unlock_domain after use */
+-struct domain *console_input_domain(void)
++struct domain *rcu_lock_domain_console_owner(void)
  {
+     if ( console_rx == 0 )
+             return NULL;
+diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
+index 6dfbade3ece36352c74f1124305da945b210f2a7..0e211e44d9703c804e18f52c9743916f8d2a9d4e 100644
+--- a/xen/include/xen/console.h
++++ b/xen/include/xen/console.h
+@@ -31,7 +31,7 @@ void console_end_sync(void);
+ void console_start_log_everything(void);
+ void console_end_log_everything(void);
+ 
+-struct domain *console_input_domain(void);
++struct domain *rcu_lock_domain_console_owner(void);
+ 
+ /*
+  * Steal output from the console. Returns +ve identifier, else -ve error.
 
 -- 
 2.34.1
