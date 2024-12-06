@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C71E7717B
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 10:21:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.850068.1264623 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64E57E77173
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 10:21:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.850066.1264621 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJVSF-0003Ey-8W; Fri, 06 Dec 2024 10:20:59 +0000
+	id 1tJVSE-0003BQ-UA; Fri, 06 Dec 2024 10:20:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 850068.1264623; Fri, 06 Dec 2024 10:20:59 +0000
+Received: by outflank-mailman (output) from mailman id 850066.1264621; Fri, 06 Dec 2024 10:20:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJVSF-0003EC-2Y; Fri, 06 Dec 2024 10:20:59 +0000
-Received: by outflank-mailman (input) for mailman id 850068;
- Fri, 06 Dec 2024 10:20:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tJVSE-0003B8-Pr; Fri, 06 Dec 2024 10:20:58 +0000
+Received: by outflank-mailman (input) for mailman id 850066;
+ Fri, 06 Dec 2024 10:20:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=igGl=S7=huawei.com=ruanjinjie@srs-se1.protection.inumbo.net>)
- id 1tJVPo-0001om-DT
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 10:18:28 +0000
+ id 1tJVQ1-0001of-FF
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 10:18:41 +0000
 Received: from szxga05-in.huawei.com (szxga05-in.huawei.com [45.249.212.191])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6cb0849b-b3bb-11ef-99a3-01e77a169b0f;
- Fri, 06 Dec 2024 11:18:25 +0100 (CET)
-Received: from mail.maildlp.com (unknown [172.19.163.17])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4Y4Rwz4YPxz1kvQ9;
- Fri,  6 Dec 2024 18:16:03 +0800 (CST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 705420c8-b3bb-11ef-a0d5-8be0dac302b0;
+ Fri, 06 Dec 2024 11:18:31 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.162.112])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4Y4Rx553lHz1kvW2;
+ Fri,  6 Dec 2024 18:16:09 +0800 (CST)
 Received: from kwepemg200008.china.huawei.com (unknown [7.202.181.35])
- by mail.maildlp.com (Postfix) with ESMTPS id CA77B1A0188;
- Fri,  6 Dec 2024 18:18:22 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id DBC6A1401DC;
+ Fri,  6 Dec 2024 18:18:28 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by kwepemg200008.china.huawei.com
  (7.202.181.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 6 Dec
- 2024 18:18:21 +0800
+ 2024 18:18:27 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,7 +48,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6cb0849b-b3bb-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 705420c8-b3bb-11ef-a0d5-8be0dac302b0
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<sstabellini@kernel.org>, <tglx@linutronix.de>, <peterz@infradead.org>,
@@ -68,9 +68,9 @@ To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<joey.gouly@arm.com>, <liuyuntao12@huawei.com>, <leobras@redhat.com>,
 	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
 	<xen-devel@lists.xenproject.org>
-Subject: [PATCH -next v5 13/22] arm64/ptrace: Refactor syscall_trace_enter()
-Date: Fri, 6 Dec 2024 18:17:35 +0800
-Message-ID: <20241206101744.4161990-14-ruanjinjie@huawei.com>
+Subject: [PATCH -next v5 18/22] arm64/ptrace: Expand secure_computing() in place
+Date: Fri, 6 Dec 2024 18:17:40 +0800
+Message-ID: <20241206101744.4161990-19-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241206101744.4161990-1-ruanjinjie@huawei.com>
 References: <20241206101744.4161990-1-ruanjinjie@huawei.com>
@@ -81,88 +81,37 @@ X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
  kwepemg200008.china.huawei.com (7.202.181.35)
 
-The generic entry syscall_trace_enter() use the input syscall
-work flag and syscall number.
+The generic entry expand secure_computing() in place and call
+__secure_computing() directly.
 
-In preparation for moving arm64 over to the generic entry code, refactor
-syscall_trace_enter() to also pass syscall number and thread flags,
-by using syscall_get_nr() helper.
+In order to switch to the generic entry for arm64, refactor
+secure_computing() for syscall_trace_enter().
 
 No functional changes.
 
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- arch/arm64/include/asm/syscall.h |  2 +-
- arch/arm64/kernel/ptrace.c       | 20 ++++++++++++++------
- arch/arm64/kernel/syscall.c      |  2 +-
- 3 files changed, 16 insertions(+), 8 deletions(-)
+ arch/arm64/kernel/ptrace.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/include/asm/syscall.h b/arch/arm64/include/asm/syscall.h
-index ab8e14b96f68..6b71d335c224 100644
---- a/arch/arm64/include/asm/syscall.h
-+++ b/arch/arm64/include/asm/syscall.h
-@@ -85,7 +85,7 @@ static inline int syscall_get_arch(struct task_struct *task)
- 	return AUDIT_ARCH_AARCH64;
- }
- 
--int syscall_trace_enter(struct pt_regs *regs);
-+int syscall_trace_enter(struct pt_regs *regs, long syscall, unsigned long flags);
- void syscall_trace_exit(struct pt_regs *regs);
- 
- #endif	/* __ASM_SYSCALL_H */
 diff --git a/arch/arm64/kernel/ptrace.c b/arch/arm64/kernel/ptrace.c
-index d0d801a4094a..48bb813e0ef6 100644
+index b53d3759baf8..c0c00e173f61 100644
 --- a/arch/arm64/kernel/ptrace.c
 +++ b/arch/arm64/kernel/ptrace.c
-@@ -2353,10 +2353,8 @@ static void report_syscall_exit(struct pt_regs *regs)
+@@ -2368,8 +2368,11 @@ int syscall_trace_enter(struct pt_regs *regs, long syscall, unsigned long flags)
  	}
- }
  
--int syscall_trace_enter(struct pt_regs *regs)
-+int syscall_trace_enter(struct pt_regs *regs, long syscall, unsigned long flags)
- {
--	unsigned long flags = read_thread_flags();
--
- 	if (flags & (_TIF_SYSCALL_EMU | _TIF_SYSCALL_TRACE)) {
- 		report_syscall_enter(regs);
- 		if (flags & _TIF_SYSCALL_EMU)
-@@ -2367,10 +2365,20 @@ int syscall_trace_enter(struct pt_regs *regs)
- 	if (secure_computing() == -1)
- 		return NO_SYSCALL;
- 
--	if (test_thread_flag(TIF_SYSCALL_TRACEPOINT))
--		trace_sys_enter(regs, regs->syscallno);
-+	/* Either of the above might have changed the syscall number */
-+	syscall = syscall_get_nr(current, regs);
-+
-+	if (test_thread_flag(TIF_SYSCALL_TRACEPOINT)) {
-+		trace_sys_enter(regs, syscall);
-+
-+		/*
-+		 * Probes or BPF hooks in the tracepoint may have changed the
-+		 * system call number as well.
-+		 */
-+		 syscall = syscall_get_nr(current, regs);
+ 	/* Do the secure computing after ptrace; failures should be fast. */
+-	if (secure_computing() == -1)
+-		return NO_SYSCALL;
++	if (flags & _TIF_SECCOMP) {
++		ret = __secure_computing(NULL);
++		if (ret == -1L)
++			return NO_SYSCALL;
 +	}
  
--	audit_syscall_entry(regs->syscallno, regs->orig_x0, regs->regs[1],
-+	audit_syscall_entry(syscall, regs->orig_x0, regs->regs[1],
- 			    regs->regs[2], regs->regs[3]);
- 
- 	return regs->syscallno;
-diff --git a/arch/arm64/kernel/syscall.c b/arch/arm64/kernel/syscall.c
-index c442fcec6b9e..eb328ee1423c 100644
---- a/arch/arm64/kernel/syscall.c
-+++ b/arch/arm64/kernel/syscall.c
-@@ -124,7 +124,7 @@ static void el0_svc_common(struct pt_regs *regs, int scno, int sc_nr,
- 		 */
- 		if (scno == NO_SYSCALL)
- 			syscall_set_return_value(current, regs, -ENOSYS, 0);
--		scno = syscall_trace_enter(regs);
-+		scno = syscall_trace_enter(regs, regs->syscallno, flags);
- 		if (scno == NO_SYSCALL)
- 			goto trace_exit;
- 	}
+ 	/* Either of the above might have changed the syscall number */
+ 	syscall = syscall_get_nr(current, regs);
 -- 
 2.34.1
 
