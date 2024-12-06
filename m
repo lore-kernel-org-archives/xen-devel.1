@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2AE1E7717D
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:42:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.849423.1264134 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3017DE77185
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:41:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.849407.1264002 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQA8-0007m1-9D; Fri, 06 Dec 2024 04:41:56 +0000
+	id 1tJQ9v-0004OQ-Sm; Fri, 06 Dec 2024 04:41:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 849423.1264134; Fri, 06 Dec 2024 04:41:56 +0000
+Received: by outflank-mailman (output) from mailman id 849407.1264002; Fri, 06 Dec 2024 04:41:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQA7-0007hl-GP; Fri, 06 Dec 2024 04:41:55 +0000
-Received: by outflank-mailman (input) for mailman id 849423;
- Fri, 06 Dec 2024 04:41:49 +0000
+	id 1tJQ9v-0004Ng-Kb; Fri, 06 Dec 2024 04:41:43 +0000
+Received: by outflank-mailman (input) for mailman id 849407;
+ Fri, 06 Dec 2024 04:41:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5aHD=S7=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tJQA0-0004Ka-Mb
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:48 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 1tJQ9u-0004Ka-50
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:42 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [2604:1380:45d1:ec00::3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 631ce79d-b38c-11ef-a0d5-8be0dac302b0;
- Fri, 06 Dec 2024 05:41:42 +0100 (CET)
+ id 619fc92f-b38c-11ef-a0d5-8be0dac302b0;
+ Fri, 06 Dec 2024 05:41:39 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B68855C7311;
- Fri,  6 Dec 2024 04:40:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 51702C4CEE1;
- Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 6750BA43EEF;
+ Fri,  6 Dec 2024 04:39:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D8D96C4CED1;
+ Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 469A7E77171;
- Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id D21F2E77173;
+ Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,24 +48,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 631ce79d-b38c-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 619fc92f-b38c-11ef-a0d5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733460098;
-	bh=owjhPqMN/sfHwDFdAwELQ23W67gacGzY3DCmgAbUG18=;
+	s=k20201202; t=1733460097;
+	bh=2WgWqZsNDflVD6JmnKTRAOPbRC5jJUlqppnLV6LXXy4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=DLTBKB4oxMWdcE1LnVcKmfZjfrKJIOFEgEJ1YU6TUpJ3qeYzBimAOcHSF5Y0zuJk3
-	 cvauLBWrtXW/9TNGZwEg8SHr14QqSa1+q+jRj6tt4Gexg+KYBDCYxxnuvsRCi54Nm3
-	 MNKzuFfuXxm57lkeHvO72G3bm8U6dD5vh3n3klUHX/2R913vGc/KkcC6Z8JMiLveQr
-	 hflxbWwGj9pwzj3JZhpxZNFh2Nw30U2zleCYzIatOYhuN8D5Ux+qKwJPJeiAWawYiG
-	 cR3ux1HHjGZBMVbYyukJS1P44BHpt1Y/yobwsJx9+MGA573+zrf0FRX5L+gfc3GTYH
-	 AgjQzBjBJzH6Q==
+	b=eFVU2m0MN1WdzL+1zbIbqDbDYwa9z1Mr9M1oPjJvCwWXkaXsAfzWiZQFuhrPbIcr2
+	 nAvRMg5F3PJTqc6q153JNQkfmBacrI1Q4a9/ZMexcU7YmXwid8fTTZWdvPs8ZDkblq
+	 IcvJp8HzxF2lUT0tmHE6uokd+ncoq83kQEXK0lSsRF3DxAi0tNsqQXxx7Uw42xixnS
+	 gtiiQLpoNi6l7H/gPWv7j8rRyfZpzB+Hxo0gKKpxCQWFYnfb1TD6rfgytu5hGvkLx4
+	 aA9DgEvxgSclbOxgr+uGf92wH0hC0TOvsyf/M8gC4XW1yUxs3R9m0dDTwgo0ZEPgtw
+	 IHtSBGOlOfKsg==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Thu, 05 Dec 2024 20:41:45 -0800
-Subject: [PATCH v2 15/35] xen/console: rename console_rx to console_owner
+Date: Thu, 05 Dec 2024 20:41:39 -0800
+Subject: [PATCH v2 09/35] x86/domain: print emulation_flags
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-vuart-ns8250-v1-15-e9aa923127eb@ford.com>
+Message-Id: <20241205-vuart-ns8250-v1-9-e9aa923127eb@ford.com>
 References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 In-Reply-To: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -73,11 +74,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=3503;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=1263;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=adx3ttDq9DGxs5v/iNqFG/t0SkuLKBWjA23PcHLO1+c=;
- b=U0p0Hzrt1FgB0xBL5A9gFP0Y7Mk23wTztAC/UqxMEAxRrYxGJSk3Xqom8dczkyZN2c2Nxokon
- RNRJP3sESjoB+bT52kOM2zEVS1JjKi7wpMFA62krW9kIMHww0XCdO41
+ bh=732gIMLcaCgGTFTHv9vAjNIT6ES/ZZttjeIUCT3F6PI=;
+ b=Y7HK/z6jmiAxr9LffbLx3VzuTnpvsJKN4W5zpRGYQrcHh7C1xfTaL3qBH1d/hc6odnj49z0ll
+ kg3ON+vpt6nA9uN2Ik2YEXEG2SpMz1AzDdlcvsmncdiJ05m4eO9kdq9
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -87,107 +88,36 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Preparation for the follow on change to switch console_owner to
-domid_t address space.
+Print d->arch.emulation_flags on the console for better traceability while
+debugging in-hypervisor hardware emulators.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/drivers/char/console.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ xen/arch/x86/domain.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index f8a7db385c9525cabc69ceb1a84d73f57863aa45..86bf899ada8f8221ffc77bcffb1f58777a22198e 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -467,11 +467,11 @@ static void cf_check dump_console_ring_key(unsigned char key)
-  */
- #define switch_code (opt_conswitch[0]-'a'+1)
- /*
-- * console_rx=0 => input to xen
-- * console_rx=1 => input to dom0 (or the sole shim domain)
-- * console_rx=N => input to dom(N-1)
-+ * console_owner=0 => input to xen
-+ * console_owner=1 => input to dom0 (or the sole shim domain)
-+ * console_owner=N => input to dom(N-1)
-  */
--static unsigned int __read_mostly console_rx = 0;
-+static unsigned int __read_mostly console_owner = 0;
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 78a13e6812c9120901d0a70fb3bc1bd6a8b6917d..c88d422a64544531c1e1058fa484364bb4277d1e 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -818,11 +818,15 @@ int arch_domain_create(struct domain *d,
  
- #define max_console_rx (max_init_domid + 1)
- 
-@@ -479,15 +479,15 @@ static unsigned int __read_mostly console_rx = 0;
- /* Make sure to rcu_unlock_domain after use */
- struct domain *rcu_lock_domain_console_owner(void)
- {
--    if ( console_rx == 0 )
-+    if ( console_owner == 0 )
-             return NULL;
--    return rcu_lock_domain_by_id(console_rx - 1);
-+    return rcu_lock_domain_by_id(console_owner - 1);
- }
- #endif
- 
- static void console_find_owner(void)
- {
--    unsigned int next_rx = console_rx;
-+    unsigned int next_rx = console_owner;
- 
-     /*
-      * Rotate among Xen, dom0 and boot-time created domUs while skipping
-@@ -500,7 +500,7 @@ static void console_find_owner(void)
- 
-         if ( next_rx++ >= max_console_rx )
-         {
--            console_rx = 0;
-+            console_owner = 0;
-             printk("*** Serial input to Xen");
-             break;
-         }
-@@ -515,7 +515,7 @@ static void console_find_owner(void)
-         if ( d )
-         {
-             rcu_unlock_domain(d);
--            console_rx = next_rx;
-+            console_owner = next_rx;
-             printk("*** Serial input to DOM%u", domid);
-             break;
-         }
-@@ -529,7 +529,7 @@ static void console_find_owner(void)
- 
- static void __serial_rx(char c)
- {
--    switch ( console_rx )
-+    switch ( console_owner )
+     if ( !emulation_flags_ok(d, emflags) )
      {
-     case 0:
-         return handle_keypress(c, false);
-@@ -552,7 +552,7 @@ static void __serial_rx(char c)
- #ifdef CONFIG_SBSA_VUART_CONSOLE
-     default:
-     {
--        struct domain *d = rcu_lock_domain_by_id(console_rx - 1);
-+        struct domain *d = rcu_lock_domain_by_id(console_owner - 1);
+-        printk(XENLOG_G_ERR "d%d: Xen does not allow %s domain creation "
++        printk(XENLOG_G_ERR "d%d: Xen does not allow %s %sdomain creation "
+                "with the current selection of emulators: %#x\n",
+-               d->domain_id, is_hvm_domain(d) ? "HVM" : "PV", emflags);
++               d->domain_id,
++               is_hvm_domain(d) ? "HVM" : "PV",
++               is_hardware_domain(d) ? "(hardware) " : "",
++               emflags);
+         return -EOPNOTSUPP;
+     }
++    printk(XENLOG_G_INFO "d%d: emulation_flags %#x\n", d->domain_id, emflags);
+     d->arch.emulation_flags = emflags;
  
-         /*
-          * If we have a properly initialized vpl011 console for the
-@@ -563,7 +563,7 @@ static void __serial_rx(char c)
-             vpl011_rx_char_xen(d, c);
-         else
-             printk("Cannot send chars to Dom%d: no UART available\n",
--                   console_rx - 1);
-+                   console_owner - 1);
- 
-         if ( d != NULL )
-             rcu_unlock_domain(d);
-@@ -1116,7 +1116,7 @@ void __init console_endboot(void)
-      * a useful 'how to switch' message.
-      */
-     if ( opt_conswitch[1] == 'x' )
--        console_rx = max_console_rx;
-+        console_owner = max_console_rx;
- 
-     register_keyhandler('w', dump_console_ring_key,
-                         "synchronously dump console ring buffer (dmesg)", 0);
+ #ifdef CONFIG_PV32
 
 -- 
 2.34.1
