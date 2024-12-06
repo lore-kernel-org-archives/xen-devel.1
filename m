@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34AFFE77173
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38EFBE77179
 	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 13:02:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.850261.1264711 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.850259.1264691 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJXyg-0003d3-NG; Fri, 06 Dec 2024 13:02:38 +0000
+	id 1tJXyV-000372-Ao; Fri, 06 Dec 2024 13:02:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 850261.1264711; Fri, 06 Dec 2024 13:02:38 +0000
+Received: by outflank-mailman (output) from mailman id 850259.1264691; Fri, 06 Dec 2024 13:02:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJXyg-0003cu-K7; Fri, 06 Dec 2024 13:02:38 +0000
-Received: by outflank-mailman (input) for mailman id 850261;
- Fri, 06 Dec 2024 13:02:37 +0000
+	id 1tJXyV-00036v-70; Fri, 06 Dec 2024 13:02:27 +0000
+Received: by outflank-mailman (input) for mailman id 850259;
+ Fri, 06 Dec 2024 13:02:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=BoLq=S7=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1tJXyf-00036p-92
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 13:02:37 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ id 1tJXyU-00036p-BF
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 13:02:26 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5d7e2060-b3d2-11ef-a0d5-8be0dac302b0;
- Fri, 06 Dec 2024 14:02:36 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 5634682c-b3d2-11ef-a0d5-8be0dac302b0;
+ Fri, 06 Dec 2024 14:02:24 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 057F92115B;
- Fri,  6 Dec 2024 13:02:35 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id BDACB1F38E;
+ Fri,  6 Dec 2024 13:02:23 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D4B2813647;
- Fri,  6 Dec 2024 13:02:34 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 723E113647;
+ Fri,  6 Dec 2024 13:02:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id KW1iMur1UmfJTgAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 06 Dec 2024 13:02:34 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id o0tlGt/1Ume3TgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 06 Dec 2024 13:02:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,211 +54,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d7e2060-b3d2-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 5634682c-b3d2-11ef-a0d5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1733490156; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=M6JXLGZ2C/uRkGXgqKjA/JAonnCDowTlDjW+0Nr5vSE=;
-	b=WBi1dMfdkL1+kyYcJnkJlMMj0/wDZt+54N073axQ3CvPetlt27z9BjMupvpfbw8pOcUVGg
-	wfPXuEGdz5xX9/qMJcxkxjBBk28LjEe3N4wcwtYTqhebXPPSgJ6KblYfWCFzEfVgVeV327
-	ECIsCkDN6fpHDIIoc8+ry4W9kr51mnM=
-Authentication-Results: smtp-out1.suse.de;
-	none
+	t=1733490143; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=PlPMsMQtiCVtC9z4pQm+gdsBuDCsGGooLtyyGsYuM9Q=;
+	b=N2OlNHAH6AWWYHrLx8ZoWTxIANLPiTpYZiV3ST3tFEio9X60CdkmgDPUr5/5/QV0S8I71z
+	FrnVaj6UYTqWdQXE6I4PsNu4EWol9O4vvP+V8kagWw9sFrZXVe5z42xlSFz0bYI9KDttz7
+	zftg4/fuYnjUK5jPGWE3SH/bRLifOLw=
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=N2OlNHAH
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1733490155; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=M6JXLGZ2C/uRkGXgqKjA/JAonnCDowTlDjW+0Nr5vSE=;
-	b=ZMKRBN7EYuzUyWlHLVV8fay6XG3Jnci5hCeUqqB6k7HctxFRQSqWRUdQyZM+PtWYfHEs5L
-	goV4OA3NjiFvwm6KB3fMeQ7ijjVzFepXhBuPKRiA8VDG8uXTANiRIVTW9f5dNK2sPPeG2g
-	YSDxbSts+7FHN4s3+X3VJL3pKGFjr48=
+	t=1733490143; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=PlPMsMQtiCVtC9z4pQm+gdsBuDCsGGooLtyyGsYuM9Q=;
+	b=N2OlNHAH6AWWYHrLx8ZoWTxIANLPiTpYZiV3ST3tFEio9X60CdkmgDPUr5/5/QV0S8I71z
+	FrnVaj6UYTqWdQXE6I4PsNu4EWol9O4vvP+V8kagWw9sFrZXVe5z42xlSFz0bYI9KDttz7
+	zftg4/fuYnjUK5jPGWE3SH/bRLifOLw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v2 2/7] tools: add a dedicated header file for barrier definitions
-Date: Fri,  6 Dec 2024 14:02:16 +0100
-Message-ID: <20241206130221.17773-3-jgross@suse.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v2 0/7] remove libxenctrl usage from xenstored
+Date: Fri,  6 Dec 2024 14:02:14 +0100
+Message-ID: <20241206130221.17773-1-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241206130221.17773-1-jgross@suse.com>
-References: <20241206130221.17773-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
+X-Rspamd-Queue-Id: BDACB1F38E
+X-Spamd-Result: default: False [-3.01 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	FUZZY_BLOCKED(0.00)[rspamd.com];
+	RCVD_TLS_ALL(0.00)[];
+	DKIM_TRACE(0.00)[suse.com:+];
+	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email,suse.com:mid];
-	RCVD_TLS_ALL(0.00)[]
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:dkim,suse.com:mid]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
 
-Instead of having to include xenctrl.h for getting definitions of cpu
-barriers, add a dedicated header for that purpose.
+Xenstored is using libxenctrl for only one purpose: to get information
+about state of domains.
 
-Switch the xen-9pfsd daemon to use the new header instead of xenctrl.h.
+This patch series is removing that dependency by introducing a new
+stable interface which can be used by xenstored instead.
 
-This is in preparation of making Xenstore independent from libxenctrl.
+There was a RFC series sent out 3 years ago, which I have taken as a
+base and by addressing all comments from back then.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V1:
-- new patch
-V2:
-- use SPDX
-- modify guard define (Anthony PERARD)
-- moved earlier in the series
----
- tools/9pfsd/io.c            |  5 ++++-
- tools/include/xen-barrier.h | 39 +++++++++++++++++++++++++++++++++++++
- tools/include/xenctrl.h     | 28 +-------------------------
- tools/libs/ctrl/Makefile    |  2 +-
- 4 files changed, 45 insertions(+), 29 deletions(-)
+The main differences since that RFC series are:
+
+- Instead of introducing an new main hypercall for a stable management
+  interface I have just added a new domctl sub-op, as requested in 2021.
+
+- I have added a new library libxenmanage for easy use of the new
+  stable hypervisor interface. Main motivation for adding the library
+  was the recent attempt to decouple oxenstored from the Xen git tree.
+  By using the new library, oxenstored could benefit in the same way as
+  xenstored from the new interface: it would be possible to rely on
+  stable libraries only.
+
+- Mini-OS has gained some more config options recently, so it was rather
+  easy to make xenstore[pvh]-stubdom independent from libxenctrl, too.
+
+- By moving the CPU barrier definitions out of xenctrl.h into a new
+  dedicated header xenstored code no longer needs to #include xenctrl.h,
+  thus removing any xenctrl reference from xenstored code.
+
+Please note that the last patch can be committed only after the related
+Mini-OS patch "config: add support for libxenmanage" has gone in AND
+the Mini-OS commit-id has been updated in Config.mk accordingly! The
+Mini-OS patch has been Acked already, so it can go in as soon as patch
+6 of this series (the one introducing libxenmanage) has been committed.
+
+Changes in V2:
+- new patch 1
+- former patch 5 mover earlier, now patch 2 (can go in without the rest
+  of the series)
+- addressed comments
+
+Juergen Gross (7):
+  xen/xsm: make getdomaininfo xsm dummy checks more stringent
+  tools: add a dedicated header file for barrier definitions
+  xen: add a domain unique id to each domain
+  xen: add bitmap to indicate per-domain state changes
+  xen: add new domctl get_changed_domain
+  tools/libs: add a new libxenmanage library
+  tools/xenstored: use new stable interface instead of libxenctrl
+
+ stubdom/Makefile                       |   8 +-
+ stubdom/mini-os.mk                     |   1 +
+ tools/9pfsd/io.c                       |   5 +-
+ tools/flask/policy/modules/dom0.te     |   2 +-
+ tools/flask/policy/modules/xen.if      |   4 +-
+ tools/flask/policy/modules/xenstore.te |   1 +
+ tools/include/xen-barrier.h            |  39 ++++++
+ tools/include/xenctrl.h                |  28 +----
+ tools/include/xenmanage.h              |  91 ++++++++++++++
+ tools/libs/Makefile                    |   1 +
+ tools/libs/ctrl/Makefile               |   2 +-
+ tools/libs/manage/Makefile             |  10 ++
+ tools/libs/manage/Makefile.common      |   3 +
+ tools/libs/manage/core.c               | 166 +++++++++++++++++++++++++
+ tools/libs/manage/libxenmanage.map     |   8 ++
+ tools/libs/uselibs.mk                  |   2 +
+ tools/xenstored/Makefile               |   2 +-
+ tools/xenstored/Makefile.common        |   2 +-
+ tools/xenstored/core.h                 |   1 -
+ tools/xenstored/domain.c               |  52 +++-----
+ tools/xenstored/lu.c                   |   1 +
+ tools/xenstored/lu_daemon.c            |   1 +
+ xen/common/domain.c                    | 134 ++++++++++++++++++++
+ xen/common/domctl.c                    |  20 ++-
+ xen/common/event_channel.c             |  20 ++-
+ xen/common/sysctl.c                    |   2 +-
+ xen/include/public/domctl.h            |  25 ++++
+ xen/include/xen/sched.h                |   8 ++
+ xen/include/xsm/dummy.h                |  10 +-
+ xen/include/xsm/xsm.h                  |   6 +
+ xen/xsm/dummy.c                        |   1 +
+ xen/xsm/flask/hooks.c                  |   7 ++
+ xen/xsm/flask/policy/access_vectors    |   2 +
+ 33 files changed, 586 insertions(+), 79 deletions(-)
  create mode 100644 tools/include/xen-barrier.h
+ create mode 100644 tools/include/xenmanage.h
+ create mode 100644 tools/libs/manage/Makefile
+ create mode 100644 tools/libs/manage/Makefile.common
+ create mode 100644 tools/libs/manage/core.c
+ create mode 100644 tools/libs/manage/libxenmanage.map
 
-diff --git a/tools/9pfsd/io.c b/tools/9pfsd/io.c
-index 468e0241f5..14cfcaf568 100644
---- a/tools/9pfsd/io.c
-+++ b/tools/9pfsd/io.c
-@@ -13,15 +13,18 @@
- 
- #include <assert.h>
- #include <errno.h>
-+#include <stdarg.h>
- #include <stdbool.h>
-+#include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
-+#include <unistd.h>
- #include <sys/types.h>
- #include <sys/stat.h>
- #include <dirent.h>
- #include <fcntl.h>
--#include <xenctrl.h>           /* For cpu barriers. */
-+#include <xen-barrier.h>
- #include <xen-tools/common-macros.h>
- 
- #include "xen-9pfsd.h"
-diff --git a/tools/include/xen-barrier.h b/tools/include/xen-barrier.h
-new file mode 100644
-index 0000000000..a716fb93cc
---- /dev/null
-+++ b/tools/include/xen-barrier.h
-@@ -0,0 +1,39 @@
-+/* SPDX-License-Identifier: LGPL-2.1 */
-+/******************************************************************************
-+ * xen-barrier.h
-+ *
-+ * Definition of CPU barriers, part of libxenctrl.
-+ *
-+ * Copyright (c) 2003-2004, K A Fraser.
-+ */
-+
-+#ifndef XEN_BARRIER_H
-+#define XEN_BARRIER_H
-+
-+/*
-+ *  DEFINITIONS FOR CPU BARRIERS
-+ */
-+
-+#define xen_barrier() asm volatile ( "" : : : "memory")
-+
-+#if defined(__i386__)
-+#define xen_mb()  asm volatile ( "lock addl $0, -4(%%esp)" ::: "memory" )
-+#define xen_rmb() xen_barrier()
-+#define xen_wmb() xen_barrier()
-+#elif defined(__x86_64__)
-+#define xen_mb()  asm volatile ( "lock addl $0, -32(%%rsp)" ::: "memory" )
-+#define xen_rmb() xen_barrier()
-+#define xen_wmb() xen_barrier()
-+#elif defined(__arm__)
-+#define xen_mb()   asm volatile ("dmb" : : : "memory")
-+#define xen_rmb()  asm volatile ("dmb" : : : "memory")
-+#define xen_wmb()  asm volatile ("dmb" : : : "memory")
-+#elif defined(__aarch64__)
-+#define xen_mb()   asm volatile ("dmb sy" : : : "memory")
-+#define xen_rmb()  asm volatile ("dmb sy" : : : "memory")
-+#define xen_wmb()  asm volatile ("dmb sy" : : : "memory")
-+#else
-+#error "Define barriers"
-+#endif
-+
-+#endif /* XEN_BARRIER_H */
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 29617585c5..ea57e9dbb9 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -48,6 +48,7 @@
- #include <xen/platform.h>
- 
- #include "xentoollog.h"
-+#include "xen-barrier.h"
- 
- #if defined(__i386__) || defined(__x86_64__)
- #include <xen/foreign/x86_32.h>
-@@ -61,33 +62,6 @@
- 
- #define INVALID_MFN  (~0UL)
- 
--/*
-- *  DEFINITIONS FOR CPU BARRIERS
-- */
--
--#define xen_barrier() asm volatile ( "" : : : "memory")
--
--#if defined(__i386__)
--#define xen_mb()  asm volatile ( "lock addl $0, -4(%%esp)" ::: "memory" )
--#define xen_rmb() xen_barrier()
--#define xen_wmb() xen_barrier()
--#elif defined(__x86_64__)
--#define xen_mb()  asm volatile ( "lock addl $0, -32(%%rsp)" ::: "memory" )
--#define xen_rmb() xen_barrier()
--#define xen_wmb() xen_barrier()
--#elif defined(__arm__)
--#define xen_mb()   asm volatile ("dmb" : : : "memory")
--#define xen_rmb()  asm volatile ("dmb" : : : "memory")
--#define xen_wmb()  asm volatile ("dmb" : : : "memory")
--#elif defined(__aarch64__)
--#define xen_mb()   asm volatile ("dmb sy" : : : "memory")
--#define xen_rmb()  asm volatile ("dmb sy" : : : "memory")
--#define xen_wmb()  asm volatile ("dmb sy" : : : "memory")
--#else
--#error "Define barriers"
--#endif
--
--
- #define XENCTRL_HAS_XC_INTERFACE 1
- /* In Xen 4.0 and earlier, xc_interface_open and xc_evtchn_open would
-  * both return ints being the file descriptor.  In 4.1 and later, they
-diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
-index 5fe0bfad0c..acce8639d3 100644
---- a/tools/libs/ctrl/Makefile
-+++ b/tools/libs/ctrl/Makefile
-@@ -3,7 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- include Makefile.common
- 
--LIBHEADER := xenctrl.h xenctrl_compat.h
-+LIBHEADER := xenctrl.h xenctrl_compat.h xen-barrier.h
- PKG_CONFIG_FILE := xencontrol.pc
- PKG_CONFIG_NAME := Xencontrol
- 
 -- 
 2.43.0
 
