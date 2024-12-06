@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE4B8E77180
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB57C3ABA1
 	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:41:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.849416.1264080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.849408.1264006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQA1-0006Dm-T7; Fri, 06 Dec 2024 04:41:49 +0000
+	id 1tJQ9w-0004U7-6C; Fri, 06 Dec 2024 04:41:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 849416.1264080; Fri, 06 Dec 2024 04:41:49 +0000
+Received: by outflank-mailman (output) from mailman id 849408.1264006; Fri, 06 Dec 2024 04:41:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQA1-0006Bs-Bc; Fri, 06 Dec 2024 04:41:49 +0000
-Received: by outflank-mailman (input) for mailman id 849416;
- Fri, 06 Dec 2024 04:41:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tJQ9v-0004RG-Ty; Fri, 06 Dec 2024 04:41:43 +0000
+Received: by outflank-mailman (input) for mailman id 849408;
+ Fri, 06 Dec 2024 04:41:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5aHD=S7=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tJQ9x-0004Ka-Ly
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:45 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 63086e56-b38c-11ef-a0d5-8be0dac302b0;
- Fri, 06 Dec 2024 05:41:41 +0100 (CET)
+ id 1tJQ9u-0004Kb-CC
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:42 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 617b5f8d-b38c-11ef-99a3-01e77a169b0f;
+ Fri, 06 Dec 2024 05:41:39 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9DE2C5C730C;
- Fri,  6 Dec 2024 04:40:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 11DC6C4CEDE;
- Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2A085A438D2;
+ Fri,  6 Dec 2024 04:39:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 9F72EC4CEE3;
+ Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0B848E77173;
- Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 95DF9E77173;
+ Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,25 +47,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 63086e56-b38c-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 617b5f8d-b38c-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733460098;
-	bh=+LyhLMcPTctK8lq8DYz5tUJcWDqBCiRHMGxFmxItyZs=;
+	s=k20201202; t=1733460097;
+	bh=bTKPqZAc34jvickLJXvP5NAA91sRqludt+wCep7eH1g=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=HBz+lNxRiLiqkCAG1Sbj8epCgg/Cp6fOqh1OfYZMGXzeLm7CsM/uW+4eYuDwjeZ+u
-	 ntKEVy2vfBbN6qjG2zrmR6GM33QU91X8oz5uPJRiikGJXNR5AasNHw5k2s0x4zicuq
-	 IiJpAbnv0oGEg5G6EP7+7RajPRXWFcQLPRbi/o+xSST7a1QZZrI4GTp9/oLUIpXBfs
-	 cXGfBfvnz8bXfzejW4Bv30qLL9A+2bLEvlzW6pmcoETpfVr2X0rPE3yvanWbarC0+0
-	 3uQZKhDRvXJjLrGsW8ytGUUQ+FzF1vHqBJWBNyXyumxGxqXgD9+r4t+xN9c4pjgot0
-	 8/mX2URhGIHnA==
+	b=X1Z+RCdC6743SeS1lGFzXjH+Rno1zVaTL+63bSmr73koOsdjSsSgmtnwSh1zP/6rK
+	 f2XLz16uPLyy74nfOecLe3+f1fDKfG2p46fluY9dD7+3ziwzfupD96STPvqq9tbf0c
+	 bUYwxgg9CwB7c7ToN34dqGeaD1yV2WoYYRWtgEszLCXU/QIH7WE7VI2tURwUHGXtdy
+	 DSwjHzRuY7yqMqpCabccf6z8iDZpia+Fd/35Y6MjHKfXqyIoxDn5C9HwEp955fH0QR
+	 WqXGsUCLhzduH2XwMN9m+6EcCwUjgQOJORy6RMqxFmv7AM7tAUSs39u/qwM6aCi451
+	 0JkBPjww/Wf+A==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Thu, 05 Dec 2024 20:41:42 -0800
-Subject: [PATCH v2 12/35] xen/console: move vpl011-related code to vpl011
- emulator
+Date: Thu, 05 Dec 2024 20:41:35 -0800
+Subject: [PATCH v2 05/35] arm/vuart: make domain_has_vuart() public
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-vuart-ns8250-v1-12-e9aa923127eb@ford.com>
+Message-Id: <20241205-vuart-ns8250-v1-5-e9aa923127eb@ford.com>
 References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 In-Reply-To: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -75,11 +73,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=3432;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=3833;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=4e0NUECCqgXdJR10Lb5Vlh9vQMFlpd/8G3QTPhFXMng=;
- b=KocrOyWBiCRdnAEiMCLW1htC7QinL+Mg1NhUgbiDAge7ljxpdEUkZHKjGaPRBPpqIuYyd94qh
- VtPCr7iMtAuCevzRbRS6SKJouJY7MRd2FPh0+9iI/OWzujWexOb2SBA
+ bh=SVfYvrMsNY/TLDndYHXbgUHVOFhA4YTrVOLvr92vE7k=;
+ b=KMBAyLtbB0Ts4a079gWdldbMDGnLogOr8Cebv62MircIQWQpRoRbNbWS6+p88uFLYfP/pXyVi
+ Gzrxs1rf9uNBhhLQq24G16NdpQXXlSEicpPnATBvCVuUGsFulswQ37a
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -89,91 +87,115 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Xen console driver has vpl011-related logic which shall belong vpl011 emulator
-code. Move vpl011-related to vpl011.c.
+Move domain_has_vuart() to arch namespace as preparation code change for
+architecture-agnostic way of forwarding physical console to the guest OS w/
+in-hypervisor UART emulator.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/arm/include/asm/vpl011.h |  2 +-
- xen/arch/arm/vpl011.c             | 15 +++++++++++----
- xen/drivers/char/console.c        |  4 +---
- 3 files changed, 13 insertions(+), 8 deletions(-)
+ xen/arch/arm/dom0less-build.c     |  2 ++
+ xen/arch/arm/domain.c             | 19 ++++++++++++-------
+ xen/arch/arm/domctl.c             |  4 +++-
+ xen/arch/arm/include/asm/domain.h |  9 +++++++++
+ xen/arch/arm/vuart.c              |  2 --
+ 5 files changed, 26 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/vpl011.h b/xen/arch/arm/include/asm/vpl011.h
-index c09abcd7a9b3356d0809743517934adae00087f5..cc838682815c0d049ba33d3bf9966a64b2e527dd 100644
---- a/xen/arch/arm/include/asm/vpl011.h
-+++ b/xen/arch/arm/include/asm/vpl011.h
-@@ -69,7 +69,7 @@ struct vpl011_init_info {
- int domain_vpl011_init(struct domain *d,
-                        struct vpl011_init_info *info);
- void domain_vpl011_deinit(struct domain *d);
--void vpl011_rx_char_xen(struct domain *d, char c);
-+int vpl011_rx_char_xen(struct domain *d, char c);
- #else
- static inline int domain_vpl011_init(struct domain *d,
-                                      struct vpl011_init_info *info)
-diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
-index 8ade6f2588b8bbcc58fb0f9edc324502a1992ce7..fe36fe2bd1529a4114884580ded6d6fa55a22f0e 100644
---- a/xen/arch/arm/vpl011.c
-+++ b/xen/arch/arm/vpl011.c
-@@ -567,16 +567,21 @@ static void vpl011_data_avail(struct domain *d,
- 
- /*
-  * vpl011_rx_char_xen adds a char to a domain's vpl011 receive buffer.
-- * It is only used when the vpl011 backend is in Xen.
-  */
--void vpl011_rx_char_xen(struct domain *d, char c)
-+int vpl011_rx_char_xen(struct domain *d, char c)
- {
-     unsigned long flags;
-     struct vpl011 *vpl011 = &d->arch.vpl011;
-     struct vpl011_xen_backend *intf = vpl011->backend.xen;
-     XENCONS_RING_IDX in_cons, in_prod, in_fifo_level;
- 
--    ASSERT(!vpl011->backend_in_domain);
-+    /* Forward input iff the vpl011 backend is in Xen. */
-+    if ( vpl011->backend_in_domain )
-+        return -ENODEV;
+diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+index f328a044e9d3bb5c9d358456c2ead5d2f125fbb1..de64ee930fdfe9a1c2842761275641485f69f675 100644
+--- a/xen/arch/arm/dom0less-build.c
++++ b/xen/arch/arm/dom0less-build.c
+@@ -831,6 +831,8 @@ static int __init construct_domU(struct domain *d,
+         rc = domain_vpl011_init(d, NULL);
+         if ( rc < 0 )
+             return rc;
 +
-+    if ( intf == NULL )
-+        return -ENODEV;
-+
-     VPL011_LOCK(d, flags);
- 
-     in_cons = intf->in_cons;
-@@ -584,7 +589,7 @@ void vpl011_rx_char_xen(struct domain *d, char c)
-     if ( xencons_queued(in_prod, in_cons, sizeof(intf->in)) == sizeof(intf->in) )
-     {
-         VPL011_UNLOCK(d, flags);
--        return;
-+        return -ENOSPC;
++        d->arch.emulation_flags |= ARM_EMU_VUART;
      }
  
-     intf->in[xencons_mask(in_prod, sizeof(intf->in))] = c;
-@@ -596,6 +601,8 @@ void vpl011_rx_char_xen(struct domain *d, char c)
+     rc = prepare_dtb_domU(d, &kinfo);
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 3ba959f866338d2e7f7dc0e301cd79c10fbc4549..02f9d59b38b4b7f6f73d97c421c9948c90e681d5 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -769,14 +769,19 @@ int arch_domain_create(struct domain *d,
+         if ( !vgic_reserve_virq(d, GUEST_EVTCHN_PPI) )
+             BUG();
+     }
++    else
++    {
++        /*
++         * Virtual UART is only used by linux early printk and decompress code.
++         * Only use it for the hardware domain because the linux kernel may not
++         * support multi-platform.
++         */
++        rc = domain_vuart_init(d);
++        if ( rc )
++            goto fail;
  
-     vpl011_data_avail(d, in_fifo_level, sizeof(intf->in), 0, SBSA_UART_FIFO_SIZE);
-     VPL011_UNLOCK(d, flags);
-+
-+    return 0;
+-    /*
+-     * Virtual UART is only used by linux early printk and decompress code.
+-     * Only use it for the hardware domain because the linux kernel may not
+-     * support multi-platform.
+-     */
+-    if ( is_hardware_domain(d) && (rc = domain_vuart_init(d)) )
+-        goto fail;
++        d->arch.emulation_flags |= ARM_EMU_VUART;
++    }
+ 
+     if ( (rc = domain_vpci_init(d)) != 0 )
+         goto fail;
+diff --git a/xen/arch/arm/domctl.c b/xen/arch/arm/domctl.c
+index 9d047065ba13ffe003d2565879cd073e78f76893..f80d34bf5f3d323a15db7f032073be52ea1009ae 100644
+--- a/xen/arch/arm/domctl.c
++++ b/xen/arch/arm/domctl.c
+@@ -42,9 +42,11 @@ static int handle_vuart_init(struct domain *d,
+         return -EOPNOTSUPP;
+ 
+     rc = domain_vpl011_init(d, &info);
+-
+     if ( !rc )
++    {
+         vuart_op->evtchn = info.evtchn;
++        d->arch.emulation_flags |= ARM_EMU_VUART;
++    }
+ 
+     return rc;
  }
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index f1d72c6e48dfeba347b4cd091ca33603c368b7c0..2bbd3f472176bdcfbc0f95f9d8809343d11965c8 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -119,8 +119,17 @@ struct arch_domain
+     void *tee;
+ #endif
  
- static void vpl011_notification(struct vcpu *v, unsigned int port)
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index bb56953bab681a13da8d41431aba4632f1919df9..0af4b551801356f242f1770b3826608136d65653 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -559,9 +559,7 @@ static void __serial_rx(char c)
-          * domain, without a full PV ring to Dom0 (in that case input
-          * comes from the PV ring), then send the character to it.
-          */
--        if ( d != NULL &&
--             !d->arch.vpl011.backend_in_domain &&
--             d->arch.vpl011.backend.xen != NULL )
-+        if ( d != NULL )
-             vpl011_rx_char_xen(d, c);
-         else
-             printk("Cannot send chars to Dom%d: no UART available\n",
++    /* Emulated devices enabled bitmap. */
++    uint32_t emulation_flags;
++
+ }  __cacheline_aligned;
+ 
++enum {
++    ARM_EMU_VUART           = BIT(0, U),
++};
++
++#define domain_has_vuart(d)     (!!((d)->arch.emulation_flags & ARM_EMU_VUART))
++
+ struct arch_vcpu
+ {
+     struct {
+diff --git a/xen/arch/arm/vuart.c b/xen/arch/arm/vuart.c
+index 38ce8cc14fac4132578059b696be952b29fab809..1fd980bd3a83820b382f875eb87ce4b8d83ccebe 100644
+--- a/xen/arch/arm/vuart.c
++++ b/xen/arch/arm/vuart.c
+@@ -31,8 +31,6 @@
+ 
+ #include "vuart.h"
+ 
+-#define domain_has_vuart(d) ((d)->arch.vuart.info != NULL)
+-
+ static int vuart_mmio_read(struct vcpu *v, mmio_info_t *info,
+                            register_t *r, void *priv);
+ static int vuart_mmio_write(struct vcpu *v, mmio_info_t *info,
 
 -- 
 2.34.1
