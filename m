@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68103E7717B
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 13:02:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.850265.1264720 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88677E7717D
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 13:02:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.850260.1264701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJXyl-0003wb-Tj; Fri, 06 Dec 2024 13:02:43 +0000
+	id 1tJXyc-0003MK-Gi; Fri, 06 Dec 2024 13:02:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 850265.1264720; Fri, 06 Dec 2024 13:02:43 +0000
+Received: by outflank-mailman (output) from mailman id 850260.1264701; Fri, 06 Dec 2024 13:02:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJXyl-0003wO-Qt; Fri, 06 Dec 2024 13:02:43 +0000
-Received: by outflank-mailman (input) for mailman id 850265;
- Fri, 06 Dec 2024 13:02:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tJXyc-0003MD-DV; Fri, 06 Dec 2024 13:02:34 +0000
+Received: by outflank-mailman (input) for mailman id 850260;
+ Fri, 06 Dec 2024 13:02:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=BoLq=S7=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1tJXyk-00036p-QZ
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 13:02:42 +0000
+ id 1tJXya-0003LF-UR
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 13:02:32 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 60cf43f4-b3d2-11ef-a0d5-8be0dac302b0;
- Fri, 06 Dec 2024 14:02:42 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5965b8e2-b3d2-11ef-99a3-01e77a169b0f;
+ Fri, 06 Dec 2024 14:02:29 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A5F7B2115B;
- Fri,  6 Dec 2024 13:02:40 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 6A46921186;
+ Fri,  6 Dec 2024 13:02:29 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 69C7D13647;
- Fri,  6 Dec 2024 13:02:40 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 2ADE913647;
+ Fri,  6 Dec 2024 13:02:29 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id TjhjGPD1UmfdTgAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 06 Dec 2024 13:02:40 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id iSoBCeX1Ume7TgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 06 Dec 2024 13:02:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,27 +54,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 60cf43f4-b3d2-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 5965b8e2-b3d2-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1733490161; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1733490149; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=FGgbqx71ndv5sBTrCP7+ufVgCN8ZAPJccnfCSLfUpqw=;
-	b=FfeKbF348liT+jCxEDdX5HPMHtvulKMD2tYDD3pJSSF9i5+ulbRRX4iYiu0AaHQ3CSOA4R
-	tFm6mskQfb5wgOYJmjzCx2h8X+CAmvbpT+nf+TF8uKtULLRESeF5zlPkPoNtYFrxBKZIqa
-	RpolKqtCRtapMyqtNDGZd3egZvRVtPg=
+	bh=6I/7sXWGYPIZHik0I/TGx8PR3rh5/YVoNt6JTXNC41g=;
+	b=q4kwtdK6hNFrXHkyTcJNIw4I9/EGgXcCVd9hCJaEa72VinT42Pmf7I3cxdnIl8xdUu8RBx
+	0n2VY26EpxqDNmjePf93TWxuZHCoimRBhxSNXaiuJ3gCkknL6VLWEr8FB+IpAvY+00vSWS
+	vYJwbvs+/bfFxDfDQL3avnam9pv2nuk=
 Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b="Ly55pB/H"
+	dkim=pass header.d=suse.com header.s=susede1 header.b=q4kwtdK6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1733490160; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1733490149; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=FGgbqx71ndv5sBTrCP7+ufVgCN8ZAPJccnfCSLfUpqw=;
-	b=Ly55pB/HxsCmMbK6Ky7T+ctjUh9B9yT2AkO4VqKFwpyjWRKTX4vchxaSXPPHdK6Rfv9a0p
-	dv5gIN4Fb4w/WbrXcwIE0h1ln8xXNtaC036NayP5eB45o4EL5kjfXhLeHYfkmkHtocABgz
-	EpZ3E85QHeaShslHXne8AynQjX9T6Bs=
+	bh=6I/7sXWGYPIZHik0I/TGx8PR3rh5/YVoNt6JTXNC41g=;
+	b=q4kwtdK6hNFrXHkyTcJNIw4I9/EGgXcCVd9hCJaEa72VinT42Pmf7I3cxdnIl8xdUu8RBx
+	0n2VY26EpxqDNmjePf93TWxuZHCoimRBhxSNXaiuJ3gCkknL6VLWEr8FB+IpAvY+00vSWS
+	vYJwbvs+/bfFxDfDQL3avnam9pv2nuk=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -82,16 +82,16 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Subject: [PATCH v2 3/7] xen: add a domain unique id to each domain
-Date: Fri,  6 Dec 2024 14:02:17 +0100
-Message-ID: <20241206130221.17773-4-jgross@suse.com>
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v2 1/7] xen/xsm: make getdomaininfo xsm dummy checks more stringent
+Date: Fri,  6 Dec 2024 14:02:15 +0100
+Message-ID: <20241206130221.17773-2-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241206130221.17773-1-jgross@suse.com>
 References: <20241206130221.17773-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: A5F7B2115B
+X-Rspamd-Queue-Id: 6A46921186
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-3.01 / 50.00];
 	BAYES_HAM(-3.00)[99.99%];
@@ -119,95 +119,68 @@ X-Spamd-Result: default: False [-3.01 / 50.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
 	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[cloud.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:mid,suse.com:email,wikipedia.org:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo]
 X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 
-Xenstore is referencing domains by their domid, but reuse of a domid
-can lead to the situation that Xenstore can't tell whether a domain
-with that domid has been deleted and created again without Xenstore
-noticing the domain is a new one now.
+Today the dummy XSM privilege checks for getdomaininfo are less
+stringent than possible: they basically rely on the general
+sysctl/domctl entry check to do all tests and then do the test with
+the XSM_HOOK privilege, which is an "allow all" default.
 
-Add a global domain creation unique id which is updated when creating
-a new domain, and store that value in struct domain of the new domain.
-The global unique id is initialized with the system time and updates
-are done via the xorshift algorithm which is used for pseudo random
-number generation, too (see https://en.wikipedia.org/wiki/Xorshift).
+Instead of XSM_HOOK use XSM_XS_PRIV, which is the privilege really
+wanted. Note that this test is still wider than the sysctl entry test,
+but there is now easy way to make both domctl and sysctl happy at the
+same time.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
-V1:
-- make unique_id local to function (Jan Beulich)
-- add lock (Julien Grall)
-- add comment (Julien Grall)
 V2:
-- move reading unique_id into locked section (Julien Grall)
-- add comment (Alejandro Vallejo)
+- new patch
 ---
- xen/common/domain.c     | 27 +++++++++++++++++++++++++++
- xen/include/xen/sched.h |  3 +++
- 2 files changed, 30 insertions(+)
+ xen/common/domctl.c     | 2 +-
+ xen/common/sysctl.c     | 2 +-
+ xen/include/xsm/dummy.h | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 92263a4fbd..e33a0a5a21 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -562,6 +562,32 @@ static void _domain_destroy(struct domain *d)
-     free_domain_struct(d);
+diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+index ea16b75910..444e072fdc 100644
+--- a/xen/common/domctl.c
++++ b/xen/common/domctl.c
+@@ -539,7 +539,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+         break;
+ 
+     case XEN_DOMCTL_getdomaininfo:
+-        ret = xsm_getdomaininfo(XSM_HOOK, d);
++        ret = xsm_getdomaininfo(XSM_XS_PRIV, d);
+         if ( ret )
+             break;
+ 
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index d02f44fe3a..c2d99ae12e 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -89,7 +89,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+             if ( num_domains == op->u.getdomaininfolist.max_domains )
+                 break;
+ 
+-            if ( xsm_getdomaininfo(XSM_HOOK, d) )
++            if ( xsm_getdomaininfo(XSM_XS_PRIV, d) )
+                 continue;
+ 
+             getdomaininfo(d, &info);
+diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
+index 7956f27a29..f8a3c4b81e 100644
+--- a/xen/include/xsm/dummy.h
++++ b/xen/include/xsm/dummy.h
+@@ -137,7 +137,7 @@ static XSM_INLINE int cf_check xsm_domain_create(
+ static XSM_INLINE int cf_check xsm_getdomaininfo(
+     XSM_DEFAULT_ARG struct domain *d)
+ {
+-    XSM_ASSERT_ACTION(XSM_HOOK);
++    XSM_ASSERT_ACTION(XSM_XS_PRIV);
+     return xsm_default_action(action, current->domain, d);
  }
  
-+static uint64_t get_unique_id(void)
-+{
-+    static uint64_t unique_id;
-+    static DEFINE_SPINLOCK(lock);
-+    uint64_t x;
-+
-+    spin_lock(&lock);
-+
-+    x = unique_id ? : NOW();
-+
-+    /*
-+     * Pseudo-randomize id in order to avoid consumers relying on sequence.
-+     * Randomization algorithm has a period of 2^64 - 1.
-+     * Unique id is not repeatable between resets and each id has the same
-+     * lifetime as the domain it is associated with.
-+     */
-+    x ^= x << 13;
-+    x ^= x >> 7;
-+    x ^= x << 17;
-+    unique_id = x;
-+
-+    spin_unlock(&lock);
-+
-+    return x;
-+}
-+
- static int sanitise_domain_config(struct xen_domctl_createdomain *config)
- {
-     bool hvm = config->flags & XEN_DOMCTL_CDF_hvm;
-@@ -654,6 +680,7 @@ struct domain *domain_create(domid_t domid,
- 
-     /* Sort out our idea of is_system_domain(). */
-     d->domain_id = domid;
-+    d->unique_id = get_unique_id();
- 
-     /* Holding CDF_* internal flags. */
-     d->cdf = flags;
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 76e39378b3..711668e028 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -370,6 +370,9 @@ struct domain
-     domid_t          domain_id;
- 
-     unsigned int     max_vcpus;
-+
-+    uint64_t         unique_id;       /* Unique domain identifier */
-+
-     struct vcpu    **vcpu;
- 
-     shared_info_t   *shared_info;     /* shared data area */
 -- 
 2.43.0
 
