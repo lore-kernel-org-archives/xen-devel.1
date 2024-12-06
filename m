@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B54E77182
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:41:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.849413.1264050 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2AE1E7717D
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:42:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.849423.1264134 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQ9y-0005L0-IS; Fri, 06 Dec 2024 04:41:46 +0000
+	id 1tJQA8-0007m1-9D; Fri, 06 Dec 2024 04:41:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 849413.1264050; Fri, 06 Dec 2024 04:41:46 +0000
+Received: by outflank-mailman (output) from mailman id 849423.1264134; Fri, 06 Dec 2024 04:41:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQ9y-0005Gg-65; Fri, 06 Dec 2024 04:41:46 +0000
-Received: by outflank-mailman (input) for mailman id 849413;
- Fri, 06 Dec 2024 04:41:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tJQA7-0007hl-GP; Fri, 06 Dec 2024 04:41:55 +0000
+Received: by outflank-mailman (input) for mailman id 849423;
+ Fri, 06 Dec 2024 04:41:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5aHD=S7=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tJQ9v-0004Kb-Vj
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:43 +0000
+ id 1tJQA0-0004Ka-Mb
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:48 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 617c78a4-b38c-11ef-99a3-01e77a169b0f;
- Fri, 06 Dec 2024 05:41:39 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 631ce79d-b38c-11ef-a0d5-8be0dac302b0;
+ Fri, 06 Dec 2024 05:41:42 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 530575C7303;
+ by dfw.source.kernel.org (Postfix) with ESMTP id B68855C7311;
  Fri,  6 Dec 2024 04:40:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id ADC4EC4CEE4;
- Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 51702C4CEE1;
+ Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id A3375E77171;
- Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 469A7E77171;
+ Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,38 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 617c78a4-b38c-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 631ce79d-b38c-11ef-a0d5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733460097;
-	bh=BvkwglhN7fVuiz9QCGrNgLj6KeYwL4hLgRPhmZlEXLs=;
+	s=k20201202; t=1733460098;
+	bh=owjhPqMN/sfHwDFdAwELQ23W67gacGzY3DCmgAbUG18=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=R0NAk2V8k78+YO2fyShNo4hL4Q1QuOCwlaxH70++zHg++M5jR9WmS6Pi218PwtJPl
-	 1uhUrWRICPMVWKl2K8Mkq/9q9JewEjHT1yPgvVnUmiSpDJ8w1wez75Gu6MEWmTiG9+
-	 QnwMPIzTmxlz5mWBy+xWIwQjijohFsGDT6Pj6XZqQbC6F/HvimDm5+u4Ftn7nalOtB
-	 RzWkCD9y6lTfSHZTodpumJK9JAwBPIrJ6yIZw96gsBGNTOQG71n1MJJzLW4oRw9gXx
-	 n9xM/MTAczUz0gbFiUXPhpuKIipcV5ZCfdScJ7fjJKx/eihIAZ6ON+mBuQjvf4wkjf
-	 sFWy5RETs+1Iw==
+	b=DLTBKB4oxMWdcE1LnVcKmfZjfrKJIOFEgEJ1YU6TUpJ3qeYzBimAOcHSF5Y0zuJk3
+	 cvauLBWrtXW/9TNGZwEg8SHr14QqSa1+q+jRj6tt4Gexg+KYBDCYxxnuvsRCi54Nm3
+	 MNKzuFfuXxm57lkeHvO72G3bm8U6dD5vh3n3klUHX/2R913vGc/KkcC6Z8JMiLveQr
+	 hflxbWwGj9pwzj3JZhpxZNFh2Nw30U2zleCYzIatOYhuN8D5Ux+qKwJPJeiAWawYiG
+	 cR3ux1HHjGZBMVbYyukJS1P44BHpt1Y/yobwsJx9+MGA573+zrf0FRX5L+gfc3GTYH
+	 AgjQzBjBJzH6Q==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Thu, 05 Dec 2024 20:41:36 -0800
-Subject: [PATCH v2 06/35] riscv/domain: introduce domain_has_vuart()
+Date: Thu, 05 Dec 2024 20:41:45 -0800
+Subject: [PATCH v2 15/35] xen/console: rename console_rx to console_owner
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-vuart-ns8250-v1-6-e9aa923127eb@ford.com>
+Message-Id: <20241205-vuart-ns8250-v1-15-e9aa923127eb@ford.com>
 References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 In-Reply-To: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, 
  Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
  Stefano Stabellini <sstabellini@kernel.org>, 
- Denis Mukhin <dmukhin@ford.com>, 
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
+ Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=737;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=3503;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=+kPk8EKdgpPKuThGSrouRJGm0Vji6pKcYMUo97PKO3Q=;
- b=6hYpirrUtuGFg5SJ0XrKEsxgzUe45RwgR0LajeGuvIJ0aB25n1VGtzPpVnNKCGGGKS7oUgfI4
- 8U4z97HHmmfBzikcouSM5h0MFyMmyrQbcm5azQxSjCr9Bq6EhZyi00j
+ bh=adx3ttDq9DGxs5v/iNqFG/t0SkuLKBWjA23PcHLO1+c=;
+ b=U0p0Hzrt1FgB0xBL5A9gFP0Y7Mk23wTztAC/UqxMEAxRrYxGJSk3Xqom8dczkyZN2c2Nxokon
+ RNRJP3sESjoB+bT52kOM2zEVS1JjKi7wpMFA62krW9kIMHww0XCdO41
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -88,27 +87,107 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Introduce domain_has_vuart() for RISC-V port to be used in the console driver.
+Preparation for the follow on change to switch console_owner to
+domid_t address space.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/domain.h | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/drivers/char/console.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index c3d965a559b6ce3661bf17166d0c51853ff295a2..efbc4f1ea2619a187fe30ede17d96de01e599220 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -10,6 +10,8 @@ struct hvm_domain
-     uint64_t              params[HVM_NR_PARAMS];
- };
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index f8a7db385c9525cabc69ceb1a84d73f57863aa45..86bf899ada8f8221ffc77bcffb1f58777a22198e 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -467,11 +467,11 @@ static void cf_check dump_console_ring_key(unsigned char key)
+  */
+ #define switch_code (opt_conswitch[0]-'a'+1)
+ /*
+- * console_rx=0 => input to xen
+- * console_rx=1 => input to dom0 (or the sole shim domain)
+- * console_rx=N => input to dom(N-1)
++ * console_owner=0 => input to xen
++ * console_owner=1 => input to dom0 (or the sole shim domain)
++ * console_owner=N => input to dom(N-1)
+  */
+-static unsigned int __read_mostly console_rx = 0;
++static unsigned int __read_mostly console_owner = 0;
  
-+#define domain_has_vuart(d)         false
-+
- struct arch_vcpu_io {
- };
+ #define max_console_rx (max_init_domid + 1)
  
+@@ -479,15 +479,15 @@ static unsigned int __read_mostly console_rx = 0;
+ /* Make sure to rcu_unlock_domain after use */
+ struct domain *rcu_lock_domain_console_owner(void)
+ {
+-    if ( console_rx == 0 )
++    if ( console_owner == 0 )
+             return NULL;
+-    return rcu_lock_domain_by_id(console_rx - 1);
++    return rcu_lock_domain_by_id(console_owner - 1);
+ }
+ #endif
+ 
+ static void console_find_owner(void)
+ {
+-    unsigned int next_rx = console_rx;
++    unsigned int next_rx = console_owner;
+ 
+     /*
+      * Rotate among Xen, dom0 and boot-time created domUs while skipping
+@@ -500,7 +500,7 @@ static void console_find_owner(void)
+ 
+         if ( next_rx++ >= max_console_rx )
+         {
+-            console_rx = 0;
++            console_owner = 0;
+             printk("*** Serial input to Xen");
+             break;
+         }
+@@ -515,7 +515,7 @@ static void console_find_owner(void)
+         if ( d )
+         {
+             rcu_unlock_domain(d);
+-            console_rx = next_rx;
++            console_owner = next_rx;
+             printk("*** Serial input to DOM%u", domid);
+             break;
+         }
+@@ -529,7 +529,7 @@ static void console_find_owner(void)
+ 
+ static void __serial_rx(char c)
+ {
+-    switch ( console_rx )
++    switch ( console_owner )
+     {
+     case 0:
+         return handle_keypress(c, false);
+@@ -552,7 +552,7 @@ static void __serial_rx(char c)
+ #ifdef CONFIG_SBSA_VUART_CONSOLE
+     default:
+     {
+-        struct domain *d = rcu_lock_domain_by_id(console_rx - 1);
++        struct domain *d = rcu_lock_domain_by_id(console_owner - 1);
+ 
+         /*
+          * If we have a properly initialized vpl011 console for the
+@@ -563,7 +563,7 @@ static void __serial_rx(char c)
+             vpl011_rx_char_xen(d, c);
+         else
+             printk("Cannot send chars to Dom%d: no UART available\n",
+-                   console_rx - 1);
++                   console_owner - 1);
+ 
+         if ( d != NULL )
+             rcu_unlock_domain(d);
+@@ -1116,7 +1116,7 @@ void __init console_endboot(void)
+      * a useful 'how to switch' message.
+      */
+     if ( opt_conswitch[1] == 'x' )
+-        console_rx = max_console_rx;
++        console_owner = max_console_rx;
+ 
+     register_keyhandler('w', dump_console_ring_key,
+                         "synchronously dump console ring buffer (dmesg)", 0);
 
 -- 
 2.34.1
