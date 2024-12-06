@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CCF7E77179
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 05:01:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.849771.1264335 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AB7E7717B
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 05:01:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.849774.1264344 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQT4-0002MQ-IW; Fri, 06 Dec 2024 05:01:30 +0000
+	id 1tJQT6-0002ct-PN; Fri, 06 Dec 2024 05:01:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 849771.1264335; Fri, 06 Dec 2024 05:01:30 +0000
+Received: by outflank-mailman (output) from mailman id 849774.1264344; Fri, 06 Dec 2024 05:01:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQT4-0002MJ-Fg; Fri, 06 Dec 2024 05:01:30 +0000
-Received: by outflank-mailman (input) for mailman id 849771;
- Fri, 06 Dec 2024 05:01:28 +0000
+	id 1tJQT6-0002cg-Lq; Fri, 06 Dec 2024 05:01:32 +0000
+Received: by outflank-mailman (input) for mailman id 849774;
+ Fri, 06 Dec 2024 05:01:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5aHD=S7=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tJQA8-0004Ka-No
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:56 +0000
+ id 1tJQA5-0004Ka-N8
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:53 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 64187365-b38c-11ef-a0d5-8be0dac302b0;
+ id 63c4dfa4-b38c-11ef-a0d5-8be0dac302b0;
  Fri, 06 Dec 2024 05:41:43 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3C87F5C7320;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 21D635C731C;
  Fri,  6 Dec 2024 04:40:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D3109C4CEE0;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B770CC4CEE4;
  Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id CCB59E77171;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id ADBAEE77175;
  Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,24 +47,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 64187365-b38c-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 63c4dfa4-b38c-11ef-a0d5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1733460098;
-	bh=eiE+Vk1+xwNQSS5lGvaUqRJncjb6mebSOM3N939URVI=;
+	bh=xN3Qk4AnkavJDz1+2oRzOsxhatlUANXuldhRbnVqaL0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=d7BCDKwQXwZ4cbD1bFWhjDN/m+kXVWns99wYk96kr3EEL6V5TOfihPPg1zdjHjzYE
-	 hbhg3UGCriGtvZwt73RW5evUKX2XjkeYiDqjSa/hWTbaza3FSVSlasA/bLG4ECCjuR
-	 3C71xULHuxVorDFC9FXMO9uOOpM6Msregplpkrb71Kd9Nus2tuNTqYwGJmq6ZN6n9s
-	 N6tfJBP8EvviPMtZ0KcOpzCVI6F73bO3nHt3c2tH/jVHmCMD+A4rAjTZ+nvbT5VHxt
-	 XhxI6AQayVJ5sIuSPZsArLR72nEYNXrHvpPYAepN2BrXFBJmh+6eiRau/op/7QioEa
-	 9ZzR5RMXS6d3A==
+	b=WuYwP5N6FRVi49Tvc8z9O/76ioaUpi/FZQBJuMRGDB+GTX2VceyVOCu8rPyGBR9BJ
+	 Oc6LrY1JRMML+ctUVgOXz6zrZlPrbcvalDD+qBZGcAGzG/2luW3je+hPqXh2k02o2z
+	 YQ7HuB/3Ww2fsvyjPNmOm++JScVRUe0EUm5VJoRK7WZVH45B66YCLescgZHWO+B0ph
+	 f1aA8/e1LbT9z1wYmvG0kem2XXv9tpqFZ8J0KYmh8KtFUav8gHDOvgTkvtjsuMaduG
+	 5BlvCSCLrHlqbO+6whey6fmCI1ci/YwN9wpp6ZFAzGacJHjCscL0md3noT+4DXQVNC
+	 fmeyoSd8P6+lQ==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Thu, 05 Dec 2024 20:41:53 -0800
-Subject: [PATCH v2 23/35] xen/console: introduce console_write()
+Date: Thu, 05 Dec 2024 20:41:51 -0800
+Subject: [PATCH v2 21/35] xen/console: introduce console_init_owner()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-vuart-ns8250-v1-23-e9aa923127eb@ford.com>
+Message-Id: <20241205-vuart-ns8250-v1-21-e9aa923127eb@ford.com>
 References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 In-Reply-To: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -73,11 +73,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=5090;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=1949;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=IJndR90ln3ebR9JBLgcF8uZuUsxgXYKVX60Wdeeyfgg=;
- b=jHyeiWGUT3FC9wqdvmDyFZNzJI9ClfZ3Imp+FXv2XyaFHnvRcCAdBiVl5YgFppU5q80Nh4ylX
- 0lCDMsThybKD8ezbX7OiCuZe8c8k5/af+wQnUOUAs2dL7Iq58CX25YI
+ bh=9IHMF1BdeViUoT1r1xwy88EM2J39hJxCdMpf6FUj+oc=;
+ b=rkPuVSjKM6PdcjQpqYx04yf5XSLLo6WwLxCVOm3Xp526geyD7FoALVxOn/SqrCa9cjSfLb+QZ
+ qW8+QGL4+VvD3kA/ow2AsW8esC9XvQRMDoI/h0TfmZ1MW76KHXfU+fc
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -87,165 +87,65 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-PV Linux kernel uses HYPERVISOR_console_io hypercall for early console which
-ends up being handled by Xen's console driver's guest_console_write().
-
-guest_console_write() duplicates the code from __putstr(), elimitate code
-duplication.
+console_init_owner() is introduced for selecting the boot-time console owner.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/drivers/char/console.c | 97 +++++++++++++++++++++++++---------------------
- 1 file changed, 53 insertions(+), 44 deletions(-)
+ xen/drivers/char/console.c | 27 +++++++++++++++++----------
+ 1 file changed, 17 insertions(+), 10 deletions(-)
 
 diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index ce3639a4cdcda00ea63e3bf119bc3b242cbfdf6a..115967d179998cba4a81578caba09db4e4aca7f7 100644
+index a8ab5c2bcb98e4cadf9ad2c9ad28d297977d0557..6261bdb5a2ac1075bc89fa408c0fd6cfef380ae6 100644
 --- a/xen/drivers/char/console.c
 +++ b/xen/drivers/char/console.c
-@@ -63,6 +63,8 @@ static const char __initconst warning_sync_console[] =
-     "However it can introduce SIGNIFICANT latencies and affect\n"
-     "timekeeping. It is NOT recommended for production use!\n";
- 
-+/* Flag: use conring for early console; switches to opt_console_to_ring */
-+static bool __read_mostly use_conring = true;
- /* console_to_ring: send guest (incl. dom 0) console data to console ring. */
- static bool __read_mostly opt_console_to_ring;
- boolean_param("console_to_ring", opt_console_to_ring);
-@@ -661,6 +663,16 @@ static void cf_check notify_dom0_con_ring(void *unused)
- static DECLARE_SOFTIRQ_TASKLET(notify_dom0_con_ring_tasklet,
-                                notify_dom0_con_ring, NULL);
- 
-+static bool console_locks_busted;
-+
-+static void conring_write(const char *str, size_t len)
-+{
-+    conring_puts(str, len);
-+
-+    if ( !console_locks_busted )
-+        tasklet_schedule(&notify_dom0_con_ring_tasklet);
-+}
-+
- #ifdef CONFIG_X86
- static inline void xen_console_write_debug_port(const char *buf, size_t len)
- {
-@@ -669,8 +681,44 @@ static inline void xen_console_write_debug_port(const char *buf, size_t len)
-                    : "=&S" (tmp), "=&c" (tmp)
-                    : "0" (buf), "1" (len), "d" (XEN_HVM_DEBUGCONS_IOPORT) );
+@@ -554,6 +554,22 @@ static void console_find_owner(void)
+         console_set_owner(DOMID_XEN);
  }
-+
-+static void xen_console_write(const char *str, size_t len)
+ 
++static void console_init_owner(void)
 +{
-+    if ( xen_guest )
-+        xen_hypercall_console_write(str, len);
++    domid_t domid;
++
++    /*
++     * If user specifies so, we fool the switch routine to redirect input
++     * straight back to Xen.
++     */
++    if ( opt_conswitch[1] == 'x' )
++        domid = DOMID_XEN;
 +    else
-+        xen_console_write_debug_port(str, len);
-+}
-+#else
-+static inline void xen_console_write(const char *str, size_t len)
-+{
-+}
- #endif
- 
-+/*
-+ * Write characters to console.
-+ *
-+ * That will handle all possible scenarios working w/ console
-+ * - serial console;
-+ * - video output;
-+ * - __HYPERVISOR_console_io hypercall (x86 only);
-+ * - debug I/O port (x86 only);
-+ * - forward to Xen event channel.
-+ */
-+static void console_write(const char *str, size_t len)
-+{
-+    ASSERT(rspin_is_locked(&console_lock));
++        domid = get_initial_domain_id();
 +
-+    console_serial_puts(str, len);
-+    video_puts(str, len);
-+
-+    if ( opt_console_xen )
-+        xen_console_write(str, len);
-+
-+    if ( use_conring )
-+        conring_write(str, len);
++    console_set_owner(domid);
 +}
 +
- static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
-                                 unsigned int count)
+ static void __serial_rx(char c)
  {
-@@ -691,28 +739,8 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
- 
-         if ( is_hardware_domain(cd) )
-         {
--            /* Use direct console output as it could be interactive */
-             nrspin_lock_irq(&console_lock);
--
--            console_serial_puts(kbuf, kcount);
--            video_puts(kbuf, kcount);
--
--#ifdef CONFIG_X86
--            if ( opt_console_xen )
--            {
--                if ( xen_guest )
--                    xen_hypercall_console_write(kbuf, kcount);
--                else
--                    xen_console_write_debug_port(kbuf, kcount);
--            }
--#endif
--
--            if ( opt_console_to_ring )
--            {
--                conring_puts(kbuf, kcount);
--                tasklet_schedule(&notify_dom0_con_ring_tasklet);
--            }
--
-+            console_write(kbuf, kcount);
-             nrspin_unlock_irq(&console_lock);
-         }
-         else
-@@ -813,31 +841,9 @@ long do_console_io(
-  * *****************************************************
-  */
- 
--static bool console_locks_busted;
--
- static void __putstr(const char *str)
- {
--    size_t len = strlen(str);
--
--    ASSERT(rspin_is_locked(&console_lock));
--
--    console_serial_puts(str, len);
--    video_puts(str, len);
--
--#ifdef CONFIG_X86
--    if ( opt_console_xen )
--    {
--        if ( xen_guest )
--            xen_hypercall_console_write(str, len);
--        else
--            xen_console_write_debug_port(str, len);
--    }
--#endif
--
--    conring_puts(str, len);
--
--    if ( !console_locks_busted )
--        tasklet_schedule(&notify_dom0_con_ring_tasklet);
-+    console_write(str, strlen(str));
- }
- 
- static int printk_prefix_check(char *p, char **pp)
-@@ -1171,6 +1177,9 @@ void __init console_endboot(void)
+     switch ( console_owner )
+@@ -1143,14 +1159,6 @@ void __init console_endboot(void)
  
      video_endboot();
  
-+    use_conring = opt_console_to_ring;
-+    smp_wmb();
-+
+-    /*
+-     * If user specifies so, we fool the switch routine to redirect input
+-     * straight back to Xen. I use this convoluted method so we still print
+-     * a useful 'how to switch' message.
+-     */
+-    if ( opt_conswitch[1] == 'x' )
+-        console_owner = DOMID_XEN;
+-
      register_keyhandler('w', dump_console_ring_key,
                          "synchronously dump console ring buffer (dmesg)", 0);
      register_irq_keyhandler('+', &do_inc_thresh,
+@@ -1160,8 +1168,7 @@ void __init console_endboot(void)
+     register_irq_keyhandler('G', &do_toggle_guest,
+                             "toggle host/guest log level adjustment", 0);
+ 
+-    /* Serial input is directed to DOM0 by default. */
+-    console_find_owner();
++    console_init_owner();
+ }
+ 
+ int __init console_has(const char *device)
 
 -- 
 2.34.1
