@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF438E77173
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 05:00:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.849736.1264315 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76C25E77173
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 05:01:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.849758.1264325 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQRZ-0007sZ-UH; Fri, 06 Dec 2024 04:59:57 +0000
+	id 1tJQSi-0001iZ-BM; Fri, 06 Dec 2024 05:01:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 849736.1264315; Fri, 06 Dec 2024 04:59:57 +0000
+Received: by outflank-mailman (output) from mailman id 849758.1264325; Fri, 06 Dec 2024 05:01:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQRZ-0007sS-Ra; Fri, 06 Dec 2024 04:59:57 +0000
-Received: by outflank-mailman (input) for mailman id 849736;
- Fri, 06 Dec 2024 04:59:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tJQSi-0001iS-8a; Fri, 06 Dec 2024 05:01:08 +0000
+Received: by outflank-mailman (input) for mailman id 849758;
+ Fri, 06 Dec 2024 05:01:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5aHD=S7=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tJQA6-0004Ka-NM
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:54 +0000
+ id 1tJQA7-0004Kb-0S
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:55 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 642fa7da-b38c-11ef-a0d5-8be0dac302b0;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 642d15e5-b38c-11ef-99a3-01e77a169b0f;
  Fri, 06 Dec 2024 05:41:43 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8411F5C732A;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 505A75C7323;
  Fri,  6 Dec 2024 04:40:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 25C16C4CEE0;
- Fri,  6 Dec 2024 04:41:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E50A9C4CEDE;
+ Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 1DE67E77175;
- Fri,  6 Dec 2024 04:41:39 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id DBE78E77175;
+ Fri,  6 Dec 2024 04:41:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,24 +47,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 642fa7da-b38c-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 642d15e5-b38c-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733460099;
-	bh=tqpmdL8JNRiLSamzy9ROf/yJ/66J2svyAG5pfiQILB0=;
+	s=k20201202; t=1733460098;
+	bh=PJJ4npH36unNSzjXcb8NI2vArWEkfURXL6bFFuUiDHo=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=u7P9mgJdpIjUCR4UTz9a57NXTHwJcB5aeeBrK0LU7Nov965LEsoBe1GBVhjVO3QQZ
-	 W0SvFy5A84Aj2H5qY5gPmEeXd3tCpjZc7TsXw3UnXUcX1htfK98vbtvrmCyfPpCOwQ
-	 EqZnHIb39dZc2WW8OTP6pkjnestLt6EXqx62a8t0QZ38di3jKlWrRiGJJt7/fNhUrl
-	 kTw2HUnIIjiUezrcjUDkyyl7bPM0FeCx3XdlC/dcbicKbiw9+tSCxw8+1oiEWNSUdq
-	 zR6UZuQZHfdI3MuFIrdANp4QHQv1nNe/+H+fDOHUO0Pw9PM/3cb6xbOTNfLwmBDjBJ
-	 N+4Z/BvgzJ8Mw==
+	b=UQgkSZtWVa9FG9t1D5mOZW5z072Osw8G8GmdO1+7fn17cWhT0Ro8xPOW/k8vF45No
+	 kA21roJuxVeE0nzz7aI/hcDSWdDh5fd1KR36560FtLwOLm0BfIbgarlaI3I7dXFkAy
+	 ue39WmPRawJ1/n9YG9L3vT1WBEYrNBiINIbnRUt7kTpYEOI4Cz3zIH0I+uG3HwCSlX
+	 lCpXFcN+KXgYunteT3BKGARDEuxesjKuQWhCgdicE3PMsZahaoisGbUJMt1QAvFc2y
+	 mNaU3ZSiqJCiPoo6Wq/ToTGYZaEtn4mr3CWdaDnLfMS4bDoldla6Lhi4cbsOAUskja
+	 nhYA9JkPvmNFg==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Thu, 05 Dec 2024 20:41:58 -0800
-Subject: [PATCH v2 28/35] xen/8250-uart: add missing definitions
+Date: Thu, 05 Dec 2024 20:41:54 -0800
+Subject: [PATCH v2 24/35] xen/console: introduce hwdom_crashconsole=
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-vuart-ns8250-v1-28-e9aa923127eb@ford.com>
+Message-Id: <20241205-vuart-ns8250-v1-24-e9aa923127eb@ford.com>
 References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 In-Reply-To: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -73,11 +73,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460095; l=7150;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=3897;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=tIDl7kdtapSdiWgcLjWmQ7v8zbW9hmc48ULvT599z7A=;
- b=kPzosi8ho+ByeLwfCWEeVFseo8sJZ+0pQO4SEJq2xAHq/cop5Z9wnnfTJ7hX4VXH2kuye0ajT
- y1zxyalUV4kBc0xBvVDO5M7y3G4JHEggAouSPKUNF5FfZUP436ueI3j
+ bh=1SE1nPGu4xeTH/OTKpOlxTlLd/mo9Wc6622Zz4Y1AHc=;
+ b=Ojfyv76A9s+nHItTnUu5XXzmcReLwQ/cS7xcueyxc3sbROAgSJngYgjiuIlonbN9oIe8CBGJs
+ YSZYIJCFA4+CNyG8V/SJfCQkjRyHkBMEHk16OIe2bCfcQi3csn2vS0U
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -87,152 +87,102 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Added missing definitions needed for NS8250 UART emulator.
+The new command line switch `hwdom_crashconsole=BOOL` allows to switch serial
+console input focus to xen for machine state inspection using keyhandler
+mechanism after the hardware domain crashes.
+
+The new command line switch is aliased via `dom0=...,crashconsole` knob.
+
+Such functionality can be useful while debugging dom0 bringup.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/include/xen/8250-uart.h | 81 +++++++++++++++++++++++++++++++++------------
- 1 file changed, 60 insertions(+), 21 deletions(-)
+ docs/misc/xen-command-line.pandoc |  5 +++++
+ xen/arch/x86/dom0_build.c         |  2 ++
+ xen/common/domain.c               | 14 +++++++++++++-
+ xen/include/xen/domain.h          |  1 +
+ 4 files changed, 21 insertions(+), 1 deletion(-)
 
-diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
-index d13352940c13c50bac17d4cdf2f3bf584380776a..4a69b2b225140efda287bdf96fa0caa4aa70074f 100644
---- a/xen/include/xen/8250-uart.h
-+++ b/xen/include/xen/8250-uart.h
-@@ -32,16 +32,22 @@
- #define UART_MCR          0x04    /* Modem control        */
- #define UART_LSR          0x05    /* line status          */
- #define UART_MSR          0x06    /* Modem status         */
-+#define UART_SCR          0x07    /* Scratch pad          */
- #define UART_USR          0x1f    /* Status register (DW) */
- #define UART_DLL          0x00    /* divisor latch (ls) (DLAB=1) */
- #define UART_DLM          0x01    /* divisor latch (ms) (DLAB=1) */
- #define UART_XR_EFR       0x09    /* Enhanced function register (Exar) */
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 293dbc1a957ba6e668fd4d55d58e84f643822126..fb77d7dca1ea517f79d6713aa6909422f31e7724 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -806,6 +806,7 @@ Specify the bit width of the DMA heap.
  
-+/* ns8250 emulator: range of emulated registers [0..UART_MAX-1] */
-+#define UART_MAX          (UART_SCR + 1)
+ ### dom0
+     = List of [ pv | pvh, shadow=<bool>, verbose=<bool>,
++                crashconsole=<bool>,
+                 cpuid-faulting=<bool>, msr-relaxed=<bool> ] (x86)
+ 
+     = List of [ sve=<integer> ] (Arm64)
+@@ -839,6 +840,10 @@ Controls for how dom0 is constructed on x86 systems.
+     information during the dom0 build.  It defaults to the compile time choice
+     of `CONFIG_VERBOSE_DEBUG`.
+ 
++*   The `crashconsole` boolean instructs Xen to drop into emergency console
++    in case of dom0 crash. May be useful for dom0 bringup on a custom
++    hardware.
 +
- /* Interrupt Enable Register */
- #define UART_IER_ERDAI    0x01    /* rx data recv'd       */
- #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
- #define UART_IER_ELSI     0x04    /* rx line status       */
- #define UART_IER_EMSI     0x08    /* MODEM status         */
-+#define UART_IER_MASK \
-+    (UART_IER_ERDAI | UART_IER_ETHREI | UART_IER_ELSI | UART_IER_EMSI)
+ *   The `cpuid-faulting` boolean is an interim option, is only applicable to
+     PV dom0, and defaults to true.
  
- /* Interrupt Identification Register */
- #define UART_IIR_NOINT    0x01    /* no interrupt pending */
-@@ -51,12 +57,21 @@
- #define UART_IIR_THR      0x02    /*  - tx reg. empty     */
- #define UART_IIR_MSI      0x00    /*  - MODEM status      */
- #define UART_IIR_BSY      0x07    /*  - busy detect (DW) */
-+#define UART_IIR_FE0      BIT(6, U) /* FIFO enable #0 */
-+#define UART_IIR_FE1      BIT(7, U) /* FIFO enable #1 */
-+#define UART_IIR_FE_MASK  (UART_IIR_FE0 | UART_IIR_FE1)
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index e8f5bf5447bc47a6daa3d95787106a4c11e80d31..706aeec0ecbb565a415edbfb33ca2fd72967c560 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -286,6 +286,8 @@ int __init parse_arch_dom0_param(const char *s, const char *e)
+         opt_dom0_cpuid_faulting = val;
+     else if ( (val = parse_boolean("msr-relaxed", s, e)) >= 0 )
+         opt_dom0_msr_relaxed = val;
++    else if ( (val = parse_boolean("crashconsole", s, e)) >= 0 )
++        opt_hwdom_crashconsole = !!val;
+     else
+         return -EINVAL;
  
- /* FIFO Control Register */
--#define UART_FCR_ENABLE   0x01    /* enable FIFO          */
--#define UART_FCR_CLRX     0x02    /* clear Rx FIFO        */
--#define UART_FCR_CLTX     0x04    /* clear Tx FIFO        */
--#define UART_FCR_DMA      0x10    /* enter DMA mode       */
-+#define UART_FCR_ENABLE     BIT(0, U)   /* enable FIFO          */
-+#define UART_FCR_CLRX       BIT(1, U)   /* clear Rx FIFO        */
-+#define UART_FCR_CLTX       BIT(2, U)   /* clear Tx FIFO        */
-+#define UART_FCR_DMA        BIT(3, U)   /* enter DMA mode       */
-+#define UART_FCR_RESERVED0  BIT(4, U)   /* reserved; always 0   */
-+#define UART_FCR_RESERVED1  BIT(5, U)   /* reserved; always 0   */
-+#define UART_FCR_RTB0       BIT(6, U)   /* receiver trigger bit #0 */
-+#define UART_FCR_RTB1       BIT(7, U)   /* receiver trigger bit #1 */
-+#define UART_FCR_TRG_MASK   (UART_FCR_RTB0 | UART_FCR_RTB1)
-+
- #define UART_FCR_TRG1     0x00    /* Rx FIFO trig lev 1   */
- #define UART_FCR_TRG4     0x40    /* Rx FIFO trig lev 4   */
- #define UART_FCR_TRG8     0x80    /* Rx FIFO trig lev 8   */
-@@ -64,17 +79,17 @@
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index aab546c0a8535e4f007cbbc9c5c552bcf66b5807..4fe69f294158dda7b2e0b9d98d49c34e04131cb8 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -56,6 +56,13 @@ unsigned int xen_processor_pmbits = XEN_PROCESSOR_PM_PX;
+ bool opt_dom0_vcpus_pin;
+ boolean_param("dom0_vcpus_pin", opt_dom0_vcpus_pin);
  
- /*
-  * Note: The FIFO trigger levels are chip specific:
-- *	RX:76 = 00  01  10  11	TX:54 = 00  01  10  11
-- * PC16550D:	 1   4   8  14		xx  xx  xx  xx
-- * TI16C550A:	 1   4   8  14          xx  xx  xx  xx
-- * TI16C550C:	 1   4   8  14          xx  xx  xx  xx
-- * ST16C550:	 1   4   8  14		xx  xx  xx  xx
-- * ST16C650:	 8  16  24  28		16   8  24  30	PORT_16650V2
-- * NS16C552:	 1   4   8  14		xx  xx  xx  xx
-- * ST16C654:	 8  16  56  60		 8  16  32  56	PORT_16654
-- * TI16C750:	 1  16  32  56		xx  xx  xx  xx	PORT_16750
-- * TI16C752:	 8  16  56  60		 8  16  32  56
-- * Tegra:	 1   4   8  14		16   8   4   1	PORT_TEGRA
-+ *  RX:76 = 00  01  10  11  TX:54 = 00  01  10  11
-+ * PC16550D:     1   4   8  14      xx  xx  xx  xx
-+ * TI16C550A:    1   4   8  14      xx  xx  xx  xx
-+ * TI16C550C:    1   4   8  14      xx  xx  xx  xx
-+ * ST16C550:     1   4   8  14      xx  xx  xx  xx
-+ * ST16C650:     8  16  24  28      16   8  24  30  PORT_16650V2
-+ * NS16C552:     1   4   8  14      xx  xx  xx  xx
-+ * ST16C654:     8  16  56  60       8  16  32  56  PORT_16654
-+ * TI16C750:     1  16  32  56      xx  xx  xx  xx  PORT_16750
-+ * TI16C752:     8  16  56  60       8  16  32  56
-+ * Tegra:        1   4   8  14      16   8   4   1  PORT_TEGRA
-  */
- #define UART_FCR_R_TRIG_00 0x00
- #define UART_FCR_R_TRIG_01 0x40
-@@ -96,11 +111,31 @@
- #define UART_LCR_CONF_MODE_B	0xBF		/* Configuration mode B */
- 
- /* Modem Control Register */
--#define UART_MCR_DTR      0x01    /* Data Terminal Ready  */
--#define UART_MCR_RTS      0x02    /* Request to Send      */
--#define UART_MCR_OUT2     0x08    /* OUT2: interrupt mask */
--#define UART_MCR_LOOP     0x10    /* Enable loopback test mode */
--#define UART_MCR_TCRTLR   0x40    /* Access TCR/TLR (TI16C752, EFR[4]=1) */
-+#define UART_MCR_DTR            BIT(0, U)   /* Data Terminal Ready  */
-+#define UART_MCR_RTS            BIT(1, U)   /* Request to Send      */
-+#define UART_MCR_OUT1           BIT(2, U)   /* OUT1: interrupt mask */
-+#define UART_MCR_OUT2           BIT(3, U)   /* OUT2: interrupt mask */
-+#define UART_MCR_LOOP           BIT(4, U)   /* Enable loopback test mode */
-+#define UART_MCR_RESERVED0      BIT(5, U)   /* Reserved #0 */
-+#define UART_MCR_RESERVED1      BIT(6, U)   /* Reserved #1 */
-+#define UART_MCR_TCRTLR         BIT(6, U)   /* Access TCR/TLR (TI16C752, EFR[4]=1) */
-+#define UART_MCR_RESERVED2      BIT(7, U)   /* Reserved #2 */
-+#define UART_MCR_MASK \
-+    (UART_MCR_DTR | UART_MCR_RTS | \
-+     UART_MCR_OUT1 | UART_MCR_OUT2 | \
-+     UART_MCR_LOOP)
-+
-+/* Modem Status Register */
-+#define UART_MSR_DCTS           BIT(0, U)   /* Change in CTS */
-+#define UART_MSR_DDSR           BIT(1, U)   /* Change in DSR */
-+#define UART_MSR_TERI           BIT(2, U)   /* Change in RI */
-+#define UART_MSR_DDCD           BIT(3, U)   /* Change in CTS */
-+#define UART_MSR_CTS            BIT(4, U)
-+#define UART_MSR_DSR            BIT(5, U)
-+#define UART_MSR_RI             BIT(6, U)
-+#define UART_MSR_DCD            BIT(7, U)
-+#define UART_MSR_DELTA \
-+    (UART_MSR_DCTS | UART_MSR_DDSR | UART_MSR_TERI | UART_MSR_DDCD)
- 
- /* Line Status Register */
- #define UART_LSR_DR       0x01    /* Data ready           */
-@@ -111,6 +146,7 @@
- #define UART_LSR_THRE     0x20    /* Xmit hold reg empty  */
- #define UART_LSR_TEMT     0x40    /* Xmitter empty        */
- #define UART_LSR_ERR      0x80    /* Error                */
-+#define UART_LSR_MASK     (UART_LSR_OE | UART_LSR_BI)
- 
- /* These parity settings can be ORed directly into the LCR. */
- #define UART_PARITY_NONE  (0<<3)
-@@ -119,7 +155,10 @@
- #define UART_PARITY_MARK  (5<<3)
- #define UART_PARITY_SPACE (7<<3)
- 
--/* Frequency of external clock source. This definition assumes PC platform. */
 +/*
-+ * Frequency of external UART clock source.
-+ * Same as IBM PC master input clock frequency.
++ * Hardware domain crash handler: if true, do not halt machine, but switch to
++ * Xen console for debugging.
 + */
- #define UART_CLOCK_HZ     1843200
++bool opt_hwdom_crashconsole;
++boolean_param("hwdom_crashconsole", opt_hwdom_crashconsole);
++
+ /* Protect updates/reads (resp.) of domain_list and domain_hash. */
+ DEFINE_SPINLOCK(domlist_update_lock);
+ DEFINE_RCU_READ_LOCK(domlist_read_lock);
+@@ -1138,7 +1145,12 @@ int domain_shutdown(struct domain *d, u8 reason)
+     reason = d->shutdown_code;
  
- /* Bits in Exar specific UART_XR_EFR register */
+     if ( is_hardware_domain(d) )
+-        hwdom_shutdown(reason);
++    {
++        if ( opt_hwdom_crashconsole )
++            console_set_owner(DOMID_XEN);
++        else
++            hwdom_shutdown(reason);
++    }
+ 
+     if ( d->is_shutting_down )
+     {
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 6102826a929ff7aad58a4bc40974815071a97446..e0c52af878b69e28e2d19957d0d3a8234860ecba 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -150,6 +150,7 @@ extern unsigned int xen_processor_pmbits;
+ extern bool opt_dom0_vcpus_pin;
+ extern cpumask_t dom0_cpus;
+ extern bool dom0_affinity_relaxed;
++extern bool opt_hwdom_crashconsole;
+ 
+ /* vnuma topology per domain. */
+ struct vnuma_info {
 
 -- 
 2.34.1
