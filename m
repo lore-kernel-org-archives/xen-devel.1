@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B5AE7717B
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 10:18:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.850004.1264566 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4CE6E77173
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 10:20:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.850049.1264580 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJVPs-0005TQ-7E; Fri, 06 Dec 2024 10:18:32 +0000
+	id 1tJVRz-0001oj-N0; Fri, 06 Dec 2024 10:20:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 850004.1264566; Fri, 06 Dec 2024 10:18:32 +0000
+Received: by outflank-mailman (output) from mailman id 850049.1264580; Fri, 06 Dec 2024 10:20:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJVPr-0005QM-Qq; Fri, 06 Dec 2024 10:18:31 +0000
-Received: by outflank-mailman (input) for mailman id 850004;
- Fri, 06 Dec 2024 10:18:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tJVRz-0001oc-KH; Fri, 06 Dec 2024 10:20:43 +0000
+Received: by outflank-mailman (input) for mailman id 850049;
+ Fri, 06 Dec 2024 10:20:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=igGl=S7=huawei.com=ruanjinjie@srs-se1.protection.inumbo.net>)
- id 1tJVPq-0001of-D7
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 10:18:30 +0000
+ id 1tJVPu-0001om-In
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 10:18:34 +0000
 Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6e5c0c36-b3bb-11ef-a0d5-8be0dac302b0;
- Fri, 06 Dec 2024 11:18:28 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 711a417a-b3bb-11ef-99a3-01e77a169b0f;
+ Fri, 06 Dec 2024 11:18:32 +0100 (CET)
 Received: from mail.maildlp.com (unknown [172.19.163.48])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Y4RwQ3XBKzgZ8D;
- Fri,  6 Dec 2024 18:15:34 +0800 (CST)
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Y4Rxj60gFzqTYt;
+ Fri,  6 Dec 2024 18:16:41 +0800 (CST)
 Received: from kwepemg200008.china.huawei.com (unknown [7.202.181.35])
- by mail.maildlp.com (Postfix) with ESMTPS id 41FA418009B;
- Fri,  6 Dec 2024 18:18:25 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id 13D7618009B;
+ Fri,  6 Dec 2024 18:18:30 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by kwepemg200008.china.huawei.com
  (7.202.181.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 6 Dec
- 2024 18:18:23 +0800
+ 2024 18:18:28 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,7 +48,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e5c0c36-b3bb-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 711a417a-b3bb-11ef-99a3-01e77a169b0f
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<sstabellini@kernel.org>, <tglx@linutronix.de>, <peterz@infradead.org>,
@@ -68,9 +68,9 @@ To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<joey.gouly@arm.com>, <liuyuntao12@huawei.com>, <leobras@redhat.com>,
 	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
 	<xen-devel@lists.xenproject.org>
-Subject: [PATCH -next v5 15/22] arm64/ptrace: Refator el0_svc_common()
-Date: Fri, 6 Dec 2024 18:17:37 +0800
-Message-ID: <20241206101744.4161990-16-ruanjinjie@huawei.com>
+Subject: [PATCH -next v5 19/22] arm64/ptrace: Use syscall_get_arguments() heleper
+Date: Fri, 6 Dec 2024 18:17:41 +0800
+Message-ID: <20241206101744.4161990-20-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241206101744.4161990-1-ruanjinjie@huawei.com>
 References: <20241206101744.4161990-1-ruanjinjie@huawei.com>
@@ -81,125 +81,58 @@ X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
  kwepemg200008.china.huawei.com (7.202.181.35)
 
-As the generic entry, before report_syscall_exit(), it terminate
-the process if the syscall is issued within a restartable sequence.
+The generic entry check audit context first and use
+syscall_get_arguments() helper.
 
-In preparation for moving arm64 over to the generic entry code,
-refator el0_svc_common() as below:
+In order to switch to the generic entry for arm64,
 
-- Extract syscall_exit_to_user_mode_prepare() helper to replace the
-  the combination of read_thread_flags() and syscall_trace_exit(), also
-  move the syscall exit check logic into it.
+- Also use the helper.
 
-- Move rseq_syscall() ahead, so the CONFIG_DEBUG_RSEQ check is
-  not needed.
+- Extract the syscall_enter_audit() helper to make it clear.
 
-- Move has_syscall_work() helper into asm/syscall.h to be reused for
-  ptrace.c.
+- Check audit context for syscall_enter_audit(), which only adds
+  one additional check without any other differences as
+  audit_syscall_entry() check it first otherwise do nothing.
+
+No functional changes.
 
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- arch/arm64/include/asm/syscall.h |  7 ++++++-
- arch/arm64/kernel/ptrace.c       | 10 +++++++++-
- arch/arm64/kernel/syscall.c      | 26 +++++---------------------
- 3 files changed, 20 insertions(+), 23 deletions(-)
+ arch/arm64/kernel/ptrace.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/include/asm/syscall.h b/arch/arm64/include/asm/syscall.h
-index 925a257145f9..6eeb1e7b033f 100644
---- a/arch/arm64/include/asm/syscall.h
-+++ b/arch/arm64/include/asm/syscall.h
-@@ -85,7 +85,12 @@ static inline int syscall_get_arch(struct task_struct *task)
- 	return AUDIT_ARCH_AARCH64;
- }
- 
-+static inline bool has_syscall_work(unsigned long flags)
-+{
-+	return unlikely(flags & _TIF_SYSCALL_WORK);
-+}
-+
- int syscall_trace_enter(struct pt_regs *regs, long syscall, unsigned long flags);
--void syscall_trace_exit(struct pt_regs *regs, unsigned long flags);
-+void syscall_exit_to_user_mode_prepare(struct pt_regs *regs);
- 
- #endif	/* __ASM_SYSCALL_H */
 diff --git a/arch/arm64/kernel/ptrace.c b/arch/arm64/kernel/ptrace.c
-index bb994d668d74..23df2e558fe9 100644
+index c0c00e173f61..3a7a1eaca0a9 100644
 --- a/arch/arm64/kernel/ptrace.c
 +++ b/arch/arm64/kernel/ptrace.c
-@@ -2384,7 +2384,7 @@ int syscall_trace_enter(struct pt_regs *regs, long syscall, unsigned long flags)
- 	return regs->syscallno;
+@@ -2357,6 +2357,17 @@ static void report_syscall_exit(struct pt_regs *regs)
+ 	}
  }
  
--void syscall_trace_exit(struct pt_regs *regs, unsigned long flags)
-+static void syscall_trace_exit(struct pt_regs *regs, unsigned long flags)
- {
- 	audit_syscall_exit(regs);
- 
-@@ -2393,8 +2393,16 @@ void syscall_trace_exit(struct pt_regs *regs, unsigned long flags)
- 
- 	if (flags & (_TIF_SYSCALL_TRACE | _TIF_SINGLESTEP))
- 		report_syscall_exit(regs);
++static inline void syscall_enter_audit(struct pt_regs *regs, long syscall)
++{
++	if (unlikely(audit_context())) {
++		unsigned long args[6];
++
++		syscall_get_arguments(current, regs, args);
++		audit_syscall_entry(syscall, args[0], args[1], args[2], args[3]);
++	}
++
 +}
 +
-+void syscall_exit_to_user_mode_prepare(struct pt_regs *regs)
-+{
-+	unsigned long flags = read_thread_flags();
- 
- 	rseq_syscall(regs);
-+
-+	if (has_syscall_work(flags) || flags & _TIF_SINGLESTEP)
-+		syscall_trace_exit(regs, flags);
- }
- 
- /*
-diff --git a/arch/arm64/kernel/syscall.c b/arch/arm64/kernel/syscall.c
-index 064dc114fb9b..a50db885fc34 100644
---- a/arch/arm64/kernel/syscall.c
-+++ b/arch/arm64/kernel/syscall.c
-@@ -65,11 +65,6 @@ static void invoke_syscall(struct pt_regs *regs, unsigned int scno,
- 	choose_random_kstack_offset(get_random_u16());
- }
- 
--static inline bool has_syscall_work(unsigned long flags)
--{
--	return unlikely(flags & _TIF_SYSCALL_WORK);
--}
--
- static void el0_svc_common(struct pt_regs *regs, int scno, int sc_nr,
- 			   const syscall_fn_t syscall_table[])
+ int syscall_trace_enter(struct pt_regs *regs, long syscall, unsigned long flags)
  {
-@@ -125,26 +120,15 @@ static void el0_svc_common(struct pt_regs *regs, int scno, int sc_nr,
- 		if (scno == NO_SYSCALL)
- 			syscall_set_return_value(current, regs, -ENOSYS, 0);
- 		scno = syscall_trace_enter(regs, regs->syscallno, flags);
--		if (scno == NO_SYSCALL)
--			goto trace_exit;
-+		if (scno == NO_SYSCALL) {
-+			syscall_exit_to_user_mode_prepare(regs);
-+			return;
-+		}
+ 	int ret;
+@@ -2387,8 +2398,7 @@ int syscall_trace_enter(struct pt_regs *regs, long syscall, unsigned long flags)
+ 		 syscall = syscall_get_nr(current, regs);
  	}
  
- 	invoke_syscall(regs, scno, sc_nr, syscall_table);
+-	audit_syscall_entry(syscall, regs->orig_x0, regs->regs[1],
+-			    regs->regs[2], regs->regs[3]);
++	syscall_enter_audit(regs, syscall);
  
--	/*
--	 * The tracing status may have changed under our feet, so we have to
--	 * check again. However, if we were tracing entry, then we always trace
--	 * exit regardless, as the old entry assembly did.
--	 */
--	if (!has_syscall_work(flags) && !IS_ENABLED(CONFIG_DEBUG_RSEQ)) {
--		flags = read_thread_flags();
--		if (!has_syscall_work(flags) && !(flags & _TIF_SINGLESTEP))
--			return;
--	}
--
--trace_exit:
--	flags = read_thread_flags();
--	syscall_trace_exit(regs, flags);
-+	syscall_exit_to_user_mode_prepare(regs);
+ 	return regs->syscallno;
  }
- 
- void do_el0_svc(struct pt_regs *regs)
 -- 
 2.34.1
 
