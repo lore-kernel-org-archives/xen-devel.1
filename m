@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99776E77179
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AC0E7717E
 	for <xen-devel@archiver.kernel.org>; Fri,  6 Dec 2024 04:41:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.849412.1264039 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.849417.1264092 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQ9x-0005A7-V9; Fri, 06 Dec 2024 04:41:45 +0000
+	id 1tJQA2-0006Ns-Sr; Fri, 06 Dec 2024 04:41:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 849412.1264039; Fri, 06 Dec 2024 04:41:45 +0000
+Received: by outflank-mailman (output) from mailman id 849417.1264092; Fri, 06 Dec 2024 04:41:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tJQ9x-00058M-Oo; Fri, 06 Dec 2024 04:41:45 +0000
-Received: by outflank-mailman (input) for mailman id 849412;
- Fri, 06 Dec 2024 04:41:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tJQA2-0006La-24; Fri, 06 Dec 2024 04:41:50 +0000
+Received: by outflank-mailman (input) for mailman id 849417;
+ Fri, 06 Dec 2024 04:41:46 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5aHD=S7=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tJQ9v-0004Ka-Li
- for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:43 +0000
+ id 1tJQ9x-0004Kb-Vk
+ for xen-devel@lists.xenproject.org; Fri, 06 Dec 2024 04:41:45 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 617d6426-b38c-11ef-a0d5-8be0dac302b0;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 617c78bd-b38c-11ef-99a3-01e77a169b0f;
  Fri, 06 Dec 2024 05:41:39 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 01D9E5C72FC;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3DC0C5C7300;
  Fri,  6 Dec 2024 04:40:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 71ACCC4CEDD;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8A1DAC4CED2;
  Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 5D5CBE77171;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 790DFE77178;
  Fri,  6 Dec 2024 04:41:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,24 +47,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 617d6426-b38c-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 617c78bd-b38c-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1733460097;
-	bh=hhpepZyC6+B98tKRYu7FEASFfIF/3/TSsCfLQMcZ32A=;
+	bh=7koQaWLewXvB3SCK9dZyYM5ZVrnylbZtaIV5UaNbJIw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=FgEft6ym49ftHh+ywRhew+yV7ooUsjJ9GgX7qlng7oFqZExFwgdQbJ3OZGbP2k1o8
-	 hqWhBr48KvJajYXUC7s9kLqnORDaBpK0U5DsgE2yh8EUwvu7IWA4n9vf4y8pVWeHuL
-	 X0CNBMStmy163XE1QJQFbGSxnnzsiXE71hONAyET4ME7Jkfu4Y5PxY9DYQZi3ceIlX
-	 DUpDL78EXSQQxAzrVuEnY8ntTxHi4qhT0SXyQi334r+gmzvcqqV1ccgWwUuMKyjk+o
-	 Pf3N/SWiluN7VWPNThRC5ZB/bZ7FQAaFJaZWxzOL40fb6RU3SYMUULqSO3AtNoUJbS
-	 6BhwXmARPGSWg==
+	b=hoHmD/h87nsVaTNuOwWGeJIP/ib+VrDqptGul4bHy+1jdGv6d0tesKtcPvEI/oaJe
+	 5gYgVFGmwqoGY8HEbJxfhSqIJt2tDg0S2l/0824jsFFymZXukR9QdzTePCDTnKjc38
+	 iodnbyM/HB9js6hJlTSJe5RkFB7ZexvdPVAjq3rXZkcAG4deVzj6gZX9VlOuUI2FN4
+	 JCNQptf8RThz9o2L6YpvS5+FNqMfWtdvEWOzE6i8ERk9pL/nbNWc2BWNUTGXcEJyoC
+	 1S96uEz9GWNeT1az2qZFamB5BR34pQ6pLzl92zrJhvSY57uAbe/pxoQ2Gi6vSMfzZa
+	 Pbpxih71Gdd6A==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Thu, 05 Dec 2024 20:41:31 -0800
-Subject: [PATCH v2 01/35] xen: introduce resource.h
+Date: Thu, 05 Dec 2024 20:41:33 -0800
+Subject: [PATCH v2 03/35] xen/ctype: introduce isconsole()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-vuart-ns8250-v1-1-e9aa923127eb@ford.com>
+Message-Id: <20241205-vuart-ns8250-v1-3-e9aa923127eb@ford.com>
 References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 In-Reply-To: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -73,11 +73,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=4665;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733460094; l=2965;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=Q8GpN19knhkzccfTAV4prViqD1gvBrGqV7AxMvPxGlg=;
- b=pLKcxFd8odpX59gNXWYl0zBIJnHXlKMAZidA2yu9BapqleSET916m7mHU6Mvl0DNg3hQZIYM4
- LVm76T+Dh3WCEayzQHVnI0ba7CbQu+O/yHEdwB8NsPJgJQ3XptYWOIA
+ bh=VA1l2CgJQ6KceeM+tuMGN+rK6UFSe0FXEY/EUwUiYwI=;
+ b=JGqXyT0nbX97Vn2mSNHSEgjpczcuciXKVCHfEW8CEpXFPzirY37JgpYwVuNT3Xh6fyHyQupM6
+ JwhVvYBYibZAg7WSsrLhqzDPlyDVc9R3X0g80jgVMZyQ7FNV0dbt/mw
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -87,138 +87,80 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Move resource definitions to a new architecture-agnostic shared header file.
-
-It will be used in follow on NS8250 emulator code to describe legacy
-PC COM resources.
+There are several console drivers which have same checks w.r.t. printable
+characters. The check is moved to new isconsole() macro and re-used in
+the console drivers.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/common/device-tree/device-tree.c | 21 +------------------
- xen/drivers/passthrough/arm/smmu.c   | 15 +-------------
- xen/include/xen/resource.h           | 40 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 42 insertions(+), 34 deletions(-)
+ xen/arch/arm/vuart.c       | 3 +--
+ xen/arch/x86/hvm/hvm.c     | 3 +--
+ xen/drivers/char/console.c | 2 +-
+ xen/include/xen/ctype.h    | 3 +++
+ 4 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/xen/common/device-tree/device-tree.c b/xen/common/device-tree/device-tree.c
-index d0528c5825651f7cc9ebca0c949229c9083063c6..e8f810b2fe10890c033ed3a9d4ca627010ad019b 100644
---- a/xen/common/device-tree/device-tree.c
-+++ b/xen/common/device-tree/device-tree.c
-@@ -24,6 +24,7 @@
- #include <xen/ctype.h>
- #include <asm/setup.h>
- #include <xen/err.h>
-+#include <xen/resource.h>
+diff --git a/xen/arch/arm/vuart.c b/xen/arch/arm/vuart.c
+index d5ba483f1e63245e545346ad5045098152b8c152..ac76e2327bb84f05ea5716c6f5550f94812d2827 100644
+--- a/xen/arch/arm/vuart.c
++++ b/xen/arch/arm/vuart.c
+@@ -79,8 +79,7 @@ static void vuart_print_char(struct vcpu *v, char c)
+     struct domain *d = v->domain;
+     struct vuart *uart = &d->arch.vuart;
  
- const void *device_tree_flattened;
- dt_irq_xlate_func dt_irq_xlate;
-@@ -535,26 +536,6 @@ int dt_child_n_size_cells(const struct dt_device_node *parent)
-     return __dt_n_size_cells(parent, true);
- }
+-    /* Accept only printable characters, newline, and horizontal tab. */
+-    if ( !isprint(c) && (c != '\n') && (c != '\t') )
++    if ( !isconsole(c) )
+         return ;
  
--/*
-- * These are defined in Linux where much of this code comes from, but
-- * are currently unused outside this file in the context of Xen.
-- */
--#define IORESOURCE_BITS         0x000000ff      /* Bus-specific bits */
--
--#define IORESOURCE_TYPE_BITS    0x00001f00      /* Resource type */
--#define IORESOURCE_IO           0x00000100      /* PCI/ISA I/O ports */
--#define IORESOURCE_MEM          0x00000200
--#define IORESOURCE_REG          0x00000300      /* Register offsets */
--#define IORESOURCE_IRQ          0x00000400
--#define IORESOURCE_DMA          0x00000800
--#define IORESOURCE_BUS          0x00001000
--
--#define IORESOURCE_PREFETCH     0x00002000      /* No side effects */
--#define IORESOURCE_READONLY     0x00004000
--#define IORESOURCE_CACHEABLE    0x00008000
--#define IORESOURCE_RANGELENGTH  0x00010000
--#define IORESOURCE_SHADOWABLE   0x00020000
--
+     spin_lock(&uart->lock);
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 74e58c653e6f697e7e563fd076bbbafaf257137d..493b699c708949b2109c26573a107565543f5d45 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -561,8 +561,7 @@ static int cf_check hvm_print_line(
+     if ( dir != IOREQ_WRITE )
+         return X86EMUL_UNHANDLEABLE;
+ 
+-    /* Accept only printable characters, newline, and horizontal tab. */
+-    if ( !isprint(c) && (c != '\n') && (c != '\t') )
++    if ( !isconsole(c) )
+         return X86EMUL_OKAY;
+ 
+     spin_lock(&cd->pbuf_lock);
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 7da8c5296f3b62c6c45131c58fe5cf0e393e9ef3..bb56953bab681a13da8d41431aba4632f1919df9 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -674,7 +674,7 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
+                 c = *kin++;
+                 if ( c == '\n' )
+                     break;
+-                if ( isprint(c) || c == '\t' )
++                if ( isconsole(c) )
+                     *kout++ = c;
+             } while ( --kcount > 0 );
+ 
+diff --git a/xen/include/xen/ctype.h b/xen/include/xen/ctype.h
+index 773ac27aa44ac65e76e87cdec960450804310249..deebaad96ede34f16f61ece862c788232c1d1efd 100644
+--- a/xen/include/xen/ctype.h
++++ b/xen/include/xen/ctype.h
+@@ -4,6 +4,8 @@
  /*
-  * Default translator (generic bus)
-  */
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index 03d22bce1e497e41834c273f9048b98dcbd48a54..aa6a968b574dce7cc753e8070fad3a6e585cd9e7 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -50,6 +50,7 @@
- #include <xen/rbtree.h>
- #include <xen/sched.h>
- #include <xen/sizes.h>
-+#include <xen/resource.h>
- #include <asm/atomic.h>
- #include <asm/device.h>
- #include <asm/io.h>
-@@ -70,22 +71,8 @@
- #define of_property_read_u32(np, pname, out) (!dt_property_read_u32(np, pname, out))
- #define of_property_read_bool dt_property_read_bool
- #define of_parse_phandle_with_args dt_parse_phandle_with_args
--
--/* Xen: Helpers to get device MMIO and IRQs */
--struct resource
--{
--	paddr_t addr;
--	paddr_t size;
--	unsigned int type;
--};
--
--#define resource_size(res) (res)->size;
--
- #define platform_device dt_device_node
- 
--#define IORESOURCE_MEM 0
--#define IORESOURCE_IRQ 1
--
- static struct resource *platform_get_resource(struct platform_device *pdev,
- 					      unsigned int type,
- 					      unsigned int num)
-diff --git a/xen/include/xen/resource.h b/xen/include/xen/resource.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..4962e17da8387b7f324317482b19cc9fe71433fc
---- /dev/null
-+++ b/xen/include/xen/resource.h
-@@ -0,0 +1,40 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * System resource description.
+  * NOTE! This ctype does not handle EOF like the standard C
+  * library is required to.
 + *
-+ * Reference:
-+ *   include/linux/ioport.h
-+ */
-+#if !defined(XEN__RESOURCE_H)
-+#define XEN__RESOURCE_H
-+
-+#define IORESOURCE_BITS         0x000000FFU      /* Bus-specific bits */
-+
-+#define IORESOURCE_TYPE_BITS    0x00001F00U      /* Resource type */
-+#define IORESOURCE_IO           0x00000100U      /* PCI/ISA I/O ports */
-+#define IORESOURCE_MEM          0x00000200U
-+#define IORESOURCE_REG          0x00000300U      /* Register offsets */
-+#define IORESOURCE_IRQ          0x00000400U
-+#define IORESOURCE_DMA          0x00000800U
-+#define IORESOURCE_BUS          0x00001000U
-+
-+#define IORESOURCE_PREFETCH     0x00002000U      /* No side effects */
-+#define IORESOURCE_READONLY     0x00004000U
-+#define IORESOURCE_CACHEABLE    0x00008000U
-+#define IORESOURCE_RANGELENGTH  0x00010000U
-+#define IORESOURCE_SHADOWABLE   0x00020000U
-+
-+#define IORESOURCE_UNKNOWN      (~0U)
-+
-+struct resource {
-+    paddr_t addr;
-+    paddr_t size;
-+    unsigned int type;
-+};
-+
-+#define resource_size(res) (res)->size;
-+
-+#define foreach_resource(res) \
-+    for (; res && res->type != IORESOURCE_UNKNOWN; res++)
-+
-+#endif /* #if !defined(XEN__RESOURCE_H) */
++ * See Rule 21.13 in docs/misra/rules.rst.
+  */
+ 
+ #define _U	0x01	/* upper */
+@@ -30,6 +32,7 @@ extern const unsigned char _ctype[];
+ #define isspace(c)	((__ismask(c)&(_S)) != 0)
+ #define isupper(c)	((__ismask(c)&(_U)) != 0)
+ #define isxdigit(c)	((__ismask(c)&(_D|_X)) != 0)
++#define isconsole(c)	(isprint(c) || (c) == '\n' || (c) == '\t')
+ 
+ #define isascii(c) (((unsigned char)(c))<=0x7f)
+ #define toascii(c) (((unsigned char)(c))&0x7f)
 
 -- 
 2.34.1
