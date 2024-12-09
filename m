@@ -4,47 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E287DE7717D
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Dec 2024 13:20:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.851330.1265417 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3103E7717D
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Dec 2024 13:24:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.851341.1265426 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKdgD-0001Bc-L4; Mon, 09 Dec 2024 13:20:05 +0000
+	id 1tKdkc-0002yf-6n; Mon, 09 Dec 2024 13:24:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 851330.1265417; Mon, 09 Dec 2024 13:20:05 +0000
+Received: by outflank-mailman (output) from mailman id 851341.1265426; Mon, 09 Dec 2024 13:24:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKdgD-0001BE-FJ; Mon, 09 Dec 2024 13:20:05 +0000
-Received: by outflank-mailman (input) for mailman id 851330;
- Mon, 09 Dec 2024 13:20:04 +0000
+	id 1tKdkc-0002yY-3V; Mon, 09 Dec 2024 13:24:38 +0000
+Received: by outflank-mailman (input) for mailman id 851341;
+ Mon, 09 Dec 2024 13:24:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=O8uR=TC=csgroup.eu=christophe.leroy@srs-se1.protection.inumbo.net>)
- id 1tKdgC-0000zr-O6
- for xen-devel@lists.xenproject.org; Mon, 09 Dec 2024 13:20:04 +0000
-Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 4c334225-b630-11ef-99a3-01e77a169b0f;
- Mon, 09 Dec 2024 14:20:02 +0100 (CET)
-Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4Y6M5p179vz9tBf;
- Mon,  9 Dec 2024 13:45:18 +0100 (CET)
-Received: from pegase2.c-s.fr ([172.26.127.65])
- by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ad8aC7rBW98b; Mon,  9 Dec 2024 13:45:18 +0100 (CET)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4Y6M5p0DxHz9tBd;
- Mon,  9 Dec 2024 13:45:18 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id E8A068B766;
- Mon,  9 Dec 2024 13:45:17 +0100 (CET)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id OUa8UHFVNS_8; Mon,  9 Dec 2024 13:45:17 +0100 (CET)
-Received: from [10.25.209.139] (unknown [10.25.209.139])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id A70C18B763;
- Mon,  9 Dec 2024 13:45:17 +0100 (CET)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=oUxd=TC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tKdkb-0002yS-AZ
+ for xen-devel@lists.xenproject.org; Mon, 09 Dec 2024 13:24:37 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id eeb2fd38-b630-11ef-99a3-01e77a169b0f;
+ Mon, 09 Dec 2024 14:24:35 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-434a2033562so41825035e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Dec 2024 05:24:35 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2efc4230217sm1120711a91.8.2024.12.09.05.24.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Dec 2024 05:24:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,81 +47,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c334225-b630-11ef-99a3-01e77a169b0f
-X-Virus-Scanned: amavisd-new at c-s.fr
-X-Virus-Scanned: amavisd-new at c-s.fr
-Message-ID: <95a461ca-3ed6-4380-ad1a-da12e1109675@csgroup.eu>
-Date: Mon, 9 Dec 2024 13:45:17 +0100
+X-Inumbo-ID: eeb2fd38-b630-11ef-99a3-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1733750675; x=1734355475; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=UabuauDlkqNJkT3tmMjByYaQcBGgy3Zfs3x9N9+um9I=;
+        b=UInkd5euMqbGHyrstPcSiHaEw0MxvM/EfHj4YjA03BmrGDQ6cGAevrjC5Mg4QB6+AC
+         yS0q145T0uxOyuVr4eWZUuboeQxDTaz/YBFYgmaRSz6AF8L2s/UKV/U50ZrT9IaqgqRT
+         XzqAyomJ6Aw4aaQbw+RKIdoaiaTiqppp5ZYD/kajbw5mQxg1pDXE04ei57hAyavn8xGv
+         EiBOX+ILq1nkzYz6ycK8r932GR9Vhpz681qfbcw3O9iINyAuJU03wmzD13pI2KsADC8f
+         nO/+nNRofHXK+J4KVnLmDjgtv43VfJPvijVEATaG7KfIecx1R04e1SqHNcRql9fGPGzl
+         e2Pg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733750675; x=1734355475;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=UabuauDlkqNJkT3tmMjByYaQcBGgy3Zfs3x9N9+um9I=;
+        b=Y+m1BLu3aTE6IQkPUFWgr8paal8NvNQHXJP2LSJhpm/T9XTmnnZ9W8xYoZR4QQCRyv
+         a77avfUOMiYycmXYLbkOepsPlI5jsfjWta5tppMSJaW2eicdjSe4dXMLyrpL1xi542T7
+         cbDZjW4HY1g1YG3pq/umUkdFMBb1Tt7f/2hV5QI2QB8+OKDvqxNkDlCoUUWCLRbLUFJh
+         LZHEf6puQx30UMxVx+OSGzzfAcTm4FyY/PuQlxyD5KSeUjgliQF0Xod4zLnNN+QJYahy
+         vydVk7HVjcVx7+kI0Gcqk/v0Csppn23HIyE5xsSo0V3ZwaAupuLHtA9A+NDJZVgT2l0u
+         pHyw==
+X-Gm-Message-State: AOJu0YzYOuC+ejzzgXrYS7v9Yg30htFv4wynlr1YH1mEKpb5ujwZVzhk
+	lvHRSBaVOoa83bXCCOViU2OjEMCPIOA9R1jolu47YgPT/OiFYWyHHsUozmQWzbzdPnNlU6izgqw
+	=
+X-Gm-Gg: ASbGncuubofkMApwjsRil5+ktMkR9boq/MQrRJfncZYLCqY//3PBJXHnKlM7X+N08Cm
+	XlFZi/49noE+LQDBjvwVh+2xShabGw9dH4pHlFd9yU3Ub1nadQdp9UnGJfSXsD7pfXD/kpYtcOV
+	zzOdMzvmv5/DTXW9niw3Jw3iOFTBqnFQwNt3k7/xQDqtyT1l9yfF8uWRBIcWOtyEY0yinFHc9MA
+	hL8owy0ebTfSxF22KHFzVwxbugWHxrZK0rJWB7/6H9sS1ywcIcjZAz/dgebMnpd0E8UXJz8zYZf
+	RTflj6liJs1tVFNIast2SJLvbaDiqJPqeNw=
+X-Google-Smtp-Source: AGHT+IGewJsUbgN85FRV9cm8gLBwkQRwj30ksA46/pwbpbAmKTvfnWP5LnoPDBBp/j9xiBeNDpDEpA==
+X-Received: by 2002:a05:6000:186b:b0:385:e170:d5b8 with SMTP id ffacd0b85a97d-3862b3ceaf7mr9832232f8f.42.1733750674654;
+        Mon, 09 Dec 2024 05:24:34 -0800 (PST)
+Message-ID: <40186a29-406e-4380-b5a0-994ed3e77cc4@suse.com>
+Date: Mon, 9 Dec 2024 14:24:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/21] Converge on using secs_to_jiffies()
-To: Przemek Kitszel <przemyslaw.kitszel@intel.com>,
- Easwar Hariharan <eahariha@linux.microsoft.com>
-Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org, cocci@inria.fr,
- linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org,
- dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-block@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, linux-mm@kvack.org,
- linux-bluetooth@vger.kernel.org, linux-staging@lists.linux.dev,
- linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
- live-patching@vger.kernel.org, linux-sound@vger.kernel.org,
- etnaviv@lists.freedesktop.org, oss-drivers@corigine.com,
- linuxppc-dev@lists.ozlabs.org, Anna-Maria Behnsen <anna-maria@linutronix.de>
-References: <20241115-converge-secs-to-jiffies-v2-0-911fb7595e79@linux.microsoft.com>
- <b9fcb12a-b7a4-4c33-836e-67109ce07deb@intel.com>
- <dab77729-682f-4182-9fb2-cd522ac29b5f@linux.microsoft.com>
- <72c8eb66-eb67-4f8b-b0c0-13f1aa001698@intel.com>
-Content-Language: fr-FR
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-In-Reply-To: <72c8eb66-eb67-4f8b-b0c0-13f1aa001698@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Jan Beulich <jbeulich@suse.com>
+Subject: Xen 4.19.1 and 4.16.7 released
+To: xen-announce@lists.xenproject.org
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Content-Language: en-US
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+All,
 
+we're pleased to announce the release of two bug fixing Xen versions.
 
-Le 09/12/2024 à 13:01, Przemek Kitszel a écrit :
-> On 12/6/24 9:58 PM, Easwar Hariharan wrote:
->> On 11/29/2024 4:57 AM, Przemek Kitszel wrote:
->>>
->>> [removed most non-list recipients, it's just too much]
->>>
->>> On 11/15/24 10:26 PM, Easwar Hariharan wrote:
->> <snip>
-> 
->>>
->>> Regarding code - you could also convert msecs_to_jiffies(const * HZ),
->>> there are 10 that are greppable.
->>>
->>
->> Those seem to be mistakes. const*HZ is a seconds-denominated timeout,
->> being passed to msecs_to_jiffies() which will treat it as a
->> millisecond-denominated timeout resulting in an excessively long
->> timeout. I suppose that's better than a too-short timeout, and
->> apparently it's been working fine all along since hardware responds
->> before the too-long timeout expires. Half of them are in
->> drivers/scsi/arcmsr/arcmsr_hba.c and the pattern has apparently been
->> there since 2010.
-> 
-> my point was that, the default value of HZ is 1000, and most of the code
-> that is just `$value*HZ` was meant as "$value seconds, in ms unit".
+Xen 4.19.1 is available from its git repository
+http://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=refs/heads/stable-4.19
+(tag RELEASE-4.19.1) or (eventually) from the XenProject download page
+https://xenproject.org/resources/downloads/.
 
-I can't follow you here. The default value of HZ is 250 as far as I can see.
+We recommend all users of the 4.19 stable series to update to this
+initial point release.
 
-Regardless, HZ is the number of jiffies per second, nothing else.
+Xen 4.16.7 is available from its git repository
+http://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=refs/heads/stable-4.16
+(tag RELEASE-4.16.7) or (eventually) from the XenProject download page
+https://xenproject.org/resources/downloads/.
 
-> 
-> Same for HZ/const, HZ/2 being 500ms.
-> 
-> HZ is awful in that it is not 1s but 1/s, but it was easy to abuse the
-> value in simple context.
+We recommend all users of the 4.16 stable series to update to this
+final point release; the branch is being closed.
 
-Why is that awful ?
-
-HZ is a nice macro that gives you the number of ticks per second, so 
-that you are able to easily calculate the number of ticks for a given 
-duration, regardless of the configured number of ticks per second.
-
-Christophe
+Regards, Jan
 
