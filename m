@@ -4,39 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E6B1E77181
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Dec 2024 17:58:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.851794.1265804 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 191FBE7717D
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Dec 2024 19:18:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.851819.1265823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKi1D-0007ng-Ph; Mon, 09 Dec 2024 17:58:03 +0000
+	id 1tKjGA-0001pJ-Nc; Mon, 09 Dec 2024 19:17:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 851794.1265804; Mon, 09 Dec 2024 17:58:03 +0000
+Received: by outflank-mailman (output) from mailman id 851819.1265823; Mon, 09 Dec 2024 19:17:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKi1D-0007nZ-LB; Mon, 09 Dec 2024 17:58:03 +0000
-Received: by outflank-mailman (input) for mailman id 851794;
- Mon, 09 Dec 2024 17:58:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=VMJQ=TC=cloud.com=andrii.sultanov@srs-se1.protection.inumbo.net>)
- id 1tKi1B-0007nO-Sj
- for xen-devel@lists.xenproject.org; Mon, 09 Dec 2024 17:58:01 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2091f904-b657-11ef-99a3-01e77a169b0f;
- Mon, 09 Dec 2024 18:57:59 +0100 (CET)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-aa67ac42819so255780366b.0
- for <xen-devel@lists.xenproject.org>; Mon, 09 Dec 2024 09:57:59 -0800 (PST)
-Received: from CSGPROD238885.citrite.net
- (cpc92320-cmbg19-2-0-cust1786.5-4.cable.virginm.net. [82.13.70.251])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa66c646e64sm353428266b.25.2024.12.09.09.57.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Dec 2024 09:57:58 -0800 (PST)
+	id 1tKjGA-0001pC-Jt; Mon, 09 Dec 2024 19:17:34 +0000
+Received: by outflank-mailman (input) for mailman id 851819;
+ Mon, 09 Dec 2024 19:17:33 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1tKjG9-0001p6-0e
+ for xen-devel@lists.xenproject.org; Mon, 09 Dec 2024 19:17:33 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1tKjG8-00CClY-0W;
+ Mon, 09 Dec 2024 19:17:32 +0000
+Received: from [2a02:8012:3a1:0:b1c7:cb3b:4877:d8]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1tKjG8-00AEeA-0a;
+ Mon, 09 Dec 2024 19:17:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,68 +41,238 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2091f904-b657-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1733767079; x=1734371879; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vvxsWYZGY25rWK0i2gMHKsDthRQUDhGDBPCU5tlH/5o=;
-        b=H3f8xmEtMzDPzswLnRAm/m1up6tGAWUmUB+lUxZUVXtGyH4zzQLBfboaWCl4OVC6X9
-         TPM+dRwRbzKC6lgF6rB15PeIZth33+w5QP3/W0i1CGydE1wcIrmRZYsU0UzltJTV6BAN
-         L9eRfisi3IfvhvYHUlTOlSj/kdikWL6nXosPA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733767079; x=1734371879;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vvxsWYZGY25rWK0i2gMHKsDthRQUDhGDBPCU5tlH/5o=;
-        b=SMNGdhdvdfgPKuGJeKop5Q+Zrhyzo5WvL3vh/Ef1eMBHtOqDBEVbev3iUGyJ/v78oo
-         fqN3JUMVLJFP+hn5FG3MrIYqWoVUzIOcHTTJCHbD5nymmaEe98sdZbYuadwmKF9RNWrv
-         b6+XJhjREx1NY92nNyhsOvW5kAABwsmCjp0F6rMpxD8z0nj4rEicesU3Ivt3FVc64Cfm
-         AI/mGZC0JMY0e6K46J9NgHo79D3jUtaVBaf5Jj2T7yEZPESFBntfBqTlcFsdrMsmQd0Z
-         TLwSVTBLsiaSTG2SI6CkJONdxuzzaI01P608kBhBAgS/ITX5qkyszZCRu2ywuk/Pxdsu
-         poBA==
-X-Gm-Message-State: AOJu0Yz8xxgEBzBdDK2zS9Ff62BsJ0w8TENUlREdJyTz6MKHT0FbOQzM
-	wDS72QhyVsLNY7Ayl+XM/x8Vu9PVZCRXjM2yX5HF4ctqL9a+RREznzbCjoXgiHaaC2s9OLPuogo
-	5
-X-Gm-Gg: ASbGncs4Exz8Y2WLMuvIbNQfd+ZjYxWkF5wjTNX75E8pDmPeyRjYvdFmGx1r7f/byr7
-	gETWc8NNhMAc3IjlzU9AlsH6kMoCE6q6r8dYt3VUvFLXThkxDtkw9R/R6TaYYWeZfsQTFglUozr
-	yUvSkz1JiMd2ozA0U3jocR8VcJCSH2De5Dx2o3HuSjJZ2nWHuvTk1n/pemlA7Lg5bnmlHcEGkbP
-	eX1pilKBJT44EV9RS/aWbPiqBolEG3Aopk3TF6gc2PyydCUrgzxC0dSvV3pv7W8c60QAYrSREM0
-	Ead8fR7t4Gq3NX/Zi6sAgJ1pSsWAMVs8eL7l8l3w6P6pqbF5Z/ZRcj7Mory3
-X-Google-Smtp-Source: AGHT+IGZvQr/woSVfYu8SGNfWP4VHfrBEtaJm3m1X0KAemLihiBxtbD+J7S9JyMi+6R4/6Jb5RGfDQ==
-X-Received: by 2002:a17:907:7847:b0:aa6:834b:d138 with SMTP id a640c23a62f3a-aa6834be354mr477407066b.19.1733767078854;
-        Mon, 09 Dec 2024 09:57:58 -0800 (PST)
-From: Andrii Sultanov <andrii.sultanov@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrii Sultanov <andrii.sultanov@cloud.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v2 0/1] Fix rpath handling in OCaml's Makefile.rules
-Date: Mon,  9 Dec 2024 17:57:48 +0000
-Message-Id: <cover.1733766758.git.andrii.sultanov@cloud.com>
-X-Mailer: git-send-email 2.39.5
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=NuyzHtvw7j+22P/MzEihM1BbP+943BZEy5p3voqdxjY=; b=YfnXK5g4DBWcZoDQ4TKyXqhf8b
+	hC6UwQPOkrgrZrv60Um3uUv6yqyc2UBW8ij3uEivxK8Cx6RExuw8n6npRe82CF/Nfp0WvLdy8EH0N
+	eWpb/3IPmrJFu1KFMJvOdcasDTa4k72L/1HbTVQzPsseks9RWkf+p7rihPI2bMMp8YME=;
+Message-ID: <0bacfdb6-d4ad-4dea-85d4-2851873dca4e@xen.org>
+Date: Mon, 9 Dec 2024 19:17:30 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 03/12] xen/arm: permit non direct-mapped Dom0
+ construction
+Content-Language: en-GB
+To: Michal Orzel <michal.orzel@amd.com>,
+ Carlo Nonato <carlo.nonato@minervasys.tech>, xen-devel@lists.xenproject.org
+Cc: andrea.bastoni@minervasys.tech, marco.solieri@minervasys.tech,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20241202165921.249585-1-carlo.nonato@minervasys.tech>
+ <20241202165921.249585-4-carlo.nonato@minervasys.tech>
+ <bc40c381-0998-4dd2-b5c9-5b70b45805ce@amd.com>
+ <7ecc99c5-0cb5-4351-bede-cb03c9a4ac7e@xen.org>
+ <293004fa-c87e-4a45-aa4c-b02456aaecea@amd.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <293004fa-c87e-4a45-aa4c-b02456aaecea@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-As reported by Nix's Xen team, OCaml stub libs would embed an absolute
-rpath in the binaries, which was picked up on by patchelf. This is a
-symptom of improper handling of -rpath-link in the first place, so
-correct that and get rid of the issue.
+Hi Michal,
 
-Changes in v2:
-- Previous version mistakenly did not actually get rid of the absolute
-  rpath, pass -L directly to the linker as well
-- Credit the original reporter
+On 07/12/2024 15:04, Michal Orzel wrote:
+> 
+> 
+> On 06/12/2024 19:37, Julien Grall wrote:
+>>
+>>
+>> Hi,
+>>
+>> Sorry for the late answer.
+>>
+>> On 05/12/2024 09:40, Michal Orzel wrote:
+>>>
+>>>
+>>> On 02/12/2024 17:59, Carlo Nonato wrote:
+>>>>
+>>>>
+>>>> Cache coloring requires Dom0 not to be direct-mapped because of its non
+>>>> contiguous mapping nature, so allocate_memory() is needed in this case.
+>>>> 8d2c3ab18cc1 ("arm/dom0less: put dom0less feature code in a separate module")
+>>>> moved allocate_memory() in dom0less_build.c. In order to use it
+>>>> in Dom0 construction bring it back to domain_build.c and declare it in
+>>>> domain_build.h.
+>>>>
+>>>> Take the opportunity to adapt the implementation of allocate_memory() so
+>>>> that it uses the host layout when called on the hwdom, via
+>>>> find_unallocated_memory().
+>>>>
+>>>> Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+>>>> ---
+>>>> v11:
+>>>> - GUEST_RAM_BANKS instead of hardcoding the number of banks in allocate_memory()
+>>>> - hwdom_ext_regions -> hwdom_free_mem in allocate_memory()
+>>>> - added a comment in allocate_memory() when skipping small banks
+>>>> v10:
+>>>> - fixed a compilation bug that happened when dom0less support was disabled
+>>>> v9:
+>>>> - no changes
+>>>> v8:
+>>>> - patch adapted to new changes to allocate_memory()
+>>>> v7:
+>>>> - allocate_memory() now uses the host layout when called on the hwdom
+>>>> v6:
+>>>> - new patch
+>>>> ---
+>>>>    xen/arch/arm/dom0less-build.c           | 44 -----------
+>>>>    xen/arch/arm/domain_build.c             | 97 ++++++++++++++++++++++++-
+>>>>    xen/arch/arm/include/asm/domain_build.h |  1 +
+>>>>    3 files changed, 94 insertions(+), 48 deletions(-)
+>>>>
+>>>> diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+>>>> index d93a85434e..67b1503647 100644
+>>>> --- a/xen/arch/arm/dom0less-build.c
+>>>> +++ b/xen/arch/arm/dom0less-build.c
+>>>> @@ -49,50 +49,6 @@ bool __init is_dom0less_mode(void)
+>>>>        return ( !dom0found && domUfound );
+>>>>    }
+>>>>
+>>>> -static void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
+>>>> -{
+>>>> -    struct membanks *mem = kernel_info_get_mem(kinfo);
+>>>> -    unsigned int i;
+>>>> -    paddr_t bank_size;
+>>>> -
+>>>> -    printk(XENLOG_INFO "Allocating mappings totalling %ldMB for %pd:\n",
+>>>> -           /* Don't want format this as PRIpaddr (16 digit hex) */
+>>>> -           (unsigned long)(kinfo->unassigned_mem >> 20), d);
+>>>> -
+>>>> -    mem->nr_banks = 0;
+>>>> -    bank_size = MIN(GUEST_RAM0_SIZE, kinfo->unassigned_mem);
+>>>> -    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM0_BASE),
+>>>> -                               bank_size) )
+>>>> -        goto fail;
+>>>> -
+>>>> -    bank_size = MIN(GUEST_RAM1_SIZE, kinfo->unassigned_mem);
+>>>> -    if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(GUEST_RAM1_BASE),
+>>>> -                               bank_size) )
+>>>> -        goto fail;
+>>>> -
+>>>> -    if ( kinfo->unassigned_mem )
+>>>> -        goto fail;
+>>>> -
+>>>> -    for( i = 0; i < mem->nr_banks; i++ )
+>>>> -    {
+>>>> -        printk(XENLOG_INFO "%pd BANK[%d] %#"PRIpaddr"-%#"PRIpaddr" (%ldMB)\n",
+>>>> -               d,
+>>>> -               i,
+>>>> -               mem->bank[i].start,
+>>>> -               mem->bank[i].start + mem->bank[i].size,
+>>>> -               /* Don't want format this as PRIpaddr (16 digit hex) */
+>>>> -               (unsigned long)(mem->bank[i].size >> 20));
+>>>> -    }
+>>>> -
+>>>> -    return;
+>>>> -
+>>>> -fail:
+>>>> -    panic("Failed to allocate requested domain memory."
+>>>> -          /* Don't want format this as PRIpaddr (16 digit hex) */
+>>>> -          " %ldKB unallocated. Fix the VMs configurations.\n",
+>>>> -          (unsigned long)kinfo->unassigned_mem >> 10);
+>>>> -}
+>>>> -
+>>>>    #ifdef CONFIG_VGICV2
+>>>>    static int __init make_gicv2_domU_node(struct kernel_info *kinfo)
+>>>>    {
+>>>> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+>>>> index 2c30792de8..2b8cba9b2f 100644
+>>>> --- a/xen/arch/arm/domain_build.c
+>>>> +++ b/xen/arch/arm/domain_build.c
+>>>> @@ -416,7 +416,6 @@ static void __init allocate_memory_11(struct domain *d,
+>>>>        }
+>>>>    }
+>>>>
+>>>> -#ifdef CONFIG_DOM0LESS_BOOT
+>>>>    bool __init allocate_domheap_memory(struct domain *d, paddr_t tot_size,
+>>>>                                        alloc_domheap_mem_cb cb, void *extra)
+>>>>    {
+>>>> @@ -508,7 +507,6 @@ bool __init allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
+>>>>
+>>>>        return true;
+>>>>    }
+>>>> -#endif
+>>>>
+>>>>    /*
+>>>>     * When PCI passthrough is available we want to keep the
+>>>> @@ -1003,6 +1001,94 @@ out:
+>>>>        return res;
+>>>>    }
+>>>>
+>>>> +void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
+>>>> +{
+>>>> +    struct membanks *mem = kernel_info_get_mem(kinfo);
+>>>> +    unsigned int i, nr_banks = GUEST_RAM_BANKS;
+>>>> +    paddr_t bank_start, bank_size;
+>>> Limit the scope
+>>>
+>>>> +    struct membanks *hwdom_free_mem = NULL;
+>>>> +    const uint64_t bankbase[] = GUEST_RAM_BANK_BASES;
+>>>> +    const uint64_t banksize[] = GUEST_RAM_BANK_SIZES;
+>>> Limit the scope
+>>>
+>>>> +
+>>>> +    printk(XENLOG_INFO "Allocating mappings totalling %ldMB for %pd:\n",
+>>>> +           /* Don't want format this as PRIpaddr (16 digit hex) */
+>>>> +           (unsigned long)(kinfo->unassigned_mem >> 20), d);
+>>>> +
+>>>> +    mem->nr_banks = 0;
+>>>> +    /*
+>>>> +     * Use host memory layout for hwdom. Only case for this is when LLC coloring
+>>>> +     * is enabled.
+>>>> +     */
+>>>> +    if ( is_hardware_domain(d) )
+>>>> +    {
+>>>> +        ASSERT(llc_coloring_enabled);
+>>> This patch does not build because of declaration not being visible. You must include <xen/llc-coloring.h>.
+>>
+>> Piggying back on this comment. AFAICT, the code below would work also in
+>> the non cache coloring case. So what's the assert is for?
+>>
+>>>
+>>>> +
+>>>> +        hwdom_free_mem = xzalloc_flex_struct(struct membanks, bank,
+>>>> +                                             NR_MEM_BANKS);
+>>>> +        if ( !hwdom_free_mem )
+>>>> +            goto fail;
+>>>> +
+>>>> +        hwdom_free_mem->max_banks = NR_MEM_BANKS;
+>>>> +
+>>>> +        if ( find_unallocated_memory(kinfo, hwdom_free_mem) )
+>>> My remarks for the use of find_unallocated_memory() 1:1 have not been addressed. You did not even
+>>> change the comments inside the function. The problem is that the function is specifically designed
+>>> for finding extended regions and assumes being called at certain point i.e. dom0 RAM allocated, gnttab
+>>> region allocated, etc.
+>>
+>> So I agree that the function should be updated if we plan to use it for
+>> other purpose.
+>>
+>> My opinion is that we should attempt to make the function generic so
+>> that in your
+>>> case you can choose which regions to exclude, define even your own function to grab free regions (at the moment
+>>> add_ext_regions grabs banks >= 64M but you still discards banks >= 128M, so it's a bit wasteful.
+>>>
+>>> My very short attempt to make the function as generic as possible in the first iteration:
+>>> https://paste.debian.net/1338334/
+>>
+>> This looks better, but I wonder why we need still need to exclude the
+>> static regions? Wouldn't it be sufficient to exclude just reserved regions?
+> Static shared memory banks are not part of reserved memory (i.e. bootinfo.reserved_mem) if that's what you're asking.
+> They are stored in bootinfo.shmem, hence we need to take them into account when searching for unused address space.
 
-Andrii Sultanov (1):
-  tools/ocaml: Specify rpath correctly for ocamlmklib
+Oh I missed the fact you now pass "mem_banks" as a parameter. I thought 
+they would still get excluded for cache coloring case.
 
- tools/ocaml/Makefile.rules | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> If you and Carlo are ok with my proposed solution for making the function generic, I can send a patch as a prerequisite
+> patch for Carlo series.
+
+I am fine with the approach.
+
+Cheers,
 
 -- 
-2.39.5
+Julien Grall
 
 
