@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF772E77182
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Dec 2024 13:07:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.851204.1265386 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4C89E7717D
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Dec 2024 13:07:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.851207.1265392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKdTm-00039M-Ci; Mon, 09 Dec 2024 13:07:14 +0000
+	id 1tKdTn-0003GL-10; Mon, 09 Dec 2024 13:07:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 851204.1265386; Mon, 09 Dec 2024 13:07:14 +0000
+Received: by outflank-mailman (output) from mailman id 851207.1265392; Mon, 09 Dec 2024 13:07:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKdTm-00038u-70; Mon, 09 Dec 2024 13:07:14 +0000
-Received: by outflank-mailman (input) for mailman id 851204;
- Mon, 09 Dec 2024 13:07:12 +0000
+	id 1tKdTm-0003El-Pp; Mon, 09 Dec 2024 13:07:14 +0000
+Received: by outflank-mailman (input) for mailman id 851207;
+ Mon, 09 Dec 2024 13:07:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8b20=TC=redhat.com=pstanner@srs-se1.protection.inumbo.net>)
- id 1tKdTk-0000OS-9U
- for xen-devel@lists.xenproject.org; Mon, 09 Dec 2024 13:07:12 +0000
+ id 1tKdTl-0000OS-Nm
+ for xen-devel@lists.xenproject.org; Mon, 09 Dec 2024 13:07:13 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7f0a196d-b62e-11ef-99a3-01e77a169b0f;
- Mon, 09 Dec 2024 14:07:09 +0100 (CET)
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ id 80721f25-b62e-11ef-99a3-01e77a169b0f;
+ Mon, 09 Dec 2024 14:07:12 +0100 (CET)
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-661-k0VvuAkBNoGDssioiK_UpQ-1; Mon, 09 Dec 2024 08:07:05 -0500
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-385df115300so2533957f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 09 Dec 2024 05:07:05 -0800 (PST)
+ us-mta-117-uac86oUmOFObv_Lg_jXchQ-1; Mon, 09 Dec 2024 08:07:09 -0500
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-434c214c05aso36610395e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Dec 2024 05:07:09 -0800 (PST)
 Received: from eisenberg.redhat.com (nat-pool-muc-u.redhat.com. [149.14.88.27])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3862190965asm13200127f8f.82.2024.12.09.05.07.01
+ ffacd0b85a97d-3862190965asm13200127f8f.82.2024.12.09.05.07.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Dec 2024 05:07:03 -0800 (PST)
+ Mon, 09 Dec 2024 05:07:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,45 +51,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f0a196d-b62e-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 80721f25-b62e-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1733749628;
+	s=mimecast20190719; t=1733749630;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nnuXTvhYTlwCBDrOS1s2G6F9Hq/4HeIeK8aJfi4Wc90=;
-	b=iZbKJL8wiWWAHLaxPEEmQomjtPQWeJdGB+ViDqye9UvXGMZVXzT7z6mzy3PVUjl1RGpW6X
-	xsHglo5TceUu95FXfFgar2MbdGZPlCbKcjGiPMxfkL5e2y7mGvc4RjUmZUXGZd9HZeij+O
-	tMcB3ecJ7G28iU5OUlBoqOib+Ov9mxY=
-X-MC-Unique: k0VvuAkBNoGDssioiK_UpQ-1
-X-Mimecast-MFC-AGG-ID: k0VvuAkBNoGDssioiK_UpQ
+	bh=cg5FDrf0+9NG9f4wa7LEIeg49zn7uGzDf8HKpIKXKbU=;
+	b=VM7y4uGewQosbc7LfMjsniDOAjbmfqEqTJM42BDCKc9Prxx5eOrQ9Nsp/YveAiXus5TM5u
+	RdvYDaOP306MnCVwa/0Dtc58OJT5j3poeEwL5ne0FQHuohxfTjALZIn5hsALMbQ7VU494a
+	FfncfBtBrqtNN+JsovTTGurqk97jNj0=
+X-MC-Unique: uac86oUmOFObv_Lg_jXchQ-1
+X-Mimecast-MFC-AGG-ID: uac86oUmOFObv_Lg_jXchQ
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733749624; x=1734354424;
+        d=1e100.net; s=20230601; t=1733749628; x=1734354428;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=nnuXTvhYTlwCBDrOS1s2G6F9Hq/4HeIeK8aJfi4Wc90=;
-        b=gFSoSZqKnOXr9c1Et3X3Q92IuXxjyw+VccYv97W6MVZjajMKads064DYeKaWpT7BYq
-         oLF6D2tHnAwuvpEHpbpiuPP2rXYeeqe8gdggciHkNCu5lRiNnHpID85o0sj9CEyOpEk7
-         C61kmi91E0qqRJ8qNQdT/zmymvKcv0AG7uT6hk1ppjeDgD6Q8oMJFvxHcx59nkVh3dwv
-         GKEWtvEgW308z36Ps2/kL6Y1vxtsR1ol2aGTE7niykXxQKjbNDyH92A+6XGHrUk/HNJy
-         9mtvttVRjjWfHxHd8NW0vCYYMcIjQob9Hqhs87wlFMyy+39kZHJfRgIpLUR/f28ND/x1
-         SpKA==
-X-Forwarded-Encrypted: i=1; AJvYcCV3syEX2Kjjdgnv/l4/wJcBrcPJC6Zrg+0WdIw5P9DmmkJf3NFNe2hkt2+26VtY+PqyEqeoa6jOfXk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzXytDaPGWEEzIA47I1ec1C4hFg3g2Xh5yuyNck+CKFWKcEzGsN
-	Sew9vhH2XM2A4GBtjT72D/TVsDb7xEJofbp89rvVTV4hmNXCvQNyX/GVzmSlGRWlG7VwLpTQ8G0
-	Tloty/So7Aj7qfuFBWcYz2kSzSMDbhGpLeRv6NZ4WKJK4sUhlpeiFoYsnvMXQ5ljV
-X-Gm-Gg: ASbGncsvURBpTzGDd9EVwls1v6ILJlLmNlTJ1o1Xp1ZXrL0nEdEZqdLAi6Ay/IYxfCb
-	1F2eHzPS85OlA4bgHC6qDBZZgLEWtwDqLet2A7B4a7+uf8BuV4EDUVhM3nXpuEsaoHNe4ggjM2s
-	9bH5lfjUa4Qr89L7N0oiO8E7sznbVNszqIsTTn8QnTw6fua3nvEP3NeZ3E5ApjcY92aYgIriKyK
-	YzbDtMbpvZQ7vy7kIo7Z6GbK07UCCmhZHvrxyAjcr6TFyP35JRUm+t6nT4ZEnChysouq1r6Dp3F
-	IIRkfda4
-X-Received: by 2002:a05:6000:a07:b0:386:1ba1:37dc with SMTP id ffacd0b85a97d-3862b3d02a7mr10541521f8f.47.1733749624044;
-        Mon, 09 Dec 2024 05:07:04 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IED6lK+xP3ASai9pzso97+PoKUV4QmBIbg3KzJDkAOewaSmInet03lP+u9hg0Iot8N8fifU+Q==
-X-Received: by 2002:a05:6000:a07:b0:386:1ba1:37dc with SMTP id ffacd0b85a97d-3862b3d02a7mr10541452f8f.47.1733749623572;
-        Mon, 09 Dec 2024 05:07:03 -0800 (PST)
+        bh=cg5FDrf0+9NG9f4wa7LEIeg49zn7uGzDf8HKpIKXKbU=;
+        b=UM/DCV4uO3y2wmmhuGo2y7fpAF8WnvwEOtFTdnGCmhU9PWOpXpdUJ3uPt/AsAuhCxU
+         xpEvUCneoqWvlMVV/79z4/YQGkTy4o65/WvtOQuktpMCwrbzXYRSKlxydQBtJRb7yCtv
+         1qwvR2XE3g3R7YKM5ivOhV8rXgE9+VL8JAfdmRiKvROY3CAF1vXz3S+BdlNjsNyPgGbh
+         VTlua+1Wj5TPXhBK3hScteyIibOcDjmTyxzNrve2sexzKeX9ddngPiy+3rqsiKK8K0LJ
+         KyFaoxzIsVE+aYrJsG0GSvOwkwxV0okgqEkOOd16RxUvJztinx+gYKZROO81CFLV9Mz9
+         hlxw==
+X-Forwarded-Encrypted: i=1; AJvYcCUxjBMTcbl5aG43oKgdn5T50BTxtA6+CPW/KnPeo2jUrX/d9T+sABX8CBUTY5qvpVDnlAuLN3bxyWo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzQz4OB9aUhuAip86SGVP3KjwQX2BZcXv/PaF3oytCBEgSKkIXW
+	fyB8G9SSI4p+kZrj+Xpfy1p8B6yU2b7tZz4rHOoi9cwy97yFpBnQm4HFIAsWsDDgnl7NPQwHmEJ
+	fn1/7QuGfdZszL6kZ6/PTrxGA/m3xF6ljUQzAByQpi+ky00NdqhO9096+HJkqiwZL
+X-Gm-Gg: ASbGnculvldtMHU4GE1CvMRcpdpw67hIDzEXYV6utI9GrjhOfMDUl30oje3doc0Vq8B
+	zTu5cyAQKMd/hyDEwiwE3kerEgRxf/FLOl4aVOgx1KlqSOEgnm++IoeJ9M6SXJvvm307ZRElSYW
+	416Dj+mxGL9bpDZtty+n8prmny6Hol8ZYf4I9UF4sU0Z6iFMfEKgXXpz9xB7oCM8Ir33FaNc3hG
+	RLEuu1HLHw+nkZGK0fZAU/+6bUuwRtfFVND1+goZwKULWmdVuygt2JppTRKWq1DwA4WYyNh2h9v
+	ZELL4Ufd
+X-Received: by 2002:a05:6000:2d12:b0:385:faec:d94d with SMTP id ffacd0b85a97d-3862b3e2f99mr6786250f8f.51.1733749628311;
+        Mon, 09 Dec 2024 05:07:08 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGzvkT5DctzF6sU2GBgKgYj4TZMfZMHtf63D+x4hcRmPdkPLtxCBfCUCCjCewKM8z5+rRuxWg==
+X-Received: by 2002:a05:6000:2d12:b0:385:faec:d94d with SMTP id ffacd0b85a97d-3862b3e2f99mr6786186f8f.51.1733749627860;
+        Mon, 09 Dec 2024 05:07:07 -0800 (PST)
 From: Philipp Stanner <pstanner@redhat.com>
 To: amien Le Moal <dlemoal@kernel.org>,
 	Niklas Cassel <cassel@kernel.org>,
@@ -149,16 +149,16 @@ Cc: linux-ide@vger.kernel.org,
 	linux-pci@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
-	Sergey Shtylyov <s.shtylyov@omp.ru>
-Subject: [PATCH v3 08/11] ata: Use always-managed version of pci_intx()
-Date: Mon,  9 Dec 2024 14:06:30 +0100
-Message-ID: <20241209130632.132074-10-pstanner@redhat.com>
+	Basavaraj Natikar <Basavaraj.Natikar@amd.com>
+Subject: [PATCH v3 10/11] HID: amd_sfh: Use always-managed version of pcim_intx()
+Date: Mon,  9 Dec 2024 14:06:32 +0100
+Message-ID: <20241209130632.132074-12-pstanner@redhat.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241209130632.132074-2-pstanner@redhat.com>
 References: <20241209130632.132074-2-pstanner@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: UPqrqIGy0DeB6m8us0pT3QKU2uKvNDYpxz5f3H1elcM_1733749624
+X-Mimecast-MFC-PROC-ID: cokNTiC4lOpw8nwSmQlxwFLcd9thvpkkTOzojUKq7_k_1733749628
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
@@ -167,115 +167,54 @@ pci_intx() is a hybrid function which can sometimes be managed through
 devres. To remove this hybrid nature from pci_intx(), it is necessary to
 port users to either an always-managed or a never-managed version.
 
-All users in ata enable their PCI-Device with pcim_enable_device(). Thus,
-they need the always-managed version.
+All users of amd_mp2_pci_remove(), where pci_intx() is used, call
+pcim_enable_device(), which is why the driver needs the always-managed
+version.
 
 Replace pci_intx() with pcim_intx().
 
 Signed-off-by: Philipp Stanner <pstanner@redhat.com>
-Reviewed-by: Sergey Shtylyov <s.shtylyov@omp.ru>
-Acked-by: Niklas Cassel <cassel@kernel.org>
+Acked-by: Basavaraj Natikar <Basavaraj.Natikar@amd.com>
 ---
- drivers/ata/ahci.c       | 2 +-
- drivers/ata/ata_piix.c   | 2 +-
- drivers/ata/pata_rdc.c   | 2 +-
- drivers/ata/sata_sil24.c | 2 +-
- drivers/ata/sata_sis.c   | 2 +-
- drivers/ata/sata_uli.c   | 2 +-
- drivers/ata/sata_vsc.c   | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/hid/amd-sfh-hid/amd_sfh_pcie.c        | 4 ++--
+ drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
-index 8d27c567be1c..f813dbdc2346 100644
---- a/drivers/ata/ahci.c
-+++ b/drivers/ata/ahci.c
-@@ -1987,7 +1987,7 @@ static int ahci_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
+diff --git a/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c b/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
+index 0c28ca349bcd..48cfd0c58241 100644
+--- a/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
++++ b/drivers/hid/amd-sfh-hid/amd_sfh_pcie.c
+@@ -122,7 +122,7 @@ int amd_sfh_irq_init_v2(struct amd_mp2_dev *privdata)
+ {
+ 	int rc;
  
- 	if (ahci_init_msi(pdev, n_ports, hpriv) < 0) {
- 		/* legacy intx interrupts */
--		pci_intx(pdev, 1);
-+		pcim_intx(pdev, 1);
- 	}
- 	hpriv->irq = pci_irq_vector(pdev, 0);
+-	pci_intx(privdata->pdev, true);
++	pcim_intx(privdata->pdev, true);
  
-diff --git a/drivers/ata/ata_piix.c b/drivers/ata/ata_piix.c
-index 093b940bc953..d441246fa357 100644
---- a/drivers/ata/ata_piix.c
-+++ b/drivers/ata/ata_piix.c
-@@ -1725,7 +1725,7 @@ static int piix_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	 * message-signalled interrupts currently).
- 	 */
- 	if (port_flags & PIIX_FLAG_CHECKINTR)
--		pci_intx(pdev, 1);
-+		pcim_intx(pdev, 1);
- 
- 	if (piix_check_450nx_errata(pdev)) {
- 		/* This writes into the master table but it does not
-diff --git a/drivers/ata/pata_rdc.c b/drivers/ata/pata_rdc.c
-index 0a9689862f71..09792aac7f9d 100644
---- a/drivers/ata/pata_rdc.c
-+++ b/drivers/ata/pata_rdc.c
-@@ -340,7 +340,7 @@ static int rdc_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
- 		return rc;
- 	host->private_data = hpriv;
- 
--	pci_intx(pdev, 1);
-+	pcim_intx(pdev, 1);
- 
- 	host->flags |= ATA_HOST_PARALLEL_SCAN;
- 
-diff --git a/drivers/ata/sata_sil24.c b/drivers/ata/sata_sil24.c
-index 72c03cbdaff4..b771ebd41252 100644
---- a/drivers/ata/sata_sil24.c
-+++ b/drivers/ata/sata_sil24.c
-@@ -1317,7 +1317,7 @@ static int sil24_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
- 
- 	if (sata_sil24_msi && !pci_enable_msi(pdev)) {
- 		dev_info(&pdev->dev, "Using MSI\n");
--		pci_intx(pdev, 0);
-+		pcim_intx(pdev, 0);
- 	}
- 
- 	pci_set_master(pdev);
-diff --git a/drivers/ata/sata_sis.c b/drivers/ata/sata_sis.c
-index ef8724986de3..b8b6d9eff3b8 100644
---- a/drivers/ata/sata_sis.c
-+++ b/drivers/ata/sata_sis.c
-@@ -290,7 +290,7 @@ static int sis_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	}
- 
- 	pci_set_master(pdev);
--	pci_intx(pdev, 1);
-+	pcim_intx(pdev, 1);
- 	return ata_host_activate(host, pdev->irq, ata_bmdma_interrupt,
- 				 IRQF_SHARED, &sis_sht);
+ 	rc = devm_request_irq(&privdata->pdev->dev, privdata->pdev->irq,
+ 			      amd_sfh_irq_handler, 0, DRIVER_NAME, privdata);
+@@ -248,7 +248,7 @@ static void amd_mp2_pci_remove(void *privdata)
+ 	struct amd_mp2_dev *mp2 = privdata;
+ 	amd_sfh_hid_client_deinit(privdata);
+ 	mp2->mp2_ops->stop_all(mp2);
+-	pci_intx(mp2->pdev, false);
++	pcim_intx(mp2->pdev, false);
+ 	amd_sfh_clear_intr(mp2);
  }
-diff --git a/drivers/ata/sata_uli.c b/drivers/ata/sata_uli.c
-index 60ea45926cd1..52894ff49dcb 100644
---- a/drivers/ata/sata_uli.c
-+++ b/drivers/ata/sata_uli.c
-@@ -221,7 +221,7 @@ static int uli_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	}
  
- 	pci_set_master(pdev);
--	pci_intx(pdev, 1);
-+	pcim_intx(pdev, 1);
- 	return ata_host_activate(host, pdev->irq, ata_bmdma_interrupt,
- 				 IRQF_SHARED, &uli_sht);
+diff --git a/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c b/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
+index db36d87d5634..ec9feb8e023b 100644
+--- a/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
++++ b/drivers/hid/amd-sfh-hid/sfh1_1/amd_sfh_init.c
+@@ -289,7 +289,7 @@ static void amd_mp2_pci_remove(void *privdata)
+ 	sfh_deinit_emp2();
+ 	amd_sfh_hid_client_deinit(privdata);
+ 	mp2->mp2_ops->stop_all(mp2);
+-	pci_intx(mp2->pdev, false);
++	pcim_intx(mp2->pdev, false);
+ 	amd_sfh_clear_intr(mp2);
  }
-diff --git a/drivers/ata/sata_vsc.c b/drivers/ata/sata_vsc.c
-index d39b87537168..a53a2dfc1e17 100644
---- a/drivers/ata/sata_vsc.c
-+++ b/drivers/ata/sata_vsc.c
-@@ -384,7 +384,7 @@ static int vsc_sata_init_one(struct pci_dev *pdev,
- 		pci_write_config_byte(pdev, PCI_CACHE_LINE_SIZE, 0x80);
  
- 	if (pci_enable_msi(pdev) == 0)
--		pci_intx(pdev, 0);
-+		pcim_intx(pdev, 0);
- 
- 	/*
- 	 * Config offset 0x98 is "Extended Control and Status Register 0"
 -- 
 2.47.1
 
