@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42AB8E7717F
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 22:11:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.853247.1266809 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BEFBE7717F
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 22:11:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.853283.1266825 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8Rw-0003In-I2; Tue, 10 Dec 2024 22:11:24 +0000
+	id 1tL8SL-00049h-2k; Tue, 10 Dec 2024 22:11:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 853247.1266809; Tue, 10 Dec 2024 22:11:24 +0000
+Received: by outflank-mailman (output) from mailman id 853283.1266825; Tue, 10 Dec 2024 22:11:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8Rw-0003Ig-FR; Tue, 10 Dec 2024 22:11:24 +0000
-Received: by outflank-mailman (input) for mailman id 853247;
- Tue, 10 Dec 2024 22:11:22 +0000
+	id 1tL8SK-00049B-U2; Tue, 10 Dec 2024 22:11:48 +0000
+Received: by outflank-mailman (input) for mailman id 853283;
+ Tue, 10 Dec 2024 22:11:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9guP=TD=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tL8Jk-0001xA-OT
- for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:56 +0000
+ id 1tL8Je-0001xA-NN
+ for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:50 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 7eb6107b-b742-11ef-a0d5-8be0dac302b0;
- Tue, 10 Dec 2024 23:02:49 +0100 (CET)
+ id 7cbba81b-b742-11ef-a0d5-8be0dac302b0;
+ Tue, 10 Dec 2024 23:02:46 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id F1ABA20ACD6F;
+ by linux.microsoft.com (Postfix) with ESMTPSA id 05ECB20ACD66;
  Tue, 10 Dec 2024 14:02:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -41,23 +41,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7eb6107b-b742-11ef-a0d5-8be0dac302b0
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com F1ABA20ACD6F
+X-Inumbo-ID: 7cbba81b-b742-11ef-a0d5-8be0dac302b0
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 05ECB20ACD66
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1733868160;
-	bh=zXBBaQqpACacMQS0Kj7gcrwl6nw/WBuJMa6i20JWtiI=;
+	s=default; t=1733868159;
+	bh=VvjxiqfKxbyi9uGzXsW8xZpGKBVs2F3SKydD57RgoIM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Vt8vx6jKTs+Ctim/qcZbBmxzvKglLplBaf8u3Ss1TuSPMlqyDk6c0iiPlA+LzR+m0
-	 YPZ/Qdi+1XcZwtu1UmEnzASc3HPTGQ/HgM/xmF7CmRGYf/aXx12mOKI6ka1aNTAUbz
-	 /gGdJ/+VOZh0/gOcfBkHqPOaIC1SiZYddw+BwdBw=
+	b=WbJnm80TvYnXykJB9DgMtqoZ50ou8AhS1efFy3dCoV03536YA3dJhXmL0IMKChnpw
+	 CujNWFZtiMOuyACXPjtJ3tU0PrbAysQ8+2RTG/TU5ekLFjjJ/pUAEWKon7ssztFoiO
+	 F9frqglM8e2VebaFFRHMBRJ+sqXulRejbFKVUSag=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Tue, 10 Dec 2024 22:02:50 +0000
-Subject: [PATCH v3 19/19] ALSA: line6: Convert timeouts to
+Date: Tue, 10 Dec 2024 22:02:45 +0000
+Subject: [PATCH v3 14/19] wifi: ath11k: Convert timeouts to
  secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241210-converge-secs-to-jiffies-v3-19-ddfefd7e9f2a@linux.microsoft.com>
+Message-Id: <20241210-converge-secs-to-jiffies-v3-14-ddfefd7e9f2a@linux.microsoft.com>
 References: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 In-Reply-To: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -120,7 +120,8 @@ Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
  live-patching@vger.kernel.org, linux-sound@vger.kernel.org, 
  oss-drivers@corigine.com, linuxppc-dev@lists.ozlabs.org, 
  Anna-Maria Behnsen <anna-maria@linutronix.de>, 
- Easwar Hariharan <eahariha@linux.microsoft.com>
+ Easwar Hariharan <eahariha@linux.microsoft.com>, 
+ Jeff Johnson <quic_jjohnson@quicinc.com>
 X-Mailer: b4 0.14.2
 
 Commit b35108a51cf7 ("jiffies: Define secs_to_jiffies()") introduced
@@ -140,23 +141,24 @@ the following Coccinelle rules:
 - msecs_to_jiffies(C * MSEC_PER_SEC)
 + secs_to_jiffies(C)
 
+Acked-by: Jeff Johnson <quic_jjohnson@quicinc.com>
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- sound/usb/line6/toneport.c | 2 +-
+ drivers/net/wireless/ath/ath11k/debugfs.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/sound/usb/line6/toneport.c b/sound/usb/line6/toneport.c
-index ca2c6f5de407ece21ab69a39ed603e3f10069039..c073b38cd6738176fc6a276d05ed553526573341 100644
---- a/sound/usb/line6/toneport.c
-+++ b/sound/usb/line6/toneport.c
-@@ -386,7 +386,7 @@ static int toneport_setup(struct usb_line6_toneport *toneport)
- 		toneport_update_led(toneport);
+diff --git a/drivers/net/wireless/ath/ath11k/debugfs.c b/drivers/net/wireless/ath/ath11k/debugfs.c
+index 57281a135dd7fa6b8610636f47873c8bba21053c..bf192529e3fe26a91e72105a77b4c6f849b905ec 100644
+--- a/drivers/net/wireless/ath/ath11k/debugfs.c
++++ b/drivers/net/wireless/ath/ath11k/debugfs.c
+@@ -178,7 +178,7 @@ static int ath11k_debugfs_fw_stats_request(struct ath11k *ar,
+ 	 * received 'update stats' event, we keep a 3 seconds timeout in case,
+ 	 * fw_stats_done is not marked yet
+ 	 */
+-	timeout = jiffies + msecs_to_jiffies(3 * 1000);
++	timeout = jiffies + secs_to_jiffies(3);
  
- 	schedule_delayed_work(&toneport->line6.startup_work,
--			      msecs_to_jiffies(TONEPORT_PCM_DELAY * 1000));
-+			      secs_to_jiffies(TONEPORT_PCM_DELAY));
- 	return 0;
- }
+ 	ath11k_debugfs_fw_stats_reset(ar);
  
 
 -- 
