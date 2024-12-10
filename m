@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1428E7719F
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 22:02:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.853122.1266717 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8403AC02182
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 22:02:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.853118.1266690 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8JZ-00038J-QT; Tue, 10 Dec 2024 22:02:45 +0000
+	id 1tL8JX-0002dI-SK; Tue, 10 Dec 2024 22:02:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 853122.1266717; Tue, 10 Dec 2024 22:02:45 +0000
+Received: by outflank-mailman (output) from mailman id 853118.1266690; Tue, 10 Dec 2024 22:02:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8JZ-00036S-FJ; Tue, 10 Dec 2024 22:02:45 +0000
-Received: by outflank-mailman (input) for mailman id 853122;
- Tue, 10 Dec 2024 22:02:43 +0000
+	id 1tL8JX-0002cc-Mg; Tue, 10 Dec 2024 22:02:43 +0000
+Received: by outflank-mailman (input) for mailman id 853118;
+ Tue, 10 Dec 2024 22:02:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9guP=TD=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tL8JX-0001xA-Lu
- for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:43 +0000
+ id 1tL8JV-0001xA-La
+ for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:41 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 7a3a455b-b742-11ef-a0d5-8be0dac302b0;
- Tue, 10 Dec 2024 23:02:42 +0100 (CET)
+ id 79172c0e-b742-11ef-a0d5-8be0dac302b0;
+ Tue, 10 Dec 2024 23:02:40 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id A7DE320BCAEA;
+ by linux.microsoft.com (Postfix) with ESMTPSA id 1CDB6204722B;
  Tue, 10 Dec 2024 14:02:37 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -41,23 +41,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a3a455b-b742-11ef-a0d5-8be0dac302b0
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A7DE320BCAEA
+X-Inumbo-ID: 79172c0e-b742-11ef-a0d5-8be0dac302b0
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 1CDB6204722B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
 	s=default; t=1733868157;
-	bh=WjXR/e+Bt5J36pfaIEwWXUE8wYei/ElgtSssYeLrLS0=;
+	bh=q4DaHZqCWeIKQe7TTG2rV3K7PdI1M/As9LhjCxxNuts=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=k1q7WXOxk1qYLVn196G3sb8s3XVjdPiH9giyU/vMWpK4NQiBox8ErAeTFxnenHayv
-	 1NLSp5g4CPg/qfYp440BlKTVCcToWDafQQXFfUYhXGaNJP4LCGPckmvvkPFrzQ2ykv
-	 8WoFkMMhJxjwt/2RQ+Oo6g69AunqDN5xYmAoTPZY=
+	b=Cha0cDHP2vqeI8GSgKLIifsRbCjhIP9dfadMSDrPMIXzCzmN2lfENv6VOGo3TWGGc
+	 RhOk4eEHD3feUGZkxL7/wUYX3ev+tB6zBroy0qt0RlqU7ha1EGeg6x38R1w2x8kfbl
+	 wuStr/zn04e6xBcfNPjBsiQEchSCZugge2XzJeQs=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Tue, 10 Dec 2024 22:02:38 +0000
-Subject: [PATCH v3 07/19] accel/habanalabs: Convert timeouts to
+Date: Tue, 10 Dec 2024 22:02:35 +0000
+Subject: [PATCH v3 04/19] s390: kernel: Convert timeouts to use
  secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241210-converge-secs-to-jiffies-v3-7-ddfefd7e9f2a@linux.microsoft.com>
+Message-Id: <20241210-converge-secs-to-jiffies-v3-4-ddfefd7e9f2a@linux.microsoft.com>
 References: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 In-Reply-To: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -124,7 +124,7 @@ Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
 X-Mailer: b4 0.14.2
 
 Commit b35108a51cf7 ("jiffies: Define secs_to_jiffies()") introduced
-secs_to_jiffies(). As the value here is a multiple of 1000, use
+secs_to_jiffies(). As the values here are a multiple of 1000, use
 secs_to_jiffies() instead of msecs_to_jiffies to avoid the multiplication.
 
 This is converted using scripts/coccinelle/misc/secs_to_jiffies.cocci with
@@ -142,37 +142,56 @@ the following Coccinelle rules:
 
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- drivers/accel/habanalabs/common/device.c         | 2 +-
- drivers/accel/habanalabs/common/habanalabs_drv.c | 3 +--
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ arch/s390/kernel/lgr.c      | 2 +-
+ arch/s390/kernel/time.c     | 4 ++--
+ arch/s390/kernel/topology.c | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/accel/habanalabs/common/device.c b/drivers/accel/habanalabs/common/device.c
-index e0cf3b4343bb081638430f2552ed27431b488ff9..30277ae410d4b742ffb7bddc35498564ff96fe62 100644
---- a/drivers/accel/habanalabs/common/device.c
-+++ b/drivers/accel/habanalabs/common/device.c
-@@ -817,7 +817,7 @@ static void device_hard_reset_pending(struct work_struct *work)
- 		}
+diff --git a/arch/s390/kernel/lgr.c b/arch/s390/kernel/lgr.c
+index 6652e54cf3db9fbdd8cfb06f8a0dc1d4c05ae7d7..6d1ffca5f798086160112990cb947ec8deed0659 100644
+--- a/arch/s390/kernel/lgr.c
++++ b/arch/s390/kernel/lgr.c
+@@ -166,7 +166,7 @@ static struct timer_list lgr_timer;
+  */
+ static void lgr_timer_set(void)
+ {
+-	mod_timer(&lgr_timer, jiffies + msecs_to_jiffies(LGR_TIMER_INTERVAL_SECS * MSEC_PER_SEC));
++	mod_timer(&lgr_timer, jiffies + secs_to_jiffies(LGR_TIMER_INTERVAL_SECS));
+ }
  
- 		queue_delayed_work(hdev->reset_wq, &device_reset_work->reset_work,
--					msecs_to_jiffies(HL_PENDING_RESET_PER_SEC * 1000));
-+					secs_to_jiffies(HL_PENDING_RESET_PER_SEC));
+ /*
+diff --git a/arch/s390/kernel/time.c b/arch/s390/kernel/time.c
+index 34a65c141ea076ba97b3238f1f36f077b15961df..e9f47c3a61978a45c72aee23bc44dcb128113c8c 100644
+--- a/arch/s390/kernel/time.c
++++ b/arch/s390/kernel/time.c
+@@ -662,12 +662,12 @@ static void stp_check_leap(void)
+ 		if (ret < 0)
+ 			pr_err("failed to set leap second flags\n");
+ 		/* arm Timer to clear leap second flags */
+-		mod_timer(&stp_timer, jiffies + msecs_to_jiffies(14400 * MSEC_PER_SEC));
++		mod_timer(&stp_timer, jiffies + secs_to_jiffies(14400));
+ 	} else {
+ 		/* The day the leap second is scheduled for hasn't been reached. Retry
+ 		 * in one hour.
+ 		 */
+-		mod_timer(&stp_timer, jiffies + msecs_to_jiffies(3600 * MSEC_PER_SEC));
++		mod_timer(&stp_timer, jiffies + secs_to_jiffies(3600));
  	}
  }
  
-diff --git a/drivers/accel/habanalabs/common/habanalabs_drv.c b/drivers/accel/habanalabs/common/habanalabs_drv.c
-index 5409b2c656c803f6d172dd882711357061f30022..596c52e8aa266bf48e2be45e719adb202604577b 100644
---- a/drivers/accel/habanalabs/common/habanalabs_drv.c
-+++ b/drivers/accel/habanalabs/common/habanalabs_drv.c
-@@ -361,8 +361,7 @@ static void fixup_device_params_per_asic(struct hl_device *hdev, int timeout)
- 		 * a different default timeout for Gaudi
- 		 */
- 		if (timeout == HL_DEFAULT_TIMEOUT_LOCKED)
--			hdev->timeout_jiffies = msecs_to_jiffies(GAUDI_DEFAULT_TIMEOUT_LOCKED *
--										MSEC_PER_SEC);
-+			hdev->timeout_jiffies = secs_to_jiffies(GAUDI_DEFAULT_TIMEOUT_LOCKED);
+diff --git a/arch/s390/kernel/topology.c b/arch/s390/kernel/topology.c
+index 4f9c301a705b63f8dd0e7bc33e7206ad1222e7a7..0fd56a1cadbd4f41a9876a3a3fec7f5dc08ac2db 100644
+--- a/arch/s390/kernel/topology.c
++++ b/arch/s390/kernel/topology.c
+@@ -371,7 +371,7 @@ static void set_topology_timer(void)
+ 	if (atomic_add_unless(&topology_poll, -1, 0))
+ 		mod_timer(&topology_timer, jiffies + msecs_to_jiffies(100));
+ 	else
+-		mod_timer(&topology_timer, jiffies + msecs_to_jiffies(60 * MSEC_PER_SEC));
++		mod_timer(&topology_timer, jiffies + secs_to_jiffies(60));
+ }
  
- 		hdev->reset_upon_device_release = 0;
- 		break;
+ void topology_expect_change(void)
 
 -- 
 2.43.0
