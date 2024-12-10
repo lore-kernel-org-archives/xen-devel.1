@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE38E77180
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 07:10:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.851878.1265853 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB8E8E77180
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 07:17:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.851891.1265873 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKuNz-0004zM-9A; Tue, 10 Dec 2024 07:10:23 +0000
+	id 1tKuV1-0005ws-Ao; Tue, 10 Dec 2024 07:17:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 851878.1265853; Tue, 10 Dec 2024 07:10:23 +0000
+Received: by outflank-mailman (output) from mailman id 851891.1265873; Tue, 10 Dec 2024 07:17:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tKuNz-0004zF-6O; Tue, 10 Dec 2024 07:10:23 +0000
-Received: by outflank-mailman (input) for mailman id 851878;
- Tue, 10 Dec 2024 07:10:21 +0000
+	id 1tKuV1-0005wj-7w; Tue, 10 Dec 2024 07:17:39 +0000
+Received: by outflank-mailman (input) for mailman id 851891;
+ Tue, 10 Dec 2024 07:17:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=So9x=TD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tKuNx-0004z9-Q2
- for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 07:10:21 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ id 1tKuV0-0005pk-Jw
+ for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 07:17:38 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d1284579-b6c5-11ef-a0d5-8be0dac302b0;
- Tue, 10 Dec 2024 08:10:20 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-434a2033562so47463995e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 09 Dec 2024 23:10:20 -0800 (PST)
+ id d562cab3-b6c6-11ef-a0d5-8be0dac302b0;
+ Tue, 10 Dec 2024 08:17:37 +0100 (CET)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-38633b5dbcfso2628099f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Dec 2024 23:17:37 -0800 (PST)
 Received: from ?IPV6:2003:ca:b746:63c:a58f:4219:ab5d:cf03?
  (p200300cab746063ca58f4219ab5dcf03.dip0.t-ipconnect.de.
  [2003:ca:b746:63c:a58f:4219:ab5d:cf03])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38621fbbdd8sm15077691f8f.95.2024.12.09.23.10.19
+ ffacd0b85a97d-3862e52a96csm11645346f8f.33.2024.12.09.23.17.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Dec 2024 23:10:19 -0800 (PST)
+ Mon, 09 Dec 2024 23:17:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,56 +49,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1284579-b6c5-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: d562cab3-b6c6-11ef-a0d5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1733814620; x=1734419420; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1733815057; x=1734419857; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=GTFiWN/I8jtMOqAmrEtbxysEib3F+04J/YUa2umo0fk=;
-        b=QlrxDdZzWK9iR9WLZ5GU68NvUXmyGPpqAujLrM0BDz9OJUwmOgZla7IeW92XCeeuFx
-         I3Kcu3oxlwE2B9YhPd1xcXPyXX5aC1XgVx7J2gMHzZDbjUyvoybzrCJ3EIrd8ZUlevs0
-         mfAiYIu21KwjQSs2ngZrZYCb+7B0V/X/MG3q3RiH+wCO2Sdm80V2WtJ/x9L+YcZHW3nv
-         FqPyJAorFP+DcfwOCdOdh6TvItG9wQEB8Tgfhsj+RbRHl/ZBDk+Hpw3hyJkSpwN9sfky
-         C0h7lOUyXPJijUX518aTGLDNvrBcJm6yvcnJEmN2WSvtoTbAacNCmURZ9eNev4BEOUN8
-         /K/g==
+        bh=1Juq6WqKgwtWs4FOuT6Ymg/mdR62ofayr2Su4F4rhCw=;
+        b=WeIbIa/AMUOHKCge5hYkz3wO8OdMH5lwLuBJoy1/RjDHTk1qI4BD3H1LlXSXf40C91
+         Lo4lIxMjp3Lx1Qc9PIkxsiNVyVYIEFY2V5ckC8Dmyg0gRe6QhcexBKjer4rEM3JZjJXp
+         nwMGPPtfvUZj8HH1Ah3SeFOChMJvbtE5+xHUQAGrm1ye5YQ5yAvjQNuCoJmUMIRW9jL8
+         S0rK1gguFtEEOm/4zR+f0+pTSRd3dJxhHGGtyWgQXXwiV39C2uI9dg9CnBYZEojC74Td
+         p8sYQDxrt0xtO5Flj1htbqmHkCiYCimXMEFiZZCdlFbtqlFkkv27oKNBod1RQcEV4U8/
+         RsaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733814620; x=1734419420;
+        d=1e100.net; s=20230601; t=1733815057; x=1734419857;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GTFiWN/I8jtMOqAmrEtbxysEib3F+04J/YUa2umo0fk=;
-        b=R0sFeO+U6mdP88xuNP9RmRJwdUsY2pyhP/HsF/gEvNFJSfVvDHg8SzU71bpAVeWchO
-         V9C/ViupYp7E+vbfJGy5NHst5BTBwbEvhEWqpR1GQQE5yN4gPtcwDiHJw/C74buh/DB+
-         1BBYEvKXMUd/Ljvj/TcTq4/oalKyY85vgAhb7Z2sdxzNgOoWYEkCQiwZ4vNmACIQ4Zh9
-         FDCBeH2yDM9tI4xpjxVk8Ac507Vc8ZeUWAiac2rTjhKZxgca1WWvZdo+YbR09veFNFhY
-         895nxB4VOmTG/cUA6zSE6iInqpkFV1kkvN/zXQcGnH6KvXGv6DKsgY5/jVBwi2oorTfS
-         hC0g==
-X-Forwarded-Encrypted: i=1; AJvYcCX6lsdcQaXQn+qJusS12GHjLvhKRgisp+qEqLTM3oPILv3Y0EkhXyKS3/POYRxfYj22BGr/CrXkyow=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz+UX4v58DHvdOg2FEB0TaPpCHCEI5lFmp5IGxdcldXxqnWaLDY
-	Kqwu9i/2TWVYeKe6rrR1hs5M+bhnbLxMjBg2vgtdEBOJD0HcTTws+W+Z3pWViw==
-X-Gm-Gg: ASbGncuZcG5NABLndwvOIMSWEdL9imvgnjAYzGFTRqb/wW6RXocR7y1kpGWFp8xJxhN
-	4It4KZyky4DuWqlUeNisLaCiqB0/7z4/jJrbAbAqwvRas635s2f2+E46/sQsWlF3LHL6+gLsJM1
-	/o7PkysRvBlH3V+Hm6lJytUVmTfvHAflg5KCoP5s3VM8C0JZF2JGxCBnMDTJkJCSfVG6nst2oSi
-	DruZNT312YglclAIzZvRYEAtgQiyjZKRWJtulAVKGvhRtYeSdO1l42/A9FtxPCBqZBnJLD1jl44
-	IkrgJYxE3ozIMhqnJsbn98CG1hsqfKKlyBaNr+h8ztcKPgEuoPjH8o2jk/Yl254Rk+u1mOvHXZ7
-	BgvSfjLbKaQ==
-X-Google-Smtp-Source: AGHT+IFK3ouiAOtSip3qbm9FBgxbL/q8AUc7IXBS2WERI5zq9OJRqlUhGGTzsLahb8rfanUtxlGTdA==
-X-Received: by 2002:a05:6000:1a86:b0:385:ec6e:e872 with SMTP id ffacd0b85a97d-3862b3cea1dmr13109617f8f.38.1733814620117;
-        Mon, 09 Dec 2024 23:10:20 -0800 (PST)
-Message-ID: <24731167-3af6-447a-b61d-b1985360a2fe@suse.com>
-Date: Tue, 10 Dec 2024 08:10:17 +0100
+        bh=1Juq6WqKgwtWs4FOuT6Ymg/mdR62ofayr2Su4F4rhCw=;
+        b=CLB4J/Iab8CR1lRojY2DaMVsO/D7UgC9UHtRQ5+ATKKnUNMgSMauu7NIVOyXA1Jklt
+         oCAR2wRD3EdeHLz/WbSBmEEgkBUq385KOP3rONymGBHwjNEmfoM7yMGxThAshD+4z+Jy
+         gH8kagmuW2qLvCs5pfSoUrPFFvgHG6CDuj/CemcdM+SOlo2T82nO9oXe04ai30/W5az4
+         a6hqc43k9qsNnf173duBOaJ0Tf00QbmDKBMJ/BfAM+48HCPGarOKoOyn08InFz3mO0vQ
+         kKLoU+tL0s0T7iRXNjViCzukAxrOmFr1PgOpDW9EuDskLIIoT+6HkPQOnH8Vwf0tcQRm
+         Q0vA==
+X-Forwarded-Encrypted: i=1; AJvYcCVAJ6EvJFb/w/veSRz16JWSht/jhVWnm6wIUp0XK90FEirLvGCsf0DfEVXQB7ikijtf8VXZ9d27OuY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwatS61ork7t13PssPeVdvirNobBPfjvxtDkk95uHJiAfRNj99U
+	fFF1SjQBoVj8Q8i74Tz07LmaJc4faaYqYNSO7MJQzBMaWNH3D96RNMLl0ggYQg==
+X-Gm-Gg: ASbGncv+mXj/v50B0lOxTPyYDrWCfSjX26yAw4qQyaA1EvtzEHn8Sl2hfhd8W5Mgy7q
+	a2OvN+hCt7hF4ZZC15GgP1xH6GFESxMdMtffcFYrlkIDnD5huaT2HLVLL9HH9pBWWL67JpARE5z
+	scL7dAzNVfZRxvlZmX72gzWUXd0VvKTmHWjKhNQlEf/3qbeH/jDBtNIpvXRL24SCMIMf5hecnft
+	A746XEVITxIc+DnwQWZX1VsGRyoCVAJ154LVUtfGJdgle34d+rS6+XwO7qxy96mFdebfJAZxfJP
+	/gV2ERo9tvhArYvskx/Qx9ABOkFlbD+7Ui0hauPe6UR8VjS19eIK7M0PuPc7t4hrOABeqdHjnYR
+	jnr9XYXkl6w==
+X-Google-Smtp-Source: AGHT+IF7MlPoFurWAOAWaiWg1w/Hl3IzUGIlmSTlJxRJu2fF1BQJBBEROZJvaVxQjo9lHlg17MSICw==
+X-Received: by 2002:a5d:5f53:0:b0:385:ee3f:5cbf with SMTP id ffacd0b85a97d-386453da317mr2745873f8f.20.1733815056726;
+        Mon, 09 Dec 2024 23:17:36 -0800 (PST)
+Message-ID: <1e0576d9-400e-4483-8dd1-061e215a00cd@suse.com>
+Date: Tue, 10 Dec 2024 08:17:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] CHANGELOG: Mention xl suspend/resume
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Community Manager <community.manager@xenproject.org>,
- xen-devel@lists.xenproject.org
-References: <20241205195026.3523-1-jason.andryuk@amd.com>
- <638e4fe3-c346-4c03-a3db-2027986753a8@suse.com>
- <f2c8d9cb-d201-4136-98f6-4beb6654b997@amd.com>
+Subject: Re: [PATCH v2 1/1] vpci: Add resizable bar support
+To: "Chen, Jiqian" <Jiqian.Chen@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, "Huang, Ray"
+ <Ray.Huang@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <20241202060956.1124162-1-Jiqian.Chen@amd.com>
+ <4e4df0ee-67f6-41e3-bfc7-e78011680015@suse.com>
+ <BL1PR12MB58499BEB287C4F9711324F71E73D2@BL1PR12MB5849.namprd12.prod.outlook.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -124,45 +126,117 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <f2c8d9cb-d201-4136-98f6-4beb6654b997@amd.com>
+In-Reply-To: <BL1PR12MB58499BEB287C4F9711324F71E73D2@BL1PR12MB5849.namprd12.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 09.12.2024 20:20, Jason Andryuk wrote:
-> On 2024-12-09 04:29, Jan Beulich wrote:
->> On 05.12.2024 20:50, Jason Andryuk wrote:
->>> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
->>> ---
->>> It only works for x86, but it isn't x86-specific.  I chose to add it as
->>> a generic entry instead of listing it as x86.
+On 10.12.2024 08:07, Chen, Jiqian wrote:
+> On 2024/12/9 21:59, Jan Beulich wrote:
+>> On 02.12.2024 07:09, Jiqian Chen wrote:
+>>> --- /dev/null
+>>> +++ b/xen/drivers/vpci/rebar.c
+>>> @@ -0,0 +1,93 @@
+>>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
 >>
->> Which probably is fine, yet then ...
->>
->>> --- a/CHANGELOG.md
->>> +++ b/CHANGELOG.md
->>> @@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
->>>   ### Added
->>>    - On Arm:
->>>      - Experimental support for Armv8-R.
->>> + - xl suspend/resume subcommands.
->>
->> ... you'd want to name the limitation to x86 here anyway, I think. Unless
->> there are firm plans to remove the limitation by 4.20 going out.
-> 
-> No, I don't think there are any plans to remove the limitation.
-> 
-> This seems weird since the feature depends on platform implementations of hypercalls and library plumbing:
-> 
->  - On x86:
->    - xl suspend/resume subcommands.
-> 
-> Whereas this seems unusual since it's not following the above format:
-> 
->  - xl suspend/resume subcommands (x86 only).
-> 
-> I guess I'd put it under "On x86" if I had to choose.
+>> Was this a deliberate decision? We default to GPL-2.0-only, I think.
+> Will change to GPL-2.0-only.
+> What's the difference between GPL-2.0-only and GPL-2.0-or-later?
 
-I'd be fine with either; neither looks more "weird" to me than the other.
+As the name says, the latter includes any known or yet to be written newer
+versions of the GPL.
+
+>>> +/*
+>>> + * Copyright (C) 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+>>> + *
+>>> + * Author: Jiqian Chen <Jiqian.Chen@amd.com>
+>>> + */
+>>> +
+>>> +#include <xen/hypercall.h>
+>>> +#include <xen/vpci.h>
+>>> +
+>>> +static void cf_check rebar_ctrl_write(const struct pci_dev *pdev,
+>>> +                                      unsigned int reg,
+>>> +                                      uint32_t val,
+>>> +                                      void *data)
+>>> +{
+>>> +    uint64_t size;
+>>> +    unsigned int index;
+>>> +    struct vpci_bar *bars = data;
+>>> +
+>>> +    if ( pci_conf_read16(pdev->sbdf, PCI_COMMAND) & PCI_COMMAND_MEMORY )
+>>> +        return;
+>>
+>> I don't think something like this can go uncommented. I don't think the
+>> spec mandates to drop writes in this situation?
+> Spec says: Software must clear the Memory Space Enable bit in the Command register before writing the BAR Size field.
+> This check is suggested by Roger and it really helps to prevent erroneous writes in this case,
+> such as the result of debugging with Roger in the previous version.
+> I will add the spec's sentences as comments here in next version.
+
+What you quote from the spec may not be enough as a comment here. There's
+no direct implication that the write would simply be dropped on the floor
+if the bit is still set. So I think you want to go a little beyond just
+quoting from the spec.
+
+>>> +        if ( rc )
+>>> +        {
+>>> +            printk("%pp: add register for PCI_REBAR_CAP failed (rc=%d)\n",
+>>> +                   &pdev->sbdf, rc);
+>>> +            break;
+>>> +        }
+>>> +
+>>> +        rc = vpci_add_register(pdev->vpci, vpci_hw_read32, rebar_ctrl_write,
+>>> +                               rebar_offset + PCI_REBAR_CTRL, 4,
+>>> +                               pdev->vpci->header.bars);
+>>> +        if ( rc )
+>>> +        {
+>>> +            printk("%pp: add register for PCI_REBAR_CTRL failed %d\n",
+>>> +                   &pdev->sbdf, rc);
+>>> +            break;
+>>
+>> Is it correct to keep the other handler installed? After all ...
+> Will change to "return rc;" here and above in next version.
+
+I'm not convinced this is what we want, as per ...
+
+>>> +        }
+>>> +    }
+>>> +
+>>> +    return 0;
+>>
+>> ... you - imo sensibly - aren't communicating the error back up (to allow
+>> the device to be used without BAR resizing.
+
+... what I said here.
+
+>>> @@ -541,6 +542,16 @@
+>>>  #define  PCI_VNDR_HEADER_REV(x)	(((x) >> 16) & 0xf)
+>>>  #define  PCI_VNDR_HEADER_LEN(x)	(((x) >> 20) & 0xfff)
+>>>  
+>>> +/* Resizable BARs */
+>>> +#define PCI_REBAR_CAP		4	/* capability register */
+>>> +#define  PCI_REBAR_CAP_SIZES		0xFFFFFFF0  /* supported BAR sizes */
+>>
+>> Misra demands that this have a U suffix.
+> Do below PCI_REBAR_CTRL_BAR_IDX, PCI_REBAR_CTRL_NBAR_MASK and PCI_REBAR_CTRL_BAR_SIZE also need a U suffix?
+
+They may want to gain them for consistency, but they don't strictly need
+them. I wanted to say "See the rest of the file", but it looks like the
+file wasn't cleaned up yet Misra-wise.
+
+>>> +#define PCI_REBAR_CTRL		8	/* control register */
+>>> +#define  PCI_REBAR_CTRL_BAR_IDX	0x00000007  /* BAR index */
+>>> +#define  PCI_REBAR_CTRL_NBAR_MASK	0x000000E0  /* # of resizable BARs */
+>>> +#define  PCI_REBAR_CTRL_BAR_SIZE	0x00001F00  /* BAR size */
+>>> +#define  PCI_REBAR_CTRL_SIZE(v) \
+>>> +            (1UL << (MASK_EXTR(v, PCI_REBAR_CTRL_BAR_SIZE) + 20))
+>>
+>> The literal 20 (appearing here the 2nd time) also wants hiding behind a
+>> #define.
+> OK, will add " #define PCI_REBAR_SIZE_UNIT_BYTES_LEN 20" to replace above two '20' case.
+
+What is "UNIT_BYTES_LEN" there? There's nothing byte-ish here, I don't
+think, 20 is simply the shift bias.
 
 Jan
 
