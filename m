@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483C4E77194
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF9AE7717F
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 22:02:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.853121.1266710 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.853115.1266660 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8JZ-0002zE-9Z; Tue, 10 Dec 2024 22:02:45 +0000
+	id 1tL8JW-0001xc-0c; Tue, 10 Dec 2024 22:02:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 853121.1266710; Tue, 10 Dec 2024 22:02:45 +0000
+Received: by outflank-mailman (output) from mailman id 853115.1266660; Tue, 10 Dec 2024 22:02:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8JZ-0002yF-1O; Tue, 10 Dec 2024 22:02:45 +0000
-Received: by outflank-mailman (input) for mailman id 853121;
- Tue, 10 Dec 2024 22:02:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tL8JV-0001xV-Sr; Tue, 10 Dec 2024 22:02:41 +0000
+Received: by outflank-mailman (input) for mailman id 853115;
+ Tue, 10 Dec 2024 22:02:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9guP=TD=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tL8JX-0001x9-4M
- for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:43 +0000
+ id 1tL8JV-0001xA-0Y
+ for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:41 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 797fbd87-b742-11ef-99a3-01e77a169b0f;
- Tue, 10 Dec 2024 23:02:40 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 78a3501f-b742-11ef-a0d5-8be0dac302b0;
+ Tue, 10 Dec 2024 23:02:39 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id 4B3EA204722C;
- Tue, 10 Dec 2024 14:02:37 -0800 (PST)
+ by linux.microsoft.com (Postfix) with ESMTPSA id E562F204722A;
+ Tue, 10 Dec 2024 14:02:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,23 +41,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 797fbd87-b742-11ef-99a3-01e77a169b0f
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 4B3EA204722C
+X-Inumbo-ID: 78a3501f-b742-11ef-a0d5-8be0dac302b0
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com E562F204722A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
 	s=default; t=1733868157;
-	bh=pNf1urZZ7beXITMyG6cNpTQM4ujE/reyCjI7dxR8TrA=;
+	bh=c41QzYd4hhSXlS6Xp2pgWqH2EB3T3v3i9Pb37cjnO/o=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=ey2u4hFur56upsg36Bzzf5E6sp9TxIQJWauHtVHyZKWxl2TYAXbOMES9gB/LrtTHt
-	 EMIcdvfnDr4nFfA+fPKgnRb6wrIZBNFQYmxUUa3IOMgJ6rbLPy51pP+s0wIlgpVbyY
-	 W7PI6jGCodUt7pK+WAXoxoZrhQg9ZJ/5kGvj+4iw=
+	b=qVCIV9cfYQFUEbAPN5oHTbVOOCMPtJTRnplX1niaLB3lEuL2MM5F44Gr4RM6lOTTS
+	 WXCIz2JA6aYjhurN56TEZJEQV0OG8AVSPHDGlGJRGWabTGSgGWE+1I7d1M8c078PhJ
+	 k5GeR3RvYMN/zDxLHn2xchQHWB1a1MyycuJ1TrJU=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Tue, 10 Dec 2024 22:02:36 +0000
-Subject: [PATCH v3 05/19] powerpc/papr_scm: Convert timeouts to
+Date: Tue, 10 Dec 2024 22:02:34 +0000
+Subject: [PATCH v3 03/19] arm: pxa: Convert timeouts to use
  secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241210-converge-secs-to-jiffies-v3-5-ddfefd7e9f2a@linux.microsoft.com>
+Message-Id: <20241210-converge-secs-to-jiffies-v3-3-ddfefd7e9f2a@linux.microsoft.com>
 References: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 In-Reply-To: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -142,22 +142,28 @@ the following Coccinelle rules:
 
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- arch/powerpc/platforms/pseries/papr_scm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-pxa/sharpsl_pm.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/powerpc/platforms/pseries/papr_scm.c b/arch/powerpc/platforms/pseries/papr_scm.c
-index f84ac9fbe203c111046464b9100866dddae687bb..f7c9271bda58433f395648063e60409a8d3c11d9 100644
---- a/arch/powerpc/platforms/pseries/papr_scm.c
-+++ b/arch/powerpc/platforms/pseries/papr_scm.c
-@@ -544,7 +544,7 @@ static int drc_pmem_query_health(struct papr_scm_priv *p)
+diff --git a/arch/arm/mach-pxa/sharpsl_pm.c b/arch/arm/mach-pxa/sharpsl_pm.c
+index 0c8d9000df5a6384d615cf231ff986c0c6b71681..dd930e3a61a493293597815782d2ffd36605a700 100644
+--- a/arch/arm/mach-pxa/sharpsl_pm.c
++++ b/arch/arm/mach-pxa/sharpsl_pm.c
+@@ -31,10 +31,10 @@
+ /*
+  * Constants
+  */
+-#define SHARPSL_CHARGE_ON_TIME_INTERVAL        (msecs_to_jiffies(1*60*1000))  /* 1 min */
+-#define SHARPSL_CHARGE_FINISH_TIME             (msecs_to_jiffies(10*60*1000)) /* 10 min */
+-#define SHARPSL_BATCHK_TIME                    (msecs_to_jiffies(15*1000))    /* 15 sec */
+-#define SHARPSL_BATCHK_TIME_SUSPEND            (60*10)                        /* 10 min */
++#define SHARPSL_CHARGE_ON_TIME_INTERVAL        (secs_to_jiffies(60))
++#define SHARPSL_CHARGE_FINISH_TIME             (secs_to_jiffies(10*60))
++#define SHARPSL_BATCHK_TIME                    (secs_to_jiffies(15))
++#define SHARPSL_BATCHK_TIME_SUSPEND            (60*10) /* 10 min */
  
- 	/* Jiffies offset for which the health data is assumed to be same */
- 	cache_timeout = p->lasthealth_jiffies +
--		msecs_to_jiffies(MIN_HEALTH_QUERY_INTERVAL * 1000);
-+		secs_to_jiffies(MIN_HEALTH_QUERY_INTERVAL);
- 
- 	/* Fetch new health info is its older than MIN_HEALTH_QUERY_INTERVAL */
- 	if (time_after(jiffies, cache_timeout))
+ #define SHARPSL_WAIT_CO_TIME                   15  /* 15 sec */
+ #define SHARPSL_WAIT_DISCHARGE_ON              100 /* 100 msec */
 
 -- 
 2.43.0
