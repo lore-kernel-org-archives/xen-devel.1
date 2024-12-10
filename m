@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DE39E77189
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED30E77190
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Dec 2024 22:02:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.853128.1266759 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.853123.1266723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8Je-0004LQ-Eu; Tue, 10 Dec 2024 22:02:50 +0000
+	id 1tL8Ja-0003H6-9L; Tue, 10 Dec 2024 22:02:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 853128.1266759; Tue, 10 Dec 2024 22:02:50 +0000
+Received: by outflank-mailman (output) from mailman id 853123.1266723; Tue, 10 Dec 2024 22:02:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tL8Je-0004JL-3P; Tue, 10 Dec 2024 22:02:50 +0000
-Received: by outflank-mailman (input) for mailman id 853128;
- Tue, 10 Dec 2024 22:02:48 +0000
+	id 1tL8JZ-0003FP-W6; Tue, 10 Dec 2024 22:02:46 +0000
+Received: by outflank-mailman (input) for mailman id 853123;
+ Tue, 10 Dec 2024 22:02:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9guP=TD=linux.microsoft.com=eahariha@srs-se1.protection.inumbo.net>)
- id 1tL8Jb-0001xA-Md
- for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:47 +0000
+ id 1tL8JY-0001xA-ME
+ for xen-devel@lists.xenproject.org; Tue, 10 Dec 2024 22:02:44 +0000
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 7b9287cf-b742-11ef-a0d5-8be0dac302b0;
- Tue, 10 Dec 2024 23:02:44 +0100 (CET)
+ id 7a90b097-b742-11ef-a0d5-8be0dac302b0;
+ Tue, 10 Dec 2024 23:02:42 +0100 (CET)
 Received: from eahariha-devbox.internal.cloudapp.net (unknown [40.91.112.99])
- by linux.microsoft.com (Postfix) with ESMTPSA id 6FF4C2047230;
- Tue, 10 Dec 2024 14:02:38 -0800 (PST)
+ by linux.microsoft.com (Postfix) with ESMTPSA id D4E6A204722D;
+ Tue, 10 Dec 2024 14:02:37 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,23 +41,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b9287cf-b742-11ef-a0d5-8be0dac302b0
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 6FF4C2047230
+X-Inumbo-ID: 7a90b097-b742-11ef-a0d5-8be0dac302b0
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com D4E6A204722D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
 	s=default; t=1733868158;
-	bh=U++D0WKRUcBPTXKKmA8ay83+fBnoO24djfuDhPxnmd0=;
+	bh=DhJBfAD2d6ET0f+MR7PDWaX6CpgYhpsGb+RQrMGIOAY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=i9DsTNH+sl/IoEAtSjlSJHTOE30TcOTSfxv7yvCJsXzsKYC64wXa+LBK94U2wED8+
-	 6hMcKIbUoHeurUTa3oCFtWHdRYvf3LnrkdYUlQGzEUBgp5Wh7dgkbASpnSVSuIShxl
-	 Qe59P7FSrX+a5TC/+UUUxnQ63OeNqL5idRg6Tx5c=
+	b=IIAWMyJ8NzQC8a9Pk8dz0U3jdNgu9NGd3SiawGSbAFHI2lBJj9kVVY+Jrn6mOAaem
+	 Wm2Q0riPqkUNNLsJAJDVn84Us2zbSxk2FObucA7BvA+Ci0Obga6BtVUEDHD7pm4PpM
+	 tPAQA1jtOYji99byX6HP0p2SzC0hDQD6638LF7MQ=
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-Date: Tue, 10 Dec 2024 22:02:42 +0000
-Subject: [PATCH v3 11/19] scsi: pm8001: Convert timeouts to
- secs_to_jiffies()
+Date: Tue, 10 Dec 2024 22:02:39 +0000
+Subject: [PATCH v3 08/19] drm/xe: Convert timeout to secs_to_jiffies()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241210-converge-secs-to-jiffies-v3-11-ddfefd7e9f2a@linux.microsoft.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20241210-converge-secs-to-jiffies-v3-8-ddfefd7e9f2a@linux.microsoft.com>
 References: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 In-Reply-To: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
 To: Pablo Neira Ayuso <pablo@netfilter.org>, 
@@ -140,24 +139,25 @@ the following Coccinelle rules:
 - msecs_to_jiffies(C * MSEC_PER_SEC)
 + secs_to_jiffies(C)
 
+Reviewed-by: Thomas Hellström <thomas.hellstrom@linux.intel.com>
 Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 ---
- drivers/scsi/pm8001/pm8001_init.c | 2 +-
+ drivers/gpu/drm/xe/xe_device.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/scsi/pm8001/pm8001_init.c b/drivers/scsi/pm8001/pm8001_init.c
-index f8c81e53e93f7849bbe7fe9cbc861f22b964bc39..22e0e79e88ab0a60965ff3809de116eb4a6851e2 100644
---- a/drivers/scsi/pm8001/pm8001_init.c
-+++ b/drivers/scsi/pm8001/pm8001_init.c
-@@ -736,7 +736,7 @@ static int pm8001_init_sas_add(struct pm8001_hba_info *pm8001_ha)
- 		return -EIO;
- 	}
- 	time_remaining = wait_for_completion_timeout(&completion,
--				msecs_to_jiffies(60*1000)); // 1 min
-+				secs_to_jiffies(60)); // 1 min
- 	if (!time_remaining) {
- 		kfree(payload.func_specific);
- 		pm8001_dbg(pm8001_ha, FAIL, "get_nvmd_req timeout\n");
+diff --git a/drivers/gpu/drm/xe/xe_device.c b/drivers/gpu/drm/xe/xe_device.c
+index 56d4ffb650dade8622cc25026a96155fa5572434..9093469a275f46f7bf58ff1049c1c9cc712cdd33 100644
+--- a/drivers/gpu/drm/xe/xe_device.c
++++ b/drivers/gpu/drm/xe/xe_device.c
+@@ -519,7 +519,7 @@ static int wait_for_lmem_ready(struct xe_device *xe)
+ 	drm_dbg(&xe->drm, "Waiting for lmem initialization\n");
+ 
+ 	start = jiffies;
+-	timeout = start + msecs_to_jiffies(60 * 1000); /* 60 sec! */
++	timeout = start + secs_to_jiffies(60); /* 60 sec! */
+ 
+ 	do {
+ 		if (signal_pending(current))
 
 -- 
 2.43.0
