@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 683B1E77184
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C63E77188
 	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 17:28:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.855082.1268168 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.855080.1268148 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLQVK-0000JD-Bb; Wed, 11 Dec 2024 17:28:06 +0000
+	id 1tLQVI-0008Gx-MS; Wed, 11 Dec 2024 17:28:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 855082.1268168; Wed, 11 Dec 2024 17:28:06 +0000
+Received: by outflank-mailman (output) from mailman id 855080.1268148; Wed, 11 Dec 2024 17:28:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLQVK-0000Hk-6i; Wed, 11 Dec 2024 17:28:06 +0000
-Received: by outflank-mailman (input) for mailman id 855082;
- Wed, 11 Dec 2024 17:28:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tLQVI-0008Gn-J1; Wed, 11 Dec 2024 17:28:04 +0000
+Received: by outflank-mailman (input) for mailman id 855080;
+ Wed, 11 Dec 2024 17:28:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ntru=TE=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tLQVI-0007JC-IC
- for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 17:28:04 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 46ee7ddc-b7e5-11ef-a0d5-8be0dac302b0;
- Wed, 11 Dec 2024 18:28:03 +0100 (CET)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d414b8af7bso5464559a12.0
- for <xen-devel@lists.xenproject.org>; Wed, 11 Dec 2024 09:28:03 -0800 (PST)
+ id 1tLQVG-0007J6-TG
+ for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 17:28:02 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4589c99e-b7e5-11ef-99a3-01e77a169b0f;
+ Wed, 11 Dec 2024 18:28:01 +0100 (CET)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9f1d76dab1so1011026766b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Dec 2024 09:28:01 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa6656f306csm687297466b.61.2024.12.11.09.28.00
+ a640c23a62f3a-aa6656f306csm687297466b.61.2024.12.11.09.27.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 09:28:01 -0800 (PST)
+ Wed, 11 Dec 2024 09:27:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,40 +46,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46ee7ddc-b7e5-11ef-a0d5-8be0dac302b0
+X-Inumbo-ID: 4589c99e-b7e5-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733938082; x=1734542882; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1733938080; x=1734542880; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GWSH1TKGIXYk6lQDxdJzHqmgxJre5HbeAcdBxlqmawo=;
-        b=bIn+98zm0J/yFYjrIpqMMy46v6pFV9B4cHanHLY3VvosZYeIixM4PBYU1auRLjj2Tb
-         2YomqT644EdOiyXGDoBOJFa4NlX5vm4NZBw+1lsoWHV61sc7SqydKTb3oR0STm++1JVd
-         4R4UuDR7XlmkNQIFTsEjy+qc8c24lpgGCD9P0faPdyYdbtds8wJr1Wx012dVRGkTPKTi
-         mTGmw0HFhPrWj8ARfLiPtZpwNGooR/7bxNAs20kw3NrBipmVRK8NWSQ2+eOhzPiSEo4y
-         8DPj5EOh4enRc3eCLaWPDXSvV3Qxsv212Oaf3KQwlhVMsWZkzgMfXYCtIMVjKvLn70oI
-         Opxg==
+        bh=kV5fnGT+IURuJB8/ySzjdk0FAfLfvbDV4kQWrHvyXVA=;
+        b=dqXcSD42gGbIpSEY8fo7L/WBDY0yi3/qqbp0eAH7QW4fLn4TDCb0zxH/NQ51/aOPkY
+         lYkBVAT1cHIz5z6beiFQyOqAujQb6lqb7aizduXHtmT6WaQ240U65gnNBjCl/S8rbaeN
+         4G0k+NB2WNLqIP5MJ7/pWkeWDQ/NU7+mnhWxqbSEVH60guKjezPzgW0nG5gK2JRFcpxS
+         N92kbD5UaTC6FCHACAIaYH0kxJ4oAcCylS2EydAm3zma19m1KV7PbG8JQ1HaKFc1975+
+         qv9sULAUkty44r2mkNuu4UL0Wf1OG3KNmUEE2LB3Ajc21i+vgyTDBnewzK5GE0Y0NMmY
+         yQhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733938082; x=1734542882;
+        d=1e100.net; s=20230601; t=1733938080; x=1734542880;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=GWSH1TKGIXYk6lQDxdJzHqmgxJre5HbeAcdBxlqmawo=;
-        b=BUcL4Ru6uWFdd8s8UGNi+074uqChOD4Ag6+b/sqU4frpOjzPtH0dkd9yyXKOGyxs2j
-         W35Q0LW7/Dd6WON37S9Q1j5AwJMkC7737B42WFbmV/OewYesIBGczO+Q4J7vLhZQVeVT
-         7Nu5bQFHzSx4J3HVlGH0JTyfYA9RBITnUC83hIDvnyfqUaHXukThxfnBItkjFi/PjyuJ
-         oeqQXgbrZq363m42e/hZJEAThyybM5hLUBRVaDo05D4exAaJaIYklMDpUQB11hHNKqF6
-         MnrELNoSrQ/9H2feUpRNUiZKIpWkxksg0WylCYEdvRG2Bh5oOPeOrhDySVqC7hw47M+Z
-         V1FA==
-X-Gm-Message-State: AOJu0YySMl6+ZwY4l6vur2D3+rKUFX9T8fveKZsOPLfhB8D7rF+8tp29
-	0dtY/Da9OyXLJ/IKLxRIZ+NnIV5FRfc8sLy+b1Ez/dreh8JaagcKhwY0LLSN
-X-Gm-Gg: ASbGncsh3fjWREjcexLpcPzSLAMHLQY8UclW2CHGiuv/HBQMZPM3o1O9xEhd67j42Wz
-	n8byqHrLoT2ptGU5m7Z1TW0Q/V51GDLq2qimWkPe5AnavegYlJ9/ndznba03P5uUZaruwLvwCBb
-	lYAkN93mamThxSJXYzyorQDai25iJQWmplaCNjocuB/VXR+TS50kJiVn0OOyvp12Azo0PQHi9CB
-	nGXIcFioJSxGidwDKiL4KO5xA/5AObAtwJYiLIgMAnGZfgVh2X3Dq4=
-X-Google-Smtp-Source: AGHT+IHbe07tD/GOgdxTxM0a2FBOELv2ZPSnPlzQYVX0S7GWmyenULQ+sfEkyhmENBGKMEnz6YDsVg==
-X-Received: by 2002:a17:906:3182:b0:aa6:ac9b:6824 with SMTP id a640c23a62f3a-aa6c1ae4bbemr65539266b.5.1733938081636;
-        Wed, 11 Dec 2024 09:28:01 -0800 (PST)
+        bh=kV5fnGT+IURuJB8/ySzjdk0FAfLfvbDV4kQWrHvyXVA=;
+        b=FDICHEwAsUK2bsbqCQc7VeZozNV8auFqA2Iy2XyRDEda0Hg8tkjLMYFyX0jwYnwDmZ
+         XKNBXd2XSEI3JwmEkDPQpYpXBwFS3WooIWHbAKHkPLXC6Lo5ROM/7XnPfsqGB1B4OECr
+         JBPR4s0W+nP+Rff9ubMLJumVjHpM2NjtF9bQvmrIM2FRTX4nakr+IAvWxSDkCUEqqq0o
+         yrJsPJ4yKndZVYExzDoRwx7jhkuXUa+CTfDTUnHRWZFlPmJcvazMe68bJr6MoLnzx7cl
+         JnDPDflm5hCXeKKkmDEkv38e8b90GFL1KK/atbjw2Ep440xs2pldaqCDUbJQcuYaEZ8V
+         /drQ==
+X-Gm-Message-State: AOJu0YwtJ95DRMKK6MgeK3s1jkbocK4cmFuUwlfdPCdXMXt8CtmVhFpO
+	6ovkQXvb4JbiITQiJiFSKxz8mHQXlDjXiwS6kPgw/nf2ByeNdp3qAG0W7cbl
+X-Gm-Gg: ASbGncuiHaQVzSe1DquEdfuUPw0vAn2Ryn4avEvKSN2XmS+TFIdgb21CoWeZy4pXrtJ
+	4m2mFUENWSBzTRor4Up9k8zP/v5f1YQ8/45pO50wDWZN7IFGHGn+xlmFyYcqeqsGej12g7eqY7o
+	JgrESNf5UOeyb/Z93nh7T7uX5ugQVQQLvI/X5NzsVae/aqeOE4BflEFWTRYw4prbL79yp+XufKz
+	biVpvhmK5cz6bLzq+jRTjRaswegRfNoZSOAfjVyYgYxBXg2kUeMJqA=
+X-Google-Smtp-Source: AGHT+IEPTLL+WUKby+ninBNWHjY1Dl2NtcLd1rZlicn1EDp6HPCuCO5wX72e+3d1olMJCiXIrwYWnA==
+X-Received: by 2002:a17:907:61a7:b0:aa6:715a:75b5 with SMTP id a640c23a62f3a-aa6b139781emr309980866b.46.1733938079661;
+        Wed, 11 Dec 2024 09:27:59 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -93,175 +93,85 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 6/7] xen/riscv: implement prereq for DTB relocation
-Date: Wed, 11 Dec 2024 18:27:50 +0100
-Message-ID: <2d2d6ca32aa7db490d47154530f01216651ba335.1733937787.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 4/7] xen/riscv: add {set,clear}_fixmap() functions for managing fixmap entries
+Date: Wed, 11 Dec 2024 18:27:48 +0100
+Message-ID: <3d34dbc7a8af373b799d1e0c1c99acfa3798f37d.1733937787.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1733937787.git.oleksii.kurochko@gmail.com>
 References: <cover.1733937787.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-DTB relocatin in Xen heap requires the following functions which are
-introduced in current patch:
-- xvmalloc_array()
-- copy_from_paddr()
+Introduce set_fixmap() and clear_fixmap() functions to manage mappings
+in the fixmap region. The set_fixmap() function maps a 4k page ( as only L0
+is expected to be updated; look at setup_fixmap_mappings() ) at a specified
+fixmap entry using map_pages_to_xen(), while clear_fixmap() removes the
+mapping from a fixmap entry by calling destroy_xen_mappings().
 
-For internal use of xvmalloc, the functions flush_page_to_ram() and
-virt_to_page() are introduced. virt_to_page() is also required for
-free_xenheap_pages().
+Both functions ensure that the operations succeed by asserting that their
+respective calls (map_pages_to_xen() and destroy_xen_mappings()) return 0.
+`BUG()` is added to trigger a failure if any issues occur during
+the mapping or unmapping process.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V2:
- - Drop variable directmap_virt_end.
- - Update ASSERT in virt_to_page() to use DIRECTMAP_VIRT_END instead of
-   variable directmap_virt_end.
- - Declare local varibale v as const inside flush_page_to_ram().
- - Declare copy_from_paddr() in riscv/setup.h as in the future it will be
-   used for copying kernel in guest memory.
- - Code style updates for copy_from_paddr().
- - Make l and s variable in copy_from_paddr() as the virables' initializers.
- - Drop call of clean_dcache_va_range(dst, l) in copy_from_paddr() as the
-   necessiry of it is Arm-specific:
-     After memcpy'ing the kernel in guest memory Arm need to flush the dcache
-     to make sure that the data actually reaches the memory before we start
-     executing guest code with caches disabled.
-   RISC-V has caches always enabled thereby there is no such issue for RISC-V.
- - Make local variable src in copy_from_paddr() as const.
- - Update the commit message and subject: drop information of relocate_fdt()
-   introduction and rename it to "prereq for DTB relocation".
- - Add BUG_ON() inside flush_page_to_ram() to check the return value of
-   clean_and_invalidate_dcache_va_range().
- - Move relocate_fdt() introduction to the next patch to make this patch
-   compilable.
+ - Update the commit message.
+ - drop local variables from {set, clear}_fixmap(); use if (... != 0) + BUG().
 ---
- xen/arch/riscv/include/asm/mm.h    |  8 ++++++--
- xen/arch/riscv/include/asm/page.h  | 11 +++++++++--
- xen/arch/riscv/include/asm/setup.h |  4 ++++
- xen/arch/riscv/setup.c             | 26 ++++++++++++++++++++++++++
- 4 files changed, 45 insertions(+), 4 deletions(-)
+ xen/arch/riscv/include/asm/fixmap.h |  5 +++++
+ xen/arch/riscv/pt.c                 | 17 +++++++++++++++++
+ 2 files changed, 22 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index 699ed23f0d..292aa48fc1 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
+diff --git a/xen/arch/riscv/include/asm/fixmap.h b/xen/arch/riscv/include/asm/fixmap.h
+index 818c8ce07b..e399a15f53 100644
+--- a/xen/arch/riscv/include/asm/fixmap.h
++++ b/xen/arch/riscv/include/asm/fixmap.h
+@@ -32,6 +32,11 @@
+  */
+ extern pte_t xen_fixmap[];
+ 
++/* Map a page in a fixmap entry */
++void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags);
++/* Remove a mapping from a fixmap entry */
++void clear_fixmap(unsigned int map);
++
+ #define fix_to_virt(slot) ((void *)FIXMAP_ADDR(slot))
+ 
+ static inline unsigned int virt_to_fix(vaddr_t vaddr)
+diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
+index 86bd9ea613..3407fda937 100644
+--- a/xen/arch/riscv/pt.c
++++ b/xen/arch/riscv/pt.c
 @@ -8,6 +8,7 @@
- #include <xen/const.h>
- #include <xen/mm-frame.h>
- #include <xen/pdx.h>
-+#include <xen/pfn.h>
- #include <xen/types.h>
+ #include <xen/pmap.h>
+ #include <xen/spinlock.h>
  
- #include <asm/page-bits.h>
-@@ -148,8 +149,11 @@ static inline void *page_to_virt(const struct page_info *pg)
- /* Convert between Xen-heap virtual addresses and page-info structures. */
- static inline struct page_info *virt_to_page(const void *v)
- {
--    BUG_ON("unimplemented");
--    return NULL;
-+    unsigned long va = (unsigned long)v;
-+
-+    ASSERT((va >= DIRECTMAP_VIRT_START) && (va <= DIRECTMAP_VIRT_END));
-+
-+    return frametable_virt_start + PFN_DOWN(va - directmap_virt_start);
- }
- 
- /*
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index 54c6fe6515..fbb35a6673 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -7,6 +7,7 @@
- 
- #include <xen/bug.h>
- #include <xen/const.h>
-+#include <xen/domain_page.h>
- #include <xen/errno.h>
- #include <xen/types.h>
- 
-@@ -175,10 +176,16 @@ static inline void invalidate_icache(void)
- #define clear_page(page) memset((void *)(page), 0, PAGE_SIZE)
- #define copy_page(dp, sp) memcpy(dp, sp, PAGE_SIZE)
- 
--/* TODO: Flush the dcache for an entire page. */
- static inline void flush_page_to_ram(unsigned long mfn, bool sync_icache)
- {
--    BUG_ON("unimplemented");
-+    const void *v = map_domain_page(_mfn(mfn));
-+
-+    BUG_ON(clean_and_invalidate_dcache_va_range(v, PAGE_SIZE));
-+
-+    unmap_domain_page(v);
-+
-+    if ( sync_icache )
-+        invalidate_icache();
- }
- 
- /* Write a pagetable entry. */
-diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
-index 844a2f0ef1..c9d69cdf51 100644
---- a/xen/arch/riscv/include/asm/setup.h
-+++ b/xen/arch/riscv/include/asm/setup.h
-@@ -3,10 +3,14 @@
- #ifndef ASM__RISCV__SETUP_H
- #define ASM__RISCV__SETUP_H
- 
-+#include <xen/types.h>
-+
- #define max_init_domid (0)
- 
- void setup_mm(void);
- 
-+void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
-+
- #endif /* ASM__RISCV__SETUP_H */
- 
- /*
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 9680332fee..bea3f27c4d 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -12,6 +12,7 @@
- #include <public/version.h>
- 
- #include <asm/early_printk.h>
 +#include <asm/fixmap.h>
- #include <asm/sbi.h>
- #include <asm/setup.h>
- #include <asm/smp.h>
-@@ -26,6 +27,31 @@ void arch_get_xen_caps(xen_capabilities_info_t *info)
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-     __aligned(STACK_SIZE);
+ #include <asm/flushtlb.h>
+ #include <asm/page.h>
  
-+/**
-+ * copy_from_paddr - copy data from a physical address
-+ * @dst: destination virtual address
-+ * @paddr: source physical address
-+ * @len: length to copy
-+ */
-+void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
+@@ -433,3 +434,19 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+ {
+     return pt_update(virt, INVALID_MFN, nr_mfns, PTE_POPULATE);
+ }
++
++/* Map a 4k page in a fixmap entry */
++void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags)
 +{
-+    const void *src = (void *)FIXMAP_ADDR(FIX_MISC);
-+
-+    while ( len )
-+    {
-+        unsigned long s = paddr & (PAGE_SIZE - 1);
-+        unsigned long l = min(PAGE_SIZE - s, len);
-+
-+        set_fixmap(FIX_MISC, maddr_to_mfn(paddr), PAGE_HYPERVISOR_RW);
-+        memcpy(dst, src + s, l);
-+        clear_fixmap(FIX_MISC);
-+
-+        paddr += l;
-+        dst += l;
-+        len -= l;
-+    }
++    if ( map_pages_to_xen(FIXMAP_ADDR(map), mfn, 1, flags | PTE_SMALL) != 0 )
++        BUG();
 +}
 +
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
- {
++/* Remove a mapping from a fixmap entry */
++void clear_fixmap(unsigned int map)
++{
++    if ( destroy_xen_mappings(
++            FIXMAP_ADDR(map),
++            FIXMAP_ADDR(map) + PAGE_SIZE) != 0 )
++        BUG();
++}
 -- 
 2.47.1
 
