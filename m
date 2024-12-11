@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C07E77186
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 17:28:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.855076.1268107 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18E36E77180
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 17:40:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.855181.1268187 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLQVE-0007JZ-JU; Wed, 11 Dec 2024 17:28:00 +0000
+	id 1tLQgr-0006kB-US; Wed, 11 Dec 2024 17:40:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 855076.1268107; Wed, 11 Dec 2024 17:28:00 +0000
+Received: by outflank-mailman (output) from mailman id 855181.1268187; Wed, 11 Dec 2024 17:40:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLQVE-0007JS-H0; Wed, 11 Dec 2024 17:28:00 +0000
-Received: by outflank-mailman (input) for mailman id 855076;
- Wed, 11 Dec 2024 17:27:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ntru=TE=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tLQVC-0007JC-O3
- for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 17:27:58 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 432b0522-b7e5-11ef-a0d5-8be0dac302b0;
- Wed, 11 Dec 2024 18:27:57 +0100 (CET)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-aa684b6d9c7so666028366b.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Dec 2024 09:27:57 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa6656f306csm687297466b.61.2024.12.11.09.27.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 09:27:55 -0800 (PST)
+	id 1tLQgr-0006k4-RL; Wed, 11 Dec 2024 17:40:01 +0000
+Received: by outflank-mailman (input) for mailman id 855181;
+ Wed, 11 Dec 2024 17:40:01 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1tLQgq-0006cD-W6
+ for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 17:40:01 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1tLQgq-00FZd6-1P;
+ Wed, 11 Dec 2024 17:40:00 +0000
+Received: from [15.248.2.30] (helo=[10.24.66.86])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1tLQgq-00F3JH-1W;
+ Wed, 11 Dec 2024 17:40:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,102 +41,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 432b0522-b7e5-11ef-a0d5-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733938077; x=1734542877; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VzX0EG8we7tfVPdrZl970dxIaE2lTCTt+eDvQIAPb6U=;
-        b=gyy4oAQ4JzDOaQWwLKl+lgiA/U8Q8LXUUB3k+NOX2+AzGor4obsc880ws+/SZNZDAZ
-         CjHk7JwwvYS7ZqXBH/AdeLPh9BQ84EVBOPs871YkKEkrjJGgQG0r6kJPqTOLajoxGHB4
-         WMShlHL9zsyCRsz4f3fcx/yRwgk/mWzGW878n933DLvR/26DMVHai4eaMtA+gKtjaovn
-         kqFSF4B/5sCdhvHTtFzYVpWJdKdaumd+vkj5FyDoOL28lK20NloDZVS+m1/r3EHy+EHM
-         RDdyDq1NhesejWlPQSRz2Drib8YuqDyJOl8WPxSAvJLLgRU61M1yxp/eXv+sih9U/qHj
-         ThdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733938077; x=1734542877;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VzX0EG8we7tfVPdrZl970dxIaE2lTCTt+eDvQIAPb6U=;
-        b=cj0CQu1FeVaWfnAYLQBBE6usbKWNTl4RpQUyM/2Y38u+BnTkc7wftlJaO+E4tQhc7r
-         75axNEOpoexl8iQjczyjMEYrCnZOblZUdLtIJOtQ0eu9ZOssVpD/ArfHiFJoY2YMNpkY
-         GIlvwex8FkSopsxgnYxM4A8wChDx4Ct0M/6KvlZxBwwIdqbQbTXHP17JXIh0K6aMprKl
-         YifZDIdaBK4Um6k3imaLusEp6hbaxVejI/dHerTk45ad4QmpDYdfv3cJDpy4RdME+fLo
-         +JKO4e5ghJXgnNQ2QsitFPLkvlLei0sgXHIEvx56BJc0pURemT2niyY9ZZr7z16TPxqP
-         xK0Q==
-X-Gm-Message-State: AOJu0YzIBOGRUFZobMsWxtsu4jU1c0LIJZhWaOoT6iVxTnYegdOnVu35
-	dVsnBiSefaGQyxMTciGIe4sIi6bHCJEqHSkIdiDF4/9+28pZkCZiO1V9gYYc
-X-Gm-Gg: ASbGncunwMxxa4fUK3lkz8+LK3zsinGQ94NN94ZCHhP/oJ8vc1K2VvPK6SMiWdGuJlL
-	QRc+uRvB08qwrtotwKjUh/Hm4lFJOFstMyfgEZnnFjQMjnnwsVcrpCkPKmqMiMGbkvhMcDE2+Xr
-	Es0m7ubFxq8Xo2BrMZN0uct8NjoyzOnmr6/dhDNPlWc/t5pYdjtJcNzhcNDiVgfTVXfcgqJarh1
-	Qn2pI8zjQCxG7OTjxyBWJnlqb/2YrVYrKdew6gsoLvHGO1kq0IkHT8=
-X-Google-Smtp-Source: AGHT+IHa49oG7xF72kcIsHSUqvy7xJ4GbRUC02XLty084JogjHEMWJU8D7j8yPmTBBEzTL036/kfmg==
-X-Received: by 2002:a17:906:9a95:b0:aa6:6276:fe5a with SMTP id a640c23a62f3a-aa6c1ce75f7mr70820866b.43.1733938075671;
-        Wed, 11 Dec 2024 09:27:55 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 1/7] xen/riscv: update layout table in config.h
-Date: Wed, 11 Dec 2024 18:27:45 +0100
-Message-ID: <c305ae5003da25d7ea4d4aa5602c4b22f83df4a8.1733937787.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <cover.1733937787.git.oleksii.kurochko@gmail.com>
-References: <cover.1733937787.git.oleksii.kurochko@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=nhFuV5+IEdDAr0T0ihXpY3oY+VU2mzJUxzfxzT/CMiI=; b=qoIpejGKW2JPH5Ik2vjiA0ulOS
+	vVqXdmblh4WV3BqM2xzHx+aEvpFXx8Q/qlxE6mXdbTRPTZv70MSQddJaF5YLAYg7KdsEOa2bm7s1V
+	4jMoi6MwFlu3Y4rXqqkB0H6+jsX9xte/IM4COa/XAUhLxPTPDva3uHD+4BfFUmP1g15c=;
+Message-ID: <f91699f4-1c40-44df-abd1-baa7cef7554e@xen.org>
+Date: Wed, 11 Dec 2024 17:39:58 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm/domain_build: Make find_unallocated_memory() more
+ generic
+Content-Language: en-GB
+To: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20241210101001.91578-1-michal.orzel@amd.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20241210101001.91578-1-michal.orzel@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Make all upper bounds (end addresses) for areas inclusive to align
-with the corresponding definitions.
+Hi Michal,
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v2:
- - new patch
----
- xen/arch/riscv/include/asm/config.h | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+On 10/12/2024 10:10, Michal Orzel wrote:
+> At the moment, find_unallocated_memory() is only used to retrieve free
+> memory ranges for direct mapped domains in order to find extended
+> regions. It is not generic as it makes assumptions as for the place at
+> which it's being called (domain memory already allocated, gnttab region
+> already found) and hardcodes the memory banks to be excluded.
+> 
+> Make the function more generic, so that it can be used for other
+> purposes whenever there is a need to find free host memory regions (e.g.
+> upcoming LLC coloring series). Allow passing array with memory banks as a
+> parameter together with a callback to populate free regions structure,
+> as the logic may differ depending on the needs.
+> 
+> Add find_host_extended_regions() to be called from make_hypervisor_node()
+> to contain the logic to find extended regions for domains using host
+> memory layout that are not permitted to use IOMMU.
+> 
+> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index 4954677aff..826e5c7172 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -41,17 +41,17 @@
-  * Start addr          | End addr         | Slot       | area description
-  * ============================================================================
-  *                   .....                 L2 511          Unused
-- *  0xffffffffc0a00000  0xffffffffc0c00000 L2 511          Fixmap
-+ *  0xffffffffc0a00000  0xffffffffc0bfffff L2 511          Fixmap
-  *                   ..... ( 2 MB gap )
-- *  0xffffffffc0400000  0xffffffffc0800000 L2 511          FDT
-+ *  0xffffffffc0400000  0xffffffffc07fffff L2 511          FDT
-  *                   ..... ( 2 MB gap )
-- *  0xffffffffc0000000  0xffffffffc0200000 L2 511          Xen
-+ *  0xffffffffc0000000  0xffffffffc01fffff L2 511          Xen
-  *                   .....                 L2 510          Unused
-- *  0x3200000000        0x7f40000000       L2 200-509      Direct map
-+ *  0x3200000000        0x7f7fffffff       L2 200-509      Direct map
-  *                   .....                 L2 199          Unused
-- *  0x30c0000000        0x31c0000000       L2 195-198      Frametable
-+ *  0x30c0000000        0x31bfffffff       L2 195-198      Frametable
-  *                   .....                 L2 194          Unused
-- *  0x3040000000        0x3080000000       L2 193          VMAP
-+ *  0x3040000000        0x307fffffff       L2 193          VMAP
-  *                   .....                 L2 0-192        Unused
- #elif RV_STAGE1_MODE == SATP_MODE_SV48
-  * Memory layout is the same as for SV39 in terms of slots, so only start and
+With one remark below:
+
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+> ---
+> This is a prerequisite patch for LLC coloring series patch 3.
+> For dom0 LLC coloring, we just need to pass resmem and gnttab in mem_banks.
+> ---
+>   xen/arch/arm/domain_build.c | 97 +++++++++++++++++++++----------------
+>   1 file changed, 55 insertions(+), 42 deletions(-)
+> 
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index 2c30792de88b..500005079b88 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -901,31 +901,26 @@ int __init add_ext_regions(unsigned long s_gfn, unsigned long e_gfn,
+>   }
+>   
+>   /*
+> - * Find unused regions of Host address space which can be exposed to Dom0
+> - * as extended regions for the special memory mappings. In order to calculate
+> - * regions we exclude every region assigned to Dom0 from the Host RAM:
+> - * - domain RAM
+> - * - reserved-memory
+> - * - static shared memory
+> - * - grant table space
+> + * Find unused regions of Host address space which can be exposed to domain
+> + * using the host memory layout (i.e. direct mapped or hardware domain). In
+
+NIT: I would use "e.g." rather than "i.e." because in the future we may 
+want to expose the host layout to a guest without necessarily having IPA 
+== PA. You could also drop the part in () because one could find the 
+definition on top of domain_use_host_layout().
+
+> + * order to calculate regions we exclude every region passed in mem_banks from
+> + * the Host RAM.
+>    */
+>   static int __init find_unallocated_memory(const struct kernel_info *kinfo,
+> -                                          struct membanks *ext_regions)
+> +                                          const struct membanks *mem_banks[],
+> +                                          unsigned int nr_mem_banks,
+> +                                          struct membanks *free_regions,
+> +                                          int (*cb)(unsigned long s_gfn,
+> +                                                    unsigned long e_gfn,
+> +                                                    void *data))
+>   {
+>       const struct membanks *mem = bootinfo_get_mem();
+> -    const struct membanks *mem_banks[] = {
+> -        kernel_info_get_mem_const(kinfo),
+> -        bootinfo_get_reserved_mem(),
+> -#ifdef CONFIG_STATIC_SHM
+> -        bootinfo_get_shmem(),
+> -#endif
+> -    };
+>       struct rangeset *unalloc_mem;
+>       paddr_t start, end;
+>       unsigned int i, j;
+>       int res;
+>   
+> -    dt_dprintk("Find unallocated memory for extended regions\n");
+> +    ASSERT(domain_use_host_layout(kinfo->d));
+>   
+>       unalloc_mem = rangeset_new(NULL, NULL, 0);
+>       if ( !unalloc_mem )
+
+Cheers,
+
 -- 
-2.47.1
+Julien Grall
 
 
