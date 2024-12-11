@@ -4,56 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE06DE7717D
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 20:55:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.855341.1268287 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C01E7717D
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 23:23:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.855365.1268302 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLTjo-0001wJ-QV; Wed, 11 Dec 2024 20:55:16 +0000
+	id 1tLW2h-0003bh-Cf; Wed, 11 Dec 2024 23:22:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 855341.1268287; Wed, 11 Dec 2024 20:55:16 +0000
+Received: by outflank-mailman (output) from mailman id 855365.1268302; Wed, 11 Dec 2024 23:22:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLTjo-0001wC-Nv; Wed, 11 Dec 2024 20:55:16 +0000
-Received: by outflank-mailman (input) for mailman id 855341;
- Wed, 11 Dec 2024 20:55:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tLW2h-0003bL-9E; Wed, 11 Dec 2024 23:22:55 +0000
+Received: by outflank-mailman (input) for mailman id 855365;
+ Wed, 11 Dec 2024 23:21:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RUTz=TE=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1tLTjn-0001w6-7e
- for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 20:55:15 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2061f.outbound.protection.outlook.com
- [2a01:111:f403:2414::61f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 36de4e19-b802-11ef-a0d5-8be0dac302b0;
- Wed, 11 Dec 2024 21:55:13 +0100 (CET)
-Received: from BL0PR02CA0136.namprd02.prod.outlook.com (2603:10b6:208:35::41)
- by PH8PR12MB6794.namprd12.prod.outlook.com (2603:10b6:510:1c5::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.18; Wed, 11 Dec
- 2024 20:55:07 +0000
-Received: from BL02EPF0002992E.namprd02.prod.outlook.com
- (2603:10b6:208:35:cafe::64) by BL0PR02CA0136.outlook.office365.com
- (2603:10b6:208:35::41) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.15 via Frontend Transport; Wed,
- 11 Dec 2024 20:55:06 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0002992E.mail.protection.outlook.com (10.167.249.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8251.15 via Frontend Transport; Wed, 11 Dec 2024 20:55:06 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Dec
- 2024 14:55:06 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Dec
- 2024 14:55:06 -0600
-Received: from [172.28.102.118] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Wed, 11 Dec 2024 14:55:05 -0600
+ <SRS0=9RZg=TE=heusel.eu=christian@srs-se1.protection.inumbo.net>)
+ id 1tLW1Z-0003Db-1t
+ for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 23:21:45 +0000
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.73])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id acf6f758-b816-11ef-99a3-01e77a169b0f;
+ Thu, 12 Dec 2024 00:21:40 +0100 (CET)
+Received: from localhost ([141.70.80.5]) by mrelayeu.kundenserver.de (mreue109
+ [212.227.15.183]) with ESMTPSA (Nemesis) id 1Mo6zF-1twmb41wmx-00fwPC; Thu, 12
+ Dec 2024 00:21:37 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,163 +41,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36de4e19-b802-11ef-a0d5-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y/EepAqvEW71O5iWgLvLMpaTjsyYh0z6kK2odW35Rgy1MENRjduOCZfTLrzeRKN0XK1+nxyo5NzMYs4o72gA1V2K4NopSIEFZPzhpyx3HszVexJ2TmfizUTRHgDFfABpxF/TRBJ5BQbqCVaydlCecJdjR4M/zMjdd5EQAEoed4XGLfW7sXsfj5uMYD7rOQ2zutzn0Ps/81Ix4UCpR1QN46BLghjebL20GKZ0+kGTzVVOezz8YC9gcIHtA9KkCSvIzA1BHrv/YunWEZDmiYJN8S4quNk+uDky5kJ0mMKgIXHe+RNc2ChzH1Rd9HyhA2uhwn++Wj7h7Ec+steoC40tOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZAv7KRx89DhcXcVv6bLoGdu/cM2Loc4RW/Vc9i+/tv4=;
- b=GZ1gC+7CIT30IlszSYdJgeYj+HbKVGlZWjjD5PKDlC9hQeCUEIn9urTrRBPXvjBtWphBRswn8bPPymf8jmn8CQPs67T5DxaFMWXwPQJfqmWqMeDzxrNQuJRQcR9YY5wz9uQe2BzpiZIXmcq1KkUp9xqHX2zF/7lpxDkwn/YlfDgR0XDlZeRUCPgkXfBCxuc0TBpA3Q5qWUQGFzPAZwPd2Dqmfokc+pW7owGYzf10GCDSib43819bsfkFejnwlUnveSaObK3PyqPnsacHDJS7qxVOGiE7hHCAmxYaQx7kRs+a3BCqRRCZhLByv+Q7LJIQqLDDsVPXu5NKlmpDZO/gIA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZAv7KRx89DhcXcVv6bLoGdu/cM2Loc4RW/Vc9i+/tv4=;
- b=ei0HkYuJChAuiDS0hf8XCrtE49KlcFtl2S/eTjbt6rGwySYyBgQA3Uy3VwOeezB8fgyvJuZBMFlyEivZ9wc+fr/gqmRcibUPDjs6vasC6inxQJwhruQOm+2PPLu9veQUSxP2cA+ZIeEN+D1jFB8p/E7pwEHyUfLsar3O3MeRNUA=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <27be3779-a192-4e64-a882-cf6e6c9bb549@amd.com>
-Date: Wed, 11 Dec 2024 15:55:05 -0500
+X-Inumbo-ID: acf6f758-b816-11ef-99a3-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=heusel.eu;
+	s=s1-ionos; t=1733959297; x=1734564097; i=christian@heusel.eu;
+	bh=X+C0SkHj3MaQtDSgienyW0MYtS9PYkivpmVdSFfEqAs=;
+	h=X-UI-Sender-Class:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:In-Reply-To:cc:
+	 content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=meZ7K8wpISnGb7HlNSceUMlXxcFdIy5ldwCI0nJ/h2znE5vOdfisEQGVxfnjcEPg
+	 sNkfQvXTfmyR0wb207zB/BwnibGuBKyVBSEt2vB4yfTmlDUY999MVL5ZblFZo7vq6
+	 PV3WYIAeNI5OBHBoSr5GBRomfE3kZcrbyzoewoTnqm3akHkIvqSYK7dqll6DJ8pjZ
+	 uHTaWVrT8SYjdMDg7+OeiFFB+Zm7nkIkIKaf3m3LeymwvCNSzMRfcVA4r8TdC0LGw
+	 fkel85g7Tud6xL3+UwFbjBDmsDfBkOS9kWiN3ID49PHMr7QnGeyIScIFwIQiZRPqP
+	 urt8cv0MvRvO6sZZxQ==
+X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
+Date: Thu, 12 Dec 2024 00:21:36 +0100
+From: Christian Heusel <christian@heusel.eu>
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>, 
+	Jason Andryuk <jandryuk@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, regressions@lists.linux.dev, 
+	xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [REGRESSION] Linux 6.6.64 crashes when booting as PVH domU
+Message-ID: <222e15c2-ca70-421e-8034-9dace7087920@heusel.eu>
+References: <Z1l6XbHP6BTTZSwr@mail-itl>
+ <fe8db5b2-7524-49ea-ab8e-21f831dc009f@suse.com>
+ <CAMj1kXHSiCo7FH0Mo-_R9HjxhthddPUZfgm5c8yj7vjGvgfTPg@mail.gmail.com>
+ <Z1mF0UZPNLjYAJI7@mail-itl>
+ <CAMj1kXFVd+2n1fRoOriwmAPH8yX22gSy7_m_1SVjtoG3r_=-Tw@mail.gmail.com>
+ <Z1mWFcm_036BrvEq@mail-itl>
+ <2024121144-false-playtime-968e@gregkh>
+ <CAMj1kXEH4jaFyFMMN41UqdkjfSrN19cwJsiAYnX6jETvDagF-g@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] xen/cppc: introduce cppc data upload sub-hypercall
-To: Penny Zheng <Penny.Zheng@amd.com>, Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>
-CC: Ray Huang <Ray.Huang@amd.com>, Xenia Ragiadakou
-	<Xenia.Ragiadakou@amd.com>, <xen-devel@lists.xenproject.org>,
-	<linux-kernel@vger.kernel.org>
-References: <20241205054252.471761-1-Penny.Zheng@amd.com>
- <20241205054252.471761-5-Penny.Zheng@amd.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <20241205054252.471761-5-Penny.Zheng@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992E:EE_|PH8PR12MB6794:EE_
-X-MS-Office365-Filtering-Correlation-Id: 62bd73dd-5c0c-4121-15a2-08dd1a2617ec
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?SndveURHc2JwOFYrdFVkUXBkakxiRm9NV1Rhc1EzeFBsZ2tzcjVjTWoyMEZP?=
- =?utf-8?B?b2xKQVRMNElRV3ZoenlGZmc2TXdSV2V2K04xUFovVzMvWTRUbGN4cEk2L3k1?=
- =?utf-8?B?OTBFRXNWNzY0Ui9RalJZOE5QYmd4THhpRHdBQ2ZtSkxZTVdYME1QNmtpTzNV?=
- =?utf-8?B?bVFkTHhiMEtibDBCcnNNY2o4cTMxWUxOdWZlQUN4YUZ5cm1Cb0FMOGtrOWlE?=
- =?utf-8?B?SUJYSWZoaUtyV1pTTkQ4ZzIrQW11VWI2WGJTMGg4ZDRzbVFPNUpOK3pRak5y?=
- =?utf-8?B?TlJqeXFZYzNMZk93QUdOb2FsOWhDb2pITWVkSW91WmlESEhMRTlIZlRpTitv?=
- =?utf-8?B?SzNKY2tPU09qd3hGWG4zalpkSHlkNWk3aUdybUlZUURrYXkydENCOXpjV2Vn?=
- =?utf-8?B?dTFnTjZUY1hVbW1YdFgzYllHcFkrYTB0M1oxb21MT3VVWTJNNElVTm1uSTZE?=
- =?utf-8?B?ZzUvSEdKd0Q2WWxvb2Q4N2wrM01oeU1WR2RiOFQ2UjI1MmdGSmlTTWJCT2JN?=
- =?utf-8?B?aEpEZk92N3FJQTRmb0QyRTlIZlVGWTA0bm1STS9Zb2hpZzhPam4reTZPV2c2?=
- =?utf-8?B?L3o1ZGxHOEVTcTgydlExRHd5dGJrRnFYWU1GNld6T3N3MzRTcGhialhXcTJx?=
- =?utf-8?B?MG1iYWorTWkvN1hkc3BNMTQrMWdub2RpZm9BVUhZRGV5TFhUZmpzRlU1UXRV?=
- =?utf-8?B?WHFEc0dLSzJSMTFiK0x3MmlwYXNObzZzWHhnOWJlWlc1am52cGlURXRHdUdj?=
- =?utf-8?B?REM2UkNZcjA2YkxuajgrOGo2aSswTVF1NmUwaUhhYWo1Wlp4Q1BSaE9ybTVQ?=
- =?utf-8?B?RGtGaFN3NUlNWlBuMnN4U1hWcjdHd055Mi91M3lUNVZwaUZxemppekNxVmZN?=
- =?utf-8?B?Y0ZLMGZNOTdNWG5BcXpYU09MVmo5bHpqQjVnd0NUN0REWVk4SUJmL2JVOGYy?=
- =?utf-8?B?Y21FNGh5MmhlWnd0d2JUMzBhc0VxM0UzMHgxbGNtclVyNHJBSTZjdFNNYnRX?=
- =?utf-8?B?VlB5djBDdXkyb0gybXJzcWdSV2RYNGVXMUY2UC9OYmlEdnY5N1dleUtaaXpx?=
- =?utf-8?B?bkdVblg4OFpVZTJEcWEyVEpDdS9ZSTRsLy91eUZ3aXc1ODBOa1MvZXpjTEw1?=
- =?utf-8?B?dFdqZ1FWWjJQQnIra1FlMDJPTU13M1l3dUR5RzhwSUxKTFRZZ0pDNktvVGhZ?=
- =?utf-8?B?VXJ3QkhJU0ZVMExkMlk3TXZXVTIrVUZFNW5JdmNJeTAybWRpYktXaDZWMEF2?=
- =?utf-8?B?M1VhcTkvUEczWTlCVDJsY2haM2M4ekY0WFR2dmw0eC8vWlJHZ3lMdUtEbXVm?=
- =?utf-8?B?djBBM0FNMXJyazJzc2JlVUpweW45TDdmZlpnN3BObXVyazhZc1AzOENEUmxO?=
- =?utf-8?B?TUhUM1orVkZJQzJrQVVQUlBZZlRQOFdERXM2aytlanZ2d1Eyem5NMVdMb2dO?=
- =?utf-8?B?R0M2VUEwVEFEK2lkcm5ERnRnckNheGozdEdITWM1cnJqRXEyOEtqRGIxUXlI?=
- =?utf-8?B?eHpOek8xWlJxcFhxZDdhM1pOTDlMV1o3N2FKQ3RQZmplcTZ2b0hndUJkUFht?=
- =?utf-8?B?ekd6L25yS1VPUVdYSzVLc21rbGJURjYxRVZmUEFVVDFKSnNFc0M1Z1dPeG96?=
- =?utf-8?B?T1Z6T1NmcXJiaTJwVGU0N2hyS0Z2OTBod0FVQ3lpOFBsbW9yRTFIdktIOE5o?=
- =?utf-8?B?V1VrU1lFREk4M3djZloyZmlNL1pLSzZ0M1pYbHc3cG5Ydy9Ock9aRjBQRmEw?=
- =?utf-8?B?Ym1SdTlBVlpmZEdLTW9wUmcvdWFGaXd0NGFQMk90SEJjZ1ZaeGR3cU1nL2or?=
- =?utf-8?B?MGNqNnhDb09kUE5xZjNRZVJGSlBQSWRpOWl6c2s3eDYyTEdBVzZMLzV6RWdW?=
- =?utf-8?B?R1NFSmt1UkdTS1ZsZjdwRlc3YlNwOUhuaWVFSmxZdzQ4TjUwTzdwbTlFWURp?=
- =?utf-8?Q?iOUzpS1LscNjIzw2xuUzXmV9SfoP+MTe?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2024 20:55:06.8280
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 62bd73dd-5c0c-4121-15a2-08dd1a2617ec
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0002992E.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6794
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="eiwstsylbaon5chu"
+Content-Disposition: inline
+In-Reply-To: <CAMj1kXEH4jaFyFMMN41UqdkjfSrN19cwJsiAYnX6jETvDagF-g@mail.gmail.com>
+X-Provags-ID: V03:K1:gYOQOD8hQSxhz/imGEOxyxSITQEnr51PQ7bwoMIEojzMxnDQlrr
+ wRBmSyAVuIljmPHF8pmYIBqn07c59anH/TtteXadd2OZppBhArWssnkxI2gMjeDaYM1v32j
+ FVs3R0xzbshxbk2AAVBFQAWSx+zyZ3xc+329hxy3Hva1UvQIxAb3RKxwU/J4CrMtvonuLAU
+ chlnTa1IV25Tq4zwzaRog==
+UI-OutboundReport: notjunk:1;M01:P0:dDW7J3i4cKs=;sEte6PkHw1QrIQQmlfc6bdJ0xQj
+ 3xvV+jsFn/MVN/uyiK+HOJM4WkUZCv3jJSn7qIuDXSaYNtnlytLYm49WlysiFGZ/jOPJXxLzn
+ fu0o4mv2051dToibcTJgV2SJZ52pYKlRHcYxNPjLx0Pzl5w7zfDojUhLvqqiazPKPJSEgGQB6
+ DntUmKj2WowVf1TCGWhuiqdGlJ22HGO4bxRUvEv43u6jxk0jC83Z0y1UwLCFblU1TUTHcJ9+a
+ uNI47KVMcYIqpujCfPONaIrclmExxqb6LEtJMA0Pu1j5kzfjRJ8s6wTAI6qUyGm1Mp/dmvxKP
+ kYvmYVIge0TcatPSl49NVjR2/BlyLkLGGaPZ64UEkX5ptaDyjZl/4OemDJdTMDrqC5yF2Y0ly
+ js8JuetTUx21VqJ1U/vmRxAS5S3lX5+6EpmrCaI1+jLkEO56yYjcvfZhIRtAl+O1l31wA7A5f
+ Q/vu1RcgfAXx7kdBd5//+K6R8aYQj+YnEt8RuWX/G1xmNgg3y3Qg0P8oALlK2AEeKmbHTJSFx
+ QI+PjX/h9g421R1wTeNNnHcHgiB2TKAJJ1K88YYt83jyEcEA3gpAg3xXLl1AxzJn3bEISk4yR
+ HOvt0h23d8KfdCIkaQNS+bqFdfNjN+5/zRSbo01xGVpahPZp9RYSHJ2tTT8UOWeHTIZwjar9D
+ 1tTGv/8hEKrlnWV/2oqdyaYef1t5tOQ5PWSvuPINxdLWxbJIAHPJkPxV4umpTXA21RF/aeSdO
+ UNchJgEoT9LYUdzenHsgp5d6C1Y7T1nnnuslGk4t3NXkpMuhKkWJUwDUml+4NaMcegLFKrG5+
+ a0vpOyNes2g8sQkuSVfwjUk0fjTPfPqtn7WmxmpbgCxsFbFOGJEycZWdUctfEEKvpPlA5MB8B
+ vI2uqa8DIXoewE7fH/CuwiUxQ2oCOamnlpJLrGJt5XMpbkIf5HIsMY/Op2sl4A8u80aLOACH/
+ JsNExE0uWd7EZhl4BR6gvkLDgy9aLmYyle/gM7BkgD2dJxJ54/PVM98WBR3w+iTgrJ9w310WU
+ 8QRERib5sQHfnwmM09nJxTLxi0BJbfHWiv/HNQi
 
 
+--eiwstsylbaon5chu
+Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [REGRESSION] Linux 6.6.64 crashes when booting as PVH domU
+MIME-Version: 1.0
 
-On 2024-12-05 00:42, Penny Zheng wrote:
-> As Xen is uncapable of parsing the ACPI dynamic table, this commit
-> introduces a new sub-hypercall XEN_PM_CPPC to deliver CPPC perf
-> caps data.
-> 
-> Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+On 24/12/11 04:10PM, Ard Biesheuvel wrote:
+> On Wed, 11 Dec 2024 at 14:46, Greg Kroah-Hartman
+> <gregkh@linuxfoundation.org> wrote:
+> >
+> > On Wed, Dec 11, 2024 at 02:39:33PM +0100, Marek Marczykowski-G=F3recki =
+wrote:
+> > > On Wed, Dec 11, 2024 at 01:37:52PM +0100, Ard Biesheuvel wrote:
+> > > > (cc Greg)
+> > > >
+> > > > On Wed, 11 Dec 2024 at 13:30, Marek Marczykowski-G=F3recki
+> > > > <marmarek@invisiblethingslab.com> wrote:
+> > > > >
+> > > > > On Wed, Dec 11, 2024 at 01:24:08PM +0100, Ard Biesheuvel wrote:
+> > > > > > On Wed, 11 Dec 2024 at 12:53, J=FCrgen Gro=DF <jgross@suse.com>=
+ wrote:
+> > > > > > >
+> > > > > > > Jason, Ard,
+> > > > > > >
+> > > > > > > I guess there are some prereq patches missing in stable 6.6.y=
+ branch?
+> > > > > > >
+> > > > > > >
+> > > > > > > Juergen
+> > > > > > >
+> > > > > > > On 11.12.24 12:41, Marek Marczykowski-G=F3recki wrote:
+> > > > > > > > Hi,
+> > > > > > > >
+> > > > > > > > With Linux 6.6.64 I get the following crash on domU boot:
+> > > > > > > >
+> > > > > > > > (XEN) d5v0 Triple fault - invoking HVM shutdown action 1
+> > > > > > > > (XEN) *** Dumping Dom5 vcpu#0 state: ***
+> > > > > > > > (XEN) ----[ Xen-4.19.0  x86_64  debug=3Dn  Tainted:  M     =
+]----
+> > > > ...
+> > > > > > > >
+> > > > > > > > Linux 6.6.63 works fine.
+> > > > > > > >
+> > > > > > > > Looking at the changes, I suspect one of those:
+> > > > > > > >
+> > > > > > > >      83d123e27623 x86/pvh: Call C code via the kernel virtu=
+al mapping
+> > > > > > > >      f662b4a69e1d x86/pvh: Set phys_base when calling xen_p=
+repare_pvh()
+> > > > > > > >
+> > > > > >
+> > > > > > The second patch shouldn't have been backported. It is unnecess=
+ary,
+> > > > > > given that in the old situation, the kernel image needs to be l=
+oaded
+> > > > > > at a fixed address. And it assumes  that %rbp is set to the phy=
+sical
+> > > > > > load offset, but those patches were not backported.
+> > > > >
+> > > > > It has this tag:
+> > > > >
+> > > > >     Stable-dep-of: e8fbc0d9cab6 ("x86/pvh: Call C code via the ke=
+rnel virtual mapping")
+> > > > >
+> > > >
+> > > > That was added by the stable maintainers - someone grabbed a patch
+> > > > from the middle of an unrelated series to make e8fbc0d9cab6 apply
+> > > > without lexical conflicts.
+> > > >
+> > > > > Does it mean neither of them should be backported?
+> > > > >
+> > > > > But then, the e8fbc0d9cab6 has "Fixes:" tag (pointing at very old
+> > > > > commit).
+> > > > >
+> > > >
+> > > > If someone thinks e8fbc0d9cab6 should be backported, they should
+> > > > rebase it onto v6.6.y, not backport random other patches until
+> > > > git-apply stops complaining. And ideally, someone would build and b=
+oot
+> > > > the result to check whether it works.
+> > > >
+> > > > For now, it would be better to revert both.
+> > >
+> > > I can confirm that reverting both commits fixes the issue.
+> >
+> > Ok, thanks, let me go rip all of these out and do a new release now to
+> > fix the issue.  Sorry about that, and thanks so much for the testing and
+> > letting us know!
+> >
+>=20
+> I guess 6.11 is beyond repair?
+>=20
 
-> @@ -208,6 +213,44 @@ static int xen_copy_pct_data(struct acpi_pct_register *pct,
->   	dst_pct->address = pct->address;
->   	return 0;
->   }
-> +static int push_cppc_to_hypervisor(struct acpi_processor *_pr)
-> +{
-> +	int ret = 0;
-> +	struct xen_platform_op op = {
-> +		.cmd            = XENPF_set_processor_pminfo,
-> +		.interface_version  = XENPF_INTERFACE_VERSION,
-> +		.u.set_pminfo.id    = _pr->acpi_id,
-> +		.u.set_pminfo.type  = XEN_PM_CPPC,
-> +	};
-> +	struct cppc_perf_caps *cppc_perf = acpi_cppc_data + _pr->acpi_id;
-> +
-> +	op.u.set_pminfo.cppc_data.highest_perf = cppc_perf->highest_perf;
-> +	op.u.set_pminfo.cppc_data.lowest_perf = cppc_perf->lowest_perf;
-> +	op.u.set_pminfo.cppc_data.nominal_perf = cppc_perf->nominal_perf;
-> +	op.u.set_pminfo.cppc_data.lowest_nonlinear_perf = cppc_perf->lowest_nonlinear_perf;
-> +	op.u.set_pminfo.cppc_data.lowest_freq = cppc_perf->lowest_freq;
-> +	op.u.set_pminfo.cppc_data.nominal_freq = cppc_perf->nominal_freq;
-> +
-> +	if (!no_hypercall)
-> +		ret = HYPERVISOR_platform_op(&op);
-> +
-> +	if (!ret) {
-> +		pr_debug("ACPI CPU%u - CPPC uploaded.\n", _pr->acpi_id);
-> +		pr_debug("     highest_perf: %d\n", cppc_perf->highest_perf);
-> +		pr_debug("     lowest_perf: %d\n", cppc_perf->lowest_perf);
-> +		pr_debug("     lowest_nonlinear_perf: %d\n", cppc_perf->lowest_nonlinear_perf);
-> +		pr_debug("     nominal_perf: %d\n", cppc_perf->nominal_perf);
-> +		pr_debug("     lowest_freq: %d Mhz\n", cppc_perf->lowest_freq);
-> +		pr_debug("     nominal_freq: %d Mhz\n", cppc_perf->nominal_freq);
-> +	} else if ((ret != -EINVAL) && (ret != -ENOSYS))
-> +		/* EINVAL means the ACPI ID is incorrect - meaning the ACPI
-> +		 * table is referencing a non-existing CPU - which can happen
-> +		 * with broken ACPI tables. */
-> +		pr_warn("(_CPC): Hypervisor error (%d) for ACPI CPU%u\n",
-> +			ret, _pr->acpi_id);
-> +
-> +		return ret;
+Yes 6.11 is not a supported stable series anymore.
 
-I just saw gcc warn about misleading indent here given the lack of { } 
-on else if above.  I think you just want a single tab indent for return.
+    $ curl -s https://kernel.org/releases.json | \
+        jq '.releases[] | select(.version=3D=3D"6.11.11") .iseol'
+    -> true
 
-Regards,
-Jason
+Cheers,
+Chris
 
-> +}
->   static int push_pxx_to_hypervisor(struct acpi_processor *_pr)
->   {
->   	int ret = 0;
+--eiwstsylbaon5chu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEb3ea3iR6a4oPcswTwEfU8yi1JYUFAmdaHoAACgkQwEfU8yi1
+JYUe1xAArNQyyXyedV1N5sISRckfRL/ugQDTAAVDy53kYTtPjn3nyQX0oX0qceAC
+AB0OQewAksKLHbxOOteciFC0muwh3XOBSDR9HcpsMTGeyGuW0V33olkDB81+o2S2
+5Hl7xPl3KRYg/ygKOUABKoaXOjtZ2KHOpHzBm3QNgsYo/uFqW1IUp/t7o0EqAGdd
+F68aoYA7f+oYcPWuuppuvvZBjvmU9TSIcuIuLwgqjcQpzWzlxe5I3djc8dVHNZQY
+SUVffEP2GGZ+QhUFXObqi6NeI195toUpsjUjUDagBS9Bt0ui3I5ETCw1opZ4J6Lt
+imLxfKetO7Lqjpmtu8wxNNkG7gKyvcuEr3ks/ag9zWt/Wv0KHFjxnS+SueskXDgT
+xGXGifcoCOmiZE2CUE+91eaBrj6hRLthX5JUW03vrO1EAVx5kOevGVv6Elirr/y0
+4isn6P6Vjjb0oY3ypeTCnrNwE7TF25T0QoiAUEGUhGV9YTWAMuOceeeszKXlQPf4
+JVTLq6W4e1FEQef8t6rkSA8RNRGGfOgCNoQ2b7SNFmqPeo70O05Zdwom3P3JJOzR
+WZf0FUHUOwIw++pMKfRBQ6ZARrI5izfo1mvN5+qo977FdFKof3AqvbxtFbbzcjF/
+R2BRG1WqXRbHfQQtras4pzPAWtLC01vq478WyoCsBGDToDRoUaY=
+=afDJ
+-----END PGP SIGNATURE-----
+
+--eiwstsylbaon5chu--
 
