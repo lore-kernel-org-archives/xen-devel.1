@@ -4,47 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AF6E77182
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 07:20:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.853869.1267208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C429EE7717D
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 07:29:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.853890.1267223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLH0x-0002wD-WF; Wed, 11 Dec 2024 07:20:08 +0000
+	id 1tLH9V-0004fu-Pg; Wed, 11 Dec 2024 07:28:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 853869.1267208; Wed, 11 Dec 2024 07:20:07 +0000
+Received: by outflank-mailman (output) from mailman id 853890.1267223; Wed, 11 Dec 2024 07:28:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLH0x-0002vN-R1; Wed, 11 Dec 2024 07:20:07 +0000
-Received: by outflank-mailman (input) for mailman id 853869;
- Wed, 11 Dec 2024 07:20:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GiIE=TE=csgroup.eu=christophe.leroy@srs-se1.protection.inumbo.net>)
- id 1tLH0w-0002Uu-Hx
- for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 07:20:06 +0000
-Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 56493c8b-b790-11ef-99a3-01e77a169b0f;
- Wed, 11 Dec 2024 08:20:02 +0100 (CET)
-Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4Y7RPY1fW8z9t4Z;
- Wed, 11 Dec 2024 08:02:41 +0100 (CET)
-Received: from pegase2.c-s.fr ([172.26.127.65])
- by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ke-WcrxaszkX; Wed, 11 Dec 2024 08:02:41 +0100 (CET)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4Y7RPY0Vj8z9t4W;
- Wed, 11 Dec 2024 08:02:41 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id ED9BB8B76E;
- Wed, 11 Dec 2024 08:02:40 +0100 (CET)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id BSgjR7epYr8H; Wed, 11 Dec 2024 08:02:40 +0100 (CET)
-Received: from [10.25.209.139] (unknown [10.25.209.139])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 2664A8B763;
- Wed, 11 Dec 2024 08:02:40 +0100 (CET)
+	id 1tLH9V-0004fn-Mx; Wed, 11 Dec 2024 07:28:57 +0000
+Received: by outflank-mailman (input) for mailman id 853890;
+ Wed, 11 Dec 2024 07:28:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2HaM=TE=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tLH9U-0004fg-Ei
+ for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 07:28:56 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 93ff1425-b791-11ef-a0d5-8be0dac302b0;
+ Wed, 11 Dec 2024 08:28:55 +0100 (CET)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4361f65ca01so1502955e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Dec 2024 23:28:55 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-216796e213bsm20618955ad.126.2024.12.10.23.28.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Dec 2024 23:28:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,122 +47,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 56493c8b-b790-11ef-99a3-01e77a169b0f
-X-Virus-Scanned: amavisd-new at c-s.fr
-X-Virus-Scanned: amavisd-new at c-s.fr
-Message-ID: <427e840b-d4f5-4554-b798-c70a5b67040e@csgroup.eu>
-Date: Wed, 11 Dec 2024 08:02:39 +0100
+X-Inumbo-ID: 93ff1425-b791-11ef-a0d5-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1733902135; x=1734506935; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=01PaaWgxANIyZIvIY2UKbBezgzZGv6uv67val1nTgtE=;
+        b=Xgo1dOhCicpyQbHnnuCeK+PpWfqDwLbGv4QF8QDo0FxzuSX+E+pBan45zhrpJsIGhr
+         dD9ia2lCI/bvc0YSEoSLTBeD8X7xQF+bHGvDKMM0DgFwn3VGck+Fc9std7H/vLZpedq0
+         NTV2rTcqOBWceKcrgqGmXkKKmUU2cqqgJBP4yFPnNc55ttE1Nhi8gi5l1hKTGSm2vbO0
+         +pje7e7u+gzXkaM15V5Y6l6ShUBewuQWDLPIJUEh5Z4C5UTkvIO3UB5lwIheT39RenaE
+         lozirXHYqCuybyNy4cxwmT5xa67W3sjWxulWnrqTZQ0aQx50SkvfVd47wd8G7rBjmg0C
+         MBKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733902135; x=1734506935;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=01PaaWgxANIyZIvIY2UKbBezgzZGv6uv67val1nTgtE=;
+        b=HXon+I1ysJNyM3RPZDSr6CLg2yepdM5b60A06pB7Q9c0RZH/pCs1ipq8fEFWb2HTCP
+         J4LHE4veMhYBmREtAWkv0kivO0+2gfez+3Ir5ngSe4XYi7X+/miBqUTHespHp/9irIGe
+         EDZQT1KIJP5agBz2zxFMeq6eNzuMwQcopK95JTFVqTqKG7J6o46jVTwQTnD6V3peubJL
+         BASDXW5vPqNBZVTrpnN8eJgpF9EjlU00MycXr9BFipfXiQWjd+FYWBfGL7Yuv2qy2U7o
+         MQ9yKt4FGod57gLOjC7pSo79cgA08I4kQWQ2urYtqdUp03JbMZ7kAcL+fPPuya63DdKI
+         bZXQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXuqbeLgapyOx9sq2XuPq9i9lrBJYDpxXFNBZ114N4acOORxDQbSQqJi2QalCM22ilXSokq+pMfhIA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx1JbFSUQkxJFJe80lbenXqoUEzVg9vO5qoSkNOTawRi0Vtq4QL
+	6S70AHbKwOLNKzXXylYsp/wyI+fpTIQu/FZAspVtn9hIg1JcMnjp/2tYQb/RCg==
+X-Gm-Gg: ASbGnctFNHm9nlero0DVKnZasqGwuz+I/OeQiqnCmGjU4nqKngn1YqSJYTFoyoK/lIk
+	sPLwYpnsyWyfk2BF1O+94feCnEWaN6N44hFJ4OpaFnk0mra2iePWkr+4AR8aQkEu8usWPOXtcYV
+	hh8ZohVqY6ldEL+5a8jALkJ2Z9PExq3GhRpAfx2NX/n8dlc2GxTzYNqqiu1je9dsBiZkFJu98kC
+	2iYG/9VOEvUrjFprkJaId5VwBXIPRtap5K+cCSS0piwNsoX11wn9urP7dyBqau7xyGjtCmMyIYz
+	ClFKOW9GkWg3Ro7COn0FrZzVIYgWO+Fq+wDRCN0=
+X-Google-Smtp-Source: AGHT+IHFOuHPWmuprje6fIwUTemXq+3Jp5ArCtETqJawgQh6kGYzFfSlitgtcwAnb6J6+nYvZ3f8oA==
+X-Received: by 2002:a5d:5989:0:b0:386:3e0f:944b with SMTP id ffacd0b85a97d-3864cec582bmr1021468f8f.37.1733902134885;
+        Tue, 10 Dec 2024 23:28:54 -0800 (PST)
+Message-ID: <d55bf6a6-5861-4b72-88b5-2aaa28ae0290@suse.com>
+Date: Wed, 11 Dec 2024 08:28:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 05/19] powerpc/papr_scm: Convert timeouts to
- secs_to_jiffies()
-To: Easwar Hariharan <eahariha@linux.microsoft.com>,
- Pablo Neira Ayuso <pablo@netfilter.org>,
- Jozsef Kadlecsik <kadlec@netfilter.org>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Julia Lawall <Julia.Lawall@inria.fr>,
- Nicolas Palix <nicolas.palix@imag.fr>, Daniel Mack <daniel@zonque.org>,
- Haojian Zhuang <haojian.zhuang@gmail.com>,
- Robert Jarzmik <robert.jarzmik@free.fr>, Russell King
- <linux@armlinux.org.uk>, Heiko Carstens <hca@linux.ibm.com>,
- Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev
- <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>,
- Sven Schnelle <svens@linux.ibm.com>, Ofir Bitton <obitton@habana.ai>,
- Oded Gabbay <ogabbay@kernel.org>, Lucas De Marchi
- <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Jeroen de Borst <jeroendb@google.com>,
- Praveen Kaligineedi <pkaligineedi@google.com>,
- Shailend Chand <shailend@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
- James Smart <james.smart@broadcom.com>,
- Dick Kennedy <dick.kennedy@broadcom.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Jens Axboe <axboe@kernel.dk>, Kalle Valo <kvalo@kernel.org>,
- Jeff Johnson <jjohnson@kernel.org>, Catalin Marinas
- <catalin.marinas@arm.com>, Andrew Morton <akpm@linux-foundation.org>,
- Jack Wang <jinpu.wang@cloud.ionos.com>, Marcel Holtmann
- <marcel@holtmann.org>, Johan Hedberg <johan.hedberg@gmail.com>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui
- <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Xiubo Li <xiubli@redhat.com>,
- Ilya Dryomov <idryomov@gmail.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- Jiri Kosina <jikos@kernel.org>, Miroslav Benes <mbenes@suse.cz>,
- Petr Mladek <pmladek@suse.com>, Joe Lawrence <joe.lawrence@redhat.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Louis Peens <louis.peens@corigine.com>, Michael Ellerman
- <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Naveen N Rao <naveen@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>
-Cc: netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org, cocci@inria.fr,
- linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org,
- dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-block@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, linux-mm@kvack.org,
- linux-bluetooth@vger.kernel.org, linux-staging@lists.linux.dev,
- linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
- live-patching@vger.kernel.org, linux-sound@vger.kernel.org,
- oss-drivers@corigine.com, linuxppc-dev@lists.ozlabs.org,
- Anna-Maria Behnsen <anna-maria@linutronix.de>
-References: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
- <20241210-converge-secs-to-jiffies-v3-5-ddfefd7e9f2a@linux.microsoft.com>
-Content-Language: fr-FR
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-In-Reply-To: <20241210-converge-secs-to-jiffies-v3-5-ddfefd7e9f2a@linux.microsoft.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 20/35] xen/console: introduce console_owner_domid()
+To: dmukhin@ford.com, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com>
+ <20241205-vuart-ns8250-v1-20-e9aa923127eb@ford.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241205-vuart-ns8250-v1-20-e9aa923127eb@ford.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+On 06.12.2024 05:41, Denis Mukhin via B4 Relay wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
+> 
+> console_owner_domid() is introduced to obtain the "console owner" domain ID.
+> 
+> The call is used in NS8250 emulator to identify the case when physical xen
+> console focus is owned by the domain w/ NS8250 emulator, in which case,
+> messages from guest OS are formatted w/o '(XEN)' prefix.
 
+Such messages ought to be processed through guest_printk(), which wants a
+domain pointer, not a domid_t anyway. Plus isn't that going to be
+current->domain anyway at the callsite, eliminating the need for such a
+helper altogether?
 
-Le 10/12/2024 à 23:02, Easwar Hariharan a écrit :
-> Commit b35108a51cf7 ("jiffies: Define secs_to_jiffies()") introduced
-> secs_to_jiffies(). As the value here is a multiple of 1000, use
-> secs_to_jiffies() instead of msecs_to_jiffies to avoid the multiplication.
-> 
-> This is converted using scripts/coccinelle/misc/secs_to_jiffies.cocci with
-> the following Coccinelle rules:
-> 
-> @@ constant C; @@
-> 
-> - msecs_to_jiffies(C * 1000)
-> + secs_to_jiffies(C)
-> 
-> @@ constant C; @@
-> 
-> - msecs_to_jiffies(C * MSEC_PER_SEC)
-> + secs_to_jiffies(C)
-> 
-> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
-
-Reviewed-by: Christophe Leroy <christophe.leroy@csgroup.eu>
-
-> ---
->   arch/powerpc/platforms/pseries/papr_scm.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/powerpc/platforms/pseries/papr_scm.c b/arch/powerpc/platforms/pseries/papr_scm.c
-> index f84ac9fbe203c111046464b9100866dddae687bb..f7c9271bda58433f395648063e60409a8d3c11d9 100644
-> --- a/arch/powerpc/platforms/pseries/papr_scm.c
-> +++ b/arch/powerpc/platforms/pseries/papr_scm.c
-> @@ -544,7 +544,7 @@ static int drc_pmem_query_health(struct papr_scm_priv *p)
->   
->   	/* Jiffies offset for which the health data is assumed to be same */
->   	cache_timeout = p->lasthealth_jiffies +
-> -		msecs_to_jiffies(MIN_HEALTH_QUERY_INTERVAL * 1000);
-> +		secs_to_jiffies(MIN_HEALTH_QUERY_INTERVAL);
->   
->   	/* Fetch new health info is its older than MIN_HEALTH_QUERY_INTERVAL */
->   	if (time_after(jiffies, cache_timeout))
-> 
-
+Jan
 
