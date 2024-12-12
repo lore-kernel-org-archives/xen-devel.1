@@ -4,33 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD182E77182
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Dec 2024 23:23:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.855193.1268298 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37B0EE7717D
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Dec 2024 00:13:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.855395.1268318 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLW2h-0003Zx-66; Wed, 11 Dec 2024 23:22:55 +0000
+	id 1tLWpo-0005xx-U9; Thu, 12 Dec 2024 00:13:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 855193.1268298; Wed, 11 Dec 2024 23:22:55 +0000
+Received: by outflank-mailman (output) from mailman id 855395.1268318; Thu, 12 Dec 2024 00:13:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tLW2h-0003Zq-2q; Wed, 11 Dec 2024 23:22:55 +0000
-Received: by outflank-mailman (input) for mailman id 855193;
- Wed, 11 Dec 2024 17:46:55 +0000
+	id 1tLWpo-0005xq-RP; Thu, 12 Dec 2024 00:13:40 +0000
+Received: by outflank-mailman (input) for mailman id 855395;
+ Thu, 12 Dec 2024 00:13:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oeU5=TE=raspberrypi.com=dave.stevenson@srs-se1.protection.inumbo.net>)
- id 1tLQnX-0001cu-FR
- for xen-devel@lists.xenproject.org; Wed, 11 Dec 2024 17:46:55 +0000
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [2607:f8b0:4864:20::b2b])
+ <SRS0=KiJC=TF=epam.com=Volodymyr_Babchuk@srs-se1.protection.inumbo.net>)
+ id 1tLWpo-0005xa-34
+ for xen-devel@lists.xenproject.org; Thu, 12 Dec 2024 00:13:40 +0000
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on2062c.outbound.protection.outlook.com
+ [2a01:111:f403:2606::62c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e73b7aa4-b7e7-11ef-99a3-01e77a169b0f;
- Wed, 11 Dec 2024 18:46:52 +0100 (CET)
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e3982e9278bso5948867276.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Dec 2024 09:46:52 -0800 (PST)
+ id ef4ecfde-b81d-11ef-99a3-01e77a169b0f;
+ Thu, 12 Dec 2024 01:13:38 +0100 (CET)
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ (2603:10a6:150:16a::21) by DB9PR03MB7625.eurprd03.prod.outlook.com
+ (2603:10a6:10:2bc::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.15; Thu, 12 Dec
+ 2024 00:13:34 +0000
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::a41e:5aa8:e298:757e]) by GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::a41e:5aa8:e298:757e%7]) with mapi id 15.20.8251.008; Thu, 12 Dec 2024
+ 00:13:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,138 +49,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e73b7aa4-b7e7-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=raspberrypi.com; s=google; t=1733939211; x=1734544011; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=XX4yF9JMGXX3II/VI0ICz4h+LN+8Yz44eu6TfJ04Ugk=;
-        b=aoftBBqYd/YdaPRjL91Sjad8U5qjxmH9vbfbY9gTQwyaK2EvFEi4MfHl5Hy4j1PdNA
-         9i+EQQraiQwZRClYSsDw3r8JRupy+8DlpAUGDt9XgIDCpyLvU8voCF+uqg3ZcFxaB2vO
-         AGMsnjjPvVFnqLT6j4cQZAisaOr6N1BLkN49l5VRboTZZypbXQ3a3ZRDg8DCKSTjZ33F
-         Jp9B0OBCtGi4Xc7LqMiYLhFsTCp2P9cSBAfVqdLBaYIivhHbZWQ6/1m0kpwdmJEbYWkV
-         PaEqm3TX9IHbbOYLT8vdymQN2Ixvj5ru3E61ke4R1IUSbllaDyV1zeX/ximYHX3g795T
-         PnoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733939211; x=1734544011;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XX4yF9JMGXX3II/VI0ICz4h+LN+8Yz44eu6TfJ04Ugk=;
-        b=ncc3Oypp+y16oYMFIHS1RZAkK8nf7l8NMSTekIzGat1cSx/NEGSSxx7JSWw9VlQyjx
-         CDozFhmJMhVgPjh7F4gf0fK06puuo6SjEEG8s0IRkF+3gMCFj99OdlmKv8gKkfcE+A+7
-         eELGHHIfL3M3qvusFFk2i+P+BGv5aVW1mMexGy1PQyY5hSPR2RN6MLJC3D7jiazzDlm2
-         oyZHt30phpHKt/ZctQP4vkaACkZSAojXM1VAu9zPwD7kNAtTB07tvEIULmcu/x/mE6gV
-         vYIh9vFYOCzxN99L5TCbtjujylxRK1qCR2Wybtalo5RkcU78epeHHJOeqqAKx5Fecq1S
-         r14w==
-X-Forwarded-Encrypted: i=1; AJvYcCWdwSqBP55xBH6CNJi52DYols1MhCu7vt+oAJiZ2AIiBqox0QqbwIpxJuhRXgi2OhLzUthJACtDVPk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yws20nK4JPKYlwOjL07E9TVJ+nZPmL5kQOraYytsexh7wDRAtkT
-	+HGG4G+SupQQrNT8ciZzmrdJ/0Xaic9sZmthF3U7W98ghivQUxoWqt0pJubT6tW05T+pfVhfZ/l
-	oqJbkYwWZOzer+zDsqs6jjKUAwL6dn05j7xCyCQ==
-X-Gm-Gg: ASbGnctE+A4rwGvncD1y0N7YqFAo0agS17bAYcENMO36jDdpjmWojmGaVuKxxVkZPLQ
-	Cv/Qs2Juj94nNKSLDZxHQudznT6Gmu6jy5n4=
-X-Google-Smtp-Source: AGHT+IG3lDp6pcc8WpN9DOxtNpymp29steFnShZFR78LeXrDU2v7lqz7zSz8oGrhbnT8m3jrCYcj2LxsZTVFVNmSQds=
-X-Received: by 2002:a05:6902:230d:b0:e39:8a36:5771 with SMTP id
- 3f1490d57ef6-e3da3158089mr228005276.34.1733939211006; Wed, 11 Dec 2024
- 09:46:51 -0800 (PST)
+X-Inumbo-ID: ef4ecfde-b81d-11ef-99a3-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=os26MnnPP9Ybn7PkGV4f/jUb0oLy1U+s6rutc5rtBQHdrjZnYW59s41IzILAthYGumAynAdbbyoAe+fM0ZpIp1TdlvYg5C2AbpylTLP8m5jCDNvcoEN1dyhX54ge10eHuLgwTTv1KYIq9JQl6XWZZLRoTE4Aef56jLE2G2D5gNzdeR5VIbRCw7S6r4S7XNWwxaW1leACqyh24xoxIx8JxMItVu2kfOSy2q0eRxERnx6eBMpSycYngRykex2LhGbi2Cquap++HR+JaoA/2lb34NQMH3uXjdqL29w5UeZUczOo2FduGUl/wsdR3z5M6meK/Q6YPp7xQLRyIa8ccQRL6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=axs4QJ77roqbYqfnnAkUbciJgFdMd1ErBhfaw24jMAg=;
+ b=EC3iKvKoIVwbkAUGyqaena/jIcKwyrJKUsjk2tsr9YeanTTm08lWnky7+ZKSAXy4py74Y3dcGYD0RI/jls6HDM+0u4u5NKYTahs0CtmCB++IVLhhQWI3CSiyV0/OEVKKbjqtwsOsCOc17n9rzgKD4oyABlbN2pRC0sXCTBIJ0uoIkWTRZkX/qpV5Ni7AQ8rKQNTrX/AFqIQbZjm5K6w0MbLGixzWJAGWxjUAgxjcZ3Limwv1j8MapstsaR69j4ZsiJ4rSFvPlHh2ZVl6DqpyuQcnUeSWCpqGyGazYwjtP7uVMU0HY2EC6yswGlYqgfhjD4JUTEJ+crWbvxPf8OpPlw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=axs4QJ77roqbYqfnnAkUbciJgFdMd1ErBhfaw24jMAg=;
+ b=l9nUpI78hqm1pnn0iD2ieFoCdlf/77OO7fTm3EnKQmzxzJsX8SPX0aYcKJBHNc11v9iLOR/GMHHzvAVtHHyXJhpAWWLuOKpt71g9nZMk+85i46m7wCCeZIYKja8GOvsL5x7lwbUfemxQ7C/5JTjUr9eXZzg7KmYoie1690OOuxPMgs3ev6swSSvS2m+jctiZkwhpbaO3iUeBISQAi6pJEtIdvJycW0MDnELVPi1z3yH98iZyaTy8W43/W8EXgFA7+uCK4sfsa8IRQWW5LoTd0DJGg6/A/4OxOEmS1lsKknEPrRahUosGa5O+VXrQsu1GGa2KVbHCDiqRhkMP+Uspmg==
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD
+	<anthony.perard@vates.tech>, Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v3 0/3] Add stack protector
+Thread-Topic: [PATCH v3 0/3] Add stack protector
+Thread-Index: AQHbS3EDPfnUwIrgWUmXfq3bo38udA==
+Date: Thu, 12 Dec 2024 00:13:33 +0000
+Message-ID: <87pllx3gib.fsf@epam.com>
+References: <20241211020424.401614-1-volodymyr_babchuk@epam.com>
+	<f1e86e0e-985a-41ae-a94c-979288275257@suse.com>
+In-Reply-To: <f1e86e0e-985a-41ae-a94c-979288275257@suse.com> (Jan Beulich's
+	message of "Wed, 11 Dec 2024 08:46:37 +0100")
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|DB9PR03MB7625:EE_
+x-ms-office365-filtering-correlation-id: 9c18fc56-c30e-4c0a-4c14-08dd1a41d0e6
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|7416014|376014|366016|1800799024|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?IwQfvcVJV51fXXF9LLMNTCAXJ4rXUrfPONPFluUhYmolWPjDZZ/m93RIzX?=
+ =?iso-8859-1?Q?s1ylnoRKE9kVLOzCQzm7RLc+NJnwfCnDSLqQ6K7NM5DbLjvJVTOh6SPPLV?=
+ =?iso-8859-1?Q?Rsw55LF4LdC4JFh/oyM2pf6ZIP2G7xYAbSGciEmJ+Q2z8/Ebk2yDqm2ejW?=
+ =?iso-8859-1?Q?7QrnAD9y4P4bzZvpRO3ONVoJVRgpwKc8qmbF5qUtAUjqfc4ETfNs3feAua?=
+ =?iso-8859-1?Q?vt13mHL8S2ipJPUEZqlL6qdFUV+Y18Z9lL3VtLuBuVZ4xBeT7cLR9+yOpz?=
+ =?iso-8859-1?Q?kFzp2XyVPNm3Keez6ZVDuEHFtzbNRSi9kWgKgO9SmvSDpITuqbaD8nScR8?=
+ =?iso-8859-1?Q?3190MY2aMCoJf/1qW4dV25P/Y9Lwd5yitLOi6rYUoHC5gI/A0JfbkVycj2?=
+ =?iso-8859-1?Q?BoWbojL6zKWAKJUoWtuNu/2Kmq9dCJcjR+oHUAA34sv/PQ9xQzleIt4aqS?=
+ =?iso-8859-1?Q?CwsU1VJlaiJMxc06utuEyTqqX5HnGGKqYl3TbxiTE4qeC0OH5Bzi1d2bo/?=
+ =?iso-8859-1?Q?hgH5H5ceWl0AcPYEfK+nOr3v0P41mT4vMG5nnsQMyvAGkqkBzCrdPAjVoe?=
+ =?iso-8859-1?Q?X+vCsGW0Q7CU4S8aUMSsnPCW/PUBUFJtAK8ukSZahxgFXflpirJ2uf/Ege?=
+ =?iso-8859-1?Q?ox5v9FwTFQiIP23oNYpqQXa9VR7PE1d6ld2Z5QFDOCXTXnQxyGl5Cwk5DR?=
+ =?iso-8859-1?Q?qbJ0VvMH1m9xuYsPYsJLOxXr5fsjxmuUJ4BeeA83BBNRvrV4WlAiJjEKxc?=
+ =?iso-8859-1?Q?I4ISAXT2Pgp1ZbIn4HiO6jWIOUAzYeLyj2psF+nJrr9zYGG8Bsn/ydKYq6?=
+ =?iso-8859-1?Q?EEWVi0xRb6dSh7yl6BT6ctJL/qFGe/iH6HZf4huXU3VlrnFj1SGgeI2rsD?=
+ =?iso-8859-1?Q?y5Rslw0ZkcvasvJZAEwB4K1wGSr1sgN4p3AqCuyWxTExx6RTLtXsd3PLNd?=
+ =?iso-8859-1?Q?5P9DRW86LzndgvUosQUac3PJs2c19I/fSisJORZNhy/3bjfhTg2qtu+6Tu?=
+ =?iso-8859-1?Q?Cb1yODYe/3QmWSmwMNZ1iDJn46AhQ07F6lOoyhQqC+2/X0AGEAnbmSMbus?=
+ =?iso-8859-1?Q?CknK0SvWsqhi8JK3iA8Eh7REBjCJB1qZcQscoA1TJgNCaAFviabtmz1Nzq?=
+ =?iso-8859-1?Q?4r/BX0D3h4a5nwUOiBqTY+fAUAgJEF3NpFX6FIHP19yRxzUOrQEeXMUFN0?=
+ =?iso-8859-1?Q?rN2QLQWuV4Ltm+HkaLfYhe0yAOX5kxHk9FKh9kw1VO1HYgtC0IyRKzXyWW?=
+ =?iso-8859-1?Q?MYqndykd9sw+I0VB+0S+LSKloxhE79XdFWV8/6K0A9VMAtub9jbHmEdzpj?=
+ =?iso-8859-1?Q?ORrTmgIPdJicIQOLAVfNajnoU6SsD8MgMXjNCiAiswQDUIuyMe9/hZuwDw?=
+ =?iso-8859-1?Q?iv30Daf545OZ8vMzSzHhtj5Crol+FCIIq5sY9u1e/iu8UTqJ6EM6+S8aZW?=
+ =?iso-8859-1?Q?epMaEXi2g/QN3w7Hd9j6iyUczUi6bwE/ulCkiA=3D=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV1PR03MB10456.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?6e9iny/2nh6ZcI6xvrowIU5zPiiHBz3nsvfUqriRGFu7MjSI7DGqwRZO4l?=
+ =?iso-8859-1?Q?JEBMYyMfx9Lk5NWZ8ULRCoVuhQ5Cb0wyOP2xc926RfF+3xzIcB7l3r0gxa?=
+ =?iso-8859-1?Q?M4M8OKdv/5v9Qg0zyOWxyDcMiEjFeZOCxFRoB9In6gMhGljelQOtQGZhC4?=
+ =?iso-8859-1?Q?Wz/L7Nkwz+IWma+4AH3vImMJDE97U8qRAhPlF32ECsoDsE0AEgkEgQ6gOA?=
+ =?iso-8859-1?Q?sIEh7p6xw++PzktKjUTce8Q5oLNcx8+aucI9sij0oJxZT8Grk1/bpLmoaC?=
+ =?iso-8859-1?Q?huBDo3eXmxYxI+RoUFMZiZerbt5BGADsFdmyscOAotVNrSG6DkYI/qFhan?=
+ =?iso-8859-1?Q?B53IGdkOC9niS2kfrbszytGA6BMQsNAPLaMUL4a+OyvVWdT1sWKHdeA4eo?=
+ =?iso-8859-1?Q?89a8PdoQV1WOqeUQOAIKr0JpxyegmFXsolp0W35OufWVNKYWbhqkYr3dya?=
+ =?iso-8859-1?Q?avk/R8nlPRgOY7/Pn1SBuuYqnhnofPQiJiulu2L7Y2P7+nKdfT1jNXuljO?=
+ =?iso-8859-1?Q?ANCCmDamtvLjyGQRdhV/zWd0AW5mE2kdZZDz/pGI5XvchYkFxT/1dT02TB?=
+ =?iso-8859-1?Q?Bm3Y8sKt+YZD1eW5dYVVlzKpJjVi1eobZf+vFqwJYRZvrzrr5YBPz2nKG8?=
+ =?iso-8859-1?Q?GWX27NvUKzSMJdmzx/9XY+JJkT8aacpAQVGBxbDQpf9Mh7YCJGOjs6Zq7f?=
+ =?iso-8859-1?Q?KvhM2T9ZD758fyClJcRhi6CjqOXgG9uf/4Y1DGkC9iIH7HARA+r7Thm1Pu?=
+ =?iso-8859-1?Q?vLQuMIDvR0yXt7k6KGv8lb3xAkcMfYOUoUAcpThVIR8d/G9d5MvX/966D3?=
+ =?iso-8859-1?Q?XoM7+c4CvCpm1+yoMyqNPvo0swtoQieEOjzly2nzaq1YUSJje9d47RGw6c?=
+ =?iso-8859-1?Q?hwDXfobKNeYOMH2z4pmijVRcUwhADLHOUgPzLei7C1mIPAlfA9U7V2Vos8?=
+ =?iso-8859-1?Q?oEejVSEtTa70W59BhUOwDEw2JJ0LCNQb7OE9CLWrFa22bxfN2PURYPjLUk?=
+ =?iso-8859-1?Q?H7BH7O6qwWDBtZ+3FZmCODvnt8chizbMN0pJIjUtDetOd0kCUvglmW7BoL?=
+ =?iso-8859-1?Q?itGaqrzNLcaVS+LmddPkiPHEHMlzm/KaBYVbg0/UmCNhOtDalzdeSyF0qB?=
+ =?iso-8859-1?Q?NHbn837XwhCfc+R34WGvIIYgPOPVCzHIMzB9VrkRLzw6eT/vg0E64LsAX4?=
+ =?iso-8859-1?Q?3WJoDseTcOvPt5QqxkVRBrBwefmIpG4tBMoT9I2ssTtGfg9qcVSTymTQD5?=
+ =?iso-8859-1?Q?xbNVVXzYR5oegF5uO57yqsgKzDKnn3UGkP5bdRgsk00thfUJH/rNzvbJ4x?=
+ =?iso-8859-1?Q?SGPb8Ji+bdwEHYM7l8NkGDVToazriMoWzU2Jv8WrYbet1tzw9IHaywLSuu?=
+ =?iso-8859-1?Q?dPdXU21rpkEwzjEMhKvNMTG+YEWF3ssMjWo72YbaSgyiefwLsHxLXJtrkF?=
+ =?iso-8859-1?Q?fnC4M28AvLahOeHdc4ialF51Err7HVH51uuSwenV2WURpz3bUkO0cHSqB2?=
+ =?iso-8859-1?Q?mTzixpHwih2c5VlHYJu5JmbY4hs3Mh4mGq9mQAdXwMezBETIvrWC6XLjTf?=
+ =?iso-8859-1?Q?Ti3Yoer+tIluEq68GwiLoXo/vj8ZH5WdAYP7DLJEWrIxZhA3stDEs9pV1G?=
+ =?iso-8859-1?Q?Ds1PmlZF2+f3H7CAI5ap8RLCrmBjNTNkqDoKfU1oy5Xbva+Am1x2Lv7A?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20241210-converge-secs-to-jiffies-v3-0-ddfefd7e9f2a@linux.microsoft.com>
- <20241210-converge-secs-to-jiffies-v3-16-ddfefd7e9f2a@linux.microsoft.com>
-In-Reply-To: <20241210-converge-secs-to-jiffies-v3-16-ddfefd7e9f2a@linux.microsoft.com>
-From: Dave Stevenson <dave.stevenson@raspberrypi.com>
-Date: Wed, 11 Dec 2024 17:46:32 +0000
-Message-ID: <CAPY8ntDHcGpsaNytY2up_54e03twqZ2fj1=JTnb8x7LLo3uGDQ@mail.gmail.com>
-Subject: Re: [PATCH v3 16/19] staging: vc04_services: Convert timeouts to secs_to_jiffies()
-To: Easwar Hariharan <eahariha@linux.microsoft.com>
-Cc: Pablo Neira Ayuso <pablo@netfilter.org>, Jozsef Kadlecsik <kadlec@netfilter.org>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Julia Lawall <Julia.Lawall@inria.fr>, Nicolas Palix <nicolas.palix@imag.fr>, 
-	Daniel Mack <daniel@zonque.org>, Haojian Zhuang <haojian.zhuang@gmail.com>, 
-	Robert Jarzmik <robert.jarzmik@free.fr>, Russell King <linux@armlinux.org.uk>, 
-	Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, 
-	Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, 
-	Sven Schnelle <svens@linux.ibm.com>, Ofir Bitton <obitton@habana.ai>, 
-	Oded Gabbay <ogabbay@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, 
-	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
-	Rodrigo Vivi <rodrigo.vivi@intel.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, 
-	Shailend Chand <shailend@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	James Smart <james.smart@broadcom.com>, Dick Kennedy <dick.kennedy@broadcom.com>, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, 
-	"Martin K. Petersen" <martin.petersen@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Jens Axboe <axboe@kernel.dk>, Kalle Valo <kvalo@kernel.org>, Jeff Johnson <jjohnson@kernel.org>, 
-	Catalin Marinas <catalin.marinas@arm.com>, Andrew Morton <akpm@linux-foundation.org>, 
-	Jack Wang <jinpu.wang@cloud.ionos.com>, Marcel Holtmann <marcel@holtmann.org>, 
-	Johan Hedberg <johan.hedberg@gmail.com>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
-	Scott Branden <sbranden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Xiubo Li <xiubli@redhat.com>, 
-	Ilya Dryomov <idryomov@gmail.com>, Josh Poimboeuf <jpoimboe@kernel.org>, Jiri Kosina <jikos@kernel.org>, 
-	Miroslav Benes <mbenes@suse.cz>, Petr Mladek <pmladek@suse.com>, 
-	Joe Lawrence <joe.lawrence@redhat.com>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
-	Louis Peens <louis.peens@corigine.com>, Michael Ellerman <mpe@ellerman.id.au>, 
-	Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy <christophe.leroy@csgroup.eu>, 
-	Naveen N Rao <naveen@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>, netfilter-devel@vger.kernel.org, 
-	coreteam@netfilter.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	cocci@inria.fr, linux-arm-kernel@lists.infradead.org, 
-	linux-s390@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	intel-xe@lists.freedesktop.org, linux-scsi@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-block@vger.kernel.org, 
-	linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
-	linux-mm@kvack.org, linux-bluetooth@vger.kernel.org, 
-	linux-staging@lists.linux.dev, linux-rpi-kernel@lists.infradead.org, 
-	ceph-devel@vger.kernel.org, live-patching@vger.kernel.org, 
-	linux-sound@vger.kernel.org, oss-drivers@corigine.com, 
-	linuxppc-dev@lists.ozlabs.org, Anna-Maria Behnsen <anna-maria@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c18fc56-c30e-4c0a-4c14-08dd1a41d0e6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Dec 2024 00:13:33.6370
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: WbBoZfuw0e5U1ePHHdHtUEtHMhCouksTCRKe8bwcniGKVigH/83Np3wl5qmScsfOgEh+6LNEStBHrZaQsUZTbTDWWIi49zkMZYyhBA058ZM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB7625
 
-On Tue, 10 Dec 2024 at 22:02, Easwar Hariharan
-<eahariha@linux.microsoft.com> wrote:
->
-> Commit b35108a51cf7 ("jiffies: Define secs_to_jiffies()") introduced
-> secs_to_jiffies(). As the value here is a multiple of 1000, use
-> secs_to_jiffies() instead of msecs_to_jiffies to avoid the multiplication.
->
-> This is converted using scripts/coccinelle/misc/secs_to_jiffies.cocci with
-> the following Coccinelle rules:
->
-> @@ constant C; @@
->
-> - msecs_to_jiffies(C * 1000)
-> + secs_to_jiffies(C)
->
-> @@ constant C; @@
->
-> - msecs_to_jiffies(C * MSEC_PER_SEC)
-> + secs_to_jiffies(C)
->
-> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 
-Reviewed-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Hello Jan,
 
-> ---
->  drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Jan Beulich <jbeulich@suse.com> writes:
+
+> On 11.12.2024 03:04, Volodymyr Babchuk wrote:
+>> Both GCC and Clang support -fstack-protector feature, which add stack
+>> canaries to functions where stack corruption is possible. This series
+>> makes possible to use this feature in Xen. I tested this on ARM64 and
+>> it is working as intended. Tested both with GCC and Clang.
+>>=20
+>> It is hard to enable this feature on x86, as GCC stores stack canary
+>> in %fs:40 by default, but Xen can't use %fs for various reasons. It is
+>> possibly to change stack canary location new newer GCC versions, but
+>> this will change minimal GCC requirement, which is also hard due to
+>> various reasons. So, this series focus mostly on ARM and RISCV.
 >
-> diff --git a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-> index dc0d715ed97078ad0f0a41db78428db4f4135a76..0dbe76ee557032d7861acfc002cc203ff2e6971d 100644
-> --- a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-> +++ b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
-> @@ -59,7 +59,7 @@ static int bcm2835_audio_send_msg_locked(struct bcm2835_audio_instance *instance
->
->         if (wait) {
->                 if (!wait_for_completion_timeout(&instance->msg_avail_comp,
-> -                                                msecs_to_jiffies(10 * 1000))) {
-> +                                                secs_to_jiffies(10))) {
->                         dev_err(instance->dev,
->                                 "vchi message timeout, msg=%d\n", m->type);
->                         return -ETIMEDOUT;
->
-> --
-> 2.43.0
->
+> Why exactly would it not be possible to offer the feature when new enough
+> gcc is in use?
+
+It is possible to use this feature with a modern enough GCC, yes. Are
+you suggesting to make HAS_STACK_PROTECTOR dependent on GCC_VERSION for
+x86 platform?
+
+--=20
+WBR, Volodymyr=
 
