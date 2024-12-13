@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7438CE77182
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Dec 2024 16:28:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.856875.1269455 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E65CE7717F
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Dec 2024 16:30:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.856904.1269465 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tM8X0-0007He-V8; Fri, 13 Dec 2024 16:28:46 +0000
+	id 1tM8Ye-0001tZ-99; Fri, 13 Dec 2024 16:30:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 856875.1269455; Fri, 13 Dec 2024 16:28:46 +0000
+Received: by outflank-mailman (output) from mailman id 856904.1269465; Fri, 13 Dec 2024 16:30:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tM8X0-0007HQ-Qv; Fri, 13 Dec 2024 16:28:46 +0000
-Received: by outflank-mailman (input) for mailman id 856875;
- Fri, 13 Dec 2024 16:28:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4bZM=TG=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1tM8Wy-0003wJ-Vf
- for xen-devel@lists.xenproject.org; Fri, 13 Dec 2024 16:28:44 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 51898afc-b96f-11ef-99a3-01e77a169b0f;
- Fri, 13 Dec 2024 17:28:43 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aab925654d9so39315266b.2
- for <xen-devel@lists.xenproject.org>; Fri, 13 Dec 2024 08:28:43 -0800 (PST)
-Received: from carlo-ubuntu.minervasys.tech ([193.207.202.156])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa673474d96sm841759266b.96.2024.12.13.08.28.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 08:28:42 -0800 (PST)
+	id 1tM8Ye-0001tQ-6V; Fri, 13 Dec 2024 16:30:28 +0000
+Received: by outflank-mailman (input) for mailman id 856904;
+ Fri, 13 Dec 2024 16:30:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=XZcu=TG=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1tM8TQ-000061-U1
+ for xen-devel@lists.xenproject.org; Fri, 13 Dec 2024 16:25:04 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [2a07:de40:b251:101:10:150:64:2])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cee4c468-b96e-11ef-a0d6-8be0dac302b0;
+ Fri, 13 Dec 2024 17:25:04 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D46FC1F394;
+ Fri, 13 Dec 2024 16:25:03 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A3B03137CF;
+ Fri, 13 Dec 2024 16:25:03 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id mPZ0Jt9fXGf7SgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 13 Dec 2024 16:25:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,324 +54,340 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 51898afc-b96f-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1734107322; x=1734712122; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tgbePI0AttbYCT39ufoypfo88obicULa6RDxOdvlbAE=;
-        b=OIYJgvHDH1xmriJ1GQbKmbeJHGFK1QulEMEJIV96OKUX3rSDAbgq3KLCjX53dalI1n
-         xAb1qc++MnXMkkcBMdL+Ltq8+Tf1CxajQ4YByAs2zGDOL1MddfX+E//Ycs64psltlvbu
-         RLiDj10/PhxEOpxk5gbwfbdkdL5JEWmVW/tI41x4w28msSB5eDDJYYMVE1glrqxtJB7j
-         lCxceRrK3afiIMVbFMT5ROAIj+Y//e86NhagCL3s7NxiAGdfzoIX/S7cxTBk7KVpxIS+
-         dIQw4dXszQGb54/zIOtJ+/RgbPgZKucvBfaGcyH3WGJqYZZmGeJ4QRtMyoQgD5gn0iK5
-         mceA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734107322; x=1734712122;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=tgbePI0AttbYCT39ufoypfo88obicULa6RDxOdvlbAE=;
-        b=nRbSj1AoKlObsaJyz4mvx34vtTwh4CdnCUaFfrvu9OkIi3s0bldL+vBhvokk+FMbPE
-         biuqi9CipXdVCzJ4iV2ymwsiQ8FkOYkAPI7ptflxaOh8K4jM8vmbLGkn5LH/ZUeANT18
-         Zg7yK89Hbps9kZGJeZQLRiOVahOIsXrouH9GxURSRK5vkLeJZfCdSbCotjnp/dJXvTOg
-         saWUF3uI53rAc6jO7mXhzCC1ankqgDem9Z73LBotX+Q7ynKXvUdV0AkUwB+SPx8e2RQA
-         A4s6XPixbW115YDIXcYe/JXqbBzRCXnKlZBjd3pFrwWrEqkjndflHdCvv1FKdR8vwfMv
-         0GTg==
-X-Gm-Message-State: AOJu0YxBZFxKgCqegR5qvInAf9nYYkeSyT9IWYXClm709d04XR7VkOuG
-	YgPA4rUZDS/Vdl3RQTIoPG4yFeWmlQUqZ/87katMDfOYsHkBb8Ly8K65EWaseYRlCvXUmkR1ku0
-	fsWw=
-X-Gm-Gg: ASbGnct0aLMBddkNd5yB/v8Y/03fYkpoO29cE2zcEgIAthSqWDvoEYj1x2rDaaKcOGr
-	8QbDB1+ZUDYIAwyTQ318e4k+tLDphLviHv1EVdCPJhpHMOzMved/obINetnQD0CDBvOK0PTfz6M
-	WcAZbBg0eCRiBiI/Q2qOE8EG/pR7J0JekljN56RaoclGC1PUupRO7ViXLe2nTZgV9YLB3D62Mjg
-	7GmzHhT63V9moEJUoofQAhJQl9p3sWoUr9matPAtCkIcdydQ9LG+YGYqns7sv0kR1cbi0YRgCL6
-	6zegQQe/MDAQ7RCg
-X-Google-Smtp-Source: AGHT+IHIXXIN+KmQgkKmBq54I0q9oKub3ahwQfBOGNdnL9of2AipdboITRWoaFpRmuiWBoDNe1F7Pg==
-X-Received: by 2002:a17:907:3e1c:b0:aa6:8160:849a with SMTP id a640c23a62f3a-aab7793eb15mr329641066b.22.1734107322492;
-        Fri, 13 Dec 2024 08:28:42 -0800 (PST)
-From: Carlo Nonato <carlo.nonato@minervasys.tech>
+X-Inumbo-ID: cee4c468-b96e-11ef-a0d6-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1734107104; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=U4Ln9oY8teJqj0oQ6om9doDIAfM1X4V+dyEL2CQtrKA=;
+	b=L1ZIHnIyoOdvizrUkZEUJ6ZpF7AD43wTTSSFRxR7g6yCHAFANNQw6Da3JiVWlPUUcpVoZp
+	iq5nzZfUF5oMCs2/rkx7A158z/cND+qs9tQCI9KZ6C+kb5JqQgWWpHtXInUrAVU3LDtGJw
+	HqJ2shDcLoIPLS1S7D2CSm7uMRjgbAo=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1734107103; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=U4Ln9oY8teJqj0oQ6om9doDIAfM1X4V+dyEL2CQtrKA=;
+	b=l7ix/qwFk+VZZ1cBNERb62DfmAzN4SuKkL+jMGRZMwzwttPax1wPIoEBj8Ujcz9pIVNjCc
+	Ag0lN9CkRVvGlzBZr+J0DVkSxI3RwOnJkqK79eIARV8OytA1sipaYgfEex/hPZ2DR8P7UD
+	oWsj5lp2o0jVifmaQ1P353I6P03QqP4=
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: andrea.bastoni@minervasys.tech,
-	marco.solieri@minervasys.tech,
-	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v12 11/12] xen/arm: make consider_modules() available for xen relocation
-Date: Fri, 13 Dec 2024 17:28:14 +0100
-Message-ID: <20241213162815.9196-12-carlo.nonato@minervasys.tech>
+Cc: Juergen Gross <jgross@suse.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Julien Grall <julien@xen.org>
+Subject: [PATCH v3 7/7] tools/xenstored: use new stable interface instead of libxenctrl
+Date: Fri, 13 Dec 2024 17:24:21 +0100
+Message-ID: <20241213162421.16782-8-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241213162815.9196-1-carlo.nonato@minervasys.tech>
-References: <20241213162815.9196-1-carlo.nonato@minervasys.tech>
+In-Reply-To: <20241213162421.16782-1-jgross@suse.com>
+References: <20241213162421.16782-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-2.80 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-0.999];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email];
+	RCVD_TLS_ALL(0.00)[]
 
-Cache coloring must physically relocate Xen in order to color the hypervisor
-and consider_modules() is a key function that is needed to find a new
-available physical address.
+Replace the current use of the unstable xc_domain_getinfo_single()
+interface with the stable domctl XEN_DOMCTL_get_domain_state call
+via the new libxenmanage library.
 
-672d67f339c0 ("xen/arm: Split MMU-specific setup_mm() and related code out")
-moved consider_modules() under arm32. Move it to mmu/setup.c and make it
-non-static so that it can be used outside.
+This will remove the last usage of libxenctrl by Xenstore, so update
+the library dependencies accordingly.
 
-Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+For now only do a direct replacement without using the functionality
+of obtaining information about domains having changed the state.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
-v12:
-- no changes
-v11:
-- removed useless #include
-v10:
-- no changes
-v9:
-- no changes
-v8:
-- patch adapted to new changes to consider_modules()
-v7:
-- moved consider_modules() to arm/mmu/setup.c
-v6:
-- new patch
----
- xen/arch/arm/arm32/mmu/mm.c      | 95 +-------------------------------
- xen/arch/arm/include/asm/setup.h |  3 +
- xen/arch/arm/mmu/setup.c         | 94 +++++++++++++++++++++++++++++++
- 3 files changed, 98 insertions(+), 94 deletions(-)
+V1:
+- use library instead of direct hypercall, only replace current
+  libxenctrl use case
 
-diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
-index 063611412b..903d946f07 100644
---- a/xen/arch/arm/arm32/mmu/mm.c
-+++ b/xen/arch/arm/arm32/mmu/mm.c
-@@ -7,6 +7,7 @@
- #include <xen/param.h>
- #include <xen/pfn.h>
- #include <asm/fixmap.h>
-+#include <asm/setup.h>
- #include <asm/static-memory.h>
- #include <asm/static-shmem.h>
+Please note that this patch can be committed only after the related
+Mini-OS patch "config: add support for libxenmanage" has gone in AND
+the Mini-OS commit-id has been updated in Config.mk accordingly!
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ stubdom/Makefile                |  8 ++---
+ stubdom/mini-os.mk              |  1 +
+ tools/xenstored/Makefile        |  2 +-
+ tools/xenstored/Makefile.common |  2 +-
+ tools/xenstored/core.h          |  1 -
+ tools/xenstored/domain.c        | 52 ++++++++++++---------------------
+ tools/xenstored/lu.c            |  1 +
+ tools/xenstored/lu_daemon.c     |  1 +
+ 8 files changed, 28 insertions(+), 40 deletions(-)
+
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 2a81af28a1..ca800b243c 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -307,7 +307,7 @@ endif
+ # libraries under tools/libs
+ #######
  
-@@ -31,100 +32,6 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
-     directmap_virt_end = XENHEAP_VIRT_START + nr_mfns * PAGE_SIZE;
+-STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl guest
++STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl guest manage
+ 
+ LIBDEP_guest := cross-zlib
+ 
+@@ -465,7 +465,7 @@ grub: cross-polarssl grub-upstream $(CROSS_ROOT) grub-$(XEN_TARGET_ARCH)-minios-
+ # xenstore
+ ##########
+ 
+-xenstore-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog ctrl
++xenstore-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog manage
+ xenstore-minios.gen.cfg: xenstore-minios.cfg Makefile
+ 	$(GEN_config) >$@
+ 
+@@ -480,7 +480,7 @@ xenstore: $(CROSS_ROOT) xenstore-minios-config.mk
+ # xenstorepvh
+ #############
+ 
+-xenstorepvh-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog ctrl
++xenstorepvh-minios.gen.cfg: APP_LIBS = gnttab evtchn toollog manage
+ xenstorepvh-minios.gen.cfg: xenstorepvh-minios.cfg Makefile
+ 	$(GEN_config) >$@
+ 
+@@ -523,7 +523,7 @@ else
+ pv-grub-if-enabled:
+ endif
+ 
+-XENSTORE_DEPS := libxenevtchn libxengnttab libxenctrl
++XENSTORE_DEPS := libxenevtchn libxengnttab libxenmanage
+ 
+ .PHONY: xenstore-stubdom
+ xenstore-stubdom: mini-os-$(XEN_TARGET_ARCH)-xenstore $(XENSTORE_DEPS) xenstore
+diff --git a/stubdom/mini-os.mk b/stubdom/mini-os.mk
+index 7e4968e026..be32302f9e 100644
+--- a/stubdom/mini-os.mk
++++ b/stubdom/mini-os.mk
+@@ -13,5 +13,6 @@ GNTTAB_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/gnttab
+ CALL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/call
+ FOREIGNMEMORY_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/foreignmemory
+ DEVICEMODEL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/devicemodel
++MANAGE_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/manage
+ CTRL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/ctrl
+ GUEST_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/guest
+diff --git a/tools/xenstored/Makefile b/tools/xenstored/Makefile
+index 09adfe1d50..81c42838e0 100644
+--- a/tools/xenstored/Makefile
++++ b/tools/xenstored/Makefile
+@@ -5,7 +5,7 @@ include Makefile.common
+ 
+ xenstored: LDLIBS += $(LDLIBS_libxenevtchn)
+ xenstored: LDLIBS += $(LDLIBS_libxengnttab)
+-xenstored: LDLIBS += $(LDLIBS_libxenctrl)
++xenstored: LDLIBS += $(LDLIBS_libxenmanage)
+ xenstored: LDLIBS += -lrt
+ xenstored: LDLIBS += $(SOCKET_LIBS)
+ 
+diff --git a/tools/xenstored/Makefile.common b/tools/xenstored/Makefile.common
+index 27fdb3b49e..271134fcc1 100644
+--- a/tools/xenstored/Makefile.common
++++ b/tools/xenstored/Makefile.common
+@@ -12,7 +12,7 @@ XENSTORED_OBJS-$(CONFIG_MiniOS) += minios.o lu_minios.o
+ # Include configure output (config.h)
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+ CFLAGS += $(CFLAGS_libxenevtchn)
+-CFLAGS += $(CFLAGS_libxenctrl)
++CFLAGS += $(CFLAGS_libxenmanage)
+ CFLAGS += $(CFLAGS_libxentoolcore)
+ 
+ $(XENSTORED_OBJS-y): CFLAGS += $(CFLAGS_libxengnttab)
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index e58779e88c..632886cecf 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -19,7 +19,6 @@
+ #ifndef _XENSTORED_CORE_H
+ #define _XENSTORED_CORE_H
+ 
+-#include <xenctrl.h>
+ #include <xengnttab.h>
+ 
+ #include <sys/types.h>
+diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
+index 64c8fd0cc3..a6506a5bb2 100644
+--- a/tools/xenstored/domain.c
++++ b/tools/xenstored/domain.c
+@@ -34,14 +34,15 @@
+ #include "control.h"
+ 
+ #include <xenevtchn.h>
+-#include <xenctrl.h>
++#include <xenmanage.h>
++#include <xen-barrier.h>
+ #include <xen/grant_table.h>
+ 
+ #ifdef __MINIOS__
+ #include <mini-os/xenbus.h>
+ #endif
+ 
+-static xc_interface **xc_handle;
++static xenmanage_handle *xm_handle;
+ xengnttab_handle **xgt_handle;
+ static evtchn_port_t virq_port;
+ 
+@@ -619,32 +620,28 @@ static int destroy_domain(void *_domain)
+ 	return 0;
  }
  
--/*
-- * Returns the end address of the highest region in the range s..e
-- * with required size and alignment that does not conflict with the
-- * modules from first_mod to nr_modules.
-- *
-- * For non-recursive callers first_mod should normally be 0 (all
-- * modules and Xen itself) or 1 (all modules but not Xen).
-- */
--static paddr_t __init consider_modules(paddr_t s, paddr_t e,
--                                       uint32_t size, paddr_t align,
--                                       int first_mod)
+-static bool get_domain_info(unsigned int domid, xc_domaininfo_t *dominfo)
 -{
--    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
--#ifdef CONFIG_STATIC_SHM
--    const struct membanks *shmem = bootinfo_get_shmem();
--#endif
--    const struct bootmodules *mi = &bootinfo.modules;
--    int i;
--    int nr;
--
--    s = (s+align-1) & ~(align-1);
--    e = e & ~(align-1);
--
--    if ( s > e ||  e - s < size )
--        return 0;
--
--    /* First check the boot modules */
--    for ( i = first_mod; i < mi->nr_mods; i++ )
--    {
--        paddr_t mod_s = mi->module[i].start;
--        paddr_t mod_e = mod_s + mi->module[i].size;
--
--        if ( s < mod_e && mod_s < e )
--        {
--            mod_e = consider_modules(mod_e, e, size, align, i+1);
--            if ( mod_e )
--                return mod_e;
--
--            return consider_modules(s, mod_s, size, align, i+1);
--        }
--    }
--
--    /*
--     * i is the current bootmodule we are evaluating, across all
--     * possible kinds of bootmodules.
--     *
--     * When retrieving the corresponding reserved-memory addresses, we
--     * need to index the reserved_mem bank starting from 0, and only counting
--     * the reserved-memory modules. Hence, we need to use i - nr.
--     */
--    nr = mi->nr_mods;
--    for ( ; i - nr < reserved_mem->nr_banks; i++ )
--    {
--        paddr_t r_s = reserved_mem->bank[i - nr].start;
--        paddr_t r_e = r_s + reserved_mem->bank[i - nr].size;
--
--        if ( s < r_e && r_s < e )
--        {
--            r_e = consider_modules(r_e, e, size, align, i + 1);
--            if ( r_e )
--                return r_e;
--
--            return consider_modules(s, r_s, size, align, i + 1);
--        }
--    }
--
--#ifdef CONFIG_STATIC_SHM
--    nr += reserved_mem->nr_banks;
--    for ( ; i - nr < shmem->nr_banks; i++ )
--    {
--        paddr_t r_s, r_e;
--
--        r_s = shmem->bank[i - nr].start;
--
--        /* Shared memory banks can contain INVALID_PADDR as start */
--        if ( INVALID_PADDR == r_s )
--            continue;
--
--        r_e = r_s + shmem->bank[i - nr].size;
--
--        if ( s < r_e && r_s < e )
--        {
--            r_e = consider_modules(r_e, e, size, align, i + 1);
--            if ( r_e )
--                return r_e;
--
--            return consider_modules(s, r_s, size, align, i + 1);
--        }
--    }
--#endif
--
--    return e;
+-	return xc_domain_getinfo_single(*xc_handle, domid, dominfo) == 0;
 -}
 -
- /*
-  * Find a contiguous region that fits in the static heap region with
-  * required size and alignment, and return the end address of the region
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index a5a80d9b47..6cf272c160 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -81,6 +81,9 @@ struct init_info
-     unsigned int cpuid;
- };
+ static int check_domain(const void *k, void *v, void *arg)
+ {
+-	xc_domaininfo_t dominfo;
++	unsigned int state;
+ 	struct connection *conn;
+-	bool dom_valid;
++	int dom_invalid;
+ 	struct domain *domain = v;
+ 	bool *notify = arg;
  
-+paddr_t consider_modules(paddr_t s, paddr_t e, uint32_t size, paddr_t align,
-+                         int first_mod);
-+
- #endif
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
-index 9664e85ee6..196974f3e2 100644
---- a/xen/arch/arm/mmu/setup.c
-+++ b/xen/arch/arm/mmu/setup.c
-@@ -222,6 +222,100 @@ static void xen_pt_enforce_wnx(void)
-     flush_xen_tlb_local();
+-	dom_valid = get_domain_info(domain->domid, &dominfo);
++	dom_invalid = xenmanage_get_domain_info(xm_handle, domain->domid,
++						&state, NULL);
+ 	if (!domain->introduced) {
+-		if (!dom_valid)
++		if (dom_invalid)
+ 			talloc_free(domain);
+ 		return 0;
+ 	}
+-	if (dom_valid) {
+-		if ((dominfo.flags & XEN_DOMINF_shutdown)
++	if (!dom_invalid) {
++		if ((state & XENMANAGE_GETDOMSTATE_STATE_SHUTDOWN)
+ 		    && !domain->shutdown) {
+ 			domain->shutdown = true;
+ 			*notify = true;
+ 		}
+-		if (!(dominfo.flags & XEN_DOMINF_dying))
++		if (!(state & XENMANAGE_GETDOMSTATE_STATE_DEAD))
+ 			return 0;
+ 	}
+ 	if (domain->conn) {
+@@ -786,10 +783,9 @@ static struct domain *find_or_alloc_domain(const void *ctx, unsigned int domid)
+ static struct domain *find_or_alloc_existing_domain(unsigned int domid)
+ {
+ 	struct domain *domain;
+-	xc_domaininfo_t dominfo;
+ 
+ 	domain = find_domain_struct(domid);
+-	if (!domain && get_domain_info(domid, &dominfo))
++	if (!domain && !xenmanage_get_domain_info(xm_handle, domid, NULL, NULL))
+ 		domain = alloc_domain(NULL, domid);
+ 
+ 	return domain;
+@@ -1187,12 +1183,6 @@ int do_reset_watches(const void *ctx, struct connection *conn,
+ 	return 0;
  }
  
-+/*
-+ * Returns the end address of the highest region in the range s..e
-+ * with required size and alignment that does not conflict with the
-+ * modules from first_mod to nr_modules.
-+ *
-+ * For non-recursive callers first_mod should normally be 0 (all
-+ * modules and Xen itself) or 1 (all modules but not Xen).
-+ */
-+paddr_t __init consider_modules(paddr_t s, paddr_t e,
-+                                uint32_t size, paddr_t align,
-+                                int first_mod)
-+{
-+    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
-+#ifdef CONFIG_STATIC_SHM
-+    const struct membanks *shmem = bootinfo_get_shmem();
-+#endif
-+    const struct bootmodules *mi = &bootinfo.modules;
-+    int i;
-+    int nr;
+-static int close_xc_handle(void *_handle)
+-{
+-	xc_interface_close(*(xc_interface**)_handle);
+-	return 0;
+-}
+-
+ static int close_xgt_handle(void *_handle)
+ {
+ 	xengnttab_close(*(xengnttab_handle **)_handle);
+@@ -1258,15 +1248,9 @@ void domain_early_init(void)
+ 	if (!domhash)
+ 		barf_perror("Failed to allocate domain hashtable");
+ 
+-	xc_handle = talloc(talloc_autofree_context(), xc_interface*);
+-	if (!xc_handle)
+-		barf_perror("Failed to allocate domain handle");
+-
+-	*xc_handle = xc_interface_open(0,0,0);
+-	if (!*xc_handle)
+-		barf_perror("Failed to open connection to hypervisor");
+-
+-	talloc_set_destructor(xc_handle, close_xc_handle);
++	xm_handle = xenmanage_open(NULL, 0);
++	if (!xm_handle)
++		barf_perror("Failed to open connection to libxenmanage");
+ 
+ 	xgt_handle = talloc(talloc_autofree_context(), xengnttab_handle*);
+ 	if (!xgt_handle)
+@@ -1306,6 +1290,8 @@ void domain_deinit(void)
+ {
+ 	if (virq_port)
+ 		xenevtchn_unbind(xce_handle, virq_port);
 +
-+    s = (s+align-1) & ~(align-1);
-+    e = e & ~(align-1);
-+
-+    if ( s > e ||  e - s < size )
-+        return 0;
-+
-+    /* First check the boot modules */
-+    for ( i = first_mod; i < mi->nr_mods; i++ )
-+    {
-+        paddr_t mod_s = mi->module[i].start;
-+        paddr_t mod_e = mod_s + mi->module[i].size;
-+
-+        if ( s < mod_e && mod_s < e )
-+        {
-+            mod_e = consider_modules(mod_e, e, size, align, i+1);
-+            if ( mod_e )
-+                return mod_e;
-+
-+            return consider_modules(s, mod_s, size, align, i+1);
-+        }
-+    }
-+
-+    /*
-+     * i is the current bootmodule we are evaluating, across all
-+     * possible kinds of bootmodules.
-+     *
-+     * When retrieving the corresponding reserved-memory addresses, we
-+     * need to index the reserved_mem bank starting from 0, and only counting
-+     * the reserved-memory modules. Hence, we need to use i - nr.
-+     */
-+    nr = mi->nr_mods;
-+    for ( ; i - nr < reserved_mem->nr_banks; i++ )
-+    {
-+        paddr_t r_s = reserved_mem->bank[i - nr].start;
-+        paddr_t r_e = r_s + reserved_mem->bank[i - nr].size;
-+
-+        if ( s < r_e && r_s < e )
-+        {
-+            r_e = consider_modules(r_e, e, size, align, i + 1);
-+            if ( r_e )
-+                return r_e;
-+
-+            return consider_modules(s, r_s, size, align, i + 1);
-+        }
-+    }
-+
-+#ifdef CONFIG_STATIC_SHM
-+    nr += reserved_mem->nr_banks;
-+    for ( ; i - nr < shmem->nr_banks; i++ )
-+    {
-+        paddr_t r_s, r_e;
-+
-+        r_s = shmem->bank[i - nr].start;
-+
-+        /* Shared memory banks can contain INVALID_PADDR as start */
-+        if ( INVALID_PADDR == r_s )
-+            continue;
-+
-+        r_e = r_s + shmem->bank[i - nr].size;
-+
-+        if ( s < r_e && r_s < e )
-+        {
-+            r_e = consider_modules(r_e, e, size, align, i + 1);
-+            if ( r_e )
-+                return r_e;
-+
-+            return consider_modules(s, r_s, size, align, i + 1);
-+        }
-+    }
-+#endif
-+
-+    return e;
-+}
-+
++	xenmanage_close(xm_handle);
+ }
+ 
  /*
-  * Boot-time pagetable setup.
-  * Changes here may need matching changes in head.S
+@@ -1335,13 +1321,13 @@ int domain_alloc_permrefs(struct node_perms *perms)
+ {
+ 	unsigned int i, domid;
+ 	struct domain *d;
+-	xc_domaininfo_t dominfo;
+ 
+ 	for (i = 0; i < perms->num; i++) {
+ 		domid = perms->p[i].id;
+ 		d = find_domain_struct(domid);
+ 		if (!d) {
+-			if (!get_domain_info(domid, &dominfo))
++			if (xenmanage_get_domain_info(xm_handle, domid,
++						      NULL, NULL))
+ 				perms->p[i].perms |= XS_PERM_IGNORE;
+ 			else if (!alloc_domain(NULL, domid))
+ 				return ENOMEM;
+diff --git a/tools/xenstored/lu.c b/tools/xenstored/lu.c
+index bec2a84e10..4fccbbc195 100644
+--- a/tools/xenstored/lu.c
++++ b/tools/xenstored/lu.c
+@@ -11,6 +11,7 @@
+ #include <stdlib.h>
+ #include <syslog.h>
+ #include <time.h>
++#include <unistd.h>
+ #include <sys/mman.h>
+ #include <sys/stat.h>
+ 
+diff --git a/tools/xenstored/lu_daemon.c b/tools/xenstored/lu_daemon.c
+index 6df6c80a2a..88d8d9e1b3 100644
+--- a/tools/xenstored/lu_daemon.c
++++ b/tools/xenstored/lu_daemon.c
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <syslog.h>
++#include <unistd.h>
+ #include <sys/stat.h>
+ 
+ #include "talloc.h"
 -- 
 2.43.0
 
