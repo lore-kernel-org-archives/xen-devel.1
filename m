@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E52E7717D
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Dec 2024 15:00:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.856765.1269284 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDDFDE7717F
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Dec 2024 16:24:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.856789.1269305 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tM78h-0005nN-Ca; Fri, 13 Dec 2024 14:59:35 +0000
+	id 1tM8Su-0000M4-Lr; Fri, 13 Dec 2024 16:24:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 856765.1269284; Fri, 13 Dec 2024 14:59:35 +0000
+Received: by outflank-mailman (output) from mailman id 856789.1269305; Fri, 13 Dec 2024 16:24:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tM78h-0005nG-A2; Fri, 13 Dec 2024 14:59:35 +0000
-Received: by outflank-mailman (input) for mailman id 856765;
- Fri, 13 Dec 2024 14:59:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gKjA=TG=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tM78f-0005nA-Lu
- for xen-devel@lists.xenproject.org; Fri, 13 Dec 2024 14:59:33 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dbaf3b52-b962-11ef-99a3-01e77a169b0f;
- Fri, 13 Dec 2024 15:59:31 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aa69077b93fso272280366b.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Dec 2024 06:59:31 -0800 (PST)
-Received: from localhost ([217.156.233.154]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa68f70cc47sm671340666b.123.2024.12.13.06.59.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Dec 2024 06:59:30 -0800 (PST)
+	id 1tM8Su-0000Lx-Io; Fri, 13 Dec 2024 16:24:32 +0000
+Received: by outflank-mailman (input) for mailman id 856789;
+ Fri, 13 Dec 2024 16:24:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=XZcu=TG=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1tM8St-000061-0l
+ for xen-devel@lists.xenproject.org; Fri, 13 Dec 2024 16:24:31 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bac62228-b96e-11ef-a0d6-8be0dac302b0;
+ Fri, 13 Dec 2024 17:24:30 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 0E33B1F394;
+ Fri, 13 Dec 2024 16:24:30 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B0EF2137CF;
+ Fri, 13 Dec 2024 16:24:29 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id ZJy9Kb1fXGfFSgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 13 Dec 2024 16:24:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,161 +53,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dbaf3b52-b962-11ef-99a3-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1734101971; x=1734706771; darn=lists.xenproject.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+8FDKQbpBGmim4bWvmV4I2XHERC7FpRhL8bJGk/mvcM=;
-        b=KizIyDC9hZycwYoPTC3l0v8JZfJ/0VNjvQprgyEp+nhpn+vsmfx4vcchYKFviznvoY
-         pWjfXmRxDz4BgGAtPCOnUsmeY/2RQZYjwtkll2vJhTeBjzbAlYOSp6QCmsL+8CY0hDAq
-         fRourpYfUwtJADpyG7VKqZuQwuse9JuytHTDI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734101971; x=1734706771;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=+8FDKQbpBGmim4bWvmV4I2XHERC7FpRhL8bJGk/mvcM=;
-        b=SXm1gbc3tLoPHBeuZvp+FB7Pzz1VtwAcYlAtcmkLC5DImbjEXvBkSJemTMaM8NPOnb
-         2mxSwxBbSWPlBfBAMfr7AJU0VbfxS7J/sCAJZjAyy82j0R/IurvAjK9TYzW+/acyyJ+t
-         ++4yP+Yj1vuULE/g1zgb+xUSPaYYVv/ZH9qm1biRFUkz+eD9B0qTqyq6ibQwa76bWFGN
-         nPiH9XxWxod9+WkWzOLwZJNMt3Xq4ZWnjfkRL689CV3u4jC4YLMYOZLauSmBSiZLzQXI
-         spCme4FgN4ZWmaxtpxw8VOPhCrh3bW0iC3niItfj1gQTLUQFwfepWMqRR2/f6MLQAcLo
-         IpIQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWHdXhtNg4vwfH/MpATlI/P8mpL1RIphNtv7PiYNE9JhtKsepBTOB+5Zw1XAfjs7PuJvw6CtN3giis=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwQN2MC2qPKXUhRp8GVM0I4hDqHTtYKeKJUMz+WzMg1nOnpQMnt
-	kV9DG3DTbe1h0McuMwP/0/S7QWiRunqtGO1nWKvxLoZAQs0hbEfLINwpzS6LSos=
-X-Gm-Gg: ASbGncsSui96jRsp7XYTz0RFCwkKaCR/k3IM3Cv+zljh/wq83+BFD97brhbnUGCQqkr
-	h1kVulaL3GNCxxOsVl2wwPtenlvQbcfFt1fSp2d1hFHvK3i2ZO6jXWqK9v9vXlmk+Zn+QX4+UBK
-	SCy+VVbMcM9o/714SgvxLQC1hgnxZTv6Xo9afPvTMA99EcRIEBx+c9bGSV1rTnEtEBhguGO6k8M
-	t1/7Lz47zUvISwrfa7HOxcseEK8BMvjah0+1AZ/BAVPolJugU2aSTLtNxIYqEvstw==
-X-Google-Smtp-Source: AGHT+IGjgOBtANzrdNgxVHbVz25HZtoWoznhpClsOWoBVge6zWGTY3JLSO3N09rNXlS8FBnA1h4+cQ==
-X-Received: by 2002:a17:907:2d8f:b0:aa6:b4b3:5923 with SMTP id a640c23a62f3a-aab779c72e4mr345786766b.33.1734101971045;
-        Fri, 13 Dec 2024 06:59:31 -0800 (PST)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 13 Dec 2024 14:59:28 +0000
-Message-Id: <D6ANUES5Q02Z.7V3FELRSIKSY@cloud.com>
-Cc: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Hongyan
- Xia" <hongyxia@amazon.com>, "Julien Grall" <jgrall@amazon.com>
-Subject: Re: [PATCH V4 10/15] xen/page_alloc: vmap heap nodes when they are
- outside the direct map
-From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
-To: "Elias El Yandouzi" <eliasely@amazon.com>,
- <xen-devel@lists.xenproject.org>
-X-Mailer: aerc 0.18.2
-References: <20241111131148.52568-1-eliasely@amazon.com>
- <20241111131148.52568-11-eliasely@amazon.com>
-In-Reply-To: <20241111131148.52568-11-eliasely@amazon.com>
+X-Inumbo-ID: bac62228-b96e-11ef-a0d6-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1734107070; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=L2xTCNjOjUSFogDUtL9Ml6AtqorKdQYe/34xDCxxxEg=;
+	b=N0WIH8RnI/1mOHjyKiQTlZnM47OIhDo/MKwqVLwsLqpr4sZ8G9Hou564PpjpqRtfxE0z5q
+	4tmuGh5OE3F7KKvgetQZoiV8QJWRO8sWyMmgZUj/DJJ3hZ4ps+eMbr/tS59jvaKocRiL52
+	6wAMs0KUo7kKAgA3D9bsjw8AQ6H5Vik=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1734107070; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=L2xTCNjOjUSFogDUtL9Ml6AtqorKdQYe/34xDCxxxEg=;
+	b=N0WIH8RnI/1mOHjyKiQTlZnM47OIhDo/MKwqVLwsLqpr4sZ8G9Hou564PpjpqRtfxE0z5q
+	4tmuGh5OE3F7KKvgetQZoiV8QJWRO8sWyMmgZUj/DJJ3hZ4ps+eMbr/tS59jvaKocRiL52
+	6wAMs0KUo7kKAgA3D9bsjw8AQ6H5Vik=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v3 1/7] xen/xsm: make getdomaininfo xsm dummy checks more stringent
+Date: Fri, 13 Dec 2024 17:24:15 +0100
+Message-ID: <20241213162421.16782-2-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241213162421.16782-1-jgross@suse.com>
+References: <20241213162421.16782-1-jgross@suse.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-2.80 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-0.998];
+	MIME_GOOD(-0.10)[text/plain];
+	ARC_NA(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_COUNT_TWO(0.00)[2];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email]
 
-On Mon Nov 11, 2024 at 1:11 PM GMT, Elias El Yandouzi wrote:
-> From: Hongyan Xia <hongyxia@amazon.com>
->
-> When we do not have a direct map, archs_mfn_in_direct_map() will always
-> return false, thus init_node_heap() will allocate xenheap pages from an
-> existing node for the metadata of a new node. This means that the
-> metadata of a new node is in a different node, slowing down heap
-> allocation.
->
-> Since we now have early vmap, vmap the metadata locally in the new node.
->
-> Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-> Signed-off-by: Julien Grall <jgrall@amazon.com>
-> Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
->
-> ----
->
->     Changes in v4:
->         * Change type of the parameters to paddr_t
->         * Use clear_domain_page() instead of open-coding it
->
->     Changes in v2:
->         * vmap_contig_pages() was renamed to vmap_contig()
->         * Fix indentation and coding style
->
->     Changes from Hongyan's version:
->         * arch_mfn_in_direct_map() was renamed to
->           arch_mfns_in_direct_map()
->         * Use vmap_contig_pages() rather than __vmap(...).
->         * Add missing include (xen/vmap.h) so it compiles on Arm
->
-> diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-> index 2cef521ad85a..62cdeb5013a3 100644
-> --- a/xen/common/page_alloc.c
-> +++ b/xen/common/page_alloc.c
-> @@ -137,6 +137,7 @@
->  #include <xen/sections.h>
->  #include <xen/softirq.h>
->  #include <xen/spinlock.h>
-> +#include <xen/vmap.h>
-> =20
->  #include <asm/flushtlb.h>
->  #include <asm/page.h>
-> @@ -606,22 +607,32 @@ static unsigned long init_node_heap(int node, unsig=
-ned long mfn,
->          needed =3D 0;
->      }
->      else if ( *use_tail && nr >=3D needed &&
-> -              arch_mfns_in_directmap(mfn + nr - needed, needed) &&
->                (!xenheap_bits ||
->                 !((mfn + nr - 1) >> (xenheap_bits - PAGE_SHIFT))) )
->      {
-> -        _heap[node] =3D mfn_to_virt(mfn + nr - needed);
-> -        avail[node] =3D mfn_to_virt(mfn + nr - 1) +
-> -                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-> +        if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
-> +            _heap[node] =3D mfn_to_virt(mfn + nr - needed);
-> +        else
-> +            _heap[node] =3D vmap_contig(_mfn(mfn + nr - needed), needed)=
-;
+Today the dummy XSM privilege checks for getdomaininfo are less
+stringent than possible: they basically rely on the general
+sysctl/domctl entry check to do all tests and then do the test with
+the XSM_HOOK privilege, which is an "allow all" default.
 
-... and looking more carefully, couldn't we simply map_pages_to_xen() on th=
-e
-directmap using mfn_to_virt() as the target? It's not like the NUMA informa=
-tion
-is a secret, and even if it was the vmap is no less exposed.
+Instead of XSM_HOOK use XSM_XS_PRIV, which is the privilege really
+wanted. Note that this test is still wider than the sysctl entry test,
+but there is no easy way to make both domctl and sysctl happy at the
+same time.
 
-I _GUESS_ this was done with the intent of eventually removing the directma=
-p
-altogether, but it's probably a lot better to keep it around for things lik=
-e
-the p2m structures and other global data (like these per-node structures).
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+---
+V2:
+- new patch
+---
+ xen/common/domctl.c     | 2 +-
+ xen/common/sysctl.c     | 2 +-
+ xen/include/xsm/dummy.h | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-> +
-> +        BUG_ON(!_heap[node]);
-> +        avail[node] =3D (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
-> +                        sizeof(**avail) * NR_ZONES;
-> +
->      }
->      else if ( nr >=3D needed &&
-> -              arch_mfns_in_directmap(mfn, needed) &&
->                (!xenheap_bits ||
-> -               !((mfn + needed - 1) >> (xenheap_bits - PAGE_SHIFT))) )
-> +              !((mfn + needed - 1) >> (xenheap_bits - PAGE_SHIFT))) )
->      {
-> -        _heap[node] =3D mfn_to_virt(mfn);
-> -        avail[node] =3D mfn_to_virt(mfn + needed - 1) +
-> -                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-> +        if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
-> +            _heap[node] =3D mfn_to_virt(mfn + nr - needed);
-> +        else
-> +            _heap[node] =3D vmap_contig(_mfn(mfn + nr - needed), needed)=
-;
-> +
-> +        BUG_ON(!_heap[node]);
-> +        avail[node] =3D (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
-> +                        sizeof(**avail) * NR_ZONES;
-> +
->          *use_tail =3D false;
->      }
->      else if ( get_order_from_bytes(sizeof(**_heap)) =3D=3D
+diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+index ea16b75910..444e072fdc 100644
+--- a/xen/common/domctl.c
++++ b/xen/common/domctl.c
+@@ -539,7 +539,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+         break;
+ 
+     case XEN_DOMCTL_getdomaininfo:
+-        ret = xsm_getdomaininfo(XSM_HOOK, d);
++        ret = xsm_getdomaininfo(XSM_XS_PRIV, d);
+         if ( ret )
+             break;
+ 
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index d02f44fe3a..c2d99ae12e 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -89,7 +89,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+             if ( num_domains == op->u.getdomaininfolist.max_domains )
+                 break;
+ 
+-            if ( xsm_getdomaininfo(XSM_HOOK, d) )
++            if ( xsm_getdomaininfo(XSM_XS_PRIV, d) )
+                 continue;
+ 
+             getdomaininfo(d, &info);
+diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
+index 7956f27a29..f8a3c4b81e 100644
+--- a/xen/include/xsm/dummy.h
++++ b/xen/include/xsm/dummy.h
+@@ -137,7 +137,7 @@ static XSM_INLINE int cf_check xsm_domain_create(
+ static XSM_INLINE int cf_check xsm_getdomaininfo(
+     XSM_DEFAULT_ARG struct domain *d)
+ {
+-    XSM_ASSERT_ACTION(XSM_HOOK);
++    XSM_ASSERT_ACTION(XSM_XS_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-- 
+2.43.0
 
-I'm compiling all these fixes/enhancements into a separate branch while tes=
-ting
-the whole thing.
-
-Cheers,
-Alejandro
 
