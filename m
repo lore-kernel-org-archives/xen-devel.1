@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E30E7717F
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Dec 2024 16:31:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.856979.1269494 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F384E77180
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Dec 2024 17:54:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.857072.1269504 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tM8Zn-0003sV-2Y; Fri, 13 Dec 2024 16:31:39 +0000
+	id 1tM9rP-0003fc-Ir; Fri, 13 Dec 2024 17:53:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 856979.1269494; Fri, 13 Dec 2024 16:31:39 +0000
+Received: by outflank-mailman (output) from mailman id 857072.1269504; Fri, 13 Dec 2024 17:53:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tM8Zm-0003sO-VY; Fri, 13 Dec 2024 16:31:38 +0000
-Received: by outflank-mailman (input) for mailman id 856979;
- Fri, 13 Dec 2024 16:31:37 +0000
+	id 1tM9rP-0003fV-Fu; Fri, 13 Dec 2024 17:53:55 +0000
+Received: by outflank-mailman (input) for mailman id 857072;
+ Fri, 13 Dec 2024 17:53:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4bZM=TG=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1tM8Wx-0003wR-4i
- for xen-devel@lists.xenproject.org; Fri, 13 Dec 2024 16:28:43 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
+ <SRS0=59wY=TG=kernel.org=helgaas@srs-se1.protection.inumbo.net>)
+ id 1tM9rN-0003fP-Nd
+ for xen-devel@lists.xenproject.org; Fri, 13 Dec 2024 17:53:53 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 505d4768-b96f-11ef-a0d6-8be0dac302b0;
- Fri, 13 Dec 2024 17:28:41 +0100 (CET)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5d0f6fa6f8bso2959123a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Dec 2024 08:28:41 -0800 (PST)
-Received: from carlo-ubuntu.minervasys.tech ([193.207.202.156])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa673474d96sm841759266b.96.2024.12.13.08.28.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 08:28:40 -0800 (PST)
+ id 367abd8c-b97b-11ef-a0d6-8be0dac302b0;
+ Fri, 13 Dec 2024 18:53:52 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id BFDE8A41425;
+ Fri, 13 Dec 2024 17:51:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6830CC4CED0;
+ Fri, 13 Dec 2024 17:53:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,213 +43,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 505d4768-b96f-11ef-a0d6-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1734107321; x=1734712121; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=v2Fqewzc4NSZqd78RnQVSVrm5ltUTfiMxSBWlBJDggY=;
-        b=EHFdkXKTEw1TeJrN+BsMuKpktu1qTB606QygXx3YIYkbDWEDp6+RtqWYziQJ8eSL60
-         fzwT8ft2c4JcPF7e6Dg3qBmR+o8Gd1p+5YBKPxNoGDQZfE0FKEu1zvDGESuXeyjHomsv
-         FJMZeQs6oeVbpH0Rp/P8OGDpbVAhmaql7prL7AraodyJOnTWiK+JQXjngVjj0hkGEVeJ
-         SVYB9ilzKTEePprDwnHRgwjAFVWCO90h4MLZmzy308JSt/NIyHjF/yuAz00x4BuLKflf
-         PW2pzOb/rCnsDBj6mNE6Fw5A2ZbrNah6dOc3HvwFCOWAuUdkbAT6YocCPPhWnKfFFNuw
-         b5Rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734107321; x=1734712121;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=v2Fqewzc4NSZqd78RnQVSVrm5ltUTfiMxSBWlBJDggY=;
-        b=JCODZws/jptT6MY9afuv4zhfe+3au4IhKBbt/vlferTDYFiuT7SUUEaXqRZEeHU2dL
-         J6reGjqEaQQD1UItliR3Myi2C7xmckbqHdWOphJNGz2PczMVpBoTOQSCMXJrUDPywChV
-         3+9ql5wdjnQmJpNvnceNq8ll3VTdtbCs5CGN9GjZmd0Ez8zvvSseVw7HTvcV1/vh4RYX
-         3Nnl09aNH8b+c3Sl+FOQstDWKi+xGxi6x+aY2Qm8M+6H/+V+WBG+akEx0NN15YcqP6sx
-         xPhnckcSslfEd1ptyTi7mmGAtr8jaL/iJJAsMbHNdREK806irAAkgwIDaTHtkZahaKLc
-         CwbA==
-X-Gm-Message-State: AOJu0YxZkVR/sXmmG4JIFoC/0poCNLJfJyWsMKxgghZW/Q0JWRXA5/3W
-	9oum3MNeuFtq2+v4yxXPlkZUvAfVqz0L/eKVeOAltRY1saGuGVQTo57J9SK/nRCvOwDsC9UrrH7
-	V1pM=
-X-Gm-Gg: ASbGnctaMu5a1ZOg5DUnQEVvnpvVG7qdlqfXAjPr0mYN2+sa/0x5rffkxRRYGGwyJCL
-	oFoJHOXw0JqZfuglG8c4P21bo3TZuCUaNmc9MHw6O1e0ycCxgSPgRWpQW/fhCOdp4q1WxrtISqf
-	7aFegRVdBjSmHzcbniYCwRAvnoP0YnS6fT8t2h4gCtctNa2A7kEPTcENjy6vx8cjWLu9rls6e2m
-	nanhYTUUkBbggYf1WAhzDlGK9wGIrrpDjKYedIFQwhczKkcNWZJTW0hORlm15arxQwj/LHY6oZH
-	10rL4R2HQmGxE+Ff
-X-Google-Smtp-Source: AGHT+IHGkm6ZpHTtlOX8qen1IdvyvNBfDHKUBnmNDwp2fqelZbnS9mSI2VsNF3FnqMeTMzhDYb9+sw==
-X-Received: by 2002:a17:907:9705:b0:aab:75f1:e520 with SMTP id a640c23a62f3a-aab779b3b5fmr328981166b.34.1734107320717;
-        Fri, 13 Dec 2024 08:28:40 -0800 (PST)
-From: Carlo Nonato <carlo.nonato@minervasys.tech>
-To: xen-devel@lists.xenproject.org
-Cc: andrea.bastoni@minervasys.tech,
-	marco.solieri@minervasys.tech,
-	Luca Miccio <lucmiccio@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+X-Inumbo-ID: 367abd8c-b97b-11ef-a0d6-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1734112430;
+	bh=giLsrBe+eXIr2Z5RCc4V156ArPFV4LhVw7wYhIzIoXE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:From;
+	b=dsGwzCpsHyKSEp5dYNZqIU7VIPCf1+1BvfLnsNExHvF+KgHEKWxdDya2OH4Yb1KdO
+	 xjyNZsn9LGsL+5ubm9YwLy6PfO1o9HHK4GH9HnfKOzJfFxn/wgTn1u4o1aUgnAXEWn
+	 GkW8WT5ub+1C8izqxGJm68p92qbUmH0Zz6j12LSWYDuKvCO0PKAmAIFG8J70k4DM58
+	 BkmbpSUnFf6MODuN2bFpAw11s14p/2yDMhpzWn6yJuuKNDwnCnEugjbstu3jKrQ4hZ
+	 YZx0beo5hpke+CycdWaTs127pteqlLsHIM7BixvuD11GKP+6nU5Tvb5YUerVZXNZPP
+	 DkNTiHRBWPZvw==
+Date: Fri, 13 Dec 2024 11:53:49 -0600
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Kalle Valo <kvalo@kernel.org>
+Cc: Philipp Stanner <pstanner@redhat.com>,
+	Igor Mitsyanko <imitsyanko@quantenna.com>,
+	amien Le Moal <dlemoal@kernel.org>,
+	Niklas Cassel <cassel@kernel.org>,
+	Basavaraj Natikar <basavaraj.natikar@amd.com>,
+	Jiri Kosina <jikos@kernel.org>,
+	Benjamin Tissoires <bentiss@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Sergey Matyukevich <geomatsi@gmail.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Alex Dubov <oakad@yahoo.com>,
+	Sudarsana Kalluru <skalluru@marvell.com>,
+	Manish Chopra <manishc@marvell.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Rasesh Mody <rmody@marvell.com>, GR-Linux-NIC-Dev@marvell.com,
+	Sanjay R Mehta <sanju.mehta@amd.com>,
+	Shyam Sundar S K <Shyam-sundar.S-k@amd.com>,
+	Jon Mason <jdmason@kudzu.us>, Dave Jiang <dave.jiang@intel.com>,
+	Allen Hubbe <allenbh@gmail.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Carlo Nonato <carlo.nonato@minervasys.tech>
-Subject: [PATCH v12 10/12] xen/arm: add Xen cache colors command line parameter
-Date: Fri, 13 Dec 2024 17:28:13 +0100
-Message-ID: <20241213162815.9196-11-carlo.nonato@minervasys.tech>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241213162815.9196-1-carlo.nonato@minervasys.tech>
-References: <20241213162815.9196-1-carlo.nonato@minervasys.tech>
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Chen Ni <nichen@iscas.ac.cn>, Ricky Wu <ricky_wu@realtek.com>,
+	Al Viro <viro@zeniv.linux.org.uk>, Breno Leitao <leitao@debian.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Mostafa Saleh <smostafa@google.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Yi Liu <yi.l.liu@intel.com>, Kunwu Chan <chentao@kylinos.cn>,
+	Dan Carpenter <dan.carpenter@linaro.org>,
+	"Dr. David Alan Gilbert" <linux@treblig.org>,
+	Ankit Agrawal <ankita@nvidia.com>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Eric Auger <eric.auger@redhat.com>, Ye Bin <yebin10@huawei.com>,
+	linux-ide@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-input@vger.kernel.org, netdev@vger.kernel.org,
+	linux-wireless@vger.kernel.org, ntb@lists.linux.dev,
+	linux-pci@vger.kernel.org, kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	Igor Mitsyanko <i.mitsyanko@gmail.com>
+Subject: Re: [PATCH v3 09/11] wifi: qtnfmac: use always-managed version of
+ pcim_intx()
+Message-ID: <20241213175349.GA3421319@bhelgaas>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87cyhvoox9.fsf@kernel.org>
 
-From: Luca Miccio <lucmiccio@gmail.com>
+[+cc personal address for Igor]
 
-Add a new command line parameter to configure Xen cache colors.
-These colors are dumped together with other coloring info.
+On Fri, Dec 13, 2024 at 12:30:42PM +0200, Kalle Valo wrote:
+> Bjorn Helgaas <helgaas@kernel.org> writes:
+> 
+> > [cc->to: Igor]
+> >
+> > On Mon, Dec 09, 2024 at 02:06:31PM +0100, Philipp Stanner wrote:
+> >> pci_intx() is a hybrid function which can sometimes be managed through
+> >> devres. To remove this hybrid nature from pci_intx(), it is necessary to
+> >> port users to either an always-managed or a never-managed version.
+> >> 
+> >> qtnfmac enables its PCI-Device with pcim_enable_device(). Thus, it needs
+> >> the always-managed version.
+> >> 
+> >> Replace pci_intx() with pcim_intx().
+> >> 
+> >> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> >> Acked-by: Kalle Valo <kvalo@kernel.org>
+> >
+> > Hoping for an ack from Igor, too.
+> 
+> Igor hasn't been around for a while so I'm not expecting see an ack from
+> him, I think the whole qtnfmac driver should be removed in the future.
+> Feel free to take the patch as is.
 
-Benchmarking the VM interrupt response time provides an estimation of
-LLC usage by Xen's most latency-critical runtime task. Results on Arm
-Cortex-A53 on Xilinx Zynq UltraScale+ XCZU9EG show that one color, which
-reserves 64 KiB of L2, is enough to attain best responsiveness:
-- Xen 1 color latency:  3.1 us
-- Xen 2 color latency:  3.1 us
-
-Since this is the most common target for Arm cache coloring, the default
-amount of Xen colors is set to one.
-
-More colors are instead very likely to be needed on processors whose L1
-cache is physically-indexed and physically-tagged, such as Cortex-A57.
-In such cases, coloring applies to L1 also, and there typically are two
-distinct L1-colors. Therefore, reserving only one color for Xen would
-senselessly partitions a cache memory that is already private, i.e.
-underutilize it.
-
-Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
-Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-v12:
-- no changes
-v11:
-- no changes
-v10:
-- no changes
-v9:
-- no changes
-v8:
-- added bound check on xen_colors in llc_coloring_init()
-v7:
-- removed XEN_DEFAULT_COLOR
-- XEN_DEFAULT_NUM_COLORS is now used in a for loop to set xen default colors
----
- docs/misc/cache-coloring.rst      |  2 ++
- docs/misc/xen-command-line.pandoc | 10 ++++++++++
- xen/common/llc-coloring.c         | 29 +++++++++++++++++++++++++++++
- 3 files changed, 41 insertions(+)
-
-diff --git a/docs/misc/cache-coloring.rst b/docs/misc/cache-coloring.rst
-index 5224b27afe..e156062aa2 100644
---- a/docs/misc/cache-coloring.rst
-+++ b/docs/misc/cache-coloring.rst
-@@ -115,6 +115,8 @@ Specific documentation is available at `docs/misc/xen-command-line.pandoc`.
- +----------------------+-------------------------------+
- | ``buddy-alloc-size`` | Buddy allocator reserved size |
- +----------------------+-------------------------------+
-+| ``xen-llc-colors``   | Xen color configuration       |
-++----------------------+-------------------------------+
- 
- Colors selection format
- ***********************
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 3a70c49c05..992e1f993e 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2923,6 +2923,16 @@ mode.
- **WARNING: `x2apic_phys` is deprecated and superseded by `x2apic-mode`.
- The latter takes precedence if both are set.**
- 
-+### xen-llc-colors (arm64)
-+> `= List of [ <integer> | <integer>-<integer> ]`
-+
-+> Default: `0: the lowermost color`
-+
-+Specify Xen LLC color configuration. This options is available only when
-+`CONFIG_LLC_COLORING` is enabled.
-+Two colors are most likely needed on platforms where private caches are
-+physically indexed, e.g. the L1 instruction cache of the Arm Cortex-A57.
-+
- ### xenheap_megabytes (arm32)
- > `= <size>`
- 
-diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-index ec6b0d3bff..ff4837fcc6 100644
---- a/xen/common/llc-coloring.c
-+++ b/xen/common/llc-coloring.c
-@@ -13,6 +13,7 @@
- #include <xen/types.h>
- 
- #define NR_LLC_COLORS          (1U << CONFIG_LLC_COLORS_ORDER)
-+#define XEN_DEFAULT_NUM_COLORS 1
- 
- /*
-  * -1: not specified (disabled unless llc-size and llc-nr-ways present)
-@@ -36,6 +37,9 @@ static unsigned int __ro_after_init default_colors[NR_LLC_COLORS];
- static unsigned int __initdata dom0_colors[NR_LLC_COLORS];
- static unsigned int __initdata dom0_num_colors;
- 
-+static unsigned int __ro_after_init xen_colors[NR_LLC_COLORS];
-+static unsigned int __ro_after_init xen_num_colors;
-+
- #define mfn_color_mask              (max_nr_colors - 1)
- #define mfn_to_color(mfn)           (mfn_x(mfn) & mfn_color_mask)
- 
-@@ -94,6 +98,13 @@ static int __init parse_dom0_colors(const char *s)
- }
- custom_param("dom0-llc-colors", parse_dom0_colors);
- 
-+static int __init parse_xen_colors(const char *s)
-+{
-+    return parse_color_config(s, xen_colors, ARRAY_SIZE(xen_colors),
-+                              &xen_num_colors);
-+}
-+custom_param("xen-llc-colors", parse_xen_colors);
-+
- static void print_colors(const unsigned int colors[], unsigned int num_colors)
- {
-     unsigned int i;
-@@ -178,6 +189,22 @@ void __init llc_coloring_init(void)
-     for ( i = 0; i < max_nr_colors; i++ )
-         default_colors[i] = i;
- 
-+    if ( !xen_num_colors )
-+    {
-+        unsigned int i;
-+
-+        xen_num_colors = MIN(XEN_DEFAULT_NUM_COLORS, max_nr_colors);
-+
-+        printk(XENLOG_WARNING
-+               "Xen LLC color config not found. Using first %u colors\n",
-+               xen_num_colors);
-+        for ( i = 0; i < xen_num_colors; i++ )
-+            xen_colors[i] = i;
-+    }
-+    else if ( xen_num_colors > max_nr_colors ||
-+              !check_colors(xen_colors, xen_num_colors) )
-+        panic("Bad LLC color config for Xen\n");
-+
-     arch_llc_coloring_init();
- }
- 
-@@ -188,6 +215,8 @@ void dump_llc_coloring_info(void)
- 
-     printk("LLC coloring info:\n");
-     printk("    Number of LLC colors supported: %u\n", max_nr_colors);
-+    printk("    Xen LLC colors (%u): ", xen_num_colors);
-+    print_colors(xen_colors, xen_num_colors);
- }
- 
- void domain_dump_llc_colors(const struct domain *d)
--- 
-2.43.0
-
+Thanks, Kalle, will do.
 
