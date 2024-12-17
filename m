@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 452DFE7716A
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 08:57:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.858638.1270884 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA45E7716A
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 09:03:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.858649.1270893 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNTOC-0003FP-Pt; Tue, 17 Dec 2024 08:57:12 +0000
+	id 1tNTTY-0005BS-BW; Tue, 17 Dec 2024 09:02:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 858638.1270884; Tue, 17 Dec 2024 08:57:12 +0000
+Received: by outflank-mailman (output) from mailman id 858649.1270893; Tue, 17 Dec 2024 09:02:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNTOC-0003FI-LL; Tue, 17 Dec 2024 08:57:12 +0000
-Received: by outflank-mailman (input) for mailman id 858638;
- Tue, 17 Dec 2024 08:57:10 +0000
+	id 1tNTTY-0005BL-7G; Tue, 17 Dec 2024 09:02:44 +0000
+Received: by outflank-mailman (input) for mailman id 858649;
+ Tue, 17 Dec 2024 09:02:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5pb9=TK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tNTOA-0003FA-Mn
- for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 08:57:10 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1tNTTW-0005BD-Tf
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 09:02:42 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e6232415-bc54-11ef-a0d6-8be0dac302b0;
- Tue, 17 Dec 2024 09:57:09 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43621d27adeso34844585e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 00:57:09 -0800 (PST)
+ id ac28406f-bc55-11ef-a0d6-8be0dac302b0;
+ Tue, 17 Dec 2024 10:02:42 +0100 (CET)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-385e27c75f4so3866652f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 01:02:42 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-388c801ad9asm10404591f8f.58.2024.12.17.00.57.06
+ ffacd0b85a97d-388c801ace1sm10557669f8f.60.2024.12.17.01.02.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Dec 2024 00:57:07 -0800 (PST)
+ Tue, 17 Dec 2024 01:02:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,59 +47,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6232415-bc54-11ef-a0d6-8be0dac302b0
+X-Inumbo-ID: ac28406f-bc55-11ef-a0d6-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1734425829; x=1735030629; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1734426161; x=1735030961; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=9ZqANH81DfpWvQHFgH/lhQ8OEBOOTblLuZ2Pzfhl1zc=;
-        b=CJovTNjJh4WcYiML8J4XEUcv0Br1/j+MFLogOvz9aM/0XbV7IC9vXHrHiQslouseJD
-         C6d8rwEOIc+DAxhv/3FlmFPECyrG8dRjws0hga3WecDMSOsV5nH76hsYvyU5onKg+7L9
-         qVJefFapnQEMikocSgwbEvkSje9vmTPgOL6GGZZLWX6Asn35iXogM6bbo19T4OhyfW8M
-         IZaGcczQzg1dX66vyBaA5MfcmJXQlEzTdOMoMfMNdVejEb6qnoiTHsXoH/UPcYi3ubJ+
-         XAUWeSbIz/8QJTFOfqARo6LYmlVd/wGpG4xA+YOvvTsvikhancxjsn8Pn5uoYnDAYG55
-         6TTw==
+        bh=xjAZZXIZu4thRZG/EQtx9Gvia9nq9b5bV4ABjR28CUQ=;
+        b=VEYZUDj5Di5jlyUDia67INEuPStoi9M8r+o7cEbtejIBcUjS3RK/iPhOVXAOlz2Mbz
+         aKwtjAJPwozQUrW2uWmJzpkhSP71wjBlTGXoA1dTkNTBTzbcbbNUib4EHsWbD9Siugcc
+         NJ8r7KEtibw2iKPbrbBso534wSBjjSxTlIyToFImdLZ6dxsDKN1LG0EpB/WMDtr2cjoN
+         9OOyweT+sUveP1e+58JVjnSjGjOMYxMroF8B1KHC5xW1aWL7jvA3qsxwNQGKwAuFHfyT
+         HTb+rIXXnv8TNmBeiy3DpnCkdXzAfOHxXN0qi63X9UVm6Bvvg0qr4OeURZEGQ2vTuU6B
+         B9Xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734425829; x=1735030629;
+        d=1e100.net; s=20230601; t=1734426161; x=1735030961;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9ZqANH81DfpWvQHFgH/lhQ8OEBOOTblLuZ2Pzfhl1zc=;
-        b=h20K9zuGkm8ntT/9u6eQY/I5fxREpfgU7Olfr/zFQvkstOxkrEiSWsUnl3ZuSqjwbp
-         8KnhPO4fR53N4xEAyeSnCriDghSKoTNKfEF9KD2T0jWr1xJBDdWl7s6qGuF2mM/amMYu
-         NgJs6QuvDa19fw2+eCAQr09lkrUeFm/Yk2n8XULHgONwXv6MoR5+FK0chhkLFgJRLZJs
-         ELy4H9VjFepmDoLHOcxaqJxRgxRV5dHVtR05MaTaFAQ3yZsYmbgTQo5F9bqilLj3h2n6
-         FMhHfqZMyTZ7nFQaC1HiwCmPBtqHc5BwVRu4bLdUJNqo4rWbuWWi/Fk4H7LsIIylp840
-         SOVg==
-X-Forwarded-Encrypted: i=1; AJvYcCX4vi58mFx7XCDEtJ7WqMJi5Xll5QfXqXRPxQDFqBXKG0gTE5l00b3my7ITJjj4Wiu8XPNOuGtgnuE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw/YzaUUl9ZzUv0X3lRruiP4zHxQwxlB6Hf2Jpdl80pOfFl3SsD
-	kPuE1oVTDz4WomugNaSGoKGj4Ip5vaBi/n+F7Vsmd57DzD4psxzlkGOF7gK26w==
-X-Gm-Gg: ASbGncv+b0V4+Vqf24SjbUZVeVZdi+Q1KxkUDDhBi+cEVaxkxPJXjEwBa8D+G62Z2dT
-	5BuRmMTE98sh737wiK+t8S/o9XoQHzBpHJXId5mFoNUlnz984pD4/Sdqz7dustM7gjJiicx2QNZ
-	gUgynrdwlEs2bsku2ijRQrCyJORscuKL8Ky5Sc4tGlRmSXm75rmiX71KFU5lb2d4awN9+YOSC07
-	5b9zAru3RWgHpHRGKPw+6qwfBhYHedByPkn+sKG7S1jxumfaRyIF605tt6C2RG09t1wdqgJz7Al
-	YBFM6tXDxWXxLPXREc7G7BFsX8k42EexgGA+8gPZ1Q==
-X-Google-Smtp-Source: AGHT+IHYMig3P9rX/ddawG9T5zluX386lW4Dq7D29209MQD8Fw/uHo1iCWQ38cFxNVevAZ8jCBpPqw==
-X-Received: by 2002:a05:6000:18a5:b0:386:2fc8:ef86 with SMTP id ffacd0b85a97d-38880ad775amr12023236f8f.14.1734425827676;
-        Tue, 17 Dec 2024 00:57:07 -0800 (PST)
-Message-ID: <00e38f79-6185-4dcb-be69-4b08fb4a81f4@suse.com>
-Date: Tue, 17 Dec 2024 09:57:06 +0100
+        bh=xjAZZXIZu4thRZG/EQtx9Gvia9nq9b5bV4ABjR28CUQ=;
+        b=PTr3rzS+93CmuB3xNPcIlcYmAy5asLmtHGhm2AvsLCn4kmtdSog4rINh6p3ydpa6bv
+         TPTelqxOGWvurwywM8dTHfDWaonkAMLoFEtbTvKyesYXzLy4R2GbSz5aLw5gL+e3Dn/w
+         G7QwI+EfSbshAcUWIt7gdu79x0DZ+8uNAgxl8exh688UNCjRku3dZaa9FCfS2SXsFxJ9
+         GfqaC5n3yRq5IJvl7q35iy4ldLrAiH3tOM1Ankqc2Ah7QYfxeePqGsFzqp2c8COUSk4c
+         qmPbs/M1EGk5OZznS18yvlBD2ZvBKKMgBKd1NhwUyzbsrELGaeutTq+XfomKm6lRaXEe
+         CE2Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWXg/69eMN/nQTPFW36rW+Sr1QdTHhGaF5cB8UiIJ8LAZtJ16+E3ak8Ug1pd3t+ReejrOZkFNtsqTw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy+SrQpgRosiRg+oORa9GrtXuXQbSXXlQ1M3he4WE7rhYlU/0ME
+	ZRCxfg/nV86BSyXq7eKOjq5J5k1RfZpuf/wMYiqmDoqVt0K0FiC/9Sf6TWbC2Q==
+X-Gm-Gg: ASbGnctfG5Fuo/AK7PA2ZNPYHNOeGh3V1viROGGPuAeOghCxFbY85+VEXFQmb5Jjj6d
+	T/7JRtizyZrNgYS7hmG8ZVHGRHi2U+EU/zV3GxXBTNoKB47+Y0WVKoNHIr8r5s5nmoMGZ0zE6EI
+	VRlSItDB9evx/56w24MSa4iY0WCfkiWsEiL3CTW6KsWM6GNS1T+efXIuN5YFluPhb4QJQF27FSD
+	Q8WradBuQRuhyzAdnYMsWPIql0kpEZr4Rj35jEy5D+NCQKN4BnERZferRLnj39qZM2yYqtDAOzU
+	p+AGsTvi/cQ2nqRpEoX8bcAN7glj3WMQ9VjZx1qmnA==
+X-Google-Smtp-Source: AGHT+IHAwkomFfJdPR4XAeJVfEWLG80Mq1QrbUImadenqFOabRzZ0S4ZI/Y6UKUPOe4dLs8sQgDA9w==
+X-Received: by 2002:a05:6000:2a8:b0:386:3262:28c6 with SMTP id ffacd0b85a97d-38880ac2d54mr12501831f8f.5.1734426160740;
+        Tue, 17 Dec 2024 01:02:40 -0800 (PST)
+Message-ID: <61a277f3-5650-4976-9ea2-4cb7137653da@suse.com>
+Date: Tue, 17 Dec 2024 10:02:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 01/12] xen/common: add cache coloring common code
-To: Carlo Nonato <carlo.nonato@minervasys.tech>
-Cc: andrea.bastoni@minervasys.tech, marco.solieri@minervasys.tech,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+Subject: Re: [PATCH] misra: add deviation for MISRA C Rule R11.8.
+To: Alessandro Zucchelli <alessandro.zucchelli@bugseng.com>
+Cc: consulting@bugseng.com, Simone Ballarin <simone.ballarin@bugseng.com>,
+ Doug Goldstein <cardoe@cardoe.com>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20241213162815.9196-1-carlo.nonato@minervasys.tech>
- <20241213162815.9196-2-carlo.nonato@minervasys.tech>
- <eaf99fc7-30f4-4820-ab36-8f5926a4e9b8@suse.com>
- <CAG+AhRUNrj9a2P1TL7MNbkPw5scZjcTamQGxKsDS5sBWqpZrYg@mail.gmail.com>
+References: <202c8efa4f846018e463f6242d25eb10c015d835.1734367711.git.alessandro.zucchelli@bugseng.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -125,115 +119,26 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAG+AhRUNrj9a2P1TL7MNbkPw5scZjcTamQGxKsDS5sBWqpZrYg@mail.gmail.com>
+In-Reply-To: <202c8efa4f846018e463f6242d25eb10c015d835.1734367711.git.alessandro.zucchelli@bugseng.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 16.12.2024 17:33, Carlo Nonato wrote:
-> On Mon, Dec 16, 2024 at 11:51 AM Jan Beulich <jbeulich@suse.com> wrote:
->> On 13.12.2024 17:28, Carlo Nonato wrote:
->>> --- /dev/null
->>> +++ b/xen/common/llc-coloring.c
->>> @@ -0,0 +1,124 @@
->>> +/* SPDX-License-Identifier: GPL-2.0-only */
->>> +/*
->>> + * Last Level Cache (LLC) coloring common code
->>> + *
->>> + * Copyright (C) 2024, Advanced Micro Devices, Inc.
->>> + * Copyright (C) 2024, Minerva Systems SRL
->>> + */
->>> +#include <xen/keyhandler.h>
->>> +#include <xen/llc-coloring.h>
->>> +#include <xen/param.h>
->>> +
->>> +#define NR_LLC_COLORS          (1U << CONFIG_LLC_COLORS_ORDER)
->>> +
->>> +/*
->>> + * -1: not specified (disabled unless llc-size and llc-nr-ways present)
->>> + *  0: explicitly disabled through cmdline
->>> + *  1: explicitly enabled through cmdline
->>> + */
->>> +static int8_t __initdata opt_llc_coloring = -1;
->>> +boolean_param("llc-coloring", opt_llc_coloring);
->>> +
->>> +static bool __ro_after_init llc_coloring_enabled;
->>> +
->>> +static unsigned int __initdata llc_size;
->>> +size_param("llc-size", llc_size);
->>> +static unsigned int __initdata llc_nr_ways;
->>> +integer_param("llc-nr-ways", llc_nr_ways);
->>> +/* Number of colors available in the LLC */
->>> +static unsigned int __ro_after_init max_nr_colors;
->>> +
->>> +static void print_colors(const unsigned int colors[], unsigned int num_colors)
->>> +{
->>> +    unsigned int i;
->>> +
->>> +    printk("{ ");
->>> +    for ( i = 0; i < num_colors; i++ )
->>> +    {
->>> +        unsigned int start = colors[i], end = start;
->>> +
->>> +        printk("%u", start);
->>> +
->>> +        for ( ; i < num_colors - 1 && end + 1 == colors[i + 1]; i++, end++ )
->>> +            ;
->>> +
->>> +        if ( start != end )
->>> +            printk("-%u", end);
->>> +
->>> +        if ( i < num_colors - 1 )
->>> +            printk(", ");
->>> +    }
->>> +    printk(" }\n");
->>> +}
->>> +
->>> +void __init llc_coloring_init(void)
->>> +{
->>> +    unsigned int way_size;
->>> +
->>> +    llc_coloring_enabled = (opt_llc_coloring == 1);
->>
->> Generally I'd suggest to only use > 0, >= 0, < 0, and <= 0 on such
->> variables.
->>
->>> +    if ( (opt_llc_coloring != 0) && llc_size && llc_nr_ways )
->>> +    {
->>> +        llc_coloring_enabled = true;
->>> +        way_size = llc_size / llc_nr_ways;
->>> +    }
->>
->> Hmm, I actually see a difference in someone saying
->>
->> "llc-coloring=0 llc-size=... llc-nr-ways=..."
->>
->> vs
->>
->> "llc-size=... llc-nr-ways=... llc-coloring=0"
->>
->> I'm not sure about Arm, but on x86 this can be relevant as there may be
->> pre-set parts of a command line with appended (human) overrides. Therefore
->> it always wants to be "last wins". Yet yes, you may weant to take the
->> position that in such a case the former example would require "llc-coloring=1"
->> to also be added.
-> 
-> Yes, I think this should be the way to go.
-> 
->> Kind of against the shorthand llc-size+llc-nr-ways only,
->> though.
-> 
-> The shorthand was proposed by you here:
-> https://patchew.org/Xen/20240315105902.160047-1-carlo.nonato@minervasys.tech/20240315105902.160047-2-carlo.nonato@minervasys.tech/#05e4d3da-4130-4c57-9855-43b685ce5005@suse.com
-> 
->> Wouldn't it make sense to infer "llc-coloring" when both of the latter options
->> were supplied?
-> 
-> We both agreed that it was something good to have.
+On 16.12.2024 17:57, Alessandro Zucchelli wrote:
+> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> @@ -393,6 +393,12 @@ Fixing this violation would require to increase code complexity and lower readab
+>  -config=MC3R1.R11.8,reports+={safe,"any_area(any_loc(any_exp(macro(^container_of$))))"}
+>  -doc_end
+>  
+> +-doc_begin="Function __hvm_copy in xen/arch/x86/hvm/hvm.c is a double-use
+> +function, where the parameter needs to not be const because it can be set for
+> +writeor not"
+> +-config=MC3A2.R11.8,reports+={safe,"any_area(any_loc(text(^.*__hvm_copy.*$)))"}
+> +-doc_end
 
-Right, and I'm not putting that under question. With that, however, I find
-your reply ambiguous. If the shorthand is useful to have, is the requirement
-to put a 2nd "llc-coloring=1" on a command line (as per above) really a good
-idea?
+Documentation text is quite a bit more specific than the config line.
+Any function anywhere in the code (even non-x86) with a __hvm_copy infix
+would be deviated this way, aiui.
 
 Jan
 
