@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D51EE7717F
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:36:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.859492.1271638 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F412DE7717F
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:40:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.859510.1271658 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaYQ-0005ZA-4I; Tue, 17 Dec 2024 16:36:14 +0000
+	id 1tNacQ-0007TS-Tg; Tue, 17 Dec 2024 16:40:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 859492.1271638; Tue, 17 Dec 2024 16:36:14 +0000
+Received: by outflank-mailman (output) from mailman id 859510.1271658; Tue, 17 Dec 2024 16:40:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaYQ-0005Z3-0s; Tue, 17 Dec 2024 16:36:14 +0000
-Received: by outflank-mailman (input) for mailman id 859492;
- Tue, 17 Dec 2024 16:36:13 +0000
+	id 1tNacQ-0007TL-Qx; Tue, 17 Dec 2024 16:40:22 +0000
+Received: by outflank-mailman (input) for mailman id 859510;
+ Tue, 17 Dec 2024 16:40:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5pb9=TK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tNaYP-0005Yv-0L
- for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:36:13 +0000
+ id 1tNacP-0007Se-As
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:40:21 +0000
 Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
  [2a00:1450:4864:20::330])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 05e811ef-bc95-11ef-99a3-01e77a169b0f;
- Tue, 17 Dec 2024 17:36:10 +0100 (CET)
+ id 9a03d5fc-bc95-11ef-99a3-01e77a169b0f;
+ Tue, 17 Dec 2024 17:40:19 +0100 (CET)
 Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4361d5dcf5bso60136265e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:36:10 -0800 (PST)
+ 5b1f17b1804b1-43635796b48so22655155e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:40:19 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4363602c9d7sm122234165e9.16.2024.12.17.08.36.09
+ ffacd0b85a97d-388c8016bdfsm11689929f8f.43.2024.12.17.08.40.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Dec 2024 08:36:09 -0800 (PST)
+ Tue, 17 Dec 2024 08:40:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,57 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 05e811ef-bc95-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 9a03d5fc-bc95-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1734453370; x=1735058170; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1734453619; x=1735058419; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=JUGEkVyrqvqSF4KL5lb1zcyA71E+u6asaMgmp+ljBIE=;
-        b=MVoXHqHT/VHwSNXF8IU4ouWrlT8gMyUJRuMqeMs5/M2BSAkq5yGDTr6zvHHlWPixy/
-         1BjcI13jgzDybjss9kKHFoYn4XvgyipqNjkE98qynFhrY22pZ/v5PNunlNYY5Ry+a6Z1
-         ebo45v2DIoxdkzFdnQSrlr4GFQLThi2mNW0rwbt33YjJn5x8mXQk/CMHnwjQ6XaYj4O1
-         zGNc5QrgqXd1lu1tazBDdI2us2OjXAFW6+7Eord4mpZOUjBV6xLQb0AyPppuoRBqnka+
-         MDW3T7z+ntlRDhTA/1XnX7h2TdKLj90sNAVV4n9vWl9ZY2RqCGWMksZSf7HYPdEjWgjj
-         TbLA==
+        bh=8b9qkerj1ruIrch9AF9tYMgh/cecoysqsxMEc+2yDlI=;
+        b=VPTQU0Uwbe3uQffJVH9SwjI9h2RudUiV+6KIIquw2NS1+Q0qQUrjPUV4M0UXczts4t
+         Eqd/+eNkrfBwGslDmZHqXu48ckZIfouKtUeO7355MPD3LIamv5dbPZg0aEIBzKwi2skd
+         V2fYlJvqv65UMiz7ZUYmY73EIbQCIZk78OVxpoEMOC8wDjmzFStGxIIw379i7+aV7OIz
+         2zMCdu9AO0gcFS0xZSDwt88pWesb76iqAuuYLO0XSVYGL5bbbFTVflNgsIvyenurANoh
+         dZCuMECrqiubX4Fcy30/ol+9TujeYFBjVSIBck4FUjW328xdC5Qv/oxlm+w4H6mlKMHc
+         ZF9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734453370; x=1735058170;
+        d=1e100.net; s=20230601; t=1734453619; x=1735058419;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JUGEkVyrqvqSF4KL5lb1zcyA71E+u6asaMgmp+ljBIE=;
-        b=F2v8Ibej8KKEs73ceI0+EvffZVgAEptlxmHW5wmW8Thz/HWWTSxZHaBgamKxyZHfJc
-         sKk4XHryOlcoQR7YTZ/m7/kPefKO/EVGu+THsIeCPf/dB79nSyOOaRqnKu4L09ebijuY
-         P9oK76aHzqR2IU22ChIkPr+88AOwunfxXyKW3Z8gry5CCYAYA3ZE73OHkRJKlm/DqLzc
-         Z27mIddyPelMu1Iq4CW+sCEWz30b1nnPqF09wvpS5qaAeAFbdS+/oBwHRL+Pa7Lw7tRM
-         BUTOXWgoOB5h5EdDVXR9vccIp5ZcgHVW9GlZpPV7KMqp0vf2Fa61eXYJgmsh8LM2c/CX
-         /2LA==
-X-Forwarded-Encrypted: i=1; AJvYcCV08seUyOR1l3hhPlDHdj+QGIhQvNoCZM2YnhE3txgvckQ+Kxs3WlsaRLZqUXMyhOjgOJsgCWIpRpk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyOnZy5HpzHsHkYB+36HqI3UrUhcxbr5K5E7CIPmcjwRHtWjK/x
-	YElT88E4yRzD3y4PEa0YWUrBdp2DWNzrPJDFyiu1AaqPM+4UprFY8xOAxMkpKg==
-X-Gm-Gg: ASbGncuh03x+1jVUMVA+gFDVks1xbbfOMhNpAF4HjvdQtKj/rccXdr2KAqpiSe8YEJs
-	1Zk6s2ecF01cnMN3AKA98Hjrkh7LMIu7w8d+7BEc/+sTiTE7k9WJvtLCYqj3UIoBi6S/nlFdTuH
-	JFXM0ikqYiir4k66ooBB9T61ymI00VCYSxVsl+4RK3ZxpsdrPVpDxU6hbaRpmaURUmslDITpK+8
-	fEk8gnMFmd1zSVBLWn+irzHDHC/GRxrZyXu98/PfE5ctOOtq8bEXzI4yZv4GRH7uBlfH8hcZ793
-	GytddIlI4X0U4v9cioLhijOU7Raci8cjjsobGV/akg==
-X-Google-Smtp-Source: AGHT+IGCnt9jTe2BOR8MnTpTMnQqxfmgG7pxkgcf+g+zJqEmiXXLrRXVIh3lhl48r9FRkTLhCquSjQ==
-X-Received: by 2002:a05:600c:5029:b0:434:a815:2b5d with SMTP id 5b1f17b1804b1-4362aa93dc9mr137719375e9.24.1734453370218;
-        Tue, 17 Dec 2024 08:36:10 -0800 (PST)
-Message-ID: <abeaddb8-6792-4766-9f29-9b0544c746b7@suse.com>
-Date: Tue, 17 Dec 2024 17:36:09 +0100
+        bh=8b9qkerj1ruIrch9AF9tYMgh/cecoysqsxMEc+2yDlI=;
+        b=Qn2Xk3TbqOwF3v3T3ZmRDSflV8ejsAPkJcoOEToRjqc5fxX6bPyYIRlqANEP5nJ9uM
+         ijyt8QxHpjV0TagyPGi3m5amICNoXXMs7vNkAjsC0A2aUeHPAvyqyCjRtLPSTNk0LR+5
+         5EAhqRp98gLZHPNDd4DAkskxJEaYOg/OTWGWJKyasBVbFqI+UTJKya9EK0m5dlNQE0+u
+         /3c3Srs2sEZCG6CLoZovTbhFK+vTA8Fpaz87hwcbPxsvrIsPPt13T5tBq6LPB0Gs/p3J
+         QS1oha2lJNPJmf9j8OANICuIRE80uJPQwb7O8IBIHRcu/+w6QnxLfW9lVZM6Ljr6FEXK
+         8e/A==
+X-Forwarded-Encrypted: i=1; AJvYcCWChZ3WaoOcm9vmOU+sV5sjg6V0JMNEKSKpylDh69daViOHQUoyCf3zeTJA2hWb62p/L6kCQ2GezRk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy4BdRtA0iMarR/mcGNYsTy6C0j6VsvOKcVmeWVaYy6wKAtYeU8
+	9WEuro/b1XuB4x1F7rStoblFqd6+5vDN9B4RstTYN6HTKKzInJYiHxHt8IZ8qw==
+X-Gm-Gg: ASbGncvYsDqy4DoFA7eDCjyCitqHtDrquRqGsS0EmzxsjUzZr37UBrsUu8cOrz5jS7e
+	3DiSpX2qeiuTN3+MRoEOykGtJ1amg4SXmekuROUKvkG7GhcxeDJt+vV5Dfmg+4xbbenq+Fm7Mqc
+	1Rlse1kSq4htMfPtP2ZKic1b723qn0bJ2bkKdMV8QU6r4uAkaM4yyKE7076PfB7pGO9R5tOLT2g
+	215rmdygAYVeRjrEQEZzWZCp6xMo2VH7mSTE8YJE3gyrFokrtGQiLjfTblMXqKxbooYLwzZ2x6N
+	EHJf3+eODV8D7hopJnC8+1l/UxhOYOVDG2KZ7q05LQ==
+X-Google-Smtp-Source: AGHT+IG6xgQgchLIoHEjDkZOrA4F/KplqVc9HWUxW9SVttr2AS0xNKXke0Gzhmmwf+RfTxUukG65Ew==
+X-Received: by 2002:a05:600c:3c82:b0:42c:b8c9:16c8 with SMTP id 5b1f17b1804b1-4364817be68mr34382485e9.10.1734453618795;
+        Tue, 17 Dec 2024 08:40:18 -0800 (PST)
+Message-ID: <c45597af-ce69-41b5-bc73-bd32f2378b76@suse.com>
+Date: Tue, 17 Dec 2024 17:40:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/7] Unflattening and relocation of host device tree
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1734452721.git.oleksii.kurochko@gmail.com>
+Subject: Re: [XEN PATCH] eclair-analysis: Add usage of varargs extension for
+ C99
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
+ ayan.kumar.halder@amd.com, consulting@bugseng.com,
+ Simone Ballarin <simone.ballarin@bugseng.com>,
+ Doug Goldstein <cardoe@cardoe.com>,
+ Andrew Cooper3 <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <bb0e1f3d0d4067b597c7cdae5ed9fc3e059d17ae.1734452569.git.nicola.vetrini@bugseng.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -123,63 +122,32 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <cover.1734452721.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <bb0e1f3d0d4067b597c7cdae5ed9fc3e059d17ae.1734452569.git.nicola.vetrini@bugseng.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 17.12.2024 17:32, Oleksii Kurochko wrote:
-> The current patch series introduces the relocation of the host device tree file
-> to free up low memory and also it is expected that discard_initial_modules()
-> will be called sooner or later, it will discard the FDT boot module,
-> and remove_early_mappings() will destroy the early mappings.
-> 
-> In addition to relocation, unflattening is introduced to create the tree of
-> struct device_node for the host device tree.
-> 
-> To implement this, several things have been introduced:
->  - destroy_xen_mappings() function, which removes page mappings from Xen's
->    page tables. This is necessary for clear_fixmap().
->  - {set,clear}_fixmap() functions to manage mappings in the fixmap region,
->    which are expected to be used in copy_from_paddr() to copy the FDT to Xen's
->    heap.
->  - Introduce new config CONFIG_QEMU which is going to be used to cover changes
->    connected to QEMU virtual board. It will be used during introduction of stubs
->    for clean_and_invalidate_dcache_va_range() and clean_dcache_va_range(),
->    which are expected to be used in copy_from_paddr() and flush_page_to_ram(),
->    which in turn are expected to be used during the call to xvmalloc_array() in
->    relocate_fdt().
->    In case of QEMU cached related functions are implemented as returning 0 as
->    QEMU doesn't model cache ( and so CMO extensions ). For others cases, it is
->    introduced as -ENOSUPP as h/w could support CMO extension ( or hardware
->    specific insertions ) and it will need to update implementation of the
->    mentioned functions.
->  - The introduction of copy_from_paddr() to copy the FDT to an address
->    allocated in Xen's heap.
-> 
-> ---
-> Changes in v3:
->  - Add some Acks for the patches. All the patches are Acked except:
->      [PATCH v3 1/7] xen/riscv: update layout table in config.h
->      [PATCH v3 5/7] xen/riscv: implement data and instruction cache operations
->  - Other changes please look at the specific patch.
-> ---
-> Changes in v2:
->  - Update the cover letter.
->  - Introduce new patch with aligning of upper bounds in the layout table in
->    config.h with the definitions below which are inclusive.
->  - Other changes please look at the specific patch.
-> ---
-> 
-> Oleksii Kurochko (7):
->   xen/riscv: update layout table in config.h
->   xen/riscv: add destroy_xen_mappings() to remove mappings in Xen page
->     tables
->   xen/riscv: reorder includes in asm/page.h alphabetically
->   xen/riscv: add {set,clear}_fixmap() functions for managing fixmap
->     entries
+On 17.12.2024 17:24, Nicola Vetrini wrote:
+> This extension name is missing from the current list of extension used
+> by Xen, therefore is must be added to that configuration in order to
+> avoid violations for MISRA C Rule 1.1.
 
-Please can you avoid re-posting patches that were already committed (the
-latter three)?
+Which extension are we talking about here? I'm afraid ...
+
+> --- a/automation/eclair_analysis/ECLAIR/toolchain.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/toolchain.ecl
+> @@ -100,8 +100,8 @@
+>      ext_enum_value_not_int: non-documented GCC extension.
+>      ext_gnu_array_range: see Section \"6.29 Designated Initializers\" of "GCC_MANUAL".
+>  "
+> --config=STD.diag,behavior+={c99,GCC_ARM64,"^(ext_paste_comma|ext_missing_varargs_arg|ext_named_variadic_macro|ext_return_has_void_expr|ext_gnu_statement_expr_macro|ext_sizeof_alignof_void_type|ext_forward_ref_enum_def|ext_gnu_array_range)$"}
+> --config=STD.diag,behavior+={c99,GCC_X86_64,"^(ext_paste_comma|ext_missing_varargs_arg|ext_named_variadic_macro|ext_return_has_void_expr|ext_gnu_statement_expr_macro|ext_sizeof_alignof_void_type|ext_flexible_array_in_struct|ext_flexible_array_in_array|ext_enum_value_not_int|ext_gnu_array_range)$"}
+> +-config=STD.diag,behavior+={c99,GCC_ARM64,"^(ext_paste_comma|ext_c_missing_varargs_arg|ext_missing_varargs_arg|ext_named_variadic_macro|ext_return_has_void_expr|ext_gnu_statement_expr_macro|ext_sizeof_alignof_void_type|ext_forward_ref_enum_def|ext_gnu_array_range)$"}
+> +-config=STD.diag,behavior+={c99,GCC_X86_64,"^(ext_paste_comma|ext_c_missing_varargs_arg|ext_missing_varargs_arg|ext_named_variadic_macro|ext_return_has_void_expr|ext_gnu_statement_expr_macro|ext_sizeof_alignof_void_type|ext_flexible_array_in_struct|ext_flexible_array_in_array|ext_enum_value_not_int|ext_gnu_array_range)$"}
+>  -doc_end
+
+... ext_c_missing_varargs_arg doesn't tell me anything. Without this it's
+hard to tell whether C-language-toolchain.rst might also need an edit; a
+search for "varargs" in the file yields no hit.
 
 Jan
 
