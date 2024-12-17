@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59341E77187
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 12:19:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.858916.1271167 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D124DE7717F
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 12:42:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.859076.1271223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNWXN-0002wm-LE; Tue, 17 Dec 2024 12:18:53 +0000
+	id 1tNWu0-0002EZ-0z; Tue, 17 Dec 2024 12:42:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 858916.1271167; Tue, 17 Dec 2024 12:18:53 +0000
+Received: by outflank-mailman (output) from mailman id 859076.1271223; Tue, 17 Dec 2024 12:42:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNWXN-0002wf-Ij; Tue, 17 Dec 2024 12:18:53 +0000
-Received: by outflank-mailman (input) for mailman id 858916;
- Tue, 17 Dec 2024 12:18:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=M9m0=TK=xenbits.xen.org=andrewcoop@srs-se1.protection.inumbo.net>)
- id 1tNWXM-0002GC-Eo
- for xen-devel@lists.xen.org; Tue, 17 Dec 2024 12:18:52 +0000
-Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 10800b33-bc71-11ef-a0d6-8be0dac302b0;
- Tue, 17 Dec 2024 13:18:48 +0100 (CET)
+	id 1tNWtz-0002ES-TN; Tue, 17 Dec 2024 12:42:15 +0000
+Received: by outflank-mailman (input) for mailman id 859076;
+ Tue, 17 Dec 2024 12:42:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1tNWty-0002EM-P4
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 12:42:14 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <andrewcoop@xenbits.xen.org>) id 1tNWXC-0081kR-16;
- Tue, 17 Dec 2024 12:18:42 +0000
-Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.96)
- (envelope-from <andrewcoop@xenbits.xen.org>) id 1tNWXC-00E24k-1b;
- Tue, 17 Dec 2024 12:18:42 +0000
+ (envelope-from <julien@xen.org>) id 1tNWty-0082CS-0R;
+ Tue, 17 Dec 2024 12:42:14 +0000
+Received: from [89.27.170.32] (helo=[172.16.75.124])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1tNWty-00E4oT-0k;
+ Tue, 17 Dec 2024 12:42:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,170 +41,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10800b33-bc71-11ef-a0d6-8be0dac302b0
-Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
-Content-Transfer-Encoding: binary
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=hxiQVjBSU1RtH1fXpA14/J9g3f4frsN07DrC7hrMxBo=; b=wHRLSwyAtS7ZKXxGodG4fr+rwj
+	zDh6qwCEfVDOxs/HE3MiSgcOk3C45Ode/FXkD6TIrdpEQaOcgz+VG1fRkO/706+re2oc3SLkPM3Xq
+	26zMKATpR8/R7UxdX9nH4YUbHFA6BybAYU9BtPqxGM5rwbFXN4n5d139F12HzVDNTEjQ=;
+Message-ID: <4e437c60-4fee-40ed-9d2a-789bac0b36d9@xen.org>
+Date: Tue, 17 Dec 2024 13:42:12 +0100
 MIME-Version: 1.0
-X-Mailer: MIME-tools 5.510 (Entity 5.510)
-To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
- xen-users@lists.xen.org, oss-security@lists.openwall.com
-From: Xen.org security team <security@xen.org>
-CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 465 v3 (CVE-2024-53240) - Backend can crash
- Linux netfront
-Message-Id: <E1tNWXC-00E24k-1b@xenbits.xenproject.org>
-Date: Tue, 17 Dec 2024 12:18:42 +0000
-
---=separator
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH] xen/kconfig: allow LATE_HWDOM config for ARM
+Content-Language: en-GB
+To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>
+References: <20241217114719.2870676-1-Sergiy_Kibrik@epam.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20241217114719.2870676-1-Sergiy_Kibrik@epam.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
+Hi,
 
-             Xen Security Advisory CVE-2024-53240 / XSA-465
-                                version 3
+Can you clarify why this is an RFC?
 
-                   Backend can crash Linux netfront
+On 17/12/2024 11:47, Sergiy Kibrik wrote:
+> Allow to build ARM configuration with support for initializing hardware domain.
+> On ARM it is only possible to start hardware domain in multiboot mode, so
+> dom0less support is required. This is reflected by dependency on DOM0LESS_BOOT
+> instead of directly depending on ARM config option.
 
-UPDATES IN VERSION 3
-====================
+I am a bit confused with the explanation. We already have an hardware 
+domain on Arm. It is dom0. So what are you trying to achieve? Is this 
+remove some permissions from the hardware domain?
 
-Public release.
+If so, why can't the hardware domain stay as dom0 and you remove the 
+feature you don't want (e.g. control domain)?
 
-ISSUE DESCRIPTION
-=================
+Are you sure this patch is sufficient to use the late hwdom feature? 
+Looking at the code, to enable the late hwdom, the user needs to provide 
+a domid on the command line. But AFAICT, there is no way to provide a 
+domain ID in the DOM0LESS case...
 
-After a suspend/resume cycle of a Linux guest (e.g. via "virsh dompmsuspend"/
-"virsh dompmwakeup") a malicious network backend can crash the guest via a
-NULL-pointer dereference in the guest's xen-netfront driver.
+> 
+> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+> ---
+>   xen/common/Kconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+> index 90268d9249..7368ca8208 100644
+> --- a/xen/common/Kconfig
+> +++ b/xen/common/Kconfig
+> @@ -374,7 +374,7 @@ endchoice
+>   config LATE_HWDOM
+>   	bool "Dedicated hardware domain"
+>   	default n
+> -	depends on XSM && X86
+> +	depends on XSM && (X86 || DOM0LESS_BOOT)
 
-During the resume operation the xen-netfront driver will release some data
-structures used for communication with the backend, in order to reallocate
-these data structures with possibly different parameters specified by the
-backend. If the backend is triggering a network device removal in the
-guest before any network I/O has happened, the NULL-pointer dereference
-may happen, causing a crash of the guest.
+This will enable LATE_HWDOM for other arch. Is this what we want?
 
-IMPACT
-======
+>   	help
+>   	  Allows the creation of a dedicated hardware domain distinct from
+>   	  domain 0 that manages devices without needing access to other
 
-In setups with non-trusted network backends (e.g. when using untrusted
-network driver domains) suspend/resume cycles of guests can result in
-those guests being crashed by a malicious network backend.
+Cheers,
 
-VULNERABLE SYSTEMS
-==================
+-- 
+Julien Grall
 
-Only systems with non-trusted network backends are vulnerable.
-
-As far as known only Linux guests with the fix for CVE-2022-48969 applied
-are vulnerable (this includes all kernel versions from 6.1 onwards).
-
-All guest types (x86 PV, x86 PVH/HVM and Arm32/Arm64) are vulnerable.
-
-MITIGATION
-==========
-
-Not doing guest suspend/resume cycles will avoid the vulnerability.
-
-Using emulated NICs instead of PV ones will avoid the vulnerability.
-
-CREDITS
-=======
-
-This issue was discovered by Marek Marczykowski-Górecki of Invisible Things Lab.
-
-RESOLUTION
-==========
-
-Applying the attached patch resolves this issue.
-
-xsa465-linux.patch     Linux
-
-$ sha256sum xsa465*
-7207a22e1e70d0b00278d90e797313bee9d72a968ddd38464b90f0612667826e  xsa465-linux.patch
-$
-
-DEPLOYMENT DURING EMBARGO
-=========================
-
-Deployment of patches or mitigations is NOT permitted (except where
-all the affected systems and VMs are administered and used only by
-organisations which are members of the Xen Project Security Issues
-Predisclosure List).  Specifically, deployment on public cloud systems
-is NOT permitted.
-
-This is because the patches need to be applied to the guests and using
-emulated NICs is a guest visible configuration change.
-
-Deployment is permitted only AFTER the embargo ends.
-
-(Note: this during-embargo deployment notice is retained in
-post-embargo publicly released Xen Project advisories, even though it
-is then no longer applicable.  This is to enable the community to have
-oversight of the Xen Project Security Team's decisionmaking.)
-
-For more information about permissible uses of embargoed information,
-consult the Xen Project community's agreed Security Policy:
-  http://www.xenproject.org/security-policy.html
------BEGIN PGP SIGNATURE-----
-
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmdhaw0MHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZ1kYH/3u0RtjvoOLf2CTFAPhBfgVXZ0nbaQAVeVY14OXL
-3WAOQzrspobwSJtVUqRCg14NllEkM2ityeAlussY++b9BFW7nqxji9yL/rSMpuPh
-vsH/sDByBSUYxpaw/LgbkZVvhRq3vbK6E7fnXCw8BO9LYA+uTZRf4P6PRe0JeQtz
-t0IyHsECXaPoSWzX18OtSrg1JFYhgBqB9vK4rKMvMjPpqZDIKlEgIpFwNlywZ6jx
-H6T3CCKUPUZqmVegxJtXIof3STEr9bzd4StPaUrRXfToOg5ZsknUkari0Nr8xW27
-mcTZaFVWgWwfI0irMs9jTp2agfQ6T+yptA8ZfM3J7kGvGcc=
-=+A6o
------END PGP SIGNATURE-----
-
---=separator
-Content-Type: application/octet-stream; name="xsa465-linux.patch"
-Content-Disposition: attachment; filename="xsa465-linux.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbSBmOTI0NGZiNTVmMzczNTZmNzVjNzM5YzU3MzIzZDk0MjJkN2FhMGY4
-IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKdWVyZ2VuIEdyb3Nz
-IDxqZ3Jvc3NAc3VzZS5jb20+CkRhdGU6IFRodSwgNyBOb3YgMjAyNCAxNjox
-NzowMCArMDEwMApTdWJqZWN0OiB4ZW4vbmV0ZnJvbnQ6IGZpeCBjcmFzaCB3
-aGVuIHJlbW92aW5nIGRldmljZQpNSU1FLVZlcnNpb246IDEuMApDb250ZW50
-LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgKQ29udGVudC1UcmFu
-c2Zlci1FbmNvZGluZzogOGJpdAoKV2hlbiByZW1vdmluZyBhIG5ldGZyb250
-IGRldmljZSBkaXJlY3RseSBhZnRlciBhIHN1c3BlbmQvcmVzdW1lIGN5Y2xl
-Cml0IG1pZ2h0IGhhcHBlbiB0aGF0IHRoZSBxdWV1ZXMgaGF2ZSBub3QgYmVl
-biBzZXR1cCBhZ2FpbiwgY2F1c2luZyBhCmNyYXNoIGR1cmluZyB0aGUgYXR0
-ZW1wdCB0byBzdG9wIHRoZSBxdWV1ZXMgYW5vdGhlciB0aW1lLgoKRml4IHRo
-YXQgYnkgY2hlY2tpbmcgdGhlIHF1ZXVlcyBhcmUgZXhpc3RpbmcgYmVmb3Jl
-IHRyeWluZyB0byBzdG9wCnRoZW0uCgpUaGlzIGlzIFhTQS00NjUgLyBDVkUt
-MjAyNC01MzI0MC4KClJlcG9ydGVkLWJ5OiBNYXJlayBNYXJjenlrb3dza2kt
-R8OzcmVja2kgPG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+CkZp
-eGVzOiBkNTBiNzkxNGZhZTAgKCJ4ZW4tbmV0ZnJvbnQ6IEZpeCBOVUxMIHNy
-aW5nIGFmdGVyIGxpdmUgbWlncmF0aW9uIikKU2lnbmVkLW9mZi1ieTogSnVl
-cmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIGRyaXZlcnMvbmV0
-L3hlbi1uZXRmcm9udC5jIHwgNSArKysrLQogMSBmaWxlIGNoYW5nZWQsIDQg
-aW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jIGIvZHJpdmVycy9uZXQveGVuLW5l
-dGZyb250LmMKaW5kZXggNDI2NWMxY2QwZmY3Li42M2ZlNTFkMGU2NGQgMTAw
-NjQ0Ci0tLSBhL2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCisrKyBiL2Ry
-aXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCkBAIC04NjcsNyArODY3LDcgQEAg
-c3RhdGljIG5ldGRldl90eF90IHhlbm5ldF9zdGFydF94bWl0KHN0cnVjdCBz
-a19idWZmICpza2IsIHN0cnVjdCBuZXRfZGV2aWNlICpkZXYKIHN0YXRpYyBp
-bnQgeGVubmV0X2Nsb3NlKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYpCiB7CiAJ
-c3RydWN0IG5ldGZyb250X2luZm8gKm5wID0gbmV0ZGV2X3ByaXYoZGV2KTsK
-LQl1bnNpZ25lZCBpbnQgbnVtX3F1ZXVlcyA9IGRldi0+cmVhbF9udW1fdHhf
-cXVldWVzOworCXVuc2lnbmVkIGludCBudW1fcXVldWVzID0gbnAtPnF1ZXVl
-cyA/IGRldi0+cmVhbF9udW1fdHhfcXVldWVzIDogMDsKIAl1bnNpZ25lZCBp
-bnQgaTsKIAlzdHJ1Y3QgbmV0ZnJvbnRfcXVldWUgKnF1ZXVlOwogCW5ldGlm
-X3R4X3N0b3BfYWxsX3F1ZXVlcyhucC0+bmV0ZGV2KTsKQEAgLTg4Miw2ICs4
-ODIsOSBAQCBzdGF0aWMgdm9pZCB4ZW5uZXRfZGVzdHJveV9xdWV1ZXMoc3Ry
-dWN0IG5ldGZyb250X2luZm8gKmluZm8pCiB7CiAJdW5zaWduZWQgaW50IGk7
-CiAKKwlpZiAoIWluZm8tPnF1ZXVlcykKKwkJcmV0dXJuOworCiAJZm9yIChp
-ID0gMDsgaSA8IGluZm8tPm5ldGRldi0+cmVhbF9udW1fdHhfcXVldWVzOyBp
-KyspIHsKIAkJc3RydWN0IG5ldGZyb250X3F1ZXVlICpxdWV1ZSA9ICZpbmZv
-LT5xdWV1ZXNbaV07CiAKLS0gCjIuNDMuMAoK
-
---=separator--
 
