@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7158DE77184
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:05:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.859384.1271508 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D789CE77184
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:12:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.859393.1271517 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNa4O-0002gJ-1j; Tue, 17 Dec 2024 16:05:12 +0000
+	id 1tNaAk-0004Y6-Lg; Tue, 17 Dec 2024 16:11:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 859384.1271508; Tue, 17 Dec 2024 16:05:12 +0000
+Received: by outflank-mailman (output) from mailman id 859393.1271517; Tue, 17 Dec 2024 16:11:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNa4N-0002gC-VF; Tue, 17 Dec 2024 16:05:11 +0000
-Received: by outflank-mailman (input) for mailman id 859384;
- Tue, 17 Dec 2024 16:05:09 +0000
+	id 1tNaAk-0004Xz-J9; Tue, 17 Dec 2024 16:11:46 +0000
+Received: by outflank-mailman (input) for mailman id 859393;
+ Tue, 17 Dec 2024 16:11:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=q2Xm=TK=intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1tNa4L-0002g4-Sg
- for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:05:09 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+ id 1tNaAj-0004Xt-KP
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:11:45 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ae80fa7f-bc90-11ef-99a3-01e77a169b0f;
- Tue, 17 Dec 2024 17:05:07 +0100 (CET)
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Dec 2024 08:05:05 -0800
+ id 99e89e41-bc91-11ef-99a3-01e77a169b0f;
+ Tue, 17 Dec 2024 17:11:43 +0100 (CET)
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+ by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Dec 2024 08:06:08 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by fmviesa004.fm.intel.com with ESMTP; 17 Dec 2024 08:05:03 -0800
+ by fmviesa009.fm.intel.com with ESMTP; 17 Dec 2024 08:06:06 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,31 +44,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae80fa7f-bc90-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 99e89e41-bc91-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1734451508; x=1765987508;
+  t=1734451903; x=1765987903;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:content-transfer-encoding:in-reply-to;
-  bh=bo86RRfkr3shVB+cRKwVtLE8HuM1MXjOYJ7K7zRqdXU=;
-  b=G7GPLR3j32QgEQOX+OJnBHpxj9dvPXvmqgoiFbjnjuR7MYnpuHFs5cY7
-   qxNqr26s60qWieL11wFDN32VNm4raNQrd7LK52W7TwJaJoR/mmtqRtHMy
-   K5XRzWDYBrJYF4X/9hTl5fQIgs9mB/vjFKHvZF5Wmzd9lODMAgbAt4pkP
-   uxyYV20qK7FrVwBiBp73rSjzhOKwfvo5Qmtzl+ZCLu9DUBDpLFhnjdqDX
-   94KK7Yqivjpl4MVEdPPfpE0HbwF+9FS+rTYe9QAbBj52eOjEW1NlgL4hN
-   0aqzw8WOiY+q+wypwLigRe196J95fMpd736nmLMP9oOMLSGSdKwL8dn8Q
-   g==;
-X-CSE-ConnectionGUID: MoS5oWUKScCG0YU/7t3AEw==
-X-CSE-MsgGUID: pybr45qUR0KJIqcSO2XRJw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11288"; a="52294481"
+  bh=ADb5LrrPM45Iltt7daJmxHcrLCSyT/62xcSAmOFT7SE=;
+  b=ZZp/Y33jjKvjGJyAnm6NS0z2IGe7DjzmyYgYcgTyKp6NwxfxZ4XLHYP5
+   aiHuN92F2f2DR7o3BNSNBH2SsTrOZP5kvNJAy1R3T0NJkg/ETfYmXY3Wx
+   +VWwccB30U+IYtQQe9+/quI84bavc2864VzLDFjzWe0aCqhCAe+A62Xg8
+   q8lz1S3Hxo1AdASzbyhzfoCoFZ36WWlW3lK3d5Iuj7R/2SOhczvlPOkm/
+   db1ZeGemtoCyNetgCzV8WpzVopnBvhhnZe9ohDIgy06vKT7nFLPUoamKh
+   rQSsu4hab73b7npeQPmu+ZEO/zhotYvLbit7jr7wCB185clNB29Ltj37w
+   w==;
+X-CSE-ConnectionGUID: bA3ROYJ1RwOUBtZ/IJGwpQ==
+X-CSE-MsgGUID: BMuf0eVcRbCoLkpxTNRtwA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11288"; a="34778439"
 X-IronPort-AV: E=Sophos;i="6.12,242,1728975600"; 
-   d="scan'208";a="52294481"
-X-CSE-ConnectionGUID: 1pLt2+9cR3y1jBA5/W6pxw==
-X-CSE-MsgGUID: qZtreTkoSoyAj1VrHL4AjQ==
+   d="scan'208";a="34778439"
+X-CSE-ConnectionGUID: rozFU8KBSmWf/b67cOyFeA==
+X-CSE-MsgGUID: 8ivHx4rvS5SaWz8EmpyQAQ==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.12,242,1728975600"; 
-   d="scan'208";a="102409761"
-Date: Wed, 18 Dec 2024 00:23:42 +0800
+   d="scan'208";a="98151026"
+Date: Wed, 18 Dec 2024 00:24:45 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>,
@@ -78,31 +78,32 @@ Cc: qemu-devel@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>,
 	Yanan Wang <wangyanan55@huawei.com>, Anton Johansson <anjo@rev.ng>,
 	Anthony PERARD <anthony@xenproject.org>,
 	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 2/3] system/numa: Remove unnecessary 'exec/cpu-common.h'
- header
-Message-ID: <Z2GljuPLP2xO3JTN@intel.com>
+Subject: Re: [PATCH 3/3] system/accel-ops: Remove unnecessary
+ 'exec/cpu-common.h' header
+Message-ID: <Z2Glzcf9pWE3BVLq@intel.com>
 References: <20241217151305.29196-1-philmd@linaro.org>
- <20241217151305.29196-3-philmd@linaro.org>
+ <20241217151305.29196-4-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20241217151305.29196-3-philmd@linaro.org>
+In-Reply-To: <20241217151305.29196-4-philmd@linaro.org>
 
-On Tue, Dec 17, 2024 at 04:13:04PM +0100, Philippe Mathieu-Daudé wrote:
-> Date: Tue, 17 Dec 2024 16:13:04 +0100
+On Tue, Dec 17, 2024 at 04:13:05PM +0100, Philippe Mathieu-Daudé wrote:
+> Date: Tue, 17 Dec 2024 16:13:05 +0100
 > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH 2/3] system/numa: Remove unnecessary 'exec/cpu-common.h'
->  header
+> Subject: [PATCH 3/3] system/accel-ops: Remove unnecessary
+>  'exec/cpu-common.h' header
 > X-Mailer: git-send-email 2.45.2
 > 
-> Nothing requires definitions from "exec/cpu-common.h",
-> do not include this header.
+> Since commit c4b3f46c151 ("include/exec: Move vaddr defines to
+> separate file") we only need to include "exec/vaddr.h" to get
+> the 'vaddr' type definition, no need for "exec/cpu-common.h".
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->  include/sysemu/numa.h | 1 -
->  1 file changed, 1 deletion(-)
+>  include/sysemu/accel-ops.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
