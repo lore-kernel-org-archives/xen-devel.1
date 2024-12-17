@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A80DE7717F
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 09:04:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.858657.1270902 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA89E7716A
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 09:30:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.858670.1270912 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNTVY-0005jO-LS; Tue, 17 Dec 2024 09:04:48 +0000
+	id 1tNTtv-0000qi-FT; Tue, 17 Dec 2024 09:29:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 858657.1270902; Tue, 17 Dec 2024 09:04:48 +0000
+Received: by outflank-mailman (output) from mailman id 858670.1270912; Tue, 17 Dec 2024 09:29:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNTVY-0005jH-It; Tue, 17 Dec 2024 09:04:48 +0000
-Received: by outflank-mailman (input) for mailman id 858657;
- Tue, 17 Dec 2024 09:04:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DIsX=TK=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tNTVX-0005jA-SA
- for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 09:04:47 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f67a58a1-bc55-11ef-a0d6-8be0dac302b0;
- Tue, 17 Dec 2024 10:04:46 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-434a766b475so53314325e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 01:04:46 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43625553234sm168873715e9.3.2024.12.17.01.04.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 01:04:45 -0800 (PST)
+	id 1tNTtv-0000qb-Ca; Tue, 17 Dec 2024 09:29:59 +0000
+Received: by outflank-mailman (input) for mailman id 858670;
+ Tue, 17 Dec 2024 09:29:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=5pb9=TK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tNTtu-0000qV-4X
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 09:29:58 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 792d1282-bc59-11ef-99a3-01e77a169b0f;
+ Tue, 17 Dec 2024 10:29:54 +0100 (CET)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43622354a3eso35146505e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 01:29:54 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4363602c9d7sm111021545e9.16.2024.12.17.01.29.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Dec 2024 01:29:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,122 +47,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f67a58a1-bc55-11ef-a0d6-8be0dac302b0
+X-Inumbo-ID: 792d1282-bc59-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1734426286; x=1735031086; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QhUhfSD222VxNlcXsjSJ/iPbolQEMip+ixbS76EcuCM=;
-        b=OYee+/cuz/OIqMgqgQAg8nzzDrs4Q7meE5yYHeRgXilXdGcPm9mYyjuXAMioCbjik4
-         weFsYp/hyK/lp5pkEgCwAMeMkT+2wWDZSbMYjj57VUcA/pVaEL9Cc4GbPKmRNXK9X7cs
-         4WKwXqceH3Rb19J3SVIlRppgm4CqXb0G2MIQQ=
+        d=suse.com; s=google; t=1734427794; x=1735032594; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=3A9RlaLr39wUofKB4B3KHUPUw1GkTQLzaTY0Xa0Iy4A=;
+        b=I08UMmPctIHnFaYefJfZwgtZX73tyS8Ka27fyjGnKymknQFI0Y9Ee9bSrSENkZvQqj
+         N97bnhLw8pNWl88egrBoRGp8WqYL4VPVz+JkZMwHA/tUKKblsVIvfuQcDzsX6Vi0jkCp
+         LoWlY6udJoSrvP6jN5H9EGDeAC3kvBNz8N9/G/wOl5bTWLCftrwIwP/eivM7M8sN/Oqs
+         qOw5ZMZ7OQyYuoTwEzkCJ6jNgwsIhACFudhIJ9ka5nak88XGY9x/flnDdXXHFkQi1yNo
+         gL+lR1KnfKk7s/GS44A6QSIzEhZzlP7h2eb8LbCPy/w7Gp+fPdIRX9vn+D8sGhI3bYbJ
+         HSoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734426286; x=1735031086;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QhUhfSD222VxNlcXsjSJ/iPbolQEMip+ixbS76EcuCM=;
-        b=JBfISDrwUsEe07A2Gn4toBSahLsojNxJgCKvjnfTs1MTJM9JoL7/Ru24XwwLOFACpB
-         OVD6M6aolq4HiIKl0g5+YaO3NlLvhAbOyqHr2kegEA6Bf2h29yKDlwJ3nz8N3QrLEspy
-         IdrxMTLix5pFs7BfHS66HbZaMI+nnMQitPv+guUzgX+gdD//cKWXRlj9yJK3l3W+yMuD
-         7MG1YqO3vZo/63wSQTDcKxB+P/w8Rhz2YoAb93z1r8YIEFLVzejnyAXPSrvCa4x1DtiF
-         Obh9H+nBkq7ijkBIyaeMT85HlqLMC+CPcYkVtBMqMluVrnNfR+jD7weZFX8M+fP2Caeh
-         gZwg==
-X-Gm-Message-State: AOJu0YzLpS1xoUJ5h9WAtpenQlgXrfsDWYeqjwzxPoNdfy5+H/cMRlJ0
-	DKv+a4eK8Mwm/8qUVsSyNBnxUOlPiNwH+9+D9v95BHPf+duBdSxEzfj+Ao/Hgwce8CsRJWg7Ora
-	/
-X-Gm-Gg: ASbGncthtCudtjAIWJj87eK/z0SGVWVRhzxhAkOnKr8f71pjEi4bWlT3na11p0Au2YH
-	BCIE56uOa3aitI3XPGsyZXPjQO45eEODz9apnAdaAMTgAoNHN3uDBZVu4m1UDoBUr2mu8K1vEqS
-	nABv59HPC+dLw9JqmGTq5nz5AIw6L750uL+8BTYk5Fhvu/jue3PTuY5K4cy6eiY1a/38A525M1d
-	XCVXCwv0O3i3NhTHOzK3GmOs9JVFddrjRI2bK2Eq2y4dHAjt1VIKTfoKS92nzuGzlc=
-X-Google-Smtp-Source: AGHT+IEBO710LCTFWwUAihOCugEA3hGN50uCDGeneSo28meI4yCjdM/bnv32SmYDN5YJfiPuKXeYeA==
-X-Received: by 2002:a05:600c:b99:b0:435:9ed3:5698 with SMTP id 5b1f17b1804b1-4362aa9784cmr126683715e9.24.1734426285738;
-        Tue, 17 Dec 2024 01:04:45 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
-Subject: [PATCH] x86/io-apic: prevent early exit from i8259 loop detection
-Date: Tue, 17 Dec 2024 10:00:45 +0100
-Message-ID: <20241217090045.6251-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
+        d=1e100.net; s=20230601; t=1734427794; x=1735032594;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3A9RlaLr39wUofKB4B3KHUPUw1GkTQLzaTY0Xa0Iy4A=;
+        b=GzAckfzC7gEFTdCzykroU08LFOTIqUhnLYF+FVFqnGm17ooTf5Ht2JdPQnXQOuCkeY
+         LKvXFkTNCc6Vh5wWFNgVm+mGy+kcYCSbSS3BK3UPW6Cz9VafuDnp2XIw7oPL/KPVof0T
+         chhXMb9jhWsqWYQ0xfx6l4WPqCxL9aPNso3e261EbkcvIKQdJ1hqPwmPkR1SbkS80k7t
+         Z98IwILO06pHFBvic2uhgIQsNsH+CHGsTgj+0/n5w3t2p5c78IA2UW3SIo17lOSZkgML
+         PbuY9qiopLSiJ9+wJIM3VAK59mzhwpUTuM/g97Wm+WHAVxnRdOVTG9qwmBDly5f2mFEN
+         X93A==
+X-Forwarded-Encrypted: i=1; AJvYcCVNVuc2Z8oGpnsO9vSBzqwuX0YQ1ow1hgnSqzQoVBxpRrrtC9IH3nUgpfUf1oGi/j/t1EcUq/HvhgY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxq+2lvUukG3slDcf1Zzo3aNpmUH8dpZxqW+DGeNZ9dOz3kDSHm
+	M8KnsgICwFO6THxV0yvJ7zhRSmki80NpZJ0Vga7TJnCEmhNZlh6fnCB6RCczbg==
+X-Gm-Gg: ASbGncsplHTUtbht2/UJ7LPoZYmxBBpRm1jAg7QDjhGTxjxqDbY7a7iBQuuwGZPn5SR
+	6VSnWShjJehwl6HHv18zNiYlRQtSpniw29FLautK25hZDZUcfK7Ko2BtiC0ls6TqSlr7Sz8TDA6
+	WoAZwcpr/6jHoo1SB4lMgU19P1GpPeprmnEy+w+SSNYhuLydNpkavZq7yjW2dsgglnLRgY+e9ow
+	cIUZWVjvjMHgwivT/e3mbY3Lqy9BpeF+e0Qf73O/tGUMJo5Euhy26N0kYRHVj2NHbRgBEGOPWgc
+	Jouk6jBJkCwWlYAeEgpnxI/qGQjpy2MT60NA/BY8Cg==
+X-Google-Smtp-Source: AGHT+IFfXowhNC600y8aw0doIJF2sVTY+PN+VHV2XtfOM1eL1l9f8xPrTlLYGBrHh/YGIhEfL6Fpow==
+X-Received: by 2002:a05:600c:524a:b0:436:488f:4f3 with SMTP id 5b1f17b1804b1-436488f0687mr20986365e9.17.1734427793816;
+        Tue, 17 Dec 2024 01:29:53 -0800 (PST)
+Message-ID: <cf8d3ff6-b72d-468e-a14f-1dfbc741f376@suse.com>
+Date: Tue, 17 Dec 2024 10:29:52 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] tools/libacpi: clear ASL warning about PCI0
+To: Ariel Otilibili <Ariel.Otilibili-Anieli@eurecom.fr>
+Cc: Anthony PERARD <anthony.perard@vates.tech>, xen-devel@lists.xenproject.org
+References: <20241215154659.151158-1-Ariel.Otilibili-Anieli@eurecom.fr>
+ <20241216235241.217642-1-Ariel.Otilibili-Anieli@eurecom.fr>
+ <20241216235241.217642-2-Ariel.Otilibili-Anieli@eurecom.fr>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241216235241.217642-2-Ariel.Otilibili-Anieli@eurecom.fr>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Avoid exiting early from the loop when a pin that could be connected to the
-i8259 is found, as such early exit would leave the EOI handler translation
-array only partially allocated and/or initialized.
+On 17.12.2024 00:50, Ariel Otilibili wrote:
+> iasl complains _HID and _ADR cannot be used at the same time:
+> 
+> ```
+> /usr/bin/iasl -vs -p tools/firmware/hvmloader/dsdt_anycpu.tmp -tc tools/firmware/hvmloader/dsdt_anycpu.asl 2>&1 | grep -B10 HID
+> 
+> tools/firmware/hvmloader/dsdt_anycpu.asl     40:        Device (PCI0)
+> Warning  3073 -                                    Multiple types ^  (Device object requires either a _HID or _ADR, but not both)
+> ```
+> 
+> Per ACPI 2.0 (Jul. 27, 2000; Section 6.1, page 146), the configuration was legit:
+> 
+> "A device object must contain either an _HID object or an _ADR object,
+> but can contain both." [1]
+> 
+> But, per ACPI 6.5 (Aug. 2022), this is no more legit:
+> 
+> "A device object must contain either an _HID object or an _ADR object,
+> but must not contain both." [2]
+> 
+> Generally _HID devices are enumerated and have their drivers loaded
+> by ACPI ("ASL 2.0 Introduction and Overview", page 4).
+> 
+> Removing _ADR, the warning is cleared out.
+> 
+> The change should be compatible down to OSes released after ACPI 2.0,
+> including Windows XP:
 
-Otherwise on systems with multiple IO-APICs and an unmasked ExtINT pin on
-any IO-APIC that's no the last one the following NULL pointer dereference
-triggers:
+So my earlier hint apparently wasn't clear enough. I really would have
+expected you to determine in what version the wording changed. Even 5.1
+still has the old wording, and that's more than 10 years newer than 2.0.
+And then in 6.0 the wording first changed to "but should not contain
+both."
 
-(XEN) Enabling APIC mode.  Using 2 I/O APICs
-(XEN) ----[ Xen-4.20-unstable  x86_64  debug=y  Not tainted ]----
-(XEN) CPU:    0
-(XEN) RIP:    e008:[<ffff82d040328046>] __ioapic_write_entry+0x83/0x95
-[...]
-(XEN) Xen call trace:
-(XEN)    [<ffff82d040328046>] R __ioapic_write_entry+0x83/0x95
-(XEN)    [<ffff82d04027464b>] F amd_iommu_ioapic_update_ire+0x1ea/0x273
-(XEN)    [<ffff82d0402755a1>] F iommu_update_ire_from_apic+0xa/0xc
-(XEN)    [<ffff82d040328056>] F __ioapic_write_entry+0x93/0x95
-(XEN)    [<ffff82d0403283c1>] F arch/x86/io_apic.c#clear_IO_APIC_pin+0x7c/0x10e
-(XEN)    [<ffff82d040328480>] F arch/x86/io_apic.c#clear_IO_APIC+0x2d/0x61
-(XEN)    [<ffff82d0404448b7>] F enable_IO_APIC+0x2e3/0x34f
-(XEN)    [<ffff82d04044c9b0>] F smp_prepare_cpus+0x254/0x27a
-(XEN)    [<ffff82d04044bec2>] F __start_xen+0x1ce1/0x23ae
-(XEN)    [<ffff82d0402033ae>] F __high_start+0x8e/0x90
-(XEN)
-(XEN) Pagetable walk from 0000000000000000:
-(XEN)  L4[0x000] = 000000007dbfd063 ffffffffffffffff
-(XEN)  L3[0x000] = 000000007dbfa063 ffffffffffffffff
-(XEN)  L2[0x000] = 000000007dbcc063 ffffffffffffffff
-(XEN)  L1[0x000] = 0000000000000000 ffffffffffffffff
-(XEN)
-(XEN) ****************************************
-(XEN) Panic on CPU 0:
-(XEN) FATAL PAGE FAULT
-(XEN) [error_code=0002]
-(XEN) Faulting linear address: 0000000000000000
-(XEN) ****************************************
-(XEN)
-(XEN) Reboot in five seconds...
+With this I'm afraid considering just WinXP is insufficient. May I also
+point you at a Win2K related comment in acpi_build_tables(), seemingly
+suggesting that that still was a "ACPI 1.0 operating system"? Further
+in that function you'll find that apparently, besides the 1.0 special
+case, we only support ACPI revisions 4 and 5. Therefore the spec change
+in v6 would become relevant only once we actually supported (and
+surfaced to guests) v6. At that point I'd further be of the opinion that
+unless it can be proven that _ADR is unused by any OS we (ever) care(d)
+about, we'd need to further split the set of DSDTs we may make use of.
+One (pair) for up to 5.x with _ADR present, and another (pair) for 6.0
+and newer with _ADR absent.
 
-Reported-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
-Fixes: 86001b3970fe ('x86/io-apic: fix directed EOI when using AMD-Vi interrupt remapping')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/io_apic.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+I'm further afraid that ...
 
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index d9db2efc4f58..e4a88a2527d7 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -1389,14 +1389,15 @@ void __init enable_IO_APIC(void)
-             /* If the interrupt line is enabled and in ExtInt mode
-              * I have found the pin where the i8259 is connected.
-              */
--            if ((entry.mask == 0) && (entry.delivery_mode == dest_ExtINT)) {
-+            if ( ioapic_i8259.apic == -1 && entry.mask == 0 &&
-+                 entry.delivery_mode == dest_ExtINT )
-+            {
-+                ASSERT(ioapic_i8259.pin == -1);
-                 ioapic_i8259.apic = apic;
-                 ioapic_i8259.pin  = pin;
--                goto found_i8259;
-             }
-         }
-     }
-- found_i8259:
-     /* Look to see what if the MP table has reported the ExtINT */
-     /* If we could not find the appropriate pin by looking at the ioapic
-      * the i8259 probably is not connected the ioapic but give the
--- 
-2.46.0
+> 1. The _HID kept in the DSDT files is the EISA ID "PNP0A03",
+> Microsoft recognizes it as PCI bus:
+> 
+> ```
+> $ curl -k -s https://download.microsoft.com/download/1/6/1/161ba512-40e2-4cc9-843a-923143f3456c/devids.txt | grep PNP0A
+> 
+> PNP0A00         ISA Bus
+> PNP0A01         EISA Bus
+> PNP0A02         MCA Bus
+> PNP0A03         PCI Bus
+> PNP0A04         VESA/VL Bus
+> PNP0A05         Generic ACPI Bus
+> PNP0A06         Generic ACPI Extended-IO Bus (EIO bus)
+> ```
+> 
+> 2. Linux 6.12 uses also _HID for identifying PCI devices [3]:
 
+... this fact alone means very little here. The more important question is
+whether there are / were OSes which use(d) _ADR for any purpose even when
+_HID is there. With just looking at the surface of just Linux, I find e.g.
+a library-like function acpi_get_local_u64_address(), all users of which
+would need auditing. Plus, once done, we'd then still only know the state
+of things in one specific Linux version.
+
+Bottom line: I wonder whether iasl has an option to suppress that warning.
+Sadly I can't find a new enough iasl anywhere on the systems I have easy
+access to, so I can't check myself. If there was no way to suppress this
+warning, I'd wonder whether this wasn't a shortcoming of the tool, as the
+warning is clearly inappropriate when dealing with tables for pre-v6
+configurations.
+
+Jan
 
