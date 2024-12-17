@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B10E7717F
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:33:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.859435.1271564 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A65CE77184
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:33:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.859438.1271598 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaVI-0001Lx-B5; Tue, 17 Dec 2024 16:33:00 +0000
+	id 1tNaVM-0002HP-0H; Tue, 17 Dec 2024 16:33:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 859435.1271564; Tue, 17 Dec 2024 16:33:00 +0000
+Received: by outflank-mailman (output) from mailman id 859438.1271598; Tue, 17 Dec 2024 16:33:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaVI-0001Kq-3k; Tue, 17 Dec 2024 16:33:00 +0000
-Received: by outflank-mailman (input) for mailman id 859435;
- Tue, 17 Dec 2024 16:32:59 +0000
+	id 1tNaVL-0002HA-SE; Tue, 17 Dec 2024 16:33:03 +0000
+Received: by outflank-mailman (input) for mailman id 859438;
+ Tue, 17 Dec 2024 16:33:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BizT=TK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tNaVH-0001J8-4j
- for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:32:59 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
+ id 1tNaVK-0001J8-4y
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:33:02 +0000
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [2a00:1450:4864:20::22d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 92487daf-bc94-11ef-99a3-01e77a169b0f;
- Tue, 17 Dec 2024 17:32:56 +0100 (CET)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-30229d5b229so53725561fa.0
- for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:32:56 -0800 (PST)
+ id 949a6394-bc94-11ef-99a3-01e77a169b0f;
+ Tue, 17 Dec 2024 17:33:00 +0100 (CET)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-3022598e213so53711211fa.0
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:33:00 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30344175b51sm13179021fa.69.2024.12.17.08.32.55
+ 38308e7fff4ca-30344175b51sm13179021fa.69.2024.12.17.08.32.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 08:32:55 -0800 (PST)
+ Tue, 17 Dec 2024 08:32:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,40 +46,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92487daf-bc94-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 949a6394-bc94-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734453176; x=1735057976; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1734453179; x=1735057979; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0ja52G4IQuA2xu4VoTss+DEM7hw7d/dQyOCwy0WEPHU=;
-        b=YdhCBKQqsFn1nHgOR8gIODSDin+T7iluk03TWdD0092m1qTCCSv1udOneSkJ/xVFCA
-         RX7xef35skqW8tnaQVyZ7tsCz/qxhVSm+yQgDgppcD2g8ikEa0sSMm2dXqXLhKXc3CKQ
-         YR1epD6tqJXzzeEH1LN8CkYyxHpAIcNTK/AymiCNH2Mbz6mvIotCd+CjvEwQDwqSdwsZ
-         guDvsTpepgecVBY36NYQQfiRYBJ0YTJoy2jSdJFOQZPt1C3l/WRPxJTtiOcKMbyYffVb
-         A+yLb6ztzq+ix+bbkXC85OSzNMCHA1Yvp7/fLb3vXzGw5WJ6NesgWGQHLurzo1hNNMY4
-         fi3A==
+        bh=COLAwTsK8KOA8E4uFs654fi6y7eVlKrSbKVPVTbpnco=;
+        b=NaK7mWP6EZMPweL9iugUHTaLO+teOF83AGwg6IDibgUM0OHcD/vR6HCfQTSV5BrLCw
+         HGIW1AANkmHhm4A5c2fuIXK/Svfu0VKvgxGbytXImW1MMuaaezVAe6gljQVsypU19tSz
+         s9oWg3dwuZECs8As1WbnrLWjYQV61jzwyGlTGa09Pf7ypT/QpZnDypgSlQ7xpU7V0i59
+         PPakavBmkyqM/nsSI8VzYmf/IN/MCM8VsfLrycUpx+B+I1btbnI5dzQUMpna05hwMDe5
+         ufgFxN3uPSS5OTCjb9yNq36XGFmJZzBRBkCBKJozYcTInOJ63UD1tMLegAlbE7O62L+m
+         fYvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734453176; x=1735057976;
+        d=1e100.net; s=20230601; t=1734453179; x=1735057979;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0ja52G4IQuA2xu4VoTss+DEM7hw7d/dQyOCwy0WEPHU=;
-        b=rDKNNTvl+/HuzPjOzJv8KD/5zgppgd+MJe2kZEgeGU0lhhfe8I3NKd2Dmfi+uB7R1G
-         HmMG7Whd2VYaeS1l/vj10bFb6QnmmgRfNDRlqqUGzl7AqoBEnpUX5FR6Q24HR1AI6oJe
-         FkBQIidqzYICnlV8JMu8vyRuqq7BCsHM6OZRDtWljk8aXlqDjCHjY1c6UaA0nwQnvgr6
-         ccT8E/EEMqSt7rFwnjF4iHrze9y6PAXVM9LA0LEq3ZcFG3Rr4jUoH2cNk2tMXlht3cvk
-         6XGyZgH9vldfeKJKJHxmZfdbbikHzvX8ylmtq0XP+zf8snxMOg9TJQUn/jqxCF1KUCO+
-         9y8Q==
-X-Gm-Message-State: AOJu0YxxznH4roI14Dr2ojQIGxnvXBXvYgoEdxzjYSP92+FVj2tnAk4l
-	hOtUPH7jFhsSyBO+Uv9DKdXDa2hKZtOwWm8ooaa1FXx3dm3yMiMHO/ihsauP
-X-Gm-Gg: ASbGncuXtHEvCze7FbLklGHpWNYZPIzdq6+OXIbyAd+q5HpCOoyjNXA0sDJefCr6CbV
-	Z0fsrRmeN/2q3xg5l2GWI+2DSIK3aooIUkpLyeX+I/SEkWYdj0NtUi2Ylu50eRNNlzaTcMo/xmU
-	Tjv93KxJGF0Fe4Ji+P9ZvO8oS4f6TCNceUpFHkqL2yAUitC4B0NphtNqSGMqnNIreATyaW+EV+r
-	ZF9TP2NGa7JNZOwO9UDow/d7Tho8v0rPoNuXV8EZ//t/YkK+gMqC11plw==
-X-Google-Smtp-Source: AGHT+IEgnG0nBK6Xz11aVTX4EQTfPpcm/ADBzlzfvN+UnBe64SwJYspZIQdu+3mLJg87eU8uKcOsFg==
-X-Received: by 2002:a05:651c:19a4:b0:302:40ee:4c37 with SMTP id 38308e7fff4ca-3044cfeac6cmr648731fa.8.1734453175775;
-        Tue, 17 Dec 2024 08:32:55 -0800 (PST)
+        bh=COLAwTsK8KOA8E4uFs654fi6y7eVlKrSbKVPVTbpnco=;
+        b=J+w1YctXCundEK2PMJvqQwgtlZId6re9DptKp3L+IF/zvUdLnB5/XzjOCxHrNjgOom
+         2oAthi1DjumyD1iXV2AkRcx59nxea3lU/vVSIE0APa8J7LBZCmxmmRgbpenWxo2GEVjz
+         sl3CqCe5PaBdxGPMnW++K7efNm32Nss1la+tA+dlD48Chn2NnWs4QkUD7HSo61gDw5LB
+         +5Jvb1Vgvaym39yRsuP2lfIrfPiYSFw9Wnk/kjDLrG1rvcF00MlWe2OaY0C0Xnpj3+UY
+         YW3vkmkxdbJEuruKw2rpGnnKoNsiY/ApcZC3swP8fT6ANaxjG7BhJKCt/NNx5y0+Pnka
+         HJWg==
+X-Gm-Message-State: AOJu0Yzgjz1sSOZe/Q/CyW6ABt7EiHGLJW7GPaBVaufRFxljX1bkFrOs
+	hCZqBYEwJSKTqARr6XKgDUyvO8RywWjpHp9Ot2TVDuLkiuKFh1Ns4RxQ4wc8
+X-Gm-Gg: ASbGncv21dsGTVJit3hNcl3hXw8dfYWtY3c0PIb/5GtdjvUizhEJWKUozzTpNLuypwu
+	WUMCxHTBw7StrUh8XImXIDAqBg9p6FzeqXDA5CHvSrDf6fvoPTRrj8XgOBpY1g3P25afCgDDyaO
+	L1poEHn6nMtJiJtqmcs7fdhMAm1tPP/CJI5Rx0BLSSG7dJvopL+cLBpIco+azK27C0DdxdBocfO
+	eVIkYVer9ZWHZLFgvFtCirQEWu5v5xDZ/qdRSbmyLnMa5zgH06DbrdjAQ==
+X-Google-Smtp-Source: AGHT+IH72GX86NpSR4Ud+2h/3T7SlD9ypv7lg2VcJ8D2evWfj3ikKjxJXjIxUtwidPHtH/IE8TKVbg==
+X-Received: by 2002:a2e:be25:0:b0:2ff:56a6:2992 with SMTP id 38308e7fff4ca-302544cd514mr49542241fa.37.1734453179235;
+        Tue, 17 Dec 2024 08:32:59 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -93,63 +93,87 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 1/7] xen/riscv: update layout table in config.h
-Date: Tue, 17 Dec 2024 17:32:45 +0100
-Message-ID: <a5c8d62f7187fb54f6009306e1d2150a6d01f4fe.1734452721.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 4/7] xen/riscv: add {set,clear}_fixmap() functions for managing fixmap entries
+Date: Tue, 17 Dec 2024 17:32:48 +0100
+Message-ID: <46bd4f5cd2f41e8f0d00be3bdd9887e57dfdcdc2.1734452721.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1734452721.git.oleksii.kurochko@gmail.com>
 References: <cover.1734452721.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Make all upper bounds (end addresses) for areas inclusive to align
-with the corresponding definitions.
+Introduce set_fixmap() and clear_fixmap() functions to manage mappings
+in the fixmap region. The set_fixmap() function maps a 4k page ( as only L0
+is expected to be updated; look at setup_fixmap_mappings() ) at a specified
+fixmap entry using map_pages_to_xen(), while clear_fixmap() removes the
+mapping from a fixmap entry by calling destroy_xen_mappings().
 
-For the Direct map region, the upper bound was calculated incorrectly
-in efadb18dd58aba ("xen/riscv: add VM space layout"). It should be
-0x7f80000000 (considering that the value is exclusive, instead of
-0x7f40000000). Therefore, the inclusive upper bound for that region
-is 0x7f80000000 - 1.
+Both functions ensure that the operations succeed by asserting that their
+respective calls (map_pages_to_xen() and destroy_xen_mappings()) return 0.
+`BUG()` is added to trigger a failure if any issues occur during
+the mapping or unmapping process.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v2:
- - update the commit message: add explanation about direct map upper bound.
+Changes in V3:
+ - Fix code style: ident if-condition properly.
 ---
-Changes in v2:
- - new patch
+Changes in V2:
+ - Update the commit message.
+ - drop local variables from {set, clear}_fixmap(); use if (... != 0) + BUG().
 ---
- xen/arch/riscv/include/asm/config.h | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ xen/arch/riscv/include/asm/fixmap.h |  5 +++++
+ xen/arch/riscv/pt.c                 | 16 ++++++++++++++++
+ 2 files changed, 21 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index 4954677aff..826e5c7172 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -41,17 +41,17 @@
-  * Start addr          | End addr         | Slot       | area description
-  * ============================================================================
-  *                   .....                 L2 511          Unused
-- *  0xffffffffc0a00000  0xffffffffc0c00000 L2 511          Fixmap
-+ *  0xffffffffc0a00000  0xffffffffc0bfffff L2 511          Fixmap
-  *                   ..... ( 2 MB gap )
-- *  0xffffffffc0400000  0xffffffffc0800000 L2 511          FDT
-+ *  0xffffffffc0400000  0xffffffffc07fffff L2 511          FDT
-  *                   ..... ( 2 MB gap )
-- *  0xffffffffc0000000  0xffffffffc0200000 L2 511          Xen
-+ *  0xffffffffc0000000  0xffffffffc01fffff L2 511          Xen
-  *                   .....                 L2 510          Unused
-- *  0x3200000000        0x7f40000000       L2 200-509      Direct map
-+ *  0x3200000000        0x7f7fffffff       L2 200-509      Direct map
-  *                   .....                 L2 199          Unused
-- *  0x30c0000000        0x31c0000000       L2 195-198      Frametable
-+ *  0x30c0000000        0x31bfffffff       L2 195-198      Frametable
-  *                   .....                 L2 194          Unused
-- *  0x3040000000        0x3080000000       L2 193          VMAP
-+ *  0x3040000000        0x307fffffff       L2 193          VMAP
-  *                   .....                 L2 0-192        Unused
- #elif RV_STAGE1_MODE == SATP_MODE_SV48
-  * Memory layout is the same as for SV39 in terms of slots, so only start and
+diff --git a/xen/arch/riscv/include/asm/fixmap.h b/xen/arch/riscv/include/asm/fixmap.h
+index 818c8ce07b..e399a15f53 100644
+--- a/xen/arch/riscv/include/asm/fixmap.h
++++ b/xen/arch/riscv/include/asm/fixmap.h
+@@ -32,6 +32,11 @@
+  */
+ extern pte_t xen_fixmap[];
+ 
++/* Map a page in a fixmap entry */
++void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags);
++/* Remove a mapping from a fixmap entry */
++void clear_fixmap(unsigned int map);
++
+ #define fix_to_virt(slot) ((void *)FIXMAP_ADDR(slot))
+ 
+ static inline unsigned int virt_to_fix(vaddr_t vaddr)
+diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
+index 2ca23206f4..aea9f97a5a 100644
+--- a/xen/arch/riscv/pt.c
++++ b/xen/arch/riscv/pt.c
+@@ -8,6 +8,7 @@
+ #include <xen/pmap.h>
+ #include <xen/spinlock.h>
+ 
++#include <asm/fixmap.h>
+ #include <asm/flushtlb.h>
+ #include <asm/page.h>
+ 
+@@ -433,3 +434,18 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+ {
+     return pt_update(virt, INVALID_MFN, nr_mfns, PTE_POPULATE);
+ }
++
++/* Map a 4k page in a fixmap entry */
++void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags)
++{
++    if ( map_pages_to_xen(FIXMAP_ADDR(map), mfn, 1, flags | PTE_SMALL) != 0 )
++        BUG();
++}
++
++/* Remove a mapping from a fixmap entry */
++void clear_fixmap(unsigned int map)
++{
++    if ( destroy_xen_mappings(FIXMAP_ADDR(map),
++                              FIXMAP_ADDR(map) + PAGE_SIZE) != 0 )
++        BUG();
++}
 -- 
 2.47.1
 
