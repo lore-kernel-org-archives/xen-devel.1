@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A7BE7717F
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:33:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.859441.1271627 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B10E7717F
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:33:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.859435.1271564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaVO-00031Y-Jx; Tue, 17 Dec 2024 16:33:06 +0000
+	id 1tNaVI-0001Lx-B5; Tue, 17 Dec 2024 16:33:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 859441.1271627; Tue, 17 Dec 2024 16:33:06 +0000
+Received: by outflank-mailman (output) from mailman id 859435.1271564; Tue, 17 Dec 2024 16:33:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaVO-0002zd-DY; Tue, 17 Dec 2024 16:33:06 +0000
-Received: by outflank-mailman (input) for mailman id 859441;
- Tue, 17 Dec 2024 16:33:05 +0000
+	id 1tNaVI-0001Kq-3k; Tue, 17 Dec 2024 16:33:00 +0000
+Received: by outflank-mailman (input) for mailman id 859435;
+ Tue, 17 Dec 2024 16:32:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BizT=TK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tNaVN-0001J8-4v
- for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:33:05 +0000
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [2a00:1450:4864:20::22a])
+ id 1tNaVH-0001J8-4j
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:32:59 +0000
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [2a00:1450:4864:20::22f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 965f96c2-bc94-11ef-99a3-01e77a169b0f;
- Tue, 17 Dec 2024 17:33:03 +0100 (CET)
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-3022598e213so53711771fa.0
- for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:33:03 -0800 (PST)
+ id 92487daf-bc94-11ef-99a3-01e77a169b0f;
+ Tue, 17 Dec 2024 17:32:56 +0100 (CET)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-30229d5b229so53725561fa.0
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:32:56 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30344175b51sm13179021fa.69.2024.12.17.08.33.01
+ 38308e7fff4ca-30344175b51sm13179021fa.69.2024.12.17.08.32.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 08:33:02 -0800 (PST)
+ Tue, 17 Dec 2024 08:32:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,40 +46,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 965f96c2-bc94-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 92487daf-bc94-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734453183; x=1735057983; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1734453176; x=1735057976; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nvts/S0YZI4SLhTFRZAtpUtbBID3pS74GNUhShT11II=;
-        b=fl9vntodxbl3oqHHhQj73tke07P+h5m4Pjon9TPTe9juQ5KOny7ZvhK8sDciIqgW8g
-         olml0Lf52im9WLNCyrDKQsxUQP+EictOakkiGwSC0yogBHko9veeALmrbrOD7mNKRuhC
-         mj5SND6QKh9BlmK6jQxhopT/0kkV1jFhiP42iLPVCMsiUFg/Ea9BkdbHmzd2TLJoueGB
-         54M5oBVs89EoZmIVhbVeygOqL11d992/1k5kM1SonOym3BPvMuxNG22ksr2pUeyir0YY
-         aiQcEAS06RMnols1gKVHjBptLf5SGAc/tvEiC/cVsOhdyDjzFMHF3vuV9cMPA4yjegn/
-         jUYg==
+        bh=0ja52G4IQuA2xu4VoTss+DEM7hw7d/dQyOCwy0WEPHU=;
+        b=YdhCBKQqsFn1nHgOR8gIODSDin+T7iluk03TWdD0092m1qTCCSv1udOneSkJ/xVFCA
+         RX7xef35skqW8tnaQVyZ7tsCz/qxhVSm+yQgDgppcD2g8ikEa0sSMm2dXqXLhKXc3CKQ
+         YR1epD6tqJXzzeEH1LN8CkYyxHpAIcNTK/AymiCNH2Mbz6mvIotCd+CjvEwQDwqSdwsZ
+         guDvsTpepgecVBY36NYQQfiRYBJ0YTJoy2jSdJFOQZPt1C3l/WRPxJTtiOcKMbyYffVb
+         A+yLb6ztzq+ix+bbkXC85OSzNMCHA1Yvp7/fLb3vXzGw5WJ6NesgWGQHLurzo1hNNMY4
+         fi3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734453183; x=1735057983;
+        d=1e100.net; s=20230601; t=1734453176; x=1735057976;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=nvts/S0YZI4SLhTFRZAtpUtbBID3pS74GNUhShT11II=;
-        b=W5a99uS7SFxx2HuwWmoMfOSt6vh2QGhooEKwJBodFPmFC74gAO6axfj8vW9f8ngFES
-         I5Erwtl/YwVIfC5jW17W+ymQrQxvIVEwcI/1KxndrcFX8Y6crnKi8tSJnpQuIbZaIP36
-         jvqE2s9ljKPw8QZPUYVNA+YshCXzIwSPWLxA5tMlYEUxhIbegaUQxSYoSamcHWWePlac
-         MXY/H8a79DqSRiwEIcQeGzfWQUe20H4kDgEi7P9BP/qmWoJRI/+PNaQEWlnE4Kp1kObV
-         XwvqJNbtcrQGLU+p916Ol1DJYMTAMRebKkb/llZyLFQlmnRFX0ZO/nKPAVagG/5wQAFo
-         I9qw==
-X-Gm-Message-State: AOJu0YzZ5m4Q/fE4iKsh8xT9jJwx07D47aecpETPnDQaSHHXD54w9ZHk
-	KpoxgcEJsBsG0eHEWekRRCc1b3rc4Cnh8bwUOaW13gLj7GdokwiWGiiFon+B
-X-Gm-Gg: ASbGncudfFCTkI0hDhhqdDiXLwMO1Z6Zli/s6L/eVDKDlJ4ZLBhjJ0DjsvNFjKO6Gby
-	jTDYg0M5x3weQ9PolTTrAfEVvWULR1OUaN+FmAiUfaxKc1P62/S58O1tSLByNIFOdrdQdMianTx
-	D6R3awIQb48m095jGA5dEPPUhb3N/xPEydOW2P37M66zwkD6UVs3rWIn28/mmjMnWMCulEaVZis
-	wisbvTlxn18vM01xvh2XG+EufzbpHiAqEneGsO/BIPujI0L9RyCjdh6PQ==
-X-Google-Smtp-Source: AGHT+IGK3SASAd8pvE8rDMsmjQYwwLclRrQxWKa1slrklD1OqtzzYxJ/aPlDyDX1ouBW6UB4Szp3Kw==
-X-Received: by 2002:a05:651c:212a:b0:304:4cac:d8f7 with SMTP id 38308e7fff4ca-3044cacdb1cmr1479351fa.13.1734453182815;
-        Tue, 17 Dec 2024 08:33:02 -0800 (PST)
+        bh=0ja52G4IQuA2xu4VoTss+DEM7hw7d/dQyOCwy0WEPHU=;
+        b=rDKNNTvl+/HuzPjOzJv8KD/5zgppgd+MJe2kZEgeGU0lhhfe8I3NKd2Dmfi+uB7R1G
+         HmMG7Whd2VYaeS1l/vj10bFb6QnmmgRfNDRlqqUGzl7AqoBEnpUX5FR6Q24HR1AI6oJe
+         FkBQIidqzYICnlV8JMu8vyRuqq7BCsHM6OZRDtWljk8aXlqDjCHjY1c6UaA0nwQnvgr6
+         ccT8E/EEMqSt7rFwnjF4iHrze9y6PAXVM9LA0LEq3ZcFG3Rr4jUoH2cNk2tMXlht3cvk
+         6XGyZgH9vldfeKJKJHxmZfdbbikHzvX8ylmtq0XP+zf8snxMOg9TJQUn/jqxCF1KUCO+
+         9y8Q==
+X-Gm-Message-State: AOJu0YxxznH4roI14Dr2ojQIGxnvXBXvYgoEdxzjYSP92+FVj2tnAk4l
+	hOtUPH7jFhsSyBO+Uv9DKdXDa2hKZtOwWm8ooaa1FXx3dm3yMiMHO/ihsauP
+X-Gm-Gg: ASbGncuXtHEvCze7FbLklGHpWNYZPIzdq6+OXIbyAd+q5HpCOoyjNXA0sDJefCr6CbV
+	Z0fsrRmeN/2q3xg5l2GWI+2DSIK3aooIUkpLyeX+I/SEkWYdj0NtUi2Ylu50eRNNlzaTcMo/xmU
+	Tjv93KxJGF0Fe4Ji+P9ZvO8oS4f6TCNceUpFHkqL2yAUitC4B0NphtNqSGMqnNIreATyaW+EV+r
+	ZF9TP2NGa7JNZOwO9UDow/d7Tho8v0rPoNuXV8EZ//t/YkK+gMqC11plw==
+X-Google-Smtp-Source: AGHT+IEgnG0nBK6Xz11aVTX4EQTfPpcm/ADBzlzfvN+UnBe64SwJYspZIQdu+3mLJg87eU8uKcOsFg==
+X-Received: by 2002:a05:651c:19a4:b0:302:40ee:4c37 with SMTP id 38308e7fff4ca-3044cfeac6cmr648731fa.8.1734453175775;
+        Tue, 17 Dec 2024 08:32:55 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -93,118 +93,63 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 7/7] xen/riscv: relocating and unflattening host device tree
-Date: Tue, 17 Dec 2024 17:32:51 +0100
-Message-ID: <b25f71d2c5c51ab1c869bc6f58738d938d0f571f.1734452721.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 1/7] xen/riscv: update layout table in config.h
+Date: Tue, 17 Dec 2024 17:32:45 +0100
+Message-ID: <a5c8d62f7187fb54f6009306e1d2150a6d01f4fe.1734452721.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1734452721.git.oleksii.kurochko@gmail.com>
 References: <cover.1734452721.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce relocate_fdt() and call it to relocate FDT to Xen heap
-instead of using early mapping as it is expected that discard_initial_modules()
-( is supposed to call in the future ) discards the FDT boot module and
-remove_early_mappings() destroys the early mapping.
+Make all upper bounds (end addresses) for areas inclusive to align
+with the corresponding definitions.
 
-Unflatten a device tree, creating the tree of struct device_node.
-It also fills the "name" and "type" pointers of the nodes so the normal
-device-tree walking functions can be used.
-
-Set device_tree_flattened to NULL in the case when acpi_disabled is
-equal to false.
+For the Direct map region, the upper bound was calculated incorrectly
+in efadb18dd58aba ("xen/riscv: add VM space layout"). It should be
+0x7f80000000 (considering that the value is exclusive, instead of
+0x7f40000000). Therefore, the inclusive upper bound for that region
+is 0x7f80000000 - 1.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V3:
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+Changes in v2:
+ - update the commit message: add explanation about direct map upper bound.
 ---
-Changes in V2:
- - Move introduction of relocate_fdt() to the current patch with the following
-   change:
-    - use xvmalloc() instead of xmalloc_bytes() in relocate_fdt();
- - Drop the check of returned fdt_size from boot_fdt_info() to be in sync
-   with Arm and boot_fdt_info() will panic anyway if something wrong with
-   DTB.
- - Update the commit message.
+Changes in v2:
+ - new patch
 ---
- xen/arch/riscv/setup.c | 31 +++++++++++++++++++++++++++++--
- 1 file changed, 29 insertions(+), 2 deletions(-)
+ xen/arch/riscv/include/asm/config.h | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index bea3f27c4d..fb6bbba684 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -1,5 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
-+#include <xen/acpi.h>
- #include <xen/bug.h>
- #include <xen/bootfdt.h>
- #include <xen/compile.h>
-@@ -8,6 +9,7 @@
- #include <xen/mm.h>
- #include <xen/shutdown.h>
- #include <xen/vmap.h>
-+#include <xen/xvmalloc.h>
- 
- #include <public/version.h>
- 
-@@ -52,10 +54,24 @@ void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
-     }
- }
- 
-+/* Relocate the FDT in Xen heap */
-+static void * __init relocate_fdt(paddr_t dtb_paddr, size_t dtb_size)
-+{
-+    void *fdt = xvmalloc_array(uint8_t, dtb_size);
-+
-+    if ( !fdt )
-+        panic("Unable to allocate memory for relocating the Device-Tree.\n");
-+
-+    copy_from_paddr(fdt, dtb_paddr, dtb_size);
-+
-+    return fdt;
-+}
-+
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
- {
-     const char *cmdline;
-+    size_t fdt_size;
- 
-     remove_identity_mapping();
- 
-@@ -80,8 +96,7 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
-                           _end - _start, false) )
-         panic("Failed to add BOOTMOD_XEN\n");
- 
--    if ( !boot_fdt_info(device_tree_flattened, dtb_addr) )
--        BUG();
-+    fdt_size = boot_fdt_info(device_tree_flattened, dtb_addr);
- 
-     cmdline = boot_fdt_cmdline(device_tree_flattened);
-     printk("Command line: %s\n", cmdline);
-@@ -99,6 +114,18 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
-      */
-     system_state = SYS_STATE_boot;
- 
-+    if ( acpi_disabled )
-+    {
-+        printk("Booting using Device Tree\n");
-+        device_tree_flattened = relocate_fdt(dtb_addr, fdt_size);
-+        dt_unflatten_host_device_tree();
-+    }
-+    else
-+    {
-+        device_tree_flattened = NULL;
-+        panic("Booting using ACPI isn't supported\n");
-+    }
-+
-     printk("All set up\n");
- 
-     machine_halt();
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 4954677aff..826e5c7172 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -41,17 +41,17 @@
+  * Start addr          | End addr         | Slot       | area description
+  * ============================================================================
+  *                   .....                 L2 511          Unused
+- *  0xffffffffc0a00000  0xffffffffc0c00000 L2 511          Fixmap
++ *  0xffffffffc0a00000  0xffffffffc0bfffff L2 511          Fixmap
+  *                   ..... ( 2 MB gap )
+- *  0xffffffffc0400000  0xffffffffc0800000 L2 511          FDT
++ *  0xffffffffc0400000  0xffffffffc07fffff L2 511          FDT
+  *                   ..... ( 2 MB gap )
+- *  0xffffffffc0000000  0xffffffffc0200000 L2 511          Xen
++ *  0xffffffffc0000000  0xffffffffc01fffff L2 511          Xen
+  *                   .....                 L2 510          Unused
+- *  0x3200000000        0x7f40000000       L2 200-509      Direct map
++ *  0x3200000000        0x7f7fffffff       L2 200-509      Direct map
+  *                   .....                 L2 199          Unused
+- *  0x30c0000000        0x31c0000000       L2 195-198      Frametable
++ *  0x30c0000000        0x31bfffffff       L2 195-198      Frametable
+  *                   .....                 L2 194          Unused
+- *  0x3040000000        0x3080000000       L2 193          VMAP
++ *  0x3040000000        0x307fffffff       L2 193          VMAP
+  *                   .....                 L2 0-192        Unused
+ #elif RV_STAGE1_MODE == SATP_MODE_SV48
+  * Memory layout is the same as for SV39 in terms of slots, so only start and
 -- 
 2.47.1
 
