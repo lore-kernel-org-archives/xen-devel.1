@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A65CE77184
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:33:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.859438.1271598 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D51EE7717F
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Dec 2024 16:36:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.859492.1271638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaVM-0002HP-0H; Tue, 17 Dec 2024 16:33:04 +0000
+	id 1tNaYQ-0005ZA-4I; Tue, 17 Dec 2024 16:36:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 859438.1271598; Tue, 17 Dec 2024 16:33:03 +0000
+Received: by outflank-mailman (output) from mailman id 859492.1271638; Tue, 17 Dec 2024 16:36:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tNaVL-0002HA-SE; Tue, 17 Dec 2024 16:33:03 +0000
-Received: by outflank-mailman (input) for mailman id 859438;
- Tue, 17 Dec 2024 16:33:02 +0000
+	id 1tNaYQ-0005Z3-0s; Tue, 17 Dec 2024 16:36:14 +0000
+Received: by outflank-mailman (input) for mailman id 859492;
+ Tue, 17 Dec 2024 16:36:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BizT=TK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tNaVK-0001J8-4y
- for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:33:02 +0000
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [2a00:1450:4864:20::22d])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=5pb9=TK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tNaYP-0005Yv-0L
+ for xen-devel@lists.xenproject.org; Tue, 17 Dec 2024 16:36:13 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 949a6394-bc94-11ef-99a3-01e77a169b0f;
- Tue, 17 Dec 2024 17:33:00 +0100 (CET)
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-3022598e213so53711211fa.0
- for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:33:00 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30344175b51sm13179021fa.69.2024.12.17.08.32.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 08:32:58 -0800 (PST)
+ id 05e811ef-bc95-11ef-99a3-01e77a169b0f;
+ Tue, 17 Dec 2024 17:36:10 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4361d5dcf5bso60136265e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Dec 2024 08:36:10 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4363602c9d7sm122234165e9.16.2024.12.17.08.36.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Dec 2024 08:36:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,135 +47,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 949a6394-bc94-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 05e811ef-bc95-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734453179; x=1735057979; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=COLAwTsK8KOA8E4uFs654fi6y7eVlKrSbKVPVTbpnco=;
-        b=NaK7mWP6EZMPweL9iugUHTaLO+teOF83AGwg6IDibgUM0OHcD/vR6HCfQTSV5BrLCw
-         HGIW1AANkmHhm4A5c2fuIXK/Svfu0VKvgxGbytXImW1MMuaaezVAe6gljQVsypU19tSz
-         s9oWg3dwuZECs8As1WbnrLWjYQV61jzwyGlTGa09Pf7ypT/QpZnDypgSlQ7xpU7V0i59
-         PPakavBmkyqM/nsSI8VzYmf/IN/MCM8VsfLrycUpx+B+I1btbnI5dzQUMpna05hwMDe5
-         ufgFxN3uPSS5OTCjb9yNq36XGFmJZzBRBkCBKJozYcTInOJ63UD1tMLegAlbE7O62L+m
-         fYvQ==
+        d=suse.com; s=google; t=1734453370; x=1735058170; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=JUGEkVyrqvqSF4KL5lb1zcyA71E+u6asaMgmp+ljBIE=;
+        b=MVoXHqHT/VHwSNXF8IU4ouWrlT8gMyUJRuMqeMs5/M2BSAkq5yGDTr6zvHHlWPixy/
+         1BjcI13jgzDybjss9kKHFoYn4XvgyipqNjkE98qynFhrY22pZ/v5PNunlNYY5Ry+a6Z1
+         ebo45v2DIoxdkzFdnQSrlr4GFQLThi2mNW0rwbt33YjJn5x8mXQk/CMHnwjQ6XaYj4O1
+         zGNc5QrgqXd1lu1tazBDdI2us2OjXAFW6+7Eord4mpZOUjBV6xLQb0AyPppuoRBqnka+
+         MDW3T7z+ntlRDhTA/1XnX7h2TdKLj90sNAVV4n9vWl9ZY2RqCGWMksZSf7HYPdEjWgjj
+         TbLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734453179; x=1735057979;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=COLAwTsK8KOA8E4uFs654fi6y7eVlKrSbKVPVTbpnco=;
-        b=J+w1YctXCundEK2PMJvqQwgtlZId6re9DptKp3L+IF/zvUdLnB5/XzjOCxHrNjgOom
-         2oAthi1DjumyD1iXV2AkRcx59nxea3lU/vVSIE0APa8J7LBZCmxmmRgbpenWxo2GEVjz
-         sl3CqCe5PaBdxGPMnW++K7efNm32Nss1la+tA+dlD48Chn2NnWs4QkUD7HSo61gDw5LB
-         +5Jvb1Vgvaym39yRsuP2lfIrfPiYSFw9Wnk/kjDLrG1rvcF00MlWe2OaY0C0Xnpj3+UY
-         YW3vkmkxdbJEuruKw2rpGnnKoNsiY/ApcZC3swP8fT6ANaxjG7BhJKCt/NNx5y0+Pnka
-         HJWg==
-X-Gm-Message-State: AOJu0Yzgjz1sSOZe/Q/CyW6ABt7EiHGLJW7GPaBVaufRFxljX1bkFrOs
-	hCZqBYEwJSKTqARr6XKgDUyvO8RywWjpHp9Ot2TVDuLkiuKFh1Ns4RxQ4wc8
-X-Gm-Gg: ASbGncv21dsGTVJit3hNcl3hXw8dfYWtY3c0PIb/5GtdjvUizhEJWKUozzTpNLuypwu
-	WUMCxHTBw7StrUh8XImXIDAqBg9p6FzeqXDA5CHvSrDf6fvoPTRrj8XgOBpY1g3P25afCgDDyaO
-	L1poEHn6nMtJiJtqmcs7fdhMAm1tPP/CJI5Rx0BLSSG7dJvopL+cLBpIco+azK27C0DdxdBocfO
-	eVIkYVer9ZWHZLFgvFtCirQEWu5v5xDZ/qdRSbmyLnMa5zgH06DbrdjAQ==
-X-Google-Smtp-Source: AGHT+IH72GX86NpSR4Ud+2h/3T7SlD9ypv7lg2VcJ8D2evWfj3ikKjxJXjIxUtwidPHtH/IE8TKVbg==
-X-Received: by 2002:a2e:be25:0:b0:2ff:56a6:2992 with SMTP id 38308e7fff4ca-302544cd514mr49542241fa.37.1734453179235;
-        Tue, 17 Dec 2024 08:32:59 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 4/7] xen/riscv: add {set,clear}_fixmap() functions for managing fixmap entries
-Date: Tue, 17 Dec 2024 17:32:48 +0100
-Message-ID: <46bd4f5cd2f41e8f0d00be3bdd9887e57dfdcdc2.1734452721.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <cover.1734452721.git.oleksii.kurochko@gmail.com>
-References: <cover.1734452721.git.oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20230601; t=1734453370; x=1735058170;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JUGEkVyrqvqSF4KL5lb1zcyA71E+u6asaMgmp+ljBIE=;
+        b=F2v8Ibej8KKEs73ceI0+EvffZVgAEptlxmHW5wmW8Thz/HWWTSxZHaBgamKxyZHfJc
+         sKk4XHryOlcoQR7YTZ/m7/kPefKO/EVGu+THsIeCPf/dB79nSyOOaRqnKu4L09ebijuY
+         P9oK76aHzqR2IU22ChIkPr+88AOwunfxXyKW3Z8gry5CCYAYA3ZE73OHkRJKlm/DqLzc
+         Z27mIddyPelMu1Iq4CW+sCEWz30b1nnPqF09wvpS5qaAeAFbdS+/oBwHRL+Pa7Lw7tRM
+         BUTOXWgoOB5h5EdDVXR9vccIp5ZcgHVW9GlZpPV7KMqp0vf2Fa61eXYJgmsh8LM2c/CX
+         /2LA==
+X-Forwarded-Encrypted: i=1; AJvYcCV08seUyOR1l3hhPlDHdj+QGIhQvNoCZM2YnhE3txgvckQ+Kxs3WlsaRLZqUXMyhOjgOJsgCWIpRpk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyOnZy5HpzHsHkYB+36HqI3UrUhcxbr5K5E7CIPmcjwRHtWjK/x
+	YElT88E4yRzD3y4PEa0YWUrBdp2DWNzrPJDFyiu1AaqPM+4UprFY8xOAxMkpKg==
+X-Gm-Gg: ASbGncuh03x+1jVUMVA+gFDVks1xbbfOMhNpAF4HjvdQtKj/rccXdr2KAqpiSe8YEJs
+	1Zk6s2ecF01cnMN3AKA98Hjrkh7LMIu7w8d+7BEc/+sTiTE7k9WJvtLCYqj3UIoBi6S/nlFdTuH
+	JFXM0ikqYiir4k66ooBB9T61ymI00VCYSxVsl+4RK3ZxpsdrPVpDxU6hbaRpmaURUmslDITpK+8
+	fEk8gnMFmd1zSVBLWn+irzHDHC/GRxrZyXu98/PfE5ctOOtq8bEXzI4yZv4GRH7uBlfH8hcZ793
+	GytddIlI4X0U4v9cioLhijOU7Raci8cjjsobGV/akg==
+X-Google-Smtp-Source: AGHT+IGCnt9jTe2BOR8MnTpTMnQqxfmgG7pxkgcf+g+zJqEmiXXLrRXVIh3lhl48r9FRkTLhCquSjQ==
+X-Received: by 2002:a05:600c:5029:b0:434:a815:2b5d with SMTP id 5b1f17b1804b1-4362aa93dc9mr137719375e9.24.1734453370218;
+        Tue, 17 Dec 2024 08:36:10 -0800 (PST)
+Message-ID: <abeaddb8-6792-4766-9f29-9b0544c746b7@suse.com>
+Date: Tue, 17 Dec 2024 17:36:09 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/7] Unflattening and relocation of host device tree
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1734452721.git.oleksii.kurochko@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <cover.1734452721.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Introduce set_fixmap() and clear_fixmap() functions to manage mappings
-in the fixmap region. The set_fixmap() function maps a 4k page ( as only L0
-is expected to be updated; look at setup_fixmap_mappings() ) at a specified
-fixmap entry using map_pages_to_xen(), while clear_fixmap() removes the
-mapping from a fixmap entry by calling destroy_xen_mappings().
+On 17.12.2024 17:32, Oleksii Kurochko wrote:
+> The current patch series introduces the relocation of the host device tree file
+> to free up low memory and also it is expected that discard_initial_modules()
+> will be called sooner or later, it will discard the FDT boot module,
+> and remove_early_mappings() will destroy the early mappings.
+> 
+> In addition to relocation, unflattening is introduced to create the tree of
+> struct device_node for the host device tree.
+> 
+> To implement this, several things have been introduced:
+>  - destroy_xen_mappings() function, which removes page mappings from Xen's
+>    page tables. This is necessary for clear_fixmap().
+>  - {set,clear}_fixmap() functions to manage mappings in the fixmap region,
+>    which are expected to be used in copy_from_paddr() to copy the FDT to Xen's
+>    heap.
+>  - Introduce new config CONFIG_QEMU which is going to be used to cover changes
+>    connected to QEMU virtual board. It will be used during introduction of stubs
+>    for clean_and_invalidate_dcache_va_range() and clean_dcache_va_range(),
+>    which are expected to be used in copy_from_paddr() and flush_page_to_ram(),
+>    which in turn are expected to be used during the call to xvmalloc_array() in
+>    relocate_fdt().
+>    In case of QEMU cached related functions are implemented as returning 0 as
+>    QEMU doesn't model cache ( and so CMO extensions ). For others cases, it is
+>    introduced as -ENOSUPP as h/w could support CMO extension ( or hardware
+>    specific insertions ) and it will need to update implementation of the
+>    mentioned functions.
+>  - The introduction of copy_from_paddr() to copy the FDT to an address
+>    allocated in Xen's heap.
+> 
+> ---
+> Changes in v3:
+>  - Add some Acks for the patches. All the patches are Acked except:
+>      [PATCH v3 1/7] xen/riscv: update layout table in config.h
+>      [PATCH v3 5/7] xen/riscv: implement data and instruction cache operations
+>  - Other changes please look at the specific patch.
+> ---
+> Changes in v2:
+>  - Update the cover letter.
+>  - Introduce new patch with aligning of upper bounds in the layout table in
+>    config.h with the definitions below which are inclusive.
+>  - Other changes please look at the specific patch.
+> ---
+> 
+> Oleksii Kurochko (7):
+>   xen/riscv: update layout table in config.h
+>   xen/riscv: add destroy_xen_mappings() to remove mappings in Xen page
+>     tables
+>   xen/riscv: reorder includes in asm/page.h alphabetically
+>   xen/riscv: add {set,clear}_fixmap() functions for managing fixmap
+>     entries
 
-Both functions ensure that the operations succeed by asserting that their
-respective calls (map_pages_to_xen() and destroy_xen_mappings()) return 0.
-`BUG()` is added to trigger a failure if any issues occur during
-the mapping or unmapping process.
+Please can you avoid re-posting patches that were already committed (the
+latter three)?
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V3:
- - Fix code style: ident if-condition properly.
----
-Changes in V2:
- - Update the commit message.
- - drop local variables from {set, clear}_fixmap(); use if (... != 0) + BUG().
----
- xen/arch/riscv/include/asm/fixmap.h |  5 +++++
- xen/arch/riscv/pt.c                 | 16 ++++++++++++++++
- 2 files changed, 21 insertions(+)
-
-diff --git a/xen/arch/riscv/include/asm/fixmap.h b/xen/arch/riscv/include/asm/fixmap.h
-index 818c8ce07b..e399a15f53 100644
---- a/xen/arch/riscv/include/asm/fixmap.h
-+++ b/xen/arch/riscv/include/asm/fixmap.h
-@@ -32,6 +32,11 @@
-  */
- extern pte_t xen_fixmap[];
- 
-+/* Map a page in a fixmap entry */
-+void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags);
-+/* Remove a mapping from a fixmap entry */
-+void clear_fixmap(unsigned int map);
-+
- #define fix_to_virt(slot) ((void *)FIXMAP_ADDR(slot))
- 
- static inline unsigned int virt_to_fix(vaddr_t vaddr)
-diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
-index 2ca23206f4..aea9f97a5a 100644
---- a/xen/arch/riscv/pt.c
-+++ b/xen/arch/riscv/pt.c
-@@ -8,6 +8,7 @@
- #include <xen/pmap.h>
- #include <xen/spinlock.h>
- 
-+#include <asm/fixmap.h>
- #include <asm/flushtlb.h>
- #include <asm/page.h>
- 
-@@ -433,3 +434,18 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
- {
-     return pt_update(virt, INVALID_MFN, nr_mfns, PTE_POPULATE);
- }
-+
-+/* Map a 4k page in a fixmap entry */
-+void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags)
-+{
-+    if ( map_pages_to_xen(FIXMAP_ADDR(map), mfn, 1, flags | PTE_SMALL) != 0 )
-+        BUG();
-+}
-+
-+/* Remove a mapping from a fixmap entry */
-+void clear_fixmap(unsigned int map)
-+{
-+    if ( destroy_xen_mappings(FIXMAP_ADDR(map),
-+                              FIXMAP_ADDR(map) + PAGE_SIZE) != 0 )
-+        BUG();
-+}
--- 
-2.47.1
-
+Jan
 
