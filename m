@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02DBBE77184
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Dec 2024 23:31:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.861531.1273497 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E6BE77184
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Dec 2024 23:55:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.861544.1273516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOPz3-00066k-3f; Thu, 19 Dec 2024 23:31:09 +0000
+	id 1tOQMa-0000qj-63; Thu, 19 Dec 2024 23:55:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 861531.1273497; Thu, 19 Dec 2024 23:31:09 +0000
+Received: by outflank-mailman (output) from mailman id 861544.1273516; Thu, 19 Dec 2024 23:55:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOPz3-00066d-0u; Thu, 19 Dec 2024 23:31:09 +0000
-Received: by outflank-mailman (input) for mailman id 861531;
- Thu, 19 Dec 2024 23:31:07 +0000
+	id 1tOQMa-0000qc-3R; Thu, 19 Dec 2024 23:55:28 +0000
+Received: by outflank-mailman (input) for mailman id 861544;
+ Thu, 19 Dec 2024 23:55:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=i+GM=TM=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tOPz1-00066X-97
- for xen-devel@lists.xenproject.org; Thu, 19 Dec 2024 23:31:07 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Om7t=TM=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
+ id 1tOQMZ-0000c1-C6
+ for xen-devel@lists.xenproject.org; Thu, 19 Dec 2024 23:55:27 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 512cccbb-be61-11ef-a0d8-8be0dac302b0;
- Fri, 20 Dec 2024 00:31:05 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4361f664af5so14869765e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 19 Dec 2024 15:31:05 -0800 (PST)
-Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ id b814a902-be64-11ef-a0d8-8be0dac302b0;
+ Fri, 20 Dec 2024 00:55:26 +0100 (CET)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3862e2c9bb5so86479f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Dec 2024 15:55:26 -0800 (PST)
+Received: from lab.home
+ (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
+ [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4364b0532a6sm90498725e9.1.2024.12.19.15.31.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Dec 2024 15:31:04 -0800 (PST)
+ ffacd0b85a97d-38a1c8a6dd3sm2628996f8f.96.2024.12.19.15.55.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2024 15:55:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,141 +49,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 512cccbb-be61-11ef-a0d8-8be0dac302b0
+X-Inumbo-ID: b814a902-be64-11ef-a0d8-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1734651065; x=1735255865; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=uJ8bJilLUMHhGPiQmNgfzkalz0eG45Ag+CdTIDcQU2U=;
-        b=ScQ0rc2wC5UoHHy27YE20uwX3mNDGi7aVR/drJYmgB1Gflq6KVpyD4FM+93H9/uB/T
-         8+/7GpBUXO6xcYX8cLxuvoMgyehXNMmLFSmY/4oFmjQ/xdmTgIX+8Qnnh0WnZKOThXkB
-         MtRJ/MNloCvYk0gQDgVPm4QVdSyph+3aXNxqo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734651065; x=1735255865;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1734652526; x=1735257326; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uJ8bJilLUMHhGPiQmNgfzkalz0eG45Ag+CdTIDcQU2U=;
-        b=VyBLt6bD7rHN/IRneprO9Tv31FOfhOCPPFPqHdFhx5zDn3VREdrlNdoyofxPtxvLO0
-         dqH6gROPpYFEXZXKp8HRQTHWXGCZ85j/jV6MkbqKiYqy+XXCnPUnUQf8VziUvts429vC
-         wYSj6vQvJZ/OcazMMeXQETYgm2pjurpMGLQwW5R73w1oRd4d4m7K5qXI1PYBLoStlNu5
-         y3PUiue4r1tmfPnRhq3QaGJeHqMypYdr8DFo3xtxY02meJ+U7roBlQ1oayBAjajfWbqm
-         Ah69FTHYiiJzEff8CpBP3NghFC1moHogZgI48M+BEhMfXi7IeSdn9IKiI7lkGv69ZpIa
-         kJZA==
-X-Forwarded-Encrypted: i=1; AJvYcCVHwicFv11Dn6Jms2EXYEgg0O+nCstFi4ggrMZkWPfGGuJoXuUX1LmWLEqq64wj6Jng99mgjIdGHVw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw55SNr4DrYfQ4/qHGuUoDyIoSbS5x0k5snQmvX8G3tUmepHPS8
-	or8YR1YjpUFxZTs0xq43//j+d0OA0E/egnsAaDSwz2Oxf3sLszqvc4x9aXTtSC0=
-X-Gm-Gg: ASbGncskqjXY8Gcalj770gsxca3UgJ/QNTlR+KKDLaQ+D0fYSUrJyM7fz01gxVFiQpc
-	pif/yW2C3/j+wJd31c1B/KH8M9V/BHvE4N+bc0K4cY4WmtaJ6nnZWjFtUcofnBdUMVT1YRnjsnU
-	iQcwXYIo8CpNRTX7myQA62Zi3lq+C85ek3TWDyQgWAxC9+KmzK60sTzMNVJEXmfvKwe4bZB1UqG
-	gwzzGvij+eYgtVaVk/xuKd0N92hn9eBvb2uxBqwY3cSZBsGOsZqkUsA+zpydJHdd+392SFmLqk9
-	AUu+7cHXDHDeuIQ+6JgQ
-X-Google-Smtp-Source: AGHT+IF8A95+qGoEVGkNn/CsYU4bQ0SKBGBgamHY2X1wqAOeeXkjDUhCVM65skz13t42A7n4TGrgiA==
-X-Received: by 2002:a05:600c:310a:b0:434:fddf:5bfa with SMTP id 5b1f17b1804b1-4366854bfc0mr4916025e9.2.1734651064899;
-        Thu, 19 Dec 2024 15:31:04 -0800 (PST)
-Message-ID: <94a1fccb-5edc-4670-b1d0-48e3bdf17a12@citrix.com>
-Date: Thu, 19 Dec 2024 23:31:03 +0000
+        bh=e4D++oBXK5nnYb4cn7GeUmCP5459fQygu93iRr5qfas=;
+        b=AKU4fV4pcNIYmnyDhL+T2a2tfNP30UAF2dU/C64JOFRYiMFq0NydvCUD+omHSmabJw
+         uEgodVl8+Jy2wlOczzY5oVqXvVKt1rUJ57/DY8z7idP0GpCR42mmyKOYgGIr28NZzHN4
+         YRPhQNFUnoVbv+E1p4QVPdt2fKCuAevKoDu7C1zkygThdt+AhBDIn6vBXPCuxst4Y9KG
+         OEwQffRWjPNFfLRwA2p1mYwFKLJC37Ylt5DMtYXhwK3j2LQJReSEdF20HOyEl+ZKVQfk
+         MKGr+MIFdGOGiMI+zL5PJUm+gx6swmGt/r3lvwLZdw+O5Siqf4ty0bzw9GJ5r98SSeQR
+         8hIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1734652526; x=1735257326;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=e4D++oBXK5nnYb4cn7GeUmCP5459fQygu93iRr5qfas=;
+        b=S+ZJgkIT4qNqQcr8QlMAQ9bkoD3I7qV78h9z1okLAaeqNUmtjDoI16FMTyeX8V69ph
+         +DFtQnKGxOi49SvM3sCI5IqVW2jHnGt2PX4mxwtw1BpgQWw/9YjW1HeeYXfquBkwJXr+
+         gX0q8Pbk/TgCuQF7RUV8HJAbmp8nK8FxdAXEqLxkt7pHxTWa4+eQaWpGwbkfrWcG/xOL
+         kkAEpn9UHmy/GllEkrLLklAbtgEyHISHLdfRRuhnH/2Pc2RxtMPokxBJrsqq2pQvqsIv
+         k1i8Fnm+9yTSBpPtFr4QfnWUd205q3T2113JNn3wY9wT6mSm0OEQ12MVruW2UV/wiI+6
+         ayTw==
+X-Gm-Message-State: AOJu0YwMPIJm3tQX4Kh617R/1+sU/IZtI92lIHacipHmRakyLyL8L7XI
+	/4/ppmAEybGl7R8uE1/S5CIu6bpbTVLY64CQOc4zPMWzOcjkzYCh10U59Q==
+X-Gm-Gg: ASbGncvK0w/t/zn5fAx4jIF2Zmk3y8M/56V06UaHPJ0+JzkfZSBihxIHXlqbPqoIhzB
+	skWnoeXN0OFQsNV2DNBCgI2qUp43WtB67cx9paNYTRwsfrye+qtZfjmfK0Rsin42Tg+/sAccChm
+	ZeTGfhtClhFP3cwqzcLtbyOcuzYkI6rZSudOd+ZWNSOnnvY8AYblieTjTk8RyYG5EjwdMR6OTgO
+	4CXzKHR1VQlW8gP/qDqTbpAzhgEQh2DORjEVxQkHNdC+tbvVlWOE3jMS/xLEwOTKXuG/ooUb+aD
+	mDVhVN6512t8oMc/9hUtpojST69ud8Mbx1PN4sNON1hwSNjteJVVNSBl
+X-Google-Smtp-Source: AGHT+IExPdJoDGnroTJOpIyAQALEK/cHEbyLaeZGfeJwiY7mRsUAu5D1LiA9hpAIXQXdI1f/hamcJQ==
+X-Received: by 2002:a05:600c:a0a:b0:42c:aeee:e604 with SMTP id 5b1f17b1804b1-43668b93b4fmr2109995e9.8.1734652525548;
+        Thu, 19 Dec 2024 15:55:25 -0800 (PST)
+From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 1/2] x86: Rename _rsvd field to pw and move it to the bit 58
+Date: Thu, 19 Dec 2024 23:55:01 +0000
+Message-Id: <bddb36cdf6a8d222fba7d5973512ebfdb86b0c0a.1734652343.git.w1benny@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1734652343.git.w1benny@gmail.com>
+References: <cover.1734652343.git.w1benny@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] x86: Add Support for Paging-Write Feature
-To: =?UTF-8?Q?Petr_Bene=C5=A1?= <w1benny@gmail.com>,
- xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Tamas K Lengyel <tamas@tklengyel.com>,
- Alexandru Isaila <aisaila@bitdefender.com>,
- Petre Pircalabu <ppircalabu@bitdefender.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Anthony PERARD <anthony.perard@vates.tech>
-References: <cover.1734631969.git.w1benny@gmail.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <cover.1734631969.git.w1benny@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 19/12/2024 6:16 pm, Petr Beneš wrote:
-> From: Petr Beneš <w1benny@gmail.com>
->
-> This patch introduces a new XENMEM_access_r_pw permission. Functionally, it is similar to XENMEM_access_r, but for processors with TERTIARY_EXEC_EPT_PAGING_WRITE support (Intel 12th Gen/Alder Lake and later), it also permits the CPU to write to the page during guest page-table walks (e.g., updating A/D bits) without triggering an EPT violation.
->
-> This behavior works by both enabling the EPT paging-write feature and setting the EPT paging-write flag in the EPT leaf entry.
->
-> This feature provides a significant performance boost for introspection tools that monitor guest page-table updates. Previously, every page-table modification by the guest—including routine updates like setting A/D bits—triggered an EPT violation, adding unnecessary overhead. The new XENMEM_access_r_pw permission allows these "uninteresting" updates to occur without EPT violations, improving efficiency.
->
-> Additionally, this feature simplifies the handling of race conditions in scenarios where an introspection tool:
->
-> - Sets an "invisible breakpoint" in the altp2m view for a function F
-> - Monitors guest page-table updates to track whether the page containing F is paged out
-> - Encounters a cleared Access (A) bit on the page containing F while the guest is about to execute the breakpoint
->
-> In the current implementation:
->
-> - If xc_monitor_inguest_pagefault() is enabled, the introspection tool must emulate both the breakpoint and the setting of the Access bit.
-> - If xc_monitor_inguest_pagefault() is disabled, Xen handles the EPT violation without notifying the introspection tool, setting the Access bit and emulating the instruction. However, Xen fetches the instruction from the default view instead of the altp2m view, potentially causing the breakpoint to be missed.
->
-> With this patch, setting XENMEM_access_r_pw for monitored guest page-tables prevents EPT violations in these cases. This change enhances performance and reduces complexity for introspection tools, ensuring seamless breakpoint handling while tracking guest page-table updates.
->
-> Petr Beneš (2):
->   x86: Rename _rsvd field to pw and move it to the bit 58
->   x86/EPT: Add Support for Paging-Write Feature
+From: Petr Beneš <w1benny@gmail.com>
 
-We're past final posting date for 4.20 now.
+The EPT Paging-write feature (when enabled by the TERTIARY_EXEC_EPT_PAGING_WRITE bit) uses bit 58 of the EPT entry to indicate that guest paging may update the page, even if the W access is not set.
 
-CC Oleksii as release manager.
+This patch is a preparation for the EPT Paging-write feature.
 
-However, it's a small patch series, and comes urgently on the back of
-Intel ceasing all EPT-SPP support in November.
+Signed-off-by: Petr Beneš <w1benny@gmail.com>
+---
+ xen/arch/x86/include/asm/hvm/vmx/vmx.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Given the timelines of the release, and how simple the series is, I'd
-like to make an argument for including it at this juncture.
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+index f0ec459622..d920de96b7 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+@@ -34,8 +34,8 @@ typedef union {
+                                EPT/VT-d usage */
+         mfn         :   40, /* bits 51:12 - Machine physical frame number */
+         sa_p2mt     :   6,  /* bits 57:52 - Software available 2 */
+-        access      :   4,  /* bits 61:58 - p2m_access_t */
+-        _rsvd       :   1,  /* bit 62 - reserved */
++        pw          :   1,  /* bit 58 - Paging-write access */
++        access      :   4,  /* bits 62:59 - p2m_access_t */
+         suppress_ve :   1;  /* bit 63 - suppress #VE */
+     };
+     u64 epte;
+-- 
+2.34.1
 
-~Andrew
 
