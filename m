@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 153F4E7718A
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Dec 2024 11:18:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.861098.1273083 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 571D0E77184
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Dec 2024 11:23:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.861110.1273109 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOEYD-0006Fa-MN; Thu, 19 Dec 2024 11:18:41 +0000
+	id 1tOEd3-0008GY-Ps; Thu, 19 Dec 2024 11:23:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 861098.1273083; Thu, 19 Dec 2024 11:18:41 +0000
+Received: by outflank-mailman (output) from mailman id 861110.1273109; Thu, 19 Dec 2024 11:23:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOEYD-0006FT-Jj; Thu, 19 Dec 2024 11:18:41 +0000
-Received: by outflank-mailman (input) for mailman id 861098;
- Thu, 19 Dec 2024 11:18:39 +0000
+	id 1tOEd3-0008G3-JI; Thu, 19 Dec 2024 11:23:41 +0000
+Received: by outflank-mailman (input) for mailman id 861110;
+ Thu, 19 Dec 2024 11:23:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fj/B=TM=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tOEYB-0006FN-IS
- for xen-devel@lists.xenproject.org; Thu, 19 Dec 2024 11:18:39 +0000
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [2a00:1450:4864:20::232])
+ <SRS0=vR1G=TM=oss.nxp.com=andrei.cherechesu@srs-se1.protection.inumbo.net>)
+ id 1tOEd2-00089J-QL
+ for xen-devel@lists.xenproject.org; Thu, 19 Dec 2024 11:23:40 +0000
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c20a::7])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fed494e9-bdfa-11ef-a0d7-8be0dac302b0;
- Thu, 19 Dec 2024 12:18:38 +0100 (CET)
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-3011c7b39c7so8827421fa.1
- for <xen-devel@lists.xenproject.org>; Thu, 19 Dec 2024 03:18:38 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5422360072fsm146401e87.102.2024.12.19.03.18.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 03:18:36 -0800 (PST)
+ id b2423776-bdfb-11ef-a0d7-8be0dac302b0;
+ Thu, 19 Dec 2024 12:23:39 +0100 (CET)
+Received: from PA4SPRMB0023.eurprd04.prod.outlook.com (2603:10a6:102:268::8)
+ by PAWPR04MB9936.eurprd04.prod.outlook.com (2603:10a6:102:38b::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.15; Thu, 19 Dec
+ 2024 11:23:37 +0000
+Received: from PA4SPRMB0023.eurprd04.prod.outlook.com
+ ([fe80::fd16:4665:bad7:33ce]) by PA4SPRMB0023.eurprd04.prod.outlook.com
+ ([fe80::fd16:4665:bad7:33ce%4]) with mapi id 15.20.8251.015; Thu, 19 Dec 2024
+ 11:23:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,86 +49,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fed494e9-bdfa-11ef-a0d7-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734607117; x=1735211917; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=49eg8s+krDtf0/1GEbBKxKE4dU89XCIcLayO0cwZhoM=;
-        b=lasjnLTdmVN5LaMcQfDPjAiXODUavUVfW75HJzzlc6AYYiEra/AoGj1T9feYIHE3zC
-         b407hsZVT2/T8SxrP6HhPHd/cUXn+YiVwsY322jDRmkiha+dK6Xt8qNebVPsnpJsOGi2
-         gwS4T9BGP9cAoM0wPzJZRRc/iWB3SblabCWIrMHQmqZ8xPcX3vYy1s2uB3Fx/e9qXwYT
-         CIrnUF/Iq9BO4Xoff+tjBk9cIVLCc7kPjVkdJI8lNukgP9f0VQqNHGyDUfiRoXItfGpb
-         FgQBJdc5yiU3zzxWOL2xpGEZ5oFwUUo1FGfhtakRY1+2I9cFEMEiP78GZi/w/WjlKueT
-         vpXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734607117; x=1735211917;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=49eg8s+krDtf0/1GEbBKxKE4dU89XCIcLayO0cwZhoM=;
-        b=O5wdLcL9dp9kjRaSAiASSZFHbway48BgsfcwexCAyHwUryzYBEV6lFoSGy3nFh5yoL
-         grW2Ey5wjZv593tm5reOjNeY6GTo6oRnXuYqEZUHZFuEbzDx2gT19/l06iSoAJI+Bgfq
-         pCOR0AhsM55v8Q0WQAtFVBBeirA1QwttsB6fsUGq0REjZqli0tVOeoGYecHg9S/94PaP
-         61ACYfG1PSWxFMSVRg/OAIfyV6UMpOP+E9MTKy7OOcKPx4Zgj47jVMlh7cj04ILE2Iea
-         /xBgguxJvPXtJqGOK5TXWYnzuqsqE8dD21ZddegCbXIFOwFCr9Sz5Ja41dNtEbQUJB0R
-         qzOw==
-X-Gm-Message-State: AOJu0Yygz1AYKPijGFZNm/Uyybwsli6yY1WAOqwAQQn3axlO9oGxz7dx
-	dslh1iGV6fIsviX7yr/XFWsEuSKGxAGgB8VCZsbewEhJojSoGucVdle+XxuG
-X-Gm-Gg: ASbGncsY2dj29C5ieQch+Egai4R0Vn8+t04Kjs6FT15Bdjzu7gmRdW9b+Op83jIs0lq
-	dU57o9WTbsfl+njLWLrA262fvrcEzEfXB/+PafisFYWtG9CNbLh8riNgjlCSuR4ePdnyv25sI7D
-	uRKeIVta7yPnQwtj38n+Wdr/52p0b4i61q0B1Fy3LmFkYSowk+s7LhmJAGzqDJzSVRWSvNJ/NoE
-	M4jmrkVEFlQmcXej3r5S0Xs2RQBPHvlNgi/U/9QHewasrUUBLDBqbMp2w==
-X-Google-Smtp-Source: AGHT+IF4H7aeIiQQFZI0LvZ40oqVUe5ZLv8MMIFtsNxrCuny68UETI8s5sCNL3eTzqbGUu8i6zasqw==
-X-Received: by 2002:a05:6512:e98:b0:540:1dca:52d3 with SMTP id 2adb3069b0e04-541e674c8b4mr2116649e87.29.1734607117080;
-        Thu, 19 Dec 2024 03:18:37 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+X-Inumbo-ID: b2423776-bdfb-11ef-a0d7-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bXq0wmAxhELERVWndeEwt+Nj/om35zrQ+84GeuEKc5n9mcXm37B4Ojz5bsl71e8ph201BrHh5Kiaj9UTv2B/xMy7hquK7OfcL7cGjMtKe7xGWZRGreSfV48vbR+ltw6VgRzZ0pyGwK6qwvgKl0b7hIdpk/Neh01vW5A63XztwX0UY21q2fULiTKeDLzGTTaNpSNuINJIqey/Q+HOvldRN6yl+HKgCUgzqgH+hVw5bIakuri4NNF3bBOzvYypRfnohBHiEKsSkRt2XsZUxfGoIo/SbH1izIgo4lldx02qLas/Ps4nFKjvNS+o0hESXM8Rktc4zphGXAO+6Ili1he8aQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vl6a2ZFCdB7uSAUka3CQGXl5zPhfOlTYRKt+89VAhOE=;
+ b=UnlXPIGAiagkfEFV9OSUSG9JR7i+b0mHEpuNpjAoai2UhoD8aFasckl/P2dpzQW2SmkwURYZwC/EcY/QmxxTsdGqZC1mF1pxiyVd+YrnLFFyB+epozl/DSlR2brI+o0ZQTWt2Nddefu57cMjgw9IopHvPnFm0yOykjXGzgiLIvTqV0CvWLRercDAPPnwl4mM0oCT5n1q2odMP7ual4i6XywKdjC5LTJOodKDwlfKB2nHke36vH2QimnijeTUJHBaisJRb/KhUgOoSouLMQllYIBHC3JUQr065n68kPqusvxczzd1r6o56s052PokfnHjA2Fg9rQ+xyutzqBp9biiMg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vl6a2ZFCdB7uSAUka3CQGXl5zPhfOlTYRKt+89VAhOE=;
+ b=IrSZ20TEnqTZxX74TgBNTXBsIxapUBMi0VQVjgmxivTmCuOWZA8Td+f2//ceBxVDMLKxFLDUsaENJ/bA5i83F+a3GVGbNcOeSuYLTjAucm6fLRjvgE5A6Bf6WVDbppL7Fvo+1FFbY9CNqZTbKNgiO794ALK6ezqprpLpVtQ0L3qH0UFTWbuRfAnForxcTs+btPVBoPw2qdL43ApmDiRidUX63gnQX6ov7nJLQXwafIlS4dDT4k+IVD+FJ/cfFhGdHXh+sYFL/OhAcjag+mVSItHlQiU8QT4i7ygK4TbUdjta796WGRYWXKSdbdPGh/ju6qyIuQ1gGIJTUcbIr3hk3A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+From: "Andrei Cherechesu (OSS)" <andrei.cherechesu@oss.nxp.com>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] automation: pin down CONFIG_QEMU_PLATFORM for RISC-V's randconfig job
-Date: Thu, 19 Dec 2024 12:18:31 +0100
-Message-ID: <20241219111831.31736-1-oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.47.1
-MIME-Version: 1.0
+Cc: S32@nxp.com,
+	andrei.cherechesu@oss.nxp.com,
+	Andrei Cherechesu <andrei.cherechesu@nxp.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v4 2/6] xen/arm: vsmc: Enable handling SiP-owned SCMI SMC calls
+Date: Thu, 19 Dec 2024 13:23:11 +0200
+Message-ID: <20241219112315.2461048-3-andrei.cherechesu@oss.nxp.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241219112315.2461048-1-andrei.cherechesu@oss.nxp.com>
+References: <20241219112315.2461048-1-andrei.cherechesu@oss.nxp.com>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AM0PR04CA0039.eurprd04.prod.outlook.com
+ (2603:10a6:208:1::16) To PA4SPRMB0023.eurprd04.prod.outlook.com
+ (2603:10a6:102:268::8)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4SPRMB0023:EE_|PAWPR04MB9936:EE_
+X-MS-Office365-Filtering-Correlation-Id: 09499d96-fb3d-45bb-fe50-08dd201f93a7
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|52116014|376014|1800799024|366016|38350700014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?9owx1PcL99jevXt75Sfru1/e5yXeizbiVeYLeIAVIEn4HGVSSY136cYlG2CF?=
+ =?us-ascii?Q?43m5GXoU8xWlyLUknVchvC/kLJppChLeUqZ7y+d9lUZcKC3Npxn8oCjyXftN?=
+ =?us-ascii?Q?zopNV///7cPJXlOZGy0SlaRRdLNZTf6IqF1d/wIGmhSEBsj3v5/97ce4Rn16?=
+ =?us-ascii?Q?bEY/7EA4plwifJxvfHxmbEBEHsamxJ97ofWYMaPUAMLfRnZ3Wp3E+KxbgbEW?=
+ =?us-ascii?Q?P0WEL0a6/YGB4dBZ193iPYhEgjXEbIBN8cCziZ4rBfNdss7nRXQQKvTlFPyJ?=
+ =?us-ascii?Q?ZPDx7uvz7fXe0FbYctVa/a75lF8iyIIov+P1fZK42M0kHE0XRrtLPxt9IR3c?=
+ =?us-ascii?Q?yFDgkcn7RTBVnfQebVAz24wM7ngOvrWQdPc9stDTsKaxqrzmN7SdS/I82R3f?=
+ =?us-ascii?Q?YU/LqsMqHhKQcaJPw3hbx+HJAImDtAgtXPtLFcfFk769GuzMOlYz86lCH3Nz?=
+ =?us-ascii?Q?LKocNZHj60DkIfxkWb7fZGskojk/VG+ab2f036a5yXYmC/XQRwEUrJ7Azwc+?=
+ =?us-ascii?Q?VJr/gJWXdxwtK19ctbgdqboytTB2eKAwUywWk7gPZU/7fPAvGozNvE6HSdm8?=
+ =?us-ascii?Q?TIqlsIyX2lddR1/QQXt3THSLoa3NBjaBhGj2j3/4F4Wxrf7c8U/oiu9UborV?=
+ =?us-ascii?Q?mPVDkv4jq2Aq2+njAFWiYvhUBGc0K0CZXpL2RWVJpzDsulA3CZkFucUDjsY+?=
+ =?us-ascii?Q?Vk9jB0R/q63c2HLVkAj4kOCUT6YjOxVNjiE5eXvxVnP2tn/gwFQJ0kTPaZKS?=
+ =?us-ascii?Q?jaAFpC8zqlIdsZ6AYEe/WI12o81ph9jWXr5mUdSUgm+nfx+P8BQJxjjuTg8R?=
+ =?us-ascii?Q?eUxenu1uD44Kd9dRCY2jrsyFkacv1WoEOCsrawsSfpZwj1wSrr+PtRxt+65K?=
+ =?us-ascii?Q?AQYD0enpa94Pkd/Dr4BNaKlJJNM4NL7PgjUNycb4WMK4D8jpyl4tTrmi51/5?=
+ =?us-ascii?Q?vzZBdMFumT1jw0DOxGq+v7zCS0uIHvC1i0aHJyf4HucefwI1jMzBp13uHa+I?=
+ =?us-ascii?Q?rz48bcGxHXeBdndk5wljckDTlX8cRqNl0ZhiCGWJMcFHuXHjYLOpKzgx8su1?=
+ =?us-ascii?Q?g7CIGJZvawfWayE3VOfsgSPvHHqsshf4okhTUM5bWGL0NNQ7X+LYz4LMTVMY?=
+ =?us-ascii?Q?Gb91O5WdEYu9C2843TIqUXGnN3+DqwyRuEupBXyNqhByYkwZjBfF3l1Zz+uN?=
+ =?us-ascii?Q?cSb5wwiWid6atbYTjJQXJVg5YWIF9DuGDsA6Ud26Ad54rA+04gAFRXuj991q?=
+ =?us-ascii?Q?uRANuek9G3FNTMCosRANtUKePsVtz8msIJv4wD0apV9PLZPWNoBlUckSPC/E?=
+ =?us-ascii?Q?KIUtyzRsO2klEw1e8sRdHDi0dmAhx1Pn7guJ5qC5/LagMJLhe7M53/Xiwgoj?=
+ =?us-ascii?Q?ca1bYBX+aGsylH74EvUdKhEgcamSBPORfiw1HyA9OQCkp/03nZqHTfWOTTcB?=
+ =?us-ascii?Q?J1Xy0NUnQrZYw7tJ3fxg2Ue5Farpt3Ew?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4SPRMB0023.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?Agv5RufhN3Wy3eEeOzXVIycdXX3R6+Y1c6G1TwzTPzl9sfvYnBCCAWEFRk4J?=
+ =?us-ascii?Q?5+OFS9uDe3/hA7XJwZGD6RaFHtVpG44wLti7HVzatGzRoV6bg7WrhySO3OMV?=
+ =?us-ascii?Q?IVYQPNPH1HbGnvfWNx0P/+NLIGfEIRkB06vqDhE2DHeovoW4LH4+l3BT53Kj?=
+ =?us-ascii?Q?7qRCp3B3jdCXG/spLCuyWsOrqvHTeoaxBVJPPIO3hlLGdR6+KB//2zTIBrCM?=
+ =?us-ascii?Q?FkYht8eQEdN6xvGoayJlVnRNb8BK76b5Mw3g4e0NH7kts/ksf77FzA4DFBoB?=
+ =?us-ascii?Q?nlxzRk1VMn84FXiX3Wi1QBCgYETxYnikrZxdouOVvIRAYtYR107QKJeJ5tRR?=
+ =?us-ascii?Q?MBZLqwLW7Zkjxej5QvXWaTl1S8w9Hgan5OcwTPuSlbiTt0WFNJNEaoD3P131?=
+ =?us-ascii?Q?ENIftydgkAQxKmYPN4uxVrPDWHnJZkav/IqNE9V9mOMhArNXmsLJ/hTLOweK?=
+ =?us-ascii?Q?1K8QfpINBBSdvp4kVI0MYaVPT5kAuXRJcDRleP4i5hTDFls+xdXVgjC8mpgc?=
+ =?us-ascii?Q?5iTe3T81eG2XeCHSwvp6vkye/hEDl9xiYn52adK/uHiea3CR5TIxHMh84l2+?=
+ =?us-ascii?Q?pNbzVdj27HrZ/2U1BIZdloJkjsK05zLxmQOUXHnhfK5hpypWQQDcN2wlDNvd?=
+ =?us-ascii?Q?CPQoVdyAICro8BouZ/Q1vux4fSZ7ZASBsV2o+/jOGCoRWe61wUcLo8TuBTX/?=
+ =?us-ascii?Q?GC0N1yb6uQlEXpnnLYuxI9MSZCTUsf1Eryjj1DpfESlgfDh/7kd2DJc6NIOU?=
+ =?us-ascii?Q?RlRj+IIr1yzrOZLYSNLV2LSl5WfHjrCmZvHwrWtI1994txU6EALKuEtwEQ5g?=
+ =?us-ascii?Q?IIbVQcYy/9+lKD3lyajPxdupi+76626J73RBoYjSF3ZqsxEQ1k5fmYlD2Mlz?=
+ =?us-ascii?Q?HtkGKAppQTebdf1AD9idSLBnpA5raDfKAI/900j5CIvbD1Gp3l2mdyuTZUnF?=
+ =?us-ascii?Q?QqnR6tujcStGtC5IvU8OX4ys9DVLBSU5p6M9Jw/Fe/gszFWrYA2oOyRjHu1K?=
+ =?us-ascii?Q?gF0ANoPV45XUxHhp9sXAZLt3K9YP0XagtzbXHySDfFH/BN0vvFFXEf0aKQQJ?=
+ =?us-ascii?Q?xnOqpGg8hVYqwoGx4/zVBX7QoYlUG8vdt+xQD92bvCwJbSRTcQUWj1lbXoqW?=
+ =?us-ascii?Q?mCszZKH41b8SWj3iwmcez0XMqbufmYaWS3RFKTgRNYvWne13ntIub8/M3Tc4?=
+ =?us-ascii?Q?0OuKWmj+eGHihLjHZY3bWPbH4iDExHyfACh6HUDu6d7B3KnrY0d/jj654rIi?=
+ =?us-ascii?Q?QBCEzyYZAsWnb57pgLhrC1IPfmfvPAIU+LRAjRrEkJeG6CEVZ+gPKiauAl7R?=
+ =?us-ascii?Q?PTMvrDgex0FLifOpKD6K9dn1BcWS/V3VhbU7Wb+WdBHlrHukbKDtZcBj/HNs?=
+ =?us-ascii?Q?zRAPJwi4vG67TDif42hhkgA+IsUIlRzVlbm4WpS6UNZ7mXcdzS+z9YUanjsK?=
+ =?us-ascii?Q?8se7lPz6IIIr40TMgBIDAcPsUy55PosFh1A1Vty10RFW7nQMc7tcswLOYEDI?=
+ =?us-ascii?Q?N7IWbwopL5H3Vgqils3c0nEWpU0D0f6qd8/p/P3EYh+dNrqNUxF3cHqxaeRp?=
+ =?us-ascii?Q?0zqGoPgX+eefaMpEO4xhkhSj7kK+egmBxKI6TuDH0ukyifbyBB/cpeRFI0qN?=
+ =?us-ascii?Q?ew=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09499d96-fb3d-45bb-fe50-08dd201f93a7
+X-MS-Exchange-CrossTenant-AuthSource: PA4SPRMB0023.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2024 11:23:35.1356
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yINuT/MC29Taswd4lu0pbGfsr53IdC5QOesUADz92PIj39aQaffeXz11m1S/5spg3rKLEkmABPL7iD43DDzLeIoNmtUcNuMK1AVpDuI52is=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR04MB9936
 
-Except setting CONFIG_QEMU_PLATFORM=y in tiny64_defconfig,
-CONFIG_QEMU_PLATFORM should be fixed for RISC-V's randconfig job.
-Otherwise, an expected compilation error for RISC-V's randconfig job
-will occur since clean_and_invalidate_dcache_va_range() and
-clean_dcache_va_range() are currently implemented only for the QEMU
-platform.
+From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
 
-Additionally, sort the EXTRA_FIXED_RANDCONFIG list alphabetically.
+Change the handling of SiP SMC calls to be more generic,
+instead of directly relying on the `platform_smc()` callback
+implementation.
 
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Fixes: f92e2709bd ("xen/riscv: implement data and instruction cache operations")
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Try to handle the SiP SMC first through the `platform_smc()`
+callback (if implemented). Otherwise, try to handle it as SCMI
+message.
+
+Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
- automation/gitlab-ci/build.yaml | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/arm/vsmc.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 1ca6764225..1b884cc81c 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -732,9 +732,10 @@ debian-12-riscv64-gcc:
-       CONFIG_COVERAGE=n
-       CONFIG_EXPERT=y
-       CONFIG_GRANT_TABLE=n
-+      CONFIG_LIVEPATCH=n
-       CONFIG_MEM_ACCESS=n
-       CONFIG_PERF_COUNTERS=n
--      CONFIG_LIVEPATCH=n
-+      CONFIG_QEMU_PLATFORM=y
-       CONFIG_XSM=n
+diff --git a/xen/arch/arm/vsmc.c b/xen/arch/arm/vsmc.c
+index f679cced7f..62d8117a12 100644
+--- a/xen/arch/arm/vsmc.c
++++ b/xen/arch/arm/vsmc.c
+@@ -20,6 +20,7 @@
+ #include <asm/traps.h>
+ #include <asm/vpsci.h>
+ #include <asm/platform.h>
++#include <asm/firmware/scmi-smc.h>
  
- debian-12-riscv64-gcc-randconfig:
+ /* Number of functions currently supported by Hypervisor Service. */
+ #define XEN_SMCCC_FUNCTION_COUNT 3
+@@ -224,6 +225,16 @@ static bool handle_sssc(struct cpu_user_regs *regs)
+     }
+ }
+ 
++/* Secure Calls defined by the Silicon Provider (SiP) */
++static bool handle_sip(struct cpu_user_regs *regs)
++{
++    /* Firstly, let each platform define custom handling for these SMCs */
++    if ( platform_smc(regs) )
++        return true;
++
++    return scmi_handle_smc(regs);
++}
++
+ /*
+  * vsmccc_handle_call() - handle SMC/HVC call according to ARM SMCCC.
+  * returns true if that was valid SMCCC call (even if function number
+@@ -288,7 +299,7 @@ static bool vsmccc_handle_call(struct cpu_user_regs *regs)
+             handled = handle_sssc(regs);
+             break;
+         case ARM_SMCCC_OWNER_SIP:
+-            handled = platform_smc(regs);
++            handled = handle_sip(regs);
+             break;
+         case ARM_SMCCC_OWNER_TRUSTED_APP ... ARM_SMCCC_OWNER_TRUSTED_APP_END:
+         case ARM_SMCCC_OWNER_TRUSTED_OS ... ARM_SMCCC_OWNER_TRUSTED_OS_END:
 -- 
-2.47.1
+2.45.2
 
 
