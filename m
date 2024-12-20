@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35330E7718C
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Dec 2024 16:59:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.861885.1273913 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0853AE77188
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Dec 2024 16:59:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.861887.1273933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOgLB-0008Ca-IK; Fri, 20 Dec 2024 16:59:05 +0000
+	id 1tOgLQ-0000N6-0d; Fri, 20 Dec 2024 16:59:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 861885.1273913; Fri, 20 Dec 2024 16:59:05 +0000
+Received: by outflank-mailman (output) from mailman id 861887.1273933; Fri, 20 Dec 2024 16:59:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOgLB-0008CT-F8; Fri, 20 Dec 2024 16:59:05 +0000
-Received: by outflank-mailman (input) for mailman id 861885;
- Fri, 20 Dec 2024 16:59:04 +0000
+	id 1tOgLP-0000Mw-Sn; Fri, 20 Dec 2024 16:59:19 +0000
+Received: by outflank-mailman (input) for mailman id 861887;
+ Fri, 20 Dec 2024 16:59:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MWOG=TN=eurecom.fr=Ariel.Otilibili-Anieli@srs-se1.protection.inumbo.net>)
- id 1tOgL9-0008Bw-9w
- for xen-devel@lists.xenproject.org; Fri, 20 Dec 2024 16:59:04 +0000
+ id 1tOgLP-0008Bw-AQ
+ for xen-devel@lists.xenproject.org; Fri, 20 Dec 2024 16:59:19 +0000
 Received: from smtp.eurecom.fr (smtp.eurecom.fr [193.55.113.210])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b52dad4b-bef3-11ef-99a3-01e77a169b0f;
- Fri, 20 Dec 2024 17:59:00 +0100 (CET)
+ id bfb58e36-bef3-11ef-99a3-01e77a169b0f;
+ Fri, 20 Dec 2024 17:59:17 +0100 (CET)
 Received: from waha.eurecom.fr (HELO smtps.eurecom.fr) ([10.3.2.236])
- by drago1i.eurecom.fr with ESMTP; 20 Dec 2024 17:58:59 +0100
+ by drago1i.eurecom.fr with ESMTP; 20 Dec 2024 17:59:17 +0100
 Received: from localhost.localdomain (88-183-119-157.subs.proxad.net
  [88.183.119.157])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by smtps.eurecom.fr (Postfix) with ESMTPSA id EAAAF249B;
- Fri, 20 Dec 2024 17:58:58 +0100 (CET)
+ by smtps.eurecom.fr (Postfix) with ESMTPSA id 2BD21249D;
+ Fri, 20 Dec 2024 17:59:17 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,50 +46,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b52dad4b-bef3-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: bfb58e36-bef3-11ef-99a3-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=eurecom.fr; i=@eurecom.fr; q=dns/txt; s=default;
-  t=1734713940; x=1766249940;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=6ayZlOYbibzJJ0P/4FSByg1LP3Aw1qXMWugsZckGMwU=;
-  b=IOJEdC2Ae8pEQA48j2xpeetc99fUgKsHN5SizhRSahKRJJpnjyokln3S
-   OJqzX0nsXZp+NT9lzBmlpjUXvK9A3scHUMdEHfMrhSOeV46b2Efw2e548
-   51gDpz/lh5vP32Ur9Frf7VZCUtNt61ZgSGzVKySJqE1W8oIH9cRumgOQG
-   E=;
-X-CSE-ConnectionGUID: ABl+VTsURsqIcznGdeA1sg==
-X-CSE-MsgGUID: pyKCtXeXQrKPT36fqiP3Bg==
+  t=1734713957; x=1766249957;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=zjQnlMsaSGWfGsQEe6M09GEFyw9td1gDFl+U5txZ89s=;
+  b=QNQl3IpmWOzv3WWYmpsaaSdWT+2j/hiYC/YrZt4bDwYQU26+zNXAoQ1T
+   /u1baMrzmM+giPrR4waWhw75hM9tjmWhHEEnm9BpCDzNZ5cCuSzfQT/Zf
+   btRZZOpFQUq0Rcq9C/Li4z2FBeKkeYte6Gz4eXGxk1T+lWu/S5ZGhpsNJ
+   I=;
+X-CSE-ConnectionGUID: QKe6ummCS/WzZkNaNCWGTQ==
+X-CSE-MsgGUID: +PZQN/0yRXq89cbRwlaFoQ==
 X-IronPort-AV: E=Sophos;i="6.12,251,1728943200"; 
-   d="scan'208";a="28280238"
+   d="scan'208";a="28280241"
 From: Ariel Otilibili <Ariel.Otilibili-Anieli@eurecom.fr>
 To: xen-devel@lists.xenproject.org
 Cc: Ariel Otilibili <Ariel.Otilibili-Anieli@eurecom.fr>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH 0/2] tools/libs,xen/tools: remove dead code
-Date: Fri, 20 Dec 2024 17:55:00 +0100
-Message-ID: <20241220165837.937976-1-Ariel.Otilibili-Anieli@eurecom.fr>
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH 2/2] xen/tools: remove dead code
+Date: Fri, 20 Dec 2024 17:55:02 +0100
+Message-ID: <20241220165837.937976-3-Ariel.Otilibili-Anieli@eurecom.fr>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20241220165837.937976-1-Ariel.Otilibili-Anieli@eurecom.fr>
+References: <20241220165837.937976-1-Ariel.Otilibili-Anieli@eurecom.fr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hello,
+Default switch case exits directly; these instructions are never reached.
 
-This series addresses the Coverity IDs 1056148, 1056149, & 1458052.
+The file was taken from Linux; the copies have diverged a lot since:
 
-Thank you,
+```
+$ diff -u xen/xen/tools/kconfig/expr.c linux/scripts/kconfig/expr.c | wc -l
+984
+```
 
-Ariel Otilibili (2):
-  tools/libs: remove dead code
-  xen/tools: remove dead code
+Therefore the change is only applied locally.
 
- tools/libs/light/libxl_create.c | 1 -
- tools/libs/light/libxl_device.c | 1 -
- xen/tools/kconfig/expr.c        | 2 --
- 3 files changed, 4 deletions(-)
+Coverity-ID: 1458052
+Fixes: 8c271b7584 ("build: import Kbuild/Kconfig from Linux 4.3")
+Signed-off-by: Ariel Otilibili <Ariel.Otilibili-Anieli@eurecom.fr>
+--
+Cc: Doug Goldstein <cardoe@cardoe.com>
+---
+ xen/tools/kconfig/expr.c | 2 --
+ 1 file changed, 2 deletions(-)
 
+diff --git a/xen/tools/kconfig/expr.c b/xen/tools/kconfig/expr.c
+index 77ffff3a05..be1400cdaf 100644
+--- a/xen/tools/kconfig/expr.c
++++ b/xen/tools/kconfig/expr.c
+@@ -1125,8 +1125,6 @@ static int expr_compare_type(enum expr_type t1, enum expr_type t2)
+ 	default:
+ 		return -1;
+ 	}
+-	printf("[%dgt%d?]", t1, t2);
+-	return 0;
+ }
+ 
+ void expr_print(struct expr *e,
 -- 
 2.47.1
 
