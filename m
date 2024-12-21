@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBBA0E7718C
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2024 10:45:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.861762.1274083 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72B7E7718B
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2024 10:51:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.862380.1274113 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOwzC-0007gu-Ub; Sat, 21 Dec 2024 10:45:30 +0000
+	id 1tOx4X-0002Ic-Dp; Sat, 21 Dec 2024 10:51:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 861762.1274083; Sat, 21 Dec 2024 10:45:30 +0000
+Received: by outflank-mailman (output) from mailman id 862380.1274113; Sat, 21 Dec 2024 10:51:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tOwzC-0007gm-O9; Sat, 21 Dec 2024 10:45:30 +0000
-Received: by outflank-mailman (input) for mailman id 861762;
- Fri, 20 Dec 2024 09:27:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tOx4X-0002IV-9k; Sat, 21 Dec 2024 10:51:01 +0000
+Received: by outflank-mailman (input) for mailman id 862380;
+ Sat, 21 Dec 2024 10:51:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Flow=TN=gmail.com=guoweikang.kernel@srs-se1.protection.inumbo.net>)
- id 1tOZHo-0002rl-G1
- for xen-devel@lists.xenproject.org; Fri, 20 Dec 2024 09:27:08 +0000
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [2607:f8b0:4864:20::435])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 921f86fb-beb4-11ef-99a3-01e77a169b0f;
- Fri, 20 Dec 2024 10:27:03 +0100 (CET)
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-728e78c4d7bso1309507b3a.0
- for <xen-devel@lists.xenproject.org>; Fri, 20 Dec 2024 01:27:03 -0800 (PST)
+ <SRS0=k/Wq=TO=gmail.com=guoweikang.kernel@srs-se1.protection.inumbo.net>)
+ id 1tOx4W-0002IP-3e
+ for xen-devel@lists.xenproject.org; Sat, 21 Dec 2024 10:51:00 +0000
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [2607:f8b0:4864:20::632])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 74b5cbb0-bf89-11ef-a0d9-8be0dac302b0;
+ Sat, 21 Dec 2024 11:50:57 +0100 (CET)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-21680814d42so24894945ad.2
+ for <xen-devel@lists.xenproject.org>; Sat, 21 Dec 2024 02:50:56 -0800 (PST)
 Received: from localhost.localdomain ([36.110.106.149])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-842b85f00f9sm2476345a12.43.2024.12.20.01.26.42
+ d9443c01a7336-219dc9f7e49sm42164475ad.217.2024.12.21.02.50.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 01:27:01 -0800 (PST)
+ Sat, 21 Dec 2024 02:50:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,45 +47,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 921f86fb-beb4-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: 74b5cbb0-bf89-11ef-a0d9-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734686822; x=1735291622; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1734778255; x=1735383055; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fv95yFRm1pZ1t8bjewPUXwQNxqgkbbAOERHyHPMPyNk=;
-        b=WKv2WnXbSoDEfW0hg9QgVwJdUK9kjJ5ZvOoVCtKEDNRMOG+ZMmbN5N79dTGtP/WyLz
-         QAzSADYYaJia4PTjriqOysHRFDTKjCTQLGgDC0igetmGqtMrCPDhb4w8LSaJitzO4opq
-         eXJi0eyPWUn3GKzpL5lfM5x1/uo7B+3cxb46afpyJcD8bH7K0lHeBRLORhdDOBavwogT
-         lMDBCPZaU1nzK7BLjLdxdRok2HVyKoN41S9hLQkV8gDXyJ4kTxoRJbHOuzfHPHLhEMRG
-         Ih6JCCXbEYftFlhkFzx6Nz/8GiQP27Iz9dJ3VSMnAH2efIBUs+Hv3d92khAhiCMtQ0eD
-         Hlzg==
+        bh=FMtuukiXGUthXESLw6zTM/MFRRzwuQ+pkPa0ANA6jII=;
+        b=lFkWsynAOAYE+nARnV3StTncfZxB3FNDmSgiHHzP9tOquLkOlcGpvqNARtzqZEj5qS
+         VrdtRWypZm9sJSeXgFdHOEBus/XksLSBEBcnAhWrWofcg6Ci2jXjbrzrHkZnk/dmauF5
+         bS5VhQ09bSw6BpvyEfryuk3YUH+Q4g5dxruw3BHPBoXMPY/qrJdEC66qgjm3AaikWUQl
+         y0Aq4m36MiLz5BeoV7Iyw6pZy+ftpnbv7nhyvj8+OBzvUfQ75YOvRMeTkpbchwWWLPN4
+         Vca6q2hyDsh26vSoN1UvWKZuSFQbjAcniduFnTweZbR0RIv0ZT18XKquFvn6ONfNpug4
+         eV9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734686822; x=1735291622;
+        d=1e100.net; s=20230601; t=1734778255; x=1735383055;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=fv95yFRm1pZ1t8bjewPUXwQNxqgkbbAOERHyHPMPyNk=;
-        b=wMOZWu7t6elfDD4X+J5m7IxiWv1Oi7W/8s5DX1VZ5b6NC5FewTU2CNwb+2940E8Cnc
-         Lmse6jNG41BzqfQBQPwBkEVVSMkYj13sEaWO/JQ6/3+Uod/OlrHr8Zskr8IR7PjE7wqs
-         w4KwwLflDr8J2emYbK8LTVXj0f2XfBal6zbmtHy81FzTTRaxdc0TCvjgqnWw/q7xb1n6
-         v65ABO9etogpvYrqulEGAjy/h27/O/tPE+0qnZ7MGbnH+NuVhtTcdxXBeGaYzTu05ZTD
-         OjcMKJW5HUn7qSzbavzgwmf6GfBZtFrqBBg4I2DCTnSzwY7o67UaNgqg/yB2a8488QsU
-         oexg==
-X-Forwarded-Encrypted: i=1; AJvYcCXBhTRZqV+Nig8V1fQmZXvOZysRGP2g59wR7sf+5gNsmY5LheC+xfGH+Sdtw1YGryOyepWQG3M+Z48=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzHr2m+LA90DiIT1X9K99qBTzeESQeP4SI9hJrM7STRNXC2wQJb
-	Dy7pN8Z1+APj9+y90t/eM01stNP0xLpkZoN9zSCpy2+C6d4z1coN
-X-Gm-Gg: ASbGnct2HfhA0SHSDjuCqug0gPUE6u6pZ8ikQNRvZ1lZr3EdVPrwTbQflFePPFRFLWL
-	+qd/JwyEI5Es9Owrn6kPHiwsxagYlx9uGJCBt04trI8OkA17lxIQ+InNoYusjgx5Udw+ozxxNIy
-	uxYqj0KNYBCEgokRY30sNLLGXdUhOPOirefxErgntdt6IGv3rEb1qMadSVqOCQLP47/gEZeJWjT
-	/De8pUKD9mBxKLMdO2V87kaADGCyeP7RBiX7wY8R+xVdwEUL7l5UtY6sUKIejksfz8vv1Lt0KtS
-	2u0A
-X-Google-Smtp-Source: AGHT+IH/qyoq6gkcTnpo7ohRXihVc7FAZQUsZPTG9leiexZnchzzE6SREdKqSmsRVszfucZ7QcKYTQ==
-X-Received: by 2002:a05:6a00:820c:b0:725:ce39:4516 with SMTP id d2e1a72fcca58-72aa9a3edc8mr8431954b3a.7.1734686821716;
-        Fri, 20 Dec 2024 01:27:01 -0800 (PST)
+        bh=FMtuukiXGUthXESLw6zTM/MFRRzwuQ+pkPa0ANA6jII=;
+        b=IElzg1D3ovRyJCb9hxCjSEXGSRHnnqzA6HceOjKajsl42JtKotqE7A2hnL9TMXafEy
+         u/cXO0FsuMkKVpe1PzbesTGLYIWXuhV9dzdgPYpDlFgeE+qdiIy3rBXYkq1kgASNnhx8
+         +L8wo3onHdwjN9ZizJLPe20eX6pKc6tYzwzvyKpYunwkUS8IVX2K2bD6lotE57XtVs4n
+         wJNuLnxuBobfkfz3d5K9PquAcfcsiniK1kdh8fjzfZksOZbA8Pg3TkRihgeKb7SLx2ut
+         898E5VmP3qvpC9P9owFeWtPQHprHtLA2rHuA70u8MMUTbXUFjiw7tmB9dYW3Ysj+jUvy
+         vWaQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXPxiLfM3wzh5xgy4IuN2XHe5g0vafN7EocppaWxZoNhLC5Sf+U5XgymC++TwUxeaKQ9ZANvEiCPWM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy30Cgnm/EOOZ1LQapdexMNLzKf4WrQxe3C5+8hDmjmJvr0Z/lN
+	TgdJUJRn9wCYund2UChonlrYXe43RtCp6R+xhF6kdANBWyI29B7O
+X-Gm-Gg: ASbGncsMBbbIhdKnm1ywVdc6kdAwA4mbUOZDXr0WhpnAOAB1DCVLRX76Rl0VwdSKJn5
+	vy4TEM/bNgHRbFQPZNe2qo6+MxPDUv2Xd85GecqOIKX3m+TPgzX3gdrVMMWVniVd9Imdpo/CxKP
+	s1o6HTOaKHPdxZl0gJlqIrK38r6uFDaz7WWQ6HKeUqlJxaYR6zoUmYxLuPJU3BbXQYOw2fSivah
+	ZiQvVan7k/m4vkZ7pMXd7HqRglBi9nm6fbxPAVDiVBs7HF3LtMCbsIL20rZ9PMQhV6L2hS5CGRs
+	LDZP
+X-Google-Smtp-Source: AGHT+IEcfdQZnOgpe4T7a55Eg82ftcD6jzd8oQZMCW61mp8xBQbLU3lm6j6/UBVOJ4rmiSs4u196sw==
+X-Received: by 2002:a17:902:ecc7:b0:215:401b:9535 with SMTP id d9443c01a7336-219e70dbe4bmr81691825ad.47.1734778255055;
+        Sat, 21 Dec 2024 02:50:55 -0800 (PST)
 From: Guo Weikang <guoweikang.kernel@gmail.com>
-To: Mike Rapoport <rppt@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Dennis Zhou <dennis@kernel.org>,
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Guo Weikang <guoweikang.kernel@gmail.com>
+Cc: Dennis Zhou <dennis@kernel.org>,
 	Tejun Heo <tj@kernel.org>,
 	Christoph Lameter <cl@linux.com>,
 	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
@@ -94,8 +95,7 @@ To: Mike Rapoport <rppt@kernel.org>,
 	Huacai Chen <chenhuacai@kernel.org>,
 	Will Deacon <will@kernel.org>,
 	Catalin Marinas <catalin.marinas@arm.com>,
-	Guo Weikang <guoweikang.kernel@gmail.com>
-Cc: Oreoluwa Babatunde <quic_obabatun@quicinc.com>,
+	Oreoluwa Babatunde <quic_obabatun@quicinc.com>,
 	rafael.j.wysocki@intel.com,
 	Palmer Dabbelt <palmer@rivosinc.com>,
 	Hanjun Guo <guohanjun@huawei.com>,
@@ -110,7 +110,6 @@ Cc: Oreoluwa Babatunde <quic_obabatun@quicinc.com>,
 	Russell King <linux@armlinux.org.uk>,
 	WANG Xuerui <kernel@xen0n.name>,
 	Michael Ellerman <mpe@ellerman.id.au>,
-	Jonas Bonn <jonas@southpole.se>,
 	Stefan Kristiansson <stefan.kristiansson@saunalahti.fi>,
 	Stafford Horne <shorne@gmail.com>,
 	Helge Deller <deller@gmx.de>,
@@ -144,22 +143,6 @@ Cc: Oreoluwa Babatunde <quic_obabatun@quicinc.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	x86@kernel.org,
-	Len Brown <lenb@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Chris Zankel <chris@zankel.net>,
-	Max Filippov <jcmvbkbc@gmail.com>,
-	Tero Kristo <kristo@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Saravana Kannan <saravanak@google.com>,
-	Pavel Machek <pavel@ucw.cz>,
-	Yury Norov <yury.norov@gmail.com>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Marco Elver <elver@google.com>,
-	Al Viro <viro@zeniv.linux.org.uk>,
-	Arnd Bergmann <arnd@arndb.de>,
 	linux-alpha@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
@@ -182,9 +165,9 @@ Cc: Oreoluwa Babatunde <quic_obabatun@quicinc.com>,
 	devicetree@vger.kernel.org,
 	linux-mm@kvack.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH] mm/memblock: Add memblock_alloc_or_panic interface
-Date: Fri, 20 Dec 2024 17:26:38 +0800
-Message-Id: <20241220092638.2611414-1-guoweikang.kernel@gmail.com>
+Subject: [PATCH v3] mm/memblock: Add memblock_alloc_or_panic interface
+Date: Sat, 21 Dec 2024 18:50:19 +0800
+Message-Id: <20241221105019.2665369-1-guoweikang.kernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -253,7 +236,7 @@ Signed-off-by: Guo Weikang <guoweikang.kernel@gmail.com>
  drivers/macintosh/smu.c                 |  6 +--
  drivers/of/fdt.c                        |  8 +--
  drivers/of/unittest.c                   |  8 +--
- include/linux/memblock.h                | 13 +++++
+ include/linux/memblock.h                | 14 +++++
  init/main.c                             | 18 ++-----
  kernel/power/snapshot.c                 |  5 +-
  lib/cpumask.c                           |  5 +-
@@ -261,7 +244,7 @@ Signed-off-by: Guo Weikang <guoweikang.kernel@gmail.com>
  mm/numa.c                               |  8 +--
  mm/percpu.c                             | 70 +++++--------------------
  mm/sparse.c                             |  5 +-
- 63 files changed, 130 insertions(+), 423 deletions(-)
+ 63 files changed, 131 insertions(+), 423 deletions(-)
 
 diff --git a/arch/alpha/kernel/core_cia.c b/arch/alpha/kernel/core_cia.c
 index ca3d9c732b61..6e577228e175 100644
@@ -1512,25 +1495,26 @@ index e50570629dc0..837eafa81636 100644
  
  /*
 diff --git a/include/linux/memblock.h b/include/linux/memblock.h
-index 673d5cae7c81..40a1c85a0bef 100644
+index 673d5cae7c81..03bd00d3ae1f 100644
 --- a/include/linux/memblock.h
 +++ b/include/linux/memblock.h
-@@ -417,6 +417,19 @@ static __always_inline void *memblock_alloc(phys_addr_t size, phys_addr_t align)
+@@ -417,6 +417,20 @@ static __always_inline void *memblock_alloc(phys_addr_t size, phys_addr_t align)
  				      MEMBLOCK_ALLOC_ACCESSIBLE, NUMA_NO_NODE);
  }
  
-+static __always_inline void *memblock_alloc_or_panic(phys_addr_t size, phys_addr_t align)
++static __always_inline void *__memblock_alloc_or_panic(phys_addr_t size,
++						       phys_addr_t align,
++						       const char *func)
 +{
 +	void *addr = memblock_alloc(size, align);
 +
 +	if (unlikely(!addr))
-+#ifdef CONFIG_PHYS_ADDR_T_64BIT
-+		panic("%s: Failed to allocate %llu bytes\n", __func__, size);
-+#else
-+		panic("%s: Failed to allocate %u bytes\n", __func__, size);
-+#endif
++		panic("%s: Failed to allocate %pap bytes\n", func, &size);
 +	return addr;
 +}
++
++#define memblock_alloc_or_panic(size, align)    \
++	 __memblock_alloc_or_panic(size, align, __func__)
 +
  static inline void *memblock_alloc_raw(phys_addr_t size,
  					       phys_addr_t align)
