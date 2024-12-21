@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B52C6E7718E
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2024 19:46:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.862508.1274144 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C3F8E7718B
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2024 21:32:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.862551.1274173 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tP5Pv-00065K-2v; Sat, 21 Dec 2024 19:45:39 +0000
+	id 1tP74Y-0003xa-U1; Sat, 21 Dec 2024 21:31:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 862508.1274144; Sat, 21 Dec 2024 19:45:39 +0000
+Received: by outflank-mailman (output) from mailman id 862551.1274173; Sat, 21 Dec 2024 21:31:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tP5Pu-00064F-UV; Sat, 21 Dec 2024 19:45:38 +0000
-Received: by outflank-mailman (input) for mailman id 862508;
- Sat, 21 Dec 2024 18:26:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tP74Y-0003xT-Qk; Sat, 21 Dec 2024 21:31:42 +0000
+Received: by outflank-mailman (input) for mailman id 862551;
+ Sat, 21 Dec 2024 21:31:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=t6MP=TO=gmail.com=sedat.dilek@srs-se1.protection.inumbo.net>)
- id 1tP4BN-0005uw-M1
- for xen-devel@lists.xenproject.org; Sat, 21 Dec 2024 18:26:33 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 19da3029-bfc9-11ef-99a3-01e77a169b0f;
- Sat, 21 Dec 2024 19:26:31 +0100 (CET)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53df6322ea7so3805420e87.0
- for <xen-devel@lists.xenproject.org>; Sat, 21 Dec 2024 10:26:31 -0800 (PST)
+ <SRS0=aaI+=TO=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tP74X-0003xN-PG
+ for xen-devel@lists.xenproject.org; Sat, 21 Dec 2024 21:31:41 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f6458011-bfe2-11ef-a0d9-8be0dac302b0;
+ Sat, 21 Dec 2024 22:31:39 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43621d27adeso20640705e9.2
+ for <xen-devel@lists.xenproject.org>; Sat, 21 Dec 2024 13:31:39 -0800 (PST)
+Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a1c828cc8sm7363868f8f.17.2024.12.21.13.31.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 21 Dec 2024 13:31:37 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,333 +47,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 19da3029-bfc9-11ef-99a3-01e77a169b0f
+X-Inumbo-ID: f6458011-bfe2-11ef-a0d9-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734805591; x=1735410391; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=Ug+2S38akg/OGmu5JFa1fwvkZP6FmAvIFxWtE1sypCI=;
-        b=P/OdeVdh1j99xVvKwf0QPaIZsIpn+rDRKOD6Mz+Uhmv3sHcQDXQJFhcjo88NHCv0ZN
-         No1a+CXh9VwDUAdEZ9eal8w7/QyAUvV/X6mcOO5q7+8623GlKbF6ckpNeX//gWQzna8V
-         gTJ8ysoSVaOuLGIOenvcowZyBeGjcYNarbbQ8uKe6OM1ZhtYya5Ru2T/iCiRDw59AuqL
-         X6qVAv59NKVx7FeG9NZLT/5JqH97fPboOblJc78JYtAPnc23h7jqflzVvQwNuWrT983J
-         UGPyl4F6Ea1xd6jVQU3tfXocWJnUmQ/1vp56jzHrbVuOc9947rUdh0ZW/qs6g+v/BgTc
-         X7GQ==
+        d=citrix.com; s=google; t=1734816698; x=1735421498; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=g80Xv9sdG8bld1hI5N8TIg0l0usJaOYYz4GMokDzByQ=;
+        b=TJBg/CsNHogDUNIuF7KeHBntwavhntxi0LeNsbvsO/8iwjbDwPrsYBFIvnahDZ89y2
+         uCzSTFpX45IPaMgjzsjRraIx0OY5GWxXRhQEN1VkrRkvcHJF2Qlwg3UnDfgVm31tMTBJ
+         00LnxRhTLe1YEeC64KD5Li31ChG4Bmp8TAdRw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734805591; x=1735410391;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Ug+2S38akg/OGmu5JFa1fwvkZP6FmAvIFxWtE1sypCI=;
-        b=FfhFHgELzyZ2cTOLfKWV1qRDHWiocWfHJN/JxBHOcNCoCyPZqwy3ZN+BD5Hf22bbQT
-         7B23n5TeBadc5nida1LPk3p9797CnNksPtsnbVIOl7HMuiN7sH8BsIXKN3Si+G7748F9
-         TSJizaTpyHbYWxFMwByDavXz0Q34H1lW8zkG2AUhx7cvASxI5EA+iWCX04qocHvCe5AC
-         3bRsM9jxWVrAWj1EoO4CfTV84tdxxbzt+B57Ng4e14KtizCW2ukKpQlpd0+VLqhOULSX
-         VVrTyhfIV07PIKx2LCiNZyTl1a/ywod+XhYlwqS+Jal+lC3Nl6D+gHazr2L3l6XMA4o0
-         saDw==
-X-Forwarded-Encrypted: i=1; AJvYcCVcrwrcZRGhZGePh0hn9hEY84kwrgQAqV1yXsqaSPyCqyrXJdJnIE4SB9F4GfTAnKIxyTRwat8RnmY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy8a7J7ONqUUaa0JIaZMSE7gZvT0xcN6DoT/HF18zmofBpwo2nO
-	0uSMYZaCyOUEFog5ooDjscGmlLYGs6nsxx0c0C9e/BjJvDdf5tB4nA0Bp4bpz3vRqde2qdtMTDL
-	NrZoLUgzC91z++XIJEmU2zHJTn7k=
-X-Gm-Gg: ASbGncu4zkUdQUjO6TSqDV/M2H8R0i34leeHe6tKI505QdmM6lu09yx+3yi2Ve4xi8I
-	Da9W+ltoDMRW4HDfYUgiZbE5oRs1ALhFFezQ9AfCMKaCKm0Z9kg8oMtxIo7TN/qbLzBOW
-X-Google-Smtp-Source: AGHT+IG/uxf+62mSAJV0vjaX5OOSPPXiQApbIfNWpW/j/U/azuxZEVr6AdlTIyiVOEKxrku3T2iYp/pg0hA3s2YrLws=
-X-Received: by 2002:a05:6512:23a0:b0:540:75d3:95a4 with SMTP id
- 2adb3069b0e04-54229538b24mr2653607e87.17.1734805590494; Sat, 21 Dec 2024
- 10:26:30 -0800 (PST)
+        d=1e100.net; s=20230601; t=1734816698; x=1735421498;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=g80Xv9sdG8bld1hI5N8TIg0l0usJaOYYz4GMokDzByQ=;
+        b=C9+RcVH16oU+54MUo/kNq5fNc/wI1ZDylr2fGoI9sr7jtYV2MwXmwdzI59ur+A381f
+         l89x1hvotrlEutYZMz5bX0anfsPQYY0FwONPC+G0mH4T8tz4ZYnLnsCtDt1BWkly/gqm
+         wXZRvdDocwx1yDDq+c65v1gOVLNJos7Q4nHXMLOSGtVWmoeOHRe/JNm5Zwqd/on3bRYm
+         utwAfdGctqJEp/HVLSE8TJdfHg2++ImdrMHsRW2wGFkOhaNNIAUTmdtw2EAwSKj7d/L7
+         Wbqn9efEU7fSxMswsxHRjKM0bpoiNKt3b8v62z8jRKpqXhXM2C2ynTtOyq9HQ7CIq6/G
+         J7bA==
+X-Forwarded-Encrypted: i=1; AJvYcCW28Wj7FXdmSvo/Mc9fzM26dn1fnVfdqEFWzHpUg/G4zs/mpYgYaEikUh8LmbXHO2RIptKSOOWTY/4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwSHrqtijEANIRTeuInLZjkJFYUlMNhEsQGwcQatRHbO/FvIgPP
+	umQAykp+d9LQ4OK/NloWeDANh9pBzCQpMqpy9MIo8CQRFWbYT1ij6B3jRDRfd8k=
+X-Gm-Gg: ASbGncs3lPMJNw5vs1Dikx1MQ4Eb4uI+2YiSIYm8V0+L7YQDLl+ff05ZcEIOabOzoeW
+	u54i19zSXmAFSP8+4HAc21xYXU+xavYFI8eXwjy4DrFtVTPMKiJTHhMY/qOocR7RQXEo3XmCm7w
+	Tgzf+2Mh4i9HOaoeHzmN4w9yOkzzyhnkpvnyZ8YN9pzXVOt1x91dm+ynkcNNMTIn8wNjBd6v7ub
+	SdpOZLHmSjVkmbiC3ZTcy3ajRrelR49uzgad3pXMYhA8g4Rd1EsXTZnxfeA0+/eObSeEC5St+Bz
+	Fhy4/hdUfJZ2HP8s/S6s
+X-Google-Smtp-Source: AGHT+IFrVlLP9YH10ZAu9oKbTiFL/KTq/9QViPYsupLF2ej43cn2G5wKtY+3Gp7pjqL4avgqCHPezA==
+X-Received: by 2002:a05:6000:156f:b0:386:2aba:a7f6 with SMTP id ffacd0b85a97d-38a224071e3mr5767422f8f.49.1734816698193;
+        Sat, 21 Dec 2024 13:31:38 -0800 (PST)
+Message-ID: <698f48a0-b674-4d7f-9c47-f1f8bf86379e@citrix.com>
+Date: Sat, 21 Dec 2024 21:31:36 +0000
 MIME-Version: 1.0
-References: <CA+icZUWHU=oXOEj5wHTzxrw_wj1w5hTvqq8Ry400s0ZCJjTEZw@mail.gmail.com>
- <099d3a80-4fdb-49a7-9fd0-207d7386551f@citrix.com> <CA+icZUX98gQ54hePEWNauiU41XQV7qdKJx5PiiXzxy+6yW7hTw@mail.gmail.com>
- <CA+icZUW-i53boHBPt+8zh-D921XFbPb_Kc=dzdgCK1QvkOgCsw@mail.gmail.com>
- <90640a5d-ff17-4555-adc6-ae9e21e24ebd@citrix.com> <CA+icZUVo69swc9QfwJr+mDuHqJKcFUexc08voP2O41g31HGx5w@mail.gmail.com>
- <43166e29-ff2d-4a9d-8c1b-41b5e247974b@citrix.com> <CA+icZUUp9rgx2Dvsww6QbTGRZz5=mf75D0_KncwdgCEZe01-EA@mail.gmail.com>
-In-Reply-To: <CA+icZUUp9rgx2Dvsww6QbTGRZz5=mf75D0_KncwdgCEZe01-EA@mail.gmail.com>
-Reply-To: sedat.dilek@gmail.com
-From: Sedat Dilek <sedat.dilek@gmail.com>
-Date: Sat, 21 Dec 2024 19:25:54 +0100
-Message-ID: <CA+icZUV0HEF_hwr-eSovntfcT0++FBrQN-HbFL+oZtnKjJzLtA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [Linux-6.12.y] XEN: CVE-2024-53241 / XSA-466 and Clang-kCFI
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Peter Zijlstra <peterz@infradead.org>, 
-	Sami Tolvanen <samitolvanen@google.com>, Jan Beulich <jbeulich@suse.com>, 
-	Josh Poimboeuf <jpoimboe@redhat.com>, Linus Torvalds <torvalds@linux-foundation.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Sasha Levin <sashal@kernel.org>, 
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
-	Kees Cook <kees@kernel.org>, Nathan Chancellor <nathan@kernel.org>, llvm@lists.linux.dev, 
-	xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: sedat.dilek@gmail.com
+Cc: Juergen Gross <jgross@suse.com>, Peter Zijlstra <peterz@infradead.org>,
+ Sami Tolvanen <samitolvanen@google.com>, Jan Beulich <jbeulich@suse.com>,
+ Josh Poimboeuf <jpoimboe@redhat.com>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Sasha Levin <sashal@kernel.org>, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, Kees Cook <kees@kernel.org>,
+ Nathan Chancellor <nathan@kernel.org>, llvm@lists.linux.dev,
+ xen-devel <xen-devel@lists.xenproject.org>
+References: <CA+icZUWHU=oXOEj5wHTzxrw_wj1w5hTvqq8Ry400s0ZCJjTEZw@mail.gmail.com>
+ <099d3a80-4fdb-49a7-9fd0-207d7386551f@citrix.com>
+ <CA+icZUX98gQ54hePEWNauiU41XQV7qdKJx5PiiXzxy+6yW7hTw@mail.gmail.com>
+ <CA+icZUW-i53boHBPt+8zh-D921XFbPb_Kc=dzdgCK1QvkOgCsw@mail.gmail.com>
+ <90640a5d-ff17-4555-adc6-ae9e21e24ebd@citrix.com>
+ <CA+icZUVo69swc9QfwJr+mDuHqJKcFUexc08voP2O41g31HGx5w@mail.gmail.com>
+ <43166e29-ff2d-4a9d-8c1b-41b5e247974b@citrix.com>
+ <CA+icZUUp9rgx2Dvsww6QbTGRZz5=mf75D0_KncwdgCEZe01-EA@mail.gmail.com>
+ <CA+icZUV0HEF_hwr-eSovntfcT0++FBrQN-HbFL+oZtnKjJzLtA@mail.gmail.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <CA+icZUV0HEF_hwr-eSovntfcT0++FBrQN-HbFL+oZtnKjJzLtA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Dec 21, 2024 at 7:17=E2=80=AFPM Sedat Dilek <sedat.dilek@gmail.com>=
- wrote:
+On 21/12/2024 6:25 pm, Sedat Dilek wrote:
+> With...
 >
-> On Fri, Dec 20, 2024 at 2:39=E2=80=AFAM Andrew Cooper <andrew.cooper3@cit=
-rix.com> wrote:
-> >
-> > On 20/12/2024 12:27 am, Sedat Dilek wrote:
-> > > On Fri, Dec 20, 2024 at 12:26=E2=80=AFAM Andrew Cooper
-> > > <andrew.cooper3@citrix.com> wrote:
-> > >> On 19/12/2024 11:10 pm, Sedat Dilek wrote:
-> > >>> On Thu, Dec 19, 2024 at 6:07=E2=80=AFPM Sedat Dilek <sedat.dilek@gm=
-ail.com> wrote:
-> > >>>> On Thu, Dec 19, 2024 at 5:44=E2=80=AFPM Andrew Cooper <andrew.coop=
-er3@citrix.com> wrote:
-> > >>>>> On 19/12/2024 4:14 pm, Sedat Dilek wrote:
-> > >>>>>> Hi,
-> > >>>>>>
-> > >>>>>> Linux v6.12.6 will include XEN CVE fixes from mainline.
-> > >>>>>>
-> > >>>>>> Here, I use Debian/unstable AMD64 and the SLIM LLVM toolchain 19=
-.1.x
-> > >>>>>> from kernel.org.
-> > >>>>>>
-> > >>>>>> What does it mean in ISSUE DESCRIPTION...
-> > >>>>>>
-> > >>>>>> Furthermore, the hypercall page has no provision for Control-flo=
-w
-> > >>>>>> Integrity schemes (e.g. kCFI/CET-IBT/FineIBT), and will simply
-> > >>>>>> malfunction in such configurations.
-> > >>>>>>
-> > >>>>>> ...when someone uses Clang-kCFI?
-> > >>>>> The hypercall page has functions of the form:
-> > >>>>>
-> > >>>>>     MOV $x, %eax
-> > >>>>>     VMCALL / VMMCALL / SYSCALL
-> > >>>>>     RET
-> > >>>>>
-> > >>>>> There are no ENDBR instructions, and no prologue/epilogue for has=
-h-based
-> > >>>>> CFI schemes.
-> > >>>>>
-> > >>>>> This is because it's code provided by Xen, not code provided by L=
-inux.
-> > >>>>>
-> > >>>>> The absence of ENDBR instructions will yield #CP when CET-IBT is =
-active,
-> > >>>>> and the absence of hash prologue/epilogue lets the function be us=
-ed in a
-> > >>>>> type-confused manor that CFI should have caught.
-> > >>>>>
-> > >>>>> ~Andrew
-> > >>>> Thanks for the technical explanation, Andrew.
-> > >>>>
-> > >>>> Hope that helps the folks of "CLANG CONTROL FLOW INTEGRITY SUPPORT=
-".
-> > >>>>
-> > >>>> I am not an active user of XEN in the Linux-kernel but I am willin=
-g to
-> > >>>> test when Linux v6.12.6 is officially released and give feedback.
-> > >>>>
-> > >>> https://wiki.xenproject.org/wiki/Testing_Xen#Presence_test
-> > >>> https://wiki.xenproject.org/wiki/Testing_Xen#Commands_for_presence_=
-testing
-> > >>>
-> > >>> # apt install -t unstable xen-utils-4.17 -y
-> > >>>
-> > >>> # xl list
-> > >>> Name                                        ID   Mem VCPUs      Sta=
-te   Time(s)
-> > >>> Domain-0                                     0  7872     4     r---=
---     398.2
-> > >>>
-> > >>> Some basic tests LGTM - see also attached stuff.
-> > >>>
-> > >>> If you have any tests to recommend, let me know.
-> > >> That itself is good enough as a smoke test.  Thankyou for trying it =
-out.
-> > >>
-> > >> If you want something a bit more thorough, try
-> > >> https://xenbits.xen.org/docs/xtf/  (Xen's self-tests)
-> > >>
-> > >> Grab and build it, and `./xtf-runner -aqq --host` will run a variety=
- of
-> > >> extra codepaths in dom0, without the effort of making/running full g=
-uests.
-> > >>
-> > >> ~Andrew
-> > > Run on Debian 6.12.5 and my selfmade 6.12.5 and 6.12.6.
-> > > All tests lead to a reboot in case of Debian or in my kernels to a sh=
-utdown.
-> > >
-> > > Can you recommend a specific test?
-> >
-> > Oh, that's distinctly less good.
-> >
-> > Start with just "example".  It's literally a hello world microkernel,
-> > but the symptoms you're seeing is a dom0 crash, so it will likely
-> > provoke it.
-> >
-> > Do you have serial to the machine?  If so, boot Xen with `console=3Dcom=
-1
-> > com1=3D115200,8n1` (or com2, as appropriate).
-> >
-> > If not and you've only got a regular screen, boot Xen with `vga=3D,keep
-> > noreboot` (comma is important) which might leave enough information on
-> > screen to get an idea of what's going on.
-> >
->
-> YES
->
-> # xl info | grep xen_commandline
-> xen_commandline        : placeholder vga=3D,keep noreboot
->
-> > Full command line docs at
-> > https://xenbits.xen.org/docs/unstable/misc/xen-command-line.html
-> >
-> > > dileks@iniza:~/src/xtf/git$ sudo ./xtf-runner --list functional xsa |=
- grep xsa-4
-> > > test-pv64-xsa-444
-> > > test-hvm64-xsa-451
-> > > test-hvm64-xsa-454
-> > >
-> > > Is there no xsa-466 test?
-> >
-> > No.  XSA-466 is really "well don't do that then if it matters".
-> >
-> > More generally, not all XSAs are amenable to testing in this way.
-> >
-> > ~Andrew
->
-> On Debian 6.12.6 kernel the TESTS stop with test-hvm64-xsa-454 -
-> machine freezes - hard reboot.
->
-> dileks@iniza:~/src/xtf/git$ sudo ./xtf-runner -a --host
->
-> root@iniza:/var/log/xen# LC_ALL=3DC ls -alth | head -20
-> total 1.7M
-> -rw-r--r--  1 root adm  1008K Dec 21 19:10 xenstored-access.log
-> drwxr-xr-x 16 root root  4.0K Dec 21 18:59 ..
-> -rw-r--r--  1 root adm     32 Dec 21 18:58 xenstored.log
-> drwxr-s---  2 root adm    36K Dec 21 18:58 .
-> -rw-r--r--  1 root adm    229 Dec 21 18:53 xl-test-hvm64-xsa-317.log
-> -rw-r--r--  1 root adm     67 Dec 21 18:53 xl-test-hvm64-xsa-454.log
-> -rw-r--r--  1 root adm    145 Dec 21 18:53 qemu-dm-test-hvm64-xsa-454.log
-> -rw-r--r--  1 root adm    232 Dec 21 18:53 qemu-dm-test-hvm64-xsa-451.log
-> -rw-r--r--  1 root adm    211 Dec 21 18:53 xl-test-hvm64-xsa-451.log
-> -rw-r--r--  1 root adm    232 Dec 21 18:53 xl-test-hvm32pse-xsa-317.log
-> -rw-r--r--  1 root adm    228 Dec 21 18:53 xl-test-pv64-xsa-444.log
-> -rw-r--r--  1 root adm    228 Dec 21 18:53 xl-test-pv64-xsa-339.log
-> -rw-r--r--  1 root adm    228 Dec 21 18:53 xl-test-pv64-xsa-333.log
-> -rw-r--r--  1 root adm    228 Dec 21 18:53 xl-test-pv64-xsa-317.log
-> -rw-r--r--  1 root adm    232 Dec 21 18:53 qemu-dm-test-hvm64-xsa-317.log
-> -rw-r--r--  1 root adm    232 Dec 21 18:53 xl-test-hvm32pae-xsa-317.log
-> -rw-r--r--  1 root adm    232 Dec 21 18:53 qemu-dm-test-hvm32pse-xsa-317.=
-log
-> -rw-r--r--  1 root adm    229 Dec 21 18:53 xl-test-hvm32-xsa-317.log
-> -rw-r--r--  1 root adm    232 Dec 21 18:53 qemu-dm-test-hvm32pae-xsa-317.=
-log
->
-> root@iniza:/var/log/xen# cat qemu-dm-test-hvm64-xsa-454.log
-> VNC server running on 127.0.0.1:5900
-> xen-qemu-system-i386: failed to create 'console' device '0': declining to=
- handle
-> console type 'xenconsoled'
->
-> root@iniza:/var/log/xen# cat xl-test-hvm64-xsa-454.log
-> Waiting for domain test-hvm64-xsa-454 (domid 94) to die [pid 4686]
->
-> -Sedat-
+> dileks@iniza:~/src/xtf/git$ mv tests/xsa-454 ../
+> dileks@iniza:~/src/xtf/git$ mv tests/xsa-consoleio-write ../
 
-With...
+That's completely bizzare.   There's nothing interestingly different
+with those two tests vs the others.
 
-dileks@iniza:~/src/xtf/git$ mv tests/xsa-454 ../
-dileks@iniza:~/src/xtf/git$ mv tests/xsa-consoleio-write ../
+I take it the crash is repeatable when using either of these?
 
-Combined test results:
-test-hvm32-cpuid-faulting                SKIP
-test-hvm32pae-cpuid-faulting             SKIP
-test-hvm32pse-cpuid-faulting             SKIP
-test-hvm64-cpuid-faulting                SKIP
-test-pv64-cpuid-faulting                 SKIP
-test-hvm64-fpu-exception-emulation       SKIP
-test-hvm32-invlpg~hap                    SUCCESS
-test-hvm32-invlpg~shadow                 SUCCESS
-test-hvm32pae-invlpg~hap                 SUCCESS
-test-hvm32pae-invlpg~shadow              SUCCESS
-test-hvm64-invlpg~hap                    SUCCESS
-test-hvm64-invlpg~shadow                 SUCCESS
-test-hvm64-lbr-tsx-vmentry               SUCCESS
-test-hvm32-livepatch-priv-check          SUCCESS
-test-hvm64-livepatch-priv-check          SUCCESS
-test-pv64-livepatch-priv-check           SUCCESS
-test-hvm32-lm-ts                         SUCCESS
-test-hvm64-lm-ts                         SUCCESS
-test-hvm32pae-memop-seg                  SUCCESS
-test-hvm64-memop-seg                     SUCCESS
-test-pv64-memop-seg                      SUCCESS
-test-hvm32pae-nmi-taskswitch-priv        SUCCESS
-test-pv64-pv-fsgsbase                    SKIP
-test-pv64-pv-iopl~hypercall              SUCCESS
-test-pv64-pv-iopl~vmassist               SUCCESS
-test-hvm32-swint-emulation               SKIP
-test-hvm32pae-swint-emulation            SKIP
-test-hvm32pse-swint-emulation            SKIP
-test-hvm64-swint-emulation               SKIP
-test-hvm32-umip                          SKIP
-test-hvm64-umip                          SKIP
-test-hvm32-xsa-122                       SUCCESS
-test-hvm32pae-xsa-122                    SUCCESS
-test-hvm32pse-xsa-122                    SUCCESS
-test-hvm64-xsa-122                       SUCCESS
-test-pv64-xsa-122                        SUCCESS
-test-hvm32-xsa-123                       SKIP
-test-pv64-xsa-167                        SKIP
-test-hvm64-xsa-168~shadow                SUCCESS
-test-hvm64-xsa-170                       SKIP
-test-hvm64-xsa-173~shadow                SUCCESS
-test-pv64-xsa-182                        SUCCESS
-test-hvm32-xsa-186                       SKIP
-test-hvm64-xsa-186                       SKIP
-test-hvm32-xsa-188                       SUCCESS
-test-hvm32pae-xsa-188                    SUCCESS
-test-hvm32pse-xsa-188                    SUCCESS
-test-hvm64-xsa-188                       SUCCESS
-test-pv64-xsa-188                        SUCCESS
-test-hvm32-xsa-191                       SKIP
-test-hvm32-xsa-192                       SUCCESS
-test-pv64-xsa-193                        SUCCESS
-test-hvm64-xsa-195                       SUCCESS
-test-hvm64-xsa-196                       SKIP
-test-hvm32-xsa-200                       SKIP
-test-hvm32-xsa-203                       SKIP
-test-hvm64-xsa-204                       SKIP
-test-pv64-xsa-212                        SUCCESS
-test-pv64-xsa-213                        SUCCESS
-test-hvm64-xsa-221                       SUCCESS
-test-pv64-xsa-221                        SUCCESS
-test-pv64-xsa-224                        SUCCESS
-test-pv64-xsa-227                        SUCCESS
-test-hvm64-xsa-231                       SUCCESS
-test-pv64-xsa-231                        SUCCESS
-test-hvm64-xsa-232                       SUCCESS
-test-pv64-xsa-232                        SUCCESS
-test-pv64-xsa-234                        SUCCESS
-test-hvm32-xsa-239                       SUCCESS
-test-pv64-xsa-255                        SUCCESS
-test-pv64-xsa-259                        SUCCESS
-test-pv64-xsa-260                        SUCCESS
-test-hvm64-xsa-261                       SUCCESS
-test-pv64-xsa-265                        SUCCESS
-test-hvm64-xsa-269                       SUCCESS
-test-hvm64-xsa-277                       SUCCESS
-test-hvm64-xsa-278                       SUCCESS
-test-pv64-xsa-279                        SUCCESS
-test-pv64-xsa-286                        SUCCESS
-test-pv64-xsa-296                        SUCCESS
-test-pv64-xsa-298                        SUCCESS
-test-hvm64-xsa-304                       SUCCESS
-test-hvm64-xsa-308                       SUCCESS
-test-pv64-xsa-316                        SUCCESS
-test-hvm32-xsa-317                       SUCCESS
-test-hvm32pae-xsa-317                    SUCCESS
-test-hvm32pse-xsa-317                    SUCCESS
-test-hvm64-xsa-317                       SUCCESS
-test-pv64-xsa-317                        SUCCESS
-test-pv64-xsa-333                        SUCCESS
-test-pv64-xsa-339                        SUCCESS
-test-pv64-xsa-444                        SKIP
-test-hvm64-xsa-451                       SKIP
-
--Sedat-
+~Andrew
 
