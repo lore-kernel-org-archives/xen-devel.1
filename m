@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7D1E77188
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Dec 2024 17:00:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.863282.1274721 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD10E77188
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Dec 2024 17:00:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.863281.1274716 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tQrDq-0006jA-LW; Thu, 26 Dec 2024 17:00:30 +0000
+	id 1tQrDq-0006g6-Bm; Thu, 26 Dec 2024 17:00:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 863282.1274721; Thu, 26 Dec 2024 17:00:30 +0000
+Received: by outflank-mailman (output) from mailman id 863281.1274716; Thu, 26 Dec 2024 17:00:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tQrDq-0006hh-GQ; Thu, 26 Dec 2024 17:00:30 +0000
-Received: by outflank-mailman (input) for mailman id 863282;
+	id 1tQrDq-0006fz-9A; Thu, 26 Dec 2024 17:00:30 +0000
+Received: by outflank-mailman (input) for mailman id 863281;
  Thu, 26 Dec 2024 17:00:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vkhu=TT=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1tQrDo-0004jO-NU
- for xen-devel@lists.xenproject.org; Thu, 26 Dec 2024 17:00:28 +0000
+ id 1tQrCH-00026T-H5
+ for xen-devel@lists.xenproject.org; Thu, 26 Dec 2024 16:58:53 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e6b3e858-c3aa-11ef-99a3-01e77a169b0f;
- Thu, 26 Dec 2024 18:00:26 +0100 (CET)
-Received: by mx.zohomail.com with SMTPS id 1735232286454203.59311331231754;
- Thu, 26 Dec 2024 08:58:06 -0800 (PST)
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id aebecc99-c3aa-11ef-a0da-8be0dac302b0;
+ Thu, 26 Dec 2024 17:58:53 +0100 (CET)
+Received: by mx.zohomail.com with SMTPS id 1735232277910815.1102165773889;
+ Thu, 26 Dec 2024 08:57:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6b3e858-c3aa-11ef-99a3-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; t=1735232291; cv=none; 
+X-Inumbo-ID: aebecc99-c3aa-11ef-a0da-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1735232281; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=P90n+tIGktjv3xZShWRRrejWe/HJ6Rq81+5MAzWjf9QaxZjbsE5AKH84oZCodLG8s8iQwi0iN3G/NV47C8QycNZslrDj8VWHbp8TcyHp3ucqO+1xoar4N+glIKcvFus71uKR+DGovv0z2x31FOXpNA7XcTgMseX7v36cW/Xx51s=
+	b=WYIn9XY6vpvXFT5X8bk8CqZfaq6m+vH6VR+LqpDtUylJ8CrfmGej/AHOigsDE2/oIALnm2MkWKFv0ln7NoFIvtPRZPEu7+J1e8qvUFMfu7GivZBdoyLh5dSAzIo9I4jVv/5dKL+Q8awyXUN4HgxYIlU04i2Bh7NiNiBTRmnTUtM=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1735232291; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=ikPFYKTKplN0c3xIGklLy3D15rucauyk9qCtpxMJhbU=; 
-	b=hszDpf2JJ7VQsMetB8M3LK4UkCP7rsdCzPhMvW9lH4nmDvXQ8rGVyfwWSBEILOdnDvfOTVlby897VvbkEZuDBjEm2jo9axjKqMSc8WpQ+IMsn2C7Bnjb3cjrH38ehsTvQBIWj/WxIEXaI+ne5BTYpGI/QfjW4fmK3nweO9ekMts=
+	t=1735232281; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=LG2YwRtPS1LBhMACiQKrmt4rkbz967gy6EJa6rK3Ja8=; 
+	b=TcbymdHc2/avL3xTlTq3kMjj2x/Sc8amUCU7VD9roTH+ih43fp3lVW56/QpwAS86bA/jAc+I9LM55cSo7P10b2/qCPLFdpSXC779obFgTlofTRE2vEUH8qDtcNwyFPS0U4paQY9k+sQTgdiEx/FZk0mcguXKzpv1xSc7ChQR/wE=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1735232291;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1735232281;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=ikPFYKTKplN0c3xIGklLy3D15rucauyk9qCtpxMJhbU=;
-	b=WcLEIFqT/hmgAmgcDIFeNGS7LXsVWtVTuISeySL3HCrzavpdsRatHARQN56uW2Xl
-	lMHIEp1in7R+G+R1Yb57fXRaqh+xsSJE63MI3oBalPkkxOEDo5LLKUPtCKgyVwd+RHe
-	NPQYWLCXGDUazPgahpK1aoTp21XbqiKcneG61qUo=
+	bh=LG2YwRtPS1LBhMACiQKrmt4rkbz967gy6EJa6rK3Ja8=;
+	b=UZN+CVPV/422zdyxIt3TB+cW9hp2YjYet50NMIlJfAlfu8JWWnsu3fI057L142iZ
+	h4R8VioyUXZPRDWULFU6/6kwrX6gODUeduDYng6KwHDPiuPXLxj/wUGRZNyoLSXTDQC
+	zuJxV86UBFS7xPOBIBKY0AAWUdtvIhkGrJQ9mWzg=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 12/15] x86/hyperlaunch: specify dom0 mode with device tree
-Date: Thu, 26 Dec 2024 11:57:37 -0500
-Message-Id: <20241226165740.29812-13-dpsmith@apertussolutions.com>
+Subject: [PATCH v2 06/15] x86/hyperlaunch: introduce the domain builder
+Date: Thu, 26 Dec 2024 11:57:31 -0500
+Message-Id: <20241226165740.29812-7-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241226165740.29812-1-dpsmith@apertussolutions.com>
 References: <20241226165740.29812-1-dpsmith@apertussolutions.com>
@@ -78,90 +78,292 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Enable selecting the mode in which the domain will be built and ran. This
-includes:
+Introduce the domain builder which is capable of consuming a device tree as the
+first boot module. If it finds a device tree as the first boot module, it will
+set its type to BOOTMOD_FDT. This change only detects the boot module and
+continues to boot with slight change to the boot convention that the dom0
+kernel is no longer first boot module but is the second.
 
-- whether it will be either a 32/64 bit domain
-- if it will be run as a PV or HVM domain
-- and if it will require a device model (not applicable for dom0)
-
-In the device tree, this will be represented as a bit map that will be carried
-through into struct boot_domain.
+No functional change intended.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
 Changes since v1:
-- switched to nested else if
-- dropped ternary op for reporting domain name
-- switch to strncmp for the check for mode prop
-- drop BUILD_MODE_LONG until PV construction series
+- coding style compliance
+- removed unnecessary include of rangeset.h
+- fixed a missed change from 0 to i
+- add missing const
+- remove unnecessary first_boot_module_index() usages
 ---
- xen/arch/x86/domain-builder/fdt.c     | 19 +++++++++++++++++++
- xen/arch/x86/include/asm/bootdomain.h |  5 +++++
- xen/arch/x86/setup.c                  |  3 ++-
- 3 files changed, 26 insertions(+), 1 deletion(-)
+ xen/arch/x86/Kconfig                     |  2 +-
+ xen/arch/x86/Makefile                    |  2 +
+ xen/arch/x86/domain-builder/Makefile     |  3 ++
+ xen/arch/x86/domain-builder/core.c       | 57 ++++++++++++++++++++++++
+ xen/arch/x86/domain-builder/fdt.c        | 37 +++++++++++++++
+ xen/arch/x86/domain-builder/fdt.h        | 21 +++++++++
+ xen/arch/x86/include/asm/bootinfo.h      |  3 ++
+ xen/arch/x86/include/asm/domainbuilder.h |  8 ++++
+ xen/arch/x86/setup.c                     | 17 ++++---
+ 9 files changed, 143 insertions(+), 7 deletions(-)
+ create mode 100644 xen/arch/x86/domain-builder/Makefile
+ create mode 100644 xen/arch/x86/domain-builder/core.c
+ create mode 100644 xen/arch/x86/domain-builder/fdt.c
+ create mode 100644 xen/arch/x86/domain-builder/fdt.h
+ create mode 100644 xen/arch/x86/include/asm/domainbuilder.h
 
-diff --git a/xen/arch/x86/domain-builder/fdt.c b/xen/arch/x86/domain-builder/fdt.c
-index efce0927c645..db584ba78e92 100644
---- a/xen/arch/x86/domain-builder/fdt.c
-+++ b/xen/arch/x86/domain-builder/fdt.c
-@@ -94,6 +94,25 @@ static int __init process_domain_node(
-             bd->domid = (domid_t)val;
-             printk("  domid: %d\n", bd->domid);
-         }
-+        else if ( strncmp(prop_name, "mode", name_len) == 0 )
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 25b9b75423c5..50b4697da565 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -383,7 +383,7 @@ config ALTP2M
+ 
+ 	  If unsure, stay with defaults.
+ 
+-source "arch/x86/domain_builder/Kconfig"
++source "arch/x86/domain-builder/Kconfig"
+ 
+ endmenu
+ 
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index b35fd5196ce2..73b332dd471b 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -81,6 +81,8 @@ obj-$(CONFIG_COMPAT) += x86_64/platform_hypercall.o
+ obj-y += sysctl.o
+ endif
+ 
++obj-y += domain-builder/
++
+ extra-y += asm-macros.i
+ extra-y += xen.lds
+ 
+diff --git a/xen/arch/x86/domain-builder/Makefile b/xen/arch/x86/domain-builder/Makefile
+new file mode 100644
+index 000000000000..309a0c4bdd9e
+--- /dev/null
++++ b/xen/arch/x86/domain-builder/Makefile
+@@ -0,0 +1,3 @@
++obj-$(CONFIG_DOMAIN_BUILDER) += fdt.init.o
++obj-y += core.init.o
++
+diff --git a/xen/arch/x86/domain-builder/core.c b/xen/arch/x86/domain-builder/core.c
+new file mode 100644
+index 000000000000..d6ae94f45c72
+--- /dev/null
++++ b/xen/arch/x86/domain-builder/core.c
+@@ -0,0 +1,57 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2024, Apertus Solutions, LLC
++ */
++#include <xen/err.h>
++#include <xen/init.h>
++#include <xen/kconfig.h>
++#include <xen/lib.h>
++
++#include <asm/bootinfo.h>
++
++#include "fdt.h"
++
++void __init builder_init(struct boot_info *bi)
++{
++    if ( IS_ENABLED(CONFIG_DOMAIN_BUILDER) )
++    {
++        int ret;
++
++        switch ( ret = has_hyperlaunch_fdt(bi) )
 +        {
-+            if ( fdt_prop_as_u32(prop, &bd->mode) != 0 )
-+            {
-+                printk("  failed processing mode for domain %s\n", name);
-+                return -EINVAL;
-+            }
++        case 0:
++            printk("Hyperlaunch device tree detected\n");
++            bi->hyperlaunch_enabled = true;
++            bi->mods[0].type = BOOTMOD_FDT;
++            break;
 +
-+            printk("  mode: ");
-+            if ( !(bd->mode & BUILD_MODE_PARAVIRT) )
-+            {
-+                if ( bd->mode & BUILD_MODE_ENABLE_DM )
-+                    printk("HVM\n");
-+                else
-+                    printk("PVH\n");
-+            }
-+            else
-+                printk("PV\n");
++        case -EINVAL:
++            printk("Hyperlaunch device tree was not detected\n");
++            bi->hyperlaunch_enabled = false;
++            break;
++
++        case -ENOENT:
++        case -ENODATA:
++            printk("Device tree found, but not hyperlaunch (%d)\n", ret);
++            bi->hyperlaunch_enabled = false;
++            bi->mods[0].type = BOOTMOD_FDT;
++            break;
++
++        default:
++            printk("Unknown error (%d) occured checking for hyperlaunch device tree\n",
++                   ret);
++            bi->hyperlaunch_enabled = false;
++            break;
 +        }
-     }
- 
-     fdt_for_each_subnode(node, fdt, dom_node)
-diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-index 101a0c643d74..5918aaf6bb63 100644
---- a/xen/arch/x86/include/asm/bootdomain.h
-+++ b/xen/arch/x86/include/asm/bootdomain.h
-@@ -15,6 +15,11 @@ struct boot_domain {
- 
-     domid_t domid;
- 
-+                                          /* On     | Off    */
-+#define BUILD_MODE_PARAVIRT      (1 << 0) /* PV     | PVH/HVM */
-+#define BUILD_MODE_ENABLE_DM     (1 << 1) /* HVM    | PVH     */
-+    uint32_t mode;
++    }
++}
 +
-     struct boot_module *kernel;
-     struct boot_module *ramdisk;
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/x86/domain-builder/fdt.c b/xen/arch/x86/domain-builder/fdt.c
+new file mode 100644
+index 000000000000..4a3f80648f86
+--- /dev/null
++++ b/xen/arch/x86/domain-builder/fdt.c
+@@ -0,0 +1,37 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2024, Apertus Solutions, LLC
++ */
++#include <xen/err.h>
++#include <xen/init.h>
++#include <xen/lib.h>
++#include <xen/libfdt/libfdt.h>
++
++#include <asm/bootinfo.h>
++#include <asm/page.h>
++#include <asm/setup.h>
++
++#include "fdt.h"
++
++int __init has_hyperlaunch_fdt(struct boot_info *bi)
++{
++    int ret = 0;
++    const void *fdt = bootstrap_map_bm(&bi->mods[HYPERLAUNCH_MODULE_IDX]);
++
++    if ( fdt_check_header(fdt) < 0 )
++        ret = -EINVAL;
++
++    bootstrap_unmap();
++
++    return ret;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/x86/domain-builder/fdt.h b/xen/arch/x86/domain-builder/fdt.h
+new file mode 100644
+index 000000000000..1c1569a9c633
+--- /dev/null
++++ b/xen/arch/x86/domain-builder/fdt.h
+@@ -0,0 +1,21 @@
++/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
++#ifndef __XEN_X86_FDT_H__
++#define __XEN_X86_FDT_H__
++
++#include <xen/init.h>
++
++#include <asm/bootinfo.h>
++
++/* hyperlaunch fdt is required to be module 0 */
++#define HYPERLAUNCH_MODULE_IDX 0
++
++#ifdef CONFIG_DOMAIN_BUILDER
++int has_hyperlaunch_fdt(struct boot_info *bi);
++#else
++static inline int __init has_hyperlaunch_fdt(struct boot_info *bi)
++{
++    return -EINVAL;
++}
++#endif
++
++#endif /* __XEN_X86_FDT_H__ */
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index 9f65e2c8f62d..208bec90913d 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -27,6 +27,7 @@ enum bootmod_type {
+     BOOTMOD_RAMDISK,
+     BOOTMOD_MICROCODE,
+     BOOTMOD_XSM_POLICY,
++    BOOTMOD_FDT,
+ };
  
+ struct boot_module {
+@@ -80,6 +81,8 @@ struct boot_info {
+     paddr_t memmap_addr;
+     size_t memmap_length;
+ 
++    bool hyperlaunch_enabled;
++
+     unsigned int nr_modules;
+     struct boot_module mods[MAX_NR_BOOTMODS + 1];
+     struct boot_domain domains[MAX_NR_BOOTDOMS];
+diff --git a/xen/arch/x86/include/asm/domainbuilder.h b/xen/arch/x86/include/asm/domainbuilder.h
+new file mode 100644
+index 000000000000..aedc2b49f7c9
+--- /dev/null
++++ b/xen/arch/x86/include/asm/domainbuilder.h
+@@ -0,0 +1,8 @@
++#ifndef __XEN_X86_DOMBUILDER_H__
++#define __XEN_X86_DOMBUILDER_H__
++
++#include <asm/bootinfo.h>
++
++void builder_init(struct boot_info *bi);
++
++#endif
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 027b224151d1..a87e122b5a61 100644
+index a61131365477..e1aa9650d22e 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -1016,7 +1016,8 @@ static struct domain *__init create_dom0(struct boot_info *bi)
-     struct boot_domain *bd = &bi->domains[0];
-     struct domain *d;
+@@ -33,6 +33,7 @@
+ #endif
+ #include <xen/bitops.h>
+ #include <asm/bootinfo.h>
++#include <asm/domainbuilder.h>
+ #include <asm/smp.h>
+ #include <asm/processor.h>
+ #include <asm/mpspec.h>
+@@ -1285,9 +1286,12 @@ void asmlinkage __init noreturn __start_xen(void)
+                bi->nr_modules);
+     }
  
--    if ( opt_dom0_pvh )
-+    if ( opt_dom0_pvh ||
-+         (bi->hyperlaunch_enabled && !(bd->mode & BUILD_MODE_PARAVIRT)) )
+-    /* Dom0 kernel is always first */
+-    bi->mods[0].type = BOOTMOD_KERNEL;
+-    bi->domains[0].kernel = &bi->mods[0];
++    builder_init(bi);
++
++    /* Find first unknown boot module to use as Dom0 kernel */
++    i = first_boot_module_index(bi, BOOTMOD_UNKNOWN);
++    bi->mods[i].type = BOOTMOD_KERNEL;
++    bi->domains[0].kernel = &bi->mods[i];
+ 
+     if ( pvh_boot )
      {
-         dom0_cfg.flags |= (XEN_DOMCTL_CDF_hvm |
-                            ((hvm_hap_supported() && !opt_dom0_shadow) ?
+@@ -1470,8 +1474,9 @@ void asmlinkage __init noreturn __start_xen(void)
+         xen->size  = __2M_rwdata_end - _stext;
+     }
+ 
+-    bi->mods[0].headroom =
+-        bzimage_headroom(bootstrap_map_bm(&bi->mods[0]), bi->mods[0].size);
++    bi->domains[0].kernel->headroom =
++        bzimage_headroom(bootstrap_map_bm(bi->domains[0].kernel),
++                         bi->domains[0].kernel->size);
+     bootstrap_unmap();
+ 
+ #ifndef highmem_start
+@@ -1595,7 +1600,7 @@ void asmlinkage __init noreturn __start_xen(void)
+ #endif
+     }
+ 
+-    if ( bi->mods[0].headroom && !bi->mods[0].relocated )
++    if ( bi->domains[0].kernel->headroom && !bi->domains[0].kernel->relocated )
+         panic("Not enough memory to relocate the dom0 kernel image\n");
+     for ( i = 0; i < bi->nr_modules; ++i )
+     {
 -- 
 2.30.2
 
