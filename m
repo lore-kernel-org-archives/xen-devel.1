@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00AECE7718E
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Dec 2024 17:00:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.863289.1274737 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D89C5E7718F
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Dec 2024 17:00:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.863299.1274747 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tQrDy-0007QO-S8; Thu, 26 Dec 2024 17:00:38 +0000
+	id 1tQrE2-0007yy-4F; Thu, 26 Dec 2024 17:00:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 863289.1274737; Thu, 26 Dec 2024 17:00:38 +0000
+Received: by outflank-mailman (output) from mailman id 863299.1274747; Thu, 26 Dec 2024 17:00:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tQrDy-0007QH-Ot; Thu, 26 Dec 2024 17:00:38 +0000
-Received: by outflank-mailman (input) for mailman id 863289;
- Thu, 26 Dec 2024 17:00:36 +0000
+	id 1tQrE2-0007yp-0L; Thu, 26 Dec 2024 17:00:42 +0000
+Received: by outflank-mailman (input) for mailman id 863299;
+ Thu, 26 Dec 2024 17:00:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vkhu=TT=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1tQrDw-0005x0-Q3
- for xen-devel@lists.xenproject.org; Thu, 26 Dec 2024 17:00:36 +0000
+ id 1tQrCo-00026T-NR
+ for xen-devel@lists.xenproject.org; Thu, 26 Dec 2024 16:59:26 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
  [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ec3fc082-c3aa-11ef-a0da-8be0dac302b0;
- Thu, 26 Dec 2024 18:00:36 +0100 (CET)
-Received: by mx.zohomail.com with SMTPS id 1735232287974875.2271421466353;
- Thu, 26 Dec 2024 08:58:07 -0800 (PST)
+ id c281d457-c3aa-11ef-a0da-8be0dac302b0;
+ Thu, 26 Dec 2024 17:59:26 +0100 (CET)
+Received: by mx.zohomail.com with SMTPS id 1735232282410325.37290437121055;
+ Thu, 26 Dec 2024 08:58:02 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec3fc082-c3aa-11ef-a0da-8be0dac302b0
-ARC-Seal: i=1; a=rsa-sha256; t=1735232292; cv=none; 
+X-Inumbo-ID: c281d457-c3aa-11ef-a0da-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1735232286; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=lAfxM47CKcNwo4zgMtfQIL0ekyx8y0H3HohdlAJPDAILxbXBPRpE3PTCGlhQzaVaT+i7NisTLOBkKsncLw3pvwmeY0TuZZXw/CamRAK+Wz/vI6P3JWrpVOTddWWfIq+fq16+EMgYaYoxU6HiaN5rifigzy2cwgX0EbsvogqCLm4=
+	b=RhWPoK4NIZjG4E6p6yzvJNhXjnhRAFyLWbXD1p759QmS2lQ4o+8HKYWJ+A0KaW3xHq1y6I4hpvEvH+uNpoa0e0Dp8TjGJByXcixe6KF4rWpaM7Yhj8DlO/M5vUWzfks/YwG43Jd9cnUXFVDYf3HL5UTBks7KFBJuEhHpM1ItkhY=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1735232292; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=8524a/8T2VisnHlwnmnufZLPjAccP9s5FDSrPRklWJU=; 
-	b=grdtl4e00u6mpMKVSsKSXPCRD5OvNa3Cmdz5d3E+ukF5kkKJlkyCxy0+/5gCaM4lNsKHw0QbZSA4Md9pKUCrqHqy/YwFZJMHCPwOvd295RDe+vkDHD7v7aolusBenIuqC3G/jsOFDSgKirLbR8YrjORb1kfn93RZ6BZ3Q+OmM38=
+	t=1735232286; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=52qJQbf7jF223erY8P2R8ITOq6qxtcd4OGVYfyMQ2rc=; 
+	b=GncS5m+hbU/SzMPAasNByTvqrnpV4itEGqfvBJhsgOkofnxJYL2kPb+i9wXtMeOmZOAn22oPJ2SJULTJ+oJNhBEIBqq5kW9W3DNFQs3amjRgDsXDw8198CLrliKId+I7iSvBbDgqjBKHkcg0bnpT9SJnj0JKhlRimWMS8ZwUc/c=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1735232292;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1735232286;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=8524a/8T2VisnHlwnmnufZLPjAccP9s5FDSrPRklWJU=;
-	b=sM3x+Hf8Y8Y0OT2ykY+7cIpkwCJjMLni+j/bLu1vkYVpiBNCjpd1y/aTuJQESi0P
-	mPwXw1/3oP7IAiJipG4RUCa1pBBcMlWBDCjnLUJG/WPYCogZHXLYM2YIMW2NEg676bU
-	h2xM5aqWria8jaPJz9MyypPV0pFu0C+zLigp3s4g=
+	bh=52qJQbf7jF223erY8P2R8ITOq6qxtcd4OGVYfyMQ2rc=;
+	b=lOE1cm+9M1fTjj2O6PTdvk0lnczYdaSKhativ/JPZ9g4EBEOUCfBOSNu2SY3IaPK
+	rxsWqwxkbhqDXuTAQJ8goejj0AOAbVlJjZPoGXuLJ6KdufWig6aA7LtSdQoIvxyXuW7
+	zjI5bYOIZWq4tVO1TNK4ajz7lWQOyBeOUjadQe0c=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -72,9 +72,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v2 13/15] x86/hyperlaunch: add memory parsing to domain config
-Date: Thu, 26 Dec 2024 11:57:38 -0500
-Message-Id: <20241226165740.29812-14-dpsmith@apertussolutions.com>
+Subject: [PATCH v2 09/15] x86/hyperlaunch: obtain cmdline from device tree
+Date: Thu, 26 Dec 2024 11:57:34 -0500
+Message-Id: <20241226165740.29812-10-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20241226165740.29812-1-dpsmith@apertussolutions.com>
 References: <20241226165740.29812-1-dpsmith@apertussolutions.com>
@@ -82,130 +82,236 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Add three properties, memory, mem-min, and mem-max, to the domain node device
-tree parsing to define the memory allocation for a domain. All three fields are
-expressed in kb and written as a u64 in the device tree entries.
+If a command line is not provided through the bootloader's mechanism, e.g.
+muiltboot module string field, then use one from the device tree if present.
+The device tree command line is located in the bootargs property of the
+`multiboot,kernel` node.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-Changes since v1
-- moved common fdt parsing to libfdt
-- dropped ternary for name selection
-- swtich over from match_fdt to strncmp
-- change mem prints to kb
+Changes since v1:
+- moved common fdt functions to libfdt
+- rename prop_as_offset to more correct prop_by_offset
 ---
- xen/arch/x86/dom0_build.c             |  8 +++++++
- xen/arch/x86/domain-builder/fdt.c     | 34 +++++++++++++++++++++++++++
- xen/arch/x86/include/asm/bootdomain.h |  4 ++++
- xen/include/xen/libfdt/libfdt-xen.h   |  9 +++++++
- 4 files changed, 55 insertions(+)
+ xen/arch/x86/domain-builder/core.c       | 28 ++++++++++++++++++++++++
+ xen/arch/x86/domain-builder/fdt.c        | 10 +++++++++
+ xen/arch/x86/domain-builder/fdt.h        | 24 ++++++++++++++++++++
+ xen/arch/x86/include/asm/bootinfo.h      |  6 +++--
+ xen/arch/x86/include/asm/domainbuilder.h |  4 ++++
+ xen/arch/x86/setup.c                     | 15 +++++++++----
+ xen/include/xen/libfdt/libfdt-xen.h      | 24 ++++++++++++++++++++
+ 7 files changed, 105 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
-index c231191faec7..1c3b7ff0e658 100644
---- a/xen/arch/x86/dom0_build.c
-+++ b/xen/arch/x86/dom0_build.c
-@@ -609,6 +609,14 @@ int __init construct_dom0(struct boot_domain *bd)
- 
-     process_pending_softirqs();
- 
-+    /* If param dom0_size was not set and HL config provided memory size */
-+    if ( !get_memsize(&dom0_size, LONG_MAX) && bd->mem_pages )
-+        dom0_size.nr_pages = bd->mem_pages;
-+    if ( !get_memsize(&dom0_min_size, LONG_MAX) && bd->min_pages )
-+        dom0_size.nr_pages = bd->min_pages;
-+    if ( !get_memsize(&dom0_max_size, LONG_MAX) && bd->max_pages )
-+        dom0_size.nr_pages = bd->max_pages;
-+
-     if ( is_hvm_domain(d) )
-         rc = dom0_construct_pvh(bd);
-     else if ( is_pv_domain(d) )
-diff --git a/xen/arch/x86/domain-builder/fdt.c b/xen/arch/x86/domain-builder/fdt.c
-index db584ba78e92..aff1b8c3235d 100644
---- a/xen/arch/x86/domain-builder/fdt.c
-+++ b/xen/arch/x86/domain-builder/fdt.c
-@@ -6,6 +6,7 @@
- #include <xen/init.h>
+diff --git a/xen/arch/x86/domain-builder/core.c b/xen/arch/x86/domain-builder/core.c
+index eda7fa7a8ffa..91d1b7367e76 100644
+--- a/xen/arch/x86/domain-builder/core.c
++++ b/xen/arch/x86/domain-builder/core.c
+@@ -8,9 +8,37 @@
  #include <xen/lib.h>
- #include <xen/libfdt/libfdt.h>
-+#include <xen/sizes.h>
  
  #include <asm/bootinfo.h>
- #include <asm/guest.h>
-@@ -113,6 +114,39 @@ static int __init process_domain_node(
-             else
-                 printk("PV\n");
-         }
-+        else if ( strncmp(prop_name, "memory", name_len) == 0 )
-+        {
-+            uint64_t kb;
-+            if ( fdt_prop_as_u64(prop, &kb) != 0 )
-+            {
-+                printk("  failed processing memory for domain %s\n", name);
-+                return -EINVAL;
-+            }
-+            bd->mem_pages = PFN_DOWN(kb * SZ_1K);
-+            printk("  memory: %ld kb\n", kb);
-+        }
-+        else if ( strncmp(prop_name, "mem-min", name_len) == 0 )
-+        {
-+            uint64_t kb;
-+            if ( fdt_prop_as_u64(prop, &kb) != 0 )
-+            {
-+                printk("  failed processing memory for domain %s\n", name);
-+                return -EINVAL;
-+            }
-+            bd->min_pages = PFN_DOWN(kb * SZ_1K);
-+            printk("  min memory: %ld kb\n", kb);
-+        }
-+        else if ( strncmp(prop_name, "mem-max", name_len) == 0 )
-+        {
-+            uint64_t kb;
-+            if ( fdt_prop_as_u64(prop, &kb) != 0 )
-+            {
-+                printk("  failed processing memory for domain %s\n", name);
-+                return -EINVAL;
-+            }
-+            bd->max_pages = PFN_DOWN(kb * SZ_1K);
-+            printk("  max memory: %ld kb\n", kb);
-+        }
-     }
++#include <asm/setup.h>
  
-     fdt_for_each_subnode(node, fdt, dom_node)
-diff --git a/xen/arch/x86/include/asm/bootdomain.h b/xen/arch/x86/include/asm/bootdomain.h
-index 5918aaf6bb63..d7092bc32ad7 100644
---- a/xen/arch/x86/include/asm/bootdomain.h
-+++ b/xen/arch/x86/include/asm/bootdomain.h
-@@ -20,6 +20,10 @@ struct boot_domain {
- #define BUILD_MODE_ENABLE_DM     (1 << 1) /* HVM    | PVH     */
-     uint32_t mode;
+ #include "fdt.h"
  
-+    unsigned long mem_pages;
-+    unsigned long min_pages;
-+    unsigned long max_pages;
-+
-     struct boot_module *kernel;
-     struct boot_module *ramdisk;
- 
-diff --git a/xen/include/xen/libfdt/libfdt-xen.h b/xen/include/xen/libfdt/libfdt-xen.h
-index 2057030dda45..3b653e626842 100644
---- a/xen/include/xen/libfdt/libfdt-xen.h
-+++ b/xen/include/xen/libfdt/libfdt-xen.h
-@@ -37,6 +37,15 @@ static inline int __init fdt_prop_as_u32(
-     return fdt_cell_as_u32((fdt32_t *)prop->data, val);
- }
- 
-+static inline int __init fdt_prop_as_u64(
-+    const struct fdt_property *prop, uint64_t *val)
++size_t __init builder_get_cmdline_size(struct boot_info *bi, int offset)
 +{
-+    if ( !prop || fdt32_to_cpu(prop->len) < sizeof(u64) )
-+        return -EINVAL;
++#ifdef CONFIG_DOMAIN_BUILDER
++    const void *fdt = bootstrap_map_bm(&bi->mods[HYPERLAUNCH_MODULE_IDX]);
++    int size = fdt_cmdline_prop_size(fdt, offset);
 +
-+    return fdt_cell_as_u64((fdt32_t *)prop->data, val);
++    bootstrap_unmap();
++    return size < 0 ? 0 : (size_t) size;
++#else
++    return 0;
++#endif
 +}
 +
- static inline int __init fdt_get_prop_by_offset(
-     const void *fdt, int node, const char *name, unsigned long *offset)
++int __init builder_get_cmdline(
++    struct boot_info *bi, int offset, char *cmdline, size_t size)
++{
++#ifdef CONFIG_DOMAIN_BUILDER
++    const void *fdt = bootstrap_map_bm(&bi->mods[HYPERLAUNCH_MODULE_IDX]);
++    int ret = fdt_cmdline_prop_copy(fdt, offset, cmdline, size);
++
++    bootstrap_unmap();
++    return ret;
++#else
++    return 0;
++#endif
++}
++
+ void __init builder_init(struct boot_info *bi)
  {
+     if ( IS_ENABLED(CONFIG_DOMAIN_BUILDER) )
+diff --git a/xen/arch/x86/domain-builder/fdt.c b/xen/arch/x86/domain-builder/fdt.c
+index bcaee50689a6..1094c8dc8838 100644
+--- a/xen/arch/x86/domain-builder/fdt.c
++++ b/xen/arch/x86/domain-builder/fdt.c
+@@ -109,6 +109,16 @@ static int __init process_domain_node(
+             printk("  kernel: boot module %d\n", idx);
+             bi->mods[idx].type = BOOTMOD_KERNEL;
+             bd->kernel = &bi->mods[idx];
++
++            /* If bootloader didn't set cmdline, see if FDT provides one. */
++            if ( bd->kernel->cmdline_pa &&
++                 !((char *)__va(bd->kernel->cmdline_pa))[0] )
++            {
++                int ret = fdt_get_prop_by_offset(
++                    fdt, node, "bootargs", &bd->kernel->cmdline_pa);
++                if ( ret > 0 )
++                    bd->kernel->fdt_cmdline = true;
++            }
+         }
+     }
+ 
+diff --git a/xen/arch/x86/domain-builder/fdt.h b/xen/arch/x86/domain-builder/fdt.h
+index 0be4ac771bc4..3938b0d2619b 100644
+--- a/xen/arch/x86/domain-builder/fdt.h
++++ b/xen/arch/x86/domain-builder/fdt.h
+@@ -13,6 +13,30 @@
+ 
+ #ifdef CONFIG_DOMAIN_BUILDER
+ 
++static inline int __init fdt_cmdline_prop_size(const void *fdt, int offset)
++{
++    int ret;
++
++    fdt_get_property_by_offset(fdt, offset, &ret);
++
++    return ret;
++}
++
++static inline int __init fdt_cmdline_prop_copy(
++    const void *fdt, int offset, char *cmdline, size_t size)
++{
++    int ret;
++    const struct fdt_property *prop =
++        fdt_get_property_by_offset(fdt, offset, &ret);
++
++    if ( ret < 0 )
++        return ret;
++
++    ASSERT(size > ret);
++
++    return strlcpy(cmdline, prop->data, ret);
++}
++
+ int has_hyperlaunch_fdt(struct boot_info *bi);
+ int walk_hyperlaunch_fdt(struct boot_info *bi);
+ #else
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index 683ca9dbe2e0..433a0e66121b 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -35,11 +35,13 @@ struct boot_module {
+ 
+     /*
+      * Module State Flags:
+-     *   relocated: indicates module has been relocated in memory.
+-     *   released:  indicates module's pages have been freed.
++     *   relocated:   indicates module has been relocated in memory.
++     *   released:    indicates module's pages have been freed.
++     *   fdt_cmdline: indicates module's cmdline is in the FDT.
+      */
+     bool relocated:1;
+     bool released:1;
++    bool fdt_cmdline:1;
+ 
+     /*
+      * A boot module may need decompressing by Xen.  Headroom is an estimate of
+diff --git a/xen/arch/x86/include/asm/domainbuilder.h b/xen/arch/x86/include/asm/domainbuilder.h
+index aedc2b49f7c9..21221d8df8ec 100644
+--- a/xen/arch/x86/include/asm/domainbuilder.h
++++ b/xen/arch/x86/include/asm/domainbuilder.h
+@@ -3,6 +3,10 @@
+ 
+ #include <asm/bootinfo.h>
+ 
++size_t __init builder_get_cmdline_size(struct boot_info *bi, int offset);
++int __init builder_get_cmdline(
++    struct boot_info *bi, int offset, char *cmdline, size_t size);
++
+ void builder_init(struct boot_info *bi);
+ 
+ #endif
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 71ce9315d3ac..3dd04b9afca7 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -981,7 +981,10 @@ static size_t __init domain_cmdline_size(
+ {
+     size_t s = bi->kextra ? strlen(bi->kextra) : 0;
+ 
+-    s += bd->kernel->cmdline_pa ? strlen(__va(bd->kernel->cmdline_pa)) : 0;
++    if ( bd->kernel->fdt_cmdline )
++        s += builder_get_cmdline_size(bi, bd->kernel->cmdline_pa);
++    else
++        s += strlen(__va(bd->kernel->cmdline_pa));
+ 
+     if ( s == 0 )
+         return s;
+@@ -1039,7 +1042,8 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+ 
+     /* Grab the DOM0 command line. */
+     if ( (bd->kernel->cmdline_pa &&
+-          ((char *)__va(bd->kernel->cmdline_pa))[0]) ||
++          (bd->kernel->fdt_cmdline ||
++           ((char *)__va(bd->kernel->cmdline_pa))[0])) ||
+          bi->kextra )
+     {
+         size_t cmdline_size = domain_cmdline_size(bi, bd);
+@@ -1049,9 +1053,12 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+             if ( !(cmdline = xzalloc_array(char, cmdline_size)) )
+                 panic("Error allocating cmdline buffer for %pd\n", d);
+ 
+-            if ( bd->kernel->cmdline_pa )
++            if ( bd->kernel->fdt_cmdline )
++                builder_get_cmdline(
++                    bi, bd->kernel->cmdline_pa, cmdline, cmdline_size);
++            else
+                 strlcpy(cmdline,
+-                        cmdline_cook(__va(bd->kernel->cmdline_pa), bi->loader),
++                        cmdline_cook(__va(bd->kernel->cmdline_pa),bi->loader),
+                         cmdline_size);
+ 
+             if ( bi->kextra )
+diff --git a/xen/include/xen/libfdt/libfdt-xen.h b/xen/include/xen/libfdt/libfdt-xen.h
+index 27d23df03af3..0e54aeeb6cc2 100644
+--- a/xen/include/xen/libfdt/libfdt-xen.h
++++ b/xen/include/xen/libfdt/libfdt-xen.h
+@@ -28,6 +28,30 @@ static inline int __init fdt_cell_as_u64(const fdt32_t *cell, uint64_t *val)
+     return 0;
+ }
+ 
++static inline int __init fdt_get_prop_by_offset(
++    const void *fdt, int node, const char *name, unsigned long *offset)
++{
++    int ret, poffset;
++    const char *pname;
++    size_t nsize = strlen(name);
++
++    fdt_for_each_property_offset(poffset, fdt, node)
++    {
++        fdt_getprop_by_offset(fdt, poffset, &pname, &ret);
++
++        if ( ret < 0 || strlen(pname) != nsize )
++            continue;
++
++        if ( !strncmp(pname, name, nsize) )
++        {
++            *offset = poffset;
++            return nsize;
++        }
++    }
++
++    return -ENOENT;
++}
++
+ /*
+  * Property: reg
+  *
 -- 
 2.30.2
 
