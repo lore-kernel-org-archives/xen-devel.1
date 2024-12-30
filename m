@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3457E77198
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2024 21:01:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.863553.1274964 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDDDFE7718F
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2024 21:01:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.863551.1274943 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tSMt4-0007vU-A7; Mon, 30 Dec 2024 21:01:18 +0000
+	id 1tSMt2-0007Ly-L4; Mon, 30 Dec 2024 21:01:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 863553.1274964; Mon, 30 Dec 2024 21:01:18 +0000
+Received: by outflank-mailman (output) from mailman id 863551.1274943; Mon, 30 Dec 2024 21:01:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tSMt4-0007ug-6K; Mon, 30 Dec 2024 21:01:18 +0000
-Received: by outflank-mailman (input) for mailman id 863553;
- Mon, 30 Dec 2024 21:01:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tSMt2-0007L1-DO; Mon, 30 Dec 2024 21:01:16 +0000
+Received: by outflank-mailman (input) for mailman id 863551;
+ Mon, 30 Dec 2024 21:01:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rjPe=TX=daemonizer.de=maxi@srs-se1.protection.inumbo.net>)
- id 1tSMt2-0006nk-PL
- for xen-devel@lists.xenproject.org; Mon, 30 Dec 2024 21:01:16 +0000
+ id 1tSMt1-00073D-57
+ for xen-devel@lists.xenproject.org; Mon, 30 Dec 2024 21:01:15 +0000
 Received: from mx1.somlen.de (typhoon.somlen.de [89.238.64.140])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 346fb3dc-c6f1-11ef-99a4-01e77a169b0f;
- Mon, 30 Dec 2024 22:01:14 +0100 (CET)
-Received: by mx1.somlen.de with ESMTPSA id D7CBA506D3D;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 343edaa2-c6f1-11ef-a0db-8be0dac302b0;
+ Mon, 30 Dec 2024 22:01:13 +0100 (CET)
+Received: by mx1.somlen.de with ESMTPSA id 6841F506D31;
  Mon, 30 Dec 2024 22:01:13 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -40,67 +40,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 346fb3dc-c6f1-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 343edaa2-c6f1-11ef-a0db-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=daemonizer.de;
-	s=202303; t=1735592474;
+	s=202303; t=1735592473;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=h75DPoDEbFCJlydhUR/eRPZoEnhMbc8Ymd/flb1Kxes=;
-	b=JMxcop1AVBmsy9zmgqrVah4uaCwV3KHJ4FM9H8+XHersdmP+Uwsz5J8VWhYyiXaEhaGDJR
-	9HUAO+jyGZWnub5Wd1V/5knWeAdV42v9GGelvXGkKCygdNXkmZVLlDEnyZOXUPR7p6s9RW
-	tOcr6pZqaFSWVLIZH2477hssqBrhZc2DW3KsHV1FnJGLxw9+88hGSAou8mGsVeju2nM1oY
-	h3o3rD3QHD4QGPFjWc4f09dCJzh/p89xCrGWmgF21auh8TwBzx2jgQLJBfpVWAIaCi8Btz
-	usx5Dx730NTneiahj0C3WGh58yHsBQzf0oUI7K8dwM5PZ1a87llMKuY52VNMkA==
+	bh=vNoycYF/AunNCbr33bPlfVZJJaaGcAgrVSlzFQ4oMMU=;
+	b=Jd/ryk/mRGv4VnXHj3pLw18iO39jMHpJOXtH+LSHqrLZSQy1Kp6PNpTLMyv/UCxUqC0oM+
+	Wc0AVSF/DR1vXdcfjAF7iXWLChWteN1+Hewq/vNohDVERwOX4SLUe49E3VmhF9PkpARXmP
+	bIt5guaI5iSxwBg4xL16NO/gvhOyxFX9AnrfOrbi+rT1e2pgs+X5usSZ9I2m8h1Sc/m50U
+	W39PRRlh3Wxyxt9gJlfPKvz8NZJOGRBShrXs42TEu+fzMcuvAFkYUw+1NN/romZ/Iy1U4L
+	HTLUKXwjwMHcbwO9LSHnes6YmElHgwT+d0NuwhiwQbtqRsx0dYEvKiSelry0YA==
 From: Maximilian Engelhardt <maxi@daemonizer.de>
 To: xen-devel@lists.xenproject.org
 Cc: Maximilian Engelhardt <maxi@daemonizer.de>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH 5/5] tools: fix typo: subsytem -> subsystem
-Date: Mon, 30 Dec 2024 22:00:33 +0100
-Message-Id: <ff9a8e506fcd69f54edc6396840bf21a69bdb5a6.1735585600.git.maxi@daemonizer.de>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [XEN PATCH 3/5] xen/arch/x86: make objdump output user locale agnostic
+Date: Mon, 30 Dec 2024 22:00:31 +0100
+Message-Id: <c86ce036f829a9e626c8d1dfc595c6caf6c48212.1735585600.git.maxi@daemonizer.de>
 In-Reply-To: <cover.1735585600.git.maxi@daemonizer.de>
 References: <cover.1735585600.git.maxi@daemonizer.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This was found by the lintian tool (Debian package checker) during
-packaging xen for Debian.
+The objdump output is fed to grep, so make sure it doesn't change with
+different user locales and break the grep parsing.
+This problem was identified while updating xen in Debian and the fix is
+needed for generating reproducible builds in varying environments.
 
 Signed-off-by: Maximilian Engelhardt <maxi@daemonizer.de>
 ---
- tools/include/xenctrl.h   | 2 +-
- tools/misc/xen-memshare.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ xen/arch/x86/arch.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 5bb41c9c53..4955981231 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -2212,7 +2212,7 @@ int xc_memshr_domain_resume(xc_interface *xch,
-  * May fail with:
-  *  EINVAL if the gfn is not populated or not sharable (mmio, etc)
-  *  ENOMEM if internal data structures cannot be allocated
-- *  E2BIG if the page is being referenced by other subsytems (e.g. qemu)
-+ *  E2BIG if the page is being referenced by other subsystems (e.g. qemu)
-  *  ENOENT or EEXIST if there are internal hypervisor errors.
-  */
- int xc_memshr_nominate_gfn(xc_interface *xch,
-diff --git a/tools/misc/xen-memshare.c b/tools/misc/xen-memshare.c
-index 8e5e22b9e9..ab30979ebc 100644
---- a/tools/misc/xen-memshare.c
-+++ b/tools/misc/xen-memshare.c
-@@ -30,7 +30,7 @@ static int usage(const char* prog)
-     printf("  add-to-physmap <domid> <gfn> <source> <source-gfn> <source-handle>\n");
-     printf("                          - Populate a page in a domain with a shared page.\n");
-     printf("  debug-gfn <domid> <gfn> - Debug a particular domain and gfn.\n");
--    printf("  audit                   - Audit the sharing subsytem in Xen.\n");
-+    printf("  audit                   - Audit the sharing subsystem in Xen.\n");
-     return 1;
- }
+diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
+index 9dde8a5756..cb47d72991 100644
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -109,7 +109,7 @@ endif
+ ifeq ($(XEN_BUILD_PE),y)
  
+ # Check if the linker produces fixups in PE by default
+-efi-nr-fixups := $(shell $(OBJDUMP) -p $(efi-check).efi | grep '^[[:blank:]]*reloc[[:blank:]]*[0-9][[:blank:]].*DIR64$$' | wc -l)
++efi-nr-fixups := $(shell LC_ALL=C $(OBJDUMP) -p $(efi-check).efi | grep '^[[:blank:]]*reloc[[:blank:]]*[0-9][[:blank:]].*DIR64$$' | wc -l)
+ 
+ ifeq ($(efi-nr-fixups),2)
+ MKRELOC := :
 -- 
 2.39.5
 
