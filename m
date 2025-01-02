@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0937FE7719A
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jan 2025 19:25:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.864433.1275675 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C5DAE77188
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jan 2025 19:34:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.864478.1275703 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTQop-0003dn-Ny; Thu, 02 Jan 2025 19:25:19 +0000
+	id 1tTQxS-0007dt-RH; Thu, 02 Jan 2025 19:34:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864433.1275675; Thu, 02 Jan 2025 19:25:19 +0000
+Received: by outflank-mailman (output) from mailman id 864478.1275703; Thu, 02 Jan 2025 19:34:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTQop-0003d5-Gj; Thu, 02 Jan 2025 19:25:19 +0000
-Received: by outflank-mailman (input) for mailman id 864433;
- Thu, 02 Jan 2025 19:25:18 +0000
+	id 1tTQxS-0007dm-OU; Thu, 02 Jan 2025 19:34:14 +0000
+Received: by outflank-mailman (input) for mailman id 864478;
+ Thu, 02 Jan 2025 19:34:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xoa/=T2=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tTQoo-0002q0-RD
- for xen-devel@lists.xenproject.org; Thu, 02 Jan 2025 19:25:18 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
+ <SRS0=AqxF=T2=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1tTQxR-0007dg-AV
+ for xen-devel@lists.xenproject.org; Thu, 02 Jan 2025 19:34:13 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4c3f7cac-c93f-11ef-99a4-01e77a169b0f;
- Thu, 02 Jan 2025 20:25:17 +0100 (CET)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-436a39e4891so28728715e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jan 2025 11:25:17 -0800 (PST)
-Received: from andrewcoop.lan ([83.105.36.37])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c6ad3e3sm40212825f8f.0.2025.01.02.11.25.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 11:25:15 -0800 (PST)
+ id 8975ca64-c940-11ef-99a4-01e77a169b0f;
+ Thu, 02 Jan 2025 20:34:10 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 319155C61D0;
+ Thu,  2 Jan 2025 19:33:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB3F1C4CED0;
+ Thu,  2 Jan 2025 19:34:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,193 +44,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c3f7cac-c93f-11ef-99a4-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1735845916; x=1736450716; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=edPTs5r2WJDCVGRT6f4/sc4UPJKROdeZIxE7m/aVPP0=;
-        b=r4WSOnwTnXrykGyuCZynr4fY7npndJUt8wv+OjTcQ+k7zS2eOc64atuMRk/+lX6sks
-         yxHRqXDIsVfmWw5qdf63/vvj4ql7C31X48bJ0qn9pAm8ACkYrjcz6eE83u11C9/qXlup
-         07Gqx6sY+TXGv1bUYo7EsOq21BRZ8F4/SKp3w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1735845916; x=1736450716;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=edPTs5r2WJDCVGRT6f4/sc4UPJKROdeZIxE7m/aVPP0=;
-        b=UOawGydv+CJKp9lnBVgFlvce2TKHQgprLDY1CmnRLQrykgtNEAkTCeRovi07sSnV6G
-         k1Dk50ZNT1QF5vaCrOuOLGMLcLUIcBwgqusdAQDznysNl6hruvpryDvOYsbcRMmBbBxt
-         S5cy2KMS10k8JQ2jXa5b4jZPpPyjy0gkog/XpNQ+DydFyLiDPO8tdP5Dhb0scmrqoSJM
-         R+2TP8DpXfQRuNPWcvBiyFe5BqxigFiV5EF6S1Yni0lfnPcatqKIeCs9QBT465g2m8ve
-         jlUSxFWSr+7IvspLLnAKdygOojTVS6cnzOnqlNYrCm2srBsmApMcR8c9viN9LEzmp57k
-         trug==
-X-Gm-Message-State: AOJu0YzwVpXBM2xl7Et8/H6xYEm1oqV/RB3CJeMMiIslxxmCS71gXyaK
-	pKtQ78xv/tjnkxK/I/98svRUw5Ae56La9CRLYqQnmMPEOTUZgFGEcwngpWvOIuV8y03S6hrde2n
-	oDKM8Tw==
-X-Gm-Gg: ASbGnctWEJUacmgPhQPbnM10iQc65/PP+WYeX3vUVf4tE7CSRSaQyfki3w1mWst7wRa
-	o/QsJaoQv6sxJiraOkoGZE3AOrzaLJ5poo/rZbmL3wjKnEDpzjb4pyW+J1MlR+tYoC6VgSJxk3x
-	/kGxTvI58orqhyQeotOed3NslQkViktCPReaFPv3xsViA8djaqeEr6B197kTU6z8hvpcQfqwcLd
-	vHTbwN+074AOu6VNzyDaV7N7Bu58G1jgDBbtGk1oiaybl6mZAapeE5HQnXpAi5T0w==
-X-Google-Smtp-Source: AGHT+IHmGwLlaLgCcyaeWZID5RvfAd2XbtkcpcMbIkQLTV2v/kVVGKNpAQ/U5CkC4f4tvIrMym4x1g==
-X-Received: by 2002:a05:600c:35cc:b0:434:f925:f5c9 with SMTP id 5b1f17b1804b1-43668547fd1mr365041085e9.6.1735845916238;
-        Thu, 02 Jan 2025 11:25:16 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 4/5] xen/perfc: Cleanup
-Date: Thu,  2 Jan 2025 19:25:07 +0000
-Message-Id: <20250102192508.2405687-5-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250102192508.2405687-1-andrew.cooper3@citrix.com>
-References: <20250102192508.2405687-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 8975ca64-c940-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1735846448;
+	bh=vZq1cqN+aNzRmgLqQrKagZQ0ckejVp8p4duY8J+lGEs=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=gvpl54sfsmhAY+BFYS8BCSQVjlY6fTTCG2jd/HSJwPWoDeELH47G8VjMuUioV5rS/
+	 pIjHM8NfplTERGm01tK2QJtrH1zDGs+5UlvI/jPcfBhQ4BPAHiKjKBfJ5TSvRE9cIZ
+	 0FpQu0ozx1BN/nOOrNlRIl8o+hZsmHmLJDYqFTIM9zBPcYpNW4n5obwPU2hWhomQlG
+	 cADO80obzfutDUJubexfoggnnSDn1Vzu8a5OaL1IMOJoLqdhmddNSaH656e02XVGrg
+	 Yly2OKK2fLywvd8bbIVnbDViFGj7KJnkWz8NzONNQ6BFK5BFssWElnZl3iSDOpHHru
+	 0G2wbfDHwR1sQ==
+Date: Thu, 2 Jan 2025 11:34:04 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+cc: xen-devel@lists.xenproject.org, 
+    Stefano Stabellini <stefano.stabellini@amd.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Jan Beulich <jbeulich@suse.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    Tamas K Lengyel <tamas@tklengyel.com>, 
+    Alexandru Isaila <aisaila@bitdefender.com>, 
+    Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: Re: [XEN PATCH v1] xen: mem_access: conditionally compile vm_event.c
+ & monitor.c
+In-Reply-To: <20241230063051.3332332-1-Sergiy_Kibrik@epam.com>
+Message-ID: <alpine.DEB.2.22.394.2501021133050.16425@ubuntu-linux-20-04-desktop>
+References: <20241230063051.3332332-1-Sergiy_Kibrik@epam.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
- * Strip trailing whitspace.
- * Remove PRIperfc.  It has never been used and isn't useful.
+On Mon, 30 Dec 2024, Sergiy Kibrik wrote:
+> From: Stefano Stabellini <stefano.stabellini@amd.com>
+> 
+> Extend coverage of CONFIG_MEM_ACCESS option and make the build of VM events
+> and monitoring support optional.
+> This is to reduce code size on Arm when this option isn't enabled.
+> 
+> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Shawn Anastasio <sanastasio@raptorengineering.com>
----
- xen/common/perfc.c      | 10 +++++-----
- xen/include/xen/perfc.h | 23 +++++++++++------------
- 2 files changed, 16 insertions(+), 17 deletions(-)
+I would add my reviewed-by but I wrote an early draft of this patch...
 
-diff --git a/xen/common/perfc.c b/xen/common/perfc.c
-index b748c8af855b..8302b7cf6db1 100644
---- a/xen/common/perfc.c
-+++ b/xen/common/perfc.c
-@@ -46,7 +46,7 @@ void cf_check perfc_printall(unsigned char key)
-         case TYPE_S_SINGLE:
-             for_each_online_cpu ( cpu )
-                 sum += per_cpu(perfcounters, cpu)[j];
--            if ( perfc_info[i].type == TYPE_S_SINGLE ) 
-+            if ( perfc_info[i].type == TYPE_S_SINGLE )
-                 sum = (perfc_t) sum;
-             printk("TOTAL[%12Lu]", sum);
-             if ( sum )
-@@ -56,7 +56,7 @@ void cf_check perfc_printall(unsigned char key)
-                 {
-                     if ( k > 0 && (k % 4) == 0 )
-                         printk("\n%53s", "");
--                    printk("  CPU%02u[%10"PRIperfc"u]", cpu, per_cpu(perfcounters, cpu)[j]);
-+                    printk("  CPU%02u[%10u]", cpu, per_cpu(perfcounters, cpu)[j]);
-                     ++k;
-                 }
-             }
-@@ -71,7 +71,7 @@ void cf_check perfc_printall(unsigned char key)
-                 for ( k = 0; k < perfc_info[i].nr_elements; k++ )
-                     sum += counters[k];
-             }
--            if ( perfc_info[i].type == TYPE_S_ARRAY ) 
-+            if ( perfc_info[i].type == TYPE_S_ARRAY )
-                 sum = (perfc_t) sum;
-             printk("TOTAL[%12Lu]", sum);
-             if (sum)
-@@ -82,7 +82,7 @@ void cf_check perfc_printall(unsigned char key)
-                     sum = 0;
-                     for_each_online_cpu ( cpu )
-                         sum += per_cpu(perfcounters, cpu)[j + k];
--                    if ( perfc_info[i].type == TYPE_S_ARRAY ) 
-+                    if ( perfc_info[i].type == TYPE_S_ARRAY )
-                         sum = (perfc_t) sum;
-                     if ( (k % 4) == 0 )
-                         printk("\n%16s", "");
-@@ -98,7 +98,7 @@ void cf_check perfc_printall(unsigned char key)
-                     sum = 0;
-                     for ( n = 0; n < perfc_info[i].nr_elements; n++ )
-                         sum += counters[n];
--                    if ( perfc_info[i].type == TYPE_S_ARRAY ) 
-+                    if ( perfc_info[i].type == TYPE_S_ARRAY )
-                         sum = (perfc_t) sum;
-                     if ( k > 0 && (k % 4) == 0 )
-                         printk("\n%53s", "");
-diff --git a/xen/include/xen/perfc.h b/xen/include/xen/perfc.h
-index 324b47665573..bf0eb032f7a9 100644
---- a/xen/include/xen/perfc.h
-+++ b/xen/include/xen/perfc.h
-@@ -8,24 +8,24 @@
- 
- /*
-  * NOTE: new counters must be defined in perfc_defn.h
-- * 
-+ *
-  * Counter declarations:
-  * PERFCOUNTER (counter, string)              define a new performance counter
-  * PERFCOUNTER_ARRAY (counter, string, size)  define an array of counters
-- * 
-+ *
-  * Unlike counters, status variables do not reset:
-  * PERFSTATUS (counter, string)               define a new performance stauts
-  * PERFSTATUS_ARRAY (counter, string, size)   define an array of status vars
-- * 
-- * unsigned long perfc_value  (counter)        get value of a counter  
-+ *
-+ * unsigned long perfc_value  (counter)        get value of a counter
-  * unsigned long perfc_valuea (counter, index) get value of an array counter
-- * unsigned long perfc_set  (counter, val)     set value of a counter  
-+ * unsigned long perfc_set  (counter, val)     set value of a counter
-  * unsigned long perfc_seta (counter, index, val) set value of an array counter
-- * void perfc_incr  (counter)                  increment a counter          
-+ * void perfc_incr  (counter)                  increment a counter
-  * void perfc_decr  (counter)                  decrement a status
-- * void perfc_incra (counter, index)           increment an array counter   
-- * void perfc_add   (counter, value)           add a value to a counter     
-- * void perfc_adda  (counter, index, value)    add a value to array counter 
-+ * void perfc_incra (counter, index)           increment an array counter
-+ * void perfc_add   (counter, value)           add a value to a counter
-+ * void perfc_adda  (counter, index, value)    add a value to array counter
-  * void perfc_print (counter)                  print out the counter
-  */
- 
-@@ -49,7 +49,6 @@ enum {
- #undef PERFSTATUS_ARRAY
- 
- typedef unsigned int perfc_t;
--#define PRIperfc ""
- 
- DECLARE_PER_CPU(perfc_t[NUM_PERFCOUNTERS], perfcounters);
- 
-@@ -72,7 +71,7 @@ DECLARE_PER_CPU(perfc_t[NUM_PERFCOUNTERS], perfcounters);
- 	 this_cpu(perfcounters)[PERFC_ ## x + (y)] = (v) : (v) )
- 
- /*
-- * Histogram: special treatment for 0 and 1 count. After that equally spaced 
-+ * Histogram: special treatment for 0 and 1 count. After that equally spaced
-  * with last bucket taking the rest.
-  */
- #ifdef CONFIG_PERF_ARRAYS
-@@ -98,7 +97,7 @@ int perfc_control(struct xen_sysctl_perfc_op *pc);
- extern void cf_check perfc_printall(unsigned char key);
- extern void cf_check perfc_reset(unsigned char key);
- 
--    
-+
- #else /* CONFIG_PERF_COUNTERS */
- 
- #define perfc_value(x)    (0)
--- 
-2.39.5
+That said, it looks OK to me.
 
+> ---
+>  xen/arch/arm/Makefile      |  4 ++--
+>  xen/arch/arm/vsmc.c        |  3 ++-
+>  xen/common/Makefile        |  4 ++--
+>  xen/include/xen/monitor.h  |  9 +++++++++
+>  xen/include/xen/vm_event.h | 14 +++++++++++---
+>  5 files changed, 26 insertions(+), 8 deletions(-)
+> 
+> diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+> index 43ab5e8f25..8903eb0bf2 100644
+> --- a/xen/arch/arm/Makefile
+> +++ b/xen/arch/arm/Makefile
+> @@ -39,7 +39,7 @@ obj-$(CONFIG_LIVEPATCH) += livepatch.o
+>  obj-$(CONFIG_LLC_COLORING) += llc-coloring.o
+>  obj-$(CONFIG_MEM_ACCESS) += mem_access.o
+>  obj-y += mm.o
+> -obj-y += monitor.o
+> +obj-$(CONFIG_MEM_ACCESS) += monitor.o
+>  obj-y += p2m.o
+>  obj-y += platform.o
+>  obj-y += platform_hypercall.o
+> @@ -65,7 +65,7 @@ obj-$(CONFIG_VGICV2) += vgic-v2.o
+>  obj-$(CONFIG_GICV3) += vgic-v3.o
+>  obj-$(CONFIG_HAS_ITS) += vgic-v3-its.o
+>  endif
+> -obj-y += vm_event.o
+> +obj-$(CONFIG_MEM_ACCESS) += vm_event.o
+>  obj-y += vtimer.o
+>  obj-$(CONFIG_SBSA_VUART_CONSOLE) += vpl011.o
+>  obj-y += vsmc.o
+> diff --git a/xen/arch/arm/vsmc.c b/xen/arch/arm/vsmc.c
+> index 62d8117a12..1c13326bdf 100644
+> --- a/xen/arch/arm/vsmc.c
+> +++ b/xen/arch/arm/vsmc.c
+> @@ -330,7 +330,8 @@ void do_trap_smc(struct cpu_user_regs *regs, const union hsr hsr)
+>      }
+>  
+>      /* If monitor is enabled, let it handle the call. */
+> -    if ( current->domain->arch.monitor.privileged_call_enabled )
+> +    if ( IS_ENABLED(CONFIG_MEM_ACCESS) &&
+> +         current->domain->arch.monitor.privileged_call_enabled )
+>          rc = monitor_smc();
+>  
+>      if ( rc == 1 )
+> diff --git a/xen/common/Makefile b/xen/common/Makefile
+> index cba3b32733..e3c6a857ab 100644
+> --- a/xen/common/Makefile
+> +++ b/xen/common/Makefile
+> @@ -54,7 +54,7 @@ obj-y += timer.o
+>  obj-$(CONFIG_TRACEBUFFER) += trace.o
+>  obj-y += version.o
+>  obj-y += virtual_region.o
+> -obj-y += vm_event.o
+> +obj-$(CONFIG_MEM_ACCESS) += vm_event.o
+>  obj-$(CONFIG_HAS_VMAP) += vmap.o
+>  obj-y += vsprintf.o
+>  obj-y += wait.o
+> @@ -68,7 +68,7 @@ obj-$(CONFIG_COMPAT) += $(addprefix compat/,domain.o memory.o multicall.o xlat.o
+>  
+>  ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
+>  obj-y += domctl.o
+> -obj-y += monitor.o
+> +obj-$(CONFIG_MEM_ACCESS) += monitor.o
+>  obj-y += sysctl.o
+>  endif
+>  
+> diff --git a/xen/include/xen/monitor.h b/xen/include/xen/monitor.h
+> index 713d54f7c1..f1359abb94 100644
+> --- a/xen/include/xen/monitor.h
+> +++ b/xen/include/xen/monitor.h
+> @@ -27,8 +27,17 @@
+>  struct domain;
+>  struct xen_domctl_monitor_op;
+>  
+> +#ifdef CONFIG_MEM_ACCESS
+>  int monitor_domctl(struct domain *d, struct xen_domctl_monitor_op *mop);
+>  void monitor_guest_request(void);
+> +#else
+> +static inline int monitor_domctl(struct domain *d,
+> +                                 struct xen_domctl_monitor_op *mop)
+> +{
+> +    return -EINVAL;
+> +}
+> +static inline void monitor_guest_request(void) {}
+> +#endif
+>  
+>  int monitor_traps(struct vcpu *v, bool sync, vm_event_request_t *req);
+>  
+> diff --git a/xen/include/xen/vm_event.h b/xen/include/xen/vm_event.h
+> index 9a86358b42..72e720e378 100644
+> --- a/xen/include/xen/vm_event.h
+> +++ b/xen/include/xen/vm_event.h
+> @@ -50,9 +50,6 @@ struct vm_event_domain
+>      unsigned int last_vcpu_wake_up;
+>  };
+>  
+> -/* Clean up on domain destruction */
+> -void vm_event_cleanup(struct domain *d);
+> -
+>  /* Returns whether a ring has been set up */
+>  bool vm_event_check_ring(struct vm_event_domain *ved);
+>  
+> @@ -88,7 +85,18 @@ void vm_event_cancel_slot(struct domain *d, struct vm_event_domain *ved);
+>  void vm_event_put_request(struct domain *d, struct vm_event_domain *ved,
+>                            vm_event_request_t *req);
+>  
+> +#ifdef CONFIG_MEM_ACCESS
+> +/* Clean up on domain destruction */
+> +void vm_event_cleanup(struct domain *d);
+>  int vm_event_domctl(struct domain *d, struct xen_domctl_vm_event_op *vec);
+> +#else
+> +static inline void vm_event_cleanup(struct domain *d) {}
+> +static inline int vm_event_domctl(struct domain *d,
+> +                                  struct xen_domctl_vm_event_op *vec)
+> +{
+> +    return -EINVAL;
+> +}
+> +#endif
+>  
+>  void vm_event_vcpu_pause(struct vcpu *v);
+>  void vm_event_vcpu_unpause(struct vcpu *v);
+> -- 
+> 2.25.1
+> 
 
