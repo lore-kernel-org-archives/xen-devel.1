@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAC9C3DA4A
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jan 2025 08:46:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.863738.1275178 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253C4E77199
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jan 2025 08:46:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.863735.1275139 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTGq0-0006yX-J9; Thu, 02 Jan 2025 08:45:52 +0000
+	id 1tTGpx-0005tN-DZ; Thu, 02 Jan 2025 08:45:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 863738.1275178; Thu, 02 Jan 2025 08:45:52 +0000
+Received: by outflank-mailman (output) from mailman id 863735.1275139; Thu, 02 Jan 2025 08:45:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTGq0-0006yI-Dq; Thu, 02 Jan 2025 08:45:52 +0000
-Received: by outflank-mailman (input) for mailman id 863738;
- Thu, 02 Jan 2025 08:45:51 +0000
+	id 1tTGpx-0005pv-5B; Thu, 02 Jan 2025 08:45:49 +0000
+Received: by outflank-mailman (input) for mailman id 863735;
+ Thu, 02 Jan 2025 08:45:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Aw1p=T2=bounce.vates.tech=bounce-md_30504962.67765234.v1-90040212465a4a738ee55cacd36524b5@srs-se1.protection.inumbo.net>)
- id 1tTGpy-0004rS-Uf
- for xen-devel@lists.xenproject.org; Thu, 02 Jan 2025 08:45:50 +0000
+ <SRS0=oHwR=T2=bounce.vates.tech=bounce-md_30504962.67765234.v1-82f3a02c5edd4500b772e324054fe213@srs-se1.protection.inumbo.net>)
+ id 1tTGpv-0004rS-Th
+ for xen-devel@lists.xenproject.org; Thu, 02 Jan 2025 08:45:47 +0000
 Received: from mail180-50.suw31.mandrillapp.com
  (mail180-50.suw31.mandrillapp.com [198.2.180.50])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f6180e64-c8e5-11ef-99a4-01e77a169b0f;
- Thu, 02 Jan 2025 09:45:47 +0100 (CET)
+ id f48e5d1a-c8e5-11ef-99a4-01e77a169b0f;
+ Thu, 02 Jan 2025 09:45:44 +0100 (CET)
 Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
  by mail180-50.suw31.mandrillapp.com (Mailchimp) with ESMTP id
- 4YP0fF0HDGzCf9PP7
- for <xen-devel@lists.xenproject.org>; Thu,  2 Jan 2025 08:45:41 +0000 (GMT)
+ 4YP0fD3qg1zCfD7NJ
+ for <xen-devel@lists.xenproject.org>; Thu,  2 Jan 2025 08:45:40 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 90040212465a4a738ee55cacd36524b5; Thu, 02 Jan 2025 08:45:41 +0000
+ 82f3a02c5edd4500b772e324054fe213; Thu, 02 Jan 2025 08:45:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,300 +45,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f6180e64-c8e5-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: f48e5d1a-c8e5-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1735807541; x=1736068041;
-	bh=TpWqF+7FFQ/hg2SGplPXaNKTXRGvQnA48A/EDvktoFg=;
+	s=mte1; t=1735807540; x=1736068040;
+	bh=lteVOQO/826dQJiMQ3UsqhNPnk1VKMnXNeukA1WaOSo=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=wZggbVYg/0D2l7QYN02MOgR+27vLGOqgHk9ISz2Iroxf9JE31GrQS6PkvY8ZsFMNB
-	 xicMvz7ofdHZR/srTQRrHMmMp4xgEJOpLbyuNlHCoT3tHBDNDaIFeei6IzcOLjaQJ2
-	 hjq08RoeD0Rl1D/p3XyLhXeVXch6pquZD7nqDAhUPEpJf37fvPDlQcigSffPqAFIDV
-	 GymYotau6IfIdlh2W3xg6RAF4Mc1pIDkf1FVtWmsU1acoMQQd8pAcjOs3dCLwwYbi9
-	 dR2ef/aAbMt3UOstha+F5ezga3Dr+/GDNExeQeUwX8NiSi1isGwRLwSCsMkTVgj+Y5
-	 EIopVjjhQsidw==
+	b=A6bso6XOHwrewVbQ+GskSObYNPGIX1Z4vhv/ffgdUazMyxQSZsEEaPk0tuSGHrq/F
+	 KYgQCzfwX0m5g/4AVJehlT1kJzGpXcUgETl0kHVv8aK1NpKDtShWDszEtWijRe+zhV
+	 cxKDotiNCCNYhL3hCpGErxUnTkGhBQs05o0SmRlNIQpHr2AsrjP984+UZyIJoGBUpH
+	 OMlT1szBwBRh4qM/VTzbHtG0B/ZEMCNUHKfo5dwdDFMSrxvtDDlQKIE/JNI386Y/E1
+	 KJj/SXclW1/ha0rF9iIiQ+2V4tHqTxkU2c2XAoFEVl+/bucBAnFeacesc+Bai+6asa
+	 W8WNAuglkrvOQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1735807541; x=1736068041; i=ngoc-tu.dinh@vates.tech;
-	bh=TpWqF+7FFQ/hg2SGplPXaNKTXRGvQnA48A/EDvktoFg=;
+	t=1735807540; x=1736068040; i=ngoc-tu.dinh@vates.tech;
+	bh=lteVOQO/826dQJiMQ3UsqhNPnk1VKMnXNeukA1WaOSo=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=Hn3NVoe1PhkrToobEUFCMSDliQow30HntEDnILD8wUomW/r1LuP7eFIHor5R/Tqok
-	 8pzaAqs/uICRumoYKyo7dutEciIN/RkC1xPPjhPppKiDcsDZGkHOAoYTeCPwIzuxHU
-	 5BF1KDf35bywQWK7oQY4t9lFuoZOSF0tM4L8k45HIHq7MfNrmUmf+eWSCONPXi11YL
-	 DRq8NXmjpcs3wpDLCX+oKuZS68XF3SzGASf6gT4eOde52Ai1CVZRv3dVsOAfmxV4UC
-	 TFgUpq+w5eRn1o60yXZYZtpuvyAtqBCJtS40nl11CylMTubfDoBv/22Tihr+5oha3f
-	 oc3pi+tABpkLQ==
+	b=UfzJS6fJ8E+WavFGOSGkBzZTURV4Gl+aOiYx+VuffqxzhyZWj3xr5tQAgiogajDYK
+	 LuY4Us1eph/9dB0X8QxdP7KYNI+SqK5sXjzGPsH2XGjnN5j7cPb+fKjdFZhd9n0C8f
+	 ZW0MyY0IP82iB+Z6lgdGg5J73x1Q5+SYD0PhNpnFBNeR4nj0KI089j6o8nSidVLkqN
+	 WBJ+gyyL6n8i+mBxN1CRErFBE0wkFa/cpshmwfcEH7m8Ee0H/rFbKBeHcm8VrGk+WV
+	 4TIzgUQcVJIEZiPNa6p19D9v2hNmiC4KzrFPa0xNfp+BCTO65QjEITQbBXmYsK4+JJ
+	 onHUjurDqe5Kw==
 From: "Tu Dinh" <ngoc-tu.dinh@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=20v2=2006/10]=20x86:=20Enable=20XSTATE=20save/restore=20for=20arch=20LBR?=
+Subject: =?utf-8?Q?[RFC=20PATCH=20v2=2004/10]=20x86:=20Calculate=20arch=20LBR=20CPUID=20policies?=
 X-Mailer: git-send-email 2.43.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1735807540083
+X-Bm-Transport-Timestamp: 1735807539667
 To: xen-devel@lists.xenproject.org
 Cc: "Tu Dinh" <ngoc-tu.dinh@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Juergen Gross" <jgross@suse.com>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Message-Id: <20250102084413.102-7-ngoc-tu.dinh@vates.tech>
+Message-Id: <20250102084413.102-5-ngoc-tu.dinh@vates.tech>
 In-Reply-To: <20250102084413.102-1-ngoc-tu.dinh@vates.tech>
 References: <20250102084413.102-1-ngoc-tu.dinh@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.90040212465a4a738ee55cacd36524b5?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.82f3a02c5edd4500b772e324054fe213?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20250102:md
-Date: Thu, 02 Jan 2025 08:45:41 +0000
+Date: Thu, 02 Jan 2025 08:45:40 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Add a function get_xstate_component_comp() to allow fetching a specific
-XSTATE component from a compressed image.
-
-Also add LBR state declarations in xstate.h.
+Ensure that the arch LBR feature and its dependents are disabled if any
+prerequisites are not available.
 
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
 ---
- xen/arch/x86/include/asm/xstate.h | 22 ++++++++-
- xen/arch/x86/msr.c                |  3 +-
- xen/arch/x86/xstate.c             | 79 +++++++++++++++++++++++--------
- 3 files changed, 79 insertions(+), 25 deletions(-)
+ xen/arch/x86/cpu-policy.c | 28 ++++++++++++++++++++++++++++
+ xen/arch/x86/cpu/common.c |  7 +++++++
+ 2 files changed, 35 insertions(+)
 
-diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
-index 07017cc4ed..cc77f599d7 100644
---- a/xen/arch/x86/include/asm/xstate.h
-+++ b/xen/arch/x86/include/asm/xstate.h
-@@ -33,13 +33,13 @@ extern uint32_t mxcsr_mask;
- #define XSTATE_FP_SSE  (X86_XCR0_X87 | X86_XCR0_SSE)
- #define XCNTXT_MASK    (X86_XCR0_X87 | X86_XCR0_SSE | X86_XCR0_YMM | \
-                         X86_XCR0_OPMASK | X86_XCR0_ZMM | X86_XCR0_HI_ZMM | \
--                        XSTATE_NONLAZY)
-+                        XSTATE_NONLAZY | XSTATE_XSAVES_ONLY)
- 
- #define XSTATE_ALL     (~(1ULL << 63))
- #define XSTATE_NONLAZY (X86_XCR0_BNDREGS | X86_XCR0_BNDCSR | X86_XCR0_PKRU | \
-                         X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA)
- #define XSTATE_LAZY    (XSTATE_ALL & ~XSTATE_NONLAZY)
--#define XSTATE_XSAVES_ONLY         0
-+#define XSTATE_XSAVES_ONLY         (X86_XSS_LBR)
- #define XSTATE_COMPACTION_ENABLED  (1ULL << 63)
- 
- #define XSTATE_XSS     (1U << 0)
-@@ -91,6 +91,21 @@ struct xstate_bndcsr {
-     uint64_t bndstatus;
- };
- 
-+struct xstate_lbr_entry {
-+    uint64_t lbr_from_ip;
-+    uint64_t lbr_to_ip;
-+    uint64_t lbr_info;
-+};
-+
-+struct xstate_lbr {
-+	uint64_t lbr_ctl;
-+	uint64_t lbr_depth;
-+	uint64_t ler_from_ip;
-+	uint64_t ler_to_ip;
-+	uint64_t ler_info;
-+	struct xstate_lbr_entry entries[32];
-+};
-+
- /* extended state operations */
- bool __must_check set_xcr0(u64 xfeatures);
- uint64_t get_xcr0(void);
-@@ -114,6 +129,9 @@ int xstate_alloc_save_area(struct vcpu *v);
- void xstate_init(struct cpuinfo_x86 *c);
- unsigned int xstate_uncompressed_size(uint64_t xcr0);
- unsigned int xstate_compressed_size(uint64_t xstates);
-+void *get_xstate_component_comp(struct xsave_struct *xstate,
-+                                unsigned int size,
-+                                uint64_t component);
- 
- static inline uint64_t xgetbv(unsigned int index)
- {
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 289cf10b78..68a419ac8e 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -522,8 +522,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-         if ( !cp->xstate.xsaves )
-             goto gp_fault;
- 
--        /* No XSS features currently supported for guests */
--        if ( val != 0 )
-+        if ( val & ~(uint64_t)XSTATE_XSAVES_ONLY )
-             goto gp_fault;
- 
-         msrs->xss.raw = val;
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index baae8e1a13..607bf9c8a5 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -18,13 +18,16 @@
- #include <asm/asm_defns.h>
- 
- /*
-- * Maximum size (in byte) of the XSAVE/XRSTOR save area required by all
-+ * Maximum size (in byte) of the XSAVE(S)/XRSTOR(S) save area required by all
-  * the supported and enabled features on the processor, including the
-  * XSAVE.HEADER. We only enable XCNTXT_MASK that we have known.
-  */
- static u32 __read_mostly xsave_cntxt_size;
- 
--/* A 64-bit bitmask of the XSAVE/XRSTOR features supported by processor. */
-+/*
-+ * A 64-bit bitmask of the XSAVE(S)/XRSTOR(S) features supported by
-+ * processor.
-+ */
- u64 __read_mostly xfeature_mask;
- 
- unsigned int *__read_mostly xstate_offsets;
-@@ -126,7 +129,8 @@ static int setup_xstate_features(bool bsp)
-             cpuid_count(XSTATE_CPUID, leaf, &eax,
-                         &ebx, &ecx, &edx);
-             BUG_ON(eax != xstate_sizes[leaf]);
--            BUG_ON(ebx != xstate_offsets[leaf]);
-+            if ( (1ul << leaf) & X86_XCR0_STATES )
-+                BUG_ON(ebx != xstate_offsets[leaf]);
-             BUG_ON(!(ecx & XSTATE_ALIGN64) != !test_bit(leaf, &xstate_align));
-         }
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index 78bc9872b0..b1398b2e3c 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -190,6 +190,16 @@ static void sanitise_featureset(uint32_t *fs)
      }
-@@ -210,7 +214,7 @@ void expand_xsave_states(const struct vcpu *v, void *dest, unsigned int size)
-      * non-compacted offset.
-      */
-     src = xstate;
--    valid = xstate_bv & ~XSTATE_FP_SSE;
-+    valid = xstate_bv & ~XSTATE_FP_SSE & ~X86_XSS_STATES;
-     while ( valid )
-     {
-         u64 feature = valid & -valid;
-@@ -276,7 +280,7 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
-      * possibly compacted offset.
-      */
-     dest = xstate;
--    valid = xstate_bv & ~XSTATE_FP_SSE;
-+    valid = xstate_bv & ~XSTATE_FP_SSE & ~X86_XSS_STATES;
-     while ( valid )
-     {
-         u64 feature = valid & -valid;
-@@ -516,7 +520,7 @@ int xstate_alloc_save_area(struct vcpu *v)
-          */
-         size = XSTATE_AREA_MIN_SIZE;
-     }
--    else if ( !is_idle_vcpu(v) || !cpu_has_xsavec )
-+    else if ( !is_idle_vcpu(v) || (!cpu_has_xsavec && !cpu_has_xsaves) )
-     {
-         size = xsave_cntxt_size;
-         BUG_ON(size < XSTATE_AREA_MIN_SIZE);
-@@ -678,12 +682,9 @@ static void __init check_new_xstate(struct xcheck_state *s, uint64_t new)
-            (new & X86_XSS_STATES)); /* User or supervisor, not both. */
- 
-     s->states |= new;
--    if ( new & X86_XCR0_STATES )
--    {
--        if ( !set_xcr0(s->states & X86_XCR0_STATES) )
--            BUG();
--    }
--    else
-+    if ( !set_xcr0(s->states & X86_XCR0_STATES) )
-+        BUG();
-+    if ( cpu_has_xsaves )
-         set_msr_xss(s->states & X86_XSS_STATES);
- 
-     /*
-@@ -850,8 +851,8 @@ void xstate_init(struct cpuinfo_x86 *c)
-     boolean_param("xsave", use_xsave);
- 
-     bool bsp = c == &boot_cpu_data;
--    u32 eax, ebx, ecx, edx;
--    u64 feature_mask;
-+    uint32_t eax, ebx, ecx, edx;
-+    uint64_t feature_mask, supervisor_feature_mask = 0;
- 
-     if ( bsp )
-     {
-@@ -874,7 +875,8 @@ void xstate_init(struct cpuinfo_x86 *c)
-     }
- 
-     cpuid_count(XSTATE_CPUID, 0, &eax, &ebx, &ecx, &edx);
--    feature_mask = (((u64)edx << 32) | eax) & XCNTXT_MASK;
-+    feature_mask = (((u64)edx << 32) | eax) &
-+                   (XCNTXT_MASK & ~X86_XSS_STATES);
-     BUG_ON(!valid_xcr0(feature_mask));
-     BUG_ON(!(feature_mask & X86_XCR0_SSE));
- 
-@@ -892,25 +894,36 @@ void xstate_init(struct cpuinfo_x86 *c)
-         BUG();
-     if ( cpu_has_xsaves )
-     {
-+        cpuid_count(XSTATE_CPUID, 1, &eax, &ebx, &ecx, &edx);
-+        supervisor_feature_mask = (((uint64_t)edx << 32) | ecx) & XCNTXT_MASK;
-+
-         this_cpu(xss) = ~0;
--        set_msr_xss(0);
-+        set_msr_xss(supervisor_feature_mask);
-     }
- 
-     if ( bsp )
-     {
--        xfeature_mask = feature_mask;
-+        xfeature_mask = feature_mask | supervisor_feature_mask;
-         /*
-          * xsave_cntxt_size is the max size required by enabled features.
-          * We know FP/SSE and YMM about eax, and nothing about edx at present.
-          */
-         xsave_cntxt_size = cpuid_count_ebx(0xd, 0);
--        printk("xstate: size: %#x and states: %#"PRIx64"\n",
--               xsave_cntxt_size, xfeature_mask);
-+        if ( cpu_has_xsaves )
-+            xsave_cntxt_size = max(xsave_cntxt_size, cpuid_count_ebx(0xd, 1));
-+        printk("xstate: size: %#x, states: %#"PRIx64
-+               ", supervisor states: %#"PRIx64"\n",
-+               xsave_cntxt_size, feature_mask, supervisor_feature_mask);
-     }
-     else
-     {
--        BUG_ON(xfeature_mask != feature_mask);
--        BUG_ON(xsave_cntxt_size != cpuid_count_ebx(0xd, 0));
-+        uint32_t ap_xsave_cntxt_size;
-+
-+        BUG_ON(xfeature_mask != (feature_mask | supervisor_feature_mask));
-+        ap_xsave_cntxt_size = cpuid_count_ebx(0xd, 0);
-+        if ( cpu_has(&current_cpu_data, X86_FEATURE_XSAVES) )
-+            ap_xsave_cntxt_size = max(ap_xsave_cntxt_size, cpuid_count_ebx(0xd, 1));
-+        BUG_ON(xsave_cntxt_size != ap_xsave_cntxt_size);
-     }
- 
-     if ( setup_xstate_features(bsp) && bsp )
-@@ -1072,6 +1085,30 @@ void xstate_set_init(uint64_t mask)
-         BUG();
  }
  
-+void *get_xstate_component_comp(struct xsave_struct *xstate,
-+                                unsigned int size,
-+                                uint64_t component)
++static void recalculate_arch_lbr(struct cpu_policy *p)
 +{
-+    uint16_t comp_offsets[sizeof(xfeature_mask) * 8];
-+    uint16_t offset;
-+    unsigned int i = ilog2(component);
-+
-+    ASSERT(generic_hweightl(component) == 1);
-+
-+    if ( !(xstate->xsave_hdr.xcomp_bv & XSTATE_COMPACTION_ENABLED) ||
-+         i >= xstate_features ||
-+         xstate_sizes[i] == 0 ||
-+         !(xstate->xsave_hdr.xcomp_bv & component) )
-+        return NULL;
-+
-+    setup_xstate_comp(comp_offsets, xstate->xsave_hdr.xcomp_bv);
-+    offset = comp_offsets[i];
-+    if ( xstate_sizes[i] + offset > size )
-+        return NULL;
-+
-+    return (void *)xstate + offset;
++    if ( p->basic.max_leaf < 0x1c ||
++         !(cpu_policy_xstates(&host_cpu_policy) & X86_XSS_LBR) ||
++         p->basic.lbr_1Ca.supported_depths == 0)
++        p->feat.arch_lbr = 0;
++    if ( !p->feat.arch_lbr )
++        p->basic.raw[0x1c] = EMPTY_LEAF;
 +}
 +
- /*
-  * Local variables:
-  * mode: C
+ static void recalculate_xstate(struct cpu_policy *p)
+ {
+     uint64_t xstates = XSTATE_FP_SSE;
+@@ -219,6 +229,9 @@ static void recalculate_xstate(struct cpu_policy *p)
+     if ( p->feat.amx_tile )
+         xstates |= X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA;
+ 
++    if ( p->feat.arch_lbr )
++        xstates |= X86_XSS_LBR;
++
+     /* Subleaf 0 */
+     p->xstate.max_size =
+         xstate_uncompressed_size(xstates & ~XSTATE_XSAVES_ONLY);
+@@ -271,6 +284,8 @@ static void recalculate_misc(struct cpu_policy *p)
+ 
+     p->basic.raw[0xc] = EMPTY_LEAF;
+ 
++    zero_leaves(p->basic.raw, 0xe, 0x1b);
++
+     p->extd.e1d &= ~CPUID_COMMON_1D_FEATURES;
+ 
+     /* Most of Power/RAS hidden from guests. */
+@@ -630,6 +645,7 @@ static void __init calculate_pv_max_policy(void)
+ 
+     sanitise_featureset(fs);
+     x86_cpu_featureset_to_policy(fs, p);
++    recalculate_arch_lbr(p);
+     recalculate_xstate(p);
+ 
+     p->extd.raw[0xa] = EMPTY_LEAF; /* No SVM for PV guests. */
+@@ -670,6 +686,7 @@ static void __init calculate_pv_def_policy(void)
+     }
+ 
+     x86_cpu_featureset_to_policy(fs, p);
++    recalculate_arch_lbr(p);
+     recalculate_xstate(p);
+ }
+ 
+@@ -755,6 +772,14 @@ static void __init calculate_hvm_max_policy(void)
+ 
+         if ( !cpu_has_vmx_xsaves )
+             __clear_bit(X86_FEATURE_XSAVES, fs);
++
++        /*
++         * VMX bitmap is needed for passing through LBR info MSRs.
++         * Require it for virtual arch LBR.
++         */
++        if ( !cpu_has_vmx_guest_lbr_ctl || !cpu_has_vmx_msr_bitmap ||
++             !cpu_has_vmx_xsaves )
++            __clear_bit(X86_FEATURE_ARCH_LBR, fs);
+     }
+ 
+     /*
+@@ -787,6 +812,7 @@ static void __init calculate_hvm_max_policy(void)
+ 
+     sanitise_featureset(fs);
+     x86_cpu_featureset_to_policy(fs, p);
++    recalculate_arch_lbr(p);
+     recalculate_xstate(p);
+ 
+     /* It's always possible to emulate CPUID faulting for HVM guests */
+@@ -839,6 +865,7 @@ static void __init calculate_hvm_def_policy(void)
+     }
+ 
+     x86_cpu_featureset_to_policy(fs, p);
++    recalculate_arch_lbr(p);
+     recalculate_xstate(p);
+ }
+ 
+@@ -971,6 +998,7 @@ void recalculate_cpuid_policy(struct domain *d)
+ 
+     p->extd.maxlinaddr = p->extd.lm ? 48 : 32;
+ 
++    recalculate_arch_lbr(p);
+     recalculate_xstate(p);
+     recalculate_misc(p);
+ 
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 067d855bad..0056b55457 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -505,6 +505,13 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ 			    &c->x86_capability[FEATURESET_Da1],
+ 			    &tmp, &tmp, &tmp);
+ 
++	if (c->cpuid_level >= 0x1c)
++		cpuid(0x1c,
++		      &c->x86_capability[FEATURESET_1Ca],
++		      &c->x86_capability[FEATURESET_1Cb],
++		      &c->x86_capability[FEATURESET_1Cc],
++		      &tmp);
++
+ 	if (test_bit(X86_FEATURE_ARCH_CAPS, c->x86_capability))
+ 		rdmsr(MSR_ARCH_CAPABILITIES,
+ 		      c->x86_capability[FEATURESET_m10Al],
 -- 
 2.43.0
 
