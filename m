@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 142C8E77198
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C026E7718B
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Jan 2025 08:46:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.863729.1275089 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.863736.1275144 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTGpu-0004rf-1C; Thu, 02 Jan 2025 08:45:46 +0000
+	id 1tTGpx-0005yz-PQ; Thu, 02 Jan 2025 08:45:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 863729.1275089; Thu, 02 Jan 2025 08:45:46 +0000
+Received: by outflank-mailman (output) from mailman id 863736.1275144; Thu, 02 Jan 2025 08:45:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTGpt-0004rY-TG; Thu, 02 Jan 2025 08:45:45 +0000
-Received: by outflank-mailman (input) for mailman id 863729;
- Thu, 02 Jan 2025 08:45:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tTGpx-0005wG-Gl; Thu, 02 Jan 2025 08:45:49 +0000
+Received: by outflank-mailman (input) for mailman id 863736;
+ Thu, 02 Jan 2025 08:45:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=W3rD=T2=bounce.vates.tech=bounce-md_30504962.67765233.v1-df1be6e558d14edfa793741efcf07dff@srs-se1.protection.inumbo.net>)
- id 1tTGps-0004rF-0c
- for xen-devel@lists.xenproject.org; Thu, 02 Jan 2025 08:45:44 +0000
+ <SRS0=M3RT=T2=bounce.vates.tech=bounce-md_30504962.67765234.v1-1b49e4c8739a434284ff6632279899b6@srs-se1.protection.inumbo.net>)
+ id 1tTGpw-0004rS-U2
+ for xen-devel@lists.xenproject.org; Thu, 02 Jan 2025 08:45:48 +0000
 Received: from mail180-50.suw31.mandrillapp.com
  (mail180-50.suw31.mandrillapp.com [198.2.180.50])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f1f4674c-c8e5-11ef-a0db-8be0dac302b0;
- Thu, 02 Jan 2025 09:45:41 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f4b2d03b-c8e5-11ef-99a4-01e77a169b0f;
+ Thu, 02 Jan 2025 09:45:45 +0100 (CET)
 Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
  by mail180-50.suw31.mandrillapp.com (Mailchimp) with ESMTP id
- 4YP0fC5pWxzCf9LdN
- for <xen-devel@lists.xenproject.org>; Thu,  2 Jan 2025 08:45:39 +0000 (GMT)
+ 4YP0fD4yH2zCf9LfB
+ for <xen-devel@lists.xenproject.org>; Thu,  2 Jan 2025 08:45:40 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- df1be6e558d14edfa793741efcf07dff; Thu, 02 Jan 2025 08:45:39 +0000
+ 1b49e4c8739a434284ff6632279899b6; Thu, 02 Jan 2025 08:45:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,86 +45,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f1f4674c-c8e5-11ef-a0db-8be0dac302b0
+X-Inumbo-ID: f4b2d03b-c8e5-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1735807539; x=1736068039;
-	bh=BJl20UXfBA4BW0v81Q6NN4eicGukuW4vkuA5YVw5iK4=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=R2HyN6daFUx7f/DGci4uyqP1DGfmGBFXYvMbr7UXaGvdwtiwsTbHFHiZsr0+GOXuF
-	 A3D6aWyivUX/ukCkeRQ0FDzYPC4dgm7HP7TDgC3BLj0U1RU6tSMnItZV0xaOmrZu/Z
-	 YWcYyW8EGIDmVz3kbo7y8YsEzvDH+kZzUmT8azr+mtYNcLOLSLbO/9lZ9ELTmiXNtn
-	 tg5q8HyAr9KvN3rApou2nfV9Ao0jijvI27vuqqX0wv9MS6bAItYjpnBvPyLzZTEP4M
-	 BSXHZq5VDWkkO3dinfIfbMwjqeFvGcwKJ5q6u2r+/pZ2PjfgPB903j5GRCzh06iUQF
-	 kWIlfcmPg7IcQ==
+	s=mte1; t=1735807540; x=1736068040;
+	bh=K9neGUeA0LQSacXkzSY79Yfv3A+07pQNOtWsOKGXlJQ=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=h0fdNRxBPHbQiEHR6YhD/L52oY1Z8+TW/7f0EVeUcQWXvCqcGRN4Ok4Ht8JHopEzT
+	 TwYhcShUWIg7UnSJ8r5YZfbVIwh/WDm9NyfP7DhJIXQ8AeFn4QFkRzDgiIaJdt96jL
+	 ohVeIu9kfhKdH6BqgHxK1PntqpfeIR9MlUlWFupCdgyM+piAV7c5Y6N8okKzbpjHto
+	 0Myznh1ClDP1OUczfH5Oc/KduRpmwW1B0vc2zWqUnTgXaK76sDOcvb+Ci6tokRLPaW
+	 QctohNo7fZJ3hE0+dxmA88/6lJVHIQd1D6DmtERB6wxqoDzW/01uZKX0HBEMUCWBs2
+	 2HYRMOv58cJFg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1735807539; x=1736068039; i=ngoc-tu.dinh@vates.tech;
-	bh=BJl20UXfBA4BW0v81Q6NN4eicGukuW4vkuA5YVw5iK4=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=hEV/1FEFqKFnyK7Vu6MLCMxGqVFzDgIr9pq9Urh6J5V1TmqGYD5eipLawoj0SOstN
-	 zMso3m0sQ6O+yWz697lo+CiTrHrXGmUxXGdkrvop3jB/2BIgwrXEvjSl+DqOVBbYHI
-	 k7uWaUDxb9J1WZpn1s38hL0TsYwIYONUBW21dhfIE+cu+Z/4oD3IelqwCgbz23JMkw
-	 US36Xt4nip40aaUwDtp4VTmHVkPRbcpuxVAbYR4iUyukz1SbERhDqJQ0qqy+SMyjf8
-	 xQsQYvnQ2x72D3Pim1X+EzwWIFX2n0MkPLEhH1LcK2ABFuMeTKBJJuCkuaW7MjF3Q5
-	 zu5h9TexRgPYA==
+	t=1735807540; x=1736068040; i=ngoc-tu.dinh@vates.tech;
+	bh=K9neGUeA0LQSacXkzSY79Yfv3A+07pQNOtWsOKGXlJQ=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=09Dmq86DkHrQZ0zHCgfLTErCy0FG84uRw4+xIVYsVDeytEUkxL5JSW+y1jIsL+7lj
+	 9K3W0sRb6O4IPX9w64wktcOiJALOY62i4PrzegV6z+RMHk8CizBdtzraE+yKida7U0
+	 W5+xnFVZHcKC+oP+/T+5tdrX4UZ6L5j1+DivJk3l+iHEUcmxOtZx1q8YSP+3t5/xfp
+	 4oNkg7iVU3tvO3CW9pFKVIi9aCDSWnCZ8h4VhOCviFmQhaxbtlY+rJtAzq9T4OYxFd
+	 n3KcHTSmqz7K6u1OhTQKD1+3QApdcc0wOt8zBFUb6zL6IZpRSu87/w25ZE9qIhDsyP
+	 1P2KGUEdDCe+w==
 From: "Tu Dinh" <ngoc-tu.dinh@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=20v2=2001/10]=20x86:=20Add=20architectural=20LBR=20definitions?=
+Subject: =?utf-8?Q?[RFC=20PATCH=20v2=2000/10]=20Virtualize=20architectural=20LBRs?=
 X-Mailer: git-send-email 2.43.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1735807538677
+X-Bm-Transport-Timestamp: 1735807538103
 To: xen-devel@lists.xenproject.org
 Cc: "Tu Dinh" <ngoc-tu.dinh@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Juergen Gross" <jgross@suse.com>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Message-Id: <20250102084413.102-2-ngoc-tu.dinh@vates.tech>
-In-Reply-To: <20250102084413.102-1-ngoc-tu.dinh@vates.tech>
-References: <20250102084413.102-1-ngoc-tu.dinh@vates.tech>
+Message-Id: <20250102084413.102-1-ngoc-tu.dinh@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.df1be6e558d14edfa793741efcf07dff?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.1b49e4c8739a434284ff6632279899b6?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20250102:md
-Date: Thu, 02 Jan 2025 08:45:39 +0000
+Date: Thu, 02 Jan 2025 08:45:40 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
----
- xen/arch/x86/include/asm/msr-index.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+Intel model-specific last branch records (LBRs) were replaced by
+architectural LBRs (see Chapter 20 of Intel SDM volume 3B). This
+patchset implements virtual LBRs for HVM guests using Intel's "load
+guest IA32_LBR_CTL" and "clear IA32_LBR_CTL" VMX controls. It
+dynamically intercepts accesses to LBR state to translate between linear
+and effective IP depending on the current host CPU core type.
 
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 9cdb5b2625..97df740b04 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -112,6 +112,8 @@
- #define  MCU_OPT_CTRL_GDS_MIT_DIS           (_AC(1, ULL) <<  4)
- #define  MCU_OPT_CTRL_GDS_MIT_LOCK          (_AC(1, ULL) <<  5)
- 
-+#define MSR_LER_INFO                        0x000001e0
-+
- #define MSR_RTIT_OUTPUT_BASE                0x00000560
- #define MSR_RTIT_OUTPUT_MASK                0x00000561
- #define MSR_RTIT_CTL                        0x00000570
-@@ -193,6 +195,16 @@
- #define MSR_UARCH_MISC_CTRL                 0x00001b01
- #define  UARCH_CTRL_DOITM                   (_AC(1, ULL) <<  0)
- 
-+/* Architectural LBR state MSRs */
-+#define MSR_LBR_INFO(n)                     (0x00001200 + (n))
-+#define MSR_LBR_CTL                         0x000014ce
-+#define  LBR_CTL_VALID                      _AC(0x7f000f, ULL)
-+#define MSR_LBR_DEPTH                       0x000014cf
-+#define MSR_LBR_FROM_IP(n)                  (0x00001500 + (n))
-+#define MSR_LBR_TO_IP(n)                    (0x00001600 + (n))
-+/* Must be updated along with XSTATE LBR state size */
-+#define NUM_MSR_ARCH_LBR_FROM_TO            32
-+
- #define MSR_EFER                            _AC(0xc0000080, U) /* Extended Feature Enable Register */
- #define  EFER_SCE                           (_AC(1, ULL) <<  0) /* SYSCALL Enable */
- #define  EFER_LME                           (_AC(1, ULL) <<  8) /* Long Mode Enable */
+The v2 patchset implements LBR state support in Xen's xstate handling.
+Additionally, it adds XSAVES/XRSTORS support to the x86 emulator.
+Finally, migration is handled by adding a new HVM save code
+CPU_XSAVES_CODE containing a vCPU's compacted xstates as written by
+XSAVES.
+
+I'm looking for feedback on emulator handling of XSAVES/XRSTORS,
+especially concerning FPU bits as it's not clear to me what should be
+done in these cases.
+
+Tu Dinh (10):
+  x86: Add architectural LBR definitions
+  x86: Define arch LBR feature bits
+  tools: Add arch LBR feature bits
+  x86: Calculate arch LBR CPUID policies
+  x86: Keep a copy of XSAVE area size
+  x86: Enable XSTATE save/restore for arch LBR
+  x86/hvm: Don't count XSS bits in XSAVE size
+  x86/emulate: Implement XSAVES/XRSTORS for arch LBR
+  x86/vmx: Implement arch LBR
+  x86/hvm: Enable XSAVES LBR save/restore
+
+ tools/libs/light/libxl_cpuid.c              |   3 +
+ tools/misc/xen-cpuid.c                      |   3 +
+ tools/tests/x86_emulator/x86-emulate.h      |   2 +
+ xen/arch/x86/cpu-policy.c                   |  28 +++
+ xen/arch/x86/cpu/common.c                   |   7 +
+ xen/arch/x86/domain.c                       |   7 +
+ xen/arch/x86/hvm/emulate.c                  |  11 +
+ xen/arch/x86/hvm/hvm.c                      |  70 +++++-
+ xen/arch/x86/hvm/vmx/vmcs.c                 |  11 +-
+ xen/arch/x86/hvm/vmx/vmx.c                  | 203 +++++++++++++--
+ xen/arch/x86/include/asm/cpufeature.h       |   5 +
+ xen/arch/x86/include/asm/domain.h           |   1 +
+ xen/arch/x86/include/asm/hvm/hvm.h          |   3 +
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h     |  11 +
+ xen/arch/x86/include/asm/msr-index.h        |  12 +
+ xen/arch/x86/include/asm/msr.h              |   5 +
+ xen/arch/x86/include/asm/xstate.h           |  22 +-
+ xen/arch/x86/msr.c                          |  89 ++++++-
+ xen/arch/x86/x86_emulate/0fc7.c             | 260 ++++++++++++++------
+ xen/arch/x86/x86_emulate/blk.c              | 142 +++++++++++
+ xen/arch/x86/x86_emulate/private.h          |   8 +
+ xen/arch/x86/x86_emulate/util-xen.c         |  14 ++
+ xen/arch/x86/x86_emulate/x86_emulate.c      |  19 ++
+ xen/arch/x86/x86_emulate/x86_emulate.h      |  33 +++
+ xen/arch/x86/xstate.c                       |  83 +++++--
+ xen/include/public/arch-x86/cpufeatureset.h |  28 ++-
+ xen/include/public/arch-x86/hvm/save.h      |   4 +-
+ xen/include/xen/lib/x86/cpu-policy.h        |  51 +++-
+ xen/lib/x86/cpuid.c                         |   6 +
+ 29 files changed, 1013 insertions(+), 128 deletions(-)
+
 -- 
 2.43.0
 
