@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E802E7719F
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 01:58:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.864712.1276007 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EA48C02184
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 01:58:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.864718.1276052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtQo-0006kd-I2; Sat, 04 Jan 2025 01:58:26 +0000
+	id 1tTtQu-0007yX-2O; Sat, 04 Jan 2025 01:58:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864712.1276007; Sat, 04 Jan 2025 01:58:26 +0000
+Received: by outflank-mailman (output) from mailman id 864718.1276052; Sat, 04 Jan 2025 01:58:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtQn-0006iI-Sr; Sat, 04 Jan 2025 01:58:25 +0000
-Received: by outflank-mailman (input) for mailman id 864712;
- Sat, 04 Jan 2025 01:58:23 +0000
+	id 1tTtQt-0007vR-1e; Sat, 04 Jan 2025 01:58:31 +0000
+Received: by outflank-mailman (input) for mailman id 864718;
+ Sat, 04 Jan 2025 01:58:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AhC6=T4=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tTtQk-0005Ax-QO
- for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:22 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 1tTtQn-0005Ax-RK
+ for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:25 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5df4cd6d-ca3f-11ef-a0de-8be0dac302b0;
- Sat, 04 Jan 2025 02:58:18 +0100 (CET)
+ id 5e419805-ca3f-11ef-a0de-8be0dac302b0;
+ Sat, 04 Jan 2025 02:58:19 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 3C02AA411F0;
- Sat,  4 Jan 2025 01:56:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2BCF9C4CEDD;
- Sat,  4 Jan 2025 01:58:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 623155C625F;
+ Sat,  4 Jan 2025 01:57:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7516CC4CEE9;
+ Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 25896E7719A;
- Sat,  4 Jan 2025 01:58:16 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 6DB20E77188;
+ Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,25 +47,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5df4cd6d-ca3f-11ef-a0de-8be0dac302b0
+X-Inumbo-ID: 5e419805-ca3f-11ef-a0de-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735955896;
-	bh=2mHkPjXf6NjW+LO0bsnwT2e081y81crKinFFDfZUM/8=;
+	s=k20201202; t=1735955895;
+	bh=mGCIEroumybSgb30DA3BBd6J1k+0FYicVpy3E9PFeTI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=b6CWmi2eXFjuj3dBJUQGQi2DY7mfzc2/rU/a5xqRt0c1R2D80+nzRD06J9oxLgaph
-	 fb20RRMaWbnKCm+6gMinN79bcDsQ2RteEJmXcDS0oehGj6G50iWSsFypAlBqnHYUeF
-	 ApZBfLLD8uDKdB2evAiGjWcfeWPBY6XRP2lTBPivxGMEcijxN/MUone536Dp6pb0Ir
-	 /43eUjBlMg/Dc/GA6Wy6UmByKg0YvnnRglOizjUOhi5b7CZqLY9ooyV7vPmPM8n077
-	 tamcnloB59wF4hNhiu17UeeST4W7OuSO+/VhoNJKtFt9zVMVhJdVz7DKTZc3B4N9fm
-	 S6GtCSn6tx2mA==
+	b=ctBvz2h2HiFmbfQEBBl/oM8bOYWI3JupZjsJ8yg3yzx4HrpURZoMLCGmL0HErBCEj
+	 l/d8+CrJq4eoYsqUdldJQzyD5QfTht0Fu1VaTOVzoio0+LvKNh5ykkK+sANJ1m2lgO
+	 akmQejRoJASXz5PxdQbDgGKBnLxXTtMTHQqCiy45Avo/5lBnEK0pDmA3Hl66bZi4v/
+	 gCA4tkbcFEISStiJi+VETTv9b8yD1DNIjEeG7C5c3DEl5XJ0pfB9AbpeF+OdCrVCCG
+	 SZld4vH5YGZWA8dSZnR0O8M2eHJGaeBuUYDnYSx+Pgn2QX4jY0ixsXlrzoBTsNsoy2
+	 ygICIRleHsEhQ==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Fri, 03 Jan 2025 17:58:30 -0800
-Subject: [PATCH v3 24/24] xen/console: unify printout behavior for UART
- emulators
+Date: Fri, 03 Jan 2025 17:58:19 -0800
+Subject: [PATCH v3 13/24] xen/console: introduce hwdom_crashconsole=
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250103-vuart-ns8250-v3-v1-24-c5d36b31d66c@ford.com>
+Message-Id: <20250103-vuart-ns8250-v3-v1-13-c5d36b31d66c@ford.com>
 References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 In-Reply-To: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -76,11 +75,11 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
  =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=6584;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=4542;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=ht6Wazj1keo9tj+WEpSpwlWS9w1mUW+HbPE+9o8P0XA=;
- b=a9v2A+pEGC73S64duP7Evt85PvPWNZaAkUU7eN+j8YqqbMH0bZXfZJ28pMx0ePRJsPx1uTi6w
- Bw2REOs04J5AizYVsUfSAOcGa9KX2lR3rudN3+aJ/KzFXDA+5IQITHi
+ bh=o12/OmA+RZtrOIYv5yea9Nc3i1rLnoZ0MtCOdADxSJE=;
+ b=laDqlcBt7fXWKuNapo74tNzV0R3dtuySyU/fhDACTJj1HAdDb8hOd7TOnz2417TA0/aAgePzE
+ m0fCgZPTNWVByduJodUh8Sxjnn3YP8OAQ5WwPrZV3Nq4hI/A+AC6YeP
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -90,160 +89,118 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-If virtual UART prints on the physical console, the behavior is updated to:
-- no prefix for Dom0 output;
-- DOM$NUM for DomUs when not in focus, otherwise no prefix.
+The new command line switch `hwdom_crashconsole=BOOL` allows to switch serial
+console input focus to xen for machine state inspection using keyhandler
+mechanism after the hardware domain crashes.
 
-Introduce printk_noprefix() for convenient printouts which skip '(XEN)'
-prefix on the physical console. This is needed for the case when physical
-console is owned by a domain with in-hypervisor UART emulation enabled.
+The new command line switch is aliased via `dom0=...,crashconsole` knob.
 
-Add printk_noprefix() to exception into ECLAIR deviations list for
-rule MC3A2.R17.1.
-
-Use guest_printk() in all current in-hypervisor UART emulators. That aligns
-behavior with debug I/O port 0xe9 handler in x86 port and slightly improves the
-logging since guest_printk() already prints the domain ID.
+Such functionality can be useful while debugging dom0 bringup.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- automation/eclair_analysis/ECLAIR/deviations.ecl | 1 +
- xen/arch/arm/vpl011.c                            | 6 +++---
- xen/arch/arm/vuart.c                             | 8 +++++++-
- xen/arch/x86/hvm/vuart-ns16550.c                 | 7 +++++--
- xen/drivers/char/console.c                       | 8 ++++++++
- xen/include/xen/lib.h                            | 3 +++
- 6 files changed, 27 insertions(+), 6 deletions(-)
+ docs/misc/xen-command-line.pandoc | 14 ++++++++++++++
+ xen/arch/x86/dom0_build.c         |  2 ++
+ xen/common/domain.c               | 14 +++++++++++++-
+ xen/include/xen/domain.h          |  1 +
+ 4 files changed, 30 insertions(+), 1 deletion(-)
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index ae25eeb76ac938588d16c9b4f9f116ddcaf97956..d94a8bc59d0b562cc285bb236dbac41a151042ac 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -523,6 +523,7 @@ safe."
- -config=MC3A2.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(panic)&&kind(function))))"}
- -config=MC3A2.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(elf_call_log_callback)&&kind(function))))"}
- -config=MC3A2.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(vprintk_common)&&kind(function))))"}
-+-config=MC3A2.R17.1,reports+={deliberate,"any_area(^.*va_list.*$&&context(ancestor_or_self(name(printk_noprefix)&&kind(function))))"}
- -config=MC3A2.R17.1,macros+={hide , "^va_(arg|start|copy|end)$"}
- -doc_end
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 08b0053f9ced7a5c44318a3414f927c31fe4c876..1a5ee3c91c5cc8bf653e5054211035b5d1bd560f 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -822,6 +822,7 @@ Specify the bit width of the DMA heap.
  
-diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
-index efe77c13007716d0e0d70ab5ccf5f94268d5b693..ab85893174e76c5ec4350931a030760c9e0331b0 100644
---- a/xen/arch/arm/vpl011.c
-+++ b/xen/arch/arm/vpl011.c
-@@ -89,7 +89,7 @@ static void vpl011_write_data_xen(struct domain *d, uint8_t data)
-     {
-         if ( intf->out_prod == 1 )
-         {
--            printk("%c", data);
-+            printk_noprefix("%c", data);
-             intf->out_prod = 0;
-         }
-         else
-@@ -97,7 +97,7 @@ static void vpl011_write_data_xen(struct domain *d, uint8_t data)
-             if ( data != '\n' )
-                 intf->out[intf->out_prod++] = '\n';
-             intf->out[intf->out_prod++] = '\0';
--            printk("%s", intf->out);
-+            printk_noprefix("%s", intf->out);
-             intf->out_prod = 0;
-         }
-     }
-@@ -109,7 +109,7 @@ static void vpl011_write_data_xen(struct domain *d, uint8_t data)
-             if ( data != '\n' )
-                 intf->out[intf->out_prod++] = '\n';
-             intf->out[intf->out_prod++] = '\0';
--            printk("DOM%u: %s", d->domain_id, intf->out);
-+            guest_printk(d, "%s", intf->out);
-             intf->out_prod = 0;
-         }
-     }
-diff --git a/xen/arch/arm/vuart.c b/xen/arch/arm/vuart.c
-index 03366da17a604502f6e0afb45e8824c9d7cfa3dd..0e0fba344b68760463e894dc43133121bccbd960 100644
---- a/xen/arch/arm/vuart.c
-+++ b/xen/arch/arm/vuart.c
-@@ -31,6 +31,7 @@
- #include <xen/serial.h>
- #include <asm/mmio.h>
- #include <xen/perfc.h>
-+#include <xen/console.h>
+ ### dom0
+     = List of [ pv | pvh, shadow=<bool>, verbose=<bool>,
++                crashconsole=<bool>,
+                 cpuid-faulting=<bool>, msr-relaxed=<bool> ] (x86)
  
- #include "vuart.h"
+     = List of [ sve=<integer> ] (Arm64)
+@@ -855,6 +856,10 @@ Controls for how dom0 is constructed on x86 systems.
+     information during the dom0 build.  It defaults to the compile time choice
+     of `CONFIG_VERBOSE_DEBUG`.
  
-@@ -87,7 +88,12 @@ static void hwdom_vuart_print_char(struct vcpu *v, char c)
-         if ( c != '\n' )
-             uart->buf[uart->idx++] = '\n';
-         uart->buf[uart->idx] = '\0';
--        printk(XENLOG_G_DEBUG "DOM%u: %s", d->domain_id, uart->buf);
++*   The `crashconsole` boolean instructs Xen to switch input console focus to
++    the hypervisor when dom0 shuts down and avoid performing dom0 domain
++    destruction.  Should only be used for debugging purposes.
 +
-+        if ( d->domain_id == console_get_owner() )
-+            printk_noprefix("%s", uart->buf);
+ *   The `cpuid-faulting` boolean is an interim option, is only applicable to
+     PV dom0, and defaults to true.
+ 
+@@ -1491,6 +1496,15 @@ Specify whether guests are to be given access to physical port 80
+ (often used for debugging purposes), to override the DMI based
+ detection of systems known to misbehave upon accesses to that port.
+ 
++### hwdom_crashconsole
++> `= <boolean>`
++
++> Default: `false`
++
++The `hwdom_crashconsole` boolean instructs Xen to switch input console focus to
++the hypervisor when dom0 shuts down and avoid performing dom0 domain
++destruction.  Should only be used for debugging purposes.
++
+ ### idle_latency_factor (x86)
+ > `= <integer>`
+ 
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index e8f5bf5447bc47a6daa3d95787106a4c11e80d31..706aeec0ecbb565a415edbfb33ca2fd72967c560 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -286,6 +286,8 @@ int __init parse_arch_dom0_param(const char *s, const char *e)
+         opt_dom0_cpuid_faulting = val;
+     else if ( (val = parse_boolean("msr-relaxed", s, e)) >= 0 )
+         opt_dom0_msr_relaxed = val;
++    else if ( (val = parse_boolean("crashconsole", s, e)) >= 0 )
++        opt_hwdom_crashconsole = !!val;
+     else
+         return -EINVAL;
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 61e0890052eb0c7ff7c19cc2fbdbfb9af512a545..1063463789224818017f7c893312e819acc0714c 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -59,6 +59,13 @@ unsigned int xen_processor_pmbits = XEN_PROCESSOR_PM_PX;
+ bool opt_dom0_vcpus_pin;
+ boolean_param("dom0_vcpus_pin", opt_dom0_vcpus_pin);
+ 
++/*
++ * Hardware domain crash handler: if true, do not halt machine, but switch to
++ * Xen console for debugging.
++ */
++bool __ro_after_init opt_hwdom_crashconsole;
++boolean_param("hwdom_crashconsole", opt_hwdom_crashconsole);
++
+ /* Protect updates/reads (resp.) of domain_list and domain_hash. */
+ DEFINE_SPINLOCK(domlist_update_lock);
+ DEFINE_RCU_READ_LOCK(domlist_read_lock);
+@@ -1162,7 +1169,12 @@ int domain_shutdown(struct domain *d, u8 reason)
+     reason = d->shutdown_code;
+ 
+     if ( is_hardware_domain(d) )
+-        hwdom_shutdown(reason);
++    {
++        if ( opt_hwdom_crashconsole )
++            console_set_owner(DOMID_XEN);
 +        else
-+            guest_printk(d, "%s", uart->buf);
-+
-         uart->idx = 0;
-     }
-     spin_unlock(&uart->lock);
-diff --git a/xen/arch/x86/hvm/vuart-ns16550.c b/xen/arch/x86/hvm/vuart-ns16550.c
-index d0c19f53399bd8241f54d2fe2716e62046b8e59d..67cc7e9acc396a2f4346aebeef85d4b96c0d0e3f 100644
---- a/xen/arch/x86/hvm/vuart-ns16550.c
-+++ b/xen/arch/x86/hvm/vuart-ns16550.c
-@@ -35,6 +35,7 @@
- #include <asm/setup.h>   /* max_init_domid */
- #include <public/io/console.h>
- #include <xen/8250-uart.h>
-+#include <xen/console.h>
- #include <xen/ctype.h>
- #include <xen/ioreq.h>
- #include <xen/resource.h>
-@@ -899,10 +900,12 @@ static int cf_check ns16550_putchar(struct domain *d, char ch)
-         regs[UART_LSR] |= UART_LSR_DR | val;
++            hwdom_shutdown(reason);
++    }
  
-         /*
--         * Echo the user input on Xen console.
-+         * Echo the user input on Xen console iff Xen console input is owned
-+         * by NS16550 domain.
-          * NB: use 'console_timestamps=none' to disable Xen timestamps.
-          */
--        printk("%c", ch);
-+        if ( d->domain_id == console_get_owner() )
-+            printk_noprefix("%c", ch);
+     if ( d->is_shutting_down )
+     {
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index eef36bafd3574c97d2f1f5c1fc93b4b7b46b78ba..1edebdce3754861244f23f6b884dd07d63958881 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -154,6 +154,7 @@ extern unsigned int xen_processor_pmbits;
+ extern bool opt_dom0_vcpus_pin;
+ extern cpumask_t dom0_cpus;
+ extern bool dom0_affinity_relaxed;
++extern bool opt_hwdom_crashconsole;
  
-         /* FIXME: check FCR when to fire an interrupt */
-         ns16550_irq_check(vdev);
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 96375067164980a138b1a93161712c0758f4f7fe..64abde479305910d1a962e68d5c1f0c25000cb3d 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -1026,6 +1026,14 @@ void printk(const char *fmt, ...)
-     va_end(args);
- }
- 
-+void printk_noprefix(const char *fmt, ...)
-+{
-+    va_list args;
-+    va_start(args, fmt);
-+    vprintk_common("", fmt, args);
-+    va_end(args);
-+}
-+
- void guest_printk(const struct domain *d, const char *fmt, ...)
- {
-     va_list args;
-diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-index 81b722ea3e801e9089aaf8758249feb3a758c4f7..e55b8fac8d4d121262a56948638d83f1146e5a06 100644
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -61,6 +61,9 @@ debugtrace_printk(const char *fmt, ...) {}
- extern void printk(const char *fmt, ...)
-     __attribute__ ((format (printf, 1, 2), cold));
- 
-+extern void printk_noprefix(const char *fmt, ...)
-+    __attribute__ ((format (printf, 1, 2), cold));
-+
- #define printk_once(fmt, args...)               \
- ({                                              \
-     static bool __read_mostly once_;            \
+ /* vnuma topology per domain. */
+ struct vnuma_info {
 
 -- 
 2.34.1
