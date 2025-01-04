@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0961BE77198
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 02:00:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.864803.1276123 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B019DE77188
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 02:00:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.864838.1276139 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtSq-0008Lw-Qa; Sat, 04 Jan 2025 02:00:32 +0000
+	id 1tTtT9-0001Xg-7S; Sat, 04 Jan 2025 02:00:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864803.1276123; Sat, 04 Jan 2025 02:00:32 +0000
+Received: by outflank-mailman (output) from mailman id 864838.1276139; Sat, 04 Jan 2025 02:00:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtSq-0008Kq-Mo; Sat, 04 Jan 2025 02:00:32 +0000
-Received: by outflank-mailman (input) for mailman id 864803;
- Sat, 04 Jan 2025 02:00:31 +0000
+	id 1tTtT9-0001WW-1R; Sat, 04 Jan 2025 02:00:51 +0000
+Received: by outflank-mailman (input) for mailman id 864838;
+ Sat, 04 Jan 2025 02:00:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AhC6=T4=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tTtQq-0005Ax-Rr
- for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:28 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 1tTtQs-0005Ax-Sa
+ for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:30 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5ecc83d6-ca3f-11ef-a0de-8be0dac302b0;
+ id 5e44473d-ca3f-11ef-a0de-8be0dac302b0;
  Sat, 04 Jan 2025 02:58:19 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id EF89D5C63FD;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 770E95C62A5;
  Sat,  4 Jan 2025 01:57:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 10C16C4CEDF;
- Sat,  4 Jan 2025 01:58:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8C669C4CEE4;
+ Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0A1DEE77198;
- Sat,  4 Jan 2025 01:58:16 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 86F8EE7719A;
+ Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,24 +48,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ecc83d6-ca3f-11ef-a0de-8be0dac302b0
+X-Inumbo-ID: 5e44473d-ca3f-11ef-a0de-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735955896;
-	bh=QazlpyV6psPVJxq90As+1tifoHdIpFVbG/2MHr8OLBw=;
+	s=k20201202; t=1735955895;
+	bh=Xgs2bv4JXXqvUy90eTrxGWRi5qSOMQjEKlvhtNuvWD0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=rrUY+R9cOymfLlpHjaW/5WWuCxfD+kpXYC19m42ZvsRMQZ2tbFy+4fYSjh5nSqOnF
-	 MDzhLmOF4r2vJ7RDUNmGK6VtIPT/hg4KdPr88fIMBe856PpMni/SavUUC54S3nkJBs
-	 97FS/wNUVRx2tgQ1vGcEYa94L/MBlToRq/UBPie/kp0o1+MbhbziOfNzyw/ZGh1nbt
-	 JOYbyxh1Nd4J0vJdOyqnbN4DXALfEvFVeNk5zmBuE1GQ78H1amMI58APMUcbsvA9i3
-	 L3BTJnHJ51Kt69qXsCFuWptoqB+r5EH9bPDjgq+9kesmPxxoW1k1JLeYnILzGBHpNH
-	 msPk4KNQTq6Yw==
+	b=gKVBWj1Q+WmEWJaWD7QxNZIudKk6SS4SvjEWEBLSsydcYHDXbuq+CkgIWhkKkYsyc
+	 7WeIyRELjzVkDHwj15LTI350khFx9qlnLOokWC84cM6HB5z5hVOChWSsnWQW6Ji1Ir
+	 omJTU6H1Egx9q8641wHVq8dtX6X3z/bqXX8gIPZ73a+bt0DlaDUYL99K+0zTNG8WF8
+	 ZZ/YumZ5NXWnlnJMUIpNiPmFSAjZY35bI0zSNc1CgLXSUhXUYfgPAhsolJSqtsg4w/
+	 gep+XQ6Eqs4vcfxNMlaCHFenrwxgjOfTQ6Aho0t3aG/hbiBIl5c7+f6DJClIUBcNXW
+	 4pthH1KzgUtEg==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Fri, 03 Jan 2025 17:58:28 -0800
-Subject: [PATCH v3 22/24] x86/hvm: enable NS16550-compatible UART emulator
+Date: Fri, 03 Jan 2025 17:58:21 -0800
+Subject: [PATCH v3 15/24] xen/console: make console buffer size
+ configurable
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250103-vuart-ns8250-v3-v1-22-c5d36b31d66c@ford.com>
+Message-Id: <20250103-vuart-ns8250-v3-v1-15-c5d36b31d66c@ford.com>
 References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 In-Reply-To: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -75,11 +77,11 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
  =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=5808;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=3361;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=oTdotR5rgkOxF28AQvVxnepnVm1tE7cePzIJQgwAwTE=;
- b=++NBrOXcXTVJ8AvbN0dFDKCaPX+KTiZWc6kqg1YW8cHeVU5lsUi46ifTL7rphNL0TvW1CYQXH
- XrobXLlc2ALALwgiWl1M0BltoYkrxIKgEelLgp8WFdBQIdlCQDKzw1V
+ bh=Q9U/5BpyrJDws6KsGm2DI3/vHtnpVBTCL+jo+AixI4I=;
+ b=hMkW/p8d9e8YlW1EjCatE/+J+TNOaD3M7w+4q9v/uuzLx8LRbhrHqNYhHbNPSDhfpAOt9c3kG
+ jcKW3DW1vu0Cbj1R7uk77E9E7hi4M5hw7d3a21DBA5Atm3hRvg/QUs8
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -89,139 +91,89 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Introduce new emulation flag for virtual UART on x86 and plumb it through
-domain creation code so NS16550 emulator is enabled properly.
+Add new CONRING_SIZE Kconfig parameter to specify the boot console buffer size
+in bytes. The value is rounded to the nearest power of 2 to match existing
+conring_size= behavior.
 
-Virtual UART facility is enabled for HVM domains only. Enabling it for PVH
-domains requires some work, as vPIC is not enabled in PVH.
+The supported range is [16KiB..128MiB].
 
-Also, since feature is currently for debugging only, vUART facility is
-controlled build-time only and globally for all HVM domains.
+Bump default size to 32 KiB.
 
-The toolstack cannot configure virtual UART yet.
-
+Link: https://gitlab.com/xen-project/xen/-/issues/185
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
-In PVH case, vUART asserts on vpic_irq_positive_edge() call while firing a
-virtual IRQ to the guest OS:
-[[
-...
-Assertion 'has_vpic(d)' failed at arch/x86/hvm/vpic.c:525
-(XEN) [   28.984923] ----[ Xen-4.20-unstable  x86_64  debug=y  Not tainted ]----
-(XEN) [   28.984925] CPU:    3
-(XEN) [   28.984926] RIP:    e008:[<ffff82d0402d201a>] vpic_irq_positive_edge+0x98/0xc0
-...
-]]
----
----
- tools/ocaml/libs/xc/xenctrl.ml    |  1 +
- tools/ocaml/libs/xc/xenctrl.mli   |  1 +
- xen/arch/x86/domain.c             | 10 ++++++++++
- xen/arch/x86/include/asm/domain.h |  5 +++--
- xen/include/public/virtdev.h      |  6 ++++--
- 5 files changed, 19 insertions(+), 4 deletions(-)
+ docs/misc/xen-command-line.pandoc |  7 +++++--
+ xen/drivers/char/Kconfig          | 11 +++++++++++
+ xen/drivers/char/console.c        |  9 ++++++---
+ 3 files changed, 22 insertions(+), 5 deletions(-)
 
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index 2690f9a92316b812ad3d3ff0e1c36823070adb4a..647239b3e55e88b00eb8e9773a5267894cbbae54 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -47,6 +47,7 @@ type x86_arch_emulation_flags =
-   | X86_EMU_PIT
-   | X86_EMU_USE_PIRQ
-   | X86_EMU_VPCI
-+  | X86_EMU_VUART
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 1a5ee3c91c5cc8bf653e5054211035b5d1bd560f..aeaee482f61aab41438a44eda470902e1e0806f8 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -423,12 +423,15 @@ The following are examples of correct specifications:
+     com1=baud=115200,parity=n,stop-bits=1,io-base=0x3f8,reg-width=4
  
- type x86_arch_misc_flags =
-   | X86_MSR_RELAXED
-diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index febbe1f6ae3f10c5abe45eaa3c06a8a67d9ba268..4f5f64c786e83e8a0c3dd3cdb0460f7095de4a62 100644
---- a/tools/ocaml/libs/xc/xenctrl.mli
-+++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -41,6 +41,7 @@ type x86_arch_emulation_flags =
-   | X86_EMU_PIT
-   | X86_EMU_USE_PIRQ
-   | X86_EMU_VPCI
-+  | X86_EMU_VUART
+ ### conring_size
+-> `= <size>`
++> `= <size-in-bytes>`
  
- type x86_arch_misc_flags =
-   | X86_MSR_RELAXED
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 9669886ac95cbee27c9eb72b16386705b470e7b1..c1b15ddf664269ba63d0bcd8a974491a4ab3524f 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -752,6 +752,10 @@ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
-         if ( is_hardware_domain(d) &&
-              emflags != (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) )
-             return false;
+-> Default: `conring_size=16k`
++> Default: `conring_size=32k`
+ 
+ Specify the size of the console ring buffer.
+ 
++The console ring buffer size can be selected at build time via
++CONFIG_CONRING_SIZE.
 +
-+        /* FIXME: remove once virtual UART is configurable via xl */
-+        emflags &= ~XEN_X86_EMU_VUART;
+ ### console
+ > `= List of [ vga | com1[H,L] | com2[H,L] | pv | dbgp | ehci | xhci | none ]`
+ 
+diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+index e6e12bb4139717f9319031f51f5d20155d2caee2..f7e193e29e2d9ac7c1b878e13f3fb1ce444f31b5 100644
+--- a/xen/drivers/char/Kconfig
++++ b/xen/drivers/char/Kconfig
+@@ -96,6 +96,17 @@ config SERIAL_TX_BUFSIZE
+ 
+ 	  Default value is 32768 (32KiB).
+ 
++config CONRING_SIZE
++	int "Console buffer size"
++	default 32768
++	help
++	  Select the boot console buffer size (in bytes).
++	  Note, the value provided will be rounded down to the nearest power of 2.
++	  Run-time console buffer size is the same as the boot console size,
++	  unless enforced via 'conring_size=' boot parameter.
 +
-         if ( !is_hardware_domain(d) &&
-              xen_emflags_allowable(emflags) != XEN_X86_EMU_BASELINE &&
-              emflags != X86_EMU_LAPIC )
-@@ -804,6 +808,12 @@ int arch_domain_create(struct domain *d,
- 
-     emflags = config->arch.emulation_flags;
- 
-+    /* FIXME: enable virtual UART for all HVMs; must be configurable via xl */
-+    if ( IS_ENABLED(CONFIG_HAS_VUART) && is_hvm_domain(d) )
-+        emflags |= XEN_X86_EMU_VUART;
-+    else
-+        emflags &= ~XEN_X86_EMU_VUART;
++	  Default value is 32768 (32KiB). The supported range is [16KiB..128MiB].
 +
-     if ( is_hardware_domain(d) && is_pv_domain(d) )
-         emflags |= XEN_X86_EMU_PIT;
+ config XHCI
+ 	bool "XHCI DbC UART driver"
+ 	depends on X86
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 1308236403df8a0f87aeb7e2c00a036c2d8433a7..a33132b8fad95a1ad7e0aab4aef3fa3e46a5c03a 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -100,12 +100,15 @@ static int cf_check parse_console_timestamps(const char *s);
+ custom_runtime_param("console_timestamps", parse_console_timestamps,
+                      con_timestamp_mode_upd);
  
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 2532616bca015d0aad9abc35e14948937ab39b8f..53d14881d94f888e72f7443159c1c278d15d05cb 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -485,7 +485,8 @@ struct arch_domain
- #define X86_EMU_VPCI     0
- #endif
+-/* conring_size: allows a large console ring than default (16kB). */
++/* conring_size: allows a large console ring than default (32 KiB). */
+ static uint32_t __initdata opt_conring_size;
+ size_param("conring_size", opt_conring_size);
  
--#define X86_EMU_PIT     XEN_X86_EMU_PIT
-+#define X86_EMU_PIT      XEN_X86_EMU_PIT
-+#define X86_EMU_VUART    XEN_X86_EMU_VUART
- 
- /* This must match XEN_X86_EMU_ALL in xen.h */
- #define X86_EMU_ALL             (X86_EMU_LAPIC | X86_EMU_HPET |         \
-@@ -493,7 +494,7 @@ struct arch_domain
-                                  X86_EMU_IOAPIC | X86_EMU_PIC |         \
-                                  X86_EMU_VGA | X86_EMU_IOMMU |          \
-                                  X86_EMU_PIT | X86_EMU_USE_PIRQ |       \
--                                 X86_EMU_VPCI)
-+                                 X86_EMU_VPCI | X86_EMU_VUART)
- 
- #define has_vlapic(d)      (!!((d)->arch.emulation_flags & X86_EMU_LAPIC))
- #define has_vhpet(d)       (!!((d)->arch.emulation_flags & X86_EMU_HPET))
-diff --git a/xen/include/public/virtdev.h b/xen/include/public/virtdev.h
-index 36931e0d679cedadd4212f34142d7c3f00cd3389..bcc71b519310e58d6094fadded14a3e0ee6bfd7e 100644
---- a/xen/include/public/virtdev.h
-+++ b/xen/include/public/virtdev.h
-@@ -32,17 +32,19 @@ enum {
- #define XEN_X86_EMU_PIT             VIRTDEV_PIT
- #define XEN_X86_EMU_USE_PIRQ        VIRTDEV_PIRQ
- #define XEN_X86_EMU_VPCI            VIRTDEV_PCI
-+#define XEN_X86_EMU_VUART           VIRTDEV_UART
- 
- #define XEN_X86_EMU_ALL             (XEN_X86_EMU_LAPIC | XEN_X86_EMU_HPET |  \
-                                      XEN_X86_EMU_PM | XEN_X86_EMU_RTC |      \
-                                      XEN_X86_EMU_IOAPIC | XEN_X86_EMU_PIC |  \
-                                      XEN_X86_EMU_VGA | XEN_X86_EMU_IOMMU |   \
-                                      XEN_X86_EMU_PIT | XEN_X86_EMU_USE_PIRQ |\
--                                     XEN_X86_EMU_VPCI)
-+                                     XEN_X86_EMU_VPCI | XEN_X86_EMU_VUART)
- 
- /* PIRQ (HVM) feature is user-selectable (libxl). */
- #define XEN_X86_EMU_OPTIONAL        (XEN_X86_EMU_VPCI | \
--                                     XEN_X86_EMU_USE_PIRQ)
-+                                     XEN_X86_EMU_USE_PIRQ | \
-+                                     XEN_X86_EMU_VUART)
- 
- #define XEN_X86_EMU_BASELINE        xen_emflags_allowable(XEN_X86_EMU_ALL)
- 
+-#define _CONRING_SIZE 16384
+-#define CONRING_IDX_MASK(i) ((i)&(conring_size-1))
++#define _CONRING_SIZE       (1UL << (31 - __builtin_clz(CONFIG_CONRING_SIZE)))
++_Static_assert(_CONRING_SIZE >= 4096 && _CONRING_SIZE <= MB(128),
++    "CONFIG_CONRING_SIZE must be in [4K..128M] range");
++
++#define CONRING_IDX_MASK(i) ( (i) & (conring_size - 1) )
+ static char __initdata _conring[_CONRING_SIZE];
+ static char *__read_mostly conring = _conring;
+ static uint32_t __read_mostly conring_size = _CONRING_SIZE;
 
 -- 
 2.34.1
