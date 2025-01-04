@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D697EE77199
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 02:00:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.864845.1276149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB520E77188
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 02:01:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.864878.1276158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtTA-0001ts-Er; Sat, 04 Jan 2025 02:00:52 +0000
+	id 1tTtTL-0002vV-UQ; Sat, 04 Jan 2025 02:01:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864845.1276149; Sat, 04 Jan 2025 02:00:52 +0000
+Received: by outflank-mailman (output) from mailman id 864878.1276158; Sat, 04 Jan 2025 02:01:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtTA-0001sW-9q; Sat, 04 Jan 2025 02:00:52 +0000
-Received: by outflank-mailman (input) for mailman id 864845;
- Sat, 04 Jan 2025 02:00:51 +0000
+	id 1tTtTL-0002vL-QM; Sat, 04 Jan 2025 02:01:03 +0000
+Received: by outflank-mailman (input) for mailman id 864878;
+ Sat, 04 Jan 2025 02:01:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AhC6=T4=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tTtQr-0005Ax-SB
- for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:29 +0000
+ id 1tTtQu-0005Ax-T7
+ for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:32 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org
  [2604:1380:4641:c500::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5e0b4e27-ca3f-11ef-a0de-8be0dac302b0;
- Sat, 04 Jan 2025 02:58:19 +0100 (CET)
+ id 5ee09da4-ca3f-11ef-a0de-8be0dac302b0;
+ Sat, 04 Jan 2025 02:58:20 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 477C45C61FB;
- Sat,  4 Jan 2025 01:57:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5750FC4CEE7;
- Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0898E5C6411;
+ Sat,  4 Jan 2025 01:57:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1E314C4CEE4;
+ Sat,  4 Jan 2025 01:58:16 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 525B5E7719A;
- Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 16F74E77188;
+ Sat,  4 Jan 2025 01:58:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,25 +48,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e0b4e27-ca3f-11ef-a0de-8be0dac302b0
+X-Inumbo-ID: 5ee09da4-ca3f-11ef-a0de-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735955895;
-	bh=0RiCLC0xOzoXE8zM6GuJsL0mR/n/aR+zKy5BKY4AmRI=;
+	s=k20201202; t=1735955896;
+	bh=C4I0w8+5EC1wc6Fr7dK8Qf/iMDwJkx3ZOmN4HyH2Ud0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Cc+SrVU8OiRGBxa/MQxYepNdpwn1YwuBa8DTaKdhhiesGN00s8ObKq73IJpqjMV+q
-	 NqC+aGc0snCvnnlXnutTjAjzUEKx/xSEkpqDlKS3PdI5Sn40BUE4DRTorkB5BJMpv/
-	 KzQuWptl2wNWjsOz2vIfRESQUKIt1sf3nXyqyztc8RVwZ0w1tnsa5M4OgY2U1wRiRw
-	 wDbCwZPFnD1xla36YaMWcRekbujrSHyQKy6pK8lk//fdBuyki2ScSBciBDH8/uhoXb
-	 FzOt7PwJLnG/7uoF1Ssb880YEFHIrYiStrgPDMaeainhDywtTs8EO00YlX1o6akHIh
-	 6sjiHFj4lOdJg==
+	b=QJCbct/KweF+9rRQW1qw0dCoTySabWk30VD93NOmGRcJwjxOs/qU3zDrrI5flFa8Y
+	 Mz1yRRiByk6k8UEepfCk2mtYwrCdkTBl/+XWqMulhJJG1SRjz/JE1xZo6t40bg6ieS
+	 H/Kq+OVSlY1B/Kx579lbK2SNFu/1KVUVpYe6DePm4lgkx3xbsGXs1I8+ywepXNJ3L1
+	 9k9EDZ4sTu/+x/vpKaw/UW2jpGC4krcycctf/ZEXwqzqK/pSbWGsgz/YGuc8DMYx6v
+	 efXgKkn7P0Onq9JciB8/ijAsIs6rLSTGIprOCKN+JG0eMN7BkVvUNFhnzSnKdwdOy6
+	 H9p+9Z/fl0m+g==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Fri, 03 Jan 2025 17:58:17 -0800
-Subject: [PATCH v3 11/24] xen/domain: move get_initial_domain_id() to
- arch-independent header
+Date: Fri, 03 Jan 2025 17:58:29 -0800
+Subject: [PATCH v3 23/24] docs/misc: update console documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250103-vuart-ns8250-v3-v1-11-c5d36b31d66c@ford.com>
+Message-Id: <20250103-vuart-ns8250-v3-v1-23-c5d36b31d66c@ford.com>
 References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 In-Reply-To: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -77,11 +76,11 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
  =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=10763;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=5686;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=KSx1P0KAHxW1DtHrVs4w4BNN0t0xYk4+xwM0DZycLC0=;
- b=XY8kJ57Z4bAPPueW7p5ElCjXAaQkou+MZAejExcnaHDRFAST3sVyhGy8HHUaFQ/I3HOrYvOr9
- kG+gPZ8+uGPBzexLC9uHJVRrvnzrJyKzRcZMyLj3faeCcwACnOdKPfS
+ bh=APQcmog0xQYM3EBoFVE5ETu0ersksioDS4x/FBTt9bk=;
+ b=oqKShhLqX/avc2rWyyCrDQH9JFfddXKvzHL7pbNhO2CYyq/vCCa+kigFa1VIsi9tjZPicHGI0
+ qLaOcxQIb1yCMyyC3wkHVL1ZUfcbYFYPKIe6Rd7bLRYo4ErAcm2Phtz
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -91,293 +90,108 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Honor 'hardware_domid=' parameter across all architectures and update
-max_init_domid correctly so that toolstack and, subsequently, console driver
-could iterate across known domains more efficiently.
+Minor update related to virtual UART support.
 
-Also, move max_init_domid to arch-independent location.
+Also:
+ s/pv/PV/g
+ s/hvm/HVM/g
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/arm/dom0less-build.c      |  6 +++---
- xen/arch/arm/domain_build.c        |  7 ++++---
- xen/arch/arm/include/asm/setup.h   |  2 --
- xen/arch/arm/setup.c               |  2 --
- xen/arch/ppc/include/asm/setup.h   |  2 --
- xen/arch/riscv/include/asm/setup.h |  2 --
- xen/arch/x86/include/asm/pv/shim.h |  5 +++--
- xen/arch/x86/include/asm/setup.h   |  2 --
- xen/arch/x86/pv/shim.c             |  5 +----
- xen/common/domain.c                | 15 +++++++++++++++
- xen/common/domctl.c                | 11 +++++------
- xen/common/kernel.c                |  8 ++++++++
- xen/include/xen/domain.h           |  4 ++++
- 13 files changed, 43 insertions(+), 28 deletions(-)
+ docs/misc/console.txt | 50 ++++++++++++++++++++++++++------------------------
+ 1 file changed, 26 insertions(+), 24 deletions(-)
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index 818e693222059a5e99a44831be62644ac442392b..b0c6c0b5c7762439dc74025333be092687c191e5 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -971,9 +971,9 @@ void __init create_domUs(void)
-             panic("'llc-colors' found, but LLC coloring is disabled\n");
+diff --git a/docs/misc/console.txt b/docs/misc/console.txt
+index 4e180f88ba1312d8fcc47d27622ec347d387ce12..7840729b0c95d9c4ea5295f17ce77c04177f48a5 100644
+--- a/docs/misc/console.txt
++++ b/docs/misc/console.txt
+@@ -4,11 +4,11 @@ Xen PV Console notes
+                                         stefano.stabellini@eu.citrix.com
  
-         /*
--         * The variable max_init_domid is initialized with zero, so here it's
--         * very important to use the pre-increment operator to call
--         * domain_create() with a domid > 0. (domid == 0 is reserved for Dom0)
-+         * NB: it's very important to use the pre-increment operator to call
-+         * domain_create() with a domid > get_initial_domain_id().
-+         * domid == get_initial_domain_id() is reserved for Dom0.
-          */
-         d = domain_create(++max_init_domid, &d_cfg, flags);
-         if ( IS_ERR(d) )
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index b072a16249feaab3eabe214040e4331e208ffae4..5fe2f397c8b1f7088b08c3435bc75a1acb8742b3 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -2357,6 +2357,7 @@ void __init create_dom0(void)
-         .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
-     };
-     unsigned int flags = CDF_privileged;
-+    domid_t domid = get_initial_domain_id();
-     int rc;
  
-     /* The vGIC for DOM0 is exactly emulating the hardware GIC */
-@@ -2387,15 +2388,15 @@ void __init create_dom0(void)
-     if ( !llc_coloring_enabled )
-         flags |= CDF_directmap;
+-Xen traditionally provided a single pv console to pv guests, storing the
++Xen traditionally provided a single PV console to PV guests, storing the
+ relevant information in xenstore under /local/domain/$DOMID/console.
  
--    dom0 = domain_create(0, &dom0_cfg, flags);
-+    dom0 = domain_create(domid, &dom0_cfg, CDF_privileged | CDF_directmap);
-     if ( IS_ERR(dom0) )
--        panic("Error creating domain 0 (rc = %ld)\n", PTR_ERR(dom0));
-+        panic("Error creating domain %d (rc = %ld)\n", domid, PTR_ERR(dom0));
+-Now many years after the introduction of the pv console we have
+-multiple pv consoles support for pv and hvm guests; multiple pv
++Now many years after the introduction of the PV console we have
++multiple PV consoles support for PV and HVM guests; multiple PV
+ console backends (qemu and xenconsoled, see limitations below) and
+ emulated serial cards too.
  
-     if ( llc_coloring_enabled && (rc = dom0_set_llc_colors(dom0)) )
-         panic("Error initializing LLC coloring for domain 0 (rc = %d)\n", rc);
+@@ -103,48 +103,50 @@ The supported values are only xenconsoled or ioemu; xenconsoled has
+ several limitations: it can only be used for the first PV or virtual UART
+ console and it can only connect to a pty.
  
-     if ( alloc_dom0_vcpu0(dom0) == NULL )
--        panic("Error creating domain 0 vcpu0\n");
-+        panic("Error creating domain %d vcpu0\n", domid);
- 
-     rc = construct_dom0(dom0);
-     if ( rc )
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 6cf272c160ef2443cb50bfa4ae2d2591c52e043d..f107e8eebb4904a4455167e8792a66994a093d86 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -25,8 +25,6 @@ struct map_range_data
-     struct rangeset *irq_ranges;
- };
- 
--extern domid_t max_init_domid;
--
- void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
- 
- size_t estimate_efi_size(unsigned int mem_nr_banks);
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index c1f2d1b89d4317224bb1011e0db3a7372df807e2..47d80fcd43289ebbd751007f02eab2def60bebad 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -60,8 +60,6 @@ struct cpuinfo_arm __read_mostly system_cpuinfo;
- bool __read_mostly acpi_disabled;
- #endif
- 
--domid_t __read_mostly max_init_domid;
--
- static __used void init_done(void)
- {
-     int rc;
-diff --git a/xen/arch/ppc/include/asm/setup.h b/xen/arch/ppc/include/asm/setup.h
-index e4f64879b68ca5aac24bd9544255143e6ef693f3..956fa6985adb23375bd41d3e5d34d9d5f0712bd5 100644
---- a/xen/arch/ppc/include/asm/setup.h
-+++ b/xen/arch/ppc/include/asm/setup.h
-@@ -1,6 +1,4 @@
- #ifndef __ASM_PPC_SETUP_H__
- #define __ASM_PPC_SETUP_H__
- 
--#define max_init_domid (0)
--
- #endif /* __ASM_PPC_SETUP_H__ */
-diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
-index c9d69cdf51666c0ec31196411b52e9b39439ba5f..d1fc64b673ab618d9ad7a78c0a8b32b70a2daae6 100644
---- a/xen/arch/riscv/include/asm/setup.h
-+++ b/xen/arch/riscv/include/asm/setup.h
-@@ -5,8 +5,6 @@
- 
- #include <xen/types.h>
- 
--#define max_init_domid (0)
--
- void setup_mm(void);
- 
- void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
-diff --git a/xen/arch/x86/include/asm/pv/shim.h b/xen/arch/x86/include/asm/pv/shim.h
-index 6153e27005986881ad87e9db0b555b30edc59fc0..27053d4f6fb93a619edba2d34d92ea5e5cd27303 100644
---- a/xen/arch/x86/include/asm/pv/shim.h
-+++ b/xen/arch/x86/include/asm/pv/shim.h
-@@ -31,7 +31,7 @@ long cf_check pv_shim_cpu_up(void *data);
- long cf_check pv_shim_cpu_down(void *data);
- void pv_shim_online_memory(unsigned int nr, unsigned int order);
- void pv_shim_offline_memory(unsigned int nr, unsigned int order);
--domid_t get_initial_domain_id(void);
-+domid_t pv_shim_get_initial_domain_id(void);
- uint64_t pv_shim_mem(uint64_t avail);
- void pv_shim_fixup_e820(void);
- const struct platform_bad_page *pv_shim_reserved_pages(unsigned int *size);
-@@ -76,8 +76,9 @@ static inline void pv_shim_offline_memory(unsigned int nr, unsigned int order)
- {
-     ASSERT_UNREACHABLE();
- }
--static inline domid_t get_initial_domain_id(void)
-+static inline domid_t pv_shim_get_initial_domain_id(void)
- {
-+    ASSERT_UNREACHABLE();
-     return 0;
- }
- static inline uint64_t pv_shim_mem(uint64_t avail)
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index 5c2391a8684b66efdf4b092409ed33935db6b40c..296348655b9d146c73acc305cc9edd5fd46f7d47 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -69,6 +69,4 @@ extern bool opt_dom0_verbose;
- extern bool opt_dom0_cpuid_faulting;
- extern bool opt_dom0_msr_relaxed;
- 
--#define max_init_domid (0)
--
- #endif
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index 9eb120258aeaf7068eae88d1e7d1b95ea7a00f31..8435f347ce31aed49309e942f9692a2307bcd93f 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -1018,13 +1018,10 @@ void pv_shim_offline_memory(unsigned int nr, unsigned int order)
-     }
- }
- 
--domid_t get_initial_domain_id(void)
-+domid_t pv_shim_get_initial_domain_id(void)
- {
-     uint32_t eax, ebx, ecx, edx;
- 
--    if ( !pv_shim )
--        return 0;
--
-     cpuid(xen_cpuid_base + 4, &eax, &ebx, &ecx, &edx);
- 
-     return (eax & XEN_HVM_CPUID_DOMID_PRESENT) ? ecx : 1;
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 711ec3bf3b7845a6c295575421c252193ccbc0ae..61e0890052eb0c7ff7c19cc2fbdbfb9af512a545 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -43,6 +43,9 @@
- #include <xsm/xsm.h>
- #include <xen/trace.h>
- #include <asm/setup.h>
-+#ifdef CONFIG_PV_SHIM
-+#include <asm/pv/shim.h>
-+#endif
- 
- #ifdef CONFIG_X86
- #include <asm/guest.h>
-@@ -65,6 +68,9 @@ DEFINE_RCU_READ_LOCK(domlist_read_lock);
- static struct domain *domain_hash[DOMAIN_HASH_SIZE];
- struct domain *domain_list;
- 
-+/* Last known non-system domain ID. */
-+domid_t __read_mostly max_init_domid;
+-Emulated serials are provided by qemu-dm only to hvm guests; the number
+-of emulated serials depends on how many "-serial" command line options
+-are given to qemu. The output of a serial is specified as argument to
+-the -serial command line option to qemu. Qemu writes the tty name to
+-xenstore in the following path:
++Emulated serials are provided to HVM guests by qemu-dm or in-hypervisor UART
++emulator (Xen needs to be re-compiled).
 +
- /*
-  * Insert a domain into the domlist/hash.  This allows the domain to be looked
-  * up by domid, and therefore to be the subject of hypercalls/etc.
-@@ -2261,6 +2267,15 @@ int continue_hypercall_on_cpu(
-     return 0;
- }
++In qemu-dm case, the number of emulated serials depends on how many "-serial"
++command line options are given to qemu. The output of a serial is specified as
++argument to the -serial command line option to qemu. Qemu writes the tty name
++to xenstore in the following path:
  
-+domid_t get_initial_domain_id(void)
-+{
-+#ifdef CONFIG_PV_SHIM
-+    if ( pv_shim )
-+        return pv_shim_get_initial_domain_id();
-+#endif
-+    return hardware_domid;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index 05abb581a03d9c4deaea432a8d5e65d6906f70b4..498bffe56e1fac217c868a0ed79a14db98cb025d 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -415,10 +415,9 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-     case XEN_DOMCTL_createdomain:
-     {
-         domid_t        dom;
--        static domid_t rover = 0;
+ /local/domain/$DOMID/serial/$SERIAL_NUM/tty
  
-         dom = op->domain;
--        if ( (dom > 0) && (dom < DOMID_FIRST_RESERVED) )
-+        if ( (dom > max_init_domid) && (dom < DOMID_FIRST_RESERVED) )
-         {
-             ret = -EEXIST;
-             if ( !is_free_domid(dom) )
-@@ -426,19 +425,19 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-         }
-         else
-         {
--            for ( dom = rover + 1; dom != rover; dom++ )
-+            for ( dom = max_init_domid + 1; dom != max_init_domid; dom++ )
-             {
-                 if ( dom == DOMID_FIRST_RESERVED )
--                    dom = 1;
-+                    dom = max_init_domid + 1;
-                 if ( is_free_domid(dom) )
-                     break;
-             }
+ xenconsole is the tool to connect to a PV or virtual UART console or an
+ emulated serial that has a pty as output. Xenconsole takes a domid as
+-parameter plus an optional console type (pv for PV consoles, vuart for
+-virtual UART or serial for emulated serials) and console number.
++parameter plus an optional console type ('pv' for PV consoles, 'vuart' for
++virtual UART or 'serial' for emulated serials) and console number.
+ Depending on the type and console number, xenconsole will look for the tty
+ node in different xenstore paths, as described above.  If the user doesn't
+-specify the console type xenconsole will try to guess: if the guest is a pv
+-guest it defaults to PV console, if the guest is an hvm guest it defaults to
++specify the console type xenconsole will try to guess: if the guest is a PV
++guest it defaults to PV console, if the guest is an HVM guest it defaults to
+ emulated serial.
  
-             ret = -ENOMEM;
--            if ( dom == rover )
-+            if ( dom == max_init_domid )
-                 break;
+-By default xl creates a pv console for hvm guests, plus an emulated
++By default xl creates a PV console for HVM guests, plus an emulated
+ serial if the user specified 'serial = "pty"' in the VM config file.
+-Considering that xenconsole defaults to emulated serials for hvm guests,
++Considering that xenconsole defaults to emulated serials for HVM guests,
+ executing xl create -c "domain" causes xenconsole to attach to the
+ emulated serial tty. This is most probably what the user wanted because
+-currently no bootloaders support xen pv consoles so the only way to
++currently no bootloaders support xen PV consoles so the only way to
+ interact with a bootloader like grub over a console is to use the
+ emulated serial.
+-However the pv console is still easy to use with Linux PV on HVM guests:
++However the PV console is still easy to use with Linux PV on HVM guests:
+ the user just need to pass "console=hvc0" to the kernel command line and
+ then execute "xl console -t pv <domain>" to connect to it.
  
--            rover = dom;
-+            max_init_domid = dom;
-         }
+ When using stubdoms the serial cards are still emulated by qemu (this
+ time running in the stubdom), the number of serial cards and where the
+ output goes is still specified using qemu command line options.
+-The difference is that for each emulated serial card there must be a pv
++The difference is that for each emulated serial card there must be a PV
+ console connection between the stubdom and dom0 to export the serial
+-output from the stubdom to dom0. The pv console backend for stubdom's pv
+-consoles is always ioemu because multiple pv consoles support is a
+-requirement in this case, considering that minios has its own pv console
+-too. In order to simplify the setup when using stubdoms the hvm guest
+-can only have one pv console with xenstored as backend (the stubdom
+-could provide pv console backends to the hvm guest but then it would
+-need another pv console connection for each console backend to export
++output from the stubdom to dom0. The PV console backend for stubdom's PV
++consoles is always ioemu because multiple PV consoles support is a
++requirement in this case, considering that minios has its own PV console
++too. In order to simplify the setup when using stubdoms the HVM guest
++can only have one PV console with xenstored as backend (the stubdom
++could provide PV console backends to the HVM guest but then it would
++need another PV console connection for each console backend to export
+ the pty to dom0).
  
-         d = domain_create(dom, &op->u.createdomain, false);
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index 8b63ca55f14fb81b6b803a8f28d487dd954ef862..1a079c9bddcb705dad256b0be1673122d77f4dd7 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -568,6 +568,14 @@ static long xenver_varbuf_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return sz;
- }
- 
-+static int __init cf_check globals_init(void)
-+{
-+    max_init_domid = get_initial_domain_id();
-+
-+    return 0;
-+}
-+__initcall(globals_init);
-+
- long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-     bool deny = xsm_xen_version(XSM_OTHER, cmd);
-diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
-index 4ae5def08eda40db58b6506b60a9393c82ba9aa7..eef36bafd3574c97d2f1f5c1fc93b4b7b46b78ba 100644
---- a/xen/include/xen/domain.h
-+++ b/xen/include/xen/domain.h
-@@ -175,4 +175,8 @@ extern bool vmtrace_available;
- 
- extern bool vpmu_is_available;
- 
-+extern domid_t max_init_domid;
-+
-+domid_t get_initial_domain_id(void);
-+
- #endif /* __XEN_DOMAIN_H__ */
+ The xenconsole program supports a very simple protocol to notify parent about
 
 -- 
 2.34.1
