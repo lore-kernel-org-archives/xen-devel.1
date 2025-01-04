@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD52E77188
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 00:21:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.864695.1275919 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 743BDE77198
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 01:58:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.864705.1275952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTruX-00031R-D4; Sat, 04 Jan 2025 00:21:01 +0000
+	id 1tTtQk-0005fg-31; Sat, 04 Jan 2025 01:58:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864695.1275919; Sat, 04 Jan 2025 00:21:01 +0000
+Received: by outflank-mailman (output) from mailman id 864705.1275952; Sat, 04 Jan 2025 01:58:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTruX-00031K-9Q; Sat, 04 Jan 2025 00:21:01 +0000
-Received: by outflank-mailman (input) for mailman id 864695;
- Sat, 04 Jan 2025 00:20:59 +0000
+	id 1tTtQj-0005ew-UU; Sat, 04 Jan 2025 01:58:21 +0000
+Received: by outflank-mailman (input) for mailman id 864705;
+ Sat, 04 Jan 2025 01:58:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MbXJ=T4=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1tTruV-00031D-BE
- for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 00:20:59 +0000
+ <SRS0=AhC6=T4=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
+ id 1tTtQi-0005Ay-5U
+ for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:20 +0000
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c4038695-ca31-11ef-99a4-01e77a169b0f;
- Sat, 04 Jan 2025 01:20:57 +0100 (CET)
+ id 5c89f58e-ca3f-11ef-99a4-01e77a169b0f;
+ Sat, 04 Jan 2025 02:58:16 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id AE367A4109D;
- Sat,  4 Jan 2025 00:19:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63EF2C4CEDD;
- Sat,  4 Jan 2025 00:20:54 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id D3CDFA411A1;
+ Sat,  4 Jan 2025 01:56:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BA0E6C4CEDF;
+ Sat,  4 Jan 2025 01:58:14 +0000 (UTC)
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id AD68FE77199;
+ Sat,  4 Jan 2025 01:58:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,71 +47,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4038695-ca31-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 5c89f58e-ca3f-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735950055;
-	bh=d2gXTBle0r2rC3VZD8twpKsd0+v0LbFWXpI1d0H/QK8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=EWSKzH+IWtdilP56Jf902jlgQg8YrQtVfcekqGJz7ezkZTFiZtbkNomEY8f63Nij8
-	 pBf+2C9QsMCRY4uDawvxa+BAtbeqPO6XSpTR1qT7Hk2zuQ9Zg3vSDC+F6P4jKPBhOy
-	 trXmr9sduQhoNlzHVrLOXHznoOF+L9RqokhUuiyseQE1R8/++WnAKo08LDrWC2O/uA
-	 k9nyZGCnpabLCKXNINVNSXDGvgmebLwsOKbyBZDH5hW2zSP1rqO+XREdRvZ09ZTWa7
-	 9YcxYenk5TY48ZjLwakINHvqwqL+7R39qbD2EoLBXVY3CMTaV5DJZ9TWD3L33G9H1N
-	 NJwsIrBhGoUaQ==
-Date: Fri, 3 Jan 2025 16:20:52 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>
-cc: Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org, 
-    Stefano Stabellini <sstabellini@kernel.org>, consulting@bugseng.com
-Subject: Re: [PATCH v2 1/2] x86/uaccess: rework user access speculative harden
- guards
-In-Reply-To: <e3ec3dad28dc94436c0b330b2f995120@bugseng.com>
-Message-ID: <alpine.DEB.2.22.394.2501031617280.16425@ubuntu-linux-20-04-desktop>
-References: <20241126093508.6966-1-roger.pau@citrix.com> <20241126093508.6966-2-roger.pau@citrix.com> <cf1f87d1-f616-4944-94fa-69a777249072@suse.com> <e3ec3dad28dc94436c0b330b2f995120@bugseng.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+	s=k20201202; t=1735955894;
+	bh=rMk6e8dP6iduBbKYzKwM0zuq90kaxVjD4waV73BrMWU=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=rAG3wWpo3Wao5hFXTgJFLK2wbqRt51cycoWp3/srRpFpZr8cV7o6O0ptiI/gmpUq3
+	 p9H8OPAnjH5YUckkHYcS3nSClDmSFCX1Yw8q1hFmEUbM/NLIWDCntJeMo9EREFu06d
+	 JxLfAom7YBjEtyTcLkbhczYn/m3oOC2d1ahDpzGGy96pDuWzzIXushtgLuURFpbqSa
+	 dsUhtELuRG7X2uaClomEvu5pyrDles2hgHfiiMx+f9DwuLJ2wH4FWe+WRiClpguqkp
+	 0S9G8xARuASgtijd+jokt+pmlpOd1T48VXQ4uxsvRJq25f9ei7q9Cgrd0e8WOJT94T
+	 AsH+WDKCd9I1A==
+From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
+Date: Fri, 03 Jan 2025 17:58:08 -0800
+Subject: [PATCH v3 02/24] arm/vuart: move vpl011-related code to vpl011
+ emulator
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250103-vuart-ns8250-v3-v1-2-c5d36b31d66c@ford.com>
+References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
+In-Reply-To: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, 
+ Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+ Denis Mukhin <dmukhin@ford.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=4317;
+ i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
+ bh=WBvO8bA+8Nj2y5g4Kr43LtifU20Luw0hJhjCrT4qixs=;
+ b=HFI194W9aVN9+Fxa7KERSNI5ADEY+BH7XLcU4u6tM3rnmm0dWvu6LsM9uIa17987zZ2YYl9bn
+ F+CVVTwcpKgDkOE0n0HGlCmYRbIhuuvizU+fBvDJOd7E/Zi9Ocism8K
+X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
+ pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
+X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
+ auth_id=287
+X-Original-From: Denis Mukhin <dmukhin@ford.com>
+Reply-To: dmukhin@ford.com
 
-Hi Nicola, one question below
+From: Denis Mukhin <dmukhin@ford.com>
 
-On Wed, 27 Nov 2024, Nicola Vetrini wrote:
-> > #define AMD_OSVW_ERRATUM(osvw_id, ...)  osvw_id, __VA_ARGS__, 0
-> > 
-> > where we're using the C99 form rather than the GNU extension, and where
-> > hence __VA_ARGS__ would - by extrapolation of the Misra rule - need
-> > parenthesizing, when it isn't and can't be.
-> > 
-> > Isn't it rather the case that variable argument macros need a more general
-> > deviation, if not an adjustment to the Misra rule? Extending the Cc list
-> > some ...
+Xen console driver has vpl011-related logic which shall belong vpl011 emulator
+code (Arm port). Move vpl011-related code from arch-independent console driver
+to Arm's vpl011.c.
 
-Nicola, if you look at the original patch:
-https://marc.info/?l=xen-devel&m=173261356716876
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+ xen/arch/arm/include/asm/vpl011.h |  2 +-
+ xen/arch/arm/vpl011.c             | 15 +++++++++++----
+ xen/drivers/char/console.c        | 23 +++++++++--------------
+ 3 files changed, 21 insertions(+), 19 deletions(-)
 
-"The current guards to select whether user accesses should be speculative
-hardened violate Misra rule 20.7, as the UA_KEEP() macro doesn't (and can't)
-parenthesize the 'args' argument."
-
-And the very first change in the patch is:
-
-diff --git a/xen/arch/x86/include/asm/uaccess.h b/xen/arch/x86/include/asm/uaccess.h
-index 2d01669b96..6b8150ac22 100644
---- a/xen/arch/x86/include/asm/uaccess.h
-+++ b/xen/arch/x86/include/asm/uaccess.h
-@@ -24,9 +24,6 @@ unsigned int copy_from_unsafe_ll(void *to, const void *from, unsigned int n);
- void noreturn __get_user_bad(void);
- void noreturn __put_user_bad(void);
+diff --git a/xen/arch/arm/include/asm/vpl011.h b/xen/arch/arm/include/asm/vpl011.h
+index c09abcd7a9b3356d0809743517934adae00087f5..cc838682815c0d049ba33d3bf9966a64b2e527dd 100644
+--- a/xen/arch/arm/include/asm/vpl011.h
++++ b/xen/arch/arm/include/asm/vpl011.h
+@@ -69,7 +69,7 @@ struct vpl011_init_info {
+ int domain_vpl011_init(struct domain *d,
+                        struct vpl011_init_info *info);
+ void domain_vpl011_deinit(struct domain *d);
+-void vpl011_rx_char_xen(struct domain *d, char c);
++int vpl011_rx_char_xen(struct domain *d, char c);
+ #else
+ static inline int domain_vpl011_init(struct domain *d,
+                                      struct vpl011_init_info *info)
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index 1fc3114cce9ddb48cf199834c8e9abe8cfba92b5..c72f3778bfedf9434f9d1a0cd7fa33852563112d 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -567,16 +567,21 @@ static void vpl011_data_avail(struct domain *d,
  
--#define UA_KEEP(args...) args
--#define UA_DROP(args...)
+ /*
+  * vpl011_rx_char_xen adds a char to a domain's vpl011 receive buffer.
+- * It is only used when the vpl011 backend is in Xen.
+  */
+-void vpl011_rx_char_xen(struct domain *d, char c)
++int vpl011_rx_char_xen(struct domain *d, char c)
+ {
+     unsigned long flags;
+     struct vpl011 *vpl011 = &d->arch.vpl011;
+     struct vpl011_xen_backend *intf = vpl011->backend.xen;
+     XENCONS_RING_IDX in_cons, in_prod, in_fifo_level;
+ 
+-    ASSERT(!vpl011->backend_in_domain);
++    /* Forward input iff the vpl011 backend is in Xen. */
++    if ( vpl011->backend_in_domain )
++        return -ENODEV;
++
++    if ( intf == NULL )
++        return -ENODEV;
++
+     VPL011_LOCK(d, flags);
+ 
+     in_cons = intf->in_cons;
+@@ -584,7 +589,7 @@ void vpl011_rx_char_xen(struct domain *d, char c)
+     if ( xencons_queued(in_prod, in_cons, sizeof(intf->in)) == sizeof(intf->in) )
+     {
+         VPL011_UNLOCK(d, flags);
+-        return;
++        return -ENOSPC;
+     }
+ 
+     intf->in[xencons_mask(in_prod, sizeof(intf->in))] = c;
+@@ -596,6 +601,8 @@ void vpl011_rx_char_xen(struct domain *d, char c)
+ 
+     vpl011_data_avail(d, in_fifo_level, sizeof(intf->in), 0, SBSA_UART_FIFO_SIZE);
+     VPL011_UNLOCK(d, flags);
++
++    return 0;
+ }
+ 
+ static void vpl011_notification(struct vcpu *v, unsigned int port)
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 4cb397116b44935214801c496b30e44c9399c59a..1411c991977b5fb26ee5709e523b7bc32b612808 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -529,6 +529,8 @@ static void switch_serial_input(void)
+ 
+ static void __serial_rx(char c)
+ {
++    int rc = 0;
++
+     switch ( console_rx )
+     {
+     case 0:
+@@ -554,21 +556,11 @@ static void __serial_rx(char c)
+     {
+         struct domain *d = rcu_lock_domain_by_id(console_rx - 1);
+ 
+-        /*
+-         * If we have a properly initialized vpl011 console for the
+-         * domain, without a full PV ring to Dom0 (in that case input
+-         * comes from the PV ring), then send the character to it.
+-         */
+-        if ( d != NULL &&
+-             !d->arch.vpl011.backend_in_domain &&
+-             d->arch.vpl011.backend.xen != NULL )
+-            vpl011_rx_char_xen(d, c);
+-        else
+-            printk("Cannot send chars to Dom%d: no UART available\n",
+-                   console_rx - 1);
 -
- /**
-  * get_guest: - Get a simple variable from guest space.
-  * @x:   Variable to store result.
+-        if ( d != NULL )
++        if ( d )
++        {
++            rc = vpl011_rx_char_xen(d, c);
+             rcu_unlock_domain(d);
++        }
  
+         break;
+     }
+@@ -579,6 +571,9 @@ static void __serial_rx(char c)
+     if ( pv_shim && pv_console )
+         consoled_guest_tx(c);
+ #endif
++
++    if ( rc )
++        printk(KERN_ERR "d%pd: failed to process console input: %d\n", d, rc);
+ }
+ 
+ static void cf_check serial_rx(char c)
 
-Do you think there is any way we could configure Eclair, with or without
-a deviation, not to detect every use of UA_KEEP as violations?
+-- 
+2.34.1
+
+
 
