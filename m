@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E3E0E77199
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93807C3DA4A
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 01:58:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.864706.1275960 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.864714.1276024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtQk-0005nW-Ia; Sat, 04 Jan 2025 01:58:22 +0000
+	id 1tTtQq-00076n-5N; Sat, 04 Jan 2025 01:58:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864706.1275960; Sat, 04 Jan 2025 01:58:22 +0000
+Received: by outflank-mailman (output) from mailman id 864714.1276024; Sat, 04 Jan 2025 01:58:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtQk-0005mw-DF; Sat, 04 Jan 2025 01:58:22 +0000
-Received: by outflank-mailman (input) for mailman id 864706;
- Sat, 04 Jan 2025 01:58:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tTtQp-000740-Et; Sat, 04 Jan 2025 01:58:27 +0000
+Received: by outflank-mailman (input) for mailman id 864714;
+ Sat, 04 Jan 2025 01:58:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AhC6=T4=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tTtQi-0005Ay-CN
- for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:20 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5cc997fe-ca3f-11ef-99a4-01e77a169b0f;
- Sat, 04 Jan 2025 02:58:16 +0100 (CET)
+ id 1tTtQl-0005Ax-Qi
+ for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:23 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5dd063cb-ca3f-11ef-a0de-8be0dac302b0;
+ Sat, 04 Jan 2025 02:58:18 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 5D055A411CA;
- Sat,  4 Jan 2025 01:56:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 3D46CC4CEE3;
- Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 08B4B5C613E;
+ Sat,  4 Jan 2025 01:57:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id EB6A4C4CED6;
+ Sat,  4 Jan 2025 01:58:14 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 34815E77199;
- Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id E2F05E77198;
+ Sat,  4 Jan 2025 01:58:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,24 +47,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5cc997fe-ca3f-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 5dd063cb-ca3f-11ef-a0de-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1735955895;
-	bh=xXcYmPnyoaBYwuvwmwzq65u8a7zL6rzG/+EY8Xv8xGE=;
+	bh=AA7+mFgdv/CLreA2xkAbjLNCRVAgqmaEv1ja2uxK2AE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=AcM7Vtoksl9NuXsBkmaV+MfZOCMRt2zDfmJPK3Gs9ieXp0syisbEcIaH8QlLJrQLB
-	 SK0JUVGW11+9hKqDLS/5CnS9gX1lCP7TNMpbehJo5pxrkbCx1f2XwD+X12QgNzweK+
-	 Kb0Bv6pRUw5UCFQesSfHU1uyrbXWwfuLw5clv5jqeXIy2xJOBtvkCKQXYBnIWMBFUH
-	 v+dwRYvU2VEzOAf76MQFuSxW3ENllWV659LJ2nnv23vaVsVyct31+F9WFpxkQYkwjB
-	 N0uaqRTn0UuVjJlMTbLz3BClt0PGRnuixH/tRLyRcau00SCMZHzxykwgSEub+mg/9o
-	 nqii0jYMZ8Hog==
+	b=kIWEW/eRK6fqXTa7M+eKyUBgFAU6g0f4xk5l5oE99ZnF0P1X0cWwRnuDgYGKYj6hc
+	 MIncbo7zBD1qIRsMYWCiYlmw7UAxjoHbCe08EEqxpQzX8uuCGAgySBCGBPuKb6WLIS
+	 OjUd4CKhK1BFxt/OpBtsmUKre/E+9ezEn6cbx5JwlxPeTWlNxOmxMjUkWLKHvItOEE
+	 tDuEwpinIHXawJOr104bGNSab64JRwi3g8jQjty0IlyrOvivNYa5ygUjA7zigC/E8Z
+	 k1RCWGsxcFTx3I8cSs3FgPAJygzY3zuCUvLP2VzTE9d6nICd+1zMTgOqxazXKaVtAP
+	 0aA++obj1Ul3A==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Date: Fri, 03 Jan 2025 17:58:15 -0800
-Subject: [PATCH v3 09/24] xen/console: rename console_rx to console_owner
+Date: Fri, 03 Jan 2025 17:58:11 -0800
+Subject: [PATCH v3 05/24] xen/console: introduce consoled_is_enabled()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250103-vuart-ns8250-v3-v1-9-c5d36b31d66c@ford.com>
+Message-Id: <20250103-vuart-ns8250-v3-v1-5-c5d36b31d66c@ford.com>
 References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 In-Reply-To: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 To: xen-devel@lists.xenproject.org
@@ -75,11 +75,11 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
  =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=2836;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=4404;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=hlHBU29TJ6azKlgJxKuwT5okumjd5Gkw0PPbKZ55oxg=;
- b=8gj6SDYe8BztlUQL/hKRBIYVD38Gp7CgTWQrnGT86srkbF/wCLOJPeSHzvZRRElqsEEVQAoxG
- SSRoin1gwJzBzBL2tPOlDVb3Ajj9sx2b2fV9mk90Edf+KMiLPBHdtvO
+ bh=n4Aqa3ybnKIx5xmfT+5F0wUDK/FeirbGr0o6DW85ymA=;
+ b=C4K8KLpFn1MjYhJMBZQMxhbcwkSQbMQPkN60/GkOpUDva4wrnJU3OI1jMwq1OYrhFKd3FJAbL
+ pLO5JKF6+JdBYum8mrIHzPA5dZ7qRLqRtkU0jOY0jQiRbsCifK3SU4j
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -89,89 +89,163 @@ Reply-To: dmukhin@ford.com
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Update the symbol name to prepare for the follow on semantic change of console
-owner identifier.
+There are few places which check pv_shim console under CONFIG_PV_SHIM in xen
+console driver. Instead of #ifdef-ing, use new consoled_is_enabled() to
+customize the logic.
+
+Header file now can be included w/o CONFIG_X86.
+
+Signature of consoled_guest_{rx,tx} has changed so the error can be logged.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/drivers/char/console.c | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
+ xen/drivers/char/console.c  | 13 +++++--------
+ xen/drivers/char/consoled.c | 17 +++++++++++++----
+ xen/include/xen/consoled.h  | 32 +++++++++++++++++++++++++++-----
+ 3 files changed, 45 insertions(+), 17 deletions(-)
 
 diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 48866cf47beda39e48a7774277238273566382b1..33da5ff7933ea2186245763e07940c17d74bf40f 100644
+index 4785f0e93a17e3ecba79a7813d2928f946abab8f..2d20a9d7531e069803eaf30ce79354b998c4a52f 100644
 --- a/xen/drivers/char/console.c
 +++ b/xen/drivers/char/console.c
-@@ -465,19 +465,19 @@ static void cf_check dump_console_ring_key(unsigned char key)
-  */
- #define switch_code (opt_conswitch[0]-'a'+1)
- /*
-- * console_rx=0 => input to xen
-- * console_rx=1 => input to dom0 (or the sole shim domain)
-- * console_rx=N => input to dom(N-1)
-+ * console_owner=0 => input to xen
-+ * console_owner=1 => input to dom0 (or the sole shim domain)
-+ * console_owner=N => input to dom(N-1)
-  */
--static unsigned int __read_mostly console_rx = 0;
-+static unsigned int __read_mostly console_owner = 0;
+@@ -33,9 +33,9 @@
+ #include <xen/pv_console.h>
+ #include <asm/setup.h>
+ #include <xen/sections.h>
++#include <xen/consoled.h>
  
- #define max_console_rx (max_init_domid + 1)
+ #ifdef CONFIG_X86
+-#include <xen/consoled.h>
+ #include <asm/guest.h>
+ #endif
+ #ifdef CONFIG_SBSA_VUART_CONSOLE
+@@ -508,11 +508,9 @@ static void switch_serial_input(void)
+             break;
+         }
  
- struct domain *console_get_domain(void)
+-#ifdef CONFIG_PV_SHIM
+-        if ( next_rx == 1 )
++        if ( consoled_is_enabled() && next_rx == 1 )
+             domid = get_initial_domain_id();
+         else
+-#endif
+             domid = next_rx - 1;
+         d = rcu_lock_domain_by_id(domid);
+         if ( d )
+@@ -563,10 +561,9 @@ static void __serial_rx(char c)
+         rc = vpl011_rx_char_xen(d, c);
+ #endif
+ 
+-#ifdef CONFIG_X86
+-    if ( pv_shim && pv_console )
+-        consoled_guest_tx(c);
+-#endif
++    if ( consoled_is_enabled() )
++        /* Deliver input to the PV shim console. */
++        rc = consoled_guest_tx(c);
+ 
+     if ( rc )
+         printk(KERN_ERR "d%pd: failed to process console input: %d\n", d, rc);
+diff --git a/xen/drivers/char/consoled.c b/xen/drivers/char/consoled.c
+index b415b632cecc0a80e161b701d7b70ba4f3cc5fb8..8704ec251eb19e9c1cdc5927f896aeb20cc5af1e 100644
+--- a/xen/drivers/char/consoled.c
++++ b/xen/drivers/char/consoled.c
+@@ -43,13 +43,13 @@ struct xencons_interface *consoled_get_ring_addr(void)
+ static char buf[BUF_SZ + 1];
+ 
+ /* Receives characters from a domain's PV console */
+-void consoled_guest_rx(void)
++int consoled_guest_rx(void)
  {
--    if ( console_rx == 0 )
-+    if ( console_owner == 0 )
-             return NULL;
--    return rcu_lock_domain_by_id(console_rx - 1);
-+    return rcu_lock_domain_by_id(console_owner - 1);
+     size_t idx = 0;
+     XENCONS_RING_IDX cons, prod;
+ 
+     if ( !cons_ring )
+-        return;
++        return -ENODEV;
+ 
+     spin_lock(&rx_lock);
+ 
+@@ -91,15 +91,17 @@ void consoled_guest_rx(void)
+ 
+  out:
+     spin_unlock(&rx_lock);
++
++    return 0;
  }
  
- void console_put_domain(struct domain *d)
-@@ -488,7 +488,7 @@ void console_put_domain(struct domain *d)
- 
- static void console_switch_input(void)
+ /* Sends a character into a domain's PV console */
+-void consoled_guest_tx(char c)
++int consoled_guest_tx(char c)
  {
--    unsigned int next_rx = console_rx;
-+    unsigned int next_rx = console_owner;
+     XENCONS_RING_IDX cons, prod;
  
-     /*
-      * Rotate among Xen, dom0 and boot-time created domUs while skipping
-@@ -501,7 +501,7 @@ static void console_switch_input(void)
+     if ( !cons_ring )
+-        return;
++        return -ENODEV;
  
-         if ( next_rx++ >= max_console_rx )
-         {
--            console_rx = 0;
-+            console_owner = 0;
-             printk("*** Serial input to Xen");
-             break;
-         }
-@@ -514,7 +514,7 @@ static void console_switch_input(void)
-         if ( d )
-         {
-             rcu_unlock_domain(d);
--            console_rx = next_rx;
-+            console_owner = next_rx;
-             printk("*** Serial input to DOM%u", domid);
-             break;
-         }
-@@ -531,7 +531,7 @@ static void __serial_rx(char c)
-     struct domain *d;
-     int rc = 0;
+     cons = ACCESS_ONCE(cons_ring->in_cons);
+     prod = cons_ring->in_prod;
+@@ -125,6 +127,13 @@ void consoled_guest_tx(char c)
+  notify:
+     /* Always notify the guest: prevents receive path from getting stuck. */
+     pv_shim_inject_evtchn(pv_console_evtchn());
++
++    return 0;
++}
++
++bool consoled_is_enabled(void)
++{
++    return pv_shim && pv_console;
+ }
  
--    if ( console_rx == 0 )
-+    if ( console_owner == 0 )
-         return handle_keypress(c, false);
+ /*
+diff --git a/xen/include/xen/consoled.h b/xen/include/xen/consoled.h
+index bd7ab6329ee8a7c466484021247241ded8ed03c7..14e5e3284a86201919f0f70a8c2785609f35b15f 100644
+--- a/xen/include/xen/consoled.h
++++ b/xen/include/xen/consoled.h
+@@ -1,14 +1,36 @@
+-#ifndef __XEN_CONSOLED_H__
+-#define __XEN_CONSOLED_H__
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef XEN__CONSOLED_H
++#define XEN__CONSOLED_H
  
-     d = console_get_domain();
-@@ -1105,7 +1105,7 @@ void __init console_endboot(void)
-      * a useful 'how to switch' message.
-      */
-     if ( opt_conswitch[1] == 'x' )
--        console_rx = max_console_rx;
-+        console_owner = max_console_rx;
+ #include <public/io/console.h>
  
-     register_keyhandler('w', dump_console_ring_key,
-                         "synchronously dump console ring buffer (dmesg)", 0);
++#ifdef CONFIG_PV_SHIM
++
+ void consoled_set_ring_addr(struct xencons_interface *ring);
+ struct xencons_interface *consoled_get_ring_addr(void);
+-void consoled_guest_rx(void);
+-void consoled_guest_tx(char c);
++int consoled_guest_rx(void);
++int consoled_guest_tx(char c);
++bool consoled_is_enabled(void);
+ 
+-#endif /* __XEN_CONSOLED_H__ */
++#else
++
++static inline int consoled_guest_rx(void)
++{
++    ASSERT_UNREACHABLE();
++    return 0;
++}
++
++static inline int consoled_guest_tx(char c)
++{
++    ASSERT_UNREACHABLE();
++    return 0;
++}
++
++#define consoled_is_enabled() ( false )
++
++#endif /* CONFIG_PV_SHIM */
++
++#endif /* XEN__CONSOLED_H */
+ /*
+  * Local variables:
+  * mode: C
 
 -- 
 2.34.1
