@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37599E77188
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 01:58:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.864709.1275983 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A934E77199
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jan 2025 01:58:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.864717.1276054 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtQm-0006FD-A1; Sat, 04 Jan 2025 01:58:24 +0000
+	id 1tTtQu-0008CD-Rj; Sat, 04 Jan 2025 01:58:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864709.1275983; Sat, 04 Jan 2025 01:58:24 +0000
+Received: by outflank-mailman (output) from mailman id 864717.1276054; Sat, 04 Jan 2025 01:58:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tTtQl-0006Ct-SM; Sat, 04 Jan 2025 01:58:23 +0000
-Received: by outflank-mailman (input) for mailman id 864709;
- Sat, 04 Jan 2025 01:58:21 +0000
+	id 1tTtQt-00085l-UB; Sat, 04 Jan 2025 01:58:31 +0000
+Received: by outflank-mailman (input) for mailman id 864717;
+ Sat, 04 Jan 2025 01:58:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AhC6=T4=kernel.org=devnull+dmukhin.ford.com@srs-se1.protection.inumbo.net>)
- id 1tTtQj-0005Ay-Gq
- for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:21 +0000
+ id 1tTtQn-0005Ay-HM
+ for xen-devel@lists.xenproject.org; Sat, 04 Jan 2025 01:58:25 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5c7b8b6b-ca3f-11ef-99a4-01e77a169b0f;
- Sat, 04 Jan 2025 02:58:16 +0100 (CET)
+ id 5e86857b-ca3f-11ef-99a4-01e77a169b0f;
+ Sat, 04 Jan 2025 02:58:19 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8F53E5C6009;
- Sat,  4 Jan 2025 01:57:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9F0E4C4CED6;
- Sat,  4 Jan 2025 01:58:14 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id BCBD75C6381;
+ Sat,  4 Jan 2025 01:57:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CCE25C4CEDD;
+ Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8BB62E77188;
- Sat,  4 Jan 2025 01:58:14 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C54DCE77198;
+ Sat,  4 Jan 2025 01:58:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,28 +47,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c7b8b6b-ca3f-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 5e86857b-ca3f-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735955894;
-	bh=1HQw4baaGqIA4Q4VIxDGGIV5uTvw8beKaHffthhNRSs=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=ktgD9ioY/Z9BoGCJD9pBEQT8YQHZ8NRHqKgs9CtlAAS0aZuO05QARNBA3UgfjcHVk
-	 hVj7DuCm7oHa6KvGPBjl4I+9egxt7Kb2xrNdJwyMiDhorLLM8nHLBgfZe54YiJ7aZj
-	 VFpxp8Cs2n+mYtjeJQmrDJvpWZ5GPftchlCt9+lrPBySRzpSdsuUm0PJ9yiTWxZ21i
-	 Y8SXugn/+IduPMYM3KrnV8EGhqUpXxtU9MwUQChqkqqdjJmAhWVQPbR6s8CpztJLBY
-	 Iw8k6fm7gVyU1D3pk+sitpJpIV5d8FxRQiZLp2op7/6xg1ni99EfuRuoa30jGc0Jys
-	 /JW/dZyQcsjmw==
+	s=k20201202; t=1735955895;
+	bh=c/sQchAB2th2WIR91b/A5zvJkudq54ZcORx3s/2AFYc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=O3wpE11lMn4BMs9NE6jG7Q1a7wgxfshSnVuXaS7yZUJX8gSJrEUhFJPrZKeEPDjZf
+	 gQUE2PfMxP/McKgUaPCwcq236fLhwJnZHoekBjERHLzjTRYdkIdw3RN9h1MO7q2WCW
+	 +SYMuvCqHb2SsndAIQfD4FjgQfIB8oQN5BGoEd8L9GOsRpORKara7MJMu/UeOyYt7+
+	 2d1vHWZUV5P9CFWxmHYUylm6v5SYjuBO1bOFQl5ZVM7EGrkrPaxLUcFRALcYXL8HPc
+	 ESggfeSIh7sj08XUDmqZdyt0CVVOIQj8zDUaPg3ZjozYURGo0caiMU37m5gPOqH8Ym
+	 /hwyXTB2HrdnA==
 From: Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org>
-Subject: [PATCH v3 00/24] x86: introduce NS16550-compatible UART emulator
-Date: Fri, 03 Jan 2025 17:58:06 -0800
-Message-Id: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
+Date: Fri, 03 Jan 2025 17:58:25 -0800
+Subject: [PATCH v3 19/24] xen/8250-uart: add missing definitions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAK+VeGcC/x3MQQqAIBBA0avIrBtwlDC6SrSQGms2FloShHdPW
- r7F/y9kTsIZRvVC4iJZjthAnYJl93FjlLUZjDa9Jm2x3D5dGPPQjMViGJiItHMuMLTqTBzk+Y8
- TFAtzrR/CAUqbZQAAAA==
-X-Change-ID: 20250103-vuart-ns8250-v3-f8e1110777fe
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250103-vuart-ns8250-v3-v1-19-c5d36b31d66c@ford.com>
+References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
+In-Reply-To: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>, 
  Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, 
@@ -77,11 +75,11 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
  =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
  Denis Mukhin <dmukhin@ford.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=9222;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735955892; l=7808;
  i=dmukhin@ford.com; s=20241125; h=from:subject:message-id;
- bh=1HQw4baaGqIA4Q4VIxDGGIV5uTvw8beKaHffthhNRSs=;
- b=fkDafXWa43fpq2gRtrfNjRvLOzfCHdAEdZg4Ae1fWU5Q36l4DhEJsA4pzz2lXgYR4pH/a+Q90
- EaLxVy/2LdFALar/4HQfBr773t0jIui/Uy/5xfvDBim/oZDzPZGytyh
+ bh=T+cbSUlwhOiYz+Afz3lMbHpJVwMTNzMdAT/z7b8cRYc=;
+ b=Seh7LR0DR3fCTrjLnw3IFzcTtD9s+yB1Dw9zGVcAIVgBH0T14IQCAi2JaSEmb3Itsmxz5kRJD
+ fDh0gHaKhV9BZJqddjdkPR5d3OBSGRt1Jm6ts0V00OayTEtEPw4C1Re
 X-Developer-Key: i=dmukhin@ford.com; a=ed25519;
  pk=SsDZ9p39s0fqcpUKQuqKqrbn0rq6EtEAClvpOpzx6+U=
 X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
@@ -89,199 +87,173 @@ X-Endpoint-Received: by B4 Relay for dmukhin@ford.com/20241125 with
 X-Original-From: Denis Mukhin <dmukhin@ford.com>
 Reply-To: dmukhin@ford.com
 
-x86 port of Xen lacks vUART facility similar to Arm's vpl011 to support x86
-guest OS bring up in the embedded setups.
+From: Denis Mukhin <dmukhin@ford.com>
 
-This patch series introduces initial in-hypervisor emulator for
-NS8250/NS16x50-compatible UARTs under CONFIG_VUART_NS16550.
+Added missing definitions needed for NS8250 UART emulator.
 
-In parallel domain creation scenario (hyperlaunch), NS16550 emulator helps
-early guest firmware and OS bringup debugging, because it eliminates dependency
-on the external emulator (qemu) being operational by the time domains are
-created.
+Re-used newly introduced MSR definitions in the existing ns16550 driver.
 
-The emulator also allows to forward the physical console input to the x86
-domain which is useful when a system has only one physical UART for early
-debugging and this UART is owned by Xen.
-
-By default, CONFIG_VUART_NS16550 enables emulation of NS16550 at I/O port
-0x3f8, IRQ#4 in guest OS (legacy COM1).
-
-Legacy COM resources can be selected at built-time and cannot be configured
-per-domain yet.
-
-The NS16550 emulator is disabled by default.
-
-Series
-======
-- patches 1-17: preparation patches. That covers existing UART emulators
-  cleanup, UART emulation framework, console driver cleanups and fixes.
-
-- patches 18-24: initial NS16550 emulator. That adds the I/O port emulator
-  for legacy PC COM UARTs, Kconfig option and enabling emulator for HVM
-  domains globally and build-time.
-
-Limitations
-===========
-- Only x86;
-- Only HVM domains support (build-time), PVH domains are not supported yet;
-- Only legacy COM{1,2,3,4} resources via Kconfig, custom I/O ports/IRQs
-  are not supported;
-- Only Xen console as a backend, no inter-domain communication (similar to
-  vpl011 on Arm);
-- Only 8n1 emulation (8-bit data, no parity, 1 stop bit);
-- No toolstack integration;
-- No baud rate emulation (reports 115200 baud to the guest OS);
-- No FIFO-less mode emulation;
-- No RX FIFO interrupt moderation (FCR) emulation;
-- No integration w/ VM snapshotting (HVM_REGISTER_SAVE_RESTORE() and
-  friends);
-- No ISA IRQ sharing allowed;
-- No MMIO-based UART emulation.
-
-Testing
-=======
-
-Gitlab CI
-  https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/1610989357
-
-Manual Testing
-  I tested boot of HVM linux guest w/ OVMF as the virtual firmware.
-
-  The emulator, if enabled via CONFIG_VUART_NS16550=y, will use COM1
-  (0x3f8) resources by default.
-
-  To test w/ virtual COM1, the guest kernel parameters should contain
-    earlycon=uart,io,0x3f8,115200n8 console=uart,io,0x3f8,115200n8
-
-  Xen is able to forward physical console input to the domain w/ virtual
-  NS16550. To switch the console focus press Ctrl+aaa. If console= is given to
-  the HVM kernel, then the user shall be able to see the login prompt on xen
-  console once console focus is switched to the HVM guest.
-
----
-Changes in v3:
-- renamed emulator s/NS8250/NS16550/g
-- reduced the patch series after addressing v2 feedback
-- introduced driver framework for UART emulators
-- unified guest OS printouts across all available UART emulators
-- Link to v2: https://lore.kernel.org/xen-devel/20241205-vuart-ns8250-v1-0-e9aa923127eb@ford.com/
-
-Changes in v2:
-- dropped kmalloc/kfree aliases
-- fixed ECLAIR jobs (thanks Andrew Cooper)
-- addressed console forwarding on arm32 and arm64 (thanks to Luca Fancellu)
-- moved NS8250 debugging stubs into its own patch
-- added fix for https://gitlab.com/xen-project/xen/-/issues/184
-- Link to v1: https://lore.kernel.org/r/20241126-vuart-ns8250-v1-v1-0-87b9a8375b7a@ford.com
----
+Also, fixed indentation in a comment for FCR register.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-
 ---
-Denis Mukhin (24):
-      xen/ctype: introduce is_console_printable()
-      arm/vuart: move vpl011-related code to vpl011 emulator
-      arm/vuart: add hwdom prefix to UART emulator
-      xen/console: introduce console_{get,put}_domain()
-      xen/console: introduce consoled_is_enabled()
-      xen/domain: introduce hardware emulation flags
-      xen/console: introduce framework for UART emulators
-      xen/console: rename switch_serial_input() to console_switch_input()
-      xen/console: rename console_rx to console_owner
-      xen/console: introduce use of 'is_console' flag
-      xen/domain: move get_initial_domain_id() to arch-independent header
-      xen/console: introduce console_{get,set}_owner()
-      xen/console: introduce hwdom_crashconsole=
-      xen/console: simplify console owner switch hint
-      xen/console: make console buffer size configurable
-      xen/console: introduce console_write()
-      xen/console: flush console ring to physical console
-      xen/include: introduce resource.h
-      xen/8250-uart: add missing definitions
-      x86/hvm: add HVM-specific Kconfig
-      x86/hvm: introduce NS16550-compatible UART emulator
-      x86/hvm: enable NS16550-compatible UART emulator
-      docs/misc: update console documentation
-      xen/console: unify printout behavior for UART emulators
+ xen/drivers/char/ns16550.c  |  6 ++--
+ xen/include/xen/8250-uart.h | 78 +++++++++++++++++++++++++++++++++------------
+ 2 files changed, 60 insertions(+), 24 deletions(-)
 
- automation/eclair_analysis/ECLAIR/deviations.ecl |   1 +
- docs/misc/console.txt                            |  50 +-
- docs/misc/xen-command-line.pandoc                |  21 +-
- tools/helpers/init-xenstore-domain.c             |   1 +
- tools/libs/light/libxl_x86.c                     |   5 +-
- tools/ocaml/libs/xc/xenctrl.ml                   |   1 +
- tools/ocaml/libs/xc/xenctrl.mli                  |   1 +
- tools/ocaml/libs/xc/xenctrl_stubs.c              |   1 +
- tools/python/xen/lowlevel/xc/xc.c                |   5 +-
- tools/tests/paging-mempool/test-paging-mempool.c |   1 +
- tools/tests/resource/test-resource.c             |   1 +
- tools/tests/tsx/test-tsx.c                       |   1 +
- xen/arch/arm/Kconfig                             |   1 +
- xen/arch/arm/dom0less-build.c                    |  11 +-
- xen/arch/arm/domain.c                            |   6 +-
- xen/arch/arm/domain_build.c                      |   7 +-
- xen/arch/arm/domctl.c                            |  11 +-
- xen/arch/arm/include/asm/domain.h                |   2 +
- xen/arch/arm/include/asm/setup.h                 |   2 -
- xen/arch/arm/include/asm/vpl011.h                |  21 +-
- xen/arch/arm/setup.c                             |   2 -
- xen/arch/arm/vpl011.c                            |  57 +-
- xen/arch/arm/vuart.c                             |  49 +-
- xen/arch/arm/vuart.h                             |   8 +-
- xen/arch/arm/xen.lds.S                           |   1 +
- xen/arch/ppc/include/asm/domain.h                |   2 +
- xen/arch/ppc/include/asm/setup.h                 |   2 -
- xen/arch/ppc/xen.lds.S                           |   1 +
- xen/arch/riscv/include/asm/domain.h              |   2 +
- xen/arch/riscv/include/asm/setup.h               |   2 -
- xen/arch/riscv/xen.lds.S                         |   1 +
- xen/arch/x86/Kconfig                             |  76 +-
- xen/arch/x86/dom0_build.c                        |   2 +
- xen/arch/x86/domain.c                            |  21 +-
- xen/arch/x86/hvm/Kconfig                         | 122 +++
- xen/arch/x86/hvm/Makefile                        |   1 +
- xen/arch/x86/hvm/hvm.c                           |  14 +-
- xen/arch/x86/hvm/vuart-ns16550.c                 | 931 +++++++++++++++++++++++
- xen/arch/x86/include/asm/domain.h                |   8 +-
- xen/arch/x86/include/asm/hvm/domain.h            |   4 +
- xen/arch/x86/include/asm/pv/shim.h               |   5 +-
- xen/arch/x86/include/asm/setup.h                 |   2 -
- xen/arch/x86/pv/shim.c                           |   7 +-
- xen/arch/x86/xen.lds.S                           |   1 +
- xen/common/device-tree/device-tree.c             |  21 +-
- xen/common/domain.c                              |  31 +-
- xen/common/domctl.c                              |  11 +-
- xen/common/kernel.c                              |   8 +
- xen/common/keyhandler.c                          |   4 +
- xen/drivers/Kconfig                              |   5 +
- xen/drivers/Makefile                             |   1 +
- xen/drivers/char/Kconfig                         |  11 +
- xen/drivers/char/console.c                       | 377 +++++----
- xen/drivers/char/consoled.c                      |  17 +-
- xen/drivers/char/ns16550.c                       |   6 +-
- xen/drivers/passthrough/arm/smmu.c               |  15 +-
- xen/drivers/virtdev-uart.c                       |  68 ++
- xen/include/Makefile                             |   1 +
- xen/include/public/arch-x86/xen.h                |  30 +-
- xen/include/public/virtdev.h                     |  64 ++
- xen/include/xen/8250-uart.h                      |  78 +-
- xen/include/xen/console.h                        |   3 +-
- xen/include/xen/consoled.h                       |  32 +-
- xen/include/xen/ctype.h                          |   7 +
- xen/include/xen/domain.h                         |   9 +
- xen/include/xen/lib.h                            |   3 +
- xen/include/xen/resource.h                       |  37 +
- xen/include/xen/virtdev-uart.h                   |  72 ++
- xen/include/xen/xen.lds.h                        |  10 +
- 69 files changed, 1913 insertions(+), 479 deletions(-)
----
-base-commit: 7e6edeaee38c66266a941bfa66d17eeeeb492fbe
-change-id: 20250103-vuart-ns8250-v3-f8e1110777fe
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index eaeb0e09d01ea70f865b8aee4f34ab7a0d4c5cf9..025ba5819d46ea567d41cea512b5f166969fb95f 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -721,9 +721,9 @@ static int __init check_existence(struct ns16550 *uart)
+      * Check to see if a UART is really there.
+      * Use loopback test mode.
+      */
+-    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | 0x0A);
+-    status = ns_read_reg(uart, UART_MSR) & 0xF0;
+-    return (status == 0x90);
++    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | UART_MCR_RTS | UART_MCR_OUT2);
++    status = ns_read_reg(uart, UART_MSR) & UART_MSR_STATUS;
++    return (status == (UART_MSR_CTS | UART_MSR_DCD));
+ }
+ 
+ #ifdef CONFIG_HAS_PCI
+diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
+index d13352940c13c50bac17d4cdf2f3bf584380776a..6d1af31d582a3dd674a401d7f649e28c889cdc3e 100644
+--- a/xen/include/xen/8250-uart.h
++++ b/xen/include/xen/8250-uart.h
+@@ -32,6 +32,7 @@
+ #define UART_MCR          0x04    /* Modem control        */
+ #define UART_LSR          0x05    /* line status          */
+ #define UART_MSR          0x06    /* Modem status         */
++#define UART_SCR          0x07    /* Scratch pad          */
+ #define UART_USR          0x1f    /* Status register (DW) */
+ #define UART_DLL          0x00    /* divisor latch (ls) (DLAB=1) */
+ #define UART_DLM          0x01    /* divisor latch (ms) (DLAB=1) */
+@@ -42,6 +43,8 @@
+ #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
+ #define UART_IER_ELSI     0x04    /* rx line status       */
+ #define UART_IER_EMSI     0x08    /* MODEM status         */
++#define UART_IER_MASK \
++    (UART_IER_ERDAI | UART_IER_ETHREI | UART_IER_ELSI | UART_IER_EMSI)
+ 
+ /* Interrupt Identification Register */
+ #define UART_IIR_NOINT    0x01    /* no interrupt pending */
+@@ -51,12 +54,19 @@
+ #define UART_IIR_THR      0x02    /*  - tx reg. empty     */
+ #define UART_IIR_MSI      0x00    /*  - MODEM status      */
+ #define UART_IIR_BSY      0x07    /*  - busy detect (DW) */
++#define UART_IIR_FE       0xC0    /* FIFO enabled (2 bits) */
+ 
+ /* FIFO Control Register */
+-#define UART_FCR_ENABLE   0x01    /* enable FIFO          */
+-#define UART_FCR_CLRX     0x02    /* clear Rx FIFO        */
+-#define UART_FCR_CLTX     0x04    /* clear Tx FIFO        */
+-#define UART_FCR_DMA      0x10    /* enter DMA mode       */
++#define UART_FCR_ENABLE     BIT(0, U)   /* enable FIFO          */
++#define UART_FCR_CLRX       BIT(1, U)   /* clear Rx FIFO        */
++#define UART_FCR_CLTX       BIT(2, U)   /* clear Tx FIFO        */
++#define UART_FCR_DMA        BIT(3, U)   /* enter DMA mode       */
++#define UART_FCR_RESERVED0  BIT(4, U)   /* reserved; always 0   */
++#define UART_FCR_RESERVED1  BIT(5, U)   /* reserved; always 0   */
++#define UART_FCR_RTB0       BIT(6, U)   /* receiver trigger bit #0 */
++#define UART_FCR_RTB1       BIT(7, U)   /* receiver trigger bit #1 */
++#define UART_FCR_TRG_MASK   (UART_FCR_RTB0 | UART_FCR_RTB1)
++
+ #define UART_FCR_TRG1     0x00    /* Rx FIFO trig lev 1   */
+ #define UART_FCR_TRG4     0x40    /* Rx FIFO trig lev 4   */
+ #define UART_FCR_TRG8     0x80    /* Rx FIFO trig lev 8   */
+@@ -64,17 +74,17 @@
+ 
+ /*
+  * Note: The FIFO trigger levels are chip specific:
+- *	RX:76 = 00  01  10  11	TX:54 = 00  01  10  11
+- * PC16550D:	 1   4   8  14		xx  xx  xx  xx
+- * TI16C550A:	 1   4   8  14          xx  xx  xx  xx
+- * TI16C550C:	 1   4   8  14          xx  xx  xx  xx
+- * ST16C550:	 1   4   8  14		xx  xx  xx  xx
+- * ST16C650:	 8  16  24  28		16   8  24  30	PORT_16650V2
+- * NS16C552:	 1   4   8  14		xx  xx  xx  xx
+- * ST16C654:	 8  16  56  60		 8  16  32  56	PORT_16654
+- * TI16C750:	 1  16  32  56		xx  xx  xx  xx	PORT_16750
+- * TI16C752:	 8  16  56  60		 8  16  32  56
+- * Tegra:	 1   4   8  14		16   8   4   1	PORT_TEGRA
++ *  RX:76 = 00  01  10  11  TX:54 = 00  01  10  11
++ * PC16550D:     1   4   8  14      xx  xx  xx  xx
++ * TI16C550A:    1   4   8  14      xx  xx  xx  xx
++ * TI16C550C:    1   4   8  14      xx  xx  xx  xx
++ * ST16C550:     1   4   8  14      xx  xx  xx  xx
++ * ST16C650:     8  16  24  28      16   8  24  30  PORT_16650V2
++ * NS16C552:     1   4   8  14      xx  xx  xx  xx
++ * ST16C654:     8  16  56  60       8  16  32  56  PORT_16654
++ * TI16C750:     1  16  32  56      xx  xx  xx  xx  PORT_16750
++ * TI16C752:     8  16  56  60       8  16  32  56
++ * Tegra:        1   4   8  14      16   8   4   1  PORT_TEGRA
+  */
+ #define UART_FCR_R_TRIG_00 0x00
+ #define UART_FCR_R_TRIG_01 0x40
+@@ -96,11 +106,33 @@
+ #define UART_LCR_CONF_MODE_B	0xBF		/* Configuration mode B */
+ 
+ /* Modem Control Register */
+-#define UART_MCR_DTR      0x01    /* Data Terminal Ready  */
+-#define UART_MCR_RTS      0x02    /* Request to Send      */
+-#define UART_MCR_OUT2     0x08    /* OUT2: interrupt mask */
+-#define UART_MCR_LOOP     0x10    /* Enable loopback test mode */
+-#define UART_MCR_TCRTLR   0x40    /* Access TCR/TLR (TI16C752, EFR[4]=1) */
++#define UART_MCR_DTR            BIT(0, U)   /* Data Terminal Ready  */
++#define UART_MCR_RTS            BIT(1, U)   /* Request to Send      */
++#define UART_MCR_OUT1           BIT(2, U)   /* OUT1: interrupt mask */
++#define UART_MCR_OUT2           BIT(3, U)   /* OUT2: interrupt mask */
++#define UART_MCR_LOOP           BIT(4, U)   /* Enable loopback test mode */
++#define UART_MCR_RESERVED0      BIT(5, U)   /* Reserved #0 */
++#define UART_MCR_RESERVED1      BIT(6, U)   /* Reserved #1 */
++#define UART_MCR_TCRTLR         BIT(6, U)   /* Access TCR/TLR (TI16C752, EFR[4]=1) */
++#define UART_MCR_RESERVED2      BIT(7, U)   /* Reserved #2 */
++#define UART_MCR_MASK \
++    (UART_MCR_DTR | UART_MCR_RTS | \
++     UART_MCR_OUT1 | UART_MCR_OUT2 | \
++     UART_MCR_LOOP)
++
++/* Modem Status Register */
++#define UART_MSR_DCTS           BIT(0, U)   /* Change in CTS */
++#define UART_MSR_DDSR           BIT(1, U)   /* Change in DSR */
++#define UART_MSR_TERI           BIT(2, U)   /* Change in RI */
++#define UART_MSR_DDCD           BIT(3, U)   /* Change in CTS */
++#define UART_MSR_CTS            BIT(4, U)
++#define UART_MSR_DSR            BIT(5, U)
++#define UART_MSR_RI             BIT(6, U)
++#define UART_MSR_DCD            BIT(7, U)
++#define UART_MSR_CHANGE \
++    (UART_MSR_DCTS | UART_MSR_DDSR | UART_MSR_TERI | UART_MSR_DDCD)
++#define UART_MSR_STATUS \
++    (UART_MSR_CTS | UART_MSR_DSR | UART_MSR_RI | UART_MSR_DCD)
+ 
+ /* Line Status Register */
+ #define UART_LSR_DR       0x01    /* Data ready           */
+@@ -111,6 +143,7 @@
+ #define UART_LSR_THRE     0x20    /* Xmit hold reg empty  */
+ #define UART_LSR_TEMT     0x40    /* Xmitter empty        */
+ #define UART_LSR_ERR      0x80    /* Error                */
++#define UART_LSR_MASK     (UART_LSR_OE | UART_LSR_BI)
+ 
+ /* These parity settings can be ORed directly into the LCR. */
+ #define UART_PARITY_NONE  (0<<3)
+@@ -119,7 +152,10 @@
+ #define UART_PARITY_MARK  (5<<3)
+ #define UART_PARITY_SPACE (7<<3)
+ 
+-/* Frequency of external clock source. This definition assumes PC platform. */
++/*
++ * Frequency of external UART clock source.
++ * Same as IBM PC master input clock frequency.
++ */
+ #define UART_CLOCK_HZ     1843200
+ 
+ /* Bits in Exar specific UART_XR_EFR register */
 
-Best regards,
 -- 
-Denis Mukhin <dmukhin@ford.com>
+2.34.1
 
 
 
