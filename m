@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA01BE77188
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7874C02184
 	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867485.1279065 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.867490.1279102 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpv-0001OW-19; Wed, 08 Jan 2025 15:19:11 +0000
+	id 1tVXpz-0002Xo-W2; Wed, 08 Jan 2025 15:19:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867485.1279065; Wed, 08 Jan 2025 15:19:10 +0000
+Received: by outflank-mailman (output) from mailman id 867490.1279102; Wed, 08 Jan 2025 15:19:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpu-0001Nk-Nm; Wed, 08 Jan 2025 15:19:10 +0000
-Received: by outflank-mailman (input) for mailman id 867485;
- Wed, 08 Jan 2025 15:19:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tVXpz-0002X1-Ka; Wed, 08 Jan 2025 15:19:15 +0000
+Received: by outflank-mailman (input) for mailman id 867490;
+ Wed, 08 Jan 2025 15:19:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HyFE=UA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tVXps-0008Lg-GL
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:08 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e78e75fd-cdd3-11ef-a0df-8be0dac302b0;
- Wed, 08 Jan 2025 16:19:08 +0100 (CET)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-aa67ac42819so2455543566b.0
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:07 -0800 (PST)
+ id 1tVXpy-0008Ue-05
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:14 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ea3f2af6-cdd3-11ef-99a4-01e77a169b0f;
+ Wed, 08 Jan 2025 16:19:12 +0100 (CET)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aaee0b309adso2115822366b.3
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:12 -0800 (PST)
 Received: from localhost.localdomain ([66.81.170.107])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.06
+ a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 07:19:06 -0800 (PST)
+ Wed, 08 Jan 2025 07:19:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,173 +47,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e78e75fd-cdd3-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: ea3f2af6-cdd3-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736349547; x=1736954347; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1736349552; x=1736954352; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yjMmCnPvYhGWKY9jq+47lrrCTBXbD9mgdkXdbRy6L+U=;
-        b=T93PYqB+WYv9aZXqGBBSHyzcJ12AJYpjmKiI8tLy0XIN3Ff2sBCULlOJTRnpg+kt3t
-         EayJEpoioR6l92BSCOdvF1KA/fkfVAiL6eP1mxr5BLGxA7A5c+hMlDo3VYnRRrB2I3WH
-         q24QD4WPuoJTFlv//KWTU25yySKyhYeOHa4OE=
+        bh=4dAl5hiiumxZdSL6vCO/VaNqrRA8aywqXxbQG/mKtGY=;
+        b=Hmh+CMApb3O8FVO4bwKJSJMyHrpRmdeiirVhb4uxxifc3B0XpmYesVCsMIgr+xx4Lc
+         a2lz/ukJhHz6QcVV4fFABgoy8K3jHsbAHMd/5F9WszbzEOce1Um3G+yofi+qWZ49sZoc
+         3BxutmNm50Vw4ZsSC1NsWS55fO4n+NRkgdKuk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736349547; x=1736954347;
+        d=1e100.net; s=20230601; t=1736349552; x=1736954352;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=yjMmCnPvYhGWKY9jq+47lrrCTBXbD9mgdkXdbRy6L+U=;
-        b=Pb5k16uYU5fPwzxXi/yiEaPQRN5YPbFEgnkYAo86jLLTdodT8nJxSV6imgF+v4ujsf
-         e9DFptFEV5q6w5udN7tjhmJTDcIYGVQp7nkpbxlf8jkJw3lw3TwE3IDm8bAQyUP0MoH2
-         EQ8dPz1yNAd7rC3cWf70z/IQhM4aNGuPAafaBhfue0k1RDDMkeqZJo+eG1/5vUjCWyIc
-         AIsfia7SYRlDy9Zr3nvJGrOCy0fLaWZjFcHxVPs/wHhDDZpoiMU5RPLDAT+Ie9FCcg60
-         LWEwly3PJzUz0NUN9u6yMa/BRepARL6h3WCnvl+OHb0bqMX3EpIE8khrne71bqyGjXti
-         XKvw==
-X-Gm-Message-State: AOJu0Yw9W6tB21VJ634nXKI2jDk1kvQRJ4UKl+O5D4wKMXNguKCt2u+h
-	WGOcgan975qlVowuCRoIjrb8cIpsXNJuhvZsIp5415zQZX0BHDm8yl8UJ0L5ThswC3PyLsLK7wC
-	Idmigrg==
-X-Gm-Gg: ASbGncsEG3s6loO5wSrzJw13jMdmIIT+mtqAqF2Fn9UezBX6HXpkW4PF6h7xNddHoI7
-	tf9yBiLTmZfu8depvCGLlGNk+Wpk08KacXfUevGZYP4KrH4E6DrysLGvZTHnSiZpXdIXgRftUsw
-	YgLewGqjmbxa/+0qVLMP+XglF02+LJaNN9b1I9VIlNakM/y6yWK2cZ6uZjTvaoVqbqFvFjOby5E
-	n8w6sFVAuQfHalya8rrpXNV+/P2LgqljnfopNaQIgkIwmOdG526ZH9hLJrFH7n9Cper5KhF0Wyp
-	2a4=
-X-Google-Smtp-Source: AGHT+IHm+GlwZHnqvLphieP9LH0FVfXA/XTlt6gMtPQsfzpf8oMG9ZAYuETNdwTvWKs+ujchLnpC2w==
-X-Received: by 2002:a17:907:94c8:b0:aaf:7321:f05a with SMTP id a640c23a62f3a-ab2abc6e773mr279314766b.46.1736349547208;
-        Wed, 08 Jan 2025 07:19:07 -0800 (PST)
+        bh=4dAl5hiiumxZdSL6vCO/VaNqrRA8aywqXxbQG/mKtGY=;
+        b=kZTkqYatzkthByTWjAhvCEMdYJNkpn2U8J930MseWSXE+sAAb8oF5m70rO8QIBEGt5
+         mwjTN4VRJO62ZUqelP0bop8f8GiL7GPQ96q/mQpRmhPyp3o7Abh/LIISNGwUryZM/nPs
+         OVV0JIQahfoBYe7gMx+F53xPZjQdBZYSBRMFJmIT1ZqW3GnzlfFi2+29+K8aRH3+bu9Q
+         QWOj1l3srNavi71gJjMsi0hn1UwhUFjOWaosAW3PZLCrvXA9CKhsPuXhTyYtemaLrE7+
+         ovTb6F4wxvWLlSdNdzW8wJo41ThupJJ8jOWdSH7IidAqRKnPTtAQozbmnRQnpr2gpPn6
+         O0QA==
+X-Gm-Message-State: AOJu0YwGupN/Nf04gQjGhAldnAov8KxdPp+aZPYlbugIROTqya5S+Ij2
+	EGBsonaUI+2cz/hZz/WVXRThEZbsREnnavcgcaOGRNK431QrFozjzHd8x9tsoM3J3al1/o6jWgR
+	Ffs6f9Q==
+X-Gm-Gg: ASbGncuktTLp95nko05sR9HAephjFcmBCzAGwo8N7IMbDaycp3IOv+jpW1zDdjI7chn
+	q1soFU6X4JduksKwN9Zv0HCnbeO5YEpEr9qJu58xRiBWqd+e/z4B67wP9r7ip9YQzzScv7wYLU8
+	3GYJFm2HE2bjTWr4pgUmOVtPV4FYUXkBUgQSgYz3SwXWNLrhorCDZd6MybdWz2VzK20kU5orMiv
+	lwY9B2wyzyNsZ4iyPQWlxBGv7cl3GWHRQNAEXgVXS5d3bHbH658jH83D/byqjilc3+wnVrFnVK1
+	oqY=
+X-Google-Smtp-Source: AGHT+IFxfaz1of1Dy+QRE/RL4Nf+b/dHh+YwZM7uFybv3bH9J3u0daWHFg1k3w3NgvYUSIrBHUHeaQ==
+X-Received: by 2002:a17:907:70c:b0:aa6:9176:61ed with SMTP id a640c23a62f3a-ab2abc6d42emr300126166b.48.1736349551627;
+        Wed, 08 Jan 2025 07:19:11 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Julien Grall <jgrall@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Hongyan Xia <hongyxia@amazon.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <jgrall@amazon.com>,
 	Elias El Yandouzi <eliasely@amazon.com>,
 	Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Subject: [PATCH v5 06/15] xen/x86: Add support for the PMAP
-Date: Wed,  8 Jan 2025 15:18:13 +0000
-Message-ID: <20250108151822.16030-7-alejandro.vallejo@cloud.com>
+Subject: [PATCH v5 10/15] xen/page_alloc: vmap heap nodes when they are outside the direct map
+Date: Wed,  8 Jan 2025 15:18:17 +0000
+Message-ID: <20250108151822.16030-11-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
 References: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <jgrall@amazon.com>
+From: Hongyan Xia <hongyxia@amazon.com>
 
-PMAP will be used in a follow-up patch to bootstrap map domain
-page infrastructure -- we need some way to map pages to setup the
-mapcache without a direct map.
+When we do not have a direct map, archs_mfn_in_direct_map() will always
+return false, thus init_node_heap() will allocate xenheap pages from an
+existing node for the metadata of a new node. This means that the
+metadata of a new node is in a different node, slowing down heap
+allocation.
 
-The functions pmap_{map, unmap} open code {set, clear}_fixmap to break
-the loop.
+Since we now have early vmap, vmap the metadata locally in the new node.
 
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v4->v5:
-  * No changes.
+  * Fix bug introduced in v4 by which node metadata would be
+    unconditionally mapped at the tail of the heap node.
+  * Remove extra space in conditional
 
 v3->v4:
-  * Select PMAP KConfig option iff ONDEMAND_DIRECTMAP is used
-
-v2->v3:
-  * No changes.
+  * Change type of the parameters to paddr_t
+  * Use clear_domain_page() instead of open-coding it
 
 v1->v2:
-  * Declare PMAP entries earlier in fixed_addresses
-  * Reword the commit message
+  * vmap_contig_pages() was renamed to vmap_contig()
+  * Fix indentation and coding style
 
-    The PMAP infrastructure was upstream separately for Arm since
-    Hongyan sent the secret-free hypervisor series. So this is a new
-    patch to plumb the feature on x86.
+Changes from Hongyan's version:
+  * arch_mfn_in_direct_map() was renamed to
+    arch_mfns_in_direct_map()
+  * Use vmap_contig_pages() rather than __vmap(...).
+  * Add missing include (xen/vmap.h) so it compiles on Arm
 ---
- xen/arch/x86/include/asm/fixmap.h |  6 ++++++
- xen/arch/x86/include/asm/pmap.h   | 35 +++++++++++++++++++++++++++++++
- xen/common/Kconfig                |  1 +
- 3 files changed, 42 insertions(+)
- create mode 100644 xen/arch/x86/include/asm/pmap.h
+ xen/common/page_alloc.c | 25 +++++++++++++++++--------
+ 1 file changed, 17 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/fixmap.h b/xen/arch/x86/include/asm/fixmap.h
-index 516ec3fa6c95..80b7b74fd816 100644
---- a/xen/arch/x86/include/asm/fixmap.h
-+++ b/xen/arch/x86/include/asm/fixmap.h
-@@ -21,6 +21,8 @@
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 1c01332b6cb0..3af86a213c4e 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -139,6 +139,7 @@
+ #include <xen/softirq.h>
+ #include <xen/spinlock.h>
+ #include <xen/vm_event.h>
++#include <xen/vmap.h>
+ #include <xen/xvmalloc.h>
  
- #include <xen/acpi.h>
- #include <xen/pfn.h>
-+#include <xen/pmap.h>
+ #include <asm/flushtlb.h>
+@@ -615,22 +616,30 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
+         needed = 0;
+     }
+     else if ( *use_tail && nr >= needed &&
+-              arch_mfns_in_directmap(mfn + nr - needed, needed) &&
+               (!xenheap_bits ||
+                !((mfn + nr - 1) >> (xenheap_bits - PAGE_SHIFT))) )
+     {
+-        _heap[node] = mfn_to_virt(mfn + nr - needed);
+-        avail[node] = mfn_to_virt(mfn + nr - 1) +
+-                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
++        if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
++            _heap[node] = mfn_to_virt(mfn + nr - needed);
++        else
++            _heap[node] = vmap_contig(_mfn(mfn + nr - needed), needed);
 +
- #include <asm/apicdef.h>
- #include <asm/msi.h>
- #include <acpi/apei.h>
-@@ -53,6 +55,10 @@ enum fixed_addresses {
-     FIX_PV_CONSOLE,
-     FIX_XEN_SHARED_INFO,
- #endif /* CONFIG_XEN_GUEST */
-+#ifdef CONFIG_HAS_PMAP
-+    FIX_PMAP_BEGIN,
-+    FIX_PMAP_END = FIX_PMAP_BEGIN + NUM_FIX_PMAP,
-+#endif
-     /* Everything else should go further down. */
-     FIX_APIC_BASE,
-     FIX_IO_APIC_BASE_0,
-diff --git a/xen/arch/x86/include/asm/pmap.h b/xen/arch/x86/include/asm/pmap.h
-new file mode 100644
-index 000000000000..1b3b729b90b2
---- /dev/null
-+++ b/xen/arch/x86/include/asm/pmap.h
-@@ -0,0 +1,35 @@
-+#ifndef __ASM_PMAP_H__
-+#define __ASM_PMAP_H__
++        BUG_ON(!_heap[node]);
++        avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
++                        sizeof(**avail) * NR_ZONES;
+     }
+     else if ( nr >= needed &&
+-              arch_mfns_in_directmap(mfn, needed) &&
+               (!xenheap_bits ||
+                !((mfn + needed - 1) >> (xenheap_bits - PAGE_SHIFT))) )
+     {
+-        _heap[node] = mfn_to_virt(mfn);
+-        avail[node] = mfn_to_virt(mfn + needed - 1) +
+-                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
++        if ( arch_mfns_in_directmap(mfn, needed) )
++            _heap[node] = mfn_to_virt(mfn);
++        else
++            _heap[node] = vmap_contig(_mfn(mfn), needed);
 +
-+#include <asm/fixmap.h>
-+
-+static inline void arch_pmap_map(unsigned int slot, mfn_t mfn)
-+{
-+    unsigned long linear = (unsigned long)fix_to_virt(slot);
-+    l1_pgentry_t *pl1e = &l1_fixmap[l1_table_offset(linear)];
-+
-+    BUILD_BUG_ON(FIX_APIC_BASE - 1 > L1_PAGETABLE_ENTRIES - 1);
-+    ASSERT(!(l1e_get_flags(*pl1e) & _PAGE_PRESENT));
-+
-+    l1e_write(pl1e, l1e_from_mfn(mfn, PAGE_HYPERVISOR));
-+}
-+
-+static inline void arch_pmap_unmap(unsigned int slot)
-+{
-+    unsigned long linear = (unsigned long)fix_to_virt(slot);
-+    l1_pgentry_t *pl1e = &l1_fixmap[l1_table_offset(linear)];
-+
-+    l1e_write(pl1e, l1e_empty());
-+    flush_tlb_one_local(linear);
-+}
-+
-+#endif /* __ASM_PMAP_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 1ee498a3e9a7..5b22b09a4fbc 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -220,6 +220,7 @@ config SPECULATIVE_HARDEN_LOCK
- config ONDEMAND_DIRECTMAP
- 	bool "On-Demand Directmap"
- 	depends on HAS_ONDEMAND_DIRECTMAP
-+	select HAS_PMAP
- 	help
- 	  Contemporary processors may use speculative execution as a
- 	  performance optimisation, but this can potentially be abused by an
++        BUG_ON(!_heap[node]);
++        avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
++                        sizeof(**avail) * NR_ZONES;
+         *use_tail = false;
+     }
+     else if ( get_order_from_bytes(sizeof(**_heap)) ==
 -- 
 2.47.1
 
