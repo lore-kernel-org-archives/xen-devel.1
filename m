@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C3A0E7719A
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867480.1279014 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAF8E7719D
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.867487.1279071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpq-0000A7-BL; Wed, 08 Jan 2025 15:19:06 +0000
+	id 1tVXpv-0001Vj-Jn; Wed, 08 Jan 2025 15:19:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867480.1279014; Wed, 08 Jan 2025 15:19:06 +0000
+Received: by outflank-mailman (output) from mailman id 867487.1279071; Wed, 08 Jan 2025 15:19:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpq-00009y-7s; Wed, 08 Jan 2025 15:19:06 +0000
-Received: by outflank-mailman (input) for mailman id 867480;
- Wed, 08 Jan 2025 15:19:04 +0000
+	id 1tVXpv-0001UP-9Z; Wed, 08 Jan 2025 15:19:11 +0000
+Received: by outflank-mailman (input) for mailman id 867487;
+ Wed, 08 Jan 2025 15:19:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HyFE=UA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tVXpo-0008Ue-QQ
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:04 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
+ id 1tVXpu-0008Ue-IL
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:10 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e4744bb5-cdd3-11ef-99a4-01e77a169b0f;
- Wed, 08 Jan 2025 16:19:02 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aaec61d0f65so285320266b.1
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:02 -0800 (PST)
+ id e82d12c0-cdd3-11ef-99a4-01e77a169b0f;
+ Wed, 08 Jan 2025 16:19:09 +0100 (CET)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-aa692211331so197245766b.1
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:09 -0800 (PST)
 Received: from localhost.localdomain ([66.81.170.107])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.00
+ a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 07:19:01 -0800 (PST)
+ Wed, 08 Jan 2025 07:19:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,39 +47,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e4744bb5-cdd3-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: e82d12c0-cdd3-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736349542; x=1736954342; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1736349548; x=1736954348; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XjrHpoafwPytgBLLE9UWiWZhowYUy5r4Ft9RDVMVLUE=;
-        b=BsK/awXxL3rqIgDMLE74aaE63ujSQ2fhVdgh/kWRIynhd6ZsrLfipJqNuF49i4mcA/
-         h5RQKPKH2e4t5hRYQAHXTvUfK/tND+84iil7xP0SPoYH8dT983wZU2O5gZulYbvpORwO
-         2sUUzPge1ahR8V34KGNIMNvD/72Ntc6/jZvG4=
+        bh=Jw7mWXVpCJfQ9bvcjiyKZM3RdMlwMcvwWhT8eTvVn6U=;
+        b=gUNxLztGT+XuBuLXeJ9Y+muSqTAx9oG17WmI1QGVAMJ5mrCDqqjn/7kKVyNFDVIJ29
+         8wihzLbT9umRID8q2SfEcUHZIR+8BTI0tD8a+BbK86ZeO1ZiHUch4X773ENOj7R4lfwA
+         mydv2YzQ0WCNANOEADXSgPpGpR6sPTIr9QOok=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736349542; x=1736954342;
+        d=1e100.net; s=20230601; t=1736349548; x=1736954348;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XjrHpoafwPytgBLLE9UWiWZhowYUy5r4Ft9RDVMVLUE=;
-        b=TnLdQ3GsSmzH2pWP7mFdaX6I+fpr1/MO0MZxNLRw79F33Crhnjp0evIT0gGQPy7p5A
-         jd8Uhi4GFecFpBr5T1mBgQE2vpFipaTf+ESwVRUgt7djyjvAt2FSc/BtSii4WbQlNYqF
-         LR4OpgHiSY6mW8y6GHmEoPSOWRJGwwsf0N6OFPSgR3psln6J8+oKt3XTOrEV697zl2ET
-         DOyCiPc0pAQk8dlZ0Mc4FjQTixK1oOeLquJLgBwLVVslsISEDgXZyn2e4Xsl5nCemY07
-         2c5EdcY6IR7dBjqSrW9a6ajPzuEa74tYS4E1TFMFM7nGLmZ5S8Me6lgz0QryUrtkW4j1
-         yOfg==
-X-Gm-Message-State: AOJu0YyfeUFCI2EeQ7dktdc9agOInHY8pvHe1L6R4DXMN4KeJ+Xb9WBA
-	h6X8nf2eCJ1MU8RCKzk9crPLvv4TzWKcCtN+pvRi8cFjr+XmS6YAJUDOw2+hRQgcmHiG3b00nr9
-	Cyq2UQQ==
-X-Gm-Gg: ASbGncs+SRfjSGY6gz+F/sVqefvmLVaDoOtvT2pRix9wxyTHMcZVOHl0wm/s3BQkaHc
-	zdZ4Jr87a4USk/Ch2BCWtAhOhhxqus27twt2DhsWWJkxg67KQm8LgZ97eUq8PfjXDW21pSTslmt
-	Lt34SdnGe3vyEwAxacNmDekmI2Bslo5zcEcMe240AEUKZQK7/iP2GNCzj0n83NX9VAkNZ0jHTFk
-	Gp5CQsC3aUHm4VDb5gsCKkfI5g4mhA77zBYOMCXSEM+1IMDGUnutXnEfJRPPIT05yukR/cW4z2l
-	5zw=
-X-Google-Smtp-Source: AGHT+IFy2qJHO7J67PwIOe0KP7iXXVioCmlPY6UKUmkZiRaVm0XX4FKWhIb/MWinoqrJ0CU6MUY5UA==
-X-Received: by 2002:a17:907:1c93:b0:aa6:894c:84b9 with SMTP id a640c23a62f3a-ab2ab6a4da6mr267067066b.23.1736349541822;
-        Wed, 08 Jan 2025 07:19:01 -0800 (PST)
+        bh=Jw7mWXVpCJfQ9bvcjiyKZM3RdMlwMcvwWhT8eTvVn6U=;
+        b=SE1qVMkjSoaUscFxYV6HA0bCx8DIL1KAQQsBRZ7HC71GXqjlrgR6j64estYN9mEqDW
+         NntetsQtlSJlfF5lxbYxLkXwWE7WbGwTP1/KhIQHA7dETNUGJJr2nxArYPTmWkofQ4H3
+         CH4eDx1pj/DYiR2bCnzDna497O/lWKs1plj78I5bVzHeSfJaJdEpAprDiHS+hsX0H7uc
+         qimBI96vXi3LoU7aTqZ4UYI6AAWmb2PEeeV9XM3AGzK1vy1GVSAjoa1aoWAcmfdJiEbe
+         T4oMdEn2qEHwgfggdQa1f1YqD2Av9hG+6o51qAWUCTxmuSeFd/dDhF5g9afu3rr3t1DJ
+         CMtQ==
+X-Gm-Message-State: AOJu0YxsoiGaNL92kpM4ekLPUFtsH+H7bUTSIxF+7ZGpaT6wXfgodHUd
+	/LvwuqJwUgBpbHobVNUXwZKRN2T9WqnYVTT0Q/9dy/l5ON07HCqv/00ZBnmDRa71IZwsnYYlNxd
+	nA/gImQ==
+X-Gm-Gg: ASbGncu2cSnrP3zpgNxieNy8MxmbThKDbP/f9kyk5ENh8Q2V2m/xN7XdhRLzDoe4A44
+	NM+aHcv1veXiOJOZtBBovVJxtobGNSW/uNn+5/IbOPhCyiN1cCzmT1oYpKvC20Y9n4w2c0Ncj5D
+	vDgzKFUKrTcuWRQuX2HOhQcurszOrXJHjjtihORhyAHT+MIOBNSS33RZS6F+09YSmIewvDj+h9/
+	KcOg+e9QWA8ojyrADlITDh33yteavBYpzzSIiAwoFGnnLUx/4A6+z9YsPnb2cLlP/Eo8UQEUscJ
+	EwY=
+X-Google-Smtp-Source: AGHT+IHSHfjOlGcCZmim3Gu0rKS/1nvYqcoEGDp9YfwIaOq2RV4Rfts5cwCxRuUXRYrl6NitiJ0QjA==
+X-Received: by 2002:a17:907:2d0e:b0:aa6:945c:4531 with SMTP id a640c23a62f3a-ab2a79d1d18mr240135266b.7.1736349548147;
+        Wed, 08 Jan 2025 07:19:08 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Hongyan Xia <hongyxia@amazon.com>,
@@ -87,11 +87,10 @@ Cc: Hongyan Xia <hongyxia@amazon.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <jgrall@amazon.com>,
-	Elias El Yandouzi <eliasely@amazon.com>,
 	Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Subject: [PATCH v5 01/15] x86: Create per-domain mapping for guest_root_pt
-Date: Wed,  8 Jan 2025 15:18:08 +0000
-Message-ID: <20250108151822.16030-2-alejandro.vallejo@cloud.com>
+Subject: [PATCH v5 07/15] x86/domain_page: Remove the fast paths when mfn is not in the directmap
+Date: Wed,  8 Jan 2025 15:18:14 +0000
+Message-ID: <20250108151822.16030-8-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
 References: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
@@ -100,265 +99,211 @@ Content-Transfer-Encoding: 8bit
 
 From: Hongyan Xia <hongyxia@amazon.com>
 
-This patch introduces a per-domain mapping for the `guest_root_pt` in PV
-guests as part of the effort to remove the direct map in Xen.
+When mfn is not in direct map, never use mfn_to_virt for any mappings.
 
-For the time being, the `root_pgt` is not mapped or unmapped, as it
-remains
-a Xenheap page. This will be addressed in subsequent patches.
+We replace mfn_x(mfn) <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) with
+arch_mfns_in_direct_map(mfn, 1) because these two are equivalent. The
+extra comparison in arch_mfns_in_direct_map() looks different but
+because
+DIRECTMAP_VIRT_END is always higher, it does not make any difference.
+
+Lastly, domain_page_map_to_mfn() needs to gain to a special case for
+the PMAP.
 
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v4->v5:
-  * bugfix: s/FREE_XENHEAP_PAGE/XFREE/ on destroying root_pt_l1tab.
-  * Add a few extra comments to the declarations for sanity's sake.
-  * Refactor pv_root_pt macro to use L1_PAGETABLE_ENTRIES instead.
-  * Removed extra newline in pv_destory_root_pt_l1tab()
+  * s/BUILD_BUG_ON/ASSERT/, or it won't build with gcc11.
+  * Add CONFIG_HAS_PMAP guards as needed so the code builds without PMAP
+  * Fix typos on 2 arch_mfns_in_directmap() calls in release config.
 
 v3->v4:
-  * Fix over-allocation issue
-  * Update the mappings when switching from kernel to user-mode
-
-v2->v3:
-  * Rename SHADOW_ROOT
-  * Haven't addressed the potentially over-allocation issue as I don't
-get it
-
-v1->v2:
-  * Rework the shadow perdomain mapping solution in the follow-up
-patches
+  * Introduce helper functions virt_is_fixmap and virt_in_fixmap_range
 
 Changes since Hongyan's version:
-  * Remove the final dot in the commit title
-
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+  * arch_mfn_in_direct_map() was renamed to arch_mfns_in_directmap()
+  * add a special case for the PMAP in domain_page_map_to_mfn()
 ---
- xen/arch/x86/include/asm/config.h | 10 ++++++-
- xen/arch/x86/include/asm/domain.h |  3 +++
- xen/arch/x86/mm.c                 | 13 +++++++++
- xen/arch/x86/pv/domain.c          | 44 ++++++++++++++++++++++++++++---
- xen/arch/x86/x86_64/asm-offsets.c |  1 +
- xen/arch/x86/x86_64/entry.S       |  9 ++++++-
- 6 files changed, 74 insertions(+), 6 deletions(-)
+ xen/arch/x86/domain_page.c        | 60 +++++++++++++++++++++++++------
+ xen/arch/x86/include/asm/fixmap.h | 25 +++++++++++++
+ 2 files changed, 75 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
-index 19746f956ec3..42c8a120e7dc 100644
---- a/xen/arch/x86/include/asm/config.h
-+++ b/xen/arch/x86/include/asm/config.h
-@@ -168,7 +168,7 @@
- /* Slot 260: per-domain mappings (including map cache). */
- #define PERDOMAIN_VIRT_START    (PML4_ADDR(260))
- #define PERDOMAIN_SLOT_MBYTES   (PML4_ENTRY_BYTES >> (20 + PAGETABLE_ORDER))
--#define PERDOMAIN_SLOTS         3
-+#define PERDOMAIN_SLOTS         4
- #define PERDOMAIN_VIRT_SLOT(s)  (PERDOMAIN_VIRT_START + (s) * \
-                                  (PERDOMAIN_SLOT_MBYTES << 20))
- /* Slot 4: mirror of per-domain mappings (for compat xlat area accesses). */
-@@ -282,6 +282,14 @@ extern unsigned long xen_phys_start;
- #define ARG_XLAT_START(v)        \
-     (ARG_XLAT_VIRT_START + ((v)->vcpu_id << ARG_XLAT_VA_SHIFT))
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index 55e337aaf703..9582bd63b5c3 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -14,8 +14,10 @@
+ #include <xen/sched.h>
+ #include <xen/vmap.h>
+ #include <asm/current.h>
++#include <asm/fixmap.h>
+ #include <asm/flushtlb.h>
+ #include <asm/hardirq.h>
++#include <asm/pmap.h>
+ #include <asm/setup.h>
  
-+/* pv_root_pt mapping area. The fourth per-domain-mapping sub-area */
-+#define PV_ROOT_PT_MAPPING_VIRT_START   PERDOMAIN_VIRT_SLOT(3)
-+#define PV_ROOT_PT_MAPPING_ENTRIES      MAX_VIRT_CPUS
-+
-+/* The address of a particular VCPU's PV_ROOT_PT */
-+#define PV_ROOT_PT_MAPPING_VCPU_VIRT_START(v) \
-+    (PV_ROOT_PT_MAPPING_VIRT_START + ((v)->vcpu_id * PAGE_SIZE))
-+
- #define ELFSIZE 64
- 
- #define ARCH_CRASH_SAVE_VMCOREINFO
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index b79d6badd71c..b5a14991ca0b 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -273,6 +273,9 @@ struct pv_domain
+ static DEFINE_PER_CPU(struct vcpu *, override);
+@@ -24,6 +26,7 @@ static inline struct vcpu *mapcache_current_vcpu(void)
  {
-     l1_pgentry_t **gdt_ldt_l1tab;
+     /* In the common case we use the mapcache of the running VCPU. */
+     struct vcpu *v = this_cpu(override) ?: current;
++    struct vcpu *idle_v = idle_vcpu[smp_processor_id()];
  
-+    /* Array of pointers to the l1 PTs holding PV root PTs of each vCPU */
-+    l1_pgentry_t **root_pt_l1tab;
+     /*
+      * When current isn't properly set up yet, this is equivalent to
+@@ -35,10 +38,11 @@ static inline struct vcpu *mapcache_current_vcpu(void)
+     /*
+      * When using efi runtime page tables, we have the equivalent of the idle
+      * domain's page tables but current may point at another domain's VCPU.
+-     * Return NULL as though current is not properly set up yet.
++     * Return the idle domains's vcpu on that core because the efi per-domain
++     * region (where the mapcache is) is in-sync with the idle domain.
+      */
+     if ( efi_rs_using_pgtables() )
+-        return NULL;
++        return idle_v;
+ 
+     /*
+      * If guest_table is NULL, and we are running a paravirtualised guest,
+@@ -48,7 +52,7 @@ static inline struct vcpu *mapcache_current_vcpu(void)
+     if ( unlikely(pagetable_is_null(v->arch.guest_table)) && is_pv_vcpu(v) )
+     {
+         /* If we really are idling, perform lazy context switch now. */
+-        if ( (v = idle_vcpu[smp_processor_id()]) == current )
++        if ( (v = idle_v) == current )
+             sync_local_execstate();
+         /* We must now be running on the idle page table. */
+         ASSERT(cr3_pa(read_cr3()) == __pa(idle_pg_table));
+@@ -77,18 +81,28 @@ void *map_domain_page(mfn_t mfn)
+     struct vcpu_maphash_entry *hashent;
+ 
+ #ifdef NDEBUG
+-    if ( mfn_x(mfn) <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
++    if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
+         return mfn_to_virt(mfn_x(mfn));
+ #endif
+ 
+     v = mapcache_current_vcpu();
+-    if ( !v )
+-        return mfn_to_virt(mfn_x(mfn));
++    if ( !v || !v->domain->arch.mapcache.inuse )
++    {
++        if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
++            return mfn_to_virt(mfn_x(mfn));
++        else
++        {
++#ifdef CONFIG_HAS_PMAP
++            BUG_ON(system_state >= SYS_STATE_smp_boot);
++            return pmap_map(mfn);
++#else
++            BUG();
++#endif
++        }
++    }
+ 
+     dcache = &v->domain->arch.mapcache;
+     vcache = &v->arch.mapcache;
+-    if ( !dcache->inuse )
+-        return mfn_to_virt(mfn_x(mfn));
+ 
+     perfc_incr(map_domain_page_count);
+ 
+@@ -184,6 +198,14 @@ void unmap_domain_page(const void *ptr)
+     if ( !va || va >= DIRECTMAP_VIRT_START )
+         return;
+ 
++#ifdef CONFIG_HAS_PMAP
++    if ( virt_is_fixmap(va) )
++    {
++        pmap_unmap(ptr);
++        return;
++    }
++#endif
 +
-     atomic_t nr_l4_pages;
+     ASSERT(va >= MAPCACHE_VIRT_START && va < MAPCACHE_VIRT_END);
  
-     /* Is a 32-bit PV guest? */
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index fa21903eb25a..adcc0b5ff328 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -527,6 +527,14 @@ void make_cr3(struct vcpu *v, mfn_t mfn)
-         v->arch.cr3 |= get_pcid_bits(v, false);
+     v = mapcache_current_vcpu();
+@@ -237,7 +259,7 @@ int mapcache_domain_init(struct domain *d)
+     unsigned int bitmap_pages;
+ 
+ #ifdef NDEBUG
+-    if ( !mem_hotplug && max_page <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
++    if ( !mem_hotplug && arch_mfns_in_directmap(0, max_page) )
+         return 0;
+ #endif
+ 
+@@ -308,7 +330,7 @@ void *map_domain_page_global(mfn_t mfn)
+             local_irq_is_enabled()));
+ 
+ #ifdef NDEBUG
+-    if ( mfn_x(mfn) <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
++    if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
+         return mfn_to_virt(mfn_x(mfn));
+ #endif
+ 
+@@ -335,6 +357,24 @@ mfn_t domain_page_map_to_mfn(const void *ptr)
+     if ( va >= DIRECTMAP_VIRT_START )
+         return _mfn(virt_to_mfn(ptr));
+ 
++#ifdef CONFIG_HAS_PMAP
++    /*
++     * The fixmap is stealing the top-end of the VMAP. So the check for
++     * the PMAP *must* happen first.
++     *
++     * Also, the fixmap translate a slot to an address backwards. The
++     * logic will rely on it to avoid any complexity. So check at
++     * compile time this will always hold.
++     */
++    ASSERT(fix_to_virt(FIX_PMAP_BEGIN) > fix_to_virt(FIX_PMAP_END));
++
++    if ( virt_in_fixmap_range(va, FIX_PMAP_BEGIN, FIX_PMAP_END) )
++    {
++        BUG_ON(system_state >= SYS_STATE_smp_boot);
++        return l1e_get_mfn(l1_fixmap[l1_table_offset(va)]);
++    }
++#endif /* CONFIG_HAS_PMAP */
++
+     if ( va >= VMAP_VIRT_START && va < VMAP_VIRT_END )
+         return vmap_to_mfn(va);
+ 
+diff --git a/xen/arch/x86/include/asm/fixmap.h b/xen/arch/x86/include/asm/fixmap.h
+index 80b7b74fd816..381c95a8b11f 100644
+--- a/xen/arch/x86/include/asm/fixmap.h
++++ b/xen/arch/x86/include/asm/fixmap.h
+@@ -101,6 +101,31 @@ static inline unsigned long virt_to_fix(const unsigned long vaddr)
+     return __virt_to_fix(vaddr);
  }
  
-+/* Index of the l1 PT that maps v's root PT */
-+#define pv_root_pt_idx(v) ((v)->vcpu_id / L1_PAGETABLE_ENTRIES)
-+
-+/* Pointer to the PTE that maps v's root PT in the perdomain area */
-+#define pv_root_pt_pte(v) \
-+    ((v)->domain->arch.pv.root_pt_l1tab[pv_root_pt_idx(v)] + \
-+     ((v)->vcpu_id & (L1_PAGETABLE_ENTRIES - 1)))
-+
- void write_ptbase(struct vcpu *v)
- {
-     const struct domain *d = v->domain;
-@@ -538,11 +546,16 @@ void write_ptbase(struct vcpu *v)
- 
-     if ( is_pv_domain(d) && d->arch.pv.xpti )
-     {
-+        mfn_t guest_root_pt = _mfn(MASK_EXTR(v->arch.cr3, X86_CR3_ADDR_MASK));
-+        l1_pgentry_t *pte = pv_root_pt_pte(v);
-+
-         cpu_info->root_pgt_changed = true;
-         cpu_info->pv_cr3 = __pa(this_cpu(root_pgt));
-         if ( new_cr4 & X86_CR4_PCIDE )
-             cpu_info->pv_cr3 |= get_pcid_bits(v, true);
-         switch_cr3_cr4(v->arch.cr3, new_cr4);
-+
-+        l1e_write(pte, l1e_from_mfn(guest_root_pt, __PAGE_HYPERVISOR_RO));
-     }
-     else
-     {
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 7aef628f55be..4b85a02d910e 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -289,6 +289,20 @@ static void pv_destroy_gdt_ldt_l1tab(struct vcpu *v)
-                               1U << GDT_LDT_VCPU_SHIFT);
- }
- 
-+static int pv_create_root_pt_l1tab(const struct vcpu *v)
++static inline bool virt_is_fixmap(const unsigned long vaddr)
 +{
-+    return create_perdomain_mapping(v->domain,
-+                                    PV_ROOT_PT_MAPPING_VCPU_VIRT_START(v),
-+                                    1, v->domain->arch.pv.root_pt_l1tab,
-+                                    NULL);
++    return vaddr >= FIXADDR_START && vaddr < FIXADDR_TOP;
 +}
 +
-+static void pv_destroy_root_pt_l1tab(const struct vcpu *v)
++static inline bool virt_in_fixmap_range(
++    const unsigned long vaddr,
++    const unsigned int start_idx,
++    const unsigned int end_idx
++)
 +{
-+    destroy_perdomain_mapping(v->domain,
-+                              PV_ROOT_PT_MAPPING_VCPU_VIRT_START(v), 1);
++    unsigned long start_addr = (unsigned long)fix_to_virt(start_idx);
++    unsigned long end_addr = (unsigned long)fix_to_virt(end_idx);
++
++    /*
++     * The check ensures that the virtual address (vaddr) is within the
++     * fixmap range. The addresses are allocated backwards, meaning the
++     * start address is higher than the end address. As a result, the
++     * check ensures that the virtual address is greater than or equal to
++     * the end address, and less than or equal to the start address, which
++     * may appear counterintuitive due to the reverse allocation order.
++     */
++    return ((vaddr & PAGE_MASK) <= start_addr) && (vaddr >= end_addr);
 +}
 +
- void pv_vcpu_destroy(struct vcpu *v)
- {
-     if ( is_pv_32bit_vcpu(v) )
-@@ -298,6 +312,7 @@ void pv_vcpu_destroy(struct vcpu *v)
-     }
- 
-     pv_destroy_gdt_ldt_l1tab(v);
-+    pv_destroy_root_pt_l1tab(v);
-     XFREE(v->arch.pv.trap_ctxt);
- }
- 
-@@ -312,6 +327,13 @@ int pv_vcpu_initialise(struct vcpu *v)
-     if ( rc )
-         return rc;
- 
-+    if ( v->domain->arch.pv.xpti )
-+    {
-+        rc = pv_create_root_pt_l1tab(v);
-+        if ( rc )
-+            goto done;
-+    }
-+
-     BUILD_BUG_ON(X86_NR_VECTORS * sizeof(*v->arch.pv.trap_ctxt) >
-                  PAGE_SIZE);
-     v->arch.pv.trap_ctxt = xzalloc_array(struct trap_info, X86_NR_VECTORS);
-@@ -347,10 +369,12 @@ void pv_domain_destroy(struct domain *d)
- 
-     destroy_perdomain_mapping(d, GDT_LDT_VIRT_START,
-                               GDT_LDT_MBYTES << (20 - PAGE_SHIFT));
-+    destroy_perdomain_mapping(d, PV_ROOT_PT_MAPPING_VIRT_START, d->max_vcpus);
- 
-     XFREE(d->arch.pv.cpuidmasks);
- 
-     FREE_XENHEAP_PAGE(d->arch.pv.gdt_ldt_l1tab);
-+    XFREE(d->arch.pv.root_pt_l1tab);
- }
- 
- void noreturn cf_check continue_pv_domain(void);
-@@ -376,8 +400,22 @@ int pv_domain_initialise(struct domain *d)
-          (d->arch.pv.cpuidmasks = xmemdup(&cpuidmask_defaults)) == NULL )
-         goto fail;
- 
-+    rc = create_perdomain_mapping(d, PV_ROOT_PT_MAPPING_VIRT_START,
-+                                  d->max_vcpus, NULL, NULL);
-+    if ( rc )
-+        goto fail;
-+
-     d->arch.ctxt_switch = &pv_csw;
- 
-+    if ( d->arch.pv.xpti )
-+    {
-+        d->arch.pv.root_pt_l1tab =
-+            xzalloc_array(l1_pgentry_t *,
-+                          DIV_ROUND_UP(d->max_vcpus, L1_PAGETABLE_ENTRIES));
-+        if ( !d->arch.pv.root_pt_l1tab )
-+            goto fail;
-+    }
-+
-     if ( !is_pv_32bit_domain(d) && use_invpcid && cpu_has_pcid )
-         switch ( ACCESS_ONCE(opt_pcid) )
-         {
-@@ -451,7 +489,8 @@ static void _toggle_guest_pt(struct vcpu *v)
-             guest_update = false;
-         }
-     }
--    write_cr3(cr3);
-+
-+    write_ptbase(v);
- 
-     if ( !pagetable_is_null(old_shadow) )
-         shadow_put_top_level(v->domain, old_shadow);
-@@ -491,9 +530,6 @@ void toggle_guest_mode(struct vcpu *v)
-     {
-         struct cpu_info *cpu_info = get_cpu_info();
- 
--        cpu_info->root_pgt_changed = true;
--        cpu_info->pv_cr3 = __pa(this_cpu(root_pgt)) |
--                           (d->arch.pv.pcid ? get_pcid_bits(v, true) : 0);
-         /*
-          * As in _toggle_guest_pt() the XPTI CR3 write needs to be a TLB-
-          * flushing one too for shadow mode guests.
-diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
-index 630bdc39451d..c1ae5013af96 100644
---- a/xen/arch/x86/x86_64/asm-offsets.c
-+++ b/xen/arch/x86/x86_64/asm-offsets.c
-@@ -80,6 +80,7 @@ void __dummy__(void)
- 
- #undef OFFSET_EF
- 
-+    OFFSET(VCPU_id, struct vcpu, vcpu_id);
-     OFFSET(VCPU_processor, struct vcpu, processor);
-     OFFSET(VCPU_domain, struct vcpu, domain);
-     OFFSET(VCPU_vcpu_info, struct vcpu, vcpu_info_area.map);
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 40d094d5b2ee..4de41ce743c7 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -170,9 +170,16 @@ FUNC_LOCAL(restore_all_guest)
-         movabs $PADDR_MASK & PAGE_MASK, %rsi
-         movabs $DIRECTMAP_VIRT_START, %rcx
-         and   %rsi, %rdi
--        and   %r9, %rsi
-         add   %rcx, %rdi
-+
-+        /*
-+         * The address in the vCPU cr3 is always mapped in the per-domain
-+         * pv_root_pt virt area.
-+         */
-+        imul  $PAGE_SIZE, VCPU_id(%rbx), %esi
-+        movabs $PV_ROOT_PT_MAPPING_VIRT_START, %rcx
-         add   %rcx, %rsi
-+
-         mov   $ROOT_PAGETABLE_FIRST_XEN_SLOT, %ecx
-         mov   root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rsi), %r8
-         mov   %r8, root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rdi)
+ enum fixed_addresses_x {
+     /* Index 0 is reserved since fix_x_to_virt(0) == FIXADDR_X_TOP. */
+     FIX_X_RESERVED,
 -- 
 2.47.1
 
