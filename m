@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 648F9E77188
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:12:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867470.1278994 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74ADCE77188
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.867488.1279082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXis-0007XQ-DN; Wed, 08 Jan 2025 15:11:54 +0000
+	id 1tVXpw-0001rT-Ql; Wed, 08 Jan 2025 15:19:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867470.1278994; Wed, 08 Jan 2025 15:11:54 +0000
+Received: by outflank-mailman (output) from mailman id 867488.1279082; Wed, 08 Jan 2025 15:19:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXis-0007XJ-9G; Wed, 08 Jan 2025 15:11:54 +0000
-Received: by outflank-mailman (input) for mailman id 867470;
- Wed, 08 Jan 2025 15:11:53 +0000
+	id 1tVXpw-0001qr-Is; Wed, 08 Jan 2025 15:19:12 +0000
+Received: by outflank-mailman (input) for mailman id 867488;
+ Wed, 08 Jan 2025 15:19:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2h7L=UA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tVXiq-0007XB-TJ
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:11:52 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ <SRS0=HyFE=UA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1tVXpu-0008Lg-Qr
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:10 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e394623a-cdd2-11ef-a0df-8be0dac302b0;
- Wed, 08 Jan 2025 16:11:51 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aaf57c2e0beso1472880766b.3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:11:51 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab2bb7e58f3sm42149466b.174.2025.01.08.07.11.50
+ id e8ece51c-cdd3-11ef-a0df-8be0dac302b0;
+ Wed, 08 Jan 2025 16:19:10 +0100 (CET)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aaf60d85238so1272582266b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:10 -0800 (PST)
+Received: from localhost.localdomain ([66.81.170.107])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 07:11:50 -0800 (PST)
+ Wed, 08 Jan 2025 07:19:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,138 +47,198 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e394623a-cdd2-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: e8ece51c-cdd3-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1736349111; x=1736953911; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1736349549; x=1736954349; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lURVxWW3sxjmXuCopSuRZQjY5IW3fE/Yrwa2ilZxWk8=;
-        b=ZySm0s2amtbN6Ff4MFbDEtIAK2h2JXkacGMBJS2l4Qh5OnCSjeKKbzsp/eHq3/zZAY
-         DQWavzCXsh+9aVrfsl2GgVW2cDEWJ8yQsc2YuZ+2h6ju6oRzyH0fG8y4FQCY7Jdr9LTy
-         YopzcdWjxV5XIk3lWFFj9xFry7xnRgHWLhN/M=
+        bh=OW3IEcDQIGgERvNx7U/UfHJTPkVf/pejI3zoKLzHcZ4=;
+        b=O72zaF7NS/cBoKnHQexNJbYarf9+dYvh96M2k8qFN+wUvi7IkFykhW2VmNbksaR9RH
+         7GITDaWY15+x0ChXWeLV2tTNQK9wr5MF5fpkFKzk50tnh8b63vY4FmjPzfZwaWevFmsc
+         HZd4+Na3kmOUh0Bm+T8GN2w4ZIGWXWWJz/g+A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736349111; x=1736953911;
+        d=1e100.net; s=20230601; t=1736349549; x=1736954349;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lURVxWW3sxjmXuCopSuRZQjY5IW3fE/Yrwa2ilZxWk8=;
-        b=kcLKMH/6ZoRumBZupkQbTRJ09mZQ9G/vrWkKWAFvxodtQcWiJ2aollzV9G8iqNENLH
-         ApJETIJkJ1JhXhT6/kZYiPQCcOxi8Lc2xbHJJmvYTXiabGTpLtwKTXF06wViTf5WMFte
-         owoKYerZxb/7rf5lAxpczWTt3fGiwOTOgEq2TLLd4RRpQR2x/Wyplrw7QgRNnvvwjOQI
-         3ESTX9dzIwvYC5+vT3IfP6Tl66CgaSZK3eCcoPfkWZRewl1AfzYSv8GKJ1/H9nb3K7US
-         G+eMb74FI4ze8xktizEccnLVt4LZN/1UDgPWwt9NLogXDY6AfsKPo5+dzsD2J7YAfOT/
-         k7Pg==
-X-Gm-Message-State: AOJu0YzwGuMVIQyjDeHdASaIrYd1SRMYIlknySgkQo/66H7EGyQU+7rw
-	D/+uxZ4CjsLvJIOlxYALsLX6JhIRW2f8zJYb/cy47BXnhJtU7wjKQO8bjR9m3BlYa8Iptaoz6kS
-	r
-X-Gm-Gg: ASbGncv81dG0UMxdB5/YbQ17drsBchxthSke8R0vUFze23TXbqUDyD5N7599bLk1Sba
-	Hyc6D4xuDtpOjOqSrub0q2SudhljYJjZncKCVM5PvXNibEliz1HMcve6RIA6nQ835JAKxGqAyUz
-	wC3QU8z9J1D69PBPTRIPIYma56X+yytDlFuI0EUgbkSwaW8GghCmujs9XcatD/MEDXa3kqwThSn
-	MFj8AS5sgXdqx9+Bdp9MGrLAAJ1jUj2iNP3OoQZ272PkigbgNgGbKNa+s3hlxjM9gM=
-X-Google-Smtp-Source: AGHT+IH/QH6tQP0+01ilYuQx000TH6lj3g1C26Rsy/yv4jSJDh8Z7oqgomwsA5hllUw7ykLGYSk8NQ==
-X-Received: by 2002:a17:907:3da3:b0:aa6:33cf:b389 with SMTP id a640c23a62f3a-ab2ab748baamr209199266b.34.1736349110971;
-        Wed, 08 Jan 2025 07:11:50 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
+        bh=OW3IEcDQIGgERvNx7U/UfHJTPkVf/pejI3zoKLzHcZ4=;
+        b=ubMthTtbcUycdSEFddVBcOLar8m3BhdxFLsC+JrBm8kwnMD8UIbmiHCXebqMtCpAMb
+         0N250MvhkD8MMCJQ25ny2Hsl0uhFVbKVBycAnhyYWJydg/SitilFDK3w1Muq/0TDGnls
+         yRN5FjLnJ8wzA+Ff8peQ1nrfGzGEwnbaBS8ZKZAsnJ+CUWyvvBXQc4r0g0JmcSiacuwh
+         VBkefj689YhIJvArELCN4CLx6GVRe8+Yw0ePhmmnPFcM95k2tVVH2vmxdxs/Lptzrr4x
+         yk861rZ/GQCC2d6jj5ZyEg2w7H15wtANX7n7+TR9qmBBq1zZCe5yOLWrWxSxMT4J4/kW
+         9E2w==
+X-Gm-Message-State: AOJu0YzjYDDbIjY6KIW+QfbS8rlNMFZvwf5ERV+SquDIDEMguUlka7Y2
+	bCWhoxZIXjavxBMZko1UIB5vqn3g8ufLrGP0GYLvgQBXnTPyuVqD+ajrR3u7J5K2RYb607bQU4J
+	hANFuoQ==
+X-Gm-Gg: ASbGncvzo5Oj155b46FsIDMSDAghELqsQYQsXnXFn5YxM4usWrbSB4G99/grBwuoYoT
+	1KTp1SeJF6PFq9w2cZsmep6Z+avuWkmgKKnIcfyuEbWf9fY/X8OOBgmo687Z1KRqeJnTYRZMFP0
+	PRZyIAAyin8UI8AxLNkCkdndwgeC1z2DtlmU3bHe/BcKUkmwCoc/jJWhpclR8RAyNp9iyPUeJ/5
+	VblwUkN5KT7O2hSw236f7jeKYzZZN52bWBx3IzNwMcJ38SysdcCJovdWHIgomDw8bLoueOUig8g
+	Xvc=
+X-Google-Smtp-Source: AGHT+IEHcvVuDBftNzgvsSJjl9/9ijtvIIRWM0K6YyDq9Uo03CAZE0TpiiTY8VB9i1idNueu4C4Prg==
+X-Received: by 2002:a17:907:80c:b0:aab:daf9:972 with SMTP id a640c23a62f3a-ab2ab70c9afmr294425966b.28.1736349549423;
+        Wed, 08 Jan 2025 07:19:09 -0800 (PST)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
+Cc: Hongyan Xia <hongyxia@amazon.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2.1 06/18] x86/pv: set/clear guest GDT mappings using {populate,destroy}_perdomain_mapping()
-Date: Wed,  8 Jan 2025 16:11:33 +0100
-Message-ID: <20250108151133.858-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20250108142659.99490-7-roger.pau@citrix.com>
-References: <20250108142659.99490-7-roger.pau@citrix.com>
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <jgrall@amazon.com>,
+	Elias El Yandouzi <eliasely@amazon.com>,
+	Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Subject: [PATCH v5 08/15] xen/page_alloc: Add a path for xenheap when there is no direct map
+Date: Wed,  8 Jan 2025 15:18:15 +0000
+Message-ID: <20250108151822.16030-9-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
+References: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The pv_{set,destroy}_gdt() functions rely on the L1 table(s) that contain such
-mappings being stashed in the domain structure, and thus such mappings being
-modified by merely updating the L1 entries.
+From: Hongyan Xia <hongyxia@amazon.com>
 
-Switch both pv_{set,destroy}_gdt() to instead use
-{populate,destory}_perdomain_mapping().
+When there is not an always-mapped direct map, xenheap allocations need
+to be mapped and unmapped on-demand.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
-Changes since v2:
- - Do not change ordering setup of arch_set_info_guest().
----
- xen/arch/x86/pv/descriptor-tables.c | 28 ++++++++++++----------------
- 1 file changed, 12 insertions(+), 16 deletions(-)
+v4->v5:
+  * Remove stray comma in printk() after XENLOG_WARNING.
 
-diff --git a/xen/arch/x86/pv/descriptor-tables.c b/xen/arch/x86/pv/descriptor-tables.c
-index 02647a2c5047..5a79f022ce13 100644
---- a/xen/arch/x86/pv/descriptor-tables.c
-+++ b/xen/arch/x86/pv/descriptor-tables.c
-@@ -49,23 +49,20 @@ bool pv_destroy_ldt(struct vcpu *v)
- 
- void pv_destroy_gdt(struct vcpu *v)
+Elias @ v4:
+  I have left the call to map_pages_to_xen() and destroy_xen_mappings()
+  in the split heap for now. I am not entirely convinced this is
+necessary
+  because in that setup only the xenheap would be always mapped and
+  this doesn't contain any guest memory (aside the grant-table).
+  So map/unmapping for every allocation seems unnecessary.
+
+v3->v4:
+  * Call printk instead of dprintk()
+
+v1->v2:
+  * Fix remaining wrong indentation in alloc_xenheap_pages()
+
+Changes since Hongyan's version:
+  * Rebase
+  * Fix indentation in alloc_xenheap_pages()
+  * Fix build for arm32
+---
+ xen/common/page_alloc.c | 43 +++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 41 insertions(+), 2 deletions(-)
+
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 1bf070c8c5df..1c01332b6cb0 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -2435,6 +2435,7 @@ void init_xenheap_pages(paddr_t ps, paddr_t pe)
+ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
  {
--    l1_pgentry_t *pl1e = pv_gdt_ptes(v);
--    mfn_t zero_mfn = _mfn(virt_to_mfn(zero_page));
--    l1_pgentry_t zero_l1e = l1e_from_mfn(zero_mfn, __PAGE_HYPERVISOR_RO);
-     unsigned int i;
+     struct page_info *pg;
++    void *virt_addr;
  
-     ASSERT(v == current || !vcpu_cpu_dirty(v));
+     ASSERT_ALLOC_CONTEXT();
  
--    v->arch.pv.gdt_ents = 0;
--    for ( i = 0; i < FIRST_RESERVED_GDT_PAGE; i++ )
--    {
--        mfn_t mfn = l1e_get_mfn(pl1e[i]);
-+    if ( v->arch.cr3 )
-+        destroy_perdomain_mapping(v, GDT_VIRT_START(v),
-+                                  ARRAY_SIZE(v->arch.pv.gdt_frames));
+@@ -2443,17 +2444,36 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
+     if ( unlikely(pg == NULL) )
+         return NULL;
  
--        if ( (l1e_get_flags(pl1e[i]) & _PAGE_PRESENT) &&
--             !mfn_eq(mfn, zero_mfn) )
--            put_page_and_type(mfn_to_page(mfn));
-+    for ( i = 0; i < ARRAY_SIZE(v->arch.pv.gdt_frames); i++)
-+    {
-+        if ( !v->arch.pv.gdt_frames[i] )
-+            break;
- 
--        l1e_write(&pl1e[i], zero_l1e);
-+        put_page_and_type(mfn_to_page(_mfn(v->arch.pv.gdt_frames[i])));
-         v->arch.pv.gdt_frames[i] = 0;
-     }
- }
-@@ -74,8 +71,8 @@ int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
-                unsigned int entries)
- {
-     struct domain *d = v->domain;
--    l1_pgentry_t *pl1e;
-     unsigned int i, nr_frames = DIV_ROUND_UP(entries, 512);
-+    mfn_t mfns[ARRAY_SIZE(v->arch.pv.gdt_frames)];
- 
-     ASSERT(v == current || !vcpu_cpu_dirty(v));
- 
-@@ -90,6 +87,8 @@ int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
-         if ( !mfn_valid(mfn) ||
-              !get_page_and_type(mfn_to_page(mfn), d, PGT_seg_desc_page) )
-             goto fail;
+-    return page_to_virt(pg);
++    virt_addr = page_to_virt(pg);
 +
-+        mfns[i] = mfn;
-     }
++    if ( !has_directmap() &&
++         map_pages_to_xen((unsigned long)virt_addr, page_to_mfn(pg), 1UL << order,
++                          PAGE_HYPERVISOR) )
++    {
++        /* Failed to map xenheap pages. */
++        free_heap_pages(pg, order, false);
++        return NULL;
++    }
++
++    return virt_addr;
+ }
  
-     /* Tear down the old GDT. */
-@@ -97,12 +96,9 @@ int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
  
-     /* Install the new GDT. */
-     v->arch.pv.gdt_ents = entries;
--    pl1e = pv_gdt_ptes(v);
-     for ( i = 0; i < nr_frames; i++ )
--    {
-         v->arch.pv.gdt_frames[i] = frames[i];
--        l1e_write(&pl1e[i], l1e_from_pfn(frames[i], __PAGE_HYPERVISOR_RW));
--    }
-+    populate_perdomain_mapping(v, GDT_VIRT_START(v), mfns, nr_frames);
+ void free_xenheap_pages(void *v, unsigned int order)
+ {
++    unsigned long va = (unsigned long)v & PAGE_MASK;
++
+     ASSERT_ALLOC_CONTEXT();
  
-     return 0;
+     if ( v == NULL )
+         return;
+ 
++    if ( !has_directmap() &&
++         destroy_xen_mappings(va, va + (PAGE_SIZE << order)) )
++        printk(XENLOG_WARNING
++                "Error while destroying xenheap mappings at %p, order %u\n",
++                v, order);
++
+     free_heap_pages(virt_to_page(v), order, false);
+ }
+ 
+@@ -2477,6 +2497,7 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
+ {
+     struct page_info *pg;
+     unsigned int i;
++    void *virt_addr;
+ 
+     ASSERT_ALLOC_CONTEXT();
+ 
+@@ -2489,16 +2510,28 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
+     if ( unlikely(pg == NULL) )
+         return NULL;
+ 
++    virt_addr = page_to_virt(pg);
++
++    if ( !has_directmap() &&
++         map_pages_to_xen((unsigned long)virt_addr, page_to_mfn(pg), 1UL << order,
++                          PAGE_HYPERVISOR) )
++    {
++        /* Failed to map xenheap pages. */
++        free_domheap_pages(pg, order);
++        return NULL;
++    }
++
+     for ( i = 0; i < (1u << order); i++ )
+         pg[i].count_info |= PGC_xen_heap;
+ 
+-    return page_to_virt(pg);
++    return virt_addr;
+ }
+ 
+ void free_xenheap_pages(void *v, unsigned int order)
+ {
+     struct page_info *pg;
+     unsigned int i;
++    unsigned long va = (unsigned long)v & PAGE_MASK;
+ 
+     ASSERT_ALLOC_CONTEXT();
+ 
+@@ -2510,6 +2543,12 @@ void free_xenheap_pages(void *v, unsigned int order)
+     for ( i = 0; i < (1u << order); i++ )
+         pg[i].count_info &= ~PGC_xen_heap;
+ 
++    if ( !has_directmap() &&
++         destroy_xen_mappings(va, va + (PAGE_SIZE << order)) )
++        printk(XENLOG_WARNING
++                "Error while destroying xenheap mappings at %p, order %u\n",
++                v, order);
++
+     free_heap_pages(pg, order, true);
+ }
  
 -- 
-2.46.0
+2.47.1
 
 
