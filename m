@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97889E7719A
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 14:30:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867321.1278833 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12836E7719F
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 14:30:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.867323.1278856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVX4p-0006vB-Ac; Wed, 08 Jan 2025 14:30:31 +0000
+	id 1tVX4r-0007Wq-CS; Wed, 08 Jan 2025 14:30:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867321.1278833; Wed, 08 Jan 2025 14:30:31 +0000
+Received: by outflank-mailman (output) from mailman id 867323.1278856; Wed, 08 Jan 2025 14:30:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVX4p-0006uc-1u; Wed, 08 Jan 2025 14:30:31 +0000
-Received: by outflank-mailman (input) for mailman id 867321;
- Wed, 08 Jan 2025 14:30:29 +0000
+	id 1tVX4r-0007VK-3l; Wed, 08 Jan 2025 14:30:33 +0000
+Received: by outflank-mailman (input) for mailman id 867323;
+ Wed, 08 Jan 2025 14:30:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2h7L=UA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tVX4n-0005q4-Rs
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 14:30:29 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
+ id 1tVX4p-0005q4-S4
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 14:30:31 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1aa728e9-cdcd-11ef-99a4-01e77a169b0f;
- Wed, 08 Jan 2025 15:30:27 +0100 (CET)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d982de9547so287385a12.2
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 06:30:27 -0800 (PST)
+ id 1c7f0dc5-cdcd-11ef-99a4-01e77a169b0f;
+ Wed, 08 Jan 2025 15:30:30 +0100 (CET)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa6c0d1833eso3513387966b.1
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 06:30:30 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d80675a6ddsm25112021a12.3.2025.01.08.06.30.24
+ a640c23a62f3a-aac0e5029f8sm2482634666b.0.2025.01.08.06.30.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 06:30:24 -0800 (PST)
+ Wed, 08 Jan 2025 06:30:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,46 +46,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1aa728e9-cdcd-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 1c7f0dc5-cdcd-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1736346626; x=1736951426; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1736346629; x=1736951429; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=m03YXRaYCtzyIlnn1N4iDdGZqjJbMIkKRiM7m/8rx14=;
-        b=SKEAwsVHqJSOh0hGbVccs3ejq4OwHvtFfki3mykrulYwh7nS1w/yPYDmu9Uyqlo7IO
-         gqCpOgcKIYy8QHMtBEo0u4mbUSzXyAdYOUBnFjA82PtH52lHnjoR4GlWJggehBFeisKm
-         WE7/tgyNqvdyF7MNjUXUI1smD9ZarLL1CaJpo=
+        bh=a/WczJNf+EXdjpOAIA1z4tpLjcOOHU7wqiQHBrWlxLM=;
+        b=b8otjL9TKGUYeRmsnAQd5u3W+9BRpyFEUqLa9m1hc/9nH51zmmEUhoGoQ37KDePh1u
+         ssplNPUJToEgOwtnOXLA/U7CIrnkMUniYXeldA5bjUOpX57Blr7SyMr1ZbEmzqDgh9dF
+         QzJDLuJG04WR+/Ug1sxZ3kKvwt3LNg+yPkpyo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736346626; x=1736951426;
+        d=1e100.net; s=20230601; t=1736346629; x=1736951429;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=m03YXRaYCtzyIlnn1N4iDdGZqjJbMIkKRiM7m/8rx14=;
-        b=eATkH06awYqBoe/UtB831ONsbBFyAHYMg4DhWC1pLTofGTQsbJCRZ2kpjXFn3QTOda
-         3m+XTAOogo3p0fId81eJhTyoaC/aHVDqTRvlZFbDCCxfWa7yK0i9bPwhG9RmWBLJP6i2
-         6QuCM3rGJp2ZG4BTLQYGvEEE+bwKr8AsRhRDoSgfSZ59kT1CuEZeceexk6FOiA33pSeo
-         b6zCu4r6j+7EEf5GLhAFIdMCy4k88n0hUGxYytgr7YhTns5DjrkbspXkfG6qLA0vPrmO
-         b1ErRImWytoeI2DXsqNwox/Eexc4WoUvMzR7JSsNSTtDw/PEemVrqKIEZ2DLfT7aQbfM
-         NwMQ==
-X-Gm-Message-State: AOJu0YwbJCUVT/YBXzduaz9CEIkEYr69OYmOAdBEI540lI2WiQ++Plu7
-	+q6cLvmxlPyAocUEGErNCw2+yEnc5ZElSfNKxYp/3fg7AnWqyP9enQ4wDHTYVcbn0PI8nY+2RAJ
-	R
-X-Gm-Gg: ASbGncvT/slGUT9IwlZ6PC/XGH5++g08P+PbZws0Ok7hulbNESK/I0WloU9zpODzpAc
-	JGnuWeNAUBiPWzF2q5qlSuIb4JDAAdfLL0O/sPxO85/Dz4qzB8uZILVCZxlm2pH7K5MMCMWKhOo
-	xTR88AlawN9Jhq9TV1J9364AjeJCL0Ln5sDUFSJIq/sI4MCT51BQHN6jnn2w8ksCE6g3Tq3mRRn
-	+jFWDhDfDt/3/6qxEBrKqFOCqEuWouZwJ72g7QLF/ouAH9TG36mhy1cHL1OkP+lRh8=
-X-Google-Smtp-Source: AGHT+IEohyalVzvnZbfPC5tNJbo0bX+go4X3U0Zx/bW9ziWAaGUnjmDoFWM3cG+OkBfpx4y5duIIHQ==
-X-Received: by 2002:a05:6402:3581:b0:5d3:ba42:e9fe with SMTP id 4fb4d7f45d1cf-5d972e04bb3mr2416313a12.12.1736346625293;
-        Wed, 08 Jan 2025 06:30:25 -0800 (PST)
+        bh=a/WczJNf+EXdjpOAIA1z4tpLjcOOHU7wqiQHBrWlxLM=;
+        b=mo6M14iTz/4QmGxGKcha6t7d60s51QV18Un1A23vA0pV4Me+cqvnEVlVEPhZoO9Npk
+         MlVxxvt2TE5YgA+BqLT7WtCTpyK3q9LhkrPIerety55qxA3Cd83gIllsSO6XuP4eN8za
+         TWTgUOtv2ADAzvdCIHhR9jEFi82a+2LwaqwIvSMYZF6JuSNSvOnlaDpLFAhU0rcV1EMt
+         8FrfMkxytoB+FTatnCvwy4PG4ptWpVxQeuqKdHzBcPPWNTHWZPomqogoxdReGEuxiEGo
+         Sg57AuSHZgkr3WFJys4Ye9R0Il91gfVWAhOqwGDPSHkWzCcvrt5hkrDJLQEkW9caAkUx
+         yjTQ==
+X-Gm-Message-State: AOJu0Ywd2+CRs5GGxJd8KO0AM+msGvvOiWYU+4jaMYSY/lTr45WDdS8d
+	FgMJBsutpZ0MocJ3uvfAJXyWaOUH084dE2VIfXO1TyunoHnQ81gEXhIhmROqNicuJ6t09NgOTHP
+	d
+X-Gm-Gg: ASbGncuD1xyLM6VS6wXzQgXhKsYx0n8otpxn5Ne1xZeDN/t1GSHnV/ZWXmwqLXyteUI
+	26OwVJ9913ss7Gf4aohC1NjYtBLR7Gt/c+EZ+3kHg1NZW2IWH3r6UamkWCLqLlHnpXoqXSGT7vf
+	OpIlLDxySJ3Kt4+ji3eP/+NsPsWViBJSxsyAGsOTahPkzyqNG1z5/+/LQqOV57Lip4tiMfRGLQp
+	McX5hw5injCGRXMHtqPNAMnRAyu7sqkVdU0HNwI74/q5jGzvbNFNboBO17bdTd8UQc=
+X-Google-Smtp-Source: AGHT+IGIvn0q5at3p77p8XfXsyt0e4XfVPi2p4jLiXnmckHaXVyXuT6UUXjW15nwisukNHSfjVnvrA==
+X-Received: by 2002:a17:906:478f:b0:aab:dc3e:1c84 with SMTP id a640c23a62f3a-ab2ab703f93mr311889766b.17.1736346629032;
+        Wed, 08 Jan 2025 06:30:29 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 04/18] x86/pv: introduce function to populate perdomain area and use it to map Xen GDT
-Date: Wed,  8 Jan 2025 15:26:44 +0100
-Message-ID: <20250108142659.99490-5-roger.pau@citrix.com>
+Subject: [PATCH v2 07/18] x86/pv: update guest LDT mappings using the linear entries
+Date: Wed,  8 Jan 2025 15:26:47 +0100
+Message-ID: <20250108142659.99490-8-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20250108142659.99490-1-roger.pau@citrix.com>
 References: <20250108142659.99490-1-roger.pau@citrix.com>
@@ -93,260 +93,120 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The current code to update the Xen part of the GDT when running a PV guest
-relies on caching the direct map address of all the L1 tables used to map the
-GDT and LDT, so that entries can be modified.
+The pv_map_ldt_shadow_page() and pv_destroy_ldt() functions rely on the L1
+table(s) that contain such mappings being stashed in the domain structure, and
+thus such mappings being modified by merely updating the require L1 entries.
 
-Introduce a new function that populates the per-domain region, either using the
-recursive linear mappings when the target vCPU is the current one, or by
-directly modifying the L1 table of the per-domain region.
+Switch pv_map_ldt_shadow_page() to unconditionally use the linear recursive, as
+that logic is always called while the vCPU is running on the current pCPU.
 
-Using such function to populate per-domain addresses drops the need to keep a
-reference to per-domain L1 tables previously used to change the per-domain
+For pv_destroy_ldt() use the linear mappings if the vCPU is the one currently
+running on the pCPU, otherwise use destroy_mappings().
+
+Note this requires keeping an array with the pages currently mapped at the LDT
+area, as that allows dropping the extra taken page reference when removing the
 mappings.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/domain.c                | 11 +++-
- xen/arch/x86/include/asm/desc.h      |  6 +-
- xen/arch/x86/include/asm/mm.h        |  2 +
- xen/arch/x86/include/asm/processor.h |  5 ++
- xen/arch/x86/mm.c                    | 88 ++++++++++++++++++++++++++++
- xen/arch/x86/smpboot.c               |  6 +-
- xen/arch/x86/traps.c                 | 10 ++--
- 7 files changed, 113 insertions(+), 15 deletions(-)
+ xen/arch/x86/include/asm/domain.h   |  2 ++
+ xen/arch/x86/pv/descriptor-tables.c | 19 ++++++++++---------
+ xen/arch/x86/pv/domain.c            |  4 ++++
+ xen/arch/x86/pv/mm.c                |  3 ++-
+ 4 files changed, 18 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 1f680bf176ee..0bd0ef7e40f4 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1953,9 +1953,14 @@ static always_inline bool need_full_gdt(const struct domain *d)
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index b79d6badd71c..b659cffc7f81 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -523,6 +523,8 @@ struct pv_vcpu
+     struct trap_info *trap_ctxt;
  
- static void update_xen_slot_in_full_gdt(const struct vcpu *v, unsigned int cpu)
+     unsigned long gdt_frames[FIRST_RESERVED_GDT_PAGE];
++    /* Max LDT entries is 8192, so 8192 * 8 = 64KiB (16 pages). */
++    mfn_t ldt_frames[16];
+     unsigned long ldt_base;
+     unsigned int gdt_ents, ldt_ents;
+ 
+diff --git a/xen/arch/x86/pv/descriptor-tables.c b/xen/arch/x86/pv/descriptor-tables.c
+index 5a79f022ce13..95b598a4c0cf 100644
+--- a/xen/arch/x86/pv/descriptor-tables.c
++++ b/xen/arch/x86/pv/descriptor-tables.c
+@@ -20,28 +20,29 @@
+  */
+ bool pv_destroy_ldt(struct vcpu *v)
  {
--    l1e_write(pv_gdt_ptes(v) + FIRST_RESERVED_GDT_PAGE,
--              !is_pv_32bit_vcpu(v) ? per_cpu(gdt_l1e, cpu)
--                                   : per_cpu(compat_gdt_l1e, cpu));
-+    ASSERT(v != current);
-+
-+    populate_perdomain_mapping(v,
-+                               GDT_VIRT_START(v) +
-+                               (FIRST_RESERVED_GDT_PAGE << PAGE_SHIFT),
-+                               !is_pv_32bit_vcpu(v) ? &per_cpu(gdt_mfn, cpu)
-+                                                    : &per_cpu(compat_gdt_mfn,
-+                                                               cpu), 1);
- }
+-    l1_pgentry_t *pl1e;
++    const unsigned int nr_frames = ARRAY_SIZE(v->arch.pv.ldt_frames);
+     unsigned int i, mappings_dropped = 0;
+-    struct page_info *page;
  
- static void load_full_gdt(const struct vcpu *v, unsigned int cpu)
-diff --git a/xen/arch/x86/include/asm/desc.h b/xen/arch/x86/include/asm/desc.h
-index a1e0807d97ed..33981bfca588 100644
---- a/xen/arch/x86/include/asm/desc.h
-+++ b/xen/arch/x86/include/asm/desc.h
-@@ -44,6 +44,8 @@
+     ASSERT(!in_irq());
  
- #ifndef __ASSEMBLY__
+     ASSERT(v == current || !vcpu_cpu_dirty(v));
  
-+#include <xen/mm-frame.h>
-+
- #define GUEST_KERNEL_RPL(d) (is_pv_32bit_domain(d) ? 1 : 3)
+-    pl1e = pv_ldt_ptes(v);
++    destroy_perdomain_mapping(v, LDT_VIRT_START(v), nr_frames);
  
- /* Fix up the RPL of a guest segment selector. */
-@@ -212,10 +214,10 @@ struct __packed desc_ptr {
+-    for ( i = 0; i < 16; i++ )
++    for ( i = 0; i < nr_frames; i++ )
+     {
+-        if ( !(l1e_get_flags(pl1e[i]) & _PAGE_PRESENT) )
+-            continue;
++        mfn_t mfn = v->arch.pv.ldt_frames[i];
++        struct page_info *page;
  
- extern seg_desc_t boot_gdt[];
- DECLARE_PER_CPU(seg_desc_t *, gdt);
--DECLARE_PER_CPU(l1_pgentry_t, gdt_l1e);
-+DECLARE_PER_CPU(mfn_t, gdt_mfn);
- extern seg_desc_t boot_compat_gdt[];
- DECLARE_PER_CPU(seg_desc_t *, compat_gdt);
--DECLARE_PER_CPU(l1_pgentry_t, compat_gdt_l1e);
-+DECLARE_PER_CPU(mfn_t, compat_gdt_mfn);
- DECLARE_PER_CPU(bool, full_gdt_loaded);
+-        page = l1e_get_page(pl1e[i]);
+-        l1e_write(&pl1e[i], l1e_empty());
+-        mappings_dropped++;
++        if ( mfn_eq(mfn, INVALID_MFN) )
++            continue;
  
- static inline void lgdt(const struct desc_ptr *gdtr)
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 6c7e66ee21ab..b50a51327b2b 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -603,6 +603,8 @@ int compat_arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- int create_perdomain_mapping(struct domain *d, unsigned long va,
-                              unsigned int nr, l1_pgentry_t **pl1tab,
-                              struct page_info **ppg);
-+void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
-+                                mfn_t *mfn, unsigned long nr);
- void destroy_perdomain_mapping(struct domain *d, unsigned long va,
-                                unsigned int nr);
- void free_perdomain_mappings(struct domain *d);
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index d247ef8dd226..82ee89f736c2 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -243,6 +243,11 @@ static inline unsigned long cr3_pa(unsigned long cr3)
-     return cr3 & X86_CR3_ADDR_MASK;
- }
++        v->arch.pv.ldt_frames[i] = INVALID_MFN;
++        page = mfn_to_page(mfn);
+         ASSERT_PAGE_IS_TYPE(page, PGT_seg_desc_page);
+         ASSERT_PAGE_IS_DOMAIN(page, v->domain);
+         put_page_and_type(page);
++        mappings_dropped++;
+     }
  
-+static inline mfn_t cr3_mfn(unsigned long cr3)
-+{
-+    return maddr_to_mfn(cr3_pa(cr3));
-+}
-+
- static inline unsigned int cr3_pcid(unsigned long cr3)
+     return mappings_dropped;
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 7e8bffaae9a0..32d7488cc186 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -303,6 +303,7 @@ void pv_vcpu_destroy(struct vcpu *v)
+ int pv_vcpu_initialise(struct vcpu *v)
  {
-     return IS_ENABLED(CONFIG_PV) ? cr3 & X86_CR3_PCID_MASK : 0;
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 3d5dd22b6c36..0abea792486c 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -6423,6 +6423,94 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
-     return rc;
- }
+     struct domain *d = v->domain;
++    unsigned int i;
+     int rc;
  
-+void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
-+                                mfn_t *mfn, unsigned long nr)
-+{
-+    l1_pgentry_t *l1tab = NULL, *pl1e;
-+    const l3_pgentry_t *l3tab;
-+    const l2_pgentry_t *l2tab;
-+    struct domain *d = v->domain;
-+
-+    ASSERT(va >= PERDOMAIN_VIRT_START &&
-+           va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
-+    ASSERT(!nr || !l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
-+
-+    /* Use likely to force the optimization for the fast path. */
-+    if ( likely(v == current) )
-+    {
-+        unsigned int i;
-+
-+        /* Ensure page-tables are from current (if current != curr_vcpu). */
-+        sync_local_execstate();
-+
-+        /* Fast path: get L1 entries using the recursive linear mappings. */
-+        pl1e = &__linear_l1_table[l1_linear_offset(va)];
-+
-+        for ( i = 0; i < nr; i++, pl1e++ )
-+        {
-+            if ( unlikely(perdomain_l1e_needs_freeing(*pl1e)) )
-+            {
-+                ASSERT_UNREACHABLE();
-+                free_domheap_page(l1e_get_page(*pl1e));
-+            }
-+            l1e_write(pl1e, l1e_from_mfn(mfn[i], __PAGE_HYPERVISOR_RW));
-+        }
-+
-+        return;
-+    }
-+
-+    ASSERT(d->arch.perdomain_l3_pg);
-+    l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
-+
-+    if ( unlikely(!(l3e_get_flags(l3tab[l3_table_offset(va)]) &
-+                    _PAGE_PRESENT)) )
-+    {
-+        unmap_domain_page(l3tab);
-+        gprintk(XENLOG_ERR, "unable to map at VA %lx: L3e not present\n", va);
-+        ASSERT_UNREACHABLE();
-+        domain_crash(d);
-+
-+        return;
-+    }
-+
-+    l2tab = map_l2t_from_l3e(l3tab[l3_table_offset(va)]);
-+
-+    for ( ; nr--; va += PAGE_SIZE, mfn++ )
-+    {
-+        if ( !l1tab || !l1_table_offset(va) )
-+        {
-+            const l2_pgentry_t *pl2e = l2tab + l2_table_offset(va);
-+
-+            if ( unlikely(!(l2e_get_flags(*pl2e) & _PAGE_PRESENT)) )
-+            {
-+                gprintk(XENLOG_ERR, "unable to map at VA %lx: L2e not present\n",
-+                        va);
-+                ASSERT_UNREACHABLE();
-+                domain_crash(d);
-+
-+                break;
-+            }
-+
-+            unmap_domain_page(l1tab);
-+            l1tab = map_l1t_from_l2e(*pl2e);
-+        }
-+
-+        pl1e = &l1tab[l1_table_offset(va)];
-+
-+        if ( unlikely(perdomain_l1e_needs_freeing(*pl1e)) )
-+        {
-+            ASSERT_UNREACHABLE();
-+            free_domheap_page(l1e_get_page(*pl1e));
-+        }
-+
-+        l1e_write(pl1e, l1e_from_mfn(*mfn, __PAGE_HYPERVISOR_RW));
-+    }
-+
-+    unmap_domain_page(l1tab);
-+    unmap_domain_page(l2tab);
-+    unmap_domain_page(l3tab);
-+}
-+
- void destroy_perdomain_mapping(struct domain *d, unsigned long va,
-                                unsigned int nr)
- {
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 79a79c54c304..a740a6402272 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -1059,8 +1059,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
-     if ( gdt == NULL )
-         goto out;
-     per_cpu(gdt, cpu) = gdt;
--    per_cpu(gdt_l1e, cpu) =
--        l1e_from_pfn(virt_to_mfn(gdt), __PAGE_HYPERVISOR_RW);
-+    per_cpu(gdt_mfn, cpu) = _mfn(virt_to_mfn(gdt));
-     memcpy(gdt, boot_gdt, NR_RESERVED_GDT_PAGES * PAGE_SIZE);
-     BUILD_BUG_ON(NR_CPUS > 0x10000);
-     gdt[PER_CPU_GDT_ENTRY - FIRST_RESERVED_GDT_ENTRY].a = cpu;
-@@ -1069,8 +1068,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
-     per_cpu(compat_gdt, cpu) = gdt = alloc_xenheap_pages(0, memflags);
-     if ( gdt == NULL )
-         goto out;
--    per_cpu(compat_gdt_l1e, cpu) =
--        l1e_from_pfn(virt_to_mfn(gdt), __PAGE_HYPERVISOR_RW);
-+    per_cpu(compat_gdt_mfn, cpu) = _mfn(virt_to_mfn(gdt));
-     memcpy(gdt, boot_compat_gdt, NR_RESERVED_GDT_PAGES * PAGE_SIZE);
-     gdt[PER_CPU_GDT_ENTRY - FIRST_RESERVED_GDT_ENTRY].a = cpu;
- #endif
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index 487b8c5a78c5..a7f6fb611c34 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -92,10 +92,10 @@ DEFINE_PER_CPU(uint64_t, efer);
- static DEFINE_PER_CPU(unsigned long, last_extable_addr);
+     ASSERT(!is_idle_domain(d));
+@@ -311,6 +312,9 @@ int pv_vcpu_initialise(struct vcpu *v)
+     if ( rc )
+         return rc;
  
- DEFINE_PER_CPU_READ_MOSTLY(seg_desc_t *, gdt);
--DEFINE_PER_CPU_READ_MOSTLY(l1_pgentry_t, gdt_l1e);
-+DEFINE_PER_CPU_READ_MOSTLY(mfn_t, gdt_mfn);
- #ifdef CONFIG_PV32
- DEFINE_PER_CPU_READ_MOSTLY(seg_desc_t *, compat_gdt);
--DEFINE_PER_CPU_READ_MOSTLY(l1_pgentry_t, compat_gdt_l1e);
-+DEFINE_PER_CPU_READ_MOSTLY(mfn_t, compat_gdt_mfn);
- #endif
++    for ( i = 0; i < ARRAY_SIZE(v->arch.pv.ldt_frames); i++ )
++        v->arch.pv.ldt_frames[i] = INVALID_MFN;
++
+     BUILD_BUG_ON(X86_NR_VECTORS * sizeof(*v->arch.pv.trap_ctxt) >
+                  PAGE_SIZE);
+     v->arch.pv.trap_ctxt = xzalloc_array(struct trap_info, X86_NR_VECTORS);
+diff --git a/xen/arch/x86/pv/mm.c b/xen/arch/x86/pv/mm.c
+index 187f5f6a3e8c..4853e619f2a7 100644
+--- a/xen/arch/x86/pv/mm.c
++++ b/xen/arch/x86/pv/mm.c
+@@ -86,7 +86,8 @@ bool pv_map_ldt_shadow_page(unsigned int offset)
+         return false;
+     }
  
- /* Master table, used by CPU0. */
-@@ -2219,11 +2219,9 @@ void __init trap_init(void)
-     init_ler();
+-    pl1e = &pv_ldt_ptes(curr)[offset >> PAGE_SHIFT];
++    curr->arch.pv.ldt_frames[offset >> PAGE_SHIFT] = page_to_mfn(page);
++    pl1e = &__linear_l1_table[l1_linear_offset(LDT_VIRT_START(curr) + offset)];
+     l1e_add_flags(gl1e, _PAGE_RW);
  
-     /* Cache {,compat_}gdt_l1e now that physically relocation is done. */
--    this_cpu(gdt_l1e) =
--        l1e_from_pfn(virt_to_mfn(boot_gdt), __PAGE_HYPERVISOR_RW);
-+    this_cpu(gdt_mfn) = _mfn(virt_to_mfn(boot_gdt));
-     if ( IS_ENABLED(CONFIG_PV32) )
--        this_cpu(compat_gdt_l1e) =
--            l1e_from_pfn(virt_to_mfn(boot_compat_gdt), __PAGE_HYPERVISOR_RW);
-+        this_cpu(compat_gdt_mfn) = _mfn(virt_to_mfn(boot_compat_gdt));
- 
-     percpu_traps_init();
- 
+     l1e_write(pl1e, gl1e);
 -- 
 2.46.0
 
