@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F56FE7719F
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867479.1279004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA01BE77188
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.867485.1279065 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpo-0008Lt-1Y; Wed, 08 Jan 2025 15:19:04 +0000
+	id 1tVXpv-0001OW-19; Wed, 08 Jan 2025 15:19:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867479.1279004; Wed, 08 Jan 2025 15:19:04 +0000
+Received: by outflank-mailman (output) from mailman id 867485.1279065; Wed, 08 Jan 2025 15:19:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpn-0008Lm-V5; Wed, 08 Jan 2025 15:19:03 +0000
-Received: by outflank-mailman (input) for mailman id 867479;
- Wed, 08 Jan 2025 15:19:03 +0000
+	id 1tVXpu-0001Nk-Nm; Wed, 08 Jan 2025 15:19:10 +0000
+Received: by outflank-mailman (input) for mailman id 867485;
+ Wed, 08 Jan 2025 15:19:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HyFE=UA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tVXpm-0008Lg-Ut
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:03 +0000
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
- [2a00:1450:4864:20::341])
+ id 1tVXps-0008Lg-GL
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:08 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e3e3acc2-cdd3-11ef-a0df-8be0dac302b0;
- Wed, 08 Jan 2025 16:19:01 +0100 (CET)
-Received: by mail-wm1-x341.google.com with SMTP id
- 5b1f17b1804b1-43624b2d453so173420295e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:01 -0800 (PST)
+ id e78e75fd-cdd3-11ef-a0df-8be0dac302b0;
+ Wed, 08 Jan 2025 16:19:08 +0100 (CET)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa67ac42819so2455543566b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:07 -0800 (PST)
 Received: from localhost.localdomain ([66.81.170.107])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.18.59
+ a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 07:19:00 -0800 (PST)
+ Wed, 08 Jan 2025 07:19:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3e3acc2-cdd3-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: e78e75fd-cdd3-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736349541; x=1736954341; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/91ShzS8VL58GKpah1RRh06XqBgOzqL+oZTNUXKZWds=;
-        b=d7HMslq9yMrFodNd58RHYyE22GSjCiM4a3Mlgq8TvOJHv77B51UansBRyiyxoNWYoN
-         IiM1vJcxJTYGm4tQKv+A4d6lgXZqAQVSPGnWhKhKGKGpDVR3fMLjQ5yfkHwKvmmdOWqJ
-         PDXTvJmw2rVddpk+TWZKaK6+r1iIc0YSIYVRQ=
+        d=cloud.com; s=cloud; t=1736349547; x=1736954347; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=yjMmCnPvYhGWKY9jq+47lrrCTBXbD9mgdkXdbRy6L+U=;
+        b=T93PYqB+WYv9aZXqGBBSHyzcJ12AJYpjmKiI8tLy0XIN3Ff2sBCULlOJTRnpg+kt3t
+         EayJEpoioR6l92BSCOdvF1KA/fkfVAiL6eP1mxr5BLGxA7A5c+hMlDo3VYnRRrB2I3WH
+         q24QD4WPuoJTFlv//KWTU25yySKyhYeOHa4OE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736349541; x=1736954341;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/91ShzS8VL58GKpah1RRh06XqBgOzqL+oZTNUXKZWds=;
-        b=UtRv14M9zDGlSt1vQJ1h9DvahS9z+OIpSvrIec9RfZ0LHVz7DniiyT1MndGy2bIdhg
-         Zq8iM8z9m/Ydu8iKd6VHGDAC96675jEuDz+LK/ynZO63Xg4mQjEGtF966StLV/NWrlrY
-         OXW6JpOHvshzp9JVLpl+qa75QKZ/RuZK0wwzBrX40Fvd+4rVI4J3FAOW1/RU9fGaPiQ6
-         gJWF0WSzesZ8Kn81AC76vTkV3ZfNr4fqRVuwoWZJYlIPQLTxP6m6td6XEQsHkdAILicA
-         /oM5/4BSu9INR4LMN0unOxT2belPNTyvSd/p1DoKz2uOGAlpCcsbn7teGxG5sAQjbhc/
-         vSDA==
-X-Gm-Message-State: AOJu0Yz5YxTXgDjpBtaOlzAtYhJ8wzxtbpA4iZFr4wpdq0+C2l0YcZMu
-	i0O7zFz5L3gK/WzrfqfIeIIfLFzEyfuGDx8zWQT1Qjw1GYK+hooJGcadLv0UZgJ5gjeM2VpoxjG
-	Vju9tdstj
-X-Gm-Gg: ASbGncuTC6miXJgJNt0lvqbVqQiVVKozEvAazJ2l/nqAwhHn76HGZ4BxjHwRMk7u3Sm
-	6LPsoOrHl13U2XLYakhmnRyZpgYSyazAydbTGm/83nzVF9S1JyQi/ZUpLWIK3QMyTw3rzhRNZoG
-	K71n1LZswRdZICUZ9regvolO3fIeUKfNFcjnRH4/pdUAOQXd0oWNrEJmzgEOQtaRSzD420hyF9X
-	WeFegpffRYarUEpKROopmkNdOpeQmjuYbKU6Un93+7vNMaAh2r6CfmDitVCWaNnYyqR9aR7FUKd
-	CyU=
-X-Google-Smtp-Source: AGHT+IFCGBRYIiVVbFLfC0bpoWRZUFKWVz1pMEI1fZRooWck3s+HgSL3+87RD41YSoer0s7rdrmGvg==
-X-Received: by 2002:a5d:5f82:0:b0:385:fa26:f0ac with SMTP id ffacd0b85a97d-38a872fc03fmr2911734f8f.7.1736349540826;
-        Wed, 08 Jan 2025 07:19:00 -0800 (PST)
+        d=1e100.net; s=20230601; t=1736349547; x=1736954347;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=yjMmCnPvYhGWKY9jq+47lrrCTBXbD9mgdkXdbRy6L+U=;
+        b=Pb5k16uYU5fPwzxXi/yiEaPQRN5YPbFEgnkYAo86jLLTdodT8nJxSV6imgF+v4ujsf
+         e9DFptFEV5q6w5udN7tjhmJTDcIYGVQp7nkpbxlf8jkJw3lw3TwE3IDm8bAQyUP0MoH2
+         EQ8dPz1yNAd7rC3cWf70z/IQhM4aNGuPAafaBhfue0k1RDDMkeqZJo+eG1/5vUjCWyIc
+         AIsfia7SYRlDy9Zr3nvJGrOCy0fLaWZjFcHxVPs/wHhDDZpoiMU5RPLDAT+Ie9FCcg60
+         LWEwly3PJzUz0NUN9u6yMa/BRepARL6h3WCnvl+OHb0bqMX3EpIE8khrne71bqyGjXti
+         XKvw==
+X-Gm-Message-State: AOJu0Yw9W6tB21VJ634nXKI2jDk1kvQRJ4UKl+O5D4wKMXNguKCt2u+h
+	WGOcgan975qlVowuCRoIjrb8cIpsXNJuhvZsIp5415zQZX0BHDm8yl8UJ0L5ThswC3PyLsLK7wC
+	Idmigrg==
+X-Gm-Gg: ASbGncsEG3s6loO5wSrzJw13jMdmIIT+mtqAqF2Fn9UezBX6HXpkW4PF6h7xNddHoI7
+	tf9yBiLTmZfu8depvCGLlGNk+Wpk08KacXfUevGZYP4KrH4E6DrysLGvZTHnSiZpXdIXgRftUsw
+	YgLewGqjmbxa/+0qVLMP+XglF02+LJaNN9b1I9VIlNakM/y6yWK2cZ6uZjTvaoVqbqFvFjOby5E
+	n8w6sFVAuQfHalya8rrpXNV+/P2LgqljnfopNaQIgkIwmOdG526ZH9hLJrFH7n9Cper5KhF0Wyp
+	2a4=
+X-Google-Smtp-Source: AGHT+IHm+GlwZHnqvLphieP9LH0FVfXA/XTlt6gMtPQsfzpf8oMG9ZAYuETNdwTvWKs+ujchLnpC2w==
+X-Received: by 2002:a17:907:94c8:b0:aaf:7321:f05a with SMTP id a640c23a62f3a-ab2abc6e773mr279314766b.46.1736349547208;
+        Wed, 08 Jan 2025 07:19:07 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+Cc: Julien Grall <jgrall@amazon.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
@@ -89,187 +90,130 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 00/15] Remove the directmap
-Date: Wed,  8 Jan 2025 15:18:07 +0000
-Message-ID: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
+	Elias El Yandouzi <eliasely@amazon.com>,
+	Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Subject: [PATCH v5 06/15] xen/x86: Add support for the PMAP
+Date: Wed,  8 Jan 2025 15:18:13 +0000
+Message-ID: <20250108151822.16030-7-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
+References: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi,
+From: Julien Grall <jgrall@amazon.com>
 
-I picked v4 of this series and run it through XenRT extensively, fixing crashes
-and errors as I hit them. Likewise, I've run it through Gitlab, fixing various
-CI failures. I listed all changes per patch. I fixed ARM to the extent that
-"Gitlab is happy when CONFIG_ONDEMAND_DIRECTMAP=y", but I didn't go much
-further than that.
+PMAP will be used in a follow-up patch to bootstrap map domain
+page infrastructure -- we need some way to map pages to setup the
+mapcache without a direct map.
 
-I _THINK_ I've covered previously unaddressed feedback, but please speak up if
-I missed something. Otherwise, same old same old.
+The functions pmap_{map, unmap} open code {set, clear}_fixmap to break
+the loop.
 
-Cheers,
-Alejandro
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+v4->v5:
+  * No changes.
 
-============== Original cover letter ==============
+v3->v4:
+  * Select PMAP KConfig option iff ONDEMAND_DIRECTMAP is used
 
-Hi all,
+v2->v3:
+  * No changes.
 
-A few years ago, Wei Liu implemented a PoC to remove the directmap
-from Xen. The last version was sent by Hongyan Xia [1].
+v1->v2:
+  * Declare PMAP entries earlier in fixed_addresses
+  * Reword the commit message
 
-I will start with thanking both Wei and Hongyan for the initial work
-to upstream the feature. A lot of patches already went in and this is
-the last few patches missing to effectively enable the feature.
-
-=== What is the directmap? ===
-
-At the moment, on both arm64 and x86, most of the RAM is mapped
-in Xen address space. This means that domain memory is easily
-accessible in Xen.
-
-=== Why do we want to remove the directmap? ===
-
-(Summarizing my understanding of the previous discussion)
-
-Speculation attacks (like Spectre SP1) rely on loading piece of memory
-in the cache. If the region is not mapped then it can't be loaded.
-
-So removing reducing the amount of memory mapped in Xen will also
-reduce the surface attack.
-
-=== What's the performance impact? ===
-
-As the guest memory is not always mapped, then the cost of mapping
-will increase. I haven't done the numbers with this new version, but
-some measurement were provided in the previous version for x86.
-
-=== Improvement possible ===
-
-The known area to improve on x86 are:
-   * Mapcache: There was a patch sent by Hongyan:
-     https://lore.kernel.org/xen-devel/4058e92ce21627731c49b588a95809dc0affd83a.1581015491.git.hongyxia@amazon.com/
-   * EPT: At the moment an guest page-tabel walk requires about 20 map/unmap.
-     This will have an very high impact on the performance. We need to decide
-     whether keep the EPT always mapped is a problem
-
-The original series didn't have support for Arm64. But as there were
-some interest, I have provided a PoC.
-
-There are more extra work for Arm64:
-   * The mapcache is quite simple. We would investigate the performance
-   * The mapcache should be made compliant to the Arm Arm (this is now
-     more critical).
-   * We will likely have the same problem as for the EPT.
-   * We have no support for merging table to a superpage, neither
-     free empty page-tables. (See more below)
-
-=== Implementation ===
-
-The subject is probably a misnomer. The directmap is still present but
-the RAM is not mapped by default. Instead, the region will still be used
-to map pages allocate via alloc_xenheap_pages().
-
-The advantage is the solution is simple (so IHMO good enough for been
-merged as a tech preview). The disadvantage is the page allocator is not
-trying to keep all the xenheap pages together. So we may end up to have
-an increase of page table usage.
-
-In the longer term, we should consider to remove the direct map
-completely and switch to vmap(). The main problem with this approach
-is it is frequent to use mfn_to_virt() in the code. So we would need
-to cache the mapping (maybe in the struct page_info).
-
-=== Why arm32 is not covered? ===
-
-On Arm32, the domheap and xenheap is always separated. So by design
-the guest memory is not mapped by default.
-
-At this stage, it seems unnecessary to have to map/unmap xenheap pages
-every time they are allocated.
-
-=== Why not using a separate domheap and xenheap? ===
-
-While a separate xenheap/domheap reduce the page-table usage (all
-xenheap pages are contiguous and could be always mapped), it is also
-currently less scalable because the split is fixed at boot time (XXX:
-Can this be dynamic?).
-
-=== Future of secret-free hypervisor ===
-
-There are some information in an e-mail from Andrew a few years ago:
-
-https://lore.kernel.org/xen-devel/e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com/
-
-Cheers,
-
-[1] https://lore.kernel.org/xen-devel/cover.1588278317.git.hongyxia@amazon.com/
-
-Alejandro Vallejo (1):
-  xen/arm32: Hardwire zeroeth_table_offset to 0 on ARM_32
-
-Hongyan Xia (8):
-  x86: Create per-domain mapping for guest_root_pt
-  x86/pv: Rewrite how building PV dom0 handles domheap mappings
-  x86: Add a boot option to enable and disable the direct map
-  x86/domain_page: Remove the fast paths when mfn is not in the
-    directmap
-  xen/page_alloc: Add a path for xenheap when there is no direct map
-  x86/setup: Leave early boot slightly earlier
-  xen/page_alloc: vmap heap nodes when they are outside the direct map
-  x86/setup: Do not create valid mappings when directmap=no
-
-Julien Grall (4):
-  xen/x86: Add support for the PMAP
-  xen/arm64: mm: Use per-pCPU page-tables
-  xen/arm64: Implement a mapcache for arm64
-  xen/arm64: Allow the admin to enable/disable the directmap
-
-Wei Liu (2):
-  x86/pv: Use copy_domain_page() to manage domheap pages during initrd
-    relocation
-  x86: Initialize mapcache for PV, HVM, and idle domains
-
- docs/misc/xen-command-line.pandoc      | 11 ++++
- xen/arch/arm/Kconfig                   |  3 +-
- xen/arch/arm/arm32/mmu/mm.c            |  1 +
- xen/arch/arm/arm64/mmu/mm.c            | 51 ++++++++++++++-
- xen/arch/arm/include/asm/arm32/mm.h    |  8 ---
- xen/arch/arm/include/asm/arm64/mm.h    |  7 +-
- xen/arch/arm/include/asm/domain_page.h | 13 ++++
- xen/arch/arm/include/asm/lpae.h        |  2 +-
- xen/arch/arm/include/asm/mm.h          |  8 +++
- xen/arch/arm/include/asm/mmu/layout.h  | 13 +++-
- xen/arch/arm/include/asm/mmu/mm.h      |  2 +
- xen/arch/arm/mmu/domain_page.c         | 45 +++++++++++--
- xen/arch/arm/mmu/pt.c                  | 12 ++--
- xen/arch/arm/mmu/setup.c               | 23 +++----
- xen/arch/arm/mmu/smpboot.c             | 16 +----
- xen/arch/arm/setup.c                   |  3 +
- xen/arch/x86/Kconfig                   |  1 +
- xen/arch/x86/domain.c                  | 13 +++-
- xen/arch/x86/domain_page.c             | 80 ++++++++++++++++------
- xen/arch/x86/include/asm/config.h      | 10 ++-
- xen/arch/x86/include/asm/domain.h      | 15 +++--
- xen/arch/x86/include/asm/fixmap.h      | 31 +++++++++
- xen/arch/x86/include/asm/mm.h          |  6 ++
- xen/arch/x86/include/asm/pmap.h        | 35 ++++++++++
- xen/arch/x86/mm.c                      | 13 ++++
- xen/arch/x86/pv/dom0_build.c           | 70 ++++++++++++++------
- xen/arch/x86/pv/domain.c               | 44 +++++++++++--
- xen/arch/x86/setup.c                   | 91 +++++++++++++++++++++++---
- xen/arch/x86/spec_ctrl.c               |  7 ++
- xen/arch/x86/x86_64/asm-offsets.c      |  1 +
- xen/arch/x86/x86_64/entry.S            |  9 ++-
- xen/common/Kconfig                     | 22 +++++++
- xen/common/page_alloc.c                | 68 ++++++++++++++++---
- xen/include/xen/mm.h                   | 11 ++++
- 34 files changed, 613 insertions(+), 132 deletions(-)
- create mode 100644 xen/arch/arm/include/asm/domain_page.h
+    The PMAP infrastructure was upstream separately for Arm since
+    Hongyan sent the secret-free hypervisor series. So this is a new
+    patch to plumb the feature on x86.
+---
+ xen/arch/x86/include/asm/fixmap.h |  6 ++++++
+ xen/arch/x86/include/asm/pmap.h   | 35 +++++++++++++++++++++++++++++++
+ xen/common/Kconfig                |  1 +
+ 3 files changed, 42 insertions(+)
  create mode 100644 xen/arch/x86/include/asm/pmap.h
 
+diff --git a/xen/arch/x86/include/asm/fixmap.h b/xen/arch/x86/include/asm/fixmap.h
+index 516ec3fa6c95..80b7b74fd816 100644
+--- a/xen/arch/x86/include/asm/fixmap.h
++++ b/xen/arch/x86/include/asm/fixmap.h
+@@ -21,6 +21,8 @@
+ 
+ #include <xen/acpi.h>
+ #include <xen/pfn.h>
++#include <xen/pmap.h>
++
+ #include <asm/apicdef.h>
+ #include <asm/msi.h>
+ #include <acpi/apei.h>
+@@ -53,6 +55,10 @@ enum fixed_addresses {
+     FIX_PV_CONSOLE,
+     FIX_XEN_SHARED_INFO,
+ #endif /* CONFIG_XEN_GUEST */
++#ifdef CONFIG_HAS_PMAP
++    FIX_PMAP_BEGIN,
++    FIX_PMAP_END = FIX_PMAP_BEGIN + NUM_FIX_PMAP,
++#endif
+     /* Everything else should go further down. */
+     FIX_APIC_BASE,
+     FIX_IO_APIC_BASE_0,
+diff --git a/xen/arch/x86/include/asm/pmap.h b/xen/arch/x86/include/asm/pmap.h
+new file mode 100644
+index 000000000000..1b3b729b90b2
+--- /dev/null
++++ b/xen/arch/x86/include/asm/pmap.h
+@@ -0,0 +1,35 @@
++#ifndef __ASM_PMAP_H__
++#define __ASM_PMAP_H__
++
++#include <asm/fixmap.h>
++
++static inline void arch_pmap_map(unsigned int slot, mfn_t mfn)
++{
++    unsigned long linear = (unsigned long)fix_to_virt(slot);
++    l1_pgentry_t *pl1e = &l1_fixmap[l1_table_offset(linear)];
++
++    BUILD_BUG_ON(FIX_APIC_BASE - 1 > L1_PAGETABLE_ENTRIES - 1);
++    ASSERT(!(l1e_get_flags(*pl1e) & _PAGE_PRESENT));
++
++    l1e_write(pl1e, l1e_from_mfn(mfn, PAGE_HYPERVISOR));
++}
++
++static inline void arch_pmap_unmap(unsigned int slot)
++{
++    unsigned long linear = (unsigned long)fix_to_virt(slot);
++    l1_pgentry_t *pl1e = &l1_fixmap[l1_table_offset(linear)];
++
++    l1e_write(pl1e, l1e_empty());
++    flush_tlb_one_local(linear);
++}
++
++#endif /* __ASM_PMAP_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 1ee498a3e9a7..5b22b09a4fbc 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -220,6 +220,7 @@ config SPECULATIVE_HARDEN_LOCK
+ config ONDEMAND_DIRECTMAP
+ 	bool "On-Demand Directmap"
+ 	depends on HAS_ONDEMAND_DIRECTMAP
++	select HAS_PMAP
+ 	help
+ 	  Contemporary processors may use speculative execution as a
+ 	  performance optimisation, but this can potentially be abused by an
 -- 
 2.47.1
 
