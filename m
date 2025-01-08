@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7874C02184
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867490.1279102 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6CE7C02183
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 15:19:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.867492.1279110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpz-0002Xo-W2; Wed, 08 Jan 2025 15:19:16 +0000
+	id 1tVXq1-0002s0-I0; Wed, 08 Jan 2025 15:19:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867490.1279102; Wed, 08 Jan 2025 15:19:15 +0000
+Received: by outflank-mailman (output) from mailman id 867492.1279110; Wed, 08 Jan 2025 15:19:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXpz-0002X1-Ka; Wed, 08 Jan 2025 15:19:15 +0000
-Received: by outflank-mailman (input) for mailman id 867490;
- Wed, 08 Jan 2025 15:19:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tVXq1-0002r2-CQ; Wed, 08 Jan 2025 15:19:17 +0000
+Received: by outflank-mailman (input) for mailman id 867492;
+ Wed, 08 Jan 2025 15:19:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HyFE=UA=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tVXpy-0008Ue-05
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:14 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ea3f2af6-cdd3-11ef-99a4-01e77a169b0f;
- Wed, 08 Jan 2025 16:19:12 +0100 (CET)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aaee0b309adso2115822366b.3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:12 -0800 (PST)
+ id 1tVXpz-0008Lg-IS
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 15:19:15 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id eb7b0015-cdd3-11ef-a0df-8be0dac302b0;
+ Wed, 08 Jan 2025 16:19:14 +0100 (CET)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aaf60d85238so1272591666b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 07:19:14 -0800 (PST)
 Received: from localhost.localdomain ([66.81.170.107])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.10
+ a640c23a62f3a-aac0eae71desm2488412166b.89.2025.01.08.07.19.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 07:19:11 -0800 (PST)
+ Wed, 08 Jan 2025 07:19:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,149 +47,341 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea3f2af6-cdd3-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: eb7b0015-cdd3-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736349552; x=1736954352; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1736349554; x=1736954354; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4dAl5hiiumxZdSL6vCO/VaNqrRA8aywqXxbQG/mKtGY=;
-        b=Hmh+CMApb3O8FVO4bwKJSJMyHrpRmdeiirVhb4uxxifc3B0XpmYesVCsMIgr+xx4Lc
-         a2lz/ukJhHz6QcVV4fFABgoy8K3jHsbAHMd/5F9WszbzEOce1Um3G+yofi+qWZ49sZoc
-         3BxutmNm50Vw4ZsSC1NsWS55fO4n+NRkgdKuk=
+        bh=mBjkyLdsM17iRKfOvcTvCdENHWOQ8GdEz5R+mPR7wOI=;
+        b=OsHcG82ueMHXdbQVs94HoeEMORhwZ7cUMwx9u3+gHCIDprc1cQroBeUZae/XNlU7O2
+         CbncZ7V1gB59SuHpwbuiULUAtP8uM18bwjjNJ/ENPVXaMohcPjVpgelZaC4AQOW8WpA/
+         6FvucMMpkQd5rCiZsy3dR4w36Dr+ctZ9QhenU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736349552; x=1736954352;
+        d=1e100.net; s=20230601; t=1736349554; x=1736954354;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4dAl5hiiumxZdSL6vCO/VaNqrRA8aywqXxbQG/mKtGY=;
-        b=kZTkqYatzkthByTWjAhvCEMdYJNkpn2U8J930MseWSXE+sAAb8oF5m70rO8QIBEGt5
-         mwjTN4VRJO62ZUqelP0bop8f8GiL7GPQ96q/mQpRmhPyp3o7Abh/LIISNGwUryZM/nPs
-         OVV0JIQahfoBYe7gMx+F53xPZjQdBZYSBRMFJmIT1ZqW3GnzlfFi2+29+K8aRH3+bu9Q
-         QWOj1l3srNavi71gJjMsi0hn1UwhUFjOWaosAW3PZLCrvXA9CKhsPuXhTyYtemaLrE7+
-         ovTb6F4wxvWLlSdNdzW8wJo41ThupJJ8jOWdSH7IidAqRKnPTtAQozbmnRQnpr2gpPn6
-         O0QA==
-X-Gm-Message-State: AOJu0YwGupN/Nf04gQjGhAldnAov8KxdPp+aZPYlbugIROTqya5S+Ij2
-	EGBsonaUI+2cz/hZz/WVXRThEZbsREnnavcgcaOGRNK431QrFozjzHd8x9tsoM3J3al1/o6jWgR
-	Ffs6f9Q==
-X-Gm-Gg: ASbGncuktTLp95nko05sR9HAephjFcmBCzAGwo8N7IMbDaycp3IOv+jpW1zDdjI7chn
-	q1soFU6X4JduksKwN9Zv0HCnbeO5YEpEr9qJu58xRiBWqd+e/z4B67wP9r7ip9YQzzScv7wYLU8
-	3GYJFm2HE2bjTWr4pgUmOVtPV4FYUXkBUgQSgYz3SwXWNLrhorCDZd6MybdWz2VzK20kU5orMiv
-	lwY9B2wyzyNsZ4iyPQWlxBGv7cl3GWHRQNAEXgVXS5d3bHbH658jH83D/byqjilc3+wnVrFnVK1
-	oqY=
-X-Google-Smtp-Source: AGHT+IFxfaz1of1Dy+QRE/RL4Nf+b/dHh+YwZM7uFybv3bH9J3u0daWHFg1k3w3NgvYUSIrBHUHeaQ==
-X-Received: by 2002:a17:907:70c:b0:aa6:9176:61ed with SMTP id a640c23a62f3a-ab2abc6d42emr300126166b.48.1736349551627;
-        Wed, 08 Jan 2025 07:19:11 -0800 (PST)
+        bh=mBjkyLdsM17iRKfOvcTvCdENHWOQ8GdEz5R+mPR7wOI=;
+        b=NNw7p9GA8gBr0FRruG7Ynk5WDmRKcHJn7HgeeBlJhIB6n+sWnFyFv3sNP1Me5Z1B66
+         qfCw4pbEMO86O+5fSa8W0J6G6k6+Wc1Cf+1l2XPUJBNocgtSYXEUCX9cMOq5OKr2cnK5
+         TziD6KJqcTK59LSwQt1tR7fm7IttDNGRzHHM/hLAWqNdo2o2ukRjJ1CZbUK8FN1r/hWr
+         FfE04zT5epJ4Es98HCoCnxXTqW5OH0eLZaWRw+XrqbPWYRr+ES0GhyISdrnwU3ZFFPor
+         9CElo+d/vXo5LTvvkBkJ7P3JZjYPsndUnjTLPuHkRjfOPmXmLb27sJrj9m8Z8HUithrb
+         lKcg==
+X-Gm-Message-State: AOJu0YwDtheWfaEVyatbIPdtCi4iCIHml2Av3Q3fR/+BZLwCGHCelGmt
+	Jtd4Dv8XIoFBhQFeQEyU8KF0idKXcVwHG56xPHFd2hCa9DDyEgBaJ8IB4GVirvvWvK5tlscdR3F
+	uaJAUAQ==
+X-Gm-Gg: ASbGncv+0oTllUgdVf47aF6vT+vqFs8aU9eNYj1Yo5rKn4Mix29blmyd+3NMV7nDSyh
+	XWIbUL6KgTtGrOeQ/cjVLXHkCFVeRt9+ZRaVf9RIMTbk5iCCBdhniTzpPFyiCM1RYbqFBBOJcSH
+	EUNYkgEoMTj2i65Ebi3U3DseMneoElxjny4S0fAayBkI/D/pRZWTmn+0AJzEJggvr3jeCfLuRcs
+	BgavPwL70MtpNEai/y1aIXtYUoEdLXc9sPgIfHCc+ejyS69msC7Jpi8K7mdflRy5Jv+eMWaor8t
+	Btg=
+X-Google-Smtp-Source: AGHT+IFr/4vVsl04wRMj0lsbKLbG9ZbWt/CJpvwrdHYprt+TFDd3PrslNZSj1LFhnlLTVEjrn+bd9Q==
+X-Received: by 2002:a17:907:1b12:b0:aae:85b4:a07 with SMTP id a640c23a62f3a-ab2ab675c58mr266911366b.8.1736349553655;
+        Wed, 08 Jan 2025 07:19:13 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Hongyan Xia <hongyxia@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+Cc: Julien Grall <jgrall@amazon.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <jgrall@amazon.com>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Elias El Yandouzi <eliasely@amazon.com>,
 	Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Subject: [PATCH v5 10/15] xen/page_alloc: vmap heap nodes when they are outside the direct map
-Date: Wed,  8 Jan 2025 15:18:17 +0000
-Message-ID: <20250108151822.16030-11-alejandro.vallejo@cloud.com>
+Subject: [PATCH v5 12/15] xen/arm64: mm: Use per-pCPU page-tables
+Date: Wed,  8 Jan 2025 15:18:19 +0000
+Message-ID: <20250108151822.16030-13-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
 References: <20250108151822.16030-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Hongyan Xia <hongyxia@amazon.com>
+From: Julien Grall <jgrall@amazon.com>
 
-When we do not have a direct map, archs_mfn_in_direct_map() will always
-return false, thus init_node_heap() will allocate xenheap pages from an
-existing node for the metadata of a new node. This means that the
-metadata of a new node is in a different node, slowing down heap
-allocation.
+At the moment, on Arm64, every pCPU is sharing the same page-tables.
 
-Since we now have early vmap, vmap the metadata locally in the new node.
+In a follow-up patch, we will allow the possibility to remove the
+direct map and therefore it will be necessary to have a mapcache.
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+While we have plenty of spare virtual address space to reserve part
+for each pCPU, it means that temporary mappings (e.g. guest memory)
+could be accessible by every pCPU.
+
+In order to increase our security posture, it would be better if
+those mappings are only accessible by the pCPU doing the temporary
+mapping.
+
+In addition to that, a per-pCPU page-tables opens the way to have
+per-domain mapping area.
+
+Arm32 is already using per-pCPU page-tables so most of the code
+can be re-used. Arm64 doesn't yet have support for the mapcache,
+so a stub is provided (moved to its own header asm/domain_page.h).
+
+Take the opportunity to fix a typo in a comment that is modified.
+
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v4->v5:
-  * Fix bug introduced in v4 by which node metadata would be
-    unconditionally mapped at the tail of the heap node.
-  * Remove extra space in conditional
-
-v3->v4:
-  * Change type of the parameters to paddr_t
-  * Use clear_domain_page() instead of open-coding it
-
-v1->v2:
-  * vmap_contig_pages() was renamed to vmap_contig()
-  * Fix indentation and coding style
-
-Changes from Hongyan's version:
-  * arch_mfn_in_direct_map() was renamed to
-    arch_mfns_in_direct_map()
-  * Use vmap_contig_pages() rather than __vmap(...).
-  * Add missing include (xen/vmap.h) so it compiles on Arm
+  * Added missing asm/domain_page.h header to arm32. Compilation fails
+    otherwise.
+  * NOTE: I rebased this patch over the LLC coloring as best as I could
+          and may have messed it up. Please do double check.
 ---
- xen/common/page_alloc.c | 25 +++++++++++++++++--------
- 1 file changed, 17 insertions(+), 8 deletions(-)
+ xen/arch/arm/arm32/mmu/mm.c            |  1 +
+ xen/arch/arm/arm64/mmu/mm.c            |  3 ++-
+ xen/arch/arm/include/asm/arm32/mm.h    |  8 --------
+ xen/arch/arm/include/asm/domain_page.h | 13 +++++++++++++
+ xen/arch/arm/include/asm/mm.h          |  3 +++
+ xen/arch/arm/include/asm/mmu/mm.h      |  2 ++
+ xen/arch/arm/mmu/pt.c                  |  6 +++---
+ xen/arch/arm/mmu/setup.c               | 23 ++++++++++-------------
+ xen/arch/arm/mmu/smpboot.c             | 16 +---------------
+ xen/arch/arm/setup.c                   |  1 +
+ 10 files changed, 36 insertions(+), 40 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/domain_page.h
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 1c01332b6cb0..3af86a213c4e 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -139,6 +139,7 @@
- #include <xen/softirq.h>
- #include <xen/spinlock.h>
- #include <xen/vm_event.h>
-+#include <xen/vmap.h>
- #include <xen/xvmalloc.h>
+diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
+index 956693232a1b..60b7f4f40512 100644
+--- a/xen/arch/arm/arm32/mmu/mm.c
++++ b/xen/arch/arm/arm32/mmu/mm.c
+@@ -6,6 +6,7 @@
+ #include <xen/mm.h>
+ #include <xen/param.h>
+ #include <xen/pfn.h>
++#include <asm/domain_page.h>
+ #include <asm/fixmap.h>
+ #include <asm/setup.h>
+ #include <asm/static-memory.h>
+diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
+index 26361c4fe4c0..7de5885cc776 100644
+--- a/xen/arch/arm/arm64/mmu/mm.c
++++ b/xen/arch/arm/arm64/mmu/mm.c
+@@ -77,6 +77,7 @@ static void __init prepare_runtime_identity_mapping(void)
+     paddr_t id_addr = virt_to_maddr(_start);
+     lpae_t pte;
+     DECLARE_OFFSETS(id_offsets, id_addr);
++    lpae_t *root = this_cpu(xen_pgtable);
  
- #include <asm/flushtlb.h>
-@@ -615,22 +616,30 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
-         needed = 0;
-     }
-     else if ( *use_tail && nr >= needed &&
--              arch_mfns_in_directmap(mfn + nr - needed, needed) &&
-               (!xenheap_bits ||
-                !((mfn + nr - 1) >> (xenheap_bits - PAGE_SHIFT))) )
-     {
--        _heap[node] = mfn_to_virt(mfn + nr - needed);
--        avail[node] = mfn_to_virt(mfn + nr - 1) +
--                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-+        if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
-+            _heap[node] = mfn_to_virt(mfn + nr - needed);
-+        else
-+            _heap[node] = vmap_contig(_mfn(mfn + nr - needed), needed);
+     if ( id_offsets[0] >= IDENTITY_MAPPING_AREA_NR_L0 )
+         panic("Cannot handle ID mapping above %uTB\n",
+@@ -87,7 +88,7 @@ static void __init prepare_runtime_identity_mapping(void)
+     pte.pt.table = 1;
+     pte.pt.xn = 0;
+ 
+-    write_pte(&xen_pgtable[id_offsets[0]], pte);
++    write_pte(&root[id_offsets[0]], pte);
+ 
+     /* Link second ID table */
+     pte = pte_of_xenaddr((vaddr_t)xen_second_id);
+diff --git a/xen/arch/arm/include/asm/arm32/mm.h b/xen/arch/arm/include/asm/arm32/mm.h
+index 856f2dbec4ad..87a315db013d 100644
+--- a/xen/arch/arm/include/asm/arm32/mm.h
++++ b/xen/arch/arm/include/asm/arm32/mm.h
+@@ -1,12 +1,6 @@
+ #ifndef __ARM_ARM32_MM_H__
+ #define __ARM_ARM32_MM_H__
+ 
+-#include <xen/percpu.h>
+-
+-#include <asm/lpae.h>
+-
+-DECLARE_PER_CPU(lpae_t *, xen_pgtable);
+-
+ /*
+  * Only a limited amount of RAM, called xenheap, is always mapped on ARM32.
+  * For convenience always return false.
+@@ -16,8 +10,6 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+     return false;
+ }
+ 
+-bool init_domheap_mappings(unsigned int cpu);
+-
+ static inline void arch_setup_page_tables(void)
+ {
+ }
+diff --git a/xen/arch/arm/include/asm/domain_page.h b/xen/arch/arm/include/asm/domain_page.h
+new file mode 100644
+index 000000000000..e9f52685e2ec
+--- /dev/null
++++ b/xen/arch/arm/include/asm/domain_page.h
+@@ -0,0 +1,13 @@
++#ifndef __ASM_ARM_DOMAIN_PAGE_H__
++#define __ASM_ARM_DOMAIN_PAGE_H__
 +
-+        BUG_ON(!_heap[node]);
-+        avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
-+                        sizeof(**avail) * NR_ZONES;
-     }
-     else if ( nr >= needed &&
--              arch_mfns_in_directmap(mfn, needed) &&
-               (!xenheap_bits ||
-                !((mfn + needed - 1) >> (xenheap_bits - PAGE_SHIFT))) )
-     {
--        _heap[node] = mfn_to_virt(mfn);
--        avail[node] = mfn_to_virt(mfn + needed - 1) +
--                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-+        if ( arch_mfns_in_directmap(mfn, needed) )
-+            _heap[node] = mfn_to_virt(mfn);
-+        else
-+            _heap[node] = vmap_contig(_mfn(mfn), needed);
++#ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
++bool init_domheap_mappings(unsigned int cpu);
++#else
++static inline bool init_domheap_mappings(unsigned int cpu)
++{
++    return true;
++}
++#endif
 +
-+        BUG_ON(!_heap[node]);
-+        avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
-+                        sizeof(**avail) * NR_ZONES;
-         *use_tail = false;
-     }
-     else if ( get_order_from_bytes(sizeof(**_heap)) ==
++#endif /* __ASM_ARM_DOMAIN_PAGE_H__ */
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index f91ff088f6b1..07329a17fffa 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -2,6 +2,9 @@
+ #define __ARCH_ARM_MM__
+ 
+ #include <xen/kernel.h>
++#include <xen/percpu.h>
++
++#include <asm/lpae.h>
+ #include <asm/page.h>
+ #include <public/xen.h>
+ #include <xen/pdx.h>
+diff --git a/xen/arch/arm/include/asm/mmu/mm.h b/xen/arch/arm/include/asm/mmu/mm.h
+index f5a00558c47b..5a8fde313693 100644
+--- a/xen/arch/arm/include/asm/mmu/mm.h
++++ b/xen/arch/arm/include/asm/mmu/mm.h
+@@ -2,6 +2,8 @@
+ #ifndef __ARM_MMU_MM_H__
+ #define __ARM_MMU_MM_H__
+ 
++DECLARE_PER_CPU(lpae_t *, xen_pgtable);
++
+ /* Non-boot CPUs use this to find the correct pagetables. */
+ extern uint64_t init_ttbr;
+ 
+diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
+index da28d669e796..1ed1a53ab1f2 100644
+--- a/xen/arch/arm/mmu/pt.c
++++ b/xen/arch/arm/mmu/pt.c
+@@ -607,9 +607,9 @@ static int xen_pt_update(unsigned long virt,
+     unsigned long left = nr_mfns;
+ 
+     /*
+-     * For arm32, page-tables are different on each CPUs. Yet, they share
+-     * some common mappings. It is assumed that only common mappings
+-     * will be modified with this function.
++     * Page-tables are different on each CPU. Yet, they share some common
++     * mappings. It is assumed that only common mappings will be modified
++     * with this function.
+      *
+      * XXX: Add a check.
+      */
+diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
+index 30afe9778194..d9308e0475ff 100644
+--- a/xen/arch/arm/mmu/setup.c
++++ b/xen/arch/arm/mmu/setup.c
+@@ -34,17 +34,15 @@
+  * PCPUs.
+  */
+ 
+-#ifdef CONFIG_ARM_64
+-DEFINE_PAGE_TABLE(xen_pgtable);
+-static DEFINE_PAGE_TABLE(xen_first);
+-#define THIS_CPU_PGTABLE xen_pgtable
+-#else
+ /* Per-CPU pagetable pages */
+ /* xen_pgtable == root of the trie (zeroeth level on 64-bit, first on 32-bit) */
+ DEFINE_PER_CPU(lpae_t *, xen_pgtable);
+ #define THIS_CPU_PGTABLE this_cpu(xen_pgtable)
+ /* Root of the trie for cpu0, other CPU's PTs are dynamically allocated */
+ static DEFINE_PAGE_TABLE(cpu0_pgtable);
++
++#ifdef CONFIG_ARM_64
++static DEFINE_PAGE_TABLE(xen_first);
+ #endif
+ 
+ /* Common pagetable leaves */
+@@ -368,17 +366,20 @@ void __init setup_pagetables(void)
+     if ( llc_coloring_enabled )
+         create_llc_coloring_mappings();
+ 
++    p = cpu0_pgtable;
++
++    /* arch_setup_page_tables() may need to access the root page-tables. */
++    per_cpu(xen_pgtable, 0) = cpu0_pgtable;
++
+     arch_setup_page_tables();
+ 
+ #ifdef CONFIG_ARM_64
+     pte = pte_of_xenaddr((uintptr_t)xen_first);
+     pte.pt.table = 1;
+     pte.pt.xn = 0;
+-    xen_pgtable[zeroeth_table_offset(XEN_VIRT_START)] = pte;
++    p[zeroeth_table_offset(XEN_VIRT_START)] = pte;
+ 
+-    p = (void *) xen_first;
+-#else
+-    p = (void *) cpu0_pgtable;
++    p = xen_first;
+ #endif
+ 
+     /* Map xen second level page-table */
+@@ -415,10 +416,6 @@ void __init setup_pagetables(void)
+     pte.pt.table = 1;
+     xen_second[second_table_offset(FIXMAP_ADDR(0))] = pte;
+ 
+-#ifdef CONFIG_ARM_32
+-    per_cpu(xen_pgtable, 0) = cpu0_pgtable;
+-#endif
+-
+     if ( llc_coloring_enabled )
+     {
+         ttbr = virt_to_maddr(virt_to_reloc_virt(THIS_CPU_PGTABLE));
+diff --git a/xen/arch/arm/mmu/smpboot.c b/xen/arch/arm/mmu/smpboot.c
+index 37e91d72b785..e4bde31605bd 100644
+--- a/xen/arch/arm/mmu/smpboot.c
++++ b/xen/arch/arm/mmu/smpboot.c
+@@ -7,6 +7,7 @@
+ 
+ #include <xen/domain_page.h>
+ 
++#include <asm/domain_page.h>
+ #include <asm/setup.h>
+ 
+ /* Override macros from asm/page.h to make them work with mfn_t */
+@@ -93,20 +94,6 @@ static void set_init_ttbr(lpae_t *root)
+     unmap_domain_page(ptr);
+ }
+ 
+-#ifdef CONFIG_ARM_64
+-int prepare_secondary_mm(int cpu)
+-{
+-    clear_boot_pagetables();
+-
+-    /*
+-     * Set init_ttbr for this CPU coming up. All CPUs share a single setof
+-     * pagetables, but rewrite it each time for consistency with 32 bit.
+-     */
+-    set_init_ttbr(xen_pgtable);
+-
+-    return 0;
+-}
+-#else
+ int prepare_secondary_mm(int cpu)
+ {
+     lpae_t *root = alloc_xenheap_page();
+@@ -136,7 +123,6 @@ int prepare_secondary_mm(int cpu)
+ 
+     return 0;
+ }
+-#endif
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index c1f2d1b89d43..3b1ab6be3fbd 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -44,6 +44,7 @@
+ #include <asm/gic.h>
+ #include <asm/cpuerrata.h>
+ #include <asm/cpufeature.h>
++#include <asm/domain_page.h>
+ #include <asm/platform.h>
+ #include <asm/procinfo.h>
+ #include <asm/setup.h>
 -- 
 2.47.1
 
