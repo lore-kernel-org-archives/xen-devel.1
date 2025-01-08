@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B239E7719A
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 11:13:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867136.1278596 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5628FE7719E
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 11:13:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.867135.1278586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVU01-00028Q-OB; Wed, 08 Jan 2025 11:13:21 +0000
+	id 1tVU00-0001sn-F5; Wed, 08 Jan 2025 11:13:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867136.1278596; Wed, 08 Jan 2025 11:13:21 +0000
+Received: by outflank-mailman (output) from mailman id 867135.1278586; Wed, 08 Jan 2025 11:13:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVU01-00028F-KP; Wed, 08 Jan 2025 11:13:21 +0000
-Received: by outflank-mailman (input) for mailman id 867136;
- Wed, 08 Jan 2025 11:13:21 +0000
+	id 1tVU00-0001sg-CH; Wed, 08 Jan 2025 11:13:20 +0000
+Received: by outflank-mailman (input) for mailman id 867135;
+ Wed, 08 Jan 2025 11:13:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WoWX=UA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tVU01-0001BZ-5j
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 11:13:21 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
+ id 1tVTzy-0001BZ-Se
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 11:13:18 +0000
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [2a00:1450:4864:20::233])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 917c0209-cdb1-11ef-a0df-8be0dac302b0;
- Wed, 08 Jan 2025 12:13:20 +0100 (CET)
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-3035046d4bfso149705381fa.0
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 03:13:20 -0800 (PST)
+ id 8f9e9649-cdb1-11ef-a0df-8be0dac302b0;
+ Wed, 08 Jan 2025 12:13:17 +0100 (CET)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-30219437e63so7116531fa.1
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 03:13:17 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3045ad99d11sm67292171fa.33.2025.01.08.03.13.18
+ 38308e7fff4ca-3045ad99d11sm67292171fa.33.2025.01.08.03.13.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 03:13:19 -0800 (PST)
+ Wed, 08 Jan 2025 03:13:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,40 +46,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 917c0209-cdb1-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: 8f9e9649-cdb1-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736334800; x=1736939600; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1736334796; x=1736939596; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gjG9qId5djE3f1micVajTt9P6Qgh0I5fxUYbZTHiv9Q=;
-        b=EP9OCOuGshgHmlld/dgJN6uhHb/oW/6akMqbSjJrRhIJihGQrkVIldLiZcBxmS/Zf4
-         zUKA9JPxNgYwRk9IMejZPpGu96ZdnvKvGSUi0C+s+OqsnP68ktDuIGITKnwRkoTX1ixl
-         +Za5Hy9BcOU9gJB4B258pEH6OZy8c2ivXR732is2IM3w6h6gFspJWFSEwRhZLcjEuhNJ
-         eosfwpe2EJKrHxqXDGPOsNO91pchxRB+0WOabp/kqfPypSO9iy8WsCob7S+7XJ/mZwTN
-         ONmWgO4ccF1MBob4T5yMqFms5JFt/ImnLOOfI9hCoBAbjiBjYwPEDfsOWw51uQDDSPU/
-         NWpQ==
+        bh=n3fSG769VnOrM2edhG3O3s3zVRPKLWUvOf5I+6qkAcQ=;
+        b=Z9BbAfDEB7ilbeMgddFjyfE3cB9w5+GgBow/2dgm/PinvNd+C8u35/YtquIcpYtekh
+         wxHuO5X0huuF57V7HGKi1l/2CvS3kmBHjm2gTgcqM4DHXzeYdE4Qtl+N3XCPAC2jp69t
+         +ar8Ee6kPs76wzMzhFrxLJdnCG4CUBNrrHCgvX8NdfqKYx99GG0t6WUgAxMT7irej1Mh
+         0Ybk0mzO/jt7PTMaRJTh3rh0t7AEwkZgZpf753e/N+rfRJ7JKHsZhA+UnuAvnKf0LU2C
+         XfWRIi9IcnjsyWc3yougW3Dk0gqIrcB0PK9zBrFbfevOmEC128Saq4XbvCm1ZfPnSxId
+         KGxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736334800; x=1736939600;
+        d=1e100.net; s=20230601; t=1736334796; x=1736939596;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=gjG9qId5djE3f1micVajTt9P6Qgh0I5fxUYbZTHiv9Q=;
-        b=nTIVU9w+Wz8BKZ6ogpTovIjWELRf1LDjhQL+vEANv0JxIhnEK8KDOoxwDh/j8Q024R
-         fKvpAnqy5iALxahYgR4K1yl4Cd7Iwg+Zlm/gEPXlSmmgBYaFH5Ty1zFohvHh82bUK4OW
-         qqHKwWsOSTDUv9MtM7nlPkda/VJakmmsj0pebC8YlEIEWI5Jb98Xl/6UnPD51WpUsZ/I
-         MYISpDW0tn3Jlwyvf6tyEtZeYOK2gI7sMdFVGRWywxQi81WzfykSYjvHNA2B/EZCTLu6
-         IBpSWO0mLb2qhqnCgU4hqnzzbY+QaUaSW7YSbxWWNc5ClF69eOLfqK1RVf30pBvIqF+V
-         I6Nw==
-X-Gm-Message-State: AOJu0Yynp0O7qwuihnQrVco+7WbFiIRGQfmGIHvZ86GKzrYLN3qlaQwm
-	R+eg/OB4pZhx1ALovcZcoJG71xA0LifXZSCu9RrgSAWqQuF3ud/y08VbG/om
-X-Gm-Gg: ASbGncu2bi9gz54ThRfcWBFhP/MM2sPmSnR0gYNRilDCeQX7+oH8jYWtWHlAlzovujv
-	wxOEVzXkFGpGVbh1CgSebDWGzjYlvoUDjosdY9NbCrxY7rtk8gvsJf8SYEwqZOo38f3z5eoskrX
-	wBpCBNdWRMUW+h06WevRjPSV6QcJXeLECDKO2QFnxL9G1yqagSJzQ4AHt50YswwnS8+DYSy9mh3
-	DBmuhowhmOrd1z4WzuFCM3AuIRdfnBT7Ljc9THNgllvOQBFOJEt2SmJXw==
-X-Google-Smtp-Source: AGHT+IGWZrRhrHrT3ZUdadlaUlf3iZdqOIAZklSUrdQWysRk2Agd0ISiTq6rO/0UhBn0Dzv/8rhd6w==
-X-Received: by 2002:a2e:a9a8:0:b0:300:324e:3506 with SMTP id 38308e7fff4ca-305f4575d06mr5892931fa.13.1736334799722;
-        Wed, 08 Jan 2025 03:13:19 -0800 (PST)
+        bh=n3fSG769VnOrM2edhG3O3s3zVRPKLWUvOf5I+6qkAcQ=;
+        b=RUJVNOJyDILEhccO6t0Yj55DPmAJ9vCPyN2WPz3okdYNpyeMVL7kKOH8gkyj3YLuJu
+         OT+S1ORlqnI/PE8zFcxgs2alRDdjh7U0TYItQRzJjoGVMWaaWq1vYpAaF1d8ITOt3qe/
+         GElfq4BNk7KBXoGMcstaEYsVehdtP11XOPpbAH1bQ3XXdBnJpqHtHvGZgEXbvjPw+Oju
+         pUq64ST4KbtbloyFO/QXjEhx/zg1Zo2ZUSLigUMhLmItvenTD0yLw6X9niM4sfGPj9dK
+         XGpU451FBMhIXEYOTEL/K1WA9hQgiWo5nFM5KjGXj+q57WG6WGuN6yDB1OV3OfZpE5zB
+         2o/Q==
+X-Gm-Message-State: AOJu0Yz7V3LQ8xqAr3fJGJednrOrNLIBYJFGvWcFLTHGUstfKjdFzUbY
+	I30tZY5t8nI8FICnVQkBqr4FohIWaXL7j8pUhVbXonEcapNNxVnnZfT2WtTn
+X-Gm-Gg: ASbGncthSXSzygqlqaZXUXV8sYdle3sfMDAUqE50in5S+RCrf1CfD6cFnZXnF5ti+Kw
+	+pnzbSJR7C2hJ5QVo3LcnOImv78+rsg1dejKDYiBw2aUe3jpt93Bh8y9IdHNSUCY9ZtUspUcVs+
+	bNp60kn0oOLHLrY0BcPetFmfmxamGCrsIYZqzE1WgUzBgBSr2z0q7xbb9mOdveNCZbpR63eBnLb
+	0tSMQOa1WcYtStcNUNXozjZG4EHnjLkvRHxJxi5Wb0at3Ey8C4GE40yEQ==
+X-Google-Smtp-Source: AGHT+IGZlEFSV35bKo9xoDZxbudY5hACznPdX4ioGucTYpB5Vt+XO/BnHvqtlSObDVsALXrcUlVShw==
+X-Received: by 2002:a2e:bc0c:0:b0:302:23bd:354b with SMTP id 38308e7fff4ca-305eb1ac962mr20794211fa.1.1736334796007;
+        Wed, 08 Jan 2025 03:13:16 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -87,113 +87,71 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v1 6/9] asm-generic: move some parts of Arm's domain_build.h to asm-generic header
-Date: Wed,  8 Jan 2025 12:13:08 +0100
-Message-ID: <ba3cde730ae072ba1088e396dd7d03482e4c4011.1736334615.git.oleksii.kurochko@gmail.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v1 3/9] arm/static-shmem.h: drop inclusion of asm/setup.h
+Date: Wed,  8 Jan 2025 12:13:05 +0100
+Message-ID: <2dd4477dd3224d00f43bbabc07f978c4e72f5a0f.1736334615.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1736334615.git.oleksii.kurochko@gmail.com>
 References: <cover.1736334615.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Nothing changed. Only some functions declaration are moved to asm-generic
-header as they are expected to be used by common code of domain builing or
-dom0less.
+Nothing is dependent from asm/setup.h in asm/static-shmem.h so inclusion of
+asm/setup.h is droped.
+
+After this drop the following compilation error related to impicit declaration
+of the following functions device_tree_get_reg and map_device_irqs_to_domain,
+device_tree_get_u32 occur during compilation of dom0less-build.c ( as they are
+declared in asm/setup.h ).
+
+Add inclusion of <asm/setup.h> in dt-overlay.c as it is using handle_device()
+declared in <asm/setup.h>.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/arm/include/asm/domain_build.h | 19 ++----------
- xen/include/asm-generic/domain-build.h  | 41 +++++++++++++++++++++++++
- 2 files changed, 43 insertions(+), 17 deletions(-)
- create mode 100644 xen/include/asm-generic/domain-build.h
+ xen/arch/arm/dom0less-build.c           | 1 +
+ xen/arch/arm/include/asm/static-shmem.h | 1 -
+ xen/common/device-tree/dt-overlay.c     | 2 ++
+ 3 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
-index 5d77af2e8b..ad5a3ddc37 100644
---- a/xen/arch/arm/include/asm/domain_build.h
-+++ b/xen/arch/arm/include/asm/domain_build.h
-@@ -4,28 +4,13 @@
- #include <xen/sched.h>
+diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+index c4badb4ade..259285ddda 100644
+--- a/xen/arch/arm/dom0less-build.c
++++ b/xen/arch/arm/dom0less-build.c
+@@ -14,6 +14,7 @@
+ #include <asm/arm64/sve.h>
+ #include <asm/dom0less-build.h>
+ #include <asm/domain_build.h>
++#include <asm/setup.h>
+ #include <asm/static-memory.h>
+ #include <asm/static-shmem.h>
+ 
+diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
+index fd0867c4f2..828c8e5480 100644
+--- a/xen/arch/arm/include/asm/static-shmem.h
++++ b/xen/arch/arm/include/asm/static-shmem.h
+@@ -5,7 +5,6 @@
+ 
+ #include <xen/types.h>
  #include <asm/kernel.h>
+-#include <asm/setup.h>
  
-+#include <asm-generic/domain-build.h>
-+
- typedef __be32 gic_interrupt_t[3];
--typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
--                                     unsigned int order, void *extra);
--bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
--                             alloc_domheap_mem_cb cb, void *extra);
--bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
--                          paddr_t tot_size);
--void allocate_memory(struct domain *d, struct kernel_info *kinfo);
--int construct_domain(struct domain *d, struct kernel_info *kinfo);
- int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
--int make_chosen_node(const struct kernel_info *kinfo);
--int make_cpus_node(const struct domain *d, void *fdt);
--int make_hypervisor_node(struct domain *d, const struct kernel_info *kinfo,
--                         int addrcells, int sizecells);
--int make_memory_node(const struct kernel_info *kinfo, int addrcells,
--                     int sizecells, const struct membanks *mem);
- int make_psci_node(void *fdt);
--int make_timer_node(const struct kernel_info *kinfo);
- void evtchn_allocate(struct domain *d);
+ #ifdef CONFIG_STATIC_SHM
  
--unsigned int get_allocation_size(paddr_t size);
--
- /*
-  * handle_device_interrupts retrieves the interrupts configuration from
-  * a device tree node and maps those interrupts to the target domain.
-diff --git a/xen/include/asm-generic/domain-build.h b/xen/include/asm-generic/domain-build.h
-new file mode 100644
-index 0000000000..237f94d0c3
---- /dev/null
-+++ b/xen/include/asm-generic/domain-build.h
-@@ -0,0 +1,41 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_DOMAIN_BUILD_H__
-+#define __ASM_GENERIC_DOMAIN_BUILD_H__
+diff --git a/xen/common/device-tree/dt-overlay.c b/xen/common/device-tree/dt-overlay.c
+index 97fb99eaaa..28bb9cf0cf 100644
+--- a/xen/common/device-tree/dt-overlay.c
++++ b/xen/common/device-tree/dt-overlay.c
+@@ -13,6 +13,8 @@
+ #include <xen/libfdt/libfdt.h>
+ #include <xen/xmalloc.h>
+ 
++#include <asm/setup.h>
 +
-+#include <xen/types.h>
-+
-+struct domain;
-+struct page_info;
-+struct kernel_info;
-+struct membanks;
-+
-+typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
-+                                     unsigned int order, void *extra);
-+bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
-+                             alloc_domheap_mem_cb cb, void *extra);
-+
-+bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
-+                          paddr_t tot_size);
-+void allocate_memory(struct domain *d, struct kernel_info *kinfo);
-+int construct_domain(struct domain *d, struct kernel_info *kinfo);
-+int make_chosen_node(const struct kernel_info *kinfo);
-+int make_cpus_node(const struct domain *d, void *fdt);
-+int make_hypervisor_node(struct domain *d, const struct kernel_info *kinfo,
-+                         int addrcells, int sizecells);
-+int make_memory_node(const struct kernel_info *kinfo, int addrcells,
-+                     int sizecells, const struct membanks *mem);
-+int make_timer_node(const struct kernel_info *kinfo);
-+
-+unsigned int get_allocation_size(paddr_t size);
-+
-+
-+#endif /* __ASM_GENERIC_DOMAIN_BUILD_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #define DT_OVERLAY_MAX_SIZE KB(500)
+ 
+ static LIST_HEAD(overlay_tracker);
 -- 
 2.47.1
 
