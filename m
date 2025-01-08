@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20F45E77188
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 14:43:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.867408.1278947 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD18E77188
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jan 2025 14:44:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.867435.1278957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXHQ-0007Rf-EM; Wed, 08 Jan 2025 14:43:32 +0000
+	id 1tVXIL-0000Dl-T8; Wed, 08 Jan 2025 14:44:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 867408.1278947; Wed, 08 Jan 2025 14:43:32 +0000
+Received: by outflank-mailman (output) from mailman id 867435.1278957; Wed, 08 Jan 2025 14:44:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVXHQ-0007RY-Bg; Wed, 08 Jan 2025 14:43:32 +0000
-Received: by outflank-mailman (input) for mailman id 867408;
- Wed, 08 Jan 2025 14:43:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tVXIL-0000De-QS; Wed, 08 Jan 2025 14:44:29 +0000
+Received: by outflank-mailman (input) for mailman id 867435;
+ Wed, 08 Jan 2025 14:44:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2h7L=UA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tVX4z-0005q4-AA
- for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 14:30:41 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 216c9d2a-cdcd-11ef-99a4-01e77a169b0f;
- Wed, 08 Jan 2025 15:30:38 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa679ad4265so176181966b.0
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 06:30:38 -0800 (PST)
+ id 1tVX53-0006o2-Lc
+ for xen-devel@lists.xenproject.org; Wed, 08 Jan 2025 14:30:45 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 245e167c-cdcd-11ef-a0df-8be0dac302b0;
+ Wed, 08 Jan 2025 15:30:43 +0100 (CET)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aa68b513abcso3092362766b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Jan 2025 06:30:43 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0f06deb8sm2476322266b.190.2025.01.08.06.30.36
+ a640c23a62f3a-aac0f06f942sm2506044666b.200.2025.01.08.06.30.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 06:30:36 -0800 (PST)
+ Wed, 08 Jan 2025 06:30:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,50 +46,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 216c9d2a-cdcd-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 245e167c-cdcd-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1736346637; x=1736951437; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1736346642; x=1736951442; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=64UhML0RWOsr//hCManVNWudvxbMgrGePKLAgvzwrso=;
-        b=YcugltHiEInC9JtMlReKqHvYYwlyquSaZr4ZHtedJCKh/HKPjITL1XbBYKBkmym18W
-         +VEZTddvJ+EoviZRPyy/YbIyj5EE0UY5TSfNYSXAorBydSiagDxH5r3xr6BBx3f8umhG
-         7TCD24rrQc2SNSr98neTJb8/I4z02FeC0BwyY=
+        bh=qyS16XcyT27yuHUB4k53rewk8F6szSNyvboeI7a+Yts=;
+        b=nnNvLh+QuoCnKt3E3GKYYAfCp4J95IgIQxR6S8jUa8bsZie3sx3EpL6IODer6P6gcS
+         ktbU1FnGfZVdpordfi5wXmMRqMdHULWzirCdYMFRLZzscd4C7yZMcz6xQoleJjPoZPEe
+         ECtWlkVCFIwvJZal07fFEhzWIxz75/dKkUWqE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736346637; x=1736951437;
+        d=1e100.net; s=20230601; t=1736346642; x=1736951442;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=64UhML0RWOsr//hCManVNWudvxbMgrGePKLAgvzwrso=;
-        b=E2O7wmSKxSMTf7gJ/oFEPr8QFr2EaajFvgVCcz40y03y3XNDPz6if7f00RanU4knll
-         rljb6dO2aLZNRvnJSW59irRoPYFYzz9N6onCI3IaJTyjnEgcIQpFJgULy10c/9LiCARk
-         7gZoyYuf+Nq8Qcac2IAB3ZiS/cH+K4OlK04eLIctsH1KgLc7k5nligEuJlaQlT0TzznR
-         dwFQaRRl+hpa4PUqqk9glsk2XnkTXRlgXUCCVpLc3O+qH3xwRpjhHRiuUg9vb8iCLKqO
-         u+8R/tJVqqfn9gy2/XZGcPGxD55G72+dvvzL5qdFa1AhJB6wwNfA2FibiDUF/x+z/KyM
-         3FeA==
-X-Gm-Message-State: AOJu0Yzq492fzlGF1dgzLU6HwM3inRdO7wLNy/Bg8yVXCYgIhbdg+VoF
-	TCa8tMCPc8lGs0dETw9uXqrg1rzSvERriBMkfV3DbmdWeTMkOS1WvSDp+Z2GO7NOxTz+hXMRWVu
-	g
-X-Gm-Gg: ASbGncvo+U1VKdEfCE8NevmanrJeLb4lgF9WMmYbSwv3OSNiCSQBOscvhfJCVp1ta88
-	ZokNNGt2/BTFvo0LsNGmSbfc2g6V3x9fQHlesuyt1D6fld2UG1Dvyyat0EY6piU6KAQhZOmmLX4
-	ZKvgE+5g09oH4vy2Koift+iwqAKRMnaGJSbdyEjA/cR9k7m03eGt+Aplncmr6Lroqg7hfK6/NxY
-	YOWomT0SqURcW4pJLWqL7gooxELQmwuqcd7qdxRoNahiUd6HMxr7ma9X1QAIqaoslk=
-X-Google-Smtp-Source: AGHT+IEq+KY2LZkz/gnj/jxJL+yjPIdvzmJsHhNv2K4GFW4sBjXt+uj2Uerfd4lNiG4OAscLmf4jpQ==
-X-Received: by 2002:a17:907:3d8f:b0:aae:83c7:6ce7 with SMTP id a640c23a62f3a-ab28d07ba93mr706906266b.0.1736346637140;
-        Wed, 08 Jan 2025 06:30:37 -0800 (PST)
+        bh=qyS16XcyT27yuHUB4k53rewk8F6szSNyvboeI7a+Yts=;
+        b=UU3uYMQ64CoepXSEHYwzEKAe0gMb/o9W9gHSEy+PGdPgztZ3EH5G5iZBB2/1SbhBkb
+         AwGhCjs/DL71hS8/en+9o24g+yLAgMynh4IQqvsX0iBjghv0Km3D4tSH6eHt/i6fjoO0
+         u+vICzVmIyv4K8nSXjU7o4gLNVSybJ2Ud39uL0luHa0CGjAlv+1ymFWmXPI8Diic/3iK
+         SE1yI+RW+48zguD+twdlbxJI3PBkAydFTqOh8YnHYitUorBTLa/wNsazr/PVxxJVesHx
+         aXc8xLgOco5apCObGangsXWJTwSPKsloN1h9mrU0+wgc1IOsE2/fQqZRk54RZ8hdUNz0
+         U8Xg==
+X-Gm-Message-State: AOJu0YyMPD+xNvNwKKjtClGYy86OUjWm5TVhWMye7jeC8s76nhG2IhgZ
+	lO4SsQ34y5oYSq4dool/KbnYrmlQC8jmS1aqz7gufkYE8DB7yh6cs7FgNIZrnBejH6VDReiRwY7
+	h
+X-Gm-Gg: ASbGnctq2wVMgnTUvhvO+4tVFxTOvhyLM5AY/LiVTGMrk47OgJSMzIPxlTS3K4L9Ia5
+	gyjz4/ieBPVV8ymZstogi+EdAHG6jF7bS0bJS/nF8f6l/SHubpp/UKwbLliGSVcEkDWf2CIbQhL
+	gLZgGt3b6U7HQ0f32VjoCIVnpJwVD+UyECxfdnGT2XeJKrBI8YPhzdbxIJljRigy/9zQFwtHwX5
+	rrTkDapqS+a8IqCKXnd0wU3aMvx4tI+fZlTrNE1JmyKlnXoeN/P+NV1S6KOhLPPhy4=
+X-Google-Smtp-Source: AGHT+IGHBykV7yeqFfoOvN865Kl8vXTpUOINIzQjWxGFlzMEcE27CB842P7ClQ3IU5vdT/VikV9Mew==
+X-Received: by 2002:a17:907:2cc5:b0:aaf:c326:f2d8 with SMTP id a640c23a62f3a-ab2abdc0257mr262042466b.57.1736346641877;
+        Wed, 08 Jan 2025 06:30:41 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 13/18] x86/spec-ctrl: introduce Address Space Isolation command line option
-Date: Wed,  8 Jan 2025 15:26:53 +0100
-Message-ID: <20250108142659.99490-14-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 16/18] x86/pv: allow using a unique per-pCPU root page table (L4)
+Date: Wed,  8 Jan 2025 15:26:56 +0100
+Message-ID: <20250108142659.99490-17-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20250108142659.99490-1-roger.pau@citrix.com>
 References: <20250108142659.99490-1-roger.pau@citrix.com>
@@ -97,261 +93,348 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-No functional change, as the option is not used.
+When running PV guests it's possible for the guest to use the same root page
+table (L4) for all vCPUs, which in turn will result in Xen also using the same
+root page table on all pCPUs that are running any domain vCPU.
 
-Introduced new so newly added functionality is keyed on the option being
-enabled, even if the feature is non-functional.
+When using XPTI Xen switches to a per-CPU shadow L4 when running in guest
+context, switching to the fully populated L4 when in Xen context.
 
-When ASI is enabled for PV domains, printing the usage of XPTI might be
-omitted if it must be uniformly disabled given the usage of ASI.
+Take advantage of this existing shadowing and force the usage of a per-CPU L4
+that shadows the guest selected L4 when Address Space Isolation is requested
+for PV guests.
+
+The mapping of the guest L4 is done with a per-CPU fixmap entry, that however
+requires that the currently loaded L4 has the per-CPU slot setup.  In order to
+ensure this switch to the shadow per-CPU L4 with just the Xen slots populated,
+and then map the guest L4 and copy the contents of the guest controlled
+slots.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-Changes since v1:
- - Improve comments and documentation about what ASI provides.
- - Do not print the XPTI information if ASI is used for pv domUs and dom0 is
-   PVH, or if ASI is used for both domU and dom0.
+ xen/arch/x86/flushtlb.c           | 22 +++++++++++++++++
+ xen/arch/x86/include/asm/config.h |  6 +++++
+ xen/arch/x86/include/asm/domain.h |  3 +++
+ xen/arch/x86/include/asm/pv/mm.h  |  5 ++++
+ xen/arch/x86/mm.c                 | 12 +++++++++-
+ xen/arch/x86/mm/paging.c          |  6 +++++
+ xen/arch/x86/pv/dom0_build.c      | 10 ++++++--
+ xen/arch/x86/pv/domain.c          | 31 +++++++++++++++++++++++-
+ xen/arch/x86/pv/mm.c              | 40 +++++++++++++++++++++++++++++++
+ 9 files changed, 131 insertions(+), 4 deletions(-)
 
-FWIW, I would print the state of XPTI uniformly, as otherwise I find the output
-might be confusing for user expecting to assert the state of XPTI.
----
- docs/misc/xen-command-line.pandoc    |  19 +++++
- xen/arch/x86/include/asm/domain.h    |   3 +
- xen/arch/x86/include/asm/spec_ctrl.h |   2 +
- xen/arch/x86/spec_ctrl.c             | 115 +++++++++++++++++++++++++--
- 4 files changed, 133 insertions(+), 6 deletions(-)
-
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 08b0053f9ced..3c1ad7b5fe7d 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -202,6 +202,25 @@ to appropriate auditing by Xen.  Argo is disabled by default.
-     This option is disabled by default, to protect domains from a DoS by a
-     buggy or malicious other domain spamming the ring.
+diff --git a/xen/arch/x86/flushtlb.c b/xen/arch/x86/flushtlb.c
+index a64c28f854ea..72692b504dd4 100644
+--- a/xen/arch/x86/flushtlb.c
++++ b/xen/arch/x86/flushtlb.c
+@@ -17,6 +17,7 @@
+ #include <asm/nops.h>
+ #include <asm/page.h>
+ #include <asm/pv/domain.h>
++#include <asm/pv/mm.h>
+ #include <asm/spec_ctrl.h>
  
-+### asi (x86)
-+> `= List of [ <bool>, {pv,hvm}=<bool>,
-+               {vcpu-pt}=<bool>|{pv,hvm}=<bool> ]`
+ /* Debug builds: Wrap frequently to stress-test the wrap logic. */
+@@ -192,7 +193,28 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
+     unsigned int order = (flags - 1) & FLUSH_ORDER_MASK;
+ 
+     if ( flags & FLUSH_ROOT_PGTBL )
++    {
+         get_cpu_info()->root_pgt_changed = true;
++        /*
++         * Use opt_vcpu_pt_pv instead of current->arch.vcpu_pt to avoid doing a
++         * sync_local_execstate() when per-vCPU page-tables are not enabled for
++         * PV.
++         */
++        if ( opt_vcpu_pt_pv )
++        {
++            const struct vcpu *curr;
++            const struct domain *curr_d;
 +
-+Offers control over whether the hypervisor will engage in Address Space
-+Isolation, by not having potentially sensitive information permanently mapped
-+in the VMM page-tables.  Using this option might avoid the need to apply
-+mitigations for certain speculative related attacks, at the cost of mapping
-+sensitive information on-demand.
++            sync_local_execstate();
 +
-+* `pv=` and `hvm=` sub-options allow enabling for specific guest types.
++            curr = current;
++            curr_d = curr->domain;
 +
-+**WARNING: manual de-selection of enabled options will invalidate any
-+protection offered by the feature.  The fine grained options provided below are
-+meant to be used for debugging purposes only.**
-+
-+* `vcpu-pt` ensure each vCPU uses a unique top-level page-table and setup a
-+  virtual address space region to map memory on a per-vCPU basis.
-+
- ### asid (x86)
- > `= <boolean>`
++            if ( is_pv_domain(curr_d) && curr_d->arch.vcpu_pt )
++                /* Update shadow root page-table ahead of doing TLB flush. */
++                pv_asi_update_shadow_l4(curr);
++        }
++    }
+ 
+     if ( flags & (FLUSH_TLB|FLUSH_TLB_GLOBAL) )
+     {
+diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
+index 19746f956ec3..af3ff3cb8705 100644
+--- a/xen/arch/x86/include/asm/config.h
++++ b/xen/arch/x86/include/asm/config.h
+@@ -265,6 +265,12 @@ extern unsigned long xen_phys_start;
+ /* The address of a particular VCPU's GDT or LDT. */
+ #define GDT_VIRT_START(v)    \
+     (PERDOMAIN_VIRT_START + ((v)->vcpu_id << GDT_LDT_VCPU_VA_SHIFT))
++/*
++ * There are 2 GDT pages reserved for Xen, but only one is used.  Use the
++ * remaining one to map the guest L4 when running with ASI enabled.
++ */
++#define L4_SHADOW(v) \
++    (GDT_VIRT_START(v) + ((FIRST_RESERVED_GDT_PAGE + 1) << PAGE_SHIFT))
+ #define LDT_VIRT_START(v)    \
+     (GDT_VIRT_START(v) + (64*1024))
  
 diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 5af414fa64ac..fb92a10bf3b7 100644
+index ba5440099d90..a3c75e323cde 100644
 --- a/xen/arch/x86/include/asm/domain.h
 +++ b/xen/arch/x86/include/asm/domain.h
-@@ -456,6 +456,9 @@ struct arch_domain
-     /* Don't unconditionally inject #GP for unhandled MSRs. */
-     bool msr_relaxed;
- 
-+    /* Use a per-vCPU root pt, and switch per-domain slot to per-vCPU. */
-+    bool vcpu_pt;
+@@ -591,6 +591,9 @@ struct pv_vcpu
+     /* Deferred VA-based update state. */
+     bool need_update_runstate_area;
+     struct vcpu_time_info pending_system_time;
 +
-     /* Emulated devices enabled bitmap. */
-     uint32_t emulation_flags;
- } __cacheline_aligned;
-diff --git a/xen/arch/x86/include/asm/spec_ctrl.h b/xen/arch/x86/include/asm/spec_ctrl.h
-index 077225418956..c58afbaab671 100644
---- a/xen/arch/x86/include/asm/spec_ctrl.h
-+++ b/xen/arch/x86/include/asm/spec_ctrl.h
-@@ -88,6 +88,8 @@ extern uint8_t default_scf;
++    /* For ASI: page to use as L4 shadow of the guest selected L4. */
++    root_pgentry_t *root_pgt;
+ };
  
- extern int8_t opt_xpti_hwdom, opt_xpti_domu;
+ struct arch_vcpu
+diff --git a/xen/arch/x86/include/asm/pv/mm.h b/xen/arch/x86/include/asm/pv/mm.h
+index 182764542c1f..540202f9712a 100644
+--- a/xen/arch/x86/include/asm/pv/mm.h
++++ b/xen/arch/x86/include/asm/pv/mm.h
+@@ -23,6 +23,8 @@ bool pv_destroy_ldt(struct vcpu *v);
  
-+extern int8_t opt_vcpu_pt_pv, opt_vcpu_pt_hwdom, opt_vcpu_pt_hvm;
+ int validate_segdesc_page(struct page_info *page);
+ 
++void pv_asi_update_shadow_l4(const struct vcpu *v);
 +
- extern bool cpu_has_bug_l1tf;
- extern int8_t opt_pv_l1tf_hwdom, opt_pv_l1tf_domu;
- extern bool opt_bp_spec_reduce;
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index ced84750015c..9463a8624701 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -85,6 +85,11 @@ static int8_t __initdata opt_gds_mit = -1;
- static int8_t __initdata opt_div_scrub = -1;
- bool __ro_after_init opt_bp_spec_reduce = true;
+ #else
  
-+/* Use a per-vCPU root page-table and switch the per-domain slot to per-vCPU. */
-+int8_t __ro_after_init opt_vcpu_pt_hvm = -1;
-+int8_t __ro_after_init opt_vcpu_pt_hwdom = -1;
-+int8_t __ro_after_init opt_vcpu_pt_pv = -1;
+ #include <xen/errno.h>
+@@ -44,6 +46,9 @@ static inline bool pv_map_ldt_shadow_page(unsigned int off) { return false; }
+ static inline bool pv_destroy_ldt(struct vcpu *v)
+ { ASSERT_UNREACHABLE(); return false; }
+ 
++static inline void pv_asi_update_shadow_l4(const struct vcpu *v)
++{ ASSERT_UNREACHABLE(); }
 +
- static int __init cf_check parse_spec_ctrl(const char *s)
- {
-     const char *ss;
-@@ -384,6 +389,13 @@ int8_t __ro_after_init opt_xpti_domu = -1;
+ #endif
  
- static __init void xpti_init_default(void)
- {
-+    ASSERT(opt_vcpu_pt_pv >= 0 && opt_vcpu_pt_hwdom >= 0);
-+    if ( (opt_xpti_hwdom == 1 || opt_xpti_domu == 1) && opt_vcpu_pt_pv == 1 )
-+    {
-+        printk(XENLOG_ERR
-+               "XPTI incompatible with per-vCPU page-tables, disabling ASI\n");
-+        opt_vcpu_pt_pv = 0;
-+    }
-     if ( (boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
-          cpu_has_rdcl_no )
-     {
-@@ -395,9 +407,9 @@ static __init void xpti_init_default(void)
+ #endif /* __X86_PV_MM_H__ */
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 583bf4c58bf9..3a637e508ff3 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -546,6 +546,8 @@ void write_ptbase(struct vcpu *v)
+     }
      else
      {
-         if ( opt_xpti_hwdom < 0 )
--            opt_xpti_hwdom = 1;
-+            opt_xpti_hwdom = !opt_vcpu_pt_hwdom;
-         if ( opt_xpti_domu < 0 )
--            opt_xpti_domu = 1;
-+            opt_xpti_domu = !opt_vcpu_pt_pv;
++        if ( is_pv_domain(d) && d->arch.vcpu_pt )
++            pv_asi_update_shadow_l4(v);
+         /* Make sure to clear use_pv_cr3 and xen_cr3 before pv_cr3. */
+         cpu_info->use_pv_cr3 = false;
+         cpu_info->xen_cr3 = 0;
+@@ -565,6 +567,7 @@ void write_ptbase(struct vcpu *v)
+  */
+ pagetable_t update_cr3(struct vcpu *v)
+ {
++    const struct domain *d = v->domain;
+     mfn_t cr3_mfn;
+ 
+     if ( paging_mode_enabled(v->domain) )
+@@ -575,7 +578,14 @@ pagetable_t update_cr3(struct vcpu *v)
+     else
+         cr3_mfn = pagetable_get_mfn(v->arch.guest_table);
+ 
+-    make_cr3(v, cr3_mfn);
++    make_cr3(v, d->arch.vcpu_pt ? virt_to_mfn(v->arch.pv.root_pgt) : cr3_mfn);
++
++    if ( d->arch.vcpu_pt )
++    {
++        populate_perdomain_mapping(v, L4_SHADOW(v), &cr3_mfn, 1);
++        if ( v == this_cpu(curr_vcpu) )
++            flush_tlb_one_local(L4_SHADOW(v));
++    }
+ 
+     return pagetable_null();
+ }
+diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
+index c77f4c1dac52..be30f21c1a7b 100644
+--- a/xen/arch/x86/mm/paging.c
++++ b/xen/arch/x86/mm/paging.c
+@@ -695,6 +695,12 @@ int paging_domctl(struct domain *d, struct xen_domctl_shadow_op *sc,
+         return -EINVAL;
      }
+ 
++    if ( is_pv_domain(d) && d->arch.vcpu_pt )
++    {
++        gprintk(XENLOG_ERR, "Paging not supported on PV domains with ASI\n");
++        return -EOPNOTSUPP;
++    }
++
+     if ( resuming
+          ? (d->arch.paging.preempt.dom != current->domain ||
+             d->arch.paging.preempt.op != sc->op)
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index 5081c19b9a9a..6c1d99a9bf0d 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -838,8 +838,11 @@ static int __init dom0_construct(struct boot_info *bi, struct domain *d)
+ 
+     d->arch.paging.mode = 0;
+ 
+-    /* Set up CR3 value for switch_cr3_cr4(). */
+-    update_cr3(v);
++    /*
++     * Set up CR3 value for switch_cr3_cr4().  Use make_cr3() instead of
++     * update_cr3() to avoid using an ASI page-table for dom0 building.
++     */
++    make_cr3(v, pagetable_get_mfn(v->arch.guest_table));
+ 
+     /* We run on dom0's page tables for the final part of the build process. */
+     switch_cr3_cr4(cr3_pa(v->arch.cr3), read_cr4());
+@@ -1068,6 +1071,9 @@ static int __init dom0_construct(struct boot_info *bi, struct domain *d)
+     }
+ #endif
+ 
++    /* Must be called in case ASI is enabled. */
++    update_cr3(v);
++
+     v->is_initialised = 1;
+     clear_bit(_VPF_down, &v->pause_flags);
+ 
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 8d2428051607..583723c5d360 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -15,6 +15,7 @@
+ #include <asm/invpcid.h>
+ #include <asm/spec_ctrl.h>
+ #include <asm/pv/domain.h>
++#include <asm/pv/mm.h>
+ #include <asm/shadow.h>
+ 
+ #ifdef CONFIG_PV32
+@@ -296,6 +297,7 @@ void pv_vcpu_destroy(struct vcpu *v)
+ 
+     pv_destroy_gdt_ldt_l1tab(v);
+     XFREE(v->arch.pv.trap_ctxt);
++    FREE_XENHEAP_PAGE(v->arch.pv.root_pgt);
  }
  
-@@ -488,6 +500,66 @@ static int __init cf_check parse_pv_l1tf(const char *s)
- }
- custom_param("pv-l1tf", parse_pv_l1tf);
+ int pv_vcpu_initialise(struct vcpu *v)
+@@ -336,6 +338,24 @@ int pv_vcpu_initialise(struct vcpu *v)
+             goto done;
+     }
  
-+static int __init cf_check parse_asi(const char *s)
-+{
-+    const char *ss;
-+    int val, rc = 0;
-+
-+    /* Interpret 'asi' alone in its positive boolean form. */
-+    if ( *s == '\0' )
-+        opt_vcpu_pt_pv = opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = 1;
-+
-+    do {
-+        ss = strchr(s, ',');
-+        if ( !ss )
-+            ss = strchr(s, '\0');
-+
-+        val = parse_bool(s, ss);
-+        switch ( val )
++    if ( d->arch.vcpu_pt )
++    {
++        v->arch.pv.root_pgt = alloc_xenheap_page();
++        if ( !v->arch.pv.root_pgt )
 +        {
-+        case 0:
-+        case 1:
-+            opt_vcpu_pt_pv = opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = val;
-+            break;
-+
-+        default:
-+            if ( (val = parse_boolean("pv", s, ss)) >= 0 )
-+                opt_vcpu_pt_pv = val;
-+            else if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
-+                opt_vcpu_pt_hvm = val;
-+            else if ( (val = parse_boolean("vcpu-pt", s, ss)) != -1 )
-+            {
-+                switch ( val )
-+                {
-+                case 1:
-+                case 0:
-+                    opt_vcpu_pt_pv = opt_vcpu_pt_hvm = opt_vcpu_pt_hwdom = val;
-+                    break;
-+
-+                case -2:
-+                    s += strlen("vcpu-pt=");
-+                    if ( (val = parse_boolean("pv", s, ss)) >= 0 )
-+                        opt_vcpu_pt_pv = val;
-+                    else if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
-+                        opt_vcpu_pt_hvm = val;
-+                    else
-+                default:
-+                        rc = -EINVAL;
-+                    break;
-+                }
-+            }
-+            else if ( *s )
-+                rc = -EINVAL;
-+            break;
++            rc = -ENOMEM;
++            goto done;
 +        }
 +
-+        s = ss + 1;
-+    } while ( *ss );
++        /*
++         * VM assists are not yet known, RO machine-to-phys slot will be copied
++         * from the guest L4.
++         */
++        init_xen_l4_slots(v->arch.pv.root_pgt,
++                          _mfn(virt_to_mfn(v->arch.pv.root_pgt)),
++                          v, INVALID_MFN, false);
++    }
 +
-+    return rc;
-+}
-+custom_param("asi", parse_asi);
-+
- static void __init print_details(enum ind_thunk thunk)
+  done:
+     if ( rc )
+         pv_vcpu_destroy(v);
+@@ -368,7 +388,7 @@ int pv_domain_initialise(struct domain *d)
+ 
+     d->arch.ctxt_switch = &pv_csw;
+ 
+-    d->arch.pv.flush_root_pt = d->arch.pv.xpti;
++    d->arch.pv.flush_root_pt = d->arch.pv.xpti || d->arch.vcpu_pt;
+ 
+     if ( !is_pv_32bit_domain(d) && use_invpcid && cpu_has_pcid )
+         switch ( ACCESS_ONCE(opt_pcid) )
+@@ -409,6 +429,7 @@ bool __init xpti_pcid_enabled(void)
+ 
+ static void _toggle_guest_pt(struct vcpu *v)
  {
-     unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, e21a = 0, max = 0, tmp;
-@@ -668,15 +740,29 @@ static void __init print_details(enum ind_thunk thunk)
-            boot_cpu_has(X86_FEATURE_IBPB_ENTRY_PV)   ? " IBPB-entry"    : "",
-            opt_bhb_entry_pv                          ? " BHB-entry"     : "");
++    const struct domain *d = v->domain;
+     bool guest_update;
+     pagetable_t old_shadow;
+     unsigned long cr3;
+@@ -417,6 +438,14 @@ static void _toggle_guest_pt(struct vcpu *v)
+     guest_update = v->arch.flags & TF_kernel_mode;
+     old_shadow = update_cr3(v);
  
--    printk("  XPTI (64-bit PV only): Dom0 %s, DomU %s (with%s PCID)\n",
--           opt_xpti_hwdom ? "enabled" : "disabled",
--           opt_xpti_domu  ? "enabled" : "disabled",
--           xpti_pcid_enabled() ? "" : "out");
-+    if ( !opt_vcpu_pt_pv || (!opt_dom0_pvh && !opt_vcpu_pt_hwdom) )
-+        printk("  XPTI (64-bit PV only): Dom0 %s, DomU %s (with%s PCID)\n",
-+               opt_xpti_hwdom ? "enabled" : "disabled",
-+               opt_xpti_domu  ? "enabled" : "disabled",
-+               xpti_pcid_enabled() ? "" : "out");
++    if ( d->arch.vcpu_pt )
++        /*
++         * _toggle_guest_pt() might switch between user and kernel page tables,
++         * but doesn't use write_ptbase(), and hence needs an explicit call to
++         * sync the shadow L4.
++         */
++        pv_asi_update_shadow_l4(v);
++
+     /*
+      * Don't flush user global mappings from the TLB. Don't tick TLB clock.
+      *
+diff --git a/xen/arch/x86/pv/mm.c b/xen/arch/x86/pv/mm.c
+index 4853e619f2a7..46c437692bea 100644
+--- a/xen/arch/x86/pv/mm.c
++++ b/xen/arch/x86/pv/mm.c
+@@ -12,6 +12,7 @@
  
-     printk("  PV L1TF shadowing: Dom0 %s, DomU %s\n",
-            opt_pv_l1tf_hwdom ? "enabled"  : "disabled",
-            opt_pv_l1tf_domu  ? "enabled"  : "disabled");
+ #include <asm/current.h>
+ #include <asm/p2m.h>
++#include <asm/pv/domain.h>
+ 
+ #include "mm.h"
+ 
+@@ -104,6 +105,45 @@ void init_xen_pae_l2_slots(l2_pgentry_t *l2t, const struct domain *d)
+ }
  #endif
-+
-+#ifdef CONFIG_HVM
-+    printk("  ASI features for HVM VMs:%s%s\n",
-+           opt_vcpu_pt_hvm                           ? ""               : " None",
-+           opt_vcpu_pt_hvm                           ? " vCPU-PT"       : "");
-+
-+#endif
-+#ifdef CONFIG_PV
-+    printk("  ASI features for PV VMs:%s%s\n",
-+           opt_vcpu_pt_pv                            ? ""               : " None",
-+           opt_vcpu_pt_pv                            ? " vCPU-PT"       : "");
-+
-+#endif
- }
  
- static bool __init check_smt_enabled(void)
-@@ -1779,6 +1865,10 @@ void spec_ctrl_init_domain(struct domain *d)
-     if ( pv )
-         d->arch.pv.xpti = is_hardware_domain(d) ? opt_xpti_hwdom
-                                                 : opt_xpti_domu;
++void pv_asi_update_shadow_l4(const struct vcpu *v)
++{
++    const root_pgentry_t *guest_pgt;
++    root_pgentry_t *root_pgt = v->arch.pv.root_pgt;
++    const struct domain *d = v->domain;
 +
-+    d->arch.vcpu_pt = is_hardware_domain(d) ? opt_vcpu_pt_hwdom
-+                                            : pv ? opt_vcpu_pt_pv
-+                                                 : opt_vcpu_pt_hvm;
- }
- 
- void __init init_speculation_mitigations(void)
-@@ -2075,6 +2165,19 @@ void __init init_speculation_mitigations(void)
-          hw_smt_enabled && default_xen_spec_ctrl )
-         setup_force_cpu_cap(X86_FEATURE_SC_MSR_IDLE);
- 
-+    /* Disable all ASI options by default until feature is finished. */
-+    if ( opt_vcpu_pt_pv == -1 )
-+        opt_vcpu_pt_pv = 0;
-+    if ( opt_vcpu_pt_hwdom == -1 )
-+        opt_vcpu_pt_hwdom = 0;
-+    if ( opt_vcpu_pt_hvm == -1 )
-+        opt_vcpu_pt_hvm = 0;
++    ASSERT(!d->arch.pv.xpti);
++    ASSERT(is_pv_domain(d));
++    ASSERT(!is_idle_domain(d));
++    ASSERT(current == this_cpu(curr_vcpu));
 +
-+    if ( opt_vcpu_pt_pv || opt_vcpu_pt_hvm )
-+        warning_add(
-+            "Address Space Isolation is not functional, this option is\n"
-+            "intended to be used only for development purposes.\n");
++    if ( likely(v == current) )
++        guest_pgt = (void *)L4_SHADOW(v);
++    else if ( !(v->arch.flags & TF_kernel_mode) )
++        guest_pgt =
++            map_domain_page(pagetable_get_mfn(v->arch.guest_table_user));
++    else
++        guest_pgt = map_domain_page(pagetable_get_mfn(v->arch.guest_table));
 +
-     xpti_init_default();
- 
-     l1tf_calculations();
++    if ( is_pv_64bit_domain(d) )
++    {
++        unsigned int i;
++
++        for ( i = 0; i < ROOT_PAGETABLE_FIRST_XEN_SLOT; i++ )
++            l4e_write(&root_pgt[i], guest_pgt[i]);
++        for ( i = ROOT_PAGETABLE_LAST_XEN_SLOT + 1;
++              i < L4_PAGETABLE_ENTRIES; i++ )
++            l4e_write(&root_pgt[i], guest_pgt[i]);
++
++        l4e_write(&root_pgt[l4_table_offset(RO_MPT_VIRT_START)],
++                  guest_pgt[l4_table_offset(RO_MPT_VIRT_START)]);
++    }
++    else
++        l4e_write(&root_pgt[0], guest_pgt[0]);
++
++    if ( v != this_cpu(curr_vcpu) )
++        unmap_domain_page(guest_pgt);
++}
++
+ /*
+  * Local variables:
+  * mode: C
 -- 
 2.46.0
 
