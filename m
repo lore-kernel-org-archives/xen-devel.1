@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B462DE77197
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 11:12:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868200.1279737 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB13E77197
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 11:18:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.868218.1279748 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVqS4-0003Ie-0f; Thu, 09 Jan 2025 11:11:48 +0000
+	id 1tVqYX-00041k-Ob; Thu, 09 Jan 2025 11:18:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868200.1279737; Thu, 09 Jan 2025 11:11:47 +0000
+Received: by outflank-mailman (output) from mailman id 868218.1279748; Thu, 09 Jan 2025 11:18:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVqS3-0003IX-U4; Thu, 09 Jan 2025 11:11:47 +0000
-Received: by outflank-mailman (input) for mailman id 868200;
- Thu, 09 Jan 2025 11:11:46 +0000
+	id 1tVqYX-00041d-Jy; Thu, 09 Jan 2025 11:18:29 +0000
+Received: by outflank-mailman (input) for mailman id 868218;
+ Thu, 09 Jan 2025 11:18:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bl7y=UB=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tVqHg-0003F6-GM
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 11:01:04 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=pS5t=UB=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tVqYV-00040q-TB
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 11:18:27 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 039cb351-ce79-11ef-a0df-8be0dac302b0;
- Thu, 09 Jan 2025 12:01:02 +0100 (CET)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43623f0c574so6149595e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 03:01:02 -0800 (PST)
-Received: from localhost ([66.81.170.107]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2e92f7bsm51705095e9.38.2025.01.09.03.01.00
+ id 722ac387-ce7b-11ef-a0df-8be0dac302b0;
+ Thu, 09 Jan 2025 12:18:26 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4361f664af5so9849845e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 03:18:26 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-436e9e37d46sm17386545e9.25.2025.01.09.03.18.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Jan 2025 03:01:01 -0800 (PST)
+ Thu, 09 Jan 2025 03:18:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,67 +47,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 039cb351-ce79-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: 722ac387-ce7b-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736420461; x=1737025261; darn=lists.xenproject.org;
-        h=in-reply-to:references:from:subject:cc:to:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dGiWpxWM7utRqSJVw4NZRMsiD0kw3rLr7nDPnYu4dFE=;
-        b=ETlz9ftuPTtxmv51Uim6SwWlfuyRyxrKHAs52eJHVL42XP302ydN+Xzgb3g4MZUhlk
-         gzKcwMN05CH8qzaMh3bNjy69+WmACGygbFdaZNk46cPc3OhFlS3yIB+farl15TUcY9Mh
-         zQoq9fOjSG7bsyGu1JiY4yCOs8X5FrD/ifLWk=
+        d=suse.com; s=google; t=1736421506; x=1737026306; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=UWhs9feB6Sp+Hi/8OiNlRyxfYZ4eXaXibU/Aw8TJAkQ=;
+        b=W9+Z3dS15HM8Yl8r+7GA+/hP0SVh74Kiiep3smePdO7oIC1smEb+lK6Vnj2x3KHzD6
+         N+KLrNdJ50hq0Vq6OKajo3EQ4PlJc3/Tm0sZ+z4XWEyUqgfbPlgidGybl3d+tNN3KNwS
+         U9IKbg6SqWCykgMUDuLDCVs4q5eaOwhW5+3A7YkzeIv5PvhWEtIkyNDKj8U6aGbPBhnS
+         LiO6FJIgG7y0VeVPBtGMdSb3dvb3sWveYsNxUUt61y2jFgYl+ASyJCyzAoAzP7Exxt49
+         LVhVhsiDhl8wTKjhzk30Yte0nakiQKbja+0kmP0/2/YkIE9uxb8DdnNNjgg1SAN5y19I
+         e4ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736420461; x=1737025261;
-        h=in-reply-to:references:from:subject:cc:to:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=dGiWpxWM7utRqSJVw4NZRMsiD0kw3rLr7nDPnYu4dFE=;
-        b=qiNYa5/E4It21oGHG+4yuzOhw2VRAyViLM+6AtbIr0a92pKpVBEtXOKbIXbU29zS7u
-         Mngoa69Us31taKhFlS/cOFg/qb0SP+6N0t6wpCN8xS8GyJho1gdKQC1SDSmgWpH75nmu
-         Xg5YD6Pi67ZCbFssU8ELUxjvrqezvdhcZBuccy7//IQaMbc+Kw0Owwhs++Ie0NgzWxTJ
-         9Bd2gslZhpS1Gyqm5E5seyYn6jDCb48SWA+Pd753Sp1VSLr9TW2b5D4WKjTvZxk3scyc
-         P9hM1E8g5muXLwIk23opQGAkWGUnQF7nH/6YY5c8C1uTUdi6zZdayhMLR2jXHg/9TWCL
-         NirQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVoFY1v37ZqaWL9WuAjBROonTK2Yc1u03CIdgSo9rV6b5dlc+mB99ZG9m0Tt95cYTpo+RkT2zvn6CM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzW1STq2nPA94V+SKPrRth6uUHwG/HHh6jB/XeIKN8lF27jJpfL
-	nvclgVFNyMEu4zxwZlqwkPIBrTUwON2CEhZSlW/8VJfPYti8HWVUNSHq5GrhWZM=
-X-Gm-Gg: ASbGnctd/0QqL/+XUxwR51alCFIuo6p6ysPFcHudWdyRjMm6+ymBO9/8wTZwu+lg7z0
-	ENqXWbGSbSAgWBpjEyDwTRunT1ujhVGCtYGnpbA4YP0rC6uAKpP0NSOTxIwqBemE0B+JsIbw/tU
-	b5HSVJu2SnNmMnVqo2ZYNYEoG/6CwWQBq8FtbcFOi+aYv9h/RvvioB4//JXTmjyIBiRIeURshsK
-	JtaRPGxHT+cqhFHkDwErBPO6oq1ilB9NngwZMew6G7sKbWuCkscPrA3FD7bIqs=
-X-Google-Smtp-Source: AGHT+IGybEm3P7KJqje+MTjwyod8X/r+6rWhswzDEuCY/jy8sTmWcc8EMqPHLMz3wyLoGlzbhaEpKw==
-X-Received: by 2002:a7b:c8d4:0:b0:434:b9c6:68f7 with SMTP id 5b1f17b1804b1-436e26ddc3cmr49453045e9.26.1736420461416;
-        Thu, 09 Jan 2025 03:01:01 -0800 (PST)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+        d=1e100.net; s=20230601; t=1736421506; x=1737026306;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UWhs9feB6Sp+Hi/8OiNlRyxfYZ4eXaXibU/Aw8TJAkQ=;
+        b=DtSp0QKxSxsOq8fOALNvy1qJjR7YS6jEnRUAb3wcxruY5xsMFHtmMv4CObda0Lq76i
+         VnPejfyeS8iPb0QykbhyyvLuQYL/WdUEwI2xDskqlyYWjDyKedJvV+v1LfGV4BlSw/Wk
+         s6eh0sq6iA1RNhfLNASZOn2TpAMsLmt4k6dQ0wq/1bYLyMZ1rKAIU0lCynu8iWd2i0Jx
+         gXvWOAUAZrLp8U+M/pRlLdOBWTXTjjsY0m9L6NbUA/LbRHJbFg4q9d918ye8qZDrJ2vd
+         DVdtCHvITfqi52GO5ZHHPHTpJKGSykcgd5avlShIXnPknqHSz4PNDitxetG0TY7HNlsW
+         4hng==
+X-Forwarded-Encrypted: i=1; AJvYcCUk/l7WvKJqddnUS6C++MwH+cmlpiLtPC6m7e6Y0TOxLarrVtZvMnGPByVX6BXlMb/l5MOOKOeeNx0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxwKBUa71ikMVRgCFgWSI2Etxr9YKYHxvVKWMqK0GHVNcrVvWxP
+	wQCHJpJ3gTogSrJhfeLqSo/XDg+qc6CNL0KayNT1ZPtVV/7Hiq63CcqfSu6yWQ==
+X-Gm-Gg: ASbGncvHWOa+OTkCbO0M9+wqDXMPxPGK9goYRJeJYDbS/PNWBupqS2Sc3G2oTDAgusa
+	f7YUSmy9008BkB9vVXhvj1MxRmiR2DYfV6q+lLl05Z/pKjRJaIC7pd+p0zWrN5vdlb6r5C+RaU6
+	nYT9KvAQBo2QVRCGeSqIgySPWd+nyNytkE9pFQXimnttSnuPxWMzgkEJ06D8DsWpAQFdH5iiZZA
+	sqfd4bWlisrNGFC9FopCD374ieCXyT1Sdr2ak5NkMy9x7t9zhH27n4dhQq2byLj1qXeHxoHJhnB
+	NCMwsh1rLVbibvZSvSTS1BkKR+lXUWFBYG3IWn8S1Q==
+X-Google-Smtp-Source: AGHT+IGFWHAXe2D6VKlCC0IANRemBwRSJMrJ7laxduDYApfa+Y5HaOTByJAotwckobAxsAltnYplfA==
+X-Received: by 2002:a5d:6c63:0:b0:385:ee59:4510 with SMTP id ffacd0b85a97d-38a872fb0f9mr5268264f8f.9.1736421504996;
+        Thu, 09 Jan 2025 03:18:24 -0800 (PST)
+Message-ID: <aa88bcec-11e9-4a1a-8c2d-e18ef5bcbc35@suse.com>
+Date: Thu, 9 Jan 2025 12:18:23 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 07/11] xen/cpufreq: only set gov NULL when
+ cpufreq_driver.target() exists
+To: Penny Zheng <Penny.Zheng@amd.com>
+Cc: stefano.stabellini@amd.com, Ray.Huang@amd.com, Xenia.Ragiadakou@amd.com,
+ Jason.Andryuk@amd.com, xen-devel@lists.xenproject.org
+References: <20241203081111.463400-1-Penny.Zheng@amd.com>
+ <20241203081111.463400-8-Penny.Zheng@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20241203081111.463400-8-Penny.Zheng@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Date: Thu, 09 Jan 2025 11:01:00 +0000
-Message-Id: <D6XHOJ01P6HV.2IGS7W4SGN07@cloud.com>
-To: "Roger Pau Monne" <roger.pau@citrix.com>,
- <xen-devel@lists.xenproject.org>
-Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper"
- <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 09/18] x86/mm: simplify create_perdomain_mapping()
- interface
-From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
-X-Mailer: aerc 0.18.2
-References: <20250108142659.99490-1-roger.pau@citrix.com>
- <20250108142659.99490-10-roger.pau@citrix.com>
-In-Reply-To: <20250108142659.99490-10-roger.pau@citrix.com>
+Content-Transfer-Encoding: 7bit
 
-On Wed Jan 8, 2025 at 2:26 PM GMT, Roger Pau Monne wrote:
-> diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.=
-h
-> index 65cd751087dc..0c57442c9593 100644
-> --- a/xen/arch/x86/include/asm/mm.h
-> +++ b/xen/arch/x86/include/asm/mm.h
-> @@ -601,8 +601,7 @@ int compat_arch_memory_op(unsigned long cmd, XEN_GUES=
-T_HANDLE_PARAM(void) arg);
->  #define IS_NIL(ptr) (!((uintptr_t)(ptr) + sizeof(*(ptr))))
+On 03.12.2024 09:11, Penny Zheng wrote:
+> --- a/xen/drivers/cpufreq/cpufreq.c
+> +++ b/xen/drivers/cpufreq/cpufreq.c
+> @@ -316,7 +316,13 @@ int cpufreq_add_cpu(unsigned int cpu)
+>      if (hw_all || (cpumask_weight(cpufreq_dom->map) ==
+>                     perf->domain_info.num_processors)) {
+>          memcpy(&new_policy, policy, sizeof(struct cpufreq_policy));
+> -        policy->governor = NULL;
+> +
+> +       /*
+> +        * Only when cpufreq_driver.target exists, we need to deliberately set old gov as NULL
+> +        * to trigger the according gov starting.
+> +        */
+> +       if ( cpufreq_driver.target )
+> +            policy->governor = NULL;
+>  
+>          cpufreq_cmdline_common_para(&new_policy);
 
-Shouldn't IS_NIL() and NIL (out of context) be removed too?
+Looking at __cpufreq_set_policy(), wouldn't the condition better check
+.setpolicy being NULL?
 
-Cheers,
-Alejandro
+Jan
 
