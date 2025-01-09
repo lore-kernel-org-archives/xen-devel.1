@@ -4,45 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C27E7719A
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:18:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868752.1280281 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB0EE77197
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:26:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.868792.1280290 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVuIT-0007xo-S9; Thu, 09 Jan 2025 15:18:09 +0000
+	id 1tVuQI-0003Au-JA; Thu, 09 Jan 2025 15:26:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868752.1280281; Thu, 09 Jan 2025 15:18:09 +0000
+Received: by outflank-mailman (output) from mailman id 868792.1280290; Thu, 09 Jan 2025 15:26:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVuIT-0007xh-P8; Thu, 09 Jan 2025 15:18:09 +0000
-Received: by outflank-mailman (input) for mailman id 868752;
- Thu, 09 Jan 2025 15:18:09 +0000
+	id 1tVuQI-0003An-Gd; Thu, 09 Jan 2025 15:26:14 +0000
+Received: by outflank-mailman (input) for mailman id 868792;
+ Thu, 09 Jan 2025 15:26:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BoWZ=UB=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1tVu4G-0007zg-PP
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:03:28 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e041e2f3-ce9a-11ef-a0df-8be0dac302b0;
- Thu, 09 Jan 2025 16:03:25 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 214142117B;
- Thu,  9 Jan 2025 15:03:25 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 99E55139AB;
- Thu,  9 Jan 2025 15:03:24 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id SFg7JDzlf2c1awAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Thu, 09 Jan 2025 15:03:24 +0000
+ <SRS0=zyMf=UB=tklengyel.com=tamas@srs-se1.protection.inumbo.net>)
+ id 1tVuQH-0003Ah-3Z
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:26:13 +0000
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0c73b30a-ce9e-11ef-a0df-8be0dac302b0;
+ Thu, 09 Jan 2025 16:26:09 +0100 (CET)
+Received: by mx.zohomail.com with SMTPS id 1736436364776946.4546907594349;
+ Thu, 9 Jan 2025 07:26:04 -0800 (PST)
+Received: by mail-yb1-f180.google.com with SMTP id
+ 3f1490d57ef6-e39779a268bso1553909276.1
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 07:26:04 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,135 +43,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e041e2f3-ce9a-11ef-a0df-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1736435005; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
-	b=mHC4BY4v0XRblAzURsuI5fLJdxUamLs0dQqT+9rcHseAZgky5Sc7GtNtWz7aFuc5dOozzt
-	VJbL4YTY/i1VCkegdtB/QrbCayouuXlzSpQqgps7bavO2+wu+XdXePW8FmTFtMJmyAHUNr
-	Q3wohlh1Vfu9a7NfOUICW86X6xwP06A=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1736435005;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
-	b=7IXWhQu4iR5JkcOvc9aZwbJA+iaYNtsjxD1mSQ6imepfirGqwhXSVCBpglaH8lZ+Xr9a6z
-	2DlTzOaLJ5/arlDg==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=mHC4BY4v;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=7IXWhQu4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1736435005; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
-	b=mHC4BY4v0XRblAzURsuI5fLJdxUamLs0dQqT+9rcHseAZgky5Sc7GtNtWz7aFuc5dOozzt
-	VJbL4YTY/i1VCkegdtB/QrbCayouuXlzSpQqgps7bavO2+wu+XdXePW8FmTFtMJmyAHUNr
-	Q3wohlh1Vfu9a7NfOUICW86X6xwP06A=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1736435005;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
-	b=7IXWhQu4iR5JkcOvc9aZwbJA+iaYNtsjxD1mSQ6imepfirGqwhXSVCBpglaH8lZ+Xr9a6z
-	2DlTzOaLJ5/arlDg==
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org,
-	linux-mediatek@lists.infradead.org,
-	freedreno@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-samsung-soc@vger.kernel.org,
-	nouveau@lists.freedesktop.org,
-	virtualization@lists.linux.dev,
-	spice-devel@lists.freedesktop.org,
-	linux-renesas-soc@vger.kernel.org,
-	linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	intel-xe@lists.freedesktop.org,
-	xen-devel@lists.xenproject.org,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Biju Das <biju.das.jz@bp.renesas.com>
-Subject: [PATCH v2 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
-Date: Thu,  9 Jan 2025 15:57:12 +0100
-Message-ID: <20250109150310.219442-19-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250109150310.219442-1-tzimmermann@suse.de>
-References: <20250109150310.219442-1-tzimmermann@suse.de>
+X-Inumbo-ID: 0c73b30a-ce9e-11ef-a0df-8be0dac302b0
+ARC-Seal: i=1; a=rsa-sha256; t=1736436365; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=E85Jrv86Y5aK+SD6b0tynCZisfGnGGI3bbdN4wTNDsTHdtopoqCnPBFoxM3/8a9h/FByDzySw26fqH3TZ1XY6RqIcHMVW2a3ctxUQ+9oi2g7KQCJidqW79wPMVhxpQmTDMHW0lgfh1/7x6fREm8F1C2g70nk2JZ+grxmlTKp4vQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1736436365; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=v9IpNl2iNQqt9WSyxFheSewMy8n03I5CieRpdGYFo6w=; 
+	b=eBQtf+7JaKoEzrMcoAwNhIAGdxLARvkNpDOkc6t2iDGpRxJs6ZffKh9qIydvVhM+OJT+M0VLtUa0RboF14pBVg+QuIL780GtiX2399lMVacxKd9wqo8XgWetn1hmoyIjdLzbm6bo4YOA06JDvptqpwXvu76s+IAUp2WkcAlHFBI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=tklengyel.com;
+	spf=pass  smtp.mailfrom=tamas@tklengyel.com;
+	dmarc=pass header.from=<tamas@tklengyel.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736436365;
+	s=zmail; d=tklengyel.com; i=tamas@tklengyel.com;
+	h=MIME-Version:References:In-Reply-To:From:From:Date:Date:Message-ID:Subject:Subject:To:To:Cc:Cc:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=v9IpNl2iNQqt9WSyxFheSewMy8n03I5CieRpdGYFo6w=;
+	b=BiaTyODOueHyV35V79fmPKBGFUq/2EcmbmvQknIpafvhLivZt/DIivttRcJ5CA6Y
+	IUM1qFmYHlKqwpjwVE25hgO0FSH1WBCfjTdMyNZNu4foNxz68yS2j9PkREkj7M4gVtx
+	JJ36BJmGMMk6x0JjCxx3fGQCKoSrbqzCrYR+j+vI=
+X-Forwarded-Encrypted: i=1; AJvYcCVFlxQri3y5TV8KM9FdA7sTX2pvXrepwotd6eHB1ueIjI1CIWap7uvhPipEFV6B6fFFSN+Xz0k7TyQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwAGOy5Cm41TtWx48HvoTsb0/LhSc6wLHueG70yNN7THVcZPWHk
+	lepk5QOe9/o7fGNIbo6stYWGMK59IonGbN22Dc5y16p6jiWfs6nwk9RWkkCjt3bgsnffJCmaXCN
+	S23q7Bg7NDrvYMmUQpg9PMIHlqPg=
+X-Google-Smtp-Source: AGHT+IGj1vTgkF+qZ3275XwZQgoP4KlB4h4vgcoHtaVtlPsaWc38lsYRzTcHjwRXn/tIqOnyxI5wo9Wf5Ha7lKGhZGI=
+X-Received: by 2002:a05:6902:2708:b0:e54:d63a:911c with SMTP id
+ 3f1490d57ef6-e550141e9c2mr2733502276.10.1736436363826; Thu, 09 Jan 2025
+ 07:26:03 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 214142117B
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.51 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,gmail.com,ffwll.ch];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:mid,suse.de:email];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[suse.de:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+References: <cover.1735837806.git.w1benny@gmail.com> <4eea61a2-cf56-4ff5-8c43-58f5a20c9cb1@gmail.com>
+In-Reply-To: <4eea61a2-cf56-4ff5-8c43-58f5a20c9cb1@gmail.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Thu, 9 Jan 2025 10:25:27 -0500
+X-Gmail-Original-Message-ID: <CABfawhmHK_Lg8GuVr9yb1gw82YFs3e1gh76azzH8C98R552dSw@mail.gmail.com>
+X-Gm-Features: AbW1kvbgU3QB5zRBc0i5XyoixetpS80JU6YW75tixuOlVts_yNiubtZG6tTwjnc
+Message-ID: <CABfawhmHK_Lg8GuVr9yb1gw82YFs3e1gh76azzH8C98R552dSw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] x86: Add Support for Paging-Write Feature
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: =?UTF-8?Q?Petr_Bene=C5=A1?= <w1benny@gmail.com>, 
+	xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Alexandru Isaila <aisaila@bitdefender.com>, Petre Pircalabu <ppircalabu@bitdefender.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Anthony PERARD <anthony.perard@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-buffer size. Align the pitch according to hardware requirements.
+On Thu, Jan 9, 2025 at 9:30=E2=80=AFAM Oleksii Kurochko
+<oleksii.kurochko@gmail.com> wrote:
+>
+>
+> On 1/2/25 6:13 PM, Petr Bene=C5=A1 wrote:
+>
+> From: Petr Bene=C5=A1 <w1benny@gmail.com>
+>
+> Changes since v2:
+> - Reset entry->pw in all cases in p2m_set_entry, except for p2m_access_r_=
+pw
+>
+> Changes since v1:
+> - Added signed-off-by tags
+>
+> This patch introduces a new XENMEM_access_r_pw permission. Functionally, =
+it is similar to XENMEM_access_r, but for processors with TERTIARY_EXEC_EPT=
+_PAGING_WRITE support (Intel 12th Gen/Alder Lake and later), it also permit=
+s the CPU to write to the page during guest page-table walks (e.g., updatin=
+g A/D bits) without triggering an EPT violation.
+>
+> This behavior works by both enabling the EPT paging-write feature and set=
+ting the EPT paging-write flag in the EPT leaf entry.
+>
+> This feature provides a significant performance boost for introspection t=
+ools that monitor guest page-table updates. Previously, every page-table mo=
+dification by the guest=E2=80=94including routine updates like setting A/D =
+bits=E2=80=94triggered an EPT violation, adding unnecessary overhead. The n=
+ew XENMEM_access_r_pw permission allows these "uninteresting" updates to oc=
+cur without EPT violations, improving efficiency.
+>
+> Considering that this feature provides a significant performance boost fo=
+r introspection tools probably we could consider to take it to current rele=
+ase.
+>
+> I see that the patch series was acked-by "Acked-by: Tamas K Lengyel <tama=
+s@tklengyel.com>" but based on the change log it is not clear when exactly
+>
+> before Feature freeze date or not. ( and I don't see any reply from Tamas=
+ ).
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>
----
- drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+I've acked the patch Thu, Dec 19, 2024.
 
-diff --git a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c b/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
-index 90c6269ccd29..f752369cd52f 100644
---- a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
-+++ b/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
-@@ -75,10 +75,11 @@ const struct rzg2l_du_format_info *rzg2l_du_format_info(u32 fourcc)
- int rzg2l_du_dumb_create(struct drm_file *file, struct drm_device *dev,
- 			 struct drm_mode_create_dumb *args)
- {
--	unsigned int min_pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
--	unsigned int align = 16 * args->bpp / 8;
-+	int ret;
- 
--	args->pitch = roundup(min_pitch, align);
-+	ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
-+	if (ret)
-+		return ret;
- 
- 	return drm_gem_dma_dumb_create_internal(file, dev, args);
- }
--- 
-2.47.1
-
+Cheers,
+Tamas
 
