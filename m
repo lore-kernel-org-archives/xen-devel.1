@@ -4,32 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 473F0E77199
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 11:00:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868107.1279666 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53093E77197
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 11:00:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.868110.1279678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVqGc-000465-8o; Thu, 09 Jan 2025 10:59:58 +0000
+	id 1tVqGf-0004TF-L9; Thu, 09 Jan 2025 11:00:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868107.1279666; Thu, 09 Jan 2025 10:59:58 +0000
+Received: by outflank-mailman (output) from mailman id 868110.1279678; Thu, 09 Jan 2025 11:00:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVqGc-00045w-62; Thu, 09 Jan 2025 10:59:58 +0000
-Received: by outflank-mailman (input) for mailman id 868107;
- Thu, 09 Jan 2025 10:59:56 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1tVqGf-0004Rm-F5; Thu, 09 Jan 2025 11:00:01 +0000
+Received: by outflank-mailman (input) for mailman id 868110;
+ Thu, 09 Jan 2025 11:00:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <anthony@xenproject.org>) id 1tVqGa-0003ot-7R
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 10:59:56 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1tVqGU-00Ckur-38;
- Thu, 09 Jan 2025 10:59:51 +0000
-Received: from lfbn-gre-1-248-145.w90-112.abo.wanadoo.fr ([90.112.205.145]
- helo=l14) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1tVqGU-009H4r-2j;
- Thu, 09 Jan 2025 10:59:51 +0000
+ (envelope-from <SRS0=vJOs=UB=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1tVqGe-0003VB-5p
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 11:00:00 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ddf6c193-ce78-11ef-99a4-01e77a169b0f;
+ Thu, 09 Jan 2025 11:59:58 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 62BB21F393;
+ Thu,  9 Jan 2025 10:59:58 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1B073139AB;
+ Thu,  9 Jan 2025 10:59:58 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id bdcVBS6sf2cBHQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 09 Jan 2025 10:59:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,79 +54,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
-	bh=Xb8WmGVRb/vr/z5nwf4UmXY3kfsCsZcEmJes/p0baWo=; b=ghRRgBC3k/9uFoYqGU8pKpLzEL
-	LnxzcjNJZxalmdPHZz3imf+etNf2Lu0rvndDrdIVCEIFVFV4iXiJdkhqW3/InpA8M9r2M8Y8bHHdK
-	wm+dk2HNMDKVolfJP+CBYaMILNQ2dQe7dobqc3tcRBSGSrochTA2alblX0PkQITE8oSA=;
-Date: Thu, 9 Jan 2025 11:59:48 +0100
-From: Anthony PERARD <anthony@xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: qemu-devel@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	=?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 2/2] xen: do not use '%ms' scanf specifier
-Message-ID: <Z3-sJMXpiFUoATHz@l14>
-References: <20250107093140.86180-1-roger.pau@citrix.com>
- <20250107093140.86180-3-roger.pau@citrix.com>
+X-Inumbo-ID: ddf6c193-ce78-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1736420398; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=g9fM0R3rr4pnSw+2kXqv7pyWo8NS0rOHw9Y3B9boDRs=;
+	b=BepEfmE9h6JLK+4zoc0ZwVB6hyIpIFbFhkdJukXnYYvtKxE/7KKu0H16wxlcbGik9meBk1
+	PNKlkJtc7h+aYgMPGWPfsZoixdLUS6WWjcZo93M0ygJ1vOlnryY3HuYT5IrhRIBY9aVd6F
+	JVAmx/69DTHaCkCF/f7mVZAPpUzBKns=
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=BepEfmE9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1736420398; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=g9fM0R3rr4pnSw+2kXqv7pyWo8NS0rOHw9Y3B9boDRs=;
+	b=BepEfmE9h6JLK+4zoc0ZwVB6hyIpIFbFhkdJukXnYYvtKxE/7KKu0H16wxlcbGik9meBk1
+	PNKlkJtc7h+aYgMPGWPfsZoixdLUS6WWjcZo93M0ygJ1vOlnryY3HuYT5IrhRIBY9aVd6F
+	JVAmx/69DTHaCkCF/f7mVZAPpUzBKns=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v7 3/7] xen/events: allow setting of global virq handler only for unbound virqs
+Date: Thu,  9 Jan 2025 11:59:31 +0100
+Message-ID: <20250109105935.23585-4-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250109105935.23585-1-jgross@suse.com>
+References: <20250109105935.23585-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250107093140.86180-3-roger.pau@citrix.com>
+X-Rspamd-Queue-Id: 62BB21F393
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:dkim,suse.com:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_ALL(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[suse.com:+]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
 
-On Tue, Jan 07, 2025 at 10:31:40AM +0100, Roger Pau Monne wrote:
-> The 'm' parameter used to request auto-allocation of the destination variable
-> is not supported on FreeBSD, and as such leads to failures to parse.
-> 
-> What's more, the current usage of '%ms' with xs_node_scanf() is pointless, as
-> it just leads to a double allocation of the same string.  Instead use
-> qemu_xen_xs_read() to read the whole xenstore node.
-> 
-> Fixes: a783f8ad4ec9 ('xen: add a mechanism to automatically create XenDevice-s...')
-> Fixes: 9b7737469080 ('hw/xen: update Xen console to XenDevice model')
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
->  hw/char/xen_console.c | 11 +++++++++--
->  hw/xen/xen-bus.c      |  7 +++++--
->  2 files changed, 14 insertions(+), 4 deletions(-)
-> 
-> diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-> index af706c7ef440..18afd214c2f6 100644
-> --- a/hw/char/xen_console.c
-> +++ b/hw/char/xen_console.c
-> @@ -531,6 +531,7 @@ static void xen_console_device_create(XenBackendInstance *backend,
->      const char *name = xen_backend_get_name(backend);
->      unsigned long number;
->      char *fe = NULL, *type = NULL, *output = NULL;
-> +    const char *node_path;
+XEN_DOMCTL_set_virq_handler will happily steal a global virq from the
+current domain having bound it and assign it to another domain. The
+former domain will just never receive any further events for that
+virq without knowing what happened.
 
-Is "const" correct when we are changing to which string `node_path` is
-pointing at? Also, why "const"? Also, compiler complains that we can't
-free a "const something*".
+Change the behavior to allow XEN_DOMCTL_set_virq_handler only if the
+virq in question is not bound by the current domain allowed to use it.
 
->      char label[32];
->      XenDevice *xendev = NULL;
->      XenConsole *con;
-> @@ -550,7 +551,10 @@ static void xen_console_device_create(XenBackendInstance *backend,
->          goto fail;
->      }
->  
-> -    if (xs_node_scanf(xsh, XBT_NULL, fe, "type", errp, "%ms", &type) != 1) {
-> +    node_path = g_strdup_printf("%s/type", fe);
-> +    type = qemu_xen_xs_read(xsh, XBT_NULL, node_path, NULL);
-> +    g_free(node_path);
+Currently the only user of XEN_DOMCTL_set_virq_handler in the Xen code
+base is init-xenstore-domain, so changing the behavior like above will
+not cause any problems.
 
-I feel like we want "xs_node_read()" which would be similair to
-xs_node_vscanf() but would simply return the result of
-qemu_xen_xs_read(). This would avoid the need format of the node path in
-several place in the code. But it's OK like that as well.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V6:
+- new patch
+---
+ xen/common/event_channel.c | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
 
-Cheers,
-
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index cd6f5a1211..4dba59efa2 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -991,7 +991,8 @@ void send_global_virq(uint32_t virq)
+ 
+ int set_global_virq_handler(struct domain *d, uint32_t virq)
+ {
+-    struct domain *old;
++    struct domain *old, *hdl;
++    const struct vcpu *v;
+     int rc = 0;
+ 
+     if (virq >= NR_VIRQS)
+@@ -1023,7 +1024,22 @@ int set_global_virq_handler(struct domain *d, uint32_t virq)
+     else
+     {
+         old = global_virq_handlers[virq];
+-        global_virq_handlers[virq] = d;
++        hdl = get_global_virq_handler(virq);
++        if ( hdl != d )
++        {
++            read_lock(&hdl->event_lock);
++
++            v = hdl->vcpu[0];
++            if ( v && read_atomic(&v->virq_to_evtchn[virq]) )
++            {
++                rc = -EBUSY;
++                old = d;
++            }
++            else
++                global_virq_handlers[virq] = d;
++
++            read_unlock(&hdl->event_lock);
++        }
+     }
+ 
+     spin_unlock(&global_virq_handlers_lock);
 -- 
-Anthony PERARD
+2.43.0
+
 
