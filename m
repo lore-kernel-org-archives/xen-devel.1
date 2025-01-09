@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B135EE77197
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 16:15:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868963.1280471 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3BDE77197
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 16:16:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.868952.1280481 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVvC3-0002Ry-2Z; Thu, 09 Jan 2025 16:15:35 +0000
+	id 1tVvCT-0003Bi-DH; Thu, 09 Jan 2025 16:16:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868963.1280471; Thu, 09 Jan 2025 16:15:35 +0000
+Received: by outflank-mailman (output) from mailman id 868952.1280481; Thu, 09 Jan 2025 16:16:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVvC2-0002RY-VU; Thu, 09 Jan 2025 16:15:34 +0000
-Received: by outflank-mailman (input) for mailman id 868963;
- Thu, 09 Jan 2025 16:15:33 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tVvCT-0003Bb-Ak; Thu, 09 Jan 2025 16:16:01 +0000
+Received: by outflank-mailman (input) for mailman id 868952;
+ Thu, 09 Jan 2025 16:06:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wq9x=UB=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tVvC1-0002PN-Og
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 16:15:33 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f310c09f-cea4-11ef-a0df-8be0dac302b0;
- Thu, 09 Jan 2025 17:15:32 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aaee2c5ee6eso190128566b.1
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 08:15:32 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab2c9645fddsm83988066b.169.2025.01.09.08.15.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 08:15:31 -0800 (PST)
+ <SRS0=soqj=UB=intel.com=matthew.auld@srs-se1.protection.inumbo.net>)
+ id 1tVv32-0004iX-Q5
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 16:06:17 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a5676a1a-cea3-11ef-99a4-01e77a169b0f;
+ Thu, 09 Jan 2025 17:06:13 +0100 (CET)
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jan 2025 08:05:55 -0800
+Received: from bergbenj-mobl1.ger.corp.intel.com (HELO [10.245.245.241])
+ ([10.245.245.241])
+ by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jan 2025 08:05:50 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,113 +45,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f310c09f-cea4-11ef-a0df-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1736439331; x=1737044131; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=k02q0uVqEedz6OethSIEqDgrfhFBHQS0vlrPrSFQJPw=;
-        b=OBWyG9N+Bq4yEhhTAGTHMD8D2o5BDGPScbiD+ACpg6kzupqZfGLdyYTbqNIjRL9yba
-         4f3O4Pv6V57XrMD/w/DIgVuvyOWSYqgIvLM4NlL3J36qoIM0G632QVet55+o0egJ+37h
-         /An5mIWn9TpMyNzfUdJmvMHWXyRAd5a6UC2n4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736439331; x=1737044131;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=k02q0uVqEedz6OethSIEqDgrfhFBHQS0vlrPrSFQJPw=;
-        b=X7NWm1Phke0xoBlWHfRtPNSUCn+aZSFBpneps3oFui8LGPsGWm8wjdGZ5NrPfprbcR
-         /uyRF+++jaH63SzMtmx+K+7Nj9I0q4XDMehW8lZcyKnSYhlVoa4HIR4kFr2x+lS4AxVe
-         WeVMlhas7mA3YF7usKWU6tE22DwmkhyE+xuLkffaRxI46NyS8+O4D/3atsyLO5jw667j
-         UnLC8dl3YcUeC6qIe8o7gj0E4YlrUfqyIjhidotuUwYHFFbJvUgj1Y7htkwZAS3uF03Z
-         K+JbruZOUO2qxP2/0qAE6AOk3WNog6meUBEbXzbrQXk9oukyy1/GLrRhJDKe+5cIp9o8
-         qD/w==
-X-Forwarded-Encrypted: i=1; AJvYcCXMlscLd1zE00tWBUPH7naMAUl9nb3nu+XzrPNkbQh8BnJxX0HLeWkSACdFOQ6pZkZ1j6G2tv2alio=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyKgNl+WeEdjLCJ9H8OjmYTz93oVXd3cGqFMCCUpzhgqzfxUQR/
-	KChEV4hS8iQwwNFPd86NTo2uAXmdvrxyRQ2mIlRzOlyZTTHsr+lKpEmpx0Pa3ac=
-X-Gm-Gg: ASbGncs4/E7uZ6sXyvlHVl1uYfFG847urKJGzGfzG08WQDEtYAc+HPplFardV/kttKa
-	4rJK3po9UYtGvxWRuMD+1owLYNpSqsur+DsFfbOAd5KWMJUsAwmHtt0egCOR7HoMyyVbQN3tUoi
-	YpmbJWzRh96m5xVic9F1G1y0Bd96WDI3OVyvNxXUBP4+fv8r/fp8WbPVxhOdQQFLDtcMNAnl3+e
-	NpgWrW7nMLRL7NOwGB6Y5DhteANIeFji5Y7JklUzjvn5csDCsfMy1VTnkJuoA==
-X-Google-Smtp-Source: AGHT+IHtOa0K6VX3BliPmhDS5BYi81wa3891u/ccPf61M2Pph9hCJc33gfh7s/tmPgj+pMUjlYaTKA==
-X-Received: by 2002:a17:907:d9f:b0:aac:180e:b1d4 with SMTP id a640c23a62f3a-ab2ab6fe016mr651317366b.27.1736439331372;
-        Thu, 09 Jan 2025 08:15:31 -0800 (PST)
-Date: Thu, 9 Jan 2025 17:15:30 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Anthony PERARD <anthony@xenproject.org>
-Cc: qemu-devel@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	=?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 2/2] xen: do not use '%ms' scanf specifier
-Message-ID: <Z3_2IhGZvpF-5IiX@macbook.local>
-References: <20250107093140.86180-1-roger.pau@citrix.com>
- <20250107093140.86180-3-roger.pau@citrix.com>
- <Z3-sJMXpiFUoATHz@l14>
+X-Inumbo-ID: a5676a1a-cea3-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1736438774; x=1767974774;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=p4XkuorIpNoSEU2HBpQ1O27DvwV5LvulfkLyMZfyAfg=;
+  b=BV96KLx/GpINYPjtoGCUzPgRdDy35Ezx9iAT4TVVlq/VU5z3poIeLtxd
+   XQhs3sidlWwjChJ4sGZciPPiwKLGUDgVjuVaPeUFL3986bSotTV4vR/Za
+   N/WKVaMPmmUo0AG5zMiPpvcmzTSTWOXIhXHoX5Wu0Gz/DoeMEuE6TA9PG
+   QabMXpOFBwFbWICOhEPkDccQZpV3YxVFW06p+gX+SATv2W6TQr5rgnJmn
+   5O6tSIFGD3rwzSYzpxz3bS1S9YzQIoJE2NDN+kqyswP/E6KXYAzyBCaTg
+   AVLcVJvWyDVORuulU68w8UOmSsSoa/7y/4nUe5+RqnFZesA3AxxLVt5Gd
+   Q==;
+X-CSE-ConnectionGUID: nV9CUtq6Q/iikQqV4TSm+w==
+X-CSE-MsgGUID: wgG7ghxVQbKfiqqSZWN6+A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11310"; a="62086137"
+X-IronPort-AV: E=Sophos;i="6.12,301,1728975600"; 
+   d="scan'208";a="62086137"
+X-CSE-ConnectionGUID: gYM7jUeoQau2+oJbNyjiWQ==
+X-CSE-MsgGUID: 8PkbOk3sQpqIzHIL0w463A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,301,1728975600"; 
+   d="scan'208";a="103967271"
+Message-ID: <91c904f8-ba47-4595-be65-6fb57dcc9c64@intel.com>
+Date: Thu, 9 Jan 2025 16:05:47 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 23/25] drm/xe: Compute dumb-buffer sizes with
+ drm_mode_size_dumb()
+To: Thomas Zimmermann <tzimmermann@suse.de>,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
+ simona@ffwll.ch
+Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ Lucas De Marchi <lucas.demarchi@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>
+References: <20250109150310.219442-1-tzimmermann@suse.de>
+ <20250109150310.219442-24-tzimmermann@suse.de>
+Content-Language: en-GB
+From: Matthew Auld <matthew.auld@intel.com>
+In-Reply-To: <20250109150310.219442-24-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <Z3-sJMXpiFUoATHz@l14>
 
-On Thu, Jan 09, 2025 at 11:59:48AM +0100, Anthony PERARD wrote:
-> On Tue, Jan 07, 2025 at 10:31:40AM +0100, Roger Pau Monne wrote:
-> > The 'm' parameter used to request auto-allocation of the destination variable
-> > is not supported on FreeBSD, and as such leads to failures to parse.
-> > 
-> > What's more, the current usage of '%ms' with xs_node_scanf() is pointless, as
-> > it just leads to a double allocation of the same string.  Instead use
-> > qemu_xen_xs_read() to read the whole xenstore node.
-> > 
-> > Fixes: a783f8ad4ec9 ('xen: add a mechanism to automatically create XenDevice-s...')
-> > Fixes: 9b7737469080 ('hw/xen: update Xen console to XenDevice model')
-> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> > ---
-> >  hw/char/xen_console.c | 11 +++++++++--
-> >  hw/xen/xen-bus.c      |  7 +++++--
-> >  2 files changed, 14 insertions(+), 4 deletions(-)
-> > 
-> > diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-> > index af706c7ef440..18afd214c2f6 100644
-> > --- a/hw/char/xen_console.c
-> > +++ b/hw/char/xen_console.c
-> > @@ -531,6 +531,7 @@ static void xen_console_device_create(XenBackendInstance *backend,
-> >      const char *name = xen_backend_get_name(backend);
-> >      unsigned long number;
-> >      char *fe = NULL, *type = NULL, *output = NULL;
-> > +    const char *node_path;
+On 09/01/2025 14:57, Thomas Zimmermann wrote:
+> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch
+> and buffer size. Align the pitch to a multiple of 8. Align the
+> buffer size according to hardware requirements.
 > 
-> Is "const" correct when we are changing to which string `node_path` is
-> pointing at? Also, why "const"? Also, compiler complains that we can't
-> free a "const something*".
-
-It's my understanding that the proposed const signals that the pointer
-value can change, but the contents of the pointer cannot (iow: the
-string cannot be modified).
-
-My build seem to be fine, but I see that g_free() doesn't seem to take
-a const pointer.  Will adjust.
-
-> >      char label[32];
-> >      XenDevice *xendev = NULL;
-> >      XenConsole *con;
-> > @@ -550,7 +551,10 @@ static void xen_console_device_create(XenBackendInstance *backend,
-> >          goto fail;
-> >      }
-> >  
-> > -    if (xs_node_scanf(xsh, XBT_NULL, fe, "type", errp, "%ms", &type) != 1) {
-> > +    node_path = g_strdup_printf("%s/type", fe);
-> > +    type = qemu_xen_xs_read(xsh, XBT_NULL, node_path, NULL);
-> > +    g_free(node_path);
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Lucas De Marchi <lucas.demarchi@intel.com>
+> Cc: "Thomas Hellström" <thomas.hellstrom@linux.intel.com>
+> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+> ---
+>   drivers/gpu/drm/xe/xe_bo.c | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
 > 
-> I feel like we want "xs_node_read()" which would be similair to
-> xs_node_vscanf() but would simply return the result of
-> qemu_xen_xs_read(). This would avoid the need format of the node path in
-> several place in the code. But it's OK like that as well.
+> diff --git a/drivers/gpu/drm/xe/xe_bo.c b/drivers/gpu/drm/xe/xe_bo.c
+> index e6c896ad5602..d75e3c39ab14 100644
+> --- a/drivers/gpu/drm/xe/xe_bo.c
+> +++ b/drivers/gpu/drm/xe/xe_bo.c
+> @@ -8,6 +8,7 @@
+>   #include <linux/dma-buf.h>
+>   
+>   #include <drm/drm_drv.h>
+> +#include <drm/drm_dumb_buffers.h>
+>   #include <drm/drm_gem_ttm_helper.h>
+>   #include <drm/drm_managed.h>
+>   #include <drm/ttm/ttm_device.h>
+> @@ -2535,14 +2536,13 @@ int xe_bo_dumb_create(struct drm_file *file_priv,
+>   	struct xe_device *xe = to_xe_device(dev);
+>   	struct xe_bo *bo;
+>   	uint32_t handle;
+> -	int cpp = DIV_ROUND_UP(args->bpp, 8);
+>   	int err;
+>   	u32 page_size = max_t(u32, PAGE_SIZE,
+>   		xe->info.vram_flags & XE_VRAM_FLAGS_NEED64K ? SZ_64K : SZ_4K);
+>   
+> -	args->pitch = ALIGN(args->width * cpp, 64);
+> -	args->size = ALIGN(mul_u32_u32(args->pitch, args->height),
+> -			   page_size);
+> +	err = drm_mode_size_dumb(dev, args, SZ_64, page_size);
 
-I was about to introduce such, but didn't end up doing.  I can do.
+AFAICT this looks to change the behaviour, where u64 size was 
+technically possible and was allowed given that args->size is u64, but 
+this helper is limiting the size to u32. Is that intentional? If so, we 
+should probably make that clear in the commit message.
 
-Thanks, Roger.
+> +	if (err)
+> +		return err;
+>   
+>   	bo = xe_bo_create_user(xe, NULL, NULL, args->size,
+>   			       DRM_XE_GEM_CPU_CACHING_WC,
+
 
