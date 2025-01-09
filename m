@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74375E77197
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C27E7719A
 	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:18:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868751.1280270 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.868752.1280281 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVuIS-0007iS-L2; Thu, 09 Jan 2025 15:18:08 +0000
+	id 1tVuIT-0007xo-S9; Thu, 09 Jan 2025 15:18:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868751.1280270; Thu, 09 Jan 2025 15:18:08 +0000
+Received: by outflank-mailman (output) from mailman id 868752.1280281; Thu, 09 Jan 2025 15:18:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVuIS-0007iL-IM; Thu, 09 Jan 2025 15:18:08 +0000
-Received: by outflank-mailman (input) for mailman id 868751;
- Thu, 09 Jan 2025 15:18:06 +0000
+	id 1tVuIT-0007xh-P8; Thu, 09 Jan 2025 15:18:09 +0000
+Received: by outflank-mailman (input) for mailman id 868752;
+ Thu, 09 Jan 2025 15:18:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BoWZ=UB=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1tVu4K-0007zg-QL
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:03:32 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de
- [2a07:de40:b251:101:10:150:64:1])
+ id 1tVu4G-0007zg-PP
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:03:28 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e25135fd-ce9a-11ef-a0df-8be0dac302b0;
- Thu, 09 Jan 2025 16:03:29 +0100 (CET)
+ id e041e2f3-ce9a-11ef-a0df-8be0dac302b0;
+ Thu, 09 Jan 2025 16:03:25 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 63D0D2117F;
- Thu,  9 Jan 2025 15:03:27 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 214142117B;
+ Thu,  9 Jan 2025 15:03:25 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D77DD139AB;
- Thu,  9 Jan 2025 15:03:26 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 99E55139AB;
+ Thu,  9 Jan 2025 15:03:24 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id MCFTMz7lf2c1awAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Thu, 09 Jan 2025 15:03:26 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id SFg7JDzlf2c1awAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Thu, 09 Jan 2025 15:03:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,46 +54,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e25135fd-ce9a-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: e041e2f3-ce9a-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1736435008; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1736435005; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=vM22xqKm0qzRdMjFd3I4M82uPWCGafIm9xozDAXbusI=;
-	b=PMV0sihsYxjfq2evvVU/cU/rGb8TP5puwgfRrOdDAwd9R8P2XFRAtfGLIfADXpDcm1O3CW
-	ZTKtvBYSXwoWxm41ddX+Hr2ovH2n0Vqjdw5RXqLATIWBSkgtIW5J5L87MQa6HgKb7yUPGh
-	t3KBMVbvQrKRXVmLDcgOR/5G3k5Bd7I=
+	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
+	b=mHC4BY4v0XRblAzURsuI5fLJdxUamLs0dQqT+9rcHseAZgky5Sc7GtNtWz7aFuc5dOozzt
+	VJbL4YTY/i1VCkegdtB/QrbCayouuXlzSpQqgps7bavO2+wu+XdXePW8FmTFtMJmyAHUNr
+	Q3wohlh1Vfu9a7NfOUICW86X6xwP06A=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1736435008;
+	s=susede2_ed25519; t=1736435005;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=vM22xqKm0qzRdMjFd3I4M82uPWCGafIm9xozDAXbusI=;
-	b=c/ewjNVppokMK62w57DhhEI+AYMlWVNcE+uza4H41d0DI93NE2G/SvEqKK+wkIGo77tEni
-	wY7Kz/JCiZiCBYCw==
+	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
+	b=7IXWhQu4iR5JkcOvc9aZwbJA+iaYNtsjxD1mSQ6imepfirGqwhXSVCBpglaH8lZ+Xr9a6z
+	2DlTzOaLJ5/arlDg==
 Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b="PRsXptM/";
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=Q2E9J7Wl
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=mHC4BY4v;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=7IXWhQu4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1736435007; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1736435005; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=vM22xqKm0qzRdMjFd3I4M82uPWCGafIm9xozDAXbusI=;
-	b=PRsXptM/HjGeXGFza62p3vMpIqYmsLBJjLyCIVutGnoYBK6NuRvbTPKJQaw4Vuyeuo5pV5
-	8jr9ReAtmELXk24UySJU4YfXGhhBJG+3UhJ7ExHvv7y5V2KBguD1AoZdokuK8V1ZgTPG4E
-	FjJyfsz8mhPZLAPip8a/M2wTli4mJB4=
+	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
+	b=mHC4BY4v0XRblAzURsuI5fLJdxUamLs0dQqT+9rcHseAZgky5Sc7GtNtWz7aFuc5dOozzt
+	VJbL4YTY/i1VCkegdtB/QrbCayouuXlzSpQqgps7bavO2+wu+XdXePW8FmTFtMJmyAHUNr
+	Q3wohlh1Vfu9a7NfOUICW86X6xwP06A=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1736435007;
+	s=susede2_ed25519; t=1736435005;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=vM22xqKm0qzRdMjFd3I4M82uPWCGafIm9xozDAXbusI=;
-	b=Q2E9J7WlWX8zVLj5G71fxVWwnUEfdleLwgzw+dOgOMHcz7uu6Bvb2OOcTfCBpNsv2qAoga
-	YmaAMmZfPaW4o+BQ==
+	bh=kNsjwPuvxigodZL3RVyzkFKzJlbnuv8zInJMu1cAV54=;
+	b=7IXWhQu4iR5JkcOvc9aZwbJA+iaYNtsjxD1mSQ6imepfirGqwhXSVCBpglaH8lZ+Xr9a6z
+	2DlTzOaLJ5/arlDg==
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: maarten.lankhorst@linux.intel.com,
 	mripard@kernel.org,
@@ -115,17 +114,17 @@ Cc: dri-devel@lists.freedesktop.org,
 	intel-xe@lists.freedesktop.org,
 	xen-devel@lists.xenproject.org,
 	Thomas Zimmermann <tzimmermann@suse.de>,
-	Zack Rusin <zack.rusin@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-Subject: [PATCH v2 22/25] drm/vmwgfx: Compute dumb-buffer sizes with drm_mode_size_dumb()
-Date: Thu,  9 Jan 2025 15:57:16 +0100
-Message-ID: <20250109150310.219442-23-tzimmermann@suse.de>
+	Biju Das <biju.das.jz@bp.renesas.com>
+Subject: [PATCH v2 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
+Date: Thu,  9 Jan 2025 15:57:12 +0100
+Message-ID: <20250109150310.219442-19-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250109150310.219442-1-tzimmermann@suse.de>
 References: <20250109150310.219442-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 63D0D2117F
+X-Rspamd-Queue-Id: 214142117B
+X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-1.51 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -140,9 +139,9 @@ X-Spamd-Result: default: False [-1.51 / 50.00];
 	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
 	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,gmail.com,ffwll.ch];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:dkim,suse.de:mid,broadcom.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:mid,suse.de:email];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
@@ -153,58 +152,36 @@ X-Spamd-Result: default: False [-1.51 / 50.00];
 	RCVD_TLS_ALL(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 
-Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch
-and buffer size. No alignment required.
+Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
+buffer size. Align the pitch according to hardware requirements.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Zack Rusin <zack.rusin@broadcom.com>
-Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
 ---
- drivers/gpu/drm/vmwgfx/vmwgfx_surface.c | 21 ++++-----------------
- 1 file changed, 4 insertions(+), 17 deletions(-)
+ drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-index 5721c74da3e0..a3fbd4148f73 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-@@ -34,6 +34,7 @@
- #include "vmw_surface_cache.h"
- #include "device_include/svga3d_surfacedefs.h"
+diff --git a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c b/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
+index 90c6269ccd29..f752369cd52f 100644
+--- a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
++++ b/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
+@@ -75,10 +75,11 @@ const struct rzg2l_du_format_info *rzg2l_du_format_info(u32 fourcc)
+ int rzg2l_du_dumb_create(struct drm_file *file, struct drm_device *dev,
+ 			 struct drm_mode_create_dumb *args)
+ {
+-	unsigned int min_pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
+-	unsigned int align = 16 * args->bpp / 8;
++	int ret;
  
-+#include <drm/drm_dumb_buffers.h>
- #include <drm/ttm/ttm_placement.h>
+-	args->pitch = roundup(min_pitch, align);
++	ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
++	if (ret)
++		return ret;
  
- #define SVGA3D_FLAGS_64(upper32, lower32) (((uint64_t)upper32 << 32) | lower32)
-@@ -2291,23 +2292,9 @@ int vmw_dumb_create(struct drm_file *file_priv,
- 	 * contents is going to be rendered guest side.
- 	 */
- 	if (!dev_priv->has_mob || !vmw_supports_3d(dev_priv)) {
--		int cpp = DIV_ROUND_UP(args->bpp, 8);
--
--		switch (cpp) {
--		case 1: /* DRM_FORMAT_C8 */
--		case 2: /* DRM_FORMAT_RGB565 */
--		case 4: /* DRM_FORMAT_XRGB8888 */
--			break;
--		default:
--			/*
--			 * Dumb buffers don't allow anything else.
--			 * This is tested via IGT's dumb_buffers
--			 */
--			return -EINVAL;
--		}
--
--		args->pitch = args->width * cpp;
--		args->size = ALIGN(args->pitch * args->height, PAGE_SIZE);
-+		ret = drm_mode_size_dumb(dev, args, 0, 0);
-+		if (ret)
-+			return ret;
- 
- 		ret = vmw_gem_object_create_with_handle(dev_priv, file_priv,
- 							args->size, &args->handle,
+ 	return drm_gem_dma_dumb_create_internal(file, dev, args);
+ }
 -- 
 2.47.1
 
