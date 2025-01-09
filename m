@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 548BBE77197
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:50:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868848.1280380 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B326E77197
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:51:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.868881.1280391 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVunx-0002rG-6c; Thu, 09 Jan 2025 15:50:41 +0000
+	id 1tVuoA-0003Hd-Ge; Thu, 09 Jan 2025 15:50:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868848.1280380; Thu, 09 Jan 2025 15:50:41 +0000
+Received: by outflank-mailman (output) from mailman id 868881.1280391; Thu, 09 Jan 2025 15:50:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVunx-0002r9-43; Thu, 09 Jan 2025 15:50:41 +0000
-Received: by outflank-mailman (input) for mailman id 868848;
- Thu, 09 Jan 2025 15:45:39 +0000
+	id 1tVuoA-0003HU-Dc; Thu, 09 Jan 2025 15:50:54 +0000
+Received: by outflank-mailman (input) for mailman id 868881;
+ Thu, 09 Jan 2025 15:50:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=GFlP=UB=minyard.net=corey@srs-se1.protection.inumbo.net>)
- id 1tVuj5-0007JX-JE
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:45:39 +0000
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [2607:f8b0:4864:20::333])
+ (envelope-from <SRS0=pS5t=UB=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tVuo9-0003BM-JB
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:50:53 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c4e9e996-cea0-11ef-99a4-01e77a169b0f;
- Thu, 09 Jan 2025 16:45:37 +0100 (CET)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-71e35be77b5so294447a34.1
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 07:45:37 -0800 (PST)
-Received: from mail.minyard.net ([2001:470:b8f6:1b:9076:47eb:1e0a:16fb])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5f882625f0esm386258eaf.9.2025.01.09.07.45.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 07:45:34 -0800 (PST)
+ id 80e0e818-cea1-11ef-99a4-01e77a169b0f;
+ Thu, 09 Jan 2025 16:50:52 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4368a293339so13308045e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 07:50:52 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-436e9e6249csm24586165e9.38.2025.01.09.07.50.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Jan 2025 07:50:51 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,94 +47,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4e9e996-cea0-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 80e0e818-cea1-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minyard-net.20230601.gappssmtp.com; s=20230601; t=1736437536; x=1737042336; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:reply-to
-         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cgTp2x21PamB5G5tjbV3jPSQRWSgTUkiJmrzV93coW4=;
-        b=q6nwCkV41xW+Fds1LDOZpnbvcSLAMdFpaetYqLXTnzUCx7IQj1j0zYEp0XaWBujad9
-         /TRD/k7dj6u5VQUDwALtFgAKVCcj5y7MJGzldjUgilyOdiNGLEh2WKNYyudXRw0HRRtI
-         Tr3qqSUUGH17QNsyhJYXYheppJzIeBdvHOW6gHDphl2Q75p4B3PuQXGnwhgGN165ySpU
-         p31qsrmHbh+h5Fq119u/tuMZo4mg1UidfiOKuFsePnFsKiuG9b+9MAV859mUZIspuuLW
-         sY4HJWxPfQJX7AlAqfZ2Hj9wBxkmR1uJ76+vLbIOJMLa2qhc3wJGQoLpXM2TtUGA+h/a
-         jyOQ==
+        d=suse.com; s=google; t=1736437851; x=1737042651; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=/6AbTStBIBSM87HCQWxECtRStNhq5jWk924Q6zyzDWE=;
+        b=ZmIxXy39YTLRnpJlkhAqAYUR/w1Zq99aea6Q4rW9qR3l+b4CFqO4x47f+FtYO1cfIM
+         Du2aOiP7w2bIA9deVlsvb/VqFCf6uDJ6W9XHIWOUE3ZrgL5jcnYEYfArEmzvVpP7Jixz
+         A/BbV4NYT0EU+z6Tpxzm9rJugl/V3K2h6n5OLL1Nwjf2TogMceN9zGgHJPwX6loRA8ik
+         ZZtmGrVD8xLJVma1Qob4gfld5a+bVJUHgYQyenvzZGXxWq3wU+hE/ZtvCoVJU1qdYeFB
+         f6+Vq6y8GOEOYNuvPZgpMWG87rGULYjhygeEP7WZqYaPV4aR2bTFjQ3Z1Mykl8c53RKw
+         b25g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736437536; x=1737042336;
-        h=in-reply-to:content-disposition:mime-version:references:reply-to
-         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cgTp2x21PamB5G5tjbV3jPSQRWSgTUkiJmrzV93coW4=;
-        b=uoNjiUNfqla2wiKfIc1CXONzzQtuJkCcZWCXUjRUfkLhhnBL14jDIWTImMrXCANhvb
-         2mCZl6fmtHjdpy8L2GQf94UY1seyjiT6w0l7CQUA2iXkrUs/2pj2KajL8d4Tsbkmxka3
-         o1wPrB2GbXz9+ZErZvNWY67fDQYZqArNTveOi2XndqTN1FAdXNX3i6mhhZ52MD/FuJ9B
-         GGWRRowjKL6n2GXZAU2eae2053XS9YujkNPKtZj4xlLrWndHSdcb+nVL1m9Hx8kPAxgo
-         So1ieVMraJOYICqaFsE0ESqbvfxk0z+2RkIgwuxer+eDiJccb6KSph3P7B+HanOTKc6E
-         k/Rw==
-X-Forwarded-Encrypted: i=1; AJvYcCVlDq5RDGTMoMciWnL1g4NqkxwP07YczMn0I6zC3ruIVyOMz208p9j9gb0BaVChW11rc6Jv5y2E6Nc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxGbeouVWadIuctb4flb5ErHvZ5F6hiHzZmjwZIKmHCLYuYotYy
-	FaBaG/Eclpi2VI48QsknFFpf1044n8/SR8aaPSX93gvWYfSK5HgwjZNyW/ZZnAw=
-X-Gm-Gg: ASbGncus6Py/kNjQGHTCQJR3+RLtaTUY4Mh11o6rGTymyePxfqZ28JldDue2qrFyqIn
-	rH7nesQW7rBDp2+WEh6pIR4CVlZU/+P8+XzKWckg2GCmQHfMffTcCwiAucAlfwnATsPENodbW41
-	6RE35Bcsc25dTDdUayrbFFlTPJud/0uUGS6DcymMbZtSDPQBqUyvAAF4ZFnHyPeJK5J6vRRkk0+
-	/ugOrqA/TXnMNjeZsdxyY/Aj9U5j1tvXahrwRUFBi16676dAmyOO2GehPo0
-X-Google-Smtp-Source: AGHT+IHELUnxP9ZvL+e2Ztemz39I9ORoPYZLTVwEa+XG73J5uz7w7yM0cuXu9KZqTaUsGk+1/+jmGA==
-X-Received: by 2002:a05:6830:6610:b0:716:a95d:9ef with SMTP id 46e09a7af769-721e2e000d6mr4949630a34.2.1736437534534;
-        Thu, 09 Jan 2025 07:45:34 -0800 (PST)
-Date: Thu, 9 Jan 2025 09:45:27 -0600
-From: Corey Minyard <corey@minyard.net>
-To: Joel Granados <joel.granados@kernel.org>
-Cc: Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>,
-	Kees Cook <kees@kernel.org>, Luis Chamberlain <mcgrof@kernel.org>,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org, linux-crypto@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net,
-	intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org, linux-hyperv@vger.kernel.org,
-	linux-rdma@vger.kernel.org, linux-raid@vger.kernel.org,
-	linux-scsi@vger.kernel.org, linux-serial@vger.kernel.org,
-	xen-devel@lists.xenproject.org, linux-aio@kvack.org,
-	linux-fsdevel@vger.kernel.org, netfs@lists.linux.dev,
-	codalist@coda.cs.cmu.edu, linux-mm@kvack.org,
-	linux-nfs@vger.kernel.org, ocfs2-devel@lists.linux.dev,
-	fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
-	io-uring@vger.kernel.org, bpf@vger.kernel.org,
-	kexec@lists.infradead.org, linux-trace-kernel@vger.kernel.org,
-	linux-hardening@vger.kernel.org, apparmor@lists.ubuntu.com,
-	linux-security-module@vger.kernel.org, keyrings@vger.kernel.org
-Subject: Re: [PATCH] treewide: const qualify ctl_tables where applicable
-Message-ID: <Z3_vF3I453flXoZv@mail.minyard.net>
-Reply-To: corey@minyard.net
-References: <20250109-jag-ctl_table_const-v1-1-622aea7230cf@kernel.org>
+        d=1e100.net; s=20230601; t=1736437851; x=1737042651;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/6AbTStBIBSM87HCQWxECtRStNhq5jWk924Q6zyzDWE=;
+        b=oZWYpGkPWjufv3tu8lFhOjuc+fkcyjAtzDFWg6zK6uhnl8DvrOOYqjsxqGmxkmTgI8
+         jltIaoUIV92xRWiVm8cMoucP8JQerUOJoAthCWfPXcNFa5TbI19ztNS1RPqQ+K/J+S0n
+         Dck3SwkOwywfIEHYGudRpt9Z9IFyyuemnrhCKh+gM4lP4oKosJChs5CJeyKWmQ+UftVD
+         kcoCcDS6RYXBR16ou7zpJhaScwo9pvVv+jHAhHIujWC6YPF/UYYgmNBUcQUrSfWhb+7p
+         M1fTsV1x2OdDoliApJBW+YecCwAaMxWIdKq9SI7de/DzT5/a17spcCx2CR4RX+Gl6Ybf
+         Ovdg==
+X-Forwarded-Encrypted: i=1; AJvYcCUhBZWJFlRr5M/H9WFRt6qndKR7yaQwjVfV5pxgV1DmmnHSOJ4lnANRvw+Xd3RBFgkHDT1rcuAzUqg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwPKoyh7HTSobgxiUsAQ9nL8FYiGKvp4nGbFIk6DWzXqqyPtvD3
+	InH4YcYxuy1A3mUi5CpEAS50i6VmF8kO5A/v+kql44wUQMTyCtoz93iur+eh+A==
+X-Gm-Gg: ASbGncs0kK4aAhbOgw5PpRI1vDRKhdzyhP5zeOKbVhHDzCRXlAF165aVktDSP7cbwdZ
+	gq2kaO/T0rqMqb+jeeNAlRLYbxiUeRR3BunObhXKLnfP3odoZyRc5in/pm9ErtIst/c78POdKGc
+	09vH5tsNh53W/THOu2IsmP5ofRs51jZeF4IYxwGkqzZjG17e0VlOrvZKqTATgexETu5V8UMVQq9
+	mhMkql039kHxcu90FalAHZ/4RTkHl3CDc0/CJm2UjJBAScriykvLWVFmMJmOTXkTxPcjMrRxDOp
+	my38Y/uj+8AKD7J5g2a2yANwO41yTLhdRVRPek9qVg==
+X-Google-Smtp-Source: AGHT+IEd2Qcp9nXKYZdraQrUkbzDZJhRjXmjipVtM7bKWkCp5E33NBhLqqnhFzt7UOu5e8mBLEwCCg==
+X-Received: by 2002:a05:600c:4ed4:b0:436:1b81:b65c with SMTP id 5b1f17b1804b1-436e26c0a33mr73657725e9.15.1736437851542;
+        Thu, 09 Jan 2025 07:50:51 -0800 (PST)
+Message-ID: <1d244fe8-96a6-4597-a741-2b4ec15a71fa@suse.com>
+Date: Thu, 9 Jan 2025 16:50:49 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250109-jag-ctl_table_const-v1-1-622aea7230cf@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 5/7] xen: add new domctl get_changed_domain
+To: Juergen Gross <jgross@suse.com>
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20250109105935.23585-1-jgross@suse.com>
+ <20250109105935.23585-6-jgross@suse.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250109105935.23585-6-jgross@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 09, 2025 at 02:16:39PM +0100, Joel Granados wrote:
-> Add the const qualifier to all the ctl_tables in the tree except the
-> ones in ./net dir. The "net" sysctl code is special as it modifies the
-> arrays before passing it on to the registration function.
+On 09.01.2025 11:59, Juergen Gross wrote:
+> Add a new domctl sub-function to get data of a domain having changed
+> state (this is needed by Xenstore).
 > 
-...
-> diff --git a/drivers/char/ipmi/ipmi_poweroff.c b/drivers/char/ipmi/ipmi_poweroff.c
-> index 941d2dcc8c9d..de84f59468a9 100644
-> --- a/drivers/char/ipmi/ipmi_poweroff.c
-> +++ b/drivers/char/ipmi/ipmi_poweroff.c
-> @@ -650,7 +650,7 @@ static struct ipmi_smi_watcher smi_watcher = {
->  #ifdef CONFIG_PROC_FS
->  #include <linux/sysctl.h>
->  
-> -static struct ctl_table ipmi_table[] = {
-> +static const struct ctl_table ipmi_table[] = {
->  	{ .procname	= "poweroff_powercycle",
->  	  .data		= &poweroff_powercycle,
->  	  .maxlen	= sizeof(poweroff_powercycle),
+> The returned state just contains the domid, the domain unique id,
+> and some flags (existing, shutdown, dying).
+> 
+> In order to enable Xenstore stubdom being built for multiple Xen
+> versions, make this domctl stable.  For stable domctls the
+> interface_version is always 0.
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Acked-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 
-For the IPMI portion:
+Reviewed-by: Jan Beulich <jbeulich@suse.com> # non-XSM/Flask
 
-Acked-by: Corey Minyard <cminyard@mvista.com>
 
 
