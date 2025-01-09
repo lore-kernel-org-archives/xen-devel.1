@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 659BAE7719A
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:30:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868800.1280300 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD76E77197
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:39:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.868813.1280321 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVuUU-0005gg-2D; Thu, 09 Jan 2025 15:30:34 +0000
+	id 1tVudK-0002XQ-3d; Thu, 09 Jan 2025 15:39:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868800.1280300; Thu, 09 Jan 2025 15:30:34 +0000
+Received: by outflank-mailman (output) from mailman id 868813.1280321; Thu, 09 Jan 2025 15:39:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVuUT-0005gZ-Vg; Thu, 09 Jan 2025 15:30:33 +0000
-Received: by outflank-mailman (input) for mailman id 868800;
- Thu, 09 Jan 2025 15:30:32 +0000
+	id 1tVudK-0002XJ-02; Thu, 09 Jan 2025 15:39:42 +0000
+Received: by outflank-mailman (input) for mailman id 868813;
+ Thu, 09 Jan 2025 15:39:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OfsQ=UB=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1tVuUS-0005gT-C8
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:30:32 +0000
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [2001:4860:4864:20::2b])
+ <SRS0=rr8/=UB=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tVudI-0002JF-9W
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:39:40 +0000
+Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com
+ [2a00:1450:4864:20::641])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a85f4310-ce9e-11ef-a0df-8be0dac302b0;
- Thu, 09 Jan 2025 16:30:31 +0100 (CET)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2a3a40c69e3so581909fac.0
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 07:30:31 -0800 (PST)
+ id effc5b1d-ce9f-11ef-a0df-8be0dac302b0;
+ Thu, 09 Jan 2025 16:39:39 +0100 (CET)
+Received: by mail-ej1-x641.google.com with SMTP id
+ a640c23a62f3a-aab925654d9so223668066b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 07:39:39 -0800 (PST)
+Received: from andrewcoop.eng.citrite.net ([83.105.36.37])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab2c95aede8sm82723366b.136.2025.01.09.07.39.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 07:39:37 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,99 +47,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a85f4310-ce9e-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: effc5b1d-ce9f-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736436629; x=1737041429; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1736437179; x=1737041979; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YTqkaJeSjH6ii8cl868aBE/9efm05NFc8SMXqdeIGvs=;
-        b=Qqm/5MEBqLAKCpw42xyDKfiuGVdqqEBOw2bsq5GXGLQGn1LJL4N8yqa1SIEUiTJQIm
-         02otp+Lmm0Vuf740dkUmLwqbLbca/vy8J3d9C9xAI+OP8qCfkahUxMgmxq+CCKAosPLF
-         z6bEADEey0OhoGo17qXnRmqZ2qtV+ETuG2vII=
+        bh=iBELJMfcQLbPtCCptLilrfSS47bvE3E/Zw4kGGrBEv0=;
+        b=pqOaBmckgw4XfVenNeUNgITcl3Nr6PdP7Aj2coBsQhW21TmsCEaDTlM6bwIcfzbYRX
+         szPIcz0anSKzf6H53Jc4FURdflrZgmbTTYgT8p0rXqpm050Z3/phojCHunPUatEcR3zu
+         Wni3coUuJOBBXV65JPRa5bf6DunvjuJuIeVrc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736436629; x=1737041429;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1736437179; x=1737041979;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YTqkaJeSjH6ii8cl868aBE/9efm05NFc8SMXqdeIGvs=;
-        b=H5nl9pszT7XdPcvOKacr70WAJQh7sDs5lpfLHyMFnu3UpYg38N3279OhGje97aG4E1
-         6yWQf+FtZuiXfdsbUIVxOxcMipHDuZlsO2yN0hNLh0ohRM7yAyZZqB1J2QChxS0Pl4E0
-         tsRVcEyCgp4m6LJaqn2lnT9ghFN8Ompwg45bMbK/yDFhOaYTIqVreyRvYmCv5MIDDnOD
-         bufpkFMTH2v//NiTEHQbtu0gwpy1I5boo+mNApLQU+xiKKQVQbHduf7x2Z9/P+9/s86T
-         Aj72jQR0/qzpX+vRP0U2WTqU3Im4A59aL1czrsRIWmLkpLpWDfTF4vSYh9axRJvcdVZl
-         Vqpg==
-X-Forwarded-Encrypted: i=1; AJvYcCXHnIXc/VgXyDR/aVYQU1ygeg094VeRqQylQXDEnWmLUQyFhoX27JGSlCYPXqt5k/pMFlbpzivIB08=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwJql5Mc4ymMNgnVw67btVSeigvQUTlvETwisfLcCw0TZ/OUEwQ
-	Ey9xc0MPYmS3eXGLawVDeNNWqtnplDI41gB3HCkWIglbhpOAP031gIzturoK3avQY8TaXX8IGbM
-	SXKCUCj06lbrs4e/7B+6qkLQKbbIT+OUuYcQlBw==
-X-Gm-Gg: ASbGnctsDjNUOH+m10ykuL3Qg0lN3bvHrxA+YL+TxtdlE2EwNS+FFZpgIUc/wkDY34k
-	Kzuqghki82Js2hW3uTXE+vC7nzCDYA/knQWBK
-X-Google-Smtp-Source: AGHT+IEDj4eRUf2qfd1XC67F1wiWGrszpuCEh/KahbAP7gBO4euqu6w/HNUuSDmbIckUjUy9MObojvgL5RjFCDkxKsc=
-X-Received: by 2002:a05:6870:6e87:b0:29e:4ba5:4ddc with SMTP id
- 586e51a60fabf-2aa0673901dmr3618444fac.24.1736436629164; Thu, 09 Jan 2025
- 07:30:29 -0800 (PST)
+        bh=iBELJMfcQLbPtCCptLilrfSS47bvE3E/Zw4kGGrBEv0=;
+        b=YKveGjN0cFl6Gy210NzS7FR/W+JmQ21Ax5yC1kjXuXJ72N8T+X30i4yyylJFuPd0i+
+         oZM2rF91CWL4E/GAmjSJbx+LwN4l2AOXMkZgANsuVZ2nyP/pXhz1wjqawsxgYzp/9gNP
+         ZCTbQ0l9xA6VzniRziaxbWB2llk5MZgBN75i4lbfVy4KriyhyZt1IUsxzv6prYGnB89L
+         UNHyJXmdxnvDYSy0jN81Ja5AbJXs5mDTfca0AYszZoiwk72ZsS6uFoi6oJQvvfNyNP8y
+         cHZzBiXYBVqK4lMjfaS2eFdIluc+PdB6uwYXDe38SypsHMKjjkkVbyqL0e1+ccXu+Gw5
+         0IEw==
+X-Gm-Message-State: AOJu0YxgOqScROU6ypdPtTQK3hitH2lJs5TF10oFnCJgjXioC4NpjcFc
+	chLPFheSuVnu+uOKU6ddVO7/QG021PrC+3zz+dtElgidPdpvXcwIciv8TE5sXslAuyZYO/mfhc+
+	yhQ0zzY1G
+X-Gm-Gg: ASbGncvTSxqp4bY3kyaZdnrOSAQKtmIDH0uBRZZNg2hrm+d0WglUEpvFJVojFWPCVEP
+	IzCDYSNvhXAI1AGFdrqtFdKLB6pGT8f5Oeh75S3OMgYdP7xw6mhidvrnMLvWDbfb1q8T70x2D4d
+	ljQUSxF5XDx1Bzz87aG/+z40l4b/yoBBfH+LM8bh3703UJk/vaFu8XE/8Qkaw0vhokA7ldq1cG6
+	6W/Ofyaz53TQTZ0aiS75oZkCg+lEcIU/Oo5al714w+FElQEbQQf8Wu+rcurXRDT4b5HUgRq91f7
+	ArBdWw==
+X-Google-Smtp-Source: AGHT+IHtP4FOlBZjpbvvefs9nxJn0Hn8juf6phznlEVYdIEpbER1mVFllXQ6UD0UNUGCHrgsTnfjZA==
+X-Received: by 2002:a17:907:3d93:b0:aa6:66bc:8788 with SMTP id a640c23a62f3a-ab2abcab45emr684090166b.45.1736437177552;
+        Thu, 09 Jan 2025 07:39:37 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH 1/2] Config.mk: Pin QEMU_UPSTREAM_REVISION
+Date: Thu,  9 Jan 2025 15:39:20 +0000
+Message-Id: <20250109153921.43610-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250109153921.43610-1-andrew.cooper3@citrix.com>
+References: <20250109153921.43610-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-References: <20250109131515.1757764-1-marmarek@invisiblethingslab.com>
- <d7421558-c2d6-485b-96bf-927992c5c066@suse.com> <47378338-ac05-4041-a055-56045e5ba131@citrix.com>
-In-Reply-To: <47378338-ac05-4041-a055-56045e5ba131@citrix.com>
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-Date: Thu, 9 Jan 2025 15:30:18 +0000
-X-Gm-Features: AbW1kvaJNCGU_fqbt_IeEkewgFAx4IlA-fmf6cQyL5X62d7uRzwuiYTWJfwMo_k
-Message-ID: <CACHz=ZjR6dSy_NsrXkhf_VfZpGYE4et6VkQvU_cO9DdAnXBzxQ@mail.gmail.com>
-Subject: Re: [PATCH] x86/boot: adjust text gap/diff to work with 64-bytes
- alignment too
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>, 
-	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 9, 2025 at 1:44=E2=80=AFPM Andrew Cooper <andrew.cooper3@citrix=
-.com> wrote:
->
-> On 09/01/2025 1:23 pm, Jan Beulich wrote:
-> > On 09.01.2025 14:15, Marek Marczykowski-G=C3=B3recki wrote:
-> >> Xen compiled with -mtune=3Dgeneric has .text alignment set to 64-bytes=
-.
-> >> Having text_diff non-64-bytes-aligned breaks stuff:
-> >>
-> >>     Traceback (most recent call last):
-> >>       File "/builddir/build/BUILD/xen-4.20.0-build/xen-4.20.0-rc0/xen/=
-./tools/combine_two_binaries.py", line 96, in <module>
-> >>         raise Exception('File sizes do not match')
-> >>     Exception: File sizes do not match: 70160 !=3D 4080 + 66048
-> >>
-> >> Adjust the numbers as suggested by Frediano to work with 64-bytes and
-> >> even 128-bytes alignment.
-> > And then breaking at 256? As indicated on Matrix, imo we should be able=
- to
-> > cope with anything up to at least PAGE_SIZE. Or we should reduce .text
-> > alignment before linking.
->
-> Do you have a concrete proposal on how to do this?
->
-> Because if not, we've had 2 downstreams hit by this build failure, and
-> we probably ought to take this patch as a stopgap fix, and see about
-> doing the better fix for 4.20.
->
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ Config.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I agree with this, merge this and then leave the improvements for follow up=
-(s).
+diff --git a/Config.mk b/Config.mk
+index fa0414055b93..13aa6ce3ab26 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -221,7 +221,7 @@ OVMF_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/ovmf.git
+ OVMF_UPSTREAM_REVISION ?= ba91d0292e593df8528b66f99c1b0b14fadc8e16
+ 
+ QEMU_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/qemu-xen.git
+-QEMU_UPSTREAM_REVISION ?= master
++QEMU_UPSTREAM_REVISION ?= 3fdb3cd3a27a22a050c7d27126a24807a7a45745
+ 
+ MINIOS_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/mini-os.git
+ MINIOS_UPSTREAM_REVISION ?= 6d5159e8410be16a47433bac1627e63f8adc7cd9
 
-Yesterday I checked the output object file (built-in-32.o) to find
-that the output alignment is 1 byte, which is obviously wrong!
+base-commit: 40f35d07aa14bde44d7baafad171f7c92b053017
+-- 
+2.39.5
 
-There's no current requirement for page alignment. As page management
-is done in both 32 and 64 bit code, pages are allocated in other parts
-of the sources and handled correctly.
-
-Personally I prefer incremental development with sensible and
-self-contained improvements kept separate, instead of adding changes
-and changes because somebody touches a piece of code that can be
-improved. Usually any piece of code can be improved.
-
-Frediano
 
