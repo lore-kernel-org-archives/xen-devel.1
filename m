@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA9FE77197
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:49:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.868871.1280371 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 548BBE77197
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jan 2025 15:50:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.868848.1280380 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVumT-0000yy-UA; Thu, 09 Jan 2025 15:49:09 +0000
+	id 1tVunx-0002rG-6c; Thu, 09 Jan 2025 15:50:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 868871.1280371; Thu, 09 Jan 2025 15:49:09 +0000
+Received: by outflank-mailman (output) from mailman id 868848.1280380; Thu, 09 Jan 2025 15:50:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tVumT-0000yr-Qy; Thu, 09 Jan 2025 15:49:09 +0000
-Received: by outflank-mailman (input) for mailman id 868871;
- Thu, 09 Jan 2025 15:49:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tVunx-0002r9-43; Thu, 09 Jan 2025 15:50:41 +0000
+Received: by outflank-mailman (input) for mailman id 868848;
+ Thu, 09 Jan 2025 15:45:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=pS5t=UB=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tVumS-0000yl-Sk
- for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:49:08 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 42eb4ed6-cea1-11ef-a0df-8be0dac302b0;
- Thu, 09 Jan 2025 16:49:08 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4361e89b6daso8896805e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 07:49:08 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2dc05a1sm59878145e9.15.2025.01.09.07.49.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Jan 2025 07:49:07 -0800 (PST)
+ (envelope-from <SRS0=GFlP=UB=minyard.net=corey@srs-se1.protection.inumbo.net>)
+ id 1tVuj5-0007JX-JE
+ for xen-devel@lists.xenproject.org; Thu, 09 Jan 2025 15:45:39 +0000
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [2607:f8b0:4864:20::333])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c4e9e996-cea0-11ef-99a4-01e77a169b0f;
+ Thu, 09 Jan 2025 16:45:37 +0100 (CET)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-71e35be77b5so294447a34.1
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jan 2025 07:45:37 -0800 (PST)
+Received: from mail.minyard.net ([2001:470:b8f6:1b:9076:47eb:1e0a:16fb])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5f882625f0esm386258eaf.9.2025.01.09.07.45.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 07:45:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,105 +47,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42eb4ed6-cea1-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: c4e9e996-cea0-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1736437747; x=1737042547; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=yG/3DWoK9VEtxCl3OuIsNNW81fipAg43SNdIHPkcq54=;
-        b=DldDiyTvBoDBtD0KgwalFkmW8tUjcpr9WbhwBZkVHGHdNFipMqd/toft5g5jHyBKxP
-         uKmK995AGiva09umVhIEkvn6d8iyO3KG+h9Tc1drV5kbWSmJYuCx1+fz/gkm4nYcZvgU
-         c9PiXXHoPIRaRlwnGhY5kSBm80ZXN+y/ntphGUVf+U7TeQmS4D8pZqxqax75p+d8XP+L
-         IHp4TxgWgmByb+VQXwYb5BWYvglkzIXevHHtSsdQK7XMaA7vgem6o75Q46IocL0mhCbQ
-         5HGthco8x0R9wvAzo9JCqynlzBHsYC73C1lf525fCmo/CrlSvIo9I9F8bCB7uPOSbYhA
-         MPzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736437747; x=1737042547;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=minyard-net.20230601.gappssmtp.com; s=20230601; t=1736437536; x=1737042336; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:reply-to
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yG/3DWoK9VEtxCl3OuIsNNW81fipAg43SNdIHPkcq54=;
-        b=oZ9xTHH4A0CfZJInU64J75Isc3lFJEu5zfoBRrvF8nsrbflK/yY1erATtzrUXPOpXT
-         MVpFJmBbwRM4gFLV39G7WDRHc7IV+T6+Z4q7hBe9PUUMk9zMxiNv1aAxnLamBbcpvr/g
-         dG1lTgjt3/OmHMHh7cstNOwMr325hyujSEUTZTdQHOEv1YVz9i2qc0b+X3zg+I4x4Td0
-         EVCKkbKrUuzcc6mdPjr2FxfJDXeOZTReNXvPkD+9EkpDv+ab6/UM9RRhMPgsqyz2TVBu
-         gZRtJzTJffr/IDwzZfubSPQBMZUhHu3qJOCgJkH/go1MG71olKLod3PQXAONBMUhhas1
-         Nlsg==
-X-Forwarded-Encrypted: i=1; AJvYcCUTnqMbcxULCHcHWzbTIjElQFy88yvXVEQmvoFC56V5xotimVVtvBipg5uj6luzX7iTYvL6fPyrHog=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz3KaVCpdEJo+CJRTuNziBOjbrw0pHE/CZjF0jsrkenWp2owhEi
-	0GQ9rRGjNUnTY5wZDCF4d8J2TIGrzC7QcuHLc5LV84FafiJJsW5ELIwTXGKX2g==
-X-Gm-Gg: ASbGncuWlA0UzqbddXIsXxjsWYWo5J6FDI5UaSbN0JCKFVNcrvQnMamG3XNy9it76Ae
-	nedjC5GAqRf02YZlSQiNvUFpt6SW66gLsYcqlnDjaePRm4pf+QEjOjLay1XV0B97aqHDVUakAR/
-	ICILpvaIJyataN2Hoz9N6dYYKNVfmEiF2+JDV00s+Eq4Z+UaMGR51YE1b37kmvUopWP7ErTS9PD
-	8nLg1r0kivFwUvJcN2cg4DqgGPYBQlAkIkX6GkdD5JzCQfycReH7g08G+8wp2t/TJPEbjvyjDQW
-	DXPB8o7xBVhYxPTHTvMsGU12U7OL1UHCiSZP47z8Sw==
-X-Google-Smtp-Source: AGHT+IEFarfKs0uFSicm2xnT7T6Y3k1iVbTo1cBnqhdcbT4Fv3ygHYyXB40NeXtXImbK364hlPpupA==
-X-Received: by 2002:a05:600c:35c1:b0:436:a3a3:a70c with SMTP id 5b1f17b1804b1-436e26ef06cmr50701365e9.28.1736437747524;
-        Thu, 09 Jan 2025 07:49:07 -0800 (PST)
-Message-ID: <96cd80fe-f4f1-430f-ab7c-2ce0befb20d7@suse.com>
-Date: Thu, 9 Jan 2025 16:49:05 +0100
+        bh=cgTp2x21PamB5G5tjbV3jPSQRWSgTUkiJmrzV93coW4=;
+        b=q6nwCkV41xW+Fds1LDOZpnbvcSLAMdFpaetYqLXTnzUCx7IQj1j0zYEp0XaWBujad9
+         /TRD/k7dj6u5VQUDwALtFgAKVCcj5y7MJGzldjUgilyOdiNGLEh2WKNYyudXRw0HRRtI
+         Tr3qqSUUGH17QNsyhJYXYheppJzIeBdvHOW6gHDphl2Q75p4B3PuQXGnwhgGN165ySpU
+         p31qsrmHbh+h5Fq119u/tuMZo4mg1UidfiOKuFsePnFsKiuG9b+9MAV859mUZIspuuLW
+         sY4HJWxPfQJX7AlAqfZ2Hj9wBxkmR1uJ76+vLbIOJMLa2qhc3wJGQoLpXM2TtUGA+h/a
+         jyOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736437536; x=1737042336;
+        h=in-reply-to:content-disposition:mime-version:references:reply-to
+         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=cgTp2x21PamB5G5tjbV3jPSQRWSgTUkiJmrzV93coW4=;
+        b=uoNjiUNfqla2wiKfIc1CXONzzQtuJkCcZWCXUjRUfkLhhnBL14jDIWTImMrXCANhvb
+         2mCZl6fmtHjdpy8L2GQf94UY1seyjiT6w0l7CQUA2iXkrUs/2pj2KajL8d4Tsbkmxka3
+         o1wPrB2GbXz9+ZErZvNWY67fDQYZqArNTveOi2XndqTN1FAdXNX3i6mhhZ52MD/FuJ9B
+         GGWRRowjKL6n2GXZAU2eae2053XS9YujkNPKtZj4xlLrWndHSdcb+nVL1m9Hx8kPAxgo
+         So1ieVMraJOYICqaFsE0ESqbvfxk0z+2RkIgwuxer+eDiJccb6KSph3P7B+HanOTKc6E
+         k/Rw==
+X-Forwarded-Encrypted: i=1; AJvYcCVlDq5RDGTMoMciWnL1g4NqkxwP07YczMn0I6zC3ruIVyOMz208p9j9gb0BaVChW11rc6Jv5y2E6Nc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxGbeouVWadIuctb4flb5ErHvZ5F6hiHzZmjwZIKmHCLYuYotYy
+	FaBaG/Eclpi2VI48QsknFFpf1044n8/SR8aaPSX93gvWYfSK5HgwjZNyW/ZZnAw=
+X-Gm-Gg: ASbGncus6Py/kNjQGHTCQJR3+RLtaTUY4Mh11o6rGTymyePxfqZ28JldDue2qrFyqIn
+	rH7nesQW7rBDp2+WEh6pIR4CVlZU/+P8+XzKWckg2GCmQHfMffTcCwiAucAlfwnATsPENodbW41
+	6RE35Bcsc25dTDdUayrbFFlTPJud/0uUGS6DcymMbZtSDPQBqUyvAAF4ZFnHyPeJK5J6vRRkk0+
+	/ugOrqA/TXnMNjeZsdxyY/Aj9U5j1tvXahrwRUFBi16676dAmyOO2GehPo0
+X-Google-Smtp-Source: AGHT+IHELUnxP9ZvL+e2Ztemz39I9ORoPYZLTVwEa+XG73J5uz7w7yM0cuXu9KZqTaUsGk+1/+jmGA==
+X-Received: by 2002:a05:6830:6610:b0:716:a95d:9ef with SMTP id 46e09a7af769-721e2e000d6mr4949630a34.2.1736437534534;
+        Thu, 09 Jan 2025 07:45:34 -0800 (PST)
+Date: Thu, 9 Jan 2025 09:45:27 -0600
+From: Corey Minyard <corey@minyard.net>
+To: Joel Granados <joel.granados@kernel.org>
+Cc: Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>,
+	Kees Cook <kees@kernel.org>, Luis Chamberlain <mcgrof@kernel.org>,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
+	linux-s390@vger.kernel.org, linux-crypto@vger.kernel.org,
+	openipmi-developer@lists.sourceforge.net,
+	intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org, linux-hyperv@vger.kernel.org,
+	linux-rdma@vger.kernel.org, linux-raid@vger.kernel.org,
+	linux-scsi@vger.kernel.org, linux-serial@vger.kernel.org,
+	xen-devel@lists.xenproject.org, linux-aio@kvack.org,
+	linux-fsdevel@vger.kernel.org, netfs@lists.linux.dev,
+	codalist@coda.cs.cmu.edu, linux-mm@kvack.org,
+	linux-nfs@vger.kernel.org, ocfs2-devel@lists.linux.dev,
+	fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
+	io-uring@vger.kernel.org, bpf@vger.kernel.org,
+	kexec@lists.infradead.org, linux-trace-kernel@vger.kernel.org,
+	linux-hardening@vger.kernel.org, apparmor@lists.ubuntu.com,
+	linux-security-module@vger.kernel.org, keyrings@vger.kernel.org
+Subject: Re: [PATCH] treewide: const qualify ctl_tables where applicable
+Message-ID: <Z3_vF3I453flXoZv@mail.minyard.net>
+Reply-To: corey@minyard.net
+References: <20250109-jag-ctl_table_const-v1-1-622aea7230cf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 4/7] xen: add bitmap to indicate per-domain state
- changes
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20250109105935.23585-1-jgross@suse.com>
- <20250109105935.23585-5-jgross@suse.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250109105935.23585-5-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250109-jag-ctl_table_const-v1-1-622aea7230cf@kernel.org>
 
-On 09.01.2025 11:59, Juergen Gross wrote:
-> Add a bitmap with one bit per possible domid indicating the respective
-> domain has changed its state (created, deleted, dying, crashed,
-> shutdown).
+On Thu, Jan 09, 2025 at 02:16:39PM +0100, Joel Granados wrote:
+> Add the const qualifier to all the ctl_tables in the tree except the
+> ones in ./net dir. The "net" sysctl code is special as it modifies the
+> arrays before passing it on to the registration function.
 > 
-> Registering the VIRQ_DOM_EXC event will result in setting the bits for
-> all existing domains and resetting all other bits.
-> 
-> As the usage of this bitmap is tightly coupled with the VIRQ_DOM_EXC
-> event, it is meant to be used only by a single consumer in the system,
-> just like the VIRQ_DOM_EXC event.
-> 
-> Resetting a bit will be done in a future patch.
-> 
-> This information is needed for Xenstore to keep track of all domains.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+...
+> diff --git a/drivers/char/ipmi/ipmi_poweroff.c b/drivers/char/ipmi/ipmi_poweroff.c
+> index 941d2dcc8c9d..de84f59468a9 100644
+> --- a/drivers/char/ipmi/ipmi_poweroff.c
+> +++ b/drivers/char/ipmi/ipmi_poweroff.c
+> @@ -650,7 +650,7 @@ static struct ipmi_smi_watcher smi_watcher = {
+>  #ifdef CONFIG_PROC_FS
+>  #include <linux/sysctl.h>
+>  
+> -static struct ctl_table ipmi_table[] = {
+> +static const struct ctl_table ipmi_table[] = {
+>  	{ .procname	= "poweroff_powercycle",
+>  	  .data		= &poweroff_powercycle,
+>  	  .maxlen	= sizeof(poweroff_powercycle),
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+For the IPMI portion:
 
+Acked-by: Corey Minyard <cminyard@mvista.com>
 
 
