@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E4C2E77188
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FBEBE7719E
 	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 13:29:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.869515.1280993 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.869517.1281002 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWF4e-0002V4-OC; Fri, 10 Jan 2025 13:29:16 +0000
+	id 1tWF4f-0002lq-V1; Fri, 10 Jan 2025 13:29:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 869515.1280993; Fri, 10 Jan 2025 13:29:16 +0000
+Received: by outflank-mailman (output) from mailman id 869517.1281002; Fri, 10 Jan 2025 13:29:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWF4e-0002UF-Gm; Fri, 10 Jan 2025 13:29:16 +0000
-Received: by outflank-mailman (input) for mailman id 869515;
- Fri, 10 Jan 2025 13:29:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tWF4f-0002l8-Qf; Fri, 10 Jan 2025 13:29:17 +0000
+Received: by outflank-mailman (input) for mailman id 869517;
+ Fri, 10 Jan 2025 13:29:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mmVM=UC=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tWF4c-0000vX-TU
- for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 13:29:14 +0000
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [2a00:1450:4864:20::52e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e1b0135c-cf56-11ef-99a4-01e77a169b0f;
- Fri, 10 Jan 2025 14:29:13 +0100 (CET)
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5d7e3f1fdafso4034677a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jan 2025 05:29:13 -0800 (PST)
+ id 1tWF4e-0001QR-GE
+ for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 13:29:16 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e33d4457-cf56-11ef-a0df-8be0dac302b0;
+ Fri, 10 Jan 2025 14:29:15 +0100 (CET)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3dce16a3dso3707488a12.1
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jan 2025 05:29:16 -0800 (PST)
 Received: from localhost.localdomain ([66.81.170.107])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d9900c98d6sm1589297a12.35.2025.01.10.05.29.11
+ 4fb4d7f45d1cf-5d9900c98d6sm1589297a12.35.2025.01.10.05.29.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 05:29:12 -0800 (PST)
+ Fri, 10 Jan 2025 05:29:14 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,94 +47,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e1b0135c-cf56-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: e33d4457-cf56-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736515752; x=1737120552; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1736515755; x=1737120555; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=CCX/yh7HycpxvmfWA8KKNWXNQA4qbA28JEl6dZ92/5k=;
-        b=eMgrfm00v/DfijO/Z7ZyU+vZPe5C3+0kl6btixzaSIiW5+8/Epbji/YTx9Lrg3UmvV
-         M/DEqs/xw3X7deL6pUAoKQaYLtXzSRX7+aAAxeiGXTxbQ2CL5HjgccXj7WbAVy9LZHCh
-         MvMoJlR8MMnmcrFDIpDaWAJleqjm3Dg2fvQI8=
+        bh=RqLvtnGygQhpjVsvp9h9as+dqMu10ap3I0KwRn4gBrU=;
+        b=jRGTW/Pc7/13lWxrUuXVe145yOiFaChY8Lq/aS57KiSuX8T0FQsjEzHN9jmMInvum/
+         uSa4zbMULN517N0MrAeaa8NR9Y1h1aeHV/Man9Px0hSFtRLkzW6BZM5toyxJaibT4HEN
+         qbUDlKvppe/BsZj1dEyWAHQU6gVIiUIfWbi/0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736515752; x=1737120552;
+        d=1e100.net; s=20230601; t=1736515755; x=1737120555;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=CCX/yh7HycpxvmfWA8KKNWXNQA4qbA28JEl6dZ92/5k=;
-        b=kqUIAPayeKjloHG4QXbKVYcAmFBtxeKJqdlc5Ma2fMhDleEVPmdLErLrQom1RJtC/b
-         sOwkvcAjeZmxfGBm/YqHJjRvuroOzXsemw9miC4vJSawL+tRC9yf7GMbiyFIhRsPPLp2
-         Akus6zCuHD93niO6obq0/xgD+I2Xml6pWEJSCzc5BTSqCjdbCQQKooTPB4eYTEuNjoCK
-         XnCpC7d1lVjlcpMHd8bm45qRoxDD9MSWSceNVLaxzjYJH+NU0sNM04bPjEM01v5jhyBP
-         Rsr8QNae4mbvjqwaGfrJry46+pKNzq7HfX9J+83TP2WekNNEvPXJOmoJxU5rZ0xF9pcC
-         fO7A==
-X-Gm-Message-State: AOJu0YykiBBpPCzMmBIyTzgHmdv2f0n1WmsVMJEo1Tl3Zh6w1fnXIxCQ
-	CcUvfzE1X4gfXOo/QTOArJvXEhFRRyG8OA1gzD6aZdmLpsZNZ7F2KsXOczPg91+zVAJi/36B/+w
-	gaFMwRg==
-X-Gm-Gg: ASbGncu2/7ccdC/3V7MYmiO671v+GGjOTTox6Y2FQP3MiC7flBk3hh67sobrVQHS9ZL
-	I0TGJ5a3idQEX4zruPt8OS4R0tKMQTCz+/bnq0ZUSCstZ6gTShukYNZHmoD1qikZrHZbdf5No2Q
-	M8FlfIHDWRDFUWDSG0WYYEf2zz4BLEfIZXNUftqFWwZw3x/V+0jdP+vTeBVxTlqDoIMsZYaF4Aa
-	midWl+Prq5JXmyEjvGxubWcEAn/rs5VbfE4y5yX1CH+yzQtI2k8CJu0RS9Kac58Vrc3/kAYnmiN
-	JKQ=
-X-Google-Smtp-Source: AGHT+IFt0+J+MzwzmdDfbFOmSHL+99J1n+bWPWq8Lzmmx0aBwjpOqjzKgIrvM+hZK/x8jYYJOdfbsA==
-X-Received: by 2002:a05:6402:430c:b0:5d4:75b:8ced with SMTP id 4fb4d7f45d1cf-5d972e6bdf5mr9861162a12.32.1736515752585;
-        Fri, 10 Jan 2025 05:29:12 -0800 (PST)
+        bh=RqLvtnGygQhpjVsvp9h9as+dqMu10ap3I0KwRn4gBrU=;
+        b=t0DdO4mQIVZ7wcuoeeG8BOoSaFgaRr25UmqBL/uHBZMap5iN6e/WNUHYhX+R1t6Xaq
+         vi9y+eLdoCAWci+6jmEKhMf1sB+u2LnhTpA6iirR3dQPtOYAOlQd8sYbLAIku6o/rYx4
+         JQAxj/MkReZwBMZaohrGBcDxiWOgusFBp+IGMsxc+SWbBN+oHQhQDzxeBm1FQqaP3Qnh
+         IAm8mQ/25oAat2gjCvlQRQOKoGHVDqEsilkvx7hBcq9+Cp/9pUyWy/PDNTLxKyyemqhX
+         ThPk4781aFg7j6EVe2vRVd72Bw6+iQqLBcUq8QeyzPF50PClDMhzJMeYgZALtsIIBokY
+         wUEw==
+X-Gm-Message-State: AOJu0Yw6+e2XcQ4oG5QsMTOIHO7PAlXMYn2mvZEXUCCFpGUZt13Mhxic
+	Xzsfcf/BDfj8bztvWHqQw324tM0XoXtphGzSaAxpZeVUzOS+WU/c2sT0DC16WmdkOrEUN2LmlPT
+	SwiY8VQ==
+X-Gm-Gg: ASbGnctFfibL85alxTTccO4PG4f03t3EB5yNovyDBhtQ/Hydp9xF68ifpPMLUkMncXH
+	jvYmL2rsXgEha0lqhWJVTKVqIca/ZTjFXKB4P1KDbstdMZ+Kv5vYv1ZpSpfTdZ1kI+YxZOskU4H
+	R6N94Qf+Z3k9bWn6lPSqjGpy0JwX7Idk6twIQvHT7/wSgNiXz7qa/MsiBbjygYJ2BdpzwWEFo2v
+	/K3aJ7ORxFPg7FJHlmXwk1+9vl0SCDNr/ErZXxjN6j8UbIMUqUo87EUnnM935VEbzYl49zUKUQP
+	y3w=
+X-Google-Smtp-Source: AGHT+IEUzU/9TuxG5IxaDVVK7OZ7dMFL9qCGMhFZl/jaqgzNc7UBjeNpP97oNPvy+m/qQtqKPk4Isw==
+X-Received: by 2002:a05:6402:4408:b0:5d3:eb50:4e33 with SMTP id 4fb4d7f45d1cf-5d9861d1511mr6241934a12.5.1736515755264;
+        Fri, 10 Jan 2025 05:29:15 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 06/12] x86/domctl: Map/unmap xsave area in arch_get_info_guest()
-Date: Fri, 10 Jan 2025 13:28:17 +0000
-Message-ID: <20250110132823.24348-7-alejandro.vallejo@cloud.com>
+Subject: [PATCH v3 08/12] x86/emulator: Refactor FXSAVE_AREA to use wrappers
+Date: Fri, 10 Jan 2025 13:28:19 +0000
+Message-ID: <20250110132823.24348-9-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250110132823.24348-1-alejandro.vallejo@cloud.com>
 References: <20250110132823.24348-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-No functional change.
+Adds an UNMAP primitive to make use of vcpu_unmap_xsave_area() when
+linked into xen. unmap is a no-op during tests.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v1->v2:
-  * Added A-by
+v2->v3:
+  * Fixed typo in first parameter of UNMAP_FXSAVE_AREA.
+  * Added Parenthesis around "x" in #else's UNMAP_FXSAVE_AREA(x)
 
 v1->v2:
-  * No change
+  * Added comments highlighting fastpath on `current`
 ---
- xen/arch/x86/domctl.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ xen/arch/x86/x86_emulate/blk.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index 5f01111619da..3044f706de1c 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -1377,16 +1377,17 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-     unsigned int i;
-     const struct domain *d = v->domain;
-     bool compat = is_pv_32bit_domain(d);
-+    const struct xsave_struct *xsave_area;
- #ifdef CONFIG_COMPAT
- #define c(fld) (!compat ? (c.nat->fld) : (c.cmp->fld))
- #else
- #define c(fld) (c.nat->fld)
+diff --git a/xen/arch/x86/x86_emulate/blk.c b/xen/arch/x86/x86_emulate/blk.c
+index 08a05f8453f7..11b16aeaec39 100644
+--- a/xen/arch/x86/x86_emulate/blk.c
++++ b/xen/arch/x86/x86_emulate/blk.c
+@@ -11,9 +11,12 @@
+     !defined(X86EMUL_NO_SIMD)
+ # ifdef __XEN__
+ #  include <asm/xstate.h>
+-#  define FXSAVE_AREA ((void *)&current->arch.xsave_area->fpu_sse)
++/* Has a fastpath for `current`, so there's no actual map */
++#  define FXSAVE_AREA ((void *)VCPU_MAP_XSAVE_AREA(current))
++#  define UNMAP_FXSAVE_AREA(x) VCPU_UNMAP_XSAVE_AREA(current, x)
+ # else
+ #  define FXSAVE_AREA get_fpu_save_area()
++#  define UNMAP_FXSAVE_AREA(x) ((void)(x))
+ # endif
  #endif
  
--    BUILD_BUG_ON(sizeof(c.nat->fpu_ctxt) !=
--                 sizeof(v->arch.xsave_area->fpu_sse));
--    memcpy(&c.nat->fpu_ctxt, &v->arch.xsave_area->fpu_sse,
--           sizeof(c.nat->fpu_ctxt));
-+    xsave_area = VCPU_MAP_XSAVE_AREA(v);
-+    BUILD_BUG_ON(sizeof(c.nat->fpu_ctxt) != sizeof(xsave_area->fpu_sse));
-+    memcpy(&c.nat->fpu_ctxt, &xsave_area->fpu_sse, sizeof(c.nat->fpu_ctxt));
-+    VCPU_UNMAP_XSAVE_AREA(v, xsave_area);
+@@ -292,6 +295,9 @@ int x86_emul_blk(
+         }
+         else
+             asm volatile ( "fxrstor %0" :: "m" (*fxsr) );
++
++        UNMAP_FXSAVE_AREA(fxsr);
++
+         break;
+     }
  
-     if ( is_pv_domain(d) )
-         c(flags = v->arch.pv.vgc_flags & ~(VGCF_i387_valid|VGCF_in_kernel));
+@@ -320,6 +326,9 @@ int x86_emul_blk(
+ 
+         if ( fxsr != ptr ) /* i.e. s->op_bytes < sizeof(*fxsr) */
+             memcpy(ptr, fxsr, s->op_bytes);
++
++        UNMAP_FXSAVE_AREA(fxsr);
++
+         break;
+     }
+ 
 -- 
 2.47.1
 
