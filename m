@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2582AE7719D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28D9FE7719E
 	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 09:36:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.869351.1280824 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.869349.1280803 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWBQn-00065C-Lv; Fri, 10 Jan 2025 09:35:53 +0000
+	id 1tWBQk-0005cL-7M; Fri, 10 Jan 2025 09:35:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 869351.1280824; Fri, 10 Jan 2025 09:35:53 +0000
+Received: by outflank-mailman (output) from mailman id 869349.1280803; Fri, 10 Jan 2025 09:35:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWBQn-000651-HJ; Fri, 10 Jan 2025 09:35:53 +0000
-Received: by outflank-mailman (input) for mailman id 869351;
- Fri, 10 Jan 2025 09:35:52 +0000
+	id 1tWBQk-0005cE-45; Fri, 10 Jan 2025 09:35:50 +0000
+Received: by outflank-mailman (input) for mailman id 869349;
+ Fri, 10 Jan 2025 09:35:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J0bo=UC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tWBQm-0005c8-2A
- for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 09:35:52 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
+ id 1tWBQj-0005c8-62
+ for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 09:35:49 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 47e5df83-cf36-11ef-a0df-8be0dac302b0;
- Fri, 10 Jan 2025 10:35:51 +0100 (CET)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d9882a936eso3308062a12.3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Jan 2025 01:35:51 -0800 (PST)
+ id 4600aef5-cf36-11ef-a0df-8be0dac302b0;
+ Fri, 10 Jan 2025 10:35:48 +0100 (CET)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aae81f4fdc4so377811166b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jan 2025 01:35:48 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d9900c98d6sm1406017a12.35.2025.01.10.01.35.49
+ a640c23a62f3a-ab2c905f0c9sm151901366b.19.2025.01.10.01.35.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 01:35:50 -0800 (PST)
+ Fri, 10 Jan 2025 01:35:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,38 +46,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47e5df83-cf36-11ef-a0df-8be0dac302b0
+X-Inumbo-ID: 4600aef5-cf36-11ef-a0df-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1736501751; x=1737106551; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Fl8lgxmL+/V36LVrcdeJiI3S1Q/yOAFdboy4Zc6RdL0=;
-        b=A80Ow/3+yMMbfH5HJi1oEoaAQL0xoeIOS6GyIcyrwaHxNcw2WNf1CovI2D10b/T48d
-         LIOwMWZONjyNl96kyPpWn34bmWuath6m9e0Uv7GnOb+LtG+rIerXtmdAxPRqodH7HPUr
-         nlhQ8VQjC7MHi2zwlh7xYpswxj/inAqJ7oq4M=
+        d=citrix.com; s=google; t=1736501748; x=1737106548; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pETirQ8gMZHueGENb+NbJKwsttVKoOOQHvJbKrUYGcU=;
+        b=aMNoyLAfsKsn8qab8N/nSE9ya1YFy9jMFthMcmSwllkVnUN1hx0QNMfkiWHXy9bggF
+         2QXoA7IQmkgmiCE1vMn4LPnw++FY942hHAOZHqUiA7J3S3RnYhU9tBgrxN9XL4fERzGK
+         +OqdSTOilRkI3nYNFDOyQm4Dhx28aoKj33eKI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736501751; x=1737106551;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Fl8lgxmL+/V36LVrcdeJiI3S1Q/yOAFdboy4Zc6RdL0=;
-        b=AbrHBy2qafx7lzlDVoPSuosiJ9gapjar9SJpg9KueqeLAjUAx6GG0ulnKPk/FIMG4W
-         ltKSR8uKEyXif5dQYJAEL8i/q6XYGSRwD1i7eJUpuN3N+RxKIcBhN17piY5GWV9FIOUj
-         BSl6aY0cOUeZMluJxZl8SsMjwMxJ92c8zs/5U0aK6PwTkjTN0f3WE2Dy3RBaisq9Wz1A
-         M+WgivlTXLW8iNyBvsBri2BdCCN/vR/BoRZo/W9/4S/UFYP86F6r+pKEUb9voptQDTl6
-         z20jT0DXVFZG8gHF+B3zCGt3gk/93kDcgcB0LksQ0ZHJuxWcTFO08ABffNMRCTpAxmoD
-         K8zQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVWJWo2FpOq7fVqlAjNrA+Aq//sjNckrGUnSQlDazuRkoesS1x+1yEF0NYdQMmrNATG9MpzVbLkhSI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YydjE6+l83Iy67eBZdAy2EJGRRyi4T+nQxu+7gVW/E5qystcj2P
-	Oi6Hx3tQEuwaOI89hJSS4YNzSAjaAwzx6t0P+QCNKKwHP247QdVy3/MA44bnh04=
-X-Gm-Gg: ASbGnctkuwyoMcNYdWQtlkkdzit3KzKNGL2PB3pl8zcHUH1J4Hcv+ZBhyW4uC1AMtOT
-	3CISd6Rh+M5vL9owIiQXeLSeJy2VwQVkRNPdXoLt7bW4Tw5EZJWs+ZYo3y2DB0EkODapIsHRUNX
-	5aiX5GmmUNCSWc2SIFjiEepq2AV13yG30zlBzExGqNvsTLJ2IyHD1kYJI0DsbkiXuVa4Mb8Ygu+
-	Ymh18XssMwWjduS/qOUKDudIX/tCURVRR8ewxtpwwp9C0pEwBFK5JYqaT32+YBZd7E=
-X-Google-Smtp-Source: AGHT+IEo9mpyvl6MxMhMK3vDEIeyTCqPvEtk3ZTUCN5P4v3M5pMXiIevI2rskGgecot8tg5zTq3PXg==
-X-Received: by 2002:a05:6402:50c6:b0:5d3:cfd0:8d3f with SMTP id 4fb4d7f45d1cf-5d972e4cc1amr9661346a12.24.1736501750881;
-        Fri, 10 Jan 2025 01:35:50 -0800 (PST)
+        d=1e100.net; s=20230601; t=1736501748; x=1737106548;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pETirQ8gMZHueGENb+NbJKwsttVKoOOQHvJbKrUYGcU=;
+        b=n1HvKTaQWqoJfbxVwzfKoBuUBD9NJIYUW582eseLTuMKVSGXTl8KtibPlC+7QWxGxm
+         /HBtkCzbN/1EUg+qG4yxglrb3kH2BGKSvtJJJueVteISDLklYS1rC6r228yo+waz91Bz
+         oQf4gAq7lnuWThd52x6oCCytCSv4as6zlGgb5pWoKEx5GnSF4EnJvqEUZW4SktbtEUj9
+         pkcvHWqKM8V2eub+NCtkHhgI2bR5gcUZuTr/jpGb5T0bP3GPnTZ/NrhUAfH5+0e9BgMi
+         JNIjrOJ7Dxk8PUU8bQAlleTe9DY426hVD6O7+GKn4DkAdJVHW49WUAQ1a9M/5ocos7vT
+         EIJw==
+X-Forwarded-Encrypted: i=1; AJvYcCXeCUUUrmeP6Y8iptxZIUk55pSgkyxuUYxVL0+lkoU7QKKtqNU9eL0Lq1l23Flt0qjYMvco1q3fAbc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxqtlbQbghByJz9H+sCd8EMsaO0CTxCFj/wrhH8o3CpqqjM2B3p
+	s3q/TxWTwIyvAPcWPIeNENg5c3Dk87RGsStW725E3gsBOdRoGBm/uqF1l6yL1j4=
+X-Gm-Gg: ASbGncs9OLwwyFR0TCAWcL6AwnRaDARRJJR1UZW87FH6dimUlRUiLv0+u8DOnuu7S+a
+	vsjboNaz9XHLRIMi0me/E5NcuFKwK/Shblnjd5wrhY7M5ZBPIFzh7oGuQJIfwqGvInjK/S6FiK4
+	JhK0RFk3y2Pj1G5XFZ8xBgnRsVhOqm+p+wTTf6NIjhEBEtSa6+BRFT+6QEYThSjqbw9rm2x+ZMR
+	vbRgtSpK1htCaQUhb+4HAnoc8F7V2u4S2TIfq2FzL0fLj8CTn1iqN/wffavVM/JOjg=
+X-Google-Smtp-Source: AGHT+IF9Q+tc7zeQFkrp5t8due6zm/61UjY1kpKR16BTxlfnx3CZQHqRQ9rAy0+5QTUyBVAxonI8fw==
+X-Received: by 2002:a17:907:3e24:b0:aa6:7737:199c with SMTP id a640c23a62f3a-ab2ab6fd036mr73135066b.15.1736501747665;
+        Fri, 10 Jan 2025 01:35:47 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: qemu-devel@nongnu.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
@@ -91,134 +90,38 @@ Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	xen-devel@lists.xenproject.org,
 	qemu-block@nongnu.org
-Subject: [PATCH v2 2/2] xen: do not use '%ms' scanf specifier
-Date: Fri, 10 Jan 2025 10:35:31 +0100
-Message-ID: <20250110093531.23221-3-roger.pau@citrix.com>
+Subject: [PATCH v2 0/2] xen: error handling and FreeBSD compatibility fixes
+Date: Fri, 10 Jan 2025 10:35:29 +0100
+Message-ID: <20250110093531.23221-1-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20250110093531.23221-1-roger.pau@citrix.com>
-References: <20250110093531.23221-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The 'm' parameter used to request auto-allocation of the destination variable
-is not supported on FreeBSD, and as such leads to failures to parse.
+Hello,
 
-What's more, the current usage of '%ms' with xs_node_scanf() is pointless, as
-it just leads to a double allocation of the same string.  Instead use
-xs_node_read() to read the whole xenstore node.
+First patch from David introduces a new helper to fetch xenstore nodes,
+while second patch removes the usage of scanf related functions with the
+"%ms" format specifier, as it's not supported by the FreeBSD scanf libc
+implementation.
 
-Fixes: a783f8ad4ec9 ('xen: add a mechanism to automatically create XenDevice-s...')
-Fixes: 9b7737469080 ('hw/xen: update Xen console to XenDevice model')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - New version of xs_node_read().
- - Fix usage of %ms in xen-block.c
+Thanks, Roger.
 
-Changes since v1:
- - Introduce xs_node_read() helper.
- - Merge with errp fixes.
----
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Anthony PERARD <anthony@xenproject.org>
-Cc: Paul Durrant <paul@xen.org>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Cc: Kevin Wolf <kwolf@redhat.com>
-Cc: Hanna Reitz <hreitz@redhat.com>
-Cc: "Marc-André Lureau" <marcandre.lureau@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: xen-devel@lists.xenproject.org
-Cc: qemu-block@nongnu.org
----
- hw/block/xen-block.c     |  3 ++-
- hw/char/xen_console.c    |  6 ++++--
- hw/xen/xen-bus.c         | 14 ++++++++++++--
- include/hw/xen/xen-bus.h |  1 +
- 4 files changed, 19 insertions(+), 5 deletions(-)
+David Woodhouse (1):
+  hw/xen: Add xs_node_read() helper function
 
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 306d38927cf4..034a18b70e28 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -239,7 +239,8 @@ static void xen_block_connect(XenDevice *xendev, Error **errp)
-         return;
-     }
- 
--    if (xen_device_frontend_scanf(xendev, "protocol", "%ms", &str) != 1) {
-+    str = xen_device_frontend_read(xendev, "protocol");
-+    if (!str) {
-         /* x86 defaults to the 32-bit protocol even for 64-bit guests. */
-         if (object_dynamic_cast(OBJECT(qdev_get_machine()), "x86-machine")) {
-             protocol = BLKIF_PROTOCOL_X86_32;
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index ef0c2912efa1..989e75fef88f 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -550,7 +550,8 @@ static void xen_console_device_create(XenBackendInstance *backend,
-         goto fail;
-     }
- 
--    if (xs_node_scanf(xsh, XBT_NULL, fe, "type", errp, "%ms", &type) != 1) {
-+    type = xs_node_read(xsh, XBT_NULL, NULL, errp, "%s/%s", fe, "type");
-+    if (!type) {
-         error_prepend(errp, "failed to read console device type: ");
-         goto fail;
-     }
-@@ -568,7 +569,8 @@ static void xen_console_device_create(XenBackendInstance *backend,
- 
-     snprintf(label, sizeof(label), "xencons%ld", number);
- 
--    if (xs_node_scanf(xsh, XBT_NULL, fe, "output", NULL, "%ms", &output) == 1) {
-+    output = xs_node_read(xsh, XBT_NULL, NULL, errp, "%s/%s", fe, "output");
-+    if (output) {
-         /*
-          * FIXME: sure we want to support implicit
-          * muxed monitors here?
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index adfc4efad035..85b92cded4e2 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -156,8 +156,8 @@ again:
-             !strcmp(key[i], "hotplug-status"))
-             continue;
- 
--        if (xs_node_scanf(xenbus->xsh, tid, path, key[i], NULL, "%ms",
--                          &val) == 1) {
-+        val = xs_node_read(xenbus->xsh, tid, NULL, NULL, "%s/%s", path, key[i]);
-+        if (val) {
-             qdict_put_str(opts, key[i], val);
-             free(val);
-         }
-@@ -650,6 +650,16 @@ int xen_device_frontend_scanf(XenDevice *xendev, const char *key,
-     return rc;
- }
- 
-+char *xen_device_frontend_read(XenDevice *xendev, const char *key)
-+{
-+    XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
-+
-+    g_assert(xenbus->xsh);
-+
-+    return xs_node_read(xenbus->xsh, XBT_NULL, NULL, NULL, "%s/%s",
-+                        xendev->frontend_path, key);;
-+}
-+
- static void xen_device_frontend_set_state(XenDevice *xendev,
-                                           enum xenbus_state state,
-                                           bool publish)
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index 38d40afa3798..2adb2af83919 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -91,6 +91,7 @@ void xen_device_frontend_printf(XenDevice *xendev, const char *key,
- int xen_device_frontend_scanf(XenDevice *xendev, const char *key,
-                               const char *fmt, ...)
-     G_GNUC_SCANF(3, 4);
-+char *xen_device_frontend_read(XenDevice *xendev, const char *key);
- 
- void xen_device_set_max_grant_refs(XenDevice *xendev, unsigned int nr_refs,
-                                    Error **errp);
+Roger Pau Monné (1):
+  xen: do not use '%ms' scanf specifier
+
+ hw/block/xen-block.c            |  3 ++-
+ hw/char/xen_console.c           | 14 ++++++++------
+ hw/xen/trace-events             |  1 +
+ hw/xen/xen-bus-helper.c         | 22 ++++++++++++++++++++++
+ hw/xen/xen-bus.c                | 14 ++++++++++++--
+ include/hw/xen/xen-bus-helper.h |  4 ++++
+ include/hw/xen/xen-bus.h        |  1 +
+ 7 files changed, 50 insertions(+), 9 deletions(-)
+
 -- 
 2.46.0
 
