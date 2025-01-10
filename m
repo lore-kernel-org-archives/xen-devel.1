@@ -4,35 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47804E7719F
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 10:03:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.869407.1280881 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A06E77188
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 11:40:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.869468.1280902 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWBrZ-0004jH-MC; Fri, 10 Jan 2025 10:03:33 +0000
+	id 1tWDNI-0004DQ-Hw; Fri, 10 Jan 2025 11:40:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 869407.1280881; Fri, 10 Jan 2025 10:03:33 +0000
+Received: by outflank-mailman (output) from mailman id 869468.1280902; Fri, 10 Jan 2025 11:40:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWBrZ-0004gv-HY; Fri, 10 Jan 2025 10:03:33 +0000
-Received: by outflank-mailman (input) for mailman id 869407;
- Fri, 10 Jan 2025 10:03:32 +0000
+	id 1tWDNI-0004DJ-EQ; Fri, 10 Jan 2025 11:40:24 +0000
+Received: by outflank-mailman (input) for mailman id 869468;
+ Fri, 10 Jan 2025 11:40:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/ds0=UC=desiato.srs.infradead.org=BATV+4d36ee5d223a5d86d66e+7810+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1tWBrY-0004A1-Pu
- for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 10:03:32 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <SRS0=mmVM=UC=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1tWDNG-0004DB-W4
+ for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 11:40:23 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 24919dca-cf3a-11ef-a0df-8be0dac302b0;
- Fri, 10 Jan 2025 11:03:30 +0100 (CET)
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
- id 1tWBrT-00000009jwk-46jj; Fri, 10 Jan 2025 10:03:28 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.98 #2 (Red Hat
- Linux)) id 1tWBrS-00000002D85-3diG; Fri, 10 Jan 2025 10:03:26 +0000
+ id ac5057e6-cf47-11ef-a0df-8be0dac302b0;
+ Fri, 10 Jan 2025 12:40:21 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aaee2c5ee6eso327258466b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jan 2025 03:40:21 -0800 (PST)
+Received: from localhost ([66.81.170.107]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab2c90da2c8sm160455666b.62.2025.01.10.03.40.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Jan 2025 03:40:20 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,94 +45,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 24919dca-cf3a-11ef-a0df-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Xoo+xm3Tw2CkYCxIV3PtG0Wlpe8+ZC90junJ+uK4GHw=; b=peyUPkgzt+cH4h/xbt1pVyqhYy
-	IJt7rina2x756yrTxng++yuyPDzQZ4pI0XICMTyTy/uRV2ramirDoVa+obGvj1xghHgvGykSTeckP
-	+eZrwM4YSO4HeWKqgznC+j6hOf5SQ0M5XcMXuhAyanlOndclQI2AhCfKgDZR2mqxXkPXLvJA6nvLr
-	5By/prH62avmOLpsdzv323RBV83Vi9DvbI9qUn7J9CcsbmRo/5fK/boU3EFEHlUKa0ORD9B6IhjCm
-	hoPOFZQhLkf56B2mljrClQ8Y0eVTBK75OQqAG0If7pZPbeFcYwdgOKsyEoT6PrZkIstBluJGb+jl7
-	Mx+1HBwA==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: Roger Pau Monne <roger.pau@citrix.com>,
-	qemu-devel@nongnu.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Paul Durrant <paul@xen.org>,
-	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
-	Kevin Wolf <kwolf@redhat.com>,
-	Hanna Reitz <hreitz@redhat.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	qemu-block@nongnu.org
-Subject: [PATCH 2/4] hw/xen: Use xs_node_read() from xen_console_get_name()
-Date: Fri, 10 Jan 2025 10:03:24 +0000
-Message-ID: <20250110100326.527101-2-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20250110100326.527101-1-dwmw2@infradead.org>
-References: <fc9b22c55eaaa79a3ef9829c270bc4b4e93be7a0.camel@infradead.org>
- <20250110100326.527101-1-dwmw2@infradead.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: ac5057e6-cf47-11ef-a0df-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1736509221; x=1737114021; darn=lists.xenproject.org;
+        h=in-reply-to:references:from:subject:cc:to:message-id:date
+         :content-transfer-encoding:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pWNhJ+USbtMq5De5TNW6JSW2YlRcCjhPAv9sMOiVInI=;
+        b=egBpkougdHjg2F2+oRSd+RNdZG6/IkqUoIwO3D9pdiT2/eT9EyJLk+JZmDKKUAGDjO
+         LzCBtkS26TulVF1odf+5/R/FfMvIlDVEdW2lkOZUIB2PzaRH/LaCwlhcqXnClTa13xmq
+         U+lYnM9upXKB07vYGNNpGyLaWRwickiV0PEoE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736509221; x=1737114021;
+        h=in-reply-to:references:from:subject:cc:to:message-id:date
+         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=pWNhJ+USbtMq5De5TNW6JSW2YlRcCjhPAv9sMOiVInI=;
+        b=kZWjUQI3LpaZ8VpDTzrAxcKAPI6OvWyOlnpMJHOL9yJ1I1jQ4HF6AF3MKCc5IBF5Fp
+         KlM9AgpJ1u3Cs4aoy17+0D1oAPaHQJU/66SHhLQ4Vvq6BJwn+5PTCwJOL1HirDz4qtxw
+         I0b0tcRcnnFMG7QakMs/HUct4LYDPoBc4yYlvj6SxGa8VFzidj1D24wIzzdatiWbyxUo
+         1C1rANWVcpB57W0fK14gXQrL/V5hEWCHFVVyPqd8e8qavLPPgr3pWjo2FFD2dhDVZHiJ
+         ISuP5SPjWxUQyLgoKXE1fgqPG6fPtRHs1R25sN1sigf3bbjvEk1wYEyUbYtuhGFrs51g
+         5Oow==
+X-Forwarded-Encrypted: i=1; AJvYcCUsXQdumbZmhxG02ROYhsVGenCtC9yCrICLeiZTdxOV83++b/0Bk6Z7+FQHsXGVo4NV8iyqxmBC17o=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwcSiK6jr4y/+wZsZ7+zxDTlYtuJRY4rM8QdhtZr46AvUfpQWl+
+	CD3z8dXBzh4X+YnPaXBA5zEWLyVMxn3GP+uLEOzwaBs4svX6fxIEgRWXGvUMCSE=
+X-Gm-Gg: ASbGncsfuzQhTabASLymGK+tVGcRQtaQZXbtkQlsY4xsG32W0RHqYSCVwgE6r53ecs5
+	nw3AI/gPeQZmTBdzqMO9sC8ozgGzXMi+vYRch4qDCA0culQ9iam74q/T2QaI/xaW6mClxQQd3Wl
+	/RCShkqAmwlJH0kVD9yNhD+oXLYpZe4oZd59mcas12CjUderIxok8QL+7yYbUvK+9ktNWTixS+o
+	I2idVou5RboKpwK+/zZ8W7uCLPsEPn1T4G0Mzrl+vdYxIlqLCOq8ZCdoVZtxmQ=
+X-Google-Smtp-Source: AGHT+IFSvwcBI3JiUS552frjGxJDx4z6XY8CARYI1vKfRa3tJ6aQ5YolVotCuP3M8VNKEkficu7KEQ==
+X-Received: by 2002:a17:906:c143:b0:aa6:79fa:b480 with SMTP id a640c23a62f3a-ab2ab670756mr947096666b.10.1736509220710;
+        Fri, 10 Jan 2025 03:40:20 -0800 (PST)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 10 Jan 2025 11:40:14 +0000
+Message-Id: <D6YD543UTJJ5.1OAN0MJ4D1OZG@cloud.com>
+To: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>, "Jan Beulich"
+ <jbeulich@suse.com>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>,
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v2 10/13] x86/mpx: Map/unmap xsave area in in
+ read_bndcfgu()
+From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
+X-Mailer: aerc 0.18.2
+References: <20241105143310.28301-1-alejandro.vallejo@cloud.com>
+ <20241105143310.28301-11-alejandro.vallejo@cloud.com>
+ <7e36137b-ce1f-4e78-9a41-fbfdbe9c0d87@suse.com>
+ <D6D3WWUR75T2.1C5DL8WJGQVNP@cloud.com>
+ <def2d398-ae9a-43c8-8de6-22ea01eae196@suse.com>
+ <D6D6IAZRJYH5.E1DPQHQSI9CE@cloud.com>
+In-Reply-To: <D6D6IAZRJYH5.E1DPQHQSI9CE@cloud.com>
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+On Mon Dec 16, 2024 at 2:02 PM GMT, Alejandro Vallejo wrote:
+> On Mon Dec 16, 2024 at 12:03 PM GMT, Jan Beulich wrote:
+> > On 16.12.2024 13:00, Alejandro Vallejo wrote:
+> > > On Mon Dec 9, 2024 at 4:30 PM GMT, Jan Beulich wrote:
+> > >> On 05.11.2024 15:33, Alejandro Vallejo wrote:
+> > >>> --- a/xen/arch/x86/xstate.c
+> > >>> +++ b/xen/arch/x86/xstate.c
+> > >>> @@ -1022,9 +1022,10 @@ int handle_xsetbv(u32 index, u64 new_bv)
+> > >>> =20
+> > >>>  uint64_t read_bndcfgu(void)
+> > >>>  {
+> > >>> +    uint64_t bndcfgu =3D 0;
+> > >>>      unsigned long cr0 =3D read_cr0();
+> > >>> -    struct xsave_struct *xstate
+> > >>> -        =3D idle_vcpu[smp_processor_id()]->arch.xsave_area;
+> > >>> +    struct vcpu *v =3D idle_vcpu[smp_processor_id()];
+> > >>
+> > >> Can this be pointer-to-const? Certainly right now, so the question i=
+s rather
+> > >> meant to be forward looking.
+> > >>
+> > >>> +    struct xsave_struct *xstate =3D VCPU_MAP_XSAVE_AREA(v);
+> > >>
+> > >> This certainly can be pointer-to-const, just like ...
+> > >>
+> > >>>      const struct xstate_bndcsr *bndcsr;
+> > >>
+> > >> ... this is.
+> > >=20
+> > > Yes, those retained non-const because of the now missing patch to zer=
+o-out
+> > > bndcfgu.
+> >
+> > I'm afraid this reply is ambiguous as to what's going to happen in the =
+next
+> > version. I can read both "will change" and "needs to stay" into it.
+> >
+> > Jan
+>
+> It was an answer to "Can this be pointer to const?". Yes, I'll put the co=
+nst
+> back.
+>
+> Cheers,
+> Alejandro
 
-Now that xs_node_read() can construct a node path, no need to open-code it.
+Actually, xstate is the target of the assembly, so it will be written to
+(though not from C). It seems like asking for trouble modifying the target =
+of a
+pointer to non-volatile const from inline assembly.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- hw/char/xen_console.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+I'll leave it as-is in the interest of safety.
 
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index 989e75fef8..9338e00473 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -367,28 +367,28 @@ static char *xen_console_get_name(XenDevice *xendev, Error **errp)
- 
-     if (con->dev == -1) {
-         XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
--        char fe_path[XENSTORE_ABS_PATH_MAX + 1];
-         int idx = (xen_mode == XEN_EMULATE) ? 0 : 1;
-+        Error *local_err = NULL;
-         char *value;
- 
-         /* Theoretically we could go up to INT_MAX here but that's overkill */
-         while (idx < 100) {
-             if (!idx) {
--                snprintf(fe_path, sizeof(fe_path),
--                         "/local/domain/%u/console", xendev->frontend_id);
-+                value = xs_node_read(xenbus->xsh, XBT_NULL, NULL, &local_err,
-+                                     "/local/domain/%u/console",
-+                                     xendev->frontend_id);
-             } else {
--                snprintf(fe_path, sizeof(fe_path),
--                         "/local/domain/%u/device/console/%u",
--                         xendev->frontend_id, idx);
-+                value = xs_node_read(xenbus->xsh, XBT_NULL, NULL, &local_err,
-+                                     "/local/domain/%u/device/console/%u",
-+                                     xendev->frontend_id, idx);
-             }
--            value = qemu_xen_xs_read(xenbus->xsh, XBT_NULL, fe_path, NULL);
-             if (!value) {
-                 if (errno == ENOENT) {
-                     con->dev = idx;
-+                    error_free(local_err);
-                     goto found;
-                 }
--                error_setg(errp, "cannot read %s: %s", fe_path,
--                           strerror(errno));
-+                error_propagate(errp, local_err);
-                 return NULL;
-             }
-             free(value);
--- 
-2.47.0
-
+Cheers,
+Alejandro
 
