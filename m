@@ -4,52 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B462E7719D
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 22:21:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.870036.1281485 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB0BE77188
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 22:25:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.870056.1281505 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWNNb-0001p1-Tt; Fri, 10 Jan 2025 22:21:23 +0000
+	id 1tWNRZ-0002yF-Mz; Fri, 10 Jan 2025 22:25:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 870036.1281485; Fri, 10 Jan 2025 22:21:23 +0000
+Received: by outflank-mailman (output) from mailman id 870056.1281505; Fri, 10 Jan 2025 22:25:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWNNb-0001ou-QX; Fri, 10 Jan 2025 22:21:23 +0000
-Received: by outflank-mailman (input) for mailman id 870036;
- Fri, 10 Jan 2025 22:21:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tWNRZ-0002y8-KS; Fri, 10 Jan 2025 22:25:29 +0000
+Received: by outflank-mailman (input) for mailman id 870056;
+ Fri, 10 Jan 2025 22:25:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=l7mG=UC=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1tWNNa-0001oo-CP
- for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 22:21:22 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20610.outbound.protection.outlook.com
- [2a01:111:f403:200a::610])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 36455260-cfa1-11ef-99a4-01e77a169b0f;
- Fri, 10 Jan 2025 23:21:19 +0100 (CET)
-Received: from CH0PR08CA0027.namprd08.prod.outlook.com (2603:10b6:610:33::32)
- by DS7PR12MB6288.namprd12.prod.outlook.com (2603:10b6:8:93::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8335.10; Fri, 10 Jan 2025 22:21:13 +0000
-Received: from CH3PEPF0000000B.namprd04.prod.outlook.com
- (2603:10b6:610:33:cafe::19) by CH0PR08CA0027.outlook.office365.com
- (2603:10b6:610:33::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8335.13 via Frontend Transport; Fri,
- 10 Jan 2025 22:21:13 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH3PEPF0000000B.mail.protection.outlook.com (10.167.244.38) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8335.7 via Frontend Transport; Fri, 10 Jan 2025 22:21:13 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 10 Jan
- 2025 16:21:12 -0600
-Received: from [172.31.88.124] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Fri, 10 Jan 2025 16:21:12 -0600
+ <SRS0=HMSX=UC=kernel.org=helgaas@srs-se1.protection.inumbo.net>)
+ id 1tWNRZ-0002y2-7A
+ for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 22:25:29 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cb196a35-cfa1-11ef-a0df-8be0dac302b0;
+ Fri, 10 Jan 2025 23:25:28 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id CA3CCA426AE;
+ Fri, 10 Jan 2025 22:23:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86143C4CED6;
+ Fri, 10 Jan 2025 22:25:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,207 +43,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36455260-cfa1-11ef-99a4-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ag6eK7gcPQRhcN1YNkG4hjji8u8waUSt7hCb38Wm95GsoLIviVV+YRaHwRdzPAMr9epgOfJMkCVLDKaV1aWnm816s0SBC4C2MPXP1nNldEHpK+DZLaXfmSIsINLtCSwXJAKNX4ZpspLYZCNuoNqUctphqJIzBnGXagtlKK3KDKO2m5DZx6CyNat7yoxE4SnFWIchbEWg7w3GFmb8SQYqcdT4xdG16o0krMwF4dlCUjddhuiMSCZBNNm+AhuGz8/0AvJqMzIgrTjI8uMtNWHO7+XcXfmV+G7OLyRoKWBa6rjpj+ivLPv9pqz3acdQA+oiqVNDih9htbO4+IdWmyVKxA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oP38IVBNbqZWKbOqOxt0j0fmaPu0MFviVieuQbDEr+M=;
- b=Js8fPhe9wiMpShUZ6l4043QvIP3PSjVB+Dj8+T7eoNGoT7kMlljytxe2qkWIGmdhGyvrceJOF++gUOzjhbYAWr4nryijxlkdJzo0BbsM5L43+7r2up2q4rogXEOdOfGJuFhZ4VCT+Gl0nQKEgpW/x2ceH7W+Lo94V57zUvwI7ZWjjBo1yCO6eYhkWsRJ30h84eFIfQepnXPOCa7cYnNrXwuQG3TAFci4HFuyVHllz7n/TPaTzrJDCsDutyS/X6jO+OPdQVDBKItktU/qCAhtqAlsZRu/I12CgMoEVgDKgBvXZEd+jThvbqEnVSK5BE2dSHaHHD06UKHa8cnM1EuS9w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=apertussolutions.com smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oP38IVBNbqZWKbOqOxt0j0fmaPu0MFviVieuQbDEr+M=;
- b=Lg50oDCUxt/X1XfGxSUWBruoXDmbssV1Rsdwg5K6WlQFn8C96EgGWsOAEtBxVESiWGFnw9iMYAe4y1HTUFcRccWxh4tG13VEnDDfSSeE+L8zBkPhwkxEcxubGHzEnaIu+iqGymzpPuM9YpWPMPuoBdKvRqJ+KWdT4EfZiTSaN/A=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <f02d01c0-2860-4645-b0a5-24cdc1415b12@amd.com>
-Date: Fri, 10 Jan 2025 17:20:05 -0500
+X-Inumbo-ID: cb196a35-cfa1-11ef-a0df-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1736547926;
+	bh=DLEpLG1m5W4R6CL6+4W7/UedZGSkgthe9gS3KngxZLE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:From;
+	b=ManuQbqHSTcactyB2Pv88RPe6kmW+6bJ70xOHlALBW8ZaApg7qihBPSgg0MB1XxDP
+	 2Sfb1aSG4MEDG2Q5BWaJbM74T9R3ZKbucW1aCtqBIgQJ6t3izk5x6xLe0wm3NfyjX8
+	 W6aHyWUpfVkabF0D/bh1JF5E8gC+jMNk2zr2037C54jxn6rEivGg2tfKQVt4UnprQE
+	 VUAgT20jki7KtulD/31HTvryTgs5MhyhkVlz7fuqbZlVHT5Dv9ha8+/jX9lFhh1Wlz
+	 EKn6/dUuT9e80byAplmUx0Kkp7RPFps29+IhXje/eJo72tFMslKD77CN5Azw1pDnvc
+	 +ITR5HQSLkzzg==
+Date: Fri, 10 Jan 2025 16:25:25 -0600
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
+	linux-pci@vger.kernel.org,
+	Nirmal Patel <nirmal.patel@linux.intel.com>,
+	Jonathan Derrick <jonathan.derrick@linux.dev>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
+Subject: Re: [PATCH 2/3] vmd: disable MSI remapping bypass under Xen
+Message-ID: <20250110222525.GA318386@bhelgaas>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/15] x86/hyperlaunch: initial support for hyperlaunch
- device tree
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	<xen-devel@lists.xenproject.org>
-CC: <christopher.w.clark@gmail.com>, <stefano.stabellini@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <20241226165740.29812-1-dpsmith@apertussolutions.com>
- <20241226165740.29812-8-dpsmith@apertussolutions.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <20241226165740.29812-8-dpsmith@apertussolutions.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000B:EE_|DS7PR12MB6288:EE_
-X-MS-Office365-Filtering-Correlation-Id: 164f12b3-b277-4b48-31e0-08dd31c517d9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?UEM4aGNFQUg1Rk40c0FuRjVyNlhTdC95bnVVc3NSeVgvcE9sbXhjQ3ByaGRT?=
- =?utf-8?B?a2Z6Uk1LQzlzaHdRTVgzZW1vSDBxVTAyOXVXL2dwTm1zN3lsVnBoNzBmVXps?=
- =?utf-8?B?Qy8wU29OQXZYQ0RZRHIveUtZZkFBcWIvZGVSZWtycVBWeCt2c0YrY2FIT0FD?=
- =?utf-8?B?ZzlkWVFjMjZaTngwT2cybzNGU2MwR1NoT1ozRlBlWTBOcU5lU0tFQytDaUFJ?=
- =?utf-8?B?ckxNQ2pNZnNObzJnVkdRNzBqaUNKU2tjYlRwdEpKRzZyeERseVVjZTZPeHlK?=
- =?utf-8?B?aWNQaERDZHc2OTFyd2gzWjJiRTN6c0xDS2ZaZUZUSm9tQW0vUy96ZzJ1NFgr?=
- =?utf-8?B?YWFPZ3d1eE84L2tNeXk0MlI2ZnZDN2VKVS9CVGI0bEpkd29ndVZHT0xSYzdF?=
- =?utf-8?B?K01zZWVQNmdjdHpVWDIvVHNpeEhWM0VWU05VV09XaFNmNFc5QUtORVJyNTFQ?=
- =?utf-8?B?WFFudWg4OE5KeWk5S01NOGN2c0JXOFI4N1dUS2RVNmRsdUlQWEVJSmtTVVdW?=
- =?utf-8?B?QS9ySE91enQ3M0NXY2htcktETk9aNm5IMzdwMi9pNFErVkdLNk5JY09KbVp3?=
- =?utf-8?B?V0xrYXlNWDJ5bFdhbm9MbjJXeGN4K0ZQTUR4RkxDenVqVldQakluTERKM1Ey?=
- =?utf-8?B?bW1CUjBZRnlCQTVVd0w1TERKZXpIV2tlY1M5UStPRjBKTE9IYjczVG1ONVRY?=
- =?utf-8?B?S1lhY3lFSXJDTmFuYnVJSC9DS2pNYm9PNTlUK1BZenVLZHlJb2hYOXZNK01M?=
- =?utf-8?B?Z0Z3QU9zY1Brc25lK1VoOXRyaTRjUmJSbEFmUUZHTGNsbUo2alI5SkJsVCtE?=
- =?utf-8?B?VUJKYnh5NmtqRGJZeDhjb3VuMHJYS1kxTUJIUWpYa1ZmVzlFOHExbUpqRGt0?=
- =?utf-8?B?NEZib2M1NzhQa3VmVFgzcGpDZWNTSE0vb29kcHlWMCtJKzhvck12anBpVWZL?=
- =?utf-8?B?bkx1ejk3dHZZSEswd3lYV0czSmZhaG1KQXFlY2d4UUR0TzdqQ3A5MDhDa3E2?=
- =?utf-8?B?UEVZZURremFYdy9kVHYyak94VVNvTTQ3ZDh4dU1sYm5JTGhKZmVDYWtxcThZ?=
- =?utf-8?B?enl5NFZIRmIxZDdkcVhPcmZMVk55ZllZQXFKaWlHUTdwclhkS29Ta0NyNFFZ?=
- =?utf-8?B?Wjc3aGVzMnlmd2pkK2pMQjBHZ3d3YW13aXNraWpHM0VWZzExYm5maHYwdk81?=
- =?utf-8?B?QVRRU3h6bHhmaTFIdFRQbEd3dkd4bzVOd2RWRE5CUVdtbnAxYzhGSUNlMHEx?=
- =?utf-8?B?dm1KZURrc0c1bHU2Rm43VXhKK2JaeVVwVUF1c0x0VHFML0RaeWorY1cyRXRz?=
- =?utf-8?B?RERZN0ZFUlNiTjh1YmVSMjRJQmtrRkVhemZ1OFIrVWNyL2RCUm16OEVHL0lu?=
- =?utf-8?B?dURjMWxPNlhoN0llY0RabHE5TkpzWXFYdGdwSzR4d0pmVGhGWGlMZENuNVBP?=
- =?utf-8?B?SU10RS83VWRRU3pJbG5NdFRQTXo5U3VCWENSUmJ1MXY3L24ySTJrYUdBVTVs?=
- =?utf-8?B?Q1VITTQyVnI2SStnbmZWRzN5bFRqME1ENnJiREl2MXJjM0pFZFBDREx3bURk?=
- =?utf-8?B?WVhJVlZlbVM3OWx2Y2pIL1lDTnllQXpKY2g3MHgxdUtBUGxpOTNyM2ZzOGdl?=
- =?utf-8?B?anpzLzErRi9HazJiZittVDMrek5hRjl3Y1N0bTlqL3R2aWJxK21CNG5GTnhG?=
- =?utf-8?B?ZEU4RjlVVytDWTBncytHSXo0UTVENDZTRGtpbmYzQ2lSR2htU1pIeElGOXl2?=
- =?utf-8?B?bGtqaEZsc2hyMHRyNkg1R2R0M08xU3QvMVJNNjNMVnBuRWVORytJaHE3SEpT?=
- =?utf-8?B?NEp5UUxvaUdQVHBid0t2a3pBZERURW0yeFhBY0k5NlgycTlwS1ZMdlZPdndK?=
- =?utf-8?B?NlY2Q0d3RkphRTV2WmtlSmx1QWtuYnFLcExnSGRkaFI1UGxwWkRUVEJOVjcz?=
- =?utf-8?B?MGErRU1RRkRvRGliV1QwY1dvalFDZHFaZHJleGFQU3V5OU9mR0dsZEJKeXY3?=
- =?utf-8?Q?2TKB1BriLnB8mrw1WTryzDHFCdmt+M=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026)(7053199007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2025 22:21:13.4125
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 164f12b3-b277-4b48-31e0-08dd31c517d9
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH3PEPF0000000B.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6288
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250110140152.27624-3-roger.pau@citrix.com>
 
-On 2024-12-26 11:57, Daniel P. Smith wrote:
-> Add the ability to detect both a formal hyperlaunch device tree or a dom0less
-> device tree. If the hyperlaunch device tree is found, then count the number of
-> domain entries, reporting an error if more than one is found.
+Match historical subject line style for prefix and capitalization:
+
+  PCI: vmd: Set devices to D0 before enabling PM L1 Substates
+  PCI: vmd: Add DID 8086:B06F and 8086:B60B for Intel client SKUs
+  PCI: vmd: Fix indentation issue in vmd_shutdown()
+
+On Fri, Jan 10, 2025 at 03:01:49PM +0100, Roger Pau Monne wrote:
+> MSI remapping bypass (directly configuring MSI entries for devices on the VMD
+> bus) won't work under Xen, as Xen is not aware of devices in such bus, and
+> hence cannot configure the entries using the pIRQ interface in the PV case, and
+> in the PVH case traps won't be setup for MSI entries for such devices.
 > 
-> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+> Until Xen is aware of devices in the VMD bus prevent the
+> VMD_FEAT_CAN_BYPASS_MSI_REMAP capability from being used when running as any
+> kind of Xen guest.
 
-> diff --git a/xen/arch/x86/domain-builder/fdt.c b/xen/arch/x86/domain-builder/fdt.c
-> index 4a3f80648f86..5793bdc9fd47 100644
-> --- a/xen/arch/x86/domain-builder/fdt.c
-> +++ b/xen/arch/x86/domain-builder/fdt.c
-> @@ -13,14 +13,77 @@
->   
->   #include "fdt.h"
->   
-> +static int __init find_hyperlaunch_node(const void *fdt)
-> +{
-> +    int hv_node = fdt_path_offset(fdt, "/chosen/hypervisor");
-> +
-> +    if ( hv_node >= 0 )
-> +    {
-> +        /* Anything other than zero indicates no match */
-> +        if ( fdt_node_check_compatible(fdt, hv_node, "hypervisor,xen") )
-> +            return -ENODATA;
-> +        else
-> +            return hv_node;
-> +    }
-> +    else
-> +    {
-> +        /* Lood for dom0less config */
+Wrap to fit in 75 columns.
 
-Look
+Can you include a hint about *why* Xen is not aware of devices below
+VMD?  That will help to know whether it's a permanent unfixable
+situation or something that could be done eventually.
 
-> +        int node, chosen_node = fdt_path_offset(fdt, "/chosen");
-> +        if ( chosen_node < 0 )
-> +            return -ENOENT;
-> +
-> +        fdt_for_each_subnode(node, fdt, chosen_node)
-> +        {
-> +            if ( fdt_node_check_compatible(fdt, node, "xen,domain") == 0 )
-> +                return chosen_node;
-> +        }
-> +    }
-> +
-> +    return -ENODATA;
-> +}
-> +
->   int __init has_hyperlaunch_fdt(struct boot_info *bi)
->   {
->       int ret = 0;
->       const void *fdt = bootstrap_map_bm(&bi->mods[HYPERLAUNCH_MODULE_IDX]);
->   
-> -    if ( fdt_check_header(fdt) < 0 )
-> +    if ( !fdt || fdt_check_header(fdt) < 0 )
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+>  drivers/pci/controller/vmd.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+> 
+> diff --git a/drivers/pci/controller/vmd.c b/drivers/pci/controller/vmd.c
+> index 264a180403a0..d9b7510ace29 100644
+> --- a/drivers/pci/controller/vmd.c
+> +++ b/drivers/pci/controller/vmd.c
+> @@ -965,6 +965,15 @@ static int vmd_probe(struct pci_dev *dev, const struct pci_device_id *id)
+>  	struct vmd_dev *vmd;
+>  	int err;
+>  
+> +	if (xen_domain())
+> +		/*
+> +		 * Xen doesn't have knowledge about devices in the VMD bus.
 
-It seems to me the !fdt check should move into the earlier patch.  What 
-do you think?
+Also here.
 
->           ret = -EINVAL;
-> +    else
-> +        ret = find_hyperlaunch_node(fdt);
+> +		 * Bypass of MSI remapping won't work in that case as direct
+> +		 * write to the MSI entries won't result in functional
+> +		 * interrupts.
+> +		 */
+> +		features &= ~VMD_FEAT_CAN_BYPASS_MSI_REMAP;
 > +
-> +    bootstrap_unmap();
-> +
-> +    return ret < 0 ? ret : 0;
-> +}
-> +
-> +int __init walk_hyperlaunch_fdt(struct boot_info *bi)
-> +{
-> +    int ret = 0, hv_node, node;
-> +    void *fdt = bootstrap_map_bm(&bi->mods[HYPERLAUNCH_MODULE_IDX]);
-> +
-> +    if ( unlikely(!fdt) )
-> +        return -EINVAL;
-> +
-> +    hv_node = find_hyperlaunch_node(fdt);
-
-You call find_hyperlaunch_node() twice.  It seems like you can just have 
-has_hyperlaunch_fdt() return the node and pass it into this function.
-
-Regards,
-Jason
-
-> +    if ( hv_node < 0 )
-> +    {
-> +        ret = hv_node;
-> +        goto err_out;
-> +    }
-> +
-> +    fdt_for_each_subnode(node, fdt, hv_node)
-> +    {
-> +        ret = fdt_node_check_compatible(fdt, node, "xen,domain");
-> +        if ( ret == 0 )
-> +            bi->nr_domains++;
-> +    }
-> +
-> +    /* Until multi-domain construction is added, throw an error */
-> +    if ( !bi->nr_domains || bi->nr_domains > 1 )
-> +        printk(XENLOG_ERR "Hyperlaunch only supports dom0 construction\n");
->   
-> + err_out:
->       bootstrap_unmap();
->   
->       return ret;
+>  	if (resource_size(&dev->resource[VMD_CFGBAR]) < (1 << 20))
+>  		return -ENOMEM;
+>  
+> -- 
+> 2.46.0
+> 
 
