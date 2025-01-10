@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7796EE77188
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 08:56:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.869332.1280793 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A90CAE77188
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2025 09:36:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.869350.1280812 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWAoP-0008RD-8s; Fri, 10 Jan 2025 08:56:13 +0000
+	id 1tWBQl-0005qK-Ci; Fri, 10 Jan 2025 09:35:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 869332.1280793; Fri, 10 Jan 2025 08:56:13 +0000
+Received: by outflank-mailman (output) from mailman id 869350.1280812; Fri, 10 Jan 2025 09:35:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tWAoP-0008R6-60; Fri, 10 Jan 2025 08:56:13 +0000
-Received: by outflank-mailman (input) for mailman id 869332;
- Fri, 10 Jan 2025 08:56:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tWBQl-0005qD-AD; Fri, 10 Jan 2025 09:35:51 +0000
+Received: by outflank-mailman (input) for mailman id 869350;
+ Fri, 10 Jan 2025 09:35:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yVcS=UC=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1tWAoM-0008R0-CE
- for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 08:56:11 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bb38d2e8-cf30-11ef-99a4-01e77a169b0f;
- Fri, 10 Jan 2025 09:56:08 +0100 (CET)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id 299D14EE0738;
- Fri, 10 Jan 2025 09:56:07 +0100 (CET)
+ <SRS0=J0bo=UC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tWBQk-0005c8-68
+ for xen-devel@lists.xenproject.org; Fri, 10 Jan 2025 09:35:50 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 46d5f3a5-cf36-11ef-a0df-8be0dac302b0;
+ Fri, 10 Jan 2025 10:35:49 +0100 (CET)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aaf6b1a5f2bso551254366b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jan 2025 01:35:49 -0800 (PST)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab2c9562519sm149700166b.132.2025.01.10.01.35.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Jan 2025 01:35:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,128 +46,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb38d2e8-cf30-11ef-99a4-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1736499367; bh=vhhd8Bm2l6X7w5OCOM7Za68j+Tx0RW2AOqgQ9FvlmnM=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=OdIw51C/qTAy1iNaIzT4pTcthCy496dBpY5C9Sb4reZM0lkcLZVnaVnHokOAEHbRF
-	 dOwSo8ZobWgLacZsXufVXUZrVO8XE5ccneMwYsV+ehuRoKZ9Ldc2eCRTYPJ/g4jxjU
-	 eJe4+9Q6P4gt7YVaT+S2LpgLeENavKhUt4Z3mRQ1tfZqi8gk74sbHnolDviQEUMTPF
-	 0x/ar4TVxmdj/pzdSjhoTufCOkJJjYXBqDUwyNKqP8JcYltbE4rQnM5XlmeB0BPMHE
-	 szzNPqtv0NEoQJhtIqL9nMtSIduV2CEtssR/pEOgppUFZrtgxuhmZV9K7XujrLol21
-	 XBuFaQmtRNMPA==
+X-Inumbo-ID: 46d5f3a5-cf36-11ef-a0df-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1736501749; x=1737106549; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=heAlNNCsF7d+p9roHrTGYRStQWTNbLe8js38yKlHKDA=;
+        b=Ox1eoZnPJ42O5nX2N6Yazmcl8wHaHdeor61p73hamVJtDfsoNYLqLmDxmIN+SGNbdl
+         uS/5vWAKJKpI9aGDJ/asjm70rCZpK3OpXrsz1BBq/z/yZX6FEHy17toUBDzOTUm4nV0k
+         gwACi8XT4PqwlfluJYKRqXgRgAFXxlvw848aM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736501749; x=1737106549;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=heAlNNCsF7d+p9roHrTGYRStQWTNbLe8js38yKlHKDA=;
+        b=ZK9Bu8FDdHjNBc2YF+knlPOAZP0D6kWKwYXtQSDHFwj7DDm7w0c7QbmNPy/p0t5OsP
+         zKbDgAR3HkGpLiI1De01dg8R+f3o5AGlQoJ4eKLWWGnv11rE7N1pWMEc9wjzwW7WY7OB
+         py1X8Z9bkDkwwqbcGDJoLIB0Y3C1ORll/kcTzy5Bn/8acuJ2ksb4rFUUOJ0M2b1nJLGV
+         NRghJTIqAOIOQ+8D5dCMe1VFy7wgvx9elMPq2K98hLecgnH65VVFplJDoJm6AqGfajM8
+         xLj8Y07/kXUi38bE/kmsYTygHHYSGmvrl2OmspGJ+Ni9RJ0DlmfqgqqELOP8dv5ejcMz
+         uyaw==
+X-Forwarded-Encrypted: i=1; AJvYcCWIC2GOGN+4Zl5JMiT55IE9R3e9Fz6PR4kJSRz3XJTrYH526+++rIUFPdOpHbWOLfiHIsWQYm/+/Mw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyvKS9QIFaKPw5KmhdHuV0mERC50CXl8Tn2FIgmkEyw/fa9OzNx
+	jcbi7v6AzswKaUOQQyL/Qh2kMiy+F9V4+Qj5WR399wcye8touylFMrQXGKqlbU20WKbvuPWB7id
+	F
+X-Gm-Gg: ASbGnctOWh+8WHGxebKS2VpeIvk4eMxpeQ0eS6vXWWHYoxLAkNLy632ev69DT0c1MyR
+	D094qFjAjng/ziRYmJXbvs9qusmfurvd5pM0afp6WTH8WOX0waHJgi05BaWw9OZkX6Y103fs9NF
+	dfxMDLA/MZtvMxpbB8H/bhbg0Ci/AXibWJfHgsYIHHWt7m9MaS2yMXIujqI5mEeR9QPHx18Swjw
+	4OWEKyeg3Pd9e93eqst97DkqpzDXAck7UvQy23i2mykKNMzOu+qJMaVA129iysFQs8=
+X-Google-Smtp-Source: AGHT+IF9I+Bn1k3Y/QmCjZal+54tLnhYTkVBay0iOh00OvkCwpx1fGD8280XTGNWMnzZIdz6+zIOPQ==
+X-Received: by 2002:a17:907:7282:b0:a9a:6c41:50a8 with SMTP id a640c23a62f3a-ab2c3c79cf5mr496036166b.17.1736501749069;
+        Fri, 10 Jan 2025 01:35:49 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: qemu-devel@nongnu.org
+Cc: David Woodhouse <dwmw@amazon.co.uk>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Paul Durrant <paul@xen.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v2 1/2] hw/xen: Add xs_node_read() helper function
+Date: Fri, 10 Jan 2025 10:35:30 +0100
+Message-ID: <20250110093531.23221-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20250110093531.23221-1-roger.pau@citrix.com>
+References: <20250110093531.23221-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Date: Fri, 10 Jan 2025 09:56:07 +0100
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich
- <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- xen-devel@lists.xenproject.org, consulting@bugseng.com
-Subject: Re: [PATCH v2 1/2] x86/uaccess: rework user access speculative harden
- guards
-In-Reply-To: <Z4DaZlbEDEjxQ6g-@macbook.local>
-References: <20241126093508.6966-1-roger.pau@citrix.com>
- <20241126093508.6966-2-roger.pau@citrix.com>
- <cf1f87d1-f616-4944-94fa-69a777249072@suse.com>
- <e3ec3dad28dc94436c0b330b2f995120@bugseng.com>
- <alpine.DEB.2.22.394.2501031617280.16425@ubuntu-linux-20-04-desktop>
- <8e31daaf77216534c252d371a3251595@bugseng.com>
- <alpine.DEB.2.22.394.2501091556590.133435@ubuntu-linux-20-04-desktop>
- <Z4DaZlbEDEjxQ6g-@macbook.local>
-Message-ID: <ec0ff4e5654752c7adbe7c4f9402cbd2@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 2025-01-10 09:29, Roger Pau Monné wrote:
-> On Thu, Jan 09, 2025 at 03:57:24PM -0800, Stefano Stabellini wrote:
->> On Thu, 9 Jan 2025, Nicola Vetrini wrote:
->> > On 2025-01-04 01:20, Stefano Stabellini wrote:
->> > > Hi Nicola, one question below
->> > >
->> > > On Wed, 27 Nov 2024, Nicola Vetrini wrote:
->> > > > > #define AMD_OSVW_ERRATUM(osvw_id, ...)  osvw_id, __VA_ARGS__, 0
->> > > > >
->> > > > > where we're using the C99 form rather than the GNU extension, and where
->> > > > > hence __VA_ARGS__ would - by extrapolation of the Misra rule - need
->> > > > > parenthesizing, when it isn't and can't be.
->> > > > >
->> > > > > Isn't it rather the case that variable argument macros need a more
->> > > > general
->> > > > > deviation, if not an adjustment to the Misra rule? Extending the Cc list
->> > > > > some ...
->> > >
->> > > Nicola, if you look at the original patch:
->> > > https://marc.info/?l=xen-devel&m=173261356716876
->> > >
->> > > "The current guards to select whether user accesses should be speculative
->> > > hardened violate Misra rule 20.7, as the UA_KEEP() macro doesn't (and can't)
->> > > parenthesize the 'args' argument."
->> > >
->> > > And the very first change in the patch is:
->> > >
->> > > diff --git a/xen/arch/x86/include/asm/uaccess.h
->> > > b/xen/arch/x86/include/asm/uaccess.h
->> > > index 2d01669b96..6b8150ac22 100644
->> > > --- a/xen/arch/x86/include/asm/uaccess.h
->> > > +++ b/xen/arch/x86/include/asm/uaccess.h
->> > > @@ -24,9 +24,6 @@ unsigned int copy_from_unsafe_ll(void *to, const void
->> > > *from, unsigned int n);
->> > >  void noreturn __get_user_bad(void);
->> > >  void noreturn __put_user_bad(void);
->> > >
->> > > -#define UA_KEEP(args...) args
->> > > -#define UA_DROP(args...)
->> > > -
->> > >  /**
->> > >   * get_guest: - Get a simple variable from guest space.
->> > >   * @x:   Variable to store result.
->> > >
->> > >
->> > > Do you think there is any way we could configure Eclair, with or without
->> > > a deviation, not to detect every use of UA_KEEP as violations?
->> >
->> > I narrowed this violation down to a different treatment of the named variadic
->> > argument. Since the argument 'args' cannot be parenthesized as a regular
->> > argument could, the invocations of the 'UA_KEEP' cannot comply with the rule.
->> > Therefore, as an extension to the rule, ECLAIR currently ignores the use of
->> > '__VA_ARGS__' in a macro definition, but treats 'args...' as a regular macro
->> > parameter name, hence the violation.
->> >
->> > To be clear, these two definitions have the same semantics, but one shows a
->> > violation and the other doesn't
->> >
->> > #define UA_KEEP(args...) args
->> > #define UA_KEEP(...) __VA_ARGS__
->> >
->> > I will update ECLAIR to treat the two forms as the same, so this patch can be
->> > dropped. If you think it's helpful I can send a patch spelling out this -
->> > arbitrary, but reasonable in my opinion - extension to the MISRA rule (which
->> > does not consider the implications related to the use of GNU exensions) so
->> > that contributors have a clear picture of the situation.
->> 
->> Thank you Nicola! Yes the patch would be appreciated :-)
-> 
-> So unless the proposed adjustment is considered better for code
-> readability patch 1 can be dropped, and patch 2 could be applied after
-> the ECLAIR change is in effect?
-> 
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Yes, exactly
+This returns the full contents of the node, having created the node path
+from the printf-style format string provided in its arguments.
 
-> How long will it take Nicola to get the ECLAIR change propagated into
-> the Gitlab runner?
-> 
-> Thanks, Roger.
+This will save various callers from having to do so for themselves (and
+from using xs_node_scanf() with the non-portable %ms format string.
 
-We're still fixing the false positive upstream, but it shouldn't take 
-too long so I think next week I should be able to refresh the runner.
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+[remove double newline and constify trace parameters]
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Anthony PERARD <anthony@xenproject.org>
+Cc: Paul Durrant <paul@xen.org>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+Cc: xen-devel@lists.xenproject.org
+---
+ hw/xen/trace-events             |  1 +
+ hw/xen/xen-bus-helper.c         | 22 ++++++++++++++++++++++
+ include/hw/xen/xen-bus-helper.h |  4 ++++
+ 3 files changed, 27 insertions(+)
 
+diff --git a/hw/xen/trace-events b/hw/xen/trace-events
+index a07fe41c6d3b..461dee7b239f 100644
+--- a/hw/xen/trace-events
++++ b/hw/xen/trace-events
+@@ -39,6 +39,7 @@ xs_node_create(const char *node) "%s"
+ xs_node_destroy(const char *node) "%s"
+ xs_node_vprintf(char *path, char *value) "%s %s"
+ xs_node_vscanf(char *path, char *value) "%s %s"
++xs_node_read(const char *path, const char *value) "%s %s"
+ xs_node_watch(char *path) "%s"
+ xs_node_unwatch(char *path) "%s"
+ 
+diff --git a/hw/xen/xen-bus-helper.c b/hw/xen/xen-bus-helper.c
+index b2b2cc9c5d5e..0fba7946c55e 100644
+--- a/hw/xen/xen-bus-helper.c
++++ b/hw/xen/xen-bus-helper.c
+@@ -142,6 +142,28 @@ int xs_node_scanf(struct qemu_xs_handle *h,  xs_transaction_t tid,
+     return rc;
+ }
+ 
++char *xs_node_read(struct qemu_xs_handle *h, xs_transaction_t tid,
++                   unsigned int *len, Error **errp,
++                   const char *node_fmt, ...)
++{
++    char *path, *value;
++    va_list ap;
++
++    va_start(ap, node_fmt);
++    path = g_strdup_vprintf(node_fmt, ap);
++    va_end(ap);
++
++    value = qemu_xen_xs_read(h, tid, path, len);
++    trace_xs_node_read(path, value);
++    if (!value) {
++        error_setg_errno(errp, errno, "failed to read from '%s'", path);
++    }
++
++    g_free(path);
++
++    return value;
++}
++
+ struct qemu_xs_watch *xs_node_watch(struct qemu_xs_handle *h, const char *node,
+                                     const char *key, xs_watch_fn fn,
+                                     void *opaque, Error **errp)
+diff --git a/include/hw/xen/xen-bus-helper.h b/include/hw/xen/xen-bus-helper.h
+index d8dcc2f0107d..6478d25be5e6 100644
+--- a/include/hw/xen/xen-bus-helper.h
++++ b/include/hw/xen/xen-bus-helper.h
+@@ -37,6 +37,10 @@ int xs_node_scanf(struct qemu_xs_handle *h,  xs_transaction_t tid,
+                   const char *node, const char *key, Error **errp,
+                   const char *fmt, ...)
+     G_GNUC_SCANF(6, 7);
++char *xs_node_read(struct qemu_xs_handle *h, xs_transaction_t tid,
++                   unsigned int *len, Error **errp,
++                   const char *node_fmt, ...)
++    G_GNUC_PRINTF(5, 6);
+ 
+ /* Watch node/key unless node is empty, in which case watch key */
+ struct qemu_xs_watch *xs_node_watch(struct qemu_xs_handle *h, const char *node,
 -- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+2.46.0
+
 
