@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3659C3DA4A
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 17:59:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.871665.1282685 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE06C0218C
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 17:59:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.871650.1282636 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBl-0004Dn-Jh; Tue, 14 Jan 2025 17:58:53 +0000
+	id 1tXlBi-0003Ll-PY; Tue, 14 Jan 2025 17:58:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 871665.1282685; Tue, 14 Jan 2025 17:58:53 +0000
+Received: by outflank-mailman (output) from mailman id 871650.1282636; Tue, 14 Jan 2025 17:58:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBl-00049t-8Z; Tue, 14 Jan 2025 17:58:53 +0000
-Received: by outflank-mailman (input) for mailman id 871665;
- Tue, 14 Jan 2025 17:56:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tXlBi-0003KG-KI; Tue, 14 Jan 2025 17:58:50 +0000
+Received: by outflank-mailman (input) for mailman id 871650;
+ Tue, 14 Jan 2025 17:53:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Qro=UG=redhat.com=vschneid@srs-se1.protection.inumbo.net>)
- id 1tXl9P-0003Ck-PF
- for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:56:27 +0000
+ id 1tXl6X-00036s-7P
+ for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:53:29 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dfa863b0-d2a0-11ef-a0e1-8be0dac302b0;
- Tue, 14 Jan 2025 18:56:26 +0100 (CET)
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 745ba2d5-d2a0-11ef-99a4-01e77a169b0f;
+ Tue, 14 Jan 2025 18:53:27 +0100 (CET)
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-663-ULU7yixpNjKqcQQdXKvPwg-1; Tue,
- 14 Jan 2025 12:56:22 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-118-EPzVHimUPgaLyL-8ZboJxw-1; Tue,
+ 14 Jan 2025 12:53:20 -0500
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 83AA919560B4; Tue, 14 Jan 2025 17:56:18 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4B02F19560B2; Tue, 14 Jan 2025 17:53:14 +0000 (UTC)
 Received: from vschneid-thinkpadt14sgen2i.remote.csb (unknown [10.39.192.55])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix)
- with ESMTPS id AE8F1195608A; Tue, 14 Jan 2025 17:55:53 +0000 (UTC)
+ with ESMTPS id 8C28819560B7; Tue, 14 Jan 2025 17:52:48 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dfa863b0-d2a0-11ef-a0e1-8be0dac302b0
+X-Inumbo-ID: 745ba2d5-d2a0-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1736877385;
+	s=mimecast20190719; t=1736877205;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=upN6bWUdwddcYtCDglXcedCwjwFydQLGp2NkOO9id+w=;
-	b=imD6509S0mofvP0Fye2E1b4akDZ9GKKr/j/BMp2D+xURbibnlr+wzwU9/tv22rtaFOfJiH
-	x0pK1Wpoal4UHgJekZl25NFSIbJUJGm4Pf6ZLuuR2st6znbg8kB4FkgRS6c1kIXSqfg+qq
-	LMOiT01QRv3VFvKoddzpC4Rf51xDKFc=
-X-MC-Unique: ULU7yixpNjKqcQQdXKvPwg-1
-X-Mimecast-MFC-AGG-ID: ULU7yixpNjKqcQQdXKvPwg
+	bh=fONXSYmqO3wil+TvuZe7xaKAIHytdle1lhLahiVcjdY=;
+	b=NDeWe24rEVylwuBHvK5ep6/9Tw2LGkVF82qmuXq2mBuIi/pQvFfKeT4nMR4BZqoO5hCKYt
+	oqcSFYcfBOlz9jGvEFvTLVDeiU6q7YTbCZc6dPtD3wlwZgkM7AFWtmYLkvIi6YapdM6SQO
+	U86H2e61eJNBKZdX3HgyTtwBeyDFQVQ=
+X-MC-Unique: EPzVHimUPgaLyL-8ZboJxw-1
+X-Mimecast-MFC-AGG-ID: EPzVHimUPgaLyL-8ZboJxw
 From: Valentin Schneider <vschneid@redhat.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
@@ -156,44 +156,84 @@ Cc: Josh Poimboeuf <jpoimboe@kernel.org>,
 	Luis Chamberlain <mcgrof@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: [PATCH v4 08/30] x86/idle: Mark x86_idle static call as __ro_after_init
-Date: Tue, 14 Jan 2025 18:51:21 +0100
-Message-ID: <20250114175143.81438-9-vschneid@redhat.com>
+Subject: [PATCH v4 01/30] objtool: Make validate_call() recognize indirect calls to pv_ops[]
+Date: Tue, 14 Jan 2025 18:51:14 +0100
+Message-ID: <20250114175143.81438-2-vschneid@redhat.com>
 In-Reply-To: <20250114175143.81438-1-vschneid@redhat.com>
 References: <20250114175143.81438-1-vschneid@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-Later commits will cause objtool to warn about static calls being used in
-.noinstr sections in order to safely defer instruction patching IPIs
-targeted at NOHZ_FULL CPUs.
+call_dest_name() does not get passed the file pointer of validate_call(),
+which means its invocation of insn_reloc() will always return NULL. Make it
+take a file pointer.
 
-x86_idle is updated in:
-o xen_set_default_idle() <- __init xen_arch_setup()
-o __init select_idle_routine()
+While at it, make sure call_dest_name() uses arch_dest_reloc_offset(),
+otherwise it gets the pv_ops[] offset wrong.
 
-IOW purely init context, and can thus be marked as __ro_after_init.
+Fabricating an intentional warning shows the change; previously:
 
-Reported-by: Josh Poimboeuf <jpoimboe@kernel.org>
+  vmlinux.o: warning: objtool: __flush_tlb_all_noinstr+0x4: call to {dynamic}() leaves .noinstr.text section
+
+now:
+
+  vmlinux.o: warning: objtool: __flush_tlb_all_noinstr+0x4: call to pv_ops[1]() leaves .noinstr.text section
+
 Signed-off-by: Valentin Schneider <vschneid@redhat.com>
+Acked-by: Josh Poimboeuf <jpoimboe@kernel.org>
 ---
- arch/x86/kernel/process.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/objtool/check.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
-index f63f8fd00a91f..85cd62f61d633 100644
---- a/arch/x86/kernel/process.c
-+++ b/arch/x86/kernel/process.c
-@@ -746,7 +746,7 @@ void __cpuidle default_idle(void)
- EXPORT_SYMBOL(default_idle);
- #endif
+diff --git a/tools/objtool/check.c b/tools/objtool/check.c
+index 76060da755b5c..b35763f05a548 100644
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -3448,7 +3448,7 @@ static inline bool func_uaccess_safe(struct symbol *func)
+ 	return false;
+ }
  
--DEFINE_STATIC_CALL_NULL(x86_idle, default_idle);
-+DEFINE_STATIC_CALL_NULL_RO(x86_idle, default_idle);
- 
- static bool x86_idle_set(void)
+-static inline const char *call_dest_name(struct instruction *insn)
++static inline const char *call_dest_name(struct objtool_file *file, struct instruction *insn)
  {
+ 	static char pvname[19];
+ 	struct reloc *reloc;
+@@ -3457,9 +3457,9 @@ static inline const char *call_dest_name(struct instruction *insn)
+ 	if (insn_call_dest(insn))
+ 		return insn_call_dest(insn)->name;
+ 
+-	reloc = insn_reloc(NULL, insn);
++	reloc = insn_reloc(file, insn);
+ 	if (reloc && !strcmp(reloc->sym->name, "pv_ops")) {
+-		idx = (reloc_addend(reloc) / sizeof(void *));
++		idx = (arch_dest_reloc_offset(reloc_addend(reloc)) / sizeof(void *));
+ 		snprintf(pvname, sizeof(pvname), "pv_ops[%d]", idx);
+ 		return pvname;
+ 	}
+@@ -3538,17 +3538,19 @@ static int validate_call(struct objtool_file *file,
+ {
+ 	if (state->noinstr && state->instr <= 0 &&
+ 	    !noinstr_call_dest(file, insn, insn_call_dest(insn))) {
+-		WARN_INSN(insn, "call to %s() leaves .noinstr.text section", call_dest_name(insn));
++		WARN_INSN(insn, "call to %s() leaves .noinstr.text section", call_dest_name(file, insn));
+ 		return 1;
+ 	}
+ 
+ 	if (state->uaccess && !func_uaccess_safe(insn_call_dest(insn))) {
+-		WARN_INSN(insn, "call to %s() with UACCESS enabled", call_dest_name(insn));
++		WARN_INSN(insn, "call to %s() with UACCESS enabled",
++			  call_dest_name(file, insn));
+ 		return 1;
+ 	}
+ 
+ 	if (state->df) {
+-		WARN_INSN(insn, "call to %s() with DF set", call_dest_name(insn));
++		WARN_INSN(insn, "call to %s() with DF set",
++			  call_dest_name(file, insn));
+ 		return 1;
+ 	}
+ 
 -- 
 2.43.0
 
