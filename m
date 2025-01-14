@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA93C0218A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3479CC02188
 	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 17:59:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.871657.1282653 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.871661.1282669 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBj-0003aw-Oc; Tue, 14 Jan 2025 17:58:51 +0000
+	id 1tXlBk-0003ti-Pm; Tue, 14 Jan 2025 17:58:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 871657.1282653; Tue, 14 Jan 2025 17:58:51 +0000
+Received: by outflank-mailman (output) from mailman id 871661.1282669; Tue, 14 Jan 2025 17:58:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBj-0003Yi-Fb; Tue, 14 Jan 2025 17:58:51 +0000
-Received: by outflank-mailman (input) for mailman id 871657;
- Tue, 14 Jan 2025 17:54:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tXlBk-0003r8-B2; Tue, 14 Jan 2025 17:58:52 +0000
+Received: by outflank-mailman (input) for mailman id 871661;
+ Tue, 14 Jan 2025 17:55:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Qro=UG=redhat.com=vschneid@srs-se1.protection.inumbo.net>)
- id 1tXl7m-00039h-5X
- for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:54:46 +0000
+ id 1tXl8Y-0003B8-Vo
+ for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:55:34 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a28a3177-d2a0-11ef-99a4-01e77a169b0f;
- Tue, 14 Jan 2025 18:54:44 +0100 (CET)
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bfed8535-d2a0-11ef-a0e1-8be0dac302b0;
+ Tue, 14 Jan 2025 18:55:34 +0100 (CET)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-217-NTn38snjMKqDKDXKnJ2usQ-1; Tue,
- 14 Jan 2025 12:54:39 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-346-TCnp728BMva_I5fFAbpK4A-1; Tue,
+ 14 Jan 2025 12:55:31 -0500
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C835019560B8; Tue, 14 Jan 2025 17:54:35 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id CC0371956053; Tue, 14 Jan 2025 17:55:27 +0000 (UTC)
 Received: from vschneid-thinkpadt14sgen2i.remote.csb (unknown [10.39.192.55])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix)
- with ESMTPS id 151C7195608A; Tue, 14 Jan 2025 17:54:09 +0000 (UTC)
+ with ESMTPS id 7D2BD195608A; Tue, 14 Jan 2025 17:55:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a28a3177-d2a0-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: bfed8535-d2a0-11ef-a0e1-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1736877283;
+	s=mimecast20190719; t=1736877332;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=sXsyWlIRHxUaG616jNoO6fTMagUzfNCGxp09271a4iI=;
-	b=NcxdypVyNu+XipMn7CzdxJzN56AyGlzt0+tFUPAeXIZ5gdSYyHTTEt+A7euttxd6FeGaLX
-	pni1Y3GrCi7XgWChDPuvNtYrACUZt2bTPzmb2DhkVSWY3hc1wYvZNyZ4U0K3RbwbpYtHpE
-	9QGoum5kzy/B7PYmktoX/w/yAfuVBCo=
-X-MC-Unique: NTn38snjMKqDKDXKnJ2usQ-1
-X-Mimecast-MFC-AGG-ID: NTn38snjMKqDKDXKnJ2usQ
+	bh=yW4eDMpnPb09nDVWkM9p9gFnBpCcE/XnyyFFoIpXh9k=;
+	b=aumpFdCNIUo3PjNZscbIrPbaTkMNK/4rnF5jsuCQYqc3tdpO3Q+KAARz/a5Kc0WR/subUa
+	FWKKcTiVvJNJlttB5rUtp+T7ygl9PIn991zURzcb2ywyAeLSJ3VYaow8ecLf8eaobZaW6D
+	gRP88zuo6BuAYhD9yweFo36E2Ub5WOU=
+X-MC-Unique: TCnp728BMva_I5fFAbpK4A-1
+X-Mimecast-MFC-AGG-ID: TCnp728BMva_I5fFAbpK4A
 From: Valentin Schneider <vschneid@redhat.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
@@ -84,7 +84,7 @@ To: linux-kernel@vger.kernel.org,
 	linux-kselftest@vger.kernel.org,
 	bpf@vger.kernel.org,
 	bcm-kernel-feedback-list@broadcom.com
-Cc: "Paul E . McKenney" <paulmck@kernel.org>,
+Cc: Josh Poimboeuf <jpoimboe@kernel.org>,
 	Juergen Gross <jgross@suse.com>,
 	Ajay Kaher <ajay.kaher@broadcom.com>,
 	Alexey Makhalov <alexey.amakhalov@broadcom.com>,
@@ -111,13 +111,13 @@ Cc: "Paul E . McKenney" <paulmck@kernel.org>,
 	Adrian Hunter <adrian.hunter@intel.com>,
 	"Liang, Kan" <kan.liang@linux.intel.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
 	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
 	Sean Christopherson <seanjc@google.com>,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	Andy Lutomirski <luto@kernel.org>,
 	Arnd Bergmann <arnd@arndb.de>,
 	Frederic Weisbecker <frederic@kernel.org>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
 	Jason Baron <jbaron@akamai.com>,
 	Steven Rostedt <rostedt@goodmis.org>,
 	Ard Biesheuvel <ardb@kernel.org>,
@@ -156,38 +156,64 @@ Cc: "Paul E . McKenney" <paulmck@kernel.org>,
 	Luis Chamberlain <mcgrof@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: [PATCH v4 04/30] rcutorture: Make TREE04 use CONFIG_RCU_DYNTICKS_TORTURE
-Date: Tue, 14 Jan 2025 18:51:17 +0100
-Message-ID: <20250114175143.81438-5-vschneid@redhat.com>
+Subject: [PATCH v4 06/30] static_call: Add read-only-after-init static calls
+Date: Tue, 14 Jan 2025 18:51:19 +0100
+Message-ID: <20250114175143.81438-7-vschneid@redhat.com>
 In-Reply-To: <20250114175143.81438-1-vschneid@redhat.com>
 References: <20250114175143.81438-1-vschneid@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-We now have an RCU_EXPERT config for testing small-sized RCU dynticks
-counter:  CONFIG_RCU_DYNTICKS_TORTURE.
+From: Josh Poimboeuf <jpoimboe@kernel.org>
 
-Modify scenario TREE04 to exercise to use this config in order to test a
-ridiculously small counter (2 bits).
+Deferring a code patching IPI is unsafe if the patched code is in a
+noinstr region.  In that case the text poke code must trigger an
+immediate IPI to all CPUs, which can rudely interrupt an isolated NO_HZ
+CPU running in userspace.
 
-Link: http://lore.kernel.org/r/4c2cb573-168f-4806-b1d9-164e8276e66a@paulmck-laptop
-Suggested-by: Paul E. McKenney <paulmck@kernel.org>
-Signed-off-by: Valentin Schneider <vschneid@redhat.com>
-Reviewed-by: Paul E. McKenney <paulmck@kernel.org>
+If a noinstr static call only needs to be patched during boot, its key
+can be made ro-after-init to ensure it will never be patched at runtime.
+
+Signed-off-by: Josh Poimboeuf <jpoimboe@kernel.org>
 ---
- tools/testing/selftests/rcutorture/configs/rcu/TREE04 | 1 +
- 1 file changed, 1 insertion(+)
+ include/linux/static_call.h | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/tools/testing/selftests/rcutorture/configs/rcu/TREE04 b/tools/testing/selftests/rcutorture/configs/rcu/TREE04
-index dc4985064b3ad..67caf4276bb01 100644
---- a/tools/testing/selftests/rcutorture/configs/rcu/TREE04
-+++ b/tools/testing/selftests/rcutorture/configs/rcu/TREE04
-@@ -16,3 +16,4 @@ CONFIG_DEBUG_OBJECTS_RCU_HEAD=n
- CONFIG_RCU_EXPERT=y
- CONFIG_RCU_EQS_DEBUG=y
- CONFIG_RCU_LAZY=y
-+CONFIG_RCU_DYNTICKS_TORTURE=y
+diff --git a/include/linux/static_call.h b/include/linux/static_call.h
+index 78a77a4ae0ea8..ea6ca57e2a829 100644
+--- a/include/linux/static_call.h
++++ b/include/linux/static_call.h
+@@ -192,6 +192,14 @@ extern long __static_call_return0(void);
+ 	};								\
+ 	ARCH_DEFINE_STATIC_CALL_TRAMP(name, _func)
+ 
++#define DEFINE_STATIC_CALL_RO(name, _func)				\
++	DECLARE_STATIC_CALL(name, _func);				\
++	struct static_call_key __ro_after_init STATIC_CALL_KEY(name) = {\
++		.func = _func,						\
++		.type = 1,						\
++	};								\
++	ARCH_DEFINE_STATIC_CALL_TRAMP(name, _func)
++
+ #define DEFINE_STATIC_CALL_NULL(name, _func)				\
+ 	DECLARE_STATIC_CALL(name, _func);				\
+ 	struct static_call_key STATIC_CALL_KEY(name) = {		\
+@@ -200,6 +208,14 @@ extern long __static_call_return0(void);
+ 	};								\
+ 	ARCH_DEFINE_STATIC_CALL_NULL_TRAMP(name)
+ 
++#define DEFINE_STATIC_CALL_NULL_RO(name, _func)				\
++	DECLARE_STATIC_CALL(name, _func);				\
++	struct static_call_key __ro_after_init STATIC_CALL_KEY(name) = {\
++		.func = NULL,						\
++		.type = 1,						\
++	};								\
++	ARCH_DEFINE_STATIC_CALL_NULL_TRAMP(name)
++
+ #define DEFINE_STATIC_CALL_RET0(name, _func)				\
+ 	DECLARE_STATIC_CALL(name, _func);				\
+ 	struct static_call_key STATIC_CALL_KEY(name) = {		\
 -- 
 2.43.0
 
