@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D997FC02183
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 18:05:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.871904.1282900 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA90E77188
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 18:11:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.871919.1282909 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlI3-00044m-SV; Tue, 14 Jan 2025 18:05:23 +0000
+	id 1tXlNw-000637-JO; Tue, 14 Jan 2025 18:11:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 871904.1282900; Tue, 14 Jan 2025 18:05:23 +0000
+Received: by outflank-mailman (output) from mailman id 871919.1282909; Tue, 14 Jan 2025 18:11:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlI3-00044d-Pq; Tue, 14 Jan 2025 18:05:23 +0000
-Received: by outflank-mailman (input) for mailman id 871904;
- Tue, 14 Jan 2025 18:05:22 +0000
+	id 1tXlNw-000630-Gw; Tue, 14 Jan 2025 18:11:28 +0000
+Received: by outflank-mailman (input) for mailman id 871919;
+ Tue, 14 Jan 2025 18:11:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Qro=UG=redhat.com=vschneid@srs-se1.protection.inumbo.net>)
- id 1tXlI2-0002j5-Ka
- for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 18:05:22 +0000
+ id 1tXlFP-0004pK-LX
+ for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 18:02:39 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1e6dd968-d2a2-11ef-a0e1-8be0dac302b0;
- Tue, 14 Jan 2025 19:05:21 +0100 (CET)
+ id bd7c1816-d2a1-11ef-a0e1-8be0dac302b0;
+ Tue, 14 Jan 2025 19:02:39 +0100 (CET)
 Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-660-8ogZguOiNnCawOG8JxolMw-1; Tue,
- 14 Jan 2025 13:05:15 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-125-79n9fhnhPJ65-rfaOeT4Rg-1; Tue,
+ 14 Jan 2025 13:02:34 -0500
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id F0F9F1956050; Tue, 14 Jan 2025 18:05:11 +0000 (UTC)
+ id 69EBE19560AA; Tue, 14 Jan 2025 18:02:31 +0000 (UTC)
 Received: from vschneid-thinkpadt14sgen2i.remote.csb (unknown [10.39.192.55])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix)
- with ESMTPS id DFA25195608A; Tue, 14 Jan 2025 18:04:49 +0000 (UTC)
+ with ESMTPS id 60C94195608A; Tue, 14 Jan 2025 18:02:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1e6dd968-d2a2-11ef-a0e1-8be0dac302b0
+X-Inumbo-ID: bd7c1816-d2a1-11ef-a0e1-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1736877920;
+	s=mimecast20190719; t=1736877758;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=hBnzPr+bF01eZ/FcGt3b6YBzs+ceSVKdSHsMFlRMR5E=;
-	b=T/Au40gFQxYBonlC4vGKMMsMz3qKg/AlgJUJ/VZiksPljqVurqVg1toKahXVWVejkSSFJL
-	9Rp9eGuHVJgw3kjR0WX4Vh7FW1lec6QFV86KFWOb3xNyFuQtEUY9bWL12T9y/YwZw0bdoR
-	f05IcEGSy05xRvh4+9egEa0aDcylGjk=
-X-MC-Unique: 8ogZguOiNnCawOG8JxolMw-1
-X-Mimecast-MFC-AGG-ID: 8ogZguOiNnCawOG8JxolMw
+	bh=vO7Dcae3S+ckJLBtr7bo/IIVyHg02LNyvWNatP3bxFA=;
+	b=J0SSJxTCxKRkZ/S/2VWkd1V2bL1JUlWAErlQkwH28yPYoEFvZ16g6s/lgaN8mWZZ6wJqZ1
+	qLIhPppnJftNW9e2g3SbTn492NKdm1a00pBM0KZKVU9ilfMUPrac3LCkJrWxmyhKXtIEoq
+	HxLlE5sNM6zOSACJ+SF7h/+T00QPb3s=
+X-MC-Unique: 79n9fhnhPJ65-rfaOeT4Rg-1
+X-Mimecast-MFC-AGG-ID: 79n9fhnhPJ65-rfaOeT4Rg
 From: Valentin Schneider <vschneid@redhat.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
@@ -156,71 +156,48 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Luis Chamberlain <mcgrof@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: [PATCH v4 30/30] context-tracking: Add a Kconfig to enable IPI deferral for NO_HZ_IDLE
-Date: Tue, 14 Jan 2025 18:51:43 +0100
-Message-ID: <20250114175143.81438-31-vschneid@redhat.com>
+Subject: [PATCH v4 23/30] context_tracking: Turn CT_STATE_* into bits
+Date: Tue, 14 Jan 2025 18:51:36 +0100
+Message-ID: <20250114175143.81438-24-vschneid@redhat.com>
 In-Reply-To: <20250114175143.81438-1-vschneid@redhat.com>
 References: <20250114175143.81438-1-vschneid@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-With NO_HZ_IDLE, we get CONTEXT_TRACKING_IDLE, so we get these
-transitions:
+A later patch will require to easily exclude CT_STATE_KERNEL from a genuine
+a ct->state read CT_STATE_KERNEL, which requires that value being non-zero
+and exclusive with the other CT_STATE_* values.
 
-  ct_idle_enter()
-    ct_kernel_exit()
-      ct_state_inc_clear_work()
-
-  ct_idle_exit()
-    ct_kernel_enter()
-      ct_work_flush()
-
-With just CONTEXT_TRACKING_IDLE, ct_state_inc_clear_work() is just
-ct_state_inc() and ct_work_flush() is a no-op. However, making them be
-functional as if under CONTEXT_TRACKING_WORK would allow NO_HZ_IDLE to
-leverage IPI deferral to keep idle CPUs idle longer.
-
-Having this enabled for NO_HZ_IDLE is a different argument than for having
-it for NO_HZ_FULL (power savings vs latency/performance), but the backing
-mechanism is identical.
-
-Add a default-no option to enable IPI deferral with NO_HZ_IDLE.
+This increases the size of the CT_STATE region of the ct->state variable by
+two bits.
 
 Signed-off-by: Valentin Schneider <vschneid@redhat.com>
 ---
- kernel/time/Kconfig | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ include/linux/context_tracking_state.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/kernel/time/Kconfig b/kernel/time/Kconfig
-index 7e8106a0d981f..c7398fe5382a0 100644
---- a/kernel/time/Kconfig
-+++ b/kernel/time/Kconfig
-@@ -183,9 +183,23 @@ config CONTEXT_TRACKING_USER_FORCE
+diff --git a/include/linux/context_tracking_state.h b/include/linux/context_tracking_state.h
+index 0b81248aa03e2..eb2149b20baef 100644
+--- a/include/linux/context_tracking_state.h
++++ b/include/linux/context_tracking_state.h
+@@ -11,11 +11,11 @@
  
- config CONTEXT_TRACKING_WORK
- 	bool
--	depends on HAVE_CONTEXT_TRACKING_WORK && CONTEXT_TRACKING_USER
-+	depends on HAVE_CONTEXT_TRACKING_WORK && (CONTEXT_TRACKING_USER || CONTEXT_TRACKING_WORK_IDLE)
- 	default y
+ enum ctx_state {
+ 	CT_STATE_DISABLED	= -1,	/* returned by ct_state() if unknown */
+-	CT_STATE_KERNEL		= 0,
+-	CT_STATE_IDLE		= 1,
+-	CT_STATE_USER		= 2,
+-	CT_STATE_GUEST		= 3,
+-	CT_STATE_MAX		= 4,
++	CT_STATE_KERNEL		= 1,
++	CT_STATE_IDLE		= 2,
++	CT_STATE_USER		= 4,
++	CT_STATE_GUEST		= 8,
++	CT_STATE_MAX		= 9,
+ };
  
-+config CONTEXT_TRACKING_WORK_IDLE
-+       bool
-+       depends on HAVE_CONTEXT_TRACKING_WORK && CONTEXT_TRACKING_IDLE && !CONTEXT_TRACKING_USER
-+       default n
-+       help
-+	 This option enables deferral of some IPIs when they are targeted at CPUs
-+	 that are idle. This can help keep CPUs idle longer, but induces some
-+	 extra overhead to idle <-> kernel transitions and to IPI sending.
-+
-+	 Say Y if the power improvements are worth more to you than the added
-+	 overheads.
-+
-+	 Say N otherwise.
-+
- config NO_HZ
- 	bool "Old Idle dynticks config"
- 	help
+ struct context_tracking {
 -- 
 2.43.0
 
