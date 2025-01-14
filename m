@@ -4,33 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59DCFC02183
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 18:17:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.871941.1282929 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D11BE77188
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 18:29:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.871967.1282940 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlTg-00009S-E8; Tue, 14 Jan 2025 18:17:24 +0000
+	id 1tXleo-0005yS-JO; Tue, 14 Jan 2025 18:28:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 871941.1282929; Tue, 14 Jan 2025 18:17:24 +0000
+Received: by outflank-mailman (output) from mailman id 871967.1282940; Tue, 14 Jan 2025 18:28:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlTg-00009L-Bb; Tue, 14 Jan 2025 18:17:24 +0000
-Received: by outflank-mailman (input) for mailman id 871941;
- Tue, 14 Jan 2025 18:17:23 +0000
+	id 1tXleo-0005yL-GW; Tue, 14 Jan 2025 18:28:54 +0000
+Received: by outflank-mailman (input) for mailman id 871967;
+ Tue, 14 Jan 2025 18:28:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yccS=UG=google.com=jannh@srs-se1.protection.inumbo.net>)
- id 1tXlTf-00009F-Jb
- for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 18:17:23 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=5Qro=UG=redhat.com=vschneid@srs-se1.protection.inumbo.net>)
+ id 1tXlFp-0007Qx-Hd
+ for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 18:03:05 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cbf8ccbe-d2a3-11ef-99a4-01e77a169b0f;
- Tue, 14 Jan 2025 19:17:21 +0100 (CET)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e638e1b4so8517a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 14 Jan 2025 10:17:21 -0800 (PST)
+ id cc15048a-d2a1-11ef-99a4-01e77a169b0f;
+ Tue, 14 Jan 2025 19:03:03 +0100 (CET)
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-557-hmcuI36TM9u3E6tRKSsWWQ-1; Tue,
+ 14 Jan 2025 13:02:57 -0500
+Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id DD5C41955DD7; Tue, 14 Jan 2025 18:02:53 +0000 (UTC)
+Received: from vschneid-thinkpadt14sgen2i.remote.csb (unknown [10.39.192.55])
+ by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix)
+ with ESMTPS id DE7CA19560AB; Tue, 14 Jan 2025 18:02:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,117 +54,463 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cbf8ccbe-d2a3-11ef-99a4-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1736878641; x=1737483441; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=I0aYHuk99JA9dU0puEhTqa+Ivu5XtOv7dOMzqH0MLLU=;
-        b=BIde5BjQRjl9MFLHci8sFoYtjcxRrQegPbbNYqo5v16Coo4X0ZV4wC8vOjlo+guQUP
-         HAycaWUUlUWUEYBrl48xF4gdaPOOpytha8ipxhEFuDTDllm/m9ZlAppy+PjQfw/yM2nU
-         9K2/qQmIUWKlqjWDytYCmuPT1IE9fH/mCfRnjykR/BSv9+lFrkbCokDeCXA8RQ7Qy5PS
-         acjmEQbYKDvt7n1AItp8XQhhEI+Pg4qWwPND0z3NZ0edup9YMBTKJXzpfqR+eVdniq6e
-         HyTXD7iA36V8wc2NEA3BSz0RjfLreNvIccQ9sLorM/2QovxxEkieiNTfBeQ095cDgMWf
-         Dv0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736878641; x=1737483441;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=I0aYHuk99JA9dU0puEhTqa+Ivu5XtOv7dOMzqH0MLLU=;
-        b=T4Qm3SZ2/BdVJ8MGozqTFrZsG1FkhFyWlHQ2UWL0SkbsPS6UtcvghoQlmfm5x2iUzD
-         s0CWPz/wYCXGBBApqWST8GW7M7a1fp18hmakilfS1fCyNkDVyMJ5HE1XtJu+Xn9ix+bK
-         f8oLipoGEIEsN3cQPdImXZAsW0+ricFEYWCTWcQvh5tEAmEE8rtolmxxq3++dJgQAdVm
-         2gQ5UUojpvLr87vueyW15EOPQHYBhC87sOs/GMuAy3kJlzlLnbaF+VpWTmiy/i/fnEDw
-         SE5ZbD2QoVWXAass9S31YaJRS/gePD/i90JneL9w8tpTIN9sYDh09lBj6VAmxAFmv5RQ
-         hyOQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXPraFji+G0QpKtO77paZ+pYTgNxMxWwCV3idYOGhNn+jmbZvTHPoeG/cs3JRwZeRUkygpBsZ0xuu0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzN04KlMM+DyoteHkKchstE6ICXg5zbozIow8T/E4UaVBQwjRlU
-	pK24t+oSAwdEwwuU+VSjhr5tA0lD+HtylJQ3ERsPr6/+NkzH5S8jVE5WeRtWZR+AltFk/1CvB9p
-	Yo5N7F30/uwJeaJoxMoU3kfuOIF/OE6XsZ7Zi
-X-Gm-Gg: ASbGncua5UqDH5LTtar/juhw3uMJE+PAjKuTfN/3iy9EOALljh2+K2dUqqwm0O1ffjL
-	4E4K7D0Xe2kI+6wwywv+NtfVUZI9WNtt3qWuj458M/BOjUUd6GL+G5Mc9x/Xfxbh0tg==
-X-Google-Smtp-Source: AGHT+IFOWOuSvDhgzEqoKb2CNkVmA/sXHofQ9hZDfWF+l4vbbQk0RN2k51cQSZIijLzKAw1RUyxlH5Nb9O1wedqOjko=
-X-Received: by 2002:a50:d4d2:0:b0:5d1:22e1:7458 with SMTP id
- 4fb4d7f45d1cf-5d9f695dda7mr124694a12.4.1736878640478; Tue, 14 Jan 2025
- 10:17:20 -0800 (PST)
-MIME-Version: 1.0
-References: <20250114175143.81438-1-vschneid@redhat.com> <20250114175143.81438-30-vschneid@redhat.com>
-In-Reply-To: <20250114175143.81438-30-vschneid@redhat.com>
-From: Jann Horn <jannh@google.com>
-Date: Tue, 14 Jan 2025 19:16:44 +0100
-X-Gm-Features: AbW1kvY7dNxOnvBqE7JSPz560QoJfBjiwfsZgS18MpZMQ07ZRC1TBr6Zwl5A-60
-Message-ID: <CAG48ez1Mh+DOy0ysOo7Qioxh1W7xWQyK9CLGNU9TGOsLXbg=gQ@mail.gmail.com>
-Subject: Re: [PATCH v4 29/30] x86/mm, mm/vmalloc: Defer flush_tlb_kernel_range()
- targeting NOHZ_FULL CPUs
-To: Valentin Schneider <vschneid@redhat.com>
-Cc: linux-kernel@vger.kernel.org, x86@kernel.org, 
-	virtualization@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	loongarch@lists.linux.dev, linux-riscv@lists.infradead.org, 
-	linux-perf-users@vger.kernel.org, xen-devel@lists.xenproject.org, 
-	kvm@vger.kernel.org, linux-arch@vger.kernel.org, rcu@vger.kernel.org, 
-	linux-hardening@vger.kernel.org, linux-mm@kvack.org, 
-	linux-kselftest@vger.kernel.org, bpf@vger.kernel.org, 
-	bcm-kernel-feedback-list@broadcom.com, Juergen Gross <jgross@suse.com>, 
-	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.amakhalov@broadcom.com>, 
-	Russell King <linux@armlinux.org.uk>, Catalin Marinas <catalin.marinas@arm.com>, 
-	Will Deacon <will@kernel.org>, Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, 
-	Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
-	Albert Ou <aou@eecs.berkeley.edu>, Thomas Gleixner <tglx@linutronix.de>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, 
-	Peter Zijlstra <peterz@infradead.org>, Arnaldo Carvalho de Melo <acme@kernel.org>, 
-	Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, 
-	Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, 
-	"Liang, Kan" <kan.liang@linux.intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-	Josh Poimboeuf <jpoimboe@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, 
-	Sean Christopherson <seanjc@google.com>, Paolo Bonzini <pbonzini@redhat.com>, 
-	Andy Lutomirski <luto@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Frederic Weisbecker <frederic@kernel.org>, "Paul E. McKenney" <paulmck@kernel.org>, 
-	Jason Baron <jbaron@akamai.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Ard Biesheuvel <ardb@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
-	Joel Fernandes <joel@joelfernandes.org>, Josh Triplett <josh@joshtriplett.org>, 
-	Boqun Feng <boqun.feng@gmail.com>, Uladzislau Rezki <urezki@gmail.com>, 
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan <jiangshanlai@gmail.com>, 
-	Zqiang <qiang.zhang1211@gmail.com>, Juri Lelli <juri.lelli@redhat.com>, 
-	Clark Williams <williams@redhat.com>, Yair Podemsky <ypodemsk@redhat.com>, 
-	Tomas Glozar <tglozar@redhat.com>, Vincent Guittot <vincent.guittot@linaro.org>, 
-	Dietmar Eggemann <dietmar.eggemann@arm.com>, Ben Segall <bsegall@google.com>, 
-	Mel Gorman <mgorman@suse.de>, Kees Cook <kees@kernel.org>, 
-	Andrew Morton <akpm@linux-foundation.org>, Christoph Hellwig <hch@infradead.org>, 
-	Shuah Khan <shuah@kernel.org>, Sami Tolvanen <samitolvanen@google.com>, 
-	Miguel Ojeda <ojeda@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
-	"Mike Rapoport (Microsoft)" <rppt@kernel.org>, Samuel Holland <samuel.holland@sifive.com>, Rong Xu <xur@google.com>, 
-	Nicolas Saenz Julienne <nsaenzju@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>, 
-	Yosry Ahmed <yosryahmed@google.com>, 
-	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>, 
-	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>, Jinghao Jia <jinghao7@illinois.edu>, 
-	Luis Chamberlain <mcgrof@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, 
+X-Inumbo-ID: cc15048a-d2a1-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1736877782;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cj0SVgwm0Gb22+xO5luDoQDcDRqoe4OsVd+MUCyw+y0=;
+	b=VbTwmz+HwkNgRJRkL9nt5UDlB0xEJzt5kNipIfJm7CLiLtJHrz5FaNY59sL8cbUqCyiNeo
+	UQYXQeGqBz8m0UxtSkPXJje/djcsKsnm7c2JjPoGhI2bQXXxmz+bNCvy3aNAa9et53HHnb
+	rBk9uxVSFFcVVcs2lcIWTe/EoZ0iEA0=
+X-MC-Unique: hmcuI36TM9u3E6tRKSsWWQ-1
+X-Mimecast-MFC-AGG-ID: hmcuI36TM9u3E6tRKSsWWQ
+From: Valentin Schneider <vschneid@redhat.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	virtualization@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	loongarch@lists.linux.dev,
+	linux-riscv@lists.infradead.org,
+	linux-perf-users@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	kvm@vger.kernel.org,
+	linux-arch@vger.kernel.org,
+	rcu@vger.kernel.org,
+	linux-hardening@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-kselftest@vger.kernel.org,
+	bpf@vger.kernel.org,
+	bcm-kernel-feedback-list@broadcom.com
+Cc: Nicolas Saenz Julienne <nsaenzju@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
+	Ajay Kaher <ajay.kaher@broadcom.com>,
+	Alexey Makhalov <alexey.amakhalov@broadcom.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	WANG Xuerui <kernel@xen0n.name>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	"Liang, Kan" <kan.liang@linux.intel.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Frederic Weisbecker <frederic@kernel.org>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Jason Baron <jbaron@akamai.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
+	Joel Fernandes <joel@joelfernandes.org>,
+	Josh Triplett <josh@joshtriplett.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Uladzislau Rezki <urezki@gmail.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Zqiang <qiang.zhang1211@gmail.com>,
+	Juri Lelli <juri.lelli@redhat.com>,
+	Clark Williams <williams@redhat.com>,
+	Yair Podemsky <ypodemsk@redhat.com>,
+	Tomas Glozar <tglozar@redhat.com>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	Dietmar Eggemann <dietmar.eggemann@arm.com>,
+	Ben Segall <bsegall@google.com>,
+	Mel Gorman <mgorman@suse.de>,
+	Kees Cook <kees@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Christoph Hellwig <hch@infradead.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>,
+	"Mike Rapoport (Microsoft)" <rppt@kernel.org>,
+	Samuel Holland <samuel.holland@sifive.com>,
+	Rong Xu <xur@google.com>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Yosry Ahmed <yosryahmed@google.com>,
+	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
+	Jinghao Jia <jinghao7@illinois.edu>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
 	Tiezhu Yang <yangtiezhu@loongson.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: [PATCH v4 24/30] context-tracking: Introduce work deferral infrastructure
+Date: Tue, 14 Jan 2025 18:51:37 +0100
+Message-ID: <20250114175143.81438-25-vschneid@redhat.com>
+In-Reply-To: <20250114175143.81438-1-vschneid@redhat.com>
+References: <20250114175143.81438-1-vschneid@redhat.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-On Tue, Jan 14, 2025 at 6:51=E2=80=AFPM Valentin Schneider <vschneid@redhat=
-.com> wrote:
-> vunmap()'s issued from housekeeping CPUs are a relatively common source o=
-f
-> interference for isolated NOHZ_FULL CPUs, as they are hit by the
-> flush_tlb_kernel_range() IPIs.
->
-> Given that CPUs executing in userspace do not access data in the vmalloc
-> range, these IPIs could be deferred until their next kernel entry.
->
-> Deferral vs early entry danger zone
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> This requires a guarantee that nothing in the vmalloc range can be vunmap=
-'d
-> and then accessed in early entry code.
+smp_call_function() & friends have the unfortunate habit of sending IPIs to
+isolated, NOHZ_FULL, in-userspace CPUs, as they blindly target all online
+CPUs.
 
-In other words, it needs a guarantee that no vmalloc allocations that
-have been created in the vmalloc region while the CPU was idle can
-then be accessed during early entry, right?
+Some callsites can be bent into doing the right, such as done by commit:
+
+  cc9e303c91f5 ("x86/cpu: Disable frequency requests via aperfmperf IPI for nohz_full CPUs")
+
+Unfortunately, not all SMP callbacks can be omitted in this
+fashion. However, some of them only affect execution in kernelspace, which
+means they don't have to be executed *immediately* if the target CPU is in
+userspace: stashing the callback and executing it upon the next kernel entry
+would suffice. x86 kernel instruction patching or kernel TLB invalidation
+are prime examples of it.
+
+Reduce the RCU dynticks counter width to free up some bits to be used as a
+deferred callback bitmask. Add some build-time checks to validate that
+setup.
+
+Presence of CT_STATE_KERNEL in the ct_state prevents queuing deferred work.
+
+Later commits introduce the bit:callback mappings.
+
+Link: https://lore.kernel.org/all/20210929151723.162004989@infradead.org/
+Signed-off-by: Nicolas Saenz Julienne <nsaenzju@redhat.com>
+Signed-off-by: Valentin Schneider <vschneid@redhat.com>
+---
+ arch/Kconfig                                 |  9 +++
+ arch/x86/Kconfig                             |  1 +
+ arch/x86/include/asm/context_tracking_work.h | 16 +++++
+ include/linux/context_tracking.h             | 21 +++++++
+ include/linux/context_tracking_state.h       | 30 ++++++---
+ include/linux/context_tracking_work.h        | 26 ++++++++
+ kernel/context_tracking.c                    | 66 +++++++++++++++++++-
+ kernel/time/Kconfig                          |  5 ++
+ 8 files changed, 162 insertions(+), 12 deletions(-)
+ create mode 100644 arch/x86/include/asm/context_tracking_work.h
+ create mode 100644 include/linux/context_tracking_work.h
+
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 6682b2a53e342..b637f20f0fc68 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -952,6 +952,15 @@ config HAVE_CONTEXT_TRACKING_USER_OFFSTACK
+ 	  - No use of instrumentation, unless instrumentation_begin() got
+ 	    called.
+ 
++config HAVE_CONTEXT_TRACKING_WORK
++	bool
++	help
++	  Architecture supports deferring work while not in kernel context.
++	  This is especially useful on setups with isolated CPUs that might
++	  want to avoid being interrupted to perform housekeeping tasks (for
++	  ex. TLB invalidation or icache invalidation). The housekeeping
++	  operations are performed upon re-entering the kernel.
++
+ config HAVE_TIF_NOHZ
+ 	bool
+ 	help
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 9d7bd0ae48c42..ca5dd4cfc354b 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -216,6 +216,7 @@ config X86
+ 	select HAVE_CMPXCHG_LOCAL
+ 	select HAVE_CONTEXT_TRACKING_USER		if X86_64
+ 	select HAVE_CONTEXT_TRACKING_USER_OFFSTACK	if HAVE_CONTEXT_TRACKING_USER
++	select HAVE_CONTEXT_TRACKING_WORK		if X86_64
+ 	select HAVE_C_RECORDMCOUNT
+ 	select HAVE_OBJTOOL_MCOUNT		if HAVE_OBJTOOL
+ 	select HAVE_OBJTOOL_NOP_MCOUNT		if HAVE_OBJTOOL_MCOUNT
+diff --git a/arch/x86/include/asm/context_tracking_work.h b/arch/x86/include/asm/context_tracking_work.h
+new file mode 100644
+index 0000000000000..5f3b2d0977235
+--- /dev/null
++++ b/arch/x86/include/asm/context_tracking_work.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _ASM_X86_CONTEXT_TRACKING_WORK_H
++#define _ASM_X86_CONTEXT_TRACKING_WORK_H
++
++static __always_inline void arch_context_tracking_work(enum ct_work work)
++{
++	switch (work) {
++	case CT_WORK_n:
++		// Do work...
++		break;
++	case CT_WORK_MAX:
++		WARN_ON_ONCE(true);
++	}
++}
++
++#endif
+diff --git a/include/linux/context_tracking.h b/include/linux/context_tracking.h
+index af9fe87a09225..0b0faa040e9b5 100644
+--- a/include/linux/context_tracking.h
++++ b/include/linux/context_tracking.h
+@@ -5,6 +5,7 @@
+ #include <linux/sched.h>
+ #include <linux/vtime.h>
+ #include <linux/context_tracking_state.h>
++#include <linux/context_tracking_work.h>
+ #include <linux/instrumentation.h>
+ 
+ #include <asm/ptrace.h>
+@@ -137,6 +138,26 @@ static __always_inline unsigned long ct_state_inc(int incby)
+ 	return raw_atomic_add_return(incby, this_cpu_ptr(&context_tracking.state));
+ }
+ 
++#ifdef CONFIG_CONTEXT_TRACKING_WORK
++static __always_inline unsigned long ct_state_inc_clear_work(int incby)
++{
++	struct context_tracking *ct = this_cpu_ptr(&context_tracking);
++	unsigned long new, old, state;
++
++	state = arch_atomic_read(&ct->state);
++	do {
++		old = state;
++		new = old & ~CT_WORK_MASK;
++		new += incby;
++		state = arch_atomic_cmpxchg(&ct->state, old, new);
++	} while (old != state);
++
++	return new;
++}
++#else
++#define ct_state_inc_clear_work(x) ct_state_inc(x)
++#endif
++
+ static __always_inline bool warn_rcu_enter(void)
+ {
+ 	bool ret = false;
+diff --git a/include/linux/context_tracking_state.h b/include/linux/context_tracking_state.h
+index eb2149b20baef..b6ddfccba9714 100644
+--- a/include/linux/context_tracking_state.h
++++ b/include/linux/context_tracking_state.h
+@@ -5,6 +5,7 @@
+ #include <linux/percpu.h>
+ #include <linux/static_key.h>
+ #include <linux/context_tracking_irq.h>
++#include <linux/context_tracking_work.h>
+ 
+ /* Offset to allow distinguishing irq vs. task-based idle entry/exit. */
+ #define CT_NESTING_IRQ_NONIDLE	((LONG_MAX / 2) + 1)
+@@ -39,16 +40,19 @@ struct context_tracking {
+ };
+ 
+ /*
+- * We cram two different things within the same atomic variable:
++ * We cram up to three different things within the same atomic variable:
+  *
+- *                     CT_RCU_WATCHING_START  CT_STATE_START
+- *                                |                |
+- *                                v                v
+- *     MSB [ RCU watching counter ][ context_state ] LSB
+- *         ^                       ^
+- *         |                       |
+- * CT_RCU_WATCHING_END        CT_STATE_END
++ *                     CT_RCU_WATCHING_START                  CT_STATE_START
++ *                                |         CT_WORK_START          |
++ *                                |               |                |
++ *                                v               v                v
++ *     MSB [ RCU watching counter ][ context work ][ context_state ] LSB
++ *         ^                       ^               ^
++ *         |                       |               |
++ *         |                  CT_WORK_END          |
++ * CT_RCU_WATCHING_END                        CT_STATE_END
+  *
++ * The [ context work ] region spans 0 bits if CONFIG_CONTEXT_WORK=n
+  * Bits are used from the LSB upwards, so unused bits (if any) will always be in
+  * upper bits of the variable.
+  */
+@@ -59,18 +63,24 @@ struct context_tracking {
+ #define CT_STATE_START 0
+ #define CT_STATE_END   (CT_STATE_START + CT_STATE_WIDTH - 1)
+ 
+-#define CT_RCU_WATCHING_MAX_WIDTH (CT_SIZE - CT_STATE_WIDTH)
++#define CT_WORK_WIDTH (IS_ENABLED(CONFIG_CONTEXT_TRACKING_WORK) ? CT_WORK_MAX_OFFSET : 0)
++#define	CT_WORK_START (CT_STATE_END + 1)
++#define CT_WORK_END   (CT_WORK_START + CT_WORK_WIDTH - 1)
++
++#define CT_RCU_WATCHING_MAX_WIDTH (CT_SIZE - CT_WORK_WIDTH - CT_STATE_WIDTH)
+ #define CT_RCU_WATCHING_WIDTH     (IS_ENABLED(CONFIG_RCU_DYNTICKS_TORTURE) ? 2 : CT_RCU_WATCHING_MAX_WIDTH)
+-#define CT_RCU_WATCHING_START     (CT_STATE_END + 1)
++#define CT_RCU_WATCHING_START     (CT_WORK_END + 1)
+ #define CT_RCU_WATCHING_END       (CT_RCU_WATCHING_START + CT_RCU_WATCHING_WIDTH - 1)
+ #define CT_RCU_WATCHING           BIT(CT_RCU_WATCHING_START)
+ 
+ #define CT_STATE_MASK        GENMASK(CT_STATE_END,        CT_STATE_START)
++#define CT_WORK_MASK         GENMASK(CT_WORK_END,         CT_WORK_START)
+ #define CT_RCU_WATCHING_MASK GENMASK(CT_RCU_WATCHING_END, CT_RCU_WATCHING_START)
+ 
+ #define CT_UNUSED_WIDTH (CT_RCU_WATCHING_MAX_WIDTH - CT_RCU_WATCHING_WIDTH)
+ 
+ static_assert(CT_STATE_WIDTH        +
++	      CT_WORK_WIDTH         +
+ 	      CT_RCU_WATCHING_WIDTH +
+ 	      CT_UNUSED_WIDTH       ==
+ 	      CT_SIZE);
+diff --git a/include/linux/context_tracking_work.h b/include/linux/context_tracking_work.h
+new file mode 100644
+index 0000000000000..c68245f8d77c5
+--- /dev/null
++++ b/include/linux/context_tracking_work.h
+@@ -0,0 +1,26 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _LINUX_CONTEXT_TRACKING_WORK_H
++#define _LINUX_CONTEXT_TRACKING_WORK_H
++
++#include <linux/bitops.h>
++
++enum {
++	CT_WORK_n_OFFSET,
++	CT_WORK_MAX_OFFSET
++};
++
++enum ct_work {
++	CT_WORK_n        = BIT(CT_WORK_n_OFFSET),
++	CT_WORK_MAX      = BIT(CT_WORK_MAX_OFFSET)
++};
++
++#include <asm/context_tracking_work.h>
++
++#ifdef CONFIG_CONTEXT_TRACKING_WORK
++extern bool ct_set_cpu_work(unsigned int cpu, enum ct_work work);
++#else
++static inline bool
++ct_set_cpu_work(unsigned int cpu, unsigned int work) { return false; }
++#endif
++
++#endif
+diff --git a/kernel/context_tracking.c b/kernel/context_tracking.c
+index 15f10ddec8cbe..f7019c12269f9 100644
+--- a/kernel/context_tracking.c
++++ b/kernel/context_tracking.c
+@@ -72,6 +72,67 @@ static __always_inline void rcu_task_trace_heavyweight_exit(void)
+ #endif /* #ifdef CONFIG_TASKS_TRACE_RCU */
+ }
+ 
++#ifdef CONFIG_CONTEXT_TRACKING_WORK
++static noinstr void ct_work_flush(unsigned long seq)
++{
++	int bit;
++
++	seq = (seq & CT_WORK_MASK) >> CT_WORK_START;
++
++	/*
++	 * arch_context_tracking_work() must be noinstr, non-blocking,
++	 * and NMI safe.
++	 */
++	for_each_set_bit(bit, &seq, CT_WORK_MAX)
++		arch_context_tracking_work(BIT(bit));
++}
++
++/**
++ * ct_set_cpu_work - set work to be run at next kernel context entry
++ *
++ * If @cpu is not currently executing in kernelspace, it will execute the
++ * callback mapped to @work (see arch_context_tracking_work()) at its next
++ * transition to CT_KERNEL_STATE.
++ *
++ * If it is already in CT_KERNEL_STATE, this will be a no-op.
++ */
++bool ct_set_cpu_work(unsigned int cpu, enum ct_work work)
++{
++	struct context_tracking *ct = per_cpu_ptr(&context_tracking, cpu);
++	unsigned int old;
++	bool ret = false;
++
++	if (!ct->active)
++		return false;
++
++	preempt_disable();
++
++	old = atomic_read(&ct->state);
++
++	/*
++	 * We only want to set the work bit if the target CPU is not in
++	 * kernelspace, so we clear the KERNEL bit here and let the cmpxchg do
++	 * the check for us - the state could change between the atomic_read() and
++	 * the cmpxchg().
++	 */
++	old &= ~CT_STATE_KERNEL;
++	/*
++	 * Try setting the work until either
++	 * - the target CPU has entered kernelspace
++	 * - the work has been set
++	 */
++	do {
++		ret = atomic_try_cmpxchg(&ct->state, &old, old | (work << CT_WORK_START));
++	} while (!ret && ((old & CT_STATE_MASK) != CT_STATE_KERNEL));
++
++	preempt_enable();
++	return ret;
++}
++#else
++static __always_inline void ct_work_flush(unsigned long work) { }
++static __always_inline void ct_work_clear(struct context_tracking *ct) { }
++#endif
++
+ /*
+  * Record entry into an extended quiescent state.  This is only to be
+  * called when not already in an extended quiescent state, that is,
+@@ -88,7 +149,7 @@ static noinstr void ct_kernel_exit_state(int offset)
+ 	 * next idle sojourn.
+ 	 */
+ 	rcu_task_trace_heavyweight_enter();  // Before CT state update!
+-	seq = ct_state_inc(offset);
++	seq = ct_state_inc_clear_work(offset);
+ 	// RCU is no longer watching.  Better be in extended quiescent state!
+ 	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && (seq & CT_RCU_WATCHING));
+ }
+@@ -100,7 +161,7 @@ static noinstr void ct_kernel_exit_state(int offset)
+  */
+ static noinstr void ct_kernel_enter_state(int offset)
+ {
+-	int seq;
++	unsigned long seq;
+ 
+ 	/*
+ 	 * CPUs seeing atomic_add_return() must see prior idle sojourns,
+@@ -108,6 +169,7 @@ static noinstr void ct_kernel_enter_state(int offset)
+ 	 * critical section.
+ 	 */
+ 	seq = ct_state_inc(offset);
++	ct_work_flush(seq);
+ 	// RCU is now watching.  Better not be in an extended quiescent state!
+ 	rcu_task_trace_heavyweight_exit();  // After CT state update!
+ 	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !(seq & CT_RCU_WATCHING));
+diff --git a/kernel/time/Kconfig b/kernel/time/Kconfig
+index b0b97a60aaa6f..7e8106a0d981f 100644
+--- a/kernel/time/Kconfig
++++ b/kernel/time/Kconfig
+@@ -181,6 +181,11 @@ config CONTEXT_TRACKING_USER_FORCE
+ 	  Say N otherwise, this option brings an overhead that you
+ 	  don't want in production.
+ 
++config CONTEXT_TRACKING_WORK
++	bool
++	depends on HAVE_CONTEXT_TRACKING_WORK && CONTEXT_TRACKING_USER
++	default y
++
+ config NO_HZ
+ 	bool "Old Idle dynticks config"
+ 	help
+-- 
+2.43.0
+
 
