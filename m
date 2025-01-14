@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE9E2C02189
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3659C3DA4A
 	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 17:59:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.871659.1282660 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.871665.1282685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBk-0003k6-5H; Tue, 14 Jan 2025 17:58:52 +0000
+	id 1tXlBl-0004Dn-Jh; Tue, 14 Jan 2025 17:58:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 871659.1282660; Tue, 14 Jan 2025 17:58:52 +0000
+Received: by outflank-mailman (output) from mailman id 871665.1282685; Tue, 14 Jan 2025 17:58:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBj-0003hI-S6; Tue, 14 Jan 2025 17:58:51 +0000
-Received: by outflank-mailman (input) for mailman id 871659;
- Tue, 14 Jan 2025 17:55:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tXlBl-00049t-8Z; Tue, 14 Jan 2025 17:58:53 +0000
+Received: by outflank-mailman (input) for mailman id 871665;
+ Tue, 14 Jan 2025 17:56:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Qro=UG=redhat.com=vschneid@srs-se1.protection.inumbo.net>)
- id 1tXl8D-00039h-0g
- for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:55:13 +0000
+ id 1tXl9P-0003Ck-PF
+ for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:56:27 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b2a2abec-d2a0-11ef-99a4-01e77a169b0f;
- Tue, 14 Jan 2025 18:55:11 +0100 (CET)
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dfa863b0-d2a0-11ef-a0e1-8be0dac302b0;
+ Tue, 14 Jan 2025 18:56:26 +0100 (CET)
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-526-rasDThuXPT-KkBXykuo6Cg-1; Tue,
- 14 Jan 2025 12:55:06 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-663-ULU7yixpNjKqcQQdXKvPwg-1; Tue,
+ 14 Jan 2025 12:56:22 -0500
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id F41581955F67; Tue, 14 Jan 2025 17:55:01 +0000 (UTC)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 83AA919560B4; Tue, 14 Jan 2025 17:56:18 +0000 (UTC)
 Received: from vschneid-thinkpadt14sgen2i.remote.csb (unknown [10.39.192.55])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix)
- with ESMTPS id 594CC19560AB; Tue, 14 Jan 2025 17:54:36 +0000 (UTC)
+ with ESMTPS id AE8F1195608A; Tue, 14 Jan 2025 17:55:53 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2a2abec-d2a0-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: dfa863b0-d2a0-11ef-a0e1-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1736877310;
+	s=mimecast20190719; t=1736877385;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=tq2pU6+Sz+OC+aH2F2609vpzg9lrw/4sZVW/JKS6LBM=;
-	b=jTcnElGVl+HCTOWay4u9OobIOl315VUnU7YWfp2W4fp93e167H/VVl7AiMJFEmF0Wk8YWC
-	w8H2nYT9gI+4L1/IH3K2PePx6WxozFP/IsPKhY4RlLqc+l5nojxmRsHU8HCZXF0j/TdL+I
-	Vd5Q5wv1RbJXmjNF5hSuFt950CWNll0=
-X-MC-Unique: rasDThuXPT-KkBXykuo6Cg-1
-X-Mimecast-MFC-AGG-ID: rasDThuXPT-KkBXykuo6Cg
+	bh=upN6bWUdwddcYtCDglXcedCwjwFydQLGp2NkOO9id+w=;
+	b=imD6509S0mofvP0Fye2E1b4akDZ9GKKr/j/BMp2D+xURbibnlr+wzwU9/tv22rtaFOfJiH
+	x0pK1Wpoal4UHgJekZl25NFSIbJUJGm4Pf6ZLuuR2st6znbg8kB4FkgRS6c1kIXSqfg+qq
+	LMOiT01QRv3VFvKoddzpC4Rf51xDKFc=
+X-MC-Unique: ULU7yixpNjKqcQQdXKvPwg-1
+X-Mimecast-MFC-AGG-ID: ULU7yixpNjKqcQQdXKvPwg
 From: Valentin Schneider <vschneid@redhat.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
@@ -156,60 +156,44 @@ Cc: Josh Poimboeuf <jpoimboe@kernel.org>,
 	Luis Chamberlain <mcgrof@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: [PATCH v4 05/30] jump_label: Add annotations for validating noinstr usage
-Date: Tue, 14 Jan 2025 18:51:18 +0100
-Message-ID: <20250114175143.81438-6-vschneid@redhat.com>
+Subject: [PATCH v4 08/30] x86/idle: Mark x86_idle static call as __ro_after_init
+Date: Tue, 14 Jan 2025 18:51:21 +0100
+Message-ID: <20250114175143.81438-9-vschneid@redhat.com>
 In-Reply-To: <20250114175143.81438-1-vschneid@redhat.com>
 References: <20250114175143.81438-1-vschneid@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-From: Josh Poimboeuf <jpoimboe@kernel.org>
+Later commits will cause objtool to warn about static calls being used in
+.noinstr sections in order to safely defer instruction patching IPIs
+targeted at NOHZ_FULL CPUs.
 
-Deferring a code patching IPI is unsafe if the patched code is in a
-noinstr region.  In that case the text poke code must trigger an
-immediate IPI to all CPUs, which can rudely interrupt an isolated NO_HZ
-CPU running in userspace.
+x86_idle is updated in:
+o xen_set_default_idle() <- __init xen_arch_setup()
+o __init select_idle_routine()
 
-Some noinstr static branches may really need to be patched at runtime,
-despite the resulting disruption.  Add DEFINE_STATIC_KEY_*_NOINSTR()
-variants for those.  They don't do anything special yet; that will come
-later.
+IOW purely init context, and can thus be marked as __ro_after_init.
 
-Signed-off-by: Josh Poimboeuf <jpoimboe@kernel.org>
+Reported-by: Josh Poimboeuf <jpoimboe@kernel.org>
+Signed-off-by: Valentin Schneider <vschneid@redhat.com>
 ---
- include/linux/jump_label.h | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ arch/x86/kernel/process.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/linux/jump_label.h b/include/linux/jump_label.h
-index f5a2727ca4a9a..88bb6e32fdcbc 100644
---- a/include/linux/jump_label.h
-+++ b/include/linux/jump_label.h
-@@ -385,6 +385,23 @@ struct static_key_false {
- #define DEFINE_STATIC_KEY_FALSE_RO(name)	\
- 	struct static_key_false name __ro_after_init = STATIC_KEY_FALSE_INIT
+diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
+index f63f8fd00a91f..85cd62f61d633 100644
+--- a/arch/x86/kernel/process.c
++++ b/arch/x86/kernel/process.c
+@@ -746,7 +746,7 @@ void __cpuidle default_idle(void)
+ EXPORT_SYMBOL(default_idle);
+ #endif
  
-+/*
-+ * The _NOINSTR variants are used to tell objtool the static key is allowed to
-+ * be used in noinstr code.
-+ *
-+ * They should almost never be used, as they prevent code patching IPIs from
-+ * being deferred, which can be problematic for isolated NOHZ_FULL CPUs running
-+ * in pure userspace.
-+ *
-+ * If using one of these _NOINSTR variants, please add a comment above the
-+ * definition with the rationale.
-+ */
-+#define DEFINE_STATIC_KEY_TRUE_NOINSTR(name)					\
-+	DEFINE_STATIC_KEY_TRUE(name)
-+
-+#define DEFINE_STATIC_KEY_FALSE_NOINSTR(name)					\
-+	DEFINE_STATIC_KEY_FALSE(name)
-+
- #define DECLARE_STATIC_KEY_FALSE(name)	\
- 	extern struct static_key_false name
+-DEFINE_STATIC_CALL_NULL(x86_idle, default_idle);
++DEFINE_STATIC_CALL_NULL_RO(x86_idle, default_idle);
  
+ static bool x86_idle_set(void)
+ {
 -- 
 2.43.0
 
