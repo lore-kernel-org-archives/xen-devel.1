@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32928C0218B
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 17:59:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.871671.1282716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17C1DE77188
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 17:59:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.871667.1282699 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBo-00050d-Dj; Tue, 14 Jan 2025 17:58:56 +0000
+	id 1tXlBm-0004TW-Nj; Tue, 14 Jan 2025 17:58:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 871671.1282716; Tue, 14 Jan 2025 17:58:56 +0000
+Received: by outflank-mailman (output) from mailman id 871667.1282699; Tue, 14 Jan 2025 17:58:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBn-0004xI-MG; Tue, 14 Jan 2025 17:58:55 +0000
-Received: by outflank-mailman (input) for mailman id 871671;
- Tue, 14 Jan 2025 17:57:48 +0000
+	id 1tXlBl-0004QS-Ql; Tue, 14 Jan 2025 17:58:53 +0000
+Received: by outflank-mailman (input) for mailman id 871667;
+ Tue, 14 Jan 2025 17:56:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Qro=UG=redhat.com=vschneid@srs-se1.protection.inumbo.net>)
- id 1tXlAi-0003Eo-3r
- for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:57:48 +0000
+ id 1tXl9p-0003Ck-2G
+ for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:56:53 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0f332de7-d2a1-11ef-a0e1-8be0dac302b0;
- Tue, 14 Jan 2025 18:57:46 +0100 (CET)
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ id eeeba8ca-d2a0-11ef-a0e1-8be0dac302b0;
+ Tue, 14 Jan 2025 18:56:52 +0100 (CET)
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-487-MPFxqqEtNGCUUE7KC7NLrg-1; Tue,
- 14 Jan 2025 12:57:42 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-83-lu3mCN1QPVqlwCLkY5ofog-1; Tue,
+ 14 Jan 2025 12:56:48 -0500
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2C9851955DC6; Tue, 14 Jan 2025 17:57:37 +0000 (UTC)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 03C901955DCC; Tue, 14 Jan 2025 17:56:45 +0000 (UTC)
 Received: from vschneid-thinkpadt14sgen2i.remote.csb (unknown [10.39.192.55])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix)
- with ESMTPS id 69120195608A; Tue, 14 Jan 2025 17:57:11 +0000 (UTC)
+ with ESMTPS id 1AEB019560B7; Tue, 14 Jan 2025 17:56:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f332de7-d2a1-11ef-a0e1-8be0dac302b0
+X-Inumbo-ID: eeeba8ca-d2a0-11ef-a0e1-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1736877465;
+	s=mimecast20190719; t=1736877411;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Gy6UStH5/TBRQ5eoVZhQAO0glKmQfzTIxzfOHtHv+oU=;
-	b=i9YCqHqHRbaEO7LbKGWwOZF8BeWjzgC/fqJzL8S0kTDO/wGpG2aBtrj/+jmum4McieHDlu
-	KX38ONfSxWCh83SMxMXNH9dee1mxzZno5OkkUiiMGI2ywF6/pGRx4HxwS8Q+OYRzMzrTZv
-	vZSI99Bing6cp6bHhhqZQyOyc16Cnzk=
-X-MC-Unique: MPFxqqEtNGCUUE7KC7NLrg-1
-X-Mimecast-MFC-AGG-ID: MPFxqqEtNGCUUE7KC7NLrg
+	bh=a7Wvwh2A2o47NLG/+LsYYIZxdlkCdbCUHu9ph/pgaME=;
+	b=EIM4yOUweAtkFV8v2bXWr2FCV6bBZ8vtS8NMoVwZ8oMU3xf4rXGqwyGlqdwoqpe4bOT+bx
+	rasiQjuy83/3vN0j3gNVp7Tf2BPQkrn2RJ3biOqYNlfgeEY55k+LbFsPf0aF2EBeM5Vohq
+	Bjsv7hGOQgZDt32M7GIm4vGpGI3T2x4=
+X-MC-Unique: lu3mCN1QPVqlwCLkY5ofog-1
+X-Mimecast-MFC-AGG-ID: lu3mCN1QPVqlwCLkY5ofog
 From: Valentin Schneider <vschneid@redhat.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
@@ -156,9 +156,9 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Luis Chamberlain <mcgrof@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: [PATCH v4 11/30] loongarch/paravirt: Mark pv_steal_clock static call as __ro_after_init
-Date: Tue, 14 Jan 2025 18:51:24 +0100
-Message-ID: <20250114175143.81438-12-vschneid@redhat.com>
+Subject: [PATCH v4 09/30] x86/paravirt: Mark pv_steal_clock static call as __ro_after_init
+Date: Tue, 14 Jan 2025 18:51:22 +0100
+Message-ID: <20250114175143.81438-10-vschneid@redhat.com>
 In-Reply-To: <20250114175143.81438-1-vschneid@redhat.com>
 References: <20250114175143.81438-1-vschneid@redhat.com>
 MIME-Version: 1.0
@@ -168,28 +168,30 @@ X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 The static call is only ever updated in
 
   __init pv_time_init()
-  __init xen_time_setup_guest()
+  __init xen_init_time_common()
+  __init vmware_paravirt_ops_setup()
+  __init xen_time_setup_guest(
 
 so mark it appropriately as __ro_after_init.
 
 Signed-off-by: Valentin Schneider <vschneid@redhat.com>
 ---
- arch/loongarch/kernel/paravirt.c | 2 +-
+ arch/x86/kernel/paravirt.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/loongarch/kernel/paravirt.c b/arch/loongarch/kernel/paravirt.c
-index e5a39bbad0780..b011578d3e931 100644
---- a/arch/loongarch/kernel/paravirt.c
-+++ b/arch/loongarch/kernel/paravirt.c
-@@ -20,7 +20,7 @@ static u64 native_steal_clock(int cpu)
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index ae6675167877b..a19b0002b18d8 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -72,7 +72,7 @@ static u64 native_steal_clock(int cpu)
  	return 0;
  }
  
 -DEFINE_STATIC_CALL(pv_steal_clock, native_steal_clock);
 +DEFINE_STATIC_CALL_RO(pv_steal_clock, native_steal_clock);
+ DEFINE_STATIC_CALL_RO(pv_sched_clock, native_sched_clock);
  
- static bool steal_acc = true;
- 
+ void paravirt_set_sched_clock(u64 (*func)(void))
 -- 
 2.43.0
 
