@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 681DDC02183
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A48E77188
 	for <xen-devel@archiver.kernel.org>; Tue, 14 Jan 2025 17:59:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.871663.1282679 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.871652.1282641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBl-00043t-6O; Tue, 14 Jan 2025 17:58:53 +0000
+	id 1tXlBj-0003Ot-5A; Tue, 14 Jan 2025 17:58:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 871663.1282679; Tue, 14 Jan 2025 17:58:53 +0000
+Received: by outflank-mailman (output) from mailman id 871652.1282641; Tue, 14 Jan 2025 17:58:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXlBk-00042L-OK; Tue, 14 Jan 2025 17:58:52 +0000
-Received: by outflank-mailman (input) for mailman id 871663;
- Tue, 14 Jan 2025 17:56:04 +0000
+	id 1tXlBi-0003Ms-Rw; Tue, 14 Jan 2025 17:58:50 +0000
+Received: by outflank-mailman (input) for mailman id 871652;
+ Tue, 14 Jan 2025 17:53:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Qro=UG=redhat.com=vschneid@srs-se1.protection.inumbo.net>)
- id 1tXl92-0003Bm-RN
- for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:56:04 +0000
+ id 1tXl6v-00036s-DB
+ for xen-devel@lists.xenproject.org; Tue, 14 Jan 2025 17:53:53 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d142d210-d2a0-11ef-99a4-01e77a169b0f;
- Tue, 14 Jan 2025 18:56:02 +0100 (CET)
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ id 8300704a-d2a0-11ef-99a4-01e77a169b0f;
+ Tue, 14 Jan 2025 18:53:51 +0100 (CET)
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-20-jE76dcsZPt-31fHWsIhMBg-1; Tue,
- 14 Jan 2025 12:55:57 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-269-5yEXaqhRNsqIKNRsVS1Lsw-1; Tue,
+ 14 Jan 2025 12:53:46 -0500
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 47A70195609E; Tue, 14 Jan 2025 17:55:53 +0000 (UTC)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 91E941955D80; Tue, 14 Jan 2025 17:53:42 +0000 (UTC)
 Received: from vschneid-thinkpadt14sgen2i.remote.csb (unknown [10.39.192.55])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix)
- with ESMTPS id 6703A195608A; Tue, 14 Jan 2025 17:55:28 +0000 (UTC)
+ with ESMTPS id BE4B5195608A; Tue, 14 Jan 2025 17:53:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d142d210-d2a0-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 8300704a-d2a0-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1736877361;
+	s=mimecast20190719; t=1736877230;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=P7DcLPe7N47ORcKkDkopF1lM4hKgrpRYFpILYCZNJJ8=;
-	b=Y8bq5zS9poTwPOOLX/87Ai62n1gNtjuD+qKZs9wZ2f1MI5UPpAPNe2yWOJMwInm9qleWlQ
-	IrsMbwNWkLbKkyxmWbcFYDuL7ldiaiHBlnnMI+m0y0MJkxEn2MUq8RYFZDHzZZosjdeD90
-	hrXofc3s0DU17aYkucrM/wKa4rWuwvk=
-X-MC-Unique: jE76dcsZPt-31fHWsIhMBg-1
-X-Mimecast-MFC-AGG-ID: jE76dcsZPt-31fHWsIhMBg
+	bh=BIPe4J+MPkclOG0fZ/T6Ew0fi09A38ofFGJkEjEgffw=;
+	b=RLVWfI37RN8n7WJ8HlkibxYjd7W0A13i/jpwkf19SDUK05V5oFRBish7S9SLz+x1RbjR36
+	WWnC4cYmSu+wBe+/198POSqD3d3XJblc3oTlLTRRP52X7RiXwO4uGtUyisbxFkvHlRAtOm
+	h4sR3fhjRylWDIaX0ScssYCQjKJdqbA=
+X-MC-Unique: 5yEXaqhRNsqIKNRsVS1Lsw-1
+X-Mimecast-MFC-AGG-ID: 5yEXaqhRNsqIKNRsVS1Lsw
 From: Valentin Schneider <vschneid@redhat.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
@@ -156,46 +156,37 @@ Cc: Josh Poimboeuf <jpoimboe@kernel.org>,
 	Luis Chamberlain <mcgrof@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: [PATCH v4 07/30] x86/paravirt: Mark pv_sched_clock static call as __ro_after_init
-Date: Tue, 14 Jan 2025 18:51:20 +0100
-Message-ID: <20250114175143.81438-8-vschneid@redhat.com>
+Subject: [PATCH v4 02/30] objtool: Flesh out warning related to pv_ops[] calls
+Date: Tue, 14 Jan 2025 18:51:15 +0100
+Message-ID: <20250114175143.81438-3-vschneid@redhat.com>
 In-Reply-To: <20250114175143.81438-1-vschneid@redhat.com>
 References: <20250114175143.81438-1-vschneid@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-Later commits will cause objtool to warn about static calls being used in
-.noinstr sections in order to safely defer instruction patching IPIs
-targeted at NOHZ_FULL CPUs.
+I had to look into objtool itself to understand what this warning was
+about; make it more explicit.
 
-pv_sched_clock is updated in:
-o __init vmware_paravirt_ops_setup()
-o __init xen_init_time_common()
-o kvm_sched_clock_init() <- __init kvmclock_init()
-o hv_setup_sched_clock() <- __init hv_init_tsc_clocksource()
-
-IOW purely init context, and can thus be marked as __ro_after_init.
-
-Reported-by: Josh Poimboeuf <jpoimboe@kernel.org>
 Signed-off-by: Valentin Schneider <vschneid@redhat.com>
+Acked-by: Josh Poimboeuf <jpoimboe@kernel.org>
 ---
- arch/x86/kernel/paravirt.c | 2 +-
+ tools/objtool/check.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index fec3815335558..ae6675167877b 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -73,7 +73,7 @@ static u64 native_steal_clock(int cpu)
- }
+diff --git a/tools/objtool/check.c b/tools/objtool/check.c
+index b35763f05a548..6aa9259fc9940 100644
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -3486,7 +3486,7 @@ static bool pv_call_dest(struct objtool_file *file, struct instruction *insn)
  
- DEFINE_STATIC_CALL(pv_steal_clock, native_steal_clock);
--DEFINE_STATIC_CALL(pv_sched_clock, native_sched_clock);
-+DEFINE_STATIC_CALL_RO(pv_sched_clock, native_sched_clock);
- 
- void paravirt_set_sched_clock(u64 (*func)(void))
- {
+ 	list_for_each_entry(target, &file->pv_ops[idx].targets, pv_target) {
+ 		if (!target->sec->noinstr) {
+-			WARN("pv_ops[%d]: %s", idx, target->name);
++			WARN("pv_ops[%d]: indirect call to %s() leaves .noinstr.text section", idx, target->name);
+ 			file->pv_ops[idx].clean = false;
+ 		}
+ 	}
 -- 
 2.43.0
 
