@@ -4,37 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BD24C02185
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 16:49:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.872894.1283887 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21634C02180
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 16:56:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.872912.1283906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY6aL-0004e2-44; Wed, 15 Jan 2025 16:49:41 +0000
+	id 1tY6gR-0007ma-VJ; Wed, 15 Jan 2025 16:55:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 872894.1283887; Wed, 15 Jan 2025 16:49:41 +0000
+Received: by outflank-mailman (output) from mailman id 872912.1283906; Wed, 15 Jan 2025 16:55:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY6aL-0004dv-0m; Wed, 15 Jan 2025 16:49:41 +0000
-Received: by outflank-mailman (input) for mailman id 872894;
- Wed, 15 Jan 2025 16:49:39 +0000
+	id 1tY6gR-0007mT-Sh; Wed, 15 Jan 2025 16:55:59 +0000
+Received: by outflank-mailman (input) for mailman id 872912;
+ Wed, 15 Jan 2025 16:55:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4o+i=UH=cloud.com=bernhard.kaindl@srs-se1.protection.inumbo.net>)
- id 1tY6aJ-0004dp-Lg
- for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 16:49:39 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
+ <SRS0=ppZO=UH=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1tY6gR-0007mH-20
+ for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 16:55:59 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2061e.outbound.protection.outlook.com
+ [2a01:111:f403:2413::61e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b4e9a9b8-d360-11ef-99a4-01e77a169b0f;
- Wed, 15 Jan 2025 17:49:37 +0100 (CET)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5da135d3162so1277047a12.3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Jan 2025 08:49:37 -0800 (PST)
-Received: from localhost ([185.68.248.203]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d99008c523sm7695114a12.8.2025.01.15.08.49.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 08:49:35 -0800 (PST)
+ id 91335e55-d361-11ef-99a4-01e77a169b0f;
+ Wed, 15 Jan 2025 17:55:48 +0100 (CET)
+Received: from PH8PR21CA0015.namprd21.prod.outlook.com (2603:10b6:510:2ce::12)
+ by CH2PR12MB9460.namprd12.prod.outlook.com (2603:10b6:610:27f::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.13; Wed, 15 Jan
+ 2025 16:55:44 +0000
+Received: from SJ1PEPF00001CE0.namprd05.prod.outlook.com
+ (2603:10b6:510:2ce:cafe::3b) by PH8PR21CA0015.outlook.office365.com
+ (2603:10b6:510:2ce::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.8 via Frontend Transport; Wed,
+ 15 Jan 2025 16:55:43 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ1PEPF00001CE0.mail.protection.outlook.com (10.167.242.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8356.11 via Frontend Transport; Wed, 15 Jan 2025 16:55:43 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 15 Jan
+ 2025 10:55:42 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 15 Jan
+ 2025 10:55:42 -0600
+Received: from [172.27.3.102] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Wed, 15 Jan 2025 10:55:41 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,145 +65,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b4e9a9b8-d360-11ef-99a4-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1736959777; x=1737564577; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5pRNe8wbi9tZ0aom2g5sJEKlIHFZvI7gb4bs1jk9GL8=;
-        b=Q+kl4iFOw4uVhiwa61N7mgIp9kG1X2qSS5JNxYMex32/0UO8+mUQjbEz6xyIScHoWv
-         WGbfGPiWUA6QUV4c8VQhqJhvldbIsukQ46dbhDzMToYixi1hR11lFpkIOpT830Vz1tg+
-         /9IwKvA7xwcCDgiHAYLPVN2lcF365Fd4rxI9A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736959777; x=1737564577;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5pRNe8wbi9tZ0aom2g5sJEKlIHFZvI7gb4bs1jk9GL8=;
-        b=FaYwwji+n2vRfiYiS6mEWq1MB9OpyBcXfePdI29IIFkdJ+UmBJX6Rkl4TN9Kcvw/NW
-         3qdM7hBmqhkr2vPul2ljsKCsIZfZujJanruxl2IFgrGfaqOWKhKqychK8QYAz9SHJ/Yh
-         fH0Z4SK6ZOmZOqf+Tsl77B3rWV1HqkDnEKvoIlFXvf2v/ICEZH+WEC6m3aE0uJ3rIfMb
-         EPH7THU/9BiccZ5ZnI+dbRoMxLKDNahI4VKeXdNtOOAyk4vDvB1w/Wg6GNPXVNlTmVnW
-         6SGmgutVwKf75vO0gvxThoZedxTWoVDsQG5tguCPpI+KwG+X91jQvsp63x0zde/tYwxH
-         TUFw==
-X-Gm-Message-State: AOJu0YwB5aY1NspS1RdzXDeWMN15j9wV+Bhkfor7n8DJWIYg9An0HEPg
-	R4/X0cZF/9vm3RgHnFaDqP/QGQt8lqnkMl5ogLTtw/AEmNQzwQG/FWekJo98zPmrcOylzt7MuAI
-	NK76aCA==
-X-Gm-Gg: ASbGnctr4hr714tTbfI3uOT+xCfrybmq9JbzwmthAQ3t1d8jdUXba0kD7y/VtgpHrO4
-	6sPhkLwPNotuDRrCZyTXBC5YUBhWashMnpXwk7eSG347VXOTW6iuq6QW64QDou8jMyKIQLioByi
-	SaGlWlKZDtG5jwoJiNB9Tr3Zz05H5rhDhPUEPAgba//xUrpW28XLy6nE7/XvrwsbHIK7sOLfzhf
-	wJae6jJtBbAoLsLGrMJIMOHNl724aPGRfpzYLDyy3u5kRXDdtm3zhX0HJQ67w==
-X-Google-Smtp-Source: AGHT+IGFhYGLOGx+UEZg9b6vDmOlXgVAdHkfCiSIaunmxo/b1LC9C0Nj3yPvU3hrP2S1tiSZTo3qpQ==
-X-Received: by 2002:a05:6402:3514:b0:5da:105b:86c2 with SMTP id 4fb4d7f45d1cf-5da105b87d5mr2107346a12.20.1736959777044;
-        Wed, 15 Jan 2025 08:49:37 -0800 (PST)
-From: Bernhard Kaindl <bernhard.kaindl@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Bernhard Kaindl <bernhard.kaindl@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] docs: Fix spaces and capitalisation of proper nouns and abbreviations
-Date: Wed, 15 Jan 2025 17:49:32 +0100
-Message-ID: <cf18d0a24e393191ec243bb67aecfd7631429576.1736959522.git.bernhard.kaindl@cloud.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: 91335e55-d361-11ef-99a4-01e77a169b0f
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cU6yn63JYUT2lhDwqiDcDqh06TD+gVaCAGsjiDctryCjXujfM2CH5dN6zl3ESkcUMdNyYpb1kRPOGaF1cHwaAuHj4IqKy91FQZGlwOZYg0ACq15p8CGXNjPx2qCnztm2WlaXe45z8iejQq3uIOC/sCOdu2kF3R/OHzl9Ky6lCYTAzIKH5/VvuGiXBYVjmAL4ykGeTgGyCRmYis7KM6CjWVGuHOph7TGtWpLZZmW4a5T9VTKXvh+x+dMo5/CoAF/G5KpyniyV6pFq2BrzPDCEw/agtBpek9eVpZ0jkZaWJJJ8y7FckjPVdudrg86BcYtFWSC+7AXjRibO5y0jFiEipQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=B0PKYXo3UQpMtUn9vNyPhmzpYAnpUNlYmbDApzfUiow=;
+ b=H+oAPymXIeohUBVJrO5XFEl/QfqSC0jxcgBvz6OqmdZo4Zc5IPlSpEufAeZfyQr6Fo1y15L5iABOelBucto1PhDxMp2IKMwxl19c3N0sn9B59sIh55eOtG2me1YdCNCF5mdMSwIHhxB0qIcqzUlflJDIAjGVhyydUuQeiYPFDGzcmwMFLIS6xoOiaYcYYLEVWM7efTdDrasNJlQmImdYYpNiGJ961too5Y10OB+4urJn9q8ylNR3Xr8aUpHhjs5H6jxy+ynhQ+vFKIxoWM+a0N9VWPcSpV3hghdqeFwmcGP8oRbv95m9EBStg2Ox/VIuIY6nVrUlX/etG2lXizjKOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=apertussolutions.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=B0PKYXo3UQpMtUn9vNyPhmzpYAnpUNlYmbDApzfUiow=;
+ b=GInGRGM22YtHJm3mhlASjtOW9HSVnTcnvCm0usSXYh03QDKEf+ILDX/Yuf7QGvrMP61wWJqRVhTxabWYOgWe1xpgRPB/m2LH4Rs/7/8zD4sPKhG+KPPgXV71IlrZ6vcIENrfdHHI4S8Dg7yrv24J55w2DEgC+apHnutgmA+PpIQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <7aa994e5-2878-4dd0-ab2b-349dff44b478@amd.com>
+Date: Wed, 15 Jan 2025 11:55:40 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 13/15] x86/hyperlaunch: add memory parsing to domain
+ config
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	<xen-devel@lists.xenproject.org>
+CC: <christopher.w.clark@gmail.com>, <stefano.stabellini@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+References: <20241226165740.29812-1-dpsmith@apertussolutions.com>
+ <20241226165740.29812-14-dpsmith@apertussolutions.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <20241226165740.29812-14-dpsmith@apertussolutions.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE0:EE_|CH2PR12MB9460:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8f748009-66ee-49fe-0245-08dd3585735d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?NkJ4SU0xb3hUUjQ1RDNZVDQ0eTRpbEN0MzBocFZhZVNJVEhQZkVPeEVtWm9m?=
+ =?utf-8?B?N3dZSEZMU1EwUmFELzZmbnZ1cmdEdDQzSEh6MEtLRWNxQWVacjh4STFEcThq?=
+ =?utf-8?B?dVhSbGQ4MlZhRkJLcGdJTlB6MC9xUXNpOWwxVzF4c3IwOWF4dEwvWWNNdVFk?=
+ =?utf-8?B?K1ZEdkxUY04wcUlNVk5WbXVwN0l2cVFCWEk3RkxMbVBIVWZydTRSQit3YmR2?=
+ =?utf-8?B?MmwxL1VtTnhVcHZrSlJTZnJyLzFxcHBBdVQ2YVZWeitHWlA0L3l5UDlkdlpn?=
+ =?utf-8?B?Z3BDSzJldVhBTU5VTkZhOWl4QXV2a3oxdnl6WEU5dTFoeVA5V01pUGhFWWFs?=
+ =?utf-8?B?ZFAzYVB0bmZBWlRQcWdqbHRQcER0by9MT2N3aS9BK1RLM0FMOUFmbEJnazAv?=
+ =?utf-8?B?SXp5VUU3S1hob0REbkt4Z1V3NGZmNU50aE12dkRLT3JDSjQxWVNMNWZWZU5n?=
+ =?utf-8?B?TGYyS1RpRThMZmpMQ2hBbEFkMkpyVCtGV29LaTIyRmpreTNQcVlPTXVEUlha?=
+ =?utf-8?B?SzN4Rmp4akJoR1lpS2M0Q053dnRJVSs2bGN3MTZTNjZQeXNJTVAwV2hFNXcx?=
+ =?utf-8?B?MDJNMFFwK21BTEN2YWlpM2RuMzZLdThoczVMQW1vYVhOOWIwTzNuU0M4WkhB?=
+ =?utf-8?B?MEJ2bjN3TnNlMXkwcERjcE5rQnJyREpROVJyNVZhZ0xYd1Z0NmJlTkc2WFg1?=
+ =?utf-8?B?WkJqdXdOZHJTbGh1T2toS3lQWFA1c3ZHOE1vcWQzdzVQc2lHTm1LbjErWVRH?=
+ =?utf-8?B?eXRYaFMybzJtSnY5d1hQaTdadTBtditRcHVYcnJpdVJGcTZTcjV6SzRDYTg0?=
+ =?utf-8?B?N0xYempuWVNoVWo1bVNabTlEc3ZTUldrdkduUUhMUnJtVFNHaklhMTJMbllm?=
+ =?utf-8?B?SzBQMFd6bk5DTUIzcndrR2FkdG81TW5EWSsrdjBNb2VwT28vbnE5S2NhSm1s?=
+ =?utf-8?B?MUErbnQwVUhyK2dYZHBDdFpncVNhb2hqTWtvdmswNTZiSVZtYkVIME9wQyt1?=
+ =?utf-8?B?aWVSbjJPcGdMYkt6dkdqRzltK21rVXhZNjIwSGJHV0p6TFVVNmlIdXBIYzAr?=
+ =?utf-8?B?WWJnWkYwSFlkZEh0TDE0RGVSREEzY3h5KzRueGdCZWtpbEVyNks3eUZlb3RC?=
+ =?utf-8?B?b0FnWFBSK3poSFlCdkFzNCtUbWVTNDdXYjBEUDlCTDRnczVnNXFRVGo0WGJI?=
+ =?utf-8?B?MENwaVJkSWZIanJacmI1YmpDSGxRdW9pc0pJOXNhOGFGZWxocE9DckZBUURJ?=
+ =?utf-8?B?V2lZSjVyaHdZNEZHUFJ0N0NzV1RseFFESng3Y1lmVUd2dU1yZEZSTERyYWNX?=
+ =?utf-8?B?T3JYdHpHRDVpRjJBS3REODlCRm16UU53RnMzY3k5ZDM2VmRuRXZ0czJ5S1pR?=
+ =?utf-8?B?ajhiL0lJc0diblREUy80WGQrZjFWS1hsNDh1NEVSR2FTZUE2bnBuNXJPbU54?=
+ =?utf-8?B?NGpTcnVQVmN1UFZocW5iUGx5RHFGT3FwdjkyNU8vWGNoTTY2UHFUbkJmV1pN?=
+ =?utf-8?B?UnVTcDlsaXYyTFpxQnBuTFpWUC9WVE5iVC9CemtHbVVmSTY0NXZwc3FKVVRU?=
+ =?utf-8?B?Qytqc0VjcmJNbFhnMDQ3VW9TQ1FQZ1hqSUdOcXg0RkpUS3VWMGF4eUpoL2p2?=
+ =?utf-8?B?eTczUFVCd2Vib3F6T2Q2TXdNSmpvVkdBS0NyVi9QTnVDNHRXSEpsMmtHbUpp?=
+ =?utf-8?B?cCt6SXUyMzNKZ0M3QzZMZHV2ZjRqY0kxbEMxYVhkT05XVVNKK2ZuSkV3WEcv?=
+ =?utf-8?B?ckQ0L0s5RE5ISU5UV2J5WlIwQmNqcU9xYjJ2cWoyclliTE9IMjZZdUFuRGMv?=
+ =?utf-8?B?TC95ZXpvelgrR3k3MnRQS3VaRmsreWRMSjh5VmZQNzJRU21teXNQeGpoNkpW?=
+ =?utf-8?B?VUpSZU90cmx3SkdoQ2NnKzJtbW1ac2xaUS9vU2VTN0tDMHVsWGUwNi9RWCt1?=
+ =?utf-8?B?MjlaT3k3L2w5ODJmdVE3TC80Y0ExNWV1ZzFEZXlxTk1SYmJsN2lxS3hHRU1k?=
+ =?utf-8?Q?I/fIbXjmSxNqxg7shgnlPOulba+b/w=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026)(7053199007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 16:55:43.7313
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f748009-66ee-49fe-0245-08dd3585735d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF00001CE0.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB9460
 
-Signed-off-by: Bernhard Kaindl <bernhard.kaindl@cloud.com>
----
- SUPPORT.md                       | 18 +++++++++---------
- docs/designs/qemu-deprivilege.md |  2 +-
- 2 files changed, 10 insertions(+), 10 deletions(-)
+On 2024-12-26 11:57, Daniel P. Smith wrote:
+> Add three properties, memory, mem-min, and mem-max, to the domain node device
+> tree parsing to define the memory allocation for a domain. All three fields are
+> expressed in kb and written as a u64 in the device tree entries.
+> 
+> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 
-diff --git a/SUPPORT.md b/SUPPORT.md
-index 2bc5bd81ee..9478b70b1b 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -258,7 +258,7 @@ Go (golang) bindings for libxl
- 
- ### Linux device model stubdomains
- 
--Support for running qemu-xen device model in a linux stubdomain.
-+Support for running the qemu-xen device model in a Linux stubdomain.
- 
-     Status: Tech Preview
- 
-@@ -626,7 +626,7 @@ Guest-side driver capable of speaking the Xen 9pfs protocol
- 
- ### PVCalls (frontend)
- 
--Guest-side driver capable of making pv system calls
-+Guest-side driver capable of making PV system calls
- 
-     Status, Linux: Tech Preview
- 
-@@ -1060,8 +1060,8 @@ This file contains prose, and machine-readable fragments.
- The data in a machine-readable fragment relate to
- the section and subsection in which it is found.
- 
--The file is in markdown format.
--The machine-readable fragments are markdown literals
-+The file is in Markdown format.
-+The machine-readable fragments are Markdown literals
- containing RFC-822-like (deb822-like) data.
- 
- In each case, descriptions which expand on the name of a feature as
-@@ -1125,7 +1125,7 @@ in such a case this feature may be described as "Stable / Interface not stable".
- 
- Does it behave like a fully functional feature?
- Does it work on all expected platforms,
--or does it only work for a very specific sub-case?
-+or does it only work for a very specific subcase?
- Does it have a sensible UI,
- or do you have to have a deep understanding of the internals
- to get it to work properly?
-@@ -1168,7 +1168,7 @@ will they still work when I upgrade to the next version?
- 
-   * **Stable**
- 
--    We will try very hard to avoid breaking backwards  compatibility,
-+    We will try very hard to avoid breaking backwards compatibility,
-     and to fix any regressions that are reported.
- 
- ### Security supported
-@@ -1200,7 +1200,7 @@ are given the following labels:
-   * **Supported, Security support external**
- 
-     This feature is security supported
--    by a different organization (not the XenProject).
-+    by a different organization (not the Xen Project).
-     The extent of support is defined by that organization.
-     It might be limited, e.g. like described in **Supported, with caveats**
-     below.
-@@ -1221,8 +1221,8 @@ Some features are only for HVM guests; some don't work with migration, &c.
- 
- ### External security support
- 
--The XenProject security team
--provides security support for XenProject projects.
-+The Xen Project security team
-+provides security support for the various projects of the Xen Project.
- 
- We also provide security support for Xen-related code in Linux,
- which is an external project but doesn't have its own security process.
-diff --git a/docs/designs/qemu-deprivilege.md b/docs/designs/qemu-deprivilege.md
-index 603491f24d..3be33adf6a 100644
---- a/docs/designs/qemu-deprivilege.md
-+++ b/docs/designs/qemu-deprivilege.md
-@@ -297,7 +297,7 @@ namespaces):
-     unshare(CLONE_NEWNET);
- 
- QEMU does actually use the network namespace as a Xen DM for two
--purposes: 1) To set up network tap devices 2) To open vnc connections.
-+purposes: 1) To set up network tap devices 2) To open VNC connections.
- 
- #### Network
- 
--- 
-2.43.0
+> diff --git a/xen/arch/x86/domain-builder/fdt.c b/xen/arch/x86/domain-builder/fdt.c
+> index db584ba78e92..aff1b8c3235d 100644
+> --- a/xen/arch/x86/domain-builder/fdt.c
+> +++ b/xen/arch/x86/domain-builder/fdt.c
+> @@ -6,6 +6,7 @@
+>   #include <xen/init.h>
+>   #include <xen/lib.h>
+>   #include <xen/libfdt/libfdt.h>
+> +#include <xen/sizes.h>
+>   
+>   #include <asm/bootinfo.h>
+>   #include <asm/guest.h>
+> @@ -113,6 +114,39 @@ static int __init process_domain_node(
+>               else
+>                   printk("PV\n");
+>           }
+> +        else if ( strncmp(prop_name, "memory", name_len) == 0 )
+> +        {
+> +            uint64_t kb;
+> +            if ( fdt_prop_as_u64(prop, &kb) != 0 )
+> +            {
+> +                printk("  failed processing memory for domain %s\n", name);
+> +                return -EINVAL;
+> +            }
+> +            bd->mem_pages = PFN_DOWN(kb * SZ_1K);
+> +            printk("  memory: %ld kb\n", kb);
+> +        }
+> +        else if ( strncmp(prop_name, "mem-min", name_len) == 0 )
+> +        {
+> +            uint64_t kb;
+> +            if ( fdt_prop_as_u64(prop, &kb) != 0 )
+> +            {
+> +                printk("  failed processing memory for domain %s\n", name);
 
+s/memory/mem-min/
+
+> +                return -EINVAL;
+> +            }
+> +            bd->min_pages = PFN_DOWN(kb * SZ_1K);
+> +            printk("  min memory: %ld kb\n", kb);
+> +        }
+> +        else if ( strncmp(prop_name, "mem-max", name_len) == 0 )
+> +        {
+> +            uint64_t kb;
+> +            if ( fdt_prop_as_u64(prop, &kb) != 0 )
+> +            {
+> +                printk("  failed processing memory for domain %s\n", name);
+
+s/memory/mem-max/
+
+With that,
+
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+
+> +                return -EINVAL;
+> +            }
+> +            bd->max_pages = PFN_DOWN(kb * SZ_1K);
+> +            printk("  max memory: %ld kb\n", kb);
+> +        }
+>       }
+>   
+>       fdt_for_each_subnode(node, fdt, dom_node)
 
