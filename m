@@ -4,30 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86776C02180
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 06:57:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.872158.1283119 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3435C02180
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 07:09:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.872178.1283129 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXxKx-0002U9-KE; Wed, 15 Jan 2025 06:57:11 +0000
+	id 1tXxWG-0004Qi-KW; Wed, 15 Jan 2025 07:08:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 872158.1283119; Wed, 15 Jan 2025 06:57:11 +0000
+Received: by outflank-mailman (output) from mailman id 872178.1283129; Wed, 15 Jan 2025 07:08:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXxKx-0002U2-HR; Wed, 15 Jan 2025 06:57:11 +0000
-Received: by outflank-mailman (input) for mailman id 872158;
- Wed, 15 Jan 2025 03:50:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Fxu6=UH=linux.dev=sui.jingfeng@srs-se1.protection.inumbo.net>)
- id 1tXuQW-0006lr-IF
- for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 03:50:47 +0000
-Received: from out-183.mta0.migadu.com (out-183.mta0.migadu.com
- [2001:41d0:1004:224b::b7])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e38b6f67-d2f3-11ef-99a4-01e77a169b0f;
- Wed, 15 Jan 2025 04:50:41 +0100 (CET)
+	id 1tXxWG-0004Qb-HB; Wed, 15 Jan 2025 07:08:52 +0000
+Received: by outflank-mailman (input) for mailman id 872178;
+ Wed, 15 Jan 2025 07:08:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=dCnP=UH=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tXxWF-0004QS-1N
+ for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 07:08:51 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 91d8ad6c-d30f-11ef-a0e1-8be0dac302b0;
+ Wed, 15 Jan 2025 08:08:49 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4361c705434so44979095e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Jan 2025 23:08:49 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-437c74d8e06sm12673145e9.31.2025.01.14.23.08.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Jan 2025 23:08:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,129 +47,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e38b6f67-d2f3-11ef-99a4-01e77a169b0f
-Message-ID: <078ddd52-1d04-4aad-935a-67c12ebf569a@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1736913034;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jVhN80lSe9/RJE7xTb/gBfGOBNDnLQWNn0HdoXTdJX4=;
-	b=teidT1Fw63fY1UplJo7A5bi9iE7QpymiDozRtg4zga+cfodcNKCHBs5xeOi588P6Xgf2QP
-	CYp1SqpJZNtGd/fHLlyHIgbHFs46Z3aoqpduhurkaP+sGXJgpt1fvAeSbcUUllSz8kx3vA
-	np+KZYyxC2PBSgowDFD5qMH7M7wgWl8=
-Date: Wed, 15 Jan 2025 11:50:20 +0800
+X-Inumbo-ID: 91d8ad6c-d30f-11ef-a0e1-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1736924929; x=1737529729; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=2Tjzwy0ANnVvnzMWfqKM9EbGCl+dzTJ3aQNsD/tdEVc=;
+        b=BoQgh+gKh1jXWnP8jCxqNKUwAEmmvc4QW0gtfMj9RIJqpQdT4aL3JI8Za/ZzqIyUqx
+         Dwcq7+26cFJ4yLSu7l+UgjHNctNPExpOlJsDYuXK+q9v4IP7Zfx1KRzhLlsUAYwimxHO
+         gl8bywHxmi60sHeLrwajmERLVllOPhnVcAXlJ+mbxQYIW4TFjcblX5NUnL7e2tzfaUH/
+         aaS+TmPaS6cjReNnGPYA8uDEjFRIL5ZbPThJ/aBUg0GxPmmmzA+60yiLw1rdcIY0n2N+
+         +vXcgbH75raciRn+Ydjz5yAdaT1QPPkHzaF3aEVzwcW7e4iAzK+OlL/CwfzjONb4MS6U
+         Sc0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736924929; x=1737529729;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2Tjzwy0ANnVvnzMWfqKM9EbGCl+dzTJ3aQNsD/tdEVc=;
+        b=uMzdcM9DfJy1iDSWKba1RCCMP4XF/tGJbs4vrJGJm9UATtfdZ1Sc7WUK4pGeklbbLb
+         Lrvk6mruUExdUhgUHwVDCXDPd2zus2zfnkk/ZokzJLdgtE5TLsJJtJoP2Vtg6s1iLaEh
+         gZ7Prl/tE0Ldf8nDJ3IJV6V+9aduHuTL+zP5BITEfQXShJecnYdJhVSM/eRnozHXEdnD
+         Sonmrbcibo/koFVWQm/qWxVDb6ZWPTJ5PY1/fHChPu+QTVHx13p35G2DovRicUbk+Y41
+         fbn+rAGOxSz4M7FcGqCdbDkZ48DcEOMnTUY1fzO8WP4jvyDPbaWYkzYaJSw2H6WV610B
+         ABVQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXzflVXeuSH87VcMZieAv+LE1zfIV65JR5uQ5wFOu6BrVx/HvVT25Y1Ln53kNGnxC9pzLCeZrRUpfA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyd48qGCa8wIytPNUeugmi/Rg/VbqPcWR7LvydaWf3cutMzvuSC
+	LtH51TS0b15K+S+12oX9KN4/JZi/fiTO3yTvzQkWchN60bP/3VKEG1C+vm8xZg==
+X-Gm-Gg: ASbGnctpk+jSKSjFsHq9GxI7+Re/FoQ2oVnfXzAMh+qZJK011EGpt6GBp+B7SdcPsHv
+	ZjYoopNYyckQQIw646S/xI3KIxoJu8QUVtmV1giOaj86RjxfLTFnntJIflB9+Wb36alGpWCZ4DW
+	9Ld65XvPcKPeYSFTPGjuwl+M4y50wCov6IiU1DhNiuMW35qB2jCHs+E3f4Rh4lSpnvHVCY2GoQ2
+	Wo3Hrf644umRr3LpJ2+BIcvHl9uDmW94mbrpHVdKnpUvzZRLKTyTGZlE6GIO86bmsCWn0pmWzup
+	9LD4S9Rp/KWkZqDbOvx99hrXBQWTsplekdSYjcIoOg==
+X-Google-Smtp-Source: AGHT+IE9qgl3Nva7YXiZkdebfXUXVUgZn8LDkXRWosJClnf+ToYOM6H+2yoxWWhK5MNKuza5lw7/Hg==
+X-Received: by 2002:a05:600c:4684:b0:434:f917:2b11 with SMTP id 5b1f17b1804b1-436e26e50c9mr213670185e9.21.1736924928794;
+        Tue, 14 Jan 2025 23:08:48 -0800 (PST)
+Message-ID: <94a5ec6a-c216-4aaa-9870-317132b7fb93@suse.com>
+Date: Wed, 15 Jan 2025 08:08:46 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 11/25] drm/loongson: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-To: Thomas Zimmermann <tzimmermann@suse.de>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
- simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Sui Jingfeng <suijingfeng@loongson.cn>
-References: <20250109150310.219442-1-tzimmermann@suse.de>
- <20250109150310.219442-12-tzimmermann@suse.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 02/11] xen/x86: introduce new sub-hypercall to get CPPC
+ data
+To: "Penny, Zheng" <penny.zheng@amd.com>
+Cc: "Stabellini, Stefano" <stefano.stabellini@amd.com>,
+ "Huang, Ray" <Ray.Huang@amd.com>,
+ "Ragiadakou, Xenia" <Xenia.Ragiadakou@amd.com>,
+ "Andryuk, Jason" <Jason.Andryuk@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <20241203081111.463400-1-Penny.Zheng@amd.com>
+ <20241203081111.463400-3-Penny.Zheng@amd.com>
+ <95183589-1a83-4c99-ade4-d37873b85e0a@suse.com>
+ <IA1PR12MB84679A0D60CD4219E9C1A01FE1192@IA1PR12MB8467.namprd12.prod.outlook.com>
 Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Sui Jingfeng <sui.jingfeng@linux.dev>
-In-Reply-To: <20250109150310.219442-12-tzimmermann@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <IA1PR12MB84679A0D60CD4219E9C1A01FE1192@IA1PR12MB8467.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
 
-Hi,
+On 15.01.2025 06:33, Penny, Zheng wrote:
+>> -----Original Message-----
+>> From: Jan Beulich <jbeulich@suse.com>
+>> Sent: Thursday, January 9, 2025 5:46 PM
+>>
+>> On 03.12.2024 09:11, Penny Zheng wrote:
+>>> In order to provide backward compatibility with existing governors
+>>> that represent performance as frequencies, like ondemand, the _CPC
+>>> table can optionally provide processor frequency range values, Lowest
+>>> frequency and Norminal frequency, to let OS use Lowest Frequency/
+>>> Performance and Nominal Frequency/Performance as anchor points to
+>>> create linear mapping of CPPC abstract performance to CPU frequency.
+>>>
+>>> As Xen is uncapable of parsing the ACPI dynamic table, this commit
+>>> introduces a new sub-hypercall to get required CPPC data from
+>>> dom0 kernel.
+>>
+>> "get" as used both here and in the title is, to me, something an entity does actively.
+>> Xen is entirely passive here, though. (Reading the title I was first assuming this is
+>> about a sub-op to get certain data out of
+>> Xen.)
+> 
+> How about "a new sub-hypercall to pass/deliver CPPC to Xen"? or any better suggestions?
 
-On 2025/1/9 22:57, Thomas Zimmermann wrote:
-> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-> buffer size. Align the pitch according to hardware requirements.
->
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Sui Jingfeng <suijingfeng@loongson.cn>
-> Cc: Sui Jingfeng <sui.jingfeng@linux.dev>
+That or "propagate" or "report" (and perhaps there are yet more alternatives).
 
-
-Reviewed-by: Sui Jingfeng <sui.jingfeng@linux.dev>
-
-
-> ---
->   drivers/gpu/drm/loongson/lsdc_gem.c | 29 ++++++++---------------------
->   1 file changed, 8 insertions(+), 21 deletions(-)
->
-> diff --git a/drivers/gpu/drm/loongson/lsdc_gem.c b/drivers/gpu/drm/loongson/lsdc_gem.c
-> index a720d8f53209..9f982b85301f 100644
-> --- a/drivers/gpu/drm/loongson/lsdc_gem.c
-> +++ b/drivers/gpu/drm/loongson/lsdc_gem.c
-> @@ -6,6 +6,7 @@
->   #include <linux/dma-buf.h>
->   
->   #include <drm/drm_debugfs.h>
-> +#include <drm/drm_dumb_buffers.h>
->   #include <drm/drm_file.h>
->   #include <drm/drm_gem.h>
->   #include <drm/drm_prime.h>
-> @@ -204,45 +205,31 @@ int lsdc_dumb_create(struct drm_file *file, struct drm_device *ddev,
->   	const struct lsdc_desc *descp = ldev->descp;
->   	u32 domain = LSDC_GEM_DOMAIN_VRAM;
->   	struct drm_gem_object *gobj;
-> -	size_t size;
-> -	u32 pitch;
-> -	u32 handle;
->   	int ret;
->   
-> -	if (!args->width || !args->height)
-> -		return -EINVAL;
-> -
-> -	if (args->bpp != 32 && args->bpp != 16)
-> -		return -EINVAL;
-> -
-> -	pitch = args->width * args->bpp / 8;
-> -	pitch = ALIGN(pitch, descp->pitch_align);
-> -	size = pitch * args->height;
-> -	size = ALIGN(size, PAGE_SIZE);
-> +	ret = drm_mode_size_dumb(ddev, args, descp->pitch_align, 0);
-> +	if (ret)
-> +		return ret;
->   
->   	/* Maximum single bo size allowed is the half vram size available */
-> -	if (size > ldev->vram_size / 2) {
-> -		drm_err(ddev, "Requesting(%zuMiB) failed\n", size >> 20);
-> +	if (args->size > ldev->vram_size / 2) {
-> +		drm_err(ddev, "Requesting(%zuMiB) failed\n", (size_t)(args->size >> PAGE_SHIFT));
->   		return -ENOMEM;
->   	}
->   
-> -	gobj = lsdc_gem_object_create(ddev, domain, size, false, NULL, NULL);
-> +	gobj = lsdc_gem_object_create(ddev, domain, args->size, false, NULL, NULL);
->   	if (IS_ERR(gobj)) {
->   		drm_err(ddev, "Failed to create gem object\n");
->   		return PTR_ERR(gobj);
->   	}
->   
-> -	ret = drm_gem_handle_create(file, gobj, &handle);
-> +	ret = drm_gem_handle_create(file, gobj, &args->handle);
->   
->   	/* drop reference from allocate, handle holds it now */
->   	drm_gem_object_put(gobj);
->   	if (ret)
->   		return ret;
->   
-> -	args->pitch = pitch;
-> -	args->size = size;
-> -	args->handle = handle;
-> -
->   	return 0;
->   }
->   
-
--- 
-Best regards,
-Sui
-
+Jan
 
