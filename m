@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D62AC02183
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 09:22:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.872256.1283215 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5788C02185
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 09:22:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.872255.1283210 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXzau-0003OG-Ut; Wed, 15 Jan 2025 09:21:48 +0000
+	id 1tXzau-0003L4-N9; Wed, 15 Jan 2025 09:21:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 872256.1283215; Wed, 15 Jan 2025 09:21:48 +0000
+Received: by outflank-mailman (output) from mailman id 872255.1283210; Wed, 15 Jan 2025 09:21:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tXzau-0003NU-QS; Wed, 15 Jan 2025 09:21:48 +0000
-Received: by outflank-mailman (input) for mailman id 872256;
+	id 1tXzau-0003Kx-Jb; Wed, 15 Jan 2025 09:21:48 +0000
+Received: by outflank-mailman (input) for mailman id 872255;
  Wed, 15 Jan 2025 09:21:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kbvD=UH=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1tXzat-0003Ki-N5
+ id 1tXzat-0003Ki-Eq
  for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 09:21:47 +0000
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [2a01:111:f403:c200::4])
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120003.outbound.protection.outlook.com
+ [2a01:111:f403:c200::3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2460b1c2-d322-11ef-a0e1-8be0dac302b0;
- Wed, 15 Jan 2025 10:21:46 +0100 (CET)
+ id 239256af-d322-11ef-a0e1-8be0dac302b0;
+ Wed, 15 Jan 2025 10:21:45 +0100 (CET)
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by DBBPR03MB6795.eurprd03.prod.outlook.com
  (2603:10a6:10:208::19) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.12; Wed, 15 Jan
- 2025 09:21:44 +0000
+ 2025 09:21:43 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::35ac:8893:c31c:b971]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::35ac:8893:c31c:b971%5]) with mapi id 15.20.8335.017; Wed, 15 Jan 2025
- 09:21:44 +0000
+ 09:21:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,36 +49,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2460b1c2-d322-11ef-a0e1-8be0dac302b0
+X-Inumbo-ID: 239256af-d322-11ef-a0e1-8be0dac302b0
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y47soDzYjxppb1ccVqFExjnQnp1jsBg/bqv5UW3iEezZfPQxrhzUrn0FN/SxDNtsjuzqXY9J/ZfLKCGzOe5xaMnuGzHlUm/d5axwMXZs4WIKcYSOMXKAW9U52yns67kjflM9tO+5rBe1/CFUGdpd+n7O8nauNBnPdWy8lZ2C9cmTDt9wVCp8Ao3hNExq48tDh4lhLdP2fH9SV316jZhGOvclUC3sCsVNkwX5l/FHFxmOysyritu86TQDu3GJGUvtSRZkv1wowmdw9sdgkqpFdv6Gz3090Iz1aUXcrGbzwm0buxv8iguBZ4Y2dCbOhg6JGgsiqBnAWHWNQFflqIQUtg==
+ b=AGLBaHj/qSdH/A9Evnyc9piWdqjr3roME8y6giycGP4wJ5jozdpUSI7z8BXFtH5grFlLoBkO4gta5e3CcarJrL9/G8yY9Eou8IcurnUrdD6VikFeHhwfItsSo6XPGx/dWYGs/4mif+pSLn177wLnxY65/A6jc/3kUa+PgT6yQdGopEqNNIJSUjCtqxLyrvKVU2TzhVbZrcmW0oOqDYexUAMvuHLc/NCB1zfb0wm2K2DYJ+rdrFkHB4/fT846ic0LbxBgvKGy2W6kgE7tAyKaVMoBk3xNkz3FokeMCeClhQowPaYy0GPp4Mw/wHKgel2IqlmMpcudF096MuEapA5H2A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eFrATFgoRJ6d7ziVWdmSYdnPpEDIZasMI6cQcXBIx4o=;
- b=n8tX68oIpvHYg1ZCeflSG70/qtgvEZmRo6H+JiUysS+rSQe+fLD2Yk4tmjKz+BcxbfzDOBEZiEB8lvhfDoSA+gC0jTNCaNf4zHgyqVXrfRzr8gZhG2VrMZUcf+SyVr02Gf4dWdRrHdqzIUrrfJmxszE3OkfNO+oOh/1pdhunJy2hwtxkg5hvKjaWq708Srkl7SZvamZ+ZZV7GECuZ2xcT5UCcRQqiYlR6iJZAN7LlvsW6EXmCOtRIDoismMSav90IeQvPTrXxFLWc+4kMPlzylMOT7JlHiM4s89n51qKUpASr54X9ZgVrE+hIm6+VyKdEBY6zeE/jGKG54+7RAKpvw==
+ bh=6Top9evq/WihGHQvxwO1jBz6G7LcEAMOiyT0Vi4ojDk=;
+ b=LgOx8xd38JzrJiarpWuFjF+EcoYunU/x6Dfy6pXVBmbOhA4AjcMfMXUYxIZHTaaBiqCnAaQYlghYFDdkVQWVXQa+CCWIk30vzBOMe6HdrtpJZvyv7JCYgCWPsK8axaadgkvUFKL//P5IMK7a8M01UHBrGahskptCJZwXENg3AaHdb062Hs23SIWVTMYWkGf85lGyErmQ5b+gbgg2B0jB8MkuSHTXVMqaHgcxDTXeUwxcyUb527FJZTg+sfGpIjhOP0cJ9/CbIbfS7oL2mSu8xna6oZvrfms0SJcClILEbemW0+ri3w8m2d+VvEwa2fuUYoiwBiurCsoalrp1q+7Buw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eFrATFgoRJ6d7ziVWdmSYdnPpEDIZasMI6cQcXBIx4o=;
- b=a4Md77JYkJk3gAFLISq0ArsCsviQXa6q1QgekP8VEum32pAsqRMeYVBHJNCC46193s23uCTZe2HlG/3CPlgSI5zv0WD2c1JMZ5WVcKCgCLQ71nfZQRhIxrRGsYrcMp3Bm19vKjrY4UXMyykQAmhlbWvzSrweii2QLFIq2vNtfTF51ELpKQ8t4wrZeyJWyOUPGKEdm41kUqRQrVy+I07dKdv8wzVED9Jozpgkw96QxhvABAVkwH2j4lQCSwkkWTah27TShEyD5OfVciW6iVGIrzIDF6n2ky+P3IzvGWduEM03efNDG8o0kfnXNzkj7WjIdV0neL8j8vw/BjCm0NxLwA==
+ bh=6Top9evq/WihGHQvxwO1jBz6G7LcEAMOiyT0Vi4ojDk=;
+ b=XGboKKkymnE2Y/pHxwxRLvtjkuIGDMcml4bmRExV9VVFlk3xtNJdOblvb2ypbkfXOtS2M9mDFmui4zAwIackD2mR/dsbgksBM4hfCNpNIGIDxvnGB5WVuUrvbdAQwc5XkSh78caeH87au4+2LGhmC8ru7/98IgeDwRmlFTnwcGlKHMb+RYeRtnWLoZKMjGp+Feba5aA1ceLdAJtNk4oyl4XP8Iu6C0IpsnNt+5AqZsk313TLzOp68o1Jy8XjYok3LkDnM+5+iA69L63CQ7Lh59JZ+YMJPwwsEgcREISf5gbDC9oHz0Aq2XXskJfKBCl64Rt+45QnVShqpNw9uq7qPQ==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Mykyta Poturai <Mykyta_Poturai@epam.com>
-Subject: [PATCH v3 2/2] xen/arm: platform: Add support for R-Car Gen4
-Thread-Topic: [PATCH v3 2/2] xen/arm: platform: Add support for R-Car Gen4
-Thread-Index: AQHbZy7k98WxcNwle0+yx5zuTI6nBw==
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 0/2] Add support for Renesas R-Car Gen4
+Thread-Topic: [PATCH v3 0/2] Add support for Renesas R-Car Gen4
+Thread-Index: AQHbZy7kXq2K+/rUoEWFgqp6M1ngYA==
 Date: Wed, 15 Jan 2025 09:21:43 +0000
-Message-ID:
- <c09059f745c33b1f10f0d1b6cb790a50b1126392.1736931052.git.mykyta_poturai@epam.com>
-References: <cover.1736931052.git.mykyta_poturai@epam.com>
-In-Reply-To: <cover.1736931052.git.mykyta_poturai@epam.com>
+Message-ID: <cover.1736931052.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -87,69 +83,68 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DBBPR03MB6795:EE_
-x-ms-office365-filtering-correlation-id: bfd9ba29-8dc3-4963-73ca-08dd35460728
+x-ms-office365-filtering-correlation-id: 22c62564-d34e-4326-abd0-08dd354606a2
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700018;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?kDMEFbZCFZaEHvJJ9jpECctJXAxFOFJReT12kZ8k4X/BuO25Yhac7Kyk3N?=
- =?iso-8859-1?Q?GgecFmsfDDLIz6+y0mJjiEp3Uy8wP28m87bFoR7Wt6P8qWLDTbItIsNumF?=
- =?iso-8859-1?Q?3PiyvLiQpZfVNaf3RKe+pTbxcPjsQHEzpR3rLMkV1KPo+4mUlMDTiBI7XK?=
- =?iso-8859-1?Q?6HAlsyK9+w/qImNfpsiG1mZ3vtphfk1uzEigC5Ey9vBBlRQO4gE+jTNFkt?=
- =?iso-8859-1?Q?qvHTOu5j2xYFJl2BQ7KEwSLI7tuoVyh0iqxuSTzIHYXjx8+Z8HTnMrjso6?=
- =?iso-8859-1?Q?UasYhWIZEhXbuxdpH2k1fQ1Mm1U6U9WFTjw720dExh5SCGvyQ5wQnYVnYG?=
- =?iso-8859-1?Q?D21ofsA2Uqi/C46Onhk3hwivR00WepO6C4CS8OPaBKqJDyrc+eb3bEflbs?=
- =?iso-8859-1?Q?VFUXy3DRuX84kXRxo6uV7tgKyv5V4mtyywQk0QCAsQGfwhEuli3N+1F4XO?=
- =?iso-8859-1?Q?vN04O7UDigRhaptf1wNFi50mphF2ySWtlg5sx+GYtzxBE8BlQVAlvpfEi3?=
- =?iso-8859-1?Q?ajXcTlLMj4XllY72VCQwsJ4AURdarwz8ZAecbAjeX4OnGvIwyi2WI1tyBg?=
- =?iso-8859-1?Q?Spxk2G1udSF2lARKzPvrKoviCqRuDBZz7uQURV+R7laVITI1rDpF8rc4O+?=
- =?iso-8859-1?Q?2f8s5li9CmKDnJXoGz4oMpesklMbIZfZWVqQyv6qhmFfipTgPDeC+xMMaM?=
- =?iso-8859-1?Q?WrW4gz4mpNkAERMcNc5yMXwqvUpXbPtFodBXdyxDVwiUPk2Fj8Z93PV/lN?=
- =?iso-8859-1?Q?GQB4FhYYZcqNci2d0u3lU643Og4/A0Dw3i6gPkIE13ALgHt+KQ3V8QDBWC?=
- =?iso-8859-1?Q?hDafspIy4mPBJNSwCu74wGCwAqWXZMpWu19Qn20gxvEa+crwH605jkUktc?=
- =?iso-8859-1?Q?Z6hF2OmhSIKiOrVshvQk9rgKpdEPNWURtj/xoQpv4kUbbQa1vUvFOxPTo0?=
- =?iso-8859-1?Q?mZ834ZXfFbDieSeCx2ucihgfdMD7BNUrQ11XYrO3S0c2RXHF89M3G2pcov?=
- =?iso-8859-1?Q?HSQjXxv07+sWUEwEaU0/uWS9CkRRcWyeOaJUUDUXwqvoA0Wh4JEWvZrp0Z?=
- =?iso-8859-1?Q?HPpuuor4n2tdaFGD3HwVuz59GnLeEhXzG41tunDglj7kKQ/dOllMpkNSS4?=
- =?iso-8859-1?Q?qRYPmyetetqEsn35JUQ4ap7OjaJZ/BXcWr0QniPz6IVEWelP0ayFsFSfTO?=
- =?iso-8859-1?Q?hZZroiTIapDM6mEO6opIEzKWz789xFwz3j9tvKzBEnlCZQO5vrWIO7bef0?=
- =?iso-8859-1?Q?KdYI56PJ/8IzW1bAPk68oFB+4DmJ2w3+xZRGQ7cjF6b+i6WhIhy3bD2oiW?=
- =?iso-8859-1?Q?2Cg3Sy/DxAHkOXGg/LD6SyHtb/VAOU2Zg2D19IGsAxpcoIFE4V8b1On/8O?=
- =?iso-8859-1?Q?bfkXGNE8dTQuvl6HuCkLGibZn+njHj8LLv5nv3eihhEtyPwi1yRLFv0eAK?=
- =?iso-8859-1?Q?oLhypUmMKAzHuapJuXzemG3/nQtTWAmaWbp9BX99O7HwyrC5m1ti+gSxBM?=
- =?iso-8859-1?Q?lH/zQL1MVPX/RsBIGyGw+C?=
+ =?iso-8859-1?Q?01dOzkZA/YHEKwhQg7zFSxe9OWnG5craFNXzYz26Noeuq3JqcxdGRv92F2?=
+ =?iso-8859-1?Q?ztCUoQKwKZLA/ql6DDI+k9ubT2IQ6Kypqeu2Gjmv0gl1zKrWx8VtDe/3wR?=
+ =?iso-8859-1?Q?5aw5sacdOuFbtjMQk5u7y9kNUdA0af4iH8WRxlTo/OtkAZTJhsrGPyinia?=
+ =?iso-8859-1?Q?+m49QPX/hmuea2W5vYalg8CKa54DFD9ZVuCDQDSlEJ4cDlAdBQtEiTTZH0?=
+ =?iso-8859-1?Q?ZnjbWbQXV5xJu71mpmvPjaSQY1KWL6R971EUwA/bHE5Et+vPqoPkZQwBtS?=
+ =?iso-8859-1?Q?iIcKPmwI3dW8GJsfshv1mje57b7AcSVje9yDg/+0m775/kmr8zApgMN0n6?=
+ =?iso-8859-1?Q?mxbrDw3uKeKdxPZKhp+QW+VdD7IH/iAeCYl0+AEaKy0f7h09eIAw8QKywV?=
+ =?iso-8859-1?Q?d4JzufCUW5AtsksCSMW47SxvT2ZTHt9po9QBVAeXHChUx5imh4W6FVzSxa?=
+ =?iso-8859-1?Q?UeyoCXO2kSi3giPtBrsDhPMtx3VdwikFfz35lG7DWv5+SfXSx+8JEsJnDA?=
+ =?iso-8859-1?Q?blAPmRferbpwM33JgNybgRSyxAHJm7hiVxMh/p7ApG21iYYJONMD7z2uFV?=
+ =?iso-8859-1?Q?OFfhgp/4O7gT/eaZxSmXEHJ54ugyUk9KDBEL4PkOSd1yQiZCrb1cJWi5Xg?=
+ =?iso-8859-1?Q?E8MtsADAej+Re3F0gV294Ru8hVFloiy3bR5gKkm2MyDEvDOEMXO/5CZpYD?=
+ =?iso-8859-1?Q?Ftj/z737TgyW7HNyxQljAbvB8PfL/tjTb04atZkPgTWjarYbbs+IVkCqJP?=
+ =?iso-8859-1?Q?Fnsy1WyZlqEG2Co3s8zwRisIVPDv2FecconbDaw43i2qvzskyFIdqusvhN?=
+ =?iso-8859-1?Q?D3rSgC5OCUnqLqdHANgeTHNnNzHU75FMLyYx791kRy6OMpfAPktRniFqRu?=
+ =?iso-8859-1?Q?YPzYrWuEMX10u+lCf+4LyW9uiCI+TtyzmwmDhs668gYyNi9eINRqKtnrVi?=
+ =?iso-8859-1?Q?WFABQyliNN7v0vSUDUS/IvvweD4XxC+aJVhMmMLMl8IZtLvG1SP0v54PXz?=
+ =?iso-8859-1?Q?PFrCfi0BUaOmXgspeRm7Ci6G3Q4trP3X4pr2x56drUZU32OQe32hjG4AMN?=
+ =?iso-8859-1?Q?6YMn+JHz/XkCFsY1su9wis4A2GNgFm0M/7xr3Rib12WkfRCZNBhhz00uud?=
+ =?iso-8859-1?Q?ni0h0g7m2lqsiKG32+xibcpNoclHBfwrIOlPXzb8/MSExrUSeugDDJtFVM?=
+ =?iso-8859-1?Q?5XO0rWxjUgmeqsNiYT4qaBGPnGSdPhXKa5cHnohy+WH9UF0Ip+WEoZdSG9?=
+ =?iso-8859-1?Q?6pnhqXun4paxQwLq/Jtst/t22jN7xXZFlqp3gJWl675yjyU0A2bQmrf/JO?=
+ =?iso-8859-1?Q?8cBDls8yPtu0w5tIUQ7nq7loonKrqRL3NISV/qAg+qKa//Z6GXdSxdzOKr?=
+ =?iso-8859-1?Q?O757MC7uJrm0+GgAoazLFFU6wtfTcTr0fd8xMzMpLs+RQ4OYia9FCYwE85?=
+ =?iso-8859-1?Q?0mg+YB+bb7+0q1JtUVn1PWfTVw6Kn3Ed4Uaevw=3D=3D?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700018);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?0WKYk7reOnB9XnzDolECMk8r9zw0OFW6Tth3nY6MOMB7ANo+d9yjduMWIr?=
- =?iso-8859-1?Q?eIWQRRCF6cr6YiO1YEY8qs8oUwW4IoEm2EG5SalAollhyD1TUpUWUcNYYO?=
- =?iso-8859-1?Q?v/7V/Z+t2nYsLWv1cpiN6EpDrhjZPKEXkNSjJNOnGmjgh3ege8QXw7s1Ay?=
- =?iso-8859-1?Q?Obr/1eF5vYoSj9iJRlmLXaMR98jlGlL5+Yoyl66gxeRXayNcXOJL5yoprX?=
- =?iso-8859-1?Q?t2sfWUuVhz8fa+5VEWpBACNwLtyxf8JgaJUdtPZA9afKgb09wj7lew2xbS?=
- =?iso-8859-1?Q?4HwrgYWwe05mlDtsG15MJN3vyyAiK1YcaSA1ckJ1U4M9q9a5DlXDxIfQ5a?=
- =?iso-8859-1?Q?6VCxR8Pok1hBt7hgYzdyKFS3DuYICrV6uRWDszQW0MUKgN3R3grXP2TeL/?=
- =?iso-8859-1?Q?gjHJMi/OQgigjpRs/k4ab2FuBTZ2HxKDn91v0hfvtEK8Vi7hYAwurQN+Na?=
- =?iso-8859-1?Q?Vm6vRu89tq1vMHDz9EK1e6982lwk8bbF3Yb6gjOW07MaNjuNR51KRWi5yt?=
- =?iso-8859-1?Q?yeHBa80Am/eCO134G8WlrxGZBwnQChbXtu45V/njX3vfZtnmNM3cpxut5s?=
- =?iso-8859-1?Q?JjoozfgIfLlXkm8Aq2MhsCszKRHtDfCUu1i62AT83h1+jHEJ6xojrC293b?=
- =?iso-8859-1?Q?zdYwK4GoTRIW+64pjAMQu6rRCgUYENGp8NTgW49vFr72IXYaITcWBPUpoo?=
- =?iso-8859-1?Q?eHMhB+5XmfjcQX8yKgaJbyogAZ2bPkNkkg4qV8Ta6IKll9aVgJhJw8dm7K?=
- =?iso-8859-1?Q?8IdNJr503yHe/a9sUBHI+pXi7XPVVnv91Sq1E5RUzoE83LNyDjJxkuNt9N?=
- =?iso-8859-1?Q?4TgN6yIhZD+TgXZm2HELb+1Jb1pfuHm8omIDB7YcIpKngEhfmSVPLMU8Jw?=
- =?iso-8859-1?Q?V5zwFxv5r1y9UwBh4yZps/JrjR+R+VG2OkrqB7C0vQxs8FIAlY7s6bQdjz?=
- =?iso-8859-1?Q?NQLU3q4QXcCFgLycb7HYPLnf6m7lzZmuLTS92TcokcfplcTX5Zod7D3mfI?=
- =?iso-8859-1?Q?rriPRK9b2qdn1EXO7pkaFUJCVuGKqhRybBIAuQWQ40rh9AcJSV8y8duCc6?=
- =?iso-8859-1?Q?ZshjsfIjjiml+lMUEiPqqpDFPavKGbgW9AOgRJoU9P9K0D2mqxlOvVujMa?=
- =?iso-8859-1?Q?OIzDGpbw/jWYXEP2Np4vpol20kiNBXRwvGnJWS7gfk2FMZa5Nzhk4NxgyM?=
- =?iso-8859-1?Q?JkwSz+GVeSVsR+L9AOITSMVQ17ybznmtz0/sa40TSXOVVl625ofGRayHOC?=
- =?iso-8859-1?Q?msb+ha5VbY81YLWfkZe/f10Sn0N+aOBu68fD/M0+zsnBjJKWudLvFYFIxr?=
- =?iso-8859-1?Q?54IGYQInc3iVQ63GsFHW8S9ijmdlvOj68QcW6vxIbqjEtKabxzKEUSAGlD?=
- =?iso-8859-1?Q?fqiV8x+N0sH86TbAQC3Su7J6GZmyafA65IR3gNBm7b7L7cfvw78s7ziBBt?=
- =?iso-8859-1?Q?ifAjwsMr+/XDuWQuEhFTmrZmdM0FEVJ7o9zBNKmuvnLpg6hRumuyt5zEwD?=
- =?iso-8859-1?Q?2Z/f0AkgYvYe8GhgwRja+iua9Qq+s1SLH4Hiww+velvBeD0ArsJDBa6iNu?=
- =?iso-8859-1?Q?aD/bNZ8r/iv7xY03YKFOOLXNrdbSrsG6vPvz8m+3UdQcE3tAObdqr27KkG?=
- =?iso-8859-1?Q?N80X85Hx93sN5KV71xIbwaFqQ+03c6TraDX6ZtvTwBlpycb3jI4ndzJA?=
+ =?iso-8859-1?Q?u7hM/nKXg8WhGY79fzUwksM/RHDa6HcW2jIGepER29ous1/q1km93GlIJT?=
+ =?iso-8859-1?Q?dee8IcXKMH4txc/sRck06CyL9+RApKvbv4CTMu184mLYNVJLhysz6MuxWq?=
+ =?iso-8859-1?Q?B22X01WpAyDI7TuKprz+UmNZqkJ1VFb101yEwqKA/XExfcgZizZKoXCugT?=
+ =?iso-8859-1?Q?DLO9b8jhUpYBKMkYtsBL1yt8/6su/HcGvVSs8xmk2a6b1DJlvoI/BstTZq?=
+ =?iso-8859-1?Q?JjFR4t5x5i7l2omvmVw9B0NxNdawrhOfsuXogwHbXhlOqsRVIp7zLbTNu2?=
+ =?iso-8859-1?Q?YpWjwd+6XuOa963qPH0zFaoO8jthGQboWjoKRzSFdrJTNv1w8M/7CG1JrN?=
+ =?iso-8859-1?Q?bAOals2F3LKpmnux19mvnHLfq1MdOsCttJwtZ7gCp2Nv1KT/02833yzPIz?=
+ =?iso-8859-1?Q?uqqsw1oJyvKoWhh6/XV6L4qkRo8MY/dV2+I6y7VOnVfZRLg++Ct3/gWkLe?=
+ =?iso-8859-1?Q?80LFNcEBWJfwf44/1yyXO9GFtQRns8OatA2Tyn6TzEge19xmrOZ6+gzaPm?=
+ =?iso-8859-1?Q?hKJNwebk1VQaD+ZMQanK/vNLeg0KpBUUNw2+UuIc0F64qhXt/MW3WEO+wN?=
+ =?iso-8859-1?Q?l7u/ISvfSH//PhXYfggCeGaVfzS9679VJGmnwf0xPk6z9ZR1la/X/suBcS?=
+ =?iso-8859-1?Q?90cuMw0s1ojKtGyNDJi1nR/P6smJz6rHrQstjiz3I9EMhXL7m21RgSNeqv?=
+ =?iso-8859-1?Q?r16rl5vfExF5VWzHU24YmSlLY36yeqeoIt7X/ldt1mjfqenPtyufMkCPYG?=
+ =?iso-8859-1?Q?1EO+wfM5ea5iMc3H7zkWyNLa24oJJb3YHJgIHEmnfA9QveWZ4gnFEFmbnH?=
+ =?iso-8859-1?Q?HAxzE1LhVchsoKAz1SfeIaLwcJ0DRJk+VmgXNjcxCeB6zxcx6M1lkLX66v?=
+ =?iso-8859-1?Q?Lj16zU8q0xRTAn5zZubFpjwS588784X4EBGwoqfPvzWZ/m/cujjv84RE0U?=
+ =?iso-8859-1?Q?y2Rq64qRxg7y17HzkNCqFT380Dl8JiG8z565bUGDIuqtGz27mJ4X/ohWs5?=
+ =?iso-8859-1?Q?pGrU1zwLdeE9zxkzrNlBSyel9T0umjKFR/ebLVFHeIPhHNVseOVtwj73Gm?=
+ =?iso-8859-1?Q?n3sp5DcFjBCHGZH8qvfGhl7Ie6YkQfEM0B/TVNYAAXwoILfNEXjDu7GtY2?=
+ =?iso-8859-1?Q?Ykd5rb9cfpaZm9wDqgig9fs0y6xcsB+IiQwbOvXoH4nuIkjBK6xkuyJO2T?=
+ =?iso-8859-1?Q?1JQPxzAqvLougmRIVx6mqq9zwmbTK+r6RtlHYiz95WanG/5l5J2lZ3CLFC?=
+ =?iso-8859-1?Q?GnQI7+Y+m8oVcxl/yDqMtSguejrGUPNBuq0tBCgjKIw8ckzWIggnpFTdnm?=
+ =?iso-8859-1?Q?YAgd8peijg0x7v67SauAiHI40dUEYG8uUFIfjFDmdy0HEUx/KqDnsv17Bv?=
+ =?iso-8859-1?Q?fh/O6GqbBaoASyZQyCwH5oZJDhIgzf1kPYu0Uq+OlsKEPGV6t35iBvdoM0?=
+ =?iso-8859-1?Q?w0SVTHPTogwDwc3YWALEcFkSa1RjSFUf7efjjtshWduucWBKVWg1bsOvie?=
+ =?iso-8859-1?Q?gP5K4AZBmDjRXd2jAPM2X2tcDJfp9LIvSdhwnGSAE2xV8b5Ajz0OliAgM6?=
+ =?iso-8859-1?Q?qDkOmiUKVLTl80tkVlbK2Hs7kc0E1q9XUhQLAg3BXjeUe/H0tJR8uuJyEZ?=
+ =?iso-8859-1?Q?mVySln4mMrTeW5kiE9MbtA29+E0uDeVHyWC498C1bQNR3s3fRhYvH6wQ?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -157,58 +152,36 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bfd9ba29-8dc3-4963-73ca-08dd35460728
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jan 2025 09:21:44.0040
+X-MS-Exchange-CrossTenant-Network-Message-Id: 22c62564-d34e-4326-abd0-08dd354606a2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jan 2025 09:21:43.1709
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: NvNJHuS3oYckyXUhF82nt2Zf5CVB/NyzqGkoBYYPu+/bN7F486AE+99yjF+MztAVdGo0hKqoWcfN3qHxbMHGMA==
+X-MS-Exchange-CrossTenant-userprincipalname: owqCvx+UtBcQPTV3LEypmJggwTxvfAteG8KMZPDMDuNBk9ye/rLkmFkbp1/fGxVKlnKP4mwbDFREiA7c01zUTQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR03MB6795
 
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Add support for Renesas Gen4 boards such as S4[1] and V4H[2] by adding the
+appropriate confing option, and support for the Gen4 ITS.
+Tested on Renesas R-Car V4H board.
 
-Add Rcar Gen4 platform choice to Kconfig to select all required
-drivers automatically.
+[1]: https://www.renesas.com/en/products/automotive-products/automotive-sys=
+tem-chips-socs/r-car-s4-automotive-system-chip-soc-car-servercommunication-=
+gateway
+[2]: https://www.renesas.com/en/products/automotive-products/automotive-sys=
+tem-chips-socs/r-car-v4h-best-class-deep-learning-very-low-power-system-chi=
+p-automated-driving-level-2level-3
 
-Changelog:
-v1 -> v2:
-- Added RB from Stefano Stabellini
+Oleksandr Andrushchenko (2):
+  ARM: ITS: implement quirks and add support for Renesas Gen4 ITS
+  xen/arm: platform: Add support for R-Car Gen4
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
----
- xen/arch/arm/platforms/Kconfig | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ xen/arch/arm/gic-v3-its.c             | 141 +++++++++++++++++++++++---
+ xen/arch/arm/gic-v3-lpi.c             |  23 +++--
+ xen/arch/arm/include/asm/gic_v3_its.h |   8 ++
+ xen/arch/arm/platforms/Kconfig        |  10 +-
+ 4 files changed, 161 insertions(+), 21 deletions(-)
 
-diff --git a/xen/arch/arm/platforms/Kconfig b/xen/arch/arm/platforms/Kconfi=
-g
-index 02322c259c..8785c168bd 100644
---- a/xen/arch/arm/platforms/Kconfig
-+++ b/xen/arch/arm/platforms/Kconfig
-@@ -29,6 +29,15 @@ config RCAR3
- 	help
- 	Enable all the required drivers for Renesas RCar3
-=20
-+config RCAR4
-+	bool "Renesas RCar4 support"
-+	depends on ARM_64
-+	select HAS_SCIF
-+	select HAS_ITS
-+	select IPMMU_VMSA
-+	help
-+	Enable all the required drivers for Renesas RCar4
-+
- config MPSOC
- 	bool "Xilinx Ultrascale+ MPSoC support"
- 	depends on ARM_64
-@@ -55,4 +64,3 @@ config ALL32_PLAT
- config MPSOC_PLATFORM
- 	bool
- 	default (ALL64_PLAT || MPSOC)
--
 --=20
 2.34.1
 
