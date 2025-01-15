@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF9EC02180
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 14:37:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.872632.1283603 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D8BC02185
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 14:37:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.872617.1283613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY4Vy-0004IU-6Y; Wed, 15 Jan 2025 14:37:02 +0000
+	id 1tY4WE-0004cO-Cd; Wed, 15 Jan 2025 14:37:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 872632.1283603; Wed, 15 Jan 2025 14:37:02 +0000
+Received: by outflank-mailman (output) from mailman id 872617.1283613; Wed, 15 Jan 2025 14:37:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY4Vy-0004IN-3d; Wed, 15 Jan 2025 14:37:02 +0000
-Received: by outflank-mailman (input) for mailman id 872632;
- Wed, 15 Jan 2025 14:37:01 +0000
+	id 1tY4WE-0004cF-9x; Wed, 15 Jan 2025 14:37:18 +0000
+Received: by outflank-mailman (input) for mailman id 872617;
+ Wed, 15 Jan 2025 14:34:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rWPo=UH=casper.srs.infradead.org=BATV+fb641630334796bb9467+7815+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1tY4Vw-0004I7-Ai
- for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 14:37:01 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=zshn=UH=fooishbar.org=daniel@srs-se1.protection.inumbo.net>)
+ id 1tY4Tg-0003GN-NP
+ for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 14:34:40 +0000
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [2607:f8b0:4864:20::f33])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2b03187d-d34e-11ef-99a4-01e77a169b0f;
- Wed, 15 Jan 2025 15:36:56 +0100 (CET)
-Received: from [54.240.197.234] (helo=freeip.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
- id 1tY4Vq-0000000Ejmc-1oFx; Wed, 15 Jan 2025 14:36:54 +0000
+ id d9574c04-d34d-11ef-99a4-01e77a169b0f;
+ Wed, 15 Jan 2025 15:34:39 +0100 (CET)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6d89a727a19so9128686d6.0
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Jan 2025 06:34:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,185 +42,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b03187d-d34e-11ef-99a4-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=olriidv7A3tyM6bmljEpUfHKcxoBpc5a3UJhy4JiR84=; b=T6IS/uAOiRU1edlwgoFko6UDPx
-	4q+J6nTt9Lj7QK9SWF7lZedZLerCvD86RItaO11b1dJMaH0cxC+sattftNweGYpGqZrXNhRPmJ0Hw
-	Y2V8JzKtnEu+x+uOgizfwJDGLuzvlGBOeteF2ztXG88U+wontcblj79tZX6W6iLkKWT60OWVoAJC+
-	z96tg7bnbpc0FDtZ0et5UX37cNl9ugLfo9erOPI891JwM+RzDN8GDfVKcdCw7zDil80EyY6/DjvmX
-	53/XF4nCvWuCCenqwcy7+Gd7XGjp8/mpvSQwiCiqOwSzX5lMKuuFQs935hYn9Dy8I36UG3HyMZcqz
-	i5YebbYg==;
-Message-ID: <70fb48c6d8516a4c4fe9318d20066fa78b72c4cb.camel@infradead.org>
-Subject: Re: [PATCH v2 0/2] xen: error handling and FreeBSD compatibility
- fixes
-From: David Woodhouse <dwmw2@infradead.org>
-To: Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: qemu-devel@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>, 
- Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Kevin Wolf
- <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
- =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>, Paolo
- Bonzini <pbonzini@redhat.com>,  xen-devel@lists.xenproject.org,
- qemu-block@nongnu.org
-Date: Wed, 15 Jan 2025 15:36:53 +0100
-In-Reply-To: <Z4fHbzgSmV9E5DR4@macbook.local>
-References: <20250110093531.23221-1-roger.pau@citrix.com>
-	 <fc9b22c55eaaa79a3ef9829c270bc4b4e93be7a0.camel@infradead.org>
-	 <Z4fHbzgSmV9E5DR4@macbook.local>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-O/SC296LeBTMCgTutiLq"
-User-Agent: Evolution 3.52.3-0ubuntu1 
+X-Inumbo-ID: d9574c04-d34d-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fooishbar.org; s=google; t=1736951678; x=1737556478; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=wgpCbUXuk0fjx7PlpFBa3YSbnvvXmj+DNx/eEdB8F5M=;
+        b=UEMMsoOdwnHr2n3YDjjvNiiZ+vvOAjWjL8RrL+194tlXk1RX69aXuyF0bGYP21X8HY
+         g04PKV2ktGIdFZR9BzivX2KAY88ylfq4Ha43mOxhEJ0Z9juSqP4gM5ybL+RwdeTqpWXu
+         sfoRZuWK0pIUHBfeH0KJm47+8zmREQ3FpmH7DmUCAqxTDRY+mZ9cJ7g9g1RJkCTWAE8f
+         1OQF+1WhdHZnFv9Gzx8AJrDTMFczux+QhboaxUA2YUdBqEI2i1G2C3+GWWSOPNxRDHEh
+         z8o3tnQ7MQ1UFZ6CafEoVd/x0Vv7E/m2zR4NeWhLn5wTX3gpFjcM8M92UTiNOVanmpLy
+         lmwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736951678; x=1737556478;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wgpCbUXuk0fjx7PlpFBa3YSbnvvXmj+DNx/eEdB8F5M=;
+        b=I11Q55wIOPDHHNDO/eafvjC6UMromxBfWHJEzgCeJfL58bhPmLGlQVL0CJvdySq6nr
+         MJz+YBLm1UCiy6HxL2FEHtEON9dj4J1SjXEDYRsj5F8wPSrIdm2/zWK7d/UBz6X0FT+p
+         r5TLx+WD9h2OT9Z4yKhDgvJgp2jRQsjye6wt1lWKR4A59mEtMqgaUopOqDpqtiMWr2fj
+         y2V/TdwnpwrqeQTXVvh9gQ7ti/+zvgAfZ+Hws74ypqJf1VYEJSMY5uA1rlXJ0bzVfvAS
+         ie4MjhlOZhZNNGEBvQQDDgLW3639myANzzhtHKHTK7tQqg7wwONSTykk/Rec1zqByxeV
+         Xpjw==
+X-Forwarded-Encrypted: i=1; AJvYcCWNSoZ4IcE7Mv+oQzu3ADaoH1CNq0vQquzHZ9kqXNTajXLpG5/cydGmZ8kn9OzKB/fSoZn0E0SG9YE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwQufZk1LAMc3T6rOWw0fjYRH2h+MHKE5BRZcAu+FntTsia33bS
+	r476MpMAx/mUXUAHlBUgE//Edha0MODTPT9zNwHYgP9TXOTH8FBCQ3AX/TKvOIAOT22PTO51a9t
+	U3REHU7oLYYrlOK5zIvSHI9ZVoztIcvJf9JA/9w==
+X-Gm-Gg: ASbGncvRHcsPUNWjAWv3tUlOUn15A9pyzk8Mgn3ovYqAyLAaFMI7BkwuOgTQ7DUorN6
+	rGgYACq86dJjC5nvuW6aGKHNWuTWhytCHJ80=
+X-Google-Smtp-Source: AGHT+IFPz9fbMcvhhyZZGYYuWLUwXCRTy8s+kBCbi69J2hIRU1+TB7begqOpM0+xy1s6GqB+nx1X6ZJAR0totDSXOwo=
+X-Received: by 2002:a05:6214:486:b0:6d8:e7c9:ffa0 with SMTP id
+ 6a1803df08f44-6e192c73ef5mr43851476d6.19.1736951677902; Wed, 15 Jan 2025
+ 06:34:37 -0800 (PST)
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-
-
---=-O/SC296LeBTMCgTutiLq
+References: <20250109150310.219442-1-tzimmermann@suse.de> <20250109150310.219442-26-tzimmermann@suse.de>
+ <cdbe483d-0895-47aa-8c83-1c28220f4a02@ideasonboard.com> <bc97b92e-7f8a-4b92-af8a-20fa165ead55@suse.de>
+ <f3ba05c7-6e49-4641-a3f9-ba418ebdb7c3@ideasonboard.com> <c6735280-7c32-4319-8ca9-a7305d8117c3@suse.de>
+ <d67adb03-5cd0-4ac9-af58-cf4446dacee3@ideasonboard.com> <0ea6be58-0e04-4172-87cd-064a3e4a43bc@suse.de>
+ <f35cb350-6be9-48ca-ad7e-e9dd418281d5@ideasonboard.com> <4af0b6a7-c16a-4187-bbf5-365a9c86de21@suse.de>
+ <e327ad84-b5c9-4480-b873-dc3aca605538@ideasonboard.com>
+In-Reply-To: <e327ad84-b5c9-4480-b873-dc3aca605538@ideasonboard.com>
+From: Daniel Stone <daniel@fooishbar.org>
+Date: Wed, 15 Jan 2025 14:34:26 +0000
+X-Gm-Features: AbW1kvZOqZIfsgr5MQqIuf1jKNJtcUmkb-2ddanRpBEhDxEw_Wl931RGN2rzkA8
+Message-ID: <CAPj87rOn=RQ615zyaEdFT2ADfPztU7+heVi0G34Rdg-=QO1cCw@mail.gmail.com>
+Subject: Re: [PATCH v2 25/25] drm/xlnx: Compute dumb-buffer sizes with drm_mode_size_dumb()
+To: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, maarten.lankhorst@linux.intel.com, 
+	mripard@kernel.org, airlied@gmail.com, simona@ffwll.ch, 
+	dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, 
+	freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+	imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org, 
+	nouveau@lists.freedesktop.org, virtualization@lists.linux.dev, 
+	spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org, 
+	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, 
+	intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Andy Yan <andyshrk@163.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2025-01-15 at 15:34 +0100, Roger Pau Monn=C3=A9 wrote:
-> On Fri, Jan 10, 2025 at 10:02:53AM +0000, David Woodhouse wrote:
-> > On Fri, 2025-01-10 at 10:35 +0100, Roger Pau Monne wrote:
-> > > Hello,
-> > >=20
-> > > First patch from David introduces a new helper to fetch xenstore node=
-s,
-> > > while second patch removes the usage of scanf related functions with =
-the
-> > > "%ms" format specifier, as it's not supported by the FreeBSD scanf li=
-bc
-> > > implementation.
-> > >=20
-> > > Thanks, Roger.
-> >=20
-> > Thanks. I've got a handful of non-bugfix cleanups to use the new
-> > xs_node_read in my tree at
-> > https://git.infradead.org/users/dwmw2/qemu.git/shortlog/refs/heads/xs_n=
-ode_read
-> >=20
-> > David Woodhouse (4):
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/xen: Use xs_node_read() from xs_node_=
-vscanf()
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/xen: Use xs_node_read() from xen_cons=
-ole_get_name()
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/xen: Use xs_node_read() from xen_netd=
-ev_get_name()
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/xen: Use xs_node_read() from xenstore=
-_read_str() instead of open-coding it
->=20
-> Acked-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+On Wed, 15 Jan 2025 at 14:20, Tomi Valkeinen
+<tomi.valkeinen@ideasonboard.com> wrote:
+> No disagreement there, we need CREATE_DUMB2.
+>
+> My point is that we have the current UAPI, and we have userspace using
+> it, but we don't have clear rules what the ioctl does with specific
+> parameters, and we don't document how it has to be used.
+>
+> Perhaps the situation is bad, and all we can really say is that
+> CREATE_DUMB only works for use with simple RGB formats, and the behavior
+> for all other formats is platform specific. But I think even that would
+> be valuable in the UAPI docs.
 
-Thanks. I'll add that on each of the four.
+Yeah, CREATE_DUMB only works for use with simple RGB formats in a
+linear layout. Not monochrome or YUV or tiled or displayed rotated or
+whatever.
 
-> > I'm slightly dubious about the last one; xen_pvdev.c didn't previously
-> > use anything from xen-bus-helper.c and even hardcodes zero for
-> > XBT_NULL. And I look at the way it deliberately reallocates the string,
-> > and wonder if we should be doing that in qemu_xen_xs_read() for the
-> > true Xen case. And does it even matter anywhere except Windows?
->=20
-> I would take the opportunity to use XBT_NULL instead of 0 on
-> xen_pvdev.c for the transaction.
+If it happens to accidentally work for other uses, that's fine, but
+it's not generically reliable for anything other than simple linear
+RGB. It's intended to let you do splash screens, consoles, recovery
+password entries, and software-rendered compositors if you really
+want. Anything more than that isn't 'dumb'.
 
-Yeah, probably a separate patch.
-
---=-O/SC296LeBTMCgTutiLq
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCD9Aw
-ggSOMIIDdqADAgECAhAOmiw0ECVD4cWj5DqVrT9PMA0GCSqGSIb3DQEBCwUAMGUxCzAJBgNVBAYT
-AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
-BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBDQTAeFw0yNDAxMzAwMDAwMDBaFw0zMTEx
-MDkyMzU5NTlaMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYDVQQDExdWZXJv
-a2V5IFNlY3VyZSBFbWFpbCBHMjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMjvgLKj
-jfhCFqxYyRiW8g3cNFAvltDbK5AzcOaR7yVzVGadr4YcCVxjKrEJOgi7WEOH8rUgCNB5cTD8N/Et
-GfZI+LGqSv0YtNa54T9D1AWJy08ZKkWvfGGIXN9UFAPMJ6OLLH/UUEgFa+7KlrEvMUupDFGnnR06
-aDJAwtycb8yXtILj+TvfhLFhafxroXrflspavejQkEiHjNjtHnwbZ+o43g0/yxjwnarGI3kgcak7
-nnI9/8Lqpq79tLHYwLajotwLiGTB71AGN5xK+tzB+D4eN9lXayrjcszgbOv2ZCgzExQUAIt98mre
-8EggKs9mwtEuKAhYBIP/0K6WsoMnQCcCAwEAAaOCAVwwggFYMBIGA1UdEwEB/wQIMAYBAf8CAQAw
-HQYDVR0OBBYEFIlICOogTndrhuWByNfhjWSEf/xwMB8GA1UdIwQYMBaAFEXroq/0ksuCMS1Ri6en
-IZ3zbcgPMA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIweQYI
-KwYBBQUHAQEEbTBrMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wQwYIKwYB
-BQUHMAKGN2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRJRFJvb3RD
-QS5jcnQwRQYDVR0fBD4wPDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
-QXNzdXJlZElEUm9vdENBLmNybDARBgNVHSAECjAIMAYGBFUdIAAwDQYJKoZIhvcNAQELBQADggEB
-ACiagCqvNVxOfSd0uYfJMiZsOEBXAKIR/kpqRp2YCfrP4Tz7fJogYN4fxNAw7iy/bPZcvpVCfe/H
-/CCcp3alXL0I8M/rnEnRlv8ItY4MEF+2T/MkdXI3u1vHy3ua8SxBM8eT9LBQokHZxGUX51cE0kwa
-uEOZ+PonVIOnMjuLp29kcNOVnzf8DGKiek+cT51FvGRjV6LbaxXOm2P47/aiaXrDD5O0RF5SiPo6
-xD1/ClkCETyyEAE5LRJlXtx288R598koyFcwCSXijeVcRvBB1cNOLEbg7RMSw1AGq14fNe2cH1HG
-W7xyduY/ydQt6gv5r21mDOQ5SaZSWC/ZRfLDuEYwggWbMIIEg6ADAgECAhAH5JEPagNRXYDiRPdl
-c1vgMA0GCSqGSIb3DQEBCwUAMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYD
-VQQDExdWZXJva2V5IFNlY3VyZSBFbWFpbCBHMjAeFw0yNDEyMzAwMDAwMDBaFw0yODAxMDQyMzU5
-NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqGSIb3DQEBAQUAA4IC
-DwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZeYAS/SRV6zmfXlXaZ
-sNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2zkC9S7/yHDYnqegqt
-w4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qGpgFdZEk2/c//ZvUN
-i12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41vav1RhZJzYan4a1gU0
-kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0cvnO8FM6PTqsnSbcc
-0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PWPU6zfQTOMZ9uLQRR
-ci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXtREF5lLXxp+CJ6KKS
-blPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQrlR0gO3lBzuyPPArV
-hvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7IqaAovAX0d+f1YjbmC
-VsAwjhLmveFjNwIDAQABo4IBsDCCAawwHwYDVR0jBBgwFoAUiUgI6iBOd2uG5YHI1+GNZIR//HAw
-HQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3bXcyQGluZnJhZGVh
-ZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEBMA4GA1UdDwEB/wQE
-AwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwewYDVR0fBHQwcjA3oDWgM4YxaHR0
-cDovL2NybDMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDA3oDWgM4YxaHR0
-cDovL2NybDQuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDB2BggrBgEFBQcB
-AQRqMGgwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBABggrBgEFBQcwAoY0
-aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNydDANBgkq
-hkiG9w0BAQsFAAOCAQEAQXc4FPiPLRnTDvmOABEzkIumojfZAe5SlnuQoeFUfi+LsWCKiB8Uextv
-iBAvboKhLuN6eG/NC6WOzOCppn4mkQxRkOdLNThwMHW0d19jrZFEKtEG/epZ/hw/DdScTuZ2m7im
-8ppItAT6GXD3aPhXkXnJpC/zTs85uNSQR64cEcBFjjoQDuSsTeJ5DAWf8EMyhMuD8pcbqx5kRvyt
-JPsWBQzv1Dsdv2LDPLNd/JUKhHSgr7nbUr4+aAP2PHTXGcEBh8lTeYea9p4d5k969pe0OHYMV5aL
-xERqTagmSetuIwolkAuBCzA9vulg8Y49Nz2zrpUGfKGOD0FMqenYxdJHgDCCBZswggSDoAMCAQIC
-EAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQELBQAwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoT
-B1Zlcm9rZXkxIDAeBgNVBAMTF1Zlcm9rZXkgU2VjdXJlIEVtYWlsIEcyMB4XDTI0MTIzMDAwMDAw
-MFoXDTI4MDEwNDIzNTk1OVowHjEcMBoGA1UEAwwTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJ
-KoZIhvcNAQEBBQADggIPADCCAgoCggIBANqWLse95HW2F7FhfH9bugyT/danKmmXrbMnz5GZNAfj
-Jl5gBL9JFXrOZ9eVdpmw04Tp6aDxZctFLoEDvSWKi367Q7Sg+ci+fH4KwwfQ8Pi0IpIKx2n5emEg
-nbOQL1Lv/IcNiep6Cq3DiyaSpSp/RZf+CAfUNySHS8eWmhLU6jGpSD6hxTpYKye7PmrmvMWwfGEP
-WoamAV1kSTb9z/9m9Q2LXa89aKmTxNwnAfD3Ohn9mtU3JukwILRMewn9QRXK7KzM+01h5hkCE4nj
-W9q/VGFknNhqfhrWBTSQoE9CSVylASGrjzCgS7XmKy/BaH3/7mOOHQv5g1o3Qj/+cdKnpT0I5Qb1
-nRy+c7wUzo9OqydJtxzSP4ZyHA4dELto/a3m/ay1XHcpum1pgTOLgxAfGb/T4dCkwRUstSKLMmpL
-g9Y9TrN9BM4xn24tBFFyL5znGG0wQGzOVAM68RBzIQb6Fz758fjsr4yZnPbVsU1+gHEs/puNHrG0
-9e1EQXmUtfGn4InoopJuU8p5VGD9S3Ikd4UoBlc7xl5yjtNlQxUeYrRlnUSmdlucCEoTX1n4UmtA
-9CuVHSA7eUHO7I88CtWG9bGOU7tLgOZoSEvNqtaL/N7sQbBZK4jZ4Rr/zNTQg1SwYjjLB7u96lDP
-sipoCi8BfR35/ViNuYJWwDCOEua94WM3AgMBAAGjggGwMIIBrDAfBgNVHSMEGDAWgBSJSAjqIE53
-a4blgcjX4Y1khH/8cDAdBgNVHQ4EFgQUXGIam3Bs59Y60yTmWgfDu6pZQ6cwMAYDVR0RBCkwJ4ET
-ZHdtdzJAaW5mcmFkZWFkLm9yZ4EQZGF2aWRAd29vZGhvdS5zZTAUBgNVHSAEDTALMAkGB2eBDAEF
-AQEwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDB7BgNVHR8E
-dDByMDegNaAzhjFodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
-Y3JsMDegNaAzhjFodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
-Y3JsMHYGCCsGAQUFBwEBBGowaDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
-MEAGCCsGAQUFBzAChjRodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVt
-YWlsRzIuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQBBdzgU+I8tGdMO+Y4AETOQi6aiN9kB7lKWe5Ch
-4VR+L4uxYIqIHxR7G2+IEC9ugqEu43p4b80LpY7M4KmmfiaRDFGQ50s1OHAwdbR3X2OtkUQq0Qb9
-6ln+HD8N1JxO5nabuKbymki0BPoZcPdo+FeRecmkL/NOzzm41JBHrhwRwEWOOhAO5KxN4nkMBZ/w
-QzKEy4PylxurHmRG/K0k+xYFDO/UOx2/YsM8s138lQqEdKCvudtSvj5oA/Y8dNcZwQGHyVN5h5r2
-nh3mT3r2l7Q4dgxXlovERGpNqCZJ624jCiWQC4ELMD2+6WDxjj03PbOulQZ8oY4PQUyp6djF0keA
-MYIDuzCCA7cCAQEwVTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMX
-VmVyb2tleSBTZWN1cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJYIZIAWUDBAIBBQCg
-ggE3MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI1MDExNTE0MzY1
-M1owLwYJKoZIhvcNAQkEMSIEIBtaUpOytkTDYMZ1nZK6KEox2iBVRjkrfhbinAJiHw7eMGQGCSsG
-AQQBgjcQBDFXMFUwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoTB1Zlcm9rZXkxIDAeBgNVBAMTF1Zl
-cm9rZXkgU2VjdXJlIEVtYWlsIEcyAhAH5JEPagNRXYDiRPdlc1vgMGYGCyqGSIb3DQEJEAILMVeg
-VTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMXVmVyb2tleSBTZWN1
-cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQEBBQAEggIAqCCkrmQNk7mN
-fUhOxU9QSKz+sJV2g022Ymt2cCxzxNnhMZaBmrd36KAMY5gNmpK6ay7fl1kr36oJkH/kSOJG1Agm
-JstQLV3hnGIiheTl8ZgVpfDHKgB3dwvR3XBRjOsBYePTzEAzNWDM23pg5/+ZR5mdEtPbykeKCKOs
-kVf7LAt8W7RlAh/IULbGz7O+16HlMUxERkDIprzydPYvdUh/xpta6wOpSAyHdsCLWzy9I23/gviv
-dOJR2viYkrKJMPMa7P4ahQgMtQ7yqB4jQBies51gt07xjSFRxDmBSqS5e6GQLrH6s25DjsFQylfS
-SM9xufiQGNThCRAiiEAveFWSs6dON7XBdMWc5ZnvMnhXo5GO+7VS/hiYH0UL4TfRuTIAbdlg6P7q
-3efTZHXrf6N7FxIaQxVsR7gKT2MvQe1Zvch+58wrWxnpejrkeeHpbo+tNogewRFq7RKErXfy4QcZ
-06kByxWWxsmOmi6mmqSQlxkHJHRU8VXcjZ0+XFLuZY/VzdnczjjvMq6WM7JPXk0pIKi6v8f5aAcY
-PqhJyX7SfLyz53UTqrNi+cOyOQJFKe9WObFHSXurX5WSeiC4SV41vJdg3NBixfCgzz8WYr2kJz4x
-1k2G+90M5C5w8UKJK2t7LwTbCpBPZ7Me8EmNU44gDqE8RMFdZKQe5SequDcifz8AAAAAAAA=
-
-
---=-O/SC296LeBTMCgTutiLq--
+Cheers,
+Daniel
 
