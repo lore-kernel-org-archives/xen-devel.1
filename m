@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FCC2C02183
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 16:35:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.872757.1283746 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B07C02187
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 16:35:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.872762.1283796 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY6Mv-0003Vf-1f; Wed, 15 Jan 2025 16:35:49 +0000
+	id 1tY6Mz-0004es-HI; Wed, 15 Jan 2025 16:35:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 872757.1283746; Wed, 15 Jan 2025 16:35:49 +0000
+Received: by outflank-mailman (output) from mailman id 872762.1283796; Wed, 15 Jan 2025 16:35:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY6Mu-0003VY-VH; Wed, 15 Jan 2025 16:35:48 +0000
-Received: by outflank-mailman (input) for mailman id 872757;
- Wed, 15 Jan 2025 16:35:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tY6Mz-0004dw-CN; Wed, 15 Jan 2025 16:35:53 +0000
+Received: by outflank-mailman (input) for mailman id 872762;
+ Wed, 15 Jan 2025 16:35:51 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rWPo=UH=casper.srs.infradead.org=BATV+fb641630334796bb9467+7815+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1tY6Mt-0003VS-Mx
- for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 16:35:47 +0000
+ id 1tY6Mx-0003cf-BN
+ for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 16:35:51 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c4ca686c-d35e-11ef-a0e1-8be0dac302b0;
- Wed, 15 Jan 2025 17:35:46 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c4c99897-d35e-11ef-99a4-01e77a169b0f;
+ Wed, 15 Jan 2025 17:35:45 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
- id 1tY6Mq-0000000GF6c-1V3F; Wed, 15 Jan 2025 16:35:44 +0000
+ id 1tY6Mq-0000000GF6P-148j; Wed, 15 Jan 2025 16:35:44 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98 #2 (Red Hat
- Linux)) id 1tY6Mq-00000001Hhz-0SV5; Wed, 15 Jan 2025 16:35:44 +0000
+ Linux)) id 1tY6Mq-00000001Hhn-00TQ; Wed, 15 Jan 2025 16:35:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c4ca686c-d35e-11ef-a0e1-8be0dac302b0
+X-Inumbo-ID: c4c99897-d35e-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
 	To:From:Reply-To:Content-ID:Content-Description;
-	bh=9YnMqT9L5zpcIdMPGD+T5rZV+9M0PECfN24dS3f5adI=; b=HBCwutm0sGscO7FRumhreu04mi
-	eCz0n7Ffb2F8brtPqDvF8E7RDAbGm1ok0tZslQVFmdeTfMtnqdYSuPx2VHbzK3mlJgy7dCI7gF9l8
-	J886BsSw/7sDOVHHH1+N/nDL0vISpjdui07wy6kzL62PW1sx9TyIYJ6H0pGGtIF00TRzw33B9LiUs
-	JobEo03D0Wdls0BhRwE/Px7ABwcKZ0hSsSLNm/r9IimyjscHWgCMV91j0hEq4EffYt5no5ryM6sM9
-	/wC2w/GcThMYonDt5+CjNzqTMAyX4LtCFAAa5eKF0ISogQB+x8haCB/B65629/kFvZ3OKWHhJSPnz
-	ZCepR7/w==;
+	bh=9nRlgfR/HkbXdsVZN1RJ5s3wIYDMgIRx7AVyt9JqyRI=; b=EyF73ntA9nNRs2USmFs3VhSFpr
+	jNl690oAvAmfPoM3d9Lc2BGc1l1/s1/SeknFPeuJTpxrf1A7JrWVzvlQVDsOj8a+dRPFzbNaLKfAO
+	j2WHAFN3Nr8xuSB9VGGQDHCWq5KJ/qkkMZ2jVCLwxPvkJkUdNMMJeg7knUUa+/YPzo2+VwEESoAFK
+	dNaXDRzPMj19LMHea3hONYRgsJN3CMHRQBl2M0zn8N29N77J4yU9eQbTo/7OQhdX7ZE6KAFTAofUj
+	XtLavELYf7LC08zgEem/hTcCPhKKoUEEmBaZ3rZkt0vw8s9Tz8tyDcbsrOICPyDnOxtVeDiDXWNhn
+	dMfyec3g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
@@ -68,9 +68,9 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Jason Wang <jasowang@redhat.com>,
 	xen-devel@lists.xenproject.org,
 	qemu-block@nongnu.org
-Subject: [PATCH v3 6/7] hw/xen: Use xs_node_read() from xenstore_read_str() instead of open-coding it
-Date: Wed, 15 Jan 2025 16:27:24 +0000
-Message-ID: <20250115163542.291424-7-dwmw2@infradead.org>
+Subject: [PATCH v3 4/7] hw/xen: Use xs_node_read() from xen_console_get_name()
+Date: Wed, 15 Jan 2025 16:27:22 +0000
+Message-ID: <20250115163542.291424-5-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20250115163542.291424-1-dwmw2@infradead.org>
 References: <20250115163542.291424-1-dwmw2@infradead.org>
@@ -82,39 +82,57 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Now that xs_node_read() can construct a node path, no need to open-code it.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
 Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- hw/xen/xen_pvdev.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/char/xen_console.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/hw/xen/xen_pvdev.c b/hw/xen/xen_pvdev.c
-index c5ad71e8dc..c9143ba259 100644
---- a/hw/xen/xen_pvdev.c
-+++ b/hw/xen/xen_pvdev.c
-@@ -22,6 +22,7 @@
- #include "qemu/main-loop.h"
- #include "hw/qdev-core.h"
- #include "hw/xen/xen-legacy-backend.h"
-+#include "hw/xen/xen-bus-helper.h"
- #include "hw/xen/xen_pvdev.h"
+diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
+index cb39b21504..e61902461b 100644
+--- a/hw/char/xen_console.c
++++ b/hw/char/xen_console.c
+@@ -367,28 +367,28 @@ static char *xen_console_get_name(XenDevice *xendev, Error **errp)
  
- /* private */
-@@ -81,12 +82,9 @@ int xenstore_write_str(const char *base, const char *node, const char *val)
+     if (con->dev == -1) {
+         XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
+-        char fe_path[XENSTORE_ABS_PATH_MAX + 1];
+         int idx = (xen_mode == XEN_EMULATE) ? 0 : 1;
++        Error *local_err = NULL;
+         char *value;
  
- char *xenstore_read_str(const char *base, const char *node)
- {
--    char abspath[XEN_BUFSIZE];
--    unsigned int len;
-     char *str, *ret = NULL;
- 
--    snprintf(abspath, sizeof(abspath), "%s/%s", base, node);
--    str = qemu_xen_xs_read(xenstore, 0, abspath, &len);
-+    str = xs_node_read(xenstore, 0, NULL, NULL, "%s/%s", base, node);
-     if (str != NULL) {
-         /* move to qemu-allocated memory to make sure
-          * callers can safely g_free() stuff. */
+         /* Theoretically we could go up to INT_MAX here but that's overkill */
+         while (idx < 100) {
+             if (!idx) {
+-                snprintf(fe_path, sizeof(fe_path),
+-                         "/local/domain/%u/console", xendev->frontend_id);
++                value = xs_node_read(xenbus->xsh, XBT_NULL, NULL, &local_err,
++                                     "/local/domain/%u/console",
++                                     xendev->frontend_id);
+             } else {
+-                snprintf(fe_path, sizeof(fe_path),
+-                         "/local/domain/%u/device/console/%u",
+-                         xendev->frontend_id, idx);
++                value = xs_node_read(xenbus->xsh, XBT_NULL, NULL, &local_err,
++                                     "/local/domain/%u/device/console/%u",
++                                     xendev->frontend_id, idx);
+             }
+-            value = qemu_xen_xs_read(xenbus->xsh, XBT_NULL, fe_path, NULL);
+             if (!value) {
+                 if (errno == ENOENT) {
+                     con->dev = idx;
++                    error_free(local_err);
+                     goto found;
+                 }
+-                error_setg(errp, "cannot read %s: %s", fe_path,
+-                           strerror(errno));
++                error_propagate(errp, local_err);
+                 return NULL;
+             }
+             free(value);
 -- 
 2.47.0
 
