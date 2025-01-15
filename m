@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B34C02183
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 16:31:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.872747.1283737 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FCC2C02183
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jan 2025 16:35:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.872757.1283746 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY6II-0002vg-Hl; Wed, 15 Jan 2025 16:31:02 +0000
+	id 1tY6Mv-0003Vf-1f; Wed, 15 Jan 2025 16:35:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 872747.1283737; Wed, 15 Jan 2025 16:31:02 +0000
+Received: by outflank-mailman (output) from mailman id 872757.1283746; Wed, 15 Jan 2025 16:35:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tY6II-0002vZ-Eq; Wed, 15 Jan 2025 16:31:02 +0000
-Received: by outflank-mailman (input) for mailman id 872747;
- Wed, 15 Jan 2025 16:31:01 +0000
+	id 1tY6Mu-0003VY-VH; Wed, 15 Jan 2025 16:35:48 +0000
+Received: by outflank-mailman (input) for mailman id 872757;
+ Wed, 15 Jan 2025 16:35:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=P4PG=UH=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tY6IH-0002vT-5b
- for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 16:31:01 +0000
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [2a00:1450:4864:20::12f])
+ <SRS0=rWPo=UH=casper.srs.infradead.org=BATV+fb641630334796bb9467+7815+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1tY6Mt-0003VS-Mx
+ for xen-devel@lists.xenproject.org; Wed, 15 Jan 2025 16:35:47 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1a7c5f2f-d35e-11ef-a0e1-8be0dac302b0;
- Wed, 15 Jan 2025 17:31:00 +0100 (CET)
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-54026562221so7149113e87.1
- for <xen-devel@lists.xenproject.org>; Wed, 15 Jan 2025 08:31:00 -0800 (PST)
-Received: from [192.168.219.191] ([94.75.70.14])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5428becb15dsm2022132e87.238.2025.01.15.08.30.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Jan 2025 08:30:58 -0800 (PST)
+ id c4ca686c-d35e-11ef-a0e1-8be0dac302b0;
+ Wed, 15 Jan 2025 17:35:46 +0100 (CET)
+Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
+ id 1tY6Mq-0000000GF6c-1V3F; Wed, 15 Jan 2025 16:35:44 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.98 #2 (Red Hat
+ Linux)) id 1tY6Mq-00000001Hhz-0SV5; Wed, 15 Jan 2025 16:35:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,206 +43,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a7c5f2f-d35e-11ef-a0e1-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736958659; x=1737563459; darn=lists.xenproject.org;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=w0hDi3ZdVEye7prLvwhTXtSTlQyM6lv0uwFu2SMg7ww=;
-        b=P0MkPG5svlEx/nbwOuvdS/jXv1RlcwSQ6gvDUpaqMvFUwskGSOmnr15sm9nAJ2lvYd
-         Id6FJyVmALsI76bF5fyT0s2I5mu7t9P2LTMNuZSaRt4DrjHwPIkjO7yZ+E5hSVnI6KgT
-         y7Y531hM6MVnz5th6zSyimkZgW7/s1C+sOR7FUM5H24B5b5TkxXyw+uGpQqPO1KAMWDS
-         i+29CRA6l0JHUz2sderSDufWTMFPkR/8E+ClZgVwrLrbZK16uyttcVDnsYCjCFuOXaqR
-         /O2No0/vfd8rD0aPTHUB1A8jWZNBIHhMR8cimEUkrv+JKre2/wyMyIve04lZL3x+FUNg
-         8FBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736958659; x=1737563459;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=w0hDi3ZdVEye7prLvwhTXtSTlQyM6lv0uwFu2SMg7ww=;
-        b=bB+faOzNgZwfrrHmbOkzdZkNzmMkTr2fYuoyzZOddc7gygS350hvPODJfwhrQGB2R+
-         C9vJ6LS7mQXQge9tdRBXm7V+tuQov0jAsMrqB+hErneeBbIVlH5D4unYqERRoYMWOtSx
-         edohCGU44tuhgv+28WF+H6gWIIlGU/E/tbEj8rrA6PSpni4si1bBZnOBsDzdbvEXKqic
-         7zY4c2w3r/mnwb6CB/eNIt9BTMnEAScAIc5Q7a8JoGhQZLQixNdgj3izY9jP2XpgObxP
-         4Ia7ivcylQVlwc6ZcfLXiHPMNAVN552pRxDzPQ6BDKfOI2KNWMzvuH0KmzCU0Z5fW4t5
-         OVuw==
-X-Forwarded-Encrypted: i=1; AJvYcCXPT2oIuKB5qHuYhAEyDsHVZkNlLV3gE02M+sfaMQrYT8Z0UKZg4MPwVhNfDhwftZPa2HB9ZuSXCqc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzGw7xlQjXD9cISluayyY1mdgROoJoAx4rps+CGU3SPew9uzAx7
-	TR4NQOQuTrZlLEMy+3Gh5Pel3f+nhxFkStVxKqRHVLls0zsopw3C
-X-Gm-Gg: ASbGncvtJ1vO2PDICVMJQOfh93fM8Dy55NJKy+JOH3DHlUDSg+QjFdc93ERREGvgYAx
-	pPUdlzipGgypA40RUczZYEqRYOWP63MS0NjaAcobmWzGIYc9t9GzR5pBxmCZyK65pFW4ydfOYEO
-	RPUQW4BLviCPBgtRtXpDKYpACAYuAtj+nFZw9dkonMrQULH1hcv9evTk2jgw+iWFTDREu/txlWS
-	hqJqsnt3qLaaW+GkmFjQsJih0ne71W2UrHpYLnP7M8cdzDJeLfrBteaiXtL0lqiSg4DqQ==
-X-Google-Smtp-Source: AGHT+IHqozlGT7lRatYG/bFCqt5LMNZZ3aQleXcw/cpbHBKijQLeRzTlMzhNdZa156V1ZZj+PMgB1w==
-X-Received: by 2002:a05:6512:4020:b0:542:9987:6ead with SMTP id 2adb3069b0e04-54299877201mr5024807e87.5.1736958658596;
-        Wed, 15 Jan 2025 08:30:58 -0800 (PST)
-Content-Type: multipart/alternative;
- boundary="------------Ci2H156EfJ7OyKE0RBG3P315"
-Message-ID: <2f1432e6-0d27-48fd-b034-475284f14233@gmail.com>
-Date: Wed, 15 Jan 2025 17:30:57 +0100
+X-Inumbo-ID: c4ca686c-d35e-11ef-a0e1-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=9YnMqT9L5zpcIdMPGD+T5rZV+9M0PECfN24dS3f5adI=; b=HBCwutm0sGscO7FRumhreu04mi
+	eCz0n7Ffb2F8brtPqDvF8E7RDAbGm1ok0tZslQVFmdeTfMtnqdYSuPx2VHbzK3mlJgy7dCI7gF9l8
+	J886BsSw/7sDOVHHH1+N/nDL0vISpjdui07wy6kzL62PW1sx9TyIYJ6H0pGGtIF00TRzw33B9LiUs
+	JobEo03D0Wdls0BhRwE/Px7ABwcKZ0hSsSLNm/r9IimyjscHWgCMV91j0hEq4EffYt5no5ryM6sM9
+	/wC2w/GcThMYonDt5+CjNzqTMAyX4LtCFAAa5eKF0ISogQB+x8haCB/B65629/kFvZ3OKWHhJSPnz
+	ZCepR7/w==;
+From: David Woodhouse <dwmw2@infradead.org>
+To: qemu-devel@nongnu.org,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Paul Durrant <paul@xen.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Kevin Wolf <kwolf@redhat.com>,
+	Hanna Reitz <hreitz@redhat.com>,
+	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	xen-devel@lists.xenproject.org,
+	qemu-block@nongnu.org
+Subject: [PATCH v3 6/7] hw/xen: Use xs_node_read() from xenstore_read_str() instead of open-coding it
+Date: Wed, 15 Jan 2025 16:27:24 +0000
+Message-ID: <20250115163542.291424-7-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20250115163542.291424-1-dwmw2@infradead.org>
+References: <20250115163542.291424-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] riscv: Add initial Xen guest support for RISC-V
-To: Stefano Stabellini <sstabellini@kernel.org>,
- Milan Djokic <milandjokic1995@gmail.com>
-Cc: linux-riscv@lists.infradead.org, paul.walmsley@sifive.com,
- palmer@dabbelt.com, aou@eecs.berkeley.edu, jgross@suse.com,
- oleksandr_tyshchenko@epam.com, Slavisa.Petrovic@rt-rk.com,
- Milan.Djokic@rt-rk.com, rafael.j.wysocki@intel.com,
- sunilvl@ventanamicro.com, takakura@valinux.co.jp,
- linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
- iommu@lists.linux.dev
-References: <e4a649a7fdfc8fcf5f48a0bc4e76e5d546078083.1736868605.git.Slavisa.Petrovic@rt-rk.com>
- <alpine.DEB.2.22.394.2501141554170.2684657@ubuntu-linux-20-04-desktop>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <alpine.DEB.2.22.394.2501141554170.2684657@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-This is a multi-part message in MIME format.
---------------Ci2H156EfJ7OyKE0RBG3P315
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Hi Stefano,
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ hw/xen/xen_pvdev.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-On 1/15/25 1:01 AM, Stefano Stabellini wrote:
-> +Oleksii
->
-> On Tue, 14 Jan 2025, Milan Djokic wrote:
->> From: Slavisa Petrovic<Slavisa.Petrovic@rt-rk.com>
->>
->> This patch introduces initial support for running RISC-V as a Xen guest.
->> It provides the necessary infrastructure and stubs for Xen-specific
->> operations. Key changes include:
->>
->> - Modifications to the RISC-V kernel to integrate Xen-specific hypercalls
->>    and interfaces, with function implementations stubbed for future work.
->> - Introduction of Xen-specific headers for RISC-V, including event
->>    handling, hypervisor interaction, and page management. Functions are
->>    defined but not yet implemented.
->> - Stub implementations for memory management, grant tables, and context
->>    switching in the Xen environment, allowing further development and
->>    integration.
->>
->> Signed-off-by: Milan Djokic<Milan.Djokic@rt-rk.com>
->> Signed-off-by: Slavisa Petrovic<Slavisa.Petrovic@rt-rk.com>
-> Hi Milan, Slavisa,
->
-> Thank you very much for your contribution! Which Xen tree are you using
-> for development?
+diff --git a/hw/xen/xen_pvdev.c b/hw/xen/xen_pvdev.c
+index c5ad71e8dc..c9143ba259 100644
+--- a/hw/xen/xen_pvdev.c
++++ b/hw/xen/xen_pvdev.c
+@@ -22,6 +22,7 @@
+ #include "qemu/main-loop.h"
+ #include "hw/qdev-core.h"
+ #include "hw/xen/xen-legacy-backend.h"
++#include "hw/xen/xen-bus-helper.h"
+ #include "hw/xen/xen_pvdev.h"
+ 
+ /* private */
+@@ -81,12 +82,9 @@ int xenstore_write_str(const char *base, const char *node, const char *val)
+ 
+ char *xenstore_read_str(const char *base, const char *node)
+ {
+-    char abspath[XEN_BUFSIZE];
+-    unsigned int len;
+     char *str, *ret = NULL;
+ 
+-    snprintf(abspath, sizeof(abspath), "%s/%s", base, node);
+-    str = qemu_xen_xs_read(xenstore, 0, abspath, &len);
++    str = xs_node_read(xenstore, 0, NULL, NULL, "%s/%s", base, node);
+     if (str != NULL) {
+         /* move to qemu-allocated memory to make sure
+          * callers can safely g_free() stuff. */
+-- 
+2.47.0
 
-They are using [1] and have separate branches on top of latest. So we are in
-sync. Also, if you are interested we have created a task/epics for this feature in
-[1] so you could also check there some details:
-1.https://gitlab.com/groups/xen-project/people/olkur/-/epics/5
-2.https://gitlab.com/xen-project/people/olkur/xen/-/issues/12
-
->   I am asking because RISC-V support in Xen is still in
-> the process of being upstreamed, and [1] is the tree that consolidates
-> all patches currently on the to-be-upstreamed list.
->
-> While the specific Xen tree you are using is not particularly important
-> at this stage, and using [1] is not a requirement, I am asking because
-> it is essential to align on the hypervisor ABI, especially regarding any
-> details that have not yet been upstreamed. Specifically, is there
-> anything in this patch series that relies on features not yet upstream
-> in Xen?
-
-There are few features but some things which are Rt-Tk's branch in [1] could go
-without waiting for these features to be upstreamed.
-
-Thanks.
-
-~ Oleksii
-
->
-> [1]https://gitlab.com/xen-project/people/olkur/xen/-/tree/latest?ref_type=heads
---------------Ci2H156EfJ7OyKE0RBG3P315
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <pre>Hi Stefano,
-</pre>
-    <div class="moz-cite-prefix">On 1/15/25 1:01 AM, Stefano Stabellini
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:alpine.DEB.2.22.394.2501141554170.2684657@ubuntu-linux-20-04-desktop">
-      <pre wrap="" class="moz-quote-pre">+Oleksii
-
-On Tue, 14 Jan 2025, Milan Djokic wrote:
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">From: Slavisa Petrovic <a class="moz-txt-link-rfc2396E" href="mailto:Slavisa.Petrovic@rt-rk.com">&lt;Slavisa.Petrovic@rt-rk.com&gt;</a>
-
-This patch introduces initial support for running RISC-V as a Xen guest.
-It provides the necessary infrastructure and stubs for Xen-specific
-operations. Key changes include:
-
-- Modifications to the RISC-V kernel to integrate Xen-specific hypercalls
-  and interfaces, with function implementations stubbed for future work.
-- Introduction of Xen-specific headers for RISC-V, including event
-  handling, hypervisor interaction, and page management. Functions are
-  defined but not yet implemented.
-- Stub implementations for memory management, grant tables, and context
-  switching in the Xen environment, allowing further development and
-  integration.
-
-Signed-off-by: Milan Djokic <a class="moz-txt-link-rfc2396E" href="mailto:Milan.Djokic@rt-rk.com">&lt;Milan.Djokic@rt-rk.com&gt;</a>
-Signed-off-by: Slavisa Petrovic <a class="moz-txt-link-rfc2396E" href="mailto:Slavisa.Petrovic@rt-rk.com">&lt;Slavisa.Petrovic@rt-rk.com&gt;</a>
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-Hi Milan, Slavisa,
-
-Thank you very much for your contribution! Which Xen tree are you using
-for development?</pre>
-    </blockquote>
-    <pre>They are using [1] and have separate branches on top of latest. So we are in
-sync. Also, if you are interested we have created a task/epics for this feature in
-[1] so you could also check there some details:
-1. <a class="moz-txt-link-freetext" href="https://gitlab.com/groups/xen-project/people/olkur/-/epics/5">https://gitlab.com/groups/xen-project/people/olkur/-/epics/5</a>
-2. <a class="moz-txt-link-freetext" href="https://gitlab.com/xen-project/people/olkur/xen/-/issues/12">https://gitlab.com/xen-project/people/olkur/xen/-/issues/12</a>
-
-</pre>
-    <blockquote type="cite"
-cite="mid:alpine.DEB.2.22.394.2501141554170.2684657@ubuntu-linux-20-04-desktop">
-      <pre wrap="" class="moz-quote-pre"> I am asking because RISC-V support in Xen is still in
-the process of being upstreamed, and [1] is the tree that consolidates
-all patches currently on the to-be-upstreamed list.  
-
-While the specific Xen tree you are using is not particularly important
-at this stage, and using [1] is not a requirement, I am asking because
-it is essential to align on the hypervisor ABI, especially regarding any
-details that have not yet been upstreamed. Specifically, is there
-anything in this patch series that relies on features not yet upstream
-in Xen?  </pre>
-    </blockquote>
-    <pre>There are few features but some things which are Rt-Tk's branch in [1] could go
-without waiting for these features to be upstreamed.
-
-Thanks.
-
-~ Oleksii
-</pre>
-    <blockquote type="cite"
-cite="mid:alpine.DEB.2.22.394.2501141554170.2684657@ubuntu-linux-20-04-desktop">
-      <pre wrap="" class="moz-quote-pre">
-
-[1] <a class="moz-txt-link-freetext" href="https://gitlab.com/xen-project/people/olkur/xen/-/tree/latest?ref_type=heads">https://gitlab.com/xen-project/people/olkur/xen/-/tree/latest?ref_type=heads</a>
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------Ci2H156EfJ7OyKE0RBG3P315--
 
