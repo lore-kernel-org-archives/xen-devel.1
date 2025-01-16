@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE9DCC02180
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 09:46:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.873390.1284353 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0E7C02180
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 09:51:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.873411.1284373 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYMSU-0000VE-Cf; Thu, 16 Jan 2025 09:46:38 +0000
+	id 1tYMWo-0002fG-5D; Thu, 16 Jan 2025 09:51:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 873390.1284353; Thu, 16 Jan 2025 09:46:38 +0000
+Received: by outflank-mailman (output) from mailman id 873411.1284373; Thu, 16 Jan 2025 09:51:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYMSU-0000V7-A6; Thu, 16 Jan 2025 09:46:38 +0000
-Received: by outflank-mailman (input) for mailman id 873390;
- Thu, 16 Jan 2025 09:46:36 +0000
+	id 1tYMWo-0002f9-1S; Thu, 16 Jan 2025 09:51:06 +0000
+Received: by outflank-mailman (input) for mailman id 873411;
+ Thu, 16 Jan 2025 09:51:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EPy+=UI=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tYMSS-0000V1-Qw
- for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 09:46:36 +0000
-Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com
- [2a00:1450:4864:20::644])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=kdRh=UI=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tYMWm-0002dP-Ut
+ for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 09:51:04 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c601f7b3-d3ee-11ef-a0e2-8be0dac302b0;
- Thu, 16 Jan 2025 10:46:35 +0100 (CET)
-Received: by mail-ej1-x644.google.com with SMTP id
- a640c23a62f3a-aafc9d75f8bso129322766b.2
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 01:46:35 -0800 (PST)
-Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab2c95af7besm896403266b.143.2025.01.16.01.46.33
+ id 66420048-d3ef-11ef-a0e2-8be0dac302b0;
+ Thu, 16 Jan 2025 10:51:03 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4361f65ca01so6230375e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 01:51:03 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-437c7499942sm52962605e9.6.2025.01.16.01.51.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 01:46:34 -0800 (PST)
+ Thu, 16 Jan 2025 01:51:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,166 +47,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c601f7b3-d3ee-11ef-a0e2-8be0dac302b0
+X-Inumbo-ID: 66420048-d3ef-11ef-a0e2-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1737020794; x=1737625594; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1737021063; x=1737625863; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=VIwPoNhHywa1w9kcouUWgx2Kas2F5uNyWXSuZbapdhI=;
-        b=YCbGd1IIGkFF/8L68nKwyGg6lvE8DYkivVWde8MMAOL275/pf0QJqhpg3+PhrFe1Rr
-         S42UG7fdlmLdZKsP6LDsZFv6X7YzoNaNZYSfQiDis0XioXQ/8eQU9k1i5UEunFD+Y737
-         MGiYv/D2D5FQGX0WlRxoY6CLElnQjCumF4eNU=
+        bh=2Q2TkjmnTaEB5x8Xl171g0+JkKKOeL7dJhCQLqhZYRE=;
+        b=hG9OvHCCVAS1iefrlTlY9Cda3iaz4Fo5oUCZH2Lh+unqknvL3SyZy3p+9+fjeyMCoX
+         rimFtsoxX2tUDQfCvITdrzgkFOdsIxwPFB0DVDMsjSGFhYeBrbL19l/bGJWjoUSEswUH
+         o7GPhkiy0b4d8pjhvHvfh7pKEVZ5WoXnGlFxWVoD5XZ7mq5Ze7CRol0DabULNkrxCh3U
+         4jbbnhaBQ2TDqxiGqYM2BPXITPulJ+f/RXv7X8XzOOmnl5EXABsjGXxclQnxBKWj+nrI
+         ADtgDw/zQ4hHkXgtV756HvBafx1uLhWi1J8I4DY2ZMkdhXqKrUgbNdQW9WxWVMW8QjB0
+         BiKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737020794; x=1737625594;
+        d=1e100.net; s=20230601; t=1737021063; x=1737625863;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VIwPoNhHywa1w9kcouUWgx2Kas2F5uNyWXSuZbapdhI=;
-        b=KEgsRavliAqZlu3kVAiGZJ0rIg1XqDibaFpytk8Ntu30DN3DIU4qUev7VHkXO5UKDn
-         Bln5X+xazobIUpdgmop0LKX6aVOBemuS5SOnIiuAD5+RPKMcSYXCIqbNZTI4PByMRGPZ
-         OLDg7ncqbEGjhVUXxZ4AagV0l2FxV5Y2yFWf/iOVgC4nEZ/kpWkUxDy7Dmt9vdFL58X8
-         Nl+Q5PGeV29YRub4NnvmowCnBxnasmgf4t/vyoprNHV+Pl00W1V+YN+A1fVvEfcxoEiB
-         v0V1X2IFfLMUlScD3GKINJ5Zb5f4jcZEXU8ZpXbWNMH3UgH4I6P+eG4ts8mMcxvFCtI4
-         wzpQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUDAEXcTMtC8t89cIL/BQ5wP9yoVhhjpTZNbH/eg9NbjNEBJcfLXYPCUVbfhAJ7sX5dNluRVlKi3FI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz+ZCLonI0gn5FlQ4V3nd9kJ1p6l3Kgw/78cLTiMJtbVN3jHvdF
-	juIUOzjsseiJ9RtBso4eFJgSJYwhuayU7pduDc8+LqxellDxZJMjRZnBFHOP194=
-X-Gm-Gg: ASbGnctYbe+L+UZ5fbxktaqS5+y8mHgJaCgHcrhx5q6+PCpZhZ0AhZVpzyIIp/XK+PA
-	+XFWyOqufLxmJOGjG71/du+ILT9UNdKojeydLHQQexcH8CFbd44LQ0Re7V4ewucb6MhyK9AnoqH
-	xeVRUArq8J/yPDVExKFd6ymklVaSkq2mgIqEtk1mTqHgOmBt0ZnU77KfAo899PeeTiz35lrAh9Q
-	yL9HJdqu6C+bkYNHTs9mx212KXt+IjiQuj27qO5i2V/e6vX6p3+l3y/jratNUBBAi8nV2aigDlA
-	ecDwlq6Vc0wgwJPXVw3j
-X-Google-Smtp-Source: AGHT+IHBbqUIzhTFw2aIFGuf4dG458UqjTq9i9/Ui6iMvzkHiNDF6KmFGvqVLIVyhbahG0SW6d0D6A==
-X-Received: by 2002:a17:907:36c8:b0:aa6:4494:e354 with SMTP id a640c23a62f3a-ab2abc92570mr3297558966b.42.1737020794373;
-        Thu, 16 Jan 2025 01:46:34 -0800 (PST)
-Message-ID: <7984d25d-66ac-4791-929b-a3ce037e960c@citrix.com>
-Date: Thu, 16 Jan 2025 09:46:33 +0000
+        bh=2Q2TkjmnTaEB5x8Xl171g0+JkKKOeL7dJhCQLqhZYRE=;
+        b=MuB94ZW0VTvAE/ROAKNiuSgyOztsGZPhv0GHowE2TD0Z9+Ch5kgaN133RW5viGq8u1
+         M5M10UjXzNkoTxFJ3n5BjQFS867C5CmiYt3u/IOfmrjNc2dd3ggSUUvdKYValRK/aBZq
+         8qsO6ifUUndVklDgVcv4KUFwMC2Sjh8xBcsKNl1OYmDS3uYqHt3lvlu1/po17ipkn2Y/
+         unVpUMU1drepO8lIZkX33ZNyr2bSVH3fV8dPPhKjvSwu9FVG90c6gAdgR0vTv+k7K5qr
+         HjMjM2p1sEQHvfFhuVn290aYmIysd0pwRwtByRbAod+kx9+E7In0hDZ8r5fJc39Zqpp0
+         ybrw==
+X-Forwarded-Encrypted: i=1; AJvYcCXeP0cF1FFxAVX7tihSk1oWd4++1f7T/040CuHDICJxp+zMCFsdD/coAd9ZquBJlVPapCGQFTBtPfY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwI29nOWYAjdYX1PFTlAGDzC0F8fO5PverWIJq0EivikNJLLpza
+	N7uWLq6tte9hIjjpdfcRwMUGLpHWNM9J8iXPSnucOW8w+0WtnQwGRImK4TjAqA==
+X-Gm-Gg: ASbGncth+TdcKo8ZQkGxM8PKi+Uj9OHIUpnN+qaLV6SDnvduIlwSYlt3uuuk//jYjPz
+	vWqN+IV4ozvDBD+Q/FwkudV92MjT0BavH9YOzQ40Wo8x0T0BClutAp7yz3finMJqvbog6qeAM2Z
+	m0dItlHCZs0r1xUQrxtVWhXChox1eSr6CiSRTK6YcrRJXyR3lHK3CByRwUmrejwFN4VQZSZtNom
+	jUpQXiaGKDXcoIssxs7/PN3amM6rORmM457L7nV6+Ssb8qtVlwqlYKW4ygmMuGoXqnQwGKxymEH
+	Nt2otl+ymZo2Fzkzu8fyvPHGk9c4kHwHP6lisMbj4g==
+X-Google-Smtp-Source: AGHT+IEnNZLOrVVu69pYB6p5VD9Sv8RPKa9TAefsGgjmEy4icwJqKrArwoufuE3pCxDJZiK350Uflg==
+X-Received: by 2002:a05:600c:4e8c:b0:434:f5c0:3288 with SMTP id 5b1f17b1804b1-436e271d355mr299560085e9.29.1737021063311;
+        Thu, 16 Jan 2025 01:51:03 -0800 (PST)
+Message-ID: <d90e5496-cccf-4670-8332-8d2e5f482c5e@suse.com>
+Date: Thu, 16 Jan 2025 10:51:01 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-4.20 2/2] automation/cirrus-ci: introduce FreeBSD
- randconfig builds
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <20250116085852.78273-1-roger.pau@citrix.com>
- <20250116085852.78273-2-roger.pau@citrix.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20250116085852.78273-2-roger.pau@citrix.com>
+Subject: Re: [XEN PATCH] docs/misra: Document ECLAIR extension to Rule 20.7
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
+ ayan.kumar.halder@amd.com, consulting@bugseng.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <77354513a986a14c37ec2dfc45cf3534b08b5e85.1736972547.git.nicola.vetrini@bugseng.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <77354513a986a14c37ec2dfc45cf3534b08b5e85.1736972547.git.nicola.vetrini@bugseng.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 16/01/2025 8:58 am, Roger Pau Monne wrote:
-> Add a new randconfig job for each FreeBSD version.  This requires some
-> rework of the template so common parts can be shared between the full and
-> the randconfig builds.  Such randconfig builds are relevant because FreeBSD
-> is the only tested system that has a full non-GNU toolchain.
->
-> While there remove the stale `python` package install in the full build
-> case: this is no longer needed if `python311` is also specified.
->
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+On 16.01.2025 10:31, Nicola Vetrini wrote:
+> MISRA C Rule 20.7 states:
+> "Expressions resulting from the expansion of macro parameters shall
+> be enclosed in parentheses".
+> 
+> Document the behaviour of ECLAIR with respect to the CPP extension
+> that allows variable macro arguments to be named.
+> 
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 > ---
->  .cirrus.yml | 64 +++++++++++++++++++++++++++++++++++++++++------------
->  1 file changed, 50 insertions(+), 14 deletions(-)
->
-> diff --git a/.cirrus.yml b/.cirrus.yml
-> index ee80152890f2..f3ea29102cbf 100644
-> --- a/.cirrus.yml
-> +++ b/.cirrus.yml
-> @@ -1,11 +1,24 @@
->  # https://cirrus-ci.org/guide/tips-and-tricks/#sharing-configuration-between-tasks
-> -freebsd_template: &FREEBSD_TEMPLATE
-> +freebsd_13: &FREEBSD_13
-> +  freebsd_instance:
-> +    image_family: freebsd-13-4
-> +freebsd_14: &FREEBSD_14
-> +  freebsd_instance:
-> +    image_family: freebsd-14-2
-> +freebsd_15: &FREEBSD_15
-> +  freebsd_instance:
-> +    image_family: freebsd-15-0-snap
+>  docs/misra/rules.rst | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+> index e7763795b826..13890f6d8852 100644
+> --- a/docs/misra/rules.rst
+> +++ b/docs/misra/rules.rst
+> @@ -671,7 +671,14 @@ maintainers if you want to suggest a change.
+>         shall be enclosed in parentheses
+>       - Extra parentheses are not required when macro parameters are used
+>         as function arguments, as macro arguments, array indices, lhs in
+> -       assignments or as initializers in initalizer lists.
+> +       assignments or as initializers in initalizer lists. In addition,
+> +       the use of a named variable argument in a macro that would constitute
+> +       a violation of the rule is allowed by ECLAIR as an extension of the
+> +       MISRA, since it may not always be possible to parenthesize such
+
+Just one nit / question (addressable while committing, if desired): I
+wouldn't have expected "the" before "MISRA". Is that conventional wording
+in your environment?
+
+Jan
+
+> +       argument and the feature is non-standard::
 > +
-> +freebsd_template: &FREEBSD_ENV
->    environment:
->      APPEND_LIB: /usr/local/lib
->      APPEND_INCLUDES: /usr/local/include
+> +         #define M(args...) args
+> +         #if M(1) + 0 
 >  
-> +freebsd_full_build_template: &FREEBSD_FULL_BUILD_TEMPLATE
-> +  << : *FREEBSD_ENV
-> +
->    install_script: pkg install -y seabios gmake ninja bash
-> -                                 pkgconf python bison perl5
-> +                                 pkgconf bison perl5
->                                   yajl lzo2 pixman argp-standalone
->                                   libxml2 glib git python311
->  
-> @@ -15,20 +28,43 @@ freebsd_template: &FREEBSD_TEMPLATE
->      - ./configure --with-system-seabios=/usr/local/share/seabios/bios.bin
->      - gmake -j`sysctl -n hw.ncpu` clang=y
->  
-> +freebsd_randconfig_template: &FREEBSD_RANDCONFIG_TEMPLATE
-> +  << : *FREEBSD_ENV
-> +
-> +  install_script: pkg install -y gmake python bison
+>     * - `Rule 20.9 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_09.c>`_
+>       - Required
 
-It's odd having python311 for the full build but only python for the
-randconfig build.
-
-IIRC, it's just for Qemu, so there is a split based on whether we build
-tools or not.
-
-What will happen when python becomes 3.12?  Does pkg have a way of
-asking "I want any python as long as it's 3.11 or later" ?
-
-Relatedly, how likely is python to transform into 3.12 in a bump to the
-minor FreeBSD versions?
-
-~Andrew
 
