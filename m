@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E3FC02183
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 17:53:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.873683.1284720 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD53C0218C
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 17:53:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.873678.1284669 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYU38-0000G4-6j; Thu, 16 Jan 2025 17:52:58 +0000
+	id 1tYU32-0007Qj-H0; Thu, 16 Jan 2025 17:52:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 873683.1284720; Thu, 16 Jan 2025 17:52:58 +0000
+Received: by outflank-mailman (output) from mailman id 873678.1284669; Thu, 16 Jan 2025 17:52:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYU38-0000Et-0x; Thu, 16 Jan 2025 17:52:58 +0000
-Received: by outflank-mailman (input) for mailman id 873683;
- Thu, 16 Jan 2025 17:52:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tYU32-0007Qc-EK; Thu, 16 Jan 2025 17:52:52 +0000
+Received: by outflank-mailman (input) for mailman id 873678;
+ Thu, 16 Jan 2025 17:52:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PV9y=UI=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tYU36-0007CP-KW
- for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 17:52:56 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b74e02b7-d432-11ef-a0e2-8be0dac302b0;
- Thu, 16 Jan 2025 18:52:56 +0100 (CET)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5d3cf094768so2189107a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 09:52:56 -0800 (PST)
+ id 1tYU30-0007C4-Q9
+ for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 17:52:50 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b306d240-d432-11ef-99a4-01e77a169b0f;
+ Thu, 16 Jan 2025 18:52:49 +0100 (CET)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3d143376dso1878477a12.3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 09:52:49 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab384f224e0sm26235766b.112.2025.01.16.09.52.54
+ 4fb4d7f45d1cf-5db73683de7sm243751a12.42.2025.01.16.09.52.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 09:52:54 -0800 (PST)
+ Thu, 16 Jan 2025 09:52:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,47 +46,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b74e02b7-d432-11ef-a0e2-8be0dac302b0
+X-Inumbo-ID: b306d240-d432-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1737049975; x=1737654775; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1737049968; x=1737654768; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sXVxPmSkdh6kTkitg7Sn1/R1oEUNu+Kk247t0METCbc=;
-        b=Uc7Ti+F3lmBlCvE7EC2B6zQyMxGzLjfvlab3jVvOE1frB7JUn1kWhC6PxGkFDUKHDg
-         0nbLYwRjEnJdtw12z2glQLYVy5vTVfvK+3g/WIfCGd6Ab87d7IYnz9RL2OBKBPVoCd7m
-         H4xie7EIh7MnrVoQ03oLEJsb6TeFly8hoO57M=
+        bh=U/uapuiccaTxH7EAPivIv8o3YxFQp/soQ4UJlMTsG9c=;
+        b=O/2JNqElh5xNd+RStDT21xcxV487992pG/yzLw+1TeuPYTfB+1uX+uR0ErhdlfzBpI
+         pL80Vn+Q2n7BbBmySPqcC4+0gUfxd0tLtkEqc7GIa+UylBZWqyGaYeyoihW1XzF0bqeE
+         0R4GWHrPSOoVZBO0RVd1fsRg59z9zDnx7SY+g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737049975; x=1737654775;
+        d=1e100.net; s=20230601; t=1737049968; x=1737654768;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sXVxPmSkdh6kTkitg7Sn1/R1oEUNu+Kk247t0METCbc=;
-        b=Ndp855aArMaV0u/S0kdQntWR6mkDDoYGnhGWcBiUp8EgbZr5TB4ncYx5Je29Cxx9+B
-         UGoM6ybifsKcO/q09FpG0XiIyQE+bGRPJHVhnVkV9qcYXxPJUpXPpNNGYcWH2PusYPGJ
-         NqHVGJYv1d6O6QBtaQCVuFB9Vg5hGYcrYy8C30vO4Ub/xqF4WZoxNkH2ru18il8W+vhE
-         5WmXkyFrPSfrOwEsQEu6QT0b4N4fsz2LfixQtyYcI/Ca00myvRpgs8lfrJp6gU+oApUZ
-         yVX7xyi3EoLx7WDi4huNP6RyfQp5bzBv4mVPi83OwTidN49sdruA+0G1tcUwGMSnYcLG
-         pF4Q==
-X-Gm-Message-State: AOJu0Yz9EbwjAFcq1h7L/50/AQ8n5ZKD5H8DqM+8sHnu6BbzH1Rt1CSx
-	Lk0J6JxCIlIPsBpD8qZ+EEk3L4pT4TQvaeEAkh2diLITHypiX7tGZky8yjELkWVGtCFmxbt6jXe
-	O
-X-Gm-Gg: ASbGnctyN06UcnGqHK8Oh0sMTPBZxbmsCOspNTDlcSGZheJUhnzDkMABGFISnazOc2v
-	vP6ezJnXd99nL1AbFhGO/2JUR+SQIOBuc6Am4qkeJwa/asN+VdN25nkq8G9GvCUJyfaWMw5De1g
-	0/ELNidHXxrBio027NzWXwh5W5FvtuItng4nq+cQ/kxZSYQgOzDswrgp5Ucz+TyUTjgGBkjRe8B
-	VG56YnVifMW2cmIu7wzpywflinhYvSaqNJ0/1ANMIzC/Wtbpv/Ch0N8gOVRAw==
-X-Google-Smtp-Source: AGHT+IFdZIe4URc/r5aMLDRcUwmFjsTbWtOQeBFa9lkuRgU01Wen7f7gO9nWpmnH3qTK+bjccegIkA==
-X-Received: by 2002:a17:907:72d0:b0:aa6:5eae:7ed8 with SMTP id a640c23a62f3a-ab2ab66cea6mr3122115866b.6.1737049975319;
-        Thu, 16 Jan 2025 09:52:55 -0800 (PST)
+        bh=U/uapuiccaTxH7EAPivIv8o3YxFQp/soQ4UJlMTsG9c=;
+        b=RolzNYnCqX3nHvY/S31qMbbpTwfYYzwmPTTBz9ZSLOtDpapjGJZz5InSIJaLN91aw4
+         +B23xvTQ4CA9JKoqnrFGR8KoWpMtKwRATU0ZSxTJjRd0KJfNvpxFMnHNfL0HbdNiK+0r
+         rjXHAmUdudj6YrzaHqyTSMsGSjAO9BvsFqvpFe6EuvNfgqBp49ZJ65VlbqKpKeT8SUGx
+         SVtcnaYullke+ZsIAcKJLh5udTnc/yKOSS01a6UJ3LJm5vYaw7R89Zf7Nknp28A/8k6X
+         Yv1dL1WYRNmiEz4LMH+RhXbbdsh2ly4czs+kuTzf7lE6w0MyZOYqNiC9Xmec9yOsFBLv
+         mz5w==
+X-Gm-Message-State: AOJu0YwFCZ0hVS55RLHMtjwmXMn7mYq66kUqR110eal0x2z68NssQPch
+	5UMnxHUzthnteDKeHrShRgGsOHIbm8kgXxlR60NiIs/1nhqrricR07bTlW8xvw//YzevIhrb3eE
+	u
+X-Gm-Gg: ASbGncsG399MMxdUpraho/Zxjk+uy/FbpuJA7TDI7lLd5O2GbyBhbwIIPvM0fbsSSp1
+	P1wEEhuZlV7LFHtD2Or7Iti5XMerKt51Q3DPWSr27GVxVvWcNaLJ9V9eGA5j7ZQoJBocaqEUYo4
+	8Klyax8rkqQAviVE89KCgUaSPFKJYUCgH+4NZWpTF+aZ1ofxUlvv9N9jOYRt8kpdkKjHKyTUxKQ
+	wSRV2uNF+g8fVEEIN3xkxaKZNI+1OJ2hEEtf4YD/XLzKxD1/tnun+i3kw4Tfw==
+X-Google-Smtp-Source: AGHT+IGeIm8rBfa4224KwZC18X4+hgNPmw3wjFS1KC8gS4AtREa/j5SkB6WcvVr/HvK0A4HLRZN3Kg==
+X-Received: by 2002:a05:6402:40d5:b0:5d9:f21e:ff5 with SMTP id 4fb4d7f45d1cf-5d9f21e18a0mr13175025a12.16.1737049968140;
+        Thu, 16 Jan 2025 09:52:48 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: konrad.wilk@oracle.com,
 	ross.lagerwall@citrix.com,
 	Artem Savkov <asavkov@redhat.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 6/7] create-diff-object: propagate ignore.functions to children
-Date: Thu, 16 Jan 2025 18:52:13 +0100
-Message-ID: <20250116175214.83742-7-roger.pau@citrix.com>
+Subject: [PATCH 1/7] create-diff-object: ignore .cold.* suffixes in is_bundleable()
+Date: Thu, 16 Jan 2025 18:52:08 +0100
+Message-ID: <20250116175214.83742-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20250116175214.83742-1-roger.pau@citrix.com>
 References: <20250116175214.83742-1-roger.pau@citrix.com>
@@ -96,30 +96,41 @@ Content-Transfer-Encoding: 8bit
 
 From: Artem Savkov <asavkov@redhat.com>
 
-Add child symbols to .kpatch.ignore.functions in case their parents are
-added to the list.
+While building a gcc-consprop patch from integration tests gcc8 would place a
+__timekeeping_inject_sleeptime.constprop.18.cold.27 symbol into
+.text.unlikely.__timekeeping_inject_sleeptime.constprop.18 section. Because
+section name doesn't have the '.cold.27' suffix this symbol fails
+is_bundleable() check while still being bundleable and later exits early in
+kpatch_rename_mangled_functions() without renaming the corresponding patched
+function. All of this results in a create-diff-object errror:
+
+  ERROR: timekeeping.o: symbol changed sections: __timekeeping_inject_sleeptime.constprop.18.cold.27
+  /home/asavkov/dev/kpatch/kpatch-build/create-diff-object: unreconcilable difference
+
+Fix by ignoring .cold.* name suffix in is_bundleable() for.text.unlikely
+sections.
 
 Signed-off-by: Artem Savkov <asavkov@redhat.com>
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- create-diff-object.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ common.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/create-diff-object.c b/create-diff-object.c
-index 3189d3e8451c..6060a73555ed 100644
---- a/create-diff-object.c
-+++ b/create-diff-object.c
-@@ -936,6 +936,10 @@ static void kpatch_mark_ignored_functions_same(struct kpatch_elf *kelf)
- 			log_normal("NOTICE: no change detected in function %s, unnecessary KPATCH_IGNORE_FUNCTION()?\n", rela->sym->name);
- 		rela->sym->status = SAME;
- 		rela->sym->sec->status = SAME;
-+
-+		if (rela->sym->child)
-+			rela->sym->child->status = SAME;
-+
- 		if (rela->sym->sec->secsym)
- 			rela->sym->sec->secsym->status = SAME;
- 		if (rela->sym->sec->rela)
+diff --git a/common.c b/common.c
+index 68a71f75ac7b..84ca14d3e397 100644
+--- a/common.c
++++ b/common.c
+@@ -126,7 +126,9 @@ static int is_bundleable(struct symbol *sym)
+ 
+ 	if (sym->type == STT_FUNC &&
+ 	    !strncmp(sym->sec->name, ".text.unlikely.",15) &&
+-	    !strcmp(sym->sec->name + 15, sym->name))
++	    (!strcmp(sym->sec->name + 15, sym->name) ||
++			 (strstr(sym->name, ".cold.") &&
++			  !strncmp(sym->sec->name + 15, sym->name, strlen(sym->sec->name) - 15))))
+ 		return 1;
+ 
+ 	if (sym->type == STT_OBJECT &&
 -- 
 2.46.0
 
