@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3175C02183
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 17:22:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.873664.1284649 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18748C02183
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 17:53:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.873679.1284679 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYTYq-00031l-VN; Thu, 16 Jan 2025 17:21:40 +0000
+	id 1tYU33-0007f9-Ow; Thu, 16 Jan 2025 17:52:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 873664.1284649; Thu, 16 Jan 2025 17:21:40 +0000
+Received: by outflank-mailman (output) from mailman id 873679.1284679; Thu, 16 Jan 2025 17:52:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYTYq-00031e-Sl; Thu, 16 Jan 2025 17:21:40 +0000
-Received: by outflank-mailman (input) for mailman id 873664;
- Thu, 16 Jan 2025 17:21:40 +0000
+	id 1tYU33-0007f0-LO; Thu, 16 Jan 2025 17:52:53 +0000
+Received: by outflank-mailman (input) for mailman id 873679;
+ Thu, 16 Jan 2025 17:52:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=StQj=UI=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tYTYq-00031B-Bf
- for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 17:21:40 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ <SRS0=PV9y=UI=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tYU31-0007CP-Ky
+ for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 17:52:51 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 56a34e4c-d42e-11ef-a0e2-8be0dac302b0;
- Thu, 16 Jan 2025 18:21:38 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43622267b2eso11445995e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 09:21:36 -0800 (PST)
-Received: from localhost (0545937c.skybroadband.com. [5.69.147.124])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-437c753c60csm64359305e9.36.2025.01.16.09.21.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 09:21:34 -0800 (PST)
+ id b3bf4873-d432-11ef-a0e2-8be0dac302b0;
+ Thu, 16 Jan 2025 18:52:50 +0100 (CET)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aaecf50578eso271479166b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 09:52:50 -0800 (PST)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab384c57034sm27787866b.34.2025.01.16.09.52.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jan 2025 09:52:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,90 +46,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 56a34e4c-d42e-11ef-a0e2-8be0dac302b0
+X-Inumbo-ID: b3bf4873-d432-11ef-a0e2-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1737048095; x=1737652895; darn=lists.xenproject.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1737049969; x=1737654769; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aiB7t28fo8v6Pa+jD/C05PgyVfsvktli5fg7J/PavTk=;
-        b=BvKJhIIGWJ2Gtdbtwircmy03Dy4KK777bdsORE1Pj4RLSM27OGjtoecnGDUFCThS+N
-         dUvfqX/KZyyrYBW/uVsaJOReQ4ywffPK0xr1x9pGr0I4Otvqjmh5zVOAaaFduZvVejEW
-         abaPBNO2MtKjSR4T7NLhqRk9ulobnf55KuCXs=
+        bh=FuFvwoczQ0Dt1tA24xhRPUnmiSMeJ5zfD1PkZdC+rZ4=;
+        b=TCfaB8BNMNubLNnPXbD6bMbfmJI/c3o/xtaHojwA3oSy3bNnaO1qwi/Z/rIyF+9Juu
+         ycwe9rTGtRxJM6raqjYo9P2OHA3n93PAfpvKNvHdEX5EEIh9ohaM6LhsRB5t1ArKjFTj
+         X9OMXDdgTineOjogMRw5wYwfOuKnIMJsfMI8s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737048095; x=1737652895;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=aiB7t28fo8v6Pa+jD/C05PgyVfsvktli5fg7J/PavTk=;
-        b=D1FBRjMvwEIa+IrUN8jVThxA7rFNoZ5om6YtF16LCEhjOrsei79LsRyDcasuElK1YX
-         vEuW3GAzsjh3Aa6/AbDzLu9Hzfyk0pRa51V9urA04XA+BgvdNpgA4JnK0mZx0/gBRdRO
-         H6Q3KXoUMAyYQvTZGwJcyFLXYi+Y+PAKJUSley4OBZGD2pzD5i/Ws4hCPMpJv3cAyfBt
-         oF2v6ikHcAeKtFiSg1I7ZBoH3fc1xutkYv0/extVy4+ub0oMaV3z8GJ1eP96sRntMYOl
-         moRKR/40+VWm+xCWHqHQk+ujT1cdicMak002zFqaQ/egMycCdLYHE1YHEDHsXLac6kKk
-         dpXA==
-X-Forwarded-Encrypted: i=1; AJvYcCWN5Vh+1C5VOOu5wknUQ+ZBJBkk+e2OH0CjbHgZ8rnxZWBb8oAXjPq+wPXPrxZJOPApoMCu2bnS3qI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwLjGiSLxo4RXwBtsYbBV4AmGN4DfIFehcuergqQbvMNl6ZLhqc
-	Eai/ESU35glbGVLAAdeSvtAmhdsinLrO6JqwdpeqvhxHOsBCTzFeGHfY1xl/jWU=
-X-Gm-Gg: ASbGncvLejyK+5jPj8+YmtykeCtvT3T9nTz5Munr1ECPHw0EyifVCk7W1BWjGoT/9PH
-	8ba8axzRnZYrCHGuIwxiFJ9mNezoQPtG5W7Gfw/74po12vjaAA6kPx0+QlnPh+f6jSvmWX+qtya
-	BPBwWZ+6UTDQcXL3i623BBnTZTK/Soc5krIgoCfM6puS5Kz7UOG707Bmccd7y6mBYpgwkPo7zAw
-	08Zk3V/tUlH16vCVGpLV3QKPavvzPI0xgxXa7MC7EakVp0iir2qj8YwUExVM+DxYQDO+56bJi8q
-	1A7tECpyYOI=
-X-Google-Smtp-Source: AGHT+IGO60/8X+2XAeb2bgrS2UcjWrwcCuAaq/kQa+TdjzAMBxwmBFFDJ5XQsOXQaFqBLtNYK/ZH0A==
-X-Received: by 2002:a05:600c:3ca4:b0:434:a10f:9b with SMTP id 5b1f17b1804b1-436e26ab2a2mr354174645e9.14.1737048095408;
-        Thu, 16 Jan 2025 09:21:35 -0800 (PST)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+        d=1e100.net; s=20230601; t=1737049969; x=1737654769;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FuFvwoczQ0Dt1tA24xhRPUnmiSMeJ5zfD1PkZdC+rZ4=;
+        b=wWcWF7QEHDwtLGNnqbPakYIp7nORGssd64HmW4nxKaZHZeYgaDN6or9CYUkGe83yEj
+         zU2hbz5Uj0P+YWGYnqSjaCEqESimjFklZpVdsR3ektXOmptBksZNCggHU2krt/mJa91v
+         lubdJboXjjCsUevEOmWowoGsJ5lFuBu2C0a1WRRdWN3aZsiL5lr/7XQn5JcXBYadTzGY
+         cnnvjl6L/R/mZLXi+Rzqi2Gec6tVB6VrdprwwDgxpMhPfpR7vO9VjcxLAtgOjspnY/nO
+         HRQyw26VQ8kl+bCSjUYNrxW66QG7slOVnZOQtZVy0xpABaUDa8B1EGqdo/iG7ygUJuGW
+         LfCQ==
+X-Gm-Message-State: AOJu0YxiDsnklJLQlaoHGXaNk3nMLi+jsuEFcEUvZ8iNut/GztWfk5r0
+	jmSmhyFMgeB/Tf5ZSDlSSe2HEw/o/a3OAL7q59nAVmRmqehSHT9baOq//5phOTNhGbSn+NUTBA+
+	6
+X-Gm-Gg: ASbGncudV+qYdLiy2TE0olpWQ0kKNWnhZtJlWumlaDDfHfIV+jtEooEnkJl+x53o8yP
+	jA5OWKu/9UUTYbJDpeJfYOiA/dDlbY91zt8gBBEeySxKUU6Krno+kfoqM8Bx5AHx8YdZlP4K6Ad
+	jsZfLt9hdWaJzInxSEwnbsaqsldaKuaprtI5NYWIA9+fM1Q6vEIT7dKAhnLMoSSh2iHkVilCnD8
+	mAkREnqhQX+MHEhQ84XBC575ZAeQ4mCu4rhFVqF5PDp5nqVmLbeQfi6nv2Dpw==
+X-Google-Smtp-Source: AGHT+IHQ78fj4w35Y9kLgaBu47AToy7EGUILnKAan473qANN6ZzI//+m6f88rVqsRBAIby1r3BuuSQ==
+X-Received: by 2002:a17:907:7f0a:b0:aab:da48:493e with SMTP id a640c23a62f3a-ab2ab559c29mr3048679366b.21.1737049969348;
+        Thu, 16 Jan 2025 09:52:49 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: konrad.wilk@oracle.com,
+	ross.lagerwall@citrix.com,
+	Artem Savkov <asavkov@redhat.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 2/7] create-diff-object: add symbol relations
+Date: Thu, 16 Jan 2025 18:52:09 +0100
+Message-ID: <20250116175214.83742-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20250116175214.83742-1-roger.pau@citrix.com>
+References: <20250116175214.83742-1-roger.pau@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu, 16 Jan 2025 17:21:34 +0000
-Message-Id: <D73O5Q2J1MGM.2YBNH2X7YYT2E@cloud.com>
-Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD"
- <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, =?utf-8?q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>,
- <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH] docs: Punctuation: Add missing commas after linking
- adverbs as intros
-From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
-To: "Jan Beulich" <jbeulich@suse.com>, "Bernhard Kaindl"
- <bernhard.kaindl@cloud.com>
-X-Mailer: aerc 0.18.2
-References: <ad9d1d7db8d43c82a02f64b8a317d7ae6522dd62.1736964253.git.bernhard.kaindl@cloud.com> <0d2e9617-e4cf-4b34-954a-a790c4bfda0a@suse.com>
-In-Reply-To: <0d2e9617-e4cf-4b34-954a-a790c4bfda0a@suse.com>
+Content-Transfer-Encoding: 8bit
 
-On Thu Jan 16, 2025 at 9:46 AM GMT, Jan Beulich wrote:
-> On 15.01.2025 19:06, Bernhard Kaindl wrote:
-> > Fix missing commas after linking adverbs such as currently, fortunately=
-,
-> > hence, instead, and thus, when used as linking adverbs at the beginning
-> > of sentences. I saw them with LTeX; other checkers have this rule too.
->
-> I'm unconvinced, and despite Stefano's R-b (Stefano, please don't feel
-> offended) I'd like this to be commented on by a native speaker.
+From: Artem Savkov <asavkov@redhat.com>
 
-Not a native speaker, but those are "sentence adverbs" and must indeed have=
- a
-comma to refer to the whole sentence they preceed. Read them aloud and you'=
-ll
-notice you do pause for a little while.
+Add a function that would detect parent/child symbol relations. So far
+it only supports .cold.* symbols as children.
 
-> It is my understanding that commas in such situations are optional.
->
-> Jan
+Signed-off-by: Artem Savkov <asavkov@redhat.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ common.h             |  2 ++
+ create-diff-object.c | 35 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
 
-A comma may or may not accompany such words depending on their position and=
- use
-in the sentence, but that doesn't mean it's optional. Some construction hav=
-e
-pauses and some don't (sometime meaning different things). In this case I'd=
- say
-they were definitely missing. Reading that without pausing at those spots i=
-s
-just awkward.
+diff --git a/common.h b/common.h
+index 5ff9ef6ca8e9..7f3a82ffdb29 100644
+--- a/common.h
++++ b/common.h
+@@ -85,6 +85,8 @@ struct section {
+ struct symbol {
+ 	struct list_head list;
+ 	struct symbol *twin;
++	struct symbol *parent;
++	struct symbol *child;
+ 	struct section *sec;
+ 	GElf_Sym sym;
+ 	char *name;
+diff --git a/create-diff-object.c b/create-diff-object.c
+index fed360a9aa68..b041d94d9723 100644
+--- a/create-diff-object.c
++++ b/create-diff-object.c
+@@ -327,6 +327,38 @@ static void kpatch_rename_mangled_functions(struct kpatch_elf *base,
+ 	}
+ }
+ 
++/*
++ * During optimization gcc may move unlikely execution branches into *.cold
++ * subfunctions. kpatch_detect_child_functions detects such subfunctions and
++ * crossreferences them with their parent functions through parent/child
++ * pointers.
++ */
++static void kpatch_detect_child_functions(struct kpatch_elf *kelf)
++{
++	struct symbol *sym;
++
++	list_for_each_entry(sym, &kelf->symbols, list) {
++		char *coldstr;
++
++		coldstr = strstr(sym->name, ".cold.");
++		if (coldstr != NULL) {
++			char *pname;
++
++			pname = strndup(sym->name, coldstr - sym->name);
++			if (!pname)
++				ERROR("strndup");
++
++			sym->parent = find_symbol_by_name(&kelf->symbols, pname);
++			free(pname);
++
++			if (!sym->parent)
++				ERROR("failed to find parent function for %s", sym->name);
++
++			sym->parent->child = sym;
++		}
++	}
++}
++
+ /*
+  * This function detects whether the given symbol is a "special" static local
+  * variable (for lack of a better term).
+@@ -2329,6 +2361,9 @@ int main(int argc, char *argv[])
+ 	log_debug("Open patched\n");
+ 	kelf_patched = kpatch_elf_open(arguments.args[1]);
+ 
++	kpatch_detect_child_functions(kelf_base);
++	kpatch_detect_child_functions(kelf_patched);
++
+ 	log_debug("Compare elf headers\n");
+ 	kpatch_compare_elf_headers(kelf_base->elf, kelf_patched->elf);
+ 	log_debug("Check program headers of base\n");
+-- 
+2.46.0
 
-My .02 anyway.
-
-Cheers,
-Alejandro
 
