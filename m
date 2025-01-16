@@ -4,39 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 444C9C02180
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 08:51:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.873334.1284293 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32EF7C02180
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 08:59:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.873344.1284313 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYLb7-0003IK-F9; Thu, 16 Jan 2025 08:51:29 +0000
+	id 1tYLiQ-00049L-Di; Thu, 16 Jan 2025 08:59:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 873334.1284293; Thu, 16 Jan 2025 08:51:29 +0000
+Received: by outflank-mailman (output) from mailman id 873344.1284313; Thu, 16 Jan 2025 08:59:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYLb7-0003ID-CO; Thu, 16 Jan 2025 08:51:29 +0000
-Received: by outflank-mailman (input) for mailman id 873334;
- Thu, 16 Jan 2025 08:51:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tYLiQ-00049E-8y; Thu, 16 Jan 2025 08:59:02 +0000
+Received: by outflank-mailman (input) for mailman id 873344;
+ Thu, 16 Jan 2025 08:59:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oQTT=UI=ventanamicro.com=ajones@srs-se1.protection.inumbo.net>)
- id 1tYLb5-0003I7-Ve
- for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 08:51:28 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 12319c9a-d3e7-11ef-a0e2-8be0dac302b0;
- Thu, 16 Jan 2025 09:51:26 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-38637614567so324350f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 00:51:26 -0800 (PST)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a8e4c3428sm19402764f8f.87.2025.01.16.00.51.25
+ <SRS0=PV9y=UI=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tYLiP-0003um-Ic
+ for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 08:59:01 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2014eea3-d3e8-11ef-99a4-01e77a169b0f;
+ Thu, 16 Jan 2025 09:58:59 +0100 (CET)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-385d7b4da2bso594853f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Jan 2025 00:59:00 -0800 (PST)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a8e383882sm20023637f8f.34.2025.01.16.00.58.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 00:51:25 -0800 (PST)
+ Thu, 16 Jan 2025 00:58:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,117 +46,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12319c9a-d3e7-11ef-a0e2-8be0dac302b0
+X-Inumbo-ID: 2014eea3-d3e8-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google; t=1737017486; x=1737622286; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=vdYGACSqmD06pBhAeXOqTAZ8uvEoU3CDJANNyc9PH5I=;
-        b=jBMgE8kWWFrRlmsPe0saWqUMRYedVc5KxBS70Ce6sKRkrvHiLDD6yY17ndN7ruFPmT
-         7YRENDkwuAJKOr7E4NtRGyhDmmD4h+cN3PgzpwP+rc18ObNHaoa8B0dFjIJizHVp2bvC
-         vkJqF4EenFchglQ1+LX4tnMQQsJ74FqsDOHyJcnGzMMPVt55ogiWU9clm/dGxpYMru4I
-         hNNOxFGFyj5NvYiELUbvtAQ8oC/PrtEJ5+1YXGFcE7dE9iH09tqGyWliBSKVygOGsZNv
-         hoUB/yD72xmSd4IoW02jLYpNEJWVlU0MVaPJRgLcLJxRNtTP08sDEBRSObrsRE4+Vbzg
-         2ibQ==
+        d=citrix.com; s=google; t=1737017939; x=1737622739; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fWuBh6NbZj0G7Aav5UDhxeeK6hgEHL+iGW447R+C6nc=;
+        b=SyvRILaMg0F7QeQTsDyPFLXfj2h8xQ1JcKHFBNAXB7Gxtrc1TYSF+nCFhoNMN+sfPh
+         3wUGSWfcdKMcN6wfD7CX3jA//zHUeuGFD1WYkB4bbC20Ts45BF60wssfCzkSnVcst5bu
+         cvBPs9ChRJ0QglBA2Uyk07ET/wHKL6qeqvDPU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737017486; x=1737622286;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vdYGACSqmD06pBhAeXOqTAZ8uvEoU3CDJANNyc9PH5I=;
-        b=dy+LBKlwa1i0QpDx15W16iakYi2+Hl25BCEIX3Z8IVPABUlrFLrJBxffB8PS3oj9Sp
-         b0oBY7U4BUdqMgZVfecxEEBxYcs3IpfgpRJnUgowfV2snLkIAw9fmxw3S2gVCcpxjNgR
-         s4KTMhR2B0FASK8dx143S6cJT4drv+tJZZgUAQ13REpLzyBF1ThCBuQtMD35mE8rzCRP
-         F81virNTe3lswQ3uWkCOn+puksDK3UGW+Q1zzQbuk1t6miJqFTogX06xwluvfy7cSBn+
-         sc+/anVcWYZCZ3JtqjKQYssqrlmTtMure9N2hIKFGrXgtAvzp/7+QEPtj73T0qp88gam
-         pcrA==
-X-Forwarded-Encrypted: i=1; AJvYcCXyLNZTE7Zz0+0E2ki0k4yGBXohvOw4pzKtrzj21lNhzfRwnPq1fsxbNNHcdaRZwAgdCXs8l13RkSk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzyBLroQ7XkotKtwhLS672QJW2y9mSQQSNJ+uIRyJTTsl4zIKHY
-	1v9cOab/K4lIgoeE/D2LAvPdZaHt/ld/I4UOVl3Zbmcp60g51UbYC7Mj48WpQAk=
-X-Gm-Gg: ASbGncs+clIxJHGrkBVF168OrCcAhr8vcj8fiiIF+Enwo2ag8jzKig6wVm8i4Wqe3p3
-	B47JWM+hFv5a9Ph+9hYZhHtMzotUafCG19bPakye9LZ2Ibi6xgeBh63uoZ14tlo54Yibnconjow
-	89xgeTAB5DVe9BGtpd1FphAFGs48t7Aj+lkZ+zrBOEkBhYmBNt70IbvgvFQ4fFV52gWHyFKO4Zn
-	8UaBn4GFpQQpQ8Vzms2UO1zRLqyHeAzEwn3ij/fSgRS6JSZbHQmUWfB1pvdHqpmGIfcjJF/Ll5H
-	ZZysPMAkO+/MbTIue+WwTsh5OsqucLlE6AmGqqLebA==
-X-Google-Smtp-Source: AGHT+IEsbulHh7PZVHSAEnmDh38IVvfobmbwOpTAusRtk5MN3iwIfCnGsZ4ArTaC23pmkWtqt4FHJQ==
-X-Received: by 2002:a5d:47c4:0:b0:385:ed16:c8b with SMTP id ffacd0b85a97d-38a87309d21mr11955948f8f.23.1737017486382;
-        Thu, 16 Jan 2025 00:51:26 -0800 (PST)
-Date: Thu, 16 Jan 2025 09:51:25 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Milan =?utf-8?B?xJBva2nEhw==?= <milandjokic1995@gmail.com>
-Cc: linux-riscv@lists.infradead.org, jgross@suse.com, 
-	aou@eecs.berkeley.edu, Milan.Djokic@rt-rk.com, rafael.j.wysocki@intel.com, 
-	linux-kernel@vger.kernel.org, oleksandr_tyshchenko@epam.com, iommu@lists.linux.dev, 
-	sstabellini@kernel.org, palmer@dabbelt.com, paul.walmsley@sifive.com, 
-	xen-devel@lists.xenproject.org, Slavisa.Petrovic@rt-rk.com, takakura@valinux.co.jp
-Subject: Re: [PATCH] riscv: Add initial Xen guest support for RISC-V
-Message-ID: <20250116-aa9eadde9279e66dbc01c705@orel>
-References: <e4a649a7fdfc8fcf5f48a0bc4e76e5d546078083.1736868605.git.Slavisa.Petrovic@rt-rk.com>
- <20250114-316084c962eb867c0b681043@orel>
- <CAKp59VFkW8F2xHsgAxiw138ZrpQJL8R5cTkF8f9vY40iEoRbWg@mail.gmail.com>
+        d=1e100.net; s=20230601; t=1737017939; x=1737622739;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fWuBh6NbZj0G7Aav5UDhxeeK6hgEHL+iGW447R+C6nc=;
+        b=cw0gr4E6WH1R/5h96r9EeeVYAnQiG+et6TNeP83Wydxu7oh/bvTieHpYiyx0i0GyWn
+         udU7dQugDzCdaON7mxVLGEwMll2PnE3fZYKohzDqhNGF09UtYpyahJoP55E4BqZjb9Qt
+         z+QHUMl8+jhHY/4ugo1CXZZ0I7sKjsiX/4V2ZTb9W0Wu41KNSVubDPJAGP1rBj1e1wsk
+         sOoAVtPT7/iY713e0VkHFvWTuxlBQgXCva0PFqJyKkg985RsnBiMH2qZ8DKF8LjQ0mlV
+         2b3EdyckpVNscykvSSWS7QGCSzgssz3gO+NTs1FucF2q+Xa5AMJwAIyJ0LNnDtjhIPvB
+         7uMQ==
+X-Gm-Message-State: AOJu0Yz5oIMR88ewO2uFGaOtPGWkstcGQkk+YpRLvov/goaAxEI1oXdm
+	QDIyALlByALJfl4tokln/gq5o0TD2K43AkwBpZUWpxerWse4ObGJmCR2chlV/lGPL4iguknNjaj
+	6
+X-Gm-Gg: ASbGncsD/GktMF2yVxq42OLpJRMtwk8SmhmmSkTaoq4O4BJxPGafXVavtd46LcKwFH0
+	7Y6vebW0GkT4iTKa2nys0pblP5/fYiF3nAflDaQ4pFdztSg5SiZGtzPrtKYv91t4TFFg3Cdm1O9
+	741lU/1pPZjB+gPVUxyA7sGsFozlgF1cuN7gOEYXeQct2A4MW5T0HturinLXu5fJPPp0I+c3Er1
+	ivZeGYMrUX/SneT6lErlDL0mtee8c8pO0P4F0qbAZLQBu/49EC/BCDYiDGatqFLZzs=
+X-Google-Smtp-Source: AGHT+IF4+4FlyXkEnXHTctrloTCmtrIYFnJLn9eEyputKWuDkHbUuyqvN0VEVtIOoYCqt1X0VCwIFw==
+X-Received: by 2002:a5d:47c9:0:b0:385:f66a:4271 with SMTP id ffacd0b85a97d-38a872fbcefmr23189409f8f.4.1737017938641;
+        Thu, 16 Jan 2025 00:58:58 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH for-4.20 2/2] automation/cirrus-ci: introduce FreeBSD randconfig builds
+Date: Thu, 16 Jan 2025 09:58:51 +0100
+Message-ID: <20250116085852.78273-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20250116085852.78273-1-roger.pau@citrix.com>
+References: <20250116085852.78273-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKp59VFkW8F2xHsgAxiw138ZrpQJL8R5cTkF8f9vY40iEoRbWg@mail.gmail.com>
 
-On Wed, Jan 15, 2025 at 08:04:05PM +0100, Milan Đokić wrote:
-> Hello Andrew,
-> 
-> On Tue, Jan 14, 2025 at 7:18 PM Andrew Jones <ajones@ventanamicro.com> wrote:
-> >
-> > On Tue, Jan 14, 2025 at 05:09:36PM +0100, Milan Djokic wrote:
-...
-> > > +++ b/arch/riscv/xen/hypercall.S
-> > > @@ -0,0 +1,71 @@
-> > > +/* SPDX-License-Identifier: GPL-2.0 */
-> > > +#include <linux/linkage.h>
-> > > +#include <asm/assembler.h>
-> > > +#include <xen/interface/xen.h>
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_event_channel_op);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_grant_table_op);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_xen_version);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_console_io);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_sched_op);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_hvm_op);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_memory_op);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_physdev_op);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_vcpu_op);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_platform_op_raw);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_multicall);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_vm_assist);
-> > > +EXPORT_SYMBOL_GPL(HYPERVISOR_dm_op);
-> > > +EXPORT_SYMBOL_GPL(privcmd_call);
-> > > +#define SBI_ECALL 0xE
-> >
-> > Shouldn't this be 0xA000007, i.e. the SBI firmware specific extension
-> > for Xen. Otherwise why refer to SBI? Note, '0xE' is an invalid, legacy
-> > extension ID in SBI.
-> >
-> Hypercall is triggered through SBI and we defined 0xE just as an
-> SBI_ECALL ID on Xen side for hypercall handling (among other operation
-> IDs), so we're not referring to some standard /legacy ID here, just
-> utilizing SBI for hypercall handling.
+Add a new randconfig job for each FreeBSD version.  This requires some
+rework of the template so common parts can be shared between the full and
+the randconfig builds.  Such randconfig builds are relevant because FreeBSD
+is the only tested system that has a full non-GNU toolchain.
 
-If the SBI specified EIDs and binary encoding aren't used, then the
-hypercalls aren't "triggered through SBI", Xen is just doing its own
-thing on an ecall. Xen doesn't have to implement SBI at all, but if
-it wants to provide SBI services, as well as its own hypercalls, then
-the hypercalls should be encoded in the same way as SBI functions and
-an EID allowed by the SBI specification for hypervisor-specific
-functions should be used. For Xen, that EID is already specified and
-it's 0xA000007.
+While there remove the stale `python` package install in the full build
+case: this is no longer needed if `python311` is also specified.
 
-> Is this specific ID (0xE) not allowed to be used on the kernel side
-> for some reason? If that is the case, we can use any other ID,
-> including the one which you suggested.
->
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ .cirrus.yml | 64 +++++++++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 50 insertions(+), 14 deletions(-)
 
-Linux can use any ID, and Xen can decide what that ID is, but, if Xen
-wants to implement SBI, then Xen can't use 0xE, because that EID is
-not allowed by the spec for the purpose of hypercalls.
+diff --git a/.cirrus.yml b/.cirrus.yml
+index ee80152890f2..f3ea29102cbf 100644
+--- a/.cirrus.yml
++++ b/.cirrus.yml
+@@ -1,11 +1,24 @@
+ # https://cirrus-ci.org/guide/tips-and-tricks/#sharing-configuration-between-tasks
+-freebsd_template: &FREEBSD_TEMPLATE
++freebsd_13: &FREEBSD_13
++  freebsd_instance:
++    image_family: freebsd-13-4
++freebsd_14: &FREEBSD_14
++  freebsd_instance:
++    image_family: freebsd-14-2
++freebsd_15: &FREEBSD_15
++  freebsd_instance:
++    image_family: freebsd-15-0-snap
++
++freebsd_template: &FREEBSD_ENV
+   environment:
+     APPEND_LIB: /usr/local/lib
+     APPEND_INCLUDES: /usr/local/include
+ 
++freebsd_full_build_template: &FREEBSD_FULL_BUILD_TEMPLATE
++  << : *FREEBSD_ENV
++
+   install_script: pkg install -y seabios gmake ninja bash
+-                                 pkgconf python bison perl5
++                                 pkgconf bison perl5
+                                  yajl lzo2 pixman argp-standalone
+                                  libxml2 glib git python311
+ 
+@@ -15,20 +28,43 @@ freebsd_template: &FREEBSD_TEMPLATE
+     - ./configure --with-system-seabios=/usr/local/share/seabios/bios.bin
+     - gmake -j`sysctl -n hw.ncpu` clang=y
+ 
++freebsd_randconfig_template: &FREEBSD_RANDCONFIG_TEMPLATE
++  << : *FREEBSD_ENV
++
++  install_script: pkg install -y gmake python bison
++
++  build_script:
++    - cc --version
++    - gmake -j`sysctl -n hw.ncpu` -C xen clang=y \
++            KCONFIG_ALLCONFIG=tools/kconfig/allrandom.config randconfig
++    - gmake -j`sysctl -n hw.ncpu` build-xen clang=y
++
+ task:
+-  name: 'FreeBSD 13'
+-  freebsd_instance:
+-    image_family: freebsd-13-4
+-  << : *FREEBSD_TEMPLATE
++  name: 'FreeBSD 13: full build'
++  << : *FREEBSD_13
++  << : *FREEBSD_FULL_BUILD_TEMPLATE
+ 
+ task:
+-  name: 'FreeBSD 14'
+-  freebsd_instance:
+-    image_family: freebsd-14-2
+-  << : *FREEBSD_TEMPLATE
++  name: 'FreeBSD 14: full build'
++  << : *FREEBSD_14
++  << : *FREEBSD_FULL_BUILD_TEMPLATE
+ 
+ task:
+-  name: 'FreeBSD 15'
+-  freebsd_instance:
+-    image_family: freebsd-15-0-snap
+-  << : *FREEBSD_TEMPLATE
++  name: 'FreeBSD 15: full build'
++  << : *FREEBSD_15
++  << : *FREEBSD_FULL_BUILD_TEMPLATE
++
++task:
++  name: 'FreeBSD 13: randconfig'
++  << : *FREEBSD_13
++  << : *FREEBSD_RANDCONFIG_TEMPLATE
++
++task:
++  name: 'FreeBSD 14: randconfig'
++  << : *FREEBSD_14
++  << : *FREEBSD_RANDCONFIG_TEMPLATE
++
++task:
++  name: 'FreeBSD 15: randconfig'
++  << : *FREEBSD_15
++  << : *FREEBSD_RANDCONFIG_TEMPLATE
+-- 
+2.46.0
 
-Thanks,
-drew
 
