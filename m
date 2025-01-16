@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A32C02183
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D9CEC02188
 	for <xen-devel@archiver.kernel.org>; Thu, 16 Jan 2025 08:44:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.873237.1284196 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.873243.1284247 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYLTk-0004St-Vj; Thu, 16 Jan 2025 08:43:52 +0000
+	id 1tYLTo-0005Xn-8c; Thu, 16 Jan 2025 08:43:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 873237.1284196; Thu, 16 Jan 2025 08:43:52 +0000
+Received: by outflank-mailman (output) from mailman id 873243.1284247; Thu, 16 Jan 2025 08:43:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tYLTk-0004QW-P5; Thu, 16 Jan 2025 08:43:52 +0000
-Received: by outflank-mailman (input) for mailman id 873237;
- Thu, 16 Jan 2025 08:43:50 +0000
+	id 1tYLTn-0005VY-Pn; Thu, 16 Jan 2025 08:43:55 +0000
+Received: by outflank-mailman (input) for mailman id 873243;
+ Thu, 16 Jan 2025 08:43:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8jK+=UI=casper.srs.infradead.org=BATV+cabf69696ff47aa9dee2+7816+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1tYLTi-0004BI-Ex
- for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 08:43:50 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=SegZ=UI=desiato.srs.infradead.org=BATV+b63efa7a8ebec188a7bb+7816+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1tYLTl-0004BI-8i
+ for xen-devel@lists.xenproject.org; Thu, 16 Jan 2025 08:43:53 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ff9d8e86-d3e5-11ef-a0e2-8be0dac302b0;
- Thu, 16 Jan 2025 09:43:46 +0100 (CET)
+ id 00b8a977-d3e6-11ef-a0e2-8be0dac302b0;
+ Thu, 16 Jan 2025 09:43:49 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
- id 1tYLTd-0000000AkbV-0JOu; Thu, 16 Jan 2025 08:43:45 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
+ id 1tYLTe-0000000B1PZ-02zV; Thu, 16 Jan 2025 08:43:46 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98 #2 (Red Hat
- Linux)) id 1tYLTc-00000007pI8-3Dc0; Thu, 16 Jan 2025 08:43:44 +0000
+ Linux)) id 1tYLTc-00000007pHU-1vM7; Thu, 16 Jan 2025 08:43:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: ff9d8e86-d3e5-11ef-a0e2-8be0dac302b0
+X-Inumbo-ID: 00b8a977-d3e6-11ef-a0e2-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=9YnMqT9L5zpcIdMPGD+T5rZV+9M0PECfN24dS3f5adI=; b=QAhTn+9luHDcx4ZBpcWeH90OPD
-	kUrxeCoetP1gumKPKrYKI0tOm+chuyObKhh8XsUWhf15Snreba/gTrp9g4OmorKfNLsrOLHPEUpWP
-	PQ+WEsNZikrHtjPm+i/8KmuA1lmh2mEXDeBieo3/4G2hhT/FN+eykSgP6+rjuBL2ftHX8UAtx8ih5
-	Bfcijh2bcxhKSL53SrxjdJIdyfwH/zccZnOt15oaxu+YZqIvHSP3CQoRNquwqLGot4MaBi9TKU+2A
-	Uuz7NHdmOX8hnCLRLt6l7tmi54R1Ra25u9P6DxwUasWLonC7win3ViRVG9hZPpALXtbzuGHC9Y1cH
-	T3091e/A==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=cRHcaJ8qr8tMPnLKEmxRjL10dz3nijScrW9hqSSprGI=; b=a0JdykAwXTVMSDZdFhhN4Z7cfQ
+	+hkqZYOFUzj70KfuL/shYChBrPpS9OMTKdQKym7SM9hE75EgIt1beZsZ0VBiTWMBI1q73n2/jeldh
+	vAyBP6Ntre/VpAlcAU3eiPuyy5qA+jQDwXdNq9JuAEyohhdwg3ByFzsHqoGk9rO54aFoxmtz2SyuI
+	u871I5zV6ZqIPcS/EyGJfbpuJvQy+1ZQOdWvTJ9iELFBkqicl4xAcN3C2b9ooQu696jWtHhpgL56+
+	xGUEtMxgXnjleq3ScpuIxnmoVy21iSD4zLs19jrJgW9gRgdLYTZj9x6/4z7LYj1Lhz0ANBOHl2keZ
+	915QaGmQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Stefan Hajnoczi <stefanha@redhat.com>,
 	qemu-devel@nongnu.org
@@ -69,57 +69,59 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	xen-devel@lists.xenproject.org,
 	qemu-block@nongnu.org,
 	Phil Dennis-Jordan <phil@philjordan.eu>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PULL 6/8] hw/xen: Use xs_node_read() from xenstore_read_str() instead of open-coding it
-Date: Thu, 16 Jan 2025 08:43:30 +0000
-Message-ID: <20250116084332.1864967-7-dwmw2@infradead.org>
+	David Woodhouse <dwmw@amazon.co.uk>
+Subject: [PULL 0/8] Xen regression fixes and cleanups
+Date: Thu, 16 Jan 2025 08:43:24 +0000
+Message-ID: <20250116084332.1864967-1-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20250116084332.1864967-1-dwmw2@infradead.org>
-References: <20250116084332.1864967-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
----
- hw/xen/xen_pvdev.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+The following changes since commit 7433709a147706ad7d1956b15669279933d0f82b:
 
-diff --git a/hw/xen/xen_pvdev.c b/hw/xen/xen_pvdev.c
-index c5ad71e8dc..c9143ba259 100644
---- a/hw/xen/xen_pvdev.c
-+++ b/hw/xen/xen_pvdev.c
-@@ -22,6 +22,7 @@
- #include "qemu/main-loop.h"
- #include "hw/qdev-core.h"
- #include "hw/xen/xen-legacy-backend.h"
-+#include "hw/xen/xen-bus-helper.h"
- #include "hw/xen/xen_pvdev.h"
- 
- /* private */
-@@ -81,12 +82,9 @@ int xenstore_write_str(const char *base, const char *node, const char *val)
- 
- char *xenstore_read_str(const char *base, const char *node)
- {
--    char abspath[XEN_BUFSIZE];
--    unsigned int len;
-     char *str, *ret = NULL;
- 
--    snprintf(abspath, sizeof(abspath), "%s/%s", base, node);
--    str = qemu_xen_xs_read(xenstore, 0, abspath, &len);
-+    str = xs_node_read(xenstore, 0, NULL, NULL, "%s/%s", base, node);
-     if (str != NULL) {
-         /* move to qemu-allocated memory to make sure
-          * callers can safely g_free() stuff. */
--- 
-2.47.0
+  Merge tag 'hw-misc-20250113' of https://github.com/philmd/qemu into staging (2025-01-14 12:46:56 -0500)
 
+are available in the Git repository at:
+
+  git://git.infradead.org/users/dwmw2/qemu.git tags/pull-xenfv-20250116
+
+for you to fetch changes up to e7bc0204e57836b3df611b73d2decc56ed698c4a:
+
+  system/runstate: Fix regression, clarify BQL status of exit notifiers (2025-01-15 18:05:19 +0000)
+
+----------------------------------------------------------------
+Xen regression fixes and cleanups
+
+----------------------------------------------------------------
+David Woodhouse (6):
+      hw/xen: Add xs_node_read() helper function
+      hw/xen: Use xs_node_read() from xs_node_vscanf()
+      hw/xen: Use xs_node_read() from xen_console_get_name()
+      hw/xen: Use xs_node_read() from xen_netdev_get_name()
+      hw/xen: Use xs_node_read() from xenstore_read_str() instead of open-coding it
+      hw/xen: Fix errp handling in xen_console
+
+Phil Dennis-Jordan (1):
+      system/runstate: Fix regression, clarify BQL status of exit notifiers
+
+Roger Pau Monné (1):
+      xen: do not use '%ms' scanf specifier
+
+ hw/block/xen-block.c            |  3 ++-
+ hw/char/xen_console.c           | 56 ++++++++++++++++++++++++-----------------
+ hw/net/xen_nic.c                | 13 +++++-----
+ hw/xen/trace-events             |  2 +-
+ hw/xen/xen-bus-helper.c         | 37 ++++++++++++++++++++-------
+ hw/xen/xen-bus.c                | 14 +++++++++--
+ hw/xen/xen_pvdev.c              |  6 ++---
+ include/hw/xen/xen-bus-helper.h |  9 +++++++
+ include/hw/xen/xen-bus.h        |  1 +
+ include/system/system.h         |  1 +
+ system/runstate.c               |  1 +
+ 11 files changed, 96 insertions(+), 47 deletions(-)
 
