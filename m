@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5FC8C02182
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jan 2025 14:02:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.875449.1285890 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82130C02182
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jan 2025 14:25:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.875470.1285911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1taEpa-0003rh-Ca; Tue, 21 Jan 2025 14:02:14 +0000
+	id 1taFBt-00083E-IU; Tue, 21 Jan 2025 14:25:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 875449.1285890; Tue, 21 Jan 2025 14:02:14 +0000
+Received: by outflank-mailman (output) from mailman id 875470.1285911; Tue, 21 Jan 2025 14:25:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1taEpa-0003ra-9K; Tue, 21 Jan 2025 14:02:14 +0000
-Received: by outflank-mailman (input) for mailman id 875449;
- Tue, 21 Jan 2025 13:56:54 +0000
+	id 1taFBt-000837-Fd; Tue, 21 Jan 2025 14:25:17 +0000
+Received: by outflank-mailman (input) for mailman id 875470;
+ Tue, 21 Jan 2025 14:25:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+LsX=UN=kernel.org=frederic@srs-se1.protection.inumbo.net>)
- id 1taEkQ-0002ZZ-I8
- for xen-devel@lists.xenproject.org; Tue, 21 Jan 2025 13:56:54 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ <SRS0=qQWO=UN=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1taFBs-000831-9q
+ for xen-devel@lists.xenproject.org; Tue, 21 Jan 2025 14:25:16 +0000
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [2a00:1450:4864:20::543])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 912a7965-d7ff-11ef-a0e4-8be0dac302b0;
- Tue, 21 Jan 2025 14:56:53 +0100 (CET)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 7F01AA41972;
- Tue, 21 Jan 2025 13:55:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13D92C4CEDF;
- Tue, 21 Jan 2025 13:56:50 +0000 (UTC)
+ id 86a1dc3e-d803-11ef-a0e4-8be0dac302b0;
+ Tue, 21 Jan 2025 15:25:13 +0100 (CET)
+Received: by mail-ed1-x543.google.com with SMTP id
+ 4fb4d7f45d1cf-5db689a87cbso11267258a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jan 2025 06:25:13 -0800 (PST)
+Received: from andrewcoop.eng.citrite.net (host-92-26-98-202.as13285.net.
+ [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5db73eb5b05sm7059934a12.63.2025.01.21.06.25.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jan 2025 06:25:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,118 +47,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 912a7965-d7ff-11ef-a0e4-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1737467810;
-	bh=MqI6lrWOZQoTFNws7n2UwUgsmLRqEZNZodv6GljplcY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=isvlPBsQ7TrI9disQI4ep5AL0JttTMJYCjeOXU0i2Ch/ZJhKtfxYn7noZla1QkDqv
-	 en2cxtzrpb+ySn8gOB8ZoZV2S+K1n5H3W3i1NokW2jFX5MYZAQKEGHyjcd+04RPzL6
-	 fTPenbokZbubnqvnOZIUv59tCiByEKKxVUoJRCVR2ClnBGXpdDVbmRMbF5RR0kls7U
-	 7c4EikX8Q0rBg27nmXW8SWsbwke1FjZREhy6DgcwG1U+Sf6B+2s64Bk1dTdAxFB7Uo
-	 aEgg3mljv5NxhaLk6HLG7ru2QC2RXk1FcHRWMYbZ4w1F80Cti9sUorhTjzrFo4+wEW
-	 S4aA+5YxpaHVg==
-Date: Tue, 21 Jan 2025 14:56:47 +0100
-From: Frederic Weisbecker <frederic@kernel.org>
-To: Valentin Schneider <vschneid@redhat.com>
-Cc: linux-kernel@vger.kernel.org, x86@kernel.org,
-	virtualization@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, loongarch@lists.linux.dev,
-	linux-riscv@lists.infradead.org, linux-perf-users@vger.kernel.org,
-	xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
-	linux-arch@vger.kernel.org, rcu@vger.kernel.org,
-	linux-hardening@vger.kernel.org, linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org, bpf@vger.kernel.org,
-	bcm-kernel-feedback-list@broadcom.com,
-	"Paul E . McKenney" <paulmck@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.amakhalov@broadcom.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Huacai Chen <chenhuacai@kernel.org>,
-	WANG Xuerui <kernel@xen0n.name>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	"Liang, Kan" <kan.liang@linux.intel.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Andy Lutomirski <luto@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-	Jason Baron <jbaron@akamai.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
-	Joel Fernandes <joel@joelfernandes.org>,
-	Josh Triplett <josh@joshtriplett.org>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	Uladzislau Rezki <urezki@gmail.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Zqiang <qiang.zhang1211@gmail.com>,
-	Juri Lelli <juri.lelli@redhat.com>,
-	Clark Williams <williams@redhat.com>,
-	Yair Podemsky <ypodemsk@redhat.com>,
-	Tomas Glozar <tglozar@redhat.com>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	Dietmar Eggemann <dietmar.eggemann@arm.com>,
-	Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-	Kees Cook <kees@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@infradead.org>,
-	Shuah Khan <shuah@kernel.org>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Miguel Ojeda <ojeda@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
-	"Mike Rapoport (Microsoft)" <rppt@kernel.org>,
-	Samuel Holland <samuel.holland@sifive.com>,
-	Rong Xu <xur@google.com>,
-	Nicolas Saenz Julienne <nsaenzju@redhat.com>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Yosry Ahmed <yosryahmed@google.com>,
-	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
-	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
-	Jinghao Jia <jinghao7@illinois.edu>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: Re: [PATCH v4 03/30] rcu: Add a small-width RCU watching counter
- debug option
-Message-ID: <Z4-nn8snXYyzocQW@localhost.localdomain>
-References: <20250114175143.81438-1-vschneid@redhat.com>
- <20250114175143.81438-4-vschneid@redhat.com>
+X-Inumbo-ID: 86a1dc3e-d803-11ef-a0e4-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1737469512; x=1738074312; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=IvOrZpMGGQA+YD5BVos8SdHvfHAL1b+MsHG+uttROsU=;
+        b=wY4SrTEqBYhQcY2g6gTCXrp68DwvM6faS+AEzIvajuZDZdh7qHAMoDmljKThDCq7fB
+         CnTPEmt2Nf43CNCe+SxKeM620EDpzMuyOaOGji2ssby43KEMDZ7ynuNX1XJNH3XWnJsH
+         +kqxqIEQK7QSdXYzXZYyWhsS8VB9zMXsdhOEM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737469512; x=1738074312;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=IvOrZpMGGQA+YD5BVos8SdHvfHAL1b+MsHG+uttROsU=;
+        b=mhCLbHMW1/VLFn3eI0R7cJRlUoc4LD89yj+y9z1wWZD0jIZ55c8IIzTVrrhZEcHysW
+         Xw0I7+6PvGdeL3nU/vmhAsAQB3C0J+HPifDqDPi1oJ2TvMQAGZaqdz86QUWTbXbop0TD
+         w6jsHdQ79YLDXC9WNVIZ6vtq5TzuNcRMQeZHnzrcUNoVwixOoA0Lqkcj/5gajBoXspy+
+         udAN6g6BXMw3STQ/daaF4KkrpOcT7b4sa803jZR+5j4Ds4LHwwgJNietoDXeB13kOgau
+         pMzTLKRMF1TbnWp8GjnayEDwuDKzAygoeEcYJLWdp63b8iSOTth/GEM2IzRTf6ntDsmd
+         /5+Q==
+X-Gm-Message-State: AOJu0YxAB6s7cYHFgfTLE0SuYcDr/AuKn/KonfXzZqcv/y3fUqU8Wube
+	EnJTw0Hu5HRi5hUQBL4HTH580B1UdzWT/pADe11SNxKV3HByfbDRrN4HnQFJgMarj3OWf7ikaG0
+	pZRv64w==
+X-Gm-Gg: ASbGncsleqhJgf3h0RK43LKyp15TFQR6red06lvIWSNfbZvSU36SbjtepdQpPKaUpdf
+	aIkW8MynE8yHPWSQp6+/sUXq3oH8zKfpTJv+rttfP68ojXlmlufW901I6MG8a7LdvzA6c7qzUsq
+	5924WsDXPOz7Y+8bCOrzj4lzI6j/UwkxxX5sZH9tXXeeUep1GDMSrC/1ztm5qlpal7R1rmRvJS7
+	OX13nJcPDzbOc8GpjB6pdfvhrhQJvQjQ5fDqWTKhDag8CKK65YQ7R5nS3kZK3Du7PtWNXo4XNSE
+	ULLeJe4L/nkdwgqNFW/+ZMVVKKVz7UuSzH4Q2eOUERZMPa36dQ==
+X-Google-Smtp-Source: AGHT+IEMy3Ai4UyNazji72hNigCLpbTF1IMBzCiawudGVO2lvl8G22VxYDdUMslc2oapKeT+eO2YrA==
+X-Received: by 2002:a05:6402:3483:b0:5d0:d30b:d53e with SMTP id 4fb4d7f45d1cf-5db7d318decmr15709509a12.19.1737469511924;
+        Tue, 21 Jan 2025 06:25:11 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jonathan Katz <jonathan.katz@aptar.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH for-4.20] x86/intel: Fix PERF_GLOBAL fixup when virtualised
+Date: Tue, 21 Jan 2025 14:25:10 +0000
+Message-Id: <20250121142510.358996-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250114175143.81438-4-vschneid@redhat.com>
 
-Le Tue, Jan 14, 2025 at 06:51:16PM +0100, Valentin Schneider a Ècrit :
-> A later commit will reduce the size of the RCU watching counter to free up
-> some bits for another purpose. Paul suggested adding a config option to
-> test the extreme case where the counter is reduced to its minimum usable
-> width for rcutorture to poke at, so do that.
-> 
-> Make it only configurable under RCU_EXPERT. While at it, add a comment to
-> explain the layout of context_tracking->state.
-> 
-> Link: http://lore.kernel.org/r/4c2cb573-168f-4806-b1d9-164e8276e66a@paulmck-laptop
-> Suggested-by: Paul E. McKenney <paulmck@kernel.org>
-> Signed-off-by: Valentin Schneider <vschneid@redhat.com>
-> Reviewed-by: Paul E. McKenney <paulmck@kernel.org>
+Logic using performance counters needs to look at
+MSR_MISC_ENABLE.PERF_AVAILABLE before touching any other resources.
 
-Reviewed-by: Frederic Weisbecker <frederic@kernel.org>
+When virtualised under ESX, Xen dies with a #GP fault trying to read
+MSR_CORE_PERF_GLOBAL_CTRL.
+
+Factor this logic out into a separate function (it's already too squashed to
+the RHS), and insert a check of MSR_MISC_ENABLE.PERF_AVAILABLE.
+
+This also limits setting X86_FEATURE_ARCH_PERFMON, although oprofile (the only
+consumer of this flag) cross-checks too.
+
+Reported-by: Jonathan Katz <jonathan.katz@aptar.com>
+Link: https://xcp-ng.org/forum/topic/10286/nesting-xcp-ng-on-esx-8
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monn√© <roger.pau@citrix.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+
+Untested, but this is the same pattern used by oprofile and watchdog setup.
+
+I've intentionally stopped using Intel style.  This file is already mixed (as
+visible even in context), and it doesn't remotely resemble it's Linux origin
+any more.
+
+For 4.20.  This regressions has already been backported.
+---
+ xen/arch/x86/cpu/intel.c | 64 +++++++++++++++++++++++-----------------
+ 1 file changed, 37 insertions(+), 27 deletions(-)
+
+diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
+index 6a7347968ba2..586ae84d806d 100644
+--- a/xen/arch/x86/cpu/intel.c
++++ b/xen/arch/x86/cpu/intel.c
+@@ -535,39 +535,49 @@ static void intel_log_freq(const struct cpuinfo_x86 *c)
+     printk("%u MHz\n", (factor * max_ratio + 50) / 100);
+ }
+ 
++static void init_intel_perf(struct cpuinfo_x86 *c)
++{
++    uint64_t val;
++    unsigned int eax, ver, nr_cnt;
++
++    if ( c->cpuid_level <= 9 ||
++         rdmsr_safe(MSR_IA32_MISC_ENABLE, val) ||
++         !(val & MSR_IA32_MISC_ENABLE_PERF_AVAIL) )
++        return;
++
++    eax = cpuid_eax(10);
++    ver = eax & 0xff;
++    nr_cnt = (eax >> 8) & 0xff;
++
++    if ( ver && nr_cnt > 1 && nr_cnt <= 32 )
++    {
++        unsigned int cnt_mask = (1UL << nr_cnt) - 1;
++
++        /*
++         * On (some?) Sapphire/Emerald Rapids platforms each package-BSP
++         * starts with all the enable bits for the general-purpose PMCs
++         * cleared.  Adjust so counters can be enabled from EVNTSEL.
++         */
++        rdmsrl(MSR_CORE_PERF_GLOBAL_CTRL, val);
++
++        if ( (val & cnt_mask) != cnt_mask )
++        {
++            printk("FIRMWARE BUG: CPU%u invalid PERF_GLOBAL_CTRL: %#"PRIx64" adjusting to %#"PRIx64"\n",
++                   smp_processor_id(), val, val | cnt_mask);
++            wrmsrl(MSR_CORE_PERF_GLOBAL_CTRL, val | cnt_mask);
++        }
++    }
++
++    __set_bit(X86_FEATURE_ARCH_PERFMON, c->x86_capability);
++}
++
+ static void cf_check init_intel(struct cpuinfo_x86 *c)
+ {
+ 	/* Detect the extended topology information if available */
+ 	detect_extended_topology(c);
+ 
+ 	init_intel_cacheinfo(c);
+-	if (c->cpuid_level > 9) {
+-		unsigned eax = cpuid_eax(10);
+-		unsigned int cnt = (eax >> 8) & 0xff;
+-
+-		/* Check for version and the number of counters */
+-		if ((eax & 0xff) && (cnt > 1) && (cnt <= 32)) {
+-			uint64_t global_ctrl;
+-			unsigned int cnt_mask = (1UL << cnt) - 1;
+-
+-			/*
+-			 * On (some?) Sapphire/Emerald Rapids platforms each
+-			 * package-BSP starts with all the enable bits for the
+-			 * general-purpose PMCs cleared.  Adjust so counters
+-			 * can be enabled from EVNTSEL.
+-			 */
+-			rdmsrl(MSR_CORE_PERF_GLOBAL_CTRL, global_ctrl);
+-			if ((global_ctrl & cnt_mask) != cnt_mask) {
+-				printk("CPU%u: invalid PERF_GLOBAL_CTRL: %#"
+-				       PRIx64 " adjusting to %#" PRIx64 "\n",
+-				       smp_processor_id(), global_ctrl,
+-				       global_ctrl | cnt_mask);
+-				wrmsrl(MSR_CORE_PERF_GLOBAL_CTRL,
+-				       global_ctrl | cnt_mask);
+-			}
+-			__set_bit(X86_FEATURE_ARCH_PERFMON, c->x86_capability);
+-		}
+-	}
++	init_intel_perf(c);
+ 
+ 	if ( !cpu_has(c, X86_FEATURE_XTOPOLOGY) )
+ 	{
+
+base-commit: c3f5d1bb40b57d467cb4051eafa86f5933ec9003
+-- 
+2.39.5
+
 
