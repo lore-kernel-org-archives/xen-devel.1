@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A85EC02182
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:44:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.876402.1286784 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B81BDC02182
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:45:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.876420.1286794 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6sP-0000zA-Uq; Thu, 23 Jan 2025 23:44:45 +0000
+	id 1tb6sc-0001o7-5K; Thu, 23 Jan 2025 23:44:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 876402.1286784; Thu, 23 Jan 2025 23:44:45 +0000
+Received: by outflank-mailman (output) from mailman id 876420.1286794; Thu, 23 Jan 2025 23:44:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6sP-0000yz-RW; Thu, 23 Jan 2025 23:44:45 +0000
-Received: by outflank-mailman (input) for mailman id 876402;
- Thu, 23 Jan 2025 23:44:45 +0000
+	id 1tb6sc-0001o0-2T; Thu, 23 Jan 2025 23:44:58 +0000
+Received: by outflank-mailman (input) for mailman id 876420;
+ Thu, 23 Jan 2025 23:44:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QxCy=UP=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1tb6sP-0007w9-3J
- for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:44:45 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ id 1tb6sb-0007w9-4x
+ for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:44:57 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 05c54f2a-d9e4-11ef-a0e5-8be0dac302b0;
- Fri, 24 Jan 2025 00:44:44 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3862d16b4f5so936156f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:44:44 -0800 (PST)
+ id 0caeff66-d9e4-11ef-a0e5-8be0dac302b0;
+ Fri, 24 Jan 2025 00:44:56 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-436a39e4891so10246835e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:44:56 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd4d29cesm6991745e9.35.2025.01.23.15.44.42
+ 5b1f17b1804b1-438bd48a94asm7141855e9.23.2025.01.23.15.44.53
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:44:43 -0800 (PST)
+ Thu, 23 Jan 2025 15:44:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 05c54f2a-d9e4-11ef-a0e5-8be0dac302b0
+X-Inumbo-ID: 0caeff66-d9e4-11ef-a0e5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1737675884; x=1738280684; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1737675895; x=1738280695; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=89WHzW+ji4rB+60gFYzeRD9ADgUNDHjcXvYSPMINgc0=;
-        b=LOKpZaohNaPsXqTNFqQma82C7DJalWUqbkHFlFZ8ABdwhIlFNbJK3U7JI7Su+jHxfS
-         zjtwuzU+lJ06EXc40EKFIQn3p8J0WCyMsqwcnuI6HqBedFZdLQ5p4e3PwxXhohQ9/SKB
-         y0Kb7aZIdxcqNQIF7sB0RrMm96URup/Z3UBabnpUEnrNBbKontJHdX2DzfKKu4mIR/pb
-         le1+C6hUtwdk6Gts9okLl9FzNZUHfFD6O8We9X8327gFMRsNJV9jUQYkOIjceD/hqVBE
-         /pa4A4MNQ+qqKZfNsTCnv3nFt6ZzFpC/3y4lHfZUgcQ4oUo8OtK4LusAGNg/mUQcLBi0
-         AUiA==
+        bh=zgM0qO1a7TmnAaVr92PdlZQNV8dbDE9Lo8CXyhKvg/4=;
+        b=Xq1EpJl+70Py/LtP6EAYoCC+9/lLsp8P1gYlPa+EqzwE5fizFA+Y7N+mEBQCtWYPkr
+         gqwqJzAIhswNWNHyN51hTKCDgeZcGxQeMz47g2r/A8Ba4yu0FQNZ4d0eadTJd4F4COih
+         JhZyMc9e2IYghSbBBJ5QEYhwdRszjHJkGMZgeycX37kWO35e5a1yLqhgBcZs642vl6wv
+         sf8NXp1sFZ4Kn8jWilco3bJIgx/dOjvHs3euwrjfHW8JWbkpjcRIOIimaTbRkZJzAicW
+         mTh9/abAYst/DDNgLKE7IpGyQOjXTi52w6QdKHnSfkilNPLVAoiiP1KpXiGqZRCqVdPv
+         X9RQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737675884; x=1738280684;
+        d=1e100.net; s=20230601; t=1737675895; x=1738280695;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=89WHzW+ji4rB+60gFYzeRD9ADgUNDHjcXvYSPMINgc0=;
-        b=ld6H4Uba5NrXjyQHH9UcTy8RV/Bappf4KvC3cHdzC+Ar9v44/hdLWXwLXTgDUj0V5j
-         EJ57En1F8/YY8+JyRckDp49DfS7gcRL3lVQjeVuqMQ/ck8GgAQ7UzCmUkjSJZbfItDs0
-         g6UTpkp2wXCrSMx4b1jLP0w37dW5SmFFmP7RM+kelJrrWzM/H5F18BKirmZFjyXttXWN
-         cDWh5wfWwDFktbtFxqAFF8cIhWDmdLCSxij/6IZFXsrz/sMcgtkFYU9znfLWrZZQOYoU
-         vwjRth1YmsNwqPhgGyjcT392JUPpZPZEwtLEuv/t+hpIsiKu+jYQh31qqSBlzqdDmE3j
-         aObg==
-X-Forwarded-Encrypted: i=1; AJvYcCXHIKfOmdBOaVK3kJOiQxlrmt2uo/c2vr+2GMlSifSmy54/EH3XorJ50blZpe+Y6jDtbs0h0EEmC2w=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxgWEYLR7Gh1qnf7wpTOSEC11GbV74pXMAKHTWC8oW16ilO+j1I
-	gvKoMUCFdMeUU2/pqyqGEq4wYXzQ5hx002e1LH9MdWWHFa8qHSL35LBlevFkyPU=
-X-Gm-Gg: ASbGnctosNAIDijgdrxe3qETQfEyBS78tcdA3c7Fz92+1KoFitFMWUuR3wH7Hnb4bEc
-	Xh9YN1t7Lqu5QPEFhigWTfBvflUDKk1LgLtX9Z5GvNDjoefNsOXk/Z2PvIAGC7QE1y/MqGpGbBC
-	dXBeMjfuER72qwudn48zXsay0pUr5i2KGWvkMCA8PX1E7GzRN1cD99KiLL0uqvF2c7qqMri3+Vn
-	u2m2G/ehthPrix+8Q0uBBRpn8FliNZRrZ1E/PnUXmSjp/Nj9+rIcTZF13pv4s4d+vue9ZE/IYpQ
-	vrCpGlDtfneyY5Vtam6GdF2V4Bgbezv4xS4AgCZ7gbsg2cRyqvkMSFE=
-X-Google-Smtp-Source: AGHT+IHfcp2D5aSm8Sn0VT4IidLdBYhD/KSzWcZHka724j1qpNfMP/dVIsxPCprx8nPoBb5TgAtEpw==
-X-Received: by 2002:a05:6000:1fa9:b0:38b:f4dc:44ad with SMTP id ffacd0b85a97d-38c2b65ebf8mr997845f8f.5.1737675884076;
-        Thu, 23 Jan 2025 15:44:44 -0800 (PST)
+        bh=zgM0qO1a7TmnAaVr92PdlZQNV8dbDE9Lo8CXyhKvg/4=;
+        b=KqTc5zy7BIGyUv59r5i/im8LLnW8ojcDwfcfRQ17mdf2vV7UQt/E7VSQBv0nghwzwp
+         POKAVtO0WGBEnTFyvULhjAnp3L2VWycp+OgZJxhgX3AcooGghHHLVo4kL16+SNcaWpFZ
+         xuTpeyGL1rXE1WtxKI1z0jc9xGbn31Q+haL6R9MtuxsKNSya3z6+Ue8ar9UKf6jdjQtu
+         Fs213pyLgd+O/ofVCCVcRPEVO7wIAsIOQPxkpw/3CMa5X0216eh5DCWQBp5xUqDNvReC
+         2JFvUbBK4G+5EPYCr47g45thLSBGn/TKUZsuhOBQML8/GWF23ZkbMUg+Qbr9k6TWLQbn
+         flvA==
+X-Forwarded-Encrypted: i=1; AJvYcCVjiJOkiUaCBQy4w1Mxtlufd3+niJ9tB+uvzuHVOYkdsTaLCT/QV5GFO5oZRp8u6FgPPdcSeuKuk5U=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywvu/CYQ34CbL1UzMv2jqXp3Qq8CzdR0V2++a17wh082aPaRMdg
+	sliT35SaTJ9lJ0QT3OE5CJBBf8/n5ow7gy/xNZV/kBvEDWptX2IL7N7T0Y0+ljY=
+X-Gm-Gg: ASbGncsPnywYvobWU04a0y7jPZzyoeuQZq6nrmtAGxVgcCPNQndvxUifUBqI8gvErjF
+	xUMAAoYPn1gLgVZ5Ud5gidY4WTBPuuF4IB0MLW2RuAkMSnjwIn7dFGi00dP4I0gUIs4h19c6G3X
+	5Tbaxa9KMEmbVpc6Rl57f7etXc3Tclc1u1huZN09fvDX1SawlAewDkfhF5cfT7Bz/Obx8EZGzDR
+	Cg4YHVGTZDj8oC4J8dIG/9cDaBDFAXItA7E/SDj450GHTmFDZa+qZGvlqvsGXUDrUVXtjk3WnhI
+	vi+MrBYZSr7toiKniFjNvh5laNQ01XjSQ552vbM7o3Iv4KnFmpqeFaY=
+X-Google-Smtp-Source: AGHT+IFu3bGh+dR4gXvA0Xd23GoBCnM+yfw+G3EPNj4Vc2jg+fj1VnlHOFgKCDXygKj5XAozIyeBjA==
+X-Received: by 2002:a05:600c:a09:b0:435:9ed3:5688 with SMTP id 5b1f17b1804b1-438913f86dcmr267603485e9.18.1737675895459;
+        Thu, 23 Jan 2025 15:44:55 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -98,9 +98,9 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	Richard Henderson <richard.henderson@linaro.org>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 05/20] cpus: Keep default fields initialization in cpu_common_initfn()
-Date: Fri, 24 Jan 2025 00:43:59 +0100
-Message-ID: <20250123234415.59850-6-philmd@linaro.org>
+Subject: [PATCH 07/20] accel/tcg: Build tcg_flags helpers as common code
+Date: Fri, 24 Jan 2025 00:44:01 +0100
+Message-ID: <20250123234415.59850-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
@@ -108,45 +108,110 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-cpu_common_initfn() is our target agnostic initializer,
-while cpu_exec_initfn() is the target specific one.
-
-The %as and %num_ases fields are not target specific,
-so initialize them in the common helper.
+While cpu-exec.c is build for each target,tcg_flags helpers
+aren't target specific. Move them to cpu-exec-common.c to
+build them once.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- cpu-target.c         | 3 ---
- hw/core/cpu-common.c | 2 ++
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ accel/tcg/cpu-exec-common.c | 33 +++++++++++++++++++++++++++++++++
+ accel/tcg/cpu-exec.c        | 32 --------------------------------
+ 2 files changed, 33 insertions(+), 32 deletions(-)
 
-diff --git a/cpu-target.c b/cpu-target.c
-index 89874496a41..75501a909df 100644
---- a/cpu-target.c
-+++ b/cpu-target.c
-@@ -234,9 +234,6 @@ void cpu_class_init_props(DeviceClass *dc)
+diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
+index 6ecfc4e7c21..100746d555a 100644
+--- a/accel/tcg/cpu-exec-common.c
++++ b/accel/tcg/cpu-exec-common.c
+@@ -18,6 +18,7 @@
+  */
  
- void cpu_exec_initfn(CPUState *cpu)
+ #include "qemu/osdep.h"
++#include "exec/log.h"
+ #include "system/cpus.h"
+ #include "system/tcg.h"
+ #include "qemu/plugin.h"
+@@ -25,6 +26,38 @@
+ 
+ bool tcg_allowed;
+ 
++bool tcg_cflags_has(CPUState *cpu, uint32_t flags)
++{
++    return cpu->tcg_cflags & flags;
++}
++
++void tcg_cflags_set(CPUState *cpu, uint32_t flags)
++{
++    cpu->tcg_cflags |= flags;
++}
++
++uint32_t curr_cflags(CPUState *cpu)
++{
++    uint32_t cflags = cpu->tcg_cflags;
++
++    /*
++     * Record gdb single-step.  We should be exiting the TB by raising
++     * EXCP_DEBUG, but to simplify other tests, disable chaining too.
++     *
++     * For singlestep and -d nochain, suppress goto_tb so that
++     * we can log -d cpu,exec after every TB.
++     */
++    if (unlikely(cpu->singlestep_enabled)) {
++        cflags |= CF_NO_GOTO_TB | CF_NO_GOTO_PTR | CF_SINGLE_STEP | 1;
++    } else if (qatomic_read(&one_insn_per_tb)) {
++        cflags |= CF_NO_GOTO_TB | 1;
++    } else if (qemu_loglevel_mask(CPU_LOG_TB_NOCHAIN)) {
++        cflags |= CF_NO_GOTO_TB;
++    }
++
++    return cflags;
++}
++
+ /* exit the current TB, but without causing any exception to be raised */
+ void cpu_loop_exit_noexc(CPUState *cpu)
  {
--    cpu->as = NULL;
--    cpu->num_ases = 0;
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index 8b773d88478..be2ba199d3d 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -148,38 +148,6 @@ static void init_delay_params(SyncClocks *sc, const CPUState *cpu)
+ }
+ #endif /* CONFIG USER ONLY */
+ 
+-bool tcg_cflags_has(CPUState *cpu, uint32_t flags)
+-{
+-    return cpu->tcg_cflags & flags;
+-}
 -
- #ifndef CONFIG_USER_ONLY
-     cpu->memory = get_system_memory();
-     object_ref(OBJECT(cpu->memory));
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index ff605059c15..71425cb7422 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -244,6 +244,8 @@ static void cpu_common_initfn(Object *obj)
-     gdb_init_cpu(cpu);
-     cpu->cpu_index = UNASSIGNED_CPU_INDEX;
-     cpu->cluster_index = UNASSIGNED_CLUSTER_INDEX;
-+    cpu->as = NULL;
-+    cpu->num_ases = 0;
-     /* user-mode doesn't have configurable SMP topology */
-     /* the default value is changed by qemu_init_vcpu() for system-mode */
-     cpu->nr_threads = 1;
+-void tcg_cflags_set(CPUState *cpu, uint32_t flags)
+-{
+-    cpu->tcg_cflags |= flags;
+-}
+-
+-uint32_t curr_cflags(CPUState *cpu)
+-{
+-    uint32_t cflags = cpu->tcg_cflags;
+-
+-    /*
+-     * Record gdb single-step.  We should be exiting the TB by raising
+-     * EXCP_DEBUG, but to simplify other tests, disable chaining too.
+-     *
+-     * For singlestep and -d nochain, suppress goto_tb so that
+-     * we can log -d cpu,exec after every TB.
+-     */
+-    if (unlikely(cpu->singlestep_enabled)) {
+-        cflags |= CF_NO_GOTO_TB | CF_NO_GOTO_PTR | CF_SINGLE_STEP | 1;
+-    } else if (qatomic_read(&one_insn_per_tb)) {
+-        cflags |= CF_NO_GOTO_TB | 1;
+-    } else if (qemu_loglevel_mask(CPU_LOG_TB_NOCHAIN)) {
+-        cflags |= CF_NO_GOTO_TB;
+-    }
+-
+-    return cflags;
+-}
+-
+ struct tb_desc {
+     vaddr pc;
+     uint64_t cs_base;
 -- 
 2.47.1
 
