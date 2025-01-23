@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6184C0218B
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:51:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.876491.1286884 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E7CC02182
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:51:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.876492.1286888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6yq-000865-2S; Thu, 23 Jan 2025 23:51:24 +0000
+	id 1tb6yq-00088t-EK; Thu, 23 Jan 2025 23:51:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 876491.1286884; Thu, 23 Jan 2025 23:51:24 +0000
+Received: by outflank-mailman (output) from mailman id 876492.1286888; Thu, 23 Jan 2025 23:51:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6yp-00085w-Uo; Thu, 23 Jan 2025 23:51:23 +0000
-Received: by outflank-mailman (input) for mailman id 876491;
- Thu, 23 Jan 2025 23:51:22 +0000
+	id 1tb6yq-00088C-6T; Thu, 23 Jan 2025 23:51:24 +0000
+Received: by outflank-mailman (input) for mailman id 876492;
+ Thu, 23 Jan 2025 23:51:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QxCy=UP=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1tb6tQ-0007w9-De
- for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:45:48 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1tb6t4-0007w9-0j
+ for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:45:26 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2b751e45-d9e4-11ef-a0e5-8be0dac302b0;
- Fri, 24 Jan 2025 00:45:47 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43618283dedso15517605e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:45:47 -0800 (PST)
+ id 1deee438-d9e4-11ef-a0e5-8be0dac302b0;
+ Fri, 24 Jan 2025 00:45:25 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4362bae4d7dso10798485e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:45:25 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd47f355sm7138595e9.4.2025.01.23.15.45.46
+ 5b1f17b1804b1-438bd4fa416sm6932195e9.6.2025.01.23.15.45.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:45:46 -0800 (PST)
+ Thu, 23 Jan 2025 15:45:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b751e45-d9e4-11ef-a0e5-8be0dac302b0
+X-Inumbo-ID: 1deee438-d9e4-11ef-a0e5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1737675947; x=1738280747; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1737675924; x=1738280724; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OmeiNXwxDOryj9Nk89BSf7ntmaAiV2ODrxL67LjT3oE=;
-        b=Nbwi6evql1n75WRaVnKCPLltTihG5WWspsDkjKs3P3n/CiDGfATte5Si4TLL0NvgBr
-         uSFr/j1ly5E+kLeI2htX8DdYgZhDtTXxA+H8d9SpVsaMrLsAV7fOybeDbkHdUxi6ygjr
-         maw5oSA4G1SNNiak+QWPOkd/hBPAFd90GQwNHRkbvVzhIjdDcS4Jo+pNQ+lELXkIT0dh
-         PyEHijOmVRt896CvKidiYv7uW+LhBC5mPiTm8+lxYDS9nRZhKeUbbhZ6H/3NqiHYXWRT
-         Pv2Z8tFp/cCzfPyEF7+ipVf9p1dLwD5Wncv+ccm63SRl3fus1InbrXcFQVUovUKTLCNz
-         AZrA==
+        bh=MdlpzTogAHHu3L1/GbHJ1cNEJlm92RpTH1AYDuj/6CU=;
+        b=E/CYzjAolE2ZZSP2yfZBtY9ejZvn8LQqaLfaf5oZVlAG2O0Oiipu6hyie6XBz6g4nH
+         pN3G5d4XeKS/q0jBWAJetK0jz9hy2vK/ATofWd3TztYIksLfuBO0uywEc3VNELzETNbt
+         +YRKfRGZo4QIE5vlS4zPEezHn/Ku4/G+O3C1nLlx2KG/Bn9TbR/g3LsA0ol7+vsnofYT
+         PeEaxvgul99KKn2PMIcfjPnDMLju6vbNfxOF3Zn09qHmArvGvbw6PHHwDLQjw72EFBAZ
+         jIytylXYStR0gSpYBgAYyKlYBKEUMvbtpoCDqFY8RaI7fP2+K4gc+iIk/rETUVdEZlcR
+         +qVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737675947; x=1738280747;
+        d=1e100.net; s=20230601; t=1737675924; x=1738280724;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OmeiNXwxDOryj9Nk89BSf7ntmaAiV2ODrxL67LjT3oE=;
-        b=O7PnIOU6RSxFDE+ICi8WBQ3f0dZF/wspV41jDrPRBNPI4LYonTqGv6cKet+hD96RCT
-         RYLkbb9qrMXTwJgupQRP/452BdfAUGUFHoyf3NR/E6NYYlQHRYLpjmh/ALLrr7XqqaSn
-         vaKSPHOuFDN5HkeukAD6uwZFcXHScjAvIiz8bqzxV6eT86Tz3nVO3bG2ibGcoAL2t1M1
-         P5fFrKhnSDZ9fDUoW5GG68z1TuFF8vgkxIuNdo5WssIneiXrvwCmuf/t3qBFky5visTI
-         EVuItF8E1GgnRWTMAh8F11Q/O0jX2D4K7f7qxpNYJmccDY8n5d4oIDoC62nBpivIUgDa
-         OQNw==
-X-Forwarded-Encrypted: i=1; AJvYcCX8PG5Rblywq4UgmYjz9+NCDD3a5B7X7BHiA74O4xlnOF0wazVd+KKfHbNh9R1HcdP6WM6LNsW1b5A=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxk+3AX0nF1PlcKgBAzkAXZ0ZT6Kkgh98d9X/pxKQJipIAZLWyJ
-	gFpgLWMD+xSnaiUN3Lx0jAB+ZE8acVhd9o2vO3B6cSLlhkFYUOZQiQN6F+kyRH8=
-X-Gm-Gg: ASbGncukU9s1TtRTE4M64BeRy1TFUQQyYfPlUCaiRzpYpMa1rFhwk9xFLraFL7VACXt
-	W1Mutbw37Bn2RzSrbV13bv/XhGm61RV0gDcv6vBmP0l1tIwaTsOe/EjUwSdrIf21KJuVEja8Otu
-	EP5kvJdXNTS5S2xEimmzhLNKhPKob0FeP1deurjd6l3u6XZZomVZO/CIFXn3B3YcYaBTzrpPwDY
-	WO0mTFVlCPgjzxL1xniPAKKCn1HYbpBMU3V46Vme8IxdFKWTAGT7DMaifxorwgnbUm9fcJYzZ9G
-	MA16Yznzbvwnhzr/x9pEDzfGmtnxMp0Ldpl5I2hsRWhUDW6+Z/6sisg=
-X-Google-Smtp-Source: AGHT+IEFJ1SeJWoUW3YaXnTGBs2yrvL22hVEarb/siWyosLBI70zXEF7xcr/1TRnUm9/lQBURa7m3g==
-X-Received: by 2002:a05:600c:1e18:b0:436:8a6f:b6db with SMTP id 5b1f17b1804b1-4389141c12emr225835175e9.22.1737675947213;
-        Thu, 23 Jan 2025 15:45:47 -0800 (PST)
+        bh=MdlpzTogAHHu3L1/GbHJ1cNEJlm92RpTH1AYDuj/6CU=;
+        b=K/etY77RdTZ9TspTkG4BHZN/vDT0D7XlKvRoGZryuvWcZvQkIJXbdj/4+kJtYeGEZR
+         Q4QK6KBhmsuZqatbK2eJjgUE2e2Wk+axvMcXc0Xy7dTFPZtlDZipeu/B/a6NM9rXv7SO
+         DR5yT07rcE1TbVJo+wWd2KF7T4t8tgIlHQQsVcG4Jj7dbTSNekb8EN+/8bTl64oWmgDE
+         kgHs2Mvjj44dA1yfq+QnBr8umk/6vG4YiTvWelpjrj8GBm0uodiQVV30Y/Wh1vIADhzY
+         QWKmG7wdt9bFa4FXamfSwmtuTff9mLrjiJL5xHCXambN/7I2xyPy5vrgTbBTAvXFmndW
+         RiGQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUiiIalxGbOQYHuQwKKLqPRCH6IqAWWhOMu+WXKymMvoZBfLLQONFP7Knl+tiU0DEPbZI80dh4LX3I=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyMab9eMIaGviwKY1PX6rngN9wdMh2TvtjPO3YI6YE9ezPoKLmp
+	UCU9v3Q3aBm7WsGCIANqZ87RFfS4zzS3eDi1siaeAfDGKq6J8uDhZeta2tXm1UE=
+X-Gm-Gg: ASbGnctxDv58Wi0Wdu+C+kFC7Hi7H6rvQST5YtUaImBk/aKFpDPhTKYsr/TzIPuMoR5
+	Iut3h2wllwK/klfiKbe2DTYE3X5oINynuik0E/oYmtLpgNEoeKc7qUtZsp2bKHvMaZz/1pZJR7C
+	XELmQTPdDbp9LSn9Ke/QVAgHiAZhPmUWceuLl1MIEGznm0HIHxMg17lQ/cYZcwEU7LaUYkkxWPe
+	5SnQDxXbwFKWg2lQde97rxf1rJ5WBwwCBjmheUGfMMB0NWYZXlnAeHCxZj4AyAZ7tuLO9vYxlC4
+	WGz+stZbXdX5oVMIq8T8lJm2VdltJMzsDVeQshmNkFYIndNRG5ScR8o=
+X-Google-Smtp-Source: AGHT+IEwKoXpxcAtZxGgBrKoty0PAI7DEzj3vUSJHkmHg5BnQeEwYri/vD7fXqCVh16ykXZTkiP5lQ==
+X-Received: by 2002:a05:600c:1987:b0:436:faf1:9da with SMTP id 5b1f17b1804b1-438913c68ebmr255744445e9.2.1737675924510;
+        Thu, 23 Jan 2025 15:45:24 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -98,9 +98,9 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	Richard Henderson <richard.henderson@linaro.org>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 16/20] cpus: Restrict cpu_common_post_load() code to TCG
-Date: Fri, 24 Jan 2025 00:44:10 +0100
-Message-ID: <20250123234415.59850-17-philmd@linaro.org>
+Subject: [PATCH 12/20] accel/accel-cpu-target.h: Include missing 'cpu.h' header
+Date: Fri, 24 Jan 2025 00:44:06 +0100
+Message-ID: <20250123234415.59850-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
@@ -108,62 +108,47 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-CPU_INTERRUPT_EXIT was removed in commit 3098dba01c7
-("Use a dedicated function to request exit from execution
-loop"), tlb_flush() and tb_flush() are related to TCG
-accelerator.
+CPU_RESOLVING_TYPE is declared per target in "cpu.h". Include
+it (along with "qom/object.h") to avoid when moving code around:
+
+  include/accel/accel-cpu-target.h:26:50: error: expected ')'
+     26 | DECLARE_CLASS_CHECKERS(AccelCPUClass, ACCEL_CPU, TYPE_ACCEL_CPU)
+        |                                                  ^
+  include/accel/accel-cpu-target.h:23:33: note: expanded from macro 'TYPE_ACCEL_CPU'
+     23 | #define TYPE_ACCEL_CPU "accel-" CPU_RESOLVING_TYPE
+        |                                 ^
+  include/accel/accel-cpu-target.h:26:1: note: to match this '('
+     26 | DECLARE_CLASS_CHECKERS(AccelCPUClass, ACCEL_CPU, TYPE_ACCEL_CPU)
+        | ^
+  include/qom/object.h:196:14: note: expanded from macro 'DECLARE_CLASS_CHECKERS'
+    196 |     { return OBJECT_GET_CLASS(ClassType, obj, TYPENAME); } \
+        |              ^
+  include/qom/object.h:558:5: note: expanded from macro 'OBJECT_GET_CLASS'
+    558 |     OBJECT_CLASS_CHECK(class, object_get_class(OBJECT(obj)), name)
+        |     ^
+  include/qom/object.h:544:74: note: expanded from macro 'OBJECT_CLASS_CHECK'
+    544 |     ((class_type *)object_class_dynamic_cast_assert(OBJECT_CLASS(class), (name), \
+        |                                                                          ^
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- cpu-target.c | 33 +++++++++++++++++++--------------
- 1 file changed, 19 insertions(+), 14 deletions(-)
+ include/accel/accel-cpu-target.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/cpu-target.c b/cpu-target.c
-index a2999e7c3c0..c05ef1ff096 100644
---- a/cpu-target.c
-+++ b/cpu-target.c
-@@ -45,22 +45,27 @@
- #ifndef CONFIG_USER_ONLY
- static int cpu_common_post_load(void *opaque, int version_id)
- {
--    CPUState *cpu = opaque;
-+#ifdef CONFIG_TCG
-+    if (tcg_enabled()) {
-+        CPUState *cpu = opaque;
+diff --git a/include/accel/accel-cpu-target.h b/include/accel/accel-cpu-target.h
+index 0a8e518600d..37dde7fae3e 100644
+--- a/include/accel/accel-cpu-target.h
++++ b/include/accel/accel-cpu-target.h
+@@ -20,6 +20,9 @@
+  * subclasses in target/, or the accel implementation itself in accel/
+  */
  
--    /*
--     * 0x01 was CPU_INTERRUPT_EXIT. This line can be removed when the
--     * version_id is increased.
--     */
--    cpu->interrupt_request &= ~0x01;
--    tlb_flush(cpu);
-+        /*
-+         * 0x01 was CPU_INTERRUPT_EXIT. This line can be removed when the
-+         * version_id is increased.
-+         */
-+        cpu->interrupt_request &= ~0x01;
- 
--    /*
--     * loadvm has just updated the content of RAM, bypassing the
--     * usual mechanisms that ensure we flush TBs for writes to
--     * memory we've translated code from. So we must flush all TBs,
--     * which will now be stale.
--     */
--    tb_flush(cpu);
-+        tlb_flush(cpu);
++#include "qom/object.h"
++#include "cpu.h"
 +
-+        /*
-+         * loadvm has just updated the content of RAM, bypassing the
-+         * usual mechanisms that ensure we flush TBs for writes to
-+         * memory we've translated code from. So we must flush all TBs,
-+         * which will now be stale.
-+         */
-+        tb_flush(cpu);
-+    }
-+#endif
- 
-     return 0;
- }
+ #define TYPE_ACCEL_CPU "accel-" CPU_RESOLVING_TYPE
+ #define ACCEL_CPU_NAME(name) (name "-" TYPE_ACCEL_CPU)
+ typedef struct AccelCPUClass AccelCPUClass;
 -- 
 2.47.1
 
