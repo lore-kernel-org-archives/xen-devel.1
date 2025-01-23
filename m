@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E3EBC0218B
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:50:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.876451.1286829 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35BCFC02182
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:50:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.876452.1286844 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6yH-0004rL-K6; Thu, 23 Jan 2025 23:50:49 +0000
+	id 1tb6yI-0005Hr-S0; Thu, 23 Jan 2025 23:50:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 876451.1286829; Thu, 23 Jan 2025 23:50:49 +0000
+Received: by outflank-mailman (output) from mailman id 876452.1286844; Thu, 23 Jan 2025 23:50:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6yH-0004qs-Fq; Thu, 23 Jan 2025 23:50:49 +0000
-Received: by outflank-mailman (input) for mailman id 876451;
- Thu, 23 Jan 2025 23:50:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tb6yI-0005HD-NY; Thu, 23 Jan 2025 23:50:50 +0000
+Received: by outflank-mailman (input) for mailman id 876452;
+ Thu, 23 Jan 2025 23:50:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QxCy=UP=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1tb6tc-0007w9-F1
- for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:46:00 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 32930e61-d9e4-11ef-a0e5-8be0dac302b0;
- Fri, 24 Jan 2025 00:45:59 +0100 (CET)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4361f664af5so17051845e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:45:59 -0800 (PST)
+ id 1tb6to-0007hN-Ta
+ for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:46:12 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3989e658-d9e4-11ef-99a4-01e77a169b0f;
+ Fri, 24 Jan 2025 00:46:11 +0100 (CET)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-38a25d4b9d4so823024f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:46:11 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a17d79csm1009152f8f.39.2025.01.23.15.45.57
+ 5b1f17b1804b1-438bd4d34e3sm6953255e9.39.2025.01.23.15.46.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:45:58 -0800 (PST)
+ Thu, 23 Jan 2025 15:46:10 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 32930e61-d9e4-11ef-a0e5-8be0dac302b0
+X-Inumbo-ID: 3989e658-d9e4-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1737675959; x=1738280759; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1737675971; x=1738280771; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9gXZ2pCmpp3MBAsW4Hnbi8sV5bqYGRAr8w/4hsc1kvQ=;
-        b=HBR0Uj+vFlsxRlHxJ5Lq/faMJg7NLpYiRNmRyKvYVs/IeUEAcvQvWXWESC+ZhN2Cv9
-         F4tmBDzFpFGfjTEq2Ok7O+LWcAnJfoR2vCLsdh3MfPzHg1QVNqkfPXNLbzx1XdwcRzxf
-         WG36fc3dnSER1bmmsQUDvFKstxjqiSOkaH81xSU516EXKACL9IZKQeEujiLGxF1EcnT0
-         IzAjdbogNFprKSwoUV277n3U4g2M2dMj52nZqy/NmWqMKTNt6ADpQl/tS5la76crbt2r
-         0nNUNNa0iFR69OelfmMAKXeUufRk2GtcV8wh6L3OpD/hK8d/3MErL+HurTWlKVKhHMqY
-         CEYw==
+        bh=xSu/7xOdAlhOhpGqndt0dd/xIMB7MzmL+xgNpZ/1JvM=;
+        b=MpF2rRi6k7bvT8XV5swq9D7SwhLpMTGCQ0qzULPbxAT0EYMx5yw6XlgiQYoI/Hb0c+
+         rUKSsgvtH4jocAc8JcdM3xW8dzMIE1NGRKwbfpFS+kf28/h3YMzA2u4XQpeLFYgyDTyj
+         k7pMa5oB2GA/VvijECAfW8p+Mrh++5//KGB0tcVHIAbGMpHMI3KyIMiJOP8EbG1CIDQk
+         DBDz+ISRJB14LQ9e6DaqhynYqTDvcgyRNEivIfABdvlDjPD7DDYOua6FZ/yDANN6djK6
+         9PYQLjkDMEUX2i3X4U7zbNAQRcEaON84WKUZY2VtPS/7xeRGs5rEUY9305H/073V3US5
+         gzTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737675959; x=1738280759;
+        d=1e100.net; s=20230601; t=1737675971; x=1738280771;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9gXZ2pCmpp3MBAsW4Hnbi8sV5bqYGRAr8w/4hsc1kvQ=;
-        b=tkMAHEJLZlpUik3bWkZeQZX7Q0RB4AvjnbUjn+EA5dE78Ep1Fx0jqXRX7mgbFh6lrA
-         UhlziAHsxQYMqczGJ4OqqQ+QUpVGQ6DNquBsd3Jy/zTLwCuPuO9iLKUAPLW/mFjbzXD/
-         ZL+24NleJ2Wy2uPsPa4rnSc9Ourcret7oNyy8lxxhf7MXXD7C4Tcd7GumqE45n30loHr
-         30JRJpe6jngHgNa+R0SzCGC8uGfIw6t+1Qnq1p0B98hn6eGxIpKG2xudUPkAJ01JZ6e7
-         z30x1ulGdVfwDeiPAOWvAI3X9tU3ERPWQ/Kh/37ASU3wSV/3qsd7YS4J5HGL5De97Jrm
-         ndDg==
-X-Forwarded-Encrypted: i=1; AJvYcCXaRLF5katSSRRwjMm7LUxzX4kN2EuwxXsHCDcjkPw0OQHN5cfz8ojlvnD/T+i2/daVysRZVfcRUB8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YziqVhUdaaYRjEM3ATAWgfkWLMu6HDkIrcFZB9DFaHiUtrM5OkJ
-	WmQHFH5A8cF273C+2v7JCpIFIPdkuuU0lFp3rpvqLNUMNEwwpUGIwgJa+F+QbmM=
-X-Gm-Gg: ASbGncsmGOW0yh79hnpgw4lX1rUKMglqhVV40xtGDu99Tgxr8qs7LkbrZshq0y53quj
-	fqOBDs5cV7HlP0M7GjcWXHGo6l26BtxrwtwhLe1FFFiTifAZcn3yCfx0L8QVKM0RzS8V78G5SWs
-	Dw3cBIwoXAdJHRAN/cgrcgsx61N3B9CQfXX5Eub8XePXEnJZQb3ypqX0nQ7iAagFNOHzmBCcdPA
-	+lLMWS5h+Ye03zuIc20yF6+6hsSOmUOKADKe2MTZQYfRNl5UDiPQ5P8DEjPr61Fq60JAD+6TNA4
-	1t0nSrf6XL8VR1RbUnSWSLaGsBXPj70WzdFvnM27gVHBueOBUkvEtFE=
-X-Google-Smtp-Source: AGHT+IFkrF3nSiyRp86eT1OfDhljZaIiOgfPlVgQgIeU90j7M027ZvrIkgirhKCWekxtCJUAZQHWLg==
-X-Received: by 2002:a05:600c:4f48:b0:434:fd15:3adc with SMTP id 5b1f17b1804b1-43891431319mr209632555e9.25.1737675959187;
-        Thu, 23 Jan 2025 15:45:59 -0800 (PST)
+        bh=xSu/7xOdAlhOhpGqndt0dd/xIMB7MzmL+xgNpZ/1JvM=;
+        b=Xc8+8N19wTqQ6NdhsP/8HWXYxGMA+nP2yCeSWllmkP5BV6rV1v5Gf7Gva1fyhRs5jQ
+         PRSJPS0eX/9v6+shSdyQJrCg8YvUugTTyLDchZWjQKNt4qJG/RV20wTS0DPXojPeqjJ7
+         rqWOsOsxB6SXtA37nQiZ2nnDCoLvg+AaXpw9U2pFoXnkCmjljELdN1YSwPoZecpA8/nb
+         y4Osl2nDluB6Ors1jfx7/9udwg4mjhWCZw/55dv1SiBvsu1EO4QbriLcY8dLGYmbTq79
+         MAz224yF+R1UpqVOYQujWw5H3q9hJK6BZk1I3+Gk1edL3wM/T/mZt4QGHE6FMrtE6n+e
+         Z0ow==
+X-Forwarded-Encrypted: i=1; AJvYcCU7MFNtEMpJwOJcKWJMlK1sNotzbEAFBMzk9OjnYfAJc+xa62Bg1cQhAUmN3EsP9br5MCA6jjvHy1U=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyYuFfOS1lb2nKCjbfh0KTf4UYIzENA8txIGTbmQNqwnh4L1c0X
+	X3EA2D19cxLzbAPER3SeDamwSyIKjQxA4jldIMxOAiGqCStroJJHawqJEVRauJk=
+X-Gm-Gg: ASbGncv0h+cU0BGypouSVAY1GeBfcMG2DffjUDGdxw72jcApIt2w7S1v/assMatryPB
+	G3jD/gG5QzBLuFD2Fuu89yavBDF0MA9arshcyZj71GYUAs2KQ59G4Hdw4aoVEkNYu8OW2hSuc8g
+	+WK9lUqUVWFRRVyzdWiq6wuCSqYa5+LPKtpOJfssSXYN3mduBeruiQiS1zq57O5XMVcsN78z33s
+	kwXoigWEjYPzM1BSbLTFlzL2CF9q0KbW7tYAnKey5YizwY4LfbbeoCzxNtmzuYHUAXaJ3lYZPe1
+	HjBaJjuK2reZBJo/OWGF9l93uPp4iCtXZDmhFWowtm2EEztt63XpynA=
+X-Google-Smtp-Source: AGHT+IFycJysfhMaCpSR16Rzr8MUGZyLqdkkV1WoJ+3KdF//Z7stLVwsFpncYG19E6JH49Nuy1YUSA==
+X-Received: by 2002:a05:6000:e4a:b0:385:ed16:c91 with SMTP id ffacd0b85a97d-38bf566f3bemr20406552f8f.24.1737675970851;
+        Thu, 23 Jan 2025 15:46:10 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -98,9 +98,9 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	Richard Henderson <richard.henderson@linaro.org>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 18/20] cpus: Have cpu_exec_initfn() per user / system emulation
-Date: Fri, 24 Jan 2025 00:44:12 +0100
-Message-ID: <20250123234415.59850-19-philmd@linaro.org>
+Subject: [PATCH 20/20] cpus: Build cpu_exec_[un]realizefn() methods once
+Date: Fri, 24 Jan 2025 00:44:14 +0100
+Message-ID: <20250123234415.59850-21-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
@@ -108,80 +108,111 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Slighly simplify cpu-target.c again by extracting cpu_exec_initfn()
-to cpu-{system,user}.c, adding an empty stub for user emulation.
+Now that cpu_exec_realizefn() and cpu_exec_unrealizefn()
+methods don't use any target specific definition anymore,
+we can move them to cpu-common.c to be able to build them
+once.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
-Good enough for now...
+Eventually they'll be absorbed within cpu_common_[un]realizefn().
 ---
- cpu-target.c         | 9 ---------
- hw/core/cpu-system.c | 7 +++++++
- hw/core/cpu-user.c   | 5 +++++
- 3 files changed, 12 insertions(+), 9 deletions(-)
+ cpu-target.c         | 30 ------------------------------
+ hw/core/cpu-common.c | 26 ++++++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 30 deletions(-)
 
 diff --git a/cpu-target.c b/cpu-target.c
-index dff8c0747f9..3d33d20b8c8 100644
+index bfcd48f9ae2..8f4477be417 100644
 --- a/cpu-target.c
 +++ b/cpu-target.c
-@@ -24,7 +24,6 @@
- #include "migration/vmstate.h"
- #ifndef CONFIG_USER_ONLY
- #include "hw/core/sysemu-cpu-ops.h"
--#include "exec/address-spaces.h"
- #endif
- #include "system/accel-ops.h"
- #include "system/cpus.h"
-@@ -176,14 +175,6 @@ void cpu_exec_unrealizefn(CPUState *cpu)
-     accel_cpu_common_unrealize(cpu);
- }
- 
--void cpu_exec_initfn(CPUState *cpu)
--{
--#ifndef CONFIG_USER_ONLY
--    cpu->memory = get_system_memory();
--    object_ref(OBJECT(cpu->memory));
--#endif
--}
--
- char *cpu_model_from_type(const char *typename)
- {
-     const char *suffix = "-" CPU_RESOLVING_TYPE;
-diff --git a/hw/core/cpu-system.c b/hw/core/cpu-system.c
-index c63c984a803..0520c362db4 100644
---- a/hw/core/cpu-system.c
-+++ b/hw/core/cpu-system.c
-@@ -20,6 +20,7 @@
+@@ -19,43 +19,13 @@
  
  #include "qemu/osdep.h"
  #include "qapi/error.h"
-+#include "exec/address-spaces.h"
- #include "exec/memory.h"
- #include "exec/tswap.h"
- #include "hw/qdev-core.h"
-@@ -182,3 +183,9 @@ void cpu_class_init_props(DeviceClass *dc)
+-#include "qemu/error-report.h"
+ #include "qemu/qemu-print.h"
+ #include "system/accel-ops.h"
+ #include "system/cpus.h"
+ #include "exec/replay-core.h"
+-#include "exec/cpu-common.h"
+ #include "exec/log.h"
+ #include "accel/accel-cpu-target.h"
+ #include "trace/trace-root.h"
+-#include "qemu/accel.h"
+-#include "hw/core/cpu.h"
+-
+-bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
+-{
+-    if (!accel_cpu_common_realize(cpu, errp)) {
+-        return false;
+-    }
+-
+-    /* Wait until cpu initialization complete before exposing cpu. */
+-    cpu_list_add(cpu);
+-
+-    cpu_vmstate_register(cpu);
+-
+-    return true;
+-}
+-
+-void cpu_exec_unrealizefn(CPUState *cpu)
+-{
+-    cpu_vmstate_unregister(cpu);
+-
+-    cpu_list_remove(cpu);
+-    /*
+-     * Now that the vCPU has been removed from the RCU list, we can call
+-     * accel_cpu_common_unrealize, which may free fields using call_rcu.
+-     */
+-    accel_cpu_common_unrealize(cpu);
+-}
  
-     device_class_set_props(dc, cpu_system_props);
- }
-+
-+void cpu_exec_initfn(CPUState *cpu)
-+{
-+    cpu->memory = get_system_memory();
-+    object_ref(OBJECT(cpu->memory));
-+}
-diff --git a/hw/core/cpu-user.c b/hw/core/cpu-user.c
-index e5ccf6bf13a..cdd8de2fefa 100644
---- a/hw/core/cpu-user.c
-+++ b/hw/core/cpu-user.c
-@@ -25,3 +25,8 @@ void cpu_class_init_props(DeviceClass *dc)
+ char *cpu_model_from_type(const char *typename)
  {
-     device_class_set_props(dc, cpu_user_props);
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index 71425cb7422..c5382a350fc 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -193,6 +193,20 @@ static void cpu_common_parse_features(const char *typename, char *features,
+     }
  }
-+
-+void cpu_exec_initfn(CPUState *cpu)
+ 
++bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
 +{
-+    /* nothing to do */
++    if (!accel_cpu_common_realize(cpu, errp)) {
++        return false;
++    }
++
++    /* Wait until cpu initialization complete before exposing cpu. */
++    cpu_list_add(cpu);
++
++    cpu_vmstate_register(cpu);
++
++    return true;
 +}
++
+ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
+ {
+     CPUState *cpu = CPU(dev);
+@@ -234,6 +248,18 @@ static void cpu_common_unrealizefn(DeviceState *dev)
+     cpu_exec_unrealizefn(cpu);
+ }
+ 
++void cpu_exec_unrealizefn(CPUState *cpu)
++{
++    cpu_vmstate_unregister(cpu);
++
++    cpu_list_remove(cpu);
++    /*
++     * Now that the vCPU has been removed from the RCU list, we can call
++     * accel_cpu_common_unrealize, which may free fields using call_rcu.
++     */
++    accel_cpu_common_unrealize(cpu);
++}
++
+ static void cpu_common_initfn(Object *obj)
+ {
+     CPUState *cpu = CPU(obj);
 -- 
 2.47.1
 
