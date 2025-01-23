@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC97CC0218B
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:51:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.876486.1286873 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6184C0218B
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jan 2025 23:51:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.876491.1286884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6yj-0007X5-PC; Thu, 23 Jan 2025 23:51:17 +0000
+	id 1tb6yq-000865-2S; Thu, 23 Jan 2025 23:51:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 876486.1286873; Thu, 23 Jan 2025 23:51:17 +0000
+Received: by outflank-mailman (output) from mailman id 876491.1286884; Thu, 23 Jan 2025 23:51:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tb6yj-0007WI-Lv; Thu, 23 Jan 2025 23:51:17 +0000
-Received: by outflank-mailman (input) for mailman id 876486;
- Thu, 23 Jan 2025 23:51:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tb6yp-00085w-Uo; Thu, 23 Jan 2025 23:51:23 +0000
+Received: by outflank-mailman (input) for mailman id 876491;
+ Thu, 23 Jan 2025 23:51:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QxCy=UP=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1tb6tj-0007hN-FG
- for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:46:07 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3620e9ed-d9e4-11ef-99a4-01e77a169b0f;
- Fri, 24 Jan 2025 00:46:05 +0100 (CET)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3862d16b4f5so936519f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:46:05 -0800 (PST)
+ id 1tb6tQ-0007w9-De
+ for xen-devel@lists.xenproject.org; Thu, 23 Jan 2025 23:45:48 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2b751e45-d9e4-11ef-a0e5-8be0dac302b0;
+ Fri, 24 Jan 2025 00:45:47 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43618283dedso15517605e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Jan 2025 15:45:47 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c403asm989733f8f.93.2025.01.23.15.46.03
+ 5b1f17b1804b1-438bd47f355sm7138595e9.4.2025.01.23.15.45.46
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:46:03 -0800 (PST)
+ Thu, 23 Jan 2025 15:45:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3620e9ed-d9e4-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 2b751e45-d9e4-11ef-a0e5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1737675965; x=1738280765; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1737675947; x=1738280747; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sQ+5PubFZrrCYmUor7z2ohXZLQOj0+FDz6CQ50FZwrM=;
-        b=cNL9W4GgXiGbGKj5Oaf3xRXVRuwiyeOYXu35T/8Gek6sP8ZleQZ9j6A9Gwd79h5SwV
-         b7ot/UE0hMOfrofoLe7KfZ6prqCnRkobFW2vqBRP1h7damETpX1HePopzG7g6iimmtcG
-         yr4TceZEyoxU9eKyNxP9twyN345/mejOxRdiIeEYNr3Gp+NjgKZNORwC1RgkhJSTeSzF
-         bew6hrKDuiaC5BEXL6YlPb96cDgmDKf0A6nHXQhAKW+5Ug+bl+Huwj76mAA0pE7rsoHW
-         bu3ys0XPQ46DG6bG796R0ZM7dIjgLwaVhZltVu28LhV61GBn9qnYS91Tev+yBojcIJjM
-         fKJw==
+        bh=OmeiNXwxDOryj9Nk89BSf7ntmaAiV2ODrxL67LjT3oE=;
+        b=Nbwi6evql1n75WRaVnKCPLltTihG5WWspsDkjKs3P3n/CiDGfATte5Si4TLL0NvgBr
+         uSFr/j1ly5E+kLeI2htX8DdYgZhDtTXxA+H8d9SpVsaMrLsAV7fOybeDbkHdUxi6ygjr
+         maw5oSA4G1SNNiak+QWPOkd/hBPAFd90GQwNHRkbvVzhIjdDcS4Jo+pNQ+lELXkIT0dh
+         PyEHijOmVRt896CvKidiYv7uW+LhBC5mPiTm8+lxYDS9nRZhKeUbbhZ6H/3NqiHYXWRT
+         Pv2Z8tFp/cCzfPyEF7+ipVf9p1dLwD5Wncv+ccm63SRl3fus1InbrXcFQVUovUKTLCNz
+         AZrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737675965; x=1738280765;
+        d=1e100.net; s=20230601; t=1737675947; x=1738280747;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sQ+5PubFZrrCYmUor7z2ohXZLQOj0+FDz6CQ50FZwrM=;
-        b=N/4IDG1mHaoDKC+S4ZV2CosUH1WIBQeZudMW8mz1ehVpXlf5IoeLCQBtGPt0wPnusK
-         jbGAdWQLEwR8mq04DrCC8mAPcDXJ3qO2CBNpWVwIB8fU7Qv44aIy3uvPvRxg5Fy+TlGC
-         XipG3xRBbciu6PAy+H48pkpL7NcJ/RCltj33f1OXj/Jx6uWu/XCNOBqgcNQBbi71YtDh
-         jd18arq6Ta7Uzd2j1i02VY/GjSUr5TTW2YQZ7uNBZGloQZxnZ6U0+i5ohlCucIntdonx
-         54XD09ujzjbLBwmClUslFyF+nyY/Akh3GAp57LFyx7ieBt6SxFFVqKB/gJCctugWEVf/
-         5l9w==
-X-Forwarded-Encrypted: i=1; AJvYcCVx/AleA068NJoEDcrWE0lXMhNZL53pkOu7pMR5PWZplyRf+G4dKeX2uUKhIyGWGf4zAO15V3mxwsA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxXhleRHduSx4qFQ568LDms2U+IBgKxZfUO/CTs1iiDUCPySaSY
-	fkSpuTkwz5at3SSK7P1qeIl47qyMKCxcHRpIjTpRkZxOWLM5qNKQBQsc3Z6QGZlAr57YNLa15IG
-	9TD8=
-X-Gm-Gg: ASbGncvz9mDfY+LYwTsMQFLns7IwRXZNHj6YNpTyzq62QQ1kcy2aBffsCJWz6IBMRT8
-	3ceijSICi0MJ8SKu1qJrQpjK3qyO8kh8J8xLOb2cLrgT73eeqxfNpuJRIeywFSlKGtZDgdF3vVs
-	1ecSs4gUjiNe/36qWazzy1jr6c80Qcm8elWzSNNMQKYRMdpNn8llDP2B4/lwqMJv2xAczltv/uP
-	CVOhMb6zT01hQopiCYNSV+jfjeVZTEU9d23JESNyXkbEQFXV8tKblYxb6s8S2VVmuyhP35LRR5l
-	ZHh54gNS6WCmoiHAemtEqER3SIp1KMRD3+RA3YQKvsnl6Uxl3WGwOpA=
-X-Google-Smtp-Source: AGHT+IGsiKZVvuhBn67VKbvp7ZCKdJegwhgfqv/IiEk5xyysRNRbKSY3tyJ6LqHq9Om3O3Zv9Xfmsw==
-X-Received: by 2002:adf:f250:0:b0:38a:5dc4:6dcd with SMTP id ffacd0b85a97d-38c22279dafmr4343550f8f.22.1737675965020;
-        Thu, 23 Jan 2025 15:46:05 -0800 (PST)
+        bh=OmeiNXwxDOryj9Nk89BSf7ntmaAiV2ODrxL67LjT3oE=;
+        b=O7PnIOU6RSxFDE+ICi8WBQ3f0dZF/wspV41jDrPRBNPI4LYonTqGv6cKet+hD96RCT
+         RYLkbb9qrMXTwJgupQRP/452BdfAUGUFHoyf3NR/E6NYYlQHRYLpjmh/ALLrr7XqqaSn
+         vaKSPHOuFDN5HkeukAD6uwZFcXHScjAvIiz8bqzxV6eT86Tz3nVO3bG2ibGcoAL2t1M1
+         P5fFrKhnSDZ9fDUoW5GG68z1TuFF8vgkxIuNdo5WssIneiXrvwCmuf/t3qBFky5visTI
+         EVuItF8E1GgnRWTMAh8F11Q/O0jX2D4K7f7qxpNYJmccDY8n5d4oIDoC62nBpivIUgDa
+         OQNw==
+X-Forwarded-Encrypted: i=1; AJvYcCX8PG5Rblywq4UgmYjz9+NCDD3a5B7X7BHiA74O4xlnOF0wazVd+KKfHbNh9R1HcdP6WM6LNsW1b5A=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxk+3AX0nF1PlcKgBAzkAXZ0ZT6Kkgh98d9X/pxKQJipIAZLWyJ
+	gFpgLWMD+xSnaiUN3Lx0jAB+ZE8acVhd9o2vO3B6cSLlhkFYUOZQiQN6F+kyRH8=
+X-Gm-Gg: ASbGncukU9s1TtRTE4M64BeRy1TFUQQyYfPlUCaiRzpYpMa1rFhwk9xFLraFL7VACXt
+	W1Mutbw37Bn2RzSrbV13bv/XhGm61RV0gDcv6vBmP0l1tIwaTsOe/EjUwSdrIf21KJuVEja8Otu
+	EP5kvJdXNTS5S2xEimmzhLNKhPKob0FeP1deurjd6l3u6XZZomVZO/CIFXn3B3YcYaBTzrpPwDY
+	WO0mTFVlCPgjzxL1xniPAKKCn1HYbpBMU3V46Vme8IxdFKWTAGT7DMaifxorwgnbUm9fcJYzZ9G
+	MA16Yznzbvwnhzr/x9pEDzfGmtnxMp0Ldpl5I2hsRWhUDW6+Z/6sisg=
+X-Google-Smtp-Source: AGHT+IEFJ1SeJWoUW3YaXnTGBs2yrvL22hVEarb/siWyosLBI70zXEF7xcr/1TRnUm9/lQBURa7m3g==
+X-Received: by 2002:a05:600c:1e18:b0:436:8a6f:b6db with SMTP id 5b1f17b1804b1-4389141c12emr225835175e9.22.1737675947213;
+        Thu, 23 Jan 2025 15:45:47 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -99,9 +98,9 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	Richard Henderson <richard.henderson@linaro.org>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 19/20] cpus: Register VMState per user / system emulation
-Date: Fri, 24 Jan 2025 00:44:13 +0100
-Message-ID: <20250123234415.59850-20-philmd@linaro.org>
+Subject: [PATCH 16/20] cpus: Restrict cpu_common_post_load() code to TCG
+Date: Fri, 24 Jan 2025 00:44:10 +0100
+Message-ID: <20250123234415.59850-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
@@ -109,234 +108,48 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Simplify cpu-target.c by extracting mixed vmstate code
-into the cpu_vmstate_register() / cpu_vmstate_unregister()
-helpers, implemented in cpu-user.c and cpu-system.c.
+CPU_INTERRUPT_EXIT was removed in commit 3098dba01c7
+("Use a dedicated function to request exit from execution
+loop"), tlb_flush() and tb_flush() are related to TCG
+accelerator.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
-XXX: tlb_flush() temporary declared manually.
+ cpu-target.c | 33 +++++++++++++++++++--------------
+ 1 file changed, 19 insertions(+), 14 deletions(-)
 
-Only 2 more CONFIG_USER_ONLY to go.
----
- include/hw/core/cpu.h |   2 +
- cpu-target.c          | 122 +----------------------------------------
- hw/core/cpu-system.c  | 123 ++++++++++++++++++++++++++++++++++++++++++
- hw/core/cpu-user.c    |  12 +++++
- 4 files changed, 139 insertions(+), 120 deletions(-)
-
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index fb397cdfc53..aadbd2e1122 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -1163,6 +1163,8 @@ G_NORETURN void cpu_abort(CPUState *cpu, const char *fmt, ...)
- /* $(top_srcdir)/cpu.c */
- void cpu_class_init_props(DeviceClass *dc);
- void cpu_exec_initfn(CPUState *cpu);
-+void cpu_vmstate_register(CPUState *cpu);
-+void cpu_vmstate_unregister(CPUState *cpu);
- bool cpu_exec_realizefn(CPUState *cpu, Error **errp);
- void cpu_exec_unrealizefn(CPUState *cpu);
- void cpu_exec_reset_hold(CPUState *cpu);
 diff --git a/cpu-target.c b/cpu-target.c
-index 3d33d20b8c8..bfcd48f9ae2 100644
+index a2999e7c3c0..c05ef1ff096 100644
 --- a/cpu-target.c
 +++ b/cpu-target.c
-@@ -21,115 +21,16 @@
- #include "qapi/error.h"
- #include "qemu/error-report.h"
- #include "qemu/qemu-print.h"
--#include "migration/vmstate.h"
--#ifndef CONFIG_USER_ONLY
--#include "hw/core/sysemu-cpu-ops.h"
--#endif
- #include "system/accel-ops.h"
- #include "system/cpus.h"
--#include "system/tcg.h"
- #include "exec/replay-core.h"
- #include "exec/cpu-common.h"
--#include "exec/exec-all.h"
--#include "exec/tb-flush.h"
- #include "exec/log.h"
- #include "accel/accel-cpu-target.h"
- #include "trace/trace-root.h"
- #include "qemu/accel.h"
- #include "hw/core/cpu.h"
- 
--#ifndef CONFIG_USER_ONLY
--static int cpu_common_post_load(void *opaque, int version_id)
--{
--#ifdef CONFIG_TCG
--    if (tcg_enabled()) {
--        CPUState *cpu = opaque;
--
--        /*
--         * 0x01 was CPU_INTERRUPT_EXIT. This line can be removed when the
--         * version_id is increased.
--         */
--        cpu->interrupt_request &= ~0x01;
--
--        tlb_flush(cpu);
--
--        /*
--         * loadvm has just updated the content of RAM, bypassing the
--         * usual mechanisms that ensure we flush TBs for writes to
--         * memory we've translated code from. So we must flush all TBs,
--         * which will now be stale.
--         */
--        tb_flush(cpu);
--    }
--#endif
--
--    return 0;
--}
--
--static int cpu_common_pre_load(void *opaque)
--{
--    CPUState *cpu = opaque;
--
--    cpu->exception_index = -1;
--
--    return 0;
--}
--
--static bool cpu_common_exception_index_needed(void *opaque)
--{
--    CPUState *cpu = opaque;
--
--    return tcg_enabled() && cpu->exception_index != -1;
--}
--
--static const VMStateDescription vmstate_cpu_common_exception_index = {
--    .name = "cpu_common/exception_index",
--    .version_id = 1,
--    .minimum_version_id = 1,
--    .needed = cpu_common_exception_index_needed,
--    .fields = (const VMStateField[]) {
--        VMSTATE_INT32(exception_index, CPUState),
--        VMSTATE_END_OF_LIST()
--    }
--};
--
--static bool cpu_common_crash_occurred_needed(void *opaque)
--{
--    CPUState *cpu = opaque;
--
--    return cpu->crash_occurred;
--}
--
--static const VMStateDescription vmstate_cpu_common_crash_occurred = {
--    .name = "cpu_common/crash_occurred",
--    .version_id = 1,
--    .minimum_version_id = 1,
--    .needed = cpu_common_crash_occurred_needed,
--    .fields = (const VMStateField[]) {
--        VMSTATE_BOOL(crash_occurred, CPUState),
--        VMSTATE_END_OF_LIST()
--    }
--};
--
--const VMStateDescription vmstate_cpu_common = {
--    .name = "cpu_common",
--    .version_id = 1,
--    .minimum_version_id = 1,
--    .pre_load = cpu_common_pre_load,
--    .post_load = cpu_common_post_load,
--    .fields = (const VMStateField[]) {
--        VMSTATE_UINT32(halted, CPUState),
--        VMSTATE_UINT32(interrupt_request, CPUState),
--        VMSTATE_END_OF_LIST()
--    },
--    .subsections = (const VMStateDescription * const []) {
--        &vmstate_cpu_common_exception_index,
--        &vmstate_cpu_common_crash_occurred,
--        NULL
--    }
--};
--#endif
--
- bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
+@@ -45,22 +45,27 @@
+ #ifndef CONFIG_USER_ONLY
+ static int cpu_common_post_load(void *opaque, int version_id)
  {
-     if (!accel_cpu_common_realize(cpu, errp)) {
-@@ -139,33 +40,14 @@ bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
-     /* Wait until cpu initialization complete before exposing cpu. */
-     cpu_list_add(cpu);
- 
--#ifdef CONFIG_USER_ONLY
--    assert(qdev_get_vmsd(DEVICE(cpu)) == NULL ||
--           qdev_get_vmsd(DEVICE(cpu))->unmigratable);
--#else
--    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
--        vmstate_register(NULL, cpu->cpu_index, &vmstate_cpu_common, cpu);
--    }
--    if (cpu->cc->sysemu_ops->legacy_vmsd != NULL) {
--        vmstate_register(NULL, cpu->cpu_index, cpu->cc->sysemu_ops->legacy_vmsd, cpu);
--    }
--#endif /* CONFIG_USER_ONLY */
-+    cpu_vmstate_register(cpu);
- 
-     return true;
- }
- 
- void cpu_exec_unrealizefn(CPUState *cpu)
- {
--#ifndef CONFIG_USER_ONLY
--    CPUClass *cc = CPU_GET_CLASS(cpu);
--
--    if (cc->sysemu_ops->legacy_vmsd != NULL) {
--        vmstate_unregister(NULL, cc->sysemu_ops->legacy_vmsd, cpu);
--    }
--    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
--        vmstate_unregister(NULL, &vmstate_cpu_common, cpu);
--    }
--#endif
-+    cpu_vmstate_unregister(cpu);
- 
-     cpu_list_remove(cpu);
-     /*
-diff --git a/hw/core/cpu-system.c b/hw/core/cpu-system.c
-index 0520c362db4..3e1f60f23df 100644
---- a/hw/core/cpu-system.c
-+++ b/hw/core/cpu-system.c
-@@ -22,10 +22,21 @@
- #include "qapi/error.h"
- #include "exec/address-spaces.h"
- #include "exec/memory.h"
-+#include "exec/tb-flush.h"
- #include "exec/tswap.h"
- #include "hw/qdev-core.h"
- #include "hw/qdev-properties.h"
- #include "hw/core/sysemu-cpu-ops.h"
-+#include "migration/vmstate.h"
-+#include "system/tcg.h"
-+
-+/*
-+ * XXX this series plan is to be applied on top on my exec/cputlb rework series,
-+ * then tlb_flush() won't be declared target-specific in exec-all.h.
-+ * Meanwhile, declare locally.
-+ * XXX
-+ */
-+void tlb_flush(CPUState *cs);
- 
- bool cpu_paging_enabled(const CPUState *cpu)
- {
-@@ -189,3 +200,115 @@ void cpu_exec_initfn(CPUState *cpu)
-     cpu->memory = get_system_memory();
-     object_ref(OBJECT(cpu->memory));
- }
-+
-+static int cpu_common_post_load(void *opaque, int version_id)
-+{
+-    CPUState *cpu = opaque;
 +#ifdef CONFIG_TCG
 +    if (tcg_enabled()) {
 +        CPUState *cpu = opaque;
-+
+ 
+-    /*
+-     * 0x01 was CPU_INTERRUPT_EXIT. This line can be removed when the
+-     * version_id is increased.
+-     */
+-    cpu->interrupt_request &= ~0x01;
+-    tlb_flush(cpu);
 +        /*
 +         * 0x01 was CPU_INTERRUPT_EXIT. This line can be removed when the
 +         * version_id is increased.
 +         */
 +        cpu->interrupt_request &= ~0x01;
-+
+ 
+-    /*
+-     * loadvm has just updated the content of RAM, bypassing the
+-     * usual mechanisms that ensure we flush TBs for writes to
+-     * memory we've translated code from. So we must flush all TBs,
+-     * which will now be stale.
+-     */
+-    tb_flush(cpu);
 +        tlb_flush(cpu);
 +
 +        /*
@@ -348,121 +161,9 @@ index 0520c362db4..3e1f60f23df 100644
 +        tb_flush(cpu);
 +    }
 +#endif
-+
-+    return 0;
-+}
-+
-+static int cpu_common_pre_load(void *opaque)
-+{
-+    CPUState *cpu = opaque;
-+
-+    cpu->exception_index = -1;
-+
-+    return 0;
-+}
-+
-+static bool cpu_common_exception_index_needed(void *opaque)
-+{
-+    CPUState *cpu = opaque;
-+
-+    return tcg_enabled() && cpu->exception_index != -1;
-+}
-+
-+static const VMStateDescription vmstate_cpu_common_exception_index = {
-+    .name = "cpu_common/exception_index",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = cpu_common_exception_index_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_INT32(exception_index, CPUState),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static bool cpu_common_crash_occurred_needed(void *opaque)
-+{
-+    CPUState *cpu = opaque;
-+
-+    return cpu->crash_occurred;
-+}
-+
-+static const VMStateDescription vmstate_cpu_common_crash_occurred = {
-+    .name = "cpu_common/crash_occurred",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = cpu_common_crash_occurred_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_BOOL(crash_occurred, CPUState),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+const VMStateDescription vmstate_cpu_common = {
-+    .name = "cpu_common",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .pre_load = cpu_common_pre_load,
-+    .post_load = cpu_common_post_load,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINT32(halted, CPUState),
-+        VMSTATE_UINT32(interrupt_request, CPUState),
-+        VMSTATE_END_OF_LIST()
-+    },
-+    .subsections = (const VMStateDescription * const []) {
-+        &vmstate_cpu_common_exception_index,
-+        &vmstate_cpu_common_crash_occurred,
-+        NULL
-+    }
-+};
-+
-+void cpu_vmstate_register(CPUState *cpu)
-+{
-+    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
-+        vmstate_register(NULL, cpu->cpu_index, &vmstate_cpu_common, cpu);
-+    }
-+    if (cpu->cc->sysemu_ops->legacy_vmsd != NULL) {
-+        vmstate_register(NULL, cpu->cpu_index, cpu->cc->sysemu_ops->legacy_vmsd, cpu);
-+    }
-+}
-+
-+void cpu_vmstate_unregister(CPUState *cpu)
-+{
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
-+
-+    if (cc->sysemu_ops->legacy_vmsd != NULL) {
-+        vmstate_unregister(NULL, cc->sysemu_ops->legacy_vmsd, cpu);
-+    }
-+    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
-+        vmstate_unregister(NULL, &vmstate_cpu_common, cpu);
-+    }
-+}
-diff --git a/hw/core/cpu-user.c b/hw/core/cpu-user.c
-index cdd8de2fefa..1892acdee0f 100644
---- a/hw/core/cpu-user.c
-+++ b/hw/core/cpu-user.c
-@@ -10,6 +10,7 @@
- #include "hw/qdev-core.h"
- #include "hw/qdev-properties.h"
- #include "hw/core/cpu.h"
-+#include "migration/vmstate.h"
  
- static const Property cpu_user_props[] = {
-     /*
-@@ -30,3 +31,14 @@ void cpu_exec_initfn(CPUState *cpu)
- {
-     /* nothing to do */
+     return 0;
  }
-+
-+void cpu_vmstate_register(CPUState *cpu)
-+{
-+    assert(qdev_get_vmsd(DEVICE(cpu)) == NULL ||
-+           qdev_get_vmsd(DEVICE(cpu))->unmigratable);
-+}
-+
-+void cpu_vmstate_unregister(CPUState *cpu)
-+{
-+    /* nothing to do */
-+}
 -- 
 2.47.1
 
