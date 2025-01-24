@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1996C0218E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D88D1C0218F
 	for <xen-devel@archiver.kernel.org>; Fri, 24 Jan 2025 12:01:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.876704.1287071 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.876706.1287091 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbINI-00084f-2C; Fri, 24 Jan 2025 12:01:24 +0000
+	id 1tbINM-0000DZ-Ml; Fri, 24 Jan 2025 12:01:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 876704.1287071; Fri, 24 Jan 2025 12:01:24 +0000
+Received: by outflank-mailman (output) from mailman id 876706.1287091; Fri, 24 Jan 2025 12:01:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbINH-00084Y-VX; Fri, 24 Jan 2025 12:01:23 +0000
-Received: by outflank-mailman (input) for mailman id 876704;
- Fri, 24 Jan 2025 12:01:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tbINM-0000Cp-Jq; Fri, 24 Jan 2025 12:01:28 +0000
+Received: by outflank-mailman (input) for mailman id 876706;
+ Fri, 24 Jan 2025 12:01:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AkuS=UQ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tbING-0007hy-Qr
- for xen-devel@lists.xenproject.org; Fri, 24 Jan 2025 12:01:22 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ed9c120f-da4a-11ef-a0e5-8be0dac302b0;
- Fri, 24 Jan 2025 13:01:22 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ab65fca99b6so392579566b.0
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jan 2025 04:01:22 -0800 (PST)
+ id 1tbINL-0007bK-Gs
+ for xen-devel@lists.xenproject.org; Fri, 24 Jan 2025 12:01:27 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id efed0514-da4a-11ef-99a4-01e77a169b0f;
+ Fri, 24 Jan 2025 13:01:26 +0100 (CET)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aafc9d75f8bso378375766b.2
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jan 2025 04:01:26 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab675e67814sm118162466b.74.2025.01.24.04.01.19
+ a640c23a62f3a-ab675e12770sm119049166b.28.2025.01.24.04.01.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 04:01:20 -0800 (PST)
+ Fri, 24 Jan 2025 04:01:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,48 +46,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ed9c120f-da4a-11ef-a0e5-8be0dac302b0
+X-Inumbo-ID: efed0514-da4a-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1737720081; x=1738324881; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1737720085; x=1738324885; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zNc8xqr1uTUQn8IFfYe+22YL6fG0Xco7Sp/pdjdKu1o=;
-        b=BOgD76sXrIjdPlAVicXZKECEDeobRT174WkCZNqU3w3O7+wlzTlhrl2hr2Q3wHCQ+q
-         ksTdXdK43RNc3lsJLTRcqlxlF2S67j+fc81S6ocGwXQiRGeXYC1kShbxzEhv1I3/QUzS
-         EYu61ElByuQo9KxVDwmw1UKazAjUcMhz9v8D8=
+        bh=ZG7JEH3gSju1VydKP45xEoqkmeQzG5Nz2nBw/4zt1JY=;
+        b=I2sEsWPX0nNYcf4zGoeeZQpf69Qrh7UQEYyzuIJdTDkoVcXkdXoXV9kO7MoSbjb5a7
+         3vS63Hu/1rxCVrBsNAhJEX+6lJAR+X+FMfA1lrZF6vOiPW7slaSMnor8xsLMCZ4v3PBG
+         WdBSGOxThvpluHYGBdqS0k100Df6IxbL/9Dkk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737720081; x=1738324881;
+        d=1e100.net; s=20230601; t=1737720085; x=1738324885;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=zNc8xqr1uTUQn8IFfYe+22YL6fG0Xco7Sp/pdjdKu1o=;
-        b=N4b4sSuDzrQaTBho+Drp19mebo1X0IwIIz2Lkh7pbdKfyS9dfntMYXHQLNBvvPB3ir
-         F8CgS67J49vRdTaXTWIhWDz39+Af9ydeMG4PSba2sVcT+sCJNVt5rVOrDLxd7wRDH0e4
-         E+HkW9OJt66CqrQmlQ2I35v4yVzI7aBa7dY/FKQbLY6uIozPmEzGy3zfBAM2bEBgruIm
-         fhTcGt0+UDBvlL5n0iCzshoWY+Heb4jx99zinZR8bCG2neRbwk1gxhDXiD0cXb8ol/dQ
-         AuwGcBzglBa1GQ+zKLt9IQY6D9eiN2phKyjWZ3bnNZekA+EpB/saXCsmIs45LThSbYWr
-         K7bg==
-X-Gm-Message-State: AOJu0YwtXRn3Xc4O78JdHwVEHfahgVhF3eIYAJSSOG0aOQ1fsUBD8QaK
-	1SlBBKi7LHHrlPZXwlLTwJAW7Br2Fqqygv1PkxAdbeKvGsyTD/YM9ASE///f8lePSYR+iVptgAh
-	J
-X-Gm-Gg: ASbGncsSRaxuxtgpPEiIFKQQ5prBU4/bQHVaqhNpZ+iuNga1Z4ls7OSVaR+Tc71iber
-	LRSh1KYcR6Zs+jZqsXRLO67c91D50ua+XImLW9Y42NxOUkR7RJImQXFhUWrTCeUrDoInuNj3iOO
-	SeO57DDQ5MTFPe0pYoUw3iD64U2Lf68ZSQ9c3H1qze2Ys7rKJZuvDPaDV4c/7m3QKnER9lc/S3r
-	/kXC4pC1RHRVUSC2XViVIZ09gB8vXzHBZner162KwVJ+5IU5z9mQfMTFk6epPwu+7K+MWYtaXQM
-	MN/9Z6Qe1eRu20k=
-X-Google-Smtp-Source: AGHT+IFO3YfpnhWTuhY7pxWYDKGiB6uFLIA/iTPiVnXhamCt+AM7SEGZvi8MUKHqQXMNGwtAo2YyZg==
-X-Received: by 2002:a17:907:940b:b0:aac:619:7ed8 with SMTP id a640c23a62f3a-ab38b1e651bmr2558293466b.7.1737720080876;
-        Fri, 24 Jan 2025 04:01:20 -0800 (PST)
+        bh=ZG7JEH3gSju1VydKP45xEoqkmeQzG5Nz2nBw/4zt1JY=;
+        b=GYK27V9ueMwQpMjKMG9YechbmYav7t5zlVPe7dzNuNk193GjyyfAndzMDei4v0/u7g
+         XFIdbzxsJoxVpq/Kkx+HJZivNxn4CJUAfEeBSwoL335t/V+gmvof7Z+w8y0xge87MRrd
+         0evMAWyZmQ0Wkwbm3grP3y31GBlSfRxJApMlJ1O9RUnZ71yjhjJcIYv3Jz2VFB2cCzx+
+         K19ddlia0Y6xroOJw12eqz6UBogKRXsW5aAO2/aVJPYYZOYTi9OzBtSzOvePsKMxFTjQ
+         dfneW4HxW1exv6glkR/y1eo2te3HaXVqigJuhDD1OA0AhiDxkLXIeCML/GnTVnK2Qezp
+         9ezg==
+X-Gm-Message-State: AOJu0YyCl+lYyKYf+bDhzSsFh6vj3ECadkMyOnaSr1XpS+yKBb+ZjEEQ
+	xd5hC8naNXKHDcA0C9Xd+tUI8/2U6QWhpI1DJpKF88wDb/T1DS/+isWO1Cz/qVw9iJHl1frB1VU
+	C
+X-Gm-Gg: ASbGnctehdgaCPpvBKCYoVXM7ylH6SbrP7ZVhNtOtDB6FS2YbYQU+nh115YeWQCZGrF
+	cIjkJs+eeOEWb8r3G8SYGb/m3ZSNSvcXEdza116sAJ/BD1Ou3ZkJAhv4Dd8oVlXAVWYfctrt69/
+	v+/k5tI8QDjbuMdowu8qZiwdniUUdaMBA42aGS5Y9WLFEU3ikuc8dm6Pi4hCByb5bdGjqSs3RWN
+	pM9r+Yva9ZqY1ql2L4pvbnlz+GGO6HfmSHWaRzPhX0SxxmJuP3Eo63YbIyBTSjL4FWsvJZyir4z
+	5m4WnwtqGbSfACA=
+X-Google-Smtp-Source: AGHT+IGwobbZw6n/IuGjK/JSvPcW4EXd/vH/ht5HiCBUBeIfVlLQYJB4jj+811xsVLL8IgmHXb0e+g==
+X-Received: by 2002:a17:907:9408:b0:aa6:a87e:f2e1 with SMTP id a640c23a62f3a-ab38b4b96d0mr2693767166b.56.1737720085229;
+        Fri, 24 Jan 2025 04:01:25 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Teddy Astie <teddy.astie@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 2/5] iommu/vtd: remove non-CX16 logic from interrupt remapping
-Date: Fri, 24 Jan 2025 13:01:08 +0100
-Message-ID: <20250124120112.56678-3-roger.pau@citrix.com>
+Subject: [PATCH v2 4/5] iommu/vtd: cleanup MAP_SINGLE_DEVICE and related code
+Date: Fri, 24 Jan 2025 13:01:10 +0100
+Message-ID: <20250124120112.56678-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20250124120112.56678-1-roger.pau@citrix.com>
 References: <20250124120112.56678-1-roger.pau@citrix.com>
@@ -97,135 +97,55 @@ Content-Transfer-Encoding: 8bit
 
 From: Teddy Astie <teddy.astie@vates.tech>
 
-As CX16 support is mandatory for IOMMU usage, the checks for CX16 in the
-interrupt remapping code are stale.  Remove them together with the
-associated code introduced in case CX16 was not available.
+This flag was only used in case cx16 is not available, as those code paths no
+longer exist, this flag now does basically nothing.
 
-Note that AMD-Vi support for atomically updating a 128bit IRTE entry is
-still not implemented, it will be done by further changes.
-
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/drivers/passthrough/vtd/intremap.c | 75 +++++---------------------
- 1 file changed, 14 insertions(+), 61 deletions(-)
+ xen/drivers/passthrough/vtd/iommu.c | 12 +++---------
+ xen/drivers/passthrough/vtd/vtd.h   |  5 ++---
+ 2 files changed, 5 insertions(+), 12 deletions(-)
 
-diff --git a/xen/drivers/passthrough/vtd/intremap.c b/xen/drivers/passthrough/vtd/intremap.c
-index 233db5cb64de..820616a8de93 100644
---- a/xen/drivers/passthrough/vtd/intremap.c
-+++ b/xen/drivers/passthrough/vtd/intremap.c
-@@ -184,49 +184,26 @@ bool __init cf_check intel_iommu_supports_eim(void)
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index b0963bfcf74e..9d7a9977a6a6 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -1695,15 +1695,9 @@ static int domain_context_mapping(struct domain *domain, u8 devfn,
+         break;
+     }
  
- /*
-  * Assume iremap_lock has been acquired. It is to make sure software will not
-- * change the same IRTE behind us. With this assumption, if only high qword or
-- * low qword in IRTE is to be updated, this function's atomic variant can
-- * present an atomic update to VT-d hardware even when cmpxchg16b
-- * instruction is not supported.
-+ * change the same IRTE behind us.
+-    if ( domain != pdev->domain && pdev->domain != dom_io )
+-    {
+-        if ( pdev->domain->is_dying )
+-            mode |= MAP_OWNER_DYING;
+-        else if ( drhd &&
+-                  !any_pdev_behind_iommu(pdev->domain, pdev, drhd->iommu) &&
+-                  !pdev->phantom_stride )
+-            mode |= MAP_SINGLE_DEVICE;
+-    }
++    if ( domain != pdev->domain && pdev->domain != dom_io &&
++         pdev->domain->is_dying )
++        mode |= MAP_OWNER_DYING;
+ 
+     switch ( pdev->type )
+     {
+diff --git a/xen/drivers/passthrough/vtd/vtd.h b/xen/drivers/passthrough/vtd/vtd.h
+index 8aeff8c1f287..b95124517bd3 100644
+--- a/xen/drivers/passthrough/vtd/vtd.h
++++ b/xen/drivers/passthrough/vtd/vtd.h
+@@ -28,9 +28,8 @@
   */
- static void update_irte(struct vtd_iommu *iommu, struct iremap_entry *entry,
-                         const struct iremap_entry *new_ire, bool atomic)
- {
--    ASSERT(spin_is_locked(&iommu->intremap.lock));
-+    __uint128_t ret;
-+    struct iremap_entry old_ire;
+ #define MAP_WITH_RMRR         (1u << 0)
+ #define MAP_OWNER_DYING       (1u << 1)
+-#define MAP_SINGLE_DEVICE     (1u << 2)
+-#define MAP_ERROR_RECOVERY    (1u << 3)
+-#define UNMAP_ME_PHANTOM_FUNC (1u << 4)
++#define MAP_ERROR_RECOVERY    (1u << 2)
++#define UNMAP_ME_PHANTOM_FUNC (1u << 3)
  
--    if ( cpu_has_cx16 )
--    {
--        __uint128_t ret;
--        struct iremap_entry old_ire;
-+    ASSERT(spin_is_locked(&iommu->intremap.lock));
- 
--        old_ire = *entry;
--        ret = cmpxchg16b(entry, &old_ire, new_ire);
-+    old_ire = *entry;
-+    ret = cmpxchg16b(entry, &old_ire, new_ire);
- 
--        /*
--         * In the above, we use cmpxchg16 to atomically update the 128-bit
--         * IRTE, and the hardware cannot update the IRTE behind us, so
--         * the return value of cmpxchg16 should be the same as old_ire.
--         * This ASSERT validate it.
--         */
--        ASSERT(ret == old_ire.val);
--    }
--    else
--    {
--        /*
--         * VT-d hardware doesn't update IRTEs behind us, nor the software
--         * since we hold iremap_lock. If the caller wants VT-d hardware to
--         * always see a consistent entry, but we can't meet it, a bug will
--         * be raised.
--         */
--        if ( entry->lo == new_ire->lo )
--            write_atomic(&entry->hi, new_ire->hi);
--        else if ( entry->hi == new_ire->hi )
--            write_atomic(&entry->lo, new_ire->lo);
--        else if ( !atomic )
--            *entry = *new_ire;
--        else
--            BUG();
--    }
-+    /*
-+     * In the above, we use cmpxchg16 to atomically update the 128-bit
-+     * IRTE, and the hardware cannot update the IRTE behind us, so
-+     * the return value of cmpxchg16 should be the same as old_ire.
-+     * This ASSERT validate it.
-+     */
-+    ASSERT(ret == old_ire.val);
- }
- 
- /* Mark specified intr remap entry as free */
-@@ -408,7 +385,6 @@ static int ioapic_rte_to_remap_entry(struct vtd_iommu *iommu,
-     /* Indicate remap format. */
-     remap_rte->format = 1;
- 
--    /* If cmpxchg16b is not available the caller must mask the IO-APIC pin. */
-     update_irte(iommu, iremap_entry, &new_ire, !init && !masked);
-     iommu_sync_cache(iremap_entry, sizeof(*iremap_entry));
-     iommu_flush_iec_index(iommu, 0, index);
-@@ -447,38 +423,15 @@ void cf_check io_apic_write_remap_rte(
- {
-     struct IO_xAPIC_route_entry old_rte = {}, new_rte;
-     struct vtd_iommu *iommu = ioapic_to_iommu(IO_APIC_ID(apic));
--    bool masked = true;
-     int rc;
- 
--    if ( !cpu_has_cx16 )
--    {
--       /*
--        * Cannot atomically update the IRTE entry: mask the IO-APIC pin to
--        * avoid interrupts seeing an inconsistent IRTE entry.
--        */
--        old_rte = __ioapic_read_entry(apic, pin, true);
--        if ( !old_rte.mask )
--        {
--            masked = false;
--            old_rte.mask = 1;
--            __ioapic_write_entry(apic, pin, true, old_rte);
--        }
--    }
--
-     /* Not the initializer, for old gcc to cope. */
-     new_rte.raw = rte;
- 
-     rc = ioapic_rte_to_remap_entry(iommu, apic, pin, &old_rte, new_rte);
-     if ( rc )
--    {
--        if ( !masked )
--        {
--            /* Recover the original value of 'mask' bit */
--            old_rte.mask = 0;
--            __ioapic_write_entry(apic, pin, true, old_rte);
--        }
-         return;
--    }
-+
-     /* old_rte will contain the updated IO-APIC RTE on success. */
-     __ioapic_write_entry(apic, pin, true, old_rte);
- }
+ /* Allow for both IOAPIC and IOSAPIC. */
+ #define IO_xAPIC_route_entry IO_APIC_route_entry
 -- 
 2.46.0
 
