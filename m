@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D88D1C0218F
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jan 2025 12:01:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.876706.1287091 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9992C02181
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jan 2025 12:50:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.876767.1287120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbINM-0000DZ-Ml; Fri, 24 Jan 2025 12:01:28 +0000
+	id 1tbJ8q-0001LX-B7; Fri, 24 Jan 2025 12:50:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 876706.1287091; Fri, 24 Jan 2025 12:01:28 +0000
+Received: by outflank-mailman (output) from mailman id 876767.1287120; Fri, 24 Jan 2025 12:50:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbINM-0000Cp-Jq; Fri, 24 Jan 2025 12:01:28 +0000
-Received: by outflank-mailman (input) for mailman id 876706;
- Fri, 24 Jan 2025 12:01:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tbJ8q-0001LQ-8G; Fri, 24 Jan 2025 12:50:32 +0000
+Received: by outflank-mailman (input) for mailman id 876767;
+ Fri, 24 Jan 2025 12:50:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=AkuS=UQ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tbINL-0007bK-Gs
- for xen-devel@lists.xenproject.org; Fri, 24 Jan 2025 12:01:27 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id efed0514-da4a-11ef-99a4-01e77a169b0f;
- Fri, 24 Jan 2025 13:01:26 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aafc9d75f8bso378375766b.2
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jan 2025 04:01:26 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab675e12770sm119049166b.28.2025.01.24.04.01.23
+ <SRS0=DEkt=UQ=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
+ id 1tbJ8p-0001LK-Eg
+ for xen-devel@lists.xenproject.org; Fri, 24 Jan 2025 12:50:31 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cb01e4af-da51-11ef-a0e5-8be0dac302b0;
+ Fri, 24 Jan 2025 13:50:30 +0100 (CET)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5dbfab8a2b0so3954884a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jan 2025 04:50:30 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5dc186d905asm1135005a12.79.2025.01.24.04.50.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 04:01:24 -0800 (PST)
+ Fri, 24 Jan 2025 04:50:29 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 2C1185F8D0;
+ Fri, 24 Jan 2025 12:50:28 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,107 +49,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: efed0514-da4a-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: cb01e4af-da51-11ef-a0e5-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1737720085; x=1738324885; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1737723030; x=1738327830; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:user-agent
+         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ZG7JEH3gSju1VydKP45xEoqkmeQzG5Nz2nBw/4zt1JY=;
-        b=I2sEsWPX0nNYcf4zGoeeZQpf69Qrh7UQEYyzuIJdTDkoVcXkdXoXV9kO7MoSbjb5a7
-         3vS63Hu/1rxCVrBsNAhJEX+6lJAR+X+FMfA1lrZF6vOiPW7slaSMnor8xsLMCZ4v3PBG
-         WdBSGOxThvpluHYGBdqS0k100Df6IxbL/9Dkk=
+        bh=AB2Veo0ifNebcRcOL1ytt2gp+aiTiH3Sf5xY6qaSWgQ=;
+        b=hteSdQFHbkx/KaSis005MSh1PJMc7PZd4hs+RqmLN9/JY7orduJyueQQugva8kI1ga
+         2vjuwuEhVZcRNSuoxD9+oo35h7LboJmloaCGUCtkhcmaaTwzTlXlWyqiVY6Wh4uoC2pa
+         MIVKZWRDd2SR9S5zjIJLx8xMuxqjRzT1E1EZNYfYaQBpU1Oj8901H0QiA/DHCcfiuG/+
+         0Hp0I6thTFM6R5H60DdO2m1xjtIgA/09J7LprG8Kc38E/B1/kiFls7wU2WnLnj8S15Z/
+         bml62UryxdnqVFSme7JiiPvyQ0iy0dr5ofmRw0btJtEO9JVTD4VPJbQFcR0/MxQ+GI6h
+         NUWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737720085; x=1738324885;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZG7JEH3gSju1VydKP45xEoqkmeQzG5Nz2nBw/4zt1JY=;
-        b=GYK27V9ueMwQpMjKMG9YechbmYav7t5zlVPe7dzNuNk193GjyyfAndzMDei4v0/u7g
-         XFIdbzxsJoxVpq/Kkx+HJZivNxn4CJUAfEeBSwoL335t/V+gmvof7Z+w8y0xge87MRrd
-         0evMAWyZmQ0Wkwbm3grP3y31GBlSfRxJApMlJ1O9RUnZ71yjhjJcIYv3Jz2VFB2cCzx+
-         K19ddlia0Y6xroOJw12eqz6UBogKRXsW5aAO2/aVJPYYZOYTi9OzBtSzOvePsKMxFTjQ
-         dfneW4HxW1exv6glkR/y1eo2te3HaXVqigJuhDD1OA0AhiDxkLXIeCML/GnTVnK2Qezp
-         9ezg==
-X-Gm-Message-State: AOJu0YyCl+lYyKYf+bDhzSsFh6vj3ECadkMyOnaSr1XpS+yKBb+ZjEEQ
-	xd5hC8naNXKHDcA0C9Xd+tUI8/2U6QWhpI1DJpKF88wDb/T1DS/+isWO1Cz/qVw9iJHl1frB1VU
-	C
-X-Gm-Gg: ASbGnctehdgaCPpvBKCYoVXM7ylH6SbrP7ZVhNtOtDB6FS2YbYQU+nh115YeWQCZGrF
-	cIjkJs+eeOEWb8r3G8SYGb/m3ZSNSvcXEdza116sAJ/BD1Ou3ZkJAhv4Dd8oVlXAVWYfctrt69/
-	v+/k5tI8QDjbuMdowu8qZiwdniUUdaMBA42aGS5Y9WLFEU3ikuc8dm6Pi4hCByb5bdGjqSs3RWN
-	pM9r+Yva9ZqY1ql2L4pvbnlz+GGO6HfmSHWaRzPhX0SxxmJuP3Eo63YbIyBTSjL4FWsvJZyir4z
-	5m4WnwtqGbSfACA=
-X-Google-Smtp-Source: AGHT+IGwobbZw6n/IuGjK/JSvPcW4EXd/vH/ht5HiCBUBeIfVlLQYJB4jj+811xsVLL8IgmHXb0e+g==
-X-Received: by 2002:a17:907:9408:b0:aa6:a87e:f2e1 with SMTP id a640c23a62f3a-ab38b4b96d0mr2693767166b.56.1737720085229;
-        Fri, 24 Jan 2025 04:01:25 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 4/5] iommu/vtd: cleanup MAP_SINGLE_DEVICE and related code
-Date: Fri, 24 Jan 2025 13:01:10 +0100
-Message-ID: <20250124120112.56678-5-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20250124120112.56678-1-roger.pau@citrix.com>
-References: <20250124120112.56678-1-roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1737723030; x=1738327830;
+        h=content-transfer-encoding:mime-version:message-id:date:user-agent
+         :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=AB2Veo0ifNebcRcOL1ytt2gp+aiTiH3Sf5xY6qaSWgQ=;
+        b=QVfH0/i0PrZzzlbjKwyoQhDJTqL6Mhv6YhHmMuz48xUQTWFzAbYj6Z4/RRnJu75r43
+         FViiB+PRHZdzXLeApQLkGYiZhneGipeQAF+0XVxHZMWyCnqR8lrTNCS0YfG76WMeVPxD
+         Mx3CScFEQyiHURTPvdh0r2VhgO9pkc7ODIPksiwzmyG6pcQUSP7YrmbjA1FqGYdtNJ9p
+         L6X1cc5FvIsQZwCxa16Zuh99gLYuQVN8PAvSAgcKqjCrRJnRAkNpRYZuqfIqSmEMUPAX
+         31tKTNMQ+0qAR08yEGuN+wNBQT+0yib8OpTBtTogz10Ji2YAaSW7O0ysawjrhXgTXbI/
+         jGyw==
+X-Forwarded-Encrypted: i=1; AJvYcCWrdn7ETFmSuajYDFKiApbSve6hxDQFMdgfTSWXWFfY1bB4zqK9u2IucT2k7VdysU7dQ3J+EFpcHmU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywpkv037ZtRlsdY6N8IY61P7dwGq1l3JvtTlJ2uaUu8QGJEigPL
+	XLcd/dSbcya/YojRUnasrkIJrCWMw7J22BCgiEM+GR3YYdYkgomY7qXyuNwPDCQ=
+X-Gm-Gg: ASbGncsHfd1BLvvQSYstTjxSFp+PEmPgl4q/F4Md1qKrpMgolQXfWsY8nm+DPgYbIti
+	GUyllPUpg/nrP4xbPhwDngR3oamuQWN7EfYJGa7PXLjDzKXA6Q8GT6B9vWJiL+vWPraIjftz7Vv
+	UG4g4hrNxNCpMj2MAGZDklqvJnIfTh3C41zACa8T/LkpLg4AgeruAqj41twO9Y3/rW2ZfLJrEBu
+	mXJFIGdHMZ6uzvi9A+bbdTV/UfR/kpJniKTM8PqJrWklJMAVXuYGG383w/9uTrrNYTkc2+bhvMq
+	n1I=
+X-Google-Smtp-Source: AGHT+IHgpCErm6J9FACp/DlMJmoU6m0AQvWBem6CobohmkoE2PSx9F3d28v8z9FWDQeB/0B9Gf2dDQ==
+X-Received: by 2002:a05:6402:4403:b0:5da:b47:1092 with SMTP id 4fb4d7f45d1cf-5db7d2f9b01mr25474703a12.10.1737723030120;
+        Fri, 24 Jan 2025 04:50:30 -0800 (PST)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org,  Peter Maydell <peter.maydell@linaro.org>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  qemu-arm@nongnu.org,  Igor Mammedov
+ <imammedo@redhat.com>,  kvm@vger.kernel.org,  qemu-ppc@nongnu.org,
+  qemu-riscv@nongnu.org,  David Hildenbrand <david@redhat.com>,
+  qemu-s390x@nongnu.org,  xen-devel@lists.xenproject.org,  Richard
+ Henderson <richard.henderson@linaro.org>
+Subject: Re: [PATCH 03/20] gdbstub: Check for TCG before calling tb_flush()
+In-Reply-To: <20250123234415.59850-4-philmd@linaro.org> ("Philippe
+	=?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Fri, 24 Jan 2025 00:43:57
+ +0100")
+References: <20250123234415.59850-1-philmd@linaro.org>
+	<20250123234415.59850-4-philmd@linaro.org>
+User-Agent: mu4e 1.12.8; emacs 29.4
+Date: Fri, 24 Jan 2025 12:50:28 +0000
+Message-ID: <878qr0jrzf.fsf@draig.linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Teddy Astie <teddy.astie@vates.tech>
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
 
-This flag was only used in case cx16 is not available, as those code paths no
-longer exist, this flag now does basically nothing.
+> Use the tcg_enabled() check so the compiler can elide
+> the call when TCG isn't available, allowing to remove
+> the tb_flush() stub.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/drivers/passthrough/vtd/iommu.c | 12 +++---------
- xen/drivers/passthrough/vtd/vtd.h   |  5 ++---
- 2 files changed, 5 insertions(+), 12 deletions(-)
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index b0963bfcf74e..9d7a9977a6a6 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -1695,15 +1695,9 @@ static int domain_context_mapping(struct domain *domain, u8 devfn,
-         break;
-     }
- 
--    if ( domain != pdev->domain && pdev->domain != dom_io )
--    {
--        if ( pdev->domain->is_dying )
--            mode |= MAP_OWNER_DYING;
--        else if ( drhd &&
--                  !any_pdev_behind_iommu(pdev->domain, pdev, drhd->iommu) &&
--                  !pdev->phantom_stride )
--            mode |= MAP_SINGLE_DEVICE;
--    }
-+    if ( domain != pdev->domain && pdev->domain != dom_io &&
-+         pdev->domain->is_dying )
-+        mode |= MAP_OWNER_DYING;
- 
-     switch ( pdev->type )
-     {
-diff --git a/xen/drivers/passthrough/vtd/vtd.h b/xen/drivers/passthrough/vtd/vtd.h
-index 8aeff8c1f287..b95124517bd3 100644
---- a/xen/drivers/passthrough/vtd/vtd.h
-+++ b/xen/drivers/passthrough/vtd/vtd.h
-@@ -28,9 +28,8 @@
-  */
- #define MAP_WITH_RMRR         (1u << 0)
- #define MAP_OWNER_DYING       (1u << 1)
--#define MAP_SINGLE_DEVICE     (1u << 2)
--#define MAP_ERROR_RECOVERY    (1u << 3)
--#define UNMAP_ME_PHANTOM_FUNC (1u << 4)
-+#define MAP_ERROR_RECOVERY    (1u << 2)
-+#define UNMAP_ME_PHANTOM_FUNC (1u << 3)
- 
- /* Allow for both IOAPIC and IOSAPIC. */
- #define IO_xAPIC_route_entry IO_APIC_route_entry
--- 
-2.46.0
-
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
