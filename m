@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41394C0218B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 294F2C0218D
 	for <xen-devel@archiver.kernel.org>; Fri, 24 Jan 2025 12:01:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.876702.1287052 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.876705.1287082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbINE-0007cA-Lg; Fri, 24 Jan 2025 12:01:20 +0000
+	id 1tbINL-0008Nd-AE; Fri, 24 Jan 2025 12:01:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 876702.1287052; Fri, 24 Jan 2025 12:01:20 +0000
+Received: by outflank-mailman (output) from mailman id 876705.1287082; Fri, 24 Jan 2025 12:01:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbINE-0007c3-ID; Fri, 24 Jan 2025 12:01:20 +0000
-Received: by outflank-mailman (input) for mailman id 876702;
- Fri, 24 Jan 2025 12:01:19 +0000
+	id 1tbINL-0008NW-7D; Fri, 24 Jan 2025 12:01:27 +0000
+Received: by outflank-mailman (input) for mailman id 876705;
+ Fri, 24 Jan 2025 12:01:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AkuS=UQ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tbIND-0007bK-Oo
- for xen-devel@lists.xenproject.org; Fri, 24 Jan 2025 12:01:19 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
+ id 1tbINJ-0007bK-AC
+ for xen-devel@lists.xenproject.org; Fri, 24 Jan 2025 12:01:25 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eb1fe049-da4a-11ef-99a4-01e77a169b0f;
- Fri, 24 Jan 2025 13:01:18 +0100 (CET)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa679ad4265so621851966b.0
- for <xen-devel@lists.xenproject.org>; Fri, 24 Jan 2025 04:01:18 -0800 (PST)
+ id ee63f287-da4a-11ef-99a4-01e77a169b0f;
+ Fri, 24 Jan 2025 13:01:23 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aa679ad4265so621868266b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Jan 2025 04:01:23 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6760fbfbcsm117545266b.153.2025.01.24.04.01.15
+ a640c23a62f3a-ab675e67814sm118167666b.74.2025.01.24.04.01.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 04:01:16 -0800 (PST)
+ Fri, 24 Jan 2025 04:01:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,79 +46,235 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb1fe049-da4a-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: ee63f287-da4a-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1737720077; x=1738324877; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/7ZDQWGxPFGr8shs6Rg8vH5vtxlwu8uwF+5wx6Pt1eI=;
-        b=IotB79FmXRi/GlvQtqrohcgpn4p4UDUFj+EpBBQPQ/YhZYAuOIc9tlBvO/QjTUlERI
-         WjxrWlRFKV4oIxyPStDQiXsdf55cjP5yBfG4ISdLqXDs4l22cy9+/HseMNd/gtSqmhXc
-         JQFxz2aXYsdXlNJM5L5q8m9WuMHhSdCRGWm3M=
+        d=citrix.com; s=google; t=1737720083; x=1738324883; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DVt6Rj0kKo02aeVOLnGhddbw+hEtfAmvfyBCodPtZ6g=;
+        b=JjODsrszv1U9dsAa9ZtCSc+3fGm8uAtr9j//kzUgExAbu0YBHq76aHArgngrDpcPJY
+         oioCuMphviKhZZTgQ/Q8a42j7EBwgpgmY3LD7NSPSKWFVTaXUUraXHoj1QQ6cUOcqkQP
+         69G0skxDdJwgaeSN60eoPF7aZniL/+VDw8hsc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737720077; x=1738324877;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/7ZDQWGxPFGr8shs6Rg8vH5vtxlwu8uwF+5wx6Pt1eI=;
-        b=Ig9vsyP0ONWpWRl4Smr/D5hs1goqgzgEdk6kvF6Cc4SyNgLU+WpPaLoiyhsGPg9hju
-         SIIdhTkaJU3y/P+Pb6KMOKdEd9wi/RJvVYlN5ko1jWbfjPsO6ze91efC0cPiVI6NRd1y
-         cI+SxCWz1a71wRbFxy7FMkV53WKX3g/BQZlrOlk8mGB4qarS+ZyEdVOvHwOmgr/DtWVm
-         uNi5pNJ4TI9krp/hy4cxX9eaSSQNAiDWwDq310q4/Z5hJhHI7rJsA4GAhXv3hLgn9d+S
-         EZSf9c5apHEywDn8YgndVTpqIt4LRzwbMtm8ifAtJ8POP+ooVjGJ67I8y5dXngunpsTi
-         NUAQ==
-X-Gm-Message-State: AOJu0Yw8338SLNO627M6Xjy4+Q9BAQ1TLkJCQgsvhCJJsvHxtIyZfarz
-	7owPF9GBRy/rLJuZP8LYuFLxIpvQgu2r+lMk58M0Dsm0gqjlZ+Wro/gBUpJnTN/IrIpnIutteAT
-	+
-X-Gm-Gg: ASbGnct79/Vo8Pg8ojxw50AiEOyK5mEQ30KlCsA0o8HFT2KOtZ6LKw+CAAdxHSveoVM
-	J99xHnExqsHW67JZTtYfGxOXO8jprSdLG2++cusLJKKkxu2SWPtDI0N5R3Dab79rxQGWv6tk4as
-	X2pOQc5DlMsSMFUc8oSkH6Vq9gU8QT4kmXYgW6mN3ZCHjV9QxOknLVfyyFVPAzXm/r0wvQiAQSw
-	M2REmS8vwq9gn8YMPZeK6KcqpgaKGisAIPrpe9aKZTj+D++6jnADcG0i5AWT5/8Gzx2NXX5hOIA
-	sC18Q5zB/zaShu8=
-X-Google-Smtp-Source: AGHT+IH9MzzNh5+IlDH4FLutc3tC/X55HB6u8bJWc/55jopMFhljDbrP8TKtVrPXbeBIwhctunMkIw==
-X-Received: by 2002:a17:906:f584:b0:ab3:a2f9:d977 with SMTP id a640c23a62f3a-ab67466fca8mr227813866b.22.1737720077191;
-        Fri, 24 Jan 2025 04:01:17 -0800 (PST)
+        d=1e100.net; s=20230601; t=1737720083; x=1738324883;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=DVt6Rj0kKo02aeVOLnGhddbw+hEtfAmvfyBCodPtZ6g=;
+        b=MurSlX3vyiLQv5si8Euj4ULVsE1AbTer5htVUIINxhgfH+VVpmqj+EBM5LE++Opqyr
+         /LS9cFm1KaRrVnGkmAqPQe9a6HMZi5cvGjAwORXenHNV6gy4M8eRZc9lEwnETt6adHoo
+         9oxvSP36Mn/pg+V6pqGheGTL9ONZ3iqdrZfJELiTW75uPm2ygwFIOOlAvECy2FtFWGZ/
+         Z2rp5sVQZ1YZdsfkQdWm4HgHIciZUl3KpSUr6owKDepGdyWeiFZgcQGUgddrOGjefsb9
+         fpSYUEFnZ6OUMlSY6YWNl1BcVYdrO5dA+5lI3DZj2CYgI+Rk3kkub7H0vTpNkflfa+Mo
+         0Atg==
+X-Gm-Message-State: AOJu0YyddWyrRp+7WvXOyJ2koWDdRsixLTpsoYjqxMJ9fyPLV7e1Yi5K
+	02BPFp9ugSz/GORbdROQ0HqiTsMjCQ2vim8oWadhHduGwfgYthpxIm8rTQ2v/O6VlvwwGW3QC0g
+	n
+X-Gm-Gg: ASbGncvHqKIYM/ikYPd4FjdJQMCOq+sh+n6d+VNULrueC5wDRAXW/Tf0v8cM2+cczXW
+	DCpdlzYta6AcQlaHE9ll3aVAKpZ7zu/r5GDw1F4C0SMzOsDY09RIW848nTHu6yJsnLQCtPRFbR4
+	9/348KnsCB2YjzDv87o3RWvq62Y53NtUXgJAUm/3zm3c6VRmURBWmn/A4iR27gq6r/vf7JU5fcQ
+	9zD+weAvBHQqbW0J+/F83EPoU5VRGGFTDmEA5EPKOADZMTh7DcZ9CRVQo5f8e/UnduXT83ouy7c
+	Bdv1MDRf8I0hz7Q=
+X-Google-Smtp-Source: AGHT+IGR5urwaiLF47OwHM87ZTumEm4WxfrMk8qLxpI+tZWW0hkbPvCEBF+0lO3eKM6AFRu5rh7bEA==
+X-Received: by 2002:a17:907:3ea0:b0:aa6:88a2:cfbd with SMTP id a640c23a62f3a-ab662a001f0mr501155566b.22.1737720082614;
+        Fri, 24 Jan 2025 04:01:22 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
+Cc: Teddy Astie <teddy.astie@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 0/5] x86/iommu: make CX16 mandatory for IOMMU
-Date: Fri, 24 Jan 2025 13:01:06 +0100
-Message-ID: <20250124120112.56678-1-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 3/5] x86/iommu: remove non-CX16 logic from DMA remapping
+Date: Fri, 24 Jan 2025 13:01:09 +0100
+Message-ID: <20250124120112.56678-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20250124120112.56678-1-roger.pau@citrix.com>
+References: <20250124120112.56678-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+From: Teddy Astie <teddy.astie@vates.tech>
 
-The following series is the original CX16 series sent by Teddy, with the
-CX16 checks split into a separate patch, plus one extra patch to switch
-AMD-Vi to use CMPXCHG16B when updating Interrupt Remapping Entries.
+As CX16 support is mandatory for IOMMU usage, the checks for CX16 in the
+DMA remapping code are stale.  Remove them together with the associated
+code introduced in case CX16 was not available.
 
-Note that last patch to use CMPXCHG16B fixes a real bug with AMD
-hardware.
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/drivers/passthrough/amd/iommu_map.c | 42 +++++----------
+ xen/drivers/passthrough/vtd/iommu.c     | 71 ++++++-------------------
+ 2 files changed, 31 insertions(+), 82 deletions(-)
 
-Thanks, Roger.
-
-Roger Pau Monne (1):
-  iommu/amd: atomically update IRTE
-
-Teddy Astie (4):
-  x86/iommu: check for CMPXCHG16B when enabling IOMMU
-  iommu/vtd: remove non-CX16 logic from interrupt remapping
-  x86/iommu: remove non-CX16 logic from DMA remapping
-  iommu/vtd: cleanup MAP_SINGLE_DEVICE and related code
-
- xen/drivers/passthrough/amd/iommu_intr.c    | 88 ++++++++++----------
- xen/drivers/passthrough/amd/iommu_map.c     | 42 ++++------
- xen/drivers/passthrough/amd/pci_amd_iommu.c |  6 ++
- xen/drivers/passthrough/vtd/intremap.c      | 88 +++++++-------------
- xen/drivers/passthrough/vtd/iommu.c         | 90 +++++++--------------
- xen/drivers/passthrough/vtd/vtd.h           |  5 +-
- 6 files changed, 121 insertions(+), 198 deletions(-)
-
+diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
+index 1f0e4167566b..dde393645a62 100644
+--- a/xen/drivers/passthrough/amd/iommu_map.c
++++ b/xen/drivers/passthrough/amd/iommu_map.c
+@@ -167,15 +167,14 @@ int amd_iommu_set_root_page_table(struct amd_iommu_dte *dte,
+ {
+     bool valid = flags & SET_ROOT_VALID;
+ 
+-    if ( dte->v && dte->tv &&
+-         (cpu_has_cx16 || (flags & SET_ROOT_WITH_UNITY_MAP)) )
++    if ( dte->v && dte->tv )
+     {
+         union {
+             struct amd_iommu_dte dte;
+             uint64_t raw64[4];
+             __uint128_t raw128[2];
+         } ldte = { .dte = *dte };
+-        __uint128_t old = ldte.raw128[0];
++        __uint128_t res, old = ldte.raw128[0];
+         int ret = 0;
+ 
+         ldte.dte.domain_id = domain_id;
+@@ -185,33 +184,20 @@ int amd_iommu_set_root_page_table(struct amd_iommu_dte *dte,
+         ldte.dte.paging_mode = paging_mode;
+         ldte.dte.v = valid;
+ 
+-        if ( cpu_has_cx16 )
+-        {
+-            __uint128_t res = cmpxchg16b(dte, &old, &ldte.raw128[0]);
++        res = cmpxchg16b(dte, &old, &ldte.raw128[0]);
+ 
+-            /*
+-             * Hardware does not update the DTE behind our backs, so the
+-             * return value should match "old".
+-             */
+-            if ( res != old )
+-            {
+-                printk(XENLOG_ERR
+-                       "Dom%d: unexpected DTE %016lx_%016lx (expected %016lx_%016lx)\n",
+-                       domain_id,
+-                       (uint64_t)(res >> 64), (uint64_t)res,
+-                       (uint64_t)(old >> 64), (uint64_t)old);
+-                ret = -EILSEQ;
+-            }
+-        }
+-        else /* Best effort, updating domain_id last. */
++        /*
++         * Hardware does not update the DTE behind our backs, so the
++         * return value should match "old".
++         */
++        if ( res != old )
+         {
+-            uint64_t *ptr = (void *)dte;
+-
+-            write_atomic(ptr + 0, ldte.raw64[0]);
+-            /* No barrier should be needed between these two. */
+-            write_atomic(ptr + 1, ldte.raw64[1]);
+-
+-            ret = 1;
++            printk(XENLOG_ERR
++                   "Dom%d: unexpected DTE %016lx_%016lx (expected %016lx_%016lx)\n",
++                   domain_id,
++                   (uint64_t)(res >> 64), (uint64_t)res,
++                   (uint64_t)(old >> 64), (uint64_t)old);
++            ret = -EILSEQ;
+         }
+ 
+         return ret;
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index 3daedc4f5593..b0963bfcf74e 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -1485,7 +1485,7 @@ int domain_context_mapping_one(
+ {
+     struct domain_iommu *hd = dom_iommu(domain);
+     struct context_entry *context, *context_entries, lctxt;
+-    __uint128_t old;
++    __uint128_t res, old;
+     uint64_t maddr;
+     uint16_t seg = iommu->drhd->segment, prev_did = 0;
+     struct domain *prev_dom = NULL;
+@@ -1583,55 +1583,23 @@ int domain_context_mapping_one(
+         ASSERT(!context_fault_disable(lctxt));
+     }
+ 
+-    if ( cpu_has_cx16 )
+-    {
+-        __uint128_t res = cmpxchg16b(context, &old, &lctxt.full);
+-
+-        /*
+-         * Hardware does not update the context entry behind our backs,
+-         * so the return value should match "old".
+-         */
+-        if ( res != old )
+-        {
+-            if ( pdev )
+-                check_cleanup_domid_map(domain, pdev, iommu);
+-            printk(XENLOG_ERR
+-                   "%pp: unexpected context entry %016lx_%016lx (expected %016lx_%016lx)\n",
+-                   &PCI_SBDF(seg, bus, devfn),
+-                   (uint64_t)(res >> 64), (uint64_t)res,
+-                   (uint64_t)(old >> 64), (uint64_t)old);
+-            rc = -EILSEQ;
+-            goto unlock;
+-        }
+-    }
+-    else if ( !prev_dom || !(mode & MAP_WITH_RMRR) )
+-    {
+-        context_clear_present(*context);
+-        iommu_sync_cache(context, sizeof(*context));
++    res = cmpxchg16b(context, &old, &lctxt.full);
+ 
+-        write_atomic(&context->hi, lctxt.hi);
+-        /* No barrier should be needed between these two. */
+-        write_atomic(&context->lo, lctxt.lo);
+-    }
+-    else /* Best effort, updating DID last. */
++    /*
++     * Hardware does not update the context entry behind our backs,
++     * so the return value should match "old".
++     */
++    if ( res != old )
+     {
+-         /*
+-          * By non-atomically updating the context entry's DID field last,
+-          * during a short window in time TLB entries with the old domain ID
+-          * but the new page tables may be inserted.  This could affect I/O
+-          * of other devices using this same (old) domain ID.  Such updating
+-          * therefore is not a problem if this was the only device associated
+-          * with the old domain ID.  Diverting I/O of any of a dying domain's
+-          * devices to the quarantine page tables is intended anyway.
+-          */
+-        if ( !(mode & (MAP_OWNER_DYING | MAP_SINGLE_DEVICE)) )
+-            printk(XENLOG_WARNING VTDPREFIX
+-                   " %pp: reassignment may cause %pd data corruption\n",
+-                   &PCI_SBDF(seg, bus, devfn), prev_dom);
+-
+-        write_atomic(&context->lo, lctxt.lo);
+-        /* No barrier should be needed between these two. */
+-        write_atomic(&context->hi, lctxt.hi);
++        if ( pdev )
++            check_cleanup_domid_map(domain, pdev, iommu);
++        printk(XENLOG_ERR
++                "%pp: unexpected context entry %016lx_%016lx (expected %016lx_%016lx)\n",
++                &PCI_SBDF(seg, bus, devfn),
++                (uint64_t)(res >> 64), (uint64_t)res,
++                (uint64_t)(old >> 64), (uint64_t)old);
++        rc = -EILSEQ;
++        goto unlock;
+     }
+ 
+     iommu_sync_cache(context, sizeof(struct context_entry));
+@@ -2702,12 +2670,7 @@ static int __init cf_check vtd_setup(void)
+             iommu_intremap = iommu_intremap_off;
+ 
+ #ifndef iommu_intpost
+-        /*
+-         * We cannot use posted interrupt if X86_FEATURE_CX16 is
+-         * not supported, since we count on this feature to
+-         * atomically update 16-byte IRTE in posted format.
+-         */
+-        if ( !cap_intr_post(iommu->cap) || !iommu_intremap || !cpu_has_cx16 )
++        if ( !cap_intr_post(iommu->cap) || !iommu_intremap )
+             iommu_intpost = false;
+ #endif
+ 
 -- 
 2.46.0
 
