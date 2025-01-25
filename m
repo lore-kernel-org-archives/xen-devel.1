@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E861C0218C
-	for <xen-devel@archiver.kernel.org>; Sat, 25 Jan 2025 18:14:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.877005.1287200 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB8AC0218E
+	for <xen-devel@archiver.kernel.org>; Sat, 25 Jan 2025 18:14:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.877008.1287220 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbkfF-0004aw-SZ; Sat, 25 Jan 2025 18:13:49 +0000
+	id 1tbkfR-00058H-9L; Sat, 25 Jan 2025 18:14:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 877005.1287200; Sat, 25 Jan 2025 18:13:49 +0000
+Received: by outflank-mailman (output) from mailman id 877008.1287220; Sat, 25 Jan 2025 18:14:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tbkfF-0004ap-Pp; Sat, 25 Jan 2025 18:13:49 +0000
-Received: by outflank-mailman (input) for mailman id 877005;
- Sat, 25 Jan 2025 18:13:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tbkfR-00058A-6Q; Sat, 25 Jan 2025 18:14:01 +0000
+Received: by outflank-mailman (input) for mailman id 877008;
+ Sat, 25 Jan 2025 18:14:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=X0T4=UR=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1tbkfE-0004aj-Kf
- for xen-devel@lists.xenproject.org; Sat, 25 Jan 2025 18:13:48 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1e3caa5b-db48-11ef-a0e5-8be0dac302b0;
- Sat, 25 Jan 2025 19:13:46 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-436326dcb1cso20958985e9.0
- for <xen-devel@lists.xenproject.org>; Sat, 25 Jan 2025 10:13:46 -0800 (PST)
+ id 1tbkfQ-000565-47
+ for xen-devel@lists.xenproject.org; Sat, 25 Jan 2025 18:14:00 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 247d6791-db48-11ef-99a4-01e77a169b0f;
+ Sat, 25 Jan 2025 19:13:57 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4361c705434so22039945e9.3
+ for <xen-devel@lists.xenproject.org>; Sat, 25 Jan 2025 10:13:57 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd48b000sm70555435e9.20.2025.01.25.10.13.43
+ 5b1f17b1804b1-438bd4c75c0sm68201815e9.31.2025.01.25.10.13.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 25 Jan 2025 10:13:44 -0800 (PST)
+ Sat, 25 Jan 2025 10:13:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1e3caa5b-db48-11ef-a0e5-8be0dac302b0
+X-Inumbo-ID: 247d6791-db48-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1737828826; x=1738433626; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=moGB9VY6BYgn3pI64/Eq1yuXgBP6nQhiwk+gTGBd7L0=;
-        b=sFHxu4AFvNC9sNk6XZu1+U7thV0oKG/TE8O6eQoiQTPTrowRm8SapVL8g0Gz2B6okJ
-         z0tBRoBNhhY5Fsuf49qSwrVvoHvtBufFCepdKZ930mscVUdEsMjdNerikwUkopYxT6Ij
-         WBfXxRN6jYkE6vTeHsiF/sVxQHJM8Xp6TiWRdDKRzsO5X3yT5lYtSCuUZGn8AsRzgGaE
-         Pn1LySNwjAhh9YHKblJzGM/VhivFDJH/9SOwCtNCclj0G/GMKr5dfB4Pdhrm0nAEoxVI
-         ONn9AcHpSc3k27W4xS/gh8FKZznFMjpMpXFw80YvwfNja7OdTgPnNrRZgFf59GuQoSI2
-         F0Dw==
+        d=linaro.org; s=google; t=1737828836; x=1738433636; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+D9ecSNssEoyInsTWPhPYbcbkHeV5ELbKuxuFIHXnAU=;
+        b=N7dRkc6p0L9U/te9/9bQ7dDkBTWvo2AePP0WNz86xrDKWDkyunA50kwama/VhS4KkM
+         u9WtPAyGqenbpHdjXvnlBnVtApy0uj52w5ADLHweKFC0GEOx73qNLhDOYmnJquFloZZT
+         0cEHqAKgG1se7H9cKre4cfNvYhR/gqs7Jve88fUaXmMiNogaYOP2MV0wipdj0/cDQGSP
+         1HMeU009HUK+aLfLLk+KM+vhQgsBt9d03JgQ+ENpi8c24gO+fgo0su3Zr8hd54vBW4Pv
+         bH3rjtASmfcb6JBfB//sxw5LxW/2OxQVcfYgNh55bW/cka3jKZ2TwGDkJi9D3yQzaFZY
+         m0Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737828826; x=1738433626;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=moGB9VY6BYgn3pI64/Eq1yuXgBP6nQhiwk+gTGBd7L0=;
-        b=aBNY+OR3DtgNZw5qu7amU68cV60qYO7uQkVdhNFQZRXJmwBBF1LA43fLfxeaGbbKsk
-         dZFGIPs4sRGejPkNJR1U8s5lo7jAgIbKWCRwyX0Knf3VLv19gt4JYMy0haziiS378hF+
-         a8WALfRGo05hCJwSRvbAdDqzSB+7ehwLpD8DUYsBxv06afEaf3+GIVAvq36TOBZ/O90E
-         bVYTPnQ2RvoZWr+wXZ+sTxX1tpabv5Zk/f6GVfKt4vlcQ6DXwdx+dlmi9yScJp6IxuE0
-         O6HyfTM25baMSk84pNVvretAYx5cEYNMvl1HJYxtdstmaV/wID3VoDI+0xqSCvfKiKmp
-         ce+A==
-X-Forwarded-Encrypted: i=1; AJvYcCXT5m+o84cam8d2AqgH1uX6R80HAMxiU+X7KemLrS+KwZ+3tVf5JQp5kpf2yg9EtqlvhKaHdYIoF4I=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxB7Yw45F8QwvBWmCAmf558Z82N/dBFGTqQikbNRs4U14lJq+l/
-	kVNYwE9UbJhw6vXBQU13iutp6Zw19O4ntqKCAZe2vU7TEnesTvHFF0fWCUfil6s=
-X-Gm-Gg: ASbGncvIh3Go2y8uIV4QhT46nrDmuSyizUsIoXmqBpbkG2AShVl2DPkcVbD1IJ+yDso
-	Gngl0GcSI9SGDr20KA340gyKCQdyTHRqrHnZ48CIJ1IXmFkKeyFgu88cTDDHweBrXCQc1wueRP1
-	etpjnwa3TtTPlYTR4beNTxHF0RLwi9w5GrX68wKZUH30+TNhAwAaWZBaAbRK90n6RRy+q9teYIr
-	NWnlyGN5I+Tq6BtNi7vkYbcXebVk3YNDF1kcjKOUOk1DEBJ7LGJiPjdtJ8TB3iyjgsCAQiUuwQD
-	EarPM5WfdC4m5f5VajRbqczyGX/KhCgyqbEHYRPTlrHvai6ISQFa+oN/sUjz
-X-Google-Smtp-Source: AGHT+IFFcuv4NbqWEewutKdT/4sas20HtAvh9/vbvnAdvh7QUUP5Q6Afr6fZs6XUltdZIWZYDYhKXA==
-X-Received: by 2002:a05:600c:1d07:b0:436:488f:50a with SMTP id 5b1f17b1804b1-438913ef4b7mr333870305e9.17.1737828825695;
-        Sat, 25 Jan 2025 10:13:45 -0800 (PST)
+        d=1e100.net; s=20230601; t=1737828836; x=1738433636;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+D9ecSNssEoyInsTWPhPYbcbkHeV5ELbKuxuFIHXnAU=;
+        b=oPCf0BwFQWGunizws6vrDn9aainlr4T4VSyA4/TT2mgbvtVPwHhNR5HvOkl83FlK5u
+         k19vX4rOFB5pcB5VNVGqwZtO2aevkOz81EGCmbvg0XWf6ZxeWqQkM/HcY3r2OIMO6TPn
+         eyEGd9/D1hzvZZfr4Rz5w0P2nHvgoRXcxSOX1d/YeW6Xj/C5RI4uJRJPPGkfgedyZ/4g
+         sdn99oFoBr1A5nOAUbO5FzKwBAdE3fhEnuku5sPfIdGwBHYhNvaFj9AljYhALXFzUilq
+         pqkmbiCQRWwLn8/HfL6kH0LmvKt4orbAwYx9wuwh6hKeRWw0mNzUpButWxHk/gJDmqJj
+         8MEA==
+X-Forwarded-Encrypted: i=1; AJvYcCXSxE/Mz8yNvwXdbi2ldxhPQu9oOOwFm/SEnhHUTrycrOACRpt1Z/jvuax0sJZmllVFQ+SL4zCOYaA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzLjl/b5jn3dcS1y/Xy+u/veYSdOazzIeqAXOV6bI9IHVZ9pN9G
+	HRJfV6oScHb5ep8DPopsIHlA6ulZJcLy9uc+Idp11Sgu+PPXLGj+jzJJQ9wpna8=
+X-Gm-Gg: ASbGncswr2Mx1QAltd1rhMTqQv0oYuR+XlqUxw0jOcHtK8TPJmRTLIACY7CPciJtuui
+	ETbsrWoneKVVzQ4hoiSFGbib+EYOGMK2tzqceIT6sx+Jd+Cc7sfEx9taONS7sysKEA8+exgiwV+
+	L0HBMnWZzxLF64Sqfay3UpPaB2NgR4QQ4z73hen587qMCaoJXGlJ0YJxNR9sxHgiMMRTheYHjX3
+	hni7oXSmJ5BMpmnsRl67VwdWxAW/ENlG7U/ZhQShDDopZq61/j0RWI7n8XweJFopvzOA+TrGhHR
+	bAgfFXjQP8eDvDaepsfRx9Rq/ns8fxSaOdDCPTUTGhMzLfdZjXvDSUGVHp1o
+X-Google-Smtp-Source: AGHT+IH3gG9oDbH+Yt++6e9axdywvxazaykwi7sr/Zo0cY2/uHyHOw51lxlnycmePra8xEH0EQ/Sbw==
+X-Received: by 2002:a05:600c:3b94:b0:434:9934:575 with SMTP id 5b1f17b1804b1-438913e02f8mr395787785e9.16.1737828836350;
+        Sat, 25 Jan 2025 10:13:56 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Yi Liu <yi.l.liu@intel.com>,
@@ -108,50 +109,88 @@ Cc: Yi Liu <yi.l.liu@intel.com>,
 	=?UTF-8?q?Cl=C3=A9ment=20Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
 	=?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 0/9] hw/sysbus/platform-bus: Introduce TYPE_DYNAMIC_SYS_BUS_DEVICE
-Date: Sat, 25 Jan 2025 19:13:34 +0100
-Message-ID: <20250125181343.59151-1-philmd@linaro.org>
+Subject: [PATCH 2/9] hw/sysbus: Declare QOM types using DEFINE_TYPES() macro
+Date: Sat, 25 Jan 2025 19:13:36 +0100
+Message-ID: <20250125181343.59151-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250125181343.59151-1-philmd@linaro.org>
+References: <20250125181343.59151-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Some SysBus devices can optionally be dynamically plugged onto
-the sysbus-platform-bus (then virtual guests are aware of
-mmio mapping and IRQs via device tree / ACPI rules).
+When multiple QOM types are registered in the same file,
+it is simpler to use the the DEFINE_TYPES() macro. In
+particular because type array declared with such macro
+are easier to review.
 
-This series makes these devices explicit by having them implement
-the DYNAMIC_SYS_BUS_DEVICE class, which only sets 'user_creatable'
-flag to %true but makes the codebase a bit clearer (IMHO, at least
-now we can grep for DYNAMIC_SYS_BUS_DEVICE).
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/core/sysbus.c | 39 +++++++++++++++++----------------------
+ 1 file changed, 17 insertions(+), 22 deletions(-)
 
-Philippe Mathieu-Daudé (9):
-  hw/sysbus: Use sizeof(BusState) in main_system_bus_create()
-  hw/sysbus: Declare QOM types using DEFINE_TYPES() macro
-  hw/sysbus: Introduce TYPE_DYNAMIC_SYS_BUS_DEVICE
-  hw/vfio: Have VFIO_PLATFORM devices inherit from
-    DYNAMIC_SYS_BUS_DEVICE
-  hw/display: Have RAMFB device inherit from DYNAMIC_SYS_BUS_DEVICE
-  hw/i386: Have X86_IOMMU devices inherit from DYNAMIC_SYS_BUS_DEVICE
-  hw/net: Have eTSEC device inherit from DYNAMIC_SYS_BUS_DEVICE
-  hw/tpm: Have TPM TIS sysbus device inherit from DYNAMIC_SYS_BUS_DEVICE
-  hw/xen: Have legacy Xen backend inherit from DYNAMIC_SYS_BUS_DEVICE
-
- include/hw/sysbus.h           |  2 ++
- include/hw/xen/xen_pvdev.h    |  3 +-
- hw/core/sysbus.c              | 53 ++++++++++++++++++++---------------
- hw/display/ramfb-standalone.c |  3 +-
- hw/i386/amd_iommu.c           |  2 --
- hw/i386/intel_iommu.c         |  2 --
- hw/i386/x86-iommu.c           |  2 +-
- hw/net/fsl_etsec/etsec.c      |  4 +--
- hw/tpm/tpm_tis_sysbus.c       |  3 +-
- hw/vfio/amd-xgbe.c            |  2 --
- hw/vfio/calxeda-xgmac.c       |  2 --
- hw/vfio/platform.c            |  4 +--
- hw/xen/xen-legacy-backend.c   |  7 ++---
- 13 files changed, 42 insertions(+), 47 deletions(-)
-
+diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+index f713bbfe04f..306f98406c0 100644
+--- a/hw/core/sysbus.c
++++ b/hw/core/sysbus.c
+@@ -80,13 +80,6 @@ static void system_bus_class_init(ObjectClass *klass, void *data)
+     k->get_fw_dev_path = sysbus_get_fw_dev_path;
+ }
+ 
+-static const TypeInfo system_bus_info = {
+-    .name = TYPE_SYSTEM_BUS,
+-    .parent = TYPE_BUS,
+-    .instance_size = sizeof(BusState),
+-    .class_init = system_bus_class_init,
+-};
+-
+ /* Check whether an IRQ source exists */
+ bool sysbus_has_irq(SysBusDevice *dev, int n)
+ {
+@@ -306,15 +299,6 @@ static void sysbus_device_class_init(ObjectClass *klass, void *data)
+     k->user_creatable = false;
+ }
+ 
+-static const TypeInfo sysbus_device_type_info = {
+-    .name = TYPE_SYS_BUS_DEVICE,
+-    .parent = TYPE_DEVICE,
+-    .instance_size = sizeof(SysBusDevice),
+-    .abstract = true,
+-    .class_size = sizeof(SysBusDeviceClass),
+-    .class_init = sysbus_device_class_init,
+-};
+-
+ static BusState *main_system_bus;
+ 
+ static void main_system_bus_create(void)
+@@ -337,10 +321,21 @@ BusState *sysbus_get_default(void)
+     return main_system_bus;
+ }
+ 
+-static void sysbus_register_types(void)
+-{
+-    type_register_static(&system_bus_info);
+-    type_register_static(&sysbus_device_type_info);
+-}
++static const TypeInfo sysbus_types[] = {
++    {
++        .name           = TYPE_SYSTEM_BUS,
++        .parent         = TYPE_BUS,
++        .instance_size  = sizeof(BusState),
++        .class_init     = system_bus_class_init,
++    },
++    {
++        .name           = TYPE_SYS_BUS_DEVICE,
++        .parent         = TYPE_DEVICE,
++        .instance_size  = sizeof(SysBusDevice),
++        .abstract       = true,
++        .class_size     = sizeof(SysBusDeviceClass),
++        .class_init     = sysbus_device_class_init,
++    },
++};
+ 
+-type_init(sysbus_register_types)
++DEFINE_TYPES(sysbus_types)
 -- 
 2.47.1
 
