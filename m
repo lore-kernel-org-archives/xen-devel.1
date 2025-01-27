@@ -4,52 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E65FC02188
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2025 12:53:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.877873.1288025 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4E3C0218C
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2025 12:57:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.877886.1288045 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcObk-0006Sv-46; Mon, 27 Jan 2025 12:52:52 +0000
+	id 1tcOgE-0007LP-Rt; Mon, 27 Jan 2025 12:57:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 877873.1288025; Mon, 27 Jan 2025 12:52:52 +0000
+Received: by outflank-mailman (output) from mailman id 877886.1288045; Mon, 27 Jan 2025 12:57:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcObk-0006So-1R; Mon, 27 Jan 2025 12:52:52 +0000
-Received: by outflank-mailman (input) for mailman id 877873;
- Mon, 27 Jan 2025 12:52:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rEBS=UT=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1tcObi-0006Ai-J5
- for xen-devel@lists.xenproject.org; Mon, 27 Jan 2025 12:52:50 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2060b.outbound.protection.outlook.com
- [2a01:111:f403:240a::60b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9b892487-dcad-11ef-99a4-01e77a169b0f;
- Mon, 27 Jan 2025 13:52:48 +0100 (CET)
-Received: from BL1PR13CA0450.namprd13.prod.outlook.com (2603:10b6:208:2c3::35)
- by SA1PR12MB8597.namprd12.prod.outlook.com (2603:10b6:806:251::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.21; Mon, 27 Jan
- 2025 12:52:42 +0000
-Received: from BN2PEPF000044A7.namprd04.prod.outlook.com
- (2603:10b6:208:2c3:cafe::b) by BL1PR13CA0450.outlook.office365.com
- (2603:10b6:208:2c3::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.14 via Frontend Transport; Mon,
- 27 Jan 2025 12:52:42 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN2PEPF000044A7.mail.protection.outlook.com (10.167.243.101) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8398.14 via Frontend Transport; Mon, 27 Jan 2025 12:52:42 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 27 Jan
- 2025 06:52:41 -0600
-Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 27 Jan 2025 06:52:40 -0600
+	id 1tcOgE-0007LI-Oo; Mon, 27 Jan 2025 12:57:30 +0000
+Received: by outflank-mailman (input) for mailman id 877886;
+ Mon, 27 Jan 2025 12:57:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=O4xJ=UT=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tcOgD-00076M-UT
+ for xen-devel@lists.xenproject.org; Mon, 27 Jan 2025 12:57:29 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 43c924ac-dcae-11ef-a0e6-8be0dac302b0;
+ Mon, 27 Jan 2025 13:57:29 +0100 (CET)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5da135d3162so7147932a12.3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jan 2025 04:57:29 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5dc186d8b2csm5321649a12.76.2025.01.27.04.57.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Jan 2025 04:57:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,136 +47,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b892487-dcad-11ef-99a4-01e77a169b0f
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XHPcj6wifu+2dtKoZJBRuqTGq1BfW5Ese17h+gwVHK20L+DP1wVIlYTYtI5xEL+u1dyZLgnO//aEJW/hgR4fOHn+QExfCLuYdqdYbB5NcaVh6sq3pu4LfZfgZ3BZoxd21bzQuLbWhO14bG36lB8AeHJAMvhyKFNN2zcurL1XzoTR4FjtUZlYwqzECuunsRMmpmHpcTMQhvu87AFF5zaKIK41MlSgv5PYSPg8/BCG5xxGfwBpHSWRKCHB5k6nzN1mvEZkDmyYrv72RJfyPssv1TW0npV4yN9VEJ6Z/iMWLm9m3hCDm2A0oirbe276ApB0KiPTVuh+MM7fKet/icSnbA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6XFgsxSwQx1KRayDWUBjwuGRg2YMiR5oxVMFrlWouDI=;
- b=GFItp0rBjmIT0bvBnuZZQwqMkOP5LMv2EsqxnS3rT61VBl6Rm6gY89kcEBWXcZXZgijuvoP+BT/4bkUbI2/neLs3U3j5G4WK4iJJ324Xn41ueiaQo8rBSsCk6wV1lzgs4ctPuHnd2RnisR7p8QpwDJXVeuh16lSDPKbgAdtUYVWe0ZuJTtwrU1F6Reulie2qsaeFyYc993RcaKAuX0Xs9R/6FpkmDdMkaGbr33n2PmQBnDRBl9vzi/yrECKzEEg6qLSBzv8wEo3RvFrDcwy8Qi/s95H6R95cYmgro0hPunXK5vfqkyHvQgNZJOl2j9tJ1lEbaoGzdaizZU8JARkNrw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6XFgsxSwQx1KRayDWUBjwuGRg2YMiR5oxVMFrlWouDI=;
- b=2Fmt9P61o8vDHkvGEbUcbtyHqVN68KyX7v2KNBeXrSDfqm9AaRsvJB7l8RQvKhxpdEHzPHod0ZRVyQXVuuq4/GwWeD80fynHyqad5TmhbH/HIy01X9ZODSow6rdCDyAYrBN4CfTBX9RPQDprbRiamZ7Ij0CSzO7cRZDDDrGiPNc=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <32d42df5-08d9-4670-a571-ef315897514b@amd.com>
-Date: Mon, 27 Jan 2025 13:52:39 +0100
+X-Inumbo-ID: 43c924ac-dcae-11ef-a0e6-8be0dac302b0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1737982649; x=1738587449; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=375YL9UDa11NDi6dH/k8prBNJ3z5vQKoj3LGrcRAB6I=;
+        b=WqB8nWp11/IRqFXKwWyg/di67KaM7o733plNybps/+icjJgnEiPxK7Xy+i5Grf3ZH/
+         udT9WVet+vwqKfMfEFj1F0mnzN1sXa5eQyVPXALY7DMFGNluUDTMFxlTxGh/pBybARib
+         w6/ornuaqYXCCFT2AksvObWJQubW0tNLIRMOL1KO9yq0Q2MtWUtmvfzf5re18Ihs7c9t
+         Xb9GRm1e/bwiFLAzzS68NtUUVC6JNE4boZOEnPghQRz9HBofJgeawcxPuIiYgrdvyv8a
+         oSwak14itnJ8IasEK3lsKvqElPLog/AW+/EwVlcn345KQblo67IxKCrAc/rNNr5ueDLM
+         FnQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737982649; x=1738587449;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=375YL9UDa11NDi6dH/k8prBNJ3z5vQKoj3LGrcRAB6I=;
+        b=Z4LiM9yw3TBm9MjU0auhVDlVAs+GILhPtsJP2gErAdLUl0HiljGCY/xXZl63jUntzZ
+         RMERq+cQBgyFEGvYrg/hyj2FmELTe6jFOcIaZEojx+C3cXa+IcHFO5joErQQJAIkuIBG
+         C9rGiqoURNzpVCVpFO4rBW6LvEKCAX9P2Gi78xRSJI1vij35IDty6EBrwciRe9TEC14q
+         Cm/BsFDgU8U9IMAPSk/OCs+T3Wb3WKqfZvVAgJnbUkrIaqg45XxZpaQi/Sd6IojEzXRc
+         TPyJkyMjH5zWVknNT5OV1kGOPnYOx5b4uALQYSIaHTP6qY+oCaxyDXhZzZSH21+UMfWc
+         CKLw==
+X-Forwarded-Encrypted: i=1; AJvYcCUMdtOORqsmP7sWD35slG7lr7LAH/2NSPSqsOPuayvdUmhvowxxwfdnDOmwgk8+DMPvorQ9xRVwJXc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz4T5LXta0cKuz//RxiVmZ0MIXWx78KqXQpttR4ZQi9q6dFY1nj
+	wF+a8tP2thzkmmq4rRbfKrNzjOrCPRXvIttYVu8OYR/vxDZLhsLrLrLOsYQaow==
+X-Gm-Gg: ASbGncvV0s+uNLzGTkHtzaB5oa8JpwbjOjzX+SAZvoFr0CitG/ABeBsnb3nadlfmyiF
+	4aAfpDPpNrSi2/LuZoBhp6aZ9l1Fp5qJ/I1fbZCNJA0Oljpt7Oet1eus+qqJFdrPw+n/M/50UzA
+	6Bz9/lteKhGbJRkcMUrm1BXPNrbNeoq8kitsHiSYG08IGelOolzYEu1jV5k3O5D26NEH7cs0qwW
+	suJ9eZxL6leHkW4I0RYyqv+YMLn9XjB5RpGGweuCeXLnWBe4zE2VDV4ohAv0jBIecwJCTTwOXQZ
+	XkGClqkyIQWY+QmnRAOWecRNsiqQ4oz7y1ZfAUdQ0e5wIyp6zNUHonGIo6ktX+eZ0w==
+X-Google-Smtp-Source: AGHT+IGs4WW77xrtSQWyDnSMLPTZ++Iyhpn/ApqEEdHB34tmygdbPNtiBcma3XhHS5gGF34JE1adqA==
+X-Received: by 2002:a05:6402:27cc:b0:5d0:b2c8:8d04 with SMTP id 4fb4d7f45d1cf-5db7d3005b5mr41272885a12.18.1737982648562;
+        Mon, 27 Jan 2025 04:57:28 -0800 (PST)
+Message-ID: <a304e4f0-709f-4fcd-9847-01fe6ab4b98c@suse.com>
+Date: Mon, 27 Jan 2025 13:57:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [for-4.20][PATCH 1/2] device-tree: bootfdt: Fix build issue when
- CONFIG_PHYS_ADDR_T_32=y
-To: Julien Grall <julien.grall.oss@gmail.com>
-CC: <xen-devel@lists.xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	<oleksii.kurochko@gmail.com>
-References: <20250127104556.175641-1-michal.orzel@amd.com>
- <20250127104556.175641-2-michal.orzel@amd.com>
- <CAJ=z9a24=PE-3bhmZvfTaTgpdCXp9iDTWfoH-9F9-_OdkEf4Tg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/3] xen/riscv: implement software page table walking
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1737391102.git.oleksii.kurochko@gmail.com>
+ <00dfc71569bc9971b53e29b36a80e9e020ac61ac.1737391102.git.oleksii.kurochko@gmail.com>
+ <21bfd2f5-74b8-409e-956c-dd736a3c0be2@suse.com>
+ <e2290a2a-a3c0-4cfe-b9e9-8cfec0b194a8@gmail.com>
 Content-Language: en-US
-From: Michal Orzel <michal.orzel@amd.com>
-In-Reply-To: <CAJ=z9a24=PE-3bhmZvfTaTgpdCXp9iDTWfoH-9F9-_OdkEf4Tg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <e2290a2a-a3c0-4cfe-b9e9-8cfec0b194a8@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: None (SATLEXMB03.amd.com: michal.orzel@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A7:EE_|SA1PR12MB8597:EE_
-X-MS-Office365-Filtering-Correlation-Id: efff4bb7-4be0-434c-6df3-08dd3ed17ce3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?cHIzZS9YQ2J2eHEvUG5JU3dlQmhXNnVvT0ZJNWlQZDh2blpybFVDRmJrVUMr?=
- =?utf-8?B?VlhQQ1ByL1FGZ05qMnl3VUtoeWtDSWY0K0JJQUV1Q0cycFhzenhjYTlZZWhB?=
- =?utf-8?B?alh1K0hsVVFiTVVFa3BYOTBjbDk3K3ArR1JndmYvMlVJQXZQRktyeGhHQTc3?=
- =?utf-8?B?dThycmVwSjFTSm10bGJWYVNUL3lIaXpqR2RTOXJLUTBpaEVDMFRudFV4SWV2?=
- =?utf-8?B?V085TGdwNC9vRTFPbUtXNk9VaTA2dmhtakNvTFNlYmpIcVpIL05xSHozNXNq?=
- =?utf-8?B?dUY4Nis5bTNuQWtodUFjQUlqSGVLZ1E5eVR4aWdDdGtkMm5uOTBJMlVHM0tW?=
- =?utf-8?B?b1VyekVOYy9nVlNoQ1pSK3NHSUpLYXZTdU44eXFENHRCU0xUcHJ0VkRNUFJP?=
- =?utf-8?B?RjY2QWQ2UmIvT1M5eG5LT0ZrQ21nRlZtN2Z5VkxLSWNHSy9TMkwwT3M3RHhL?=
- =?utf-8?B?ZGZVYXVRNndobFB3K1Z0dVIwaS94TWNOb2dtalQ0ZVp4dVQ3bzhML0R1Njk0?=
- =?utf-8?B?c0svQUpzS213K21wcWNteFNCOFZJMFptdkFMcG9ORFE2WXRxVTlHNWdoWDBx?=
- =?utf-8?B?YmpFTnlud01iWmQ1YVZsN1NGaWM4UWhVM09wL0l1UUZuTzc5VzJtc0dCNmZz?=
- =?utf-8?B?QTdYZ3dDUmtHUEE3L2t4a1BjeDB6MjJHY3ZkR1VHUXF5T05EZ3NPR2pKUkRI?=
- =?utf-8?B?bTcrS3R5T2t3a25iZTR5cC9aWHhPZGpsSDN6VERFYXNkNU9WZVJYUmtOK2hX?=
- =?utf-8?B?MnlRNDFzYjhrbExraEtjbDBtZ3E4Z3AxaXJITlRGdzhjWm1qejBEZlNKYTZK?=
- =?utf-8?B?bExHT29GSTdsamJOZkR2YlZCOWh4VmJEUDdSdm9vTWdGSzd3aGNrREVxeHdw?=
- =?utf-8?B?ZStJdVF6bEl5RXdlMElmYjMxUzNWSkpiOFFGcmlOV1JWSkRxWFo1UmJOaG05?=
- =?utf-8?B?dlZpYm5ncXdpVVIvWWp1eEFqUnFlOXlvRmZiR3RmQ2J5bGp6NlVSN21MMGJ6?=
- =?utf-8?B?N0hjeWJQclhsSGlVS3BCOEFaRzB2TnhHcHI3a1dJU2V4UmNSUEtHZHUwRnVs?=
- =?utf-8?B?bXQvNllYWEN2YU9rUTBBR2Nhckl4YmtSMWFqYkRLeUlidzhBckJuMHdpaVlw?=
- =?utf-8?B?WDZQSXpzLzlTSTZpM1RsV0krZFRKWVZLUXhSMFpwcGR1eGgzL0paTmJNQ0lO?=
- =?utf-8?B?TzVlZ0p5VUNyaHhhZGxSTE9CME0xWUZuek9EbUhPNzNxdkV5bWdCaUZBN0Jt?=
- =?utf-8?B?Wm9INmhzYmZRY2pWTXJOM2FYcFBtbWJUcjZTbkFaNW4waVE3Qi9OcDl1elNU?=
- =?utf-8?B?MW5zc24yRnZhMklySGNJY2hjVmYwZGo5KzJ2NkdvaHplS3ZOUVMxbnJPMXdB?=
- =?utf-8?B?OUZHOEhxcThZZFRBc3o4OFkvZ0h6dENxaWhtMFVEODBMcW9oREtDUWlXajFs?=
- =?utf-8?B?bnd1Y0lvdFJkc0M4OEs2UXExTDY1S0dnUHZOOElpNXFrVW8yeUhUTndDRWVj?=
- =?utf-8?B?MVVBRUJBSVIxK0ZPUXZ6TytUMGFKT2lXWklwQmo0eUdyaUUxVUVla3pJUlky?=
- =?utf-8?B?OFlhZGFURk5nOHQ5OVQ1R0JKMWhqNUQwbHFUUWlLMmh6V28welg3WFllaGdM?=
- =?utf-8?B?amJObm0vc0lFN1pDTkpmVDJ3ZXc2KzgyajM1NEV1SnVQZEswRzNqZTFFQzdq?=
- =?utf-8?B?WmUzWjl3R3dKTnBEaDJneHIrekZBNWlVMU1HSitKQmV0NXRMWStTLzNDVnl4?=
- =?utf-8?B?eERsRFRxQ0s5L1VjWmk4RXpZc1Yyck9PY0RBcjZOSHFFVlNqbkNad0ZhVHVQ?=
- =?utf-8?B?UktuV1RTdWJGKzVtQlRxVDl4ZmVGSHlHb2FCOUQ4dEhnbzBKNFY4NGk0Q1lx?=
- =?utf-8?B?aElxU2ZtOGJUd2RFQ1JhSUdBS1pLaHB3ekFnMWlHOTNIUTc1YVJ4WW1aclZk?=
- =?utf-8?B?Q1JuZTZacUxqcVo1NExWb014WmYxbWtURzZjZUJ1SnRzOEpPV0VlSFVRSE85?=
- =?utf-8?Q?j/hh6E5CdQzFI6ZKtHiF/j/NLqVnWw=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2025 12:52:42.0220
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: efff4bb7-4be0-434c-6df3-08dd3ed17ce3
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000044A7.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8597
 
+On 27.01.2025 13:29, Oleksii Kurochko wrote:
+> On 1/27/25 11:06 AM, Jan Beulich wrote:
+>> On 20.01.2025 17:54, Oleksii Kurochko wrote:
+>>> RISC-V doesn't have hardware feature to ask MMU to translate
+>>> virtual address to physical address ( like Arm has, for example ),
+>>> so software page table walking in implemented.
+>>>
+>>> Signed-off-by: Oleksii Kurochko<oleksii.kurochko@gmail.com>
+>>> ---
+>>>   xen/arch/riscv/include/asm/mm.h |  2 ++
+>>>   xen/arch/riscv/pt.c             | 56 +++++++++++++++++++++++++++++++++
+>>>   2 files changed, 58 insertions(+)
+>>>
+>>> diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+>>> index 292aa48fc1..d46018c132 100644
+>>> --- a/xen/arch/riscv/include/asm/mm.h
+>>> +++ b/xen/arch/riscv/include/asm/mm.h
+>>> @@ -15,6 +15,8 @@
+>>>   
+>>>   extern vaddr_t directmap_virt_start;
+>>>   
+>>> +paddr_t pt_walk(vaddr_t va);
+>> In the longer run, is returning just the PA really going to be sufficient?
+>> If not, perhaps say a word on the limitation in the description.
+> 
+> In the long run, this function's prototype looks like|paddr_t pt_walk(vaddr_t root, vaddr_t va, bool is_xen)| [1]. However, I'm not sure if it will stay that way,
+> as I think|is_xen| could be skipped, since using|map_table()| should be sufficient (as it now considers|system_state|) and I'm not really sure if I need root argument
+> as initial goal was to use this function for debug only purposes and I've never used it for guest page table (stage-1) walking.
+> Anyway, yes, it is still returning a physical address, and that seems enough to me.
+> 
+> Could you share your thoughts on what I should take into account for returning value, probably, I am missing something really useful?
 
+Often you care about the permissions as well. Sometimes it may even be relevant
+to know the (super-)page size of the mapping.
 
-On 27/01/2025 12:19, Julien Grall wrote:
-> 	
+> |[1] 
+> https://gitlab.com/xen-project/people/olkur/xen/-/blob/latest/xen/arch/riscv/mm.c#L820|
 > 
+>>> +     * initialize `ret` with "impossible" XEN_TABLE_MAP_NOMEM.
+>>> +    */
+>>> +    int ret = XEN_TABLE_MAP_NOMEM;
+>>> +    unsigned int level = HYP_PT_ROOT_LEVEL;
+>>> +    paddr_t pa = 0;
+>> Seeing 0 as initializer here, just to double check: You do prevent MFN 0
+>> to be handed to the page allocator, and you also don't use it "manually"
+>> anywhere?
 > 
+> MFN 0 could be used when removing the page:https://gitlab.com/xen-project/xen/-/blob/staging/xen/arch/riscv/pt.c?ref_type=heads#L251 <https://gitlab.com/xen-project/xen/-/blob/staging/xen/arch/riscv/pt.c?ref_type=heads#L251>.
 > 
+> In that case, it would be better to initialize|pa| with|(paddr_t)(-1)|, as this value couldn't be mapped and is safe to use as an invalid value.
 > 
-> On Mon, 27 Jan 2025 at 07:46, Michal Orzel <michal.orzel@amd.com <mailto:michal.orzel@amd.com>> wrote:
+>>
+>>> +    pte_t *table;
+>>> +
+>>> +    DECLARE_OFFSETS(offsets, va);
+>>> +
+>>> +    table = map_table(root);
+>>> +
+>>> +    /*
+>>> +     * Find `pa` of an entry which corresponds to `va` by iterating for each
+>>> +     * page level and checking if the entry points to a next page table or
+>>> +     * to a page.
+>>> +     *
+>>> +     * Two cases are possible:
+>>> +     * - ret == XEN_TABLE_SUPER_PAGE means that the entry was find;
+>>> +     *   (Despite of the name) XEN_TABLE_SUPER_PAGE covers 4k mapping too.
+>>> +     * - ret == XEN_TABLE_MAP_NONE means that requested `va` wasn't actually
+>>> +     *   mapped.
+>>> +     */
+>>> +    while ( (ret != XEN_TABLE_MAP_NONE) && (ret != XEN_TABLE_SUPER_PAGE) )
+>>> +    {
+>>> +        /*
+>>> +         * This case shouldn't really occur as it will mean that for table
+>>> +         * level 0 a pointer to next page table has been written, but at
+>>> +         * level 0 it could be only a pointer to 4k page.
+>>> +         */
+>>> +        ASSERT(level <= HYP_PT_ROOT_LEVEL);
+>>> +
+>>> +        ret = pt_next_level(false, &table, offsets[level]);
+>>> +        level--;
+>>> +    }
+>>> +
+>>> +    if ( ret == XEN_TABLE_MAP_NONE )
+>>> +        dprintk(XENLOG_WARNING, "Is va(%#lx) really mapped?\n", va);
+>> Even if it's a dprintk(), I'd recommend against adding such.
+>>
+>>> +    else if ( ret == XEN_TABLE_SUPER_PAGE )
+>>> +        pa = pte_to_paddr(*(table + offsets[level + 1]));
+>> Missing "else if ( ret == XEN_TABLE_NORMAL )" (or maybe simply "else")?
 > 
->     On Arm32, when CONFIG_PHYS_ADDR_T_32 is set, a build failure is observed:
->     common/device-tree/bootfdt.c: In function 'build_assertions':
->     ./include/xen/macros.h:47:31: error: static assertion failed: "!(alignof(struct membanks) != 8)"
->        47 | #define BUILD_BUG_ON(cond) ({ _Static_assert(!(cond), "!(" #cond ")"); })
->           |                               ^~~~~~~~~~~~~~
->     common/device-tree/bootfdt.c:31:5: note: in expansion of macro 'BUILD_BUG_ON'
->        31 |     BUILD_BUG_ON(alignof(struct membanks) != 8);
-> 
->     When CONFIG_PHYS_ADDR_T_32 is set, paddr_t is defined as unsigned long,
->     therefore the struct membanks alignment is 4B. Fix it.
-> 
-> 
-> Usually, we add a BUILD_BUG_ON when other parts of the code rely on a specific property (in this case alignment). Can you explain in the commit message why the new check is still ok?
-Well, the change itself reflects the change in alignment requirement.
-When paddr_t is 64b (Arm64, Arm32 with PA=40b) the alignment is 8B.
-On Arm32 with PA=32b, the alignment is 4B because paddr_t is 4B.
+> If I am not missing something, we can't be here with ret == XEN_TABLE_NORMAL because we iterating
+> in the while loop above until we don't find a leaf or until reach level = 0.
 
-AFAICT you requested this check back then, because struct membanks contains flexible array member 'bank' of type struct membank.
-The alignment requirement of struct membanks becomes the requirement of struct membank whose largest type is paddr_t.
-Let me know how you would like to have this written in commit msg.
+I'll admit that I didn't specifically check whether XEN_TABLE_NORMAL could
+be observed here; my point was that non-super-page mappings aren't handled,
+as you ...
 
-~Michal
+> If we find a leaf then
+> XEN_TABLE_SUPER_PAGE is returned; otherwise sooner or later we should face a case when next table
+> (in case when `level`=0 and someone put at this level a pointer to next level, what is a bug) should
+> be allocated in pt_next_level(), but it will fail because `alloc_tbl`=false is passed to pt_next_level()
+> and thereby ret=XEN_TABLE_MAP_NONE() will be returned.
+> 
+> Based on your previous comment about dprintk this could could be re-written in the following way:
+> -    if ( ret == XEN_TABLE_MAP_NONE )
+> -        dprintk(XENLOG_WARNING, "Is va(%#lx) really mapped?\n", va);
+> -    else if ( ret == XEN_TABLE_SUPER_PAGE )
+> +    if ( ret != XEN_TABLE_MAP_NONE )
+>           pa = pte_to_paddr(*(table + offsets[level + 1]));
 
+... appear to confirm here.
+
+Jan
 
