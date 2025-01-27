@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB1A5C0218C
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2025 10:46:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.877646.1287805 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7880DC0218A
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2025 10:46:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.877643.1287784 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcMdB-0002wl-Bz; Mon, 27 Jan 2025 10:46:13 +0000
+	id 1tcMd9-0002Sx-Se; Mon, 27 Jan 2025 10:46:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 877646.1287805; Mon, 27 Jan 2025 10:46:13 +0000
+Received: by outflank-mailman (output) from mailman id 877643.1287784; Mon, 27 Jan 2025 10:46:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcMdB-0002vx-8X; Mon, 27 Jan 2025 10:46:13 +0000
-Received: by outflank-mailman (input) for mailman id 877646;
- Mon, 27 Jan 2025 10:46:11 +0000
+	id 1tcMd9-0002So-Pi; Mon, 27 Jan 2025 10:46:11 +0000
+Received: by outflank-mailman (input) for mailman id 877643;
+ Mon, 27 Jan 2025 10:46:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rEBS=UT=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1tcMd9-0001ah-SQ
- for xen-devel@lists.xenproject.org; Mon, 27 Jan 2025 10:46:11 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2060c.outbound.protection.outlook.com
- [2a01:111:f403:2412::60c])
+ id 1tcMd7-0001ah-S8
+ for xen-devel@lists.xenproject.org; Mon, 27 Jan 2025 10:46:10 +0000
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20605.outbound.protection.outlook.com
+ [2a01:111:f403:2409::605])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eaebcf9a-dc9b-11ef-a0e6-8be0dac302b0;
- Mon, 27 Jan 2025 11:46:10 +0100 (CET)
-Received: from SJ0PR03CA0264.namprd03.prod.outlook.com (2603:10b6:a03:3a0::29)
- by CY8PR12MB8194.namprd12.prod.outlook.com (2603:10b6:930:76::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.20; Mon, 27 Jan
- 2025 10:46:05 +0000
-Received: from MWH0EPF000971E3.namprd02.prod.outlook.com
- (2603:10b6:a03:3a0:cafe::f9) by SJ0PR03CA0264.outlook.office365.com
- (2603:10b6:a03:3a0::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8377.23 via Frontend Transport; Mon,
- 27 Jan 2025 10:46:05 +0000
+ id e7cda445-dc9b-11ef-a0e6-8be0dac302b0;
+ Mon, 27 Jan 2025 11:46:05 +0100 (CET)
+Received: from MW3PR05CA0030.namprd05.prod.outlook.com (2603:10b6:303:2b::35)
+ by SN7PR12MB7834.namprd12.prod.outlook.com (2603:10b6:806:34d::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.21; Mon, 27 Jan
+ 2025 10:46:01 +0000
+Received: from MWH0EPF000971E9.namprd02.prod.outlook.com
+ (2603:10b6:303:2b:cafe::69) by MW3PR05CA0030.outlook.office365.com
+ (2603:10b6:303:2b::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8377.18 via Frontend Transport; Mon,
+ 27 Jan 2025 10:46:01 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MWH0EPF000971E3.mail.protection.outlook.com (10.167.243.70) with Microsoft
+ MWH0EPF000971E9.mail.protection.outlook.com (10.167.243.71) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8398.14 via Frontend Transport; Mon, 27 Jan 2025 10:46:04 +0000
+ 15.20.8398.14 via Frontend Transport; Mon, 27 Jan 2025 10:46:00 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 27 Jan
- 2025 04:46:03 -0600
+ 2025 04:45:59 -0600
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39
- via Frontend Transport; Mon, 27 Jan 2025 04:46:01 -0600
+ via Frontend Transport; Mon, 27 Jan 2025 04:45:58 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eaebcf9a-dc9b-11ef-a0e6-8be0dac302b0
+X-Inumbo-ID: e7cda445-dc9b-11ef-a0e6-8be0dac302b0
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QsgZ8r2Dz7Q35lkSz6Z8g1DXwZ/2X86QNaFDbTn4nrzXAPIi1YsZOePzwMdyWU76HU0Bo/QUq3sB3Vc5Ef6o+gFR9Urkw92U68q5yOLBbLQpxtgz36rMowLFKfls+IlGxt9faH9u0xGvghHGVzDrn9ZOj9KBFvkPeTF2wNaOakGPG+q/uiKhn6pxQVt6Z8FF0yQ4pWnG9/hS1IoAHJ70EvufnXhtTwnNxFlZ/MyGXdXtIXBtpG/X/M8HW6CJZSAvdMpxKkKtq83Gu1eTUSmdkWzX/+EutF56K0CcUKkV6N2EeXX4J+Ge7lObJlYn/frE/Msx2Wfb0+XsOvQRSGfdBg==
+ b=pAN0t58IPfWvQAFR4M25oDgKNHnzOva3L65Y6d++ZVPTGc6QRn7TSb6QWaaH/5r9+r+T+XVSGgptjjP/HsLNm5hiOO/YPuPxU/d22q9EDBEMUwaz2wNObXFhH9GR26somtY1OF56mt/d6i5Pw1zUjx2u3Hm2VDctRdXzL7bXh9Zr/Jabszp85ew4oFsq2DCbCq18VvtRPncrpo6JbzsTjMkJVByO4LpLgIv3ZuEb+ZWKOI3bk9eXEsRgzbLXGzCJ/5yJ53BI19UJXlCNZM8PWknWsQFfTQfZMayITrjT8ubYkaghmKqgDNttPtDMtuwMPKwNfVInYVas9V3hfRb+Mg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0FlS5NYMJkshnxGYQIzdg2iyP5nY3U9hAQSCfYUR8ds=;
- b=kgO8clTeM3LzqczldlrZ12+0uGBiwFlHmw7seZX/sPazCUTrzmqzbA6ddLZFMyy2deLIT4WrdvteYnogNb8sbKcxy48/9EtM7DJxl8+AYC2lfij/JQni3EcRjkKSDxVac6RLJh+7pzbleTKvlitZNf2aWer8NzapASb59uDH1MBA4aX/1JS3/17m/ICdY639szVtqWYl7r1ydlOYQQOmSN76HxKXeT0xN0vhkbwmwILoL0RR97caMVjIIFxW65jLzaOfxZfnDF2rWM7R2pwlhtL0f2GUWPEDNdmc1IT8gQwAzTxqCjhpAFvFf5c4K//OlmZN8tysqmoL4lYVb9QuQQ==
+ bh=6w7NW5Tq9BQ4T5PXnzy3s3SW3uM9h9Kf76VWukGYyXA=;
+ b=L4t2+Sz6SdqYGDqA6hFoYzw6yfPZdf5+f3sPtGzsvLPCk0dJlMRLmp6Gw0a+VA/smY9GEcFBaso4nwMFoxx4GW7KJiFKsJV+K2S7L52K7uIRFnvWXim5ChwGGTzogXytQKBJJ8H4y2vqFKrEdgqbFJrXx/k6lkLpTvMW+nTUjWpfOQyuKcJN2f8x8gfEqn1bBEmJH2DWTNqeH9KSAWdEV4aWOavPQ/1ql+vtX0xVhFAxmicr4SVV3sH/8aH18MxPgIGZ9HM6Ti5sMEEmGBXa4JNbLrEQfqHvsHq5MFydP1r22bDR22FO3i0vidMbJkUaxfLCV61jLBv23AjSh9qCfQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0FlS5NYMJkshnxGYQIzdg2iyP5nY3U9hAQSCfYUR8ds=;
- b=3Z7mHjc3KjZfh94vEQytbv+evGMcgrR9Rymz0L91Ku29ScYTOOdene3egyMurVH35QGN4Yz+CMmYSaAwgF5gU8fdmYtyapfzy9tS4U1CMIPTopQGfjYJhTgSz2QMBiweAsQI5u2hV1DN+KKdE/rnIiH5/x87IfeMPC5NJ+YVBgg=
+ bh=6w7NW5Tq9BQ4T5PXnzy3s3SW3uM9h9Kf76VWukGYyXA=;
+ b=qajKZmhqcLmrgoeoW2nm+hsHzljQaKla/07mXwgoccXpEM7sv6rfYEyaUE8ZOtLtQC4jaSM3hfERmCZJXxGQLWqUdRf4skhl2Pddssu2gvH7/MXLXbkgrl8wZ6cfiNDwIq4Ot/+phuRq3k2loZEl62bgeJ0Fb8O4sYh0Yn26DtU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -89,12 +89,10 @@ CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	<oleksii.kurochko@gmail.com>
-Subject: [for-4.20][PATCH 2/2] xen/arm: Fix build issue when CONFIG_PHYS_ADDR_T_32=y
-Date: Mon, 27 Jan 2025 11:45:56 +0100
-Message-ID: <20250127104556.175641-3-michal.orzel@amd.com>
+Subject: [for-4.20][PATCH 0/2] xen/arm CONFIG_PHYS_ADDR_T_32=y fixes
+Date: Mon, 27 Jan 2025 11:45:54 +0100
+Message-ID: <20250127104556.175641-1-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250127104556.175641-1-michal.orzel@amd.com>
-References: <20250127104556.175641-1-michal.orzel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -102,82 +100,66 @@ Received-SPF: None (SATLEXMB04.amd.com: michal.orzel@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E3:EE_|CY8PR12MB8194:EE_
-X-MS-Office365-Filtering-Correlation-Id: fc186281-1563-42d1-3486-08dd3ebfccb5
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E9:EE_|SN7PR12MB7834:EE_
+X-MS-Office365-Filtering-Correlation-Id: f4e542db-8fc1-49f9-399d-08dd3ebfca3d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
+	BCL:0;ARA:13230040|376014|36860700013|1800799024|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?e0U7RTw0MEZqNp4EiOkfZQlRiY9jY7dsPkbX2lwz7Pdzk8o4+HiNm6itsKCa?=
- =?us-ascii?Q?lPt7C7kqo+qNugRNhQF9k0qYd0dD8EzYgMtYaDcDJEJlAtEA1Uvt46iopz7w?=
- =?us-ascii?Q?4afNOdlDd12gE7V+Z0BKJLJnmw3feSl7eqYLgH6NOWxjt485jmF+FVt8Fjjc?=
- =?us-ascii?Q?/pspQpp+Tor3mAy7n6dlOQjD//HCBR+qMLGvS+jWe/Kg3R2oEvbMw6P5Z77w?=
- =?us-ascii?Q?+aAhAakZYWu/l1IEemS9Zvl2yk7Aw00IBbY5/CXIWk+SufRnR1zht8BgEi+s?=
- =?us-ascii?Q?Ajv3ABcpZp1eyJO8RssMxzVqJsNHwNJygyMtrHlvbPRrnVNJ4a5BwLhrHLMr?=
- =?us-ascii?Q?A0DrJJ26ATEfuw/Dwx2D675OeO53QHqBuwUdwhKxJWZQa6qK4DsF4omm9xTF?=
- =?us-ascii?Q?8Wxi+nRbrdn3RTw56nZhq/Nnsgq5MXOEeTrlX3zhMsvSfIAMSxl3+vwqTzIW?=
- =?us-ascii?Q?E/fd+lc0Vd549Urx1E6l/Q3krezm2twr+WGXEvRV/RxHD8TtaYvYGawJbPTU?=
- =?us-ascii?Q?P+IB3zmSNkls/aik6RGI1ntcfEEooNnEinxkEH56abkD9st+Jod7wuImPTAf?=
- =?us-ascii?Q?5PYBO3J1H65nuVufv+qf1bUEdZVwz85cueMckXI/rqIg07y6yKcUU0iSnuBL?=
- =?us-ascii?Q?z2E0JznlbmD/mkXrEcGLyIwMq53/7/OL+lH1JyoqDaohrRtxWHKd3gj4x7Oj?=
- =?us-ascii?Q?lmaWrzXK3YJNtlWMsOstsY2z9Xgnbs5depiMIUBkP6TzDBwdDISFNZMwiJWn?=
- =?us-ascii?Q?t7DUMMNqYVbGWguvVUlon+ZOY3fSh4zZyLI5d0kMBppq5i8vWE+qg3gxyIAU?=
- =?us-ascii?Q?UrsInUBb9C7jxP9lQIRM0rgde36aPsjr1ROu83v/6bpvz0Rjce30Qg2chICR?=
- =?us-ascii?Q?DJxHLtVRSy1JbkZEzzjz0M/w7ubCd+Dns1KaTYDNQGZZvBDH5aybgCCKbXCn?=
- =?us-ascii?Q?Tgft2iYv+REyT78CIpXtrU5rKArTaTCWmYizxvVSiNl6rPkuY2DJWqPEtLsX?=
- =?us-ascii?Q?/nYZ8oWzbyQzCyqPNMH0PZwcDon12vlIoAcnw61f5fNR+RB69+34DShkLqFx?=
- =?us-ascii?Q?aVqM/Myue0RY3aJ48POIxSBF6VnYY7z2FEycGAWma/eDr+7p2Jg752cT8ZCr?=
- =?us-ascii?Q?WKxGoyOim7vWkrAhLdVRFUQkn/z4U6pLct3BVlKYgh7Yle+pYDLehidnIOqC?=
- =?us-ascii?Q?pgHBp0XZA8bDg6HoPIHuQKA20RERveyPa97lotpA+oS1GcnVpl4AcZM41pjC?=
- =?us-ascii?Q?ElnoERPxbHEbMOHM6CCW3anGiuEq2RNnfIz9P5j6Xt/8cau4yMvRutsrN2ze?=
- =?us-ascii?Q?kcmTY0Bg5e7d8H1Ty5mK/CqY/Gvf3HApX3CTerGLiga9p2yv9PTmbd8QnbZB?=
- =?us-ascii?Q?FScI70ReCtqB4gwke2o09Jd2YLrfC51ArrNUFud7aCucC9JJ368Mdfu3w9K+?=
- =?us-ascii?Q?uXpfmMaCssArM9H5FMehs6fEMBt+6ro1D6vtENoIhU5SN09yP4yhBRKt7KxN?=
- =?us-ascii?Q?NJlLfReDqhLjlzI=3D?=
+	=?us-ascii?Q?QtIBy4qMcf8wYuBtMD88bGdIkkTgcDiegWt9iKkPCsGjNbmcitsM+fxRHZoV?=
+ =?us-ascii?Q?D/KHdF2YnWDTyZGe+SJlmJnUYCwkeDLkSreg+JMc4HlGN/57BupqneVMpaXc?=
+ =?us-ascii?Q?u4CWOE1LPU/HUz3eDZX0WoWwCzzHLM4SK3SyQIR14pqPfD5XyR9mnBI6xc7H?=
+ =?us-ascii?Q?hTAvqufzAMCgY3zZiDNdg5Wd2vu0KOEpNYR0hv3ZuFnefZfv16K3E+HwakQ0?=
+ =?us-ascii?Q?9h+VFgINLpRm4/MYPDrkEig4xVE6yrH7naqd03VyuBggd3xdHBsw/FV2MzKu?=
+ =?us-ascii?Q?zGvwxlKsY7cMO6XhPlu8oaRKER/nnLHVDKQ9b2WhZ6x48oQ5RIg5sAKOcYrk?=
+ =?us-ascii?Q?BCjvVTIlcyNdc/D133WGGOum9oq3lV7nGB+N7jXxVQ7TxhdOBna8LIuL7RtJ?=
+ =?us-ascii?Q?Qd/nIxKXVts3OOJlMfnltV7j2OWrIH65pdiHRnXdQPKdjSzkmJiBNcKkS7Ie?=
+ =?us-ascii?Q?kNOl9FHGkBXwC6ZcK04KFI7SElIJMzEFuVX+1DXb/fZRLytwz2UMInmljkBt?=
+ =?us-ascii?Q?lUeXCiRFJhQRkzADVImaHDh6NPaVqfRJC0grtIjHt5ty79yutTKiYqCKLtsA?=
+ =?us-ascii?Q?RwLPfUuC7bdN1rlF3bx5/J67pioQ3x1erpD8ewkXeiUpNi185+pKd3L8TnZ5?=
+ =?us-ascii?Q?I1tFz9UlFed++4sEdR3o3fX6s+uvJ7GvFfS3bqSiS/0TluTnxjyWAkTrOxKK?=
+ =?us-ascii?Q?IxUGhfDNjD/Kc5GMPf37qMwQOXf4ez7vr+sDQdTKxL0FTXVVMCohVE5VOcEb?=
+ =?us-ascii?Q?C0lI18bNHw54UYu1Zg47d157x2nQj9G2hYNGm0neJJgKgRIqkQnLSVg8Hqcp?=
+ =?us-ascii?Q?xMvyU2t9/F3WUqy+ViRUz0N4UDH0FZQ01hx5B551AH0weoX6iswl2P2PGphJ?=
+ =?us-ascii?Q?exLjptnCDd5WCbIrZOUhF0JwPdnFpX75GLbEqMCUt1AR/sX286o4xmyPeo41?=
+ =?us-ascii?Q?t3nsXs+RprttsKs3ZOrb1Pg6KivsmFaedX7kYK4a20IfDOXa7EIWCX337bOk?=
+ =?us-ascii?Q?pxBgGF+LxvkZ1rC5P0eKigrcN+IEmgY1GH7t4t2E7MpOG6KdpM0P8DGEgbVC?=
+ =?us-ascii?Q?9kpjXKrmNqoWQ2HZsMvYu/F4PENs8JXwFT/r/2HODrLjGaX+pO95qemiURzb?=
+ =?us-ascii?Q?IWlbSulrLjZ94LJEeWF6FVj/hiNVwCB+fTykyXDBZpcWYVdwEWFNMrEv193l?=
+ =?us-ascii?Q?S6K/Vv411fkJQ8vEb2B7StzLl08LqvcxrU2xbIzSO9K2Iy4yT4IfSFGXavLm?=
+ =?us-ascii?Q?HOJRxew4kV5QGL2QLIo64ijxIWHvyK1E6knp55CkVahxWdaFuqCtaMpXoTHd?=
+ =?us-ascii?Q?wwe53CRjWs79u1UYefaxiaFqZNBXitToz/rulGR301sWVTPlO1Zk15ER6egc?=
+ =?us-ascii?Q?CnLE3qJ9yqtbXskPWnTcqY4PgB1/owEFOL8fQ39JZUAhg1XUpCx9bB5z6MEE?=
+ =?us-ascii?Q?dA3XobaiMi1XTMm7aWjMNZ8jYYUxoA//CelQdBTanTe6L0Jn8fBn+zLmXgYE?=
+ =?us-ascii?Q?EsGV6wzgm5juBFY=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2025 10:46:04.8862
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2025 10:46:00.7601
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc186281-1563-42d1-3486-08dd3ebfccb5
+X-MS-Exchange-CrossTenant-Network-Message-Id: f4e542db-8fc1-49f9-399d-08dd3ebfca3d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000971E3.namprd02.prod.outlook.com
+	MWH0EPF000971E9.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8194
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7834
 
-On Arm32, when CONFIG_PHYS_ADDR_T_32 is set, a build failure is observed:
-arch/arm/platforms/vexpress.c: In function 'vexpress_smp_init':
-arch/arm/platforms/vexpress.c:102:12: error: format '%lx' expects argument of type 'long unsigned int', but argument 2 has type 'long long unsigned int' [-Werror=format=]
-  102 |     printk("Set SYS_FLAGS to %"PRIpaddr" (%p)\n",
+This series contains build fixes when CONFIG_PHYS_ADDR_T_32=y.
 
-When CONFIG_PHYS_ADDR_T_32 is set, paddr_t is defined as unsigned long.
-Commit 96f35de69e59 dropped __virt_to_maddr() which used paddr_t as a
-return type. Without a cast, the expression type is unsigned long long
-which causes the issue. Fix it.
+@Oleksii:
+This is a release blocker.
 
-Fixes: 96f35de69e59 ("x86+Arm: drop (rename) __virt_to_maddr() / __maddr_to_virt()")
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
- xen/arch/arm/include/asm/mm.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Michal Orzel (2):
+  device-tree: bootfdt: Fix build issue when CONFIG_PHYS_ADDR_T_32=y
+  xen/arm: Fix build issue when CONFIG_PHYS_ADDR_T_32=y
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index f91ff088f6b1..a0d8e5afe977 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -263,7 +263,7 @@ static inline void __iomem *ioremap_wc(paddr_t start, size_t len)
- 
- #define virt_to_maddr(va) ({                                        \
-     vaddr_t va_ = (vaddr_t)(va);                                    \
--    (va_to_par(va_) & PADDR_MASK & PAGE_MASK) | (va_ & ~PAGE_MASK); \
-+    (paddr_t)((va_to_par(va_) & PADDR_MASK & PAGE_MASK) | (va_ & ~PAGE_MASK)); \
- })
- 
- #ifdef CONFIG_ARM_32
+ xen/arch/arm/include/asm/mm.h    | 2 +-
+ xen/common/device-tree/bootfdt.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
 -- 
 2.25.1
 
