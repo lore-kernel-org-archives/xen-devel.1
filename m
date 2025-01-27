@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93631C02188
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2025 10:45:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.877634.1287764 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E14C6C0218A
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2025 10:46:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.877642.1287775 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcMbz-0001aw-8w; Mon, 27 Jan 2025 10:44:59 +0000
+	id 1tcMd1-0002Av-Lp; Mon, 27 Jan 2025 10:46:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 877634.1287764; Mon, 27 Jan 2025 10:44:59 +0000
+Received: by outflank-mailman (output) from mailman id 877642.1287775; Mon, 27 Jan 2025 10:46:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcMbz-0001ap-6O; Mon, 27 Jan 2025 10:44:59 +0000
-Received: by outflank-mailman (input) for mailman id 877634;
- Mon, 27 Jan 2025 10:44:58 +0000
+	id 1tcMd1-0002Ao-Ic; Mon, 27 Jan 2025 10:46:03 +0000
+Received: by outflank-mailman (input) for mailman id 877642;
+ Mon, 27 Jan 2025 10:46:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=O4xJ=UT=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tcMbx-0001ah-Vn
- for xen-devel@lists.xenproject.org; Mon, 27 Jan 2025 10:44:57 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
+ id 1tcMd0-0001ah-6w
+ for xen-devel@lists.xenproject.org; Mon, 27 Jan 2025 10:46:02 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bfcd15e5-dc9b-11ef-a0e6-8be0dac302b0;
- Mon, 27 Jan 2025 11:44:56 +0100 (CET)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5d0d32cd31aso6382048a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jan 2025 02:44:56 -0800 (PST)
+ id e6728bd3-dc9b-11ef-a0e6-8be0dac302b0;
+ Mon, 27 Jan 2025 11:46:01 +0100 (CET)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f28a4fccso6349759a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jan 2025 02:46:01 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab675e66358sm566631266b.69.2025.01.27.02.44.55
+ 4fb4d7f45d1cf-5dc186d8ab9sm5162441a12.78.2025.01.27.02.46.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jan 2025 02:44:56 -0800 (PST)
+ Mon, 27 Jan 2025 02:46:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bfcd15e5-dc9b-11ef-a0e6-8be0dac302b0
+X-Inumbo-ID: e6728bd3-dc9b-11ef-a0e6-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1737974696; x=1738579496; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1737974761; x=1738579561; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=zDL8kIOek8iWrkwRYQHjtWMr97qlvPEUGJ/CkFtkRGw=;
-        b=FQs7clwZwNlarKfryrwJOWYQh5rLn01FHr0pJ9e92w9kVE6SJQrSEGfIDv2s0lY0R7
-         CIUXj9g8ibuWU4ABGoKj1iMx54LZiWo+C1vNIqYgyl/LntqgqtEAvrjz7geJt7KhNtjC
-         I07zM7fmtMcR/wbXbE59iUzKW08IwDhBIL5nDwged+mLF28LiyPDKKK3j+ajnPDW+llO
-         KCABwBZgao7h1Te0slavY7hXsaAQo7U2Lj205gVj+eapKIak8CVICD++C35GbW0qPXz1
-         sY7XwuGF1ct1toKARcTHLZwWF1QFlqIsE2ecD0zxIHPdRandYJH2SVGTN/6b3uXt4WR2
-         +t3g==
+        bh=gVrL5ZnCJNmg+XsCPqZMwMCOIU9fjI8lpvMFD8YiMlk=;
+        b=HC0L0gwNapWzI/+ueEA5fncoWZJCh94e0FZxwJmicXNXX7MJOtez5hkx03FvifjKbl
+         oIxIl7p68Q6fzJbZ8wtUHnxCi/eviM35JAMnt/x+6MWeIvVwDENldvoB+v7uUL7DU+P6
+         QwLpfElQAswTfmIgordrOpTkHa55f5uCKyx3Mlid+x/PmZ1ln71ANb9hkkasMnAkwqI8
+         cd1ntkJo6CCz+B93Gjx7Ga0Muv+TqzZSYxTBzp1QhiUIkMSKmyutsIEVzlx7F1maQ9Et
+         Kwg2RkCwsgKz+Yz3g7TmDVQHClf8CmbC9Vrcv6XsGbS/ER8NEsRWfFdLmS9/M3TT0SJQ
+         FBHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737974696; x=1738579496;
+        d=1e100.net; s=20230601; t=1737974761; x=1738579561;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zDL8kIOek8iWrkwRYQHjtWMr97qlvPEUGJ/CkFtkRGw=;
-        b=jX65v2XVJ+32ek4Qh56lHsuGA10Akc11y9+3mgw3LUDnlnLdRxlnWs5fY/LIBwQs9u
-         G/mzb90FsLLkxwnu83rSkbeWArY8HXS1BAk6RLxty6ncA6FjNfjYYOQUpbws7adfuNS0
-         W5wRLDTuWqzby95ejH2bNaa2/FQvvSPhQpcNTRB2D8bNui4zh1sZYA8TYhpL2SNJz9Nu
-         /tUsrCmD+QxlaFfV6yBsQuU+oqZqkNGXTxU47aeoK/xMen01Q4yM4VX3uv/Yp5k8wOIN
-         EWt0BV1dGAwu1PuYc20eKgHXCeP8zzAPLNrEOsMUv7q23HiEjYnnV97OgsseeLo4VIAq
-         J2Ww==
-X-Forwarded-Encrypted: i=1; AJvYcCUF7xttNkloHe/kkJi/2qo17cDWRMBY+Y4q9hr0vaqh8veRtiD0WS34u+MQvn6cE378mlBE0oWUGYs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxw1c9nbgx2icbfWd0l2dryvhy6CuQQeTDPzUDdPUZFY1eIX+e1
-	wvLfujRqIKhr4d8cw8WqwanUBEY4Tr7nmidPM0kHkkmOhI3xlqI3CCmlVCNwBQ==
-X-Gm-Gg: ASbGncsHaOGUabo7WEhMol/pNHb7OJH/Te4SrLkJS9IFS6uQ5ilGjP/R3RSFoLuIa6F
-	Icdq14zfK1usElqUKOR5o8FffRuTeX52MeZ0rn1p3LVrRVUrFkgeqJLB9nuHHB7EsO/UZBkFgmi
-	b5jw27kizJu9ieG5xHlHgFe1jxyNzbfBL8LoNbwqicyBoWmLRM4DON0QBu4gdEWeNj+vT/qDICN
-	xq67BCkXFTFEVwm7pVzQJfcbqo75Cv8nsejuNcGcFeZK4VEZ38mdHAm/ABHcVdJ0l52FOymA8Jv
-	KlegZMScPCvZli0pXEtSXEuR9PKPxON5NVehxKVRG55WsDyPcKJ09zidQ6MDm2KKtg==
-X-Google-Smtp-Source: AGHT+IFuso5LFYBjCyHHxnfSoiRKKt+NOdKjxS6R5NRIrtTLrx9tq4AhFfetbzWYrWu1y/2Du7f6fA==
-X-Received: by 2002:a05:6402:2706:b0:5d4:2ef7:1c with SMTP id 4fb4d7f45d1cf-5db7db078c2mr91872839a12.24.1737974696311;
-        Mon, 27 Jan 2025 02:44:56 -0800 (PST)
-Message-ID: <74ba0d8b-af2a-4fc7-891c-1a1305e71df7@suse.com>
-Date: Mon, 27 Jan 2025 11:44:58 +0100
+        bh=gVrL5ZnCJNmg+XsCPqZMwMCOIU9fjI8lpvMFD8YiMlk=;
+        b=l4nXmJc1fdXZ7+5BBJGKoVtaTHWD1Nu4d04LcS3HeSrtl+Ky/kpHjhdRX9BP3kstIk
+         2gAtFFz0aeHZGnrn0B4c1+isP2HC8CPb1MsNhrTS+/dgH2thkslOChhEiysFygvk7Vel
+         PwBfCw80mGJUaFhsWBoETBR3TvWA5rygRh3LSNOo+SwYxV7PAbN9gsm3Ij+WrTMfd3Cj
+         KotFPa4XR4PD1QGge27ky8mrZdACVQuK15p0mnwTevEBdNDKKvZnYjdqvtjupNoKKAz4
+         WMH7roPVIvLiS1sY/hB+29F8xIv1LrJn9DV+gHCee03lp0x4Vt+WKXKlYM86TD6tAcHE
+         Su3g==
+X-Forwarded-Encrypted: i=1; AJvYcCV+BeYxDcIuGK4V7EOmGqofZypAlyDLTbzQiAPVBpPK/mfQ4Or7g5KEWpkOEd8J+aft+Cy0a9ivx2Y=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzMxeDGcz10uY1oC5OrDcVxe7pB/6OtZs9mi5A1AwWIwwQTUenZ
+	R4J3+nhL2JjOiZ/8x418FjL6gZ604H4rWWvBhxAAV1hdgZBz/+X94LMvv0VhYg==
+X-Gm-Gg: ASbGncs8n0H0prh7np4MWTHjX04tLLMRPunbRaP8xRLsVMMo7OgMK1cLQ+7tNwKWA6K
+	u3DtYRYl6NuhlXlIPlsyZjAmnRy13iAAdjYy7gKIhJOWze/CwUA9xji+6xZS1lzH4bs6b5qp6fa
+	7zGT6w0M6Dy/Yxe1vdcPtR93cbsDpbVNd89Qi5/53rar4J09cq+7Jg8vRoeoyRiorFgSXoRKByV
+	pG/YQ9ojte1w8qjR2LR45/4GuNFWCvPrZwcZW07W1fArw7AYN4KCmI/h2rOXYVJjQt1FI3gr5n0
+	LNAKifmeT7iG+q9ioWdxmSD0XT+44WMtgzkxfEgHkGXd1PkloSu0O0rF/drgsT6PmQ==
+X-Google-Smtp-Source: AGHT+IHLOscrQvsmuL5tvNuLJAGZpwGEBLtyyzQeUyH4RIrIwCd7B41Jb1R2sK7nuou5exL9EtKrug==
+X-Received: by 2002:a17:906:5617:b0:ab2:b8c3:be3c with SMTP id a640c23a62f3a-ab38b3fb0dcmr3186508166b.51.1737974761231;
+        Mon, 27 Jan 2025 02:46:01 -0800 (PST)
+Message-ID: <5b897c0e-1102-4bdc-bcb8-8cd8e4a4d6f6@suse.com>
+Date: Mon, 27 Jan 2025 11:46:03 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/12] x86/xstate: Create map/unmap primitives for
- xsave areas
+Subject: Re: [PATCH v3 07/12] x86/xstate: Map/unmap xsave area in
+ {compress,expand}_xsave_states()
 To: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  xen-devel@lists.xenproject.org
 References: <20250110132823.24348-1-alejandro.vallejo@cloud.com>
- <20250110132823.24348-2-alejandro.vallejo@cloud.com>
+ <20250110132823.24348-8-alejandro.vallejo@cloud.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -121,84 +121,16 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250110132823.24348-2-alejandro.vallejo@cloud.com>
+In-Reply-To: <20250110132823.24348-8-alejandro.vallejo@cloud.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 10.01.2025 14:28, Alejandro Vallejo wrote:
-> Add infrastructure to simplify ASI handling. With ASI in the picture
-> we'll have several different means of accessing the XSAVE area of a
-> given vCPU, depending on whether a domain is covered by ASI or not and
-> whether the vCPU is question is scheduled on the current pCPU or not.
-> 
-> Having these complexities exposed at the call sites becomes unwieldy
-> very fast. These wrappers are intended to be used in a similar way to
-> map_domain_page() and unmap_domain_page(); The map operation will
-> dispatch the appropriate pointer for each case in a future patch, while
-> unmap will remain a no-op where no unmap is required (e.g: when there's
-> no ASI) and remove the transient maping if one was required.
-> 
-> Follow-up patches replace all uses of raw v->arch.xsave_area by this
-> mechanism in preparation to add the beforementioned dispatch logic to be
-> added at a later time.
+> No functional change.
 > 
 > Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
-with one nit below.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-> --- a/xen/arch/x86/include/asm/xstate.h
-> +++ b/xen/arch/x86/include/asm/xstate.h
-> @@ -143,4 +143,46 @@ static inline bool xstate_all(const struct vcpu *v)
->             (v->arch.xcr0_accum & XSTATE_LAZY & ~XSTATE_FP_SSE);
->  }
->  
-> +/*
-> + * Fetch a pointer to a vCPU's XSAVE area
-> + *
-> + * TL;DR: If v == current, the mapping is guaranteed to already exist.
-> + *
-> + * Despite the name, this macro might not actually map anything. The only case
-> + * in which a mutation of page tables is strictly required is when ASI==on &&
-> + * v!=current. For everything else the mapping already exists and needs not
-> + * be created nor destroyed.
-> + *
-> + *                         +-----------------+--------------+
-> + *                         |   v == current  | v != current |
-> + *          +--------------+-----------------+--------------+
-> + *          | ASI  enabled | per-vCPU fixmap |  actual map  |
-> + *          +--------------+-----------------+--------------+
-> + *          | ASI disabled |             directmap          |
-> + *          +--------------+--------------------------------+
-> + *
-> + * There MUST NOT be outstanding maps of XSAVE areas of the non-current vCPU
-> + * at the point of context switch. Otherwise, the unmap operation will
-> + * misbehave.
-> + *
-> + * TODO: Expand the macro to the ASI cases after infra to do so is in place.
-> + *
-> + * @param v Owner of the XSAVE area
-> + */
-> +#define VCPU_MAP_XSAVE_AREA(v) ((v)->arch.xsave_area)
-> +
-> +/*
-> + * Drops the mapping of a vCPU's XSAVE area and nullifies its pointer on exit
-> + *
-> + * See VCPU_MAP_XSAVE_AREA() for additional information on the persistence of
-> + * these mappings. This macro only tears down the mappings in the ASI=on &&
-> + * v!=current case.
-> + *
-> + * TODO: Expand the macro to the ASI cases after infra to do so is in place.
-> + *
-> + * @param v Owner of the XSAVE area
-> + * @param x XSAVE blob of v
-> + */
-> +#define VCPU_UNMAP_XSAVE_AREA(v, x) do { (void)(v); (x) = NULL; } while(0)
 
-The "while" still wants to conform to style, despite it being a kind of
-degenerate form. The overwhelming majority of instances we've got have at
-least a blank before the opening parenthesis. Many also have the ones
-inside.
-
-Jan
 
