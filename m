@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65B30C02190
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jan 2025 16:34:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.878659.1288865 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D811C0218A
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jan 2025 16:48:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.878695.1288884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcoXT-0007TB-O3; Tue, 28 Jan 2025 16:34:11 +0000
+	id 1tcolG-0002T1-6v; Tue, 28 Jan 2025 16:48:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 878659.1288865; Tue, 28 Jan 2025 16:34:11 +0000
+Received: by outflank-mailman (output) from mailman id 878695.1288884; Tue, 28 Jan 2025 16:48:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcoXT-0007T4-Iv; Tue, 28 Jan 2025 16:34:11 +0000
-Received: by outflank-mailman (input) for mailman id 878659;
- Tue, 28 Jan 2025 16:34:09 +0000
+	id 1tcolG-0002Su-4D; Tue, 28 Jan 2025 16:48:26 +0000
+Received: by outflank-mailman (input) for mailman id 878695;
+ Tue, 28 Jan 2025 16:48:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=C4cq=UU=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tcoXR-00070Z-Rf
- for xen-devel@lists.xenproject.org; Tue, 28 Jan 2025 16:34:09 +0000
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [2a00:1450:4864:20::536])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jygh=UU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tcolF-0002So-DD
+ for xen-devel@lists.xenproject.org; Tue, 28 Jan 2025 16:48:25 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b2b1284e-dd95-11ef-a0e6-8be0dac302b0;
- Tue, 28 Jan 2025 17:34:09 +0100 (CET)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d14336f0so9948170a12.3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jan 2025 08:34:09 -0800 (PST)
-Received: from localhost.localdomain ([217.156.233.154])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6973090d0sm534810966b.18.2025.01.28.08.34.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 08:34:07 -0800 (PST)
+ id b06cc1d0-dd97-11ef-a0e6-8be0dac302b0;
+ Tue, 28 Jan 2025 17:48:24 +0100 (CET)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aab925654d9so1147973666b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jan 2025 08:48:24 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab6760fc4aasm811547266b.159.2025.01.28.08.48.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jan 2025 08:48:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,145 +47,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2b1284e-dd95-11ef-a0e6-8be0dac302b0
+X-Inumbo-ID: b06cc1d0-dd97-11ef-a0e6-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1738082048; x=1738686848; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9PocrDZ9hDRaC7DH9mGBlVuageGkmPBew72m1MalZps=;
-        b=SeDo6HQD43B9Tg2lusAh3ekHc4vMD/5YNWIknrkayvSjS6oakYijT1hiexy5ryRiLv
-         9aJleiuV/nzBFAvFMIwByYA1sYqTlUVgeq4MRJ3DCBOj/En4+MjBSdaVUSzInMZw5HfL
-         qMvJdYWwdKuUgoVyJHC0+Cn0T9b7XrsjlCzTE=
+        d=suse.com; s=google; t=1738082904; x=1738687704; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=K5WdeAugfw1zLhTjqfKX13AAha5zDWO0+XALTcJYz8g=;
+        b=bW3p3LpaTnzItH68XuW6Mt+Sddmzn7f/eAMc+TQstTuMnf/WD4Q/yZAncLWoLRGYko
+         e+hi75tK3JijM9C9DuSIIkzosRrsWAn1nBT4KGO8Z9YguWEdJsQjQoFVHwQ71qDPbULJ
+         oEGSigDmdjAUOq7dvQEnaRz1Ka3fyeGjqdcF2g/nbicia3A2paBC7HjpyValb/BxKxIS
+         ND8Ni2+/b9rdMl5Jr33Xo7Rc8HOwlQK1mgilDwmqhfxrLB+Uzx9ZN8DK0l/0RcS5hZii
+         dSWlSXdV4p0wWSENYEeQPQcMoGTIHr61CNAkiwtyixy0T7kHXORw/5q11fK357jWyoCm
+         2nCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738082048; x=1738686848;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9PocrDZ9hDRaC7DH9mGBlVuageGkmPBew72m1MalZps=;
-        b=jyFdlW1Vpdd3lqVnMOhIBDgsXTMJqiDhxvKrvFa2yGZEtI/cjfE09mZuKvifrpkNFQ
-         B90LHUscZenWefrXdo84B8gIKGMEZdAomuvq7UdLAwmtQ1Fx5MmVYfiSVkWd3hcqT9n6
-         y22iA8w6/QMZOx8MgpoxPox25uQGjsIdHmsC74exAzGuo65Wh4hgfbXYcQZBUjdqsrf1
-         /3FI90nUCLeYKJUATb7Xlo1yqTho/Re+mbzXHru+l4W2IRyQOCgIibYpveapbIgbUxnX
-         YzRRnCXMzL9rrcPgHhKI3DiHhps40hrFqT6nteruZSSBfbMA7ms9UcVuy/HomgfCua4J
-         po3Q==
-X-Gm-Message-State: AOJu0YyXnnDBdiZHS994OaA1epmlN89QKNqd7dQE4Nd/BCg5c6FRmJgX
-	GZjOqbVx1s1qXKxX3A5E/FJvtgPu85nmkcwXz/Na8s7K3ncNl/JZySubE7cctQk3y43QsOTP9SP
-	CYKQ=
-X-Gm-Gg: ASbGncsi1ZeXEZkONS25SIXnDdHYJFMSwZp9R1IQqSgoYAWgEWztohC7MWdeeHw6RTV
-	LdBqOa23UA3sF6+DFLoKcVr5eK2ToJ2kBkvU5JBc7BgrKP6nG5jeIDwdxwAHj3OPoeuasA9VbEO
-	O5TtsI9es+v0j1bOOVmVVYH4wUE/IiUYOkqdzfJJYw/L7x46YF9RKK5OmPYd+XWoY8yt0tKwmMK
-	sG35PwEGraGBZdLJ5Uvv2vvaLtACXuJHSZJJlro4KNM7dxwLD51dEnXX21g7xas+WgwAIvHg7RS
-	gMn42nzBR8PJk4UB+oQ/B6wP6Y4rrAX0/SNtZCz7cx0qx7EJ+/o=
-X-Google-Smtp-Source: AGHT+IEHvOHZ3rC79zgZtlrliUBcqHcZd/1yasALjI6l+oiiKoATwG1XM4JqoTd0amr0xZiVHwo+Tg==
-X-Received: by 2002:a17:906:f598:b0:aa6:7933:8b26 with SMTP id a640c23a62f3a-ab38b1b17ecmr4577230966b.9.1738082048332;
-        Tue, 28 Jan 2025 08:34:08 -0800 (PST)
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH 2/3] tools/hvmloader: Replace LAPIC_ID() with cpu_to_apicid[]
-Date: Tue, 28 Jan 2025 16:33:41 +0000
-Message-ID: <20250128163342.1491-3-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250128163342.1491-1-alejandro.vallejo@cloud.com>
-References: <20250128163342.1491-1-alejandro.vallejo@cloud.com>
+        d=1e100.net; s=20230601; t=1738082904; x=1738687704;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=K5WdeAugfw1zLhTjqfKX13AAha5zDWO0+XALTcJYz8g=;
+        b=D/0GYAfKZ50neDvcjcxGcc9Klotpl7pNJcDpih2dkhwDrkBnrGVNwQSc6J54en/hDK
+         ZyEbjcO1HwPgNTxxmj3or35LQKu4jKDLn0ZXRG+a5nvdmW6Dgt/t6HSlluJYr8Y62X6z
+         4FY16dQHoAE85ToDdMzc/+4jpxHk0KD3WRPW2+Q4yyOcqUCl4m5V5qvY/Isp3+qnXSSx
+         oOdN4NBQV/vmHeubveZlmGKdI3lnkpHTYA/Dkg05EGuQJXLkf2VwOIp9INALSMZflvep
+         2w8ezk6/hwIEWTH8q1m5jS2q87rQQ7gRH81pWwA6RiWRMxLnby6IqH+yIb3tHvlWGBJY
+         nTJA==
+X-Forwarded-Encrypted: i=1; AJvYcCX3wn9yYRuUU1HKAPDtNuwk9YnsDAxqAy4neDeWWkOYKr/mCMhX31x1f6cOqeqV6LHXPAS5xcnguRo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwghSz3drn+nFahA6SxZW4UciWoKwfO033PnZ2dgp3bCEUKTbw5
+	DnTQvh4Y51bKv8iC1aNbvatWRalgEnG5aQV/w+J0PzNXXToXo715U9X1wOP0Ew==
+X-Gm-Gg: ASbGncuQuUp9haWbu1pST9TQN9prwTmXOWA+utEhO1V4ZyH8anYuQcEqLRN4bHpiPc1
+	DKH0QP5RaIrIQPc1C8Uba5VMxEI5cDnKmFhLA+pUjUwcVA+idLDMMQIGKCBjSg+KcE/PGrmI6eo
+	+4QmhGCRvhmFmjCv3s8jvS+4OV8JGBUSP3p9lIR+pAHjN7kG4a2GCyJcxcRxZG8CkrgoSToCrX6
+	LaVAWSj1tPIjN5hayXPWjaND0D0n8v/70YmaEiZOyWWQhFDpS+kli9/TwhVbWUIoJjMnj5QAQfy
+	jMRQcfZZnr33Ub7y1rKD5QNT+azfpAaUUmGMV139Ya7qkToiczffAwL1aKXuda7SZKjzLYUqvL+
+	NeMQouExkqdk=
+X-Google-Smtp-Source: AGHT+IFKcoSrZF/TOHLWTTIGAqV+4mH4gauL+MSjCK70Hg7n7K38mI3aiRuclcGFw1PMkg3oilCeMg==
+X-Received: by 2002:a17:907:72d0:b0:aa6:7cae:dba7 with SMTP id a640c23a62f3a-ab38b1e1dfcmr4683129366b.4.1738082903675;
+        Tue, 28 Jan 2025 08:48:23 -0800 (PST)
+Message-ID: <be8e6ec3-30d1-4d20-88a8-07698cc630fe@suse.com>
+Date: Tue, 28 Jan 2025 17:48:22 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 16/24] xen/console: introduce console_write()
+To: dmukhin@ford.com
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
+ <20250103-vuart-ns8250-v3-v1-16-c5d36b31d66c@ford.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250103-vuart-ns8250-v3-v1-16-c5d36b31d66c@ford.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Replace uses of the LAPIC_ID() macro with accesses to the
-cpu_to_apicid[] lookup table. This table contains the APIC IDs of each
-vCPU as probed at runtime rather than assuming a predefined relation.
+On 04.01.2025 02:58, Denis Mukhin via B4 Relay wrote:
+> --- a/xen/drivers/char/console.c
+> +++ b/xen/drivers/char/console.c
+> @@ -40,6 +40,11 @@
+>  #include <asm/guest.h>
+>  #endif
+>  
+> +/* Console flags. */
+> +enum {
+> +    CONSOLE_RING    = BIT(0, U),
+> +};
 
-Moved smp_initialise() ahead of apic_setup() in order to initialise
-cpu_to_apicid ASAP and avoid using it uninitialised. Note that bringing
-up the APs doesn't need the APIC in hvmloader becasue it always runs
-virtualized and uses the PV interface.
+These aren't console flags, but flags passed to the new console_write().
+The comment wants adjusting accordingly, and I guess the enum would also
+best move immediately ahead of the function.
 
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
----
-Changes from v7 of the longer topology series:
-  * Removed ASSERT() for the MP tables and merely skipped writing them
-    if any vCPU has an APIC ID >=255.
----
- tools/firmware/hvmloader/config.h    | 3 ++-
- tools/firmware/hvmloader/hvmloader.c | 6 +++---
- tools/firmware/hvmloader/mp_tables.c | 2 +-
- tools/firmware/hvmloader/util.c      | 2 +-
- 4 files changed, 7 insertions(+), 6 deletions(-)
+> @@ -636,6 +641,16 @@ static void cf_check notify_dom0_con_ring(void *unused)
+>  static DECLARE_SOFTIRQ_TASKLET(notify_dom0_con_ring_tasklet,
+>                                 notify_dom0_con_ring, NULL);
+>  
+> +static bool console_locks_busted;
+> +
+> +static void conring_write(const char *str, size_t len)
+> +{
+> +    conring_puts(str, len);
+> +
+> +    if ( !console_locks_busted )
+> +        tasklet_schedule(&notify_dom0_con_ring_tasklet);
+> +}
 
-diff --git a/tools/firmware/hvmloader/config.h b/tools/firmware/hvmloader/config.h
-index cd716bf39245..6e1da137d779 100644
---- a/tools/firmware/hvmloader/config.h
-+++ b/tools/firmware/hvmloader/config.h
-@@ -48,8 +48,9 @@ extern uint8_t ioapic_version;
- 
- #define IOAPIC_ID           0x01
- 
-+extern uint32_t *cpu_to_apicid;
-+
- #define LAPIC_BASE_ADDRESS  0xfee00000
--#define LAPIC_ID(vcpu_id)   ((vcpu_id) * 2)
- 
- #define PCI_ISA_DEVFN       0x08    /* dev 1, fn 0 */
- #define PCI_ISA_IRQ_MASK    0x0c20U /* ISA IRQs 5,10,11 are PCI connected */
-diff --git a/tools/firmware/hvmloader/hvmloader.c b/tools/firmware/hvmloader/hvmloader.c
-index f8af88fabf24..4e330fc1e241 100644
---- a/tools/firmware/hvmloader/hvmloader.c
-+++ b/tools/firmware/hvmloader/hvmloader.c
-@@ -224,7 +224,7 @@ static void apic_setup(void)
- 
-     /* 8259A ExtInts are delivered through IOAPIC pin 0 (Virtual Wire Mode). */
-     ioapic_write(0x10, APIC_DM_EXTINT);
--    ioapic_write(0x11, SET_APIC_ID(LAPIC_ID(0)));
-+    ioapic_write(0x11, SET_APIC_ID(cpu_to_apicid[0]));
- }
- 
- struct bios_info {
-@@ -341,11 +341,11 @@ int main(void)
- 
-     printf("CPU speed is %u MHz\n", get_cpu_mhz());
- 
-+    smp_initialise();
-+
-     apic_setup();
-     pci_setup();
- 
--    smp_initialise();
--
-     perform_tests();
- 
-     if ( bios->bios_info_setup )
-diff --git a/tools/firmware/hvmloader/mp_tables.c b/tools/firmware/hvmloader/mp_tables.c
-index 77d3010406d0..3c93a5c947d9 100644
---- a/tools/firmware/hvmloader/mp_tables.c
-+++ b/tools/firmware/hvmloader/mp_tables.c
-@@ -199,7 +199,7 @@ static void fill_mp_config_table(struct mp_config_table *mpct, int length)
- static void fill_mp_proc_entry(struct mp_proc_entry *mppe, int vcpu_id)
- {
-     mppe->type = ENTRY_TYPE_PROCESSOR;
--    mppe->lapic_id = LAPIC_ID(vcpu_id);
-+    mppe->lapic_id = cpu_to_apicid[vcpu_id];
-     mppe->lapic_version = 0x11;
-     mppe->cpu_flags = CPU_FLAG_ENABLED;
-     if ( vcpu_id == 0 )
-diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
-index d3b3f9038e64..2d07ce129013 100644
---- a/tools/firmware/hvmloader/util.c
-+++ b/tools/firmware/hvmloader/util.c
-@@ -827,7 +827,7 @@ static void acpi_mem_free(struct acpi_ctxt *ctxt,
- 
- static uint32_t acpi_lapic_id(unsigned cpu)
- {
--    return LAPIC_ID(cpu);
-+    return cpu_to_apicid[cpu];
- }
- 
- void hvmloader_acpi_build_tables(struct acpi_config *config,
--- 
-2.48.1
+This doesn't really need to be a separate function, does it?
 
+> @@ -644,8 +659,47 @@ static inline void xen_console_write_debug_port(const char *buf, size_t len)
+>                     : "=&S" (tmp), "=&c" (tmp)
+>                     : "0" (buf), "1" (len), "d" (XEN_HVM_DEBUGCONS_IOPORT) );
+>  }
+> +
+> +static void xen_console_write(const char *str, size_t len)
+> +{
+> +    if ( xen_guest )
+> +        xen_hypercall_console_write(str, len);
+> +    else
+> +        xen_console_write_debug_port(str, len);
+> +}
+
+Nor does this, I suppose. The more that the sole call to here ...
+
+>  #endif
+>  
+> +/*
+> + * Write characters to console.
+> + *
+> + * That will handle all possible scenarios working w/ console
+> + * - serial console;
+> + * - VGA console (x86 only);
+> + * - __HYPERVISOR_console_io hypercall (x86 only);
+> + * - debug I/O port (x86 only);
+> + * - PV console.
+> + */
+> +static void console_write(const char *str, size_t len, unsigned int flags)
+> +{
+> +    ASSERT(rspin_is_locked(&console_lock));
+> +
+> +    console_serial_puts(str, len);
+> +    video_puts(str, len);
+> +
+> +#ifdef CONFIG_X86
+> +    if ( opt_console_xen )
+> +        xen_console_write(str, len);
+> +#endif
+
+... continues to sit in an #ifdef.
+
+> @@ -666,28 +720,8 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
+>  
+>          if ( is_hardware_domain(cd) )
+>          {
+> -            /* Use direct console output as it could be interactive */
+
+This comment looks like being removed with no replacement? Why?
+
+>              nrspin_lock_irq(&console_lock);
+> -
+> -            console_serial_puts(kbuf, kcount);
+> -            video_puts(kbuf, kcount);
+> -
+> -#ifdef CONFIG_X86
+> -            if ( opt_console_xen )
+> -            {
+> -                if ( xen_guest )
+> -                    xen_hypercall_console_write(kbuf, kcount);
+> -                else
+> -                    xen_console_write_debug_port(kbuf, kcount);
+> -            }
+> -#endif
+> -
+> -            if ( opt_console_to_ring )
+> -            {
+> -                conring_puts(kbuf, kcount);
+> -                tasklet_schedule(&notify_dom0_con_ring_tasklet);
+> -            }
+> -
+> +            console_write(kbuf, kcount, !!opt_console_to_ring);
+
+Here you assume CONSOLE_RING is bit 0. Please don't create such (then
+also un-annotated) implicit dependencies.
+
+> @@ -788,33 +822,6 @@ long do_console_io(
+>   * *****************************************************
+>   */
+>  
+> -static bool console_locks_busted;
+> -
+> -static void __putstr(const char *str)
+> -{
+
+Please note the comment up from here, the tail of which is visible in
+context. I wonder whether the new function wouldn't better live here,
+then also reducing the diff quite a bit. Requiring a forward decl
+for this to work isn't very nice, but a reasonable price to pay, I
+think.
+
+Jan
 
