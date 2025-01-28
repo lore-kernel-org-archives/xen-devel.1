@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9377DC02192
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jan 2025 16:28:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.878623.1288811 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25205C0218A
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jan 2025 16:32:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.878649.1288835 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcoRk-0003RF-49; Tue, 28 Jan 2025 16:28:16 +0000
+	id 1tcoVW-0006Q5-TD; Tue, 28 Jan 2025 16:32:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 878623.1288811; Tue, 28 Jan 2025 16:28:16 +0000
+Received: by outflank-mailman (output) from mailman id 878649.1288835; Tue, 28 Jan 2025 16:32:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcoRj-0003Qt-VO; Tue, 28 Jan 2025 16:28:15 +0000
-Received: by outflank-mailman (input) for mailman id 878623;
- Tue, 28 Jan 2025 16:28:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=00fH=UU=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tcoRi-0003Ni-HS
- for xen-devel@lists.xenproject.org; Tue, 28 Jan 2025 16:28:14 +0000
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [2a00:1450:4864:20::42e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id de2588e6-dd94-11ef-a0e6-8be0dac302b0;
- Tue, 28 Jan 2025 17:28:12 +0100 (CET)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3862ca8e0bbso5198478f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jan 2025 08:28:12 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1bad87sm14559514f8f.74.2025.01.28.08.28.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 08:28:11 -0800 (PST)
+	id 1tcoVW-0006Py-QD; Tue, 28 Jan 2025 16:32:10 +0000
+Received: by outflank-mailman (input) for mailman id 878649;
+ Tue, 28 Jan 2025 16:32:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jygh=UU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tcoVV-0006Ps-Uw
+ for xen-devel@lists.xenproject.org; Tue, 28 Jan 2025 16:32:10 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6a9645a7-dd95-11ef-99a4-01e77a169b0f;
+ Tue, 28 Jan 2025 17:32:08 +0100 (CET)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-38633b5dbcfso6639602f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jan 2025 08:32:08 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab69179d7c7sm578711566b.112.2025.01.28.08.32.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jan 2025 08:32:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,253 +47,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: de2588e6-dd94-11ef-a0e6-8be0dac302b0
+X-Inumbo-ID: 6a9645a7-dd95-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1738081692; x=1738686492; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CD81beFmPqaU1R9FOQxjBPyp+1ickihRrVRD2fGWEdE=;
-        b=Smv+sZb4dNiGdnWum/Nv2lCuU9vVoZkfrzg/j3z7lgsAmtz+Svj6xMoLlRwb7socqW
-         +za+Icrq0kmarjmimJBDO+YTa281/RsM8G65WkgEJuINP1MOvBxW779R0kJM8qQEeYaN
-         4MlOcxKDGj50AWt6suqMJPT2cPRRa/Vw0sLJE=
+        d=suse.com; s=google; t=1738081927; x=1738686727; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=UkCd7FMoo0J6NkVeEHdu6xmJCSHgM3opraZr/s1fnRg=;
+        b=E27BLiXWCHlcqMhUvIV+l4ICS9P0+OwmLaG1fTM4smBWDdQ1G7cEyaOdml9dP/zCsg
+         clWmSWP3fjGRYf6CWjV3WRbtlXUxiPozFHdAoUgS9kP3dR76E7RNSGW68BA75dvyPGR2
+         FkNeQKsG/3zTq59kRUf194CP6Sf6r0O9cCpVVkgXPs4EtIYtysaVH1/5SGxAP8nWYAZV
+         QV/pl3ncqPBAl7K7CvQ1Gub3E2XhTbbvj9QtCn/Ew9v2XuSRsdGPqHbOYN2pfrk/cVAc
+         dS05+kG8zACthkU//btpN8sx/69qIll2RYAxniosjC6O4i+splYwOZsusmgvR9d34k+n
+         xjfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738081692; x=1738686492;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CD81beFmPqaU1R9FOQxjBPyp+1ickihRrVRD2fGWEdE=;
-        b=m07d/dVEf/6jCeETdSu/kwif/gRVFW78pDsJ0L/pw3s/378YKMrGnezbaxagstZKzf
-         QKyqKuuyFKyfw7/nwkIeKrXQzUgTfKX6PtQxwxb6xnAkuVx0SojIv/iePU09xZGJWZFP
-         lM3cStNF0ZaAUdjxpvuu65WR3GkZ1YE4NRZ7aNS6jXYUHUNpNJRaPv1z1NrHFvnOtKLv
-         4Tm9Cmw3rWn1PNEUXNL2sxEckdqltnZwuEzifv0opb42sfpHq4jf+bwyR3wTwfzPDgyL
-         tyhK+oUDpbtIhbHiXeKTVPegME7MwT34EbNHr4HC2CLoKAKTZVZliLj9mSBjXzjakoU9
-         F1uA==
-X-Gm-Message-State: AOJu0YwhXIEAqlkHVxkoC91CaQ2EcCuST/SK2e6uXqMWHYgQhI1SN5uE
-	d6x0BFCZrSe6oYcfYQ7uoafHBeUetZklnP7Rp0Z0yQRlXo9o6pXvRf9EGX1/r0E0fYw1YcFyXLE
-	Z
-X-Gm-Gg: ASbGnctR1utRzzIDkm6+wxKlpxK1V3qA/EWA6DNecok5RgQmh1fWST4viaRXsGEuTJA
-	dlb/YEhRhXkN4vDLgPaju0uAJdrjHWN/9INZ1pWFGeAtxTU3LYT2AIu7lvv95Ab66YsjwqNxown
-	QE1inMVNGscHsHghtzgZsN7EUokNGWk1o/d/X6t7R2QNEj2R2WLn1qT2hKah+I7FfvjHEzqQmEm
-	4fiYWM5tn3MUhgwlWTTL5uTBifElmBQ/AVf77wkGnkhcCdlLbSrj6F/PmKscIOcpJUy1eDrXRbl
-	7F/zWh1UAPMtrIxTgAnY4Ga0mZxH1sQ=
-X-Google-Smtp-Source: AGHT+IFT1mqzxuzpsPHaj5Q551xZdz3zB9BacWXjyIfD1UFaX6aPFzxddX6WMZwbn1IvIvZtuL0ojQ==
-X-Received: by 2002:a05:6000:2a6:b0:385:eb7c:5d0f with SMTP id ffacd0b85a97d-38bf566a239mr42568251f8f.26.1738081691636;
-        Tue, 28 Jan 2025 08:28:11 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH for-4.20 1/2] x86/shutdown: quiesce devices ahead of AP shutdown
-Date: Tue, 28 Jan 2025 17:27:41 +0100
-Message-ID: <20250128162742.90431-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20250128162742.90431-1-roger.pau@citrix.com>
-References: <20250128162742.90431-1-roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1738081927; x=1738686727;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UkCd7FMoo0J6NkVeEHdu6xmJCSHgM3opraZr/s1fnRg=;
+        b=vCoL8xWvxwH6eaArSqCVOorBWCPw/8LSxrTB0HtAvG3ukiT/tGFegGWR34Dvc8Eu5I
+         Wszu9Nt9MPVor50TC9vT0ylqmYI3pYdyh5+jz+7eoN7Ze1yjUXT2kv0gvjlcXUVWkD2E
+         FZgBHMUQ63CfMiGTuWVcOjzG/25KpR1MuSiVYrt1sm76f6YhznZyDZog7vsJw8ap1Nd8
+         On0fVZ5JiD7+FJLYtsCGLKBempoEYqLiHgt6wGjaVbZ/81BpOhpCOqU7MnePcn01jvMX
+         SSRjgOgqAlFFDU1O9MsjnN1yhe2GnM7RNvlodcC8HiHvoqyARUBt5Cvu5RL1Mrd8I7zf
+         Rx3A==
+X-Forwarded-Encrypted: i=1; AJvYcCXeURU2EJ463IYRpMDMzs0Tqb8sgWvie/Cxd7dpTgCQxvkRnfeHq0faX5AZ53HFlEQkD3jTcfL67mg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwqIDO1j0NOHFGMcagJ8nSbiV7N0z8KEFaSDwvadVwpq9TvkZ9q
+	qw9K+BBw0KdXVit/FJQ2eP4YL+lw2VOSRerPFaOpLuUuaFrUzjqlMGBlEY6kQg==
+X-Gm-Gg: ASbGncsD3EMLB8SQhtWf3BD1NQPz1vSUbIeVnOb8tJy8emCjkUBd2+FdJ6NXnnRlWnM
+	UwtvCqAhn8noULwxL8jUkQEzC7kcx7hF22mcubJPoFDfz6dps99QyWwV7Wi2lR88r00zmuSbxeX
+	gBcvPFVsayIJ1ULLp5+iT+rybftXSmdO5xyoa7kKj6MTxG+lQozuuh/LMP2JC6oU/Lsu87g8QD/
+	oEA+3aTa8aaWfwJVed4ypP+76YiZsQCIP03Y9FcYB5/70emypbFm4rK6E68L9Upyx/s76T4r9vZ
+	HY+rOyclJvD0MeiKsDMBxsnU6af1NKPVH6JQUBSwsszKLxVds0z3uwBZfGf9w9LN5DqWbscqLy5
+	O
+X-Google-Smtp-Source: AGHT+IHapNumHUc0+s5PUTlXuSriAJ3SYR0jIwhBcAr6R0GtwfMVnAiIsksKYBNOfHW3E39Il90NCQ==
+X-Received: by 2002:a05:6000:186f:b0:385:fa26:f0ac with SMTP id ffacd0b85a97d-38bf564926cmr39788652f8f.7.1738081927522;
+        Tue, 28 Jan 2025 08:32:07 -0800 (PST)
+Message-ID: <d471f3b0-5638-47b3-927e-318b0575eaa3@suse.com>
+Date: Tue, 28 Jan 2025 17:32:06 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 15/24] xen/console: make console buffer size
+ configurable
+To: dmukhin@ford.com
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20250103-vuart-ns8250-v3-v1-0-c5d36b31d66c@ford.com>
+ <20250103-vuart-ns8250-v3-v1-15-c5d36b31d66c@ford.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250103-vuart-ns8250-v3-v1-15-c5d36b31d66c@ford.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-The current shutdown logic in smp_send_stop() will first disable the APs,
-and then attempt to disable (some) of the interrupt sources.
+On 04.01.2025 02:58, Denis Mukhin via B4 Relay wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
+> 
+> Add new CONRING_SIZE Kconfig parameter to specify the boot console buffer size
+> in bytes. The value is rounded to the nearest power of 2 to match existing
+> conring_size= behavior.
+> 
+> The supported range is [16KiB..128MiB].
+> 
+> Bump default size to 32 KiB.
+> 
+> Link: https://gitlab.com/xen-project/xen/-/issues/185
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 
-There are two issues with this approach; the first one being that MSI
-interrupt sources are not disabled, the second one is the APs are stopped
-before interrupts are disabled.  On AMD systems this can lead to the
-triggering of local APIC errors:
+As asked elsewhere already: How's this related to the goal of the series?
 
-APIC error on CPU0: 00(08), Receive accept error
+> --- a/docs/misc/xen-command-line.pandoc
+> +++ b/docs/misc/xen-command-line.pandoc
+> @@ -423,12 +423,15 @@ The following are examples of correct specifications:
+>      com1=baud=115200,parity=n,stop-bits=1,io-base=0x3f8,reg-width=4
+>  
+>  ### conring_size
+> -> `= <size>`
+> +> `= <size-in-bytes>`
 
-Such error message can be printed in a loop, thus blocking the system from
-rebooting.  I assume this loop is created by the error being triggered by
-the console interrupt, which is further triggered by the ESR reporting
-write to the console.
+May I direct you to the explanations near the top of the file? <size>
+is a uniform term throughout this document, and wants to stay like this.
 
-Intel SDM states:
+> --- a/xen/drivers/char/Kconfig
+> +++ b/xen/drivers/char/Kconfig
+> @@ -96,6 +96,17 @@ config SERIAL_TX_BUFSIZE
+>  
+>  	  Default value is 32768 (32KiB).
+>  
+> +config CONRING_SIZE
+> +	int "Console buffer size"
+> +	default 32768
+> +	help
+> +	  Select the boot console buffer size (in bytes).
+> +	  Note, the value provided will be rounded down to the nearest power of 2.
+> +	  Run-time console buffer size is the same as the boot console size,
+> +	  unless enforced via 'conring_size=' boot parameter.
 
-"Receive Accept Error.
+Maybe s/enforced/overridden/ ?
 
-Set when the local APIC detects that the message it received was not
-accepted by any APIC on the APIC bus, including itself. Used only on P6
-family and Pentium processors."
+> +	  Default value is 32768 (32KiB). The supported range is [16KiB..128MiB].
 
-So the error shouldn't trigger on any Intel CPU supported by Xen.
+Yet then there's no "range" directive.
 
-However AMD doesn't make such claims, and indeed the error is broadcasted
-to all local APIC when for example an interrupt targets a CPU that's
-offline.
+> --- a/xen/drivers/char/console.c
+> +++ b/xen/drivers/char/console.c
+> @@ -100,12 +100,15 @@ static int cf_check parse_console_timestamps(const char *s);
+>  custom_runtime_param("console_timestamps", parse_console_timestamps,
+>                       con_timestamp_mode_upd);
+>  
+> -/* conring_size: allows a large console ring than default (16kB). */
+> +/* conring_size: allows a large console ring than default (32 KiB). */
 
-To prevent the error from triggering, move the masking of IO-APIC pins
-ahead of stopping the APs.  Also introduce a new function that disables
-MSI and MSI-X on all PCI devices.  Remove the call to fixup_irqs() since
-there's no point in attempting to move interrupts: all sources will be
-either masked or disabled.
+As you touch this, also s/large/larger/ ?
 
-For the NMI crash path also call the newly introduced function, with the
-hope that disabling MSI and MSI-X will make it easier for the (possible)
-crash kernel to boot, as it could otherwise receive the same "Receive
-accept error" upon re-enabling interrupts.
+>  static uint32_t __initdata opt_conring_size;
+>  size_param("conring_size", opt_conring_size);
+>  
+> -#define _CONRING_SIZE 16384
+> -#define CONRING_IDX_MASK(i) ((i)&(conring_size-1))
+> +#define _CONRING_SIZE       (1UL << (31 - __builtin_clz(CONFIG_CONRING_SIZE)))
+> +_Static_assert(_CONRING_SIZE >= 4096 && _CONRING_SIZE <= MB(128),
+> +    "CONFIG_CONRING_SIZE must be in [4K..128M] range");
 
-Note that this will have the side-effect of preventing further IOMMU
-interrupts from being delivered, that's expected and at that point in the
-shutdown process no further interaction with the IOMMU should be relevant.
-Also note all current callers of smp_send_stop() do so after having called
-console_start_sync(), so disabling the console interrupt won't hamper
-console output.
+Hmm, 4k here as the lower bound, when in description and Kconfig it's
+said to be 16k?
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/crash.c           |  1 +
- xen/arch/x86/include/asm/msi.h |  1 +
- xen/arch/x86/msi.c             | 14 ++++++++++++++
- xen/arch/x86/smp.c             | 10 +++++-----
- xen/drivers/passthrough/pci.c  | 32 ++++++++++++++++++++++++++++++++
- xen/include/xen/pci.h          |  2 ++
- 6 files changed, 55 insertions(+), 5 deletions(-)
+Also I fear _Static_assert() can't be used here, for not being supported
+by all gcc versions we continue to permit being used on x86. That'll be
+unnecessary anyway once you put in place the missing range directive in
+Kconfig. (If something like this needed keeping, it would be
+BUILD_BUG_ON() that you want to use instead. Which, yes, can only be
+used inside a function. Hence why we have a number of build_assertions()
+functions throughout the codebase.)
 
-diff --git a/xen/arch/x86/crash.c b/xen/arch/x86/crash.c
-index a789416ca3ae..55a96d469f47 100644
---- a/xen/arch/x86/crash.c
-+++ b/xen/arch/x86/crash.c
-@@ -176,6 +176,7 @@ static void nmi_shootdown_cpus(void)
-         x2apic_enabled = (current_local_apic_mode() == APIC_MODE_X2APIC);
- 
-         disable_IO_APIC();
-+        pci_disable_msi_all();
-         hpet_disable();
-     }
- }
-diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
-index 63adb19820e8..7f9e531f73e6 100644
---- a/xen/arch/x86/include/asm/msi.h
-+++ b/xen/arch/x86/include/asm/msi.h
-@@ -86,6 +86,7 @@ extern int pci_enable_msi(struct pci_dev *pdev, struct msi_info *msi,
- extern void pci_disable_msi(struct msi_desc *msi_desc);
- extern int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool off);
- extern void pci_cleanup_msi(struct pci_dev *pdev);
-+extern void pci_disable_msi_all(void);
- extern int setup_msi_irq(struct irq_desc *desc, struct msi_desc *msidesc);
- extern int __setup_msi_irq(struct irq_desc *desc, struct msi_desc *msidesc,
-                            hw_irq_controller *handler);
-diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-index e2360579deda..f53b50c98f2a 100644
---- a/xen/arch/x86/msi.c
-+++ b/xen/arch/x86/msi.c
-@@ -1248,6 +1248,20 @@ void pci_cleanup_msi(struct pci_dev *pdev)
-     msi_free_irqs(pdev);
- }
- 
-+static int cf_check disable_msi(struct pci_dev *pdev, void *arg)
-+{
-+    msi_set_enable(pdev, 0);
-+    msix_set_enable(pdev, 0);
-+
-+    return 0;
-+}
-+
-+void pci_disable_msi_all(void)
-+{
-+    /* Disable MSI and/or MSI-X on all devices. */
-+    pci_iterate_devices(disable_msi, NULL);
-+}
-+
- int pci_reset_msix_state(struct pci_dev *pdev)
- {
-     unsigned int pos = pdev->msix_pos;
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index 02a6ed7593f3..0cf03660214d 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -358,14 +358,15 @@ void smp_send_stop(void)
- {
-     unsigned int cpu = smp_processor_id();
- 
-+    local_irq_disable();
-+    disable_IO_APIC();
-+    pci_disable_msi_all();
-+    local_irq_enable();
-+
-     if ( num_online_cpus() > 1 )
-     {
-         int timeout = 10;
- 
--        local_irq_disable();
--        fixup_irqs(cpumask_of(cpu), 0);
--        local_irq_enable();
--
-         smp_call_function(stop_this_cpu, NULL, 0);
- 
-         /* Wait 10ms for all other CPUs to go offline. */
-@@ -376,7 +377,6 @@ void smp_send_stop(void)
-     if ( cpu_online(cpu) )
-     {
-         local_irq_disable();
--        disable_IO_APIC();
-         hpet_disable();
-         __stop_this_cpu();
-         x2apic_enabled = (current_local_apic_mode() == APIC_MODE_X2APIC);
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 777c6b1a7fdc..9782750f7902 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -1803,6 +1803,38 @@ int iommu_do_pci_domctl(
-     return ret;
- }
- 
-+struct segment_iter {
-+    int (*handler)(struct pci_dev *pdev, void *arg);
-+    void *arg;
-+};
-+
-+static int cf_check iterate_all(struct pci_seg *pseg, void *arg)
-+{
-+    const struct segment_iter *iter = arg;
-+    struct pci_dev *pdev;
-+
-+    list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
-+    {
-+        int rc = iter->handler(pdev, iter->arg);
-+
-+        if ( rc )
-+            return rc;
-+    }
-+
-+    return 0;
-+}
-+
-+int pci_iterate_devices(int (*handler)(struct pci_dev *pdev, void *arg),
-+                        void *arg)
-+{
-+    struct segment_iter iter = {
-+        .handler = handler,
-+        .arg = arg,
-+    };
-+
-+    return pci_segments_iterate(iterate_all, &iter);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
-index f784e9116059..d4c9837af722 100644
---- a/xen/include/xen/pci.h
-+++ b/xen/include/xen/pci.h
-@@ -225,6 +225,8 @@ int pci_hide_device(unsigned int seg, unsigned int bus, unsigned int devfn);
- struct pci_dev *pci_get_pdev(const struct domain *d, pci_sbdf_t sbdf);
- struct pci_dev *pci_get_real_pdev(pci_sbdf_t sbdf);
- void pci_check_disable_device(u16 seg, u8 bus, u8 devfn);
-+int pci_iterate_devices(int (*handler)(struct pci_dev *pdev, void *arg),
-+                        void *arg);
- 
- uint8_t pci_conf_read8(pci_sbdf_t sbdf, unsigned int reg);
- uint16_t pci_conf_read16(pci_sbdf_t sbdf, unsigned int reg);
--- 
-2.46.0
+> +#define CONRING_IDX_MASK(i) ( (i) & (conring_size - 1) )
 
+Once again - no blanks immediately inside parentheses, _except_ as
+written in ./CODING_STYLE (i.e. in control flow statements).
+
+Jan
 
