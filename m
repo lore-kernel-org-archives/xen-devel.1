@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 602F7C0218A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A75C02190
 	for <xen-devel@archiver.kernel.org>; Tue, 28 Jan 2025 16:28:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.878622.1288804 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.878624.1288816 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcoRj-0003O5-Qj; Tue, 28 Jan 2025 16:28:15 +0000
+	id 1tcoRk-0003Vv-Br; Tue, 28 Jan 2025 16:28:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 878622.1288804; Tue, 28 Jan 2025 16:28:15 +0000
+Received: by outflank-mailman (output) from mailman id 878624.1288816; Tue, 28 Jan 2025 16:28:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tcoRj-0003Ny-OG; Tue, 28 Jan 2025 16:28:15 +0000
-Received: by outflank-mailman (input) for mailman id 878622;
+	id 1tcoRk-0003UB-68; Tue, 28 Jan 2025 16:28:16 +0000
+Received: by outflank-mailman (input) for mailman id 878624;
  Tue, 28 Jan 2025 16:28:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=00fH=UU=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tcoRi-0003Nh-9n
+ id 1tcoRi-0003Ni-Qd
  for xen-devel@lists.xenproject.org; Tue, 28 Jan 2025 16:28:14 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dd5dbb0e-dd94-11ef-99a4-01e77a169b0f;
- Tue, 28 Jan 2025 17:28:11 +0100 (CET)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-436326dcb1cso40024185e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jan 2025 08:28:11 -0800 (PST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [2a00:1450:4864:20::42c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id df285eb8-dd94-11ef-a0e6-8be0dac302b0;
+ Tue, 28 Jan 2025 17:28:14 +0100 (CET)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-385d7b4da2bso5507860f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jan 2025 08:28:14 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd4900e2sm174050885e9.24.2025.01.28.08.28.09
+ ffacd0b85a97d-38c2a1bb0d4sm14883704f8f.69.2025.01.28.08.28.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 08:28:09 -0800 (PST)
+ Tue, 28 Jan 2025 08:28:12 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,83 +46,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd5dbb0e-dd94-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: df285eb8-dd94-11ef-a0e6-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1738081690; x=1738686490; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bfGHCk6ylqGUI3xZCBhS9XoBD9F0iDbrjpTzeSrCs9k=;
-        b=bJNzahERuM9jAcjTLkXwQvIROVaFDnExdDd2gW7jBcgQxHDfSAW+hhIvmU9OUocRoW
-         DSqw9gxbqk5pVLWrqrbaw63Ujib9DmGbPajGhZ38Osr3z8m8B1q5Ax3H4k2iAQSGqkfr
-         hy60yg+CoXlLiMM08hy7utBw7Y5Y4FGvDXmKY=
+        d=citrix.com; s=google; t=1738081693; x=1738686493; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hnHpl/m5AWH7KgOy5WgkrsyIBrkq3GKBbJwmITZKh7E=;
+        b=vj7zW69retZetKofy0xJHqUuRg88dw8F6kKZwO9jIIvuojG91IjAP1s74Lk0VLE4OJ
+         uV5o+e+YS79WDPfHgBo5dUlFBIQcOVQlnUQHg5pnsml6zChu9XGV4EH/iTn4NoAR5ewx
+         5g4NxKxs3zqq7fVP+RSY1zld6P2wkQgQJGg7k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738081690; x=1738686490;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bfGHCk6ylqGUI3xZCBhS9XoBD9F0iDbrjpTzeSrCs9k=;
-        b=QkQCYdZsmcbRv6B92kWL7lY43WlScWqldqRXOSS+pl7JY+0kp+C8ZxYjcFPwTgR+ai
-         AQIiHBBilfVJDwpbzFU7o8mDMs/c3Zqj+P46AMe2z+/62UpWI2Kd/VGiSDY1TtAyr79e
-         9y20wJYHs/zLg1QirGNzrmOWfHVA6PfnO6F49YG7Tiu0dwObtVpmjjVCT3SoHce3voEA
-         btSvyBGTQ8TeVWNqN+bWFFwAy5+L21pJGECQpmRAf4R5cxzKZyUdB/8D2XXnmjBDnPuY
-         7ekcu9FkaUNfQPJLNomOB37YZhZu/Noqk+UUNk0PlwYVoH6Im1+RYo91Xp617v9yIt6I
-         NptA==
-X-Gm-Message-State: AOJu0YxRvWlTN5fbwIpzmbMpvyZjHx9r7MnJ6HVzINb2TAD6o2aEzpe6
-	dCwUDyp3gJthiSf8trwXL5i1gQwZXSqLr3y8CTRQHJjjSokq9f+eJ4RdLNO9VNLii1Me4Y8laPW
-	d
-X-Gm-Gg: ASbGncuhHhrhobSyLMEtpPWmSHlHIcIOpZz7Q361AWGyvEZMO1qmJywlGpB1/hfQnOX
-	Oc7Ew4+XMr5wdtpRT6GDSaWXTxzr7E1/UUn8fxneqYZt7ZnVoXk8knG5qsg4s99ei5PaYVMZvKi
-	sxZ1qGN7bkR6Y+1DsmMIhsTmhl1rNo9qMHBLlzsrqN66Z6UdPj8/hkr8xYKrY1E8sCnG8mordCE
-	uTrhQTfI7lRc12hekgtKrzc1amDf07j3Lbp1uwsEg3OtxePksaC3sHLGLdwLNrkeCpho8r+5bOk
-	BPpARh3jA5RIB8l6al/J
-X-Google-Smtp-Source: AGHT+IHH2eFbXY53zF4x9LgAzRtPh7a1FZtQWBbb4xMPa3oJK39nsHjbrHVv3z9wiW/gTyKn/ryZ6Q==
-X-Received: by 2002:a05:600c:1d07:b0:436:488f:50a with SMTP id 5b1f17b1804b1-438913ef4b7mr431819065e9.17.1738081690282;
-        Tue, 28 Jan 2025 08:28:10 -0800 (PST)
+        d=1e100.net; s=20230601; t=1738081693; x=1738686493;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hnHpl/m5AWH7KgOy5WgkrsyIBrkq3GKBbJwmITZKh7E=;
+        b=B0Jr8HvnXC7NmVDrD2gQ4Aax4XAgYxGOLHAkP/b/Zbt1z4qOB6fayNrRh+71m06FKx
+         xfQQgtNlVlbmWYvD1PSWTXI4Py3XtPdQe/+ocb+uXxRuipaYfD6cAHCEpShuZ+T/C2Nt
+         m7VVWcNrSHnaVE8Y0PVNegOTOMu9i6/BjlHedF3QXFI6GlD/vAhS37RDD7LfGLJepFuf
+         nRtIhF2syvACeXaaQRKRG4bVJk9xgBK2GRCGIKryMynIgc5oziUA5Wt9WByFEWGfKdrz
+         JFFzQNoaak7+xk2X30TLshaFP/+KSSdIgVmnA6X2Gyma5AUO5DraiiicJJ/5fzZ1Rzye
+         Gqog==
+X-Gm-Message-State: AOJu0Yy6Pzzyw3ffrILNnVaux/LGv7E9CdAp00HvM/kX5c1iW2IgPg1y
+	qUWvJ734masV0kkwJEyZzBTeeNEhSwrOw8Ocl6Wa3kFuCyf0YlnviOzD+c5RYChnXj0TwmxwgyC
+	1
+X-Gm-Gg: ASbGncs68mG/4ZZHghWmE+Q/JZo2NDgLxnApg0X+RxY3lksmDel5910QgiQuje1W1p/
+	MoYsNuI6PtlCnA3YxmvmeOWzkhc+Ni2jGwJzGS/AhHxO4PRK5dbo0GE7M7ZVzwJODfECp0E8nG/
+	9vIIgsNipQaLjFrsiw5MvtZU9SvLclS+yQtd6oHnLNRvqrjOMuV1gifSx06lJDyEbhujY90N83y
+	+0E0eTMf56P2tMcLTTl4Jo/1xxci7aDkmCYiC5zkwzLREvDIWSXuTOIX4Xr127TUwvsE6iXF9xr
+	HlpwYVr/jtTtScAoT2VMxoZheKE2Dyg=
+X-Google-Smtp-Source: AGHT+IHmQZTZKmzSN4EMPA4+MYUogYUFe6ox8dngn7MLh0/Pc/Sz4zd+ZoG+yXc6EgrOT6lW698cUw==
+X-Received: by 2002:a05:6000:186f:b0:385:fa26:f0ac with SMTP id ffacd0b85a97d-38bf564926cmr39771375f8f.7.1738081692812;
+        Tue, 28 Jan 2025 08:28:12 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH for-4.20 0/2] x86/shutdown: prevent lapic "Receive accept error" errors on AMD
-Date: Tue, 28 Jan 2025 17:27:40 +0100
-Message-ID: <20250128162742.90431-1-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.20 2/2] x86/irq: drop fixup_irqs() parameters
+Date: Tue, 28 Jan 2025 17:27:42 +0100
+Message-ID: <20250128162742.90431-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20250128162742.90431-1-roger.pau@citrix.com>
+References: <20250128162742.90431-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+The solely remaining caller always passes the same globally available
+parameters.  Drop the parameters and modify fixup_irqs() to use
+cpu_online_map in place of the input mask parameter, and always be verbose
+in its output printing.
 
-The following series aims to fix the issues seeing during shutdown on
-AMD boxes related to "Receive accept error" local APIC messages.
+While there remove some of the checks given the single context where
+fixup_irqs() is now called, which should always be in the CPU offline path,
+after the CPU going offline has been removed from cpu_online_map.
 
-Fix patch aims to fix the issue, while second patch adjust fixup_irqs()
-given it now has a single caller.
+No functional change intended.
 
-I think at least patch 1 should be considered for 4.20, as it fixes a
-real issue on AMD boxes that prevents rebooting them.
-
-Thanks, Roger.
-
-Roger Pau Monne (2):
-  x86/shutdown: quiesce devices ahead of AP shutdown
-  x86/irq: drop fixup_irqs() parameters
-
- xen/arch/x86/crash.c           |  1 +
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+There's more cleanup that can likely be done here, but it's best if such
+cleanup is done after the cpu_mask and old_cpu_mask irq_desc fields are
+converted from cpu masks to integers, as logic delivery mode should never
+be used for external interrupts now.
+---
  xen/arch/x86/include/asm/irq.h |  4 ++--
- xen/arch/x86/include/asm/msi.h |  1 +
  xen/arch/x86/irq.c             | 30 +++++++++++++-----------------
- xen/arch/x86/msi.c             | 14 ++++++++++++++
- xen/arch/x86/smp.c             | 10 +++++-----
  xen/arch/x86/smpboot.c         |  2 +-
- xen/drivers/passthrough/pci.c  | 32 ++++++++++++++++++++++++++++++++
- xen/include/xen/pci.h          |  2 ++
- 9 files changed, 71 insertions(+), 25 deletions(-)
+ 3 files changed, 16 insertions(+), 20 deletions(-)
 
+diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
+index d3bc76806808..354868ba31ab 100644
+--- a/xen/arch/x86/include/asm/irq.h
++++ b/xen/arch/x86/include/asm/irq.h
+@@ -168,8 +168,8 @@ void free_domain_pirqs(struct domain *d);
+ int map_domain_emuirq_pirq(struct domain *d, int pirq, int emuirq);
+ int unmap_domain_pirq_emuirq(struct domain *d, int pirq);
+ 
+-/* Evacuate interrupts assigned to CPUs not present in the input CPU mask. */
+-void fixup_irqs(const cpumask_t *mask, bool verbose);
++/* Evacuate interrupts assigned to CPUs not present in the CPU online map. */
++void fixup_irqs(void);
+ void fixup_eoi(void);
+ 
+ int  init_irq_data(void);
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index e56bacc88d84..ff3ac832f4b9 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -2590,17 +2590,21 @@ static int __init cf_check setup_dump_irqs(void)
+ }
+ __initcall(setup_dump_irqs);
+ 
+-/* Evacuate interrupts assigned to CPUs not present in the input CPU mask. */
+-void fixup_irqs(const cpumask_t *mask, bool verbose)
++/* Evacuate interrupts assigned to CPUs not present in the CPU online map. */
++void fixup_irqs(void)
+ {
++    const unsigned int cpu = smp_processor_id();
+     unsigned int irq;
+     static int warned;
+     struct irq_desc *desc;
+ 
++    /* Only to be called from the context of a CPU going offline. */
++    ASSERT(!cpu_online(cpu));
++
+     for ( irq = 0; irq < nr_irqs; irq++ )
+     {
+         bool break_affinity = false, set_affinity = true, check_irr = false;
+-        unsigned int vector, cpu = smp_processor_id();
++        unsigned int vector;
+         cpumask_t *affinity = this_cpu(scratch_cpumask);
+ 
+         if ( irq == 2 )
+@@ -2644,12 +2648,6 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
+         }
+ 
+         if ( desc->arch.move_in_progress &&
+-             /*
+-              * Only attempt to adjust the mask if the current CPU is going
+-              * offline, otherwise the whole system is going down and leaving
+-              * stale data in the masks is fine.
+-              */
+-             !cpu_online(cpu) &&
+              cpumask_test_cpu(cpu, desc->arch.old_cpu_mask) )
+         {
+             /*
+@@ -2691,16 +2689,17 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
+ 
+         /*
+          * Avoid shuffling the interrupt around as long as current target CPUs
+-         * are a subset of the input mask.  What fixup_irqs() cares about is
+-         * evacuating interrupts from CPUs not in the input mask.
++         * are a subset of the online mask.  What fixup_irqs() cares about is
++         * evacuating interrupts from CPUs not in the online mask.
+          */
+-        if ( !desc->action || cpumask_subset(desc->arch.cpu_mask, mask) )
++        if ( !desc->action || cpumask_subset(desc->arch.cpu_mask,
++                                             &cpu_online_map) )
+         {
+             spin_unlock(&desc->lock);
+             continue;
+         }
+ 
+-        if ( !cpumask_intersects(mask, desc->affinity) )
++        if ( !cpumask_intersects(&cpu_online_map, desc->affinity) )
+         {
+             break_affinity = true;
+             cpumask_setall(affinity);
+@@ -2716,7 +2715,7 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
+          * the interrupt, signal to check whether there are any pending vectors
+          * to be handled in the local APIC after the interrupt has been moved.
+          */
+-        if ( !cpu_online(cpu) && cpumask_test_cpu(cpu, desc->arch.cpu_mask) )
++        if ( cpumask_test_cpu(cpu, desc->arch.cpu_mask) )
+             check_irr = true;
+ 
+         if ( desc->handler->set_affinity )
+@@ -2743,9 +2742,6 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
+ 
+         spin_unlock(&desc->lock);
+ 
+-        if ( !verbose )
+-            continue;
+-
+         if ( !set_affinity )
+             printk("Cannot set affinity for IRQ%u\n", irq);
+         else if ( break_affinity )
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 79a79c54c304..891a29fca146 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -1282,7 +1282,7 @@ void __cpu_disable(void)
+ 
+     /* It's now safe to remove this processor from the online map */
+     cpumask_clear_cpu(cpu, &cpu_online_map);
+-    fixup_irqs(&cpu_online_map, 1);
++    fixup_irqs();
+     fixup_eoi();
+ }
+ 
 -- 
 2.46.0
 
