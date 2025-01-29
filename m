@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB058C0218D
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jan 2025 10:13:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.879014.1289220 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D99C0218D
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jan 2025 10:16:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.878937.1289230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1td54N-0004PH-Nf; Wed, 29 Jan 2025 10:13:15 +0000
+	id 1td57k-0004ww-6t; Wed, 29 Jan 2025 10:16:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 879014.1289220; Wed, 29 Jan 2025 10:13:15 +0000
+Received: by outflank-mailman (output) from mailman id 878937.1289230; Wed, 29 Jan 2025 10:16:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1td54N-0004PA-L8; Wed, 29 Jan 2025 10:13:15 +0000
-Received: by outflank-mailman (input) for mailman id 879014;
- Wed, 29 Jan 2025 10:13:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=1peA=UV=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1td54L-0004P4-Lk
- for xen-devel@lists.xenproject.org; Wed, 29 Jan 2025 10:13:13 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a4d6a173-de29-11ef-a0e6-8be0dac302b0;
- Wed, 29 Jan 2025 11:13:11 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ab2bb0822a4so1283575466b.3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Jan 2025 02:13:11 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6d9bfe8afsm11264766b.170.2025.01.29.02.13.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jan 2025 02:13:10 -0800 (PST)
+	id 1td57k-0004wp-3m; Wed, 29 Jan 2025 10:16:44 +0000
+Received: by outflank-mailman (input) for mailman id 878937;
+ Wed, 29 Jan 2025 08:28:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=XMr0=UV=oracle.com=harshvardhan.j.jha@srs-se1.protection.inumbo.net>)
+ id 1td3RD-0001v1-Ef
+ for xen-devel@lists.xenproject.org; Wed, 29 Jan 2025 08:28:43 +0000
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0a6bc5bd-de1b-11ef-99a4-01e77a169b0f;
+ Wed, 29 Jan 2025 09:28:40 +0100 (CET)
+Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50T7txCG015486;
+ Wed, 29 Jan 2025 08:28:34 GMT
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 44ffve0445-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 29 Jan 2025 08:28:34 +0000 (GMT)
+Received: from pps.filterd
+ (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
+ with ESMTP id 50T7WdEP005314; Wed, 29 Jan 2025 08:28:34 GMT
+Received: from nam11-co1-obe.outbound.protection.outlook.com
+ (mail-co1nam11lp2174.outbound.protection.outlook.com [104.47.56.174])
+ by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
+ 44cpd9gvy3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 29 Jan 2025 08:28:09 +0000
+Received: from PH7PR10MB6505.namprd10.prod.outlook.com (2603:10b6:510:200::11)
+ by MN6PR10MB8045.namprd10.prod.outlook.com (2603:10b6:208:4fb::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.18; Wed, 29 Jan
+ 2025 08:28:06 +0000
+Received: from PH7PR10MB6505.namprd10.prod.outlook.com
+ ([fe80::83d9:1bf1:52cf:df54]) by PH7PR10MB6505.namprd10.prod.outlook.com
+ ([fe80::83d9:1bf1:52cf:df54%6]) with mapi id 15.20.8377.021; Wed, 29 Jan 2025
+ 08:28:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,252 +65,236 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4d6a173-de29-11ef-a0e6-8be0dac302b0
+X-Inumbo-ID: 0a6bc5bd-de1b-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=corp-2023-11-20; bh=sx6WvSTDPY0O6Hbb
+	hwfY5GBuY2MohoBL1aomhDbhz0Y=; b=O2l65cSmzku9RUYy8WTJbrPWvYntnhJ7
+	CBAex5JnbuXBKpiY7/Xrz0IC7cjJcCtHqj3uygIij3haiWXheV0LCGXOf8OQo+Te
+	sCUIkFwVkF62DhLFsL9Oay+HzCZRWonI8dygJNYI/y8ivmezGU5Ctu1iWGHsvQN7
+	5XTk9mJ/YgExwymZ2ev0EWsWlZQz2fn03ua0XXamHm439FHozah6h4rYRppGxS/I
+	5UG6fjwOPefEQ9ixGr64jhdu7+hNTx0OnefOeR8q/ltdXGAkz2EE8V103QJuRzvF
+	s3kJJ9Yw9PMdIP4OywjyHmKu6RQyO2eKUFGLWZefGeMY2KqSAq73Cg==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EWFbJ7E1kgJ66gJ+n1QCeIhiHtWNLMLChWq0Gx2iH7wP6d+kNDRYn6AGDeZ8vv1DOFVy/cH36bENzPeWfi5m3AY4HAaNlrGWNDOplGaP+52igfsqDLcWUJ6YQFsBK8fdRkBjQc6PhueMG6Xh8wlYVCSwSQluei9SfYlZ+QWEyXBV2VPyGiZNRogWXTLlbd4Tl6boU23jwGo7V2cljJbOIT5HbVNeAIoCZwvVXw/nEULc5hr5iVrmQPMtNQr3A/CcUfrxvQsYKRTD/+JjwslBowyVQ6xGOHThawgwV1bqoeNx8tI/EqabNM3k+ntkCDqES4vuUSv2qE4/LkShv6Ci3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sx6WvSTDPY0O6HbbhwfY5GBuY2MohoBL1aomhDbhz0Y=;
+ b=Vy1OXAu3LvzkM1ecMLsQTfdxERcvysaLWr7hEtrw2Giq8XgXI7sEN82c/USgui2EPH3T6FnQlb0IcvMZDq5VptMDRblYC9d/AMkYrzFBRVxB7uLHV4BZj65Y7JCEQp/smb71D1mY0xNK/N1lf/uBFBuNSlcLrn/QPBmq8/Z3AHM3emFtl7ui2roMXp52fjplrog3l1yDk7GaUYC3xkQduyZtTfBNYsrfXXrJifJ+F4HRMQ3xlHrdCCPUX+Z5DUj6wtoXcDNFuWTPuDcFL4HFHXGcGHOu6Jfraq1oCQvEfsX3I8sEoLGuRESp2zsvITZ8llwEOyxcmuER5dksfPHPuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1738145591; x=1738750391; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=dilwzZLmL6ENvq+ua7V+MRhIZ8PixkwHoP0NVF7nR1Y=;
-        b=VCaeQZpMYsH6fagukdzqZ585i11cg0d67ISk+Qgaz8BcH79EZ+5IKxXaB2HRk0TCG8
-         UCjV0/1f07tqIRAW+5oDFIhfAo8ZAOzo3+DBRYrf5G8Z0Uu/YNIy1jpkHET1v3QuxLqx
-         uPberGyxrKFHoBA3l3RgLUfQ87hezJi+/3AebPyQsD4+XjnnqKSjW8KOGLOmfZD2qBtE
-         319ylQqM4E2z2qKsU6dlD4v03hwxAkCb0lXUYx4P7g/oSMl5AHfxEgFBPNsqMH2kl2UR
-         DJdZspYrqLIM28of3Bs0Y8zmRQjftI3XnZreMmYigEuKpfTdf68XyHsiOYeugRGafv2R
-         i9uA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738145591; x=1738750391;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dilwzZLmL6ENvq+ua7V+MRhIZ8PixkwHoP0NVF7nR1Y=;
-        b=b0kkcZmBhAhB0l5Q+0RtBENp4R2yFphkdflWt9s5AWbz90B49v1H1gdKfYdwf/8Q/B
-         o7ZeeJre7soeemTGJd/GqbXimq+zrTkVKLFYn7ZVGwaa2xsxfpzzf8UOrB7MrsBF+DFq
-         fbeZ9MyJ1yYXoXZobwfEJV/qRuMzWlpxRgjG5XhE8gLkAD40MB1rXwTHIiWTYR7f6mOj
-         3jJbSiRNDfXR+bY9ZbSNu6hp8DtyJ/goya+n13yS3NcEsnqqVCwWjlb8mkZNHQzbky/W
-         Dc+PVKerI4XPaxjWJaiKkgbDpsfWgpobgswl53/eO0zVeTF7FfyFxgIPNJFx38szw8a2
-         9XaQ==
-X-Forwarded-Encrypted: i=1; AJvYcCX/mYB2KLd1pqUHEB9xIVnjy8Q6EkYZtTb2VyDEC7/XdP8/NAyoP801Xe145W6a5iSQnfgzLANr0ns=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YySz/W1SBtxeOI5x0E6iyIa5vmmZdRO4C0nwBCGHHD76Eb5mVA5
-	7Dk5IaRPsI++RsgvEhlfygkHt8zOf+jg0/MNCJ33XXjQCQdlEC8CjnZSZaG2Mg==
-X-Gm-Gg: ASbGncv8WiXI3yCNCkQ3w9RBBFXlCt01BqETdQ+Sybg2mDkAjyF5q4fZNKz9/FoEva0
-	3s08M1BuWf8OaxDZY2jrypO7aQQnAXGwJZ5RmatVzbhY/RlXnthqm1Id1QG7/soxbOLXuziwBcT
-	/4X6WbbcPZVTahcPCm9E76wzha+ZkOdhWVycP1f+VyamYOa0kzGyqCFJQePKszLtEvDb4Aucex8
-	G00weukdxH/MC5X8ZyeO9hq7opCXgpeXwH1yw3fF2M8gz9m+WdKzJk5NRUV0Tvhw6eNtK2NbZ+p
-	Qn0OE3r419L0v5XQYtXsdkfH9opGjfUt/zewUr1Is64WS6yaOoHjOeqGAaR3CqmqxaXfbJBkigs
-	4
-X-Google-Smtp-Source: AGHT+IF4QIe+XNr/oYfnDUlpfDxewrC3a2lA6mEh6XMvW0iWkkdeY84eTQd6eTRDZucJVtDyhjfARQ==
-X-Received: by 2002:a17:907:1c07:b0:aa6:834b:d136 with SMTP id a640c23a62f3a-ab6cfd10a0dmr269337866b.33.1738145590691;
-        Wed, 29 Jan 2025 02:13:10 -0800 (PST)
-Message-ID: <9673c95f-7ee6-461c-8678-46aeab55735a@suse.com>
-Date: Wed, 29 Jan 2025 11:13:09 +0100
-MIME-Version: 1.0
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sx6WvSTDPY0O6HbbhwfY5GBuY2MohoBL1aomhDbhz0Y=;
+ b=orW1JV9cBuHsj9GrYuFaINcgGVh7ysQyg4F8jxwo+ZAnLctthMqXauBHQvZF8b4VWJ4LwUALLJytJTL/AQhWt9ekgXiyucvDE7aSbCRiQPFyptnKdSjx1EdEMivhaDZ06KHmY/gyYHk8X/5mHcsHCLucqSo2zB9jVNeGiR+/23o=
+Message-ID: <7dc143fa-4a48-440b-b624-ac57a361ac74@oracle.com>
+Date: Wed, 29 Jan 2025 13:57:59 +0530
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-4.20 1/2] x86/shutdown: quiesce devices ahead of AP
- shutdown
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20250128162742.90431-1-roger.pau@citrix.com>
- <20250128162742.90431-2-roger.pau@citrix.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250128162742.90431-2-roger.pau@citrix.com>
+To: Konrad Wilk <konrad.wilk@oracle.com>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        "jgross@suse.com" <jgross@suse.com>
+Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>,
+        "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+        "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        Harshit Mogalapalli <harshit.m.mogalapalli@oracle.com>
+From: Harshvardhan Jha <harshvardhan.j.jha@oracle.com>
+Subject: v5.4.289 failed to boot with error megasas_build_io_fusion 3219
+ sge_count (-12) is out of range
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SG2PR04CA0200.apcprd04.prod.outlook.com
+ (2603:1096:4:187::15) To PH7PR10MB6505.namprd10.prod.outlook.com
+ (2603:10b6:510:200::11)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR10MB6505:EE_|MN6PR10MB8045:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4b50e43a-06d6-48ee-7b8a-08dd403edaf3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?RFJERTJoSWRsc253dnNnMmUzMTE1MFk5WEV5cTZUdUo5UmV4KzJtMzFrUDhD?=
+ =?utf-8?B?TTlRY3BBeG1LK29QZWNSNmlvRDhnTVhlc0NiclFwOHJhU1dlVytpYWcvU3lX?=
+ =?utf-8?B?NHNJdWkxMmh1eUM1QnhuYURpWUR1U3RxRDNCYyszOGlLK1JyWjN2TTlUU1di?=
+ =?utf-8?B?UkVxME04bU11NllEUkJaMndldDAxbUR6QXdSY08vVkhpNnZiTEZoZWRWOUgy?=
+ =?utf-8?B?NnFTL2J3QTZWU0dlSDZwYjUvY3JUTDlnL1RqWXRpcUliMFVyeS9SOVF3TDFG?=
+ =?utf-8?B?MWxUdXJBcXcvZ0FHVzJCdkhOZzZTUCtTVWFSemxQWmVwTENTUUMycStVVEUz?=
+ =?utf-8?B?dlNJNWFlVU1sQ3VPcyt4c0hHT3gzYWlsdnVNRWtZWDB5WDBSNlpoR0pjNVVY?=
+ =?utf-8?B?YXR3dUFySWRqNHhGMTlWSWkrM1FoU3kvbVlidlhFenhKWjJBd21VTm82ajd3?=
+ =?utf-8?B?QUxsY0JDelQ4NlRRa1QzL1ZRbERRWk5yRHhHeDZXWWNQY05LQ05qcUd4aXdM?=
+ =?utf-8?B?OHRKYWVOaElsV1BJR1FKVElXQmIvbjJOYmd3U2hTTTZJbkF6YktXdloxTlJo?=
+ =?utf-8?B?RW5rcE43NGVxSE1leWVQSjFIS1F3K2Ruam5XM2ZBWXppYVBPS0Jwazk2MENa?=
+ =?utf-8?B?aGhnUEFTTzR2ZEhxbmlrNDUybVhMU1F5VldiYUpMOE9VV1lVcHFkdDh5K2xU?=
+ =?utf-8?B?RS9VdWtWcDlsWUxzYXdoQmMzTkR6dFpVM1M0cXVDQXphMkxLVUxoSWhBTVpn?=
+ =?utf-8?B?UzlaVUtINjhKR3J4WXQrZEppYkN2dkw1Q3E5NzBIeXJ2bjlJL2tBUmZCMkUw?=
+ =?utf-8?B?SmhMV0wxR3lPaVRyTEFXTjF1YkgwVFNRUytUdlZ2YTFXaGpLQnlmMm81eFJs?=
+ =?utf-8?B?RXVBQldreTJYdE5CdTJJOW1jV2h6S0xhVWJSSStXNlVlNHhkRGpzWSthdmpK?=
+ =?utf-8?B?VjdYaklGV29jMWZLU2hXY0JvUzVFWkp1cE9xQ2JTUVZoUTJOSGZCNWUrUVNG?=
+ =?utf-8?B?dWF4aHU3YkRvQ0VUQjMrcytWMmlZVjJkejFuV2FTd3BEbzJ4ZVJUeElIUWRp?=
+ =?utf-8?B?N0x2ZGh3Ly8wVUM0Mys2dnhLQzViSkpqVzFmWHgwbTU1U3pkNkIrR3R2SEpx?=
+ =?utf-8?B?cTBvcDAvRHZlbVltNzJES3hxN1Yzc1RTUmZqajMzMlRqS3U4Mm5jRUJQR2VU?=
+ =?utf-8?B?MEM3UzgrS3o0TW4vemd2M1BNeDQ0VFYreVU5Z0lWSkFpSjY5V1RuUEU1ZERB?=
+ =?utf-8?B?TmZGZ0xwQ2ZTbk1zVFg4OXVBUXphMFVTL1liNHBBK3pSRFVmS0RJV0RaK0hX?=
+ =?utf-8?B?OXBld2FSSHlITk1NendXWm5jNG5TRVBjYVYvRjZ4T3pYaWE3czkybjZUNXhl?=
+ =?utf-8?B?RkJma3pnNnhDUnpyeTI3RlA5S1pPVnQzMm00VG4xL2crSTVGSGEyNDRlYXdi?=
+ =?utf-8?B?MXl0Z2x3eHVYRmQwTGtXM3NoWFgxeGxKR3NQQ0VleHF5NHJXOG9mWEtPUlZz?=
+ =?utf-8?B?QXprL3RJd1oxcktWMUdBak9UUVVJcE0za0d1U0JEdGR2dVBDck1FVUxCOUZV?=
+ =?utf-8?B?RURSS2QzUHB3Yy92elhYbklkQzAzblZEZzRFL2ZkYkZ3cDN1eUpXQ2U2cmZa?=
+ =?utf-8?B?Mkt4WWdWYUozNWN5UzFxVkFVc2pvY0RqRVBEaFVNMjE4MnR5YlJkNnI3T3NO?=
+ =?utf-8?B?RjZwREZWMUt2aEJLTkVUMHg2NTJEUW50SWk0ZG9HYUpNT0xrbEdyb2gzbnVB?=
+ =?utf-8?B?MHFuQkk5eFV5TC9GSlRxTEl6QUNDSG5kbENlOTlQU0VVWnFXaUJ3OUtLTFRU?=
+ =?utf-8?B?ZXltd3Z0cFcyQVpOalhRN0V5VnBoQklvbG5vWC9LZ3FuRGtYclJsUU1ZRDBY?=
+ =?utf-8?Q?sy1g0kzi8v1PT?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR10MB6505.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Rmx4RVBRVzFIZzBsU0w1MCtEakIxenlHT0k4aWhHUExMcm5uMjZjbUhPbXNG?=
+ =?utf-8?B?NnpLRHlSTS9lZ3lLSHRQZ2w2VkJGL0w3K0ZCWnhCcjdSc3p3YnRqNkdRejhB?=
+ =?utf-8?B?Vk92S25mb0ozNnJHc2UxbGUwOGQzSWQyTmNEYW5MQTk5eGlVWWNVSHdtODFq?=
+ =?utf-8?B?cnlQT0NVUUllci8yaS8rQUhjVys3NHhSb0luc29qaWpMWkV6a0c1eDE4ZVRT?=
+ =?utf-8?B?K0IwcjRpTmdENUNyemp3cjk5azVoUGZkOUMxYVlIem9TSGQ4M2lPSEFqV2pt?=
+ =?utf-8?B?bnMzSThBTWMwSmtxK25HVTV0Mmswdk4yeXFrc0wyK201Qi8yN1gwWGlYOVI1?=
+ =?utf-8?B?OHVaeWZQRUJOU2pBZmpzNXdyMERtcjFGRWxTdGIwL2JEaGV6N3YySUhUMEl4?=
+ =?utf-8?B?eUplR0F6RkFGRWZ3clNsSWprdmFTVlZOMjNzUFdKem5XUGpDZ1U4cnZFcHpD?=
+ =?utf-8?B?eGdhRVlUQ2Q4S0p6SDJobW5IQTRNWUpHZUdxdVNLejdkN2wzKzcxTE1kQzFn?=
+ =?utf-8?B?QWFxcFkxU1dNdmRBbk9FRnBDblZDREhJenEveW9mc2pENS9SRUhWdUs4UWpS?=
+ =?utf-8?B?aEFMZklyaWd6VUtrbzFPZEFsUk8wRmtMWFU4ZTdmTndNVkZIUDErZjhpaGMr?=
+ =?utf-8?B?UmtqT0tlTEIvN3lUbzVtRldNTzY0TUcxQ1hET1VUcVBwTldKL3l6ZTNIdm12?=
+ =?utf-8?B?Ny95UXY4eS9TU09LbmdyaThrbnFDeEY2bGtLcUhNRW1ibjNqL085UHR0Sksv?=
+ =?utf-8?B?RmNMZzB6dTJHNHAwaCtLdkRiSmsyNDhPUDBSNEdvc3ZhWU13MzRtRWpiVjRq?=
+ =?utf-8?B?TTdPNmxVRUI3bVlSbldNNGhrRzJBRE9BSEI1VktYc2VaVVBwck5MWWNITVMv?=
+ =?utf-8?B?RFQvWS9XL1dwRlVvQnhaWXRaYmIzLzl3NkNNVmRPZ25kZjIvK3dtcmt6bVZn?=
+ =?utf-8?B?bDR1RHdjdmhhRGVTbTdDZTUwR0pRQkVpMVhOREJFeHU0Nk9Gc3Z5bUlDMlRr?=
+ =?utf-8?B?ZDZiaVZQSlArYm9vU2RFS3l1bldXdWlUUkl6OE5LQzZKK3VCVXdIMkdJNkVo?=
+ =?utf-8?B?c21WWHdHZFBEaFo4WVFaWTVoN0lTUnRERkVpN28vb1NiV0xrS2tEam1ZV08r?=
+ =?utf-8?B?SUdhZm05T29LUnRkQzh2eWQzSVlvL1QyRGR3QjNVZW1MSmEyaDN0S3h6K3d4?=
+ =?utf-8?B?Vm9LajFFSEpkdEQwWTY0WEhrbkd4ZHd3R0JhMEx1VVU3RmZ0TDNZdE8zT2Y0?=
+ =?utf-8?B?QVpEdlNZbjhvT01wcFh4VEkvR2VtUE9TbW45OTNNUmdBeE0yUWc3czFNVXZv?=
+ =?utf-8?B?NTgvYTlTMkk4UFJNNXpkemZ3R2gvdEl4bm5XQXRsMkY0VWlCNCtzN2M5V3kv?=
+ =?utf-8?B?Y3UvSGo5dUI2OWFkc0VsdUJ4eWZtSGtFMDU1VzVVeUh6dXJJSXBlcE5SRDQ1?=
+ =?utf-8?B?bUdkR3RWSEpLb2FTcG1TZnVHQzZmNEtaQnJjcXRXNU1NMUlGVDN5dE1hOHdC?=
+ =?utf-8?B?MDhNQlBUeWtsUU5jNjRTTHdiSGVNdUQ2YXoyK2NXbUwrR3pRQ3llWGNKQ3Zh?=
+ =?utf-8?B?MUtPSXlPb0QrNTBzRjgra1ltZzNNYnpUQ0dPREd5cWpSM0dNV3dEZDZmYlBL?=
+ =?utf-8?B?dVJpK3MySjRMbkxhZUU4SWxuWm1DejZ0SlBCdWFuYzQ1L2s1MzNkK1hVazhj?=
+ =?utf-8?B?M09YZ3NsdnZ0NGdSbnpQcmdCQ25rUGtFR2RqTnNIMndocUJyQ1lSbTV2bmxz?=
+ =?utf-8?B?djA3Wnc1Y2xROWhyTTlPTGRoNTBjQkRQOURUSmdYYXdQOVZjYVl1SXlGL3pC?=
+ =?utf-8?B?SmZwcXlzL1BhVHF4S093cUFaOFJVRjlHek53dTBOSG8rZk1WUWpYV3NLOVVl?=
+ =?utf-8?B?WkVWNUp4MmhwVkI2L2hsOHViUnJ2b2thV2lHL2JMbXVHc3crUXJraHpoSndY?=
+ =?utf-8?B?d0xuTGlRdzQyUEhjOVBtTEZGRGZpaFh4SzFob1RYY0Y2VXhFdjN1R1dmK2ho?=
+ =?utf-8?B?Wm1pNEV2ekFqb1FOM2trN0ZTaWlqQzUzQlFlVXRPcW5uSlJ2SjAwaE9wamdZ?=
+ =?utf-8?B?MWdPMnN5TnArbkFjS2ZPc3Qza2xFdDkxOFhFSDIxOGF5bDhoSVdwRjJFSURI?=
+ =?utf-8?B?VlluTldYQ3pDdU90N3JsM3BybXU2V0E1RUoxYkNWOUZBYnRkOFBFVFZLNmJt?=
+ =?utf-8?B?MWc9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	1UqMbLA4s8V349nfO41WhUtdjHuALEnmPhAxj0NZnW0o91PgaDvK6krL0Rtm8F55w6l5RRauKzyhYPSCVn4+YRiNzLtu/N+8EDN/zZr8ziZ1yZctwvWVG4gelZVZwTVPDIIHm2Y6JWqCvo2OhxfUQMX+JOY2oo2Jf1rLlU1oyknG5nM+Zr0dKafseifGtLeWyqlEkRKfql5P9/Psx69lDj86Td9CY5O+udTvukH2wCRTJxPOvoxTebFU2s6yXWKjmndFgvh3cTUMxAv133hgzf9FqRUVJJSyMJqEJcmsadktl+y/h0RxiA+RoW6doW2IQ9NYVTZdabeR3CBNtpWtjbjqKgoe0BZTAhIPAWZ5srRGBHOamLrgYG5VVtlzSWgEW0EPmbGoWCBPQHPzvuBPX5hrIxwHAaxGgrvUPsqqJPfyVbtGINCTri5ZOzxjzeHCtpneDWmjHkhyVAr+fQED/iWv5DwX0ZJomes8apnsZkKIREhfEnRuwsdiW6H95JnCF46hHHCctKUk9tM62XNC+ym5qVgXXUhitUb7JZIcrLnfdFACTzB78v3KIXBbaZ1f4VXvCz84iHgYG17MWqBZd6MogJdDgABuKILYlx+igjI=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4b50e43a-06d6-48ee-7b8a-08dd403edaf3
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR10MB6505.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2025 08:28:06.5091
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bktS6O5bsKk52fUyg6288Rl9lPUwf8vTMXyre7sOKEhHkRxl5F+2SEZHrhbnK6hqwAeJkfpVZWLG8JLZyNLPg5sGl74+A/EyP5mz2VPRWnI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR10MB8045
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-28_04,2025-01-27_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 mlxscore=0 adultscore=0
+ malwarescore=0 spamscore=0 bulkscore=0 mlxlogscore=999 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2411120000
+ definitions=main-2501290068
+X-Proofpoint-GUID: ALR5CpneA_GqVTdXeCkkRQhvyeLiSY-h
+X-Proofpoint-ORIG-GUID: ALR5CpneA_GqVTdXeCkkRQhvyeLiSY-h
 
-On 28.01.2025 17:27, Roger Pau Monne wrote:
-> The current shutdown logic in smp_send_stop() will first disable the APs,
-> and then attempt to disable (some) of the interrupt sources.
-> 
-> There are two issues with this approach; the first one being that MSI
-> interrupt sources are not disabled, the second one is the APs are stopped
-> before interrupts are disabled.  On AMD systems this can lead to the
-> triggering of local APIC errors:
-> 
-> APIC error on CPU0: 00(08), Receive accept error
-> 
-> Such error message can be printed in a loop, thus blocking the system from
-> rebooting.  I assume this loop is created by the error being triggered by
-> the console interrupt, which is further triggered by the ESR reporting
-> write to the console.
-> 
-> Intel SDM states:
-> 
-> "Receive Accept Error.
-> 
-> Set when the local APIC detects that the message it received was not
-> accepted by any APIC on the APIC bus, including itself. Used only on P6
-> family and Pentium processors."
-> 
-> So the error shouldn't trigger on any Intel CPU supported by Xen.
-> 
-> However AMD doesn't make such claims, and indeed the error is broadcasted
-> to all local APIC when for example an interrupt targets a CPU that's
-> offline.
-> 
-> To prevent the error from triggering, move the masking of IO-APIC pins
-> ahead of stopping the APs.  Also introduce a new function that disables
-> MSI and MSI-X on all PCI devices.  Remove the call to fixup_irqs() since
-> there's no point in attempting to move interrupts: all sources will be
-> either masked or disabled.
-> 
-> For the NMI crash path also call the newly introduced function, with the
-> hope that disabling MSI and MSI-X will make it easier for the (possible)
-> crash kernel to boot, as it could otherwise receive the same "Receive
-> accept error" upon re-enabling interrupts.
-> 
-> Note that this will have the side-effect of preventing further IOMMU
-> interrupts from being delivered, that's expected and at that point in the
-> shutdown process no further interaction with the IOMMU should be relevant.
+Hello there,
 
-This is at most for AMD only. Shouldn't we similarly disable VT-d's
-interrupt(s)? (It's only one right now, as we still don't use the QI
-completion one.) Even for AMD I'm uncertain: It has separate
-hw_irq_controller instances, and its set_iommu_interrupt_handler() is
-custom as well. Will pci_disable_msi_all() really affect it? (Hmm,
-yes, from amd_iommu_msi_enable() it looks like it will.)
+The stable tag v5.4.289 seems to fail to boot with following trace:
 
-> --- a/xen/arch/x86/msi.c
-> +++ b/xen/arch/x86/msi.c
-> @@ -1248,6 +1248,20 @@ void pci_cleanup_msi(struct pci_dev *pdev)
->      msi_free_irqs(pdev);
->  }
->  
-> +static int cf_check disable_msi(struct pci_dev *pdev, void *arg)
-> +{
-> +    msi_set_enable(pdev, 0);
-> +    msix_set_enable(pdev, 0);
-> +
-> +    return 0;
-> +}
-> +
-> +void pci_disable_msi_all(void)
-> +{
-> +    /* Disable MSI and/or MSI-X on all devices. */
-> +    pci_iterate_devices(disable_msi, NULL);
-> +}
+[ OK ] Created slice system-serial\x2dgetty.slice. [ OK ] Listening on
+udev Control Socket. [ OK ] Reached target Local Encrypted Volumes. [ OK
+] Listening on /dev/initctl Compatibility Named Pipe. [ OK ] Listening
+on Delayed Shutdown Socket. [ OK ] Created slice
+system-selinux\x2dpol...grate\x2dlocal\x2dchanges.slice. [ OK ] Stopped
+target Initrd File Systems. [ OK ] Listening on LVM2 metadata daemon
+socket. Mounting Debug File System... [ OK ] Listening on networkd
+rtnetlink socket. [ OK ] Listening on Device-mapper event daemon FIFOs.
+Starting Monitoring of LVM2 mirrors... dmeventd or progress polling... [
+OK ] Created slice User and Session Slice. Starting Read and set NIS
+domainname from /etc/sysconfig/network... Starting Load legacy module
+configuration... [ OK ] Set up automount Arbitrary Executab...ats File
+System Automount Point. [ OK ] Created slice
+system-rdma\x2dload\x2dmodules.slice. [ OK ] Started Forward Password
+Requests to Wall Directory Watch. [ OK ] Reached target Paths. Starting
+Remount Root and Kernel File Systems... [ OK ] Created slice
+system-getty.slice. Starting Create list of required st... nodes for the
+current kernel... Starting Set Up Additional Binary Formats... [ OK ]
+Stopped target Initrd Root File System. [ OK ] Reached target Slices. [
+OK ] Created slice system-systemd\x2dfsck.slice. [ OK ] Mounted POSIX
+Message Queue File System. [ OK ] Mounted Debug File System. [ OK ]
+Started Read and set NIS domainname from /etc/sysconfig/network.
+Mounting Arbitrary Executable File Formats File System... [ OK ] Started
+Journal Service. [ OK ] Started Create list of required sta...ce nodes
+for the current kernel. Starting Create Static Device Nodes in /dev... [
+OK ] Started LVM2 metadata daemon. [ OK ] Started Remount Root and
+Kernel File Systems. Starting Load/Save Random Seed... Starting udev
+Coldplug all Devices... Starting Flush Journal to Persistent Storage...
+[FAILED] Failed to start Load Kernel Modules. See 'systemctl status
+systemd-modules-load.service' for details. Starting Apply Kernel
+Variables... [ OK ] Started Load/Save Random Seed. [ OK ] Mounted
+Arbitrary Executable File Formats File System. [ OK ] Started Set Up
+Additional Binary Formats. [ OK ] Started Create Static Device Nodes in
+/dev. Starting udev Kernel Device Manager... [ OK ] Started Apply Kernel
+Variables. [ OK ] Started Load legacy module configuration. [ OK ]
+Started udev Coldplug all Devices. Starting udev Wait for Complete
+Device Initialization... [ 24.427217] megaraid_sas 0000:65:00.0:
+megasas_build_io_fusion 3273 sge_count (-12) is out of range. Range is:
+0-256
 
-That's going to be all devices we know of. I.e. best effort only. Maybe
-the comment should be adjusted to this effect.
+[   24.427217] megaraid_sas 0000:65:00.0: megasas_build_io_fusion 3273
+sge_count (-12) is out of range. Range is:  0-256 kept showing
+infinitely. It kept popping until I reset the system.
 
-> --- a/xen/arch/x86/smp.c
-> +++ b/xen/arch/x86/smp.c
-> @@ -358,14 +358,15 @@ void smp_send_stop(void)
->  {
->      unsigned int cpu = smp_processor_id();
->  
-> +    local_irq_disable();
-> +    disable_IO_APIC();
-> +    pci_disable_msi_all();
-> +    local_irq_enable();
-> +
->      if ( num_online_cpus() > 1 )
->      {
->          int timeout = 10;
->  
-> -        local_irq_disable();
-> -        fixup_irqs(cpumask_of(cpu), 0);
-> -        local_irq_enable();
-> -
->          smp_call_function(stop_this_cpu, NULL, 0);
->  
->          /* Wait 10ms for all other CPUs to go offline. */
-> @@ -376,7 +377,6 @@ void smp_send_stop(void)
->      if ( cpu_online(cpu) )
->      {
->          local_irq_disable();
-> -        disable_IO_APIC();
->          hpet_disable();
+Reverting the following patch seems to fix the issue:
 
-Like IOMMUs, HPET also has custom interrupt management. I think this
-call needs pulling up, too (much like it is also there in
-nmi_shootdown_cpus()).
+commit 07c9cccc4c3fecba175a7e5aafba6370758f5ce2
+Author: Juergen Gross <jgross@suse.com>
+Date:   Fri Sep 13 12:05:02 2024 +0200
 
-> --- a/xen/drivers/passthrough/pci.c
-> +++ b/xen/drivers/passthrough/pci.c
-> @@ -1803,6 +1803,38 @@ int iommu_do_pci_domctl(
->      return ret;
->  }
->  
-> +struct segment_iter {
-> +    int (*handler)(struct pci_dev *pdev, void *arg);
-> +    void *arg;
-> +};
-> +
-> +static int cf_check iterate_all(struct pci_seg *pseg, void *arg)
-> +{
-> +    const struct segment_iter *iter = arg;
-> +    struct pci_dev *pdev;
-> +
-> +    list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
-> +    {
-> +        int rc = iter->handler(pdev, iter->arg);
-> +
-> +        if ( rc )
-> +            return rc;
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +int pci_iterate_devices(int (*handler)(struct pci_dev *pdev, void *arg),
-> +                        void *arg)
-> +{
-> +    struct segment_iter iter = {
-> +        .handler = handler,
-> +        .arg = arg,
-> +    };
-> +
-> +    return pci_segments_iterate(iterate_all, &iter);
-> +}
+    xen/swiotlb: add alignment check for dma buffers
 
-For the specific purpose during shutdown it may be okay to do all of this
-without locking (but see below) and without preemption checks. Yet then a
-warning will want putting here to indicate that from other environments
-this isn't okay to use as-is.
+    [ Upstream commit 9f40ec84a7976d95c34e7cc070939deb103652b0 ]
 
-This use then also requires that msi{,x}_set_enable() paths never gain
-lock-related assertions.
+    When checking a memory buffer to be consecutive in machine memory,
+    the alignment needs to be checked, too. Failing to do so might result
+    in DMA memory not being aligned according to its requested size,
+    leading to error messages like:
 
-Talking of the lack of locking: Since you invoke the disabling before
-bringing down APs, we're ending up in kind of a chicken and egg problem
-here: Without APs quiesced, there may be operations in progress there
-which conflict with the disabling done here. Hence why so far we brought
-down APs first.
+      4xxx 0000:2b:00.0: enabling device (0140 -> 0142)
+      4xxx 0000:2b:00.0: Ring address not aligned
+      4xxx 0000:2b:00.0: Failed to initialise service qat_crypto
+      4xxx 0000:2b:00.0: Resetting device qat_dev0
+      4xxx: probe of 0000:2b:00.0 failed with error -14
 
-With this special-purpose use I further wonder whether iterate_all()
-wouldn't better continue despite an error coming back from a callback
-(and also arrange for pci_segments_iterate() to continue, by merely
-recording any possible error in struct segment_iter), and only accumulate
-the error code to eventually return. The more devices we manage to
-quiesce, the better our chances of rebooting cleanly.
+    Fixes: 9435cce87950 ("xen/swiotlb: Add support for 64KB page
+granularity")
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Signed-off-by: Sasha Levin <sashal@kernel.org>
 
-Jan
+I tried changing swiotlb grub command line arguments but that didn't
+seem to help much unfortunately and the error was seen again.
+
+Thanks & Regards,
+Harshvardhan
+
 
