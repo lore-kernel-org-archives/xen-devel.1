@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3744C0218D
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Jan 2025 08:36:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.878954.1289161 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16579C02192
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Jan 2025 08:49:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.878963.1289172 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1td3Z3-0003iv-Ms; Wed, 29 Jan 2025 08:36:49 +0000
+	id 1td3lD-0005Xd-RX; Wed, 29 Jan 2025 08:49:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 878954.1289161; Wed, 29 Jan 2025 08:36:49 +0000
+Received: by outflank-mailman (output) from mailman id 878963.1289172; Wed, 29 Jan 2025 08:49:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1td3Z3-0003io-KH; Wed, 29 Jan 2025 08:36:49 +0000
-Received: by outflank-mailman (input) for mailman id 878954;
- Wed, 29 Jan 2025 08:36:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1td3lD-0005XW-N5; Wed, 29 Jan 2025 08:49:23 +0000
+Received: by outflank-mailman (input) for mailman id 878963;
+ Wed, 29 Jan 2025 08:49:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=StUP=UV=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
- id 1td3Z2-0003ii-Bs
- for xen-devel@lists.xenproject.org; Wed, 29 Jan 2025 08:36:48 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2c655b58-de1c-11ef-a0e6-8be0dac302b0;
- Wed, 29 Jan 2025 09:36:46 +0100 (CET)
+ <SRS0=vr49=UV=kernel.org=joel.granados@srs-se1.protection.inumbo.net>)
+ id 1td3lC-0005XQ-Qv
+ for xen-devel@lists.xenproject.org; Wed, 29 Jan 2025 08:49:22 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ed8f5395-de1d-11ef-99a4-01e77a169b0f;
+ Wed, 29 Jan 2025 09:49:20 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 65540A4162B;
- Wed, 29 Jan 2025 08:34:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61FABC4CED3;
- Wed, 29 Jan 2025 08:36:44 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 631165C027D;
+ Wed, 29 Jan 2025 08:48:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AAFA1C4CED3;
+ Wed, 29 Jan 2025 08:49:17 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,47 +43,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c655b58-de1c-11ef-a0e6-8be0dac302b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1738139804;
-	bh=VW2r6/JfcXBwlJAM+bj3qoZydV8ADfVuANDZWaGlq1k=;
+X-Inumbo-ID: ed8f5395-de1d-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1738140558;
+	bh=bkecGghn49Q0kcBr4/Q4RAYEqTU2lzStxg+kMBkUviM=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=L0Szo1OP12RiVurJQJGyYYgqz6jPTKmhBt+YSI0rGbppuJQsW0C73y5fq1TtdVjv/
-	 2/Jiy69mXaiswLMODjxzA/Ztcwsldv26K2UY920wT3S6CPdVh7lu21ptcTlJrqdeqt
-	 b1rezmUmtUpPfyx6LBojtI0hxPdT+u8aG50sNHXU=
-Date: Wed, 29 Jan 2025 09:35:44 +0100
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Harshvardhan Jha <harshvardhan.j.jha@oracle.com>
-Cc: Konrad Wilk <konrad.wilk@oracle.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	"jgross@suse.com" <jgross@suse.com>,
-	"sstabellini@kernel.org" <sstabellini@kernel.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	Harshit Mogalapalli <harshit.m.mogalapalli@oracle.com>,
-	stable@vger.kernel.org
-Subject: Re: v5.4.289 failed to boot with error megasas_build_io_fusion 3219
- sge_count (-12) is out of range
-Message-ID: <2025012919-series-chaps-856e@gregkh>
-References: <7dc143fa-4a48-440b-b624-ac57a361ac74@oracle.com>
- <9dd91f6e-1c66-4961-994e-dbda87d69dad@oracle.com>
+	b=D+6QRnebTmdCsTn/fBIyawZ8F2h5FOi1VkBceKjrJE9gQqYhsE4MpI+DUnmOyvn9r
+	 jy2STn2XFJrPEPFrh+vO/ZWYbctxdvY6UR3Ry6YZK+y8a1MhcK6ynlBs1p1BMMkJ1P
+	 w6gLTDQPv35AYJJgnh4TzBlS6e9ascDPFne+p1YDjEpGVHG5PR2AxRH9J1o9Q9BPKi
+	 anvTB+Oa86UvplOCcaBDT4qhHCCSJO/P11ip4o+2DBjUNcnkNIz/KxsEnezLq+wofc
+	 pmlKCTkKHhEdUE5jBQ13DTAnVV4ZlV/QW5dr1RzqeBZB57C+fkYnuuFh6jqnxMpijz
+	 QxNX1fm0X2YKQ==
+Date: Wed, 29 Jan 2025 09:49:13 +0100
+From: Joel Granados <joel.granados@kernel.org>
+To: Paul Moore <paul@paul-moore.com>
+Cc: Matthew Wilcox <willy@infradead.org>, 
+	Jani Nikula <jani.nikula@intel.com>, Ard Biesheuvel <ardb@kernel.org>, 
+	Alexander Gordeev <agordeev@linux.ibm.com>, Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>, 
+	Kees Cook <kees@kernel.org>, Luis Chamberlain <mcgrof@kernel.org>, 
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
+	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org, linux-crypto@vger.kernel.org, 
+	openipmi-developer@lists.sourceforge.net, intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+	intel-xe@lists.freedesktop.org, linux-hyperv@vger.kernel.org, linux-rdma@vger.kernel.org, 
+	linux-raid@vger.kernel.org, linux-scsi@vger.kernel.org, linux-serial@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, 
+	netfs@lists.linux.dev, codalist@coda.cs.cmu.edu, linux-mm@kvack.org, 
+	linux-nfs@vger.kernel.org, ocfs2-devel@lists.linux.dev, fsverity@lists.linux.dev, 
+	linux-xfs@vger.kernel.org, io-uring@vger.kernel.org, bpf@vger.kernel.org, 
+	kexec@lists.infradead.org, linux-trace-kernel@vger.kernel.org, 
+	linux-hardening@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, 
+	keyrings@vger.kernel.org, Song Liu <song@kernel.org>, 
+	"Steven Rostedt (Google)" <rostedt@goodmis.org>, "Martin K. Petersen" <martin.petersen@oracle.com>, 
+	"Darrick J. Wong" <djwong@kernel.org>, Corey Minyard <cminyard@mvista.com>
+Subject: Re: Re: Re: Re: Re: [PATCH v2] treewide: const qualify ctl_tables
+ where applicable
+Message-ID: <umk5gfo7iq7krppvqsal57hlzds26bdqd3g7kccjzuudjikdws@k2oknd6zx6g7>
+References: <20250110-jag-ctl_table_const-v2-1-0000e1663144@kernel.org>
+ <Z4+jwDBrZNRgu85S@li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com>
+ <nslqrapp4v3rknjgtfk4cg64ha7rewrrg24aslo2e5jmxfwce5@t4chrpuk632k>
+ <CAMj1kXEZPe8zk7s67SADK9wVH3cfBup-sAZSC6_pJyng9QT7aw@mail.gmail.com>
+ <f4lfo2fb7ajogucsvisfd5sg2avykavmkizr6ycsllcrco4mo3@qt2zx4zp57zh>
+ <87jzag9ugx.fsf@intel.com>
+ <Z5epb86xkHQ3BLhp@casper.infradead.org>
+ <u2fwibsnbfvulxj6adigla6geiafh2vuve4hcyo4vmeytwjl7p@oz6xonrq5225>
+ <CAHC9VhQnB_bsQaezBfAcA0bE7Zoc99QXrvO1qjpHA-J8+_doYg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <9dd91f6e-1c66-4961-994e-dbda87d69dad@oracle.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAHC9VhQnB_bsQaezBfAcA0bE7Zoc99QXrvO1qjpHA-J8+_doYg@mail.gmail.com>
 
-On Wed, Jan 29, 2025 at 02:03:51PM +0530, Harshvardhan Jha wrote:
-> Hi All,
+On Tue, Jan 28, 2025 at 10:43:10AM -0500, Paul Moore wrote:
+> On Tue, Jan 28, 2025 at 6:22 AM Joel Granados <joel.granados@kernel.org> wrote:
+> > On Mon, Jan 27, 2025 at 03:42:39PM +0000, Matthew Wilcox wrote:
+> > > On Mon, Jan 27, 2025 at 04:55:58PM +0200, Jani Nikula wrote:
+> > > > You could have static const within functions too. You get the rodata
+> > > > protection and function local scope, best of both worlds?
+> > >
+> > > timer_active is on the stack, so it can't be static const.
+> > >
+> > > Does this really need to be cc'd to such a wide distribution list?
+> > That is a very good question. I removed 160 people from the original
+> > e-mail and left the ones that where previously involved with this patch
+> > and left all the lists for good measure. But it seems I can reduce it
+> > even more.
+> >
+> > How about this: For these treewide efforts I just leave the people that
+> > are/were involved in the series and add two lists: linux-kernel and
+> > linux-hardening.
+> >
+> > Unless someone screams, I'll try this out on my next treewide.
 > 
-> +stable
-> 
-> There seems to be some formatting issues in my log output. I have
-> attached it as a file.
+> I'm not screaming about it :) but anything that touches the LSM,
+I'll consider it as a scream :) So I'll keep my previous approach of
+leaving only personal mails that are involved, but leaving all the lists
+that b4 suggests.
 
-Confused, what are you wanting us to do here in the stable tree?
+> SELinux, or audit code (or matches the regex in MAINTAINERS) I would
+> prefer to see on the associated mailing list.
 
-thanks,
+General comment sent to the void:
+It is tricky to know exactly who wants to be informed of all this and
+who thinks its useless. I think that if we want more focus it should
+come from automated tools like b4. Maybe some string in MAINTAINERS
+stating that the list should not be used in cases of tree-wide commits?
 
-greg k-h
+Best
+
+-- 
+
+Joel Granados
 
