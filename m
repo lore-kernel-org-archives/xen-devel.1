@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D28FC02190
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BDE2C02198
 	for <xen-devel@archiver.kernel.org>; Sat,  1 Feb 2025 02:17:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.880051.1290216 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.880058.1290276 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1te34f-0002v9-PC; Sat, 01 Feb 2025 02:17:33 +0000
+	id 1te34p-0004XQ-Jc; Sat, 01 Feb 2025 02:17:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 880051.1290216; Sat, 01 Feb 2025 02:17:33 +0000
+Received: by outflank-mailman (output) from mailman id 880058.1290276; Sat, 01 Feb 2025 02:17:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1te34f-0002uz-M0; Sat, 01 Feb 2025 02:17:33 +0000
-Received: by outflank-mailman (input) for mailman id 880051;
- Sat, 01 Feb 2025 02:17:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1te34p-0004X3-Fe; Sat, 01 Feb 2025 02:17:43 +0000
+Received: by outflank-mailman (input) for mailman id 880058;
+ Sat, 01 Feb 2025 02:17:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iPih=UY=flex--seanjc.bounces.google.com=3OYSdZwYKCfougcpleiqqing.eqozgp-fgxgnnkuvu.zgprtqlgev.qti@srs-se1.protection.inumbo.net>)
- id 1te34e-0002if-AR
- for xen-devel@lists.xenproject.org; Sat, 01 Feb 2025 02:17:32 +0000
+ <SRS0=nbP4=UY=flex--seanjc.bounces.google.com=3Q4SdZwYKCQYykgtpimuumrk.ius3kt-jk1krroyzy.3ktvxupkiz.uxm@srs-se1.protection.inumbo.net>)
+ id 1te34n-0002sH-Ke
+ for xen-devel@lists.xenproject.org; Sat, 01 Feb 2025 02:17:41 +0000
 Received: from mail-pj1-x104a.google.com (mail-pj1-x104a.google.com
  [2607:f8b0:4864:20::104a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b016f918-e042-11ef-99a4-01e77a169b0f;
- Sat, 01 Feb 2025 03:17:30 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b6426eef-e042-11ef-a0e6-8be0dac302b0;
+ Sat, 01 Feb 2025 03:17:41 +0100 (CET)
 Received: by mail-pj1-x104a.google.com with SMTP id
- 98e67ed59e1d1-2ef9dbeb848so4914044a91.0
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jan 2025 18:17:30 -0800 (PST)
+ 98e67ed59e1d1-2ef91d5c863so5214158a91.2
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jan 2025 18:17:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,48 +42,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b016f918-e042-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: b6426eef-e042-11ef-a0e6-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1738376249; x=1738981049; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1738376259; x=1738981059; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=3q3VtWChJd6qluhOhoVrZUOxKE25zEDROrS3h+FyOz0=;
-        b=2cdtKeHgV8lDsMWkW+92/WDsnBqRqMS+nQSUMyZQ4CHTWuje8OGotpb2Uxo+F8gIx7
-         G4wrisslOvefx15K14WoeCI2PBRZl+fiLjRc9SVy/thBMBQPvqvoYmUHqASaehKRU7jh
-         XVKKGjDrW1nbu54dcpWToHyhHLGYRp9Aglcda2Mzm4nkw/zBS7nRGs/9zNnlRHHPlCYX
-         l+h+e7Jb7J/9/msCS3jX2abu4N62zpXBI0zxB3xZVw6wIEnNswpWdOl2dGvCxrk5xAT1
-         +IWPf4rlpQ+JBN/L1f0jV5TGTSQoh+xBi5YsIf4j9wSZlIqNZHjbhZLF+sUddqfetM8Q
-         j7mA==
+        bh=IW8kJcAcrKvt4c0vMOL7jWV1OXPEd6lfnHsLFZy4QXA=;
+        b=u5r2yP8nY0proWRdrPWqgiNwULrxZLR+nu0opv0+uPTPhT3R1UasvRlWBMtyIf4DiY
+         nQ7Ybvb5p2/1PAV+y3GB8ZujOhl+MXJXD83jBLnMp7GAtHJQYFQiqlafhBcAyGK+gBEQ
+         jD078MrFczhqg6ybEVAbL6mZr99YvZ0jvSEETumAK1qm4oC4x9LX0jQGVFsvk/Kk79Bh
+         PbZ2XLSsDUvwggpPOdrFoYYMFaVpSuCC3Rb0n8sCZf+O+otdEMCdeqy7qAQpsUHqGSoF
+         CDHqOv92FLNqFS5H6+0nnhKedYDqNAZihWRgwDZHV23A4vXevdBDaFU0I4HWftygVGNP
+         eE+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738376249; x=1738981049;
+        d=1e100.net; s=20230601; t=1738376259; x=1738981059;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=3q3VtWChJd6qluhOhoVrZUOxKE25zEDROrS3h+FyOz0=;
-        b=u42JSpY3pBDv8PTmah86jdEZZ+aFof+38s/XtTh/y3aqBdR3q2xdXmIkjfw8ZYJt2l
-         eEBSR7kbfgO4hEvdNyiZ22EAHF6HsONDnoyVIHBURzcvO06/Cae35WQ2/2JQY2a74UB7
-         2wYvArIKRKG7bz1kYidZRL62yAGq/ZSQ7Q3EJDrSJ+LWgH4xPJ8JCjoFyi5HPx7kRwjY
-         RjzEcYY7WTSI82H68SkTn8ylT7Fvzlmk03pGZNQH93jLvW/XAjgdFPTvtkeJj+zeDw0r
-         c5hxKhNThIyrbKZcPQtlYSl1xDKvk4WJ+iFwQIgR+p8iQwmPugQCMyhIm9CEFemuH3ek
-         uSRA==
-X-Forwarded-Encrypted: i=1; AJvYcCXiVNaqtOXNl5zDcB09lYAy9xI128JlYsS9kOC4rNRXEttm2RZGh8dkneazWEpW5ws0O1//TqSycPI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxM4Sjltr7H8KQJfY+9jK6SDp873OyyCbdkuzB6sIAXOqyByiIj
-	3cu2T32rep10vNGTHZP9U70oHF6Kk7LiXSzfFpDBWwEdvFRllD/JNybcnkHyJkKKIniTHol+7EV
-	5wQ==
-X-Google-Smtp-Source: AGHT+IGlJL+gh3dhTIPqGXIyfYqBO171NEVUqAKwIwg+mryw0iUEaDc1VWsrQ1YFiTTJEYVX1rRFTepD4XE=
-X-Received: from pjbpx11.prod.google.com ([2002:a17:90b:270b:b0:2e9:5043:f55b])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90a:fc46:b0:2ee:af31:a7b3
- with SMTP id 98e67ed59e1d1-2f83ab8c3edmr21370350a91.7.1738376249247; Fri, 31
- Jan 2025 18:17:29 -0800 (PST)
+        bh=IW8kJcAcrKvt4c0vMOL7jWV1OXPEd6lfnHsLFZy4QXA=;
+        b=wUQrVx6S0JuagK1XGmyVvhgqftgbbw4Mhc1zxO4jVrab3RwEsns/NQrhofCmFrCxMP
+         E28R+gXvZaoG/j+nhz2u6ErJExCVPmj0im4JylOqJnwU21GZryQqGZmwdzRo9wCFharJ
+         hRpiEnF0D0YnlN2LaMJrjsqxuopvvXFoW2wWWDO6K3LFIwkMDH86g2f284CGZjK5j51x
+         7Nsfo6nAB19TD8SYuafdFMgo0lo7DCqLd+VnIca9eLWnx+QUL/fyhGel0zS9VrspgH5Z
+         qwRw3aDi81fH+WD49nvzTI+lUXDmDJNqtUhFdZD1KnDm0tk7NrSc4NFb42EZ40C0B5KS
+         TEIQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXWB6ms1o3Q0v28N5xOCbHjfaed9Ui3nv3jnXtNkwKBfS3QQ2x7K+PoUFOCGhC954XH7REXfVu3Mxo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy2arjyrS3pXjogH7uVQXM/hx4fVq7SrJYArrcTx+48aL0byZYh
+	UcS6+KnLBBZvbk0vUdC0HrTsDMBwaubVXMbfK38QyvZ3X1RTYzw03RGyZ2BPpWi8TIKygCEG0I9
+	Qyw==
+X-Google-Smtp-Source: AGHT+IF5rIJ4SRqkvzrTVMPpN2jn4obzhnrXzWmKwhKWojp8QTZ0kuVpAxPsfycQKPuD0sAxN2zkeFmWkds=
+X-Received: from pjbsb15.prod.google.com ([2002:a17:90b:50cf:b0:2ef:701e:21c1])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:3a08:b0:2ea:37b4:5373
+ with SMTP id 98e67ed59e1d1-2f83abe2135mr21011714a91.10.1738376259599; Fri, 31
+ Jan 2025 18:17:39 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Fri, 31 Jan 2025 18:17:03 -0800
+Date: Fri, 31 Jan 2025 18:17:09 -0800
 In-Reply-To: <20250201021718.699411-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20250201021718.699411-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.362.g079036d154-goog
-Message-ID: <20250201021718.699411-2-seanjc@google.com>
-Subject: [PATCH 01/16] x86/tsc: Add a standalone helpers for getting TSC info
- from CPUID.0x15
+Message-ID: <20250201021718.699411-8-seanjc@google.com>
+Subject: [PATCH 07/16] x86/acrn: Mark TSC frequency as known when using ACRN
+ for calibration
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -100,104 +100,27 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	Nikunj A Dadhania <nikunj@amd.com>, Tom Lendacky <thomas.lendacky@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Extract retrieval of TSC frequency information from CPUID into standalone
-helpers so that TDX guest support and kvmlock can reuse the logic.  Provide
-a version that includes the multiplier math as TDX in particular does NOT
-want to use native_calibrate_tsc()'s fallback logic that derives the TSC
-frequency based on CPUID.0x16 when the core crystal frequency isn't known.
-
-No functional change intended.
+Mark the TSC frequency as known when using ACRN's PV CPUID information.
+Per commit 81a71f51b89e ("x86/acrn: Set up timekeeping") and common sense,
+the TSC freq is explicitly provided by the hypervisor.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/include/asm/tsc.h | 41 ++++++++++++++++++++++++++++++++++++++
- arch/x86/kernel/tsc.c      | 14 ++-----------
- 2 files changed, 43 insertions(+), 12 deletions(-)
+ arch/x86/kernel/cpu/acrn.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
-index 94408a784c8e..14a81a66b37c 100644
---- a/arch/x86/include/asm/tsc.h
-+++ b/arch/x86/include/asm/tsc.h
-@@ -28,6 +28,47 @@ static inline cycles_t get_cycles(void)
+diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
+index c1506cb87d8c..2da3de4d470e 100644
+--- a/arch/x86/kernel/cpu/acrn.c
++++ b/arch/x86/kernel/cpu/acrn.c
+@@ -29,6 +29,7 @@ static void __init acrn_init_platform(void)
+ 	/* Install system interrupt handler for ACRN hypervisor callback */
+ 	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
+ 
++	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
+ 	tsc_register_calibration_routines(acrn_get_tsc_khz,
+ 					  acrn_get_tsc_khz);
  }
- #define get_cycles get_cycles
- 
-+static inline int cpuid_get_tsc_info(unsigned int *crystal_khz,
-+				     unsigned int *denominator,
-+				     unsigned int *numerator)
-+{
-+	unsigned int ecx_hz, edx;
-+
-+	if (boot_cpu_data.cpuid_level < CPUID_LEAF_TSC)
-+		return -ENOENT;
-+
-+	*crystal_khz = *denominator = *numerator = ecx_hz = edx = 0;
-+
-+	/* CPUID 15H TSC/Crystal ratio, plus optionally Crystal Hz */
-+	cpuid(CPUID_LEAF_TSC, denominator, numerator, &ecx_hz, &edx);
-+
-+	if (!*denominator || !*numerator)
-+		return -ENOENT;
-+
-+	/*
-+	 * Note, some CPUs provide the multiplier information, but not the core
-+	 * crystal frequency.  The multiplier information is still useful for
-+	 * such CPUs, as the crystal frequency can be gleaned from CPUID.0x16.
-+	 */
-+	*crystal_khz = ecx_hz / 1000;
-+	return 0;
-+}
-+
-+static inline int cpuid_get_tsc_freq(unsigned int *tsc_khz,
-+				     unsigned int *crystal_khz)
-+{
-+	unsigned int denominator, numerator;
-+
-+	if (cpuid_get_tsc_info(tsc_khz, &denominator, &numerator))
-+		return -ENOENT;
-+
-+	if (!*crystal_khz)
-+		return -ENOENT;
-+
-+	*tsc_khz = *crystal_khz * numerator / denominator;
-+	return 0;
-+}
-+
- extern void tsc_early_init(void);
- extern void tsc_init(void);
- extern void mark_tsc_unstable(char *reason);
-diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index 34dec0b72ea8..e3faa2b36910 100644
---- a/arch/x86/kernel/tsc.c
-+++ b/arch/x86/kernel/tsc.c
-@@ -661,25 +661,15 @@ static unsigned long quick_pit_calibrate(void)
-  */
- unsigned long native_calibrate_tsc(void)
- {
--	unsigned int eax_denominator, ebx_numerator, ecx_hz, edx;
-+	unsigned int eax_denominator, ebx_numerator;
- 	unsigned int crystal_khz;
- 
- 	if (boot_cpu_data.x86_vendor != X86_VENDOR_INTEL)
- 		return 0;
- 
--	if (boot_cpu_data.cpuid_level < CPUID_LEAF_TSC)
-+	if (cpuid_get_tsc_info(&crystal_khz, &eax_denominator, &ebx_numerator))
- 		return 0;
- 
--	eax_denominator = ebx_numerator = ecx_hz = edx = 0;
--
--	/* CPUID 15H TSC/Crystal ratio, plus optionally Crystal Hz */
--	cpuid(CPUID_LEAF_TSC, &eax_denominator, &ebx_numerator, &ecx_hz, &edx);
--
--	if (ebx_numerator == 0 || eax_denominator == 0)
--		return 0;
--
--	crystal_khz = ecx_hz / 1000;
--
- 	/*
- 	 * Denverton SoCs don't report crystal clock, and also don't support
- 	 * CPUID_LEAF_FREQ for the calculation below, so hardcode the 25MHz
 -- 
 2.48.1.362.g079036d154-goog
 
