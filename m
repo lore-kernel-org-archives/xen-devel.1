@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28DD2C02190
-	for <xen-devel@archiver.kernel.org>; Sat,  1 Feb 2025 02:17:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.880050.1290206 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 318CBC02194
+	for <xen-devel@archiver.kernel.org>; Sat,  1 Feb 2025 02:17:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.880064.1290296 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1te34e-0002j8-K3; Sat, 01 Feb 2025 02:17:32 +0000
+	id 1te34t-0005Ad-F9; Sat, 01 Feb 2025 02:17:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 880050.1290206; Sat, 01 Feb 2025 02:17:32 +0000
+Received: by outflank-mailman (output) from mailman id 880064.1290296; Sat, 01 Feb 2025 02:17:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1te34e-0002ip-F7; Sat, 01 Feb 2025 02:17:32 +0000
-Received: by outflank-mailman (input) for mailman id 880050;
- Sat, 01 Feb 2025 02:17:31 +0000
+	id 1te34t-0005AA-9e; Sat, 01 Feb 2025 02:17:47 +0000
+Received: by outflank-mailman (input) for mailman id 880064;
+ Sat, 01 Feb 2025 02:17:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=b9ke=UY=flex--seanjc.bounces.google.com=3N4SdZwYKCfgxjfsohlttlqj.htr2js-ij0jqqnxyx.2jsuwtojhy.twl@srs-se1.protection.inumbo.net>)
- id 1te34d-0002if-Bh
- for xen-devel@lists.xenproject.org; Sat, 01 Feb 2025 02:17:31 +0000
+ <SRS0=i9Oe=UY=flex--seanjc.bounces.google.com=3R4SdZwYKCQo2okxtmqyyqvo.myw7ox-no5ovvs232.7oxz1ytom3.y1q@srs-se1.protection.inumbo.net>)
+ id 1te34s-0002if-0Y
+ for xen-devel@lists.xenproject.org; Sat, 01 Feb 2025 02:17:46 +0000
 Received: from mail-pj1-x104a.google.com (mail-pj1-x104a.google.com
  [2607:f8b0:4864:20::104a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id af157f97-e042-11ef-99a4-01e77a169b0f;
- Sat, 01 Feb 2025 03:17:29 +0100 (CET)
+ id b846fcd3-e042-11ef-99a4-01e77a169b0f;
+ Sat, 01 Feb 2025 03:17:44 +0100 (CET)
 Received: by mail-pj1-x104a.google.com with SMTP id
- 98e67ed59e1d1-2ee5616e986so7262646a91.2
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jan 2025 18:17:29 -0800 (PST)
+ 98e67ed59e1d1-2ef79403c5eso7332543a91.0
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jan 2025 18:17:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,44 +42,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af157f97-e042-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: b846fcd3-e042-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1738376247; x=1738981047; darn=lists.xenproject.org;
-        h=cc:to:from:subject:message-id:mime-version:date:reply-to:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Cq2j2i7xKbEmxmaKlx5ycVjsc6NUu7PBqfSVX6ZfTN4=;
-        b=AmgjInzCZTtMueEhKHRv1q62pJoxPdl0j8Q/whlqtunqzZ3+aRBLzPjuCrEnLmqspI
-         JTa/7MXb7ICCzZoBpF1CumNUBLcmyg+hf1+2FIxoP29bsF7qstTyK59WVliHRJS1RFpw
-         9tuAD1oAl0YfUZHMwGgEuTf+p+Or4uiLLMG0uNADXH1dRTP9J4zD/Onfzbp7knKN553P
-         3+zvS2i0k0jYip1be7m2rzvC6oTjoJBsZLVlyjQW4KG2pZdblqQJOFa6FgA+AEJz3DgR
-         yMXea+Zjo1sYahVemQJTJd+mHcnRXZe3sTU/VIbruXySLQVmQnlLpiV5cikv3Y806rqk
-         omkA==
+        d=google.com; s=20230601; t=1738376263; x=1738981063; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
+        bh=T4DEhCWG0SuSvz0a+mPR7euxpU0fSN+tQ/CkCS9MqCY=;
+        b=TBikqo4t1PDUKXRaeOn2PDwZkvuQ8UCNgRvbckKvXi1E0s6Vk4Cv3eeJ64WE22yPzS
+         nb3gOQ+a9FqGelFhiteMS6mZBI6pO9lUsnuYgFdYwXxo7xvshPOLV6ls1jFKG0vZYKBl
+         ADo+BnhgtHj71WZfsO4F9tu+ssMkSe1od/+cujeButP48l/xjSDVmt0FbnQGznmJPWVE
+         UObux/HuRcm+w4a36EwreoNMzSHYYg/+YU3w+FMZMcE6iR+oAd8Pf7gN9dD8K15QKBhV
+         /kLoI0G2qV3m5KfEykbhBwng0ADnZcAjfQmxf6nMAMvrlXg+O6pJ5sHTBRbMb0V2YTFa
+         bGbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738376247; x=1738981047;
-        h=cc:to:from:subject:message-id:mime-version:date:reply-to
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Cq2j2i7xKbEmxmaKlx5ycVjsc6NUu7PBqfSVX6ZfTN4=;
-        b=khG5ftdGd9tMSwmc8JtkS9bPLC8Udv5ZA+48dwn3Kc+joqngUOAquRzkUcqFrYR5zS
-         MHcfcovccwn/n9LvEmFNRZOUNVpimLRYkaDfyXqqBgRUXjj5jHKTnL5WkxFdK/U78Pnn
-         mHGfGwgUGPBycy+Xibp/JEMWDtUSdAuVVi+SCTGR1U4JJwkxzMntAZX/BEYaaBuPl9Be
-         unZO9zRleyeh5rYCJPrun6zBQpeyXm3wVQra9hH5dMRNwLwQRzpGMWxXmtHorcH8m9Eo
-         57+SIkld9HbIaWzDzRQQMvphsOojL8EKwbbuUY/yfBI6Bv422iZ2VHbCFNUNh9j13ad8
-         LBTw==
-X-Forwarded-Encrypted: i=1; AJvYcCXyN0NaJEIgCpU17JRBcGJZ1BOkoj9lowGwUpEUr6YYJkz6+aDnibHvG2VDx7UUmeiSNIi349RP5Ao=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyaUCC9NH3/p7ip3AjgyDlnf1NAY6DRq7VYCsNBlWkfi9bWrCop
-	tEARnHajj0iFDXbsueToJ99utOLXTJWQZhTCZZAti5btbNUT2TmXpQ0N8lqpV4JWdLVkfEApZcV
-	MwQ==
-X-Google-Smtp-Source: AGHT+IEXms2W7h6OPbgfhbPe+T0bjO3rPyG4kBeOBL1XLya2FJ/dryX9qDtrHv/AVlJBJdJ2J5PBFLJRbi4=
-X-Received: from pjbsw11.prod.google.com ([2002:a17:90b:2c8b:b0:2ef:a732:f48d])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:258c:b0:2ee:f687:6acb
- with SMTP id 98e67ed59e1d1-2f83abd9998mr19471173a91.13.1738376247517; Fri, 31
- Jan 2025 18:17:27 -0800 (PST)
+        d=1e100.net; s=20230601; t=1738376263; x=1738981063;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=T4DEhCWG0SuSvz0a+mPR7euxpU0fSN+tQ/CkCS9MqCY=;
+        b=n5DZlF15iDEseujMiyQz2tAPrAZ1ZyAT8j71baSHAFXqBrR+w98KG3+yx9JXq/6zEk
+         ghFyotY0vLkH3NCmYSyihWEPZ09sAZWgjN3c6FbArFnONYneSmqMd9BNjjRao6vDGbg/
+         poxdve0fg7EEH9lLUMdrVGSwdN67oU7jK24NuMmt/1ZBTfZr3T+27Ei9krLRbt0AF5lG
+         kIbWt/s7+a0PDxz6amdE3nC4Cc1Cu8KLEmydmxQN5HsHIP3QIVI9lydtn1hQJyNaCWyt
+         ekcDnA+bITGfVRuHgIHFJmrPDRpKNq6L939+CjrGZnZGLdKarQbW3oMvssyUGzDd/k+N
+         awPA==
+X-Forwarded-Encrypted: i=1; AJvYcCXpinDL7FN2lab9r2lmWYP+W7B/CFPEcABpSXa6AsJ031VsFQ4JmobkTOJFul2Eop6Xi2MzBu2JgGE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyvtUVBCBlRidM5XMQgGqb97bpdyWkHlEMlIezVmxRGei1KOptJ
+	iXwfcZKPmAcudGGdCn3ixWnuWGSbOVvuztU7bjJHAizmmMjKdYrl8riMtLU4wamgN6bt8PoRHwq
+	9MQ==
+X-Google-Smtp-Source: AGHT+IHof1w34LjQ30XVM2gwsfD2n69eJy7Rgvm5USApfq7itvhXgigdwO4D30qo87G/8bS8xHYNlWrIUTM=
+X-Received: from pjd6.prod.google.com ([2002:a17:90b:54c6:b0:2e2:9f67:1ca3])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:51c1:b0:2ea:7cd5:4ad6
+ with SMTP id 98e67ed59e1d1-2f83ac86a44mr17727640a91.32.1738376263046; Fri, 31
+ Jan 2025 18:17:43 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Fri, 31 Jan 2025 18:17:02 -0800
+Date: Fri, 31 Jan 2025 18:17:11 -0800
+In-Reply-To: <20250201021718.699411-1-seanjc@google.com>
 Mime-Version: 1.0
+References: <20250201021718.699411-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.362.g079036d154-goog
-Message-ID: <20250201021718.699411-1-seanjc@google.com>
-Subject: [PATCH 00/16] x86/tsc: Try to wrangle PV clocks vs. TSC
+Message-ID: <20250201021718.699411-10-seanjc@google.com>
+Subject: [PATCH 09/16] x86/tsc: Rejects attempts to override TSC calibration
+ with lesser routine
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -96,64 +100,42 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	Nikunj A Dadhania <nikunj@amd.com>, Tom Lendacky <thomas.lendacky@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Attempt to bring some amount of order to the PV clocks vs. TSC madness in
-the kernel.  The primary goal of this series is to fix flaws with SNP
-and TDX guests where a PV clock provided by the untrusted hypervisor is
-used instead of the secure/trusted TSC that is controlled by trusted
-firmware.
+When registering a TSC frequency calibration routine, sanity check that
+the incoming routine is as robust as the outgoing routine, and reject the
+incoming routine if the sanity check fails.
 
-The secondary goal (last few patches) is to draft off of the SNP and TDX
-changes to slightly modernize running under KVM.  Currently, KVM guests
-will use TSC for clocksource, but not sched_clock.  And they ignore Intel's
-CPUID-based TSC and CPU frequency enumeration, even when using the TSC
-instead of kvmclock.  And if the host provides the core crystal frequency
-in CPUID.0x15, then KVM guests can use that for the APIC timer period
-instead of manually calibrating the frequency.
+Because native calibration routines only mark the TSC frequency as known
+and reliable when they actually run, the effective progression of
+capabilities is: None (native) => Known and maybe Reliable (PV) =>
+Known and Reliable (CoCo).  Violating that progression for a PV override
+is relatively benign, but messing up the progression when CoCo is
+involved is more problematic, as it likely means a trusted source of
+information (hardware/firmware) is being discarded in favor of a less
+trusted source (hypervisor).
 
-Lots more background: https://lore.kernel.org/all/20250106124633.1418972-13-nikunj@amd.com
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+---
+ arch/x86/kernel/tsc.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-This is all *very* lightly tested (borderline RFC).
-
-Sean Christopherson (16):
-  x86/tsc: Add a standalone helpers for getting TSC info from CPUID.0x15
-  x86/tsc: Add standalone helper for getting CPU frequency from CPUID
-  x86/tsc: Add helper to register CPU and TSC freq calibration routines
-  x86/sev: Mark TSC as reliable when configuring Secure TSC
-  x86/sev: Move check for SNP Secure TSC support to tsc_early_init()
-  x86/tdx: Override PV calibration routines with CPUID-based calibration
-  x86/acrn: Mark TSC frequency as known when using ACRN for calibration
-  x86/tsc: Pass KNOWN_FREQ and RELIABLE as params to registration
-  x86/tsc: Rejects attempts to override TSC calibration with lesser
-    routine
-  x86/paravirt: Move handling of unstable PV clocks into
-    paravirt_set_sched_clock()
-  x86/paravirt: Don't use a PV sched_clock in CoCo guests with trusted
-    TSC
-  x86/kvmclock: Mark TSC as reliable when it's constant and nonstop
-  x86/kvmclock: Get CPU base frequency from CPUID when it's available
-  x86/kvmclock: Get TSC frequency from CPUID when its available
-  x86/kvmclock: Stuff local APIC bus period when core crystal freq comes
-    from CPUID
-  x86/kvmclock: Use TSC for sched_clock if it's constant and non-stop
-
- arch/x86/coco/sev/core.c        |  9 ++--
- arch/x86/coco/tdx/tdx.c         | 27 ++++++++--
- arch/x86/include/asm/paravirt.h |  7 ++-
- arch/x86/include/asm/tdx.h      |  2 +
- arch/x86/include/asm/tsc.h      | 67 +++++++++++++++++++++++++
- arch/x86/kernel/cpu/acrn.c      |  5 +-
- arch/x86/kernel/cpu/mshyperv.c  | 11 +++--
- arch/x86/kernel/cpu/vmware.c    |  9 ++--
- arch/x86/kernel/jailhouse.c     |  6 +--
- arch/x86/kernel/kvmclock.c      | 88 +++++++++++++++++++++++----------
- arch/x86/kernel/paravirt.c      | 15 +++++-
- arch/x86/kernel/tsc.c           | 74 ++++++++++++++++-----------
- arch/x86/mm/mem_encrypt_amd.c   |  3 --
- arch/x86/xen/time.c             |  4 +-
- 14 files changed, 243 insertions(+), 84 deletions(-)
-
-
-base-commit: ebbb8be421eefbe2d47b99c2e1a6dd840d7930f9
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index 47776f450720..d7096323c2c4 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -1260,8 +1260,13 @@ void tsc_register_calibration_routines(unsigned long (*calibrate_tsc)(void),
+ 
+ 	if (properties & TSC_FREQUENCY_KNOWN)
+ 		setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
++	else if (WARN_ON(boot_cpu_has(X86_FEATURE_TSC_KNOWN_FREQ)))
++		return;
++
+ 	if (properties & TSC_RELIABLE)
+ 		setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
++	else if (WARN_ON(boot_cpu_has(X86_FEATURE_TSC_RELIABLE)))
++		return;
+ 
+ 	x86_platform.calibrate_tsc = calibrate_tsc;
+ 	if (calibrate_cpu)
 -- 
 2.48.1.362.g079036d154-goog
 
