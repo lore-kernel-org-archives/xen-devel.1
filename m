@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E35BC02196
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Feb 2025 16:31:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.880851.1290937 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B8BC02192
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Feb 2025 16:33:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.880859.1290948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tezLu-0001cn-OO; Mon, 03 Feb 2025 16:31:14 +0000
+	id 1tezNZ-0002W8-19; Mon, 03 Feb 2025 16:32:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 880851.1290937; Mon, 03 Feb 2025 16:31:14 +0000
+Received: by outflank-mailman (output) from mailman id 880859.1290948; Mon, 03 Feb 2025 16:32:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tezLu-0001cg-LR; Mon, 03 Feb 2025 16:31:14 +0000
-Received: by outflank-mailman (input) for mailman id 880851;
- Mon, 03 Feb 2025 16:31:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tezNY-0002W1-UU; Mon, 03 Feb 2025 16:32:56 +0000
+Received: by outflank-mailman (input) for mailman id 880859;
+ Mon, 03 Feb 2025 16:32:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=LRcK=U2=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tezLt-0001bQ-I3
- for xen-devel@lists.xenproject.org; Mon, 03 Feb 2025 16:31:13 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 479e74ee-e24c-11ef-a0e7-8be0dac302b0;
- Mon, 03 Feb 2025 17:31:12 +0100 (CET)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5d0d32cd31aso6588209a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 03 Feb 2025 08:31:12 -0800 (PST)
+ id 1tezIF-0006gZ-Ms
+ for xen-devel@lists.xenproject.org; Mon, 03 Feb 2025 16:27:27 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c103a5f0-e24b-11ef-99a4-01e77a169b0f;
+ Mon, 03 Feb 2025 17:27:26 +0100 (CET)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aaf57c2e0beso943962866b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Feb 2025 08:27:26 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47ceb47sm777354366b.42.2025.02.03.08.31.10
+ a640c23a62f3a-ab6e47d070bsm772781666b.48.2025.02.03.08.27.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Feb 2025 08:31:10 -0800 (PST)
+ Mon, 03 Feb 2025 08:27:25 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,64 +47,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 479e74ee-e24c-11ef-a0e7-8be0dac302b0
+X-Inumbo-ID: c103a5f0-e24b-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1738600271; x=1739205071; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=A+DkwE7AiU1AA9jrMmFuAjztWO1rbekuEF+coC0hFXc=;
-        b=bAon/K3xjovBFsOn4sntmp02Rf7Km8QYsrwJXdtWN9KwSx2zuKrNAJ/DM17WERzRVx
-         l5W+OS2H+Q0BPEHMnLt03xxQK5t8G+TXHTBfkXykCQlAdZP6muds6Wlm30MdMagsvigz
-         xM4H89fIB2t0PB7yJJl+ZeqdbG6A66e+kmyxHPnJ01n1U1C0n25SFSAUA3eWpkfqizuz
-         7O01V8vC6Iv3gZ9IrqSNcdwUldu0w6y6b3dIRzxsFPTsz9B4e1AnkfflkmfYD0DqngIC
-         e9U6HeU1Psxf4eabCsYbHoPNQFUUqQqiGYMKCBeYxgtEwNYNSvP7ntDMFoXm5UgkjCNj
-         oqDg==
+        d=suse.com; s=google; t=1738600046; x=1739204846; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=oIG8+dfgv5JrBN9qiubMzxCH8fENGmq0/5ptspun5xg=;
+        b=F1CSUD0421d0LFTvLog1YkCUNtLhLqYYKf9oB8RU8t7K2SwfLNl7ixCed+bFWUlrn6
+         UP8meVAr1rkjN1L8ixZkcvNvufAARHXu1itJ+JfE6NZ/Z6T6qSiNPrDYaOYR91reCgx/
+         mb+7ZqVxK2aqLDQ7NZ/eq06+amsESpNl5u3Ym9exMoZCwDPKDIP6xg9NAeuBHVrUepz7
+         7223ggMOOfkUkZN9LuAIHZr/EWd8ZqKFj8QcoV8xMSEdk3RHnuJilrRK4AA8T5Udl8bR
+         Dt0DNab+wddBbCytWmQ+t2tMi+LoU0lzNuAXm2FFcu0L3DI9lDD0Hv/knaRrk9zN9eC+
+         KDiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738600271; x=1739205071;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=A+DkwE7AiU1AA9jrMmFuAjztWO1rbekuEF+coC0hFXc=;
-        b=s13YgdZiHrUFDPL5diKsfVkWMt0rZAN2NsgLegSOcq5HbHGF1jJ/Cxz+NDbJa2Hggb
-         4rOdppL2whLTLG89ha/Lq5Fl2kyyfF0NlkshiiGmi6tD5E7nZkZerAOlpsJCITVpIckc
-         r7u5qulTSjTOkGroL5aWEvwR+e1ciQ3JMypmi8/rkyzhSTi3QhUJmygq39SUbLq+3+9I
-         JOJlqEiNG5vulV5t+jzW5HT/Lm1Om2LPEElASfnZS/Cv/T9PtHQbUYkUih/yU94cE97v
-         MUXboh0qmtnFx43f273a3IH8+lXBs5t6I4OGa4t17bs5cqCItsshNBFbD+M9tiLvxLHi
-         JCVA==
-X-Forwarded-Encrypted: i=1; AJvYcCWh55IxTMKVpQkCdVHg7mlv4O9Q51n5N4SCAVgPML+So6CFTMT8WEYvzzAgHyNFyV/39wpl/ABufwg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxBhpt+DlWsmOKof0sVnfjj9Ho64NaWlRefNbtl1ZRv8zR/fu3t
-	tTvZXPBQTmerf2f5TocaqF7bmBX4j3CNtBrsv/pCCJAp18Qp/gDheyfzhdVPtg==
-X-Gm-Gg: ASbGncsi0CS1ARQyGjLB3kKgffo3b7vD/Il0AM0PvmZzlrIJp62UWYWF0Gmha/ANPZA
-	zgFFEf356tsFJM8AouRZuI7HJL9AVb3JlTouMbewFIO/hGDUS6UOVC175zvJfgJHjSX6tO/qkz3
-	ciaKihF+7K7DnjeT2fRUBdnKpQjVzuwb5WGdXqSJ1vXk0z3un4ct44zGO1Pe07KJjuSzpPEfMa1
-	XcfQq4WI7xog8dNVExB3XbyPKp4qgABX05ca+GbPpVsAXSfEOesXOl77qe6WtsB3FJY64q898lA
-	Me8nYFJaSawLbMJt0Zl5ePvR9t+U76tiIgOF9ZjtfbxNVcmOvsjbM4hzpeLofSIy1oxp3mqeNAf
-	2
-X-Google-Smtp-Source: AGHT+IG+NMWseO6kFpsBr1qeLqI5FYLMDSIGMK7CXOGD3Wj70ELEGm/TdemtlIDJuhUK7BkAgWNn3w==
-X-Received: by 2002:a05:6402:2390:b0:5dc:71f6:9725 with SMTP id 4fb4d7f45d1cf-5dc71f698d6mr35131017a12.27.1738600271346;
-        Mon, 03 Feb 2025 08:31:11 -0800 (PST)
-Message-ID: <78a30e0b-5d79-4451-8fdc-99dfc7485b7d@suse.com>
-Date: Mon, 3 Feb 2025 17:31:09 +0100
+        d=1e100.net; s=20230601; t=1738600046; x=1739204846;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=oIG8+dfgv5JrBN9qiubMzxCH8fENGmq0/5ptspun5xg=;
+        b=aMb+VmjucGbUVgeiKX5aK3hMtLM7eThaEv3C78ne9a9okwpK12RjV8fiGDDrvy+E/W
+         zqdsYSxHDHpdB0I8qEcvzm8BkrXCE1aW7VpzxgrP7JztIBtUAQIxJykLcFyg0ek6Jmn0
+         RMnvxjQscmsWDnozvWdC9i6adE9kMzuU8jxBk2oUa6c8D0BxxUtnz3AGOe1b8g2cYuz1
+         KwrZxKewGhZKJTvLwwXG0X3DMAYhxB+MmVARfJDwX3BmsogOBVJIsMthYSwLYhEVA0+/
+         fOSdExDDvkxsEcsn+B+DwBZGkUz2oJTNlcRzTxzxp46Bqz6arHJAOqUT8f/AH1z/pgsB
+         +DHw==
+X-Gm-Message-State: AOJu0YyOegYKLcC3mfZvQkH7PV4YfdNKK1wP1j8TTHORPtu7llIUh5uX
+	m1OSbQBPxUmfaAY6vDACfC1Tcgcy5x2X4nrw7BcycjejWQ/CX/eLd8+/hKcEc7fEYKSXWE0NIsc
+	=
+X-Gm-Gg: ASbGnctZxc+9jgVMNwsxMnp55fgkzAW0fNcMA23a2ttdrllLMk/f3XgGQ9EpFj9FZrg
+	gIH5XojdALAj+JtMcrwKnUEC6a8eAqPSjqCRBxhdweZvayROHS5EDCQ3o7NbJLgzu3lrL1zJwVk
+	f/6OrDcUd7HaUvstijLayEdo7aM5ASgyujqV3H8A/yFk72CCAsfX+P6mqi+CbPDvT0xyuJa9NgK
+	/yJaC8CxfG3oSPTKeolxvk4Gxf3gManecOqktGIjXLhbAKDyOg26hsmtU8/7JbwWMNU/xqInIo2
+	wOaOruANpAiGfua7EgKXWP5FnHV/7EfGCgyVZtKJPREAKTRGZjRrgEAffqVQEQQMf6CmIChbB5G
+	s
+X-Google-Smtp-Source: AGHT+IHihczvoIXGJfjJMfSlrCjW2GvCHbT5w24tirZXoVH4RlueR8nqEW1Pfm5TUrSdqQNbeXA42Q==
+X-Received: by 2002:a17:906:6a23:b0:ab6:de3a:351d with SMTP id a640c23a62f3a-ab6de3a358emr2081002466b.12.1738600045611;
+        Mon, 03 Feb 2025 08:27:25 -0800 (PST)
+Message-ID: <3abd753b-b1f2-499a-8c02-6b6d64a78a17@suse.com>
+Date: Mon, 3 Feb 2025 17:27:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] xen/riscv: identify specific ISA supported by cpu
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <ddf678bb829003b2c4a0a85166a29b61e75bcea9.1737643226.git.oleksii.kurochko@gmail.com>
- <e51b0425-568a-4a4b-b240-a5276a017a70@suse.com>
- <4ee4c8c8-b392-4c0a-8173-624d661409f4@gmail.com>
- <99a1a2f6-12d7-4a4e-a776-05d6b960cf1d@suse.com>
- <f9c4166a-4d96-46af-adf0-1c91fe50e249@gmail.com>
-Content-Language: en-US
+Subject: [PATCH v2 for-4.20? 6/6] PCI: drop pci_segments_init()
 From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, Julien Grall
+ <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>
+References: <30f29dde-15e1-4af9-b86f-0040658c381a@suse.com>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -128,80 +124,75 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <f9c4166a-4d96-46af-adf0-1c91fe50e249@gmail.com>
+In-Reply-To: <30f29dde-15e1-4af9-b86f-0040658c381a@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 03.02.2025 17:24, Oleksii Kurochko wrote:
-> On 2/3/25 5:03 PM, Jan Beulich wrote:
->> On 03.02.2025 16:05, Oleksii Kurochko wrote:
->>> On 1/27/25 3:47 PM, Jan Beulich wrote:
->>>>> +static bool is_lowercase_extension_name(const char *str)
->>>>> +{
->>>>> +    /*
->>>>> +     * `str` could contain full riscv,isa string from device tree so one
->>>>> +     * of the stop condionitions is checking for '_' as extensions are
->>>>> +     * separated by '_'.
->>>>> +     */
->>>>> +    for ( unsigned int i = 0; (str[i] != '\0') && (str[i] != '_'); i++ )
->>>>> +        if ( !islower(str[i]) )
->>>>> +            return false;
->>>>> +
->>>>> +    return true;
->>>>> +}
->>>>> +
->>>>> +static void __init match_isa_ext(const char *name, const char *name_end,
->>>>> +                                 unsigned long *bitmap)
->>>>> +{
->>>>> +    const size_t riscv_isa_ext_count = ARRAY_SIZE(riscv_isa_ext);
->>>>> +
->>>>> +    for ( unsigned int i = 0; i < riscv_isa_ext_count; i++ )
->>>>> +    {
->>>>> +        const struct riscv_isa_ext_data *ext = &riscv_isa_ext[i];
->>>>> +
->>>>> +        /*
->>>>> +         * `name` (according to device tree binding) and
->>>>> +         * `ext->name` (according to initialization of riscv_isa_ext[]
->>>>> +         * elements) must be all in lowercase.
->>>>> +         *
->>>>> +         * Just to be sure that it is true, ASSERT() is added.
->>>>> +         */
->>>>> +        ASSERT(is_lowercase_extension_name(name) &&
->>>>> +               is_lowercase_extension_name(ext->name));
->>>> More general remark: While asserting on ext->name is okay, for it being
->>>> our own data, asserting on data coming from the outside is generally not
->>>> correct. For now I'm not going to insist on this being changed, but
->>>> sooner or later it will want revisiting
->>> IIUC it would be better to leave ASSERT(is_lowercase_extension_name(ext->name)) in match_isa_ext()
->>> and put ASSERT(is_lowercase_extension_name(ext) in riscv_isa_parse_string() before match_isa_ext()
->>> is called:
->>>     static int __init riscv_isa_parse_string(const char *isa,
->>>                                              unsigned long *out_bitmap)
->>>     {
->>>       ...
->>>       while ( *isa )
->>>       {
->>>         const char *ext = isa++;
->>>       ...
->>>       ASSERT(is_lowercase_extension_name(ext));
->>>       match_isa_ext(ext, ext_end, out_bitmap);
->>>     }
->>>
->>> Is my understanding correct?
->> That depends on the origin of the incoming "isa". Considering the function
->> wants to parse it, I'd expect it still comes from DT. In which case
->> asserting on it is wrong; anything may come from there, and nothing should
->> cause assertion failures. Recall that assertions are checks of _our own
->> internal state_ only.
-> 
-> But based on the device tree binding (https://elixir.bootlin.com/linux/v6.13.1/source/Documentation/devicetree/bindings/riscv/extensions.yaml#L47 <https://elixir.bootlin.com/linux/v6.13.1/source/Documentation/devicetree/bindings/riscv/extensions.yaml#L47> ),
-> not anything should come from DT for the riscv,isa string; only lowercase letters are allowed.
-> I am not sure if it makes sense to double-check if riscv,isa is correct, as my expectation (which I haven’t checked yet) is that the DTS will
-> be validated during compilation.
-> 
-> Does it make sense to double check what was put in DT's riscv,isa?
+Have callers invoke pci_add_segment() directly instead. On x86 move the
+invocation back to acpi_mmcfg_init(), where it was prior to ????????????
+("x86/PCI: init segments earlier").
+---
+v2: New.
 
-I think so. Just not by way of an assertion.
+--- a/xen/arch/arm/pci/pci.c
++++ b/xen/arch/arm/pci/pci.c
+@@ -88,7 +88,8 @@ static int __init pci_init(void)
+     if ( !pci_passthrough_enabled )
+         return 0;
+ 
+-    pci_segments_init();
++    if ( pci_add_segment(0) )
++        panic("Could not initialize PCI segment 0\n");
+ 
+     if ( acpi_disabled )
+         return dt_pci_init();
+--- a/xen/arch/x86/x86_64/mmconfig-shared.c
++++ b/xen/arch/x86/x86_64/mmconfig-shared.c
+@@ -402,6 +402,9 @@ void __init acpi_mmcfg_init(void)
+ {
+     bool valid = true;
+ 
++    if ( pci_add_segment(0) )
++        panic("Could not initialize PCI segment 0\n");
++
+     /* MMCONFIG disabled */
+     if ((pci_probe & PCI_PROBE_MMCONF) == 0)
+         return;
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -122,12 +122,6 @@ static int pci_segments_iterate(
+     return rc;
+ }
+ 
+-void __init pci_segments_init(void)
+-{
+-    if ( !alloc_pseg(0) )
+-        panic("Could not initialize PCI segment 0\n");
+-}
+-
+ int __init pci_add_segment(u16 seg)
+ {
+     return alloc_pseg(seg) ? 0 : -ENOMEM;
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -55,8 +55,6 @@ void __init acpi_iommu_init(void)
+ {
+     int ret = -ENODEV;
+ 
+-    pci_segments_init();
+-
+     if ( !iommu_enable && !iommu_intremap )
+         return;
+ 
+--- a/xen/include/xen/pci.h
++++ b/xen/include/xen/pci.h
+@@ -214,7 +214,6 @@ void setup_hwdom_pci_devices(struct doma
+                              int (*handler)(uint8_t devfn,
+                                             struct pci_dev *pdev));
+ int pci_release_devices(struct domain *d);
+-void pci_segments_init(void);
+ int pci_add_segment(u16 seg);
+ const unsigned long *pci_get_ro_map(u16 seg);
+ int pci_add_device(u16 seg, u8 bus, u8 devfn,
 
-Jan
 
