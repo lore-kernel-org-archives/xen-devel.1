@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B8BC02192
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Feb 2025 16:33:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.880859.1290948 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 969BDC02192
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Feb 2025 16:33:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.880867.1290958 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tezNZ-0002W8-19; Mon, 03 Feb 2025 16:32:57 +0000
+	id 1tezOK-0003G8-8q; Mon, 03 Feb 2025 16:33:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 880859.1290948; Mon, 03 Feb 2025 16:32:57 +0000
+Received: by outflank-mailman (output) from mailman id 880867.1290958; Mon, 03 Feb 2025 16:33:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tezNY-0002W1-UU; Mon, 03 Feb 2025 16:32:56 +0000
-Received: by outflank-mailman (input) for mailman id 880859;
- Mon, 03 Feb 2025 16:32:56 +0000
+	id 1tezOK-0003G1-6O; Mon, 03 Feb 2025 16:33:44 +0000
+Received: by outflank-mailman (input) for mailman id 880867;
+ Mon, 03 Feb 2025 16:33:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=LRcK=U2=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tezIF-0006gZ-Ms
- for xen-devel@lists.xenproject.org; Mon, 03 Feb 2025 16:27:27 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
+ id 1tezOI-00031N-L0
+ for xen-devel@lists.xenproject.org; Mon, 03 Feb 2025 16:33:42 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c103a5f0-e24b-11ef-99a4-01e77a169b0f;
- Mon, 03 Feb 2025 17:27:26 +0100 (CET)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aaf57c2e0beso943962866b.3
- for <xen-devel@lists.xenproject.org>; Mon, 03 Feb 2025 08:27:26 -0800 (PST)
+ id a06c79c3-e24c-11ef-99a4-01e77a169b0f;
+ Mon, 03 Feb 2025 17:33:41 +0100 (CET)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ab2c9b8aecaso785035266b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Feb 2025 08:33:41 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47d070bsm772781666b.48.2025.02.03.08.27.24
+ a640c23a62f3a-ab6e49ff269sm775735966b.118.2025.02.03.08.33.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Feb 2025 08:27:25 -0800 (PST)
+ Mon, 03 Feb 2025 08:33:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,60 +47,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c103a5f0-e24b-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: a06c79c3-e24c-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1738600046; x=1739204846; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=oIG8+dfgv5JrBN9qiubMzxCH8fENGmq0/5ptspun5xg=;
-        b=F1CSUD0421d0LFTvLog1YkCUNtLhLqYYKf9oB8RU8t7K2SwfLNl7ixCed+bFWUlrn6
-         UP8meVAr1rkjN1L8ixZkcvNvufAARHXu1itJ+JfE6NZ/Z6T6qSiNPrDYaOYR91reCgx/
-         mb+7ZqVxK2aqLDQ7NZ/eq06+amsESpNl5u3Ym9exMoZCwDPKDIP6xg9NAeuBHVrUepz7
-         7223ggMOOfkUkZN9LuAIHZr/EWd8ZqKFj8QcoV8xMSEdk3RHnuJilrRK4AA8T5Udl8bR
-         Dt0DNab+wddBbCytWmQ+t2tMi+LoU0lzNuAXm2FFcu0L3DI9lDD0Hv/knaRrk9zN9eC+
-         KDiw==
+        d=suse.com; s=google; t=1738600420; x=1739205220; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=xU9FE5UikwYpsW1feAk3el5qgiM8RTKMmdxwjd+Fq5U=;
+        b=PAVj7QfGJ4rDcoZ6dR+ZcUCJKHWUGSqwzemCUr2X+fsV2HmfDHgae4VVbhcblvZMau
+         8ZlnT7NEeV4SwclHat5vkTcDpja8aWsXaNPZFrLRqmaEZjuWEqsQ0rY0oOrnqrkqQogk
+         AlKH31nshTeskdKB49rh7EKfcixHqcUfepxP+oXnyakOivf9PMzkXePnn1nchTY5XvSf
+         y0HmcqZCcXjFchAWLAtbfZQJAW6PivDgqJfe0UDDTbmW7Mg0RpK63ySMQQTx11pVSDfc
+         V0gAkH0n5AoRDkU0JuCqUvdUMqWf2ySShKe8ftul7dsYLHJ/oTEXA4ePSmZPE1s1nf30
+         nN2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738600046; x=1739204846;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oIG8+dfgv5JrBN9qiubMzxCH8fENGmq0/5ptspun5xg=;
-        b=aMb+VmjucGbUVgeiKX5aK3hMtLM7eThaEv3C78ne9a9okwpK12RjV8fiGDDrvy+E/W
-         zqdsYSxHDHpdB0I8qEcvzm8BkrXCE1aW7VpzxgrP7JztIBtUAQIxJykLcFyg0ek6Jmn0
-         RMnvxjQscmsWDnozvWdC9i6adE9kMzuU8jxBk2oUa6c8D0BxxUtnz3AGOe1b8g2cYuz1
-         KwrZxKewGhZKJTvLwwXG0X3DMAYhxB+MmVARfJDwX3BmsogOBVJIsMthYSwLYhEVA0+/
-         fOSdExDDvkxsEcsn+B+DwBZGkUz2oJTNlcRzTxzxp46Bqz6arHJAOqUT8f/AH1z/pgsB
-         +DHw==
-X-Gm-Message-State: AOJu0YyOegYKLcC3mfZvQkH7PV4YfdNKK1wP1j8TTHORPtu7llIUh5uX
-	m1OSbQBPxUmfaAY6vDACfC1Tcgcy5x2X4nrw7BcycjejWQ/CX/eLd8+/hKcEc7fEYKSXWE0NIsc
-	=
-X-Gm-Gg: ASbGnctZxc+9jgVMNwsxMnp55fgkzAW0fNcMA23a2ttdrllLMk/f3XgGQ9EpFj9FZrg
-	gIH5XojdALAj+JtMcrwKnUEC6a8eAqPSjqCRBxhdweZvayROHS5EDCQ3o7NbJLgzu3lrL1zJwVk
-	f/6OrDcUd7HaUvstijLayEdo7aM5ASgyujqV3H8A/yFk72CCAsfX+P6mqi+CbPDvT0xyuJa9NgK
-	/yJaC8CxfG3oSPTKeolxvk4Gxf3gManecOqktGIjXLhbAKDyOg26hsmtU8/7JbwWMNU/xqInIo2
-	wOaOruANpAiGfua7EgKXWP5FnHV/7EfGCgyVZtKJPREAKTRGZjRrgEAffqVQEQQMf6CmIChbB5G
-	s
-X-Google-Smtp-Source: AGHT+IHihczvoIXGJfjJMfSlrCjW2GvCHbT5w24tirZXoVH4RlueR8nqEW1Pfm5TUrSdqQNbeXA42Q==
-X-Received: by 2002:a17:906:6a23:b0:ab6:de3a:351d with SMTP id a640c23a62f3a-ab6de3a358emr2081002466b.12.1738600045611;
-        Mon, 03 Feb 2025 08:27:25 -0800 (PST)
-Message-ID: <3abd753b-b1f2-499a-8c02-6b6d64a78a17@suse.com>
-Date: Mon, 3 Feb 2025 17:27:24 +0100
+        d=1e100.net; s=20230601; t=1738600420; x=1739205220;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xU9FE5UikwYpsW1feAk3el5qgiM8RTKMmdxwjd+Fq5U=;
+        b=o/3grm7k5l9/LeotXH1+jWETJER1V7Zwk7ujppJqFRhsMom1mqwsK6iLeZUTTHEtNW
+         nZWZcZ3dqoKZ2t0HVGqvBk4UxZmOpTV/z/dueRS9hZf+9MKRtu9rJzgtBQ7hjrUl2nzo
+         bXokvHJg21S1A1Mmp8CwyGtCle7LY9H1EmoXzpxaQHQfhan2MTI26zdRzdUkXqVICQZ2
+         MBZw/DrFZFp06uROy8ApDhUFI/XpfUIxqoESd7Pq00li4OibNlK6+ML/oJIEsZIb1omu
+         Su8blQtlTAUvWeMLx5Vy4WTBewUvMLruIDeqtld1I14Rdz65PGdjOGCFecDaZFQe0eo9
+         TnPw==
+X-Forwarded-Encrypted: i=1; AJvYcCUZju+Um9KxVGuHoDQb+RyK3Zu9tYDQeONWfWF+3yy2jcSbBomTyoHNAlpMPE18BrgE3xAbhiaLYyg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzbRrGSng0l+HtGzO2MImgi/rSrxysChu1nB5R6GOUAk0Pk7R/9
+	Xjz9EdR5Nc7I34Ca6yimXtHrLAB6+lGk4uMpQCfASfACytuyTIYvWoZrUdiHKg==
+X-Gm-Gg: ASbGncsgFsm8KooDvsrPtejdCb8GeOv6tGUy4dC+aRiDON+IsRBAy7MpIgUkHAx0nsF
+	IYEoISCcvMdExC9MPOE0+IzsuQhbU1h6x0nfU5fpUHdfLTFqc4XCubZKh/APF1dIjCHTzDRV47u
+	kly6fl0olPmAhRH7K6LnvUTw9dtr8gEofiqnjV04kEIwMe7uGOp4lnUmS+yvc7I49swfJC2/r06
+	67lpGoX3Q9d15/crnYMDTysITKoAtU1ZS3yNL7nzv315B2xiF9jCY+aSvH1NNy+QgcAtjiN12Vu
+	5wNGZc5Pgk8TsveeoemIRUrU1/3QNV5dM06E5rd4ChHQeEbyrS+prgGbaAKvblZb+UeU2hFmrV9
+	K
+X-Google-Smtp-Source: AGHT+IE/jBkjXNkbQGUUm/mY78YJk4uarbpJUjMyCQUXnXL+n9EMK0ToQ48y7U+GARnkRtCTDAcCZw==
+X-Received: by 2002:a17:906:f58b:b0:ab7:3e27:ff04 with SMTP id a640c23a62f3a-ab73e28080bmr285408666b.3.1738600419975;
+        Mon, 03 Feb 2025 08:33:39 -0800 (PST)
+Message-ID: <3adb5869-fb96-4b8e-8423-7f9eccd2f6ca@suse.com>
+Date: Mon, 3 Feb 2025 17:33:38 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 for-4.20? 6/6] PCI: drop pci_segments_init()
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH v1 2/9] asm-generic: move parts of Arm's asm/kernel.h to
+ asm-generic
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>, Julien Grall
- <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>
-References: <30f29dde-15e1-4af9-b86f-0040658c381a@suse.com>
+ xen-devel@lists.xenproject.org
+References: <cover.1736334615.git.oleksii.kurochko@gmail.com>
+ <6404cb5ae077909cbfdf3860d38c701c65547b56.1736334615.git.oleksii.kurochko@gmail.com>
+ <2f14762e-d302-483c-8adb-3223e6290de0@suse.com>
+ <a2e07db1-ce5b-4999-9dbd-e7e097061d2a@gmail.com>
 Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -124,75 +129,56 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <30f29dde-15e1-4af9-b86f-0040658c381a@suse.com>
+In-Reply-To: <a2e07db1-ce5b-4999-9dbd-e7e097061d2a@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Have callers invoke pci_add_segment() directly instead. On x86 move the
-invocation back to acpi_mmcfg_init(), where it was prior to ????????????
-("x86/PCI: init segments earlier").
----
-v2: New.
+On 03.02.2025 16:34, Oleksii Kurochko wrote:
+> 
+> On 1/27/25 12:15 PM, Jan Beulich wrote:
+>> On 08.01.2025 12:13, Oleksii Kurochko wrote:
+>>> Move the following parts to asm-generic with the following changes:
+>>> - struct kernel_info:
+>>>    - Create arch_kernel_info for arch specific kernel information.
+>>>      At the moment, it contains domain_type for Arm.
+>>>    - Rename vpl011 to vuart to have more generic name suitable for other archs.
+>>>    - s/phandle_gic/phandle_intc to have more generic name suitable for other
+>>>      archs.
+>>>    - Make text_offset of zimage structure available for RISCV_64.
+>>> - Wrap by `#ifdef KERNEL_INFO_SHM_MEM_INIT` definition of KERNEL_SHM_MEM_INIT
+>>>    and wrap by `#ifndef KERNEL_INFO_INIT` definition of KERNEL_INFO_INIT to have
+>>>    ability to override KERNEL_INFO_SHM_MEM_INIT for arch in case it doesn't
+>>>    want to use generic one.
+>>> - All other parts are left as is from Arm's asm/kernel.h
+>>>
+>>> Because of the changes in struct kernel_info the correspondent parts of Arm's
+>>> code are updated.
+>>>
+>>> As part of this patch the following clean up happens:
+>>> - Drop asm/setup.h from asm/kernel.h as nothing depends from it.
+>>>    Add inclusion of asm/setup.h for a code which uses device_tree_get_reg() to
+>>>    avoid compilation issues for CONFIG_STATIC_MEMORY and CONFIG_STATIC_SHM.
+>>>
+>>> Signed-off-by: Oleksii Kurochko<oleksii.kurochko@gmail.com>
+>> I question that what is being moved qualifies for asm-generic, an in particular
+>> for a header named kernel.h. Some of what you move may make sense to move to
+>> dom0less-build.h instead. But everything that doesn't fit there needs to find
+>> a different home, imo.
+> 
+> It doesn't clear what then should be in kernel.h, I did in this way to not have a problem with header inclusion
+> during the build of Arm.
+> 
+> Definitions DOM0LESSS_* could be moved to dom0less-build.h, all other doesn't really connected only to dom0less feature
+> and could be re-used for dom0 so it seems like it should leave in a separate header ( if kernel.h isn't good for it ).
+> 
+> Probably kernel.h shouldn't leave in asm-generic as nothing architecture specific is in it,
 
---- a/xen/arch/arm/pci/pci.c
-+++ b/xen/arch/arm/pci/pci.c
-@@ -88,7 +88,8 @@ static int __init pci_init(void)
-     if ( !pci_passthrough_enabled )
-         return 0;
- 
--    pci_segments_init();
-+    if ( pci_add_segment(0) )
-+        panic("Could not initialize PCI segment 0\n");
- 
-     if ( acpi_disabled )
-         return dt_pci_init();
---- a/xen/arch/x86/x86_64/mmconfig-shared.c
-+++ b/xen/arch/x86/x86_64/mmconfig-shared.c
-@@ -402,6 +402,9 @@ void __init acpi_mmcfg_init(void)
- {
-     bool valid = true;
- 
-+    if ( pci_add_segment(0) )
-+        panic("Could not initialize PCI segment 0\n");
-+
-     /* MMCONFIG disabled */
-     if ((pci_probe & PCI_PROBE_MMCONF) == 0)
-         return;
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -122,12 +122,6 @@ static int pci_segments_iterate(
-     return rc;
- }
- 
--void __init pci_segments_init(void)
--{
--    if ( !alloc_pseg(0) )
--        panic("Could not initialize PCI segment 0\n");
--}
--
- int __init pci_add_segment(u16 seg)
- {
-     return alloc_pseg(seg) ? 0 : -ENOMEM;
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -55,8 +55,6 @@ void __init acpi_iommu_init(void)
- {
-     int ret = -ENODEV;
- 
--    pci_segments_init();
--
-     if ( !iommu_enable && !iommu_intremap )
-         return;
- 
---- a/xen/include/xen/pci.h
-+++ b/xen/include/xen/pci.h
-@@ -214,7 +214,6 @@ void setup_hwdom_pci_devices(struct doma
-                              int (*handler)(uint8_t devfn,
-                                             struct pci_dev *pdev));
- int pci_release_devices(struct domain *d);
--void pci_segments_init(void);
- int pci_add_segment(u16 seg);
- const unsigned long *pci_get_ro_map(u16 seg);
- int pci_add_device(u16 seg, u8 bus, u8 devfn,
+Well, kernel.h under asm-generic/ is somewhat odd in the first place.
 
+> but on the other hand, will it
+> be okay to have something in xen/include if it isn't supported by all architectures?
+
+It can be okay; it depends on a number of factors.
+
+Jan
 
