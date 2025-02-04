@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD57C02194
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Feb 2025 01:17:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.881046.1291176 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED17DC02194
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Feb 2025 01:17:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.881054.1291186 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tf7Z3-0007fA-IV; Tue, 04 Feb 2025 01:17:21 +0000
+	id 1tf7ZC-0008Cl-QQ; Tue, 04 Feb 2025 01:17:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 881046.1291176; Tue, 04 Feb 2025 01:17:21 +0000
+Received: by outflank-mailman (output) from mailman id 881054.1291186; Tue, 04 Feb 2025 01:17:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tf7Z3-0007f3-FZ; Tue, 04 Feb 2025 01:17:21 +0000
-Received: by outflank-mailman (input) for mailman id 881046;
- Tue, 04 Feb 2025 01:17:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tf7ZC-0008Cb-NP; Tue, 04 Feb 2025 01:17:30 +0000
+Received: by outflank-mailman (input) for mailman id 881054;
+ Tue, 04 Feb 2025 01:17:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v9a5=U3=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1tf7Z2-000612-Q8
- for xen-devel@lists.xenproject.org; Tue, 04 Feb 2025 01:17:20 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c710bdef-e295-11ef-a0e7-8be0dac302b0;
- Tue, 04 Feb 2025 02:17:19 +0100 (CET)
+ id 1tf7ZB-0006iz-8h
+ for xen-devel@lists.xenproject.org; Tue, 04 Feb 2025 01:17:29 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ca7e3029-e295-11ef-99a4-01e77a169b0f;
+ Tue, 04 Feb 2025 02:17:25 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C1FB65C6A84;
- Tue,  4 Feb 2025 01:16:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C88EC4CEE0;
- Tue,  4 Feb 2025 01:17:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7B0505C572E;
+ Tue,  4 Feb 2025 01:16:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3231C4CEE0;
+ Tue,  4 Feb 2025 01:17:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c710bdef-e295-11ef-a0e7-8be0dac302b0
+X-Inumbo-ID: ca7e3029-e295-11ef-99a4-01e77a169b0f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1738631838;
-	bh=MUQ4+NaqgZEwXW07mwTUR9YMTSPx33+JrXsFymPR8c4=;
+	s=k20201202; t=1738631844;
+	bh=WfV0I2XcMcWq6iqVHClcxb6CZ1GUpZumWWMRKQxTWPo=;
 	h=From:To:Cc:Subject:Date:From;
-	b=m7vhuyCNL/jJ8/4LTRIZ4hdZdXJiCihSjUaGjGBLAgxGTBoqnFtJhW10WA0T85RhP
-	 cBYMVs7RPerPDmNQiKizoKDZiEIeDR27l67VpdS0S9kaVxVYrQ8qeXHGoVMVWFSSkk
-	 tacO5k2Gf8D8L0VatCQi/jUDGUSG1IQuFju7X4BJ+UMxrH5NJimbOxD2fxJ6HTDeeq
-	 ZKrcprIuynqrHnhMO8FoI3LsLcm4QmoQMrpayLG+J9tpn9pi945EOvJAVFHsM4vIIZ
-	 ECRUNMGC/6PIPDBC9HUFwkAc1eqezhsPW6uWpEgq1tzIi9magXsfpy00t0B/PBEL25
-	 s9kXBvBQZq5ug==
+	b=tv4iU+zbrSlv8yVrjuDbIHRlttiA0Bct6P/BoPU4CUH5gb3FsEL5SPb0OJLaS7YB9
+	 ESTyYmoUI2z+iBJpm//6e+QW8JeoXr3arXWnuihjQ0hh9KUzIp9oAFvuVQjYP0PYAA
+	 gZBAumzd5BWhPcstg8YQyEtSLUdsvWOQ+eXxzkh5qNM4p3m0tF6PbyV5Xyta9LifiA
+	 4a1nGef+fPAUu4m7IRNP7h62oeoJkvK2lX6otR5NP/W0jfZaYA5HtcErV8Wbq7Z205
+	 fwu6fWW3oEaDnlKvR14N7Ea4dZY24Tl3qX7RKBvZ+o5cfJS2t4RKVeSxSuagsZKhHm
+	 UVOE/cBDHI6rQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -67,14 +66,14 @@ Cc: Maksym Planeta <maksym@exostellar.io>,
 	dave.hansen@linux.intel.com,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.15] Grab mm lock before grabbing pt lock
-Date: Mon,  3 Feb 2025 20:17:13 -0500
-Message-Id: <20250204011713.2206595-1-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.10] Grab mm lock before grabbing pt lock
+Date: Mon,  3 Feb 2025 20:17:18 -0500
+Message-Id: <20250204011718.2206631-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.15.178
+X-stable-base: Linux 5.10.234
 Content-Transfer-Encoding: 8bit
 
 From: Maksym Planeta <maksym@exostellar.io>
@@ -190,7 +189,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+)
 
 diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
-index 3359c23573c50..f737e3af3edcc 100644
+index cf2ade864c302..2fef8ad3f1df9 100644
 --- a/arch/x86/xen/mmu_pv.c
 +++ b/arch/x86/xen/mmu_pv.c
 @@ -762,6 +762,7 @@ void xen_mm_pin_all(void)
