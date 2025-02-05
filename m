@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80C98C02192
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Feb 2025 11:07:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.882130.1292303 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5FBC02196
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Feb 2025 11:07:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.882135.1292334 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfdFB-0006B7-Om; Wed, 05 Feb 2025 11:06:57 +0000
+	id 1tfdFS-00073i-H4; Wed, 05 Feb 2025 11:07:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 882130.1292303; Wed, 05 Feb 2025 11:06:57 +0000
+Received: by outflank-mailman (output) from mailman id 882135.1292334; Wed, 05 Feb 2025 11:07:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfdFB-0006B0-Lw; Wed, 05 Feb 2025 11:06:57 +0000
-Received: by outflank-mailman (input) for mailman id 882130;
- Wed, 05 Feb 2025 11:06:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tfdFS-00073U-BV; Wed, 05 Feb 2025 11:07:14 +0000
+Received: by outflank-mailman (input) for mailman id 882135;
+ Wed, 05 Feb 2025 11:07:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=j99B=U4=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1tfdFA-0006Au-PY
- for xen-devel@lists.xenproject.org; Wed, 05 Feb 2025 11:06:56 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de
- [2a07:de40:b251:101:10:150:64:1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4edfcc18-e3b1-11ef-99a4-01e77a169b0f;
- Wed, 05 Feb 2025 12:06:54 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 1tfdFR-0006zg-Cb
+ for xen-devel@lists.xenproject.org; Wed, 05 Feb 2025 11:07:13 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [2a07:de40:b251:101:10:150:64:2])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 58f88314-e3b1-11ef-a0e7-8be0dac302b0;
+ Wed, 05 Feb 2025 12:07:11 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id C56C6211A3;
- Wed,  5 Feb 2025 11:06:53 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 220461F461;
+ Wed,  5 Feb 2025 11:07:11 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5F857139D8;
- Wed,  5 Feb 2025 11:06:53 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C1977139D8;
+ Wed,  5 Feb 2025 11:07:10 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id NB6OFU1Go2fcTQAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 05 Feb 2025 11:06:53 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id OrXKLV5Go2f3TQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 05 Feb 2025 11:07:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,23 +54,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4edfcc18-e3b1-11ef-99a4-01e77a169b0f
+X-Inumbo-ID: 58f88314-e3b1-11ef-a0e7-8be0dac302b0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1738753613; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=nyj59u2iCrTl64Iik+1BDNAjH9IfXKH2V6avJGpyHFY=;
-	b=oMZOrWkEuAapwMQTTUue+x++uMXoroL5KsVTIAuAydTCvKSbKMW4Oo6BrkDg6mNpMWvUwG
-	Tt6FkP8l/DkYKDES91uX3hyls84LQ0k62mFHOJiBh5TsVgXwmpB6hgJsr4jNxHFEpfzqnR
-	zCOaYhUGDa39qo6To3jNwVS3TP/0FRo=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=oMZOrWkE
+	t=1738753631; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=C+IDx8vE0Cv/MWgdce49lISNw1mI+dFGY3GPexpYFgA=;
+	b=pNiVUjStSqhsdarFmkOWe4HfZYvWERBGJIuU/7qZtFoIVX598QwXVe3gbDVB7mRzG8d57Q
+	Bscsxz33egKRPU12CNO0PVAdGeXd+g0wkMXXMBlOBlw0SnFck6dLt5Slt7JvpRWOY7cC/l
+	X7utxEo8XbjfwOllN6K/Ox+DjLdGHQM=
+Authentication-Results: smtp-out2.suse.de;
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1738753613; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=nyj59u2iCrTl64Iik+1BDNAjH9IfXKH2V6avJGpyHFY=;
-	b=oMZOrWkEuAapwMQTTUue+x++uMXoroL5KsVTIAuAydTCvKSbKMW4Oo6BrkDg6mNpMWvUwG
-	Tt6FkP8l/DkYKDES91uX3hyls84LQ0k62mFHOJiBh5TsVgXwmpB6hgJsr4jNxHFEpfzqnR
-	zCOaYhUGDa39qo6To3jNwVS3TP/0FRo=
+	t=1738753631; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=C+IDx8vE0Cv/MWgdce49lISNw1mI+dFGY3GPexpYFgA=;
+	b=pNiVUjStSqhsdarFmkOWe4HfZYvWERBGJIuU/7qZtFoIVX598QwXVe3gbDVB7mRzG8d57Q
+	Bscsxz33egKRPU12CNO0PVAdGeXd+g0wkMXXMBlOBlw0SnFck6dLt5Slt7JvpRWOY7cC/l
+	X7utxEo8XbjfwOllN6K/Ox+DjLdGHQM=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org
@@ -83,54 +86,68 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	"H. Peter Anvin" <hpa@zytor.com>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 0/3] x86/xen: some xen_hypercall_hvm() fixes
-Date: Wed,  5 Feb 2025 12:06:48 +0100
-Message-ID: <20250205110651.26280-1-jgross@suse.com>
+Subject: [PATCH v2 3/3] x86/xen: remove unneeded dummy push from xen_hypercall_hvm()
+Date: Wed,  5 Feb 2025 12:06:51 +0100
+Message-ID: <20250205110651.26280-4-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250205110651.26280-1-jgross@suse.com>
+References: <20250205110651.26280-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: C56C6211A3
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00];
+X-Spamd-Result: default: False [-2.80 / 50.00];
 	BAYES_HAM(-3.00)[99.99%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:dkim]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email];
+	RCVD_TLS_ALL(0.00)[]
 
-3 fixes of the xen_hypercall_hvm() function, with the last one being
-probably more a cleanup.
+Stack alignment of the kernel in 64-bit mode is 8, not 16, so the
+dummy push in xen_hypercall_hvm() for aligning the stack to 16 bytes
+can be removed.
 
-Juergen Gross (3):
-  x86/xen: fix xen_hypercall_hvm() to not clobber %rbx
-  x86/xen: add FRAME_END to xen_hypercall_hvm()
-  x86/xen: remove unneeded dummy push from xen_hypercall_hvm()
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/xen/xen-head.S | 6 ------
+ 1 file changed, 6 deletions(-)
 
- arch/x86/xen/xen-head.S | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
-
+diff --git a/arch/x86/xen/xen-head.S b/arch/x86/xen/xen-head.S
+index 4e481b0eefc9..894edf8d6d62 100644
+--- a/arch/x86/xen/xen-head.S
++++ b/arch/x86/xen/xen-head.S
+@@ -100,9 +100,6 @@ SYM_FUNC_START(xen_hypercall_hvm)
+ 	push %r10
+ 	push %r9
+ 	push %r8
+-#ifdef CONFIG_FRAME_POINTER
+-	pushq $0	/* Dummy push for stack alignment. */
+-#endif
+ #endif
+ 	/* Set the vendor specific function. */
+ 	call __xen_hypercall_setfunc
+@@ -119,9 +116,6 @@ SYM_FUNC_START(xen_hypercall_hvm)
+ #else
+ 	lea xen_hypercall_amd(%rip), %rcx
+ 	cmp %rax, %rcx
+-#ifdef CONFIG_FRAME_POINTER
+-	pop %rax	/* Dummy pop. */
+-#endif
+ 	pop %r8
+ 	pop %r9
+ 	pop %r10
 -- 
 2.43.0
 
