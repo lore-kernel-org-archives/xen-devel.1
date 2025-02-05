@@ -4,37 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B19ACC02192
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Feb 2025 10:53:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.882118.1292294 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A831C02196
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Feb 2025 11:07:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.882132.1292325 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfd2C-00048T-MD; Wed, 05 Feb 2025 10:53:32 +0000
+	id 1tfdFN-0006hq-7O; Wed, 05 Feb 2025 11:07:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 882118.1292294; Wed, 05 Feb 2025 10:53:32 +0000
+Received: by outflank-mailman (output) from mailman id 882132.1292325; Wed, 05 Feb 2025 11:07:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfd2C-00048M-Ih; Wed, 05 Feb 2025 10:53:32 +0000
-Received: by outflank-mailman (input) for mailman id 882118;
- Wed, 05 Feb 2025 10:53:31 +0000
+	id 1tfdFN-0006hg-33; Wed, 05 Feb 2025 11:07:09 +0000
+Received: by outflank-mailman (input) for mailman id 882132;
+ Wed, 05 Feb 2025 11:07:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QrMT=U4=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1tfd2B-00048G-Fu
- for xen-devel@lists.xenproject.org; Wed, 05 Feb 2025 10:53:31 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=j99B=U4=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1tfdFL-0006Au-AX
+ for xen-devel@lists.xenproject.org; Wed, 05 Feb 2025 11:07:07 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [2a07:de40:b251:101:10:150:64:2])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6f147db2-e3af-11ef-99a4-01e77a169b0f;
- Wed, 05 Feb 2025 11:53:29 +0100 (CET)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5dccaaca646so1582218a12.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Feb 2025 02:53:29 -0800 (PST)
-Received: from localhost ([46.149.103.13]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dcdf8529f1sm725511a12.1.2025.02.05.02.53.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Feb 2025 02:53:28 -0800 (PST)
+ id 559de97a-e3b1-11ef-99a4-01e77a169b0f;
+ Wed, 05 Feb 2025 12:07:05 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 57FE91F6E6;
+ Wed,  5 Feb 2025 11:07:05 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id ECC1A139D8;
+ Wed,  5 Feb 2025 11:07:04 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id DotZOFhGo2fuTQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 05 Feb 2025 11:07:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,109 +55,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f147db2-e3af-11ef-99a4-01e77a169b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1738752809; x=1739357609; darn=lists.xenproject.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=S79cnXj0xDh57l0DIpuxobQyWwCV3UjACzIa9GRq0f0=;
-        b=CjvUnEGimPZ2zFosFR+TresWvV4EhMtGVeTtPSLAqVOLTd9PRB3iDtcl11CzH1SgYR
-         FM7tFZE3ALXnfiIApAD/EUHJGEDojjs2XehY70OB8OqMohgADZ5Rq2I3zY6hSEJlsNZm
-         uLYaqMJ6QXcNyT8y06kJOOOda6ccviDikN49g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738752809; x=1739357609;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=S79cnXj0xDh57l0DIpuxobQyWwCV3UjACzIa9GRq0f0=;
-        b=KrLEZIjT8jWEZEv+wUcfdsmsakStRO0bmh4a/7jwaG+YUPli8jkE050o+mX/F0Gk5v
-         8jtBhjBYdH79ZjIN9jVwpF3n9Em1HHiSeyXMvETtDfbMxZRXcUAhRIHFvv5nmsiH3Nt3
-         SaLii8xbqEpaAbQfjxvQjPcDHsu/hygev+75TZmuGL10o84evEudUJfFOFXNM7yuhQ2s
-         R5522ySfo3QYe+xDL8zbXNy4uWC2Jm4Y7PtCKECURHC3q8tJZZWXT01HFpAmZsHLPSjl
-         bmDcbaASEeBPOIWvGU4jbueo9Ntkn3BzSpyCHsuP+BkZ3Pu2BAw95KOB/TjH4glW72Sk
-         zLjQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXvDr/Z2U7o1xUwwCBRvx7B6srtiGc8+RxKpOFRLSX90FJx9qXAxRhCChInd1S/Yt4Wt11Ufs7Ccxk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzwKAzevUJDIzMFgG5zvWi6ozDJPWRZvsB8WPa3g12aOaVDwkMB
-	06bFzsaAZvE4yQvNw+Ix6Q1hWeOAEKADFrRndYdwL7pZq5SZefPSqoQZe+1HyP4=
-X-Gm-Gg: ASbGncuw9AEBR0p97pybtPiKVd3BbTzA8um+QK1Co9qLfHVB1rZtPTEjdu52J0GsCaH
-	CON0APxqXZ73VUVIqhcOWVXy70mfZb55GP86QtIn7DcgCwylcPWxzSHqlaDiyZpq4brCXwITTgq
-	CBwhhMlfc+yeE6AvOq8DaR03m7hxGfFwuwmfXkT5W0NpqBux/1v79X3jJCmWYRKjlBKEsTY2mEZ
-	k4fN7wAUh+qxEs0ffGqtkFALGIqb4YDFqmtPsBwWE72c2Fa4jaisXnI7SWAKjL1Adx6N3dLiHOr
-	Y4n1RdLNYAs/oFHA49eM8g==
-X-Google-Smtp-Source: AGHT+IHl2HyI21ccDTs0YuwtfivixNeeqW9Uv0Xr7cYu1D8gxdSvcAbaHG/VrSBm0DhJtC3oPRFfiw==
-X-Received: by 2002:a05:6402:4486:b0:5d9:a5b:d84c with SMTP id 4fb4d7f45d1cf-5dcdbff3624mr2682143a12.3.1738752808959;
-        Wed, 05 Feb 2025 02:53:28 -0800 (PST)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 05 Feb 2025 10:53:26 +0000
-Message-Id: <D7KGFG2DO1B9.1MZ7UYCS0SOMT@cloud.com>
-Cc: <andrew.cooper3@citrix.com>, <anthony.perard@vates.tech>,
- <michal.orzel@amd.com>, <jbeulich@suse.com>, <julien@xen.org>,
- <roger.pau@citrix.com>, "Bertrand Marquis" <bertrand.marquis@arm.com>
-Subject: Re: [RFC] enable UBSAN for automation tests
-From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
-To: "Stefano Stabellini" <sstabellini@kernel.org>,
- <xen-devel@lists.xenproject.org>
-X-Mailer: aerc 0.18.2
-References: <alpine.DEB.2.22.394.2502041612070.9756@ubuntu-linux-20-04-desktop>
-In-Reply-To: <alpine.DEB.2.22.394.2502041612070.9756@ubuntu-linux-20-04-desktop>
+X-Inumbo-ID: 559de97a-e3b1-11ef-99a4-01e77a169b0f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1738753625; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=bKe894QJDLgxCUKyYymG61XqQ9XlP2r3abPMdaYkO+0=;
+	b=WKD/cvDvjpYt5SkhNkPkebCowAjhIracaY5un3kd66efNd3R2qs1sKsrZSEU0BG+Rzas2l
+	mv1OXZAr+n1FjMknqWATGZOoHAd/ry94lJdiXo1gzC6f00zPSA8w7KecpoV/32QpaHkGow
+	8OZfz1TDcSY0xDxm74RSIvqZe4aD00c=
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b="WKD/cvDv"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1738753625; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=bKe894QJDLgxCUKyYymG61XqQ9XlP2r3abPMdaYkO+0=;
+	b=WKD/cvDvjpYt5SkhNkPkebCowAjhIracaY5un3kd66efNd3R2qs1sKsrZSEU0BG+Rzas2l
+	mv1OXZAr+n1FjMknqWATGZOoHAd/ry94lJdiXo1gzC6f00zPSA8w7KecpoV/32QpaHkGow
+	8OZfz1TDcSY0xDxm74RSIvqZe4aD00c=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	xen-devel@lists.xenproject.org,
+	kernel test robot <lkp@intel.com>
+Subject: [PATCH v2 2/3] x86/xen: add FRAME_END to xen_hypercall_hvm()
+Date: Wed,  5 Feb 2025 12:06:50 +0100
+Message-ID: <20250205110651.26280-3-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250205110651.26280-1-jgross@suse.com>
+References: <20250205110651.26280-1-jgross@suse.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 57FE91F6E6
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	RCVD_TLS_ALL(0.00)[];
+	DKIM_TRACE(0.00)[suse.com:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	R_RATELIMIT(0.00)[to_ip_from(RLkdkdrsxe9hqhhs5ask8616i6)];
+	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:dkim,suse.com:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
 
-On Wed Feb 5, 2025 at 12:44 AM GMT, Stefano Stabellini wrote:
-> Hi all,
->
-> I would like to propose to enable the UBSAN config option in our Gitlab
-> pipelines. The attached patch (just for testing, do not commit) enables
-> UBSAN on the Xen build jobs used for most of the ARM and x86 tests. The
-> pipeline passes.
->
-> https://gitlab.com/xen-project/people/sstabellini/xen/-/pipelines/1656001=
-157
->
-> Cheers,
->
-> Stefano
->
-> diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build=
-.yaml
-> index bc4a8a5ad2..92790648aa 100644
-> --- a/automation/gitlab-ci/build.yaml
-> +++ b/automation/gitlab-ci/build.yaml
-> @@ -333,6 +333,8 @@ alpine-3.18-gcc-debug:
->        CONFIG_EXPERT=3Dy
->        CONFIG_UNSUPPORTED=3Dy
->        CONFIG_ARGO=3Dy
-> +      CONFIG_UBSAN=3Dy
-> +      CONFIG_UBSAN_FATAL=3Dy
-> =20
->  debian-12-x86_64-gcc-debug:
->    extends: .gcc-x86-64-build-debug
-> @@ -419,6 +421,11 @@ alpine-3.18-gcc-debug-arm64:
->    extends: .gcc-arm64-build-debug
->    variables:
->      CONTAINER: alpine:3.18-arm64v8
-> +    EXTRA_XEN_CONFIG: |
-> +      CONFIG_EXPERT=3Dy
-> +      CONFIG_UNSUPPORTED=3Dy
-> +      CONFIG_UBSAN=3Dy
-> +      CONFIG_UBSAN_FATAL=3Dy
-> =20
->  alpine-3.18-gcc-arm64-randconfig:
->    extends: .gcc-arm64-build
+xen_hypercall_hvm() is missing a FRAME_END at the end, add it.
 
-Sounds good to me. Particularly seeing how the pipeline is already clean. W=
-e
-did some UBSAN checking in XenServer and it did uncovered a number of "oops=
-,
-yes that shouldn't quite be like that" sort of issues.
+Reported-by: kernel test robot <lkp@intel.com>
+Closes: https://lore.kernel.org/oe-kbuild-all/202502030848.HTNTTuo9-lkp@intel.com/
+Fixes: b4845bb63838 ("x86/xen: add central hypercall functions")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/xen/xen-head.S | 1 +
+ 1 file changed, 1 insertion(+)
 
-There's already precedent for making debug builds do slightly different thi=
-ngs
-to exercise different code paths (e.g: forcing map_domain_page() to always =
-use
-the mapcache rather than short-circuiting via the directmap).
+diff --git a/arch/x86/xen/xen-head.S b/arch/x86/xen/xen-head.S
+index 72f28d66e0e5..4e481b0eefc9 100644
+--- a/arch/x86/xen/xen-head.S
++++ b/arch/x86/xen/xen-head.S
+@@ -132,6 +132,7 @@ SYM_FUNC_START(xen_hypercall_hvm)
+ 	pop %rcx
+ 	pop %rax
+ #endif
++	FRAME_END
+ 	/* Use correct hypercall function. */
+ 	jz xen_hypercall_amd
+ 	jmp xen_hypercall_intel
+-- 
+2.43.0
 
-Cheers,
-Alejandro
 
