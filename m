@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C310C3DA4A
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 08:33:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.882555.1292666 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1132C0219C
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 08:33:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.882557.1292689 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfxKD-0000kI-AH; Thu, 06 Feb 2025 08:33:29 +0000
+	id 1tfxKJ-0001SM-Ru; Thu, 06 Feb 2025 08:33:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 882555.1292666; Thu, 06 Feb 2025 08:33:29 +0000
+Received: by outflank-mailman (output) from mailman id 882557.1292689; Thu, 06 Feb 2025 08:33:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfxKD-0000jA-4A; Thu, 06 Feb 2025 08:33:29 +0000
-Received: by outflank-mailman (input) for mailman id 882555;
- Thu, 06 Feb 2025 08:33:27 +0000
+	id 1tfxKJ-0001SD-OV; Thu, 06 Feb 2025 08:33:35 +0000
+Received: by outflank-mailman (input) for mailman id 882557;
+ Thu, 06 Feb 2025 08:33:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2Xgo=U5=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1tfxKB-0000gq-Ty
- for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 08:33:27 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2060e.outbound.protection.outlook.com
- [2a01:111:f403:2414::60e])
+ id 1tfxKI-0000gq-Qt
+ for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 08:33:34 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2062a.outbound.protection.outlook.com
+ [2a01:111:f403:2415::62a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0672de73-e465-11ef-b3ef-695165c68f79;
- Thu, 06 Feb 2025 09:33:24 +0100 (CET)
-Received: from BN0PR04CA0144.namprd04.prod.outlook.com (2603:10b6:408:ed::29)
- by CY5PR12MB9054.namprd12.prod.outlook.com (2603:10b6:930:36::14)
+ id 0c406dfd-e465-11ef-b3ef-695165c68f79;
+ Thu, 06 Feb 2025 09:33:33 +0100 (CET)
+Received: from BN9P221CA0016.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::18)
+ by CH2PR12MB4087.namprd12.prod.outlook.com (2603:10b6:610:7f::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.24; Thu, 6 Feb
- 2025 08:33:19 +0000
-Received: from BN1PEPF0000468C.namprd05.prod.outlook.com
- (2603:10b6:408:ed:cafe::ac) by BN0PR04CA0144.outlook.office365.com
- (2603:10b6:408:ed::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.29 via Frontend Transport; Thu,
- 6 Feb 2025 08:33:18 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Thu, 6 Feb
+ 2025 08:33:29 +0000
+Received: from BN1PEPF00004687.namprd05.prod.outlook.com
+ (2603:10b6:408:10a:cafe::1c) by BN9P221CA0016.outlook.office365.com
+ (2603:10b6:408:10a::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.28 via Frontend Transport; Thu,
+ 6 Feb 2025 08:33:29 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN1PEPF0000468C.mail.protection.outlook.com (10.167.243.137) with Microsoft
+ BN1PEPF00004687.mail.protection.outlook.com (10.167.243.132) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8398.14 via Frontend Transport; Thu, 6 Feb 2025 08:33:18 +0000
+ 15.20.8398.14 via Frontend Transport; Thu, 6 Feb 2025 08:33:28 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Thu, 6 Feb 2025 02:33:15 -0600
+ 15.1.2507.39; Thu, 6 Feb 2025 02:33:26 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0672de73-e465-11ef-b3ef-695165c68f79
+X-Inumbo-ID: 0c406dfd-e465-11ef-b3ef-695165c68f79
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yVDJrP5GeDcA+MIzgISJQZhWkj9RYN3b11bEouKZaA35BYFT9DCB9HkUfBqVTqofycWjD63io3Vil2KZipxcKwzCumPYWOT55fQ7AEBmqG760taBlLWUyKd099hxMnQR0IIZBQhqI0J8m1/UK/cEo5yANoQYmgOs1hW68UCSMezM2BnLShD6O2hf7N4JxUNWNXkjx/wkrqFsfIvSfQsfLncsBW3gEIyi884HkDHBxQhl4vBdcro0F7/s7PY905EXEgIVTxf59fq7+wcXjYJp3glwbf4kKOJ/tCUS+IESIO/Wlhn7WozLyvhFMmk153vsPEV75kOLShzdgV15ForMgw==
+ b=Y4gibFYkOqYazLEBhTbjzCT7yDgr85x8ncMrhCO6FPu+OIklUlrQy1xPYFnHYy1gXkYLdYhLoEOnep4Bom6Ch6aP3RNI6rHaNsr+iarrQEGdgBQ8J8lyKe+gwGUiIlS3ZbMJ3n0++t6OktaOC18TKC6dxThk88ZaugTL+T4fZnWOsV5StNF2+1UdFnPKoSlK+QKwjgIYl9a1MEuLpMWICVFEFB8nqcZiHtNqAoZnoLSnFfo7A17+ugnhN4nmjDMbNVglwcUhNKx+aHX1DPUX7/6EbxM6aqC0FAJn0E9XIv2I6Hy8WLIuKi8C/nqiRCVo+MKlO13CIbYiOI0tZiEjkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mXPN/tS2EgkLMc73jFgEtncJMnvlDmpkNwAlqOFEqSE=;
- b=WTSdwZhRJWLT8vpnYBsW34YACwxOjF2GSMZLiyVhX523mXUR4QO7wHl4UehQ1Rn6sjuxIBkaAx4PQ/BfIFh0gHXJmwk9c2f5w81Gbmi3q9UXiB4VvUUlEW85loVoi1tkCh1xmFJ1hy6K29GwkZaLbeVbREinvOeNDcTrI8j19fGbrbItqsS+ri1hWww3edtYtsyK9jT2THgpJj6M+vN2hYbwkpwPRDb3DlHXQMNS6MbOUWtQuexwP1q2CYfaK29cjsbgyvK/mhqkr+iuFWFlBIm/G//kyCj7h0Rzk6nNsHMK3B+/F+WinkoaSPzXvmM/LJqP08wIj9paAg9W/Uiogw==
+ bh=uUUUYW+VHXbpHQDxQCEnkBbb3oOklS6IdLABVlVMlmk=;
+ b=JoBss/1qcpTd2EV7CfpxjAAYww2sdWZTxFHOlyr8MyW2YLf6Kz8X/G/WKFA6yJsdONXHxPIwbLv0upQef5JLezp1nSqNbl4HfhF39znBP/txTf1OXaL4xvf51AfFf3HRVi2etiKyW78QqA42eJasAJ8S2CeoxD+RUVY4f0Ppcjjq4HXOLcYxkWZ2NDlZfY+zxXw+m7YUeDd1cGjVSdjWPOuzr623NcziJamNklOPwmWZswhOkgy4EUmSsnmHY3Xo3sbjxqRcmIhdNeRX4pbxgAcgKkrXjqoHl/d/h38FGfw+yLnL/9G33i+5YlBragnQh6V/LybNnsq/7DcAdU4RiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mXPN/tS2EgkLMc73jFgEtncJMnvlDmpkNwAlqOFEqSE=;
- b=Xr7KbbLNc61r+pAsdX6x98QZP/znSfIArrYiOWQufrSxLB8RGbTrrSYxNUtM9v7qQUWQTySiEQlt1PJvWS8v2NW+lQeCU4kcjvAr9ThFeCQ3qkkRS9WAYZ0YttOf2NVm5XorJ3Z8JIomb3sKPZ49JYryhA6ZQrLDL9YVhTu90Mw=
+ bh=uUUUYW+VHXbpHQDxQCEnkBbb3oOklS6IdLABVlVMlmk=;
+ b=4MVJPEnt/yLmym2fLyKEyD/aAlgcG5byM2+xc9Pmx6IG710ei2ow7QGZCARpj/bm2OOSChXU9hvyCqK+0orwxlmVOjOsJd3albu5YULVJjK7ptrTYC+B2wO5JZJdWufAowUmxB4X0CqQwOM3yVMIgpkqBgUKL5CvtZayGXsjW/k=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,13 +85,13 @@ To: <xen-devel@lists.xenproject.org>
 CC: <Ray.Huang@amd.com>, <Jason.Andryuk@amd.com>, Penny Zheng
 	<Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Michal
- Orzel" <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>
-Subject: [PATCH v2 00/11] amd-cppc CPU Performance Scaling Driver
-Date: Thu, 6 Feb 2025 16:32:44 +0800
-Message-ID: <20250206083255.1296363-1-Penny.Zheng@amd.com>
+	<roger.pau@citrix.com>
+Subject: [PATCH v2 04/11] xen/amd: export processor max frequency value
+Date: Thu, 6 Feb 2025 16:32:48 +0800
+Message-ID: <20250206083255.1296363-5-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250206083255.1296363-1-Penny.Zheng@amd.com>
+References: <20250206083255.1296363-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -100,135 +100,104 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF0000468C:EE_|CY5PR12MB9054:EE_
-X-MS-Office365-Filtering-Correlation-Id: 976c488d-da01-4ad8-3789-08dd4688e86a
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004687:EE_|CH2PR12MB4087:EE_
+X-MS-Office365-Filtering-Correlation-Id: 88db1faa-49b2-45d4-9194-08dd4688ee99
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+	BCL:0;ARA:13230040|1800799024|376014|36860700013|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?/3oITQ7MlZ+xM6ye/JboYdsg0OzHP6FlFVMf2kflv1QvH7r6Y1YgEFqYQ0tg?=
- =?us-ascii?Q?iC68TNkA4eW27Xm4V8ssc/6pnnrS8RoXY65e2qsrkkJD1RpUreX5n82UUebF?=
- =?us-ascii?Q?ZkF5spSLQRjHNKf+xSg1e9M9cvkXWFd8IDdL++DPKM81HYrzHqyXH1Gq1AeV?=
- =?us-ascii?Q?SEhxCZ730tWH4aDaAxw40iQy731vbnE1hZFm85LGsWKHQj0w15hmQaA21pX1?=
- =?us-ascii?Q?x43YzHW4DT6RaRn42gK2mfQiY+24fudnZBvLatLGx6vGnK2MeQP9qaZQjiHD?=
- =?us-ascii?Q?CzEeSLHHnx/5INUfKmKpffRxOlFTWYwE0WwA6raTVAdE3+l/tgDb7JpZ3Eta?=
- =?us-ascii?Q?cHjAlUYV1mfAY8jclxC+dePkonyC/gBwFcYfrrlPRpuC/p+I2Rxe0/LI+1U1?=
- =?us-ascii?Q?0tbBXYawJdnzfWFXqznMk5UW9f/yMqPywqfLrGrAc+BTRVqg97aO12pf7roA?=
- =?us-ascii?Q?2bcvETq8f5w/vZajlrRJjUCe225EH5fe8xQp3hfdEdS0XrMIf9Ro4LpVdDoY?=
- =?us-ascii?Q?EZV+FoQyb7nQloGPq3xfBHrn1btKEyi+f3nwjKSrku4x/qKCTgUE50Z0xaLg?=
- =?us-ascii?Q?cWmZpdCAm5SZgrtBIL58eSqfxyQQZrORsXpc3oaMrOqedeUR8cz5vMMcXayJ?=
- =?us-ascii?Q?JW3plDEwEHa0SxK2KMN+9z7CtbxrTqjkMKyZYw3NlP74Va8jqU/h1sI6IyPo?=
- =?us-ascii?Q?+RmOOTBAstA50sSlElEzARK/ydX8ro0HUS6uZ96MVoCvqeoKf1RzboNTbtwD?=
- =?us-ascii?Q?qA0WnNPYm81JquiugPK1Y5Rvcfl92XtsZU45xGQ2wqYhnMiQT4dIfkhZHOoj?=
- =?us-ascii?Q?QzQTiN75Fa83xmwCgij6gxCdfIF86A92AeqONnvWB2MmXBBircuYoakufJdC?=
- =?us-ascii?Q?ZqZ24t3bFJYfvYNlNezkMv/k/Z8/zHjkjZKsd7D6pfKEpIooR/ezkkyvHw4t?=
- =?us-ascii?Q?ahQXVRwnbIlBjxvt/ogv9HmKtC8iy2A5WuJSI4bAoSHc/JjG3UOvpk4HYYDH?=
- =?us-ascii?Q?s10HGutD2ce99ZlQMkq9eBv4YXFX1p0LgOI6+wVw5Bj3Nw2Ilaef6nz+y9Pg?=
- =?us-ascii?Q?SVDGHYzwsgooY+peGWbuSml9JRK9FtR00sCjQQLZ0L/MhdxlRDV+PeAyztQq?=
- =?us-ascii?Q?9WQI0U9Mjm04BFvSSqgi+sh/x4agwsf3jPVMT7XXhT4NoHfOGWKnpldKhgVG?=
- =?us-ascii?Q?23wJ3gFxCfe6KQgSTMqxPDyw0iPxQD6yy6Cym7ysekioo+YjoQqR0BMTGunl?=
- =?us-ascii?Q?gdSiGLuwcKwsLkMFrtCeMLNEoTD9kKF1cALzj+i9KqbHzjYs1em+lcrfcfcs?=
- =?us-ascii?Q?kvT7s68NsJJ+a83QRDOE+PaALoLV0C/Fl1BjfKGZcbPjY+G4tPlE/PbFSFMs?=
- =?us-ascii?Q?q0/f60XWYHByWuL0/+MdklfqM32Rn0OYgAptRmPDcyu799wf1/YbKu0GR9QV?=
- =?us-ascii?Q?ZvLlcmnw1Mw1NNkVqJcjvPJ2umUnBcDt4eyrBhFWq28z5eWkTN1ADIvvTrcQ?=
- =?us-ascii?Q?XgPpWpAkgYVTXsA=3D?=
+	=?us-ascii?Q?XhPl6wDI/raZd1+VzEiGTrQ0soFPm5MI3De3DhQAioPYH7nC6MJg99EMkjE2?=
+ =?us-ascii?Q?NGZbo5PaAY78TpURXGoiGxVV7OWTACpA6VYjExfOA6C2qWPl8UyTQbc7Xvg5?=
+ =?us-ascii?Q?JmfDe1OREHSJIhTptIX1PgxXjBO9LQiKHZHfYMfjWQelVCfXBYkaYW0Hxeig?=
+ =?us-ascii?Q?dwpjnAVE1sDSe13T/CvCNa+vc2iuLDrMLOzd7PSGNXFyWO8mOVYAyrpZV4hk?=
+ =?us-ascii?Q?kFes5FNHLlcEdi4SWgbtC0ZG4hc1HG4YzRDRAubKZQh+1LQsdtg5LYl1egQy?=
+ =?us-ascii?Q?0b8TPcberKP1FIWg4oDNhONKO/KBfPwFBI8/hYtImDU8qltBeH3TdXu5boPq?=
+ =?us-ascii?Q?LdMOi62WmPMYdjzARDvD1tdCJNnMfX3gXP37JBc19LYFGfSq1a7ciw7RfGpy?=
+ =?us-ascii?Q?M664HfVelPA2X4cUujWV1A88utJYFCaFrOHVJKajWfa0ckpSdHH+F458D1wg?=
+ =?us-ascii?Q?mT/zVkS/eOzbE1f68OQwtKviVue4pgf9JBDH/5tMr0hWN2j9gBdTcE0/dS7i?=
+ =?us-ascii?Q?eirs39gAEVCSMLbPpEfPYpdbbehRzZ5QJUc4C44TD8w3IokMoMjLUPyg6OV0?=
+ =?us-ascii?Q?eJXeEAToanRhu/M+Y6fBGCrrLYv+VzO84MytUVLN3O9Ykr0blhL/Q6E4CqrW?=
+ =?us-ascii?Q?wEtKQtoYNMhfaZWzHtRlrdN/Gi2jsEqaiV8Qn3rVTwbRwKbxUk/m2OnR4yMY?=
+ =?us-ascii?Q?XyiKBb6hRJmogsygbV4mUdUTQwYTmD2G3hefqiuOfwCoVJgW0w4Ga3CKedUt?=
+ =?us-ascii?Q?vUkrzmCZQVfohk2OGvxgPvTLgOk6SXCEQRF279GJyVFI7qn7zZ6pV1GvKAfH?=
+ =?us-ascii?Q?8yZREWR6ufmtH6AUVNTHY6QL52DflWAFiYFNab2QTnNK6rbdMIBuyLvcf4kG?=
+ =?us-ascii?Q?IDnietUTxP9OlKawGd2w4Nc4iFnx9VDMo0TBkNgDcXq7+xTd+/Xchr/deGiC?=
+ =?us-ascii?Q?rsLdGycRR/m8iGnKcF8Hd2quZSBrxEO8259XlcbrhhHEtuGvKV41j8kq3yCY?=
+ =?us-ascii?Q?fP+WYK95cem5rKf/gmEk6N9fcyavQoB5sEHmX48vDqPp4UTHH9Xfeff+SjlX?=
+ =?us-ascii?Q?5/a2EEM3LRXoXQgI2yr98S59neDGKTetpq1DtXh+vU6/0xL0qLMq2O07jl7T?=
+ =?us-ascii?Q?ozqkoOVHThwyJzSEE/YsyWBolEyPNnPaeWPFzGRPvi2W2puuAjnrj9uZCA/C?=
+ =?us-ascii?Q?vIemecEKGb+aKA5UFJysjbNgUKiT7I51NOAOAntsPwqkQetUBL5kfYbbClKK?=
+ =?us-ascii?Q?0cMYYEGSjRUhIRwT/7jzQAPQ3xWOXzW56aO7qrFmZdq1yo2z8PJRjbS+GsCD?=
+ =?us-ascii?Q?ZE/eg4S6f0K45znnCnS9OrgcZ9ySXV3OAHUXCgS+lBxGrJwl0JaHnfrzX+CN?=
+ =?us-ascii?Q?uhUMXBT3tDz9niPEGT/SyzIDd3X7sXhf2fazZfoT+5ba9nWazdBrQz2VpSox?=
+ =?us-ascii?Q?Y0x9g58GVCFNVMB3s6Rsr97jwK+HoHo5GjUo3JIz8L2j9ZkH0k6fd7ELUKIr?=
+ =?us-ascii?Q?G847QszIEMJltnY=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 08:33:18.4468
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 08:33:28.8391
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 976c488d-da01-4ad8-3789-08dd4688e86a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88db1faa-49b2-45d4-9194-08dd4688ee99
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF0000468C.namprd05.prod.outlook.com
+	BN1PEPF00004687.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB9054
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4087
 
-amd-cppc is the AMD CPU performance scaling driver that introduces a
-new CPU frequency control mechanism on modern AMD APU and CPU series in
-Xen. The new mechanism is based on Collaborative Processor Performance
-Control (CPPC) which provides finer grain frequency management than
-legacy ACPI hardware P-States. Current AMD CPU/APU platforms are using
-the ACPI P-states driver to manage CPU frequency and clocks with
-switching only in 3 P-states. CPPC replaces the ACPI P-states controls
-and allows a flexible, low-latency interface for Xen to directly
-communicate the performance hints to hardware.
+When _CPC table could not provide processor frequency range
+values for OS governor, we need to read processor max frequency
+as anchor point.
 
-amd_cppc driver has 2 operation modes: autonomous (active) mode,
-and non-autonomous (passive) mode. We register different CPUFreq driver
-for different modes, "amd-cppc" for passive mode and "amd-cppc-epp"
-for active mode.
+For AMD processors, we export max frequency value from amd_log_freq()
 
-The passive mode leverages common governors such as *ondemand*,
-*performance*, etc, to manage the performance hints. And the active mode
-uses epp to provides a hint to the hardware if software wants to bias
-toward performance (0x0) or energy efficiency (0xff). CPPC power algorithm
-in hardware will automatically calculate the runtime workload and adjust the
-realtime cpu cores frequency according to the power supply and thermal, core
-voltage and some other hardware conditions.
+Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+---
+v1 -> v2:
+- new commit
+---
+ xen/arch/x86/cpu/amd.c         | 7 +++++++
+ xen/arch/x86/include/asm/amd.h | 1 +
+ 2 files changed, 8 insertions(+)
 
-amd-cppc is enabled on passive mode with a top-level `cpufreq=amd-cppc` option,
-while users add extra `active` flag to select active mode. It will fallback to
-`cpufreq=xen` if amd-cppc feature is unavailable on hardware.
-
-With `cpufreq=amd-cppc,active`, we did a 60s sampling test to see the CPU
-frequency change, through tweaking the energy_perf preference from
-`xenpm set-cpufreq-cppc powersave` to `xenpm set-cpufreq-cppc performance`.
-The outputs are as follows:
-```
-Setting CPU in powersave mode
-Sampling and Outputs:
-  Avg freq      2000000 KHz
-  Avg freq      2000000 KHz
-  Avg freq      2000000 KHz
-Setting CPU in performance mode
-Sampling and Outputs:
-  Avg freq      4640000 KHz
-  Avg freq      4220000 KHz
-  Avg freq      4640000 KHz
-```
-
-Penny Zheng (11):
-  xen/x86: add CPPC feature flag for AMD processors
-  xen/x86: introduce new sub-hypercall to propagate CPPC data
-  xen/x86: introduce "cpufreq=amd-cppc" xen cmdline
-  xen/amd: export processor max frequency value
-  xen/x86: introduce a new amd cppc driver for cpufreq scaling
-  xen/cpufreq: only set gov NULL when cpufreq_driver.setpolicy is NULL
-  x86/cpufreq: add "cpufreq=amd-cppc,active" para
-  xen/cpufreq: abstract Energy Performance Preference value
-  xen/x86: implement EPP support for the amd-cppc driver in active mode
-  tools/xenpm: Print CPPC parameters for amd-cppc driver
-  xen/cpufreq: Adapt SET/GET_CPUFREQ_CPPC xen_sysctl_pm_op for amd-cppc
-    driver
-
- docs/misc/xen-command-line.pandoc           |  14 +-
- tools/misc/xenpm.c                          |  18 +-
- xen/arch/x86/acpi/cpufreq/Makefile          |   1 +
- xen/arch/x86/acpi/cpufreq/amd-cppc.c        | 678 ++++++++++++++++++++
- xen/arch/x86/acpi/cpufreq/cpufreq.c         |  32 +-
- xen/arch/x86/acpi/cpufreq/hwp.c             |  10 +-
- xen/arch/x86/cpu/amd.c                      |   7 +
- xen/arch/x86/include/asm/amd.h              |   1 +
- xen/arch/x86/include/asm/cpufeature.h       |   1 +
- xen/arch/x86/platform_hypercall.c           |  10 +
- xen/arch/x86/x86_64/cpufreq.c               |   2 +
- xen/drivers/acpi/pmstat.c                   |  20 +-
- xen/drivers/cpufreq/cpufreq.c               |  69 +-
- xen/drivers/cpufreq/utility.c               |  11 +
- xen/include/acpi/cpufreq/cpufreq.h          |  31 +
- xen/include/acpi/cpufreq/processor_perf.h   |   1 +
- xen/include/public/arch-x86/cpufeatureset.h |   1 +
- xen/include/public/platform.h               |  17 +
- xen/include/public/sysctl.h                 |   2 +
- xen/include/xen/pmstat.h                    |   1 +
- xen/include/xlat.lst                        |   1 +
- 21 files changed, 907 insertions(+), 21 deletions(-)
- create mode 100644 xen/arch/x86/acpi/cpufreq/amd-cppc.c
-
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index 597b0f073d..489e092815 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -56,6 +56,8 @@ bool __initdata amd_virt_spec_ctrl;
+ 
+ static bool __read_mostly fam17_c6_disabled;
+ 
++DEFINE_PER_CPU_READ_MOSTLY(uint64_t, max_freq_mhz);
++
+ static inline int rdmsr_amd_safe(unsigned int msr, unsigned int *lo,
+ 				 unsigned int *hi)
+ {
+@@ -669,7 +671,12 @@ void amd_log_freq(const struct cpuinfo_x86 *c)
+ 		printk("CPU%u: %lu ... %lu MHz\n",
+ 		       smp_processor_id(), FREQ(lo), FREQ(hi));
+ 	else
++	{
+ 		printk("CPU%u: %lu MHz\n", smp_processor_id(), FREQ(lo));
++		return;
++	}
++
++	per_cpu(max_freq_mhz, smp_processor_id()) = FREQ(hi);
+ #undef FREQ
+ }
+ 
+diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
+index 9c9599a622..96367ba646 100644
+--- a/xen/arch/x86/include/asm/amd.h
++++ b/xen/arch/x86/include/asm/amd.h
+@@ -174,4 +174,5 @@ bool amd_setup_legacy_ssbd(void);
+ void amd_set_legacy_ssbd(bool enable);
+ void amd_set_cpuid_user_dis(bool enable);
+ 
++DECLARE_PER_CPU(uint64_t, max_freq_mhz);
+ #endif /* __AMD_H__ */
 -- 
 2.34.1
 
