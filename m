@@ -4,40 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22AF1C02196
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 08:04:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.882543.1292648 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08A12C02196
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 08:33:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.882554.1292659 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfws6-0004y5-Nk; Thu, 06 Feb 2025 08:04:26 +0000
+	id 1tfxKD-0000h8-0y; Thu, 06 Feb 2025 08:33:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 882543.1292648; Thu, 06 Feb 2025 08:04:26 +0000
+Received: by outflank-mailman (output) from mailman id 882554.1292659; Thu, 06 Feb 2025 08:33:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfws6-0004xy-LD; Thu, 06 Feb 2025 08:04:26 +0000
-Received: by outflank-mailman (input) for mailman id 882543;
- Thu, 06 Feb 2025 08:04:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tfxKC-0000h1-Uf; Thu, 06 Feb 2025 08:33:28 +0000
+Received: by outflank-mailman (input) for mailman id 882554;
+ Thu, 06 Feb 2025 08:33:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GaX0=U5=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1tfws5-0004xs-IZ
- for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 08:04:25 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2061f.outbound.protection.outlook.com
- [2a01:111:f403:2418::61f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f9ccf817-e460-11ef-a0e7-8be0dac302b0;
- Thu, 06 Feb 2025 09:04:24 +0100 (CET)
-Received: from BN9PR12MB5273.namprd12.prod.outlook.com (2603:10b6:408:11e::22)
- by CY8PR12MB7539.namprd12.prod.outlook.com (2603:10b6:930:96::12)
+ <SRS0=2Xgo=U5=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
+ id 1tfxKB-0000gq-Lj
+ for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 08:33:27 +0000
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20602.outbound.protection.outlook.com
+ [2a01:111:f403:2407::602])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 07b5d558-e465-11ef-b3ef-695165c68f79;
+ Thu, 06 Feb 2025 09:33:24 +0100 (CET)
+Received: from BN0PR04CA0136.namprd04.prod.outlook.com (2603:10b6:408:ed::21)
+ by MN2PR12MB4424.namprd12.prod.outlook.com (2603:10b6:208:26a::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Thu, 6 Feb
- 2025 08:04:20 +0000
-Received: from BN9PR12MB5273.namprd12.prod.outlook.com
- ([fe80::cf66:58ab:47be:4b13]) by BN9PR12MB5273.namprd12.prod.outlook.com
- ([fe80::cf66:58ab:47be:4b13%6]) with mapi id 15.20.8422.010; Thu, 6 Feb 2025
- 08:04:20 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.25; Thu, 6 Feb
+ 2025 08:33:21 +0000
+Received: from BN1PEPF0000468C.namprd05.prod.outlook.com
+ (2603:10b6:408:ed:cafe::3b) by BN0PR04CA0136.outlook.office365.com
+ (2603:10b6:408:ed::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.28 via Frontend Transport; Thu,
+ 6 Feb 2025 08:33:20 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN1PEPF0000468C.mail.protection.outlook.com (10.167.243.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8398.14 via Frontend Transport; Thu, 6 Feb 2025 08:33:20 +0000
+Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Thu, 6 Feb 2025 02:33:18 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,160 +58,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9ccf817-e460-11ef-a0e7-8be0dac302b0
+X-Inumbo-ID: 07b5d558-e465-11ef-b3ef-695165c68f79
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y6sDqNBRcE7gU1D0Z9qiGWTfaFj7+BMAeYvRIePIkbvvnslsgvQEED0UV8WkuTZqQo3eVxltndSMpUSoVgFSbSG4aFW0C37EyeSQe/YOu6jxZtnklFfBNLD9+7s4x/iFpHGIZcLZ750wX5VPbfH0R+NukkHJoKko8dQezBXEHnl+HX9jW+hXpL5oOF/oHdepTfUODF+QQNFb4Jre/9XiNR0wQXeqHwQ3sedSuIKOPMl2yP/OnPDh77bS8NnBvXCtruNsqJVjI/czjNGGc9sfRX0piz6+jrcijqiSsPJuQYvmffYPL5Nylt2hFGiLbxolzhsf6DWhkbt3LVx+e4a/VQ==
+ b=wx/jreXkk7dC5sXQUM0Y2IYpzUOxOEWgWG6VXE0+32ltIRglNW7LhD2y07XLVG+CBqLC3Eba9ek5mvjQw4ftqKcA/PYksfPX/2g6nk61Nq6QT1DCgPjHp1p2HfNws7qoRlRB9uXtbqNPh5MY0yt/vBDnwFXEn6b7303bVGaohaz6+DdirfXSvSvlOp09kHumNrBk7WV28KxVIq08kuz84SeeZPvIftli6Fw+DZbVjPo9JxdUQCqR0skI2mN5rnCPhYhjNLHaQ0pnPb8n06bXFcpOEDOz5RsPzRLgzVwZ9bqJjw3TbXeF4BWzKTSrKTn/rp1PuQyYgoeF1EKin8C7Ww==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WSkQvAczRhjw8CF4SlqTnu6U5e+qrEE4SHAH7N80e4w=;
- b=eToJL2OUMXteB/yfPFReE7NtnxnZkFvtj4o6/mI9Q/CWHJ8lwPfXbcj25OM7IDwxxFwO/3UIwGVFr6+/utf3y3gLlFjgkjsczFlutLEf641axVk/S86wDQUGXX/WAHL+aL8x4/0vWKN+h0endpZRk7eVWe2PHvVL9k4t8w5PXa0kuRKAW/tmTFMOf6T2IRAJOyECaMez5t74DuLdYpjHXg5aWfWtD9UT8EYs6Ho8JG8DC2l2MkLlknlsLbG7AL2x6wv+O/xfuAGKA/iPUjIwPYgH9sDjZrrIL9YEXrb4cWDt+HQNuTrzpDyOJ+VhG8zkUlVZgpotiO1ryiHAhRnTcA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
+ bh=41y8sec6nqUyzgRa9rWZO3TQWkVErDGbU7dAJLNct/4=;
+ b=wzn2mQw9VVzGe97WJuBI/EzoL1MjAsxePrBTkHpqvzA1sNUvL2gVUkQXnXf2+14VOltUMzwWwbK1J5YTi0OwcbMLEsTZuDZ7ZtQ0+7hgYaUwpRnydJcICJvSaPAUP0Z1pyeYa5WFUKooM2XTFJPdDclFu+bjNtutrUWG8LfY5gPKed5rWKSH/H8FtDG3dG6CVrkF6du0dyX9vvhGAvUY9oXXLg3jijIl4OlH9l8v1H0u2q5PpOE14xSUTIZiiSXxdNuUuWZ0HN8qOLBDgWmKsklyeqA3u5uegKxq6oFBw8VPIgzxCk3n75MHMbxSUkqoI9lUsykqYxl7z3ygEjIrCA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WSkQvAczRhjw8CF4SlqTnu6U5e+qrEE4SHAH7N80e4w=;
- b=PQokKrjvIMvy8ToYgjJAyLO+PkjT7zaQF471E5P/sV39qhBCKiNaJB4noHOrAuVAu0IJHOldyeGoIA9HBGiW7VOL9gd5JV0Mg8H0J+E9MHBx2slFdvrNhCvocVHOMJ7UuVdKx0anlxhYBcNHtJJiazMBkWjAQGX/BzCyNU7AsEA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <9e65b38c-20bd-4e4b-8bf2-5eb0510f9e4d@amd.com>
-Date: Thu, 6 Feb 2025 09:04:16 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/9] xen/arm/static-shmem: Static-shmem should be
- direct-mapped for direct-mapped domains
-To: Stefano Stabellini <stefano.stabellini@amd.com>,
- xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, bertrand.marquis@arm.com, julien@xen.org,
- Volodymyr_Babchuk@epam.com, Henry Wang <xin.wang2@amd.com>
-References: <alpine.DEB.2.22.394.2502041807070.9756@ubuntu-linux-20-04-desktop>
- <20250206010843.618280-2-stefano.stabellini@amd.com>
-Content-Language: en-US
-From: "Orzel, Michal" <michal.orzel@amd.com>
-In-Reply-To: <20250206010843.618280-2-stefano.stabellini@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0104.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9c::11) To BN9PR12MB5273.namprd12.prod.outlook.com
- (2603:10b6:408:11e::22)
+ bh=41y8sec6nqUyzgRa9rWZO3TQWkVErDGbU7dAJLNct/4=;
+ b=p99r19jLxwJSiOKLCYplV8oKHElRDVJAXHmW/vxo5s1g1ZecBPECcbLZLTrOOQ9uRdiEcjIkrdz/DYug7WKzvlWMwoT7ApD6ECZ5A/R0cfh0o78LP24CJvhK8dBBKnpm7zH2L+kjFy+u1QuhOAL/3JkUCnBcuw15hmHFFNdBaN0=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Penny Zheng <Penny.Zheng@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <Ray.Huang@amd.com>, <Jason.Andryuk@amd.com>, Penny Zheng
+	<Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>
+Subject: [PATCH v2 01/11] xen/x86: add CPPC feature flag for AMD processors
+Date: Thu, 6 Feb 2025 16:32:45 +0800
+Message-ID: <20250206083255.1296363-2-Penny.Zheng@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250206083255.1296363-1-Penny.Zheng@amd.com>
+References: <20250206083255.1296363-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN9PR12MB5273:EE_|CY8PR12MB7539:EE_
-X-MS-Office365-Filtering-Correlation-Id: 67f0620e-d55f-4d0e-43c3-08dd4684dc68
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468C:EE_|MN2PR12MB4424:EE_
+X-MS-Office365-Filtering-Correlation-Id: ad0c470a-aec4-4232-fee4-08dd4688e9d6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?U29EZlRzaXFTUE95N0ZESUp4enJoZ0syQnIrdjhETnhkbmorVWpMWm5BL2Ja?=
- =?utf-8?B?WHdMNlVGN1daQ3JtcjNyTkpXQkpZZFV6b1N0Y0RDbUNEdFUxSEFnLzREb203?=
- =?utf-8?B?N0ZrTmQyaEJ2blNxbU41ZkdRbTJjdFp3UHpkZjVKbGZhUWRTZmFGNXBRZEpu?=
- =?utf-8?B?Ui85d0N1alFjenJZdXFZbm1FY0hzK1NiQ09DV0IvbkZSOUhyQ3B1QURXVERj?=
- =?utf-8?B?YzJVRzE1Y1k4RHYzOUhRaUNPWURYKzNVdGF1cCt5MTdHb3JwS1VlOElIYnZU?=
- =?utf-8?B?c2FIbXMreHNGQWRYMzJuZFcvTGUrVmxrSnN0UkxMcFgwNEF1anl4WDlwS0U2?=
- =?utf-8?B?VmxyV0tJZVRubnNwUFhXOHp2K2djLytudnFuS1hmL3NUWHJTeWw4QTRqZDMv?=
- =?utf-8?B?eHVXalluZTl3djNTVUxvRjRiN01FZ2tWdXliTDRpUXRqcFBzeWFoWmNiN05N?=
- =?utf-8?B?bjc2UCt1VXlGMitJV2RzditiY00xdGU2ek90ZEphYVpLWkVZNWFvaE9uaHMz?=
- =?utf-8?B?bnpCb2o2VHpsdmhvTnhYNzJzMklJbG53TGZBelNvUVF3UFlwTXVjdHgwd0RS?=
- =?utf-8?B?a2w3dHcxOWp4eG5BUVhrc05abFpkWm44djhaS0VwZ3oydnNoZDJoZ0tVYU5w?=
- =?utf-8?B?T3ZJUUJkUHcrc1NrRWVNOCtFeldSWmpwWnZKYVlGWGJhY1RJOUJ0VjJrNkVF?=
- =?utf-8?B?VHVkR0s1NmxtVHF0bjY1ekJHeld5VENCQTQra0E5QWhQK1ZJMmxNNWVNMjZa?=
- =?utf-8?B?VTVrbTFIQ1J5UzVCZGgzTm0xMGw3UHVhNE94ZWQ1K01qSGRTdTFxbHRnOVFn?=
- =?utf-8?B?TzlXeGFTSjduUlk5R3ZvczR6dmFLc1V2Q01RUkF1REozQVArNForbTE4Wmo3?=
- =?utf-8?B?eEhGOU5Cei96YlI5RmoxcXYxQUdTV1R6SmxLU1lPMlVEam1UZmFhQ0M1Qy96?=
- =?utf-8?B?R1prdzVzL1BuNmE1Q3Ztd0tuTmRQeXJDN0Z0Qy9Bdm11N01MQ3cydG5xYVY5?=
- =?utf-8?B?U3I2MDk1RVRZTSs0dExjWXU2NDE2SEVLS0l1Z2t1bFdtYnFORU1wRVI1T1Bi?=
- =?utf-8?B?dm5YcFd1RElEWGRjamhoQTgraHk5YjZ6ZTZreFVTQmdIRVE2VTgvbGhqOFUw?=
- =?utf-8?B?ald5MXk5WmhzSVZwdk96UTRpdEUxbXJVT2w0Wk96M3lBZlJpMTgwYTYvdDFn?=
- =?utf-8?B?QmNxdDRLNGN6ZlR6bXF5MmZ4aFlqbDlYY29XeGhVZWNQZXRtTURhYXZPMStl?=
- =?utf-8?B?eEJTelk1STZsYUpQYXhOejlLV2piV1ZlM2twZnpDOUhJd25CZG5memNWaE9D?=
- =?utf-8?B?VmdleFhndVlGdVhqTDYxUUVrcUdjMzZuNXN2QUZ3T29tanUwa1pxaWRQOTln?=
- =?utf-8?B?V2dxaUI0YVRFb3NHQnY1RGZkbXNqbnU5WXoxaWtCVWdDcFF6b3NFTW9LUCtl?=
- =?utf-8?B?bTNJZUo2Y2FabmlJdytEenZOL3haZ1dwYjFhbE9QdWZxdFh1c2lPdURPRzY1?=
- =?utf-8?B?NTdUK2cvcjlKSnpUbFMrellRY0Ryay9ma3BKNTJmL0h2cjU4SjRWbk5wbjZa?=
- =?utf-8?B?T1BVbFMzRUdCcER4QjVCMDlXSUJ3T2wxSHdQV0JabTJWdTZ6UUorbDJsdnRy?=
- =?utf-8?B?VEt3ZEszWklNeXgxcmJCU0U1QWVROUtROW51STZDRG1BSElPSnhGQlUzYVo5?=
- =?utf-8?B?Y0tUSDE3R1FLK0FSYXg3enMxU2xiRmJYbjk1RGRzS2NBcFVzTXhMNmpQK0hw?=
- =?utf-8?B?NFZpdnNlcmtEVkJES01CL05mUVRFKy9FcU8zUUV3MHBaUmlDbi8rUHNvZEZj?=
- =?utf-8?B?SmxHaEU5T3ZiSmszYmhZQTNjZlVlRWRaVEZxbGUrV1Y4a05aS1MvZmdmdzBm?=
- =?utf-8?Q?FAAoITP6lj/cc?=
+	=?us-ascii?Q?BlUfm2mr0hKcldLYMJfbcH0qWBOVD+WHiBN7pK6V6gVqJ27+71ecsmLp6MDg?=
+ =?us-ascii?Q?isKG9PJmZ5jtcfWjHlhRWadjXmHXhK5zrV3PTmW47je7aJf/75p9v/8kaHYm?=
+ =?us-ascii?Q?rkx7M+2N+l7hn2bsGAk1mqT7Q2fzQOeJsKz/TNDYlDMEip7v9ydjSTC1H3kK?=
+ =?us-ascii?Q?dQ9JBZgogeAYXqVZ/tx1tF4VFxd0mY+RXu+nCww05QxOUPSl90LVTjV/VJx2?=
+ =?us-ascii?Q?pjNm6X5rESAnfq3bmSP9lEMoZDqjkgpQclVamzs1ujXLmHMHddefLg86cALp?=
+ =?us-ascii?Q?VhWyZBcxGmGJPAto9gD6N6yx0ovUlL03ojc2Cv6HB2lRQ89cNbX9iCBEIwbU?=
+ =?us-ascii?Q?1y/NoOFTFwku7GcmEaYPRUqylsG9NawapRF2Zn35wsr5Wy59R35yzly1mAZa?=
+ =?us-ascii?Q?T5I2UdWRJ1KGAEqOHEZZys+owCDWiyZ8Mr6NSVgILl2KuGUBenWTADJW4Rfl?=
+ =?us-ascii?Q?/RnQRH+kPj53+7pzUw6gKxVTnbZBTGaG8lWBvl0clzmgs+kmFHdruQutp6Eu?=
+ =?us-ascii?Q?GYSfRL+42tRXu0AL0ROS+AROOiY/jyzaW/ZavQcGyO6GIIIK3ASJXjbozI96?=
+ =?us-ascii?Q?56jRBOJRY77l2kw5jB97sM99ni44yMGN3vVpaKS5jOq6DT3XiqNz4DiCOv13?=
+ =?us-ascii?Q?GxRE91M8bzrcfaIdGaMR3UyHvtFdXrCv+Q1ksjqneZWgnM1+omX5IsWi2qk+?=
+ =?us-ascii?Q?iFOXgXNmkQiZVaP5MToC3o3fMpKybZRMyIjasQvyqELsrbBaILGrQDWkKqz7?=
+ =?us-ascii?Q?2W5yZmoQcZWNHRr0kBMyGfAeA7NKdP7vJmXim2gzqhSntY/iGr+70lNtZzjN?=
+ =?us-ascii?Q?NAnvTBZM9MzLiGSr0fiPd1RJd+89uziun471T6fctlC7443q7LmWGYh/5VF9?=
+ =?us-ascii?Q?yZ6DCMsPUhA/eC4PY5hWxzvTiigGrdHN1Dffusqfm5y7nN6M/R8CxsA4n6Yc?=
+ =?us-ascii?Q?RHZr6JQQOtIabLYmafPYet2xyYLhQqiI6U4lmTavt1eTOFf+2j1dV1tkWnTI?=
+ =?us-ascii?Q?MJ54LbxMwu3jkujBQaIM61rwNKwj47G3/AajIh9dk7k/TRZ5kKZ+GeHzfWG9?=
+ =?us-ascii?Q?jwZarwyFWCR//UDnD+QRn9MBl5lBACaPA3rOKiCKIGvLrsspm6996P1etgSH?=
+ =?us-ascii?Q?G5PaRePWJbHVn7zhC9/6jg3PIOm7sndMHmo+XT+KTThZwwD9bD35VJ73tUZE?=
+ =?us-ascii?Q?Ror2J5jEF5cFU/u4tCUF23Q7Ut17/VTAx5c/wKXViM39Ox+piLow2VHd9HmQ?=
+ =?us-ascii?Q?0QP94DjCB0EkZvyKUsZwx8CBEv6FV1WXoM1NJFsLQRJ3R0q8kg9/p/r+rGzC?=
+ =?us-ascii?Q?PGizFXY7k0q3S9K35yC8alNhxCTDYbmg9guAAnSE40MdamHmb3wWOo0m5vSc?=
+ =?us-ascii?Q?Hm0C5T/w81inuaO4acf+f7skImI+LHDUakFl9bgHdBkwlw9qSnJ7akS/SSxI?=
+ =?us-ascii?Q?kKoai/tJJKOpyQTzPTBy29/VQlTG0X253GZkGMUwLjJ7fa0xu5C9eKG+Fy+i?=
+ =?us-ascii?Q?aC0o3XZDShWrgOg=3D?=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR12MB5273.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?TlpSb2NBLy9scS80cW5NcmpCWVRpajZBaDFpK2VuSTlqNVpJVDRvRzAzKzli?=
- =?utf-8?B?eE5xSk0xeGxXNE5DYjZnZ2tyNWVibm1BTHFNSkU1MlZDRHYycC9EdDlQNXRy?=
- =?utf-8?B?Q3hvNzlQSnFsUkFhNElFdUtiZ29wWDlyQWgrNk9kVk5qaG4wU0FKSTI2VDJj?=
- =?utf-8?B?VVFNS290d09UWUdub3ZrcHFmY0QyYjZlQno0SHo3RHdLNXc0eGhmOVZiS0FC?=
- =?utf-8?B?aUFuWTY1S2FqQTJWY1VodDdmVjJYQkxyWWRFT28ybjRGU2F3OUwvOVd5Ry8v?=
- =?utf-8?B?Q25WUzh4T0FSelUzU1lOR05GU0Qwcy9GRkoyek9vV0U2OWJERWJvSloweVRH?=
- =?utf-8?B?aCtsMUFJYjJVRW1LdW4zV2NhbmdhMnUyNXNmY3JQL1pzd2NUUUs1cyt5QzhJ?=
- =?utf-8?B?ZXRHN05nMGZJQ1hIdXdHb2dBK3Y0ZWNkTWdQRGZZTHpUaW5LbG9OdDhEeFJG?=
- =?utf-8?B?cDI2WkpMMTdPS0hYL2NJNmgvbGpNSG85QWFRNGRNZ29oaENVLytqT1NOMGxr?=
- =?utf-8?B?RjNyc2w4SnJzcmMvNURJT0hOeFpwZitTRHpMdlYyTExFSVZEQ2NwbDIvZEY4?=
- =?utf-8?B?L3QzeGlXdlRadnNTT1BTUzg1VllKYi93dmJpN2JDUTRYOVd4TFM5eXI5aWcr?=
- =?utf-8?B?Yk9idUlkU2FpY0NOU2R0Mkh2Nk15Y09vQ2ZJRFgzNnVFY243TndKTDFlTkdq?=
- =?utf-8?B?UHdrSzJoL0JwTTR0ZzF0c1JGZXRNRDlLZHh0YkNROGtSR0duSlU3WGFNQUpX?=
- =?utf-8?B?d2hHUGd3WVV1MXdGakZpeW9PQ1AvUUJ6ajdnaUJjSFBvSUdGZytUTVE2YmUy?=
- =?utf-8?B?elFmRVQyZW5reXppZndyRDhqb3JIaTJBdXNFR0R6VFNYWTgwWnl3VDUvNCth?=
- =?utf-8?B?U0VGQXVUejA1M0YxbUZJejZRcnVoaVlyTGFla2kydFlVK1FsNmFYN0toeGtI?=
- =?utf-8?B?RGhBalUvM2t4V3A0Z0IxODl5U1phRnJYNWdNMi9NVzd5OW0xL3BEaEpydmZJ?=
- =?utf-8?B?Vkt5UUFMeUhtL2VLSFU2MXZsVkozd3MwdmVBSTR1MlprclI0SnVOR2dKVTdL?=
- =?utf-8?B?YndwWG9zZ2xzMWlRcjZOOXlKU0dtMC9uMmRWTTd3TUhvbHJLZGNRSWppem54?=
- =?utf-8?B?ZmtLN0M2OGdnRnppZHJ2b3FuTHFtM3ExREY0a1ZGRkN2UndvU0xwcWU2cVJk?=
- =?utf-8?B?SzY5dmp5cXNLamh4dWV5RDAzeFQxV2hFVTduTXNHRjc0QWY0SjVza0Q1SVVv?=
- =?utf-8?B?NHA2UC9RSVdBOUN1TzlQcXIxbjEzUWo1NGFlTzd6SnBham1DQm15QlBVWlN1?=
- =?utf-8?B?azRUd2dBdkJQN0hYbThjeER2WXBHY0t1NE55WHdMM2l4azBSaXpGRGx5TVpH?=
- =?utf-8?B?bTJTU1VEUlhJSklhOUM0Rk5kLzZ4dGNrR1lzbjYyWS9NcDhXR21EOVFQaXhK?=
- =?utf-8?B?RDRBa08zZmp1RnFqM2JKb2czVW5OSlhFUVdZOW91anlyTFNDQ1pWTjJwUGE2?=
- =?utf-8?B?a2s3dUZPcGZJZUlZYjBJNDFhT2Z1VEVNaFlxUVpqUGVWTVZCbjhaL2g5WkUx?=
- =?utf-8?B?UWJQWUwzZmFjSlhtZnlFK1NNTjRZTXhUVzRNVjZEQ1c0ZXFXcnN2TkRkUlFl?=
- =?utf-8?B?RlE3d2l0QWRxdXNramlCUGpQYk5BWHRzb09ZNEJwSXRZZDVIMnE2NUhuMEpY?=
- =?utf-8?B?blhlanhJUlhVdDV3b2R0c3NNYlJiY3RLeDFzdUpXTXFYS2dndmZKdEwzbFpU?=
- =?utf-8?B?aFA4cWk2cXREVDZTemUwVnJXZmg0V1VJNEN5Q281U3lSVEYxZjBQT1I2MXpX?=
- =?utf-8?B?MWpCN2JCTDdzUVFMNnhlanMxeFZUREswM1FxUTZrcCtrM05OQ3NyN212S0E5?=
- =?utf-8?B?eEZNSHR1Um5kVTdKRmF0Z3VXdEQyeFZHZk9RVHhZbHUzOXI4SHRabXZWbDJO?=
- =?utf-8?B?M2Z0VThCbDU5S1R3REE5QTk3YlB3NTJKUy9vMHNzc0xGRHhsbXF3OHBIV0Y1?=
- =?utf-8?B?V2h2S1VOQmVxMGV1Z3BQbTFJRHJtUVdIUTJvZSt5eG9xbFFrb1dMdHQraDRs?=
- =?utf-8?B?TTJKN0xVVFRKOVlaS3dGenJLejUwYUllbTNBWHk1Q3E0VG9ZUk5HVXBxWVA2?=
- =?utf-8?Q?x2zw=3D?=
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 67f0620e-d55f-4d0e-43c3-08dd4684dc68
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5273.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 08:04:20.5733
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 08:33:20.8531
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Network-Message-Id: ad0c470a-aec4-4232-fee4-08dd4688e9d6
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ccr9p+vqzESyYapIvLygLJRNSJtBka/wnvnUmhq7v1mJR9K1//7GWTofbNRsGPIf
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7539
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF0000468C.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4424
 
+Add Collaborative Processor Performance Control feature flag for
+AMD processors.
 
+amd-cppc is the AMD CPU performance scaling driver that
+introduces a new CPU frequency control mechanism on modern AMD
+APU and CPU series.
+There are two types of hardware implementations: "Full MSR Support"
+and "Shared Memory Support".
 
-On 06/02/2025 02:08, Stefano Stabellini wrote:
-> From: Henry Wang <xin.wang2@amd.com>
-> 
-> Currently, users are allowed to map static shared memory in a
-> non-direct-mapped way for direct-mapped domains. This can lead to
-> clashing of guest memory spaces. Also, the current extended region
-> finding logic only removes the host physical addresses of the
-> static shared memory areas for direct-mapped domains, which may be
-> inconsistent with the guest memory map if users map the static
-> shared memory in a non-direct-mapped way. This will lead to incorrect
-> extended region calculation results.
-> 
-> To make things easier, add restriction that static shared memory
-> should also be direct-mapped for direct-mapped domains. Check the
-> host physical address to be matched with guest physical address when
-> parsing the device tree. Document this restriction in the doc.
-> 
-> Signed-off-by: Henry Wang <xin.wang2@amd.com>
-> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-> Acked-by: Michal Orzel <michal.orzel@amd.com>
-This patch has already been committed (see 0a0f30c1b55e) and later on fixed (see 988f1c7e1f40).
+Right now, xen will only implement "Full MSR Support", and this new
+feature flag indicates whether processor has this feature or not.
 
-DO NOT COMMIT.
+Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+---
+v1 -> v2:
+- Remove A flag, as the feature is Xen-only
+---
+ xen/arch/x86/include/asm/cpufeature.h       | 1 +
+ xen/include/public/arch-x86/cpufeatureset.h | 1 +
+ 2 files changed, 2 insertions(+)
 
-~Michal
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index 3a06b6f297..6935703e71 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -170,6 +170,7 @@ static inline bool boot_cpu_has(unsigned int feat)
+ #define cpu_has_amd_ssbd        boot_cpu_has(X86_FEATURE_AMD_SSBD)
+ #define cpu_has_virt_ssbd       boot_cpu_has(X86_FEATURE_VIRT_SSBD)
+ #define cpu_has_ssb_no          boot_cpu_has(X86_FEATURE_SSB_NO)
++#define cpu_has_cppc            boot_cpu_has(X86_FEATURE_CPPC)
+ #define cpu_has_auto_ibrs       boot_cpu_has(X86_FEATURE_AUTO_IBRS)
+ 
+ /* CPUID level 0x00000007:0.edx */
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 16207e3817..cc6e984a88 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -265,6 +265,7 @@ XEN_CPUFEATURE(AMD_PPIN,      8*32+23) /*   Protected Processor Inventory Number
+ XEN_CPUFEATURE(AMD_SSBD,      8*32+24) /*S  MSR_SPEC_CTRL.SSBD available */
+ XEN_CPUFEATURE(VIRT_SSBD,     8*32+25) /*!  MSR_VIRT_SPEC_CTRL.SSBD */
+ XEN_CPUFEATURE(SSB_NO,        8*32+26) /*A  Hardware not vulnerable to SSB */
++XEN_CPUFEATURE(CPPC,          8*32+27) /*   Collaborative Processor Performance Control */
+ XEN_CPUFEATURE(PSFD,          8*32+28) /*S  MSR_SPEC_CTRL.PSFD */
+ XEN_CPUFEATURE(BTC_NO,        8*32+29) /*A  Hardware not vulnerable to Branch Type Confusion */
+ XEN_CPUFEATURE(IBPB_RET,      8*32+30) /*A  IBPB clears RSB/RAS too. */
+-- 
+2.34.1
 
 
