@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF5AC02194
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 15:06:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.882923.1293029 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FB0C02198
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 15:06:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.882925.1293049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tg3SV-0003ZW-WB; Thu, 06 Feb 2025 15:06:27 +0000
+	id 1tg3SZ-00048F-Mi; Thu, 06 Feb 2025 15:06:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 882923.1293029; Thu, 06 Feb 2025 15:06:27 +0000
+Received: by outflank-mailman (output) from mailman id 882925.1293049; Thu, 06 Feb 2025 15:06:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tg3SV-0003ZO-T1; Thu, 06 Feb 2025 15:06:27 +0000
-Received: by outflank-mailman (input) for mailman id 882923;
- Thu, 06 Feb 2025 15:06:26 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tg3SZ-000485-IX; Thu, 06 Feb 2025 15:06:31 +0000
+Received: by outflank-mailman (input) for mailman id 882925;
+ Thu, 06 Feb 2025 15:06:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rEyC=U5=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tg3SU-0002qa-If
- for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 15:06:26 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eecf43c3-e49b-11ef-b3ef-695165c68f79;
- Thu, 06 Feb 2025 16:06:25 +0100 (CET)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5dca468c5e4so2189462a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 06 Feb 2025 07:06:25 -0800 (PST)
+ id 1tg3SX-0002qU-O8
+ for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 15:06:29 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f0e4c8fa-e49b-11ef-a073-877d107080fb;
+ Thu, 06 Feb 2025 16:06:28 +0100 (CET)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ab74ecfdae4so152183166b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Feb 2025 07:06:28 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dcf9f952casm1005879a12.81.2025.02.06.07.06.23
+ a640c23a62f3a-ab772f842a5sm112190766b.43.2025.02.06.07.06.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 07:06:23 -0800 (PST)
+ Thu, 06 Feb 2025 07:06:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,47 +46,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eecf43c3-e49b-11ef-b3ef-695165c68f79
+X-Inumbo-ID: f0e4c8fa-e49b-11ef-a073-877d107080fb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1738854384; x=1739459184; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1738854388; x=1739459188; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xm1F4/LWDRjOr5tGbdwduMf0+aedjlnrUC4bJARj2yg=;
-        b=sFfnaEWLqZLkMDbuQovuPTLXpoGdEffy6RW2iqJEWK4maqzmpxNbAXbkHCPoKDX76H
-         4JOxWMFk9DKq6y8IGJkhyg7+ztR1CAYHc2+Ur2Cb0eRuG06mxy3iETlnibl8oYKtRbhr
-         ehhKIPWq2q7fvwzYvg8eSZgjDpW2RcdiGbdUI=
+        bh=54IsyjeaR6PU2ZI4fbX9EXq6TKKgpbduJj8jzthLGEQ=;
+        b=KTONNa/aFGTpaMZ2NAR8UGdWKFP+X8YPa2nXwwoiZAqa4ihISBP5VpzQgUD8pbxzBl
+         Y1PxK6WN8SaUQZ95GOt2ES0Al785ayrlHByUfzDJVORWOY4MK/QnC4VcVv/CCNUBwhQC
+         wyLAey92/wIXDirHzIZR7/7Ks+i3vtTxpkVSc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738854384; x=1739459184;
+        d=1e100.net; s=20230601; t=1738854388; x=1739459188;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xm1F4/LWDRjOr5tGbdwduMf0+aedjlnrUC4bJARj2yg=;
-        b=lboFwGo0OaHri52/pWoMXYr4U+CGndHBq1X9GKel60EFu8KpubjiX/Wv1qIgYumzkr
-         Q5ZXii49JPN2bYojLDp6XeAwgRb2zg7nAGk6HFDtdd5BoB1tUY6LbvtjIRe5tm4KvrzD
-         L22g69M82NDy61uVp7UZ+WJz6DkgQmsSYx5te/7qCIiwxD4jUiWM0XrCVVDsp7wSwRin
-         0tnGCnq9o0exP1nR+s837ZIpnNVSnhDYk9i8VOCt11Vhd14hjLTK5HXz9B9b/B8Gfvmw
-         lIQ6ndwsbklh4EFM6SNYcIfLX7SWCf2H0PtrjAGA6qSN0w+gFFcyW6Z5rTGrN2ySUbl6
-         DkoA==
-X-Gm-Message-State: AOJu0YzgBlbHVUMeHYR7mJHzzzOx2Tj0XrUQDchLiWVEm4duzJl03h/R
-	sApKW1yvtuguk6xL+rKmu+RL014FcxCPQPUqmqp9N9J0C/fmgzpkYjuOZq7777YcyF+H2TS0RK/
-	7
-X-Gm-Gg: ASbGnctNbXqdbEFJesdAUc1wniGIHcP2KtuLaf8BWrucf9YSUNHl5VxfMr/dX2QfQ+E
-	F0YdyJJPJqo2imTZ8QSmJQm1M2yf3mnGRtfXmunB9ct3/R1vxUBf5RHzQTTd4awYIAcCJAs+iAZ
-	S084FtdNMZhPduk0vnr3OygYQHNNrxnVvg0iLD0SHr5vzqSEzD88mBIR2BIQggKxeY1OOKZI3DV
-	QOUJAn24K9ip/cXTukRkZu0S899Xt8O3+3KMyy0eM/9qBho5GPoRZsCowudhs2LALC9abUzhCJQ
-	ZyatKWYJYHEhFEA+/9QH
-X-Google-Smtp-Source: AGHT+IEqfzSJcLtiZZ7Gwzgf0wFdVc5OJNyojfhwDjWLvVeRVXVV3uduhSDKDO3D5BHocMUt9AX07g==
-X-Received: by 2002:a05:6402:3707:b0:5db:e7eb:1b4a with SMTP id 4fb4d7f45d1cf-5dcdb732c6amr8066409a12.10.1738854383971;
-        Thu, 06 Feb 2025 07:06:23 -0800 (PST)
+        bh=54IsyjeaR6PU2ZI4fbX9EXq6TKKgpbduJj8jzthLGEQ=;
+        b=uXmrYqbS4x77jCAZD5AXGDzznXdERbNZWjn37JV53rhnGOpqRo1UZ1BqMwtf3XkKXi
+         6m3xfa+tBnsWESq+vAHP5dhqnwXUqM2aGhY4kfzRu/VMW/nvmRv5eQM6Jf3QeVitSGxA
+         kkGJ86m5lDzKS7ks7loCYYtLQp/e0qZMPamNUZaiDLyg2zqvOBiskDBVXoNwG4CoCz5a
+         eF7R88y4EOhXBfulSwIKyycnbatLNFb6HUjgiRNMjG3pgdpkR+gZ0/7+5VcH5/y1Byr3
+         Chu/2B6AhWsHSGmhyX5V5S3DIqEh7VW6/ceMw11PIU2Je2/k/6jsKQSnrpQ+5shIFpDB
+         qLdQ==
+X-Gm-Message-State: AOJu0Yzv2eM3UC0awFw74N3lkhiaPqfYBPdEx99KOd/1do2UGIsQ4VyX
+	mpvRNKTRWOjyh4elZ65zUmoNWJNj5arKixfYhPMGBPpwe2rt28zfNtAZ1Gn3KIzDhKnsQ+OIFlZ
+	j
+X-Gm-Gg: ASbGncubV4To9soJ47E2V20H3WCunM6qc9VioOSKlxS1m3Y+6qKaT5bJAFjw+PfC334
+	VEfNq7M/qeI/ZXu8DK2m9T0Z2BuZb+YZ6Umj1m1rlzNgWs0G1vEJW1c+qQeDGr3ixP1xQSc79GV
+	UQgCGWC5RfceSf2lDnhfpZqU4kqeJMc5dcn42Eon0T2fIA0PuKavb/kXyscQfqDBtHgeRM4HPxl
+	9NFa3JcfM3MYhxL6oLlAghIskWQ8J2LVx08SRwoK1lpvJQYGwBouYH2Ks1Ey7IqZ2SXq8sAX2kQ
+	JxZVdD8aQ1/vl/esr5vr
+X-Google-Smtp-Source: AGHT+IE+G9fd4+/h481OwTZe16KfLx8FrIvqJv3B5R5S7j0ovNsKJOOtNzp56KhI3/IPrMbqjeCQaQ==
+X-Received: by 2002:a17:907:6e92:b0:aa6:9eac:4b8e with SMTP id a640c23a62f3a-ab75e2f6e43mr994010366b.41.1738854387948;
+        Thu, 06 Feb 2025 07:06:27 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 2/5] x86/irq: drop fixup_irqs() parameters
-Date: Thu,  6 Feb 2025 16:06:12 +0100
-Message-ID: <20250206150615.52052-3-roger.pau@citrix.com>
+Subject: [PATCH v2 5/5] x86/iommu: disable interrupts at shutdown
+Date: Thu,  6 Feb 2025 16:06:15 +0100
+Message-ID: <20250206150615.52052-6-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20250206150615.52052-1-roger.pau@citrix.com>
 References: <20250206150615.52052-1-roger.pau@citrix.com>
@@ -94,140 +94,176 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The solely remaining caller always passes the same globally available
-parameters.  Drop the parameters and modify fixup_irqs() to use
-cpu_online_map in place of the input mask parameter, and always be verbose
-in its output printing.
+Add a new hook to inhibit interrupt generation by the IOMMU(s).  Note the
+hook is currently only implemented for x86 IOMMUs.  The purpose is to
+disable interrupt generation at shutdown so any kexec chained image finds
+the IOMMU(s) in a quiesced state.
 
-While there remove some of the checks given the single context where
-fixup_irqs() is now called, which should always be in the CPU offline path,
-after the CPU going offline has been removed from cpu_online_map.
-
-No functional change intended.
+It would also prevent "Receive accept error" being raised as a result of
+non-disabled interrupts targeting offline CPUs.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-There's more cleanup that can likely be done here, but it's best if such
-cleanup is done after the cpu_mask and old_cpu_mask irq_desc fields are
-converted from cpu masks to integers, as logic delivery mode should never
-be used for external interrupts now.
+Changes since v1:
+ - New in this version.
 ---
- xen/arch/x86/include/asm/irq.h |  4 ++--
- xen/arch/x86/irq.c             | 30 +++++++++++++-----------------
- xen/arch/x86/smpboot.c         |  2 +-
- 3 files changed, 16 insertions(+), 20 deletions(-)
+ xen/arch/x86/crash.c                        |  1 +
+ xen/arch/x86/smp.c                          |  1 +
+ xen/drivers/passthrough/amd/iommu.h         |  1 +
+ xen/drivers/passthrough/amd/iommu_init.c    | 17 +++++++++++++++++
+ xen/drivers/passthrough/amd/pci_amd_iommu.c |  1 +
+ xen/drivers/passthrough/iommu.c             |  6 ++++++
+ xen/drivers/passthrough/vtd/iommu.c         | 19 +++++++++++++++++++
+ xen/include/xen/iommu.h                     |  3 +++
+ 8 files changed, 49 insertions(+)
 
-diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
-index d3bc76806808..354868ba31ab 100644
---- a/xen/arch/x86/include/asm/irq.h
-+++ b/xen/arch/x86/include/asm/irq.h
-@@ -168,8 +168,8 @@ void free_domain_pirqs(struct domain *d);
- int map_domain_emuirq_pirq(struct domain *d, int pirq, int emuirq);
- int unmap_domain_pirq_emuirq(struct domain *d, int pirq);
- 
--/* Evacuate interrupts assigned to CPUs not present in the input CPU mask. */
--void fixup_irqs(const cpumask_t *mask, bool verbose);
-+/* Evacuate interrupts assigned to CPUs not present in the CPU online map. */
-+void fixup_irqs(void);
- void fixup_eoi(void);
- 
- int  init_irq_data(void);
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index e56bacc88d84..ff3ac832f4b9 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -2590,17 +2590,21 @@ static int __init cf_check setup_dump_irqs(void)
+diff --git a/xen/arch/x86/crash.c b/xen/arch/x86/crash.c
+index c946225c0b9b..a5feed298d1e 100644
+--- a/xen/arch/x86/crash.c
++++ b/xen/arch/x86/crash.c
+@@ -178,6 +178,7 @@ static void nmi_shootdown_cpus(void)
+         disable_IO_APIC();
+         hpet_disable();
+         pci_disable_msi_all();
++        iommu_quiesce();
+     }
  }
- __initcall(setup_dump_irqs);
  
--/* Evacuate interrupts assigned to CPUs not present in the input CPU mask. */
--void fixup_irqs(const cpumask_t *mask, bool verbose)
-+/* Evacuate interrupts assigned to CPUs not present in the CPU online map. */
-+void fixup_irqs(void)
- {
-+    const unsigned int cpu = smp_processor_id();
-     unsigned int irq;
-     static int warned;
-     struct irq_desc *desc;
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index f58c8d3cafe1..06c0e84d40b3 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -377,6 +377,7 @@ void smp_send_stop(void)
+     disable_IO_APIC();
+     hpet_disable();
+     pci_disable_msi_all();
++    iommu_quiesce();
  
-+    /* Only to be called from the context of a CPU going offline. */
-+    ASSERT(!cpu_online(cpu));
-+
-     for ( irq = 0; irq < nr_irqs; irq++ )
+     if ( num_online_cpus() > 1 )
      {
-         bool break_affinity = false, set_affinity = true, check_irr = false;
--        unsigned int vector, cpu = smp_processor_id();
-+        unsigned int vector;
-         cpumask_t *affinity = this_cpu(scratch_cpumask);
+diff --git a/xen/drivers/passthrough/amd/iommu.h b/xen/drivers/passthrough/amd/iommu.h
+index c32e9e9a1602..00e81b4b2ab3 100644
+--- a/xen/drivers/passthrough/amd/iommu.h
++++ b/xen/drivers/passthrough/amd/iommu.h
+@@ -292,6 +292,7 @@ extern unsigned long *shared_intremap_inuse;
+ void cf_check amd_iommu_resume(void);
+ int __must_check cf_check amd_iommu_suspend(void);
+ void cf_check amd_iommu_crash_shutdown(void);
++void cf_check amd_iommu_quiesce(void);
  
-         if ( irq == 2 )
-@@ -2644,12 +2648,6 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
-         }
- 
-         if ( desc->arch.move_in_progress &&
--             /*
--              * Only attempt to adjust the mask if the current CPU is going
--              * offline, otherwise the whole system is going down and leaving
--              * stale data in the masks is fine.
--              */
--             !cpu_online(cpu) &&
-              cpumask_test_cpu(cpu, desc->arch.old_cpu_mask) )
-         {
-             /*
-@@ -2691,16 +2689,17 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
- 
-         /*
-          * Avoid shuffling the interrupt around as long as current target CPUs
--         * are a subset of the input mask.  What fixup_irqs() cares about is
--         * evacuating interrupts from CPUs not in the input mask.
-+         * are a subset of the online mask.  What fixup_irqs() cares about is
-+         * evacuating interrupts from CPUs not in the online mask.
-          */
--        if ( !desc->action || cpumask_subset(desc->arch.cpu_mask, mask) )
-+        if ( !desc->action || cpumask_subset(desc->arch.cpu_mask,
-+                                             &cpu_online_map) )
-         {
-             spin_unlock(&desc->lock);
-             continue;
-         }
- 
--        if ( !cpumask_intersects(mask, desc->affinity) )
-+        if ( !cpumask_intersects(&cpu_online_map, desc->affinity) )
-         {
-             break_affinity = true;
-             cpumask_setall(affinity);
-@@ -2716,7 +2715,7 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
-          * the interrupt, signal to check whether there are any pending vectors
-          * to be handled in the local APIC after the interrupt has been moved.
-          */
--        if ( !cpu_online(cpu) && cpumask_test_cpu(cpu, desc->arch.cpu_mask) )
-+        if ( cpumask_test_cpu(cpu, desc->arch.cpu_mask) )
-             check_irr = true;
- 
-         if ( desc->handler->set_affinity )
-@@ -2743,9 +2742,6 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
- 
-         spin_unlock(&desc->lock);
- 
--        if ( !verbose )
--            continue;
--
-         if ( !set_affinity )
-             printk("Cannot set affinity for IRQ%u\n", irq);
-         else if ( break_affinity )
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 79a79c54c304..891a29fca146 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -1282,7 +1282,7 @@ void __cpu_disable(void)
- 
-     /* It's now safe to remove this processor from the online map */
-     cpumask_clear_cpu(cpu, &cpu_online_map);
--    fixup_irqs(&cpu_online_map, 1);
-+    fixup_irqs();
-     fixup_eoi();
+ static inline u32 get_field_from_reg_u32(u32 reg_value, u32 mask, u32 shift)
+ {
+diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
+index 302362502033..2e60aef151b0 100644
+--- a/xen/drivers/passthrough/amd/iommu_init.c
++++ b/xen/drivers/passthrough/amd/iommu_init.c
+@@ -1611,3 +1611,20 @@ void cf_check amd_iommu_resume(void)
+         invalidate_all_domain_pages();
+     }
  }
++
++void cf_check amd_iommu_quiesce(void)
++{
++    struct amd_iommu *iommu;
++
++    for_each_amd_iommu ( iommu )
++    {
++        if ( iommu->ctrl.int_cap_xt_en )
++        {
++            iommu->ctrl.int_cap_xt_en = false;
++            writeq(iommu->ctrl.raw,
++                   iommu->mmio_base + IOMMU_CONTROL_MMIO_OFFSET);
++        }
++        else
++            amd_iommu_msi_enable(iommu, IOMMU_CONTROL_DISABLED);
++    }
++}
+diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+index f96f59440bcc..d00697edb3a2 100644
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -791,6 +791,7 @@ static const struct iommu_ops __initconst_cf_clobber _iommu_ops = {
+     .crash_shutdown = amd_iommu_crash_shutdown,
+     .get_reserved_device_memory = amd_iommu_get_reserved_device_memory,
+     .dump_page_tables = amd_dump_page_tables,
++    .quiesce = amd_iommu_quiesce,
+ };
+ 
+ static const struct iommu_init_ops __initconstrel _iommu_init_ops = {
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 9e74a1fc72fa..35c08ee0612c 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -663,6 +663,12 @@ void iommu_crash_shutdown(void)
+ #endif
+ }
+ 
++void iommu_quiesce(void)
++{
++    if ( iommu_enabled )
++        iommu_vcall(iommu_get_ops(), quiesce);
++}
++
+ int iommu_get_reserved_device_memory(iommu_grdm_t *func, void *ctxt)
+ {
+     const struct iommu_ops *ops;
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index 9d7a9977a6a6..a1927d9f126d 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -3207,6 +3207,24 @@ static int cf_check intel_iommu_quarantine_init(struct pci_dev *pdev,
+     return rc;
+ }
+ 
++static void cf_check vtd_quiesce(void)
++{
++    const struct acpi_drhd_unit *drhd;
++
++    for_each_drhd_unit ( drhd )
++    {
++        const struct vtd_iommu *iommu = drhd->iommu;
++        uint32_t sts = dmar_readl(iommu->reg, DMAR_FECTL_REG);
++
++        /*
++         * Open code dma_msi_mask() to avoid taking the spinlock which could
++         * deadlock if called from crash context.
++         */
++        sts |= DMA_FECTL_IM;
++        dmar_writel(iommu->reg, DMAR_FECTL_REG, sts);
++    }
++}
++
+ static const struct iommu_ops __initconst_cf_clobber vtd_ops = {
+     .page_sizes = PAGE_SIZE_4K,
+     .init = intel_iommu_domain_init,
+@@ -3236,6 +3254,7 @@ static const struct iommu_ops __initconst_cf_clobber vtd_ops = {
+     .iotlb_flush = iommu_flush_iotlb,
+     .get_reserved_device_memory = intel_iommu_get_reserved_device_memory,
+     .dump_page_tables = vtd_dump_page_tables,
++    .quiesce = vtd_quiesce,
+ };
+ 
+ const struct iommu_init_ops __initconstrel intel_iommu_init_ops = {
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index b928c67e1995..77a514019cc6 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -314,6 +314,8 @@ struct iommu_ops {
+      */
+     int (*dt_xlate)(device_t *dev, const struct dt_phandle_args *args);
+ #endif
++    /* Inhibit all interrupt generation, to be used at shutdown. */
++    void (*quiesce)(void);
+ };
+ 
+ /*
+@@ -404,6 +406,7 @@ static inline int iommu_do_domctl(struct xen_domctl *domctl, struct domain *d,
+ int __must_check iommu_suspend(void);
+ void iommu_resume(void);
+ void iommu_crash_shutdown(void);
++void iommu_quiesce(void);
+ int iommu_get_reserved_device_memory(iommu_grdm_t *func, void *ctxt);
+ int iommu_quarantine_dev_init(device_t *dev);
  
 -- 
 2.46.0
