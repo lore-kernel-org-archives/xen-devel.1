@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B33FBC0219D
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 15:06:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.882926.1293055 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01692C02194
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 15:09:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.882971.1293069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tg3Sa-0004BN-3q; Thu, 06 Feb 2025 15:06:32 +0000
+	id 1tg3Uy-0006W9-EY; Thu, 06 Feb 2025 15:09:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 882926.1293055; Thu, 06 Feb 2025 15:06:32 +0000
+Received: by outflank-mailman (output) from mailman id 882971.1293069; Thu, 06 Feb 2025 15:09:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tg3SZ-0004AV-Rj; Thu, 06 Feb 2025 15:06:31 +0000
-Received: by outflank-mailman (input) for mailman id 882926;
- Thu, 06 Feb 2025 15:06:30 +0000
+	id 1tg3Uy-0006W2-BS; Thu, 06 Feb 2025 15:09:00 +0000
+Received: by outflank-mailman (input) for mailman id 882971;
+ Thu, 06 Feb 2025 15:08:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rEyC=U5=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tg3SY-0002qU-OI
- for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 15:06:30 +0000
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [2a00:1450:4864:20::52e])
+ id 1tg3Ux-0006Vw-I9
+ for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 15:08:59 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f155c01d-e49b-11ef-a073-877d107080fb;
- Thu, 06 Feb 2025 16:06:29 +0100 (CET)
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5dcc38c7c6bso2054816a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 06 Feb 2025 07:06:29 -0800 (PST)
+ id 4a3b0cc7-e49c-11ef-a073-877d107080fb;
+ Thu, 06 Feb 2025 16:08:58 +0100 (CET)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ab7800d3939so57691766b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Feb 2025 07:08:58 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab772f491dcsm111083066b.22.2025.02.06.07.06.25
+ a640c23a62f3a-ab773339e6bsm111714766b.152.2025.02.06.07.08.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 07:06:26 -0800 (PST)
+ Thu, 06 Feb 2025 07:08:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,205 +46,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f155c01d-e49b-11ef-a073-877d107080fb
+X-Inumbo-ID: 4a3b0cc7-e49c-11ef-a073-877d107080fb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1738854388; x=1739459188; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=X0ovGj55iVS260GGwyIambmI1156khDmYHppn2PNqbM=;
-        b=OfBcpQOiYku/j67p+tz8IqXEhVcGWQbt0hQ8uZdcPltFac7qSG+1NMdM7sJ1WzdeSS
-         Sfa5YNAHZI3fsCGIyOfvVRW0rvpI6tnJ5QB+7Q6ZdAdExnqvtc5rf0SrX9t3b4Vgk2hr
-         a+ZK+Wryn+srjZvgEbFUZVx4HVnDo+4hC1oLs=
+        d=citrix.com; s=google; t=1738854538; x=1739459338; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=qN9MyrO3vWYmbTU96ZVoZKQiVe7pYPrUj3GKsHh3ADc=;
+        b=F7AEIBrdcRAvE1GjHU9r+qRcGlmdVYy4sYO9Rml5AHXdFX+mJGVgQbckqjBABt5wqk
+         axEEvZcrusZcHsilfSmSTpfAJwQ0x5oOg/j3L27bGPDKIq2ZLgVTI9MIpMTBgRcBwB/L
+         AxWUlqeDbk0hkj9fwjNco8O4rkdHAxYR/zs68=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738854388; x=1739459188;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=X0ovGj55iVS260GGwyIambmI1156khDmYHppn2PNqbM=;
-        b=S2hnegQN8DhIxNDW+uZF3Z3Q430ps6TNgxJhfDGBBbNMOSYHQ4Mdi/OxcQ5yB3KfIW
-         wkhhwr8wTybtp+qlaaq1klvIIt8r7uwBNZ+7ZpezSEHYryDL0jmFQnc975FKf3fW/8Fz
-         7lMcmiWNKB3IMpiyWcZqk0KxjTrjOBc1ZxETx4W+dWRthqpsQ1eB9X282e0m+JdGrF9N
-         uVb50PJmYVofkaKu7iVlH2batuYhEMwcPLR1LLMQ/XLryDIuV7i2fL/TFSIN7bh2hjWJ
-         8fX1BIYnIlqaycWFxDnFCEfb3mVc2az/fXD/iWdyda1KU+pslIvLNgVnhXuj2GPyAFBC
-         akQA==
-X-Gm-Message-State: AOJu0YzhvHjfMwXSHmgm94PQX1qqDXIhUngiTfod0hOZfUtCwoYAI5+j
-	Qq6fqDb8eC4ypmhYUBzfkXK3hXfV2+sPQQY/zn7m/eUvFZoCItvTxhE1s0bH2J7SA03skZyOufW
-	l
-X-Gm-Gg: ASbGncvrDHZ3bqZFKp+zfcRvOJFBbZ4tW89KCc9Z5cJx4QydUCxlZqug1mIQGOjSEbK
-	GhUVNRMe0V9k94LdN5kJd9lBupXQkZ+Dbl0u5zLUrbXOmslHLZZMmCkpn6egETZszoo6Sr9wSMB
-	73HQLcESqaJEkRx289hoO6RFA+6TmaIP43e2dHIIRK5EyMlPUCm1YP5TxhKXoNHSgRM6b6Bfny6
-	QHd1PpeLNunXRwZJgSQ06+Jv8Bium6uTRrQ956XxikeLgvCZxik21rUanmy8srCN1MW3n+CKrKT
-	8BP271CjjTXKlpRf/L3B
-X-Google-Smtp-Source: AGHT+IHGlVhkxHSOoLQK1U4QnHqyRKKxrQ9vlFjLukcvGvocJz0uyp3SQkcmSHcHzy+unuKq/hdrLQ==
-X-Received: by 2002:a17:907:2d22:b0:ab6:d7c4:fc7d with SMTP id a640c23a62f3a-ab75e35dc0dmr658202466b.39.1738854386398;
-        Thu, 06 Feb 2025 07:06:26 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+        d=1e100.net; s=20230601; t=1738854538; x=1739459338;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qN9MyrO3vWYmbTU96ZVoZKQiVe7pYPrUj3GKsHh3ADc=;
+        b=p7kS5RtzQX44UPLWOGn39xzggcO994qYfn0VDwBYC81swJ9Qr/rEk5JUHCFk2ArQ0p
+         7aD/C/buHlo6bkuNttM8ovVSBUgowketprbtP9+gAkAHZsMxYMrMj8WtJ+JDCVyX27u9
+         QbYKe85pBrClVS6sosUOM62wSCddNq4RwULVP383hmHnuPO51D8rZayG+XnI2eKc6LEz
+         WpvvT8fWONGle2SgkvlsFX+TW3Vml0pRKIiDHBTcxTEz13oaEnXNKQw2foTwzU9618Xz
+         e7K0X+vvYfEbTr4iobKAosZFo5oBwU+AfvQduvYxhaqo178D+waq1k7blMDhF6wZTTfC
+         //bg==
+X-Gm-Message-State: AOJu0Yy4ZR33suYQPIkMUsP6cFmEd83WTrhhFhBpfryzrIOEdZrfX0j6
+	JUaGCMVnxOuidjmt0AOzJFM3N13LK1ZHj2NmtsJ0hrWFBXR8wzWx14DZnw7dZ7M=
+X-Gm-Gg: ASbGncu6g7IVGMXtEGacKz4xzDY9gxTlvnQmQsW4W+3AX5WNbqnhYMjXrCvwgxasUSi
+	jbPWeeo6a4BbR068OQ7M4NsNTWz/G5Ozi9jfTWltLqGE48sMbq6m5M6ZKyTBnGH45z6sWJHvwJY
+	zCzCuEzPDwe6pAxnCL7yYOGfVsBZMzl10wTsLNi3tcYzmyfvih4TWMWM1RFrPZpPFaGlZqxAwYC
+	IXRZ6+2i9oeS+iqbQhILm5Qeshp6GuliCA/sCuoaXeGUCkgiDtCFn9AubMAh+ZzeayCeYa3FlS0
+	oA3rUnVxzAU7KlLrtiOJbxSHAA==
+X-Google-Smtp-Source: AGHT+IHb5fAWgVA2kjAMAr7K6ckf1B0CBMQH2c5wWY5F8n3xnv0cHsdRYFUB6LNqkt//J5XfypIOnA==
+X-Received: by 2002:a17:907:3d8e:b0:aa6:7cae:dba7 with SMTP id a640c23a62f3a-ab75e214248mr890807266b.4.1738854538152;
+        Thu, 06 Feb 2025 07:08:58 -0800 (PST)
+Date: Thu, 6 Feb 2025 16:08:56 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 4/5] x86/pci: disable MSI(-X) on all devices at shutdown
-Date: Thu,  6 Feb 2025 16:06:14 +0100
-Message-ID: <20250206150615.52052-5-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20250206150615.52052-1-roger.pau@citrix.com>
-References: <20250206150615.52052-1-roger.pau@citrix.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: Re: [PATCH v3 for-4.21 4/4] PCI: drop pci_segments_init()
+Message-ID: <Z6TQiP7142UON90W@macbook.local>
+References: <0a006732-2b6e-46f0-a706-f432abd45d2c@suse.com>
+ <b7b148fc-ee74-4f02-9dab-f80b1707e44e@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <b7b148fc-ee74-4f02-9dab-f80b1707e44e@suse.com>
 
-Attempt to disable MSI(-X) capabilities on all PCI devices know by Xen at
-shutdown.  Doing such disabling should facilitate kexec chained kernel from
-booting more reliably, as device MSI(-X) interrupt generation should be
-quiesced.
+On Tue, Feb 04, 2025 at 02:04:35PM +0100, Jan Beulich wrote:
+> Have callers invoke pci_add_segment() directly instead: With radix tree
+> initialization moved out of the function, its name isn't quite
+> describing anymore what it actually does.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-It would also prevent "Receive accept error" being raised as a result of
-non-disabled interrupts targeting offline CPUs.
+IMO I would rather not add the segment here, and just make sure that
+all callers that add segments have proper error reporting when it
+fails.  Maybe alloc_pseg() should gain a printk on failure?
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v1:
- - Split from bigger patch.
- - Iterate over all devices, even if the handler returns failure.
----
- xen/arch/x86/crash.c           |  1 +
- xen/arch/x86/include/asm/msi.h |  1 +
- xen/arch/x86/msi.c             | 18 ++++++++++++++++++
- xen/arch/x86/smp.c             |  1 +
- xen/drivers/passthrough/pci.c  | 33 +++++++++++++++++++++++++++++++++
- xen/include/xen/pci.h          |  4 ++++
- 6 files changed, 58 insertions(+)
-
-diff --git a/xen/arch/x86/crash.c b/xen/arch/x86/crash.c
-index a789416ca3ae..c946225c0b9b 100644
---- a/xen/arch/x86/crash.c
-+++ b/xen/arch/x86/crash.c
-@@ -177,6 +177,7 @@ static void nmi_shootdown_cpus(void)
- 
-         disable_IO_APIC();
-         hpet_disable();
-+        pci_disable_msi_all();
-     }
- }
- 
-diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
-index 63adb19820e8..7f9e531f73e6 100644
---- a/xen/arch/x86/include/asm/msi.h
-+++ b/xen/arch/x86/include/asm/msi.h
-@@ -86,6 +86,7 @@ extern int pci_enable_msi(struct pci_dev *pdev, struct msi_info *msi,
- extern void pci_disable_msi(struct msi_desc *msi_desc);
- extern int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool off);
- extern void pci_cleanup_msi(struct pci_dev *pdev);
-+extern void pci_disable_msi_all(void);
- extern int setup_msi_irq(struct irq_desc *desc, struct msi_desc *msidesc);
- extern int __setup_msi_irq(struct irq_desc *desc, struct msi_desc *msidesc,
-                            hw_irq_controller *handler);
-diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-index e2360579deda..c9fe942c46f3 100644
---- a/xen/arch/x86/msi.c
-+++ b/xen/arch/x86/msi.c
-@@ -1248,6 +1248,24 @@ void pci_cleanup_msi(struct pci_dev *pdev)
-     msi_free_irqs(pdev);
- }
- 
-+static int cf_check disable_msi(struct pci_dev *pdev, void *arg)
-+{
-+    msi_set_enable(pdev, 0);
-+    msix_set_enable(pdev, 0);
-+
-+    return 0;
-+}
-+
-+/* Disable MSI and/or MSI-X on all devices known by Xen. */
-+void pci_disable_msi_all(void)
-+{
-+    int rc = pci_iterate_devices(disable_msi, NULL);
-+
-+    if ( rc )
-+        printk(XENLOG_ERR
-+               "Failed to disable MSI(-X) on some devices: %d\n", rc);
-+}
-+
- int pci_reset_msix_state(struct pci_dev *pdev)
- {
-     unsigned int pos = pdev->msix_pos;
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index f931db0d71c6..f58c8d3cafe1 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -376,6 +376,7 @@ void smp_send_stop(void)
-     local_irq_disable();
-     disable_IO_APIC();
-     hpet_disable();
-+    pci_disable_msi_all();
- 
-     if ( num_online_cpus() > 1 )
-     {
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 777c6b1a7fdc..945118383f45 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -1803,6 +1803,39 @@ int iommu_do_pci_domctl(
-     return ret;
- }
- 
-+struct segment_iter {
-+    int (*handler)(struct pci_dev *pdev, void *arg);
-+    void *arg;
-+    int rc;
-+};
-+
-+static int cf_check iterate_all(struct pci_seg *pseg, void *arg)
-+{
-+    struct segment_iter *iter = arg;
-+    struct pci_dev *pdev;
-+
-+    list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
-+    {
-+        int rc = iter->handler(pdev, iter->arg);
-+
-+        if ( !iter->rc )
-+            iter->rc = rc;
-+    }
-+
-+    return 0;
-+}
-+
-+int pci_iterate_devices(int (*handler)(struct pci_dev *pdev, void *arg),
-+                        void *arg)
-+{
-+    struct segment_iter iter = {
-+        .handler = handler,
-+        .arg = arg,
-+    };
-+
-+    return pci_segments_iterate(iterate_all, &iter) ?: iter.rc;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
-index f784e9116059..983c592124a8 100644
---- a/xen/include/xen/pci.h
-+++ b/xen/include/xen/pci.h
-@@ -226,6 +226,10 @@ struct pci_dev *pci_get_pdev(const struct domain *d, pci_sbdf_t sbdf);
- struct pci_dev *pci_get_real_pdev(pci_sbdf_t sbdf);
- void pci_check_disable_device(u16 seg, u8 bus, u8 devfn);
- 
-+/* Iterate without locking or preemption over all PCI devices known by Xen. */
-+int pci_iterate_devices(int (*handler)(struct pci_dev *pdev, void *arg),
-+                        void *arg);
-+
- uint8_t pci_conf_read8(pci_sbdf_t sbdf, unsigned int reg);
- uint16_t pci_conf_read16(pci_sbdf_t sbdf, unsigned int reg);
- uint32_t pci_conf_read32(pci_sbdf_t sbdf, unsigned int reg);
--- 
-2.46.0
-
+Thanks, Roger.
 
