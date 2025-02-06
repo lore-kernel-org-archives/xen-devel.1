@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D19C02198
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 08:42:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.882637.1292775 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45953C02194
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Feb 2025 09:40:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.882685.1292789 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfxSF-0007tB-FB; Thu, 06 Feb 2025 08:41:47 +0000
+	id 1tfyM9-0000W9-Es; Thu, 06 Feb 2025 09:39:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 882637.1292775; Thu, 06 Feb 2025 08:41:47 +0000
+Received: by outflank-mailman (output) from mailman id 882685.1292789; Thu, 06 Feb 2025 09:39:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tfxSF-0007sB-8u; Thu, 06 Feb 2025 08:41:47 +0000
-Received: by outflank-mailman (input) for mailman id 882637;
- Thu, 06 Feb 2025 08:41:45 +0000
+	id 1tfyM9-0000W2-BO; Thu, 06 Feb 2025 09:39:33 +0000
+Received: by outflank-mailman (input) for mailman id 882685;
+ Thu, 06 Feb 2025 09:39:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2Xgo=U5=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1tfxKd-0000gq-KL
- for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 08:33:55 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2061c.outbound.protection.outlook.com
- [2a01:111:f403:200a::61c])
+ <SRS0=liKN=U5=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
+ id 1tfyM6-0000Vu-Ul
+ for xen-devel@lists.xenproject.org; Thu, 06 Feb 2025 09:39:31 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2062f.outbound.protection.outlook.com
+ [2a01:111:f403:2416::62f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 185e2128-e465-11ef-b3ef-695165c68f79;
- Thu, 06 Feb 2025 09:33:54 +0100 (CET)
-Received: from BN0PR04CA0206.namprd04.prod.outlook.com (2603:10b6:408:e9::31)
- by CY8PR12MB8315.namprd12.prod.outlook.com (2603:10b6:930:7e::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.25; Thu, 6 Feb
- 2025 08:33:44 +0000
-Received: from BN1PEPF0000468E.namprd05.prod.outlook.com
- (2603:10b6:408:e9:cafe::e7) by BN0PR04CA0206.outlook.office365.com
- (2603:10b6:408:e9::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.28 via Frontend Transport; Thu,
- 6 Feb 2025 08:33:43 +0000
+ id 411ec9d7-e46e-11ef-b3ef-695165c68f79;
+ Thu, 06 Feb 2025 10:39:27 +0100 (CET)
+Received: from PH8PR21CA0004.namprd21.prod.outlook.com (2603:10b6:510:2ce::11)
+ by CYYPR12MB8730.namprd12.prod.outlook.com (2603:10b6:930:c1::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.10; Thu, 6 Feb
+ 2025 09:39:21 +0000
+Received: from CO1PEPF000044F7.namprd21.prod.outlook.com
+ (2603:10b6:510:2ce:cafe::7d) by PH8PR21CA0004.outlook.office365.com
+ (2603:10b6:510:2ce::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8445.6 via Frontend Transport; Thu, 6
+ Feb 2025 09:39:21 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN1PEPF0000468E.mail.protection.outlook.com (10.167.243.139) with Microsoft
+ CO1PEPF000044F7.mail.protection.outlook.com (10.167.241.197) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8398.14 via Frontend Transport; Thu, 6 Feb 2025 08:33:43 +0000
-Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
- SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Thu, 6 Feb 2025 02:33:41 -0600
+ 15.20.8445.2 via Frontend Transport; Thu, 6 Feb 2025 09:39:20 +0000
+Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Feb
+ 2025 03:39:17 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,39 +58,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 185e2128-e465-11ef-b3ef-695165c68f79
+X-Inumbo-ID: 411ec9d7-e46e-11ef-b3ef-695165c68f79
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ftnL4KHRf3JX1LWPlDGQoM1ZUrT+Uu5gzj6tO+mXUY4YXnDPWAwPgvonJhDisAgKVEOuE3iRFAzRuu6vvsJl3w4nlLKJoPJFYYXgKlaWs1uG6U/gKsxh7SpjIa3mbACYP7x/dUgtHt5o2yRyatpu/GsShJgaaB/PbjT3r3mVpg0MiNmobDSY3YQ48VKlS5KadsAH8pNTnGABq1txwFJ1n+qjCq+zvkM65hicTbnLMSjUWyBXObjIIfPRjEVy85DJhl/+YaaMSoFUTlTBV8k/bJuNxW6yETD9vTLoEt809VibFC8qXlW3V//E+Rl3y3f/4ZrK98qiPO4oopnLhZ8ViA==
+ b=NOPlomlcB2hEh1kqc5+OAAQGiRzmnE0j6Hslzo9LJVXyhgLz8K3I/+ABpzOShSKNs87LcUFL3OCNXpAWRQr7XVX+XB/oaXWztORsCpSQW1K626R6yfVZUijk1+p8A6lD2FQJzyXX+/1c9kC/q/s4YO9dnf6GKKWK+xqUCI3FPr4RN7IqTjntbtMmN7y/fIDoXTJUYdfLqnaOLKZr2648lZddKwJTehKEioTbP7uMcSB04JT8eI4CV9gUW3EKB2XCk5xZvr+mvQbIuYdZYopw2vmW8YDTv5L5g03cNuO1SEtjlmBRUiS1Yb0S+7iHqChXWBLiVnZx95RfIES5XJl9qQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UYDVLpHYY1dKVUItM7B0Aj/SePLS+Y9cVbRvGpBLd50=;
- b=YOekTgCoTzEK7HlhLsV3ZlCsmFvXAdgJMXFfD3QGctCm4rXtufFzO9m8SLtlZvkVG4tbHxe2RXyNEwna3YK+ArePPC1wfmTaOOCNkq9FbR1h2wy3hXycUMcbAdXvMGgh0qS2iyUhbcTNkgFqqHyaea+BiWbtzALOdJqYDUDLC81Myl75pQ7cBO22KnZNdP/OpAoaiTaen4MJqIxvWtHrNWzeFp2zL9C50LuZA+AMBvzD9yXAmJM/NQP/bUFKqRApAjBp0C9mIwCjDy3yYEJxuqBH1pkZTuhRiCL/6u4a+AIRqbJCAIiQOFPVYwRzbWLNE32Bs2xGTTMRMD82LQdG4A==
+ bh=cYFbZCbfAzd6TvW+5QxzSY2l5SGiwjv2aSHKJZTtvSc=;
+ b=Z55/3mcRNta5XZiRr9sQIuFBlyOQcyaulTlqJ9PLzHRK8XwVyGZvD5mrS2nIijx6VXHWkx1Om3Vg0hhJz3B8NDUyQUp2jdZ+W1rlRPJGfvfM0pnB66SL/wFEuA4lItORyR1MPIz2swYLod0D1Ei0dw9oyn7RWUAisFKRFfna9vkuuUKxWb6fbpmT2ZLIa70vSnOER4j6Sx1fUdmEKNU8M8i083YgJLPPG9hfD1gv230p6IxsINjg1vFS8JW1g35f+Ir1nes6QyiJNwhcYeBbous/6QF6zyWz0K3dVJ/YoI4sV3kRKZk9qFUBa/4YgCAx02uIh8sddXYfy9yAdaSBUg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UYDVLpHYY1dKVUItM7B0Aj/SePLS+Y9cVbRvGpBLd50=;
- b=pc8LpcqMlSP2MDsb/NFXDbOFLRk2hJAegV3ZzivaTsN4OcoGKS5YpWCGVcBnDku41qWLMblVUWrO720J69+4Z6dD1XLtz9yXtwCxTPdaM3VTC9sCFsDqKLr5Te9xcOzunz5G+aTWIUcQQCRavr7dz67eB8mfX6gxzO5CPWZXJVs=
+ bh=cYFbZCbfAzd6TvW+5QxzSY2l5SGiwjv2aSHKJZTtvSc=;
+ b=uu/M7EanGbIi7niOXo42mNiSDzI423GAvPgDDNtGoq4aUQ+2ikOX78R22RbPhR7z4/6w33ue777Hw0IUX0uTCATBKofntylGkPNcW+0zkUQtNtrLvfW1q0lIFTYwWpTc3ArO+QX0zjmM2/55duM7K2Wd7hN8m/b8JcpUEtaJAhw=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Penny Zheng <Penny.Zheng@amd.com>
+From: Jiqian Chen <Jiqian.Chen@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <Ray.Huang@amd.com>, <Jason.Andryuk@amd.com>, Penny Zheng
-	<penny.zheng@amd.com>, Anthony PERARD <anthony.perard@vates.tech>, "Penny
- Zheng" <Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 10/11] tools/xenpm: Print CPPC parameters for amd-cppc driver
-Date: Thu, 6 Feb 2025 16:32:54 +0800
-Message-ID: <20250206083255.1296363-11-Penny.Zheng@amd.com>
+CC: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Huang Rui
+	<ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>
+Subject: [PATCH v7] vpci: Add resizable bar support
+Date: Thu, 6 Feb 2025 17:39:00 +0800
+Message-ID: <20250206093900.1410342-1-Jiqian.Chen@amd.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250206083255.1296363-1-Penny.Zheng@amd.com>
-References: <20250206083255.1296363-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -99,120 +98,341 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF0000468E:EE_|CY8PR12MB8315:EE_
-X-MS-Office365-Filtering-Correlation-Id: f5835a08-4070-4871-cd88-08dd4688f76a
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F7:EE_|CYYPR12MB8730:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9fd61e2-bad0-432c-a3e8-08dd469221d0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026;
+	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?FA5GLDkXoMz3nrEuYbmR0joZwEVXgrxyu6YrR58pMfpNhv/ern2j6FlfyDzB?=
- =?us-ascii?Q?/DXBWCdrMRGuDkhMDF810xgvrsMtqHQ6OaLTW7MyqUOcyX4DwwcChb07+okp?=
- =?us-ascii?Q?HI5tKlxwwCRer5q+PD8U41f3gplhL26/kxqF53CU+u+ZAQpWwi8oVP+v59l9?=
- =?us-ascii?Q?iSsM0ZSANiqT7LQ69IYSSe2eOspjPuAc7r+GLSz4z2jVJLnW7WZr12QjgNYA?=
- =?us-ascii?Q?2+UK6H32DNKs/zA3FPeg1Ynwt/mY/ACHZ8LEvjdDbHBsEGrqbNOEpqfMo4/B?=
- =?us-ascii?Q?sdCW0jr7x5ZmH/eto/3ZYhoJVVpN9FF3X7ub2E83g+cZTaMpbYoQIlNARP+3?=
- =?us-ascii?Q?fv/xV2Jy4NIMsemXSBUg+rrm+3jPISFlaN8PBM3557rOUZceZAAtq/gVpkwi?=
- =?us-ascii?Q?ey5keCl25x5ikX+fZlFQy2bPFHh3Bmhq7NQeYLqgrvW1fEsEYK/QY4nGpolX?=
- =?us-ascii?Q?xRrfzrjhaOQLMQCLq9w+GRoyFZDn8WH5I58LocIY5tG/2Q4sWQvtYoiGFcBV?=
- =?us-ascii?Q?0bCGhRS7ZquAsaD5poDTLqVIQLxSQg3arRm4v0PJrbZV1JkDomYfBE0oSliB?=
- =?us-ascii?Q?ub0iYQ0tgT1hX8J5NbFqlI5NeLJwXKNSINGvgL6Zo/UFYBgm6+FUzKHOCnOG?=
- =?us-ascii?Q?vLLSOqBE5q5l8580POgqEtBTSg3/kP/uemsscCud7prNWeglinoS7vf0pHgf?=
- =?us-ascii?Q?JwdfLFTsvI2t3F1E+YG9rJIdY6aCN37C0zF+ye/OpVY8Xbh6F1cpxQPwMZdV?=
- =?us-ascii?Q?raqHhjK4G1AT3DxfcFgV8bMu5qGe6FPoXTjJZaJ3m8d3Suo6wynpymZhLD/p?=
- =?us-ascii?Q?WMUF1B4I/ZoTKTmsV/vuJwDzHqyiuZIjdGa+6V4BX1OynmUmzi1vmHQCIUVf?=
- =?us-ascii?Q?FDziJIYJ8SR8kapvdJihFW80LjZ0TSaaylf7RT0eEeXUNaWir5TKLV949IFS?=
- =?us-ascii?Q?YMQBngDQyAhloJDy7ze3+b8vKmPxQdwN1xpsiQUQb3ZJUZhhA2d+U1i1GlMR?=
- =?us-ascii?Q?LKxWK2c6Q70TY2fXDrm7/7+IAPyMRp6IN8BbF7BnQHkgF1C7KFrJYLdgicsf?=
- =?us-ascii?Q?XSz8YWpU5riNwwYl5QDYmHBZ3cEBij53FLN9iWWKWHog4f6/V2PCtqX28rQR?=
- =?us-ascii?Q?RM1yZ+PabAn84yxBOpORFQWCoO91Q7lGBXzv0MZVke52TbyRmuIZm6dAGSBO?=
- =?us-ascii?Q?dAeyWSswuoZ3yzzVSnQvmoIixrV/dffWyYM4N5joFvqSiO/TK0wqjOlKimCc?=
- =?us-ascii?Q?GGQt1j84sB+1+FUe3NKMKYHfEwtEEqhFdcrPXzOFld1Oj50zIc8Q7z0DDIdi?=
- =?us-ascii?Q?pBmuxLdRsljOugCQbp8kMajxyiwjNMIXtvY5dgvLfFilrXkzbTO+YceNjx6S?=
- =?us-ascii?Q?sLlA9sG/2YPe91nWS9zHVBc78rOqWr0CC8DK4u2gOqeT9nnnPbmsdSezDcXg?=
- =?us-ascii?Q?IOD9WFH1jejmpuzyRYVDAU20TQwZ0/uPWXNU1rw1SLFf0BOJkJP+VRTazysF?=
- =?us-ascii?Q?QklQMXztNQwZiCc=3D?=
+	=?us-ascii?Q?XMFfgZYXnylg8MVgALtxCNNVbWSs5nppg6ZFpd+6NlNicR3cikfuoZXrkWUk?=
+ =?us-ascii?Q?3mrQOftXNARsjYXwCAoXZD/U8TOATSJdGW9372ir830qmFn0czgZGqAkhnjL?=
+ =?us-ascii?Q?eN5VQloC/UgRpr/V/vtuZGka6yHM2fPV3kpu1MYwZPL5lvaDj1SC4SmS/qyN?=
+ =?us-ascii?Q?Vi/MuuiBmh8xsHj7wplgm5+PxtCeb85JblP74JBaCgW6xOrOSuDgvYsZxI3S?=
+ =?us-ascii?Q?IKoC38f7r+aeCO7M6joqT3d+eK2auxFzG0ImdI3GUDDHcS9L+madjfl9590E?=
+ =?us-ascii?Q?xPmoehhCgzdP6Dblpk5E+nKrBzya2on8gVyuBfIjoquQYk49Au7zPHZ5CL//?=
+ =?us-ascii?Q?mX5qDLwMMEISZCkIfh8pX5pSI6yYzdUhZjdSpz3gpguVPuPlWXmQI2XUn3Uv?=
+ =?us-ascii?Q?HcnUuJseZ0fFnJk+UM9cOFokg+d5QU42DRXv0yzi8VX0jqwciLbtRl/kiF0t?=
+ =?us-ascii?Q?OpGG5PAR1FngoTLmUIfyDRPZQxDeiYctjDg1/6Cb5Lr1tJUgdBpaOPCoCZY3?=
+ =?us-ascii?Q?2gumxOefpRSWuxAy7MgfEDNvuG8/Lc4Dc1g6fVZ8mayRukXYN8FaSTElcLnq?=
+ =?us-ascii?Q?9OZo91mFVxJ7yEFynNDKakofqjE9frIYXQ9N+BTGVwSOnUck6HcP4I3bc82I?=
+ =?us-ascii?Q?HIKC/Q1ywpfDfJ8sVYRCia+lUnevd7UQ0v/vFN2zGxptsDXLtthYWzz54nfD?=
+ =?us-ascii?Q?pkgzgRP9ywKA9Cek7wbpVoNbkPbwKltSUTI0QGQaKEqbdQdZdqc4A7K3QJwc?=
+ =?us-ascii?Q?Jw/KPxX0Bc5HyHuWEzPd6pFN2iSjMJ5ZSSVJdW25KPUc9UetSMcNKOBtdi7E?=
+ =?us-ascii?Q?docrXctA+uG5jkSavPS1dSIAUAYphNlFO0QP1mfYQUfdIz3jda59ie/aNNxm?=
+ =?us-ascii?Q?waBEL+QuFe1EQ9NbzoitakzZXJ2W/6rFo+pNiNKU1TOwrEphUzqILjKfYw5n?=
+ =?us-ascii?Q?Ak47CK47EOjE2q3NB+Ge/gPgAw8rP+C3mm/HKLaJ021DKH9/OPGp/eJT/ig2?=
+ =?us-ascii?Q?MqSnBwHU9TXNl/HBUU0GPLOeFmn6DkgnknFsi01rZEquX3cfQtK1KwNu3Bf5?=
+ =?us-ascii?Q?JK25rTyAAFPevBgK86HkEDA1mpLWk1jOrJ2bT/6ABLuo1FT6rxOt+QPAMORB?=
+ =?us-ascii?Q?o+A/TQ8DTllazvhtsY1NlCIDgJJ2KpthKw3I1l9fi6Iy86xHBiOxgOHD+uhk?=
+ =?us-ascii?Q?rR/mByFCMJb0Qfp6MaR+37455cjpvbQvWdgCAAhdZ7t7EbNsm1uAlQSWYvFj?=
+ =?us-ascii?Q?NVcCnGwlLKsTFFJn6YP45cWRl+ZmJVVH1xy9YBLiBR2fvrOihfdqNFQtZJlt?=
+ =?us-ascii?Q?o8LhIPZxb/4DYcvo9g/R0d8dV4ddnUCqW3YiBhuobFBDzNekMFISX5hWL1QP?=
+ =?us-ascii?Q?aEqGbOLSvLz5oyMXNi1WC4SypuoUVtfRx5qrq9d7aNMMwCgUAxzZ945uEvK9?=
+ =?us-ascii?Q?vpEytVS8aGjLRuqbmBU486bCWpLf9uywma+tBvl+Lmr5yiHs+L7PyY8/50YX?=
+ =?us-ascii?Q?O0fH9pZwZqYvGEc=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 08:33:43.6321
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 09:39:20.1250
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f5835a08-4070-4871-cd88-08dd4688f76a
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9fd61e2-bad0-432c-a3e8-08dd469221d0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF0000468E.namprd05.prod.outlook.com
+	CO1PEPF000044F7.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8315
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB8730
 
-From: Penny Zheng <penny.zheng@amd.com>
+Some devices, like discrete GPU of amd, support resizable bar
+capability, but vpci of Xen doesn't support this feature, so
+they fail to resize bars and then cause probing failure.
 
-HWP, amd-cppc, amd-cppc-epp are all the implementation
-of ACPI CPPC (Collaborative Processor Performace Control),
-so we introduce cppc_mode flag to print CPPC-related para.
+According to PCIe spec, each bar that supports resizing has
+two registers, PCI_REBAR_CAP and PCI_REBAR_CTRL. So, add
+handlers for them to support resizing the size of BARs.
 
-And HWP and amd-cppc-epp are both governor-less driver,
-so we introduce hw_auto flag to bypass governor-related print.
-
-Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
 ---
- tools/misc/xenpm.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+Hi all,
+v6->v7 changes:
+* Deleted codes that add register for PCI_REBAR_CAP, and added comments to explain why.
+* Added comments to explain why use "continue" when fail to add register for PCI_REBAR_CTRL.
 
-diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
-index 336d246346..a7aeaea35e 100644
---- a/tools/misc/xenpm.c
-+++ b/tools/misc/xenpm.c
-@@ -790,9 +790,18 @@ static unsigned int calculate_activity_window(const xc_cppc_para_t *cppc,
- /* print out parameters about cpu frequency */
- static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
- {
--    bool hwp = strcmp(p_cpufreq->scaling_driver, XEN_HWP_DRIVER_NAME) == 0;
-+    bool cppc_mode = false, hw_auto = false;
-     int i;
- 
-+    if ( !strcmp(p_cpufreq->scaling_driver, XEN_HWP_DRIVER_NAME) ||
-+         !strcmp(p_cpufreq->scaling_driver, XEN_AMD_CPPC_DRIVER_NAME) ||
-+         !strcmp(p_cpufreq->scaling_driver, XEN_AMD_CPPC_EPP_DRIVER_NAME) )
-+        cppc_mode = true;
+Best regards,
+Jiqian Chen.
+
+v5->v6 changes:
+* Changed "1UL" to "1ULL" in PCI_REBAR_CTRL_SIZE idefinition for 32 bit architecture.
+* In rebar_ctrl_write used "bar - pdev->vpci->header.bars" to get index instead of reading
+  from register.
+* Added the index of BAR to error messages.
+* Changed to "continue" instead of "return an error" when vpci_add_register failed.
+
+v4->v5 changes:
+* Called pci_size_mem_bar in rebar_ctrl_write to get addr and size of BAR instead of setting
+  their values directly after writing new size to hardware.
+* Changed from "return" to "continue" when index/type of BAR are not correct during initializing
+  BAR.
+* Corrected the value of PCI_REBAR_CTRL_BAR_SIZE from "0x00001F00" to "0x00003F00".
+* Renamed PCI_REBAR_SIZE_BIAS to PCI_REBAR_CTRL_SIZE_BIAS.
+* Re-defined "PCI_REBAR_CAP_SHIFT 4" to "PCI_REBAR_CAP_SIZES_MASK 0xFFFFFFF0U".
+
+v3->v4 changes:
+* Removed PCI_REBAR_CAP_SIZES since it was not needed, and added
+  PCI_REBAR_CAP_SHIFT and PCI_REBAR_CTRL_SIZES.
+* Added parameter resizable_sizes to struct vpci_bar to cache the support resizable sizes and
+  added the logic in init_rebar().
+* Changed PCI_REBAR_CAP to PCI_REBAR_CAP(n) (4+8*(n)), changed PCI_REBAR_CTRL to
+  PCI_REBAR_CTRL(n) (8+8*(n)).
+* Added domain info of pci_dev to printings of init_rebar().
+
+v2->v3 changes:
+* Used "bar->enabled" to replace "pci_conf_read16(pdev->sbdf, PCI_COMMAND) & PCI_COMMAND_MEMORY",
+  and added comments why it needs this check.
+* Added "!is_hardware_domain(pdev->domain)" check in init_rebar() to return EOPNOTSUPP for domUs.
+* Moved BAR type and index check into init_rebar(), then only need to check once.
+* Added 'U' suffix for macro PCI_REBAR_CAP_SIZES.
+* Added macro PCI_REBAR_SIZE_BIAS to represent 20.
+TODO: need to hide ReBar capability from hardware domain when init_rebar() fails.
+
+v1->v2 changes:
+* In rebar_ctrl_write, to check if memory decoding is enabled, and added
+  some checks for the type of Bar.
+* Added vpci_hw_write32 to handle PCI_REBAR_CAP's write, since there is
+  no write limitation of dom0.
+* And has many other minor modifications as well.
+---
+ xen/drivers/vpci/Makefile  |   2 +-
+ xen/drivers/vpci/rebar.c   | 136 +++++++++++++++++++++++++++++++++++++
+ xen/drivers/vpci/vpci.c    |   6 ++
+ xen/include/xen/pci_regs.h |  15 ++++
+ xen/include/xen/vpci.h     |   3 +
+ 5 files changed, 161 insertions(+), 1 deletion(-)
+ create mode 100644 xen/drivers/vpci/rebar.c
+
+diff --git a/xen/drivers/vpci/Makefile b/xen/drivers/vpci/Makefile
+index 1a1413b93e76..a7c8a30a8956 100644
+--- a/xen/drivers/vpci/Makefile
++++ b/xen/drivers/vpci/Makefile
+@@ -1,2 +1,2 @@
+-obj-y += vpci.o header.o
++obj-y += vpci.o header.o rebar.o
+ obj-$(CONFIG_HAS_PCI_MSI) += msi.o msix.o
+diff --git a/xen/drivers/vpci/rebar.c b/xen/drivers/vpci/rebar.c
+new file mode 100644
+index 000000000000..64b56a9567fa
+--- /dev/null
++++ b/xen/drivers/vpci/rebar.c
+@@ -0,0 +1,136 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2025 Advanced Micro Devices, Inc. All Rights Reserved.
++ *
++ * Author: Jiqian Chen <Jiqian.Chen@amd.com>
++ */
 +
-+    if ( !strcmp(p_cpufreq->scaling_driver, XEN_HWP_DRIVER_NAME) ||
-+         !strcmp(p_cpufreq->scaling_driver, XEN_AMD_CPPC_EPP_DRIVER_NAME) )
-+        hw_auto = true;
++#include <xen/sched.h>
++#include <xen/vpci.h>
 +
-     printf("cpu id               : %d\n", cpuid);
- 
-     printf("affected_cpus        :");
-@@ -800,7 +809,7 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
-         printf(" %d", p_cpufreq->affected_cpus[i]);
-     printf("\n");
- 
--    if ( hwp )
-+    if ( hw_auto )
-         printf("cpuinfo frequency    : base [%"PRIu32"] max [%"PRIu32"]\n",
-                p_cpufreq->cpuinfo_min_freq,
-                p_cpufreq->cpuinfo_max_freq);
-@@ -812,7 +821,7 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
- 
-     printf("scaling_driver       : %s\n", p_cpufreq->scaling_driver);
- 
--    if ( hwp )
-+    if ( cppc_mode )
-     {
-         const xc_cppc_para_t *cppc = &p_cpufreq->u.cppc_para;
- 
-@@ -838,7 +847,8 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
-                cppc->desired,
-                cppc->desired ? "" : " hw autonomous");
-     }
--    else
++static void cf_check rebar_ctrl_write(const struct pci_dev *pdev,
++                                      unsigned int reg,
++                                      uint32_t val,
++                                      void *data)
++{
++    struct vpci_bar *bar = data;
++    const unsigned int index = bar - pdev->vpci->header.bars;
++    uint64_t size = PCI_REBAR_CTRL_SIZE(val);
 +
-+    if ( !hw_auto )
-     {
-         printf("scaling_avail_gov    : %s\n",
-                p_cpufreq->scaling_available_governors);
++    if ( bar->enabled )
++    {
++        /*
++         * Refuse to resize a BAR while memory decoding is enabled, as
++         * otherwise the size of the mapped region in the p2m would become
++         * stale with the newly set BAR size, and the position of the BAR
++         * would be reset to undefined.  Note the PCIe specification also
++         * forbids resizing a BAR with memory decoding enabled.
++         */
++        if ( size != bar->size )
++            gprintk(XENLOG_ERR,
++                    "%pp: refuse to resize BAR#%u with memory decoding enabled\n",
++                    &pdev->sbdf, index);
++        return;
++    }
++
++    if ( !((size >> PCI_REBAR_CTRL_SIZE_BIAS) & bar->resizable_sizes) )
++        gprintk(XENLOG_WARNING,
++                "%pp: new BAR#%u size %#lx is not supported by hardware\n",
++                &pdev->sbdf, index, size);
++
++    pci_conf_write32(pdev->sbdf, reg, val);
++
++    pci_size_mem_bar(pdev->sbdf,
++                     PCI_BASE_ADDRESS_0 + index * 4,
++                     &bar->addr,
++                     &bar->size,
++                     (index == PCI_HEADER_NORMAL_NR_BARS - 1) ?
++                      PCI_BAR_LAST : 0);
++    bar->guest_addr = bar->addr;
++}
++
++static int cf_check init_rebar(struct pci_dev *pdev)
++{
++    uint32_t ctrl;
++    unsigned int nbars;
++    unsigned int rebar_offset = pci_find_ext_capability(pdev->sbdf,
++                                                        PCI_EXT_CAP_ID_REBAR);
++
++    if ( !rebar_offset )
++        return 0;
++
++    if ( !is_hardware_domain(pdev->domain) )
++    {
++        printk(XENLOG_ERR "%pp: resizable BARs unsupported for unpriv %pd\n",
++               &pdev->sbdf, pdev->domain);
++        return -EOPNOTSUPP;
++    }
++
++    ctrl = pci_conf_read32(pdev->sbdf, rebar_offset + PCI_REBAR_CTRL(0));
++    nbars = MASK_EXTR(ctrl, PCI_REBAR_CTRL_NBAR_MASK);
++    for ( unsigned int i = 0; i < nbars; i++ )
++    {
++        int rc;
++        struct vpci_bar *bar;
++        unsigned int index;
++
++        ctrl = pci_conf_read32(pdev->sbdf, rebar_offset + PCI_REBAR_CTRL(i));
++        index = ctrl & PCI_REBAR_CTRL_BAR_IDX;
++        if ( index >= PCI_HEADER_NORMAL_NR_BARS )
++        {
++            printk(XENLOG_ERR "%pd %pp: too big BAR number %u in REBAR_CTRL\n",
++                   pdev->domain, &pdev->sbdf, index);
++            continue;
++        }
++
++        bar = &pdev->vpci->header.bars[index];
++        if ( bar->type != VPCI_BAR_MEM64_LO && bar->type != VPCI_BAR_MEM32 )
++        {
++            printk(XENLOG_ERR "%pd %pp: BAR%u is not in memory space\n",
++                   pdev->domain, &pdev->sbdf, index);
++            continue;
++        }
++
++        /*
++         * Here not to add register for PCI_REBAR_CAP since it is read-only
++         * register without other specific operations, and hardware domain
++         * has no limitation of read/write access to all PCI config space.
++         */
++        rc = vpci_add_register(pdev->vpci, vpci_hw_read32, rebar_ctrl_write,
++                               rebar_offset + PCI_REBAR_CTRL(i), 4, bar);
++        if ( rc )
++        {
++            printk(XENLOG_ERR "%pd %pp: BAR%u fail to add reg of REBAR_CTRL rc=%d\n",
++                   pdev->domain, &pdev->sbdf, index, rc);
++            /*
++             * Ideally we would hide the ReBar capability here, but code
++             * for doing so still needs to be written. And using continue
++             * can keep any possible hooks working, instead, returning
++             * failure would cause all vPCI hooks down and hardware domain
++             * has entirely unmediated access to the device, which is worse.
++             */
++            continue;
++        }
++
++        bar->resizable_sizes =
++            MASK_EXTR(pci_conf_read32(pdev->sbdf,
++                                      rebar_offset + PCI_REBAR_CAP(i)),
++                      PCI_REBAR_CAP_SIZES_MASK);
++        bar->resizable_sizes |=
++            (((uint64_t)MASK_EXTR(ctrl, PCI_REBAR_CTRL_SIZES_MASK) << 32) /
++             ISOLATE_LSB(PCI_REBAR_CAP_SIZES_MASK));
++    }
++
++    return 0;
++}
++REGISTER_VPCI_INIT(init_rebar, VPCI_PRIORITY_LOW);
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 1e6aa5d799b9..3349b98389b8 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -232,6 +232,12 @@ void cf_check vpci_hw_write16(
+     pci_conf_write16(pdev->sbdf, reg, val);
+ }
+ 
++void cf_check vpci_hw_write32(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
++{
++    pci_conf_write32(pdev->sbdf, reg, val);
++}
++
+ int vpci_add_register_mask(struct vpci *vpci, vpci_read_t *read_handler,
+                            vpci_write_t *write_handler, unsigned int offset,
+                            unsigned int size, void *data, uint32_t ro_mask,
+diff --git a/xen/include/xen/pci_regs.h b/xen/include/xen/pci_regs.h
+index 250ba106dbd3..2f1d0d63e962 100644
+--- a/xen/include/xen/pci_regs.h
++++ b/xen/include/xen/pci_regs.h
+@@ -459,6 +459,7 @@
+ #define PCI_EXT_CAP_ID_ARI	14
+ #define PCI_EXT_CAP_ID_ATS	15
+ #define PCI_EXT_CAP_ID_SRIOV	16
++#define PCI_EXT_CAP_ID_REBAR	21	/* Resizable BAR */
+ 
+ /* Advanced Error Reporting */
+ #define PCI_ERR_UNCOR_STATUS	4	/* Uncorrectable Error Status */
+@@ -541,6 +542,20 @@
+ #define  PCI_VNDR_HEADER_REV(x)	(((x) >> 16) & 0xf)
+ #define  PCI_VNDR_HEADER_LEN(x)	(((x) >> 20) & 0xfff)
+ 
++/* Resizable BARs */
++#define PCI_REBAR_CAP(n)	(4 + 8 * (n))	/* capability register */
++#define  PCI_REBAR_CAP_SIZES_MASK	0xFFFFFFF0U	/* supported BAR sizes in CAP */
++#define PCI_REBAR_CTRL(n)	(8 + 8 * (n))	/* control register */
++#define  PCI_REBAR_CTRL_BAR_IDX		0x00000007	/* BAR index */
++#define  PCI_REBAR_CTRL_NBAR_MASK	0x000000E0	/* # of resizable BARs */
++#define  PCI_REBAR_CTRL_BAR_SIZE	0x00003F00	/* BAR size */
++#define  PCI_REBAR_CTRL_SIZES_MASK	0xFFFF0000U	/* supported BAR sizes in CTRL */
++
++#define PCI_REBAR_CTRL_SIZE_BIAS	20
++#define PCI_REBAR_CTRL_SIZE(v) \
++            (1ULL << (MASK_EXTR(v, PCI_REBAR_CTRL_BAR_SIZE) \
++                      + PCI_REBAR_CTRL_SIZE_BIAS))
++
+ /*
+  * Hypertransport sub capability types
+  *
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 41e7c3bc2791..9d47b8c1a50e 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -78,6 +78,8 @@ uint32_t cf_check vpci_hw_read32(
+     const struct pci_dev *pdev, unsigned int reg, void *data);
+ void cf_check vpci_hw_write16(
+     const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
++void cf_check vpci_hw_write32(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
+ 
+ /*
+  * Check for pending vPCI operations on this vcpu. Returns true if the vcpu
+@@ -100,6 +102,7 @@ struct vpci {
+             /* Guest address. */
+             uint64_t guest_addr;
+             uint64_t size;
++            uint64_t resizable_sizes;
+             struct rangeset *mem;
+             enum {
+                 VPCI_BAR_EMPTY,
 -- 
 2.34.1
 
