@@ -4,45 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3360C0219E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Feb 2025 15:25:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.885682.1295493 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B2EC0219E
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Feb 2025 15:28:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.885693.1295503 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ths8j-0001pG-Uv; Tue, 11 Feb 2025 15:25:33 +0000
+	id 1thsBs-0002TB-Iw; Tue, 11 Feb 2025 15:28:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 885682.1295493; Tue, 11 Feb 2025 15:25:33 +0000
+Received: by outflank-mailman (output) from mailman id 885693.1295503; Tue, 11 Feb 2025 15:28:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ths8j-0001p9-Ry; Tue, 11 Feb 2025 15:25:33 +0000
-Received: by outflank-mailman (input) for mailman id 885682;
- Tue, 11 Feb 2025 15:25:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vD9p=VC=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1ths8i-0001oz-JK
- for xen-devel@lists.xenproject.org; Tue, 11 Feb 2025 15:25:32 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6e09128c-e88c-11ef-a075-877d107080fb;
- Tue, 11 Feb 2025 16:25:31 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 93FCA37363;
- Tue, 11 Feb 2025 12:04:41 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5851313782;
- Tue, 11 Feb 2025 12:04:41 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id A7geFNk8q2e3GgAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 11 Feb 2025 12:04:41 +0000
+	id 1thsBs-0002T4-Ea; Tue, 11 Feb 2025 15:28:48 +0000
+Received: by outflank-mailman (input) for mailman id 885693;
+ Tue, 11 Feb 2025 15:28:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=GN4I=VC=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1thsBq-0002Sy-Rl
+ for xen-devel@lists.xenproject.org; Tue, 11 Feb 2025 15:28:47 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id df6e2587-e88c-11ef-b3ef-695165c68f79;
+ Tue, 11 Feb 2025 16:28:41 +0100 (CET)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5450abbdce0so2442395e87.3
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Feb 2025 07:28:41 -0800 (PST)
+Received: from [192.168.209.66] ([94.75.70.14])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-54506c6b218sm958984e87.222.2025.02.11.07.28.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Feb 2025 07:28:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,144 +47,323 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e09128c-e88c-11ef-a075-877d107080fb
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1739275481; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=7+JonyeTS6PhmJUJZ7cwFOpKA9QAKAShpmEQryox7lg=;
-	b=f1ygNHlEKOh+wqzr5Bw8tgj1xvQeSPm0CX93J6GGbGyWsio/hs85hO7PYIhiK977tm6t8F
-	2E7TbMOFvyFWF0MKDWeFPcG2nCkH3JdwQMmabolIhf+HnOHKL1ZyED/NwEhn4gApyiHLIu
-	1fkS/q8EFadYRtjyu3cSGL3TSp5O49g=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=f1ygNHlE
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1739275481; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=7+JonyeTS6PhmJUJZ7cwFOpKA9QAKAShpmEQryox7lg=;
-	b=f1ygNHlEKOh+wqzr5Bw8tgj1xvQeSPm0CX93J6GGbGyWsio/hs85hO7PYIhiK977tm6t8F
-	2E7TbMOFvyFWF0MKDWeFPcG2nCkH3JdwQMmabolIhf+HnOHKL1ZyED/NwEhn4gApyiHLIu
-	1fkS/q8EFadYRtjyu3cSGL3TSp5O49g=
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	iommu@lists.linux.dev
-Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org,
-	Jan Vejvalka <jan.vejvalka@lfmotol.cuni.cz>
-Subject: [PATCH 1/2] xen/swiotlb: relax alignment requirements
-Date: Tue, 11 Feb 2025 13:04:31 +0100
-Message-ID: <20250211120432.29493-2-jgross@suse.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250211120432.29493-1-jgross@suse.com>
-References: <20250211120432.29493-1-jgross@suse.com>
+X-Inumbo-ID: df6e2587-e88c-11ef-b3ef-695165c68f79
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1739287721; x=1739892521; darn=lists.xenproject.org;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kiS3cBfzou9rO47HcJmBS77eN8im0c0nuVZztpoPt4I=;
+        b=H9zvE01Mcp/cQkFcuo4AUxxsrcqzWsCZwnLQ9x2KxSgGZvCl4ktfauSOR3zHkQlBhw
+         D1A9FRu0c7s1sT1CpJ5oXzia8ThtjdhGtgwowRz49iFb7kfSQ8Lxv7sj8rTu+AyWhJlU
+         doCJuCzNG92SaJhXpsKBlQGntAfKSOcW0mfwT8ynyr4zg+t5GI0/fqpbYJ7iHzBhDm5S
+         bEq6yPL87kJjeJcKubCZGevl7S1FywKHNl0GpDaSTfy2uyuANJaTyuGHV71b2hma9fUn
+         tjfnx1aQsFFKOnEsx/Xc6re4ziFRdV6FSVR4PdGYt0aqwEqqX+1Z9TktcTNBRnp12qbg
+         r0kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739287721; x=1739892521;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=kiS3cBfzou9rO47HcJmBS77eN8im0c0nuVZztpoPt4I=;
+        b=TKFgY80o+4fNGZoXnsVKbsTanMNdwSSzD7t/bUFN4QXpJDWV3QcoN9LtH8g15pfO/v
+         7JkbfrXkmDUpJ1AI4l/sWXNIpP03yQofbUST9sy6vE7qM/U5v1bNrCgkrc6mc5xC01TC
+         Tblpu79z3v8NDTpuSj6jQiZcacMI1htW5YTdg0H9fs+8gJtVk2+X24UL5CloZTFUr5Ou
+         PwhrXvArY6MuXSYzq1dltTABfMzqaonsX03mx+Di/l1+DEZe+ns+CTPKMtZXdzQOlWjK
+         jEyMRziNxz4TwW1JlFGeS1hQOjFNkW/fjBnH7F2Kius4gkN2pZ0K4EKMi7PHwVb09CC6
+         hrGA==
+X-Forwarded-Encrypted: i=1; AJvYcCXS4mrbg8T8L/g6Zl2axrVHi7VkUnCb3etkh3SHE2DQQ+z0rXWyLZ7PVc5pquLXuSpf0BI9L7P/LXc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwwIwrz+56LpESxRqu4DUKCE0iPU98P+ls1BQdLz6SfSaTFbFEj
+	SJVvBdUPFXrmNhux8RkJ0m0xbX4x6KIemQgUJTj2h486ptKWZ3vP
+X-Gm-Gg: ASbGncsot321AeE9hOkr9ONSSpvSe9jTLC6I8diuclygivaAaPr6BGth+WLurdsBh5U
+	J7rBgALDFVU8trZ6U1o0Q/VfAf25rq5qNCvRyzQ8Yhp29x2wVQ+klYugBv8+ykLpQGE0SfXCjE9
+	caEZal6cqBmMFutA8fkOyxpNmujIRvzULjpheOSWxg0/8+reTG/3GiJKoot2x2E8NLm0DdTK3Lc
+	TDZ/FUcXYxrfNEhghQyO9CfJmsSpkQy3K/Z5trRXS29rvg38lb+8ryJKvP8XmmX8VpOhUdVtQu+
+	6mpvQ6QC25+skky0NcwrwkJT9YU=
+X-Google-Smtp-Source: AGHT+IEcebum+DWnNSU7BgyT+4Nj8QftnCb47EuWePbX6T/xo0k0KikzFf9B+9mfJOWQxt820vOk6A==
+X-Received: by 2002:a05:6512:118f:b0:545:a1a:556f with SMTP id 2adb3069b0e04-545118767edmr1320343e87.50.1739287720416;
+        Tue, 11 Feb 2025 07:28:40 -0800 (PST)
+Content-Type: multipart/alternative;
+ boundary="------------FElgY7kss6sQyEaaJQXXc02P"
+Message-ID: <cf11e1a6-6b89-4eca-b13c-d8b9b81262e4@gmail.com>
+Date: Tue, 11 Feb 2025 16:28:39 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 93FCA37363
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for 4.21 v5] xen/riscv: identify specific ISA supported by
+ cpu
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <39eacdb6312988fb746e3dff7e29db2f9fcef614.1738958635.git.oleksii.kurochko@gmail.com>
+ <18030e36-ac28-42e0-9bcb-2457c0281273@suse.com>
+ <279e70a8-ad09-46bc-a1f9-7aa6707d3974@gmail.com>
+ <417b456f-77b9-4e8f-9641-2ac8e2fb9cda@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <417b456f-77b9-4e8f-9641-2ac8e2fb9cda@suse.com>
 
-When mapping a buffer for DMA via .map_page or .map_sg DMA operations,
-there is no need to check the machine frames to be aligned according
-to the mapped areas size. All what is needed in these cases is that the
-buffer is contiguous at machine level.
+This is a multi-part message in MIME format.
+--------------FElgY7kss6sQyEaaJQXXc02P
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-So carve out the alignment check from range_straddles_page_boundary()
-and move it to a helper called by xen_swiotlb_alloc_coherent() and
-xen_swiotlb_free_coherent() directly.
 
-Fixes: 9f40ec84a797 ("xen/swiotlb: add alignment check for dma buffers")
-Reported-by: Jan Vejvalka <jan.vejvalka@lfmotol.cuni.cz>
-Tested-by: Jan Vejvalka <jan.vejvalka@lfmotol.cuni.cz>
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- drivers/xen/swiotlb-xen.c | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+On 2/11/25 11:01 AM, Jan Beulich wrote:
+> On 11.02.2025 10:53, Oleksii Kurochko wrote:
+>> On 2/10/25 5:19 PM, Jan Beulich wrote:
+>>> On 07.02.2025 21:07, Oleksii Kurochko wrote:
+>>>> +/*
+>>>> + * The canonical order of ISA extension names in the ISA string is defined in
+>>>> + * chapter 27 of the unprivileged specification.
+>>>> + *
+>>>> + * The specification uses vague wording, such as should, when it comes to
+>>>> + * ordering, so for our purposes the following rules apply:
+>>>> + *
+>>>> + * 1. All multi-letter extensions must be separated from other extensions by an
+>>>> + *    underscore.
+>>>> + *
+>>>> + * 2. Additional standard extensions (starting with 'Z') must be sorted after
+>>>> + *    single-letter extensions and before any higher-privileged extensions.
+>>>> + *
+>>>> + * 3. The first letter following the 'Z' conventionally indicates the most
+>>>> + *    closely related alphabetical extension category, IMAFDQLCBKJTPVH.
+>>>> + *    If multiple 'Z' extensions are named, they must be ordered first by
+>>>> + *    category, then alphabetically within a category.
+>>>> + *
+>>>> + * 4. Standard supervisor-level extensions (starting with 'S') must be listed
+>>>> + *    after standard unprivileged extensions.  If multiple supervisor-level
+>>>> + *    extensions are listed, they must be ordered alphabetically.
+>>>> + *
+>>>> + * 5. Standard machine-level extensions (starting with 'Zxm') must be listed
+>>>> + *    after any lower-privileged, standard extensions.  If multiple
+>>>> + *    machine-level extensions are listed, they must be ordered
+>>>> + *    alphabetically.
+>>>> + *
+>>>> + * 6. Non-standard extensions (starting with 'X') must be listed after all
+>>>> + *    standard extensions. If multiple non-standard extensions are listed, they
+>>>> + *    must be ordered alphabetically.
+>>>> + *
+>>>> + * An example string following the order is:
+>>>> + *    rv64imadc_zifoo_zigoo_zafoo_sbar_scar_zxmbaz_xqux_xrux
+>>>> + *
+>>>> + * New entries to this struct should follow the ordering rules described above.
+>>>> + *
+>>>> + * Extension name must be all lowercase (according to device-tree binding)
+>>>> + * and strncmp() is used in match_isa_ext() to compare extension names instead
+>>>> + * of strncasecmp().
+>>>> + */
+>>>> +const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
+>>>> +    RISCV_ISA_EXT_DATA(i, RISCV_ISA_EXT_i),
+>>>> +    RISCV_ISA_EXT_DATA(m, RISCV_ISA_EXT_m),
+>>>> +    RISCV_ISA_EXT_DATA(a, RISCV_ISA_EXT_a),
+>>>> +    RISCV_ISA_EXT_DATA(f, RISCV_ISA_EXT_f),
+>>>> +    RISCV_ISA_EXT_DATA(d, RISCV_ISA_EXT_d),
+>>>> +    RISCV_ISA_EXT_DATA(q, RISCV_ISA_EXT_q),
+>>>> +    RISCV_ISA_EXT_DATA(c, RISCV_ISA_EXT_c),
+>>>> +    RISCV_ISA_EXT_DATA(h, RISCV_ISA_EXT_h),
+>>>> +    RISCV_ISA_EXT_DATA(zicntr, RISCV_ISA_EXT_ZICNTR),
+>>>> +    RISCV_ISA_EXT_DATA(zicsr, RISCV_ISA_EXT_ZICSR),
+>>>> +    RISCV_ISA_EXT_DATA(zifencei, RISCV_ISA_EXT_ZIFENCEI),
+>>>> +    RISCV_ISA_EXT_DATA(zihintpause, RISCV_ISA_EXT_ZIHINTPAUSE),
+>>>> +    RISCV_ISA_EXT_DATA(zihpm, RISCV_ISA_EXT_ZIHPM),
+>>>> +    RISCV_ISA_EXT_DATA(zbb, RISCV_ISA_EXT_ZBB),
+>>>> +    RISCV_ISA_EXT_DATA(smaia, RISCV_ISA_EXT_SMAIA),
+>>>> +    RISCV_ISA_EXT_DATA(ssaia, RISCV_ISA_EXT_SSAIA),
+>>>> +};
+>>>> +
+>>>> +static const struct riscv_isa_ext_data __initconst required_extensions[] = {
+>>>> +    RISCV_ISA_EXT_DATA(i, RISCV_ISA_EXT_i),
+>>>> +    RISCV_ISA_EXT_DATA(m, RISCV_ISA_EXT_m),
+>>>> +    RISCV_ISA_EXT_DATA(a, RISCV_ISA_EXT_a),
+>>>> +    RISCV_ISA_EXT_DATA(f, RISCV_ISA_EXT_f),
+>>>> +    RISCV_ISA_EXT_DATA(d, RISCV_ISA_EXT_d),
+>>> Why would these last four (Zifencei below) not be included in #ifdef
+>>> CONFIG_RISCV_ISA_RV64G, just like ...
+>>>
+>>>> +#ifdef CONFIG_RISCV_ISA_C
+>>>> +    RISCV_ISA_EXT_DATA(c, RISCV_ISA_EXT_c),
+>>>> +#endif
+>>> .. this one is?
+>> I'm not sure if it was the best decision, but I did it this way because
+>> I believe other bitnesses (32, 128) will also need G. So, I left them
+>> without|#ifdef| to avoid adding|#ifdef CONFIG_RV{32,128}G| in the future.
+> That's fine, but then imo RISCV_ISA_RV64G ought to be dropped, and we use
+> G unconditionally. Whether that's a good move I don't know. I could
+> imagine embedded use cases which want to run an very simple processors.
+>
+>> I also spent some time considering whether 'f' and 'd' are necessary
+>> for Xen. In the end, I decided that if they aren't needed for Xen,
+>> it might be better not to use "G" for compilation and instead explicitly
+>> specify "ima". But it will be better to do as a separate patch (if it
+>> makes sense).
+> That's certainly an option; use of floating point registers / insns will
+> need suppressing one way or another anyway, sooner or later. And yes, I
+> agree this wants to be a separate change. Even their relative order is
+> not important, as long as things remain consistent at any point in time.
 
-diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index a337edcf8faf..26c62e0d34e9 100644
---- a/drivers/xen/swiotlb-xen.c
-+++ b/drivers/xen/swiotlb-xen.c
-@@ -74,19 +74,21 @@ static inline phys_addr_t xen_dma_to_phys(struct device *dev,
- 	return xen_bus_to_phys(dev, dma_to_phys(dev, dma_addr));
- }
- 
-+static inline bool range_requires_alignment(phys_addr_t p, size_t size)
-+{
-+	phys_addr_t algn = 1ULL << (get_order(size) + PAGE_SHIFT);
-+	phys_addr_t bus_addr = pfn_to_bfn(XEN_PFN_DOWN(p)) << XEN_PAGE_SHIFT;
+Actually, I think that we should drop 'f' and 'd' from required_extensions[]
+array as they aren't really needed for Xen. Or make them conditional just to
+be sure that if "G" was used for compilation and the code with using of them
+was generated then they are really supported by a h/w.
+
+Regarding #ifdef-ing with RISCV_ISA_RV64G, I think that we have to keep them
+mentioned unconditionally as 'i', 'm', 'a', 'zicsr' and 'zifencei' which are
+part of 'G' as all of them are needed by Xen to work.
+
+~ Oleksii
+
+
+--------------FElgY7kss6sQyEaaJQXXc02P
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2/11/25 11:01 AM, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:417b456f-77b9-4e8f-9641-2ac8e2fb9cda@suse.com">
+      <pre wrap="" class="moz-quote-pre">On 11.02.2025 10:53, Oleksii Kurochko wrote:
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">On 2/10/25 5:19 PM, Jan Beulich wrote:
+</pre>
+        <blockquote type="cite">
+          <pre wrap="" class="moz-quote-pre">On 07.02.2025 21:07, Oleksii Kurochko wrote:
+</pre>
+          <blockquote type="cite">
+            <pre wrap="" class="moz-quote-pre">+/*
++ * The canonical order of ISA extension names in the ISA string is defined in
++ * chapter 27 of the unprivileged specification.
++ *
++ * The specification uses vague wording, such as should, when it comes to
++ * ordering, so for our purposes the following rules apply:
++ *
++ * 1. All multi-letter extensions must be separated from other extensions by an
++ *    underscore.
++ *
++ * 2. Additional standard extensions (starting with 'Z') must be sorted after
++ *    single-letter extensions and before any higher-privileged extensions.
++ *
++ * 3. The first letter following the 'Z' conventionally indicates the most
++ *    closely related alphabetical extension category, IMAFDQLCBKJTPVH.
++ *    If multiple 'Z' extensions are named, they must be ordered first by
++ *    category, then alphabetically within a category.
++ *
++ * 4. Standard supervisor-level extensions (starting with 'S') must be listed
++ *    after standard unprivileged extensions.  If multiple supervisor-level
++ *    extensions are listed, they must be ordered alphabetically.
++ *
++ * 5. Standard machine-level extensions (starting with 'Zxm') must be listed
++ *    after any lower-privileged, standard extensions.  If multiple
++ *    machine-level extensions are listed, they must be ordered
++ *    alphabetically.
++ *
++ * 6. Non-standard extensions (starting with 'X') must be listed after all
++ *    standard extensions. If multiple non-standard extensions are listed, they
++ *    must be ordered alphabetically.
++ *
++ * An example string following the order is:
++ *    rv64imadc_zifoo_zigoo_zafoo_sbar_scar_zxmbaz_xqux_xrux
++ *
++ * New entries to this struct should follow the ordering rules described above.
++ *
++ * Extension name must be all lowercase (according to device-tree binding)
++ * and strncmp() is used in match_isa_ext() to compare extension names instead
++ * of strncasecmp().
++ */
++const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
++    RISCV_ISA_EXT_DATA(i, RISCV_ISA_EXT_i),
++    RISCV_ISA_EXT_DATA(m, RISCV_ISA_EXT_m),
++    RISCV_ISA_EXT_DATA(a, RISCV_ISA_EXT_a),
++    RISCV_ISA_EXT_DATA(f, RISCV_ISA_EXT_f),
++    RISCV_ISA_EXT_DATA(d, RISCV_ISA_EXT_d),
++    RISCV_ISA_EXT_DATA(q, RISCV_ISA_EXT_q),
++    RISCV_ISA_EXT_DATA(c, RISCV_ISA_EXT_c),
++    RISCV_ISA_EXT_DATA(h, RISCV_ISA_EXT_h),
++    RISCV_ISA_EXT_DATA(zicntr, RISCV_ISA_EXT_ZICNTR),
++    RISCV_ISA_EXT_DATA(zicsr, RISCV_ISA_EXT_ZICSR),
++    RISCV_ISA_EXT_DATA(zifencei, RISCV_ISA_EXT_ZIFENCEI),
++    RISCV_ISA_EXT_DATA(zihintpause, RISCV_ISA_EXT_ZIHINTPAUSE),
++    RISCV_ISA_EXT_DATA(zihpm, RISCV_ISA_EXT_ZIHPM),
++    RISCV_ISA_EXT_DATA(zbb, RISCV_ISA_EXT_ZBB),
++    RISCV_ISA_EXT_DATA(smaia, RISCV_ISA_EXT_SMAIA),
++    RISCV_ISA_EXT_DATA(ssaia, RISCV_ISA_EXT_SSAIA),
++};
 +
-+	return IS_ALIGNED(p, algn) && !IS_ALIGNED(bus_addr, algn);
-+}
-+
- static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
- {
- 	unsigned long next_bfn, xen_pfn = XEN_PFN_DOWN(p);
- 	unsigned int i, nr_pages = XEN_PFN_UP(xen_offset_in_page(p) + size);
--	phys_addr_t algn = 1ULL << (get_order(size) + PAGE_SHIFT);
- 
- 	next_bfn = pfn_to_bfn(xen_pfn);
- 
--	/* If buffer is physically aligned, ensure DMA alignment. */
--	if (IS_ALIGNED(p, algn) &&
--	    !IS_ALIGNED((phys_addr_t)next_bfn << XEN_PAGE_SHIFT, algn))
--		return 1;
--
- 	for (i = 1; i < nr_pages; i++)
- 		if (pfn_to_bfn(++xen_pfn) != ++next_bfn)
- 			return 1;
-@@ -156,7 +158,8 @@ xen_swiotlb_alloc_coherent(struct device *dev, size_t size,
- 
- 	*dma_handle = xen_phys_to_dma(dev, phys);
- 	if (*dma_handle + size - 1 > dma_mask ||
--	    range_straddles_page_boundary(phys, size)) {
-+	    range_straddles_page_boundary(phys, size) ||
-+	    range_requires_alignment(phys, size)) {
- 		if (xen_create_contiguous_region(phys, order, fls64(dma_mask),
- 				dma_handle) != 0)
- 			goto out_free_pages;
-@@ -182,7 +185,8 @@ xen_swiotlb_free_coherent(struct device *dev, size_t size, void *vaddr,
- 	size = ALIGN(size, XEN_PAGE_SIZE);
- 
- 	if (WARN_ON_ONCE(dma_handle + size - 1 > dev->coherent_dma_mask) ||
--	    WARN_ON_ONCE(range_straddles_page_boundary(phys, size)))
-+	    WARN_ON_ONCE(range_straddles_page_boundary(phys, size) ||
-+			 range_requires_alignment(phys, size)))
- 	    	return;
- 
- 	if (TestClearPageXenRemapped(virt_to_page(vaddr)))
--- 
-2.43.0
++static const struct riscv_isa_ext_data __initconst required_extensions[] = {
++    RISCV_ISA_EXT_DATA(i, RISCV_ISA_EXT_i),
++    RISCV_ISA_EXT_DATA(m, RISCV_ISA_EXT_m),
++    RISCV_ISA_EXT_DATA(a, RISCV_ISA_EXT_a),
++    RISCV_ISA_EXT_DATA(f, RISCV_ISA_EXT_f),
++    RISCV_ISA_EXT_DATA(d, RISCV_ISA_EXT_d),
+</pre>
+          </blockquote>
+          <pre wrap="" class="moz-quote-pre">Why would these last four (Zifencei below) not be included in #ifdef
+CONFIG_RISCV_ISA_RV64G, just like ...
 
+</pre>
+          <blockquote type="cite">
+            <pre wrap="" class="moz-quote-pre">+#ifdef CONFIG_RISCV_ISA_C
++    RISCV_ISA_EXT_DATA(c, RISCV_ISA_EXT_c),
++#endif
+</pre>
+          </blockquote>
+          <pre wrap="" class="moz-quote-pre">.. this one is?
+</pre>
+        </blockquote>
+        <pre wrap="" class="moz-quote-pre">
+I'm not sure if it was the best decision, but I did it this way because
+I believe other bitnesses (32, 128) will also need G. So, I left them
+without|#ifdef| to avoid adding|#ifdef CONFIG_RV{32,128}G| in the future.
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+That's fine, but then imo RISCV_ISA_RV64G ought to be dropped, and we use
+G unconditionally. Whether that's a good move I don't know. I could
+imagine embedded use cases which want to run an very simple processors.
+
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">I also spent some time considering whether 'f' and 'd' are necessary
+for Xen. In the end, I decided that if they aren't needed for Xen,
+it might be better not to use "G" for compilation and instead explicitly
+specify "ima". But it will be better to do as a separate patch (if it
+makes sense).
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+That's certainly an option; use of floating point registers / insns will
+need suppressing one way or another anyway, sooner or later. And yes, I
+agree this wants to be a separate change. Even their relative order is
+not important, as long as things remain consistent at any point in time.</pre>
+    </blockquote>
+    <pre>Actually, I think that we should drop 'f' and 'd' from required_extensions[]
+array as they aren't really needed for Xen. Or make them conditional just to
+be sure that if "G" was used for compilation and the code with using of them
+was generated then they are really supported by a h/w.
+
+Regarding #ifdef-ing with RISCV_ISA_RV64G, I think that we have to keep them
+mentioned unconditionally as 'i', 'm', 'a', 'zicsr' and 'zifencei' which are
+part of 'G' as all of them are needed by Xen to work.
+
+~ Oleksii
+
+
+</pre>
+  </body>
+</html>
+
+--------------FElgY7kss6sQyEaaJQXXc02P--
 
