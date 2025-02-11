@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39050C021A2
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Feb 2025 11:02:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.885347.1295162 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88796C021A6
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Feb 2025 11:02:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.885349.1295181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tho29-0005cc-SK; Tue, 11 Feb 2025 11:02:29 +0000
+	id 1tho2C-0006A4-Dw; Tue, 11 Feb 2025 11:02:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 885347.1295162; Tue, 11 Feb 2025 11:02:29 +0000
+Received: by outflank-mailman (output) from mailman id 885349.1295181; Tue, 11 Feb 2025 11:02:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tho29-0005cQ-MO; Tue, 11 Feb 2025 11:02:29 +0000
-Received: by outflank-mailman (input) for mailman id 885347;
- Tue, 11 Feb 2025 11:02:28 +0000
+	id 1tho2C-00069j-Ay; Tue, 11 Feb 2025 11:02:32 +0000
+Received: by outflank-mailman (input) for mailman id 885349;
+ Tue, 11 Feb 2025 11:02:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jP5V=VC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tho28-0005b1-Ca
- for xen-devel@lists.xenproject.org; Tue, 11 Feb 2025 11:02:28 +0000
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [2a00:1450:4864:20::430])
+ id 1tho2A-0005b1-B7
+ for xen-devel@lists.xenproject.org; Tue, 11 Feb 2025 11:02:30 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ad723bf9-e867-11ef-b3ef-695165c68f79;
- Tue, 11 Feb 2025 12:02:26 +0100 (CET)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-38dd93a4e8eso2084910f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 11 Feb 2025 03:02:26 -0800 (PST)
+ id aeea617c-e867-11ef-b3ef-695165c68f79;
+ Tue, 11 Feb 2025 12:02:28 +0100 (CET)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ab771575040so1043583266b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Feb 2025 03:02:28 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab7a7829d4csm645870866b.9.2025.02.11.03.02.24
+ a640c23a62f3a-ab7b7f98188sm473048166b.76.2025.02.11.03.02.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2025 03:02:24 -0800 (PST)
+ Tue, 11 Feb 2025 03:02:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,48 +46,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad723bf9-e867-11ef-b3ef-695165c68f79
+X-Inumbo-ID: aeea617c-e867-11ef-b3ef-695165c68f79
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1739271745; x=1739876545; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1739271748; x=1739876548; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xm1F4/LWDRjOr5tGbdwduMf0+aedjlnrUC4bJARj2yg=;
-        b=P5/4XsRVZRcB1OyMZgYEyvjfLBOmnHmERtfsyrqGJKfB23mK/zlepEvLDIQb0UmwGR
-         6QTqlhlbtkwo0QQF/ysZhqd7upyBLoLlU9tKwal8G8GNumuu0MDJ/z/uYtzWoaUp7PwV
-         TrwsRZ8uKGnNUqeRuksEDK/rLcKAlFW1YG4rY=
+        bh=vDaxzJFjL9hpy0bIqZLAOYXowlYPXeqf+Vn+cdNImxU=;
+        b=oOBYP8HwT1zDQ9k+1pbzp8t+xESGA9ggcbIVjxaAgxH3Cux8sqAZWZuvkzoa6jVP5I
+         vwVtQD7yznf4gw8WEs8TX97KGPPd55Nu96pcGQOZV0LTeMygClg/N6OsDa23M3owIhPx
+         YG8qjhRo6fQhDQKSzGArHK5NfLgmmkzt3/O20=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739271745; x=1739876545;
+        d=1e100.net; s=20230601; t=1739271748; x=1739876548;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xm1F4/LWDRjOr5tGbdwduMf0+aedjlnrUC4bJARj2yg=;
-        b=TMynutw1rXk2FweYQrjtee9bYMZj54x6KRpoR33MXMO+vkIYHG4SsvFhXsOMMI0EL7
-         SiX3iXXI3+Uj50XmmJTRSp5N6iC0gNwpkLDJ1jeSyrdQGjB7DAO0AGT697iXu5FZPGB5
-         7JbZDV9cf2NtkC79d12hu6xw5GaTfTc8/ga6xkew4X9/Zsjkas6wkkhcTF/sz+xZODHb
-         tf4AbJWQ2GsombKGhAfz2XI+8AydERpDL11np2nmQedpYDEDzXFH3Nw5iyJLL5uD7734
-         mgPv8jepWyY81/hRENkefXc2lU0TFWghcbPGIiqncL3xHVjrwwmynwYt3SqZ/d77K2NL
-         6Mtw==
-X-Gm-Message-State: AOJu0Yx2xhtxS6U3SrCCSw083iwZTp3aSQvvJB/6m331ZxKXeP1bUHWJ
-	5+oqhZIBdvaG8SQvRLken2oIQA3OQ0yO1PSD9v1L1AocVarKwaJ8f8xCE2bRnB9LJSst9Zdw5N3
-	0
-X-Gm-Gg: ASbGncsV+81TJMofhHK8SEKDJv+ZheX4Z7d0n5tJa/DntNS/6L/77sPZiAkqx5CBk9Q
-	bqn2W3X9qZk7RHPQP6tb1joPTFImhkcWl4gmkWcyzb8hP9qJcg1nfbNbZ4e/SktAQKO44JnvII7
-	2fGnKiyERK/mpLnahN07px/ae9k3ltu/27aLRkaDugbJntEWEpKVqJjdcuEncYIvyWfA9xdDMEU
-	haOriDOdh13WF4fW50qCGQUfkqi3LDAAUa3x8eKjUoILDZdVYLe46SkLsdOUzYSlAqaSz+nlSWG
-	i1yVLZA1OiZo+DyULwLk
-X-Google-Smtp-Source: AGHT+IFRf2jmgiUE8z1ItqEeZ+88FruhyR5Z+iCXHYTmzbTBggA3HeeCpC/GIxLHFe4bgiY+sHk4nQ==
-X-Received: by 2002:a5d:6d0c:0:b0:38d:df29:e14f with SMTP id ffacd0b85a97d-38ddf29e276mr7467246f8f.43.1739271745153;
-        Tue, 11 Feb 2025 03:02:25 -0800 (PST)
+        bh=vDaxzJFjL9hpy0bIqZLAOYXowlYPXeqf+Vn+cdNImxU=;
+        b=ZyqICxNMuCJvNx9reY6Xbn98KYb7a8G8Yc1ZWVhTrZIS1WICFxqUHd7mt+UOdSU0Kx
+         9C3XmHKW34VuNAnt2gkn5yyf5hl8XAduj9DSQ0rIxgjhJ3PbEfReHAq1nz/kTumb1jxk
+         xz2pfQ8Ah2cfD2zHXThgcr6uNrufOUpnIg1m4Vu0t3jtgP1sXM/MoJ8wlQNt1bN2tZ0k
+         0+miUYoZQWI0OXQtsWtSmUPzi80CpNWhqXJZIzavfzCA24msJftnGoyKLSS1vavHjGk7
+         e7xUSrfUmlr7TckgnRwJM3d2ye7b8IpFFH4b7yi0YqgUJQEZb5EC9t0dwEa73/wno50o
+         k2pQ==
+X-Gm-Message-State: AOJu0Yz+0iqfa/+BLLsRrv3uVcwn2VFqbHFMfjMvUyn57CSUn88SCLkk
+	iMIkaxW8wxpm+A7IMRgEfd9O9CzwHR39wO5J7YCLhYMLczK21Nyv9Da5fDYA60JYFHb2uJrJGDm
+	h
+X-Gm-Gg: ASbGncsXeJoRe35Nr/SpOILTXv7dO5+7D2SMsWsvbYR6WD4pncWBcofBCU77w8HLz4q
+	bhv4WHPElFNN71k2CUUhQiR3WeXr2noDn0sGPnJPhl4EeyaavCkuBgUwSWTP+6bJsJxeRp1m+dC
+	jKvP9t4rnJ/comyneAyKCe0DcNjJRt8eCBRotI/RtyWGiuQszJy7IzimCP4WQxM9wBfAzahLKJm
+	/ZH3hFdf8ZMgYWr+tt+UaKlMnrXgjpToCCT97DFoahDhVj++ShfpspHU45s0/tmgm3rNdTpiB6q
+	XvsKSHoQOidw6ZsHLyZu
+X-Google-Smtp-Source: AGHT+IE3VU7GGVwqyYi0lesUwWrbkuUFVf0cckS2J1esvlsayG+nhNwB9dau/k65MPZHr4ICV+bNjQ==
+X-Received: by 2002:a17:907:a089:b0:ab6:f4eb:91aa with SMTP id a640c23a62f3a-ab7dafef037mr246749066b.10.1739271747828;
+        Tue, 11 Feb 2025 03:02:27 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: oleksii.kurochko@gmail.com,
 	Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH for-4.20 v3 2/5] x86/irq: drop fixup_irqs() parameters
-Date: Tue, 11 Feb 2025 12:02:06 +0100
-Message-ID: <20250211110209.86974-3-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH for-4.20 v3 4/5] x86/pci: disable MSI(-X) on all devices at shutdown
+Date: Tue, 11 Feb 2025 12:02:08 +0100
+Message-ID: <20250211110209.86974-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20250211110209.86974-1-roger.pau@citrix.com>
 References: <20250211110209.86974-1-roger.pau@citrix.com>
@@ -95,141 +99,176 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The solely remaining caller always passes the same globally available
-parameters.  Drop the parameters and modify fixup_irqs() to use
-cpu_online_map in place of the input mask parameter, and always be verbose
-in its output printing.
+Attempt to disable MSI(-X) capabilities on all PCI devices know by Xen at
+shutdown.  Doing such disabling should facilitate kexec chained kernel from
+booting more reliably, as device MSI(-X) interrupt generation should be
+quiesced.  Only attempt to disable MSI(-X) on all devices in the crash
+context if the PCI lock is not taken, otherwise the PCI device list could
+be in an inconsistent state.
 
-While there remove some of the checks given the single context where
-fixup_irqs() is now called, which should always be in the CPU offline path,
-after the CPU going offline has been removed from cpu_online_map.
-
-No functional change intended.
+Disabling MSI(-X) should prevent "Receive accept error" being raised as a
+result of non-disabled interrupts targeting offline CPUs.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-There's more cleanup that can likely be done here, but it's best if such
-cleanup is done after the cpu_mask and old_cpu_mask irq_desc fields are
-converted from cpu masks to integers, as logic delivery mode should never
-be used for external interrupts now.
----
- xen/arch/x86/include/asm/irq.h |  4 ++--
- xen/arch/x86/irq.c             | 30 +++++++++++++-----------------
- xen/arch/x86/smpboot.c         |  2 +-
- 3 files changed, 16 insertions(+), 20 deletions(-)
+Changes since v2:
+ - Disable MSI(-X) ahead of IO-APIC disabling.
+ - Duplicate and expand comment about pci_iterate_devices() in function
+   declaration.
+ - Add assert interrupts are disabled in pci_iterate_devices().
+ - Only walk PCI device list on crash context if the pci lock is not taken.
 
-diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
-index d3bc76806808..354868ba31ab 100644
---- a/xen/arch/x86/include/asm/irq.h
-+++ b/xen/arch/x86/include/asm/irq.h
-@@ -168,8 +168,8 @@ void free_domain_pirqs(struct domain *d);
- int map_domain_emuirq_pirq(struct domain *d, int pirq, int emuirq);
- int unmap_domain_pirq_emuirq(struct domain *d, int pirq);
+Changes since v1:
+ - Split from bigger patch.
+ - Iterate over all devices, even if the handler returns failure.
+---
+ xen/arch/x86/crash.c           |  7 ++++++
+ xen/arch/x86/include/asm/msi.h |  1 +
+ xen/arch/x86/msi.c             | 18 ++++++++++++++++
+ xen/arch/x86/smp.c             |  1 +
+ xen/drivers/passthrough/pci.c  | 39 ++++++++++++++++++++++++++++++++++
+ xen/include/xen/pci.h          |  7 ++++++
+ 6 files changed, 73 insertions(+)
+
+diff --git a/xen/arch/x86/crash.c b/xen/arch/x86/crash.c
+index a789416ca3ae..621af81acc09 100644
+--- a/xen/arch/x86/crash.c
++++ b/xen/arch/x86/crash.c
+@@ -175,6 +175,13 @@ static void nmi_shootdown_cpus(void)
+          */
+         x2apic_enabled = (current_local_apic_mode() == APIC_MODE_X2APIC);
  
--/* Evacuate interrupts assigned to CPUs not present in the input CPU mask. */
--void fixup_irqs(const cpumask_t *mask, bool verbose);
-+/* Evacuate interrupts assigned to CPUs not present in the CPU online map. */
-+void fixup_irqs(void);
- void fixup_eoi(void);
- 
- int  init_irq_data(void);
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index e56bacc88d84..ff3ac832f4b9 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -2590,17 +2590,21 @@ static int __init cf_check setup_dump_irqs(void)
- }
- __initcall(setup_dump_irqs);
- 
--/* Evacuate interrupts assigned to CPUs not present in the input CPU mask. */
--void fixup_irqs(const cpumask_t *mask, bool verbose)
-+/* Evacuate interrupts assigned to CPUs not present in the CPU online map. */
-+void fixup_irqs(void)
- {
-+    const unsigned int cpu = smp_processor_id();
-     unsigned int irq;
-     static int warned;
-     struct irq_desc *desc;
- 
-+    /* Only to be called from the context of a CPU going offline. */
-+    ASSERT(!cpu_online(cpu));
++        if ( !pcidevs_locked() )
++            /*
++             * Assume the PCI device list to be in a consistent state if the
++             * lock is not held when the crash happened.
++             */
++            pci_disable_msi_all();
 +
-     for ( irq = 0; irq < nr_irqs; irq++ )
-     {
-         bool break_affinity = false, set_affinity = true, check_irr = false;
--        unsigned int vector, cpu = smp_processor_id();
-+        unsigned int vector;
-         cpumask_t *affinity = this_cpu(scratch_cpumask);
- 
-         if ( irq == 2 )
-@@ -2644,12 +2648,6 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
-         }
- 
-         if ( desc->arch.move_in_progress &&
--             /*
--              * Only attempt to adjust the mask if the current CPU is going
--              * offline, otherwise the whole system is going down and leaving
--              * stale data in the masks is fine.
--              */
--             !cpu_online(cpu) &&
-              cpumask_test_cpu(cpu, desc->arch.old_cpu_mask) )
-         {
-             /*
-@@ -2691,16 +2689,17 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
- 
-         /*
-          * Avoid shuffling the interrupt around as long as current target CPUs
--         * are a subset of the input mask.  What fixup_irqs() cares about is
--         * evacuating interrupts from CPUs not in the input mask.
-+         * are a subset of the online mask.  What fixup_irqs() cares about is
-+         * evacuating interrupts from CPUs not in the online mask.
-          */
--        if ( !desc->action || cpumask_subset(desc->arch.cpu_mask, mask) )
-+        if ( !desc->action || cpumask_subset(desc->arch.cpu_mask,
-+                                             &cpu_online_map) )
-         {
-             spin_unlock(&desc->lock);
-             continue;
-         }
- 
--        if ( !cpumask_intersects(mask, desc->affinity) )
-+        if ( !cpumask_intersects(&cpu_online_map, desc->affinity) )
-         {
-             break_affinity = true;
-             cpumask_setall(affinity);
-@@ -2716,7 +2715,7 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
-          * the interrupt, signal to check whether there are any pending vectors
-          * to be handled in the local APIC after the interrupt has been moved.
-          */
--        if ( !cpu_online(cpu) && cpumask_test_cpu(cpu, desc->arch.cpu_mask) )
-+        if ( cpumask_test_cpu(cpu, desc->arch.cpu_mask) )
-             check_irr = true;
- 
-         if ( desc->handler->set_affinity )
-@@ -2743,9 +2742,6 @@ void fixup_irqs(const cpumask_t *mask, bool verbose)
- 
-         spin_unlock(&desc->lock);
- 
--        if ( !verbose )
--            continue;
--
-         if ( !set_affinity )
-             printk("Cannot set affinity for IRQ%u\n", irq);
-         else if ( break_affinity )
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 79a79c54c304..891a29fca146 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -1282,7 +1282,7 @@ void __cpu_disable(void)
- 
-     /* It's now safe to remove this processor from the online map */
-     cpumask_clear_cpu(cpu, &cpu_online_map);
--    fixup_irqs(&cpu_online_map, 1);
-+    fixup_irqs();
-     fixup_eoi();
+         disable_IO_APIC();
+         hpet_disable();
+     }
+diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
+index 63adb19820e8..7f9e531f73e6 100644
+--- a/xen/arch/x86/include/asm/msi.h
++++ b/xen/arch/x86/include/asm/msi.h
+@@ -86,6 +86,7 @@ extern int pci_enable_msi(struct pci_dev *pdev, struct msi_info *msi,
+ extern void pci_disable_msi(struct msi_desc *msi_desc);
+ extern int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool off);
+ extern void pci_cleanup_msi(struct pci_dev *pdev);
++extern void pci_disable_msi_all(void);
+ extern int setup_msi_irq(struct irq_desc *desc, struct msi_desc *msidesc);
+ extern int __setup_msi_irq(struct irq_desc *desc, struct msi_desc *msidesc,
+                            hw_irq_controller *handler);
+diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
+index e2360579deda..c9fe942c46f3 100644
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -1248,6 +1248,24 @@ void pci_cleanup_msi(struct pci_dev *pdev)
+     msi_free_irqs(pdev);
  }
  
++static int cf_check disable_msi(struct pci_dev *pdev, void *arg)
++{
++    msi_set_enable(pdev, 0);
++    msix_set_enable(pdev, 0);
++
++    return 0;
++}
++
++/* Disable MSI and/or MSI-X on all devices known by Xen. */
++void pci_disable_msi_all(void)
++{
++    int rc = pci_iterate_devices(disable_msi, NULL);
++
++    if ( rc )
++        printk(XENLOG_ERR
++               "Failed to disable MSI(-X) on some devices: %d\n", rc);
++}
++
+ int pci_reset_msix_state(struct pci_dev *pdev)
+ {
+     unsigned int pos = pdev->msix_pos;
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index 4d29a09a9a95..28bc041e03a9 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -374,6 +374,7 @@ void smp_send_stop(void)
+         smp_call_function(stop_this_cpu, &stop_aps, 0);
+ 
+     local_irq_disable();
++    pci_disable_msi_all();
+     disable_IO_APIC();
+     hpet_disable();
+ 
+diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+index f398c3aa65dc..6c6b18a16dbc 100644
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -1802,6 +1802,45 @@ int iommu_do_pci_domctl(
+     return ret;
+ }
+ 
++struct segment_iter {
++    int (*handler)(struct pci_dev *pdev, void *arg);
++    void *arg;
++    int rc;
++};
++
++static int cf_check iterate_all(struct pci_seg *pseg, void *arg)
++{
++    struct segment_iter *iter = arg;
++    struct pci_dev *pdev;
++
++    list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
++    {
++        int rc = iter->handler(pdev, iter->arg);
++
++        if ( !iter->rc )
++            iter->rc = rc;
++    }
++
++    return 0;
++}
++
++/*
++ * Iterate without locking or preemption over all PCI devices known by Xen.
++ * Expected to be called with interrupts disabled.
++ */
++int pci_iterate_devices(int (*handler)(struct pci_dev *pdev, void *arg),
++                        void *arg)
++{
++    struct segment_iter iter = {
++        .handler = handler,
++        .arg = arg,
++    };
++
++    ASSERT(!local_irq_is_enabled());
++
++    return pci_segments_iterate(iterate_all, &iter) ?: iter.rc;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
+index f784e9116059..815589dcea16 100644
+--- a/xen/include/xen/pci.h
++++ b/xen/include/xen/pci.h
+@@ -226,6 +226,13 @@ struct pci_dev *pci_get_pdev(const struct domain *d, pci_sbdf_t sbdf);
+ struct pci_dev *pci_get_real_pdev(pci_sbdf_t sbdf);
+ void pci_check_disable_device(u16 seg, u8 bus, u8 devfn);
+ 
++/*
++ * Iterate without locking or preemption over all PCI devices known by Xen.
++ * Expected to be called with interrupts disabled.
++ */
++int pci_iterate_devices(int (*handler)(struct pci_dev *pdev, void *arg),
++                        void *arg);
++
+ uint8_t pci_conf_read8(pci_sbdf_t sbdf, unsigned int reg);
+ uint16_t pci_conf_read16(pci_sbdf_t sbdf, unsigned int reg);
+ uint32_t pci_conf_read32(pci_sbdf_t sbdf, unsigned int reg);
 -- 
 2.46.0
 
