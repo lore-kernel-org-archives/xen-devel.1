@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18E49C021A0
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Feb 2025 16:50:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.886617.1296277 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC4CC02198
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Feb 2025 16:50:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.886619.1296297 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiFwK-00008K-NV; Wed, 12 Feb 2025 16:50:20 +0000
+	id 1tiFwM-0000eR-FD; Wed, 12 Feb 2025 16:50:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 886617.1296277; Wed, 12 Feb 2025 16:50:20 +0000
+Received: by outflank-mailman (output) from mailman id 886619.1296297; Wed, 12 Feb 2025 16:50:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiFwK-000086-Jq; Wed, 12 Feb 2025 16:50:20 +0000
-Received: by outflank-mailman (input) for mailman id 886617;
- Wed, 12 Feb 2025 16:50:18 +0000
+	id 1tiFwM-0000cF-BL; Wed, 12 Feb 2025 16:50:22 +0000
+Received: by outflank-mailman (input) for mailman id 886619;
+ Wed, 12 Feb 2025 16:50:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mGeD=VD=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tiFwI-0007h7-SN
- for xen-devel@lists.xenproject.org; Wed, 12 Feb 2025 16:50:18 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
+ id 1tiFwL-0007h7-JA
+ for xen-devel@lists.xenproject.org; Wed, 12 Feb 2025 16:50:21 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 700f1a13-e961-11ef-b3ef-695165c68f79;
- Wed, 12 Feb 2025 17:50:17 +0100 (CET)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-545074b88aaso4345955e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Feb 2025 08:50:17 -0800 (PST)
+ id 71b25ebd-e961-11ef-b3ef-695165c68f79;
+ Wed, 12 Feb 2025 17:50:20 +0100 (CET)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5450cf0cb07so2977493e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Feb 2025 08:50:20 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-54504fc26b3sm1409118e87.44.2025.02.12.08.50.15
+ 2adb3069b0e04-54504fc26b3sm1409118e87.44.2025.02.12.08.50.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Feb 2025 08:50:16 -0800 (PST)
+ Wed, 12 Feb 2025 08:50:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,40 +46,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 700f1a13-e961-11ef-b3ef-695165c68f79
+X-Inumbo-ID: 71b25ebd-e961-11ef-b3ef-695165c68f79
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739379017; x=1739983817; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oH0texVkmm3jWhvVk9ubyUsQTjJOc/sBkyDaeYcpo8Q=;
-        b=IlwlQGoGcJtY5ARCYHGeMwS4Cj3+xhnPEbctcVilb8jM3C5Swtj8+X6i/YAqw6uAzm
-         iAETO8jOHYlTcK5/J+k3EZm0Schjo7CM5RCPCeBqvSicITQ07UDu2LCbh8vQ3jSTZ5ZV
-         BvTLpE3aE9wogAfUYaS24LYAkcZxDQYxN6wXKivZ2y0Zbix0AdLztGRVdzv2E9+T0l9O
-         TWfD/tnwjDv8yC30IMYCUjnaWAaEea1Mq2Z7/4hH0zaMGrR40NWSi08f5x6wqqQpy9NH
-         sPiETkP0zoCAms3WC8m9HRPk8UgajCx7zzLik37ziEUqjGtHezcRZdgUBGewQ9uoEl8e
-         knqQ==
+        d=gmail.com; s=20230601; t=1739379019; x=1739983819; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=T+n6oADRrQ8i7LaTPgH/X75bMuImDuCw7dC3gadSd7I=;
+        b=CBJOxyWofPS1A6jr1CyfmlREaOPPY2AalyaFdEFPDPn3jrTtQYKeUsdXpa0WcrKMYP
+         y8V0AX73HndYzsn8SJMh04Mae9QKR1gcw7PnIdUooV/4ktQhzsUHiQP54Y3on54smoxH
+         AJmxRJEUOzDI8e40jzdA1erf5Jyxc8KLmDroIpQUjFTxjH3/M84C3Wgkaiu6zRt1JyOh
+         M5t3ErVtz4CKVkXK/a23gd9qu66C4nnOQg6KcHCXF3+sebSgHfj8M8sPYAff+cGK9SR5
+         aBWEyQprJXm+seu5wxNkQ11Ct/hcBXYDZfXoP676V+LA/788vwrV2GG9Q1VAtswM47Jn
+         xVYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739379017; x=1739983817;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oH0texVkmm3jWhvVk9ubyUsQTjJOc/sBkyDaeYcpo8Q=;
-        b=hn0sFVX3y67pEG+25JOzWF8bw1iIbWcJp7eHsLh3nEkAOkIPnCG/2MNp/di61C2PHN
-         du9sZtnsOz6fQ3tcwuJaurbTgpDET/62aRnTZtsAqJUb/X+6Nim/DDnKweB0uggqKqmE
-         bumfuhRvX61tETYSyrUfOtiuXrt7nwd0ebNt+gjIUvJnkq5i+bwxKQokZ+CQ51z0QrPb
-         X9slDj4YpaOal8Vpwyaaw6u+o0iFKNj1jgtDcUZrw4x3K9vbYcQdytOX07ZHZhQyGNpU
-         FkxwQSsnNFRomde5X/9GVVCLgEUcQtb8DdDRq8ZkmHqjGwrLgBi1+Dx2PxMrOeM/Qc3C
-         dIsQ==
-X-Gm-Message-State: AOJu0YwwAL8jK13GUo8Kz/UJeJK+iG4+UTCbc2rUFlQxI01dmMH2c9+k
-	YarmAmImGyKN3eWg4Yx2ItFecabapCH1oM9i0QbqfshaWIJB3lpzypaeRw==
-X-Gm-Gg: ASbGncsLKiS1TzpMeyMfO4CJvz+Ei4Dv2yy5Qy3v4TrNKTQtnowRhsqyo/FTBGJFJCU
-	BosHOqwCHurtWl6KyrlS4/heKSxSdQnghdHNkvSTFODUcjgViyYdvuCrRHvQyMk1wlc6ijLG2B2
-	PJdqvyeq5OERpFYb0uf6+j1Rc8wRDRkInw+ru6r0j4OksrtPYwnPy7xWpDwcE8fbUKUVMqb8SOa
-	nS0C5GZFrsFY8aG2ZSCC4/bQxhmow3NogZKNktCz6IepZuAvJy/HDbmsnQI3s6i1tz89Zq/dz9w
-	un3/FE4hiIDoTktP
-X-Google-Smtp-Source: AGHT+IEqESNRwSlNW/hFvBTd87wt1pYzEOWQD/LrJniY8HD9FCLyp3s15gtyu0UUqBE4dm5lUzqr8w==
-X-Received: by 2002:a05:6512:5c6:b0:545:1240:2500 with SMTP id 2adb3069b0e04-545181893bemr1101239e87.35.1739379016439;
-        Wed, 12 Feb 2025 08:50:16 -0800 (PST)
+        d=1e100.net; s=20230601; t=1739379019; x=1739983819;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=T+n6oADRrQ8i7LaTPgH/X75bMuImDuCw7dC3gadSd7I=;
+        b=cgOPK+ba7Cyi1aMaVZD0RVDW/3xOyQnxurf/Sqle2Z5BAcZ5qQa1bdVoLRzKDjmIOK
+         QXTN4xKEwuAw6hBVA7AuzIzkBdaI1yatx8E99GiWl8FVbjhQG9X69CwZTjcsek7MfhSJ
+         cxhZrQ57Nx/ucne7NkXxHJZ9hldzgNEBejT022+9IbTsCM7FiRycNdkLlDIGRJV8OMJm
+         ZHmRoc3SVpVKFwQ+azBvwEqJ7U816xsM9sF5six+X8QN3bh+qMJolCHe9ACK5Q0X8CxL
+         S5sojnqO1n5ersa1jHJaamPsxxzaAVqAcGDa0X3go1xx8OsOHqXB86Y5ZLbzHoIurldm
+         V35g==
+X-Gm-Message-State: AOJu0YwTxrdZ0jx9uUczCk2UyxdZVvYa5HdR2cb4l67zZ6u/F5yknaQq
+	g0Dvjqhv3vOpnvkUazkFrXD9Ov9CXr15tselDwHlLJ8yRti6un7EHcEfMg==
+X-Gm-Gg: ASbGncvKQtheqW/cik5Yc/+pm93nGETCJALFWcYcDssr1JRAC/EquKX3TVBPDsgqCB5
+	5pBsKG/xJrP84z8PDzBpynPtawt1MY5tPslwujR/U6lodhUVIFPcT8UoWEpiMKyVKj3++RrhomJ
+	gmQmBwir2v1u2PSoWwDle1wHL3XK5qzdEYOQv11kt0rlijD/FZ5nShGHP7mpe429YzrLiD/f7z2
+	gYLVWdPgjoikLLJZaNgaK3QMTn21mELNWD+rwe+oXTHJhJRvWsVanFPFVvA7WZi7hxq0sZVuJR5
+	l2dzYfYeMoO0vHgu
+X-Google-Smtp-Source: AGHT+IEWO5cM5QRrUrpjHA5E/Edd6WQtBeoKODdO/q2MX6j1JVPB///ibyED7OqqoxrImtU0BsfEpQ==
+X-Received: by 2002:a05:6512:2394:b0:545:e2e:843f with SMTP id 2adb3069b0e04-5451810bd21mr1224552e87.13.1739379018619;
+        Wed, 12 Feb 2025 08:50:18 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -93,54 +94,86 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH for 4.20? v4 0/3] Fixes for vmap_to_mfn() and pt_mapping_level
-Date: Wed, 12 Feb 2025 17:50:10 +0100
-Message-ID: <cover.1739363240.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH for 4.20? v4 2/3] xen/riscv: update defintion of vmap_to_mfn()
+Date: Wed, 12 Feb 2025 17:50:12 +0100
+Message-ID: <aba5cd4c47cc7d9be55fd255b5b60664b6a0ddf6.1739363240.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1739363240.git.oleksii.kurochko@gmail.com>
+References: <cover.1739363240.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce pt_walk(), which does software page table walking to resolve the
-following issues:
-1. vmap_to_mfn() uses virt_to_maddr(), which is designed to work with VA
-   from either the direct map region or Xen's linkage region (XEN_VIRT_START),
-   thereby an assertion will occur if it is used with other regions, in
-   particular for the VMAP region. The solution is usage of pt_walk() for
-   vmap_to_mfn().
-2. pt_mapping_level() returns incorrect page table level in the case when
-   mfn==INVALID_MFN when, for example, VA was mapped to PA using 4k mapping,
-   but during destroying/modification pt_mapping_level() could return incorrect
-   page table level as when mfn==INVALID_MFN then only VA is taking into account
-   for page table level calculation and so if VA is page table level 1 aligned
-   then page_mapping_level() will return level 1 ( instead of level 0 as VA was
-   mapped to PA using 4k mapping so there is incostinency here ).
-   The solution is to set level=CONFIG_PAGING_TABLE to tell pt_update() algo
-   that it should use pt_walk() to find proper page table entry instead of
-   using for searching of page table entry based on precalculated by
-   pt_mapping_level() `level` and `order` values.
+vmap_to_mfn() uses virt_to_maddr(), which is designed to work with VA from
+either the direct map region or Xen's linkage region (XEN_VIRT_START).
+An assertion will occur if it is used with other regions, in particular for
+the VMAP region.
 
-It would be nice  to have these fixes in Xen 4.20 but isn't really critical as
-there is no any users for RISC-V port at this moment.
+Since RISC-V lacks a hardware feature to request the MMU to translate a VA to
+a PA (as Arm does, for example), software page table walking (pt_walk()) is
+used for the VMAP region to obtain the mfn from pte_t.
 
+To avoid introduce a circular dependency between asm/mm.h and asm/page.h by
+including each other, the static inline function  _vmap_to_mfn() is introduced
+in asm/page.h, as it uses struct pte_t and pte_is_mapping() from asm/page.h.
+_vmap_to_mfn() is then reused in the definition of vmap_to_mfn() macro in
+asm/mm.h.
+
+Fixes: 7db8d2bd9b ("xen/riscv: add minimal stuff to mm.h to build full Xen")
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v4:
- - please look at a specific patch.
+- Convert _vmap_to_mfn() macro to static inline function.
+- Update the commit message: change macro to static inline function for
+  _vmap_to_mfn().
 ---
-Changes in v2-v3:
- - update the commit message.
- - other changes look in specific patch.
+Changes in v3:
+- Move vmap_to_mfn_ to asm/page.h to deal with circular dependency.
+- Convert vmap_to_mfn_() to macros.
+- Rename vmap_to_mfn_ to _vmap_to_mfn.
+- Update _vmap_to_mfn() to work with pte_t instead of pte_t*.
+- Add parentheses around va argument for macros vmap_to_mfn().
+- Updated the commit message.
 ---
+Changes in v2:
+ - Update defintion of vmap_to_mfn() as pt_walk() now returns pte_t
+   instead of paddr_t.
+ - Update the commit message.
+---
+ xen/arch/riscv/include/asm/mm.h   | 2 +-
+ xen/arch/riscv/include/asm/page.h | 7 +++++++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-Oleksii Kurochko (3):
-  xen/riscv: implement software page table walking
-  xen/riscv: update defintion of vmap_to_mfn()
-  xen/riscv: update mfn calculation in pt_mapping_level()
-
- xen/arch/riscv/include/asm/mm.h   |   2 +-
- xen/arch/riscv/include/asm/page.h |   9 ++
- xen/arch/riscv/pt.c               | 159 +++++++++++++++++++++++-------
- 3 files changed, 135 insertions(+), 35 deletions(-)
-
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 292aa48fc1..4035cd400a 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -23,7 +23,7 @@ extern vaddr_t directmap_virt_start;
+ #define gaddr_to_gfn(ga)    _gfn(paddr_to_pfn(ga))
+ #define mfn_to_maddr(mfn)   pfn_to_paddr(mfn_x(mfn))
+ #define maddr_to_mfn(ma)    _mfn(paddr_to_pfn(ma))
+-#define vmap_to_mfn(va)     maddr_to_mfn(virt_to_maddr((vaddr_t)(va)))
++#define vmap_to_mfn(va)     _vmap_to_mfn((vaddr_t)(va))
+ #define vmap_to_page(va)    mfn_to_page(vmap_to_mfn(va))
+ 
+ static inline void *maddr_to_virt(paddr_t ma)
+diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
+index 0439a1a9ee..6ed570b478 100644
+--- a/xen/arch/riscv/include/asm/page.h
++++ b/xen/arch/riscv/include/asm/page.h
+@@ -210,6 +210,13 @@ static inline pte_t pte_from_mfn(mfn_t mfn, unsigned int flags)
+ 
+ pte_t pt_walk(vaddr_t va, unsigned int *pte_level);
+ 
++static inline mfn_t _vmap_to_mfn(vaddr_t va)
++{
++    pte_t entry = pt_walk(va, NULL);
++    BUG_ON(!pte_is_mapping(entry));
++    return mfn_from_pte(entry);
++}
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* ASM__RISCV__PAGE_H */
 -- 
 2.48.1
 
