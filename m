@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85727C02198
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Feb 2025 01:28:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.886996.1296578 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23659C02198
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Feb 2025 01:28:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.886998.1296598 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiO1J-0002ti-8X; Thu, 13 Feb 2025 01:28:01 +0000
+	id 1tiO1K-0003NN-QC; Thu, 13 Feb 2025 01:28:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 886996.1296578; Thu, 13 Feb 2025 01:28:01 +0000
+Received: by outflank-mailman (output) from mailman id 886998.1296598; Thu, 13 Feb 2025 01:28:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiO1J-0002tX-4c; Thu, 13 Feb 2025 01:28:01 +0000
-Received: by outflank-mailman (input) for mailman id 886996;
- Thu, 13 Feb 2025 01:27:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tiO1K-0003ND-My; Thu, 13 Feb 2025 01:28:02 +0000
+Received: by outflank-mailman (input) for mailman id 886998;
+ Thu, 13 Feb 2025 01:28:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZTDb=VE=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1tiO1H-0002et-Av
- for xen-devel@lists.xenproject.org; Thu, 13 Feb 2025 01:27:59 +0000
+ id 1tiO1J-0002en-Vn
+ for xen-devel@lists.xenproject.org; Thu, 13 Feb 2025 01:28:01 +0000
 Received: from fhigh-b5-smtp.messagingengine.com
  (fhigh-b5-smtp.messagingengine.com [202.12.124.156])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c09cc945-e9a9-11ef-a075-877d107080fb;
- Thu, 13 Feb 2025 02:27:57 +0100 (CET)
-Received: from phl-compute-09.internal (phl-compute-09.phl.internal
- [10.202.2.49])
- by mailfhigh.stl.internal (Postfix) with ESMTP id D6A0A254022D;
- Wed, 12 Feb 2025 20:27:55 -0500 (EST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c280dd4a-e9a9-11ef-b3ef-695165c68f79;
+ Thu, 13 Feb 2025 02:28:00 +0100 (CET)
+Received: from phl-compute-06.internal (phl-compute-06.phl.internal
+ [10.202.2.46])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 0E96E2540229;
+ Wed, 12 Feb 2025 20:27:59 -0500 (EST)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-09.internal (MEProxy); Wed, 12 Feb 2025 20:27:55 -0500
+ by phl-compute-06.internal (MEProxy); Wed, 12 Feb 2025 20:27:59 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 12 Feb 2025 20:27:54 -0500 (EST)
+ 12 Feb 2025 20:27:57 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,63 +47,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c09cc945-e9a9-11ef-a075-877d107080fb
+X-Inumbo-ID: c280dd4a-e9a9-11ef-b3ef-695165c68f79
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1739410075; x=1739496475; bh=4H8q28RBwO
-	0fsczKjYmAk0JYmP0oRIZ18QAagB4kiT4=; b=dcYhXqCJ56FQOFWGPPfiBh14i0
-	nSgNBQDws1MNZE9r6PCShR6u9M1Vl+W6u1QHN8FRUW6YKJ6KDYKan8/V8d8/ggDn
-	DZW0ljwYOiXNN53JrsVjosSFCZGVds+Zn7NqkRzMgqUEn2UY881C7suP5aiPcffm
-	W9xrIzWVC57uIDTQ6LRa9C4AzsAxbQj0poiR1h8Pt3S9LsR5tFP2oZ8nA199ORPG
-	aH2LILMU2nXBNSvg0vu2N687WlTdTZ/z95/dDrkz3KDhMqFStUd/Cx5LCesQBEdZ
-	BcSAUoku4ccPoi6zzUeTvA7zJ+tv0W0It7lgYn4wcIQDgCdaltWVcEPgNXeA==
+	:subject:to:to; s=fm3; t=1739410078; x=1739496478; bh=8M1xzm8hV9
+	Um78SmNZrELAQJGXvbIf1E+3WQK8Hqgk0=; b=iLjcB+doguuTEFaTnkK6vUJjsa
+	DPnKdkLLjYvS2HwcpPaVmcPJPdsddfn5ZY3oY3dG6jM2FBoACLFF5KvCviFS8m5o
+	yFuTVR62czp4n6VR8169eMBtPDjUgR6CxdAjUXAqgWFdjzSErhs/N0nYw7CUkcoe
+	d9O2bp0xjtZx+nlVUNaQmkMtbCK38sc2oW8ZfqSZwCxc/Nlw6yHICUc9H9pxgF1y
+	cpmbyklXUDipvQOe43lUowi4Qh1o6JfCzHWvQZfSNPs8nB+31QuSe7h0HwY73tLH
+	NE6rfmb0w5/zNrZni3nmpNyXgCyXuJGbpKuw/4KmvGshgGz8QnBiCEl44r2g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1739410075; x=
-	1739496475; bh=4H8q28RBwO0fsczKjYmAk0JYmP0oRIZ18QAagB4kiT4=; b=0
-	1+/JjovSHQIFFr8ovqERoC5T3RkDmoW3Z5QyUUAR25rC+Izr+gIdinqISyK8osIe
-	ip73OuioZNihHr3iizYYGK4ZAEkwFo4lSNdv4YVc2Ums/Ro622T5JcaN1ZP4au69
-	6RPuTU8feiiqX/24v2S340W5NqjV8CgROVdXxuheG279KzDR6O794xi+l3bltqAr
-	4h0R3LbA9dlHHikOyBiMrGUcSBZh0QqWsKP+GJK/0UMLSkvy9m5cl9konZqTtCvz
-	sJ1gJdmrHCW3LN0sRYA7BjzNlpqiqp/v2Jirvoc68Rtp1vT5bRvrT/JuWv+TXDMc
-	WGZvUOGxRlu6vZtKr8bRQ==
-X-ME-Sender: <xms:m0qtZwuE0igDtuc51DvjFdXlySYZS7R1QWR0qKgx52xIRvyunM6dqw>
-    <xme:m0qtZ9c2XhBzR8i-RYzFRq5RFSc04jLvWNT5Gs7-hOMKRpeAwe4-yKmPE98j1GiY1
-    eEgj7EiaGmIIA>
-X-ME-Received: <xmr:m0qtZ7zb9pSUZyXvXzii6wDoUFODLtW4M0G5a-Usq_qvkM1vSkDbB6-zOvWQXOaN1DhsvEpo>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1739410078; x=
+	1739496478; bh=8M1xzm8hV9Um78SmNZrELAQJGXvbIf1E+3WQK8Hqgk0=; b=i
+	sYbeKuVh1bRNWGJPrJx22l/xR9HlLRFKQOZcLn4G54Nrvqm5t7rqiDt76Nknun0i
+	AHHgvt+VNVMldaRi2tsvLgTtQd8YTdW0VjLxfrgFShUJrXrwjz0q4T05vXZRUgZv
+	q4uJ2og491uL2k1wgUiyDX6aMMS5wPyVMo2L1xstO/KCsPFrZzvQmZ1hxlsIRyZW
+	U4gKLkDXegP2SKjUq3650LmkdFX3eosfEdgoFvM0mNLMLle0RlAvS1C97YiBqEJB
+	jnn9eYR7gDlUyRfj1mNi9W3wPgATgFRLM/Pd8WgP7Qic3CmfcqdesfKerl3Rtp30
+	iE6qMPqrBRPltDzJgKiAA==
+X-ME-Sender: <xms:nkqtZ9W61e0TJ9uW5LBXFtA9ssLLp1rQoJCYyFgTxeBXeYQlfbOjDA>
+    <xme:nkqtZ9kGLoQjEvI_GlwBDbCQW5WG4Q0Mc1SzEewCJy3LmRjojhQrDFPC1MG3nbru-
+    kdqp9s8BNsz1Q>
+X-ME-Received: <xmr:nkqtZ5Y4LBe31T1j9wWPUoRe--iumarvuXTdNN26h4srNnxbgFb1BdoSIdl2KlQeoT8uKrqA>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdegheeghecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
     uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
     hnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfgggtgfesthekredtredt
     jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
     eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
-    ggftrfgrthhtvghrnhepgfeuudehgfdvfeehhedujeehfeduveeugefhkefhheelgeevud
-    etueeiudfggfffnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
-    rhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-    dpnhgspghrtghpthhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepgigv
-    nhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoh
-    epmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgt
-    phhtthhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsg
-    gvlhhlihhniheskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:m0qtZzPjuRQNd9KLywpUq_azsejTO12J8RTI2BppCag_v_g-wBXP3Q>
-    <xmx:m0qtZw9Tjb5v7WY1WSAVf70EeI0dKdbyhDaAkH0kfk6MjpKlz2NVsA>
-    <xmx:m0qtZ7Vzhi9EPN2Vcr3JEt1q77fq38S3heM6ZuN4O-44dnubXFR1Ug>
-    <xmx:m0qtZ5dzrRu8ykXASFHQ-CdZVdCUTFk2vU1WF7VQG-fz23h6PyVJIQ>
-    <xmx:m0qtZ0Y-6x5fT8Q9u_XYrwFDb6Q1Uj5CuR3TXtKbVyPXuUcWqiP0lWrp>
+    ggftrfgrthhtvghrnhepudeuheehtefghfelhfffheevffeftefhteehtddtfeevfedvle
+    dvvdfhffevkeetnecuffhomhgrihhnpehgihhtlhgrsgdrtghordhjphdpghhithhlrggs
+    rdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
+    epmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgs
+    pghrtghpthhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdqug
+    gvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtohepmhgr
+    rhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgtphhtth
+    hopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsggvlhhl
+    ihhniheskhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:nkqtZwVI1htEc6CWkxKNI2GgOlk5GzhAVnvlkqfTV5N3EQUa99ymSQ>
+    <xmx:nkqtZ3ns0FV431ABhZdbNomXG9720BHL0Ju7bCFLlnKp_XrQ1xlmqw>
+    <xmx:nkqtZ9cB3Kzcu6tFNRsW_mNZlIAm5tCnlxpEALK_jHokIoasPxqqnA>
+    <xmx:nkqtZxGEJdoSfWSsYhO86qIgYQKKO6FafvVXirOPxLlIMqPxhu5x5A>
+    <xmx:nkqtZwAkQ2bEsYCCjV4LCikrK2mJK3dh3ZO_JUqA5Kyi7d_ilhSC2S-W>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/3] automation: skip building domU if there is no test defined for it
-Date: Thu, 13 Feb 2025 02:23:54 +0100
-Message-ID: <bcedc3d646e93a43525976fc4548a9c5e307b93a.1739409822.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v1 3/3] automation: allow selecting individual jobs via CI variables
+Date: Thu, 13 Feb 2025 02:23:56 +0100
+Message-ID: <90a256242870d1772bade171a7171d4e889f4e02.1739409822.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.0
 In-Reply-To: <cover.068c7421003863de7fca1cbe6aed2af000f061a7.1739409822.git-series.marmarek@invisiblethingslab.com>
 References: <cover.068c7421003863de7fca1cbe6aed2af000f061a7.1739409822.git-series.marmarek@invisiblethingslab.com>
@@ -111,96 +112,112 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This will be useful for later tests not using generic domU (unit tests,
-xtf etc).
+Debugging sometimes involves running specific jobs on different
+versions. It's useful to easily avoid running all of the not interesting
+ones (for given case) to save both time and CI resources. Doing so used
+to require changing the yaml files, usually in several places.
+Ease this step by adding SELECTED_JOBS_ONLY variable that takes a regex.
+Note that one needs to satisfy job dependencies on their own (for
+example if a test job needs a build job, that specific build job
+needs to be included too).
+
+The variable can be specified via Gitlab web UI when scheduling a
+pipeline, but it can be also set when doing git push directly:
+
+    git push -o ci.variable=SELECTED_JOBS_ONLY="/job1|job2/"
+
+More details at https://docs.gitlab.co.jp/ee/user/project/push_options.html
+
+The variable needs to include regex for selecting jobs, including
+enclosing slashes.
+A coma/space separated list of jobs to select would be friendlier UX,
+but unfortunately that is not supported:
+https://gitlab.com/gitlab-org/gitlab/-/issues/209904 (note the proposed
+workaround doesn't work for job-level CI_JOB_NAME).
+On the other hand, the regex is more flexible (one can select for
+example all arm32 jobs).
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- automation/scripts/qubes-x86-64.sh | 50 +++++++++++++++++++------------
- 1 file changed, 31 insertions(+), 19 deletions(-)
+This probably wants documenting beyond this commit message. I don't
+think we have any CI-related docs anywhere, do we? Some new file in
+docs/misc?
 
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 8a0b7bfbc0d0..7eb3ce1bf703 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -144,26 +144,28 @@ disk = [ ]
- ${domU_extra_config}
- "
+And also, it's possible to extend web ui for starting pipelines to
+include pre-defined variables. I use it in qubes here if you want to
+see:
+https://gitlab.com/QubesOS/qubes-continuous-integration/-/pipelines/new
+Does it make sense to include SELECTED_JOBS_ONLY this way too?
+Personally, I'll probably use it via cmdline push only anyway, but I
+don't know what workflows other people have.
+---
+ automation/gitlab-ci/build.yaml |  6 ++++++
+ automation/gitlab-ci/test.yaml  | 14 ++++++++++++++
+ 2 files changed, 20 insertions(+)
+
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 35e224366f62..f12de00a164a 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -12,6 +12,12 @@
+       - '*/*.log'
+     when: always
+   needs: []
++  rules:
++  - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
++    when: always
++  - if: $SELECTED_JOBS_ONLY
++    when: never
++  - when: on_success
  
--# DomU
--mkdir -p rootfs
--cd rootfs
--# fakeroot is needed to preserve device nodes in rootless podman container
--fakeroot -s ../fakeroot-save tar xzf ../binaries/initrd.tar.gz
--mkdir proc
--mkdir run
--mkdir srv
--mkdir sys
--rm var/run
--echo "#!/bin/sh
-+if [ -n "$domU_check" ]; then
-+    # DomU
-+    mkdir -p rootfs
-+    cd rootfs
-+    # fakeroot is needed to preserve device nodes in rootless podman container
-+    fakeroot -s ../fakeroot-save tar xzf ../binaries/initrd.tar.gz
-+    mkdir proc
-+    mkdir run
-+    mkdir srv
-+    mkdir sys
-+    rm var/run
-+    echo "#!/bin/sh
+ .gcc-tmpl:
+   variables: &gcc
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index c21a37933881..93632f1f9204 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -1,6 +1,11 @@
+ .test-jobs-common:
+   stage: test
+   image: ${XEN_REGISTRY}/${CONTAINER}
++  rules:
++  - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
++  - if: $SELECTED_JOBS_ONLY
++    when: never
++  - when: on_success
  
- ${domU_check}
- " > etc/local.d/xen.start
--chmod +x etc/local.d/xen.start
--echo "rc_verbose=yes" >> etc/rc.conf
--sed -i -e 's/^Welcome/domU \0/' etc/issue
--find . | fakeroot -i ../fakeroot-save cpio -H newc -o | gzip > ../binaries/domU-rootfs.cpio.gz
--cd ..
--rm -rf rootfs
-+    chmod +x etc/local.d/xen.start
-+    echo "rc_verbose=yes" >> etc/rc.conf
-+    sed -i -e 's/^Welcome/domU \0/' etc/issue
-+    find . | fakeroot -i ../fakeroot-save cpio -H newc -o | gzip > ../binaries/domU-rootfs.cpio.gz
-+    cd ..
-+    rm -rf rootfs
-+fi
- 
- # DOM0 rootfs
- mkdir -p rootfs
-@@ -188,11 +190,19 @@ ifconfig eth0 up
- ifconfig xenbr0 up
- ifconfig xenbr0 192.168.0.1
- 
-+" > etc/local.d/xen.start
-+
-+if [ -n "$domU_check" ]; then
-+    echo "
- # get domU console content into test log
- tail -F /var/log/xen/console/guest-domU.log 2>/dev/null | sed -e \"s/^/(domU) /\" &
- xl create /etc/xen/domU.cfg
- ${dom0_check}
--" > etc/local.d/xen.start
-+" >> etc/local.d/xen.start
-+else
-+    echo "${dom0_check}" >> etc/local.d/xen.start
-+fi
-+
- chmod +x etc/local.d/xen.start
- echo "$domU_config" > etc/xen/domU.cfg
- 
-@@ -201,7 +211,9 @@ echo "XENCONSOLED_TRACE=all" >> etc/default/xencommons
- echo "QEMU_XEN=/bin/false" >> etc/default/xencommons
- mkdir -p var/log/xen/console
- cp ../binaries/bzImage boot/vmlinuz
--cp ../binaries/domU-rootfs.cpio.gz boot/initrd-domU
-+if [ -n "$domU_check" ]; then
-+    cp ../binaries/domU-rootfs.cpio.gz boot/initrd-domU
-+fi
- find . | fakeroot -i ../fakeroot-save cpio -H newc -o | gzip > ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
+ .arm64-test-needs: &arm64-test-needs
+   - alpine-3.18-arm64-rootfs-export
+@@ -99,6 +104,9 @@
+       - '*.dtb'
+     when: always
+   rules:
++    - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
++    - if: $SELECTED_JOBS_ONLY
++      when: never
+     - if: $XILINX_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
+   tags:
+     - xilinx
+@@ -117,6 +125,9 @@
+       - '*.log'
+     when: always
+   rules:
++    - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
++    - if: $SELECTED_JOBS_ONLY
++      when: never
+     - if: $XILINX_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
+   tags:
+     - xilinx
+@@ -137,6 +148,9 @@
+       - '*.log'
+     when: always
+   rules:
++    - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
++    - if: $SELECTED_JOBS_ONLY
++      when: never
+     - if: $QUBES_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
+   tags:
+     - qubes-hw2
 -- 
 git-series 0.9.1
 
