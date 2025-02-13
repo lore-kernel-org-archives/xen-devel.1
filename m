@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A15C02198
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Feb 2025 01:28:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.886997.1296583 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD8F0C02198
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Feb 2025 01:35:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.887033.1296607 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiO1J-0002x7-Jb; Thu, 13 Feb 2025 01:28:01 +0000
+	id 1tiO7r-0005oq-LE; Thu, 13 Feb 2025 01:34:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 886997.1296583; Thu, 13 Feb 2025 01:28:01 +0000
+Received: by outflank-mailman (output) from mailman id 887033.1296607; Thu, 13 Feb 2025 01:34:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiO1J-0002ve-Dn; Thu, 13 Feb 2025 01:28:01 +0000
-Received: by outflank-mailman (input) for mailman id 886997;
- Thu, 13 Feb 2025 01:28:00 +0000
+	id 1tiO7r-0005oj-IT; Thu, 13 Feb 2025 01:34:47 +0000
+Received: by outflank-mailman (input) for mailman id 887033;
+ Thu, 13 Feb 2025 01:34:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZTDb=VE=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1tiO1I-0002en-3t
- for xen-devel@lists.xenproject.org; Thu, 13 Feb 2025 01:28:00 +0000
-Received: from fout-b4-smtp.messagingengine.com
- (fout-b4-smtp.messagingengine.com [202.12.124.147])
+ <SRS0=Q8TG=VE=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tiO7p-0005od-Rx
+ for xen-devel@lists.xenproject.org; Thu, 13 Feb 2025 01:34:45 +0000
+Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com
+ [2a00:1450:4864:20::343])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c18e9c8f-e9a9-11ef-b3ef-695165c68f79;
- Thu, 13 Feb 2025 02:27:58 +0100 (CET)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id 7388B1140115;
- Wed, 12 Feb 2025 20:27:57 -0500 (EST)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-05.internal (MEProxy); Wed, 12 Feb 2025 20:27:57 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 12 Feb 2025 20:27:56 -0500 (EST)
+ id b38f7676-e9aa-11ef-b3ef-695165c68f79;
+ Thu, 13 Feb 2025 02:34:44 +0100 (CET)
+Received: by mail-wm1-x343.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so2276575e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Feb 2025 17:34:43 -0800 (PST)
+Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f258b4335sm463982f8f.15.2025.02.12.17.34.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Feb 2025 17:34:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,268 +47,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c18e9c8f-e9a9-11ef-b3ef-695165c68f79
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1739410077; x=1739496477; bh=2LmMWXubmX
-	uwTO3Eqs6AeYprMTw7CSalB1/qW/l0z4k=; b=SxMX5OuVUmOiF1vlkTvRcKGhOM
-	rWxWbeCFr6FeY0N/MENxBXdzRbQdLogvurCyKQDpCFdOO2u1wpFZpGxwh1cs/dW/
-	zzHK2xUBcWlslJ8Qa79vfqQvVjXyWRGvJSghnWaTYgSTk5fKc0QS+0dd/0XVCzR8
-	1V0YBqWXkUy7UyIUjENGcu+xKKa4Cbz+Od4H82uDmQY0D4fTP1sFiRPskSpU0R58
-	Dg7+w/EtQ2WaVBRPy37jFn4t+aUSAiIbr3df6Z/wubhMB5lR7rVKQzVLoJGWOIeA
-	o3t2EHRokzytxneu1piy03rfZqZ+odeR6lLPsaY+CHKjyhaX0i8QiCEx7MgA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1739410077; x=
-	1739496477; bh=2LmMWXubmXuwTO3Eqs6AeYprMTw7CSalB1/qW/l0z4k=; b=e
-	hibIwpCF/6N/UF1GbysxB3NY/fUnpTUaV5aDgge+sGoNA8F1+EIAAh28V0IrDvnm
-	/WM0QcEZs0FHzXMN09MwdHJYDj7y3JnZubJyyV7IooiMu1W5nnyT3mJlBFfaId+L
-	kdJ9R5E8pum9xwEMWX++v7pg2YcMFaRD8vcLhKN30jAi/o0/D6e+gSl0q1n7hifs
-	JIKq0Abg7FGHf+RQUCNxktUrXR8qA8pT/+t7SVJ0hF2eiCkc4J5rV5RyubpeEQ5j
-	QGhh1ifmmv8kMHwW6GcqCkjYKuHJnN5xWLKxe0ngWA+0qXd21ltW5s05gwfy1IE4
-	weZWpvRDTVuptW6SKES9A==
-X-ME-Sender: <xms:nUqtZ9CbGe5bhRDJm-Mhc3AOV3SEMMx83DfdBcgHmC4avyCY2mmBgg>
-    <xme:nUqtZ7hTmq5evz5WFmPjojGfasJ9PQmtIpZxd1AP0-U4IrqGkpVytRjBGoEZHiPCU
-    xzA4JWgMaSO0A>
-X-ME-Received: <xmr:nUqtZ4lN7bMx7GGegyNG_9y5qbpjiK27OFgOjDnKNJ-r3OwE1uvbYNubHwsNmNCGxKxFZ_y7>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdegheeghecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
-    uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
-    hnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfgggtgfesthekredtredt
-    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
-    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
-    ggftrfgrthhtvghrnhepgfeuudehgfdvfeehhedujeehfeduveeugefhkefhheelgeevud
-    etueeiudfggfffnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
-    rhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-    dpnhgspghrtghpthhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepgigv
-    nhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoh
-    epmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgt
-    phhtthhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsg
-    gvlhhlihhniheskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:nUqtZ3yF4ly3We3yBufvtduQp6B2oA12hr4QN6q83r4ppvBGsB759g>
-    <xmx:nUqtZyQC9OL6LC-3Q9shWLG9X7eFfOACHyb71f2WkciyDxN6X-DlXw>
-    <xmx:nUqtZ6bd540hcVTy3CmDsg_qXL1Uj6qn6vghFny5QuhyCR3vl0-gTw>
-    <xmx:nUqtZzQVgnhBUk24l1yHg0CfkHnhTD1RC9-KtXH6tnp82QcgTRhblQ>
-    <xmx:nUqtZ4OWZQXO7NzEL9LRdLp7S_fOtEFsB2vZtN34YTHt1k6wgXOLN64F>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 2/3] automation: add jobs running tests from tools/tests/*
-Date: Thu, 13 Feb 2025 02:23:55 +0100
-Message-ID: <3fbb4c6be9d9190bb2bd6427ab0f0a933c95dde1.1739409822.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.48.0
-In-Reply-To: <cover.068c7421003863de7fca1cbe6aed2af000f061a7.1739409822.git-series.marmarek@invisiblethingslab.com>
-References: <cover.068c7421003863de7fca1cbe6aed2af000f061a7.1739409822.git-series.marmarek@invisiblethingslab.com>
+X-Inumbo-ID: b38f7676-e9aa-11ef-b3ef-695165c68f79
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1739410483; x=1740015283; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=QXhL3yCjNajGXTBvimFymfEIzganVGmH8aiVRhf3nAc=;
+        b=tq+NcV4bYlcTJk4lPUvjEhNhD6mfUDUQGB0OdPtS8L/0jemQ9McEf7GCdFZO7s+0si
+         9M4ibA+cYo7l8ZDfQkZsBtbijGlsrwnHyzHG+d5gLmkJ/R/MOgyXakx/hJWWvc4jMpua
+         jgxptsTd7v91c5fN00G4oN/pe/2tgDsKcvNiY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739410483; x=1740015283;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QXhL3yCjNajGXTBvimFymfEIzganVGmH8aiVRhf3nAc=;
+        b=U+Ndjh99PR1Dd7FJ2PmQbTD8nchUNnXlYeGuio9GfUbM+GGZfFsK7bmxRZQFk/PfVN
+         zuB+lAmF//7NL/9ev1XqXUxG07SIef/WJ2gJstC4LoDw5cnQD9r18upZVTWfhIwmYnRj
+         qWuS4ce/X8IMnKUJ1hyaT4Qz9rErewiCgsZII91TfO1yYtk+1VDn3HYllxs1vbIHKthj
+         R2XUyerUlGJNc7MAjRYOhVxvq4cZRHvUubFdwanenwSZn0Bt60i2caWn1RHW3EW8Ebjt
+         WFmb076guwr9gsuW462c63iafZLw2COr/U5F0e0+D2tB0Sfe+KbXX0M+CJaflTZG1C49
+         4e+g==
+X-Forwarded-Encrypted: i=1; AJvYcCW2N3romTrmgxGnyIkiNQEgp0QOqmuBM26b4ze0xjx+NT71uUvSVcB6ESQtURgMMylRuEbfhYJQmqE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwTAe2M4IoCENBSVgzvByV4MSY4/yj8A158rFMljGduvy5xbr4o
+	kYKtiMyweQFgXLz8y4XOJVq0DmnYVVxswDnop7Xo8+lobAmMUqqb10Bd+nUE5YkHK9sUn2vxwFn
+	2ALnT+Q==
+X-Gm-Gg: ASbGncvrA0iqgdDnAmbNUfvfVdt98inUQrTfHnwUHwBCjzSAeponrIf8shHupNJHgto
+	EFVzRRRdFQmtT01of/2QInQe3DkaU9tGETze0FNh+i3NQ1S1uP1OUU126lE9y9zUZMbSwpmGqsX
+	1y7OsYsXj6Bi3N3MD1aWi0QV0JH40aqm7X9qxNkmS8vDOzad5Sa161XjsTLubVC5gPERNbqgWrj
+	KTTNuKeMPPFTvcy6BfJpzDRw6X7bMjbEnHxDNbLEDcOQZ1rPgLRLYDRrW/3dcShFt9UrbxnzxOU
+	xdf7SmQDfYzNsE1qluyhgBqcgq0dGvaGZNaHBtbGApybAQlp/zBWHUM=
+X-Google-Smtp-Source: AGHT+IFGlf4JqJBi7NZE+ioH19qXpdwVtqHLZnXvtbv9fDQS5GJfFUchrYJwHqpa5FApnRCzVhmVsQ==
+X-Received: by 2002:a05:600c:2294:b0:439:6030:9b8d with SMTP id 5b1f17b1804b1-43960309c5dmr13001445e9.29.1739410483350;
+        Wed, 12 Feb 2025 17:34:43 -0800 (PST)
+Message-ID: <1823d604-aa29-4828-a954-b8a08fbdbda7@citrix.com>
+Date: Thu, 13 Feb 2025 01:34:41 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: struct mctelem_cookie missing definition
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>
+References: <alpine.DEB.2.22.394.2502121721490.619090@ubuntu-linux-20-04-desktop>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <alpine.DEB.2.22.394.2502121721490.619090@ubuntu-linux-20-04-desktop>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-There are a bunch of tests in tools/tests/, let them run in CI.
-For each subdirectory expect "make run" will run the test, and observe
-its exit code. This way, adding new tests is easy, and they will be
-automatically picked up.
+On 13/02/2025 1:25 am, Stefano Stabellini wrote:
+> Hi all,
+>
+> I am looking through the few remaining MISRA violations that we have
+> left.  One of them is R11.2:
+>
+> https://saas.eclairit.com:3787/fs/var/local/eclair/xen-project.ecdf/xen-project/hardware/xen/ECLAIR_normal/staging/X86_64/9118578464/PROJECT.ecd;/by_service/MC3A2.R11.2.html#{%22select%22:true,%22selection%22:{%22hiddenAreaKinds%22:[],%22hiddenSubareaKinds%22:[],%22show%22:false,%22selector%22:{%22enabled%22:true,%22negated%22:true,%22kind%22:0,%22domain%22:%22kind%22,%22inputs%22:[{%22enabled%22:true,%22text%22:%22violation%22}]}}}
+>
+> Specifically, mctelem_cookie_t is a pointer to incomplete type and
+> therefore COOKIE2MCTE triggers a "conversion between a pointer to an
+> incomplete type and any other type".
+>
+> mctelem_cookie_t is defined as:
+>
+> typedef struct mctelem_cookie *mctelem_cookie_t;
+>
+> I am looking through the code and I genuinely cannot find the definition
+> of struct mctelem_cookie.
+>
+> If mctelem_cookie_t is only used as a pointer, wouldn't it make more
+> sense to do:
+>
+> typedef struct mctelem_ent *mctelem_cookie_t;
+>
+> ?
+>
+> What am I missing?
 
-For better visibility, log test output to junit xml format, and let
-gitlab ingest it. Set SUT_ADDR variable with name/address of the system
-under test, so a network can be used to extract the file. The actual
-address is set using DHCP. And for the test internal network, still add
-the 192.168.0.1 IP (but don't replace the DHCP-provided one).
+Nothing.  Or perhaps the twisted thinking of the original author.
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
- automation/gitlab-ci/test.yaml     | 23 +++++++++++++++-
- automation/scripts/build           |  1 +-
- automation/scripts/qubes-x86-64.sh | 27 +++++++++++++++++-
- automation/scripts/run-tools-tests | 47 +++++++++++++++++++++++++++++++-
- 4 files changed, 97 insertions(+), 1 deletion(-)
- create mode 100755 automation/scripts/run-tools-tests
+It is genuinely a pointer type (== known size) which you can't deference
+(because there is no definition), and can only operate on by casting to
+an integer.  Except the code also requires it to be a uint64_t which is
+why there's some fun disabling of relevant hypercalls for compat guests.
 
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 1822e3ea5fd7..c21a37933881 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -130,6 +130,7 @@
-     PCIDEV: "03:00.0"
-     PCIDEV_INTR: "MSI-X"
-     CONSOLE_OPTS: "console=com1 com1=115200,8n1"
-+    SUT_ADDR: test-2.testnet
-   artifacts:
-     paths:
-       - smoke.serial
-@@ -263,6 +264,28 @@ adl-pvshim-x86-64-gcc-debug:
-     - *x86-64-test-needs
-     - alpine-3.18-gcc-debug
- 
-+adl-tools-tests-pv-x86-64-gcc-debug:
-+  extends: .adl-x86-64
-+  script:
-+    - ./automation/scripts/qubes-x86-64.sh tools-tests-pv 2>&1 | tee ${LOGFILE}
-+  artifacts:
-+    reports:
-+      junit: tests-junit.xml
-+  needs:
-+    - *x86-64-test-needs
-+    - alpine-3.18-gcc-debug
-+
-+adl-tools-tests-pvh-x86-64-gcc-debug:
-+  extends: .adl-x86-64
-+  script:
-+    - ./automation/scripts/qubes-x86-64.sh tools-tests-pvh 2>&1 | tee ${LOGFILE}
-+  artifacts:
-+    reports:
-+      junit: tests-junit.xml
-+  needs:
-+    - *x86-64-test-needs
-+    - alpine-3.18-gcc-debug
-+
- zen3p-smoke-x86-64-gcc-debug:
-   extends: .zen3p-x86-64
-   script:
-diff --git a/automation/scripts/build b/automation/scripts/build
-index 952599cc25c2..522efe774ef3 100755
---- a/automation/scripts/build
-+++ b/automation/scripts/build
-@@ -109,5 +109,6 @@ else
-     # even though dist/ contains everything, while some containers don't even
-     # build Xen
-     cp -r dist binaries/
-+    cp -r tools/tests binaries/
-     collect_xen_artefacts
- fi
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 7eb3ce1bf703..81d239cc8b75 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -10,6 +10,8 @@ set -ex
- #  - pci-pv         PV dom0,  PV domU + PCI Passthrough
- #  - pvshim         PV dom0,  PVSHIM domU
- #  - s3             PV dom0,  S3 suspend/resume
-+#  - tools-tests-pv PV dom0, run tests from tools/tests/*
-+#  - tools-tests-pvh PVH dom0, run tests from tools/tests/*
- test_variant=$1
- 
- ### defaults
-@@ -19,6 +21,7 @@ timeout=120
- domU_type="pvh"
- domU_vif="'bridge=xenbr0',"
- domU_extra_config=
-+retrieve_xml=
- 
- case "${test_variant}" in
-     ### test: smoke test & smoke test PVH & smoke test HVM & smoke test PVSHIM
-@@ -126,6 +129,21 @@ done
- "
-         ;;
- 
-+    ### tests: tools-tests-pv, tools-tests-pvh
-+    "tools-tests-pv"|"tools-tests-pvh")
-+        retrieve_xml=1
-+        passed="test passed"
-+        domU_check=""
-+        dom0_check="
-+/tests/run-tools-tests /tests /tmp/tests-junit.xml && echo \"${passed}\"
-+nc -l -p 8080 < /tmp/tests-junit.xml >/dev/null &
-+"
-+        if [ "${test_variant}" = "tools-tests-pvh" ]; then
-+            extra_xen_opts="dom0=pvh"
-+        fi
-+
-+        ;;
-+
-     *)
-         echo "Unrecognised test_variant '${test_variant}'" >&2
-         exit 1
-@@ -178,6 +196,8 @@ mkdir srv
- mkdir sys
- rm var/run
- cp -ar ../binaries/dist/install/* .
-+cp -ar ../binaries/tests .
-+cp -a ../automation/scripts/run-tools-tests tests/
- 
- echo "#!/bin/bash
- 
-@@ -188,7 +208,8 @@ brctl addbr xenbr0
- brctl addif xenbr0 eth0
- ifconfig eth0 up
- ifconfig xenbr0 up
--ifconfig xenbr0 192.168.0.1
-+timeout 30s udhcpc -i xenbr0
-+ip addr add dev xenbr0 192.168.0.1/24
- 
- " > etc/local.d/xen.start
- 
-@@ -272,6 +293,10 @@ if [ $timeout -le 0 ]; then
-     exit 1
- fi
- 
-+if [ -n "$retrieve_xml" ]; then
-+    nc -w 10 "$SUT_ADDR" 8080 > tests-junit.xml </dev/null
-+fi
-+
- sleep 1
- 
- (grep -q "^Welcome to Alpine Linux" smoke.serial && grep -q "${passed}" smoke.serial) || exit 1
-diff --git a/automation/scripts/run-tools-tests b/automation/scripts/run-tools-tests
-new file mode 100755
-index 000000000000..242a9edad941
---- /dev/null
-+++ b/automation/scripts/run-tools-tests
-@@ -0,0 +1,47 @@
-+#!/bin/sh
-+
-+usage() {
-+    echo "Usage: $0 tests-dir xml-out"
-+}
-+
-+xml_out=$2
-+if [ -z "$xml_out" ]; then
-+  xml_out=/dev/null
-+fi
-+printf '<?xml version="1.0" encoding="UTF-8"?>\n' > "$xml_out"
-+printf '<testsuites name="tools.tests">\n' >> "$xml_out"
-+printf ' <testsuite name="tools.tests">\n' >> "$xml_out"
-+failed=
-+for dir in "$1"/*; do
-+    [ -d "$dir" ] || continue
-+    echo "Running test in $dir"
-+    printf '  <testcase name="%s">\n' "$dir" >> "$xml_out"
-+    ret=
-+    for f in "$dir"/*; do
-+        [ -f "$f" ] || continue
-+        [ -x "$f" ] || continue
-+        "$f" 2>&1 | tee /tmp/out
-+        ret=$?
-+        if [ "$ret" -ne 0 ]; then
-+            echo "FAILED"
-+            failed+=" $dir"
-+            printf '   <failure type="failure" message="binary %s exited with code %d">\n' "$f" "$ret" >> "$xml_out"
-+            # TODO: could use xml escaping... but current tests seems to
-+            # produce sane output
-+            cat /tmp/out >> "$xml_out"
-+            printf '   </failure>\n' "$f" "$ret" >> "$xml_out"
-+        else
-+            echo "PASSED"
-+        fi
-+    done
-+    if [ -z "$ret" ]; then
-+        printf '   <skipped type="skipped" message="test not found"/>\n' >> "$xml_out"
-+    fi
-+    printf '  </testcase>\n' "$dir" >> "$xml_out"
-+done
-+printf ' </testsuite>\n' >> "$xml_out"
-+printf '</testsuites>\n' >> "$xml_out"
-+
-+if [ -n "$failed" ]; then
-+    exit 1
-+fi
--- 
-git-series 0.9.1
+If someone could find the time to file it in /dev/null and replace it
+with literally anything else, I'd be very thankful.
+
+~Andrew
 
