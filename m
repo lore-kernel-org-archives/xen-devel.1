@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76602C02198
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Feb 2025 01:26:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.886985.1296557 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB78BC02198
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Feb 2025 01:28:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.886995.1296568 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiNzK-00029l-ME; Thu, 13 Feb 2025 01:25:58 +0000
+	id 1tiO1I-0002fB-25; Thu, 13 Feb 2025 01:28:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 886985.1296557; Thu, 13 Feb 2025 01:25:58 +0000
+Received: by outflank-mailman (output) from mailman id 886995.1296568; Thu, 13 Feb 2025 01:28:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tiNzK-00029e-JV; Thu, 13 Feb 2025 01:25:58 +0000
-Received: by outflank-mailman (input) for mailman id 886985;
- Thu, 13 Feb 2025 01:25:57 +0000
+	id 1tiO1H-0002f4-Ul; Thu, 13 Feb 2025 01:27:59 +0000
+Received: by outflank-mailman (input) for mailman id 886995;
+ Thu, 13 Feb 2025 01:27:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IJm2=VE=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1tiNzJ-00029Y-M4
- for xen-devel@lists.xenproject.org; Thu, 13 Feb 2025 01:25:57 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ <SRS0=ZTDb=VE=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1tiO1G-0002en-MM
+ for xen-devel@lists.xenproject.org; Thu, 13 Feb 2025 01:27:58 +0000
+Received: from fout-b4-smtp.messagingengine.com
+ (fout-b4-smtp.messagingengine.com [202.12.124.147])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 76fe1c19-e9a9-11ef-b3ef-695165c68f79;
- Thu, 13 Feb 2025 02:25:53 +0100 (CET)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 891605C634D;
- Thu, 13 Feb 2025 01:25:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24B7DC4CEDF;
- Thu, 13 Feb 2025 01:25:51 +0000 (UTC)
+ id bfb456da-e9a9-11ef-b3ef-695165c68f79;
+ Thu, 13 Feb 2025 02:27:55 +0100 (CET)
+Received: from phl-compute-01.internal (phl-compute-01.phl.internal
+ [10.202.2.41])
+ by mailfout.stl.internal (Postfix) with ESMTP id 2F7411140149;
+ Wed, 12 Feb 2025 20:27:54 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-01.internal (MEProxy); Wed, 12 Feb 2025 20:27:54 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 12 Feb 2025 20:27:53 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,58 +47,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76fe1c19-e9a9-11ef-b3ef-695165c68f79
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1739409951;
-	bh=GeCeotpOAjnCJizZpOps2jIFM6vLzfj+FV4o9Gy/gbo=;
-	h=Date:From:To:cc:Subject:From;
-	b=oeDk1jO166pkrU8dgeRLYUpHx2hK4cjoZoz5Yn8zdTr0bZXXamO9wajJFdDQYiVP5
-	 +uspYhVajGmbXhgc/e6n2yrdnVE/dWqIfhC1TehySZoy/325q146F7R49wlU2DbtFl
-	 3yK9V4eD0yE+HD0E97PVL8WO+UX6YeZXvTz1k/7mkxLMbdWyGVmYeiLAeIcaHnpmGW
-	 YQCkBvn0cvNkDdpOfmgzwnxzR21v1IM0XhQjULZmRPmYd9rg5/ZvSLHR9DtuBEmPYM
-	 La6WSx7ufDvUH6en/HPjWGP+1PBMURrl00x0hAxRM+UOSHyEjNH9BOw6cCz+lMICNs
-	 ESAZbB5qKpzUw==
-Date: Wed, 12 Feb 2025 17:25:49 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+X-Inumbo-ID: bfb456da-e9a9-11ef-b3ef-695165c68f79
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm3;
+	 t=1739410074; x=1739496474; bh=gVYarZS/Yh3zmSotdl7/1+0CpZQ3iQrg
+	kI4mB4LGJiU=; b=AlTs/dwB+ZGCPYjgp5HHKe9JpwexPTlyi54y+nf2mHDTwwFF
+	B8wj8JzE1EFXkSzVqCsPjr1nbwtmGrc+Ve0urbkhDdR5ViP6NUjIbC0GYPVs7JaL
+	MOyyjcVVWP6+SsxyQ3s5C8XWQsJBed3wwEojRoCNLwliQdJwZ+NYRq2lRV/ZApMI
+	nbzAWtvg+jBS/MMbX/eAHKefjnIkcZ840fXSJ4ZyeGjwa2kVhCoVQocEUxgpHrRu
+	p9mxUgAOwXS94iBn2wUtAp4aBFPIkPStrj9/+N6gX2BjVrkloUbCU6bZwRMxs6Mf
+	z3IWYr6VSg1GyEb1kituKHsq8bN3EFSzdanowg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm3; t=1739410074; x=1739496474; bh=gVYarZS/Yh3zmSotdl7/1+0CpZQ3
+	iQrgkI4mB4LGJiU=; b=o3L56Qo/A3/yYWz/CLxokbEHtmnZKXCs/sZkPNqE3Hpm
+	GtZkpgdHaek4aX5rG559KPaGKwQP6B4KhBaI3rWZpWxarvIUYAr0VrlTZTx0IN3m
+	JBSoVzsjlc5EZb7+/0oZr2EEm5atTcQhtHxCvrMJSIxRxCIeaQQ8k0uOvS+gpU8H
+	7/Kd+eapKkmX7Lozhh+GxOh8gqs9kYCCnRAkHSO3VXUjRYI8YQivY9aFco8iHI1q
+	brnVgjWL8j9pYX0YOQw6SKWw5b5cJbkd/VCaNIJtjicpP07+p1tYFqryManjTX7n
+	a3Q4zdkmD5s5/SkUPSDBr2JwVSyW/86vymlqUPOBiw==
+X-ME-Sender: <xms:mUqtZ-c5mMbS3gsjLOYqDDalwRJ9TVVLbMUC-VRxf6M1jMWab6Z3mA>
+    <xme:mUqtZ4NNwE27SNOf4XDfKvYTjnaUfdvFirzYU5QzW28Egmv6Ksvx0gBeZlIX_Rz3y
+    w9YSbAoD4qbkQ>
+X-ME-Received: <xmr:mUqtZ_gKqeb6hp6Cu9vnLGrTH68iOZ_Y_LejfMzSk_wLjB2q_uSAoYlPnu038z9V10cUCgyA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdegheeghecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+    uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecunecujfgurhephffvve
+    fufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghkucforghrtgiihihk
+    ohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthh
+    hinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeelkefhudelteelleelteet
+    veeffeetffekteetjeehlefggeekleeghefhtdehvdenucevlhhushhtvghrufhiiigvpe
+    dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghl
+    vghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopedvpdhmohguvgepshhmth
+    hpohhuthdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhj
+    vggtthdrohhrghdprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthh
+    hinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:mUqtZ7_nV4fLQk5E11dXTsbh3b9TzNp9r7gvgAzoFMME_rMRMjzGbg>
+    <xmx:mUqtZ6sK-xyN7toOj1EC0Yj6-yvlp-2-0Zk9WMdSKY4pdBZX7ol4Yg>
+    <xmx:mUqtZyHJA4MaYLrjJAkXwZvbovHT4Yw14fLS9A-zYRv_DkpAYZD5rw>
+    <xmx:mUqtZ5PaWarayrTm0nEeiKVmgOhtlNd7sa9OXgrFJgGTpXVq784lVw>
+    <xmx:mkqtZz6ifiTcVXto_mInnji3wR1ljAa9seyoROCxkek6mZ6ZkZd1zwwq>
+Feedback-ID: i1568416f:Fastmail
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-cc: sstabellini@kernel.org, Jan Beulich <jbeulich@suse.com>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: struct mctelem_cookie missing definition
-Message-ID: <alpine.DEB.2.22.394.2502121721490.619090@ubuntu-linux-20-04-desktop>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v1 0/3] Few CI improvements
+Date: Thu, 13 Feb 2025 02:23:53 +0100
+Message-ID: <cover.068c7421003863de7fca1cbe6aed2af000f061a7.1739409822.git-series.marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.48.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi all,
+- Add some more test jobs
+- Allow selecting individual jobs, without editing yaml files
 
-I am looking through the few remaining MISRA violations that we have
-left.  One of them is R11.2:
+I don't think it needs to be included in 4.20, but may be considered later for
+backporting.
 
-https://saas.eclairit.com:3787/fs/var/local/eclair/xen-project.ecdf/xen-project/hardware/xen/ECLAIR_normal/staging/X86_64/9118578464/PROJECT.ecd;/by_service/MC3A2.R11.2.html#{%22select%22:true,%22selection%22:{%22hiddenAreaKinds%22:[],%22hiddenSubareaKinds%22:[],%22show%22:false,%22selector%22:{%22enabled%22:true,%22negated%22:true,%22kind%22:0,%22domain%22:%22kind%22,%22inputs%22:[{%22enabled%22:true,%22text%22:%22violation%22}]}}}
+Marek Marczykowski-Górecki (3):
+  automation: skip building domU if there is no test defined for it
+  automation: add jobs running tests from tools/tests/*
+  automation: allow selecting individual jobs via CI variables
 
-Specifically, mctelem_cookie_t is a pointer to incomplete type and
-therefore COOKIE2MCTE triggers a "conversion between a pointer to an
-incomplete type and any other type".
+ automation/gitlab-ci/build.yaml    |  6 ++-
+ automation/gitlab-ci/test.yaml     | 37 +++++++++++++++-
+ automation/scripts/build           |  1 +-
+ automation/scripts/qubes-x86-64.sh | 77 ++++++++++++++++++++++---------
+ automation/scripts/run-tools-tests | 47 +++++++++++++++++++-
+ 5 files changed, 148 insertions(+), 20 deletions(-)
+ create mode 100755 automation/scripts/run-tools-tests
 
-mctelem_cookie_t is defined as:
-
-typedef struct mctelem_cookie *mctelem_cookie_t;
-
-I am looking through the code and I genuinely cannot find the definition
-of struct mctelem_cookie.
-
-If mctelem_cookie_t is only used as a pointer, wouldn't it make more
-sense to do:
-
-typedef struct mctelem_ent *mctelem_cookie_t;
-
-?
-
-What am I missing?
-
-Cheers,
-
-Stefano
+base-commit: 819c3cb186a86ef3e04fb5af4d9f9f6de032c3ee
+-- 
+git-series 0.9.1
 
