@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 600A0C021A7
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 01:28:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.888256.1297646 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3A7C021A0
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 01:37:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.888305.1297696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tikVQ-0005O7-Kj; Fri, 14 Feb 2025 01:28:36 +0000
+	id 1tikdT-0000tN-Om; Fri, 14 Feb 2025 01:36:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 888256.1297646; Fri, 14 Feb 2025 01:28:36 +0000
+Received: by outflank-mailman (output) from mailman id 888305.1297696; Fri, 14 Feb 2025 01:36:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tikVQ-0005O0-I9; Fri, 14 Feb 2025 01:28:36 +0000
-Received: by outflank-mailman (input) for mailman id 888256;
- Fri, 14 Feb 2025 01:28:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tikdT-0000tG-Kk; Fri, 14 Feb 2025 01:36:55 +0000
+Received: by outflank-mailman (input) for mailman id 888305;
+ Fri, 14 Feb 2025 01:36:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kkdH=VF=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1tikVP-0005Nm-Lv
- for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 01:28:35 +0000
-Received: from fhigh-a4-smtp.messagingengine.com
- (fhigh-a4-smtp.messagingengine.com [103.168.172.155])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0035c39b-ea73-11ef-9896-31a8f345e629;
- Fri, 14 Feb 2025 02:28:32 +0100 (CET)
-Received: from phl-compute-01.internal (phl-compute-01.phl.internal
- [10.202.2.41])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 45FB11140207;
- Thu, 13 Feb 2025 20:28:31 -0500 (EST)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Thu, 13 Feb 2025 20:28:31 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 13 Feb 2025 20:28:30 -0500 (EST)
+ <SRS0=83Ve=VF=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1tikdR-0000t8-Jj
+ for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 01:36:53 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 29be0594-ea74-11ef-9aa4-95dc52dad729;
+ Fri, 14 Feb 2025 02:36:52 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id ABB495C4ABE;
+ Fri, 14 Feb 2025 01:36:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44DB9C4CED1;
+ Fri, 14 Feb 2025 01:36:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,84 +43,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0035c39b-ea73-11ef-9896-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm3;
-	 t=1739496511; x=1739582911; bh=NeHin5JG6Si9esGXudiDoBFJ3y2RoVdG
-	BkdNyJRtT18=; b=Le9qvFYqu8+VF0uDlHnIW+yUbwxjeEtykHUdM+gcXp2fPzv+
-	ZWZTGm6gMQC92+FsKteOdW9MyqiRpMeXIdPDPAiLV+RQ37cO3PKZETQdfV/bNDqP
-	8Hp8LWdG6ju9JqGyv6QynA/MqW1b8xr6ZPRBLZE3QCSiaqeYJks+cnABodFGo3Wx
-	hVD7YfqLSWYDLsz2O/andDwVzEfvLRpzG1Ja7b5hDaOCnXo45fZSVW09Esqfim1m
-	RP2gan9BqhnZX1xjSmsoF2D3ouYlYjhECFI6qhWWDOU+T2fEcLAXZet3MkULRHHf
-	xPAr7D/jiezC7c1HvwfPiCg0wbO2e8ttRIDBPA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm3; t=1739496511; x=1739582911; bh=NeHin5JG6Si9esGXudiDoBFJ3y2R
-	oVdGBkdNyJRtT18=; b=Cw3/n7Em2EKQ47YG5ySjAlx4MxglZI429sqg/JYU1ij1
-	ZQYG/OQ6ygZtLd2xQDSU/CXzbQ+wTFNWSd9Rbs0UB/ETgPr2fJOS6TDv375wKg9v
-	MiG+iKGJp5amC9asZGAGK6jt4D8a8vM+hJC2p5//RcUNVn0Gxzblt8G1G8WO7ypd
-	zt7hvXmHHtouBnAqRmCXfWTCXjvgoYAAIeEg3c69xXcEh/nZFJtKvFrCvdjkCe2j
-	YhNmlgsWtKCy8IlgVpUya+vV64s2h+iLnELFBNCgg7fHnVNppBMucieFhIe0wwwP
-	UnR0E7Rxq5wkN+nT4bfxRGoJZK4BmMF1t5qD/xDn9w==
-X-ME-Sender: <xms:PpyuZ_iEaScILeFoqOv_A4ehYA2jvww6w6I38BCoSGtZJ4s7XUGk4w>
-    <xme:PpyuZ8CJ-oG-GzlbOc-nimS_PNGOrqnMnE3MZTe_l69LEVet-ijb-evE5m2ANg0XC
-    td4AmS3yGZf6g>
-X-ME-Received: <xmr:PpyuZ_F-z-Mp1ZGwlTQonmvzpyU3zquJNpps2MTIglitWYrHAiRO12PVKFR1gg6yJRGjySPY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdegkeeffecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
-    uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecunecujfgurhephffvve
-    fufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghkucforghrtgiihihk
-    ohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthh
-    hinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeelkefhudelteelleelteet
-    veeffeetffekteetjeehlefggeekleeghefhtdehvdenucevlhhushhtvghrufhiiigvpe
-    dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghl
-    vghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopedvpdhmohguvgepshhmth
-    hpohhuthdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhj
-    vggtthdrohhrghdprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthh
-    hinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:PpyuZ8T-dLSnhHJCq0yhBEoo3lU6cIrWyw2v6W5i8DKigtpPxhP4pw>
-    <xmx:PpyuZ8xVqAMxeCdjF5VU8FPEhGwcVw5TcRuaMDq6eCDQ3-XXVxruUg>
-    <xmx:PpyuZy5suEyj8_DPXJSum3gXKW3Dvfaz2L--tM0mEFig2UVRd4Ayew>
-    <xmx:PpyuZxz1vGz3OrSJzKYlbP1RgaKAXfcXDZv7_ulNPMmpTJ5ycCNrqw>
-    <xmx:P5yuZ3_QQ93o5umvMgxbHaOOMl6Ra-2hzfAuVXs2d1eAF3qXl_9dc5LD>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v2 0/4] Few CI improvements
-Date: Fri, 14 Feb 2025 02:28:06 +0100
-Message-ID: <cover.36ee649a8537af1a5fb5b3c5b7ffc0d8a1369969.1739496480.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.48.0
+X-Inumbo-ID: 29be0594-ea74-11ef-9aa4-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1739497009;
+	bh=yi1J/COoJ5gmUUmoSBYcfyOa6XcJNRCy03TLpIc8btA=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=jk4Dzc1nZxTU681W3TGKl5qhrN7hvqBHjMuNldHqSXIeKP59lRObX4m+CvS9jvAWx
+	 ag5QCpvFY44Jzs6N08iIqZ5DvZbwrHNWNMIHuG0b74Ei9Hm3wZ3gPnmyRTVtiDr3NY
+	 7UKjlLWVOscdABggwLpcJJmN4y8ThmWlbZ3bYKkaZYzv3iFzE/7cKrBNieryP6c9if
+	 /vbcfAiOPP7WxRr/Sxo5WhCWXgf1JlnkGYyAGszAcW3H1fbbDroZG6FecqwKhEUMUe
+	 45eNPizmCcgEpLfhZORSNDIqfnyd0qjTgxIgocKNnssTm2EhxEajT+DcJY/O39ZUk9
+	 WIP35sYgCYzaA==
+Date: Thu, 13 Feb 2025 17:36:47 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v1 3/3] automation: allow selecting individual jobs via
+ CI variables
+In-Reply-To: <90a256242870d1772bade171a7171d4e889f4e02.1739409822.git-series.marmarek@invisiblethingslab.com>
+Message-ID: <alpine.DEB.2.22.394.2502131727580.619090@ubuntu-linux-20-04-desktop>
+References: <cover.068c7421003863de7fca1cbe6aed2af000f061a7.1739409822.git-series.marmarek@invisiblethingslab.com> <90a256242870d1772bade171a7171d4e889f4e02.1739409822.git-series.marmarek@invisiblethingslab.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="8323329-34521494-1739497009=:619090"
+
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-34521494-1739497009=:619090
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 8BIT
 
-- Add some more test jobs
-- Allow selecting individual jobs, without editing yaml files
+On Thu, 13 Feb 2025, Marek Marczykowski-Górecki wrote:
+> Debugging sometimes involves running specific jobs on different
+> versions. It's useful to easily avoid running all of the not interesting
+> ones (for given case) to save both time and CI resources. Doing so used
+> to require changing the yaml files, usually in several places.
+> Ease this step by adding SELECTED_JOBS_ONLY variable that takes a regex.
+> Note that one needs to satisfy job dependencies on their own (for
+> example if a test job needs a build job, that specific build job
+> needs to be included too).
+> 
+> The variable can be specified via Gitlab web UI when scheduling a
+> pipeline, but it can be also set when doing git push directly:
+> 
+>     git push -o ci.variable=SELECTED_JOBS_ONLY="/job1|job2/"
+> 
+> More details at https://docs.gitlab.co.jp/ee/user/project/push_options.html
+> 
+> The variable needs to include regex for selecting jobs, including
+> enclosing slashes.
+> A coma/space separated list of jobs to select would be friendlier UX,
+> but unfortunately that is not supported:
+> https://gitlab.com/gitlab-org/gitlab/-/issues/209904 (note the proposed
+> workaround doesn't work for job-level CI_JOB_NAME).
+> On the other hand, the regex is more flexible (one can select for
+> example all arm32 jobs).
 
-I don't think it needs to be included in 4.20, but may be considered later for
-backporting.
+I was trying to find workarounds so that we could also support the
+simple list of comma-separated jobs you mentioned, but I couldn't find
+an easy way to do that.
 
-Marek Marczykowski-Górecki (4):
-  automation: skip building domU if there is no test defined for it
-  automation: add jobs running tests from tools/tests/*
-  automation: allow selecting individual jobs via CI variables
-  automation: add tools/tests jobs on the AMD Zen3+ runner too
+However, one thing we can do is to support writing SELECTED_JOBS_ONLY in
+.gitlab-ci.yml as a commit in xen.git, for people that don't know or
+don't remember how to set ci.variable using the git command line.
 
- automation/gitlab-ci/build.yaml    |  6 ++-
- automation/gitlab-ci/test.yaml     | 60 ++++++++++++++++++++++++-
- automation/scripts/build           |  1 +-
- automation/scripts/qubes-x86-64.sh | 78 +++++++++++++++++++++++--------
- automation/scripts/run-tools-tests | 47 +++++++++++++++++++-
- 5 files changed, 173 insertions(+), 19 deletions(-)
- create mode 100755 automation/scripts/run-tools-tests
+Given that this is for testing, I think it would be no problem to adding
+a special commit on top of your tree. We are just trying to make it
+easier compared to having to manually delete the list of jobs we don't
+need.
 
-base-commit: 819c3cb186a86ef3e04fb5af4d9f9f6de032c3ee
--- 
-git-series 0.9.1
+But even with the special commit, I couldn't think of an easy way to
+achieve the nicer comma-separated list of jobs...
+
+
+> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> ---
+> This probably wants documenting beyond this commit message. I don't
+> think we have any CI-related docs anywhere, do we? Some new file in
+> docs/misc?
+
+Yes please :-)
+
+It would be also worth documenting how to create a simple pipeline by
+removing everything that you don't need for a single test
+
+
+> And also, it's possible to extend web ui for starting pipelines to
+> include pre-defined variables. I use it in qubes here if you want to
+> see:
+> https://gitlab.com/QubesOS/qubes-continuous-integration/-/pipelines/new
+
+I don't have access to this
+
+
+> Does it make sense to include SELECTED_JOBS_ONLY this way too?
+> Personally, I'll probably use it via cmdline push only anyway, but I
+> don't know what workflows other people have.
+> ---
+>  automation/gitlab-ci/build.yaml |  6 ++++++
+>  automation/gitlab-ci/test.yaml  | 14 ++++++++++++++
+>  2 files changed, 20 insertions(+)
+> 
+> diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+> index 35e224366f62..f12de00a164a 100644
+> --- a/automation/gitlab-ci/build.yaml
+> +++ b/automation/gitlab-ci/build.yaml
+> @@ -12,6 +12,12 @@
+>        - '*/*.log'
+>      when: always
+>    needs: []
+> +  rules:
+> +  - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
+> +    when: always
+> +  - if: $SELECTED_JOBS_ONLY
+> +    when: never
+> +  - when: on_success
+>  
+>  .gcc-tmpl:
+>    variables: &gcc
+> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+> index c21a37933881..93632f1f9204 100644
+> --- a/automation/gitlab-ci/test.yaml
+> +++ b/automation/gitlab-ci/test.yaml
+> @@ -1,6 +1,11 @@
+>  .test-jobs-common:
+>    stage: test
+>    image: ${XEN_REGISTRY}/${CONTAINER}
+> +  rules:
+> +  - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
+> +  - if: $SELECTED_JOBS_ONLY
+> +    when: never
+> +  - when: on_success
+>  
+>  .arm64-test-needs: &arm64-test-needs
+>    - alpine-3.18-arm64-rootfs-export
+> @@ -99,6 +104,9 @@
+>        - '*.dtb'
+>      when: always
+>    rules:
+> +    - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
+> +    - if: $SELECTED_JOBS_ONLY
+> +      when: never
+>      - if: $XILINX_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
+>    tags:
+>      - xilinx
+> @@ -117,6 +125,9 @@
+>        - '*.log'
+>      when: always
+>    rules:
+> +    - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
+> +    - if: $SELECTED_JOBS_ONLY
+> +      when: never
+>      - if: $XILINX_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
+>    tags:
+>      - xilinx
+> @@ -137,6 +148,9 @@
+>        - '*.log'
+>      when: always
+>    rules:
+> +    - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
+> +    - if: $SELECTED_JOBS_ONLY
+> +      when: never
+>      - if: $QUBES_JOBS == "true" && $CI_COMMIT_REF_PROTECTED == "true"
+>    tags:
+>      - qubes-hw2
+> -- 
+> git-series 0.9.1
+> 
+--8323329-34521494-1739497009=:619090--
 
