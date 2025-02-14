@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1265EC02198
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 21:37:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.889112.1298329 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73221C02198
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 23:04:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.889129.1298349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tj3NR-0000jz-0z; Fri, 14 Feb 2025 21:37:37 +0000
+	id 1tj4jV-0004OU-1C; Fri, 14 Feb 2025 23:04:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 889112.1298329; Fri, 14 Feb 2025 21:37:37 +0000
+Received: by outflank-mailman (output) from mailman id 889129.1298349; Fri, 14 Feb 2025 23:04:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tj3NQ-0000js-TS; Fri, 14 Feb 2025 21:37:36 +0000
-Received: by outflank-mailman (input) for mailman id 889112;
- Fri, 14 Feb 2025 21:37:35 +0000
+	id 1tj4jU-0004OL-Uf; Fri, 14 Feb 2025 23:04:28 +0000
+Received: by outflank-mailman (input) for mailman id 889129;
+ Fri, 14 Feb 2025 23:04:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=83Ve=VF=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1tj3NP-0000jm-TW
- for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 21:37:35 +0000
+ id 1tj4jT-0004Nq-Ng
+ for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 23:04:27 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e60a553c-eb1b-11ef-9aa4-95dc52dad729;
- Fri, 14 Feb 2025 22:37:34 +0100 (CET)
+ id 08ccad1c-eb28-11ef-9aa4-95dc52dad729;
+ Sat, 15 Feb 2025 00:04:26 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7CAA65C5ADD;
- Fri, 14 Feb 2025 21:36:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16AF6C4CED1;
- Fri, 14 Feb 2025 21:37:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id B51A65C5DF2;
+ Fri, 14 Feb 2025 23:03:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72E90C4CED1;
+ Fri, 14 Feb 2025 23:04:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,132 +43,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e60a553c-eb1b-11ef-9aa4-95dc52dad729
+X-Inumbo-ID: 08ccad1c-eb28-11ef-9aa4-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1739569051;
-	bh=d4YvmSmJTJlzXxhbmrNdspDmut7IkB9sy+vtVLBKyTA=;
+	s=k20201202; t=1739574263;
+	bh=hNMi7wMgSXfOTSF82stAAOetMr5QEw5TN9oPwEH9gz8=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=iPudCJvdPh8ogNmIpjjPYCK0eMTppsjVN5ul0Z72tv67msw9FBsvZmn9FbOFi3BFG
-	 0b4Pv9+AJQmT5FJZAPWh+bonOy9yXp4zgPOHDfDmgI6AKt4nB6W5l7V2wE+0Btmvo9
-	 cfcaL1SeZAZ+7jFQFTdixWbA4JeWikSvHrYLm5wOCqkWpZWRnV030bnRxi7SwkP1gu
-	 em/2XdAyZNXH+Opgp+8V5pYlCbd8Y5n5t2zpqRR5Z+n1vVmK56rF+VPG6j+W13LfY5
-	 zqa3zbD3B3QTr3chiaDWcUHz9U01sjpRrIe7cU6yWbj5LaCY/snrpXSVyj8bAwXBuI
-	 ZDP7bhedfp7xg==
-Date: Fri, 14 Feb 2025 13:37:29 -0800 (PST)
+	b=Rv6mzaTEnuSIxvRL/GkJFwBPEDd9gXUeSpal3kc8fL04TtDhg9p7EWdLUn8oFkrXl
+	 YXjSKgk0Knxhpl4sQKo7NY3/Aihtyh8azspipvRCztcV7j+3kFkLYInO4/KMyYBqp0
+	 9diK8ZjuBWdojcKPxVMveEzj9++Ga4mkH5gJMiTtV58J1DsXS7i8w13ojB+i4BDgit
+	 ACDOcUUbdHlMAKfYcU5xOET18B0IDNAz70Q0lx8xnlzDaYaVeYte5YKTHP/LP+ALJb
+	 uWXQlLkZ8f9e/yLUZ5CG0Usg8aHcBtgvnDXntwJQHBZoem0wLXEcWACKsyrypMNBDd
+	 e+AhScnEwj87Q==
+Date: Fri, 14 Feb 2025 15:04:20 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Stefano Stabellini <sstabellini@kernel.org>
-cc: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
-    xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v1 3/3] automation: allow selecting individual jobs via
- CI variables
-In-Reply-To: <alpine.DEB.2.22.394.2502141325030.3858257@ubuntu-linux-20-04-desktop>
-Message-ID: <alpine.DEB.2.22.394.2502141336320.3858257@ubuntu-linux-20-04-desktop>
-References: <cover.068c7421003863de7fca1cbe6aed2af000f061a7.1739409822.git-series.marmarek@invisiblethingslab.com> <90a256242870d1772bade171a7171d4e889f4e02.1739409822.git-series.marmarek@invisiblethingslab.com> <alpine.DEB.2.22.394.2502131727580.619090@ubuntu-linux-20-04-desktop>
- <Z66rSEWUZT2OXWBU@mail-itl> <alpine.DEB.2.22.394.2502141325030.3858257@ubuntu-linux-20-04-desktop>
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, 
+    michal.orzel@amd.com, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, 
+    consulting@bugseng.com, Julien Grall <julien@xen.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [XEN PATCH 1/3] xen/arm: platform: address violation of MISRA
+ C Rule 7.2
+In-Reply-To: <33f3ba81af293a92fb27d55b42e620b807f1a5b3.1739564781.git.nicola.vetrini@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2502141301020.3858257@ubuntu-linux-20-04-desktop>
+References: <cover.1739564781.git.nicola.vetrini@bugseng.com> <33f3ba81af293a92fb27d55b42e620b807f1a5b3.1739564781.git.nicola.vetrini@bugseng.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323329-38153445-1739569051=:3858257"
+Content-Type: text/plain; charset=US-ASCII
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+On Fri, 14 Feb 2025, Nicola Vetrini wrote:
+> Rule 7.2 states: "A u or U suffix shall be applied to all integer
+> constants that are represented in an unsigned type".
+> 
+> Some PM_* constants are unsigned quantities, despite some
+> of them being representable in a signed type, so a 'U' suffix
+> should be present.
+> 
+> No functional change.
+> 
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 
---8323329-38153445-1739569051=:3858257
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-On Fri, 14 Feb 2025, Stefano Stabellini wrote:
-> On Fri, 14 Feb 2025, Marek Marczykowski-Górecki wrote:
-> > On Thu, Feb 13, 2025 at 05:36:47PM -0800, Stefano Stabellini wrote:
-> > > On Thu, 13 Feb 2025, Marek Marczykowski-Górecki wrote:
-> > > > Debugging sometimes involves running specific jobs on different
-> > > > versions. It's useful to easily avoid running all of the not interesting
-> > > > ones (for given case) to save both time and CI resources. Doing so used
-> > > > to require changing the yaml files, usually in several places.
-> > > > Ease this step by adding SELECTED_JOBS_ONLY variable that takes a regex.
-> > > > Note that one needs to satisfy job dependencies on their own (for
-> > > > example if a test job needs a build job, that specific build job
-> > > > needs to be included too).
-> > > > 
-> > > > The variable can be specified via Gitlab web UI when scheduling a
-> > > > pipeline, but it can be also set when doing git push directly:
-> > > > 
-> > > >     git push -o ci.variable=SELECTED_JOBS_ONLY="/job1|job2/"
-> > > > 
-> > > > More details at https://docs.gitlab.co.jp/ee/user/project/push_options.html
-> > > > 
-> > > > The variable needs to include regex for selecting jobs, including
-> > > > enclosing slashes.
-> > > > A coma/space separated list of jobs to select would be friendlier UX,
-> > > > but unfortunately that is not supported:
-> > > > https://gitlab.com/gitlab-org/gitlab/-/issues/209904 (note the proposed
-> > > > workaround doesn't work for job-level CI_JOB_NAME).
-> > > > On the other hand, the regex is more flexible (one can select for
-> > > > example all arm32 jobs).
-> > > 
-> > > I was trying to find workarounds so that we could also support the
-> > > simple list of comma-separated jobs you mentioned, but I couldn't find
-> > > an easy way to do that.
-> > > 
-> > > However, one thing we can do is to support writing SELECTED_JOBS_ONLY in
-> > > .gitlab-ci.yml as a commit in xen.git, for people that don't know or
-> > > don't remember how to set ci.variable using the git command line.
-> > 
-> > You can always do it, in `variables` setting AFAIR.
-> > 
-> > > Given that this is for testing, I think it would be no problem to adding
-> > > a special commit on top of your tree. We are just trying to make it
-> > > easier compared to having to manually delete the list of jobs we don't
-> > > need.
-> > 
-> > Yes, manually delete was awful. In practice I usually added always-false
-> > rules, but still.
-> > 
-> > > But even with the special commit, I couldn't think of an easy way to
-> > > achieve the nicer comma-separated list of jobs...
-> > > 
-> > > 
-> > > > Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-> > > > ---
-> > > > This probably wants documenting beyond this commit message. I don't
-> > > > think we have any CI-related docs anywhere, do we? Some new file in
-> > > > docs/misc?
-> > > 
-> > > Yes please :-)
-> > > 
-> > > It would be also worth documenting how to create a simple pipeline by
-> > > removing everything that you don't need for a single test
-> > 
-> > You mean how to find what jobs you need?
-> > 
-> > > > And also, it's possible to extend web ui for starting pipelines to
-> > > > include pre-defined variables. I use it in qubes here if you want to
-> > > > see:
-> > > > https://gitlab.com/QubesOS/qubes-continuous-integration/-/pipelines/new
-> > > 
-> > > I don't have access to this
-> > 
-> > Oh, sorry. Screenshot attached.
-> > 
-> > And its definition looks like this:
-> > https://gitlab.com/QubesOS/qubes-continuous-integration/-/blob/main/.gitlab-ci.yml?ref_type=heads#L15-26
-> 
-> Actually this gave me an idea. What if we flip the default? Normally we
-> want to run all the jobs.
-> 
-> When doing development, we typically want to run one specific job
-> attached to the work we are currently doing. This patch introduces a
-> blacklist, but it looks like we want a whitelist instead?
-> 
-> Wouldn't it be easier to say: "delete everything except for
-> adl-smoke-x86-64-dom0pvh-hvm-gcc-debug"
-> 
-> Then we can arrange it so adl-smoke-x86-64-dom0pvh-hvm-gcc-debug and its
-> dependencies are left enabled. Everything else is disabled?
 
-Sorry I sent it too fast without thinking. This patch is already
-implementing the whitelist. The only thing we are really missing is the
-automatic dependency enablement, but I don't know how that could be
-implemented.
---8323329-38153445-1739569051=:3858257--
+> ---
+> This fix is needed in order to keep the rule clean when the
+> Xen configuration under static analysis is changed later in patch 3
+> of this series.
+> 
+> Only PM_RSTC_WRCFG_CLR is strictly needed to conform to the rule,
+> but the other constants have a 'U' added for consistency. PM_RSTC
+> and PM_WDOG are used as offsets, so in principle they can be negative,
+> therefore they are left as is.
+> ---
+>  xen/arch/arm/platforms/brcm-raspberry-pi.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/arch/arm/platforms/brcm-raspberry-pi.c b/xen/arch/arm/platforms/brcm-raspberry-pi.c
+> index 407ec07f63b8..d49460329cc8 100644
+> --- a/xen/arch/arm/platforms/brcm-raspberry-pi.c
+> +++ b/xen/arch/arm/platforms/brcm-raspberry-pi.c
+> @@ -47,11 +47,11 @@ static const struct dt_device_match rpi4_blacklist_dev[] __initconst =
+>  };
+>  
+>  
+> -#define PM_PASSWORD                 0x5a000000
+> +#define PM_PASSWORD                 0x5a000000U
+>  #define PM_RSTC                     0x1c
+>  #define PM_WDOG                     0x24
+> -#define PM_RSTC_WRCFG_FULL_RESET    0x00000020
+> -#define PM_RSTC_WRCFG_CLR           0xffffffcf
+> +#define PM_RSTC_WRCFG_FULL_RESET    0x00000020U
+> +#define PM_RSTC_WRCFG_CLR           0xffffffcfU
+>  
+>  static void __iomem *rpi4_map_watchdog(void)
+>  {
+> -- 
+> 2.43.0
+> 
 
