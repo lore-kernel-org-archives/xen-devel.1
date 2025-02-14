@@ -4,29 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE07DC02198
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 20:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.889032.1298269 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67BC3C021A4
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 20:46:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.889052.1298299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tj1y1-0002ih-Dz; Fri, 14 Feb 2025 20:07:17 +0000
+	id 1tj2ZS-0008SS-Nt; Fri, 14 Feb 2025 20:45:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 889032.1298269; Fri, 14 Feb 2025 20:07:17 +0000
+Received: by outflank-mailman (output) from mailman id 889052.1298299; Fri, 14 Feb 2025 20:45:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tj1y1-0002ia-Aq; Fri, 14 Feb 2025 20:07:17 +0000
-Received: by outflank-mailman (input) for mailman id 889032;
- Fri, 14 Feb 2025 20:07:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=w5DB=VF=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1tj1y0-0002iS-Ia
- for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 20:07:16 +0000
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 492665a8-eb0f-11ef-9aa4-95dc52dad729;
- Fri, 14 Feb 2025 21:07:15 +0100 (CET)
+	id 1tj2ZS-0008SJ-KS; Fri, 14 Feb 2025 20:45:58 +0000
+Received: by outflank-mailman (input) for mailman id 889052;
+ Fri, 14 Feb 2025 20:45:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=vKzd=VF=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1tj2ZR-0008RW-H3
+ for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 20:45:57 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id afe48f91-eb14-11ef-9896-31a8f345e629;
+ Fri, 14 Feb 2025 21:45:55 +0100 (CET)
+Received: from nico.tail608894.ts.net (unknown [46.228.253.214])
+ by support.bugseng.com (Postfix) with ESMTPSA id 0AF954EF5133;
+ Fri, 14 Feb 2025 21:45:52 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,132 +41,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 492665a8-eb0f-11ef-9aa4-95dc52dad729
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1739563634; x=1739822834;
-	bh=s/XDEHSzC1NWhTr/8nLQqvZ/cHg/O4dU+IHqSbSEFus=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=fLs62hJIFuKv2VCz6krsuKfNWSAi+CqXNgmTJwC5qoJnBzb0t8lC1qkRIZF4Q9ieN
-	 NwC7wQokt4BzZyKlsQG8xNqkYKu7CAtzNpcND/uEm1TqPtuKUcXsDfLeBzA3S4yqyU
-	 zdrBi0jx5Ub/XCOIJWa23VOltsQ2liKHOjd6DsKvTM8DXIsEtlJpy1mmGYBL9cUPtS
-	 mrskLsa38tgG2kV/TdXrQE0TKo212KbgCXcmVOpB/Ai/um6edi3Pd1mzo7pEwGcK0/
-	 SxwHcnVbcoAZZszhmmUVZ1JtxA0Z4BHpgUsJNwH1BHrVE14ACOMcmCaVPQHSEODjko
-	 Ot6McYMeq0R+A==
-Date: Fri, 14 Feb 2025 20:07:09 +0000
-To: Jan Beulich <jbeulich@suse.com>
-From: Denis Mukhin <dmkhn@proton.me>
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v3] xen/console: print Xen version via keyhandler
-Message-ID: <tzAUNSv_X55I4CsPnmpDvLQ09p6mK5og088aJunH0vLh1CcZ3K1WYZpRGwCVbigzsiyp8MJPSrObT6rX1fqri2d3-PToFgXSMVsbWi5PHN0=@proton.me>
-In-Reply-To: <e80d6139-b918-4830-9db9-aac297446e7e@suse.com>
-References: <20250213214054.1745501-1-dmukhin@ford.com> <e80d6139-b918-4830-9db9-aac297446e7e@suse.com>
-Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: e06fcdcc795153ce2169c37c7bafc3908c55bead
+X-Inumbo-ID: afe48f91-eb14-11ef-9896-31a8f345e629
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=46.228.253.214
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1739565955;
+	b=SRGrr3fWpxobkT6A8GTnCqfGSsQBST0I5DTyG9lsvRSxJ/stJC5nYLCHqzeOX3bL13Nz
+	 RaDeFCCB4uz2Gvk4hzwOMkS29/0It39M/KVLSohFkYnoVZcFZMaZJhdQ6qLginsodZ9C+
+	 DZiazjAxtqeWNLQlXJFzzd98zEJ9YcydDqioBF9NT71aEwqh21uyU6Um+WIiiOB+g32U6
+	 sKq5e67S9f3WHF3W4mB8Q4njU50sM1FdtMFVvIPuCP45+W66EaElwlEpu77b5NxCtTus3
+	 CltaL2vgSumf3txWHo8wdQ6skthayfTjURsgk8iGJyx4V9tl6AOyrH266Wu30qUSuOjtC
+	 0z/mzm4OmAVaRj1f3B10B4m8EJkixRrFlOwMHY8FE9sloPgwmxWn/G9h84hNeoZekORek
+	 X16AN903m+ot8Jml3ELcf5I2twsLO9Gwm5T5Frn2Ev/2JLvQR0ZBbHm6dXmwYqV9bMwwm
+	 af9Du4SpK/2tSAaZDZNdT9IzV8R0HDTEUn8MMbc1VqQ7VjZxWMElPjH/OUR/I+lVawE3g
+	 7cEAbZcS1RKrjMBQ+vRd6zITHnL7jtuG8Dbuh1nLE8OYWXR8VABSJhc45xMph7bp5PwA/
+	 90Yi5RGf/jLHcNpKHfg9uxMJAWda0yNP46Do/Z2DPTbhJil4o1T7X/3rlx87cpw=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1739565955;
+	h=DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+	bh=F6dLZHpAftKOEJLHOuiXBv1ROWYaaj6czWWml//vfP0=;
+	b=oviKzs0tnfmSMvkUg1ae9I4NMp+AGpxMtrjTWz7KMlJSjAJzhjnw7+x2fi4VMa5AQLTX
+	 02YxcshJDUkm7eKlH3WpSg68eJYZNO7IzGJrSEZWRCKKe4ubxqq2t7iucAfCUv8BOknBg
+	 ltJutQGsP6DmwIXPdGpR1akJqv/2XWwJDIygwXaFgsxXgITePLxwrt6HuWEga5Q7wYfVO
+	 uEg1qH2AF1yIF4lL/kvl+73j439Zdp2AmF0ZqmTPzLVLuGZntu+y2aHkY9f5daHtJ7O5p
+	 BjqPFQSPcSyHMe+v6aDATsvC0dqaQf1as2aZgzj/92hJgQvmeFVnDjbs9LBIFHz7rY3FY
+	 ic4+U0Ch9DzgHG2WKSPSnx2wGGBauaJu5ZU4gNMrtH+Etni9GS88GJzKtacTRcyFXdd9B
+	 aX/IqN/NuMYJuUymLhlNNlwtZblFNoG97wlYNTYVRTSCNIZTL0RkxKy5ny5ivZFh7u32C
+	 oL2XuhtVyeVY6nuyb5dX6iN5s/DgZP1p0HtUoNogjQELcLw6u7SVeR+OR2ItfzoSURSzW
+	 jwtBTapXsDjAEHnQtzIQg+NZTI4B+4aZ1rYGfTheMdaQTXS3Xt5f9OuFYJanqBd6AUXdm
+	 CF8SSTinOuVKsgKvrXjK/dsjLB2oXj8PhHsFAc0qN1tgC/hlMCKg4niLvea7wDY=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=46.228.253.214
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1739565955; bh=rEgEDMpEVP5VlbunFiK29t0Y1ZnvBhmsHk6WUsWWNG4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=PO5lgtBMFI2wMxd7QJ/57rYccIJUVHSFshYS2KAkD2u825wmMrbHonalfLVmdht8m
+	 GsAJci8/YN7Ay3037S1Fq4m830N9u/IbrHUsACV18fDKe+Ig5XhrKATtZ4R83wM5Ur
+	 DRembfBxS8XQIq8vzeC1TVYfGKcVPDq00hUWImsd6EhYlwnV2eFXe5NYILGodv62Tx
+	 j3I9U5sv+ROhOPM24S/eHikJDw7szcUSQegHuoHot36KYXr0B9r1n/tEELiQTKzeHJ
+	 hgsrdKyP+Haw0d3u49oPLRVxzFrZkxgmZJcYHUHhZOIA7j4YzyEchrp4SW3UA+sQDC
+	 Ip7rjfauefO5A==
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Meng Xu <mengxu@cis.upenn.edu>,
+	Juergen Gross <jgross@suse.com>,
+	George Dunlap <gwd@xenproject.org>
+Subject: [XEN PATCH 2/3] xen/sched: address violation of MISRA C Rule 8.2
+Date: Fri, 14 Feb 2025 21:45:22 +0100
+Message-ID: <36cd255a8d4068a66ad8cf45060d60b84b9d4c6d.1739564781.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1739564781.git.nicola.vetrini@bugseng.com>
+References: <cover.1739564781.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thursday, February 13th, 2025 at 11:54 PM, Jan Beulich <jbeulich@suse.co=
-m> wrote:
+Rule 8.2 states: "Function types shall be in prototype form with
+named parameters".
 
->=20
->=20
-> On 13.02.2025 22:41, dmkhn@proton.me wrote:
->=20
-> > Add Xen version printout to 'h' keyhandler output.
-> >=20
-> > That is useful for debugging systems that have been left intact for a l=
-ong
-> > time.
-> >=20
-> > Signed-off-by: Denis Mukhin dmukhin@ford.com
-> > ---
-> > Changes since v2:
-> > - moved new function declarations to xen/lib.h
-> > - dropped xen_ prefix in new functions
-> > ---
-> > xen/common/keyhandler.c | 4 ++++
-> > xen/common/version.c | 20 ++++++++++++++++++--
-> > xen/drivers/char/console.c | 8 +++-----
-> > xen/include/xen/lib.h | 3 +++
-> > 4 files changed, 28 insertions(+), 7 deletions(-)
-> >=20
-> > diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
-> > index 6ea54838d4..0bb842ec00 100644
-> > --- a/xen/common/keyhandler.c
-> > +++ b/xen/common/keyhandler.c
-> > @@ -129,6 +129,10 @@ static void cf_check show_handlers(unsigned char k=
-ey)
-> > unsigned int i;
-> >=20
-> > printk("'%c' pressed -> showing installed handlers\n", key);
-> > +
-> > + print_version();
-> > + print_build_id();
-> > +
-> > for ( i =3D 0; i < ARRAY_SIZE(key_table); i++ )
-> > if ( key_table[i].fn )
-> > printk(" key '%c' (ascii '%02x') =3D> %s\n",
-> > diff --git a/xen/common/version.c b/xen/common/version.c
-> > index bc3714b45f..8672d5544e 100644
-> > --- a/xen/common/version.c
-> > +++ b/xen/common/version.c
-> > @@ -210,9 +210,25 @@ void __init xen_build_init(void)
-> > }
-> > }
-> > #endif /* CONFIG_X86 */
-> > - if ( !rc )
-> > - printk(XENLOG_INFO "build-id: %*phN\n", build_id_len, build_id_p);
-> > }
-> > +
-> > +void print_version(void)
-> > +{
-> > + printk("Xen version %d.%d%s (%s@%s) (%s) %s %s\n",
-> > + xen_major_version(), xen_minor_version(), xen_extra_version(),
-> > + xen_compile_by(), xen_compile_domain(), xen_compiler(),
-> > + xen_build_info(), xen_compile_date());
-> > +
-> > + printk("Latest ChangeSet: %s\n", xen_changeset());
-> > +}
-> > +
-> > +void print_build_id(void)
-> > +{
-> > + BUG_ON(!build_id_p);
-> > + BUG_ON(!build_id_len);
->=20
->=20
-> Technically one of the two would likely suffice, if we need such checks
-> at all. Question is why you added them. After all ...
+The parameter name is missing from the function pointer type
+that constitutes the first parameter.
 
-I added assertions so that any misuse can bee easily seen.
-But I did not know about XEN_HAS_BUILD_ID switch.
+No functional change.
 
->=20
-> > + printk(XENLOG_INFO "build-id: %*phN\n", build_id_len, build_id_p);
->=20
->=20
-> ... this isn't supposed to malfunction when passed a NULL pointer (with
-> zero length). If it can malfunction, it wants fixing there imo. And that
-> extends to the case of non-zero length as well: Any extensions to %p
-> that we add would better retain the basic property of %p printing when
-> NULL is passed as argument. (I'm sorry for not paying enough attention
-> to this on v2 already.)
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+This small fix is needed in order to keep the rule clean in the
+follow-up patch that changes the Xen configuration under static
+analysis.
 
-No problem! Thanks for the feedback, much appreciated.
+I wasn't really certain about the right name to give to the parameter,
+so if there are better options I'd be happy to accept them.
+---
+ xen/common/sched/rt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->=20
-> (Later) Oh, actually these BUG_ON() are both wrong. They would trigger
-> when building with a build-id-incapable linker. See the detection logic
-> in the top level Makefile (search for XEN_HAS_BUILD_ID). To retain
-> original behavior you will want to make the printk() conditional upon
-> e.g. build_id_len being non-zero.
+diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+index f368e0fdd5a5..0300d2d2e454 100644
+--- a/xen/common/sched/rt.c
++++ b/xen/common/sched/rt.c
+@@ -500,7 +500,7 @@ deadline_queue_remove(struct list_head *queue, struct list_head *elem)
+ }
+ 
+ static inline bool
+-deadline_queue_insert(struct rt_unit * (*qelem)(struct list_head *),
++deadline_queue_insert(struct rt_unit * (*qelem)(struct list_head *q_iter),
+                       struct rt_unit *svc, struct list_head *elem,
+                       struct list_head *queue)
+ {
+-- 
+2.43.0
 
-Oh, I see.
-%p in printk() behaves correctly when passing NULL pointer - it prints
-nothing.
-
->=20
-> Jan
 
