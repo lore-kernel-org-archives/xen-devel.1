@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D1FC021A0
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 01:05:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.888246.1297636 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A60C021A0
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 01:28:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.888258.1297660 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tik8f-0001ni-TJ; Fri, 14 Feb 2025 01:05:05 +0000
+	id 1tikVT-0005eh-6O; Fri, 14 Feb 2025 01:28:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 888246.1297636; Fri, 14 Feb 2025 01:05:05 +0000
+Received: by outflank-mailman (output) from mailman id 888258.1297660; Fri, 14 Feb 2025 01:28:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tik8f-0001nb-QD; Fri, 14 Feb 2025 01:05:05 +0000
-Received: by outflank-mailman (input) for mailman id 888246;
- Fri, 14 Feb 2025 01:05:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tikVT-0005e5-23; Fri, 14 Feb 2025 01:28:39 +0000
+Received: by outflank-mailman (input) for mailman id 888258;
+ Fri, 14 Feb 2025 01:28:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5vTB=VF=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tik8e-0001nA-JU
- for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 01:05:04 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b850d308-ea6f-11ef-9aa4-95dc52dad729;
- Fri, 14 Feb 2025 02:05:02 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43932b9b09aso16733765e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Feb 2025 17:05:02 -0800 (PST)
-Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4396180f199sm30675425e9.15.2025.02.13.17.05.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Feb 2025 17:05:01 -0800 (PST)
+ <SRS0=kkdH=VF=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1tikVR-0005Nm-06
+ for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 01:28:37 +0000
+Received: from fout-a1-smtp.messagingengine.com
+ (fout-a1-smtp.messagingengine.com [103.168.172.144])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 01d02365-ea73-11ef-9896-31a8f345e629;
+ Fri, 14 Feb 2025 02:28:35 +0100 (CET)
+Received: from phl-compute-12.internal (phl-compute-12.phl.internal
+ [10.202.2.52])
+ by mailfout.phl.internal (Postfix) with ESMTP id 477201380289;
+ Thu, 13 Feb 2025 20:28:34 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-12.internal (MEProxy); Thu, 13 Feb 2025 20:28:34 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 13 Feb 2025 20:28:32 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,134 +47,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b850d308-ea6f-11ef-9aa4-95dc52dad729
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1739495102; x=1740099902; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=P/DRgaTQfFfnR5FRYvXUPQ8pkxQ8pYwXp6/1cHfSeGc=;
-        b=Uw7tf3Bn7KZiaGFIbgIVtIw6uVDq8mZZl/l8+Cs67IjLyUjra59n7o6WGyE9Ciiz55
-         ZKTh0i/EOaUD6ockio5rOWEPoOK38FWgKrEgVmPiYdjC3baPJ/fJagV55iFwH2VlMLib
-         hzkQVyYwXHB1vj9SI6pJOqHREa5Bz+/U9TjU4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739495102; x=1740099902;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=P/DRgaTQfFfnR5FRYvXUPQ8pkxQ8pYwXp6/1cHfSeGc=;
-        b=Z3uFvChRtBCgHEV+Cg307lMyddnFO9jw6dhHtETt4DQE7nams98Lrqoj+kgzvTAKdT
-         Z+47ztpOoQErRv7RXzSg2tpIbDy8RjNL2t9xphaWZM5N8Y5MFBtI443iSENT+KJQD5pR
-         csWKKKtMH8Y1YugopQz1zaBhaa0aE2c4qNfTXgEyR4aC8tvhNHvGkBkZkcyiqE+5Utcl
-         /yBY4oy8vQaUqSKRDDLuBoEhysViOypjffIUnoulI/E/zYcWKQuWhZY5jCD9SLuqlNY6
-         A8n6tm7ZG2OzwoY44qnwCzT7hReyHOV14XNzVDrpqDwWoW98RXDMQepqKqh0mRVDUA4u
-         pGDw==
-X-Forwarded-Encrypted: i=1; AJvYcCVnjV/QaM4JgGNNH4pAdmCF14HQOQ2B1bR2ZnlCDWUTcy8cQVuUfqkEKuL6p2ybesTaqPI4taBgSxc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy7c1kb1cYkbf5i8oYIkfOZXtfcguWBKe82Y64pmeO5nzvreD4W
-	PlaFMyMPuPnM0E8CiGEDD07omQ0bdQIH2TQUc/ufKcBOG5J7dga26UoHT7DHnWo=
-X-Gm-Gg: ASbGncsJYjtr2gEfRdLq1SS7ZLAjcaTjvLNEf8+6HPKYahf03AHjqwitt8qIRYcYjvs
-	T8efRZYMzMHHDnQRw30IosQ2+T/Dv6ajyP0tLvpm2tKOO91S73tYUWekUzhj4IJVw4V0yovu+5o
-	zhUJzbYx1VcIhXz9mAF7t+gzp1jTKCpbmPQ+5ev6HyA1w3rdiitHl7FWpdNQEJZLFPGBaEz3GY9
-	lb422cyoqwP0HmjTHUaSIqjMGzxSTBLMdYv06Fz7HJUkAUfuoaHEM1+7dUBAkD2i+zGYkOhMPno
-	zZlVZ7GTLvgOyoTk38L0rU0E0u5hYeff2mQrPsku1Ut//N9QdGzrevk=
-X-Google-Smtp-Source: AGHT+IFF79qu8IrDPb8UJ1s8Z5XvGu9KV0bV83T2Nt8aVJKmRVRZJaz8UQFDWkuKiU6nle72utMS1g==
-X-Received: by 2002:a05:600c:3485:b0:439:5a37:8140 with SMTP id 5b1f17b1804b1-439601b7addmr72604295e9.22.1739495102226;
-        Thu, 13 Feb 2025 17:05:02 -0800 (PST)
-Message-ID: <f5deca6a-313f-4daf-b774-cc05223ab034@citrix.com>
-Date: Fri, 14 Feb 2025 01:05:00 +0000
+X-Inumbo-ID: 01d02365-ea73-11ef-9896-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm3; t=1739496514; x=1739582914; bh=DC6A2BjUjZ
+	pkR7anGZPjWglSZCWFDKHyJlMNEw2MOAA=; b=gAPuXBZxamzzHozU4vT3HTRAMw
+	k645th90YnJVPR48p1Ge9LyTSnVn5AjbMhvLyWc+7gIgjs0sQXnXFcq0V3peVpQ2
+	5IoOIzLTJM+xq2HbzasbGvyYcq+qmvIsQUEeoIO4/Sm16DLLt3PZ2GnYSUF4Mswj
+	jMPiZZwrEXDrMfYe8rxGE04GNMiWKLKLIgQH/zg3AJ1686LzIMUbdMCpIUccr940
+	qYhZMRneQHiImVIyvHUmo5VsPkh/0Bm7yJHsnJmGTTKwrEHzIYDYn1I8X/S0rNMf
+	EocRwqHHeCbSd/nLkOeHpAoDw7RrJj29muJ5WsqqezUvAROeLaNzzrSeKPNQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1739496514; x=
+	1739582914; bh=DC6A2BjUjZpkR7anGZPjWglSZCWFDKHyJlMNEw2MOAA=; b=u
+	j3ZWJtpSbMVROpEeu6Np+UE56GWs50dRHcAvxdrwQ6iHY+0td6ySWdqPgotQG5xa
+	eoMNj41NF+3+jCPtW7vJGeOst7IRAVSE1jz0rkLI+K1aFt/fW7Zdv+wPdVahFQCz
+	GTNyCekKcOZfmJj7PQ2i9389xx8L7ECuAlCbHbDtnGsDWVEu2LM/mFIdeesKVpic
+	t/SU8ljFkE0MzSlrwakHJnz5M524JN1UojuzzCW3/oxmSRgzQMxP4J+gGyyyUD1Q
+	BYwjhwWKiUEh0nCOAI3ii0bdoIWHUe7hf7M5tvpaIlQ5LELTW9LzEBJxrfX8Jkmd
+	WveTvHI5CvCKoeXT9KsqA==
+X-ME-Sender: <xms:QZyuZ0FIMpsLNmhRKjH0ZXJJlg2rqghT_8zxTI0BE7r5n_S_jZj-8w>
+    <xme:QZyuZ9VFNYP8-IHoEuW7zVX26CfgNpxj_YZX15KH1hPAi8969MeNKWnnWcErUWafz
+    SHWF-kTD8o9Hg>
+X-ME-Received: <xmr:QZyuZ-JxKMjdnBi05Nrld24ajpZaNtjnfIzyGMD0Au36Wi7XedigYbW6c3cgNJ1-0iYVGleR>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdegkeeffecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+    uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
+    hnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfgggtgfesthekredtredt
+    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
+    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
+    ggftrfgrthhtvghrnhepgfeuudehgfdvfeehhedujeehfeduveeugefhkefhheelgeevud
+    etueeiudfggfffnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
+    rhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+    dpnhgspghrtghpthhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepgigv
+    nhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoh
+    epmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgt
+    phhtthhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsg
+    gvlhhlihhniheskhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:QpyuZ2H1xMxAAPzY523QgN7LPpF4AYrqLLvFSiCqt3re-PvcXxaEkA>
+    <xmx:QpyuZ6VkAbRFfdOns5qf-Dx6B19U3xzBWEE7yTw4SevIQO7EU5uePw>
+    <xmx:QpyuZ5O0BkTKcG4O3SSJ5nC-wVH3_IdBmSy_EuLetnJ98sPDlB9UWQ>
+    <xmx:QpyuZx2GOGGIPqPXKYqob8_mBPZ1WarUiwz2s5MUpjZvhFL3GCZhyw>
+    <xmx:QpyuZ4zbt10FvBLxbLsZ_mPjt5IHuL5OJOoFBTSWzM0rs_bmKBGNPNjr>
+Feedback-ID: i1568416f:Fastmail
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 2/4] automation: add jobs running tests from tools/tests/*
+Date: Fri, 14 Feb 2025 02:28:08 +0100
+Message-ID: <cafc69b6c01805e7ccc0fcd6ccebe0b7088c4bd5.1739496480.git-series.marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.48.0
+In-Reply-To: <cover.36ee649a8537af1a5fb5b3c5b7ffc0d8a1369969.1739496480.git-series.marmarek@invisiblethingslab.com>
+References: <cover.36ee649a8537af1a5fb5b3c5b7ffc0d8a1369969.1739496480.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/x86: fix build with CONFIG_HVM=n and -Og
-To: Stewart Hildebrand <stewart.hildebrand@amd.com>,
- xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
-References: <20250213185055.711703-1-stewart.hildebrand@amd.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20250213185055.711703-1-stewart.hildebrand@amd.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 13/02/2025 6:50 pm, Stewart Hildebrand wrote:
-> When building with CONFIG_HVM=n and -Og, we encounter:
->
-> prelink.o: in function `pit_set_gate':
-> xen/xen/arch/x86/emul-i8254.c:195: undefined reference to `destroy_periodic_time'
->
-> Add an IS_ENABLED(CONFIG_HVM) check to assist with dead code
-> elimination.
->
-> Fixes: 14f42af3f52d ("x86/vPIT: account for "counter stopped" time")
-> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+There are a bunch of tests in tools/tests/, let them run in CI.
+For each subdirectory expect "make run" will run the test, and observe
+its exit code. This way, adding new tests is easy, and they will be
+automatically picked up.
 
-While I appreciate the effort to get -Og working (I tried and gave up
-due to frustration), this is gnarly.
+For better visibility, log test output to junit xml format, and let
+gitlab ingest it. Set SUT_ADDR variable with name/address of the system
+under test, so a network can be used to extract the file. The actual
+address is set using DHCP. And for the test internal network, still add
+the 192.168.0.1 IP (but don't replace the DHCP-provided one).
 
-PIT emulation is used by both PV and HVM guests.  All other uses of
-{create,destroy}_periodic_time() are behind something that explicitly
-short-circuits in !HVM cases (usually an is_hvm_*() predicate).
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+Changes in v2:
+ - use bash shebang
+ - clarify skipped message
+ - cleanup extra printf params
+ - limit calling DHCP in dom0 to only tests that need it
+---
+ automation/gitlab-ci/test.yaml     | 23 +++++++++++++++-
+ automation/scripts/build           |  1 +-
+ automation/scripts/qubes-x86-64.sh | 28 ++++++++++++++++++-
+ automation/scripts/run-tools-tests | 47 +++++++++++++++++++++++++++++++-
+ 4 files changed, 99 insertions(+)
+ create mode 100755 automation/scripts/run-tools-tests
 
-The PV path would normally passes 2 for the channel, which would
-normally get const-propagated and trigger DCE here.
-
-One option might be to make pit_set_gate() be __always_inline.  It only
-has a single caller, and it's only because of -Og that it doesn't get
-inlined.  Then again, this is arguably more subtle than the fix
-presented here.
-
-A preferable fix (but one that really won't get into 4.20 at this point)
-would be to genuinely compile pit->pt0 out in !HVM builds.  That would
-save structure space, but would also force the use of full #ifdef-ary
-across this file.
-
-Is this the singular failure with -Og, or are there others?  I never got
-it working, and there were quite a few failures that failed to get a
-resolution.
-
-~Andrew
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 1822e3ea5fd7..c21a37933881 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -130,6 +130,7 @@
+     PCIDEV: "03:00.0"
+     PCIDEV_INTR: "MSI-X"
+     CONSOLE_OPTS: "console=com1 com1=115200,8n1"
++    SUT_ADDR: test-2.testnet
+   artifacts:
+     paths:
+       - smoke.serial
+@@ -263,6 +264,28 @@ adl-pvshim-x86-64-gcc-debug:
+     - *x86-64-test-needs
+     - alpine-3.18-gcc-debug
+ 
++adl-tools-tests-pv-x86-64-gcc-debug:
++  extends: .adl-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh tools-tests-pv 2>&1 | tee ${LOGFILE}
++  artifacts:
++    reports:
++      junit: tests-junit.xml
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.18-gcc-debug
++
++adl-tools-tests-pvh-x86-64-gcc-debug:
++  extends: .adl-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh tools-tests-pvh 2>&1 | tee ${LOGFILE}
++  artifacts:
++    reports:
++      junit: tests-junit.xml
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.18-gcc-debug
++
+ zen3p-smoke-x86-64-gcc-debug:
+   extends: .zen3p-x86-64
+   script:
+diff --git a/automation/scripts/build b/automation/scripts/build
+index 952599cc25c2..522efe774ef3 100755
+--- a/automation/scripts/build
++++ b/automation/scripts/build
+@@ -109,5 +109,6 @@ else
+     # even though dist/ contains everything, while some containers don't even
+     # build Xen
+     cp -r dist binaries/
++    cp -r tools/tests binaries/
+     collect_xen_artefacts
+ fi
+diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
+index 7eb3ce1bf703..7c80e0c23318 100755
+--- a/automation/scripts/qubes-x86-64.sh
++++ b/automation/scripts/qubes-x86-64.sh
+@@ -10,6 +10,8 @@ set -ex
+ #  - pci-pv         PV dom0,  PV domU + PCI Passthrough
+ #  - pvshim         PV dom0,  PVSHIM domU
+ #  - s3             PV dom0,  S3 suspend/resume
++#  - tools-tests-pv PV dom0, run tests from tools/tests/*
++#  - tools-tests-pvh PVH dom0, run tests from tools/tests/*
+ test_variant=$1
+ 
+ ### defaults
+@@ -19,6 +21,7 @@ timeout=120
+ domU_type="pvh"
+ domU_vif="'bridge=xenbr0',"
+ domU_extra_config=
++retrieve_xml=
+ 
+ case "${test_variant}" in
+     ### test: smoke test & smoke test PVH & smoke test HVM & smoke test PVSHIM
+@@ -126,6 +129,21 @@ done
+ "
+         ;;
+ 
++    ### tests: tools-tests-pv, tools-tests-pvh
++    "tools-tests-pv"|"tools-tests-pvh")
++        retrieve_xml=1
++        passed="test passed"
++        domU_check=""
++        dom0_check="
++/tests/run-tools-tests /tests /tmp/tests-junit.xml && echo \"${passed}\"
++nc -l -p 8080 < /tmp/tests-junit.xml >/dev/null &
++"
++        if [ "${test_variant}" = "tools-tests-pvh" ]; then
++            extra_xen_opts="dom0=pvh"
++        fi
++
++        ;;
++
+     *)
+         echo "Unrecognised test_variant '${test_variant}'" >&2
+         exit 1
+@@ -178,6 +196,8 @@ mkdir srv
+ mkdir sys
+ rm var/run
+ cp -ar ../binaries/dist/install/* .
++cp -ar ../binaries/tests .
++cp -a ../automation/scripts/run-tools-tests tests/
+ 
+ echo "#!/bin/bash
+ 
+@@ -192,6 +212,10 @@ ifconfig xenbr0 192.168.0.1
+ 
+ " > etc/local.d/xen.start
+ 
++if [ -n "$retrieve_xml" ]; then
++    echo "timeout 30s udhcpc -i xenbr0" >> etc/local.d/xen.start
++fi
++
+ if [ -n "$domU_check" ]; then
+     echo "
+ # get domU console content into test log
+@@ -272,6 +296,10 @@ if [ $timeout -le 0 ]; then
+     exit 1
+ fi
+ 
++if [ -n "$retrieve_xml" ]; then
++    nc -w 10 "$SUT_ADDR" 8080 > tests-junit.xml </dev/null
++fi
++
+ sleep 1
+ 
+ (grep -q "^Welcome to Alpine Linux" smoke.serial && grep -q "${passed}" smoke.serial) || exit 1
+diff --git a/automation/scripts/run-tools-tests b/automation/scripts/run-tools-tests
+new file mode 100755
+index 000000000000..770e97c3e943
+--- /dev/null
++++ b/automation/scripts/run-tools-tests
+@@ -0,0 +1,47 @@
++#!/bin/bash
++
++usage() {
++    echo "Usage: $0 tests-dir xml-out"
++}
++
++xml_out=$2
++if [ -z "$xml_out" ]; then
++  xml_out=/dev/null
++fi
++printf '<?xml version="1.0" encoding="UTF-8"?>\n' > "$xml_out"
++printf '<testsuites name="tools.tests">\n' >> "$xml_out"
++printf ' <testsuite name="tools.tests">\n' >> "$xml_out"
++failed=
++for dir in "$1"/*; do
++    [ -d "$dir" ] || continue
++    echo "Running test in $dir"
++    printf '  <testcase name="%s">\n' "$dir" >> "$xml_out"
++    ret=
++    for f in "$dir"/*; do
++        [ -f "$f" ] || continue
++        [ -x "$f" ] || continue
++        "$f" 2>&1 | tee /tmp/out
++        ret=$?
++        if [ "$ret" -ne 0 ]; then
++            echo "FAILED: $ret"
++            failed+=" $dir"
++            printf '   <failure type="failure" message="binary %s exited with code %d">\n' "$f" "$ret" >> "$xml_out"
++            # TODO: could use xml escaping... but current tests seems to
++            # produce sane output
++            cat /tmp/out >> "$xml_out"
++            printf '   </failure>\n' >> "$xml_out"
++        else
++            echo "PASSED"
++        fi
++    done
++    if [ -z "$ret" ]; then
++        printf '   <skipped type="skipped" message="no executable test found in %s"/>\n' "$dir" >> "$xml_out"
++    fi
++    printf '  </testcase>\n' >> "$xml_out"
++done
++printf ' </testsuite>\n' >> "$xml_out"
++printf '</testsuites>\n' >> "$xml_out"
++
++if [ -n "$failed" ]; then
++    exit 1
++fi
+-- 
+git-series 0.9.1
 
