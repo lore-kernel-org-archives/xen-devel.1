@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9FDC02198
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 23:04:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.889128.1298338 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F17EC02198
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Feb 2025 23:04:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.889131.1298359 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tj4jN-00049O-R7; Fri, 14 Feb 2025 23:04:21 +0000
+	id 1tj4ja-0004g5-8o; Fri, 14 Feb 2025 23:04:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 889128.1298338; Fri, 14 Feb 2025 23:04:21 +0000
+Received: by outflank-mailman (output) from mailman id 889131.1298359; Fri, 14 Feb 2025 23:04:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tj4jN-00049H-OO; Fri, 14 Feb 2025 23:04:21 +0000
-Received: by outflank-mailman (input) for mailman id 889128;
- Fri, 14 Feb 2025 23:04:20 +0000
+	id 1tj4ja-0004fy-5s; Fri, 14 Feb 2025 23:04:34 +0000
+Received: by outflank-mailman (input) for mailman id 889131;
+ Fri, 14 Feb 2025 23:04:33 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=83Ve=VF=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1tj4jM-00048v-Ar
- for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 23:04:20 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 1tj4jZ-00048v-Bl
+ for xen-devel@lists.xenproject.org; Fri, 14 Feb 2025 23:04:33 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 02b1945b-eb28-11ef-9896-31a8f345e629;
- Sat, 15 Feb 2025 00:04:17 +0100 (CET)
+ id 0c34761c-eb28-11ef-9896-31a8f345e629;
+ Sat, 15 Feb 2025 00:04:31 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 21977A41DDC;
- Fri, 14 Feb 2025 23:02:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2FEB0C4CEE2;
- Fri, 14 Feb 2025 23:04:13 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0F7EF5C5DF5;
+ Fri, 14 Feb 2025 23:03:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC381C4CED1;
+ Fri, 14 Feb 2025 23:04:28 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,90 +44,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 02b1945b-eb28-11ef-9896-31a8f345e629
+X-Inumbo-ID: 0c34761c-eb28-11ef-9896-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1739574254;
-	bh=sWlm91Ip/2lWKBEjXE+scOhVRsme0hZnZEEz5DNnNEc=;
+	s=k20201202; t=1739574270;
+	bh=uCqM9IdkcfSdTHtQrqfihNhbAMkjLAyJfwXTNQqsRsE=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=f1MxI9jNN3BgtnezkwguNiatrHiiEH7BPsvCg0mPGegcN1LQyWrDrFGAVfMyOioTy
-	 AyYKvJBiMnjd8rXSRRupXOwJfel0IGcf4QHWx/2kbpU8xEZF1r/beqCriIyP/+6qG7
-	 mr692kpuFQCZ81UUxqrONbOIGdMCYwmLu35h9s8RM5mSoyhDm+b+EcwpLSpd2wvBlw
-	 uUGDQU1C8gKEXCROSUhkbJ5oIC1k9nRfHF1ft/t+8pmnt9TCNh6loNocbAywWTlF+o
-	 X9N2c0O01Uc6F9qlo4HmIBCjqVfhAc8EpfKB6l9hqDPwX8ee8ro9f9xXqwHs6CYXNb
-	 zBY3fbVOtqojg==
-Date: Fri, 14 Feb 2025 15:04:11 -0800 (PST)
+	b=sSVe77UuJ5m4EDOnqk29WW6QheMtN5abZtSMxVlsKp3rnpQFrYuFDbozM0FJRCVSM
+	 KDIAeOqbZvZh5QNJA4zkzXBWEZBNnS3Y98wuW5jxSb81Ks54pymiT8+idZGfp0X9Vj
+	 OxNsUVEn4bjDH5tCTNGMu/JDg92RnsnuTvpxBTDnC9lKGB8AJQaBoflzxhGMy7BRAW
+	 zGnTRfgrawLa39NoP6G75hZXYJurW+/+BeWBM1nTwpcPlpASOj8Ht627g0xhXHyI6n
+	 BZdta49OPn929N8P+W4uy/yAZffZcCFTYaApITtcbcEYnzG30+1b/5+SjGFVfo0lRG
+	 FI+FGn7QCTz2w==
+Date: Fri, 14 Feb 2025 15:04:27 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Jan Beulich <jbeulich@suse.com>
-cc: Nicola Vetrini <nicola.vetrini@bugseng.com>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: struct mctelem_cookie missing definition
-In-Reply-To: <69a70bfa-203c-44f9-99ea-60a674e36442@suse.com>
-Message-ID: <alpine.DEB.2.22.394.2502141245150.3858257@ubuntu-linux-20-04-desktop>
-References: <alpine.DEB.2.22.394.2502121721490.619090@ubuntu-linux-20-04-desktop> <1823d604-aa29-4828-a954-b8a08fbdbda7@citrix.com> <alpine.DEB.2.22.394.2502121738440.619090@ubuntu-linux-20-04-desktop> <alpine.DEB.2.22.394.2502121800190.619090@ubuntu-linux-20-04-desktop>
- <eccc2a63-9678-4675-8a7b-7c8e94206cb8@suse.com> <alpine.DEB.2.22.394.2502131326440.619090@ubuntu-linux-20-04-desktop> <alpine.DEB.2.22.394.2502131804510.619090@ubuntu-linux-20-04-desktop> <3c883b4587d750c2723637a037fb46b4@bugseng.com>
- <69a70bfa-203c-44f9-99ea-60a674e36442@suse.com>
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, 
+    michal.orzel@amd.com, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, 
+    consulting@bugseng.com, Dario Faggioli <dfaggioli@suse.com>, 
+    Meng Xu <mengxu@cis.upenn.edu>, Juergen Gross <jgross@suse.com>, 
+    George Dunlap <gwd@xenproject.org>
+Subject: Re: [XEN PATCH 2/3] xen/sched: address violation of MISRA C Rule
+ 8.2
+In-Reply-To: <36cd255a8d4068a66ad8cf45060d60b84b9d4c6d.1739564781.git.nicola.vetrini@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2502141303380.3858257@ubuntu-linux-20-04-desktop>
+References: <cover.1739564781.git.nicola.vetrini@bugseng.com> <36cd255a8d4068a66ad8cf45060d60b84b9d4c6d.1739564781.git.nicola.vetrini@bugseng.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Fri, 14 Feb 2025, Jan Beulich wrote:
-> > Would deviating macros "COOKIE2MCTE" and "MCTE2COOKIE" work?
+On Fri, 14 Feb 2025, Nicola Vetrini wrote:
+> Rule 8.2 states: "Function types shall be in prototype form with
+> named parameters".
 > 
-> If it did, COOKIE2ID and ID2COOKIE would likely need including as well.
+> The parameter name is missing from the function pointer type
+> that constitutes the first parameter.
+> 
+> No functional change.
+> 
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+> ---
+> This small fix is needed in order to keep the rule clean in the
+> follow-up patch that changes the Xen configuration under static
+> analysis.
+> 
+> I wasn't really certain about the right name to give to the parameter,
+> so if there are better options I'd be happy to accept them.
+> ---
+>  xen/common/sched/rt.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+> index f368e0fdd5a5..0300d2d2e454 100644
+> --- a/xen/common/sched/rt.c
+> +++ b/xen/common/sched/rt.c
+> @@ -500,7 +500,7 @@ deadline_queue_remove(struct list_head *queue, struct list_head *elem)
+>  }
+>  
+>  static inline bool
+> -deadline_queue_insert(struct rt_unit * (*qelem)(struct list_head *),
+> +deadline_queue_insert(struct rt_unit * (*qelem)(struct list_head *q_iter),
 
-I wrote this patch. Nicola, can you please check the changes to
-deviations.ecl, this is the first time I try to write the deviation
-myself :-)
+I think it should be "elem" instead of "q_iter"
 
----
-misra: add 11.2 deviation for incomplete types
+Other than that:
 
-struct mctelem_cookie* is used exactly because it is an incomplete type
-so the pointer cannot be dereferenced. This is deliberate. So add a
-deviation for it.
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-In deviations.ecl, add the list of macros that do the conversions to and
-from struct mctelem_cookie*.
+The small change can be done on commit.
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index a28eb0ae76..87bfd2160c 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -366,6 +366,14 @@ constant expressions are required.\""
- }
- -doc_end
- 
-+-doc_begin="Certain pointers point to incomplete types purposely so that they are impossible to dereference."
-+-config=MC3A2.R11.2,reports+={deliberate, "any_area(any_loc(any_exp(macro(^COOKIE2MCTE$))))"}
-+-config=MC3A2.R11.2,reports+={deliberate, "any_area(any_loc(any_exp(macro(^MCTE2COOKIE$))))"}
-+-config=MC3A2.R11.2,reports+={deliberate, "any_area(any_loc(any_exp(macro(^COOKIE2ID$))))"}
-+-config=MC3A2.R11.2,reports+={deliberate, "any_area(any_loc(any_exp(macro(^ID2COOKIE$))))"}
-+}
-+-doc_end
-+
- -doc_begin="Conversions to object pointers that have a pointee type with a smaller (i.e., less strict) alignment requirement are safe."
- -config=MC3A2.R11.3,casts+={safe,
-   "!relation(more_aligned_pointee)"
-diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-index fe0b1e10a2..f3004d6023 100644
---- a/docs/misra/deviations.rst
-+++ b/docs/misra/deviations.rst
-@@ -324,6 +324,12 @@ Deviations related to MISRA C:2012 Rules:
-        semantics that do not lead to unexpected behaviour.
-      - Tagged as `safe` for ECLAIR.
- 
-+   * - R11.2
-+     - Certain pointers point to incomplete types purposely so that they
-+       are impossible to dereference.
-+     - Tagged as `deliberate` for ECLAIR. Such pointer is struct
-+       mctelem_cookie \*.
-+
-    * - R11.2
-      - The conversion from a pointer to an incomplete type to unsigned long
-        does not lose any information, provided that the target type has enough
+>                        struct rt_unit *svc, struct list_head *elem,
+>                        struct list_head *queue)
+>  {
+> -- 
+> 2.43.0
+> 
 
