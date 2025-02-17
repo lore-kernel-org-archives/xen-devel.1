@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD788C021A0
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 10:27:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.890172.1299175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2D6C0219E
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 10:27:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.890173.1299185 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tjyLt-0001nK-Bc; Mon, 17 Feb 2025 10:27:49 +0000
+	id 1tjyLv-00021Y-IT; Mon, 17 Feb 2025 10:27:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 890172.1299175; Mon, 17 Feb 2025 10:27:49 +0000
+Received: by outflank-mailman (output) from mailman id 890173.1299185; Mon, 17 Feb 2025 10:27:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tjyLt-0001nD-7p; Mon, 17 Feb 2025 10:27:49 +0000
-Received: by outflank-mailman (input) for mailman id 890172;
- Mon, 17 Feb 2025 10:27:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tjyLv-00021R-Es; Mon, 17 Feb 2025 10:27:51 +0000
+Received: by outflank-mailman (input) for mailman id 890173;
+ Mon, 17 Feb 2025 10:27:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kh3E=VI=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1tjyLr-0001n7-Kh
- for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 10:27:47 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d3d47573-ed19-11ef-9896-31a8f345e629;
- Mon, 17 Feb 2025 11:27:45 +0100 (CET)
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-3098088c630so13635331fa.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 02:27:45 -0800 (PST)
-Received: from EPUAKYIW03DD.. ([91.123.151.154])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30a39d1dfd2sm285771fa.48.2025.02.17.02.27.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 02:27:43 -0800 (PST)
+ <SRS0=2bV9=VI=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1tjyLu-00021B-Si
+ for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 10:27:50 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id d5c0bd9a-ed19-11ef-9aa6-95dc52dad729;
+ Mon, 17 Feb 2025 11:27:49 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B2464176C;
+ Mon, 17 Feb 2025 02:28:07 -0800 (PST)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 383B73F6A8;
+ Mon, 17 Feb 2025 02:27:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,104 +44,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3d47573-ed19-11ef-9896-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739788065; x=1740392865; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dxqqmfmkX3ZeSqvoxwHhQJEOsttNrAJ3ATYW/mXkYxA=;
-        b=fGul6WKAv0GU//0iqYsppnqdPTlOweMxRsOSakEfyZoLmikundc4bGmrXSTZ2InKbu
-         HFdXZS17+2l0VlEtxY5btJlXuKAng35A7FeWAc4y1bUG32Yaun7bpoYFjs+ufLZEcmQC
-         +ga0YTm0Yuq7SyuDl5lcXkurboyT+z1OnjDnTGI6m9PBDg4hN26QfuKRfxjnklywgpyk
-         +60CY6FEthnjQi/+Zk5v/SMwoYv1tlmk3bgo8LafNC4GHYUDdW5cKtb0Lu71xPnUda0S
-         9jJwRUVZBdY3PHTlWbrOFpdtRRF50bqY7GZmMsiIPicuW/0y5VdzdbzjLkE6lWju3K5V
-         QnoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739788065; x=1740392865;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dxqqmfmkX3ZeSqvoxwHhQJEOsttNrAJ3ATYW/mXkYxA=;
-        b=sd5gDJP6GH7TyvpMUgGAd4Es4PQXHN8/ohONRPm5ppMwPPUSSWtnJ196urE06O63Hr
-         Ru9pb9wu41EM+oEDqB+p3PKjE9npWoNOv0MrJA6vFiNPCTueMQJ/vWYDdnnkZ2sTQxcf
-         GlIoCRgGQRVhbR3n4sLzBDQbMvQvmadJI+JHCCm8qD+0rC4Cwuz3gUSeB7kFkhhuVYx4
-         OWfehMgKQzMkPHZudZC3gtYiLBNrhXl5JQwH1Yjlp7Lui2bGCEV9At0VNBx23vpkpUxw
-         W9epF5841d8ZjLgWukGbiIk7pkAtNYcdMIagzEW+/UZqWg5bfed7m7T5MCrm8XkeM33g
-         Y+cw==
-X-Gm-Message-State: AOJu0Yx/baKF33VQUk+nVi/TES15lTa/ckFDa535/TIi3k3eY6R/aKSs
-	vNELU2pZ1ZCRlBBNQClcP1UeWS0qSjPlSEIxhvMv2Q1CP9vdw1IYM4r/ag==
-X-Gm-Gg: ASbGncvTK0Fbnojqz+FADNRQRAp40AASDXuYYk0jBxCmIU4DDvpgfFXWm4BWRPVrU1B
-	lzwR2ToMCpJWkBNHpdH2J6AmxS3zTzmZGP+SL7HjxYF4cTk4JyK6wCap8ysDs/YiYHBNojHrCmJ
-	3dZN1EvLQtqTZVFbJTgAR53DhLOg0+/7fKMNjM+KXxVuQyKtJIxYeIZiupBTxrGkkXvr9vAKgyV
-	WE7t5MoMtetzOjCwn7Ksoxb6qUf2+Xb1JUShpDlzW2tIbz8ORz4wF63wZIiNpsPDVQWyULY8Yqc
-	99JgI34/fR+LQuQF0bs=
-X-Google-Smtp-Source: AGHT+IF2lYNrqFKgnIJMw+M2luQkfWrHpvaxfceP4/FYehhlWqpzJe1IOL32p8Pw9hmoPGkakUD0zg==
-X-Received: by 2002:a2e:380f:0:b0:309:1ee1:3512 with SMTP id 38308e7fff4ca-30927b197bbmr23293921fa.26.1739788064509;
-        Mon, 17 Feb 2025 02:27:44 -0800 (PST)
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+X-Inumbo-ID: d5c0bd9a-ed19-11ef-9aa6-95dc52dad729
+From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH V2] xen/memory: Make resource_max_frames() to return 0 on unknown type
-Date: Mon, 17 Feb 2025 12:27:41 +0200
-Message-Id: <20250217102741.4122367-1-olekstysh@gmail.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 1/2] xen/passthrough: Provide stub functions when !HAS_PASSTHROUGH
+Date: Mon, 17 Feb 2025 10:27:31 +0000
+Message-Id: <20250217102732.2343729-2-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250217102732.2343729-1-luca.fancellu@arm.com>
+References: <20250217102732.2343729-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+When Xen is built without HAS_PASSTHROUGH, there are some parts
+in arm and x86 where iommu_* functions are called in the codebase,
+but their implementation is under xen/drivers/passthrough that is
+not built.
 
-This is actually what the caller acquire_resource() expects on any kind
-of error (the comment on top of resource_max_frames() also suggests that).
-Otherwise, the caller will treat -errno as a valid value and propagate incorrect
-nr_frames to the VM. As a possible consequence, a VM trying to query a resource
-size of an unknown type will get the success result from the hypercall and obtain
-nr_frames 4294967201.
+So provide some stub for these functions in order to build Xen
+when !HAS_PASSTHROUGH, which is the case for example on systems
+with MPU support.
 
-Also, add an ASSERT_UNREACHABLE() in the default case of _acquire_resource(),
-normally we won't get to this point, as an unknown type will always be rejected
-earlier in resource_max_frames().
+For gnttab_need_iommu_mapping() in the Arm part, modify the macro
+to use IS_ENABLED for the HAS_PASSTHROUGH Kconfig.
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
-  V2:
-   - add R-b
-   - add ASSERT_UNREACHABLE() in the default case of _acquire_resource()
-     and update commit desc regarding that
-   - drop post-commit remark
+v2 Changes:
+ - modify gnttab_need_iommu_mapping to use IS_ENABLED
+ - removed macro that didn't allow some of the parameter to be
+   evaluated
+ - Changed commit message
 ---
 ---
- xen/common/memory.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/arm/include/asm/grant_table.h |  5 +--
+ xen/include/xen/iommu.h                | 48 ++++++++++++++++++++++++--
+ 2 files changed, 49 insertions(+), 4 deletions(-)
 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index a6f2f6d1b3..8ca4e1a842 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -1157,7 +1157,7 @@ static unsigned int resource_max_frames(const struct domain *d,
-         return d->vmtrace_size >> PAGE_SHIFT;
+diff --git a/xen/arch/arm/include/asm/grant_table.h b/xen/arch/arm/include/asm/grant_table.h
+index d3c518a926b9..c5d87b60c4df 100644
+--- a/xen/arch/arm/include/asm/grant_table.h
++++ b/xen/arch/arm/include/asm/grant_table.h
+@@ -73,8 +73,9 @@ int replace_grant_host_mapping(uint64_t gpaddr, mfn_t frame,
+ #define gnttab_status_gfn(d, t, i)                                       \
+     page_get_xenheap_gfn(gnttab_status_page(t, i))
  
-     default:
--        return -EOPNOTSUPP;
-+        return 0;
-     }
- }
+-#define gnttab_need_iommu_mapping(d)                    \
+-    (is_domain_direct_mapped(d) && is_iommu_enabled(d))
++#define gnttab_need_iommu_mapping(d)                                     \
++    (IS_ENABLED(CONFIG_HAS_PASSTHROUGH) && is_domain_direct_mapped(d) && \
++     is_iommu_enabled(d))
  
-@@ -1240,6 +1240,7 @@ static int _acquire_resource(
-         return acquire_vmtrace_buf(d, id, frame, nr_frames, mfn_list);
+ #endif /* __ASM_GRANT_TABLE_H__ */
+ /*
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index b928c67e1995..3e49fef8544e 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -110,6 +110,8 @@ extern int8_t iommu_hwdom_reserved;
  
-     default:
-+        ASSERT_UNREACHABLE();
-         return -EOPNOTSUPP;
-     }
- }
+ extern unsigned int iommu_dev_iotlb_timeout;
+ 
++#ifdef CONFIG_HAS_PASSTHROUGH
++
+ int iommu_setup(void);
+ int iommu_hardware_setup(void);
+ 
+@@ -122,6 +124,24 @@ int arch_iommu_domain_init(struct domain *d);
+ void arch_iommu_check_autotranslated_hwdom(struct domain *d);
+ void arch_iommu_hwdom_init(struct domain *d);
+ 
++#else
++
++static inline int iommu_setup(void)
++{
++    return -ENODEV;
++}
++
++static inline int iommu_domain_init(struct domain *d, unsigned int opts)
++{
++    return 0;
++}
++
++static inline void iommu_hwdom_init(struct domain *d) {}
++
++static inline void iommu_domain_destroy(struct domain *d) {}
++
++#endif /* HAS_PASSTHROUGH */
++
+ /*
+  * The following flags are passed to map (applicable ones also to unmap)
+  * operations, while some are passed back by lookup operations.
+@@ -209,6 +229,8 @@ struct msi_msg;
+ #ifdef CONFIG_HAS_DEVICE_TREE
+ #include <xen/device_tree.h>
+ 
++#ifdef CONFIG_HAS_PASSTHROUGH
++
+ int iommu_assign_dt_device(struct domain *d, struct dt_device_node *dev);
+ int iommu_deassign_dt_device(struct domain *d, struct dt_device_node *dev);
+ int iommu_dt_domain_init(struct domain *d);
+@@ -238,6 +260,26 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
+  */
+ int iommu_remove_dt_device(struct dt_device_node *np);
+ 
++#else
++
++static inline int iommu_assign_dt_device(struct domain *d,
++                                         struct dt_device_node *dev)
++{
++    return -EINVAL;
++}
++
++static inline int iommu_add_dt_device(struct dt_device_node *np)
++{
++    return 1;
++}
++
++static inline int iommu_release_dt_devices(struct domain *d)
++{
++    return 0;
++}
++
++#endif /* HAS_PASSTHROUGH */
++
+ #endif /* HAS_DEVICE_TREE */
+ 
+ struct page_info;
+@@ -381,17 +423,19 @@ struct domain_iommu {
+ #define iommu_set_feature(d, f)   set_bit(f, dom_iommu(d)->features)
+ #define iommu_clear_feature(d, f) clear_bit(f, dom_iommu(d)->features)
+ 
++/* Does the IOMMU pagetable need to be kept synchronized with the P2M */
++#ifdef CONFIG_HAS_PASSTHROUGH
+ /* Are we using the domain P2M table as its IOMMU pagetable? */
+ #define iommu_use_hap_pt(d)       (IS_ENABLED(CONFIG_HVM) && \
+                                    dom_iommu(d)->hap_pt_share)
+ 
+-/* Does the IOMMU pagetable need to be kept synchronized with the P2M */
+-#ifdef CONFIG_HAS_PASSTHROUGH
+ #define need_iommu_pt_sync(d)     (dom_iommu(d)->need_sync)
+ 
+ int iommu_do_domctl(struct xen_domctl *domctl, struct domain *d,
+                     XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
+ #else
++#define iommu_use_hap_pt(d)       ({ (void)(d); false; })
++
+ #define need_iommu_pt_sync(d)     ({ (void)(d); false; })
+ 
+ static inline int iommu_do_domctl(struct xen_domctl *domctl, struct domain *d,
 -- 
 2.34.1
 
