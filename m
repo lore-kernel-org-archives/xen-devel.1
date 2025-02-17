@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7C7C021A9
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 16:27:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.890662.1299809 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90906C021A9
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 16:31:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.890683.1299819 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk3xf-0005pJ-JP; Mon, 17 Feb 2025 16:27:11 +0000
+	id 1tk41Q-0007mv-5f; Mon, 17 Feb 2025 16:31:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 890662.1299809; Mon, 17 Feb 2025 16:27:11 +0000
+Received: by outflank-mailman (output) from mailman id 890683.1299819; Mon, 17 Feb 2025 16:31:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk3xf-0005pC-FC; Mon, 17 Feb 2025 16:27:11 +0000
-Received: by outflank-mailman (input) for mailman id 890662;
- Mon, 17 Feb 2025 16:27:10 +0000
+	id 1tk41Q-0007mo-1i; Mon, 17 Feb 2025 16:31:04 +0000
+Received: by outflank-mailman (input) for mailman id 890683;
+ Mon, 17 Feb 2025 16:31:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IPKs=VI=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1tk3xe-000531-TP
- for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 16:27:10 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=o9S/=VI=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tk41O-0007l1-H7
+ for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 16:31:02 +0000
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [2a00:1450:4864:20::535])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 094bb192-ed4c-11ef-9aa6-95dc52dad729;
- Mon, 17 Feb 2025 17:27:10 +0100 (CET)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43984e9cc90so6396725e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 08:27:10 -0800 (PST)
-Received: from localhost.localdomain (172.74.6.51.dyn.plus.net. [51.6.74.172])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f259d5ef9sm12651334f8f.76.2025.02.17.08.27.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 08:27:09 -0800 (PST)
+ id 9330c8c9-ed4c-11ef-9aa6-95dc52dad729;
+ Mon, 17 Feb 2025 17:31:01 +0100 (CET)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5e04cb346eeso3077707a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 08:31:01 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aba5323202dsm903093266b.6.2025.02.17.08.31.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Feb 2025 08:31:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,205 +47,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 094bb192-ed4c-11ef-9aa6-95dc52dad729
+X-Inumbo-ID: 9330c8c9-ed4c-11ef-9aa6-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1739809629; x=1740414429; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=d6mmCdnEK4WLbCua9qHCvfFVcXpvOHJMVDWGCqinwp8=;
-        b=F2LbYCGTj5zFtNsX+6QGvAVlg9Ilm4mjo+vB4DwCILPslzo50n7zWZpRKiUYsXUI0F
-         tQ5F5DJYjvJPyABbr3a6wzFvEiQ5ZSrifvCRqY6usjrBlmg6CorKRlix8lLz7z1Yp3FD
-         6vBdMOp+oXHHC0froD9vjuGIEkdrO1kePQT34=
+        d=suse.com; s=google; t=1739809861; x=1740414661; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=mQ2IeoO+WiJD99KVpVcsiVOIBnIP72sXFe1+iuF2U88=;
+        b=emTLeHDdWL7wuGy+d8aqsuMw3C9+169f+Nqa//wjrHKCHLoUn7+WconLkD3tTjZsnR
+         PKZnX9c/bq/Je1oz0BqqKGQLw0mCJusxYqoiO4RgFC/Yx57MIV+FY7PMyHYFrjl/xz22
+         y4+cSGhpGbua+G6sgQS+7NX8Xn7k237GN4jpzEA6bo1CLYUeZzATfTLqcKNBxvtm9OkD
+         pEMbA1dz12xVKr7PBWBuzoF56z2CYNMM0uNAgmzY/ZEVHfG0xdUxr+A2ox2QzLICK1SD
+         PAapZwatrvvFjW4JKLs0vvwpmMICtcwYxJnBPJ2wh0lHHAUZ713v/6nTN97RJ8gEWibE
+         9CLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739809629; x=1740414429;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=d6mmCdnEK4WLbCua9qHCvfFVcXpvOHJMVDWGCqinwp8=;
-        b=xEpAw9qhVF6Hf3dRxeaIUGEl6LPs+7oouKeO+TVcjusIyY7aINU/NbIGGg3MJ7N2/V
-         y9OMVSoagvBjUDZCT2FO+brEapN6hwMv8HHxx/xcGtBhzFm0xX1q4ZOtZKCEilV/YL7U
-         b/KWnXVw6keW9FyWaLIvciH8xH+8JGh8l8SLuXA/syrvNINCjFnHaS1e9KmHd+r82OyH
-         M7gVqEGF/JS0AzU6O5IQg4bGjNpiIHW7DScMrO56MLqZQOJROB5GMGGHQ1Brogi3d8+i
-         mAZeN8pjdwYcKAaMq8IJf0YWjC2xTCREbXsd67krvQewMvlmNpTXpEhrmiwd6MfO3tRO
-         3pFg==
-X-Gm-Message-State: AOJu0YyjMttojaWIgOGMObbe4davAWZ+D/XthkcdPNOYuSRJ111XVojh
-	JeXIq5EGxr9glSmtSOCSznZxbazZcvYTsL8A89wnfP2RnqXINQffqcLNtYdn8RKZnFKvrrsSSCU
-	Y
-X-Gm-Gg: ASbGncsmLyddg6Wv7j32ml1A80yWtyrAvy8dV/yUBGm81LZ8WaquXYb+DCG4UjpwxhV
-	RV0iQmrGqtu5HSn8qQRTeggw+F1xI0EOlMKB3DRuZcCTWujcpFGAiv8IIC72VYzy9wSRf5gOQ5o
-	m4nLuO4NzJb3PrACEut+sBVmn01Z4iC/npnD4skyDaLYDD+pvtM1RUkMoqyZP0jf1rtvudHr192
-	GeoVxSouiwz0Y7FDDFfsku8HsmYOqMU6Gwkkjry3BcLCYTzsc2nXvT3+hjcobHf2IsLM1hcAQ65
-	6pctqjPY95+FtYravHJPu5miGIF6LZtT5BPyPhAp1YND2dv/O6nHLjZb
-X-Google-Smtp-Source: AGHT+IHLO/8WOm2XzsbHdshyqk+1zpOW9OvRO63dLt/8AVw1vcT/P4NdQEHiwdwCG1hXG7KJmdJjZw==
-X-Received: by 2002:a5d:64e6:0:b0:38d:e3da:8b4f with SMTP id ffacd0b85a97d-38f3398735amr10222788f8f.0.1739809629395;
-        Mon, 17 Feb 2025 08:27:09 -0800 (PST)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v6] Avoid crash calling PrintErrMesg from efi_multiboot2
-Date: Mon, 17 Feb 2025 16:26:59 +0000
-Message-Id: <20250217162659.151232-1-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1739809861; x=1740414661;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mQ2IeoO+WiJD99KVpVcsiVOIBnIP72sXFe1+iuF2U88=;
+        b=PeGN9YXrBJj/zU0o9LTwGrvH9ZdAS7YdtY1vcTSDEBk5MnP5tRIYJLWhQAxCBN1ZgB
+         t37vWu8TaxzKkvlAwpFOhefawkIVephRDfFYoYuNuCZcYiKxO5sj3TlDjhXqFyW5PuAX
+         zWvM3o1W7Zhf+Jv0JqOsoF0rjeKPhBkhHF6N5DT2MYEo0TEippXknhvdLk5HUpP5XR49
+         kOtNsWB/T9RQ8L3iMuQv86SYg7XoLdIpy+UoYYm5y2IEtu1/L/3NlxHDzgtkyPs+Wdo3
+         khqMsZppbyI6HcGI+MbYLHYKssEuQti/36zcxDxIfRfEGQElkJqmqHYE7gmUZNK5pC6L
+         DRDA==
+X-Forwarded-Encrypted: i=1; AJvYcCWAX9OY8NzREtzcIYZkMbGQayskdKQcHGO6PqbiA6rlsdDM1R9B4mko+KaIGA9hFJ98mO5ierm1mW0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzGZvDzDbewB6Iul1ZdRXSnctUKrY6UcCACNQGlCjKYH7tFyFd2
+	YaXZmcxIEW8g2Gz/Qtb5MskvCfTDP0iYP9d7vwI6LIwgvVSRzLJ1yvVWjILDIKKrbLLfXsSTi5Y
+	=
+X-Gm-Gg: ASbGnctWi7zagDVejadh1guoGcUdZgRRcZsnTu5vr/CVjFdHBFHCAdsBFlFnp9irw2i
+	qz9i5GYDjjk9ALiV8e9Mjs2bgtdENzzogtpWzckH0Sd9h7OeQqlPoEMJAY2eYe9HLc/FVaAAvdh
+	5iGqHaug8LLyAlh8+xUaoJl8h3Zy67EJ5lrpT18pOvrfwOWpDaqSoJAWf+lrvOLRc9kfHh+q8z2
+	qZ6qYqQudWs3Yq+Hd20uVMZos6eH9jfC+/2JVIP7c9o3QiopTtZMflk1Zj7GKAw5FD5y/nb2dz+
+	f4lNAb7x1LohHDcRoz3no8SDk7enweFeMXDCK7lmjJPWgLwKAlzOJm6Xe3xrm2WMslqwYelncVV
+	K
+X-Google-Smtp-Source: AGHT+IGysohYYbQO+Nwqn9uMLSNZbM2fhXDFhJ5OW7Il9JXOJyFBZIUuC2IEXGXvtmcqCGS8rHuS+w==
+X-Received: by 2002:a17:907:3e02:b0:ab6:d4d0:2be9 with SMTP id a640c23a62f3a-abb70e67725mr1137594666b.56.1739809861002;
+        Mon, 17 Feb 2025 08:31:01 -0800 (PST)
+Message-ID: <77eb149c-bb1e-4f77-85ba-c44b173a5c1e@suse.com>
+Date: Mon, 17 Feb 2025 17:31:00 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6] Avoid crash calling PrintErrMesg from efi_multiboot2
+To: Frediano Ziglio <frediano.ziglio@cloud.com>
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, xen-devel@lists.xenproject.org
+References: <20250217162659.151232-1-frediano.ziglio@cloud.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250217162659.151232-1-frediano.ziglio@cloud.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Although code is compiled with -fpic option data is not position
-independent. This causes data pointer to become invalid if
-code is not relocated properly which is what happens for
-efi_multiboot2 which is called by multiboot entry code.
+On 17.02.2025 17:26, Frediano Ziglio wrote:
+> --- a/xen/common/efi/efi-common.mk
+> +++ b/xen/common/efi/efi-common.mk
+> @@ -2,6 +2,7 @@ EFIOBJ-y := boot.init.o pe.init.o ebmalloc.o runtime.o
+>  EFIOBJ-$(CONFIG_COMPAT) += compat.o
+>  
+>  CFLAGS-y += -fshort-wchar
+> +CFLAGS-y += -fno-jump-tables
+>  CFLAGS-y += -iquote $(srctree)/common/efi
+>  CFLAGS-y += -iquote $(srcdir)
 
-Code tested adding
-   PrintErrMesg(L"Test message", EFI_BUFFER_TOO_SMALL);
-in efi_multiboot2 before calling efi_arch_edd (this function
-can potentially call PrintErrMesg).
+Do source files other than boot.c really need this? Do any other files outside
+of efi/ maybe also need this (iirc this point was made along with the v5 comment
+you got)?
 
-Before the patch (XenServer installation on Qemu, xen replaced
-with vanilla xen.gz):
-  Booting `XenServer (Serial)'Booting `XenServer (Serial)'
-  Test message: !!!! X64 Exception Type - 0E(#PF - Page-Fault)  CPU Apic ID - 00000000 !!!!
-  ExceptionData - 0000000000000000  I:0 R:0 U:0 W:0 P:0 PK:0 SS:0 SGX:0
-  RIP  - 000000007EE21E9A, CS  - 0000000000000038, RFLAGS - 0000000000210246
-  RAX  - 000000007FF0C1B5, RCX - 0000000000000050, RDX - 0000000000000010
-  RBX  - 0000000000000000, RSP - 000000007FF0C180, RBP - 000000007FF0C210
-  RSI  - FFFF82D040467CE8, RDI - 0000000000000000
-  R8   - 000000007FF0C1C8, R9  - 000000007FF0C1C0, R10 - 0000000000000000
-  R11  - 0000000000001020, R12 - FFFF82D040467CE8, R13 - 000000007FF0C1B8
-  R14  - 000000007EA33328, R15 - 000000007EA332D8
-  DS   - 0000000000000030, ES  - 0000000000000030, FS  - 0000000000000030
-  GS   - 0000000000000030, SS  - 0000000000000030
-  CR0  - 0000000080010033, CR2 - FFFF82D040467CE8, CR3 - 000000007FC01000
-  CR4  - 0000000000000668, CR8 - 0000000000000000
-  DR0  - 0000000000000000, DR1 - 0000000000000000, DR2 - 0000000000000000
-  DR3  - 0000000000000000, DR6 - 00000000FFFF0FF0, DR7 - 0000000000000400
-  GDTR - 000000007F9DB000 0000000000000047, LDTR - 0000000000000000
-  IDTR - 000000007F48E018 0000000000000FFF,   TR - 0000000000000000
-  FXSAVE_STATE - 000000007FF0BDE0
-  !!!! Find image based on IP(0x7EE21E9A) (No PDB)  (ImageBase=000000007EE20000, EntryPoint=000000007EE23935) !!!!
-
-After the patch:
-  Booting `XenServer (Serial)'Booting `XenServer (Serial)'
-  Test message: Buffer too small
-  BdsDxe: loading Boot0000 "UiApp" from Fv(7CB8BDC9-F8EB-4F34-AAEA-3EE4AF6516A1)/FvFile(462CAA21-7614-4503-836E-8AB6F4662331)
-  BdsDxe: starting Boot0000 "UiApp" from Fv(7CB8BDC9-F8EB-4F34-AAEA-3EE4AF6516A1)/FvFile(462CAA21-7614-4503-836E-8AB6F4662331)
-
-This partially rollback commit 00d5d5ce23e6.
-
-Fixes: 9180f5365524 ("x86: add multiboot2 protocol support for EFI platforms")
-Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
----
-Changes since v1:
-- added "Fixes:" tag;
-- fixed cast style change.
-
-Changes since v2:
-- wrap long line.
-
-Changes since v3:
-- fixed "Fixes:" tag.
-
-Changes since v4:
-- use switch instead of tables.
-
-Changes since v5:
-- added -fno-jump-tables option.
----
- xen/common/efi/boot.c        | 58 ++++++++++++++++++++++++------------
- xen/common/efi/efi-common.mk |  1 +
- 2 files changed, 40 insertions(+), 19 deletions(-)
-
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index efbec00af9..143b5681ba 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -287,33 +287,53 @@ static bool __init match_guid(const EFI_GUID *guid1, const EFI_GUID *guid2)
- /* generic routine for printing error messages */
- static void __init PrintErrMesg(const CHAR16 *mesg, EFI_STATUS ErrCode)
- {
--    static const CHAR16* const ErrCodeToStr[] __initconstrel = {
--        [~EFI_ERROR_MASK & EFI_NOT_FOUND]           = L"Not found",
--        [~EFI_ERROR_MASK & EFI_NO_MEDIA]            = L"The device has no media",
--        [~EFI_ERROR_MASK & EFI_MEDIA_CHANGED]       = L"Media changed",
--        [~EFI_ERROR_MASK & EFI_DEVICE_ERROR]        = L"Device error",
--        [~EFI_ERROR_MASK & EFI_VOLUME_CORRUPTED]    = L"Volume corrupted",
--        [~EFI_ERROR_MASK & EFI_ACCESS_DENIED]       = L"Access denied",
--        [~EFI_ERROR_MASK & EFI_OUT_OF_RESOURCES]    = L"Out of resources",
--        [~EFI_ERROR_MASK & EFI_VOLUME_FULL]         = L"Volume is full",
--        [~EFI_ERROR_MASK & EFI_SECURITY_VIOLATION]  = L"Security violation",
--        [~EFI_ERROR_MASK & EFI_CRC_ERROR]           = L"CRC error",
--        [~EFI_ERROR_MASK & EFI_COMPROMISED_DATA]    = L"Compromised data",
--        [~EFI_ERROR_MASK & EFI_BUFFER_TOO_SMALL]    = L"Buffer too small",
--    };
--    EFI_STATUS ErrIdx = ErrCode & ~EFI_ERROR_MASK;
--
-     StdOut = StdErr;
-     PrintErr(mesg);
-     PrintErr(L": ");
- 
--    if( (ErrIdx < ARRAY_SIZE(ErrCodeToStr)) && ErrCodeToStr[ErrIdx] )
--        mesg = ErrCodeToStr[ErrIdx];
--    else
-+    switch (ErrCode)
-     {
-+    case EFI_NOT_FOUND:
-+        mesg = L"Not found";
-+        break;
-+    case EFI_NO_MEDIA:
-+        mesg = L"The device has no media";
-+        break;
-+    case EFI_MEDIA_CHANGED:
-+        mesg = L"Media changed";
-+        break;
-+    case EFI_DEVICE_ERROR:
-+        mesg = L"Device error";
-+        break;
-+    case EFI_VOLUME_CORRUPTED:
-+        mesg = L"Volume corrupted";
-+        break;
-+    case EFI_ACCESS_DENIED:
-+        mesg = L"Access denied";
-+        break;
-+    case EFI_OUT_OF_RESOURCES:
-+        mesg = L"Out of resources";
-+        break;
-+    case EFI_VOLUME_FULL:
-+        mesg = L"Volume is full";
-+        break;
-+    case EFI_SECURITY_VIOLATION:
-+        mesg = L"Security violation";
-+        break;
-+    case EFI_CRC_ERROR:
-+        mesg = L"CRC error";
-+        break;
-+    case EFI_COMPROMISED_DATA:
-+        mesg = L"Compromised data";
-+        break;
-+    case EFI_BUFFER_TOO_SMALL:
-+        mesg = L"Buffer too small";
-+        break;
-+    default:
-         PrintErr(L"ErrCode: ");
-         DisplayUint(ErrCode, 0);
-         mesg = NULL;
-+        break;
-     }
-     blexit(mesg);
- }
-diff --git a/xen/common/efi/efi-common.mk b/xen/common/efi/efi-common.mk
-index 23cafcf20c..06b1c19674 100644
---- a/xen/common/efi/efi-common.mk
-+++ b/xen/common/efi/efi-common.mk
-@@ -2,6 +2,7 @@ EFIOBJ-y := boot.init.o pe.init.o ebmalloc.o runtime.o
- EFIOBJ-$(CONFIG_COMPAT) += compat.o
- 
- CFLAGS-y += -fshort-wchar
-+CFLAGS-y += -fno-jump-tables
- CFLAGS-y += -iquote $(srctree)/common/efi
- CFLAGS-y += -iquote $(srcdir)
- 
--- 
-2.34.1
-
+Jan
 
