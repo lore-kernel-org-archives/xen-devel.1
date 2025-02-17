@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93AA3C021A9
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 19:29:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.890801.1299931 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19E3CC021AA
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 19:44:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.890813.1299952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk6nO-0002om-N4; Mon, 17 Feb 2025 19:28:46 +0000
+	id 1tk72d-0005lS-C6; Mon, 17 Feb 2025 19:44:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 890801.1299931; Mon, 17 Feb 2025 19:28:46 +0000
+Received: by outflank-mailman (output) from mailman id 890813.1299952; Mon, 17 Feb 2025 19:44:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk6nO-0002of-JP; Mon, 17 Feb 2025 19:28:46 +0000
-Received: by outflank-mailman (input) for mailman id 890801;
- Mon, 17 Feb 2025 19:28:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tk72d-0005lJ-9S; Mon, 17 Feb 2025 19:44:31 +0000
+Received: by outflank-mailman (input) for mailman id 890813;
+ Mon, 17 Feb 2025 19:44:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/Ii7=VI=linaro.org=richard.henderson@srs-se1.protection.inumbo.net>)
- id 1tk6nN-0002oZ-3B
- for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 19:28:45 +0000
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [2607:f8b0:4864:20::62c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 65e047e6-ed65-11ef-9aa6-95dc52dad729;
- Mon, 17 Feb 2025 20:28:43 +0100 (CET)
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-220c8eb195aso96692625ad.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 11:28:43 -0800 (PST)
-Received: from [192.168.0.4] (71-212-39-66.tukw.qwest.net. [71.212.39.66])
+ <SRS0=xGAw=VI=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tk72b-0005X7-Nx
+ for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 19:44:29 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 994766b6-ed67-11ef-9896-31a8f345e629;
+ Mon, 17 Feb 2025 20:44:28 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43937cf2131so31539725e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 11:44:28 -0800 (PST)
+Received: from andrewcoop.. (host-92-26-98-202.as13285.net. [92.26.98.202])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73242568a0dsm8436448b3a.43.2025.02.17.11.28.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Feb 2025 11:28:41 -0800 (PST)
+ 5b1f17b1804b1-4395a06d22csm161547025e9.22.2025.02.17.11.44.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Feb 2025 11:44:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,101 +47,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65e047e6-ed65-11ef-9aa6-95dc52dad729
+X-Inumbo-ID: 994766b6-ed67-11ef-9896-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1739820522; x=1740425322; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=VEJ/B3GBCyQg1NZ8srPFvpNFWpxr50mPaKhI69Ppxgo=;
-        b=ZiKvDAlU+QZ1yN7LlSZ8nP/2bOLZlfLkSBi7nXMXnIc3ykViV6QzaaGyRhfG0tvuSy
-         H02iLXmPJdp8Wb5bRiDRoqWpO/NboJW7iQZaxs6y0F+gnNu+2jQjE8HPJMmcS+I4s0Sb
-         HJRox+zjF4RpE/U3g1Qdj9jW2i87QWLWPakjv+lr2Y5uBt3DRplZjlr3KjDFiWDcvAK/
-         en5g18XXeyojV7Pm3JnLKuojywNgYDEq3bW1pFVLv32w8W2jvc2mN41m4dPBhXZz5Kps
-         4JNF6IbsH84LsGouNtXI1PnrttfdcBV993yACuwY69awaTf7ZltJcmSSOPpCt6p/0lIA
-         allA==
+        d=citrix.com; s=google; t=1739821467; x=1740426267; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5YzESArRGDEbanW7NDpWp+57rIKx6rZ39D0RVCP0EuY=;
+        b=cwJKryvjPFA1DszRqyUSOE8v0/SHb6sbz3/7ttoogZEfkXhxEpln/+efg3I+Mymzu7
+         sStIpW2JQA7zn6+ZdLvrb2l0s1rUKcyp37adwcUoakxArqbOng/odO9fPVrcbi5TI2SU
+         KpjZXR2QZ4/rFf53dNoxwHX1Ns4z2EZG4dEPI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739820522; x=1740425322;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=VEJ/B3GBCyQg1NZ8srPFvpNFWpxr50mPaKhI69Ppxgo=;
-        b=FuRBPUNyw8+SkAv1ciEtrlibsrOmdR6/rhshiDra4awOB49WhoRW7AdEkWfPKhrKWW
-         ZQnFTSl31LqSTMDTlKy4z+m/gnMiwoPD3biF/fR2AqYsg6EIGB4xvcDs61yEIxavPa/N
-         69MKYoh//6Dk43c4GJ7JVz3cCxd7VKW/sjKRVW4jalvYrys8hYwfacDqkTUG6A4GBREJ
-         ZXbammeAgSUOne6NF4rT2RFHfP4V0QjvWZ7a+NHo/Bg6h7tbwgRBZfRWt2sTxl18iqzF
-         SZGCKJdC48Si33EpA2YcOzj7OWXumSNd9d2G6wfXm5bfBXG+Yo1jlsfWUV0/JCup7WUF
-         koNw==
-X-Forwarded-Encrypted: i=1; AJvYcCVpJ7QCVbkXFziJrLGN+m+RVjNmV0VZPjxY3U8A/qWdGibNgMVBre7Qk0BTmEyDw9AU3JRkyC17Vbc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yytq+L1E4MzXhPSbUrwF0LDZdj23uRIcr8nAVgzMMkKETwOCqjX
-	qZMvKBQ2B2WbcDYedyDBS6slWo0GY9DrZeq1XII3fAp8pNQbsjr0mm+MawH614c=
-X-Gm-Gg: ASbGncvLmUYdiA8j14MHP3qQmjnjd2e1NtZ+sDtCmt5jJ55Lk/MUdOSAxEyQZtgx5JP
-	giriwsrVdf0hm/qv6jSALIxsT0p0AiSflGyOBHL7/mgfoWeMhdqMM0sewXgOJsE3ylcTfUNApvg
-	BNwzJM+rwLOq/8H9qflSiYP9S8+hjGgKokeQH0z+ZgLp+Ta+VVmOjMJayX4BTnR/bN2MEe28hTa
-	q5Js3yYrOq/ByMmz+6+JIUL3RfOOElOZunSav2rfJtqAsBSLUwZUCKdil/2c9Ls9hu9NosbjWNZ
-	rkRgiwGEvLuZel8lMIRB9WUVZ3oPtEyrNvaDl/katSIiOaTOKae6ve4=
-X-Google-Smtp-Source: AGHT+IFw9x3ddCLNhBbl16dPCQzotblc4ykNeeWquQsvMRT1NjsLlII2PlFLuCRaJQswwJsL3MPGMA==
-X-Received: by 2002:a05:6a00:2e08:b0:730:74f8:25c1 with SMTP id d2e1a72fcca58-732618c0351mr14386201b3a.15.1739820521870;
-        Mon, 17 Feb 2025 11:28:41 -0800 (PST)
-Message-ID: <3cf6d45b-0d0e-4669-954f-a545f3ec1a37@linaro.org>
-Date: Mon, 17 Feb 2025 11:28:39 -0800
+        d=1e100.net; s=20230601; t=1739821467; x=1740426267;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5YzESArRGDEbanW7NDpWp+57rIKx6rZ39D0RVCP0EuY=;
+        b=fwIY4Pj5NPdkf2teiCliaa9SGTAc6cdAby/CPb3Y6Yhtb4M/pZnLJ0Q0YUB93cAmXO
+         PciAyvYQeWNE0n8YU7p+EguTaDLHnoHcYouITLdbPJC5R+mQuOrysmtBAES4Rv/qVRe/
+         BhrY1bzwczcISLS7I2acS6g6LaoEGLWlX0gqxlakHOSoCGM+ybRBC+1pvCs/bTk4rdGK
+         wZRfhdN8Ih/jlon18oCgoBVLcdo5EG5CDUGTDCO/iBe7iehnajeLGWPoxnZmowID8WZv
+         BR4lDPtQ9Hat0ieK9J5QfL5q/gDLp9HNkMC+Fe/1fTthcGpiqQE3CYQqxDwir579ai3s
+         /cww==
+X-Gm-Message-State: AOJu0Yw+xk/kQuu8bGfQZDXEnybPlOJeeBRs3rhkA5g3oGjPCsGQP2/6
+	ZfR37SR32QwMDU8TTIWmbBg1xRCJT/lK/xncrrKye+L83bNg1evqn0kZgv4IzTUPyw2/kcXF2rv
+	X
+X-Gm-Gg: ASbGncvJEMPr+I5Nd8J4V7MeV3apVZxufxt8w+2RXhntZOk4Xxt2E8F/IIBX3bVBL44
+	KCMfeChPII4FJLcbqLmemwdkT6S7ikdgKduXwsPu5LVYZy19k15xpd5W0k/6Ul5HsQNo1lwdXPR
+	llnGqoWgg1gXEf2ZQn0Ai/4uPDf2Tagx78Bcb8hcrEaQsPj1B6bBGFEIysz0XaRR34ww7aCX5bb
+	bYOX0CTe3cZJHWWe4Zynws/bm02SpoK/T5Iqb3dqb5ed6qmv/pSLtGk6vooeBgBbaqEAbruRhod
+	/1NcwuQoWHem+4JGgi15uC+36ujw8OoHb8C6vKeWAfAqcu/iESsl
+X-Google-Smtp-Source: AGHT+IE99dFPsW0YkAvMyNqRAy9mwU7uFHCF7uYyOWMGkzmRGb2OORq8+KprPLet8O8BIX+shANhqA==
+X-Received: by 2002:a05:600c:1c84:b0:439:8c80:6af4 with SMTP id 5b1f17b1804b1-4398c806deemr23873485e9.19.1739821467385;
+        Mon, 17 Feb 2025 11:44:27 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH for-4.21 3/3] xen/ACPI: Drop local acpi_os_{v,}printf() and use plain {v,}printk()
+Date: Mon, 17 Feb 2025 19:44:21 +0000
+Message-Id: <20250217194421.601813-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250217194421.601813-1-andrew.cooper3@citrix.com>
+References: <20250217194421.601813-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 16/20] cpus: Restrict cpu_common_post_load() code to TCG
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, David Hildenbrand <david@redhat.com>,
- qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
-References: <20250123234415.59850-1-philmd@linaro.org>
- <20250123234415.59850-17-philmd@linaro.org>
- <e52485c5-122a-4a95-928f-08fcd17cd772@linaro.org>
- <a8be34a4-c157-4a5f-99bc-50c87c1330b1@linaro.org>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <a8be34a4-c157-4a5f-99bc-50c87c1330b1@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 2/17/25 09:19, Philippe Mathieu-Daudé wrote:
-> On 26/1/25 22:16, Richard Henderson wrote:
->> On 1/23/25 15:44, Philippe Mathieu-Daudé wrote:
->>> CPU_INTERRUPT_EXIT was removed in commit 3098dba01c7
->>> ("Use a dedicated function to request exit from execution
->>> loop"), tlb_flush() and tb_flush() are related to TCG
->>> accelerator.
->>>
->>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->>> ---
->>>   cpu-target.c | 33 +++++++++++++++++++--------------
->>>   1 file changed, 19 insertions(+), 14 deletions(-)
->>>
->>> diff --git a/cpu-target.c b/cpu-target.c
->>> index a2999e7c3c0..c05ef1ff096 100644
->>> --- a/cpu-target.c
->>> +++ b/cpu-target.c
->>> @@ -45,22 +45,27 @@
->>>   #ifndef CONFIG_USER_ONLY
->>>   static int cpu_common_post_load(void *opaque, int version_id)
->>>   {
->>> -    CPUState *cpu = opaque;
->>> +#ifdef CONFIG_TCG
->>> +    if (tcg_enabled()) {
->>
->> Why do you need both ifdef and tcg_enabled()?  I would have thought just tcg_enabled().
->>
->> Are there declarations that are (unnecessarily?) protected?
-> 
-> No, you are right, tcg_enabled() is sufficient, I don't remember why
-> I added the #ifdef.
-> 
-> Could I include your R-b tag without the #ifdef lines?
+Now that Xen has a real vprintk(), there's no need to opencode it locally with
+vsnprintf().  Redirect the debug routines to the real {v,}printk() and drop
+the local acpi_os_{v,}printf() implementations.
 
-Yes.
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Amongst other things, this removes one arbitrary limit on message size, as
+well as removing a 512 byte static buffer that ought to have been in
+__initdata given that is private to an __init function.
 
-r~
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/drivers/acpi/osl.c      | 17 -----------------
+ xen/include/acpi/acpiosxf.h |  5 ++---
+ 2 files changed, 2 insertions(+), 20 deletions(-)
+
+diff --git a/xen/drivers/acpi/osl.c b/xen/drivers/acpi/osl.c
+index ab80d6b2a92a..7f233bab4269 100644
+--- a/xen/drivers/acpi/osl.c
++++ b/xen/drivers/acpi/osl.c
+@@ -45,23 +45,6 @@ ACPI_MODULE_NAME("osl")
+ #include CONFIG_ACPI_CUSTOM_DSDT_FILE
+ #endif
+ 
+-void __init acpi_os_printf(const char *fmt, ...)
+-{
+-	va_list args;
+-	va_start(args, fmt);
+-	acpi_os_vprintf(fmt, args);
+-	va_end(args);
+-}
+-
+-void __init acpi_os_vprintf(const char *fmt, va_list args)
+-{
+-	static char buffer[512];
+-
+-	vsnprintf(buffer, sizeof(buffer), fmt, args);
+-
+-	printk("%s", buffer);
+-}
+-
+ acpi_physical_address __initdata rsdp_hint;
+ 
+ acpi_physical_address __init acpi_os_get_root_pointer(void)
+diff --git a/xen/include/acpi/acpiosxf.h b/xen/include/acpi/acpiosxf.h
+index de83ea38c40f..2da318962f0d 100644
+--- a/xen/include/acpi/acpiosxf.h
++++ b/xen/include/acpi/acpiosxf.h
+@@ -82,8 +82,7 @@ acpi_os_write_memory(acpi_physical_address address, u32 value, u32 width);
+ /*
+  * Debug print routines
+  */
+-void ACPI_INTERNAL_VAR_XFACE acpi_os_printf(const char *format, ...);
+-
+-void acpi_os_vprintf(const char *format, va_list args);
++#define acpi_os_printf printk
++#define acpi_os_vprintf vprintk
+ 
+ #endif				/* __ACPIOSXF_H__ */
+-- 
+2.39.5
+
 
