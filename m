@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4FE3C021AB
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 10:18:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.890009.1299101 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 423BBC0219E
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 10:18:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.890011.1299122 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tjyCs-0001le-Ep; Mon, 17 Feb 2025 10:18:30 +0000
+	id 1tjyCv-0002Pa-2W; Mon, 17 Feb 2025 10:18:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 890009.1299101; Mon, 17 Feb 2025 10:18:30 +0000
+Received: by outflank-mailman (output) from mailman id 890011.1299122; Mon, 17 Feb 2025 10:18:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tjyCs-0001kh-1O; Mon, 17 Feb 2025 10:18:30 +0000
-Received: by outflank-mailman (input) for mailman id 890009;
- Mon, 17 Feb 2025 10:18:28 +0000
+	id 1tjyCu-0002Og-IK; Mon, 17 Feb 2025 10:18:32 +0000
+Received: by outflank-mailman (input) for mailman id 890011;
+ Mon, 17 Feb 2025 10:18:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EOw1=VI=bounce.vates.tech=bounce-md_30504962.67b30cee.v1-b40b248698934c5e840df52a6849616b@srs-se1.protection.inumbo.net>)
- id 1tjyCq-0008Nl-9s
- for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 10:18:28 +0000
+ <SRS0=ivl3=VI=bounce.vates.tech=bounce-md_30504962.67b30cf1.v1-1139b33da4f64eb4982db78ecf1a9d49@srs-se1.protection.inumbo.net>)
+ id 1tjyCs-0008Nl-9o
+ for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 10:18:30 +0000
 Received: from mail178-27.suw51.mandrillapp.com
  (mail178-27.suw51.mandrillapp.com [198.2.178.27])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 86130cc7-ed18-11ef-9aa6-95dc52dad729;
- Mon, 17 Feb 2025 11:18:25 +0100 (CET)
+ id 86988630-ed18-11ef-9aa6-95dc52dad729;
+ Mon, 17 Feb 2025 11:18:26 +0100 (CET)
 Received: from pmta13.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
  by mail178-27.suw51.mandrillapp.com (Mailchimp) with ESMTP id
- 4YxJWy5LXQz6CPyQT
- for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 10:18:22 +0000 (GMT)
+ 4YxJX12b2pz6CPyQ8
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 10:18:25 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- b40b248698934c5e840df52a6849616b; Mon, 17 Feb 2025 10:18:22 +0000
+ 1139b33da4f64eb4982db78ecf1a9d49; Mon, 17 Feb 2025 10:18:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,320 +45,1370 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 86130cc7-ed18-11ef-9aa6-95dc52dad729
+X-Inumbo-ID: 86988630-ed18-11ef-9aa6-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1739787502; x=1740057502;
-	bh=zoLqeflgQV7od7E9S7uru8jBtRkAuKD+thEBMZ1CtXE=;
+	s=mte1; t=1739787505; x=1740057505;
+	bh=WbgTGvRMlHFjR5UB7o6+2Ox9ptYDhf0B20gCWQNSGOE=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=AecTorfYV5B4nPZ3WL6xVdqUAe5260IYtLVn1YZyh+DU9ZxczFW6OpyppEJDj6312
-	 leSqW+uBvQxhNymD921sBgDOyMTxIT+8bMh3na8GOzfmEbiTMNBH0No5fuddCQl68F
-	 2eQFSxwr5eRIfW4D6BzwzI07gC9iubEN44OsmxzMwX0+bWGLqGu0nY79omwkagGPun
-	 1lIQVoBWiBPTOZRI5Ama3Ht69EoI/8lnJ5UXShB9Vz4OumZHiCAeMH/4MgDv3Jyllq
-	 8pzjlw3OwxFEOuzXFTDPibWkDouJvV/t6mtNYuyYKkSTB57PsuWHqA14guJpmuWQsE
-	 hzZ45cfw47Fzg==
+	b=twBMtl1WPy1ibOZkb6Ce9EyLnJ4aBXCD5vQyVuthdfwbO/wqngaRncHelrQtneLrB
+	 TZSAvGJs5pRhxCoDbopEYT6+uBIDbFE4n/+pH3sMvych3PIpWtmwVszPno97/sxlZo
+	 D5XxI/+VA+Vhp0THDxmZMlxrLaFytMM6ig5WOjGleTXIJseMZ2jRbmFqfza2K3jfCZ
+	 /dt2ofRxbwiVV6LvnWMuziA8WlbV6oDSPm+NY46SDZuaJvROuOhllbD5GfQwxcP9x0
+	 R5fMBBZsV8qIxm4y0rDp4vYWREO08iII0qswJApjvwUjc8qyMm+i2oFIPEmL0lCV1Y
+	 hnDmUeiULhedg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1739787502; x=1740048002; i=teddy.astie@vates.tech;
-	bh=zoLqeflgQV7od7E9S7uru8jBtRkAuKD+thEBMZ1CtXE=;
+	t=1739787505; x=1740048005; i=teddy.astie@vates.tech;
+	bh=WbgTGvRMlHFjR5UB7o6+2Ox9ptYDhf0B20gCWQNSGOE=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=BIKXgasbPfGeutyxqRg3EzMJ8Oq3gXx+TBhVeTXFfttneO35gW4OVW/86lEIfhaG0
-	 SD+SUGJ7h6dmyBdfAz3zm2Lr6PBmFEZGH8yq/lVp7ODjOJFxYWiTuf0UIhKCcM4eS0
-	 tHmvBj2wYr7+/2xD2tWrK8aq/1vzy2OxlbBRP99X8jqKg0J9o1aqLbjEpSlYkew/nb
-	 rm18oE5RI9rlcygvQTU5vKg888Ze95ZyKjShwZAlsYyUd1DVekV0lE+YiRftJq+SHs
-	 tB+M3SwgRHfOllFUKH+FV/WlWONi5PIaGvYj18E9xqnAN/4iLPN9th6RR5kKzHH/TS
-	 Uk8NMlsT1INrQ==
+	b=tPt8J4wt6Uf7CH67fK60T8DLCP74ycOeVAWDfer+Y59e7XBEnlW0IE7WR2DVdgMqF
+	 441HHJAYeJRs/ZN27wl7stfTX/VrTQWwqXRBXycF0wL6ATAxKtwh+5H/KE8lW5MiCT
+	 r8yUvCHsxaTYRrCeR/3i/ePQBB0kgF6fUbDVA3OTG2G22vXbhWihpCoUy97XpakoD5
+	 z1IxYtTGFxcd2sM6IS/bAIX7SPDrbnWm616yOMeZ/7M4KqAHoTEuBf6vYlTpnLA4Ef
+	 7emVVSVy6f+MeQnts//4rvFmn+oTQJDqyX0RnpmvELFEjbuMVyHurYEDox5YkNOGLk
+	 2u3NfNt1KpOPQ==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[XEN=20RFC=20PATCH=20v6=2009/11]=20x86/iommu:=20Introduce=20IOMMU=20arena?=
+Subject: =?utf-8?Q?[XEN=20RFC=20PATCH=20v6=2010/11]=20iommu:=20Introduce=20PV-IOMMU?=
 X-Mailer: git-send-email 2.47.2
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1739787501844
+X-Bm-Transport-Timestamp: 1739787502089
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Message-Id: <19b58d02c32d35bb422df7934da26855da7e3f87.1739785339.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
+Message-Id: <9d2d5f255224eca6be95eff0f538d7fd7d93a2ac.1739785339.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1739785339.git.teddy.astie@vates.tech>
 References: <cover.1739785339.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.b40b248698934c5e840df52a6849616b?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.1139b33da4f64eb4982db78ecf1a9d49?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20250217:md
-Date: Mon, 17 Feb 2025 10:18:22 +0000
+Date: Mon, 17 Feb 2025 10:18:25 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Introduce a new facility that reserves a fixed amount of contiguous
-pages and provide a way to allocate them.
-
-It is used to ensure that the guest cannot cause the hypervisor to
-OOM with unconstrained allocations by abusing the PV-IOMMU interface.
+Introduce the PV-IOMMU subsystem as defined in docs/designs/pv-iommu.md.
 
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/include/asm/arena.h     |  54 +++++++++
- xen/arch/x86/include/asm/iommu.h     |   3 +
- xen/drivers/passthrough/x86/Makefile |   1 +
- xen/drivers/passthrough/x86/arena.c  | 157 +++++++++++++++++++++++++++
- 4 files changed, 215 insertions(+)
- create mode 100644 xen/arch/x86/include/asm/arena.h
- create mode 100644 xen/drivers/passthrough/x86/arena.c
+ xen/arch/x86/include/asm/iommu.h            |   3 +
+ xen/common/Makefile                         |   1 +
+ xen/common/pv-iommu.c                       | 536 ++++++++++++++++++++
+ xen/drivers/passthrough/amd/pci_amd_iommu.c |  15 +
+ xen/drivers/passthrough/iommu.c             | 105 ++++
+ xen/drivers/passthrough/vtd/iommu.c         |   8 +
+ xen/drivers/passthrough/x86/iommu.c         |  61 ++-
+ xen/include/hypercall-defs.c                |   6 +
+ xen/include/public/pv-iommu.h               | 343 +++++++++++++
+ xen/include/public/xen.h                    |   1 +
+ xen/include/xen/iommu.h                     |  11 +
+ 11 files changed, 1085 insertions(+), 5 deletions(-)
+ create mode 100644 xen/common/pv-iommu.c
+ create mode 100644 xen/include/public/pv-iommu.h
 
-diff --git a/xen/arch/x86/include/asm/arena.h b/xen/arch/x86/include/asm/arena.h
-new file mode 100644
-index 0000000000..7555b100e0
---- /dev/null
-+++ b/xen/arch/x86/include/asm/arena.h
-@@ -0,0 +1,54 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/**
-+ * Simple arena-based page allocator.
-+ */
-+
-+#ifndef __XEN_IOMMU_ARENA_H__
-+#define __XEN_IOMMU_ARENA_H__
-+
-+#include "xen/domain.h"
-+#include "xen/atomic.h"
-+#include "xen/mm-frame.h"
-+#include "xen/types.h"
-+
-+/**
-+ * struct page_arena: Page arena structure
-+ */
-+struct iommu_arena {
-+    /* mfn of the first page of the memory region */
-+    mfn_t region_start;
-+    /* bitmap of allocations */
-+    unsigned long *map;
-+
-+    /* Order of the arena */
-+    unsigned int order;
-+
-+    /* Used page count */
-+    atomic_t used_pages;
-+};
-+
-+/**
-+ * Initialize a arena using domheap allocator.
-+ * @param [out] arena Arena to allocate
-+ * @param [in] domain domain that has ownership of arena pages
-+ * @param [in] order order of the arena (power of two of the size)
-+ * @param [in] memflags Flags for domheap_alloc_pages()
-+ * @return -ENOMEM on arena allocation error, 0 otherwise
-+ */
-+int iommu_arena_initialize(struct iommu_arena *arena, struct domain *domain,
-+                           unsigned int order, unsigned int memflags);
-+
-+/**
-+ * Teardown a arena.
-+ * @param [out] arena arena to allocate
-+ * @param [in] check check for existing allocations
-+ * @return -EBUSY if check is specified
-+ */
-+int iommu_arena_teardown(struct iommu_arena *arena, bool check);
-+
-+struct page_info *iommu_arena_allocate_page(struct iommu_arena *arena);
-+bool iommu_arena_free_page(struct iommu_arena *arena, struct page_info *page);
-+
-+#define iommu_arena_size(arena) (1LLU << (arena)->order)
-+
-+#endif
 diff --git a/xen/arch/x86/include/asm/iommu.h b/xen/arch/x86/include/asm/iommu.h
-index 654a07b9b2..452b98b42d 100644
+index 452b98b42d..09fb512936 100644
 --- a/xen/arch/x86/include/asm/iommu.h
 +++ b/xen/arch/x86/include/asm/iommu.h
-@@ -12,6 +12,8 @@
- #include <asm/cache.h>
- #include <asm/processor.h>
- 
-+#include "arena.h"
+@@ -136,6 +136,9 @@ int iommu_identity_mapping(struct domain *d, struct iommu_context *ctx,
+                            p2m_access_t p2ma, paddr_t base, paddr_t end,
+                            unsigned int flag);
+ void iommu_identity_map_teardown(struct domain *d, struct iommu_context *ctx);
++bool iommu_identity_map_check(struct domain *d, struct iommu_context *ctx,
++                              mfn_t mfn);
 +
- #define DEFAULT_DOMAIN_ADDRESS_WIDTH 48
  
- struct g2m_ioport {
-@@ -62,6 +64,7 @@ struct arch_iommu
- {
-     /* Queue for freeing pages */
-     struct page_list_head free_queue;
-+    struct iommu_arena pt_arena; /* allocator for non-default contexts */
+ extern bool untrusted_msi;
  
-     union {
-         /* Intel VT-d */
-diff --git a/xen/drivers/passthrough/x86/Makefile b/xen/drivers/passthrough/x86/Makefile
-index 75b2885336..1614f3d284 100644
---- a/xen/drivers/passthrough/x86/Makefile
-+++ b/xen/drivers/passthrough/x86/Makefile
-@@ -1,2 +1,3 @@
- obj-y += iommu.o
-+obj-y += arena.o
- obj-$(CONFIG_HVM) += hvm.o
-diff --git a/xen/drivers/passthrough/x86/arena.c b/xen/drivers/passthrough/x86/arena.c
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index cba3b32733..c8583a80ba 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -37,6 +37,7 @@ obj-y += percpu.o
+ obj-$(CONFIG_PERF_COUNTERS) += perfc.o
+ obj-bin-$(CONFIG_HAS_PMAP) += pmap.init.o
+ obj-y += preempt.o
++obj-y += pv-iommu.o
+ obj-y += random.o
+ obj-y += rangeset.o
+ obj-y += radix-tree.o
+diff --git a/xen/common/pv-iommu.c b/xen/common/pv-iommu.c
 new file mode 100644
-index 0000000000..984bc4d643
+index 0000000000..a1315bf582
 --- /dev/null
-+++ b/xen/drivers/passthrough/x86/arena.c
-@@ -0,0 +1,157 @@
++++ b/xen/common/pv-iommu.c
+@@ -0,0 +1,536 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
-+/**
-+ * Simple arena-based page allocator.
++/*
++ * xen/common/pv_iommu.c
 + *
-+ * Allocate a large block using alloc_domheam_pages and allocate single pages
-+ * using iommu_arena_allocate_page and iommu_arena_free_page functions.
-+ *
-+ * Concurrent {allocate/free}_page is thread-safe
-+ * iommu_arena_teardown during {allocate/free}_page is not thread-safe.
-+ *
-+ * Written by Teddy Astie <teddy.astie@vates.tech>
++ * PV-IOMMU hypercall interface.
 + */
 +
-+#include <asm/bitops.h>
-+#include <asm/page.h>
-+#include <xen/atomic.h>
-+#include <xen/bug.h>
-+#include <xen/config.h>
-+#include <xen/mm-frame.h>
++#include <xen/errno.h>
 +#include <xen/mm.h>
-+#include <xen/xmalloc.h>
++#include <xen/lib.h>
++#include <xen/iommu.h>
++#include <xen/sched.h>
++#include <xen/iocap.h>
++#include <xen/mm-frame.h>
++#include <xen/pci.h>
++#include <xen/guest_access.h>
++#include <asm/p2m.h>
++#include <asm/event.h>
++#include <asm/mm.h>
++#include <asm/iommu.h>
++#include <public/pv-iommu.h>
 +
-+#include <asm/arena.h>
++#define PVIOMMU_PREFIX "[PV-IOMMU] "
 +
-+/* Maximum of scan tries if the bit found not available */
-+#define ARENA_TSL_MAX_TRIES 5
-+
-+int iommu_arena_initialize(struct iommu_arena *arena, struct domain *d,
-+                           unsigned int order, unsigned int memflags)
++static int get_paged_frame(struct domain *d, gfn_t gfn, mfn_t *mfn,
++                           struct page_info **page, bool readonly)
 +{
-+    struct page_info *page;
++    int ret = 0;
++    p2m_type_t p2mt = p2m_invalid;
 +
-+    /* TODO: Maybe allocate differently ? */
-+    page = alloc_domheap_pages(d, order, memflags);
++    #ifdef CONFIG_X86
++    p2m_query_t query = P2M_ALLOC;
 +
-+    if ( !page )
-+        return -ENOMEM;
++    if ( !readonly )
++        query |= P2M_UNSHARE;
 +
-+    arena->map = xzalloc_array(unsigned long, BITS_TO_LONGS(1LLU << order));
-+    arena->order = order;
-+    arena->region_start = page_to_mfn(page);
++    *mfn = get_gfn_type(d, gfn_x(gfn), &p2mt, query);
++    #else
++    *mfn = p2m_lookup(d, gfn, &p2mt);
++    #endif
 +
-+    _atomic_set(&arena->used_pages, 0);
-+    bitmap_zero(arena->map, iommu_arena_size(arena));
-+
-+    printk(XENLOG_DEBUG "IOMMU: Allocated arena (%llu pages, start=%"PRI_mfn")\n",
-+           iommu_arena_size(arena), mfn_x(arena->region_start));
-+    return 0;
-+}
-+
-+int iommu_arena_teardown(struct iommu_arena *arena, bool check)
-+{
-+    BUG_ON(mfn_x(arena->region_start) == 0);
-+
-+    /* Check for allocations if check is specified */
-+    if ( check && (atomic_read(&arena->used_pages) > 0) )
-+        return -EBUSY;
-+
-+    free_domheap_pages(mfn_to_page(arena->region_start), arena->order);
-+
-+    arena->region_start = _mfn(0);
-+    _atomic_set(&arena->used_pages, 0);
-+    xfree(arena->map);
-+    arena->map = NULL;
-+
-+    return 0;
-+}
-+
-+struct page_info *iommu_arena_allocate_page(struct iommu_arena *arena)
-+{
-+    unsigned int index;
-+    unsigned int tsl_tries = 0;
-+
-+    BUG_ON(mfn_x(arena->region_start) == 0);
-+
-+    if ( atomic_read(&arena->used_pages) == iommu_arena_size(arena) )
-+        /* All pages used */
-+        return NULL;
-+
-+    do
++    if ( mfn_eq(*mfn, INVALID_MFN) )
 +    {
-+        index = find_first_zero_bit(arena->map, iommu_arena_size(arena));
++        /* No mapping ? */
++        printk(XENLOG_G_WARNING PVIOMMU_PREFIX
++               "Trying to map to non-backed page frame (gfn=%"PRI_gfn
++               " p2mt=%d d%d)\n", gfn_x(gfn), p2mt, d->domain_id);
 +
-+        if ( index >= iommu_arena_size(arena) )
-+            /* No more free pages */
-+            return NULL;
++        ret = -ENOENT;
++    }
++    else if ( p2m_is_any_ram(p2mt) && mfn_valid(*mfn) )
++    {
++        *page = get_page_from_mfn(*mfn, d);
++        ret = 0;
++    }
++    else if ( p2m_is_mmio(p2mt) ||
++              iomem_access_permitted(d, mfn_x(*mfn),mfn_x(*mfn)) )
++    {
++        *page = NULL;
++        ret = 0;
++    }
++    else
++    {
++        printk(XENLOG_G_WARNING PVIOMMU_PREFIX
++               "Unexpected p2mt %d (d%d gfn=%"PRI_gfn" mfn=%"PRI_mfn")\n",
++               p2mt, d->domain_id, gfn_x(gfn), mfn_x(*mfn));
 +
-+        /*
-+         * While there shouldn't be a lot of retries in practice, this loop
-+         * *may* run indefinetly if the found bit is never free due to being
-+         * overwriten by another CPU core right after. Add a safeguard for
-+         * such very rare cases.
-+         */
-+        tsl_tries++;
++        ret = -EPERM;
++    }
 +
-+        if ( unlikely(tsl_tries == ARENA_TSL_MAX_TRIES) )
-+        {
-+            printk(XENLOG_ERR "ARENA: Too many TSL retries !");
-+            return NULL;
-+        }
-+
-+        /* Make sure that the bit we found is still free */
-+    } while ( test_and_set_bit(index, arena->map) );
-+
-+    atomic_inc(&arena->used_pages);
-+
-+    return mfn_to_page(mfn_add(arena->region_start, index));
++    put_gfn(d, gfn_x(gfn));
++    return ret;
 +}
 +
-+bool iommu_arena_free_page(struct iommu_arena *arena, struct page_info *page)
++static bool can_use_iommu_check(struct domain *d)
 +{
-+    unsigned long index;
-+    mfn_t frame;
-+
-+    if ( !page )
++    if ( !is_iommu_enabled(d) )
 +    {
-+        printk(XENLOG_WARNING "IOMMU: Trying to free NULL page");
-+        WARN();
++        printk(XENLOG_G_WARNING PVIOMMU_PREFIX
++               "IOMMU disabled for this domain\n");
 +        return false;
 +    }
 +
-+    frame = page_to_mfn(page);
-+
-+    /* Check if page belongs to our arena */
-+    if ( (mfn_x(frame) < mfn_x(arena->region_start))
-+        || (mfn_x(frame) >= (mfn_x(arena->region_start) + iommu_arena_size(arena))) )
++    if ( !dom_iommu(d)->allow_pv_iommu )
 +    {
-+        printk(XENLOG_WARNING
-+               "IOMMU: Trying to free outside arena region [mfn=%"PRI_mfn"]",
-+               mfn_x(frame));
-+        WARN();
++        printk(XENLOG_G_WARNING PVIOMMU_PREFIX
++               "PV-IOMMU disabled for this domain\n");
 +        return false;
 +    }
-+
-+    index = mfn_x(frame) - mfn_x(arena->region_start);
-+
-+    /* Sanity check in case of underflow. */
-+    ASSERT(index < iommu_arena_size(arena));
-+
-+    if ( !test_and_clear_bit(index, arena->map) )
-+    {
-+        /*
-+         * Bit was free during our arena_free_page, which means that
-+         * either this page was never allocated, or we are in a double-free
-+         * situation.
-+         */
-+        printk(XENLOG_WARNING
-+               "IOMMU: Freeing non-allocated region (double-free?) [mfn=%"PRI_mfn"]",
-+               mfn_x(frame));
-+        WARN();
-+        return false;
-+    }
-+
-+    atomic_dec(&arena->used_pages);
 +
 +    return true;
 +}
++
++static long capabilities_op(struct pv_iommu_capabilities *cap, struct domain *d)
++{
++    cap->max_ctx_no = d->iommu.other_contexts.count;
++    cap->max_iova_addr = iommu_get_max_iova(d);
++
++    cap->max_pasid = 0; /* TODO */
++    cap->cap_flags = 0;
++
++    cap->pgsize_mask = PAGE_SIZE_4K;
++
++    return 0;
++}
++
++static long init_op(struct pv_iommu_init *init, struct domain *d)
++{
++    if (init->max_ctx_no == UINT32_MAX)
++        return -E2BIG;
++
++    return iommu_domain_pviommu_init(d, init->max_ctx_no + 1, init->arena_order);
++}
++
++static long alloc_context_op(struct pv_iommu_alloc *alloc, struct domain *d)
++{
++    u16 ctx_no = 0;
++    int status = 0;
++
++    status = iommu_context_alloc(d, &ctx_no, 0);
++
++    if ( status )
++        return status;
++
++    printk(XENLOG_G_INFO PVIOMMU_PREFIX
++           "Created IOMMU context %hu in d%d\n", ctx_no, d->domain_id);
++
++    alloc->ctx_no = ctx_no;
++    return 0;
++}
++
++static long free_context_op(struct pv_iommu_free *free, struct domain *d)
++{
++    int flags = IOMMU_TEARDOWN_PREEMPT;
++
++    if ( !free->ctx_no )
++        return -EINVAL;
++
++    if ( free->free_flags & IOMMU_FREE_reattach_default )
++        flags |= IOMMU_TEARDOWN_REATTACH_DEFAULT;
++
++    return iommu_context_free(d, free->ctx_no, flags);
++}
++
++static long reattach_device_op(struct pv_iommu_reattach_device *reattach,
++                               struct domain *d)
++{
++    int ret;
++    device_t *pdev;
++    struct physdev_pci_device dev = reattach->dev;
++
++    pcidevs_lock();
++    pdev = pci_get_pdev(d, PCI_SBDF(dev.seg, dev.bus, dev.devfn));
++
++    if ( !pdev )
++    {
++        pcidevs_unlock();
++        return -ENOENT;
++    }
++
++    ret = iommu_reattach_context(d, d, pdev, reattach->ctx_no);
++
++    pcidevs_unlock();
++    return ret;
++}
++
++static long map_pages_op(struct pv_iommu_map_pages *map, struct domain *d)
++{
++    struct iommu_context *ctx;
++    int ret = 0, flush_ret;
++    struct page_info *page = NULL;
++    mfn_t mfn, mfn_lookup;
++    unsigned int flags = 0, flush_flags = 0;
++    size_t i = 0;
++    dfn_t dfn0 = _dfn(map->dfn); /* original map->dfn */
++
++    if ( !map->ctx_no || !(ctx = iommu_get_context(d, map->ctx_no)) )
++        return -EINVAL;
++
++    if ( map->map_flags & IOMMU_MAP_readable )
++        flags |= IOMMUF_readable;
++
++    if ( map->map_flags & IOMMU_MAP_writeable )
++        flags |= IOMMUF_writable;
++
++    for (i = 0; i < map->nr_pages; i++)
++    {
++        gfn_t gfn = _gfn(map->gfn + i);
++        dfn_t dfn = _dfn(map->dfn + i);
++
++#ifdef CONFIG_X86
++        if ( iommu_identity_map_check(d, ctx, _mfn(map->dfn)) )
++        {
++            ret = -EADDRNOTAVAIL;
++            break;
++        }
++#endif
++
++        ret = get_paged_frame(d, gfn, &mfn, &page, 0);
++
++        if ( ret )
++            break;
++
++        /* Check for conflict with existing mappings */
++        if ( !iommu_lookup_page(d, dfn, &mfn_lookup, &flags, map->ctx_no) )
++        {
++            if ( page )
++                put_page(page);
++
++            ret = -EADDRINUSE;
++            break;
++        }
++
++        ret = iommu_map(d, dfn, mfn, 1, flags, &flush_flags, map->ctx_no);
++
++        if ( ret )
++        {
++            if ( page )
++                put_page(page);
++
++            break;
++        }
++
++        map->mapped++;
++
++        if ( (i & 0xff) && hypercall_preempt_check() )
++        {
++            i++;
++
++            map->gfn += i;
++            map->dfn += i;
++            map->nr_pages -= i;
++
++            ret = -ERESTART;
++            break;
++        }
++    }
++
++    flush_ret = iommu_iotlb_flush(d, dfn0, i, flush_flags, map->ctx_no);
++
++    iommu_put_context(ctx);
++
++    if ( flush_ret )
++        printk(XENLOG_G_WARNING PVIOMMU_PREFIX
++               "Flush operation failed for d%dc%d (%d)\n", d->domain_id,
++               ctx->id, flush_ret);
++
++    return ret;
++}
++
++static long unmap_pages_op(struct pv_iommu_unmap_pages *unmap, struct domain *d)
++{
++    struct iommu_context *ctx;
++    mfn_t mfn;
++    int ret = 0, flush_ret;
++    unsigned int flags, flush_flags = 0;
++    size_t i = 0;
++    dfn_t dfn0 = _dfn(unmap->dfn); /* original unmap->dfn */
++
++    if ( !unmap->ctx_no || !(ctx = iommu_get_context(d, unmap->ctx_no)) )
++        return -EINVAL;
++
++    for (i = 0; i < unmap->nr_pages; i++)
++    {
++        dfn_t dfn = _dfn(unmap->dfn + i);
++
++#ifdef CONFIG_X86
++        if ( iommu_identity_map_check(d, ctx, _mfn(unmap->dfn)) )
++        {
++            ret = -EADDRNOTAVAIL;
++            break;
++        }
++#endif
++
++        /* Check if there is a valid mapping for this domain */
++        if ( iommu_lookup_page(d, dfn, &mfn, &flags, unmap->ctx_no) ) {
++            ret = -ENOENT;
++            break;
++        }
++
++        ret = iommu_unmap(d, dfn, 1, 0, &flush_flags, unmap->ctx_no);
++
++        if ( ret )
++            break;
++
++        unmap->unmapped++;
++
++        /* Decrement reference counter (if needed) */
++        if ( mfn_valid(mfn) )
++            put_page(mfn_to_page(mfn));
++
++        if ( (i & 0xff) && hypercall_preempt_check() )
++        {
++            i++;
++
++            unmap->dfn += i;
++            unmap->nr_pages -= i;
++
++            ret = -ERESTART;
++            break;
++        }
++    }
++
++    flush_ret = iommu_iotlb_flush(d, dfn0, i, flush_flags, unmap->ctx_no);
++
++    iommu_put_context(ctx);
++
++    if ( flush_ret )
++        printk(XENLOG_WARNING PVIOMMU_PREFIX
++               "Flush operation failed for d%dc%d (%d)\n", d->domain_id,
++               ctx->id, flush_ret);
++
++    return ret;
++}
++
++static long do_iommu_subop(int subop, XEN_GUEST_HANDLE_PARAM(void) arg,
++                           struct domain *d, bool remote);
++
++static long remote_cmd_op(struct pv_iommu_remote_cmd *remote_cmd,
++                          struct domain *current_domain)
++{
++    long ret = 0;
++    struct domain *d;
++
++    /* TODO: use a better permission logic */
++    if ( !is_hardware_domain(current_domain) )
++        return -EPERM;
++
++    d = get_domain_by_id(remote_cmd->domid);
++
++    if ( !d )
++        return -ENOENT;
++
++    ret = do_iommu_subop(remote_cmd->subop, remote_cmd->arg, d, true);
++
++    put_domain(d);
++
++    return ret;
++}
++
++static long do_iommu_subop(int subop, XEN_GUEST_HANDLE_PARAM(void) arg,
++                           struct domain *d, bool remote)
++{
++    long ret = 0;
++
++    switch ( subop )
++    {
++        case IOMMU_noop:
++            break;
++
++        case IOMMU_query_capabilities:
++        {
++            struct pv_iommu_capabilities cap;
++
++            ret = capabilities_op(&cap, d);
++
++            if ( unlikely(copy_to_guest(arg, &cap, 1)) )
++                ret = -EFAULT;
++
++            break;
++        }
++
++        case IOMMU_init:
++        {
++            struct pv_iommu_init init;
++
++            if ( unlikely(copy_from_guest(&init, arg, 1)) )
++            {
++                ret = -EFAULT;
++                break;
++            }
++
++            ret = init_op(&init, d);
++        }
++
++        case IOMMU_alloc_context:
++        {
++            struct pv_iommu_alloc alloc;
++
++            if ( unlikely(copy_from_guest(&alloc, arg, 1)) )
++            {
++                ret = -EFAULT;
++                break;
++            }
++
++            ret = alloc_context_op(&alloc, d);
++
++            if ( unlikely(copy_to_guest(arg, &alloc, 1)) )
++                ret = -EFAULT;
++
++            break;
++        }
++
++        case IOMMU_free_context:
++        {
++            struct pv_iommu_free free;
++
++            if ( unlikely(copy_from_guest(&free, arg, 1)) )
++            {
++                ret = -EFAULT;
++                break;
++            }
++
++            ret = free_context_op(&free, d);
++            break;
++        }
++
++        case IOMMU_reattach_device:
++        {
++            struct pv_iommu_reattach_device reattach;
++
++            if ( unlikely(copy_from_guest(&reattach, arg, 1)) )
++            {
++                ret = -EFAULT;
++                break;
++            }
++
++            ret = reattach_device_op(&reattach, d);
++            break;
++        }
++
++        case IOMMU_map_pages:
++        {
++            struct pv_iommu_map_pages map;
++
++            if ( unlikely(copy_from_guest(&map, arg, 1)) )
++            {
++                ret = -EFAULT;
++                break;
++            }
++
++            ret = map_pages_op(&map, d);
++
++            if ( unlikely(copy_to_guest(arg, &map, 1)) )
++                ret = -EFAULT;
++
++            break;
++        }
++
++        case IOMMU_unmap_pages:
++        {
++            struct pv_iommu_unmap_pages unmap;
++
++            if ( unlikely(copy_from_guest(&unmap, arg, 1)) )
++            {
++                ret = -EFAULT;
++                break;
++            }
++
++            ret = unmap_pages_op(&unmap, d);
++
++            if ( unlikely(copy_to_guest(arg, &unmap, 1)) )
++                ret = -EFAULT;
++
++            break;
++        }
++
++        case IOMMU_remote_cmd:
++        {
++            struct pv_iommu_remote_cmd remote_cmd;
++
++            if ( remote )
++            {
++                /* Prevent remote_cmd from being called recursively */
++                ret = -EINVAL;
++                break;
++            }
++
++            if ( unlikely(copy_from_guest(&remote_cmd, arg, 1)) )
++            {
++                ret = -EFAULT;
++                break;
++            }
++
++            ret = remote_cmd_op(&remote_cmd, d);
++            break;
++        }
++
++        /*
++         * TODO
++         */
++        case IOMMU_alloc_nested:
++        {
++            ret = -EOPNOTSUPP;
++            break;
++        }
++
++        case IOMMU_flush_nested:
++        {
++            ret = -EOPNOTSUPP;
++            break;
++        }
++
++        case IOMMU_attach_pasid:
++        {
++            ret = -EOPNOTSUPP;
++            break;
++        }
++
++        case IOMMU_detach_pasid:
++        {
++            ret = -EOPNOTSUPP;
++            break;
++        }
++
++        default:
++            return -EOPNOTSUPP;
++    }
++
++    return ret;
++}
++
++long do_iommu_op(unsigned int subop, XEN_GUEST_HANDLE_PARAM(void) arg)
++{
++    long ret = 0;
++
++    if ( !can_use_iommu_check(current->domain) )
++        return -ENODEV;
++
++    ret = do_iommu_subop(subop, arg, current->domain, false);
++
++    if ( ret == -ERESTART )
++        return hypercall_create_continuation(__HYPERVISOR_iommu_op, "ih", subop, arg);
++
++    return ret;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+index 366d5eb982..0b561ff99b 100644
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -714,6 +714,20 @@ static void cf_check amd_dump_page_tables(struct domain *d)
+                               hd->arch.amd.paging_mode, 0, 0);
+ }
+ 
++uint64_t amd_get_max_iova(struct domain *d)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++    unsigned int bits = 12 + hd->arch.amd.paging_mode * 9;
++
++    /* If paging_mode == 6, which indicates 6-level page tables,
++       we have bits == 66 while the GPA space is still 64-bits
++     */
++    if (bits >= 64)
++        return ~0LLU;
++
++    return (1LLU << bits) - 1;
++}
++
+ static const struct iommu_ops __initconst_cf_clobber _iommu_ops = {
+     .page_sizes = PAGE_SIZE_4K | PAGE_SIZE_2M | PAGE_SIZE_1G,
+     .init = amd_iommu_domain_init,
+@@ -742,6 +756,7 @@ static const struct iommu_ops __initconst_cf_clobber _iommu_ops = {
+     .crash_shutdown = amd_iommu_crash_shutdown,
+     .get_reserved_device_memory = amd_iommu_get_reserved_device_memory,
+     .dump_page_tables = amd_dump_page_tables,
++    .get_max_iova = amd_get_max_iova,
+ };
+ 
+ static const struct iommu_init_ops __initconstrel _iommu_init_ops = {
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index f92835a2ed..c26a2160f9 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -193,6 +193,99 @@ static void __hwdom_init check_hwdom_reqs(struct domain *d)
+     arch_iommu_check_autotranslated_hwdom(d);
+ }
+ 
++
++int iommu_domain_pviommu_init(struct domain *d, uint16_t nb_ctx, uint32_t arena_order)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++    int rc;
++
++    BUG_ON(nb_ctx == 0); /* sanity check (prevent underflow) */
++
++    /*
++     * hd->other_contexts.count is always reported as 0 during initialization
++     * preventing misuse of partially initialized IOMMU contexts.
++     */
++
++    if ( atomic_cmpxchg(&hd->other_contexts.initialized, 0, 1) == 1 )
++        return -EACCES;
++
++    if ( (nb_ctx - 1) > 0 ) {
++        /* Initialize context bitmap */
++        size_t i;
++
++        hd->other_contexts.bitmap = xzalloc_array(unsigned long,
++                                                  BITS_TO_LONGS(nb_ctx - 1));
++
++        if (!hd->other_contexts.bitmap)
++        {
++            rc = -ENOMEM;
++            goto cleanup;
++        }
++
++        hd->other_contexts.map = xzalloc_array(struct iommu_context, nb_ctx - 1);
++
++        if (!hd->other_contexts.map)
++        {
++            rc = -ENOMEM;
++            goto cleanup;
++        }
++
++        for (i = 0; i < (nb_ctx - 1); i++)
++            rspin_lock_init(&hd->other_contexts.map[i].lock);
++    }
++
++    rc = arch_iommu_pviommu_init(d, nb_ctx, arena_order);
++
++    if ( rc )
++        goto cleanup;
++
++    /* Make sure initialization is complete before making it visible to other CPUs. */
++    smp_wmb();
++
++    hd->other_contexts.count = nb_ctx - 1;
++
++    printk(XENLOG_INFO "Dom%d uses %lu IOMMU contexts (%llu pages arena)\n",
++           d->domain_id, (unsigned long)nb_ctx, 1llu << arena_order);
++
++    return 0;
++
++cleanup:
++    /* TODO: Reset hd->other_contexts.initialized */
++    if ( hd->other_contexts.bitmap )
++    {
++        xfree(hd->other_contexts.bitmap);
++        hd->other_contexts.bitmap = NULL;
++    }
++
++    if ( hd->other_contexts.map )
++    {
++        xfree(hd->other_contexts.map);
++        hd->other_contexts.bitmap = NULL;
++    }
++
++    return rc;
++}
++
++int iommu_domain_pviommu_teardown(struct domain *d)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++    int i;
++    /* FIXME: Potential race condition with remote_op ? */
++
++    for (i = 0; i < hd->other_contexts.count; i++)
++        WARN_ON(iommu_context_free(d, i, IOMMU_TEARDOWN_REATTACH_DEFAULT) != ENOENT);
++
++    hd->other_contexts.count = 0;
++
++    if ( hd->other_contexts.bitmap )
++        xfree(hd->other_contexts.bitmap);
++
++    if ( hd->other_contexts.map )
++        xfree(hd->other_contexts.map);
++
++    return 0;
++}
++
+ int iommu_domain_init(struct domain *d, unsigned int opts)
+ {
+     struct domain_iommu *hd = dom_iommu(d);
+@@ -238,6 +331,8 @@ int iommu_domain_init(struct domain *d, unsigned int opts)
+ 
+     ASSERT(!(hd->need_sync && hd->hap_pt_share));
+ 
++    hd->allow_pv_iommu = true;
++
+     rspin_lock(&hd->default_ctx.lock);
+     ret = iommu_context_init(d, &hd->default_ctx, 0, IOMMU_CONTEXT_INIT_default);
+     rspin_unlock(&hd->default_ctx.lock);
+@@ -1204,6 +1299,16 @@ bool iommu_has_feature(struct domain *d, enum iommu_feature feature)
+     return is_iommu_enabled(d) && test_bit(feature, dom_iommu(d)->features);
+ }
+ 
++uint64_t iommu_get_max_iova(struct domain *d)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++
++    if ( !hd->platform_ops->get_max_iova )
++        return 0;
++
++    return iommu_call(hd->platform_ops, get_max_iova, d);
++}
++
+ #define MAX_EXTRA_RESERVED_RANGES 20
+ struct extra_reserved_range {
+     unsigned long start;
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index bb53cff158..20afb68399 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -2605,6 +2605,13 @@ static int cf_check intel_iommu_remove_devfn(struct domain *d, struct pci_dev *p
+     return unapply_context_single(d, drhd->iommu, NULL, pdev->bus, devfn);
+ }
+ 
++static uint64_t cf_check intel_iommu_get_max_iova(struct domain *d)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++
++    return (1LLU << agaw_to_width(hd->arch.vtd.agaw)) - 1;
++}
++
+ static const struct iommu_ops __initconst_cf_clobber vtd_ops = {
+     .page_sizes = PAGE_SIZE_4K,
+     .init = intel_iommu_domain_init,
+@@ -2636,6 +2643,7 @@ static const struct iommu_ops __initconst_cf_clobber vtd_ops = {
+     .iotlb_flush = iommu_flush_iotlb,
+     .get_reserved_device_memory = intel_iommu_get_reserved_device_memory,
+     .dump_page_tables = vtd_dump_page_tables,
++    .get_max_iova = intel_iommu_get_max_iova,
+ };
+ 
+ const struct iommu_init_ops __initconstrel intel_iommu_init_ops = {
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index 7b7fac0db8..79efc6ad47 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -215,6 +215,32 @@ int arch_iommu_context_teardown(struct domain *d, struct iommu_context *ctx, u32
+     return 0;
+ }
+ 
++int arch_iommu_pviommu_init(struct domain *d, uint16_t nb_ctx, uint32_t arena_order)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++
++    if ( arena_order == 0 )
++        return 0;
++
++    return iommu_arena_initialize(&hd->arch.pt_arena, NULL, arena_order, 0);
++}
++
++int arch_iommu_pviommu_teardown(struct domain *d)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++
++    if ( iommu_arena_teardown(&hd->arch.pt_arena, true) )
++    {
++        printk(XENLOG_WARNING "IOMMU Arena used while being destroyed\n");
++        WARN();
++
++        /* Teardown anyway */
++        iommu_arena_teardown(&hd->arch.pt_arena, false);
++    }
++
++    return 0;
++}
++
+ void arch_iommu_domain_destroy(struct domain *d)
+ {
+ }
+@@ -394,6 +420,19 @@ void iommu_identity_map_teardown(struct domain *d, struct iommu_context *ctx)
+     }
+ }
+ 
++bool iommu_identity_map_check(struct domain *d, struct iommu_context *ctx,
++                              mfn_t mfn)
++{
++    struct identity_map *map;
++    uint64_t addr = pfn_to_paddr(mfn_x(mfn));
++
++    list_for_each_entry ( map, &ctx->arch.identity_maps, list )
++        if (addr >= map->base && addr < map->end)
++            return true;
++
++    return false;
++}
++
+ static int __hwdom_init cf_check map_subtract(unsigned long s, unsigned long e,
+                                               void *data)
+ {
+@@ -669,7 +708,7 @@ void iommu_free_domid(domid_t domid, unsigned long *map)
+         BUG();
+ }
+ 
+-int iommu_free_pgtables(struct domain *d, struct iommu_context *ctx)
++int cf_check iommu_free_pgtables(struct domain *d, struct iommu_context *ctx)
+ {
+     struct domain_iommu *hd = dom_iommu(d);
+     struct page_info *pg;
+@@ -686,7 +725,10 @@ int iommu_free_pgtables(struct domain *d, struct iommu_context *ctx)
+ 
+     while ( (pg = page_list_remove_head(&ctx->arch.pgtables)) )
+     {
+-        free_domheap_page(pg);
++        if (ctx->id == 0)
++            free_domheap_page(pg);
++        else
++            iommu_arena_free_page(&hd->arch.pt_arena, pg);
+ 
+         if ( !(++done & 0xff) && general_preempt_check() )
+             return -ERESTART;
+@@ -708,7 +750,11 @@ struct page_info *iommu_alloc_pgtable(struct domain_iommu *hd,
+         memflags = MEMF_node(hd->node);
+ #endif
+ 
+-    pg = alloc_domheap_page(NULL, memflags);
++    if (ctx->id == 0)
++        pg = alloc_domheap_page(NULL, memflags);
++    else
++        pg = iommu_arena_allocate_page(&hd->arch.pt_arena);
++
+     if ( !pg )
+         return NULL;
+ 
+@@ -787,9 +833,14 @@ void iommu_queue_free_pgtable(struct domain *d, struct iommu_context *ctx,
+ 
+     page_list_del(pg, &ctx->arch.pgtables);
+ 
+-    page_list_add_tail(pg, &per_cpu(free_pgt_list, cpu));
++    if ( !ctx->id )
++    {
++        page_list_add_tail(pg, &per_cpu(free_pgt_list, cpu));
+ 
+-    tasklet_schedule(&per_cpu(free_pgt_tasklet, cpu));
++        tasklet_schedule(&per_cpu(free_pgt_tasklet, cpu));
++    }
++    else
++        iommu_arena_free_page(&dom_iommu(d)->arch.pt_arena, pg);
+ }
+ 
+ static int cf_check cpu_callback(
+diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
+index 7720a29ade..78ca87b57f 100644
+--- a/xen/include/hypercall-defs.c
++++ b/xen/include/hypercall-defs.c
+@@ -209,6 +209,9 @@ hypfs_op(unsigned int cmd, const char *arg1, unsigned long arg2, void *arg3, uns
+ #ifdef CONFIG_X86
+ xenpmu_op(unsigned int op, xen_pmu_params_t *arg)
+ #endif
++#ifdef CONFIG_HAS_PASSTHROUGH
++iommu_op(unsigned int subop, void *arg)
++#endif
+ 
+ #ifdef CONFIG_PV
+ caller: pv64
+@@ -295,5 +298,8 @@ mca                                do       do       -        -        -
+ #ifndef CONFIG_PV_SHIM_EXCLUSIVE
+ paging_domctl_cont                 do       do       do       do       -
+ #endif
++#ifdef CONFIG_HAS_PASSTHROUGH
++iommu_op                           do       do       do       do       -
++#endif
+ 
+ #endif /* !CPPCHECK */
+diff --git a/xen/include/public/pv-iommu.h b/xen/include/public/pv-iommu.h
+new file mode 100644
+index 0000000000..6f50aea4b7
+--- /dev/null
++++ b/xen/include/public/pv-iommu.h
+@@ -0,0 +1,343 @@
++/* SPDX-License-Identifier: MIT */
++/**
++ * pv-iommu.h
++ *
++ * Paravirtualized IOMMU driver interface.
++ *
++ * Copyright (c) 2024 Teddy Astie <teddy.astie@vates.tech>
++ */
++
++#ifndef __XEN_PUBLIC_PV_IOMMU_H__
++#define __XEN_PUBLIC_PV_IOMMU_H__
++
++#include "xen.h"
++#include "physdev.h"
++
++#ifndef uint64_aligned_t
++#define uint64_aligned_t uint64_t
++#endif
++
++#define IOMMU_DEFAULT_CONTEXT (0)
++
++enum pv_iommu_cmd {
++    /* Basic cmd */
++    IOMMU_noop = 0,
++    IOMMU_query_capabilities = 1,
++    IOMMU_init = 2,
++    IOMMU_alloc_context = 3,
++    IOMMU_free_context = 4,
++    IOMMU_reattach_device = 5,
++    IOMMU_map_pages = 6,
++    IOMMU_unmap_pages = 7,
++    IOMMU_remote_cmd = 8,
++
++    /* Extended cmd */
++    IOMMU_alloc_nested = 9,      /* if IOMMUCAP_nested */
++    IOMMU_flush_nested = 10,     /* if IOMMUCAP_nested */
++    IOMMU_attach_pasid = 11,     /* if IOMMUCAP_pasid */
++    IOMMU_detach_pasid = 12,     /* if IOMMUCAP_pasid */
++};
++
++/**
++ * If set, default context allow DMA to domain memory.
++ * If cleared, default context blocks all DMA to domain memory.
++ */
++#define IOMMUCAP_default_identity  (1U << 0)
++
++/**
++ * IOMMU_MAP_cache support.
++ */
++#define IOMMUCAP_cache     (1U << 1)
++
++/**
++ * If set, IOMMU_alloc_nested and IOMMU_flush_nested are supported.
++ */
++#define IOMMUCAP_nested    (1U << 2)
++
++/**
++ * If set, IOMMU_attach_pasid and IOMMU_detach_pasid are supported and
++ * a device PASID can be specified in reattach_context.
++ */
++#define IOMMUCAP_pasid     (1U << 3)
++
++/**
++ * If set, IOMMU_ALLOC_identity is supported in pv_iommu_alloc.
++ */
++#define IOMMUCAP_identity  (1U << 4)
++
++/**
++ * IOMMU_query_capabilities
++ * Query PV-IOMMU capabilities for this domain.
++ */
++struct pv_iommu_capabilities {
++    /*
++     * OUT: Maximum device address (iova) that the guest can use for mappings.
++     */
++    uint64_aligned_t max_iova_addr;
++
++    /* OUT: IOMMU capabilities flags */
++    uint32_t cap_flags;
++
++    /* OUT: Mask of all supported page sizes. */
++    uint32_t pgsize_mask;
++
++    /* OUT: Maximum pasid (if IOMMUCAP_pasid) */
++    uint32_t max_pasid;
++
++    /* OUT: Maximum number of IOMMU context this domain can use. */
++    uint16_t max_ctx_no;
++
++    uint16_t pad0;
++};
++typedef struct pv_iommu_capabilities pv_iommu_capabilities_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_capabilities_t);
++
++/**
++ * IOMMU_init
++ * Initialize PV-IOMMU for this domain.
++ *
++ * Fails with -EACCESS if PV-IOMMU is already initialized.
++ */
++struct pv_iommu_init {
++    /* IN: Maximum number of IOMMU context this domain can use. */
++    uint32_t max_ctx_no;
++
++    /* IN: Arena size in pages (in power of two) */
++    uint32_t arena_order;
++};
++typedef struct pv_iommu_init pv_iommu_init_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_init_t);
++
++/**
++ * Create a 1:1 identity mapped context to domain memory
++ * (needs IOMMUCAP_identity).
++ */
++#define IOMMU_ALLOC_identity (1 << 0)
++
++/**
++ * IOMMU_alloc_context
++ * Allocate an IOMMU context.
++ * Fails with -ENOSPC if no context number is available.
++ */
++struct pv_iommu_alloc {
++    /* OUT: allocated IOMMU context number */
++    uint16_t ctx_no;
++
++    /* IN: allocation flags */
++    uint32_t alloc_flags;
++};
++typedef struct pv_iommu_alloc pv_iommu_alloc_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_alloc_t);
++
++/**
++ * Move all devices to default context before freeing the context.
++ */
++#define IOMMU_FREE_reattach_default (1 << 0)
++
++/**
++ * IOMMU_free_context
++ * Destroy a IOMMU context.
++ *
++ * If IOMMU_FREE_reattach_default is specified, move all context devices to
++ * default context before destroying this context.
++ *
++ * If there are devices in the context and IOMMU_FREE_reattach_default is not
++ * specified, fail with -EBUSY.
++ *
++ * The default context can't be destroyed.
++ */
++struct pv_iommu_free {
++    /* IN: IOMMU context number to free */
++    uint16_t ctx_no;
++
++    /* IN: Free operation specific flags */
++    uint32_t free_flags;
++};
++typedef struct pv_iommu_free pv_iommu_free_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_free_t);
++
++/* Device has read access */
++#define IOMMU_MAP_readable (1 << 0)
++
++/* Device has write access */
++#define IOMMU_MAP_writeable (1 << 1)
++
++/* Enforce DMA coherency */
++#define IOMMU_MAP_cache (1 << 2)
++
++/**
++ * IOMMU_map_pages
++ * Map pages on a IOMMU context.
++ *
++ * pgsize must be supported by pgsize_mask.
++ * Fails with -EINVAL if mapping on top of another mapping.
++ * Report actually mapped page count in mapped field (regardless of failure).
++ */
++struct pv_iommu_map_pages {
++    /* IN: IOMMU context number */
++    uint16_t ctx_no;
++
++    /* IN: Guest frame number */
++    uint64_aligned_t gfn;
++
++    /* IN: Device frame number */
++    uint64_aligned_t dfn;
++
++    /* IN: Map flags */
++    uint32_t map_flags;
++
++    /* IN: Size of pages to map */
++    uint32_t pgsize;
++
++    /* IN: Number of pages to map */
++    uint32_t nr_pages;
++
++    /* OUT: Number of pages actually mapped */
++    uint32_t mapped;
++};
++typedef struct pv_iommu_map_pages pv_iommu_map_pages_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_map_pages_t);
++
++/**
++ * IOMMU_unmap_pages
++ * Unmap pages on a IOMMU context.
++ *
++ * pgsize must be supported by pgsize_mask.
++ * Report actually unmapped page count in mapped field (regardless of failure).
++ * Fails with -ENOENT when attempting to unmap a page without any mapping
++ */
++struct pv_iommu_unmap_pages {
++    /* IN: IOMMU context number */
++    uint16_t ctx_no;
++
++    /* IN: Device frame number */
++    uint64_aligned_t dfn;
++
++    /* IN: Size of pages to unmap */
++    uint32_t pgsize;
++
++    /* IN: Number of pages to unmap */
++    uint32_t nr_pages;
++
++    /* OUT: Number of pages actually unmapped */
++    uint32_t unmapped;
++};
++typedef struct pv_iommu_unmap_pages pv_iommu_unmap_pages_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_unmap_pages_t);
++
++/**
++ * IOMMU_reattach_device
++ * Reattach a device to another IOMMU context.
++ * Fails with -ENODEV if no such device exist.
++ */
++struct pv_iommu_reattach_device {
++    /* IN: Target IOMMU context number */
++    uint16_t ctx_no;
++
++    /* IN: Physical device to move */
++    struct physdev_pci_device dev;
++
++    /* IN: PASID of the device (if IOMMUCAP_pasid) */
++    uint32_t pasid;
++};
++typedef struct pv_iommu_reattach_device pv_iommu_reattach_device_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_reattach_device_t);
++
++
++/**
++ * IOMMU_remote_cmd
++ * Do a PV-IOMMU operation on another domain.
++ * Current domain needs to be allowed to act on the target domain, otherwise
++ * fails with -EPERM.
++ */
++struct pv_iommu_remote_cmd {
++    /* IN: Target domain to do the subop on */
++    uint16_t domid;
++
++    /* IN: Command to do on target domain. */
++    uint16_t subop;
++
++    /* INOUT: Command argument from current domain memory */
++    XEN_GUEST_HANDLE(void) arg;
++};
++typedef struct pv_iommu_remote_cmd pv_iommu_remote_cmd_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_remote_cmd_t);
++
++/**
++ * IOMMU_alloc_nested
++ * Create a nested IOMMU context (needs IOMMUCAP_nested).
++ *
++ * This context uses a platform-specific page table from domain address space
++ * specified in pgtable_gfn and use it for nested translations.
++ *
++ * Explicit flushes needs to be submited with IOMMU_flush_nested on
++ * modification of the nested pagetable to ensure coherency between IOTLB and
++ * nested page table.
++ *
++ * This context can be destroyed using IOMMU_free_context.
++ * This context cannot be modified using map_pages, unmap_pages.
++ */
++struct pv_iommu_alloc_nested {
++    /* OUT: allocated IOMMU context number */
++    uint16_t ctx_no;
++
++    /* IN: guest frame number of the nested page table */
++    uint64_aligned_t pgtable_gfn;
++
++    /* IN: nested mode flags */
++    uint64_aligned_t nested_flags;
++};
++typedef struct pv_iommu_alloc_nested pv_iommu_alloc_nested_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_alloc_nested_t);
++
++/**
++ * IOMMU_flush_nested (needs IOMMUCAP_nested)
++ * Flush the IOTLB for nested translation.
++ */
++struct pv_iommu_flush_nested {
++    /* TODO */
++};
++typedef struct pv_iommu_flush_nested pv_iommu_flush_nested_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_flush_nested_t);
++
++/**
++ * IOMMU_attach_pasid (needs IOMMUCAP_pasid)
++ * Attach a new device-with-pasid to a IOMMU context.
++ * If a matching device-with-pasid already exists (globally),
++ * fail with -EEXIST.
++ * If pasid is 0, fails with -EINVAL.
++ * If physical device doesn't exist in domain, fail with -ENOENT.
++ */
++struct pv_iommu_attach_pasid {
++    /* IN: IOMMU context to add the device-with-pasid in */
++    uint16_t ctx_no;
++
++    /* IN: Physical device */
++    struct physdev_pci_device dev;
++
++    /* IN: pasid of the device to attach */
++    uint32_t pasid;
++};
++typedef struct pv_iommu_attach_pasid pv_iommu_attach_pasid_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_attach_pasid_t);
++
++/**
++ * IOMMU_detach_pasid (needs IOMMUCAP_pasid)
++ * detach a device-with-pasid.
++ * If the device-with-pasid doesn't exist or belong to the domain,
++ * fail with -ENOENT.
++ * If pasid is 0, fails with -EINVAL.
++ */
++struct pv_iommu_detach_pasid {
++    /* IN: Physical device */
++    struct physdev_pci_device dev;
++
++    /* pasid of the device to detach */
++    uint32_t pasid;
++};
++typedef struct pv_iommu_detach_pasid pv_iommu_detach_pasid_t;
++DEFINE_XEN_GUEST_HANDLE(pv_iommu_detach_pasid_t);
++
++/* long do_iommu_op(int subop, XEN_GUEST_HANDLE_PARAM(void) arg) */
++
++#endif
 \ No newline at end of file
+diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
+index e051f989a5..d5bdedfee5 100644
+--- a/xen/include/public/xen.h
++++ b/xen/include/public/xen.h
+@@ -118,6 +118,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
+ #define __HYPERVISOR_xenpmu_op            40
+ #define __HYPERVISOR_dm_op                41
+ #define __HYPERVISOR_hypfs_op             42
++#define __HYPERVISOR_iommu_op             43
+ 
+ /* Architecture-specific hypercall definitions. */
+ #define __HYPERVISOR_arch_0               48
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 15250da119..e115642b86 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -328,6 +328,8 @@ struct iommu_ops {
+      */
+     int (*dt_xlate)(device_t *dev, const struct dt_phandle_args *args);
+ #endif
++
++    uint64_t (*get_max_iova)(struct domain *d);
+ };
+ 
+ /*
+@@ -409,6 +411,10 @@ struct domain_iommu {
+     /* SAF-2-safe enum constant in arithmetic operation */
+     DECLARE_BITMAP(features, IOMMU_FEAT_count);
+ 
++
++    /* Is the domain allowed to use PV-IOMMU ? */
++    bool allow_pv_iommu;
++
+     /* Does the guest share HAP mapping with the IOMMU? */
+     bool hap_pt_share;
+ 
+@@ -446,6 +452,8 @@ static inline int iommu_do_domctl(struct xen_domctl *domctl, struct domain *d,
+ }
+ #endif
+ 
++int iommu_domain_pviommu_init(struct domain *d, uint16_t nb_ctx, uint32_t arena_order);
++
+ int __must_check iommu_suspend(void);
+ void iommu_resume(void);
+ void iommu_crash_shutdown(void);
+@@ -461,6 +469,7 @@ int iommu_do_pci_domctl(struct xen_domctl *domctl, struct domain *d,
+ 
+ void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev);
+ 
++uint64_t iommu_get_max_iova(struct domain *d);
+ 
+ struct iommu_context *iommu_get_context(struct domain *d, u16 ctx_id);
+ void iommu_put_context(struct iommu_context *ctx);
+@@ -496,6 +505,8 @@ DECLARE_PER_CPU(bool, iommu_dont_flush_iotlb);
+ extern struct spinlock iommu_pt_cleanup_lock;
+ extern struct page_list_head iommu_pt_cleanup_list;
+ 
++int arch_iommu_pviommu_init(struct domain *d, uint16_t nb_ctx, uint32_t arena_order);
++int arch_iommu_pviommu_teardown(struct domain *d);
+ bool arch_iommu_use_permitted(const struct domain *d);
+ 
+ #ifdef CONFIG_X86
 -- 
 2.47.2
 
