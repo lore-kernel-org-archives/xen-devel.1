@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19E3CC021AA
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 19:44:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.890813.1299952 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB5CC021A9
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 19:44:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.890814.1299962 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk72d-0005lS-C6; Mon, 17 Feb 2025 19:44:31 +0000
+	id 1tk72f-00060N-Ku; Mon, 17 Feb 2025 19:44:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 890813.1299952; Mon, 17 Feb 2025 19:44:31 +0000
+Received: by outflank-mailman (output) from mailman id 890814.1299962; Mon, 17 Feb 2025 19:44:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk72d-0005lJ-9S; Mon, 17 Feb 2025 19:44:31 +0000
-Received: by outflank-mailman (input) for mailman id 890813;
- Mon, 17 Feb 2025 19:44:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tk72f-00060E-Hj; Mon, 17 Feb 2025 19:44:33 +0000
+Received: by outflank-mailman (input) for mailman id 890814;
+ Mon, 17 Feb 2025 19:44:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xGAw=VI=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tk72b-0005X7-Nx
- for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 19:44:29 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 994766b6-ed67-11ef-9896-31a8f345e629;
- Mon, 17 Feb 2025 20:44:28 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43937cf2131so31539725e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 11:44:28 -0800 (PST)
+ id 1tk72e-0005w6-Dx
+ for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 19:44:32 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 98443ff2-ed67-11ef-9aa6-95dc52dad729;
+ Mon, 17 Feb 2025 20:44:26 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-439846bc7eeso8187955e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 11:44:26 -0800 (PST)
 Received: from andrewcoop.. (host-92-26-98-202.as13285.net. [92.26.98.202])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4395a06d22csm161547025e9.22.2025.02.17.11.44.26
+ 5b1f17b1804b1-4395a06d22csm161547025e9.22.2025.02.17.11.44.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 11:44:27 -0800 (PST)
+ Mon, 17 Feb 2025 11:44:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,39 +47,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 994766b6-ed67-11ef-9896-31a8f345e629
+X-Inumbo-ID: 98443ff2-ed67-11ef-9aa6-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1739821467; x=1740426267; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5YzESArRGDEbanW7NDpWp+57rIKx6rZ39D0RVCP0EuY=;
-        b=cwJKryvjPFA1DszRqyUSOE8v0/SHb6sbz3/7ttoogZEfkXhxEpln/+efg3I+Mymzu7
-         sStIpW2JQA7zn6+ZdLvrb2l0s1rUKcyp37adwcUoakxArqbOng/odO9fPVrcbi5TI2SU
-         KpjZXR2QZ4/rFf53dNoxwHX1Ns4z2EZG4dEPI=
+        d=citrix.com; s=google; t=1739821465; x=1740426265; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yP1wxryyhWPR0UYVLI882uiLGQethpi+m5a0U1C5NfY=;
+        b=bZ+H/nBRgebZWBkp/35U4x8kL+rIySk/T7ZUq+1jn6vd01eV6pFMEYWPOxPkmkaagC
+         9BVtg2litSr91Lsi497+J7xOEXoyqkaiLjzpbTq2nyLRmoeggekn/zIgEx/7EDtIvl6f
+         nVBp9l4WyJ86BJChTVSwF2fEY8T2L8nwWS8OQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739821467; x=1740426267;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=5YzESArRGDEbanW7NDpWp+57rIKx6rZ39D0RVCP0EuY=;
-        b=fwIY4Pj5NPdkf2teiCliaa9SGTAc6cdAby/CPb3Y6Yhtb4M/pZnLJ0Q0YUB93cAmXO
-         PciAyvYQeWNE0n8YU7p+EguTaDLHnoHcYouITLdbPJC5R+mQuOrysmtBAES4Rv/qVRe/
-         BhrY1bzwczcISLS7I2acS6g6LaoEGLWlX0gqxlakHOSoCGM+ybRBC+1pvCs/bTk4rdGK
-         wZRfhdN8Ih/jlon18oCgoBVLcdo5EG5CDUGTDCO/iBe7iehnajeLGWPoxnZmowID8WZv
-         BR4lDPtQ9Hat0ieK9J5QfL5q/gDLp9HNkMC+Fe/1fTthcGpiqQE3CYQqxDwir579ai3s
-         /cww==
-X-Gm-Message-State: AOJu0Yw+xk/kQuu8bGfQZDXEnybPlOJeeBRs3rhkA5g3oGjPCsGQP2/6
-	ZfR37SR32QwMDU8TTIWmbBg1xRCJT/lK/xncrrKye+L83bNg1evqn0kZgv4IzTUPyw2/kcXF2rv
-	X
-X-Gm-Gg: ASbGncvJEMPr+I5Nd8J4V7MeV3apVZxufxt8w+2RXhntZOk4Xxt2E8F/IIBX3bVBL44
-	KCMfeChPII4FJLcbqLmemwdkT6S7ikdgKduXwsPu5LVYZy19k15xpd5W0k/6Ul5HsQNo1lwdXPR
-	llnGqoWgg1gXEf2ZQn0Ai/4uPDf2Tagx78Bcb8hcrEaQsPj1B6bBGFEIysz0XaRR34ww7aCX5bb
-	bYOX0CTe3cZJHWWe4Zynws/bm02SpoK/T5Iqb3dqb5ed6qmv/pSLtGk6vooeBgBbaqEAbruRhod
-	/1NcwuQoWHem+4JGgi15uC+36ujw8OoHb8C6vKeWAfAqcu/iESsl
-X-Google-Smtp-Source: AGHT+IE99dFPsW0YkAvMyNqRAy9mwU7uFHCF7uYyOWMGkzmRGb2OORq8+KprPLet8O8BIX+shANhqA==
-X-Received: by 2002:a05:600c:1c84:b0:439:8c80:6af4 with SMTP id 5b1f17b1804b1-4398c806deemr23873485e9.19.1739821467385;
-        Mon, 17 Feb 2025 11:44:27 -0800 (PST)
+        d=1e100.net; s=20230601; t=1739821465; x=1740426265;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yP1wxryyhWPR0UYVLI882uiLGQethpi+m5a0U1C5NfY=;
+        b=Vm2zBStwvntjVN6BH15I9tLv4dJBTrBDBEK/YME/Q0/nfTUvVuYrTWNNUE057dN4PO
+         84FHsVlsPZITSBfnqyGF+AfPAQHj1lA+LwwrBhQ7zUdXGoJecIhhhUpD8TVhnCWbS1fS
+         WUDVYbzzCsw/Zqb0ua9BW7j3WmRuIOEo0SSLgXUm1hxW5gBjUNQfpVP7/RJM36HdSjvJ
+         gsg0Hv5nE9Pt49y28kuIoY5dhfKh7SPZOaofk46Y4AMfo21Y3uAm7E6I3vT+vbfnzxXv
+         8ogYXRHBM3wSmDgByoVii+xzW/kXJVtbPKKKSUVCDLwOY6J55oA5ZdHZnhu4zyUZp7rC
+         XIyg==
+X-Gm-Message-State: AOJu0Yx3XNG0eXUWzBnqpjNMEIGhdJxdUye5/DcH0n7VnrM43PCVaiBd
+	eSs6fH7qtpMg3mhKvI/EXxMAVkn6PJJH+mNoGMC04MbZ7iAmTLhIh8abDaIjHPa3huJMx6yzXj8
+	H
+X-Gm-Gg: ASbGncvrZaCyrJKd3KG68wa7SErOgMoNdyc5kgWwLZ17VOvwjpY3jdfAMQA2VSJlSpH
+	clF1qp3Th6RMF4aLiPZE+lLJaZuyyHHJE2nxhUrVsoMLjHBXEKPJJZRdDargDGcpcPSx+xHMBA/
+	xvqpzqk0oEjrTWdjwUnngPka9vg6jTdF0UulNSxe85OjdJABFnkJpqGdMaY61+8UzeZ7KFGoJRP
+	LM44w6AM74UjYNfYN8WedGAPaQ9lb96hYVBbvKHZQR+MX6q731WyyxkZ8qVPn3gXOwo8A272/AE
+	3B3pDXREq8oQ7V8oRD3BXjNchbR721epoINgQiIfIoStewoQgGzW
+X-Google-Smtp-Source: AGHT+IHuRZFJATWSuRE87A/eaWd+iKKB4lC84am6eo0jKyx/jhpZVrwQOGwR1nCubhkt/V7pLWgMbA==
+X-Received: by 2002:a05:600c:4e45:b0:439:8346:505f with SMTP id 5b1f17b1804b1-4398346524amr42691355e9.20.1739821464832;
+        Mon, 17 Feb 2025 11:44:24 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -92,85 +91,34 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.21 3/3] xen/ACPI: Drop local acpi_os_{v,}printf() and use plain {v,}printk()
-Date: Mon, 17 Feb 2025 19:44:21 +0000
-Message-Id: <20250217194421.601813-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/3] xen/console: Fix truncation of panic() messages
+Date: Mon, 17 Feb 2025 19:44:18 +0000
+Message-Id: <20250217194421.601813-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250217194421.601813-1-andrew.cooper3@citrix.com>
-References: <20250217194421.601813-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Now that Xen has a real vprintk(), there's no need to opencode it locally with
-vsnprintf().  Redirect the debug routines to the real {v,}printk() and drop
-the local acpi_os_{v,}printf() implementations.
+This taken from a security series (hence partially reviewed already), and
+thought it only applied to a forthcoming selftest, but then Ayan posted a
+truncated example to Matrix.
 
-Amongst other things, this removes one arbitrary limit on message size, as
-well as removing a 512 byte static buffer that ought to have been in
-__initdata given that is private to an __init function.
+Patch 1 should be considered for 4.20 at this point.  Patches 2 and 3 can
+definitely wait until 4.21 opens.
 
-No functional change.
+Andrew Cooper (3):
+  xen/console: Fix truncation of panic() messages
+  xen/console: Optimise parameter order of vprintk_common()
+  xen/ACPI: Drop local acpi_os_{v,}printf() and use plain {v,}printk()
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
  xen/drivers/acpi/osl.c      | 17 -----------------
+ xen/drivers/char/console.c  | 25 +++++++++++++++----------
  xen/include/acpi/acpiosxf.h |  5 ++---
- 2 files changed, 2 insertions(+), 20 deletions(-)
+ xen/include/xen/lib.h       |  2 ++
+ 4 files changed, 19 insertions(+), 30 deletions(-)
 
-diff --git a/xen/drivers/acpi/osl.c b/xen/drivers/acpi/osl.c
-index ab80d6b2a92a..7f233bab4269 100644
---- a/xen/drivers/acpi/osl.c
-+++ b/xen/drivers/acpi/osl.c
-@@ -45,23 +45,6 @@ ACPI_MODULE_NAME("osl")
- #include CONFIG_ACPI_CUSTOM_DSDT_FILE
- #endif
- 
--void __init acpi_os_printf(const char *fmt, ...)
--{
--	va_list args;
--	va_start(args, fmt);
--	acpi_os_vprintf(fmt, args);
--	va_end(args);
--}
--
--void __init acpi_os_vprintf(const char *fmt, va_list args)
--{
--	static char buffer[512];
--
--	vsnprintf(buffer, sizeof(buffer), fmt, args);
--
--	printk("%s", buffer);
--}
--
- acpi_physical_address __initdata rsdp_hint;
- 
- acpi_physical_address __init acpi_os_get_root_pointer(void)
-diff --git a/xen/include/acpi/acpiosxf.h b/xen/include/acpi/acpiosxf.h
-index de83ea38c40f..2da318962f0d 100644
---- a/xen/include/acpi/acpiosxf.h
-+++ b/xen/include/acpi/acpiosxf.h
-@@ -82,8 +82,7 @@ acpi_os_write_memory(acpi_physical_address address, u32 value, u32 width);
- /*
-  * Debug print routines
-  */
--void ACPI_INTERNAL_VAR_XFACE acpi_os_printf(const char *format, ...);
--
--void acpi_os_vprintf(const char *format, va_list args);
-+#define acpi_os_printf printk
-+#define acpi_os_vprintf vprintk
- 
- #endif				/* __ACPIOSXF_H__ */
+
+base-commit: 414dde38b0cf8a38230c8c3f9e8564da9762e743
 -- 
 2.39.5
 
