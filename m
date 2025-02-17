@@ -4,40 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34447C021A9
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 14:00:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.890499.1299651 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F522C021AA
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Feb 2025 14:16:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.890511.1299671 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk1ff-0005u8-4p; Mon, 17 Feb 2025 14:00:27 +0000
+	id 1tk1vM-0008EU-L4; Mon, 17 Feb 2025 14:16:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 890499.1299651; Mon, 17 Feb 2025 14:00:27 +0000
+Received: by outflank-mailman (output) from mailman id 890511.1299671; Mon, 17 Feb 2025 14:16:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tk1ff-0005u1-1z; Mon, 17 Feb 2025 14:00:27 +0000
-Received: by outflank-mailman (input) for mailman id 890499;
- Mon, 17 Feb 2025 14:00:26 +0000
+	id 1tk1vM-0008EN-Hh; Mon, 17 Feb 2025 14:16:40 +0000
+Received: by outflank-mailman (input) for mailman id 890511;
+ Mon, 17 Feb 2025 14:16:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=L/wo=VI=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1tk1fe-0005tt-Cv
- for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 14:00:26 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=glRE=VI=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tk1vL-0007zu-K7
+ for xen-devel@lists.xenproject.org; Mon, 17 Feb 2025 14:16:39 +0000
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [2607:f8b0:4864:20::102a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 88faf095-ed37-11ef-9aa6-95dc52dad729;
- Mon, 17 Feb 2025 15:00:25 +0100 (CET)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5deb1266031so7694378a12.2
- for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 06:00:25 -0800 (PST)
-Received: from ?IPV6:2003:e5:8714:500:2aea:6ec9:1d88:c1ef?
- (p200300e5871405002aea6ec91d88c1ef.dip0.t-ipconnect.de.
- [2003:e5:8714:500:2aea:6ec9:1d88:c1ef])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dece1d00d9sm7193635a12.32.2025.02.17.06.00.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Feb 2025 06:00:23 -0800 (PST)
+ id cce0917c-ed39-11ef-9aa6-95dc52dad729;
+ Mon, 17 Feb 2025 15:16:38 +0100 (CET)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2fc6272259cso1695526a91.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Feb 2025 06:16:38 -0800 (PST)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2fc13ba61f1sm8064686a91.42.2025.02.17.06.16.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Feb 2025 06:16:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,305 +46,263 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88faf095-ed37-11ef-9aa6-95dc52dad729
+X-Inumbo-ID: cce0917c-ed39-11ef-9aa6-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1739800824; x=1740405624; darn=lists.xenproject.org;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=xEYjKomFi+MmNMV04HVkayp40MGUXEYydJ07iWFZgZI=;
-        b=QZuA6m4IAy13AoRm5qrjIQ3sUUzve2PfbRA0T87GoPsbZvGP+NZOvg+W6p7SMyHQjJ
-         mKTpqaDaK3ULz9F/X3Qpjh8gKBXqVERwIkppzvho1lwrmpsrtW9RbATx+8wywo8qHrpi
-         o2rFl6pBUOrZVhNs49dkoWktnVIa3qg15mSVVurJTGGy5cScrOFOBc2GsdJgTlhpeIMC
-         oq3pTgBunLLRGhriTKSofspbG/3qW77G0PNV/TLuVhe2C+han9IMcuMzw40rbY/htvt0
-         bXiodImQgjbwYQnj+SlF6whLzPzLhoI05DttF1ADJZBzYsA7kjaZbu0FeFAtTi0LruC/
-         Fh/w==
+        d=citrix.com; s=google; t=1739801797; x=1740406597; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NgVZpL1IIHgOFeFyiAgEthF53qJAdwqkkBm0ueYgozU=;
+        b=o3bmyjzCTUH8AifsInqmifZ07fenJHjlqj896+68dVUziTB+QKv7LVnXluh5EBOWiw
+         kj5s9V92XREKR/9vXFzvd8tPOWmmlGmAgAGWw6hmEUbP3MdTMotQoDaLp2Rh8xVt2qKU
+         wFj+NlMvmUd0/DBsytGrPy7CeFRxL7fKrXhvM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739800824; x=1740405624;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=xEYjKomFi+MmNMV04HVkayp40MGUXEYydJ07iWFZgZI=;
-        b=Hr7Lnqo6ZnHd7JRyayioQbBeMd0Ots6uGuqA2phC7GatlJQXUdrEQOrflQQmURtWKd
-         8d5Z+li7rCuSiV4ya54z3qctE2fuxpSfWEV8C/NDWa1PGYEWk0ih71otGBrcqjq3v/bN
-         U3t6BvrFM4ft4qWE7RxWyA4BmhipJnvBtHYSSDHBB4iNTCGkR5WobQVTHQ8oJShct5Zc
-         bKpUa7BDld0kNT4mjSq5KVj8VugXKAuh0iSNrKwgLgCUxfsf7oHVQ/fEo14kKnRVARdj
-         jbguH95d5W1XEInzOfjM0RPdbOoOkC9nEoGL1wg/3Un/dl9hfR8xHpunaTfkHAuBPn6q
-         npAQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWJpkoiwpFBDj/NNoQLm4U0BTsBbulWlSOCmEGndS909j5IJk4QDUGjYE/Hrn+y7wHAjUxpz1ba8so=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzg5RlsMKPSZOcIROfyJeudnbrQyiJZ5FYAo6CWGXJjNJA0wrWD
-	jfEitXRAhoUWsN//xT5JlsWQ1uvKXIxR0f6klxrrL8Q7NVTvD3L+Ok5Y1QqN88s=
-X-Gm-Gg: ASbGncsRd770dg6D839//TMHpdc3D2UClDGA0lEwonjFFFRagZqz85b7yKck1q4O7Jy
-	AhmfZHvJPiAsQzypQ57JUeYZjt38iO537VcYSiMtZ9Fx0OY6l+pR1U1QR3ibvkWV1NXQQ3qeWZQ
-	WeI8QwpxSLIuqsQbny5w49MSE2RRId3q7FNHrgWgvwPW3T3t72eGiuoPABgaGhed4DrN656Gx3l
-	hxhxnLra+YYE1frpEmGphHLPU2/lYlyej8dp1o2uUSz23HG4SIPH9yN7T9wOVTEFgHi331taDAS
-	gdq5Ew6K7qLZX0KiRgDFGFoqYVjprN55bpMJGDDLbJ4G+PuLBI16vSqC7dIT5pLneZLSP0HkB1F
-	qPRBeW5Um/g8ZNIzDdSlQstTGxPcJniiYtZHETQ==
-X-Google-Smtp-Source: AGHT+IH96POiGCHpCYRDidEwiZLnvx6jjJS8nimJrvpkYqYZ5gZxybm4R+GVsyz2lElibRP+wl+pKQ==
-X-Received: by 2002:a05:6402:354e:b0:5dc:74fd:ac0a with SMTP id 4fb4d7f45d1cf-5e03606f4camr7995059a12.8.1739800824270;
-        Mon, 17 Feb 2025 06:00:24 -0800 (PST)
-Message-ID: <12ede60b-3c87-4f1e-b8f2-4c13fe001cd5@suse.com>
-Date: Mon, 17 Feb 2025 15:00:22 +0100
+        d=1e100.net; s=20230601; t=1739801797; x=1740406597;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=NgVZpL1IIHgOFeFyiAgEthF53qJAdwqkkBm0ueYgozU=;
+        b=NzW2IpK264vwnbsIBEX+TarMvEyHqxKJS2ctAMzWwyK61e7yjJ234XeEP56PJdi8PN
+         HpK73hyxmyzuUvWlrDz2dtINjXg4i2hFLgQiTqZEwjp9FzMFhfF03Ln8IBWalM6LrW5A
+         LfY/QvLHFgjRhm73/x6/O8rh0+rREev5BUZ75dJdivcnMjNtbUDqtn3tj5Qg63QHdxO4
+         iKD922k5/dMSaK5zfZy1xeeP6Ax/EsxY0fhs8Lgycu0c7wICmQwKkoWMt3g9D174cSON
+         7grngySA7Q7V/jQEVTmQMCOVRDjpLPp/Fmv74xG82A0nC7JxmnMeQd7MJskdIwQZRvoy
+         I6Iw==
+X-Gm-Message-State: AOJu0Yy5/+Lmqp0x9DC1S9iGFiDwVH/zRWbTn31SLgOtIbVRUFPw5k94
+	Aulecv4OK2+LX6d952HkQjsaz2McoDllu+c/yMb/WrqsIH2+7dWvZL3Ct6OFMPf9O0RfCzHI1vJ
+	V
+X-Gm-Gg: ASbGncsYRoDnm22RUvsy/v+ONyFi+YHzafFazED1tx0rdy9ouJlcbcRFf3KB3kepdym
+	WUyJ9pwOGwOa0SvbaRHD9RZHeoa7y2atYc0szW4lQ+EglJyvwkw8S8MtMi5RZb3CfGOkIomPhnF
+	+x6uUq9SVZogKDJMIeEJTA7q+NYh+oYlviy/9lL0K59/E847/wwSItjGyuxcTN55QtGzDIuEYG+
+	mEgHtIm6gWm/jMzg2tlLHQ/8wwd8vJpimK02sNlErIahMl6pfCWhTWIobJxobeBcDXN1WZfvF7/
+	UOQ7o/pb3YOiwtGe61mr
+X-Google-Smtp-Source: AGHT+IE7Me8pB7QyV9z6f2oAJ7+JBE9OOhiEsaYtTLuBx81vps9U3VFoDRJCGvAOnK7vqW3oLI3gbg==
+X-Received: by 2002:a17:90b:2d8d:b0:2f7:4cce:ae37 with SMTP id 98e67ed59e1d1-2fc40f22cd2mr18280582a91.18.1739801796215;
+        Mon, 17 Feb 2025 06:16:36 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 1/2] x86/iommu: account for IOMEM caps when populating dom0 IOMMU page-tables
+Date: Mon, 17 Feb 2025 15:16:01 +0100
+Message-ID: <20250217141602.64014-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20250217141602.64014-1-roger.pau@citrix.com>
+References: <20250217141602.64014-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] xen/list: avoid UB in list iterators
-To: Jan Beulich <jbeulich@suse.com>
-Cc: oleksii.kurochko@gmail.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20250216102356.18801-1-jgross@suse.com>
- <20250216102356.18801-2-jgross@suse.com>
- <6e429c09-7f45-4bf6-b5b9-5d4b8885620c@suse.com>
- <93a37ce1-cffb-4dae-b339-7fd52a1098d8@suse.com>
- <ad91884b-e712-4f6e-a7ee-04817e8aabce@suse.com>
- <b1a4fd99-6553-4256-97ec-655c944170b2@suse.com>
- <3a3a1efe-ddde-44c6-b4c0-1701657f31c1@suse.com>
-Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <3a3a1efe-ddde-44c6-b4c0-1701657f31c1@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------GWo06CPsuUvwW2X1edT99cbe"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------GWo06CPsuUvwW2X1edT99cbe
-Content-Type: multipart/mixed; boundary="------------YvMYh7O0SCAxxHr0AHJFmhTD";
- protected-headers="v1"
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: oleksii.kurochko@gmail.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Message-ID: <12ede60b-3c87-4f1e-b8f2-4c13fe001cd5@suse.com>
-Subject: Re: [PATCH 1/2] xen/list: avoid UB in list iterators
-References: <20250216102356.18801-1-jgross@suse.com>
- <20250216102356.18801-2-jgross@suse.com>
- <6e429c09-7f45-4bf6-b5b9-5d4b8885620c@suse.com>
- <93a37ce1-cffb-4dae-b339-7fd52a1098d8@suse.com>
- <ad91884b-e712-4f6e-a7ee-04817e8aabce@suse.com>
- <b1a4fd99-6553-4256-97ec-655c944170b2@suse.com>
- <3a3a1efe-ddde-44c6-b4c0-1701657f31c1@suse.com>
-In-Reply-To: <3a3a1efe-ddde-44c6-b4c0-1701657f31c1@suse.com>
-Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
- ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
- Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
- pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
- tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
- OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
- v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
- 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
- jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
- DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
- Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
- dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
- AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
+The current code in arch_iommu_hwdom_init() kind of open-codes the same
+MMIO permission ranges that are added to the hardware domain ->iomem_caps.
+Avoid this duplication and use ->iomem_caps in arch_iommu_hwdom_init() to
+filter which memory regions should be added to the dom0 IOMMU page-tables.
 
---------------YvMYh7O0SCAxxHr0AHJFmhTD
-Content-Type: multipart/mixed; boundary="------------a0q3eX4nD8YOaiD3EaIZXZ0T"
+This should result in no change in the memory regions that end up identity
+mapped in the domain IOMMU page tables.
 
---------------a0q3eX4nD8YOaiD3EaIZXZ0T
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Note the IO-APIC and MCFG page(s) must be set as not accessible for a PVH
+dom0, otherwise the internal Xen emulation for those ranges won't work.
+This requires an adjustment in dom0_setup_permissions().
 
-T24gMTcuMDIuMjUgMTM6MTYsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAxNy4wMi4yMDI1
-IDEyOjU4LCBKw7xyZ2VuIEdyb8OfIHdyb3RlOg0KPj4gT24gMTcuMDIuMjUgMTI6MzksIEph
-biBCZXVsaWNoIHdyb3RlOg0KPj4+IE9uIDE3LjAyLjIwMjUgMTI6MTYsIEp1ZXJnZW4gR3Jv
-c3Mgd3JvdGU6DQo+Pj4+IE9uIDE3LjAyLjI1IDEwOjQ3LCBKYW4gQmV1bGljaCB3cm90ZToN
-Cj4+Pj4+IE9uIDE2LjAyLjIwMjUgMTE6MjMsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6DQo+Pj4+
-Pj4gQEAgLTU1NiwxMSArNTkwLDExIEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBsaXN0X3NwbGlj
-ZV9pbml0KHN0cnVjdCBsaXN0X2hlYWQgKmxpc3QsDQo+Pj4+Pj4gICAgICAqIEBoZWFkOiAg
-IHRoZSBoZWFkIGZvciB5b3VyIGxpc3QuDQo+Pj4+Pj4gICAgICAqIEBtZW1iZXI6IHRoZSBu
-YW1lIG9mIHRoZSBsaXN0X3N0cnVjdCB3aXRoaW4gdGhlIHN0cnVjdC4NCj4+Pj4+PiAgICAg
-ICovDQo+Pj4+Pj4gLSNkZWZpbmUgbGlzdF9mb3JfZWFjaF9lbnRyeV9zYWZlKHBvcywgbiwg
-aGVhZCwgbWVtYmVyKSAgICAgICAgICAgICAgICAgIFwNCj4+Pj4+PiAtICAgIGZvciAoKHBv
-cykgPSBsaXN0X2VudHJ5KChoZWFkKS0+bmV4dCwgdHlwZW9mKCoocG9zKSksIG1lbWJlciks
-ICAgICAgXA0KPj4+Pj4+IC0gICAgICAgICAobikgPSBsaXN0X2VudHJ5KChwb3MpLT5tZW1i
-ZXIubmV4dCwgdHlwZW9mKCoocG9zKSksIG1lbWJlcik7ICBcDQo+Pj4+Pj4gLSAgICAgICAg
-ICYocG9zKS0+bWVtYmVyICE9IChoZWFkKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIFwNCj4+Pj4+PiAtICAgICAgICAgKHBvcykgPSAobiksIChuKSA9IGxpc3Rf
-ZW50cnkoKG4pLT5tZW1iZXIubmV4dCwgdHlwZW9mKCoobikpLCBtZW1iZXIpKQ0KPj4+Pj4+
-ICsjZGVmaW5lIGxpc3RfZm9yX2VhY2hfZW50cnlfc2FmZShwb3MsIG4sIGhlYWQsIG1lbWJl
-cikgICAgICAgICAgICAgICAgICAgICBcDQo+Pj4+Pj4gKyAgICBmb3IgKCAocG9zKSA9IGxp
-c3RfZmlyc3RfZW50cnlfb3JfbnVsbChoZWFkLCB0eXBlb2YoKihwb3MpKSwgbWVtYmVyKSwg
-IFwNCj4+Pj4+PiArICAgICAgICAgIChuKSA9IChwb3MpID8gbGlzdF9uZXh0X2VudHJ5X29y
-X251bGwoaGVhZCwgcG9zLCBtZW1iZXIpIDogTlVMTDsgXA0KPj4+Pj4NCj4+Pj4+IG4gY2Fu
-IGVuZCB1cCBiZWluZyBOVUxMIGhlcmUgZXZlbiBpZiBwb3MgaXNuJ3QuIFRoZW4gLi4uDQo+
-Pj4+Pg0KPj4+Pj4+ICsgICAgICAgICAgcG9zOyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcDQo+Pj4+Pj4gKyAgICAgICAg
-ICAocG9zKSA9IChuKSwgKG4pID0gbGlzdF9uZXh0X2VudHJ5X29yX251bGwoaGVhZCwgbiwg
-bWVtYmVyKSApDQo+Pj4+Pg0KPj4+Pj4gLi4uIHlvdSBjYW4ndCB1c2UgbGlzdF9uZXh0X2Vu
-dHJ5X29yX251bGwoKSBvbiBpdC4NCj4+Pj4NCj4+Pj4gQWgsIGluZGVlZC4NCj4+Pj4NCj4+
-Pj4gV2hhdCB3b3VsZCB5b3UgcHJlZmVyPyBIYW5kbGluZyB0aGF0IGluIHRoZSAqX3NhZmUo
-KSBpdGVyYXRvciBtYWNyb3MsIG9yDQo+Pj4+IGFsbG93aW5nIHRoZSAqX2VudHJ5X29yX251
-bGwoKSBtYWNyb3MgdG8gYmUgY2FsbGVkIHdpdGggYSBOVUxMIHBhcmFtZXRlcj8NCj4+Pg0K
-Pj4+IEknZCBwcmVmZXIgdGhlIGZvcm1lciwgYnV0IEkgcHJvYmFibHkgd291bGRuJ3QgbWlu
-ZCB0aGUgbGF0dGVyLg0KPj4+DQo+Pj4+Pj4gQEAgLTY1NSwxMCArNjg5LDEwIEBAIHN0YXRp
-YyBpbmxpbmUgdm9pZCBsaXN0X3NwbGljZV9pbml0KHN0cnVjdCBsaXN0X2hlYWQgKmxpc3Qs
-DQo+Pj4+Pj4gICAgICAqIHRoZSBfcmN1IGxpc3QtbXV0YXRpb24gcHJpbWl0aXZlcyBzdWNo
-IGFzIGxpc3RfYWRkX3JjdSgpDQo+Pj4+Pj4gICAgICAqIGFzIGxvbmcgYXMgdGhlIHRyYXZl
-cnNhbCBpcyBndWFyZGVkIGJ5IHJjdV9yZWFkX2xvY2soKS4NCj4+Pj4+PiAgICAgICovDQo+
-Pj4+Pj4gLSNkZWZpbmUgbGlzdF9mb3JfZWFjaF9lbnRyeV9yY3UocG9zLCBoZWFkLCBtZW1i
-ZXIpICAgICAgICAgICAgICAgICAgICAgIFwNCj4+Pj4+PiAtICAgIGZvciAoKHBvcykgPSBs
-aXN0X2VudHJ5KChoZWFkKS0+bmV4dCwgdHlwZW9mKCoocG9zKSksIG1lbWJlcik7ICAgICAg
-XA0KPj4+Pj4+IC0gICAgICAgICAmcmN1X2RlcmVmZXJlbmNlKHBvcyktPm1lbWJlciAhPSAo
-aGVhZCk7ICAgICAgICAgICAgICAgICAgICAgICBcDQo+Pj4+Pj4gLSAgICAgICAgIChwb3Mp
-ID0gbGlzdF9lbnRyeSgocG9zKS0+bWVtYmVyLm5leHQsIHR5cGVvZigqKHBvcykpLCBtZW1i
-ZXIpKQ0KPj4+Pj4+ICsjZGVmaW5lIGxpc3RfZm9yX2VhY2hfZW50cnlfcmN1KHBvcywgaGVh
-ZCwgbWVtYmVyKSAgICAgICAgICAgICAgICAgICAgICAgIFwNCj4+Pj4+PiArICAgIGZvciAo
-IChwb3MpID0gbGlzdF9maXJzdF9lbnRyeV9vcl9udWxsKGhlYWQsIHR5cGVvZigqKHBvcykp
-LCBtZW1iZXIpOyBcDQo+Pj4+Pj4gKyAgICAgICAgICByY3VfZGVyZWZlcmVuY2UocG9zKTsg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXA0KPj4+Pj4+ICsg
-ICAgICAgICAgKHBvcykgPSBsaXN0X25leHRfZW50cnlfb3JfbnVsbChoZWFkLCBwb3MsIG1l
-bWJlcikgKQ0KPj4+Pj4NCj4+Pj4+IERvbid0IHlvdSBuZWVkIGEgbGlzdF9uZXh0X2VudHJ5
-X29yX251bGxfcmN1KCkgZmxhdm9yIGhlcmUsIHVzaW5nDQo+Pj4+PiByY3VfZGVyZWZlcmVu
-Y2UoKSBvbiB0aGUgcGFzc2VkIGluIHBvcyBmb3IgdGhlIChwb3MpLT5tZW1iZXIubmV4dCBk
-ZXJlZj8NCj4+Pj4NCj4+Pj4gSXNuJ3QgdGhlICJyY3VfZGVyZWZlcmVuY2UocG9zKTsiIGFs
-bCB3aGF0IGlzIG5lZWRlZCBmb3IgdGhlIGN1cnJlbnQgaXRlcmF0aW9uPw0KPj4+DQo+Pj4g
-UmVhZGluZyBMaW51eCdlcyByY3VfZGVyZWZlcmVuY2UucnN0LCBteSB1bmRlcnN0YW5kaW5n
-IGlzIHRoYXQgb25lIG9mIHRoZW0NCj4+PiB3b3VsZCBzdWZmaWNlIGlmIHRoZW4gd2UgdXNl
-ZCBpdHMgcmVzdWx0IHJhdGhlciB0aGFuIHRoZSBvcmlnaW5hbCBwb2ludGVyLg0KPj4+IFRo
-ZW4gYWdhaW4gUkNVIGhhcyBiZWVuIHNvbWV3aGF0IG9wYXF1ZSB0byBtZSBmb3IgYWxsIHRo
-ZSB5ZWFycyAuLi4NCj4+Pg0KPj4+PiBPdGhlcndpc2UgdG9kYXkncyBpbXBsZW1lbnRhdGlv
-biB3b3VsZCBzdWZmZXIgZnJvbSB0aGUgc2FtZSBwcm9ibGVtIElNSE8uDQo+Pj4NCj4+PiBU
-aGF0J3MgdGhlIGltcHJlc3Npb24gSSdtIChub3cpIGhhdmluZy4NCj4+DQo+PiBUaGUgcmN1
-X2RlcmVmZXJlbmNlKCkgaXMgYmFzaWNhbGx5IGp1c3QgZm9yIGRvY3VtZW50YXRpb24gcHVy
-cG9zZXMuIElmIG5lZWRlZA0KPj4gYnkgYW4gYXJjaCwgaXQgY2FuIGFkZCBiYXJyaWVycywg
-dG9vLCBidXQgYWNjb3JkaW5nIHRvIHRoZSBjb21tZW50cyB0aG9zZSB3b3VsZA0KPj4gYmUg
-bmVlZGVkIG9uIGFscGhhIG9ubHkuIFRoZSByZXR1cm5lZCB2YWx1ZSBpcyBhbHdheXMgdGhl
-IG9yaWdpbmFsIHBvaW50ZXINCj4+IHZhbHVlLiBTZWUgdGhlIGNvbW1lbnQgYmxvY2sgaW4g
-eGVuL2luY2x1ZGUveGVuL3JjdXBkYXRlLmgNCj4gDQo+IE5vdGUgdGhlICJUaGlzIHBvaW50
-ZXIgbWF5IGxhdGVyIGJlIHNhZmVseSBkZXJlZmVyZW5jZWQiIGluIHRoZXJlLiBBcyBzYWlk
-LA0KPiB3ZSdkIGJlIGZpbmUgaWYgd2UgdXNlZCB0aGUgcmV0dXJuIHZhbHVlIGluc3RlYWQg
-b2YgdGhlIG9yaWdpbmFsICJwb3MiLiBZZXQNCj4gd2UgZG9uJ3QuIFdlIGVmZmVjdGl2ZWx5
-IGFzc3VtZSB0aGF0IHRoZSBtYWNybyBleHBhbmRzIHRvIGp1c3QgdGhlIHBhc3NlZA0KPiBp
-biBwb2ludGVyLCB3aXRoIG5vIGJhcnJpZXJzIG9yIGFueXRoaW5nIGVsc2UuDQo+IA0KPiBB
-bnl3YXksIHNpbmNlIC0gYXMgeW91IHZhbGlkbHkgc2F5IC0gdGhpcyBpcyBhIHByZS1leGlz
-dGluZyBpc3N1ZSwgbGV0J3MgcHV0DQo+IGl0IG9uIHRoZSBzaWRlIHJpZ2h0IGhlcmUuDQoN
-CkknbGwgc2V0dXAgYSBwYXRjaCBmb3IgNC4yMSBmaXhpbmcgYWxsIHRoZSByY3UgbGlzdCBp
-dGVyYXRvcnMuDQoNCg0KSnVlcmdlbg0K
---------------a0q3eX4nD8YOaiD3EaIZXZ0T
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+Also the special casing of E820_UNUSABLE regions no longer needs to be done
+in arch_iommu_hwdom_init(), as those regions are already blocked in
+->iomem_caps and thus would be removed from the rangeset as part of
+->iomem_caps processing in arch_iommu_hwdom_init().
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v1:
+ - New in this version.
+---
+ xen/arch/x86/dom0_build.c           | 19 ++++++++-
+ xen/arch/x86/hvm/io.c               | 16 --------
+ xen/arch/x86/include/asm/hvm/io.h   |  3 --
+ xen/drivers/passthrough/x86/iommu.c | 61 +++++++++++++----------------
+ 4 files changed, 45 insertions(+), 54 deletions(-)
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index e8f5bf5447bc..22da9ba5a362 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -552,7 +552,8 @@ int __init dom0_setup_permissions(struct domain *d)
+     for ( i = 0; i < nr_ioapics; i++ )
+     {
+         mfn = paddr_to_pfn(mp_ioapics[i].mpc_apicaddr);
+-        if ( !rangeset_contains_singleton(mmio_ro_ranges, mfn) )
++        if ( is_hvm_domain(d) ||
++             !rangeset_contains_singleton(mmio_ro_ranges, mfn) )
+             rc |= iomem_deny_access(d, mfn, mfn);
+     }
+     /* MSI range. */
+@@ -593,6 +594,22 @@ int __init dom0_setup_permissions(struct domain *d)
+             rc |= rangeset_add_singleton(mmio_ro_ranges, mfn);
+     }
+ 
++    /* For PVH dom0 prevent access to MCFG, it's emulated by Xen. */
++    if ( is_hvm_domain(d) )
++    {
++        for ( i = 0; i < pci_mmcfg_config_num; i++ )
++        {
++            const unsigned long s =
++                PFN_DOWN(pci_mmcfg_config[i].address) +
++                PCI_BDF(pci_mmcfg_config[i].start_bus_number, 0, 0);
++            const unsigned long e =
++                PFN_DOWN(pci_mmcfg_config[i].address) +
++                PCI_BDF(pci_mmcfg_config[i].end_bus_number, ~0, ~0);
++
++            rc |= iomem_deny_access(d, s, e);
++        }
++    }
++
+     return rc;
+ }
+ 
+diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
+index db726b38177b..174c3285a636 100644
+--- a/xen/arch/x86/hvm/io.c
++++ b/xen/arch/x86/hvm/io.c
+@@ -363,22 +363,6 @@ static const struct hvm_mmcfg *vpci_mmcfg_find(const struct domain *d,
+     return NULL;
+ }
+ 
+-int __hwdom_init vpci_subtract_mmcfg(const struct domain *d, struct rangeset *r)
+-{
+-    const struct hvm_mmcfg *mmcfg;
+-
+-    list_for_each_entry ( mmcfg, &d->arch.hvm.mmcfg_regions, next )
+-    {
+-        int rc = rangeset_remove_range(r, PFN_DOWN(mmcfg->addr),
+-                                       PFN_DOWN(mmcfg->addr + mmcfg->size - 1));
+-
+-        if ( rc )
+-            return rc;
+-    }
+-
+-    return 0;
+-}
+-
+ static unsigned int vpci_mmcfg_decode_addr(const struct hvm_mmcfg *mmcfg,
+                                            paddr_t addr, pci_sbdf_t *sbdf)
+ {
+diff --git a/xen/arch/x86/include/asm/hvm/io.h b/xen/arch/x86/include/asm/hvm/io.h
+index f2b8431facb0..0881e9e9f72d 100644
+--- a/xen/arch/x86/include/asm/hvm/io.h
++++ b/xen/arch/x86/include/asm/hvm/io.h
+@@ -132,9 +132,6 @@ int register_vpci_mmcfg_handler(struct domain *d, paddr_t addr,
+ /* Destroy tracked MMCFG areas. */
+ void destroy_vpci_mmcfg(struct domain *d);
+ 
+-/* Remove MMCFG regions from a given rangeset. */
+-int vpci_subtract_mmcfg(const struct domain *d, struct rangeset *r);
+-
+ #endif /* __ASM_X86_HVM_IO_H__ */
+ 
+ 
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index 8b1e0596b84a..3b386eb19d13 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -320,6 +320,26 @@ static int __hwdom_init cf_check map_subtract(unsigned long s, unsigned long e,
+     return rangeset_remove_range(map, s, e);
+ }
+ 
++struct handle_iomemcap {
++    struct rangeset *r;
++    unsigned long last;
++};
++static int __hwdom_init cf_check map_subtract_iomemcap(unsigned long s,
++                                                       unsigned long e,
++                                                       void *data)
++{
++    struct handle_iomemcap *h = data;
++    int rc = 0;
++
++    if ( h->last != s )
++        rc = rangeset_remove_range(h->r, h->last, s - 1);
++
++    /* Be careful with overflows. */
++    h->last = max(e + 1, e);
++
++    return rc;
++}
++
+ struct map_data {
+     struct domain *d;
+     unsigned int flush_flags;
+@@ -400,6 +420,7 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+     unsigned int i;
+     struct rangeset *map;
+     struct map_data map_data = { .d = d };
++    struct handle_iomemcap iomem = {};
+     int rc;
+ 
+     BUG_ON(!is_hardware_domain(d));
+@@ -442,14 +463,6 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+ 
+         switch ( entry.type )
+         {
+-        case E820_UNUSABLE:
+-            /* Only relevant for inclusive mode, otherwise this is a no-op. */
+-            rc = rangeset_remove_range(map, PFN_DOWN(entry.addr),
+-                                       PFN_DOWN(entry.addr + entry.size - 1));
+-            if ( rc )
+-                panic("IOMMU failed to remove unusable memory: %d\n", rc);
+-            continue;
+-
+         case E820_RESERVED:
+             if ( !iommu_hwdom_inclusive && !iommu_hwdom_reserved )
+                 continue;
+@@ -475,22 +488,13 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+     if ( rc )
+         panic("IOMMU failed to remove Xen ranges: %d\n", rc);
+ 
+-    /* Remove any overlap with the Interrupt Address Range. */
+-    rc = rangeset_remove_range(map, 0xfee00, 0xfeeff);
++    iomem.r = map;
++    rc = rangeset_report_ranges(d->iomem_caps, 0, ~0UL, map_subtract_iomemcap,
++                                &iomem);
++    if ( !rc && iomem.last < ~0UL )
++        rc = rangeset_remove_range(map, iomem.last, ~0UL);
+     if ( rc )
+-        panic("IOMMU failed to remove Interrupt Address Range: %d\n", rc);
+-
+-    /* If emulating IO-APIC(s) make sure the base address is unmapped. */
+-    if ( has_vioapic(d) )
+-    {
+-        for ( i = 0; i < d->arch.hvm.nr_vioapics; i++ )
+-        {
+-            rc = rangeset_remove_singleton(map,
+-                PFN_DOWN(domain_vioapic(d, i)->base_address));
+-            if ( rc )
+-                panic("IOMMU failed to remove IO-APIC: %d\n", rc);
+-        }
+-    }
++        panic("IOMMU failed to remove forbidden regions: %d\n", rc);
+ 
+     if ( is_pv_domain(d) )
+     {
+@@ -506,17 +510,6 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+             panic("IOMMU failed to remove read-only regions: %d\n", rc);
+     }
+ 
+-    if ( has_vpci(d) )
+-    {
+-        /*
+-         * TODO: runtime added MMCFG regions are not checked to make sure they
+-         * don't overlap with already mapped regions, thus preventing trapping.
+-         */
+-        rc = vpci_subtract_mmcfg(d, map);
+-        if ( rc )
+-            panic("IOMMU unable to remove MMCFG areas: %d\n", rc);
+-    }
+-
+     /* Remove any regions past the last address addressable by the domain. */
+     rc = rangeset_remove_range(map, PFN_DOWN(1UL << domain_max_paddr_bits(d)),
+                                ~0UL);
+-- 
+2.46.0
 
---------------a0q3eX4nD8YOaiD3EaIZXZ0T--
-
---------------YvMYh7O0SCAxxHr0AHJFmhTD--
-
---------------GWo06CPsuUvwW2X1edT99cbe
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmezQPcFAwAAAAAACgkQsN6d1ii/Ey8x
-cQf/Z4FQH1sktogXR0rJ27N+9fJD9GgpxqdmEy1oktsdTXKz+y3uWOb+0sssxs27ZS/UGHWpx/Zu
-i8uAkwj9GSOk0ei9QevuV5qyljyddEjwwvP04VMF4Jl7iwERTaZPfTPYKjhcbvK7BCQBcmOQbTFX
-JoQaPznMopUS7lQ3W/tuQuN+0h58LaoTc4j/iJfid/v1DEwjNnq9SFUSWfcuOKjIe3P6c6vlqjVn
-yk7NMjcLT7Qd9L2ysiePuEHgGWQxZTD6J8ln1Zfm78O3sZr/VFe/qHIMxe4hc/QlDByFOPEcd+zW
-CKEZ2wI1d1zI/3MTCq350qVxE8FBPCDtrDN7ncF6rQ==
-=jBLI
------END PGP SIGNATURE-----
-
---------------GWo06CPsuUvwW2X1edT99cbe--
 
