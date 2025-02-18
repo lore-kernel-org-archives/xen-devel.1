@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 514B1C02198
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:45:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.891772.1300812 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CADD1C02198
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:45:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.891780.1300822 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOqO-0005WR-H4; Tue, 18 Feb 2025 14:45:04 +0000
+	id 1tkOqo-00065E-Qc; Tue, 18 Feb 2025 14:45:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 891772.1300812; Tue, 18 Feb 2025 14:45:04 +0000
+Received: by outflank-mailman (output) from mailman id 891780.1300822; Tue, 18 Feb 2025 14:45:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOqO-0005WK-E5; Tue, 18 Feb 2025 14:45:04 +0000
-Received: by outflank-mailman (input) for mailman id 891772;
- Tue, 18 Feb 2025 14:45:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tkOqo-000657-MJ; Tue, 18 Feb 2025 14:45:30 +0000
+Received: by outflank-mailman (input) for mailman id 891780;
+ Tue, 18 Feb 2025 14:45:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=v6LV=VJ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tkOgq-000673-Pf
- for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:35:12 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8f6839d0-ee05-11ef-9aa7-95dc52dad729;
- Tue, 18 Feb 2025 15:35:12 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-abb7f539c35so623453966b.1
- for <xen-devel@lists.xenproject.org>; Tue, 18 Feb 2025 06:35:12 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abbb297ccd6sm187008966b.160.2025.02.18.06.35.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 06:35:10 -0800 (PST)
+ <SRS0=J6eQ=VJ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tkOqn-00061H-M8
+ for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:45:29 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fe803af1-ee06-11ef-9896-31a8f345e629;
+ Tue, 18 Feb 2025 15:45:28 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43948f77f1aso36446585e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Feb 2025 06:45:28 -0800 (PST)
+Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f259f7979sm14980182f8f.83.2025.02.18.06.45.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Feb 2025 06:45:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,298 +47,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f6839d0-ee05-11ef-9aa7-95dc52dad729
+X-Inumbo-ID: fe803af1-ee06-11ef-9896-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1739889311; x=1740494111; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0KCSjyGMRhRccb8+O9P77tIoteqmX4B4he+uBAZ8Pjw=;
-        b=OWiFWdMYRYB7snYSckv4xTnS9MHwbq2hjK6RMxKE530/0JPzanPJYoh7fbhf/jr1m+
-         0Tl+AbpagygD3VWuXc8gUe0TuTNz1Yip2FChrcVUaGklArZwiPL4V94gsdVc9Mp7hH4m
-         NJsPUH2WejWxBxmwGChWXKAUuUbeNyx22sWgk=
+        d=citrix.com; s=google; t=1739889927; x=1740494727; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZkqYJNgrmr8nrxZeCLkbegx8IRhLuMnWymVqkuxHe5k=;
+        b=S57peWW55dl6hhpBKGEEy0oPat1C3DQDCYp0GoquvAj0d7wIFp1jmiyObQPGS71KKv
+         153iv/MlN8zL4zTYYJLD6Lkd+AzvvYQhcoyAgKIk/vn30hFOOjUEj/mxG4C/OTiXtqKX
+         UVbf79jc7eMCJkChIMIpe5PW5lfh1fDB/zbjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739889311; x=1740494111;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0KCSjyGMRhRccb8+O9P77tIoteqmX4B4he+uBAZ8Pjw=;
-        b=frXlQ16cQT0z7qZN/y5E54znM2zS1wT9PQ7X2Mpg/Ks21ljaCyixj+Jqg16Xc1yeie
-         LIYFN8VT2BY3OZXbN3cIdxs6MUwnxqVipHN5Srfg9jCTzfw9GQa5pIa+kLe3BZ7SJzcI
-         gbgsxWML3bPSCK1PJu/7lwQvIoVBKZN3XBRvclKcel4hVrjkcRaJheAMzqsecFDCVTpl
-         oTIQPgPv6KVkt61btONCMPf8A0g31YH2xCgt1g5UdwISnOc2yPwz27nnWboS7zPZ9b4E
-         fM2Ng8RF66zWWgISSeJTNC+sJ/M9DqiyR7eZp4VNdjxbDwHwog/IhlyBF4u7K+J6XKpx
-         qnaQ==
-X-Gm-Message-State: AOJu0YxIzGwe/tbSAE4/RuNCKlm0AGB3AaPFOp/OIvD391/6NE7nqJCs
-	HrsoCC16gh52RnB7JAvE5yAaB4VmxNFxFIbdJ/W5n9mm37CBl4fKPXGvaeOXPrcqfGZkE48HUgb
-	t
-X-Gm-Gg: ASbGncsw6QwYuNQ5JH0z73NxnzXtHUs/APkQx5ay3V0EJF8r7TU3S52j+3kPSe7ZKLu
-	+MVWzshejDpZZflKosoR0KKvpmHlgByrDbgwAfJz4BpQNiPFWEHcSRbcnNPU4mysv4ckBUKlGK1
-	RTGp7PVP/4VoQeiny54wxvpzb1EMgtQWxIUppGup1xe2jKXIhOgb03nNbn9Y+3DktQc9OjtSCoY
-	7l4tcGvomx6M9ALxtn3rllqWqRMcWHOwpuPlxRY0YcWaLYLt522EKGn6W3f52KNutAckRt31o6q
-	8bNNFGc1b3n7TUZAZWyq
-X-Google-Smtp-Source: AGHT+IE4yCeMa8fCFyU/iSMMhgr0I/IAAo1OeHksm9dYKyIsTmmsIQKy3faWCG8qXOC7BzW+O/V9Kw==
-X-Received: by 2002:a17:907:6091:b0:ab7:d916:4fe4 with SMTP id a640c23a62f3a-abb70bacfc2mr1528841866b.24.1739889310862;
-        Tue, 18 Feb 2025 06:35:10 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 2/2] x86/dom0: attempt to fixup p2m page-faults for PVH dom0
-Date: Tue, 18 Feb 2025 15:35:04 +0100
-Message-ID: <20250218143504.77638-3-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20250218143504.77638-1-roger.pau@citrix.com>
-References: <20250218143504.77638-1-roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1739889927; x=1740494727;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZkqYJNgrmr8nrxZeCLkbegx8IRhLuMnWymVqkuxHe5k=;
+        b=SpL1NLVFGn03PH6AyTIXp2pdTOF7EYqE7jnQOz/e2CnM2kcsSVVg5q5L2x3X98ANS9
+         MLAKN/Fj3i6+z94xW3kxkRH1Ze5hfMTCmfXJQiH7WXaivfRtHj4gWzUElmd5wlspB/vV
+         nzPIPuFD6+oSygmf6Mzkc4h+SHzeuTsFxzWdqq/7RJ0wS7HkoH5KrT+p+KEEDl2Y2JBX
+         V6NJ3wS1UzJU1VXrtnuiE+vl7ZvtIRFi1JU2G/HaX+fPtvJIortnG8MqHEHEF8/Snty8
+         qSS8ICgwuMhrMFQYnwDvoSAyT2Ax6pm9QzJMDW5r0HtQsznQmZ9pIaz0/aZMfy1gK6V3
+         a4WA==
+X-Gm-Message-State: AOJu0YwN/2Z/2BFwlhTNVzEVURFFZbTxbF4+vMB+d0jUld+0+ldAZg6Y
+	b4EybM3dP0bJcJcgzlYimqQUSHq4An8MjvdfKFyAMmrqz6JR6Vg26Jlwc2dzM5g=
+X-Gm-Gg: ASbGncv+dTliIjFEol5l8ucCzE/O8RiapManjumSIl8PHggYBM1PFsSfhuvljt6j3CI
+	Gb3yyAJs1gu+hPy7rcrrico7jCXxRT9iDS5m/eHJ2+o1o4i9qPZM0J5VQ2bcNVJvzsDF1NL9+lV
+	nvfeN/N3M6Rn8fSrDLkHrz9aY8jIdzQKPZKfr0vLbxtDreR3r6BF63pPaktHywYT6PtPn1a9/FH
+	9ldUcm6wyWKs9He4xs2ExlJ82+x1QAxiSVv4V+RUFl7qMRGbtM658rswhXfLhvrTXXgX0R5WhUs
+	iaHpZvC0tebA72mx1QCOb3WBgvvrrUJ0Z/3WQtVmjjkPqzU8q+aMIn4=
+X-Google-Smtp-Source: AGHT+IFYVft/kIJ+62HRRV+TEZ1h+c9NaxmdTMi1gBSsWG4/UI9ktxis/Z+A4Ozx1gZZy4EejEhEpw==
+X-Received: by 2002:a5d:5888:0:b0:38f:27d3:1b3b with SMTP id ffacd0b85a97d-38f33f11925mr11692128f8f.11.1739889927464;
+        Tue, 18 Feb 2025 06:45:27 -0800 (PST)
+Message-ID: <22d66aba-45e7-46c7-9aaf-7809a9fadb80@citrix.com>
+Date: Tue, 18 Feb 2025 14:45:26 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] x86/svm: Separate STI and VMRUN instructions in
+ svm_asm_do_resume()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <20250217161241.537168-1-andrew.cooper3@citrix.com>
+ <20250218143739.623451-1-andrew.cooper3@citrix.com>
+ <799c5a1b-d083-4b93-be44-a204a8b845f8@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
+ VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
+ srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
+ Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
+ ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
+ YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
+ LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
+ e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
+ gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
+ ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
+ cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
+ CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
+ 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
+ IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
+ SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
+ JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
+ mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
+ ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
+ RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
+ dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
+ /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
+ TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
+ Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
+ 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
+ vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
+ g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
+ wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
+ 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
+ kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
+ bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
+ uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
+ XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
+ HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
+ pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
+ vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
+ b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
+ 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
+ 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
+ nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
+ B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
+ d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
+ 6+ahAA==
+In-Reply-To: <799c5a1b-d083-4b93-be44-a204a8b845f8@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-When building a PVH dom0 Xen attempts to map all (relevant) MMIO regions
-into the p2m for dom0 access.  However the information Xen has about the
-host memory map is limited.  Xen doesn't have access to any resources
-described in ACPI dynamic tables, and hence the p2m mappings provided might
-not be complete.
+On 18/02/2025 2:42 pm, Jan Beulich wrote:
+> On 18.02.2025 15:37, Andrew Cooper wrote:
+>> There is a corner case in the VMRUN instruction where its INTR_SHADOW state
+>> leaks into guest state if a VMExit occurs before the VMRUN is complete.  An
+>> example of this could be taking #NPF due to event injection.
+>>
+>> Xen can safely execute STI anywhere between CLGI and VMRUN, as CLGI blocks
+>> external interrupts too.  However, an exception (while fatal) will appear to
+>> be in an irqs-on region (as GIF isn't considered), so position the STI after
+>> the speculation actions but prior to the GPR pops.
+>>
+>> Link: https://lore.kernel.org/all/CADH9ctBs1YPmE4aCfGPNBwA10cA8RuAk2gO7542DjMZgs4uzJQ@mail.gmail.com/
+>> Fixes: 66b245d9eaeb ("SVM: limit GIF=0 region")
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> v2:
+>>  * Move after the speculation actions.
+>>
+>> Emailed out just for completeness.  I've queued it in my for-4.21 branch.
+> It'll want backporting, so I wonder if we should persuade Oleksii into
+> taking it for 4.20.
 
-PV doesn't suffer from this issue because a PV dom0 is capable of mapping
-into it's page-tables any address not explicitly banned in d->iomem_caps.
+If Oleksii is happy, I can put it into 4.20.
 
-Introduce a new command line options that allows Xen to attempt to fixup
-the p2m page-faults, by creating p2m identity maps in response to p2m
-page-faults.
-
-This is aimed as a workaround to small ACPI regions Xen doesn't know about.
-Note that missing large MMIO regions mapped in this way will lead to
-slowness due to the VM exit processing, plus the mappings will always use
-small pages.
-
-The ultimate aim is to attempt to bring better parity with a classic PV
-dom0.
-
-Note such fixup rely on the CPU doing the access to the unpopulated
-address.  If the access is attempted from a device instead there's no
-possible way to fixup, as IOMMU page-fault are asynchronous.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Only slightly tested on my local PVH dom0 deployment.
----
-Changes since v1:
- - Make the fixup function static.
- - Print message in case mapping already exists.
----
- CHANGELOG.md                           | 10 ++++
- docs/misc/xen-command-line.pandoc      | 16 +++++-
- xen/arch/x86/dom0_build.c              |  5 ++
- xen/arch/x86/hvm/emulate.c             | 74 +++++++++++++++++++++++++-
- xen/arch/x86/include/asm/hvm/emulate.h |  3 ++
- 5 files changed, 105 insertions(+), 3 deletions(-)
-
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 1de1d1eca17f..e5e6ab3a8902 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -4,6 +4,16 @@ Notable changes to Xen will be documented in this file.
- 
- The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
- 
-+## [4.21.0 UNRELEASED](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
-+
-+### Changed
-+
-+### Added
-+ - On x86:
-+   - Option to attempt to fixup p2m page-faults on PVH dom0.
-+
-+### Removed
-+
- ## [4.20.0 UNRELEASED](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
- 
- ### Changed
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 9bbd00baef91..83bb69cfb852 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -822,7 +822,8 @@ Specify the bit width of the DMA heap.
- 
- ### dom0
-     = List of [ pv | pvh, shadow=<bool>, verbose=<bool>,
--                cpuid-faulting=<bool>, msr-relaxed=<bool> ] (x86)
-+                cpuid-faulting=<bool>, msr-relaxed=<bool>,
-+                pf-fixup=<bool> ] (x86)
- 
-     = List of [ sve=<integer> ] (Arm64)
- 
-@@ -883,6 +884,19 @@ Controls for how dom0 is constructed on x86 systems.
- 
-     If using this option is necessary to fix an issue, please report a bug.
- 
-+*   The `pf-fixup` boolean is only applicable when using a PVH dom0 and
-+    defaults to false.
-+
-+    When running dom0 in PVH mode the dom0 kernel has no way to map MMIO
-+    regions into its physical memory map, such mode relies on Xen dom0 builder
-+    populating the physical memory map with all MMIO regions that dom0 should
-+    access.  However Xen doesn't have a complete picture of the host memory
-+    map, due to not being able to process ACPI dynamic tables.
-+
-+    The `pf-fixup` option allows Xen to attempt to add missing MMIO regions
-+    to the dom0 physical memory map in response to page-faults generated by
-+    dom0 trying to access unpopulated entries in the memory map.
-+
- Enables features on dom0 on Arm systems.
- 
- *   The `sve` integer parameter enables Arm SVE usage for Dom0 and sets the
-diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
-index 2fe6b449149e..11c20b9ab0a4 100644
---- a/xen/arch/x86/dom0_build.c
-+++ b/xen/arch/x86/dom0_build.c
-@@ -16,6 +16,7 @@
- #include <asm/dom0_build.h>
- #include <asm/guest.h>
- #include <asm/hpet.h>
-+#include <asm/hvm/emulate.h>
- #include <asm/io-ports.h>
- #include <asm/io_apic.h>
- #include <asm/p2m.h>
-@@ -286,6 +287,10 @@ int __init parse_arch_dom0_param(const char *s, const char *e)
-         opt_dom0_cpuid_faulting = val;
-     else if ( (val = parse_boolean("msr-relaxed", s, e)) >= 0 )
-         opt_dom0_msr_relaxed = val;
-+#ifdef CONFIG_HVM
-+    else if ( (val = parse_boolean("pf-fixup", s, e)) >= 0 )
-+        opt_dom0_pf_fixup = val;
-+#endif
-     else
-         return -EINVAL;
- 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 08b9493e6d88..3cd7f2e22f26 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -10,12 +10,15 @@
-  */
- 
- #include <xen/init.h>
-+#include <xen/iocap.h>
- #include <xen/ioreq.h>
- #include <xen/lib.h>
- #include <xen/sched.h>
- #include <xen/paging.h>
- #include <xen/trace.h>
- #include <xen/vm_event.h>
-+
-+#include <asm/altp2m.h>
- #include <asm/event.h>
- #include <asm/i387.h>
- #include <asm/xstate.h>
-@@ -161,6 +164,36 @@ void hvmemul_cancel(struct vcpu *v)
-     hvmemul_cache_disable(v);
- }
- 
-+bool __ro_after_init opt_dom0_pf_fixup;
-+static int hwdom_fixup_p2m(paddr_t addr)
-+{
-+    unsigned long gfn = paddr_to_pfn(addr);
-+    struct domain *currd = current->domain;
-+    p2m_type_t type;
-+    mfn_t mfn;
-+    int rc;
-+
-+    ASSERT(is_hardware_domain(currd));
-+    ASSERT(!altp2m_active(currd));
-+
-+    /*
-+     * Fixups are only applied for MMIO holes, and rely on the hardware domain
-+     * having identity mappings for non RAM regions (gfn == mfn).
-+     */
-+    if ( !iomem_access_permitted(currd, gfn, gfn) ||
-+         !is_memory_hole(_mfn(gfn), _mfn(gfn)) )
-+        return -EPERM;
-+
-+    mfn = get_gfn(currd, gfn, &type);
-+    if ( !mfn_eq(mfn, INVALID_MFN) || !p2m_is_hole(type) )
-+        rc = mfn_eq(mfn, _mfn(gfn)) ? -EEXIST : -ENOTEMPTY;
-+    else
-+        rc = set_mmio_p2m_entry(currd, _gfn(gfn), _mfn(gfn), 0);
-+    put_gfn(currd, gfn);
-+
-+    return rc;
-+}
-+
- static int hvmemul_do_io(
-     bool is_mmio, paddr_t addr, unsigned long *reps, unsigned int size,
-     uint8_t dir, bool df, bool data_is_addr, uintptr_t data)
-@@ -338,8 +371,45 @@ static int hvmemul_do_io(
-         if ( !s )
-         {
-             if ( is_mmio && is_hardware_domain(currd) )
--                gdprintk(XENLOG_DEBUG, "unhandled memory %s %#lx size %u\n",
--                         dir ? "read from" : "write to", addr, size);
-+            {
-+                /*
-+                 * PVH dom0 is likely missing MMIO mappings on the p2m, due to
-+                 * the incomplete information Xen has about the memory layout.
-+                 *
-+                 * Either print a message to note dom0 attempted to access an
-+                 * unpopulated GPA, or try to fixup the p2m by creating an
-+                 * identity mapping for the faulting GPA.
-+                 */
-+                if ( opt_dom0_pf_fixup )
-+                {
-+                    int inner_rc = hwdom_fixup_p2m(addr);
-+
-+                    if ( !inner_rc || inner_rc == -EEXIST )
-+                    {
-+                        if ( !inner_rc )
-+                            gdprintk(XENLOG_DEBUG,
-+                                     "fixup p2m mapping for page %lx added\n",
-+                                     paddr_to_pfn(addr));
-+                        else
-+                            gprintk(XENLOG_INFO,
-+                                    "fixup p2m mapping for page %lx already present\n",
-+                                    paddr_to_pfn(addr));
-+
-+                        rc = X86EMUL_RETRY;
-+                        vio->req.state = STATE_IOREQ_NONE;
-+                        break;
-+                    }
-+
-+                    gprintk(XENLOG_WARNING,
-+                            "unable to fixup memory %s %#lx size %u: %d\n",
-+                            dir ? "read from" : "write to", addr, size,
-+                            inner_rc);
-+                }
-+                else
-+                    gdprintk(XENLOG_DEBUG,
-+                             "unhandled memory %s %#lx size %u\n",
-+                             dir ? "read from" : "write to", addr, size);
-+            }
-             rc = hvm_process_io_intercept(&null_handler, &p);
-             vio->req.state = STATE_IOREQ_NONE;
-         }
-diff --git a/xen/arch/x86/include/asm/hvm/emulate.h b/xen/arch/x86/include/asm/hvm/emulate.h
-index 760ce5e77cce..d17c025a1d45 100644
---- a/xen/arch/x86/include/asm/hvm/emulate.h
-+++ b/xen/arch/x86/include/asm/hvm/emulate.h
-@@ -148,6 +148,9 @@ static inline void hvmemul_write_cache(const struct vcpu *v, paddr_t gpa,
- void hvm_dump_emulation_state(const char *loglvl, const char *prefix,
-                               struct hvm_emulate_ctxt *hvmemul_ctxt, int rc);
- 
-+/* For PVH dom0: signal whether to attempt fixup of p2m page-faults. */
-+extern bool opt_dom0_pf_fixup;
-+
- #endif /* __ASM_X86_HVM_EMULATE_H__ */
- 
- /*
--- 
-2.46.0
-
+~Andrew
 
