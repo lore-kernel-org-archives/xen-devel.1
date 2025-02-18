@@ -4,46 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02AD7C021AA
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:35:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.891701.1300763 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1687BC02198
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:39:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.891721.1300771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOh5-0000XO-NE; Tue, 18 Feb 2025 14:35:27 +0000
+	id 1tkOkT-0001QT-4P; Tue, 18 Feb 2025 14:38:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 891701.1300763; Tue, 18 Feb 2025 14:35:27 +0000
+Received: by outflank-mailman (output) from mailman id 891721.1300771; Tue, 18 Feb 2025 14:38:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOh5-0000XH-Is; Tue, 18 Feb 2025 14:35:27 +0000
-Received: by outflank-mailman (input) for mailman id 891701;
- Tue, 18 Feb 2025 14:35:26 +0000
+	id 1tkOkT-0001QM-1Y; Tue, 18 Feb 2025 14:38:57 +0000
+Received: by outflank-mailman (input) for mailman id 891721;
+ Tue, 18 Feb 2025 14:38:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=n6Eg=VJ=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1tkOYN-0001OR-PR
- for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:26:27 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de
- [2a07:de40:b251:101:10:150:64:1])
+ <SRS0=J6eQ=VJ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tkOkR-0001QG-R1
+ for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:38:55 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55f76fd1-ee04-11ef-9896-31a8f345e629;
- Tue, 18 Feb 2025 15:26:26 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 073D321181;
- Tue, 18 Feb 2025 14:25:58 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 71E1B13AFB;
- Tue, 18 Feb 2025 14:25:57 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id MNl3GnWYtGdXYQAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Tue, 18 Feb 2025 14:25:57 +0000
+ id 138d266b-ee06-11ef-9896-31a8f345e629;
+ Tue, 18 Feb 2025 15:38:53 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4395f81db4dso33646675e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Feb 2025 06:38:53 -0800 (PST)
+Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4395a0558e2sm183826145e9.11.2025.02.18.06.38.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Feb 2025 06:38:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,153 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55f76fd1-ee04-11ef-9896-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1739888758; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WWelbGgEbCkjP4y//d+vHYWhnPzSt4ULU4ovN7MHpM8=;
-	b=a5IsVRUf7Aomcqi2+yV0epMv85SDrYjVJJU1zEs0NcqDK954Cj0+Bzy6KMeRJrS49RwdRr
-	zt5oFHbnK8oP6xbGuGeFXN1P1HZeAy5kscv4SVnZbaFs1kXGSmWAKcoT9LWtjkdvge/fjz
-	efYZCyogQFIlsgg8Ynqm2Sg0BqV1vEQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1739888758;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WWelbGgEbCkjP4y//d+vHYWhnPzSt4ULU4ovN7MHpM8=;
-	b=9+NmcIQIJleq73RkooIS3KUW/mfunUzKHXdYX7JKxeASUQK2PAnBXbnzUDTDcMHKI5hFGQ
-	G3fz9pcQK9OqkVCg==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=a5IsVRUf;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=9+NmcIQI
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1739888758; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WWelbGgEbCkjP4y//d+vHYWhnPzSt4ULU4ovN7MHpM8=;
-	b=a5IsVRUf7Aomcqi2+yV0epMv85SDrYjVJJU1zEs0NcqDK954Cj0+Bzy6KMeRJrS49RwdRr
-	zt5oFHbnK8oP6xbGuGeFXN1P1HZeAy5kscv4SVnZbaFs1kXGSmWAKcoT9LWtjkdvge/fjz
-	efYZCyogQFIlsgg8Ynqm2Sg0BqV1vEQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1739888758;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WWelbGgEbCkjP4y//d+vHYWhnPzSt4ULU4ovN7MHpM8=;
-	b=9+NmcIQIJleq73RkooIS3KUW/mfunUzKHXdYX7JKxeASUQK2PAnBXbnzUDTDcMHKI5hFGQ
-	G3fz9pcQK9OqkVCg==
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org,
-	linux-mediatek@lists.infradead.org,
-	freedreno@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-samsung-soc@vger.kernel.org,
-	nouveau@lists.freedesktop.org,
-	virtualization@lists.linux.dev,
-	spice-devel@lists.freedesktop.org,
-	linux-renesas-soc@vger.kernel.org,
-	linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	intel-xe@lists.freedesktop.org,
-	xen-devel@lists.xenproject.org,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Heiko Stuebner <heiko@sntech.de>,
-	Sandy Huang <hjc@rock-chips.com>,
-	Andy Yan <andy.yan@rock-chips.com>
-Subject: [PATCH v3 19/25] drm/rockchip: Compute dumb-buffer sizes with drm_mode_size_dumb()
-Date: Tue, 18 Feb 2025 15:23:42 +0100
-Message-ID: <20250218142542.438557-20-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250218142542.438557-1-tzimmermann@suse.de>
-References: <20250218142542.438557-1-tzimmermann@suse.de>
+X-Inumbo-ID: 138d266b-ee06-11ef-9896-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1739889533; x=1740494333; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=6dZgVe8Q3pUjMU+Nfk+MsaSEUwQM2cCyHwNGXoPYzpA=;
+        b=BjhoEEaDlZMfqJsekKw6eak2pTs5bmwKE3pftFn4V82NIjyftJXtOXH6PmJlZ5Xx5w
+         S+htjQefb9i/UbO3enVyPuzAkNpbfsfJBNpmSwW5w+FvtXlz+b47DGLnNYrosPWYWECZ
+         K5is79MKBSD/+I5vMwT01d6Bgf0H6ILnL6kCw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739889533; x=1740494333;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6dZgVe8Q3pUjMU+Nfk+MsaSEUwQM2cCyHwNGXoPYzpA=;
+        b=Z1Tg02s01buJeHFJaFo26Ke3QYGGb9ynPGfIu2ccd5apG7mTe/v/BEi8HnNR0DLDkS
+         ILjn5avi+WM8gds/Ffyd/D6eJKhcnZiNU9cvfbamuio8ZKwRzTODFSx+KqJPjDLkqZOf
+         L6lLc9eKnVEFvig8VLwdSwaEq/MZNU+7znxjX7lYj4LXqZypoI+2veJyePToHuGwccB4
+         cr1DELqYod4f+QxUk7Jz/SIdAbD8Y84O8SxMDr9W42XZBPCsAPB/ePC3SXQrls6dg/9C
+         ZgsAcG+AQZqe0SvgvhPkui4WMbaWzgJ4V7p10v2hysF22sbge6jFdG/dk5uoQTekP65X
+         G5vg==
+X-Gm-Message-State: AOJu0YyDbrs1jrXgzD/y9cBa8p7PEpcspeh+SigDjY9lEqCr7n4cNM2B
+	qntN+BabOlZ4ZjgtQSK9aMkA30k1VuPSnWPCvoWFHpsggU7pk9Rmmj6pCm35Wkw=
+X-Gm-Gg: ASbGncu7ayAMUEkB8eDokYF8HDGF6mSD4qh+ulzpxVR/O6yb9B7NiDgUu5uPPFqRFG0
+	1nHZIWfCdtytCFRSUpvjglzdRbNVDQhJh0v+cUTyH56nv9FlunjEBKb6Bunl0skqIqZE/DzkHgk
+	8bCoUeAU0isLEMR4GPjbukMMEidK8Jtp8D4Iv/QsPBMGBRdkcnh4lrmkDApXrcEvVaAD094q4Ed
+	Bxs1hewrkmO4FOWgfdjL8H2tNbqCmP6Ht7bwu+aElvElkS5WFNBy9uWYYC5PctQ8rBhJIcU7kRS
+	GGvg/OYshRx+aHybs98o6WvrMayvuhoH3IxST8nZZLZ3PPJclV+fPKc=
+X-Google-Smtp-Source: AGHT+IHwtoDoUxgncHmK57cdoMTTnP6z/kwbdnzkBSO+H9c/bmqs3v8DR4uSyudwhD+9MFZGCwI58Q==
+X-Received: by 2002:a05:600c:46ce:b0:439:5fbd:19d2 with SMTP id 5b1f17b1804b1-4396ec7c92amr121807475e9.10.1739889533249;
+        Tue, 18 Feb 2025 06:38:53 -0800 (PST)
+Message-ID: <5d518271-17d3-474e-b27e-d553f5004d84@citrix.com>
+Date: Tue, 18 Feb 2025 14:38:51 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] tools/ocaml: Fix oxenstored build warning
+To: Andrii Sultanov <andrii.sultanov@cloud.com>
+Cc: xen-devel@lists.xenproject.org,
+ Christian Lindig <christian.lindig@citrix.com>, David Scott
+ <dave@recoil.org>, Anthony PERARD <anthony.perard@vates.tech>,
+ Christian Lindig <christian.lindig@cloud.com>
+References: <cover.1739546412.git.andrii.sultanov@cloud.com>
+ <0545259ba8f7c54b6fd6c82b185bdee475694747.1739546412.git.andrii.sultanov@cloud.com>
+ <850c2854-17ee-42d7-856a-44604f755941@citrix.com>
+ <CAAa3AOOYpak4987-7H71CpaBcHyHOOYUL0w6rqVDM17yTvTYJg@mail.gmail.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <CAAa3AOOYpak4987-7H71CpaBcHyHOOYUL0w6rqVDM17yTvTYJg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 073D321181
-X-Spamd-Result: default: False [-2.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,gmail.com,ffwll.ch];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	R_RATELIMIT(0.00)[to_ip_from(RLqtkr6cif1ebgurukgmwdm7xc),to(RLbwen1niosrcqbxsafh1)];
-	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
-	DKIM_TRACE(0.00)[suse.de:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:dkim,suse.de:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
 
-Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-buffer size. Align the pitch to a multiple of 64.
+On 14/02/2025 3:47 pm, Andrii Sultanov wrote:
+> > What's this hunk for?  There's a change in poll.ml <http://poll.ml>,
+> but I don't see why
+> > it would need to change this list.
+>
+> Otherwise Poll doesn't pick up Utils as its dependency - I guess
+> before it was always independent and didn't need anything like that
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Acked-by: Heiko Stuebner <heiko@sntech.de>
-Cc: Sandy Huang <hjc@rock-chips.com>
-Cc: "Heiko Stübner" <heiko@sntech.de>
-Cc: Andy Yan <andy.yan@rock-chips.com>
----
- drivers/gpu/drm/rockchip/rockchip_drm_gem.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Ok.  R-by and queued for 4.21.
 
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-index 6330b883efc3..3bd06202e232 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-@@ -9,6 +9,7 @@
- #include <linux/vmalloc.h>
- 
- #include <drm/drm.h>
-+#include <drm/drm_dumb_buffers.h>
- #include <drm/drm_fb_helper.h>
- #include <drm/drm_gem.h>
- #include <drm/drm_gem_dma_helper.h>
-@@ -403,13 +404,12 @@ int rockchip_gem_dumb_create(struct drm_file *file_priv,
- 			     struct drm_mode_create_dumb *args)
- {
- 	struct rockchip_gem_object *rk_obj;
--	int min_pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
-+	int ret;
- 
--	/*
--	 * align to 64 bytes since Mali requires it.
--	 */
--	args->pitch = ALIGN(min_pitch, 64);
--	args->size = args->pitch * args->height;
-+	/* 64-byte alignment required by Mali */
-+	ret = drm_mode_size_dumb(dev, args, SZ_64, 0);
-+	if (ret)
-+		return ret;
- 
- 	rk_obj = rockchip_gem_create_with_handle(file_priv, dev, args->size,
- 						 &args->handle);
--- 
-2.48.1
-
+~Andrew
 
